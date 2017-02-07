@@ -2,6 +2,7 @@ package collect
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/pms/pmsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -25,12 +26,22 @@ func NewAddordeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addord
 }
 
 func (l *AddordeleteLogic) Addordelete(req types.AddOrDeleteReq) (resp *types.AddOrDeleteResp, err error) {
-	l.svcCtx.Pms.CollectAddOrDelete(l.ctx, &pmsclient.CollectAddOrDeleteReq{
-		Id: 0,
+	_, err = l.svcCtx.Pms.CollectAddOrDelete(l.ctx, &pmsclient.CollectAddOrDeleteReq{
+		ValueID:  req.ValueID,
+		MemberId: req.MemberId,
 	})
+
+	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.WithContext(l.ctx).Errorf("添加或者取消收藏失败,参数：%s,响应：%s", reqStr, err.Error())
+		return &types.AddOrDeleteResp{
+			Errno:  1,
+			Errmsg: err.Error(),
+		}, nil
+	}
 
 	return &types.AddOrDeleteResp{
 		Errno:  0,
-		Errmsg: "",
+		Errmsg: "添加或者取消收藏成功",
 	}, nil
 }

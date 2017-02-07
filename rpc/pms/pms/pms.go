@@ -42,6 +42,7 @@ type (
 	BrandUpdateResp                            = pmsclient.BrandUpdateResp
 	CollectAddOrDeleteReq                      = pmsclient.CollectAddOrDeleteReq
 	CollectAddOrDeleteResp                     = pmsclient.CollectAddOrDeleteResp
+	CollectListData                            = pmsclient.CollectListData
 	CollectListReq                             = pmsclient.CollectListReq
 	CollectListResp                            = pmsclient.CollectListResp
 	CommentAddReq                              = pmsclient.CommentAddReq

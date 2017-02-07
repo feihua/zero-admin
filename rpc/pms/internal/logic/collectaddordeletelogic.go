@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"time"
+	"zero-admin/rpc/model/pmsmodel"
 
 	"zero-admin/rpc/pms/internal/svc"
 	"zero-admin/rpc/pms/pmsclient"
@@ -24,7 +26,36 @@ func NewCollectAddOrDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *CollectAddOrDeleteLogic) CollectAddOrDelete(in *pmsclient.CollectAddOrDeleteReq) (*pmsclient.CollectAddOrDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	collect, _ := l.svcCtx.PmsCollectModel.FindOne(in.MemberId, in.ValueID)
 
-	return &pmsclient.CollectAddOrDeleteResp{}, nil
+	if collect == nil {
+		//不存在，则添加
+		return insertCollect(in, l)
+	} else {
+		//存在，则删除
+		return deleteCollect(l, collect)
+	}
+
+}
+
+//删除收藏
+func deleteCollect(l *CollectAddOrDeleteLogic, collect *pmsmodel.PmsCollect) (*pmsclient.CollectAddOrDeleteResp, error) {
+	err := l.svcCtx.PmsCollectModel.Delete(int64(collect.Id))
+	return &pmsclient.CollectAddOrDeleteResp{
+		Pong: "pong",
+	}, err
+}
+
+//添加收藏
+func insertCollect(in *pmsclient.CollectAddOrDeleteReq, l *CollectAddOrDeleteLogic) (*pmsclient.CollectAddOrDeleteResp, error) {
+	_, err := l.svcCtx.PmsCollectModel.Insert(pmsmodel.PmsCollect{
+		UserId:      in.MemberId,
+		ValueId:     in.ValueID,
+		CollectType: 0,
+		AddTime:     time.Now(),
+		Deleted:     0,
+	})
+	return &pmsclient.CollectAddOrDeleteResp{
+		Pong: "pong",
+	}, err
 }

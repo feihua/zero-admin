@@ -27,6 +27,7 @@ type ServiceContext struct {
 	PmsProductOperateLogModel                *pmsmodel.PmsProductOperateLogModel
 	PmsProductVertifyRecordModel             *pmsmodel.PmsProductVertifyRecordModel
 	PmsSkuStockModel                         *pmsmodel.PmsSkuStockModel
+	PmsCollectModel                          *pmsmodel.PmsCollectModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {

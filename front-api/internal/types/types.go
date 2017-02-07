@@ -318,9 +318,7 @@ type SecondCategoryReq struct {
 }
 
 type CollectListReq struct {
-	Type  int64 `json:"type"`
-	Page  int64 `json:"page"`
-	Limit int64 `json:"limit"`
+	MemberId int64 `json:"memberId"`
 }
 
 type CollectListResp struct {
@@ -330,9 +328,9 @@ type CollectListResp struct {
 }
 
 type CollectListData struct {
-	ID          int64  `json:"id"`          //id
-	Type        int64  `json:"type"`        //类型
-	ValueID     int64  `json:"valueId"`     //商品Id
+	ID          int32  `json:"id"`          //id
+	Type        int32  `json:"type"`        //类型
+	ValueID     int32  `json:"valueId"`     //商品Id
 	Name        string `json:"name"`        //名称
 	Brief       string `json:"brief"`       //描述
 	PicUrl      string `json:"picUrl"`      //图片
@@ -340,8 +338,9 @@ type CollectListData struct {
 }
 
 type AddOrDeleteReq struct {
-	Type    int64 `json:"type"`    //类型
-	ValueID int64 `json:"valueId"` //商品Id
+	Type     int32 `json:"type"`    //类型
+	ValueID  int32 `json:"valueId"` //商品Id
+	MemberId int32 `json:"memberId"`
 }
 
 type AddOrDeleteResp struct {
