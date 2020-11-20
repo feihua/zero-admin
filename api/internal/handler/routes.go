@@ -25,8 +25,8 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: user.UserLoginHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/api/user/userInfo",
+				Method:  http.MethodGet,
+				Path:    "/api/user/currentUser",
 				Handler: user.UserInfoHandler(serverCtx),
 			},
 			{

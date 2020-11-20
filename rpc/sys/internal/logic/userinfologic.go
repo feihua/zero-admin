@@ -26,5 +26,8 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &sys.InfoResp{}, nil
+	return &sys.InfoResp{
+		Avatar: "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+		Name:   "liufeihua",
+	}, nil
 }

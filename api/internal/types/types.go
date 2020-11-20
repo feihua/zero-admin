@@ -65,18 +65,18 @@ type DeleteUserResp struct {
 }
 
 type ListConfigData struct {
-	Id             int64  `db:"id"`               // 编号
-	Value          string `db:"value"`            // 数据值
-	Label          string `db:"label"`            // 标签名
-	Type           string `db:"type"`             // 类型
-	Description    string `db:"description"`      // 描述
-	Sort           int64  `db:"sort"`             // 排序（升序）
-	CreateBy       string `db:"create_by"`        // 创建人
-	CreateTime     string `db:"create_time"`      // 创建时间
-	LastUpdateBy   string `db:"last_update_by"`   // 更新人
-	LastUpdateTime string `db:"last_update_time"` // 更新时间
-	Remarks        string `db:"remarks"`          // 备注信息
-	DelFlag        int64  `db:"del_flag"`         // 是否删除  -1：已删除  0：正常
+	Id             int64  `json:"id"`               // 编号
+	Value          string `json:"value"`            // 数据值
+	Label          string `json:"label"`            // 标签名
+	Type           string `json:"type"`             // 类型
+	Description    string `json:"description"`      // 描述
+	Sort           int64  `json:"sort"`             // 排序（升序）
+	CreateBy       string `json:"create_by"`        // 创建人
+	CreateTime     string `json:"create_time"`      // 创建时间
+	LastUpdateBy   string `json:"last_update_by"`   // 更新人
+	LastUpdateTime string `json:"last_update_time"` // 更新时间
+	Remarks        string `json:"remarks"`          // 备注信息
+	DelFlag        int64  `json:"del_flag"`         // 是否删除  -1：已删除  0：正常
 }
 
 type ListConfigReq struct {
@@ -93,15 +93,15 @@ type ListConfigResp struct {
 }
 
 type ListDeptData struct {
-	Id             int64  `db:"id"`               // 编号
-	Name           string `db:"name"`             // 机构名称
-	ParentId       int64  `db:"parent_id"`        // 上级机构ID，一级机构为0
-	OrderNum       int64  `db:"order_num"`        // 排序
-	CreateBy       string `db:"create_by"`        // 创建人
-	CreateTime     string `db:"create_time"`      // 创建时间
-	LastUpdateBy   string `db:"last_update_by"`   // 更新人
-	LastUpdateTime string `db:"last_update_time"` // 更新时间
-	DelFlag        int64  `db:"del_flag"`         // 是否删除  -1：已删除  0：正常
+	Id             int64  `json:"id"`               // 编号
+	Name           string `json:"name"`             // 机构名称
+	ParentId       int64  `json:"parent_id"`        // 上级机构ID，一级机构为0
+	OrderNum       int64  `json:"order_num"`        // 排序
+	CreateBy       string `json:"create_by"`        // 创建人
+	CreateTime     string `json:"create_time"`      // 创建时间
+	LastUpdateBy   string `json:"last_update_by"`   // 更新人
+	LastUpdateTime string `json:"last_update_time"` // 更新时间
+	DelFlag        int64  `json:"del_flag"`         // 是否删除  -1：已删除  0：正常
 }
 
 type ListDeptReq struct {
@@ -118,18 +118,18 @@ type ListDeptResp struct {
 }
 
 type ListDictData struct {
-	Id             int64   `db:"id"`               // 编号
-	Value          string  `db:"value"`            // 数据值
-	Label          string  `db:"label"`            // 标签名
-	Type           string  `db:"type"`             // 类型
-	Description    string  `db:"description"`      // 描述
-	Sort           float64 `db:"sort"`             // 排序（升序）
-	CreateBy       string  `db:"create_by"`        // 创建人
-	CreateTime     string  `db:"create_time"`      // 创建时间
-	LastUpdateBy   string  `db:"last_update_by"`   // 更新人
-	LastUpdateTime string  `db:"last_update_time"` // 更新时间
-	Remarks        string  `db:"remarks"`          // 备注信息
-	DelFlag        int64   `db:"del_flag"`         // 是否删除  -1：已删除  0：正常
+	Id             int64   `json:"id"`               // 编号
+	Value          string  `json:"value"`            // 数据值
+	Label          string  `json:"label"`            // 标签名
+	Type           string  `json:"type"`             // 类型
+	Description    string  `json:"description"`      // 描述
+	Sort           float64 `json:"sort"`             // 排序（升序）
+	CreateBy       string  `json:"create_by"`        // 创建人
+	CreateTime     string  `json:"create_time"`      // 创建时间
+	LastUpdateBy   string  `json:"last_update_by"`   // 更新人
+	LastUpdateTime string  `json:"last_update_time"` // 更新时间
+	Remarks        string  `json:"remarks"`          // 备注信息
+	DelFlag        int64   `json:"del_flag"`         // 是否删除  -1：已删除  0：正常
 }
 
 type ListDictReq struct {
@@ -146,14 +146,14 @@ type ListDictResp struct {
 }
 
 type ListLoginLogData struct {
-	Id             int64  `db:"id"`               // 编号
-	UserName       string `db:"user_name"`        // 用户名
-	Status         string `db:"status"`           // 登录状态（online:在线，登录初始状态，方便统计在线人数；login:退出登录后将online置为login；logout:退出登录）
-	Ip             string `db:"ip"`               // IP地址
-	CreateBy       string `db:"create_by"`        // 创建人
-	CreateTime     string `db:"create_time"`      // 创建时间
-	LastUpdateBy   string `db:"last_update_by"`   // 更新人
-	LastUpdateTime string `db:"last_update_time"` // 更新时间
+	Id             int64  `json:"id"`               // 编号
+	UserName       string `json:"user_name"`        // 用户名
+	Status         string `json:"status"`           // 登录状态（online:在线，登录初始状态，方便统计在线人数；login:退出登录后将online置为login；logout:退出登录）
+	Ip             string `json:"ip"`               // IP地址
+	CreateBy       string `json:"create_by"`        // 创建人
+	CreateTime     string `json:"create_time"`      // 创建时间
+	LastUpdateBy   string `json:"last_update_by"`   // 更新人
+	LastUpdateTime string `json:"last_update_time"` // 更新时间
 }
 
 type ListLoginLogReq struct {
@@ -183,14 +183,14 @@ type ListMenuResp struct {
 }
 
 type ListRoleData struct {
-	Id             int64  `db:"id"`               // 编号
-	Name           string `db:"name"`             // 角色名称
-	Remark         string `db:"remark"`           // 备注
-	CreateBy       string `db:"create_by"`        // 创建人
-	CreateTime     string `db:"create_time"`      // 创建时间
-	LastUpdateBy   string `db:"last_update_by"`   // 更新人
-	LastUpdateTime string `db:"last_update_time"` // 更新时间
-	DelFlag        int64  `db:"del_flag"`         // 是否删除  -1：已删除  0：正常
+	Id             int64  `json:"id"`               // 编号
+	Name           string `json:"name"`             // 角色名称
+	Remark         string `json:"remark"`           // 备注
+	CreateBy       string `json:"create_by"`        // 创建人
+	CreateTime     string `json:"create_time"`      // 创建时间
+	LastUpdateBy   string `json:"last_update_by"`   // 更新人
+	LastUpdateTime string `json:"last_update_time"` // 更新时间
+	DelFlag        int64  `json:"del_flag"`         // 是否删除  -1：已删除  0：正常
 }
 
 type ListRoleReq struct {
@@ -207,17 +207,17 @@ type ListRoleResp struct {
 }
 
 type ListSysLogData struct {
-	Id             int64  `db:"id"`               // 编号
-	UserName       string `db:"user_name"`        // 用户名
-	Operation      string `db:"operation"`        // 用户操作
-	Method         string `db:"method"`           // 请求方法
-	Params         string `db:"params"`           // 请求参数
-	Time           int64  `db:"time"`             // 执行时长(毫秒)
-	Ip             string `db:"ip"`               // IP地址
-	CreateBy       string `db:"create_by"`        // 创建人
-	CreateTime     string `db:"create_time"`      // 创建时间
-	LastUpdateBy   string `db:"last_update_by"`   // 更新人
-	LastUpdateTime string `db:"last_update_time"` // 更新时间
+	Id             int64  `json:"id"`               // 编号
+	UserName       string `json:"user_name"`        // 用户名
+	Operation      string `json:"operation"`        // 用户操作
+	Method         string `json:"method"`           // 请求方法
+	Params         string `json:"params"`           // 请求参数
+	Time           int64  `json:"time"`             // 执行时长(毫秒)
+	Ip             string `json:"ip"`               // IP地址
+	CreateBy       string `json:"create_by"`        // 创建人
+	CreateTime     string `json:"create_time"`      // 创建时间
+	LastUpdateBy   string `json:"last_update_by"`   // 更新人
+	LastUpdateTime string `json:"last_update_time"` // 更新时间
 }
 
 type ListSysLogReq struct {
@@ -234,21 +234,21 @@ type ListSysLogResp struct {
 }
 
 type ListUserData struct {
-	Id             int64  `db:"id"`               // 编号
-	Name           string `db:"name"`             // 用户名
-	NickName       string `db:"nick_name"`        // 昵称
-	Avatar         string `db:"avatar"`           // 头像
-	Password       string `db:"password"`         // 密码
-	Salt           string `db:"salt"`             // 加密盐
-	Email          string `db:"email"`            // 邮箱
-	Mobile         string `db:"mobile"`           // 手机号
-	Status         int64  `db:"status"`           // 状态  0：禁用   1：正常
-	DeptId         int64  `db:"dept_id"`          // 机构ID
-	CreateBy       string `db:"create_by"`        // 创建人
-	CreateTime     string `db:"create_time"`      // 创建时间
-	LastUpdateBy   string `db:"last_update_by"`   // 更新人
-	LastUpdateTime string `db:"last_update_time"` // 更新时间
-	DelFlag        int64  `db:"del_flag"`         // 是否删除  -1：已删除  0：正常
+	Id             int64  `json:"id"`               // 编号
+	Name           string `json:"name"`             // 用户名
+	NickName       string `json:"nick_name"`        // 昵称
+	Avatar         string `json:"avatar"`           // 头像
+	Password       string `json:"password"`         // 密码
+	Salt           string `json:"salt"`             // 加密盐
+	Email          string `json:"email"`            // 邮箱
+	Mobile         string `json:"mobile"`           // 手机号
+	Status         int64  `json:"status"`           // 状态  0：禁用   1：正常
+	DeptId         int64  `json:"dept_id"`          // 机构ID
+	CreateBy       string `json:"create_by"`        // 创建人
+	CreateTime     string `json:"create_time"`      // 创建时间
+	LastUpdateBy   string `json:"last_update_by"`   // 更新人
+	LastUpdateTime string `json:"last_update_time"` // 更新时间
+	DelFlag        int64  `json:"del_flag"`         // 是否删除  -1：已删除  0：正常
 }
 
 type ListUserReq struct {
@@ -265,19 +265,19 @@ type ListUserResp struct {
 }
 
 type ListtMenuData struct {
-	Id             int64  `db:"id"`               // 编号
-	Name           string `db:"name"`             // 菜单名称
-	ParentId       int64  `db:"parent_id"`        // 父菜单ID，一级菜单为0
-	Url            string `db:"url"`              // 菜单URL,类型：1.普通页面（如用户管理， /sys/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-	Perms          string `db:"perms"`            // 授权(多个用逗号分隔，如：sys:user:add,sys:user:edit)
-	Type           int64  `db:"type"`             // 类型   0：目录   1：菜单   2：按钮
-	Icon           string `db:"icon"`             // 菜单图标
-	OrderNum       int64  `db:"order_num"`        // 排序
-	CreateBy       string `db:"create_by"`        // 创建人
-	CreateTime     string `db:"create_time"`      // 创建时间
-	LastUpdateBy   string `db:"last_update_by"`   // 更新人
-	LastUpdateTime string `db:"last_update_time"` // 更新时间
-	DelFlag        int64  `db:"del_flag"`         // 是否删除  -1：已删除  0：正常
+	Id             int64  `json:"id"`               // 编号
+	Name           string `json:"name"`             // 菜单名称
+	ParentId       int64  `json:"parent_id"`        // 父菜单ID，一级菜单为0
+	Url            string `json:"url"`              // 菜单URL,类型：1.普通页面（如用户管理， /sys/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
+	Perms          string `json:"perms"`            // 授权(多个用逗号分隔，如：sys:user:add,sys:user:edit)
+	Type           int64  `json:"type"`             // 类型   0：目录   1：菜单   2：按钮
+	Icon           string `json:"icon"`             // 菜单图标
+	OrderNum       int64  `json:"order_num"`        // 排序
+	CreateBy       string `json:"create_by"`        // 创建人
+	CreateTime     string `json:"create_time"`      // 创建时间
+	LastUpdateBy   string `json:"last_update_by"`   // 更新人
+	LastUpdateTime string `json:"last_update_time"` // 更新时间
+	DelFlag        int64  `json:"del_flag"`         // 是否删除  -1：已删除  0：正常
 }
 
 type RoleMenuIdsReq struct {

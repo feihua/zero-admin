@@ -17,14 +17,14 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListRoleData struct {
-        Id int64 `db:"id"`                               // 编号
-        Name string `db:"name"`                          // 角色名称
-        Remark string `db:"remark"`                      // 备注
-        CreateBy string `db:"create_by"`                 // 创建人
-        CreateTime string `db:"create_time"`             // 创建时间
-        LastUpdateBy string `db:"last_update_by"`        // 更新人
-        LastUpdateTime string `db:"last_update_time"`    // 更新时间
-        DelFlag int64 `db:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+        Id int64 `json:"id"`                               // 编号
+        Name string `json:"name"`                          // 角色名称
+        Remark string `json:"remark"`                      // 备注
+        CreateBy string `json:"create_by"`                 // 创建人
+        CreateTime string `json:"create_time"`             // 创建时间
+        LastUpdateBy string `json:"last_update_by"`        // 更新人
+        LastUpdateTime string `json:"last_update_time"`    // 更新时间
+        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
     }
     ListRoleResp struct {
         Current int64 `json:"current"`

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,13 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 }
 
 func (l *UserLoginLogic) UserLogin() (*types.LoginResp, error) {
-	// todo: add your logic here and delete this line
+	resp, err := l.svcCtx.Sys.Login(l.ctx, &sysclient.LoginReq{})
 
-	return &types.LoginResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+	return &types.LoginResp{
+		Status:           resp.Status,
+		CurrentAuthority: resp.CurrentAuthority,
+	}, nil
 }

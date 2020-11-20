@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,13 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserInfoL
 }
 
 func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
-	// todo: add your logic here and delete this line
+	resp, err := l.svcCtx.Sys.UserInfo(l.ctx, &sysclient.InfoReq{})
 
-	return &types.UserInfoResp{}, nil
+	if err != nil {
+		return nil, err
+	}
+	return &types.UserInfoResp{
+		Avatar: resp.Avatar,
+		Name:   resp.Name,
+	}, nil
 }

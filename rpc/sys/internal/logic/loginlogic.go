@@ -26,5 +26,8 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &sys.LoginResp{}, nil
+	return &sys.LoginResp{
+		Status:           "ok",
+		CurrentAuthority: "admin",
+	}, nil
 }

@@ -29,21 +29,21 @@ type (
     }
 
     ListUserData struct {
-        Id int64 `db:"id"`                               // 编号
-        Name string `db:"name"`                          // 用户名
-        NickName string `db:"nick_name"`                 // 昵称
-        Avatar string `db:"avatar"`                      // 头像
-        Password string `db:"password"`                  // 密码
-        Salt string `db:"salt"`                          // 加密盐
-        Email string `db:"email"`                        // 邮箱
-        Mobile string `db:"mobile"`                      // 手机号
-        Status int64 `db:"status"`                       // 状态  0：禁用   1：正常
-        DeptId int64 `db:"dept_id"`                      // 机构ID
-        CreateBy string `db:"create_by"`                 // 创建人
-        CreateTime string `db:"create_time"`             // 创建时间
-        LastUpdateBy string `db:"last_update_by"`        // 更新人
-        LastUpdateTime string `db:"last_update_time"`    // 更新时间
-        DelFlag int64 `db:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+        Id int64 `json:"id"`                               // 编号
+        Name string `json:"name"`                          // 用户名
+        NickName string `json:"nick_name"`                 // 昵称
+        Avatar string `json:"avatar"`                      // 头像
+        Password string `json:"password"`                  // 密码
+        Salt string `json:"salt"`                          // 加密盐
+        Email string `json:"email"`                        // 邮箱
+        Mobile string `json:"mobile"`                      // 手机号
+        Status int64 `json:"status"`                       // 状态  0：禁用   1：正常
+        DeptId int64 `json:"dept_id"`                      // 机构ID
+        CreateBy string `json:"create_by"`                 // 创建人
+        CreateTime string `json:"create_time"`             // 创建时间
+        LastUpdateBy string `json:"last_update_by"`        // 更新人
+        LastUpdateTime string `json:"last_update_time"`    // 更新时间
+        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
     }
     ListUserResp struct {
         Current int64 `json:"current"`
@@ -80,7 +80,7 @@ service admin-api {
     post /api/user/login () returns (loginResp)
 
     @handler UserInfo
-    post /api/user/userInfo () returns (userInfoResp)
+    get /api/user/currentUser () returns (userInfoResp)
 
     @handler UserAdd
     post /api/user/add (addUserReq) returns (addUserResp)
