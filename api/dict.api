@@ -1,0 +1,81 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+
+type (
+    addDictReq struct {
+        Value string `json:"value"`
+        Label string `json:"label"`
+        Type string `json:"type"`
+        Description string `json:"description"`
+        Remarks string `json:"remarks"`
+    }
+    addDictResp struct {
+    }
+    ListDictReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListDictData struct {
+        Id int64 `db:"id"`                               // 编号
+        Value string `db:"value"`                        // 数据值
+        Label string `db:"label"`                        // 标签名
+        Type string `db:"type"`                          // 类型
+        Description string `db:"description"`            // 描述
+        Sort float64 `db:"sort"`                         // 排序（升序）
+        CreateBy string `db:"create_by"`                 // 创建人
+        CreateTime string `db:"create_time"`             // 创建时间
+        LastUpdateBy string `db:"last_update_by"`        // 更新人
+        LastUpdateTime string `db:"last_update_time"`    // 更新时间
+        Remarks string `db:"remarks"`                    // 备注信息
+        DelFlag int64 `db:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+    }
+    ListDictResp struct {
+        Current int64 `json:"current"`
+        Data []*ListDictData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateDictReq struct {
+        ID int64 `json:"id"`
+        Value string `json:"value"`
+        Label string `json:"label"`
+        Type string `json:"type"`
+        Description string `json:"description"`
+        Remarks string `json:"remarks"`
+    }
+    UpdateDictResp struct {
+    }
+    DeleteDictReq struct {
+        ID int64 `json:"id"`
+        Value string `json:"value"`
+        Label string `json:"label"`
+        Type string `json:"type"`
+        Description string `json:"description"`
+        Remarks string `json:"remarks"`
+    }
+    DeleteDictResp struct {
+    }
+)
+
+@server(
+    group: dict
+)
+service admin-api {
+    @handler DictAdd
+    post /api/dict/add (addDictReq) returns (addDictResp)
+
+    @handler DictList
+    get /api/dict/list (ListDictReq) returns (ListDictResp)
+
+    @handler DictUpdate
+    post /api/dict/update (UpdateDictReq) returns (UpdateDictResp)
+
+    @handler DictDelete
+    post /api/dict/delete (DeleteDictReq) returns (DeleteDictResp)
+}

@@ -1,0 +1,50 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    ListSysLogReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListSysLogData struct {
+        Id int64 `db:"id"`                               // 编号
+        UserName string `db:"user_name"`                 // 用户名
+        Operation string `db:"operation"`                // 用户操作
+        Method string `db:"method"`                      // 请求方法
+        Params string `db:"params"`                      // 请求参数
+        Time int64 `db:"time"`                           // 执行时长(毫秒)
+        Ip string `db:"ip"`                              // IP地址
+        CreateBy string `db:"create_by"`                 // 创建人
+        CreateTime string `db:"create_time"`             // 创建时间
+        LastUpdateBy string `db:"last_update_by"`        // 更新人
+        LastUpdateTime string `db:"last_update_time"`    // 更新时间
+    }
+    ListSysLogResp struct {
+        Current int64 `json:"current"`
+        Data []*ListSysLogData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    DeleteSysLogReq struct {
+        ID int64 `json:"id"`
+    }
+    DeleteSysLogResp struct {
+    }
+)
+
+@server(
+    group: log
+)
+service admin-api {
+    @handler SysLogList
+    get /api/sysLog/list (ListSysLogReq) returns (ListSysLogResp)
+
+    @handler SysLogDelete
+    post /api/sysLog/delete (DeleteSysLogReq) returns (DeleteSysLogResp)
+}
+

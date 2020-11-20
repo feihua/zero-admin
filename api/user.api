@@ -1,0 +1,100 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    loginResp struct {
+        Status string `json:"status"`
+        CurrentAuthority string `json:"currentAuthority"`
+    }
+    userInfoResp struct {
+        Avatar string `json:"avatar"`
+        Name string `json:"name"`
+    }
+    addUserReq struct {
+        Email string `json:"email"`
+        Mobile string `json:"mobile"`
+        Name string `json:"name"`
+        NickName string `json:"nick_name"`
+    }
+    addUserResp struct {
+    }
+
+    ListUserReq struct {
+        current int64 `form:"current"`
+        pageSize int64 `form:"pageSize"`
+    }
+
+    ListUserData struct {
+        Id int64 `db:"id"`                               // 编号
+        Name string `db:"name"`                          // 用户名
+        NickName string `db:"nick_name"`                 // 昵称
+        Avatar string `db:"avatar"`                      // 头像
+        Password string `db:"password"`                  // 密码
+        Salt string `db:"salt"`                          // 加密盐
+        Email string `db:"email"`                        // 邮箱
+        Mobile string `db:"mobile"`                      // 手机号
+        Status int64 `db:"status"`                       // 状态  0：禁用   1：正常
+        DeptId int64 `db:"dept_id"`                      // 机构ID
+        CreateBy string `db:"create_by"`                 // 创建人
+        CreateTime string `db:"create_time"`             // 创建时间
+        LastUpdateBy string `db:"last_update_by"`        // 更新人
+        LastUpdateTime string `db:"last_update_time"`    // 更新时间
+        DelFlag int64 `db:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+    }
+    ListUserResp struct {
+        Current int64 `json:"current"`
+        Data []*ListUserData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateUserReq struct {
+        ID int64 `json:"id"`
+        Email string `json:"email"`
+        Mobile string `json:"mobile"`
+        Name string `json:"name"`
+        NickName string `json:"nick_name"`
+    }
+    UpdateUserResp struct {
+    }
+    DeleteUserReq struct {
+        ID int64 `json:"id"`
+    }
+    DeleteUserResp struct {
+    }
+    UpdateUserRoleReq struct {
+    }
+    UpdateUserRoleResp struct {
+    }
+)
+
+@server(
+    group: user
+)
+service admin-api {
+    @handler UserLogin
+    post /api/user/login () returns (loginResp)
+
+    @handler UserInfo
+    post /api/user/userInfo () returns (userInfoResp)
+
+    @handler UserAdd
+    post /api/user/add (addUserReq) returns (addUserResp)
+
+    @handler UserList
+    get /api/user/list (ListUserReq) returns (ListUserResp)
+
+    @handler UserUpdate
+    post /api/user/update (UpdateUserReq) returns (UpdateUserResp)
+
+    @handler UserDelete
+    post /api/user/delete (DeleteUserReq) returns (DeleteUserResp)
+
+    @handler UpdateUserRole
+    post /api/user/updateUserRole (UpdateUserRoleReq) returns (UpdateUserRoleResp)
+}
+

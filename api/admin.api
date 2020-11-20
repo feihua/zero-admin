@@ -1,0 +1,15 @@
+import "user.api"
+import "role.api"
+import "menu.api"
+import "dict.api"
+import "dept.api"
+import "loginlog.api"
+import "syslog.api"
+import "config.api"
+
+info(
+	title: "go zero admin"
+	desc: "go zero admin"
+	author: "koobe"
+	email: "koobe.liu@uaf.com.cn"
+)

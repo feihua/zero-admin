@@ -1,0 +1,81 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addRoleReq struct {
+        Name string `json:"name"`
+        Remark string `json:"remark"`
+    }
+    addRoleResp struct {
+    }
+    ListRoleReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListRoleData struct {
+        Id int64 `db:"id"`                               // 编号
+        Name string `db:"name"`                          // 角色名称
+        Remark string `db:"remark"`                      // 备注
+        CreateBy string `db:"create_by"`                 // 创建人
+        CreateTime string `db:"create_time"`             // 创建时间
+        LastUpdateBy string `db:"last_update_by"`        // 更新人
+        LastUpdateTime string `db:"last_update_time"`    // 更新时间
+        DelFlag int64 `db:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+    }
+    ListRoleResp struct {
+        Current int64 `json:"current"`
+        Data []*ListRoleData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateRoleReq struct {
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Remark string `json:"remark"`
+    }
+    UpdateRoleResp struct {
+    }
+    DeleteRoleReq struct {
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Remark string `json:"remark"`
+    }
+    DeleteRoleResp struct {
+    }
+    RoleMenuIdsReq struct {
+    }
+    RoleMenuIdsResp struct {
+    }
+    UpdateRoleMenuReq struct {
+    }
+    UpdateRoleMenuResp struct {
+    }
+)
+
+@server(
+    group: role
+)
+service admin-api {
+    @handler RoleAdd
+    post /api/role/add (addRoleReq) returns (addRoleResp)
+
+    @handler RoleList
+    get /api/role/list (ListRoleReq) returns (ListRoleResp)
+
+    @handler RoleUpdate
+    post /api/role/update (UpdateRoleReq) returns (UpdateRoleResp)
+
+    @handler RoleDelete
+    post /api/role/delete (DeleteRoleReq) returns (DeleteRoleResp)
+
+    @handler RoleMenuIds
+    post /api/role/roleMenuIds (RoleMenuIdsReq) returns (RoleMenuIdsResp)
+
+    @handler UpdateRoleMenu
+    post /api/role/updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
+}

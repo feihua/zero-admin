@@ -1,0 +1,64 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addConfigReq struct {
+    }
+    addConfigResp struct {
+    }
+    ListConfigReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListConfigData struct {
+        Id int64 `db:"id"`                               // 编号
+        Value string `db:"value"`                        // 数据值
+        Label string `db:"label"`                        // 标签名
+        Type string `db:"type"`                          // 类型
+        Description string `db:"description"`            // 描述
+        Sort int64 `db:"sort"`                           // 排序（升序）
+        CreateBy string `db:"create_by"`                 // 创建人
+        CreateTime string `db:"create_time"`             // 创建时间
+        LastUpdateBy string `db:"last_update_by"`        // 更新人
+        LastUpdateTime string `db:"last_update_time"`    // 更新时间
+        Remarks string `db:"remarks"`                    // 备注信息
+        DelFlag int64 `db:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+    }
+    ListConfigResp struct {
+        Current int64 `json:"current"`
+        Data []*ListConfigData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateConfigReq struct {
+    }
+    UpdateConfigResp struct {
+    }
+    DeleteConfigReq struct {
+        ID int64 `json:"id"`
+    }
+    DeleteConfigResp struct {
+    }
+)
+
+@server(
+    group: config
+)
+service admin-api {
+    @handler ConfigAdd
+    post /api/config/add (addConfigReq) returns (addConfigResp)
+
+    @handler ConfigList
+    get /api/config/list (ListConfigReq) returns (ListConfigResp)
+
+    @handler ConfigUpdate
+    post /api/config/update (UpdateConfigReq) returns (UpdateConfigResp)
+
+    @handler ConfigDelete
+    post /api/config/delete (DeleteConfigReq) returns (DeleteConfigResp)
+}

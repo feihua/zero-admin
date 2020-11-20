@@ -1,0 +1,63 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addDeptReq struct {
+    }
+    addDeptResp struct {
+    }
+    ListDeptReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListDeptData struct {
+        Id int64 `db:"id"`                               // 编号
+        Name string `db:"name"`                          // 机构名称
+        ParentId int64 `db:"parent_id"`                  // 上级机构ID，一级机构为0
+        OrderNum int64 `db:"order_num"`                  // 排序
+        CreateBy string `db:"create_by"`                 // 创建人
+        CreateTime string `db:"create_time"`             // 创建时间
+        LastUpdateBy string `db:"last_update_by"`        // 更新人
+        LastUpdateTime string `db:"last_update_time"`    // 更新时间
+        DelFlag int64 `db:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+    }
+    ListDeptResp struct {
+        Current int64 `json:"current"`
+        Data []*ListDeptData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateDeptReq struct {
+        ID int64 `json:"id"`
+    }
+    UpdateDeptResp struct {
+    }
+    DeleteDeptReq struct {
+        ID int64 `json:"id"`
+    }
+    DeleteDeptResp struct {
+    }
+)
+
+
+@server(
+    group: dept
+)
+service admin-api {
+    @handler DeptAdd
+    post /api/dept/add (addDeptReq) returns (addDeptResp)
+
+    @handler DeptList
+    get /api/dept/list (ListDeptReq) returns (ListDeptResp)
+
+    @handler DeptUpdate
+    post /api/dept/update (UpdateDeptReq) returns (UpdateDeptResp)
+
+    @handler DeptDelete
+    post /api/dept/delete (DeleteDeptReq) returns (DeleteDeptResp)
+}

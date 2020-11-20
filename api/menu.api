@@ -1,0 +1,66 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addMenuReq struct {
+    }
+    addMenuResp struct {
+    }
+    ListMenuReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtMenuData struct {
+        Id int64 `db:"id"`                               // 编号
+        Name string `db:"name"`                          // 菜单名称
+        ParentId int64 `db:"parent_id"`                  // 父菜单ID，一级菜单为0
+        Url string `db:"url"`                            // 菜单URL,类型：1.普通页面（如用户管理， /sys/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
+        Perms string `db:"perms"`                        // 授权(多个用逗号分隔，如：sys:user:add,sys:user:edit)
+        Type int64 `db:"type"`                           // 类型   0：目录   1：菜单   2：按钮
+        Icon string `db:"icon"`                          // 菜单图标
+        OrderNum int64 `db:"order_num"`                  // 排序
+        CreateBy string `db:"create_by"`                 // 创建人
+        CreateTime string `db:"create_time"`             // 创建时间
+        LastUpdateBy string `db:"last_update_by"`        // 更新人
+        LastUpdateTime string `db:"last_update_time"`    // 更新时间
+        DelFlag int64 `db:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+    }
+    ListMenuResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtMenuData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateMenuReq struct {
+        ID int64 `json:"id"`
+    }
+    UpdateMenuResp struct {
+    }
+    DeleteMenuReq struct {
+        ID int64 `json:"id"`
+    }
+    DeleteMenuResp struct {
+    }
+)
+
+@server(
+    group: menu
+)
+service admin-api {
+    @handler MenuAdd
+    post /api/menu/add (addMenuReq) returns (addMenuResp)
+
+    @handler MenuList
+    get /api/menu/list (ListMenuReq) returns (ListMenuResp)
+
+    @handler MenuUpdate
+    post /api/menu/update (UpdateMenuReq) returns (UpdateMenuResp)
+
+    @handler MenuDelete
+    post /api/menu/delete (DeleteMenuReq) returns (DeleteMenuResp)
+}

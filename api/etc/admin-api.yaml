@@ -1,0 +1,9 @@
+Name: admin-api
+Host: 0.0.0.0
+Port: 8888
+
+SysRpc:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: sys.rpc
