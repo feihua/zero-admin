@@ -117,6 +117,7 @@ message UserStatusResp {
 message RoleAddReq {
   string name = 1;
   string remark = 2;
+  string create_by = 3;
 }
 
 message RoleAddResp {
@@ -149,8 +150,6 @@ message RoleUpdateReq {
   string name = 2;
   string remark = 3;
   string last_update_by = 4;
-  string last_update_time = 5;
-  int64 del_flag = 6;
 }
 
 message RoleUpdateResp {

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,13 @@ func NewRoleDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleDel
 }
 
 func (l *RoleDeleteLogic) RoleDelete(req types.DeleteRoleReq) (*types.DeleteRoleResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sys.RoleDelete(l.ctx, &sysclient.RoleDeleteReq{
+		Id: req.ID,
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.DeleteRoleResp{}, nil
 }

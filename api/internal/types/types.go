@@ -42,9 +42,7 @@ type DeleteMenuResp struct {
 }
 
 type DeleteRoleReq struct {
-	ID     int64  `json:"id"`
-	Name   string `json:"name"`
-	Remark string `json:"remark"`
+	ID int64 `json:"id"`
 }
 
 type DeleteRoleResp struct {

@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
 
@@ -24,7 +23,7 @@ func NewRoleDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleDe
 }
 
 func (l *RoleDeleteLogic) RoleDelete(in *sys.RoleDeleteReq) (*sys.RoleDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.RoleModel.Delete(in.Id)
 
 	return &sys.RoleDeleteResp{}, nil
 }

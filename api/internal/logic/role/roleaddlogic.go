@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,15 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleAddLog
 }
 
 func (l *RoleAddLogic) RoleAdd(req types.AddRoleReq) (*types.AddRoleResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sys.RoleAdd(l.ctx, &sysclient.RoleAddReq{
+		Name:     req.Name,
+		Remark:   req.Remark,
+		CreateBy: "admin",
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddRoleResp{}, nil
 }
