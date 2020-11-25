@@ -280,6 +280,13 @@ type ListtMenuData struct {
 	DelFlag        int64  `json:"del_flag"`         // 是否删除  -1：已删除  0：正常
 }
 
+type ReSetPasswordReq struct {
+	ID int64 `json:"id"`
+}
+
+type ReSetPasswordResp struct {
+}
+
 type RoleMenuIdsReq struct {
 }
 
@@ -334,14 +341,13 @@ type UpdateRoleResp struct {
 }
 
 type UpdateUserReq struct {
-	ID           int64  `json:"id"`
-	Email        string `json:"email"`
-	Mobile       string `json:"mobile"`
-	Name         string `json:"name"`
-	NickName     string `json:"nick_name"`
-	Avatar       string `json:"avatar"`
-	DeptId       int64  `json:"dept_id"`
-	LastUpdateBy string `json:"last_update_by"`
+	ID       int64  `json:"id"`
+	Email    string `json:"email"`
+	Mobile   string `json:"mobile"`
+	Name     string `json:"name"`
+	NickName string `json:"nick_name"`
+	Avatar   string `json:"avatar"`
+	DeptId   int64  `json:"dept_id"`
 }
 
 type UpdateUserResp struct {
@@ -351,6 +357,14 @@ type UpdateUserRoleReq struct {
 }
 
 type UpdateUserRoleResp struct {
+}
+
+type UserStatusReq struct {
+	ID     int64 `json:"id"`
+	Status int64 `json:"status"` // 状态  0：禁用   1：正常
+}
+
+type UserStatusResp struct {
 }
 
 type AddConfigReq struct {
@@ -397,7 +411,6 @@ type AddUserReq struct {
 	NickName string `json:"nick_name"`
 	Avatar   string `json:"avatar"`
 	DeptId   int64  `json:"dept_id"`
-	CreateBy string `json:"create_by"`
 }
 
 type AddUserResp struct {

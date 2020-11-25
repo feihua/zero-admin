@@ -21,7 +21,6 @@ type (
         NickName string `json:"nick_name"`
         Avatar string  `json:"avatar"`
         DeptId int64`json:"dept_id"`
-        CreateBy string `json:"create_by"`
     }
     addUserResp struct {
     }
@@ -63,7 +62,6 @@ type (
         NickName string `json:"nick_name"`
         Avatar string  `json:"avatar"`
         DeptId int64`json:"dept_id"`
-        LastUpdateBy string `json:"last_update_by"`
     }
     UpdateUserResp struct {
     }
@@ -75,6 +73,18 @@ type (
     UpdateUserRoleReq struct {
     }
     UpdateUserRoleResp struct {
+    }
+    ReSetPasswordReq struct {
+        ID int64 `json:"id"`
+    }
+    ReSetPasswordResp struct {
+    }
+    UserStatusReq struct {
+        ID int64 `json:"id"`
+        Status int64 `json:"status"`                       // 状态  0：禁用   1：正常
+
+    }
+    UserStatusResp struct {
     }
 )
 
@@ -102,5 +112,11 @@ service admin-api {
 
     @handler UpdateUserRole
     post /api/user/updateUserRole (UpdateUserRoleReq) returns (UpdateUserRoleResp)
+
+    @handler ReSetPassword
+    post /api/user/reSetPassword (ReSetPasswordReq) returns (ReSetPasswordResp)
+
+    @handler UpdateUserStatus
+    post /api/user/UpdateUserStatus (UserStatusReq) returns (UserStatusResp)
 }
 

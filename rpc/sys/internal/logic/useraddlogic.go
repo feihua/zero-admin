@@ -32,7 +32,7 @@ func (l *UserAddLogic) UserAdd(in *sys.UserAddReq) (*sys.UserAddResp, error) {
 		NickName:   in.NickName,
 		Avatar:     in.Avatar,
 		Password:   "123456",
-		Salt:       "Salt",
+		Salt:       "123456",
 		Email:      in.Email,
 		Mobile:     in.Mobile,
 		Status:     1,

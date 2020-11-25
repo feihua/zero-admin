@@ -54,6 +54,16 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/user/updateUserRole",
 				Handler: user.UpdateUserRoleHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/user/reSetPassword",
+				Handler: user.ReSetPasswordHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/user/UpdateUserStatus",
+				Handler: user.UpdateUserStatusHandler(serverCtx),
+			},
 		},
 	)
 

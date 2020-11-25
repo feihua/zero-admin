@@ -56,6 +56,16 @@ func (s *SysServer) UpdateUserRole(ctx context.Context, in *sys.UpdateUserRoleRe
 	return l.UpdateUserRole(in)
 }
 
+func (s *SysServer) ReSetPassword(ctx context.Context, in *sys.ReSetPasswordReq) (*sys.ReSetPasswordResp, error) {
+	l := logic.NewReSetPasswordLogic(ctx, s.svcCtx)
+	return l.ReSetPassword(in)
+}
+
+func (s *SysServer) UpdateUserStatus(ctx context.Context, in *sys.UserStatusReq) (*sys.UserStatusResp, error) {
+	l := logic.NewUpdateUserStatusLogic(ctx, s.svcCtx)
+	return l.UpdateUserStatus(in)
+}
+
 func (s *SysServer) RoleAdd(ctx context.Context, in *sys.RoleAddReq) (*sys.RoleAddResp, error) {
 	l := logic.NewRoleAddLogic(ctx, s.svcCtx)
 	return l.RoleAdd(in)
