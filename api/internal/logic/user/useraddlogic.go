@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,19 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserAddLog
 }
 
 func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sys.UserAdd(l.ctx, &sysclient.UserAddReq{
+		Email:    req.Email,
+		Mobile:   req.Mobile,
+		Name:     req.Name,
+		NickName: req.NickName,
+		Avatar:   req.Avatar,
+		DeptId:   req.DeptId,
+		CreateBy: "admin",
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddUserResp{}, nil
 }

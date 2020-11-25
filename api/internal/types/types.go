@@ -334,11 +334,14 @@ type UpdateRoleResp struct {
 }
 
 type UpdateUserReq struct {
-	ID       int64  `json:"id"`
-	Email    string `json:"email"`
-	Mobile   string `json:"mobile"`
-	Name     string `json:"name"`
-	NickName string `json:"nick_name"`
+	ID           int64  `json:"id"`
+	Email        string `json:"email"`
+	Mobile       string `json:"mobile"`
+	Name         string `json:"name"`
+	NickName     string `json:"nick_name"`
+	Avatar       string `json:"avatar"`
+	DeptId       int64  `json:"dept_id"`
+	LastUpdateBy string `json:"last_update_by"`
 }
 
 type UpdateUserResp struct {
@@ -392,6 +395,9 @@ type AddUserReq struct {
 	Mobile   string `json:"mobile"`
 	Name     string `json:"name"`
 	NickName string `json:"nick_name"`
+	Avatar   string `json:"avatar"`
+	DeptId   int64  `json:"dept_id"`
+	CreateBy string `json:"create_by"`
 }
 
 type AddUserResp struct {

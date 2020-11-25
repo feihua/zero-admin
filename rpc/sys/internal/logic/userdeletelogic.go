@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
 
@@ -24,7 +23,7 @@ func NewUserDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserDe
 }
 
 func (l *UserDeleteLogic) UserDelete(in *sys.UserDeleteReq) (*sys.UserDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	_ = l.svcCtx.UserModel.Delete(in.Id)
 
 	return &sys.UserDeleteResp{}, nil
 }

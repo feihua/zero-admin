@@ -19,6 +19,9 @@ type (
         Mobile string `json:"mobile"`
         Name string `json:"name"`
         NickName string `json:"nick_name"`
+        Avatar string  `json:"avatar"`
+        DeptId int64`json:"dept_id"`
+        CreateBy string `json:"create_by"`
     }
     addUserResp struct {
     }
@@ -58,6 +61,9 @@ type (
         Mobile string `json:"mobile"`
         Name string `json:"name"`
         NickName string `json:"nick_name"`
+        Avatar string  `json:"avatar"`
+        DeptId int64`json:"dept_id"`
+        LastUpdateBy string `json:"last_update_by"`
     }
     UpdateUserResp struct {
     }
