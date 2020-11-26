@@ -7,6 +7,12 @@ info(
 
 type (
     addConfigReq struct {
+        Value string `json:"value"`                        // 数据值
+        Label string `json:"label"`                        // 标签名
+        Type string `json:"type"`                          // 类型
+        Description string `json:"description"`            // 描述
+        Sort int64 `json:"sort"`                           // 排序（升序）
+        Remarks string `json:"remarks"`                    // 备注信息
     }
     addConfigResp struct {
     }
@@ -36,11 +42,18 @@ type (
         Total int64 `json:"total"`
     }
     UpdateConfigReq struct {
+        Id int64 `json:"id"`                               // 编号
+        Value string `json:"value"`                        // 数据值
+        Label string `json:"label"`                        // 标签名
+        Type string `json:"type"`                          // 类型
+        Description string `json:"description"`            // 描述
+        Sort int64 `json:"sort"`                           // 排序（升序）
+        Remarks string `json:"remarks"`                    // 备注信息
     }
     UpdateConfigResp struct {
     }
     DeleteConfigReq struct {
-        ID int64 `json:"id"`
+        Id int64 `json:"id"`
     }
     DeleteConfigResp struct {
     }

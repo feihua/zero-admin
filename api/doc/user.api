@@ -55,7 +55,7 @@ type (
         Total int64 `json:"total"`
     }
     UpdateUserReq struct {
-        ID int64 `json:"id"`
+        Id int64 `json:"id"`
         Email string `json:"email"`
         Mobile string `json:"mobile"`
         Name string `json:"name"`
@@ -75,12 +75,12 @@ type (
     UpdateUserRoleResp struct {
     }
     ReSetPasswordReq struct {
-        ID int64 `json:"id"`
+        Id int64 `json:"id"`
     }
     ReSetPasswordResp struct {
     }
     UserStatusReq struct {
-        ID int64 `json:"id"`
+        Id int64 `json:"id"`
         Status int64 `json:"status"`                       // 状态  0：禁用   1：正常
 
     }

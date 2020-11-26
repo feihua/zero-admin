@@ -26,9 +26,10 @@ func NewRoleUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleUpd
 
 func (l *RoleUpdateLogic) RoleUpdate(req types.UpdateRoleReq) (*types.UpdateRoleResp, error) {
 	_, err := l.svcCtx.Sys.RoleUpdate(l.ctx, &sysclient.RoleUpdateReq{
-		Id:           req.ID,
-		Name:         req.Name,
-		Remark:       req.Remark,
+		Id:     req.Id,
+		Name:   req.Name,
+		Remark: req.Remark,
+		//todo 从token里面拿
 		LastUpdateBy: "admin",
 	})
 

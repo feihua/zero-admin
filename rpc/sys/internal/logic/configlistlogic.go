@@ -24,8 +24,10 @@ func NewConfigListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Config
 }
 
 func (l *ConfigListLogic) ConfigList(in *sys.ConfigListReq) (*sys.ConfigListResp, error) {
-	all, _ := l.svcCtx.ConfigModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	all, err := l.svcCtx.ConfigModel.FindAll(in.Current, in.PageSize)
+	if err != nil {
+		return nil, err
+	}
 
 	var list []*sys.ConfigListData
 	for _, config := range *all {

@@ -7,6 +7,9 @@ info(
 
 type (
     addDeptReq struct {
+        Name string `json:"name"`                          // 机构名称
+        ParentId int64 `json:"parent_id"`                  // 上级机构ID，一级机构为0
+        OrderNum int64 `json:"order_num"`                  // 排序
     }
     addDeptResp struct {
     }
@@ -33,12 +36,15 @@ type (
         Total int64 `json:"total"`
     }
     UpdateDeptReq struct {
-        ID int64 `json:"id"`
+        Id int64 `json:"id"`                               // 编号
+        Name string `json:"name"`                          // 机构名称
+        ParentId int64 `json:"parent_id"`                  // 上级机构ID，一级机构为0
+        OrderNum int64 `json:"order_num"`                  // 排序
     }
     UpdateDeptResp struct {
     }
     DeleteDeptReq struct {
-        ID int64 `json:"id"`
+        Id int64 `json:"id"`
     }
     DeleteDeptResp struct {
     }

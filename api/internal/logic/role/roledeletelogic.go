@@ -26,7 +26,7 @@ func NewRoleDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleDel
 
 func (l *RoleDeleteLogic) RoleDelete(req types.DeleteRoleReq) (*types.DeleteRoleResp, error) {
 	_, err := l.svcCtx.Sys.RoleDelete(l.ctx, &sysclient.RoleDeleteReq{
-		Id: req.ID,
+		Id: req.Id,
 	})
 
 	if err != nil {

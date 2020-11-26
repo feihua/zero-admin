@@ -24,7 +24,12 @@ func NewDeptDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptDe
 }
 
 func (l *DeptDeleteLogic) DeptDelete(in *sys.DeptDeleteReq) (*sys.DeptDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.DeptModel.Delete(in.Id)
+	//count, _ := l.svcCtx.UserModel.Count()
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sys.DeptDeleteResp{}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,21 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictUpd
 }
 
 func (l *DictUpdateLogic) DictUpdate(req types.UpdateDictReq) (*types.UpdateDictResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sys.DictUpdate(l.ctx, &sysclient.DictUpdateReq{
+		Id:          req.Id,
+		Value:       req.Value,
+		Label:       req.Label,
+		Type:        req.Type,
+		Description: req.Description,
+		Sort:        int64(req.Sort),
+		Remarks:     req.Remarks,
+		//todo 从token里面拿
+		LastUpdateBy: "admin",
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateDictResp{}, nil
 }

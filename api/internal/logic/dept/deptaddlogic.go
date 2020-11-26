@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,17 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptAddLog
 }
 
 func (l *DeptAddLogic) DeptAdd(req types.AddDeptReq) (*types.AddDeptResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sys.DeptAdd(l.ctx, &sysclient.DeptAddReq{
+		Name:     req.Name,
+		ParentId: req.ParentId,
+		OrderNum: req.OrderNum,
+		//todo 从token里面拿
+		CreateBy: "admin",
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddDeptResp{}, nil
 }

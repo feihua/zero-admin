@@ -24,7 +24,11 @@ func NewConfigDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Conf
 }
 
 func (l *ConfigDeleteLogic) ConfigDelete(in *sys.ConfigDeleteReq) (*sys.ConfigDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.DeptModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sys.ConfigDeleteResp{}, nil
 }

@@ -2,54 +2,49 @@
 package types
 
 type DeleteConfigReq struct {
-	ID int64 `json:"id"`
+	Id int64 `json:"id"`
 }
 
 type DeleteConfigResp struct {
 }
 
 type DeleteDeptReq struct {
-	ID int64 `json:"id"`
+	Id int64 `json:"id"`
 }
 
 type DeleteDeptResp struct {
 }
 
 type DeleteDictReq struct {
-	ID          int64  `json:"id"`
-	Value       string `json:"value"`
-	Label       string `json:"label"`
-	Type        string `json:"type"`
-	Description string `json:"description"`
-	Remarks     string `json:"remarks"`
+	Id int64 `json:"id"`
 }
 
 type DeleteDictResp struct {
 }
 
 type DeleteLoginLogReq struct {
-	ID int64 `json:"id"`
+	Id int64 `json:"id"`
 }
 
 type DeleteLoginLogResp struct {
 }
 
 type DeleteMenuReq struct {
-	ID int64 `json:"id"`
+	Id int64 `json:"id"`
 }
 
 type DeleteMenuResp struct {
 }
 
 type DeleteRoleReq struct {
-	ID int64 `json:"id"`
+	Id int64 `json:"id"`
 }
 
 type DeleteRoleResp struct {
 }
 
 type DeleteSysLogReq struct {
-	ID int64 `json:"id"`
+	Id int64 `json:"id"`
 }
 
 type DeleteSysLogResp struct {
@@ -279,7 +274,7 @@ type ListtMenuData struct {
 }
 
 type ReSetPasswordReq struct {
-	ID int64 `json:"id"`
+	Id int64 `json:"id"`
 }
 
 type ReSetPasswordResp struct {
@@ -292,32 +287,50 @@ type RoleMenuIdsResp struct {
 }
 
 type UpdateConfigReq struct {
+	Id          int64  `json:"id"`          // 编号
+	Value       string `json:"value"`       // 数据值
+	Label       string `json:"label"`       // 标签名
+	Type        string `json:"type"`        // 类型
+	Description string `json:"description"` // 描述
+	Sort        int64  `json:"sort"`        // 排序（升序）
+	Remarks     string `json:"remarks"`     // 备注信息
 }
 
 type UpdateConfigResp struct {
 }
 
 type UpdateDeptReq struct {
-	ID int64 `json:"id"`
+	Id       int64  `json:"id"`        // 编号
+	Name     string `json:"name"`      // 机构名称
+	ParentId int64  `json:"parent_id"` // 上级机构ID，一级机构为0
+	OrderNum int64  `json:"order_num"` // 排序
 }
 
 type UpdateDeptResp struct {
 }
 
 type UpdateDictReq struct {
-	ID          int64  `json:"id"`
-	Value       string `json:"value"`
-	Label       string `json:"label"`
-	Type        string `json:"type"`
-	Description string `json:"description"`
-	Remarks     string `json:"remarks"`
+	Id          int64   `json:"id"`          // 编号
+	Value       string  `json:"value"`       // 数据值
+	Label       string  `json:"label"`       // 标签名
+	Type        string  `json:"type"`        // 类型
+	Description string  `json:"description"` // 描述
+	Sort        float64 `json:"sort"`        // 排序（升序）
+	Remarks     string  `json:"remarks"`     // 备注信息
 }
 
 type UpdateDictResp struct {
 }
 
 type UpdateMenuReq struct {
-	ID int64 `json:"id"`
+	Id       int64  `json:"id"`        // 编号
+	Name     string `json:"name"`      // 菜单名称
+	ParentId int64  `json:"parent_id"` // 父菜单ID，一级菜单为0
+	Url      string `json:"url"`       // 菜单URL,类型：1.普通页面（如用户管理， /sys/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
+	Perms    string `json:"perms"`     // 授权(多个用逗号分隔，如：sys:user:add,sys:user:edit)
+	Type     int64  `json:"type"`      // 类型   0：目录   1：菜单   2：按钮
+	Icon     string `json:"icon"`      // 菜单图标
+	OrderNum int64  `json:"order_num"` // 排序
 }
 
 type UpdateMenuResp struct {
@@ -330,16 +343,16 @@ type UpdateRoleMenuResp struct {
 }
 
 type UpdateRoleReq struct {
-	ID     int64  `json:"id"`
-	Name   string `json:"name"`
-	Remark string `json:"remark"`
+	Id     int64  `json:"id"`     // 编号
+	Name   string `json:"name"`   // 角色名称
+	Remark string `json:"remark"` // 备注
 }
 
 type UpdateRoleResp struct {
 }
 
 type UpdateUserReq struct {
-	ID       int64  `json:"id"`
+	Id       int64  `json:"id"`
 	Email    string `json:"email"`
 	Mobile   string `json:"mobile"`
 	Name     string `json:"name"`
@@ -358,7 +371,7 @@ type UpdateUserRoleResp struct {
 }
 
 type UserStatusReq struct {
-	ID     int64 `json:"id"`
+	Id     int64 `json:"id"`
 	Status int64 `json:"status"` // 状态  0：禁用   1：正常
 }
 
@@ -366,37 +379,54 @@ type UserStatusResp struct {
 }
 
 type AddConfigReq struct {
+	Value       string `json:"value"`       // 数据值
+	Label       string `json:"label"`       // 标签名
+	Type        string `json:"type"`        // 类型
+	Description string `json:"description"` // 描述
+	Sort        int64  `json:"sort"`        // 排序（升序）
+	Remarks     string `json:"remarks"`     // 备注信息
 }
 
 type AddConfigResp struct {
 }
 
 type AddDeptReq struct {
+	Name     string `json:"name"`      // 机构名称
+	ParentId int64  `json:"parent_id"` // 上级机构ID，一级机构为0
+	OrderNum int64  `json:"order_num"` // 排序
 }
 
 type AddDeptResp struct {
 }
 
 type AddDictReq struct {
-	Value       string `json:"value"`
-	Label       string `json:"label"`
-	Type        string `json:"type"`
-	Description string `json:"description"`
-	Remarks     string `json:"remarks"`
+	Value       string  `json:"value"`       // 数据值
+	Label       string  `json:"label"`       // 标签名
+	Type        string  `json:"type"`        // 类型
+	Description string  `json:"description"` // 描述
+	Sort        float64 `json:"sort"`        // 排序（升序）
+	Remarks     string  `json:"remarks"`     // 备注信息
 }
 
 type AddDictResp struct {
 }
 
 type AddMenuReq struct {
+	Name     string `json:"name"`      // 菜单名称
+	ParentId int64  `json:"parent_id"` // 父菜单ID，一级菜单为0
+	Url      string `json:"url"`       // 菜单URL,类型：1.普通页面（如用户管理， /sys/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
+	Perms    string `json:"perms"`     // 授权(多个用逗号分隔，如：sys:user:add,sys:user:edit)
+	Type     int64  `json:"type"`      // 类型   0：目录   1：菜单   2：按钮
+	Icon     string `json:"icon"`      // 菜单图标
+	OrderNum int64  `json:"order_num"` // 排序
 }
 
 type AddMenuResp struct {
 }
 
 type AddRoleReq struct {
-	Name   string `json:"name"`
-	Remark string `json:"remark"`
+	Name   string `json:"name"`   // 角色名称
+	Remark string `json:"remark"` // 备注
 }
 
 type AddRoleResp struct {

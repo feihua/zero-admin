@@ -7,8 +7,8 @@ info(
 
 type (
     addRoleReq struct {
-        Name string `json:"name"`
-        Remark string `json:"remark"`
+        Name string `json:"name"`                          // 角色名称
+        Remark string `json:"remark"`                      // 备注
     }
     addRoleResp struct {
     }
@@ -34,14 +34,14 @@ type (
         Total int64 `json:"total"`
     }
     UpdateRoleReq struct {
-        ID int64 `json:"id"`
-        Name string `json:"name"`
-        Remark string `json:"remark"`
+        Id int64 `json:"id"`                               // 编号
+        Name string `json:"name"`                          // 角色名称
+        Remark string `json:"remark"`                      // 备注
     }
     UpdateRoleResp struct {
     }
     DeleteRoleReq struct {
-        ID int64 `json:"id"`
+        Id int64 `json:"id"`
     }
     DeleteRoleResp struct {
     }

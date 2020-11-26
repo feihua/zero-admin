@@ -26,7 +26,7 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserUpd
 
 func (l *UserUpdateLogic) UserUpdate(req types.UpdateUserReq) (*types.UpdateUserResp, error) {
 	_, err := l.svcCtx.Sys.UserUpdate(l.ctx, &sysclient.UserUpdateReq{
-		Id:           req.ID,
+		Id:           req.Id,
 		Email:        req.Email,
 		Mobile:       req.Mobile,
 		Name:         req.Name,

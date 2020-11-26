@@ -31,7 +31,7 @@ type (
         Total int64 `json:"total"`
     }
     DeleteSysLogReq struct {
-        ID int64 `json:"id"`
+        Id int64 `json:"id"`
     }
     DeleteSysLogResp struct {
     }

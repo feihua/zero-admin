@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model"
+	"time"
 
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
@@ -24,7 +26,21 @@ func NewDictAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictAddLo
 }
 
 func (l *DictAddLogic) DictAdd(in *sys.DictAddReq) (*sys.DictAddResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.DictModel.Insert(model.SysDict{
+		Value:       in.Value,
+		Label:       in.Label,
+		Type:        in.Type,
+		Description: in.Description,
+		Sort:        float64(in.Sort),
+		CreateBy:    in.CreateBy,
+		CreateTime:  time.Time{},
+		Remarks:     in.Remarks,
+		DelFlag:     0,
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sys.DictAddResp{}, nil
 }

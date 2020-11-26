@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,20 @@ func NewDictAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictAddLog
 }
 
 func (l *DictAddLogic) DictAdd(req types.AddDictReq) (*types.AddDictResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sys.DictAdd(l.ctx, &sysclient.DictAddReq{
+		Value:       req.Value,
+		Label:       req.Label,
+		Type:        req.Type,
+		Description: req.Description,
+		Sort:        int64(req.Sort),
+		Remarks:     req.Remarks,
+		//todo 从token里面拿
+		CreateBy: "admin",
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddDictResp{}, nil
 }

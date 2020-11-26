@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,21 @@ func NewConfigUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Confi
 }
 
 func (l *ConfigUpdateLogic) ConfigUpdate(req types.UpdateConfigReq) (*types.UpdateConfigResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sys.ConfigUpdate(l.ctx, &sysclient.ConfigUpdateReq{
+		Id:          req.Id,
+		Value:       req.Value,
+		Label:       req.Label,
+		Type:        req.Type,
+		Description: req.Description,
+		Sort:        req.Sort,
+		Remarks:     req.Remarks,
+		//todo 从token里面拿
+		LastUpdateBy: "admin",
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateConfigResp{}, nil
 }

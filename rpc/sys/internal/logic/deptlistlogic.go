@@ -24,8 +24,12 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptList
 }
 
 func (l *DeptListLogic) DeptList(in *sys.DeptListReq) (*sys.DeptListResp, error) {
-	all, _ := l.svcCtx.DeptModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.DeptModel.FindAll(in.Current, in.PageSize)
 	//count, _ := l.svcCtx.UserModel.Count()
+
+	if err != nil {
+		return nil, err
+	}
 
 	var list []*sys.DeptListData
 	for _, dept := range *all {

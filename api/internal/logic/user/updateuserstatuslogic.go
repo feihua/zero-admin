@@ -26,7 +26,7 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) U
 
 func (l *UpdateUserStatusLogic) UpdateUserStatus(req types.UserStatusReq) (*types.UserStatusResp, error) {
 	_, _ = l.svcCtx.Sys.UpdateUserStatus(l.ctx, &sysclient.UserStatusReq{
-		Id:           req.ID,
+		Id:           req.Id,
 		Status:       req.Status,
 		LastUpdateBy: "admin",
 	})

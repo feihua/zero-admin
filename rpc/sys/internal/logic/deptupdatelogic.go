@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model"
+	"time"
 
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
@@ -24,7 +26,18 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptUp
 }
 
 func (l *DeptUpdateLogic) DeptUpdate(in *sys.DeptUpdateReq) (*sys.DeptUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.DeptModel.Update(model.SysDept{
+		Id:             in.Id,
+		Name:           in.Name,
+		ParentId:       in.ParentId,
+		OrderNum:       in.OrderNum,
+		LastUpdateBy:   in.LastUpdateBy,
+		LastUpdateTime: time.Time{},
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sys.DeptUpdateResp{}, nil
 }
