@@ -34,7 +34,7 @@ func (l *ConfigUpdateLogic) ConfigUpdate(in *sys.ConfigUpdateReq) (*sys.ConfigUp
 		Description:    in.Description,
 		Sort:           float64(in.Sort),
 		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Time{},
+		LastUpdateTime: time.Now(),
 		Remarks:        in.Remarks,
 	})
 	if err != nil {

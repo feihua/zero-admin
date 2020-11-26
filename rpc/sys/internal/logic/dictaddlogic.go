@@ -27,15 +27,16 @@ func NewDictAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictAddLo
 
 func (l *DictAddLogic) DictAdd(in *sys.DictAddReq) (*sys.DictAddResp, error) {
 	_, err := l.svcCtx.DictModel.Insert(model.SysDict{
-		Value:       in.Value,
-		Label:       in.Label,
-		Type:        in.Type,
-		Description: in.Description,
-		Sort:        float64(in.Sort),
-		CreateBy:    in.CreateBy,
-		CreateTime:  time.Time{},
-		Remarks:     in.Remarks,
-		DelFlag:     0,
+		Value:          in.Value,
+		Label:          in.Label,
+		Type:           in.Type,
+		Description:    in.Description,
+		Sort:           float64(in.Sort),
+		CreateBy:       in.CreateBy,
+		LastUpdateBy:   in.CreateBy,
+		LastUpdateTime: time.Now(),
+		Remarks:        in.Remarks,
+		DelFlag:        0,
 	})
 
 	if err != nil {

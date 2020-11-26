@@ -36,7 +36,7 @@ func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp
 		Mobile:         in.Mobile,
 		DeptId:         in.DeptId,
 		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Time{},
+		LastUpdateTime: time.Now(),
 	})
 
 	return &sys.UserUpdateResp{}, nil

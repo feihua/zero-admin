@@ -32,7 +32,7 @@ func (l *ReSetPasswordLogic) ReSetPassword(in *sys.ReSetPasswordReq) (*sys.ReSet
 		Password:       "123456",
 		Salt:           "123456",
 		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Time{},
+		LastUpdateTime: time.Now(),
 	})
 
 	return &sys.ReSetPasswordResp{}, nil

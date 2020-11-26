@@ -26,7 +26,7 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictUp
 }
 
 func (l *DictUpdateLogic) DictUpdate(in *sys.DictUpdateReq) (*sys.DictUpdateResp, error) {
-	_, err := l.svcCtx.DictModel.Insert(model.SysDict{
+	err := l.svcCtx.DictModel.Update(model.SysDict{
 		Id:             in.Id,
 		Value:          in.Value,
 		Label:          in.Label,
@@ -34,7 +34,7 @@ func (l *DictUpdateLogic) DictUpdate(in *sys.DictUpdateReq) (*sys.DictUpdateResp
 		Description:    in.Description,
 		Sort:           float64(in.Sort),
 		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Time{},
+		LastUpdateTime: time.Now(),
 		Remarks:        in.Remarks,
 		DelFlag:        0,
 	})

@@ -30,7 +30,7 @@ func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sys.UserStatusReq) (*sys.Us
 		Id:             in.Id,
 		Status:         in.Status,
 		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Time{},
+		LastUpdateTime: time.Now(),
 	})
 
 	return &sys.UserStatusResp{}, nil

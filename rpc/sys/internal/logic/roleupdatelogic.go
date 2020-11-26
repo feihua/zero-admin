@@ -31,7 +31,7 @@ func (l *RoleUpdateLogic) RoleUpdate(in *sys.RoleUpdateReq) (*sys.RoleUpdateResp
 		Name:           in.Name,
 		Remark:         in.Remark,
 		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Time{},
+		LastUpdateTime: time.Now(),
 	})
 
 	return &sys.RoleUpdateResp{}, nil

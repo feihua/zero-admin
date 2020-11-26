@@ -24,7 +24,7 @@ func NewLoginLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Lo
 }
 
 func (l *LoginLogDeleteLogic) LoginLogDelete(in *sys.LoginLogDeleteReq) (*sys.LoginLogDeleteResp, error) {
-	err := l.svcCtx.DictModel.Delete(in.Id)
+	err := l.svcCtx.LoginLogModel.Delete(in.Id)
 
 	if err != nil {
 		return nil, err

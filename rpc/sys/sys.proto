@@ -412,7 +412,7 @@ message SysLogAddReq {
   string operation = 2;
   string method = 3;
   string params = 4;
-  string time = 5;
+  int64 time = 5;
   string ip = 6;
   string create_by = 7;
 }

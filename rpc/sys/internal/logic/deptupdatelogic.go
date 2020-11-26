@@ -32,7 +32,7 @@ func (l *DeptUpdateLogic) DeptUpdate(in *sys.DeptUpdateReq) (*sys.DeptUpdateResp
 		ParentId:       in.ParentId,
 		OrderNum:       in.OrderNum,
 		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Time{},
+		LastUpdateTime: time.Now(),
 	})
 
 	if err != nil {

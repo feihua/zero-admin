@@ -36,7 +36,7 @@ func (l *MenuUpdateLogic) MenuUpdate(in *sys.MenuUpdateReq) (*sys.MenuUpdateResp
 		Icon:           in.Icon,
 		OrderNum:       in.OrderNum,
 		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Time{},
+		LastUpdateTime: time.Now(),
 		DelFlag:        0,
 	})
 	//count, _ := l.svcCtx.UserModel.Count()

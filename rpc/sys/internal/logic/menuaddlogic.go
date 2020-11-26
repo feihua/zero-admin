@@ -27,16 +27,17 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuAddLo
 
 func (l *MenuAddLogic) MenuAdd(in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
 	_, err := l.svcCtx.MenuModel.Insert(model.SysMenu{
-		Name:       in.Name,
-		ParentId:   in.ParentId,
-		Url:        in.Url,
-		Perms:      in.Perms,
-		Type:       in.Type,
-		Icon:       in.Icon,
-		OrderNum:   in.OrderNum,
-		CreateBy:   in.CreateBy,
-		CreateTime: time.Time{},
-		DelFlag:    0,
+		Name:           in.Name,
+		ParentId:       in.ParentId,
+		Url:            in.Url,
+		Perms:          in.Perms,
+		Type:           in.Type,
+		Icon:           in.Icon,
+		OrderNum:       in.OrderNum,
+		CreateBy:       in.CreateBy,
+		LastUpdateBy:   in.CreateBy,
+		LastUpdateTime: time.Now(),
+		DelFlag:        0,
 	})
 	//count, _ := l.svcCtx.UserModel.Count()
 
