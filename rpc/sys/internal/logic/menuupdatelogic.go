@@ -26,8 +26,8 @@ func NewMenuUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuUp
 }
 
 func (l *MenuUpdateLogic) MenuUpdate(in *sys.MenuUpdateReq) (*sys.MenuUpdateResp, error) {
-	_, err := l.svcCtx.MenuModel.Insert(model.SysMenu{
-		Id:             0,
+	err := l.svcCtx.MenuModel.Update(model.SysMenu{
+		Id:             in.Id,
 		Name:           in.Name,
 		ParentId:       in.ParentId,
 		Url:            in.Url,
