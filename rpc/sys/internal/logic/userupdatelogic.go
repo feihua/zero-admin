@@ -31,7 +31,6 @@ func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp
 		Name:           in.Name,
 		NickName:       in.NickName,
 		Avatar:         in.Avatar,
-		Password:       "123456",
 		Email:          in.Email,
 		Mobile:         in.Mobile,
 		DeptId:         in.DeptId,

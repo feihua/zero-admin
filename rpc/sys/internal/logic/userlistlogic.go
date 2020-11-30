@@ -39,6 +39,7 @@ func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error)
 			Salt:           user.Salt,
 			Email:          user.Email,
 			Mobile:         user.Mobile,
+			DeptId:         user.DeptId,
 			Status:         user.Status,
 			CreateBy:       user.CreateBy,
 			CreateTime:     user.CreateTime.Format("2006-01-02 15:04:05"),

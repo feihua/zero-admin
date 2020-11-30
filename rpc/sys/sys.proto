@@ -50,11 +50,12 @@ message UserListData{
   string email = 7;
   string mobile = 8;
   int64 status = 9;
-  string create_by = 10;
-  string create_time = 11;
-  string last_update_by = 12;
-  string last_update_time = 13;
-  int64 del_flag = 14;
+  int64 dept_id = 10;
+  string create_by = 11;
+  string create_time = 12;
+  string last_update_by = 13;
+  string last_update_time = 14;
+  int64 del_flag = 15;
 }
 
 message UserListResp {

@@ -357,8 +357,7 @@ type UpdateUserReq struct {
 	Mobile   string `json:"mobile"`
 	Name     string `json:"name"`
 	NickName string `json:"nick_name"`
-	Avatar   string `json:"avatar"`
-	DeptId   string `json:"dept_id"`
+	DeptId   int64  `json:"dept_id"`
 }
 
 type UpdateUserResp struct {
@@ -437,7 +436,6 @@ type AddUserReq struct {
 	Mobile   string `json:"mobile"`
 	Name     string `json:"name"`
 	NickName string `json:"nick_name"`
-	Avatar   string `json:"avatar"`
 	DeptId   string `json:"dept_id"`
 }
 

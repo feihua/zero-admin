@@ -32,7 +32,6 @@ func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error)
 		Mobile:   req.Mobile,
 		Name:     req.Name,
 		NickName: req.NickName,
-		Avatar:   req.Avatar,
 		DeptId:   deptId,
 		CreateBy: "admin",
 	})
