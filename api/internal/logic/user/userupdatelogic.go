@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"go-zero-admin/rpc/sys/sysclient"
+	"strconv"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,6 +26,7 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserUpd
 }
 
 func (l *UserUpdateLogic) UserUpdate(req types.UpdateUserReq) (*types.UpdateUserResp, error) {
+	deptId, _ := strconv.ParseInt(req.DeptId, 10, 64)
 	_, err := l.svcCtx.Sys.UserUpdate(l.ctx, &sysclient.UserUpdateReq{
 		Id:           req.Id,
 		Email:        req.Email,
@@ -32,7 +34,7 @@ func (l *UserUpdateLogic) UserUpdate(req types.UpdateUserReq) (*types.UpdateUser
 		Name:         req.Name,
 		NickName:     req.NickName,
 		Avatar:       req.Avatar,
-		DeptId:       req.DeptId,
+		DeptId:       deptId,
 		LastUpdateBy: "admin",
 	})
 

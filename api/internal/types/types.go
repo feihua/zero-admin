@@ -358,7 +358,7 @@ type UpdateUserReq struct {
 	Name     string `json:"name"`
 	NickName string `json:"nick_name"`
 	Avatar   string `json:"avatar"`
-	DeptId   int64  `json:"dept_id"`
+	DeptId   string `json:"dept_id"`
 }
 
 type UpdateUserResp struct {
@@ -438,7 +438,7 @@ type AddUserReq struct {
 	Name     string `json:"name"`
 	NickName string `json:"nick_name"`
 	Avatar   string `json:"avatar"`
-	DeptId   int64  `json:"dept_id"`
+	DeptId   string `json:"dept_id"`
 }
 
 type AddUserResp struct {

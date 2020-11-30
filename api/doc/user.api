@@ -20,7 +20,7 @@ type (
         Name string `json:"name"`
         NickName string `json:"nick_name"`
         Avatar string  `json:"avatar"`
-        DeptId int64`json:"dept_id"`
+        DeptId string`json:"dept_id"`
     }
     addUserResp struct {
     }
@@ -61,7 +61,7 @@ type (
         Name string `json:"name"`
         NickName string `json:"nick_name"`
         Avatar string  `json:"avatar"`
-        DeptId int64`json:"dept_id"`
+        DeptId string`json:"dept_id"`
     }
     UpdateUserResp struct {
     }
