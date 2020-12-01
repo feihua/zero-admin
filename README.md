@@ -1,5 +1,5 @@
 声明：数据库表来源网上https://gitee.com/macrozheng/mall 这个项目,如果有侵权请告知，本人会立即删除
-## 项目前端是基于Ant Design Pro来创建的，后端是基于go-zero来创建的一个前后端分离的管理系统
+#### 项目前端是基于Ant Design Pro来创建的，后端是基于go-zero来创建的一个前后端分离的管理系统
 
 # 1.项目预览
 
