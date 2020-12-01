@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package oms;
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+service Oms {
+  rpc Ping(Request) returns(Response);
+}
