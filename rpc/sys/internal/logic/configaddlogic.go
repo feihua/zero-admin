@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model"
+	"go-zero-admin/rpc/model/sysmodel"
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
 	"time"
@@ -25,7 +25,7 @@ func NewConfigAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ConfigA
 }
 
 func (l *ConfigAddLogic) ConfigAdd(in *sys.ConfigAddReq) (*sys.ConfigAddResp, error) {
-	_, err := l.svcCtx.ConfigModel.Insert(model.SysConfig{
+	_, err := l.svcCtx.ConfigModel.Insert(sysmodel.SysConfig{
 		Value:          in.Value,
 		Label:          in.Label,
 		Type:           in.Type,

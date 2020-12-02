@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model"
+	"go-zero-admin/rpc/model/sysmodel"
 	"time"
 
 	"go-zero-admin/rpc/sys/internal/svc"
@@ -26,7 +26,7 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserUp
 }
 
 func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp, error) {
-	_ = l.svcCtx.UserModel.Update(model.SysUser{
+	_ = l.svcCtx.UserModel.Update(sysmodel.SysUser{
 		Id:             in.Id,
 		Name:           in.Name,
 		NickName:       in.NickName,

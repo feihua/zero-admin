@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.13.0
-// source: sys.proto
+// source: sysmodel.proto
 
 package sys
 
@@ -6049,176 +6049,176 @@ func file_sys_proto_rawDescGZIP() []byte {
 
 var file_sys_proto_msgTypes = make([]protoimpl.MessageInfo, 84)
 var file_sys_proto_goTypes = []interface{}{
-	(*LoginReq)(nil),             // 0: sys.LoginReq
-	(*LoginResp)(nil),            // 1: sys.loginResp
-	(*InfoReq)(nil),              // 2: sys.InfoReq
-	(*InfoResp)(nil),             // 3: sys.InfoResp
-	(*UserAddReq)(nil),           // 4: sys.UserAddReq
-	(*UserAddResp)(nil),          // 5: sys.UserAddResp
-	(*UserListReq)(nil),          // 6: sys.UserListReq
-	(*UserListData)(nil),         // 7: sys.UserListData
-	(*UserListResp)(nil),         // 8: sys.UserListResp
-	(*UserUpdateReq)(nil),        // 9: sys.UserUpdateReq
-	(*UserUpdateResp)(nil),       // 10: sys.UserUpdateResp
-	(*UserDeleteReq)(nil),        // 11: sys.UserDeleteReq
-	(*UserDeleteResp)(nil),       // 12: sys.UserDeleteResp
-	(*UpdateUserRoleReq)(nil),    // 13: sys.UpdateUserRoleReq
-	(*UpdateUserRoleResp)(nil),   // 14: sys.UpdateUserRoleResp
-	(*ReSetPasswordReq)(nil),     // 15: sys.ReSetPasswordReq
-	(*ReSetPasswordResp)(nil),    // 16: sys.ReSetPasswordResp
-	(*UserStatusReq)(nil),        // 17: sys.UserStatusReq
-	(*UserStatusResp)(nil),       // 18: sys.UserStatusResp
-	(*RoleAddReq)(nil),           // 19: sys.RoleAddReq
-	(*RoleAddResp)(nil),          // 20: sys.RoleAddResp
-	(*RoleListReq)(nil),          // 21: sys.RoleListReq
-	(*RoleListData)(nil),         // 22: sys.RoleListData
-	(*RoleListResp)(nil),         // 23: sys.RoleListResp
-	(*RoleUpdateReq)(nil),        // 24: sys.RoleUpdateReq
-	(*RoleUpdateResp)(nil),       // 25: sys.RoleUpdateResp
-	(*RoleDeleteReq)(nil),        // 26: sys.RoleDeleteReq
-	(*RoleDeleteResp)(nil),       // 27: sys.RoleDeleteResp
-	(*UpdateRoleRoleReq)(nil),    // 28: sys.UpdateRoleRoleReq
-	(*UpdateRoleRoleResp)(nil),   // 29: sys.UpdateRoleRoleResp
-	(*MenuAddReq)(nil),           // 30: sys.MenuAddReq
-	(*MenuAddResp)(nil),          // 31: sys.MenuAddResp
-	(*MenuListReq)(nil),          // 32: sys.MenuListReq
-	(*MenuListData)(nil),         // 33: sys.MenuListData
-	(*MenuListResp)(nil),         // 34: sys.MenuListResp
-	(*MenuUpdateReq)(nil),        // 35: sys.MenuUpdateReq
-	(*MenuUpdateResp)(nil),       // 36: sys.MenuUpdateResp
-	(*MenuDeleteReq)(nil),        // 37: sys.MenuDeleteReq
-	(*MenuDeleteResp)(nil),       // 38: sys.MenuDeleteResp
-	(*UpdateMenuRoleReq)(nil),    // 39: sys.UpdateMenuRoleReq
-	(*UpdateMenuRoleResp)(nil),   // 40: sys.UpdateMenuRoleResp
-	(*DictAddReq)(nil),           // 41: sys.DictAddReq
-	(*DictAddResp)(nil),          // 42: sys.DictAddResp
-	(*DictListReq)(nil),          // 43: sys.DictListReq
-	(*DictListData)(nil),         // 44: sys.DictListData
-	(*DictListResp)(nil),         // 45: sys.DictListResp
-	(*DictUpdateReq)(nil),        // 46: sys.DictUpdateReq
-	(*DictUpdateResp)(nil),       // 47: sys.DictUpdateResp
-	(*DictDeleteReq)(nil),        // 48: sys.DictDeleteReq
-	(*DictDeleteResp)(nil),       // 49: sys.DictDeleteResp
-	(*DeptAddReq)(nil),           // 50: sys.DeptAddReq
-	(*DeptAddResp)(nil),          // 51: sys.DeptAddResp
-	(*DeptListReq)(nil),          // 52: sys.DeptListReq
-	(*DeptListData)(nil),         // 53: sys.DeptListData
-	(*DeptListResp)(nil),         // 54: sys.DeptListResp
-	(*DeptUpdateReq)(nil),        // 55: sys.DeptUpdateReq
-	(*DeptUpdateResp)(nil),       // 56: sys.DeptUpdateResp
-	(*DeptDeleteReq)(nil),        // 57: sys.DeptDeleteReq
-	(*DeptDeleteResp)(nil),       // 58: sys.DeptDeleteResp
-	(*LoginLogAddReq)(nil),       // 59: sys.LoginLogAddReq
-	(*LoginLogAddResp)(nil),      // 60: sys.LoginLogAddResp
-	(*LoginLogListReq)(nil),      // 61: sys.LoginLogListReq
-	(*LoginLogListData)(nil),     // 62: sys.LoginLogListData
-	(*LoginLogListResp)(nil),     // 63: sys.LoginLogListResp
-	(*LoginLogDeleteReq)(nil),    // 64: sys.LoginLogDeleteReq
-	(*LoginLogDeleteResp)(nil),   // 65: sys.LoginLogDeleteResp
-	(*SysLogAddReq)(nil),         // 66: sys.SysLogAddReq
-	(*SysLogAddResp)(nil),        // 67: sys.SysLogAddResp
-	(*SysLogListReq)(nil),        // 68: sys.SysLogListReq
-	(*SysLogListData)(nil),       // 69: sys.SysLogListData
-	(*SysLogListResp)(nil),       // 70: sys.SysLogListResp
-	(*SysLogDeleteReq)(nil),      // 71: sys.SysLogDeleteReq
-	(*SysLogDeleteResp)(nil),     // 72: sys.SysLogDeleteResp
-	(*ConfigAddReq)(nil),         // 73: sys.ConfigAddReq
-	(*ConfigAddResp)(nil),        // 74: sys.ConfigAddResp
-	(*ConfigListReq)(nil),        // 75: sys.ConfigListReq
-	(*ConfigListData)(nil),       // 76: sys.ConfigListData
-	(*ConfigListResp)(nil),       // 77: sys.ConfigListResp
-	(*ConfigUpdateReq)(nil),      // 78: sys.ConfigUpdateReq
-	(*ConfigUpdateResp)(nil),     // 79: sys.ConfigUpdateResp
-	(*ConfigDeleteReq)(nil),      // 80: sys.ConfigDeleteReq
-	(*ConfigDeleteResp)(nil),     // 81: sys.ConfigDeleteResp
-	(*UpdateConfigRoleReq)(nil),  // 82: sys.UpdateConfigRoleReq
-	(*UpdateConfigRoleResp)(nil), // 83: sys.UpdateConfigRoleResp
+	(*LoginReq)(nil),             // 0: sysmodel.LoginReq
+	(*LoginResp)(nil),            // 1: sysmodel.loginResp
+	(*InfoReq)(nil),              // 2: sysmodel.InfoReq
+	(*InfoResp)(nil),             // 3: sysmodel.InfoResp
+	(*UserAddReq)(nil),           // 4: sysmodel.UserAddReq
+	(*UserAddResp)(nil),          // 5: sysmodel.UserAddResp
+	(*UserListReq)(nil),          // 6: sysmodel.UserListReq
+	(*UserListData)(nil),         // 7: sysmodel.UserListData
+	(*UserListResp)(nil),         // 8: sysmodel.UserListResp
+	(*UserUpdateReq)(nil),        // 9: sysmodel.UserUpdateReq
+	(*UserUpdateResp)(nil),       // 10: sysmodel.UserUpdateResp
+	(*UserDeleteReq)(nil),        // 11: sysmodel.UserDeleteReq
+	(*UserDeleteResp)(nil),       // 12: sysmodel.UserDeleteResp
+	(*UpdateUserRoleReq)(nil),    // 13: sysmodel.UpdateUserRoleReq
+	(*UpdateUserRoleResp)(nil),   // 14: sysmodel.UpdateUserRoleResp
+	(*ReSetPasswordReq)(nil),     // 15: sysmodel.ReSetPasswordReq
+	(*ReSetPasswordResp)(nil),    // 16: sysmodel.ReSetPasswordResp
+	(*UserStatusReq)(nil),        // 17: sysmodel.UserStatusReq
+	(*UserStatusResp)(nil),       // 18: sysmodel.UserStatusResp
+	(*RoleAddReq)(nil),           // 19: sysmodel.RoleAddReq
+	(*RoleAddResp)(nil),          // 20: sysmodel.RoleAddResp
+	(*RoleListReq)(nil),          // 21: sysmodel.RoleListReq
+	(*RoleListData)(nil),         // 22: sysmodel.RoleListData
+	(*RoleListResp)(nil),         // 23: sysmodel.RoleListResp
+	(*RoleUpdateReq)(nil),        // 24: sysmodel.RoleUpdateReq
+	(*RoleUpdateResp)(nil),       // 25: sysmodel.RoleUpdateResp
+	(*RoleDeleteReq)(nil),        // 26: sysmodel.RoleDeleteReq
+	(*RoleDeleteResp)(nil),       // 27: sysmodel.RoleDeleteResp
+	(*UpdateRoleRoleReq)(nil),    // 28: sysmodel.UpdateRoleRoleReq
+	(*UpdateRoleRoleResp)(nil),   // 29: sysmodel.UpdateRoleRoleResp
+	(*MenuAddReq)(nil),           // 30: sysmodel.MenuAddReq
+	(*MenuAddResp)(nil),          // 31: sysmodel.MenuAddResp
+	(*MenuListReq)(nil),          // 32: sysmodel.MenuListReq
+	(*MenuListData)(nil),         // 33: sysmodel.MenuListData
+	(*MenuListResp)(nil),         // 34: sysmodel.MenuListResp
+	(*MenuUpdateReq)(nil),        // 35: sysmodel.MenuUpdateReq
+	(*MenuUpdateResp)(nil),       // 36: sysmodel.MenuUpdateResp
+	(*MenuDeleteReq)(nil),        // 37: sysmodel.MenuDeleteReq
+	(*MenuDeleteResp)(nil),       // 38: sysmodel.MenuDeleteResp
+	(*UpdateMenuRoleReq)(nil),    // 39: sysmodel.UpdateMenuRoleReq
+	(*UpdateMenuRoleResp)(nil),   // 40: sysmodel.UpdateMenuRoleResp
+	(*DictAddReq)(nil),           // 41: sysmodel.DictAddReq
+	(*DictAddResp)(nil),          // 42: sysmodel.DictAddResp
+	(*DictListReq)(nil),          // 43: sysmodel.DictListReq
+	(*DictListData)(nil),         // 44: sysmodel.DictListData
+	(*DictListResp)(nil),         // 45: sysmodel.DictListResp
+	(*DictUpdateReq)(nil),        // 46: sysmodel.DictUpdateReq
+	(*DictUpdateResp)(nil),       // 47: sysmodel.DictUpdateResp
+	(*DictDeleteReq)(nil),        // 48: sysmodel.DictDeleteReq
+	(*DictDeleteResp)(nil),       // 49: sysmodel.DictDeleteResp
+	(*DeptAddReq)(nil),           // 50: sysmodel.DeptAddReq
+	(*DeptAddResp)(nil),          // 51: sysmodel.DeptAddResp
+	(*DeptListReq)(nil),          // 52: sysmodel.DeptListReq
+	(*DeptListData)(nil),         // 53: sysmodel.DeptListData
+	(*DeptListResp)(nil),         // 54: sysmodel.DeptListResp
+	(*DeptUpdateReq)(nil),        // 55: sysmodel.DeptUpdateReq
+	(*DeptUpdateResp)(nil),       // 56: sysmodel.DeptUpdateResp
+	(*DeptDeleteReq)(nil),        // 57: sysmodel.DeptDeleteReq
+	(*DeptDeleteResp)(nil),       // 58: sysmodel.DeptDeleteResp
+	(*LoginLogAddReq)(nil),       // 59: sysmodel.LoginLogAddReq
+	(*LoginLogAddResp)(nil),      // 60: sysmodel.LoginLogAddResp
+	(*LoginLogListReq)(nil),      // 61: sysmodel.LoginLogListReq
+	(*LoginLogListData)(nil),     // 62: sysmodel.LoginLogListData
+	(*LoginLogListResp)(nil),     // 63: sysmodel.LoginLogListResp
+	(*LoginLogDeleteReq)(nil),    // 64: sysmodel.LoginLogDeleteReq
+	(*LoginLogDeleteResp)(nil),   // 65: sysmodel.LoginLogDeleteResp
+	(*SysLogAddReq)(nil),         // 66: sysmodel.SysLogAddReq
+	(*SysLogAddResp)(nil),        // 67: sysmodel.SysLogAddResp
+	(*SysLogListReq)(nil),        // 68: sysmodel.SysLogListReq
+	(*SysLogListData)(nil),       // 69: sysmodel.SysLogListData
+	(*SysLogListResp)(nil),       // 70: sysmodel.SysLogListResp
+	(*SysLogDeleteReq)(nil),      // 71: sysmodel.SysLogDeleteReq
+	(*SysLogDeleteResp)(nil),     // 72: sysmodel.SysLogDeleteResp
+	(*ConfigAddReq)(nil),         // 73: sysmodel.ConfigAddReq
+	(*ConfigAddResp)(nil),        // 74: sysmodel.ConfigAddResp
+	(*ConfigListReq)(nil),        // 75: sysmodel.ConfigListReq
+	(*ConfigListData)(nil),       // 76: sysmodel.ConfigListData
+	(*ConfigListResp)(nil),       // 77: sysmodel.ConfigListResp
+	(*ConfigUpdateReq)(nil),      // 78: sysmodel.ConfigUpdateReq
+	(*ConfigUpdateResp)(nil),     // 79: sysmodel.ConfigUpdateResp
+	(*ConfigDeleteReq)(nil),      // 80: sysmodel.ConfigDeleteReq
+	(*ConfigDeleteResp)(nil),     // 81: sysmodel.ConfigDeleteResp
+	(*UpdateConfigRoleReq)(nil),  // 82: sysmodel.UpdateConfigRoleReq
+	(*UpdateConfigRoleResp)(nil), // 83: sysmodel.UpdateConfigRoleResp
 }
 var file_sys_proto_depIdxs = []int32{
-	7,  // 0: sys.UserListResp.list:type_name -> sys.UserListData
-	22, // 1: sys.RoleListResp.list:type_name -> sys.RoleListData
-	33, // 2: sys.MenuListResp.list:type_name -> sys.MenuListData
-	44, // 3: sys.DictListResp.list:type_name -> sys.DictListData
-	53, // 4: sys.DeptListResp.list:type_name -> sys.DeptListData
-	62, // 5: sys.LoginLogListResp.list:type_name -> sys.LoginLogListData
-	69, // 6: sys.SysLogListResp.list:type_name -> sys.SysLogListData
-	76, // 7: sys.ConfigListResp.list:type_name -> sys.ConfigListData
-	0,  // 8: sys.Sys.Login:input_type -> sys.LoginReq
-	2,  // 9: sys.Sys.UserInfo:input_type -> sys.InfoReq
-	4,  // 10: sys.Sys.UserAdd:input_type -> sys.UserAddReq
-	6,  // 11: sys.Sys.UserList:input_type -> sys.UserListReq
-	9,  // 12: sys.Sys.UserUpdate:input_type -> sys.UserUpdateReq
-	11, // 13: sys.Sys.UserDelete:input_type -> sys.UserDeleteReq
-	13, // 14: sys.Sys.UpdateUserRole:input_type -> sys.UpdateUserRoleReq
-	15, // 15: sys.Sys.ReSetPassword:input_type -> sys.ReSetPasswordReq
-	17, // 16: sys.Sys.UpdateUserStatus:input_type -> sys.UserStatusReq
-	19, // 17: sys.Sys.RoleAdd:input_type -> sys.RoleAddReq
-	21, // 18: sys.Sys.RoleList:input_type -> sys.RoleListReq
-	24, // 19: sys.Sys.RoleUpdate:input_type -> sys.RoleUpdateReq
-	26, // 20: sys.Sys.RoleDelete:input_type -> sys.RoleDeleteReq
-	28, // 21: sys.Sys.UpdateRoleRole:input_type -> sys.UpdateRoleRoleReq
-	30, // 22: sys.Sys.MenuAdd:input_type -> sys.MenuAddReq
-	32, // 23: sys.Sys.MenuList:input_type -> sys.MenuListReq
-	35, // 24: sys.Sys.MenuUpdate:input_type -> sys.MenuUpdateReq
-	37, // 25: sys.Sys.MenuDelete:input_type -> sys.MenuDeleteReq
-	39, // 26: sys.Sys.UpdateMenuRole:input_type -> sys.UpdateMenuRoleReq
-	41, // 27: sys.Sys.DictAdd:input_type -> sys.DictAddReq
-	43, // 28: sys.Sys.DictList:input_type -> sys.DictListReq
-	46, // 29: sys.Sys.DictUpdate:input_type -> sys.DictUpdateReq
-	48, // 30: sys.Sys.DictDelete:input_type -> sys.DictDeleteReq
-	50, // 31: sys.Sys.DeptAdd:input_type -> sys.DeptAddReq
-	52, // 32: sys.Sys.DeptList:input_type -> sys.DeptListReq
-	55, // 33: sys.Sys.DeptUpdate:input_type -> sys.DeptUpdateReq
-	57, // 34: sys.Sys.DeptDelete:input_type -> sys.DeptDeleteReq
-	59, // 35: sys.Sys.LoginLogAdd:input_type -> sys.LoginLogAddReq
-	61, // 36: sys.Sys.LoginLogList:input_type -> sys.LoginLogListReq
-	64, // 37: sys.Sys.LoginLogDelete:input_type -> sys.LoginLogDeleteReq
-	66, // 38: sys.Sys.SysLogAdd:input_type -> sys.SysLogAddReq
-	68, // 39: sys.Sys.SysLogList:input_type -> sys.SysLogListReq
-	71, // 40: sys.Sys.SysLogDelete:input_type -> sys.SysLogDeleteReq
-	73, // 41: sys.Sys.ConfigAdd:input_type -> sys.ConfigAddReq
-	75, // 42: sys.Sys.ConfigList:input_type -> sys.ConfigListReq
-	78, // 43: sys.Sys.ConfigUpdate:input_type -> sys.ConfigUpdateReq
-	80, // 44: sys.Sys.ConfigDelete:input_type -> sys.ConfigDeleteReq
-	82, // 45: sys.Sys.UpdateConfigRole:input_type -> sys.UpdateConfigRoleReq
-	1,  // 46: sys.Sys.Login:output_type -> sys.loginResp
-	3,  // 47: sys.Sys.UserInfo:output_type -> sys.InfoResp
-	5,  // 48: sys.Sys.UserAdd:output_type -> sys.UserAddResp
-	8,  // 49: sys.Sys.UserList:output_type -> sys.UserListResp
-	10, // 50: sys.Sys.UserUpdate:output_type -> sys.UserUpdateResp
-	12, // 51: sys.Sys.UserDelete:output_type -> sys.UserDeleteResp
-	14, // 52: sys.Sys.UpdateUserRole:output_type -> sys.UpdateUserRoleResp
-	16, // 53: sys.Sys.ReSetPassword:output_type -> sys.ReSetPasswordResp
-	18, // 54: sys.Sys.UpdateUserStatus:output_type -> sys.UserStatusResp
-	20, // 55: sys.Sys.RoleAdd:output_type -> sys.RoleAddResp
-	23, // 56: sys.Sys.RoleList:output_type -> sys.RoleListResp
-	25, // 57: sys.Sys.RoleUpdate:output_type -> sys.RoleUpdateResp
-	27, // 58: sys.Sys.RoleDelete:output_type -> sys.RoleDeleteResp
-	29, // 59: sys.Sys.UpdateRoleRole:output_type -> sys.UpdateRoleRoleResp
-	31, // 60: sys.Sys.MenuAdd:output_type -> sys.MenuAddResp
-	34, // 61: sys.Sys.MenuList:output_type -> sys.MenuListResp
-	36, // 62: sys.Sys.MenuUpdate:output_type -> sys.MenuUpdateResp
-	38, // 63: sys.Sys.MenuDelete:output_type -> sys.MenuDeleteResp
-	40, // 64: sys.Sys.UpdateMenuRole:output_type -> sys.UpdateMenuRoleResp
-	42, // 65: sys.Sys.DictAdd:output_type -> sys.DictAddResp
-	45, // 66: sys.Sys.DictList:output_type -> sys.DictListResp
-	47, // 67: sys.Sys.DictUpdate:output_type -> sys.DictUpdateResp
-	49, // 68: sys.Sys.DictDelete:output_type -> sys.DictDeleteResp
-	51, // 69: sys.Sys.DeptAdd:output_type -> sys.DeptAddResp
-	54, // 70: sys.Sys.DeptList:output_type -> sys.DeptListResp
-	56, // 71: sys.Sys.DeptUpdate:output_type -> sys.DeptUpdateResp
-	58, // 72: sys.Sys.DeptDelete:output_type -> sys.DeptDeleteResp
-	60, // 73: sys.Sys.LoginLogAdd:output_type -> sys.LoginLogAddResp
-	63, // 74: sys.Sys.LoginLogList:output_type -> sys.LoginLogListResp
-	65, // 75: sys.Sys.LoginLogDelete:output_type -> sys.LoginLogDeleteResp
-	67, // 76: sys.Sys.SysLogAdd:output_type -> sys.SysLogAddResp
-	70, // 77: sys.Sys.SysLogList:output_type -> sys.SysLogListResp
-	72, // 78: sys.Sys.SysLogDelete:output_type -> sys.SysLogDeleteResp
-	74, // 79: sys.Sys.ConfigAdd:output_type -> sys.ConfigAddResp
-	77, // 80: sys.Sys.ConfigList:output_type -> sys.ConfigListResp
-	79, // 81: sys.Sys.ConfigUpdate:output_type -> sys.ConfigUpdateResp
-	81, // 82: sys.Sys.ConfigDelete:output_type -> sys.ConfigDeleteResp
-	83, // 83: sys.Sys.UpdateConfigRole:output_type -> sys.UpdateConfigRoleResp
+	7,  // 0: sysmodel.UserListResp.list:type_name -> sysmodel.UserListData
+	22, // 1: sysmodel.RoleListResp.list:type_name -> sysmodel.RoleListData
+	33, // 2: sysmodel.MenuListResp.list:type_name -> sysmodel.MenuListData
+	44, // 3: sysmodel.DictListResp.list:type_name -> sysmodel.DictListData
+	53, // 4: sysmodel.DeptListResp.list:type_name -> sysmodel.DeptListData
+	62, // 5: sysmodel.LoginLogListResp.list:type_name -> sysmodel.LoginLogListData
+	69, // 6: sysmodel.SysLogListResp.list:type_name -> sysmodel.SysLogListData
+	76, // 7: sysmodel.ConfigListResp.list:type_name -> sysmodel.ConfigListData
+	0,  // 8: sysmodel.Sys.Login:input_type -> sysmodel.LoginReq
+	2,  // 9: sysmodel.Sys.UserInfo:input_type -> sysmodel.InfoReq
+	4,  // 10: sysmodel.Sys.UserAdd:input_type -> sysmodel.UserAddReq
+	6,  // 11: sysmodel.Sys.UserList:input_type -> sysmodel.UserListReq
+	9,  // 12: sysmodel.Sys.UserUpdate:input_type -> sysmodel.UserUpdateReq
+	11, // 13: sysmodel.Sys.UserDelete:input_type -> sysmodel.UserDeleteReq
+	13, // 14: sysmodel.Sys.UpdateUserRole:input_type -> sysmodel.UpdateUserRoleReq
+	15, // 15: sysmodel.Sys.ReSetPassword:input_type -> sysmodel.ReSetPasswordReq
+	17, // 16: sysmodel.Sys.UpdateUserStatus:input_type -> sysmodel.UserStatusReq
+	19, // 17: sysmodel.Sys.RoleAdd:input_type -> sysmodel.RoleAddReq
+	21, // 18: sysmodel.Sys.RoleList:input_type -> sysmodel.RoleListReq
+	24, // 19: sysmodel.Sys.RoleUpdate:input_type -> sysmodel.RoleUpdateReq
+	26, // 20: sysmodel.Sys.RoleDelete:input_type -> sysmodel.RoleDeleteReq
+	28, // 21: sysmodel.Sys.UpdateRoleRole:input_type -> sysmodel.UpdateRoleRoleReq
+	30, // 22: sysmodel.Sys.MenuAdd:input_type -> sysmodel.MenuAddReq
+	32, // 23: sysmodel.Sys.MenuList:input_type -> sysmodel.MenuListReq
+	35, // 24: sysmodel.Sys.MenuUpdate:input_type -> sysmodel.MenuUpdateReq
+	37, // 25: sysmodel.Sys.MenuDelete:input_type -> sysmodel.MenuDeleteReq
+	39, // 26: sysmodel.Sys.UpdateMenuRole:input_type -> sysmodel.UpdateMenuRoleReq
+	41, // 27: sysmodel.Sys.DictAdd:input_type -> sysmodel.DictAddReq
+	43, // 28: sysmodel.Sys.DictList:input_type -> sysmodel.DictListReq
+	46, // 29: sysmodel.Sys.DictUpdate:input_type -> sysmodel.DictUpdateReq
+	48, // 30: sysmodel.Sys.DictDelete:input_type -> sysmodel.DictDeleteReq
+	50, // 31: sysmodel.Sys.DeptAdd:input_type -> sysmodel.DeptAddReq
+	52, // 32: sysmodel.Sys.DeptList:input_type -> sysmodel.DeptListReq
+	55, // 33: sysmodel.Sys.DeptUpdate:input_type -> sysmodel.DeptUpdateReq
+	57, // 34: sysmodel.Sys.DeptDelete:input_type -> sysmodel.DeptDeleteReq
+	59, // 35: sysmodel.Sys.LoginLogAdd:input_type -> sysmodel.LoginLogAddReq
+	61, // 36: sysmodel.Sys.LoginLogList:input_type -> sysmodel.LoginLogListReq
+	64, // 37: sysmodel.Sys.LoginLogDelete:input_type -> sysmodel.LoginLogDeleteReq
+	66, // 38: sysmodel.Sys.SysLogAdd:input_type -> sysmodel.SysLogAddReq
+	68, // 39: sysmodel.Sys.SysLogList:input_type -> sysmodel.SysLogListReq
+	71, // 40: sysmodel.Sys.SysLogDelete:input_type -> sysmodel.SysLogDeleteReq
+	73, // 41: sysmodel.Sys.ConfigAdd:input_type -> sysmodel.ConfigAddReq
+	75, // 42: sysmodel.Sys.ConfigList:input_type -> sysmodel.ConfigListReq
+	78, // 43: sysmodel.Sys.ConfigUpdate:input_type -> sysmodel.ConfigUpdateReq
+	80, // 44: sysmodel.Sys.ConfigDelete:input_type -> sysmodel.ConfigDeleteReq
+	82, // 45: sysmodel.Sys.UpdateConfigRole:input_type -> sysmodel.UpdateConfigRoleReq
+	1,  // 46: sysmodel.Sys.Login:output_type -> sysmodel.loginResp
+	3,  // 47: sysmodel.Sys.UserInfo:output_type -> sysmodel.InfoResp
+	5,  // 48: sysmodel.Sys.UserAdd:output_type -> sysmodel.UserAddResp
+	8,  // 49: sysmodel.Sys.UserList:output_type -> sysmodel.UserListResp
+	10, // 50: sysmodel.Sys.UserUpdate:output_type -> sysmodel.UserUpdateResp
+	12, // 51: sysmodel.Sys.UserDelete:output_type -> sysmodel.UserDeleteResp
+	14, // 52: sysmodel.Sys.UpdateUserRole:output_type -> sysmodel.UpdateUserRoleResp
+	16, // 53: sysmodel.Sys.ReSetPassword:output_type -> sysmodel.ReSetPasswordResp
+	18, // 54: sysmodel.Sys.UpdateUserStatus:output_type -> sysmodel.UserStatusResp
+	20, // 55: sysmodel.Sys.RoleAdd:output_type -> sysmodel.RoleAddResp
+	23, // 56: sysmodel.Sys.RoleList:output_type -> sysmodel.RoleListResp
+	25, // 57: sysmodel.Sys.RoleUpdate:output_type -> sysmodel.RoleUpdateResp
+	27, // 58: sysmodel.Sys.RoleDelete:output_type -> sysmodel.RoleDeleteResp
+	29, // 59: sysmodel.Sys.UpdateRoleRole:output_type -> sysmodel.UpdateRoleRoleResp
+	31, // 60: sysmodel.Sys.MenuAdd:output_type -> sysmodel.MenuAddResp
+	34, // 61: sysmodel.Sys.MenuList:output_type -> sysmodel.MenuListResp
+	36, // 62: sysmodel.Sys.MenuUpdate:output_type -> sysmodel.MenuUpdateResp
+	38, // 63: sysmodel.Sys.MenuDelete:output_type -> sysmodel.MenuDeleteResp
+	40, // 64: sysmodel.Sys.UpdateMenuRole:output_type -> sysmodel.UpdateMenuRoleResp
+	42, // 65: sysmodel.Sys.DictAdd:output_type -> sysmodel.DictAddResp
+	45, // 66: sysmodel.Sys.DictList:output_type -> sysmodel.DictListResp
+	47, // 67: sysmodel.Sys.DictUpdate:output_type -> sysmodel.DictUpdateResp
+	49, // 68: sysmodel.Sys.DictDelete:output_type -> sysmodel.DictDeleteResp
+	51, // 69: sysmodel.Sys.DeptAdd:output_type -> sysmodel.DeptAddResp
+	54, // 70: sysmodel.Sys.DeptList:output_type -> sysmodel.DeptListResp
+	56, // 71: sysmodel.Sys.DeptUpdate:output_type -> sysmodel.DeptUpdateResp
+	58, // 72: sysmodel.Sys.DeptDelete:output_type -> sysmodel.DeptDeleteResp
+	60, // 73: sysmodel.Sys.LoginLogAdd:output_type -> sysmodel.LoginLogAddResp
+	63, // 74: sysmodel.Sys.LoginLogList:output_type -> sysmodel.LoginLogListResp
+	65, // 75: sysmodel.Sys.LoginLogDelete:output_type -> sysmodel.LoginLogDeleteResp
+	67, // 76: sysmodel.Sys.SysLogAdd:output_type -> sysmodel.SysLogAddResp
+	70, // 77: sysmodel.Sys.SysLogList:output_type -> sysmodel.SysLogListResp
+	72, // 78: sysmodel.Sys.SysLogDelete:output_type -> sysmodel.SysLogDeleteResp
+	74, // 79: sysmodel.Sys.ConfigAdd:output_type -> sysmodel.ConfigAddResp
+	77, // 80: sysmodel.Sys.ConfigList:output_type -> sysmodel.ConfigListResp
+	79, // 81: sysmodel.Sys.ConfigUpdate:output_type -> sysmodel.ConfigUpdateResp
+	81, // 82: sysmodel.Sys.ConfigDelete:output_type -> sysmodel.ConfigDeleteResp
+	83, // 83: sysmodel.Sys.UpdateConfigRole:output_type -> sysmodel.UpdateConfigRoleResp
 	46, // [46:84] is the sub-list for method output_type
 	8,  // [8:46] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
@@ -7323,7 +7323,7 @@ func NewSysClient(cc grpc.ClientConnInterface) SysClient {
 
 func (c *sysClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
 	out := new(LoginResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/Login", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7332,7 +7332,7 @@ func (c *sysClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOp
 
 func (c *sysClient) UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error) {
 	out := new(InfoResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UserInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7341,7 +7341,7 @@ func (c *sysClient) UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.Call
 
 func (c *sysClient) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
 	out := new(UserAddResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UserAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UserAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7350,7 +7350,7 @@ func (c *sysClient) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.Ca
 
 func (c *sysClient) UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error) {
 	out := new(UserListResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UserList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UserList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7359,7 +7359,7 @@ func (c *sysClient) UserList(ctx context.Context, in *UserListReq, opts ...grpc.
 
 func (c *sysClient) UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*UserUpdateResp, error) {
 	out := new(UserUpdateResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UserUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UserUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7368,7 +7368,7 @@ func (c *sysClient) UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...g
 
 func (c *sysClient) UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error) {
 	out := new(UserDeleteResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UserDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UserDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7377,7 +7377,7 @@ func (c *sysClient) UserDelete(ctx context.Context, in *UserDeleteReq, opts ...g
 
 func (c *sysClient) UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*UpdateUserRoleResp, error) {
 	out := new(UpdateUserRoleResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UpdateUserRole", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UpdateUserRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7386,7 +7386,7 @@ func (c *sysClient) UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, o
 
 func (c *sysClient) ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error) {
 	out := new(ReSetPasswordResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/ReSetPassword", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/ReSetPassword", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7395,7 +7395,7 @@ func (c *sysClient) ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opt
 
 func (c *sysClient) UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error) {
 	out := new(UserStatusResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UpdateUserStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UpdateUserStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7404,7 +7404,7 @@ func (c *sysClient) UpdateUserStatus(ctx context.Context, in *UserStatusReq, opt
 
 func (c *sysClient) RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error) {
 	out := new(RoleAddResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/RoleAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/RoleAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7413,7 +7413,7 @@ func (c *sysClient) RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.Ca
 
 func (c *sysClient) RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error) {
 	out := new(RoleListResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/RoleList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/RoleList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7422,7 +7422,7 @@ func (c *sysClient) RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.
 
 func (c *sysClient) RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error) {
 	out := new(RoleUpdateResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/RoleUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/RoleUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7431,7 +7431,7 @@ func (c *sysClient) RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...g
 
 func (c *sysClient) RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error) {
 	out := new(RoleDeleteResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/RoleDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/RoleDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7440,7 +7440,7 @@ func (c *sysClient) RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...g
 
 func (c *sysClient) UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, opts ...grpc.CallOption) (*UpdateRoleRoleResp, error) {
 	out := new(UpdateRoleRoleResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UpdateRoleRole", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UpdateRoleRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7449,7 +7449,7 @@ func (c *sysClient) UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, o
 
 func (c *sysClient) MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error) {
 	out := new(MenuAddResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/MenuAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/MenuAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7458,7 +7458,7 @@ func (c *sysClient) MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.Ca
 
 func (c *sysClient) MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error) {
 	out := new(MenuListResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/MenuList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/MenuList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7467,7 +7467,7 @@ func (c *sysClient) MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.
 
 func (c *sysClient) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error) {
 	out := new(MenuUpdateResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/MenuUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/MenuUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7476,7 +7476,7 @@ func (c *sysClient) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...g
 
 func (c *sysClient) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error) {
 	out := new(MenuDeleteResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/MenuDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/MenuDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7485,7 +7485,7 @@ func (c *sysClient) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...g
 
 func (c *sysClient) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
 	out := new(UpdateMenuRoleResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UpdateMenuRole", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UpdateMenuRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7494,7 +7494,7 @@ func (c *sysClient) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, o
 
 func (c *sysClient) DictAdd(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error) {
 	out := new(DictAddResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/DictAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/DictAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7503,7 +7503,7 @@ func (c *sysClient) DictAdd(ctx context.Context, in *DictAddReq, opts ...grpc.Ca
 
 func (c *sysClient) DictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error) {
 	out := new(DictListResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/DictList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/DictList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7512,7 +7512,7 @@ func (c *sysClient) DictList(ctx context.Context, in *DictListReq, opts ...grpc.
 
 func (c *sysClient) DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error) {
 	out := new(DictUpdateResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/DictUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/DictUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7521,7 +7521,7 @@ func (c *sysClient) DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...g
 
 func (c *sysClient) DictDelete(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error) {
 	out := new(DictDeleteResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/DictDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/DictDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7530,7 +7530,7 @@ func (c *sysClient) DictDelete(ctx context.Context, in *DictDeleteReq, opts ...g
 
 func (c *sysClient) DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error) {
 	out := new(DeptAddResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/DeptAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/DeptAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7539,7 +7539,7 @@ func (c *sysClient) DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.Ca
 
 func (c *sysClient) DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error) {
 	out := new(DeptListResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/DeptList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/DeptList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7548,7 +7548,7 @@ func (c *sysClient) DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.
 
 func (c *sysClient) DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error) {
 	out := new(DeptUpdateResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/DeptUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/DeptUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7557,7 +7557,7 @@ func (c *sysClient) DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...g
 
 func (c *sysClient) DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error) {
 	out := new(DeptDeleteResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/DeptDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/DeptDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7566,7 +7566,7 @@ func (c *sysClient) DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...g
 
 func (c *sysClient) LoginLogAdd(ctx context.Context, in *LoginLogAddReq, opts ...grpc.CallOption) (*LoginLogAddResp, error) {
 	out := new(LoginLogAddResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/LoginLogAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/LoginLogAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7575,7 +7575,7 @@ func (c *sysClient) LoginLogAdd(ctx context.Context, in *LoginLogAddReq, opts ..
 
 func (c *sysClient) LoginLogList(ctx context.Context, in *LoginLogListReq, opts ...grpc.CallOption) (*LoginLogListResp, error) {
 	out := new(LoginLogListResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/LoginLogList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/LoginLogList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7584,7 +7584,7 @@ func (c *sysClient) LoginLogList(ctx context.Context, in *LoginLogListReq, opts 
 
 func (c *sysClient) LoginLogDelete(ctx context.Context, in *LoginLogDeleteReq, opts ...grpc.CallOption) (*LoginLogDeleteResp, error) {
 	out := new(LoginLogDeleteResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/LoginLogDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/LoginLogDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7593,7 +7593,7 @@ func (c *sysClient) LoginLogDelete(ctx context.Context, in *LoginLogDeleteReq, o
 
 func (c *sysClient) SysLogAdd(ctx context.Context, in *SysLogAddReq, opts ...grpc.CallOption) (*SysLogAddResp, error) {
 	out := new(SysLogAddResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/SysLogAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/SysLogAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7602,7 +7602,7 @@ func (c *sysClient) SysLogAdd(ctx context.Context, in *SysLogAddReq, opts ...grp
 
 func (c *sysClient) SysLogList(ctx context.Context, in *SysLogListReq, opts ...grpc.CallOption) (*SysLogListResp, error) {
 	out := new(SysLogListResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/SysLogList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/SysLogList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7611,7 +7611,7 @@ func (c *sysClient) SysLogList(ctx context.Context, in *SysLogListReq, opts ...g
 
 func (c *sysClient) SysLogDelete(ctx context.Context, in *SysLogDeleteReq, opts ...grpc.CallOption) (*SysLogDeleteResp, error) {
 	out := new(SysLogDeleteResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/SysLogDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/SysLogDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7620,7 +7620,7 @@ func (c *sysClient) SysLogDelete(ctx context.Context, in *SysLogDeleteReq, opts 
 
 func (c *sysClient) ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grpc.CallOption) (*ConfigAddResp, error) {
 	out := new(ConfigAddResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/ConfigAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/ConfigAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7629,7 +7629,7 @@ func (c *sysClient) ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grp
 
 func (c *sysClient) ConfigList(ctx context.Context, in *ConfigListReq, opts ...grpc.CallOption) (*ConfigListResp, error) {
 	out := new(ConfigListResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/ConfigList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/ConfigList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7638,7 +7638,7 @@ func (c *sysClient) ConfigList(ctx context.Context, in *ConfigListReq, opts ...g
 
 func (c *sysClient) ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts ...grpc.CallOption) (*ConfigUpdateResp, error) {
 	out := new(ConfigUpdateResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/ConfigUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/ConfigUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7647,7 +7647,7 @@ func (c *sysClient) ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts 
 
 func (c *sysClient) ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts ...grpc.CallOption) (*ConfigDeleteResp, error) {
 	out := new(ConfigDeleteResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/ConfigDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/ConfigDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7656,7 +7656,7 @@ func (c *sysClient) ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts 
 
 func (c *sysClient) UpdateConfigRole(ctx context.Context, in *UpdateConfigRoleReq, opts ...grpc.CallOption) (*UpdateConfigRoleResp, error) {
 	out := new(UpdateConfigRoleResp)
-	err := c.cc.Invoke(ctx, "/sys.Sys/UpdateConfigRole", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysmodel.Sys/UpdateConfigRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7838,7 +7838,7 @@ func _Sys_Login_Handler(srv interface{}, ctx context.Context, dec func(interface
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/Login",
+		FullMethod: "/sysmodel.Sys/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).Login(ctx, req.(*LoginReq))
@@ -7856,7 +7856,7 @@ func _Sys_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UserInfo",
+		FullMethod: "/sysmodel.Sys/UserInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UserInfo(ctx, req.(*InfoReq))
@@ -7874,7 +7874,7 @@ func _Sys_UserAdd_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UserAdd",
+		FullMethod: "/sysmodel.Sys/UserAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UserAdd(ctx, req.(*UserAddReq))
@@ -7892,7 +7892,7 @@ func _Sys_UserList_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UserList",
+		FullMethod: "/sysmodel.Sys/UserList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UserList(ctx, req.(*UserListReq))
@@ -7910,7 +7910,7 @@ func _Sys_UserUpdate_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UserUpdate",
+		FullMethod: "/sysmodel.Sys/UserUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UserUpdate(ctx, req.(*UserUpdateReq))
@@ -7928,7 +7928,7 @@ func _Sys_UserDelete_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UserDelete",
+		FullMethod: "/sysmodel.Sys/UserDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UserDelete(ctx, req.(*UserDeleteReq))
@@ -7946,7 +7946,7 @@ func _Sys_UpdateUserRole_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UpdateUserRole",
+		FullMethod: "/sysmodel.Sys/UpdateUserRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UpdateUserRole(ctx, req.(*UpdateUserRoleReq))
@@ -7964,7 +7964,7 @@ func _Sys_ReSetPassword_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/ReSetPassword",
+		FullMethod: "/sysmodel.Sys/ReSetPassword",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).ReSetPassword(ctx, req.(*ReSetPasswordReq))
@@ -7982,7 +7982,7 @@ func _Sys_UpdateUserStatus_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UpdateUserStatus",
+		FullMethod: "/sysmodel.Sys/UpdateUserStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UpdateUserStatus(ctx, req.(*UserStatusReq))
@@ -8000,7 +8000,7 @@ func _Sys_RoleAdd_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/RoleAdd",
+		FullMethod: "/sysmodel.Sys/RoleAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).RoleAdd(ctx, req.(*RoleAddReq))
@@ -8018,7 +8018,7 @@ func _Sys_RoleList_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/RoleList",
+		FullMethod: "/sysmodel.Sys/RoleList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).RoleList(ctx, req.(*RoleListReq))
@@ -8036,7 +8036,7 @@ func _Sys_RoleUpdate_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/RoleUpdate",
+		FullMethod: "/sysmodel.Sys/RoleUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).RoleUpdate(ctx, req.(*RoleUpdateReq))
@@ -8054,7 +8054,7 @@ func _Sys_RoleDelete_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/RoleDelete",
+		FullMethod: "/sysmodel.Sys/RoleDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).RoleDelete(ctx, req.(*RoleDeleteReq))
@@ -8072,7 +8072,7 @@ func _Sys_UpdateRoleRole_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UpdateRoleRole",
+		FullMethod: "/sysmodel.Sys/UpdateRoleRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UpdateRoleRole(ctx, req.(*UpdateRoleRoleReq))
@@ -8090,7 +8090,7 @@ func _Sys_MenuAdd_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/MenuAdd",
+		FullMethod: "/sysmodel.Sys/MenuAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).MenuAdd(ctx, req.(*MenuAddReq))
@@ -8108,7 +8108,7 @@ func _Sys_MenuList_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/MenuList",
+		FullMethod: "/sysmodel.Sys/MenuList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).MenuList(ctx, req.(*MenuListReq))
@@ -8126,7 +8126,7 @@ func _Sys_MenuUpdate_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/MenuUpdate",
+		FullMethod: "/sysmodel.Sys/MenuUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).MenuUpdate(ctx, req.(*MenuUpdateReq))
@@ -8144,7 +8144,7 @@ func _Sys_MenuDelete_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/MenuDelete",
+		FullMethod: "/sysmodel.Sys/MenuDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).MenuDelete(ctx, req.(*MenuDeleteReq))
@@ -8162,7 +8162,7 @@ func _Sys_UpdateMenuRole_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UpdateMenuRole",
+		FullMethod: "/sysmodel.Sys/UpdateMenuRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UpdateMenuRole(ctx, req.(*UpdateMenuRoleReq))
@@ -8180,7 +8180,7 @@ func _Sys_DictAdd_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/DictAdd",
+		FullMethod: "/sysmodel.Sys/DictAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).DictAdd(ctx, req.(*DictAddReq))
@@ -8198,7 +8198,7 @@ func _Sys_DictList_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/DictList",
+		FullMethod: "/sysmodel.Sys/DictList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).DictList(ctx, req.(*DictListReq))
@@ -8216,7 +8216,7 @@ func _Sys_DictUpdate_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/DictUpdate",
+		FullMethod: "/sysmodel.Sys/DictUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).DictUpdate(ctx, req.(*DictUpdateReq))
@@ -8234,7 +8234,7 @@ func _Sys_DictDelete_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/DictDelete",
+		FullMethod: "/sysmodel.Sys/DictDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).DictDelete(ctx, req.(*DictDeleteReq))
@@ -8252,7 +8252,7 @@ func _Sys_DeptAdd_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/DeptAdd",
+		FullMethod: "/sysmodel.Sys/DeptAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).DeptAdd(ctx, req.(*DeptAddReq))
@@ -8270,7 +8270,7 @@ func _Sys_DeptList_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/DeptList",
+		FullMethod: "/sysmodel.Sys/DeptList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).DeptList(ctx, req.(*DeptListReq))
@@ -8288,7 +8288,7 @@ func _Sys_DeptUpdate_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/DeptUpdate",
+		FullMethod: "/sysmodel.Sys/DeptUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).DeptUpdate(ctx, req.(*DeptUpdateReq))
@@ -8306,7 +8306,7 @@ func _Sys_DeptDelete_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/DeptDelete",
+		FullMethod: "/sysmodel.Sys/DeptDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).DeptDelete(ctx, req.(*DeptDeleteReq))
@@ -8324,7 +8324,7 @@ func _Sys_LoginLogAdd_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/LoginLogAdd",
+		FullMethod: "/sysmodel.Sys/LoginLogAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).LoginLogAdd(ctx, req.(*LoginLogAddReq))
@@ -8342,7 +8342,7 @@ func _Sys_LoginLogList_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/LoginLogList",
+		FullMethod: "/sysmodel.Sys/LoginLogList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).LoginLogList(ctx, req.(*LoginLogListReq))
@@ -8360,7 +8360,7 @@ func _Sys_LoginLogDelete_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/LoginLogDelete",
+		FullMethod: "/sysmodel.Sys/LoginLogDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).LoginLogDelete(ctx, req.(*LoginLogDeleteReq))
@@ -8378,7 +8378,7 @@ func _Sys_SysLogAdd_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/SysLogAdd",
+		FullMethod: "/sysmodel.Sys/SysLogAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).SysLogAdd(ctx, req.(*SysLogAddReq))
@@ -8396,7 +8396,7 @@ func _Sys_SysLogList_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/SysLogList",
+		FullMethod: "/sysmodel.Sys/SysLogList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).SysLogList(ctx, req.(*SysLogListReq))
@@ -8414,7 +8414,7 @@ func _Sys_SysLogDelete_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/SysLogDelete",
+		FullMethod: "/sysmodel.Sys/SysLogDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).SysLogDelete(ctx, req.(*SysLogDeleteReq))
@@ -8432,7 +8432,7 @@ func _Sys_ConfigAdd_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/ConfigAdd",
+		FullMethod: "/sysmodel.Sys/ConfigAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).ConfigAdd(ctx, req.(*ConfigAddReq))
@@ -8450,7 +8450,7 @@ func _Sys_ConfigList_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/ConfigList",
+		FullMethod: "/sysmodel.Sys/ConfigList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).ConfigList(ctx, req.(*ConfigListReq))
@@ -8468,7 +8468,7 @@ func _Sys_ConfigUpdate_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/ConfigUpdate",
+		FullMethod: "/sysmodel.Sys/ConfigUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).ConfigUpdate(ctx, req.(*ConfigUpdateReq))
@@ -8486,7 +8486,7 @@ func _Sys_ConfigDelete_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/ConfigDelete",
+		FullMethod: "/sysmodel.Sys/ConfigDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).ConfigDelete(ctx, req.(*ConfigDeleteReq))
@@ -8504,7 +8504,7 @@ func _Sys_UpdateConfigRole_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sys.Sys/UpdateConfigRole",
+		FullMethod: "/sysmodel.Sys/UpdateConfigRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UpdateConfigRole(ctx, req.(*UpdateConfigRoleReq))
@@ -8513,7 +8513,7 @@ func _Sys_UpdateConfigRole_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 var _Sys_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "sys.Sys",
+	ServiceName: "sysmodel.Sys",
 	HandlerType: (*SysServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -8670,5 +8670,5 @@ var _Sys_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "sys.proto",
+	Metadata: "sysmodel.proto",
 }

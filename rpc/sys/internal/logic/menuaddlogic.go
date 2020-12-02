@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model"
+	"go-zero-admin/rpc/model/sysmodel"
 	"time"
 
 	"go-zero-admin/rpc/sys/internal/svc"
@@ -26,7 +26,7 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuAddLo
 }
 
 func (l *MenuAddLogic) MenuAdd(in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
-	_, err := l.svcCtx.MenuModel.Insert(model.SysMenu{
+	_, err := l.svcCtx.MenuModel.Insert(sysmodel.SysMenu{
 		Name:           in.Name,
 		ParentId:       in.ParentId,
 		Url:            in.Url,

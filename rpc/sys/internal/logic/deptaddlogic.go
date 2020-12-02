@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model"
+	"go-zero-admin/rpc/model/sysmodel"
 	"time"
 
 	"go-zero-admin/rpc/sys/internal/svc"
@@ -26,7 +26,7 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptAddLo
 }
 
 func (l *DeptAddLogic) DeptAdd(in *sys.DeptAddReq) (*sys.DeptAddResp, error) {
-	_, err := l.svcCtx.DeptModel.Insert(model.SysDept{
+	_, err := l.svcCtx.DeptModel.Insert(sysmodel.SysDept{
 		Name:           in.Name,
 		ParentId:       in.ParentId,
 		OrderNum:       in.OrderNum,

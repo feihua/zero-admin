@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model"
+	"go-zero-admin/rpc/model/sysmodel"
 	"time"
 
 	"go-zero-admin/rpc/sys/internal/svc"
@@ -27,7 +27,7 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ReS
 
 func (l *ReSetPasswordLogic) ReSetPassword(in *sys.ReSetPasswordReq) (*sys.ReSetPasswordResp, error) {
 
-	_ = l.svcCtx.UserModel.Update(model.SysUser{
+	_ = l.svcCtx.UserModel.Update(sysmodel.SysUser{
 		Id:             in.Id,
 		Password:       "123456",
 		Salt:           "123456",

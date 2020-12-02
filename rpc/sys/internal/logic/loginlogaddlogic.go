@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model"
+	"go-zero-admin/rpc/model/sysmodel"
 	"time"
 
 	"go-zero-admin/rpc/sys/internal/svc"
@@ -26,7 +26,7 @@ func NewLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 }
 
 func (l *LoginLogAddLogic) LoginLogAdd(in *sys.LoginLogAddReq) (*sys.LoginLogAddResp, error) {
-	_, err := l.svcCtx.LoginLogModel.Insert(model.SysLoginLog{
+	_, err := l.svcCtx.LoginLogModel.Insert(sysmodel.SysLoginLog{
 		UserName:       in.UserName,
 		Status:         in.Status,
 		Ip:             in.Ip,

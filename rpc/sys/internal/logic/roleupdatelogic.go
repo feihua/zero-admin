@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model"
+	"go-zero-admin/rpc/model/sysmodel"
 	"time"
 
 	"go-zero-admin/rpc/sys/internal/svc"
@@ -26,7 +26,7 @@ func NewRoleUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleUp
 }
 
 func (l *RoleUpdateLogic) RoleUpdate(in *sys.RoleUpdateReq) (*sys.RoleUpdateResp, error) {
-	_ = l.svcCtx.RoleModel.Update(model.SysRole{
+	_ = l.svcCtx.RoleModel.Update(sysmodel.SysRole{
 		Id:             in.Id,
 		Name:           in.Name,
 		Remark:         in.Remark,

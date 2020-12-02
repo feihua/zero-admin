@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model"
+	"go-zero-admin/rpc/model/sysmodel"
 	"time"
 
 	"go-zero-admin/rpc/sys/internal/svc"
@@ -27,7 +27,7 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserAddLo
 
 func (l *UserAddLogic) UserAdd(in *sys.UserAddReq) (*sys.UserAddResp, error) {
 
-	_, _ = l.svcCtx.UserModel.Insert(model.SysUser{
+	_, _ = l.svcCtx.UserModel.Insert(sysmodel.SysUser{
 		Name:           in.Name,
 		NickName:       in.NickName,
 		Avatar:         in.Avatar,
