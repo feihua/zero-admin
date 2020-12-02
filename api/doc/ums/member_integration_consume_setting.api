@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addIntegrationConsumeSettingReq struct {
+       
+    }
+    addIntegrationConsumeSettingResp struct {
+    }
+    ListIntegrationConsumeSettingReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtIntegrationConsumeSettingData struct {
+        
+    }
+    ListIntegrationConsumeSettingResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtIntegrationConsumeSettingData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateIntegrationConsumeSettingReq struct {
+        
+    }
+    UpdateIntegrationConsumeSettingResp struct {
+    }
+    DeleteIntegrationConsumeSettingReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteIntegrationConsumeSettingResp struct {
+    }
+)
+
+@server(
+    group: member/integrationconsumesetting
+)
+service admin-api {
+    @handler IntegrationConsumeSettingAdd
+    post /api/member/integrationconsumesetting/add (addIntegrationConsumeSettingReq) returns (addIntegrationConsumeSettingResp)
+
+    @handler IntegrationConsumeSettingList
+    get /api/member/integrationconsumesetting/list (ListIntegrationConsumeSettingReq) returns (ListIntegrationConsumeSettingResp)
+
+    @handler IntegrationConsumeSettingUpdate
+    post /api/member/integrationconsumesetting/update (UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp)
+
+    @handler IntegrationConsumeSettingDelete
+    post /api/member/integrationconsumesetting/delete (DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp)
+}

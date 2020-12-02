@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addCompayAddressReq struct {
+       
+    }
+    addCompayAddressResp struct {
+    }
+    ListCompayAddressReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtCompayAddressData struct {
+        
+    }
+    ListCompayAddressResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtCompayAddressData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateCompayAddressReq struct {
+        
+    }
+    UpdateCompayAddressResp struct {
+    }
+    DeleteCompayAddressReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteCompayAddressResp struct {
+    }
+)
+
+@server(
+    group: order/compayaddress
+)
+service admin-api {
+    @handler CompayAddressAdd
+    post /api/order/compayaddress/add (addCompayAddressReq) returns (addCompayAddressResp)
+
+    @handler CompayAddressList
+    get /api/order/compayaddress/list (ListCompayAddressReq) returns (ListCompayAddressResp)
+
+    @handler CompayAddressUpdate
+    post /api/order/compayaddress/update (UpdateCompayAddressReq) returns (UpdateCompayAddressResp)
+
+    @handler CompayAddressDelete
+    post /api/order/compayaddress/delete (DeleteCompayAddressReq) returns (DeleteCompayAddressResp)
+}

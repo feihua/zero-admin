@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addFlashPromotionSessionReq struct {
+       
+    }
+    addFlashPromotionSessionResp struct {
+    }
+    ListFlashPromotionSessionReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtFlashPromotionSessionData struct {
+        
+    }
+    ListFlashPromotionSessionResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtFlashPromotionSessionData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateFlashPromotionSessionReq struct {
+        
+    }
+    UpdateFlashPromotionSessionResp struct {
+    }
+    DeleteFlashPromotionSessionReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteFlashPromotionSessionResp struct {
+    }
+)
+
+@server(
+    group: sms/flashpromotionsession
+)
+service admin-api {
+    @handler FlashPromotionSessionAdd
+    post /api/sms/flashpromotionsession/add (addFlashPromotionSessionReq) returns (addFlashPromotionSessionResp)
+
+    @handler FlashPromotionSessionList
+    get /api/sms/flashpromotionsession/list (ListFlashPromotionSessionReq) returns (ListFlashPromotionSessionResp)
+
+    @handler FlashPromotionSessionUpdate
+    post /api/sms/flashpromotionsession/update (UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp)
+
+    @handler FlashPromotionSessionDelete
+    post /api/sms/flashpromotionsession/delete (DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp)
+}

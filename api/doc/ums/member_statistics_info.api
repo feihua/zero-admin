@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addMemberStatisticsInfoReq struct {
+       
+    }
+    addMemberStatisticsInfoResp struct {
+    }
+    ListMemberStatisticsInfoReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtMemberStatisticsInfoData struct {
+        
+    }
+    ListMemberStatisticsInfoResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtMemberStatisticsInfoData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateMemberStatisticsInfoReq struct {
+        
+    }
+    UpdateMemberStatisticsInfoResp struct {
+    }
+    DeleteMemberStatisticsInfoReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteMemberStatisticsInfoResp struct {
+    }
+)
+
+@server(
+    group: member/statistics
+)
+service admin-api {
+    @handler MemberStatisticsInfoAdd
+    post /api/member/statistics/add (addMemberStatisticsInfoReq) returns (addMemberStatisticsInfoResp)
+
+    @handler MemberStatisticsInfoList
+    get /api/member/statistics/list (ListMemberStatisticsInfoReq) returns (ListMemberStatisticsInfoResp)
+
+    @handler MemberStatisticsInfoUpdate
+    post /api/member/statistics/update (UpdateMemberStatisticsInfoReq) returns (UpdateMemberStatisticsInfoResp)
+
+    @handler MemberStatisticsInfoDelete
+    post /api/member/statistics/delete (DeleteMemberStatisticsInfoReq) returns (DeleteMemberStatisticsInfoResp)
+}

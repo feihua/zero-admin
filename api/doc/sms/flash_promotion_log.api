@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addFlashPromotionLogReq struct {
+       
+    }
+    addFlashPromotionLogResp struct {
+    }
+    ListFlashPromotionLogReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtFlashPromotionLogData struct {
+        
+    }
+    ListFlashPromotionLogResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtFlashPromotionLogData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateFlashPromotionLogReq struct {
+        
+    }
+    UpdateFlashPromotionLogResp struct {
+    }
+    DeleteFlashPromotionLogReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteFlashPromotionLogResp struct {
+    }
+)
+
+@server(
+    group: sms/flashpromotionlog
+)
+service admin-api {
+    @handler FlashPromotionLogAdd
+    post /api/sms/flashpromotionlog/add (addFlashPromotionLogReq) returns (addFlashPromotionLogResp)
+
+    @handler FlashPromotionLogList
+    get /api/sms/flashpromotionlog/list (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
+
+    @handler FlashPromotionLogUpdate
+    post /api/sms/flashpromotionlog/update (UpdateFlashPromotionLogReq) returns (UpdateFlashPromotionLogResp)
+
+    @handler FlashPromotionLogDelete
+    post /api/sms/flashpromotionlog/delete (DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp)
+}

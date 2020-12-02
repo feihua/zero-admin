@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addHomeBrandReq struct {
+       
+    }
+    addHomeBrandResp struct {
+    }
+    ListHomeBrandReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtHomeBrandData struct {
+        
+    }
+    ListHomeBrandResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtHomeBrandData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateHomeBrandReq struct {
+        
+    }
+    UpdateHomeBrandResp struct {
+    }
+    DeleteHomeBrandReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteHomeBrandResp struct {
+    }
+)
+
+@server(
+    group: sms/homebrand
+)
+service admin-api {
+    @handler HomeBrandAdd
+    post /api/sms/homebrand/add (addHomeBrandReq) returns (addHomeBrandResp)
+
+    @handler HomeBrandList
+    get /api/sms/homebrand/list (ListHomeBrandReq) returns (ListHomeBrandResp)
+
+    @handler HomeBrandUpdate
+    post /api/sms/homebrand/update (UpdateHomeBrandReq) returns (UpdateHomeBrandResp)
+
+    @handler HomeBrandDelete
+    post /api/sms/homebrand/delete (DeleteHomeBrandReq) returns (DeleteHomeBrandResp)
+}

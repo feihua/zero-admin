@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addReturnResonReq struct {
+       
+    }
+    addReturnResonResp struct {
+    }
+    ListReturnResonReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtReturnResonData struct {
+        
+    }
+    ListReturnResonResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtReturnResonData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateReturnResonReq struct {
+        
+    }
+    UpdateReturnResonResp struct {
+    }
+    DeleteReturnResonReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteReturnResonResp struct {
+    }
+)
+
+@server(
+    group: order/returnreason
+)
+service admin-api {
+    @handler ReturnResonAdd
+    post /api/order/returnreason/add (addReturnResonReq) returns (addReturnResonResp)
+
+    @handler ReturnResonList
+    get /api/order/returnreason/list (ListReturnResonReq) returns (ListReturnResonResp)
+
+    @handler ReturnResonUpdate
+    post /api/order/returnreason/update (UpdateReturnResonReq) returns (UpdateReturnResonResp)
+
+    @handler ReturnResonDelete
+    post /api/order/returnreason/delete (DeleteReturnResonReq) returns (DeleteReturnResonResp)
+}

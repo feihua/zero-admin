@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addProductCategoryReq struct {
+       
+    }
+    addProductCategoryResp struct {
+    }
+    ListProductCategoryReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtProductCategoryData struct {
+        
+    }
+    ListProductCategoryResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtProductCategoryData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateProductCategoryReq struct {
+        
+    }
+    UpdateProductCategoryResp struct {
+    }
+    DeleteProductCategoryReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteProductCategoryResp struct {
+    }
+)
+
+@server(
+    group: product/category
+)
+service admin-api {
+    @handler ProductCategoryAdd
+    post /api/product/category/add (addProductCategoryReq) returns (addProductCategoryResp)
+
+    @handler ProductCategoryList
+    get /api/product/category/list (ListProductCategoryReq) returns (ListProductCategoryResp)
+
+    @handler ProductCategoryUpdate
+    post /api/product/category/update (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
+
+    @handler ProductCategoryDelete
+    post /api/product/category/delete (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
+}

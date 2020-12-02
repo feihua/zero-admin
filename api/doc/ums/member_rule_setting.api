@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addMemberRuleSettingReq struct {
+       
+    }
+    addMemberRuleSettingResp struct {
+    }
+    ListMemberRuleSettingReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtMemberRuleSettingData struct {
+        
+    }
+    ListMemberRuleSettingResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtMemberRuleSettingData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateMemberRuleSettingReq struct {
+        
+    }
+    UpdateMemberRuleSettingResp struct {
+    }
+    DeleteMemberRuleSettingReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteMemberRuleSettingResp struct {
+    }
+)
+
+@server(
+    group: member/rulesetting
+)
+service admin-api {
+    @handler MemberRuleSettingAdd
+    post /api/member/rulesetting/add (addMemberRuleSettingReq) returns (addMemberRuleSettingResp)
+
+    @handler MemberRuleSettingList
+    get /api/member/rulesetting/list (ListMemberRuleSettingReq) returns (ListMemberRuleSettingResp)
+
+    @handler MemberRuleSettingUpdate
+    post /api/member/rulesetting/update (UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp)
+
+    @handler MemberRuleSettingDelete
+    post /api/member/rulesetting/delete (DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp)
+}

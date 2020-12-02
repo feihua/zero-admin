@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addHomeNewProductReq struct {
+       
+    }
+    addHomeNewProductResp struct {
+    }
+    ListHomeNewProductReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtHomeNewProductData struct {
+        
+    }
+    ListHomeNewProductResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtHomeNewProductData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateHomeNewProductReq struct {
+        
+    }
+    UpdateHomeNewProductResp struct {
+    }
+    DeleteHomeNewProductReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteHomeNewProductResp struct {
+    }
+)
+
+@server(
+    group: sms/homenewproduct
+)
+service admin-api {
+    @handler HomeNewProductAdd
+    post /api/sms/homenewproduct/add (addHomeNewProductReq) returns (addHomeNewProductResp)
+
+    @handler HomeNewProductList
+    get /api/sms/homenewproduct/list (ListHomeNewProductReq) returns (ListHomeNewProductResp)
+
+    @handler HomeNewProductUpdate
+    post /api/sms/homenewproduct/update (UpdateHomeNewProductReq) returns (UpdateHomeNewProductResp)
+
+    @handler HomeNewProductDelete
+    post /api/sms/homenewproduct/delete (DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp)
+}

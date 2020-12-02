@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addGrowthChangeHistoryReq struct {
+       
+    }
+    addGrowthChangeHistoryResp struct {
+    }
+    ListGrowthChangeHistoryReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtGrowthChangeHistoryData struct {
+        
+    }
+    ListGrowthChangeHistoryResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtGrowthChangeHistoryData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateGrowthChangeHistoryReq struct {
+        
+    }
+    UpdateGrowthChangeHistoryResp struct {
+    }
+    DeleteGrowthChangeHistoryReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteGrowthChangeHistoryResp struct {
+    }
+)
+
+@server(
+    group: member/growthchangehistory
+)
+service admin-api {
+    @handler GrowthChangeHistoryAdd
+    post /api/member/growthchangehistory/add (addGrowthChangeHistoryReq) returns (addGrowthChangeHistoryResp)
+
+    @handler GrowthChangeHistoryList
+    get /api/member/growthchangehistory/list (ListGrowthChangeHistoryReq) returns (ListGrowthChangeHistoryResp)
+
+    @handler GrowthChangeHistoryUpdate
+    post /api/member/growthchangehistory/update (UpdateGrowthChangeHistoryReq) returns (UpdateGrowthChangeHistoryResp)
+
+    @handler GrowthChangeHistoryDelete
+    post /api/member/growthchangehistory/delete (DeleteGrowthChangeHistoryReq) returns (DeleteGrowthChangeHistoryResp)
+}

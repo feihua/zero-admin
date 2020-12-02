@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addCouponReq struct {
+       
+    }
+    addCouponResp struct {
+    }
+    ListCouponReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtCouponData struct {
+        
+    }
+    ListCouponResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtCouponData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateCouponReq struct {
+        
+    }
+    UpdateCouponResp struct {
+    }
+    DeleteCouponReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteCouponResp struct {
+    }
+)
+
+@server(
+    group: sms/coupon
+)
+service admin-api {
+    @handler CouponAdd
+    post /api/sms/coupon/add (addCouponReq) returns (addCouponResp)
+
+    @handler CouponList
+    get /api/sms/coupon/list (ListCouponReq) returns (ListCouponResp)
+
+    @handler CouponUpdate
+    post /api/sms/coupon/update (UpdateCouponReq) returns (UpdateCouponResp)
+
+    @handler CouponDelete
+    post /api/sms/coupon/delete (DeleteCouponReq) returns (DeleteCouponResp)
+}

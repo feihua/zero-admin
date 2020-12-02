@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addMemberReq struct {
+       
+    }
+    addMemberResp struct {
+    }
+    ListMemberReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtMemberData struct {
+        
+    }
+    ListMemberResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtMemberData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateMemberReq struct {
+        
+    }
+    UpdateMemberResp struct {
+    }
+    DeleteMemberReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteMemberResp struct {
+    }
+)
+
+@server(
+    group: member/member
+)
+service admin-api {
+    @handler MemberAdd
+    post /api/member/member/add (addMemberReq) returns (addMemberResp)
+
+    @handler MemberList
+    get /api/member/member/list (ListMemberReq) returns (ListMemberResp)
+
+    @handler MemberUpdate
+    post /api/member/member/update (UpdateMemberReq) returns (UpdateMemberResp)
+
+    @handler MemberDelete
+    post /api/member/member/delete (DeleteMemberReq) returns (DeleteMemberResp)
+}

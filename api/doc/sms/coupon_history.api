@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addCouponHistoryReq struct {
+       
+    }
+    addCouponHistoryResp struct {
+    }
+    ListCouponHistoryReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtCouponHistoryData struct {
+        
+    }
+    ListCouponHistoryResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtCouponHistoryData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateCouponHistoryReq struct {
+        
+    }
+    UpdateCouponHistoryResp struct {
+    }
+    DeleteCouponHistoryReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteCouponHistoryResp struct {
+    }
+)
+
+@server(
+    group: sms/couponhistory
+)
+service admin-api {
+    @handler CouponHistoryAdd
+    post /api/sms/couponhistory/add (addCouponHistoryReq) returns (addCouponHistoryResp)
+
+    @handler CouponHistoryList
+    get /api/sms/couponhistory/list (ListCouponHistoryReq) returns (ListCouponHistoryResp)
+
+    @handler CouponHistoryUpdate
+    post /api/sms/couponhistory/update (UpdateCouponHistoryReq) returns (UpdateCouponHistoryResp)
+
+    @handler CouponHistoryDelete
+    post /api/sms/couponhistory/delete (DeleteCouponHistoryReq) returns (DeleteCouponHistoryResp)
+}

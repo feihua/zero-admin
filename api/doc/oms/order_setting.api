@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addOrderSettingReq struct {
+       
+    }
+    addOrderSettingResp struct {
+    }
+    ListOrderSettingReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtOrderSettingData struct {
+        
+    }
+    ListOrderSettingResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtOrderSettingData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateOrderSettingReq struct {
+        
+    }
+    UpdateOrderSettingResp struct {
+    }
+    DeleteOrderSettingReq struct {
+        id int64 `json:"id"`
+    }
+    DeleteOrderSettingResp struct {
+    }
+)
+
+@server(
+    group: order/setting
+)
+service admin-api {
+    @handler OrderSettingAdd
+    post /api/order/setting/add (addOrderSettingReq) returns (addOrderSettingResp)
+
+    @handler OrderSettingList
+    get /api/order/setting/list (ListOrderSettingReq) returns (ListOrderSettingResp)
+
+    @handler OrderSettingUpdate
+    post /api/order/setting/update (UpdateOrderSettingReq) returns (UpdateOrderSettingResp)
+
+    @handler OrderSettingDelete
+    post /api/order/setting/delete (DeleteOrderSettingReq) returns (DeleteOrderSettingResp)
+}

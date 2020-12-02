@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addOperateHistoryReq struct {
+       
+    }
+    addOperateHistoryResp struct {
+    }
+    ListOperateHistoryReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtOperateHistoryData struct {
+        
+    }
+    ListOperateHistoryResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtOperateHistoryData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateOperateHistoryReq struct {
+        
+    }
+    UpdateOperateHistoryResp struct {
+    }
+    DeleteOperateHistoryReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteOperateHistoryResp struct {
+    }
+)
+
+@server(
+    group: order/operatehistory
+)
+service admin-api {
+    @handler OperateHistoryAdd
+    post /api/order/operatehistory/add (addOperateHistoryReq) returns (addOperateHistoryResp)
+
+    @handler OperateHistoryList
+    get /api/order/operatehistory/list (ListOperateHistoryReq) returns (ListOperateHistoryResp)
+
+    @handler OperateHistoryUpdate
+    post /api/order/operatehistory/update (UpdateOperateHistoryReq) returns (UpdateOperateHistoryResp)
+
+    @handler OperateHistoryDelete
+    post /api/order/operatehistory/delete (DeleteOperateHistoryReq) returns (DeleteOperateHistoryResp)
+}

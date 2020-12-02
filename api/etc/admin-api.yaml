@@ -6,4 +6,4 @@ SysRpc:
   Etcd:
     Hosts:
       - localhost:2379
-    Key: sys.rpc
+    Key: sysmodel.rpc

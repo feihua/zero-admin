@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addMemberPriceReq struct {
+       
+    }
+    addMemberPriceResp struct {
+    }
+    ListMemberPriceReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtMemberPriceData struct {
+        
+    }
+    ListMemberPriceResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtMemberPriceData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateMemberPriceReq struct {
+        
+    }
+    UpdateMemberPriceResp struct {
+    }
+    DeleteMemberPriceReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteMemberPriceResp struct {
+    }
+)
+
+@server(
+    group: product/memberprice
+)
+service admin-api {
+    @handler MemberPriceAdd
+    post /api/product/memberprice/add (addMemberPriceReq) returns (addMemberPriceResp)
+
+    @handler MemberPriceList
+    get /api/product/memberprice/list (ListMemberPriceReq) returns (ListMemberPriceResp)
+
+    @handler MemberPriceUpdate
+    post /api/product/memberprice/update (UpdateMemberPriceReq) returns (UpdateMemberPriceResp)
+
+    @handler MemberPriceDelete
+    post /api/product/memberprice/delete (DeleteMemberPriceReq) returns (DeleteMemberPriceResp)
+}

@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addProductCommentReq struct {
+       
+    }
+    addProductCommentResp struct {
+    }
+    ListProductCommentReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtProductCommentData struct {
+        
+    }
+    ListProductCommentResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtProductCommentData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateProductCommentReq struct {
+        
+    }
+    UpdateProductCommentResp struct {
+    }
+    DeleteProductCommentReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteProductCommentResp struct {
+    }
+)
+
+@server(
+    group: product/comment
+)
+service admin-api {
+    @handler ProductCommentAdd
+    post /api/product/comment/add (addProductCommentReq) returns (addProductCommentResp)
+
+    @handler ProductCommentList
+    get /api/product/comment/list (ListProductCommentReq) returns (ListProductCommentResp)
+
+    @handler ProductCommentUpdate
+    post /api/product/comment/update (UpdateProductCommentReq) returns (UpdateProductCommentResp)
+
+    @handler ProductCommentDelete
+    post /api/product/comment/delete (DeleteProductCommentReq) returns (DeleteProductCommentResp)
+}

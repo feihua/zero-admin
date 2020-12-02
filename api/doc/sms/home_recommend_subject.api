@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addHomeRecommendSubjectReq struct {
+       
+    }
+    addHomeRecommendSubjectResp struct {
+    }
+    ListHomeRecommendSubjectReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtHomeRecommendSubjectData struct {
+        
+    }
+    ListHomeRecommendSubjectResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtHomeRecommendSubjectData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateHomeRecommendSubjectReq struct {
+        
+    }
+    UpdateHomeRecommendSubjectResp struct {
+    }
+    DeleteHomeRecommendSubjectReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteHomeRecommendSubjectResp struct {
+    }
+)
+
+@server(
+    group: sms/homerecommendsubject
+)
+service admin-api {
+    @handler HomeRecommendSubjectAdd
+    post /api/sms/homerecommendsubject/add (addHomeRecommendSubjectReq) returns (addHomeRecommendSubjectResp)
+
+    @handler HomeRecommendSubjectList
+    get /api/sms/homerecommendsubject/list (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
+
+    @handler HomeRecommendSubjectUpdate
+    post /apisms/homerecommendsubject/update (UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp)
+
+    @handler HomeRecommendSubjectDelete
+    post /api/sms/homerecommendsubject/delete (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
+}

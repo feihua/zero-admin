@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addProductBrandReq struct {
+       
+    }
+    addProductBrandResp struct {
+    }
+    ListProductBrandReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtProductBrandData struct {
+        
+    }
+    ListProductBrandResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtProductBrandData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateProductBrandReq struct {
+        
+    }
+    UpdateProductBrandResp struct {
+    }
+    DeleteProductBrandReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteProductBrandResp struct {
+    }
+)
+
+@server(
+    group: product/brand
+)
+service admin-api {
+    @handler ProductBrandAdd
+    post /api/product/brand/add (addProductBrandReq) returns (addProductBrandResp)
+
+    @handler ProductBrandList
+    get /api/product/brand/list (ListProductBrandReq) returns (ListProductBrandResp)
+
+    @handler ProductBrandUpdate
+    post /api/product/brand/update (UpdateProductBrandReq) returns (UpdateProductBrandResp)
+
+    @handler ProductBrandDelete
+    post /api/product/brand/delete (DeleteProductBrandReq) returns (DeleteProductBrandResp)
+}

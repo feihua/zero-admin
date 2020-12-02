@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addProductReq struct {
+       
+    }
+    addProductResp struct {
+    }
+    ListProductReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtProductData struct {
+        
+    }
+    ListProductResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtProductData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateProductReq struct {
+        
+    }
+    UpdateProductResp struct {
+    }
+    DeleteProductReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteProductResp struct {
+    }
+)
+
+@server(
+    group: prodcut/prodcut
+)
+service admin-api {
+    @handler ProductAdd
+    post /api/prodcut/prodcut/add (addProductReq) returns (addProductResp)
+
+    @handler ProductList
+    get /api/prodcut/prodcut/list (ListProductReq) returns (ListProductResp)
+
+    @handler ProductUpdate
+    post /api/prodcut/prodcut/update (UpdateProductReq) returns (UpdateProductResp)
+
+    @handler ProductDelete
+    post /api/prodcut/prodcut/delete (DeleteProductReq) returns (DeleteProductResp)
+}

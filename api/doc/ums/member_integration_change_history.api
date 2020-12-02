@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addIntegrationChangeHistoryReq struct {
+       
+    }
+    addIntegrationChangeHistoryResp struct {
+    }
+    ListIntegrationChangeHistoryReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtIntegrationChangeHistoryData struct {
+        
+    }
+    ListIntegrationChangeHistoryResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtIntegrationChangeHistoryData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateIntegrationChangeHistoryReq struct {
+        
+    }
+    UpdateIntegrationChangeHistoryResp struct {
+    }
+    DeleteIntegrationChangeHistoryReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteIntegrationChangeHistoryResp struct {
+    }
+)
+
+@server(
+    group: member/integrationchangehistory
+)
+service admin-api {
+    @handler IntegrationChangeHistoryAdd
+    post /api/member/integrationchangehistory/add (addIntegrationChangeHistoryReq) returns (addIntegrationChangeHistoryResp)
+
+    @handler IntegrationChangeHistoryList
+    get /api/member/integrationchangehistory/list (ListIntegrationChangeHistoryReq) returns (ListIntegrationChangeHistoryResp)
+
+    @handler IntegrationChangeHistoryUpdate
+    post /api/member/integrationchangehistory/update (UpdateIntegrationChangeHistoryReq) returns (UpdateIntegrationChangeHistoryResp)
+
+    @handler IntegrationChangeHistoryDelete
+    post /api/member/integrationchangehistory/delete (DeleteIntegrationChangeHistoryReq) returns (DeleteIntegrationChangeHistoryResp)
+}

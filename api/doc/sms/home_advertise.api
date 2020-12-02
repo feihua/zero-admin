@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addHomeAdvertiseReq struct {
+       
+    }
+    addHomeAdvertiseResp struct {
+    }
+    ListHomeAdvertiseReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtHomeAdvertiseData struct {
+        
+    }
+    ListHomeAdvertiseResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtHomeAdvertiseData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateHomeAdvertiseReq struct {
+        
+    }
+    UpdateHomeAdvertiseResp struct {
+    }
+    DeleteHomeAdvertiseReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteHomeAdvertiseResp struct {
+    }
+)
+
+@server(
+    group: sms/homeadvertise
+)
+service admin-api {
+    @handler HomeAdvertiseAdd
+    post /api/sms/homeadvertise/add (addHomeAdvertiseReq) returns (addHomeAdvertiseResp)
+
+    @handler HomeAdvertiseList
+    get /api/sms/homeadvertise/list (ListHomeAdvertiseReq) returns (ListHomeAdvertiseResp)
+
+    @handler HomeAdvertiseUpdate
+    post /api/sms/homeadvertise/update (UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp)
+
+    @handler HomeAdvertiseDelete
+    post /api/sms/homeadvertise/delete (DeleteHomeAdvertiseReq) returns (DeleteHomeAdvertiseResp)
+}

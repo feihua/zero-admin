@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addFlashPromotionReq struct {
+       
+    }
+    addFlashPromotionResp struct {
+    }
+    ListFlashPromotionReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtFlashPromotionData struct {
+        
+    }
+    ListFlashPromotionResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtFlashPromotionData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateFlashPromotionReq struct {
+        
+    }
+    UpdateFlashPromotionResp struct {
+    }
+    DeleteFlashPromotionReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteFlashPromotionResp struct {
+    }
+)
+
+@server(
+    group: sms/flashpromotion
+)
+service admin-api {
+    @handler FlashPromotionAdd
+    post /api/sms/flashpromotion/add (addFlashPromotionReq) returns (addFlashPromotionResp)
+
+    @handler FlashPromotionList
+    get /api/sms/flashpromotion/list (ListFlashPromotionReq) returns (ListFlashPromotionResp)
+
+    @handler FlashPromotionUpdate
+    post /api/sms/flashpromotion/update (UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp)
+
+    @handler FlashPromotionDelete
+    post /api/sms/flashpromotion/delete (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
+}

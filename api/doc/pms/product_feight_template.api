@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addFeightTemplateReq struct {
+       
+    }
+    addFeightTemplateResp struct {
+    }
+    ListFeightTemplateReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtFeightTemplateData struct {
+        
+    }
+    ListFeightTemplateResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtFeightTemplateData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateFeightTemplateReq struct {
+        
+    }
+    UpdateFeightTemplateResp struct {
+    }
+    DeleteFeightTemplateReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteFeightTemplateResp struct {
+    }
+)
+
+@server(
+    group: proudct/feighttemplate
+)
+service admin-api {
+    @handler FeightTemplateAdd
+    post /api/proudct/feighttemplate/add (addFeightTemplateReq) returns (addFeightTemplateResp)
+
+    @handler FeightTemplateList
+    get /api/proudct/feighttemplate/list (ListFeightTemplateReq) returns (ListFeightTemplateResp)
+
+    @handler FeightTemplateUpdate
+    post /api/proudct/feighttemplate/update (UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp)
+
+    @handler FeightTemplateDelete
+    post /api/proudct/feighttemplate/delete (DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp)
+}

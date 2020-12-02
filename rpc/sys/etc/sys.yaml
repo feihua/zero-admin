@@ -6,4 +6,4 @@ Etcd:
   Key: sysmodel.rpc
 
 Mysql:
-  Datasource: koobe:koobe123@tcp(114.215.136.213:3307)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Datasource: root:123456@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

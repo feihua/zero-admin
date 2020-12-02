@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addMemberTagReq struct {
+       
+    }
+    addMemberTagResp struct {
+    }
+    ListMemberTagReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtMemberTagData struct {
+        
+    }
+    ListMemberTagResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtMemberTagData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateMemberTagReq struct {
+        
+    }
+    UpdateMemberTagResp struct {
+    }
+    DeleteMemberTagReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteMemberTagResp struct {
+    }
+)
+
+@server(
+    group: member/tag
+)
+service admin-api {
+    @handler MemberTagAdd
+    post /api/member/tag/add (addMemberTagReq) returns (addMemberTagResp)
+
+    @handler MemberTagList
+    get /api/member/tag/list (ListMemberTagReq) returns (ListMemberTagResp)
+
+    @handler MemberTagUpdate
+    post /api/member/tag/update (UpdateMemberTagReq) returns (UpdateMemberTagResp)
+
+    @handler MemberTagDelete
+    post /api/member/tag/delete (DeleteMemberTagReq) returns (DeleteMemberTagResp)
+}

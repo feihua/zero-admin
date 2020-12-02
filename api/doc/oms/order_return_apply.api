@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addReturnApplyReq struct {
+       
+    }
+    addReturnApplyResp struct {
+    }
+    ListReturnApplyReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtReturnApplyData struct {
+        
+    }
+    ListReturnApplyResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtReturnApplyData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateReturnApplyReq struct {
+        
+    }
+    UpdateReturnApplyResp struct {
+    }
+    DeleteReturnApplyReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteReturnApplyResp struct {
+    }
+)
+
+@server(
+    group: order/returnapply
+)
+service admin-api {
+    @handler ReturnApplyAdd
+    post /api/order/returnapply/add (addReturnApplyReq) returns (addReturnApplyResp)
+
+    @handler ReturnApplyList
+    get /api/order/returnapply/list (ListReturnApplyReq) returns (ListReturnApplyResp)
+
+    @handler ReturnApplyUpdate
+    post /api/order/returnapply/update (UpdateReturnApplyReq) returns (UpdateReturnApplyResp)
+
+    @handler ReturnApplyDelete
+    post /api/order/returnapply/delete (DeleteReturnApplyReq) returns (DeleteReturnApplyResp)
+}

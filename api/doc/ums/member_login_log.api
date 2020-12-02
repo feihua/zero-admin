@@ -1,0 +1,55 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addMemberLoginLogReq struct {
+
+    }
+    addMemberLoginLogResp struct {
+    }
+    ListMemberLoginLogReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtMemberLoginLogData struct {
+
+    }
+    ListMemberLoginLogResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtMemberLoginLogData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateMemberLoginLogReq struct {
+
+    }
+    UpdateMemberLoginLogResp struct {
+    }
+    DeleteMemberLoginLogReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteMemberLoginLogResp struct {
+    }
+)
+
+@server(
+    group: member/loginlog
+)
+service admin-api {
+    @handler MemberLoginLogAdd
+    post /api/member/loginlog/add (addMemberLoginLogReq) returns (addMemberLoginLogResp)
+
+    @handler MemberLoginLogList
+    get /api/member/loginlog/list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
+
+    @handler MemberLoginLogUpdate
+    post /api/member/loginlog/update (UpdateMemberLoginLogReq) returns (UpdateMemberLoginLogResp)
+
+    @handler MemberLoginLogDelete
+    post /api/member/loginlog/delete (DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp)
+}

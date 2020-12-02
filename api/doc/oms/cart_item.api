@@ -1,0 +1,56 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addCartItemReq struct {
+       
+    }
+    addCartItemResp struct {
+
+    }
+    ListCartItemReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtCartItemData struct {
+        
+    }
+    ListCartItemResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtCartItemData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateCartItemReq struct {
+        
+    }
+    UpdateCartItemResp struct {
+    }
+    DeleteCartItemReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteCartItemResp struct {
+    }
+)
+
+@server(
+    group: order/cart
+)
+service admin-api {
+    @handler CartItemAdd
+    post /api/order/cart/add (addCartItemReq) returns (addCartItemResp)
+
+    @handler CartItemList
+    get /api/order/cart/list (ListCartItemReq) returns (ListCartItemResp)
+
+    @handler CartItemUpdate
+    post /api/order/cart/update (UpdateCartItemReq) returns (UpdateCartItemResp)
+
+    @handler CartItemDelete
+    post /api/order/cart/delete (DeleteCartItemReq) returns (DeleteCartItemResp)
+}
