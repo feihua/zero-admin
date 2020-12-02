@@ -87,34 +87,34 @@ type (
 )
 
 @server(
-    group: user
+    group: sys/user
 )
 service admin-api {
     @handler UserLogin
-    post /api/user/login () returns (loginResp)
+    post /api/sys/user/login () returns (loginResp)
 
     @handler UserInfo
-    get /api/user/currentUser () returns (userInfoResp)
+    get /api/sys/user/currentUser () returns (userInfoResp)
 
     @handler UserAdd
-    post /api/user/add (addUserReq) returns (addUserResp)
+    post /api/sys/user/add (addUserReq) returns (addUserResp)
 
     @handler UserList
-    get /api/user/list (ListUserReq) returns (ListUserResp)
+    get /api/sys/user/list (ListUserReq) returns (ListUserResp)
 
     @handler UserUpdate
-    post /api/user/update (UpdateUserReq) returns (UpdateUserResp)
+    post /api/sys/user/update (UpdateUserReq) returns (UpdateUserResp)
 
     @handler UserDelete
-    post /api/user/delete (DeleteUserReq) returns (DeleteUserResp)
+    post /api/sys/user/delete (DeleteUserReq) returns (DeleteUserResp)
 
     @handler UpdateUserRole
-    post /api/user/updateUserRole (UpdateUserRoleReq) returns (UpdateUserRoleResp)
+    post /api/sys/user/updateUserRole (UpdateUserRoleReq) returns (UpdateUserRoleResp)
 
     @handler ReSetPassword
-    post /api/user/reSetPassword (ReSetPasswordReq) returns (ReSetPasswordResp)
+    post /api/sys/user/reSetPassword (ReSetPasswordReq) returns (ReSetPasswordResp)
 
     @handler UpdateUserStatus
-    post /api/user/UpdateUserStatus (UserStatusReq) returns (UserStatusResp)
+    post /api/sys/user/UpdateUserStatus (UserStatusReq) returns (UserStatusResp)
 }
 

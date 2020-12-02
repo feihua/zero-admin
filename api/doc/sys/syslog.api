@@ -38,13 +38,13 @@ type (
 )
 
 @server(
-    group: log
+    group: sys/log
 )
 service admin-api {
     @handler SysLogList
-    get /api/sysLog/list (ListSysLogReq) returns (ListSysLogResp)
+    get /api/sys/sysLog/list (ListSysLogReq) returns (ListSysLogResp)
 
     @handler SysLogDelete
-    post /api/sysLog/delete (DeleteSysLogReq) returns (DeleteSysLogResp)
+    post /api/sys/sysLog/delete (DeleteSysLogReq) returns (DeleteSysLogResp)
 }
 

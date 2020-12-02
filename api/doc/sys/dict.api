@@ -61,18 +61,18 @@ type (
 )
 
 @server(
-    group: dict
+    group: sys/dict
 )
 service admin-api {
     @handler DictAdd
-    post /api/dict/add (addDictReq) returns (addDictResp)
+    post /api/sys/dict/add (addDictReq) returns (addDictResp)
 
     @handler DictList
-    get /api/dict/list (ListDictReq) returns (ListDictResp)
+    get /api/sys/dict/list (ListDictReq) returns (ListDictResp)
 
     @handler DictUpdate
-    post /api/dict/update (UpdateDictReq) returns (UpdateDictResp)
+    post /api/sys/dict/update (UpdateDictReq) returns (UpdateDictResp)
 
     @handler DictDelete
-    post /api/dict/delete (DeleteDictReq) returns (DeleteDictResp)
+    post /api/sys/dict/delete (DeleteDictReq) returns (DeleteDictResp)
 }

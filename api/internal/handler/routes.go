@@ -4,10 +4,6 @@ package handler
 import (
 	"net/http"
 
-	config "go-zero-admin/api/internal/handler/config"
-	dept "go-zero-admin/api/internal/handler/dept"
-	dict "go-zero-admin/api/internal/handler/dict"
-	log "go-zero-admin/api/internal/handler/log"
 	memberaddress "go-zero-admin/api/internal/handler/member/address"
 	membergrowthchangehistory "go-zero-admin/api/internal/handler/member/growthchangehistory"
 	memberintegrationchangehistory "go-zero-admin/api/internal/handler/member/integrationchangehistory"
@@ -19,7 +15,6 @@ import (
 	memberstatistics "go-zero-admin/api/internal/handler/member/statistics"
 	membertag "go-zero-admin/api/internal/handler/member/tag"
 	membertask "go-zero-admin/api/internal/handler/member/task"
-	menu "go-zero-admin/api/internal/handler/menu"
 	ordercart "go-zero-admin/api/internal/handler/order/cart"
 	ordercompayaddress "go-zero-admin/api/internal/handler/order/compayaddress"
 	orderoperatehistory "go-zero-admin/api/internal/handler/order/operatehistory"
@@ -27,14 +22,13 @@ import (
 	orderreturnapply "go-zero-admin/api/internal/handler/order/returnapply"
 	orderreturnreason "go-zero-admin/api/internal/handler/order/returnreason"
 	ordersetting "go-zero-admin/api/internal/handler/order/setting"
-	prodcutprodcut "go-zero-admin/api/internal/handler/prodcut/prodcut"
 	productbrand "go-zero-admin/api/internal/handler/product/brand"
 	productcategory "go-zero-admin/api/internal/handler/product/category"
 	productcomment "go-zero-admin/api/internal/handler/product/comment"
+	productfeighttemplate "go-zero-admin/api/internal/handler/product/feighttemplate"
 	productmemberprice "go-zero-admin/api/internal/handler/product/memberprice"
+	productproduct "go-zero-admin/api/internal/handler/product/product"
 	productskustock "go-zero-admin/api/internal/handler/product/skustock"
-	proudctfeighttemplate "go-zero-admin/api/internal/handler/proudct/feighttemplate"
-	role "go-zero-admin/api/internal/handler/role"
 	smscoupon "go-zero-admin/api/internal/handler/sms/coupon"
 	smscouponhistory "go-zero-admin/api/internal/handler/sms/couponhistory"
 	smsflashpromotion "go-zero-admin/api/internal/handler/sms/flashpromotion"
@@ -45,7 +39,13 @@ import (
 	smshomenewproduct "go-zero-admin/api/internal/handler/sms/homenewproduct"
 	smshomerecommendproduct "go-zero-admin/api/internal/handler/sms/homerecommendproduct"
 	smshomerecommendsubject "go-zero-admin/api/internal/handler/sms/homerecommendsubject"
-	user "go-zero-admin/api/internal/handler/user"
+	sysconfig "go-zero-admin/api/internal/handler/sys/config"
+	sysdept "go-zero-admin/api/internal/handler/sys/dept"
+	sysdict "go-zero-admin/api/internal/handler/sys/dict"
+	syslog "go-zero-admin/api/internal/handler/sys/log"
+	sysmenu "go-zero-admin/api/internal/handler/sys/menu"
+	sysrole "go-zero-admin/api/internal/handler/sys/role"
+	sysuser "go-zero-admin/api/internal/handler/sys/user"
 	"go-zero-admin/api/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
@@ -56,48 +56,48 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/user/login",
-				Handler: user.UserLoginHandler(serverCtx),
+				Path:    "/api/sys/user/login",
+				Handler: sysuser.UserLoginHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/user/currentUser",
-				Handler: user.UserInfoHandler(serverCtx),
+				Path:    "/api/sys/user/currentUser",
+				Handler: sysuser.UserInfoHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/user/add",
-				Handler: user.UserAddHandler(serverCtx),
+				Path:    "/api/sys/user/add",
+				Handler: sysuser.UserAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/user/list",
-				Handler: user.UserListHandler(serverCtx),
+				Path:    "/api/sys/user/list",
+				Handler: sysuser.UserListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/user/update",
-				Handler: user.UserUpdateHandler(serverCtx),
+				Path:    "/api/sys/user/update",
+				Handler: sysuser.UserUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/user/delete",
-				Handler: user.UserDeleteHandler(serverCtx),
+				Path:    "/api/sys/user/delete",
+				Handler: sysuser.UserDeleteHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/user/updateUserRole",
-				Handler: user.UpdateUserRoleHandler(serverCtx),
+				Path:    "/api/sys/user/updateUserRole",
+				Handler: sysuser.UpdateUserRoleHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/user/reSetPassword",
-				Handler: user.ReSetPasswordHandler(serverCtx),
+				Path:    "/api/sys/user/reSetPassword",
+				Handler: sysuser.ReSetPasswordHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/user/UpdateUserStatus",
-				Handler: user.UpdateUserStatusHandler(serverCtx),
+				Path:    "/api/sys/user/UpdateUserStatus",
+				Handler: sysuser.UpdateUserStatusHandler(serverCtx),
 			},
 		},
 	)
@@ -106,33 +106,33 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/role/add",
-				Handler: role.RoleAddHandler(serverCtx),
+				Path:    "/api/sys/role/add",
+				Handler: sysrole.RoleAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/role/list",
-				Handler: role.RoleListHandler(serverCtx),
+				Path:    "/api/sys/role/list",
+				Handler: sysrole.RoleListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/role/update",
-				Handler: role.RoleUpdateHandler(serverCtx),
+				Path:    "/api/sys/role/update",
+				Handler: sysrole.RoleUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/role/delete",
-				Handler: role.RoleDeleteHandler(serverCtx),
+				Path:    "/api/sys/role/delete",
+				Handler: sysrole.RoleDeleteHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/role/roleMenuIds",
-				Handler: role.RoleMenuIdsHandler(serverCtx),
+				Path:    "/api/sys/role/roleMenuIds",
+				Handler: sysrole.RoleMenuIdsHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/role/updateRoleMenu",
-				Handler: role.UpdateRoleMenuHandler(serverCtx),
+				Path:    "/api/sys/role/updateRoleMenu",
+				Handler: sysrole.UpdateRoleMenuHandler(serverCtx),
 			},
 		},
 	)
@@ -141,23 +141,23 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/menu/add",
-				Handler: menu.MenuAddHandler(serverCtx),
+				Path:    "/api/sys/menu/add",
+				Handler: sysmenu.MenuAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/menu/list",
-				Handler: menu.MenuListHandler(serverCtx),
+				Path:    "/api/sys/menu/list",
+				Handler: sysmenu.MenuListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/menu/update",
-				Handler: menu.MenuUpdateHandler(serverCtx),
+				Path:    "/api/sys/menu/update",
+				Handler: sysmenu.MenuUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/menu/delete",
-				Handler: menu.MenuDeleteHandler(serverCtx),
+				Path:    "/api/sys/menu/delete",
+				Handler: sysmenu.MenuDeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -166,23 +166,23 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/dict/add",
-				Handler: dict.DictAddHandler(serverCtx),
+				Path:    "/api/sys/dict/add",
+				Handler: sysdict.DictAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/dict/list",
-				Handler: dict.DictListHandler(serverCtx),
+				Path:    "/api/sys/dict/list",
+				Handler: sysdict.DictListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/dict/update",
-				Handler: dict.DictUpdateHandler(serverCtx),
+				Path:    "/api/sys/dict/update",
+				Handler: sysdict.DictUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/dict/delete",
-				Handler: dict.DictDeleteHandler(serverCtx),
+				Path:    "/api/sys/dict/delete",
+				Handler: sysdict.DictDeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -191,23 +191,23 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/dept/add",
-				Handler: dept.DeptAddHandler(serverCtx),
+				Path:    "/api/sys/dept/add",
+				Handler: sysdept.DeptAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/dept/list",
-				Handler: dept.DeptListHandler(serverCtx),
+				Path:    "/api/sys/dept/list",
+				Handler: sysdept.DeptListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/dept/update",
-				Handler: dept.DeptUpdateHandler(serverCtx),
+				Path:    "/api/sys/dept/update",
+				Handler: sysdept.DeptUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/dept/delete",
-				Handler: dept.DeptDeleteHandler(serverCtx),
+				Path:    "/api/sys/dept/delete",
+				Handler: sysdept.DeptDeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -216,13 +216,13 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/loginLog/list",
-				Handler: log.LoginLogListHandler(serverCtx),
+				Path:    "/api/sys/loginLog/list",
+				Handler: syslog.LoginLogListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/loginLog/delete",
-				Handler: log.LoginLogDeleteHandler(serverCtx),
+				Path:    "/api/sys/loginLog/delete",
+				Handler: syslog.LoginLogDeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -231,13 +231,13 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/sysLog/list",
-				Handler: log.SysLogListHandler(serverCtx),
+				Path:    "/api/sys/sysLog/list",
+				Handler: syslog.SysLogListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sysLog/delete",
-				Handler: log.SysLogDeleteHandler(serverCtx),
+				Path:    "/api/sys/sysLog/delete",
+				Handler: syslog.SysLogDeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -246,23 +246,23 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/config/add",
-				Handler: config.ConfigAddHandler(serverCtx),
+				Path:    "/api/sys/config/add",
+				Handler: sysconfig.ConfigAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/config/list",
-				Handler: config.ConfigListHandler(serverCtx),
+				Path:    "/api/sys/config/list",
+				Handler: sysconfig.ConfigListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/config/update",
-				Handler: config.ConfigUpdateHandler(serverCtx),
+				Path:    "/api/sys/config/update",
+				Handler: sysconfig.ConfigUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/config/delete",
-				Handler: config.ConfigDeleteHandler(serverCtx),
+				Path:    "/api/sys/config/delete",
+				Handler: sysconfig.ConfigDeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -446,23 +446,23 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/prodcut/prodcut/add",
-				Handler: prodcutprodcut.ProductAddHandler(serverCtx),
+				Path:    "/api/product/product/add",
+				Handler: productproduct.ProductAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/prodcut/prodcut/list",
-				Handler: prodcutprodcut.ProductListHandler(serverCtx),
+				Path:    "/api/product/product/list",
+				Handler: productproduct.ProductListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/prodcut/prodcut/update",
-				Handler: prodcutprodcut.ProductUpdateHandler(serverCtx),
+				Path:    "/api/product/product/update",
+				Handler: productproduct.ProductUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/prodcut/prodcut/delete",
-				Handler: prodcutprodcut.ProductDeleteHandler(serverCtx),
+				Path:    "/api/product/product/delete",
+				Handler: productproduct.ProductDeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -546,23 +546,23 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/proudct/feighttemplate/add",
-				Handler: proudctfeighttemplate.FeightTemplateAddHandler(serverCtx),
+				Path:    "/api/product/feighttemplate/add",
+				Handler: productfeighttemplate.FeightTemplateAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/proudct/feighttemplate/list",
-				Handler: proudctfeighttemplate.FeightTemplateListHandler(serverCtx),
+				Path:    "/api/product/feighttemplate/list",
+				Handler: productfeighttemplate.FeightTemplateListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/proudct/feighttemplate/update",
-				Handler: proudctfeighttemplate.FeightTemplateUpdateHandler(serverCtx),
+				Path:    "/api/product/feighttemplate/update",
+				Handler: productfeighttemplate.FeightTemplateUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/proudct/feighttemplate/delete",
-				Handler: proudctfeighttemplate.FeightTemplateDeleteHandler(serverCtx),
+				Path:    "/api/product/feighttemplate/delete",
+				Handler: productfeighttemplate.FeightTemplateDeleteHandler(serverCtx),
 			},
 		},
 	)

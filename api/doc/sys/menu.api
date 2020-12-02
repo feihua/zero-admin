@@ -63,18 +63,18 @@ type (
 )
 
 @server(
-    group: menu
+    group: sys/menu
 )
 service admin-api {
     @handler MenuAdd
-    post /api/menu/add (addMenuReq) returns (addMenuResp)
+    post /api/sys/menu/add (addMenuReq) returns (addMenuResp)
 
     @handler MenuList
-    get /api/menu/list (ListMenuReq) returns (ListMenuResp)
+    get /api/sys/menu/list (ListMenuReq) returns (ListMenuResp)
 
     @handler MenuUpdate
-    post /api/menu/update (UpdateMenuReq) returns (UpdateMenuResp)
+    post /api/sys/menu/update (UpdateMenuReq) returns (UpdateMenuResp)
 
     @handler MenuDelete
-    post /api/menu/delete (DeleteMenuReq) returns (DeleteMenuResp)
+    post /api/sys/menu/delete (DeleteMenuReq) returns (DeleteMenuResp)
 }

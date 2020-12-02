@@ -35,12 +35,12 @@ type (
 )
 
 @server(
-    group: log
+    group: sys/log
 )
 service admin-api {
     @handler LoginLogList
-    get /api/loginLog/list (ListLoginLogReq) returns (ListLoginLogResp)
+    get /api/sys/loginLog/list (ListLoginLogReq) returns (ListLoginLogResp)
 
     @handler LoginLogDelete
-    post /api/loginLog/delete (DeleteLoginLogReq) returns (DeleteLoginLogResp)
+    post /api/sys/loginLog/delete (DeleteLoginLogReq) returns (DeleteLoginLogResp)
 }

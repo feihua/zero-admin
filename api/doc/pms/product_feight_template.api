@@ -38,18 +38,18 @@ type (
 )
 
 @server(
-    group: proudct/feighttemplate
+    group: product/feighttemplate
 )
 service admin-api {
     @handler FeightTemplateAdd
-    post /api/proudct/feighttemplate/add (addFeightTemplateReq) returns (addFeightTemplateResp)
+    post /api/product/feighttemplate/add (addFeightTemplateReq) returns (addFeightTemplateResp)
 
     @handler FeightTemplateList
-    get /api/proudct/feighttemplate/list (ListFeightTemplateReq) returns (ListFeightTemplateResp)
+    get /api/product/feighttemplate/list (ListFeightTemplateReq) returns (ListFeightTemplateResp)
 
     @handler FeightTemplateUpdate
-    post /api/proudct/feighttemplate/update (UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp)
+    post /api/product/feighttemplate/update (UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp)
 
     @handler FeightTemplateDelete
-    post /api/proudct/feighttemplate/delete (DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp)
+    post /api/product/feighttemplate/delete (DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp)
 }

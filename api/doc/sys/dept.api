@@ -52,18 +52,18 @@ type (
 
 
 @server(
-    group: dept
+    group: sys/dept
 )
 service admin-api {
     @handler DeptAdd
-    post /api/dept/add (addDeptReq) returns (addDeptResp)
+    post /api/sys/dept/add (addDeptReq) returns (addDeptResp)
 
     @handler DeptList
-    get /api/dept/list (ListDeptReq) returns (ListDeptResp)
+    get /api/sys/dept/list (ListDeptReq) returns (ListDeptResp)
 
     @handler DeptUpdate
-    post /api/dept/update (UpdateDeptReq) returns (UpdateDeptResp)
+    post /api/sys/dept/update (UpdateDeptReq) returns (UpdateDeptResp)
 
     @handler DeptDelete
-    post /api/dept/delete (DeleteDeptReq) returns (DeleteDeptResp)
+    post /api/sys/dept/delete (DeleteDeptReq) returns (DeleteDeptResp)
 }

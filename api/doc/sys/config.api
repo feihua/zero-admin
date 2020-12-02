@@ -60,18 +60,18 @@ type (
 )
 
 @server(
-    group: config
+    group: sys/config
 )
 service admin-api {
     @handler ConfigAdd
-    post /api/config/add (addConfigReq) returns (addConfigResp)
+    post /api/sys/config/add (addConfigReq) returns (addConfigResp)
 
     @handler ConfigList
-    get /api/config/list (ListConfigReq) returns (ListConfigResp)
+    get /api/sys/config/list (ListConfigReq) returns (ListConfigResp)
 
     @handler ConfigUpdate
-    post /api/config/update (UpdateConfigReq) returns (UpdateConfigResp)
+    post /api/sys/config/update (UpdateConfigReq) returns (UpdateConfigResp)
 
     @handler ConfigDelete
-    post /api/config/delete (DeleteConfigReq) returns (DeleteConfigResp)
+    post /api/sys/config/delete (DeleteConfigReq) returns (DeleteConfigResp)
 }

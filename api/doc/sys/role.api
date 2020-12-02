@@ -56,24 +56,24 @@ type (
 )
 
 @server(
-    group: role
+    group: sys/role
 )
 service admin-api {
     @handler RoleAdd
-    post /api/role/add (addRoleReq) returns (addRoleResp)
+    post /api/sys/role/add (addRoleReq) returns (addRoleResp)
 
     @handler RoleList
-    get /api/role/list (ListRoleReq) returns (ListRoleResp)
+    get /api/sys/role/list (ListRoleReq) returns (ListRoleResp)
 
     @handler RoleUpdate
-    post /api/role/update (UpdateRoleReq) returns (UpdateRoleResp)
+    post /api/sys/role/update (UpdateRoleReq) returns (UpdateRoleResp)
 
     @handler RoleDelete
-    post /api/role/delete (DeleteRoleReq) returns (DeleteRoleResp)
+    post /api/sys/role/delete (DeleteRoleReq) returns (DeleteRoleResp)
 
     @handler RoleMenuIds
-    post /api/role/roleMenuIds (RoleMenuIdsReq) returns (RoleMenuIdsResp)
+    post /api/sys/role/roleMenuIds (RoleMenuIdsReq) returns (RoleMenuIdsResp)
 
     @handler UpdateRoleMenu
-    post /api/role/updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
+    post /api/sys/role/updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
 }
