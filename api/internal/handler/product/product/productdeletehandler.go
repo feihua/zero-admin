@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"go-zero-admin/api/internal/logic/prodcut/prodcut"
+	"go-zero-admin/api/internal/logic/product/product"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 

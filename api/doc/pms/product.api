@@ -38,18 +38,18 @@ type (
 )
 
 @server(
-    group: prodcut/prodcut
+    group: product/product
 )
 service admin-api {
     @handler ProductAdd
-    post /api/prodcut/prodcut/add (addProductReq) returns (addProductResp)
+    post /api/product/product/add (addProductReq) returns (addProductResp)
 
     @handler ProductList
-    get /api/prodcut/prodcut/list (ListProductReq) returns (ListProductResp)
+    get /api/product/product/list (ListProductReq) returns (ListProductResp)
 
     @handler ProductUpdate
-    post /api/prodcut/prodcut/update (UpdateProductReq) returns (UpdateProductResp)
+    post /api/product/product/update (UpdateProductReq) returns (UpdateProductResp)
 
     @handler ProductDelete
-    post /api/prodcut/prodcut/delete (DeleteProductReq) returns (DeleteProductResp)
+    post /api/product/product/delete (DeleteProductReq) returns (DeleteProductResp)
 }
