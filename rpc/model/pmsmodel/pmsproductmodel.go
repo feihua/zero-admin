@@ -98,6 +98,27 @@ func (m *PmsProductModel) FindOne(id int64) (*PmsProduct, error) {
 	}
 }
 
+func (m *PmsProductModel) FindAll(Current int64, PageSize int64) (*[]PmsProduct, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductRows, m.table)
+	var resp []PmsProduct
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsProductModel) Update(data PmsProduct) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsProductRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.BrandId, data.ProductCategoryId, data.FeightTemplateId, data.ProductAttributeCategoryId, data.Name, data.Pic, data.ProductSn, data.DeleteStatus, data.PublishStatus, data.NewStatus, data.RecommandStatus, data.VerifyStatus, data.Sort, data.Sale, data.Price, data.PromotionPrice, data.GiftGrowth, data.GiftPoint, data.UsePointLimit, data.SubTitle, data.Description, data.OriginalPrice, data.Stock, data.LowStock, data.Unit, data.Weight, data.PreviewStatus, data.ServiceIds, data.Keywords, data.Note, data.AlbumPics, data.DetailTitle, data.DetailDesc, data.DetailHtml, data.DetailMobileHtml, data.PromotionStartTime, data.PromotionEndTime, data.PromotionPerLimit, data.PromotionType, data.BrandName, data.ProductCategoryName, data.Id)

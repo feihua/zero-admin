@@ -100,6 +100,27 @@ func (m *OmsOrderModel) FindOne(id int64) (*OmsOrder, error) {
 	}
 }
 
+func (m *OmsOrderModel) FindAll(Current int64, PageSize int64) (*[]OmsOrder, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderRows, m.table)
+	var resp []OmsOrder
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *OmsOrderModel) Update(data OmsOrder) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, omsOrderRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.MemberId, data.CouponId, data.OrderSn, data.MemberUsername, data.TotalAmount, data.PayAmount, data.FreightAmount, data.PromotionAmount, data.IntegrationAmount, data.CouponAmount, data.DiscountAmount, data.PayType, data.SourceType, data.Status, data.OrderType, data.DeliveryCompany, data.DeliverySn, data.AutoConfirmDay, data.Integration, data.Growth, data.PromotionInfo, data.BillType, data.BillHeader, data.BillContent, data.BillReceiverPhone, data.BillReceiverEmail, data.ReceiverName, data.ReceiverPhone, data.ReceiverPostCode, data.ReceiverProvince, data.ReceiverCity, data.ReceiverRegion, data.ReceiverDetailAddress, data.Note, data.ConfirmStatus, data.DeleteStatus, data.UseIntegration, data.PaymentTime, data.DeliveryTime, data.ReceiveTime, data.CommentTime, data.ModifyTime, data.Id)

@@ -26,24 +26,24 @@ type (
 	}
 
 	SmsCoupon struct {
-		Id           int64     `db:"id"`
-		Type         int64     `db:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-		Name         string    `db:"name"`
-		Platform     int64     `db:"platform"`  // 使用平台：0->全部；1->移动；2->PC
-		Count        int64     `db:"count"`     // 数量
-		Amount       float64   `db:"amount"`    // 金额
-		PerLimit     int64     `db:"per_limit"` // 每人限领张数
-		MinPoint     float64   `db:"min_point"` // 使用门槛；0表示无门槛
-		StartTime    time.Time `db:"start_time"`
-		EndTime      time.Time `db:"end_time"`
-		UseType      int64     `db:"use_type"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
-		Note         string    `db:"note"`          // 备注
-		PublishCount int64     `db:"publish_count"` // 发行数量
-		UseCount     int64     `db:"use_count"`     // 已使用数量
-		ReceiveCount int64     `db:"receive_count"` // 领取数量
-		EnableTime   time.Time `db:"enable_time"`   // 可以领取的日期
-		Code         string    `db:"code"`          // 优惠码
-		MemberLevel  int64     `db:"member_level"`  // 可领取的会员类型：0->无限时
+		Id           int64          `db:"id"`
+		Type         int64          `db:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+		Name         string         `db:"name"`
+		Platform     int64          `db:"platform"`  // 使用平台：0->全部；1->移动；2->PC
+		Count        int64          `db:"count"`     // 数量
+		Amount       float64        `db:"amount"`    // 金额
+		PerLimit     int64          `db:"per_limit"` // 每人限领张数
+		MinPoint     float64        `db:"min_point"` // 使用门槛；0表示无门槛
+		StartTime    time.Time      `db:"start_time"`
+		EndTime      time.Time      `db:"end_time"`
+		UseType      int64          `db:"use_type"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+		Note         string         `db:"note"`          // 备注
+		PublishCount int64          `db:"publish_count"` // 发行数量
+		UseCount     int64          `db:"use_count"`     // 已使用数量
+		ReceiveCount int64          `db:"receive_count"` // 领取数量
+		EnableTime   sql.NullTime   `db:"enable_time"`   // 可以领取的日期
+		Code         sql.NullString `db:"code"`          // 优惠码
+		MemberLevel  sql.NullInt64  `db:"member_level"`  // 可领取的会员类型：0->无限时
 	}
 )
 
@@ -64,6 +64,27 @@ func (m *SmsCouponModel) FindOne(id int64) (*SmsCoupon, error) {
 	query := fmt.Sprintf("select %s from %s where id = ? limit 1", smsCouponRows, m.table)
 	var resp SmsCoupon
 	err := m.conn.QueryRow(&resp, query, id)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *SmsCouponModel) FindAll(Current int64, PageSize int64) (*[]SmsCoupon, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", smsCouponRows, m.table)
+	var resp []SmsCoupon
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
