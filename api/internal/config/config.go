@@ -8,5 +8,14 @@ import (
 type Config struct {
 	rest.RestConf
 
+	//系统
 	SysRpc zrpc.RpcClientConf
+	//会员
+	UmsRpc zrpc.RpcClientConf
+	//商品
+	PmsRpc zrpc.RpcClientConf
+	//订单
+	OmsRpc zrpc.RpcClientConf
+	//营销
+	SmsRpc zrpc.RpcClientConf
 }
