@@ -2,14 +2,65 @@ syntax = "proto3";
 
 package sms;
 
-message Request {
-  string ping = 1;
+message CouponAddReq {
+
 }
 
-message Response {
+message CouponAddResp {
   string pong = 1;
 }
 
+message CouponListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message CouponListData{
+  int64     Id = 1;
+  int64     Type = 2;
+  string    Name = 3;
+  int64     Platform = 4;
+  int64     Count = 5;
+  double    Amount = 6;
+  int64     PerLimit = 7;
+  double    MinPoint = 8;
+  string    StartTime = 9;
+  string    EndTime = 10;
+  int64     UseType = 11;
+  string    Note = 12;
+  int64     PublishCount = 13;
+  int64     UseCount = 14;
+  int64     ReceiveCount = 15;
+  string    EnableTime = 16;
+  string    Code = 17;
+  int64     MemberLevel = 18;
+}
+
+message CouponListResp {
+  int64 total = 1;
+  repeated  CouponListData list = 2;
+}
+
+message CouponUpdateReq {
+
+}
+
+message CouponUpdateResp {
+  string pong = 1;
+}
+
+message CouponDeleteReq {
+  int64 id = 1;
+}
+
+message CouponDeleteResp {
+  string pong = 1;
+}
 service Sms {
-  rpc Ping(Request) returns(Response);
+
+  rpc CouponAdd(CouponAddReq) returns(CouponAddResp);
+  rpc CouponList(CouponListReq) returns(CouponListResp);
+  rpc CouponUpdate(CouponUpdateReq) returns(CouponUpdateResp);
+  rpc CouponDelete(CouponDeleteReq) returns(CouponDeleteResp);
+
 }

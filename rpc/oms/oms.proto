@@ -2,14 +2,90 @@ syntax = "proto3";
 
 package oms;
 
-message Request {
-  string ping = 1;
+message OrderAddReq {
+
 }
 
-message Response {
+message OrderAddResp {
+  string pong = 1;
+}
+
+message OrderListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message OrderListData{
+  int64       Id = 1;
+  int64       MemberId = 2;
+  int64       CouponId = 3;
+  string      OrderSn = 4;
+  string   CreateTime = 5;
+  string      MemberUsername = 6;
+  double     TotalAmount = 7;
+  double     PayAmount = 8;
+  double     FreightAmount = 9;
+  double     PromotionAmount = 10;
+  double     IntegrationAmount = 11;
+  double     CouponAmount = 12;
+  double     DiscountAmount = 13;
+  int64       PayType = 14;
+  int64       SourceType = 15;
+  int64       Status = 16;
+  int64       OrderType = 17;
+  string      DeliveryCompany = 18;
+  string      DeliverySn = 19;
+  int64       AutoConfirmDay = 20;
+  int64       Integration = 21;
+  int64       Growth = 22;
+  string      PromotionInfo = 23;
+  int64       BillType = 24;
+  string      BillHeader = 25;
+  string      BillContent = 26;
+  string      BillReceiverPhone = 27;
+  string      BillReceiverEmail = 28;
+  string      ReceiverName = 29;
+  string      ReceiverPhone = 30;
+  string      ReceiverPostCode = 31;
+  string      ReceiverProvince = 32;
+  string      ReceiverCity = 33;
+  string      ReceiverRegion = 34;
+  string      ReceiverDetailAddress = 35;
+  string      Note = 36;
+  int64       ConfirmStatus = 37;
+  int64       DeleteStatus = 38;
+  int64       UseIntegration = 39;
+  string   PaymentTime = 40;
+  string   DeliveryTime = 41;
+  string   ReceiveTime = 42;
+  string   CommentTime = 43;
+  string   ModifyTime = 44;
+}
+
+message OrderListResp {
+  int64 total = 1;
+  repeated  OrderListData list = 2;
+}
+
+message OrderUpdateReq {
+
+}
+
+message OrderUpdateResp {
+  string pong = 1;
+}
+
+message OrderDeleteReq {
+  int64 id = 1;
+}
+
+message OrderDeleteResp {
   string pong = 1;
 }
 
 service Oms {
-  rpc Ping(Request) returns(Response);
+  rpc OrderAdd(OrderAddReq) returns(OrderAddResp);
+  rpc OrderList(OrderListReq) returns(OrderListResp);
+  rpc OrderUpdate(OrderUpdateReq) returns(OrderUpdateResp);
+  rpc OrderDelete(OrderDeleteReq) returns(OrderDeleteResp);
 }

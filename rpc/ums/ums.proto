@@ -2,14 +2,67 @@ syntax = "proto3";
 
 package ums;
 
-message Request {
-  string ping = 1;
+message MemberAddReq {
+
 }
 
-message Response {
+message MemberAddResp {
+  string pong = 1;
+}
+
+message MemberListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message MemberListData{
+  int64       Id = 1;
+  int64       MemberLevelId = 2;
+  string      Username = 3;
+  string      Password = 4;
+  string      Nickname = 5;
+  string      Phone = 6;
+  int64       Status = 7;
+  string      CreateTime = 8;
+  string      Icon = 9;
+  int64       Gender = 10;
+  string      Birthday = 11;
+  string      City = 12;
+  string      Job = 13;
+  string      PersonalizedSignature = 14;
+  int64       SourceType = 15;
+  int64       Integration = 16;
+  int64       Growth = 17;
+  int64       LuckeyCount = 18;
+  int64       HistoryIntegration = 19;
+}
+
+message MemberListResp {
+  int64 total = 1;
+  repeated  MemberListData list = 2;
+}
+
+message MemberUpdateReq {
+
+}
+
+message MemberUpdateResp {
+  string pong = 1;
+}
+
+message MemberDeleteReq {
+  int64 id = 1;
+}
+
+message MemberDeleteResp {
   string pong = 1;
 }
 
 service Ums {
-  rpc Ping(Request) returns(Response);
+
+  rpc MemberAdd(MemberAddReq) returns(MemberAddResp);
+  rpc MemberList(MemberListReq) returns(MemberListResp);
+  rpc MemberUpdate(MemberUpdateReq) returns(MemberUpdateResp);
+  rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);
+
 }
