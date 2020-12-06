@@ -7,7 +7,21 @@ info(
 
 type (
     addMemberStatisticsInfoReq struct {
-       
+        MemberId            int64     `json:"member_id"`
+        ConsumeAmount       float64   `json:"consume_amount"`     // 累计消费金额
+        OrderCount          int64     `json:"order_count"`        // 订单数量
+        CouponCount         int64     `json:"coupon_count"`       // 优惠券数量
+        CommentCount        int64     `json:"comment_count"`      // 评价数
+        ReturnOrderCount    int64     `json:"return_order_count"` // 退货数量
+        LoginCount          int64     `json:"login_count"`        // 登录次数
+        AttendCount         int64     `json:"attend_count"`       // 关注数量
+        FansCount           int64     `json:"fans_count"`         // 粉丝数量
+        CollectProductCount int64     `json:"collect_product_count"`
+        CollectSubjectCount int64     `json:"collect_subject_count"`
+        CollectTopicCount   int64     `json:"collect_topic_count"`
+        CollectCommentCount int64     `json:"collect_comment_count"`
+        InviteFriendCount   int64     `json:"invite_friend_count"`
+        RecentOrderTime     string `json:"recent_order_time"` // 最后一次下订单时间
     }
     addMemberStatisticsInfoResp struct {
     }
@@ -16,7 +30,22 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtMemberStatisticsInfoData struct {
-        
+        Id                  int64     `json:"id"`
+        MemberId            int64     `json:"member_id"`
+        ConsumeAmount       float64   `json:"consume_amount"`     // 累计消费金额
+        OrderCount          int64     `json:"order_count"`        // 订单数量
+        CouponCount         int64     `json:"coupon_count"`       // 优惠券数量
+        CommentCount        int64     `json:"comment_count"`      // 评价数
+        ReturnOrderCount    int64     `json:"return_order_count"` // 退货数量
+        LoginCount          int64     `json:"login_count"`        // 登录次数
+        AttendCount         int64     `json:"attend_count"`       // 关注数量
+        FansCount           int64     `json:"fans_count"`         // 粉丝数量
+        CollectProductCount int64     `json:"collect_product_count"`
+        CollectSubjectCount int64     `json:"collect_subject_count"`
+        CollectTopicCount   int64     `json:"collect_topic_count"`
+        CollectCommentCount int64     `json:"collect_comment_count"`
+        InviteFriendCount   int64     `json:"invite_friend_count"`
+        RecentOrderTime     string `json:"recent_order_time"` // 最后一次下订单时间
     }
     ListMemberStatisticsInfoResp struct {
         Current int64 `json:"current"`
@@ -26,7 +55,22 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberStatisticsInfoReq struct {
-        
+        Id                  int64     `json:"id"`
+        MemberId            int64     `json:"member_id"`
+        ConsumeAmount       float64   `json:"consume_amount"`     // 累计消费金额
+        OrderCount          int64     `json:"order_count"`        // 订单数量
+        CouponCount         int64     `json:"coupon_count"`       // 优惠券数量
+        CommentCount        int64     `json:"comment_count"`      // 评价数
+        ReturnOrderCount    int64     `json:"return_order_count"` // 退货数量
+        LoginCount          int64     `json:"login_count"`        // 登录次数
+        AttendCount         int64     `json:"attend_count"`       // 关注数量
+        FansCount           int64     `json:"fans_count"`         // 粉丝数量
+        CollectProductCount int64     `json:"collect_product_count"`
+        CollectSubjectCount int64     `json:"collect_subject_count"`
+        CollectTopicCount   int64     `json:"collect_topic_count"`
+        CollectCommentCount int64     `json:"collect_comment_count"`
+        InviteFriendCount   int64     `json:"invite_friend_count"`
+        RecentOrderTime     string `json:"recent_order_time"` // 最后一次下订单时间
     }
     UpdateMemberStatisticsInfoResp struct {
     }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewMemberRuleSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(req types.AddMemberRuleSettingReq) (*types.AddMemberRuleSettingResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Ums.MemberRuleSettingAdd(l.ctx, &umsclient.MemberRuleSettingAddReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddMemberRuleSettingResp{}, nil
 }

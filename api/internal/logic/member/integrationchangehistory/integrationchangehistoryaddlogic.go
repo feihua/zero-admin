@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewIntegrationChangeHistoryAddLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *IntegrationChangeHistoryAddLogic) IntegrationChangeHistoryAdd(req types.AddIntegrationChangeHistoryReq) (*types.AddIntegrationChangeHistoryResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Ums.IntegrationChangeHistoryAdd(l.ctx, &umsclient.IntegrationChangeHistoryAddReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddIntegrationChangeHistoryResp{}, nil
 }

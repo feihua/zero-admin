@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewMemberLevelAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Mem
 }
 
 func (l *MemberLevelAddLogic) MemberLevelAdd(req types.AddMemberLevelReq) (*types.AddMemberLevelResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Ums.MemberLevelAdd(l.ctx, &umsclient.MemberLevelAddReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddMemberLevelResp{}, nil
 }

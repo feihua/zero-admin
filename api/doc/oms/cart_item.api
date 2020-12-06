@@ -7,7 +7,21 @@ info(
 
 type (
     addCartItemReq struct {
-       
+        ProductId         int64     `json:"product_id"`
+        ProductSkuId      int64     `json:"product_sku_id"`
+        MemberId          int64     `json:"member_id"`
+        Quantity          int64     `json:"quantity"`            // 购买数量
+        Price             float64   `json:"price"`               // 添加到购物车的价格
+        ProductPic        string    `json:"product_pic"`         // 商品主图
+        ProductName       string    `json:"product_name"`        // 商品名称
+        ProductSubTitle   string    `json:"product_sub_title"`   // 商品副标题（卖点）
+        ProductSkuCode    string    `json:"product_sku_code"`    // 商品sku条码
+        MemberNickname    string    `json:"member_nickname"`     // 会员昵称
+        DeleteStatus      int64     `json:"delete_status"`       // 是否删除
+        ProductCategoryId int64     `json:"product_category_id"` // 商品分类
+        ProductBrand      string    `json:"product_brand"`
+        ProductSn         string    `json:"product_sn"`
+        ProductAttr       string    `json:"product_attr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
     }
     addCartItemResp struct {
 
@@ -17,7 +31,24 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtCartItemData struct {
-        
+        Id                int64     `json:"id"`
+        ProductId         int64     `json:"product_id"`
+        ProductSkuId      int64     `json:"product_sku_id"`
+        MemberId          int64     `json:"member_id"`
+        Quantity          int64     `json:"quantity"`            // 购买数量
+        Price             float64   `json:"price"`               // 添加到购物车的价格
+        ProductPic        string    `json:"product_pic"`         // 商品主图
+        ProductName       string    `json:"product_name"`        // 商品名称
+        ProductSubTitle   string    `json:"product_sub_title"`   // 商品副标题（卖点）
+        ProductSkuCode    string    `json:"product_sku_code"`    // 商品sku条码
+        MemberNickname    string    `json:"member_nickname"`     // 会员昵称
+        CreateDate        string `json:"create_date"`         // 创建时间
+        ModifyDate        string `json:"modify_date"`         // 修改时间
+        DeleteStatus      int64     `json:"delete_status"`       // 是否删除
+        ProductCategoryId int64     `json:"product_category_id"` // 商品分类
+        ProductBrand      string    `json:"product_brand"`
+        ProductSn         string    `json:"product_sn"`
+        ProductAttr       string    `json:"product_attr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
     }
     ListCartItemResp struct {
         Current int64 `json:"current"`
@@ -27,7 +58,22 @@ type (
         Total int64 `json:"total"`
     }
     UpdateCartItemReq struct {
-        
+        Id                int64     `json:"id"`
+        ProductId         int64     `json:"product_id"`
+        ProductSkuId      int64     `json:"product_sku_id"`
+        MemberId          int64     `json:"member_id"`
+        Quantity          int64     `json:"quantity"`            // 购买数量
+        Price             float64   `json:"price"`               // 添加到购物车的价格
+        ProductPic        string    `json:"product_pic"`         // 商品主图
+        ProductName       string    `json:"product_name"`        // 商品名称
+        ProductSubTitle   string    `json:"product_sub_title"`   // 商品副标题（卖点）
+        ProductSkuCode    string    `json:"product_sku_code"`    // 商品sku条码
+        MemberNickname    string    `json:"member_nickname"`     // 会员昵称
+        DeleteStatus      int64     `json:"delete_status"`       // 是否删除
+        ProductCategoryId int64     `json:"product_category_id"` // 商品分类
+        ProductBrand      string    `json:"product_brand"`
+        ProductSn         string    `json:"product_sn"`
+        ProductAttr       string    `json:"product_attr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
     }
     UpdateCartItemResp struct {
     }

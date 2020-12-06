@@ -3,7 +3,23 @@ syntax = "proto3";
 package sms;
 
 message CouponAddReq {
-
+  int64     Type = 2;
+  string    Name = 3;
+  int64     Platform = 4;
+  int64     Count = 5;
+  double    Amount = 6;
+  int64     PerLimit = 7;
+  double    MinPoint = 8;
+  string    StartTime = 9;
+  string    EndTime = 10;
+  int64     UseType = 11;
+  string    Note = 12;
+  int64     PublishCount = 13;
+  int64     UseCount = 14;
+  int64     ReceiveCount = 15;
+  string    EnableTime = 16;
+  string    Code = 17;
+  int64     MemberLevel = 18;
 }
 
 message CouponAddResp {
@@ -42,7 +58,24 @@ message CouponListResp {
 }
 
 message CouponUpdateReq {
-
+  int64     Id = 1;
+  int64     Type = 2;
+  string    Name = 3;
+  int64     Platform = 4;
+  int64     Count = 5;
+  double    Amount = 6;
+  int64     PerLimit = 7;
+  double    MinPoint = 8;
+  string    StartTime = 9;
+  string    EndTime = 10;
+  int64     UseType = 11;
+  string    Note = 12;
+  int64     PublishCount = 13;
+  int64     UseCount = 14;
+  int64     ReceiveCount = 15;
+  string    EnableTime = 16;
+  string    Code = 17;
+  int64     MemberLevel = 18;
 }
 
 message CouponUpdateResp {
@@ -56,11 +89,742 @@ message CouponDeleteReq {
 message CouponDeleteResp {
   string pong = 1;
 }
+
+message CouponHistoryAddReq {
+  int64     	CouponId   = 2;
+  int64     	MemberId      = 3;
+  string    	CouponCode     = 4;
+  string    	MemberNickname = 5;
+  int64     	GetType        = 6;
+  string 	CreateTime     = 7;
+  int64     	UseStatus      = 8;
+  string 	UseTime        = 9;
+  int64     	OrderId        = 10;
+  string    	OrderSn        = 11;
+}
+
+message CouponHistoryAddResp {
+  string pong = 1;
+}
+
+message CouponHistoryListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message CouponHistoryListData{
+  int64     	Id       = 1;
+  int64     	CouponId   = 2;
+  int64     	MemberId      = 3;
+  string    	CouponCode     = 4;
+  string    	MemberNickname = 5;
+  int64     	GetType        = 6;
+  string 	CreateTime     = 7;
+  int64     	UseStatus      = 8;
+  string 	UseTime        = 9;
+  int64     	OrderId        = 10;
+  string    	OrderSn        = 11;
+
+}
+
+message CouponHistoryListResp {
+  int64 total = 1;
+  repeated  CouponHistoryListData list = 2;
+}
+
+message CouponHistoryUpdateReq {
+  int64     	Id       = 1;
+  int64     	CouponId   = 2;
+  int64     	MemberId      = 3;
+  string    	CouponCode     = 4;
+  string    	MemberNickname = 5;
+  int64     	GetType        = 6;
+  string 	CreateTime     = 7;
+  int64     	UseStatus      = 8;
+  string 	UseTime        = 9;
+  int64     	OrderId        = 10;
+  string    	OrderSn        = 11;
+}
+
+message CouponHistoryUpdateResp {
+  string pong = 1;
+}
+
+message CouponHistoryDeleteReq {
+  int64 id = 1;
+}
+
+message CouponHistoryDeleteResp {
+  string pong = 1;
+}
+
+
+message CouponProductCategoryRelationAddReq {
+  int64 	CouponId  = 2;
+  int64 	ProductCategoryId = 3;
+  string	ProductCategoryName  = 4;
+  string	ParentCategoryName  = 5;
+}
+
+message CouponProductCategoryRelationAddResp {
+  string pong = 1;
+}
+
+message CouponProductCategoryRelationListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message CouponProductCategoryRelationListData{
+  int64 	Id      = 1;
+  int64 	CouponId  = 2;
+  int64 	ProductCategoryId = 3;
+  string	ProductCategoryName  = 4;
+  string	ParentCategoryName  = 5;
+
+}
+
+message CouponProductCategoryRelationListResp {
+  int64 total = 1;
+  repeated  CouponProductCategoryRelationListData list = 2;
+}
+
+message CouponProductCategoryRelationUpdateReq {
+  int64 	Id      = 1;
+  int64 	CouponId  = 2;
+  int64 	ProductCategoryId = 3;
+  string	ProductCategoryName  = 4;
+  string	ParentCategoryName  = 5;
+}
+
+message CouponProductCategoryRelationUpdateResp {
+  string pong = 1;
+}
+
+message CouponProductCategoryRelationDeleteReq {
+  int64 id = 1;
+}
+
+message CouponProductCategoryRelationDeleteResp {
+  string pong = 1;
+}
+
+
+message CouponProductRelationAddReq {
+  int64  	CouponId   = 2;
+  int64  	ProductId   = 3;
+  string 	ProductName = 4;
+  string 	ProductSn   = 5;
+}
+
+message CouponProductRelationAddResp {
+  string pong = 1;
+}
+
+message CouponProductRelationListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message CouponProductRelationListData{
+  int64  	Id      = 1;
+  int64  	CouponId   = 2;
+  int64  	ProductId   = 3;
+  string 	ProductName = 4;
+  string 	ProductSn   = 5;
+
+}
+
+message CouponProductRelationListResp {
+  int64 total = 1;
+  repeated  CouponProductRelationListData list = 2;
+}
+
+message CouponProductRelationUpdateReq {
+  int64  	Id      = 1;
+  int64  	CouponId   = 2;
+  int64  	ProductId   = 3;
+  string 	ProductName = 4;
+  string 	ProductSn   = 5;
+}
+
+message CouponProductRelationUpdateResp {
+  string pong = 1;
+}
+
+message CouponProductRelationDeleteReq {
+  int64 id = 1;
+}
+
+message CouponProductRelationDeleteResp {
+  string pong = 1;
+}
+
+message FlashPromotionLogAddReq {
+  int64     	MemberId    = 2;
+  int64     	ProductId    = 3;
+  string    	MemberPhone   = 4;
+  string    	ProductName   = 5;
+  string 	SubscribeTime = 6;
+  string 	SendTime      = 7;
+}
+
+message FlashPromotionLogAddResp {
+  string pong = 1;
+}
+
+message FlashPromotionLogListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message FlashPromotionLogListData{
+  int64     	Id      = 1;
+  int64     	MemberId    = 2;
+  int64     	ProductId    = 3;
+  string    	MemberPhone   = 4;
+  string    	ProductName   = 5;
+  string 	SubscribeTime = 6;
+  string 	SendTime      = 7;
+
+}
+
+message FlashPromotionLogListResp {
+  int64 total = 1;
+  repeated  FlashPromotionLogListData list = 2;
+}
+
+message FlashPromotionLogUpdateReq {
+  int64     	Id      = 1;
+  int64     	MemberId    = 2;
+  int64     	ProductId    = 3;
+  string    	MemberPhone   = 4;
+  string    	ProductName   = 5;
+  string 	SubscribeTime = 6;
+  string 	SendTime      = 7;
+}
+
+message FlashPromotionLogUpdateResp {
+  string pong = 1;
+}
+
+message FlashPromotionLogDeleteReq {
+  int64 id = 1;
+}
+
+message FlashPromotionLogDeleteResp {
+  string pong = 1;
+}
+
+
+message FlashPromotionAddReq {
+  string    	Title = 2;
+  string 	StartDate  = 3;
+  string 	EndDate    = 4;
+  int64     	Status     = 5;
+  string 	CreateTime = 6;
+}
+
+message FlashPromotionAddResp {
+  string pong = 1;
+}
+
+message FlashPromotionListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message FlashPromotionListData{
+  int64     	Id         = 1;
+  string    	Title = 2;
+  string 	StartDate  = 3;
+  string 	EndDate    = 4;
+  int64     	Status     = 5;
+  string 	CreateTime = 6;
+
+}
+
+message FlashPromotionListResp {
+  int64 total = 1;
+  repeated  FlashPromotionListData list = 2;
+}
+
+message FlashPromotionUpdateReq {
+  int64     	Id         = 1;
+  string    	Title = 2;
+  string 	StartDate  = 3;
+  string 	EndDate    = 4;
+  int64     	Status     = 5;
+  string 	CreateTime = 6;
+}
+
+message FlashPromotionUpdateResp {
+  string pong = 1;
+}
+
+message FlashPromotionDeleteReq {
+  int64 id = 1;
+}
+
+message FlashPromotionDeleteResp {
+  string pong = 1;
+}
+
+
+message FlashPromotionProductRelationAddReq {
+  int64   	FlashPromotionId     = 2;
+  int64   	FlashPromotionSessionId = 3;
+  int64   	ProductId               = 4;
+  int64 	FlashPromotionPrice     = 5;
+  int64   	FlashPromotionCount     = 6;
+  int64   	FlashPromotionLimit     = 7;
+  int64   	Sort                   = 8;
+}
+
+message FlashPromotionProductRelationAddResp {
+  string pong = 1;
+}
+
+message FlashPromotionProductRelationListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message FlashPromotionProductRelationListData{
+  int64   	Id        = 1;
+  int64   	FlashPromotionId     = 2;
+  int64   	FlashPromotionSessionId = 3;
+  int64   	ProductId               = 4;
+  int64 	FlashPromotionPrice     = 5;
+  int64   	FlashPromotionCount     = 6;
+  int64   	FlashPromotionLimit     = 7;
+  int64   	Sort                   = 8;
+
+}
+
+message FlashPromotionProductRelationListResp {
+  int64 total = 1;
+  repeated  FlashPromotionProductRelationListData list = 2;
+}
+
+message FlashPromotionProductRelationUpdateReq {
+  int64   	Id        = 1;
+  int64   	FlashPromotionId     = 2;
+  int64   	FlashPromotionSessionId = 3;
+  int64   	ProductId               = 4;
+  int64 	FlashPromotionPrice     = 5;
+  int64   	FlashPromotionCount     = 6;
+  int64   	FlashPromotionLimit     = 7;
+  int64   	Sort                   = 8;
+}
+
+message FlashPromotionProductRelationUpdateResp {
+  string pong = 1;
+}
+
+message FlashPromotionProductRelationDeleteReq {
+  int64 id = 1;
+}
+
+message FlashPromotionProductRelationDeleteResp {
+  string pong = 1;
+}
+
+
+message FlashPromotionSessionAddReq {
+  string    	Name    = 2;
+  string    	StartTime  = 3;
+  string    	EndTime    = 4;
+  int64     	Status     = 5;
+  string 	CreateTime = 6;
+}
+
+message FlashPromotionSessionAddResp {
+  string pong = 1;
+}
+
+message FlashPromotionSessionListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message FlashPromotionSessionListData{
+  int64     	Id    = 1;
+  string    	Name    = 2;
+  string    	StartTime  = 3;
+  string    	EndTime    = 4;
+  int64     	Status     = 5;
+  string 	CreateTime = 6;
+
+}
+
+message FlashPromotionSessionListResp {
+  int64 total = 1;
+  repeated  FlashPromotionSessionListData list = 2;
+}
+
+message FlashPromotionSessionUpdateReq {
+  int64     	Id    = 1;
+  string    	Name    = 2;
+  string    	StartTime  = 3;
+  string    	EndTime    = 4;
+  int64     	Status     = 5;
+  string 	CreateTime = 6;
+}
+
+message FlashPromotionSessionUpdateResp {
+  string pong = 1;
+}
+
+message FlashPromotionSessionDeleteReq {
+  int64 id = 1;
+}
+
+message FlashPromotionSessionDeleteResp {
+  string pong = 1;
+}
+
+
+message HomeAdvertiseAddReq {
+  string    	Name       = 2;
+  int64     	Type       = 3;
+  string    	Pic        = 4;
+  string 	StartTime  = 5;
+  string 	EndTime    = 6;
+  int64     	Status     = 7;
+  int64     	ClickCount = 8;
+  int64     	OrderCount = 9;
+  string    	Url        = 10;
+  string    	Note       = 11;
+  int64     	Sort       = 12;
+}
+
+message HomeAdvertiseAddResp {
+  string pong = 1;
+}
+
+message HomeAdvertiseListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message HomeAdvertiseListData{
+  int64     	Id         = 1;
+  string    	Name       = 2;
+  int64     	Type       = 3;
+  string    	Pic        = 4;
+  string 	StartTime  = 5;
+  string 	EndTime    = 6;
+  int64     	Status     = 7;
+  int64     	ClickCount = 8;
+  int64     	OrderCount = 9;
+  string    	Url        = 10;
+  string    	Note       = 11;
+  int64     	Sort       = 12;
+
+}
+
+message HomeAdvertiseListResp {
+  int64 total = 1;
+  repeated  HomeAdvertiseListData list = 2;
+}
+
+message HomeAdvertiseUpdateReq {
+  int64     	Id         = 1;
+  string    	Name       = 2;
+  int64     	Type       = 3;
+  string    	Pic        = 4;
+  string 	StartTime  = 5;
+  string 	EndTime    = 6;
+  int64     	Status     = 7;
+  int64     	ClickCount = 8;
+  int64     	OrderCount = 9;
+  string    	Url        = 10;
+  string    	Note       = 11;
+  int64     	Sort       = 12;
+}
+
+message HomeAdvertiseUpdateResp {
+  string pong = 1;
+}
+
+message HomeAdvertiseDeleteReq {
+  int64 id = 1;
+}
+
+message HomeAdvertiseDeleteResp {
+  string pong = 1;
+}
+
+
+message HomeBrandAddReq {
+  int64 	BrandId   = 2;
+  string	BrandName   = 3;
+  int64 	RecommendStatus = 4;
+  int64 	Sort          = 5;
+}
+
+message HomeBrandAddResp {
+  string pong = 1;
+}
+
+message HomeBrandListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message HomeBrandListData{
+  int64 	Id      = 1;
+  int64 	BrandId   = 2;
+  string	BrandName   = 3;
+  int64 	RecommendStatus = 4;
+  int64 	Sort          = 5;
+
+}
+
+message HomeBrandListResp {
+  int64 total = 1;
+  repeated  HomeBrandListData list = 2;
+}
+
+message HomeBrandUpdateReq {
+  int64 	Id      = 1;
+  int64 	BrandId   = 2;
+  string	BrandName   = 3;
+  int64 	RecommendStatus = 4;
+  int64 	Sort          = 5;
+}
+
+message HomeBrandUpdateResp {
+  string pong = 1;
+}
+
+message HomeBrandDeleteReq {
+  int64 id = 1;
+}
+
+message HomeBrandDeleteResp {
+  string pong = 1;
+}
+
+
+message HomeNewProductAddReq {
+  int64  	ProductId      = 2;
+  string 	ProductName    = 3;
+  int64  	RecommendStatus  = 4;
+  int64  	Sort             = 5;
+}
+
+message HomeNewProductAddResp {
+  string pong = 1;
+}
+
+message HomeNewProductListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message HomeNewProductListData{
+  int64  	Id          = 1;
+  int64  	ProductId      = 2;
+  string 	ProductName    = 3;
+  int64  	RecommendStatus  = 4;
+  int64  	Sort             = 5;
+
+}
+
+message HomeNewProductListResp {
+  int64 total = 1;
+  repeated  HomeNewProductListData list = 2;
+}
+
+message HomeNewProductUpdateReq {
+  int64  	Id          = 1;
+  int64  	ProductId      = 2;
+  string 	ProductName    = 3;
+  int64  	RecommendStatus  = 4;
+  int64  	Sort             = 5;
+}
+
+message HomeNewProductUpdateResp {
+  string pong = 1;
+}
+
+message HomeNewProductDeleteReq {
+  int64 id = 1;
+}
+
+message HomeNewProductDeleteResp {
+  string pong = 1;
+}
+
+
+message HomeRecommendProductAddReq {
+  int64 	ProductId    = 2;
+  string	ProductName      = 3;
+  int64 	RecommendStatus  = 4;
+  int64 	Sort           = 5;
+}
+
+message HomeRecommendProductAddResp {
+  string pong = 1;
+}
+
+message HomeRecommendProductListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message HomeRecommendProductListData{
+  int64 	Id           = 1;
+  int64 	ProductId    = 2;
+  string	ProductName      = 3;
+  int64 	RecommendStatus  = 4;
+  int64 	Sort           = 5;
+
+}
+
+message HomeRecommendProductListResp {
+  int64 total = 1;
+  repeated  HomeRecommendProductListData list = 2;
+}
+
+message HomeRecommendProductUpdateReq {
+  int64 	Id           = 1;
+  int64 	ProductId    = 2;
+  string	ProductName      = 3;
+  int64 	RecommendStatus  = 4;
+  int64 	Sort           = 5;
+}
+
+message HomeRecommendProductUpdateResp {
+  string pong = 1;
+}
+
+message HomeRecommendProductDeleteReq {
+  int64 id = 1;
+}
+
+message HomeRecommendProductDeleteResp {
+  string pong = 1;
+}
+
+
+message HomeRecommendSubjectAddReq {
+  int64  	SubjectId     = 2;
+  string 	SubjectName      = 3;
+  int64  	RecommendStatus  = 4;
+  int64  	Sort           = 5;
+}
+
+message HomeRecommendSubjectAddResp {
+  string pong = 1;
+}
+
+message HomeRecommendSubjectListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message HomeRecommendSubjectListData{
+  int64  	Id     = 1;
+  int64  	SubjectId     = 2;
+  string 	SubjectName      = 3;
+  int64  	RecommendStatus  = 4;
+  int64  	Sort           = 5;
+
+}
+
+message HomeRecommendSubjectListResp {
+  int64 total = 1;
+  repeated  HomeRecommendSubjectListData list = 2;
+}
+
+message HomeRecommendSubjectUpdateReq {
+  int64  	Id     = 1;
+  int64  	SubjectId     = 2;
+  string 	SubjectName      = 3;
+  int64  	RecommendStatus  = 4;
+  int64  	Sort           = 5;
+}
+
+message HomeRecommendSubjectUpdateResp {
+  string pong = 1;
+}
+
+message HomeRecommendSubjectDeleteReq {
+  int64 id = 1;
+}
+
+message HomeRecommendSubjectDeleteResp {
+  string pong = 1;
+}
+
 service Sms {
 
   rpc CouponAdd(CouponAddReq) returns(CouponAddResp);
   rpc CouponList(CouponListReq) returns(CouponListResp);
   rpc CouponUpdate(CouponUpdateReq) returns(CouponUpdateResp);
   rpc CouponDelete(CouponDeleteReq) returns(CouponDeleteResp);
+
+  rpc CouponHistoryAdd(CouponHistoryAddReq) returns(CouponHistoryAddResp);
+  rpc CouponHistoryList(CouponHistoryListReq) returns(CouponHistoryListResp);
+  rpc CouponHistoryUpdate(CouponHistoryUpdateReq) returns(CouponHistoryUpdateResp);
+  rpc CouponHistoryDelete(CouponHistoryDeleteReq) returns(CouponHistoryDeleteResp);
+
+  rpc CouponProductCategoryRelationAdd(CouponProductCategoryRelationAddReq) returns(CouponProductCategoryRelationAddResp);
+  rpc CouponProductCategoryRelationList(CouponProductCategoryRelationListReq) returns(CouponProductCategoryRelationListResp);
+  rpc CouponProductCategoryRelationUpdate(CouponProductCategoryRelationUpdateReq) returns(CouponProductCategoryRelationUpdateResp);
+  rpc CouponProductCategoryRelationDelete(CouponProductCategoryRelationDeleteReq) returns(CouponProductCategoryRelationDeleteResp);
+
+  rpc CouponProductRelationAdd(CouponProductRelationAddReq) returns(CouponProductRelationAddResp);
+  rpc CouponProductRelationList(CouponProductRelationListReq) returns(CouponProductRelationListResp);
+  rpc CouponProductRelationUpdate(CouponProductRelationUpdateReq) returns(CouponProductRelationUpdateResp);
+  rpc CouponProductRelationDelete(CouponProductRelationDeleteReq) returns(CouponProductRelationDeleteResp);
+
+  rpc FlashPromotionLogAdd(FlashPromotionLogAddReq) returns(FlashPromotionLogAddResp);
+  rpc FlashPromotionLogList(FlashPromotionLogListReq) returns(FlashPromotionLogListResp);
+  rpc FlashPromotionLogUpdate(FlashPromotionLogUpdateReq) returns(FlashPromotionLogUpdateResp);
+  rpc FlashPromotionLogDelete(FlashPromotionLogDeleteReq) returns(FlashPromotionLogDeleteResp);
+
+  rpc FlashPromotionAdd(FlashPromotionAddReq) returns(FlashPromotionAddResp);
+  rpc FlashPromotionList(FlashPromotionListReq) returns(FlashPromotionListResp);
+  rpc FlashPromotionUpdate(FlashPromotionUpdateReq) returns(FlashPromotionUpdateResp);
+  rpc FlashPromotionDelete(FlashPromotionDeleteReq) returns(FlashPromotionDeleteResp);
+
+  rpc FlashPromotionProductRelationAdd(FlashPromotionProductRelationAddReq) returns(FlashPromotionProductRelationAddResp);
+  rpc FlashPromotionProductRelationList(FlashPromotionProductRelationListReq) returns(FlashPromotionProductRelationListResp);
+  rpc FlashPromotionProductRelationUpdate(FlashPromotionProductRelationUpdateReq) returns(FlashPromotionProductRelationUpdateResp);
+  rpc FlashPromotionProductRelationDelete(FlashPromotionProductRelationDeleteReq) returns(FlashPromotionProductRelationDeleteResp);
+
+  rpc FlashPromotionSessionAdd(FlashPromotionSessionAddReq) returns(FlashPromotionSessionAddResp);
+  rpc FlashPromotionSessionList(FlashPromotionSessionListReq) returns(FlashPromotionSessionListResp);
+  rpc FlashPromotionSessionUpdate(FlashPromotionSessionUpdateReq) returns(FlashPromotionSessionUpdateResp);
+  rpc FlashPromotionSessionDelete(FlashPromotionSessionDeleteReq) returns(FlashPromotionSessionDeleteResp);
+
+  rpc HomeAdvertiseAdd(HomeAdvertiseAddReq) returns(HomeAdvertiseAddResp);
+  rpc HomeAdvertiseList(HomeAdvertiseListReq) returns(HomeAdvertiseListResp);
+  rpc HomeAdvertiseUpdate(HomeAdvertiseUpdateReq) returns(HomeAdvertiseUpdateResp);
+  rpc HomeAdvertiseDelete(HomeAdvertiseDeleteReq) returns(HomeAdvertiseDeleteResp);
+
+  rpc HomeBrandAdd(HomeBrandAddReq) returns(HomeBrandAddResp);
+  rpc HomeBrandList(HomeBrandListReq) returns(HomeBrandListResp);
+  rpc HomeBrandUpdate(HomeBrandUpdateReq) returns(HomeBrandUpdateResp);
+  rpc HomeBrandDelete(HomeBrandDeleteReq) returns(HomeBrandDeleteResp);
+
+  rpc HomeNewProductAdd(HomeNewProductAddReq) returns(HomeNewProductAddResp);
+  rpc HomeNewProductList(HomeNewProductListReq) returns(HomeNewProductListResp);
+  rpc HomeNewProductUpdate(HomeNewProductUpdateReq) returns(HomeNewProductUpdateResp);
+  rpc HomeNewProductDelete(HomeNewProductDeleteReq) returns(HomeNewProductDeleteResp);
+
+  rpc HomeRecommendProductAdd(HomeRecommendProductAddReq) returns(HomeRecommendProductAddResp);
+  rpc HomeRecommendProductList(HomeRecommendProductListReq) returns(HomeRecommendProductListResp);
+  rpc HomeRecommendProductUpdate(HomeRecommendProductUpdateReq) returns(HomeRecommendProductUpdateResp);
+  rpc HomeRecommendProductDelete(HomeRecommendProductDeleteReq) returns(HomeRecommendProductDeleteResp);
+
+  rpc HomeRecommendSubjectAdd(HomeRecommendSubjectAddReq) returns(HomeRecommendSubjectAddResp);
+  rpc HomeRecommendSubjectList(HomeRecommendSubjectListReq) returns(HomeRecommendSubjectListResp);
+  rpc HomeRecommendSubjectUpdate(HomeRecommendSubjectUpdateReq) returns(HomeRecommendSubjectUpdateResp);
+  rpc HomeRecommendSubjectDelete(HomeRecommendSubjectDeleteReq) returns(HomeRecommendSubjectDeleteResp);
 
 }

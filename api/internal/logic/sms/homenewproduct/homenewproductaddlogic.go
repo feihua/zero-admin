@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductReq) (*types.AddHomeNewProductResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sms.HomeNewProductAdd(l.ctx, &smsclient.HomeNewProductAddReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddHomeNewProductResp{}, nil
 }

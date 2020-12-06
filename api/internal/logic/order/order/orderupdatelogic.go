@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewOrderUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderU
 }
 
 func (l *OrderUpdateLogic) OrderUpdate(req types.UpdateOrderReq) (*types.UpdateOrderResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Oms.OrderUpdate(l.ctx, &omsclient.OrderUpdateReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateOrderResp{}, nil
 }

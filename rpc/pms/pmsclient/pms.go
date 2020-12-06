@@ -14,20 +14,242 @@ import (
 )
 
 type (
-	ProductDeleteReq  = pms.ProductDeleteReq
-	ProductDeleteResp = pms.ProductDeleteResp
-	ProductAddReq     = pms.ProductAddReq
-	ProductAddResp    = pms.ProductAddResp
-	ProductListReq    = pms.ProductListReq
-	ProductListResp   = pms.ProductListResp
-	ProductUpdateReq  = pms.ProductUpdateReq
-	ProductUpdateResp = pms.ProductUpdateResp
+	BrandUpdateResp                            = pms.BrandUpdateResp
+	AlbumPicAddResp                            = pms.AlbumPicAddResp
+	CommentListResp                            = pms.CommentListResp
+	CommentReplayListReq                       = pms.CommentReplayListReq
+	MemberPriceListData                        = pms.MemberPriceListData
+	ProductAttributeCategoryListResp           = pms.ProductAttributeCategoryListResp
+	ProductAttributeCategoryUpdateReq          = pms.ProductAttributeCategoryUpdateReq
+	ProductAttributeListReq                    = pms.ProductAttributeListReq
+	ProductAttributeValueListData              = pms.ProductAttributeValueListData
+	BrandListReq                               = pms.BrandListReq
+	ProductOperateLogUpdateResp                = pms.ProductOperateLogUpdateResp
+	SkuStockListReq                            = pms.SkuStockListReq
+	ProductFullReductionAddReq                 = pms.ProductFullReductionAddReq
+	MemberPriceListReq                         = pms.MemberPriceListReq
+	ProductAttributeValueDeleteReq             = pms.ProductAttributeValueDeleteReq
+	BrandAddReq                                = pms.BrandAddReq
+	ProductAttributeCategoryAddResp            = pms.ProductAttributeCategoryAddResp
+	ProductCategoryAttributeRelationListReq    = pms.ProductCategoryAttributeRelationListReq
+	AlbumDeleteReq                             = pms.AlbumDeleteReq
+	CommentReplayUpdateResp                    = pms.CommentReplayUpdateResp
+	CommentReplayDeleteResp                    = pms.CommentReplayDeleteResp
+	FeightTemplateAddReq                       = pms.FeightTemplateAddReq
+	FeightTemplateUpdateResp                   = pms.FeightTemplateUpdateResp
+	ProductOperateLogAddResp                   = pms.ProductOperateLogAddResp
+	CommentReplayListResp                      = pms.CommentReplayListResp
+	AlbumPicListReq                            = pms.AlbumPicListReq
+	ProductFullReductionDeleteReq              = pms.ProductFullReductionDeleteReq
+	ProductOperateLogDeleteResp                = pms.ProductOperateLogDeleteResp
+	ProductListData                            = pms.ProductListData
+	AlbumPicDeleteResp                         = pms.AlbumPicDeleteResp
+	BrandListData                              = pms.BrandListData
+	CommentReplayAddResp                       = pms.CommentReplayAddResp
+	ProductAttributeListData                   = pms.ProductAttributeListData
+	ProductCategoryAttributeRelationAddReq     = pms.ProductCategoryAttributeRelationAddReq
+	ProductFullReductionAddResp                = pms.ProductFullReductionAddResp
+	ProductOperateLogAddReq                    = pms.ProductOperateLogAddReq
+	ProductDeleteResp                          = pms.ProductDeleteResp
+	SkuStockAddResp                            = pms.SkuStockAddResp
+	AlbumPicListData                           = pms.AlbumPicListData
+	MemberPriceUpdateReq                       = pms.MemberPriceUpdateReq
+	ProductAttributeAddResp                    = pms.ProductAttributeAddResp
+	ProductCategoryListReq                     = pms.ProductCategoryListReq
+	AlbumUpdateReq                             = pms.AlbumUpdateReq
+	MemberPriceAddResp                         = pms.MemberPriceAddResp
+	ProductAttributeCategoryDeleteResp         = pms.ProductAttributeCategoryDeleteResp
+	ProductAttributeUpdateReq                  = pms.ProductAttributeUpdateReq
+	ProductCategoryDeleteResp                  = pms.ProductCategoryDeleteResp
+	ProductFullReductionListData               = pms.ProductFullReductionListData
+	ProductOperateLogDeleteReq                 = pms.ProductOperateLogDeleteReq
+	SkuStockListData                           = pms.SkuStockListData
+	ProductUpdateResp                          = pms.ProductUpdateResp
+	ProductLadderAddReq                        = pms.ProductLadderAddReq
+	FeightTemplateUpdateReq                    = pms.FeightTemplateUpdateReq
+	AlbumPicUpdateResp                         = pms.AlbumPicUpdateResp
+	ProductAttributeListResp                   = pms.ProductAttributeListResp
+	ProductCategoryAddResp                     = pms.ProductCategoryAddResp
+	ProductCategoryListResp                    = pms.ProductCategoryListResp
+	SkuStockDeleteResp                         = pms.SkuStockDeleteResp
+	AlbumPicListResp                           = pms.AlbumPicListResp
+	MemberPriceAddReq                          = pms.MemberPriceAddReq
+	ProductAttributeValueListReq               = pms.ProductAttributeValueListReq
+	ProductLadderUpdateReq                     = pms.ProductLadderUpdateReq
+	SkuStockDeleteReq                          = pms.SkuStockDeleteReq
+	CommentUpdateResp                          = pms.CommentUpdateResp
+	AlbumPicAddReq                             = pms.AlbumPicAddReq
+	ProductAttributeCategoryUpdateResp         = pms.ProductAttributeCategoryUpdateResp
+	ProductCategoryAttributeRelationListResp   = pms.ProductCategoryAttributeRelationListResp
+	ProductCategoryAttributeRelationUpdateResp = pms.ProductCategoryAttributeRelationUpdateResp
+	ProductOperateLogListResp                  = pms.ProductOperateLogListResp
+	ProductAddResp                             = pms.ProductAddResp
+	ProductOperateLogListData                  = pms.ProductOperateLogListData
+	ProductVertifyRecordAddReq                 = pms.ProductVertifyRecordAddReq
+	ProductLadderDeleteReq                     = pms.ProductLadderDeleteReq
+	AlbumAddResp                               = pms.AlbumAddResp
+	CommentAddReq                              = pms.CommentAddReq
+	CommentListData                            = pms.CommentListData
+	CommentUpdateReq                           = pms.CommentUpdateReq
+	ProductAttributeAddReq                     = pms.ProductAttributeAddReq
+	ProductAttributeValueUpdateResp            = pms.ProductAttributeValueUpdateResp
+	ProductCategoryAttributeRelationListData   = pms.ProductCategoryAttributeRelationListData
+	ProductDeleteReq                           = pms.ProductDeleteReq
+	SkuStockUpdateReq                          = pms.SkuStockUpdateReq
+	ProductCategoryAttributeRelationUpdateReq  = pms.ProductCategoryAttributeRelationUpdateReq
+	CommentDeleteResp                          = pms.CommentDeleteResp
+	ProductAttributeCategoryDeleteReq          = pms.ProductAttributeCategoryDeleteReq
+	ProductAttributeDeleteReq                  = pms.ProductAttributeDeleteReq
+	ProductAttributeValueListResp              = pms.ProductAttributeValueListResp
+	ProductAttributeValueDeleteResp            = pms.ProductAttributeValueDeleteResp
+	ProductCategoryAttributeRelationDeleteReq  = pms.ProductCategoryAttributeRelationDeleteReq
+	ProductCategoryUpdateResp                  = pms.ProductCategoryUpdateResp
+	CommentAddResp                             = pms.CommentAddResp
+	ProductVertifyRecordUpdateResp             = pms.ProductVertifyRecordUpdateResp
+	AlbumListReq                               = pms.AlbumListReq
+	AlbumListResp                              = pms.AlbumListResp
+	CommentReplayAddReq                        = pms.CommentReplayAddReq
+	ProductAttributeValueUpdateReq             = pms.ProductAttributeValueUpdateReq
+	ProductAddReq                              = pms.ProductAddReq
+	ProductListResp                            = pms.ProductListResp
+	AlbumPicDeleteReq                          = pms.AlbumPicDeleteReq
+	ProductCategoryUpdateReq                   = pms.ProductCategoryUpdateReq
+	ProductCategoryDeleteReq                   = pms.ProductCategoryDeleteReq
+	ProductListReq                             = pms.ProductListReq
+	CommentReplayListData                      = pms.CommentReplayListData
+	FeightTemplateAddResp                      = pms.FeightTemplateAddResp
+	ProductAttributeCategoryListReq            = pms.ProductAttributeCategoryListReq
+	ProductAttributeValueAddReq                = pms.ProductAttributeValueAddReq
+	ProductLadderDeleteResp                    = pms.ProductLadderDeleteResp
+	CommentListReq                             = pms.CommentListReq
+	ProductAttributeCategoryListData           = pms.ProductAttributeCategoryListData
+	ProductCategoryAddReq                      = pms.ProductCategoryAddReq
+	ProductVertifyRecordListResp               = pms.ProductVertifyRecordListResp
+	AlbumAddReq                                = pms.AlbumAddReq
+	ProductAttributeDeleteResp                 = pms.ProductAttributeDeleteResp
+	ProductCategoryAttributeRelationDeleteResp = pms.ProductCategoryAttributeRelationDeleteResp
+	ProductFullReductionUpdateReq              = pms.ProductFullReductionUpdateReq
+	ProductFullReductionUpdateResp             = pms.ProductFullReductionUpdateResp
+	MemberPriceDeleteResp                      = pms.MemberPriceDeleteResp
+	ProductOperateLogUpdateReq                 = pms.ProductOperateLogUpdateReq
+	ProductAttributeUpdateResp                 = pms.ProductAttributeUpdateResp
+	BrandListResp                              = pms.BrandListResp
+	CommentDeleteReq                           = pms.CommentDeleteReq
+	FeightTemplateDeleteResp                   = pms.FeightTemplateDeleteResp
+	MemberPriceListResp                        = pms.MemberPriceListResp
+	ProductCategoryListData                    = pms.ProductCategoryListData
+	ProductLadderListResp                      = pms.ProductLadderListResp
+	ProductVertifyRecordAddResp                = pms.ProductVertifyRecordAddResp
+	ProductUpdateReq                           = pms.ProductUpdateReq
+	ProductVertifyRecordUpdateReq              = pms.ProductVertifyRecordUpdateReq
+	ProductFullReductionDeleteResp             = pms.ProductFullReductionDeleteResp
+	FeightTemplateListReq                      = pms.FeightTemplateListReq
+	FeightTemplateListResp                     = pms.FeightTemplateListResp
+	AlbumListData                              = pms.AlbumListData
+	MemberPriceDeleteReq                       = pms.MemberPriceDeleteReq
+	ProductAttributeValueAddResp               = pms.ProductAttributeValueAddResp
+	ProductLadderAddResp                       = pms.ProductLadderAddResp
+	BrandDeleteResp                            = pms.BrandDeleteResp
+	ProductVertifyRecordListReq                = pms.ProductVertifyRecordListReq
+	MemberPriceUpdateResp                      = pms.MemberPriceUpdateResp
+	AlbumPicUpdateReq                          = pms.AlbumPicUpdateReq
+	BrandAddResp                               = pms.BrandAddResp
+	BrandUpdateReq                             = pms.BrandUpdateReq
+	CommentReplayUpdateReq                     = pms.CommentReplayUpdateReq
+	ProductAttributeCategoryAddReq             = pms.ProductAttributeCategoryAddReq
+	ProductFullReductionListResp               = pms.ProductFullReductionListResp
+	ProductLadderUpdateResp                    = pms.ProductLadderUpdateResp
+	AlbumUpdateResp                            = pms.AlbumUpdateResp
+	SkuStockAddReq                             = pms.SkuStockAddReq
+	ProductVertifyRecordDeleteReq              = pms.ProductVertifyRecordDeleteReq
+	ProductCategoryAttributeRelationAddResp    = pms.ProductCategoryAttributeRelationAddResp
+	ProductFullReductionListReq                = pms.ProductFullReductionListReq
+	ProductLadderListReq                       = pms.ProductLadderListReq
+	ProductLadderListData                      = pms.ProductLadderListData
+	ProductVertifyRecordDeleteResp             = pms.ProductVertifyRecordDeleteResp
+	SkuStockUpdateResp                         = pms.SkuStockUpdateResp
+	BrandDeleteReq                             = pms.BrandDeleteReq
+	ProductVertifyRecordListData               = pms.ProductVertifyRecordListData
+	FeightTemplateListData                     = pms.FeightTemplateListData
+	CommentReplayDeleteReq                     = pms.CommentReplayDeleteReq
+	FeightTemplateDeleteReq                    = pms.FeightTemplateDeleteReq
+	ProductOperateLogListReq                   = pms.ProductOperateLogListReq
+	SkuStockListResp                           = pms.SkuStockListResp
+	AlbumDeleteResp                            = pms.AlbumDeleteResp
 
 	Pms interface {
 		ProductAdd(ctx context.Context, in *ProductAddReq) (*ProductAddResp, error)
 		ProductList(ctx context.Context, in *ProductListReq) (*ProductListResp, error)
 		ProductUpdate(ctx context.Context, in *ProductUpdateReq) (*ProductUpdateResp, error)
 		ProductDelete(ctx context.Context, in *ProductDeleteReq) (*ProductDeleteResp, error)
+		AlbumAdd(ctx context.Context, in *AlbumAddReq) (*AlbumAddResp, error)
+		AlbumList(ctx context.Context, in *AlbumListReq) (*AlbumListResp, error)
+		AlbumUpdate(ctx context.Context, in *AlbumUpdateReq) (*AlbumUpdateResp, error)
+		AlbumDelete(ctx context.Context, in *AlbumDeleteReq) (*AlbumDeleteResp, error)
+		AlbumPicAdd(ctx context.Context, in *AlbumPicAddReq) (*AlbumPicAddResp, error)
+		AlbumPicList(ctx context.Context, in *AlbumPicListReq) (*AlbumPicListResp, error)
+		AlbumPicUpdate(ctx context.Context, in *AlbumPicUpdateReq) (*AlbumPicUpdateResp, error)
+		AlbumPicDelete(ctx context.Context, in *AlbumPicDeleteReq) (*AlbumPicDeleteResp, error)
+		BrandAdd(ctx context.Context, in *BrandAddReq) (*BrandAddResp, error)
+		BrandList(ctx context.Context, in *BrandListReq) (*BrandListResp, error)
+		BrandUpdate(ctx context.Context, in *BrandUpdateReq) (*BrandUpdateResp, error)
+		BrandDelete(ctx context.Context, in *BrandDeleteReq) (*BrandDeleteResp, error)
+		CommentAdd(ctx context.Context, in *CommentAddReq) (*CommentAddResp, error)
+		CommentList(ctx context.Context, in *CommentListReq) (*CommentListResp, error)
+		CommentUpdate(ctx context.Context, in *CommentUpdateReq) (*CommentUpdateResp, error)
+		CommentDelete(ctx context.Context, in *CommentDeleteReq) (*CommentDeleteResp, error)
+		CommentReplayAdd(ctx context.Context, in *CommentReplayAddReq) (*CommentReplayAddResp, error)
+		CommentReplayList(ctx context.Context, in *CommentReplayListReq) (*CommentReplayListResp, error)
+		CommentReplayUpdate(ctx context.Context, in *CommentReplayUpdateReq) (*CommentReplayUpdateResp, error)
+		CommentReplayDelete(ctx context.Context, in *CommentReplayDeleteReq) (*CommentReplayDeleteResp, error)
+		FeightTemplateAdd(ctx context.Context, in *FeightTemplateAddReq) (*FeightTemplateAddResp, error)
+		FeightTemplateList(ctx context.Context, in *FeightTemplateListReq) (*FeightTemplateListResp, error)
+		FeightTemplateUpdate(ctx context.Context, in *FeightTemplateUpdateReq) (*FeightTemplateUpdateResp, error)
+		FeightTemplateDelete(ctx context.Context, in *FeightTemplateDeleteReq) (*FeightTemplateDeleteResp, error)
+		MemberPriceAdd(ctx context.Context, in *MemberPriceAddReq) (*MemberPriceAddResp, error)
+		MemberPriceList(ctx context.Context, in *MemberPriceListReq) (*MemberPriceListResp, error)
+		MemberPriceUpdate(ctx context.Context, in *MemberPriceUpdateReq) (*MemberPriceUpdateResp, error)
+		MemberPriceDelete(ctx context.Context, in *MemberPriceDeleteReq) (*MemberPriceDeleteResp, error)
+		ProductAttributeCategoryAdd(ctx context.Context, in *ProductAttributeCategoryAddReq) (*ProductAttributeCategoryAddResp, error)
+		ProductAttributeCategoryList(ctx context.Context, in *ProductAttributeCategoryListReq) (*ProductAttributeCategoryListResp, error)
+		ProductAttributeCategoryUpdate(ctx context.Context, in *ProductAttributeCategoryUpdateReq) (*ProductAttributeCategoryUpdateResp, error)
+		ProductAttributeCategoryDelete(ctx context.Context, in *ProductAttributeCategoryDeleteReq) (*ProductAttributeCategoryDeleteResp, error)
+		ProductAttributeAdd(ctx context.Context, in *ProductAttributeAddReq) (*ProductAttributeAddResp, error)
+		ProductAttributeList(ctx context.Context, in *ProductAttributeListReq) (*ProductAttributeListResp, error)
+		ProductAttributeUpdate(ctx context.Context, in *ProductAttributeUpdateReq) (*ProductAttributeUpdateResp, error)
+		ProductAttributeDelete(ctx context.Context, in *ProductAttributeDeleteReq) (*ProductAttributeDeleteResp, error)
+		ProductAttributeValueAdd(ctx context.Context, in *ProductAttributeValueAddReq) (*ProductAttributeValueAddResp, error)
+		ProductAttributeValueList(ctx context.Context, in *ProductAttributeValueListReq) (*ProductAttributeValueListResp, error)
+		ProductAttributeValueUpdate(ctx context.Context, in *ProductAttributeValueUpdateReq) (*ProductAttributeValueUpdateResp, error)
+		ProductAttributeValueDelete(ctx context.Context, in *ProductAttributeValueDeleteReq) (*ProductAttributeValueDeleteResp, error)
+		ProductCategoryAttributeRelationAdd(ctx context.Context, in *ProductCategoryAttributeRelationAddReq) (*ProductCategoryAttributeRelationAddResp, error)
+		ProductCategoryAttributeRelationList(ctx context.Context, in *ProductCategoryAttributeRelationListReq) (*ProductCategoryAttributeRelationListResp, error)
+		ProductCategoryAttributeRelationUpdate(ctx context.Context, in *ProductCategoryAttributeRelationUpdateReq) (*ProductCategoryAttributeRelationUpdateResp, error)
+		ProductCategoryAttributeRelationDelete(ctx context.Context, in *ProductCategoryAttributeRelationDeleteReq) (*ProductCategoryAttributeRelationDeleteResp, error)
+		ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq) (*ProductCategoryAddResp, error)
+		ProductCategoryList(ctx context.Context, in *ProductCategoryListReq) (*ProductCategoryListResp, error)
+		ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error)
+		ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error)
+		ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq) (*ProductFullReductionAddResp, error)
+		ProductFullReductionList(ctx context.Context, in *ProductFullReductionListReq) (*ProductFullReductionListResp, error)
+		ProductFullReductionUpdate(ctx context.Context, in *ProductFullReductionUpdateReq) (*ProductFullReductionUpdateResp, error)
+		ProductFullReductionDelete(ctx context.Context, in *ProductFullReductionDeleteReq) (*ProductFullReductionDeleteResp, error)
+		ProductLadderAdd(ctx context.Context, in *ProductLadderAddReq) (*ProductLadderAddResp, error)
+		ProductLadderList(ctx context.Context, in *ProductLadderListReq) (*ProductLadderListResp, error)
+		ProductLadderUpdate(ctx context.Context, in *ProductLadderUpdateReq) (*ProductLadderUpdateResp, error)
+		ProductLadderDelete(ctx context.Context, in *ProductLadderDeleteReq) (*ProductLadderDeleteResp, error)
+		ProductOperateLogAdd(ctx context.Context, in *ProductOperateLogAddReq) (*ProductOperateLogAddResp, error)
+		ProductOperateLogList(ctx context.Context, in *ProductOperateLogListReq) (*ProductOperateLogListResp, error)
+		ProductOperateLogUpdate(ctx context.Context, in *ProductOperateLogUpdateReq) (*ProductOperateLogUpdateResp, error)
+		ProductOperateLogDelete(ctx context.Context, in *ProductOperateLogDeleteReq) (*ProductOperateLogDeleteResp, error)
+		ProductVertifyRecordAdd(ctx context.Context, in *ProductVertifyRecordAddReq) (*ProductVertifyRecordAddResp, error)
+		ProductVertifyRecordList(ctx context.Context, in *ProductVertifyRecordListReq) (*ProductVertifyRecordListResp, error)
+		ProductVertifyRecordUpdate(ctx context.Context, in *ProductVertifyRecordUpdateReq) (*ProductVertifyRecordUpdateResp, error)
+		ProductVertifyRecordDelete(ctx context.Context, in *ProductVertifyRecordDeleteReq) (*ProductVertifyRecordDeleteResp, error)
+		SkuStockAdd(ctx context.Context, in *SkuStockAddReq) (*SkuStockAddResp, error)
+		SkuStockList(ctx context.Context, in *SkuStockListReq) (*SkuStockListResp, error)
+		SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq) (*SkuStockUpdateResp, error)
+		SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq) (*SkuStockDeleteResp, error)
 	}
 
 	defaultPms struct {
@@ -59,4 +281,344 @@ func (m *defaultPms) ProductUpdate(ctx context.Context, in *ProductUpdateReq) (*
 func (m *defaultPms) ProductDelete(ctx context.Context, in *ProductDeleteReq) (*ProductDeleteResp, error) {
 	client := pms.NewPmsClient(m.cli.Conn())
 	return client.ProductDelete(ctx, in)
+}
+
+func (m *defaultPms) AlbumAdd(ctx context.Context, in *AlbumAddReq) (*AlbumAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.AlbumAdd(ctx, in)
+}
+
+func (m *defaultPms) AlbumList(ctx context.Context, in *AlbumListReq) (*AlbumListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.AlbumList(ctx, in)
+}
+
+func (m *defaultPms) AlbumUpdate(ctx context.Context, in *AlbumUpdateReq) (*AlbumUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.AlbumUpdate(ctx, in)
+}
+
+func (m *defaultPms) AlbumDelete(ctx context.Context, in *AlbumDeleteReq) (*AlbumDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.AlbumDelete(ctx, in)
+}
+
+func (m *defaultPms) AlbumPicAdd(ctx context.Context, in *AlbumPicAddReq) (*AlbumPicAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.AlbumPicAdd(ctx, in)
+}
+
+func (m *defaultPms) AlbumPicList(ctx context.Context, in *AlbumPicListReq) (*AlbumPicListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.AlbumPicList(ctx, in)
+}
+
+func (m *defaultPms) AlbumPicUpdate(ctx context.Context, in *AlbumPicUpdateReq) (*AlbumPicUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.AlbumPicUpdate(ctx, in)
+}
+
+func (m *defaultPms) AlbumPicDelete(ctx context.Context, in *AlbumPicDeleteReq) (*AlbumPicDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.AlbumPicDelete(ctx, in)
+}
+
+func (m *defaultPms) BrandAdd(ctx context.Context, in *BrandAddReq) (*BrandAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.BrandAdd(ctx, in)
+}
+
+func (m *defaultPms) BrandList(ctx context.Context, in *BrandListReq) (*BrandListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.BrandList(ctx, in)
+}
+
+func (m *defaultPms) BrandUpdate(ctx context.Context, in *BrandUpdateReq) (*BrandUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.BrandUpdate(ctx, in)
+}
+
+func (m *defaultPms) BrandDelete(ctx context.Context, in *BrandDeleteReq) (*BrandDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.BrandDelete(ctx, in)
+}
+
+func (m *defaultPms) CommentAdd(ctx context.Context, in *CommentAddReq) (*CommentAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.CommentAdd(ctx, in)
+}
+
+func (m *defaultPms) CommentList(ctx context.Context, in *CommentListReq) (*CommentListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.CommentList(ctx, in)
+}
+
+func (m *defaultPms) CommentUpdate(ctx context.Context, in *CommentUpdateReq) (*CommentUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.CommentUpdate(ctx, in)
+}
+
+func (m *defaultPms) CommentDelete(ctx context.Context, in *CommentDeleteReq) (*CommentDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.CommentDelete(ctx, in)
+}
+
+func (m *defaultPms) CommentReplayAdd(ctx context.Context, in *CommentReplayAddReq) (*CommentReplayAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.CommentReplayAdd(ctx, in)
+}
+
+func (m *defaultPms) CommentReplayList(ctx context.Context, in *CommentReplayListReq) (*CommentReplayListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.CommentReplayList(ctx, in)
+}
+
+func (m *defaultPms) CommentReplayUpdate(ctx context.Context, in *CommentReplayUpdateReq) (*CommentReplayUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.CommentReplayUpdate(ctx, in)
+}
+
+func (m *defaultPms) CommentReplayDelete(ctx context.Context, in *CommentReplayDeleteReq) (*CommentReplayDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.CommentReplayDelete(ctx, in)
+}
+
+func (m *defaultPms) FeightTemplateAdd(ctx context.Context, in *FeightTemplateAddReq) (*FeightTemplateAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.FeightTemplateAdd(ctx, in)
+}
+
+func (m *defaultPms) FeightTemplateList(ctx context.Context, in *FeightTemplateListReq) (*FeightTemplateListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.FeightTemplateList(ctx, in)
+}
+
+func (m *defaultPms) FeightTemplateUpdate(ctx context.Context, in *FeightTemplateUpdateReq) (*FeightTemplateUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.FeightTemplateUpdate(ctx, in)
+}
+
+func (m *defaultPms) FeightTemplateDelete(ctx context.Context, in *FeightTemplateDeleteReq) (*FeightTemplateDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.FeightTemplateDelete(ctx, in)
+}
+
+func (m *defaultPms) MemberPriceAdd(ctx context.Context, in *MemberPriceAddReq) (*MemberPriceAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.MemberPriceAdd(ctx, in)
+}
+
+func (m *defaultPms) MemberPriceList(ctx context.Context, in *MemberPriceListReq) (*MemberPriceListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.MemberPriceList(ctx, in)
+}
+
+func (m *defaultPms) MemberPriceUpdate(ctx context.Context, in *MemberPriceUpdateReq) (*MemberPriceUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.MemberPriceUpdate(ctx, in)
+}
+
+func (m *defaultPms) MemberPriceDelete(ctx context.Context, in *MemberPriceDeleteReq) (*MemberPriceDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.MemberPriceDelete(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeCategoryAdd(ctx context.Context, in *ProductAttributeCategoryAddReq) (*ProductAttributeCategoryAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeCategoryAdd(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeCategoryList(ctx context.Context, in *ProductAttributeCategoryListReq) (*ProductAttributeCategoryListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeCategoryList(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeCategoryUpdate(ctx context.Context, in *ProductAttributeCategoryUpdateReq) (*ProductAttributeCategoryUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeCategoryUpdate(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeCategoryDelete(ctx context.Context, in *ProductAttributeCategoryDeleteReq) (*ProductAttributeCategoryDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeCategoryDelete(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeAdd(ctx context.Context, in *ProductAttributeAddReq) (*ProductAttributeAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeAdd(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeList(ctx context.Context, in *ProductAttributeListReq) (*ProductAttributeListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeList(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeUpdate(ctx context.Context, in *ProductAttributeUpdateReq) (*ProductAttributeUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeUpdate(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeDelete(ctx context.Context, in *ProductAttributeDeleteReq) (*ProductAttributeDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeDelete(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeValueAdd(ctx context.Context, in *ProductAttributeValueAddReq) (*ProductAttributeValueAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeValueAdd(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeValueList(ctx context.Context, in *ProductAttributeValueListReq) (*ProductAttributeValueListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeValueList(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeValueUpdate(ctx context.Context, in *ProductAttributeValueUpdateReq) (*ProductAttributeValueUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeValueUpdate(ctx, in)
+}
+
+func (m *defaultPms) ProductAttributeValueDelete(ctx context.Context, in *ProductAttributeValueDeleteReq) (*ProductAttributeValueDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductAttributeValueDelete(ctx, in)
+}
+
+func (m *defaultPms) ProductCategoryAttributeRelationAdd(ctx context.Context, in *ProductCategoryAttributeRelationAddReq) (*ProductCategoryAttributeRelationAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductCategoryAttributeRelationAdd(ctx, in)
+}
+
+func (m *defaultPms) ProductCategoryAttributeRelationList(ctx context.Context, in *ProductCategoryAttributeRelationListReq) (*ProductCategoryAttributeRelationListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductCategoryAttributeRelationList(ctx, in)
+}
+
+func (m *defaultPms) ProductCategoryAttributeRelationUpdate(ctx context.Context, in *ProductCategoryAttributeRelationUpdateReq) (*ProductCategoryAttributeRelationUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductCategoryAttributeRelationUpdate(ctx, in)
+}
+
+func (m *defaultPms) ProductCategoryAttributeRelationDelete(ctx context.Context, in *ProductCategoryAttributeRelationDeleteReq) (*ProductCategoryAttributeRelationDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductCategoryAttributeRelationDelete(ctx, in)
+}
+
+func (m *defaultPms) ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq) (*ProductCategoryAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductCategoryAdd(ctx, in)
+}
+
+func (m *defaultPms) ProductCategoryList(ctx context.Context, in *ProductCategoryListReq) (*ProductCategoryListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductCategoryList(ctx, in)
+}
+
+func (m *defaultPms) ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductCategoryUpdate(ctx, in)
+}
+
+func (m *defaultPms) ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductCategoryDelete(ctx, in)
+}
+
+func (m *defaultPms) ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq) (*ProductFullReductionAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductFullReductionAdd(ctx, in)
+}
+
+func (m *defaultPms) ProductFullReductionList(ctx context.Context, in *ProductFullReductionListReq) (*ProductFullReductionListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductFullReductionList(ctx, in)
+}
+
+func (m *defaultPms) ProductFullReductionUpdate(ctx context.Context, in *ProductFullReductionUpdateReq) (*ProductFullReductionUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductFullReductionUpdate(ctx, in)
+}
+
+func (m *defaultPms) ProductFullReductionDelete(ctx context.Context, in *ProductFullReductionDeleteReq) (*ProductFullReductionDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductFullReductionDelete(ctx, in)
+}
+
+func (m *defaultPms) ProductLadderAdd(ctx context.Context, in *ProductLadderAddReq) (*ProductLadderAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductLadderAdd(ctx, in)
+}
+
+func (m *defaultPms) ProductLadderList(ctx context.Context, in *ProductLadderListReq) (*ProductLadderListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductLadderList(ctx, in)
+}
+
+func (m *defaultPms) ProductLadderUpdate(ctx context.Context, in *ProductLadderUpdateReq) (*ProductLadderUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductLadderUpdate(ctx, in)
+}
+
+func (m *defaultPms) ProductLadderDelete(ctx context.Context, in *ProductLadderDeleteReq) (*ProductLadderDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductLadderDelete(ctx, in)
+}
+
+func (m *defaultPms) ProductOperateLogAdd(ctx context.Context, in *ProductOperateLogAddReq) (*ProductOperateLogAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductOperateLogAdd(ctx, in)
+}
+
+func (m *defaultPms) ProductOperateLogList(ctx context.Context, in *ProductOperateLogListReq) (*ProductOperateLogListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductOperateLogList(ctx, in)
+}
+
+func (m *defaultPms) ProductOperateLogUpdate(ctx context.Context, in *ProductOperateLogUpdateReq) (*ProductOperateLogUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductOperateLogUpdate(ctx, in)
+}
+
+func (m *defaultPms) ProductOperateLogDelete(ctx context.Context, in *ProductOperateLogDeleteReq) (*ProductOperateLogDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductOperateLogDelete(ctx, in)
+}
+
+func (m *defaultPms) ProductVertifyRecordAdd(ctx context.Context, in *ProductVertifyRecordAddReq) (*ProductVertifyRecordAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductVertifyRecordAdd(ctx, in)
+}
+
+func (m *defaultPms) ProductVertifyRecordList(ctx context.Context, in *ProductVertifyRecordListReq) (*ProductVertifyRecordListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductVertifyRecordList(ctx, in)
+}
+
+func (m *defaultPms) ProductVertifyRecordUpdate(ctx context.Context, in *ProductVertifyRecordUpdateReq) (*ProductVertifyRecordUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductVertifyRecordUpdate(ctx, in)
+}
+
+func (m *defaultPms) ProductVertifyRecordDelete(ctx context.Context, in *ProductVertifyRecordDeleteReq) (*ProductVertifyRecordDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.ProductVertifyRecordDelete(ctx, in)
+}
+
+func (m *defaultPms) SkuStockAdd(ctx context.Context, in *SkuStockAddReq) (*SkuStockAddResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.SkuStockAdd(ctx, in)
+}
+
+func (m *defaultPms) SkuStockList(ctx context.Context, in *SkuStockListReq) (*SkuStockListResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.SkuStockList(ctx, in)
+}
+
+func (m *defaultPms) SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq) (*SkuStockUpdateResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.SkuStockUpdate(ctx, in)
+}
+
+func (m *defaultPms) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq) (*SkuStockDeleteResp, error) {
+	client := pms.NewPmsClient(m.cli.Conn())
+	return client.SkuStockDelete(ctx, in)
 }

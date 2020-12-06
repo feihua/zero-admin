@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
+	"go-zero-admin/rpc/oms/omsclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,7 +24,9 @@ func NewCartItemDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Car
 }
 
 func (l *CartItemDeleteLogic) CartItemDelete(req types.DeleteCartItemReq) (*types.DeleteCartItemResp, error) {
-	// todo: add your logic here and delete this line
+	_, _ = l.svcCtx.Oms.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{
+		Id: req.Id,
+	})
 
 	return &types.DeleteCartItemResp{}, nil
 }

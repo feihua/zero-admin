@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewSkuStockUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Sku
 }
 
 func (l *SkuStockUpdateLogic) SkuStockUpdate(req types.UpdateSkuStockReq) (*types.UpdateSkuStockResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Pms.SkuStockUpdate(l.ctx, &pmsclient.SkuStockUpdateReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateSkuStockResp{}, nil
 }

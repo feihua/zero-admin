@@ -3,7 +3,49 @@ syntax = "proto3";
 package oms;
 
 message OrderAddReq {
-
+  int64       MemberId = 2;
+  int64       CouponId = 3;
+  string      OrderSn = 4;
+  string   CreateTime = 5;
+  string      MemberUsername = 6;
+  double     TotalAmount = 7;
+  double     PayAmount = 8;
+  double     FreightAmount = 9;
+  double     PromotionAmount = 10;
+  double     IntegrationAmount = 11;
+  double     CouponAmount = 12;
+  double     DiscountAmount = 13;
+  int64       PayType = 14;
+  int64       SourceType = 15;
+  int64       Status = 16;
+  int64       OrderType = 17;
+  string      DeliveryCompany = 18;
+  string      DeliverySn = 19;
+  int64       AutoConfirmDay = 20;
+  int64       Integration = 21;
+  int64       Growth = 22;
+  string      PromotionInfo = 23;
+  int64       BillType = 24;
+  string      BillHeader = 25;
+  string      BillContent = 26;
+  string      BillReceiverPhone = 27;
+  string      BillReceiverEmail = 28;
+  string      ReceiverName = 29;
+  string      ReceiverPhone = 30;
+  string      ReceiverPostCode = 31;
+  string      ReceiverProvince = 32;
+  string      ReceiverCity = 33;
+  string      ReceiverRegion = 34;
+  string      ReceiverDetailAddress = 35;
+  string      Note = 36;
+  int64       ConfirmStatus = 37;
+  int64       DeleteStatus = 38;
+  int64       UseIntegration = 39;
+  string   PaymentTime = 40;
+  string   DeliveryTime = 41;
+  string   ReceiveTime = 42;
+  string   CommentTime = 43;
+  string   ModifyTime = 44;
 }
 
 message OrderAddResp {
@@ -68,7 +110,50 @@ message OrderListResp {
 }
 
 message OrderUpdateReq {
-
+  int64       Id = 1;
+  int64       MemberId = 2;
+  int64       CouponId = 3;
+  string      OrderSn = 4;
+  string   CreateTime = 5;
+  string      MemberUsername = 6;
+  double     TotalAmount = 7;
+  double     PayAmount = 8;
+  double     FreightAmount = 9;
+  double     PromotionAmount = 10;
+  double     IntegrationAmount = 11;
+  double     CouponAmount = 12;
+  double     DiscountAmount = 13;
+  int64       PayType = 14;
+  int64       SourceType = 15;
+  int64       Status = 16;
+  int64       OrderType = 17;
+  string      DeliveryCompany = 18;
+  string      DeliverySn = 19;
+  int64       AutoConfirmDay = 20;
+  int64       Integration = 21;
+  int64       Growth = 22;
+  string      PromotionInfo = 23;
+  int64       BillType = 24;
+  string      BillHeader = 25;
+  string      BillContent = 26;
+  string      BillReceiverPhone = 27;
+  string      BillReceiverEmail = 28;
+  string      ReceiverName = 29;
+  string      ReceiverPhone = 30;
+  string      ReceiverPostCode = 31;
+  string      ReceiverProvince = 32;
+  string      ReceiverCity = 33;
+  string      ReceiverRegion = 34;
+  string      ReceiverDetailAddress = 35;
+  string      Note = 36;
+  int64       ConfirmStatus = 37;
+  int64       DeleteStatus = 38;
+  int64       UseIntegration = 39;
+  string   PaymentTime = 40;
+  string   DeliveryTime = 41;
+  string   ReceiveTime = 42;
+  string   CommentTime = 43;
+  string   ModifyTime = 44;
 }
 
 message OrderUpdateResp {
@@ -83,9 +168,562 @@ message OrderDeleteResp {
   string pong = 1;
 }
 
+message CartItemAddReq {
+  int64     	ProductId   = 2;
+  int64     	ProductSkuId   = 3;
+  int64     	MemberId      = 4;
+  int64     	Quantity     = 5;
+  int64   	Price         = 6;
+  string    	ProductPic    = 7;
+  string    	ProductName       = 8;
+  string    	ProductSubTitle   = 9;
+  string    	ProductSkuCode    = 10;
+  string    	MemberNickname   = 11;
+  string 	CreateDate       = 12;
+  string 	ModifyDate        = 13;
+  int64     	DeleteStatus     = 14;
+  int64     	ProductCategoryId = 15;
+  string    	ProductBrand     = 16;
+  string    	ProductSn        = 17;
+  string    	ProductAttr       = 18;
+}
+
+message CartItemAddResp {
+  string pong = 1;
+}
+
+message CartItemListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message CartItemListData{
+  int64     	Id      = 1;
+  int64     	ProductId   = 2;
+  int64     	ProductSkuId   = 3;
+  int64     	MemberId      = 4;
+  int64     	Quantity     = 5;
+  int64   	Price         = 6;
+  string    	ProductPic    = 7;
+  string    	ProductName       = 8;
+  string    	ProductSubTitle   = 9;
+  string    	ProductSkuCode    = 10;
+  string    	MemberNickname   = 11;
+  string 	CreateDate       = 12;
+  string 	ModifyDate        = 13;
+  int64     	DeleteStatus     = 14;
+  int64     	ProductCategoryId = 15;
+  string    	ProductBrand     = 16;
+  string    	ProductSn        = 17;
+  string    	ProductAttr       = 18;
+}
+
+message CartItemListResp {
+  int64 total = 1;
+  repeated  CartItemListData list = 2;
+}
+
+message CartItemUpdateReq {
+  int64     	Id      = 1;
+  int64     	ProductId   = 2;
+  int64     	ProductSkuId   = 3;
+  int64     	MemberId      = 4;
+  int64     	Quantity     = 5;
+  int64   	Price         = 6;
+  string    	ProductPic    = 7;
+  string    	ProductName       = 8;
+  string    	ProductSubTitle   = 9;
+  string    	ProductSkuCode    = 10;
+  string    	MemberNickname   = 11;
+  string 	CreateDate       = 12;
+  string 	ModifyDate        = 13;
+  int64     	DeleteStatus     = 14;
+  int64     	ProductCategoryId = 15;
+  string    	ProductBrand     = 16;
+  string    	ProductSn        = 17;
+  string    	ProductAttr       = 18;
+}
+
+message CartItemUpdateResp {
+  string pong = 1;
+}
+
+message CartItemDeleteReq {
+  int64 id = 1;
+}
+
+message CartItemDeleteResp {
+  string pong = 1;
+}
+
+message CompanyAddressAddReq {
+  string 	AddressName = 2;
+  int64  	SendStatus  = 3;
+  int64  	ReceiveStatus = 4;
+  string 	Name       = 5;
+  string 	Phone     = 6;
+  string 	Province   = 7;
+  string 	City       = 8;
+  string 	Region     = 9;
+  string 	DetailAddress = 10;
+}
+
+message CompanyAddressAddResp {
+  string pong = 1;
+}
+
+message CompanyAddressListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message CompanyAddressListData{
+  int64  	Id     = 1;
+  string 	AddressName = 2;
+  int64  	SendStatus  = 3;
+  int64  	ReceiveStatus = 4;
+  string 	Name       = 5;
+  string 	Phone     = 6;
+  string 	Province   = 7;
+  string 	City       = 8;
+  string 	Region     = 9;
+  string 	DetailAddress = 10;
+}
+
+message CompanyAddressListResp {
+  int64 total = 1;
+  repeated  CompanyAddressListData list = 2;
+}
+
+message CompanyAddressUpdateReq {
+  int64  	Id     = 1;
+  string 	AddressName = 2;
+  int64  	SendStatus  = 3;
+  int64  	ReceiveStatus = 4;
+  string 	Name       = 5;
+  string 	Phone     = 6;
+  string 	Province   = 7;
+  string 	City       = 8;
+  string 	Region     = 9;
+  string 	DetailAddress = 10;
+}
+
+message CompanyAddressUpdateResp {
+  string pong = 1;
+}
+
+message CompanyAddressDeleteReq {
+  int64 id = 1;
+}
+
+message CompanyAddressDeleteResp {
+  string pong = 1;
+}
+
+message OrderItemAddReq {
+  int64   	OrderId   = 2;
+  string  	OrderSn   = 3;
+  int64   	ProductId   = 4;
+  string  	ProductPic    = 5;
+  string  	ProductName   = 6;
+  string  	ProductBrand    = 7;
+  string  	ProductSn       = 8;
+  int64 	ProductPrice    = 9;
+  int64   	ProductQuantity   = 10;
+  int64   	ProductSkuId      = 11;
+  string  	ProductSkuCode    = 12;
+  int64   	ProductCategoryId = 13;
+  string  	PromotionName     = 14;
+  int64 	PromotionAmount   = 15;
+  int64 	CouponAmount      = 17;
+  int64 	IntegrationAmount = 18;
+  int64 	RealAmount        = 19;
+  int64   	GiftIntegration   = 20;
+  int64   	GiftGrowth        = 21;
+  string  	ProductAttr      = 22;
+}
+
+message OrderItemAddResp {
+  string pong = 1;
+}
+
+message OrderItemListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message OrderItemListData{
+  int64   	Id    = 1;
+  int64   	OrderId   = 2;
+  string  	OrderSn   = 3;
+  int64   	ProductId   = 4;
+  string  	ProductPic    = 5;
+  string  	ProductName   = 6;
+  string  	ProductBrand    = 7;
+  string  	ProductSn       = 8;
+  int64 	ProductPrice    = 9;
+  int64   	ProductQuantity   = 10;
+  int64   	ProductSkuId      = 11;
+  string  	ProductSkuCode    = 12;
+  int64   	ProductCategoryId = 13;
+  string  	PromotionName     = 14;
+  int64 	PromotionAmount   = 15;
+  int64 	CouponAmount      = 17;
+  int64 	IntegrationAmount = 18;
+  int64 	RealAmount        = 19;
+  int64   	GiftIntegration   = 20;
+  int64   	GiftGrowth        = 21;
+  string  	ProductAttr      = 22;
+}
+
+message OrderItemListResp {
+  int64 total = 1;
+  repeated  OrderItemListData list = 2;
+}
+
+message OrderItemUpdateReq {
+  int64   	Id    = 1;
+  int64   	OrderId   = 2;
+  string  	OrderSn   = 3;
+  int64   	ProductId   = 4;
+  string  	ProductPic    = 5;
+  string  	ProductName   = 6;
+  string  	ProductBrand    = 7;
+  string  	ProductSn       = 8;
+  int64 	ProductPrice    = 9;
+  int64   	ProductQuantity   = 10;
+  int64   	ProductSkuId      = 11;
+  string  	ProductSkuCode    = 12;
+  int64   	ProductCategoryId = 13;
+  string  	PromotionName     = 14;
+  int64 	PromotionAmount   = 15;
+  int64 	CouponAmount      = 17;
+  int64 	IntegrationAmount = 18;
+  int64 	RealAmount        = 19;
+  int64   	GiftIntegration   = 20;
+  int64   	GiftGrowth        = 21;
+  string  	ProductAttr      = 22;
+}
+
+message OrderItemUpdateResp {
+  string pong = 1;
+}
+
+message OrderItemDeleteReq {
+  int64 id = 1;
+}
+
+message OrderItemDeleteResp {
+  string pong = 1;
+}
+
+message OrderOperateHistoryAddReq {
+  int64    	OrderId   = 2;
+  string   	OperateMan  = 3;
+  string	CreateTime  = 4;
+  int64    	OrderStatus = 5;
+  string   	Note       = 6;
+}
+
+message OrderOperateHistoryAddResp {
+  string pong = 1;
+}
+
+message OrderOperateHistoryListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message OrderOperateHistoryListData{
+  int64    	Id     = 1;
+  int64    	OrderId   = 2;
+  string   	OperateMan  = 3;
+  string	CreateTime  = 4;
+  int64    	OrderStatus = 5;
+  string   	Note       = 6;
+}
+
+message OrderOperateHistoryListResp {
+  int64 total = 1;
+  repeated  OrderOperateHistoryListData list = 2;
+}
+
+message OrderOperateHistoryUpdateReq {
+  int64    	Id     = 1;
+  int64    	OrderId   = 2;
+  string   	OperateMan  = 3;
+  string	CreateTime  = 4;
+  int64    	OrderStatus = 5;
+  string   	Note       = 6;
+}
+
+message OrderOperateHistoryUpdateResp {
+  string pong = 1;
+}
+
+message OrderOperateHistoryDeleteReq {
+  int64 id = 1;
+}
+
+message OrderOperateHistoryDeleteResp {
+  string pong = 1;
+}
+
+message OrderReturnApplyAddReq {
+  int64     	OrderId     = 2;
+  int64     	CompanyAddressId  = 3;
+  int64     	ProductId         = 4;
+  string    	OrderSn          = 5;
+  string 	CreateTime        = 6;
+  string    	MemberUsername    = 7;
+  int64   	ReturnAmount      = 8;
+  string    	ReturnName        = 9;
+  string    	ReturnPhone       = 10;
+  int64     	Status            = 11;
+  string 	HandleTime        = 12;
+  string    	ProductPic       = 13;
+  string    	ProductName       = 14;
+  string    	ProductBrand      = 15;
+  string    	ProductAttr       = 16;
+  int64     	ProductCount      = 17;
+  int64   	ProductPrice      = 18;
+  int64   	ProductRealPrice  = 19;
+  string    	Reason            = 20;
+  string    	Description       = 21;
+  string    	ProofPics         = 22;
+  string    	HandleNote        = 23;
+  string    	HandleMan         = 24;
+  string    	ReceiveMan        = 25;
+  string 	ReceiveTime       = 26;
+  string    	ReceiveNote       = 27;
+}
+
+message OrderReturnApplyAddResp {
+  string pong = 1;
+}
+
+message OrderReturnApplyListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message OrderReturnApplyListData{
+  int64     	Id       = 1;
+  int64     	OrderId     = 2;
+  int64     	CompanyAddressId  = 3;
+  int64     	ProductId         = 4;
+  string    	OrderSn          = 5;
+  string 	CreateTime        = 6;
+  string    	MemberUsername    = 7;
+  int64   	ReturnAmount      = 8;
+  string    	ReturnName        = 9;
+  string    	ReturnPhone       = 10;
+  int64     	Status            = 11;
+  string 	HandleTime        = 12;
+  string    	ProductPic       = 13;
+  string    	ProductName       = 14;
+  string    	ProductBrand      = 15;
+  string    	ProductAttr       = 16;
+  int64     	ProductCount      = 17;
+  int64   	ProductPrice      = 18;
+  int64   	ProductRealPrice  = 19;
+  string    	Reason            = 20;
+  string    	Description       = 21;
+  string    	ProofPics         = 22;
+  string    	HandleNote        = 23;
+  string    	HandleMan         = 24;
+  string    	ReceiveMan        = 25;
+  string 	ReceiveTime       = 26;
+  string    	ReceiveNote       = 27;
+}
+
+message OrderReturnApplyListResp {
+  int64 total = 1;
+  repeated  OrderReturnApplyListData list = 2;
+}
+
+message OrderReturnApplyUpdateReq {
+  int64     	Id       = 1;
+  int64     	OrderId     = 2;
+  int64     	CompanyAddressId  = 3;
+  int64     	ProductId         = 4;
+  string    	OrderSn          = 5;
+  string 	CreateTime        = 6;
+  string    	MemberUsername    = 7;
+  int64   	ReturnAmount      = 8;
+  string    	ReturnName        = 9;
+  string    	ReturnPhone       = 10;
+  int64     	Status            = 11;
+  string 	HandleTime        = 12;
+  string    	ProductPic       = 13;
+  string    	ProductName       = 14;
+  string    	ProductBrand      = 15;
+  string    	ProductAttr       = 16;
+  int64     	ProductCount      = 17;
+  int64   	ProductPrice      = 18;
+  int64   	ProductRealPrice  = 19;
+  string    	Reason            = 20;
+  string    	Description       = 21;
+  string    	ProofPics         = 22;
+  string    	HandleNote        = 23;
+  string    	HandleMan         = 24;
+  string    	ReceiveMan        = 25;
+  string 	ReceiveTime       = 26;
+  string    	ReceiveNote       = 27;
+}
+
+message OrderReturnApplyUpdateResp {
+  string pong = 1;
+}
+
+message OrderReturnApplyDeleteReq {
+  int64 id = 1;
+}
+
+message OrderReturnApplyDeleteResp {
+  string pong = 1;
+}
+
+
+message OrderReturnReasonAddReq {
+  string    	Name= 2;
+  int64     	Sort      = 3;
+  int64     	Status      = 4;
+  string 	CreateTime  = 5;
+}
+
+message OrderReturnReasonAddResp {
+  string pong = 1;
+}
+
+message OrderReturnReasonListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message OrderReturnReasonListData{
+  int64     	Id  = 1;
+  string    	Name= 2;
+  int64     	Sort      = 3;
+  int64     	Status      = 4;
+  string 	CreateTime  = 5;
+}
+
+message OrderReturnReasonListResp {
+  int64 total = 1;
+  repeated  OrderReturnReasonListData list = 2;
+}
+
+message OrderReturnReasonUpdateReq {
+  int64     	Id  = 1;
+  string    	Name= 2;
+  int64     	Sort      = 3;
+  int64     	Status      = 4;
+  string 	CreateTime  = 5;
+}
+
+message OrderReturnReasonUpdateResp {
+  string pong = 1;
+}
+
+message OrderReturnReasonDeleteReq {
+  int64 id = 1;
+}
+
+message OrderReturnReasonDeleteResp {
+  string pong = 1;
+}
+
+message OrderSettingAddReq {
+  int64 	FlashOrderOvertime  = 2;
+  int64 	NormalOrderOvertime = 3;
+  int64 	ConfirmOvertime     = 4;
+  int64 	FinishOvertime      = 5;
+  int64 	CommentOvertime     = 6;
+}
+
+message OrderSettingAddResp {
+  string pong = 1;
+}
+
+message OrderSettingListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message OrderSettingListData{
+  int64 	Id    = 1;
+  int64 	FlashOrderOvertime  = 2;
+  int64 	NormalOrderOvertime = 3;
+  int64 	ConfirmOvertime     = 4;
+  int64 	FinishOvertime      = 5;
+  int64 	CommentOvertime     = 6;
+}
+
+message OrderSettingListResp {
+  int64 total = 1;
+  repeated  OrderSettingListData list = 2;
+}
+
+message OrderSettingUpdateReq {
+  int64 	Id    = 1;
+  int64 	FlashOrderOvertime  = 2;
+  int64 	NormalOrderOvertime = 3;
+  int64 	ConfirmOvertime     = 4;
+  int64 	FinishOvertime      = 5;
+  int64 	CommentOvertime     = 6;
+}
+
+message OrderSettingUpdateResp {
+  string pong = 1;
+}
+
+message OrderSettingDeleteReq {
+  int64 id = 1;
+}
+
+message OrderSettingDeleteResp {
+  string pong = 1;
+}
+
 service Oms {
   rpc OrderAdd(OrderAddReq) returns(OrderAddResp);
   rpc OrderList(OrderListReq) returns(OrderListResp);
   rpc OrderUpdate(OrderUpdateReq) returns(OrderUpdateResp);
   rpc OrderDelete(OrderDeleteReq) returns(OrderDeleteResp);
+
+  rpc CartItemAdd(CartItemAddReq) returns(CartItemAddResp);
+  rpc CartItemList(CartItemListReq) returns(CartItemListResp);
+  rpc CartItemUpdate(CartItemUpdateReq) returns(CartItemUpdateResp);
+  rpc CartItemDelete(CartItemDeleteReq) returns(CartItemDeleteResp);
+
+  rpc CompanyAddressAdd(CompanyAddressAddReq) returns(CompanyAddressAddResp);
+  rpc CompanyAddressList(CompanyAddressListReq) returns(CompanyAddressListResp);
+  rpc CompanyAddressUpdate(CompanyAddressUpdateReq) returns(CompanyAddressUpdateResp);
+  rpc CompanyAddressDelete(CompanyAddressDeleteReq) returns(CompanyAddressDeleteResp);
+
+  rpc OrderItemAdd(OrderItemAddReq) returns(OrderItemAddResp);
+  rpc OrderItemList(OrderItemListReq) returns(OrderItemListResp);
+  rpc OrderItemUpdate(OrderItemUpdateReq) returns(OrderItemUpdateResp);
+  rpc OrderItemDelete(OrderItemDeleteReq) returns(OrderItemDeleteResp);
+
+  rpc OrderOperateHistoryAdd(OrderOperateHistoryAddReq) returns(OrderOperateHistoryAddResp);
+  rpc OrderOperateHistoryList(OrderOperateHistoryListReq) returns(OrderOperateHistoryListResp);
+  rpc OrderOperateHistoryUpdate(OrderOperateHistoryUpdateReq) returns(OrderOperateHistoryUpdateResp);
+  rpc OrderOperateHistoryDelete(OrderOperateHistoryDeleteReq) returns(OrderOperateHistoryDeleteResp);
+
+  rpc OrderReturnApplyAdd(OrderReturnApplyAddReq) returns(OrderReturnApplyAddResp);
+  rpc OrderReturnApplyList(OrderReturnApplyListReq) returns(OrderReturnApplyListResp);
+  rpc OrderReturnApplyUpdate(OrderReturnApplyUpdateReq) returns(OrderReturnApplyUpdateResp);
+  rpc OrderReturnApplyDelete(OrderReturnApplyDeleteReq) returns(OrderReturnApplyDeleteResp);
+
+  rpc OrderReturnReasonAdd(OrderReturnReasonAddReq) returns(OrderReturnReasonAddResp);
+  rpc OrderReturnReasonList(OrderReturnReasonListReq) returns(OrderReturnReasonListResp);
+  rpc OrderReturnReasonUpdate(OrderReturnReasonUpdateReq) returns(OrderReturnReasonUpdateResp);
+  rpc OrderReturnReasonDelete(OrderReturnReasonDeleteReq) returns(OrderReturnReasonDeleteResp);
+
+  rpc OrderSettingAdd(OrderSettingAddReq) returns(OrderSettingAddResp);
+  rpc OrderSettingList(OrderSettingListReq) returns(OrderSettingListResp);
+  rpc OrderSettingUpdate(OrderSettingUpdateReq) returns(OrderSettingUpdateResp);
+  rpc OrderSettingDelete(OrderSettingDeleteReq) returns(OrderSettingDeleteResp);
 }

@@ -3,7 +3,47 @@ syntax = "proto3";
 package pms;
 
 message ProductAddReq {
-
+  int64       BrandId = 2;
+  int64       ProductCategoryId = 3;
+  int64       FeightTemplateId = 4;
+  int64       ProductAttributeCategoryId = 5;
+  string      Name = 6;
+  string      Pic = 7;
+  string      ProductSn = 8;
+  int64       DeleteStatus = 9;
+  int64       PublishStatus = 10;
+  int64       NewStatus = 11;
+  int64       RecommandStatus = 12;
+  int64       VerifyStatus = 13;
+  int64       Sort = 14;
+  int64       Sale = 15;
+  double     Price = 16;
+  double     PromotionPrice = 17;
+  int64       GiftGrowth = 18;
+  int64       GiftPoint = 19;
+  int64       UsePointLimit = 20;
+  string      SubTitle = 21;
+  string      Description = 22;
+  double     OriginalPrice = 23;
+  int64       Stock = 24;
+  int64       LowStock = 25;
+  string      Unit = 26;
+  double     Weight = 27;
+  int64       PreviewStatus = 28;
+  string      ServiceIds = 29;
+  string      Keywords = 30;
+  string      Note = 31;
+  string      AlbumPics = 32;
+  string      DetailTitle = 33;
+  string      DetailDesc = 34;
+  string      DetailHtml = 35;
+  string      DetailMobileHtml = 36;
+  string   PromotionStartTime = 37;
+  string   PromotionEndTime = 38;
+  int64       PromotionPerLimit = 39;
+  int64       PromotionType = 40;
+  string      BrandName = 41;
+  string      ProductCategoryName = 42;
 }
 
 message ProductAddResp {
@@ -66,7 +106,48 @@ message ProductListResp {
 }
 
 message ProductUpdateReq {
-
+  int64       Id = 1;
+  int64       BrandId = 2;
+  int64       ProductCategoryId = 3;
+  int64       FeightTemplateId = 4;
+  int64       ProductAttributeCategoryId = 5;
+  string      Name = 6;
+  string      Pic = 7;
+  string      ProductSn = 8;
+  int64       DeleteStatus = 9;
+  int64       PublishStatus = 10;
+  int64       NewStatus = 11;
+  int64       RecommandStatus = 12;
+  int64       VerifyStatus = 13;
+  int64       Sort = 14;
+  int64       Sale = 15;
+  double     Price = 16;
+  double     PromotionPrice = 17;
+  int64       GiftGrowth = 18;
+  int64       GiftPoint = 19;
+  int64       UsePointLimit = 20;
+  string      SubTitle = 21;
+  string      Description = 22;
+  double     OriginalPrice = 23;
+  int64       Stock = 24;
+  int64       LowStock = 25;
+  string      Unit = 26;
+  double     Weight = 27;
+  int64       PreviewStatus = 28;
+  string      ServiceIds = 29;
+  string      Keywords = 30;
+  string      Note = 31;
+  string      AlbumPics = 32;
+  string      DetailTitle = 33;
+  string      DetailDesc = 34;
+  string      DetailHtml = 35;
+  string      DetailMobileHtml = 36;
+  string   PromotionStartTime = 37;
+  string   PromotionEndTime = 38;
+  int64       PromotionPerLimit = 39;
+  int64       PromotionType = 40;
+  string      BrandName = 41;
+  string      ProductCategoryName = 42;
 }
 
 message ProductUpdateResp {
@@ -81,9 +162,1082 @@ message ProductDeleteResp {
   string pong = 1;
 }
 
+message AlbumAddReq {
+  string 	Name     = 2;
+  string 	CoverPic     = 3;
+  int64  	PicCount     = 4;
+  int64  	Sort         = 5;
+  string 	Description  = 6;
+}
+
+message AlbumAddResp {
+  string pong = 1;
+}
+
+message AlbumListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message AlbumListData{
+  int64  	Id       = 1;
+  string 	Name     = 2;
+  string 	CoverPic     = 3;
+  int64  	PicCount     = 4;
+  int64  	Sort         = 5;
+  string 	Description  = 6;
+}
+
+message AlbumListResp {
+  int64 total = 1;
+  repeated  AlbumListData list = 2;
+}
+
+message AlbumUpdateReq {
+  int64  	Id       = 1;
+  string 	Name     = 2;
+  string 	CoverPic     = 3;
+  int64  	PicCount     = 4;
+  int64  	Sort         = 5;
+  string 	Description  = 6;
+}
+
+message AlbumUpdateResp {
+  string pong = 1;
+}
+
+message AlbumDeleteReq {
+  int64 id = 1;
+}
+
+message AlbumDeleteResp {
+  string pong = 1;
+}
+
+message AlbumPicAddReq {
+  int64 	AlbumId     = 2;
+  string 	Pic     = 3;
+}
+
+message AlbumPicAddResp {
+  string pong = 1;
+}
+
+message AlbumPicListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message AlbumPicListData{
+  int64  	Id       = 1;
+  int64 	AlbumId     = 2;
+  string 	Pic     = 3;
+
+}
+
+message AlbumPicListResp {
+  int64 total = 1;
+  repeated  AlbumPicListData list = 2;
+}
+
+message AlbumPicUpdateReq {
+  int64  	Id       = 1;
+  int64 	AlbumId     = 2;
+  string 	Pic     = 3;
+}
+
+message AlbumPicUpdateResp {
+  string pong = 1;
+}
+
+message AlbumPicDeleteReq {
+  int64 id = 1;
+}
+
+message AlbumPicDeleteResp {
+  string pong = 1;
+}
+
+message BrandAddReq {
+  string 	Name     = 2;
+  string 	FirstLetter    = 3;
+  int64  	Sort           = 4;
+  int64  	FactoryStatus     = 5;
+  int64  	ShowStatus        = 6;
+  int64  	ProductCount       = 7;
+  int64  	ProductCommentCount  = 8;
+  string 	Logo               = 9;
+  string 	BigPic            = 10;
+  string 	BrandStory        = 11;
+}
+
+message BrandAddResp {
+  string pong = 1;
+}
+
+message BrandListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message BrandListData{
+  int64  	Id     = 1;
+  string 	Name     = 2;
+  string 	FirstLetter    = 3;
+  int64  	Sort           = 4;
+  int64  	FactoryStatus     = 5;
+  int64  	ShowStatus        = 6;
+  int64  	ProductCount       = 7;
+  int64  	ProductCommentCount  = 8;
+  string 	Logo               = 9;
+  string 	BigPic            = 10;
+  string 	BrandStory        = 11;
+
+}
+
+message BrandListResp {
+  int64 total = 1;
+  repeated  BrandListData list = 2;
+}
+
+message BrandUpdateReq {
+  int64  	Id     = 1;
+  string 	Name     = 2;
+  string 	FirstLetter    = 3;
+  int64  	Sort           = 4;
+  int64  	FactoryStatus     = 5;
+  int64  	ShowStatus        = 6;
+  int64  	ProductCount       = 7;
+  int64  	ProductCommentCount  = 8;
+  string 	Logo               = 9;
+  string 	BigPic            = 10;
+  string 	BrandStory        = 11;
+}
+
+message BrandUpdateResp {
+  string pong = 1;
+}
+
+message BrandDeleteReq {
+  int64 id = 1;
+}
+
+message BrandDeleteResp {
+  string pong = 1;
+}
+
+message CommentAddReq {
+  int64     	ProductId       = 2;
+  string    	MemberNickName    = 3;
+  string    	ProductName       = 4;
+  int64     	Star              = 5;
+  string    	MemberIp          = 6;
+  string 	CreateTime        = 7;
+  int64     	ShowStatus        = 8;
+  string    	ProductAttribute  = 9;
+  int64     	CollectCouont     = 10;
+  int64     	ReadCount        = 11;
+  string    	Content          = 12;
+  string    	Pics              = 13;
+  string    	MemberIcon        = 14;
+  int64     	ReplayCount       = 15;
+}
+
+message CommentAddResp {
+  string pong = 1;
+}
+
+message CommentListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message CommentListData{
+  int64     	Id           = 1;
+  int64     	ProductId       = 2;
+  string    	MemberNickName    = 3;
+  string    	ProductName       = 4;
+  int64     	Star              = 5;
+  string    	MemberIp          = 6;
+  string 	CreateTime        = 7;
+  int64     	ShowStatus        = 8;
+  string    	ProductAttribute  = 9;
+  int64     	CollectCouont     = 10;
+  int64     	ReadCount        = 11;
+  string    	Content          = 12;
+  string    	Pics              = 13;
+  string    	MemberIcon        = 14;
+  int64     	ReplayCount       = 15;
+
+}
+
+message CommentListResp {
+  int64 total = 1;
+  repeated  CommentListData list = 2;
+}
+
+message CommentUpdateReq {
+  int64     	Id           = 1;
+  int64     	ProductId       = 2;
+  string    	MemberNickName    = 3;
+  string    	ProductName       = 4;
+  int64     	Star              = 5;
+  string    	MemberIp          = 6;
+  string 	CreateTime        = 7;
+  int64     	ShowStatus        = 8;
+  string    	ProductAttribute  = 9;
+  int64     	CollectCouont     = 10;
+  int64     	ReadCount        = 11;
+  string    	Content          = 12;
+  string    	Pics              = 13;
+  string    	MemberIcon        = 14;
+  int64     	ReplayCount       = 15;
+}
+
+message CommentUpdateResp {
+  string pong = 1;
+}
+
+message CommentDeleteReq {
+  int64 id = 1;
+}
+
+message CommentDeleteResp {
+  string pong = 1;
+}
+
+
+message CommentReplayAddReq {
+  int64     	CommentId    = 2;
+  string    	MemberNickName = 3;
+  string    	MemberIcon     = 4;
+  string    	Content        = 5;
+  string 	CreateTime     = 6;
+  int64     	Type           = 7;
+}
+
+message CommentReplayAddResp {
+  string pong = 1;
+}
+
+message CommentReplayListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message CommentReplayListData{
+  int64     	Id    = 1;
+  int64     	CommentId    = 2;
+  string    	MemberNickName = 3;
+  string    	MemberIcon     = 4;
+  string    	Content        = 5;
+  string 	CreateTime     = 6;
+  int64     	Type           = 7;
+
+}
+
+message CommentReplayListResp {
+  int64 total = 1;
+  repeated  CommentReplayListData list = 2;
+}
+
+message CommentReplayUpdateReq {
+  int64     	Id    = 1;
+  int64     	CommentId    = 2;
+  string    	MemberNickName = 3;
+  string    	MemberIcon     = 4;
+  string    	Content        = 5;
+  string 	CreateTime     = 6;
+  int64     	Type           = 7;
+}
+
+message CommentReplayUpdateResp {
+  string pong = 1;
+}
+
+message CommentReplayDeleteReq {
+  int64 id = 1;
+}
+
+message CommentReplayDeleteResp {
+  string pong = 1;
+}
+
+
+message FeightTemplateAddReq {
+  string  	Name    = 2;
+  int64   	ChargeType  = 3;
+  int64 	FirstWeight    = 4;
+  int64 	FirstFee       = 5;
+  int64 	ContinueWeight = 61;
+  int64 	ContinmeFee    = 7;
+  string  	Dest          = 8;
+}
+
+message FeightTemplateAddResp {
+  string pong = 1;
+}
+
+message FeightTemplateListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message FeightTemplateListData{
+  int64   	Id     = 1;
+  string  	Name    = 2;
+  int64   	ChargeType  = 3;
+  int64 	FirstWeight    = 4;
+  int64 	FirstFee       = 5;
+  int64 	ContinueWeight = 61;
+  int64 	ContinmeFee    = 7;
+  string  	Dest          = 8;
+
+}
+
+message FeightTemplateListResp {
+  int64 total = 1;
+  repeated  FeightTemplateListData list = 2;
+}
+
+message FeightTemplateUpdateReq {
+  int64   	Id     = 1;
+  string  	Name    = 2;
+  int64   	ChargeType  = 3;
+  int64 	FirstWeight    = 4;
+  int64 	FirstFee       = 5;
+  int64 	ContinueWeight = 61;
+  int64 	ContinmeFee    = 7;
+  string  	Dest          = 8;
+}
+
+message FeightTemplateUpdateResp {
+  string pong = 1;
+}
+
+message FeightTemplateDeleteReq {
+  int64 id = 1;
+}
+
+message FeightTemplateDeleteResp {
+  string pong = 1;
+}
+
+
+message MemberPriceAddReq {
+  int64   	ProductId   = 2;
+  int64   	MemberLevelId  = 3;
+  int64 	MemberPrice     = 4;
+  string  	MemberLevelName = 5;
+}
+
+message MemberPriceAddResp {
+  string pong = 1;
+}
+
+message MemberPriceListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message MemberPriceListData{
+  int64   	Id    = 1;
+  int64   	ProductId   = 2;
+  int64   	MemberLevelId  = 3;
+  int64 	MemberPrice     = 4;
+  string  	MemberLevelName = 5;
+
+}
+
+message MemberPriceListResp {
+  int64 total = 1;
+  repeated  MemberPriceListData list = 2;
+}
+
+message MemberPriceUpdateReq {
+  int64   	Id    = 1;
+  int64   	ProductId   = 2;
+  int64   	MemberLevelId  = 3;
+  int64 	MemberPrice     = 4;
+  string  	MemberLevelName = 5;
+}
+
+message MemberPriceUpdateResp {
+  string pong = 1;
+}
+
+message MemberPriceDeleteReq {
+  int64 id = 1;
+}
+
+message MemberPriceDeleteResp {
+  string pong = 1;
+}
+
+
+message ProductAttributeCategoryAddReq {
+  string 	Name      = 2;
+  int64  	AttributeCount  = 3;
+  int64  	ParamCount      = 4;
+}
+
+message ProductAttributeCategoryAddResp {
+  string pong = 1;
+}
+
+message ProductAttributeCategoryListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ProductAttributeCategoryListData{
+  int64  	Id        = 1;
+  string 	Name      = 2;
+  int64  	AttributeCount  = 3;
+  int64  	ParamCount      = 4;
+
+}
+
+message ProductAttributeCategoryListResp {
+  int64 total = 1;
+  repeated  ProductAttributeCategoryListData list = 2;
+}
+
+message ProductAttributeCategoryUpdateReq {
+  int64  	Id        = 1;
+  string 	Name      = 2;
+  int64  	AttributeCount  = 3;
+  int64  	ParamCount      = 4;
+}
+
+message ProductAttributeCategoryUpdateResp {
+  string pong = 1;
+}
+
+message ProductAttributeCategoryDeleteReq {
+  int64 id = 1;
+}
+
+message ProductAttributeCategoryDeleteResp {
+  string pong = 1;
+}
+
+
+message ProductAttributeAddReq {
+  int64  	ProductAttributeCategoryId  = 2;
+  string 	Name                   = 3;
+  int64  	SelectType          = 4;
+  int64  	InputType              = 5;
+  string 	InputList              = 6;
+  int64  	Sort                    = 7;
+  int64  	FilterType             = 8;
+  int64  	SearchType             = 9;
+  int64  	RelatedStatus          = 10;
+  int64  	HandAddStatus          = 11;
+  int64  	Type                    = 12;
+}
+
+message ProductAttributeAddResp {
+  string pong = 1;
+}
+
+message ProductAttributeListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ProductAttributeListData{
+  int64  	Id       = 1;
+  int64  	ProductAttributeCategoryId  = 2;
+  string 	Name                   = 3;
+  int64  	SelectType          = 4;
+  int64  	InputType              = 5;
+  string 	InputList              = 6;
+  int64  	Sort                    = 7;
+  int64  	FilterType             = 8;
+  int64  	SearchType             = 9;
+  int64  	RelatedStatus          = 10;
+  int64  	HandAddStatus          = 11;
+  int64  	Type                    = 12;
+
+}
+
+message ProductAttributeListResp {
+  int64 total = 1;
+  repeated  ProductAttributeListData list = 2;
+}
+
+message ProductAttributeUpdateReq {
+  int64  	Id       = 1;
+  int64  	ProductAttributeCategoryId  = 2;
+  string 	Name                   = 3;
+  int64  	SelectType          = 4;
+  int64  	InputType              = 5;
+  string 	InputList              = 6;
+  int64  	Sort                    = 7;
+  int64  	FilterType             = 8;
+  int64  	SearchType             = 9;
+  int64  	RelatedStatus          = 10;
+  int64  	HandAddStatus          = 11;
+  int64  	Type                    = 12;
+}
+
+message ProductAttributeUpdateResp {
+  string pong = 1;
+}
+
+message ProductAttributeDeleteReq {
+  int64 id = 1;
+}
+
+message ProductAttributeDeleteResp {
+  string pong = 1;
+}
+
+
+message ProductAttributeValueAddReq {
+  int64  	ProductId   = 2;
+  int64  	ProductAttributeId = 3;
+  string 	Value            = 4;
+}
+
+message ProductAttributeValueAddResp {
+  string pong = 1;
+}
+
+message ProductAttributeValueListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ProductAttributeValueListData{
+  int64  	Id    = 1;
+  int64  	ProductId   = 2;
+  int64  	ProductAttributeId = 3;
+  string 	Value            = 4;
+
+}
+
+message ProductAttributeValueListResp {
+  int64 total = 1;
+  repeated  ProductAttributeValueListData list = 2;
+}
+
+message ProductAttributeValueUpdateReq {
+  int64  	Id    = 1;
+  int64  	ProductId   = 2;
+  int64  	ProductAttributeId = 3;
+  string 	Value            = 4;
+}
+
+message ProductAttributeValueUpdateResp {
+  string pong = 1;
+}
+
+message ProductAttributeValueDeleteReq {
+  int64 id = 1;
+}
+
+message ProductAttributeValueDeleteResp {
+  string pong = 1;
+}
+
+message ProductCategoryAttributeRelationAddReq {
+  int64 	ProductCategoryId  = 2;
+  int64 	ProductAttributeId = 3;
+}
+
+message ProductCategoryAttributeRelationAddResp {
+  string pong = 1;
+}
+
+message ProductCategoryAttributeRelationListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ProductCategoryAttributeRelationListData{
+  int64 	Id    = 1;
+  int64 	ProductCategoryId  = 2;
+  int64 	ProductAttributeId = 3;
+
+}
+
+message ProductCategoryAttributeRelationListResp {
+  int64 total = 1;
+  repeated  ProductCategoryAttributeRelationListData list = 2;
+}
+
+message ProductCategoryAttributeRelationUpdateReq {
+  int64 	Id    = 1;
+  int64 	ProductCategoryId  = 2;
+  int64 	ProductAttributeId = 3;
+}
+
+message ProductCategoryAttributeRelationUpdateResp {
+  string pong = 1;
+}
+
+message ProductCategoryAttributeRelationDeleteReq {
+  int64 id = 1;
+}
+
+message ProductCategoryAttributeRelationDeleteResp {
+  string pong = 1;
+}
+
+message ProductCategoryAddReq {
+  int64  	ParentId    = 2;
+  string 	Name        = 3;
+  int64  	Level         = 4;
+  int64  	ProductCount  = 5;
+  string 	ProductUnit   = 6;
+  int64  	NavStatus     = 7;
+  int64  	ShowStatus    = 8;
+  int64  	Sort          = 9;
+  string 	Icon          = 10;
+  string 	Keywords      = 11;
+  string 	Description   = 12;
+}
+
+message ProductCategoryAddResp {
+  string pong = 1;
+}
+
+message ProductCategoryListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ProductCategoryListData{
+  int64  	Id         = 1;
+  int64  	ParentId    = 2;
+  string 	Name        = 3;
+  int64  	Level         = 4;
+  int64  	ProductCount  = 5;
+  string 	ProductUnit   = 6;
+  int64  	NavStatus     = 7;
+  int64  	ShowStatus    = 8;
+  int64  	Sort          = 9;
+  string 	Icon          = 10;
+  string 	Keywords      = 11;
+  string 	Description   = 12;
+
+}
+
+message ProductCategoryListResp {
+  int64 total = 1;
+  repeated  ProductCategoryListData list = 2;
+}
+
+message ProductCategoryUpdateReq {
+  int64  	Id         = 1;
+  int64  	ParentId    = 2;
+  string 	Name        = 3;
+  int64  	Level         = 4;
+  int64  	ProductCount  = 5;
+  string 	ProductUnit   = 6;
+  int64  	NavStatus     = 7;
+  int64  	ShowStatus    = 8;
+  int64  	Sort          = 9;
+  string 	Icon          = 10;
+  string 	Keywords      = 11;
+  string 	Description   = 12;
+}
+
+message ProductCategoryUpdateResp {
+  string pong = 1;
+}
+
+message ProductCategoryDeleteReq {
+  int64 id = 1;
+}
+
+message ProductCategoryDeleteResp {
+  string pong = 1;
+}
+
+message ProductFullReductionAddReq {
+  int64   	ProductId   = 2;
+  int64 	FullPrice    = 3;
+  int64 	ReducePrice  = 4;
+}
+
+message ProductFullReductionAddResp {
+  string pong = 1;
+}
+
+message ProductFullReductionListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ProductFullReductionListData{
+  int64   	Id      = 1;
+  int64   	ProductId   = 2;
+  int64 	FullPrice    = 3;
+  int64 	ReducePrice  = 4;
+
+}
+
+message ProductFullReductionListResp {
+  int64 total = 1;
+  repeated  ProductFullReductionListData list = 2;
+}
+
+message ProductFullReductionUpdateReq {
+  int64   	Id      = 1;
+  int64   	ProductId   = 2;
+  int64 	FullPrice    = 3;
+  int64 	ReducePrice  = 4;
+}
+
+message ProductFullReductionUpdateResp {
+  string pong = 1;
+}
+
+message ProductFullReductionDeleteReq {
+  int64 id = 1;
+}
+
+message ProductFullReductionDeleteResp {
+  string pong = 1;
+}
+
+message ProductLadderAddReq {
+  int64   	ProductId = 2;
+  int64   	Count     = 3;
+  int64 	Discount  = 4;
+  int64 	Price     = 5;
+}
+
+message ProductLadderAddResp {
+  string pong = 1;
+}
+
+message ProductLadderListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ProductLadderListData{
+  int64   	Id    = 1;
+  int64   	ProductId = 2;
+  int64   	Count     = 3;
+  int64 	Discount  = 4;
+  int64 	Price     = 5;
+
+}
+
+message ProductLadderListResp {
+  int64 total = 1;
+  repeated  ProductLadderListData list = 2;
+}
+
+message ProductLadderUpdateReq {
+  int64   	Id    = 1;
+  int64   	ProductId = 2;
+  int64   	Count     = 3;
+  int64 	Discount  = 4;
+  int64 	Price     = 5;
+}
+
+message ProductLadderUpdateResp {
+  string pong = 1;
+}
+
+message ProductLadderDeleteReq {
+  int64 id = 1;
+}
+
+message ProductLadderDeleteResp {
+  string pong = 1;
+}
+
+
+message ProductOperateLogAddReq {
+  int64     	ProductId  = 2;
+  int64   	PriceOld    = 3;
+  int64   	PriceNew    = 4;
+  int64   	SalePriceOld  = 5;
+  int64   	SalePriceNew   = 6;
+  int64     	GiftPointOld   = 7;
+  int64     	GiftPointNew    = 8;
+  int64     	UsePointLimitOld = 9;
+  int64     	UsePointLimitNew = 10;
+  string    	OperateMan     = 11;
+  string 	CreateTime    = 12;
+}
+
+message ProductOperateLogAddResp {
+  string pong = 1;
+}
+
+message ProductOperateLogListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ProductOperateLogListData{
+  int64     	Id        = 1;
+  int64     	ProductId  = 2;
+  int64   	PriceOld    = 3;
+  int64   	PriceNew    = 4;
+  int64   	SalePriceOld  = 5;
+  int64   	SalePriceNew   = 6;
+  int64     	GiftPointOld   = 7;
+  int64     	GiftPointNew    = 8;
+  int64     	UsePointLimitOld = 9;
+  int64     	UsePointLimitNew = 10;
+  string    	OperateMan     = 11;
+  string 	CreateTime    = 12;
+
+}
+
+message ProductOperateLogListResp {
+  int64 total = 1;
+  repeated  ProductOperateLogListData list = 2;
+}
+
+message ProductOperateLogUpdateReq {
+  int64     	Id        = 1;
+  int64     	ProductId  = 2;
+  int64   	PriceOld    = 3;
+  int64   	PriceNew    = 4;
+  int64   	SalePriceOld  = 5;
+  int64   	SalePriceNew   = 6;
+  int64     	GiftPointOld   = 7;
+  int64     	GiftPointNew    = 8;
+  int64     	UsePointLimitOld = 9;
+  int64     	UsePointLimitNew = 10;
+  string    	OperateMan     = 11;
+  string 	CreateTime    = 12;
+}
+
+message ProductOperateLogUpdateResp {
+  string pong = 1;
+}
+
+message ProductOperateLogDeleteReq {
+  int64 id = 1;
+}
+
+message ProductOperateLogDeleteResp {
+  string pong = 1;
+}
+
+
+message ProductVertifyRecordAddReq {
+  int64    	ProductId  = 2;
+  string	CreateTime = 3;
+  string   	VertifyMan = 4;
+  int64    	Status     = 5;
+  string   	Detail     = 6;
+}
+
+message ProductVertifyRecordAddResp {
+  string pong = 1;
+}
+
+message ProductVertifyRecordListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ProductVertifyRecordListData{
+  int64    	Id      = 1;
+  int64    	ProductId  = 2;
+  string	CreateTime = 3;
+  string   	VertifyMan = 4;
+  int64    	Status     = 5;
+  string   	Detail     = 6;
+
+}
+
+message ProductVertifyRecordListResp {
+  int64 total = 1;
+  repeated  ProductVertifyRecordListData list = 2;
+}
+
+message ProductVertifyRecordUpdateReq {
+  int64    	Id      = 1;
+  int64    	ProductId  = 2;
+  string	CreateTime = 3;
+  string   	VertifyMan = 4;
+  int64    	Status     = 5;
+  string   	Detail     = 6;
+}
+
+message ProductVertifyRecordUpdateResp {
+  string pong = 1;
+}
+
+message ProductVertifyRecordDeleteReq {
+  int64 id = 1;
+}
+
+message ProductVertifyRecordDeleteResp {
+  string pong = 1;
+}
+
+
+message SkuStockAddReq {
+  int64   	ProductId   = 2;
+  string  	SkuCode  = 3;
+  int64 	Price        = 4;
+  int64   	Stock       = 5;
+  int64   	LowStock    = 6;
+  string  	Pic        = 7;
+  int64   	Sale           = 8;
+  int64 	PromotionPrice = 9;
+  int64   	LockStock      = 10;
+  string  	SpData       = 11;
+}
+
+message SkuStockAddResp {
+  string pong = 1;
+}
+
+message SkuStockListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message SkuStockListData{
+  int64   	Id     = 1;
+  int64   	ProductId   = 2;
+  string  	SkuCode  = 3;
+  int64 	Price        = 4;
+  int64   	Stock       = 5;
+  int64   	LowStock    = 6;
+  string  	Pic        = 7;
+  int64   	Sale           = 8;
+  int64 	PromotionPrice = 9;
+  int64   	LockStock      = 10;
+  string  	SpData       = 11;
+
+}
+
+message SkuStockListResp {
+  int64 total = 1;
+  repeated  SkuStockListData list = 2;
+}
+
+message SkuStockUpdateReq {
+  int64   	Id     = 1;
+  int64   	ProductId   = 2;
+  string  	SkuCode  = 3;
+  int64 	Price        = 4;
+  int64   	Stock       = 5;
+  int64   	LowStock    = 6;
+  string  	Pic        = 7;
+  int64   	Sale           = 8;
+  int64 	PromotionPrice = 9;
+  int64   	LockStock      = 10;
+  string  	SpData       = 11;
+}
+
+message SkuStockUpdateResp {
+  string pong = 1;
+}
+
+message SkuStockDeleteReq {
+  int64 id = 1;
+}
+
+message SkuStockDeleteResp {
+  string pong = 1;
+}
+
 service Pms {
   rpc ProductAdd(ProductAddReq) returns(ProductAddResp);
   rpc ProductList(ProductListReq) returns(ProductListResp);
   rpc ProductUpdate(ProductUpdateReq) returns(ProductUpdateResp);
   rpc ProductDelete(ProductDeleteReq) returns(ProductDeleteResp);
+
+  rpc AlbumAdd(AlbumAddReq) returns(AlbumAddResp);
+  rpc AlbumList(AlbumListReq) returns(AlbumListResp);
+  rpc AlbumUpdate(AlbumUpdateReq) returns(AlbumUpdateResp);
+  rpc AlbumDelete(AlbumDeleteReq) returns(AlbumDeleteResp);
+
+  rpc AlbumPicAdd(AlbumPicAddReq) returns(AlbumPicAddResp);
+  rpc AlbumPicList(AlbumPicListReq) returns(AlbumPicListResp);
+  rpc AlbumPicUpdate(AlbumPicUpdateReq) returns(AlbumPicUpdateResp);
+  rpc AlbumPicDelete(AlbumPicDeleteReq) returns(AlbumPicDeleteResp);
+
+  rpc BrandAdd(BrandAddReq) returns(BrandAddResp);
+  rpc BrandList(BrandListReq) returns(BrandListResp);
+  rpc BrandUpdate(BrandUpdateReq) returns(BrandUpdateResp);
+  rpc BrandDelete(BrandDeleteReq) returns(BrandDeleteResp);
+
+  rpc CommentAdd(CommentAddReq) returns(CommentAddResp);
+  rpc CommentList(CommentListReq) returns(CommentListResp);
+  rpc CommentUpdate(CommentUpdateReq) returns(CommentUpdateResp);
+  rpc CommentDelete(CommentDeleteReq) returns(CommentDeleteResp);
+
+  rpc CommentReplayAdd(CommentReplayAddReq) returns(CommentReplayAddResp);
+  rpc CommentReplayList(CommentReplayListReq) returns(CommentReplayListResp);
+  rpc CommentReplayUpdate(CommentReplayUpdateReq) returns(CommentReplayUpdateResp);
+  rpc CommentReplayDelete(CommentReplayDeleteReq) returns(CommentReplayDeleteResp);
+
+  rpc FeightTemplateAdd(FeightTemplateAddReq) returns(FeightTemplateAddResp);
+  rpc FeightTemplateList(FeightTemplateListReq) returns(FeightTemplateListResp);
+  rpc FeightTemplateUpdate(FeightTemplateUpdateReq) returns(FeightTemplateUpdateResp);
+  rpc FeightTemplateDelete(FeightTemplateDeleteReq) returns(FeightTemplateDeleteResp);
+
+  rpc MemberPriceAdd(MemberPriceAddReq) returns(MemberPriceAddResp);
+  rpc MemberPriceList(MemberPriceListReq) returns(MemberPriceListResp);
+  rpc MemberPriceUpdate(MemberPriceUpdateReq) returns(MemberPriceUpdateResp);
+  rpc MemberPriceDelete(MemberPriceDeleteReq) returns(MemberPriceDeleteResp);
+
+  rpc ProductAttributeCategoryAdd(ProductAttributeCategoryAddReq) returns(ProductAttributeCategoryAddResp);
+  rpc ProductAttributeCategoryList(ProductAttributeCategoryListReq) returns(ProductAttributeCategoryListResp);
+  rpc ProductAttributeCategoryUpdate(ProductAttributeCategoryUpdateReq) returns(ProductAttributeCategoryUpdateResp);
+  rpc ProductAttributeCategoryDelete(ProductAttributeCategoryDeleteReq) returns(ProductAttributeCategoryDeleteResp);
+
+  rpc ProductAttributeAdd(ProductAttributeAddReq) returns(ProductAttributeAddResp);
+  rpc ProductAttributeList(ProductAttributeListReq) returns(ProductAttributeListResp);
+  rpc ProductAttributeUpdate(ProductAttributeUpdateReq) returns(ProductAttributeUpdateResp);
+  rpc ProductAttributeDelete(ProductAttributeDeleteReq) returns(ProductAttributeDeleteResp);
+
+  rpc ProductAttributeValueAdd(ProductAttributeValueAddReq) returns(ProductAttributeValueAddResp);
+  rpc ProductAttributeValueList(ProductAttributeValueListReq) returns(ProductAttributeValueListResp);
+  rpc ProductAttributeValueUpdate(ProductAttributeValueUpdateReq) returns(ProductAttributeValueUpdateResp);
+  rpc ProductAttributeValueDelete(ProductAttributeValueDeleteReq) returns(ProductAttributeValueDeleteResp);
+
+  rpc ProductCategoryAttributeRelationAdd(ProductCategoryAttributeRelationAddReq) returns(ProductCategoryAttributeRelationAddResp);
+  rpc ProductCategoryAttributeRelationList(ProductCategoryAttributeRelationListReq) returns(ProductCategoryAttributeRelationListResp);
+  rpc ProductCategoryAttributeRelationUpdate(ProductCategoryAttributeRelationUpdateReq) returns(ProductCategoryAttributeRelationUpdateResp);
+  rpc ProductCategoryAttributeRelationDelete(ProductCategoryAttributeRelationDeleteReq) returns(ProductCategoryAttributeRelationDeleteResp);
+
+  rpc ProductCategoryAdd(ProductCategoryAddReq) returns(ProductCategoryAddResp);
+  rpc ProductCategoryList(ProductCategoryListReq) returns(ProductCategoryListResp);
+  rpc ProductCategoryUpdate(ProductCategoryUpdateReq) returns(ProductCategoryUpdateResp);
+  rpc ProductCategoryDelete(ProductCategoryDeleteReq) returns(ProductCategoryDeleteResp);
+
+  rpc ProductFullReductionAdd(ProductFullReductionAddReq) returns(ProductFullReductionAddResp);
+  rpc ProductFullReductionList(ProductFullReductionListReq) returns(ProductFullReductionListResp);
+  rpc ProductFullReductionUpdate(ProductFullReductionUpdateReq) returns(ProductFullReductionUpdateResp);
+  rpc ProductFullReductionDelete(ProductFullReductionDeleteReq) returns(ProductFullReductionDeleteResp);
+
+  rpc ProductLadderAdd(ProductLadderAddReq) returns(ProductLadderAddResp);
+  rpc ProductLadderList(ProductLadderListReq) returns(ProductLadderListResp);
+  rpc ProductLadderUpdate(ProductLadderUpdateReq) returns(ProductLadderUpdateResp);
+  rpc ProductLadderDelete(ProductLadderDeleteReq) returns(ProductLadderDeleteResp);
+
+  rpc ProductOperateLogAdd(ProductOperateLogAddReq) returns(ProductOperateLogAddResp);
+  rpc ProductOperateLogList(ProductOperateLogListReq) returns(ProductOperateLogListResp);
+  rpc ProductOperateLogUpdate(ProductOperateLogUpdateReq) returns(ProductOperateLogUpdateResp);
+  rpc ProductOperateLogDelete(ProductOperateLogDeleteReq) returns(ProductOperateLogDeleteResp);
+
+  rpc ProductVertifyRecordAdd(ProductVertifyRecordAddReq) returns(ProductVertifyRecordAddResp);
+  rpc ProductVertifyRecordList(ProductVertifyRecordListReq) returns(ProductVertifyRecordListResp);
+  rpc ProductVertifyRecordUpdate(ProductVertifyRecordUpdateReq) returns(ProductVertifyRecordUpdateResp);
+  rpc ProductVertifyRecordDelete(ProductVertifyRecordDeleteReq) returns(ProductVertifyRecordDeleteResp);
+
+  rpc SkuStockAdd(SkuStockAddReq) returns(SkuStockAddResp);
+  rpc SkuStockList(SkuStockListReq) returns(SkuStockListResp);
+  rpc SkuStockUpdate(SkuStockUpdateReq) returns(SkuStockUpdateResp);
+  rpc SkuStockDelete(SkuStockDeleteReq) returns(SkuStockDeleteResp);
+
 }

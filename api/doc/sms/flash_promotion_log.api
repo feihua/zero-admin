@@ -7,7 +7,12 @@ info(
 
 type (
     addFlashPromotionLogReq struct {
-       
+        MemberId      int64     `json:"member_id"`
+        ProductId     int64     `json:"product_id"`
+        MemberPhone   string    `json:"member_phone"`
+        ProductName   string    `json:"product_name"`
+        SubscribeTime string `json:"subscribe_time"` // 会员订阅时间
+        SendTime      string `json:"send_time"`
     }
     addFlashPromotionLogResp struct {
     }
@@ -16,7 +21,13 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtFlashPromotionLogData struct {
-        
+        Id            int64     `json:"id"`
+        MemberId      int64     `json:"member_id"`
+        ProductId     int64     `json:"product_id"`
+        MemberPhone   string    `json:"member_phone"`
+        ProductName   string    `json:"product_name"`
+        SubscribeTime string `json:"subscribe_time"` // 会员订阅时间
+        SendTime      string `json:"send_time"`
     }
     ListFlashPromotionLogResp struct {
         Current int64 `json:"current"`
@@ -26,7 +37,13 @@ type (
         Total int64 `json:"total"`
     }
     UpdateFlashPromotionLogReq struct {
-        
+        Id            int64     `json:"id"`
+        MemberId      int64     `json:"member_id"`
+        ProductId     int64     `json:"product_id"`
+        MemberPhone   string    `json:"member_phone"`
+        ProductName   string    `json:"product_name"`
+        SubscribeTime string `json:"subscribe_time"` // 会员订阅时间
+        SendTime      string `json:"send_time"`
     }
     UpdateFlashPromotionLogResp struct {
     }

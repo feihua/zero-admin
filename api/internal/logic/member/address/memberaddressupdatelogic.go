@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewMemberAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *MemberAddressUpdateLogic) MemberAddressUpdate(req types.UpdateMemberAddressReq) (*types.UpdateMemberAddressResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Ums.MemberReceiveAddressUpdate(l.ctx, &umsclient.MemberReceiveAddressUpdateReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateMemberAddressResp{}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewReturnApplyUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ReturnApplyUpdateLogic) ReturnApplyUpdate(req types.UpdateReturnApplyReq) (*types.UpdateReturnApplyResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Oms.OrderReturnApplyUpdate(l.ctx, &omsclient.OrderReturnApplyUpdateReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateReturnApplyResp{}, nil
 }

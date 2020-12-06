@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
+	"go-zero-admin/rpc/oms/omsclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,7 +24,11 @@ func NewCartItemUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Car
 }
 
 func (l *CartItemUpdateLogic) CartItemUpdate(req types.UpdateCartItemReq) (*types.UpdateCartItemResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Oms.CartItemUpdate(l.ctx, &omsclient.CartItemUpdateReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateCartItemResp{}, nil
 }

@@ -7,7 +7,11 @@ info(
 
 type (
     addOrderSettingReq struct {
-       
+        FlashOrderOvertime  int64 `json:"flash_order_overtime"`  // 秒杀订单超时关闭时间(分)
+        NormalOrderOvertime int64 `json:"normal_order_overtime"` // 正常订单超时时间(分)
+        ConfirmOvertime     int64 `json:"confirm_overtime"`      // 发货后自动确认收货时间（天）
+        FinishOvertime      int64 `json:"finish_overtime"`       // 自动完成交易时间，不能申请售后（天）
+        CommentOvertime     int64 `json:"comment_overtime"`      // 订单完成后自动好评时间（天）
     }
     addOrderSettingResp struct {
     }
@@ -16,7 +20,12 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtOrderSettingData struct {
-        
+        Id                  int64 `json:"id"`
+        FlashOrderOvertime  int64 `json:"flash_order_overtime"`  // 秒杀订单超时关闭时间(分)
+        NormalOrderOvertime int64 `json:"normal_order_overtime"` // 正常订单超时时间(分)
+        ConfirmOvertime     int64 `json:"confirm_overtime"`      // 发货后自动确认收货时间（天）
+        FinishOvertime      int64 `json:"finish_overtime"`       // 自动完成交易时间，不能申请售后（天）
+        CommentOvertime     int64 `json:"comment_overtime"`      // 订单完成后自动好评时间（天）
     }
     ListOrderSettingResp struct {
         Current int64 `json:"current"`
@@ -26,7 +35,12 @@ type (
         Total int64 `json:"total"`
     }
     UpdateOrderSettingReq struct {
-        
+        Id                  int64 `json:"id"`
+        FlashOrderOvertime  int64 `json:"flash_order_overtime"`  // 秒杀订单超时关闭时间(分)
+        NormalOrderOvertime int64 `json:"normal_order_overtime"` // 正常订单超时时间(分)
+        ConfirmOvertime     int64 `json:"confirm_overtime"`      // 发货后自动确认收货时间（天）
+        FinishOvertime      int64 `json:"finish_overtime"`       // 自动完成交易时间，不能申请售后（天）
+        CommentOvertime     int64 `json:"comment_overtime"`      // 订单完成后自动好评时间（天）
     }
     UpdateOrderSettingResp struct {
     }

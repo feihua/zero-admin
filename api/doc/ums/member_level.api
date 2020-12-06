@@ -7,7 +7,17 @@ info(
 
 type (
     addMemberLevelReq struct {
-
+        Name                  string  `json:"name"`
+        GrowthPoint           int64   `json:"growth_point"`
+        DefaultStatus         int64   `json:"default_status"`          // 是否为默认等级：0->不是；1->是
+        FreeFreightPoint      float64 `json:"free_freight_point"`      // 免运费标准
+        CommentGrowthPoint    int64   `json:"comment_growth_point"`    // 每次评价获取的成长值
+        PriviledgeFreeFreight int64   `json:"priviledge_free_freight"` // 是否有免邮特权
+        PriviledgeSignIn      int64   `json:"priviledge_sign_in"`      // 是否有签到特权
+        PriviledgeComment     int64   `json:"priviledge_comment"`      // 是否有评论获奖励特权
+        PriviledgePromotion   int64   `json:"priviledge_promotion"`    // 是否有专享活动特权
+        PriviledgeMemberPrice int64   `json:"priviledge_member_price"` // 是否有会员价格特权
+        PriviledgeBirthday    int64   `json:"priviledge_birthday"`     // 是否有生日特权
     }
     addMemberLevelResp struct {
     }
@@ -16,7 +26,19 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtMemberLevelData struct {
-
+        Id                    int64   `json:"id"`
+        Name                  string  `json:"name"`
+        GrowthPoint           int64   `json:"growth_point"`
+        DefaultStatus         int64   `json:"default_status"`          // 是否为默认等级：0->不是；1->是
+        FreeFreightPoint      float64 `json:"free_freight_point"`      // 免运费标准
+        CommentGrowthPoint    int64   `json:"comment_growth_point"`    // 每次评价获取的成长值
+        PriviledgeFreeFreight int64   `json:"priviledge_free_freight"` // 是否有免邮特权
+        PriviledgeSignIn      int64   `json:"priviledge_sign_in"`      // 是否有签到特权
+        PriviledgeComment     int64   `json:"priviledge_comment"`      // 是否有评论获奖励特权
+        PriviledgePromotion   int64   `json:"priviledge_promotion"`    // 是否有专享活动特权
+        PriviledgeMemberPrice int64   `json:"priviledge_member_price"` // 是否有会员价格特权
+        PriviledgeBirthday    int64   `json:"priviledge_birthday"`     // 是否有生日特权
+        Note                  string  `json:"note"`
     }
     ListMemberLevelResp struct {
         Current int64 `json:"current"`
@@ -26,6 +48,18 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberLevelReq struct {
+        Id                    int64   `json:"id"`
+        Name                  string  `json:"name"`
+        GrowthPoint           int64   `json:"growth_point"`
+        DefaultStatus         int64   `json:"default_status"`          // 是否为默认等级：0->不是；1->是
+        FreeFreightPoint      float64 `json:"free_freight_point"`      // 免运费标准
+        CommentGrowthPoint    int64   `json:"comment_growth_point"`    // 每次评价获取的成长值
+        PriviledgeFreeFreight int64   `json:"priviledge_free_freight"` // 是否有免邮特权
+        PriviledgeSignIn      int64   `json:"priviledge_sign_in"`      // 是否有签到特权
+        PriviledgeComment     int64   `json:"priviledge_comment"`      // 是否有评论获奖励特权
+        PriviledgePromotion   int64   `json:"priviledge_promotion"`    // 是否有专享活动特权
+        PriviledgeMemberPrice int64   `json:"priviledge_member_price"` // 是否有会员价格特权
+        PriviledgeBirthday    int64   `json:"priviledge_birthday"`     // 是否有生日特权
     }
     UpdateMemberLevelResp struct {
     }

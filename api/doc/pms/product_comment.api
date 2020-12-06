@@ -7,7 +7,20 @@ info(
 
 type (
     addProductCommentReq struct {
-       
+        ProductId        int64     `json:"product_id"`
+        MemberNickName   string    `json:"member_nick_name"`
+        ProductName      string    `json:"product_name"`
+        Star             int64     `json:"star"`      // 评价星数：0->5
+        MemberIp         string    `json:"member_ip"` // 评价的ip
+        CreateTime       string `json:"create_time"`
+        ShowStatus       int64     `json:"show_status"`
+        ProductAttribute string    `json:"product_attribute"` // 购买时的商品属性
+        CollectCouont    int64     `json:"collect_couont"`
+        ReadCount        int64     `json:"read_count"`
+        Content          string    `json:"content"`
+        Pics             string    `json:"pics"`        // 上传图片地址，以逗号隔开
+        MemberIcon       string    `json:"member_icon"` // 评论用户头像
+        ReplayCount      int64     `json:"replay_count"`
     }
     addProductCommentResp struct {
     }
@@ -16,7 +29,21 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtProductCommentData struct {
-        
+        Id               int64     `json:"id"`
+        ProductId        int64     `json:"product_id"`
+        MemberNickName   string    `json:"member_nick_name"`
+        ProductName      string    `json:"product_name"`
+        Star             int64     `json:"star"`      // 评价星数：0->5
+        MemberIp         string    `json:"member_ip"` // 评价的ip
+        CreateTime       string `json:"create_time"`
+        ShowStatus       int64     `json:"show_status"`
+        ProductAttribute string    `json:"product_attribute"` // 购买时的商品属性
+        CollectCouont    int64     `json:"collect_couont"`
+        ReadCount        int64     `json:"read_count"`
+        Content          string    `json:"content"`
+        Pics             string    `json:"pics"`        // 上传图片地址，以逗号隔开
+        MemberIcon       string    `json:"member_icon"` // 评论用户头像
+        ReplayCount      int64     `json:"replay_count"`
     }
     ListProductCommentResp struct {
         Current int64 `json:"current"`
@@ -26,7 +53,21 @@ type (
         Total int64 `json:"total"`
     }
     UpdateProductCommentReq struct {
-        
+        Id               int64     `json:"id"`
+        ProductId        int64     `json:"product_id"`
+        MemberNickName   string    `json:"member_nick_name"`
+        ProductName      string    `json:"product_name"`
+        Star             int64     `json:"star"`      // 评价星数：0->5
+        MemberIp         string    `json:"member_ip"` // 评价的ip
+        CreateTime       string `json:"create_time"`
+        ShowStatus       int64     `json:"show_status"`
+        ProductAttribute string    `json:"product_attribute"` // 购买时的商品属性
+        CollectCouont    int64     `json:"collect_couont"`
+        ReadCount        int64     `json:"read_count"`
+        Content          string    `json:"content"`
+        Pics             string    `json:"pics"`        // 上传图片地址，以逗号隔开
+        MemberIcon       string    `json:"member_icon"` // 评论用户头像
+        ReplayCount      int64     `json:"replay_count"`
     }
     UpdateProductCommentResp struct {
     }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,9 @@ func NewMemberDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Membe
 }
 
 func (l *MemberDeleteLogic) MemberDelete(req types.DeleteMemberReq) (*types.DeleteMemberResp, error) {
-	// todo: add your logic here and delete this line
+	_, _ = l.svcCtx.Ums.MemberDelete(l.ctx, &umsclient.MemberDeleteReq{
+		Id: req.Id,
+	})
 
 	return &types.DeleteMemberResp{}, nil
 }

@@ -7,7 +7,9 @@ info(
 
 type (
     addMemberTagReq struct {
-       
+        Name              string  `json:"name"`
+        FinishOrderCount  int64   `json:"finish_order_count"`  // 自动打标签完成订单数量
+        FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
     }
     addMemberTagResp struct {
     }
@@ -16,7 +18,10 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtMemberTagData struct {
-        
+        Id                int64   `json:"id"`
+        Name              string  `json:"name"`
+        FinishOrderCount  int64   `json:"finish_order_count"`  // 自动打标签完成订单数量
+        FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
     }
     ListMemberTagResp struct {
         Current int64 `json:"current"`
@@ -26,7 +31,10 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberTagReq struct {
-        
+        Id                int64   `json:"id"`
+        Name              string  `json:"name"`
+        FinishOrderCount  int64   `json:"finish_order_count"`  // 自动打标签完成订单数量
+        FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
     }
     UpdateMemberTagResp struct {
     }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,9 @@ func NewFeightTemplateDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FeightTemplateDeleteLogic) FeightTemplateDelete(req types.DeleteFeightTemplateReq) (*types.DeleteFeightTemplateResp, error) {
-	// todo: add your logic here and delete this line
+	_, _ = l.svcCtx.Pms.FeightTemplateDelete(l.ctx, &pmsclient.FeightTemplateDeleteReq{
+		Id: req.Id,
+	})
 
 	return &types.DeleteFeightTemplateResp{}, nil
 }

@@ -7,7 +7,15 @@ info(
 
 type (
     addCompayAddressReq struct {
-       
+        AddressName   string `json:"address_name"`   // 地址名称
+        SendStatus    int64  `json:"send_status"`    // 默认发货地址：0->否；1->是
+        ReceiveStatus int64  `json:"receive_status"` // 是否默认收货地址：0->否；1->是
+        Name          string `json:"name"`           // 收发货人姓名
+        Phone         string `json:"phone"`          // 收货人电话
+        Province      string `json:"province"`       // 省/直辖市
+        City          string `json:"city"`           // 市
+        Region        string `json:"region"`         // 区
+        DetailAddress string `json:"detail_address"` // 详细地址
     }
     addCompayAddressResp struct {
     }
@@ -16,7 +24,16 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtCompayAddressData struct {
-        
+        Id            int64  `json:"id"`
+        AddressName   string `json:"address_name"`   // 地址名称
+        SendStatus    int64  `json:"send_status"`    // 默认发货地址：0->否；1->是
+        ReceiveStatus int64  `json:"receive_status"` // 是否默认收货地址：0->否；1->是
+        Name          string `json:"name"`           // 收发货人姓名
+        Phone         string `json:"phone"`          // 收货人电话
+        Province      string `json:"province"`       // 省/直辖市
+        City          string `json:"city"`           // 市
+        Region        string `json:"region"`         // 区
+        DetailAddress string `json:"detail_address"` // 详细地址
     }
     ListCompayAddressResp struct {
         Current int64 `json:"current"`
@@ -26,7 +43,16 @@ type (
         Total int64 `json:"total"`
     }
     UpdateCompayAddressReq struct {
-        
+        Id            int64  `json:"id"`
+        AddressName   string `json:"address_name"`   // 地址名称
+        SendStatus    int64  `json:"send_status"`    // 默认发货地址：0->否；1->是
+        ReceiveStatus int64  `json:"receive_status"` // 是否默认收货地址：0->否；1->是
+        Name          string `json:"name"`           // 收发货人姓名
+        Phone         string `json:"phone"`          // 收货人电话
+        Province      string `json:"province"`       // 省/直辖市
+        City          string `json:"city"`           // 市
+        Region        string `json:"region"`         // 区
+        DetailAddress string `json:"detail_address"` // 详细地址
     }
     UpdateCompayAddressResp struct {
     }

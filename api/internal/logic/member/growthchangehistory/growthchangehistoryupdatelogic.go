@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewGrowthChangeHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *GrowthChangeHistoryUpdateLogic) GrowthChangeHistoryUpdate(req types.UpdateGrowthChangeHistoryReq) (*types.UpdateGrowthChangeHistoryResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Ums.GrowthChangeHistoryUpdate(l.ctx, &umsclient.GrowthChangeHistoryUpdateReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateGrowthChangeHistoryResp{}, nil
 }

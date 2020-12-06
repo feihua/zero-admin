@@ -7,7 +7,15 @@ info(
 
 type (
     addMemberAddressReq struct {
-       
+        MemberId      int64  `json:"member_id"`
+        Name          string `json:"name"` // 收货人名称
+        PhoneNumber   string `json:"phone_number"`
+        DefaultStatus int64  `json:"default_status"` // 是否为默认
+        PostCode      string `json:"post_code"`      // 邮政编码
+        Province      string `json:"province"`       // 省份/直辖市
+        City          string `json:"city"`           // 城市
+        Region        string `json:"region"`         // 区
+        DetailAddress string `json:"detail_address"` // 详细地址(街道)
     }
     addMemberAddressResp struct {
     }
@@ -16,7 +24,16 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtMemberAddressData struct {
-        
+        Id            int64  `json:"id"`
+        MemberId      int64  `json:"member_id"`
+        Name          string `json:"name"` // 收货人名称
+        PhoneNumber   string `json:"phone_number"`
+        DefaultStatus int64  `json:"default_status"` // 是否为默认
+        PostCode      string `json:"post_code"`      // 邮政编码
+        Province      string `json:"province"`       // 省份/直辖市
+        City          string `json:"city"`           // 城市
+        Region        string `json:"region"`         // 区
+        DetailAddress string `json:"detail_address"` // 详细地址(街道)
     }
     ListMemberAddressResp struct {
         Current int64 `json:"current"`
@@ -26,7 +43,16 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberAddressReq struct {
-       
+        Id            int64  `json:"id"`
+        MemberId      int64  `json:"member_id"`
+        Name          string `json:"name"` // 收货人名称
+        PhoneNumber   string `json:"phone_number"`
+        DefaultStatus int64  `json:"default_status"` // 是否为默认
+        PostCode      string `json:"post_code"`      // 邮政编码
+        Province      string `json:"province"`       // 省份/直辖市
+        City          string `json:"city"`           // 城市
+        Region        string `json:"region"`         // 区
+        DetailAddress string `json:"detail_address"` // 详细地址(街道)
     }
     UpdateMemberAddressResp struct {
     }

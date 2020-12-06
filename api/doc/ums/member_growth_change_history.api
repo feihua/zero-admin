@@ -7,7 +7,13 @@ info(
 
 type (
     addGrowthChangeHistoryReq struct {
-       
+        MemberId    int64     `json:"member_id"`
+        CreateTime  string `json:"create_time"`
+        ChangeType  int64     `json:"change_type"`  // 改变类型：0->增加；1->减少
+        ChangeCount int64     `json:"change_count"` // 积分改变数量
+        OperateMan  string    `json:"operate_man"`  // 操作人员
+        OperateNote string    `json:"operate_note"` // 操作备注
+        SourceType  int64     `json:"source_type"`  // 积分来源：0->购物；1->管理员修改
     }
     addGrowthChangeHistoryResp struct {
     }
@@ -16,7 +22,14 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtGrowthChangeHistoryData struct {
-        
+        Id          int64     `json:"id"`
+        MemberId    int64     `json:"member_id"`
+        CreateTime  string `json:"create_time"`
+        ChangeType  int64     `json:"change_type"`  // 改变类型：0->增加；1->减少
+        ChangeCount int64     `json:"change_count"` // 积分改变数量
+        OperateMan  string    `json:"operate_man"`  // 操作人员
+        OperateNote string    `json:"operate_note"` // 操作备注
+        SourceType  int64     `json:"source_type"`  // 积分来源：0->购物；1->管理员修改
     }
     ListGrowthChangeHistoryResp struct {
         Current int64 `json:"current"`
@@ -26,7 +39,14 @@ type (
         Total int64 `json:"total"`
     }
     UpdateGrowthChangeHistoryReq struct {
-        
+        Id          int64     `json:"id"`
+        MemberId    int64     `json:"member_id"`
+        CreateTime  string `json:"create_time"`
+        ChangeType  int64     `json:"change_type"`  // 改变类型：0->增加；1->减少
+        ChangeCount int64     `json:"change_count"` // 积分改变数量
+        OperateMan  string    `json:"operate_man"`  // 操作人员
+        OperateNote string    `json:"operate_note"` // 操作备注
+        SourceType  int64     `json:"source_type"`  // 积分来源：0->购物；1->管理员修改
     }
     UpdateGrowthChangeHistoryResp struct {
     }

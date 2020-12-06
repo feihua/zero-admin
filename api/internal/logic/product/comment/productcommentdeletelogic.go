@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,9 @@ func NewProductCommentDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *ProductCommentDeleteLogic) ProductCommentDelete(req types.DeleteProductCommentReq) (*types.DeleteProductCommentResp, error) {
-	// todo: add your logic here and delete this line
+	_, _ = l.svcCtx.Pms.CommentDelete(l.ctx, &pmsclient.CommentDeleteReq{
+		Id: req.Id,
+	})
 
 	return &types.DeleteProductCommentResp{}, nil
 }

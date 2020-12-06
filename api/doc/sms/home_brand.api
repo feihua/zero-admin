@@ -7,7 +7,10 @@ info(
 
 type (
     addHomeBrandReq struct {
-       
+        BrandId         int64  `json:"brand_id"`
+        BrandName       string `json:"brand_name"`
+        RecommendStatus int64  `json:"recommend_status"`
+        Sort            int64  `json:"sort"`
     }
     addHomeBrandResp struct {
     }
@@ -16,7 +19,11 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtHomeBrandData struct {
-        
+        Id              int64  `json:"id"`
+        BrandId         int64  `json:"brand_id"`
+        BrandName       string `json:"brand_name"`
+        RecommendStatus int64  `json:"recommend_status"`
+        Sort            int64  `json:"sort"`
     }
     ListHomeBrandResp struct {
         Current int64 `json:"current"`
@@ -26,7 +33,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateHomeBrandReq struct {
-        
+        Id              int64  `json:"id"`
+        BrandId         int64  `json:"brand_id"`
+        BrandName       string `json:"brand_name"`
+        RecommendStatus int64  `json:"recommend_status"`
+        Sort            int64  `json:"sort"`
     }
     UpdateHomeBrandResp struct {
     }

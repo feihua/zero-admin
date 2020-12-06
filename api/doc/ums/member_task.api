@@ -7,7 +7,10 @@ info(
 
 type (
     addMemberTaskReq struct {
-       
+        Name         string `json:"name"`
+        Growth       int64  `json:"growth"`       // 赠送成长值
+        Intergration int64  `json:"intergration"` // 赠送积分
+        Type         int64  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
     }
     addMemberTaskResp struct {
     }
@@ -16,7 +19,11 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtMemberTaskData struct {
-        
+        Id           int64  `json:"id"`
+        Name         string `json:"name"`
+        Growth       int64  `json:"growth"`       // 赠送成长值
+        Intergration int64  `json:"intergration"` // 赠送积分
+        Type         int64  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
     }
     ListMemberTaskResp struct {
         Current int64 `json:"current"`
@@ -26,7 +33,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberTaskReq struct {
-        
+        Id           int64  `json:"id"`
+        Name         string `json:"name"`
+        Growth       int64  `json:"growth"`       // 赠送成长值
+        Intergration int64  `json:"intergration"` // 赠送积分
+        Type         int64  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
     }
     UpdateMemberTaskResp struct {
     }

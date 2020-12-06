@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewOperateHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *OperateHistoryAddLogic) OperateHistoryAdd(req types.AddOperateHistoryReq) (*types.AddOperateHistoryResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Oms.OrderOperateHistoryAdd(l.ctx, &omsclient.OrderOperateHistoryAddReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddOperateHistoryResp{}, nil
 }

@@ -14,20 +14,112 @@ import (
 )
 
 type (
-	OrderUpdateResp = oms.OrderUpdateResp
-	OrderDeleteReq  = oms.OrderDeleteReq
-	OrderDeleteResp = oms.OrderDeleteResp
-	OrderAddReq     = oms.OrderAddReq
-	OrderAddResp    = oms.OrderAddResp
-	OrderListReq    = oms.OrderListReq
-	OrderListResp   = oms.OrderListResp
-	OrderUpdateReq  = oms.OrderUpdateReq
+	CompanyAddressListData        = oms.CompanyAddressListData
+	CompanyAddressDeleteResp      = oms.CompanyAddressDeleteResp
+	OrderReturnApplyUpdateReq     = oms.OrderReturnApplyUpdateReq
+	OrderSettingAddReq            = oms.OrderSettingAddReq
+	OrderSettingListData          = oms.OrderSettingListData
+	OrderSettingUpdateReq         = oms.OrderSettingUpdateReq
+	OrderSettingDeleteReq         = oms.OrderSettingDeleteReq
+	CartItemAddReq                = oms.CartItemAddReq
+	CartItemUpdateResp            = oms.CartItemUpdateResp
+	CompanyAddressUpdateResp      = oms.CompanyAddressUpdateResp
+	OrderItemAddReq               = oms.OrderItemAddReq
+	OrderOperateHistoryUpdateResp = oms.OrderOperateHistoryUpdateResp
+	OrderReturnReasonAddReq       = oms.OrderReturnReasonAddReq
+	OrderReturnReasonListReq      = oms.OrderReturnReasonListReq
+	OrderSettingAddResp           = oms.OrderSettingAddResp
+	OrderSettingUpdateResp        = oms.OrderSettingUpdateResp
+	CompanyAddressAddResp         = oms.CompanyAddressAddResp
+	OrderReturnReasonListData     = oms.OrderReturnReasonListData
+	CartItemDeleteReq             = oms.CartItemDeleteReq
+	OrderItemUpdateReq            = oms.OrderItemUpdateReq
+	OrderItemUpdateResp           = oms.OrderItemUpdateResp
+	OrderOperateHistoryAddReq     = oms.OrderOperateHistoryAddReq
+	OrderOperateHistoryUpdateReq  = oms.OrderOperateHistoryUpdateReq
+	OrderReturnApplyListReq       = oms.OrderReturnApplyListReq
+	OrderReturnApplyUpdateResp    = oms.OrderReturnApplyUpdateResp
+	OrderReturnReasonListResp     = oms.OrderReturnReasonListResp
+	OrderReturnReasonUpdateReq    = oms.OrderReturnReasonUpdateReq
+	OrderReturnReasonUpdateResp   = oms.OrderReturnReasonUpdateResp
+	CartItemListResp              = oms.CartItemListResp
+	OrderReturnApplyDeleteResp    = oms.OrderReturnApplyDeleteResp
+	OrderSettingListResp          = oms.OrderSettingListResp
+	OrderListReq                  = oms.OrderListReq
+	OrderListResp                 = oms.OrderListResp
+	OrderUpdateReq                = oms.OrderUpdateReq
+	CartItemDeleteResp            = oms.CartItemDeleteResp
+	CompanyAddressAddReq          = oms.CompanyAddressAddReq
+	OrderItemAddResp              = oms.OrderItemAddResp
+	OrderAddReq                   = oms.OrderAddReq
+	CartItemListReq               = oms.CartItemListReq
+	OrderItemListResp             = oms.OrderItemListResp
+	OrderOperateHistoryListReq    = oms.OrderOperateHistoryListReq
+	OrderOperateHistoryDeleteResp = oms.OrderOperateHistoryDeleteResp
+	OrderReturnApplyAddResp       = oms.OrderReturnApplyAddResp
+	OrderReturnReasonDeleteReq    = oms.OrderReturnReasonDeleteReq
+	CompanyAddressListReq         = oms.CompanyAddressListReq
+	OrderItemDeleteReq            = oms.OrderItemDeleteReq
+	OrderReturnApplyAddReq        = oms.OrderReturnApplyAddReq
+	OrderReturnApplyListData      = oms.OrderReturnApplyListData
+	OrderItemListReq              = oms.OrderItemListReq
+	OrderSettingDeleteResp        = oms.OrderSettingDeleteResp
+	OrderUpdateResp               = oms.OrderUpdateResp
+	OrderDeleteReq                = oms.OrderDeleteReq
+	CartItemUpdateReq             = oms.CartItemUpdateReq
+	OrderListData                 = oms.OrderListData
+	CartItemAddResp               = oms.CartItemAddResp
+	OrderOperateHistoryAddResp    = oms.OrderOperateHistoryAddResp
+	OrderOperateHistoryListData   = oms.OrderOperateHistoryListData
+	OrderOperateHistoryListResp   = oms.OrderOperateHistoryListResp
+	OrderOperateHistoryDeleteReq  = oms.OrderOperateHistoryDeleteReq
+	OrderAddResp                  = oms.OrderAddResp
+	CompanyAddressDeleteReq       = oms.CompanyAddressDeleteReq
+	OrderItemListData             = oms.OrderItemListData
+	OrderReturnApplyDeleteReq     = oms.OrderReturnApplyDeleteReq
+	CartItemListData              = oms.CartItemListData
+	CompanyAddressListResp        = oms.CompanyAddressListResp
+	OrderSettingListReq           = oms.OrderSettingListReq
+	OrderDeleteResp               = oms.OrderDeleteResp
+	CompanyAddressUpdateReq       = oms.CompanyAddressUpdateReq
+	OrderReturnReasonAddResp      = oms.OrderReturnReasonAddResp
+	OrderReturnReasonDeleteResp   = oms.OrderReturnReasonDeleteResp
+	OrderItemDeleteResp           = oms.OrderItemDeleteResp
+	OrderReturnApplyListResp      = oms.OrderReturnApplyListResp
 
 	Oms interface {
 		OrderAdd(ctx context.Context, in *OrderAddReq) (*OrderAddResp, error)
 		OrderList(ctx context.Context, in *OrderListReq) (*OrderListResp, error)
 		OrderUpdate(ctx context.Context, in *OrderUpdateReq) (*OrderUpdateResp, error)
 		OrderDelete(ctx context.Context, in *OrderDeleteReq) (*OrderDeleteResp, error)
+		CartItemAdd(ctx context.Context, in *CartItemAddReq) (*CartItemAddResp, error)
+		CartItemList(ctx context.Context, in *CartItemListReq) (*CartItemListResp, error)
+		CartItemUpdate(ctx context.Context, in *CartItemUpdateReq) (*CartItemUpdateResp, error)
+		CartItemDelete(ctx context.Context, in *CartItemDeleteReq) (*CartItemDeleteResp, error)
+		CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq) (*CompanyAddressAddResp, error)
+		CompanyAddressList(ctx context.Context, in *CompanyAddressListReq) (*CompanyAddressListResp, error)
+		CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error)
+		CompanyAddressDelete(ctx context.Context, in *CompanyAddressDeleteReq) (*CompanyAddressDeleteResp, error)
+		OrderItemAdd(ctx context.Context, in *OrderItemAddReq) (*OrderItemAddResp, error)
+		OrderItemList(ctx context.Context, in *OrderItemListReq) (*OrderItemListResp, error)
+		OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq) (*OrderItemUpdateResp, error)
+		OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq) (*OrderItemDeleteResp, error)
+		OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error)
+		OrderOperateHistoryList(ctx context.Context, in *OrderOperateHistoryListReq) (*OrderOperateHistoryListResp, error)
+		OrderOperateHistoryUpdate(ctx context.Context, in *OrderOperateHistoryUpdateReq) (*OrderOperateHistoryUpdateResp, error)
+		OrderOperateHistoryDelete(ctx context.Context, in *OrderOperateHistoryDeleteReq) (*OrderOperateHistoryDeleteResp, error)
+		OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq) (*OrderReturnApplyAddResp, error)
+		OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq) (*OrderReturnApplyListResp, error)
+		OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq) (*OrderReturnApplyUpdateResp, error)
+		OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq) (*OrderReturnApplyDeleteResp, error)
+		OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq) (*OrderReturnReasonAddResp, error)
+		OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq) (*OrderReturnReasonListResp, error)
+		OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error)
+		OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error)
+		OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq) (*OrderSettingAddResp, error)
+		OrderSettingList(ctx context.Context, in *OrderSettingListReq) (*OrderSettingListResp, error)
+		OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq) (*OrderSettingUpdateResp, error)
+		OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq) (*OrderSettingDeleteResp, error)
 	}
 
 	defaultOms struct {
@@ -59,4 +151,144 @@ func (m *defaultOms) OrderUpdate(ctx context.Context, in *OrderUpdateReq) (*Orde
 func (m *defaultOms) OrderDelete(ctx context.Context, in *OrderDeleteReq) (*OrderDeleteResp, error) {
 	client := oms.NewOmsClient(m.cli.Conn())
 	return client.OrderDelete(ctx, in)
+}
+
+func (m *defaultOms) CartItemAdd(ctx context.Context, in *CartItemAddReq) (*CartItemAddResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.CartItemAdd(ctx, in)
+}
+
+func (m *defaultOms) CartItemList(ctx context.Context, in *CartItemListReq) (*CartItemListResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.CartItemList(ctx, in)
+}
+
+func (m *defaultOms) CartItemUpdate(ctx context.Context, in *CartItemUpdateReq) (*CartItemUpdateResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.CartItemUpdate(ctx, in)
+}
+
+func (m *defaultOms) CartItemDelete(ctx context.Context, in *CartItemDeleteReq) (*CartItemDeleteResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.CartItemDelete(ctx, in)
+}
+
+func (m *defaultOms) CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq) (*CompanyAddressAddResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.CompanyAddressAdd(ctx, in)
+}
+
+func (m *defaultOms) CompanyAddressList(ctx context.Context, in *CompanyAddressListReq) (*CompanyAddressListResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.CompanyAddressList(ctx, in)
+}
+
+func (m *defaultOms) CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.CompanyAddressUpdate(ctx, in)
+}
+
+func (m *defaultOms) CompanyAddressDelete(ctx context.Context, in *CompanyAddressDeleteReq) (*CompanyAddressDeleteResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.CompanyAddressDelete(ctx, in)
+}
+
+func (m *defaultOms) OrderItemAdd(ctx context.Context, in *OrderItemAddReq) (*OrderItemAddResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderItemAdd(ctx, in)
+}
+
+func (m *defaultOms) OrderItemList(ctx context.Context, in *OrderItemListReq) (*OrderItemListResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderItemList(ctx, in)
+}
+
+func (m *defaultOms) OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq) (*OrderItemUpdateResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderItemUpdate(ctx, in)
+}
+
+func (m *defaultOms) OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq) (*OrderItemDeleteResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderItemDelete(ctx, in)
+}
+
+func (m *defaultOms) OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderOperateHistoryAdd(ctx, in)
+}
+
+func (m *defaultOms) OrderOperateHistoryList(ctx context.Context, in *OrderOperateHistoryListReq) (*OrderOperateHistoryListResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderOperateHistoryList(ctx, in)
+}
+
+func (m *defaultOms) OrderOperateHistoryUpdate(ctx context.Context, in *OrderOperateHistoryUpdateReq) (*OrderOperateHistoryUpdateResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderOperateHistoryUpdate(ctx, in)
+}
+
+func (m *defaultOms) OrderOperateHistoryDelete(ctx context.Context, in *OrderOperateHistoryDeleteReq) (*OrderOperateHistoryDeleteResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderOperateHistoryDelete(ctx, in)
+}
+
+func (m *defaultOms) OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq) (*OrderReturnApplyAddResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderReturnApplyAdd(ctx, in)
+}
+
+func (m *defaultOms) OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq) (*OrderReturnApplyListResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderReturnApplyList(ctx, in)
+}
+
+func (m *defaultOms) OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq) (*OrderReturnApplyUpdateResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderReturnApplyUpdate(ctx, in)
+}
+
+func (m *defaultOms) OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq) (*OrderReturnApplyDeleteResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderReturnApplyDelete(ctx, in)
+}
+
+func (m *defaultOms) OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq) (*OrderReturnReasonAddResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderReturnReasonAdd(ctx, in)
+}
+
+func (m *defaultOms) OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq) (*OrderReturnReasonListResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderReturnReasonList(ctx, in)
+}
+
+func (m *defaultOms) OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderReturnReasonUpdate(ctx, in)
+}
+
+func (m *defaultOms) OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderReturnReasonDelete(ctx, in)
+}
+
+func (m *defaultOms) OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq) (*OrderSettingAddResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderSettingAdd(ctx, in)
+}
+
+func (m *defaultOms) OrderSettingList(ctx context.Context, in *OrderSettingListReq) (*OrderSettingListResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderSettingList(ctx, in)
+}
+
+func (m *defaultOms) OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq) (*OrderSettingUpdateResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderSettingUpdate(ctx, in)
+}
+
+func (m *defaultOms) OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq) (*OrderSettingDeleteResp, error) {
+	client := oms.NewOmsClient(m.cli.Conn())
+	return client.OrderSettingDelete(ctx, in)
 }

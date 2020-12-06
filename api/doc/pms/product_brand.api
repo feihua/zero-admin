@@ -7,7 +7,16 @@ info(
 
 type (
     addProductBrandReq struct {
-       
+        Name                string `json:"name"`
+        FirstLetter         string `json:"first_letter"` // 首字母
+        Sort                int64  `json:"sort"`
+        FactoryStatus       int64  `json:"factory_status"` // 是否为品牌制造商：0->不是；1->是
+        ShowStatus          int64  `json:"show_status"`
+        ProductCount        int64  `json:"product_count"`         // 产品数量
+        ProductCommentCount int64  `json:"product_comment_count"` // 产品评论数量
+        Logo                string `json:"logo"`                  // 品牌logo
+        BigPic              string `json:"big_pic"`               // 专区大图
+        BrandStory          string `json:"brand_story"`           // 品牌故事
     }
     addProductBrandResp struct {
     }
@@ -16,7 +25,17 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtProductBrandData struct {
-        
+        Id                  int64  `json:"id"`
+        Name                string `json:"name"`
+        FirstLetter         string `json:"first_letter"` // 首字母
+        Sort                int64  `json:"sort"`
+        FactoryStatus       int64  `json:"factory_status"` // 是否为品牌制造商：0->不是；1->是
+        ShowStatus          int64  `json:"show_status"`
+        ProductCount        int64  `json:"product_count"`         // 产品数量
+        ProductCommentCount int64  `json:"product_comment_count"` // 产品评论数量
+        Logo                string `json:"logo"`                  // 品牌logo
+        BigPic              string `json:"big_pic"`               // 专区大图
+        BrandStory          string `json:"brand_story"`           // 品牌故事
     }
     ListProductBrandResp struct {
         Current int64 `json:"current"`
@@ -26,7 +45,17 @@ type (
         Total int64 `json:"total"`
     }
     UpdateProductBrandReq struct {
-        
+        Id                  int64  `json:"id"`
+        Name                string `json:"name"`
+        FirstLetter         string `json:"first_letter"` // 首字母
+        Sort                int64  `json:"sort"`
+        FactoryStatus       int64  `json:"factory_status"` // 是否为品牌制造商：0->不是；1->是
+        ShowStatus          int64  `json:"show_status"`
+        ProductCount        int64  `json:"product_count"`         // 产品数量
+        ProductCommentCount int64  `json:"product_comment_count"` // 产品评论数量
+        Logo                string `json:"logo"`                  // 品牌logo
+        BigPic              string `json:"big_pic"`               // 专区大图
+        BrandStory          string `json:"brand_story"`           // 品牌故事
     }
     UpdateProductBrandResp struct {
     }

@@ -7,7 +7,10 @@ info(
 
 type (
     addHomeNewProductReq struct {
-       
+        ProductId       int64  `json:"product_id"`
+        ProductName     string `json:"product_name"`
+        RecommendStatus int64  `json:"recommend_status"`
+        Sort            int64  `json:"sort"`
     }
     addHomeNewProductResp struct {
     }
@@ -16,7 +19,11 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtHomeNewProductData struct {
-        
+        Id              int64  `json:"id"`
+        ProductId       int64  `json:"product_id"`
+        ProductName     string `json:"product_name"`
+        RecommendStatus int64  `json:"recommend_status"`
+        Sort            int64  `json:"sort"`
     }
     ListHomeNewProductResp struct {
         Current int64 `json:"current"`
@@ -26,7 +33,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateHomeNewProductReq struct {
-        
+        Id              int64  `json:"id"`
+        ProductId       int64  `json:"product_id"`
+        ProductName     string `json:"product_name"`
+        RecommendStatus int64  `json:"recommend_status"`
+        Sort            int64  `json:"sort"`
     }
     UpdateHomeNewProductResp struct {
     }

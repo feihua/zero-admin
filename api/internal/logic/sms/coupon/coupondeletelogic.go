@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,9 @@ func NewCouponDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 }
 
 func (l *CouponDeleteLogic) CouponDelete(req types.DeleteCouponReq) (*types.DeleteCouponResp, error) {
-	// todo: add your logic here and delete this line
+	_, _ = l.svcCtx.Sms.CouponDelete(l.ctx, &smsclient.CouponDeleteReq{
+		Id: req.Id,
+	})
 
 	return &types.DeleteCouponResp{}, nil
 }

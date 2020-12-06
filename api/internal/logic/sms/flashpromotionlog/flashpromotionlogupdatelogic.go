@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewFlashPromotionLogUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *FlashPromotionLogUpdateLogic) FlashPromotionLogUpdate(req types.UpdateFlashPromotionLogReq) (*types.UpdateFlashPromotionLogResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sms.FlashPromotionLogUpdate(l.ctx, &smsclient.FlashPromotionLogUpdateReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateFlashPromotionLogResp{}, nil
 }

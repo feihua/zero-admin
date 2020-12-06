@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewCouponHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *CouponHistoryUpdateLogic) CouponHistoryUpdate(req types.UpdateCouponHistoryReq) (*types.UpdateCouponHistoryResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sms.CouponHistoryUpdate(l.ctx, &smsclient.CouponHistoryUpdateReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateCouponHistoryResp{}, nil
 }

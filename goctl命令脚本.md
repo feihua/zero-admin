@@ -4,7 +4,7 @@
 
 2.创建api
 进到api/doc/目录执行
-goctl api -o borrow.api
+goctl api -o admin.api
 goctl api go -api admin.api -dir ../
 
 3.创建rpc

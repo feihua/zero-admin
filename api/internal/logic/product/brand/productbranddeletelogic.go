@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,9 @@ func NewProductBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *ProductBrandDeleteLogic) ProductBrandDelete(req types.DeleteProductBrandReq) (*types.DeleteProductBrandResp, error) {
-	// todo: add your logic here and delete this line
+	_, _ = l.svcCtx.Pms.BrandDelete(l.ctx, &pmsclient.BrandDeleteReq{
+		Id: req.Id,
+	})
 
 	return &types.DeleteProductBrandResp{}, nil
 }

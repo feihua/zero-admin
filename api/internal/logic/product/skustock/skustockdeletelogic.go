@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,9 @@ func NewSkuStockDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Sku
 }
 
 func (l *SkuStockDeleteLogic) SkuStockDelete(req types.DeleteSkuStockReq) (*types.DeleteSkuStockResp, error) {
-	// todo: add your logic here and delete this line
+	_, _ = l.svcCtx.Pms.SkuStockDelete(l.ctx, &pmsclient.SkuStockDeleteReq{
+		Id: req.Id,
+	})
 
 	return &types.DeleteSkuStockResp{}, nil
 }

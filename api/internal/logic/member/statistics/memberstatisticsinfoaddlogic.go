@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewMemberStatisticsInfoAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *MemberStatisticsInfoAddLogic) MemberStatisticsInfoAdd(req types.AddMemberStatisticsInfoReq) (*types.AddMemberStatisticsInfoResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Ums.MemberStatisticsInfoAdd(l.ctx, &umsclient.MemberStatisticsInfoAddReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddMemberStatisticsInfoResp{}, nil
 }

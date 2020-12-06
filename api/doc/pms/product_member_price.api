@@ -7,7 +7,10 @@ info(
 
 type (
     addMemberPriceReq struct {
-       
+        ProductId       int64   `json:"product_id"`
+        MemberLevelId   int64   `json:"member_level_id"`
+        MemberPrice     float64 `json:"member_price"` // 会员价格
+        MemberLevelName string  `json:"member_level_name"`
     }
     addMemberPriceResp struct {
     }
@@ -16,7 +19,11 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtMemberPriceData struct {
-        
+        Id              int64   `json:"id"`
+        ProductId       int64   `json:"product_id"`
+        MemberLevelId   int64   `json:"member_level_id"`
+        MemberPrice     float64 `json:"member_price"` // 会员价格
+        MemberLevelName string  `json:"member_level_name"`
     }
     ListMemberPriceResp struct {
         Current int64 `json:"current"`
@@ -26,7 +33,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberPriceReq struct {
-        
+        Id              int64   `json:"id"`
+        ProductId       int64   `json:"product_id"`
+        MemberLevelId   int64   `json:"member_level_id"`
+        MemberPrice     float64 `json:"member_price"` // 会员价格
+        MemberLevelName string  `json:"member_level_name"`
     }
     UpdateMemberPriceResp struct {
     }

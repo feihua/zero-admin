@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewCompayAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *CompayAddressUpdateLogic) CompayAddressUpdate(req types.UpdateCompayAddressReq) (*types.UpdateCompayAddressResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Oms.CompanyAddressUpdate(l.ctx, &omsclient.CompanyAddressUpdateReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateCompayAddressResp{}, nil
 }

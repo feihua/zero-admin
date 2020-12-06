@@ -40,3 +40,143 @@ func (s *OmsServer) OrderDelete(ctx context.Context, in *oms.OrderDeleteReq) (*o
 	l := logic.NewOrderDeleteLogic(ctx, s.svcCtx)
 	return l.OrderDelete(in)
 }
+
+func (s *OmsServer) CartItemAdd(ctx context.Context, in *oms.CartItemAddReq) (*oms.CartItemAddResp, error) {
+	l := logic.NewCartItemAddLogic(ctx, s.svcCtx)
+	return l.CartItemAdd(in)
+}
+
+func (s *OmsServer) CartItemList(ctx context.Context, in *oms.CartItemListReq) (*oms.CartItemListResp, error) {
+	l := logic.NewCartItemListLogic(ctx, s.svcCtx)
+	return l.CartItemList(in)
+}
+
+func (s *OmsServer) CartItemUpdate(ctx context.Context, in *oms.CartItemUpdateReq) (*oms.CartItemUpdateResp, error) {
+	l := logic.NewCartItemUpdateLogic(ctx, s.svcCtx)
+	return l.CartItemUpdate(in)
+}
+
+func (s *OmsServer) CartItemDelete(ctx context.Context, in *oms.CartItemDeleteReq) (*oms.CartItemDeleteResp, error) {
+	l := logic.NewCartItemDeleteLogic(ctx, s.svcCtx)
+	return l.CartItemDelete(in)
+}
+
+func (s *OmsServer) CompanyAddressAdd(ctx context.Context, in *oms.CompanyAddressAddReq) (*oms.CompanyAddressAddResp, error) {
+	l := logic.NewCompanyAddressAddLogic(ctx, s.svcCtx)
+	return l.CompanyAddressAdd(in)
+}
+
+func (s *OmsServer) CompanyAddressList(ctx context.Context, in *oms.CompanyAddressListReq) (*oms.CompanyAddressListResp, error) {
+	l := logic.NewCompanyAddressListLogic(ctx, s.svcCtx)
+	return l.CompanyAddressList(in)
+}
+
+func (s *OmsServer) CompanyAddressUpdate(ctx context.Context, in *oms.CompanyAddressUpdateReq) (*oms.CompanyAddressUpdateResp, error) {
+	l := logic.NewCompanyAddressUpdateLogic(ctx, s.svcCtx)
+	return l.CompanyAddressUpdate(in)
+}
+
+func (s *OmsServer) CompanyAddressDelete(ctx context.Context, in *oms.CompanyAddressDeleteReq) (*oms.CompanyAddressDeleteResp, error) {
+	l := logic.NewCompanyAddressDeleteLogic(ctx, s.svcCtx)
+	return l.CompanyAddressDelete(in)
+}
+
+func (s *OmsServer) OrderItemAdd(ctx context.Context, in *oms.OrderItemAddReq) (*oms.OrderItemAddResp, error) {
+	l := logic.NewOrderItemAddLogic(ctx, s.svcCtx)
+	return l.OrderItemAdd(in)
+}
+
+func (s *OmsServer) OrderItemList(ctx context.Context, in *oms.OrderItemListReq) (*oms.OrderItemListResp, error) {
+	l := logic.NewOrderItemListLogic(ctx, s.svcCtx)
+	return l.OrderItemList(in)
+}
+
+func (s *OmsServer) OrderItemUpdate(ctx context.Context, in *oms.OrderItemUpdateReq) (*oms.OrderItemUpdateResp, error) {
+	l := logic.NewOrderItemUpdateLogic(ctx, s.svcCtx)
+	return l.OrderItemUpdate(in)
+}
+
+func (s *OmsServer) OrderItemDelete(ctx context.Context, in *oms.OrderItemDeleteReq) (*oms.OrderItemDeleteResp, error) {
+	l := logic.NewOrderItemDeleteLogic(ctx, s.svcCtx)
+	return l.OrderItemDelete(in)
+}
+
+func (s *OmsServer) OrderOperateHistoryAdd(ctx context.Context, in *oms.OrderOperateHistoryAddReq) (*oms.OrderOperateHistoryAddResp, error) {
+	l := logic.NewOrderOperateHistoryAddLogic(ctx, s.svcCtx)
+	return l.OrderOperateHistoryAdd(in)
+}
+
+func (s *OmsServer) OrderOperateHistoryList(ctx context.Context, in *oms.OrderOperateHistoryListReq) (*oms.OrderOperateHistoryListResp, error) {
+	l := logic.NewOrderOperateHistoryListLogic(ctx, s.svcCtx)
+	return l.OrderOperateHistoryList(in)
+}
+
+func (s *OmsServer) OrderOperateHistoryUpdate(ctx context.Context, in *oms.OrderOperateHistoryUpdateReq) (*oms.OrderOperateHistoryUpdateResp, error) {
+	l := logic.NewOrderOperateHistoryUpdateLogic(ctx, s.svcCtx)
+	return l.OrderOperateHistoryUpdate(in)
+}
+
+func (s *OmsServer) OrderOperateHistoryDelete(ctx context.Context, in *oms.OrderOperateHistoryDeleteReq) (*oms.OrderOperateHistoryDeleteResp, error) {
+	l := logic.NewOrderOperateHistoryDeleteLogic(ctx, s.svcCtx)
+	return l.OrderOperateHistoryDelete(in)
+}
+
+func (s *OmsServer) OrderReturnApplyAdd(ctx context.Context, in *oms.OrderReturnApplyAddReq) (*oms.OrderReturnApplyAddResp, error) {
+	l := logic.NewOrderReturnApplyAddLogic(ctx, s.svcCtx)
+	return l.OrderReturnApplyAdd(in)
+}
+
+func (s *OmsServer) OrderReturnApplyList(ctx context.Context, in *oms.OrderReturnApplyListReq) (*oms.OrderReturnApplyListResp, error) {
+	l := logic.NewOrderReturnApplyListLogic(ctx, s.svcCtx)
+	return l.OrderReturnApplyList(in)
+}
+
+func (s *OmsServer) OrderReturnApplyUpdate(ctx context.Context, in *oms.OrderReturnApplyUpdateReq) (*oms.OrderReturnApplyUpdateResp, error) {
+	l := logic.NewOrderReturnApplyUpdateLogic(ctx, s.svcCtx)
+	return l.OrderReturnApplyUpdate(in)
+}
+
+func (s *OmsServer) OrderReturnApplyDelete(ctx context.Context, in *oms.OrderReturnApplyDeleteReq) (*oms.OrderReturnApplyDeleteResp, error) {
+	l := logic.NewOrderReturnApplyDeleteLogic(ctx, s.svcCtx)
+	return l.OrderReturnApplyDelete(in)
+}
+
+func (s *OmsServer) OrderReturnReasonAdd(ctx context.Context, in *oms.OrderReturnReasonAddReq) (*oms.OrderReturnReasonAddResp, error) {
+	l := logic.NewOrderReturnReasonAddLogic(ctx, s.svcCtx)
+	return l.OrderReturnReasonAdd(in)
+}
+
+func (s *OmsServer) OrderReturnReasonList(ctx context.Context, in *oms.OrderReturnReasonListReq) (*oms.OrderReturnReasonListResp, error) {
+	l := logic.NewOrderReturnReasonListLogic(ctx, s.svcCtx)
+	return l.OrderReturnReasonList(in)
+}
+
+func (s *OmsServer) OrderReturnReasonUpdate(ctx context.Context, in *oms.OrderReturnReasonUpdateReq) (*oms.OrderReturnReasonUpdateResp, error) {
+	l := logic.NewOrderReturnReasonUpdateLogic(ctx, s.svcCtx)
+	return l.OrderReturnReasonUpdate(in)
+}
+
+func (s *OmsServer) OrderReturnReasonDelete(ctx context.Context, in *oms.OrderReturnReasonDeleteReq) (*oms.OrderReturnReasonDeleteResp, error) {
+	l := logic.NewOrderReturnReasonDeleteLogic(ctx, s.svcCtx)
+	return l.OrderReturnReasonDelete(in)
+}
+
+func (s *OmsServer) OrderSettingAdd(ctx context.Context, in *oms.OrderSettingAddReq) (*oms.OrderSettingAddResp, error) {
+	l := logic.NewOrderSettingAddLogic(ctx, s.svcCtx)
+	return l.OrderSettingAdd(in)
+}
+
+func (s *OmsServer) OrderSettingList(ctx context.Context, in *oms.OrderSettingListReq) (*oms.OrderSettingListResp, error) {
+	l := logic.NewOrderSettingListLogic(ctx, s.svcCtx)
+	return l.OrderSettingList(in)
+}
+
+func (s *OmsServer) OrderSettingUpdate(ctx context.Context, in *oms.OrderSettingUpdateReq) (*oms.OrderSettingUpdateResp, error) {
+	l := logic.NewOrderSettingUpdateLogic(ctx, s.svcCtx)
+	return l.OrderSettingUpdate(in)
+}
+
+func (s *OmsServer) OrderSettingDelete(ctx context.Context, in *oms.OrderSettingDeleteReq) (*oms.OrderSettingDeleteResp, error) {
+	l := logic.NewOrderSettingDeleteLogic(ctx, s.svcCtx)
+	return l.OrderSettingDelete(in)
+}

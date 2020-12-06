@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,11 @@ func NewIntegrationConsumeSettingAddLogic(ctx context.Context, svcCtx *svc.Servi
 }
 
 func (l *IntegrationConsumeSettingAddLogic) IntegrationConsumeSettingAdd(req types.AddIntegrationConsumeSettingReq) (*types.AddIntegrationConsumeSettingResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Ums.IntegrationConsumeSettingAdd(l.ctx, &umsclient.IntegrationConsumeSettingAddReq{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.AddIntegrationConsumeSettingResp{}, nil
 }
