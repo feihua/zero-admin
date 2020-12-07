@@ -25,7 +25,26 @@ func NewMemberAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) MemberAd
 }
 
 func (l *MemberAddLogic) MemberAdd(req types.AddMemberReq) (*types.AddMemberResp, error) {
-	_, err := l.svcCtx.Ums.MemberAdd(l.ctx, &umsclient.MemberAddReq{})
+	_, err := l.svcCtx.Ums.MemberAdd(l.ctx, &umsclient.MemberAddReq{
+		MemberLevelId:         req.MemberLevelId,
+		Username:              req.Username,
+		Password:              req.Password,
+		Nickname:              req.Nickname,
+		Phone:                 req.Phone,
+		Status:                req.Status,
+		CreateTime:            req.CreateTime,
+		Icon:                  req.Icon,
+		Gender:                req.Gender,
+		Birthday:              req.Birthday,
+		City:                  req.City,
+		Job:                   req.Job,
+		PersonalizedSignature: req.PersonalizedSignature,
+		SourceType:            req.SourceType,
+		Integration:           req.Integration,
+		Growth:                req.Growth,
+		LuckeyCount:           req.LuckeyCount,
+		HistoryIntegration:    req.HistoryIntegration,
+	})
 
 	if err != nil {
 		return nil, err

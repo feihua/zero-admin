@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/umsmodel"
+	"time"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +26,29 @@ func NewMemberUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Memb
 }
 
 func (l *MemberUpdateLogic) MemberUpdate(in *ums.MemberUpdateReq) (*ums.MemberUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	createTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
+	birthday, _ := time.Parse("2006-01-02 15:04:05", in.Birthday)
+	l.svcCtx.UmsMemberModel.Update(umsmodel.UmsMember{
+		Id:                    in.Id,
+		MemberLevelId:         in.MemberLevelId,
+		Username:              in.Username,
+		Password:              in.Password,
+		Nickname:              in.Nickname,
+		Phone:                 in.Phone,
+		Status:                in.Status,
+		CreateTime:            createTime,
+		Icon:                  in.Icon,
+		Gender:                in.Gender,
+		Birthday:              birthday,
+		City:                  in.City,
+		Job:                   in.Job,
+		PersonalizedSignature: in.PersonalizedSignature,
+		SourceType:            in.SourceType,
+		Integration:           in.Integration,
+		Growth:                in.Growth,
+		LuckeyCount:           in.LuckeyCount,
+		HistoryIntegration:    in.HistoryIntegration,
+	})
 
 	return &ums.MemberUpdateResp{}, nil
 }

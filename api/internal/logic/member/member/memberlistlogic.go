@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -35,28 +34,31 @@ func (l *MemberListLogic) MemberList(req types.ListMemberReq) (*types.ListMember
 		return nil, err
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
+	var list []*types.ListtMemberData
+
+	for _, member := range resp.List {
+		list = append(list, &types.ListtMemberData{
+			Id:                    member.Id,
+			MemberLevelId:         member.MemberLevelId,
+			Username:              member.Username,
+			Password:              member.Password,
+			Nickname:              member.Nickname,
+			Phone:                 member.Phone,
+			Status:                member.Status,
+			CreateTime:            member.CreateTime,
+			Icon:                  member.Icon,
+			Gender:                member.Gender,
+			Birthday:              member.Birthday,
+			City:                  member.City,
+			Job:                   member.Job,
+			PersonalizedSignature: member.PersonalizedSignature,
+			SourceType:            member.SourceType,
+			Integration:           member.Integration,
+			Growth:                member.Growth,
+			LuckeyCount:           member.LuckeyCount,
+			HistoryIntegration:    member.HistoryIntegration,
+		})
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
 
 	return &types.ListMemberResp{
 		Current:  req.Current,
