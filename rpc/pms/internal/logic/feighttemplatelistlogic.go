@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,7 +24,27 @@ func NewFeightTemplateListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *FeightTemplateListLogic) FeightTemplateList(in *pms.FeightTemplateListReq) (*pms.FeightTemplateListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.PmsFeightTemplateModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &pms.FeightTemplateListResp{}, nil
+	var list []*pms.FeightTemplateListData
+	for _, item := range *all {
+
+		list = append(list, &pms.FeightTemplateListData{
+			Id:             item.Id,
+			Name:           item.Name,
+			ChargeType:     item.ChargeType,
+			FirstWeight:    int64(item.FirstWeight),
+			FirstFee:       int64(item.FirstFee),
+			ContinueWeight: int64(item.ContinueWeight),
+			ContinmeFee:    int64(item.ContinmeFee),
+			Dest:           item.Dest,
+		})
+	}
+
+	fmt.Println(list)
+	return &pms.FeightTemplateListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

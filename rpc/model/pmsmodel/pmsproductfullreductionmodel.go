@@ -59,6 +59,27 @@ func (m *PmsProductFullReductionModel) FindOne(id int64) (*PmsProductFullReducti
 	}
 }
 
+func (m *PmsProductFullReductionModel) FindAll(Current int64, PageSize int64) (*[]PmsProductFullReduction, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductFullReductionRows, m.table)
+	var resp []PmsProductFullReduction
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsProductFullReductionModel) Update(data PmsProductFullReduction) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsProductFullReductionRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductId, data.FullPrice, data.ReducePrice, data.Id)

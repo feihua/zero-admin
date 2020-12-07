@@ -24,7 +24,11 @@ func NewMemberLoginLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *MemberLoginLogDeleteLogic) MemberLoginLogDelete(in *ums.MemberLoginLogDeleteReq) (*ums.MemberLoginLogDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.UmsMemberLoginLogModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &ums.MemberLoginLogDeleteResp{}, nil
 }

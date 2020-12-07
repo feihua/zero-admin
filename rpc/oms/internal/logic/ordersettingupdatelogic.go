@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/omsmodel"
 
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
@@ -24,7 +25,17 @@ func NewOrderSettingUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *OrderSettingUpdateLogic) OrderSettingUpdate(in *oms.OrderSettingUpdateReq) (*oms.OrderSettingUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.OmsOrderSettingModel.Update(omsmodel.OmsOrderSetting{
+		Id:                  in.Id,
+		FlashOrderOvertime:  in.FinishOvertime,
+		NormalOrderOvertime: in.NormalOrderOvertime,
+		ConfirmOvertime:     in.ConfirmOvertime,
+		FinishOvertime:      in.FinishOvertime,
+		CommentOvertime:     in.CommentOvertime,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &oms.OrderSettingUpdateResp{}, nil
 }

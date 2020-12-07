@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +25,36 @@ func NewMemberStatisticsInfoListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(in *ums.MemberStatisticsInfoListReq) (*ums.MemberStatisticsInfoListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.UmsMemberStatisticsInfoModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &ums.MemberStatisticsInfoListResp{}, nil
+	var list []*ums.MemberStatisticsInfoListData
+	for _, item := range *all {
+
+		list = append(list, &ums.MemberStatisticsInfoListData{
+			Id:                  item.Id,
+			MemberId:            item.MemberId,
+			ConsumeAmount:       int64(item.ConsumeAmount),
+			OrderCount:          item.OrderCount,
+			CouponCount:         item.CouponCount,
+			CommentCount:        item.CommentCount,
+			ReturnOrderCount:    item.ReturnOrderCount,
+			LoginCount:          item.LoginCount,
+			AttendCount:         item.AttendCount,
+			FansCount:           item.FansCount,
+			CollectProductCount: item.CollectProductCount,
+			CollectSubjectCount: item.CollectSubjectCount,
+			CollectTopicCount:   item.CollectTopicCount,
+			CollectCommentCount: item.CollectCommentCount,
+			InviteFriendCount:   item.InviteFriendCount,
+			RecentOrderTime:     item.RecentOrderTime.Format("2006-01-02 15:04:05"),
+		})
+	}
+
+	fmt.Println(list)
+	return &ums.MemberStatisticsInfoListResp{
+		Total: 10,
+		List:  list,
+	}, nil
+
 }

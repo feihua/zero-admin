@@ -63,6 +63,27 @@ func (m *PmsFeightTemplateModel) FindOne(id int64) (*PmsFeightTemplate, error) {
 	}
 }
 
+func (m *PmsFeightTemplateModel) FindAll(Current int64, PageSize int64) (*[]PmsFeightTemplate, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", pmsFeightTemplateRows, m.table)
+	var resp []PmsFeightTemplate
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsFeightTemplateModel) Update(data PmsFeightTemplate) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsFeightTemplateRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.Name, data.ChargeType, data.FirstWeight, data.FirstFee, data.ContinueWeight, data.ContinmeFee, data.Dest, data.Id)

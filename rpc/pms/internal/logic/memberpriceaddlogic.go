@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/pmsmodel"
 
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
@@ -24,7 +25,15 @@ func NewMemberPriceAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 }
 
 func (l *MemberPriceAddLogic) MemberPriceAdd(in *pms.MemberPriceAddReq) (*pms.MemberPriceAddResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.PmsMemberPriceModel.Insert(pmsmodel.PmsMemberPrice{
+		ProductId:       in.ProductId,
+		MemberLevelId:   in.MemberLevelId,
+		MemberPrice:     float64(in.MemberPrice),
+		MemberLevelName: in.MemberLevelName,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.MemberPriceAddResp{}, nil
 }

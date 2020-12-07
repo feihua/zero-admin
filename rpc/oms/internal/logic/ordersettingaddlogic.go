@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"go-zero-admin/rpc/model/omsmodel"
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
 
@@ -24,7 +24,16 @@ func NewOrderSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *O
 }
 
 func (l *OrderSettingAddLogic) OrderSettingAdd(in *oms.OrderSettingAddReq) (*oms.OrderSettingAddResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.OmsOrderSettingModel.Insert(omsmodel.OmsOrderSetting{
+		FlashOrderOvertime:  in.FinishOvertime,
+		NormalOrderOvertime: in.NormalOrderOvertime,
+		ConfirmOvertime:     in.ConfirmOvertime,
+		FinishOvertime:      in.FinishOvertime,
+		CommentOvertime:     in.CommentOvertime,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &oms.OrderSettingAddResp{}, nil
 }

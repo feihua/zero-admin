@@ -60,6 +60,27 @@ func (m *SmsHomeRecommendProductModel) FindOne(id int64) (*SmsHomeRecommendProdu
 	}
 }
 
+func (m *SmsHomeRecommendProductModel) FindAll(Current int64, PageSize int64) (*[]SmsHomeRecommendProduct, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", smsHomeRecommendProductRows, m.table)
+	var resp []SmsHomeRecommendProduct
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *SmsHomeRecommendProductModel) Update(data SmsHomeRecommendProduct) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsHomeRecommendProductRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductId, data.ProductName, data.RecommendStatus, data.Sort, data.Id)

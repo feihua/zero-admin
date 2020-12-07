@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/pmsmodel"
 
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
@@ -24,7 +25,19 @@ func NewFeightTemplateUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FeightTemplateUpdateLogic) FeightTemplateUpdate(in *pms.FeightTemplateUpdateReq) (*pms.FeightTemplateUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.PmsFeightTemplateModel.Update(pmsmodel.PmsFeightTemplate{
+		Id:             in.Id,
+		Name:           in.Name,
+		ChargeType:     in.ChargeType,
+		FirstWeight:    float64(in.FirstWeight),
+		FirstFee:       float64(in.FirstFee),
+		ContinueWeight: float64(in.ContinueWeight),
+		ContinmeFee:    float64(in.ContinmeFee),
+		Dest:           in.Dest,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.FeightTemplateUpdateResp{}, nil
 }

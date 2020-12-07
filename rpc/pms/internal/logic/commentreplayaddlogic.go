@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/pmsmodel"
+	"time"
 
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
@@ -24,7 +26,18 @@ func NewCommentReplayAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *CommentReplayAddLogic) CommentReplayAdd(in *pms.CommentReplayAddReq) (*pms.CommentReplayAddResp, error) {
-	// todo: add your logic here and delete this line
+	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
+	_, err := l.svcCtx.PmsCommentReplayModel.Insert(pmsmodel.PmsCommentReplay{
+		CommentId:      in.CommentId,
+		MemberNickName: in.MemberNickName,
+		MemberIcon:     in.MemberIcon,
+		Content:        in.Content,
+		CreateTime:     CreateTime,
+		Type:           in.Type,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.CommentReplayAddResp{}, nil
 }

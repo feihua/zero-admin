@@ -46,9 +46,9 @@ func (l *CouponListLogic) CouponList(in *sms.CouponListReq) (*sms.CouponListResp
 			PublishCount: coupon.PublishCount,
 			UseCount:     coupon.UseCount,
 			ReceiveCount: coupon.ReceiveCount,
-			EnableTime:   coupon.EnableTime.Time.Format("2006-01-02 15:04:05"),
-			Code:         coupon.Code.String,
-			MemberLevel:  coupon.MemberLevel.Int64,
+			EnableTime:   coupon.EnableTime.Format("2006-01-02 15:04:05"),
+			Code:         coupon.Code,
+			MemberLevel:  coupon.MemberLevel,
 		})
 
 		fmt.Println(list)

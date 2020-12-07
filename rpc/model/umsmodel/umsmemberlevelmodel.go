@@ -68,6 +68,27 @@ func (m *UmsMemberLevelModel) FindOne(id int64) (*UmsMemberLevel, error) {
 	}
 }
 
+func (m *UmsMemberLevelModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberLevel, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberLevelRows, m.table)
+	var resp []UmsMemberLevel
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *UmsMemberLevelModel) Update(data UmsMemberLevel) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, umsMemberLevelRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note, data.Id)

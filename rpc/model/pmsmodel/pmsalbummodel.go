@@ -61,6 +61,27 @@ func (m *PmsAlbumModel) FindOne(id int64) (*PmsAlbum, error) {
 	}
 }
 
+func (m *PmsAlbumModel) FindAll(Current int64, PageSize int64) (*[]PmsAlbum, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", pmsAlbumRows, m.table)
+	var resp []PmsAlbum
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsAlbumModel) Update(data PmsAlbum) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsAlbumRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.Name, data.CoverPic, data.PicCount, data.Sort, data.Description, data.Id)

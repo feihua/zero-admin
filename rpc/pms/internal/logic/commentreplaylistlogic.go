@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,7 +24,26 @@ func NewCommentReplayListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *CommentReplayListLogic) CommentReplayList(in *pms.CommentReplayListReq) (*pms.CommentReplayListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.PmsCommentReplayModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &pms.CommentReplayListResp{}, nil
+	var list []*pms.CommentReplayListData
+	for _, item := range *all {
+
+		list = append(list, &pms.CommentReplayListData{
+			Id:             item.Id,
+			CommentId:      item.CommentId,
+			MemberNickName: item.MemberNickName,
+			MemberIcon:     item.MemberIcon,
+			Content:        item.Content,
+			CreateTime:     item.CreateTime.Format("2006-01-02 15:04:05"),
+			Type:           item.Type,
+		})
+	}
+
+	fmt.Println(list)
+	return &pms.CommentReplayListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

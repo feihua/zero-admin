@@ -60,6 +60,27 @@ func (m *SmsCouponProductRelationModel) FindOne(id int64) (*SmsCouponProductRela
 	}
 }
 
+func (m *SmsCouponProductRelationModel) FindAll(Current int64, PageSize int64) (*[]SmsCouponProductRelation, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", smsCouponProductRelationRows, m.table)
+	var resp []SmsCouponProductRelation
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *SmsCouponProductRelationModel) Update(data SmsCouponProductRelation) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsCouponProductRelationRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.CouponId, data.ProductId, data.ProductName, data.ProductSn, data.Id)

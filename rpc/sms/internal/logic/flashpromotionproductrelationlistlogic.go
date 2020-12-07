@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,7 +24,27 @@ func NewFlashPromotionProductRelationListLogic(ctx context.Context, svcCtx *svc.
 }
 
 func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationList(in *sms.FlashPromotionProductRelationListReq) (*sms.FlashPromotionProductRelationListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.SmsFlashPromotionProductRelationModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &sms.FlashPromotionProductRelationListResp{}, nil
+	var list []*sms.FlashPromotionProductRelationListData
+	for _, item := range *all {
+
+		list = append(list, &sms.FlashPromotionProductRelationListData{
+			Id:                      item.Id,
+			FlashPromotionId:        item.FlashPromotionId,
+			FlashPromotionSessionId: item.FlashPromotionSessionId,
+			ProductId:               item.ProductId,
+			FlashPromotionPrice:     int64(item.FlashPromotionPrice),
+			FlashPromotionCount:     item.FlashPromotionCount,
+			FlashPromotionLimit:     item.FlashPromotionLimit,
+			Sort:                    item.Sort,
+		})
+	}
+
+	fmt.Println(list)
+	return &sms.FlashPromotionProductRelationListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

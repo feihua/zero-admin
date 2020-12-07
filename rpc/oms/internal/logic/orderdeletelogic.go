@@ -24,7 +24,11 @@ func NewOrderDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Order
 }
 
 func (l *OrderDeleteLogic) OrderDelete(in *oms.OrderDeleteReq) (*oms.OrderDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.OmsOrderModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &oms.OrderDeleteResp{}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/pmsmodel"
 
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
@@ -24,7 +25,13 @@ func NewAlbumPicAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Album
 }
 
 func (l *AlbumPicAddLogic) AlbumPicAdd(in *pms.AlbumPicAddReq) (*pms.AlbumPicAddResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.PmsAlbumPicModel.Insert(pmsmodel.PmsAlbumPic{
+		AlbumId: in.AlbumId,
+		Pic:     in.Pic,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.AlbumPicAddResp{}, nil
 }

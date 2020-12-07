@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/smsmodel"
 
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
@@ -24,7 +25,15 @@ func NewCouponProductCategoryRelationAddLogic(ctx context.Context, svcCtx *svc.S
 }
 
 func (l *CouponProductCategoryRelationAddLogic) CouponProductCategoryRelationAdd(in *sms.CouponProductCategoryRelationAddReq) (*sms.CouponProductCategoryRelationAddResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.SmsCouponProductCategoryRelationModel.Insert(smsmodel.SmsCouponProductCategoryRelation{
+		CouponId:            in.CouponId,
+		ProductCategoryId:   in.ProductCategoryId,
+		ProductCategoryName: in.ProductCategoryName,
+		ParentCategoryName:  in.ParentCategoryName,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.CouponProductCategoryRelationAddResp{}, nil
 }

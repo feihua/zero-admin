@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/smsmodel"
+	"time"
 
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
@@ -24,7 +26,17 @@ func NewFlashPromotionSessionAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(in *sms.FlashPromotionSessionAddReq) (*sms.FlashPromotionSessionAddResp, error) {
-	// todo: add your logic here and delete this line
+	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
+	_, err := l.svcCtx.SmsFlashPromotionSessionModel.Insert(smsmodel.SmsFlashPromotionSession{
+		Name:       in.Name,
+		StartTime:  in.StartTime,
+		EndTime:    in.EndTime,
+		Status:     in.Status,
+		CreateTime: CreateTime,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.FlashPromotionSessionAddResp{}, nil
 }

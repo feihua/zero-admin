@@ -24,7 +24,11 @@ func NewFeightTemplateDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FeightTemplateDeleteLogic) FeightTemplateDelete(in *pms.FeightTemplateDeleteReq) (*pms.FeightTemplateDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.PmsFeightTemplateModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.FeightTemplateDeleteResp{}, nil
 }

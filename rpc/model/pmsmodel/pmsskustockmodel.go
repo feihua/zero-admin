@@ -66,6 +66,27 @@ func (m *PmsSkuStockModel) FindOne(id int64) (*PmsSkuStock, error) {
 	}
 }
 
+func (m *PmsSkuStockModel) FindAll(Current int64, PageSize int64) (*[]PmsSkuStock, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", pmsSkuStockRows, m.table)
+	var resp []PmsSkuStock
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsSkuStockModel) Update(data PmsSkuStock) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsSkuStockRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductId, data.SkuCode, data.Price, data.Stock, data.LowStock, data.Pic, data.Sale, data.PromotionPrice, data.LockStock, data.SpData, data.Id)

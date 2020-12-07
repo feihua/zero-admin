@@ -65,6 +65,27 @@ func (m *UmsMemberReceiveAddressModel) FindOne(id int64) (*UmsMemberReceiveAddre
 	}
 }
 
+func (m *UmsMemberReceiveAddressModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberReceiveAddress, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberReceiveAddressRows, m.table)
+	var resp []UmsMemberReceiveAddress
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *UmsMemberReceiveAddressModel) Update(data UmsMemberReceiveAddress) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, umsMemberReceiveAddressRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.MemberId, data.Name, data.PhoneNumber, data.DefaultStatus, data.PostCode, data.Province, data.City, data.Region, data.DetailAddress, data.Id)

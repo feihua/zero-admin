@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/smsmodel"
 
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
@@ -24,7 +25,16 @@ func NewHomeBrandUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *H
 }
 
 func (l *HomeBrandUpdateLogic) HomeBrandUpdate(in *sms.HomeBrandUpdateReq) (*sms.HomeBrandUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.SmsHomeBrandModel.Update(smsmodel.SmsHomeBrand{
+		Id:              in.Id,
+		BrandId:         in.BrandId,
+		BrandName:       in.BrandName,
+		RecommendStatus: in.RecommendStatus,
+		Sort:            in.Sort,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.HomeBrandUpdateResp{}, nil
 }

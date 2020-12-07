@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/umsmodel"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +25,24 @@ func NewMemberLevelUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberLevelUpdateLogic) MemberLevelUpdate(in *ums.MemberLevelUpdateReq) (*ums.MemberLevelUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.UmsMemberLevelModel.Update(umsmodel.UmsMemberLevel{
+		Id:                    in.Id,
+		Name:                  in.Name,
+		GrowthPoint:           in.GrowthPoint,
+		DefaultStatus:         in.DefaultStatus,
+		FreeFreightPoint:      float64(in.FreeFreightPoint),
+		CommentGrowthPoint:    in.CommentGrowthPoint,
+		PriviledgeFreeFreight: in.PriviledgeFreeFreight,
+		PriviledgeSignIn:      in.PriviledgeSignIn,
+		PriviledgeComment:     in.PriviledgeComment,
+		PriviledgePromotion:   in.PriviledgePromotion,
+		PriviledgeMemberPrice: in.PriviledgeMemberPrice,
+		PriviledgeBirthday:    in.PriviledgeBirthday,
+		Note:                  in.Note,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &ums.MemberLevelUpdateResp{}, nil
 }

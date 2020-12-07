@@ -63,6 +63,27 @@ func (m *PmsCommentReplayModel) FindOne(id int64) (*PmsCommentReplay, error) {
 	}
 }
 
+func (m *PmsCommentReplayModel) FindAll(Current int64, PageSize int64) (*[]PmsCommentReplay, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", pmsCommentReplayRows, m.table)
+	var resp []PmsCommentReplay
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsCommentReplayModel) Update(data PmsCommentReplay) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsCommentReplayRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.CommentId, data.MemberNickName, data.MemberIcon, data.Content, data.Type, data.Id)

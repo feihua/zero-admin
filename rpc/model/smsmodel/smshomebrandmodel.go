@@ -60,6 +60,27 @@ func (m *SmsHomeBrandModel) FindOne(id int64) (*SmsHomeBrand, error) {
 	}
 }
 
+func (m *SmsHomeBrandModel) FindAll(Current int64, PageSize int64) (*[]SmsHomeBrand, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", smsHomeBrandRows, m.table)
+	var resp []SmsHomeBrand
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *SmsHomeBrandModel) Update(data SmsHomeBrand) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsHomeBrandRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.BrandId, data.BrandName, data.RecommendStatus, data.Sort, data.Id)

@@ -60,6 +60,27 @@ func (m *PmsProductLadderModel) FindOne(id int64) (*PmsProductLadder, error) {
 	}
 }
 
+func (m *PmsProductLadderModel) FindAll(Current int64, PageSize int64) (*[]PmsProductLadder, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductLadderRows, m.table)
+	var resp []PmsProductLadder
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsProductLadderModel) Update(data PmsProductLadder) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsProductLadderRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductId, data.Count, data.Discount, data.Price, data.Id)

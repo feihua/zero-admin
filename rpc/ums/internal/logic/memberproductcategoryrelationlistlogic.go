@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +25,23 @@ func NewMemberProductCategoryRelationListLogic(ctx context.Context, svcCtx *svc.
 }
 
 func (l *MemberProductCategoryRelationListLogic) MemberProductCategoryRelationList(in *ums.MemberProductCategoryRelationListReq) (*ums.MemberProductCategoryRelationListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.UmsMemberProductCategoryRelationModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &ums.MemberProductCategoryRelationListResp{}, nil
+	var list []*ums.MemberProductCategoryRelationListData
+	for _, item := range *all {
+
+		list = append(list, &ums.MemberProductCategoryRelationListData{
+			Id:                item.Id,
+			MemberId:          item.MemberId,
+			ProductCategoryId: item.ProductCategoryId,
+		})
+	}
+
+	fmt.Println(list)
+	return &ums.MemberProductCategoryRelationListResp{
+		Total: 10,
+		List:  list,
+	}, nil
+
 }

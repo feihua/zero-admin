@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/pmsmodel"
 
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
@@ -24,7 +25,14 @@ func NewProductAttributeCategoryAddLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *ProductAttributeCategoryAddLogic) ProductAttributeCategoryAdd(in *pms.ProductAttributeCategoryAddReq) (*pms.ProductAttributeCategoryAddResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.PmsProductAttributeCategoryModel.Insert(pmsmodel.PmsProductAttributeCategory{
+		Name:           in.Name,
+		AttributeCount: in.AttributeCount,
+		ParamCount:     in.ParamCount,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.ProductAttributeCategoryAddResp{}, nil
 }

@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,7 +24,24 @@ func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Hom
 }
 
 func (l *HomeBrandListLogic) HomeBrandList(in *sms.HomeBrandListReq) (*sms.HomeBrandListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.SmsHomeBrandModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &sms.HomeBrandListResp{}, nil
+	var list []*sms.HomeBrandListData
+	for _, item := range *all {
+
+		list = append(list, &sms.HomeBrandListData{
+			Id:              item.Id,
+			BrandId:         item.BrandId,
+			BrandName:       item.BrandName,
+			RecommendStatus: item.RecommendStatus,
+			Sort:            item.Sort,
+		})
+	}
+
+	fmt.Println(list)
+	return &sms.HomeBrandListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

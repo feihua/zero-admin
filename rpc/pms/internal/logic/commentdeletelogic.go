@@ -24,7 +24,11 @@ func NewCommentDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Com
 }
 
 func (l *CommentDeleteLogic) CommentDelete(in *pms.CommentDeleteReq) (*pms.CommentDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.PmsCommentModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.CommentDeleteResp{}, nil
 }

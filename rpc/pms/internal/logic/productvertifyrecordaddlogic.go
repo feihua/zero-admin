@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/pmsmodel"
+	"time"
 
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
@@ -24,7 +26,17 @@ func NewProductVertifyRecordAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *ProductVertifyRecordAddLogic) ProductVertifyRecordAdd(in *pms.ProductVertifyRecordAddReq) (*pms.ProductVertifyRecordAddResp, error) {
-	// todo: add your logic here and delete this line
+	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
+	_, err := l.svcCtx.PmsProductVertifyRecordModel.Insert(pmsmodel.PmsProductVertifyRecord{
+		ProductId:  in.ProductId,
+		CreateTime: CreateTime,
+		VertifyMan: in.VertifyMan,
+		Status:     in.Status,
+		Detail:     in.Detail,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.ProductVertifyRecordAddResp{}, nil
 }

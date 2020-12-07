@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
@@ -24,7 +25,29 @@ func NewCompanyAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *CompanyAddressListLogic) CompanyAddressList(in *oms.CompanyAddressListReq) (*oms.CompanyAddressListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.OmsCompanyAddressModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &oms.CompanyAddressListResp{}, nil
+	var list []*oms.CompanyAddressListData
+	for _, item := range *all {
+
+		list = append(list, &oms.CompanyAddressListData{
+			Id:            item.Id,
+			AddressName:   item.AddressName,
+			SendStatus:    item.SendStatus,
+			ReceiveStatus: item.ReceiveStatus,
+			Name:          item.Name,
+			Phone:         item.Phone,
+			Province:      item.Province,
+			City:          item.City,
+			Region:        item.Region,
+			DetailAddress: item.DetailAddress,
+		})
+	}
+
+	fmt.Println(list)
+	return &oms.CompanyAddressListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

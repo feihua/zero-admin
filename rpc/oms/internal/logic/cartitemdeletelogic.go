@@ -24,7 +24,11 @@ func NewCartItemDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 }
 
 func (l *CartItemDeleteLogic) CartItemDelete(in *oms.CartItemDeleteReq) (*oms.CartItemDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.OmsCartItemModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &oms.CartItemDeleteResp{}, nil
 }

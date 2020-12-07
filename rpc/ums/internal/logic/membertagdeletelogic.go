@@ -24,7 +24,11 @@ func NewMemberTagDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 }
 
 func (l *MemberTagDeleteLogic) MemberTagDelete(in *ums.MemberTagDeleteReq) (*ums.MemberTagDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.UmsMemberTagModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &ums.MemberTagDeleteResp{}, nil
 }

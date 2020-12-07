@@ -24,7 +24,11 @@ func NewIntegrationConsumeSettingDeleteLogic(ctx context.Context, svcCtx *svc.Se
 }
 
 func (l *IntegrationConsumeSettingDeleteLogic) IntegrationConsumeSettingDelete(in *ums.IntegrationConsumeSettingDeleteReq) (*ums.IntegrationConsumeSettingDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.UmsIntegrationConsumeSettingModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &ums.IntegrationConsumeSettingDeleteResp{}, nil
 }

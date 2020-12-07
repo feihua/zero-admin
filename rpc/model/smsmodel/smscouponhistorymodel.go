@@ -67,6 +67,27 @@ func (m *SmsCouponHistoryModel) FindOne(id int64) (*SmsCouponHistory, error) {
 	}
 }
 
+func (m *SmsCouponHistoryModel) FindAll(Current int64, PageSize int64) (*[]SmsCouponHistory, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", smsCouponHistoryRows, m.table)
+	var resp []SmsCouponHistory
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *SmsCouponHistoryModel) Update(data SmsCouponHistory) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsCouponHistoryRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.CouponId, data.MemberId, data.CouponCode, data.MemberNickname, data.GetType, data.UseStatus, data.UseTime, data.OrderId, data.OrderSn, data.Id)

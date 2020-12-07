@@ -74,6 +74,27 @@ func (m *OmsCartItemModel) FindOne(id int64) (*OmsCartItem, error) {
 	}
 }
 
+func (m *OmsCartItemModel) FindAll(Current int64, PageSize int64) (*[]OmsCartItem, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", omsCartItemRows, m.table)
+	var resp []OmsCartItem
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *OmsCartItemModel) Update(data OmsCartItem) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, omsCartItemRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductId, data.ProductSkuId, data.MemberId, data.Quantity, data.Price, data.ProductPic, data.ProductName, data.ProductSubTitle, data.ProductSkuCode, data.MemberNickname, data.CreateDate, data.ModifyDate, data.DeleteStatus, data.ProductCategoryId, data.ProductBrand, data.ProductSn, data.ProductAttr, data.Id)

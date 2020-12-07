@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/umsmodel"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +25,14 @@ func NewMemberProductCategoryRelationUpdateLogic(ctx context.Context, svcCtx *sv
 }
 
 func (l *MemberProductCategoryRelationUpdateLogic) MemberProductCategoryRelationUpdate(in *ums.MemberProductCategoryRelationUpdateReq) (*ums.MemberProductCategoryRelationUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.UmsMemberProductCategoryRelationModel.Update(umsmodel.UmsMemberProductCategoryRelation{
+		Id:                in.Id,
+		MemberId:          in.MemberId,
+		ProductCategoryId: in.ProductCategoryId,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &ums.MemberProductCategoryRelationUpdateResp{}, nil
 }

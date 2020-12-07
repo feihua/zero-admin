@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +25,29 @@ func NewGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(in *ums.GrowthChangeHistoryListReq) (*ums.GrowthChangeHistoryListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.UmsGrowthChangeHistoryModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
+
+	var list []*ums.GrowthChangeHistoryListData
+	for _, item := range *all {
+
+		list = append(list, &ums.GrowthChangeHistoryListData{
+			Id:          item.Id,
+			MemberId:    item.MemberId,
+			CreateTime:  item.CreateTime.Format("2006-01-02 15:04:05"),
+			ChangeType:  item.ChangeType,
+			ChangeCount: item.ChangeCount,
+			OperateMan:  item.OperateMan,
+			OperateNote: item.OperateNote,
+			SourceType:  item.SourceType,
+		})
+	}
+
+	fmt.Println(list)
+	return &ums.GrowthChangeHistoryListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 
 	return &ums.GrowthChangeHistoryListResp{}, nil
 }

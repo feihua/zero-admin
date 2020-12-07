@@ -24,7 +24,11 @@ func NewCouponProductRelationDeleteLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *CouponProductRelationDeleteLogic) CouponProductRelationDelete(in *sms.CouponProductRelationDeleteReq) (*sms.CouponProductRelationDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.SmsCouponProductRelationModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.CouponProductRelationDeleteResp{}, nil
 }

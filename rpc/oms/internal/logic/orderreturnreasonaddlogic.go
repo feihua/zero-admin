@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
-
+	"go-zero-admin/rpc/model/omsmodel"
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
+	"time"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,7 +25,16 @@ func NewOrderReturnReasonAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *OrderReturnReasonAddLogic) OrderReturnReasonAdd(in *oms.OrderReturnReasonAddReq) (*oms.OrderReturnReasonAddResp, error) {
-	// todo: add your logic here and delete this line
+	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
+	_, err := l.svcCtx.OmsOrderReturnReasonModel.Insert(omsmodel.OmsOrderReturnReason{
+		Name:       in.Name,
+		Sort:       in.Sort,
+		Status:     in.Status,
+		CreateTime: CreateTime,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &oms.OrderReturnReasonAddResp{}, nil
 }

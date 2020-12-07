@@ -24,7 +24,11 @@ func NewFlashPromotionDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FlashPromotionDeleteLogic) FlashPromotionDelete(in *sms.FlashPromotionDeleteReq) (*sms.FlashPromotionDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.SmsFlashPromotionModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.FlashPromotionDeleteResp{}, nil
 }

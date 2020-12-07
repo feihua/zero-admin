@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,7 +24,31 @@ func NewHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *sms.HomeAdvertiseListReq) (*sms.HomeAdvertiseListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.SmsHomeAdvertiseModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &sms.HomeAdvertiseListResp{}, nil
+	var list []*sms.HomeAdvertiseListData
+	for _, item := range *all {
+
+		list = append(list, &sms.HomeAdvertiseListData{
+			Id:         item.Id,
+			Name:       item.Name,
+			Type:       item.Type,
+			Pic:        item.Pic,
+			StartTime:  item.StartTime.Format("2006-01-02 15:04:05"),
+			EndTime:    item.EndTime.Format("2006-01-02 15:04:05"),
+			Status:     item.Status,
+			ClickCount: item.ClickCount,
+			OrderCount: item.OrderCount,
+			Url:        item.Url,
+			Note:       item.Note,
+			Sort:       item.Sort,
+		})
+	}
+
+	fmt.Println(list)
+	return &sms.HomeAdvertiseListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

@@ -68,6 +68,27 @@ func (m *SmsHomeAdvertiseModel) FindOne(id int64) (*SmsHomeAdvertise, error) {
 	}
 }
 
+func (m *SmsHomeAdvertiseModel) FindAll(Current int64, PageSize int64) (*[]SmsHomeAdvertise, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", smsHomeAdvertiseRows, m.table)
+	var resp []SmsHomeAdvertise
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *SmsHomeAdvertiseModel) Update(data SmsHomeAdvertise) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsHomeAdvertiseRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.Name, data.Type, data.Pic, data.StartTime, data.EndTime, data.Status, data.ClickCount, data.OrderCount, data.Url, data.Note, data.Sort, data.Id)

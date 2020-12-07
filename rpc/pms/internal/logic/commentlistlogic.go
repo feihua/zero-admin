@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,7 +24,34 @@ func NewCommentListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Comme
 }
 
 func (l *CommentListLogic) CommentList(in *pms.CommentListReq) (*pms.CommentListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.PmsCommentModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &pms.CommentListResp{}, nil
+	var list []*pms.CommentListData
+	for _, item := range *all {
+
+		list = append(list, &pms.CommentListData{
+			Id:               item.Id,
+			ProductId:        item.ProductId,
+			MemberNickName:   item.MemberNickName,
+			ProductName:      item.ProductName,
+			Star:             item.Star,
+			MemberIp:         item.MemberIp,
+			CreateTime:       item.CreateTime.Format("2006-01-02 15:04:05"),
+			ShowStatus:       item.ShowStatus,
+			ProductAttribute: item.ProductAttribute,
+			CollectCouont:    item.CollectCouont,
+			ReadCount:        item.ReadCount,
+			Content:          item.Content,
+			Pics:             item.Pics,
+			MemberIcon:       item.MemberIcon,
+			ReplayCount:      item.ReplayCount,
+		})
+	}
+
+	fmt.Println(list)
+	return &pms.CommentListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

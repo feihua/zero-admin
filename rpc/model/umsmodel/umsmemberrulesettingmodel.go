@@ -62,6 +62,27 @@ func (m *UmsMemberRuleSettingModel) FindOne(id int64) (*UmsMemberRuleSetting, er
 	}
 }
 
+func (m *UmsMemberRuleSettingModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberRuleSetting, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberRuleSettingRows, m.table)
+	var resp []UmsMemberRuleSetting
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *UmsMemberRuleSettingModel) Update(data UmsMemberRuleSetting) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, umsMemberRuleSettingRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ContinueSignDay, data.ContinueSignPoint, data.ConsumePerPoint, data.LowOrderAmount, data.MaxPointPerOrder, data.Type, data.Id)

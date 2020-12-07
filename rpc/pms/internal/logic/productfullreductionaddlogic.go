@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/pmsmodel"
 
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
@@ -24,7 +25,14 @@ func NewProductFullReductionAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *ProductFullReductionAddLogic) ProductFullReductionAdd(in *pms.ProductFullReductionAddReq) (*pms.ProductFullReductionAddResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.PmsProductFullReductionModel.Insert(pmsmodel.PmsProductFullReduction{
+		ProductId:   in.ProductId,
+		FullPrice:   float64(in.FullPrice),
+		ReducePrice: float64(in.ReducePrice),
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.ProductFullReductionAddResp{}, nil
 }

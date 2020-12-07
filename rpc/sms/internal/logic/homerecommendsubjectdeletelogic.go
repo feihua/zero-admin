@@ -24,7 +24,11 @@ func NewHomeRecommendSubjectDeleteLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(in *sms.HomeRecommendSubjectDeleteReq) (*sms.HomeRecommendSubjectDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.SmsHomeRecommendSubjectModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.HomeRecommendSubjectDeleteResp{}, nil
 }

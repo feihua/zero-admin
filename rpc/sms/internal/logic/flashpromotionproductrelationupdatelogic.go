@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/smsmodel"
 
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
@@ -24,7 +25,19 @@ func NewFlashPromotionProductRelationUpdateLogic(ctx context.Context, svcCtx *sv
 }
 
 func (l *FlashPromotionProductRelationUpdateLogic) FlashPromotionProductRelationUpdate(in *sms.FlashPromotionProductRelationUpdateReq) (*sms.FlashPromotionProductRelationUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.SmsFlashPromotionProductRelationModel.Update(smsmodel.SmsFlashPromotionProductRelation{
+		Id:                      in.Id,
+		FlashPromotionId:        in.FlashPromotionId,
+		FlashPromotionSessionId: in.FlashPromotionSessionId,
+		ProductId:               in.ProductId,
+		FlashPromotionPrice:     float64(in.FlashPromotionPrice),
+		FlashPromotionCount:     in.FlashPromotionCount,
+		FlashPromotionLimit:     in.FlashPromotionLimit,
+		Sort:                    in.Sort,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.FlashPromotionProductRelationUpdateResp{}, nil
 }

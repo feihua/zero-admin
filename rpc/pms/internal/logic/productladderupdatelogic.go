@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/pmsmodel"
 
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
@@ -24,7 +25,16 @@ func NewProductLadderUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *ProductLadderUpdateLogic) ProductLadderUpdate(in *pms.ProductLadderUpdateReq) (*pms.ProductLadderUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.PmsProductLadderModel.Update(pmsmodel.PmsProductLadder{
+		Id:        in.Id,
+		ProductId: in.ProductId,
+		Count:     in.Count,
+		Discount:  float64(in.Discount),
+		Price:     float64(in.Price),
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.ProductLadderUpdateResp{}, nil
 }

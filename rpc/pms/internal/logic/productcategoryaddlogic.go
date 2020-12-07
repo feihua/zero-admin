@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/pmsmodel"
 
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
@@ -24,7 +25,22 @@ func NewProductCategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *ProductCategoryAddLogic) ProductCategoryAdd(in *pms.ProductCategoryAddReq) (*pms.ProductCategoryAddResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.PmsProductCategoryModel.Insert(pmsmodel.PmsProductCategory{
+		ParentId:     in.ParentId,
+		Name:         in.Name,
+		Level:        in.Level,
+		ProductCount: in.ProductCount,
+		ProductUnit:  in.ProductUnit,
+		NavStatus:    in.NavStatus,
+		ShowStatus:   in.ShowStatus,
+		Sort:         in.Sort,
+		Icon:         in.Icon,
+		Keywords:     in.Keywords,
+		Description:  in.Description,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.ProductCategoryAddResp{}, nil
 }

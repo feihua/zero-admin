@@ -24,7 +24,11 @@ func NewOrderOperateHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *OrderOperateHistoryDeleteLogic) OrderOperateHistoryDelete(in *oms.OrderOperateHistoryDeleteReq) (*oms.OrderOperateHistoryDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.OmsOrderOperateHistoryModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &oms.OrderOperateHistoryDeleteResp{}, nil
 }

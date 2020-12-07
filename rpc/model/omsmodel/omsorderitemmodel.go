@@ -76,6 +76,27 @@ func (m *OmsOrderItemModel) FindOne(id int64) (*OmsOrderItem, error) {
 	}
 }
 
+func (m *OmsOrderItemModel) FindAll(Current int64, PageSize int64) (*[]OmsOrderItem, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderItemRows, m.table)
+	var resp []OmsOrderItem
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *OmsOrderItemModel) Update(data OmsOrderItem) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, omsOrderItemRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.OrderId, data.OrderSn, data.ProductId, data.ProductPic, data.ProductName, data.ProductBrand, data.ProductSn, data.ProductPrice, data.ProductQuantity, data.ProductSkuId, data.ProductSkuCode, data.ProductCategoryId, data.PromotionName, data.PromotionAmount, data.CouponAmount, data.IntegrationAmount, data.RealAmount, data.GiftIntegration, data.GiftGrowth, data.ProductAttr, data.Id)

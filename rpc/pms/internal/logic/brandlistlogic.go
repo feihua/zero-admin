@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,7 +24,30 @@ func NewBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandLi
 }
 
 func (l *BrandListLogic) BrandList(in *pms.BrandListReq) (*pms.BrandListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.PmsBrandModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &pms.BrandListResp{}, nil
+	var list []*pms.BrandListData
+	for _, item := range *all {
+
+		list = append(list, &pms.BrandListData{
+			Id:                  item.Id,
+			Name:                item.Name,
+			FirstLetter:         item.FirstLetter,
+			Sort:                item.Sort,
+			FactoryStatus:       item.FactoryStatus,
+			ShowStatus:          item.ShowStatus,
+			ProductCount:        item.ProductCount,
+			ProductCommentCount: item.ProductCommentCount,
+			Logo:                item.Logo,
+			BigPic:              item.BigPic,
+			BrandStory:          item.BrandStory,
+		})
+	}
+
+	fmt.Println(list)
+	return &pms.BrandListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

@@ -60,6 +60,27 @@ func (m *UmsIntegrationConsumeSettingModel) FindOne(id int64) (*UmsIntegrationCo
 	}
 }
 
+func (m *UmsIntegrationConsumeSettingModel) FindAll(Current int64, PageSize int64) (*[]UmsIntegrationConsumeSetting, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", umsIntegrationConsumeSettingRows, m.table)
+	var resp []UmsIntegrationConsumeSetting
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *UmsIntegrationConsumeSettingModel) Update(data UmsIntegrationConsumeSetting) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, umsIntegrationConsumeSettingRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.DeductionPerAmount, data.MaxPercentPerOrder, data.UseUnit, data.CouponStatus, data.Id)

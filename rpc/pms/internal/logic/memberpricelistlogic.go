@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,7 +24,24 @@ func NewMemberPriceListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 }
 
 func (l *MemberPriceListLogic) MemberPriceList(in *pms.MemberPriceListReq) (*pms.MemberPriceListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.PmsMemberPriceModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &pms.MemberPriceListResp{}, nil
+	var list []*pms.MemberPriceListData
+	for _, item := range *all {
+
+		list = append(list, &pms.MemberPriceListData{
+			Id:              item.Id,
+			ProductId:       item.ProductId,
+			MemberLevelId:   item.MemberLevelId,
+			MemberPrice:     int64(item.MemberPrice),
+			MemberLevelName: item.MemberLevelName,
+		})
+	}
+
+	fmt.Println(list)
+	return &pms.MemberPriceListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

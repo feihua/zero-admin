@@ -59,6 +59,27 @@ func (m *UmsMemberTagModel) FindOne(id int64) (*UmsMemberTag, error) {
 	}
 }
 
+func (m *UmsMemberTagModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberTag, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberTagRows, m.table)
+	var resp []UmsMemberTag
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *UmsMemberTagModel) Update(data UmsMemberTag) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, umsMemberTagRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.Name, data.FinishOrderCount, data.FinishOrderAmount, data.Id)

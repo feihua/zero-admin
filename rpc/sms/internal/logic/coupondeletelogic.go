@@ -24,7 +24,11 @@ func NewCouponDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Coup
 }
 
 func (l *CouponDeleteLogic) CouponDelete(in *sms.CouponDeleteReq) (*sms.CouponDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.SmsCouponModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.CouponDeleteResp{}, nil
 }

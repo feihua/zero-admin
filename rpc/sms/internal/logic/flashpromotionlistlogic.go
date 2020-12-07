@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,7 +24,25 @@ func NewFlashPromotionListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *FlashPromotionListLogic) FlashPromotionList(in *sms.FlashPromotionListReq) (*sms.FlashPromotionListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.SmsFlashPromotionModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &sms.FlashPromotionListResp{}, nil
+	var list []*sms.FlashPromotionListData
+	for _, item := range *all {
+
+		list = append(list, &sms.FlashPromotionListData{
+			Id:         item.Id,
+			Title:      item.Title,
+			StartDate:  item.StartDate.Format("2006-01-02 15:04:05"),
+			EndDate:    item.EndDate.Format("2006-01-02 15:04:05"),
+			Status:     item.Status,
+			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
+		})
+	}
+
+	fmt.Println(list)
+	return &sms.FlashPromotionListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/umsmodel"
+	"time"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +26,19 @@ func NewMemberLoginLogUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *MemberLoginLogUpdateLogic) MemberLoginLogUpdate(in *ums.MemberLoginLogUpdateReq) (*ums.MemberLoginLogUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
+	err := l.svcCtx.UmsMemberLoginLogModel.Update(umsmodel.UmsMemberLoginLog{
+		Id:         in.Id,
+		MemberId:   in.MemberId,
+		CreateTime: CreateTime,
+		Ip:         in.Ip,
+		City:       in.City,
+		LoginType:  in.LoginType,
+		Province:   in.Province,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &ums.MemberLoginLogUpdateResp{}, nil
 }

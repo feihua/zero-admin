@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,7 +24,24 @@ func NewCouponProductRelationListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *CouponProductRelationListLogic) CouponProductRelationList(in *sms.CouponProductRelationListReq) (*sms.CouponProductRelationListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.SmsCouponProductRelationModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &sms.CouponProductRelationListResp{}, nil
+	var list []*sms.CouponProductRelationListData
+	for _, item := range *all {
+
+		list = append(list, &sms.CouponProductRelationListData{
+			Id:          item.Id,
+			CouponId:    item.CouponId,
+			ProductId:   item.ProductId,
+			ProductName: item.ProductName,
+			ProductSn:   item.ProductSn,
+		})
+	}
+
+	fmt.Println(list)
+	return &sms.CouponProductRelationListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

@@ -24,7 +24,11 @@ func NewProductOperateLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *ProductOperateLogDeleteLogic) ProductOperateLogDelete(in *pms.ProductOperateLogDeleteReq) (*pms.ProductOperateLogDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.PmsProductOperateLogModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.ProductOperateLogDeleteResp{}, nil
 }

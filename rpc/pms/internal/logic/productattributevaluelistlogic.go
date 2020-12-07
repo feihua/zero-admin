@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,7 +24,23 @@ func NewProductAttributeValueListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *ProductAttributeValueListLogic) ProductAttributeValueList(in *pms.ProductAttributeValueListReq) (*pms.ProductAttributeValueListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.PmsProductAttributeValueModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &pms.ProductAttributeValueListResp{}, nil
+	var list []*pms.ProductAttributeValueListData
+	for _, item := range *all {
+
+		list = append(list, &pms.ProductAttributeValueListData{
+			Id:                 item.Id,
+			ProductId:          item.ProductId,
+			ProductAttributeId: item.ProductAttributeId,
+			Value:              item.Value,
+		})
+	}
+
+	fmt.Println(list)
+	return &pms.ProductAttributeValueListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

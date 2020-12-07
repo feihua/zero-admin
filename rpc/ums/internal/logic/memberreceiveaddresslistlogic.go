@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +25,30 @@ func NewMemberReceiveAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *ums.MemberReceiveAddressListReq) (*ums.MemberReceiveAddressListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &ums.MemberReceiveAddressListResp{}, nil
+	var list []*ums.MemberReceiveAddressListData
+	for _, item := range *all {
+
+		list = append(list, &ums.MemberReceiveAddressListData{
+			Id:            item.Id,
+			MemberId:      item.MemberId,
+			Name:          item.Name,
+			PhoneNumber:   item.PhoneNumber,
+			DefaultStatus: item.DefaultStatus,
+			PostCode:      item.PostCode,
+			Province:      item.Province,
+			City:          item.City,
+			Region:        item.Region,
+			DetailAddress: item.DetailAddress,
+		})
+	}
+
+	fmt.Println(list)
+	return &ums.MemberReceiveAddressListResp{
+		Total: 10,
+		List:  list,
+	}, nil
+
 }

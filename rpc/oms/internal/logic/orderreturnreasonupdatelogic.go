@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/omsmodel"
+	"time"
 
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
@@ -24,7 +26,17 @@ func NewOrderReturnReasonUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *OrderReturnReasonUpdateLogic) OrderReturnReasonUpdate(in *oms.OrderReturnReasonUpdateReq) (*oms.OrderReturnReasonUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
+	err := l.svcCtx.OmsOrderReturnReasonModel.Update(omsmodel.OmsOrderReturnReason{
+		Id:         in.Id,
+		Name:       in.Name,
+		Sort:       in.Sort,
+		Status:     in.Status,
+		CreateTime: CreateTime,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &oms.OrderReturnReasonUpdateResp{}, nil
 }

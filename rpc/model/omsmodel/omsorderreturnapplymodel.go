@@ -83,6 +83,27 @@ func (m *OmsOrderReturnApplyModel) FindOne(id int64) (*OmsOrderReturnApply, erro
 	}
 }
 
+func (m *OmsOrderReturnApplyModel) FindAll(Current int64, PageSize int64) (*[]OmsOrderReturnApply, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderReturnApplyRows, m.table)
+	var resp []OmsOrderReturnApply
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *OmsOrderReturnApplyModel) Update(data OmsOrderReturnApply) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, omsOrderReturnApplyRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.OrderId, data.CompanyAddressId, data.ProductId, data.OrderSn, data.MemberUsername, data.ReturnAmount, data.ReturnName, data.ReturnPhone, data.Status, data.HandleTime, data.ProductPic, data.ProductName, data.ProductBrand, data.ProductAttr, data.ProductCount, data.ProductPrice, data.ProductRealPrice, data.Reason, data.Description, data.ProofPics, data.HandleNote, data.HandleMan, data.ReceiveMan, data.ReceiveTime, data.ReceiveNote, data.Id)

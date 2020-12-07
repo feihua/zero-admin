@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +25,27 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *MemberLoginLogListLogic) MemberLoginLogList(in *ums.MemberLoginLogListReq) (*ums.MemberLoginLogListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.UmsMemberLoginLogModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &ums.MemberLoginLogListResp{}, nil
+	var list []*ums.MemberLoginLogListData
+	for _, item := range *all {
+
+		list = append(list, &ums.MemberLoginLogListData{
+			Id:         item.Id,
+			MemberId:   item.MemberId,
+			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
+			Ip:         item.Ip,
+			City:       item.City,
+			LoginType:  item.LoginType,
+			Province:   item.Province,
+		})
+	}
+
+	fmt.Println(list)
+	return &ums.MemberLoginLogListResp{
+		Total: 10,
+		List:  list,
+	}, nil
+
 }

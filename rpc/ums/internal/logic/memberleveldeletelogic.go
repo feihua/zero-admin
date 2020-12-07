@@ -24,7 +24,11 @@ func NewMemberLevelDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberLevelDeleteLogic) MemberLevelDelete(in *ums.MemberLevelDeleteReq) (*ums.MemberLevelDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.UmsMemberLevelModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &ums.MemberLevelDeleteResp{}, nil
 }

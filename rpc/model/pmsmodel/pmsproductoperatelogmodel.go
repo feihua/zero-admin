@@ -68,6 +68,27 @@ func (m *PmsProductOperateLogModel) FindOne(id int64) (*PmsProductOperateLog, er
 	}
 }
 
+func (m *PmsProductOperateLogModel) FindAll(Current int64, PageSize int64) (*[]PmsProductOperateLog, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductOperateLogRows, m.table)
+	var resp []PmsProductOperateLog
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsProductOperateLogModel) Update(data PmsProductOperateLog) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsProductOperateLogRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductId, data.PriceOld, data.PriceNew, data.SalePriceOld, data.SalePriceNew, data.GiftPointOld, data.GiftPointNew, data.UsePointLimitOld, data.UsePointLimitNew, data.OperateMan, data.Id)

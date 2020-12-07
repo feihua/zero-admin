@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,7 +24,22 @@ func NewProductCategoryAttributeRelationListLogic(ctx context.Context, svcCtx *s
 }
 
 func (l *ProductCategoryAttributeRelationListLogic) ProductCategoryAttributeRelationList(in *pms.ProductCategoryAttributeRelationListReq) (*pms.ProductCategoryAttributeRelationListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.PmsProductCategoryAttributeRelationModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &pms.ProductCategoryAttributeRelationListResp{}, nil
+	var list []*pms.ProductCategoryAttributeRelationListData
+	for _, item := range *all {
+
+		list = append(list, &pms.ProductCategoryAttributeRelationListData{
+			Id:                 item.Id,
+			ProductCategoryId:  item.ProductCategoryId,
+			ProductAttributeId: item.ProductAttributeId,
+		})
+	}
+
+	fmt.Println(list)
+	return &pms.ProductCategoryAttributeRelationListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"fmt"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,7 +24,25 @@ func NewAlbumListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AlbumLi
 }
 
 func (l *AlbumListLogic) AlbumList(in *pms.AlbumListReq) (*pms.AlbumListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.PmsAlbumModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &pms.AlbumListResp{}, nil
+	var list []*pms.AlbumListData
+	for _, item := range *all {
+
+		list = append(list, &pms.AlbumListData{
+			Id:          item.Id,
+			Name:        item.Name,
+			CoverPic:    item.CoverPic,
+			PicCount:    item.PicCount,
+			Sort:        item.Sort,
+			Description: item.Description,
+		})
+	}
+
+	fmt.Println(list)
+	return &pms.AlbumListResp{
+		Total: 10,
+		List:  list,
+	}, nil
 }

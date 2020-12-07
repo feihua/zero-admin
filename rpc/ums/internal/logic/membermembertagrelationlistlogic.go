@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +25,23 @@ func NewMemberMemberTagRelationListLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *MemberMemberTagRelationListLogic) MemberMemberTagRelationList(in *ums.MemberMemberTagRelationListReq) (*ums.MemberMemberTagRelationListResp, error) {
-	// todo: add your logic here and delete this line
+	all, _ := l.svcCtx.UmsMemberMemberTagRelationModel.FindAll(in.Current, in.PageSize)
+	//count, _ := l.svcCtx.UserModel.Count()
 
-	return &ums.MemberMemberTagRelationListResp{}, nil
+	var list []*ums.MemberMemberTagRelationListData
+	for _, item := range *all {
+
+		list = append(list, &ums.MemberMemberTagRelationListData{
+			Id:       item.Id,
+			MemberId: item.MemberId,
+			TagId:    item.TagId,
+		})
+	}
+
+	fmt.Println(list)
+	return &ums.MemberMemberTagRelationListResp{
+		Total: 10,
+		List:  list,
+	}, nil
+
 }

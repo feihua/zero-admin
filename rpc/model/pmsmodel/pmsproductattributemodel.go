@@ -67,6 +67,27 @@ func (m *PmsProductAttributeModel) FindOne(id int64) (*PmsProductAttribute, erro
 	}
 }
 
+func (m *PmsProductAttributeModel) FindAll(Current int64, PageSize int64) (*[]PmsProductAttribute, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductAttributeRows, m.table)
+	var resp []PmsProductAttribute
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsProductAttributeModel) Update(data PmsProductAttribute) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsProductAttributeRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductAttributeCategoryId, data.Name, data.SelectType, data.InputType, data.InputList, data.Sort, data.FilterType, data.SearchType, data.RelatedStatus, data.HandAddStatus, data.Type, data.Id)

@@ -24,7 +24,11 @@ func NewHomeAdvertiseDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(in *sms.HomeAdvertiseDeleteReq) (*sms.HomeAdvertiseDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.SmsHomeAdvertiseModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.HomeAdvertiseDeleteResp{}, nil
 }

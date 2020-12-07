@@ -62,6 +62,27 @@ func (m *SmsFlashPromotionSessionModel) FindOne(id int64) (*SmsFlashPromotionSes
 	}
 }
 
+func (m *SmsFlashPromotionSessionModel) FindAll(Current int64, PageSize int64) (*[]SmsFlashPromotionSession, error) {
+
+	if Current < 1 {
+		Current = 1
+	}
+	if PageSize < 1 {
+		PageSize = 20
+	}
+	query := fmt.Sprintf("select %s from %s limit ?,?", smsFlashPromotionSessionRows, m.table)
+	var resp []SmsFlashPromotionSession
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *SmsFlashPromotionSessionModel) Update(data SmsFlashPromotionSession) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsFlashPromotionSessionRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.Name, data.StartTime, data.EndTime, data.Status, data.Id)

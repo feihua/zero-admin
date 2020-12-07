@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/umsmodel"
 
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
@@ -24,7 +25,16 @@ func NewMemberTaskUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *MemberTaskUpdateLogic) MemberTaskUpdate(in *ums.MemberTaskUpdateReq) (*ums.MemberTaskUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.UmsMemberTaskModel.Update(umsmodel.UmsMemberTask{
+		Id:           in.Id,
+		Name:         in.Name,
+		Growth:       in.Growth,
+		Intergration: in.Intergration,
+		Type:         in.Type,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &ums.MemberTaskUpdateResp{}, nil
 }

@@ -24,7 +24,11 @@ func NewAlbumDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Album
 }
 
 func (l *AlbumDeleteLogic) AlbumDelete(in *pms.AlbumDeleteReq) (*pms.AlbumDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.PmsAlbumModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.AlbumDeleteResp{}, nil
 }

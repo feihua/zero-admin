@@ -24,7 +24,11 @@ func NewFlashPromotionProductRelationDeleteLogic(ctx context.Context, svcCtx *sv
 }
 
 func (l *FlashPromotionProductRelationDeleteLogic) FlashPromotionProductRelationDelete(in *sms.FlashPromotionProductRelationDeleteReq) (*sms.FlashPromotionProductRelationDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.SmsFlashPromotionProductRelationModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.FlashPromotionProductRelationDeleteResp{}, nil
 }

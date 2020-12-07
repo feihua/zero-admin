@@ -24,7 +24,11 @@ func NewOrderReturnReasonDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *OrderReturnReasonDeleteLogic) OrderReturnReasonDelete(in *oms.OrderReturnReasonDeleteReq) (*oms.OrderReturnReasonDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.OmsOrderReturnReasonModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &oms.OrderReturnReasonDeleteResp{}, nil
 }

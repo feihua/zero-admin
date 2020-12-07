@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/model/smsmodel"
 
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
@@ -24,7 +25,15 @@ func NewHomeRecommendSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(in *sms.HomeRecommendSubjectAddReq) (*sms.HomeRecommendSubjectAddResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.SmsHomeRecommendSubjectModel.Insert(smsmodel.SmsHomeRecommendSubject{
+		SubjectId:       in.SubjectId,
+		SubjectName:     in.SubjectName,
+		RecommendStatus: in.RecommendStatus,
+		Sort:            in.Sort,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &sms.HomeRecommendSubjectAddResp{}, nil
 }

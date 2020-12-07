@@ -24,7 +24,11 @@ func NewProductVertifyRecordDeleteLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *ProductVertifyRecordDeleteLogic) ProductVertifyRecordDelete(in *pms.ProductVertifyRecordDeleteReq) (*pms.ProductVertifyRecordDeleteResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.PmsProductVertifyRecordModel.Delete(in.Id)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &pms.ProductVertifyRecordDeleteResp{}, nil
 }
