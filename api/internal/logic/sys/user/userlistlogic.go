@@ -35,21 +35,21 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 
 	var list []*types.ListUserData
 
-	for _, user := range resp.List {
+	for _, item := range resp.List {
 		list = append(list, &types.ListUserData{
-			Id:             user.Id,
-			Name:           user.Name,
-			NickName:       user.NickName,
-			Password:       user.Password,
-			Salt:           user.Salt,
-			Email:          user.Email,
-			Mobile:         user.Mobile,
-			DeptId:         user.DeptId,
-			CreateBy:       user.CreateBy,
-			CreateTime:     user.CreateTime,
-			LastUpdateBy:   user.LastUpdateBy,
-			LastUpdateTime: user.LastUpdateTime,
-			DelFlag:        user.DelFlag,
+			Id:             item.Id,
+			Name:           item.Name,
+			NickName:       item.NickName,
+			Password:       item.Password,
+			Salt:           item.Salt,
+			Email:          item.Email,
+			Mobile:         item.Mobile,
+			DeptId:         item.DeptId,
+			CreateBy:       item.CreateBy,
+			CreateTime:     item.CreateTime,
+			LastUpdateBy:   item.LastUpdateBy,
+			LastUpdateTime: item.LastUpdateTime,
+			DelFlag:        item.DelFlag,
 		})
 	}
 

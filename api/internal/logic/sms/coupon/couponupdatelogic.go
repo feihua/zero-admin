@@ -25,7 +25,26 @@ func NewCouponUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 }
 
 func (l *CouponUpdateLogic) CouponUpdate(req types.UpdateCouponReq) (*types.UpdateCouponResp, error) {
-	_, err := l.svcCtx.Sms.CouponUpdate(l.ctx, &smsclient.CouponUpdateReq{})
+	_, err := l.svcCtx.Sms.CouponUpdate(l.ctx, &smsclient.CouponUpdateReq{
+		Id:           req.Id,
+		Type:         req.Type,
+		Name:         req.Name,
+		Platform:     req.Platform,
+		Count:        req.Count,
+		Amount:       req.Amount,
+		PerLimit:     req.PerLimit,
+		MinPoint:     req.MinPoint,
+		StartTime:    req.StartTime.Format("2006-01-02 15:04:05"),
+		EndTime:      req.EndTime.Format("2006-01-02 15:04:05"),
+		UseType:      req.UseType,
+		Note:         req.Note,
+		PublishCount: req.PublishCount,
+		UseCount:     req.UseCount,
+		ReceiveCount: req.ReceiveCount,
+		EnableTime:   req.EnableTime,
+		Code:         req.Code,
+		MemberLevel:  req.MemberLevel,
+	})
 
 	if err != nil {
 		return nil, err

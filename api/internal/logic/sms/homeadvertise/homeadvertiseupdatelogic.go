@@ -25,7 +25,20 @@ func NewHomeAdvertiseUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(req types.UpdateHomeAdvertiseReq) (*types.UpdateHomeAdvertiseResp, error) {
-	_, err := l.svcCtx.Sms.HomeAdvertiseUpdate(l.ctx, &smsclient.HomeAdvertiseUpdateReq{})
+	_, err := l.svcCtx.Sms.HomeAdvertiseUpdate(l.ctx, &smsclient.HomeAdvertiseUpdateReq{
+		Id:         req.Id,
+		Name:       req.Name,
+		Type:       req.Type,
+		Pic:        req.Pic,
+		StartTime:  req.StartTime,
+		EndTime:    req.EndTime,
+		Status:     req.Status,
+		ClickCount: req.ClickCount,
+		OrderCount: req.OrderCount,
+		Url:        req.Url,
+		Note:       req.Note,
+		Sort:       req.Sort,
+	})
 
 	if err != nil {
 		return nil, err

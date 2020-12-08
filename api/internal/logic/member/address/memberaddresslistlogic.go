@@ -38,29 +38,26 @@ func (l *MemberAddressListLogic) MemberAddressList(req types.ListMemberAddressRe
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	var list []*types.ListtMemberAddressData
+
+	for _, item := range resp.List {
+		list = append(list, &types.ListtMemberAddressData{
+			Id:            item.Id,
+			MemberId:      item.MemberId,
+			Name:          item.Name,
+			PhoneNumber:   item.PhoneNumber,
+			DefaultStatus: item.DefaultStatus,
+			PostCode:      item.PostCode,
+			Province:      item.Province,
+			City:          item.City,
+			Region:        item.Region,
+			DetailAddress: item.DetailAddress,
+		})
+	}
 
 	return &types.ListMemberAddressResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,

@@ -38,25 +38,23 @@ func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) 
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	var list []*types.ListtProductBrandData
+
+	for _, item := range resp.List {
+		list = append(list, &types.ListtProductBrandData{
+			Id:                  item.Id,
+			Name:                item.Name,
+			FirstLetter:         item.FirstLetter,
+			Sort:                item.Sort,
+			FactoryStatus:       item.FactoryStatus,
+			ShowStatus:          item.ShowStatus,
+			ProductCount:        item.ProductCount,
+			ProductCommentCount: item.ProductCommentCount,
+			Logo:                item.Logo,
+			BigPic:              item.BigPic,
+			BrandStory:          item.BrandStory,
+		})
+	}
 
 	return &types.ListProductBrandResp{
 		Current:  req.Current,

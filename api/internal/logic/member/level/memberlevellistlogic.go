@@ -38,25 +38,25 @@ func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*t
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	var list []*types.ListtMemberLevelData
+
+	for _, item := range resp.List {
+		list = append(list, &types.ListtMemberLevelData{
+			Id:                    item.Id,
+			Name:                  item.Name,
+			GrowthPoint:           item.GrowthPoint,
+			DefaultStatus:         item.DefaultStatus,
+			FreeFreightPoint:      float64(item.FreeFreightPoint),
+			CommentGrowthPoint:    item.CommentGrowthPoint,
+			PriviledgeFreeFreight: item.PriviledgeFreeFreight,
+			PriviledgeSignIn:      item.PriviledgeSignIn,
+			PriviledgeComment:     item.PriviledgeComment,
+			PriviledgePromotion:   item.PriviledgePromotion,
+			PriviledgeMemberPrice: item.PriviledgeMemberPrice,
+			PriviledgeBirthday:    item.PriviledgeBirthday,
+			Note:                  item.Note,
+		})
+	}
 
 	return &types.ListMemberLevelResp{
 		Current:  req.Current,

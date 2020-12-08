@@ -25,7 +25,18 @@ func NewCompayAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *CompayAddressUpdateLogic) CompayAddressUpdate(req types.UpdateCompayAddressReq) (*types.UpdateCompayAddressResp, error) {
-	_, err := l.svcCtx.Oms.CompanyAddressUpdate(l.ctx, &omsclient.CompanyAddressUpdateReq{})
+	_, err := l.svcCtx.Oms.CompanyAddressUpdate(l.ctx, &omsclient.CompanyAddressUpdateReq{
+		Id:            req.Id,
+		AddressName:   req.AddressName,
+		SendStatus:    req.SendStatus,
+		ReceiveStatus: req.ReceiveStatus,
+		Name:          req.Name,
+		Phone:         req.Phone,
+		Province:      req.Province,
+		City:          req.City,
+		Region:        req.Region,
+		DetailAddress: req.DetailAddress,
+	})
 
 	if err != nil {
 		return nil, err

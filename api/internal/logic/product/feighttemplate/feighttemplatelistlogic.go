@@ -38,25 +38,20 @@ func (l *FeightTemplateListLogic) FeightTemplateList(req types.ListFeightTemplat
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	var list []*types.ListtFeightTemplateData
+
+	for _, item := range resp.List {
+		list = append(list, &types.ListtFeightTemplateData{
+			Id:             item.Id,
+			Name:           item.Name,
+			ChargeType:     item.ChargeType,
+			FirstWeight:    float64(item.FirstWeight),
+			FirstFee:       float64(item.FirstFee),
+			ContinueWeight: float64(item.ContinueWeight),
+			ContinmeFee:    float64(item.FirstFee),
+			Dest:           item.Dest,
+		})
+	}
 
 	return &types.ListFeightTemplateResp{
 		Current:  req.Current,

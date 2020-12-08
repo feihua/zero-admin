@@ -25,7 +25,12 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductReq) (*types.AddHomeNewProductResp, error) {
-	_, err := l.svcCtx.Sms.HomeNewProductAdd(l.ctx, &smsclient.HomeNewProductAddReq{})
+	_, err := l.svcCtx.Sms.HomeNewProductAdd(l.ctx, &smsclient.HomeNewProductAddReq{
+		ProductId:       req.ProductId,
+		ProductName:     req.ProductName,
+		RecommendStatus: req.RecommendStatus,
+		Sort:            req.Sort,
+	})
 
 	if err != nil {
 		return nil, err

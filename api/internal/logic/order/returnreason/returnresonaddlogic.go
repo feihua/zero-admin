@@ -25,7 +25,11 @@ func NewReturnResonAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Ret
 }
 
 func (l *ReturnResonAddLogic) ReturnResonAdd(req types.AddReturnResonReq) (*types.AddReturnResonResp, error) {
-	_, err := l.svcCtx.Oms.OrderReturnReasonAdd(l.ctx, &omsclient.OrderReturnReasonAddReq{})
+	_, err := l.svcCtx.Oms.OrderReturnReasonAdd(l.ctx, &omsclient.OrderReturnReasonAddReq{
+		Name:   req.Name,
+		Sort:   req.Sort,
+		Status: req.Status,
+	})
 
 	if err != nil {
 		return nil, err

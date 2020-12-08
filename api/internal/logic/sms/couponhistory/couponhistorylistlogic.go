@@ -39,25 +39,23 @@ func (l *CouponHistoryListLogic) CouponHistoryList(req types.ListCouponHistoryRe
 
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	var list []*types.ListtCouponHistoryData
+
+	for _, item := range resp.List {
+		list = append(list, &types.ListtCouponHistoryData{
+			Id:             item.Id,
+			CouponId:       item.CouponId,
+			MemberId:       item.MemberId,
+			CouponCode:     item.CouponCode,
+			MemberNickname: item.MemberNickname,
+			GetType:        item.GetType,
+			CreateTime:     item.CreateTime,
+			UseStatus:      item.UseStatus,
+			UseTime:        item.UseTime,
+			OrderId:        item.OrderId,
+			OrderSn:        item.OrderSn,
+		})
+	}
 
 	return &types.ListCouponHistoryResp{
 		Current:  req.Current,

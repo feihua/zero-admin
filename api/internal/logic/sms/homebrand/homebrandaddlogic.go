@@ -25,7 +25,12 @@ func NewHomeBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeB
 }
 
 func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddHomeBrandResp, error) {
-	_, err := l.svcCtx.Sms.HomeBrandAdd(l.ctx, &smsclient.HomeBrandAddReq{})
+	_, err := l.svcCtx.Sms.HomeBrandAdd(l.ctx, &smsclient.HomeBrandAddReq{
+		BrandId:         req.BrandId,
+		BrandName:       req.BrandName,
+		RecommendStatus: req.RecommendStatus,
+		Sort:            req.Sort,
+	})
 
 	if err != nil {
 		return nil, err

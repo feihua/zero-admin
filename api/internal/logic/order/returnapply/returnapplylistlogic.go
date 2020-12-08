@@ -38,25 +38,39 @@ func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*t
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
+	var list []*types.ListtReturnApplyData
 
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	for _, item := range resp.List {
+		list = append(list, &types.ListtReturnApplyData{
+			Id:               item.Id,
+			OrderId:          item.OrderId,
+			CompanyAddressId: item.CompanyAddressId,
+			ProductId:        item.ProductId,
+			OrderSn:          item.OrderSn,
+			CreateTime:       item.CreateTime,
+			MemberUsername:   item.MemberUsername,
+			ReturnAmount:     float64(item.ReturnAmount),
+			ReturnName:       item.ReturnName,
+			ReturnPhone:      item.ReturnPhone,
+			Status:           item.Status,
+			HandleTime:       item.HandleTime,
+			ProductPic:       item.ProductPic,
+			ProductName:      item.ProductName,
+			ProductBrand:     item.ProductBrand,
+			ProductAttr:      item.ProductAttr,
+			ProductCount:     item.ProductCount,
+			ProductPrice:     float64(item.ProductPrice),
+			ProductRealPrice: float64(item.ProductRealPrice),
+			Reason:           item.Reason,
+			Description:      item.Description,
+			ProofPics:        item.ProofPics,
+			HandleNote:       item.HandleNote,
+			HandleMan:        item.HandleMan,
+			ReceiveMan:       item.ReceiveMan,
+			ReceiveTime:      item.ReceiveTime,
+			ReceiveNote:      item.ReceiveNote,
+		})
+	}
 
 	return &types.ListReturnApplyResp{
 		Current:  req.Current,

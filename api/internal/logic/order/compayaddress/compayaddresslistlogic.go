@@ -38,25 +38,22 @@ func (l *CompayAddressListLogic) CompayAddressList(req types.ListCompayAddressRe
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
+	var list []*types.ListtCompayAddressData
 
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	for _, item := range resp.List {
+		list = append(list, &types.ListtCompayAddressData{
+			Id:            item.Id,
+			AddressName:   item.AddressName,
+			SendStatus:    item.SendStatus,
+			ReceiveStatus: item.ReceiveStatus,
+			Name:          item.Name,
+			Phone:         item.Phone,
+			Province:      item.Province,
+			City:          item.City,
+			Region:        item.Region,
+			DetailAddress: item.DetailAddress,
+		})
+	}
 
 	return &types.ListCompayAddressResp{
 		Current:  req.Current,

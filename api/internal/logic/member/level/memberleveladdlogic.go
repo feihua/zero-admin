@@ -25,7 +25,20 @@ func NewMemberLevelAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Mem
 }
 
 func (l *MemberLevelAddLogic) MemberLevelAdd(req types.AddMemberLevelReq) (*types.AddMemberLevelResp, error) {
-	_, err := l.svcCtx.Ums.MemberLevelAdd(l.ctx, &umsclient.MemberLevelAddReq{})
+	_, err := l.svcCtx.Ums.MemberLevelAdd(l.ctx, &umsclient.MemberLevelAddReq{
+		Name:                  req.Name,
+		GrowthPoint:           req.GrowthPoint,
+		DefaultStatus:         req.DefaultStatus,
+		FreeFreightPoint:      int64(req.FreeFreightPoint),
+		CommentGrowthPoint:    req.CommentGrowthPoint,
+		PriviledgeFreeFreight: req.PriviledgeFreeFreight,
+		PriviledgeSignIn:      req.PriviledgeSignIn,
+		PriviledgeComment:     req.PriviledgeComment,
+		PriviledgePromotion:   req.PriviledgePromotion,
+		PriviledgeMemberPrice: req.PriviledgeMemberPrice,
+		PriviledgeBirthday:    req.PriviledgeBirthday,
+		Note:                  req.Note,
+	})
 
 	if err != nil {
 		return nil, err

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"go-zero-admin/rpc/oms/omsclient"
+	"time"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -38,25 +39,19 @@ func (l *OperateHistoryListLogic) OperateHistoryList(req types.ListOperateHistor
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
+	var list []*types.ListtOperateHistoryData
 
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	for _, item := range resp.List {
+		CreateTime, _ := time.Parse("2006-01-02 15:04:05", item.CreateTime)
+		list = append(list, &types.ListtOperateHistoryData{
+			Id:          item.Id,
+			OrderId:     item.OrderId,
+			OperateMan:  item.OperateMan,
+			CreateTime:  CreateTime,
+			OrderStatus: item.OrderStatus,
+			Note:        item.Note,
+		})
+	}
 
 	return &types.ListOperateHistoryResp{
 		Current:  req.Current,

@@ -24,7 +24,15 @@ func NewGrowthChangeHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 func (l *GrowthChangeHistoryAddLogic) GrowthChangeHistoryAdd(req types.AddGrowthChangeHistoryReq) (*types.AddGrowthChangeHistoryResp, error) {
-	_, err := l.svcCtx.Ums.GrowthChangeHistoryAdd(l.ctx, &umsclient.GrowthChangeHistoryAddReq{})
+	_, err := l.svcCtx.Ums.GrowthChangeHistoryAdd(l.ctx, &umsclient.GrowthChangeHistoryAddReq{
+		MemberId:    req.MemberId,
+		CreateTime:  req.CreateTime,
+		ChangeType:  req.ChangeType,
+		ChangeCount: req.ChangeCount,
+		OperateMan:  req.OperateMan,
+		OperateNote: req.OperateNote,
+		SourceType:  req.SourceType,
+	})
 
 	if err != nil {
 		return nil, err

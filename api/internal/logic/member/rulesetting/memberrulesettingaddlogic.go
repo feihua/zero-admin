@@ -25,7 +25,14 @@ func NewMemberRuleSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(req types.AddMemberRuleSettingReq) (*types.AddMemberRuleSettingResp, error) {
-	_, err := l.svcCtx.Ums.MemberRuleSettingAdd(l.ctx, &umsclient.MemberRuleSettingAddReq{})
+	_, err := l.svcCtx.Ums.MemberRuleSettingAdd(l.ctx, &umsclient.MemberRuleSettingAddReq{
+		ContinueSignDay:   req.ContinueSignDay,
+		ContinueSignPoint: req.ContinueSignPoint,
+		ConsumePerPoint:   int64(req.ConsumePerPoint),
+		LowOrderAmount:    int64(req.LowOrderAmount),
+		MaxPointPerOrder:  req.MaxPointPerOrder,
+		Type:              req.Type,
+	})
 
 	if err != nil {
 		return nil, err

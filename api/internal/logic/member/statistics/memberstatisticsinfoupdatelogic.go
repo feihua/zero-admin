@@ -25,7 +25,24 @@ func NewMemberStatisticsInfoUpdateLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *MemberStatisticsInfoUpdateLogic) MemberStatisticsInfoUpdate(req types.UpdateMemberStatisticsInfoReq) (*types.UpdateMemberStatisticsInfoResp, error) {
-	_, err := l.svcCtx.Ums.MemberStatisticsInfoUpdate(l.ctx, &umsclient.MemberStatisticsInfoUpdateReq{})
+	_, err := l.svcCtx.Ums.MemberStatisticsInfoUpdate(l.ctx, &umsclient.MemberStatisticsInfoUpdateReq{
+		Id:                  req.Id,
+		MemberId:            req.MemberId,
+		ConsumeAmount:       int64(req.ConsumeAmount),
+		OrderCount:          req.OrderCount,
+		CouponCount:         req.CouponCount,
+		CommentCount:        req.CommentCount,
+		ReturnOrderCount:    req.ReturnOrderCount,
+		LoginCount:          req.LoginCount,
+		AttendCount:         req.AttendCount,
+		FansCount:           req.FansCount,
+		CollectProductCount: req.CollectProductCount,
+		CollectSubjectCount: req.CollectSubjectCount,
+		CollectTopicCount:   req.CollectTopicCount,
+		CollectCommentCount: req.CollectCommentCount,
+		InviteFriendCount:   req.InviteFriendCount,
+		RecentOrderTime:     req.RecentOrderTime,
+	})
 
 	if err != nil {
 		return nil, err

@@ -25,7 +25,12 @@ func NewHomeRecommendProductAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHomeRecommendProductReq) (*types.AddHomeRecommendProductResp, error) {
-	_, err := l.svcCtx.Sms.HomeRecommendProductAdd(l.ctx, &smsclient.HomeRecommendProductAddReq{})
+	_, err := l.svcCtx.Sms.HomeRecommendProductAdd(l.ctx, &smsclient.HomeRecommendProductAddReq{
+		ProductId:       req.ProductId,
+		ProductName:     req.ProductName,
+		RecommendStatus: req.RecommendStatus,
+		Sort:            req.Sort,
+	})
 
 	if err != nil {
 		return nil, err

@@ -38,25 +38,17 @@ func (l *ReturnResonListLogic) ReturnResonList(req types.ListReturnResonReq) (*t
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
+	var list []*types.ListtReturnResonData
 
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	for _, item := range resp.List {
+		list = append(list, &types.ListtReturnResonData{
+			Id:         item.Id,
+			Name:       item.Name,
+			Sort:       item.Sort,
+			Status:     item.Status,
+			CreateTime: item.CreateTime,
+		})
+	}
 
 	return &types.ListReturnResonResp{
 		Current:  req.Current,

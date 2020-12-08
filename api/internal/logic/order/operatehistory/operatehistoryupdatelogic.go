@@ -25,7 +25,14 @@ func NewOperateHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *OperateHistoryUpdateLogic) OperateHistoryUpdate(req types.UpdateOperateHistoryReq) (*types.UpdateOperateHistoryResp, error) {
-	_, err := l.svcCtx.Oms.OrderOperateHistoryUpdate(l.ctx, &omsclient.OrderOperateHistoryUpdateReq{})
+	_, err := l.svcCtx.Oms.OrderOperateHistoryUpdate(l.ctx, &omsclient.OrderOperateHistoryUpdateReq{
+		Id:          req.Id,
+		OrderId:     req.OrderId,
+		OperateMan:  req.OperateMan,
+		CreateTime:  req.CreateTime.Format("2006-01-02 15:04:05"),
+		OrderStatus: req.OrderStatus,
+		Note:        req.Note,
+	})
 
 	if err != nil {
 		return nil, err

@@ -38,25 +38,17 @@ func (l *MemberTaskListLogic) MemberTaskList(req types.ListMemberTaskReq) (*type
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	var list []*types.ListtMemberTaskData
+
+	for _, item := range resp.List {
+		list = append(list, &types.ListtMemberTaskData{
+			Id:           item.Id,
+			Name:         item.Name,
+			Growth:       item.Growth,
+			Intergration: item.Intergration,
+			Type:         item.Type,
+		})
+	}
 
 	return &types.ListMemberTaskResp{
 		Current:  req.Current,

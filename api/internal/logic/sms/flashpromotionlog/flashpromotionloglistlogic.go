@@ -39,25 +39,19 @@ func (l *FlashPromotionLogListLogic) FlashPromotionLogList(req types.ListFlashPr
 
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	var list []*types.ListtFlashPromotionLogData
+
+	for _, item := range resp.List {
+		list = append(list, &types.ListtFlashPromotionLogData{
+			Id:            item.Id,
+			MemberId:      item.MemberId,
+			ProductId:     item.ProductId,
+			MemberPhone:   item.MemberPhone,
+			ProductName:   item.ProductName,
+			SubscribeTime: item.SubscribeTime,
+			SendTime:      item.SendTime,
+		})
+	}
 
 	return &types.ListFlashPromotionLogResp{
 		Current:  req.Current,

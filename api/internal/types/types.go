@@ -1793,6 +1793,7 @@ type UpdateMemberLevelReq struct {
 	PriviledgePromotion   int64   `json:"priviledge_promotion"`    // 是否有专享活动特权
 	PriviledgeMemberPrice int64   `json:"priviledge_member_price"` // 是否有会员价格特权
 	PriviledgeBirthday    int64   `json:"priviledge_birthday"`     // 是否有生日特权
+	Note                  string  `json:"note"`
 }
 
 type UpdateMemberLevelResp struct {
@@ -2466,6 +2467,7 @@ type AddMemberLevelReq struct {
 	PriviledgePromotion   int64   `json:"priviledge_promotion"`    // 是否有专享活动特权
 	PriviledgeMemberPrice int64   `json:"priviledge_member_price"` // 是否有会员价格特权
 	PriviledgeBirthday    int64   `json:"priviledge_birthday"`     // 是否有生日特权
+	Note                  string  `json:"note"`
 }
 
 type AddMemberLevelResp struct {

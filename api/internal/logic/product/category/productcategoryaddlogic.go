@@ -25,7 +25,19 @@ func NewProductCategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *ProductCategoryAddLogic) ProductCategoryAdd(req types.AddProductCategoryReq) (*types.AddProductCategoryResp, error) {
-	_, err := l.svcCtx.Pms.ProductCategoryAdd(l.ctx, &pmsclient.ProductCategoryAddReq{})
+	_, err := l.svcCtx.Pms.ProductCategoryAdd(l.ctx, &pmsclient.ProductCategoryAddReq{
+		ParentId:     req.ParentId,
+		Name:         req.Name,
+		Level:        req.Level,
+		ProductCount: req.ProductCount,
+		ProductUnit:  req.ProductUnit,
+		NavStatus:    req.NavStatus,
+		ShowStatus:   req.ShowStatus,
+		Sort:         req.Sort,
+		Icon:         req.Icon,
+		Keywords:     req.Keywords,
+		Description:  req.Description,
+	})
 
 	if err != nil {
 		return nil, err

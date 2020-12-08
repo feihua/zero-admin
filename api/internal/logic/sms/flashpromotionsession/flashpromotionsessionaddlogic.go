@@ -25,7 +25,13 @@ func NewFlashPromotionSessionAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req types.AddFlashPromotionSessionReq) (*types.AddFlashPromotionSessionResp, error) {
-	_, err := l.svcCtx.Sms.FlashPromotionSessionAdd(l.ctx, &smsclient.FlashPromotionSessionAddReq{})
+	_, err := l.svcCtx.Sms.FlashPromotionSessionAdd(l.ctx, &smsclient.FlashPromotionSessionAddReq{
+		Name:       req.Name,
+		StartTime:  req.StartTime,
+		EndTime:    req.EndTime,
+		Status:     req.Status,
+		CreateTime: req.CreateTime,
+	})
 
 	if err != nil {
 		return nil, err

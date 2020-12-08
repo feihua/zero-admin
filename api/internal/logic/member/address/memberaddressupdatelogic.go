@@ -25,7 +25,18 @@ func NewMemberAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *MemberAddressUpdateLogic) MemberAddressUpdate(req types.UpdateMemberAddressReq) (*types.UpdateMemberAddressResp, error) {
-	_, err := l.svcCtx.Ums.MemberReceiveAddressUpdate(l.ctx, &umsclient.MemberReceiveAddressUpdateReq{})
+	_, err := l.svcCtx.Ums.MemberReceiveAddressUpdate(l.ctx, &umsclient.MemberReceiveAddressUpdateReq{
+		Id:            req.Id,
+		MemberId:      req.MemberId,
+		Name:          req.Name,
+		PhoneNumber:   req.PhoneNumber,
+		DefaultStatus: req.DefaultStatus,
+		PostCode:      req.PostCode,
+		Province:      req.Province,
+		City:          req.City,
+		Region:        req.Region,
+		DetailAddress: req.DetailAddress,
+	})
 
 	if err != nil {
 		return nil, err

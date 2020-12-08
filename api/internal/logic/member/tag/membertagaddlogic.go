@@ -25,7 +25,11 @@ func NewMemberTagAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Membe
 }
 
 func (l *MemberTagAddLogic) MemberTagAdd(req types.AddMemberTagReq) (*types.AddMemberTagResp, error) {
-	_, err := l.svcCtx.Ums.MemberTagAdd(l.ctx, &umsclient.MemberTagAddReq{})
+	_, err := l.svcCtx.Ums.MemberTagAdd(l.ctx, &umsclient.MemberTagAddReq{
+		Name:              req.Name,
+		FinishOrderCount:  req.FinishOrderCount,
+		FinishOrderAmount: int64(req.FinishOrderAmount),
+	})
 
 	if err != nil {
 		return nil, err

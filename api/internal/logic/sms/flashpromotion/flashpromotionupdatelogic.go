@@ -25,7 +25,14 @@ func NewFlashPromotionUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FlashPromotionUpdateLogic) FlashPromotionUpdate(req types.UpdateFlashPromotionReq) (*types.UpdateFlashPromotionResp, error) {
-	_, err := l.svcCtx.Sms.FlashPromotionUpdate(l.ctx, &smsclient.FlashPromotionUpdateReq{})
+	_, err := l.svcCtx.Sms.FlashPromotionUpdate(l.ctx, &smsclient.FlashPromotionUpdateReq{
+		Id:         req.Id,
+		Title:      req.Title,
+		StartDate:  req.StartDate,
+		EndDate:    req.EndDate,
+		Status:     req.Status,
+		CreateTime: req.CreateTime,
+	})
 
 	if err != nil {
 		return nil, err

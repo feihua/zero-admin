@@ -37,25 +37,54 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	var list []*types.ListtProductData
+
+	for _, item := range resp.List {
+		list = append(list, &types.ListtProductData{
+			Id:                         item.Id,
+			BrandId:                    item.BrandId,
+			ProductCategoryId:          item.ProductCategoryId,
+			FeightTemplateId:           item.FeightTemplateId,
+			ProductAttributeCategoryId: item.ProductAttributeCategoryId,
+			Name:                       item.Name,
+			Pic:                        item.Pic,
+			ProductSn:                  item.ProductSn,
+			DeleteStatus:               item.DeleteStatus,
+			PublishStatus:              item.PublishStatus,
+			NewStatus:                  item.NewStatus,
+			RecommandStatus:            item.RecommandStatus,
+			VerifyStatus:               item.VerifyStatus,
+			Sort:                       item.Sort,
+			Sale:                       item.Sale,
+			Price:                      item.Price,
+			PromotionPrice:             item.PromotionPrice,
+			GiftGrowth:                 item.GiftGrowth,
+			GiftPoint:                  item.GiftPoint,
+			UsePointLimit:              item.UsePointLimit,
+			SubTitle:                   item.SubTitle,
+			Description:                item.Description,
+			OriginalPrice:              item.OriginalPrice,
+			Stock:                      item.Stock,
+			LowStock:                   item.LowStock,
+			Unit:                       item.Unit,
+			Weight:                     item.Weight,
+			PreviewStatus:              item.PreviewStatus,
+			ServiceIds:                 item.ServiceIds,
+			Keywords:                   item.Keywords,
+			Note:                       item.Note,
+			AlbumPics:                  item.AlbumPics,
+			DetailTitle:                item.DetailTitle,
+			DetailDesc:                 item.DetailDesc,
+			DetailHtml:                 item.DetailHtml,
+			DetailMobileHtml:           item.DetailMobileHtml,
+			PromotionStartTime:         item.PromotionStartTime,
+			PromotionEndTime:           item.PromotionEndTime,
+			PromotionPerLimit:          item.PromotionPerLimit,
+			PromotionType:              item.PromotionType,
+			BrandName:                  item.BrandName,
+			ProductCategoryName:        item.ProductCategoryName,
+		})
+	}
 
 	return &types.ListProductResp{
 		Current:  req.Current,

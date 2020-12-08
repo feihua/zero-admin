@@ -25,7 +25,12 @@ func NewIntegrationConsumeSettingAddLogic(ctx context.Context, svcCtx *svc.Servi
 }
 
 func (l *IntegrationConsumeSettingAddLogic) IntegrationConsumeSettingAdd(req types.AddIntegrationConsumeSettingReq) (*types.AddIntegrationConsumeSettingResp, error) {
-	_, err := l.svcCtx.Ums.IntegrationConsumeSettingAdd(l.ctx, &umsclient.IntegrationConsumeSettingAddReq{})
+	_, err := l.svcCtx.Ums.IntegrationConsumeSettingAdd(l.ctx, &umsclient.IntegrationConsumeSettingAddReq{
+		DeductionPerAmount: req.DeductionPerAmount,
+		MaxPercentPerOrder: req.MaxPercentPerOrder,
+		UseUnit:            req.UseUnit,
+		CouponStatus:       req.CouponStatus,
+	})
 
 	if err != nil {
 		return nil, err

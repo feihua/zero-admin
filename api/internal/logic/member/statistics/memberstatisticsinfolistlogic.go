@@ -38,25 +38,28 @@ func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(req types.ListM
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
-	//
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	var list []*types.ListtMemberStatisticsInfoData
+
+	for _, item := range resp.List {
+		list = append(list, &types.ListtMemberStatisticsInfoData{
+			Id:                  item.Id,
+			MemberId:            item.MemberId,
+			ConsumeAmount:       float64(item.ConsumeAmount),
+			OrderCount:          item.OrderCount,
+			CouponCount:         item.CouponCount,
+			CommentCount:        item.CommentCount,
+			ReturnOrderCount:    item.ReturnOrderCount,
+			LoginCount:          item.LoginCount,
+			AttendCount:         item.AttendCount,
+			FansCount:           item.FansCount,
+			CollectProductCount: item.CollectProductCount,
+			CollectSubjectCount: item.CollectSubjectCount,
+			CollectTopicCount:   item.CollectTopicCount,
+			CollectCommentCount: item.CollectCommentCount,
+			InviteFriendCount:   item.InviteFriendCount,
+			RecentOrderTime:     item.RecentOrderTime,
+		})
+	}
 
 	return &types.ListMemberStatisticsInfoResp{
 		Current:  req.Current,

@@ -38,25 +38,30 @@ func (l *CartItemListLogic) CartItemList(req types.ListCartItemReq) (*types.List
 	for _, data := range resp.List {
 		fmt.Println(data)
 	}
-	//var list []*types.ListUserData
+	var list []*types.ListtCartItemData
 
-	//for _, user := range resp.List {
-	//	list = append(list, &types.ListUserData{
-	//		Id:             user.Id,
-	//		Name:           user.Name,
-	//		NickName:       user.NickName,
-	//		Password:       user.Password,
-	//		Salt:           user.Salt,
-	//		Email:          user.Email,
-	//		Mobile:         user.Mobile,
-	//		DeptId:         user.DeptId,
-	//		CreateBy:       user.CreateBy,
-	//		CreateTime:     user.CreateTime,
-	//		LastUpdateBy:   user.LastUpdateBy,
-	//		LastUpdateTime: user.LastUpdateTime,
-	//		DelFlag:        user.DelFlag,
-	//	})
-	//}
+	for _, item := range resp.List {
+		list = append(list, &types.ListtCartItemData{
+			Id:                item.Id,
+			ProductId:         item.ProductId,
+			ProductSkuId:      item.ProductSkuId,
+			MemberId:          item.MemberId,
+			Quantity:          item.Quantity,
+			Price:             float64(item.Price),
+			ProductPic:        item.ProductPic,
+			ProductName:       item.ProductName,
+			ProductSubTitle:   item.ProductSubTitle,
+			ProductSkuCode:    item.ProductSkuCode,
+			MemberNickname:    item.MemberNickname,
+			CreateDate:        item.CreateDate,
+			ModifyDate:        item.ModifyDate,
+			DeleteStatus:      item.DeleteStatus,
+			ProductCategoryId: item.ProductCategoryId,
+			ProductBrand:      item.ProductBrand,
+			ProductSn:         item.ProductSn,
+			ProductAttr:       item.ProductAttr,
+		})
+	}
 
 	return &types.ListCartItemResp{
 		Current:  req.Current,
