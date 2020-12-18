@@ -1,0 +1,8 @@
+import "ums/member.api"
+
+info(
+	title: "go zero admin"
+	desc: "go zero admin"
+	author: "koobe"
+	email: "koobe.liu@uaf.com.cn"
+)

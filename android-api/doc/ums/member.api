@@ -1,0 +1,53 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    MemberRegisterReq struct {
+        Username string `json:"username"`
+        Mobile   string `json:"mobile"`
+        Password string `json:"password"`
+    }
+    MemberRegisterResp struct {
+        Id       int64  `json:"id"`
+        Username string `json:"username"`
+        Mobile   string `json:"mobile"`
+        Nickname string `json:"nickname"`
+        Gender   string `json:"gender"`
+        JwtToken
+    }
+
+    MemberLoginReq struct {
+        Password string `json:"password"`
+        Phone string `json:"phone"`
+    }
+    MemberLoginResp struct {
+        Id       int64  `json:"id"`
+        Username string `json:"username"`
+        Mobile   string `json:"mobile"`
+        Nickname string `json:"nickname"`
+        Gender   string `json:"gender"`
+        JwtToken
+    }
+
+   JwtToken struct {
+        AccessToken  string `json:"accessToken,omitempty"`
+        AccessExpire int64  `json:"accessExpire,omitempty"`
+        RefreshAfter int64  `json:"refreshAfter,omitempty"`
+    }
+)
+
+@server(
+    group: member/member
+)
+service android-api {
+
+    @handler MemberRegister
+    post /api/member/member/login (MemberRegisterReq) returns (MemberRegisterResp)
+
+    @handler MemberLogin
+    post /api/member/member/login (MemberLoginReq) returns (MemberLoginResp)
+}
