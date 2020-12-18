@@ -1,3 +1,8 @@
+import "oms/cart_item.api"
+import "oms/order.api"
+import "pms/product.api"
+import "pms/product_category.api"
+import "sms/home.api"
 import "ums/member.api"
 
 info(

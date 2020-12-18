@@ -1,0 +1,173 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addOrderReq struct {
+        MemberId              int64     `json:"member_id"`
+        CouponId              int64     `json:"coupon_id"`
+        OrderSn               string    `json:"order_sn"`                // 订单编号
+        CreateTime            string `json:"create_time"`             // 提交时间
+        MemberUsername        string    `json:"member_username"`         // 用户帐号
+        TotalAmount           float64   `json:"total_amount"`            // 订单总金额
+        PayAmount             float64   `json:"pay_amount"`              // 应付金额（实际支付金额）
+        FreightAmount         float64   `json:"freight_amount"`          // 运费金额
+        PromotionAmount       float64   `json:"promotion_amount"`        // 促销优化金额（促销价、满减、阶梯价）
+        IntegrationAmount     float64   `json:"integration_amount"`      // 积分抵扣金额
+        CouponAmount          float64   `json:"coupon_amount"`           // 优惠券抵扣金额
+        DiscountAmount        float64   `json:"discount_amount"`         // 管理员后台调整订单使用的折扣金额
+        PayType               int64     `json:"pay_type"`                // 支付方式：0->未支付；1->支付宝；2->微信
+        SourceType            int64     `json:"source_type"`             // 订单来源：0->PC订单；1->app订单
+        Status                int64     `json:"status"`                  // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+        OrderType             int64     `json:"order_type"`              // 订单类型：0->正常订单；1->秒杀订单
+        DeliveryCompany       string    `json:"delivery_company"`        // 物流公司(配送方式)
+        DeliverySn            string    `json:"delivery_sn"`             // 物流单号
+        AutoConfirmDay        int64     `json:"auto_confirm_day"`        // 自动确认时间（天）
+        Integration           int64     `json:"integration"`             // 可以获得的积分
+        Growth                int64     `json:"growth"`                  // 可以活动的成长值
+        PromotionInfo         string    `json:"promotion_info"`          // 活动信息
+        BillType              int64     `json:"bill_type"`               // 发票类型：0->不开发票；1->电子发票；2->纸质发票
+        BillHeader            string    `json:"bill_header"`             // 发票抬头
+        BillContent           string    `json:"bill_content"`            // 发票内容
+        BillReceiverPhone     string    `json:"bill_receiver_phone"`     // 收票人电话
+        BillReceiverEmail     string    `json:"bill_receiver_email"`     // 收票人邮箱
+        ReceiverName          string    `json:"receiver_name"`           // 收货人姓名
+        ReceiverPhone         string    `json:"receiver_phone"`          // 收货人电话
+        ReceiverPostCode      string    `json:"receiver_post_code"`      // 收货人邮编
+        ReceiverProvince      string    `json:"receiver_province"`       // 省份/直辖市
+        ReceiverCity          string    `json:"receiver_city"`           // 城市
+        ReceiverRegion        string    `json:"receiver_region"`         // 区
+        ReceiverDetailAddress string    `json:"receiver_detail_address"` // 详细地址
+        Note                  string    `json:"note"`                    // 订单备注
+        ConfirmStatus         int64     `json:"confirm_status"`          // 确认收货状态：0->未确认；1->已确认
+        DeleteStatus          int64     `json:"delete_status"`           // 删除状态：0->未删除；1->已删除
+        UseIntegration        int64     `json:"use_integration"`         // 下单时使用的积分
+    }
+    addOrderResp struct {
+    }
+    ListOrderReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtOrderData struct {
+        Id                    int64     `json:"id"` // 订单id
+        MemberId              int64     `json:"member_id"`
+        CouponId              int64     `json:"coupon_id"`
+        OrderSn               string    `json:"order_sn"`                // 订单编号
+        CreateTime            string `json:"create_time"`             // 提交时间
+        MemberUsername        string    `json:"member_username"`         // 用户帐号
+        TotalAmount           float64   `json:"total_amount"`            // 订单总金额
+        PayAmount             float64   `json:"pay_amount"`              // 应付金额（实际支付金额）
+        FreightAmount         float64   `json:"freight_amount"`          // 运费金额
+        PromotionAmount       float64   `json:"promotion_amount"`        // 促销优化金额（促销价、满减、阶梯价）
+        IntegrationAmount     float64   `json:"integration_amount"`      // 积分抵扣金额
+        CouponAmount          float64   `json:"coupon_amount"`           // 优惠券抵扣金额
+        DiscountAmount        float64   `json:"discount_amount"`         // 管理员后台调整订单使用的折扣金额
+        PayType               int64     `json:"pay_type"`                // 支付方式：0->未支付；1->支付宝；2->微信
+        SourceType            int64     `json:"source_type"`             // 订单来源：0->PC订单；1->app订单
+        Status                int64     `json:"status"`                  // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+        OrderType             int64     `json:"order_type"`              // 订单类型：0->正常订单；1->秒杀订单
+        DeliveryCompany       string    `json:"delivery_company"`        // 物流公司(配送方式)
+        DeliverySn            string    `json:"delivery_sn"`             // 物流单号
+        AutoConfirmDay        int64     `json:"auto_confirm_day"`        // 自动确认时间（天）
+        Integration           int64     `json:"integration"`             // 可以获得的积分
+        Growth                int64     `json:"growth"`                  // 可以活动的成长值
+        PromotionInfo         string    `json:"promotion_info"`          // 活动信息
+        BillType              int64     `json:"bill_type"`               // 发票类型：0->不开发票；1->电子发票；2->纸质发票
+        BillHeader            string    `json:"bill_header"`             // 发票抬头
+        BillContent           string    `json:"bill_content"`            // 发票内容
+        BillReceiverPhone     string    `json:"bill_receiver_phone"`     // 收票人电话
+        BillReceiverEmail     string    `json:"bill_receiver_email"`     // 收票人邮箱
+        ReceiverName          string    `json:"receiver_name"`           // 收货人姓名
+        ReceiverPhone         string    `json:"receiver_phone"`          // 收货人电话
+        ReceiverPostCode      string    `json:"receiver_post_code"`      // 收货人邮编
+        ReceiverProvince      string    `json:"receiver_province"`       // 省份/直辖市
+        ReceiverCity          string    `json:"receiver_city"`           // 城市
+        ReceiverRegion        string    `json:"receiver_region"`         // 区
+        ReceiverDetailAddress string    `json:"receiver_detail_address"` // 详细地址
+        Note                  string    `json:"note"`                    // 订单备注
+        ConfirmStatus         int64     `json:"confirm_status"`          // 确认收货状态：0->未确认；1->已确认
+        DeleteStatus          int64     `json:"delete_status"`           // 删除状态：0->未删除；1->已删除
+        UseIntegration        int64     `json:"use_integration"`         // 下单时使用的积分
+        PaymentTime           string    `json:"payment_time"`            // 支付时间
+        DeliveryTime          string    `json:"delivery_time"`           // 发货时间
+        ReceiveTime           string    `json:"receive_time"`            // 确认收货时间
+        CommentTime           string    `json:"comment_time"`            // 评价时间
+        ModifyTime            string    `json:"modify_time"`             // 修改时间
+    }
+    ListOrderResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtOrderData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdateOrderReq struct {
+        Id                    int64     `json:"id"` // 订单id
+        MemberId              int64     `json:"member_id"`
+        CouponId              int64     `json:"coupon_id"`
+        OrderSn               string    `json:"order_sn"`                // 订单编号
+        CreateTime            string `json:"create_time"`             // 提交时间
+        MemberUsername        string    `json:"member_username"`         // 用户帐号
+        TotalAmount           float64   `json:"total_amount"`            // 订单总金额
+        PayAmount             float64   `json:"pay_amount"`              // 应付金额（实际支付金额）
+        FreightAmount         float64   `json:"freight_amount"`          // 运费金额
+        PromotionAmount       float64   `json:"promotion_amount"`        // 促销优化金额（促销价、满减、阶梯价）
+        IntegrationAmount     float64   `json:"integration_amount"`      // 积分抵扣金额
+        CouponAmount          float64   `json:"coupon_amount"`           // 优惠券抵扣金额
+        DiscountAmount        float64   `json:"discount_amount"`         // 管理员后台调整订单使用的折扣金额
+        PayType               int64     `json:"pay_type"`                // 支付方式：0->未支付；1->支付宝；2->微信
+        SourceType            int64     `json:"source_type"`             // 订单来源：0->PC订单；1->app订单
+        Status                int64     `json:"status"`                  // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+        OrderType             int64     `json:"order_type"`              // 订单类型：0->正常订单；1->秒杀订单
+        DeliveryCompany       string    `json:"delivery_company"`        // 物流公司(配送方式)
+        DeliverySn            string    `json:"delivery_sn"`             // 物流单号
+        AutoConfirmDay        int64     `json:"auto_confirm_day"`        // 自动确认时间（天）
+        Integration           int64     `json:"integration"`             // 可以获得的积分
+        Growth                int64     `json:"growth"`                  // 可以活动的成长值
+        PromotionInfo         string    `json:"promotion_info"`          // 活动信息
+        BillType              int64     `json:"bill_type"`               // 发票类型：0->不开发票；1->电子发票；2->纸质发票
+        BillHeader            string    `json:"bill_header"`             // 发票抬头
+        BillContent           string    `json:"bill_content"`            // 发票内容
+        BillReceiverPhone     string    `json:"bill_receiver_phone"`     // 收票人电话
+        BillReceiverEmail     string    `json:"bill_receiver_email"`     // 收票人邮箱
+        ReceiverName          string    `json:"receiver_name"`           // 收货人姓名
+        ReceiverPhone         string    `json:"receiver_phone"`          // 收货人电话
+        ReceiverPostCode      string    `json:"receiver_post_code"`      // 收货人邮编
+        ReceiverProvince      string    `json:"receiver_province"`       // 省份/直辖市
+        ReceiverCity          string    `json:"receiver_city"`           // 城市
+        ReceiverRegion        string    `json:"receiver_region"`         // 区
+        ReceiverDetailAddress string    `json:"receiver_detail_address"` // 详细地址
+        Note                  string    `json:"note"`                    // 订单备注
+        ConfirmStatus         int64     `json:"confirm_status"`          // 确认收货状态：0->未确认；1->已确认
+        DeleteStatus          int64     `json:"delete_status"`           // 删除状态：0->未删除；1->已删除
+        UseIntegration        int64     `json:"use_integration"`         // 下单时使用的积分
+    }
+    UpdateOrderResp struct {
+    }
+    DeleteOrderReq struct {
+        Id int64 `json:"id"`
+    }
+    DeleteOrderResp struct {
+    }
+)
+
+@server(
+    group: order/order
+)
+service front-api {
+    @handler OrderAdd
+    post /api/order/order/add (addOrderReq) returns (addOrderResp)
+
+    @handler OrderList
+    get /api/order/order/list (ListOrderReq) returns (ListOrderResp)
+
+    @handler OrderUpdate
+    post /api/order/order/update (UpdateOrderReq) returns (UpdateOrderResp)
+
+    @handler OrderDelete
+    post /api/order/order/delete (DeleteOrderReq) returns (DeleteOrderResp)
+}

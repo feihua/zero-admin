@@ -1,0 +1,35 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    ListHomeDisplayReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+    ListtHomeDisplayData struct {
+        Id int64 `json:"id"`
+        BrandId int64 `json:"brand_id"`
+        BrandName string `json:"brand_name"`
+        RecommendStatus int64 `json:"recommend_status"`
+        Sort int64 `json:"sort"`
+    }
+    ListHomeDisplayResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtHomeDisplayData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+)
+
+@server(
+    group: sms/home
+)
+service front-api {
+    @handler HomeDisplay
+    get /api/sms/homedisplay/list (ListHomeDisplayReq) returns (ListHomeDisplayResp)
+}

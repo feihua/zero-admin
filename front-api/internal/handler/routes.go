@@ -5,12 +5,97 @@ import (
 	"net/http"
 
 	membermember "go-zero-admin/front-api/internal/handler/member/member"
+	ordercart "go-zero-admin/front-api/internal/handler/order/cart"
+	orderorder "go-zero-admin/front-api/internal/handler/order/order"
+	productcategory "go-zero-admin/front-api/internal/handler/product/category"
+	productproduct "go-zero-admin/front-api/internal/handler/product/product"
+	smshome "go-zero-admin/front-api/internal/handler/sms/home"
 	"go-zero-admin/front-api/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
 )
 
 func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/order/cart/add",
+				Handler: ordercart.CartItemAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/cart/list",
+				Handler: ordercart.CartItemListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/order/cart/update",
+				Handler: ordercart.CartItemUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/order/cart/delete",
+				Handler: ordercart.CartItemDeleteHandler(serverCtx),
+			},
+		},
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/order/order/add",
+				Handler: orderorder.OrderAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/order/list",
+				Handler: orderorder.OrderListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/order/order/update",
+				Handler: orderorder.OrderUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/order/order/delete",
+				Handler: orderorder.OrderDeleteHandler(serverCtx),
+			},
+		},
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/product/product/list",
+				Handler: productproduct.ProductListHandler(serverCtx),
+			},
+		},
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/product/category/list",
+				Handler: productcategory.ProductCategoryListHandler(serverCtx),
+			},
+		},
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/sms/homedisplay/list",
+				Handler: smshome.HomeDisplayHandler(serverCtx),
+			},
+		},
+	)
+
 	engine.AddRoutes(
 		[]rest.Route{
 			{
