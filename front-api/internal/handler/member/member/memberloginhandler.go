@@ -3,9 +3,9 @@ package handler
 import (
 	"net/http"
 
-	"go-zero-admin/android-api/internal/logic/member/member"
-	"go-zero-admin/android-api/internal/svc"
-	"go-zero-admin/android-api/internal/types"
+	"go-zero-admin/front-api/internal/logic/member/member"
+	"go-zero-admin/front-api/internal/svc"
+	"go-zero-admin/front-api/internal/types"
 
 	"github.com/tal-tech/go-zero/rest/httpx"
 )

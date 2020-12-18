@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/android-api/internal/svc"
-	"go-zero-admin/android-api/internal/types"
+	"go-zero-admin/front-api/internal/svc"
+	"go-zero-admin/front-api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )

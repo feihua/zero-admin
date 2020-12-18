@@ -43,7 +43,7 @@ type (
 @server(
     group: member/member
 )
-service android-api {
+service front-api {
 
     @handler MemberRegister
     post /api/member/member/login (MemberRegisterReq) returns (MemberRegisterResp)

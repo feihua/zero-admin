@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"go-zero-admin/android-api/internal/config"
+	"go-zero-admin/front-api/internal/config"
 )
 
 type ServiceContext struct {

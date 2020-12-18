@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	membermember "go-zero-admin/android-api/internal/handler/member/member"
-	"go-zero-admin/android-api/internal/svc"
+	membermember "go-zero-admin/front-api/internal/handler/member/member"
+	"go-zero-admin/front-api/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
 )

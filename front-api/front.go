@@ -4,15 +4,15 @@ import (
 	"flag"
 	"fmt"
 
-	"go-zero-admin/android-api/internal/config"
-	"go-zero-admin/android-api/internal/handler"
-	"go-zero-admin/android-api/internal/svc"
+	"go-zero-admin/front-api/internal/config"
+	"go-zero-admin/front-api/internal/handler"
+	"go-zero-admin/front-api/internal/svc"
 
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/rest"
 )
 
-var configFile = flag.String("f", "etc/android-api.yaml", "the config file")
+var configFile = flag.String("f", "etc/front-api.yaml", "the config file")
 
 func main() {
 	flag.Parse()
