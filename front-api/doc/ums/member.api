@@ -46,7 +46,7 @@ type (
 service front-api {
 
     @handler MemberRegister
-    post /api/member/member/login (MemberRegisterReq) returns (MemberRegisterResp)
+    post /api/member/member/register (MemberRegisterReq) returns (MemberRegisterResp)
 
     @handler MemberLogin
     post /api/member/member/login (MemberLoginReq) returns (MemberLoginResp)

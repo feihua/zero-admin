@@ -15,7 +15,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/member/member/login",
+				Path:    "/api/member/member/register",
 				Handler: membermember.MemberRegisterHandler(serverCtx),
 			},
 			{

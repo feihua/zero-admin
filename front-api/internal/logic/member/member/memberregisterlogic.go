@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"fmt"
+	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/front-api/internal/svc"
 	"go-zero-admin/front-api/internal/types"
@@ -24,7 +26,14 @@ func NewMemberRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) Mem
 }
 
 func (l *MemberRegisterLogic) MemberRegister(req types.MemberRegisterReq) (*types.MemberRegisterResp, error) {
-	// todo: add your logic here and delete this line
+	resp, _ := l.svcCtx.Ums.MemberList(l.ctx, &umsclient.MemberListReq{
+		Current:  1,
+		PageSize: 2,
+	})
+
+	for _, data := range resp.List {
+		fmt.Println(data)
+	}
 
 	return &types.MemberRegisterResp{}, nil
 }
