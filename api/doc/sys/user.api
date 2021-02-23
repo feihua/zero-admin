@@ -6,9 +6,18 @@ info(
 )
 
 type (
+    loginReq struct {
+        UserName string `json:"userName"`
+        Password string `json:"password"`
+    }
     loginResp struct {
         Status string `json:"status"`
         CurrentAuthority string `json:"currentAuthority"`
+        Id int64 `json:"id"`
+        UserName string `json:"userName"`
+        AccessToken string `json:"accessToken"`
+        AccessExpire int64 `json:"accessExpire"`
+        RefreshAfter int64 `json:"refreshAfter"`
     }
     userInfoResp struct {
         Avatar string `json:"avatar"`
@@ -19,7 +28,7 @@ type (
         Mobile string `json:"mobile"`
         Name string `json:"name"`
         NickName string `json:"nick_name"`
-        DeptId string`json:"dept_id"`
+        DeptId string `json:"dept_id"`
     }
     addUserResp struct {
     }
@@ -59,7 +68,7 @@ type (
         Mobile string `json:"mobile"`
         Name string `json:"name"`
         NickName string `json:"nick_name"`
-        DeptId int64`json:"dept_id"`
+        DeptId int64 `json:"dept_id"`
     }
     UpdateUserResp struct {
     }
@@ -80,7 +89,6 @@ type (
     UserStatusReq struct {
         Id int64 `json:"id"`
         Status int64 `json:"status"`                       // 状态  0：禁用   1：正常
-
     }
     UserStatusResp struct {
     }
@@ -91,7 +99,7 @@ type (
 )
 service admin-api {
     @handler UserLogin
-    post /api/sys/user/login () returns (loginResp)
+    post /api/sys/user/login (loginReq) returns (loginResp)
 
     @handler UserInfo
     get /api/sys/user/currentUser () returns (userInfoResp)

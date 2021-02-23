@@ -1120,11 +1120,11 @@ type ListtHomeRecommendProductData struct {
 }
 
 type ListtHomeRecommendSubjectData struct {
-	Id              int64  `db:"id"`
-	SubjectId       int64  `db:"subject_id"`
-	SubjectName     string `db:"subject_name"`
-	RecommendStatus int64  `db:"recommend_status"`
-	Sort            int64  `db:"sort"`
+	Id              int64  `json:"id"`
+	SubjectId       int64  `json:"subject_id"`
+	SubjectName     string `json:"subject_name"`
+	RecommendStatus int64  `json:"recommend_status"`
+	Sort            int64  `json:"sort"`
 }
 
 type ListtIntegrationChangeHistoryData struct {
@@ -1729,11 +1729,11 @@ type UpdateHomeRecommendProductResp struct {
 }
 
 type UpdateHomeRecommendSubjectReq struct {
-	Id              int64  `db:"id"`
-	SubjectId       int64  `db:"subject_id"`
-	SubjectName     string `db:"subject_name"`
-	RecommendStatus int64  `db:"recommend_status"`
-	Sort            int64  `db:"sort"`
+	Id              int64  `json:"id"`
+	SubjectId       int64  `json:"subject_id"`
+	SubjectName     string `json:"subject_name"`
+	RecommendStatus int64  `json:"recommend_status"`
+	Sort            int64  `json:"sort"`
 }
 
 type UpdateHomeRecommendSubjectResp struct {
@@ -2408,10 +2408,10 @@ type AddHomeRecommendProductResp struct {
 }
 
 type AddHomeRecommendSubjectReq struct {
-	SubjectId       int64  `db:"subject_id"`
-	SubjectName     string `db:"subject_name"`
-	RecommendStatus int64  `db:"recommend_status"`
-	Sort            int64  `db:"sort"`
+	SubjectId       int64  `json:"subject_id"`
+	SubjectName     string `json:"subject_name"`
+	RecommendStatus int64  `json:"recommend_status"`
+	Sort            int64  `json:"sort"`
 }
 
 type AddHomeRecommendSubjectResp struct {
@@ -2826,9 +2826,19 @@ type AddUserReq struct {
 type AddUserResp struct {
 }
 
+type LoginReq struct {
+	UserName string `json:"userName"`
+	Password string `json:"password"`
+}
+
 type LoginResp struct {
 	Status           string `json:"status"`
 	CurrentAuthority string `json:"currentAuthority"`
+	Id               int64  `json:"id"`
+	UserName         string `json:"userName"`
+	AccessToken      string `json:"accessToken"`
+	AccessExpire     int64  `json:"accessExpire"`
+	RefreshAfter     int64  `json:"refreshAfter"`
 }
 
 type UserInfoResp struct {

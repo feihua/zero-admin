@@ -7,10 +7,10 @@ info(
 
 type (
     addHomeRecommendSubjectReq struct {
-        SubjectId       int64  `db:"subject_id"`
-        SubjectName     string `db:"subject_name"`
-        RecommendStatus int64  `db:"recommend_status"`
-        Sort            int64  `db:"sort"`
+        SubjectId       int64  `json:"subject_id"`
+        SubjectName     string `json:"subject_name"`
+        RecommendStatus int64  `json:"recommend_status"`
+        Sort            int64  `json:"sort"`
     }
     addHomeRecommendSubjectResp struct {
     }
@@ -19,11 +19,11 @@ type (
         PageSize int64 `form:"pageSize"`
     }
     ListtHomeRecommendSubjectData struct {
-        Id              int64  `db:"id"`
-        SubjectId       int64  `db:"subject_id"`
-        SubjectName     string `db:"subject_name"`
-        RecommendStatus int64  `db:"recommend_status"`
-        Sort            int64  `db:"sort"`
+        Id              int64  `json:"id"`
+        SubjectId       int64  `json:"subject_id"`
+        SubjectName     string `json:"subject_name"`
+        RecommendStatus int64  `json:"recommend_status"`
+        Sort            int64  `json:"sort"`
     }
     ListHomeRecommendSubjectResp struct {
         Current int64 `json:"current"`
@@ -33,11 +33,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateHomeRecommendSubjectReq struct {
-        Id              int64  `db:"id"`
-        SubjectId       int64  `db:"subject_id"`
-        SubjectName     string `db:"subject_name"`
-        RecommendStatus int64  `db:"recommend_status"`
-        Sort            int64  `db:"sort"`
+        Id              int64  `json:"id"`
+        SubjectId       int64  `json:"subject_id"`
+        SubjectName     string `json:"subject_name"`
+        RecommendStatus int64  `json:"recommend_status"`
+        Sort            int64  `json:"sort"`
     }
     UpdateHomeRecommendSubjectResp struct {
     }

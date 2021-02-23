@@ -2,7 +2,9 @@ package logic
 
 import (
 	"context"
+	"errors"
 	"go-zero-admin/rpc/sys/sysclient"
+	"strings"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,8 +26,17 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 	}
 }
 
-func (l *UserLoginLogic) UserLogin() (*types.LoginResp, error) {
-	resp, err := l.svcCtx.Sys.Login(l.ctx, &sysclient.LoginReq{})
+//根据用户名和密码登录
+func (l *UserLoginLogic) UserLogin(req types.LoginReq) (*types.LoginResp, error) {
+
+	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
+		return nil, errors.New("用户名或密码不能为空")
+	}
+
+	resp, err := l.svcCtx.Sys.Login(l.ctx, &sysclient.LoginReq{
+		UserName: req.UserName,
+		Password: req.Password,
+	})
 
 	if err != nil {
 		return nil, err
@@ -33,5 +44,10 @@ func (l *UserLoginLogic) UserLogin() (*types.LoginResp, error) {
 	return &types.LoginResp{
 		Status:           resp.Status,
 		CurrentAuthority: resp.CurrentAuthority,
+		Id:               resp.Id,
+		UserName:         resp.UserName,
+		AccessToken:      resp.AccessToken,
+		AccessExpire:     resp.AccessExpire,
+		RefreshAfter:     resp.RefreshAfter,
 	}, nil
 }
