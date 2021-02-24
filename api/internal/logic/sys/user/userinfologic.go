@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,7 +26,12 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserInfoL
 }
 
 func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
-	resp, err := l.svcCtx.Sys.UserInfo(l.ctx, &sysclient.InfoReq{})
+	// 这里的key和生成jwt token时传入的key一致
+	userId, _ := l.ctx.Value("userId").(json.Number).Int64()
+
+	resp, err := l.svcCtx.Sys.UserInfo(l.ctx, &sysclient.InfoReq{
+		UserId: userId,
+	})
 
 	if err != nil {
 		return nil, err

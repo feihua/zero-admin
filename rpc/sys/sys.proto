@@ -19,7 +19,7 @@ message loginResp {
 }
 
 message InfoReq {
-  string ping = 1;
+  int64 UserId = 1;
 }
 
 message InfoResp {
