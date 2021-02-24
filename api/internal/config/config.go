@@ -18,4 +18,9 @@ type Config struct {
 	OmsRpc zrpc.RpcClientConf
 	//营销
 	SmsRpc zrpc.RpcClientConf
+
+	Auth struct {
+		AccessSecret string
+		AccessExpire int64
+	}
 }

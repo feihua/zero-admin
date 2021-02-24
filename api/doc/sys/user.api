@@ -15,7 +15,7 @@ type (
         CurrentAuthority string `json:"currentAuthority"`
         Id int64 `json:"id"`
         UserName string `json:"userName"`
-        AccessToken string `json:"accessToken"`
+        AccessToken string `json:"token"`
         AccessExpire int64 `json:"accessExpire"`
         RefreshAfter int64 `json:"refreshAfter"`
     }
@@ -94,12 +94,12 @@ type (
     }
 )
 
+
 @server(
+    jwt: Auth
     group: sys/user
 )
 service admin-api {
-    @handler UserLogin
-    post /api/sys/user/login (loginReq) returns (loginResp)
 
     @handler UserInfo
     get /api/sys/user/currentUser () returns (userInfoResp)
@@ -126,3 +126,10 @@ service admin-api {
     post /api/sys/user/UpdateUserStatus (UserStatusReq) returns (UserStatusResp)
 }
 
+@server(
+    group: sys/user
+)
+service admin-api {
+    @handler UserLogin
+    post /api/sys/user/login (loginReq) returns (loginResp)
+}

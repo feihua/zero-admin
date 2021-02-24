@@ -2836,7 +2836,7 @@ type LoginResp struct {
 	CurrentAuthority string `json:"currentAuthority"`
 	Id               int64  `json:"id"`
 	UserName         string `json:"userName"`
-	AccessToken      string `json:"accessToken"`
+	AccessToken      string `json:"token"`
 	AccessExpire     int64  `json:"accessExpire"`
 	RefreshAfter     int64  `json:"refreshAfter"`
 }
