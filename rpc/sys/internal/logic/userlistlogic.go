@@ -25,7 +25,7 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserList
 func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error) {
 
 	all, _ := l.svcCtx.UserModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UserModel.Count()
 
 	var list []*sys.UserListData
 	for _, user := range *all {
@@ -51,7 +51,7 @@ func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error)
 
 	fmt.Println(list)
 	return &sys.UserListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

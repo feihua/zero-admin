@@ -93,17 +93,19 @@ func (m *SysUserModel) FindAll(Current int64, PageSize int64) (*[]SysUser, error
 }
 
 func (m *SysUserModel) Count() (int64, error) {
-	query := fmt.Sprintf("select count(%s) from %s", "id", m.table)
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
 
 	var count int64
-	result, err := m.conn.Exec(query, count)
+	err := m.conn.QueryRow(&count, query)
 
-	if err != nil {
-		fmt.Println(err)
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
 	}
-	fmt.Println(result)
-
-	return 10, nil
 }
 
 func (m *SysUserModel) FindOneByName(name string) (*SysUser, error) {
