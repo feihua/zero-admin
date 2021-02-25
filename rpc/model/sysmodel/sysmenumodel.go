@@ -90,6 +90,21 @@ func (m *SysMenuModel) FindAll(Current int64, PageSize int64) (*[]SysMenu, error
 	}
 }
 
+func (m *SysMenuModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
 func (m *SysMenuModel) Update(data SysMenu) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, sysMenuRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.Name, data.ParentId, data.Url, data.Perms, data.Type, data.Icon, data.OrderNum, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.Id)

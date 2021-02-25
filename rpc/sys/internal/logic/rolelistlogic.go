@@ -26,7 +26,7 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleList
 
 func (l *RoleListLogic) RoleList(in *sys.RoleListReq) (*sys.RoleListResp, error) {
 	all, _ := l.svcCtx.RoleModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.RoleModel.Count()
 
 	var list []*sys.RoleListData
 	for _, role := range *all {
@@ -44,7 +44,7 @@ func (l *RoleListLogic) RoleList(in *sys.RoleListReq) (*sys.RoleListResp, error)
 	}
 
 	return &sys.RoleListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

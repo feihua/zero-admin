@@ -26,7 +26,7 @@ func NewDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictList
 
 func (l *DictListLogic) DictList(in *sys.DictListReq) (*sys.DictListResp, error) {
 	all, err := l.svcCtx.DictModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.DictModel.Count()
 
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (l *DictListLogic) DictList(in *sys.DictListReq) (*sys.DictListResp, error)
 	}
 
 	return &sys.DictListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

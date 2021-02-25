@@ -26,7 +26,7 @@ func NewLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Logi
 
 func (l *LoginLogListLogic) LoginLogList(in *sys.LoginLogListReq) (*sys.LoginLogListResp, error) {
 	all, err := l.svcCtx.LoginLogModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.LoginLogModel.Count()
 
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func (l *LoginLogListLogic) LoginLogList(in *sys.LoginLogListReq) (*sys.LoginLog
 	}
 
 	return &sys.LoginLogListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

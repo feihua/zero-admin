@@ -88,6 +88,22 @@ func (m *SysLogModel) FindAll(Current int64, PageSize int64) (*[]SysLog, error) 
 	}
 }
 
+func (m *SysLogModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *SysLogModel) Update(data SysLog) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, sysLogRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.UserName, data.Operation, data.Method, data.Params, data.Time, data.Ip, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.Id)

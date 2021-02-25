@@ -26,7 +26,7 @@ func NewSysLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLog
 
 func (l *SysLogListLogic) SysLogList(in *sys.SysLogListReq) (*sys.SysLogListResp, error) {
 	all, err := l.svcCtx.SysLogModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SysLogModel.Count()
 
 	if err != nil {
 		return nil, err
@@ -50,7 +50,7 @@ func (l *SysLogListLogic) SysLogList(in *sys.SysLogListReq) (*sys.SysLogListResp
 	}
 
 	return &sys.SysLogListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 
