@@ -25,8 +25,8 @@ func NewMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuList
 }
 
 func (l *MenuListLogic) MenuList(in *sys.MenuListReq) (*sys.MenuListResp, error) {
-	all, err := l.svcCtx.MenuModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.MenuModel.Count()
+	all, err := l.svcCtx.MenuModel.FindAll(in.Current, count)
 
 	if err != nil {
 		return nil, err
