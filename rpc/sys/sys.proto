@@ -25,6 +25,7 @@ message InfoReq {
 message InfoResp {
   string avatar = 1;
   string name = 2;
+  repeated MenuListTree menuListTree=3;
 }
 
 message UserAddReq {
@@ -215,6 +216,14 @@ message MenuListData {
   string last_update_by = 12;
   string last_update_time = 13;
   int64 del_flag = 14;
+}
+
+message MenuListTree {
+  int64 id = 1;
+  string name = 2;
+  string icon = 3;
+  int64 parent_id = 4;
+  string path = 5;
 }
 
 message MenuListResp{

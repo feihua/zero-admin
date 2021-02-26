@@ -36,8 +36,22 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	var list []*types.ListMenuTree
+
+	for _, item := range resp.MenuListTree {
+		list = append(list, &types.ListMenuTree{
+			Id:       item.Id,
+			Path:     item.Path,
+			Name:     item.Name,
+			ParentId: item.ParentId,
+			Icon:     item.Icon,
+		})
+	}
+
 	return &types.UserInfoResp{
-		Avatar: resp.Avatar,
-		Name:   resp.Name,
+		Avatar:   resp.Avatar,
+		Name:     resp.Name,
+		MenuTree: list,
 	}, nil
 }

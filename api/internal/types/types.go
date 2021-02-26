@@ -741,6 +741,14 @@ type ListMenuResp struct {
 	Total   int64            `json:"total"`
 }
 
+type ListMenuTree struct {
+	Id       int64  `json:"id"`        // 编号
+	Path     string `json:"path"`      // 菜单路径
+	Name     string `json:"name"`      // 菜单名称
+	ParentId int64  `json:"parent_id"` // 父菜单ID，一级菜单为0
+	Icon     string `json:"icon"`      // 菜单图标
+}
+
 type ListOperateHistoryReq struct {
 	Current  int64 `form:"current"`
 	PageSize int64 `form:"pageSize"`
@@ -2834,6 +2842,7 @@ type LoginResp struct {
 }
 
 type UserInfoResp struct {
-	Avatar string `json:"avatar"`
-	Name   string `json:"name"`
+	Avatar   string          `json:"avatar"`
+	Name     string          `json:"name"`
+	MenuTree []*ListMenuTree `json:"menuTree"`
 }

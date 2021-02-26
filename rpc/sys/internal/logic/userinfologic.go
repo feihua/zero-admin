@@ -36,8 +36,22 @@ func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 		return nil, err
 	}
 
+	menus, _ := l.svcCtx.MenuModel.FindAll(1, 100)
+
+	var list []*sys.MenuListTree
+	for _, menu := range *menus {
+		list = append(list, &sys.MenuListTree{
+			Id:       menu.Id,
+			Name:     menu.Name,
+			ParentId: menu.ParentId,
+			Path:     menu.Url,
+			Icon:     menu.Icon,
+		})
+	}
+
 	return &sys.InfoResp{
-		Avatar: "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
-		Name:   userInfo.Name,
+		Avatar:       "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+		Name:         userInfo.Name,
+		MenuListTree: list,
 	}, nil
 }
