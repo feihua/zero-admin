@@ -18,8 +18,8 @@ type (
     addMenuResp struct {
     }
     ListMenuReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+//        Current int64 `form:"current"`
+//        PageSize int64 `form:"pageSize"`
     }
     ListtMenuData struct {
         Id int64 `json:"id"`                               // 编号
@@ -37,9 +37,9 @@ type (
         DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
     }
     ListMenuResp struct {
-        Current int64 `json:"current"`
+//        Current int64 `json:"current"`
         Data []*ListtMenuData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+//        PageSize int64 `json:"pageSize"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

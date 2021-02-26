@@ -197,8 +197,8 @@ message MenuAddResp {
 }
 
 message MenuListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
+//  int64 current = 1;
+//  int64 pageSize = 2;
 }
 
 message MenuListData {
@@ -331,8 +331,8 @@ message DeptAddResp {
 }
 
 message DeptListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
+//  int64 current = 1;
+//  int64 pageSize = 2;
 }
 
 message DeptListData {

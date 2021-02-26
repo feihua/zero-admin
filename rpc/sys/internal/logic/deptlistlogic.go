@@ -25,7 +25,7 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptList
 
 func (l *DeptListLogic) DeptList(in *sys.DeptListReq) (*sys.DeptListResp, error) {
 	count, _ := l.svcCtx.DeptModel.Count()
-	all, err := l.svcCtx.DeptModel.FindAll(in.Current, count)
+	all, err := l.svcCtx.DeptModel.FindAll(1, count)
 
 	if err != nil {
 		return nil, err

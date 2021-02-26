@@ -24,10 +24,7 @@ func NewMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuListL
 }
 
 func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, error) {
-	resp, err := l.svcCtx.Sys.MenuList(l.ctx, &sysclient.MenuListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sys.MenuList(l.ctx, &sysclient.MenuListReq{})
 
 	if err != nil {
 		return nil, err
@@ -54,10 +51,8 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 	}
 
 	return &types.ListMenuResp{
-		Current:  req.Current,
-		Data:     list,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
+		Data:    list,
+		Success: true,
+		Total:   resp.Total,
 	}, nil
 }

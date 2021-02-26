@@ -399,16 +399,12 @@ type ListDeptData struct {
 }
 
 type ListDeptReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
 }
 
 type ListDeptResp struct {
-	Current  int64           `json:"current"`
-	Data     []*ListDeptData `json:"data"`
-	PageSize int64           `json:"pageSize"`
-	Success  bool            `json:"success"`
-	Total    int64           `json:"total"`
+	Data    []*ListDeptData `json:"data"`
+	Success bool            `json:"success"`
+	Total   int64           `json:"total"`
 }
 
 type ListDictData struct {
@@ -737,16 +733,12 @@ type ListMemberTaskResp struct {
 }
 
 type ListMenuReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
 }
 
 type ListMenuResp struct {
-	Current  int64            `json:"current"`
-	Data     []*ListtMenuData `json:"data"`
-	PageSize int64            `json:"pageSize"`
-	Success  bool             `json:"success"`
-	Total    int64            `json:"total"`
+	Data    []*ListtMenuData `json:"data"`
+	Success bool             `json:"success"`
+	Total   int64            `json:"total"`
 }
 
 type ListOperateHistoryReq struct {

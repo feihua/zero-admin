@@ -24,10 +24,7 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptListL
 }
 
 func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, error) {
-	resp, err := l.svcCtx.Sys.DeptList(l.ctx, &sysclient.DeptListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sys.DeptList(l.ctx, &sysclient.DeptListReq{})
 
 	if err != nil {
 		return nil, err
@@ -50,10 +47,8 @@ func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, er
 	}
 
 	return &types.ListDeptResp{
-		Current:  req.Current,
-		Data:     list,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
+		Data:    list,
+		Success: true,
+		Total:   resp.Total,
 	}, nil
 }
