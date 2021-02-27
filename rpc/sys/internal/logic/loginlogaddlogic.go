@@ -30,6 +30,7 @@ func (l *LoginLogAddLogic) LoginLogAdd(in *sys.LoginLogAddReq) (*sys.LoginLogAdd
 		UserName:       in.UserName,
 		Status:         in.Status,
 		Ip:             in.Ip,
+		CreateTime:     time.Now(),
 		CreateBy:       in.CreateBy,
 		LastUpdateBy:   in.CreateBy,
 		LastUpdateTime: time.Now(),

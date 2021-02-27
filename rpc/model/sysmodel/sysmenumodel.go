@@ -77,7 +77,7 @@ func (m *SysMenuModel) FindAll(Current int64, PageSize int64) (*[]SysMenu, error
 	if PageSize < 1 {
 		PageSize = 20
 	}
-	query := fmt.Sprintf("select %s from %s limit ?,?", sysMenuRows, m.table)
+	query := fmt.Sprintf("select %s from %s order by id limit ?,?", sysMenuRows, m.table)
 	var resp []SysMenu
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
 	switch err {

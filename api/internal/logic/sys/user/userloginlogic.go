@@ -27,7 +27,7 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 }
 
 //根据用户名和密码登录
-func (l *UserLoginLogic) UserLogin(req types.LoginReq) (*types.LoginResp, error) {
+func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginResp, error) {
 
 	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
 		return nil, errors.New("用户名或密码不能为空")
@@ -41,6 +41,15 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq) (*types.LoginResp, error)
 	if err != nil {
 		return nil, err
 	}
+
+	//保存登录日志
+	_, _ = l.svcCtx.Sys.LoginLogAdd(l.ctx, &sysclient.LoginLogAddReq{
+		UserName: resp.UserName,
+		Status:   "login",
+		Ip:       ip,
+		CreateBy: resp.UserName,
+	})
+
 	return &types.LoginResp{
 		Status:           resp.Status,
 		CurrentAuthority: resp.CurrentAuthority,
