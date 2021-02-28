@@ -27,6 +27,10 @@ func (l *DictListLogic) DictList(req types.ListDictReq) (*types.ListDictResp, er
 	resp, err := l.svcCtx.Sys.DictList(l.ctx, &sysclient.DictListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		Value:    req.Value,
+		Label:    req.Label,
+		Type:     req.Type,
+		DelFlag:  req.DelFlag,
 	})
 
 	if err != nil {

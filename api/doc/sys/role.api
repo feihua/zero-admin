@@ -13,8 +13,10 @@ type (
     addRoleResp struct {
     }
     ListRoleReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `form:"current,optional"`
+        PageSize int64 `form:"pageSize,optional"`
+        Name string `form:"name,optional "`
+        DelFlag int64 `form:"del_flag,optional "`
     }
     ListRoleData struct {
         Id int64 `json:"id"`                               // 编号
@@ -25,6 +27,8 @@ type (
         LastUpdateBy string `json:"last_update_by"`        // 更新人
         LastUpdateTime string `json:"last_update_time"`    // 更新时间
         DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+        Label string `json:"label"`                         // 编号
+        Value string `json:"value"`                        // 角色名称
     }
     ListRoleResp struct {
         Current int64 `json:"current"`

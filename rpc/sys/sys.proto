@@ -45,6 +45,12 @@ message UserAddResp {
 message UserListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string name = 3;
+  string nick_name = 4;
+  string mobile = 5;
+  string email = 6;
+  int64 status = 7;
+  int64 dept_id = 8;
 }
 
 message UserListData{
@@ -94,7 +100,8 @@ message UserDeleteResp {
 }
 
 message UpdateUserRoleReq {
-  string ping = 1;
+  int64 id = 1;
+  string role_id = 2;
 }
 
 message UpdateUserRoleResp {
@@ -135,6 +142,8 @@ message RoleAddResp {
 message RoleListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string name = 3;
+  int64 del_flag = 4;
 }
 
 message RoleListData {
@@ -173,7 +182,7 @@ message RoleDeleteResp {
 }
 
 message UpdateRoleRoleReq {
-  string ping = 1;
+  string id = 1;
 }
 
 message UpdateRoleRoleResp {
@@ -200,6 +209,8 @@ message MenuAddResp {
 message MenuListReq {
 //  int64 current = 1;
 //  int64 pageSize = 2;
+  string name = 1;
+  string url = 2;
 }
 
 message MenuListData {
@@ -281,6 +292,10 @@ message DictAddResp {
 message DictListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string value = 3;
+  string label = 4;
+  string type = 5;
+  int64 del_flag = 6;
 }
 
 message DictListData {
@@ -342,6 +357,8 @@ message DeptAddResp {
 message DeptListReq {
 //  int64 current = 1;
 //  int64 pageSize = 2;
+  string name = 1;
+  string create_by = 2;
 }
 
 message DeptListData {

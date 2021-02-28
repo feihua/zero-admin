@@ -399,6 +399,8 @@ type ListDeptData struct {
 }
 
 type ListDeptReq struct {
+	Name     string `form:"name,optional "`
+	CreateBy string `form:"create_by,optional "`
 }
 
 type ListDeptResp struct {
@@ -423,8 +425,12 @@ type ListDictData struct {
 }
 
 type ListDictReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64  `form:"current"`
+	PageSize int64  `form:"pageSize"`
+	Value    string `form:"value,optional "`
+	Label    string `form:"label,optional "`
+	DelFlag  int64  `form:"del_flag,optional "`
+	Type     string `form:"type,optional "`
 }
 
 type ListDictResp struct {
@@ -733,6 +739,8 @@ type ListMemberTaskResp struct {
 }
 
 type ListMenuReq struct {
+	Name string `form:"name,optional "`
+	Url  string `form:"url,optional "`
 }
 
 type ListMenuResp struct {
@@ -875,11 +883,15 @@ type ListRoleData struct {
 	LastUpdateBy   string `json:"last_update_by"`   // 更新人
 	LastUpdateTime string `json:"last_update_time"` // 更新时间
 	DelFlag        int64  `json:"del_flag"`         // 是否删除  -1：已删除  0：正常
+	Label          string `json:"label"`            // 编号
+	Value          string `json:"value"`            // 角色名称
 }
 
 type ListRoleReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64  `form:"current,optional"`
+	PageSize int64  `form:"pageSize,optional"`
+	Name     string `form:"name,optional "`
+	DelFlag  int64  `form:"del_flag,optional "`
 }
 
 type ListRoleResp struct {
@@ -949,8 +961,14 @@ type ListUserData struct {
 }
 
 type ListUserReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64  `form:"current"`
+	PageSize int64  `form:"pageSize"`
+	Name     string `form:"name,optional "`
+	NickName string `form:"nick_name,optional "`
+	Mobile   string `form:"mobile,optional "`
+	Email    string `form:"email,optional "`
+	Status   int64  `form:"status,optional "`
+	DeptId   int64  `form:"dept_id,optional "`
 }
 
 type ListUserResp struct {
@@ -2179,6 +2197,8 @@ type UpdateUserResp struct {
 }
 
 type UpdateUserRoleReq struct {
+	Id     int64  `json:"id"`
+	RoleId string `json:"role_id"`
 }
 
 type UpdateUserRoleResp struct {

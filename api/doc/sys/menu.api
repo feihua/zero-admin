@@ -20,6 +20,8 @@ type (
     ListMenuReq struct {
 //        Current int64 `form:"current"`
 //        PageSize int64 `form:"pageSize"`
+        Name string `form:"name,optional "`
+        Url string `form:"url,optional "`
     }
     ListtMenuData struct {
         Id int64 `json:"id"`                               // 编号

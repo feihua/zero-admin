@@ -24,7 +24,10 @@ func NewMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuListL
 }
 
 func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, error) {
-	resp, err := l.svcCtx.Sys.MenuList(l.ctx, &sysclient.MenuListReq{})
+	resp, err := l.svcCtx.Sys.MenuList(l.ctx, &sysclient.MenuListReq{
+		Name: req.Name,
+		Url:  req.Url,
+	})
 
 	if err != nil {
 		return nil, err

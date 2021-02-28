@@ -27,6 +27,12 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 	resp, err := l.svcCtx.Sys.UserList(l.ctx, &sysclient.UserListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		Name:     req.Name,
+		NickName: req.NickName,
+		Mobile:   req.Mobile,
+		Email:    req.Mobile,
+		Status:   req.Status,
+		DeptId:   req.DeptId,
 	})
 
 	if err != nil {
@@ -44,6 +50,7 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 			Salt:           item.Salt,
 			Email:          item.Email,
 			Mobile:         item.Mobile,
+			Status:         item.Status,
 			DeptId:         item.DeptId,
 			CreateBy:       item.CreateBy,
 			CreateTime:     item.CreateTime,

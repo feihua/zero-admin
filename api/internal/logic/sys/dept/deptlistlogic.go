@@ -24,7 +24,10 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptListL
 }
 
 func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, error) {
-	resp, err := l.svcCtx.Sys.DeptList(l.ctx, &sysclient.DeptListReq{})
+	resp, err := l.svcCtx.Sys.DeptList(l.ctx, &sysclient.DeptListReq{
+		Name:     req.Name,
+		CreateBy: req.CreateBy,
+	})
 
 	if err != nil {
 		return nil, err

@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
-
+	"go-zero-admin/rpc/model/sysmodel"
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
+	"strconv"
+	"time"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,7 +26,18 @@ func NewUpdateUserRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 }
 
 func (l *UpdateUserRoleLogic) UpdateUserRole(in *sys.UpdateUserRoleReq) (*sys.UpdateUserRoleResp, error) {
-	// todo: add your logic here and delete this line
+	_ = l.svcCtx.UserRoleModel.Delete(in.Id)
+
+	roleId, _ := strconv.ParseInt(in.RoleId, 10, 64)
+
+	_, _ = l.svcCtx.UserRoleModel.Insert(sysmodel.SysUserRole{
+		UserId:         in.Id,
+		RoleId:         roleId,
+		CreateBy:       "admin",
+		CreateTime:     time.Now(),
+		LastUpdateBy:   "admin",
+		LastUpdateTime: time.Now(),
+	})
 
 	return &sys.UpdateUserRoleResp{}, nil
 }

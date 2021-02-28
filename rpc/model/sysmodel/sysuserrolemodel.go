@@ -70,7 +70,7 @@ func (m *SysUserRoleModel) Update(data SysUserRole) error {
 }
 
 func (m *SysUserRoleModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id = ?", m.table)
+	query := fmt.Sprintf("delete from %s where user_id = ?", m.table)
 	_, err := m.conn.Exec(query, id)
 	return err
 }

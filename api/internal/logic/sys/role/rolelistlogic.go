@@ -5,6 +5,7 @@ import (
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
+	"strconv"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -27,6 +28,8 @@ func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, er
 	resp, err := l.svcCtx.Sys.RoleList(l.ctx, &sysclient.RoleListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		Name:     req.Name,
+		DelFlag:  req.DelFlag,
 	})
 
 	if err != nil {
@@ -45,6 +48,8 @@ func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, er
 			LastUpdateBy:   role.LastUpdateBy,
 			LastUpdateTime: role.LastUpdateTime,
 			DelFlag:        role.DelFlag,
+			Label:          role.Name,
+			Value:          strconv.FormatInt(role.Id, 10),
 		})
 	}
 
