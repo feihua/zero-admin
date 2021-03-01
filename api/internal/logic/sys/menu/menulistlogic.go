@@ -5,6 +5,7 @@ import (
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
+	"strconv"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -38,7 +39,9 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 	for _, menu := range resp.List {
 		list = append(list, &types.ListtMenuData{
 			Id:             menu.Id,
+			Key:            strconv.FormatInt(menu.Id, 10),
 			Name:           menu.Name,
+			Title:          menu.Name,
 			ParentId:       menu.ParentId,
 			Url:            menu.Url,
 			Perms:          menu.Perms,
