@@ -188,6 +188,15 @@ message UpdateRoleRoleReq {
 message UpdateRoleRoleResp {
   string pong = 1;
 }
+
+message QueryMenuByRoleIdReq {
+  int64 id = 1;
+}
+
+message QueryMenuByRoleIdResp {
+  repeated string ids = 1;
+}
+
 //role end---------------------
 
 //menu start---------------------
@@ -574,6 +583,7 @@ service Sys {
   rpc RoleUpdate(RoleUpdateReq) returns(RoleUpdateResp);
   rpc RoleDelete(RoleDeleteReq) returns(RoleDeleteResp);
   rpc UpdateRoleRole(UpdateRoleRoleReq) returns(UpdateRoleRoleResp);
+  rpc QueryMenuByRoleId(QueryMenuByRoleIdReq) returns(QueryMenuByRoleIdResp);
 
   rpc MenuAdd(MenuAddReq) returns(MenuAddResp);
   rpc MenuList(MenuListReq) returns(MenuListResp);

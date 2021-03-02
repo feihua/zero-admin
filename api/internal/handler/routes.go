@@ -137,10 +137,16 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
+				Path:    "/api/sys/role/queryMenuByRoleId",
+				Handler: sysrole.QueryMenuByRoleIdHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/api/sys/role/updateRoleMenu",
 				Handler: sysrole.UpdateRoleMenuHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -166,6 +172,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysmenu.MenuDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -191,6 +198,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysdict.DictDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -216,6 +224,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysdept.DeptDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -231,6 +240,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: syslog.LoginLogDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -246,6 +256,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: syslog.SysLogDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -271,6 +282,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysconfig.ConfigDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(

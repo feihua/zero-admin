@@ -738,6 +738,12 @@ type ListMemberTaskResp struct {
 	Total    int64                  `json:"total"`
 }
 
+type ListMenuData struct {
+	Key      string `json:"key"`       // 菜单名称
+	Title    string `json:"title"`     // 菜单名称
+	ParentId int64  `json:"parent_id"` // 父菜单ID，一级菜单为0
+}
+
 type ListMenuReq struct {
 	Name string `form:"name,optional "`
 	Url  string `form:"url,optional "`
@@ -1515,6 +1521,15 @@ type RoleMenuIdsReq struct {
 }
 
 type RoleMenuIdsResp struct {
+}
+
+type RoleMenuReq struct {
+	Id int64 `form:"id,optional"`
+}
+
+type RoleMenuResp struct {
+	AllData  []*ListMenuData `json:"allData"`
+	RoleData []string        `json:"userData"`
 }
 
 type UpdateCartItemReq struct {

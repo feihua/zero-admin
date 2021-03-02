@@ -12,6 +12,7 @@ type ServiceContext struct {
 	UserModel     *sysmodel.SysUserModel
 	UserRoleModel *sysmodel.SysUserRoleModel
 	RoleModel     *sysmodel.SysRoleModel
+	RoleMenuModel *sysmodel.SysRoleMenuModel
 	MenuModel     *sysmodel.SysMenuModel
 	DictModel     *sysmodel.SysDictModel
 	DeptModel     *sysmodel.SysDeptModel
@@ -29,6 +30,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		UserModel:     sysmodel.NewSysUserModel(sqlConn),
 		UserRoleModel: sysmodel.NewSysUserRoleModel(sqlConn),
 		RoleModel:     sysmodel.NewSysRoleModel(sqlConn),
+		RoleMenuModel: sysmodel.NewSysRoleMenuModel(sqlConn),
 		MenuModel:     sysmodel.NewSysMenuModel(sqlConn),
 		DictModel:     sysmodel.NewSysDictModel(sqlConn),
 		DeptModel:     sysmodel.NewSysDeptModel(sqlConn),

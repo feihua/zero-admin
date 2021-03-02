@@ -49,6 +49,21 @@ func (m *SysRoleMenuModel) Insert(data SysRoleMenu) (sql.Result, error) {
 	return ret, err
 }
 
+func (m *SysRoleMenuModel) FindByRoleId(RoleId int64) (*[]SysRoleMenu, error) {
+
+	query := fmt.Sprintf("select %s from %s where role_id = ?", sysRoleMenuRows, m.table)
+	var resp []SysRoleMenu
+	err := m.conn.QueryRows(&resp, query, RoleId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *SysRoleMenuModel) FindOne(id int64) (*SysRoleMenu, error) {
 	query := fmt.Sprintf("select %s from %s where id = ? limit 1", sysRoleMenuRows, m.table)
 	var resp SysRoleMenu

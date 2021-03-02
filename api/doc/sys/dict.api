@@ -65,6 +65,7 @@ type (
 )
 
 @server(
+    jwt: Auth
     group: sys/dict
 )
 service admin-api {

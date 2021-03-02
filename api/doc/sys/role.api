@@ -57,9 +57,24 @@ type (
     }
     UpdateRoleMenuResp struct {
     }
+
+    ListMenuData struct {
+        Key string `json:"key"`                          // 菜单名称
+        Title string `json:"title"`                          // 菜单名称
+        ParentId int64 `json:"parent_id"`                  // 父菜单ID，一级菜单为0
+    }
+
+    RoleMenuReq struct {
+        Id int64 `form:"id,optional"`
+    }
+    RoleMenuResp struct {
+        AllData []*ListMenuData `json:"allData"`
+        RoleData []string `json:"userData"`
+    }
 )
 
 @server(
+    jwt: Auth
     group: sys/role
 )
 service admin-api {
@@ -78,6 +93,12 @@ service admin-api {
     @handler RoleMenuIds
     post /api/sys/role/roleMenuIds (RoleMenuIdsReq) returns (RoleMenuIdsResp)
 
+    @handler QueryMenuByRoleId
+    post /api/sys/role/queryMenuByRoleId (RoleMenuReq) returns (RoleMenuResp)
+
     @handler UpdateRoleMenu
     post /api/sys/role/updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
+
+
+
 }
