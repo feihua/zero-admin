@@ -2208,17 +2208,11 @@ type UpdateUserReq struct {
 	Name     string `json:"name"`
 	NickName string `json:"nick_name"`
 	DeptId   int64  `json:"dept_id"`
+	RoleId   string `json:"role_id"`
+	Status   string `json:"status"`
 }
 
 type UpdateUserResp struct {
-}
-
-type UpdateUserRoleReq struct {
-	Id     int64  `json:"id"`
-	RoleId string `json:"role_id"`
-}
-
-type UpdateUserRoleResp struct {
 }
 
 type UserStatusReq struct {
@@ -2858,6 +2852,7 @@ type AddUserReq struct {
 	Name     string `json:"name"`
 	NickName string `json:"nick_name"`
 	DeptId   string `json:"dept_id"`
+	RoleId   string `json:"role_id"`
 }
 
 type AddUserResp struct {

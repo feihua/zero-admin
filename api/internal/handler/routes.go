@@ -81,11 +81,6 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/user/updateUserRole",
-				Handler: sysuser.UpdateUserRoleHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
 				Path:    "/api/sys/user/reSetPassword",
 				Handler: sysuser.ReSetPasswordHandler(serverCtx),
 			},

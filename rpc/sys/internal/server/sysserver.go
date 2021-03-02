@@ -51,11 +51,6 @@ func (s *SysServer) UserDelete(ctx context.Context, in *sys.UserDeleteReq) (*sys
 	return l.UserDelete(in)
 }
 
-func (s *SysServer) UpdateUserRole(ctx context.Context, in *sys.UpdateUserRoleReq) (*sys.UpdateUserRoleResp, error) {
-	l := logic.NewUpdateUserRoleLogic(ctx, s.svcCtx)
-	return l.UpdateUserRole(in)
-}
-
 func (s *SysServer) ReSetPassword(ctx context.Context, in *sys.ReSetPasswordReq) (*sys.ReSetPasswordResp, error) {
 	l := logic.NewReSetPasswordLogic(ctx, s.svcCtx)
 	return l.ReSetPassword(in)

@@ -32,6 +32,8 @@ func (l *UserUpdateLogic) UserUpdate(req types.UpdateUserReq) (*types.UpdateUser
 		NickName:     req.NickName,
 		DeptId:       req.DeptId,
 		LastUpdateBy: "admin",
+		RoleId:       req.RoleId,
+		Status:       req.Status,
 	})
 
 	if err != nil {

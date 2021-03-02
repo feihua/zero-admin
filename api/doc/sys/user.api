@@ -38,6 +38,7 @@ type (
         Name string `json:"name"`
         NickName string `json:"nick_name"`
         DeptId string `json:"dept_id"`
+        RoleId string `json:"role_id"`
     }
     addUserResp struct {
     }
@@ -84,6 +85,8 @@ type (
         Name string `json:"name"`
         NickName string `json:"nick_name"`
         DeptId int64 `json:"dept_id"`
+        RoleId string `json:"role_id"`
+        status string `json:"status"`
     }
     UpdateUserResp struct {
     }
@@ -91,12 +94,6 @@ type (
         ID int64 `json:"id"`
     }
     DeleteUserResp struct {
-    }
-    UpdateUserRoleReq struct {
-        Id int64 `json:"id"`
-        RoleId string `json:"role_id"`
-    }
-    UpdateUserRoleResp struct {
     }
     ReSetPasswordReq struct {
         Id int64 `json:"id"`
@@ -132,9 +129,6 @@ service admin-api {
 
     @handler UserDelete
     post /api/sys/user/delete (DeleteUserReq) returns (DeleteUserResp)
-
-    @handler UpdateUserRole
-    post /api/sys/user/updateUserRole (UpdateUserRoleReq) returns (UpdateUserRoleResp)
 
     @handler ReSetPassword
     post /api/sys/user/reSetPassword (ReSetPasswordReq) returns (ReSetPasswordResp)
