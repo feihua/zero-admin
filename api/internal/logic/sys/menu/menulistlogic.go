@@ -57,6 +57,8 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 	}
 
 	return &types.ListMenuResp{
+		Code:    "000000",
+		Message: "",
 		Data:    list,
 		Success: true,
 		Total:   resp.Total,

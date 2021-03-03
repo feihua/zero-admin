@@ -50,6 +50,8 @@ func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, er
 	}
 
 	return &types.ListDeptResp{
+		Code:    "000000",
+		Message: "",
 		Data:    list,
 		Success: true,
 		Total:   resp.Total,

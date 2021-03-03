@@ -61,6 +61,8 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 	}
 
 	return &types.ListUserResp{
+		Code:     "000000",
+		Message:  "查询用户列表成功",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

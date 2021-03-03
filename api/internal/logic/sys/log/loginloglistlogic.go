@@ -49,6 +49,8 @@ func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.List
 	}
 
 	return &types.ListLoginLogResp{
+		Code:     "000000",
+		Message:  "",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

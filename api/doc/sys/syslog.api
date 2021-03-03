@@ -7,8 +7,8 @@ info(
 
 type (
     ListSysLogReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `form:"current,optional"`
+        PageSize int64 `form:"pageSize,optional"`
     }
     ListSysLogData struct {
         Id int64 `json:"id"`                               // 编号

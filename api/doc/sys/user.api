@@ -69,14 +69,14 @@ type (
     }
 
     ListUserReq struct {
-        current int64 `form:"current"`
-        pageSize int64 `form:"pageSize"`
-        Name string `form:"name,optional "`
-        NickName string `form:"nick_name,optional "`
-        Mobile string `form:"mobile,optional "`
-        Email string `form:"email,optional "`
-        Status int64 `form:"status,optional "`
-        DeptId int64 `form:"dept_id,optional "`
+        current int64 `form:"current,optional"`
+        pageSize int64 `form:"pageSize,optional"`
+        Name string `form:"name,optional"`
+        NickName string `form:"nick_name,optional"`
+        Mobile string `form:"mobile,optional"`
+        Email string `form:"email,optional"`
+        Status int64 `form:"status,optional"`
+        DeptId int64 `form:"dept_id,optional"`
     }
 
     ListUserData struct {

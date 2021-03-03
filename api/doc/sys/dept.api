@@ -18,8 +18,8 @@ type (
     ListDeptReq struct {
 //        Current int64 `form:"current"`
 //        PageSize int64 `form:"pageSize"`
-        Name string `form:"name,optional "`
-        CreateBy string `form:"create_by,optional "`
+        Name string `form:"name,optional"`
+        CreateBy string `form:"create_by,optional"`
     }
     ListDeptData struct {
         Id int64 `json:"id"`                               // 编号

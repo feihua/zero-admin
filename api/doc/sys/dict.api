@@ -20,11 +20,11 @@ type (
         Message string `json:"message"`
     }
     ListDictReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
-        Value string `form:"value,optional "`
-        Label string `form:"label,optional "`
-        DelFlag int64 `form:"del_flag,optional "`
+        Current int64 `form:"current,optional"`
+        PageSize int64 `form:"pageSize,optional"`
+        Value string `form:"value,optional"`
+        Label string `form:"label,optional"`
+        DelFlag int64 `form:"del_flag,optional"`
         Type string `form:"type,optional "`
     }
     ListDictData struct {

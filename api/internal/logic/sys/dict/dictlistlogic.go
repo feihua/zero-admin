@@ -57,6 +57,8 @@ func (l *DictListLogic) DictList(req types.ListDictReq) (*types.ListDictResp, er
 	}
 
 	return &types.ListDictResp{
+		Code:     "000000",
+		Message:  "",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

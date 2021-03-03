@@ -493,8 +493,8 @@ type ListDeptData struct {
 }
 
 type ListDeptReq struct {
-	Name     string `form:"name,optional "`
-	CreateBy string `form:"create_by,optional "`
+	Name     string `form:"name,optional"`
+	CreateBy string `form:"create_by,optional"`
 }
 
 type ListDeptResp struct {
@@ -521,11 +521,11 @@ type ListDictData struct {
 }
 
 type ListDictReq struct {
-	Current  int64  `form:"current"`
-	PageSize int64  `form:"pageSize"`
-	Value    string `form:"value,optional "`
-	Label    string `form:"label,optional "`
-	DelFlag  int64  `form:"del_flag,optional "`
+	Current  int64  `form:"current,optional"`
+	PageSize int64  `form:"pageSize,optional"`
+	Value    string `form:"value,optional"`
+	Label    string `form:"label,optional"`
+	DelFlag  int64  `form:"del_flag,optional"`
 	Type     string `form:"type,optional "`
 }
 
@@ -729,8 +729,8 @@ type ListLoginLogData struct {
 }
 
 type ListLoginLogReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `form:"current,optional"`
+	PageSize int64 `form:"pageSize,optional"`
 }
 
 type ListLoginLogResp struct {
@@ -1104,8 +1104,8 @@ type ListSysLogData struct {
 }
 
 type ListSysLogReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `form:"current,optional"`
+	PageSize int64 `form:"pageSize,optional"`
 }
 
 type ListSysLogResp struct {
@@ -1137,14 +1137,14 @@ type ListUserData struct {
 }
 
 type ListUserReq struct {
-	Current  int64  `form:"current"`
-	PageSize int64  `form:"pageSize"`
-	Name     string `form:"name,optional "`
-	NickName string `form:"nick_name,optional "`
-	Mobile   string `form:"mobile,optional "`
-	Email    string `form:"email,optional "`
-	Status   int64  `form:"status,optional "`
-	DeptId   int64  `form:"dept_id,optional "`
+	Current  int64  `form:"current,optional"`
+	PageSize int64  `form:"pageSize,optional"`
+	Name     string `form:"name,optional"`
+	NickName string `form:"nick_name,optional"`
+	Mobile   string `form:"mobile,optional"`
+	Email    string `form:"email,optional"`
+	Status   int64  `form:"status,optional"`
+	DeptId   int64  `form:"dept_id,optional"`
 }
 
 type ListUserResp struct {

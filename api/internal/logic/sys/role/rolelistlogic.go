@@ -54,6 +54,8 @@ func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, er
 	}
 
 	return &types.ListRoleResp{
+		Code:     "000000",
+		Message:  "",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,
