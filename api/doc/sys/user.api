@@ -29,12 +29,31 @@ type (
         ParentId int64 `json:"parent_id"`                  // 父菜单ID，一级菜单为0
         Icon string `json:"icon"`                          // 菜单图标
     }
+
+    ListMenuTreeVue struct {
+        Id int64 `json:"id"`
+        ParentId int64 `json:"parent_id"`
+        Title string `json:"title"`
+        Path string `json:"path"`
+        Name string `json:"name"`
+        Icon string `json:"icon"`
+        VueRedirect string `json:"redirect"`
+        VueComponent string `json:"component"`
+        Meta MenuTreeMeta `json:"meta"`
+    }
+
+    MenuTreeMeta struct {
+        Title string `json:"title"`
+        Icon string `json:"icon"`
+    }
+
     userInfoResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
         Avatar string `json:"avatar"`
         Name string `json:"name"`
         MenuTree []*ListMenuTree `json:"menuTree"`
+        menuTreeVue []*ListMenuTreeVue `json:"menuTreeVue"`
     }
     addUserReq struct {
         Email string `json:"email"`

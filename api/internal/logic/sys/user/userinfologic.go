@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"go-zero-admin/rpc/sys/sysclient"
+	"strings"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -37,10 +38,10 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 		return nil, err
 	}
 
-	var list []*types.ListMenuTree
+	var MenuTree []*types.ListMenuTree
 
 	for _, item := range resp.MenuListTree {
-		list = append(list, &types.ListMenuTree{
+		MenuTree = append(MenuTree, &types.ListMenuTree{
 			Id:       item.Id,
 			Path:     item.Path,
 			Name:     item.Name,
@@ -49,9 +50,35 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 		})
 	}
 
+	var MenuTreeVue []*types.ListMenuTreeVue
+
+	for _, item := range resp.MenuListTree {
+
+		if len(strings.TrimSpace(item.VuePath)) != 0 {
+			MenuTreeVue = append(MenuTreeVue, &types.ListMenuTreeVue{
+				Id:           item.Id,
+				ParentId:     item.ParentId,
+				Title:        item.Name,
+				Path:         item.VuePath,
+				Name:         item.Name,
+				Icon:         item.VueIcon,
+				VueRedirect:  item.VueRedirect,
+				VueComponent: item.VueComponent,
+				Meta: types.MenuTreeMeta{
+					Title: item.Name,
+					Icon:  item.VueIcon,
+				},
+			})
+		}
+
+	}
+
 	return &types.UserInfoResp{
-		Avatar:   resp.Avatar,
-		Name:     resp.Name,
-		MenuTree: list,
+		Code:        "000000",
+		Message:     "获取个人信息成功",
+		Avatar:      resp.Avatar,
+		Name:        resp.Name,
+		MenuTree:    MenuTree,
+		MenuTreeVue: MenuTreeVue,
 	}, nil
 }

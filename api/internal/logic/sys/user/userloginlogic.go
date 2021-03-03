@@ -51,6 +51,8 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginR
 	})
 
 	return &types.LoginResp{
+		Code:             "000000",
+		Message:          "登录成功",
 		Status:           resp.Status,
 		CurrentAuthority: resp.CurrentAuthority,
 		Id:               resp.Id,

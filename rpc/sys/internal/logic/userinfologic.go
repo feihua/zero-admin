@@ -41,11 +41,15 @@ func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 	var list []*sys.MenuListTree
 	for _, menu := range *menus {
 		list = append(list, &sys.MenuListTree{
-			Id:       menu.Id,
-			Name:     menu.Name,
-			ParentId: menu.ParentId,
-			Path:     menu.Url,
-			Icon:     menu.Icon,
+			Id:           menu.Id,
+			Name:         menu.Name,
+			Icon:         menu.Icon,
+			ParentId:     menu.ParentId,
+			Path:         menu.Url,
+			VuePath:      menu.VuePath.String,
+			VueComponent: menu.VueComponent.String,
+			VueIcon:      menu.VueIcon.String,
+			VueRedirect:  menu.VueRedirect.String,
 		})
 	}
 

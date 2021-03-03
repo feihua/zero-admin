@@ -239,6 +239,10 @@ message MenuListTree {
   string icon = 3;
   int64 parent_id = 4;
   string path = 5;
+  string vue_path = 6;
+  string vue_component = 7;
+  string vue_icon = 8;
+  string vue_redirect = 9;
 }
 
 message MenuListResp{

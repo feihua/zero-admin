@@ -901,6 +901,18 @@ type ListMenuTree struct {
 	Icon     string `json:"icon"`      // 菜单图标
 }
 
+type ListMenuTreeVue struct {
+	Id           int64        `json:"id"`
+	ParentId     int64        `json:"parent_id"`
+	Title        string       `json:"title"`
+	Path         string       `json:"path"`
+	Name         string       `json:"name"`
+	Icon         string       `json:"icon"`
+	VueRedirect  string       `json:"redirect"`
+	VueComponent string       `json:"component"`
+	Meta         MenuTreeMeta `json:"meta"`
+}
+
 type ListOperateHistoryReq struct {
 	Current  int64 `form:"current"`
 	PageSize int64 `form:"pageSize"`
@@ -1668,6 +1680,11 @@ type ListtSkuStockData struct {
 	PromotionPrice float64 `json:"promotion_price"` // 单品促销价格
 	LockStock      int64   `json:"lock_stock"`      // 锁定库存
 	SpData         string  `json:"sp_data"`         // 商品销售属性，json格式
+}
+
+type MenuTreeMeta struct {
+	Title string `json:"title"`
+	Icon  string `json:"icon"`
 }
 
 type ReSetPasswordReq struct {
@@ -3208,9 +3225,10 @@ type LoginResp struct {
 }
 
 type UserInfoResp struct {
-	Code     string          `json:"code"`
-	Message  string          `json:"message"`
-	Avatar   string          `json:"avatar"`
-	Name     string          `json:"name"`
-	MenuTree []*ListMenuTree `json:"menuTree"`
+	Code        string             `json:"code"`
+	Message     string             `json:"message"`
+	Avatar      string             `json:"avatar"`
+	Name        string             `json:"name"`
+	MenuTree    []*ListMenuTree    `json:"menuTree"`
+	MenuTreeVue []*ListMenuTreeVue `json:"menuTreeVue"`
 }
