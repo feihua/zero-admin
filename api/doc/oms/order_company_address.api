@@ -18,6 +18,8 @@ type (
         DetailAddress string `json:"detail_address"` // 详细地址
     }
     addCompayAddressResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListCompayAddressReq struct {
         Current int64 `form:"current"`
@@ -36,6 +38,8 @@ type (
         DetailAddress string `json:"detail_address"` // 详细地址
     }
     ListCompayAddressResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtCompayAddressData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -55,11 +59,15 @@ type (
         DetailAddress string `json:"detail_address"` // 详细地址
     }
     UpdateCompayAddressResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteCompayAddressReq struct {
         Id int64 `json:"id"`
     }
     DeleteCompayAddressResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

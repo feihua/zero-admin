@@ -13,6 +13,8 @@ type (
         Type         int64  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
     }
     addMemberTaskResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListMemberTaskReq struct {
         Current int64 `form:"current"`
@@ -26,6 +28,8 @@ type (
         Type         int64  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
     }
     ListMemberTaskResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtMemberTaskData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -40,11 +44,15 @@ type (
         Type         int64  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
     }
     UpdateMemberTaskResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteMemberTaskReq struct {
         Id int64 `json:"id"`
     }
     DeleteMemberTaskResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

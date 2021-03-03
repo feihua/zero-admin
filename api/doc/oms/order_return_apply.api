@@ -35,6 +35,8 @@ type (
         ReceiveNote      string    `json:"receive_note"`       // 收货备注
     }
     addReturnApplyResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListReturnApplyReq struct {
         Current int64 `form:"current"`
@@ -70,6 +72,8 @@ type (
         ReceiveNote      string    `json:"receive_note"`       // 收货备注
     }
     ListReturnApplyResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtReturnApplyData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -106,11 +110,15 @@ type (
         ReceiveNote      string    `json:"receive_note"`       // 收货备注
     }
     UpdateReturnApplyResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteReturnApplyReq struct {
         Id int64 `json:"id"`
     }
     DeleteReturnApplyResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

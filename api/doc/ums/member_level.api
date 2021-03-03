@@ -21,6 +21,8 @@ type (
         Note                  string  `json:"note"`
     }
     addMemberLevelResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListMemberLevelReq struct {
         Current int64 `form:"current"`
@@ -42,6 +44,8 @@ type (
         Note                  string  `json:"note"`
     }
     ListMemberLevelResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtMemberLevelData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -64,11 +68,15 @@ type (
         Note                  string  `json:"note"`
     }
     UpdateMemberLevelResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteMemberLevelReq struct {
         Id int64 `json:"id"`
     }
     DeleteMemberLevelResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

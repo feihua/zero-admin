@@ -10,6 +10,8 @@ type DeleteCartItemReq struct {
 }
 
 type DeleteCartItemResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteCompayAddressReq struct {
@@ -17,6 +19,8 @@ type DeleteCompayAddressReq struct {
 }
 
 type DeleteCompayAddressResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteConfigReq struct {
@@ -24,6 +28,8 @@ type DeleteConfigReq struct {
 }
 
 type DeleteConfigResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteCouponHistoryReq struct {
@@ -31,6 +37,8 @@ type DeleteCouponHistoryReq struct {
 }
 
 type DeleteCouponHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteCouponReq struct {
@@ -38,6 +46,8 @@ type DeleteCouponReq struct {
 }
 
 type DeleteCouponResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteDeptReq struct {
@@ -45,6 +55,8 @@ type DeleteDeptReq struct {
 }
 
 type DeleteDeptResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteDictReq struct {
@@ -52,6 +64,8 @@ type DeleteDictReq struct {
 }
 
 type DeleteDictResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteFeightTemplateReq struct {
@@ -59,6 +73,8 @@ type DeleteFeightTemplateReq struct {
 }
 
 type DeleteFeightTemplateResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteFlashPromotionLogReq struct {
@@ -66,6 +82,8 @@ type DeleteFlashPromotionLogReq struct {
 }
 
 type DeleteFlashPromotionLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteFlashPromotionReq struct {
@@ -73,6 +91,8 @@ type DeleteFlashPromotionReq struct {
 }
 
 type DeleteFlashPromotionResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteFlashPromotionSessionReq struct {
@@ -80,6 +100,8 @@ type DeleteFlashPromotionSessionReq struct {
 }
 
 type DeleteFlashPromotionSessionResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteGrowthChangeHistoryReq struct {
@@ -87,6 +109,8 @@ type DeleteGrowthChangeHistoryReq struct {
 }
 
 type DeleteGrowthChangeHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteHomeAdvertiseReq struct {
@@ -94,6 +118,8 @@ type DeleteHomeAdvertiseReq struct {
 }
 
 type DeleteHomeAdvertiseResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteHomeBrandReq struct {
@@ -101,6 +127,8 @@ type DeleteHomeBrandReq struct {
 }
 
 type DeleteHomeBrandResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteHomeNewProductReq struct {
@@ -108,6 +136,8 @@ type DeleteHomeNewProductReq struct {
 }
 
 type DeleteHomeNewProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteHomeRecommendProductReq struct {
@@ -115,6 +145,8 @@ type DeleteHomeRecommendProductReq struct {
 }
 
 type DeleteHomeRecommendProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteHomeRecommendSubjectReq struct {
@@ -122,6 +154,8 @@ type DeleteHomeRecommendSubjectReq struct {
 }
 
 type DeleteHomeRecommendSubjectResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteIntegrationChangeHistoryReq struct {
@@ -129,6 +163,8 @@ type DeleteIntegrationChangeHistoryReq struct {
 }
 
 type DeleteIntegrationChangeHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteIntegrationConsumeSettingReq struct {
@@ -136,6 +172,8 @@ type DeleteIntegrationConsumeSettingReq struct {
 }
 
 type DeleteIntegrationConsumeSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteLoginLogReq struct {
@@ -143,6 +181,8 @@ type DeleteLoginLogReq struct {
 }
 
 type DeleteLoginLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMemberAddressReq struct {
@@ -150,6 +190,8 @@ type DeleteMemberAddressReq struct {
 }
 
 type DeleteMemberAddressResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMemberLevelReq struct {
@@ -157,6 +199,8 @@ type DeleteMemberLevelReq struct {
 }
 
 type DeleteMemberLevelResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMemberLoginLogReq struct {
@@ -164,6 +208,8 @@ type DeleteMemberLoginLogReq struct {
 }
 
 type DeleteMemberLoginLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMemberPriceReq struct {
@@ -171,6 +217,8 @@ type DeleteMemberPriceReq struct {
 }
 
 type DeleteMemberPriceResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMemberReq struct {
@@ -178,6 +226,8 @@ type DeleteMemberReq struct {
 }
 
 type DeleteMemberResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMemberRuleSettingReq struct {
@@ -185,6 +235,8 @@ type DeleteMemberRuleSettingReq struct {
 }
 
 type DeleteMemberRuleSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMemberStatisticsInfoReq struct {
@@ -192,6 +244,8 @@ type DeleteMemberStatisticsInfoReq struct {
 }
 
 type DeleteMemberStatisticsInfoResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMemberTagReq struct {
@@ -199,6 +253,8 @@ type DeleteMemberTagReq struct {
 }
 
 type DeleteMemberTagResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMemberTaskReq struct {
@@ -206,6 +262,8 @@ type DeleteMemberTaskReq struct {
 }
 
 type DeleteMemberTaskResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteMenuReq struct {
@@ -213,6 +271,8 @@ type DeleteMenuReq struct {
 }
 
 type DeleteMenuResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteOperateHistoryReq struct {
@@ -220,6 +280,8 @@ type DeleteOperateHistoryReq struct {
 }
 
 type DeleteOperateHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteOrderReq struct {
@@ -227,6 +289,8 @@ type DeleteOrderReq struct {
 }
 
 type DeleteOrderResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteOrderSettingReq struct {
@@ -234,6 +298,8 @@ type DeleteOrderSettingReq struct {
 }
 
 type DeleteOrderSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteProductBrandReq struct {
@@ -241,6 +307,8 @@ type DeleteProductBrandReq struct {
 }
 
 type DeleteProductBrandResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteProductCategoryReq struct {
@@ -248,6 +316,8 @@ type DeleteProductCategoryReq struct {
 }
 
 type DeleteProductCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteProductCommentReq struct {
@@ -255,6 +325,8 @@ type DeleteProductCommentReq struct {
 }
 
 type DeleteProductCommentResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteProductReq struct {
@@ -262,6 +334,8 @@ type DeleteProductReq struct {
 }
 
 type DeleteProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteReturnApplyReq struct {
@@ -269,6 +343,8 @@ type DeleteReturnApplyReq struct {
 }
 
 type DeleteReturnApplyResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteReturnResonReq struct {
@@ -276,6 +352,8 @@ type DeleteReturnResonReq struct {
 }
 
 type DeleteReturnResonResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteRoleReq struct {
@@ -283,6 +361,8 @@ type DeleteRoleReq struct {
 }
 
 type DeleteRoleResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteSkuStockReq struct {
@@ -290,6 +370,8 @@ type DeleteSkuStockReq struct {
 }
 
 type DeleteSkuStockResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteSysLogReq struct {
@@ -297,13 +379,17 @@ type DeleteSysLogReq struct {
 }
 
 type DeleteSysLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteUserReq struct {
-	ID int64 `json:"id"`
+	Id int64 `json:"id"`
 }
 
 type DeleteUserResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type ListCartItemReq struct {
@@ -312,6 +398,8 @@ type ListCartItemReq struct {
 }
 
 type ListCartItemResp struct {
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
 	Current  int64                `json:"current"`
 	Data     []*ListtCartItemData `json:"data"`
 	PageSize int64                `json:"pageSize"`
@@ -325,6 +413,8 @@ type ListCompayAddressReq struct {
 }
 
 type ListCompayAddressResp struct {
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
 	Current  int64                     `json:"current"`
 	Data     []*ListtCompayAddressData `json:"data"`
 	PageSize int64                     `json:"pageSize"`
@@ -353,6 +443,8 @@ type ListConfigReq struct {
 }
 
 type ListConfigResp struct {
+	Code     string            `json:"code"`
+	Message  string            `json:"message"`
 	Current  int64             `json:"current"`
 	Data     []*ListConfigData `json:"data"`
 	PageSize int64             `json:"pageSize"`
@@ -379,6 +471,8 @@ type ListCouponReq struct {
 }
 
 type ListCouponResp struct {
+	Code     string             `json:"code"`
+	Message  string             `json:"message"`
 	Current  int64              `json:"current"`
 	Data     []*ListtCouponData `json:"data"`
 	PageSize int64              `json:"pageSize"`
@@ -404,6 +498,8 @@ type ListDeptReq struct {
 }
 
 type ListDeptResp struct {
+	Code    string          `json:"code"`
+	Message string          `json:"message"`
 	Data    []*ListDeptData `json:"data"`
 	Success bool            `json:"success"`
 	Total   int64           `json:"total"`
@@ -434,6 +530,8 @@ type ListDictReq struct {
 }
 
 type ListDictResp struct {
+	Code     string          `json:"code"`
+	Message  string          `json:"message"`
 	Current  int64           `json:"current"`
 	Data     []*ListDictData `json:"data"`
 	PageSize int64           `json:"pageSize"`
@@ -447,6 +545,8 @@ type ListFeightTemplateReq struct {
 }
 
 type ListFeightTemplateResp struct {
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
 	Current  int64                      `json:"current"`
 	Data     []*ListtFeightTemplateData `json:"data"`
 	PageSize int64                      `json:"pageSize"`
@@ -460,6 +560,8 @@ type ListFlashPromotionLogReq struct {
 }
 
 type ListFlashPromotionLogResp struct {
+	Code     string                        `json:"code"`
+	Message  string                        `json:"message"`
 	Current  int64                         `json:"current"`
 	Data     []*ListtFlashPromotionLogData `json:"data"`
 	PageSize int64                         `json:"pageSize"`
@@ -473,6 +575,8 @@ type ListFlashPromotionReq struct {
 }
 
 type ListFlashPromotionResp struct {
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
 	Current  int64                      `json:"current"`
 	Data     []*ListtFlashPromotionData `json:"data"`
 	PageSize int64                      `json:"pageSize"`
@@ -486,6 +590,8 @@ type ListFlashPromotionSessionReq struct {
 }
 
 type ListFlashPromotionSessionResp struct {
+	Code     string                            `json:"code"`
+	Message  string                            `json:"message"`
 	Current  int64                             `json:"current"`
 	Data     []*ListtFlashPromotionSessionData `json:"data"`
 	PageSize int64                             `json:"pageSize"`
@@ -512,6 +618,8 @@ type ListHomeAdvertiseReq struct {
 }
 
 type ListHomeAdvertiseResp struct {
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
 	Current  int64                     `json:"current"`
 	Data     []*ListtHomeAdvertiseData `json:"data"`
 	PageSize int64                     `json:"pageSize"`
@@ -525,6 +633,8 @@ type ListHomeBrandReq struct {
 }
 
 type ListHomeBrandResp struct {
+	Code     string                `json:"code"`
+	Message  string                `json:"message"`
 	Current  int64                 `json:"current"`
 	Data     []*ListtHomeBrandData `json:"data"`
 	PageSize int64                 `json:"pageSize"`
@@ -538,6 +648,8 @@ type ListHomeNewProductReq struct {
 }
 
 type ListHomeNewProductResp struct {
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
 	Current  int64                      `json:"current"`
 	Data     []*ListtHomeNewProductData `json:"data"`
 	PageSize int64                      `json:"pageSize"`
@@ -551,6 +663,8 @@ type ListHomeRecommendProductReq struct {
 }
 
 type ListHomeRecommendProductResp struct {
+	Code     string                           `json:"code"`
+	Message  string                           `json:"message"`
 	Current  int64                            `json:"current"`
 	Data     []*ListtHomeRecommendProductData `json:"data"`
 	PageSize int64                            `json:"pageSize"`
@@ -564,6 +678,8 @@ type ListHomeRecommendSubjectReq struct {
 }
 
 type ListHomeRecommendSubjectResp struct {
+	Code     string                           `json:"code"`
+	Message  string                           `json:"message"`
 	Current  int64                            `json:"current"`
 	Data     []*ListtHomeRecommendSubjectData `json:"data"`
 	PageSize int64                            `json:"pageSize"`
@@ -577,6 +693,8 @@ type ListIntegrationChangeHistoryReq struct {
 }
 
 type ListIntegrationChangeHistoryResp struct {
+	Code     string                               `json:"code"`
+	Message  string                               `json:"message"`
 	Current  int64                                `json:"current"`
 	Data     []*ListtIntegrationChangeHistoryData `json:"data"`
 	PageSize int64                                `json:"pageSize"`
@@ -590,6 +708,8 @@ type ListIntegrationConsumeSettingReq struct {
 }
 
 type ListIntegrationConsumeSettingResp struct {
+	Code     string                                `json:"code"`
+	Message  string                                `json:"message"`
 	Current  int64                                 `json:"current"`
 	Data     []*ListtIntegrationConsumeSettingData `json:"data"`
 	PageSize int64                                 `json:"pageSize"`
@@ -614,6 +734,8 @@ type ListLoginLogReq struct {
 }
 
 type ListLoginLogResp struct {
+	Code     string              `json:"code"`
+	Message  string              `json:"message"`
 	Current  int64               `json:"current"`
 	Data     []*ListLoginLogData `json:"data"`
 	PageSize int64               `json:"pageSize"`
@@ -640,6 +762,8 @@ type ListMemberLevelReq struct {
 }
 
 type ListMemberLevelResp struct {
+	Code     string                  `json:"code"`
+	Message  string                  `json:"message"`
 	Current  int64                   `json:"current"`
 	Data     []*ListtMemberLevelData `json:"data"`
 	PageSize int64                   `json:"pageSize"`
@@ -653,6 +777,8 @@ type ListMemberLoginLogReq struct {
 }
 
 type ListMemberLoginLogResp struct {
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
 	Current  int64                      `json:"current"`
 	Data     []*ListtMemberLoginLogData `json:"data"`
 	PageSize int64                      `json:"pageSize"`
@@ -679,6 +805,8 @@ type ListMemberReq struct {
 }
 
 type ListMemberResp struct {
+	Code     string             `json:"code"`
+	Message  string             `json:"message"`
 	Current  int64              `json:"current"`
 	Data     []*ListtMemberData `json:"data"`
 	PageSize int64              `json:"pageSize"`
@@ -692,6 +820,8 @@ type ListMemberRuleSettingReq struct {
 }
 
 type ListMemberRuleSettingResp struct {
+	Code     string                        `json:"code"`
+	Message  string                        `json:"message"`
 	Current  int64                         `json:"current"`
 	Data     []*ListtMemberRuleSettingData `json:"data"`
 	PageSize int64                         `json:"pageSize"`
@@ -705,6 +835,8 @@ type ListMemberStatisticsInfoReq struct {
 }
 
 type ListMemberStatisticsInfoResp struct {
+	Code     string                           `json:"code"`
+	Message  string                           `json:"message"`
 	Current  int64                            `json:"current"`
 	Data     []*ListtMemberStatisticsInfoData `json:"data"`
 	PageSize int64                            `json:"pageSize"`
@@ -718,6 +850,8 @@ type ListMemberTagReq struct {
 }
 
 type ListMemberTagResp struct {
+	Code     string                `json:"code"`
+	Message  string                `json:"message"`
 	Current  int64                 `json:"current"`
 	Data     []*ListtMemberTagData `json:"data"`
 	PageSize int64                 `json:"pageSize"`
@@ -731,6 +865,8 @@ type ListMemberTaskReq struct {
 }
 
 type ListMemberTaskResp struct {
+	Code     string                 `json:"code"`
+	Message  string                 `json:"message"`
 	Current  int64                  `json:"current"`
 	Data     []*ListtMemberTaskData `json:"data"`
 	PageSize int64                  `json:"pageSize"`
@@ -750,6 +886,8 @@ type ListMenuReq struct {
 }
 
 type ListMenuResp struct {
+	Code    string           `json:"code"`
+	Message string           `json:"message"`
 	Data    []*ListtMenuData `json:"data"`
 	Success bool             `json:"success"`
 	Total   int64            `json:"total"`
@@ -769,6 +907,8 @@ type ListOperateHistoryReq struct {
 }
 
 type ListOperateHistoryResp struct {
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
 	Current  int64                      `json:"current"`
 	Data     []*ListtOperateHistoryData `json:"data"`
 	PageSize int64                      `json:"pageSize"`
@@ -782,6 +922,8 @@ type ListOrderReq struct {
 }
 
 type ListOrderResp struct {
+	Code     string            `json:"code"`
+	Message  string            `json:"message"`
 	Current  int64             `json:"current"`
 	Data     []*ListtOrderData `json:"data"`
 	PageSize int64             `json:"pageSize"`
@@ -795,6 +937,8 @@ type ListOrderSettingReq struct {
 }
 
 type ListOrderSettingResp struct {
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
 	Current  int64                    `json:"current"`
 	Data     []*ListtOrderSettingData `json:"data"`
 	PageSize int64                    `json:"pageSize"`
@@ -821,6 +965,8 @@ type ListProductCategoryReq struct {
 }
 
 type ListProductCategoryResp struct {
+	Code     string                      `json:"code"`
+	Message  string                      `json:"message"`
 	Current  int64                       `json:"current"`
 	Data     []*ListtProductCategoryData `json:"data"`
 	PageSize int64                       `json:"pageSize"`
@@ -834,6 +980,8 @@ type ListProductCommentReq struct {
 }
 
 type ListProductCommentResp struct {
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
 	Current  int64                      `json:"current"`
 	Data     []*ListtProductCommentData `json:"data"`
 	PageSize int64                      `json:"pageSize"`
@@ -847,6 +995,8 @@ type ListProductReq struct {
 }
 
 type ListProductResp struct {
+	Code     string              `json:"code"`
+	Message  string              `json:"message"`
 	Current  int64               `json:"current"`
 	Data     []*ListtProductData `json:"data"`
 	PageSize int64               `json:"pageSize"`
@@ -860,6 +1010,8 @@ type ListReturnApplyReq struct {
 }
 
 type ListReturnApplyResp struct {
+	Code     string                  `json:"code"`
+	Message  string                  `json:"message"`
 	Current  int64                   `json:"current"`
 	Data     []*ListtReturnApplyData `json:"data"`
 	PageSize int64                   `json:"pageSize"`
@@ -873,6 +1025,8 @@ type ListReturnResonReq struct {
 }
 
 type ListReturnResonResp struct {
+	Code     string                  `json:"code"`
+	Message  string                  `json:"message"`
 	Current  int64                   `json:"current"`
 	Data     []*ListtReturnResonData `json:"data"`
 	PageSize int64                   `json:"pageSize"`
@@ -901,6 +1055,8 @@ type ListRoleReq struct {
 }
 
 type ListRoleResp struct {
+	Code     string          `json:"code"`
+	Message  string          `json:"message"`
 	Current  int64           `json:"current"`
 	Data     []*ListRoleData `json:"data"`
 	PageSize int64           `json:"pageSize"`
@@ -941,6 +1097,8 @@ type ListSysLogReq struct {
 }
 
 type ListSysLogResp struct {
+	Code     string            `json:"code"`
+	Message  string            `json:"message"`
 	Current  int64             `json:"current"`
 	Data     []*ListSysLogData `json:"data"`
 	PageSize int64             `json:"pageSize"`
@@ -978,6 +1136,8 @@ type ListUserReq struct {
 }
 
 type ListUserResp struct {
+	Code     string          `json:"code"`
+	Message  string          `json:"message"`
 	Current  int64           `json:"current"`
 	Data     []*ListUserData `json:"data"`
 	PageSize int64           `json:"pageSize"`
@@ -1515,12 +1675,16 @@ type ReSetPasswordReq struct {
 }
 
 type ReSetPasswordResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type RoleMenuIdsReq struct {
 }
 
 type RoleMenuIdsResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type RoleMenuReq struct {
@@ -1552,6 +1716,8 @@ type UpdateCartItemReq struct {
 }
 
 type UpdateCartItemResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateCompayAddressReq struct {
@@ -1568,6 +1734,8 @@ type UpdateCompayAddressReq struct {
 }
 
 type UpdateCompayAddressResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateConfigReq struct {
@@ -1581,6 +1749,8 @@ type UpdateConfigReq struct {
 }
 
 type UpdateConfigResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateCouponHistoryReq struct {
@@ -1598,6 +1768,8 @@ type UpdateCouponHistoryReq struct {
 }
 
 type UpdateCouponHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateCouponReq struct {
@@ -1622,6 +1794,8 @@ type UpdateCouponReq struct {
 }
 
 type UpdateCouponResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateDeptReq struct {
@@ -1632,6 +1806,8 @@ type UpdateDeptReq struct {
 }
 
 type UpdateDeptResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateDictReq struct {
@@ -1645,6 +1821,8 @@ type UpdateDictReq struct {
 }
 
 type UpdateDictResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateFeightTemplateReq struct {
@@ -1659,6 +1837,8 @@ type UpdateFeightTemplateReq struct {
 }
 
 type UpdateFeightTemplateResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateFlashPromotionLogReq struct {
@@ -1672,6 +1852,8 @@ type UpdateFlashPromotionLogReq struct {
 }
 
 type UpdateFlashPromotionLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateFlashPromotionReq struct {
@@ -1684,6 +1866,8 @@ type UpdateFlashPromotionReq struct {
 }
 
 type UpdateFlashPromotionResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateFlashPromotionSessionReq struct {
@@ -1696,6 +1880,8 @@ type UpdateFlashPromotionSessionReq struct {
 }
 
 type UpdateFlashPromotionSessionResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateGrowthChangeHistoryReq struct {
@@ -1710,6 +1896,8 @@ type UpdateGrowthChangeHistoryReq struct {
 }
 
 type UpdateGrowthChangeHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateHomeAdvertiseReq struct {
@@ -1728,6 +1916,8 @@ type UpdateHomeAdvertiseReq struct {
 }
 
 type UpdateHomeAdvertiseResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateHomeBrandReq struct {
@@ -1739,6 +1929,8 @@ type UpdateHomeBrandReq struct {
 }
 
 type UpdateHomeBrandResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateHomeNewProductReq struct {
@@ -1750,6 +1942,8 @@ type UpdateHomeNewProductReq struct {
 }
 
 type UpdateHomeNewProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateHomeRecommendProductReq struct {
@@ -1761,6 +1955,8 @@ type UpdateHomeRecommendProductReq struct {
 }
 
 type UpdateHomeRecommendProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateHomeRecommendSubjectReq struct {
@@ -1772,6 +1968,8 @@ type UpdateHomeRecommendSubjectReq struct {
 }
 
 type UpdateHomeRecommendSubjectResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateIntegrationChangeHistoryReq struct {
@@ -1786,6 +1984,8 @@ type UpdateIntegrationChangeHistoryReq struct {
 }
 
 type UpdateIntegrationChangeHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateIntegrationConsumeSettingReq struct {
@@ -1797,6 +1997,8 @@ type UpdateIntegrationConsumeSettingReq struct {
 }
 
 type UpdateIntegrationConsumeSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberAddressReq struct {
@@ -1813,6 +2015,8 @@ type UpdateMemberAddressReq struct {
 }
 
 type UpdateMemberAddressResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberLevelReq struct {
@@ -1832,6 +2036,8 @@ type UpdateMemberLevelReq struct {
 }
 
 type UpdateMemberLevelResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberLoginLogReq struct {
@@ -1845,6 +2051,8 @@ type UpdateMemberLoginLogReq struct {
 }
 
 type UpdateMemberLoginLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberPriceReq struct {
@@ -1856,6 +2064,8 @@ type UpdateMemberPriceReq struct {
 }
 
 type UpdateMemberPriceResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberReq struct {
@@ -1881,6 +2091,8 @@ type UpdateMemberReq struct {
 }
 
 type UpdateMemberResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberRuleSettingReq struct {
@@ -1894,6 +2106,8 @@ type UpdateMemberRuleSettingReq struct {
 }
 
 type UpdateMemberRuleSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberStatisticsInfoReq struct {
@@ -1916,6 +2130,8 @@ type UpdateMemberStatisticsInfoReq struct {
 }
 
 type UpdateMemberStatisticsInfoResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberTagReq struct {
@@ -1926,6 +2142,8 @@ type UpdateMemberTagReq struct {
 }
 
 type UpdateMemberTagResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberTaskReq struct {
@@ -1937,6 +2155,8 @@ type UpdateMemberTaskReq struct {
 }
 
 type UpdateMemberTaskResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMenuReq struct {
@@ -1951,6 +2171,8 @@ type UpdateMenuReq struct {
 }
 
 type UpdateMenuResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateOperateHistoryReq struct {
@@ -1963,6 +2185,8 @@ type UpdateOperateHistoryReq struct {
 }
 
 type UpdateOperateHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateOrderReq struct {
@@ -2008,6 +2232,8 @@ type UpdateOrderReq struct {
 }
 
 type UpdateOrderResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateOrderSettingReq struct {
@@ -2020,6 +2246,8 @@ type UpdateOrderSettingReq struct {
 }
 
 type UpdateOrderSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateProductBrandReq struct {
@@ -2037,6 +2265,8 @@ type UpdateProductBrandReq struct {
 }
 
 type UpdateProductBrandResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateProductCategoryReq struct {
@@ -2055,6 +2285,8 @@ type UpdateProductCategoryReq struct {
 }
 
 type UpdateProductCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateProductCommentReq struct {
@@ -2076,6 +2308,8 @@ type UpdateProductCommentReq struct {
 }
 
 type UpdateProductCommentResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateProductReq struct {
@@ -2124,6 +2358,8 @@ type UpdateProductReq struct {
 }
 
 type UpdateProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateReturnApplyReq struct {
@@ -2157,6 +2393,8 @@ type UpdateReturnApplyReq struct {
 }
 
 type UpdateReturnApplyResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateReturnResonReq struct {
@@ -2167,12 +2405,16 @@ type UpdateReturnResonReq struct {
 }
 
 type UpdateReturnResonResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateRoleMenuReq struct {
 }
 
 type UpdateRoleMenuResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateRoleReq struct {
@@ -2182,6 +2424,8 @@ type UpdateRoleReq struct {
 }
 
 type UpdateRoleResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateSkuStockReq struct {
@@ -2199,6 +2443,8 @@ type UpdateSkuStockReq struct {
 }
 
 type UpdateSkuStockResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateUserReq struct {
@@ -2213,6 +2459,8 @@ type UpdateUserReq struct {
 }
 
 type UpdateUserResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UserStatusReq struct {
@@ -2221,6 +2469,8 @@ type UserStatusReq struct {
 }
 
 type UserStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddCartItemReq struct {
@@ -2242,6 +2492,8 @@ type AddCartItemReq struct {
 }
 
 type AddCartItemResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddCompayAddressReq struct {
@@ -2257,6 +2509,8 @@ type AddCompayAddressReq struct {
 }
 
 type AddCompayAddressResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddConfigReq struct {
@@ -2269,6 +2523,8 @@ type AddConfigReq struct {
 }
 
 type AddConfigResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddCouponHistoryReq struct {
@@ -2285,6 +2541,8 @@ type AddCouponHistoryReq struct {
 }
 
 type AddCouponHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddCouponReq struct {
@@ -2308,6 +2566,8 @@ type AddCouponReq struct {
 }
 
 type AddCouponResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddDeptReq struct {
@@ -2317,6 +2577,8 @@ type AddDeptReq struct {
 }
 
 type AddDeptResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddDictReq struct {
@@ -2329,6 +2591,8 @@ type AddDictReq struct {
 }
 
 type AddDictResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddFeightTemplateReq struct {
@@ -2342,6 +2606,8 @@ type AddFeightTemplateReq struct {
 }
 
 type AddFeightTemplateResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddFlashPromotionLogReq struct {
@@ -2354,6 +2620,8 @@ type AddFlashPromotionLogReq struct {
 }
 
 type AddFlashPromotionLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddFlashPromotionReq struct {
@@ -2365,6 +2633,8 @@ type AddFlashPromotionReq struct {
 }
 
 type AddFlashPromotionResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddFlashPromotionSessionReq struct {
@@ -2376,6 +2646,8 @@ type AddFlashPromotionSessionReq struct {
 }
 
 type AddFlashPromotionSessionResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddGrowthChangeHistoryReq struct {
@@ -2389,6 +2661,8 @@ type AddGrowthChangeHistoryReq struct {
 }
 
 type AddGrowthChangeHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddHomeAdvertiseReq struct {
@@ -2406,6 +2680,8 @@ type AddHomeAdvertiseReq struct {
 }
 
 type AddHomeAdvertiseResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddHomeBrandReq struct {
@@ -2416,6 +2692,8 @@ type AddHomeBrandReq struct {
 }
 
 type AddHomeBrandResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddHomeNewProductReq struct {
@@ -2426,6 +2704,8 @@ type AddHomeNewProductReq struct {
 }
 
 type AddHomeNewProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddHomeRecommendProductReq struct {
@@ -2436,6 +2716,8 @@ type AddHomeRecommendProductReq struct {
 }
 
 type AddHomeRecommendProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddHomeRecommendSubjectReq struct {
@@ -2446,6 +2728,8 @@ type AddHomeRecommendSubjectReq struct {
 }
 
 type AddHomeRecommendSubjectResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddIntegrationChangeHistoryReq struct {
@@ -2459,6 +2743,8 @@ type AddIntegrationChangeHistoryReq struct {
 }
 
 type AddIntegrationChangeHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddIntegrationConsumeSettingReq struct {
@@ -2469,6 +2755,8 @@ type AddIntegrationConsumeSettingReq struct {
 }
 
 type AddIntegrationConsumeSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMemberAddressReq struct {
@@ -2484,6 +2772,8 @@ type AddMemberAddressReq struct {
 }
 
 type AddMemberAddressResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMemberLevelReq struct {
@@ -2502,6 +2792,8 @@ type AddMemberLevelReq struct {
 }
 
 type AddMemberLevelResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMemberLoginLogReq struct {
@@ -2514,6 +2806,8 @@ type AddMemberLoginLogReq struct {
 }
 
 type AddMemberLoginLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMemberPriceReq struct {
@@ -2524,6 +2818,8 @@ type AddMemberPriceReq struct {
 }
 
 type AddMemberPriceResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMemberReq struct {
@@ -2548,6 +2844,8 @@ type AddMemberReq struct {
 }
 
 type AddMemberResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMemberRuleSettingReq struct {
@@ -2560,6 +2858,8 @@ type AddMemberRuleSettingReq struct {
 }
 
 type AddMemberRuleSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMemberStatisticsInfoReq struct {
@@ -2581,6 +2881,8 @@ type AddMemberStatisticsInfoReq struct {
 }
 
 type AddMemberStatisticsInfoResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMemberTagReq struct {
@@ -2590,6 +2892,8 @@ type AddMemberTagReq struct {
 }
 
 type AddMemberTagResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMemberTaskReq struct {
@@ -2600,6 +2904,8 @@ type AddMemberTaskReq struct {
 }
 
 type AddMemberTaskResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddMenuReq struct {
@@ -2613,6 +2919,8 @@ type AddMenuReq struct {
 }
 
 type AddMenuResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddOperateHistoryReq struct {
@@ -2624,6 +2932,8 @@ type AddOperateHistoryReq struct {
 }
 
 type AddOperateHistoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddOrderReq struct {
@@ -2668,6 +2978,8 @@ type AddOrderReq struct {
 }
 
 type AddOrderResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddOrderSettingReq struct {
@@ -2679,6 +2991,8 @@ type AddOrderSettingReq struct {
 }
 
 type AddOrderSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddProductBrandReq struct {
@@ -2695,6 +3009,8 @@ type AddProductBrandReq struct {
 }
 
 type AddProductBrandResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddProductCategoryReq struct {
@@ -2712,6 +3028,8 @@ type AddProductCategoryReq struct {
 }
 
 type AddProductCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddProductCommentReq struct {
@@ -2732,6 +3050,8 @@ type AddProductCommentReq struct {
 }
 
 type AddProductCommentResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddProductReq struct {
@@ -2779,6 +3099,8 @@ type AddProductReq struct {
 }
 
 type AddProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddReturnApplyReq struct {
@@ -2811,6 +3133,8 @@ type AddReturnApplyReq struct {
 }
 
 type AddReturnApplyResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddReturnResonReq struct {
@@ -2820,6 +3144,8 @@ type AddReturnResonReq struct {
 }
 
 type AddReturnResonResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddRoleReq struct {
@@ -2828,6 +3154,8 @@ type AddRoleReq struct {
 }
 
 type AddRoleResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddSkuStockReq struct {
@@ -2844,6 +3172,8 @@ type AddSkuStockReq struct {
 }
 
 type AddSkuStockResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type AddUserReq struct {
@@ -2856,6 +3186,8 @@ type AddUserReq struct {
 }
 
 type AddUserResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type LoginReq struct {
@@ -2864,6 +3196,8 @@ type LoginReq struct {
 }
 
 type LoginResp struct {
+	Code             string `json:"code"`
+	Message          string `json:"message"`
 	Status           string `json:"status"`
 	CurrentAuthority string `json:"currentAuthority"`
 	Id               int64  `json:"id"`
@@ -2874,6 +3208,8 @@ type LoginResp struct {
 }
 
 type UserInfoResp struct {
+	Code     string          `json:"code"`
+	Message  string          `json:"message"`
 	Avatar   string          `json:"avatar"`
 	Name     string          `json:"name"`
 	MenuTree []*ListMenuTree `json:"menuTree"`

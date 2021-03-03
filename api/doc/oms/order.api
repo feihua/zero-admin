@@ -47,6 +47,8 @@ type (
         UseIntegration        int64     `json:"use_integration"`         // 下单时使用的积分
     }
     addOrderResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListOrderReq struct {
         Current int64 `form:"current"`
@@ -99,6 +101,8 @@ type (
         ModifyTime            string    `json:"modify_time"`             // 修改时间
     }
     ListOrderResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtOrderData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -147,11 +151,15 @@ type (
         UseIntegration        int64     `json:"use_integration"`         // 下单时使用的积分
     }
     UpdateOrderResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteOrderReq struct {
         Id int64 `json:"id"`
     }
     DeleteOrderResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

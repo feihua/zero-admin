@@ -12,6 +12,8 @@ type (
         FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
     }
     addMemberTagResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListMemberTagReq struct {
         Current int64 `form:"current"`
@@ -24,6 +26,8 @@ type (
         FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
     }
     ListMemberTagResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtMemberTagData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -37,11 +41,15 @@ type (
         FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
     }
     UpdateMemberTagResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteMemberTagReq struct {
         Id int64 `json:"id"`
     }
     DeleteMemberTagResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

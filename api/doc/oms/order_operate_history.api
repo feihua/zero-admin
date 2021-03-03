@@ -14,6 +14,8 @@ type (
         Note        string    `json:"note"`         // 备注
     }
     addOperateHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListOperateHistoryReq struct {
         Current int64 `form:"current"`
@@ -28,6 +30,8 @@ type (
         Note        string    `json:"note"`         // 备注
     }
     ListOperateHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtOperateHistoryData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -43,11 +47,15 @@ type (
         Note        string    `json:"note"`         // 备注
     }
     UpdateOperateHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteOperateHistoryReq struct {
         Id int64 `json:"id"`
     }
     DeleteOperateHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

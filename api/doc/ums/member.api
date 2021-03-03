@@ -27,6 +27,8 @@ type (
         HistoryIntegration    int64     `json:"history_integration"`    // 历史积分数量
     }
     addMemberResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListMemberReq struct {
         Current int64 `form:"current"`
@@ -54,6 +56,8 @@ type (
         HistoryIntegration    int64     `json:"history_integration"`    // 历史积分数量
     }
     ListMemberResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtMemberData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -82,11 +86,15 @@ type (
         HistoryIntegration    int64     `json:"history_integration"`    // 历史积分数量
     }
     UpdateMemberResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteMemberReq struct {
         Id int64 `json:"id"`
     }
     DeleteMemberResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

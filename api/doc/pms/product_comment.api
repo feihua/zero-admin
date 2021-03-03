@@ -23,6 +23,8 @@ type (
         ReplayCount      int64     `json:"replay_count"`
     }
     addProductCommentResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListProductCommentReq struct {
         Current int64 `form:"current"`
@@ -46,6 +48,8 @@ type (
         ReplayCount      int64     `json:"replay_count"`
     }
     ListProductCommentResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtProductCommentData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -70,11 +74,15 @@ type (
         ReplayCount      int64     `json:"replay_count"`
     }
     UpdateProductCommentResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteProductCommentReq struct {
         Id int64 `json:"id"`
     }
     DeleteProductCommentResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

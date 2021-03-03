@@ -20,6 +20,8 @@ type (
         Description  string `json:"description"` // 描述
     }
     addProductCategoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListProductCategoryReq struct {
         Current int64 `form:"current"`
@@ -40,6 +42,8 @@ type (
         Description  string `json:"description"` // 描述
     }
     ListProductCategoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtProductCategoryData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -61,11 +65,15 @@ type (
         Description  string `json:"description"` // 描述
     }
     UpdateProductCategoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteProductCategoryReq struct {
         Id int64 `json:"id"`
     }
     DeleteProductCategoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

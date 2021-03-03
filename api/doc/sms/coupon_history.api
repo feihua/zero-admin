@@ -19,6 +19,8 @@ type (
         OrderSn        string    `json:"order_sn"`   // 订单号码
     }
     addCouponHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListCouponHistoryReq struct {
         Current int64 `form:"current"`
@@ -58,11 +60,15 @@ type (
         OrderSn        string    `json:"order_sn"`   // 订单号码
     }
     UpdateCouponHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteCouponHistoryReq struct {
         Id int64 `json:"id"`
     }
     DeleteCouponHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

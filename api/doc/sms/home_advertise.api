@@ -20,6 +20,8 @@ type (
         Sort       int64     `json:"sort"`        // 排序
     }
     addHomeAdvertiseResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListHomeAdvertiseReq struct {
         Current int64 `form:"current"`
@@ -40,6 +42,8 @@ type (
         Sort       int64     `json:"sort"`        // 排序
     }
     ListHomeAdvertiseResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtHomeAdvertiseData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -61,11 +65,15 @@ type (
         Sort       int64     `json:"sort"`        // 排序
     }
     UpdateHomeAdvertiseResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteHomeAdvertiseReq struct {
         Id int64 `json:"id"`
     }
     DeleteHomeAdvertiseResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

@@ -19,6 +19,8 @@ type (
         SpData         string  `json:"sp_data"`         // 商品销售属性，json格式
     }
     addSkuStockResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListSkuStockReq struct {
         Current int64 `form:"current"`
@@ -58,11 +60,15 @@ type (
         SpData         string  `json:"sp_data"`         // 商品销售属性，json格式
     }
     UpdateSkuStockResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteSkuStockReq struct {
         Id int64 `json:"id"`
     }
     DeleteSkuStockResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

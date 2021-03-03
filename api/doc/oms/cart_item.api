@@ -24,7 +24,8 @@ type (
         ProductAttr       string    `json:"product_attr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
     }
     addCartItemResp struct {
-
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListCartItemReq struct {
         Current int64 `form:"current"`
@@ -51,6 +52,8 @@ type (
         ProductAttr       string    `json:"product_attr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
     }
     ListCartItemResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtCartItemData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -76,11 +79,15 @@ type (
         ProductAttr       string    `json:"product_attr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
     }
     UpdateCartItemResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteCartItemReq struct {
         Id int64 `json:"id"`
     }
     DeleteCartItemResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

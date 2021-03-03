@@ -16,6 +16,8 @@ type (
         Remarks string `json:"remarks"`                    // 备注信息
     }
     addDictResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListDictReq struct {
         Current int64 `form:"current"`
@@ -40,6 +42,8 @@ type (
         DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
     }
     ListDictResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListDictData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -56,11 +60,15 @@ type (
         Remarks string `json:"remarks"`                    // 备注信息
     }
     UpdateDictResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteDictReq struct {
         Id int64 `json:"id"`
     }
     DeleteDictResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

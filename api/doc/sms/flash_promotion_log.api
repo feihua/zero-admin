@@ -15,6 +15,8 @@ type (
         SendTime      string `json:"send_time"`
     }
     addFlashPromotionLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListFlashPromotionLogReq struct {
         Current int64 `form:"current"`
@@ -30,6 +32,8 @@ type (
         SendTime      string `json:"send_time"`
     }
     ListFlashPromotionLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtFlashPromotionLogData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -46,11 +50,15 @@ type (
         SendTime      string `json:"send_time"`
     }
     UpdateFlashPromotionLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteFlashPromotionLogReq struct {
         Id int64 `json:"id"`
     }
     DeleteFlashPromotionLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

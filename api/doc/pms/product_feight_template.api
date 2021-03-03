@@ -16,6 +16,8 @@ type (
         Dest           string  `json:"dest"` // 目的地（省、市）
     }
     addFeightTemplateResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListFeightTemplateReq struct {
         Current int64 `form:"current"`
@@ -32,6 +34,8 @@ type (
         Dest           string  `json:"dest"` // 目的地（省、市）
     }
     ListFeightTemplateResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtFeightTemplateData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -49,11 +53,15 @@ type (
         Dest           string  `json:"dest"` // 目的地（省、市）
     }
     UpdateFeightTemplateResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteFeightTemplateReq struct {
         Id int64 `json:"id"`
     }
     DeleteFeightTemplateResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

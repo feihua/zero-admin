@@ -24,6 +24,8 @@ type (
         LastUpdateTime string `json:"last_update_time"`    // 更新时间
     }
     ListSysLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListSysLogData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -34,6 +36,8 @@ type (
         Id int64 `json:"id"`
     }
     DeleteSysLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

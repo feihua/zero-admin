@@ -26,6 +26,8 @@ type (
         MemberLevel  int64          `json:"member_level"`  // 可领取的会员类型：0->无限时
     }
     addCouponResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListCouponReq struct {
         Current int64 `form:"current"`
@@ -52,6 +54,8 @@ type (
         MemberLevel  int64          `json:"member_level"`  // 可领取的会员类型：0->无限时
     }
     ListCouponResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtCouponData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -79,11 +83,15 @@ type (
         MemberLevel  int64          `json:"member_level"`  // 可领取的会员类型：0->无限时
     }
     UpdateCouponResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteCouponReq struct {
         Id int64 `json:"id"`
     }
     DeleteCouponResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

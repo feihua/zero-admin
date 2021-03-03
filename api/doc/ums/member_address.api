@@ -18,6 +18,8 @@ type (
         DetailAddress string `json:"detail_address"` // 详细地址(街道)
     }
     addMemberAddressResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListMemberAddressReq struct {
         Current int64 `form:"current"`
@@ -55,11 +57,15 @@ type (
         DetailAddress string `json:"detail_address"` // 详细地址(街道)
     }
     UpdateMemberAddressResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteMemberAddressReq struct {
         Id int64 `json:"id"`
     }
     DeleteMemberAddressResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

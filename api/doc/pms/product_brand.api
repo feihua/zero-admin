@@ -19,6 +19,8 @@ type (
         BrandStory          string `json:"brand_story"`           // 品牌故事
     }
     addProductBrandResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListProductBrandReq struct {
         Current int64 `form:"current"`
@@ -58,11 +60,15 @@ type (
         BrandStory          string `json:"brand_story"`           // 品牌故事
     }
     UpdateProductBrandResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteProductBrandReq struct {
         Id int64 `json:"id"`
     }
     DeleteProductBrandResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

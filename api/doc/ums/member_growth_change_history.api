@@ -16,6 +16,8 @@ type (
         SourceType  int64     `json:"source_type"`  // 积分来源：0->购物；1->管理员修改
     }
     addGrowthChangeHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListGrowthChangeHistoryReq struct {
         Current int64 `form:"current"`
@@ -49,11 +51,15 @@ type (
         SourceType  int64     `json:"source_type"`  // 积分来源：0->购物；1->管理员修改
     }
     UpdateGrowthChangeHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteGrowthChangeHistoryReq struct {
         Id int64 `json:"id"`
     }
     DeleteGrowthChangeHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

@@ -12,6 +12,8 @@ type (
         Status     int64     `json:"status"`      // 状态：0->不启用；1->启用
     }
     addReturnResonResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListReturnResonReq struct {
         Current int64 `form:"current"`
@@ -25,6 +27,8 @@ type (
         CreateTime string `json:"create_time"` // 添加时间
     }
     ListReturnResonResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtReturnResonData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -38,11 +42,15 @@ type (
         Status     int64     `json:"status"`      // 状态：0->不启用；1->启用
     }
     UpdateReturnResonResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteReturnResonReq struct {
         Id int64 `json:"id"`
     }
     DeleteReturnResonResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

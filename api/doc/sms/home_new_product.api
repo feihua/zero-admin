@@ -13,6 +13,8 @@ type (
         Sort            int64  `json:"sort"`
     }
     addHomeNewProductResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListHomeNewProductReq struct {
         Current int64 `form:"current"`
@@ -26,6 +28,8 @@ type (
         Sort            int64  `json:"sort"`
     }
     ListHomeNewProductResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtHomeNewProductData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -40,11 +44,15 @@ type (
         Sort            int64  `json:"sort"`
     }
     UpdateHomeNewProductResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteHomeNewProductReq struct {
         Id int64 `json:"id"`
     }
     DeleteHomeNewProductResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

@@ -14,6 +14,8 @@ type (
         CreateTime string `json:"create_time"` // 创建时间
     }
     addFlashPromotionSessionResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListFlashPromotionSessionReq struct {
         Current int64 `form:"current"`
@@ -28,6 +30,8 @@ type (
         CreateTime string `json:"create_time"` // 创建时间
     }
     ListFlashPromotionSessionResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtFlashPromotionSessionData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -43,11 +47,15 @@ type (
         CreateTime string `json:"create_time"` // 创建时间
     }
     UpdateFlashPromotionSessionResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteFlashPromotionSessionReq struct {
         Id int64 `json:"id"`
     }
     DeleteFlashPromotionSessionResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

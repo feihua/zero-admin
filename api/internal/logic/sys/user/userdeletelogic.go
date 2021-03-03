@@ -27,7 +27,7 @@ func NewUserDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserDel
 func (l *UserDeleteLogic) UserDelete(req types.DeleteUserReq) (*types.DeleteUserResp, error) {
 
 	_, _ = l.svcCtx.Sys.UserDelete(l.ctx, &sysclient.UserDeleteReq{
-		Id: req.ID,
+		Id: req.Id,
 	})
 
 	return &types.DeleteUserResp{}, nil

@@ -21,6 +21,8 @@ type (
         LastUpdateTime string `json:"last_update_time"`    // 更新时间
     }
     ListLoginLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListLoginLogData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -31,6 +33,8 @@ type (
         Id int64 `json:"id"`
     }
     DeleteLoginLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

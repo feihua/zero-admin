@@ -11,6 +11,8 @@ type (
         Password string `json:"password"`
     }
     loginResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Status string `json:"status"`
         CurrentAuthority string `json:"currentAuthority"`
         Id int64 `json:"id"`
@@ -28,6 +30,8 @@ type (
         Icon string `json:"icon"`                          // 菜单图标
     }
     userInfoResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Avatar string `json:"avatar"`
         Name string `json:"name"`
         MenuTree []*ListMenuTree `json:"menuTree"`
@@ -41,6 +45,8 @@ type (
         RoleId string `json:"role_id"`
     }
     addUserResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 
     ListUserReq struct {
@@ -72,6 +78,8 @@ type (
         DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
     }
     ListUserResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListUserData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -89,22 +97,30 @@ type (
         status string `json:"status"`
     }
     UpdateUserResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteUserReq struct {
-        ID int64 `json:"id"`
+        Id int64 `json:"id"`
     }
     DeleteUserResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ReSetPasswordReq struct {
         Id int64 `json:"id"`
     }
     ReSetPasswordResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     UserStatusReq struct {
         Id int64 `json:"id"`
         Status int64 `json:"status"`                       // 状态  0：禁用   1：正常
     }
     UserStatusResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

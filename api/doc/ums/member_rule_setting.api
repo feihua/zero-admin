@@ -15,6 +15,8 @@ type (
         Type              int64   `json:"type"`                // 类型：0->积分规则；1->成长值规则
     }
     addMemberRuleSettingResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListMemberRuleSettingReq struct {
         Current int64 `form:"current"`
@@ -30,6 +32,8 @@ type (
         Type              int64   `json:"type"`                // 类型：0->积分规则；1->成长值规则
     }
     ListMemberRuleSettingResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtMemberRuleSettingData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -46,11 +50,15 @@ type (
         Type              int64   `json:"type"`                // 类型：0->积分规则；1->成长值规则
     }
     UpdateMemberRuleSettingResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteMemberRuleSettingReq struct {
         Id int64 `json:"id"`
     }
     DeleteMemberRuleSettingResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

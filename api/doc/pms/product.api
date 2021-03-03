@@ -50,6 +50,8 @@ type (
         ProductCategoryName        string    `json:"product_category_name"` // 商品分类名称
     }
     addProductResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListProductReq struct {
         Current int64 `form:"current"`
@@ -100,6 +102,8 @@ type (
         ProductCategoryName        string    `json:"product_category_name"` // 商品分类名称
     }
     ListProductResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtProductData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -151,11 +155,15 @@ type (
         ProductCategoryName        string    `json:"product_category_name"` // 商品分类名称
     }
     UpdateProductResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteProductReq struct {
         Id int64 `json:"id"`
     }
     DeleteProductResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

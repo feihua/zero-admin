@@ -16,6 +16,8 @@ type (
         OrderNum int64 `json:"order_num"`                  // 排序
     }
     addMenuResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListMenuReq struct {
 //        Current int64 `form:"current"`
@@ -41,6 +43,8 @@ type (
         DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
     }
     ListMenuResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
 //        Current int64 `json:"current"`
         Data []*ListtMenuData `json:"data"`
 //        PageSize int64 `json:"pageSize"`
@@ -58,11 +62,15 @@ type (
         OrderNum int64 `json:"order_num"`                  // 排序
     }
     UpdateMenuResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteMenuReq struct {
         id int64 `json:"id"`
     }
     DeleteMenuResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

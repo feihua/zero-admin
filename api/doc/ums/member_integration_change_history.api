@@ -16,6 +16,8 @@ type (
         SourceType  int64     `json:"source_type"`  // 积分来源：0->购物；1->管理员修改
     }
     addIntegrationChangeHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListIntegrationChangeHistoryReq struct {
         Current int64 `form:"current"`
@@ -32,6 +34,8 @@ type (
         SourceType  int64     `json:"source_type"`  // 积分来源：0->购物；1->管理员修改
     }
     ListIntegrationChangeHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtIntegrationChangeHistoryData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -49,12 +53,16 @@ type (
         SourceType  int64     `json:"source_type"`  // 积分来源：0->购物；1->管理员修改
     }
     UpdateIntegrationChangeHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     
     }
     DeleteIntegrationChangeHistoryReq struct {
         Id int64 `json:"id"`
     }
     DeleteIntegrationChangeHistoryResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
 
     }
 )

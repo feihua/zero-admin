@@ -24,6 +24,8 @@ type (
         RecentOrderTime     string `json:"recent_order_time"` // 最后一次下订单时间
     }
     addMemberStatisticsInfoResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListMemberStatisticsInfoReq struct {
         Current int64 `form:"current"`
@@ -48,6 +50,8 @@ type (
         RecentOrderTime     string `json:"recent_order_time"` // 最后一次下订单时间
     }
     ListMemberStatisticsInfoResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtMemberStatisticsInfoData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -73,11 +77,15 @@ type (
         RecentOrderTime     string `json:"recent_order_time"` // 最后一次下订单时间
     }
     UpdateMemberStatisticsInfoResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteMemberStatisticsInfoReq struct {
         Id int64 `json:"id"`
     }
     DeleteMemberStatisticsInfoResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 

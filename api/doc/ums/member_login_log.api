@@ -15,6 +15,8 @@ type (
         Province   string    `json:"province"`
     }
     addMemberLoginLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     ListMemberLoginLogReq struct {
         Current int64 `form:"current"`
@@ -30,6 +32,8 @@ type (
         Province   string    `json:"province"`
     }
     ListMemberLoginLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
         Current int64 `json:"current"`
         Data []*ListtMemberLoginLogData `json:"data"`
         PageSize int64 `json:"pageSize"`
@@ -46,11 +50,15 @@ type (
         Province   string    `json:"province"`
     }
     UpdateMemberLoginLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     DeleteMemberLoginLogReq struct {
         Id int64 `json:"id"`
     }
     DeleteMemberLoginLogResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
 )
 
