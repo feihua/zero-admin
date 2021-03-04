@@ -33,5 +33,8 @@ func (l *MenuDeleteLogic) MenuDelete(req types.DeleteMenuReq) (*types.DeleteMenu
 		return nil, err
 	}
 
-	return &types.DeleteMenuResp{}, nil
+	return &types.DeleteMenuResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

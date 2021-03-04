@@ -38,5 +38,8 @@ func (l *MenuUpdateLogic) MenuUpdate(req types.UpdateMenuReq) (*types.UpdateMenu
 		LastUpdateBy: "admin",
 	})
 
-	return &types.UpdateMenuResp{}, nil
+	return &types.UpdateMenuResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -41,5 +41,8 @@ func (l *DictUpdateLogic) DictUpdate(req types.UpdateDictReq) (*types.UpdateDict
 		return nil, err
 	}
 
-	return &types.UpdateDictResp{}, nil
+	return &types.UpdateDictResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

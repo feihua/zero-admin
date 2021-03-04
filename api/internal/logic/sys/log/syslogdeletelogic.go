@@ -33,5 +33,8 @@ func (l *SysLogDeleteLogic) SysLogDelete(req types.DeleteSysLogReq) (*types.Dele
 		return nil, err
 	}
 
-	return &types.DeleteSysLogResp{}, nil
+	return &types.DeleteSysLogResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

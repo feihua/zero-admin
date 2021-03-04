@@ -33,5 +33,8 @@ func (l *LoginLogDeleteLogic) LoginLogDelete(req types.DeleteLoginLogReq) (*type
 		return nil, err
 	}
 
-	return &types.DeleteLoginLogResp{}, nil
+	return &types.DeleteLoginLogResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

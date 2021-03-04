@@ -36,5 +36,8 @@ func (l *RoleAddLogic) RoleAdd(req types.AddRoleReq) (*types.AddRoleResp, error)
 		return nil, err
 	}
 
-	return &types.AddRoleResp{}, nil
+	return &types.AddRoleResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

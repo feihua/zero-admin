@@ -41,5 +41,8 @@ func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error)
 		return nil, err
 	}
 
-	return &types.AddMenuResp{}, nil
+	return &types.AddMenuResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

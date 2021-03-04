@@ -26,5 +26,8 @@ func NewUpdateRoleMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) Upd
 func (l *UpdateRoleMenuLogic) UpdateRoleMenu(req types.UpdateRoleMenuReq) (*types.UpdateRoleMenuResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &types.UpdateRoleMenuResp{}, nil
+	return &types.UpdateRoleMenuResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

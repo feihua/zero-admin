@@ -40,5 +40,8 @@ func (l *UserUpdateLogic) UserUpdate(req types.UpdateUserReq) (*types.UpdateUser
 		return nil, err
 	}
 
-	return &types.UpdateUserResp{}, nil
+	return &types.UpdateUserResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

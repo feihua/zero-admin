@@ -37,5 +37,8 @@ func (l *DeptAddLogic) DeptAdd(req types.AddDeptReq) (*types.AddDeptResp, error)
 		return nil, err
 	}
 
-	return &types.AddDeptResp{}, nil
+	return &types.AddDeptResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

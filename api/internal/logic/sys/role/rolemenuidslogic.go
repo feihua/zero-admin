@@ -26,5 +26,8 @@ func NewRoleMenuIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleMe
 func (l *RoleMenuIdsLogic) RoleMenuIds(req types.RoleMenuIdsReq) (*types.RoleMenuIdsResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &types.RoleMenuIdsResp{}, nil
+	return &types.RoleMenuIdsResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

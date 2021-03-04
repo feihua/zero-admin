@@ -52,6 +52,8 @@ func (l *SysLogListLogic) SysLogList(req types.ListSysLogReq) (*types.ListSysLog
 	}
 
 	return &types.ListSysLogResp{
+		Code:     "000000",
+		Message:  "",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

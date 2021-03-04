@@ -33,5 +33,8 @@ func (l *DeptDeleteLogic) DeptDelete(req types.DeleteDeptReq) (*types.DeleteDept
 		return nil, err
 	}
 
-	return &types.DeleteDeptResp{}, nil
+	return &types.DeleteDeptResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

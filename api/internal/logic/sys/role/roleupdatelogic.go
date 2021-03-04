@@ -37,5 +37,8 @@ func (l *RoleUpdateLogic) RoleUpdate(req types.UpdateRoleReq) (*types.UpdateRole
 		return nil, err
 	}
 
-	return &types.UpdateRoleResp{}, nil
+	return &types.UpdateRoleResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

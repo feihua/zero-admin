@@ -33,5 +33,8 @@ func (l *RoleDeleteLogic) RoleDelete(req types.DeleteRoleReq) (*types.DeleteRole
 		return nil, err
 	}
 
-	return &types.DeleteRoleResp{}, nil
+	return &types.DeleteRoleResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

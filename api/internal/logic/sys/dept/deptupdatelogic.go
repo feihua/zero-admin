@@ -38,5 +38,8 @@ func (l *DeptUpdateLogic) DeptUpdate(req types.UpdateDeptReq) (*types.UpdateDept
 		return nil, err
 	}
 
-	return &types.UpdateDeptResp{}, nil
+	return &types.UpdateDeptResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -33,5 +33,8 @@ func (l *DictDeleteLogic) DictDelete(req types.DeleteDictReq) (*types.DeleteDict
 		return nil, err
 	}
 
-	return &types.DeleteDictResp{}, nil
+	return &types.DeleteDictResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -42,5 +42,8 @@ func (l *DictAddLogic) DictAdd(req types.AddDictReq) (*types.AddDictResp, error)
 		return nil, err
 	}
 
-	return &types.AddDictResp{}, nil
+	return &types.AddDictResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }
