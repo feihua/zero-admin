@@ -51,8 +51,8 @@ type (
         Message string `json:"message"`
     }
     ListOrderReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtOrderData struct {
         Id                    int64     `json:"id"` // 订单id
@@ -171,7 +171,7 @@ service admin-api {
     post /api/order/order/add (addOrderReq) returns (addOrderResp)
 
     @handler OrderList
-    get /api/order/order/list (ListOrderReq) returns (ListOrderResp)
+    post /api/order/order/list (ListOrderReq) returns (ListOrderResp)
 
     @handler OrderUpdate
     post /api/order/order/update (UpdateOrderReq) returns (UpdateOrderResp)

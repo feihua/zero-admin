@@ -27,8 +27,8 @@ type (
         Message string `json:"message"`
     }
     ListProductCommentReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtProductCommentData struct {
         Id               int64     `json:"id"`
@@ -94,7 +94,7 @@ service admin-api {
     post /api/product/comment/add (addProductCommentReq) returns (addProductCommentResp)
 
     @handler ProductCommentList
-    get /api/product/comment/list (ListProductCommentReq) returns (ListProductCommentResp)
+    post /api/product/comment/list (ListProductCommentReq) returns (ListProductCommentResp)
 
     @handler ProductCommentUpdate
     post /api/product/comment/update (UpdateProductCommentReq) returns (UpdateProductCommentResp)

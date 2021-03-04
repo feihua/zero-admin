@@ -28,8 +28,8 @@ type (
         Message string `json:"message"`
     }
     ListCartItemReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtCartItemData struct {
         Id                int64     `json:"id"`
@@ -99,7 +99,7 @@ service admin-api {
     post /api/order/cart/add (addCartItemReq) returns (addCartItemResp)
 
     @handler CartItemList
-    get /api/order/cart/list (ListCartItemReq) returns (ListCartItemResp)
+    post /api/order/cart/list (ListCartItemReq) returns (ListCartItemResp)
 
     @handler CartItemUpdate
     post /api/order/cart/update (UpdateCartItemReq) returns (UpdateCartItemResp)

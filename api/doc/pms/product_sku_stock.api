@@ -23,8 +23,8 @@ type (
         Message string `json:"message"`
     }
     ListSkuStockReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtSkuStockData struct {
         Id             int64   `json:"id"`
@@ -80,7 +80,7 @@ service admin-api {
     post /api/product/skustock/add (addSkuStockReq) returns (addSkuStockResp)
 
     @handler SkuStockList
-    get /api/product/skustock/list (ListSkuStockReq) returns (ListSkuStockResp)
+    post /api/product/skustock/list (ListSkuStockReq) returns (ListSkuStockResp)
 
     @handler SkuStockUpdate
     post /api/product/skustock/update (UpdateSkuStockReq) returns (UpdateSkuStockResp)

@@ -7,8 +7,8 @@ info(
 
 type (
     ListLoginLogReq struct {
-        Current int64 `form:"current,optional"`
-        PageSize int64 `form:"pageSize,optional"`
+        Current int64 `json:"current,optional"`
+        PageSize int64 `json:"pageSize,optional"`
     }
     ListLoginLogData struct {
         Id int64 `json:"id"`                               // 编号
@@ -44,7 +44,7 @@ type (
 )
 service admin-api {
     @handler LoginLogList
-    get /api/sys/loginLog/list (ListLoginLogReq) returns (ListLoginLogResp)
+    post /api/sys/loginLog/list (ListLoginLogReq) returns (ListLoginLogResp)
 
     @handler LoginLogDelete
     post /api/sys/loginLog/delete (DeleteLoginLogReq) returns (DeleteLoginLogResp)

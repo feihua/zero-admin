@@ -24,8 +24,8 @@ type (
         Message string `json:"message"`
     }
     ListProductCategoryReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtProductCategoryData struct {
         Id           int64  `json:"id"`
@@ -85,7 +85,7 @@ service admin-api {
     post /api/product/category/add (addProductCategoryReq) returns (addProductCategoryResp)
 
     @handler ProductCategoryList
-    get /api/product/category/list (ListProductCategoryReq) returns (ListProductCategoryResp)
+    post /api/product/category/list (ListProductCategoryReq) returns (ListProductCategoryResp)
 
     @handler ProductCategoryUpdate
     post /api/product/category/update (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)

@@ -65,7 +65,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysuser.UserAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sys/user/list",
 				Handler: sysuser.UserListHandler(serverCtx),
 			},
@@ -111,7 +111,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysrole.RoleAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sys/role/list",
 				Handler: sysrole.RoleListHandler(serverCtx),
 			},
@@ -152,7 +152,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysmenu.MenuAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sys/menu/list",
 				Handler: sysmenu.MenuListHandler(serverCtx),
 			},
@@ -178,7 +178,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysdict.DictAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sys/dict/list",
 				Handler: sysdict.DictListHandler(serverCtx),
 			},
@@ -204,7 +204,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysdept.DeptAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sys/dept/list",
 				Handler: sysdept.DeptListHandler(serverCtx),
 			},
@@ -225,7 +225,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 	engine.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sys/loginLog/list",
 				Handler: syslog.LoginLogListHandler(serverCtx),
 			},
@@ -241,7 +241,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 	engine.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sys/sysLog/list",
 				Handler: syslog.SysLogListHandler(serverCtx),
 			},
@@ -262,7 +262,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysconfig.ConfigAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sys/config/list",
 				Handler: sysconfig.ConfigListHandler(serverCtx),
 			},
@@ -288,7 +288,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: ordercart.CartItemAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/order/cart/list",
 				Handler: ordercart.CartItemListHandler(serverCtx),
 			},
@@ -313,7 +313,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: orderorder.OrderAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/order/order/list",
 				Handler: orderorder.OrderListHandler(serverCtx),
 			},
@@ -338,7 +338,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: ordercompayaddress.CompayAddressAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/order/compayaddress/list",
 				Handler: ordercompayaddress.CompayAddressListHandler(serverCtx),
 			},
@@ -363,7 +363,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: orderoperatehistory.OperateHistoryAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/order/operatehistory/list",
 				Handler: orderoperatehistory.OperateHistoryListHandler(serverCtx),
 			},
@@ -388,7 +388,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: orderreturnapply.ReturnApplyAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/order/returnapply/list",
 				Handler: orderreturnapply.ReturnApplyListHandler(serverCtx),
 			},
@@ -413,7 +413,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: orderreturnreason.ReturnResonAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/order/returnreason/list",
 				Handler: orderreturnreason.ReturnResonListHandler(serverCtx),
 			},
@@ -438,7 +438,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: ordersetting.OrderSettingAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/order/setting/list",
 				Handler: ordersetting.OrderSettingListHandler(serverCtx),
 			},
@@ -463,7 +463,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: productproduct.ProductAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/product/product/list",
 				Handler: productproduct.ProductListHandler(serverCtx),
 			},
@@ -488,7 +488,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: productbrand.ProductBrandAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/product/brand/list",
 				Handler: productbrand.ProductBrandListHandler(serverCtx),
 			},
@@ -513,7 +513,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: productcategory.ProductCategoryAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/product/category/list",
 				Handler: productcategory.ProductCategoryListHandler(serverCtx),
 			},
@@ -538,7 +538,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: productcomment.ProductCommentAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/product/comment/list",
 				Handler: productcomment.ProductCommentListHandler(serverCtx),
 			},
@@ -563,7 +563,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: productfeighttemplate.FeightTemplateAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/product/feighttemplate/list",
 				Handler: productfeighttemplate.FeightTemplateListHandler(serverCtx),
 			},
@@ -588,7 +588,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: productmemberprice.MemberPriceAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/product/memberprice/list",
 				Handler: productmemberprice.MemberPriceListHandler(serverCtx),
 			},
@@ -613,7 +613,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: productskustock.SkuStockAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/product/skustock/list",
 				Handler: productskustock.SkuStockListHandler(serverCtx),
 			},
@@ -638,7 +638,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smscoupon.CouponAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/coupon/list",
 				Handler: smscoupon.CouponListHandler(serverCtx),
 			},
@@ -663,7 +663,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smscouponhistory.CouponHistoryAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/couponhistory/list",
 				Handler: smscouponhistory.CouponHistoryListHandler(serverCtx),
 			},
@@ -688,7 +688,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smsflashpromotion.FlashPromotionAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/flashpromotion/list",
 				Handler: smsflashpromotion.FlashPromotionListHandler(serverCtx),
 			},
@@ -713,7 +713,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smsflashpromotionlog.FlashPromotionLogAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/flashpromotionlog/list",
 				Handler: smsflashpromotionlog.FlashPromotionLogListHandler(serverCtx),
 			},
@@ -738,7 +738,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smsflashpromotionsession.FlashPromotionSessionAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/flashpromotionsession/list",
 				Handler: smsflashpromotionsession.FlashPromotionSessionListHandler(serverCtx),
 			},
@@ -763,7 +763,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smshomeadvertise.HomeAdvertiseAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/homeadvertise/list",
 				Handler: smshomeadvertise.HomeAdvertiseListHandler(serverCtx),
 			},
@@ -788,7 +788,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smshomebrand.HomeBrandAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/homebrand/list",
 				Handler: smshomebrand.HomeBrandListHandler(serverCtx),
 			},
@@ -813,7 +813,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smshomenewproduct.HomeNewProductAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/homenewproduct/list",
 				Handler: smshomenewproduct.HomeNewProductListHandler(serverCtx),
 			},
@@ -838,7 +838,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smshomerecommendproduct.HomeRecommendProductAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/homerecommendproduct/list",
 				Handler: smshomerecommendproduct.HomeRecommendProductListHandler(serverCtx),
 			},
@@ -863,7 +863,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: smshomerecommendsubject.HomeRecommendSubjectAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/sms/homerecommendsubject/list",
 				Handler: smshomerecommendsubject.HomeRecommendSubjectListHandler(serverCtx),
 			},
@@ -888,7 +888,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membermember.MemberAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/member/list",
 				Handler: membermember.MemberListHandler(serverCtx),
 			},
@@ -913,7 +913,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberaddress.MemberAddressAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/address/list",
 				Handler: memberaddress.MemberAddressListHandler(serverCtx),
 			},
@@ -938,7 +938,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membergrowthchangehistory.GrowthChangeHistoryAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/growthchangehistory/list",
 				Handler: membergrowthchangehistory.GrowthChangeHistoryListHandler(serverCtx),
 			},
@@ -963,7 +963,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberintegrationchangehistory.IntegrationChangeHistoryAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/integrationchangehistory/list",
 				Handler: memberintegrationchangehistory.IntegrationChangeHistoryListHandler(serverCtx),
 			},
@@ -988,7 +988,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberintegrationconsumesetting.IntegrationConsumeSettingAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/integrationconsumesetting/list",
 				Handler: memberintegrationconsumesetting.IntegrationConsumeSettingListHandler(serverCtx),
 			},
@@ -1013,7 +1013,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberlevel.MemberLevelAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/level/list",
 				Handler: memberlevel.MemberLevelListHandler(serverCtx),
 			},
@@ -1038,7 +1038,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberloginlog.MemberLoginLogAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/loginlog/list",
 				Handler: memberloginlog.MemberLoginLogListHandler(serverCtx),
 			},
@@ -1063,7 +1063,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberrulesetting.MemberRuleSettingAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/rulesetting/list",
 				Handler: memberrulesetting.MemberRuleSettingListHandler(serverCtx),
 			},
@@ -1088,7 +1088,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberstatistics.MemberStatisticsInfoAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/statistics/list",
 				Handler: memberstatistics.MemberStatisticsInfoListHandler(serverCtx),
 			},
@@ -1113,7 +1113,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membertag.MemberTagAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/tag/list",
 				Handler: membertag.MemberTagListHandler(serverCtx),
 			},
@@ -1138,7 +1138,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membertask.MemberTaskAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/api/member/task/list",
 				Handler: membertask.MemberTaskListHandler(serverCtx),
 			},

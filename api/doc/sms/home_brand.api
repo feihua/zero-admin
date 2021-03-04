@@ -17,8 +17,8 @@ type (
         Message string `json:"message"`
     }
     ListHomeBrandReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtHomeBrandData struct {
         Id              int64  `json:"id"`
@@ -64,7 +64,7 @@ service admin-api {
     post /api/sms/homebrand/add (addHomeBrandReq) returns (addHomeBrandResp)
 
     @handler HomeBrandList
-    get /api/sms/homebrand/list (ListHomeBrandReq) returns (ListHomeBrandResp)
+    post /api/sms/homebrand/list (ListHomeBrandReq) returns (ListHomeBrandResp)
 
     @handler HomeBrandUpdate
     post /api/sms/homebrand/update (UpdateHomeBrandReq) returns (UpdateHomeBrandResp)

@@ -19,8 +19,8 @@ type (
         Message string `json:"message"`
     }
     ListConfigReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListConfigData struct {
         Id int64 `json:"id"`                               // 编号
@@ -76,7 +76,7 @@ service admin-api {
     post /api/sys/config/add (addConfigReq) returns (addConfigResp)
 
     @handler ConfigList
-    get /api/sys/config/list (ListConfigReq) returns (ListConfigResp)
+    post /api/sys/config/list (ListConfigReq) returns (ListConfigResp)
 
     @handler ConfigUpdate
     post /api/sys/config/update (UpdateConfigReq) returns (UpdateConfigResp)

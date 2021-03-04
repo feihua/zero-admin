@@ -69,14 +69,14 @@ type (
     }
 
     ListUserReq struct {
-        current int64 `form:"current,optional"`
-        pageSize int64 `form:"pageSize,optional"`
-        Name string `form:"name,optional"`
-        NickName string `form:"nick_name,optional"`
-        Mobile string `form:"mobile,optional"`
-        Email string `form:"email,optional"`
-        Status int64 `form:"status,optional"`
-        DeptId int64 `form:"dept_id,optional"`
+        current int64 `json:"current,optional"`
+        pageSize int64 `json:"pageSize,optional"`
+        Name string `json:"name,optional"`
+        NickName string `json:"nick_name,optional"`
+        Mobile string `json:"mobile,optional"`
+        Email string `json:"email,optional"`
+        Status int64 `json:"status,optional"`
+        DeptId int64 `json:"dept_id,optional"`
     }
 
     ListUserData struct {
@@ -157,7 +157,7 @@ service admin-api {
     post /api/sys/user/add (addUserReq) returns (addUserResp)
 
     @handler UserList
-    get /api/sys/user/list (ListUserReq) returns (ListUserResp)
+    post /api/sys/user/list (ListUserReq) returns (ListUserResp)
 
     @handler UserUpdate
     post /api/sys/user/update (UpdateUserReq) returns (UpdateUserResp)

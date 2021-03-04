@@ -30,8 +30,8 @@ type (
         Message string `json:"message"`
     }
     ListCouponReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtCouponData struct {
         Id           int64          `json:"id"`
@@ -103,7 +103,7 @@ service admin-api {
     post /api/sms/coupon/add (addCouponReq) returns (addCouponResp)
 
     @handler CouponList
-    get /api/sms/coupon/list (ListCouponReq) returns (ListCouponResp)
+    post /api/sms/coupon/list (ListCouponReq) returns (ListCouponResp)
 
     @handler CouponUpdate
     post /api/sms/coupon/update (UpdateCouponReq) returns (UpdateCouponResp)

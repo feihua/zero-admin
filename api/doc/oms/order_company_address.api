@@ -22,8 +22,8 @@ type (
         Message string `json:"message"`
     }
     ListCompayAddressReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtCompayAddressData struct {
         Id            int64  `json:"id"`
@@ -79,7 +79,7 @@ service admin-api {
     post /api/order/compayaddress/add (addCompayAddressReq) returns (addCompayAddressResp)
 
     @handler CompayAddressList
-    get /api/order/compayaddress/list (ListCompayAddressReq) returns (ListCompayAddressResp)
+    post /api/order/compayaddress/list (ListCompayAddressReq) returns (ListCompayAddressResp)
 
     @handler CompayAddressUpdate
     post /api/order/compayaddress/update (UpdateCompayAddressReq) returns (UpdateCompayAddressResp)

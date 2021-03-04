@@ -19,8 +19,8 @@ type (
         Message string `json:"message"`
     }
     ListMemberLoginLogReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtMemberLoginLogData struct {
         Id         int64     `json:"id"`
@@ -70,7 +70,7 @@ service admin-api {
     post /api/member/loginlog/add (addMemberLoginLogReq) returns (addMemberLoginLogResp)
 
     @handler MemberLoginLogList
-    get /api/member/loginlog/list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
+    post /api/member/loginlog/list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
 
     @handler MemberLoginLogUpdate
     post /api/member/loginlog/update (UpdateMemberLoginLogReq) returns (UpdateMemberLoginLogResp)

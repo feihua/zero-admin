@@ -17,8 +17,8 @@ type (
         Message string `json:"message"`
     }
     ListHomeRecommendSubjectReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtHomeRecommendSubjectData struct {
         Id              int64  `json:"id"`
@@ -64,7 +64,7 @@ service admin-api {
     post /api/sms/homerecommendsubject/add (addHomeRecommendSubjectReq) returns (addHomeRecommendSubjectResp)
 
     @handler HomeRecommendSubjectList
-    get /api/sms/homerecommendsubject/list (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
+    post /api/sms/homerecommendsubject/list (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
 
     @handler HomeRecommendSubjectUpdate
     post /apisms/homerecommendsubject/update (UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp)

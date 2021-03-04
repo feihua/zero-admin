@@ -25,8 +25,8 @@ type (
         Message string `json:"message"`
     }
     ListMemberLevelReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtMemberLevelData struct {
         Id                    int64   `json:"id"`
@@ -88,7 +88,7 @@ service admin-api {
     post /api/member/level/add (addMemberLevelReq) returns (addMemberLevelResp)
 
     @handler MemberLevelList
-    get /api/member/level/list (ListMemberLevelReq) returns (ListMemberLevelResp)
+    post /api/member/level/list (ListMemberLevelReq) returns (ListMemberLevelResp)
 
     @handler MemberLevelUpdate
     post /api/member/level/update (UpdateMemberLevelReq) returns (UpdateMemberLevelResp)

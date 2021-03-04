@@ -393,8 +393,8 @@ type DeleteUserResp struct {
 }
 
 type ListCartItemReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListCartItemResp struct {
@@ -408,8 +408,8 @@ type ListCartItemResp struct {
 }
 
 type ListCompayAddressReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListCompayAddressResp struct {
@@ -438,8 +438,8 @@ type ListConfigData struct {
 }
 
 type ListConfigReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListConfigResp struct {
@@ -453,8 +453,8 @@ type ListConfigResp struct {
 }
 
 type ListCouponHistoryReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListCouponHistoryResp struct {
@@ -466,8 +466,8 @@ type ListCouponHistoryResp struct {
 }
 
 type ListCouponReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListCouponResp struct {
@@ -493,8 +493,8 @@ type ListDeptData struct {
 }
 
 type ListDeptReq struct {
-	Name     string `form:"name,optional"`
-	CreateBy string `form:"create_by,optional"`
+	Name     string `json:"name,optional"`
+	CreateBy string `json:"create_by,optional"`
 }
 
 type ListDeptResp struct {
@@ -521,12 +521,12 @@ type ListDictData struct {
 }
 
 type ListDictReq struct {
-	Current  int64  `form:"current,optional"`
-	PageSize int64  `form:"pageSize,optional"`
-	Value    string `form:"value,optional"`
-	Label    string `form:"label,optional"`
-	DelFlag  int64  `form:"del_flag,optional"`
-	Type     string `form:"type,optional "`
+	Current  int64  `json:"current,optional"`
+	PageSize int64  `json:"pageSize,optional"`
+	Value    string `json:"value,optional"`
+	Label    string `json:"label,optional"`
+	DelFlag  int64  `json:"del_flag,optional"`
+	Type     string `json:"type,optional "`
 }
 
 type ListDictResp struct {
@@ -540,8 +540,8 @@ type ListDictResp struct {
 }
 
 type ListFeightTemplateReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListFeightTemplateResp struct {
@@ -555,8 +555,8 @@ type ListFeightTemplateResp struct {
 }
 
 type ListFlashPromotionLogReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListFlashPromotionLogResp struct {
@@ -570,8 +570,8 @@ type ListFlashPromotionLogResp struct {
 }
 
 type ListFlashPromotionReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListFlashPromotionResp struct {
@@ -585,8 +585,8 @@ type ListFlashPromotionResp struct {
 }
 
 type ListFlashPromotionSessionReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListFlashPromotionSessionResp struct {
@@ -600,8 +600,8 @@ type ListFlashPromotionSessionResp struct {
 }
 
 type ListGrowthChangeHistoryReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListGrowthChangeHistoryResp struct {
@@ -613,8 +613,8 @@ type ListGrowthChangeHistoryResp struct {
 }
 
 type ListHomeAdvertiseReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListHomeAdvertiseResp struct {
@@ -628,8 +628,8 @@ type ListHomeAdvertiseResp struct {
 }
 
 type ListHomeBrandReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListHomeBrandResp struct {
@@ -643,8 +643,8 @@ type ListHomeBrandResp struct {
 }
 
 type ListHomeNewProductReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListHomeNewProductResp struct {
@@ -658,8 +658,8 @@ type ListHomeNewProductResp struct {
 }
 
 type ListHomeRecommendProductReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListHomeRecommendProductResp struct {
@@ -673,8 +673,8 @@ type ListHomeRecommendProductResp struct {
 }
 
 type ListHomeRecommendSubjectReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListHomeRecommendSubjectResp struct {
@@ -688,8 +688,8 @@ type ListHomeRecommendSubjectResp struct {
 }
 
 type ListIntegrationChangeHistoryReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListIntegrationChangeHistoryResp struct {
@@ -703,8 +703,8 @@ type ListIntegrationChangeHistoryResp struct {
 }
 
 type ListIntegrationConsumeSettingReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListIntegrationConsumeSettingResp struct {
@@ -729,8 +729,8 @@ type ListLoginLogData struct {
 }
 
 type ListLoginLogReq struct {
-	Current  int64 `form:"current,optional"`
-	PageSize int64 `form:"pageSize,optional"`
+	Current  int64 `json:"current,optional"`
+	PageSize int64 `json:"pageSize,optional"`
 }
 
 type ListLoginLogResp struct {
@@ -744,8 +744,8 @@ type ListLoginLogResp struct {
 }
 
 type ListMemberAddressReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListMemberAddressResp struct {
@@ -757,8 +757,8 @@ type ListMemberAddressResp struct {
 }
 
 type ListMemberLevelReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListMemberLevelResp struct {
@@ -772,8 +772,8 @@ type ListMemberLevelResp struct {
 }
 
 type ListMemberLoginLogReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListMemberLoginLogResp struct {
@@ -787,8 +787,8 @@ type ListMemberLoginLogResp struct {
 }
 
 type ListMemberPriceReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListMemberPriceResp struct {
@@ -800,8 +800,8 @@ type ListMemberPriceResp struct {
 }
 
 type ListMemberReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListMemberResp struct {
@@ -815,8 +815,8 @@ type ListMemberResp struct {
 }
 
 type ListMemberRuleSettingReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListMemberRuleSettingResp struct {
@@ -830,8 +830,8 @@ type ListMemberRuleSettingResp struct {
 }
 
 type ListMemberStatisticsInfoReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListMemberStatisticsInfoResp struct {
@@ -845,8 +845,8 @@ type ListMemberStatisticsInfoResp struct {
 }
 
 type ListMemberTagReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListMemberTagResp struct {
@@ -860,8 +860,8 @@ type ListMemberTagResp struct {
 }
 
 type ListMemberTaskReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListMemberTaskResp struct {
@@ -881,8 +881,8 @@ type ListMenuData struct {
 }
 
 type ListMenuReq struct {
-	Name string `form:"name,optional "`
-	Url  string `form:"url,optional "`
+	Name string `json:"name,optional "`
+	Url  string `json:"url,optional "`
 }
 
 type ListMenuResp struct {
@@ -914,8 +914,8 @@ type ListMenuTreeVue struct {
 }
 
 type ListOperateHistoryReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListOperateHistoryResp struct {
@@ -929,8 +929,8 @@ type ListOperateHistoryResp struct {
 }
 
 type ListOrderReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListOrderResp struct {
@@ -944,8 +944,8 @@ type ListOrderResp struct {
 }
 
 type ListOrderSettingReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListOrderSettingResp struct {
@@ -959,8 +959,8 @@ type ListOrderSettingResp struct {
 }
 
 type ListProductBrandReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListProductBrandResp struct {
@@ -972,8 +972,8 @@ type ListProductBrandResp struct {
 }
 
 type ListProductCategoryReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListProductCategoryResp struct {
@@ -987,8 +987,8 @@ type ListProductCategoryResp struct {
 }
 
 type ListProductCommentReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListProductCommentResp struct {
@@ -1002,8 +1002,8 @@ type ListProductCommentResp struct {
 }
 
 type ListProductReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListProductResp struct {
@@ -1017,8 +1017,8 @@ type ListProductResp struct {
 }
 
 type ListReturnApplyReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListReturnApplyResp struct {
@@ -1032,8 +1032,8 @@ type ListReturnApplyResp struct {
 }
 
 type ListReturnResonReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListReturnResonResp struct {
@@ -1060,10 +1060,10 @@ type ListRoleData struct {
 }
 
 type ListRoleReq struct {
-	Current  int64  `form:"current,optional"`
-	PageSize int64  `form:"pageSize,optional"`
-	Name     string `form:"name,optional "`
-	DelFlag  int64  `form:"del_flag,optional "`
+	Current  int64  `json:"current,optional"`
+	PageSize int64  `json:"pageSize,optional"`
+	Name     string `json:"name,optional "`
+	DelFlag  int64  `json:"del_flag,optional "`
 }
 
 type ListRoleResp struct {
@@ -1077,8 +1077,8 @@ type ListRoleResp struct {
 }
 
 type ListSkuStockReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
 }
 
 type ListSkuStockResp struct {
@@ -1104,8 +1104,8 @@ type ListSysLogData struct {
 }
 
 type ListSysLogReq struct {
-	Current  int64 `form:"current,optional"`
-	PageSize int64 `form:"pageSize,optional"`
+	Current  int64 `json:"current,optional"`
+	PageSize int64 `json:"pageSize,optional"`
 }
 
 type ListSysLogResp struct {
@@ -1137,14 +1137,14 @@ type ListUserData struct {
 }
 
 type ListUserReq struct {
-	Current  int64  `form:"current,optional"`
-	PageSize int64  `form:"pageSize,optional"`
-	Name     string `form:"name,optional"`
-	NickName string `form:"nick_name,optional"`
-	Mobile   string `form:"mobile,optional"`
-	Email    string `form:"email,optional"`
-	Status   int64  `form:"status,optional"`
-	DeptId   int64  `form:"dept_id,optional"`
+	Current  int64  `json:"current,optional"`
+	PageSize int64  `json:"pageSize,optional"`
+	Name     string `json:"name,optional"`
+	NickName string `json:"nick_name,optional"`
+	Mobile   string `json:"mobile,optional"`
+	Email    string `json:"email,optional"`
+	Status   int64  `json:"status,optional"`
+	DeptId   int64  `json:"dept_id,optional"`
 }
 
 type ListUserResp struct {
@@ -1705,7 +1705,7 @@ type RoleMenuIdsResp struct {
 }
 
 type RoleMenuReq struct {
-	Id int64 `form:"id,optional"`
+	Id int64 `json:"id,optional"`
 }
 
 type RoleMenuResp struct {

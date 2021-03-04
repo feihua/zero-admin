@@ -24,8 +24,8 @@ type (
         Message string `json:"message"`
     }
     ListHomeAdvertiseReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtHomeAdvertiseData struct {
         Id         int64     `json:"id"`
@@ -85,7 +85,7 @@ service admin-api {
     post /api/sms/homeadvertise/add (addHomeAdvertiseReq) returns (addHomeAdvertiseResp)
 
     @handler HomeAdvertiseList
-    get /api/sms/homeadvertise/list (ListHomeAdvertiseReq) returns (ListHomeAdvertiseResp)
+    post /api/sms/homeadvertise/list (ListHomeAdvertiseReq) returns (ListHomeAdvertiseResp)
 
     @handler HomeAdvertiseUpdate
     post /api/sms/homeadvertise/update (UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp)

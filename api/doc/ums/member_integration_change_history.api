@@ -20,8 +20,8 @@ type (
         Message string `json:"message"`
     }
     ListIntegrationChangeHistoryReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtIntegrationChangeHistoryData struct {
         Id          int64     `json:"id"`
@@ -75,7 +75,7 @@ service admin-api {
     post /api/member/integrationchangehistory/add (addIntegrationChangeHistoryReq) returns (addIntegrationChangeHistoryResp)
 
     @handler IntegrationChangeHistoryList
-    get /api/member/integrationchangehistory/list (ListIntegrationChangeHistoryReq) returns (ListIntegrationChangeHistoryResp)
+    post /api/member/integrationchangehistory/list (ListIntegrationChangeHistoryReq) returns (ListIntegrationChangeHistoryResp)
 
     @handler IntegrationChangeHistoryUpdate
     post /api/member/integrationchangehistory/update (UpdateIntegrationChangeHistoryReq) returns (UpdateIntegrationChangeHistoryResp)

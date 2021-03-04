@@ -28,8 +28,8 @@ type (
         Message string `json:"message"`
     }
     ListMemberStatisticsInfoReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtMemberStatisticsInfoData struct {
         Id                  int64     `json:"id"`
@@ -97,7 +97,7 @@ service admin-api {
     post /api/member/statistics/add (addMemberStatisticsInfoReq) returns (addMemberStatisticsInfoResp)
 
     @handler MemberStatisticsInfoList
-    get /api/member/statistics/list (ListMemberStatisticsInfoReq) returns (ListMemberStatisticsInfoResp)
+    post /api/member/statistics/list (ListMemberStatisticsInfoReq) returns (ListMemberStatisticsInfoResp)
 
     @handler MemberStatisticsInfoUpdate
     post /api/member/statistics/update (UpdateMemberStatisticsInfoReq) returns (UpdateMemberStatisticsInfoResp)

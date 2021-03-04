@@ -16,8 +16,8 @@ type (
         Message string `json:"message"`
     }
     ListReturnResonReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtReturnResonData struct {
         Id         int64     `json:"id"`
@@ -62,7 +62,7 @@ service admin-api {
     post /api/order/returnreason/add (addReturnResonReq) returns (addReturnResonResp)
 
     @handler ReturnResonList
-    get /api/order/returnreason/list (ListReturnResonReq) returns (ListReturnResonResp)
+    post /api/order/returnreason/list (ListReturnResonReq) returns (ListReturnResonResp)
 
     @handler ReturnResonUpdate
     post /api/order/returnreason/update (UpdateReturnResonReq) returns (UpdateReturnResonResp)

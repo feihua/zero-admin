@@ -19,8 +19,8 @@ type (
         Message string `json:"message"`
     }
     ListFlashPromotionLogReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtFlashPromotionLogData struct {
         Id            int64     `json:"id"`
@@ -70,7 +70,7 @@ service admin-api {
     post /api/sms/flashpromotionlog/add (addFlashPromotionLogReq) returns (addFlashPromotionLogResp)
 
     @handler FlashPromotionLogList
-    get /api/sms/flashpromotionlog/list (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
+    post /api/sms/flashpromotionlog/list (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
 
     @handler FlashPromotionLogUpdate
     post /api/sms/flashpromotionlog/update (UpdateFlashPromotionLogReq) returns (UpdateFlashPromotionLogResp)

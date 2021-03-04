@@ -16,10 +16,10 @@ type (
         Message string `json:"message"`
     }
     ListDeptReq struct {
-//        Current int64 `form:"current"`
-//        PageSize int64 `form:"pageSize"`
-        Name string `form:"name,optional"`
-        CreateBy string `form:"create_by,optional"`
+//        Current int64 `json:"current"`
+//        PageSize int64 `json:"pageSize"`
+        Name string `json:"name,optional"`
+        CreateBy string `json:"create_by,optional"`
     }
     ListDeptData struct {
         Id int64 `json:"id"`                               // 编号
@@ -70,7 +70,7 @@ service admin-api {
     post /api/sys/dept/add (addDeptReq) returns (addDeptResp)
 
     @handler DeptList
-    get /api/sys/dept/list (ListDeptReq) returns (ListDeptResp)
+    post /api/sys/dept/list (ListDeptReq) returns (ListDeptResp)
 
     @handler DeptUpdate
     post /api/sys/dept/update (UpdateDeptReq) returns (UpdateDeptResp)

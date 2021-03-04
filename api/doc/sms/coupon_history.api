@@ -23,8 +23,8 @@ type (
         Message string `json:"message"`
     }
     ListCouponHistoryReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtCouponHistoryData struct {
         Id             int64     `json:"id"`
@@ -80,7 +80,7 @@ service admin-api {
     post /api/sms/couponhistory/add (addCouponHistoryReq) returns (addCouponHistoryResp)
 
     @handler CouponHistoryList
-    get /api/sms/couponhistory/list (ListCouponHistoryReq) returns (ListCouponHistoryResp)
+    post /api/sms/couponhistory/list (ListCouponHistoryReq) returns (ListCouponHistoryResp)
 
     @handler CouponHistoryUpdate
     post /api/sms/couponhistory/update (UpdateCouponHistoryReq) returns (UpdateCouponHistoryResp)

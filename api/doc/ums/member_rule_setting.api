@@ -19,8 +19,8 @@ type (
         Message string `json:"message"`
     }
     ListMemberRuleSettingReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtMemberRuleSettingData struct {
         Id                int64   `json:"id"`
@@ -70,7 +70,7 @@ service admin-api {
     post /api/member/rulesetting/add (addMemberRuleSettingReq) returns (addMemberRuleSettingResp)
 
     @handler MemberRuleSettingList
-    get /api/member/rulesetting/list (ListMemberRuleSettingReq) returns (ListMemberRuleSettingResp)
+    post /api/member/rulesetting/list (ListMemberRuleSettingReq) returns (ListMemberRuleSettingResp)
 
     @handler MemberRuleSettingUpdate
     post /api/member/rulesetting/update (UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp)

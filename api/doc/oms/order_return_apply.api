@@ -39,8 +39,8 @@ type (
         Message string `json:"message"`
     }
     ListReturnApplyReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtReturnApplyData struct {
         Id               int64     `json:"id"`
@@ -130,7 +130,7 @@ service admin-api {
     post /api/order/returnapply/add (addReturnApplyReq) returns (addReturnApplyResp)
 
     @handler ReturnApplyList
-    get /api/order/returnapply/list (ListReturnApplyReq) returns (ListReturnApplyResp)
+    post /api/order/returnapply/list (ListReturnApplyReq) returns (ListReturnApplyResp)
 
     @handler ReturnApplyUpdate
     post /api/order/returnapply/update (UpdateReturnApplyReq) returns (UpdateReturnApplyResp)

@@ -17,8 +17,8 @@ type (
         Message string `json:"message"`
     }
     ListMemberTaskReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
     }
     ListtMemberTaskData struct {
         Id           int64  `json:"id"`
@@ -64,7 +64,7 @@ service admin-api {
     post /api/member/task/add (addMemberTaskReq) returns (addMemberTaskResp)
 
     @handler MemberTaskList
-    get /api/member/task/list (ListMemberTaskReq) returns (ListMemberTaskResp)
+    post /api/member/task/list (ListMemberTaskReq) returns (ListMemberTaskResp)
 
     @handler MemberTaskUpdate
     post /api/member/task/update (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)

@@ -15,10 +15,10 @@ type (
         Message string `json:"message"`
     }
     ListRoleReq struct {
-        Current int64 `form:"current,optional"`
-        PageSize int64 `form:"pageSize,optional"`
-        Name string `form:"name,optional "`
-        DelFlag int64 `form:"del_flag,optional "`
+        Current int64 `json:"current,optional"`
+        PageSize int64 `json:"pageSize,optional"`
+        Name string `json:"name,optional "`
+        DelFlag int64 `json:"del_flag,optional "`
     }
     ListRoleData struct {
         Id int64 `json:"id"`                               // 编号
@@ -78,7 +78,7 @@ type (
     }
 
     RoleMenuReq struct {
-        Id int64 `form:"id,optional"`
+        Id int64 `json:"id,optional"`
     }
     RoleMenuResp struct {
         AllData []*ListMenuData `json:"allData"`
@@ -95,7 +95,7 @@ service admin-api {
     post /api/sys/role/add (addRoleReq) returns (addRoleResp)
 
     @handler RoleList
-    get /api/sys/role/list (ListRoleReq) returns (ListRoleResp)
+    post /api/sys/role/list (ListRoleReq) returns (ListRoleResp)
 
     @handler RoleUpdate
     post /api/sys/role/update (UpdateRoleReq) returns (UpdateRoleResp)

@@ -7,8 +7,8 @@ info(
 
 type (
     ListSysLogReq struct {
-        Current int64 `form:"current,optional"`
-        PageSize int64 `form:"pageSize,optional"`
+        Current int64 `json:"current,optional"`
+        PageSize int64 `json:"pageSize,optional"`
     }
     ListSysLogData struct {
         Id int64 `json:"id"`                               // 编号
@@ -47,7 +47,7 @@ type (
 )
 service admin-api {
     @handler SysLogList
-    get /api/sys/sysLog/list (ListSysLogReq) returns (ListSysLogResp)
+    post /api/sys/sysLog/list (ListSysLogReq) returns (ListSysLogResp)
 
     @handler SysLogDelete
     post /api/sys/sysLog/delete (DeleteSysLogReq) returns (DeleteSysLogResp)

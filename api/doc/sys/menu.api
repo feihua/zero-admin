@@ -20,10 +20,10 @@ type (
         Message string `json:"message"`
     }
     ListMenuReq struct {
-//        Current int64 `form:"current"`
-//        PageSize int64 `form:"pageSize"`
-        Name string `form:"name,optional "`
-        Url string `form:"url,optional "`
+//        Current int64 `json:"current"`
+//        PageSize int64 `json:"pageSize"`
+        Name string `json:"name,optional "`
+        Url string `json:"url,optional "`
     }
     ListtMenuData struct {
         Id int64 `json:"id"`                               // 编号
@@ -83,7 +83,7 @@ service admin-api {
     post /api/sys/menu/add (addMenuReq) returns (addMenuResp)
 
     @handler MenuList
-    get /api/sys/menu/list (ListMenuReq) returns (ListMenuResp)
+    post /api/sys/menu/list (ListMenuReq) returns (ListMenuResp)
 
     @handler MenuUpdate
     post /api/sys/menu/update (UpdateMenuReq) returns (UpdateMenuResp)
