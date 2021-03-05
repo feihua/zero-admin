@@ -31,5 +31,8 @@ func (l *UpdateUserStatusLogic) UpdateUserStatus(req types.UserStatusReq) (*type
 		LastUpdateBy: "admin",
 	})
 
-	return &types.UserStatusResp{}, nil
+	return &types.UserStatusResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

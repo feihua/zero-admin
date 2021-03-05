@@ -30,5 +30,8 @@ func (l *UserDeleteLogic) UserDelete(req types.DeleteUserReq) (*types.DeleteUser
 		Id: req.Id,
 	})
 
-	return &types.DeleteUserResp{}, nil
+	return &types.DeleteUserResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

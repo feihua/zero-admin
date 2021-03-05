@@ -41,5 +41,8 @@ func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error)
 		return nil, err
 	}
 
-	return &types.AddUserResp{}, nil
+	return &types.AddUserResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

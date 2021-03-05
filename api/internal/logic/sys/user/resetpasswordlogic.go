@@ -30,5 +30,8 @@ func (l *ReSetPasswordLogic) ReSetPassword(req types.ReSetPasswordReq) (*types.R
 		LastUpdateBy: "admin",
 	})
 
-	return &types.ReSetPasswordResp{}, nil
+	return &types.ReSetPasswordResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }
