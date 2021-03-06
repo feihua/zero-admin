@@ -36,6 +36,10 @@ func (l *MenuUpdateLogic) MenuUpdate(req types.UpdateMenuReq) (*types.UpdateMenu
 		OrderNum: req.OrderNum,
 		//todo 从token里面拿
 		LastUpdateBy: "admin",
+		VuePath:      req.VuePath,
+		VueComponent: req.VueComponent,
+		VueIcon:      req.VueIcon,
+		VueRedirect:  req.VueRedirect,
 	})
 
 	return &types.UpdateMenuResp{

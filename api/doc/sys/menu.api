@@ -14,6 +14,10 @@ type (
         Type int64 `json:"type"`                           // 类型   0：目录   1：菜单   2：按钮
         Icon string `json:"icon"`                          // 菜单图标
         OrderNum int64 `json:"order_num"`                  // 排序
+        VuePath        string `json:"vue_path"`         // vue系统的path
+        VueComponent   string `json:"vue_component"`    // vue的页面
+        VueIcon        string `json:"vue_icon"`         // vue的图标
+        VueRedirect    string `json:"vue_redirect"`     // vue的路由重定向
     }
     addMenuResp struct {
         Code string `json:"code"`
@@ -41,6 +45,10 @@ type (
         LastUpdateBy string `json:"last_update_by"`        // 更新人
         LastUpdateTime string `json:"last_update_time"`    // 更新时间
         DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+        VuePath        string `json:"vue_path"`         // vue系统的path
+        VueComponent   string `json:"vue_component"`    // vue的页面
+        VueIcon        string `json:"vue_icon"`         // vue的图标
+        VueRedirect    string `json:"vue_redirect"`     // vue的路由重定向
     }
     ListMenuResp struct {
         Code string `json:"code"`
@@ -60,6 +68,10 @@ type (
         Type int64 `json:"type"`                           // 类型   0：目录   1：菜单   2：按钮
         Icon string `json:"icon"`                          // 菜单图标
         OrderNum int64 `json:"order_num"`                  // 排序
+        VuePath        string `json:"vue_path"`         // vue系统的path
+        VueComponent   string `json:"vue_component"`    // vue的页面
+        VueIcon        string `json:"vue_icon"`         // vue的图标
+        VueRedirect    string `json:"vue_redirect"`     // vue的路由重定向
     }
     UpdateMenuResp struct {
         Code string `json:"code"`

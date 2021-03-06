@@ -204,6 +204,10 @@ message MenuAddReq {
   string icon = 6;
   int64 order_num = 7;
   string create_by = 8;
+  string vuePath =9;
+  string vueComponent =10;
+  string vueIcon =11;
+  string vueRedirect =12;
 }
 
 message MenuAddResp {
@@ -231,6 +235,10 @@ message MenuListData {
   string last_update_by = 12;
   string last_update_time = 13;
   int64 del_flag = 14;
+  string vuePath =15;
+  string vueComponent =16;
+  string vueIcon =17;
+  string vueRedirect =18;
 }
 
 message MenuListTree {
@@ -259,6 +267,10 @@ message MenuUpdateReq {
   string icon = 7;
   int64 order_num = 8;
   string last_update_by = 9;
+  string vuePath =10;
+  string vueComponent =11;
+  string vueIcon =12;
+  string vueRedirect =13;
 }
 
 message MenuUpdateResp {

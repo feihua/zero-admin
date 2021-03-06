@@ -48,6 +48,10 @@ func (l *MenuListLogic) MenuList(in *sys.MenuListReq) (*sys.MenuListResp, error)
 			LastUpdateBy:   menu.LastUpdateBy,
 			LastUpdateTime: menu.LastUpdateTime.Format("2006-01-02 15:04:05"),
 			DelFlag:        menu.DelFlag,
+			VuePath:        menu.VuePath.String,
+			VueComponent:   menu.VueComponent.String,
+			VueIcon:        menu.VueIcon.String,
+			VueRedirect:    menu.VueRedirect.String,
 		})
 	}
 

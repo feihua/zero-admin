@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"go-zero-admin/rpc/model/sysmodel"
 	"time"
 
@@ -27,6 +28,7 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuAddLo
 
 func (l *MenuAddLogic) MenuAdd(in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
 	_, err := l.svcCtx.MenuModel.Insert(sysmodel.SysMenu{
+		Id:             0,
 		Name:           in.Name,
 		ParentId:       in.ParentId,
 		Url:            in.Url,
@@ -35,9 +37,14 @@ func (l *MenuAddLogic) MenuAdd(in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
 		Icon:           in.Icon,
 		OrderNum:       in.OrderNum,
 		CreateBy:       in.CreateBy,
+		CreateTime:     time.Time{},
 		LastUpdateBy:   in.CreateBy,
 		LastUpdateTime: time.Now(),
 		DelFlag:        0,
+		VuePath:        sql.NullString{in.VuePath, false},
+		VueComponent:   sql.NullString{in.VueComponent, false},
+		VueIcon:        sql.NullString{in.VueIcon, false},
+		VueRedirect:    sql.NullString{in.VueRedirect, false},
 	})
 	//count, _ := l.svcCtx.UserModel.Count()
 

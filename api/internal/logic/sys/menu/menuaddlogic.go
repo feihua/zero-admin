@@ -34,7 +34,11 @@ func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error)
 		Icon:     req.Icon,
 		OrderNum: req.OrderNum,
 		//todo 从token里面拿
-		CreateBy: "admin",
+		CreateBy:     "admin",
+		VuePath:      req.VuePath,
+		VueComponent: req.VueComponent,
+		VueIcon:      req.VueIcon,
+		VueRedirect:  req.VueRedirect,
 	})
 
 	if err != nil {
