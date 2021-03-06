@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"database/sql"
 	"go-zero-admin/rpc/model/sysmodel"
 	"time"
 
@@ -41,10 +40,10 @@ func (l *MenuAddLogic) MenuAdd(in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
 		LastUpdateBy:   in.CreateBy,
 		LastUpdateTime: time.Now(),
 		DelFlag:        0,
-		VuePath:        sql.NullString{in.VuePath, false},
-		VueComponent:   sql.NullString{in.VueComponent, false},
-		VueIcon:        sql.NullString{in.VueIcon, false},
-		VueRedirect:    sql.NullString{in.VueRedirect, false},
+		VuePath:        in.VuePath,
+		VueComponent:   in.VueComponent,
+		VueIcon:        in.VueIcon,
+		VueRedirect:    in.VueRedirect,
 	})
 	//count, _ := l.svcCtx.UserModel.Count()
 

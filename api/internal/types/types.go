@@ -881,7 +881,7 @@ type ListMenuData struct {
 }
 
 type ListMenuReq struct {
-	Name string `json:"name,optional "`
+	Name string `json:"name,optional"`
 	Url  string `json:"url,optional "`
 }
 
@@ -2181,18 +2181,18 @@ type UpdateMemberTaskResp struct {
 }
 
 type UpdateMenuReq struct {
-	Id           int64  `json:"id"`            // 编号
-	Name         string `json:"name"`          // 菜单名称
-	ParentId     int64  `json:"parent_id"`     // 父菜单ID，一级菜单为0
-	Url          string `json:"url"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-	Perms        string `json:"perms"`         // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
-	Type         int64  `json:"type"`          // 类型   0：目录   1：菜单   2：按钮
-	Icon         string `json:"icon"`          // 菜单图标
-	OrderNum     int64  `json:"order_num"`     // 排序
-	VuePath      string `json:"vue_path"`      // vue系统的path
-	VueComponent string `json:"vue_component"` // vue的页面
-	VueIcon      string `json:"vue_icon"`      // vue的图标
-	VueRedirect  string `json:"vue_redirect"`  // vue的路由重定向
+	Id           int64  `json:"id"`                     // 编号
+	Name         string `json:"name"`                   // 菜单名称
+	ParentId     int64  `json:"parent_id"`              // 父菜单ID，一级菜单为0
+	Url          string `json:"url,optional"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
+	Perms        string `json:"perms,optional"`         // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
+	Type         int64  `json:"type,optional"`          // 类型   0：目录   1：菜单   2：按钮
+	Icon         string `json:"icon,optional"`          // 菜单图标
+	OrderNum     int64  `json:"order_num,optional"`     // 排序
+	VuePath      string `json:"vue_path,optional"`      // vue系统的path
+	VueComponent string `json:"vue_component,optional"` // vue的页面
+	VueIcon      string `json:"vue_icon,optional"`      // vue的图标
+	VueRedirect  string `json:"vue_redirect,optional"`  // vue的路由重定向
 }
 
 type UpdateMenuResp struct {
@@ -2934,17 +2934,17 @@ type AddMemberTaskResp struct {
 }
 
 type AddMenuReq struct {
-	Name         string `json:"name"`          // 菜单名称
-	ParentId     int64  `json:"parent_id"`     // 父菜单ID，一级菜单为0
-	Url          string `json:"url"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-	Perms        string `json:"perms"`         // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
-	Type         int64  `json:"type"`          // 类型   0：目录   1：菜单   2：按钮
-	Icon         string `json:"icon"`          // 菜单图标
-	OrderNum     int64  `json:"order_num"`     // 排序
-	VuePath      string `json:"vue_path"`      // vue系统的path
-	VueComponent string `json:"vue_component"` // vue的页面
-	VueIcon      string `json:"vue_icon"`      // vue的图标
-	VueRedirect  string `json:"vue_redirect"`  // vue的路由重定向
+	Name         string `json:"name"`                   // 菜单名称
+	ParentId     int64  `json:"parent_id"`              // 父菜单ID，一级菜单为0
+	Url          string `json:"url,optional"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
+	Perms        string `json:"perms,optional"`         // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
+	Type         int64  `json:"type,optional"`          // 类型   0：目录   1：菜单   2：按钮
+	Icon         string `json:"icon,optional"`          // 菜单图标
+	OrderNum     int64  `json:"order_num,optional"`     // 排序
+	VuePath      string `json:"vue_path,optional"`      // vue系统的path
+	VueComponent string `json:"vue_component,optional"` // vue的页面
+	VueIcon      string `json:"vue_icon,optional"`      // vue的图标
+	VueRedirect  string `json:"vue_redirect,optional"`  // vue的路由重定向
 }
 
 type AddMenuResp struct {

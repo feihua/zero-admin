@@ -53,6 +53,10 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 			LastUpdateBy:   menu.LastUpdateBy,
 			LastUpdateTime: menu.LastUpdateTime,
 			DelFlag:        menu.DelFlag,
+			VuePath:        menu.VuePath,
+			VueComponent:   menu.VueComponent,
+			VueIcon:        menu.VueIcon,
+			VueRedirect:    menu.VueRedirect,
 		})
 	}
 

@@ -46,10 +46,10 @@ func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 			Icon:         menu.Icon,
 			ParentId:     menu.ParentId,
 			Path:         menu.Url,
-			VuePath:      menu.VuePath.String,
-			VueComponent: menu.VueComponent.String,
-			VueIcon:      menu.VueIcon.String,
-			VueRedirect:  menu.VueRedirect.String,
+			VuePath:      menu.VuePath,
+			VueComponent: menu.VueComponent,
+			VueIcon:      menu.VueIcon,
+			VueRedirect:  menu.VueRedirect,
 		})
 	}
 
