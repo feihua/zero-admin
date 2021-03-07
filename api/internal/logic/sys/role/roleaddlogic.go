@@ -30,6 +30,7 @@ func (l *RoleAddLogic) RoleAdd(req types.AddRoleReq) (*types.AddRoleResp, error)
 		Remark: req.Remark,
 		//todo 从token里面拿
 		CreateBy: "admin",
+		Status:   req.Status,
 	})
 
 	if err != nil {

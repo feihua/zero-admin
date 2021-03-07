@@ -38,6 +38,8 @@ func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(req types.RoleMenuReq) (*type
 			Key:      strconv.FormatInt(menu.Id, 10),
 			Title:    menu.Name,
 			ParentId: menu.ParentId,
+			Id:       menu.Id,
+			Label:    menu.Name,
 		})
 	}
 
@@ -48,5 +50,7 @@ func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(req types.RoleMenuReq) (*type
 	return &types.RoleMenuResp{
 		AllData:  list,
 		RoleData: QueryMenu.Ids,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

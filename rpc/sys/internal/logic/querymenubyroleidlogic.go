@@ -2,8 +2,6 @@ package logic
 
 import (
 	"context"
-	"strconv"
-
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
 
@@ -27,13 +25,13 @@ func NewQueryMenuByRoleIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(in *sys.QueryMenuByRoleIdReq) (*sys.QueryMenuByRoleIdResp, error) {
 	RoleMenus, _ := l.svcCtx.RoleMenuModel.FindByRoleId(in.Id)
 
-	var list []string
+	var list []int64
 	for _, user := range *RoleMenus {
 
-		list = append(list, strconv.FormatInt(user.MenuId, 10))
+		list = append(list, user.MenuId)
 	}
 
 	return &sys.QueryMenuByRoleIdResp{
-		Ids: nil,
+		Ids: list,
 	}, nil
 }

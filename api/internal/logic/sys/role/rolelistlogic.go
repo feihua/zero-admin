@@ -29,7 +29,7 @@ func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, er
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		Name:     req.Name,
-		DelFlag:  req.DelFlag,
+		Status:   req.Status,
 	})
 
 	if err != nil {
@@ -50,6 +50,7 @@ func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, er
 			DelFlag:        role.DelFlag,
 			Label:          role.Name,
 			Value:          strconv.FormatInt(role.Id, 10),
+			Status:         role.Status,
 		})
 	}
 

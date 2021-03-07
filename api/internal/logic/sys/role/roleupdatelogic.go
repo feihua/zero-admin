@@ -31,6 +31,7 @@ func (l *RoleUpdateLogic) RoleUpdate(req types.UpdateRoleReq) (*types.UpdateRole
 		Remark: req.Remark,
 		//todo 从token里面拿
 		LastUpdateBy: "admin",
+		Status:       req.Status,
 	})
 
 	if err != nil {

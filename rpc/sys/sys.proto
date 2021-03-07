@@ -128,6 +128,7 @@ message RoleAddReq {
   string name = 1;
   string remark = 2;
   string create_by = 3;
+  int64 status = 5;
 }
 
 message RoleAddResp {
@@ -138,7 +139,7 @@ message RoleListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string name = 3;
-  int64 del_flag = 4;
+  int64 status = 4;
 }
 
 message RoleListData {
@@ -150,6 +151,7 @@ message RoleListData {
   string last_update_by = 6;
   string last_update_time = 7;
   int64 del_flag = 8;
+  int64 status = 9;
 }
 
 message RoleListResp {
@@ -162,6 +164,7 @@ message RoleUpdateReq {
   string name = 2;
   string remark = 3;
   string last_update_by = 4;
+  int64 status = 5;
 }
 
 message RoleUpdateResp {
@@ -189,7 +192,7 @@ message QueryMenuByRoleIdReq {
 }
 
 message QueryMenuByRoleIdResp {
-  repeated string ids = 1;
+  repeated int64 ids = 1;
 }
 
 //role end---------------------
@@ -286,7 +289,8 @@ message MenuDeleteResp {
 }
 
 message UpdateMenuRoleReq {
-  string ping = 1;
+  int64 roleId = 1;
+  repeated int64 menuIds = 2;
 }
 
 message UpdateMenuRoleResp {
@@ -594,12 +598,12 @@ service Sys {
   rpc RoleDelete(RoleDeleteReq) returns(RoleDeleteResp);
   rpc UpdateRoleRole(UpdateRoleRoleReq) returns(UpdateRoleRoleResp);
   rpc QueryMenuByRoleId(QueryMenuByRoleIdReq) returns(QueryMenuByRoleIdResp);
+  rpc UpdateMenuRole(UpdateMenuRoleReq) returns(UpdateMenuRoleResp);
 
   rpc MenuAdd(MenuAddReq) returns(MenuAddResp);
   rpc MenuList(MenuListReq) returns(MenuListResp);
   rpc MenuUpdate(MenuUpdateReq) returns(MenuUpdateResp);
   rpc MenuDelete(MenuDeleteReq) returns(MenuDeleteResp);
-  rpc UpdateMenuRole(UpdateMenuRoleReq) returns(UpdateMenuRoleResp);
 
   rpc DictAdd(DictAddReq) returns(DictAddResp);
   rpc DictList(DictListReq) returns(DictListResp);

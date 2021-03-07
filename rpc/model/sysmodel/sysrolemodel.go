@@ -34,6 +34,7 @@ type (
 		LastUpdateBy   string    `db:"last_update_by"`   // 更新人
 		LastUpdateTime time.Time `db:"last_update_time"` // 更新时间
 		DelFlag        int64     `db:"del_flag"`         // 是否删除  -1：已删除  0：正常
+		Status         int64     `db:"status"`           // 状态  1：启用  0：禁用
 	}
 )
 
@@ -45,8 +46,8 @@ func NewSysRoleModel(conn sqlx.SqlConn) *SysRoleModel {
 }
 
 func (m *SysRoleModel) Insert(data SysRole) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, sysRoleRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.Name, data.Remark, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, sysRoleRowsExpectAutoSet)
+	ret, err := m.conn.Exec(query, data.Name, data.Remark, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.Status)
 	return ret, err
 }
 
@@ -103,7 +104,7 @@ func (m *SysRoleModel) Count() (int64, error) {
 
 func (m *SysRoleModel) Update(data SysRole) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, sysRoleRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.Name, data.Remark, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.Id)
+	_, err := m.conn.Exec(query, data.Name, data.Remark, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.Status, data.Id)
 	return err
 }
 

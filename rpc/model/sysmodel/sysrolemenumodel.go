@@ -85,7 +85,7 @@ func (m *SysRoleMenuModel) Update(data SysRoleMenu) error {
 }
 
 func (m *SysRoleMenuModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id = ?", m.table)
+	query := fmt.Sprintf("delete from %s where role_id = ?", m.table)
 	_, err := m.conn.Exec(query, id)
 	return err
 }

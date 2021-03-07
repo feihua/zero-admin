@@ -91,6 +91,11 @@ func (s *SysServer) QueryMenuByRoleId(ctx context.Context, in *sys.QueryMenuByRo
 	return l.QueryMenuByRoleId(in)
 }
 
+func (s *SysServer) UpdateMenuRole(ctx context.Context, in *sys.UpdateMenuRoleReq) (*sys.UpdateMenuRoleResp, error) {
+	l := logic.NewUpdateMenuRoleLogic(ctx, s.svcCtx)
+	return l.UpdateMenuRole(in)
+}
+
 func (s *SysServer) MenuAdd(ctx context.Context, in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
 	l := logic.NewMenuAddLogic(ctx, s.svcCtx)
 	return l.MenuAdd(in)
@@ -109,11 +114,6 @@ func (s *SysServer) MenuUpdate(ctx context.Context, in *sys.MenuUpdateReq) (*sys
 func (s *SysServer) MenuDelete(ctx context.Context, in *sys.MenuDeleteReq) (*sys.MenuDeleteResp, error) {
 	l := logic.NewMenuDeleteLogic(ctx, s.svcCtx)
 	return l.MenuDelete(in)
-}
-
-func (s *SysServer) UpdateMenuRole(ctx context.Context, in *sys.UpdateMenuRoleReq) (*sys.UpdateMenuRoleResp, error) {
-	l := logic.NewUpdateMenuRoleLogic(ctx, s.svcCtx)
-	return l.UpdateMenuRole(in)
 }
 
 func (s *SysServer) DictAdd(ctx context.Context, in *sys.DictAddReq) (*sys.DictAddResp, error) {

@@ -27,12 +27,15 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleAddLo
 
 func (l *RoleAddLogic) RoleAdd(in *sys.RoleAddReq) (*sys.RoleAddResp, error) {
 	_, _ = l.svcCtx.RoleModel.Insert(sysmodel.SysRole{
+		Id:             0,
 		Name:           in.Name,
 		Remark:         in.Remark,
 		CreateBy:       in.CreateBy,
+		CreateTime:     time.Time{},
 		LastUpdateBy:   in.CreateBy,
 		LastUpdateTime: time.Now(),
 		DelFlag:        0,
+		Status:         in.Status,
 	})
 
 	return &sys.RoleAddResp{}, nil

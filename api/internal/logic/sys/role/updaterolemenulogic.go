@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,7 +25,14 @@ func NewUpdateRoleMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) Upd
 }
 
 func (l *UpdateRoleMenuLogic) UpdateRoleMenu(req types.UpdateRoleMenuReq) (*types.UpdateRoleMenuResp, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Sys.UpdateMenuRole(l.ctx, &sysclient.UpdateMenuRoleReq{
+		RoleId:  req.RoleId,
+		MenuIds: req.MenuIds,
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.UpdateRoleMenuResp{
 		Code:    "000000",

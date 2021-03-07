@@ -14,91 +14,91 @@ import (
 )
 
 type (
-	MenuListTree          = sys.MenuListTree
-	LoginLogAddReq        = sys.LoginLogAddReq
-	SysLogListData        = sys.SysLogListData
-	RoleListResp          = sys.RoleListResp
-	RoleUpdateResp        = sys.RoleUpdateResp
-	UpdateRoleRoleReq     = sys.UpdateRoleRoleReq
-	MenuAddReq            = sys.MenuAddReq
-	MenuListReq           = sys.MenuListReq
-	DictListReq           = sys.DictListReq
-	ConfigListReq         = sys.ConfigListReq
-	UpdateConfigRoleReq   = sys.UpdateConfigRoleReq
-	QueryMenuByRoleIdResp = sys.QueryMenuByRoleIdResp
-	MenuDeleteResp        = sys.MenuDeleteResp
-	DeptAddReq            = sys.DeptAddReq
-	LoginLogListReq       = sys.LoginLogListReq
-	LoginLogListData      = sys.LoginLogListData
-	LoginResp             = sys.LoginResp
-	DictDeleteReq         = sys.DictDeleteReq
-	ConfigListData        = sys.ConfigListData
-	ConfigListResp        = sys.ConfigListResp
-	ConfigDeleteReq       = sys.ConfigDeleteReq
-	UpdateConfigRoleResp  = sys.UpdateConfigRoleResp
-	InfoReq               = sys.InfoReq
-	UserAddResp           = sys.UserAddResp
-	UserStatusReq         = sys.UserStatusReq
-	LoginLogDeleteReq     = sys.LoginLogDeleteReq
-	SysLogAddReq          = sys.SysLogAddReq
-	SysLogListReq         = sys.SysLogListReq
-	UserDeleteReq         = sys.UserDeleteReq
-	UserStatusResp        = sys.UserStatusResp
-	RoleListReq           = sys.RoleListReq
-	MenuUpdateResp        = sys.MenuUpdateResp
-	MenuDeleteReq         = sys.MenuDeleteReq
-	DictUpdateReq         = sys.DictUpdateReq
-	MenuListResp          = sys.MenuListResp
-	UpdateMenuRoleReq     = sys.UpdateMenuRoleReq
-	DictAddResp           = sys.DictAddResp
 	DeptDeleteReq         = sys.DeptDeleteReq
-	ConfigUpdateReq       = sys.ConfigUpdateReq
-	InfoResp              = sys.InfoResp
-	RoleAddReq            = sys.RoleAddReq
-	RoleDeleteReq         = sys.RoleDeleteReq
-	MenuAddResp           = sys.MenuAddResp
-	UpdateMenuRoleResp    = sys.UpdateMenuRoleResp
-	DeptListReq           = sys.DeptListReq
-	UserUpdateReq         = sys.UserUpdateReq
-	UserUpdateResp        = sys.UserUpdateResp
-	UpdateRoleRoleResp    = sys.UpdateRoleRoleResp
-	MenuUpdateReq         = sys.MenuUpdateReq
-	LoginLogAddResp       = sys.LoginLogAddResp
-	SysLogDeleteResp      = sys.SysLogDeleteResp
-	DictAddReq            = sys.DictAddReq
-	DeptListResp          = sys.DeptListResp
-	DeptUpdateResp        = sys.DeptUpdateResp
-	UserListReq           = sys.UserListReq
-	RoleDeleteResp        = sys.RoleDeleteResp
-	DictUpdateResp        = sys.DictUpdateResp
-	DictDeleteResp        = sys.DictDeleteResp
-	ConfigAddReq          = sys.ConfigAddReq
-	ConfigAddResp         = sys.ConfigAddResp
-	UserListData          = sys.UserListData
-	UserListResp          = sys.UserListResp
-	RoleAddResp           = sys.RoleAddResp
-	LoginLogListResp      = sys.LoginLogListResp
-	SysLogListResp        = sys.SysLogListResp
-	SysLogDeleteReq       = sys.SysLogDeleteReq
-	LoginLogDeleteResp    = sys.LoginLogDeleteResp
-	LoginReq              = sys.LoginReq
-	ReSetPasswordReq      = sys.ReSetPasswordReq
-	RoleListData          = sys.RoleListData
-	QueryMenuByRoleIdReq  = sys.QueryMenuByRoleIdReq
-	DictListResp          = sys.DictListResp
-	DeptUpdateReq         = sys.DeptUpdateReq
-	ReSetPasswordResp     = sys.ReSetPasswordResp
-	MenuListData          = sys.MenuListData
-	DictListData          = sys.DictListData
-	DeptDeleteResp        = sys.DeptDeleteResp
-	ConfigUpdateResp      = sys.ConfigUpdateResp
-	ConfigDeleteResp      = sys.ConfigDeleteResp
+	ConfigListReq         = sys.ConfigListReq
+	ConfigDeleteReq       = sys.ConfigDeleteReq
 	UserAddReq            = sys.UserAddReq
-	UserDeleteResp        = sys.UserDeleteResp
+	RoleListResp          = sys.RoleListResp
+	DictAddResp           = sys.DictAddResp
+	UpdateMenuRoleReq     = sys.UpdateMenuRoleReq
+	ReSetPasswordReq      = sys.ReSetPasswordReq
 	RoleUpdateReq         = sys.RoleUpdateReq
+	MenuAddResp           = sys.MenuAddResp
+	DictUpdateReq         = sys.DictUpdateReq
+	DictDeleteReq         = sys.DictDeleteReq
+	ConfigListResp        = sys.ConfigListResp
+	RoleAddResp           = sys.RoleAddResp
+	MenuListData          = sys.MenuListData
+	MenuDeleteReq         = sys.MenuDeleteReq
 	DeptAddResp           = sys.DeptAddResp
-	DeptListData          = sys.DeptListData
+	LoginLogAddReq        = sys.LoginLogAddReq
+	LoginLogDeleteResp    = sys.LoginLogDeleteResp
+	ConfigDeleteResp      = sys.ConfigDeleteResp
+	ReSetPasswordResp     = sys.ReSetPasswordResp
+	UpdateMenuRoleResp    = sys.UpdateMenuRoleResp
+	DeptAddReq            = sys.DeptAddReq
+	MenuListResp          = sys.MenuListResp
+	MenuDeleteResp        = sys.MenuDeleteResp
+	DictUpdateResp        = sys.DictUpdateResp
+	DeptUpdateResp        = sys.DeptUpdateResp
+	LoginLogAddResp       = sys.LoginLogAddResp
+	UserListReq           = sys.UserListReq
+	UserDeleteResp        = sys.UserDeleteResp
+	RoleDeleteResp        = sys.RoleDeleteResp
+	SysLogDeleteResp      = sys.SysLogDeleteResp
+	ConfigAddReq          = sys.ConfigAddReq
+	LoginLogListResp      = sys.LoginLogListResp
+	LoginLogDeleteReq     = sys.LoginLogDeleteReq
 	SysLogAddResp         = sys.SysLogAddResp
+	LoginLogListReq       = sys.LoginLogListReq
+	SysLogDeleteReq       = sys.SysLogDeleteReq
+	ConfigUpdateReq       = sys.ConfigUpdateReq
+	LoginResp             = sys.LoginResp
+	UpdateRoleRoleReq     = sys.UpdateRoleRoleReq
+	MenuListReq           = sys.MenuListReq
+	LoginLogListData      = sys.LoginLogListData
+	SysLogAddReq          = sys.SysLogAddReq
+	ConfigAddResp         = sys.ConfigAddResp
+	InfoResp              = sys.InfoResp
+	UserDeleteReq         = sys.UserDeleteReq
+	UserStatusReq         = sys.UserStatusReq
+	DictListData          = sys.DictListData
+	RoleDeleteReq         = sys.RoleDeleteReq
+	QueryMenuByRoleIdReq  = sys.QueryMenuByRoleIdReq
+	DictAddReq            = sys.DictAddReq
+	DictListResp          = sys.DictListResp
+	ConfigListData        = sys.ConfigListData
+	UpdateConfigRoleResp  = sys.UpdateConfigRoleResp
+	UserUpdateResp        = sys.UserUpdateResp
+	RoleListReq           = sys.RoleListReq
+	MenuAddReq            = sys.MenuAddReq
+	QueryMenuByRoleIdResp = sys.QueryMenuByRoleIdResp
+	UpdateConfigRoleReq   = sys.UpdateConfigRoleReq
+	DeptListResp          = sys.DeptListResp
+	RoleListData          = sys.RoleListData
+	MenuUpdateResp        = sys.MenuUpdateResp
+	DeptListReq           = sys.DeptListReq
+	RoleUpdateResp        = sys.RoleUpdateResp
+	DeptDeleteResp        = sys.DeptDeleteResp
+	SysLogListReq         = sys.SysLogListReq
+	SysLogListData        = sys.SysLogListData
+	InfoReq               = sys.InfoReq
+	UserListResp          = sys.UserListResp
+	UserStatusResp        = sys.UserStatusResp
+	UserListData          = sys.UserListData
+	DictListReq           = sys.DictListReq
+	UpdateRoleRoleResp    = sys.UpdateRoleRoleResp
+	DictDeleteResp        = sys.DictDeleteResp
+	DeptUpdateReq         = sys.DeptUpdateReq
+	SysLogListResp        = sys.SysLogListResp
+	ConfigUpdateResp      = sys.ConfigUpdateResp
+	LoginReq              = sys.LoginReq
+	UserUpdateReq         = sys.UserUpdateReq
+	RoleAddReq            = sys.RoleAddReq
+	DeptListData          = sys.DeptListData
+	UserAddResp           = sys.UserAddResp
+	MenuListTree          = sys.MenuListTree
+	MenuUpdateReq         = sys.MenuUpdateReq
 
 	Sys interface {
 		Login(ctx context.Context, in *LoginReq) (*LoginResp, error)
@@ -115,11 +115,11 @@ type (
 		RoleDelete(ctx context.Context, in *RoleDeleteReq) (*RoleDeleteResp, error)
 		UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq) (*UpdateRoleRoleResp, error)
 		QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq) (*QueryMenuByRoleIdResp, error)
+		UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
 		MenuAdd(ctx context.Context, in *MenuAddReq) (*MenuAddResp, error)
 		MenuList(ctx context.Context, in *MenuListReq) (*MenuListResp, error)
 		MenuUpdate(ctx context.Context, in *MenuUpdateReq) (*MenuUpdateResp, error)
 		MenuDelete(ctx context.Context, in *MenuDeleteReq) (*MenuDeleteResp, error)
-		UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
 		DictAdd(ctx context.Context, in *DictAddReq) (*DictAddResp, error)
 		DictList(ctx context.Context, in *DictListReq) (*DictListResp, error)
 		DictUpdate(ctx context.Context, in *DictUpdateReq) (*DictUpdateResp, error)
@@ -222,6 +222,11 @@ func (m *defaultSys) QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleI
 	return client.QueryMenuByRoleId(ctx, in)
 }
 
+func (m *defaultSys) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.UpdateMenuRole(ctx, in)
+}
+
 func (m *defaultSys) MenuAdd(ctx context.Context, in *MenuAddReq) (*MenuAddResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.MenuAdd(ctx, in)
@@ -240,11 +245,6 @@ func (m *defaultSys) MenuUpdate(ctx context.Context, in *MenuUpdateReq) (*MenuUp
 func (m *defaultSys) MenuDelete(ctx context.Context, in *MenuDeleteReq) (*MenuDeleteResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.MenuDelete(ctx, in)
-}
-
-func (m *defaultSys) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error) {
-	client := sys.NewSysClient(m.cli.Conn())
-	return client.UpdateMenuRole(ctx, in)
 }
 
 func (m *defaultSys) DictAdd(ctx context.Context, in *DictAddReq) (*DictAddResp, error) {

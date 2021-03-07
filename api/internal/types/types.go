@@ -878,6 +878,8 @@ type ListMenuData struct {
 	Key      string `json:"key"`       // 菜单名称
 	Title    string `json:"title"`     // 菜单名称
 	ParentId int64  `json:"parent_id"` // 父菜单ID，一级菜单为0
+	Id       int64  `json:"id"`        // 父菜单ID，一级菜单为0
+	Label    string `json:"label"`     // 父菜单ID，一级菜单为0
 }
 
 type ListMenuReq struct {
@@ -1057,13 +1059,14 @@ type ListRoleData struct {
 	DelFlag        int64  `json:"del_flag"`         // 是否删除  -1：已删除  0：正常
 	Label          string `json:"label"`            // 编号
 	Value          string `json:"value"`            // 角色名称
+	Status         int64  `json:"status"`           // 角色名称
 }
 
 type ListRoleReq struct {
 	Current  int64  `json:"current,optional"`
 	PageSize int64  `json:"pageSize,optional"`
 	Name     string `json:"name,optional "`
-	DelFlag  int64  `json:"del_flag,optional "`
+	Status   int64  `json:"del_flag,optional "`
 }
 
 type ListRoleResp struct {
@@ -1714,7 +1717,9 @@ type RoleMenuReq struct {
 
 type RoleMenuResp struct {
 	AllData  []*ListMenuData `json:"allData"`
-	RoleData []string        `json:"userData"`
+	RoleData []int64         `json:"userData"`
+	Code     string          `json:"code"`
+	Message  string          `json:"message"`
 }
 
 type UpdateCartItemReq struct {
@@ -2435,6 +2440,8 @@ type UpdateReturnResonResp struct {
 }
 
 type UpdateRoleMenuReq struct {
+	RoleId  int64   `json:"role_id"`
+	MenuIds []int64 `json:"menu_ids"`
 }
 
 type UpdateRoleMenuResp struct {
@@ -2446,6 +2453,7 @@ type UpdateRoleReq struct {
 	Id     int64  `json:"id"`     // 编号
 	Name   string `json:"name"`   // 角色名称
 	Remark string `json:"remark"` // 备注
+	Status int64  `json:"status"` // 状态
 }
 
 type UpdateRoleResp struct {
@@ -3180,6 +3188,7 @@ type AddReturnResonResp struct {
 type AddRoleReq struct {
 	Name   string `json:"name"`   // 角色名称
 	Remark string `json:"remark"` // 备注
+	Status int64  `json:"status"` // 状态
 }
 
 type AddRoleResp struct {

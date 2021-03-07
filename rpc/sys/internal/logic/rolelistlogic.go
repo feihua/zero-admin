@@ -40,6 +40,7 @@ func (l *RoleListLogic) RoleList(in *sys.RoleListReq) (*sys.RoleListResp, error)
 			LastUpdateBy:   role.LastUpdateBy,
 			LastUpdateTime: role.LastUpdateTime.Format("2006-01-02 15:04:05"),
 			DelFlag:        role.DelFlag,
+			Status:         role.Status,
 		})
 	}
 

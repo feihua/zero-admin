@@ -30,8 +30,12 @@ func (l *RoleUpdateLogic) RoleUpdate(in *sys.RoleUpdateReq) (*sys.RoleUpdateResp
 		Id:             in.Id,
 		Name:           in.Name,
 		Remark:         in.Remark,
+		CreateBy:       "admin",
+		CreateTime:     time.Time{},
 		LastUpdateBy:   in.LastUpdateBy,
 		LastUpdateTime: time.Now(),
+		DelFlag:        0,
+		Status:         in.Status,
 	})
 
 	return &sys.RoleUpdateResp{}, nil
