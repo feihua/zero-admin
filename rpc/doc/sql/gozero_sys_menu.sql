@@ -2,22 +2,22 @@ create table sys_menu
 (
     id               bigint auto_increment comment '编号'
         primary key,
-    name             varchar(50)                         '' comment '菜单名称',
-    parent_id        bigint                              '' comment '父菜单ID，一级菜单为0',
-    url              varchar(200)                        '',
-    perms            varchar(500)                        '' comment '授权(多个用逗号分隔，如：sys:user:add,sys:user:edit)',
-    type             int                                 '' comment '类型   0：目录   1：菜单   2：按钮',
-    icon             varchar(50)                         '' comment '菜单图标',
-    order_num        int                                 '' comment '排序',
-    create_by        varchar(50)                         '' comment '创建人',
-    create_time      timestamp default CURRENT_TIMESTAMP '' comment '创建时间',
-    last_update_by   varchar(50)                         '' comment '更新人',
-    last_update_time datetime                            '' comment '更新时间',
-    del_flag         tinyint   default 0                 '' comment '是否删除  -1：已删除  0：正常',
-    vue_path         varchar(64)                         '' comment 'vue系统的path',
-    vue_component    varchar(64)                         '' comment 'vue的页面',
-    vue_icon         varchar(64)                         '' comment 'vue的图标',
-    vue_redirect     varchar(64)                         '' comment 'vue的路由重定向'
+    name             varchar(50)                         null comment '菜单名称',
+    parent_id        bigint                              null comment '父菜单ID，一级菜单为0',
+    url              varchar(200)                        null,
+    perms            varchar(500)                        null comment '授权(多个用逗号分隔，如：sys:user:add,sys:user:edit)',
+    type             int                                 null comment '类型   0：目录   1：菜单   2：按钮',
+    icon             varchar(50)                         null comment '菜单图标',
+    order_num        int                                 null comment '排序',
+    create_by        varchar(50)                         null comment '创建人',
+    create_time      timestamp default CURRENT_TIMESTAMP null comment '创建时间',
+    last_update_by   varchar(50)                         null comment '更新人',
+    last_update_time datetime                            null comment '更新时间',
+    del_flag         tinyint   default 0                 null comment '是否删除  -1：已删除  0：正常',
+    vue_path         varchar(64)                         null comment 'vue系统的path',
+    vue_component    varchar(64)                         null comment 'vue的页面',
+    vue_icon         varchar(64)                         null comment 'vue的图标',
+    vue_redirect     varchar(64)                         null comment 'vue的路由重定向'
 )
     comment '菜单管理';
 
