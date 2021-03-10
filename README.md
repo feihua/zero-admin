@@ -1,5 +1,9 @@
 #### 项目前端是基于Ant Design Pro来创建的，后端是基于go-zero来创建的一个前后端分离的管理系统
 
+[如果喜欢Ant Design Pro前端版本的，可以点击查看](https://github.com/feihua/go-zero-admin-ui)
+
+[如果喜欢Element Admin UI前端版本的，可以点击查看](https://github.com/feihua/go-zero-admin-vue)
+
 # 1.项目预览
 
 ## 1.1用户
