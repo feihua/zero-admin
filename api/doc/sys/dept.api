@@ -8,7 +8,7 @@ info(
 type (
     addDeptReq struct {
         Name string `json:"name"`                          // 机构名称
-        ParentId int64 `json:"parent_id"`                  // 上级机构ID，一级机构为0
+        ParentId int64 `json:"parent_id,optional"`                  // 上级机构ID，一级机构为0
         OrderNum int64 `json:"order_num"`                  // 排序
     }
     addDeptResp struct {
