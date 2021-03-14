@@ -2,7 +2,7 @@
 
 [如果喜欢Ant Design Pro前端版本的，可以点击查看](https://github.com/feihua/go-zero-admin-ui)
 
-[如果喜欢Element Admin UI前端版本的，可以点击查看](https://github.com/feihua/go-zero-admin-vue)
+[如果喜欢Element Admin UI前端版本的，可以点击查看](https://github.com/feihua/zero-vue-admin)
 
 # 1.项目预览
 
