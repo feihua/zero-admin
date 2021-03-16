@@ -29,5 +29,8 @@ func (l *HomeBrandDeleteLogic) HomeBrandDelete(req types.DeleteHomeBrandReq) (*t
 		Id: req.Id,
 	})
 
-	return &types.DeleteHomeBrandResp{}, nil
+	return &types.DeleteHomeBrandResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

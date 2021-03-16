@@ -29,5 +29,8 @@ func (l *FeightTemplateDeleteLogic) FeightTemplateDelete(req types.DeleteFeightT
 		Id: req.Id,
 	})
 
-	return &types.DeleteFeightTemplateResp{}, nil
+	return &types.DeleteFeightTemplateResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

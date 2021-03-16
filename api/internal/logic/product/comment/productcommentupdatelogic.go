@@ -47,5 +47,8 @@ func (l *ProductCommentUpdateLogic) ProductCommentUpdate(req types.UpdateProduct
 		return nil, err
 	}
 
-	return &types.UpdateProductCommentResp{}, nil
+	return &types.UpdateProductCommentResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

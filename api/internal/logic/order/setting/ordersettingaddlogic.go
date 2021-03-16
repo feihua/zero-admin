@@ -37,5 +37,8 @@ func (l *OrderSettingAddLogic) OrderSettingAdd(req types.AddOrderSettingReq) (*t
 		return nil, err
 	}
 
-	return &types.AddOrderSettingResp{}, nil
+	return &types.AddOrderSettingResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -60,9 +60,11 @@ func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*t
 
 	return &types.ListMemberLevelResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

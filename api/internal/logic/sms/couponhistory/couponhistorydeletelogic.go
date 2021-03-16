@@ -29,5 +29,8 @@ func (l *CouponHistoryDeleteLogic) CouponHistoryDelete(req types.DeleteCouponHis
 		Id: req.Id,
 	})
 
-	return &types.DeleteCouponHistoryResp{}, nil
+	return &types.DeleteCouponHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

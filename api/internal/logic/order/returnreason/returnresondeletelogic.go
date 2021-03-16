@@ -28,5 +28,8 @@ func (l *ReturnResonDeleteLogic) ReturnResonDelete(req types.DeleteReturnResonRe
 		Id: req.Id,
 	})
 
-	return &types.DeleteReturnResonResp{}, nil
+	return &types.DeleteReturnResonResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

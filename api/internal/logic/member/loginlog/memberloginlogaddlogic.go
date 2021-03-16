@@ -38,5 +38,8 @@ func (l *MemberLoginLogAddLogic) MemberLoginLogAdd(req types.AddMemberLoginLogRe
 		return nil, err
 	}
 
-	return &types.AddMemberLoginLogResp{}, nil
+	return &types.AddMemberLoginLogResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -37,5 +37,8 @@ func (l *MemberTaskUpdateLogic) MemberTaskUpdate(req types.UpdateMemberTaskReq) 
 		return nil, err
 	}
 
-	return &types.UpdateMemberTaskResp{}, nil
+	return &types.UpdateMemberTaskResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

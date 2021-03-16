@@ -29,5 +29,8 @@ func (l *ProductCommentDeleteLogic) ProductCommentDelete(req types.DeleteProduct
 		Id: req.Id,
 	})
 
-	return &types.DeleteProductCommentResp{}, nil
+	return &types.DeleteProductCommentResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -28,5 +28,8 @@ func (l *CartItemDeleteLogic) CartItemDelete(req types.DeleteCartItemReq) (*type
 		Id: req.Id,
 	})
 
-	return &types.DeleteCartItemResp{}, nil
+	return &types.DeleteCartItemResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

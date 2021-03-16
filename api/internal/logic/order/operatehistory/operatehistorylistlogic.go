@@ -55,9 +55,11 @@ func (l *OperateHistoryListLogic) OperateHistoryList(req types.ListOperateHistor
 
 	return &types.ListOperateHistoryResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

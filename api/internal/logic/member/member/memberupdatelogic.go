@@ -51,5 +51,8 @@ func (l *MemberUpdateLogic) MemberUpdate(req types.UpdateMemberReq) (*types.Upda
 		return nil, err
 	}
 
-	return &types.UpdateMemberResp{}, nil
+	return &types.UpdateMemberResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

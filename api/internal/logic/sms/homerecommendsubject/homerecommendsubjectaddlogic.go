@@ -36,5 +36,8 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHome
 		return nil, err
 	}
 
-	return &types.AddHomeRecommendSubjectResp{}, nil
+	return &types.AddHomeRecommendSubjectResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

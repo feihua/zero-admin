@@ -38,5 +38,8 @@ func (l *OperateHistoryUpdateLogic) OperateHistoryUpdate(req types.UpdateOperate
 		return nil, err
 	}
 
-	return &types.UpdateOperateHistoryResp{}, nil
+	return &types.UpdateOperateHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

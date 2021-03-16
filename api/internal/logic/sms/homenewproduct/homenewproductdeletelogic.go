@@ -29,5 +29,8 @@ func (l *HomeNewProductDeleteLogic) HomeNewProductDelete(req types.DeleteHomeNew
 		Id: req.Id,
 	})
 
-	return &types.DeleteHomeNewProductResp{}, nil
+	return &types.DeleteHomeNewProductResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

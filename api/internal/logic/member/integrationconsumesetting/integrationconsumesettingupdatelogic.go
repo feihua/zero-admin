@@ -37,5 +37,8 @@ func (l *IntegrationConsumeSettingUpdateLogic) IntegrationConsumeSettingUpdate(r
 		return nil, err
 	}
 
-	return &types.UpdateIntegrationConsumeSettingResp{}, nil
+	return &types.UpdateIntegrationConsumeSettingResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

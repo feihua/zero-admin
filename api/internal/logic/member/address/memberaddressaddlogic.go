@@ -40,5 +40,8 @@ func (l *MemberAddressAddLogic) MemberAddressAdd(req types.AddMemberAddressReq) 
 		return nil, err
 	}
 
-	return &types.AddMemberAddressResp{}, nil
+	return &types.AddMemberAddressResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

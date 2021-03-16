@@ -65,9 +65,11 @@ func (l *CartItemListLogic) CartItemList(req types.ListCartItemReq) (*types.List
 
 	return &types.ListCartItemResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

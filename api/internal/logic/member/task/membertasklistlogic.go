@@ -52,9 +52,11 @@ func (l *MemberTaskListLogic) MemberTaskList(req types.ListMemberTaskReq) (*type
 
 	return &types.ListMemberTaskResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

@@ -53,9 +53,11 @@ func (l *HomeNewProductListLogic) HomeNewProductList(req types.ListHomeNewProduc
 
 	return &types.ListHomeNewProductResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

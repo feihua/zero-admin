@@ -43,5 +43,8 @@ func (l *ProductBrandUpdateLogic) ProductBrandUpdate(req types.UpdateProductBran
 		return nil, err
 	}
 
-	return &types.UpdateProductBrandResp{}, nil
+	return &types.UpdateProductBrandResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

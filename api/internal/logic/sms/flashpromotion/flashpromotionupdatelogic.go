@@ -38,5 +38,8 @@ func (l *FlashPromotionUpdateLogic) FlashPromotionUpdate(req types.UpdateFlashPr
 		return nil, err
 	}
 
-	return &types.UpdateFlashPromotionResp{}, nil
+	return &types.UpdateFlashPromotionResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

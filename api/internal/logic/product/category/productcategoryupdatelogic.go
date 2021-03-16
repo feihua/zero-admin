@@ -44,5 +44,8 @@ func (l *ProductCategoryUpdateLogic) ProductCategoryUpdate(req types.UpdateProdu
 		return nil, err
 	}
 
-	return &types.UpdateProductCategoryResp{}, nil
+	return &types.UpdateProductCategoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

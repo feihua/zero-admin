@@ -58,9 +58,11 @@ func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) 
 
 	return &types.ListProductBrandResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

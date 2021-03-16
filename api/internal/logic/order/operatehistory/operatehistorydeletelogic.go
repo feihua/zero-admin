@@ -28,5 +28,8 @@ func (l *OperateHistoryDeleteLogic) OperateHistoryDelete(req types.DeleteOperate
 		Id: req.Id,
 	})
 
-	return &types.DeleteOperateHistoryResp{}, nil
+	return &types.DeleteOperateHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

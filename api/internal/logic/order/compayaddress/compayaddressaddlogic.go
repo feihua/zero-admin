@@ -41,5 +41,8 @@ func (l *CompayAddressAddLogic) CompayAddressAdd(req types.AddCompayAddressReq) 
 		return nil, err
 	}
 
-	return &types.AddCompayAddressResp{}, nil
+	return &types.AddCompayAddressResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

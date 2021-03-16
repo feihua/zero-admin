@@ -42,5 +42,8 @@ func (l *ProductBrandAddLogic) ProductBrandAdd(req types.AddProductBrandReq) (*t
 		return nil, err
 	}
 
-	return &types.AddProductBrandResp{}, nil
+	return &types.AddProductBrandResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

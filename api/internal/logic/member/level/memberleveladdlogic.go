@@ -44,5 +44,8 @@ func (l *MemberLevelAddLogic) MemberLevelAdd(req types.AddMemberLevelReq) (*type
 		return nil, err
 	}
 
-	return &types.AddMemberLevelResp{}, nil
+	return &types.AddMemberLevelResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

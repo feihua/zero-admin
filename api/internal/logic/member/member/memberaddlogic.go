@@ -50,5 +50,8 @@ func (l *MemberAddLogic) MemberAdd(req types.AddMemberReq) (*types.AddMemberResp
 		return nil, err
 	}
 
-	return &types.AddMemberResp{}, nil
+	return &types.AddMemberResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

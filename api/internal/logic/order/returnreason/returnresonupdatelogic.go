@@ -36,5 +36,8 @@ func (l *ReturnResonUpdateLogic) ReturnResonUpdate(req types.UpdateReturnResonRe
 		return nil, err
 	}
 
-	return &types.UpdateReturnResonResp{}, nil
+	return &types.UpdateReturnResonResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

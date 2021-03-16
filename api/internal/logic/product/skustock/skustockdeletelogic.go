@@ -29,5 +29,8 @@ func (l *SkuStockDeleteLogic) SkuStockDelete(req types.DeleteSkuStockReq) (*type
 		Id: req.Id,
 	})
 
-	return &types.DeleteSkuStockResp{}, nil
+	return &types.DeleteSkuStockResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

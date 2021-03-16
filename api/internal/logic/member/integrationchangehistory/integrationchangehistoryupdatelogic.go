@@ -40,5 +40,8 @@ func (l *IntegrationChangeHistoryUpdateLogic) IntegrationChangeHistoryUpdate(req
 		return nil, err
 	}
 
-	return &types.UpdateIntegrationChangeHistoryResp{}, nil
+	return &types.UpdateIntegrationChangeHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

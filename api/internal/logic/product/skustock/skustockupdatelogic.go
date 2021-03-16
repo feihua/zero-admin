@@ -43,5 +43,8 @@ func (l *SkuStockUpdateLogic) SkuStockUpdate(req types.UpdateSkuStockReq) (*type
 		return nil, err
 	}
 
-	return &types.UpdateSkuStockResp{}, nil
+	return &types.UpdateSkuStockResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

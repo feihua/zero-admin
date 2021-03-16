@@ -29,5 +29,8 @@ func (l *MemberLoginLogDeleteLogic) MemberLoginLogDelete(req types.DeleteMemberL
 		Id: req.Id,
 	})
 
-	return &types.DeleteMemberLoginLogResp{}, nil
+	return &types.DeleteMemberLoginLogResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

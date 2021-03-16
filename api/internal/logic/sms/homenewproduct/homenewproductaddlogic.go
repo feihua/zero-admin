@@ -36,5 +36,8 @@ func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductRe
 		return nil, err
 	}
 
-	return &types.AddHomeNewProductResp{}, nil
+	return &types.AddHomeNewProductResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

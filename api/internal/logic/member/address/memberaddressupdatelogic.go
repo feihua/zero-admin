@@ -42,5 +42,8 @@ func (l *MemberAddressUpdateLogic) MemberAddressUpdate(req types.UpdateMemberAdd
 		return nil, err
 	}
 
-	return &types.UpdateMemberAddressResp{}, nil
+	return &types.UpdateMemberAddressResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

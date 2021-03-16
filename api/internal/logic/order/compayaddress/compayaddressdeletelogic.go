@@ -28,5 +28,8 @@ func (l *CompayAddressDeleteLogic) CompayAddressDelete(req types.DeleteCompayAdd
 		Id: req.Id,
 	})
 
-	return &types.DeleteCompayAddressResp{}, nil
+	return &types.DeleteCompayAddressResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

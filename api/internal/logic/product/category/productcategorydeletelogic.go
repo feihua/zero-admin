@@ -29,5 +29,8 @@ func (l *ProductCategoryDeleteLogic) ProductCategoryDelete(req types.DeleteProdu
 		Id: req.Id,
 	})
 
-	return &types.DeleteProductCategoryResp{}, nil
+	return &types.DeleteProductCategoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

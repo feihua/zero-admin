@@ -29,5 +29,8 @@ func (l *IntegrationConsumeSettingDeleteLogic) IntegrationConsumeSettingDelete(r
 		Id: req.Id,
 	})
 
-	return &types.DeleteIntegrationConsumeSettingResp{}, nil
+	return &types.DeleteIntegrationConsumeSettingResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

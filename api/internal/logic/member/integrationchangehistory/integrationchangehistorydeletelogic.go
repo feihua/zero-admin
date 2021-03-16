@@ -29,5 +29,8 @@ func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(req
 		Id: req.Id,
 	})
 
-	return &types.DeleteIntegrationChangeHistoryResp{}, nil
+	return &types.DeleteIntegrationChangeHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

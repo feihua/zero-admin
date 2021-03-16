@@ -29,5 +29,8 @@ func (l *CouponDeleteLogic) CouponDelete(req types.DeleteCouponReq) (*types.Dele
 		Id: req.Id,
 	})
 
-	return &types.DeleteCouponResp{}, nil
+	return &types.DeleteCouponResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -39,5 +39,8 @@ func (l *FeightTemplateAddLogic) FeightTemplateAdd(req types.AddFeightTemplateRe
 		return nil, err
 	}
 
-	return &types.AddFeightTemplateResp{}, nil
+	return &types.AddFeightTemplateResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

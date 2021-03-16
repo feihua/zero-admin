@@ -40,5 +40,8 @@ func (l *FeightTemplateUpdateLogic) FeightTemplateUpdate(req types.UpdateFeightT
 		return nil, err
 	}
 
-	return &types.UpdateFeightTemplateResp{}, nil
+	return &types.UpdateFeightTemplateResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

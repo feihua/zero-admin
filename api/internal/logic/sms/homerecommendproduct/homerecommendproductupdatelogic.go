@@ -37,5 +37,8 @@ func (l *HomeRecommendProductUpdateLogic) HomeRecommendProductUpdate(req types.U
 		return nil, err
 	}
 
-	return &types.UpdateHomeRecommendProductResp{}, nil
+	return &types.UpdateHomeRecommendProductResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

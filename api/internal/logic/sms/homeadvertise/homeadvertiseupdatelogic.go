@@ -44,5 +44,8 @@ func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(req types.UpdateHomeAdver
 		return nil, err
 	}
 
-	return &types.UpdateHomeAdvertiseResp{}, nil
+	return &types.UpdateHomeAdvertiseResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -33,6 +33,8 @@ type (
         PageSize int64 `json:"pageSize"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
+        Code string `json:"code"`
+        Message string `json:"message"`
     }
     UpdateMemberPriceReq struct {
         Id              int64   `json:"id"`

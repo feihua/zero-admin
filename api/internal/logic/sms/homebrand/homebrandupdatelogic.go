@@ -37,5 +37,8 @@ func (l *HomeBrandUpdateLogic) HomeBrandUpdate(req types.UpdateHomeBrandReq) (*t
 		return nil, err
 	}
 
-	return &types.UpdateHomeBrandResp{}, nil
+	return &types.UpdateHomeBrandResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

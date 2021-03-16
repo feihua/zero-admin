@@ -43,5 +43,8 @@ func (l *CouponHistoryUpdateLogic) CouponHistoryUpdate(req types.UpdateCouponHis
 		return nil, err
 	}
 
-	return &types.UpdateCouponHistoryResp{}, nil
+	return &types.UpdateCouponHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

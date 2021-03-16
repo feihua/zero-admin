@@ -48,5 +48,8 @@ func (l *MemberStatisticsInfoUpdateLogic) MemberStatisticsInfoUpdate(req types.U
 		return nil, err
 	}
 
-	return &types.UpdateMemberStatisticsInfoResp{}, nil
+	return &types.UpdateMemberStatisticsInfoResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

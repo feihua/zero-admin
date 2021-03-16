@@ -37,5 +37,8 @@ func (l *MemberPriceUpdateLogic) MemberPriceUpdate(req types.UpdateMemberPriceRe
 		return nil, err
 	}
 
-	return &types.UpdateMemberPriceResp{}, nil
+	return &types.UpdateMemberPriceResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

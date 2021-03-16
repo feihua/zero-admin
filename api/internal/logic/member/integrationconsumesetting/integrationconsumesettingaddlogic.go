@@ -36,5 +36,8 @@ func (l *IntegrationConsumeSettingAddLogic) IntegrationConsumeSettingAdd(req typ
 		return nil, err
 	}
 
-	return &types.AddIntegrationConsumeSettingResp{}, nil
+	return &types.AddIntegrationConsumeSettingResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

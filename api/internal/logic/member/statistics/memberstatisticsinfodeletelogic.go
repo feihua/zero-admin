@@ -29,5 +29,8 @@ func (l *MemberStatisticsInfoDeleteLogic) MemberStatisticsInfoDelete(req types.D
 		Id: req.Id,
 	})
 
-	return &types.DeleteMemberStatisticsInfoResp{}, nil
+	return &types.DeleteMemberStatisticsInfoResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

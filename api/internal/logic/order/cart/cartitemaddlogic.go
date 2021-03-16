@@ -46,5 +46,8 @@ func (l *CartItemAddLogic) CartItemAdd(req types.AddCartItemReq) (*types.AddCart
 		return nil, err
 	}
 
-	return &types.AddCartItemResp{}, nil
+	return &types.AddCartItemResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

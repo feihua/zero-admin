@@ -29,5 +29,8 @@ func (l *GrowthChangeHistoryDeleteLogic) GrowthChangeHistoryDelete(req types.Del
 		Id: req.Id,
 	})
 
-	return &types.DeleteGrowthChangeHistoryResp{}, nil
+	return &types.DeleteGrowthChangeHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

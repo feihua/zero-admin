@@ -50,5 +50,8 @@ func (l *CouponUpdateLogic) CouponUpdate(req types.UpdateCouponReq) (*types.Upda
 		return nil, err
 	}
 
-	return &types.UpdateCouponResp{}, nil
+	return &types.UpdateCouponResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

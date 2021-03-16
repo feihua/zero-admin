@@ -47,5 +47,8 @@ func (l *MemberStatisticsInfoAddLogic) MemberStatisticsInfoAdd(req types.AddMemb
 		return nil, err
 	}
 
-	return &types.AddMemberStatisticsInfoResp{}, nil
+	return &types.AddMemberStatisticsInfoResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

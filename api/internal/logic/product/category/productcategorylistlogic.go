@@ -59,9 +59,11 @@ func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCate
 
 	return &types.ListProductCategoryResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

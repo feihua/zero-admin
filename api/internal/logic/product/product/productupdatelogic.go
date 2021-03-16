@@ -74,5 +74,8 @@ func (l *ProductUpdateLogic) ProductUpdate(req types.UpdateProductReq) (*types.U
 		return nil, err
 	}
 
-	return &types.UpdateProductResp{}, nil
+	return &types.UpdateProductResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

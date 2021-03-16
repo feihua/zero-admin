@@ -45,5 +45,8 @@ func (l *MemberLevelUpdateLogic) MemberLevelUpdate(req types.UpdateMemberLevelRe
 		return nil, err
 	}
 
-	return &types.UpdateMemberLevelResp{}, nil
+	return &types.UpdateMemberLevelResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

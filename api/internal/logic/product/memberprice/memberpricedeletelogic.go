@@ -29,5 +29,8 @@ func (l *MemberPriceDeleteLogic) MemberPriceDelete(req types.DeleteMemberPriceRe
 		Id: req.Id,
 	})
 
-	return &types.DeleteMemberPriceResp{}, nil
+	return &types.DeleteMemberPriceResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

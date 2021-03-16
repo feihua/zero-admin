@@ -46,5 +46,8 @@ func (l *ProductCommentAddLogic) ProductCommentAdd(req types.AddProductCommentRe
 		return nil, err
 	}
 
-	return &types.AddProductCommentResp{}, nil
+	return &types.AddProductCommentResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

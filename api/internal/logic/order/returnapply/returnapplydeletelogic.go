@@ -28,5 +28,8 @@ func (l *ReturnApplyDeleteLogic) ReturnApplyDelete(req types.DeleteReturnApplyRe
 		Id: req.Id,
 	})
 
-	return &types.DeleteReturnApplyResp{}, nil
+	return &types.DeleteReturnApplyResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

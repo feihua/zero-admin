@@ -43,5 +43,8 @@ func (l *ProductCategoryAddLogic) ProductCategoryAdd(req types.AddProductCategor
 		return nil, err
 	}
 
-	return &types.AddProductCategoryResp{}, nil
+	return &types.AddProductCategoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

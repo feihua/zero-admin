@@ -29,5 +29,8 @@ func (l *MemberTaskDeleteLogic) MemberTaskDelete(req types.DeleteMemberTaskReq) 
 		Id: req.Id,
 	})
 
-	return &types.DeleteMemberTaskResp{}, nil
+	return &types.DeleteMemberTaskResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

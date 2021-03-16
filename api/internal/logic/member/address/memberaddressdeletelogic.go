@@ -29,5 +29,8 @@ func (l *MemberAddressDeleteLogic) MemberAddressDelete(req types.DeleteMemberAdd
 		Id: req.Id,
 	})
 
-	return &types.DeleteMemberAddressResp{}, nil
+	return &types.DeleteMemberAddressResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

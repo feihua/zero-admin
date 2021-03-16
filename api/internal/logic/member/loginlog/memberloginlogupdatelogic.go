@@ -39,5 +39,8 @@ func (l *MemberLoginLogUpdateLogic) MemberLoginLogUpdate(req types.UpdateMemberL
 		return nil, err
 	}
 
-	return &types.UpdateMemberLoginLogResp{}, nil
+	return &types.UpdateMemberLoginLogResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

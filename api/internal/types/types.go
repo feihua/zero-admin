@@ -463,6 +463,8 @@ type ListCouponHistoryResp struct {
 	PageSize int64                     `json:"pageSize"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
 }
 
 type ListCouponReq struct {
@@ -610,6 +612,8 @@ type ListGrowthChangeHistoryResp struct {
 	PageSize int64                           `json:"pageSize"`
 	Success  bool                            `json:"success"`
 	Total    int64                           `json:"total"`
+	Code     string                          `json:"code"`
+	Message  string                          `json:"message"`
 }
 
 type ListHomeAdvertiseReq struct {
@@ -754,6 +758,8 @@ type ListMemberAddressResp struct {
 	PageSize int64                     `json:"pageSize"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
 }
 
 type ListMemberLevelReq struct {
@@ -797,6 +803,8 @@ type ListMemberPriceResp struct {
 	PageSize int64                   `json:"pageSize"`
 	Success  bool                    `json:"success"`
 	Total    int64                   `json:"total"`
+	Code     string                  `json:"code"`
+	Message  string                  `json:"message"`
 }
 
 type ListMemberReq struct {
@@ -971,6 +979,8 @@ type ListProductBrandResp struct {
 	PageSize int64                    `json:"pageSize"`
 	Success  bool                     `json:"success"`
 	Total    int64                    `json:"total"`
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
 }
 
 type ListProductCategoryReq struct {
@@ -1090,6 +1100,8 @@ type ListSkuStockResp struct {
 	PageSize int64                `json:"pageSize"`
 	Success  bool                 `json:"success"`
 	Total    int64                `json:"total"`
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
 }
 
 type ListSysLogData struct {

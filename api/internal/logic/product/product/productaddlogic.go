@@ -73,5 +73,8 @@ func (l *ProductAddLogic) ProductAdd(req types.AddProductReq) (*types.AddProduct
 		return nil, err
 	}
 
-	return &types.AddProductResp{}, nil
+	return &types.AddProductResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

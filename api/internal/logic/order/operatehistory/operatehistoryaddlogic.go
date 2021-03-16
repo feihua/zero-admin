@@ -37,5 +37,8 @@ func (l *OperateHistoryAddLogic) OperateHistoryAdd(req types.AddOperateHistoryRe
 		return nil, err
 	}
 
-	return &types.AddOperateHistoryResp{}, nil
+	return &types.AddOperateHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

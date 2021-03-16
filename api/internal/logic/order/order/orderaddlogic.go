@@ -70,5 +70,8 @@ func (l *OrderAddLogic) OrderAdd(req types.AddOrderReq) (*types.AddOrderResp, er
 		return nil, err
 	}
 
-	return &types.AddOrderResp{}, nil
+	return &types.AddOrderResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

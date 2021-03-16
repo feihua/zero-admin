@@ -43,5 +43,8 @@ func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(req types.AddHomeAdvertiseReq) 
 		return nil, err
 	}
 
-	return &types.AddHomeAdvertiseResp{}, nil
+	return &types.AddHomeAdvertiseResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

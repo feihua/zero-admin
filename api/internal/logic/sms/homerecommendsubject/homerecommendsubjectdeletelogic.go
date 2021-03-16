@@ -29,5 +29,8 @@ func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req types.D
 		Id: req.Id,
 	})
 
-	return &types.DeleteHomeRecommendSubjectResp{}, nil
+	return &types.DeleteHomeRecommendSubjectResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

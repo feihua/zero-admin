@@ -38,5 +38,8 @@ func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(req types.AddMemberRule
 		return nil, err
 	}
 
-	return &types.AddMemberRuleSettingResp{}, nil
+	return &types.AddMemberRuleSettingResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

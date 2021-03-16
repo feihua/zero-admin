@@ -62,9 +62,11 @@ func (l *ProductCommentListLogic) ProductCommentList(req types.ListProductCommen
 
 	return &types.ListProductCommentResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

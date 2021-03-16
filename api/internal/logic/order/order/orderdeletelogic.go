@@ -29,5 +29,8 @@ func (l *OrderDeleteLogic) OrderDelete(req types.DeleteOrderReq) (*types.DeleteO
 		Id: req.Id,
 	})
 
-	return &types.DeleteOrderResp{}, nil
+	return &types.DeleteOrderResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -88,9 +88,11 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 
 	return &types.ListProductResp{
 		Current:  req.Current,
-		Data:     nil,
+		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

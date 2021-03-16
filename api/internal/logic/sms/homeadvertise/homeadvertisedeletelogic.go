@@ -29,5 +29,8 @@ func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(req types.DeleteHomeAdver
 		Id: req.Id,
 	})
 
-	return &types.DeleteHomeAdvertiseResp{}, nil
+	return &types.DeleteHomeAdvertiseResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

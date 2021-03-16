@@ -61,5 +61,7 @@ func (l *MemberAddressListLogic) MemberAddressList(req types.ListMemberAddressRe
 		PageSize: req.PageSize,
 		Success:  true,
 		Total:    resp.Total,
+		Code:     "000000",
+		Message:  "",
 	}, nil
 }

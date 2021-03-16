@@ -42,5 +42,8 @@ func (l *CouponHistoryAddLogic) CouponHistoryAdd(req types.AddCouponHistoryReq) 
 		return nil, err
 	}
 
-	return &types.AddCouponHistoryResp{}, nil
+	return &types.AddCouponHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

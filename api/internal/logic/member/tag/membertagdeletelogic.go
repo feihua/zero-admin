@@ -29,5 +29,8 @@ func (l *MemberTagDeleteLogic) MemberTagDelete(req types.DeleteMemberTagReq) (*t
 		Id: req.Id,
 	})
 
-	return &types.DeleteMemberTagResp{}, nil
+	return &types.DeleteMemberTagResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

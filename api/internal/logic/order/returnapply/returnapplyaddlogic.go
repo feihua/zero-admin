@@ -58,5 +58,8 @@ func (l *ReturnApplyAddLogic) ReturnApplyAdd(req types.AddReturnApplyReq) (*type
 		return nil, err
 	}
 
-	return &types.AddReturnApplyResp{}, nil
+	return &types.AddReturnApplyResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

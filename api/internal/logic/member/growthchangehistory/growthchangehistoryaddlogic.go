@@ -38,5 +38,8 @@ func (l *GrowthChangeHistoryAddLogic) GrowthChangeHistoryAdd(req types.AddGrowth
 		return nil, err
 	}
 
-	return &types.AddGrowthChangeHistoryResp{}, nil
+	return &types.AddGrowthChangeHistoryResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

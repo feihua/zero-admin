@@ -38,5 +38,8 @@ func (l *OrderSettingUpdateLogic) OrderSettingUpdate(req types.UpdateOrderSettin
 		return nil, err
 	}
 
-	return &types.UpdateOrderSettingResp{}, nil
+	return &types.UpdateOrderSettingResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

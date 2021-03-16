@@ -36,5 +36,8 @@ func (l *MemberTagUpdateLogic) MemberTagUpdate(req types.UpdateMemberTagReq) (*t
 		return nil, err
 	}
 
-	return &types.UpdateMemberTagResp{}, nil
+	return &types.UpdateMemberTagResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

@@ -37,5 +37,8 @@ func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req types.AddFl
 		return nil, err
 	}
 
-	return &types.AddFlashPromotionSessionResp{}, nil
+	return &types.AddFlashPromotionSessionResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

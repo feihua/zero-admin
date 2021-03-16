@@ -42,5 +42,8 @@ func (l *SkuStockAddLogic) SkuStockAdd(req types.AddSkuStockReq) (*types.AddSkuS
 		return nil, err
 	}
 
-	return &types.AddSkuStockResp{}, nil
+	return &types.AddSkuStockResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

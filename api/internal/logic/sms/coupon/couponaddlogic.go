@@ -49,5 +49,8 @@ func (l *CouponAddLogic) CouponAdd(req types.AddCouponReq) (*types.AddCouponResp
 		return nil, err
 	}
 
-	return &types.AddCouponResp{}, nil
+	return &types.AddCouponResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

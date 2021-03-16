@@ -29,5 +29,8 @@ func (l *FlashPromotionSessionDeleteLogic) FlashPromotionSessionDelete(req types
 		Id: req.Id,
 	})
 
-	return &types.DeleteFlashPromotionSessionResp{}, nil
+	return &types.DeleteFlashPromotionSessionResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

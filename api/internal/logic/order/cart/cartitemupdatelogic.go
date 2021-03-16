@@ -47,5 +47,8 @@ func (l *CartItemUpdateLogic) CartItemUpdate(req types.UpdateCartItemReq) (*type
 		return nil, err
 	}
 
-	return &types.UpdateCartItemResp{}, nil
+	return &types.UpdateCartItemResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

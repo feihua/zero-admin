@@ -29,5 +29,8 @@ func (l *MemberRuleSettingDeleteLogic) MemberRuleSettingDelete(req types.DeleteM
 		Id: req.Id,
 	})
 
-	return &types.DeleteMemberRuleSettingResp{}, nil
+	return &types.DeleteMemberRuleSettingResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

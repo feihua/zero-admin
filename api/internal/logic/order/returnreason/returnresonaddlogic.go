@@ -35,5 +35,8 @@ func (l *ReturnResonAddLogic) ReturnResonAdd(req types.AddReturnResonReq) (*type
 		return nil, err
 	}
 
-	return &types.AddReturnResonResp{}, nil
+	return &types.AddReturnResonResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

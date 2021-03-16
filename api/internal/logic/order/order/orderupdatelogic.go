@@ -71,5 +71,8 @@ func (l *OrderUpdateLogic) OrderUpdate(req types.UpdateOrderReq) (*types.UpdateO
 		return nil, err
 	}
 
-	return &types.UpdateOrderResp{}, nil
+	return &types.UpdateOrderResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }

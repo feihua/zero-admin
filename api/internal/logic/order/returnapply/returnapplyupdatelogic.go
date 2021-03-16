@@ -59,5 +59,8 @@ func (l *ReturnApplyUpdateLogic) ReturnApplyUpdate(req types.UpdateReturnApplyRe
 		return nil, err
 	}
 
-	return &types.UpdateReturnApplyResp{}, nil
+	return &types.UpdateReturnApplyResp{
+		Code:    "000000",
+		Message: "",
+	}, nil
 }
