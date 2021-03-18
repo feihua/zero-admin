@@ -96,6 +96,22 @@ func (m *UmsMemberModel) FindAll(Current int64, PageSize int64) (*[]UmsMember, e
 	}
 }
 
+func (m *UmsMemberModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *UmsMemberModel) FindOneByUsername(username string) (*UmsMember, error) {
 	var resp UmsMember
 	query := fmt.Sprintf("select %s from %s where username = ? limit 1", umsMemberRows, m.table)

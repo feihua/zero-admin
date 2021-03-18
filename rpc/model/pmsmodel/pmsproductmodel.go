@@ -119,6 +119,22 @@ func (m *PmsProductModel) FindAll(Current int64, PageSize int64) (*[]PmsProduct,
 	}
 }
 
+func (m *PmsProductModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *PmsProductModel) Update(data PmsProduct) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsProductRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.BrandId, data.ProductCategoryId, data.FeightTemplateId, data.ProductAttributeCategoryId, data.Name, data.Pic, data.ProductSn, data.DeleteStatus, data.PublishStatus, data.NewStatus, data.RecommandStatus, data.VerifyStatus, data.Sort, data.Sale, data.Price, data.PromotionPrice, data.GiftGrowth, data.GiftPoint, data.UsePointLimit, data.SubTitle, data.Description, data.OriginalPrice, data.Stock, data.LowStock, data.Unit, data.Weight, data.PreviewStatus, data.ServiceIds, data.Keywords, data.Note, data.AlbumPics, data.DetailTitle, data.DetailDesc, data.DetailHtml, data.DetailMobileHtml, data.PromotionStartTime, data.PromotionEndTime, data.PromotionPerLimit, data.PromotionType, data.BrandName, data.ProductCategoryName, data.Id)

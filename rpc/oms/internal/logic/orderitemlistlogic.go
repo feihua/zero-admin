@@ -26,7 +26,7 @@ func NewOrderItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ord
 
 func (l *OrderItemListLogic) OrderItemList(in *oms.OrderItemListReq) (*oms.OrderItemListResp, error) {
 	all, _ := l.svcCtx.OmsOrderItemModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.OmsOrderItemModel.Count()
 
 	var list []*oms.OrderItemListData
 	for _, item := range *all {
@@ -58,7 +58,7 @@ func (l *OrderItemListLogic) OrderItemList(in *oms.OrderItemListReq) (*oms.Order
 
 	fmt.Println(list)
 	return &oms.OrderItemListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

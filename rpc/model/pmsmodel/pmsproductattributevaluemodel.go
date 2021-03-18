@@ -80,6 +80,22 @@ func (m *PmsProductAttributeValueModel) FindAll(Current int64, PageSize int64) (
 	}
 }
 
+func (m *PmsProductAttributeValueModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *PmsProductAttributeValueModel) Update(data PmsProductAttributeValue) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsProductAttributeValueRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductId, data.ProductAttributeId, data.Value, data.Id)

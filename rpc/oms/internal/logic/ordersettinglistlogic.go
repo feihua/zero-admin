@@ -26,7 +26,7 @@ func NewOrderSettingListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 func (l *OrderSettingListLogic) OrderSettingList(in *oms.OrderSettingListReq) (*oms.OrderSettingListResp, error) {
 	all, _ := l.svcCtx.OmsOrderSettingModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.OmsOrderSettingModel.Count()
 
 	var list []*oms.OrderSettingListData
 	for _, item := range *all {
@@ -43,7 +43,7 @@ func (l *OrderSettingListLogic) OrderSettingList(in *oms.OrderSettingListReq) (*
 
 	fmt.Println(list)
 	return &oms.OrderSettingListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

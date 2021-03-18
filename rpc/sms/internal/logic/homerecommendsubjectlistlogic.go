@@ -25,7 +25,7 @@ func NewHomeRecommendSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(in *sms.HomeRecommendSubjectListReq) (*sms.HomeRecommendSubjectListResp, error) {
 	all, _ := l.svcCtx.SmsHomeRecommendSubjectModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SmsHomeRecommendSubjectModel.Count()
 
 	var list []*sms.HomeRecommendSubjectListData
 	for _, item := range *all {
@@ -41,7 +41,7 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(in *sms.HomeRec
 
 	fmt.Println(list)
 	return &sms.HomeRecommendSubjectListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

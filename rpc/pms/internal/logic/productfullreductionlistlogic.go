@@ -25,7 +25,7 @@ func NewProductFullReductionListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 func (l *ProductFullReductionListLogic) ProductFullReductionList(in *pms.ProductFullReductionListReq) (*pms.ProductFullReductionListResp, error) {
 	all, _ := l.svcCtx.PmsProductFullReductionModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsProductFullReductionModel.Count()
 
 	var list []*pms.ProductFullReductionListData
 	for _, item := range *all {
@@ -40,7 +40,7 @@ func (l *ProductFullReductionListLogic) ProductFullReductionList(in *pms.Product
 
 	fmt.Println(list)
 	return &pms.ProductFullReductionListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

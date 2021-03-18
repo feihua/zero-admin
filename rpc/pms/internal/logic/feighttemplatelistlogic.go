@@ -25,7 +25,7 @@ func NewFeightTemplateListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 func (l *FeightTemplateListLogic) FeightTemplateList(in *pms.FeightTemplateListReq) (*pms.FeightTemplateListResp, error) {
 	all, _ := l.svcCtx.PmsFeightTemplateModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsFeightTemplateModel.Count()
 
 	var list []*pms.FeightTemplateListData
 	for _, item := range *all {
@@ -44,7 +44,7 @@ func (l *FeightTemplateListLogic) FeightTemplateList(in *pms.FeightTemplateListR
 
 	fmt.Println(list)
 	return &pms.FeightTemplateListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

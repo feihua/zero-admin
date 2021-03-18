@@ -25,7 +25,7 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SkuS
 
 func (l *SkuStockListLogic) SkuStockList(in *pms.SkuStockListReq) (*pms.SkuStockListResp, error) {
 	all, _ := l.svcCtx.PmsSkuStockModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsSkuStockModel.Count()
 
 	var list []*pms.SkuStockListData
 	for _, item := range *all {
@@ -47,7 +47,7 @@ func (l *SkuStockListLogic) SkuStockList(in *pms.SkuStockListReq) (*pms.SkuStock
 
 	fmt.Println(list)
 	return &pms.SkuStockListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

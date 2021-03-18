@@ -26,7 +26,7 @@ func NewOrderReturnReasonListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 func (l *OrderReturnReasonListLogic) OrderReturnReasonList(in *oms.OrderReturnReasonListReq) (*oms.OrderReturnReasonListResp, error) {
 	all, _ := l.svcCtx.OmsOrderReturnReasonModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.OmsOrderReturnReasonModel.Count()
 
 	var list []*oms.OrderReturnReasonListData
 	for _, item := range *all {
@@ -41,7 +41,7 @@ func (l *OrderReturnReasonListLogic) OrderReturnReasonList(in *oms.OrderReturnRe
 
 	fmt.Println(list)
 	return &oms.OrderReturnReasonListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

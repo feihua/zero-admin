@@ -26,7 +26,7 @@ func NewMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 
 func (l *MemberLevelListLogic) MemberLevelList(in *ums.MemberLevelListReq) (*ums.MemberLevelListResp, error) {
 	all, _ := l.svcCtx.UmsMemberLevelModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberLevelModel.Count()
 
 	var list []*ums.MemberLevelListData
 	for _, item := range *all {
@@ -50,7 +50,7 @@ func (l *MemberLevelListLogic) MemberLevelList(in *ums.MemberLevelListReq) (*ums
 
 	fmt.Println(list)
 	return &ums.MemberLevelListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

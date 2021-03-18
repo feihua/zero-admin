@@ -25,7 +25,7 @@ func NewAlbumPicListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Albu
 
 func (l *AlbumPicListLogic) AlbumPicList(in *pms.AlbumPicListReq) (*pms.AlbumPicListResp, error) {
 	all, _ := l.svcCtx.PmsAlbumPicModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsAlbumPicModel.Count()
 
 	var list []*pms.AlbumPicListData
 	for _, item := range *all {
@@ -39,7 +39,7 @@ func (l *AlbumPicListLogic) AlbumPicList(in *pms.AlbumPicListReq) (*pms.AlbumPic
 
 	fmt.Println(list)
 	return &pms.AlbumPicListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

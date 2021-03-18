@@ -25,7 +25,7 @@ func NewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Produ
 
 func (l *ProductListLogic) ProductList(in *pms.ProductListReq) (*pms.ProductListResp, error) {
 	all, _ := l.svcCtx.PmsProductModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsProductModel.Count()
 
 	var list []*pms.ProductListData
 	for _, product := range *all {
@@ -78,7 +78,7 @@ func (l *ProductListLogic) ProductList(in *pms.ProductListReq) (*pms.ProductList
 
 	fmt.Println(list)
 	return &pms.ProductListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

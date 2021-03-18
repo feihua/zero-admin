@@ -25,7 +25,7 @@ func NewFlashPromotionSessionListLogic(ctx context.Context, svcCtx *svc.ServiceC
 
 func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(in *sms.FlashPromotionSessionListReq) (*sms.FlashPromotionSessionListResp, error) {
 	all, _ := l.svcCtx.SmsFlashPromotionSessionModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SmsFlashPromotionSessionModel.Count()
 
 	var list []*sms.FlashPromotionSessionListData
 	for _, item := range *all {
@@ -42,7 +42,7 @@ func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(in *sms.Flash
 
 	fmt.Println(list)
 	return &sms.FlashPromotionSessionListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

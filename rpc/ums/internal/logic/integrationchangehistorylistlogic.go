@@ -26,7 +26,7 @@ func NewIntegrationChangeHistoryListLogic(ctx context.Context, svcCtx *svc.Servi
 
 func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(in *ums.IntegrationChangeHistoryListReq) (*ums.IntegrationChangeHistoryListResp, error) {
 	all, _ := l.svcCtx.UmsIntegrationChangeHistoryModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsIntegrationChangeHistoryModel.Count()
 
 	var list []*ums.IntegrationChangeHistoryListData
 	for _, item := range *all {
@@ -45,7 +45,7 @@ func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(in *ums
 
 	fmt.Println(list)
 	return &ums.IntegrationChangeHistoryListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

@@ -93,6 +93,22 @@ func (m *UmsMemberStatisticsInfoModel) FindAll(Current int64, PageSize int64) (*
 	}
 }
 
+func (m *UmsMemberStatisticsInfoModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *UmsMemberStatisticsInfoModel) Update(data UmsMemberStatisticsInfo) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, umsMemberStatisticsInfoRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.MemberId, data.ConsumeAmount, data.OrderCount, data.CouponCount, data.CommentCount, data.ReturnOrderCount, data.LoginCount, data.AttendCount, data.FansCount, data.CollectProductCount, data.CollectSubjectCount, data.CollectTopicCount, data.CollectCommentCount, data.InviteFriendCount, data.RecentOrderTime, data.Id)

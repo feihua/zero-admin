@@ -25,7 +25,7 @@ func NewCommentReplayListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *CommentReplayListLogic) CommentReplayList(in *pms.CommentReplayListReq) (*pms.CommentReplayListResp, error) {
 	all, _ := l.svcCtx.PmsCommentReplayModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsCommentReplayModel.Count()
 
 	var list []*pms.CommentReplayListData
 	for _, item := range *all {
@@ -43,7 +43,7 @@ func (l *CommentReplayListLogic) CommentReplayList(in *pms.CommentReplayListReq)
 
 	fmt.Println(list)
 	return &pms.CommentReplayListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

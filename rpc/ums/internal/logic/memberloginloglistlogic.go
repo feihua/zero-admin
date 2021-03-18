@@ -26,7 +26,7 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 func (l *MemberLoginLogListLogic) MemberLoginLogList(in *ums.MemberLoginLogListReq) (*ums.MemberLoginLogListResp, error) {
 	all, _ := l.svcCtx.UmsMemberLoginLogModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberLoginLogModel.Count()
 
 	var list []*ums.MemberLoginLogListData
 	for _, item := range *all {
@@ -44,7 +44,7 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(in *ums.MemberLoginLogListR
 
 	fmt.Println(list)
 	return &ums.MemberLoginLogListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

@@ -25,7 +25,7 @@ func NewCouponProductRelationListLogic(ctx context.Context, svcCtx *svc.ServiceC
 
 func (l *CouponProductRelationListLogic) CouponProductRelationList(in *sms.CouponProductRelationListReq) (*sms.CouponProductRelationListResp, error) {
 	all, _ := l.svcCtx.SmsCouponProductRelationModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SmsCouponProductRelationModel.Count()
 
 	var list []*sms.CouponProductRelationListData
 	for _, item := range *all {
@@ -41,7 +41,7 @@ func (l *CouponProductRelationListLogic) CouponProductRelationList(in *sms.Coupo
 
 	fmt.Println(list)
 	return &sms.CouponProductRelationListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

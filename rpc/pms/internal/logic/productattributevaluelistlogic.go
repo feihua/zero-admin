@@ -25,7 +25,7 @@ func NewProductAttributeValueListLogic(ctx context.Context, svcCtx *svc.ServiceC
 
 func (l *ProductAttributeValueListLogic) ProductAttributeValueList(in *pms.ProductAttributeValueListReq) (*pms.ProductAttributeValueListResp, error) {
 	all, _ := l.svcCtx.PmsProductAttributeValueModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsProductAttributeValueModel.Count()
 
 	var list []*pms.ProductAttributeValueListData
 	for _, item := range *all {
@@ -40,7 +40,7 @@ func (l *ProductAttributeValueListLogic) ProductAttributeValueList(in *pms.Produ
 
 	fmt.Println(list)
 	return &pms.ProductAttributeValueListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

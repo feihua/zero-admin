@@ -121,6 +121,22 @@ func (m *OmsOrderModel) FindAll(Current int64, PageSize int64) (*[]OmsOrder, err
 	}
 }
 
+func (m *OmsOrderModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *OmsOrderModel) Update(data OmsOrder) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, omsOrderRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.MemberId, data.CouponId, data.OrderSn, data.MemberUsername, data.TotalAmount, data.PayAmount, data.FreightAmount, data.PromotionAmount, data.IntegrationAmount, data.CouponAmount, data.DiscountAmount, data.PayType, data.SourceType, data.Status, data.OrderType, data.DeliveryCompany, data.DeliverySn, data.AutoConfirmDay, data.Integration, data.Growth, data.PromotionInfo, data.BillType, data.BillHeader, data.BillContent, data.BillReceiverPhone, data.BillReceiverEmail, data.ReceiverName, data.ReceiverPhone, data.ReceiverPostCode, data.ReceiverProvince, data.ReceiverCity, data.ReceiverRegion, data.ReceiverDetailAddress, data.Note, data.ConfirmStatus, data.DeleteStatus, data.UseIntegration, data.PaymentTime, data.DeliveryTime, data.ReceiveTime, data.CommentTime, data.ModifyTime, data.Id)

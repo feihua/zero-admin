@@ -26,7 +26,7 @@ func NewCompanyAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 func (l *CompanyAddressListLogic) CompanyAddressList(in *oms.CompanyAddressListReq) (*oms.CompanyAddressListResp, error) {
 	all, _ := l.svcCtx.OmsCompanyAddressModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.OmsCompanyAddressModel.Count()
 
 	var list []*oms.CompanyAddressListData
 	for _, item := range *all {
@@ -47,7 +47,7 @@ func (l *CompanyAddressListLogic) CompanyAddressList(in *oms.CompanyAddressListR
 
 	fmt.Println(list)
 	return &oms.CompanyAddressListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

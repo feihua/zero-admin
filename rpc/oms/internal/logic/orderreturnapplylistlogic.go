@@ -26,7 +26,7 @@ func NewOrderReturnApplyListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *oms.OrderReturnApplyListReq) (*oms.OrderReturnApplyListResp, error) {
 	all, _ := l.svcCtx.OmsOrderReturnApplyModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.OmsOrderReturnApplyModel.Count()
 
 	var list []*oms.OrderReturnApplyListData
 	for _, item := range *all {
@@ -64,7 +64,7 @@ func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *oms.OrderReturnAppl
 
 	fmt.Println(list)
 	return &oms.OrderReturnApplyListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

@@ -25,7 +25,7 @@ func NewProductOperateLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pms.ProductOperateLogListReq) (*pms.ProductOperateLogListResp, error) {
 	all, _ := l.svcCtx.PmsProductOperateLogModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsProductOperateLogModel.Count()
 
 	var list []*pms.ProductOperateLogListData
 	for _, item := range *all {
@@ -48,7 +48,7 @@ func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pms.ProductOperat
 
 	fmt.Println(list)
 	return &pms.ProductOperateLogListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

@@ -25,7 +25,7 @@ func NewBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandLi
 
 func (l *BrandListLogic) BrandList(in *pms.BrandListReq) (*pms.BrandListResp, error) {
 	all, _ := l.svcCtx.PmsBrandModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsBrandModel.Count()
 
 	var list []*pms.BrandListData
 	for _, item := range *all {
@@ -47,7 +47,7 @@ func (l *BrandListLogic) BrandList(in *pms.BrandListReq) (*pms.BrandListResp, er
 
 	fmt.Println(list)
 	return &pms.BrandListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

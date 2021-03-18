@@ -81,6 +81,22 @@ func (m *PmsProductLadderModel) FindAll(Current int64, PageSize int64) (*[]PmsPr
 	}
 }
 
+func (m *PmsProductLadderModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *PmsProductLadderModel) Update(data PmsProductLadder) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsProductLadderRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductId, data.Count, data.Discount, data.Price, data.Id)

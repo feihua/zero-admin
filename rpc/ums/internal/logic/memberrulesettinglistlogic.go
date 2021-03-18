@@ -26,7 +26,7 @@ func NewMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *ums.MemberRuleSettingListReq) (*ums.MemberRuleSettingListResp, error) {
 	all, _ := l.svcCtx.UmsMemberRuleSettingModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberRuleSettingModel.Count()
 
 	var list []*ums.MemberRuleSettingListData
 	for _, item := range *all {
@@ -44,7 +44,7 @@ func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *ums.MemberRuleSet
 
 	fmt.Println(list)
 	return &ums.MemberRuleSettingListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

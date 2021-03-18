@@ -25,7 +25,7 @@ func NewCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Coupon
 
 func (l *CouponListLogic) CouponList(in *sms.CouponListReq) (*sms.CouponListResp, error) {
 	all, _ := l.svcCtx.SmsCouponModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SmsCouponModel.Count()
 
 	var list []*sms.CouponListData
 	for _, coupon := range *all {
@@ -55,7 +55,7 @@ func (l *CouponListLogic) CouponList(in *sms.CouponListReq) (*sms.CouponListResp
 	}
 
 	return &sms.CouponListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

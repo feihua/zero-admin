@@ -26,7 +26,7 @@ func NewOrderOperateHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *OrderOperateHistoryListLogic) OrderOperateHistoryList(in *oms.OrderOperateHistoryListReq) (*oms.OrderOperateHistoryListResp, error) {
 	all, _ := l.svcCtx.OmsOrderOperateHistoryModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.OmsOrderOperateHistoryModel.Count()
 
 	var list []*oms.OrderOperateHistoryListData
 	for _, item := range *all {
@@ -43,7 +43,7 @@ func (l *OrderOperateHistoryListLogic) OrderOperateHistoryList(in *oms.OrderOper
 
 	fmt.Println(list)
 	return &oms.OrderOperateHistoryListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

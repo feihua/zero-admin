@@ -25,7 +25,7 @@ func NewProductCategoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 func (l *ProductCategoryListLogic) ProductCategoryList(in *pms.ProductCategoryListReq) (*pms.ProductCategoryListResp, error) {
 	all, _ := l.svcCtx.PmsProductCategoryModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsProductCategoryModel.Count()
 
 	var list []*pms.ProductCategoryListData
 	for _, item := range *all {
@@ -48,7 +48,7 @@ func (l *ProductCategoryListLogic) ProductCategoryList(in *pms.ProductCategoryLi
 
 	fmt.Println(list)
 	return &pms.ProductCategoryListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

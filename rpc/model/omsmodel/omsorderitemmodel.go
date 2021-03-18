@@ -97,6 +97,22 @@ func (m *OmsOrderItemModel) FindAll(Current int64, PageSize int64) (*[]OmsOrderI
 	}
 }
 
+func (m *OmsOrderItemModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *OmsOrderItemModel) Update(data OmsOrderItem) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, omsOrderItemRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.OrderId, data.OrderSn, data.ProductId, data.ProductPic, data.ProductName, data.ProductBrand, data.ProductSn, data.ProductPrice, data.ProductQuantity, data.ProductSkuId, data.ProductSkuCode, data.ProductCategoryId, data.PromotionName, data.PromotionAmount, data.CouponAmount, data.IntegrationAmount, data.RealAmount, data.GiftIntegration, data.GiftGrowth, data.ProductAttr, data.Id)

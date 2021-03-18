@@ -25,7 +25,7 @@ func NewProductVertifyRecordListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 func (l *ProductVertifyRecordListLogic) ProductVertifyRecordList(in *pms.ProductVertifyRecordListReq) (*pms.ProductVertifyRecordListResp, error) {
 	all, _ := l.svcCtx.PmsProductVertifyRecordModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsProductVertifyRecordModel.Count()
 
 	var list []*pms.ProductVertifyRecordListData
 	for _, item := range *all {
@@ -42,7 +42,7 @@ func (l *ProductVertifyRecordListLogic) ProductVertifyRecordList(in *pms.Product
 
 	fmt.Println(list)
 	return &pms.ProductVertifyRecordListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

@@ -25,7 +25,7 @@ func NewHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *sms.HomeAdvertiseListReq) (*sms.HomeAdvertiseListResp, error) {
 	all, _ := l.svcCtx.SmsHomeAdvertiseModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SmsHomeAdvertiseModel.Count()
 
 	var list []*sms.HomeAdvertiseListData
 	for _, item := range *all {
@@ -48,7 +48,7 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *sms.HomeAdvertiseListReq)
 
 	fmt.Println(list)
 	return &sms.HomeAdvertiseListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

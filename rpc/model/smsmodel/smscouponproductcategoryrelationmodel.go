@@ -81,6 +81,22 @@ func (m *SmsCouponProductCategoryRelationModel) FindAll(Current int64, PageSize 
 	}
 }
 
+func (m *SmsCouponProductCategoryRelationModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *SmsCouponProductCategoryRelationModel) Update(data SmsCouponProductCategoryRelation) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsCouponProductCategoryRelationRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.CouponId, data.ProductCategoryId, data.ProductCategoryName, data.ParentCategoryName, data.Id)

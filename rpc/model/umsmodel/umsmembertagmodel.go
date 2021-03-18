@@ -80,6 +80,22 @@ func (m *UmsMemberTagModel) FindAll(Current int64, PageSize int64) (*[]UmsMember
 	}
 }
 
+func (m *UmsMemberTagModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *UmsMemberTagModel) Update(data UmsMemberTag) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, umsMemberTagRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.Name, data.FinishOrderCount, data.FinishOrderAmount, data.Id)

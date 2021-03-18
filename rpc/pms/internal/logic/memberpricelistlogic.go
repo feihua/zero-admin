@@ -25,7 +25,7 @@ func NewMemberPriceListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 
 func (l *MemberPriceListLogic) MemberPriceList(in *pms.MemberPriceListReq) (*pms.MemberPriceListResp, error) {
 	all, _ := l.svcCtx.PmsMemberPriceModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsMemberPriceModel.Count()
 
 	var list []*pms.MemberPriceListData
 	for _, item := range *all {
@@ -41,7 +41,7 @@ func (l *MemberPriceListLogic) MemberPriceList(in *pms.MemberPriceListReq) (*pms
 
 	fmt.Println(list)
 	return &pms.MemberPriceListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

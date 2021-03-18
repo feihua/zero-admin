@@ -25,7 +25,7 @@ func NewProductAttributeCategoryListLogic(ctx context.Context, svcCtx *svc.Servi
 
 func (l *ProductAttributeCategoryListLogic) ProductAttributeCategoryList(in *pms.ProductAttributeCategoryListReq) (*pms.ProductAttributeCategoryListResp, error) {
 	all, _ := l.svcCtx.PmsProductAttributeCategoryModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsProductAttributeCategoryModel.Count()
 
 	var list []*pms.ProductAttributeCategoryListData
 	for _, item := range *all {
@@ -40,7 +40,7 @@ func (l *ProductAttributeCategoryListLogic) ProductAttributeCategoryList(in *pms
 
 	fmt.Println(list)
 	return &pms.ProductAttributeCategoryListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

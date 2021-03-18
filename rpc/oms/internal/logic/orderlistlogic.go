@@ -25,7 +25,7 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderLi
 
 func (l *OrderListLogic) OrderList(in *oms.OrderListReq) (*oms.OrderListResp, error) {
 	all, _ := l.svcCtx.OmsOrderModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.OmsOrderModel.Count()
 
 	var list []*oms.OrderListData
 	for _, order := range *all {
@@ -80,7 +80,7 @@ func (l *OrderListLogic) OrderList(in *oms.OrderListReq) (*oms.OrderListResp, er
 
 	fmt.Println(list)
 	return &oms.OrderListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

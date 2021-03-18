@@ -25,7 +25,7 @@ func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Hom
 
 func (l *HomeBrandListLogic) HomeBrandList(in *sms.HomeBrandListReq) (*sms.HomeBrandListResp, error) {
 	all, _ := l.svcCtx.SmsHomeBrandModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SmsHomeBrandModel.Count()
 
 	var list []*sms.HomeBrandListData
 	for _, item := range *all {
@@ -41,7 +41,7 @@ func (l *HomeBrandListLogic) HomeBrandList(in *sms.HomeBrandListReq) (*sms.HomeB
 
 	fmt.Println(list)
 	return &sms.HomeBrandListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

@@ -25,7 +25,7 @@ func NewFlashPromotionLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 func (l *FlashPromotionLogListLogic) FlashPromotionLogList(in *sms.FlashPromotionLogListReq) (*sms.FlashPromotionLogListResp, error) {
 	all, _ := l.svcCtx.SmsFlashPromotionLogModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SmsFlashPromotionLogModel.Count()
 
 	var list []*sms.FlashPromotionLogListData
 	for _, item := range *all {
@@ -43,7 +43,7 @@ func (l *FlashPromotionLogListLogic) FlashPromotionLogList(in *sms.FlashPromotio
 
 	fmt.Println(list)
 	return &sms.FlashPromotionLogListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

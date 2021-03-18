@@ -95,6 +95,22 @@ func (m *SmsCouponModel) FindAll(Current int64, PageSize int64) (*[]SmsCoupon, e
 	}
 }
 
+func (m *SmsCouponModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *SmsCouponModel) Update(data SmsCoupon) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsCouponRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.Type, data.Name, data.Platform, data.Count, data.Amount, data.PerLimit, data.MinPoint, data.StartTime, data.EndTime, data.UseType, data.Note, data.PublishCount, data.UseCount, data.ReceiveCount, data.EnableTime, data.Code, data.MemberLevel, data.Id)

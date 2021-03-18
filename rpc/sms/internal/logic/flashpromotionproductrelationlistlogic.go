@@ -25,7 +25,7 @@ func NewFlashPromotionProductRelationListLogic(ctx context.Context, svcCtx *svc.
 
 func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationList(in *sms.FlashPromotionProductRelationListReq) (*sms.FlashPromotionProductRelationListResp, error) {
 	all, _ := l.svcCtx.SmsFlashPromotionProductRelationModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SmsFlashPromotionProductRelationModel.Count()
 
 	var list []*sms.FlashPromotionProductRelationListData
 	for _, item := range *all {
@@ -44,7 +44,7 @@ func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationLi
 
 	fmt.Println(list)
 	return &sms.FlashPromotionProductRelationListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

@@ -25,7 +25,7 @@ func NewMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Member
 
 func (l *MemberListLogic) MemberList(in *ums.MemberListReq) (*ums.MemberListResp, error) {
 	all, _ := l.svcCtx.UmsMemberModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberModel.Count()
 
 	var list []*ums.MemberListData
 	for _, member := range *all {
@@ -55,7 +55,7 @@ func (l *MemberListLogic) MemberList(in *ums.MemberListReq) (*ums.MemberListResp
 
 	fmt.Println(list)
 	return &ums.MemberListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

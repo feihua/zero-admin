@@ -26,7 +26,7 @@ func NewIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc.Serv
 
 func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *ums.IntegrationConsumeSettingListReq) (*ums.IntegrationConsumeSettingListResp, error) {
 	all, _ := l.svcCtx.UmsIntegrationConsumeSettingModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsIntegrationConsumeSettingModel.Count()
 
 	var list []*ums.IntegrationConsumeSettingListData
 	for _, item := range *all {
@@ -42,7 +42,7 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *u
 
 	fmt.Println(list)
 	return &ums.IntegrationConsumeSettingListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

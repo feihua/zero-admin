@@ -25,7 +25,7 @@ func NewHomeNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 func (l *HomeNewProductListLogic) HomeNewProductList(in *sms.HomeNewProductListReq) (*sms.HomeNewProductListResp, error) {
 	all, _ := l.svcCtx.SmsHomeNewProductModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.SmsHomeNewProductModel.Count()
 
 	var list []*sms.HomeNewProductListData
 	for _, item := range *all {
@@ -41,7 +41,7 @@ func (l *HomeNewProductListLogic) HomeNewProductList(in *sms.HomeNewProductListR
 
 	fmt.Println(list)
 	return &sms.HomeNewProductListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

@@ -26,7 +26,7 @@ func NewMemberMemberTagRelationListLogic(ctx context.Context, svcCtx *svc.Servic
 
 func (l *MemberMemberTagRelationListLogic) MemberMemberTagRelationList(in *ums.MemberMemberTagRelationListReq) (*ums.MemberMemberTagRelationListResp, error) {
 	all, _ := l.svcCtx.UmsMemberMemberTagRelationModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberMemberTagRelationModel.Count()
 
 	var list []*ums.MemberMemberTagRelationListData
 	for _, item := range *all {
@@ -40,7 +40,7 @@ func (l *MemberMemberTagRelationListLogic) MemberMemberTagRelationList(in *ums.M
 
 	fmt.Println(list)
 	return &ums.MemberMemberTagRelationListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

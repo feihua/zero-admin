@@ -26,7 +26,7 @@ func NewCartItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cart
 
 func (l *CartItemListLogic) CartItemList(in *oms.CartItemListReq) (*oms.CartItemListResp, error) {
 	all, _ := l.svcCtx.OmsCartItemModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.OmsCartItemModel.Count()
 
 	var list []*oms.CartItemListData
 	for _, item := range *all {
@@ -55,7 +55,7 @@ func (l *CartItemListLogic) CartItemList(in *oms.CartItemListReq) (*oms.CartItem
 
 	fmt.Println(list)
 	return &oms.CartItemListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

@@ -25,7 +25,7 @@ func NewProductLadderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *ProductLadderListLogic) ProductLadderList(in *pms.ProductLadderListReq) (*pms.ProductLadderListResp, error) {
 	all, _ := l.svcCtx.PmsProductLadderModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsProductLadderModel.Count()
 
 	var list []*pms.ProductLadderListData
 	for _, item := range *all {
@@ -41,7 +41,7 @@ func (l *ProductLadderListLogic) ProductLadderList(in *pms.ProductLadderListReq)
 
 	fmt.Println(list)
 	return &pms.ProductLadderListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

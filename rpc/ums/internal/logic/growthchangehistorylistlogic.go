@@ -26,7 +26,7 @@ func NewGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(in *ums.GrowthChangeHistoryListReq) (*ums.GrowthChangeHistoryListResp, error) {
 	all, _ := l.svcCtx.UmsGrowthChangeHistoryModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsGrowthChangeHistoryModel.Count()
 
 	var list []*ums.GrowthChangeHistoryListData
 	for _, item := range *all {
@@ -45,9 +45,8 @@ func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(in *ums.GrowthCha
 
 	fmt.Println(list)
 	return &ums.GrowthChangeHistoryListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 
-	return &ums.GrowthChangeHistoryListResp{}, nil
 }

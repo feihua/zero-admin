@@ -26,7 +26,7 @@ func NewMemberStatisticsInfoListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(in *ums.MemberStatisticsInfoListReq) (*ums.MemberStatisticsInfoListResp, error) {
 	all, _ := l.svcCtx.UmsMemberStatisticsInfoModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberStatisticsInfoModel.Count()
 
 	var list []*ums.MemberStatisticsInfoListData
 	for _, item := range *all {
@@ -53,7 +53,7 @@ func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(in *ums.MemberS
 
 	fmt.Println(list)
 	return &ums.MemberStatisticsInfoListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

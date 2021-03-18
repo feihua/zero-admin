@@ -87,6 +87,22 @@ func (m *PmsSkuStockModel) FindAll(Current int64, PageSize int64) (*[]PmsSkuStoc
 	}
 }
 
+func (m *PmsSkuStockModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *PmsSkuStockModel) Update(data PmsSkuStock) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, pmsSkuStockRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.ProductId, data.SkuCode, data.Price, data.Stock, data.LowStock, data.Pic, data.Sale, data.PromotionPrice, data.LockStock, data.SpData, data.Id)

@@ -26,7 +26,7 @@ func NewMemberTagListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mem
 
 func (l *MemberTagListLogic) MemberTagList(in *ums.MemberTagListReq) (*ums.MemberTagListResp, error) {
 	all, _ := l.svcCtx.UmsMemberTagModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberTagModel.Count()
 
 	var list []*ums.MemberTagListData
 	for _, item := range *all {
@@ -41,7 +41,7 @@ func (l *MemberTagListLogic) MemberTagList(in *ums.MemberTagListReq) (*ums.Membe
 
 	fmt.Println(list)
 	return &ums.MemberTagListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

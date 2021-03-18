@@ -26,7 +26,7 @@ func NewMemberReceiveAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *ums.MemberReceiveAddressListReq) (*ums.MemberReceiveAddressListResp, error) {
 	all, _ := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberReceiveAddressModel.Count()
 
 	var list []*ums.MemberReceiveAddressListData
 	for _, item := range *all {
@@ -47,7 +47,7 @@ func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *ums.MemberR
 
 	fmt.Println(list)
 	return &ums.MemberReceiveAddressListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

@@ -26,7 +26,7 @@ func NewMemberProductCategoryRelationListLogic(ctx context.Context, svcCtx *svc.
 
 func (l *MemberProductCategoryRelationListLogic) MemberProductCategoryRelationList(in *ums.MemberProductCategoryRelationListReq) (*ums.MemberProductCategoryRelationListResp, error) {
 	all, _ := l.svcCtx.UmsMemberProductCategoryRelationModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberProductCategoryRelationModel.Count()
 
 	var list []*ums.MemberProductCategoryRelationListData
 	for _, item := range *all {
@@ -40,7 +40,7 @@ func (l *MemberProductCategoryRelationListLogic) MemberProductCategoryRelationLi
 
 	fmt.Println(list)
 	return &ums.MemberProductCategoryRelationListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

@@ -82,6 +82,22 @@ func (m *OmsOrderSettingModel) FindAll(Current int64, PageSize int64) (*[]OmsOrd
 	}
 }
 
+func (m *OmsOrderSettingModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *OmsOrderSettingModel) Update(data OmsOrderSetting) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, omsOrderSettingRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.FlashOrderOvertime, data.NormalOrderOvertime, data.ConfirmOvertime, data.FinishOvertime, data.CommentOvertime, data.Id)

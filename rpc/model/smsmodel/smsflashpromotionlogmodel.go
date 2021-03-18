@@ -84,6 +84,22 @@ func (m *SmsFlashPromotionLogModel) FindAll(Current int64, PageSize int64) (*[]S
 	}
 }
 
+func (m *SmsFlashPromotionLogModel) Count() (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
 func (m *SmsFlashPromotionLogModel) Update(data SmsFlashPromotionLog) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsFlashPromotionLogRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.MemberId, data.ProductId, data.MemberPhone, data.ProductName, data.SubscribeTime, data.SendTime, data.Id)

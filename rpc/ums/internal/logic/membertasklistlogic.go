@@ -26,7 +26,7 @@ func NewMemberTaskListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 
 func (l *MemberTaskListLogic) MemberTaskList(in *ums.MemberTaskListReq) (*ums.MemberTaskListResp, error) {
 	all, _ := l.svcCtx.UmsMemberTaskModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UmsMemberTaskModel.Count()
 
 	var list []*ums.MemberTaskListData
 	for _, item := range *all {
@@ -42,7 +42,7 @@ func (l *MemberTaskListLogic) MemberTaskList(in *ums.MemberTaskListReq) (*ums.Me
 
 	fmt.Println(list)
 	return &ums.MemberTaskListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 

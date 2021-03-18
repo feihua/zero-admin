@@ -25,7 +25,7 @@ func NewCommentListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Comme
 
 func (l *CommentListLogic) CommentList(in *pms.CommentListReq) (*pms.CommentListResp, error) {
 	all, _ := l.svcCtx.PmsCommentModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsCommentModel.Count()
 
 	var list []*pms.CommentListData
 	for _, item := range *all {
@@ -51,7 +51,7 @@ func (l *CommentListLogic) CommentList(in *pms.CommentListReq) (*pms.CommentList
 
 	fmt.Println(list)
 	return &pms.CommentListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }

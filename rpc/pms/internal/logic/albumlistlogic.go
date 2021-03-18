@@ -25,7 +25,7 @@ func NewAlbumListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AlbumLi
 
 func (l *AlbumListLogic) AlbumList(in *pms.AlbumListReq) (*pms.AlbumListResp, error) {
 	all, _ := l.svcCtx.PmsAlbumModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.PmsAlbumModel.Count()
 
 	var list []*pms.AlbumListData
 	for _, item := range *all {
@@ -42,7 +42,7 @@ func (l *AlbumListLogic) AlbumList(in *pms.AlbumListReq) (*pms.AlbumListResp, er
 
 	fmt.Println(list)
 	return &pms.AlbumListResp{
-		Total: 10,
+		Total: count,
 		List:  list,
 	}, nil
 }
