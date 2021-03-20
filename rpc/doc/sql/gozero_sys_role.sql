@@ -9,6 +9,7 @@ create table sys_role
     last_update_by   varchar(50)                         null comment '更新人',
     last_update_time datetime                            null comment '更新时间',
     del_flag         tinyint   default 0                 null comment '是否删除  -1：已删除  0：正常'
+    status         bigint   default 1                null comment '状态  1:启用,0:禁用'
 )
     comment '角色管理';
 
