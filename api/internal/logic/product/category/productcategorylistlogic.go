@@ -3,10 +3,9 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/pms/pmsclient"
-
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
+	"go-zero-admin/rpc/pms/pmsclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -47,13 +46,14 @@ func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCate
 			Name:         item.Name,
 			Level:        item.Level,
 			ProductCount: item.ProductCount,
-			ProductUnit:  item.ProductUnit,
-			NavStatus:    item.NavStatus,
-			ShowStatus:   item.ShowStatus,
-			Sort:         item.Sort,
-			Icon:         item.Icon,
-			Keywords:     item.Keywords,
-			Description:  item.Description,
+			//ProductUnit:  strconv.FormatInt( item.ProductCount,10)+item.ProductUnit,
+			ProductUnit: item.ProductUnit,
+			NavStatus:   item.NavStatus,
+			ShowStatus:  item.ShowStatus,
+			Sort:        item.Sort,
+			Icon:        item.Icon,
+			Keywords:    item.Keywords,
+			Description: item.Description,
 		})
 	}
 

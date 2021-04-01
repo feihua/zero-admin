@@ -984,8 +984,8 @@ type ListProductBrandResp struct {
 }
 
 type ListProductCategoryReq struct {
-	Current  int64 `json:"current"`
-	PageSize int64 `json:"pageSize"`
+	Current  int64 `json:"current,optional"`
+	PageSize int64 `json:"pageSize,optional"`
 }
 
 type ListProductCategoryResp struct {
