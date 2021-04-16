@@ -2,11 +2,9 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sys/sysclient"
-	"strconv"
-
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
+	"go-zero-admin/rpc/sys/sysclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,13 +24,12 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserAddLog
 }
 
 func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error) {
-	deptId, _ := strconv.ParseInt(req.DeptId, 10, 64)
 	_, err := l.svcCtx.Sys.UserAdd(l.ctx, &sysclient.UserAddReq{
 		Email:    req.Email,
 		Mobile:   req.Mobile,
 		Name:     req.Name,
 		NickName: req.NickName,
-		DeptId:   deptId,
+		DeptId:   req.DeptId,
 		CreateBy: "admin",
 		RoleId:   req.RoleId,
 	})

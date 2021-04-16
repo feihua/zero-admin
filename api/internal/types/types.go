@@ -2499,8 +2499,8 @@ type UpdateUserReq struct {
 	Name     string `json:"name"`
 	NickName string `json:"nick_name"`
 	DeptId   int64  `json:"dept_id"`
-	RoleId   string `json:"role_id"`
-	Status   string `json:"status"`
+	RoleId   int64  `json:"role_id"`
+	Status   int64  `json:"status"`
 }
 
 type UpdateUserResp struct {
@@ -3231,8 +3231,8 @@ type AddUserReq struct {
 	Mobile   string `json:"mobile"`
 	Name     string `json:"name"`
 	NickName string `json:"nick_name"`
-	DeptId   string `json:"dept_id"`
-	RoleId   string `json:"role_id"`
+	DeptId   int64  `json:"dept_id"`
+	RoleId   int64  `json:"role_id"`
 }
 
 type AddUserResp struct {

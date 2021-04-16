@@ -36,7 +36,7 @@ message UserAddReq {
   string avatar = 5;
   int64 dept_id = 6;
   string create_by = 7;
-  string role_id = 8;
+  int64 role_id = 8;
 }
 
 message UserAddResp {
@@ -86,8 +86,8 @@ message UserUpdateReq {
   string avatar = 6;
   int64 dept_id = 7;
   string last_update_by = 8;
-  string role_id = 9;
-  string status = 10;
+  int64 role_id = 9;
+  int64 status = 10;
 }
 
 message UserUpdateResp {
