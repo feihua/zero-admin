@@ -12,13 +12,13 @@ type (
     }
     ListLoginLogData struct {
         Id int64 `json:"id"`                               // 编号
-        UserName string `json:"user_name"`                 // 用户名
+        UserName string `json:"userName"`                 // 用户名
         Status string `json:"status"`                      // 登录状态（online:在线，登录初始状态，方便统计在线人数；login:退出登录后将online置为login；logout:退出登录）
         Ip string `json:"ip"`                              // IP地址
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
+        CreateBy string `json:"createBy"`                 // 创建人
+        CreateTime string `json:"createTime"`             // 创建时间
+        LastUpdateBy string `json:"lastUpdateBy"`        // 更新人
+        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
     }
     ListLoginLogResp struct {
         Code string `json:"code"`

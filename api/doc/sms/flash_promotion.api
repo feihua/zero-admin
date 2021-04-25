@@ -8,10 +8,10 @@ info(
 type (
     addFlashPromotionReq struct {
         Title      string    `json:"title"`
-        StartDate  string `json:"start_date"`  // 开始日期
-        EndDate    string `json:"end_date"`    // 结束日期
+        StartDate  string `json:"startDate"`  // 开始日期
+        EndDate    string `json:"endDate"`    // 结束日期
         Status     int64     `json:"status"`      // 上下线状态
-        CreateTime string `json:"create_time"` // 秒杀时间段名称
+        CreateTime string `json:"createTime"` // 秒杀时间段名称
     }
     addFlashPromotionResp struct {
         Code string `json:"code"`
@@ -24,10 +24,10 @@ type (
     ListtFlashPromotionData struct {
         Id         int64     `json:"id"`
         Title      string    `json:"title"`
-        StartDate  string `json:"start_date"`  // 开始日期
-        EndDate    string `json:"end_date"`    // 结束日期
+        StartDate  string `json:"startDate"`  // 开始日期
+        EndDate    string `json:"endDate"`    // 结束日期
         Status     int64     `json:"status"`      // 上下线状态
-        CreateTime string `json:"create_time"` // 秒杀时间段名称
+        CreateTime string `json:"createTime"` // 秒杀时间段名称
     }
     ListFlashPromotionResp struct {
         Code string `json:"code"`
@@ -41,10 +41,10 @@ type (
     UpdateFlashPromotionReq struct {
         Id         int64     `json:"id"`
         Title      string    `json:"title"`
-        StartDate  string `json:"start_date"`  // 开始日期
-        EndDate    string `json:"end_date"`    // 结束日期
+        StartDate  string `json:"startDate"`  // 开始日期
+        EndDate    string `json:"endDate"`    // 结束日期
         Status     int64     `json:"status"`      // 上下线状态
-        CreateTime string `json:"create_time"` // 秒杀时间段名称
+        CreateTime string `json:"createTime"` // 秒杀时间段名称
     }
     UpdateFlashPromotionResp struct {
         Code string `json:"code"`

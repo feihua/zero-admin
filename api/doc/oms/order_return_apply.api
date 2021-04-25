@@ -7,32 +7,32 @@ info(
 
 type (
     addReturnApplyReq struct {
-        OrderId          int64     `json:"order_id"`           // 订单id
-        CompanyAddressId int64     `json:"company_address_id"` // 收货地址表id
-        ProductId        int64     `json:"product_id"`         // 退货商品id
-        OrderSn          string    `json:"order_sn"`           // 订单编号
-        CreateTime       string `json:"create_time"`        // 申请时间
-        MemberUsername   string    `json:"member_username"`    // 会员用户名
-        ReturnAmount     float64   `json:"return_amount"`      // 退款金额
-        ReturnName       string    `json:"return_name"`        // 退货人姓名
-        ReturnPhone      string    `json:"return_phone"`       // 退货人电话
+        OrderId          int64     `json:"orderId"`           // 订单id
+        CompanyAddressId int64     `json:"companyAddressId"` // 收货地址表id
+        ProductId        int64     `json:"productId"`         // 退货商品id
+        OrderSn          string    `json:"orderSn"`           // 订单编号
+        CreateTime       string `json:"createTime"`        // 申请时间
+        MemberUsername   string    `json:"memberUserName"`    // 会员用户名
+        ReturnAmount     float64   `json:"returnAmount"`      // 退款金额
+        ReturnName       string    `json:"returnName"`        // 退货人姓名
+        ReturnPhone      string    `json:"returnPhone"`       // 退货人电话
         Status           int64     `json:"status"`             // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-        HandleTime       string `json:"handle_time"`        // 处理时间
-        ProductPic       string    `json:"product_pic"`        // 商品图片
-        ProductName      string    `json:"product_name"`       // 商品名称
-        ProductBrand     string    `json:"product_brand"`      // 商品品牌
-        ProductAttr      string    `json:"product_attr"`       // 商品销售属性：颜色：红色；尺码：xl;
-        ProductCount     int64     `json:"product_count"`      // 退货数量
-        ProductPrice     float64   `json:"product_price"`      // 商品单价
-        ProductRealPrice float64   `json:"product_real_price"` // 商品实际支付单价
+        HandleTime       string `json:"handleTime"`        // 处理时间
+        ProductPic       string    `json:"productPic"`        // 商品图片
+        ProductName      string    `json:"productName"`       // 商品名称
+        ProductBrand     string    `json:"productBrand"`      // 商品品牌
+        ProductAttr      string    `json:"productAttr"`       // 商品销售属性：颜色：红色；尺码：xl;
+        ProductCount     int64     `json:"productCount"`      // 退货数量
+        ProductPrice     float64   `json:"productPrice"`      // 商品单价
+        ProductRealPrice float64   `json:"productRealPrice"` // 商品实际支付单价
         Reason           string    `json:"reason"`             // 原因
         Description      string    `json:"description"`        // 描述
-        ProofPics        string    `json:"proof_pics"`         // 凭证图片，以逗号隔开
-        HandleNote       string    `json:"handle_note"`        // 处理备注
-        HandleMan        string    `json:"handle_man"`         // 处理人员
-        ReceiveMan       string    `json:"receive_man"`        // 收货人
-        ReceiveTime      string `json:"receive_time"`       // 收货时间
-        ReceiveNote      string    `json:"receive_note"`       // 收货备注
+        ProofPics        string    `json:"proofPics"`         // 凭证图片，以逗号隔开
+        HandleNote       string    `json:"handleNote"`        // 处理备注
+        HandleMan        string    `json:"handleMan"`         // 处理人员
+        ReceiveMan       string    `json:"receiveMan"`        // 收货人
+        ReceiveTime      string `json:"receiveTime"`       // 收货时间
+        ReceiveNote      string    `json:"receiveNote"`       // 收货备注
     }
     addReturnApplyResp struct {
         Code string `json:"code"`
@@ -44,32 +44,32 @@ type (
     }
     ListtReturnApplyData struct {
         Id               int64     `json:"id"`
-        OrderId          int64     `json:"order_id"`           // 订单id
-        CompanyAddressId int64     `json:"company_address_id"` // 收货地址表id
-        ProductId        int64     `json:"product_id"`         // 退货商品id
-        OrderSn          string    `json:"order_sn"`           // 订单编号
-        CreateTime       string `json:"create_time"`        // 申请时间
-        MemberUsername   string    `json:"member_username"`    // 会员用户名
-        ReturnAmount     float64   `json:"return_amount"`      // 退款金额
-        ReturnName       string    `json:"return_name"`        // 退货人姓名
-        ReturnPhone      string    `json:"return_phone"`       // 退货人电话
+        OrderId          int64     `json:"orderId"`           // 订单id
+        CompanyAddressId int64     `json:"companyAddressId"` // 收货地址表id
+        ProductId        int64     `json:"productId"`         // 退货商品id
+        OrderSn          string    `json:"orderSn"`           // 订单编号
+        CreateTime       string `json:"createTime"`        // 申请时间
+        MemberUsername   string    `json:"memberUserName"`    // 会员用户名
+        ReturnAmount     float64   `json:"returnAmount"`      // 退款金额
+        ReturnName       string    `json:"returnName"`        // 退货人姓名
+        ReturnPhone      string    `json:"returnPhone"`       // 退货人电话
         Status           int64     `json:"status"`             // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-        HandleTime       string `json:"handle_time"`        // 处理时间
-        ProductPic       string    `json:"product_pic"`        // 商品图片
-        ProductName      string    `json:"product_name"`       // 商品名称
-        ProductBrand     string    `json:"product_brand"`      // 商品品牌
-        ProductAttr      string    `json:"product_attr"`       // 商品销售属性：颜色：红色；尺码：xl;
-        ProductCount     int64     `json:"product_count"`      // 退货数量
-        ProductPrice     float64   `json:"product_price"`      // 商品单价
-        ProductRealPrice float64   `json:"product_real_price"` // 商品实际支付单价
+        HandleTime       string `json:"handleTime"`        // 处理时间
+        ProductPic       string    `json:"productPic"`        // 商品图片
+        ProductName      string    `json:"productName"`       // 商品名称
+        ProductBrand     string    `json:"productBrand"`      // 商品品牌
+        ProductAttr      string    `json:"productAttr"`       // 商品销售属性：颜色：红色；尺码：xl;
+        ProductCount     int64     `json:"productCount"`      // 退货数量
+        ProductPrice     float64   `json:"productPrice"`      // 商品单价
+        ProductRealPrice float64   `json:"productRealPrice"` // 商品实际支付单价
         Reason           string    `json:"reason"`             // 原因
         Description      string    `json:"description"`        // 描述
-        ProofPics        string    `json:"proof_pics"`         // 凭证图片，以逗号隔开
-        HandleNote       string    `json:"handle_note"`        // 处理备注
-        HandleMan        string    `json:"handle_man"`         // 处理人员
-        ReceiveMan       string    `json:"receive_man"`        // 收货人
-        ReceiveTime      string `json:"receive_time"`       // 收货时间
-        ReceiveNote      string    `json:"receive_note"`       // 收货备注
+        ProofPics        string    `json:"proofPics"`         // 凭证图片，以逗号隔开
+        HandleNote       string    `json:"handleNote"`        // 处理备注
+        HandleMan        string    `json:"handleMan"`         // 处理人员
+        ReceiveMan       string    `json:"receiveMan"`        // 收货人
+        ReceiveTime      string `json:"receiveTime"`       // 收货时间
+        ReceiveNote      string    `json:"receiveNote"`       // 收货备注
     }
     ListReturnApplyResp struct {
         Code string `json:"code"`
@@ -82,32 +82,32 @@ type (
     }
     UpdateReturnApplyReq struct {
         Id               int64     `json:"id"`
-        OrderId          int64     `json:"order_id"`           // 订单id
-        CompanyAddressId int64     `json:"company_address_id"` // 收货地址表id
-        ProductId        int64     `json:"product_id"`         // 退货商品id
-        OrderSn          string    `json:"order_sn"`           // 订单编号
-        CreateTime       string `json:"create_time"`        // 申请时间
-        MemberUsername   string    `json:"member_username"`    // 会员用户名
-        ReturnAmount     float64   `json:"return_amount"`      // 退款金额
-        ReturnName       string    `json:"return_name"`        // 退货人姓名
-        ReturnPhone      string    `json:"return_phone"`       // 退货人电话
+        OrderId          int64     `json:"orderId"`           // 订单id
+        CompanyAddressId int64     `json:"companyAddressId"` // 收货地址表id
+        ProductId        int64     `json:"productId"`         // 退货商品id
+        OrderSn          string    `json:"orderSn"`           // 订单编号
+        CreateTime       string `json:"createTime"`        // 申请时间
+        MemberUsername   string    `json:"memberUserName"`    // 会员用户名
+        ReturnAmount     float64   `json:"returnAmount"`      // 退款金额
+        ReturnName       string    `json:"returnName"`        // 退货人姓名
+        ReturnPhone      string    `json:"returnPhone"`       // 退货人电话
         Status           int64     `json:"status"`             // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-        HandleTime       string `json:"handle_time"`        // 处理时间
-        ProductPic       string    `json:"product_pic"`        // 商品图片
-        ProductName      string    `json:"product_name"`       // 商品名称
-        ProductBrand     string    `json:"product_brand"`      // 商品品牌
-        ProductAttr      string    `json:"product_attr"`       // 商品销售属性：颜色：红色；尺码：xl;
-        ProductCount     int64     `json:"product_count"`      // 退货数量
-        ProductPrice     float64   `json:"product_price"`      // 商品单价
-        ProductRealPrice float64   `json:"product_real_price"` // 商品实际支付单价
+        HandleTime       string `json:"handleTime"`        // 处理时间
+        ProductPic       string    `json:"productPic"`        // 商品图片
+        ProductName      string    `json:"productName"`       // 商品名称
+        ProductBrand     string    `json:"productBrand"`      // 商品品牌
+        ProductAttr      string    `json:"productAttr"`       // 商品销售属性：颜色：红色；尺码：xl;
+        ProductCount     int64     `json:"productCount"`      // 退货数量
+        ProductPrice     float64   `json:"productPrice"`      // 商品单价
+        ProductRealPrice float64   `json:"productRealPrice"` // 商品实际支付单价
         Reason           string    `json:"reason"`             // 原因
         Description      string    `json:"description"`        // 描述
-        ProofPics        string    `json:"proof_pics"`         // 凭证图片，以逗号隔开
-        HandleNote       string    `json:"handle_note"`        // 处理备注
-        HandleMan        string    `json:"handle_man"`         // 处理人员
-        ReceiveMan       string    `json:"receive_man"`        // 收货人
-        ReceiveTime      string `json:"receive_time"`       // 收货时间
-        ReceiveNote      string    `json:"receive_note"`       // 收货备注
+        ProofPics        string    `json:"proofPics"`         // 凭证图片，以逗号隔开
+        HandleNote       string    `json:"handleNote"`        // 处理备注
+        HandleMan        string    `json:"handleMan"`         // 处理人员
+        ReceiveMan       string    `json:"receiveMan"`        // 收货人
+        ReceiveTime      string `json:"receiveTime"`       // 收货时间
+        ReceiveNote      string    `json:"receiveNote"`       // 收货备注
     }
     UpdateReturnApplyResp struct {
         Code string `json:"code"`

@@ -26,13 +26,13 @@ type (
         Id int64 `json:"id"`                               // 编号
         Path string `json:"path"`                          // 菜单路径
         Name string `json:"name"`                          // 菜单名称
-        ParentId int64 `json:"parent_id"`                  // 父菜单ID，一级菜单为0
+        ParentId int64 `json:"parentId"`                  // 父菜单ID，一级菜单为0
         Icon string `json:"icon"`                          // 菜单图标
     }
 
     ListMenuTreeVue struct {
         Id int64 `json:"id"`
-        ParentId int64 `json:"parent_id"`
+        ParentId int64 `json:"parentId"`
         Title string `json:"title"`
         Path string `json:"path"`
         Name string `json:"name"`
@@ -59,9 +59,9 @@ type (
         Email string `json:"email"`
         Mobile string `json:"mobile"`
         Name string `json:"name"`
-        NickName string `json:"nick_name"`
-        DeptId int64 `json:"dept_id"`
-        RoleId int64 `json:"role_id"`
+        NickName string `json:"nickName"`
+        DeptId int64 `json:"deptId"`
+        RoleId int64 `json:"roleId"`
     }
     addUserResp struct {
         Code string `json:"code"`
@@ -72,29 +72,29 @@ type (
         current int64 `json:"current,optional"`
         pageSize int64 `json:"pageSize,optional"`
         Name string `json:"name,optional"`
-        NickName string `json:"nick_name,optional"`
+        NickName string `json:"nickName,optional"`
         Mobile string `json:"mobile,optional"`
         Email string `json:"email,optional"`
         Status int64 `json:"status,optional"`
-        DeptId int64 `json:"dept_id,optional"`
+        DeptId int64 `json:"deptId,optional"`
     }
 
     ListUserData struct {
         Id int64 `json:"id"`                               // 编号
         Name string `json:"name"`                          // 用户名
-        NickName string `json:"nick_name"`                 // 昵称
+        NickName string `json:"nickName"`                 // 昵称
         Avatar string `json:"avatar"`                      // 头像
         Password string `json:"password"`                  // 密码
         Salt string `json:"salt"`                          // 加密盐
         Email string `json:"email"`                        // 邮箱
         Mobile string `json:"mobile"`                      // 手机号
         Status int64 `json:"status"`                       // 状态  0：禁用   1：正常
-        DeptId int64 `json:"dept_id"`                      // 机构ID
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
-        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+        DeptId int64 `json:"deptId"`                      // 机构ID
+        CreateBy string `json:"createBy"`                 // 创建人
+        CreateTime string `json:"createTime"`             // 创建时间
+        LastUpdateBy string `json:"lastUpdateBy"`        // 更新人
+        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
+        DelFlag int64 `json:"delFlag"`                    // 是否删除  -1：已删除  0：正常
     }
     ListUserResp struct {
         Code string `json:"code"`
@@ -110,9 +110,9 @@ type (
         Email string `json:"email"`
         Mobile string `json:"mobile"`
         Name string `json:"name"`
-        NickName string `json:"nick_name"`
-        DeptId int64 `json:"dept_id"`
-        RoleId int64 `json:"role_id"`
+        NickName string `json:"nickName"`
+        DeptId int64 `json:"deptId"`
+        RoleId int64 `json:"roleId"`
         status int64 `json:"status"`
     }
     UpdateUserResp struct {

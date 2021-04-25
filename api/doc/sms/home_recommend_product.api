@@ -7,9 +7,9 @@ info(
 
 type (
     addHomeRecommendProductReq struct {
-        ProductId       int64  `json:"product_id"`
-        ProductName     string `json:"product_name"`
-        RecommendStatus int64  `json:"recommend_status"`
+        ProductId       int64  `json:"productId"`
+        ProductName     string `json:"productName"`
+        RecommendStatus int64  `json:"recommendStatus"`
         Sort            int64  `json:"sort"`
     }
     addHomeRecommendProductResp struct {
@@ -22,9 +22,9 @@ type (
     }
     ListtHomeRecommendProductData struct {
         Id              int64  `json:"id"`
-        ProductId       int64  `json:"product_id"`
-        ProductName     string `json:"product_name"`
-        RecommendStatus int64  `json:"recommend_status"`
+        ProductId       int64  `json:"productId"`
+        ProductName     string `json:"productName"`
+        RecommendStatus int64  `json:"recommendStatus"`
         Sort            int64  `json:"sort"`
     }
     ListHomeRecommendProductResp struct {
@@ -38,9 +38,9 @@ type (
     }
     UpdateHomeRecommendProductReq struct {
         Id              int64  `json:"id"`
-        ProductId       int64  `json:"product_id"`
-        ProductName     string `json:"product_name"`
-        RecommendStatus int64  `json:"recommend_status"`
+        ProductId       int64  `json:"productId"`
+        ProductName     string `json:"productName"`
+        RecommendStatus int64  `json:"recommendStatus"`
         Sort            int64  `json:"sort"`
     }
     UpdateHomeRecommendProductResp struct {

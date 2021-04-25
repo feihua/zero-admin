@@ -12,18 +12,18 @@ type (
         Platform     int64          `json:"platform"`  // 使用平台：0->全部；1->移动；2->PC
         Count        int64          `json:"count"`     // 数量
         Amount       float64        `json:"amount"`    // 金额
-        PerLimit     int64          `json:"per_limit"` // 每人限领张数
-        MinPoint     float64        `json:"min_point"` // 使用门槛；0表示无门槛
-        StartTime    time.Time      `json:"start_time"`
-        EndTime      time.Time      `json:"end_time"`
-        UseType      int64          `json:"use_type"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+        PerLimit     int64          `json:"perLimit"` // 每人限领张数
+        MinPoint     float64        `json:"minPoint"` // 使用门槛；0表示无门槛
+        StartTime    time.Time      `json:"startTime"`
+        EndTime      time.Time      `json:"endTime"`
+        UseType      int64          `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
         Note         string         `json:"note"`          // 备注
-        PublishCount int64          `json:"publish_count"` // 发行数量
-        UseCount     int64          `json:"use_count"`     // 已使用数量
-        ReceiveCount int64          `json:"receive_count"` // 领取数量
-        EnableTime   string         `json:"enable_time"`   // 可以领取的日期
+        PublishCount int64          `json:"publishCount"` // 发行数量
+        UseCount     int64          `json:"useCount"`     // 已使用数量
+        ReceiveCount int64          `json:"receiveCount"` // 领取数量
+        EnableTime   string         `json:"enableTime"`   // 可以领取的日期
         Code         string         `json:"code"`          // 优惠码
-        MemberLevel  int64          `json:"member_level"`  // 可领取的会员类型：0->无限时
+        MemberLevel  int64          `json:"memberLevel"`  // 可领取的会员类型：0->无限时
     }
     addCouponResp struct {
         Code string `json:"code"`
@@ -40,18 +40,18 @@ type (
         Platform     int64          `json:"platform"`  // 使用平台：0->全部；1->移动；2->PC
         Count        int64          `json:"count"`     // 数量
         Amount       float64        `json:"amount"`    // 金额
-        PerLimit     int64          `json:"per_limit"` // 每人限领张数
-        MinPoint     float64        `json:"min_point"` // 使用门槛；0表示无门槛
-        StartTime    time.Time      `json:"start_time"`
-        EndTime      time.Time      `json:"end_time"`
-        UseType      int64          `json:"use_type"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+        PerLimit     int64          `json:"perLimit"` // 每人限领张数
+        MinPoint     float64        `json:"minPoint"` // 使用门槛；0表示无门槛
+        StartTime    time.Time      `json:"startTime"`
+        EndTime      time.Time      `json:"endTime"`
+        UseType      int64          `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
         Note         string         `json:"note"`          // 备注
-        PublishCount int64          `json:"publish_count"` // 发行数量
-        UseCount     int64          `json:"use_count"`     // 已使用数量
-        ReceiveCount int64          `json:"receive_count"` // 领取数量
-        EnableTime   string         `json:"enable_time"`   // 可以领取的日期
+        PublishCount int64          `json:"publishCount"` // 发行数量
+        UseCount     int64          `json:"useCount"`     // 已使用数量
+        ReceiveCount int64          `json:"receiveCount"` // 领取数量
+        EnableTime   string         `json:"enableTime"`   // 可以领取的日期
         Code         string         `json:"code"`          // 优惠码
-        MemberLevel  int64          `json:"member_level"`  // 可领取的会员类型：0->无限时
+        MemberLevel  int64          `json:"memberLevel"`  // 可领取的会员类型：0->无限时
     }
     ListCouponResp struct {
         Code string `json:"code"`
@@ -69,18 +69,18 @@ type (
         Platform     int64          `json:"platform"`  // 使用平台：0->全部；1->移动；2->PC
         Count        int64          `json:"count"`     // 数量
         Amount       float64        `json:"amount"`    // 金额
-        PerLimit     int64          `json:"per_limit"` // 每人限领张数
-        MinPoint     float64        `json:"min_point"` // 使用门槛；0表示无门槛
-        StartTime    time.Time      `json:"start_time"`
-        EndTime      time.Time      `json:"end_time"`
-        UseType      int64          `json:"use_type"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+        PerLimit     int64          `json:"perLimit"` // 每人限领张数
+        MinPoint     float64        `json:"minPoint"` // 使用门槛；0表示无门槛
+        StartTime    time.Time      `json:"startTime"`
+        EndTime      time.Time      `json:"endTime"`
+        UseType      int64          `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
         Note         string         `json:"note"`          // 备注
-        PublishCount int64          `json:"publish_count"` // 发行数量
-        UseCount     int64          `json:"use_count"`     // 已使用数量
-        ReceiveCount int64          `json:"receive_count"` // 领取数量
-        EnableTime   string         `json:"enable_time"`   // 可以领取的日期
+        PublishCount int64          `json:"publishCount"` // 发行数量
+        UseCount     int64          `json:"useCount"`     // 已使用数量
+        ReceiveCount int64          `json:"receiveCount"` // 领取数量
+        EnableTime   string         `json:"enableTime"`   // 可以领取的日期
         Code         string         `json:"code"`          // 优惠码
-        MemberLevel  int64          `json:"member_level"`  // 可领取的会员类型：0->无限时
+        MemberLevel  int64          `json:"memberLevel"`  // 可领取的会员类型：0->无限时
     }
     UpdateCouponResp struct {
         Code string `json:"code"`

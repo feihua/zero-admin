@@ -29,12 +29,12 @@ type (
         Type string `json:"type"`                          // 类型
         Description string `json:"description"`            // 描述
         Sort int64 `json:"sort"`                           // 排序（升序）
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
+        CreateBy string `json:"createBy"`                 // 创建人
+        CreateTime string `json:"createTime"`             // 创建时间
+        LastUpdateBy string `json:"lastUpdateBy"`        // 更新人
+        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
         Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+        DelFlag int64 `json:"delFlag"`                    // 是否删除  -1：已删除  0：正常
     }
     ListConfigResp struct {
         Code string `json:"code"`

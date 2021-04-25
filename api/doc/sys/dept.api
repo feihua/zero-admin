@@ -8,8 +8,8 @@ info(
 type (
     addDeptReq struct {
         Name string `json:"name"`                          // 机构名称
-        ParentId int64 `json:"parent_id,optional"`                  // 上级机构ID，一级机构为0
-        OrderNum int64 `json:"order_num"`                  // 排序
+        ParentId int64 `json:"parentId,optional"`                  // 上级机构ID，一级机构为0
+        OrderNum int64 `json:"orderNum"`                  // 排序
     }
     addDeptResp struct {
         Code string `json:"code"`
@@ -19,18 +19,18 @@ type (
 //        Current int64 `json:"current"`
 //        PageSize int64 `json:"pageSize"`
         Name string `json:"name,optional"`
-        CreateBy string `json:"create_by,optional"`
+        CreateBy string `json:"createBy,optional"`
     }
     ListDeptData struct {
         Id int64 `json:"id"`                               // 编号
         Name string `json:"name"`                          // 机构名称
-        ParentId int64 `json:"parent_id"`                  // 上级机构ID，一级机构为0
-        OrderNum int64 `json:"order_num"`                  // 排序
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
-        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+        ParentId int64 `json:"parentId"`                  // 上级机构ID，一级机构为0
+        OrderNum int64 `json:"orderNum"`                  // 排序
+        CreateBy string `json:"createBy"`                 // 创建人
+        CreateTime string `json:"createTime"`             // 创建时间
+        LastUpdateBy string `json:"lastUpdateBy"`        // 更新人
+        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
+        DelFlag int64 `json:"delFlag"`                    // 是否删除  -1：已删除  0：正常
     }
     ListDeptResp struct {
         Code string `json:"code"`
@@ -44,8 +44,8 @@ type (
     UpdateDeptReq struct {
         Id int64 `json:"id"`                               // 编号
         Name string `json:"name"`                          // 机构名称
-        ParentId int64 `json:"parent_id"`                  // 上级机构ID，一级机构为0
-        OrderNum int64 `json:"order_num"`                  // 排序
+        ParentId int64 `json:"parentId"`                  // 上级机构ID，一级机构为0
+        OrderNum int64 `json:"orderNum"`                  // 排序
     }
     UpdateDeptResp struct {
         Code string `json:"code"`

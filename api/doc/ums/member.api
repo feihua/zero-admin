@@ -7,24 +7,24 @@ info(
 
 type (
     addMemberReq struct {
-        MemberLevelId         int64     `json:"member_level_id"`
+        MemberLevelId         int64     `json:"memberLevelId"`
         Username              string    `json:"username"`               // 用户名
         Password              string    `json:"password"`               // 密码
         Nickname              string    `json:"nickname"`               // 昵称
         Phone                 string    `json:"phone"`                  // 手机号码
         Status                int64     `json:"status"`                 // 帐号启用状态:0->禁用；1->启用
-        CreateTime            string    `json:"create_time"`            // 注册时间
+        CreateTime            string    `json:"createTime"`            // 注册时间
         Icon                  string    `json:"icon"`                   // 头像
         Gender                int64     `json:"gender"`                 // 性别：0->未知；1->男；2->女
         Birthday              string    `json:"birthday"`               // 生日
         City                  string    `json:"city"`                   // 所做城市
         Job                   string    `json:"job"`                    // 职业
-        PersonalizedSignature string    `json:"personalized_signature"` // 个性签名
-        SourceType            int64     `json:"source_type"`            // 用户来源
+        PersonalizedSignature string    `json:"personalizedSignature"` // 个性签名
+        SourceType            int64     `json:"sourceType"`            // 用户来源
         Integration           int64     `json:"integration"`            // 积分
         Growth                int64     `json:"growth"`                 // 成长值
-        LuckeyCount           int64     `json:"luckey_count"`           // 剩余抽奖次数
-        HistoryIntegration    int64     `json:"history_integration"`    // 历史积分数量
+        LuckeyCount           int64     `json:"luckeyCount"`           // 剩余抽奖次数
+        HistoryIntegration    int64     `json:"historyIntegration"`    // 历史积分数量
     }
     addMemberResp struct {
         Code string `json:"code"`
@@ -36,24 +36,24 @@ type (
     }
     ListtMemberData struct {
         Id                    int64     `json:"id"`
-        MemberLevelId         int64     `json:"member_level_id"`
+        MemberLevelId         int64     `json:"memberLevelId"`
         Username              string    `json:"username"`               // 用户名
         Password              string    `json:"password"`               // 密码
         Nickname              string    `json:"nickname"`               // 昵称
         Phone                 string    `json:"phone"`                  // 手机号码
         Status                int64     `json:"status"`                 // 帐号启用状态:0->禁用；1->启用
-        CreateTime            string    `json:"create_time"`            // 注册时间
+        CreateTime            string    `json:"createTime"`            // 注册时间
         Icon                  string    `json:"icon"`                   // 头像
         Gender                int64     `json:"gender"`                 // 性别：0->未知；1->男；2->女
         Birthday              string    `json:"birthday"`               // 生日
         City                  string    `json:"city"`                   // 所做城市
         Job                   string    `json:"job"`                    // 职业
-        PersonalizedSignature string    `json:"personalized_signature"` // 个性签名
-        SourceType            int64     `json:"source_type"`            // 用户来源
+        PersonalizedSignature string    `json:"personalizedSignature"` // 个性签名
+        SourceType            int64     `json:"sourceType"`            // 用户来源
         Integration           int64     `json:"integration"`            // 积分
         Growth                int64     `json:"growth"`                 // 成长值
-        LuckeyCount           int64     `json:"luckey_count"`           // 剩余抽奖次数
-        HistoryIntegration    int64     `json:"history_integration"`    // 历史积分数量
+        LuckeyCount           int64     `json:"luckeyCount"`           // 剩余抽奖次数
+        HistoryIntegration    int64     `json:"historyIntegration"`    // 历史积分数量
     }
     ListMemberResp struct {
         Code string `json:"code"`
@@ -66,24 +66,24 @@ type (
     }
     UpdateMemberReq struct {
         Id                    int64     `json:"id"`
-        MemberLevelId         int64     `json:"member_level_id"`
+        MemberLevelId         int64     `json:"memberLevelId"`
         Username              string    `json:"username"`               // 用户名
         Password              string    `json:"password"`               // 密码
         Nickname              string    `json:"nickname"`               // 昵称
         Phone                 string    `json:"phone"`                  // 手机号码
         Status                int64     `json:"status"`                 // 帐号启用状态:0->禁用；1->启用
-        CreateTime            string    `json:"create_time"`            // 注册时间
+        CreateTime            string    `json:"createTime"`            // 注册时间
         Icon                  string    `json:"icon"`                   // 头像
         Gender                int64     `json:"gender"`                 // 性别：0->未知；1->男；2->女
         Birthday              string    `json:"birthday"`               // 生日
         City                  string    `json:"city"`                   // 所做城市
         Job                   string    `json:"job"`                    // 职业
-        PersonalizedSignature string    `json:"personalized_signature"` // 个性签名
-        SourceType            int64     `json:"source_type"`            // 用户来源
+        PersonalizedSignature string    `json:"personalizedSignature"` // 个性签名
+        SourceType            int64     `json:"sourceType"`            // 用户来源
         Integration           int64     `json:"integration"`            // 积分
         Growth                int64     `json:"growth"`                 // 成长值
-        LuckeyCount           int64     `json:"luckey_count"`           // 剩余抽奖次数
-        HistoryIntegration    int64     `json:"history_integration"`    // 历史积分数量
+        LuckeyCount           int64     `json:"luckeyCount"`           // 剩余抽奖次数
+        HistoryIntegration    int64     `json:"historyIntegration"`    // 历史积分数量
     }
     UpdateMemberResp struct {
         Code string `json:"code"`

@@ -7,11 +7,11 @@ info(
 
 type (
     addMemberRuleSettingReq struct {
-        ContinueSignDay   int64   `json:"continue_sign_day"`   // 连续签到天数
-        ContinueSignPoint int64   `json:"continue_sign_point"` // 连续签到赠送数量
-        ConsumePerPoint   float64 `json:"consume_per_point"`   // 每消费多少元获取1个点
-        LowOrderAmount    float64 `json:"low_order_amount"`    // 最低获取点数的订单金额
-        MaxPointPerOrder  int64   `json:"max_point_per_order"` // 每笔订单最高获取点数
+        ContinueSignDay   int64   `json:"continueSignDay"`   // 连续签到天数
+        ContinueSignPoint int64   `json:"continueSignPoint"` // 连续签到赠送数量
+        ConsumePerPoint   float64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
+        LowOrderAmount    float64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
+        MaxPointPerOrder  int64   `json:"maxPointPerOrder"` // 每笔订单最高获取点数
         Type              int64   `json:"type"`                // 类型：0->积分规则；1->成长值规则
     }
     addMemberRuleSettingResp struct {
@@ -24,11 +24,11 @@ type (
     }
     ListtMemberRuleSettingData struct {
         Id                int64   `json:"id"`
-        ContinueSignDay   int64   `json:"continue_sign_day"`   // 连续签到天数
-        ContinueSignPoint int64   `json:"continue_sign_point"` // 连续签到赠送数量
-        ConsumePerPoint   float64 `json:"consume_per_point"`   // 每消费多少元获取1个点
-        LowOrderAmount    float64 `json:"low_order_amount"`    // 最低获取点数的订单金额
-        MaxPointPerOrder  int64   `json:"max_point_per_order"` // 每笔订单最高获取点数
+        ContinueSignDay   int64   `json:"continueSignDay"`   // 连续签到天数
+        ContinueSignPoint int64   `json:"continueSignPoint"` // 连续签到赠送数量
+        ConsumePerPoint   float64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
+        LowOrderAmount    float64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
+        MaxPointPerOrder  int64   `json:"maxPointPerOrder"` // 每笔订单最高获取点数
         Type              int64   `json:"type"`                // 类型：0->积分规则；1->成长值规则
     }
     ListMemberRuleSettingResp struct {
@@ -42,11 +42,11 @@ type (
     }
     UpdateMemberRuleSettingReq struct {
         Id                int64   `json:"id"`
-        ContinueSignDay   int64   `json:"continue_sign_day"`   // 连续签到天数
-        ContinueSignPoint int64   `json:"continue_sign_point"` // 连续签到赠送数量
-        ConsumePerPoint   float64 `json:"consume_per_point"`   // 每消费多少元获取1个点
-        LowOrderAmount    float64 `json:"low_order_amount"`    // 最低获取点数的订单金额
-        MaxPointPerOrder  int64   `json:"max_point_per_order"` // 每笔订单最高获取点数
+        ContinueSignDay   int64   `json:"continueSignDay"`   // 连续签到天数
+        ContinueSignPoint int64   `json:"continueSignPoint"` // 连续签到赠送数量
+        ConsumePerPoint   float64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
+        LowOrderAmount    float64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
+        MaxPointPerOrder  int64   `json:"maxPointPerOrder"` // 每笔订单最高获取点数
         Type              int64   `json:"type"`                // 类型：0->积分规则；1->成长值规则
     }
     UpdateMemberRuleSettingResp struct {

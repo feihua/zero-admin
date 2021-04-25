@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"github.com/jinzhu/copier"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -24,16 +25,10 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserListL
 }
 
 func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, error) {
-	resp, err := l.svcCtx.Sys.UserList(l.ctx, &sysclient.UserListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		Name:     req.Name,
-		NickName: req.NickName,
-		Mobile:   req.Mobile,
-		Email:    req.Mobile,
-		Status:   req.Status,
-		DeptId:   req.DeptId,
-	})
+
+	userListReq := sysclient.UserListReq{}
+	_ = copier.Copy(&userListReq, &req)
+	resp, err := l.svcCtx.Sys.UserList(l.ctx, &userListReq)
 
 	if err != nil {
 		return nil, err
@@ -42,22 +37,9 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 	var list []*types.ListUserData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListUserData{
-			Id:             item.Id,
-			Name:           item.Name,
-			NickName:       item.NickName,
-			Password:       item.Password,
-			Salt:           item.Salt,
-			Email:          item.Email,
-			Mobile:         item.Mobile,
-			Status:         item.Status,
-			DeptId:         item.DeptId,
-			CreateBy:       item.CreateBy,
-			CreateTime:     item.CreateTime,
-			LastUpdateBy:   item.LastUpdateBy,
-			LastUpdateTime: item.LastUpdateTime,
-			DelFlag:        item.DelFlag,
-		})
+		listUserData := types.ListUserData{}
+		_ = copier.Copy(&listUserData, &item)
+		list = append(list, &listUserData)
 	}
 
 	return &types.ListUserResp{

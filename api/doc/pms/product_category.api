@@ -7,13 +7,13 @@ info(
 
 type (
     addProductCategoryReq struct {
-        ParentId     int64  `json:"parent_id"` // 上机分类的编号：0表示一级分类
+        ParentId     int64  `json:"parentId"` // 上机分类的编号：0表示一级分类
         Name         string `json:"name"`
         Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
-        ProductCount int64  `json:"product_count"`
+        ProductCount int64  `json:"productCount"`
         ProductUnit  string `json:"product_unit"`
-        NavStatus    int64  `json:"nav_status"`  // 是否显示在导航栏：0->不显示；1->显示
-        ShowStatus   int64  `json:"show_status"` // 显示状态：0->不显示；1->显示
+        NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+        ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
         Sort         int64  `json:"sort"`
         Icon         string `json:"icon"` // 图标
         Keywords     string `json:"keywords"`
@@ -29,13 +29,13 @@ type (
     }
     ListtProductCategoryData struct {
         Id           int64  `json:"id"`
-        ParentId     int64  `json:"parent_id"` // 上机分类的编号：0表示一级分类
+        ParentId     int64  `json:"parentId"` // 上机分类的编号：0表示一级分类
         Name         string `json:"name"`
         Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
-        ProductCount int64  `json:"product_count"`
+        ProductCount int64  `json:"productCount"`
         ProductUnit  string `json:"product_unit"`
-        NavStatus    int64  `json:"nav_status"`  // 是否显示在导航栏：0->不显示；1->显示
-        ShowStatus   int64  `json:"show_status"` // 显示状态：0->不显示；1->显示
+        NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+        ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
         Sort         int64  `json:"sort"`
         Icon         string `json:"icon"` // 图标
         Keywords     string `json:"keywords"`
@@ -52,13 +52,13 @@ type (
     }
     UpdateProductCategoryReq struct {
         Id           int64  `json:"id"`
-        ParentId     int64  `json:"parent_id"` // 上机分类的编号：0表示一级分类
+        ParentId     int64  `json:"parentId"` // 上机分类的编号：0表示一级分类
         Name         string `json:"name"`
         Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
-        ProductCount int64  `json:"product_count"`
+        ProductCount int64  `json:"productCount"`
         ProductUnit  string `json:"product_unit"`
-        NavStatus    int64  `json:"nav_status"`  // 是否显示在导航栏：0->不显示；1->显示
-        ShowStatus   int64  `json:"show_status"` // 显示状态：0->不显示；1->显示
+        NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+        ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
         Sort         int64  `json:"sort"`
         Icon         string `json:"icon"` // 图标
         Keywords     string `json:"keywords"`

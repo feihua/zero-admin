@@ -7,10 +7,10 @@ info(
 
 type (
     addOperateHistoryReq struct {
-        OrderId     int64     `json:"order_id"`     // 订单id
-        OperateMan  string    `json:"operate_man"`  // 操作人：用户；系统；后台管理员
-        CreateTime  time.Time `json:"create_time"`  // 操作时间
-        OrderStatus int64     `json:"order_status"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+        OrderId     int64     `json:"orderId"`     // 订单id
+        OperateMan  string    `json:"operateMan"`  // 操作人：用户；系统；后台管理员
+        CreateTime  time.Time `json:"createTime"`  // 操作时间
+        OrderStatus int64     `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
         Note        string    `json:"note"`         // 备注
     }
     addOperateHistoryResp struct {
@@ -23,10 +23,10 @@ type (
     }
     ListtOperateHistoryData struct {
         Id          int64     `json:"id"`
-        OrderId     int64     `json:"order_id"`     // 订单id
-        OperateMan  string    `json:"operate_man"`  // 操作人：用户；系统；后台管理员
-        CreateTime  time.Time `json:"create_time"`  // 操作时间
-        OrderStatus int64     `json:"order_status"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+        OrderId     int64     `json:"orderId"`     // 订单id
+        OperateMan  string    `json:"operateMan"`  // 操作人：用户；系统；后台管理员
+        CreateTime  time.Time `json:"createTime"`  // 操作时间
+        OrderStatus int64     `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
         Note        string    `json:"note"`         // 备注
     }
     ListOperateHistoryResp struct {
@@ -40,10 +40,10 @@ type (
     }
     UpdateOperateHistoryReq struct {
         Id          int64     `json:"id"`
-        OrderId     int64     `json:"order_id"`     // 订单id
-        OperateMan  string    `json:"operate_man"`  // 操作人：用户；系统；后台管理员
-        CreateTime  time.Time `json:"create_time"`  // 操作时间
-        OrderStatus int64     `json:"order_status"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+        OrderId     int64     `json:"orderId"`     // 订单id
+        OperateMan  string    `json:"operateMan"`  // 操作人：用户；系统；后台管理员
+        CreateTime  time.Time `json:"createTime"`  // 操作时间
+        OrderStatus int64     `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
         Note        string    `json:"note"`         // 备注
     }
     UpdateOperateHistoryResp struct {

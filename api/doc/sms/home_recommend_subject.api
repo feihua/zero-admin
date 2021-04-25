@@ -7,9 +7,9 @@ info(
 
 type (
     addHomeRecommendSubjectReq struct {
-        SubjectId       int64  `json:"subject_id"`
-        SubjectName     string `json:"subject_name"`
-        RecommendStatus int64  `json:"recommend_status"`
+        SubjectId       int64  `json:"subjectId"`
+        SubjectName     string `json:"subjectName"`
+        RecommendStatus int64  `json:"recommendStatus"`
         Sort            int64  `json:"sort"`
     }
     addHomeRecommendSubjectResp struct {
@@ -22,9 +22,9 @@ type (
     }
     ListtHomeRecommendSubjectData struct {
         Id              int64  `json:"id"`
-        SubjectId       int64  `json:"subject_id"`
-        SubjectName     string `json:"subject_name"`
-        RecommendStatus int64  `json:"recommend_status"`
+        SubjectId       int64  `json:"subjectId"`
+        SubjectName     string `json:"subjectName"`
+        RecommendStatus int64  `json:"recommendStatus"`
         Sort            int64  `json:"sort"`
     }
     ListHomeRecommendSubjectResp struct {
@@ -38,9 +38,9 @@ type (
     }
     UpdateHomeRecommendSubjectReq struct {
         Id              int64  `json:"id"`
-        SubjectId       int64  `json:"subject_id"`
-        SubjectName     string `json:"subject_name"`
-        RecommendStatus int64  `json:"recommend_status"`
+        SubjectId       int64  `json:"subjectId"`
+        SubjectName     string `json:"subjectName"`
+        RecommendStatus int64  `json:"recommendStatus"`
         Sort            int64  `json:"sort"`
     }
     UpdateHomeRecommendSubjectResp struct {

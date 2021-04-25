@@ -10,11 +10,11 @@ type (
         Name       string    `json:"name"`
         Type       int64     `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
         Pic        string    `json:"pic"`
-        StartTime  string `json:"start_time"`
-        EndTime    string `json:"end_time"`
+        StartTime  string `json:"startTime"`
+        EndTime    string `json:"endTime"`
         Status     int64     `json:"status"`      // 上下线状态：0->下线；1->上线
-        ClickCount int64     `json:"click_count"` // 点击数
-        OrderCount int64     `json:"order_count"` // 下单数
+        ClickCount int64     `json:"clickCount"` // 点击数
+        OrderCount int64     `json:"orderCount"` // 下单数
         Url        string    `json:"url"`         // 链接地址
         Note       string    `json:"note"`        // 备注
         Sort       int64     `json:"sort"`        // 排序
@@ -32,11 +32,11 @@ type (
         Name       string    `json:"name"`
         Type       int64     `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
         Pic        string    `json:"pic"`
-        StartTime  string `json:"start_time"`
-        EndTime    string `json:"end_time"`
+        StartTime  string `json:"startTime"`
+        EndTime    string `json:"endTime"`
         Status     int64     `json:"status"`      // 上下线状态：0->下线；1->上线
-        ClickCount int64     `json:"click_count"` // 点击数
-        OrderCount int64     `json:"order_count"` // 下单数
+        ClickCount int64     `json:"clickCount"` // 点击数
+        OrderCount int64     `json:"orderCount"` // 下单数
         Url        string    `json:"url"`         // 链接地址
         Note       string    `json:"note"`        // 备注
         Sort       int64     `json:"sort"`        // 排序
@@ -55,11 +55,11 @@ type (
         Name       string    `json:"name"`
         Type       int64     `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
         Pic        string    `json:"pic"`
-        StartTime  string `json:"start_time"`
-        EndTime    string `json:"end_time"`
+        StartTime  string `json:"startTime"`
+        EndTime    string `json:"endTime"`
         Status     int64     `json:"status"`      // 上下线状态：0->下线；1->上线
-        ClickCount int64     `json:"click_count"` // 点击数
-        OrderCount int64     `json:"order_count"` // 下单数
+        ClickCount int64     `json:"clickCount"` // 点击数
+        OrderCount int64     `json:"orderCount"` // 下单数
         Url        string    `json:"url"`         // 链接地址
         Note       string    `json:"note"`        // 备注
         Sort       int64     `json:"sort"`        // 排序
