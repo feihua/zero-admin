@@ -9,7 +9,7 @@ type (
     addIntegrationConsumeSettingReq struct {
         DeductionPerAmount int64 `json:"deductionPerAmount"`  // 每一元需要抵扣的积分数量
         MaxPercentPerOrder int64 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-        UseUnit            int64 `json:"use_unit"`              // 每次使用积分最小单位100
+        UseUnit            int64 `json:"useUnit"`              // 每次使用积分最小单位100
         CouponStatus       int64 `json:"couponStatus"`         // 是否可以和优惠券同用；0->不可以；1->可以
     }
     addIntegrationConsumeSettingResp struct {
@@ -24,7 +24,7 @@ type (
         Id                 int64 `json:"id"`
         DeductionPerAmount int64 `json:"deductionPerAmount"`  // 每一元需要抵扣的积分数量
         MaxPercentPerOrder int64 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-        UseUnit            int64 `json:"use_unit"`              // 每次使用积分最小单位100
+        UseUnit            int64 `json:"useUnit"`              // 每次使用积分最小单位100
         CouponStatus       int64 `json:"couponStatus"`         // 是否可以和优惠券同用；0->不可以；1->可以
     }
     ListIntegrationConsumeSettingResp struct {
@@ -40,7 +40,7 @@ type (
         Id                 int64 `json:"id"`
         DeductionPerAmount int64 `json:"deductionPerAmount"`  // 每一元需要抵扣的积分数量
         MaxPercentPerOrder int64 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-        UseUnit            int64 `json:"use_unit"`              // 每次使用积分最小单位100
+        UseUnit            int64 `json:"useUnit"`              // 每次使用积分最小单位100
         CouponStatus       int64 `json:"couponStatus"`         // 是否可以和优惠券同用；0->不可以；1->可以
     }
     UpdateIntegrationConsumeSettingResp struct {

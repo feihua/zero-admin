@@ -1353,7 +1353,7 @@ type ListtIntegrationConsumeSettingData struct {
 	Id                 int64 `json:"id"`
 	DeductionPerAmount int64 `json:"deductionPerAmount"` // 每一元需要抵扣的积分数量
 	MaxPercentPerOrder int64 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-	UseUnit            int64 `json:"use_unit"`           // 每次使用积分最小单位100
+	UseUnit            int64 `json:"useUnit"`            // 每次使用积分最小单位100
 	CouponStatus       int64 `json:"couponStatus"`       // 是否可以和优惠券同用；0->不可以；1->可以
 }
 
@@ -1577,7 +1577,7 @@ type ListtProductCategoryData struct {
 	Name         string `json:"name"`
 	Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
 	ProductCount int64  `json:"productCount"`
-	ProductUnit  string `json:"product_unit"`
+	ProductUnit  string `json:"productUnit"`
 	NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
 	ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
 	Sort         int64  `json:"sort"`
@@ -2030,7 +2030,7 @@ type UpdateIntegrationConsumeSettingReq struct {
 	Id                 int64 `json:"id"`
 	DeductionPerAmount int64 `json:"deductionPerAmount"` // 每一元需要抵扣的积分数量
 	MaxPercentPerOrder int64 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-	UseUnit            int64 `json:"use_unit"`           // 每次使用积分最小单位100
+	UseUnit            int64 `json:"useUnit"`            // 每次使用积分最小单位100
 	CouponStatus       int64 `json:"couponStatus"`       // 是否可以和优惠券同用；0->不可以；1->可以
 }
 
@@ -2317,7 +2317,7 @@ type UpdateProductCategoryReq struct {
 	Name         string `json:"name"`
 	Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
 	ProductCount int64  `json:"productCount"`
-	ProductUnit  string `json:"product_unit"`
+	ProductUnit  string `json:"productUnit"`
 	NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
 	ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
 	Sort         int64  `json:"sort"`
@@ -2795,7 +2795,7 @@ type AddIntegrationChangeHistoryResp struct {
 type AddIntegrationConsumeSettingReq struct {
 	DeductionPerAmount int64 `json:"deductionPerAmount"` // 每一元需要抵扣的积分数量
 	MaxPercentPerOrder int64 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-	UseUnit            int64 `json:"use_unit"`           // 每次使用积分最小单位100
+	UseUnit            int64 `json:"useUnit"`            // 每次使用积分最小单位100
 	CouponStatus       int64 `json:"couponStatus"`       // 是否可以和优惠券同用；0->不可以；1->可以
 }
 
@@ -3067,7 +3067,7 @@ type AddProductCategoryReq struct {
 	Name         string `json:"name"`
 	Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
 	ProductCount int64  `json:"productCount"`
-	ProductUnit  string `json:"product_unit"`
+	ProductUnit  string `json:"productUnit"`
 	NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
 	ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
 	Sort         int64  `json:"sort"`
