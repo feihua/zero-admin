@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="api" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="go-zero-admin" />
+    <working_directory value="$PROJECT_DIR$" />
+    <kind value="PACKAGE" />
+    <filePath value="$PROJECT_DIR$/api/admin.go" />
+    <package value="go-zero-admin/api" />
+    <directory value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>
