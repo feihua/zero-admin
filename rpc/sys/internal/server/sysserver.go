@@ -210,3 +210,23 @@ func (s *SysServer) UpdateConfigRole(ctx context.Context, in *sys.UpdateConfigRo
 	l := logic.NewUpdateConfigRoleLogic(ctx, s.svcCtx)
 	return l.UpdateConfigRole(in)
 }
+
+func (s *SysServer) JobAdd(ctx context.Context, in *sys.JobAddReq) (*sys.JobAddResp, error) {
+	l := logic.NewJobAddLogic(ctx, s.svcCtx)
+	return l.JobAdd(in)
+}
+
+func (s *SysServer) JobList(ctx context.Context, in *sys.JobListReq) (*sys.JobListResp, error) {
+	l := logic.NewJobListLogic(ctx, s.svcCtx)
+	return l.JobList(in)
+}
+
+func (s *SysServer) JobUpdate(ctx context.Context, in *sys.JobUpdateReq) (*sys.JobUpdateResp, error) {
+	l := logic.NewJobUpdateLogic(ctx, s.svcCtx)
+	return l.JobUpdate(in)
+}
+
+func (s *SysServer) JobDelete(ctx context.Context, in *sys.JobDeleteReq) (*sys.JobDeleteResp, error) {
+	l := logic.NewJobDeleteLogic(ctx, s.svcCtx)
+	return l.JobDelete(in)
+}

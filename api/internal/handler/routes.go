@@ -42,6 +42,7 @@ import (
 	sysconfig "go-zero-admin/api/internal/handler/sys/config"
 	sysdept "go-zero-admin/api/internal/handler/sys/dept"
 	sysdict "go-zero-admin/api/internal/handler/sys/dict"
+	sysjob "go-zero-admin/api/internal/handler/sys/job"
 	syslog "go-zero-admin/api/internal/handler/sys/log"
 	sysmenu "go-zero-admin/api/internal/handler/sys/menu"
 	sysrole "go-zero-admin/api/internal/handler/sys/role"
@@ -275,6 +276,32 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/api/sys/config/delete",
 				Handler: sysconfig.ConfigDeleteHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/sys/job/add",
+				Handler: sysjob.JobAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/sys/job/list",
+				Handler: sysjob.JobListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/sys/job/update",
+				Handler: sysjob.JobUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/sys/job/delete",
+				Handler: sysjob.JobDeleteHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

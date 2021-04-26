@@ -176,6 +176,15 @@ type DeleteIntegrationConsumeSettingResp struct {
 	Message string `json:"message"`
 }
 
+type DeleteJobReq struct {
+	Id int64 `json:"id"`
+}
+
+type DeleteJobResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type DeleteLoginLogReq struct {
 	Id int64 `json:"id"`
 }
@@ -719,6 +728,34 @@ type ListIntegrationConsumeSettingResp struct {
 	PageSize int64                                 `json:"pageSize"`
 	Success  bool                                  `json:"success"`
 	Total    int64                                 `json:"total"`
+}
+
+type ListJobData struct {
+	Id             int64  `json:"id"`             // 编号
+	JobName        string `json:"jobName"`        // 职位名称
+	OrderNum       int64  `json:"orderNum"`       // 排序
+	CreateBy       string `json:"createBy"`       // 创建人
+	CreateTime     string `json:"createTime"`     // 创建时间
+	LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
+	LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
+	DelFlag        int64  `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
+	Remarks        string `json:"remarks"`        // 备注
+}
+
+type ListJobReq struct {
+	Current  int64  `json:"current,optional"`
+	PageSize int64  `json:"pageSize,optional"`
+	JobName  string `json:"jobName,optional"`
+}
+
+type ListJobResp struct {
+	Code     string         `json:"code"`
+	Message  string         `json:"message"`
+	Current  int64          `json:"current"`
+	Data     []*ListJobData `json:"data"`
+	PageSize int64          `json:"pageSize"`
+	Success  bool           `json:"success"`
+	Total    int64          `json:"total"`
 }
 
 type ListLoginLogData struct {
@@ -2039,6 +2076,18 @@ type UpdateIntegrationConsumeSettingResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateJobReq struct {
+	Id       int64  `json:"id"`       // 编号
+	JobName  string `json:"jobName"`  // 职位名称
+	OrderNum int64  `json:"orderNum"` // 排序
+	Remarks  string `json:"remarks"`  // 备注
+}
+
+type UpdateJobResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateMemberAddressReq struct {
 	Id            int64  `json:"id"`
 	MemberId      int64  `json:"memberId"`
@@ -2800,6 +2849,17 @@ type AddIntegrationConsumeSettingReq struct {
 }
 
 type AddIntegrationConsumeSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type AddJobReq struct {
+	JobName  string `json:"jobName"`  // 职位名称
+	Remarks  string `json:"remarks"`  // 备注
+	OrderNum int64  `json:"orderNum"` // 排序
+}
+
+type AddJobResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
