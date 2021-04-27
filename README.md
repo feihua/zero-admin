@@ -6,6 +6,8 @@
 
 # 1.项目预览
 
+**预览地址**http://129.204.22.242/ <span  style="color: red;"> 账号：admin 密码: 123456</span>
+
 ## 1.1用户
 
 ![image-20210427204637691](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204637691.png)
