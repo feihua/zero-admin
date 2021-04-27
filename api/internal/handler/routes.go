@@ -90,6 +90,11 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/sys/user/UpdateUserStatus",
 				Handler: sysuser.UpdateUserStatusHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/sys/user/selectAllData",
+				Handler: sysuser.SelectAllDataHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)

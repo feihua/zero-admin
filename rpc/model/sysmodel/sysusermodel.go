@@ -16,7 +16,7 @@ var (
 	sysUserFieldNames          = builderx.FieldNames(&SysUser{})
 	sysUserRows                = strings.Join(sysUserFieldNames, ",")
 	sysUserRowsExpectAutoSet   = strings.Join(stringx.Remove(sysUserFieldNames, "id", "create_time", "update_time"), ",")
-	sysUserRowsWithPlaceHolder = strings.Join(stringx.Remove(sysUserFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
+	sysUserRowsWithPlaceHolder = strings.Join(stringx.Remove(sysUserFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
 )
 
 type (
@@ -36,11 +36,36 @@ type (
 		Mobile         string    `db:"mobile"`           // 手机号
 		Status         int64     `db:"status"`           // 状态  0：禁用   1：正常
 		DeptId         int64     `db:"dept_id"`          // 机构ID
+		JobId          int64     `db:"job_id"`           // 岗位ID
 		CreateBy       string    `db:"create_by"`        // 创建人
 		CreateTime     time.Time `db:"create_time"`      // 创建时间
 		LastUpdateBy   string    `db:"last_update_by"`   // 更新人
 		LastUpdateTime time.Time `db:"last_update_time"` // 更新时间
 		DelFlag        int64     `db:"del_flag"`         // 是否删除  -1：已删除  0：正常
+
+	}
+
+	SysUserList struct {
+		Id             int64     `db:"id"`               // 编号
+		Name           string    `db:"name"`             // 用户名
+		NickName       string    `db:"nick_name"`        // 昵称
+		Avatar         string    `db:"avatar"`           // 头像
+		Password       string    `db:"password"`         // 密码
+		Salt           string    `db:"salt"`             // 加密盐
+		Email          string    `db:"email"`            // 邮箱
+		Mobile         string    `db:"mobile"`           // 手机号
+		Status         int64     `db:"status"`           // 状态  0：禁用   1：正常
+		DeptId         int64     `db:"dept_id"`          // 机构ID
+		JobId          int64     `db:"job_id"`           // 岗位ID
+		CreateBy       string    `db:"create_by"`        // 创建人
+		CreateTime     time.Time `db:"create_time"`      // 创建时间
+		LastUpdateBy   string    `db:"last_update_by"`   // 更新人
+		LastUpdateTime time.Time `db:"last_update_time"` // 更新时间
+		DelFlag        int64     `db:"del_flag"`         // 是否删除  -1：已删除  0：正常
+		JobName        string    `db:"job_name"`
+		DeptName       string    `db:"dept_name"`
+		RoleName       string    `db:"role_name"`
+		RoleId         int64     `db:"role_id"`
 	}
 )
 
@@ -52,8 +77,8 @@ func NewSysUserModel(conn sqlx.SqlConn) *SysUserModel {
 }
 
 func (m *SysUserModel) Insert(data SysUser) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysUserRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.Name, data.NickName, data.Avatar, data.Password, data.Salt, data.Email, data.Mobile, data.Status, data.DeptId, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysUserRowsExpectAutoSet)
+	ret, err := m.conn.Exec(query, data.Name, data.NickName, data.Avatar, data.Password, data.Salt, data.Email, data.Mobile, data.Status, data.DeptId, data.JobId, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag)
 	return ret, err
 }
 
@@ -71,7 +96,7 @@ func (m *SysUserModel) FindOne(id int64) (*SysUser, error) {
 	}
 }
 
-func (m *SysUserModel) FindAll(Current int64, PageSize int64) (*[]SysUser, error) {
+func (m *SysUserModel) FindAll(Current int64, PageSize int64) (*[]SysUserList, error) {
 
 	if Current < 1 {
 		Current = 1
@@ -79,8 +104,9 @@ func (m *SysUserModel) FindAll(Current int64, PageSize int64) (*[]SysUser, error
 	if PageSize < 1 {
 		PageSize = 20
 	}
-	query := fmt.Sprintf("select %s from %s limit ?,?", sysUserRows, m.table)
-	var resp []SysUser
+	//query := fmt.Sprintf("select %s from %s limit ?,?", sysUserRows, m.table)
+	query := "select sys_user.*, ifnull(sj.job_name,'') as job_name, ifnull(sd.name ,'')as dept_name, ifnull(sys_role.name,'') as role_name,ifnull(sys_role.id ,'1')as role_id from sys_user   left join sys_user_role sur on sys_user.id = sur.user_id   left join sys_role on sur.role_id = sys_role.id    left join sys_job sj on sys_user.job_id = sj.id left join sys_dept sd on sys_user.dept_id = sd.id limit ?,?"
+	var resp []SysUserList
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
 	switch err {
 	case nil:
@@ -124,7 +150,7 @@ func (m *SysUserModel) FindOneByName(name string) (*SysUser, error) {
 
 func (m *SysUserModel) Update(data SysUser) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, sysUserRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.Name, data.NickName, data.Avatar, data.Password, data.Salt, data.Email, data.Mobile, data.Status, data.DeptId, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.Id)
+	_, err := m.conn.Exec(query, data.Name, data.NickName, data.Avatar, data.Password, data.Salt, data.Email, data.Mobile, data.Status, data.DeptId, data.JobId, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.Id)
 	return err
 }
 

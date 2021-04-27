@@ -16,7 +16,7 @@ var (
 	sysMenuFieldNames          = builderx.FieldNames(&SysMenu{})
 	sysMenuRows                = strings.Join(sysMenuFieldNames, ",")
 	sysMenuRowsExpectAutoSet   = strings.Join(stringx.Remove(sysMenuFieldNames, "id", "create_time", "update_time"), ",")
-	sysMenuRowsWithPlaceHolder = strings.Join(stringx.Remove(sysMenuFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
+	sysMenuRowsWithPlaceHolder = strings.Join(stringx.Remove(sysMenuFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
 )
 
 type (
@@ -94,6 +94,21 @@ func (m *SysMenuModel) FindAll(Current int64, PageSize int64) (*[]SysMenu, error
 	}
 }
 
+func (m *SysMenuModel) FindAllByUserId(userId int64) (*[]SysMenu, error) {
+
+	query := "select sm.* from sys_user_role sur left join sys_role sr on sur.role_id = sr.id left join sys_role_menu srm on sr.id = srm.role_id left join sys_menu sm on srm.menu_id = sm.id where sur.user_id=? order by sm.id"
+	var resp []SysMenu
+	err := m.conn.QueryRows(&resp, query, userId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *SysMenuModel) Count() (int64, error) {
 	query := fmt.Sprintf("select count(*) as count from %s", m.table)
 
@@ -111,7 +126,7 @@ func (m *SysMenuModel) Count() (int64, error) {
 }
 func (m *SysMenuModel) Update(data SysMenu) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, sysMenuRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.Name, data.ParentId, data.Url, data.Perms, data.Type, data.Icon, data.OrderNum, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.VuePath, data.VueComponent, data.VueIcon, data.VueRedirect, data.Id)
+	_, err := m.conn.Exec(query, data.Name, data.ParentId, data.Url, data.Perms, data.Type, data.Icon, data.OrderNum, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.VuePath, data.VueComponent, data.VueIcon, data.VueRedirect, data.Id)
 	return err
 }
 

@@ -16,7 +16,7 @@ var (
 	sysDeptFieldNames          = builderx.FieldNames(&SysDept{})
 	sysDeptRows                = strings.Join(sysDeptFieldNames, ",")
 	sysDeptRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDeptFieldNames, "id", "create_time", "update_time"), ",")
-	sysDeptRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDeptFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
+	sysDeptRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDeptFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
 )
 
 type (
@@ -103,7 +103,7 @@ func (m *SysDeptModel) Count() (int64, error) {
 }
 func (m *SysDeptModel) Update(data SysDept) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, sysDeptRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.Name, data.ParentId, data.OrderNum, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.Id)
+	_, err := m.conn.Exec(query, data.Name, data.ParentId, data.OrderNum, data.LastUpdateBy, data.LastUpdateTime, data.DelFlag, data.Id)
 	return err
 }
 

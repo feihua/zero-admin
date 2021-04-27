@@ -41,6 +41,7 @@ func (l *UserAddLogic) UserAdd(in *sys.UserAddReq) (*sys.UserAddResp, error) {
 		LastUpdateBy:   in.CreateBy,
 		LastUpdateTime: time.Now(),
 		DelFlag:        0,
+		JobId:          in.JobId,
 	})
 
 	id, _ := insert.LastInsertId()

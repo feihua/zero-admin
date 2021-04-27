@@ -16,7 +16,7 @@ var (
 	sysDictFieldNames          = builderx.FieldNames(&SysDict{})
 	sysDictRows                = strings.Join(sysDictFieldNames, ",")
 	sysDictRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDictFieldNames, "id", "create_time", "update_time"), ",")
-	sysDictRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDictFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
+	sysDictRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDictFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
 )
 
 type (
@@ -107,7 +107,7 @@ func (m *SysDictModel) Count() (int64, error) {
 
 func (m *SysDictModel) Update(data SysDict) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, sysDictRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.Value, data.Label, data.Type, data.Description, data.Sort, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.Remarks, data.DelFlag, data.Id)
+	_, err := m.conn.Exec(query, data.Value, data.Label, data.Type, data.Description, data.Sort, data.LastUpdateBy, data.LastUpdateTime, data.Remarks, data.DelFlag, data.Id)
 	return err
 }
 

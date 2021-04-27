@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/tal-tech/go-zero/core/stores/sqlc"
-
+	"go-zero-admin/rpc/model/sysmodel"
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
 
@@ -36,9 +36,26 @@ func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 		return nil, err
 	}
 
-	menus, _ := l.svcCtx.MenuModel.FindAll(1, 100)
-
 	var list []*sys.MenuListTree
+
+	if in.UserId == 1 {
+		menus, _ := l.svcCtx.MenuModel.FindAll(1, 1000)
+		list = listTrees(menus, list)
+		logx.Info("超级管理员登录", list)
+	} else {
+		menus, _ := l.svcCtx.MenuModel.FindAllByUserId(in.UserId)
+		list = listTrees(menus, list)
+		logx.Info("普通管理员登录", list)
+	}
+
+	return &sys.InfoResp{
+		Avatar:       "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+		Name:         userInfo.Name,
+		MenuListTree: list,
+	}, nil
+}
+
+func listTrees(menus *[]sysmodel.SysMenu, list []*sys.MenuListTree) []*sys.MenuListTree {
 	for _, menu := range *menus {
 		list = append(list, &sys.MenuListTree{
 			Id:           menu.Id,
@@ -52,10 +69,5 @@ func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 			VueRedirect:  menu.VueRedirect,
 		})
 	}
-
-	return &sys.InfoResp{
-		Avatar:       "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
-		Name:         userInfo.Name,
-		MenuListTree: list,
-	}, nil
+	return list
 }

@@ -401,6 +401,18 @@ type DeleteUserResp struct {
 	Message string `json:"message"`
 }
 
+type DeptAllResp struct {
+	Id       int64  `json:"id"`
+	Value    string `json:"value"`
+	Title    string `json:"title"`
+	ParentId int64  `json:"parentId"`
+}
+
+type JobAllResp struct {
+	Id      int64  `json:"id"`
+	JobName string `json:"jobName"`
+}
+
 type ListCartItemReq struct {
 	Current  int64 `json:"current"`
 	PageSize int64 `json:"pageSize"`
@@ -1186,6 +1198,11 @@ type ListUserData struct {
 	LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
 	LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
 	DelFlag        int64  `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
+	JobId          int64  `json:"jobId"`
+	RoleId         int64  `json:"roleId"`
+	RoleName       string `json:"roleName"`
+	JobName        string `json:"jobName"`
+	DeptName       string `json:"deptName"`
 }
 
 type ListUserReq struct {
@@ -1197,6 +1214,7 @@ type ListUserReq struct {
 	Email    string `json:"email,optional"`
 	Status   int64  `json:"status,optional"`
 	DeptId   int64  `json:"deptId,optional"`
+	JobId    int64  `json:"deptId,optional"`
 }
 
 type ListUserResp struct {
@@ -1752,6 +1770,12 @@ type ReSetPasswordResp struct {
 	Message string `json:"message"`
 }
 
+type RoleAllResp struct {
+	Id     int64  `json:"id"`
+	Name   string `json:"name"`
+	Remark string `json:"remark"`
+}
+
 type RoleMenuIdsReq struct {
 }
 
@@ -1769,6 +1793,19 @@ type RoleMenuResp struct {
 	RoleData []int64         `json:"userData"`
 	Code     string          `json:"code"`
 	Message  string          `json:"message"`
+}
+
+type SelectDataReq struct {
+	Current  int64 `json:"current,optional"`
+	PageSize int64 `json:"pageSize,optional"`
+}
+
+type SelectDataResp struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	RoleAll []*RoleAllResp `json:"roleAll"`
+	DeptAll []*DeptAllResp `json:"deptAll"`
+	JobAll  []*JobAllResp  `json:"jobAll"`
 }
 
 type UpdateCartItemReq struct {
@@ -2550,6 +2587,7 @@ type UpdateUserReq struct {
 	DeptId   int64  `json:"deptId"`
 	RoleId   int64  `json:"roleId"`
 	Status   int64  `json:"status"`
+	JobId    int64  `json:"jobId"`
 }
 
 type UpdateUserResp struct {
@@ -3258,9 +3296,9 @@ type AddReturnResonResp struct {
 }
 
 type AddRoleReq struct {
-	Name   string `json:"name"`   // 角色名称
-	Remark string `json:"remark"` // 备注
-	Status int64  `json:"status"` // 状态
+	Name   string `json:"name"`            // 角色名称
+	Remark string `json:"remark"`          // 备注
+	Status int64  `json:"status,optional"` // 状态
 }
 
 type AddRoleResp struct {
@@ -3293,6 +3331,7 @@ type AddUserReq struct {
 	NickName string `json:"nickName"`
 	DeptId   int64  `json:"deptId"`
 	RoleId   int64  `json:"roleId"`
+	JobId    int64  `json:"jobId"`
 }
 
 type AddUserResp struct {

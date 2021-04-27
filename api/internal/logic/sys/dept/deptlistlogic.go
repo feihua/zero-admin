@@ -2,11 +2,10 @@ package logic
 
 import (
 	"context"
+	"github.com/tal-tech/go-zero/core/logx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
-
-	"github.com/tal-tech/go-zero/core/logx"
 )
 
 type DeptListLogic struct {

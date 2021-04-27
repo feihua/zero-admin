@@ -29,7 +29,7 @@ func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error)
 
 	var list []*sys.UserListData
 	for _, user := range *all {
-
+		fmt.Println(user)
 		list = append(list, &sys.UserListData{
 			Id:             user.Id,
 			Name:           user.Name,
@@ -46,6 +46,11 @@ func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error)
 			LastUpdateBy:   user.LastUpdateBy,
 			LastUpdateTime: user.LastUpdateTime.Format("2006-01-02 15:04:05"),
 			DelFlag:        user.DelFlag,
+			JobId:          user.JobId,
+			RoleId:         user.RoleId,
+			RoleName:       user.RoleName,
+			JobName:        user.JobName,
+			DeptName:       user.DeptName,
 		})
 	}
 

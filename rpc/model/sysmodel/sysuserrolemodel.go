@@ -16,7 +16,7 @@ var (
 	sysUserRoleFieldNames          = builderx.FieldNames(&SysUserRole{})
 	sysUserRoleRows                = strings.Join(sysUserRoleFieldNames, ",")
 	sysUserRoleRowsExpectAutoSet   = strings.Join(stringx.Remove(sysUserRoleFieldNames, "id", "create_time", "update_time"), ",")
-	sysUserRoleRowsWithPlaceHolder = strings.Join(stringx.Remove(sysUserRoleFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
+	sysUserRoleRowsWithPlaceHolder = strings.Join(stringx.Remove(sysUserRoleFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
 )
 
 type (
@@ -65,7 +65,7 @@ func (m *SysUserRoleModel) FindOne(id int64) (*SysUserRole, error) {
 
 func (m *SysUserRoleModel) Update(data SysUserRole) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, sysUserRoleRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.UserId, data.RoleId, data.CreateBy, data.LastUpdateBy, data.LastUpdateTime, data.Id)
+	_, err := m.conn.Exec(query, data.UserId, data.RoleId, data.LastUpdateBy, data.LastUpdateTime, data.Id)
 	return err
 }
 

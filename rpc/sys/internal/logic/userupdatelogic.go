@@ -38,6 +38,7 @@ func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp
 		LastUpdateBy:   in.LastUpdateBy,
 		Status:         in.Status,
 		LastUpdateTime: time.Now(),
+		JobId:          in.JobId,
 	})
 
 	_ = l.svcCtx.UserRoleModel.Delete(in.Id)
