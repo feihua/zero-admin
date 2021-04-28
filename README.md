@@ -6,13 +6,23 @@
 
 # 1.项目预览
 
+**预览地址**http://129.204.22.242/ <span  style="color: red;"> 账号：admin 密码: 123456</span>
+
 ## 1.1用户
 
-![图片](https://uploader.shimo.im/f/j0EweNEWALTstzMb.png!thumbnail)
+![image-20210427204637691](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204637691.png)
+
+### 1.1.1新增用户
+
+![image-20210427204434301](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204434301.png)
 
 ## 1.2角色
 
 ![图片](https://uploader.shimo.im/f/5k8DqDJY7ZlCpg9t.png!thumbnail)
+
+### 1.2.1分配权限
+
+![image-20210427204555834](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204555834.png)
 
 ## 1.3菜单
 
@@ -24,9 +34,12 @@
 
 ## 1.5字典
 
-![图片](https://uploader.shimo.im/f/kNteWGjPv6aDo4ik.png!thumbnail)
+![image-20210427204811263](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204811263.png)
 
 ## 1.6日志
 
-![图片](https://uploader.shimo.im/f/QcZDKQeWKTcXuOLd.png!thumbnail)
+![image-20210427204848192](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204848192.png)
 
+## 1.7职位列表
+
+![image-20210427204732978](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204732978.png)
