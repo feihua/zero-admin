@@ -15,6 +15,8 @@ RUN go build -ldflags="-s -w" -o /app/pms rpc/pms/pms.go
 
 FROM alpine
 
+RUN echo -e http://mirrors.ustc.edu.cn/alpine/v3.13/main/ > /etc/apk/repositories
+RUN cat /etc/apk/repositories
 RUN apk update --no-cache
 RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache tzdata
