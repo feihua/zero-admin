@@ -251,6 +251,28 @@ type MemberRegisterResp struct {
 	JwtToken
 }
 
+type OrderQueryReq struct {
+	BusinessId string `json:"businessId"` // 业务编号
+}
+
+type OrderQueryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UnifiedOrderReq struct {
+	BusinessId string `json:"businessId"` // 业务编号
+	Amount     string `json:"amount"`     // 金额
+	PayType    int64  `json:"pay_type"`   // 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
+	Remarks    string `json:"remarks"`    // 描述
+}
+
+type UnifiedOrderResp struct {
+	Code    string            `json:"code"`
+	Message string            `json:"message"`
+	Data    map[string]string `json:"data"`
+}
+
 type UpdateCartItemReq struct {
 	Id                int64   `json:"id"`
 	ProductId         int64   `json:"product_id"`

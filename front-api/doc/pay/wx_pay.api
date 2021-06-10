@@ -1,0 +1,40 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+
+type (
+    UnifiedOrderReq struct {
+        BusinessId string `json:"businessId"`     // 业务编号
+        Amount string `json:"amount"`             // 金额
+        PayType int64 `json:"pay_type"`           // 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
+        Remarks string `json:"remarks"`           // 描述
+    }
+    UnifiedOrderResp {
+        Code string `json:"code"`
+        Message string `json:"message"`
+        Data map[string]string `json:"data"`
+    }
+    OrderQueryReq struct {
+        BusinessId string `json:"businessId"`     // 业务编号
+    }
+    OrderQueryResp {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
+)
+
+@server(
+    jwt: Auth
+    group: pay/weixin
+)
+service front-api {
+    @handler UnifiedOrder
+    post /api/pay/wx/unifiedOrder (UnifiedOrderReq) returns (UnifiedOrderResp)
+
+    @handler OrderQuery
+    post /api/pay/wx/orderQuery (OrderQueryReq) returns (OrderQueryResp)
+}

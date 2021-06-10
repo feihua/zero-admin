@@ -7,6 +7,7 @@ import (
 	membermember "go-zero-admin/front-api/internal/handler/member/member"
 	ordercart "go-zero-admin/front-api/internal/handler/order/cart"
 	orderorder "go-zero-admin/front-api/internal/handler/order/order"
+	payweixin "go-zero-admin/front-api/internal/handler/pay/weixin"
 	productcategory "go-zero-admin/front-api/internal/handler/product/category"
 	productproduct "go-zero-admin/front-api/internal/handler/product/product"
 	smshome "go-zero-admin/front-api/internal/handler/sms/home"
@@ -109,5 +110,21 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membermember.MemberLoginHandler(serverCtx),
 			},
 		},
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/pay/wx/unifiedOrder",
+				Handler: payweixin.UnifiedOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/pay/wx/orderQuery",
+				Handler: payweixin.OrderQueryHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 }

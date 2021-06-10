@@ -4,6 +4,7 @@ import "pms/product.api"
 import "pms/product_category.api"
 import "sms/home.api"
 import "ums/member.api"
+import "pay/wx_pay.api"
 
 info(
 	title: "go zero admin"

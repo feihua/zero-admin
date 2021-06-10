@@ -33,6 +33,10 @@ goctl rpc proto -src oms.proto -dir .
 goctl rpc template -o sms.proto
 goctl rpc proto -src sms.proto -dir .
 
+进到rpc/pay/目录操作
+goctl rpc template -o pay.proto
+goctl rpc proto -src pay.proto -dir .
+
 4.创建model
 进到rpc/目录操作
 goctl model mysql ddl -c -src book.sql -dir .
