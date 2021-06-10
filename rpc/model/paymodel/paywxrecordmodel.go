@@ -23,6 +23,7 @@ type (
 	PayWxRecordModel interface {
 		Insert(data PayWxRecord) (sql.Result, error)
 		FindOne(id int64) (*PayWxRecord, error)
+		FindOneByBusinessId(businessId string) (*PayWxRecord, error)
 		Update(data PayWxRecord) error
 		Delete(id int64) error
 	}
@@ -65,6 +66,20 @@ func (m *defaultPayWxRecordModel) FindOne(id int64) (*PayWxRecord, error) {
 	query := fmt.Sprintf("select %s from %s where id = ? limit 1", payWxRecordRows, m.table)
 	var resp PayWxRecord
 	err := m.conn.QueryRow(&resp, query, id)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *defaultPayWxRecordModel) FindOneByBusinessId(businessId string) (*PayWxRecord, error) {
+	query := fmt.Sprintf("select %s from %s where businessId = ? limit 1", payWxRecordRows, m.table)
+	var resp PayWxRecord
+	err := m.conn.QueryRow(&resp, query, businessId)
 	switch err {
 	case nil:
 		return &resp, nil
