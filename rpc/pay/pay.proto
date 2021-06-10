@@ -2,14 +2,41 @@ syntax = "proto3";
 
 package pay;
 
-message Request {
-  string ping = 1;
+message UnifiedOrderReq {
+  string BusinessId = 1;
+  string Amount = 2;
+  string Remarks = 3;
+  string Code = 4;
 }
 
-message Response {
+message UnifiedOrderResp {
+  string AppId = 1;
+  string PartnerId = 2;
+  string prepayId = 3;
+  string PackageStr = 4;
+  string NonceStr = 5;
+  string Timestamp = 6;
+  string Sign = 7;
+  string MWebUrl = 8;
+}
+
+message H5UnifiedOrderResp {
+  string MWebUrl = 1;
+}
+
+message OrderQueryReq {
+  string BusinessId = 1;
+}
+
+message OrderQueryResp {
   string pong = 1;
 }
 
 service Pay {
-  rpc Ping(Request) returns(Response);
+  rpc AppUnifiedOrder(UnifiedOrderReq) returns(UnifiedOrderResp);
+  rpc SmallUnifiedOrder(UnifiedOrderReq) returns(UnifiedOrderResp);
+  rpc H5UnifiedOrder(UnifiedOrderReq) returns(H5UnifiedOrderResp);
+  rpc JsUnifiedOrder(UnifiedOrderReq) returns(UnifiedOrderResp);
+
+  rpc OrderQuery(OrderQueryReq) returns(OrderQueryResp);
 }

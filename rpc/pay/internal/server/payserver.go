@@ -21,7 +21,27 @@ func NewPayServer(svcCtx *svc.ServiceContext) *PayServer {
 	}
 }
 
-func (s *PayServer) Ping(ctx context.Context, in *pay.Request) (*pay.Response, error) {
-	l := logic.NewPingLogic(ctx, s.svcCtx)
-	return l.Ping(in)
+func (s *PayServer) AppUnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq) (*pay.UnifiedOrderResp, error) {
+	l := logic.NewAppUnifiedOrderLogic(ctx, s.svcCtx)
+	return l.AppUnifiedOrder(in)
+}
+
+func (s *PayServer) SmallUnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq) (*pay.UnifiedOrderResp, error) {
+	l := logic.NewSmallUnifiedOrderLogic(ctx, s.svcCtx)
+	return l.SmallUnifiedOrder(in)
+}
+
+func (s *PayServer) H5UnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq) (*pay.H5UnifiedOrderResp, error) {
+	l := logic.NewH5UnifiedOrderLogic(ctx, s.svcCtx)
+	return l.H5UnifiedOrder(in)
+}
+
+func (s *PayServer) JsUnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq) (*pay.UnifiedOrderResp, error) {
+	l := logic.NewJsUnifiedOrderLogic(ctx, s.svcCtx)
+	return l.JsUnifiedOrder(in)
+}
+
+func (s *PayServer) OrderQuery(ctx context.Context, in *pay.OrderQueryReq) (*pay.OrderQueryResp, error) {
+	l := logic.NewOrderQueryLogic(ctx, s.svcCtx)
+	return l.OrderQuery(in)
 }
