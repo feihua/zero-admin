@@ -40,6 +40,11 @@ type (
 		Remarks    string    `db:"remarks"`     // 备注
 		CreateTime time.Time `db:"create_time"` // 创建时间
 		UpdateTime time.Time `db:"update_time"` // 更新时间
+		ReturnCode string    `db:"return_code"`
+		ReturnMsg  string    `db:"return_msg"`
+		ResultCode string    `db:"result_code"`
+		ResultMsg  string    `db:"result_msg"`
+		PayStatus  int64     `db:"pay_status"` // 0：初始化 1：已发送 2：成功 3：失败
 	}
 )
 
@@ -51,8 +56,8 @@ func NewPayWxRecordModel(conn sqlx.SqlConn) PayWxRecordModel {
 }
 
 func (m *defaultPayWxRecordModel) Insert(data PayWxRecord) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, payWxRecordRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.BusinessId, data.Amount, data.PayType, data.Remarks)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, payWxRecordRowsExpectAutoSet)
+	ret, err := m.conn.Exec(query, data.BusinessId, data.Amount, data.PayType, data.Remarks, data.ReturnCode, data.ReturnMsg, data.ResultCode, data.ResultMsg, data.PayStatus)
 	return ret, err
 }
 
@@ -72,7 +77,7 @@ func (m *defaultPayWxRecordModel) FindOne(id int64) (*PayWxRecord, error) {
 
 func (m *defaultPayWxRecordModel) Update(data PayWxRecord) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, payWxRecordRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.BusinessId, data.Amount, data.PayType, data.Remarks, data.Id)
+	_, err := m.conn.Exec(query, data.BusinessId, data.Amount, data.PayType, data.Remarks, data.ReturnCode, data.ReturnMsg, data.ResultCode, data.ResultMsg, data.PayStatus, data.Id)
 	return err
 }
 

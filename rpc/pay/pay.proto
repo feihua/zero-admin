@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pay;
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+service Pay {
+  rpc Ping(Request) returns(Response);
+}
