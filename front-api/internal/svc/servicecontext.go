@@ -4,6 +4,7 @@ import (
 	"github.com/tal-tech/go-zero/zrpc"
 	"go-zero-admin/front-api/internal/config"
 	"go-zero-admin/rpc/oms/omsclient"
+	"go-zero-admin/rpc/pay/payclient"
 	"go-zero-admin/rpc/pms/pmsclient"
 	"go-zero-admin/rpc/sms/smsclient"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -18,6 +19,7 @@ type ServiceContext struct {
 	Pms pmsclient.Pms
 	Oms omsclient.Oms
 	Sms smsclient.Sms
+	Pay payclient.Pay
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -29,5 +31,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Pms: pmsclient.NewPms(zrpc.MustNewClient(c.PmsRpc)),
 		Oms: omsclient.NewOms(zrpc.MustNewClient(c.OmsRpc)),
 		Sms: smsclient.NewSms(zrpc.MustNewClient(c.SmsRpc)),
+		Pay: payclient.NewPay(zrpc.MustNewClient(c.PayRpc)),
 	}
 }

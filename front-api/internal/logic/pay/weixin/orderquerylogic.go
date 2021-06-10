@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/rpc/pay/payclient"
 
 	"go-zero-admin/front-api/internal/svc"
 	"go-zero-admin/front-api/internal/types"
@@ -24,7 +25,12 @@ func NewOrderQueryLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderQu
 }
 
 func (l *OrderQueryLogic) OrderQuery(req types.OrderQueryReq) (*types.OrderQueryResp, error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Pay.OrderQuery(l.ctx, &payclient.OrderQueryReq{
+		BusinessId: req.BusinessId,
+	})
 
-	return &types.OrderQueryResp{}, nil
+	return &types.OrderQueryResp{
+		Code:    "",
+		Message: "",
+	}, nil
 }

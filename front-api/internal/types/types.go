@@ -261,10 +261,11 @@ type OrderQueryResp struct {
 }
 
 type UnifiedOrderReq struct {
-	BusinessId string `json:"businessId"` // 业务编号
-	Amount     string `json:"amount"`     // 金额
-	PayType    int64  `json:"pay_type"`   // 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
-	Remarks    string `json:"remarks"`    // 描述
+	BusinessId string `json:"businessId"`    // 业务编号
+	Amount     string `json:"amount"`        // 金额
+	PayType    int64  `json:"pay_type"`      // 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
+	Remarks    string `json:"remarks"`       // 描述
+	Code       string `json:"code,optional"` // jsapi支付的时候,需要根据临时code来获取openid
 }
 
 type UnifiedOrderResp struct {
