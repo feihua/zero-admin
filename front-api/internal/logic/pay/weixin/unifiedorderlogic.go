@@ -25,19 +25,25 @@ func NewUnifiedOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) Unifi
 
 func (l *UnifiedOrderLogic) UnifiedOrder(req types.UnifiedOrderReq) (*types.UnifiedOrderResp, error) {
 
+	orderReq := &payclient.UnifiedOrderReq{
+		BusinessId: req.BusinessId,
+		Amount:     req.Amount,
+		Remarks:    req.Remarks,
+		MerId:      req.MerId,
+		Code:       req.Code,
+	}
+
 	resp := &types.UnifiedOrderResp{}
 	resp.Code = "000000"
 
-	// 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
+	// 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
 	switch req.PayType {
-	case 1:
-		appUnifiedOrder(req, l, resp)
-	case 2:
-		smallUnisafiedOrder(req, l, resp)
-	case 3:
-		h5UnifiedOrder(req, l, resp)
-	case 4:
-		jsApiUnifiedOrder(req, l, resp)
+	case "APP":
+		appUnifiedOrder(orderReq, l, resp)
+	case "JSAPI":
+		jsApiUnifiedOrder(orderReq, l, resp)
+	case "MWEB":
+		h5UnifiedOrder(orderReq, l, resp)
 	}
 
 	return resp, nil
@@ -46,12 +52,9 @@ func (l *UnifiedOrderLogic) UnifiedOrder(req types.UnifiedOrderReq) (*types.Unif
 /**
 微信app统一下单
 */
-func appUnifiedOrder(req types.UnifiedOrderReq, l *UnifiedOrderLogic, resp *types.UnifiedOrderResp) {
-	orderResp, _ := l.svcCtx.Pay.AppUnifiedOrder(l.ctx, &payclient.UnifiedOrderReq{
-		BusinessId: req.BusinessId,
-		Amount:     req.Amount,
-		Remarks:    req.Remarks,
-	})
+func appUnifiedOrder(req *payclient.UnifiedOrderReq, l *UnifiedOrderLogic, resp *types.UnifiedOrderResp) {
+
+	orderResp, _ := l.svcCtx.Pay.AppUnifiedOrder(l.ctx, req)
 
 	var data = make(map[string]string)
 	data["appId"] = orderResp.AppId
@@ -67,55 +70,11 @@ func appUnifiedOrder(req types.UnifiedOrderReq, l *UnifiedOrderLogic, resp *type
 }
 
 /**
-微信小程序统一下单
+微信jsapi统一下单(小程序统,公从号)
 */
-func smallUnisafiedOrder(req types.UnifiedOrderReq, l *UnifiedOrderLogic, resp *types.UnifiedOrderResp) {
-	orderResp, _ := l.svcCtx.Pay.SmallUnifiedOrder(l.ctx, &payclient.UnifiedOrderReq{
-		BusinessId: req.BusinessId,
-		Amount:     req.Amount,
-		Remarks:    req.Remarks,
-	})
+func jsApiUnifiedOrder(req *payclient.UnifiedOrderReq, l *UnifiedOrderLogic, resp *types.UnifiedOrderResp) {
 
-	var data = make(map[string]string)
-	data["appId"] = orderResp.AppId
-	data["timeStamp"] = orderResp.PartnerId
-	data["nonceStr"] = orderResp.PrepayId
-	data["package"] = orderResp.PackageStr
-	data["signType"] = "MD5"
-	data["sign"] = orderResp.Sign
-
-	resp.Message = "微信小程序统一下单成功"
-	resp.Data = data
-}
-
-/**
-微信h5统一下单
-*/
-func h5UnifiedOrder(req types.UnifiedOrderReq, l *UnifiedOrderLogic, resp *types.UnifiedOrderResp) {
-	orderResp, _ := l.svcCtx.Pay.H5UnifiedOrder(l.ctx, &payclient.UnifiedOrderReq{
-		BusinessId: req.BusinessId,
-		Amount:     req.Amount,
-		Remarks:    req.Remarks,
-	})
-
-	var data = make(map[string]string)
-	data[""] = orderResp.MWebUrl
-
-	resp.Message = "微信h5统一下单成功"
-	resp.Data = data
-}
-
-/**
-微信jsapi统一下单
-*/
-func jsApiUnifiedOrder(req types.UnifiedOrderReq, l *UnifiedOrderLogic, resp *types.UnifiedOrderResp) {
-
-	orderResp, _ := l.svcCtx.Pay.JsUnifiedOrder(l.ctx, &payclient.UnifiedOrderReq{
-		BusinessId: req.BusinessId,
-		Amount:     req.Amount,
-		Remarks:    req.Remarks,
-		Code:       req.Code,
-	})
+	orderResp, _ := l.svcCtx.Pay.JsUnifiedOrder(l.ctx, req)
 
 	var data = make(map[string]string)
 	data["appId"] = orderResp.AppId
@@ -126,5 +85,19 @@ func jsApiUnifiedOrder(req types.UnifiedOrderReq, l *UnifiedOrderLogic, resp *ty
 	data["sign"] = orderResp.Sign
 
 	resp.Message = "微信jsapi统一下单成功"
+	resp.Data = data
+}
+
+/**
+微信h5统一下单
+*/
+func h5UnifiedOrder(req *payclient.UnifiedOrderReq, l *UnifiedOrderLogic, resp *types.UnifiedOrderResp) {
+
+	orderResp, _ := l.svcCtx.Pay.H5UnifiedOrder(l.ctx, req)
+
+	var data = make(map[string]string)
+	data["nWebUrl"] = orderResp.MWebUrl
+
+	resp.Message = "微信h5统一下单成功"
 	resp.Data = data
 }

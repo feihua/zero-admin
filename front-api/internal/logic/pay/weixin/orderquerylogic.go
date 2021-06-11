@@ -25,12 +25,19 @@ func NewOrderQueryLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderQu
 }
 
 func (l *OrderQueryLogic) OrderQuery(req types.OrderQueryReq) (*types.OrderQueryResp, error) {
-	l.svcCtx.Pay.OrderQuery(l.ctx, &payclient.OrderQueryReq{
+
+	queryResp, err := l.svcCtx.Pay.OrderQuery(l.ctx, &payclient.OrderQueryReq{
 		BusinessId: req.BusinessId,
 	})
 
+	if err != nil {
+		return nil, err
+	}
+
 	return &types.OrderQueryResp{
-		Code:    "",
-		Message: "",
+		Code:       "000000",
+		Message:    "查询成功",
+		PayMessage: queryResp.PayMessage,
+		PayStatus:  queryResp.PayStatus,
 	}, nil
 }
