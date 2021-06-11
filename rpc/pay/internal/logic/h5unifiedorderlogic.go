@@ -29,8 +29,8 @@ func (l *H5UnifiedOrderLogic) H5UnifiedOrder(in *pay.UnifiedOrderReq) (*pay.H5Un
 	result, err := l.svcCtx.WxRecordModel.Insert(paymodel.PayWxRecord{
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
-		// 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
-		PayType:    3,
+		// 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
+		PayType:    "MWEB",
 		Remarks:    in.Remarks,
 		CreateTime: time.Now(),
 		// 0：初始化 1：已发送 2：成功 3：失败
@@ -41,15 +41,15 @@ func (l *H5UnifiedOrderLogic) H5UnifiedOrder(in *pay.UnifiedOrderReq) (*pay.H5Un
 	}
 	id, _ := result.LastInsertId()
 
-	//todo 请求微信统一下单
+	buildH5OrderReqVo(in, l)
 
 	_ = l.svcCtx.WxRecordModel.Update(paymodel.PayWxRecord{
 		Id:         id,
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
-		// 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
-		PayType:    3,
-		Remarks:    "",
+		// 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
+		PayType:    h5TradeType,
+		Remarks:    in.Remarks,
 		UpdateTime: time.Now(),
 		ReturnCode: "",
 		ReturnMsg:  "",
@@ -60,4 +60,30 @@ func (l *H5UnifiedOrderLogic) H5UnifiedOrder(in *pay.UnifiedOrderReq) (*pay.H5Un
 	})
 
 	return &pay.H5UnifiedOrderResp{}, nil
+}
+
+/**
+构建h5支付统一下单参数
+*/
+func buildH5OrderReqVo(in *pay.UnifiedOrderReq, l *H5UnifiedOrderLogic) map[string]string {
+
+	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, "APP")
+
+	reqVo := make(map[string]string)
+	reqVo["appid"] = merchants.AppId
+	reqVo["mch_id"] = merchants.MchId
+	reqVo["nonce_str"] = ""
+	reqVo["sign_type"] = md5SignType
+	reqVo["body"] = in.Remarks
+	reqVo["out_trade_no"] = in.BusinessId
+	reqVo["fee_type"] = "CNY"
+	reqVo["total_fee"] = in.Amount
+	reqVo["spbill_create_ip"] = ""
+	reqVo["notify_url"] = merchants.NotifyUrl
+	reqVo["trade_type"] = h5TradeType
+	reqVo["scene_info"] = ""
+	//reqVo["attach"] = ""
+	reqVo["sign"] = ""
+
+	return reqVo
 }

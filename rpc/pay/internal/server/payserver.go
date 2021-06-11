@@ -26,11 +26,6 @@ func (s *PayServer) AppUnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq
 	return l.AppUnifiedOrder(in)
 }
 
-func (s *PayServer) SmallUnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq) (*pay.UnifiedOrderResp, error) {
-	l := logic.NewSmallUnifiedOrderLogic(ctx, s.svcCtx)
-	return l.SmallUnifiedOrder(in)
-}
-
 func (s *PayServer) H5UnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq) (*pay.H5UnifiedOrderResp, error) {
 	l := logic.NewH5UnifiedOrderLogic(ctx, s.svcCtx)
 	return l.H5UnifiedOrder(in)

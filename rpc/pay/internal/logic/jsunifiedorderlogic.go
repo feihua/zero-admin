@@ -1,8 +1,14 @@
 package logic
 
 import (
+	"bytes"
 	"context"
+	"encoding/xml"
+	"errors"
+	"fmt"
 	"go-zero-admin/rpc/model/paymodel"
+	"io/ioutil"
+	"net/http"
 	"time"
 
 	"go-zero-admin/rpc/pay/internal/svc"
@@ -29,8 +35,8 @@ func (l *JsUnifiedOrderLogic) JsUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.Unif
 	result, err := l.svcCtx.WxRecordModel.Insert(paymodel.PayWxRecord{
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
-		// 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
-		PayType:    4,
+		// 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
+		PayType:    "JSAPI",
 		Remarks:    in.Remarks,
 		CreateTime: time.Now(),
 		// 0：初始化 1：已发送 2：成功 3：失败
@@ -41,17 +47,17 @@ func (l *JsUnifiedOrderLogic) JsUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.Unif
 	}
 	id, _ := result.LastInsertId()
 
-	//todo 根据临时code获取openid
+	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, "APP")
 
-	//todo 请求微信统一下单
+	_, _ = commonPay(merchants)
 
 	_ = l.svcCtx.WxRecordModel.Update(paymodel.PayWxRecord{
 		Id:         id,
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
-		// 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
-		PayType:    4,
-		Remarks:    "",
+		// 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
+		PayType:    "JSAPI",
+		Remarks:    in.Remarks,
 		UpdateTime: time.Now(),
 		ReturnCode: "",
 		ReturnMsg:  "",
@@ -62,4 +68,80 @@ func (l *JsUnifiedOrderLogic) JsUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.Unif
 	})
 
 	return &pay.UnifiedOrderResp{}, nil
+}
+
+type JsApiPayParam struct {
+	CommonPayParam
+	Openid string `json:"openid" xml:"openid"`
+}
+
+type JsApiPayResponse struct {
+	CommonPayResponse
+}
+
+// 统一下单
+func commonPay(merchants *paymodel.PayWxMerchants) (commonPayRes CommonPayResponse, err error) {
+	amount := 1
+	payParam := make(map[string]string)
+	payParam["appid"] = merchants.AppId
+	payParam["mch_id"] = merchants.MchId
+	payParam["nonce_str"] = getRandomString(32)
+	payParam["body"] = fmt.Sprintf("微信充值:￥%d", amount)
+	payParam["notify_url"] = "https://hy.life23.cn/order/notify"
+	payParam["openid"] = ""
+	payParam["out_trade_no"] = fmt.Sprintf("test%s%s", time.Now().Format("20060102150405"), randNumber())
+	payParam["spbill_create_ip"] = "127.0.0.1"
+	payParam["total_fee"] = fmt.Sprintf("%v", amount)
+	payParam["trade_type"] = jsApiTradeType
+	payParam["sign_type"] = md5SignType
+	payParam["sign"] = getMd5Sign(payParam, "md5key")
+	commonPayParam := CommonPayParam{
+		AppId:          payParam["appid"],
+		MchId:          payParam["mch_id"],
+		NonceStr:       payParam["nonce_str"],
+		Body:           payParam["body"],
+		NotifyUrl:      payParam["notify_url"],
+		Openid:         payParam["openid"],
+		OutTradeNo:     payParam["out_trade_no"],
+		SpBillCreateIp: payParam["spbill_create_ip"],
+		TotalFee:       payParam["total_fee"],
+		TradeType:      payParam["trade_type"],
+		Sign:           payParam["sign"],
+		SignType:       payParam["sign_type"],
+	}
+	payXmlBytes, err := xml.Marshal(commonPayParam)
+	if err != nil {
+		return commonPayRes, err
+	}
+	//fmt.Println(string(payXmlBytes))
+	request, err := http.NewRequest(http.MethodPost, CommonPayUrl, bytes.NewReader(payXmlBytes))
+	if err != nil {
+		return commonPayRes, err
+	}
+	client := http.DefaultClient
+	response, err := client.Do(request)
+	if err != nil {
+		return commonPayRes, err
+	}
+	defer response.Body.Close()
+	bodyBytes, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return commonPayRes, err
+	}
+	if err = xml.Unmarshal(bodyBytes, &commonPayRes); err != nil {
+		return commonPayRes, err
+	}
+	commonPayResParam := make(map[string]string)
+	commonPayResParam["return_code"] = commonPayRes.ReturnCode
+	commonPayResParam["return_msg"] = commonPayRes.ReturnMsg
+	commonPayResParam["appid"] = commonPayRes.AppId
+	commonPayResParam["mch_id"] = commonPayRes.MchId
+	commonPayResParam["nonce_str"] = commonPayRes.NonceStr
+	commonPayResParam["result_code"] = commonPayRes.ResultCode
+	commonPayResParam["prepay_id"] = commonPayRes.PrepayId
+	commonPayResParam["trade_type"] = commonPayRes.TradeType
+	if !checkMd5Sign(commonPayResParam, "md5key", commonPayRes.Sign) {
+		return commonPayRes, errors.New("common pay response sign verify error")
+	}
+	return commonPayRes, nil
 }

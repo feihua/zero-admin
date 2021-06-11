@@ -22,7 +22,6 @@ type (
 
 	Pay interface {
 		AppUnifiedOrder(ctx context.Context, in *UnifiedOrderReq) (*UnifiedOrderResp, error)
-		SmallUnifiedOrder(ctx context.Context, in *UnifiedOrderReq) (*UnifiedOrderResp, error)
 		H5UnifiedOrder(ctx context.Context, in *UnifiedOrderReq) (*H5UnifiedOrderResp, error)
 		JsUnifiedOrder(ctx context.Context, in *UnifiedOrderReq) (*UnifiedOrderResp, error)
 		OrderQuery(ctx context.Context, in *OrderQueryReq) (*OrderQueryResp, error)
@@ -42,11 +41,6 @@ func NewPay(cli zrpc.Client) Pay {
 func (m *defaultPay) AppUnifiedOrder(ctx context.Context, in *UnifiedOrderReq) (*UnifiedOrderResp, error) {
 	client := pay.NewPayClient(m.cli.Conn())
 	return client.AppUnifiedOrder(ctx, in)
-}
-
-func (m *defaultPay) SmallUnifiedOrder(ctx context.Context, in *UnifiedOrderReq) (*UnifiedOrderResp, error) {
-	client := pay.NewPayClient(m.cli.Conn())
-	return client.SmallUnifiedOrder(ctx, in)
 }
 
 func (m *defaultPay) H5UnifiedOrder(ctx context.Context, in *UnifiedOrderReq) (*H5UnifiedOrderResp, error) {

@@ -22,6 +22,7 @@ type (
     }
     OrderQueryReq struct {
         BusinessId string `json:"businessId"`     // 业务编号
+        MerId string `json:"merId"`                         // 本地商户id
     }
     OrderQueryResp {
         Code string `json:"code"`

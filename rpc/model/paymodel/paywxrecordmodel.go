@@ -16,7 +16,7 @@ var (
 	payWxRecordFieldNames          = builderx.FieldNames(&PayWxRecord{})
 	payWxRecordRows                = strings.Join(payWxRecordFieldNames, ",")
 	payWxRecordRowsExpectAutoSet   = strings.Join(stringx.Remove(payWxRecordFieldNames, "id", "create_time", "update_time"), ",")
-	payWxRecordRowsWithPlaceHolder = strings.Join(stringx.Remove(payWxRecordFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
+	payWxRecordRowsWithPlaceHolder = strings.Join(stringx.Remove(payWxRecordFieldNames, "id", "pay_type", "create_time", "update_time"), "=?,") + "=?"
 )
 
 type (
@@ -92,7 +92,7 @@ func (m *defaultPayWxRecordModel) FindOneByBusinessId(businessId string) (*PayWx
 
 func (m *defaultPayWxRecordModel) Update(data PayWxRecord) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, payWxRecordRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.BusinessId, data.Amount, data.PayType, data.Remarks, data.ReturnCode, data.ReturnMsg, data.ResultCode, data.ResultMsg, data.PayStatus, data.Id)
+	_, err := m.conn.Exec(query, data.BusinessId, data.Amount, data.Remarks, data.ReturnCode, data.ReturnMsg, data.ResultCode, data.ResultMsg, data.PayStatus, data.Id)
 	return err
 }
 

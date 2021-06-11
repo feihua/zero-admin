@@ -28,6 +28,7 @@ func (l *OrderQueryLogic) OrderQuery(req types.OrderQueryReq) (*types.OrderQuery
 
 	queryResp, err := l.svcCtx.Pay.OrderQuery(l.ctx, &payclient.OrderQueryReq{
 		BusinessId: req.BusinessId,
+		MerId:      req.MerId,
 	})
 
 	if err != nil {

@@ -253,6 +253,7 @@ type MemberRegisterResp struct {
 
 type OrderQueryReq struct {
 	BusinessId string `json:"businessId"` // 业务编号
+	MerId      string `json:"merId"`      // 本地商户id
 }
 
 type OrderQueryResp struct {
@@ -268,7 +269,7 @@ type UnifiedOrderReq struct {
 	PayType    string `json:"pay_type"`      // 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
 	Remarks    string `json:"remarks"`       // 描述
 	Code       string `json:"code,optional"` // jsapi支付的时候,需要根据临时code来获取openid
-	MerId      string `json:"merId"`         // jsapi支付的时候,需要根据临时code来获取openid
+	MerId      string `json:"merId"`         // 本地商户id
 }
 
 type UnifiedOrderResp struct {

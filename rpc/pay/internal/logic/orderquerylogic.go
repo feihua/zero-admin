@@ -36,14 +36,12 @@ func (l *OrderQueryLogic) OrderQuery(in *pay.OrderQueryReq) (*pay.OrderQueryResp
 		return &pay.OrderQueryResp{}, nil
 	}
 
-	//todo 请求微信统一下单
+	buildOderQueryVo(in, l)
 
 	_ = l.svcCtx.WxRecordModel.Update(paymodel.PayWxRecord{
 		Id:         result.Id,
 		BusinessId: in.BusinessId,
 		Amount:     result.Amount,
-		// 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
-		PayType:    1,
 		Remarks:    result.Remarks,
 		CreateTime: time.Now(),
 		UpdateTime: time.Now(),
@@ -56,4 +54,20 @@ func (l *OrderQueryLogic) OrderQuery(in *pay.OrderQueryReq) (*pay.OrderQueryResp
 	})
 
 	return &pay.OrderQueryResp{}, nil
+}
+
+/**
+构建微信支付订单查询参数
+*/
+func buildOderQueryVo(in *pay.OrderQueryReq, l *OrderQueryLogic) map[string]string {
+
+	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, "APP")
+
+	return map[string]string{
+		"appid":        merchants.AppId,
+		"mch_id":       merchants.MchId,
+		"nonce_str":    "",
+		"out_trade_no": in.BusinessId,
+		"sign":         "",
+	}
 }

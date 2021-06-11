@@ -25,6 +25,7 @@ type (
 		FindOne(id int64) (*PayWxMerchants, error)
 		Update(data PayWxMerchants) error
 		Delete(id int64) error
+		FindOneByMerId(merId string, payType string) (*PayWxMerchants, error)
 	}
 
 	defaultPayWxMerchantsModel struct {
@@ -63,6 +64,20 @@ func (m *defaultPayWxMerchantsModel) FindOne(id int64) (*PayWxMerchants, error) 
 	query := fmt.Sprintf("select %s from %s where id = ? limit 1", payWxMerchantsRows, m.table)
 	var resp PayWxMerchants
 	err := m.conn.QueryRow(&resp, query, id)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *defaultPayWxMerchantsModel) FindOneByMerId(merId string, payType string) (*PayWxMerchants, error) {
+	query := fmt.Sprintf("select %s from %s where mer_id = ? and pay_type = ? limit 1", payWxMerchantsRows, m.table)
+	var resp PayWxMerchants
+	err := m.conn.QueryRow(&resp, query, merId, payType)
 	switch err {
 	case nil:
 		return &resp, nil

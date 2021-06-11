@@ -7,6 +7,7 @@ message UnifiedOrderReq {
   string Amount = 2;
   string Remarks = 3;
   string Code = 4;
+  string MerId = 5;
 }
 
 message UnifiedOrderResp {
@@ -26,15 +27,16 @@ message H5UnifiedOrderResp {
 
 message OrderQueryReq {
   string BusinessId = 1;
+  string MerId = 2;
 }
 
 message OrderQueryResp {
-  string pong = 1;
+  string PayMessage = 1;
+  string PayStatus = 2;
 }
 
 service Pay {
   rpc AppUnifiedOrder(UnifiedOrderReq) returns(UnifiedOrderResp);
-  rpc SmallUnifiedOrder(UnifiedOrderReq) returns(UnifiedOrderResp);
   rpc H5UnifiedOrder(UnifiedOrderReq) returns(H5UnifiedOrderResp);
   rpc JsUnifiedOrder(UnifiedOrderReq) returns(UnifiedOrderResp);
 
