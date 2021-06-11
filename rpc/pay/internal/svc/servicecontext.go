@@ -7,14 +7,16 @@ import (
 )
 
 type ServiceContext struct {
-	c             config.Config
-	WxRecordModel paymodel.PayWxRecordModel
+	c                config.Config
+	WxRecordModel    paymodel.PayWxRecordModel
+	WxMerchantsModel paymodel.PayWxMerchantsModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
 	return &ServiceContext{
-		c:             c,
-		WxRecordModel: paymodel.NewPayWxRecordModel(sqlConn),
+		c:                c,
+		WxRecordModel:    paymodel.NewPayWxRecordModel(sqlConn),
+		WxMerchantsModel: paymodel.NewPayWxMerchantsModel(sqlConn),
 	}
 }
