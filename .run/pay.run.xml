@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="pay" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="go-zero-admin" />
+    <working_directory value="$PROJECT_DIR$" />
+    <kind value="PACKAGE" />
+    <package value="go-zero-admin/rpc/pay" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/rpc/pay/pay.go" />
+    <method v="2" />
+  </configuration>
+</component>
