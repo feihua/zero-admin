@@ -38,6 +38,7 @@ type (
 		AppId      string    `db:"app_id"`     // 应用ID 微信开放平台审核通过的应用APPID
 		MchId      string    `db:"mch_id"`     // 微信支付分配的商户号
 		MchKey     string    `db:"mch_key"`    // 微信支付分配的商户秘钥
+		PayType    string    `db:"pay_type"`   // APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付
 		NotifyUrl  string    `db:"notify_url"` // 微信支付回调地址
 		Remarks    string    `db:"remarks"`    // 备注
 		CreateTime time.Time `db:"create_time"`
@@ -53,8 +54,8 @@ func NewPayWxMerchantsModel(conn sqlx.SqlConn) PayWxMerchantsModel {
 }
 
 func (m *defaultPayWxMerchantsModel) Insert(data PayWxMerchants) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, payWxMerchantsRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.MerId, data.AppId, data.MchId, data.MchKey, data.NotifyUrl, data.Remarks)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, payWxMerchantsRowsExpectAutoSet)
+	ret, err := m.conn.Exec(query, data.MerId, data.AppId, data.MchId, data.MchKey, data.PayType, data.NotifyUrl, data.Remarks)
 	return ret, err
 }
 
@@ -74,7 +75,7 @@ func (m *defaultPayWxMerchantsModel) FindOne(id int64) (*PayWxMerchants, error) 
 
 func (m *defaultPayWxMerchantsModel) Update(data PayWxMerchants) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, payWxMerchantsRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.MerId, data.AppId, data.MchId, data.MchKey, data.NotifyUrl, data.Remarks, data.Id)
+	_, err := m.conn.Exec(query, data.MerId, data.AppId, data.MchId, data.MchKey, data.PayType, data.NotifyUrl, data.Remarks, data.Id)
 	return err
 }
 

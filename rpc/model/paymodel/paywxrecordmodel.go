@@ -34,18 +34,18 @@ type (
 	}
 
 	PayWxRecord struct {
-		Id         int64     `db:"id"`          // 主键
-		BusinessId string    `db:"businessId"`  // 业务编号
-		Amount     string    `db:"amount"`      // 金额
-		PayType    int64     `db:"pay_type"`    // 支付类型(1:app支付 2:小程序支付 3:h5支付 4:公众号支付)
-		Remarks    string    `db:"remarks"`     // 备注
-		CreateTime time.Time `db:"create_time"` // 创建时间
-		UpdateTime time.Time `db:"update_time"` // 更新时间
+		Id         int64     `db:"id"`         // 主键
+		BusinessId string    `db:"businessId"` // 业务编号
+		Amount     string    `db:"amount"`     // 金额
+		PayType    string    `db:"pay_type"`   // 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
+		Remarks    string    `db:"remarks"`    // 备注
 		ReturnCode string    `db:"return_code"`
 		ReturnMsg  string    `db:"return_msg"`
 		ResultCode string    `db:"result_code"`
 		ResultMsg  string    `db:"result_msg"`
-		PayStatus  int64     `db:"pay_status"` // 0：初始化 1：已发送 2：成功 3：失败
+		PayStatus  int64     `db:"pay_status"`  // 0：初始化 1：已发送 2：成功 3：失败
+		CreateTime time.Time `db:"create_time"` // 创建时间
+		UpdateTime time.Time `db:"update_time"` // 更新时间
 	}
 )
 
