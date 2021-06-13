@@ -3,12 +3,10 @@ package logic
 import (
 	"context"
 	"fmt"
+	"github.com/tal-tech/go-zero/core/logx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sms/smsclient"
-	"time"
-
-	"github.com/tal-tech/go-zero/core/logx"
 )
 
 type CouponListLogic struct {
@@ -42,8 +40,6 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 	var list []*types.ListtCouponData
 
 	for _, item := range resp.List {
-		StartTime, _ := time.Parse("2006-01-02 15:04:05", item.StartTime)
-		EndTime, _ := time.Parse("2006-01-02 15:04:05", item.EndTime)
 		list = append(list, &types.ListtCouponData{
 			Id:           item.Id,
 			Type:         item.Type,
@@ -53,8 +49,8 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 			Amount:       item.Amount,
 			PerLimit:     item.PerLimit,
 			MinPoint:     item.MinPoint,
-			StartTime:    StartTime,
-			EndTime:      EndTime,
+			StartTime:    item.StartTime,
+			EndTime:      item.EndTime,
 			UseType:      item.UseType,
 			Note:         item.Note,
 			PublishCount: item.PublishCount,

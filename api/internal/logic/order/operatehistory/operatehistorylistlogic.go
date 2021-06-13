@@ -3,11 +3,9 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/oms/omsclient"
-	"time"
-
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
+	"go-zero-admin/rpc/oms/omsclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -42,12 +40,11 @@ func (l *OperateHistoryListLogic) OperateHistoryList(req types.ListOperateHistor
 	var list []*types.ListtOperateHistoryData
 
 	for _, item := range resp.List {
-		CreateTime, _ := time.Parse("2006-01-02 15:04:05", item.CreateTime)
 		list = append(list, &types.ListtOperateHistoryData{
 			Id:          item.Id,
 			OrderId:     item.OrderId,
 			OperateMan:  item.OperateMan,
-			CreateTime:  CreateTime,
+			CreateTime:  item.CreateTime,
 			OrderStatus: item.OrderStatus,
 			Note:        item.Note,
 		})

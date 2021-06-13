@@ -29,7 +29,7 @@ func (l *OperateHistoryUpdateLogic) OperateHistoryUpdate(req types.UpdateOperate
 		Id:          req.Id,
 		OrderId:     req.OrderId,
 		OperateMan:  req.OperateMan,
-		CreateTime:  req.CreateTime.Format("2006-01-02 15:04:05"),
+		CreateTime:  req.CreateTime,
 		OrderStatus: req.OrderStatus,
 		Note:        req.Note,
 	})
