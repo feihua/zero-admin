@@ -18,23 +18,23 @@ type (
         Message string `json:"message"`
     }
     ListFlashPromotionReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtFlashPromotionData struct {
-        Id         int64     `json:"id"`
-        Title      string    `json:"title"`
-        StartDate  string `json:"startDate"`  // 开始日期
-        EndDate    string `json:"endDate"`    // 结束日期
-        Status     int64     `json:"status"`      // 上下线状态
+        Id int64 `json:"id"`
+        Title string `json:"title"`
+        StartDate string `json:"startDate"`   // 开始日期
+        EndDate string `json:"endDate"`       // 结束日期
+        Status int64 `json:"status"`          // 上下线状态
         CreateTime string `json:"createTime"` // 秒杀时间段名称
     }
     ListFlashPromotionResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtFlashPromotionData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

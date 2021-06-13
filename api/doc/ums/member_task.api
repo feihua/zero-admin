@@ -17,22 +17,22 @@ type (
         Message string `json:"message"`
     }
     ListMemberTaskReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtMemberTaskData struct {
-        Id           int64  `json:"id"`
-        Name         string `json:"name"`
-        Growth       int64  `json:"growth"`       // 赠送成长值
-        Intergration int64  `json:"intergration"` // 赠送积分
-        Type         int64  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        Growth int64 `json:"growth"`             // 赠送成长值
+        Intergration int64 `json:"intergration"` // 赠送积分
+        Type int64 `json:"type"`                 // 任务类型：0->新手任务；1->日常任务
     }
     ListMemberTaskResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtMemberTaskData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

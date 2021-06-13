@@ -54,18 +54,18 @@ type (
         Message string `json:"message"`
     }
     ListProductReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtProductData struct {
-        Id                         int64     `json:"id"`
-        BrandId                    int64     `json:"brandId"`
-        ProductCategoryId          int64     `json:"productCategoryId"`
-        FeightTemplateId           int64     `json:"feightTemplateId"`
-        ProductAttributeCategoryId int64     `json:"productAttributeCategoryId"`
-        Name                       string    `json:"name"`
-        Pic                        string    `json:"pic"`
-        ProductSn                  string    `json:"productSn"`       // 货号
+        Id int64 `json:"id"`
+        BrandId int64 `json:"brandId"`
+        ProductCategoryId int64 `json:"productCategoryId"`
+        FeightTemplateId int64 `json:"feightTemplateId"`
+        ProductAttributeCategoryId int64 `json:"productAttributeCategoryId"`
+        Name string `json:"name"`
+        Pic string `json:"pic"`
+        ProductSn string `json:"productSn"`                                // 货号
         DeleteStatus               int64     `json:"deleteStatus"`    // 删除状态：0->未删除；1->已删除
         PublishStatus              int64     `json:"publishStatus"`   // 上架状态：0->下架；1->上架
         NewStatus                  int64     `json:"newStatus"`       // 新品状态:0->不是新品；1->新品
@@ -104,9 +104,9 @@ type (
     ListProductResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtProductData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

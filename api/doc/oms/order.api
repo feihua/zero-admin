@@ -51,18 +51,18 @@ type (
         Message string `json:"message"`
     }
     ListOrderReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtOrderData struct {
-        Id                    int64     `json:"id"` // 订单id
-        MemberId              int64     `json:"memberId"`
-        CouponId              int64     `json:"couponId"`
-        OrderSn               string    `json:"orderSn"`                // 订单编号
-        CreateTime            string `json:"createTime"`             // 提交时间
-        MemberUsername        string    `json:"memberUserName"`         // 用户帐号
-        TotalAmount           float64   `json:"totalAmount"`            // 订单总金额
-        PayAmount             float64   `json:"payAmount"`              // 应付金额（实际支付金额）
+        Id int64 `json:"id"`                                             // 订单id
+        MemberId int64 `json:"memberId"`
+        CouponId int64 `json:"couponId"`
+        OrderSn string `json:"orderSn"`                                  // 订单编号
+        CreateTime string `json:"createTime"`                            // 提交时间
+        MemberUsername string `json:"memberUserName"`                    // 用户帐号
+        TotalAmount float64 `json:"totalAmount"`                         // 订单总金额
+        PayAmount float64 `json:"payAmount"`                             // 应付金额（实际支付金额）
         FreightAmount         float64   `json:"freightAmount"`          // 运费金额
         PromotionAmount       float64   `json:"promotionAmount"`        // 促销优化金额（促销价、满减、阶梯价）
         IntegrationAmount     float64   `json:"integrationAmount"`      // 积分抵扣金额
@@ -103,9 +103,9 @@ type (
     ListOrderResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtOrderData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

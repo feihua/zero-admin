@@ -24,18 +24,18 @@ type (
         Message string `json:"message"`
     }
     ListProductCategoryReq struct {
-        Current int64 `json:"current,optional"`
-        PageSize int64 `json:"pageSize,optional"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtProductCategoryData struct {
-        Id           int64  `json:"id"`
-        ParentId     int64  `json:"parentId"` // 上机分类的编号：0表示一级分类
-        Name         string `json:"name"`
-        Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
-        ProductCount int64  `json:"productCount"`
-        ProductUnit  string `json:"productUnit"`
-        NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-        ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+        Id int64 `json:"id"`
+        ParentId int64 `json:"parentId"`         // 上机分类的编号：0表示一级分类
+        Name string `json:"name"`
+        Level int64 `json:"level"`               // 分类级别：0->1级；1->2级
+        ProductCount int64 `json:"productCount"`
+        ProductUnit string `json:"productUnit"`
+        NavStatus int64 `json:"navStatus"`       // 是否显示在导航栏：0->不显示；1->显示
+        ShowStatus int64 `json:"showStatus"`     // 显示状态：0->不显示；1->显示
         Sort         int64  `json:"sort"`
         Icon         string `json:"icon"` // 图标
         Keywords     string `json:"keywords"`
@@ -44,9 +44,9 @@ type (
     ListProductCategoryResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtProductCategoryData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

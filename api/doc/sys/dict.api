@@ -20,8 +20,8 @@ type (
         Message string `json:"message"`
     }
     ListDictReq struct {
-        Current int64 `json:"current,optional"`
-        PageSize int64 `json:"pageSize,optional"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
         Value string `json:"value,optional"`
         Label string `json:"label,optional"`
         DelFlag int64 `json:"delFlag,optional"`
@@ -44,9 +44,9 @@ type (
     ListDictResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListDictData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

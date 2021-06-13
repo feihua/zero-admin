@@ -39,18 +39,18 @@ type (
         Message string `json:"message"`
     }
     ListReturnApplyReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtReturnApplyData struct {
-        Id               int64     `json:"id"`
-        OrderId          int64     `json:"orderId"`           // 订单id
-        CompanyAddressId int64     `json:"companyAddressId"` // 收货地址表id
-        ProductId        int64     `json:"productId"`         // 退货商品id
-        OrderSn          string    `json:"orderSn"`           // 订单编号
-        CreateTime       string `json:"createTime"`        // 申请时间
-        MemberUsername   string    `json:"memberUserName"`    // 会员用户名
-        ReturnAmount     float64   `json:"returnAmount"`      // 退款金额
+        Id int64 `json:"id"`
+        OrderId int64 `json:"orderId"`                         // 订单id
+        CompanyAddressId int64 `json:"companyAddressId"`       // 收货地址表id
+        ProductId int64 `json:"productId"`                     // 退货商品id
+        OrderSn string `json:"orderSn"`                        // 订单编号
+        CreateTime string `json:"createTime"`                  // 申请时间
+        MemberUsername string `json:"memberUserName"`          // 会员用户名
+        ReturnAmount float64 `json:"returnAmount"`             // 退款金额
         ReturnName       string    `json:"returnName"`        // 退货人姓名
         ReturnPhone      string    `json:"returnPhone"`       // 退货人电话
         Status           int64     `json:"status"`             // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
@@ -74,9 +74,9 @@ type (
     ListReturnApplyResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtReturnApplyData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

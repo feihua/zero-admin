@@ -18,23 +18,23 @@ type (
         Message string `json:"message"`
     }
     ListFlashPromotionSessionReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtFlashPromotionSessionData struct {
-        Id         int64     `json:"id"`          // 编号
-        Name       string    `json:"name"`        // 场次名称
-        StartTime  string    `json:"startTime"`  // 每日开始时间
-        EndTime    string    `json:"endTime"`    // 每日结束时间
-        Status     int64     `json:"status"`      // 启用状态：0->不启用；1->启用
+        Id int64 `json:"id"`                  // 编号
+        Name string `json:"name"`             // 场次名称
+        StartTime string `json:"startTime"`   // 每日开始时间
+        EndTime string `json:"endTime"`       // 每日结束时间
+        Status int64 `json:"status"`          // 启用状态：0->不启用；1->启用
         CreateTime string `json:"createTime"` // 创建时间
     }
     ListFlashPromotionSessionResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtFlashPromotionSessionData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

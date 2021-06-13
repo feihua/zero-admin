@@ -19,24 +19,24 @@ type (
         Message string `json:"message"`
     }
     ListMemberLoginLogReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtMemberLoginLogData struct {
-        Id         int64     `json:"id"`
-        MemberId   int64     `json:"memberId"`
+        Id int64 `json:"id"`
+        MemberId int64 `json:"memberId"`
         CreateTime string `json:"createTime"`
-        Ip         string    `json:"ip"`
-        City       string    `json:"city"`
-        LoginType  int64     `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
-        Province   string    `json:"province"`
+        Ip string `json:"ip"`
+        City string `json:"city"`
+        LoginType int64 `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
+        Province string `json:"province"`
     }
     ListMemberLoginLogResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtMemberLoginLogData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

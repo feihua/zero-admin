@@ -28,18 +28,18 @@ type (
         Message string `json:"message"`
     }
     ListMemberStatisticsInfoReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtMemberStatisticsInfoData struct {
-        Id                  int64     `json:"id"`
-        MemberId            int64     `json:"memberId"`
-        ConsumeAmount       float64   `json:"consumeAmount"`     // 累计消费金额
-        OrderCount          int64     `json:"orderCount"`        // 订单数量
-        CouponCount         int64     `json:"couponCount"`       // 优惠券数量
-        CommentCount        int64     `json:"commentCount"`      // 评价数
-        ReturnOrderCount    int64     `json:"returnOrderCount"` // 退货数量
-        LoginCount          int64     `json:"loginCount"`        // 登录次数
+        Id int64 `json:"id"`
+        MemberId int64 `json:"memberId"`
+        ConsumeAmount float64 `json:"consumeAmount"`             // 累计消费金额
+        OrderCount int64 `json:"orderCount"`                     // 订单数量
+        CouponCount int64 `json:"couponCount"`                   // 优惠券数量
+        CommentCount int64 `json:"commentCount"`                 // 评价数
+        ReturnOrderCount int64 `json:"returnOrderCount"`         // 退货数量
+        LoginCount int64 `json:"loginCount"`                     // 登录次数
         AttendCount         int64     `json:"attendCount"`       // 关注数量
         FansCount           int64     `json:"fansCount"`         // 粉丝数量
         CollectProductCount int64     `json:"collectProductCount"`
@@ -52,9 +52,9 @@ type (
     ListMemberStatisticsInfoResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtMemberStatisticsInfoData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

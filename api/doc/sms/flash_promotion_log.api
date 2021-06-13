@@ -19,24 +19,24 @@ type (
         Message string `json:"message"`
     }
     ListFlashPromotionLogReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtFlashPromotionLogData struct {
-        Id            int64     `json:"id"`
-        MemberId      int64     `json:"memberId"`
-        ProductId     int64     `json:"productId"`
-        MemberPhone   string    `json:"memberPhone"`
-        ProductName   string    `json:"productName"`
+        Id int64 `json:"id"`
+        MemberId int64 `json:"memberId"`
+        ProductId int64 `json:"productId"`
+        MemberPhone string `json:"memberPhone"`
+        ProductName string `json:"productName"`
         SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-        SendTime      string `json:"sendTime"`
+        SendTime string `json:"sendTime"`
     }
     ListFlashPromotionLogResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtFlashPromotionLogData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

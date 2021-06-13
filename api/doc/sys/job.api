@@ -17,27 +17,27 @@ type (
         Message string `json:"message"`
     }
     ListJobReq struct {
-        Current int64 `json:"current,optional"`
-        PageSize int64 `json:"pageSize,optional"`
-        JobName  string `json:"jobName,optional"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
+        JobName string `json:"jobName,optional"`
     }
     ListJobData struct {
-        Id             int64          `json:"id"`               // 编号
-        JobName        string `json:"jobName"`         // 职位名称
-        OrderNum       int64  `json:"orderNum"`        // 排序
+        Id int64 `json:"id"`                              // 编号
+        JobName string `json:"jobName"`                   // 职位名称
+        OrderNum int64 `json:"orderNum"`                  // 排序
         CreateBy string `json:"createBy"`                 // 创建人
         CreateTime string `json:"createTime"`             // 创建时间
-        LastUpdateBy string `json:"lastUpdateBy"`        // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
+        LastUpdateBy string `json:"lastUpdateBy"`         // 更新人
+        LastUpdateTime string `json:"lastUpdateTime"`     // 更新时间
         DelFlag int64 `json:"delFlag"`                    // 是否删除  -1：已删除  0：正常
         Remarks        string `json:"remarks"`         // 备注
     }
     ListJobResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListJobData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }

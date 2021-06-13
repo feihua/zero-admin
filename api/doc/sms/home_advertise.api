@@ -24,18 +24,18 @@ type (
         Message string `json:"message"`
     }
     ListHomeAdvertiseReq struct {
-        Current int64 `json:"current"`
-        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
     }
     ListtHomeAdvertiseData struct {
-        Id         int64     `json:"id"`
-        Name       string    `json:"name"`
-        Type       int64     `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-        Pic        string    `json:"pic"`
-        StartTime  string `json:"startTime"`
-        EndTime    string `json:"endTime"`
-        Status     int64     `json:"status"`      // 上下线状态：0->下线；1->上线
-        ClickCount int64     `json:"clickCount"` // 点击数
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        Type int64 `json:"type"`                  // 轮播位置：0->PC首页轮播；1->app首页轮播
+        Pic string `json:"pic"`
+        StartTime string `json:"startTime"`
+        EndTime string `json:"endTime"`
+        Status int64 `json:"status"`              // 上下线状态：0->下线；1->上线
+        ClickCount int64 `json:"clickCount"`      // 点击数
         OrderCount int64     `json:"orderCount"` // 下单数
         Url        string    `json:"url"`         // 链接地址
         Note       string    `json:"note"`        // 备注
@@ -44,9 +44,9 @@ type (
     ListHomeAdvertiseResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
-        Current int64 `json:"current"`
+        Current int64 `json:"current,default=1"`
         Data []*ListtHomeAdvertiseData `json:"data"`
-        PageSize int64 `json:"pageSize"`
+        PageSize int64 `json:"pageSize,default=20"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
