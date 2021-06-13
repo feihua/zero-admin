@@ -66,9 +66,10 @@ func (m *SysRoleModel) FindOne(id int64) (*SysRole, error) {
 	}
 }
 
-func (m *SysRoleModel) FindAll(Current int32, PageSize int64, Name string) (*[]SysRole, error) {
+func (m *SysRoleModel) FindAll(Current int64, PageSize int64, Name string) (*[]SysRole, error) {
 
 	build := builder.Dialect(builder.MYSQL).Select(sysRoleRows).From(m.table).Where(nil)
+
 	if Name != "" {
 		build.And(builder.Eq{`name`: Name})
 	}

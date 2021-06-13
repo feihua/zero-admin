@@ -25,7 +25,7 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleList
 }
 
 func (l *RoleListLogic) RoleList(in *sys.RoleListReq) (*sys.RoleListResp, error) {
-	all, _ := l.svcCtx.RoleModel.FindAll(in.Current, in.PageSize)
+	all, _ := l.svcCtx.RoleModel.FindAll(in.Current, in.PageSize, in.Name)
 	count, _ := l.svcCtx.RoleModel.Count()
 
 	var list []*sys.RoleListData
