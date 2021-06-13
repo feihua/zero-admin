@@ -69,12 +69,6 @@ func (m *SmsCouponHistoryModel) FindOne(id int64) (*SmsCouponHistory, error) {
 
 func (m *SmsCouponHistoryModel) FindAll(Current int64, PageSize int64) (*[]SmsCouponHistory, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", smsCouponHistoryRows, m.table)
 	var resp []SmsCouponHistory
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

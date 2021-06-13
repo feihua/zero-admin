@@ -61,12 +61,6 @@ func (m *PmsProductFullReductionModel) FindOne(id int64) (*PmsProductFullReducti
 
 func (m *PmsProductFullReductionModel) FindAll(Current int64, PageSize int64) (*[]PmsProductFullReduction, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductFullReductionRows, m.table)
 	var resp []PmsProductFullReduction
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

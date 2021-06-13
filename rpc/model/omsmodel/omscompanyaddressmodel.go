@@ -67,12 +67,6 @@ func (m *OmsCompanyAddressModel) FindOne(id int64) (*OmsCompanyAddress, error) {
 
 func (m *OmsCompanyAddressModel) FindAll(Current int64, PageSize int64) (*[]OmsCompanyAddress, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", omsCompanyAddressRows, m.table)
 	var resp []OmsCompanyAddress
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

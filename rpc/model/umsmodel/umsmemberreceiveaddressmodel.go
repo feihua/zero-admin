@@ -67,12 +67,6 @@ func (m *UmsMemberReceiveAddressModel) FindOne(id int64) (*UmsMemberReceiveAddre
 
 func (m *UmsMemberReceiveAddressModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberReceiveAddress, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberReceiveAddressRows, m.table)
 	var resp []UmsMemberReceiveAddress
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

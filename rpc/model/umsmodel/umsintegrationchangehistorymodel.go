@@ -66,12 +66,6 @@ func (m *UmsIntegrationChangeHistoryModel) FindOne(id int64) (*UmsIntegrationCha
 
 func (m *UmsIntegrationChangeHistoryModel) FindAll(Current int64, PageSize int64) (*[]UmsIntegrationChangeHistory, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", umsIntegrationChangeHistoryRows, m.table)
 	var resp []UmsIntegrationChangeHistory
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

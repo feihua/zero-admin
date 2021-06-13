@@ -65,12 +65,6 @@ func (m *SmsFlashPromotionLogModel) FindOne(id int64) (*SmsFlashPromotionLog, er
 
 func (m *SmsFlashPromotionLogModel) FindAll(Current int64, PageSize int64) (*[]SmsFlashPromotionLog, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", smsFlashPromotionLogRows, m.table)
 	var resp []SmsFlashPromotionLog
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

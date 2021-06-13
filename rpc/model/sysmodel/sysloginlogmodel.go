@@ -66,12 +66,6 @@ func (m *SysLoginLogModel) FindOne(id int64) (*SysLoginLog, error) {
 
 func (m *SysLoginLogModel) FindAll(Current int64, PageSize int64) (*[]SysLoginLog, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", sysLoginLogRows, m.table)
 	var resp []SysLoginLog
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

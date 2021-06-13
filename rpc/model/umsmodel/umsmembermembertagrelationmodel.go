@@ -60,12 +60,6 @@ func (m *UmsMemberMemberTagRelationModel) FindOne(id int64) (*UmsMemberMemberTag
 
 func (m *UmsMemberMemberTagRelationModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberMemberTagRelation, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberMemberTagRelationRows, m.table)
 	var resp []UmsMemberMemberTagRelation
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

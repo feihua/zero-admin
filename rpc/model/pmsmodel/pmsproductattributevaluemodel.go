@@ -61,12 +61,6 @@ func (m *PmsProductAttributeValueModel) FindOne(id int64) (*PmsProductAttributeV
 
 func (m *PmsProductAttributeValueModel) FindAll(Current int64, PageSize int64) (*[]PmsProductAttributeValue, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductAttributeValueRows, m.table)
 	var resp []PmsProductAttributeValue
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

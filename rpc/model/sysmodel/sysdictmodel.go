@@ -70,12 +70,6 @@ func (m *SysDictModel) FindOne(id int64) (*SysDict, error) {
 
 func (m *SysDictModel) FindAll(Current int64, PageSize int64) (*[]SysDict, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", sysDictRows, m.table)
 	var resp []SysDict
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

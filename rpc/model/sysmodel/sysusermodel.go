@@ -98,12 +98,6 @@ func (m *SysUserModel) FindOne(id int64) (*SysUser, error) {
 
 func (m *SysUserModel) FindAll(Current int64, PageSize int64) (*[]SysUserList, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	//query := fmt.Sprintf("select %s from %s limit ?,?", sysUserRows, m.table)
 	query := "select sys_user.*, ifnull(sj.job_name,'') as job_name, ifnull(sd.name ,'')as dept_name, ifnull(sys_role.name,'') as role_name,ifnull(sys_role.id ,'1')as role_id from sys_user   left join sys_user_role sur on sys_user.id = sur.user_id   left join sys_role on sur.role_id = sys_role.id    left join sys_job sj on sys_user.job_id = sj.id left join sys_dept sd on sys_user.dept_id = sd.id limit ?,?"
 	var resp []SysUserList

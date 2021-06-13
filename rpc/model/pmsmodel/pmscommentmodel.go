@@ -73,12 +73,6 @@ func (m *PmsCommentModel) FindOne(id int64) (*PmsComment, error) {
 
 func (m *PmsCommentModel) FindAll(Current int64, PageSize int64) (*[]PmsComment, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", pmsCommentRows, m.table)
 	var resp []PmsComment
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

@@ -66,12 +66,6 @@ func (m *UmsGrowthChangeHistoryModel) FindOne(id int64) (*UmsGrowthChangeHistory
 
 func (m *UmsGrowthChangeHistoryModel) FindAll(Current int64, PageSize int64) (*[]UmsGrowthChangeHistory, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", umsGrowthChangeHistoryRows, m.table)
 	var resp []UmsGrowthChangeHistory
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

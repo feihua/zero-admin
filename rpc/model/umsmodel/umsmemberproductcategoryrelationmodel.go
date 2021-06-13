@@ -60,12 +60,6 @@ func (m *UmsMemberProductCategoryRelationModel) FindOne(id int64) (*UmsMemberPro
 
 func (m *UmsMemberProductCategoryRelationModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberProductCategoryRelation, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberProductCategoryRelationRows, m.table)
 	var resp []UmsMemberProductCategoryRelation
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

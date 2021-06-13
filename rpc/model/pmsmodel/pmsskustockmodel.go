@@ -68,12 +68,6 @@ func (m *PmsSkuStockModel) FindOne(id int64) (*PmsSkuStock, error) {
 
 func (m *PmsSkuStockModel) FindAll(Current int64, PageSize int64) (*[]PmsSkuStock, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", pmsSkuStockRows, m.table)
 	var resp []PmsSkuStock
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

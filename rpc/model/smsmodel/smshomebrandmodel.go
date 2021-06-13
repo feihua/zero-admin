@@ -62,12 +62,6 @@ func (m *SmsHomeBrandModel) FindOne(id int64) (*SmsHomeBrand, error) {
 
 func (m *SmsHomeBrandModel) FindAll(Current int64, PageSize int64) (*[]SmsHomeBrand, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", smsHomeBrandRows, m.table)
 	var resp []SmsHomeBrand
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

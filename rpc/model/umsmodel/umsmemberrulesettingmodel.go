@@ -64,12 +64,6 @@ func (m *UmsMemberRuleSettingModel) FindOne(id int64) (*UmsMemberRuleSetting, er
 
 func (m *UmsMemberRuleSettingModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberRuleSetting, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberRuleSettingRows, m.table)
 	var resp []UmsMemberRuleSetting
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

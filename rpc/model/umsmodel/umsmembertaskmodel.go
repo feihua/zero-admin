@@ -62,12 +62,6 @@ func (m *UmsMemberTaskModel) FindOne(id int64) (*UmsMemberTask, error) {
 
 func (m *UmsMemberTaskModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberTask, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberTaskRows, m.table)
 	var resp []UmsMemberTask
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

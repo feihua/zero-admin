@@ -85,12 +85,6 @@ func (m *OmsOrderReturnApplyModel) FindOne(id int64) (*OmsOrderReturnApply, erro
 
 func (m *OmsOrderReturnApplyModel) FindAll(Current int64, PageSize int64) (*[]OmsOrderReturnApply, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderReturnApplyRows, m.table)
 	var resp []OmsOrderReturnApply
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

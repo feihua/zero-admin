@@ -70,12 +70,6 @@ func (m *SysConfigModel) FindOne(id int64) (*SysConfig, error) {
 
 func (m *SysConfigModel) FindAll(Current int64, PageSize int64) (*[]SysConfig, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", sysConfigRows, m.table)
 	var resp []SysConfig
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

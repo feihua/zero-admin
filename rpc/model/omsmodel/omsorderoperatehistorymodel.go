@@ -64,12 +64,6 @@ func (m *OmsOrderOperateHistoryModel) FindOne(id int64) (*OmsOrderOperateHistory
 
 func (m *OmsOrderOperateHistoryModel) FindAll(Current int64, PageSize int64) (*[]OmsOrderOperateHistory, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderOperateHistoryRows, m.table)
 	var resp []OmsOrderOperateHistory
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)

@@ -62,12 +62,6 @@ func (m *UmsIntegrationConsumeSettingModel) FindOne(id int64) (*UmsIntegrationCo
 
 func (m *UmsIntegrationConsumeSettingModel) FindAll(Current int64, PageSize int64) (*[]UmsIntegrationConsumeSetting, error) {
 
-	if Current < 1 {
-		Current = 1
-	}
-	if PageSize < 1 {
-		PageSize = 20
-	}
 	query := fmt.Sprintf("select %s from %s limit ?,?", umsIntegrationConsumeSettingRows, m.table)
 	var resp []UmsIntegrationConsumeSetting
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
