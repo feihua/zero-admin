@@ -14,11 +14,11 @@ import (
 )
 
 type (
+	OrderQueryResp     = pay.OrderQueryResp
 	UnifiedOrderReq    = pay.UnifiedOrderReq
 	UnifiedOrderResp   = pay.UnifiedOrderResp
 	H5UnifiedOrderResp = pay.H5UnifiedOrderResp
 	OrderQueryReq      = pay.OrderQueryReq
-	OrderQueryResp     = pay.OrderQueryResp
 
 	Pay interface {
 		AppUnifiedOrder(ctx context.Context, in *UnifiedOrderReq) (*UnifiedOrderResp, error)

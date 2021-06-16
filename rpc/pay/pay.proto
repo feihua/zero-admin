@@ -29,6 +29,7 @@ message H5UnifiedOrderResp {
 message OrderQueryReq {
   string BusinessId = 1;
   string MerId = 2;
+  string PayType = 6;
 }
 
 message OrderQueryResp {

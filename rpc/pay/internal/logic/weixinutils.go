@@ -14,6 +14,7 @@ import (
 
 const md5SignType = "MD5"
 const CommonPayUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder"
+const searchTradeUrl = "https://api.mch.weixin.qq.com/pay/orderquery"
 
 func getRandomString(length int) string {
 	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
