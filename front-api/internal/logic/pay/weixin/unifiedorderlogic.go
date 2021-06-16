@@ -31,6 +31,7 @@ func (l *UnifiedOrderLogic) UnifiedOrder(req types.UnifiedOrderReq) (*types.Unif
 		Remarks:    req.Remarks,
 		MerId:      req.MerId,
 		Code:       req.Code,
+		PayType:    req.PayType,
 	}
 
 	resp := &types.UnifiedOrderResp{}

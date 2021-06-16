@@ -35,8 +35,7 @@ func (l *JsUnifiedOrderLogic) JsUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.Unif
 	result, err := l.svcCtx.WxRecordModel.Insert(paymodel.PayWxRecord{
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
-		// 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
-		PayType:    "JSAPI",
+		PayType:    in.PayType,
 		Remarks:    in.Remarks,
 		CreateTime: time.Now(),
 		// 0：初始化 1：已发送 2：成功 3：失败
@@ -47,21 +46,20 @@ func (l *JsUnifiedOrderLogic) JsUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.Unif
 	}
 	id, _ := result.LastInsertId()
 
-	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, "APP")
+	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, in.PayType)
 
-	_, _ = commonPay(merchants)
+	res, _ := jsApiPay(merchants)
 
 	_ = l.svcCtx.WxRecordModel.Update(paymodel.PayWxRecord{
 		Id:         id,
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
-		// 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
-		PayType:    "JSAPI",
+		PayType:    in.PayType,
 		Remarks:    in.Remarks,
 		UpdateTime: time.Now(),
-		ReturnCode: "",
-		ReturnMsg:  "",
-		ResultCode: "",
+		ReturnCode: res.ReturnCode,
+		ReturnMsg:  res.ReturnMsg,
+		ResultCode: res.ResultCode,
 		ResultMsg:  "",
 		// 0：初始化 1：已发送 2：成功 3：失败
 		PayStatus: 1,
@@ -70,17 +68,8 @@ func (l *JsUnifiedOrderLogic) JsUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.Unif
 	return &pay.UnifiedOrderResp{}, nil
 }
 
-type JsApiPayParam struct {
-	CommonPayParam
-	Openid string `json:"openid" xml:"openid"`
-}
-
-type JsApiPayResponse struct {
-	CommonPayResponse
-}
-
 // 统一下单
-func commonPay(merchants *paymodel.PayWxMerchants) (commonPayRes CommonPayResponse, err error) {
+func jsApiPay(merchants *paymodel.PayWxMerchants) (commonPayRes CommonPayResponse, err error) {
 	amount := 1
 	payParam := make(map[string]string)
 	payParam["appid"] = merchants.AppId
@@ -92,9 +81,9 @@ func commonPay(merchants *paymodel.PayWxMerchants) (commonPayRes CommonPayRespon
 	payParam["out_trade_no"] = fmt.Sprintf("test%s%s", time.Now().Format("20060102150405"), randNumber())
 	payParam["spbill_create_ip"] = "127.0.0.1"
 	payParam["total_fee"] = fmt.Sprintf("%v", amount)
-	payParam["trade_type"] = jsApiTradeType
+	payParam["trade_type"] = merchants.PayType
 	payParam["sign_type"] = md5SignType
-	payParam["sign"] = getMd5Sign(payParam, "md5key")
+	payParam["sign"] = getMd5Sign(payParam, merchants.MchKey)
 	commonPayParam := CommonPayParam{
 		AppId:          payParam["appid"],
 		MchId:          payParam["mch_id"],
@@ -140,7 +129,7 @@ func commonPay(merchants *paymodel.PayWxMerchants) (commonPayRes CommonPayRespon
 	commonPayResParam["result_code"] = commonPayRes.ResultCode
 	commonPayResParam["prepay_id"] = commonPayRes.PrepayId
 	commonPayResParam["trade_type"] = commonPayRes.TradeType
-	if !checkMd5Sign(commonPayResParam, "md5key", commonPayRes.Sign) {
+	if !checkMd5Sign(commonPayResParam, merchants.MchKey, commonPayRes.Sign) {
 		return commonPayRes, errors.New("common pay response sign verify error")
 	}
 	return commonPayRes, nil

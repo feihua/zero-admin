@@ -8,6 +8,7 @@ message UnifiedOrderReq {
   string Remarks = 3;
   string Code = 4;
   string MerId = 5;
+  string PayType = 6;
 }
 
 message UnifiedOrderResp {

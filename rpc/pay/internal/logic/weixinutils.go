@@ -13,9 +13,6 @@ import (
 )
 
 const md5SignType = "MD5"
-const appTradeType = "APP"
-const jsApiTradeType = "JSAPI"
-const h5TradeType = "MWEB"
 const CommonPayUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder"
 
 func getRandomString(length int) string {

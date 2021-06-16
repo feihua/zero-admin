@@ -1,8 +1,14 @@
 package logic
 
 import (
+	"bytes"
 	"context"
+	"encoding/xml"
+	"errors"
+	"fmt"
 	"go-zero-admin/rpc/model/paymodel"
+	"io/ioutil"
+	"net/http"
 	"time"
 
 	"go-zero-admin/rpc/pay/internal/svc"
@@ -29,8 +35,7 @@ func (l *H5UnifiedOrderLogic) H5UnifiedOrder(in *pay.UnifiedOrderReq) (*pay.H5Un
 	result, err := l.svcCtx.WxRecordModel.Insert(paymodel.PayWxRecord{
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
-		// 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
-		PayType:    "MWEB",
+		PayType:    in.PayType,
 		Remarks:    in.Remarks,
 		CreateTime: time.Now(),
 		// 0：初始化 1：已发送 2：成功 3：失败
@@ -41,19 +46,20 @@ func (l *H5UnifiedOrderLogic) H5UnifiedOrder(in *pay.UnifiedOrderReq) (*pay.H5Un
 	}
 	id, _ := result.LastInsertId()
 
-	buildH5OrderReqVo(in, l)
+	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, in.PayType)
+
+	res, _ := h5Pay(merchants)
 
 	_ = l.svcCtx.WxRecordModel.Update(paymodel.PayWxRecord{
 		Id:         id,
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
-		// 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
-		PayType:    h5TradeType,
+		PayType:    in.PayType,
 		Remarks:    in.Remarks,
 		UpdateTime: time.Now(),
-		ReturnCode: "",
-		ReturnMsg:  "",
-		ResultCode: "",
+		ReturnCode: res.ReturnCode,
+		ReturnMsg:  res.ReturnMsg,
+		ResultCode: res.ResultCode,
 		ResultMsg:  "",
 		// 0：初始化 1：已发送 2：成功 3：失败
 		PayStatus: 1,
@@ -65,25 +71,66 @@ func (l *H5UnifiedOrderLogic) H5UnifiedOrder(in *pay.UnifiedOrderReq) (*pay.H5Un
 /**
 构建h5支付统一下单参数
 */
-func buildH5OrderReqVo(in *pay.UnifiedOrderReq, l *H5UnifiedOrderLogic) map[string]string {
-
-	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, "APP")
-
-	reqVo := make(map[string]string)
-	reqVo["appid"] = merchants.AppId
-	reqVo["mch_id"] = merchants.MchId
-	reqVo["nonce_str"] = ""
-	reqVo["sign_type"] = md5SignType
-	reqVo["body"] = in.Remarks
-	reqVo["out_trade_no"] = in.BusinessId
-	reqVo["fee_type"] = "CNY"
-	reqVo["total_fee"] = in.Amount
-	reqVo["spbill_create_ip"] = ""
-	reqVo["notify_url"] = merchants.NotifyUrl
-	reqVo["trade_type"] = h5TradeType
-	reqVo["scene_info"] = ""
-	//reqVo["attach"] = ""
-	reqVo["sign"] = ""
-
-	return reqVo
+func h5Pay(merchants *paymodel.PayWxMerchants) (commonPayRes CommonPayResponse, err error) {
+	amount := 1
+	payParam := make(map[string]string)
+	payParam["appid"] = merchants.AppId
+	payParam["mch_id"] = merchants.MchId
+	payParam["nonce_str"] = getRandomString(32)
+	payParam["body"] = fmt.Sprintf("微信充值:￥%d", amount)
+	payParam["notify_url"] = "https://hy.life23.cn/order/notify"
+	payParam["out_trade_no"] = fmt.Sprintf("test%s%s", time.Now().Format("20060102150405"), randNumber())
+	payParam["spbill_create_ip"] = "127.0.0.1"
+	payParam["total_fee"] = fmt.Sprintf("%v", amount)
+	payParam["trade_type"] = merchants.PayType
+	payParam["sign_type"] = md5SignType
+	payParam["sign"] = getMd5Sign(payParam, merchants.MchKey)
+	commonPayParam := CommonPayParam{
+		AppId:          payParam["appid"],
+		MchId:          payParam["mch_id"],
+		NonceStr:       payParam["nonce_str"],
+		Body:           payParam["body"],
+		NotifyUrl:      payParam["notify_url"],
+		OutTradeNo:     payParam["out_trade_no"],
+		SpBillCreateIp: payParam["spbill_create_ip"],
+		TotalFee:       payParam["total_fee"],
+		TradeType:      payParam["trade_type"],
+		Sign:           payParam["sign"],
+		SignType:       payParam["sign_type"],
+	}
+	payXmlBytes, err := xml.Marshal(commonPayParam)
+	if err != nil {
+		return commonPayRes, err
+	}
+	//fmt.Println(string(payXmlBytes))
+	request, err := http.NewRequest(http.MethodPost, CommonPayUrl, bytes.NewReader(payXmlBytes))
+	if err != nil {
+		return commonPayRes, err
+	}
+	client := http.DefaultClient
+	response, err := client.Do(request)
+	if err != nil {
+		return commonPayRes, err
+	}
+	defer response.Body.Close()
+	bodyBytes, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return commonPayRes, err
+	}
+	if err = xml.Unmarshal(bodyBytes, &commonPayRes); err != nil {
+		return commonPayRes, err
+	}
+	commonPayResParam := make(map[string]string)
+	commonPayResParam["return_code"] = commonPayRes.ReturnCode
+	commonPayResParam["return_msg"] = commonPayRes.ReturnMsg
+	commonPayResParam["appid"] = commonPayRes.AppId
+	commonPayResParam["mch_id"] = commonPayRes.MchId
+	commonPayResParam["nonce_str"] = commonPayRes.NonceStr
+	commonPayResParam["result_code"] = commonPayRes.ResultCode
+	commonPayResParam["prepay_id"] = commonPayRes.PrepayId
+	commonPayResParam["trade_type"] = commonPayRes.TradeType
+	if !checkMd5Sign(commonPayResParam, merchants.MchKey, commonPayRes.Sign) {
+		return commonPayRes, errors.New("common pay response sign verify error")
+	}
+	return commonPayRes, nil
 }
