@@ -8,6 +8,7 @@ import (
 	ordercart "go-zero-admin/front-api/internal/handler/order/cart"
 	orderorder "go-zero-admin/front-api/internal/handler/order/order"
 	payweixin "go-zero-admin/front-api/internal/handler/pay/weixin"
+	persionpersion "go-zero-admin/front-api/internal/handler/persion/persion"
 	productcategory "go-zero-admin/front-api/internal/handler/product/category"
 	productproduct "go-zero-admin/front-api/internal/handler/product/product"
 	smshome "go-zero-admin/front-api/internal/handler/sms/home"
@@ -126,5 +127,20 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/persion/persion/register",
+				Handler: persionpersion.PersionRegisterHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/persion/persion/login",
+				Handler: persionpersion.PersionLoginHandler(serverCtx),
+			},
+		},
 	)
 }

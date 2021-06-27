@@ -3,7 +3,6 @@ package sysmodel
 import (
 	"database/sql"
 	"fmt"
-	"github.com/go-xorm/builder"
 	"strings"
 	"time"
 
@@ -68,20 +67,27 @@ func (m *SysRoleModel) FindOne(id int64) (*SysRole, error) {
 
 func (m *SysRoleModel) FindAll(Current int64, PageSize int64, Name string) (*[]SysRole, error) {
 
-	build := builder.Dialect(builder.MYSQL).Select(sysRoleRows).From(m.table).Where(nil)
+	//fmt.Println("SysRoleModel FindAll111111111111")
+	//build := builder.Dialect(builder.MYSQL).Select(sysRoleRows).From(m.table).Where(nil)
+	//fmt.Println("SysRoleModel FindAll22222")
+	//if Name != "" {
+	//	build.And(builder.Eq{`name`: Name})
+	//}
+	//fmt.Println("SysRoleModel FindAll4333333")
+	//query, args, err := build.OrderBy(`id desc`).Limit(int(Current), int(PageSize)).ToSQL()
+	//if err != nil {
+	//	return nil, err
+	//}
+	//
+	//fmt.Println("SysRoleModel FindAll4444443")
 
-	if Name != "" {
-		build.And(builder.Eq{`name`: Name})
-	}
+	fmt.Println("SysRoleModel FindAll Name:" +Name)
 
-	query, args, err := build.OrderBy(`id desc`).Limit(int(Current), int(PageSize)).ToSQL()
-	if err != nil {
-		return nil, err
-	}
-
+	query := fmt.Sprintf("select %s from %s limit ?,?", sysRoleRows, m.table)
 	var resp []SysRole
-	err1 := m.conn.QueryRows(resp, query, args...)
-
+	//err1 := m.conn.QueryRows(resp, query, args...)
+	//var resp []UsUsers
+	err1 := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
 	switch err1 {
 	case nil:
 		return &resp, nil

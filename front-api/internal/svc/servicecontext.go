@@ -9,6 +9,7 @@ import (
 	"go-zero-admin/rpc/sms/smsclient"
 	"go-zero-admin/rpc/sys/sysclient"
 	"go-zero-admin/rpc/ums/umsclient"
+	"go-zero-admin/rpc/us/usclient"
 )
 
 type ServiceContext struct {
@@ -20,6 +21,7 @@ type ServiceContext struct {
 	Oms omsclient.Oms
 	Sms smsclient.Sms
 	Pay payclient.Pay
+	Us  usclient.Us
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -32,5 +34,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Oms: omsclient.NewOms(zrpc.MustNewClient(c.OmsRpc)),
 		Sms: smsclient.NewSms(zrpc.MustNewClient(c.SmsRpc)),
 		Pay: payclient.NewPay(zrpc.MustNewClient(c.PayRpc)),
+		Us:  usclient.NewUs(zrpc.MustNewClient(c.UsRpc)),
 	}
 }

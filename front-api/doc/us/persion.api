@@ -1,0 +1,72 @@
+info(
+    title: "users "
+    desc: "type desc here"
+    author: "type author here"
+    email: "442567835@qq.com"
+    version: "1.0"
+)
+
+
+type(
+    PersionRegisterReq struct {
+        PhoneNumber string `json:"phoneNumber"`
+        Password    string `json:"password"`
+        Number      string `json:"number"`
+        Email       string `json:"email"`
+        Gender      string `json:"gender"`
+        Name        string `json:"name"`
+        RoleId      int64  `json:"roleId"`
+    }
+    PersionRegisterRespData struct {
+        Result       bool `json:"result"`
+    }
+    PersionRegisterResp struct {
+        Code              int64 `json:"code"`
+        Message           string `json:"message"`
+        Data              PersionRegisterRespData `json:"data"`
+    }
+
+
+    PersionLoginReq struct {
+        Password    string `json:"password"`
+        PhoneNumber string `json:"phoneNumber"`
+    }
+    PersionLoginRespData struct {
+        Id                int64  `json:"id"`
+        Name              string `json:"Name"`
+        PhoneNumber       string `json:"phoneNumber"`
+        Email             string `json:"email"`
+        RoleName          string `json:"roleName"`
+        RoleId            int64  `json:"roleId"`
+        Gender            string `json:"gender"`
+        AccessToken       string `json:"token"`
+        AccessExpire      int64 `json:"accessExpire"`
+        RefreshAfter      int64 `json:"refreshAfter"`
+    }
+    PersionLoginResp struct {
+        Code              int64 `json:"code"`
+        Message           string `json:"message"`
+        Data              PersionLoginRespData `json:"data"`
+    }
+
+    PersionJwtToken struct {
+        AccessToken  string `json:"accessToken,omitempty"`
+        AccessExpire int64  `json:"accessExpire,omitempty"`
+        RefreshAfter int64  `json:"refreshAfter,omitempty"`
+    }
+
+
+
+)
+
+@server(
+    group: persion/persion
+)
+service front-api {
+
+    @handler PersionRegister
+    post /api/persion/persion/register (PersionRegisterReq) returns (PersionRegisterResp)
+
+    @handler PersionLogin
+    post /api/persion/persion/login (PersionLoginReq) returns (PersionLoginResp)
+}

@@ -2,8 +2,8 @@ Name: pay.rpc
 ListenOn: 127.0.0.1:8085
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+  - 192.168.217.129:2379
   Key: pay.rpc
 
 Mysql:
-  Datasource: root:123456@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Datasource: root:newclass!123654@tcp(192.168.217.129:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

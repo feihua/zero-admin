@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package us;
+
+message PersionData {
+  int64        Id = 1;
+  string       PhoneNumber = 2;
+  string       Password = 3;
+  string       UniqueId = 4;
+  string       Number = 5;
+  string       Email = 6;
+  string       Gender = 7;
+  string       Name = 8;
+  int64        RoleType = 9;
+  int64        State = 10;
+  string       CreateAt = 11;
+  string       UpdateAt = 12;
+}
+
+message PersionAddReq {
+  PersionData Data = 1;
+}
+
+message PersionAddResp {
+  bool   Result = 1;
+}
+
+message PersionListReq {
+  int64 Current = 1;
+  int64 PageSize = 2;
+}
+
+
+message PersionListResp {
+  int64 Total = 1;
+  repeated  PersionData list = 2;
+}
+
+message PersionUpdateReq {
+  PersionData Data = 1;
+}
+
+message PersionUpdateResp {
+  bool   Result = 1;
+}
+
+message PersionDeleteReq {
+  int64 Id = 1;
+}
+
+message PersionDeleteResp {
+  bool   Result = 1;
+}
+
+
+message RoleData {
+  int64        Id = 1;
+  string       RoleName = 2;
+  string       Remark = 3;
+  string       CreateAt = 4;
+  string       UpdateAt = 5;
+}
+
+
+
+message RoleAddReq {
+  RoleData Data = 1;
+}
+
+message RoleAddResp {
+  bool   Result = 1;
+}
+
+message RoleListReq {
+  int64 Current = 1;
+  int64 PageSize = 2;
+}
+
+
+message RoleListResp {
+  int64     Total = 1;
+  repeated  RoleData List = 2;
+}
+
+message RoleUpdateReq {
+  RoleData Data = 1;
+}
+
+message RoleUpdateResp {
+  bool        Result = 1;
+}
+
+message RoleDeleteReq {
+  int64 Id = 1;
+}
+
+message RoleDeleteResp {
+  bool   Result = 1;
+}
+
+
+
+message PersionLoginReq {
+  string PhoneNumber = 1;
+  string Password = 2;
+}
+
+message PersionLoginResp {
+  int64        Id = 1;
+  string       PhoneNumber = 2;
+  string       UniqueId = 3;
+  string       Number = 4;
+  string       Email = 5;
+  string       Gender = 6;
+  string       Name = 7;
+  int64        State = 8;
+  string       CreateAt = 9;
+  int64        roleId = 10;
+  string       roleName = 11;
+}
+
+message PersionRegisterReq {
+  string PhoneNumber = 1;
+  string Password = 2;
+  string Number = 3;
+  string Email = 4;
+  string Gender = 5;
+  string Name = 6;
+  int64  RoleId = 7;
+
+}
+
+message PersionRegisterResp {
+  bool Result = 1;
+}
+
+
+
+
+
+service Us {
+  rpc PersionAdd(PersionAddReq) returns(PersionAddResp);
+  rpc PersionList(PersionListReq) returns(PersionListResp);
+  rpc PersionUpdate(PersionUpdateReq) returns(PersionUpdateResp);
+  rpc PersionDelete(PersionDeleteReq) returns(PersionDeleteResp);
+
+
+  rpc RoleAdd(RoleAddReq) returns(RoleAddResp);
+  rpc RoleList(RoleListReq) returns(RoleListResp);
+  rpc RoleUpdate(RoleUpdateReq) returns(RoleUpdateResp);
+  rpc RoleDelete(RoleDeleteReq) returns(RoleDeleteResp);
+
+  rpc PersionLogin(PersionLoginReq) returns(PersionLoginResp);
+  rpc PersionRegister(PersionRegisterReq) returns(PersionRegisterResp);
+}

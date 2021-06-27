@@ -8,6 +8,11 @@ import (
 type Config struct {
 	rest.RestConf
 
+	Auth struct {
+		AccessSecret string
+		AccessExpire int64
+	}
+
 	//系统
 	SysRpc zrpc.RpcClientConf
 	//会员
@@ -20,4 +25,7 @@ type Config struct {
 	SmsRpc zrpc.RpcClientConf
 	//支付
 	PayRpc zrpc.RpcClientConf
+
+	//Us
+	UsRpc zrpc.RpcClientConf
 }

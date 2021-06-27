@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/tal-tech/go-zero/rest/httpx"
+	"go-zero-admin/shared"
 
 	"go-zero-admin/front-api/internal/config"
 	"go-zero-admin/front-api/internal/handler"
@@ -12,7 +14,7 @@ import (
 	"github.com/tal-tech/go-zero/rest"
 )
 
-var configFile = flag.String("f", "front-api/etc/front-api.yaml", "the config file")
+var configFile = flag.String("f", "etc/front-api.yaml", "the config file")
 
 func main() {
 	flag.Parse()
@@ -25,6 +27,9 @@ func main() {
 	defer server.Stop()
 
 	handler.RegisterHandlers(server, ctx)
+
+	// 设置错误处理函数
+	httpx.SetErrorHandler(shared.ErrorHandler)
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()

@@ -17,7 +17,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-var configFile = flag.String("f", "rpc/oms/etc/oms.yaml", "the config file")
+var configFile = flag.String("f", "etc/oms.yaml", "the config file")
 
 func main() {
 	flag.Parse()

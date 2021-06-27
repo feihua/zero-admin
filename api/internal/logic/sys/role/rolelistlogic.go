@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -25,6 +26,7 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleListL
 }
 
 func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, error) {
+	fmt.Println("RoleList1111")
 	resp, err := l.svcCtx.Sys.RoleList(l.ctx, &sysclient.RoleListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
