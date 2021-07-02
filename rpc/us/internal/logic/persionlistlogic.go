@@ -42,8 +42,8 @@ func (l *PersionListLogic) PersionList(in *us.PersionListReq) (*us.PersionListRe
 			Name:        item.Name.String,
 			RoleType:    item.RoleId.Int64,
 			State:       item.State.Int64,
-			CreateAt:    item.CreateTime.Time.String(),
-			UpdateAt:    item.UpdateTime.Time.String(),
+			CreateTime:    item.CreateTime.Time.String(),
+			UpdateTime:    item.UpdateTime.Time.String(),
 		})
 	}
 

@@ -21,12 +21,17 @@ func NewPersionLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Pers
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
+	//logic := PersionLoginLogic{
+	//	ctx:    ctx,
+	//	svcCtx: svcCtx,
+	//	Logger: logx.WithContext(ctx),
+	//}
+
 }
 
 func (l *PersionLoginLogic) PersionLogin(in *us.PersionLoginReq) (*us.PersionLoginResp, error) {
 	// todo: add your logic here and delete this line
 	userInfo, err := l.svcCtx.UsUsersModel.FindOneByPhoneNumber(in.PhoneNumber)
-
 
 	switch err {
 	case nil:
@@ -41,22 +46,30 @@ func (l *PersionLoginLogic) PersionLogin(in *us.PersionLoginReq) (*us.PersionLog
 
 	usRole, err := l.svcCtx.UsRolesModel.FindOne(userInfo.RoleId.Int64)
 	roleName := ""
-	if err == nil{
+	if err == nil {
 		roleName = usRole.RoleName.String
 	}
 
+	roleExtendMap, _ := GetRoleExtendInfoByRoleName(l.svcCtx, usRole.RoleName.String, userInfo.Id)
+
 	return &us.PersionLoginResp{
-		Id:          userInfo.Id,
-		PhoneNumber: userInfo.PhoneNumber.String,
-		UniqueId:    userInfo.UniqueId.String,
-		Number:      userInfo.Number.String,
-		Email:       userInfo.Email.String,
-		Gender:      userInfo.Sex.String,
-		Name:        userInfo.Name.String,
-		State:       userInfo.State.Int64,
-		CreateAt:    userInfo.CreateTime.Time.String(),
-		RoleId:      userInfo.RoleId.Int64,
-		RoleName:    roleName,
+		Info: &us.PersionInfo{
+			Id:          userInfo.Id,
+			PhoneNumber: userInfo.PhoneNumber.String,
+			UniqueId:    userInfo.UniqueId.String,
+			Number:      userInfo.Number.String,
+			Email:       userInfo.Email.String,
+			Gender:      userInfo.Sex.String,
+			Name:        userInfo.Name.String,
+			State:       userInfo.State.Int64,
+			CreateTime:  userInfo.CreateTime.Time.String(),
+			RoleId:      userInfo.RoleId.Int64,
+			RoleName:    roleName,
+			Class:       roleExtendMap["class"],
+			Academy:     roleExtendMap["academy"],
+			School:      roleExtendMap["school"],
+			Grade:       roleExtendMap["grade"],
+		},
 	}, nil
 
 }

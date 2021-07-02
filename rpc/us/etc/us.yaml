@@ -1,5 +1,8 @@
 Name: us.rpc
 ListenOn: 127.0.0.1:9081
+Log:
+  Mode: console
+  Level: info
 Etcd:
   Hosts:
     - 192.168.217.129:2379

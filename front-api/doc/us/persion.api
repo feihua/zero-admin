@@ -16,6 +16,10 @@ type(
         Gender      string `json:"gender"`
         Name        string `json:"name"`
         RoleId      int64  `json:"roleId"`
+        Class       string    `json:"class,optional"`
+        Academy     string    `json:"academy,optional"`
+        School      string    `json:"school,optional"`
+        Grade       string    `json:"grade,optional"`
     }
     PersionRegisterRespData struct {
         Result       bool `json:"result"`
@@ -26,12 +30,7 @@ type(
         Data              PersionRegisterRespData `json:"data"`
     }
 
-
-    PersionLoginReq struct {
-        Password    string `json:"password"`
-        PhoneNumber string `json:"phoneNumber"`
-    }
-    PersionLoginRespData struct {
+    PersionInfo struct{
         Id                int64  `json:"id"`
         Name              string `json:"Name"`
         PhoneNumber       string `json:"phoneNumber"`
@@ -39,6 +38,18 @@ type(
         RoleName          string `json:"roleName"`
         RoleId            int64  `json:"roleId"`
         Gender            string `json:"gender"`
+        Class             string    `json:"class"`
+        Academy           string    `json:"academy"`
+        School            string    `json:"school"`
+        Grade             string    `json:"grade"`
+    }
+
+    PersionLoginReq struct {
+        Password    string `json:"password"`
+        PhoneNumber string `json:"phoneNumber"`
+    }
+    PersionLoginRespData struct {
+        PersionInfo
         AccessToken       string `json:"token"`
         AccessExpire      int64 `json:"accessExpire"`
         RefreshAfter      int64 `json:"refreshAfter"`
@@ -56,6 +67,40 @@ type(
     }
 
 
+    PersionInfoReq struct{
+        Id int64 `json:"id"`
+    }
+
+    PersionInfoResp struct{
+        Code              int64 `json:"code"`
+        Message           string `json:"message"`
+        Data              PersionInfo `json:"data"`
+    }
+
+
+    AllRoleReq struct{
+
+    }
+    RoleData struct{
+       Id int64         `json:"id"`
+       RoleName string  `json:"roleName"`
+       Remark   string  `json:"remark"`
+       CreateTime string  `json:"createTime"`
+       UpdateTime string  `json:"updateTime"`
+    }
+
+    AllRoleData{
+        RoleData     []*RoleData  `json:"roleData"`
+        Total        int64        `json:"total"`
+    }
+
+    AllRoleResp struct{
+        Code        int64       `json:"code"`
+        Message     string      `json:"message"`
+        Data        AllRoleData `json:"data"`
+    }
+
+
 
 )
 
@@ -69,4 +114,16 @@ service front-api {
 
     @handler PersionLogin
     post /api/persion/persion/login (PersionLoginReq) returns (PersionLoginResp)
+
+    @handler AllRole
+    post /api/persion/persion/allroles (AllRoleReq) returns (AllRoleResp)
+}
+
+@server(
+    jwt: Auth
+    group: persion/persion
+)
+service front-api {
+    @handler PersionInfo
+    post /api/persion/persion/info (PersionInfoReq) returns (PersionInfoResp)
 }

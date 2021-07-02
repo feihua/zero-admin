@@ -419,6 +419,10 @@ type PersionRegisterReq struct {
 	Gender      string `json:"gender"`
 	Name        string `json:"name"`
 	RoleId      int64  `json:"roleId"`
+	Class       string `json:"class,optional"`
+	Academy     string `json:"academy,optional"`
+	School      string `json:"school,optional"`
+	Grade       string `json:"grade,optional"`
 }
 
 type PersionRegisterRespData struct {
@@ -431,19 +435,27 @@ type PersionRegisterResp struct {
 	Data    PersionRegisterRespData `json:"data"`
 }
 
+type PersionInfo struct {
+	Id          int64  `json:"id"`
+	Name        string `json:"Name"`
+	PhoneNumber string `json:"phoneNumber"`
+	Email       string `json:"email"`
+	RoleName    string `json:"roleName"`
+	RoleId      int64  `json:"roleId"`
+	Gender      string `json:"gender"`
+	Class       string `json:"class"`
+	Academy     string `json:"academy"`
+	School      string `json:"school"`
+	Grade       string `json:"grade"`
+}
+
 type PersionLoginReq struct {
 	Password    string `json:"password"`
 	PhoneNumber string `json:"phoneNumber"`
 }
 
 type PersionLoginRespData struct {
-	Id           int64  `json:"id"`
-	Name         string `json:"Name"`
-	PhoneNumber  string `json:"phoneNumber"`
-	Email        string `json:"email"`
-	RoleName     string `json:"roleName"`
-	RoleId       int64  `json:"roleId"`
-	Gender       string `json:"gender"`
+	PersionInfo
 	AccessToken  string `json:"token"`
 	AccessExpire int64  `json:"accessExpire"`
 	RefreshAfter int64  `json:"refreshAfter"`
@@ -459,4 +471,36 @@ type PersionJwtToken struct {
 	AccessToken  string `json:"accessToken,omitempty"`
 	AccessExpire int64  `json:"accessExpire,omitempty"`
 	RefreshAfter int64  `json:"refreshAfter,omitempty"`
+}
+
+type PersionInfoReq struct {
+	Id int64 `json:"id"`
+}
+
+type PersionInfoResp struct {
+	Code    int64       `json:"code"`
+	Message string      `json:"message"`
+	Data    PersionInfo `json:"data"`
+}
+
+type AllRoleReq struct {
+}
+
+type RoleData struct {
+	Id         int64  `json:"id"`
+	RoleName   string `json:"roleName"`
+	Remark     string `json:"remark"`
+	CreateTime string `json:"createTime"`
+	UpdateTime string `json:"updateTime"`
+}
+
+type AllRoleData struct {
+	RoleData []*RoleData `json:"roleData"`
+	Total    int64       `json:"total"`
+}
+
+type AllRoleResp struct {
+	Code    int64       `json:"code"`
+	Message string      `json:"message"`
+	Data    AllRoleData `json:"data"`
 }

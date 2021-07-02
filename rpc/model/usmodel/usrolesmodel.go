@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/tal-tech/go-zero/core/stores/cache"
 	"github.com/tal-tech/go-zero/core/stores/sqlc"
@@ -18,6 +19,8 @@ var (
 	usRolesRowsExpectAutoSet   = strings.Join(stringx.Remove(usRolesFieldNames, "`create_time`", "`update_time`"), ",")
 	usRolesRowsWithPlaceHolder = strings.Join(stringx.Remove(usRolesFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 
+	usRolesRowsForDeleteSoft = strings.Join([]string{"delete_time"}, "=?,") + "=?"
+
 	cacheUsRolesIdPrefix = "cache#usRoles#id#"
 )
 
@@ -29,6 +32,7 @@ type (
 		Count() (int64, error)
 		Update(data UsRoles) error
 		Delete(id int64) error
+		DeleteSoft(id int64) error
 	}
 
 	defaultUsRolesModel struct {
@@ -37,12 +41,12 @@ type (
 	}
 
 	UsRoles struct {
-		Id       int64          `db:"id"`
-		RoleName sql.NullString `db:"role_name"`
-		Remark   sql.NullString `db:"remark"`
-		CreateAt sql.NullTime   `db:"create_at"`
-		UpdateAt sql.NullTime   `db:"update_at"`
-		DeleteAt sql.NullTime   `db:"delete_at"`
+		Id         int64          `db:"id"`
+		RoleName   sql.NullString `db:"role_name"`
+		Remark     sql.NullString `db:"remark"`
+		CreateTime sql.NullTime   `db:"create_time"`
+		UpdateTime sql.NullTime   `db:"update_time"`
+		DeleteTime   sql.NullTime   `db:"delete_time"`
 	}
 )
 
@@ -55,7 +59,7 @@ func NewUsRolesModel(conn sqlx.SqlConn, c cache.CacheConf) UsRolesModel {
 
 func (m *defaultUsRolesModel) Insert(data UsRoles) (sql.Result, error) {
 	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, usRolesRowsExpectAutoSet)
-	ret, err := m.ExecNoCache(query, data.Id, data.RoleName, data.Remark, data.CreateAt, data.UpdateAt, data.DeleteAt)
+	ret, err := m.ExecNoCache(query, data.Id, data.RoleName, data.Remark, data.CreateTime, data.UpdateTime, data.DeleteTime)
 
 	return ret, err
 }
@@ -64,7 +68,7 @@ func (m *defaultUsRolesModel) FindOne(id int64) (*UsRoles, error) {
 	usRolesIdKey := fmt.Sprintf("%s%v", cacheUsRolesIdPrefix, id)
 	var resp UsRoles
 	err := m.QueryRow(&resp, usRolesIdKey, func(conn sqlx.SqlConn, v interface{}) error {
-		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", usRolesRows, m.table)
+		query := fmt.Sprintf("select %s from %s where `id` = ? and `delete_time` is null limit 1", usRolesRows, m.table)
 		return conn.QueryRow(v, query, id)
 	})
 	switch err {
@@ -85,7 +89,7 @@ func (m *defaultUsRolesModel) FindAll(Current int64, PageSize int64) (*[]UsRoles
 	if PageSize < 1 {
 		PageSize = 20
 	}
-	query := fmt.Sprintf("select %s from %s limit ?,?", usRolesRows, m.table)
+	query := fmt.Sprintf("select %s from %s where `delete_time` is null limit ?,?", usRolesRows, m.table)
 	var resp []UsRoles
 	err := m.QueryRowsNoCache(&resp, query, (Current-1)*PageSize, PageSize)
 	switch err {
@@ -99,7 +103,7 @@ func (m *defaultUsRolesModel) FindAll(Current int64, PageSize int64) (*[]UsRoles
 }
 
 func (m *defaultUsRolesModel) Count() (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+	query := fmt.Sprintf("select count(*) as count from %s  where `delete_time` is null", m.table)
 
 	var count int64
 	err := m.QueryRowNoCache(&count, query)
@@ -118,7 +122,9 @@ func (m *defaultUsRolesModel) Update(data UsRoles) error {
 	usRolesIdKey := fmt.Sprintf("%s%v", cacheUsRolesIdPrefix, data.Id)
 	_, err := m.Exec(func(conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, usRolesRowsWithPlaceHolder)
-		return conn.Exec(query, data.RoleName, data.Remark, data.CreateAt, data.UpdateAt, data.DeleteAt, data.Id)
+		data.UpdateTime.Time = time.Now()
+		data.UpdateTime.Valid = true
+		return conn.Exec(query, data.RoleName, data.Remark, data.CreateTime, data.UpdateTime, data.DeleteTime, data.Id)
 	}, usRolesIdKey)
 	return err
 }
@@ -130,6 +136,16 @@ func (m *defaultUsRolesModel) Delete(id int64) error {
 		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
 		return conn.Exec(query, id)
 	}, usRolesIdKey)
+	return err
+}
+
+func (m *defaultUsRolesModel) DeleteSoft(id int64) error {
+	usUsersIdKey := fmt.Sprintf("%s%v", cacheUsUsersIdPrefix, id)
+	_, err := m.Exec(func(conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, usRolesRowsForDeleteSoft)
+		currTime := time.Now()
+		return conn.Exec(query, currTime, id)
+	}, usUsersIdKey)
 	return err
 }
 

@@ -61,6 +61,11 @@ func (s *UsServer) RoleDelete(ctx context.Context, in *us.RoleDeleteReq) (*us.Ro
 	return l.RoleDelete(in)
 }
 
+func (s *UsServer) AllRoles(ctx context.Context, in *us.AllRoleReq) (*us.AllRoleResp, error) {
+	l := logic.NewAllRolesLogic(ctx, s.svcCtx)
+	return l.AllRoles(in)
+}
+
 func (s *UsServer) PersionLogin(ctx context.Context, in *us.PersionLoginReq) (*us.PersionLoginResp, error) {
 	l := logic.NewPersionLoginLogic(ctx, s.svcCtx)
 	return l.PersionLogin(in)
@@ -69,4 +74,9 @@ func (s *UsServer) PersionLogin(ctx context.Context, in *us.PersionLoginReq) (*u
 func (s *UsServer) PersionRegister(ctx context.Context, in *us.PersionRegisterReq) (*us.PersionRegisterResp, error) {
 	l := logic.NewPersionRegisterLogic(ctx, s.svcCtx)
 	return l.PersionRegister(in)
+}
+
+func (s *UsServer) PersionInfo(ctx context.Context, in *us.PersionInfoReq) (*us.PersionInfoResp, error) {
+	l := logic.NewPersionInfoLogic(ctx, s.svcCtx)
+	return l.PersionInfo(in)
 }

@@ -31,7 +31,7 @@ func NewPersionLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) Persi
 func (l *PersionLoginLogic) PersionLogin(req types.PersionLoginReq) (*types.PersionLoginResp, error) {
 	// todo: add your logic here and delete this line
 	if len(strings.TrimSpace(req.PhoneNumber)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
-		return nil,errors.New("参数错误")
+		return nil, errors.New("参数错误")
 	}
 
 	resp, err := l.svcCtx.Us.PersionLogin(l.ctx, &usclient.PersionLoginReq{
@@ -40,7 +40,7 @@ func (l *PersionLoginLogic) PersionLogin(req types.PersionLoginReq) (*types.Pers
 	})
 
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
 	//保存登录日志
@@ -53,7 +53,7 @@ func (l *PersionLoginLogic) PersionLogin(req types.PersionLoginReq) (*types.Pers
 	// ---start---
 	now := time.Now().Unix()
 	accessExpire := l.svcCtx.Config.Auth.AccessExpire
-	jwtToken, err := l.getJwtToken(l.svcCtx.Config.Auth.AccessSecret, now, l.svcCtx.Config.Auth.AccessExpire, resp.Id)
+	jwtToken, err := l.getJwtToken(l.svcCtx.Config.Auth.AccessSecret, now, l.svcCtx.Config.Auth.AccessExpire, resp.Info.Id)
 	if err != nil {
 		return nil, err
 	}
@@ -62,19 +62,21 @@ func (l *PersionLoginLogic) PersionLogin(req types.PersionLoginReq) (*types.Pers
 	return &types.PersionLoginResp{
 		Code:    0,
 		Message: "success",
-		Data:    types.PersionLoginRespData{
-			Id:           resp.Id,
-			Name:         resp.Name,
-			PhoneNumber:  resp.PhoneNumber,
-			Email:        resp.Email,
-			RoleId:       resp.RoleId,
-			RoleName:     resp.RoleName,
-			Gender:       resp.Gender,
+		Data: types.PersionLoginRespData{
+			PersionInfo: types.PersionInfo{
+				Id:          resp.Info.Id,
+				Name:        resp.Info.Name,
+				PhoneNumber: resp.Info.PhoneNumber,
+				Email:       resp.Info.Email,
+				RoleId:      resp.Info.RoleId,
+				RoleName:    resp.Info.RoleName,
+				Gender:      resp.Info.Gender,
+			},
 			AccessToken:  jwtToken,
 			AccessExpire: now + accessExpire,
 			RefreshAfter: now + accessExpire/2,
 		},
-	},nil
+	}, nil
 }
 
 func (l *PersionLoginLogic) getJwtToken(secretKey string, iat, seconds, userId int64) (string, error) {

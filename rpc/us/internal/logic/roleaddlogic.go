@@ -28,28 +28,32 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleAddLo
 
 func (l *RoleAddLogic) RoleAdd(in *us.RoleAddReq) (*us.RoleAddResp, error) {
 	// todo: add your logic here and delete this line
-	_,err := l.svcCtx.UsRolesModel.Insert(usmodel.UsRoles{
+	result, err := l.svcCtx.UsRolesModel.Insert(usmodel.UsRoles{
 		RoleName: sql.NullString{
 			String: in.Data.RoleName,
 			Valid:  true,
 		},
-		Remark:   sql.NullString{
+		Remark: sql.NullString{
 			String: in.Data.Remark,
 			Valid:  true,
 		},
-		CreateAt: sql.NullTime{
+		CreateTime: sql.NullTime{
 			Time:  time.Now(),
 			Valid: true,
 		},
-		UpdateAt: sql.NullTime{
+		UpdateTime: sql.NullTime{
 			Time:  time.Now(),
 			Valid: true,
 		},
 	})
-	if err != nil{
+	if err != nil {
 		return &us.RoleAddResp{
 			Result: false,
 		}, err
+	}
+	// 增加 role缓存
+	if id, err := result.LastInsertId(); err == nil {
+		AddRoleId(l.svcCtx.RedisConn, id)
 	}
 	return &us.RoleAddResp{
 		Result: true,

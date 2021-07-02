@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package us;
+package su;
 
 message PersionData {
   int64        Id = 1;
@@ -115,7 +115,7 @@ message PersionLoginReq {
 }
 
 message PersionLoginResp {
-    PersionInfo Info = 1;
+    PersionInfo Data = 1;
 }
 
 message PersionRegisterReq {
@@ -167,16 +167,40 @@ message PersionInfoResp {
     PersionInfo Info = 1;
 }
 
-//message PersionRolesReq {
-//
-//}
-//message PersionRole{
-//  int64 Id = 1;
-//  string RoleName = 2;
-//}
-//message PersionRolesResp {
-//  repeated PersionRole List = 1;
-//}
+message SubjectInfo {
+  int64        Id = 1;
+  string       Uuid  = 2;
+  string       Name   = 3;
+  int64        Status   = 4;
+  string       Code   = 5;
+  int64        MaxPersion   = 6;
+  int64        MainTeacherId   = 7;
+  int64        AssistantTeacherId   = 8;
+  string       Introduce   = 9;
+  string       Backup   = 10;
+  string       CreateTime   = 11;
+  string       UpdateTime   = 12;
+  string       DeleteTime   = 13;
+}
+
+message SubjectAddReq{
+  SubjectInfo RoleData = 1;
+}
+
+message SubjectAddReap{
+  bool Result = 1;
+  SubjectInfo RoleData = 2;
+}
+
+message MainTeacherSubjectListReq{
+  int64 Id = 1;
+}
+message MainTeacherSubjectListReap{
+  int64     Total = 1;
+  repeated  SubjectInfo List = 2;
+}
+
+
 
 
 service Us {

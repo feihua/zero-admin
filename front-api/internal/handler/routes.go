@@ -141,6 +141,22 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/persion/persion/login",
 				Handler: persionpersion.PersionLoginHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/persion/persion/allroles",
+				Handler: persionpersion.AllRoleHandler(serverCtx),
+			},
 		},
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/persion/persion/info",
+				Handler: persionpersion.PersionInfoHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 }

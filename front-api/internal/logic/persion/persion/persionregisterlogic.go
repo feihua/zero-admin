@@ -34,6 +34,10 @@ func (l *PersionRegisterLogic) PersionRegister(req types.PersionRegisterReq) (*t
 		Gender:      req.Gender,
 		Name:        req.Name,
 		RoleId:      req.RoleId,
+		Class:       req.Class,
+		Academy:     req.Academy,
+		School:      req.School,
+		Grade:       req.Grade,
 	})
 	if err != nil {
 		return nil, err

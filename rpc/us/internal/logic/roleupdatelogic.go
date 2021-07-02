@@ -4,8 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"go-zero-admin/rpc/model/usmodel"
-	"time"
-
 	"go-zero-admin/rpc/us/internal/svc"
 	"go-zero-admin/rpc/us/us"
 
@@ -37,10 +35,6 @@ func (l *RoleUpdateLogic) RoleUpdate(in *us.RoleUpdateReq) (*us.RoleUpdateResp, 
 		Remark:   sql.NullString{
 			String: in.Data.Remark,
 			Valid:  true,
-		},
-		UpdateAt: sql.NullTime{
-			Time:  time.Now(),
-			Valid: true,
 		},
 	})
 	if err != nil{

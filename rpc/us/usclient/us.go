@@ -14,28 +14,33 @@ import (
 )
 
 type (
-	PersionLoginReq     = us.PersionLoginReq
-	PersionAddReq       = us.PersionAddReq
-	PersionListResp     = us.PersionListResp
+	PersionAddResp      = us.PersionAddResp
 	RoleListReq         = us.RoleListReq
-	RoleAddReq          = us.RoleAddReq
-	RoleListResp        = us.RoleListResp
-	RoleDeleteReq       = us.RoleDeleteReq
+	PersionInfoReq      = us.PersionInfoReq
 	RoleDeleteResp      = us.RoleDeleteResp
-	PersionLoginResp    = us.PersionLoginResp
-	PersionUpdateResp   = us.PersionUpdateResp
 	PersionDeleteResp   = us.PersionDeleteResp
-	RoleData            = us.RoleData
-	PersionDeleteReq    = us.PersionDeleteReq
 	RoleAddResp         = us.RoleAddResp
-	PersionUpdateReq    = us.PersionUpdateReq
+	RoleData            = us.RoleData
+	PersionUpdateResp   = us.PersionUpdateResp
+	PersionData         = us.PersionData
+	RoleDeleteReq       = us.RoleDeleteReq
+	PersionLoginReq     = us.PersionLoginReq
+	PersionInfoResp     = us.PersionInfoResp
+	PersionListReq      = us.PersionListReq
+	RoleListResp        = us.RoleListResp
+	AllRoleResp         = us.AllRoleResp
 	RoleUpdateReq       = us.RoleUpdateReq
 	RoleUpdateResp      = us.RoleUpdateResp
+	RoleAddReq          = us.RoleAddReq
+	AllRoleReq          = us.AllRoleReq
+	PersionLoginResp    = us.PersionLoginResp
+	PersionInfo         = us.PersionInfo
 	PersionRegisterReq  = us.PersionRegisterReq
 	PersionRegisterResp = us.PersionRegisterResp
-	PersionData         = us.PersionData
-	PersionAddResp      = us.PersionAddResp
-	PersionListReq      = us.PersionListReq
+	PersionListResp     = us.PersionListResp
+	PersionUpdateReq    = us.PersionUpdateReq
+	PersionDeleteReq    = us.PersionDeleteReq
+	PersionAddReq       = us.PersionAddReq
 
 	Us interface {
 		PersionAdd(ctx context.Context, in *PersionAddReq) (*PersionAddResp, error)
@@ -46,8 +51,10 @@ type (
 		RoleList(ctx context.Context, in *RoleListReq) (*RoleListResp, error)
 		RoleUpdate(ctx context.Context, in *RoleUpdateReq) (*RoleUpdateResp, error)
 		RoleDelete(ctx context.Context, in *RoleDeleteReq) (*RoleDeleteResp, error)
+		AllRoles(ctx context.Context, in *AllRoleReq) (*AllRoleResp, error)
 		PersionLogin(ctx context.Context, in *PersionLoginReq) (*PersionLoginResp, error)
 		PersionRegister(ctx context.Context, in *PersionRegisterReq) (*PersionRegisterResp, error)
+		PersionInfo(ctx context.Context, in *PersionInfoReq) (*PersionInfoResp, error)
 	}
 
 	defaultUs struct {
@@ -101,6 +108,11 @@ func (m *defaultUs) RoleDelete(ctx context.Context, in *RoleDeleteReq) (*RoleDel
 	return client.RoleDelete(ctx, in)
 }
 
+func (m *defaultUs) AllRoles(ctx context.Context, in *AllRoleReq) (*AllRoleResp, error) {
+	client := us.NewUsClient(m.cli.Conn())
+	return client.AllRoles(ctx, in)
+}
+
 func (m *defaultUs) PersionLogin(ctx context.Context, in *PersionLoginReq) (*PersionLoginResp, error) {
 	client := us.NewUsClient(m.cli.Conn())
 	return client.PersionLogin(ctx, in)
@@ -109,4 +121,9 @@ func (m *defaultUs) PersionLogin(ctx context.Context, in *PersionLoginReq) (*Per
 func (m *defaultUs) PersionRegister(ctx context.Context, in *PersionRegisterReq) (*PersionRegisterResp, error) {
 	client := us.NewUsClient(m.cli.Conn())
 	return client.PersionRegister(ctx, in)
+}
+
+func (m *defaultUs) PersionInfo(ctx context.Context, in *PersionInfoReq) (*PersionInfoResp, error) {
+	client := us.NewUsClient(m.cli.Conn())
+	return client.PersionInfo(ctx, in)
 }

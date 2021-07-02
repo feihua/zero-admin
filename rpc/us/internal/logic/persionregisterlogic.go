@@ -3,9 +3,8 @@ package logic
 import (
 	"context"
 	"database/sql"
+	"github.com/tal-tech/go-zero/core/stores/sqlx"
 	"go-zero-admin/rpc/model/usmodel"
-	"time"
-
 	"go-zero-admin/rpc/us/internal/svc"
 	"go-zero-admin/rpc/us/us"
 
@@ -29,14 +28,20 @@ func NewPersionRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *P
 }
 
 func (l *PersionRegisterLogic) PersionRegister(in *us.PersionRegisterReq) (*us.PersionRegisterResp, error) {
-	// todo: add your logic here and delete this line
-
-	if _,err := l.svcCtx.UsUsersModel.FindOneByPhoneNumber(in.PhoneNumber);err == nil{
+	if _, err := l.svcCtx.UsUsersModel.FindOneByPhoneNumber(in.PhoneNumber); err == nil {
 		return nil, errorDuplicateMobile
 	}
 
+	var usRole *usmodel.UsRoles
+	if tempUsRole, err := l.svcCtx.UsRolesModel.FindOne(in.RoleId); err != nil {
+		return nil, errorRoleUnRegister
+	} else {
+		usRole = tempUsRole
+	}
+
 	uniqueId := guid.S()
-	_,err := l.svcCtx.UsUsersModel.Insert(usmodel.UsUsers{
+
+	usUser := usmodel.UsUsers{
 		PhoneNumber: sql.NullString{
 			String: in.PhoneNumber,
 			Valid:  true,
@@ -73,17 +78,64 @@ func (l *PersionRegisterLogic) PersionRegister(in *us.PersionRegisterReq) (*us.P
 			Int64: 1,
 			Valid: true,
 		},
-		CreateTime: sql.NullTime{
-			Time:  time.Now(),
-			Valid: true,
-		},
-		UpdateTime: sql.NullTime{
-			Time:  time.Now(),
-			Valid: true,
-		},
+	}
+
+	err := l.svcCtx.UsUsersModel.GetSqlCachedConn().Transact(func(session sqlx.Session) error {
+		userId := int64(0)
+
+		if result, err := l.svcCtx.UsUsersModel.InsertBySession(usUser, session); err != nil {
+			return err
+		} else {
+			userId, _ = result.LastInsertId()
+		}
+
+		switch usRole.RoleName.String {
+		case "teacher":
+			usTeacher := usmodel.UsTeacher{
+				Academy: sql.NullString{
+					String: in.Academy,
+					Valid:  true,
+				},
+				School: sql.NullString{
+					String: in.School,
+					Valid:  true,
+				},
+				UserId: userId,
+			}
+			if _, err := l.svcCtx.UsTeacherModel.InsertBySession(usTeacher, session); err != nil {
+				return err
+			}
+			break
+		case "student":
+			usStudent := usmodel.UsStudent{
+				Academy: sql.NullString{
+					String: in.Academy,
+					Valid:  true,
+				},
+				Class: sql.NullString{
+					String: in.Class,
+					Valid:  true,
+				},
+				School: sql.NullString{
+					String: in.School,
+					Valid:  true,
+				},
+				Grade: sql.NullString{
+					String: in.Grade,
+					Valid:  true,
+				},
+				UserId: userId,
+			}
+			if _, err := l.svcCtx.UsStudentModel.InsertBySession(usStudent, session); err != nil {
+				return err
+			}
+			break
+		default:
+			return errorUserRegisterFail
+		}
+		return nil
 	})
-	if err != nil{
-		logx.Error("register err:" + err.Error())
+	if err != nil {
 		return nil, errorUserRegisterFail
 	}
 

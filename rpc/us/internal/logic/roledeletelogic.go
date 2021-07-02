@@ -31,6 +31,9 @@ func (l *RoleDeleteLogic) RoleDelete(in *us.RoleDeleteReq) (*us.RoleDeleteResp, 
 			Result: false,
 		}, err
 	}
+	// 删除 role id缓存
+	DelRoleId(l.svcCtx.RedisConn, in.Id)
+
 	return &us.RoleDeleteResp{
 		Result: true,
 	}, nil
