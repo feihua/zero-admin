@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -32,11 +33,11 @@ func (l *JobAddLogic) JobAdd(req types.AddJobReq) (*types.AddJobResp, error) {
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加岗位失败")
 	}
 
 	return &types.AddJobResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加岗位成功",
 	}, nil
 }

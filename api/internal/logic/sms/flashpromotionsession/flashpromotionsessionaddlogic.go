@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -34,11 +35,11 @@ func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req types.AddFl
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加限时购场次表失败")
 	}
 
 	return &types.AddFlashPromotionSessionResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加限时购场次表成功",
 	}, nil
 }

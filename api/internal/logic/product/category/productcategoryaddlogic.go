@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -40,11 +41,11 @@ func (l *ProductCategoryAddLogic) ProductCategoryAdd(req types.AddProductCategor
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加商品分类失败")
 	}
 
 	return &types.AddProductCategoryResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加商品分类成功",
 	}, nil
 }

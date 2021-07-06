@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -35,11 +36,11 @@ func (l *FlashPromotionUpdateLogic) FlashPromotionUpdate(req types.UpdateFlashPr
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新限时购表失败")
 	}
 
 	return &types.UpdateFlashPromotionResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新限时购表成功",
 	}, nil
 }

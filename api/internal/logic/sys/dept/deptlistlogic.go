@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"github.com/tal-tech/go-zero/core/logx"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -29,7 +30,7 @@ func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, er
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询机构失败")
 	}
 
 	var list []*types.ListDeptData
@@ -50,7 +51,7 @@ func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, er
 
 	return &types.ListDeptResp{
 		Code:    "000000",
-		Message: "",
+		Message: "查询机构成功",
 		Data:    list,
 		Success: true,
 		Total:   resp.Total,

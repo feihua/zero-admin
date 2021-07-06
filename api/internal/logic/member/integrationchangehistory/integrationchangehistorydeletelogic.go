@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,12 +26,15 @@ func NewIntegrationChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(req types.DeleteIntegrationChangeHistoryReq) (*types.DeleteIntegrationChangeHistoryResp, error) {
-	_, _ = l.svcCtx.Ums.IntegrationChangeHistoryDelete(l.ctx, &umsclient.IntegrationChangeHistoryDeleteReq{
+	_, err := l.svcCtx.Ums.IntegrationChangeHistoryDelete(l.ctx, &umsclient.IntegrationChangeHistoryDeleteReq{
 		Id: req.Id,
 	})
 
+	if err != nil {
+		return nil, errorx.NewDefaultError("删除积分变化历史记录失败")
+	}
 	return &types.DeleteIntegrationChangeHistoryResp{
 		Code:    "000000",
-		Message: "",
+		Message: "查询成长值变化历史记录成功",
 	}, nil
 }

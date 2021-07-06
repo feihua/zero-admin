@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *MemberPriceListLogic) MemberPriceList(req types.ListMemberPriceReq) (*t
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询会员价格失败")
 	}
 
 	for _, data := range resp.List {
@@ -57,6 +58,6 @@ func (l *MemberPriceListLogic) MemberPriceList(req types.ListMemberPriceReq) (*t
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询会员价格成功",
 	}, nil
 }

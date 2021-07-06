@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -36,11 +37,11 @@ func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error)
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加用户失败")
 	}
 
 	return &types.AddUserResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加用户成功",
 	}, nil
 }

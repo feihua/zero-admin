@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"errors"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 	"strings"
 
@@ -30,7 +30,7 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginResp, error) {
 
 	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
-		return nil, errors.New("用户名或密码不能为空")
+		return nil, errorx.NewDefaultError("用户名或密码不能为空")
 	}
 
 	resp, err := l.svcCtx.Sys.Login(l.ctx, &sysclient.LoginReq{
@@ -39,7 +39,7 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginR
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("登录失败")
 	}
 
 	//保存登录日志

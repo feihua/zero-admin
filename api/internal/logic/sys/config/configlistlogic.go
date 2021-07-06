@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -30,7 +31,7 @@ func (l *ConfigListLogic) ConfigList(req types.ListConfigReq) (*types.ListConfig
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询参数配置失败")
 	}
 
 	var list []*types.ListConfigData

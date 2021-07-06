@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,11 +33,11 @@ func (l *MemberTagAddLogic) MemberTagAdd(req types.AddMemberTagReq) (*types.AddM
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加会员标签失败")
 	}
 
 	return &types.AddMemberTagResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加会员标签成功",
 	}, nil
 }

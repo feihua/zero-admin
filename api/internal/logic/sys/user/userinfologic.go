@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"encoding/json"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 	"strings"
 
@@ -35,7 +36,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询用户失败")
 	}
 
 	var MenuTree []*types.ListMenuTree

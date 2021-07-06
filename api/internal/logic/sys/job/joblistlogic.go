@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *JobListLogic) JobList(req types.ListJobReq) (*types.ListJobResp, error)
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询岗位失败")
 	}
 
 	var list []*types.ListJobData
@@ -53,7 +54,7 @@ func (l *JobListLogic) JobList(req types.ListJobReq) (*types.ListJobResp, error)
 
 	return &types.ListJobResp{
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询岗位成功",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

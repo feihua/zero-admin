@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,12 +26,15 @@ func NewMemberAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *MemberAddressDeleteLogic) MemberAddressDelete(req types.DeleteMemberAddressReq) (*types.DeleteMemberAddressResp, error) {
-	_, _ = l.svcCtx.Ums.MemberReceiveAddressDelete(l.ctx, &umsclient.MemberReceiveAddressDeleteReq{
+	_, err := l.svcCtx.Ums.MemberReceiveAddressDelete(l.ctx, &umsclient.MemberReceiveAddressDeleteReq{
 		Id: req.Id,
 	})
 
+	if err != nil {
+		return nil, errorx.NewDefaultError("删除会员地址失败")
+	}
 	return &types.DeleteMemberAddressResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除会员地址成功",
 	}, nil
 }

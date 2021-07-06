@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(req types.ListGro
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询成长值变化历史记录失败")
 	}
 
 	for _, data := range resp.List {
@@ -60,6 +61,6 @@ func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(req types.ListGro
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询成长值变化历史记录成功",
 	}, nil
 }

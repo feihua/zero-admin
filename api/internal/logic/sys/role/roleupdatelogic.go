@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -35,11 +36,11 @@ func (l *RoleUpdateLogic) RoleUpdate(req types.UpdateRoleReq) (*types.UpdateRole
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新角色失败")
 	}
 
 	return &types.UpdateRoleResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新角色成功",
 	}, nil
 }

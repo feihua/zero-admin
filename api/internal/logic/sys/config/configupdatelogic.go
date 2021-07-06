@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -38,7 +39,7 @@ func (l *ConfigUpdateLogic) ConfigUpdate(req types.UpdateConfigReq) (*types.Upda
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新参数配置失败")
 	}
 
 	return &types.UpdateConfigResp{}, nil

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -71,11 +72,11 @@ func (l *ProductUpdateLogic) ProductUpdate(req types.UpdateProductReq) (*types.U
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新商品信息失败")
 	}
 
 	return &types.UpdateProductResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新商品信息成功",
 	}, nil
 }

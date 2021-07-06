@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -41,11 +42,11 @@ func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(req types.UpdateHomeAdver
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新首页广告失败")
 	}
 
 	return &types.UpdateHomeAdvertiseResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新首页广告成功",
 	}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -33,11 +34,11 @@ func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductRe
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加新鲜好物表失败")
 	}
 
 	return &types.AddHomeNewProductResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加新鲜好物表成功",
 	}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -33,11 +34,11 @@ func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddH
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加首页品牌失败")
 	}
 
 	return &types.AddHomeBrandResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加首页品牌成功",
 	}, nil
 }

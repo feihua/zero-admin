@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -41,11 +42,11 @@ func (l *MemberLevelAddLogic) MemberLevelAdd(req types.AddMemberLevelReq) (*type
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加会员等级失败")
 	}
 
 	return &types.AddMemberLevelResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加会员等级成功",
 	}, nil
 }

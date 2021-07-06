@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/oms/omsclient"
@@ -31,7 +32,7 @@ func (l *OrderListLogic) OrderList(req types.ListOrderReq) (*types.ListOrderResp
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询订单信息失败")
 	}
 
 	for _, data := range resp.List {
@@ -95,6 +96,6 @@ func (l *OrderListLogic) OrderList(req types.ListOrderReq) (*types.ListOrderResp
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询订单信息成功",
 	}, nil
 }

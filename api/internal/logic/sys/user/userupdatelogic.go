@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -38,11 +39,11 @@ func (l *UserUpdateLogic) UserUpdate(req types.UpdateUserReq) (*types.UpdateUser
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新用户失败")
 	}
 
 	return &types.UpdateUserResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新用户成功",
 	}, nil
 }

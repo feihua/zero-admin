@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req types.ListH
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询人气推荐专题失败")
 	}
 
 	for _, data := range resp.List {
@@ -58,6 +59,6 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req types.ListH
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询人气推荐专题成功",
 	}, nil
 }

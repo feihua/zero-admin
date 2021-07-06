@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/oms/omsclient"
@@ -44,11 +45,11 @@ func (l *CartItemUpdateLogic) CartItemUpdate(req types.UpdateCartItemReq) (*type
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新购物车失败")
 	}
 
 	return &types.UpdateCartItemResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新购物车成功",
 	}, nil
 }

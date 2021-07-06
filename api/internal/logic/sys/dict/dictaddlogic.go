@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 	"strconv"
 
@@ -39,11 +40,11 @@ func (l *DictAddLogic) DictAdd(req types.AddDictReq) (*types.AddDictResp, error)
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加字典失败")
 	}
 
 	return &types.AddDictResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加字典成功",
 	}, nil
 }

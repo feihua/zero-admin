@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"github.com/jinzhu/copier"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -31,7 +32,7 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 	resp, err := l.svcCtx.Sys.UserList(l.ctx, &userListReq)
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询失败")
 	}
 
 	var list []*types.ListUserData

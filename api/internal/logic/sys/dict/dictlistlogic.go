@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -34,7 +35,7 @@ func (l *DictListLogic) DictList(req types.ListDictReq) (*types.ListDictResp, er
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询字典失败")
 	}
 
 	var list []*types.ListDictData
@@ -58,7 +59,7 @@ func (l *DictListLogic) DictList(req types.ListDictReq) (*types.ListDictResp, er
 
 	return &types.ListDictResp{
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询字典成功",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

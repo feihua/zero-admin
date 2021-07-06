@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLo
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询员登录记录列表失败")
 	}
 
 	for _, data := range resp.List {
@@ -59,6 +60,6 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLo
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询员登录记录列表成功",
 	}, nil
 }

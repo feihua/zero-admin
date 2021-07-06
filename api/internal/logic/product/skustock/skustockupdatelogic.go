@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -40,11 +41,11 @@ func (l *SkuStockUpdateLogic) SkuStockUpdate(req types.UpdateSkuStockReq) (*type
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新商品库存失败")
 	}
 
 	return &types.UpdateSkuStockResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新商品库存成功",
 	}, nil
 }

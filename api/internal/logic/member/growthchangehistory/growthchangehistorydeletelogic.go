@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,12 +26,15 @@ func NewGrowthChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *GrowthChangeHistoryDeleteLogic) GrowthChangeHistoryDelete(req types.DeleteGrowthChangeHistoryReq) (*types.DeleteGrowthChangeHistoryResp, error) {
-	_, _ = l.svcCtx.Ums.GrowthChangeHistoryDelete(l.ctx, &umsclient.GrowthChangeHistoryDeleteReq{
+	_, err := l.svcCtx.Ums.GrowthChangeHistoryDelete(l.ctx, &umsclient.GrowthChangeHistoryDeleteReq{
 		Id: req.Id,
 	})
 
+	if err != nil {
+		return nil, errorx.NewDefaultError("删除成长值变化历史记录失败")
+	}
 	return &types.DeleteGrowthChangeHistoryResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除成长值变化历史记录成功",
 	}, nil
 }

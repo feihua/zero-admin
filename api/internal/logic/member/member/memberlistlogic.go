@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -31,7 +32,7 @@ func (l *MemberListLogic) MemberList(req types.ListMemberReq) (*types.ListMember
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询会员信息失败")
 	}
 
 	var list []*types.ListtMemberData
@@ -67,6 +68,6 @@ func (l *MemberListLogic) MemberList(req types.ListMemberReq) (*types.ListMember
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询会员信息成功",
 	}, nil
 }

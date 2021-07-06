@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -37,11 +38,11 @@ func (l *IntegrationChangeHistoryUpdateLogic) IntegrationChangeHistoryUpdate(req
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新积分变化历史记录失败")
 	}
 
 	return &types.UpdateIntegrationChangeHistoryResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新积分变化历史记录成功",
 	}, nil
 }

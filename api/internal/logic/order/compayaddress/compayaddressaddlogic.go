@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -38,11 +39,11 @@ func (l *CompayAddressAddLogic) CompayAddressAdd(req types.AddCompayAddressReq) 
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加公司收发货地址失败")
 	}
 
 	return &types.AddCompayAddressResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加公司收发货地址成功",
 	}, nil
 }

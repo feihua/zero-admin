@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -33,11 +34,11 @@ func (l *MemberPriceAddLogic) MemberPriceAdd(req types.AddMemberPriceReq) (*type
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加会员价格失败")
 	}
 
 	return &types.AddMemberPriceResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加会员价格成功",
 	}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -30,11 +31,11 @@ func (l *RoleDeleteLogic) RoleDelete(req types.DeleteRoleReq) (*types.DeleteRole
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("删除角色失败")
 	}
 
 	return &types.DeleteRoleResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除角色成功",
 	}, nil
 }

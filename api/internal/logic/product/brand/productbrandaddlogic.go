@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -39,11 +40,11 @@ func (l *ProductBrandAddLogic) ProductBrandAdd(req types.AddProductBrandReq) (*t
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加商品品牌失败")
 	}
 
 	return &types.AddProductBrandResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加商品品牌成功",
 	}, nil
 }

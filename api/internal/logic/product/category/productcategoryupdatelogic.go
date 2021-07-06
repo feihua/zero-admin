@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -41,11 +42,11 @@ func (l *ProductCategoryUpdateLogic) ProductCategoryUpdate(req types.UpdateProdu
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新商品分类失败")
 	}
 
 	return &types.UpdateProductCategoryResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新商品分类成功",
 	}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -39,11 +40,11 @@ func (l *CouponHistoryAddLogic) CouponHistoryAdd(req types.AddCouponHistoryReq) 
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加优惠券使用记录失败")
 	}
 
 	return &types.AddCouponHistoryResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加优惠券使用记录成功",
 	}, nil
 }

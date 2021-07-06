@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,12 +26,15 @@ func NewIntegrationConsumeSettingDeleteLogic(ctx context.Context, svcCtx *svc.Se
 }
 
 func (l *IntegrationConsumeSettingDeleteLogic) IntegrationConsumeSettingDelete(req types.DeleteIntegrationConsumeSettingReq) (*types.DeleteIntegrationConsumeSettingResp, error) {
-	_, _ = l.svcCtx.Ums.IntegrationConsumeSettingDelete(l.ctx, &umsclient.IntegrationConsumeSettingDeleteReq{
+	_, err := l.svcCtx.Ums.IntegrationConsumeSettingDelete(l.ctx, &umsclient.IntegrationConsumeSettingDeleteReq{
 		Id: req.Id,
 	})
 
+	if err != nil {
+		return nil, errorx.NewDefaultError("删除积分消费设置失败")
+	}
 	return &types.DeleteIntegrationConsumeSettingResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除积分消费设置成功",
 	}, nil
 }

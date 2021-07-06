@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseRe
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询首页广告失败")
 	}
 
 	for _, data := range resp.List {
@@ -65,6 +66,6 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseRe
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询首页广告成功",
 	}, nil
 }

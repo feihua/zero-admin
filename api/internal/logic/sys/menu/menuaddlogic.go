@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -42,11 +43,11 @@ func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error)
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加菜单失败")
 	}
 
 	return &types.AddMenuResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加菜单成功",
 	}, nil
 }

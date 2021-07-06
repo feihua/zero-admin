@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -67,11 +68,11 @@ func (l *OrderAddLogic) OrderAdd(req types.AddOrderReq) (*types.AddOrderResp, er
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加订单信息失败")
 	}
 
 	return &types.AddOrderResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加订单信息成功",
 	}, nil
 }

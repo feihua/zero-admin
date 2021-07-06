@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/pms/pmsclient"
@@ -31,7 +32,7 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询商品信息失败")
 	}
 
 	for _, data := range resp.List {
@@ -93,6 +94,6 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询商品信息成功",
 	}, nil
 }

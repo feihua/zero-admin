@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *FeightTemplateListLogic) FeightTemplateList(req types.ListFeightTemplat
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询运费模版失败")
 	}
 
 	for _, data := range resp.List {
@@ -60,6 +61,6 @@ func (l *FeightTemplateListLogic) FeightTemplateList(req types.ListFeightTemplat
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询运费模版成功",
 	}, nil
 }

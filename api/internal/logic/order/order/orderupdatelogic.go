@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -68,11 +69,11 @@ func (l *OrderUpdateLogic) OrderUpdate(req types.UpdateOrderReq) (*types.UpdateO
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新订单信息失败")
 	}
 
 	return &types.UpdateOrderResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新订单信息成功",
 	}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -46,11 +47,11 @@ func (l *CouponAddLogic) CouponAdd(req types.AddCouponReq) (*types.AddCouponResp
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加优惠券失败")
 	}
 
 	return &types.AddCouponResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加优惠券成功",
 	}, nil
 }

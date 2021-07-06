@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -39,11 +40,11 @@ func (l *SkuStockAddLogic) SkuStockAdd(req types.AddSkuStockReq) (*types.AddSkuS
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加商品库存失败")
 	}
 
 	return &types.AddSkuStockResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加商品库存成功",
 	}, nil
 }

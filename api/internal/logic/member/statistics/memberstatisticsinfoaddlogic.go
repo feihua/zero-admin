@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -44,11 +45,11 @@ func (l *MemberStatisticsInfoAddLogic) MemberStatisticsInfoAdd(req types.AddMemb
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加会员统计信息失败")
 	}
 
 	return &types.AddMemberStatisticsInfoResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加会员统计信息成功",
 	}, nil
 }

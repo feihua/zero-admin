@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -31,11 +32,11 @@ func (l *UpdateRoleMenuLogic) UpdateRoleMenu(req types.UpdateRoleMenuReq) (*type
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新角色菜单失败")
 	}
 
 	return &types.UpdateRoleMenuResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新角色菜单成功",
 	}, nil
 }

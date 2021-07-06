@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -34,11 +35,11 @@ func (l *HomeBrandUpdateLogic) HomeBrandUpdate(req types.UpdateHomeBrandReq) (*t
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新首页品牌失败")
 	}
 
 	return &types.UpdateHomeBrandResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新首页品牌成功",
 	}, nil
 }

@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req t
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询积分消费设置失败")
 	}
 
 	for _, data := range resp.List {
@@ -57,6 +58,6 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req t
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询积分消费设置成功",
 	}, nil
 }

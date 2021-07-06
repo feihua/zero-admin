@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/oms/omsclient"
@@ -43,11 +44,11 @@ func (l *CartItemAddLogic) CartItemAdd(req types.AddCartItemReq) (*types.AddCart
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加购物车失败")
 	}
 
 	return &types.AddCartItemResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加购物车成功",
 	}, nil
 }

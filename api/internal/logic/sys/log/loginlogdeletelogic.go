@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -30,11 +31,11 @@ func (l *LoginLogDeleteLogic) LoginLogDelete(req types.DeleteLoginLogReq) (*type
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("删除登录日志失败")
 	}
 
 	return &types.DeleteLoginLogResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除登录日志成功",
 	}, nil
 }

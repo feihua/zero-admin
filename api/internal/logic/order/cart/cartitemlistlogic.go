@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *CartItemListLogic) CartItemList(req types.ListCartItemReq) (*types.List
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询购物车失败")
 	}
 
 	for _, data := range resp.List {
@@ -70,6 +71,6 @@ func (l *CartItemListLogic) CartItemList(req types.ListCartItemReq) (*types.List
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询购物车成功",
 	}, nil
 }

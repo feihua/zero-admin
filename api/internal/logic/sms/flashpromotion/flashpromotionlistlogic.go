@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -32,7 +33,7 @@ func (l *FlashPromotionListLogic) FlashPromotionList(req types.ListFlashPromotio
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询限时购表失败")
 	}
 
 	for _, data := range resp.List {
@@ -59,6 +60,6 @@ func (l *FlashPromotionListLogic) FlashPromotionList(req types.ListFlashPromotio
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询限时购表成功",
 	}, nil
 }

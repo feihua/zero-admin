@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -31,7 +32,7 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询菜单失败")
 	}
 
 	var list []*types.ListtMenuData
@@ -62,7 +63,7 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 
 	return &types.ListMenuResp{
 		Code:    "000000",
-		Message: "",
+		Message: "查询菜单成功",
 		Data:    list,
 		Success: true,
 		Total:   resp.Total,

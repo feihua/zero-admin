@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -35,11 +36,11 @@ func (l *JobUpdateLogic) JobUpdate(req types.UpdateJobReq) (*types.UpdateJobResp
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("删除岗位失败")
 	}
 
 	return &types.UpdateJobResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除岗位信息成功",
 	}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -35,11 +36,11 @@ func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(req types.AddMemberRule
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加会员积分规则失败")
 	}
 
 	return &types.AddMemberRuleSettingResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加会员积分规则成功",
 	}, nil
 }

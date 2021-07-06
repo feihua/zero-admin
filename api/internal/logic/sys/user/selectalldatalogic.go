@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 	"strconv"
 
@@ -66,7 +67,7 @@ func (l *SelectAllDataLogic) SelectAllData(req types.SelectDataReq) (*types.Sele
 	deptList, err := l.svcCtx.Sys.DeptList(l.ctx, &sysclient.DeptListReq{})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError(" ")
 	}
 
 	var deptData []*types.DeptAllResp

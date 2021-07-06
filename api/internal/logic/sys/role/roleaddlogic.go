@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -34,11 +35,11 @@ func (l *RoleAddLogic) RoleAdd(req types.AddRoleReq) (*types.AddRoleResp, error)
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加角色失败")
 	}
 
 	return &types.AddRoleResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加角色成功",
 	}, nil
 }

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/tal-tech/go-zero/core/logx"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sms/smsclient"
@@ -30,7 +31,7 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询优惠券失败")
 	}
 
 	for _, data := range resp.List {
@@ -69,6 +70,6 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询优惠券成功",
 	}, nil
 }

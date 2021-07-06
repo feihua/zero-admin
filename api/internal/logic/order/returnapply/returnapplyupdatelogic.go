@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -56,11 +57,11 @@ func (l *ReturnApplyUpdateLogic) ReturnApplyUpdate(req types.UpdateReturnApplyRe
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("更新退货申请失败")
 	}
 
 	return &types.UpdateReturnApplyResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新退货申请成功",
 	}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -36,11 +37,11 @@ func (l *FeightTemplateAddLogic) FeightTemplateAdd(req types.AddFeightTemplateRe
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加运费模版失败")
 	}
 
 	return &types.AddFeightTemplateResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加运费模版成功",
 	}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -34,11 +35,11 @@ func (l *DeptAddLogic) DeptAdd(req types.AddDeptReq) (*types.AddDeptResp, error)
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加机构失败")
 	}
 
 	return &types.AddDeptResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加机构成功",
 	}, nil
 }

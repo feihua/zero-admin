@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -26,12 +27,16 @@ func NewUserDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserDel
 
 func (l *UserDeleteLogic) UserDelete(req types.DeleteUserReq) (*types.DeleteUserResp, error) {
 
-	_, _ = l.svcCtx.Sys.UserDelete(l.ctx, &sysclient.UserDeleteReq{
+	_, err := l.svcCtx.Sys.UserDelete(l.ctx, &sysclient.UserDeleteReq{
 		Id: req.Id,
 	})
 
+	if err != nil {
+		return nil, errorx.NewDefaultError("删除用户失败")
+	}
+
 	return &types.DeleteUserResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除用户成功",
 	}, nil
 }

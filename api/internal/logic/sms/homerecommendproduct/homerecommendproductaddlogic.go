@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -33,11 +34,11 @@ func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHome
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加人气推荐商品失败")
 	}
 
 	return &types.AddHomeRecommendProductResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加人气推荐商品成功",
 	}, nil
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -30,11 +31,11 @@ func (l *MenuDeleteLogic) MenuDelete(req types.DeleteMenuReq) (*types.DeleteMenu
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("删除菜单失败")
 	}
 
 	return &types.DeleteMenuResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除菜单成功",
 	}, nil
 }

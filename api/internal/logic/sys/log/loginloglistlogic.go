@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
@@ -30,7 +31,7 @@ func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.List
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("查询登录日志失败")
 	}
 
 	var list []*types.ListLoginLogData
@@ -50,7 +51,7 @@ func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.List
 
 	return &types.ListLoginLogResp{
 		Code:     "000000",
-		Message:  "",
+		Message:  "查询登录日志成功",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

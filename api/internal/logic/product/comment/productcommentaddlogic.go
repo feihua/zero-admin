@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -43,11 +44,11 @@ func (l *ProductCommentAddLogic) ProductCommentAdd(req types.AddProductCommentRe
 	})
 
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("添加商品评价失败")
 	}
 
 	return &types.AddProductCommentResp{
 		Code:    "000000",
-		Message: "",
+		Message: "添加商品评价成功",
 	}, nil
 }
