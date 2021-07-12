@@ -34,7 +34,6 @@ type (
 )
 
 @server(
-    jwt: Auth
     group: pay/weixin
 )
 service front-api {
