@@ -40,3 +40,11 @@ SmsRpc:
 Auth:
   AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
   AccessExpire: 86400
+
+Log:
+  Mode: file
+  Path: logs/admin
+Prometheus:
+  Host: 127.0.0.1
+  Port: 8188
+  Path: /metrics

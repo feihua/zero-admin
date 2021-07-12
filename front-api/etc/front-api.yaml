@@ -1,6 +1,6 @@
 Name: front-api
 Host: 0.0.0.0
-Port: 80
+Port: 9999
 
 #系统
 SysRpc:
@@ -43,3 +43,11 @@ PayRpc:
     Hosts:
       - localhost:2379
     Key: pay.rpc
+
+Log:
+  Mode: file
+  Path: logs/front
+Prometheus:
+  Host: 127.0.0.1
+  Port: 9199
+  Path: /metrics
