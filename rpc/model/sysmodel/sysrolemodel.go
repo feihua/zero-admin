@@ -3,7 +3,6 @@ package sysmodel
 import (
 	"database/sql"
 	"fmt"
-	"github.com/go-xorm/builder"
 	"strings"
 	"time"
 
@@ -68,27 +67,16 @@ func (m *SysRoleModel) FindOne(id int64) (*SysRole, error) {
 
 func (m *SysRoleModel) FindAll(Current int64, PageSize int64, Name string) (*[]SysRole, error) {
 
-	build := builder.Dialect(builder.MYSQL).Select(sysRoleRows).From(m.table).Where(nil)
-
-	if Name != "" {
-		build.And(builder.Eq{`name`: Name})
-	}
-
-	query, args, err := build.OrderBy(`id desc`).Limit(int(Current), int(PageSize)).ToSQL()
-	if err != nil {
-		return nil, err
-	}
-
+	query := fmt.Sprintf("select %s from %s limit ?,?", sysRoleRows, m.table)
 	var resp []SysRole
-	err1 := m.conn.QueryRows(resp, query, args...)
-
-	switch err1 {
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
 	case nil:
 		return &resp, nil
 	case sqlc.ErrNotFound:
 		return nil, ErrNotFound
 	default:
-		return nil, err1
+		return nil, err
 	}
 }
 
