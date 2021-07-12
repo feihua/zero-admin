@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
 
@@ -25,8 +24,14 @@ func NewMemberStatisticsInfoListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(in *ums.MemberStatisticsInfoListReq) (*ums.MemberStatisticsInfoListResp, error) {
-	all, _ := l.svcCtx.UmsMemberStatisticsInfoModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.UmsMemberStatisticsInfoModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.UmsMemberStatisticsInfoModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询会员统计列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*ums.MemberStatisticsInfoListData
 	for _, item := range *all {
@@ -51,7 +56,9 @@ func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(in *ums.MemberS
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询会员统计列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &ums.MemberStatisticsInfoListResp{
 		Total: count,
 		List:  list,

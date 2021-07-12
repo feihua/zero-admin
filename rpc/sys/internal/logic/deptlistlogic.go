@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
@@ -28,6 +29,8 @@ func (l *DeptListLogic) DeptList(in *sys.DeptListReq) (*sys.DeptListResp, error)
 	all, err := l.svcCtx.DeptModel.FindAll(1, count)
 
 	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询机构列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -47,6 +50,9 @@ func (l *DeptListLogic) DeptList(in *sys.DeptListReq) (*sys.DeptListResp, error)
 		})
 	}
 
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询机构列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &sys.DeptListResp{
 		Total: count,
 		List:  list,

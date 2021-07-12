@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
 
@@ -25,8 +24,14 @@ func NewMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *ums.MemberRuleSettingListReq) (*ums.MemberRuleSettingListResp, error) {
-	all, _ := l.svcCtx.UmsMemberRuleSettingModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.UmsMemberRuleSettingModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.UmsMemberRuleSettingModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询积分规则列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*ums.MemberRuleSettingListData
 	for _, item := range *all {
@@ -42,7 +47,9 @@ func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *ums.MemberRuleSet
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询会员规则设置列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &ums.MemberRuleSettingListResp{
 		Total: count,
 		List:  list,

@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
 
@@ -25,8 +24,14 @@ func NewOrderOperateHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *OrderOperateHistoryListLogic) OrderOperateHistoryList(in *oms.OrderOperateHistoryListReq) (*oms.OrderOperateHistoryListResp, error) {
-	all, _ := l.svcCtx.OmsOrderOperateHistoryModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.OmsOrderOperateHistoryModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.OmsOrderOperateHistoryModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询订单操作历史列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*oms.OrderOperateHistoryListData
 	for _, item := range *all {
@@ -41,7 +46,9 @@ func (l *OrderOperateHistoryListLogic) OrderOperateHistoryList(in *oms.OrderOper
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询订单操作历史列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &oms.OrderOperateHistoryListResp{
 		Total: count,
 		List:  list,

@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
 
@@ -25,9 +24,14 @@ func NewMemberReceiveAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *ums.MemberReceiveAddressListReq) (*ums.MemberReceiveAddressListResp, error) {
-	all, _ := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.UmsMemberReceiveAddressModel.Count()
 
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询会员地址列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 	var list []*ums.MemberReceiveAddressListData
 	for _, item := range *all {
 
@@ -45,7 +49,9 @@ func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *ums.MemberR
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询会员地址列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &ums.MemberReceiveAddressListResp{
 		Total: count,
 		List:  list,

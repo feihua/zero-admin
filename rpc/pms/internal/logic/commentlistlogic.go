@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,8 +24,14 @@ func NewCommentListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Comme
 }
 
 func (l *CommentListLogic) CommentList(in *pms.CommentListReq) (*pms.CommentListResp, error) {
-	all, _ := l.svcCtx.PmsCommentModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.PmsCommentModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.PmsCommentModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询商品评价列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*pms.CommentListData
 	for _, item := range *all {
@@ -49,7 +55,9 @@ func (l *CommentListLogic) CommentList(in *pms.CommentListReq) (*pms.CommentList
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询商品评价列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.CommentListResp{
 		Total: count,
 		List:  list,

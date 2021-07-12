@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
 
@@ -24,12 +24,17 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderLi
 }
 
 func (l *OrderListLogic) OrderList(in *oms.OrderListReq) (*oms.OrderListResp, error) {
-	all, _ := l.svcCtx.OmsOrderModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.OmsOrderModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.OmsOrderModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询订单列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*oms.OrderListData
 	for _, order := range *all {
-
 		list = append(list, &oms.OrderListData{
 			Id:                    order.Id,
 			MemberId:              order.MemberId,
@@ -78,7 +83,9 @@ func (l *OrderListLogic) OrderList(in *oms.OrderListReq) (*oms.OrderListResp, er
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询订单列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &oms.OrderListResp{
 		Total: count,
 		List:  list,

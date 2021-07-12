@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
 
@@ -25,12 +24,17 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleList
 }
 
 func (l *RoleListLogic) RoleList(in *sys.RoleListReq) (*sys.RoleListResp, error) {
-	all, _ := l.svcCtx.RoleModel.FindAll(in.Current, in.PageSize, in.Name)
+	all, err := l.svcCtx.RoleModel.FindAll(in.Current, in.PageSize, in.Name)
 	count, _ := l.svcCtx.RoleModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询角色列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*sys.RoleListData
 	for _, role := range *all {
-		fmt.Println(role)
 		list = append(list, &sys.RoleListData{
 			Id:             role.Id,
 			Name:           role.Name,
@@ -44,6 +48,9 @@ func (l *RoleListLogic) RoleList(in *sys.RoleListReq) (*sys.RoleListResp, error)
 		})
 	}
 
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询角色列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &sys.RoleListResp{
 		Total: count,
 		List:  list,

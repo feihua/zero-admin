@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,8 +24,14 @@ func NewProductLadderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ProductLadderListLogic) ProductLadderList(in *pms.ProductLadderListReq) (*pms.ProductLadderListResp, error) {
-	all, _ := l.svcCtx.PmsProductLadderModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.PmsProductLadderModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.PmsProductLadderModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询产品阶梯价格列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*pms.ProductLadderListData
 	for _, item := range *all {
@@ -39,7 +45,9 @@ func (l *ProductLadderListLogic) ProductLadderList(in *pms.ProductLadderListReq)
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询产品阶梯价格列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.ProductLadderListResp{
 		Total: count,
 		List:  list,

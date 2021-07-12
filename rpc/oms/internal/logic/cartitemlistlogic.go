@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
 
@@ -25,12 +24,16 @@ func NewCartItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cart
 }
 
 func (l *CartItemListLogic) CartItemList(in *oms.CartItemListReq) (*oms.CartItemListResp, error) {
-	all, _ := l.svcCtx.OmsCartItemModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.OmsCartItemModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.OmsCartItemModel.Count()
 
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询购物车列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 	var list []*oms.CartItemListData
 	for _, item := range *all {
-
 		list = append(list, &oms.CartItemListData{
 			Id:                item.Id,
 			ProductId:         item.ProductId,
@@ -53,7 +56,9 @@ func (l *CartItemListLogic) CartItemList(in *oms.CartItemListReq) (*oms.CartItem
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询购物车lis列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &oms.CartItemListResp{
 		Total: count,
 		List:  list,

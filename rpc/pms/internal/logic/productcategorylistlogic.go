@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,8 +24,14 @@ func NewProductCategoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *ProductCategoryListLogic) ProductCategoryList(in *pms.ProductCategoryListReq) (*pms.ProductCategoryListResp, error) {
-	all, _ := l.svcCtx.PmsProductCategoryModel.FindAll(in.Current, 1000)
+	all, err := l.svcCtx.PmsProductCategoryModel.FindAll(in.Current, 1000)
 	count, _ := l.svcCtx.PmsProductCategoryModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询商品类别列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*pms.ProductCategoryListData
 	for _, item := range *all {
@@ -46,7 +52,9 @@ func (l *ProductCategoryListLogic) ProductCategoryList(in *pms.ProductCategoryLi
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询商品类别列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.ProductCategoryListResp{
 		Total: count,
 		List:  list,

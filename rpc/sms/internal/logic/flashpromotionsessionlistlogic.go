@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,8 +24,14 @@ func NewFlashPromotionSessionListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(in *sms.FlashPromotionSessionListReq) (*sms.FlashPromotionSessionListResp, error) {
-	all, _ := l.svcCtx.SmsFlashPromotionSessionModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.SmsFlashPromotionSessionModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.SmsFlashPromotionSessionModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询限时购场次列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*sms.FlashPromotionSessionListData
 	for _, item := range *all {
@@ -40,7 +46,9 @@ func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(in *sms.Flash
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询限时购场次列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &sms.FlashPromotionSessionListResp{
 		Total: count,
 		List:  list,

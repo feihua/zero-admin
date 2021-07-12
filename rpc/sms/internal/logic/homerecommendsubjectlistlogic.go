@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,8 +24,14 @@ func NewHomeRecommendSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(in *sms.HomeRecommendSubjectListReq) (*sms.HomeRecommendSubjectListResp, error) {
-	all, _ := l.svcCtx.SmsHomeRecommendSubjectModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.SmsHomeRecommendSubjectModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.SmsHomeRecommendSubjectModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询人气专题推荐列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*sms.HomeRecommendSubjectListData
 	for _, item := range *all {
@@ -39,7 +45,9 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(in *sms.HomeRec
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询人气专题推荐列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &sms.HomeRecommendSubjectListResp{
 		Total: count,
 		List:  list,

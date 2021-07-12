@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
 
@@ -25,8 +24,14 @@ func NewCompanyAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *CompanyAddressListLogic) CompanyAddressList(in *oms.CompanyAddressListReq) (*oms.CompanyAddressListResp, error) {
-	all, _ := l.svcCtx.OmsCompanyAddressModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.OmsCompanyAddressModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.OmsCompanyAddressModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询公司收发货地址列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*oms.CompanyAddressListData
 	for _, item := range *all {
@@ -45,7 +50,9 @@ func (l *CompanyAddressListLogic) CompanyAddressList(in *oms.CompanyAddressListR
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询公司收发货地址列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &oms.CompanyAddressListResp{
 		Total: count,
 		List:  list,

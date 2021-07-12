@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,8 +24,14 @@ func NewAlbumPicListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Albu
 }
 
 func (l *AlbumPicListLogic) AlbumPicList(in *pms.AlbumPicListReq) (*pms.AlbumPicListResp, error) {
-	all, _ := l.svcCtx.PmsAlbumPicModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.PmsAlbumPicModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.PmsAlbumPicModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询相册图片列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*pms.AlbumPicListData
 	for _, item := range *all {
@@ -37,7 +43,9 @@ func (l *AlbumPicListLogic) AlbumPicList(in *pms.AlbumPicListReq) (*pms.AlbumPic
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询相册图片列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.AlbumPicListResp{
 		Total: count,
 		List:  list,

@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
 
@@ -25,8 +24,14 @@ func NewIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *ums.IntegrationConsumeSettingListReq) (*ums.IntegrationConsumeSettingListResp, error) {
-	all, _ := l.svcCtx.UmsIntegrationConsumeSettingModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.UmsIntegrationConsumeSettingModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.UmsIntegrationConsumeSettingModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询积分消费设置列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*ums.IntegrationConsumeSettingListData
 	for _, item := range *all {
@@ -40,7 +45,9 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *u
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询积分消费设置列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &ums.IntegrationConsumeSettingListResp{
 		Total: count,
 		List:  list,

@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,8 +24,14 @@ func NewFlashPromotionLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *FlashPromotionLogListLogic) FlashPromotionLogList(in *sms.FlashPromotionLogListReq) (*sms.FlashPromotionLogListResp, error) {
-	all, _ := l.svcCtx.SmsFlashPromotionLogModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.SmsFlashPromotionLogModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.SmsFlashPromotionLogModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询限时购通知记录列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*sms.FlashPromotionLogListData
 	for _, item := range *all {
@@ -41,7 +47,9 @@ func (l *FlashPromotionLogListLogic) FlashPromotionLogList(in *sms.FlashPromotio
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询限时购通知记录列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &sms.FlashPromotionLogListResp{
 		Total: count,
 		List:  list,

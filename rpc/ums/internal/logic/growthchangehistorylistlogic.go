@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
 
@@ -25,8 +24,14 @@ func NewGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(in *ums.GrowthChangeHistoryListReq) (*ums.GrowthChangeHistoryListResp, error) {
-	all, _ := l.svcCtx.UmsGrowthChangeHistoryModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.UmsGrowthChangeHistoryModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.UmsGrowthChangeHistoryModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询成长值变化历史记录列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*ums.GrowthChangeHistoryListData
 	for _, item := range *all {
@@ -43,7 +48,9 @@ func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(in *ums.GrowthCha
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询成长值变化历史记录列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &ums.GrowthChangeHistoryListResp{
 		Total: count,
 		List:  list,

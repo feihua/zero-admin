@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
 
@@ -25,12 +24,17 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *MemberLoginLogListLogic) MemberLoginLogList(in *ums.MemberLoginLogListReq) (*ums.MemberLoginLogListResp, error) {
-	all, _ := l.svcCtx.UmsMemberLoginLogModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.UmsMemberLoginLogModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.UmsMemberLoginLogModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询会员登录记录列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*ums.MemberLoginLogListData
 	for _, item := range *all {
-
 		list = append(list, &ums.MemberLoginLogListData{
 			Id:         item.Id,
 			MemberId:   item.MemberId,
@@ -42,7 +46,9 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(in *ums.MemberLoginLogListR
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询会员登录记录列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &ums.MemberLoginLogListResp{
 		Total: count,
 		List:  list,

@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/ums/internal/svc"
 	"go-zero-admin/rpc/ums/ums"
 
@@ -25,9 +24,14 @@ func NewMemberTaskListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 }
 
 func (l *MemberTaskListLogic) MemberTaskList(in *ums.MemberTaskListReq) (*ums.MemberTaskListResp, error) {
-	all, _ := l.svcCtx.UmsMemberTaskModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.UmsMemberTaskModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.UmsMemberTaskModel.Count()
 
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询会员任务列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 	var list []*ums.MemberTaskListData
 	for _, item := range *all {
 
@@ -40,7 +44,9 @@ func (l *MemberTaskListLogic) MemberTaskList(in *ums.MemberTaskListReq) (*ums.Me
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询会员任务列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &ums.MemberTaskListResp{
 		Total: count,
 		List:  list,

@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
 
@@ -25,8 +24,14 @@ func NewOrderReturnReasonListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *OrderReturnReasonListLogic) OrderReturnReasonList(in *oms.OrderReturnReasonListReq) (*oms.OrderReturnReasonListResp, error) {
-	all, _ := l.svcCtx.OmsOrderReturnReasonModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.OmsOrderReturnReasonModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.OmsOrderReturnReasonModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询退货原因列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*oms.OrderReturnReasonListData
 	for _, item := range *all {
@@ -39,7 +44,9 @@ func (l *OrderReturnReasonListLogic) OrderReturnReasonList(in *oms.OrderReturnRe
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询退货原因列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &oms.OrderReturnReasonListResp{
 		Total: count,
 		List:  list,

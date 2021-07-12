@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,8 +24,14 @@ func NewProductOperateLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pms.ProductOperateLogListReq) (*pms.ProductOperateLogListResp, error) {
-	all, _ := l.svcCtx.PmsProductOperateLogModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.PmsProductOperateLogModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.PmsProductOperateLogModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询商品操作历史列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*pms.ProductOperateLogListData
 	for _, item := range *all {
@@ -46,7 +52,9 @@ func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pms.ProductOperat
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询商品操作历史列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.ProductOperateLogListResp{
 		Total: count,
 		List:  list,

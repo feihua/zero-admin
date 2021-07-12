@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,8 +24,14 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SkuS
 }
 
 func (l *SkuStockListLogic) SkuStockList(in *pms.SkuStockListReq) (*pms.SkuStockListResp, error) {
-	all, _ := l.svcCtx.PmsSkuStockModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.PmsSkuStockModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.PmsSkuStockModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询库存列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*pms.SkuStockListData
 	for _, item := range *all {
@@ -45,7 +51,9 @@ func (l *SkuStockListLogic) SkuStockList(in *pms.SkuStockListReq) (*pms.SkuStock
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询库存列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.SkuStockListResp{
 		Total: count,
 		List:  list,

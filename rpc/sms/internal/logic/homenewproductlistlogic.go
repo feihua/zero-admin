@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,8 +24,14 @@ func NewHomeNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *HomeNewProductListLogic) HomeNewProductList(in *sms.HomeNewProductListReq) (*sms.HomeNewProductListResp, error) {
-	all, _ := l.svcCtx.SmsHomeNewProductModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.SmsHomeNewProductModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.SmsHomeNewProductModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询首页新鲜好物列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*sms.HomeNewProductListData
 	for _, item := range *all {
@@ -39,7 +45,9 @@ func (l *HomeNewProductListLogic) HomeNewProductList(in *sms.HomeNewProductListR
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询首页新鲜好物列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &sms.HomeNewProductListResp{
 		Total: count,
 		List:  list,

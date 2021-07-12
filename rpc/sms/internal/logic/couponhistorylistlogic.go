@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/sms/internal/svc"
 	"go-zero-admin/rpc/sms/sms"
 
@@ -24,8 +24,14 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *CouponHistoryListLogic) CouponHistoryList(in *sms.CouponHistoryListReq) (*sms.CouponHistoryListResp, error) {
-	all, _ := l.svcCtx.SmsCouponHistoryModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.SmsCouponHistoryModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.SmsCouponHistoryModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询优惠券使用历史列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*sms.CouponHistoryListData
 	for _, item := range *all {
@@ -45,7 +51,9 @@ func (l *CouponHistoryListLogic) CouponHistoryList(in *sms.CouponHistoryListReq)
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询优惠券使用历史列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &sms.CouponHistoryListResp{
 		Total: count,
 		List:  list,

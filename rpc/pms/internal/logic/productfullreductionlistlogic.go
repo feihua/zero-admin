@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"go-zero-admin/rpc/pms/internal/svc"
 	"go-zero-admin/rpc/pms/pms"
 
@@ -24,8 +24,14 @@ func NewProductFullReductionListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *ProductFullReductionListLogic) ProductFullReductionList(in *pms.ProductFullReductionListReq) (*pms.ProductFullReductionListResp, error) {
-	all, _ := l.svcCtx.PmsProductFullReductionModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.PmsProductFullReductionModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.PmsProductFullReductionModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询产品满减列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*pms.ProductFullReductionListData
 	for _, item := range *all {
@@ -38,7 +44,9 @@ func (l *ProductFullReductionListLogic) ProductFullReductionList(in *pms.Product
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询产品满减列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.ProductFullReductionListResp{
 		Total: count,
 		List:  list,

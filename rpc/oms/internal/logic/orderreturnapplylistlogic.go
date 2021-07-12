@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
+	"encoding/json"
 	"go-zero-admin/rpc/oms/internal/svc"
 	"go-zero-admin/rpc/oms/oms"
 
@@ -25,8 +24,14 @@ func NewOrderReturnApplyListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *oms.OrderReturnApplyListReq) (*oms.OrderReturnApplyListResp, error) {
-	all, _ := l.svcCtx.OmsOrderReturnApplyModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.OmsOrderReturnApplyModel.FindAll(in.Current, in.PageSize)
 	count, _ := l.svcCtx.OmsOrderReturnApplyModel.Count()
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("查询退货申请列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
 
 	var list []*oms.OrderReturnApplyListData
 	for _, item := range *all {
@@ -62,7 +67,9 @@ func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *oms.OrderReturnAppl
 		})
 	}
 
-	fmt.Println(list)
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.Infof("查询退货申请列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &oms.OrderReturnApplyListResp{
 		Total: count,
 		List:  list,
