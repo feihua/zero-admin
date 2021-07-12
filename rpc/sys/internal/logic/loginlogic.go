@@ -68,7 +68,7 @@ func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(resp)
-	logx.Errorf("登录成功,参数:%s,响应:%s", reqStr, listStr)
+	logx.Infof("登录成功,参数:%s,响应:%s", reqStr, listStr)
 	return resp, nil
 }
 
