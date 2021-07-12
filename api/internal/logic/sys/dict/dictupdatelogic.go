@@ -41,7 +41,7 @@ func (l *DictUpdateLogic) DictUpdate(req types.UpdateDictReq) (*types.UpdateDict
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("更新字典参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("更新字典信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新字典失败")
 	}
 

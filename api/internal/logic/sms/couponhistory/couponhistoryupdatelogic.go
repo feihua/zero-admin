@@ -43,7 +43,7 @@ func (l *CouponHistoryUpdateLogic) CouponHistoryUpdate(req types.UpdateCouponHis
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("更新优惠券使用记录参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("更新优惠券使用记录信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新优惠券使用记录失败")
 	}
 

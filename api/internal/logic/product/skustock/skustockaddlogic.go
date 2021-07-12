@@ -42,7 +42,7 @@ func (l *SkuStockAddLogic) SkuStockAdd(req types.AddSkuStockReq) (*types.AddSkuS
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加商品库存参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("添加商品库存信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加商品库存失败")
 	}
 

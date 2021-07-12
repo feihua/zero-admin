@@ -46,7 +46,7 @@ func (l *ProductCommentAddLogic) ProductCommentAdd(req types.AddProductCommentRe
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加商品评价参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("添加商品评价信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加商品评价失败")
 	}
 

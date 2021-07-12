@@ -39,7 +39,7 @@ func (l *FlashPromotionLogUpdateLogic) FlashPromotionLogUpdate(req types.UpdateF
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("更新限时购通知记录参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("更新限时购通知记录信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新限时购通知记录失败")
 	}
 

@@ -36,7 +36,7 @@ func (l *IntegrationConsumeSettingAddLogic) IntegrationConsumeSettingAdd(req typ
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加积分消费设置参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("添加积分消费设置信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加积分消费设置失败")
 	}
 

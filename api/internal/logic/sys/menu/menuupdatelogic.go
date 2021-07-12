@@ -45,7 +45,7 @@ func (l *MenuUpdateLogic) MenuUpdate(req types.UpdateMenuReq) (*types.UpdateMenu
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("更新菜单参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("更新菜单信息失败,参数:%s,异常:%s", reqStr, err.Error())
 	}
 	return &types.UpdateMenuResp{
 		Code:    "000000",

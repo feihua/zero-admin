@@ -44,7 +44,7 @@ func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(req types.UpdateHomeAdver
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("更新首页广告参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("更新首页广告信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新首页广告失败")
 	}
 

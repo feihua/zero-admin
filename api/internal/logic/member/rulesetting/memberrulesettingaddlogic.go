@@ -38,7 +38,7 @@ func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(req types.AddMemberRule
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加会员积分规则参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("添加会员积分规则信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加会员积分规则失败")
 	}
 

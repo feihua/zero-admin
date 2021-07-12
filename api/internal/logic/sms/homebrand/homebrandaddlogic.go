@@ -36,7 +36,7 @@ func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddH
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加首页品牌参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("添加首页品牌信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加首页品牌失败")
 	}
 

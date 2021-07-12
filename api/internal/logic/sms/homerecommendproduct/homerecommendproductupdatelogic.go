@@ -37,7 +37,7 @@ func (l *HomeRecommendProductUpdateLogic) HomeRecommendProductUpdate(req types.U
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("更新人气推荐商品参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("更新人气推荐商品信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新人气推荐商品失败")
 	}
 

@@ -39,7 +39,7 @@ func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加用户参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("添加用户信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加用户失败")
 	}
 

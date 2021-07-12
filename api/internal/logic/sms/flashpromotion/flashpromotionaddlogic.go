@@ -37,7 +37,7 @@ func (l *FlashPromotionAddLogic) FlashPromotionAdd(req types.AddFlashPromotionRe
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加限时购物记录参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("添加限时购物记录信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加限时购表失败")
 	}
 

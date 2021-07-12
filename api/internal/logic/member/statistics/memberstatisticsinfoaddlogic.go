@@ -47,7 +47,7 @@ func (l *MemberStatisticsInfoAddLogic) MemberStatisticsInfoAdd(req types.AddMemb
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加会员统计信息参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("添加会员统计信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加会员统计信息失败")
 	}
 

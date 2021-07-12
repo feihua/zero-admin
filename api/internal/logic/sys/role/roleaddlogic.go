@@ -37,7 +37,7 @@ func (l *RoleAddLogic) RoleAdd(req types.AddRoleReq) (*types.AddRoleResp, error)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加角色参数:%s,异常:%s", reqStr, err.Error())
+		logx.Errorf("添加角色信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加角色失败")
 	}
 
