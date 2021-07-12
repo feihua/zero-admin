@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/jinzhu/copier"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
@@ -32,6 +33,8 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 	resp, err := l.svcCtx.Sys.UserList(l.ctx, &userListReq)
 
 	if err != nil {
+		data, _ := json.Marshal(req)
+		logx.Errorf("参数: %s,查询用户列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询失败")
 	}
 

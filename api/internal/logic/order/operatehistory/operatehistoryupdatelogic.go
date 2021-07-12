@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/oms/omsclient"
 
@@ -36,6 +37,8 @@ func (l *OperateHistoryUpdateLogic) OperateHistoryUpdate(req types.UpdateOperate
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("更新订单操作历史参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新订单操作历史失败")
 	}
 

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
@@ -33,6 +34,8 @@ func (l *JobListLogic) JobList(req types.ListJobReq) (*types.ListJobResp, error)
 	})
 
 	if err != nil {
+		data, _ := json.Marshal(req)
+		logx.Errorf("参数: %s,查询岗位列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询岗位失败")
 	}
 

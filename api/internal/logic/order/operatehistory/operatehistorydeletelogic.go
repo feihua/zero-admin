@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/oms/omsclient"
@@ -24,9 +25,14 @@ func NewOperateHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *OperateHistoryDeleteLogic) OperateHistoryDelete(req types.DeleteOperateHistoryReq) (*types.DeleteOperateHistoryResp, error) {
-	_, _ = l.svcCtx.Oms.OrderOperateHistoryDelete(l.ctx, &omsclient.OrderOperateHistoryDeleteReq{
+	_, err := l.svcCtx.Oms.OrderOperateHistoryDelete(l.ctx, &omsclient.OrderOperateHistoryDeleteReq{
 		Id: req.Id,
 	})
+
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除订单操作历史异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除订单操作历史签失败")
+	}
 
 	return &types.DeleteOperateHistoryResp{
 		Code:    "000000",

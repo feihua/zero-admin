@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -31,6 +32,8 @@ func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.List
 	})
 
 	if err != nil {
+		data, _ := json.Marshal(req)
+		logx.Errorf("参数: %s,查询登录日志列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询登录日志失败")
 	}
 

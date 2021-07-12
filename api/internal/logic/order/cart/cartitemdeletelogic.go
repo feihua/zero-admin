@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/oms/omsclient"
@@ -24,10 +25,14 @@ func NewCartItemDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Car
 }
 
 func (l *CartItemDeleteLogic) CartItemDelete(req types.DeleteCartItemReq) (*types.DeleteCartItemResp, error) {
-	_, _ = l.svcCtx.Oms.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{
+	_, err := l.svcCtx.Oms.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{
 		Id: req.Id,
 	})
 
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除购物车异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除购物车失败")
+	}
 	return &types.DeleteCartItemResp{
 		Code:    "000000",
 		Message: "",

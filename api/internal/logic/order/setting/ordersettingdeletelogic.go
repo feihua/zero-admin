@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,9 +26,14 @@ func NewOrderSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *OrderSettingDeleteLogic) OrderSettingDelete(req types.DeleteOrderSettingReq) (*types.DeleteOrderSettingResp, error) {
-	_, _ = l.svcCtx.Oms.OrderSettingDelete(l.ctx, &omsclient.OrderSettingDeleteReq{
+	_, err := l.svcCtx.Oms.OrderSettingDelete(l.ctx, &omsclient.OrderSettingDeleteReq{
 		Id: req.Id,
 	})
+
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除订单设置异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除订单设置失败")
+	}
 
 	return &types.DeleteOrderSettingResp{
 		Code:    "000000",

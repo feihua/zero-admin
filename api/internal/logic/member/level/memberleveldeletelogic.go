@@ -31,6 +31,7 @@ func (l *MemberLevelDeleteLogic) MemberLevelDelete(req types.DeleteMemberLevelRe
 	})
 
 	if err != nil {
+		logx.Errorf("根据Id: %d,删除会员等级异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除会员等级失败")
 	}
 	return &types.DeleteMemberLevelResp{

@@ -31,6 +31,7 @@ func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(req
 	})
 
 	if err != nil {
+		logx.Errorf("根据Id: %d,删除积分变化历史记录异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除积分变化历史记录失败")
 	}
 	return &types.DeleteIntegrationChangeHistoryResp{

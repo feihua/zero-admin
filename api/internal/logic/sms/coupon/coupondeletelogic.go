@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,10 +26,14 @@ func NewCouponDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 }
 
 func (l *CouponDeleteLogic) CouponDelete(req types.DeleteCouponReq) (*types.DeleteCouponResp, error) {
-	_, _ = l.svcCtx.Sms.CouponDelete(l.ctx, &smsclient.CouponDeleteReq{
+	_, err := l.svcCtx.Sms.CouponDelete(l.ctx, &smsclient.CouponDeleteReq{
 		Id: req.Id,
 	})
 
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除优惠券异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除优惠券失败")
+	}
 	return &types.DeleteCouponResp{
 		Code:    "000000",
 		Message: "",

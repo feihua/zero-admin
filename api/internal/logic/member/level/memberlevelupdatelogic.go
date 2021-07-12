@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
 
@@ -43,6 +44,8 @@ func (l *MemberLevelUpdateLogic) MemberLevelUpdate(req types.UpdateMemberLevelRe
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("更新会员等级参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新会员等级失败")
 	}
 

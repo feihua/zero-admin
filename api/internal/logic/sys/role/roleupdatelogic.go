@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
@@ -36,6 +37,8 @@ func (l *RoleUpdateLogic) RoleUpdate(req types.UpdateRoleReq) (*types.UpdateRole
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("更新角色参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新角色失败")
 	}
 

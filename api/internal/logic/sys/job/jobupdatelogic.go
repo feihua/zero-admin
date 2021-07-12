@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 
@@ -36,6 +37,8 @@ func (l *JobUpdateLogic) JobUpdate(req types.UpdateJobReq) (*types.UpdateJobResp
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("更新岗位参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("删除岗位失败")
 	}
 

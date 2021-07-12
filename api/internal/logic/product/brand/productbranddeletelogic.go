@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,9 +26,14 @@ func NewProductBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *ProductBrandDeleteLogic) ProductBrandDelete(req types.DeleteProductBrandReq) (*types.DeleteProductBrandResp, error) {
-	_, _ = l.svcCtx.Pms.BrandDelete(l.ctx, &pmsclient.BrandDeleteReq{
+	_, err := l.svcCtx.Pms.BrandDelete(l.ctx, &pmsclient.BrandDeleteReq{
 		Id: req.Id,
 	})
+
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除商品品牌异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除商品品牌失败")
+	}
 
 	return &types.DeleteProductBrandResp{
 		Code:    "000000",

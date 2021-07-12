@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
 	"strings"
@@ -26,10 +27,12 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 	}
 }
 
-//根据用户名和密码登录
+// 根据用户名和密码登录
 func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginResp, error) {
 
 	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("用户名或密码不能为空,请求参数:%s", reqStr)
 		return nil, errorx.NewDefaultError("用户名或密码不能为空")
 	}
 
@@ -39,6 +42,7 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginR
 	})
 
 	if err != nil {
+		logx.Errorf("根据用户名: %s和密码: %s查询用户异常:%s", req.UserName, req.Password, err.Error())
 		return nil, errorx.NewDefaultError("登录失败")
 	}
 

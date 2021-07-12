@@ -31,7 +31,8 @@ func (l *MemberLoginLogDeleteLogic) MemberLoginLogDelete(req types.DeleteMemberL
 	})
 
 	if err != nil {
-		return nil, errorx.NewDefaultError("删除员登录记录失败")
+		logx.Errorf("根据Id: %d,删除会员登录记录异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除会员登录记录失败")
 	}
 	return &types.DeleteMemberLoginLogResp{
 		Code:    "000000",

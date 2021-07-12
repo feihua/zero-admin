@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,9 +26,14 @@ func NewFeightTemplateDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FeightTemplateDeleteLogic) FeightTemplateDelete(req types.DeleteFeightTemplateReq) (*types.DeleteFeightTemplateResp, error) {
-	_, _ = l.svcCtx.Pms.FeightTemplateDelete(l.ctx, &pmsclient.FeightTemplateDeleteReq{
+	_, err := l.svcCtx.Pms.FeightTemplateDelete(l.ctx, &pmsclient.FeightTemplateDeleteReq{
 		Id: req.Id,
 	})
+
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除运费模板异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除运费模板失败")
+	}
 
 	return &types.DeleteFeightTemplateResp{
 		Code:    "000000",

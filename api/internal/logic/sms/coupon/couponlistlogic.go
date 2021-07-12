@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/tal-tech/go-zero/core/logx"
 	"go-zero-admin/api/internal/common/errorx"
@@ -31,6 +32,8 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 	})
 
 	if err != nil {
+		data, _ := json.Marshal(req)
+		logx.Errorf("参数: %s,查询优惠券列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询优惠券失败")
 	}
 

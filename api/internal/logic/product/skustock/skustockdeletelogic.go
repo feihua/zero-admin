@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,9 +26,14 @@ func NewSkuStockDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Sku
 }
 
 func (l *SkuStockDeleteLogic) SkuStockDelete(req types.DeleteSkuStockReq) (*types.DeleteSkuStockResp, error) {
-	_, _ = l.svcCtx.Pms.SkuStockDelete(l.ctx, &pmsclient.SkuStockDeleteReq{
+	_, err := l.svcCtx.Pms.SkuStockDelete(l.ctx, &pmsclient.SkuStockDeleteReq{
 		Id: req.Id,
 	})
+
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除库存异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除库存失败")
+	}
 
 	return &types.DeleteSkuStockResp{
 		Code:    "000000",

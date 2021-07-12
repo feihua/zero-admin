@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,9 +26,14 @@ func NewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Prod
 }
 
 func (l *ProductDeleteLogic) ProductDelete(req types.DeleteProductReq) (*types.DeleteProductResp, error) {
-	_, _ = l.svcCtx.Pms.ProductDelete(l.ctx, &pmsclient.ProductDeleteReq{
+	_, err := l.svcCtx.Pms.ProductDelete(l.ctx, &pmsclient.ProductDeleteReq{
 		Id: req.Id,
 	})
+
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除商品信息异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除商品信息失败")
+	}
 
 	return &types.DeleteProductResp{
 		Code:    "000000",

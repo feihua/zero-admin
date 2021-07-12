@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/rpc/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,7 +26,7 @@ func NewMenuUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuUpd
 }
 
 func (l *MenuUpdateLogic) MenuUpdate(req types.UpdateMenuReq) (*types.UpdateMenuResp, error) {
-	_, _ = l.svcCtx.Sys.MenuUpdate(l.ctx, &sysclient.MenuUpdateReq{
+	_, err := l.svcCtx.Sys.MenuUpdate(l.ctx, &sysclient.MenuUpdateReq{
 		Id:       req.Id,
 		Name:     req.Name,
 		ParentId: req.ParentId,
@@ -42,6 +43,10 @@ func (l *MenuUpdateLogic) MenuUpdate(req types.UpdateMenuReq) (*types.UpdateMenu
 		VueRedirect:  req.VueRedirect,
 	})
 
+	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("更新菜单参数:%s,异常:%s", reqStr, err.Error())
+	}
 	return &types.UpdateMenuResp{
 		Code:    "000000",
 		Message: "",

@@ -31,6 +31,7 @@ func (l *JobDeleteLogic) JobDelete(req types.DeleteJobReq) (*types.DeleteJobResp
 	})
 
 	if err != nil {
+		logx.Errorf("根据jobId: %d,删除岗位异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除岗位失败")
 	}
 

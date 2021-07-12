@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
@@ -36,6 +37,8 @@ func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(req types.AddFlashPromo
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("添加限时购通知记录参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加限时购通知记录失败")
 	}
 

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,10 +26,14 @@ func NewHomeRecommendProductDeleteLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(req types.DeleteHomeRecommendProductReq) (*types.DeleteHomeRecommendProductResp, error) {
-	_, _ = l.svcCtx.Sms.HomeRecommendProductDelete(l.ctx, &smsclient.HomeRecommendProductDeleteReq{
+	_, err := l.svcCtx.Sms.HomeRecommendProductDelete(l.ctx, &smsclient.HomeRecommendProductDeleteReq{
 		Id: req.Id,
 	})
 
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除人气推荐商品异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除人气推荐商品失败")
+	}
 	return &types.DeleteHomeRecommendProductResp{
 		Code:    "000000",
 		Message: "",

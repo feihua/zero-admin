@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/ums/umsclient"
@@ -33,6 +34,8 @@ func (l *MemberTagListLogic) MemberTagList(req types.ListMemberTagReq) (*types.L
 	})
 
 	if err != nil {
+		data, _ := json.Marshal(req)
+		logx.Errorf("参数: %s,查询会员标签列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询会员标签失败")
 	}
 

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -35,6 +36,8 @@ func (l *DictListLogic) DictList(req types.ListDictReq) (*types.ListDictResp, er
 	})
 
 	if err != nil {
+		data, _ := json.Marshal(req)
+		logx.Errorf("参数: %s,查询字典列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询字典失败")
 	}
 

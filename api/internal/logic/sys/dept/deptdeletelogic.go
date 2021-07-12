@@ -31,6 +31,7 @@ func (l *DeptDeleteLogic) DeptDelete(req types.DeleteDeptReq) (*types.DeleteDept
 	})
 
 	if err != nil {
+		logx.Errorf("根据deptId: %d,删除部门异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除机构失败")
 	}
 

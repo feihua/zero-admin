@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
@@ -32,6 +33,8 @@ func (l *OperateHistoryListLogic) OperateHistoryList(req types.ListOperateHistor
 	})
 
 	if err != nil {
+		data, _ := json.Marshal(req)
+		logx.Errorf("参数: %s,查询订单操作历史列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询订单操作历史失败")
 	}
 

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,9 +26,14 @@ func NewFlashPromotionDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FlashPromotionDeleteLogic) FlashPromotionDelete(req types.DeleteFlashPromotionReq) (*types.DeleteFlashPromotionResp, error) {
-	_, _ = l.svcCtx.Sms.FlashPromotionDelete(l.ctx, &smsclient.FlashPromotionDeleteReq{
+	_, err := l.svcCtx.Sms.FlashPromotionDelete(l.ctx, &smsclient.FlashPromotionDeleteReq{
 		Id: req.Id,
 	})
+
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除限时购记录异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除限时购记录失败")
+	}
 
 	return &types.DeleteFlashPromotionResp{
 		Code:    "000000",

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/oms/omsclient"
 
@@ -36,6 +37,8 @@ func (l *OrderSettingUpdateLogic) OrderSettingUpdate(req types.UpdateOrderSettin
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("更新订单设置参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新订单设置失败")
 	}
 

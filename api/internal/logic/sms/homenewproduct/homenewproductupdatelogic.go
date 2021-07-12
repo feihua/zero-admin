@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
@@ -35,6 +36,8 @@ func (l *HomeNewProductUpdateLogic) HomeNewProductUpdate(req types.UpdateHomeNew
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("更新新鲜好物表参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新新鲜好物表失败")
 	}
 

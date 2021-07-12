@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
@@ -33,6 +34,8 @@ func (l *FeightTemplateListLogic) FeightTemplateList(req types.ListFeightTemplat
 	})
 
 	if err != nil {
+		data, _ := json.Marshal(req)
+		logx.Errorf("参数: %s,查询运费模版列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询运费模版失败")
 	}
 

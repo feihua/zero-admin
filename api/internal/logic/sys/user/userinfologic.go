@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sys/sysclient"
+	"strconv"
 	"strings"
 
 	"go-zero-admin/api/internal/svc"
@@ -36,6 +37,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	})
 
 	if err != nil {
+		logx.Errorf("根据userId: %s,查询用户异常:%s", strconv.FormatInt(userId, 10), err.Error())
 		return nil, errorx.NewDefaultError("查询用户失败")
 	}
 

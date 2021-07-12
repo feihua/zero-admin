@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
@@ -25,9 +26,14 @@ func NewMemberPriceDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberPriceDeleteLogic) MemberPriceDelete(req types.DeleteMemberPriceReq) (*types.DeleteMemberPriceResp, error) {
-	_, _ = l.svcCtx.Pms.MemberPriceDelete(l.ctx, &pmsclient.MemberPriceDeleteReq{
+	_, err := l.svcCtx.Pms.MemberPriceDelete(l.ctx, &pmsclient.MemberPriceDeleteReq{
 		Id: req.Id,
 	})
+
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除会员价格异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除会员价格失败")
+	}
 
 	return &types.DeleteMemberPriceResp{
 		Code:    "000000",

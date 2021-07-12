@@ -31,6 +31,7 @@ func (l *RoleDeleteLogic) RoleDelete(req types.DeleteRoleReq) (*types.DeleteRole
 	})
 
 	if err != nil {
+		logx.Errorf("根据roleId: %d,删除角色异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除角色失败")
 	}
 

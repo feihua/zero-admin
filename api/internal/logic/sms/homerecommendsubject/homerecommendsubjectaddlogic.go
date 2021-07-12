@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
@@ -34,6 +35,8 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHome
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("添加人气推荐专题参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加人气推荐专题失败")
 	}
 

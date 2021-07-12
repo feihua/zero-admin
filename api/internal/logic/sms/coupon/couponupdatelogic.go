@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/sms/smsclient"
 
@@ -48,6 +49,8 @@ func (l *CouponUpdateLogic) CouponUpdate(req types.UpdateCouponReq) (*types.Upda
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("更新优惠券参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新优惠券失败")
 	}
 

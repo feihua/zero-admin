@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/oms/omsclient"
@@ -24,10 +25,14 @@ func NewReturnResonDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ReturnResonDeleteLogic) ReturnResonDelete(req types.DeleteReturnResonReq) (*types.DeleteReturnResonResp, error) {
-	_, _ = l.svcCtx.Oms.OrderReturnReasonDelete(l.ctx, &omsclient.OrderReturnReasonDeleteReq{
+	_, err := l.svcCtx.Oms.OrderReturnReasonDelete(l.ctx, &omsclient.OrderReturnReasonDeleteReq{
 		Id: req.Id,
 	})
 
+	if err != nil {
+		logx.Errorf("根据Id: %d,删除退货原因异常:%s", req.Id, err.Error())
+		return nil, errorx.NewDefaultError("删除退货原因失败")
+	}
 	return &types.DeleteReturnResonResp{
 		Code:    "000000",
 		Message: "",

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"go-zero-admin/api/internal/common/errorx"
 	"go-zero-admin/rpc/pms/pmsclient"
 
@@ -34,6 +35,8 @@ func (l *MemberPriceAddLogic) MemberPriceAdd(req types.AddMemberPriceReq) (*type
 	})
 
 	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.Errorf("添加会员价格参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加会员价格失败")
 	}
 
