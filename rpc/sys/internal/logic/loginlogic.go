@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/tal-tech/go-zero/core/stores/sqlc"
@@ -33,12 +34,15 @@ func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
 	switch err {
 	case nil:
 	case sqlc.ErrNotFound:
-		return nil, errors.New("用户名不存在")
+		logx.Errorf("用户不存在,参数:%s,异常:%s", in.UserName, err.Error())
+		return nil, errors.New("用户不存在")
 	default:
+		logx.Errorf("用户登录失败,参数:%s,异常:%s", in.UserName, err.Error())
 		return nil, err
 	}
 
 	if userInfo.Password != in.Password {
+		logx.Errorf("用户密码不正确,参数:%s", in.Password)
 		return nil, errors.New("用户密码不正确")
 	}
 
@@ -47,10 +51,12 @@ func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
 	jwtToken, err := l.getJwtToken(l.svcCtx.Config.JWT.AccessSecret, now, l.svcCtx.Config.JWT.AccessExpire, userInfo.Id)
 
 	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.Errorf("生成token失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
-	return &sys.LoginResp{
+	resp := &sys.LoginResp{
 		Status:           "ok",
 		CurrentAuthority: "admin",
 		Id:               userInfo.Id,
@@ -58,7 +64,12 @@ func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
 		AccessToken:      jwtToken,
 		AccessExpire:     now + accessExpire,
 		RefreshAfter:     now + accessExpire/2,
-	}, nil
+	}
+
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(resp)
+	logx.Errorf("登录成功,参数:%s,响应:%s", reqStr, listStr)
+	return resp, nil
 }
 
 func (l *LoginLogic) getJwtToken(secretKey string, iat, seconds, userId int64) (string, error) {
