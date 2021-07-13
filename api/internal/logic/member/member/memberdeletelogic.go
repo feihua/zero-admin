@@ -31,7 +31,7 @@ func (l *MemberDeleteLogic) MemberDelete(req types.DeleteMemberReq) (*types.Dele
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除会员信息异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员信息异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除会员信息失败")
 	}
 	return &types.DeleteMemberResp{

@@ -29,7 +29,7 @@ func (l *ProductAttributeListLogic) ProductAttributeList(in *pms.ProductAttribut
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.Errorf("查询商品属性列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("查询商品属性列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -54,7 +54,7 @@ func (l *ProductAttributeListLogic) ProductAttributeList(in *pms.ProductAttribut
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(list)
-	logx.Infof("查询商品属性列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logx.WithContext(l.ctx).Infof("查询商品属性列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.ProductAttributeListResp{
 		Total: count,
 		List:  list,

@@ -31,7 +31,7 @@ func (l *FlashPromotionDeleteLogic) FlashPromotionDelete(req types.DeleteFlashPr
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除限时购记录异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除限时购记录异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除限时购记录失败")
 	}
 

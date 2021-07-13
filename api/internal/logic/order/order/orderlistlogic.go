@@ -34,7 +34,7 @@ func (l *OrderListLogic) OrderList(req types.ListOrderReq) (*types.ListOrderResp
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.Errorf("参数: %s,查询订单信息列表异常:%s", string(data), err.Error())
+		logx.WithContext(l.ctx).Errorf("参数: %s,查询订单信息列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询订单信息失败")
 	}
 

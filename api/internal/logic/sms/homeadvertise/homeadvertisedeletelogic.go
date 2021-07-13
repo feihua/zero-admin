@@ -31,7 +31,7 @@ func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(req types.DeleteHomeAdver
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除首页广告异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除首页广告异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除首页广告失败")
 	}
 

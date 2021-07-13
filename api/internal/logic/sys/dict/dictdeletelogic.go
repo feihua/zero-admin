@@ -31,7 +31,7 @@ func (l *DictDeleteLogic) DictDelete(req types.DeleteDictReq) (*types.DeleteDict
 	})
 
 	if err != nil {
-		logx.Errorf("根据dictId: %d,删除字典异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据dictId: %d,删除字典异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除字典失败")
 	}
 

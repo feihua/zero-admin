@@ -34,7 +34,7 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.Errorf("参数: %s,查询菜单列表异常:%s", string(data), err.Error())
+		logx.WithContext(l.ctx).Errorf("参数: %s,查询菜单列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询菜单失败")
 	}
 

@@ -36,7 +36,7 @@ func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHome
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加人气推荐商品信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("添加人气推荐商品信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加人气推荐商品失败")
 	}
 

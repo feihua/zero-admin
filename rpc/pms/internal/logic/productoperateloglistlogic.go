@@ -29,7 +29,7 @@ func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pms.ProductOperat
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.Errorf("查询商品操作历史列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("查询商品操作历史列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -54,7 +54,7 @@ func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pms.ProductOperat
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(list)
-	logx.Infof("查询商品操作历史列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logx.WithContext(l.ctx).Infof("查询商品操作历史列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.ProductOperateLogListResp{
 		Total: count,
 		List:  list,

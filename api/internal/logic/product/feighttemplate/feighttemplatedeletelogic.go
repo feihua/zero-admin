@@ -31,7 +31,7 @@ func (l *FeightTemplateDeleteLogic) FeightTemplateDelete(req types.DeleteFeightT
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除运费模板异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除运费模板异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除运费模板失败")
 	}
 

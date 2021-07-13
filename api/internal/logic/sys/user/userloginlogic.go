@@ -32,7 +32,7 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginR
 
 	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("用户名或密码不能为空,请求信息失败,参数:%s", reqStr)
+		logx.WithContext(l.ctx).Errorf("用户名或密码不能为空,请求信息失败,参数:%s", reqStr)
 		return nil, errorx.NewDefaultError("用户名或密码不能为空")
 	}
 
@@ -42,7 +42,7 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginR
 	})
 
 	if err != nil {
-		logx.Errorf("根据用户名: %s和密码: %s查询用户异常:%s", req.UserName, req.Password, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据用户名: %s和密码: %s查询用户异常:%s", req.UserName, req.Password, err.Error())
 		return nil, errorx.NewDefaultError("登录失败")
 	}
 

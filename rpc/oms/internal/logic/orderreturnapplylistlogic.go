@@ -29,7 +29,7 @@ func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *oms.OrderReturnAppl
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.Errorf("查询退货申请列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("查询退货申请列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -69,7 +69,7 @@ func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *oms.OrderReturnAppl
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(list)
-	logx.Infof("查询退货申请列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logx.WithContext(l.ctx).Infof("查询退货申请列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &oms.OrderReturnApplyListResp{
 		Total: count,
 		List:  list,

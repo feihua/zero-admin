@@ -46,7 +46,7 @@ func (l *CartItemAddLogic) CartItemAdd(req types.AddCartItemReq) (*types.AddCart
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加购物车信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("添加购物车信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加购物车失败")
 	}
 

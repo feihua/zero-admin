@@ -34,7 +34,7 @@ func (l *SkuStockListLogic) SkuStockList(req types.ListSkuStockReq) (*types.List
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.Errorf("参数: %s,查询商品库存列表异常:%s", string(data), err.Error())
+		logx.WithContext(l.ctx).Errorf("参数: %s,查询商品库存列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询商品库存失败")
 	}
 

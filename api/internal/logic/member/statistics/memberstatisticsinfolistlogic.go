@@ -35,7 +35,7 @@ func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(req types.ListM
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.Errorf("参数: %s,查询会员统计信息列表异常:%s", string(data), err.Error())
+		logx.WithContext(l.ctx).Errorf("参数: %s,查询会员统计信息列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询会员统计信息失败")
 	}
 

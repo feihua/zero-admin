@@ -35,7 +35,7 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req t
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.Errorf("参数: %s,查询积分消费设置列表异常:%s", string(data), err.Error())
+		logx.WithContext(l.ctx).Errorf("参数: %s,查询积分消费设置列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询积分消费设置失败")
 	}
 

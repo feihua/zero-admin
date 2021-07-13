@@ -34,7 +34,7 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.Errorf("参数: %s,查询用户列表异常:%s", string(data), err.Error())
+		logx.WithContext(l.ctx).Errorf("参数: %s,查询用户列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询失败")
 	}
 

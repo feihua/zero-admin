@@ -39,7 +39,7 @@ func (l *FeightTemplateAddLogic) FeightTemplateAdd(req types.AddFeightTemplateRe
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加运费模板信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("添加运费模板信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加运费模版失败")
 	}
 

@@ -31,7 +31,7 @@ func (l *MenuDeleteLogic) MenuDelete(req types.DeleteMenuReq) (*types.DeleteMenu
 	})
 
 	if err != nil {
-		logx.Errorf("根据menuId: %d,删除菜单异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据menuId: %d,删除菜单异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除菜单失败")
 	}
 

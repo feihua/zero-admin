@@ -29,7 +29,7 @@ func (l *CompanyAddressListLogic) CompanyAddressList(in *oms.CompanyAddressListR
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.Errorf("查询公司收发货地址列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("查询公司收发货地址列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -52,7 +52,7 @@ func (l *CompanyAddressListLogic) CompanyAddressList(in *oms.CompanyAddressListR
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(list)
-	logx.Infof("查询公司收发货地址列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logx.WithContext(l.ctx).Infof("查询公司收发货地址列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &oms.CompanyAddressListResp{
 		Total: count,
 		List:  list,

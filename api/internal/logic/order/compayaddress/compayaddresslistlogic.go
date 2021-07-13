@@ -35,7 +35,7 @@ func (l *CompayAddressListLogic) CompayAddressList(req types.ListCompayAddressRe
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.Errorf("参数: %s,查询公司收发货地址列表异常:%s", string(data), err.Error())
+		logx.WithContext(l.ctx).Errorf("参数: %s,查询公司收发货地址列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询公司收发货地址失败")
 	}
 

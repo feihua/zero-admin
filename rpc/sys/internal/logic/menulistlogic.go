@@ -31,7 +31,7 @@ func (l *MenuListLogic) MenuList(in *sys.MenuListReq) (*sys.MenuListResp, error)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.Errorf("查询菜单列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("查询菜单列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 	var list []*sys.MenuListData
@@ -60,7 +60,7 @@ func (l *MenuListLogic) MenuList(in *sys.MenuListReq) (*sys.MenuListResp, error)
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(list)
-	logx.Infof("查询菜单列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logx.WithContext(l.ctx).Infof("查询菜单列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &sys.MenuListResp{
 		Total: count,
 		List:  list,

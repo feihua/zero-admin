@@ -43,7 +43,7 @@ func (l *ProductBrandUpdateLogic) ProductBrandUpdate(req types.UpdateProductBran
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("更新商品品牌信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("更新商品品牌信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新商品品牌失败")
 	}
 

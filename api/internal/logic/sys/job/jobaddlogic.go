@@ -35,7 +35,7 @@ func (l *JobAddLogic) JobAdd(req types.AddJobReq) (*types.AddJobResp, error) {
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加岗位信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("添加岗位信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加岗位失败")
 	}
 

@@ -42,7 +42,7 @@ func (l *CouponHistoryAddLogic) CouponHistoryAdd(req types.AddCouponHistoryReq) 
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加优惠券使用信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("添加优惠券使用信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加优惠券使用记录失败")
 	}
 

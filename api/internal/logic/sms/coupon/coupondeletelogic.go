@@ -31,7 +31,7 @@ func (l *CouponDeleteLogic) CouponDelete(req types.DeleteCouponReq) (*types.Dele
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除优惠券异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除优惠券异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除优惠券失败")
 	}
 	return &types.DeleteCouponResp{

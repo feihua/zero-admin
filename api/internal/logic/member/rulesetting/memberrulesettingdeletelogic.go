@@ -31,7 +31,7 @@ func (l *MemberRuleSettingDeleteLogic) MemberRuleSettingDelete(req types.DeleteM
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除积分规则异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除积分规则异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除积分规则失败")
 	}
 	return &types.DeleteMemberRuleSettingResp{

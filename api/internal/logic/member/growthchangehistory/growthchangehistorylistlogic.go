@@ -35,7 +35,7 @@ func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(req types.ListGro
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.Errorf("参数: %s,查询成长值变化历史记录列表异常:%s", string(data), err.Error())
+		logx.WithContext(l.ctx).Errorf("参数: %s,查询成长值变化历史记录列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询成长值变化历史记录失败")
 	}
 

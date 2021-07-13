@@ -37,7 +37,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	})
 
 	if err != nil {
-		logx.Errorf("根据userId: %s,查询用户异常:%s", strconv.FormatInt(userId, 10), err.Error())
+		logx.WithContext(l.ctx).Errorf("根据userId: %s,查询用户异常:%s", strconv.FormatInt(userId, 10), err.Error())
 		return nil, errorx.NewDefaultError("查询用户失败")
 	}
 

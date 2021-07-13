@@ -29,7 +29,7 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *u
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.Errorf("查询积分消费设置列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("查询积分消费设置列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -47,7 +47,7 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *u
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(list)
-	logx.Infof("查询积分消费设置列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logx.WithContext(l.ctx).Infof("查询积分消费设置列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &ums.IntegrationConsumeSettingListResp{
 		Total: count,
 		List:  list,

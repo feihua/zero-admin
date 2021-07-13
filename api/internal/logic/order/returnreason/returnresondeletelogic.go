@@ -30,7 +30,7 @@ func (l *ReturnResonDeleteLogic) ReturnResonDelete(req types.DeleteReturnResonRe
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除退货原因异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除退货原因异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除退货原因失败")
 	}
 	return &types.DeleteReturnResonResp{

@@ -30,7 +30,7 @@ func (l *CompayAddressDeleteLogic) CompayAddressDelete(req types.DeleteCompayAdd
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除公司地址异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除公司地址异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除公司地址失败")
 	}
 

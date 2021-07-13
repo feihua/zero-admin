@@ -31,7 +31,7 @@ func (l *CouponHistoryDeleteLogic) CouponHistoryDelete(req types.DeleteCouponHis
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除优惠券使用记录异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除优惠券使用记录异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除优惠券使用记录失败")
 	}
 	return &types.DeleteCouponHistoryResp{

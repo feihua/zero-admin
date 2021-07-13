@@ -29,7 +29,7 @@ func (l *MemberTagListLogic) MemberTagList(in *ums.MemberTagListReq) (*ums.Membe
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.Errorf("查询会员标签列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("查询会员标签列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -46,7 +46,7 @@ func (l *MemberTagListLogic) MemberTagList(in *ums.MemberTagListReq) (*ums.Membe
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(list)
-	logx.Infof("查询会员标签列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logx.WithContext(l.ctx).Infof("查询会员标签列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &ums.MemberTagListResp{
 		Total: count,
 		List:  list,

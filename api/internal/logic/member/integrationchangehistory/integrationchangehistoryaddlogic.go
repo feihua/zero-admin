@@ -39,7 +39,7 @@ func (l *IntegrationChangeHistoryAddLogic) IntegrationChangeHistoryAdd(req types
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.Errorf("添加会员积分变化历史记录信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("添加会员积分变化历史记录信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("添加积分变化历史记录失败")
 	}
 

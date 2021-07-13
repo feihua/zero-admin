@@ -31,7 +31,7 @@ func (l *MemberTaskDeleteLogic) MemberTaskDelete(req types.DeleteMemberTaskReq) 
 	})
 
 	if err != nil {
-		logx.Errorf("根据Id: %d,删除会员任务异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员任务异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除会员任务失败")
 	}
 
