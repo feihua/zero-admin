@@ -23,4 +23,8 @@ type Config struct {
 		AccessSecret string
 		AccessExpire int64
 	}
+
+	Redis struct {
+		Address string
+	}
 }

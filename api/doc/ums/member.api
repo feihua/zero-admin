@@ -99,6 +99,8 @@ type (
 )
 
 @server(
+    jwt: Auth
+    middleware: CheckUrl
     group: member/member
 )
 service admin-api {

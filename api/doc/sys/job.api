@@ -62,6 +62,7 @@ type (
 
 @server(
     jwt: Auth
+    middleware: CheckUrl
     group: sys/job
 )
 service admin-api {

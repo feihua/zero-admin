@@ -55,6 +55,8 @@ type (
 )
 
 @server(
+    jwt: Auth
+    middleware: CheckUrl
     group: order/returnreason
 )
 service admin-api {

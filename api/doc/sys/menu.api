@@ -88,6 +88,7 @@ type (
 
 @server(
     jwt: Auth
+    middleware: CheckUrl
     group: sys/menu
 )
 service admin-api {

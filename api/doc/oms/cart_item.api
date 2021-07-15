@@ -92,6 +92,8 @@ type (
 )
 
 @server(
+    jwt: Auth
+    middleware: CheckUrl
     group: order/cart
 )
 service admin-api {

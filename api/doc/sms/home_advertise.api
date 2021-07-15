@@ -78,6 +78,8 @@ type (
 )
 
 @server(
+    jwt: Auth
+    middleware: CheckUrl
     group: sms/homeadvertise
 )
 service admin-api {
