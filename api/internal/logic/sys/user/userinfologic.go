@@ -43,6 +43,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 
 	var MenuTree []*types.ListMenuTree
 
+	//组装ant ui中的菜单
 	for _, item := range resp.MenuListTree {
 		MenuTree = append(MenuTree, &types.ListMenuTree{
 			Id:       item.Id,
@@ -53,6 +54,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 		})
 	}
 
+	//组装element ui中的菜单
 	var MenuTreeVue []*types.ListMenuTreeVue
 
 	for _, item := range resp.MenuListTree {
@@ -74,6 +76,13 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 			})
 		}
 
+	}
+
+	//把能访问的url存在在redis，在middleware中检验
+	err = l.svcCtx.Redis.Set(strconv.FormatInt(userId, 10), strings.Join(resp.BackgroundUrls, ","))
+
+	if err != nil {
+		logx.Errorf("设置用户：%s,权限到redis异常: %+v", resp.Name, err)
 	}
 
 	return &types.UserInfoResp{

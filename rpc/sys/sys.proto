@@ -26,6 +26,7 @@ message InfoResp {
   string avatar = 1;
   string name = 2;
   repeated MenuListTree menuListTree=3;
+  repeated string BackgroundUrls =4;
 }
 
 message UserAddReq {

@@ -3,12 +3,14 @@ package logic
 import (
 	"context"
 	"errors"
+	"fmt"
+	"github.com/tal-tech/go-zero/core/logx"
 	"github.com/tal-tech/go-zero/core/stores/sqlc"
 	"go-zero-admin/rpc/model/sysmodel"
 	"go-zero-admin/rpc/sys/internal/svc"
 	"go-zero-admin/rpc/sys/sys"
-
-	"github.com/tal-tech/go-zero/core/logx"
+	"strconv"
+	"strings"
 )
 
 type UserInfoLogic struct {
@@ -31,31 +33,34 @@ func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 	switch err {
 	case nil:
 	case sqlc.ErrNotFound:
-		return nil, errors.New("用户名不存在")
+		logx.WithContext(l.ctx).Infof("用户不存在userId: %s", in.UserId)
+		return nil, errors.New(fmt.Sprintf("用户不存在userId: %s", strconv.FormatInt(in.UserId, 10)))
 	default:
 		return nil, err
 	}
 
 	var list []*sys.MenuListTree
+	var listUrls []string
 
 	if in.UserId == 1 {
 		menus, _ := l.svcCtx.MenuModel.FindAll(1, 1000)
-		list = listTrees(menus, list)
-		logx.Info("超级管理员登录", list)
+		list, listUrls = listTrees(menus, list, listUrls)
+		logx.WithContext(l.ctx).Infof("超级管理员: %s登录,菜单: %+v", userInfo.Name, list)
 	} else {
 		menus, _ := l.svcCtx.MenuModel.FindAllByUserId(in.UserId)
-		list = listTrees(menus, list)
-		logx.Info("普通管理员登录", list)
+		list, listUrls = listTrees(menus, list, listUrls)
+		logx.WithContext(l.ctx).Infof("普通管理员: %s登录,菜单: %+v", userInfo.Name, list)
 	}
 
 	return &sys.InfoResp{
-		Avatar:       "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
-		Name:         userInfo.Name,
-		MenuListTree: list,
+		Avatar:         "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+		Name:           userInfo.Name,
+		MenuListTree:   list,
+		BackgroundUrls: listUrls,
 	}, nil
 }
 
-func listTrees(menus *[]sysmodel.SysMenu, list []*sys.MenuListTree) []*sys.MenuListTree {
+func listTrees(menus *[]sysmodel.SysMenu, list []*sys.MenuListTree, listUrls []string) ([]*sys.MenuListTree, []string) {
 	for _, menu := range *menus {
 		list = append(list, &sys.MenuListTree{
 			Id:           menu.Id,
@@ -68,6 +73,11 @@ func listTrees(menus *[]sysmodel.SysMenu, list []*sys.MenuListTree) []*sys.MenuL
 			VueIcon:      menu.VueIcon,
 			VueRedirect:  menu.VueRedirect,
 		})
+
+		if len(strings.TrimSpace(menu.BackgroundUrl)) != 0 {
+			listUrls = append(listUrls, menu.BackgroundUrl)
+		}
+
 	}
-	return list
+	return list, listUrls
 }
