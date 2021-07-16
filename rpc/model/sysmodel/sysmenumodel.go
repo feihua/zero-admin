@@ -43,6 +43,7 @@ type (
 		VueComponent   string    `db:"vue_component"`    // vue的页面
 		VueIcon        string    `db:"vue_icon"`         // vue的图标
 		VueRedirect    string    `db:"vue_redirect"`     // vue的路由重定向
+		BackgroundUrl  string    `db:"background_url"`   // 后台地址
 	}
 )
 
