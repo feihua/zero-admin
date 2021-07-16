@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/tal-tech/go-zero/core/logx"
 	"github.com/tal-tech/go-zero/core/stores/redis"
@@ -22,7 +23,7 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		//判断请求header中是否携带了x-user-id
-		userId := r.Header.Get("x-user-id")
+		userId := r.Context().Value("userId").(json.Number).String()
 		if userId == "" {
 			logx.Errorf("缺少必要参数x-user-id")
 			httpx.Error(w, errorx.NewDefaultError("缺少必要参数x-user-id"))
@@ -53,7 +54,8 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			}
 		}
 
-		if b || r.RequestURI == "/api/sys/user/currentUser" {
+		if b || r.RequestURI == "/api/sys/user/currentUser" || r.RequestURI == "/api/sys/user/selectAllData" || r.RequestURI == "/api/sys/role/queryMenuByRoleId" {
+			logx.Infof("用户userId: %s,访问: %s路径", userId, r.RequestURI)
 			next(w, r)
 		} else {
 			logx.Errorf("用户userId: %s,没有访问: %s路径的权限", userId, r.RequestURI)
