@@ -25,7 +25,7 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	newRedis := redis.NewRedis(c.Redis.Address, redis.NodeType)
+	newRedis := redis.New(c.Redis.Address)
 	return &ServiceContext{
 		Config:   c,
 		CheckUrl: middleware.NewCheckUrlMiddleware(newRedis).Handle,

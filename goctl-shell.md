@@ -1,5 +1,5 @@
 1.安装
-框架安装 go get github.com/tal-tech/go-zero
+框架安装 go get -u github.com/tal-tech/go-zero
 框架代码生成工具安装 go get -u github.com/tal-tech/go-zero/tools/goctl
 
 2.创建api
