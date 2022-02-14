@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 	"go-zero-admin/api/internal/common/errorx"
 	"net/http"
 
@@ -11,8 +11,8 @@ import (
 	"go-zero-admin/api/internal/handler"
 	"go-zero-admin/api/internal/svc"
 
-	"github.com/tal-tech/go-zero/core/conf"
-	"github.com/tal-tech/go-zero/rest"
+	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/rest"
 )
 
 var configFile = flag.String("f", "api/etc/admin-api.yaml", "the config file")

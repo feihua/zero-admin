@@ -7,7 +7,7 @@ import (
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/sys/sysclient"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type SysLogListLogic struct {

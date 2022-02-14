@@ -8,8 +8,8 @@ import (
 	"go-zero-admin/front-api/internal/handler"
 	"go-zero-admin/front-api/internal/svc"
 
-	"github.com/tal-tech/go-zero/core/conf"
-	"github.com/tal-tech/go-zero/rest"
+	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/rest"
 )
 
 var configFile = flag.String("f", "front-api/etc/front-api.yaml", "the config file")

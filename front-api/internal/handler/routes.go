@@ -13,7 +13,7 @@ import (
 	smshome "go-zero-admin/front-api/internal/handler/sms/home"
 	"go-zero-admin/front-api/internal/svc"
 
-	"github.com/tal-tech/go-zero/rest"
+	"github.com/zeromicro/go-zero/rest"
 )
 
 func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {

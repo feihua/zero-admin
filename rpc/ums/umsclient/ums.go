@@ -10,7 +10,7 @@ import (
 
 	"go-zero-admin/rpc/ums/ums"
 
-	"github.com/tal-tech/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type (

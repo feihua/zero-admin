@@ -7,7 +7,7 @@ import (
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func OrderSettingListHandler(ctx *svc.ServiceContext) http.HandlerFunc {

@@ -9,7 +9,7 @@ import (
 	"go-zero-admin/api/internal/types"
 	"go-zero-admin/rpc/oms/omsclient"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type OperateHistoryListLogic struct {

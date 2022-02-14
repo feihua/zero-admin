@@ -13,7 +13,7 @@ import (
 	"go-zero-admin/rpc/pay/internal/svc"
 	"go-zero-admin/rpc/pay/pay"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type OrderQueryLogic struct {

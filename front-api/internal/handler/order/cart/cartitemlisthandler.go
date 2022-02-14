@@ -7,7 +7,7 @@ import (
 	"go-zero-admin/front-api/internal/svc"
 	"go-zero-admin/front-api/internal/types"
 
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func CartItemListHandler(ctx *svc.ServiceContext) http.HandlerFunc {

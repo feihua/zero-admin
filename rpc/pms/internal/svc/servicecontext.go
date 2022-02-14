@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"github.com/tal-tech/go-zero/core/stores/sqlx"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"go-zero-admin/rpc/model/pmsmodel"
 	"go-zero-admin/rpc/pms/internal/config"
 )

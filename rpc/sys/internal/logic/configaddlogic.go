@@ -7,7 +7,7 @@ import (
 	"go-zero-admin/rpc/sys/sys"
 	"time"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type ConfigAddLogic struct {

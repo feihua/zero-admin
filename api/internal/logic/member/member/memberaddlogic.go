@@ -9,7 +9,7 @@ import (
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type MemberAddLogic struct {

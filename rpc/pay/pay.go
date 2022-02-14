@@ -12,8 +12,8 @@ import (
 	"go-zero-admin/rpc/pay/internal/svc"
 	"go-zero-admin/rpc/pay/pay"
 
-	"github.com/tal-tech/go-zero/core/conf"
-	"github.com/tal-tech/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 

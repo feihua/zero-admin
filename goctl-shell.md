@@ -1,6 +1,6 @@
 1.安装
-框架安装 go get -u github.com/tal-tech/go-zero
-框架代码生成工具安装 go get -u github.com/tal-tech/go-zero/tools/goctl
+框架安装 go get -u github.com/zeromicro/go-zero
+框架代码生成工具安装 go get -u github.com/zeromicro/go-zero/tools/goctl
 
 2.创建api
 进到api/doc/目录执行
@@ -16,6 +16,8 @@ goctl api go -api front.api -dir ../
 进到rpc/sys/目录操作
 goctl rpc template -o sys.proto
 goctl rpc proto -src sys.proto -dir .
+
+goctl rpc protoc user.proto --go_out=./types --go-grpc_out=./types --zrpc_out=.
 
 进到rpc/ums/目录操作
 goctl rpc template -o ums.proto

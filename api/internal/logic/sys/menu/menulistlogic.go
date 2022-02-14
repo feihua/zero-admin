@@ -9,7 +9,7 @@ import (
 	"go-zero-admin/rpc/sys/sysclient"
 	"strconv"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type MenuListLogic struct {
