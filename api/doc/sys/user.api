@@ -1,8 +1,9 @@
+syntax = "v1"
+
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "用户相关"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
@@ -26,7 +27,7 @@ type (
         Id int64 `json:"id"`                               // 编号
         Path string `json:"path"`                          // 菜单路径
         Name string `json:"name"`                          // 菜单名称
-        ParentId int64 `json:"parentId"`                  // 父菜单ID，一级菜单为0
+        ParentId int64 `json:"parentId"`                   // 父菜单ID，一级菜单为0
         Icon string `json:"icon"`                          // 菜单图标
     }
 
@@ -84,19 +85,19 @@ type (
     ListUserData struct {
         Id int64 `json:"id"`                               // 编号
         Name string `json:"name"`                          // 用户名
-        NickName string `json:"nickName"`                 // 昵称
+        NickName string `json:"nickName"`                  // 昵称
         Avatar string `json:"avatar"`                      // 头像
         Password string `json:"password"`                  // 密码
         Salt string `json:"salt"`                          // 加密盐
         Email string `json:"email"`                        // 邮箱
         Mobile string `json:"mobile"`                      // 手机号
         Status int64 `json:"status"`                       // 状态  0：禁用   1：正常
-        DeptId int64 `json:"deptId"`                      // 机构ID
-        CreateBy string `json:"createBy"`                 // 创建人
-        CreateTime string `json:"createTime"`             // 创建时间
-        LastUpdateBy string `json:"lastUpdateBy"`        // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
-        DelFlag int64 `json:"delFlag"`                    // 是否删除  -1：已删除  0：正常
+        DeptId int64 `json:"deptId"`                       // 机构ID
+        CreateBy string `json:"createBy"`                  // 创建人
+        CreateTime string `json:"createTime"`              // 创建时间
+        LastUpdateBy string `json:"lastUpdateBy"`          // 更新人
+        LastUpdateTime string `json:"lastUpdateTime"`      // 更新时间
+        DelFlag int64 `json:"delFlag"`                     // 是否删除  -1：已删除  0：正常
         JobId int64 `json:"jobId"`
         RoleId int64 `json:"roleId"`
         RoleName string `json:"roleName"`
@@ -187,32 +188,33 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sys/user
+    prefix: /api/sys/user
 )
 service admin-api {
-
     @handler UserInfo
-    get /api/sys/user/currentUser () returns (userInfoResp)
+    get /currentUser () returns (userInfoResp)
 
     @handler UserAdd
-    post /api/sys/user/add (addUserReq) returns (addUserResp)
+    post /add (addUserReq) returns (addUserResp)
 
     @handler UserList
-    post /api/sys/user/list (ListUserReq) returns (ListUserResp)
+    post /list (ListUserReq) returns (ListUserResp)
 
     @handler UserUpdate
-    post /api/sys/user/update (UpdateUserReq) returns (UpdateUserResp)
+    post /update (UpdateUserReq) returns (UpdateUserResp)
 
     @handler UserDelete
-    post /api/sys/user/delete (DeleteUserReq) returns (DeleteUserResp)
+    post /delete (DeleteUserReq) returns (DeleteUserResp)
 
     @handler ReSetPassword
-    post /api/sys/user/reSetPassword (ReSetPasswordReq) returns (ReSetPasswordResp)
+    post /reSetPassword (ReSetPasswordReq) returns (ReSetPasswordResp)
 
     @handler UpdateUserStatus
-    post /api/sys/user/UpdateUserStatus (UserStatusReq) returns (UserStatusResp)
+
+    post /UpdateUserStatus (UserStatusReq) returns (UserStatusResp)
 
     @handler SelectAllData
-    post /api/sys/user/selectAllData (SelectDataReq) returns (SelectDataResp)
+    post /selectAllData (SelectDataReq) returns (SelectDataResp)
 }
 
 @server(

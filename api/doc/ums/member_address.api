@@ -1,20 +1,19 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "会员地址"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addMemberAddressReq struct {
-        MemberId      int64  `json:"memberId"`
-        Name          string `json:"name"` // 收货人名称
-        PhoneNumber   string `json:"phoneNumber"`
-        DefaultStatus int64  `json:"defaultStatus"` // 是否为默认
-        PostCode      string `json:"postCode"`      // 邮政编码
-        Province      string `json:"province"`       // 省份/直辖市
-        City          string `json:"city"`           // 城市
-        Region        string `json:"region"`         // 区
+        MemberId int64 `json:"memberId"`
+        Name string `json:"name"`                   // 收货人名称
+        PhoneNumber string `json:"phoneNumber"`
+        DefaultStatus int64 `json:"defaultStatus"`  // 是否为默认
+        PostCode string `json:"postCode"`           // 邮政编码
+        Province string `json:"province"`           // 省份/直辖市
+        City string `json:"city"`                   // 城市
+        Region string `json:"region"`               // 区
         DetailAddress string `json:"detailAddress"` // 详细地址(街道)
     }
     addMemberAddressResp struct {
@@ -34,8 +33,8 @@ type (
         PostCode string `json:"postCode"`            // 邮政编码
         Province string `json:"province"`            // 省份/直辖市
         City string `json:"city"`                    // 城市
-        Region        string `json:"region"`         // 区
-        DetailAddress string `json:"detailAddress"` // 详细地址(街道)
+        Region string `json:"region"`                // 区
+        DetailAddress string `json:"detailAddress"`  // 详细地址(街道)
     }
     ListMemberAddressResp struct {
         Current int64 `json:"current,default=1"`
@@ -47,15 +46,15 @@ type (
         Message string `json:"message"`
     }
     UpdateMemberAddressReq struct {
-        Id            int64  `json:"id"`
-        MemberId      int64  `json:"memberId"`
-        Name          string `json:"name"` // 收货人名称
-        PhoneNumber   string `json:"phoneNumber"`
-        DefaultStatus int64  `json:"defaultStatus"` // 是否为默认
-        PostCode      string `json:"postCode"`      // 邮政编码
-        Province      string `json:"province"`       // 省份/直辖市
-        City          string `json:"city"`           // 城市
-        Region        string `json:"region"`         // 区
+        Id int64 `json:"id"`
+        MemberId int64 `json:"memberId"`
+        Name string `json:"name"`                   // 收货人名称
+        PhoneNumber string `json:"phoneNumber"`
+        DefaultStatus int64 `json:"defaultStatus"`  // 是否为默认
+        PostCode string `json:"postCode"`           // 邮政编码
+        Province string `json:"province"`           // 省份/直辖市
+        City string `json:"city"`                   // 城市
+        Region string `json:"region"`               // 区
         DetailAddress string `json:"detailAddress"` // 详细地址(街道)
     }
     UpdateMemberAddressResp struct {
@@ -75,17 +74,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: member/address
+    prefix: /api/member/address
 )
 service admin-api {
     @handler MemberAddressAdd
-    post /api/member/address/add (addMemberAddressReq) returns (addMemberAddressResp)
+    post /add (addMemberAddressReq) returns (addMemberAddressResp)
 
     @handler MemberAddressList
-    post /api/member/address/list (ListMemberAddressReq) returns (ListMemberAddressResp)
+    post /list (ListMemberAddressReq) returns (ListMemberAddressResp)
 
     @handler MemberAddressUpdate
-    post /api/member/address/update (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
+    post /update (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
 
     @handler MemberAddressDelete
-    post /api/member/address/delete (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
+    post /delete (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
 }

@@ -1,16 +1,15 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "首页推荐商品"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addHomeRecommendProductReq struct {
-        ProductId       int64  `json:"productId"`
-        ProductName     string `json:"productName"`
-        RecommendStatus int64  `json:"recommendStatus"`
-        Sort            int64  `json:"sort"`
+        ProductId int64 `json:"productId"`
+        ProductName string `json:"productName"`
+        RecommendStatus int64 `json:"recommendStatus"`
+        Sort int64 `json:"sort"`
     }
     addHomeRecommendProductResp struct {
         Code string `json:"code"`
@@ -37,11 +36,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateHomeRecommendProductReq struct {
-        Id              int64  `json:"id"`
-        ProductId       int64  `json:"productId"`
-        ProductName     string `json:"productName"`
-        RecommendStatus int64  `json:"recommendStatus"`
-        Sort            int64  `json:"sort"`
+        Id int64 `json:"id"`
+        ProductId int64 `json:"productId"`
+        ProductName string `json:"productName"`
+        RecommendStatus int64 `json:"recommendStatus"`
+        Sort int64 `json:"sort"`
     }
     UpdateHomeRecommendProductResp struct {
         Code string `json:"code"`
@@ -60,17 +59,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sms/homerecommendproduct
+    prefix: /api/sms/homerecommendproduct
 )
 service admin-api {
     @handler HomeRecommendProductAdd
-    post /api/sms/homerecommendproduct/add (addHomeRecommendProductReq) returns (addHomeRecommendProductResp)
+    post /add (addHomeRecommendProductReq) returns (addHomeRecommendProductResp)
 
     @handler HomeRecommendProductList
-    post /api/sms/homerecommendproduct/list (ListHomeRecommendProductReq) returns (ListHomeRecommendProductResp)
+    post /list (ListHomeRecommendProductReq) returns (ListHomeRecommendProductResp)
 
     @handler HomeRecommendProductUpdate
-    post /api/sms/homerecommendproduct/update (UpdateHomeRecommendProductReq) returns (UpdateHomeRecommendProductResp)
+    post /update (UpdateHomeRecommendProductReq) returns (UpdateHomeRecommendProductResp)
 
     @handler HomeRecommendProductDelete
-    post /api/sms/homerecommendproduct/delete (DeleteHomeRecommendProductReq) returns (DeleteHomeRecommendProductResp)
+    post /delete (DeleteHomeRecommendProductReq) returns (DeleteHomeRecommendProductResp)
 }

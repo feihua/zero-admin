@@ -52,57 +52,58 @@ import (
 	"github.com/zeromicro/go-zero/rest"
 )
 
-func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
-	engine.AddRoutes(
+func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/api/sys/user/currentUser",
+					Path:    "/currentUser",
 					Handler: sysuser.UserInfoHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/user/add",
+					Path:    "/add",
 					Handler: sysuser.UserAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/user/list",
+					Path:    "/list",
 					Handler: sysuser.UserListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/user/update",
+					Path:    "/update",
 					Handler: sysuser.UserUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/user/delete",
+					Path:    "/delete",
 					Handler: sysuser.UserDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/user/reSetPassword",
+					Path:    "/reSetPassword",
 					Handler: sysuser.ReSetPasswordHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/user/UpdateUserStatus",
+					Path:    "/UpdateUserStatus",
 					Handler: sysuser.UpdateUserStatusHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/user/selectAllData",
+					Path:    "/selectAllData",
 					Handler: sysuser.SelectAllDataHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/user"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
@@ -112,912 +113,943 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/role/add",
+					Path:    "/add",
 					Handler: sysrole.RoleAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/role/list",
+					Path:    "/list",
 					Handler: sysrole.RoleListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/role/update",
+					Path:    "/update",
 					Handler: sysrole.RoleUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/role/delete",
+					Path:    "/delete",
 					Handler: sysrole.RoleDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/role/roleMenuIds",
+					Path:    "/roleMenuIds",
 					Handler: sysrole.RoleMenuIdsHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/role/queryMenuByRoleId",
+					Path:    "/queryMenuByRoleId",
 					Handler: sysrole.QueryMenuByRoleIdHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/role/updateRoleMenu",
+					Path:    "/updateRoleMenu",
 					Handler: sysrole.UpdateRoleMenuHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/role"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/menu/add",
+					Path:    "/add",
 					Handler: sysmenu.MenuAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/menu/list",
+					Path:    "/list",
 					Handler: sysmenu.MenuListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/menu/update",
+					Path:    "/update",
 					Handler: sysmenu.MenuUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/menu/delete",
+					Path:    "/delete",
 					Handler: sysmenu.MenuDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/menu"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/dict/add",
+					Path:    "/add",
 					Handler: sysdict.DictAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/dict/list",
+					Path:    "/list",
 					Handler: sysdict.DictListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/dict/update",
+					Path:    "/update",
 					Handler: sysdict.DictUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/dict/delete",
+					Path:    "/delete",
 					Handler: sysdict.DictDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/dict"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/dept/add",
+					Path:    "/add",
 					Handler: sysdept.DeptAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/dept/list",
+					Path:    "/list",
 					Handler: sysdept.DeptListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/dept/update",
+					Path:    "/update",
 					Handler: sysdept.DeptUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/dept/delete",
+					Path:    "/delete",
 					Handler: sysdept.DeptDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/dept"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/loginLog/list",
+					Path:    "/list",
 					Handler: syslog.LoginLogListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/loginLog/delete",
+					Path:    "/delete",
 					Handler: syslog.LoginLogDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/loginLog"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/sysLog/list",
+					Path:    "/list",
 					Handler: syslog.SysLogListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/sysLog/delete",
+					Path:    "/delete",
 					Handler: syslog.SysLogDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/sysLog"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/config/add",
+					Path:    "/add",
 					Handler: sysconfig.ConfigAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/config/list",
+					Path:    "/list",
 					Handler: sysconfig.ConfigListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/config/update",
+					Path:    "/update",
 					Handler: sysconfig.ConfigUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/config/delete",
+					Path:    "/delete",
 					Handler: sysconfig.ConfigDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/config"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/job/add",
+					Path:    "/add",
 					Handler: sysjob.JobAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/job/list",
+					Path:    "/list",
 					Handler: sysjob.JobListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/job/update",
+					Path:    "/update",
 					Handler: sysjob.JobUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sys/job/delete",
+					Path:    "/delete",
 					Handler: sysjob.JobDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/job"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/cart/add",
+					Path:    "/add",
 					Handler: ordercart.CartItemAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/cart/list",
+					Path:    "/list",
 					Handler: ordercart.CartItemListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/cart/update",
+					Path:    "/update",
 					Handler: ordercart.CartItemUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/cart/delete",
+					Path:    "/delete",
 					Handler: ordercart.CartItemDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order/cart"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/order/add",
+					Path:    "/add",
 					Handler: orderorder.OrderAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/order/list",
+					Path:    "/list",
 					Handler: orderorder.OrderListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/order/update",
+					Path:    "/update",
 					Handler: orderorder.OrderUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/order/delete",
+					Path:    "/delete",
 					Handler: orderorder.OrderDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order/order"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/compayaddress/add",
+					Path:    "/add",
 					Handler: ordercompayaddress.CompayAddressAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/compayaddress/list",
+					Path:    "/list",
 					Handler: ordercompayaddress.CompayAddressListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/compayaddress/update",
+					Path:    "/update",
 					Handler: ordercompayaddress.CompayAddressUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/compayaddress/delete",
+					Path:    "/delete",
 					Handler: ordercompayaddress.CompayAddressDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order/compayaddress"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/operatehistory/add",
+					Path:    "/add",
 					Handler: orderoperatehistory.OperateHistoryAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/operatehistory/list",
+					Path:    "/list",
 					Handler: orderoperatehistory.OperateHistoryListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/operatehistory/update",
+					Path:    "/update",
 					Handler: orderoperatehistory.OperateHistoryUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/operatehistory/delete",
+					Path:    "/delete",
 					Handler: orderoperatehistory.OperateHistoryDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order/operatehistory"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/returnapply/add",
+					Path:    "/add",
 					Handler: orderreturnapply.ReturnApplyAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/returnapply/list",
+					Path:    "/list",
 					Handler: orderreturnapply.ReturnApplyListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/returnapply/update",
+					Path:    "/update",
 					Handler: orderreturnapply.ReturnApplyUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/returnapply/delete",
+					Path:    "/delete",
 					Handler: orderreturnapply.ReturnApplyDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order/returnapply"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/returnreason/add",
+					Path:    "/add",
 					Handler: orderreturnreason.ReturnResonAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/returnreason/list",
+					Path:    "/list",
 					Handler: orderreturnreason.ReturnResonListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/returnreason/update",
+					Path:    "/update",
 					Handler: orderreturnreason.ReturnResonUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/returnreason/delete",
+					Path:    "/delete",
 					Handler: orderreturnreason.ReturnResonDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order/returnreason"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/setting/add",
+					Path:    "/add",
 					Handler: ordersetting.OrderSettingAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/setting/list",
+					Path:    "/list",
 					Handler: ordersetting.OrderSettingListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/setting/update",
+					Path:    "/update",
 					Handler: ordersetting.OrderSettingUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/order/setting/delete",
+					Path:    "/delete",
 					Handler: ordersetting.OrderSettingDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order/setting"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/product/add",
+					Path:    "/add",
 					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/product/list",
+					Path:    "/list",
 					Handler: productproduct.ProductListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/product/update",
+					Path:    "/update",
 					Handler: productproduct.ProductUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/product/delete",
+					Path:    "/delete",
 					Handler: productproduct.ProductDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/product"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/brand/add",
+					Path:    "/add",
 					Handler: productbrand.ProductBrandAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/brand/list",
+					Path:    "/list",
 					Handler: productbrand.ProductBrandListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/brand/update",
+					Path:    "/update",
 					Handler: productbrand.ProductBrandUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/brand/delete",
+					Path:    "/delete",
 					Handler: productbrand.ProductBrandDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/brand"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/category/add",
+					Path:    "/add",
 					Handler: productcategory.ProductCategoryAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/category/list",
+					Path:    "/list",
 					Handler: productcategory.ProductCategoryListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/category/update",
+					Path:    "/update",
 					Handler: productcategory.ProductCategoryUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/category/delete",
+					Path:    "/delete",
 					Handler: productcategory.ProductCategoryDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/category"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/comment/add",
+					Path:    "/add",
 					Handler: productcomment.ProductCommentAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/comment/list",
+					Path:    "/list",
 					Handler: productcomment.ProductCommentListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/comment/update",
+					Path:    "/update",
 					Handler: productcomment.ProductCommentUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/comment/delete",
+					Path:    "/delete",
 					Handler: productcomment.ProductCommentDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/comment"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/feighttemplate/add",
+					Path:    "/add",
 					Handler: productfeighttemplate.FeightTemplateAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/feighttemplate/list",
+					Path:    "/list",
 					Handler: productfeighttemplate.FeightTemplateListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/feighttemplate/update",
+					Path:    "/update",
 					Handler: productfeighttemplate.FeightTemplateUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/feighttemplate/delete",
+					Path:    "/delete",
 					Handler: productfeighttemplate.FeightTemplateDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/feighttemplate"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/memberprice/add",
+					Path:    "/add",
 					Handler: productmemberprice.MemberPriceAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/memberprice/list",
+					Path:    "/list",
 					Handler: productmemberprice.MemberPriceListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/memberprice/update",
+					Path:    "/update",
 					Handler: productmemberprice.MemberPriceUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/memberprice/delete",
+					Path:    "/delete",
 					Handler: productmemberprice.MemberPriceDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/memberprice"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/skustock/add",
+					Path:    "/add",
 					Handler: productskustock.SkuStockAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/skustock/list",
+					Path:    "/list",
 					Handler: productskustock.SkuStockListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/skustock/update",
+					Path:    "/update",
 					Handler: productskustock.SkuStockUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/product/skustock/delete",
+					Path:    "/delete",
 					Handler: productskustock.SkuStockDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/skustock"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/coupon/add",
+					Path:    "/add",
 					Handler: smscoupon.CouponAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/coupon/list",
+					Path:    "/list",
 					Handler: smscoupon.CouponListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/coupon/update",
+					Path:    "/update",
 					Handler: smscoupon.CouponUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/coupon/delete",
+					Path:    "/delete",
 					Handler: smscoupon.CouponDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/coupon"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/couponhistory/add",
+					Path:    "/add",
 					Handler: smscouponhistory.CouponHistoryAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/couponhistory/list",
+					Path:    "/list",
 					Handler: smscouponhistory.CouponHistoryListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/couponhistory/update",
+					Path:    "/update",
 					Handler: smscouponhistory.CouponHistoryUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/couponhistory/delete",
+					Path:    "/delete",
 					Handler: smscouponhistory.CouponHistoryDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/couponhistory"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotion/add",
+					Path:    "/add",
 					Handler: smsflashpromotion.FlashPromotionAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotion/list",
+					Path:    "/list",
 					Handler: smsflashpromotion.FlashPromotionListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotion/update",
+					Path:    "/update",
 					Handler: smsflashpromotion.FlashPromotionUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotion/delete",
+					Path:    "/delete",
 					Handler: smsflashpromotion.FlashPromotionDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/flashpromotion"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotionlog/add",
+					Path:    "/add",
 					Handler: smsflashpromotionlog.FlashPromotionLogAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotionlog/list",
+					Path:    "/list",
 					Handler: smsflashpromotionlog.FlashPromotionLogListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotionlog/update",
+					Path:    "/update",
 					Handler: smsflashpromotionlog.FlashPromotionLogUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotionlog/delete",
+					Path:    "/delete",
 					Handler: smsflashpromotionlog.FlashPromotionLogDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/flashpromotionlog"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotionsession/add",
+					Path:    "/add",
 					Handler: smsflashpromotionsession.FlashPromotionSessionAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotionsession/list",
+					Path:    "/list",
 					Handler: smsflashpromotionsession.FlashPromotionSessionListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotionsession/update",
+					Path:    "/update",
 					Handler: smsflashpromotionsession.FlashPromotionSessionUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/flashpromotionsession/delete",
+					Path:    "/delete",
 					Handler: smsflashpromotionsession.FlashPromotionSessionDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/flashpromotionsession"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homeadvertise/add",
+					Path:    "/add",
 					Handler: smshomeadvertise.HomeAdvertiseAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homeadvertise/list",
+					Path:    "/list",
 					Handler: smshomeadvertise.HomeAdvertiseListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homeadvertise/update",
+					Path:    "/update",
 					Handler: smshomeadvertise.HomeAdvertiseUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homeadvertise/delete",
+					Path:    "/delete",
 					Handler: smshomeadvertise.HomeAdvertiseDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/homeadvertise"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homebrand/add",
+					Path:    "/add",
 					Handler: smshomebrand.HomeBrandAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homebrand/list",
+					Path:    "/list",
 					Handler: smshomebrand.HomeBrandListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homebrand/update",
+					Path:    "/update",
 					Handler: smshomebrand.HomeBrandUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homebrand/delete",
+					Path:    "/delete",
 					Handler: smshomebrand.HomeBrandDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/homebrand"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homenewproduct/add",
+					Path:    "/add",
 					Handler: smshomenewproduct.HomeNewProductAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homenewproduct/list",
+					Path:    "/list",
 					Handler: smshomenewproduct.HomeNewProductListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homenewproduct/update",
+					Path:    "/update",
 					Handler: smshomenewproduct.HomeNewProductUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homenewproduct/delete",
+					Path:    "/delete",
 					Handler: smshomenewproduct.HomeNewProductDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/homenewproduct"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homerecommendproduct/add",
+					Path:    "/add",
 					Handler: smshomerecommendproduct.HomeRecommendProductAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homerecommendproduct/list",
+					Path:    "/list",
 					Handler: smshomerecommendproduct.HomeRecommendProductListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homerecommendproduct/update",
+					Path:    "/update",
 					Handler: smshomerecommendproduct.HomeRecommendProductUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homerecommendproduct/delete",
+					Path:    "/delete",
 					Handler: smshomerecommendproduct.HomeRecommendProductDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/homerecommendproduct"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homerecommendsubject/add",
+					Path:    "/add",
 					Handler: smshomerecommendsubject.HomeRecommendSubjectAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homerecommendsubject/list",
+					Path:    "/list",
 					Handler: smshomerecommendsubject.HomeRecommendSubjectListHandler(serverCtx),
 				},
 				{
@@ -1027,330 +1059,342 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/sms/homerecommendsubject/delete",
+					Path:    "/delete",
 					Handler: smshomerecommendsubject.HomeRecommendSubjectDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/homerecommendsubject"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/member/add",
+					Path:    "/add",
 					Handler: membermember.MemberAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/member/list",
+					Path:    "/list",
 					Handler: membermember.MemberListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/member/update",
+					Path:    "/update",
 					Handler: membermember.MemberUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/member/delete",
+					Path:    "/delete",
 					Handler: membermember.MemberDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/member"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/address/add",
+					Path:    "/add",
 					Handler: memberaddress.MemberAddressAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/address/list",
+					Path:    "/list",
 					Handler: memberaddress.MemberAddressListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/address/update",
+					Path:    "/update",
 					Handler: memberaddress.MemberAddressUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/address/delete",
+					Path:    "/delete",
 					Handler: memberaddress.MemberAddressDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/address"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/growthchangehistory/add",
+					Path:    "/add",
 					Handler: membergrowthchangehistory.GrowthChangeHistoryAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/growthchangehistory/list",
+					Path:    "/list",
 					Handler: membergrowthchangehistory.GrowthChangeHistoryListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/growthchangehistory/update",
+					Path:    "/update",
 					Handler: membergrowthchangehistory.GrowthChangeHistoryUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/growthchangehistory/delete",
+					Path:    "/delete",
 					Handler: membergrowthchangehistory.GrowthChangeHistoryDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/growthchangehistory"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/integrationchangehistory/add",
+					Path:    "/add",
 					Handler: memberintegrationchangehistory.IntegrationChangeHistoryAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/integrationchangehistory/list",
+					Path:    "/list",
 					Handler: memberintegrationchangehistory.IntegrationChangeHistoryListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/integrationchangehistory/update",
+					Path:    "/update",
 					Handler: memberintegrationchangehistory.IntegrationChangeHistoryUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/integrationchangehistory/delete",
+					Path:    "/delete",
 					Handler: memberintegrationchangehistory.IntegrationChangeHistoryDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/integrationchangehistory"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/integrationconsumesetting/add",
+					Path:    "/add",
 					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/integrationconsumesetting/list",
+					Path:    "/list",
 					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/integrationconsumesetting/update",
+					Path:    "/update",
 					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/integrationconsumesetting/delete",
+					Path:    "/delete",
 					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/integrationconsumesetting"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/level/add",
+					Path:    "/add",
 					Handler: memberlevel.MemberLevelAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/level/list",
+					Path:    "/list",
 					Handler: memberlevel.MemberLevelListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/level/update",
+					Path:    "/update",
 					Handler: memberlevel.MemberLevelUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/level/delete",
+					Path:    "/delete",
 					Handler: memberlevel.MemberLevelDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/level"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/loginlog/add",
+					Path:    "/add",
 					Handler: memberloginlog.MemberLoginLogAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/loginlog/list",
+					Path:    "/list",
 					Handler: memberloginlog.MemberLoginLogListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/loginlog/update",
+					Path:    "/update",
 					Handler: memberloginlog.MemberLoginLogUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/loginlog/delete",
+					Path:    "/delete",
 					Handler: memberloginlog.MemberLoginLogDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/loginlog"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/rulesetting/add",
+					Path:    "/add",
 					Handler: memberrulesetting.MemberRuleSettingAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/rulesetting/list",
+					Path:    "/list",
 					Handler: memberrulesetting.MemberRuleSettingListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/rulesetting/update",
+					Path:    "/update",
 					Handler: memberrulesetting.MemberRuleSettingUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/rulesetting/delete",
+					Path:    "/delete",
 					Handler: memberrulesetting.MemberRuleSettingDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/rulesetting"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/statistics/add",
+					Path:    "/add",
 					Handler: memberstatistics.MemberStatisticsInfoAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/statistics/list",
+					Path:    "/list",
 					Handler: memberstatistics.MemberStatisticsInfoListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/statistics/update",
+					Path:    "/update",
 					Handler: memberstatistics.MemberStatisticsInfoUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/statistics/delete",
+					Path:    "/delete",
 					Handler: memberstatistics.MemberStatisticsInfoDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/statistics"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/tag/add",
+					Path:    "/add",
 					Handler: membertag.MemberTagAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/tag/list",
+					Path:    "/list",
 					Handler: membertag.MemberTagListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/tag/update",
+					Path:    "/update",
 					Handler: membertag.MemberTagUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/tag/delete",
+					Path:    "/delete",
 					Handler: membertag.MemberTagDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/tag"),
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/task/add",
+					Path:    "/add",
 					Handler: membertask.MemberTaskAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/task/list",
+					Path:    "/list",
 					Handler: membertask.MemberTaskListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/task/update",
+					Path:    "/update",
 					Handler: membertask.MemberTaskUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/api/member/task/delete",
+					Path:    "/delete",
 					Handler: membertask.MemberTaskDeleteHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/task"),
 	)
 }

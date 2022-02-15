@@ -1,16 +1,15 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "首页新鲜好物"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addHomeNewProductReq struct {
-        ProductId       int64  `json:"productId"`
-        ProductName     string `json:"productName"`
-        RecommendStatus int64  `json:"recommendStatus"`
-        Sort            int64  `json:"sort"`
+        ProductId int64 `json:"productId"`
+        ProductName string `json:"productName"`
+        RecommendStatus int64 `json:"recommendStatus"`
+        Sort int64 `json:"sort"`
     }
     addHomeNewProductResp struct {
         Code string `json:"code"`
@@ -37,11 +36,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateHomeNewProductReq struct {
-        Id              int64  `json:"id"`
-        ProductId       int64  `json:"productId"`
-        ProductName     string `json:"productName"`
-        RecommendStatus int64  `json:"recommendStatus"`
-        Sort            int64  `json:"sort"`
+        Id int64 `json:"id"`
+        ProductId int64 `json:"productId"`
+        ProductName string `json:"productName"`
+        RecommendStatus int64 `json:"recommendStatus"`
+        Sort int64 `json:"sort"`
     }
     UpdateHomeNewProductResp struct {
         Code string `json:"code"`
@@ -60,17 +59,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sms/homenewproduct
+    prefix: /api/sms/homenewproduct
 )
 service admin-api {
     @handler HomeNewProductAdd
-    post /api/sms/homenewproduct/add (addHomeNewProductReq) returns (addHomeNewProductResp)
+    post /add (addHomeNewProductReq) returns (addHomeNewProductResp)
 
     @handler HomeNewProductList
-    post /api/sms/homenewproduct/list (ListHomeNewProductReq) returns (ListHomeNewProductResp)
+    post /list (ListHomeNewProductReq) returns (ListHomeNewProductResp)
 
     @handler HomeNewProductUpdate
-    post /api/sms/homenewproduct/update (UpdateHomeNewProductReq) returns (UpdateHomeNewProductResp)
+    post /update (UpdateHomeNewProductReq) returns (UpdateHomeNewProductResp)
 
     @handler HomeNewProductDelete
-    post /api/sms/homenewproduct/delete (DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp)
+    post /delete (DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp)
 }

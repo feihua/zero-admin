@@ -1,8 +1,7 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "登录日志"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
@@ -42,11 +41,12 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sys/log
+    prefix: /api/sys/loginLog
 )
 service admin-api {
     @handler LoginLogList
-    post /api/sys/loginLog/list (ListLoginLogReq) returns (ListLoginLogResp)
+    post /list (ListLoginLogReq) returns (ListLoginLogResp)
 
     @handler LoginLogDelete
-    post /api/sys/loginLog/delete (DeleteLoginLogReq) returns (DeleteLoginLogResp)
+    post /delete (DeleteLoginLogReq) returns (DeleteLoginLogResp)
 }

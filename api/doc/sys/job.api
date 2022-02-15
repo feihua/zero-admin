@@ -1,8 +1,7 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "职位"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 
@@ -64,17 +63,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sys/job
+    prefix: /api/sys/job
 )
 service admin-api {
     @handler JobAdd
-    post /api/sys/job/add (addJobReq) returns (addJobResp)
+    post /add (addJobReq) returns (addJobResp)
 
     @handler JobList
-    post /api/sys/job/list (ListJobReq) returns (ListJobResp)
+    post /list (ListJobReq) returns (ListJobResp)
 
     @handler JobUpdate
-    post /api/sys/job/update (UpdateJobReq) returns (UpdateJobResp)
+    post /update (UpdateJobReq) returns (UpdateJobResp)
 
     @handler JobDelete
-    post /api/sys/job/delete (DeleteJobReq) returns (DeleteJobResp)
+    post /delete (DeleteJobReq) returns (DeleteJobResp)
 }

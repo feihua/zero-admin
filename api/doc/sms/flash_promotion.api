@@ -1,16 +1,15 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "秒杀活动"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addFlashPromotionReq struct {
-        Title      string    `json:"title"`
-        StartDate  string `json:"startDate"`  // 开始日期
-        EndDate    string `json:"endDate"`    // 结束日期
-        Status     int64     `json:"status"`      // 上下线状态
+        Title string `json:"title"`
+        StartDate string `json:"startDate"`   // 开始日期
+        EndDate string `json:"endDate"`       // 结束日期
+        Status int64 `json:"status"`          // 上下线状态
         CreateTime string `json:"createTime"` // 秒杀时间段名称
     }
     addFlashPromotionResp struct {
@@ -39,11 +38,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateFlashPromotionReq struct {
-        Id         int64     `json:"id"`
-        Title      string    `json:"title"`
-        StartDate  string `json:"startDate"`  // 开始日期
-        EndDate    string `json:"endDate"`    // 结束日期
-        Status     int64     `json:"status"`      // 上下线状态
+        Id int64 `json:"id"`
+        Title string `json:"title"`
+        StartDate string `json:"startDate"`   // 开始日期
+        EndDate string `json:"endDate"`       // 结束日期
+        Status int64 `json:"status"`          // 上下线状态
         CreateTime string `json:"createTime"` // 秒杀时间段名称
     }
     UpdateFlashPromotionResp struct {
@@ -63,17 +62,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sms/flashpromotion
+    prefix: /api/sms/flashpromotion
 )
 service admin-api {
     @handler FlashPromotionAdd
-    post /api/sms/flashpromotion/add (addFlashPromotionReq) returns (addFlashPromotionResp)
+    post /add (addFlashPromotionReq) returns (addFlashPromotionResp)
 
     @handler FlashPromotionList
-    post /api/sms/flashpromotion/list (ListFlashPromotionReq) returns (ListFlashPromotionResp)
+    post /list (ListFlashPromotionReq) returns (ListFlashPromotionResp)
 
     @handler FlashPromotionUpdate
-    post /api/sms/flashpromotion/update (UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp)
+    post /update (UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp)
 
     @handler FlashPromotionDelete
-    post /api/sms/flashpromotion/delete (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
+    post /delete (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
 }

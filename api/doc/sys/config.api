@@ -1,8 +1,7 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "配置参数"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
@@ -31,10 +30,10 @@ type (
         Sort int64 `json:"sort"`                           // 排序（升序）
         CreateBy string `json:"createBy"`                  // 创建人
         CreateTime string `json:"createTime"`              // 创建时间
-        LastUpdateBy string `json:"lastUpdateBy"`        // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
+        LastUpdateBy string `json:"lastUpdateBy"`          // 更新人
+        LastUpdateTime string `json:"lastUpdateTime"`      // 更新时间
         Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"delFlag"`                    // 是否删除  -1：已删除  0：正常
+        DelFlag int64 `json:"delFlag"`                     // 是否删除  -1：已删除  0：正常
     }
     ListConfigResp struct {
         Code string `json:"code"`
@@ -71,17 +70,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sys/config
+    prefix: /api/sys/config
 )
 service admin-api {
     @handler ConfigAdd
-    post /api/sys/config/add (addConfigReq) returns (addConfigResp)
+    post /add (addConfigReq) returns (addConfigResp)
 
     @handler ConfigList
-    post /api/sys/config/list (ListConfigReq) returns (ListConfigResp)
+    post /list (ListConfigReq) returns (ListConfigResp)
 
     @handler ConfigUpdate
-    post /api/sys/config/update (UpdateConfigReq) returns (UpdateConfigResp)
+    post /update (UpdateConfigReq) returns (UpdateConfigResp)
 
     @handler ConfigDelete
-    post /api/sys/config/delete (DeleteConfigReq) returns (DeleteConfigResp)
+    post /delete (DeleteConfigReq) returns (DeleteConfigResp)
 }

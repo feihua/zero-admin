@@ -1,14 +1,13 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "会员标签"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addMemberTagReq struct {
-        Name              string  `json:"name"`
-        FinishOrderCount  int64   `json:"finishOrderCount"`  // 自动打标签完成订单数量
+        Name string `json:"name"`
+        FinishOrderCount int64 `json:"finishOrderCount"`     // 自动打标签完成订单数量
         FinishOrderAmount float64 `json:"finishOrderAmount"` // 自动打标签完成订单金额
     }
     addMemberTagResp struct {
@@ -35,9 +34,9 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberTagReq struct {
-        Id                int64   `json:"id"`
-        Name              string  `json:"name"`
-        FinishOrderCount  int64   `json:"finishOrderCount"`  // 自动打标签完成订单数量
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        FinishOrderCount int64 `json:"finishOrderCount"`     // 自动打标签完成订单数量
         FinishOrderAmount float64 `json:"finishOrderAmount"` // 自动打标签完成订单金额
     }
     UpdateMemberTagResp struct {
@@ -57,17 +56,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: member/tag
+    prefix: /api/member/tag
 )
 service admin-api {
     @handler MemberTagAdd
-    post /api/member/tag/add (addMemberTagReq) returns (addMemberTagResp)
+    post /add (addMemberTagReq) returns (addMemberTagResp)
 
     @handler MemberTagList
-    post /api/member/tag/list (ListMemberTagReq) returns (ListMemberTagResp)
+    post /list (ListMemberTagReq) returns (ListMemberTagResp)
 
     @handler MemberTagUpdate
-    post /api/member/tag/update (UpdateMemberTagReq) returns (UpdateMemberTagResp)
+    post /update (UpdateMemberTagReq) returns (UpdateMemberTagResp)
 
     @handler MemberTagDelete
-    post /api/member/tag/delete (DeleteMemberTagReq) returns (DeleteMemberTagResp)
+    post /delete (DeleteMemberTagReq) returns (DeleteMemberTagResp)
 }

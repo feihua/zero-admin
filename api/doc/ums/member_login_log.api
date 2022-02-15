@@ -1,18 +1,17 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "会员登录日志"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addMemberLoginLogReq struct {
-        MemberId   int64     `json:"memberId"`
+        MemberId int64 `json:"memberId"`
         CreateTime string `json:"createTime"`
-        Ip         string    `json:"ip"`
-        City       string    `json:"city"`
-        LoginType  int64     `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
-        Province   string    `json:"province"`
+        Ip string `json:"ip"`
+        City string `json:"city"`
+        LoginType int64 `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
+        Province string `json:"province"`
     }
     addMemberLoginLogResp struct {
         Code string `json:"code"`
@@ -41,13 +40,13 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberLoginLogReq struct {
-        Id         int64     `json:"id"`
-        MemberId   int64     `json:"memberId"`
+        Id int64 `json:"id"`
+        MemberId int64 `json:"memberId"`
         CreateTime string `json:"createTime"`
-        Ip         string    `json:"ip"`
-        City       string    `json:"city"`
-        LoginType  int64     `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
-        Province   string    `json:"province"`
+        Ip string `json:"ip"`
+        City string `json:"city"`
+        LoginType int64 `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
+        Province string `json:"province"`
     }
     UpdateMemberLoginLogResp struct {
         Code string `json:"code"`
@@ -66,17 +65,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: member/loginlog
+    prefix: /api/member/loginlog
 )
 service admin-api {
     @handler MemberLoginLogAdd
-    post /api/member/loginlog/add (addMemberLoginLogReq) returns (addMemberLoginLogResp)
+    post /add (addMemberLoginLogReq) returns (addMemberLoginLogResp)
 
     @handler MemberLoginLogList
-    post /api/member/loginlog/list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
+    post /list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
 
     @handler MemberLoginLogUpdate
-    post /api/member/loginlog/update (UpdateMemberLoginLogReq) returns (UpdateMemberLoginLogResp)
+    post /update (UpdateMemberLoginLogReq) returns (UpdateMemberLoginLogResp)
 
     @handler MemberLoginLogDelete
-    post /api/member/loginlog/delete (DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp)
+    post /delete (DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp)
 }

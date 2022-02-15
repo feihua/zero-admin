@@ -1,19 +1,18 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "运费模板"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addFeightTemplateReq struct {
-        Name           string  `json:"name"`
-        ChargeType     int64   `json:"chargeType"`  // 计费类型:0->按重量；1->按件数
-        FirstWeight    float64 `json:"first_weight"` // 首重kg
-        FirstFee       float64 `json:"firstFee"`    // 首费（元）
+        Name string `json:"name"`
+        ChargeType int64 `json:"chargeType"`      // 计费类型:0->按重量；1->按件数
+        FirstWeight float64 `json:"first_weight"` // 首重kg
+        FirstFee float64 `json:"firstFee"`        // 首费（元）
         ContinueWeight float64 `json:"continue_weight"`
-        ContinmeFee    float64 `json:"continmeFee"`
-        Dest           string  `json:"dest"` // 目的地（省、市）
+        ContinmeFee float64 `json:"continmeFee"`
+        Dest string `json:"dest"`                 // 目的地（省、市）
     }
     addFeightTemplateResp struct {
         Code string `json:"code"`
@@ -43,14 +42,14 @@ type (
         Total int64 `json:"total"`
     }
     UpdateFeightTemplateReq struct {
-        Id             int64   `json:"id"`
-        Name           string  `json:"name"`
-        ChargeType     int64   `json:"chargeType"`  // 计费类型:0->按重量；1->按件数
-        FirstWeight    float64 `json:"first_weight"` // 首重kg
-        FirstFee       float64 `json:"firstFee"`    // 首费（元）
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        ChargeType int64 `json:"chargeType"`      // 计费类型:0->按重量；1->按件数
+        FirstWeight float64 `json:"first_weight"` // 首重kg
+        FirstFee float64 `json:"firstFee"`        // 首费（元）
         ContinueWeight float64 `json:"continue_weight"`
-        ContinmeFee    float64 `json:"continmeFee"`
-        Dest           string  `json:"dest"` // 目的地（省、市）
+        ContinmeFee float64 `json:"continmeFee"`
+        Dest string `json:"dest"`                 // 目的地（省、市）
     }
     UpdateFeightTemplateResp struct {
         Code string `json:"code"`
@@ -69,17 +68,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: product/feighttemplate
+    prefix: /api/product/feighttemplate
 )
 service admin-api {
     @handler FeightTemplateAdd
-    post /api/product/feighttemplate/add (addFeightTemplateReq) returns (addFeightTemplateResp)
+    post /add (addFeightTemplateReq) returns (addFeightTemplateResp)
 
     @handler FeightTemplateList
-    post /api/product/feighttemplate/list (ListFeightTemplateReq) returns (ListFeightTemplateResp)
+    post /list (ListFeightTemplateReq) returns (ListFeightTemplateResp)
 
     @handler FeightTemplateUpdate
-    post /api/product/feighttemplate/update (UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp)
+    post /update (UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp)
 
     @handler FeightTemplateDelete
-    post /api/product/feighttemplate/delete (DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp)
+    post /delete (DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp)
 }

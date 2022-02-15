@@ -1,15 +1,14 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "退货原因"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addReturnResonReq struct {
-        Name       string    `json:"name"` // 退货类型
-        Sort       int64     `json:"sort"`
-        Status     int64     `json:"status"`      // 状态：0->不启用；1->启用
+        Name string `json:"name"`         // 退货类型
+        Sort int64 `json:"sort"`
+        Status int64 `json:"status"`      // 状态：0->不启用；1->启用
     }
     addReturnResonResp struct {
         Code string `json:"code"`
@@ -36,10 +35,10 @@ type (
         Total int64 `json:"total"`
     }
     UpdateReturnResonReq struct {
-        Id         int64     `json:"id"`
-        Name       string    `json:"name"` // 退货类型
-        Sort       int64     `json:"sort"`
-        Status     int64     `json:"status"`      // 状态：0->不启用；1->启用
+        Id int64 `json:"id"`
+        Name string `json:"name"`         // 退货类型
+        Sort int64 `json:"sort"`
+        Status int64 `json:"status"`      // 状态：0->不启用；1->启用
     }
     UpdateReturnResonResp struct {
         Code string `json:"code"`
@@ -58,17 +57,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: order/returnreason
+    prefix: /api/order/returnreason
 )
 service admin-api {
     @handler ReturnResonAdd
-    post /api/order/returnreason/add (addReturnResonReq) returns (addReturnResonResp)
+    post /add (addReturnResonReq) returns (addReturnResonResp)
 
     @handler ReturnResonList
-    post /api/order/returnreason/list (ListReturnResonReq) returns (ListReturnResonResp)
+    post /list (ListReturnResonReq) returns (ListReturnResonResp)
 
     @handler ReturnResonUpdate
-    post /api/order/returnreason/update (UpdateReturnResonReq) returns (UpdateReturnResonResp)
+    post /update (UpdateReturnResonReq) returns (UpdateReturnResonResp)
 
     @handler ReturnResonDelete
-    post /api/order/returnreason/delete (DeleteReturnResonReq) returns (DeleteReturnResonResp)
+    post /delete (DeleteReturnResonReq) returns (DeleteReturnResonResp)
 }

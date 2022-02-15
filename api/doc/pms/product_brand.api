@@ -1,22 +1,21 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "商品品牌"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addProductBrandReq struct {
-        Name                string `json:"name"`
-        FirstLetter         string `json:"firstLetter"` // 首字母
-        Sort                int64  `json:"sort"`
-        FactoryStatus       int64  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
-        ShowStatus          int64  `json:"showStatus"`
-        ProductCount        int64  `json:"productCount"`         // 产品数量
-        ProductCommentCount int64  `json:"productCommentCount"` // 产品评论数量
-        Logo                string `json:"logo"`                  // 品牌logo
-        BigPic              string `json:"bigPic"`               // 专区大图
-        BrandStory          string `json:"brandStory"`           // 品牌故事
+        Name string `json:"name"`
+        FirstLetter string `json:"firstLetter"`                // 首字母
+        Sort int64 `json:"sort"`
+        FactoryStatus int64 `json:"factoryStatus"`             // 是否为品牌制造商：0->不是；1->是
+        ShowStatus int64 `json:"showStatus"`
+        ProductCount int64 `json:"productCount"`               // 产品数量
+        ProductCommentCount int64 `json:"productCommentCount"` // 产品评论数量
+        Logo string `json:"logo"`                              // 品牌logo
+        BigPic string `json:"bigPic"`                          // 专区大图
+        BrandStory string `json:"brandStory"`                  // 品牌故事
     }
     addProductBrandResp struct {
         Code string `json:"code"`
@@ -35,9 +34,9 @@ type (
         ShowStatus int64 `json:"showStatus"`
         ProductCount int64 `json:"productCount"`                  // 产品数量
         ProductCommentCount int64 `json:"productCommentCount"`    // 产品评论数量
-        Logo                string `json:"logo"`                  // 品牌logo
-        BigPic              string `json:"bigPic"`               // 专区大图
-        BrandStory          string `json:"brandStory"`           // 品牌故事
+        Logo string `json:"logo"`                                 // 品牌logo
+        BigPic string `json:"bigPic"`                             // 专区大图
+        BrandStory string `json:"brandStory"`                     // 品牌故事
     }
     ListProductBrandResp struct {
         Current int64 `json:"current,default=1"`
@@ -49,17 +48,17 @@ type (
         Message string `json:"message"`
     }
     UpdateProductBrandReq struct {
-        Id                  int64  `json:"id"`
-        Name                string `json:"name"`
-        FirstLetter         string `json:"firstLetter"` // 首字母
-        Sort                int64  `json:"sort"`
-        FactoryStatus       int64  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
-        ShowStatus          int64  `json:"showStatus"`
-        ProductCount        int64  `json:"productCount"`         // 产品数量
-        ProductCommentCount int64  `json:"productCommentCount"` // 产品评论数量
-        Logo                string `json:"logo"`                  // 品牌logo
-        BigPic              string `json:"bigPic"`               // 专区大图
-        BrandStory          string `json:"brandStory"`           // 品牌故事
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        FirstLetter string `json:"firstLetter"`                // 首字母
+        Sort int64 `json:"sort"`
+        FactoryStatus int64 `json:"factoryStatus"`             // 是否为品牌制造商：0->不是；1->是
+        ShowStatus int64 `json:"showStatus"`
+        ProductCount int64 `json:"productCount"`               // 产品数量
+        ProductCommentCount int64 `json:"productCommentCount"` // 产品评论数量
+        Logo string `json:"logo"`                              // 品牌logo
+        BigPic string `json:"bigPic"`                          // 专区大图
+        BrandStory string `json:"brandStory"`                  // 品牌故事
     }
     UpdateProductBrandResp struct {
         Code string `json:"code"`
@@ -78,17 +77,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: product/brand
+    prefix: /api/product/brand
 )
 service admin-api {
     @handler ProductBrandAdd
-    post /api/product/brand/add (addProductBrandReq) returns (addProductBrandResp)
+    post /add (addProductBrandReq) returns (addProductBrandResp)
 
     @handler ProductBrandList
-    post /api/product/brand/list (ListProductBrandReq) returns (ListProductBrandResp)
+    post /list (ListProductBrandReq) returns (ListProductBrandResp)
 
     @handler ProductBrandUpdate
-    post /api/product/brand/update (UpdateProductBrandReq) returns (UpdateProductBrandResp)
+    post /update (UpdateProductBrandReq) returns (UpdateProductBrandResp)
 
     @handler ProductBrandDelete
-    post /api/product/brand/delete (DeleteProductBrandReq) returns (DeleteProductBrandResp)
+    post /delete (DeleteProductBrandReq) returns (DeleteProductBrandResp)
 }

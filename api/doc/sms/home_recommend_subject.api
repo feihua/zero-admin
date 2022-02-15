@@ -1,16 +1,15 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "首页推荐主题"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addHomeRecommendSubjectReq struct {
-        SubjectId       int64  `json:"subjectId"`
-        SubjectName     string `json:"subjectName"`
-        RecommendStatus int64  `json:"recommendStatus"`
-        Sort            int64  `json:"sort"`
+        SubjectId int64 `json:"subjectId"`
+        SubjectName string `json:"subjectName"`
+        RecommendStatus int64 `json:"recommendStatus"`
+        Sort int64 `json:"sort"`
     }
     addHomeRecommendSubjectResp struct {
         Code string `json:"code"`
@@ -37,11 +36,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateHomeRecommendSubjectReq struct {
-        Id              int64  `json:"id"`
-        SubjectId       int64  `json:"subjectId"`
-        SubjectName     string `json:"subjectName"`
-        RecommendStatus int64  `json:"recommendStatus"`
-        Sort            int64  `json:"sort"`
+        Id int64 `json:"id"`
+        SubjectId int64 `json:"subjectId"`
+        SubjectName string `json:"subjectName"`
+        RecommendStatus int64 `json:"recommendStatus"`
+        Sort int64 `json:"sort"`
     }
     UpdateHomeRecommendSubjectResp struct {
         Code string `json:"code"`
@@ -60,17 +59,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sms/homerecommendsubject
+    prefix: /api/sms/homerecommendsubject
 )
 service admin-api {
     @handler HomeRecommendSubjectAdd
-    post /api/sms/homerecommendsubject/add (addHomeRecommendSubjectReq) returns (addHomeRecommendSubjectResp)
+    post /add (addHomeRecommendSubjectReq) returns (addHomeRecommendSubjectResp)
 
     @handler HomeRecommendSubjectList
-    post /api/sms/homerecommendsubject/list (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
+    post /list (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
 
     @handler HomeRecommendSubjectUpdate
     post /apisms/homerecommendsubject/update (UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp)
 
     @handler HomeRecommendSubjectDelete
-    post /api/sms/homerecommendsubject/delete (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
+    post /delete (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
 }

@@ -1,23 +1,22 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "首页广告"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addHomeAdvertiseReq struct {
-        Name       string    `json:"name"`
-        Type       int64     `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-        Pic        string    `json:"pic"`
-        StartTime  string `json:"startTime"`
-        EndTime    string `json:"endTime"`
-        Status     int64     `json:"status"`      // 上下线状态：0->下线；1->上线
-        ClickCount int64     `json:"clickCount"` // 点击数
-        OrderCount int64     `json:"orderCount"` // 下单数
-        Url        string    `json:"url"`         // 链接地址
-        Note       string    `json:"note"`        // 备注
-        Sort       int64     `json:"sort"`        // 排序
+        Name string `json:"name"`
+        Type int64 `json:"type"`             // 轮播位置：0->PC首页轮播；1->app首页轮播
+        Pic string `json:"pic"`
+        StartTime string `json:"startTime"`
+        EndTime string `json:"endTime"`
+        Status int64 `json:"status"`         // 上下线状态：0->下线；1->上线
+        ClickCount int64 `json:"clickCount"` // 点击数
+        OrderCount int64 `json:"orderCount"` // 下单数
+        Url string `json:"url"`              // 链接地址
+        Note string `json:"note"`            // 备注
+        Sort int64 `json:"sort"`             // 排序
     }
     addHomeAdvertiseResp struct {
         Code string `json:"code"`
@@ -36,10 +35,10 @@ type (
         EndTime string `json:"endTime"`
         Status int64 `json:"status"`              // 上下线状态：0->下线；1->上线
         ClickCount int64 `json:"clickCount"`      // 点击数
-        OrderCount int64     `json:"orderCount"` // 下单数
-        Url        string    `json:"url"`         // 链接地址
-        Note       string    `json:"note"`        // 备注
-        Sort       int64     `json:"sort"`        // 排序
+        OrderCount int64 `json:"orderCount"`      // 下单数
+        Url string `json:"url"`                   // 链接地址
+        Note string `json:"note"`                 // 备注
+        Sort int64 `json:"sort"`                  // 排序
     }
     ListHomeAdvertiseResp struct {
         Code string `json:"code"`
@@ -51,18 +50,18 @@ type (
         Total int64 `json:"total"`
     }
     UpdateHomeAdvertiseReq struct {
-        Id         int64     `json:"id"`
-        Name       string    `json:"name"`
-        Type       int64     `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-        Pic        string    `json:"pic"`
-        StartTime  string `json:"startTime"`
-        EndTime    string `json:"endTime"`
-        Status     int64     `json:"status"`      // 上下线状态：0->下线；1->上线
-        ClickCount int64     `json:"clickCount"` // 点击数
-        OrderCount int64     `json:"orderCount"` // 下单数
-        Url        string    `json:"url"`         // 链接地址
-        Note       string    `json:"note"`        // 备注
-        Sort       int64     `json:"sort"`        // 排序
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        Type int64 `json:"type"`             // 轮播位置：0->PC首页轮播；1->app首页轮播
+        Pic string `json:"pic"`
+        StartTime string `json:"startTime"`
+        EndTime string `json:"endTime"`
+        Status int64 `json:"status"`         // 上下线状态：0->下线；1->上线
+        ClickCount int64 `json:"clickCount"` // 点击数
+        OrderCount int64 `json:"orderCount"` // 下单数
+        Url string `json:"url"`              // 链接地址
+        Note string `json:"note"`            // 备注
+        Sort int64 `json:"sort"`             // 排序
     }
     UpdateHomeAdvertiseResp struct {
         Code string `json:"code"`
@@ -81,17 +80,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sms/homeadvertise
+    prefix: /api/sms/homeadvertise
 )
 service admin-api {
     @handler HomeAdvertiseAdd
-    post /api/sms/homeadvertise/add (addHomeAdvertiseReq) returns (addHomeAdvertiseResp)
+    post /add (addHomeAdvertiseReq) returns (addHomeAdvertiseResp)
 
     @handler HomeAdvertiseList
-    post /api/sms/homeadvertise/list (ListHomeAdvertiseReq) returns (ListHomeAdvertiseResp)
+    post /list (ListHomeAdvertiseReq) returns (ListHomeAdvertiseResp)
 
     @handler HomeAdvertiseUpdate
-    post /api/sms/homeadvertise/update (UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp)
+    post /update (UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp)
 
     @handler HomeAdvertiseDelete
-    post /api/sms/homeadvertise/delete (DeleteHomeAdvertiseReq) returns (DeleteHomeAdvertiseResp)
+    post /delete (DeleteHomeAdvertiseReq) returns (DeleteHomeAdvertiseResp)
 }

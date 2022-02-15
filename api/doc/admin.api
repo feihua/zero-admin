@@ -48,8 +48,7 @@ import "ums/member_tag.api"
 import "ums/member_task.api"
 
 info(
-	title: "go zero admin"
 	desc: "go zero admin"
 	author: "koobe"
-	email: "koobe.liu@uaf.com.cn"
+	email: "1002219331@qq.com"
 )

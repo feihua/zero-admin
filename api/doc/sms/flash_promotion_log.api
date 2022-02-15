@@ -1,18 +1,17 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "秒杀日志"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addFlashPromotionLogReq struct {
-        MemberId      int64     `json:"memberId"`
-        ProductId     int64     `json:"productId"`
-        MemberPhone   string    `json:"memberPhone"`
-        ProductName   string    `json:"productName"`
+        MemberId int64 `json:"memberId"`
+        ProductId int64 `json:"productId"`
+        MemberPhone string `json:"memberPhone"`
+        ProductName string `json:"productName"`
         SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-        SendTime      string `json:"sendTime"`
+        SendTime string `json:"sendTime"`
     }
     addFlashPromotionLogResp struct {
         Code string `json:"code"`
@@ -41,13 +40,13 @@ type (
         Total int64 `json:"total"`
     }
     UpdateFlashPromotionLogReq struct {
-        Id            int64     `json:"id"`
-        MemberId      int64     `json:"memberId"`
-        ProductId     int64     `json:"productId"`
-        MemberPhone   string    `json:"memberPhone"`
-        ProductName   string    `json:"productName"`
+        Id int64 `json:"id"`
+        MemberId int64 `json:"memberId"`
+        ProductId int64 `json:"productId"`
+        MemberPhone string `json:"memberPhone"`
+        ProductName string `json:"productName"`
         SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-        SendTime      string `json:"sendTime"`
+        SendTime string `json:"sendTime"`
     }
     UpdateFlashPromotionLogResp struct {
         Code string `json:"code"`
@@ -66,17 +65,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sms/flashpromotionlog
+    prefix: /api/sms/flashpromotionlog
 )
 service admin-api {
     @handler FlashPromotionLogAdd
-    post /api/sms/flashpromotionlog/add (addFlashPromotionLogReq) returns (addFlashPromotionLogResp)
+    post /add (addFlashPromotionLogReq) returns (addFlashPromotionLogResp)
 
     @handler FlashPromotionLogList
-    post /api/sms/flashpromotionlog/list (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
+    post /list (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
 
     @handler FlashPromotionLogUpdate
-    post /api/sms/flashpromotionlog/update (UpdateFlashPromotionLogReq) returns (UpdateFlashPromotionLogResp)
+    post /update (UpdateFlashPromotionLogReq) returns (UpdateFlashPromotionLogResp)
 
     @handler FlashPromotionLogDelete
-    post /api/sms/flashpromotionlog/delete (DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp)
+    post /delete (DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp)
 }

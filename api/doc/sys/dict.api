@@ -1,8 +1,7 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "字典"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 
@@ -12,7 +11,7 @@ type (
         Label string `json:"label"`                        // 标签名
         Type string `json:"type"`                          // 类型
         Description string `json:"description"`            // 描述
-        Sort string `json:"sort"`                         // 排序（升序）
+        Sort string `json:"sort"`                          // 排序（升序）
         Remarks string `json:"remarks"`                    // 备注信息
     }
     addDictResp struct {
@@ -34,12 +33,12 @@ type (
         Type string `json:"type"`                          // 类型
         Description string `json:"description"`            // 描述
         Sort float64 `json:"sort"`                         // 排序（升序）
-        CreateBy string `json:"createBy"`                 // 创建人
-        CreateTime string `json:"createTime"`             // 创建时间
-        LastUpdateBy string `json:"lastUpdateBy"`        // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
+        CreateBy string `json:"createBy"`                  // 创建人
+        CreateTime string `json:"createTime"`              // 创建时间
+        LastUpdateBy string `json:"lastUpdateBy"`          // 更新人
+        LastUpdateTime string `json:"lastUpdateTime"`      // 更新时间
         Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"delFlag"`                    // 是否删除  -1：已删除  0：正常
+        DelFlag int64 `json:"delFlag"`                     // 是否删除  -1：已删除  0：正常
     }
     ListDictResp struct {
         Code string `json:"code"`
@@ -76,17 +75,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sys/dict
+    prefix: /api/sys/dict
 )
 service admin-api {
     @handler DictAdd
-    post /api/sys/dict/add (addDictReq) returns (addDictResp)
+    post /add (addDictReq) returns (addDictResp)
 
     @handler DictList
-    post /api/sys/dict/list (ListDictReq) returns (ListDictResp)
+    post /list (ListDictReq) returns (ListDictResp)
 
     @handler DictUpdate
-    post /api/sys/dict/update (UpdateDictReq) returns (UpdateDictResp)
+    post /update (UpdateDictReq) returns (UpdateDictResp)
 
     @handler DictDelete
-    post /api/sys/dict/delete (DeleteDictReq) returns (DeleteDictResp)
+    post /delete (DeleteDictReq) returns (DeleteDictResp)
 }

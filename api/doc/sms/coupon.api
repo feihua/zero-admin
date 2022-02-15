@@ -1,8 +1,7 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "优惠券"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
@@ -99,17 +98,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sms/coupon
+    prefix: /api/sms/coupon
 )
 service admin-api {
     @handler CouponAdd
-    post /api/sms/coupon/add (addCouponReq) returns (addCouponResp)
+    post /add (addCouponReq) returns (addCouponResp)
 
     @handler CouponList
-    post /api/sms/coupon/list (ListCouponReq) returns (ListCouponResp)
+    post /list (ListCouponReq) returns (ListCouponResp)
 
     @handler CouponUpdate
-    post /api/sms/coupon/update (UpdateCouponReq) returns (UpdateCouponResp)
+    post /update (UpdateCouponReq) returns (UpdateCouponResp)
 
     @handler CouponDelete
-    post /api/sms/coupon/delete (DeleteCouponReq) returns (DeleteCouponResp)
+    post /delete (DeleteCouponReq) returns (DeleteCouponResp)
 }

@@ -1,16 +1,15 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "积分消费设置"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addIntegrationConsumeSettingReq struct {
         DeductionPerAmount int64 `json:"deductionPerAmount"`  // 每一元需要抵扣的积分数量
-        MaxPercentPerOrder int64 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-        UseUnit            int64 `json:"useUnit"`              // 每次使用积分最小单位100
-        CouponStatus       int64 `json:"couponStatus"`         // 是否可以和优惠券同用；0->不可以；1->可以
+        MaxPercentPerOrder int64 `json:"maxPercentPerOrder"`  // 每笔订单最高抵用百分比
+        UseUnit int64 `json:"useUnit"`                        // 每次使用积分最小单位100
+        CouponStatus int64 `json:"couponStatus"`              // 是否可以和优惠券同用；0->不可以；1->可以
     }
     addIntegrationConsumeSettingResp struct {
         Code string `json:"code"`
@@ -37,11 +36,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateIntegrationConsumeSettingReq struct {
-        Id                 int64 `json:"id"`
+        Id int64 `json:"id"`
         DeductionPerAmount int64 `json:"deductionPerAmount"`  // 每一元需要抵扣的积分数量
-        MaxPercentPerOrder int64 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-        UseUnit            int64 `json:"useUnit"`              // 每次使用积分最小单位100
-        CouponStatus       int64 `json:"couponStatus"`         // 是否可以和优惠券同用；0->不可以；1->可以
+        MaxPercentPerOrder int64 `json:"maxPercentPerOrder"`  // 每笔订单最高抵用百分比
+        UseUnit int64 `json:"useUnit"`                        // 每次使用积分最小单位100
+        CouponStatus int64 `json:"couponStatus"`              // 是否可以和优惠券同用；0->不可以；1->可以
     }
     UpdateIntegrationConsumeSettingResp struct {
         Code string `json:"code"`
@@ -60,17 +59,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: member/integrationconsumesetting
+    prefix: /api/member/integrationconsumesetting
 )
 service admin-api {
     @handler IntegrationConsumeSettingAdd
-    post /api/member/integrationconsumesetting/add (addIntegrationConsumeSettingReq) returns (addIntegrationConsumeSettingResp)
+    post /add (addIntegrationConsumeSettingReq) returns (addIntegrationConsumeSettingResp)
 
     @handler IntegrationConsumeSettingList
-    post /api/member/integrationconsumesetting/list (ListIntegrationConsumeSettingReq) returns (ListIntegrationConsumeSettingResp)
+    post /list (ListIntegrationConsumeSettingReq) returns (ListIntegrationConsumeSettingResp)
 
     @handler IntegrationConsumeSettingUpdate
-    post /api/member/integrationconsumesetting/update (UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp)
+    post /update (UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp)
 
     @handler IntegrationConsumeSettingDelete
-    post /api/member/integrationconsumesetting/delete (DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp)
+    post /delete (DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp)
 }

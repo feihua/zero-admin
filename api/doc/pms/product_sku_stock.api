@@ -1,22 +1,21 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "商品库存"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addSkuStockReq struct {
-        ProductId      int64   `json:"productId"`
-        SkuCode        string  `json:"skuCode"` // sku编码
-        Price          float64 `json:"price"`
-        Stock          int64   `json:"stock"`           // 库存
-        LowStock       int64   `json:"lowStock"`       // 预警库存
-        Pic            string  `json:"pic"`             // 展示图片
-        Sale           int64   `json:"sale"`            // 销量
+        ProductId int64 `json:"productId"`
+        SkuCode string `json:"skuCode"`                // sku编码
+        Price float64 `json:"price"`
+        Stock int64 `json:"stock"`                     // 库存
+        LowStock int64 `json:"lowStock"`               // 预警库存
+        Pic string `json:"pic"`                        // 展示图片
+        Sale int64 `json:"sale"`                       // 销量
         PromotionPrice float64 `json:"promotionPrice"` // 单品促销价格
-        LockStock      int64   `json:"lockStock"`      // 锁定库存
-        SpData         string  `json:"spData"`         // 商品销售属性，json格式
+        LockStock int64 `json:"lockStock"`             // 锁定库存
+        SpData string `json:"spData"`                  // 商品销售属性，json格式
     }
     addSkuStockResp struct {
         Code string `json:"code"`
@@ -36,8 +35,8 @@ type (
         Pic string `json:"pic"`                        // 展示图片
         Sale int64 `json:"sale"`                       // 销量
         PromotionPrice float64 `json:"promotionPrice"` // 单品促销价格
-        LockStock      int64   `json:"lockStock"`      // 锁定库存
-        SpData         string  `json:"spData"`         // 商品销售属性，json格式
+        LockStock int64 `json:"lockStock"`             // 锁定库存
+        SpData string `json:"spData"`                  // 商品销售属性，json格式
     }
     ListSkuStockResp struct {
         Current int64 `json:"current,default=1"`
@@ -49,17 +48,17 @@ type (
         Message string `json:"message"`
     }
     UpdateSkuStockReq struct {
-        Id             int64   `json:"id"`
-        ProductId      int64   `json:"productId"`
-        SkuCode        string  `json:"skuCode"` // sku编码
-        Price          float64 `json:"price"`
-        Stock          int64   `json:"stock"`           // 库存
-        LowStock       int64   `json:"lowStock"`       // 预警库存
-        Pic            string  `json:"pic"`             // 展示图片
-        Sale           int64   `json:"sale"`            // 销量
+        Id int64 `json:"id"`
+        ProductId int64 `json:"productId"`
+        SkuCode string `json:"skuCode"`                // sku编码
+        Price float64 `json:"price"`
+        Stock int64 `json:"stock"`                     // 库存
+        LowStock int64 `json:"lowStock"`               // 预警库存
+        Pic string `json:"pic"`                        // 展示图片
+        Sale int64 `json:"sale"`                       // 销量
         PromotionPrice float64 `json:"promotionPrice"` // 单品促销价格
-        LockStock      int64   `json:"lockStock"`      // 锁定库存
-        SpData         string  `json:"spData"`         // 商品销售属性，json格式
+        LockStock int64 `json:"lockStock"`             // 锁定库存
+        SpData string `json:"spData"`                  // 商品销售属性，json格式
     }
     UpdateSkuStockResp struct {
         Code string `json:"code"`
@@ -78,17 +77,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: product/skustock
+    prefix: /api/product/skustock
 )
 service admin-api {
     @handler SkuStockAdd
-    post /api/product/skustock/add (addSkuStockReq) returns (addSkuStockResp)
+    post /add (addSkuStockReq) returns (addSkuStockResp)
 
     @handler SkuStockList
-    post /api/product/skustock/list (ListSkuStockReq) returns (ListSkuStockResp)
+    post /list (ListSkuStockReq) returns (ListSkuStockResp)
 
     @handler SkuStockUpdate
-    post /api/product/skustock/update (UpdateSkuStockReq) returns (UpdateSkuStockResp)
+    post /update (UpdateSkuStockReq) returns (UpdateSkuStockResp)
 
     @handler SkuStockDelete
-    post /api/product/skustock/delete (DeleteSkuStockReq) returns (DeleteSkuStockResp)
+    post /delete (DeleteSkuStockReq) returns (DeleteSkuStockResp)
 }

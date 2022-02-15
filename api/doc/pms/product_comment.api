@@ -1,26 +1,25 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "商品评论"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addProductCommentReq struct {
-        ProductId        int64     `json:"productId"`
-        MemberNickName   string    `json:"memberNickName"`
-        ProductName      string    `json:"productName"`
-        Star             int64     `json:"star"`      // 评价星数：0->5
-        MemberIp         string    `json:"memberIp"` // 评价的ip
-        CreateTime       string `json:"createTime"`
-        ShowStatus       int64     `json:"showStatus"`
-        ProductAttribute string    `json:"productAttribute"` // 购买时的商品属性
-        CollectCouont    int64     `json:"collectCouont"`
-        ReadCount        int64     `json:"readCount"`
-        Content          string    `json:"content"`
-        Pics             string    `json:"pics"`        // 上传图片地址，以逗号隔开
-        MemberIcon       string    `json:"memberIcon"` // 评论用户头像
-        ReplayCount      int64     `json:"replayCount"`
+        ProductId int64 `json:"productId"`
+        MemberNickName string `json:"memberNickName"`
+        ProductName string `json:"productName"`
+        Star int64 `json:"star"`                          // 评价星数：0->5
+        MemberIp string `json:"memberIp"`                 // 评价的ip
+        CreateTime string `json:"createTime"`
+        ShowStatus int64 `json:"showStatus"`
+        ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
+        CollectCouont int64 `json:"collectCouont"`
+        ReadCount int64 `json:"readCount"`
+        Content string `json:"content"`
+        Pics string `json:"pics"`                         // 上传图片地址，以逗号隔开
+        MemberIcon string `json:"memberIcon"`             // 评论用户头像
+        ReplayCount int64 `json:"replayCount"`
     }
     addProductCommentResp struct {
         Code string `json:"code"`
@@ -39,13 +38,13 @@ type (
         MemberIp string `json:"memberIp"`                    // 评价的ip
         CreateTime string `json:"createTime"`
         ShowStatus int64 `json:"showStatus"`
-        ProductAttribute string    `json:"productAttribute"` // 购买时的商品属性
-        CollectCouont    int64     `json:"collectCouont"`
-        ReadCount        int64     `json:"readCount"`
-        Content          string    `json:"content"`
-        Pics             string    `json:"pics"`        // 上传图片地址，以逗号隔开
-        MemberIcon       string    `json:"memberIcon"` // 评论用户头像
-        ReplayCount      int64     `json:"replayCount"`
+        ProductAttribute string `json:"productAttribute"`    // 购买时的商品属性
+        CollectCouont int64 `json:"collectCouont"`
+        ReadCount int64 `json:"readCount"`
+        Content string `json:"content"`
+        Pics string `json:"pics"`                            // 上传图片地址，以逗号隔开
+        MemberIcon string `json:"memberIcon"`                // 评论用户头像
+        ReplayCount int64 `json:"replayCount"`
     }
     ListProductCommentResp struct {
         Code string `json:"code"`
@@ -57,21 +56,21 @@ type (
         Total int64 `json:"total"`
     }
     UpdateProductCommentReq struct {
-        Id               int64     `json:"id"`
-        ProductId        int64     `json:"productId"`
-        MemberNickName   string    `json:"memberNickName"`
-        ProductName      string    `json:"productName"`
-        Star             int64     `json:"star"`      // 评价星数：0->5
-        MemberIp         string    `json:"memberIp"` // 评价的ip
-        CreateTime       string `json:"createTime"`
-        ShowStatus       int64     `json:"showStatus"`
-        ProductAttribute string    `json:"productAttribute"` // 购买时的商品属性
-        CollectCouont    int64     `json:"collectCouont"`
-        ReadCount        int64     `json:"readCount"`
-        Content          string    `json:"content"`
-        Pics             string    `json:"pics"`        // 上传图片地址，以逗号隔开
-        MemberIcon       string    `json:"memberIcon"` // 评论用户头像
-        ReplayCount      int64     `json:"replayCount"`
+        Id int64 `json:"id"`
+        ProductId int64 `json:"productId"`
+        MemberNickName string `json:"memberNickName"`
+        ProductName string `json:"productName"`
+        Star int64 `json:"star"`                          // 评价星数：0->5
+        MemberIp string `json:"memberIp"`                 // 评价的ip
+        CreateTime string `json:"createTime"`
+        ShowStatus int64 `json:"showStatus"`
+        ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
+        CollectCouont int64 `json:"collectCouont"`
+        ReadCount int64 `json:"readCount"`
+        Content string `json:"content"`
+        Pics string `json:"pics"`                         // 上传图片地址，以逗号隔开
+        MemberIcon string `json:"memberIcon"`             // 评论用户头像
+        ReplayCount int64 `json:"replayCount"`
     }
     UpdateProductCommentResp struct {
         Code string `json:"code"`
@@ -90,17 +89,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: product/comment
+    prefix: /api/product/comment
 )
 service admin-api {
     @handler ProductCommentAdd
-    post /api/product/comment/add (addProductCommentReq) returns (addProductCommentResp)
+    post /add (addProductCommentReq) returns (addProductCommentResp)
 
     @handler ProductCommentList
-    post /api/product/comment/list (ListProductCommentReq) returns (ListProductCommentResp)
+    post /list (ListProductCommentReq) returns (ListProductCommentResp)
 
     @handler ProductCommentUpdate
-    post /api/product/comment/update (UpdateProductCommentReq) returns (UpdateProductCommentResp)
+    post /update (UpdateProductCommentReq) returns (UpdateProductCommentResp)
 
     @handler ProductCommentDelete
-    post /api/product/comment/delete (DeleteProductCommentReq) returns (DeleteProductCommentResp)
+    post /delete (DeleteProductCommentReq) returns (DeleteProductCommentResp)
 }

@@ -1,14 +1,13 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "角色"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addRoleReq struct {
-        Name string `json:"name"`                          // 角色名称
-        Remark string `json:"remark"`                      // 备注
+        Name string `json:"name"`                                  // 角色名称
+        Remark string `json:"remark"`                              // 备注
         Status int64 `json:"status,optional"`                      // 状态
     }
     addRoleResp struct {
@@ -28,10 +27,10 @@ type (
         CreateBy string `json:"createBy"`                   // 创建人
         CreateTime string `json:"createTime"`               // 创建时间
         LastUpdateBy string `json:"lastUpdateBy"`           // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
-        DelFlag int64 `json:"delFlag"`                    // 是否删除  -1：已删除  0：正常
+        LastUpdateTime string `json:"lastUpdateTime"`       // 更新时间
+        DelFlag int64 `json:"delFlag"`                      // 是否删除  -1：已删除  0：正常
         Label string `json:"label"`                         // 编号
-        Value string `json:"value"`                        // 角色名称
+        Value string `json:"value"`                         // 角色名称
         Status int64 `json:"status"`                        // 角色名称
     }
     ListRoleResp struct {
@@ -47,7 +46,7 @@ type (
         Id int64 `json:"id"`                               // 编号
         Name string `json:"name"`                          // 角色名称
         Remark string `json:"remark"`                      // 备注
-        Status int64 `json:"status"`                      // 状态
+        Status int64 `json:"status"`                       // 状态
     }
     UpdateRoleResp struct {
         Code string `json:"code"`
@@ -76,11 +75,11 @@ type (
     }
 
     ListMenuData struct {
-        Key string `json:"key"`                          // 菜单名称
+        Key string `json:"key"`                              // 菜单名称
         Title string `json:"title"`                          // 菜单名称
-        ParentId int64 `json:"parentId"`                  // 父菜单ID，一级菜单为0
-        Id int64 `json:"id"`                  // 父菜单ID，一级菜单为0
-        Label string `json:"label"`                  // 父菜单ID，一级菜单为0
+        ParentId int64 `json:"parentId"`                     // 父菜单ID，一级菜单为0
+        Id int64 `json:"id"`                                 // 父菜单ID，一级菜单为0
+        Label string `json:"label"`                          // 父菜单ID，一级菜单为0
     }
 
     RoleMenuReq struct {
@@ -98,29 +97,27 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sys/role
+    prefix: /api/sys/role
 )
 service admin-api {
     @handler RoleAdd
-    post /api/sys/role/add (addRoleReq) returns (addRoleResp)
+    post /add (addRoleReq) returns (addRoleResp)
 
     @handler RoleList
-    post /api/sys/role/list (ListRoleReq) returns (ListRoleResp)
+    post /list (ListRoleReq) returns (ListRoleResp)
 
     @handler RoleUpdate
-    post /api/sys/role/update (UpdateRoleReq) returns (UpdateRoleResp)
+    post /update (UpdateRoleReq) returns (UpdateRoleResp)
 
     @handler RoleDelete
-    post /api/sys/role/delete (DeleteRoleReq) returns (DeleteRoleResp)
+    post /delete (DeleteRoleReq) returns (DeleteRoleResp)
 
     @handler RoleMenuIds
-    post /api/sys/role/roleMenuIds (RoleMenuIdsReq) returns (RoleMenuIdsResp)
+    post /roleMenuIds (RoleMenuIdsReq) returns (RoleMenuIdsResp)
 
     @handler QueryMenuByRoleId
-    post /api/sys/role/queryMenuByRoleId (RoleMenuReq) returns (RoleMenuResp)
+    post /queryMenuByRoleId (RoleMenuReq) returns (RoleMenuResp)
 
     @handler UpdateRoleMenu
-    post /api/sys/role/updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
-
-
-
+    post /updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
 }

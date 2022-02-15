@@ -1,20 +1,19 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "地址"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addCompayAddressReq struct {
-        AddressName   string `json:"addressName"`   // 地址名称
-        SendStatus    int64  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
-        ReceiveStatus int64  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
-        Name          string `json:"name"`           // 收发货人姓名
-        Phone         string `json:"phone"`          // 收货人电话
-        Province      string `json:"province"`       // 省/直辖市
-        City          string `json:"city"`           // 市
-        Region        string `json:"region"`         // 区
+        AddressName string `json:"addressName"`     // 地址名称
+        SendStatus int64 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
+        ReceiveStatus int64 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
+        Name string `json:"name"`                   // 收发货人姓名
+        Phone string `json:"phone"`                 // 收货人电话
+        Province string `json:"province"`           // 省/直辖市
+        City string `json:"city"`                   // 市
+        Region string `json:"region"`               // 区
         DetailAddress string `json:"detailAddress"` // 详细地址
     }
     addCompayAddressResp struct {
@@ -34,8 +33,8 @@ type (
         Phone string `json:"phone"`                  // 收货人电话
         Province string `json:"province"`            // 省/直辖市
         City string `json:"city"`                    // 市
-        Region        string `json:"region"`         // 区
-        DetailAddress string `json:"detailAddress"` // 详细地址
+        Region string `json:"region"`                // 区
+        DetailAddress string `json:"detailAddress"`  // 详细地址
     }
     ListCompayAddressResp struct {
         Code string `json:"code"`
@@ -47,15 +46,15 @@ type (
         Total int64 `json:"total"`
     }
     UpdateCompayAddressReq struct {
-        Id            int64  `json:"id"`
-        AddressName   string `json:"addressName"`   // 地址名称
-        SendStatus    int64  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
-        ReceiveStatus int64  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
-        Name          string `json:"name"`           // 收发货人姓名
-        Phone         string `json:"phone"`          // 收货人电话
-        Province      string `json:"province"`       // 省/直辖市
-        City          string `json:"city"`           // 市
-        Region        string `json:"region"`         // 区
+        Id int64 `json:"id"`
+        AddressName string `json:"addressName"`     // 地址名称
+        SendStatus int64 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
+        ReceiveStatus int64 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
+        Name string `json:"name"`                   // 收发货人姓名
+        Phone string `json:"phone"`                 // 收货人电话
+        Province string `json:"province"`           // 省/直辖市
+        City string `json:"city"`                   // 市
+        Region string `json:"region"`               // 区
         DetailAddress string `json:"detailAddress"` // 详细地址
     }
     UpdateCompayAddressResp struct {
@@ -75,17 +74,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: order/compayaddress
+    prefix: /api/order/compayaddress
 )
 service admin-api {
     @handler CompayAddressAdd
-    post /api/order/compayaddress/add (addCompayAddressReq) returns (addCompayAddressResp)
+    post /add (addCompayAddressReq) returns (addCompayAddressResp)
 
     @handler CompayAddressList
-    post /api/order/compayaddress/list (ListCompayAddressReq) returns (ListCompayAddressResp)
+    post /list (ListCompayAddressReq) returns (ListCompayAddressResp)
 
     @handler CompayAddressUpdate
-    post /api/order/compayaddress/update (UpdateCompayAddressReq) returns (UpdateCompayAddressResp)
+    post /update (UpdateCompayAddressReq) returns (UpdateCompayAddressResp)
 
     @handler CompayAddressDelete
-    post /api/order/compayaddress/delete (DeleteCompayAddressReq) returns (DeleteCompayAddressResp)
+    post /delete (DeleteCompayAddressReq) returns (DeleteCompayAddressResp)
 }

@@ -1,16 +1,15 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "会员任务"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addMemberTaskReq struct {
-        Name         string `json:"name"`
-        Growth       int64  `json:"growth"`       // 赠送成长值
-        Intergration int64  `json:"intergration"` // 赠送积分
-        Type         int64  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
+        Name string `json:"name"`
+        Growth int64 `json:"growth"`             // 赠送成长值
+        Intergration int64 `json:"intergration"` // 赠送积分
+        Type int64 `json:"type"`                 // 任务类型：0->新手任务；1->日常任务
     }
     addMemberTaskResp struct {
         Code string `json:"code"`
@@ -37,11 +36,11 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberTaskReq struct {
-        Id           int64  `json:"id"`
-        Name         string `json:"name"`
-        Growth       int64  `json:"growth"`       // 赠送成长值
-        Intergration int64  `json:"intergration"` // 赠送积分
-        Type         int64  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        Growth int64 `json:"growth"`             // 赠送成长值
+        Intergration int64 `json:"intergration"` // 赠送积分
+        Type int64 `json:"type"`                 // 任务类型：0->新手任务；1->日常任务
     }
     UpdateMemberTaskResp struct {
         Code string `json:"code"`
@@ -60,17 +59,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: member/task
+    prefix: /api/member/task
 )
 service admin-api {
     @handler MemberTaskAdd
-    post /api/member/task/add (addMemberTaskReq) returns (addMemberTaskResp)
+    post /add (addMemberTaskReq) returns (addMemberTaskResp)
 
     @handler MemberTaskList
-    post /api/member/task/list (ListMemberTaskReq) returns (ListMemberTaskResp)
+    post /list (ListMemberTaskReq) returns (ListMemberTaskResp)
 
     @handler MemberTaskUpdate
-    post /api/member/task/update (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
+    post /update (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
 
     @handler MemberTaskDelete
-    post /api/member/task/delete (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
+    post /delete (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
 }

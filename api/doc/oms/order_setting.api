@@ -1,17 +1,16 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "订单设置"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addOrderSettingReq struct {
-        FlashOrderOvertime  int64 `json:"flashOrderOvertime"`  // 秒杀订单超时关闭时间(分)
+        FlashOrderOvertime int64 `json:"flashOrderOvertime"`   // 秒杀订单超时关闭时间(分)
         NormalOrderOvertime int64 `json:"normalOrderOvertime"` // 正常订单超时时间(分)
-        ConfirmOvertime     int64 `json:"confirmOvertime"`      // 发货后自动确认收货时间（天）
-        FinishOvertime      int64 `json:"finishOvertime"`       // 自动完成交易时间，不能申请售后（天）
-        CommentOvertime     int64 `json:"commentOvertime"`      // 订单完成后自动好评时间（天）
+        ConfirmOvertime int64 `json:"confirmOvertime"`         // 发货后自动确认收货时间（天）
+        FinishOvertime int64 `json:"finishOvertime"`           // 自动完成交易时间，不能申请售后（天）
+        CommentOvertime int64 `json:"commentOvertime"`         // 订单完成后自动好评时间（天）
     }
     addOrderSettingResp struct {
         Code string `json:"code"`
@@ -39,12 +38,12 @@ type (
         Total int64 `json:"total"`
     }
     UpdateOrderSettingReq struct {
-        Id                  int64 `json:"id"`
-        FlashOrderOvertime  int64 `json:"flashOrderOvertime"`  // 秒杀订单超时关闭时间(分)
+        Id int64 `json:"id"`
+        FlashOrderOvertime int64 `json:"flashOrderOvertime"`   // 秒杀订单超时关闭时间(分)
         NormalOrderOvertime int64 `json:"normalOrderOvertime"` // 正常订单超时时间(分)
-        ConfirmOvertime     int64 `json:"confirmOvertime"`      // 发货后自动确认收货时间（天）
-        FinishOvertime      int64 `json:"finishOvertime"`       // 自动完成交易时间，不能申请售后（天）
-        CommentOvertime     int64 `json:"commentOvertime"`      // 订单完成后自动好评时间（天）
+        ConfirmOvertime int64 `json:"confirmOvertime"`         // 发货后自动确认收货时间（天）
+        FinishOvertime int64 `json:"finishOvertime"`           // 自动完成交易时间，不能申请售后（天）
+        CommentOvertime int64 `json:"commentOvertime"`         // 订单完成后自动好评时间（天）
     }
     UpdateOrderSettingResp struct {
         Code string `json:"code"`
@@ -63,17 +62,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: order/setting
+    prefix: /api/order/setting
 )
 service admin-api {
     @handler OrderSettingAdd
-    post /api/order/setting/add (addOrderSettingReq) returns (addOrderSettingResp)
+    post /add (addOrderSettingReq) returns (addOrderSettingResp)
 
     @handler OrderSettingList
-    post /api/order/setting/list (ListOrderSettingReq) returns (ListOrderSettingResp)
+    post /list (ListOrderSettingReq) returns (ListOrderSettingResp)
 
     @handler OrderSettingUpdate
-    post /api/order/setting/update (UpdateOrderSettingReq) returns (UpdateOrderSettingResp)
+    post /update (UpdateOrderSettingReq) returns (UpdateOrderSettingResp)
 
     @handler OrderSettingDelete
-    post /api/order/setting/delete (DeleteOrderSettingReq) returns (DeleteOrderSettingResp)
+    post /delete (DeleteOrderSettingReq) returns (DeleteOrderSettingResp)
 }

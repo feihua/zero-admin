@@ -1,8 +1,7 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "订单操作历史"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
@@ -63,17 +62,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: order/operatehistory
+    prefix: /api/order/operatehistory
 )
 service admin-api {
     @handler OperateHistoryAdd
-    post /api/order/operatehistory/add (addOperateHistoryReq) returns (addOperateHistoryResp)
+    post /add (addOperateHistoryReq) returns (addOperateHistoryResp)
 
     @handler OperateHistoryList
-    post /api/order/operatehistory/list (ListOperateHistoryReq) returns (ListOperateHistoryResp)
+    post /list (ListOperateHistoryReq) returns (ListOperateHistoryResp)
 
     @handler OperateHistoryUpdate
-    post /api/order/operatehistory/update (UpdateOperateHistoryReq) returns (UpdateOperateHistoryResp)
+    post /update (UpdateOperateHistoryReq) returns (UpdateOperateHistoryResp)
 
     @handler OperateHistoryDelete
-    post /api/order/operatehistory/delete (DeleteOperateHistoryReq) returns (DeleteOperateHistoryResp)
+    post /delete (DeleteOperateHistoryReq) returns (DeleteOperateHistoryResp)
 }

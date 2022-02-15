@@ -1,23 +1,22 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "商品分类"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addProductCategoryReq struct {
-        ParentId     int64  `json:"parentId"` // 上机分类的编号：0表示一级分类
-        Name         string `json:"name"`
-        Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
-        ProductCount int64  `json:"productCount"`
-        ProductUnit  string `json:"productUnit"`
-        NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-        ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-        Sort         int64  `json:"sort"`
-        Icon         string `json:"icon"` // 图标
-        Keywords     string `json:"keywords"`
-        Description  string `json:"description"` // 描述
+        ParentId int64 `json:"parentId"`        // 上机分类的编号：0表示一级分类
+        Name string `json:"name"`
+        Level int64 `json:"level"`              // 分类级别：0->1级；1->2级
+        ProductCount int64 `json:"productCount"`
+        ProductUnit string `json:"productUnit"`
+        NavStatus int64 `json:"navStatus"`      // 是否显示在导航栏：0->不显示；1->显示
+        ShowStatus int64 `json:"showStatus"`    // 显示状态：0->不显示；1->显示
+        Sort int64 `json:"sort"`
+        Icon string `json:"icon"`               // 图标
+        Keywords string `json:"keywords"`
+        Description string `json:"description"` // 描述
     }
     addProductCategoryResp struct {
         Code string `json:"code"`
@@ -36,10 +35,10 @@ type (
         ProductUnit string `json:"productUnit"`
         NavStatus int64 `json:"navStatus"`       // 是否显示在导航栏：0->不显示；1->显示
         ShowStatus int64 `json:"showStatus"`     // 显示状态：0->不显示；1->显示
-        Sort         int64  `json:"sort"`
-        Icon         string `json:"icon"` // 图标
-        Keywords     string `json:"keywords"`
-        Description  string `json:"description"` // 描述
+        Sort int64 `json:"sort"`
+        Icon string `json:"icon"`                // 图标
+        Keywords string `json:"keywords"`
+        Description string `json:"description"`  // 描述
     }
     ListProductCategoryResp struct {
         Code string `json:"code"`
@@ -51,18 +50,18 @@ type (
         Total int64 `json:"total"`
     }
     UpdateProductCategoryReq struct {
-        Id           int64  `json:"id"`
-        ParentId     int64  `json:"parentId"` // 上机分类的编号：0表示一级分类
-        Name         string `json:"name"`
-        Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
-        ProductCount int64  `json:"productCount"`
-        ProductUnit  string `json:"productUnit"`
-        NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-        ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-        Sort         int64  `json:"sort"`
-        Icon         string `json:"icon"` // 图标
-        Keywords     string `json:"keywords"`
-        Description  string `json:"description"` // 描述
+        Id int64 `json:"id"`
+        ParentId int64 `json:"parentId"`        // 上机分类的编号：0表示一级分类
+        Name string `json:"name"`
+        Level int64 `json:"level"`              // 分类级别：0->1级；1->2级
+        ProductCount int64 `json:"productCount"`
+        ProductUnit string `json:"productUnit"`
+        NavStatus int64 `json:"navStatus"`      // 是否显示在导航栏：0->不显示；1->显示
+        ShowStatus int64 `json:"showStatus"`    // 显示状态：0->不显示；1->显示
+        Sort int64 `json:"sort"`
+        Icon string `json:"icon"`               // 图标
+        Keywords string `json:"keywords"`
+        Description string `json:"description"` // 描述
     }
     UpdateProductCategoryResp struct {
         Code string `json:"code"`
@@ -81,17 +80,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: product/category
+    prefix: /api/product/category
 )
 service admin-api {
     @handler ProductCategoryAdd
-    post /api/product/category/add (addProductCategoryReq) returns (addProductCategoryResp)
+    post /add (addProductCategoryReq) returns (addProductCategoryResp)
 
     @handler ProductCategoryList
-    post /api/product/category/list (ListProductCategoryReq) returns (ListProductCategoryResp)
+    post /list (ListProductCategoryReq) returns (ListProductCategoryResp)
 
     @handler ProductCategoryUpdate
-    post /api/product/category/update (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
+    post /update (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
 
     @handler ProductCategoryDelete
-    post /api/product/category/delete (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
+    post /delete (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
 }

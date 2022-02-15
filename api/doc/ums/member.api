@@ -1,30 +1,29 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "会员信息"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
     addMemberReq struct {
-        MemberLevelId         int64     `json:"memberLevelId"`
-        Username              string    `json:"username"`               // 用户名
-        Password              string    `json:"password"`               // 密码
-        Nickname              string    `json:"nickname"`               // 昵称
-        Phone                 string    `json:"phone"`                  // 手机号码
-        Status                int64     `json:"status"`                 // 帐号启用状态:0->禁用；1->启用
-        CreateTime            string    `json:"createTime"`            // 注册时间
-        Icon                  string    `json:"icon"`                   // 头像
-        Gender                int64     `json:"gender"`                 // 性别：0->未知；1->男；2->女
-        Birthday              string    `json:"birthday"`               // 生日
-        City                  string    `json:"city"`                   // 所做城市
-        Job                   string    `json:"job"`                    // 职业
-        PersonalizedSignature string    `json:"personalizedSignature"` // 个性签名
-        SourceType            int64     `json:"sourceType"`            // 用户来源
-        Integration           int64     `json:"integration"`            // 积分
-        Growth                int64     `json:"growth"`                 // 成长值
-        LuckeyCount           int64     `json:"luckeyCount"`           // 剩余抽奖次数
-        HistoryIntegration    int64     `json:"historyIntegration"`    // 历史积分数量
+        MemberLevelId int64 `json:"memberLevelId"`
+        Username string `json:"username"`                           // 用户名
+        Password string `json:"password"`                           // 密码
+        Nickname string `json:"nickname"`                           // 昵称
+        Phone string `json:"phone"`                                 // 手机号码
+        Status int64 `json:"status"`                                // 帐号启用状态:0->禁用；1->启用
+        CreateTime string `json:"createTime"`                       // 注册时间
+        Icon string `json:"icon"`                                   // 头像
+        Gender int64 `json:"gender"`                                // 性别：0->未知；1->男；2->女
+        Birthday string `json:"birthday"`                           // 生日
+        City string `json:"city"`                                   // 所做城市
+        Job string `json:"job"`                                     // 职业
+        PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
+        SourceType int64 `json:"sourceType"`                        // 用户来源
+        Integration int64 `json:"integration"`                      // 积分
+        Growth int64 `json:"growth"`                                // 成长值
+        LuckeyCount int64 `json:"luckeyCount"`                      // 剩余抽奖次数
+        HistoryIntegration int64 `json:"historyIntegration"`        // 历史积分数量
     }
     addMemberResp struct {
         Code string `json:"code"`
@@ -43,17 +42,17 @@ type (
         Phone string `json:"phone"`                                     // 手机号码
         Status int64 `json:"status"`                                    // 帐号启用状态:0->禁用；1->启用
         CreateTime string `json:"createTime"`                           // 注册时间
-        Icon                  string    `json:"icon"`                   // 头像
-        Gender                int64     `json:"gender"`                 // 性别：0->未知；1->男；2->女
-        Birthday              string    `json:"birthday"`               // 生日
-        City                  string    `json:"city"`                   // 所做城市
-        Job                   string    `json:"job"`                    // 职业
-        PersonalizedSignature string    `json:"personalizedSignature"` // 个性签名
-        SourceType            int64     `json:"sourceType"`            // 用户来源
-        Integration           int64     `json:"integration"`            // 积分
-        Growth                int64     `json:"growth"`                 // 成长值
-        LuckeyCount           int64     `json:"luckeyCount"`           // 剩余抽奖次数
-        HistoryIntegration    int64     `json:"historyIntegration"`    // 历史积分数量
+        Icon string `json:"icon"`                                       // 头像
+        Gender int64 `json:"gender"`                                    // 性别：0->未知；1->男；2->女
+        Birthday string `json:"birthday"`                               // 生日
+        City string `json:"city"`                                       // 所做城市
+        Job string `json:"job"`                                         // 职业
+        PersonalizedSignature string `json:"personalizedSignature"`     // 个性签名
+        SourceType int64 `json:"sourceType"`                            // 用户来源
+        Integration int64 `json:"integration"`                          // 积分
+        Growth int64 `json:"growth"`                                    // 成长值
+        LuckeyCount int64 `json:"luckeyCount"`                          // 剩余抽奖次数
+        HistoryIntegration int64 `json:"historyIntegration"`            // 历史积分数量
     }
     ListMemberResp struct {
         Code string `json:"code"`
@@ -65,25 +64,25 @@ type (
         Total int64 `json:"total"`
     }
     UpdateMemberReq struct {
-        Id                    int64     `json:"id"`
-        MemberLevelId         int64     `json:"memberLevelId"`
-        Username              string    `json:"username"`               // 用户名
-        Password              string    `json:"password"`               // 密码
-        Nickname              string    `json:"nickname"`               // 昵称
-        Phone                 string    `json:"phone"`                  // 手机号码
-        Status                int64     `json:"status"`                 // 帐号启用状态:0->禁用；1->启用
-        CreateTime            string    `json:"createTime"`            // 注册时间
-        Icon                  string    `json:"icon"`                   // 头像
-        Gender                int64     `json:"gender"`                 // 性别：0->未知；1->男；2->女
-        Birthday              string    `json:"birthday"`               // 生日
-        City                  string    `json:"city"`                   // 所做城市
-        Job                   string    `json:"job"`                    // 职业
-        PersonalizedSignature string    `json:"personalizedSignature"` // 个性签名
-        SourceType            int64     `json:"sourceType"`            // 用户来源
-        Integration           int64     `json:"integration"`            // 积分
-        Growth                int64     `json:"growth"`                 // 成长值
-        LuckeyCount           int64     `json:"luckeyCount"`           // 剩余抽奖次数
-        HistoryIntegration    int64     `json:"historyIntegration"`    // 历史积分数量
+        Id int64 `json:"id"`
+        MemberLevelId int64 `json:"memberLevelId"`
+        Username string `json:"username"`                           // 用户名
+        Password string `json:"password"`                           // 密码
+        Nickname string `json:"nickname"`                           // 昵称
+        Phone string `json:"phone"`                                 // 手机号码
+        Status int64 `json:"status"`                                // 帐号启用状态:0->禁用；1->启用
+        CreateTime string `json:"createTime"`                       // 注册时间
+        Icon string `json:"icon"`                                   // 头像
+        Gender int64 `json:"gender"`                                // 性别：0->未知；1->男；2->女
+        Birthday string `json:"birthday"`                           // 生日
+        City string `json:"city"`                                   // 所做城市
+        Job string `json:"job"`                                     // 职业
+        PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
+        SourceType int64 `json:"sourceType"`                        // 用户来源
+        Integration int64 `json:"integration"`                      // 积分
+        Growth int64 `json:"growth"`                                // 成长值
+        LuckeyCount int64 `json:"luckeyCount"`                      // 剩余抽奖次数
+        HistoryIntegration int64 `json:"historyIntegration"`        // 历史积分数量
     }
     UpdateMemberResp struct {
         Code string `json:"code"`
@@ -102,17 +101,18 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: member/member
+    prefix: /api/member/member
 )
 service admin-api {
     @handler MemberAdd
-    post /api/member/member/add (addMemberReq) returns (addMemberResp)
+    post /add (addMemberReq) returns (addMemberResp)
 
     @handler MemberList
-    post /api/member/member/list (ListMemberReq) returns (ListMemberResp)
+    post /list (ListMemberReq) returns (ListMemberResp)
 
     @handler MemberUpdate
-    post /api/member/member/update (UpdateMemberReq) returns (UpdateMemberResp)
+    post /update (UpdateMemberReq) returns (UpdateMemberResp)
 
     @handler MemberDelete
-    post /api/member/member/delete (DeleteMemberReq) returns (DeleteMemberResp)
+    post /delete (DeleteMemberReq) returns (DeleteMemberResp)
 }

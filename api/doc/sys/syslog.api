@@ -1,8 +1,7 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "系统日志"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type (
@@ -19,9 +18,9 @@ type (
         Time int64 `json:"time"`                           // 执行时长(毫秒)
         Ip string `json:"ip"`                              // IP地址
         CreateBy string `json:"createBy"`                  // 创建人
-        CreateTime string `json:"createTime"`             // 创建时间
-        LastUpdateBy string `json:"lastUpdateBy"`        // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`    // 更新时间
+        CreateTime string `json:"createTime"`              // 创建时间
+        LastUpdateBy string `json:"lastUpdateBy"`          // 更新人
+        LastUpdateTime string `json:"lastUpdateTime"`      // 更新时间
     }
     ListSysLogResp struct {
         Code string `json:"code"`
@@ -45,12 +44,13 @@ type (
     jwt: Auth
     middleware: CheckUrl
     group: sys/log
+    prefix: /api/sys/sysLog
 )
 service admin-api {
     @handler SysLogList
-    post /api/sys/sysLog/list (ListSysLogReq) returns (ListSysLogResp)
+    post /list (ListSysLogReq) returns (ListSysLogResp)
 
     @handler SysLogDelete
-    post /api/sys/sysLog/delete (DeleteSysLogReq) returns (DeleteSysLogResp)
+    post /delete (DeleteSysLogReq) returns (DeleteSysLogResp)
 }
 
