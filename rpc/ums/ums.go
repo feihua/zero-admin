@@ -10,7 +10,7 @@ import (
 	"zero-admin/rpc/ums/internal/config"
 	"zero-admin/rpc/ums/internal/server"
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -28,7 +28,7 @@ func main() {
 	srv := server.NewUmsServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		ums.RegisterUmsServer(grpcServer, srv)
+		umsclient.RegisterUmsServer(grpcServer, srv)
 	})
 	defer s.Stop()
 

@@ -6,15 +6,15 @@ package cms
 import (
 	"context"
 
-	"zero-admin/rpc/cms/types/cms"
+	"zero-admin/rpc/cms/cmsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	StreamReq  = cms.StreamReq
-	StreamResp = cms.StreamResp
+	StreamReq  = cmsclient.StreamReq
+	StreamResp = cmsclient.StreamResp
 
 	Cms interface {
 		Greet(ctx context.Context, in *StreamReq, opts ...grpc.CallOption) (*StreamResp, error)
@@ -32,6 +32,6 @@ func NewCms(cli zrpc.Client) Cms {
 }
 
 func (m *defaultCms) Greet(ctx context.Context, in *StreamReq, opts ...grpc.CallOption) (*StreamResp, error) {
-	client := cms.NewCmsClient(m.cli.Conn())
+	client := cmsclient.NewCmsClient(m.cli.Conn())
 	return client.Greet(ctx, in, opts...)
 }

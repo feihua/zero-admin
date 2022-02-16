@@ -1,5 +1,5 @@
 Name: cms.rpc
-ListenOn: 127.0.0.1:8085
+ListenOn: 127.0.0.1:8086
 Etcd:
   Hosts:
   - 127.0.0.1:2379

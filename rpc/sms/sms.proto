@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package sms;
+package smsclient;
+
+option go_package = "./smsclient";
 
 message CouponAddReq {
   int64     Type = 2;

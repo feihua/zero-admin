@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package pay;
+package payclient;
+
+option go_package = "./payclient";
 
 message UnifiedOrderReq {
   string BusinessId = 1;

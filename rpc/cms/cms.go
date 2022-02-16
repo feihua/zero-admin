@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
+	"zero-admin/rpc/cms/cmsclient"
 	"zero-admin/rpc/cms/internal/config"
 	"zero-admin/rpc/cms/internal/server"
 	"zero-admin/rpc/cms/internal/svc"
-	"zero-admin/rpc/cms/types/cms"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -27,7 +27,7 @@ func main() {
 	srv := server.NewCmsServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		cms.RegisterCmsServer(grpcServer, srv)
+		cmsclient.RegisterCmsServer(grpcServer, srv)
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

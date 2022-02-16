@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package pms;
+package pmsclient;
+
+option go_package = "./pmsclient";
 
 message ProductAddReq {
   int64       BrandId = 2;

@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package cms;
+package cmsclient;
 
-option go_package = "./cms";
+option go_package = "./cmsclient";
 
 message StreamReq {
   string name = 1;

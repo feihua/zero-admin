@@ -10,7 +10,7 @@ import (
 	"zero-admin/rpc/sys/internal/config"
 	"zero-admin/rpc/sys/internal/server"
 	"zero-admin/rpc/sys/internal/svc"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -28,7 +28,7 @@ func main() {
 	srv := server.NewSysServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		sys.RegisterSysServer(grpcServer, srv)
+		sysclient.RegisterSysServer(grpcServer, srv)
 	})
 	defer s.Stop()
 

@@ -8,11 +8,12 @@ import (
 
 	"zero-admin/rpc/pay/internal/logic"
 	"zero-admin/rpc/pay/internal/svc"
-	"zero-admin/rpc/pay/pay"
+	"zero-admin/rpc/pay/payclient"
 )
 
 type PayServer struct {
 	svcCtx *svc.ServiceContext
+	payclient.UnimplementedPayServer
 }
 
 func NewPayServer(svcCtx *svc.ServiceContext) *PayServer {
@@ -21,22 +22,22 @@ func NewPayServer(svcCtx *svc.ServiceContext) *PayServer {
 	}
 }
 
-func (s *PayServer) AppUnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq) (*pay.UnifiedOrderResp, error) {
+func (s *PayServer) AppUnifiedOrder(ctx context.Context, in *payclient.UnifiedOrderReq) (*payclient.UnifiedOrderResp, error) {
 	l := logic.NewAppUnifiedOrderLogic(ctx, s.svcCtx)
 	return l.AppUnifiedOrder(in)
 }
 
-func (s *PayServer) H5UnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq) (*pay.H5UnifiedOrderResp, error) {
+func (s *PayServer) H5UnifiedOrder(ctx context.Context, in *payclient.UnifiedOrderReq) (*payclient.H5UnifiedOrderResp, error) {
 	l := logic.NewH5UnifiedOrderLogic(ctx, s.svcCtx)
 	return l.H5UnifiedOrder(in)
 }
 
-func (s *PayServer) JsUnifiedOrder(ctx context.Context, in *pay.UnifiedOrderReq) (*pay.UnifiedOrderResp, error) {
+func (s *PayServer) JsUnifiedOrder(ctx context.Context, in *payclient.UnifiedOrderReq) (*payclient.UnifiedOrderResp, error) {
 	l := logic.NewJsUnifiedOrderLogic(ctx, s.svcCtx)
 	return l.JsUnifiedOrder(in)
 }
 
-func (s *PayServer) OrderQuery(ctx context.Context, in *pay.OrderQueryReq) (*pay.OrderQueryResp, error) {
+func (s *PayServer) OrderQuery(ctx context.Context, in *payclient.OrderQueryReq) (*payclient.OrderQueryResp, error) {
 	l := logic.NewOrderQueryLogic(ctx, s.svcCtx)
 	return l.OrderQuery(in)
 }

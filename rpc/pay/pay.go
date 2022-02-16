@@ -6,15 +6,14 @@ package main
 import (
 	"flag"
 	"fmt"
-
-	"zero-admin/rpc/pay/internal/config"
-	"zero-admin/rpc/pay/internal/server"
-	"zero-admin/rpc/pay/internal/svc"
-	"zero-admin/rpc/pay/pay"
+	"zero-admin/rpc/pay/payclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
+	"zero-admin/rpc/pay/internal/config"
+	"zero-admin/rpc/pay/internal/server"
+	"zero-admin/rpc/pay/internal/svc"
 )
 
 var configFile = flag.String("f", "rpc/pay/etc/pay.yaml", "the config file")
@@ -28,7 +27,7 @@ func main() {
 	srv := server.NewPayServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		pay.RegisterPayServer(grpcServer, srv)
+		payclient.RegisterPayServer(grpcServer, srv)
 	})
 	defer s.Stop()
 

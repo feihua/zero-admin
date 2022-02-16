@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package oms;
+package omsclient;
+
+option go_package = "./omsclient";
 
 message OrderAddReq {
   int64       MemberId = 2;

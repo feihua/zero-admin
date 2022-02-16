@@ -3,34 +3,34 @@ package svc
 import (
 	"github.com/zeromicro/go-zero/zrpc"
 	"zero-admin/front-api/internal/config"
-	"zero-admin/rpc/oms/omsclient"
-	"zero-admin/rpc/pay/payclient"
-	"zero-admin/rpc/pms/pmsclient"
-	"zero-admin/rpc/sms/smsclient"
-	"zero-admin/rpc/sys/sysclient"
-	"zero-admin/rpc/ums/umsclient"
+	"zero-admin/rpc/oms/oms"
+	"zero-admin/rpc/pay/pay"
+	"zero-admin/rpc/pms/pms"
+	"zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/ums/ums"
 )
 
 type ServiceContext struct {
 	Config config.Config
 
-	Sys sysclient.Sys
-	Ums umsclient.Ums
-	Pms pmsclient.Pms
-	Oms omsclient.Oms
-	Sms smsclient.Sms
-	Pay payclient.Pay
+	Sys sys.Sys
+	Ums ums.Ums
+	Pms pms.Pms
+	Oms oms.Oms
+	Sms sms.Sms
+	Pay pay.Pay
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config: c,
 
-		Sys: sysclient.NewSys(zrpc.MustNewClient(c.SysRpc)),
-		Ums: umsclient.NewUms(zrpc.MustNewClient(c.UmsRpc)),
-		Pms: pmsclient.NewPms(zrpc.MustNewClient(c.PmsRpc)),
-		Oms: omsclient.NewOms(zrpc.MustNewClient(c.OmsRpc)),
-		Sms: smsclient.NewSms(zrpc.MustNewClient(c.SmsRpc)),
-		Pay: payclient.NewPay(zrpc.MustNewClient(c.PayRpc)),
+		Sys: sys.NewSys(zrpc.MustNewClient(c.SysRpc)),
+		Ums: ums.NewUms(zrpc.MustNewClient(c.UmsRpc)),
+		Pms: pms.NewPms(zrpc.MustNewClient(c.PmsRpc)),
+		Oms: oms.NewOms(zrpc.MustNewClient(c.OmsRpc)),
+		Sms: sms.NewSms(zrpc.MustNewClient(c.SmsRpc)),
+		Pay: pay.NewPay(zrpc.MustNewClient(c.PayRpc)),
 	}
 }

@@ -6,11 +6,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/rpc/oms/internal/config"
 	"zero-admin/rpc/oms/internal/server"
 	"zero-admin/rpc/oms/internal/svc"
-	"zero-admin/rpc/oms/oms"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -28,7 +28,7 @@ func main() {
 	srv := server.NewOmsServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		oms.RegisterOmsServer(grpcServer, srv)
+		omsclient.RegisterOmsServer(grpcServer, srv)
 	})
 	defer s.Stop()
 

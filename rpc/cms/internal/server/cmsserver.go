@@ -6,14 +6,14 @@ package server
 import (
 	"context"
 
+	"zero-admin/rpc/cms/cmsclient"
 	"zero-admin/rpc/cms/internal/logic"
 	"zero-admin/rpc/cms/internal/svc"
-	"zero-admin/rpc/cms/types/cms"
 )
 
 type CmsServer struct {
 	svcCtx *svc.ServiceContext
-	cms.UnimplementedCmsServer
+	cmsclient.UnimplementedCmsServer
 }
 
 func NewCmsServer(svcCtx *svc.ServiceContext) *CmsServer {
@@ -22,7 +22,7 @@ func NewCmsServer(svcCtx *svc.ServiceContext) *CmsServer {
 	}
 }
 
-func (s *CmsServer) Greet(ctx context.Context, in *cms.StreamReq) (*cms.StreamResp, error) {
+func (s *CmsServer) Greet(ctx context.Context, in *cmsclient.StreamReq) (*cmsclient.StreamResp, error) {
 	l := logic.NewGreetLogic(ctx, s.svcCtx)
 	return l.Greet(in)
 }

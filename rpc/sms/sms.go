@@ -10,7 +10,7 @@ import (
 	"zero-admin/rpc/sms/internal/config"
 	"zero-admin/rpc/sms/internal/server"
 	"zero-admin/rpc/sms/internal/svc"
-	"zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sms/smsclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -28,7 +28,7 @@ func main() {
 	srv := server.NewSmsServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		sms.RegisterSmsServer(grpcServer, srv)
+		smsclient.RegisterSmsServer(grpcServer, srv)
 	})
 	defer s.Stop()
 

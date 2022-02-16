@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package ums;
+package umsclient;
+
+option go_package = "./umsclient";
 
 message MemberAddReq {
   int64       MemberLevelId = 2;

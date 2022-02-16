@@ -6,15 +6,14 @@ package main
 import (
 	"flag"
 	"fmt"
-
-	"zero-admin/rpc/pms/internal/config"
-	"zero-admin/rpc/pms/internal/server"
-	"zero-admin/rpc/pms/internal/svc"
-	"zero-admin/rpc/pms/pms"
+	"zero-admin/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
+	"zero-admin/rpc/pms/internal/config"
+	"zero-admin/rpc/pms/internal/server"
+	"zero-admin/rpc/pms/internal/svc"
 )
 
 var configFile = flag.String("f", "rpc/pms/etc/pms.yaml", "the config file")
@@ -28,7 +27,7 @@ func main() {
 	srv := server.NewPmsServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		pms.RegisterPmsServer(grpcServer, srv)
+		pmsclient.RegisterPmsServer(grpcServer, srv)
 	})
 	defer s.Stop()
 
