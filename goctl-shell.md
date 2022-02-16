@@ -15,33 +15,31 @@ goctl api go -api front.api -dir ../
 3.创建rpc
 进到rpc/sys/目录操作
 goctl rpc template -o sys.proto
-goctl rpc proto -src sys.proto -dir .
-
-goctl rpc protoc user.proto --go_out=./types --go-grpc_out=./types --zrpc_out=.
+goctl rpc protoc sys.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 
 进到rpc/ums/目录操作
 goctl rpc template -o ums.proto
-goctl rpc proto -src ums.proto -dir .
+goctl rpc protoc ums.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 
 进到rpc/pms/目录操作
 goctl rpc template -o pms.proto
-goctl rpc proto -src pms.proto -dir .
+goctl rpc protoc pms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 
 进到rpc/oms/目录操作
 goctl rpc template -o oms.proto
-goctl rpc proto -src oms.proto -dir .
+goctl rpc protoc oms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 
 进到rpc/sms/目录操作
 goctl rpc template -o sms.proto
-goctl rpc proto -src sms.proto -dir .
+goctl rpc protoc sms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 
 进到rpc/pay/目录操作
 goctl rpc template -o pay.proto
-goctl rpc proto -src pay.proto -dir .
+goctl rpc protoc pay.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 
 进到rpc/cms/目录操作
 goctl rpc template -o cms.proto
-goctl rpc protoc cms.proto --go_out=./types --go-grpc_out=./types --zrpc_out=.
+goctl rpc protoc cms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 
 4.创建model
 进到rpc/目录操作
