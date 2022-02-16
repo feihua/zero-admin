@@ -8,7 +8,7 @@ package umsclient
 import (
 	"context"
 
-	"go-zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/ums"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

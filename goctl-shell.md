@@ -39,6 +39,10 @@ goctl rpc proto -src sms.proto -dir .
 goctl rpc template -o pay.proto
 goctl rpc proto -src pay.proto -dir .
 
+进到rpc/cms/目录操作
+goctl rpc template -o cms.proto
+goctl rpc protoc cms.proto --go_out=./types --go-grpc_out=./types --zrpc_out=.
+
 4.创建model
 进到rpc/目录操作
 goctl model mysql ddl -c -src book.sql -dir .

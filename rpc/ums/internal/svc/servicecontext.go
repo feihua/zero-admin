@@ -2,8 +2,8 @@ package svc
 
 import (
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"go-zero-admin/rpc/model/umsmodel"
-	"go-zero-admin/rpc/ums/internal/config"
+	"zero-admin/rpc/model/umsmodel"
+	"zero-admin/rpc/ums/internal/config"
 )
 
 type ServiceContext struct {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/zeromicro/go-zero/core/logx"
-	"go-zero-admin/rpc/sys/internal/svc"
-	"go-zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 )
 
 type UserListLogic struct {

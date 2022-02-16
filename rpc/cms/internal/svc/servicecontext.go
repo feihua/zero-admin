@@ -1,6 +1,6 @@
 package svc
 
-import "go-zero-admin/rpc/cms/internal/config"
+import "zero-admin/rpc/cms/internal/config"
 
 type ServiceContext struct {
 	Config config.Config

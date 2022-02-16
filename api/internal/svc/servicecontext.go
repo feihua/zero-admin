@@ -4,13 +4,14 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/rest"
 	"github.com/zeromicro/go-zero/zrpc"
-	"go-zero-admin/api/internal/config"
-	"go-zero-admin/api/internal/middleware"
-	"go-zero-admin/rpc/oms/omsclient"
-	"go-zero-admin/rpc/pms/pmsclient"
-	"go-zero-admin/rpc/sms/smsclient"
-	"go-zero-admin/rpc/sys/sysclient"
-	"go-zero-admin/rpc/ums/umsclient"
+	"zero-admin/api/internal/config"
+	"zero-admin/api/internal/middleware"
+	"zero-admin/rpc/cms/cms"
+	"zero-admin/rpc/oms/omsclient"
+	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin/rpc/sms/smsclient"
+	"zero-admin/rpc/sys/sysclient"
+	"zero-admin/rpc/ums/umsclient"
 )
 
 type ServiceContext struct {
@@ -21,6 +22,7 @@ type ServiceContext struct {
 	Pms      pmsclient.Pms
 	Oms      omsclient.Oms
 	Sms      smsclient.Sms
+	Cms      cms.Cms
 	Redis    *redis.Redis
 }
 

@@ -2,12 +2,12 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/api/internal/common/errorx"
-	"go-zero-admin/rpc/sys/sysclient"
 	"strconv"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/rpc/sys/sysclient"
 
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

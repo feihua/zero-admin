@@ -37,6 +37,13 @@ SmsRpc:
       - localhost:2379
     Key: sms.rpc
 
+#内容
+CmsRpc:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: cms.rpc
+
 Auth:
   AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
   AccessExpire: 86400

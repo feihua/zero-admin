@@ -19,6 +19,8 @@ type Config struct {
 	//营销
 	SmsRpc zrpc.RpcClientConf
 
+	CmsRpc zrpc.RpcClientConf
+
 	Auth struct {
 		AccessSecret string
 		AccessExpire int64

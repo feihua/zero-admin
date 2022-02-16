@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model/sysmodel"
-	"go-zero-admin/rpc/sys/internal/svc"
-	"go-zero-admin/rpc/sys/sys"
 	"time"
+	"zero-admin/rpc/model/sysmodel"
+	"zero-admin/rpc/sys/internal/svc"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

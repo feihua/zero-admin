@@ -6,7 +6,7 @@ package cms
 import (
 	"context"
 
-	"go-zero-admin/rpc/cms/types/cms"
+	"zero-admin/rpc/cms/types/cms"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

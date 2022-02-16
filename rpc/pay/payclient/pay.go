@@ -8,7 +8,7 @@ package payclient
 import (
 	"context"
 
-	"go-zero-admin/rpc/pay/pay"
+	"zero-admin/rpc/pay/pay"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

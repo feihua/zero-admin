@@ -8,7 +8,7 @@ package omsclient
 import (
 	"context"
 
-	"go-zero-admin/rpc/oms/oms"
+	"zero-admin/rpc/oms/oms"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

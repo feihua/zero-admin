@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/zeromicro/go-zero/core/logx"
-	"go-zero-admin/front-api/internal/svc"
+	"zero-admin/front-api/internal/svc"
 )
 
 type ProductCategoryDeleteLogic struct {

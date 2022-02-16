@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"go-zero-admin/rpc/sms/internal/logic"
-	"go-zero-admin/rpc/sms/internal/svc"
-	"go-zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sms/internal/logic"
+	"zero-admin/rpc/sms/internal/svc"
+	"zero-admin/rpc/sms/sms"
 )
 
 type SmsServer struct {

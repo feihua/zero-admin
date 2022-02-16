@@ -8,7 +8,7 @@ package sysclient
 import (
 	"context"
 
-	"go-zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/sys"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

@@ -8,7 +8,7 @@ package smsclient
 import (
 	"context"
 
-	"go-zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sms/sms"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

@@ -6,12 +6,12 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"go-zero-admin/rpc/model/paymodel"
-	"go-zero-admin/rpc/pay/internal/svc"
-	"go-zero-admin/rpc/pay/pay"
 	"io/ioutil"
 	"net/http"
 	"time"
+	"zero-admin/rpc/model/paymodel"
+	"zero-admin/rpc/pay/internal/svc"
+	"zero-admin/rpc/pay/pay"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

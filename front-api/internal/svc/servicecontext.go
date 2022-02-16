@@ -2,13 +2,13 @@ package svc
 
 import (
 	"github.com/zeromicro/go-zero/zrpc"
-	"go-zero-admin/front-api/internal/config"
-	"go-zero-admin/rpc/oms/omsclient"
-	"go-zero-admin/rpc/pay/payclient"
-	"go-zero-admin/rpc/pms/pmsclient"
-	"go-zero-admin/rpc/sms/smsclient"
-	"go-zero-admin/rpc/sys/sysclient"
-	"go-zero-admin/rpc/ums/umsclient"
+	"zero-admin/front-api/internal/config"
+	"zero-admin/rpc/oms/omsclient"
+	"zero-admin/rpc/pay/payclient"
+	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin/rpc/sms/smsclient"
+	"zero-admin/rpc/sys/sysclient"
+	"zero-admin/rpc/ums/umsclient"
 )
 
 type ServiceContext struct {

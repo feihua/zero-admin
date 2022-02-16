@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"go-zero-admin/rpc/oms/internal/logic"
-	"go-zero-admin/rpc/oms/internal/svc"
-	"go-zero-admin/rpc/oms/oms"
+	"zero-admin/rpc/oms/internal/logic"
+	"zero-admin/rpc/oms/internal/svc"
+	"zero-admin/rpc/oms/oms"
 )
 
 type OmsServer struct {

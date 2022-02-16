@@ -4,12 +4,12 @@ import (
 	"flag"
 	"fmt"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"go-zero-admin/api/internal/common/errorx"
 	"net/http"
+	"zero-admin/api/internal/common/errorx"
 
-	"go-zero-admin/api/internal/config"
-	"go-zero-admin/api/internal/handler"
-	"go-zero-admin/api/internal/svc"
+	"zero-admin/api/internal/config"
+	"zero-admin/api/internal/handler"
+	"zero-admin/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

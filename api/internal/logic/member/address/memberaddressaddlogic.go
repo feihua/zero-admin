@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"go-zero-admin/api/internal/common/errorx"
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/ums/umsclient"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

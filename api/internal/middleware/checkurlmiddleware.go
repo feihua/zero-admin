@@ -6,9 +6,9 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"go-zero-admin/api/internal/common/errorx"
 	"net/http"
 	"strings"
+	"zero-admin/api/internal/common/errorx"
 )
 
 type CheckUrlMiddleware struct {

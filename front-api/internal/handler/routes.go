@@ -4,14 +4,14 @@ package handler
 import (
 	"net/http"
 
-	membermember "go-zero-admin/front-api/internal/handler/member/member"
-	ordercart "go-zero-admin/front-api/internal/handler/order/cart"
-	orderorder "go-zero-admin/front-api/internal/handler/order/order"
-	payweixin "go-zero-admin/front-api/internal/handler/pay/weixin"
-	productcategory "go-zero-admin/front-api/internal/handler/product/category"
-	productproduct "go-zero-admin/front-api/internal/handler/product/product"
-	smshome "go-zero-admin/front-api/internal/handler/sms/home"
-	"go-zero-admin/front-api/internal/svc"
+	membermember "zero-admin/front-api/internal/handler/member/member"
+	ordercart "zero-admin/front-api/internal/handler/order/cart"
+	orderorder "zero-admin/front-api/internal/handler/order/order"
+	payweixin "zero-admin/front-api/internal/handler/pay/weixin"
+	productcategory "zero-admin/front-api/internal/handler/product/category"
+	productproduct "zero-admin/front-api/internal/handler/product/product"
+	smshome "zero-admin/front-api/internal/handler/sms/home"
+	"zero-admin/front-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

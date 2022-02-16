@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"go-zero-admin/rpc/ums/internal/logic"
-	"go-zero-admin/rpc/ums/internal/svc"
-	"go-zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/internal/logic"
+	"zero-admin/rpc/ums/internal/svc"
+	"zero-admin/rpc/ums/ums"
 )
 
 type UmsServer struct {

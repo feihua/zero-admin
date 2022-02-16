@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/jinzhu/copier"
-	"go-zero-admin/api/internal/common/errorx"
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/sys/sysclient"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+	"zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

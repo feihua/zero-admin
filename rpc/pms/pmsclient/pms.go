@@ -8,7 +8,7 @@ package pmsclient
 import (
 	"context"
 
-	"go-zero-admin/rpc/pms/pms"
+	"zero-admin/rpc/pms/pms"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/front-api/internal/svc"
-	"go-zero-admin/front-api/internal/types"
-	"go-zero-admin/rpc/pay/payclient"
+	"zero-admin/front-api/internal/svc"
+	"zero-admin/front-api/internal/types"
+	"zero-admin/rpc/pay/payclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

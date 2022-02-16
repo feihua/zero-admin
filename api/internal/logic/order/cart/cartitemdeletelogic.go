@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/api/internal/common/errorx"
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/oms/omsclient"
+	"zero-admin/api/internal/common/errorx"
+	"zero-admin/api/internal/svc"
+	"zero-admin/api/internal/types"
+	"zero-admin/rpc/oms/omsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

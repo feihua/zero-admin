@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/model/omsmodel"
-	"go-zero-admin/rpc/oms/internal/svc"
-	"go-zero-admin/rpc/oms/oms"
+	"zero-admin/rpc/model/omsmodel"
+	"zero-admin/rpc/oms/internal/svc"
+	"zero-admin/rpc/oms/oms"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
