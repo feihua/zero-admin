@@ -1,4 +1,4 @@
-module go-zero-admin
+module zero-admin
 
 go 1.17
 

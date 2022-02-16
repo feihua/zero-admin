@@ -1,11 +1,11 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="front-api" type="GoApplicationRunConfiguration" factoryName="Go Application">
+  <configuration default="false" name="cms" type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="zero-admin" />
     <working_directory value="$PROJECT_DIR$" />
     <kind value="PACKAGE" />
-    <package value="zero-admin/front-api" />
+    <package value="zero-admin/rpc/cms" />
     <directory value="$PROJECT_DIR$" />
-    <filePath value="$PROJECT_DIR$/front-api/front.go" />
+    <filePath value="$PROJECT_DIR$/rpc/cms/cms.go" />
     <method v="2" />
   </configuration>
 </component>
