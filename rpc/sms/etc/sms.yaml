@@ -8,9 +8,9 @@ Etcd:
 Mysql:
   Datasource: root:123456@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
-Log:
-  Mode: file
-  Path: logs/sms
+#Log:
+#  Mode: file
+#  Path: logs/sms
 Prometheus:
   Host: 127.0.0.1
   Port: 8184
