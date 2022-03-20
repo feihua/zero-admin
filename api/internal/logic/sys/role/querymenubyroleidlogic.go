@@ -25,13 +25,17 @@ func NewQueryMenuByRoleIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// QueryMenuByRoleId 根据roleId查询角色的权限
 func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(req types.RoleMenuReq) (*types.RoleMenuResp, error) {
+
+	//查询所有菜单
 	resp, _ := l.svcCtx.Sys.MenuList(l.ctx, &sysclient.MenuListReq{
 		Name: "",
 		Url:  "",
 	})
 
 	var list []*types.ListMenuData
+	var listIds []int64
 
 	for _, menu := range resp.List {
 		list = append(list, &types.ListMenuData{
@@ -41,16 +45,22 @@ func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(req types.RoleMenuReq) (*type
 			Id:       menu.Id,
 			Label:    menu.Name,
 		})
+		//admin账号全部权限
+		listIds = append(listIds, menu.Id)
 	}
 
-	QueryMenu, _ := l.svcCtx.Sys.QueryMenuByRoleId(l.ctx, &sysclient.QueryMenuByRoleIdReq{
-		Id: req.Id,
-	})
+	//如果角色不是admin则根据roleId查询菜单
+	if req.Id != 1 {
+		QueryMenu, _ := l.svcCtx.Sys.QueryMenuByRoleId(l.ctx, &sysclient.QueryMenuByRoleIdReq{
+			Id: req.Id,
+		})
+		listIds = QueryMenu.Ids
+	}
 
 	return &types.RoleMenuResp{
 		AllData:  list,
-		RoleData: QueryMenu.Ids,
+		RoleData: listIds,
 		Code:     "000000",
-		Message:  "",
+		Message:  "根据角色id查询菜单成功",
 	}, nil
 }
