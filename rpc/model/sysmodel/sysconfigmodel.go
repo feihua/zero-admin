@@ -15,8 +15,8 @@ import (
 var (
 	sysConfigFieldNames          = builderx.FieldNames(&SysConfig{})
 	sysConfigRows                = strings.Join(sysConfigFieldNames, ",")
-	sysConfigRowsExpectAutoSet   = strings.Join(stringx.Remove(sysConfigFieldNames, "id", "create_time", "update_time"), ",")
-	sysConfigRowsWithPlaceHolder = strings.Join(stringx.Remove(sysConfigFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
+	sysConfigRowsExpectAutoSet   = strings.Join(stringx.Remove(sysConfigFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	sysConfigRowsWithPlaceHolder = strings.Join(stringx.Remove(sysConfigFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 )
 
 type (

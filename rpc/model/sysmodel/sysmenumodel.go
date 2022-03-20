@@ -15,8 +15,8 @@ import (
 var (
 	sysMenuFieldNames          = builderx.FieldNames(&SysMenu{})
 	sysMenuRows                = strings.Join(sysMenuFieldNames, ",")
-	sysMenuRowsExpectAutoSet   = strings.Join(stringx.Remove(sysMenuFieldNames, "id", "create_time", "update_time"), ",")
-	sysMenuRowsWithPlaceHolder = strings.Join(stringx.Remove(sysMenuFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
+	sysMenuRowsExpectAutoSet   = strings.Join(stringx.Remove(sysMenuFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	sysMenuRowsWithPlaceHolder = strings.Join(stringx.Remove(sysMenuFieldNames, "`id`", "`create_by`", "`create_time`", "`update_time`"), "=?,") + "=?"
 )
 
 type (

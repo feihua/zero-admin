@@ -15,8 +15,8 @@ import (
 var (
 	sysLoginLogFieldNames          = builderx.FieldNames(&SysLoginLog{})
 	sysLoginLogRows                = strings.Join(sysLoginLogFieldNames, ",")
-	sysLoginLogRowsExpectAutoSet   = strings.Join(stringx.Remove(sysLoginLogFieldNames, "id", "create_time", "update_time"), ",")
-	sysLoginLogRowsWithPlaceHolder = strings.Join(stringx.Remove(sysLoginLogFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
+	sysLoginLogRowsExpectAutoSet   = strings.Join(stringx.Remove(sysLoginLogFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	sysLoginLogRowsWithPlaceHolder = strings.Join(stringx.Remove(sysLoginLogFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 )
 
 type (

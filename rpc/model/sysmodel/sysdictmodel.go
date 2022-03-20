@@ -15,8 +15,8 @@ import (
 var (
 	sysDictFieldNames          = builderx.FieldNames(&SysDict{})
 	sysDictRows                = strings.Join(sysDictFieldNames, ",")
-	sysDictRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDictFieldNames, "id", "create_time", "update_time"), ",")
-	sysDictRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDictFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
+	sysDictRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDictFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	sysDictRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDictFieldNames, "`id`", "`create_by`", "`create_time`", "`update_time`"), "=?,") + "=?"
 )
 
 type (

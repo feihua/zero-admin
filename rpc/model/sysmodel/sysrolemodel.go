@@ -15,8 +15,8 @@ import (
 var (
 	sysRoleFieldNames          = builderx.FieldNames(&SysRole{})
 	sysRoleRows                = strings.Join(sysRoleFieldNames, ",")
-	sysRoleRowsExpectAutoSet   = strings.Join(stringx.Remove(sysRoleFieldNames, "id", "create_time", "update_time"), ",")
-	sysRoleRowsWithPlaceHolder = strings.Join(stringx.Remove(sysRoleFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
+	sysRoleRowsExpectAutoSet   = strings.Join(stringx.Remove(sysRoleFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	sysRoleRowsWithPlaceHolder = strings.Join(stringx.Remove(sysRoleFieldNames, "`id`", "`create_by`", "`create_time`", "`update_time`"), "=?,") + "=?"
 )
 
 type (

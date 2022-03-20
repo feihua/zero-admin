@@ -3,20 +3,20 @@ package sysmodel
 import (
 	"database/sql"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/stores/builder"
 	"strings"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/builderx"
 )
 
 var (
-	sysRoleMenuFieldNames          = builderx.FieldNames(&SysRoleMenu{})
+	sysRoleMenuFieldNames          = builder.RawFieldNames(&SysRoleMenu{})
 	sysRoleMenuRows                = strings.Join(sysRoleMenuFieldNames, ",")
-	sysRoleMenuRowsExpectAutoSet   = strings.Join(stringx.Remove(sysRoleMenuFieldNames, "id", "create_time", "update_time"), ",")
-	sysRoleMenuRowsWithPlaceHolder = strings.Join(stringx.Remove(sysRoleMenuFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
+	sysRoleMenuRowsExpectAutoSet   = strings.Join(stringx.Remove(sysRoleMenuFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	sysRoleMenuRowsWithPlaceHolder = strings.Join(stringx.Remove(sysRoleMenuFieldNames, "`id`", "`create_by`", "`create_time`", "`update_time`"), "=?,") + "=?"
 )
 
 type (

@@ -15,8 +15,8 @@ import (
 var (
 	sysJobFieldNames          = builderx.FieldNames(&SysJob{})
 	sysJobRows                = strings.Join(sysJobFieldNames, ",")
-	sysJobRowsExpectAutoSet   = strings.Join(stringx.Remove(sysJobFieldNames, "id", "create_time", "update_time"), ",")
-	sysJobRowsWithPlaceHolder = strings.Join(stringx.Remove(sysJobFieldNames, "id", "create_by", "create_time", "update_time"), "=?,") + "=?"
+	sysJobRowsExpectAutoSet   = strings.Join(stringx.Remove(sysJobFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	sysJobRowsWithPlaceHolder = strings.Join(stringx.Remove(sysJobFieldNames, "`id`", "`create_by`", "`create_time`", "`update_time`"), "=?,") + "=?"
 )
 
 type (
