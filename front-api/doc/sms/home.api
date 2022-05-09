@@ -6,30 +6,58 @@ info(
 )
 
 type (
-    ListHomeDisplayReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
-    }
-    ListtHomeDisplayData struct {
+    ListHomeAdvertiseData struct {
         Id int64 `json:"id"`
-        BrandId int64 `json:"brand_id"`
-        BrandName string `json:"brand_name"`
-        RecommendStatus int64 `json:"recommend_status"`
-        Sort int64 `json:"sort"`
+        Name string `json:"name"`
+        Type int64 `json:"type"`                    // 轮播位置：0->PC首页轮播；1->app首页轮播
+        Url string `json:"url"`                     // 轮播图地址
+        Link string `json:"link"`                   // 轮播图链接
+        StartTime string `json:"startTime"`
+        EndTime string `json:"endTime"`
+        Status int64 `json:"status"`                // 上下线状态：0->下线；1->上线
+        Note string `json:"note"`                   // 备注
+        Sort int64 `json:"sort"`                    // 排序
     }
+    ListHomeBrandData struct {
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        iconUrl string `json:"iconUrl"`
+    }
+    ListHomeNewProductData struct {
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        PicUrl string `json:"picUrl"`
+        IsNew int64 `json:"isNew"`
+        IsHot int64 `json:"isHot"`
+        Price int64 `json:"price"`
+    }
+    ListHomeRecommendProductData struct {
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        PicUrl string `json:"picUrl"`
+        IsNew int64 `json:"isNew"`
+        IsHot int64 `json:"isHot"`
+        Price int64 `json:"price"`
+    }
+
+    HomeData struct {
+        AdvertiseData []*ListHomeAdvertiseData `json:"advertiseData"`
+        BrandData []*ListHomeBrandData `json:"brandData"`
+        NewProductData []*ListHomeNewProductData `json:"newProductData"`
+        RecommendProductData []*ListHomeRecommendProductData `json:"recommendProductData"`
+    }
+
     ListHomeDisplayResp struct {
-        Current int64 `json:"current"`
-        Data []*ListtHomeDisplayData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+        Code string `json:"code"`
+        Message string `json:"message"`
+        Data HomeData `json:"data"`
     }
 )
 
 @server(
-    group: sms/home
+    group: home
 )
 service front-api {
-    @handler HomeDisplay
-    get /api/sms/homedisplay/list (ListHomeDisplayReq) returns (ListHomeDisplayResp)
+    @handler HomeIndex
+    get /api/home/index () returns (ListHomeDisplayResp)
 }

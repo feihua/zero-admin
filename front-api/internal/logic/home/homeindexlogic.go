@@ -1,4 +1,4 @@
-package logic
+package home
 
 import (
 	"context"
@@ -9,22 +9,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type HomeDisplayLogic struct {
+type HomeIndexLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeDisplayLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeDisplayLogic {
-	return HomeDisplayLogic{
+func NewHomeIndexLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeIndexLogic {
+	return HomeIndexLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *HomeDisplayLogic) HomeDisplay(req types.ListHomeDisplayReq) (*types.ListHomeDisplayResp, error) {
+func (l *HomeIndexLogic) HomeIndex() (resp *types.ListHomeDisplayResp, err error) {
 	// todo: add your logic here and delete this line
 
-	return &types.ListHomeDisplayResp{}, nil
+	return
 }

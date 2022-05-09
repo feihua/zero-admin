@@ -4,20 +4,20 @@ package handler
 import (
 	"net/http"
 
+	home "zero-admin/front-api/internal/handler/home"
 	membermember "zero-admin/front-api/internal/handler/member/member"
 	ordercart "zero-admin/front-api/internal/handler/order/cart"
 	orderorder "zero-admin/front-api/internal/handler/order/order"
 	payweixin "zero-admin/front-api/internal/handler/pay/weixin"
 	productcategory "zero-admin/front-api/internal/handler/product/category"
 	productproduct "zero-admin/front-api/internal/handler/product/product"
-	smshome "zero-admin/front-api/internal/handler/sms/home"
 	"zero-admin/front-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
 
-func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
-	engine.AddRoutes(
+func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
@@ -42,7 +42,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
@@ -67,7 +67,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
@@ -77,7 +77,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
@@ -87,17 +87,17 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/sms/homedisplay/list",
-				Handler: smshome.HomeDisplayHandler(serverCtx),
+				Path:    "/api/home/index",
+				Handler: home.HomeIndexHandler(serverCtx),
 			},
 		},
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
@@ -112,7 +112,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 	)
 
-	engine.AddRoutes(
+	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
