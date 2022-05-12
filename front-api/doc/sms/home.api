@@ -5,59 +5,72 @@ info(
     email: "koobe.liu@uaf.com.cn"
 )
 
-type (
-    ListHomeAdvertiseData struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        Type int64 `json:"type"`                    // 轮播位置：0->PC首页轮播；1->app首页轮播
-        Url string `json:"url"`                     // 轮播图地址
-        Link string `json:"link"`                   // 轮播图链接
-        StartTime string `json:"startTime"`
-        EndTime string `json:"endTime"`
-        Status int64 `json:"status"`                // 上下线状态：0->下线；1->上线
-        Note string `json:"note"`                   // 备注
-        Sort int64 `json:"sort"`                    // 排序
-    }
-    ListHomeBrandData struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        iconUrl string `json:"iconUrl"`
-    }
-    ListHomeNewProductData struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        PicUrl string `json:"picUrl"`
-        IsNew int64 `json:"isNew"`
-        IsHot int64 `json:"isHot"`
-        Price int64 `json:"price"`
-    }
-    ListHomeRecommendProductData struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        PicUrl string `json:"picUrl"`
-        IsNew int64 `json:"isNew"`
-        IsHot int64 `json:"isHot"`
-        Price int64 `json:"price"`
-    }
+type HomeResp struct {
+    Errno  int64  `json:"errno"`
+    Data   Data   `json:"data"`
+    Errmsg string `json:"errmsg"`
+}
 
-    HomeData struct {
-        AdvertiseData []*ListHomeAdvertiseData `json:"advertiseData"`
-        BrandData []*ListHomeBrandData `json:"brandData"`
-        NewProductData []*ListHomeNewProductData `json:"newProductData"`
-        RecommendProductData []*ListHomeRecommendProductData `json:"recommendProductData"`
-    }
+type Data struct {
+    NewGoodsList []GoodsList `json:"newGoodsList"`
+    Channel      []Channel   `json:"channel"`
+    Banner       []Banner    `json:"banner"`
+    HotGoodsList []GoodsList `json:"hotGoodsList"`
+}
 
-    ListHomeDisplayResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Data HomeData `json:"data"`
-    }
-)
+type Banner struct {
+    ID         int64  `json:"id"`
+    Name       string `json:"name"`
+    Link       string `json:"link"`
+    URL        string `json:"url"`
+    Position   int64  `json:"position"`
+    Content    string `json:"content"`
+    Enabled    bool   `json:"enabled"`
+    AddTime    Time   `json:"addTime"`
+    UpdateTime Time   `json:"updateTime"`
+    Deleted    bool   `json:"deleted"`
+}
+
+type Time struct {
+    Date Date      `json:"date"`
+    Time TimeClass `json:"time"`
+}
+
+type Date struct {
+    Year  int64 `json:"year"`
+    Month int64 `json:"month"`
+    Day   int64 `json:"day"`
+}
+
+type TimeClass struct {
+    Hour   int64 `json:"hour"`
+    Minute int64 `json:"minute"`
+    Second int64 `json:"second"`
+    Nano   int64 `json:"nano"`
+}
+
+type Channel struct {
+    ID      int64  `json:"id"`
+    Name    string `json:"name"`
+    IconURL string `json:"iconUrl"`
+}
+
+type GoodsList struct {
+    ID           int64  `json:"id"`
+    Name         string `json:"name"`
+    Brief        string `json:"brief"`
+    PicURL       string `json:"picUrl"`
+    IsNew        bool   `json:"isNew"`
+    IsHot        bool   `json:"isHot"`
+    CounterPrice int64  `json:"counterPrice"`
+    RetailPrice  int64  `json:"retailPrice"`
+}
+
 
 @server(
     group: home
 )
 service front-api {
     @handler HomeIndex
-    get /api/home/index () returns (ListHomeDisplayResp)
+    get /api/home/index returns (HomeResp)
 }
