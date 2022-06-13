@@ -1,17 +1,16 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
+    desc: "首页数据"
     author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    email: "1002219331@qq.com"
 )
 
 type HomeResp struct {
     Errno  int64  `json:"errno"`
-    Data   Data   `json:"data"`
+    Data   HomeData   `json:"data"`
     Errmsg string `json:"errmsg"`
 }
 
-type Data struct {
+type HomeData struct {
     NewGoodsList []GoodsList `json:"newGoodsList"`
     Channel      []Channel   `json:"channel"`
     Banner       []Banner    `json:"banner"`
@@ -26,28 +25,11 @@ type Banner struct {
     Position   int64  `json:"position"`
     Content    string `json:"content"`
     Enabled    bool   `json:"enabled"`
-    AddTime    Time   `json:"addTime"`
-    UpdateTime Time   `json:"updateTime"`
+    AddTime    string   `json:"addTime"`
+    UpdateTime string   `json:"updateTime"`
     Deleted    bool   `json:"deleted"`
 }
 
-type Time struct {
-    Date Date      `json:"date"`
-    Time TimeClass `json:"time"`
-}
-
-type Date struct {
-    Year  int64 `json:"year"`
-    Month int64 `json:"month"`
-    Day   int64 `json:"day"`
-}
-
-type TimeClass struct {
-    Hour   int64 `json:"hour"`
-    Minute int64 `json:"minute"`
-    Second int64 `json:"second"`
-    Nano   int64 `json:"nano"`
-}
 
 type Channel struct {
     ID      int64  `json:"id"`
@@ -71,6 +53,7 @@ type GoodsList struct {
     group: home
 )
 service front-api {
+
     @handler HomeIndex
     get /api/home/index returns (HomeResp)
 }

@@ -1,0 +1,42 @@
+info(
+    desc: "分类相关"
+    author: "koobe"
+    email: "1002219331@qq.com"
+)
+
+type CategoryResp struct {
+    Errno  int64   `json:"errno"`
+    Data   []CategoryData `json:"data"`
+    Errmsg string  `json:"errmsg"`
+}
+
+type CategoryData struct {
+    ID         int64  `json:"id"`
+    Name       string `json:"name"`
+    Keywords   string `json:"keywords"`
+    Desc       string `json:"desc"`
+    PID        int64  `json:"pid"`
+    IconURL    string `json:"iconUrl"`
+    PicURL     string `json:"picUrl"`
+    Level      string  `json:"level"`
+    SortOrder  int64  `json:"sortOrder"`
+    AddTime    string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted    bool   `json:"deleted"`
+}
+
+type SecondCategoryReq struct {
+    Id  int64   `json:"id"`
+}
+
+@server(
+    group: category
+)
+service front-api {
+
+    @handler GetFirstCategory
+    get /api/catalog/getfirstcategory returns (CategoryResp)
+
+    @handler GetSecondCategory
+    get /api/catalog/getsecondcategory (SecondCategoryReq) returns (CategoryResp)
+}
