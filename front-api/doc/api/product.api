@@ -1,0 +1,104 @@
+info(
+    desc: "商品信息"
+    author: "koobe"
+    email: "1002219331@qq.com"
+)
+
+
+type GoodsDetailReq struct {
+    Id  int64  `form:"id"`
+}
+
+type GoodsDetailResp struct {
+    Errno  int64  `json:"errno"`
+    Data   GoodsDetailData   `json:"data"`
+    Errmsg string `json:"errmsg"`
+}
+
+type GoodsDetailData struct {
+    SpecificationList []SpecificationList `json:"specificationList"`
+    Issue             []Issue             `json:"issue"`
+    UserHasCollect    int64               `json:"userHasCollect"`
+    ShareImage        string              `json:"shareImage"`
+    Share             bool                `json:"share"`
+    Attribute         []interface{}       `json:"attribute"`
+    ProductList       []ProductList       `json:"productList"`
+    Info              Info                `json:"info"`
+}
+
+type Info struct {
+    ID           int64    `json:"id"`
+    GoodsSn      string   `json:"goodsSn"`
+    Name         string   `json:"name"`
+    CategoryID   int64    `json:"categoryId"`
+    Gallery      []string `json:"gallery"`
+    Keywords     string   `json:"keywords"`
+    Brief        string   `json:"brief"`
+    IsOnSale     bool     `json:"isOnSale"`
+    SortOrder    int64    `json:"sortOrder"`
+    PicURL       string   `json:"picUrl"`
+    ShareURL     string   `json:"shareUrl"`
+    IsNew        bool     `json:"isNew"`
+    IsHot        bool     `json:"isHot"`
+    Unit         string   `json:"unit"`
+    CounterPrice int64    `json:"counterPrice"`
+    RetailPrice  int64    `json:"retailPrice"`
+    AddTime      string     `json:"addTime"`
+    UpdateTime   string     `json:"updateTime"`
+    Deleted      bool     `json:"deleted"`
+    Detail       string   `json:"detail"`
+}
+
+type Issue struct {
+    ID         int64  `json:"id"`
+    Question   string `json:"question"`
+    Answer     string `json:"answer"`
+    AddTime    string   `json:"addTime"`
+    UpdateTime string   `json:"updateTime"`
+    Deleted    bool   `json:"deleted"`
+}
+
+type ProductList struct {
+    ID             int64    `json:"id"`
+    GoodsID        int64    `json:"goodsId"`
+    Specifications []string `json:"specifications"`
+    Price          int64    `json:"price"`
+    Number         int64    `json:"number"`
+    URL            string   `json:"url"`
+    AddTime        string     `json:"addTime"`
+    UpdateTime     string     `json:"updateTime"`
+    Deleted        bool     `json:"deleted"`
+}
+
+type SpecificationList struct {
+    Name      string      `json:"name"`
+    ValueList []ValueList `json:"valueList"`
+}
+
+type ValueList struct {
+    ID            int64  `json:"id"`
+    GoodsID       int64  `json:"goodsId"`
+    Specification string `json:"specification"`
+    Value         string `json:"value"`
+    PicURL        string `json:"picUrl"`
+    AddTime       string   `json:"addTime"`
+    UpdateTime    string   `json:"updateTime"`
+    Deleted       bool   `json:"deleted"`
+}
+
+type GoodsCategoryReq struct {
+    Id  int64  `form:"id"`
+}
+
+@server(
+//    jwt: Auth
+    group: product
+)
+service front-api {
+
+    @handler GoodsDetail
+    get /api/goods/detail (GoodsDetailReq) returns (GoodsDetailResp)
+
+    @handler GoodsCategory
+    get /api/goods/category (GoodsCategoryReq) returns (GoodsDetailResp)
+}

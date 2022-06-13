@@ -4,13 +4,13 @@ package handler
 import (
 	"net/http"
 
+	auth "zero-admin/front-api/internal/handler/auth"
+	cart "zero-admin/front-api/internal/handler/cart"
+	category "zero-admin/front-api/internal/handler/category"
+	collect "zero-admin/front-api/internal/handler/collect"
 	home "zero-admin/front-api/internal/handler/home"
-	membermember "zero-admin/front-api/internal/handler/member/member"
-	ordercart "zero-admin/front-api/internal/handler/order/cart"
-	orderorder "zero-admin/front-api/internal/handler/order/order"
-	payweixin "zero-admin/front-api/internal/handler/pay/weixin"
-	productcategory "zero-admin/front-api/internal/handler/product/category"
-	productproduct "zero-admin/front-api/internal/handler/product/product"
+	order "zero-admin/front-api/internal/handler/order"
+	product "zero-admin/front-api/internal/handler/product"
 	"zero-admin/front-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -20,49 +20,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/cart/add",
-				Handler: ordercart.CartItemAddHandler(serverCtx),
+				Method:  http.MethodGet,
+				Path:    "/api/auth/login",
+				Handler: auth.LoginHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/order/cart/list",
-				Handler: ordercart.CartItemListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/cart/update",
-				Handler: ordercart.CartItemUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/cart/delete",
-				Handler: ordercart.CartItemDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/order/add",
-				Handler: orderorder.OrderAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/order/order/list",
-				Handler: orderorder.OrderListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/order/update",
-				Handler: orderorder.OrderUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/order/delete",
-				Handler: orderorder.OrderDeleteHandler(serverCtx),
+				Path:    "/api/auth/register",
+				Handler: auth.RegisterHandler(serverCtx),
 			},
 		},
 	)
@@ -71,8 +36,38 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/product/product/list",
-				Handler: productproduct.ProductListHandler(serverCtx),
+				Path:    "/api/cart/index/:userId",
+				Handler: cart.CartListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/cart/add",
+				Handler: cart.CartAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/cart/fastadd",
+				Handler: cart.CartFastAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/cart/checked",
+				Handler: cart.CartCheckedHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/cart/checkout",
+				Handler: cart.CartCheckOutHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/cart/delete",
+				Handler: cart.CartDeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/cart/update",
+				Handler: cart.CartUpdateHandler(serverCtx),
 			},
 		},
 	)
@@ -81,8 +76,28 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/product/category/list",
-				Handler: productcategory.ProductCategoryListHandler(serverCtx),
+				Path:    "/api/catalog/getfirstcategory",
+				Handler: category.GetFirstCategoryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/catalog/getsecondcategory",
+				Handler: category.GetSecondCategoryHandler(serverCtx),
+			},
+		},
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/collect/list",
+				Handler: collect.CollectListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/collect/addordelete",
+				Handler: collect.AddordeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -100,14 +115,39 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodPost,
-				Path:    "/api/member/member/register",
-				Handler: membermember.MemberRegisterHandler(serverCtx),
+				Method:  http.MethodGet,
+				Path:    "/api/order/list",
+				Handler: order.OrderListHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/api/member/member/login",
-				Handler: membermember.MemberLoginHandler(serverCtx),
+				Method:  http.MethodGet,
+				Path:    "/api/order/cancel",
+				Handler: order.OrderCancelHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/refund",
+				Handler: order.OrderRefundHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/confirm",
+				Handler: order.OrderConfirmHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/delete",
+				Handler: order.OrderDeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/goods",
+				Handler: order.OrderGoodsHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/comment",
+				Handler: order.OrderCommentHandler(serverCtx),
 			},
 		},
 	)
@@ -115,14 +155,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodPost,
-				Path:    "/api/pay/wx/unifiedOrder",
-				Handler: payweixin.UnifiedOrderHandler(serverCtx),
+				Method:  http.MethodGet,
+				Path:    "/api/goods/detail",
+				Handler: product.GoodsDetailHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/api/pay/wx/orderQuery",
-				Handler: payweixin.OrderQueryHandler(serverCtx),
+				Method:  http.MethodGet,
+				Path:    "/api/goods/category",
+				Handler: product.GoodsCategoryHandler(serverCtx),
 			},
 		},
 	)

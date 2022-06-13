@@ -1,4 +1,4 @@
-package home
+package collect
 
 import (
 	"context"
@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type HomeIndexLogic struct {
+type AddordeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeIndexLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeIndexLogic {
-	return HomeIndexLogic{
+func NewAddordeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddordeleteLogic {
+	return AddordeleteLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *HomeIndexLogic) HomeIndex() (resp *types.HomeResp, err error) {
+func (l *AddordeleteLogic) Addordelete(req types.AddOrDeleteReq) (resp *types.AddOrDeleteResp, err error) {
 	// todo: add your logic here and delete this line
 
 	return

@@ -1,4 +1,4 @@
-package home
+package auth
 
 import (
 	"context"
@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type HomeIndexLogic struct {
+type RegisterLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeIndexLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeIndexLogic {
-	return HomeIndexLogic{
+func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) RegisterLogic {
+	return RegisterLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *HomeIndexLogic) HomeIndex() (resp *types.HomeResp, err error) {
+func (l *RegisterLogic) Register(req types.RegisterReq) (resp *types.LoginAndRegisterResp, err error) {
 	// todo: add your logic here and delete this line
 
 	return

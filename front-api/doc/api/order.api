@@ -1,0 +1,125 @@
+info(
+    desc: "订单信息"
+    author: "koobe"
+    email: "1002219331@qq.com"
+)
+
+
+type OrderListReq struct {
+    Page int64 `json:"page"`
+    Limit int64 `json:"limit"`
+}
+
+type OrderListResp struct {
+    Errno int64 `json:"errno"`
+    //    Data   []Datum `json:"data"`
+    Errmsg string `json:"errmsg"`
+}
+
+//type Datum struct {
+//
+//}
+
+type OrderCancelReq struct {
+    UserId int64 `json:"userId"`
+    OrderId int64 `json:"orderId"`
+}
+type OrderCancelResp struct {
+    Errno int64 `json:"errno"`
+    Errmsg string `json:"errmsg"`
+}
+
+type OrderRefundReq struct {
+    UserId int64 `json:"userId"`
+    OrderId int64 `json:"orderId"`
+}
+type OrderRefundResp struct {
+    Errno int64 `json:"errno"`
+    Errmsg string `json:"errmsg"`
+}
+
+type OrderConfirmReq struct {
+    UserId int64 `json:"userId"`
+    OrderId int64 `json:"orderId"`
+}
+type OrderConfirmResp struct {
+    Errno int64 `json:"errno"`
+    Errmsg string `json:"errmsg"`
+}
+
+type OrderDeleteReq struct {
+    UserId int64 `json:"userId"`
+    OrderId int64 `json:"orderId"`
+}
+type OrderDeleteResp struct {
+    Errno int64 `json:"errno"`
+    Errmsg string `json:"errmsg"`
+}
+
+type OrderGoodsReq struct {
+    UserId int64 `json:"userId"`
+    OrderId int64 `json:"orderId"`
+    GoodsId int64 `json:"goodsId"`
+}
+type OrderGoodsResp struct {
+    Errno int64 `json:"errno"`
+    Data []OrderGoodsData `json:"data"`
+    Errmsg string `json:"errmsg"`
+}
+
+type OrderGoodsData struct {
+    IsDeleted bool `json:"IS_DELETED"`
+    NotDeleted bool `json:"NOT_DELETED"`
+    ID int64 `json:"id"`
+    OrderID int64 `json:"orderId"`
+    GoodsID int64 `json:"goodsId"`
+    GoodsName string `json:"goodsName"`
+    GoodsSn string `json:"goodsSn"`
+    ProductID int64 `json:"productId"`
+    Number string `json:"number"`
+    Price string `json:"price"`
+    Specifications string `json:"specifications"`
+    PicURL string `json:"picUrl"`
+    Comment int64 `json:"comment"`
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
+}
+
+type OrderCommentReq struct {
+    UserId int64 `json:"userId"`
+    OrderGoodsId int64 `json:"orderGoodsId"`
+    Content string `json:"content"`
+    PicUrls []string `json:"picUrls"`
+}
+type OrderCommentResp struct {
+    Errno int64 `json:"errno"`
+    Errmsg string `json:"errmsg"`
+}
+
+@server(
+    //    jwt: Auth
+    group: order
+)
+service front-api {
+    @handler OrderList
+    get /api/order/list (OrderListReq) returns (OrderListResp)
+
+    @handler OrderCancel
+    get /api/order/cancel (OrderCancelReq) returns (OrderCancelResp)
+
+    @handler OrderRefund
+    get /api/order/refund (OrderRefundReq) returns (OrderRefundResp)
+
+    @handler OrderConfirm
+    get /api/order/confirm (OrderConfirmReq) returns (OrderConfirmResp)
+
+    @handler OrderDelete
+    get /api/order/delete (OrderDeleteReq) returns (OrderDeleteResp)
+
+    @handler OrderGoods
+    get /api/order/goods (OrderGoodsReq) returns (OrderGoodsResp)
+
+    @handler OrderComment
+    get /api/order/comment (OrderCommentReq) returns (OrderCommentResp)
+}

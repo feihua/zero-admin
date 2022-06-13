@@ -1,4 +1,4 @@
-package home
+package category
 
 import (
 	"context"
@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type HomeIndexLogic struct {
+type GetSecondCategoryLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeIndexLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeIndexLogic {
-	return HomeIndexLogic{
+func NewGetSecondCategoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) GetSecondCategoryLogic {
+	return GetSecondCategoryLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *HomeIndexLogic) HomeIndex() (resp *types.HomeResp, err error) {
+func (l *GetSecondCategoryLogic) GetSecondCategory(req types.SecondCategoryReq) (resp *types.CategoryResp, err error) {
 	// todo: add your logic here and delete this line
 
 	return

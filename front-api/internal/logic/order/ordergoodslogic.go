@@ -1,4 +1,4 @@
-package home
+package order
 
 import (
 	"context"
@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type HomeIndexLogic struct {
+type OrderGoodsLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeIndexLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeIndexLogic {
-	return HomeIndexLogic{
+func NewOrderGoodsLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderGoodsLogic {
+	return OrderGoodsLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *HomeIndexLogic) HomeIndex() (resp *types.HomeResp, err error) {
+func (l *OrderGoodsLogic) OrderGoods(req types.OrderGoodsReq) (resp *types.OrderGoodsResp, err error) {
 	// todo: add your logic here and delete this line
 
 	return

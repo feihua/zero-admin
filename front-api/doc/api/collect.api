@@ -1,0 +1,53 @@
+info(
+    desc: "收藏商品"
+    author: "koobe"
+    email: "1002219331@qq.com"
+)
+
+
+type CollectListReq struct {
+    Type  int64   `json:"type"`
+    Page  int64   `json:"page"`
+    Limit  int64   `json:"limit"`
+}
+
+
+type CollectListResp struct {
+    Errno  int64   `json:"errno"`
+    Data   []CollectListData `json:"data"`
+    Errmsg string  `json:"errmsg"`
+}
+type CollectListData struct {
+    ID         int64  `json:"id"`
+    Type       int64  `json:"type"`
+    ValueID    int64  `json:"valueId"`
+    Name       string  `json:"name"`
+    Brief    string `json:"brief"`
+    PicUrl string `json:"picUrl"`
+    RetailPrice    string   `json:"retailPrice"`
+}
+
+type AddOrDeleteReq struct {
+    Type       int64  `json:"type"`
+    ValueID    int64  `json:"valueId"`
+
+}
+
+type AddOrDeleteResp struct {
+    Errno  int64   `json:"errno"`
+    Errmsg string  `json:"errmsg"`
+}
+
+@server(
+//    jwt: Auth
+    group: collect
+)
+service front-api {
+
+    @handler CollectList
+    get /api/collect/list (CollectListReq) returns (CollectListResp)
+
+    @handler Addordelete
+    get /api/collect/addordelete (AddOrDeleteReq) returns (AddOrDeleteResp)
+
+}

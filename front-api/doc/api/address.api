@@ -1,0 +1,119 @@
+info(
+    desc: "收货地址"
+    author: "koobe"
+    email: "1002219331@qq.com"
+)
+
+
+type AddressListReq struct {
+    UserId int64 `json:"userId"`
+}
+type AddressListResp struct {
+    Errno int64 `json:"errno"`
+    Data AddressListData `json:"data"`
+    Errmsg string `json:"errmsg"`
+}
+
+type AddressListData struct {
+    Total int64 `json:"total"`
+    Pages int64 `json:"pages"`
+    Limit int64 `json:"limit"`
+    Page int64 `json:"page"`
+    List []AddressList `json:"list"`
+}
+
+type AddressList struct {
+    ID int64 `json:"id"`
+    Name string `json:"name"`
+    UserID int64 `json:"userId"`
+    Province string `json:"province"`
+    City string `json:"city"`
+    County string `json:"county"`
+    AddressDetail string `json:"addressDetail"`
+    AreaCode string `json:"areaCode"`
+    Tel string `json:"tel"`
+    IsDefault bool `json:"isDefault"`
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
+}
+
+type AddressSaveReq struct {
+    IsDeleted     bool   `json:"IS_DELETED"`
+    NotDeleted    bool   `json:"NOT_DELETED"`
+    ID            int64  `json:"id"`
+    Name          string `json:"name"`
+    UserID        int64  `json:"userId"`
+    Province      string `json:"province"`
+    City          string `json:"city"`
+    County        string `json:"county"`
+    AddressDetail string `json:"addressDetail"`
+    AreaCode      string `json:"areaCode"`
+    PostalCode    string `json:"postalCode"`
+    Tel           string `json:"tel"`
+    IsDefault     bool   `json:"isDefault"`
+    AddTime       string `json:"addTime"`
+    UpdateTime    string `json:"updateTime"`
+    Deleted       bool   `json:"deleted"`
+}
+type AddressSaveResp struct {
+    Errno  int64   `json:"errno"`
+    Errmsg string  `json:"errmsg"`
+}
+
+type AddressDeleteReq struct {
+    UserID        int64  `json:"userId"`
+    AddressID     int64  `json:"addressID"`
+}
+type AddressDeleteResp struct {
+    Errno  int64   `json:"errno"`
+    Errmsg string  `json:"errmsg"`
+}
+
+type AddressDetailReq struct {
+    UserID        int64  `json:"userId"`
+    AddressID     int64  `json:"addressID"`
+}
+type AddressDetailResp struct {
+    Errno  int64   `json:"errno"`
+    Data   []AddressDetailData `json:"data"`
+    Errmsg string  `json:"errmsg"`
+}
+
+type AddressDetailData struct {
+    IsDeleted     bool   `json:"IS_DELETED"`
+    NotDeleted    bool   `json:"NOT_DELETED"`
+    ID            int64  `json:"id"`
+    Name          string `json:"name"`
+    UserID        int64  `json:"userId"`
+    Province      string `json:"province"`
+    City          string `json:"city"`
+    County        string `json:"county"`
+    AddressDetail string `json:"addressDetail"`
+    AreaCode      string `json:"areaCode"`
+    PostalCode    string `json:"postalCode"`
+    Tel           string `json:"tel"`
+    IsDefault     bool   `json:"isDefault"`
+    AddTime       string `json:"addTime"`
+    UpdateTime    string `json:"updateTime"`
+    Deleted       bool   `json:"deleted"`
+}
+}
+
+@server(
+    //    jwt: Auth
+    group: address
+)
+service front-api {
+    @handler AddressList
+    get /api/address/list (AddressListReq) returns (AddressListResp)
+
+    @handler AddressSave
+    get /api/address/save (AddressSaveReq) returns (AddressSaveResp)
+
+    @handler AddressDelete
+    get /api/address/delete (AddressDeleteReq) returns (AddressDeleteResp)
+
+    @handler AddressDetail
+    get /api/address/detail (AddressDetailReq) returns (AddressDetailResp)
+}
