@@ -21,85 +21,89 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/auth/login",
+				Path:    "/login",
 				Handler: auth.LoginHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/auth/register",
+				Path:    "/register",
 				Handler: auth.RegisterHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/auth"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/cart/index/:userId",
+				Path:    "/index/:userId",
 				Handler: cart.CartListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/cart/add",
+				Path:    "/add",
 				Handler: cart.CartAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/cart/fastadd",
+				Path:    "/fastadd",
 				Handler: cart.CartFastAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/cart/checked",
+				Path:    "/checked",
 				Handler: cart.CartCheckedHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/cart/checkout",
+				Path:    "/checkout",
 				Handler: cart.CartCheckOutHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/cart/delete",
+				Path:    "/delete",
 				Handler: cart.CartDeleteHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/cart/update",
+				Path:    "/update",
 				Handler: cart.CartUpdateHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/cart"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/catalog/getfirstcategory",
+				Path:    "/getfirstcategory",
 				Handler: category.GetFirstCategoryHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/catalog/getsecondcategory",
+				Path:    "/getsecondcategory",
 				Handler: category.GetSecondCategoryHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/catalog"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/collect/list",
+				Path:    "/list",
 				Handler: collect.CollectListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/collect/addordelete",
+				Path:    "/addordelete",
 				Handler: collect.AddordeleteHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/collect"),
 	)
 
 	server.AddRoutes(
@@ -116,54 +120,56 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/order/list",
+				Path:    "/list",
 				Handler: order.OrderListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/order/cancel",
+				Path:    "/cancel",
 				Handler: order.OrderCancelHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/order/refund",
+				Path:    "/refund",
 				Handler: order.OrderRefundHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/order/confirm",
+				Path:    "/confirm",
 				Handler: order.OrderConfirmHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/order/delete",
+				Path:    "/delete",
 				Handler: order.OrderDeleteHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/order/goods",
+				Path:    "/goods",
 				Handler: order.OrderGoodsHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/order/comment",
+				Path:    "/comment",
 				Handler: order.OrderCommentHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/order"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/goods/detail",
+				Path:    "/detail",
 				Handler: product.GoodsDetailHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/goods/category",
+				Path:    "/category",
 				Handler: product.GoodsCategoryHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/goods"),
 	)
 }

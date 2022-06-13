@@ -34,12 +34,13 @@ type RegisterReq struct {
 
 @server(
     group: auth
+    prefix: /api/auth
 )
 service front-api {
 
     @handler Login
-    get /api/auth/login (LoginReq) returns (LoginAndRegisterResp)
+    get /login (LoginReq) returns (LoginAndRegisterResp)
 
     @handler Register
-    get /api/auth/register (RegisterReq) returns (LoginAndRegisterResp)
+    get /register (RegisterReq) returns (LoginAndRegisterResp)
 }

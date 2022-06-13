@@ -93,12 +93,13 @@ type GoodsCategoryReq struct {
 @server(
 //    jwt: Auth
     group: product
+    prefix: /api/goods
 )
 service front-api {
 
     @handler GoodsDetail
-    get /api/goods/detail (GoodsDetailReq) returns (GoodsDetailResp)
+    get /detail (GoodsDetailReq) returns (GoodsDetailResp)
 
     @handler GoodsCategory
-    get /api/goods/category (GoodsCategoryReq) returns (GoodsDetailResp)
+    get /category (GoodsCategoryReq) returns (GoodsDetailResp)
 }

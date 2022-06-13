@@ -31,12 +31,13 @@ type SecondCategoryReq struct {
 
 @server(
     group: category
+    prefix: /api/catalog
 )
 service front-api {
 
     @handler GetFirstCategory
-    get /api/catalog/getfirstcategory returns (CategoryResp)
+    get /getfirstcategory returns (CategoryResp)
 
     @handler GetSecondCategory
-    get /api/catalog/getsecondcategory (SecondCategoryReq) returns (CategoryResp)
+    get /getsecondcategory (SecondCategoryReq) returns (CategoryResp)
 }

@@ -100,26 +100,27 @@ type OrderCommentResp struct {
 @server(
     //    jwt: Auth
     group: order
+    prefix: /api/order
 )
 service front-api {
     @handler OrderList
-    get /api/order/list (OrderListReq) returns (OrderListResp)
+    get /list (OrderListReq) returns (OrderListResp)
 
     @handler OrderCancel
-    get /api/order/cancel (OrderCancelReq) returns (OrderCancelResp)
+    get /cancel (OrderCancelReq) returns (OrderCancelResp)
 
     @handler OrderRefund
-    get /api/order/refund (OrderRefundReq) returns (OrderRefundResp)
+    get /refund (OrderRefundReq) returns (OrderRefundResp)
 
     @handler OrderConfirm
-    get /api/order/confirm (OrderConfirmReq) returns (OrderConfirmResp)
+    get /confirm (OrderConfirmReq) returns (OrderConfirmResp)
 
     @handler OrderDelete
-    get /api/order/delete (OrderDeleteReq) returns (OrderDeleteResp)
+    get /delete (OrderDeleteReq) returns (OrderDeleteResp)
 
     @handler OrderGoods
-    get /api/order/goods (OrderGoodsReq) returns (OrderGoodsResp)
+    get /goods (OrderGoodsReq) returns (OrderGoodsResp)
 
     @handler OrderComment
-    get /api/order/comment (OrderCommentReq) returns (OrderCommentResp)
+    get /comment (OrderCommentReq) returns (OrderCommentResp)
 }

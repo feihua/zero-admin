@@ -174,28 +174,29 @@ type CartUpdateResp struct {
 @server(
 //    jwt: Auth
     group: cart
+    prefix: /api/cart
 )
 service front-api {
 
     @handler CartList
-    get /api/cart/index/:userId (CartListReq) returns (CartListResp)
+    get /index/:userId (CartListReq) returns (CartListResp)
 
     @handler CartAdd
-    get /api/cart/add (CartAddReq) returns (CartAddResp)
+    get /add (CartAddReq) returns (CartAddResp)
 
     @handler CartFastAdd
-    get /api/cart/fastadd (CartFastAddReq) returns (CartFastAddResp)
+    get /fastadd (CartFastAddReq) returns (CartFastAddResp)
 
     @handler CartChecked
-    get /api/cart/checked (CartCheckedReq) returns (CartListResp)
+    get /checked (CartCheckedReq) returns (CartListResp)
 
     @handler CartCheckOut
-    get /api/cart/checkout (CartCheckOutReq) returns (CartCheckOutResp)
+    get /checkout (CartCheckOutReq) returns (CartCheckOutResp)
 
     @handler CartDelete
-    get /api/cart/delete (CartDeleteReq) returns (CartListResp)
+    get /delete (CartDeleteReq) returns (CartListResp)
 
     @handler CartUpdate
-    get /api/cart/update (CartUpdateReq) returns (CartUpdateResp)
+    get /update (CartUpdateReq) returns (CartUpdateResp)
 
 }

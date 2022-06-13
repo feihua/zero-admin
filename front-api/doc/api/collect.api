@@ -41,13 +41,14 @@ type AddOrDeleteResp struct {
 @server(
 //    jwt: Auth
     group: collect
+    prefix: /api/collect
 )
 service front-api {
 
     @handler CollectList
-    get /api/collect/list (CollectListReq) returns (CollectListResp)
+    get /list (CollectListReq) returns (CollectListResp)
 
     @handler Addordelete
-    get /api/collect/addordelete (AddOrDeleteReq) returns (AddOrDeleteResp)
+    get /addordelete (AddOrDeleteReq) returns (AddOrDeleteResp)
 
 }

@@ -103,17 +103,18 @@ type AddressDetailData struct {
 @server(
     //    jwt: Auth
     group: address
+    prefix: /api/address
 )
 service front-api {
     @handler AddressList
-    get /api/address/list (AddressListReq) returns (AddressListResp)
+    get /list (AddressListReq) returns (AddressListResp)
 
     @handler AddressSave
-    get /api/address/save (AddressSaveReq) returns (AddressSaveResp)
+    get /save (AddressSaveReq) returns (AddressSaveResp)
 
     @handler AddressDelete
-    get /api/address/delete (AddressDeleteReq) returns (AddressDeleteResp)
+    get /delete (AddressDeleteReq) returns (AddressDeleteResp)
 
     @handler AddressDetail
-    get /api/address/detail (AddressDetailReq) returns (AddressDetailResp)
+    get /detail (AddressDetailReq) returns (AddressDetailResp)
 }
