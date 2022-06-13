@@ -26,7 +26,7 @@ type CategoryData struct {
 }
 
 type SecondCategoryReq struct {
-    Id  int64   `json:"id"`
+    Id  int64   `form:"id"`
 }
 
 @server(
