@@ -272,6 +272,16 @@ func (s *PmsServer) ProductCategoryList(ctx context.Context, in *pmsclient.Produ
 	return l.ProductCategoryList(in)
 }
 
+func (s *PmsServer) ProductCategoryFirstList(ctx context.Context, in *pmsclient.ProductCategoryFirstListReq) (*pmsclient.ProductCategoryListResp, error) {
+	l := logic.NewProductCategoryFirstListLogic(ctx, s.svcCtx)
+	return l.ProductCategoryFirstList(in)
+}
+
+func (s *PmsServer) ProductCategorySecondList(ctx context.Context, in *pmsclient.ProductCategorySecondListReq) (*pmsclient.ProductCategoryListResp, error) {
+	l := logic.NewProductCategorySecondListLogic(ctx, s.svcCtx)
+	return l.ProductCategorySecondList(in)
+}
+
 func (s *PmsServer) ProductCategoryUpdate(ctx context.Context, in *pmsclient.ProductCategoryUpdateReq) (*pmsclient.ProductCategoryUpdateResp, error) {
 	l := logic.NewProductCategoryUpdateLogic(ctx, s.svcCtx)
 	return l.ProductCategoryUpdate(in)

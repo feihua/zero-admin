@@ -67,6 +67,21 @@ func (m *PmsProductCategoryModel) FindOne(id int64) (*PmsProductCategory, error)
 	}
 }
 
+func (m *PmsProductCategoryModel) FindByParentId(parentId int64) (*[]PmsProductCategory, error) {
+
+	query := fmt.Sprintf("select %s from %s  where parent_id = ?", pmsProductCategoryRows, m.table)
+	var resp []PmsProductCategory
+	err := m.conn.QueryRows(&resp, query, parentId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsProductCategoryModel) FindAll(Current int64, PageSize int64) (*[]PmsProductCategory, error) {
 
 	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductCategoryRows, m.table)

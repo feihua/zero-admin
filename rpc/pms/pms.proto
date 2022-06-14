@@ -811,6 +811,14 @@ message ProductCategoryListReq {
   int64 pageSize = 2;
 }
 
+message ProductCategoryFirstListReq {
+  int64 ParentId = 1;
+}
+
+message ProductCategorySecondListReq {
+  int64 ParentId = 1;
+}
+
 message ProductCategoryListData{
   int64  	Id         = 1;
   int64  	ParentId    = 2;
@@ -1214,6 +1222,8 @@ service Pms {
 
   rpc ProductCategoryAdd(ProductCategoryAddReq) returns(ProductCategoryAddResp);
   rpc ProductCategoryList(ProductCategoryListReq) returns(ProductCategoryListResp);
+  rpc ProductCategoryFirstList(ProductCategoryFirstListReq) returns(ProductCategoryListResp);
+  rpc ProductCategorySecondList(ProductCategorySecondListReq) returns(ProductCategoryListResp);
   rpc ProductCategoryUpdate(ProductCategoryUpdateReq) returns(ProductCategoryUpdateResp);
   rpc ProductCategoryDelete(ProductCategoryDeleteReq) returns(ProductCategoryDeleteResp);
 
