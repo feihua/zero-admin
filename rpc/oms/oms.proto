@@ -170,6 +170,89 @@ message OrderDeleteResp {
   string pong = 1;
 }
 
+message OrderListByMemberIdReq {
+  int64 MemberId = 1;
+}
+
+message OrderListByMemberIdData{
+  int64       Id = 1;
+  int64       MemberId = 2;
+  int64       CouponId = 3;
+  string      OrderSn = 4;
+  string   CreateTime = 5;
+  string      MemberUsername = 6;
+  double     TotalAmount = 7;
+  double     PayAmount = 8;
+  double     FreightAmount = 9;
+  double     PromotionAmount = 10;
+  double     IntegrationAmount = 11;
+  double     CouponAmount = 12;
+  double     DiscountAmount = 13;
+  int64       PayType = 14;
+  int64       SourceType = 15;
+  int64       Status = 16;
+  int64       OrderType = 17;
+  string      DeliveryCompany = 18;
+  string      DeliverySn = 19;
+  int64       AutoConfirmDay = 20;
+  int64       Integration = 21;
+  int64       Growth = 22;
+  string      PromotionInfo = 23;
+  int64       BillType = 24;
+  string      BillHeader = 25;
+  string      BillContent = 26;
+  string      BillReceiverPhone = 27;
+  string      BillReceiverEmail = 28;
+  string      ReceiverName = 29;
+  string      ReceiverPhone = 30;
+  string      ReceiverPostCode = 31;
+  string      ReceiverProvince = 32;
+  string      ReceiverCity = 33;
+  string      ReceiverRegion = 34;
+  string      ReceiverDetailAddress = 35;
+  string      Note = 36;
+  int64       ConfirmStatus = 37;
+  int64       DeleteStatus = 38;
+  int64       UseIntegration = 39;
+  string   PaymentTime = 40;
+  string   DeliveryTime = 41;
+  string   ReceiveTime = 42;
+  string   CommentTime = 43;
+  string   ModifyTime = 44;
+}
+
+message OrderListByMemberIdResp {
+  int64 total = 1;
+  repeated  OrderListByMemberIdData list = 2;
+}
+
+message OrderCancelReq {
+  int64       Id = 1;
+  int64       MemberId = 2;
+}
+
+message OrderCancelResp {
+  string pong = 1;
+}
+
+message OrderConfirmReq {
+  int64       Id = 1;
+  int64       MemberId = 2;
+}
+
+message OrderConfirmResp {
+  string pong = 1;
+}
+
+message OrderRefundReq {
+  int64       Id = 1;
+  int64       MemberId = 2;
+}
+
+message OrderRefundResp {
+  string pong = 1;
+}
+
 message CartItemAddReq {
   int64     	ProductId   = 2;
   int64     	ProductSkuId   = 3;
@@ -416,6 +499,30 @@ message OrderItemDeleteReq {
 }
 
 message OrderItemDeleteResp {
+  string pong = 1;
+}
+
+message OrderItemCheckedReq {
+  int64 id = 1;
+}
+
+message OrderItemCheckedResp {
+  string pong = 1;
+}
+
+message OrderItemCheckOutReq {
+  int64 id = 1;
+}
+
+message OrderItemCheckOutResp {
+  string pong = 1;
+}
+
+message OrderItemFastAddReq {
+  int64 id = 1;
+}
+
+message OrderItemFastAddResp {
   string pong = 1;
 }
 
@@ -693,6 +800,10 @@ service Oms {
   rpc OrderList(OrderListReq) returns(OrderListResp);
   rpc OrderUpdate(OrderUpdateReq) returns(OrderUpdateResp);
   rpc OrderDelete(OrderDeleteReq) returns(OrderDeleteResp);
+  rpc OrderListByMemberId(OrderListByMemberIdReq) returns(OrderListByMemberIdResp);
+  rpc OrderCancel(OrderCancelReq) returns(OrderCancelResp);
+  rpc OrderConfirm(OrderConfirmReq) returns(OrderConfirmResp);
+  rpc OrderRefund(OrderRefundReq) returns(OrderRefundResp);
 
   rpc CartItemAdd(CartItemAddReq) returns(CartItemAddResp);
   rpc CartItemList(CartItemListReq) returns(CartItemListResp);
@@ -708,6 +819,9 @@ service Oms {
   rpc OrderItemList(OrderItemListReq) returns(OrderItemListResp);
   rpc OrderItemUpdate(OrderItemUpdateReq) returns(OrderItemUpdateResp);
   rpc OrderItemDelete(OrderItemDeleteReq) returns(OrderItemDeleteResp);
+  rpc OrderItemChecked(OrderItemCheckedReq) returns(OrderItemCheckedResp);
+  rpc OrderItemCheckOut(OrderItemCheckOutReq) returns(OrderItemCheckOutResp);
+  rpc OrderItemFastAdd(OrderItemFastAddReq) returns(OrderItemFastAddResp);
 
   rpc OrderOperateHistoryAdd(OrderOperateHistoryAddReq) returns(OrderOperateHistoryAddResp);
   rpc OrderOperateHistoryList(OrderOperateHistoryListReq) returns(OrderOperateHistoryListResp);

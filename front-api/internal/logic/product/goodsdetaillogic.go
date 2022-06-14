@@ -2,9 +2,9 @@ package product
 
 import (
 	"context"
-
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
+	"zero-admin/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +24,24 @@ func NewGoodsDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) GoodsD
 }
 
 func (l *GoodsDetailLogic) GoodsDetail(req types.GoodsDetailReq) (resp *types.GoodsDetailResp, err error) {
-	// todo: add your logic here and delete this line
+	_, _ = l.svcCtx.Pms.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
+		Id: req.Id,
+	})
 
-	return
+	data := types.GoodsDetailData{
+		SpecificationList: nil,
+		Issue:             nil,
+		UserHasCollect:    0,
+		ShareImage:        "",
+		Share:             false,
+		Attribute:         nil,
+		ProductList:       nil,
+		Info:              types.Info{},
+	}
+
+	return &types.GoodsDetailResp{
+		Errno:  0,
+		Data:   data,
+		Errmsg: "",
+	}, nil
 }

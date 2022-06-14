@@ -574,3 +574,29 @@ type ValueList struct {
 type GoodsCategoryReq struct {
 	Id int64 `form:"id"`
 }
+
+type GoodsCategoryResp struct {
+	Errno  int64             `json:"errno"`
+	Data   GoodsCategoryData `json:"data"`
+	Errmsg string            `json:"errmsg"`
+}
+
+type GoodsCategoryData struct {
+	Total int64               `json:"total"`
+	Pages int64               `json:"pages"`
+	Limit int64               `json:"limit"`
+	Page  int64               `json:"page"`
+	List  []GoodsCategoryList `json:"list"`
+}
+
+type GoodsCategoryList struct {
+	ID             int64    `json:"id"`
+	GoodsID        int64    `json:"goodsId"`
+	Specifications []string `json:"specifications"`
+	Price          int64    `json:"price"`
+	Number         int64    `json:"number"`
+	URL            string   `json:"url"`
+	AddTime        string   `json:"addTime"`
+	UpdateTime     string   `json:"updateTime"`
+	Deleted        bool     `json:"deleted"`
+}

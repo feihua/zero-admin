@@ -67,6 +67,8 @@ type (
 	FeightTemplateListResp                     = pmsclient.FeightTemplateListResp
 	FeightTemplateUpdateReq                    = pmsclient.FeightTemplateUpdateReq
 	FeightTemplateUpdateResp                   = pmsclient.FeightTemplateUpdateResp
+	HomeIndexReq                               = pmsclient.HomeIndexReq
+	HomeIndexResp                              = pmsclient.HomeIndexResp
 	MemberPriceAddReq                          = pmsclient.MemberPriceAddReq
 	MemberPriceAddResp                         = pmsclient.MemberPriceAddResp
 	MemberPriceDeleteReq                       = pmsclient.MemberPriceDeleteReq
@@ -127,6 +129,8 @@ type (
 	ProductCategoryUpdateResp                  = pmsclient.ProductCategoryUpdateResp
 	ProductDeleteReq                           = pmsclient.ProductDeleteReq
 	ProductDeleteResp                          = pmsclient.ProductDeleteResp
+	ProductDetailByIdReq                       = pmsclient.ProductDetailByIdReq
+	ProductDetailByIdResp                      = pmsclient.ProductDetailByIdResp
 	ProductFullReductionAddReq                 = pmsclient.ProductFullReductionAddReq
 	ProductFullReductionAddResp                = pmsclient.ProductFullReductionAddResp
 	ProductFullReductionDeleteReq              = pmsclient.ProductFullReductionDeleteReq
@@ -145,6 +149,9 @@ type (
 	ProductLadderListResp                      = pmsclient.ProductLadderListResp
 	ProductLadderUpdateReq                     = pmsclient.ProductLadderUpdateReq
 	ProductLadderUpdateResp                    = pmsclient.ProductLadderUpdateResp
+	ProductListByCategoryIdData                = pmsclient.ProductListByCategoryIdData
+	ProductListByCategoryIdReq                 = pmsclient.ProductListByCategoryIdReq
+	ProductListByCategoryIdResp                = pmsclient.ProductListByCategoryIdResp
 	ProductListData                            = pmsclient.ProductListData
 	ProductListReq                             = pmsclient.ProductListReq
 	ProductListResp                            = pmsclient.ProductListResp
@@ -179,10 +186,13 @@ type (
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
 
 	Pms interface {
+		HomeIndex(ctx context.Context, in *HomeIndexReq, opts ...grpc.CallOption) (*HomeIndexResp, error)
 		ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error)
 		ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error)
 		ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
 		ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
+		ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
+		ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error)
 		AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error)
 		AlbumList(ctx context.Context, in *AlbumListReq, opts ...grpc.CallOption) (*AlbumListResp, error)
 		AlbumUpdate(ctx context.Context, in *AlbumUpdateReq, opts ...grpc.CallOption) (*AlbumUpdateResp, error)
@@ -266,6 +276,11 @@ func NewPms(cli zrpc.Client) Pms {
 	}
 }
 
+func (m *defaultPms) HomeIndex(ctx context.Context, in *HomeIndexReq, opts ...grpc.CallOption) (*HomeIndexResp, error) {
+	client := pmsclient.NewPmsClient(m.cli.Conn())
+	return client.HomeIndex(ctx, in, opts...)
+}
+
 func (m *defaultPms) ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error) {
 	client := pmsclient.NewPmsClient(m.cli.Conn())
 	return client.ProductAdd(ctx, in, opts...)
@@ -284,6 +299,16 @@ func (m *defaultPms) ProductUpdate(ctx context.Context, in *ProductUpdateReq, op
 func (m *defaultPms) ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error) {
 	client := pmsclient.NewPmsClient(m.cli.Conn())
 	return client.ProductDelete(ctx, in, opts...)
+}
+
+func (m *defaultPms) ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error) {
+	client := pmsclient.NewPmsClient(m.cli.Conn())
+	return client.ProductDetailById(ctx, in, opts...)
+}
+
+func (m *defaultPms) ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error) {
+	client := pmsclient.NewPmsClient(m.cli.Conn())
+	return client.ProductListByCategoryId(ctx, in, opts...)
 }
 
 func (m *defaultPms) AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error) {

@@ -22,6 +22,11 @@ func NewPmsServer(svcCtx *svc.ServiceContext) *PmsServer {
 	}
 }
 
+func (s *PmsServer) HomeIndex(ctx context.Context, in *pmsclient.HomeIndexReq) (*pmsclient.HomeIndexResp, error) {
+	l := logic.NewHomeIndexLogic(ctx, s.svcCtx)
+	return l.HomeIndex(in)
+}
+
 func (s *PmsServer) ProductAdd(ctx context.Context, in *pmsclient.ProductAddReq) (*pmsclient.ProductAddResp, error) {
 	l := logic.NewProductAddLogic(ctx, s.svcCtx)
 	return l.ProductAdd(in)
@@ -40,6 +45,16 @@ func (s *PmsServer) ProductUpdate(ctx context.Context, in *pmsclient.ProductUpda
 func (s *PmsServer) ProductDelete(ctx context.Context, in *pmsclient.ProductDeleteReq) (*pmsclient.ProductDeleteResp, error) {
 	l := logic.NewProductDeleteLogic(ctx, s.svcCtx)
 	return l.ProductDelete(in)
+}
+
+func (s *PmsServer) ProductDetailById(ctx context.Context, in *pmsclient.ProductDetailByIdReq) (*pmsclient.ProductDetailByIdResp, error) {
+	l := logic.NewProductDetailByIdLogic(ctx, s.svcCtx)
+	return l.ProductDetailById(in)
+}
+
+func (s *PmsServer) ProductListByCategoryId(ctx context.Context, in *pmsclient.ProductListByCategoryIdReq) (*pmsclient.ProductListByCategoryIdResp, error) {
+	l := logic.NewProductListByCategoryIdLogic(ctx, s.svcCtx)
+	return l.ProductListByCategoryId(in)
 }
 
 func (s *PmsServer) AlbumAdd(ctx context.Context, in *pmsclient.AlbumAddReq) (*pmsclient.AlbumAddResp, error) {

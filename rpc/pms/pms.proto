@@ -4,6 +4,14 @@ package pmsclient;
 
 option go_package = "./pmsclient";
 
+message HomeIndexReq {
+
+}
+
+message HomeIndexResp {
+  string pong = 1;
+}
+
 message ProductAddReq {
   int64       BrandId = 2;
   int64       ProductCategoryId = 3;
@@ -162,6 +170,110 @@ message ProductDeleteReq {
 
 message ProductDeleteResp {
   string pong = 1;
+}
+
+message ProductDetailByIdReq {
+  int64 id = 1;
+}
+
+message ProductDetailByIdResp{
+  int64       Id = 1;
+  int64       BrandId = 2;
+  int64       ProductCategoryId = 3;
+  int64       FeightTemplateId = 4;
+  int64       ProductAttributeCategoryId = 5;
+  string      Name = 6;
+  string      Pic = 7;
+  string      ProductSn = 8;
+  int64       DeleteStatus = 9;
+  int64       PublishStatus = 10;
+  int64       NewStatus = 11;
+  int64       RecommandStatus = 12;
+  int64       VerifyStatus = 13;
+  int64       Sort = 14;
+  int64       Sale = 15;
+  double     Price = 16;
+  double     PromotionPrice = 17;
+  int64       GiftGrowth = 18;
+  int64       GiftPoint = 19;
+  int64       UsePointLimit = 20;
+  string      SubTitle = 21;
+  string      Description = 22;
+  double     OriginalPrice = 23;
+  int64       Stock = 24;
+  int64       LowStock = 25;
+  string      Unit = 26;
+  double     Weight = 27;
+  int64       PreviewStatus = 28;
+  string      ServiceIds = 29;
+  string      Keywords = 30;
+  string      Note = 31;
+  string      AlbumPics = 32;
+  string      DetailTitle = 33;
+  string      DetailDesc = 34;
+  string      DetailHtml = 35;
+  string      DetailMobileHtml = 36;
+  string   PromotionStartTime = 37;
+  string   PromotionEndTime = 38;
+  int64       PromotionPerLimit = 39;
+  int64       PromotionType = 40;
+  string      BrandName = 41;
+  string      ProductCategoryName = 42;
+}
+
+
+message ProductListByCategoryIdReq {
+  int64 ProductCategoryId = 1;
+}
+
+message ProductListByCategoryIdData{
+  int64       Id = 1;
+  int64       BrandId = 2;
+  int64       ProductCategoryId = 3;
+  int64       FeightTemplateId = 4;
+  int64       ProductAttributeCategoryId = 5;
+  string      Name = 6;
+  string      Pic = 7;
+  string      ProductSn = 8;
+  int64       DeleteStatus = 9;
+  int64       PublishStatus = 10;
+  int64       NewStatus = 11;
+  int64       RecommandStatus = 12;
+  int64       VerifyStatus = 13;
+  int64       Sort = 14;
+  int64       Sale = 15;
+  double     Price = 16;
+  double     PromotionPrice = 17;
+  int64       GiftGrowth = 18;
+  int64       GiftPoint = 19;
+  int64       UsePointLimit = 20;
+  string      SubTitle = 21;
+  string      Description = 22;
+  double     OriginalPrice = 23;
+  int64       Stock = 24;
+  int64       LowStock = 25;
+  string      Unit = 26;
+  double     Weight = 27;
+  int64       PreviewStatus = 28;
+  string      ServiceIds = 29;
+  string      Keywords = 30;
+  string      Note = 31;
+  string      AlbumPics = 32;
+  string      DetailTitle = 33;
+  string      DetailDesc = 34;
+  string      DetailHtml = 35;
+  string      DetailMobileHtml = 36;
+  string   PromotionStartTime = 37;
+  string   PromotionEndTime = 38;
+  int64       PromotionPerLimit = 39;
+  int64       PromotionType = 40;
+  string      BrandName = 41;
+  string      ProductCategoryName = 42;
+}
+
+message ProductListByCategoryIdResp {
+  int64 total = 1;
+  repeated  ProductListByCategoryIdData list = 2;
 }
 
 message AlbumAddReq {
@@ -1160,10 +1272,14 @@ message SkuStockDeleteResp {
 }
 
 service Pms {
+
+  rpc HomeIndex(HomeIndexReq) returns(HomeIndexResp);
   rpc ProductAdd(ProductAddReq) returns(ProductAddResp);
   rpc ProductList(ProductListReq) returns(ProductListResp);
   rpc ProductUpdate(ProductUpdateReq) returns(ProductUpdateResp);
   rpc ProductDelete(ProductDeleteReq) returns(ProductDeleteResp);
+  rpc ProductDetailById(ProductDetailByIdReq) returns(ProductDetailByIdResp);
+  rpc ProductListByCategoryId(ProductListByCategoryIdReq) returns(ProductListByCategoryIdResp);
 
   rpc AlbumAdd(AlbumAddReq) returns(AlbumAddResp);
   rpc AlbumList(AlbumListReq) returns(AlbumListResp);

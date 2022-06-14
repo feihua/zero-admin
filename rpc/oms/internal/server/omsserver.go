@@ -42,6 +42,26 @@ func (s *OmsServer) OrderDelete(ctx context.Context, in *omsclient.OrderDeleteRe
 	return l.OrderDelete(in)
 }
 
+func (s *OmsServer) OrderListByMemberId(ctx context.Context, in *omsclient.OrderListByMemberIdReq) (*omsclient.OrderListByMemberIdResp, error) {
+	l := logic.NewOrderListByMemberIdLogic(ctx, s.svcCtx)
+	return l.OrderListByMemberId(in)
+}
+
+func (s *OmsServer) OrderCancel(ctx context.Context, in *omsclient.OrderCancelReq) (*omsclient.OrderCancelResp, error) {
+	l := logic.NewOrderCancelLogic(ctx, s.svcCtx)
+	return l.OrderCancel(in)
+}
+
+func (s *OmsServer) OrderConfirm(ctx context.Context, in *omsclient.OrderConfirmReq) (*omsclient.OrderConfirmResp, error) {
+	l := logic.NewOrderConfirmLogic(ctx, s.svcCtx)
+	return l.OrderConfirm(in)
+}
+
+func (s *OmsServer) OrderRefund(ctx context.Context, in *omsclient.OrderRefundReq) (*omsclient.OrderRefundResp, error) {
+	l := logic.NewOrderRefundLogic(ctx, s.svcCtx)
+	return l.OrderRefund(in)
+}
+
 func (s *OmsServer) CartItemAdd(ctx context.Context, in *omsclient.CartItemAddReq) (*omsclient.CartItemAddResp, error) {
 	l := logic.NewCartItemAddLogic(ctx, s.svcCtx)
 	return l.CartItemAdd(in)
@@ -100,6 +120,21 @@ func (s *OmsServer) OrderItemUpdate(ctx context.Context, in *omsclient.OrderItem
 func (s *OmsServer) OrderItemDelete(ctx context.Context, in *omsclient.OrderItemDeleteReq) (*omsclient.OrderItemDeleteResp, error) {
 	l := logic.NewOrderItemDeleteLogic(ctx, s.svcCtx)
 	return l.OrderItemDelete(in)
+}
+
+func (s *OmsServer) OrderItemChecked(ctx context.Context, in *omsclient.OrderItemCheckedReq) (*omsclient.OrderItemCheckedResp, error) {
+	l := logic.NewOrderItemCheckedLogic(ctx, s.svcCtx)
+	return l.OrderItemChecked(in)
+}
+
+func (s *OmsServer) OrderItemCheckOut(ctx context.Context, in *omsclient.OrderItemCheckOutReq) (*omsclient.OrderItemCheckOutResp, error) {
+	l := logic.NewOrderItemCheckOutLogic(ctx, s.svcCtx)
+	return l.OrderItemCheckOut(in)
+}
+
+func (s *OmsServer) OrderItemFastAdd(ctx context.Context, in *omsclient.OrderItemFastAddReq) (*omsclient.OrderItemFastAddResp, error) {
+	l := logic.NewOrderItemFastAddLogic(ctx, s.svcCtx)
+	return l.OrderItemFastAdd(in)
 }
 
 func (s *OmsServer) OrderOperateHistoryAdd(ctx context.Context, in *omsclient.OrderOperateHistoryAddReq) (*omsclient.OrderOperateHistoryAddResp, error) {

@@ -18,10 +18,13 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PmsClient interface {
+	HomeIndex(ctx context.Context, in *HomeIndexReq, opts ...grpc.CallOption) (*HomeIndexResp, error)
 	ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error)
 	ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error)
 	ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
 	ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
+	ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
+	ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error)
 	AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error)
 	AlbumList(ctx context.Context, in *AlbumListReq, opts ...grpc.CallOption) (*AlbumListResp, error)
 	AlbumUpdate(ctx context.Context, in *AlbumUpdateReq, opts ...grpc.CallOption) (*AlbumUpdateResp, error)
@@ -102,6 +105,15 @@ func NewPmsClient(cc grpc.ClientConnInterface) PmsClient {
 	return &pmsClient{cc}
 }
 
+func (c *pmsClient) HomeIndex(ctx context.Context, in *HomeIndexReq, opts ...grpc.CallOption) (*HomeIndexResp, error) {
+	out := new(HomeIndexResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.Pms/HomeIndex", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *pmsClient) ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error) {
 	out := new(ProductAddResp)
 	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAdd", in, out, opts...)
@@ -132,6 +144,24 @@ func (c *pmsClient) ProductUpdate(ctx context.Context, in *ProductUpdateReq, opt
 func (c *pmsClient) ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error) {
 	out := new(ProductDeleteResp)
 	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pmsClient) ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error) {
+	out := new(ProductDetailByIdResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductDetailById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pmsClient) ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error) {
+	out := new(ProductListByCategoryIdResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductListByCategoryId", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -772,10 +802,13 @@ func (c *pmsClient) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, o
 // All implementations must embed UnimplementedPmsServer
 // for forward compatibility
 type PmsServer interface {
+	HomeIndex(context.Context, *HomeIndexReq) (*HomeIndexResp, error)
 	ProductAdd(context.Context, *ProductAddReq) (*ProductAddResp, error)
 	ProductList(context.Context, *ProductListReq) (*ProductListResp, error)
 	ProductUpdate(context.Context, *ProductUpdateReq) (*ProductUpdateResp, error)
 	ProductDelete(context.Context, *ProductDeleteReq) (*ProductDeleteResp, error)
+	ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error)
+	ProductListByCategoryId(context.Context, *ProductListByCategoryIdReq) (*ProductListByCategoryIdResp, error)
 	AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error)
 	AlbumList(context.Context, *AlbumListReq) (*AlbumListResp, error)
 	AlbumUpdate(context.Context, *AlbumUpdateReq) (*AlbumUpdateResp, error)
@@ -853,6 +886,9 @@ type PmsServer interface {
 type UnimplementedPmsServer struct {
 }
 
+func (UnimplementedPmsServer) HomeIndex(context.Context, *HomeIndexReq) (*HomeIndexResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeIndex not implemented")
+}
 func (UnimplementedPmsServer) ProductAdd(context.Context, *ProductAddReq) (*ProductAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductAdd not implemented")
 }
@@ -864,6 +900,12 @@ func (UnimplementedPmsServer) ProductUpdate(context.Context, *ProductUpdateReq) 
 }
 func (UnimplementedPmsServer) ProductDelete(context.Context, *ProductDeleteReq) (*ProductDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductDelete not implemented")
+}
+func (UnimplementedPmsServer) ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductDetailById not implemented")
+}
+func (UnimplementedPmsServer) ProductListByCategoryId(context.Context, *ProductListByCategoryIdReq) (*ProductListByCategoryIdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductListByCategoryId not implemented")
 }
 func (UnimplementedPmsServer) AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AlbumAdd not implemented")
@@ -1088,6 +1130,24 @@ func RegisterPmsServer(s grpc.ServiceRegistrar, srv PmsServer) {
 	s.RegisterService(&Pms_ServiceDesc, srv)
 }
 
+func _Pms_HomeIndex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeIndexReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PmsServer).HomeIndex(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pmsclient.Pms/HomeIndex",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PmsServer).HomeIndex(ctx, req.(*HomeIndexReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Pms_ProductAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAddReq)
 	if err := dec(in); err != nil {
@@ -1156,6 +1216,42 @@ func _Pms_ProductDelete_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PmsServer).ProductDelete(ctx, req.(*ProductDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pms_ProductDetailById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductDetailByIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PmsServer).ProductDetailById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pmsclient.Pms/ProductDetailById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PmsServer).ProductDetailById(ctx, req.(*ProductDetailByIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pms_ProductListByCategoryId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductListByCategoryIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PmsServer).ProductListByCategoryId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pmsclient.Pms/ProductListByCategoryId",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PmsServer).ProductListByCategoryId(ctx, req.(*ProductListByCategoryIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2428,6 +2524,10 @@ var Pms_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PmsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "HomeIndex",
+			Handler:    _Pms_HomeIndex_Handler,
+		},
+		{
 			MethodName: "ProductAdd",
 			Handler:    _Pms_ProductAdd_Handler,
 		},
@@ -2442,6 +2542,14 @@ var Pms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductDelete",
 			Handler:    _Pms_ProductDelete_Handler,
+		},
+		{
+			MethodName: "ProductDetailById",
+			Handler:    _Pms_ProductDetailById_Handler,
+		},
+		{
+			MethodName: "ProductListByCategoryId",
+			Handler:    _Pms_ProductListByCategoryId_Handler,
 		},
 		{
 			MethodName: "AlbumAdd",
