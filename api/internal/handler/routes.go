@@ -1074,11 +1074,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/add",
-					Handler: membermember.MemberAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
 					Path:    "/list",
 					Handler: membermember.MemberListHandler(serverCtx),
 				},
