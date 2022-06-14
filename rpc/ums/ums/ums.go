@@ -65,6 +65,8 @@ type (
 	MemberLoginLogListResp                  = umsclient.MemberLoginLogListResp
 	MemberLoginLogUpdateReq                 = umsclient.MemberLoginLogUpdateReq
 	MemberLoginLogUpdateResp                = umsclient.MemberLoginLogUpdateResp
+	MemberLoginReq                          = umsclient.MemberLoginReq
+	MemberLoginResp                         = umsclient.MemberLoginResp
 	MemberMemberTagRelationAddReq           = umsclient.MemberMemberTagRelationAddReq
 	MemberMemberTagRelationAddResp          = umsclient.MemberMemberTagRelationAddResp
 	MemberMemberTagRelationDeleteReq        = umsclient.MemberMemberTagRelationDeleteReq
@@ -133,6 +135,7 @@ type (
 
 	Ums interface {
 		MemberAdd(ctx context.Context, in *MemberAddReq, opts ...grpc.CallOption) (*MemberAddResp, error)
+		MemberLogin(ctx context.Context, in *MemberLoginReq, opts ...grpc.CallOption) (*MemberLoginResp, error)
 		MemberList(ctx context.Context, in *MemberListReq, opts ...grpc.CallOption) (*MemberListResp, error)
 		MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts ...grpc.CallOption) (*MemberUpdateResp, error)
 		MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error)
@@ -200,6 +203,11 @@ func NewUms(cli zrpc.Client) Ums {
 func (m *defaultUms) MemberAdd(ctx context.Context, in *MemberAddReq, opts ...grpc.CallOption) (*MemberAddResp, error) {
 	client := umsclient.NewUmsClient(m.cli.Conn())
 	return client.MemberAdd(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberLogin(ctx context.Context, in *MemberLoginReq, opts ...grpc.CallOption) (*MemberLoginResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberLogin(ctx, in, opts...)
 }
 
 func (m *defaultUms) MemberList(ctx context.Context, in *MemberListReq, opts ...grpc.CallOption) (*MemberListResp, error) {

@@ -7,7 +7,7 @@ import (
 )
 
 type ServiceContext struct {
-	c config.Config
+	Config config.Config
 
 	UmsGrowthChangeHistoryModel           *umsmodel.UmsGrowthChangeHistoryModel
 	UmsIntegrationChangeHistoryModel      *umsmodel.UmsIntegrationChangeHistoryModel
@@ -28,7 +28,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
 	return &ServiceContext{
-		c: c,
+		Config: c,
 
 		UmsGrowthChangeHistoryModel:           umsmodel.NewUmsGrowthChangeHistoryModel(sqlConn),
 		UmsIntegrationChangeHistoryModel:      umsmodel.NewUmsIntegrationChangeHistoryModel(sqlConn),

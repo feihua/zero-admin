@@ -5,28 +5,27 @@ package umsclient;
 option go_package = "./umsclient";
 
 message MemberAddReq {
-  int64       MemberLevelId = 2;
-  string      Username = 3;
-  string      Password = 4;
-  string      Nickname = 5;
-  string      Phone = 6;
-  int64       Status = 7;
-  string      CreateTime = 8;
-  string      Icon = 9;
-  int64       Gender = 10;
-  string      Birthday = 11;
-  string      City = 12;
-  string      Job = 13;
-  string      PersonalizedSignature = 14;
-  int64       SourceType = 15;
-  int64       Integration = 16;
-  int64       Growth = 17;
-  int64       LuckeyCount = 18;
-  int64       HistoryIntegration = 19;
+  string      Username = 1;
+  string      Password = 2;
+  string      Phone = 3;
 }
 
 message MemberAddResp {
-  string pong = 1;
+  string Nickname = 1;
+  string Token = 2;
+  string Icon = 3;
+}
+
+message MemberLoginReq {
+  string      Username = 1;
+  string      Password = 2;
+  string      Phone = 3;
+}
+
+message MemberLoginResp {
+  string Nickname = 1;
+  string Token = 2;
+  string Icon = 3;
 }
 
 message MemberListReq {
@@ -778,6 +777,7 @@ message MemberTaskDeleteResp {
 service Ums {
 
   rpc MemberAdd(MemberAddReq) returns(MemberAddResp);
+  rpc MemberLogin(MemberLoginReq) returns(MemberLoginResp);
   rpc MemberList(MemberListReq) returns(MemberListResp);
   rpc MemberUpdate(MemberUpdateReq) returns(MemberUpdateResp);
   rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);

@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,24 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) LoginLogic {
 }
 
 func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginAndRegisterResp, err error) {
-	// todo: add your logic here and delete this line
+	memberAddResp, _ := l.svcCtx.Ums.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
+		Username: req.Username,
+		Password: req.Password,
+		Phone:    "req.Mobile",
+	})
 
-	return
+	userInfo := types.UserInfo{
+		NickName:  memberAddResp.Nickname,
+		AvatarURL: memberAddResp.Icon,
+	}
+
+	data := types.LoginAndRegisterData{
+		UserInfo: userInfo,
+		Token:    memberAddResp.Token,
+	}
+	return &types.LoginAndRegisterResp{
+		Errno:  0,
+		Data:   data,
+		Errmsg: "",
+	}, nil
 }

@@ -8,6 +8,9 @@ Etcd:
 Mysql:
   Datasource: root:123456@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
+JWT:
+  AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
+  AccessExpire: 86400
 #Log:
 #  Mode: file
 #  Path: logs/ums

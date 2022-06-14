@@ -27,6 +27,11 @@ func (s *UmsServer) MemberAdd(ctx context.Context, in *umsclient.MemberAddReq) (
 	return l.MemberAdd(in)
 }
 
+func (s *UmsServer) MemberLogin(ctx context.Context, in *umsclient.MemberLoginReq) (*umsclient.MemberLoginResp, error) {
+	l := logic.NewMemberLoginLogic(ctx, s.svcCtx)
+	return l.MemberLogin(in)
+}
+
 func (s *UmsServer) MemberList(ctx context.Context, in *umsclient.MemberListReq) (*umsclient.MemberListResp, error) {
 	l := logic.NewMemberListLogic(ctx, s.svcCtx)
 	return l.MemberList(in)
