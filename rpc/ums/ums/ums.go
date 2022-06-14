@@ -92,6 +92,8 @@ type (
 	MemberReceiveAddressListData            = umsclient.MemberReceiveAddressListData
 	MemberReceiveAddressListReq             = umsclient.MemberReceiveAddressListReq
 	MemberReceiveAddressListResp            = umsclient.MemberReceiveAddressListResp
+	MemberReceiveAddressQueryDetailReq      = umsclient.MemberReceiveAddressQueryDetailReq
+	MemberReceiveAddressQueryDetailResp     = umsclient.MemberReceiveAddressQueryDetailResp
 	MemberReceiveAddressUpdateReq           = umsclient.MemberReceiveAddressUpdateReq
 	MemberReceiveAddressUpdateResp          = umsclient.MemberReceiveAddressUpdateResp
 	MemberRuleSettingAddReq                 = umsclient.MemberRuleSettingAddReq
@@ -171,6 +173,7 @@ type (
 		MemberReceiveAddressList(ctx context.Context, in *MemberReceiveAddressListReq, opts ...grpc.CallOption) (*MemberReceiveAddressListResp, error)
 		MemberReceiveAddressUpdate(ctx context.Context, in *MemberReceiveAddressUpdateReq, opts ...grpc.CallOption) (*MemberReceiveAddressUpdateResp, error)
 		MemberReceiveAddressDelete(ctx context.Context, in *MemberReceiveAddressDeleteReq, opts ...grpc.CallOption) (*MemberReceiveAddressDeleteResp, error)
+		MemberReceiveAddressQueryDetail(ctx context.Context, in *MemberReceiveAddressQueryDetailReq, opts ...grpc.CallOption) (*MemberReceiveAddressQueryDetailResp, error)
 		MemberRuleSettingAdd(ctx context.Context, in *MemberRuleSettingAddReq, opts ...grpc.CallOption) (*MemberRuleSettingAddResp, error)
 		MemberRuleSettingList(ctx context.Context, in *MemberRuleSettingListReq, opts ...grpc.CallOption) (*MemberRuleSettingListResp, error)
 		MemberRuleSettingUpdate(ctx context.Context, in *MemberRuleSettingUpdateReq, opts ...grpc.CallOption) (*MemberRuleSettingUpdateResp, error)
@@ -383,6 +386,11 @@ func (m *defaultUms) MemberReceiveAddressUpdate(ctx context.Context, in *MemberR
 func (m *defaultUms) MemberReceiveAddressDelete(ctx context.Context, in *MemberReceiveAddressDeleteReq, opts ...grpc.CallOption) (*MemberReceiveAddressDeleteResp, error) {
 	client := umsclient.NewUmsClient(m.cli.Conn())
 	return client.MemberReceiveAddressDelete(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberReceiveAddressQueryDetail(ctx context.Context, in *MemberReceiveAddressQueryDetailReq, opts ...grpc.CallOption) (*MemberReceiveAddressQueryDetailResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberReceiveAddressQueryDetail(ctx, in, opts...)
 }
 
 func (m *defaultUms) MemberRuleSettingAdd(ctx context.Context, in *MemberRuleSettingAddReq, opts ...grpc.CallOption) (*MemberRuleSettingAddResp, error) {

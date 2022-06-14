@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	address "zero-admin/front-api/internal/handler/address"
 	auth "zero-admin/front-api/internal/handler/auth"
 	cart "zero-admin/front-api/internal/handler/cart"
 	category "zero-admin/front-api/internal/handler/category"
@@ -17,6 +18,32 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/list",
+				Handler: address.AddressListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/save",
+				Handler: address.AddressSaveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/delete",
+				Handler: address.AddressDeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/detail",
+				Handler: address.AddressDetailHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/address"),
+	)
+
 	server.AddRoutes(
 		[]rest.Route{
 			{

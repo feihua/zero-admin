@@ -207,6 +207,11 @@ func (s *UmsServer) MemberReceiveAddressDelete(ctx context.Context, in *umsclien
 	return l.MemberReceiveAddressDelete(in)
 }
 
+func (s *UmsServer) MemberReceiveAddressQueryDetail(ctx context.Context, in *umsclient.MemberReceiveAddressQueryDetailReq) (*umsclient.MemberReceiveAddressQueryDetailResp, error) {
+	l := logic.NewMemberReceiveAddressQueryDetailLogic(ctx, s.svcCtx)
+	return l.MemberReceiveAddressQueryDetail(in)
+}
+
 func (s *UmsServer) MemberRuleSettingAdd(ctx context.Context, in *umsclient.MemberRuleSettingAddReq) (*umsclient.MemberRuleSettingAddResp, error) {
 	l := logic.NewMemberRuleSettingAddLogic(ctx, s.svcCtx)
 	return l.MemberRuleSettingAdd(in)

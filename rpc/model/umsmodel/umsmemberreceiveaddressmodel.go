@@ -65,6 +65,20 @@ func (m *UmsMemberReceiveAddressModel) FindOne(id int64) (*UmsMemberReceiveAddre
 	}
 }
 
+func (m *UmsMemberReceiveAddressModel) FindByIdAndMemberId(id int64, memberId int64) (*UmsMemberReceiveAddress, error) {
+	query := fmt.Sprintf("select %s from %s where id = ? and member_id = ? limit 1", umsMemberReceiveAddressRows, m.table)
+	var resp UmsMemberReceiveAddress
+	err := m.conn.QueryRow(&resp, query, id, memberId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *UmsMemberReceiveAddressModel) FindAll(Current int64, PageSize int64) (*[]UmsMemberReceiveAddress, error) {
 
 	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberReceiveAddressRows, m.table)

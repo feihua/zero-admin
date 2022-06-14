@@ -494,6 +494,7 @@ message MemberReceiveAddressAddResp {
 message MemberReceiveAddressListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  int64 userId = 3;
 }
 
 message MemberReceiveAddressListData{
@@ -539,6 +540,25 @@ message MemberReceiveAddressDeleteResp {
   string pong = 1;
 }
 
+
+
+message MemberReceiveAddressQueryDetailReq {
+  int64 UserId = 1;
+  int64 AddressID = 2;
+}
+
+message MemberReceiveAddressQueryDetailResp {
+  int64  	Id            = 1;
+  int64  	MemberId     = 2;
+  string 	Name         = 3;
+  string 	PhoneNumber   = 4;
+  int64  	DefaultStatus = 5;
+  string 	PostCode      = 6;
+  string 	Province      = 7;
+  string 	City          = 8;
+  string 	Region        = 9;
+  string 	DetailAddress = 10;
+}
 
 message MemberRuleSettingAddReq {
   int64  	ContinueSignDay   = 2;
@@ -822,6 +842,7 @@ service Ums {
   rpc MemberReceiveAddressList(MemberReceiveAddressListReq) returns(MemberReceiveAddressListResp);
   rpc MemberReceiveAddressUpdate(MemberReceiveAddressUpdateReq) returns(MemberReceiveAddressUpdateResp);
   rpc MemberReceiveAddressDelete(MemberReceiveAddressDeleteReq) returns(MemberReceiveAddressDeleteResp);
+  rpc MemberReceiveAddressQueryDetail(MemberReceiveAddressQueryDetailReq) returns(MemberReceiveAddressQueryDetailResp);
 
   rpc MemberRuleSettingAdd(MemberRuleSettingAddReq) returns(MemberRuleSettingAddResp);
   rpc MemberRuleSettingList(MemberRuleSettingListReq) returns(MemberRuleSettingListResp);

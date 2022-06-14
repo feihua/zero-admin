@@ -6,8 +6,11 @@ info(
 
 
 type AddressListReq struct {
+    Current int64 `json:"current,default=1"`
+    PageSize int64 `json:"pageSize,default=20"`
     UserId int64 `json:"userId"`
 }
+
 type AddressListResp struct {
     Errno int64 `json:"errno"`
     Data AddressListData `json:"data"`
@@ -76,7 +79,7 @@ type AddressDetailReq struct {
 }
 type AddressDetailResp struct {
     Errno  int64   `json:"errno"`
-    Data   []AddressDetailData `json:"data"`
+    Data   AddressDetailData `json:"data"`
     Errmsg string  `json:"errmsg"`
 }
 
@@ -97,7 +100,6 @@ type AddressDetailData struct {
     AddTime       string `json:"addTime"`
     UpdateTime    string `json:"updateTime"`
     Deleted       bool   `json:"deleted"`
-}
 }
 
 @server(

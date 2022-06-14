@@ -2,7 +2,9 @@
 package types
 
 type AddressListReq struct {
-	UserId int64 `json:"userId"`
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=20"`
+	UserId   int64 `json:"userId"`
 }
 
 type AddressListResp struct {
@@ -75,9 +77,9 @@ type AddressDetailReq struct {
 }
 
 type AddressDetailResp struct {
-	Errno  int64               `json:"errno"`
-	Data   []AddressDetailData `json:"data"`
-	Errmsg string              `json:"errmsg"`
+	Errno  int64             `json:"errno"`
+	Data   AddressDetailData `json:"data"`
+	Errmsg string            `json:"errmsg"`
 }
 
 type AddressDetailData struct {

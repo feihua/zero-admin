@@ -55,6 +55,7 @@ type UmsClient interface {
 	MemberReceiveAddressList(ctx context.Context, in *MemberReceiveAddressListReq, opts ...grpc.CallOption) (*MemberReceiveAddressListResp, error)
 	MemberReceiveAddressUpdate(ctx context.Context, in *MemberReceiveAddressUpdateReq, opts ...grpc.CallOption) (*MemberReceiveAddressUpdateResp, error)
 	MemberReceiveAddressDelete(ctx context.Context, in *MemberReceiveAddressDeleteReq, opts ...grpc.CallOption) (*MemberReceiveAddressDeleteResp, error)
+	MemberReceiveAddressQueryDetail(ctx context.Context, in *MemberReceiveAddressQueryDetailReq, opts ...grpc.CallOption) (*MemberReceiveAddressQueryDetailResp, error)
 	MemberRuleSettingAdd(ctx context.Context, in *MemberRuleSettingAddReq, opts ...grpc.CallOption) (*MemberRuleSettingAddResp, error)
 	MemberRuleSettingList(ctx context.Context, in *MemberRuleSettingListReq, opts ...grpc.CallOption) (*MemberRuleSettingListResp, error)
 	MemberRuleSettingUpdate(ctx context.Context, in *MemberRuleSettingUpdateReq, opts ...grpc.CallOption) (*MemberRuleSettingUpdateResp, error)
@@ -414,6 +415,15 @@ func (c *umsClient) MemberReceiveAddressDelete(ctx context.Context, in *MemberRe
 	return out, nil
 }
 
+func (c *umsClient) MemberReceiveAddressQueryDetail(ctx context.Context, in *MemberReceiveAddressQueryDetailReq, opts ...grpc.CallOption) (*MemberReceiveAddressQueryDetailResp, error) {
+	out := new(MemberReceiveAddressQueryDetailResp)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberReceiveAddressQueryDetail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *umsClient) MemberRuleSettingAdd(ctx context.Context, in *MemberRuleSettingAddReq, opts ...grpc.CallOption) (*MemberRuleSettingAddResp, error) {
 	out := new(MemberRuleSettingAddResp)
 	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberRuleSettingAdd", in, out, opts...)
@@ -599,6 +609,7 @@ type UmsServer interface {
 	MemberReceiveAddressList(context.Context, *MemberReceiveAddressListReq) (*MemberReceiveAddressListResp, error)
 	MemberReceiveAddressUpdate(context.Context, *MemberReceiveAddressUpdateReq) (*MemberReceiveAddressUpdateResp, error)
 	MemberReceiveAddressDelete(context.Context, *MemberReceiveAddressDeleteReq) (*MemberReceiveAddressDeleteResp, error)
+	MemberReceiveAddressQueryDetail(context.Context, *MemberReceiveAddressQueryDetailReq) (*MemberReceiveAddressQueryDetailResp, error)
 	MemberRuleSettingAdd(context.Context, *MemberRuleSettingAddReq) (*MemberRuleSettingAddResp, error)
 	MemberRuleSettingList(context.Context, *MemberRuleSettingListReq) (*MemberRuleSettingListResp, error)
 	MemberRuleSettingUpdate(context.Context, *MemberRuleSettingUpdateReq) (*MemberRuleSettingUpdateResp, error)
@@ -732,6 +743,9 @@ func (UnimplementedUmsServer) MemberReceiveAddressUpdate(context.Context, *Membe
 }
 func (UnimplementedUmsServer) MemberReceiveAddressDelete(context.Context, *MemberReceiveAddressDeleteReq) (*MemberReceiveAddressDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberReceiveAddressDelete not implemented")
+}
+func (UnimplementedUmsServer) MemberReceiveAddressQueryDetail(context.Context, *MemberReceiveAddressQueryDetailReq) (*MemberReceiveAddressQueryDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberReceiveAddressQueryDetail not implemented")
 }
 func (UnimplementedUmsServer) MemberRuleSettingAdd(context.Context, *MemberRuleSettingAddReq) (*MemberRuleSettingAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberRuleSettingAdd not implemented")
@@ -1460,6 +1474,24 @@ func _Ums_MemberReceiveAddressDelete_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Ums_MemberReceiveAddressQueryDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberReceiveAddressQueryDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberReceiveAddressQueryDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/MemberReceiveAddressQueryDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberReceiveAddressQueryDetail(ctx, req.(*MemberReceiveAddressQueryDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Ums_MemberRuleSettingAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MemberRuleSettingAddReq)
 	if err := dec(in); err != nil {
@@ -1902,6 +1934,10 @@ var Ums_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberReceiveAddressDelete",
 			Handler:    _Ums_MemberReceiveAddressDelete_Handler,
+		},
+		{
+			MethodName: "MemberReceiveAddressQueryDetail",
+			Handler:    _Ums_MemberReceiveAddressQueryDetail_Handler,
 		},
 		{
 			MethodName: "MemberRuleSettingAdd",
