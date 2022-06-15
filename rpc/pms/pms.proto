@@ -4,14 +4,6 @@ package pmsclient;
 
 option go_package = "./pmsclient";
 
-message HomeIndexReq {
-
-}
-
-message HomeIndexResp {
-  string pong = 1;
-}
-
 message ProductAddReq {
   int64       BrandId = 2;
   int64       ProductCategoryId = 3;
@@ -1273,7 +1265,6 @@ message SkuStockDeleteResp {
 
 service Pms {
 
-  rpc HomeIndex(HomeIndexReq) returns(HomeIndexResp);
   rpc ProductAdd(ProductAddReq) returns(ProductAddResp);
   rpc ProductList(ProductListReq) returns(ProductListResp);
   rpc ProductUpdate(ProductUpdateReq) returns(ProductUpdateResp);

@@ -67,8 +67,6 @@ type (
 	FeightTemplateListResp                     = pmsclient.FeightTemplateListResp
 	FeightTemplateUpdateReq                    = pmsclient.FeightTemplateUpdateReq
 	FeightTemplateUpdateResp                   = pmsclient.FeightTemplateUpdateResp
-	HomeIndexReq                               = pmsclient.HomeIndexReq
-	HomeIndexResp                              = pmsclient.HomeIndexResp
 	MemberPriceAddReq                          = pmsclient.MemberPriceAddReq
 	MemberPriceAddResp                         = pmsclient.MemberPriceAddResp
 	MemberPriceDeleteReq                       = pmsclient.MemberPriceDeleteReq
@@ -186,7 +184,6 @@ type (
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
 
 	Pms interface {
-		HomeIndex(ctx context.Context, in *HomeIndexReq, opts ...grpc.CallOption) (*HomeIndexResp, error)
 		ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error)
 		ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error)
 		ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
@@ -274,11 +271,6 @@ func NewPms(cli zrpc.Client) Pms {
 	return &defaultPms{
 		cli: cli,
 	}
-}
-
-func (m *defaultPms) HomeIndex(ctx context.Context, in *HomeIndexReq, opts ...grpc.CallOption) (*HomeIndexResp, error) {
-	client := pmsclient.NewPmsClient(m.cli.Conn())
-	return client.HomeIndex(ctx, in, opts...)
 }
 
 func (m *defaultPms) ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error) {

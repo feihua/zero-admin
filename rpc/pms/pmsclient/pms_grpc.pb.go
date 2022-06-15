@@ -18,7 +18,6 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PmsClient interface {
-	HomeIndex(ctx context.Context, in *HomeIndexReq, opts ...grpc.CallOption) (*HomeIndexResp, error)
 	ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error)
 	ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error)
 	ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
@@ -103,15 +102,6 @@ type pmsClient struct {
 
 func NewPmsClient(cc grpc.ClientConnInterface) PmsClient {
 	return &pmsClient{cc}
-}
-
-func (c *pmsClient) HomeIndex(ctx context.Context, in *HomeIndexReq, opts ...grpc.CallOption) (*HomeIndexResp, error) {
-	out := new(HomeIndexResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/HomeIndex", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *pmsClient) ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error) {
@@ -802,7 +792,6 @@ func (c *pmsClient) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, o
 // All implementations must embed UnimplementedPmsServer
 // for forward compatibility
 type PmsServer interface {
-	HomeIndex(context.Context, *HomeIndexReq) (*HomeIndexResp, error)
 	ProductAdd(context.Context, *ProductAddReq) (*ProductAddResp, error)
 	ProductList(context.Context, *ProductListReq) (*ProductListResp, error)
 	ProductUpdate(context.Context, *ProductUpdateReq) (*ProductUpdateResp, error)
@@ -886,9 +875,6 @@ type PmsServer interface {
 type UnimplementedPmsServer struct {
 }
 
-func (UnimplementedPmsServer) HomeIndex(context.Context, *HomeIndexReq) (*HomeIndexResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeIndex not implemented")
-}
 func (UnimplementedPmsServer) ProductAdd(context.Context, *ProductAddReq) (*ProductAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductAdd not implemented")
 }
@@ -1128,24 +1114,6 @@ type UnsafePmsServer interface {
 
 func RegisterPmsServer(s grpc.ServiceRegistrar, srv PmsServer) {
 	s.RegisterService(&Pms_ServiceDesc, srv)
-}
-
-func _Pms_HomeIndex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeIndexReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PmsServer).HomeIndex(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pmsclient.Pms/HomeIndex",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).HomeIndex(ctx, req.(*HomeIndexReq))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Pms_ProductAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2523,10 +2491,6 @@ var Pms_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "pmsclient.Pms",
 	HandlerType: (*PmsServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "HomeIndex",
-			Handler:    _Pms_HomeIndex_Handler,
-		},
 		{
 			MethodName: "ProductAdd",
 			Handler:    _Pms_ProductAdd_Handler,

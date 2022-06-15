@@ -22,11 +22,6 @@ func NewPmsServer(svcCtx *svc.ServiceContext) *PmsServer {
 	}
 }
 
-func (s *PmsServer) HomeIndex(ctx context.Context, in *pmsclient.HomeIndexReq) (*pmsclient.HomeIndexResp, error) {
-	l := logic.NewHomeIndexLogic(ctx, s.svcCtx)
-	return l.HomeIndex(in)
-}
-
 func (s *PmsServer) ProductAdd(ctx context.Context, in *pmsclient.ProductAddReq) (*pmsclient.ProductAddResp, error) {
 	l := logic.NewProductAddLogic(ctx, s.svcCtx)
 	return l.ProductAdd(in)
