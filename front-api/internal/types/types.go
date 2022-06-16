@@ -398,8 +398,9 @@ type GoodsList struct {
 }
 
 type OrderListReq struct {
-	Page  int64 `json:"page"`
-	Limit int64 `json:"limit"`
+	Page   int64 `json:"page"`
+	Limit  int64 `json:"limit"`
+	UserId int64 `json:"userId"`
 }
 
 type OrderListResp struct {

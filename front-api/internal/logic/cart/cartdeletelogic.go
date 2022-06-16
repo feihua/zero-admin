@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,12 @@ func NewCartDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartDel
 }
 
 func (l *CartDeleteLogic) CartDelete(req types.CartDeleteReq) (resp *types.CartListResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Oms.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{
+		Id: 0,
+	})
 
-	return
+	return &types.CartListResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

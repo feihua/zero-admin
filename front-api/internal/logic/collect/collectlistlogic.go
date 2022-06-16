@@ -2,6 +2,7 @@ package collect
 
 import (
 	"context"
+	"zero-admin/rpc/pms/pmsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,12 @@ func NewCollectListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Collec
 }
 
 func (l *CollectListLogic) CollectList(req types.CollectListReq) (resp *types.CollectListResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Pms.CollectList(l.ctx, &pmsclient.CollectListReq{
+		Id: 0,
+	})
 
-	return
+	return &types.CollectListResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

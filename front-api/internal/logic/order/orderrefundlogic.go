@@ -2,6 +2,7 @@ package order
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,13 @@ func NewOrderRefundLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderR
 }
 
 func (l *OrderRefundLogic) OrderRefund(req types.OrderRefundReq) (resp *types.OrderRefundResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Oms.OrderRefund(l.ctx, &omsclient.OrderRefundReq{
+		Id:       req.OrderId,
+		MemberId: req.UserId,
+	})
 
-	return
+	return &types.OrderRefundResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

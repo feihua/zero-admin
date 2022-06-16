@@ -2,6 +2,7 @@ package collect
 
 import (
 	"context"
+	"zero-admin/rpc/pms/pmsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,12 @@ func NewAddordeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addord
 }
 
 func (l *AddordeleteLogic) Addordelete(req types.AddOrDeleteReq) (resp *types.AddOrDeleteResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Pms.CollectAddOrDelete(l.ctx, &pmsclient.CollectAddOrDeleteReq{
+		Id: 0,
+	})
 
-	return
+	return &types.AddOrDeleteResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

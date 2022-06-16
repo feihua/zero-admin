@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,12 @@ func NewCartCheckOutLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartC
 }
 
 func (l *CartCheckOutLogic) CartCheckOut(req types.CartCheckOutReq) (resp *types.CartCheckOutResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Oms.CartItemCheckOut(l.ctx, &omsclient.CartItemCheckOutReq{
+		Id: 0,
+	})
 
-	return
+	return &types.CartCheckOutResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

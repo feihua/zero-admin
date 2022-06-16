@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,13 @@ func NewCartListLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartListL
 }
 
 func (l *CartListLogic) CartList(req types.CartListReq) (resp *types.CartListResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Oms.CartItemList(l.ctx, &omsclient.CartItemListReq{
+		Current:  0,
+		PageSize: 0,
+	})
 
-	return
+	return &types.CartListResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

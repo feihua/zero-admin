@@ -2,6 +2,7 @@ package order
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,13 @@ func NewOrderConfirmLogic(ctx context.Context, svcCtx *svc.ServiceContext) Order
 }
 
 func (l *OrderConfirmLogic) OrderConfirm(req types.OrderConfirmReq) (resp *types.OrderConfirmResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Oms.OrderConfirm(l.ctx, &omsclient.OrderConfirmReq{
+		Id:       req.OrderId,
+		MemberId: req.UserId,
+	})
 
-	return
+	return &types.OrderConfirmResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

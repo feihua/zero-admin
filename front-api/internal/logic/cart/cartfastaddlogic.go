@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,12 @@ func NewCartFastAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartFa
 }
 
 func (l *CartFastAddLogic) CartFastAdd(req types.CartFastAddReq) (resp *types.CartFastAddResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Oms.CartItemFastAdd(l.ctx, &omsclient.CartItemFastAddReq{
+		Id: 0,
+	})
 
-	return
+	return &types.CartFastAddResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

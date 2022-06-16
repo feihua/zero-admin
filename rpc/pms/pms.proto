@@ -1263,6 +1263,21 @@ message SkuStockDeleteResp {
   string pong = 1;
 }
 
+message CollectListReq {
+  int64 id = 1;
+}
+
+message CollectListResp {
+  string pong = 1;
+}
+
+message CollectAddOrDeleteReq {
+  int64 id = 1;
+}
+
+message CollectAddOrDeleteResp {
+  string pong = 1;
+}
 service Pms {
 
   rpc ProductAdd(ProductAddReq) returns(ProductAddResp);
@@ -1358,5 +1373,8 @@ service Pms {
   rpc SkuStockList(SkuStockListReq) returns(SkuStockListResp);
   rpc SkuStockUpdate(SkuStockUpdateReq) returns(SkuStockUpdateResp);
   rpc SkuStockDelete(SkuStockDeleteReq) returns(SkuStockDeleteResp);
+
+  rpc CollectList(CollectListReq) returns(CollectListResp);
+  rpc CollectAddOrDelete(CollectAddOrDeleteReq) returns(CollectAddOrDeleteResp);
 
 }

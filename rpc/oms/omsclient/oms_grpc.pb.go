@@ -30,6 +30,9 @@ type OmsClient interface {
 	CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error)
 	CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
 	CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error)
+	CartItemChecked(ctx context.Context, in *CartItemCheckedReq, opts ...grpc.CallOption) (*CartItemCheckedResp, error)
+	CartItemCheckOut(ctx context.Context, in *CartItemCheckOutReq, opts ...grpc.CallOption) (*CartItemCheckOutResp, error)
+	CartItemFastAdd(ctx context.Context, in *CartItemFastAddReq, opts ...grpc.CallOption) (*CartItemFastAddResp, error)
 	CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error)
 	CompanyAddressList(ctx context.Context, in *CompanyAddressListReq, opts ...grpc.CallOption) (*CompanyAddressListResp, error)
 	CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq, opts ...grpc.CallOption) (*CompanyAddressUpdateResp, error)
@@ -38,9 +41,6 @@ type OmsClient interface {
 	OrderItemList(ctx context.Context, in *OrderItemListReq, opts ...grpc.CallOption) (*OrderItemListResp, error)
 	OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq, opts ...grpc.CallOption) (*OrderItemUpdateResp, error)
 	OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq, opts ...grpc.CallOption) (*OrderItemDeleteResp, error)
-	OrderItemChecked(ctx context.Context, in *OrderItemCheckedReq, opts ...grpc.CallOption) (*OrderItemCheckedResp, error)
-	OrderItemCheckOut(ctx context.Context, in *OrderItemCheckOutReq, opts ...grpc.CallOption) (*OrderItemCheckOutResp, error)
-	OrderItemFastAdd(ctx context.Context, in *OrderItemFastAddReq, opts ...grpc.CallOption) (*OrderItemFastAddResp, error)
 	OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq, opts ...grpc.CallOption) (*OrderOperateHistoryAddResp, error)
 	OrderOperateHistoryList(ctx context.Context, in *OrderOperateHistoryListReq, opts ...grpc.CallOption) (*OrderOperateHistoryListResp, error)
 	OrderOperateHistoryUpdate(ctx context.Context, in *OrderOperateHistoryUpdateReq, opts ...grpc.CallOption) (*OrderOperateHistoryUpdateResp, error)
@@ -175,6 +175,33 @@ func (c *omsClient) CartItemDelete(ctx context.Context, in *CartItemDeleteReq, o
 	return out, nil
 }
 
+func (c *omsClient) CartItemChecked(ctx context.Context, in *CartItemCheckedReq, opts ...grpc.CallOption) (*CartItemCheckedResp, error) {
+	out := new(CartItemCheckedResp)
+	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemChecked", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omsClient) CartItemCheckOut(ctx context.Context, in *CartItemCheckOutReq, opts ...grpc.CallOption) (*CartItemCheckOutResp, error) {
+	out := new(CartItemCheckOutResp)
+	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemCheckOut", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omsClient) CartItemFastAdd(ctx context.Context, in *CartItemFastAddReq, opts ...grpc.CallOption) (*CartItemFastAddResp, error) {
+	out := new(CartItemFastAddResp)
+	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemFastAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *omsClient) CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error) {
 	out := new(CompanyAddressAddResp)
 	err := c.cc.Invoke(ctx, "/omsclient.Oms/CompanyAddressAdd", in, out, opts...)
@@ -241,33 +268,6 @@ func (c *omsClient) OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq,
 func (c *omsClient) OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq, opts ...grpc.CallOption) (*OrderItemDeleteResp, error) {
 	out := new(OrderItemDeleteResp)
 	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderItemDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderItemChecked(ctx context.Context, in *OrderItemCheckedReq, opts ...grpc.CallOption) (*OrderItemCheckedResp, error) {
-	out := new(OrderItemCheckedResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderItemChecked", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderItemCheckOut(ctx context.Context, in *OrderItemCheckOutReq, opts ...grpc.CallOption) (*OrderItemCheckOutResp, error) {
-	out := new(OrderItemCheckOutResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderItemCheckOut", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderItemFastAdd(ctx context.Context, in *OrderItemFastAddReq, opts ...grpc.CallOption) (*OrderItemFastAddResp, error) {
-	out := new(OrderItemFastAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderItemFastAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -434,6 +434,9 @@ type OmsServer interface {
 	CartItemList(context.Context, *CartItemListReq) (*CartItemListResp, error)
 	CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
 	CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error)
+	CartItemChecked(context.Context, *CartItemCheckedReq) (*CartItemCheckedResp, error)
+	CartItemCheckOut(context.Context, *CartItemCheckOutReq) (*CartItemCheckOutResp, error)
+	CartItemFastAdd(context.Context, *CartItemFastAddReq) (*CartItemFastAddResp, error)
 	CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error)
 	CompanyAddressList(context.Context, *CompanyAddressListReq) (*CompanyAddressListResp, error)
 	CompanyAddressUpdate(context.Context, *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error)
@@ -442,9 +445,6 @@ type OmsServer interface {
 	OrderItemList(context.Context, *OrderItemListReq) (*OrderItemListResp, error)
 	OrderItemUpdate(context.Context, *OrderItemUpdateReq) (*OrderItemUpdateResp, error)
 	OrderItemDelete(context.Context, *OrderItemDeleteReq) (*OrderItemDeleteResp, error)
-	OrderItemChecked(context.Context, *OrderItemCheckedReq) (*OrderItemCheckedResp, error)
-	OrderItemCheckOut(context.Context, *OrderItemCheckOutReq) (*OrderItemCheckOutResp, error)
-	OrderItemFastAdd(context.Context, *OrderItemFastAddReq) (*OrderItemFastAddResp, error)
 	OrderOperateHistoryAdd(context.Context, *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error)
 	OrderOperateHistoryList(context.Context, *OrderOperateHistoryListReq) (*OrderOperateHistoryListResp, error)
 	OrderOperateHistoryUpdate(context.Context, *OrderOperateHistoryUpdateReq) (*OrderOperateHistoryUpdateResp, error)
@@ -504,6 +504,15 @@ func (UnimplementedOmsServer) CartItemUpdate(context.Context, *CartItemUpdateReq
 func (UnimplementedOmsServer) CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CartItemDelete not implemented")
 }
+func (UnimplementedOmsServer) CartItemChecked(context.Context, *CartItemCheckedReq) (*CartItemCheckedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CartItemChecked not implemented")
+}
+func (UnimplementedOmsServer) CartItemCheckOut(context.Context, *CartItemCheckOutReq) (*CartItemCheckOutResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CartItemCheckOut not implemented")
+}
+func (UnimplementedOmsServer) CartItemFastAdd(context.Context, *CartItemFastAddReq) (*CartItemFastAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CartItemFastAdd not implemented")
+}
 func (UnimplementedOmsServer) CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressAdd not implemented")
 }
@@ -527,15 +536,6 @@ func (UnimplementedOmsServer) OrderItemUpdate(context.Context, *OrderItemUpdateR
 }
 func (UnimplementedOmsServer) OrderItemDelete(context.Context, *OrderItemDeleteReq) (*OrderItemDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderItemDelete not implemented")
-}
-func (UnimplementedOmsServer) OrderItemChecked(context.Context, *OrderItemCheckedReq) (*OrderItemCheckedResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemChecked not implemented")
-}
-func (UnimplementedOmsServer) OrderItemCheckOut(context.Context, *OrderItemCheckOutReq) (*OrderItemCheckOutResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemCheckOut not implemented")
-}
-func (UnimplementedOmsServer) OrderItemFastAdd(context.Context, *OrderItemFastAddReq) (*OrderItemFastAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemFastAdd not implemented")
 }
 func (UnimplementedOmsServer) OrderOperateHistoryAdd(context.Context, *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryAdd not implemented")
@@ -814,6 +814,60 @@ func _Oms_CartItemDelete_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Oms_CartItemChecked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CartItemCheckedReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmsServer).CartItemChecked(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omsclient.Oms/CartItemChecked",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmsServer).CartItemChecked(ctx, req.(*CartItemCheckedReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Oms_CartItemCheckOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CartItemCheckOutReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmsServer).CartItemCheckOut(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omsclient.Oms/CartItemCheckOut",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmsServer).CartItemCheckOut(ctx, req.(*CartItemCheckOutReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Oms_CartItemFastAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CartItemFastAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmsServer).CartItemFastAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omsclient.Oms/CartItemFastAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmsServer).CartItemFastAdd(ctx, req.(*CartItemFastAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Oms_CompanyAddressAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CompanyAddressAddReq)
 	if err := dec(in); err != nil {
@@ -954,60 +1008,6 @@ func _Oms_OrderItemDelete_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OmsServer).OrderItemDelete(ctx, req.(*OrderItemDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Oms_OrderItemChecked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderItemCheckedReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OmsServer).OrderItemChecked(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderItemChecked",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderItemChecked(ctx, req.(*OrderItemCheckedReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Oms_OrderItemCheckOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderItemCheckOutReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OmsServer).OrderItemCheckOut(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderItemCheckOut",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderItemCheckOut(ctx, req.(*OrderItemCheckOutReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Oms_OrderItemFastAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderItemFastAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OmsServer).OrderItemFastAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderItemFastAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderItemFastAdd(ctx, req.(*OrderItemFastAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1356,6 +1356,18 @@ var Oms_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Oms_CartItemDelete_Handler,
 		},
 		{
+			MethodName: "CartItemChecked",
+			Handler:    _Oms_CartItemChecked_Handler,
+		},
+		{
+			MethodName: "CartItemCheckOut",
+			Handler:    _Oms_CartItemCheckOut_Handler,
+		},
+		{
+			MethodName: "CartItemFastAdd",
+			Handler:    _Oms_CartItemFastAdd_Handler,
+		},
+		{
 			MethodName: "CompanyAddressAdd",
 			Handler:    _Oms_CompanyAddressAdd_Handler,
 		},
@@ -1386,18 +1398,6 @@ var Oms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OrderItemDelete",
 			Handler:    _Oms_OrderItemDelete_Handler,
-		},
-		{
-			MethodName: "OrderItemChecked",
-			Handler:    _Oms_OrderItemChecked_Handler,
-		},
-		{
-			MethodName: "OrderItemCheckOut",
-			Handler:    _Oms_OrderItemCheckOut_Handler,
-		},
-		{
-			MethodName: "OrderItemFastAdd",
-			Handler:    _Oms_OrderItemFastAdd_Handler,
 		},
 		{
 			MethodName: "OrderOperateHistoryAdd",

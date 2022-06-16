@@ -340,6 +340,30 @@ message CartItemDeleteReq {
 message CartItemDeleteResp {
   string pong = 1;
 }
+message CartItemCheckedReq {
+  int64 id = 1;
+}
+
+message CartItemCheckedResp {
+  string pong = 1;
+}
+
+message CartItemCheckOutReq {
+  int64 id = 1;
+}
+
+message CartItemCheckOutResp {
+  string pong = 1;
+}
+
+message CartItemFastAddReq {
+  int64 id = 1;
+}
+
+message CartItemFastAddResp {
+  string pong = 1;
+}
+
 
 message CompanyAddressAddReq {
   string 	AddressName = 2;
@@ -499,30 +523,6 @@ message OrderItemDeleteReq {
 }
 
 message OrderItemDeleteResp {
-  string pong = 1;
-}
-
-message OrderItemCheckedReq {
-  int64 id = 1;
-}
-
-message OrderItemCheckedResp {
-  string pong = 1;
-}
-
-message OrderItemCheckOutReq {
-  int64 id = 1;
-}
-
-message OrderItemCheckOutResp {
-  string pong = 1;
-}
-
-message OrderItemFastAddReq {
-  int64 id = 1;
-}
-
-message OrderItemFastAddResp {
   string pong = 1;
 }
 
@@ -809,6 +809,9 @@ service Oms {
   rpc CartItemList(CartItemListReq) returns(CartItemListResp);
   rpc CartItemUpdate(CartItemUpdateReq) returns(CartItemUpdateResp);
   rpc CartItemDelete(CartItemDeleteReq) returns(CartItemDeleteResp);
+  rpc CartItemChecked(CartItemCheckedReq) returns(CartItemCheckedResp);
+  rpc CartItemCheckOut(CartItemCheckOutReq) returns(CartItemCheckOutResp);
+  rpc CartItemFastAdd(CartItemFastAddReq) returns(CartItemFastAddResp);
 
   rpc CompanyAddressAdd(CompanyAddressAddReq) returns(CompanyAddressAddResp);
   rpc CompanyAddressList(CompanyAddressListReq) returns(CompanyAddressListResp);
@@ -819,9 +822,6 @@ service Oms {
   rpc OrderItemList(OrderItemListReq) returns(OrderItemListResp);
   rpc OrderItemUpdate(OrderItemUpdateReq) returns(OrderItemUpdateResp);
   rpc OrderItemDelete(OrderItemDeleteReq) returns(OrderItemDeleteResp);
-  rpc OrderItemChecked(OrderItemCheckedReq) returns(OrderItemCheckedResp);
-  rpc OrderItemCheckOut(OrderItemCheckOutReq) returns(OrderItemCheckOutResp);
-  rpc OrderItemFastAdd(OrderItemFastAddReq) returns(OrderItemFastAddResp);
 
   rpc OrderOperateHistoryAdd(OrderOperateHistoryAddReq) returns(OrderOperateHistoryAddResp);
   rpc OrderOperateHistoryList(OrderOperateHistoryListReq) returns(OrderOperateHistoryListResp);

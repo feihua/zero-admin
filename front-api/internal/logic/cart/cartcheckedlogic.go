@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,12 @@ func NewCartCheckedLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartCh
 }
 
 func (l *CartCheckedLogic) CartChecked(req types.CartCheckedReq) (resp *types.CartListResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Oms.CartItemChecked(l.ctx, &omsclient.CartItemCheckedReq{
+		Id: 0,
+	})
 
-	return
+	return &types.CartListResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

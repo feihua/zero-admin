@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,28 @@ func NewCartUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartUpd
 }
 
 func (l *CartUpdateLogic) CartUpdate(req types.CartUpdateReq) (resp *types.CartUpdateResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Oms.CartItemUpdate(l.ctx, &omsclient.CartItemUpdateReq{
+		ProductId:         0,
+		ProductSkuId:      0,
+		MemberId:          0,
+		Quantity:          0,
+		Price:             0,
+		ProductPic:        "",
+		ProductName:       "",
+		ProductSubTitle:   "",
+		ProductSkuCode:    "",
+		MemberNickname:    "",
+		CreateDate:        "",
+		ModifyDate:        "",
+		DeleteStatus:      0,
+		ProductCategoryId: 0,
+		ProductBrand:      "",
+		ProductSn:         "",
+		ProductAttr:       "",
+	})
 
-	return
+	return &types.CartUpdateResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

@@ -2,6 +2,7 @@ package order
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,12 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderLis
 }
 
 func (l *OrderListLogic) OrderList(req types.OrderListReq) (resp *types.OrderListResp, err error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Oms.OrderListByMemberId(l.ctx, &omsclient.OrderListByMemberIdReq{
+		MemberId: req.UserId,
+	})
 
-	return
+	return &types.OrderListResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

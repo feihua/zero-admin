@@ -12419,6 +12419,194 @@ func (x *SkuStockDeleteResp) GetPong() string {
 	return ""
 }
 
+type CollectListReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *CollectListReq) Reset() {
+	*x = CollectListReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_pms_proto_msgTypes[169]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectListReq) ProtoMessage() {}
+
+func (x *CollectListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_pms_proto_msgTypes[169]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectListReq.ProtoReflect.Descriptor instead.
+func (*CollectListReq) Descriptor() ([]byte, []int) {
+	return file_pms_proto_rawDescGZIP(), []int{169}
+}
+
+func (x *CollectListReq) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type CollectListResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
+}
+
+func (x *CollectListResp) Reset() {
+	*x = CollectListResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_pms_proto_msgTypes[170]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectListResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectListResp) ProtoMessage() {}
+
+func (x *CollectListResp) ProtoReflect() protoreflect.Message {
+	mi := &file_pms_proto_msgTypes[170]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectListResp.ProtoReflect.Descriptor instead.
+func (*CollectListResp) Descriptor() ([]byte, []int) {
+	return file_pms_proto_rawDescGZIP(), []int{170}
+}
+
+func (x *CollectListResp) GetPong() string {
+	if x != nil {
+		return x.Pong
+	}
+	return ""
+}
+
+type CollectAddOrDeleteReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *CollectAddOrDeleteReq) Reset() {
+	*x = CollectAddOrDeleteReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_pms_proto_msgTypes[171]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectAddOrDeleteReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectAddOrDeleteReq) ProtoMessage() {}
+
+func (x *CollectAddOrDeleteReq) ProtoReflect() protoreflect.Message {
+	mi := &file_pms_proto_msgTypes[171]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectAddOrDeleteReq.ProtoReflect.Descriptor instead.
+func (*CollectAddOrDeleteReq) Descriptor() ([]byte, []int) {
+	return file_pms_proto_rawDescGZIP(), []int{171}
+}
+
+func (x *CollectAddOrDeleteReq) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type CollectAddOrDeleteResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
+}
+
+func (x *CollectAddOrDeleteResp) Reset() {
+	*x = CollectAddOrDeleteResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_pms_proto_msgTypes[172]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CollectAddOrDeleteResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectAddOrDeleteResp) ProtoMessage() {}
+
+func (x *CollectAddOrDeleteResp) ProtoReflect() protoreflect.Message {
+	mi := &file_pms_proto_msgTypes[172]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectAddOrDeleteResp.ProtoReflect.Descriptor instead.
+func (*CollectAddOrDeleteResp) Descriptor() ([]byte, []int) {
+	return file_pms_proto_rawDescGZIP(), []int{172}
+}
+
+func (x *CollectAddOrDeleteResp) GetPong() string {
+	if x != nil {
+		return x.Pong
+	}
+	return ""
+}
+
 var File_pms_proto protoreflect.FileDescriptor
 
 var file_pms_proto_rawDesc = []byte{
@@ -14052,7 +14240,17 @@ var file_pms_proto_rawDesc = []byte{
 	0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x02, 0x69, 0x64, 0x22, 0x28, 0x0a, 0x12, 0x53, 0x6b, 0x75, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x44,
 	0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e,
-	0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x32, 0x87, 0x38,
+	0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x22, 0x20, 0x0a,
+	0x0e, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22,
+	0x25, 0x0a, 0x0f, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x22, 0x27, 0x0a, 0x15, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63,
+	0x74, 0x41, 0x64, 0x64, 0x4f, 0x72, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22,
+	0x2c, 0x0a, 0x16, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x41, 0x64, 0x64, 0x4f, 0x72, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e,
+	0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x32, 0xa8, 0x39,
 	0x0a, 0x03, 0x50, 0x6d, 0x73, 0x12, 0x41, 0x0a, 0x0a, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
 	0x41, 0x64, 0x64, 0x12, 0x18, 0x2e, 0x70, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e,
 	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e,
@@ -14501,8 +14699,18 @@ var file_pms_proto_rawDesc = []byte{
 	0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x53, 0x6b, 0x75, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x44,
 	0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x1d, 0x2e, 0x70, 0x6d, 0x73, 0x63, 0x6c,
 	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x53, 0x6b, 0x75, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x44, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x42, 0x0d, 0x5a, 0x0b, 0x2e, 0x2f, 0x70, 0x6d, 0x73,
-	0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x44, 0x0a, 0x0b, 0x43, 0x6f, 0x6c, 0x6c, 0x65,
+	0x63, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x19, 0x2e, 0x70, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x2e, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
+	0x71, 0x1a, 0x1a, 0x2e, 0x70, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x6f,
+	0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x59, 0x0a,
+	0x12, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x41, 0x64, 0x64, 0x4f, 0x72, 0x44, 0x65, 0x6c,
+	0x65, 0x74, 0x65, 0x12, 0x20, 0x2e, 0x70, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e,
+	0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x41, 0x64, 0x64, 0x4f, 0x72, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x21, 0x2e, 0x70, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x2e, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x41, 0x64, 0x64, 0x4f, 0x72, 0x44, 0x65,
+	0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x42, 0x0d, 0x5a, 0x0b, 0x2e, 0x2f, 0x70, 0x6d,
+	0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -14517,7 +14725,7 @@ func file_pms_proto_rawDescGZIP() []byte {
 	return file_pms_proto_rawDescData
 }
 
-var file_pms_proto_msgTypes = make([]protoimpl.MessageInfo, 169)
+var file_pms_proto_msgTypes = make([]protoimpl.MessageInfo, 173)
 var file_pms_proto_goTypes = []interface{}{
 	(*ProductAddReq)(nil),                              // 0: pmsclient.ProductAddReq
 	(*ProductAddResp)(nil),                             // 1: pmsclient.ProductAddResp
@@ -14688,6 +14896,10 @@ var file_pms_proto_goTypes = []interface{}{
 	(*SkuStockUpdateResp)(nil),                         // 166: pmsclient.SkuStockUpdateResp
 	(*SkuStockDeleteReq)(nil),                          // 167: pmsclient.SkuStockDeleteReq
 	(*SkuStockDeleteResp)(nil),                         // 168: pmsclient.SkuStockDeleteResp
+	(*CollectListReq)(nil),                             // 169: pmsclient.CollectListReq
+	(*CollectListResp)(nil),                            // 170: pmsclient.CollectListResp
+	(*CollectAddOrDeleteReq)(nil),                      // 171: pmsclient.CollectAddOrDeleteReq
+	(*CollectAddOrDeleteResp)(nil),                     // 172: pmsclient.CollectAddOrDeleteResp
 }
 var file_pms_proto_depIdxs = []int32{
 	3,   // 0: pmsclient.ProductListResp.list:type_name -> pmsclient.ProductListData
@@ -14785,84 +14997,88 @@ var file_pms_proto_depIdxs = []int32{
 	162, // 92: pmsclient.Pms.SkuStockList:input_type -> pmsclient.SkuStockListReq
 	165, // 93: pmsclient.Pms.SkuStockUpdate:input_type -> pmsclient.SkuStockUpdateReq
 	167, // 94: pmsclient.Pms.SkuStockDelete:input_type -> pmsclient.SkuStockDeleteReq
-	1,   // 95: pmsclient.Pms.ProductAdd:output_type -> pmsclient.ProductAddResp
-	4,   // 96: pmsclient.Pms.ProductList:output_type -> pmsclient.ProductListResp
-	6,   // 97: pmsclient.Pms.ProductUpdate:output_type -> pmsclient.ProductUpdateResp
-	8,   // 98: pmsclient.Pms.ProductDelete:output_type -> pmsclient.ProductDeleteResp
-	10,  // 99: pmsclient.Pms.ProductDetailById:output_type -> pmsclient.ProductDetailByIdResp
-	13,  // 100: pmsclient.Pms.ProductListByCategoryId:output_type -> pmsclient.ProductListByCategoryIdResp
-	15,  // 101: pmsclient.Pms.AlbumAdd:output_type -> pmsclient.AlbumAddResp
-	18,  // 102: pmsclient.Pms.AlbumList:output_type -> pmsclient.AlbumListResp
-	20,  // 103: pmsclient.Pms.AlbumUpdate:output_type -> pmsclient.AlbumUpdateResp
-	22,  // 104: pmsclient.Pms.AlbumDelete:output_type -> pmsclient.AlbumDeleteResp
-	24,  // 105: pmsclient.Pms.AlbumPicAdd:output_type -> pmsclient.AlbumPicAddResp
-	27,  // 106: pmsclient.Pms.AlbumPicList:output_type -> pmsclient.AlbumPicListResp
-	29,  // 107: pmsclient.Pms.AlbumPicUpdate:output_type -> pmsclient.AlbumPicUpdateResp
-	31,  // 108: pmsclient.Pms.AlbumPicDelete:output_type -> pmsclient.AlbumPicDeleteResp
-	33,  // 109: pmsclient.Pms.BrandAdd:output_type -> pmsclient.BrandAddResp
-	36,  // 110: pmsclient.Pms.BrandList:output_type -> pmsclient.BrandListResp
-	38,  // 111: pmsclient.Pms.BrandUpdate:output_type -> pmsclient.BrandUpdateResp
-	40,  // 112: pmsclient.Pms.BrandDelete:output_type -> pmsclient.BrandDeleteResp
-	42,  // 113: pmsclient.Pms.CommentAdd:output_type -> pmsclient.CommentAddResp
-	45,  // 114: pmsclient.Pms.CommentList:output_type -> pmsclient.CommentListResp
-	47,  // 115: pmsclient.Pms.CommentUpdate:output_type -> pmsclient.CommentUpdateResp
-	49,  // 116: pmsclient.Pms.CommentDelete:output_type -> pmsclient.CommentDeleteResp
-	51,  // 117: pmsclient.Pms.CommentReplayAdd:output_type -> pmsclient.CommentReplayAddResp
-	54,  // 118: pmsclient.Pms.CommentReplayList:output_type -> pmsclient.CommentReplayListResp
-	56,  // 119: pmsclient.Pms.CommentReplayUpdate:output_type -> pmsclient.CommentReplayUpdateResp
-	58,  // 120: pmsclient.Pms.CommentReplayDelete:output_type -> pmsclient.CommentReplayDeleteResp
-	60,  // 121: pmsclient.Pms.FeightTemplateAdd:output_type -> pmsclient.FeightTemplateAddResp
-	63,  // 122: pmsclient.Pms.FeightTemplateList:output_type -> pmsclient.FeightTemplateListResp
-	65,  // 123: pmsclient.Pms.FeightTemplateUpdate:output_type -> pmsclient.FeightTemplateUpdateResp
-	67,  // 124: pmsclient.Pms.FeightTemplateDelete:output_type -> pmsclient.FeightTemplateDeleteResp
-	69,  // 125: pmsclient.Pms.MemberPriceAdd:output_type -> pmsclient.MemberPriceAddResp
-	72,  // 126: pmsclient.Pms.MemberPriceList:output_type -> pmsclient.MemberPriceListResp
-	74,  // 127: pmsclient.Pms.MemberPriceUpdate:output_type -> pmsclient.MemberPriceUpdateResp
-	76,  // 128: pmsclient.Pms.MemberPriceDelete:output_type -> pmsclient.MemberPriceDeleteResp
-	78,  // 129: pmsclient.Pms.ProductAttributeCategoryAdd:output_type -> pmsclient.ProductAttributeCategoryAddResp
-	81,  // 130: pmsclient.Pms.ProductAttributeCategoryList:output_type -> pmsclient.ProductAttributeCategoryListResp
-	83,  // 131: pmsclient.Pms.ProductAttributeCategoryUpdate:output_type -> pmsclient.ProductAttributeCategoryUpdateResp
-	85,  // 132: pmsclient.Pms.ProductAttributeCategoryDelete:output_type -> pmsclient.ProductAttributeCategoryDeleteResp
-	87,  // 133: pmsclient.Pms.ProductAttributeAdd:output_type -> pmsclient.ProductAttributeAddResp
-	90,  // 134: pmsclient.Pms.ProductAttributeList:output_type -> pmsclient.ProductAttributeListResp
-	92,  // 135: pmsclient.Pms.ProductAttributeUpdate:output_type -> pmsclient.ProductAttributeUpdateResp
-	94,  // 136: pmsclient.Pms.ProductAttributeDelete:output_type -> pmsclient.ProductAttributeDeleteResp
-	96,  // 137: pmsclient.Pms.ProductAttributeValueAdd:output_type -> pmsclient.ProductAttributeValueAddResp
-	99,  // 138: pmsclient.Pms.ProductAttributeValueList:output_type -> pmsclient.ProductAttributeValueListResp
-	101, // 139: pmsclient.Pms.ProductAttributeValueUpdate:output_type -> pmsclient.ProductAttributeValueUpdateResp
-	103, // 140: pmsclient.Pms.ProductAttributeValueDelete:output_type -> pmsclient.ProductAttributeValueDeleteResp
-	105, // 141: pmsclient.Pms.ProductCategoryAttributeRelationAdd:output_type -> pmsclient.ProductCategoryAttributeRelationAddResp
-	108, // 142: pmsclient.Pms.ProductCategoryAttributeRelationList:output_type -> pmsclient.ProductCategoryAttributeRelationListResp
-	110, // 143: pmsclient.Pms.ProductCategoryAttributeRelationUpdate:output_type -> pmsclient.ProductCategoryAttributeRelationUpdateResp
-	112, // 144: pmsclient.Pms.ProductCategoryAttributeRelationDelete:output_type -> pmsclient.ProductCategoryAttributeRelationDeleteResp
-	114, // 145: pmsclient.Pms.ProductCategoryAdd:output_type -> pmsclient.ProductCategoryAddResp
-	119, // 146: pmsclient.Pms.ProductCategoryList:output_type -> pmsclient.ProductCategoryListResp
-	119, // 147: pmsclient.Pms.ProductCategoryFirstList:output_type -> pmsclient.ProductCategoryListResp
-	119, // 148: pmsclient.Pms.ProductCategorySecondList:output_type -> pmsclient.ProductCategoryListResp
-	121, // 149: pmsclient.Pms.ProductCategoryUpdate:output_type -> pmsclient.ProductCategoryUpdateResp
-	123, // 150: pmsclient.Pms.ProductCategoryDelete:output_type -> pmsclient.ProductCategoryDeleteResp
-	125, // 151: pmsclient.Pms.ProductFullReductionAdd:output_type -> pmsclient.ProductFullReductionAddResp
-	128, // 152: pmsclient.Pms.ProductFullReductionList:output_type -> pmsclient.ProductFullReductionListResp
-	130, // 153: pmsclient.Pms.ProductFullReductionUpdate:output_type -> pmsclient.ProductFullReductionUpdateResp
-	132, // 154: pmsclient.Pms.ProductFullReductionDelete:output_type -> pmsclient.ProductFullReductionDeleteResp
-	134, // 155: pmsclient.Pms.ProductLadderAdd:output_type -> pmsclient.ProductLadderAddResp
-	137, // 156: pmsclient.Pms.ProductLadderList:output_type -> pmsclient.ProductLadderListResp
-	139, // 157: pmsclient.Pms.ProductLadderUpdate:output_type -> pmsclient.ProductLadderUpdateResp
-	141, // 158: pmsclient.Pms.ProductLadderDelete:output_type -> pmsclient.ProductLadderDeleteResp
-	143, // 159: pmsclient.Pms.ProductOperateLogAdd:output_type -> pmsclient.ProductOperateLogAddResp
-	146, // 160: pmsclient.Pms.ProductOperateLogList:output_type -> pmsclient.ProductOperateLogListResp
-	148, // 161: pmsclient.Pms.ProductOperateLogUpdate:output_type -> pmsclient.ProductOperateLogUpdateResp
-	150, // 162: pmsclient.Pms.ProductOperateLogDelete:output_type -> pmsclient.ProductOperateLogDeleteResp
-	152, // 163: pmsclient.Pms.ProductVertifyRecordAdd:output_type -> pmsclient.ProductVertifyRecordAddResp
-	155, // 164: pmsclient.Pms.ProductVertifyRecordList:output_type -> pmsclient.ProductVertifyRecordListResp
-	157, // 165: pmsclient.Pms.ProductVertifyRecordUpdate:output_type -> pmsclient.ProductVertifyRecordUpdateResp
-	159, // 166: pmsclient.Pms.ProductVertifyRecordDelete:output_type -> pmsclient.ProductVertifyRecordDeleteResp
-	161, // 167: pmsclient.Pms.SkuStockAdd:output_type -> pmsclient.SkuStockAddResp
-	164, // 168: pmsclient.Pms.SkuStockList:output_type -> pmsclient.SkuStockListResp
-	166, // 169: pmsclient.Pms.SkuStockUpdate:output_type -> pmsclient.SkuStockUpdateResp
-	168, // 170: pmsclient.Pms.SkuStockDelete:output_type -> pmsclient.SkuStockDeleteResp
-	95,  // [95:171] is the sub-list for method output_type
-	19,  // [19:95] is the sub-list for method input_type
+	169, // 95: pmsclient.Pms.CollectList:input_type -> pmsclient.CollectListReq
+	171, // 96: pmsclient.Pms.CollectAddOrDelete:input_type -> pmsclient.CollectAddOrDeleteReq
+	1,   // 97: pmsclient.Pms.ProductAdd:output_type -> pmsclient.ProductAddResp
+	4,   // 98: pmsclient.Pms.ProductList:output_type -> pmsclient.ProductListResp
+	6,   // 99: pmsclient.Pms.ProductUpdate:output_type -> pmsclient.ProductUpdateResp
+	8,   // 100: pmsclient.Pms.ProductDelete:output_type -> pmsclient.ProductDeleteResp
+	10,  // 101: pmsclient.Pms.ProductDetailById:output_type -> pmsclient.ProductDetailByIdResp
+	13,  // 102: pmsclient.Pms.ProductListByCategoryId:output_type -> pmsclient.ProductListByCategoryIdResp
+	15,  // 103: pmsclient.Pms.AlbumAdd:output_type -> pmsclient.AlbumAddResp
+	18,  // 104: pmsclient.Pms.AlbumList:output_type -> pmsclient.AlbumListResp
+	20,  // 105: pmsclient.Pms.AlbumUpdate:output_type -> pmsclient.AlbumUpdateResp
+	22,  // 106: pmsclient.Pms.AlbumDelete:output_type -> pmsclient.AlbumDeleteResp
+	24,  // 107: pmsclient.Pms.AlbumPicAdd:output_type -> pmsclient.AlbumPicAddResp
+	27,  // 108: pmsclient.Pms.AlbumPicList:output_type -> pmsclient.AlbumPicListResp
+	29,  // 109: pmsclient.Pms.AlbumPicUpdate:output_type -> pmsclient.AlbumPicUpdateResp
+	31,  // 110: pmsclient.Pms.AlbumPicDelete:output_type -> pmsclient.AlbumPicDeleteResp
+	33,  // 111: pmsclient.Pms.BrandAdd:output_type -> pmsclient.BrandAddResp
+	36,  // 112: pmsclient.Pms.BrandList:output_type -> pmsclient.BrandListResp
+	38,  // 113: pmsclient.Pms.BrandUpdate:output_type -> pmsclient.BrandUpdateResp
+	40,  // 114: pmsclient.Pms.BrandDelete:output_type -> pmsclient.BrandDeleteResp
+	42,  // 115: pmsclient.Pms.CommentAdd:output_type -> pmsclient.CommentAddResp
+	45,  // 116: pmsclient.Pms.CommentList:output_type -> pmsclient.CommentListResp
+	47,  // 117: pmsclient.Pms.CommentUpdate:output_type -> pmsclient.CommentUpdateResp
+	49,  // 118: pmsclient.Pms.CommentDelete:output_type -> pmsclient.CommentDeleteResp
+	51,  // 119: pmsclient.Pms.CommentReplayAdd:output_type -> pmsclient.CommentReplayAddResp
+	54,  // 120: pmsclient.Pms.CommentReplayList:output_type -> pmsclient.CommentReplayListResp
+	56,  // 121: pmsclient.Pms.CommentReplayUpdate:output_type -> pmsclient.CommentReplayUpdateResp
+	58,  // 122: pmsclient.Pms.CommentReplayDelete:output_type -> pmsclient.CommentReplayDeleteResp
+	60,  // 123: pmsclient.Pms.FeightTemplateAdd:output_type -> pmsclient.FeightTemplateAddResp
+	63,  // 124: pmsclient.Pms.FeightTemplateList:output_type -> pmsclient.FeightTemplateListResp
+	65,  // 125: pmsclient.Pms.FeightTemplateUpdate:output_type -> pmsclient.FeightTemplateUpdateResp
+	67,  // 126: pmsclient.Pms.FeightTemplateDelete:output_type -> pmsclient.FeightTemplateDeleteResp
+	69,  // 127: pmsclient.Pms.MemberPriceAdd:output_type -> pmsclient.MemberPriceAddResp
+	72,  // 128: pmsclient.Pms.MemberPriceList:output_type -> pmsclient.MemberPriceListResp
+	74,  // 129: pmsclient.Pms.MemberPriceUpdate:output_type -> pmsclient.MemberPriceUpdateResp
+	76,  // 130: pmsclient.Pms.MemberPriceDelete:output_type -> pmsclient.MemberPriceDeleteResp
+	78,  // 131: pmsclient.Pms.ProductAttributeCategoryAdd:output_type -> pmsclient.ProductAttributeCategoryAddResp
+	81,  // 132: pmsclient.Pms.ProductAttributeCategoryList:output_type -> pmsclient.ProductAttributeCategoryListResp
+	83,  // 133: pmsclient.Pms.ProductAttributeCategoryUpdate:output_type -> pmsclient.ProductAttributeCategoryUpdateResp
+	85,  // 134: pmsclient.Pms.ProductAttributeCategoryDelete:output_type -> pmsclient.ProductAttributeCategoryDeleteResp
+	87,  // 135: pmsclient.Pms.ProductAttributeAdd:output_type -> pmsclient.ProductAttributeAddResp
+	90,  // 136: pmsclient.Pms.ProductAttributeList:output_type -> pmsclient.ProductAttributeListResp
+	92,  // 137: pmsclient.Pms.ProductAttributeUpdate:output_type -> pmsclient.ProductAttributeUpdateResp
+	94,  // 138: pmsclient.Pms.ProductAttributeDelete:output_type -> pmsclient.ProductAttributeDeleteResp
+	96,  // 139: pmsclient.Pms.ProductAttributeValueAdd:output_type -> pmsclient.ProductAttributeValueAddResp
+	99,  // 140: pmsclient.Pms.ProductAttributeValueList:output_type -> pmsclient.ProductAttributeValueListResp
+	101, // 141: pmsclient.Pms.ProductAttributeValueUpdate:output_type -> pmsclient.ProductAttributeValueUpdateResp
+	103, // 142: pmsclient.Pms.ProductAttributeValueDelete:output_type -> pmsclient.ProductAttributeValueDeleteResp
+	105, // 143: pmsclient.Pms.ProductCategoryAttributeRelationAdd:output_type -> pmsclient.ProductCategoryAttributeRelationAddResp
+	108, // 144: pmsclient.Pms.ProductCategoryAttributeRelationList:output_type -> pmsclient.ProductCategoryAttributeRelationListResp
+	110, // 145: pmsclient.Pms.ProductCategoryAttributeRelationUpdate:output_type -> pmsclient.ProductCategoryAttributeRelationUpdateResp
+	112, // 146: pmsclient.Pms.ProductCategoryAttributeRelationDelete:output_type -> pmsclient.ProductCategoryAttributeRelationDeleteResp
+	114, // 147: pmsclient.Pms.ProductCategoryAdd:output_type -> pmsclient.ProductCategoryAddResp
+	119, // 148: pmsclient.Pms.ProductCategoryList:output_type -> pmsclient.ProductCategoryListResp
+	119, // 149: pmsclient.Pms.ProductCategoryFirstList:output_type -> pmsclient.ProductCategoryListResp
+	119, // 150: pmsclient.Pms.ProductCategorySecondList:output_type -> pmsclient.ProductCategoryListResp
+	121, // 151: pmsclient.Pms.ProductCategoryUpdate:output_type -> pmsclient.ProductCategoryUpdateResp
+	123, // 152: pmsclient.Pms.ProductCategoryDelete:output_type -> pmsclient.ProductCategoryDeleteResp
+	125, // 153: pmsclient.Pms.ProductFullReductionAdd:output_type -> pmsclient.ProductFullReductionAddResp
+	128, // 154: pmsclient.Pms.ProductFullReductionList:output_type -> pmsclient.ProductFullReductionListResp
+	130, // 155: pmsclient.Pms.ProductFullReductionUpdate:output_type -> pmsclient.ProductFullReductionUpdateResp
+	132, // 156: pmsclient.Pms.ProductFullReductionDelete:output_type -> pmsclient.ProductFullReductionDeleteResp
+	134, // 157: pmsclient.Pms.ProductLadderAdd:output_type -> pmsclient.ProductLadderAddResp
+	137, // 158: pmsclient.Pms.ProductLadderList:output_type -> pmsclient.ProductLadderListResp
+	139, // 159: pmsclient.Pms.ProductLadderUpdate:output_type -> pmsclient.ProductLadderUpdateResp
+	141, // 160: pmsclient.Pms.ProductLadderDelete:output_type -> pmsclient.ProductLadderDeleteResp
+	143, // 161: pmsclient.Pms.ProductOperateLogAdd:output_type -> pmsclient.ProductOperateLogAddResp
+	146, // 162: pmsclient.Pms.ProductOperateLogList:output_type -> pmsclient.ProductOperateLogListResp
+	148, // 163: pmsclient.Pms.ProductOperateLogUpdate:output_type -> pmsclient.ProductOperateLogUpdateResp
+	150, // 164: pmsclient.Pms.ProductOperateLogDelete:output_type -> pmsclient.ProductOperateLogDeleteResp
+	152, // 165: pmsclient.Pms.ProductVertifyRecordAdd:output_type -> pmsclient.ProductVertifyRecordAddResp
+	155, // 166: pmsclient.Pms.ProductVertifyRecordList:output_type -> pmsclient.ProductVertifyRecordListResp
+	157, // 167: pmsclient.Pms.ProductVertifyRecordUpdate:output_type -> pmsclient.ProductVertifyRecordUpdateResp
+	159, // 168: pmsclient.Pms.ProductVertifyRecordDelete:output_type -> pmsclient.ProductVertifyRecordDeleteResp
+	161, // 169: pmsclient.Pms.SkuStockAdd:output_type -> pmsclient.SkuStockAddResp
+	164, // 170: pmsclient.Pms.SkuStockList:output_type -> pmsclient.SkuStockListResp
+	166, // 171: pmsclient.Pms.SkuStockUpdate:output_type -> pmsclient.SkuStockUpdateResp
+	168, // 172: pmsclient.Pms.SkuStockDelete:output_type -> pmsclient.SkuStockDeleteResp
+	170, // 173: pmsclient.Pms.CollectList:output_type -> pmsclient.CollectListResp
+	172, // 174: pmsclient.Pms.CollectAddOrDelete:output_type -> pmsclient.CollectAddOrDeleteResp
+	97,  // [97:175] is the sub-list for method output_type
+	19,  // [19:97] is the sub-list for method input_type
 	19,  // [19:19] is the sub-list for extension type_name
 	19,  // [19:19] is the sub-list for extension extendee
 	0,   // [0:19] is the sub-list for field type_name
@@ -16902,6 +17118,54 @@ func file_pms_proto_init() {
 				return nil
 			}
 		}
+		file_pms_proto_msgTypes[169].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectListReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_pms_proto_msgTypes[170].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectListResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_pms_proto_msgTypes[171].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectAddOrDeleteReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_pms_proto_msgTypes[172].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CollectAddOrDeleteResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -16909,7 +17173,7 @@ func file_pms_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_pms_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   169,
+			NumMessages:   173,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -2,6 +2,7 @@ package order
 
 import (
 	"context"
+	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -24,7 +25,14 @@ func NewOrderCancelLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderC
 }
 
 func (l *OrderCancelLogic) OrderCancel(req types.OrderCancelReq) (resp *types.OrderCancelResp, err error) {
-	// todo: add your logic here and delete this line
 
-	return
+	l.svcCtx.Oms.OrderCancel(l.ctx, &omsclient.OrderCancelReq{
+		Id:       req.OrderId,
+		MemberId: req.UserId,
+	})
+
+	return &types.OrderCancelResp{
+		Errno:  0,
+		Errmsg: "",
+	}, nil
 }

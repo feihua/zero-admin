@@ -2,7 +2,6 @@ package order
 
 import (
 	"context"
-
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
 
@@ -24,7 +23,13 @@ func NewOrderGoodsLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderGo
 }
 
 func (l *OrderGoodsLogic) OrderGoods(req types.OrderGoodsReq) (resp *types.OrderGoodsResp, err error) {
-	// todo: add your logic here and delete this line
+	//l.svcCtx.Pms.ProductListByCategoryId(l.ctx, &pmsclient.ProductListByCategoryIdReq{
+	//	ProductCategoryId: req.OrderId,
+	//})
 
-	return
+	return &types.OrderGoodsResp{
+		Errno:  0,
+		Data:   nil,
+		Errmsg: "",
+	}, nil
 }
