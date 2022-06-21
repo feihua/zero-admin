@@ -5,89 +5,87 @@ info(
 )
 
 type CartListReq struct {
-    UserId  int64  `path:"userId"`
+    UserId int64 `path:"userId"`
 }
 
 type CartListResp struct {
-    Errno  int64  `json:"errno"`
-    Data   CartListData   `json:"data"`
+    Errno int64 `json:"errno"`
+    Data CartListData `json:"data"`
     Errmsg string `json:"errmsg"`
 }
 
 type CartListData struct {
-    CartTotal CartTotal  `json:"cartTotal"`
-    CartList  []CartList `json:"cartList"`
+    CartTotal CartTotal `json:"cartTotal"` //统计数据
+    CartList []CartList `json:"cartList"`  //商品数据列表
 }
 
 type CartList struct {
-    ID             int64    `json:"id"`
-    UserID         int64    `json:"userId"`
-    GoodsID        int64    `json:"goodsId"`
-    GoodsSn        string   `json:"goodsSn"`
-    GoodsName      string   `json:"goodsName"`
-    ProductID      int64    `json:"productId"`
-    Price          int64    `json:"price"`
-    Number         int64    `json:"number"`
-    Specifications []string `json:"specifications"`
-    Checked        bool     `json:"checked"`
-    PicURL         string   `json:"picUrl"`
-    AddTime        string     `json:"addTime"`
-    UpdateTime     string     `json:"updateTime"`
-    Deleted        bool     `json:"deleted"`
+    ID int64 `json:"id"`                            //id
+    UserID int64 `json:"userId"`                    //用户Id
+    GoodsID int64 `json:"goodsId"`                  //商品Id
+    GoodsSn string `json:"goodsSn"`                 //商品编号
+    GoodsName string `json:"goodsName"`             //商品名称
+    ProductID int64 `json:"productId"`              //产品规格Id
+    Price int64 `json:"price"`                      //价格
+    Number int64 `json:"number"`                    //数量
+    Specifications []string `json:"specifications"` //规格值
+    Checked bool `json:"checked"`                   //是否选择
+    PicURL string `json:"picUrl"`                   //图片
+    AddTime string `json:"addTime"`                 //添加时间
+    UpdateTime string `json:"updateTime"`           //更新时间
+    Deleted bool `json:"deleted"`                   //是否删除
 }
 
 type CartTotal struct {
-    GoodsCount         int64 `json:"goodsCount"`
-    CheckedGoodsCount  int64 `json:"checkedGoodsCount"`
-    GoodsAmount        int64 `json:"goodsAmount"`
-    CheckedGoodsAmount int64 `json:"checkedGoodsAmount"`
+    GoodsCount int64 `json:"goodsCount"`                //商品总数
+    CheckedGoodsCount int64 `json:"checkedGoodsCount"`  //选择的商品总数
 }
 
 type CartAddReq struct {
-    IsDeleted      bool   `json:"IS_DELETED"`
-    NotDeleted     bool   `json:"NOT_DELETED"`
-    ID             int64  `json:"id"`
-    UserID         int64  `json:"userId"`
-    GoodsID        int64  `json:"goodsId"`
-    GoodsSn        string `json:"goodsSn"`
-    GoodsName      string `json:"goodsName"`
-    ProductID      int64  `json:"productId"`
-    Price          string `json:"price"`
-    Number         string `json:"number"`
-    Specifications string `json:"specifications"`
-    Checked        bool   `json:"checked"`
-    PicURL         string `json:"picUrl"`
-    AddTime        string `json:"addTime"`
-    UpdateTime     string `json:"updateTime"`
-    Deleted        bool   `json:"deleted"`
+    IsDeleted bool `json:"IS_DELETED"`
+    NotDeleted bool `json:"NOT_DELETED"`
+    ID int64 `json:"id"`                            //id
+    UserID int64 `json:"userId"`                    //用户Id
+    GoodsID int64 `json:"goodsId"`                  //商品Id
+    GoodsSn string `json:"goodsSn"`                 //商品编号
+    GoodsName string `json:"goodsName"`             //商品名称
+    ProductID int64 `json:"productId"`              //产品规格Id
+    Price int64 `json:"price"`                      //价格
+    Number int64 `json:"number"`                    //数量
+    Specifications []string `json:"specifications"` //规格值
+    Checked bool `json:"checked"`                   //是否选择
+    PicURL string `json:"picUrl"`                   //图片
+    AddTime string `json:"addTime"`                 //添加时间
+    UpdateTime string `json:"updateTime"`           //更新时间
+    Deleted bool `json:"deleted"`                   //是否删除
 }
 type CartAddResp struct {
-    Errno  int64  `json:"errno"`
+    Errno int64 `json:"errno"`
     Errmsg string `json:"errmsg"`
 }
 
 type CartFastAddReq struct {
-    IsDeleted      bool   `json:"IS_DELETED"`
-    NotDeleted     bool   `json:"NOT_DELETED"`
-    ID             int64  `json:"id"`
-    UserID         int64  `json:"userId"`
-    GoodsID        int64  `json:"goodsId"`
-    GoodsSn        string `json:"goodsSn"`
-    GoodsName      string `json:"goodsName"`
-    ProductID      int64  `json:"productId"`
-    Price          string `json:"price"`
-    Number         string `json:"number"`
-    Specifications string `json:"specifications"`
-    Checked        bool   `json:"checked"`
-    PicURL         string `json:"picUrl"`
-    AddTime        string `json:"addTime"`
-    UpdateTime     string `json:"updateTime"`
-    Deleted        bool   `json:"deleted"`
+    IsDeleted bool `json:"IS_DELETED"`
+    NotDeleted bool `json:"NOT_DELETED"`
+    ID int64 `json:"id"`                            //id
+    UserID int64 `json:"userId"`                    //用户Id
+    GoodsID int64 `json:"goodsId"`                  //商品Id
+    GoodsSn string `json:"goodsSn"`                 //商品编号
+    GoodsName string `json:"goodsName"`             //商品名称
+    ProductID int64 `json:"productId"`              //产品规格Id
+    Price int64 `json:"price"`                      //价格
+    Number int64 `json:"number"`                    //数量
+    Specifications []string `json:"specifications"` //规格值
+    Checked bool `json:"checked"`                   //是否选择
+    PicURL string `json:"picUrl"`                   //图片
+    AddTime string `json:"addTime"`                 //添加时间
+    UpdateTime string `json:"updateTime"`           //更新时间
+    Deleted bool `json:"deleted"`                   //是否删除
 }
 type CartFastAddResp struct {
-    Errno  int64   `json:"errno"`
-    Data   []CartFastAddData `json:"data"`
-    Errmsg string  `json:"errmsg"`
+    Errno int64 `json:"errno"`
+    Data []CartFastAddData `json:"data"`
+    Errmsg string `json:"errmsg"`
 }
 
 type CartFastAddData struct {
@@ -95,31 +93,31 @@ type CartFastAddData struct {
 }
 
 type CartCheckedReq struct {
-    UserID        int64  `json:"userId"`
-    ProductIds     []int64  `json:"productIds"`
-    IsChecked     int64  `json:"isChecked"`
+    UserID int64 `json:"userId"`
+    ProductIds []int64 `json:"productIds"`
+    IsChecked int64 `json:"isChecked"`
 }
 
 type CartCheckOutReq struct {
 
-    UserID        int64  `json:"userId"`
-    ProductIds     []int64  `json:"productIds"`
+    UserID int64 `json:"userId"`
+    ProductIds []int64 `json:"productIds"`
 }
 type CartCheckOutResp struct {
-    Errno  int64  `json:"errno"`
-    Data   CartCheckOutData   `json:"data"`
+    Errno int64 `json:"errno"`
+    Data CartCheckOutData `json:"data"`
     Errmsg string `json:"errmsg"`
 }
 
 type CartCheckOutData struct {
-    CheckedAddress   CheckedAddress     `json:"checkedAddress"`
-    ActualPrice      int64              `json:"actualPrice"`
-    OrderTotalPrice  int64              `json:"orderTotalPrice"`
-    CartID           int64              `json:"cartId"`
-    FreightPrice     int64              `json:"freightPrice"`
+    CheckedAddress CheckedAddress `json:"checkedAddress"`
+    ActualPrice int64 `json:"actualPrice"`
+    OrderTotalPrice int64 `json:"orderTotalPrice"`
+    CartID int64 `json:"cartId"`
+    FreightPrice int64 `json:"freightPrice"`
     CheckedGoodsList []CheckedGoodsList `json:"checkedGoodsList"`
-    GoodsTotalPrice  int64              `json:"goodsTotalPrice"`
-    AddressID        int64              `json:"addressId"`
+    GoodsTotalPrice int64 `json:"goodsTotalPrice"`
+    AddressID int64 `json:"addressId"`
 }
 
 type CheckedAddress struct {
@@ -127,20 +125,20 @@ type CheckedAddress struct {
 }
 
 type CheckedGoodsList struct {
-    ID             int64    `json:"id"`
-    UserID         int64    `json:"userId"`
-    GoodsID        int64    `json:"goodsId"`
-    GoodsSn        string   `json:"goodsSn"`
-    GoodsName      string   `json:"goodsName"`
-    ProductID      int64    `json:"productId"`
-    Price          int64    `json:"price"`
-    Number         int64    `json:"number"`
+    ID int64 `json:"id"`
+    UserID int64 `json:"userId"`
+    GoodsID int64 `json:"goodsId"`
+    GoodsSn string `json:"goodsSn"`
+    GoodsName string `json:"goodsName"`
+    ProductID int64 `json:"productId"`
+    Price int64 `json:"price"`
+    Number int64 `json:"number"`
     Specifications []string `json:"specifications"`
-    Checked        bool     `json:"checked"`
-    PicURL         string   `json:"picUrl"`
-    AddTime        string     `json:"addTime"`
-    UpdateTime     string     `json:"updateTime"`
-    Deleted        bool     `json:"deleted"`
+    Checked bool `json:"checked"`
+    PicURL string `json:"picUrl"`
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
 }
 
 type CartDeleteReq struct {
@@ -149,35 +147,34 @@ type CartDeleteReq struct {
 }
 
 type CartUpdateReq struct {
-    IsDeleted      bool   `json:"IS_DELETED"`
-    NotDeleted     bool   `json:"NOT_DELETED"`
-    ID             int64  `json:"id"`
-    UserID         int64  `json:"userId"`
-    GoodsID        int64  `json:"goodsId"`
-    GoodsSn        string `json:"goodsSn"`
-    GoodsName      string `json:"goodsName"`
-    ProductID      int64  `json:"productId"`
-    Price          string `json:"price"`
-    Number         string `json:"number"`
+    IsDeleted bool `json:"IS_DELETED"`
+    NotDeleted bool `json:"NOT_DELETED"`
+    ID int64 `json:"id"`
+    UserID int64 `json:"userId"`
+    GoodsID int64 `json:"goodsId"`
+    GoodsSn string `json:"goodsSn"`
+    GoodsName string `json:"goodsName"`
+    ProductID int64 `json:"productId"`
+    Price string `json:"price"`
+    Number string `json:"number"`
     Specifications string `json:"specifications"`
-    Checked        bool   `json:"checked"`
-    PicURL         string `json:"picUrl"`
-    AddTime        string `json:"addTime"`
-    UpdateTime     string `json:"updateTime"`
-    Deleted        bool   `json:"deleted"`
+    Checked bool `json:"checked"`
+    PicURL string `json:"picUrl"`
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
 }
 type CartUpdateResp struct {
-    Errno  int64  `json:"errno"`
+    Errno int64 `json:"errno"`
     Errmsg string `json:"errmsg"`
 }
 
 @server(
-//    jwt: Auth
+    //    jwt: Auth
     group: cart
     prefix: /api/cart
 )
 service front-api {
-
     @handler CartList
     get /index/:userId (CartListReq) returns (CartListResp)
 
@@ -198,5 +195,4 @@ service front-api {
 
     @handler CartUpdate
     get /update (CartUpdateReq) returns (CartUpdateResp)
-
 }

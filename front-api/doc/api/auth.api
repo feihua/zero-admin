@@ -11,19 +11,19 @@ type LoginReq struct {
 }
 
 type LoginAndRegisterResp struct {
-    Errno  int64  `json:"errno"`
-    Data   LoginAndRegisterData   `json:"data"`
+    Errno int64 `json:"errno"`
+    Data LoginAndRegisterData `json:"data"`
     Errmsg string `json:"errmsg"`
 }
 
 type LoginAndRegisterData struct {
-    UserInfo UserInfo `json:"userInfo"`
-    Token    string   `json:"token"`
+    UserInfo UserInfo `json:"userInfo"` //用户基本信息
+    Token string `json:"token"`         //服务端返回的token值
 }
 
 type UserInfo struct {
-    NickName  string `json:"nickName"`
-    AvatarURL string `json:"avatarUrl"`
+    NickName string `json:"nickName"`   //昵称
+    AvatarURL string `json:"avatarUrl"` //头像地址
 }
 
 type RegisterReq struct {
@@ -37,7 +37,6 @@ type RegisterReq struct {
     prefix: /api/auth
 )
 service front-api {
-
     @handler Login
     get /login (LoginReq) returns (LoginAndRegisterResp)
 

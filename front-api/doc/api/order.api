@@ -9,7 +9,6 @@ type OrderListReq struct {
     Page int64 `json:"page"`
     Limit int64 `json:"limit"`
     UserId int64 `json:"userId"`
-
 }
 
 type OrderListResp struct {
@@ -72,17 +71,17 @@ type OrderGoodsResp struct {
 type OrderGoodsData struct {
     IsDeleted bool `json:"IS_DELETED"`
     NotDeleted bool `json:"NOT_DELETED"`
-    ID int64 `json:"id"`
-    OrderID int64 `json:"orderId"`
-    GoodsID int64 `json:"goodsId"`
-    GoodsName string `json:"goodsName"`
-    GoodsSn string `json:"goodsSn"`
-    ProductID int64 `json:"productId"`
-    Number string `json:"number"`
-    Price string `json:"price"`
+    ID int64 `json:"id"`               //id
+    OrderID int64 `json:"orderId"`     //订单Id
+    GoodsID int64 `json:"goodsId"`     //商品Id
+    GoodsName string `json:"goodsName"`//商品名称
+    GoodsSn string `json:"goodsSn"`    //商品编号
+    ProductID int64 `json:"productId"` //产品规格Id
+    Number string `json:"number"`      //商品数量
+    Price string `json:"price"`        //商品价格
     Specifications string `json:"specifications"`
-    PicURL string `json:"picUrl"`
-    Comment int64 `json:"comment"`
+    PicURL string `json:"picUrl"`      //商品图片
+    Comment int64 `json:"comment"`     //评论
     AddTime string `json:"addTime"`
     UpdateTime string `json:"updateTime"`
     Deleted bool `json:"deleted"`

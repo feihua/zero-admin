@@ -6,88 +6,88 @@ info(
 
 
 type GoodsDetailReq struct {
-    Id  int64  `form:"id"`
+    Id int64 `form:"id"`
 }
 
 type GoodsDetailResp struct {
-    Errno  int64  `json:"errno"`
-    Data   GoodsDetailData   `json:"data"`
+    Errno int64 `json:"errno"`
+    Data GoodsDetailData `json:"data"`
     Errmsg string `json:"errmsg"`
 }
 
 type GoodsDetailData struct {
     SpecificationList []SpecificationList `json:"specificationList"`
-    Issue             []Issue             `json:"issue"`
-    UserHasCollect    int64               `json:"userHasCollect"`
-    ShareImage        string              `json:"shareImage"`
-    Share             bool                `json:"share"`
-    Attribute         []interface{}       `json:"attribute"`
-    ProductList       []ProductList       `json:"productList"`
-    Info              Info                `json:"info"`
+    Issue []Issue `json:"issue"`                   //常见问题
+    UserHasCollect int64 `json:"userHasCollect"`
+    ShareImage string `json:"shareImage"`
+    Share bool `json:"share"`
+    Attribute []interface{} `json:"attribute"`     //商品属性
+    ProductList []ProductList `json:"productList"` //商品规格
+    Info Info `json:"info"`                        //商品信息
 }
 
 type Info struct {
-    ID           int64    `json:"id"`
-    GoodsSn      string   `json:"goodsSn"`
-    Name         string   `json:"name"`
-    CategoryID   int64    `json:"categoryId"`
-    Gallery      []string `json:"gallery"`
-    Keywords     string   `json:"keywords"`
-    Brief        string   `json:"brief"`
-    IsOnSale     bool     `json:"isOnSale"`
-    SortOrder    int64    `json:"sortOrder"`
-    PicURL       string   `json:"picUrl"`
-    ShareURL     string   `json:"shareUrl"`
-    IsNew        bool     `json:"isNew"`
-    IsHot        bool     `json:"isHot"`
-    Unit         string   `json:"unit"`
-    CounterPrice int64    `json:"counterPrice"`
-    RetailPrice  int64    `json:"retailPrice"`
-    AddTime      string     `json:"addTime"`
-    UpdateTime   string     `json:"updateTime"`
-    Deleted      bool     `json:"deleted"`
-    Detail       string   `json:"detail"`
+    ID int64 `json:"id"`                    //id
+    GoodsSn string `json:"goodsSn"`         //商品编号
+    Name string `json:"name"`               //名称
+    CategoryID int64 `json:"categoryId"`    //分类Id
+    Gallery []string `json:"gallery"`       //图片
+    Keywords string `json:"keywords"`       //关键字
+    Brief string `json:"brief"`             //简介
+    IsOnSale bool `json:"isOnSale"`         //是否在售
+    SortOrder int64 `json:"sortOrder"`      //排序规则
+    PicURL string `json:"picUrl"`           //图片地址
+    ShareURL string `json:"shareUrl"`       //分享地址
+    IsNew bool `json:"isNew"`               //是否为新品
+    IsHot bool `json:"isHot"`               //是否为热卖商品
+    Unit string `json:"unit"`               //单位
+    CounterPrice int64 `json:"counterPrice"`//专柜价格
+    RetailPrice int64 `json:"retailPrice"`  //零售价格
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
+    Detail string `json:"detail"`
 }
 
 type Issue struct {
-    ID         int64  `json:"id"`
-    Question   string `json:"question"`
-    Answer     string `json:"answer"`
-    AddTime    string   `json:"addTime"`
-    UpdateTime string   `json:"updateTime"`
-    Deleted    bool   `json:"deleted"`
+    ID int64 `json:"id"`             //id
+    Question string `json:"question"`//问
+    Answer string `json:"answer"`    //答
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
 }
 
 type ProductList struct {
-    ID             int64    `json:"id"`
-    GoodsID        int64    `json:"goodsId"`
-    Specifications []string `json:"specifications"`
-    Price          int64    `json:"price"`
-    Number         int64    `json:"number"`
-    URL            string   `json:"url"`
-    AddTime        string     `json:"addTime"`
-    UpdateTime     string     `json:"updateTime"`
-    Deleted        bool     `json:"deleted"`
+    ID int64 `json:"id"`                           //id
+    GoodsID int64 `json:"goodsId"`                 //商品Id
+    Specifications []string `json:"specifications"`//规格值
+    Price int64 `json:"price"`                     //价格
+    Number int64 `json:"number"`                   //数量
+    URL string `json:"url"`                        //图片路径
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
 }
 
 type SpecificationList struct {
-    Name      string      `json:"name"`
+    Name string `json:"name"`
     ValueList []ValueList `json:"valueList"`
 }
 
 type ValueList struct {
-    ID            int64  `json:"id"`
-    GoodsID       int64  `json:"goodsId"`
+    ID int64 `json:"id"`
+    GoodsID int64 `json:"goodsId"`
     Specification string `json:"specification"`
-    Value         string `json:"value"`
-    PicURL        string `json:"picUrl"`
-    AddTime       string   `json:"addTime"`
-    UpdateTime    string   `json:"updateTime"`
-    Deleted       bool   `json:"deleted"`
+    Value string `json:"value"`
+    PicURL string `json:"picUrl"`
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
 }
 
 type GoodsCategoryReq struct {
-    Id  int64  `form:"id"`
+    Id int64 `form:"id"`
 }
 
 type GoodsCategoryResp struct {
@@ -105,24 +105,23 @@ type GoodsCategoryData struct {
 }
 
 type GoodsCategoryList struct {
-    ID             int64    `json:"id"`
-    GoodsID        int64    `json:"goodsId"`
+    ID int64 `json:"id"`
+    GoodsID int64 `json:"goodsId"`
     Specifications []string `json:"specifications"`
-    Price          int64    `json:"price"`
-    Number         int64    `json:"number"`
-    URL            string   `json:"url"`
-    AddTime        string     `json:"addTime"`
-    UpdateTime     string     `json:"updateTime"`
-    Deleted        bool     `json:"deleted"`
+    Price int64 `json:"price"`
+    Number int64 `json:"number"`
+    URL string `json:"url"`
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
 }
 
 @server(
-//    jwt: Auth
+    //    jwt: Auth
     group: product
     prefix: /api/goods
 )
 service front-api {
-
     @handler GoodsDetail
     get /detail (GoodsDetailReq) returns (GoodsDetailResp)
 

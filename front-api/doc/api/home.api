@@ -5,47 +5,47 @@ info(
 )
 
 type HomeResp struct {
-    Errno  int64  `json:"errno"`
-    Data   HomeData   `json:"data"`
+    Errno int64 `json:"errno"`
+    Data HomeData `json:"data"`
     Errmsg string `json:"errmsg"`
 }
 
 type HomeData struct {
-    NewGoodsList []GoodsList `json:"newGoodsList"`
-    Channel      []Channel   `json:"channel"`
-    Banner       []Banner    `json:"banner"`
-    HotGoodsList []GoodsList `json:"hotGoodsList"`
+    NewGoodsList []GoodsList `json:"newGoodsList"`//新品列表
+    Channel []Channel `json:"channel"`            //分类列表
+    Banner []Banner `json:"banner"`               //轮播图列表
+    HotGoodsList []GoodsList `json:"hotGoodsList"`//热卖商品列表
 }
 
 type Banner struct {
-    ID         int64  `json:"id"`
-    Name       string `json:"name"`
-    Link       string `json:"link"`
-    URL        string `json:"url"`
-    Position   int64  `json:"position"`
-    Content    string `json:"content"`
-    Enabled    bool   `json:"enabled"`
-    AddTime    string   `json:"addTime"`
-    UpdateTime string   `json:"updateTime"`
-    Deleted    bool   `json:"deleted"`
+    ID int64 `json:"id"`            //轮播图id
+    Name string `json:"name"`       //名称
+    Link string `json:"link"`       //轮播图链接
+    URL string `json:"url"`         //轮播图地址
+    Position int64 `json:"position"`//位置
+    Content string `json:"content"` //内容
+    Enabled bool `json:"enabled"`   //是否启用
+    AddTime string `json:"addTime"`
+    UpdateTime string `json:"updateTime"`
+    Deleted bool `json:"deleted"`
 }
 
 
 type Channel struct {
-    ID      int64  `json:"id"`
-    Name    string `json:"name"`
-    IconURL string `json:"iconUrl"`
+    ID int64 `json:"id"`           //分类id
+    Name string `json:"name"`      //分类名称
+    IconURL string `json:"iconUrl"`//分类图标地址
 }
 
 type GoodsList struct {
-    ID           int64  `json:"id"`
-    Name         string `json:"name"`
-    Brief        string `json:"brief"`
-    PicURL       string `json:"picUrl"`
-    IsNew        bool   `json:"isNew"`
-    IsHot        bool   `json:"isHot"`
-    CounterPrice int64  `json:"counterPrice"`
-    RetailPrice  int64  `json:"retailPrice"`
+    ID int64 `json:"id"`                    //商品id
+    Name string `json:"name"`               //商品名称
+    Brief string `json:"brief"`             //商品简介
+    PicURL string `json:"picUrl"`           //商品图片
+    IsNew bool `json:"isNew"`               //是否为新品
+    IsHot bool `json:"isHot"`               //是否为热卖商品
+    CounterPrice int64 `json:"counterPrice"`//专柜价格
+    RetailPrice int64 `json:"retailPrice"`  //零售价格
 }
 
 
@@ -53,7 +53,6 @@ type GoodsList struct {
     group: home
 )
 service front-api {
-
     @handler HomeIndex
     get /api/home/index returns (HomeResp)
 }

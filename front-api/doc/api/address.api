@@ -18,14 +18,32 @@ type AddressListResp struct {
 }
 
 type AddressListData struct {
-    Total int64 `json:"total"`
-    Pages int64 `json:"pages"`
-    Limit int64 `json:"limit"`
-    Page int64 `json:"page"`
-    List []AddressList `json:"list"`
+    Total int64 `json:"total"`       //总数
+    Pages int64 `json:"pages"`       //总页数
+    Limit int64 `json:"limit"`       //分页数量
+    Page int64 `json:"page"`         //当前页
+    List []AddressList `json:"list"` //地址列表
 }
 
 type AddressList struct {
+    ID int64 `json:"id"`                        //id
+    Name string `json:"name"`                   //用户名
+    UserID int64 `json:"userId"`                //用户Id
+    Province string `json:"province"`           //省
+    City string `json:"city"`                   //市
+    County string `json:"county"`               //国家
+    AddressDetail string `json:"addressDetail"` //详情地址
+    AreaCode string `json:"areaCode"`           //地区编码
+    Tel string `json:"tel"`                     //电话
+    IsDefault bool `json:"isDefault"`           //是否为默认地址
+    AddTime string `json:"addTime"`             //添加时间
+    UpdateTime string `json:"updateTime"`       //更新时间
+    Deleted bool `json:"deleted"`               //是否删除
+}
+
+type AddressSaveReq struct {
+    IsDeleted bool `json:"IS_DELETED"`
+    NotDeleted bool `json:"NOT_DELETED"`
     ID int64 `json:"id"`
     Name string `json:"name"`
     UserID int64 `json:"userId"`
@@ -34,72 +52,51 @@ type AddressList struct {
     County string `json:"county"`
     AddressDetail string `json:"addressDetail"`
     AreaCode string `json:"areaCode"`
+    PostalCode string `json:"postalCode"`
     Tel string `json:"tel"`
     IsDefault bool `json:"isDefault"`
-    AddTime string `json:"addTime"`
-    UpdateTime string `json:"updateTime"`
-    Deleted bool `json:"deleted"`
-}
-
-type AddressSaveReq struct {
-    IsDeleted     bool   `json:"IS_DELETED"`
-    NotDeleted    bool   `json:"NOT_DELETED"`
-    ID            int64  `json:"id"`
-    Name          string `json:"name"`
-    UserID        int64  `json:"userId"`
-    Province      string `json:"province"`
-    City          string `json:"city"`
-    County        string `json:"county"`
-    AddressDetail string `json:"addressDetail"`
-    AreaCode      string `json:"areaCode"`
-    PostalCode    string `json:"postalCode"`
-    Tel           string `json:"tel"`
-    IsDefault     bool   `json:"isDefault"`
-    AddTime       string `json:"addTime"`
-    UpdateTime    string `json:"updateTime"`
-    Deleted       bool   `json:"deleted"`
 }
 type AddressSaveResp struct {
-    Errno  int64   `json:"errno"`
-    Errmsg string  `json:"errmsg"`
+    Errno int64 `json:"errno"`
+    Errmsg string `json:"errmsg"`
 }
 
 type AddressDeleteReq struct {
-    UserID        int64  `json:"userId"`
-    AddressID     int64  `json:"addressID"`
+    UserID int64 `json:"userId"`
+    AddressID int64 `json:"addressID"`
 }
 type AddressDeleteResp struct {
-    Errno  int64   `json:"errno"`
-    Errmsg string  `json:"errmsg"`
+    Errno int64 `json:"errno"`
+    Errmsg string `json:"errmsg"`
 }
 
 type AddressDetailReq struct {
-    UserID        int64  `json:"userId"`
-    AddressID     int64  `json:"addressID"`
+    UserID int64 `json:"userId"`
+    AddressID int64 `json:"addressID"`
 }
 type AddressDetailResp struct {
-    Errno  int64   `json:"errno"`
-    Data   AddressDetailData `json:"data"`
-    Errmsg string  `json:"errmsg"`
+    Errno int64 `json:"errno"`
+    Data AddressDetailData `json:"data"`
+    Errmsg string `json:"errmsg"`
 }
 
 type AddressDetailData struct {
-    IsDeleted     bool   `json:"IS_DELETED"`
-    NotDeleted    bool   `json:"NOT_DELETED"`
-    ID            int64  `json:"id"`
-    Name          string `json:"name"`
-    UserID        int64  `json:"userId"`
-    Province      string `json:"province"`
-    City          string `json:"city"`
-    County        string `json:"county"`
-    AddressDetail string `json:"addressDetail"`
-    AreaCode      string `json:"areaCode"`
-    PostalCode    string `json:"postalCode"`
-    Tel           string `json:"tel"`
-    IsDefault     bool   `json:"isDefault"`
-    AddTime       string `json:"addTime"`
-    UpdateTime    string `json:"updateTime"`
-    Deleted       bool   `json:"deleted"`
+    IsDeleted bool `json:"IS_DELETED"`
+    NotDeleted bool `json:"NOT_DELETED"`
+    ID int64 `json:"id"`                        //id
+    Name string `json:"name"`                   //用户名
+    UserID int64 `json:"userId"`                //用户Id
+    Province string `json:"province"`           //省
+    City string `json:"city"`                   //市
+    County string `json:"county"`               //国家
+    AddressDetail string `json:"addressDetail"` //详情地址
+    AreaCode string `json:"areaCode"`           //地区编码
+    PostalCode string `json:"postalCode"`
+    Tel string `json:"tel"`                     //电话
+    IsDefault bool `json:"isDefault"`           //是否为默认地址
+    AddTime string `json:"addTime"`             //添加时间
+    UpdateTime string `json:"updateTime"`       //更新时间
+    Deleted bool `json:"deleted"`               //是否删除
 }
 
 @server(

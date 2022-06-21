@@ -5,28 +5,28 @@ info(
 )
 
 type CategoryResp struct {
-    Errno  int64   `json:"errno"`
-    Data   []CategoryData `json:"data"`
-    Errmsg string  `json:"errmsg"`
+    Errno int64 `json:"errno"`
+    Data []CategoryData `json:"data"`
+    Errmsg string `json:"errmsg"`
 }
 
 type CategoryData struct {
-    ID         int64  `json:"id"`
-    Name       string `json:"name"`
-    Keywords   string `json:"keywords"`
-    Desc       string `json:"desc"`
-    PID        int64  `json:"pid"`
-    IconURL    string `json:"iconUrl"`
-    PicURL     string `json:"picUrl"`
-    Level      string  `json:"level"`
-    SortOrder  int64  `json:"sortOrder"`
-    AddTime    string `json:"addTime"`
+    ID int64 `json:"id"`              //分类id
+    Name string `json:"name"`         //名称
+    Keywords string `json:"keywords"` //关键字
+    Desc string `json:"desc"`         //描述
+    PID int64 `json:"pid"`            //父id
+    IconURL string `json:"iconUrl"`   //图标地址
+    PicURL string `json:"picUrl"`     //图片地址
+    Level string `json:"level"`       //等级
+    SortOrder int64 `json:"sortOrder"`//排序规则
+    AddTime string `json:"addTime"`
     UpdateTime string `json:"updateTime"`
-    Deleted    bool   `json:"deleted"`
+    Deleted bool `json:"deleted"`
 }
 
 type SecondCategoryReq struct {
-    Id  int64   `form:"id"`
+    Id int64 `form:"id"`
 }
 
 @server(
@@ -34,7 +34,6 @@ type SecondCategoryReq struct {
     prefix: /api/catalog
 )
 service front-api {
-
     @handler GetFirstCategory
     get /getfirstcategory returns (CategoryResp)
 
