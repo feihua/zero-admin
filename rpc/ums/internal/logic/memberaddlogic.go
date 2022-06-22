@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"encoding/json"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
@@ -30,18 +31,13 @@ func NewMemberAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MemberA
 // MemberAdd 会员注册
 func (l *MemberAddLogic) MemberAdd(in *ums.MemberAddReq) (*ums.MemberAddResp, error) {
 
-	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(in.Username)
-	if member != nil {
-		logx.WithContext(l.ctx).Errorf("用户名已注册,参数Username:%s", in.Username)
-		return nil, errors.New("用户名已注册")
+	//1.校验参数
+	err := checkParams(in, l)
+	if err != nil {
+		return nil, err
 	}
 
-	phone, _ := l.svcCtx.UmsMemberModel.FindOneByPhone(in.Phone)
-	if phone != nil {
-		logx.WithContext(l.ctx).Errorf("手机号已注册,参数Phone:%s", in.Phone)
-		return nil, errors.New("手机号已注册")
-	}
-
+	//2.插入数据
 	result, _ := l.svcCtx.UmsMemberModel.Insert(umsmodel.UmsMember{
 		MemberLevelId:         4, //默认是普通会员
 		Username:              in.Username,
@@ -62,6 +58,29 @@ func (l *MemberAddLogic) MemberAdd(in *ums.MemberAddReq) (*ums.MemberAddResp, er
 		HistoryIntegration:    0,
 	})
 
+	//3.构建返回数据
+	return buildMemberRegisterResp(in, result, l)
+}
+
+//校验参数
+func checkParams(in *ums.MemberAddReq, l *MemberAddLogic) error {
+	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(in.Username)
+	if member != nil {
+		logx.WithContext(l.ctx).Errorf("用户名已注册,参数Username:%s", in.Username)
+		return errors.New("用户名已注册")
+	}
+
+	phone, _ := l.svcCtx.UmsMemberModel.FindOneByPhone(in.Phone)
+	if phone != nil {
+		logx.WithContext(l.ctx).Errorf("手机号已注册,参数Phone:%s", in.Phone)
+		return errors.New("手机号已注册")
+	}
+	return nil
+}
+
+//构建返回数据
+func buildMemberRegisterResp(in *ums.MemberAddReq, result sql.Result, l *MemberAddLogic) (*ums.MemberAddResp, error) {
+	//3.1生成token
 	userId, _ := result.LastInsertId()
 
 	now := time.Now().Unix()
@@ -74,6 +93,7 @@ func (l *MemberAddLogic) MemberAdd(in *ums.MemberAddReq) (*ums.MemberAddResp, er
 		return nil, err
 	}
 
+	//3.2返回数据
 	resp := &ums.MemberAddResp{
 		Nickname: in.Username,
 		Token:    jwtToken,
@@ -87,6 +107,7 @@ func (l *MemberAddLogic) MemberAdd(in *ums.MemberAddReq) (*ums.MemberAddResp, er
 	return resp, nil
 }
 
+//创建token
 func (l *MemberAddLogic) createJwtToken(secretKey string, iat, seconds, userId int64) (string, error) {
 	claims := make(jwt.MapClaims)
 	claims["exp"] = iat + seconds
