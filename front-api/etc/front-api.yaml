@@ -44,9 +44,9 @@ PayRpc:
       - localhost:2379
     Key: pay.rpc
 
-Log:
-  Mode: file
-  Path: logs/front
+#Log:
+#  Mode: file
+#  Path: logs/front
 Prometheus:
   Host: 127.0.0.1
   Port: 9199

@@ -38,8 +38,8 @@ type RegisterReq struct {
 )
 service front-api {
     @handler Login
-    get /login (LoginReq) returns (LoginAndRegisterResp)
+    post /login (LoginReq) returns (LoginAndRegisterResp)
 
     @handler Register
-    get /register (RegisterReq) returns (LoginAndRegisterResp)
+    post /register (RegisterReq) returns (LoginAndRegisterResp)
 }

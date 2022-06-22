@@ -8,7 +8,7 @@ create table ums_member
     nickname               varchar(64)  null comment '昵称',
     phone                  varchar(64)  null comment '手机号码',
     status                 int(1)       null comment '帐号启用状态:0->禁用；1->启用',
-    create_time            datetime     null comment '注册时间',
+    create_time            timestamp default CURRENT_TIMESTAMP     null comment '注册时间',
     icon                   varchar(500) null comment '头像',
     gender                 int(1)       null comment '性别：0->未知；1->男；2->女',
     birthday               date         null comment '生日',

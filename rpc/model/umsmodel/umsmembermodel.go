@@ -15,8 +15,8 @@ import (
 var (
 	umsMemberFieldNames          = builderx.FieldNames(&UmsMember{})
 	umsMemberRows                = strings.Join(umsMemberFieldNames, ",")
-	umsMemberRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberFieldNames, "id", "create_time", "update_time"), ",")
-	umsMemberRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
+	umsMemberRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	umsMemberRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 )
 
 type (
