@@ -28,5 +28,6 @@ type Config struct {
 
 	Redis struct {
 		Address string
+		Pass    string
 	}
 }

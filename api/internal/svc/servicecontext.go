@@ -27,7 +27,7 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	newRedis := redis.New(c.Redis.Address, redisConfig())
+	newRedis := redis.New(c.Redis.Address, redisConfig(c))
 	return &ServiceContext{
 		Config:   c,
 		CheckUrl: middleware.NewCheckUrlMiddleware(newRedis).Handle,
@@ -40,8 +40,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	}
 }
 
-func redisConfig() redis.Option {
+func redisConfig(c config.Config) redis.Option {
 	return func(r *redis.Redis) {
 		r.Type = redis.NodeType
+		r.Pass = c.Redis.Pass
 	}
 }
