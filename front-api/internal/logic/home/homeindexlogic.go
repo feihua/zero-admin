@@ -67,7 +67,7 @@ func queryHotProducts(l *HomeIndexLogic) []types.GoodsList {
 	for _, item := range homeRecommendProductList.List {
 		goodsLists = append(goodsLists, types.GoodsList{
 			ID:           item.Id,
-			Name:         "",
+			Name:         item.ProductName,
 			Brief:        "",
 			PicURL:       "",
 			IsNew:        false,
@@ -90,7 +90,7 @@ func queryNewProducts(l *HomeIndexLogic) []types.GoodsList {
 	for _, item := range homeNewProductList.List {
 		goodsList = append(goodsList, types.GoodsList{
 			ID:           item.Id,
-			Name:         "",
+			Name:         item.ProductName,
 			Brief:        "",
 			PicURL:       "",
 			IsNew:        false,
@@ -112,9 +112,10 @@ func queryBrands(l *HomeIndexLogic) []types.Channel {
 	var channels []types.Channel
 	for _, item := range homeBrandList.List {
 		channels = append(channels, types.Channel{
-			ID:      item.BrandId,
-			Name:    item.BrandName,
-			IconURL: item.BrandName,
+			ID:   item.BrandId,
+			Name: item.BrandName,
+			//todo 还要修改表，品牌图标url
+			IconURL: "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20181113/car_ad2.jpg",
 		})
 	}
 	return channels
@@ -133,7 +134,7 @@ func queryBanners(l *HomeIndexLogic) []types.Banner {
 			ID:       item.Id,
 			Name:     item.Name,
 			Link:     item.Url,
-			URL:      item.Url,
+			URL:      item.Pic,
 			Position: item.Sort,
 			//Content:    item.,
 			Enabled: item.Status == 1,
