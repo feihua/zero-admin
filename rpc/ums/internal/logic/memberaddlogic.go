@@ -38,6 +38,13 @@ func (l *MemberAddLogic) MemberAdd(in *ums.MemberAddReq) (*ums.MemberAddResp, er
 	}
 
 	//2.插入数据
+	result := insertMember(in, l)
+
+	//3.构建返回数据
+	return buildMemberRegisterResp(in, result, l)
+}
+
+func insertMember(in *ums.MemberAddReq, l *MemberAddLogic) sql.Result {
 	result, _ := l.svcCtx.UmsMemberModel.Insert(umsmodel.UmsMember{
 		MemberLevelId:         4, //默认是普通会员
 		Username:              in.Username,
@@ -57,9 +64,7 @@ func (l *MemberAddLogic) MemberAdd(in *ums.MemberAddReq) (*ums.MemberAddResp, er
 		LuckeyCount:           0,
 		HistoryIntegration:    0,
 	})
-
-	//3.构建返回数据
-	return buildMemberRegisterResp(in, result, l)
+	return result
 }
 
 //校验参数

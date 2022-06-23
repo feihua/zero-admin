@@ -2,6 +2,8 @@ package auth
 
 import (
 	"context"
+	"encoding/json"
+	"zero-admin/rpc/ums/ums"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -24,13 +26,19 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) LoginLogic {
 	}
 }
 
+// Login 会员登录
 func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginAndRegisterResp, err error) {
-	memberAddResp, _ := l.svcCtx.Ums.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
-		Username: req.Username,
-		Password: req.Password,
-		Phone:    "req.Mobile",
-	})
 
+	memberLoginResp, loginResp, err2, done := callLoginRpc(req, err, l)
+	if done {
+		return loginResp, err2
+	}
+
+	return buildLoginResp(memberLoginResp)
+}
+
+//构建返回数据
+func buildLoginResp(memberAddResp *ums.MemberLoginResp) (*types.LoginAndRegisterResp, error) {
 	userInfo := types.UserInfo{
 		NickName:  memberAddResp.Nickname,
 		AvatarURL: memberAddResp.Icon,
@@ -43,6 +51,25 @@ func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginAndRegisterResp
 	return &types.LoginAndRegisterResp{
 		Errno:  0,
 		Data:   data,
-		Errmsg: "",
+		Errmsg: "会员登录成功",
 	}, nil
+}
+
+//调用rpc方法登录
+func callLoginRpc(req types.LoginReq, err error, l *LoginLogic) (*ums.MemberLoginResp, *types.LoginAndRegisterResp, error, bool) {
+	loginResp, err := l.svcCtx.Ums.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
+		Username: req.Username,
+		Password: req.Password,
+		Phone:    "req.Mobile",
+	})
+
+	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.WithContext(l.ctx).Errorf("会员登录失败,参数: %s,响应：%s", reqStr, err.Error())
+		return nil, &types.LoginAndRegisterResp{
+			Errno:  1,
+			Errmsg: err.Error(),
+		}, nil, true
+	}
+	return loginResp, nil, nil, false
 }
