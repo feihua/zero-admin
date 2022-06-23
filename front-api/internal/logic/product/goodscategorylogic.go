@@ -32,15 +32,14 @@ func (l *GoodsCategoryLogic) GoodsCategory(req types.GoodsCategoryReq) (resp *ty
 
 	for _, item := range result.List {
 		list = append(list, types.GoodsCategoryList{
-			ID:             item.Id,
-			GoodsID:        0,
-			Specifications: nil,
-			Price:          0,
-			Number:         0,
-			URL:            "",
-			AddTime:        "",
-			UpdateTime:     "",
-			Deleted:        false,
+			ID:           item.Id,
+			Name:         item.Name,
+			Brief:        item.Description,
+			PicURL:       item.Pic,
+			IsNew:        false,
+			IsHot:        false,
+			CounterPrice: item.Price,
+			RetailPrice:  item.PromotionPrice,
 		})
 	}
 

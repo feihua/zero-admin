@@ -26,7 +26,7 @@ func NewProductListByCategoryIdLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *ProductListByCategoryIdLogic) ProductListByCategoryId(in *pmsclient.ProductListByCategoryIdReq) (*pmsclient.ProductListByCategoryIdResp, error) {
-	all, err := l.svcCtx.PmsProductModel.FindAll(1, 1000)
+	all, err := l.svcCtx.PmsProductModel.ProductListByCategoryId(in.ProductCategoryId, 1, 1000)
 	count, _ := l.svcCtx.PmsProductModel.Count()
 
 	if err != nil {

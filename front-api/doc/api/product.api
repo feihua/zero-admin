@@ -105,15 +105,15 @@ type GoodsCategoryData struct {
 }
 
 type GoodsCategoryList struct {
-    ID int64 `json:"id"`
-    GoodsID int64 `json:"goodsId"`
-    Specifications []string `json:"specifications"`
-    Price int64 `json:"price"`
-    Number int64 `json:"number"`
-    URL string `json:"url"`
-    AddTime string `json:"addTime"`
-    UpdateTime string `json:"updateTime"`
-    Deleted bool `json:"deleted"`
+    ID int64 `json:"id"`                    //商品id
+    Name string `json:"name"`               //商品名称
+    Brief string `json:"brief"`             //商品简介
+    PicURL string `json:"picUrl"`           //商品图片
+    IsNew bool `json:"isNew"`               //是否为新品
+    IsHot bool `json:"isHot"`               //是否为热卖商品
+    CounterPrice float64 `json:"counterPrice"`//专柜价格
+    RetailPrice float64 `json:"retailPrice"`  //零售价格
+
 }
 
 @server(
