@@ -25,9 +25,17 @@ func NewGetFirstCategoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) G
 }
 
 func (l *GetFirstCategoryLogic) GetFirstCategory() (resp *types.CategoryResp, err error) {
-	result, _ := l.svcCtx.Pms.ProductCategoryFirstList(l.ctx, &pmsclient.ProductCategoryFirstListReq{
+	result, err := l.svcCtx.Pms.ProductCategoryFirstList(l.ctx, &pmsclient.ProductCategoryFirstListReq{
 		ParentId: 0,
 	})
+
+	if err != nil {
+		logx.WithContext(l.ctx).Errorf("查询商品一级分类失败,响应：%s", err.Error())
+		return &types.CategoryResp{
+			Errno:  1,
+			Errmsg: err.Error(),
+		}, nil
+	}
 
 	var list []types.CategoryData
 
@@ -47,6 +55,6 @@ func (l *GetFirstCategoryLogic) GetFirstCategory() (resp *types.CategoryResp, er
 	return &types.CategoryResp{
 		Errno:  0,
 		Data:   list,
-		Errmsg: "",
+		Errmsg: "查询商品一级分类成功",
 	}, nil
 }

@@ -25,9 +25,17 @@ func NewGetSecondCategoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *GetSecondCategoryLogic) GetSecondCategory(req types.SecondCategoryReq) (resp *types.CategoryResp, err error) {
-	result, _ := l.svcCtx.Pms.ProductCategorySecondList(l.ctx, &pmsclient.ProductCategorySecondListReq{
+	result, err := l.svcCtx.Pms.ProductCategorySecondList(l.ctx, &pmsclient.ProductCategorySecondListReq{
 		ParentId: req.Id,
 	})
+
+	if err != nil {
+		logx.WithContext(l.ctx).Errorf("查询商品二级分类失败,响应：%s", err.Error())
+		return &types.CategoryResp{
+			Errno:  1,
+			Errmsg: err.Error(),
+		}, nil
+	}
 
 	var list []types.CategoryData
 
@@ -47,6 +55,6 @@ func (l *GetSecondCategoryLogic) GetSecondCategory(req types.SecondCategoryReq) 
 	return &types.CategoryResp{
 		Errno:  0,
 		Data:   list,
-		Errmsg: "",
+		Errmsg: "查询商品二级分类成功",
 	}, nil
 }
