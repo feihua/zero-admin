@@ -2,6 +2,7 @@ package address
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -26,13 +27,22 @@ func NewAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addr
 
 func (l *AddressDeleteLogic) AddressDelete(req types.AddressDeleteReq) (resp *types.AddressDeleteResp, err error) {
 
-	_, _ = l.svcCtx.Ums.MemberReceiveAddressDelete(l.ctx, &umsclient.MemberReceiveAddressDeleteReq{
+	_, err = l.svcCtx.Ums.MemberReceiveAddressDelete(l.ctx, &umsclient.MemberReceiveAddressDeleteReq{
 		Id: req.AddressID,
 	})
 
+	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.WithContext(l.ctx).Errorf("删除会员收货地址失败,参数：%s,响应：%s", reqStr, err.Error())
+		return &types.AddressDeleteResp{
+			Errno:  1,
+			Errmsg: err.Error(),
+		}, nil
+	}
+
 	return &types.AddressDeleteResp{
 		Errno:  0,
-		Errmsg: "删除会员信息成功",
+		Errmsg: "删除会员收货地址成功",
 	}, nil
 
 }

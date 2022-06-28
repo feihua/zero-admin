@@ -2,6 +2,7 @@ package address
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -26,15 +27,24 @@ func NewAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addres
 
 func (l *AddressListLogic) AddressList(req types.AddressListReq) (resp *types.AddressListResp, err error) {
 
-	reslut, _ := l.svcCtx.Ums.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
+	result, err := l.svcCtx.Ums.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		UserId:   req.UserId,
 	})
 
+	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.WithContext(l.ctx).Errorf("查询用户收货地址列表失败,参数：%s,响应：%s", reqStr, err.Error())
+		return &types.AddressListResp{
+			Errno:  1,
+			Errmsg: err.Error(),
+		}, nil
+	}
+
 	var list []types.AddressList
 
-	for _, address := range reslut.List {
+	for _, address := range result.List {
 		list = append(list, types.AddressList{
 			ID:            address.Id,
 			Name:          address.Name,
@@ -58,6 +68,6 @@ func (l *AddressListLogic) AddressList(req types.AddressListReq) (resp *types.Ad
 			Page:  0,
 			List:  list,
 		},
-		Errmsg: "",
+		Errmsg: "查询用户收货地址列表成功",
 	}, nil
 }
