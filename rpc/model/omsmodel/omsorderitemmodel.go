@@ -76,6 +76,21 @@ func (m *OmsOrderItemModel) FindOne(id int64) (*OmsOrderItem, error) {
 	}
 }
 
+func (m *OmsOrderItemModel) FindProductListByOrderId(OrderId int64) (*[]OmsOrderItem, error) {
+
+	query := fmt.Sprintf("select %s from %s where order_id = ?", omsOrderItemRows, m.table)
+	var resp []OmsOrderItem
+	err := m.conn.QueryRows(&resp, query, OrderId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *OmsOrderItemModel) FindAll(Current int64, PageSize int64) (*[]OmsOrderItem, error) {
 
 	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderItemRows, m.table)

@@ -100,6 +100,22 @@ func (m *OmsOrderModel) FindOne(id int64) (*OmsOrder, error) {
 	}
 }
 
+// FindListByMemberId 根据用户id查询订单
+func (m *OmsOrderModel) FindListByMemberId(MemberId int64) (*[]OmsOrder, error) {
+
+	query := fmt.Sprintf("select %s from %s where member_id = ? limit 1", omsOrderRows, m.table)
+	var resp []OmsOrder
+	err := m.conn.QueryRows(&resp, query, MemberId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *OmsOrderModel) FindAll(Current int64, PageSize int64) (*[]OmsOrder, error) {
 
 	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderRows, m.table)
@@ -134,6 +150,13 @@ func (m *OmsOrderModel) Count() (int64, error) {
 func (m *OmsOrderModel) Update(data OmsOrder) error {
 	query := fmt.Sprintf("update %s set %s where id = ?", m.table, omsOrderRowsWithPlaceHolder)
 	_, err := m.conn.Exec(query, data.MemberId, data.CouponId, data.OrderSn, data.MemberUsername, data.TotalAmount, data.PayAmount, data.FreightAmount, data.PromotionAmount, data.IntegrationAmount, data.CouponAmount, data.DiscountAmount, data.PayType, data.SourceType, data.Status, data.OrderType, data.DeliveryCompany, data.DeliverySn, data.AutoConfirmDay, data.Integration, data.Growth, data.PromotionInfo, data.BillType, data.BillHeader, data.BillContent, data.BillReceiverPhone, data.BillReceiverEmail, data.ReceiverName, data.ReceiverPhone, data.ReceiverPostCode, data.ReceiverProvince, data.ReceiverCity, data.ReceiverRegion, data.ReceiverDetailAddress, data.Note, data.ConfirmStatus, data.DeleteStatus, data.UseIntegration, data.PaymentTime, data.DeliveryTime, data.ReceiveTime, data.CommentTime, data.ModifyTime, data.Id)
+	return err
+}
+
+// UpdateOrderStatus 根据订单id更新订单状态
+func (m *OmsOrderModel) UpdateOrderStatus(status int64, id int64) error {
+	query := fmt.Sprintf("update %s set status = ? where id = ?", m.table)
+	_, err := m.conn.Exec(query, status, id)
 	return err
 }
 

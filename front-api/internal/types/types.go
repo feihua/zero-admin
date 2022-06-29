@@ -398,8 +398,27 @@ type OrderListReq struct {
 }
 
 type OrderListResp struct {
-	Errno  int64  `json:"errno"`
-	Errmsg string `json:"errmsg"`
+	Errno  int64           `json:"errno"`
+	Data   []OrderListData `json:"data"`
+	Errmsg string          `json:"errmsg"`
+}
+
+type OrderListData struct {
+	Id              int32           `json:"id"`
+	OrderSn         string          `json:"orderSn"`
+	ActualPrice     string          `json:"actualPrice"`
+	OrderStatusText string          `json:"orderStatusText"`
+	HandleOption    string          `json:"handleOption"`
+	GoodsList       []GoodsListData `json:"goodsList"`
+}
+
+type GoodsListData struct {
+	Id             int32  `json:"id"`
+	GoodsName      string `json:"goodsName"`
+	Number         string `json:"number"`
+	PicUrl         string `json:"picUrl"`
+	Specifications string `json:"specifications"`
+	Price          string `json:"price"`
 }
 
 type OrderCancelReq struct {

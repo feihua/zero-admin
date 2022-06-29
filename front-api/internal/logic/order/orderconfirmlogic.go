@@ -2,6 +2,7 @@ package order
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -25,13 +26,22 @@ func NewOrderConfirmLogic(ctx context.Context, svcCtx *svc.ServiceContext) Order
 }
 
 func (l *OrderConfirmLogic) OrderConfirm(req types.OrderConfirmReq) (resp *types.OrderConfirmResp, err error) {
-	l.svcCtx.Oms.OrderConfirm(l.ctx, &omsclient.OrderConfirmReq{
-		Id:       req.OrderId,
-		MemberId: req.UserId,
+	_, err = l.svcCtx.Oms.OrderConfirm(l.ctx, &omsclient.OrderConfirmReq{
+		UserId:  req.UserId,
+		OrderId: req.OrderId,
 	})
+
+	if err != nil {
+		reqStr, _ := json.Marshal(req)
+		logx.WithContext(l.ctx).Errorf("确认订单失败,参数：%s,响应：%s", reqStr, err.Error())
+		return &types.OrderConfirmResp{
+			Errno:  1,
+			Errmsg: err.Error(),
+		}, nil
+	}
 
 	return &types.OrderConfirmResp{
 		Errno:  0,
-		Errmsg: "",
+		Errmsg: "确认订单成功",
 	}, nil
 }

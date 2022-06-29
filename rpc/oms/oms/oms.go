@@ -37,6 +37,7 @@ type (
 	CompanyAddressListResp        = omsclient.CompanyAddressListResp
 	CompanyAddressUpdateReq       = omsclient.CompanyAddressUpdateReq
 	CompanyAddressUpdateResp      = omsclient.CompanyAddressUpdateResp
+	GoodsListByMemberIdData       = omsclient.GoodsListByMemberIdData
 	OrderAddReq                   = omsclient.OrderAddReq
 	OrderAddResp                  = omsclient.OrderAddResp
 	OrderCancelReq                = omsclient.OrderCancelReq
