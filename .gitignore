@@ -40,8 +40,8 @@ screenshot
 build
 logs
 goctl-shell.md
-api/etc/admin-api.yaml
-front-api/etc/front-api.yaml
+/api/etc/admin-api.yaml
+/front-api/etc/front-api.yaml
 rpc/oms/etc/oms.yaml
 rpc/pay/etc/pay.yaml
 rpc/pms/etc/pms.yaml
