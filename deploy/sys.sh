@@ -1,0 +1,1 @@
+go run rpc/sys/sys.go rpc/sys/etc/sys.yaml

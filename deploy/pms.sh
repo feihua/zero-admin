@@ -1,0 +1,1 @@
+go run rpc/pms/pms.go rpc/pms/etc/pms.yaml

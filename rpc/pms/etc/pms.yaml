@@ -6,7 +6,7 @@ Etcd:
   Key: pms.rpc
 
 Mysql:
-  Datasource: root:123456@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Datasource: root:123456@tcp(192.168.64.4:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
 #Log:
 #  Mode: file

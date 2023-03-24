@@ -44,10 +44,10 @@ goctl rpc protoc cms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 4.创建model
 进到rpc/目录操作
 goctl model mysql ddl -c -src book.sql -dir .
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="sys*" -dir ./model/sysmodel
+goctl model mysql datasource -url="root:123456@tcp(192.168.64.4:3306)/gozero" -table="sys*" -dir ./model/sysmodel
 
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="ums*" -dir ./model/umsmodel
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="pms*" -dir ./model/pmsmodel
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="oms*" -dir ./model/omsmodel
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="sms*" -dir ./model/smsmodel
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="pay*" -dir ./model/paymodel
+goctl model mysql datasource -url="root:123456@tcp(192.168.64.4:3306)/gozero" -table="ums*" -dir ./model/umsmodel
+goctl model mysql datasource -url="root:123456@tcp(192.168.64.4:3306)/gozero" -table="pms*" -dir ./model/pmsmodel
+goctl model mysql datasource -url="root:123456@tcp(192.168.64.4:3306)/gozero" -table="oms*" -dir ./model/omsmodel
+goctl model mysql datasource -url="root:123456@tcp(192.168.64.4:3306)/gozero" -table="sms*" -dir ./model/smsmodel
+goctl model mysql datasource -url="root:123456@tcp(192.168.64.4:3306)/gozero" -table="pay*" -dir ./model/paymodel

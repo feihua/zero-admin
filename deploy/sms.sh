@@ -1,0 +1,1 @@
+go run rpc/sms/sms.go rpc/sms/etc/sms.yaml

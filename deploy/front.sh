@@ -1,0 +1,1 @@
+go run front-api/front.go front-api/etc/front-api.yaml

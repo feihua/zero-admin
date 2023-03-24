@@ -1,0 +1,1 @@
+go run rpc/oms/oms.go rpc/oms/etc/oms.yaml

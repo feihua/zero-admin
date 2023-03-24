@@ -1,0 +1,1 @@
+go run api/admin.go api/etc/admin-api.yaml

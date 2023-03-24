@@ -1087,6 +1087,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/delete",
 					Handler: membermember.MemberDeleteHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/add",
+					Handler: membermember.MemberAddHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

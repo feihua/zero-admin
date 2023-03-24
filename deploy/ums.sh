@@ -1,0 +1,1 @@
+go run rpc/ums/ums.go rpc/ums/etc/ums.yaml

@@ -2666,6 +2666,17 @@ type DeleteMemberResp struct {
 	Message string `json:"message"`
 }
 
+type AddMemberReq struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Mobile   string `json:"mobile"`
+}
+
+type AddMemberResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type AddMemberAddressReq struct {
 	MemberId      int64  `json:"memberId"`
 	Name          string `json:"name"` // 收货人名称

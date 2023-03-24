@@ -5,11 +5,13 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
-	"github.com/dgrijalva/jwt-go"
 	"time"
 	"zero-admin/rpc/model/umsmodel"
+	"zero-admin/rpc/ums/internal/common/cryptox"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/ums"
+
+	"github.com/dgrijalva/jwt-go"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -48,7 +50,7 @@ func insertMember(in *ums.MemberAddReq, l *MemberAddLogic) sql.Result {
 	result, _ := l.svcCtx.UmsMemberModel.Insert(umsmodel.UmsMember{
 		MemberLevelId:         4, //默认是普通会员
 		Username:              in.Username,
-		Password:              in.Password,
+		Password:              cryptox.Crypto(in.Password),
 		Nickname:              in.Username,
 		Phone:                 in.Phone,
 		Status:                0,
@@ -67,7 +69,7 @@ func insertMember(in *ums.MemberAddReq, l *MemberAddLogic) sql.Result {
 	return result
 }
 
-//校验参数
+// 校验参数
 func checkParams(in *ums.MemberAddReq, l *MemberAddLogic) error {
 	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(in.Username)
 	if member != nil {
@@ -83,7 +85,7 @@ func checkParams(in *ums.MemberAddReq, l *MemberAddLogic) error {
 	return nil
 }
 
-//构建返回数据
+// 构建返回数据
 func buildMemberRegisterResp(in *ums.MemberAddReq, result sql.Result, l *MemberAddLogic) (*ums.MemberAddResp, error) {
 	//3.1生成token
 	userId, _ := result.LastInsertId()
@@ -112,7 +114,7 @@ func buildMemberRegisterResp(in *ums.MemberAddReq, result sql.Result, l *MemberA
 	return resp, nil
 }
 
-//创建token
+// 创建token
 func (l *MemberAddLogic) createJwtToken(secretKey string, iat, seconds, userId int64) (string, error) {
 	claims := make(jwt.MapClaims)
 	claims["exp"] = iat + seconds

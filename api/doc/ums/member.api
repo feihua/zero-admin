@@ -71,6 +71,16 @@ type (
         Code string `json:"code"`
         Message string `json:"message"`
     }
+
+    AddMemberReq struct {
+        Username string `json:"username"`
+        Password string `json:"password"`
+        Mobile string `json:"mobile"`
+    }
+    AddMemberResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
 )
 
 @server(
@@ -89,4 +99,8 @@ service admin-api {
 
     @handler MemberDelete
     post /delete (DeleteMemberReq) returns (DeleteMemberResp)
+
+    @handler MemberAdd
+    post /add (AddMemberReq) returns (AddMemberResp)
+    
 }

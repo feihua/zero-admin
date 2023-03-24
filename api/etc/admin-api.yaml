@@ -54,5 +54,6 @@ Prometheus:
   Path: /metrics
 
 Redis:
-  Address: 127.0.0.1:6379
-  Pass: 123456
+  Address: 192.168.64.3:6379
+  # Address: 127.0.0.1:6379
+  Pass: "123456"

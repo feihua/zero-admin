@@ -1,0 +1,1 @@
+go run rpc/pay/pay.go rpc/pay/etc/pay.yaml

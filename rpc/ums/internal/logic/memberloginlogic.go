@@ -4,11 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/dgrijalva/jwt-go"
 	"time"
 	"zero-admin/rpc/model/umsmodel"
+	"zero-admin/rpc/ums/internal/common/cryptox"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
+
+	"github.com/dgrijalva/jwt-go"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -42,7 +44,7 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 	return buildLoginResp(in, l, member)
 }
 
-//返回数据
+// 返回数据
 func buildLoginResp(in *umsclient.MemberLoginReq, l *MemberLoginLogic, member *umsmodel.UmsMember) (*umsclient.MemberLoginResp, error) {
 	//生成token
 	now := time.Now().Unix()
@@ -73,18 +75,22 @@ func checkLoginParams(in *umsclient.MemberLoginReq, l *MemberLoginLogic) (*umsmo
 	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(in.Username)
 	if member == nil {
 		logx.WithContext(l.ctx).Errorf("账号不存在,参数:%s", in.Username)
-		return nil, errors.New("账号不存在")
+		return nil, errors.New("账号或密码错误")
 	}
 
 	//判断密码
-	if member.Password != in.Password {
+	// if member.Password != in.Password {
+	// 	logx.WithContext(l.ctx).Errorf("账号密码不对,参数:%s", in.Password)
+	// 	return nil, errors.New("账号密码不对")
+	// }
+	if !cryptox.CheckCrypto(member.Password, in.Password) {
 		logx.WithContext(l.ctx).Errorf("账号密码不对,参数:%s", in.Password)
-		return nil, errors.New("账号密码不对")
+		return nil, errors.New("账号或密码错误")
 	}
 	return member, nil
 }
 
-//插入登录日志
+// 插入登录日志
 func insertLoginLog(l *MemberLoginLogic, m *umsmodel.UmsMember) {
 	memberLoginLog := umsmodel.UmsMemberLoginLog{
 		MemberId:   m.Id,
@@ -97,7 +103,7 @@ func insertLoginLog(l *MemberLoginLogic, m *umsmodel.UmsMember) {
 	_, _ = l.svcCtx.UmsMemberLoginLogModel.Insert(memberLoginLog)
 }
 
-//生成token
+// 生成token
 func (l *MemberLoginLogic) getJwtToken(secretKey string, iat, seconds, userId int64) (string, error) {
 	claims := make(jwt.MapClaims)
 	claims["exp"] = iat + seconds

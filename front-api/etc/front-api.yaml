@@ -1,6 +1,6 @@
 Name: front-api
 Host: 0.0.0.0
-Port: 9999
+Port: 7777
 
 #系统
 SysRpc:
