@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"zero-admin/rpc/model/umsmodel"
 
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,14 +23,8 @@ func NewMemberMemberTagRelationAddLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
-func (l *MemberMemberTagRelationAddLogic) MemberMemberTagRelationAdd(in *ums.MemberMemberTagRelationAddReq) (*ums.MemberMemberTagRelationAddResp, error) {
-	_, err := l.svcCtx.UmsMemberMemberTagRelationModel.Insert(umsmodel.UmsMemberMemberTagRelation{
-		MemberId: in.MemberId,
-		TagId:    in.TagId,
-	})
-	if err != nil {
-		return nil, err
-	}
+func (l *MemberMemberTagRelationAddLogic) MemberMemberTagRelationAdd(in *umsclient.MemberMemberTagRelationAddReq) (*umsclient.MemberMemberTagRelationAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	return &ums.MemberMemberTagRelationAddResp{}, nil
+	return &umsclient.MemberMemberTagRelationAddResp{}, nil
 }

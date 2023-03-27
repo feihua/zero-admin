@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,12 +23,8 @@ func NewMemberRuleSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-func (l *MemberRuleSettingDeleteLogic) MemberRuleSettingDelete(in *ums.MemberRuleSettingDeleteReq) (*ums.MemberRuleSettingDeleteResp, error) {
-	err := l.svcCtx.UmsMemberRuleSettingModel.Delete(in.Id)
+func (l *MemberRuleSettingDeleteLogic) MemberRuleSettingDelete(in *umsclient.MemberRuleSettingDeleteReq) (*umsclient.MemberRuleSettingDeleteResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &ums.MemberRuleSettingDeleteResp{}, nil
+	return &umsclient.MemberRuleSettingDeleteResp{}, nil
 }

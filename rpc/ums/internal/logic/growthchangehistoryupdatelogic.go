@@ -2,11 +2,9 @@ package logic
 
 import (
 	"context"
-	"time"
-	"zero-admin/rpc/model/umsmodel"
 
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,21 +23,8 @@ func NewGrowthChangeHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceC
 	}
 }
 
-func (l *GrowthChangeHistoryUpdateLogic) GrowthChangeHistoryUpdate(in *ums.GrowthChangeHistoryUpdateReq) (*ums.GrowthChangeHistoryUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.UmsGrowthChangeHistoryModel.Update(umsmodel.UmsGrowthChangeHistory{
-		Id:          in.Id,
-		MemberId:    in.MemberId,
-		CreateTime:  CreateTime,
-		ChangeType:  in.ChangeType,
-		ChangeCount: in.ChangeCount,
-		OperateMan:  in.OperateMan,
-		OperateNote: in.OperateNote,
-		SourceType:  in.SourceType,
-	})
-	if err != nil {
-		return nil, err
-	}
+func (l *GrowthChangeHistoryUpdateLogic) GrowthChangeHistoryUpdate(in *umsclient.GrowthChangeHistoryUpdateReq) (*umsclient.GrowthChangeHistoryUpdateResp, error) {
+	// todo: add your logic here and delete this line
 
-	return &ums.GrowthChangeHistoryUpdateResp{}, nil
+	return &umsclient.GrowthChangeHistoryUpdateResp{}, nil
 }

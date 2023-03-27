@@ -39,7 +39,7 @@ func (l *RegisterLogic) Register(req types.RegisterReq) (resp *types.LoginAndReg
 	return buildRegisterMemberResp(memberAddResp)
 }
 
-//构建返回数据
+// 构建返回数据
 func buildRegisterMemberResp(memberAddResp *ums.MemberAddResp) (*types.LoginAndRegisterResp, error) {
 	userInfo := types.UserInfo{
 		NickName:  memberAddResp.Nickname,

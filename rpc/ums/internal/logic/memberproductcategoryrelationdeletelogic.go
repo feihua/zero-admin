@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,12 +23,8 @@ func NewMemberProductCategoryRelationDeleteLogic(ctx context.Context, svcCtx *sv
 	}
 }
 
-func (l *MemberProductCategoryRelationDeleteLogic) MemberProductCategoryRelationDelete(in *ums.MemberProductCategoryRelationDeleteReq) (*ums.MemberProductCategoryRelationDeleteResp, error) {
-	err := l.svcCtx.UmsMemberProductCategoryRelationModel.Delete(in.Id)
+func (l *MemberProductCategoryRelationDeleteLogic) MemberProductCategoryRelationDelete(in *umsclient.MemberProductCategoryRelationDeleteReq) (*umsclient.MemberProductCategoryRelationDeleteResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &ums.MemberProductCategoryRelationDeleteResp{}, nil
+	return &umsclient.MemberProductCategoryRelationDeleteResp{}, nil
 }

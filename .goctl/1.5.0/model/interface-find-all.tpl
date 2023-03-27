@@ -1,0 +1,1 @@
+FindAll(ctx context.Context, Current int64, PageSize int64) (*[]{{.upperStartCamelObject}}, error)

@@ -68,7 +68,8 @@ func (l *H5UnifiedOrderLogic) H5UnifiedOrder(in *pay.UnifiedOrderReq) (*pay.H5Un
 	return &pay.H5UnifiedOrderResp{}, nil
 }
 
-/**
+/*
+*
 构建h5支付统一下单参数
 */
 func h5Pay(merchants *paymodel.PayWxMerchants) (commonPayRes CommonPayResponse, err error) {

@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"zero-admin/rpc/model/umsmodel"
 
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,14 +23,8 @@ func NewMemberProductCategoryRelationAddLogic(ctx context.Context, svcCtx *svc.S
 	}
 }
 
-func (l *MemberProductCategoryRelationAddLogic) MemberProductCategoryRelationAdd(in *ums.MemberProductCategoryRelationAddReq) (*ums.MemberProductCategoryRelationAddResp, error) {
-	_, err := l.svcCtx.UmsMemberProductCategoryRelationModel.Insert(umsmodel.UmsMemberProductCategoryRelation{
-		MemberId:          in.MemberId,
-		ProductCategoryId: in.ProductCategoryId,
-	})
-	if err != nil {
-		return nil, err
-	}
+func (l *MemberProductCategoryRelationAddLogic) MemberProductCategoryRelationAdd(in *umsclient.MemberProductCategoryRelationAddReq) (*umsclient.MemberProductCategoryRelationAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	return &ums.MemberProductCategoryRelationAddResp{}, nil
+	return &umsclient.MemberProductCategoryRelationAddResp{}, nil
 }

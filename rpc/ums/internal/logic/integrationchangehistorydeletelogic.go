@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,12 +23,8 @@ func NewIntegrationChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.Ser
 	}
 }
 
-func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(in *ums.IntegrationChangeHistoryDeleteReq) (*ums.IntegrationChangeHistoryDeleteResp, error) {
-	err := l.svcCtx.UmsIntegrationChangeHistoryModel.Delete(in.Id)
+func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(in *umsclient.IntegrationChangeHistoryDeleteReq) (*umsclient.IntegrationChangeHistoryDeleteResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &ums.IntegrationChangeHistoryDeleteResp{}, nil
+	return &umsclient.IntegrationChangeHistoryDeleteResp{}, nil
 }

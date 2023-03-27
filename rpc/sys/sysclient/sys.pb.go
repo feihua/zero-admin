@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//user start---------------------
+// user start---------------------
 type LoginReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1284,7 +1284,7 @@ func (x *UserStatusResp) GetPong() string {
 	return ""
 }
 
-//role start---------------------
+// role start---------------------
 type RoleAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2048,7 +2048,7 @@ func (x *QueryMenuByRoleIdResp) GetIds() []int64 {
 	return nil
 }
 
-//menu start---------------------
+// menu start---------------------
 type MenuAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3015,7 +3015,7 @@ func (x *UpdateMenuRoleResp) GetPong() string {
 	return ""
 }
 
-//dict start---------------------
+// dict start---------------------
 type DictAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3679,7 +3679,7 @@ func (x *DictDeleteResp) GetPong() string {
 	return ""
 }
 
-//dept start---------------------
+// dept start---------------------
 type DeptAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4241,7 +4241,7 @@ func (x *DeptDeleteResp) GetPong() string {
 	return ""
 }
 
-//loginLog start---------------------
+// loginLog start---------------------
 type LoginLogAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4667,7 +4667,7 @@ func (x *LoginLogDeleteResp) GetPong() string {
 	return ""
 }
 
-//sysLog start---------------------
+// sysLog start---------------------
 type SysLogAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5141,7 +5141,7 @@ func (x *SysLogDeleteResp) GetPong() string {
 	return ""
 }
 
-//config start---------------------
+// config start---------------------
 type ConfigAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5867,7 +5867,7 @@ func (x *UpdateConfigRoleResp) GetPong() string {
 	return ""
 }
 
-//job start---------------------
+// job start---------------------
 type JobAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

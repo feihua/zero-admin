@@ -37,7 +37,7 @@ func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginAndRegisterResp
 	return buildLoginResp(memberLoginResp)
 }
 
-//构建返回数据
+// 构建返回数据
 func buildLoginResp(memberAddResp *ums.MemberLoginResp) (*types.LoginAndRegisterResp, error) {
 	userInfo := types.UserInfo{
 		NickName:  memberAddResp.Nickname,
@@ -55,7 +55,7 @@ func buildLoginResp(memberAddResp *ums.MemberLoginResp) (*types.LoginAndRegister
 	}, nil
 }
 
-//调用rpc方法登录
+// 调用rpc方法登录
 func callLoginRpc(req types.LoginReq, err error, l *LoginLogic) (*ums.MemberLoginResp, *types.LoginAndRegisterResp, error, bool) {
 	loginResp, err := l.svcCtx.Ums.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
 		Username: req.Username,

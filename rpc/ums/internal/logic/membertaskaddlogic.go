@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"zero-admin/rpc/model/umsmodel"
 
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,16 +23,8 @@ func NewMemberTaskAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mem
 	}
 }
 
-func (l *MemberTaskAddLogic) MemberTaskAdd(in *ums.MemberTaskAddReq) (*ums.MemberTaskAddResp, error) {
-	_, err := l.svcCtx.UmsMemberTaskModel.Insert(umsmodel.UmsMemberTask{
-		Name:         in.Name,
-		Growth:       in.Growth,
-		Intergration: in.Intergration,
-		Type:         in.Type,
-	})
-	if err != nil {
-		return nil, err
-	}
+func (l *MemberTaskAddLogic) MemberTaskAdd(in *umsclient.MemberTaskAddReq) (*umsclient.MemberTaskAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	return &ums.MemberTaskAddResp{}, nil
+	return &umsclient.MemberTaskAddResp{}, nil
 }

@@ -67,7 +67,8 @@ func (l *AppUnifiedOrderLogic) AppUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.Un
 	return &pay.UnifiedOrderResp{}, nil
 }
 
-/**
+/*
+*
 构建app支付统一下单参数
 */
 func appPay(merchants *paymodel.PayWxMerchants) (commonPayRes CommonPayResponse, err error) {

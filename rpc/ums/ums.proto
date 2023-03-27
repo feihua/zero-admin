@@ -431,6 +431,49 @@ message MemberMemberTagRelationDeleteResp {
   string pong = 1;
 }
 
+message MemberPrepaidCardRelationAddReq {
+  int64	MemberId     = 2;
+  int64	PrepaidCardId = 3;
+}
+
+message MemberPrepaidCardRelationAddResp {
+  string pong = 1;
+}
+
+message MemberPrepaidCardRelationListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message MemberPrepaidCardRelationListData{
+  int64	Id           = 1;
+  int64	MemberId     = 2;
+  int64	PrepaidCardId = 3;
+}
+
+message MemberPrepaidCardRelationListResp {
+  int64 total = 1;
+  repeated  MemberPrepaidCardRelationListData list = 2;
+}
+
+message MemberPrepaidCardRelationUpdateReq {
+  int64	Id           = 1;
+  int64	MemberId     = 2;
+  int64	PrepaidCardId = 3;
+}
+
+message MemberPrepaidCardRelationUpdateResp {
+  string pong = 1;
+}
+
+message MemberPrepaidCardRelationDeleteReq {
+  int64 id = 1;
+}
+
+message MemberPrepaidCardRelationDeleteResp {
+  string pong = 1;
+}
+
 message MemberProductCategoryRelationAddReq {
   int64	MemberId     = 2;
   int64	ProductCategoryId = 3;
@@ -832,6 +875,11 @@ service Ums {
   rpc MemberMemberTagRelationList(MemberMemberTagRelationListReq) returns(MemberMemberTagRelationListResp);
   rpc MemberMemberTagRelationUpdate(MemberMemberTagRelationUpdateReq) returns(MemberMemberTagRelationUpdateResp);
   rpc MemberMemberTagRelationDelete(MemberMemberTagRelationDeleteReq) returns(MemberMemberTagRelationDeleteResp);
+
+  rpc MemberPrepaidCardRelationAdd(MemberPrepaidCardRelationAddReq) returns(MemberPrepaidCardRelationAddResp);
+  rpc MemberPrepaidCardRelationList(MemberPrepaidCardRelationListReq) returns(MemberPrepaidCardRelationListResp);
+  rpc MemberPrepaidCardRelationUpdate(MemberPrepaidCardRelationUpdateReq) returns(MemberPrepaidCardRelationUpdateResp);
+  rpc MemberPrepaidCardRelationDelete(MemberPrepaidCardRelationDeleteReq) returns(MemberPrepaidCardRelationDeleteResp);
 
   rpc MemberProductCategoryRelationAdd(MemberProductCategoryRelationAddReq) returns(MemberProductCategoryRelationAddResp);
   rpc MemberProductCategoryRelationList(MemberProductCategoryRelationListReq) returns(MemberProductCategoryRelationListResp);

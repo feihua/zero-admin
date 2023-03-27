@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"zero-admin/rpc/model/umsmodel"
 
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,18 +23,8 @@ func NewMemberRuleSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(in *ums.MemberRuleSettingAddReq) (*ums.MemberRuleSettingAddResp, error) {
-	_, err := l.svcCtx.UmsMemberRuleSettingModel.Insert(umsmodel.UmsMemberRuleSetting{
-		ContinueSignDay:   in.ContinueSignDay,
-		ContinueSignPoint: in.ContinueSignPoint,
-		ConsumePerPoint:   float64(in.ConsumePerPoint),
-		LowOrderAmount:    float64(in.LowOrderAmount),
-		MaxPointPerOrder:  in.MaxPointPerOrder,
-		Type:              in.Type,
-	})
-	if err != nil {
-		return nil, err
-	}
+func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(in *umsclient.MemberRuleSettingAddReq) (*umsclient.MemberRuleSettingAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	return &ums.MemberRuleSettingAddResp{}, nil
+	return &umsclient.MemberRuleSettingAddResp{}, nil
 }

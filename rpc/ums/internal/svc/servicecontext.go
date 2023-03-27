@@ -1,27 +1,29 @@
 package svc
 
 import (
-	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"zero-admin/rpc/model/umsmodel"
 	"zero-admin/rpc/ums/internal/config"
+
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
 type ServiceContext struct {
 	Config config.Config
 
-	UmsGrowthChangeHistoryModel           *umsmodel.UmsGrowthChangeHistoryModel
-	UmsIntegrationChangeHistoryModel      *umsmodel.UmsIntegrationChangeHistoryModel
-	UmsIntegrationConsumeSettingModel     *umsmodel.UmsIntegrationConsumeSettingModel
-	UmsMemberModel                        *umsmodel.UmsMemberModel
-	UmsMemberLevelModel                   *umsmodel.UmsMemberLevelModel
-	UmsMemberLoginLogModel                *umsmodel.UmsMemberLoginLogModel
-	UmsMemberMemberTagRelationModel       *umsmodel.UmsMemberMemberTagRelationModel
-	UmsMemberProductCategoryRelationModel *umsmodel.UmsMemberProductCategoryRelationModel
-	UmsMemberReceiveAddressModel          *umsmodel.UmsMemberReceiveAddressModel
-	UmsMemberRuleSettingModel             *umsmodel.UmsMemberRuleSettingModel
-	UmsMemberStatisticsInfoModel          *umsmodel.UmsMemberStatisticsInfoModel
-	UmsMemberTaskModel                    *umsmodel.UmsMemberTaskModel
-	UmsMemberTagModel                     *umsmodel.UmsMemberTagModel
+	UmsGrowthChangeHistoryModel           umsmodel.UmsGrowthChangeHistoryModel
+	UmsIntegrationChangeHistoryModel      umsmodel.UmsIntegrationChangeHistoryModel
+	UmsIntegrationConsumeSettingModel     umsmodel.UmsIntegrationConsumeSettingModel
+	UmsMemberModel                        umsmodel.UmsMemberModel
+	UmsMemberLevelModel                   umsmodel.UmsMemberLevelModel
+	UmsMemberLoginLogModel                umsmodel.UmsMemberLoginLogModel
+	UmsMemberMemberTagRelationModel       umsmodel.UmsMemberMemberTagRelationModel
+	UmsMemberPrepaidCardRelationModel     umsmodel.UmsMemberPrepaidCardRelationModel
+	UmsMemberProductCategoryRelationModel umsmodel.UmsMemberProductCategoryRelationModel
+	UmsMemberReceiveAddressModel          umsmodel.UmsMemberReceiveAddressModel
+	UmsMemberRuleSettingModel             umsmodel.UmsMemberRuleSettingModel
+	UmsMemberStatisticsInfoModel          umsmodel.UmsMemberStatisticsInfoModel
+	UmsMemberTaskModel                    umsmodel.UmsMemberTaskModel
+	UmsMemberTagModel                     umsmodel.UmsMemberTagModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -37,6 +39,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		UmsMemberLevelModel:                   umsmodel.NewUmsMemberLevelModel(sqlConn),
 		UmsMemberLoginLogModel:                umsmodel.NewUmsMemberLoginLogModel(sqlConn),
 		UmsMemberMemberTagRelationModel:       umsmodel.NewUmsMemberMemberTagRelationModel(sqlConn),
+		UmsMemberPrepaidCardRelationModel:     umsmodel.NewUmsMemberPrepaidCardRelationModel(sqlConn),
 		UmsMemberProductCategoryRelationModel: umsmodel.NewUmsMemberProductCategoryRelationModel(sqlConn),
 		UmsMemberReceiveAddressModel:          umsmodel.NewUmsMemberReceiveAddressModel(sqlConn),
 		UmsMemberRuleSettingModel:             umsmodel.NewUmsMemberRuleSettingModel(sqlConn),

@@ -56,7 +56,7 @@ func (l *HomeIndexLogic) HomeIndex() (resp *types.HomeResp, err error) {
 	return resp, nil
 }
 
-//人气推荐商品表
+// 人气推荐商品表
 func queryHotProducts(l *HomeIndexLogic) []types.GoodsList {
 	homeRecommendProductList, _ := l.svcCtx.Sms.HomeRecommendProductList(l.ctx, &smsclient.HomeRecommendProductListReq{
 		Current:  1,
@@ -79,7 +79,7 @@ func queryHotProducts(l *HomeIndexLogic) []types.GoodsList {
 	return goodsLists
 }
 
-//新鲜好物表
+// 新鲜好物表
 func queryNewProducts(l *HomeIndexLogic) []types.GoodsList {
 	homeNewProductList, _ := l.svcCtx.Sms.HomeNewProductList(l.ctx, &smsclient.HomeNewProductListReq{
 		Current:  1,
@@ -102,7 +102,7 @@ func queryNewProducts(l *HomeIndexLogic) []types.GoodsList {
 	return goodsList
 }
 
-//首页推荐品牌表
+// 首页推荐品牌表
 func queryBrands(l *HomeIndexLogic) []types.Channel {
 	homeBrandList, _ := l.svcCtx.Sms.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
 		Current:  1,
@@ -121,7 +121,7 @@ func queryBrands(l *HomeIndexLogic) []types.Channel {
 	return channels
 }
 
-//首页轮播图
+// 首页轮播图
 func queryBanners(l *HomeIndexLogic) []types.Banner {
 	homeAdvertiseList, _ := l.svcCtx.Sms.HomeAdvertiseList(l.ctx, &smsclient.HomeAdvertiseListReq{
 		Current:  1,

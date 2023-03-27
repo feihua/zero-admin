@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,12 +23,8 @@ func NewMemberLoginLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-func (l *MemberLoginLogDeleteLogic) MemberLoginLogDelete(in *ums.MemberLoginLogDeleteReq) (*ums.MemberLoginLogDeleteResp, error) {
-	err := l.svcCtx.UmsMemberLoginLogModel.Delete(in.Id)
+func (l *MemberLoginLogDeleteLogic) MemberLoginLogDelete(in *umsclient.MemberLoginLogDeleteReq) (*umsclient.MemberLoginLogDeleteResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &ums.MemberLoginLogDeleteResp{}, nil
+	return &umsclient.MemberLoginLogDeleteResp{}, nil
 }
