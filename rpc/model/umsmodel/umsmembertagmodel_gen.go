@@ -37,10 +37,10 @@ type (
 	}
 
 	UmsMemberTag struct {
-		Id                int64           `db:"id"`
-		Name              sql.NullString  `db:"name"`
-		FinishOrderCount  sql.NullInt64   `db:"finish_order_count"`  // 自动打标签完成订单数量
-		FinishOrderAmount sql.NullFloat64 `db:"finish_order_amount"` // 自动打标签完成订单金额
+		Id                int64   `db:"id"`
+		Name              string  `db:"name"`
+		FinishOrderCount  int64   `db:"finish_order_count"`  // 自动打标签完成订单数量
+		FinishOrderAmount float64 `db:"finish_order_amount"` // 自动打标签完成订单金额
 	}
 )
 

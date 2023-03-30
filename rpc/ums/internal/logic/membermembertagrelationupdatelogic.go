@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 
+	"zero-admin/rpc/model/umsmodel"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -25,6 +26,13 @@ func NewMemberMemberTagRelationUpdateLogic(ctx context.Context, svcCtx *svc.Serv
 
 func (l *MemberMemberTagRelationUpdateLogic) MemberMemberTagRelationUpdate(in *umsclient.MemberMemberTagRelationUpdateReq) (*umsclient.MemberMemberTagRelationUpdateResp, error) {
 	// todo: add your logic here and delete this line
-
+	err := l.svcCtx.UmsMemberMemberTagRelationModel.Update(l.ctx, &umsmodel.UmsMemberMemberTagRelation{
+		Id:       in.Id,
+		MemberId: in.MemberId,
+		TagId:    in.TagId,
+	})
+	if err != nil {
+		return nil, err
+	}
 	return &umsclient.MemberMemberTagRelationUpdateResp{}, nil
 }

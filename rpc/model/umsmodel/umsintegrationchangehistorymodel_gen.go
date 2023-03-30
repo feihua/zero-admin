@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -37,14 +38,14 @@ type (
 	}
 
 	UmsIntegrationChangeHistory struct {
-		Id          int64          `db:"id"`
-		MemberId    sql.NullInt64  `db:"member_id"`
-		CreateTime  sql.NullTime   `db:"create_time"`
-		ChangeType  sql.NullInt64  `db:"change_type"`  // 改变类型：0->增加；1->减少
-		ChangeCount sql.NullInt64  `db:"change_count"` // 积分改变数量
-		OperateMan  sql.NullString `db:"operate_man"`  // 操作人员
-		OperateNote sql.NullString `db:"operate_note"` // 操作备注
-		SourceType  sql.NullInt64  `db:"source_type"`  // 积分来源：0->购物；1->管理员修改
+		Id          int64     `db:"id"`
+		MemberId    int64     `db:"member_id"`
+		CreateTime  time.Time `db:"create_time"`
+		ChangeType  int64     `db:"change_type"`  // 改变类型：0->增加；1->减少
+		ChangeCount int64     `db:"change_count"` // 积分改变数量
+		OperateMan  string    `db:"operate_man"`  // 操作人员
+		OperateNote string    `db:"operate_note"` // 操作备注
+		SourceType  int64     `db:"source_type"`  // 积分来源：0->购物；1->管理员修改
 	}
 )
 

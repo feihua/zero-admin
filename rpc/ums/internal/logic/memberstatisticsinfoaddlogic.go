@@ -2,7 +2,9 @@ package logic
 
 import (
 	"context"
+	"time"
 
+	"zero-admin/rpc/model/umsmodel"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -25,6 +27,26 @@ func NewMemberStatisticsInfoAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *MemberStatisticsInfoAddLogic) MemberStatisticsInfoAdd(in *umsclient.MemberStatisticsInfoAddReq) (*umsclient.MemberStatisticsInfoAddResp, error) {
 	// todo: add your logic here and delete this line
-
+	RecentOrderTime, _ := time.Parse("2006-01-02 15:04:05", in.RecentOrderTime)
+	_, err := l.svcCtx.UmsMemberStatisticsInfoModel.Insert(l.ctx, &umsmodel.UmsMemberStatisticsInfo{
+		MemberId:            in.MemberId,
+		ConsumeAmount:       float64(in.ConsumeAmount),
+		OrderCount:          in.OrderCount,
+		CouponCount:         in.CouponCount,
+		CommentCount:        in.CommentCount,
+		ReturnOrderCount:    in.ReturnOrderCount,
+		LoginCount:          in.LoginCount,
+		AttendCount:         in.AttendCount,
+		FansCount:           in.FansCount,
+		CollectProductCount: in.CollectProductCount,
+		CollectSubjectCount: in.CollectSubjectCount,
+		CollectTopicCount:   in.CollectTopicCount,
+		CollectCommentCount: in.CollectCommentCount,
+		InviteFriendCount:   in.InviteFriendCount,
+		RecentOrderTime:     RecentOrderTime,
+	})
+	if err != nil {
+		return nil, err
+	}
 	return &umsclient.MemberStatisticsInfoAddResp{}, nil
 }

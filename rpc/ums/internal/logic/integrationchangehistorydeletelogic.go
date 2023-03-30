@@ -25,6 +25,10 @@ func NewIntegrationChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.Ser
 
 func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(in *umsclient.IntegrationChangeHistoryDeleteReq) (*umsclient.IntegrationChangeHistoryDeleteResp, error) {
 	// todo: add your logic here and delete this line
+	err := l.svcCtx.UmsIntegrationChangeHistoryModel.Delete(l.ctx, in.Id)
 
+	if err != nil {
+		return nil, err
+	}
 	return &umsclient.IntegrationChangeHistoryDeleteResp{}, nil
 }

@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -37,22 +38,22 @@ type (
 	}
 
 	UmsMemberStatisticsInfo struct {
-		Id                  int64           `db:"id"`
-		MemberId            sql.NullInt64   `db:"member_id"`
-		ConsumeAmount       sql.NullFloat64 `db:"consume_amount"`     // 累计消费金额
-		OrderCount          sql.NullInt64   `db:"order_count"`        // 订单数量
-		CouponCount         sql.NullInt64   `db:"coupon_count"`       // 优惠券数量
-		CommentCount        sql.NullInt64   `db:"comment_count"`      // 评价数
-		ReturnOrderCount    sql.NullInt64   `db:"return_order_count"` // 退货数量
-		LoginCount          sql.NullInt64   `db:"login_count"`        // 登录次数
-		AttendCount         sql.NullInt64   `db:"attend_count"`       // 关注数量
-		FansCount           sql.NullInt64   `db:"fans_count"`         // 粉丝数量
-		CollectProductCount sql.NullInt64   `db:"collect_product_count"`
-		CollectSubjectCount sql.NullInt64   `db:"collect_subject_count"`
-		CollectTopicCount   sql.NullInt64   `db:"collect_topic_count"`
-		CollectCommentCount sql.NullInt64   `db:"collect_comment_count"`
-		InviteFriendCount   sql.NullInt64   `db:"invite_friend_count"`
-		RecentOrderTime     sql.NullTime    `db:"recent_order_time"` // 最后一次下订单时间
+		Id                  int64     `db:"id"`
+		MemberId            int64     `db:"member_id"`
+		ConsumeAmount       float64   `db:"consume_amount"`     // 累计消费金额
+		OrderCount          int64     `db:"order_count"`        // 订单数量
+		CouponCount         int64     `db:"coupon_count"`       // 优惠券数量
+		CommentCount        int64     `db:"comment_count"`      // 评价数
+		ReturnOrderCount    int64     `db:"return_order_count"` // 退货数量
+		LoginCount          int64     `db:"login_count"`        // 登录次数
+		AttendCount         int64     `db:"attend_count"`       // 关注数量
+		FansCount           int64     `db:"fans_count"`         // 粉丝数量
+		CollectProductCount int64     `db:"collect_product_count"`
+		CollectSubjectCount int64     `db:"collect_subject_count"`
+		CollectTopicCount   int64     `db:"collect_topic_count"`
+		CollectCommentCount int64     `db:"collect_comment_count"`
+		InviteFriendCount   int64     `db:"invite_friend_count"`
+		RecentOrderTime     time.Time `db:"recent_order_time"` // 最后一次下订单时间
 	}
 )
 

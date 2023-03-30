@@ -37,16 +37,16 @@ type (
 	}
 
 	UmsMemberReceiveAddress struct {
-		Id            int64          `db:"id"`
-		MemberId      sql.NullInt64  `db:"member_id"`
-		Name          sql.NullString `db:"name"` // 收货人名称
-		PhoneNumber   sql.NullString `db:"phone_number"`
-		DefaultStatus sql.NullInt64  `db:"default_status"` // 是否为默认
-		PostCode      sql.NullString `db:"post_code"`      // 邮政编码
-		Province      sql.NullString `db:"province"`       // 省份/直辖市
-		City          sql.NullString `db:"city"`           // 城市
-		Region        sql.NullString `db:"region"`         // 区
-		DetailAddress sql.NullString `db:"detail_address"` // 详细地址(街道)
+		Id            int64  `db:"id"`
+		MemberId      int64  `db:"member_id"`
+		Name          string `db:"name"` // 收货人名称
+		PhoneNumber   string `db:"phone_number"`
+		DefaultStatus int64  `db:"default_status"` // 是否为默认
+		PostCode      string `db:"post_code"`      // 邮政编码
+		Province      string `db:"province"`       // 省份/直辖市
+		City          string `db:"city"`           // 城市
+		Region        string `db:"region"`         // 区
+		DetailAddress string `db:"detail_address"` // 详细地址(街道)
 	}
 )
 

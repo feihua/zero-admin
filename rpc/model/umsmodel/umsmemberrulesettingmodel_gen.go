@@ -37,13 +37,13 @@ type (
 	}
 
 	UmsMemberRuleSetting struct {
-		Id                int64           `db:"id"`
-		ContinueSignDay   sql.NullInt64   `db:"continue_sign_day"`   // 连续签到天数
-		ContinueSignPoint sql.NullInt64   `db:"continue_sign_point"` // 连续签到赠送数量
-		ConsumePerPoint   sql.NullFloat64 `db:"consume_per_point"`   // 每消费多少元获取1个点
-		LowOrderAmount    sql.NullFloat64 `db:"low_order_amount"`    // 最低获取点数的订单金额
-		MaxPointPerOrder  sql.NullInt64   `db:"max_point_per_order"` // 每笔订单最高获取点数
-		Type              sql.NullInt64   `db:"type"`                // 类型：0->积分规则；1->成长值规则
+		Id                int64   `db:"id"`
+		ContinueSignDay   int64   `db:"continue_sign_day"`   // 连续签到天数
+		ContinueSignPoint int64   `db:"continue_sign_point"` // 连续签到赠送数量
+		ConsumePerPoint   float64 `db:"consume_per_point"`   // 每消费多少元获取1个点
+		LowOrderAmount    float64 `db:"low_order_amount"`    // 最低获取点数的订单金额
+		MaxPointPerOrder  int64   `db:"max_point_per_order"` // 每笔订单最高获取点数
+		Type              int64   `db:"type"`                // 类型：0->积分规则；1->成长值规则
 	}
 )
 

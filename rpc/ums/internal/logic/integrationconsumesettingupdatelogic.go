@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 
+	"zero-admin/rpc/model/umsmodel"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -25,6 +26,15 @@ func NewIntegrationConsumeSettingUpdateLogic(ctx context.Context, svcCtx *svc.Se
 
 func (l *IntegrationConsumeSettingUpdateLogic) IntegrationConsumeSettingUpdate(in *umsclient.IntegrationConsumeSettingUpdateReq) (*umsclient.IntegrationConsumeSettingUpdateResp, error) {
 	// todo: add your logic here and delete this line
-
+	err := l.svcCtx.UmsIntegrationConsumeSettingModel.Update(l.ctx, &umsmodel.UmsIntegrationConsumeSetting{
+		Id:                 in.Id,
+		DeductionPerAmount: in.DeductionPerAmount,
+		MaxPercentPerOrder: in.MaxPercentPerOrder,
+		UseUnit:            in.UseUnit,
+		CouponStatus:       in.CouponStatus,
+	})
+	if err != nil {
+		return nil, err
+	}
 	return &umsclient.IntegrationConsumeSettingUpdateResp{}, nil
 }

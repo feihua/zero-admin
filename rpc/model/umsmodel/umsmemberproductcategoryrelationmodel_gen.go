@@ -37,9 +37,9 @@ type (
 	}
 
 	UmsMemberProductCategoryRelation struct {
-		Id                int64         `db:"id"`
-		MemberId          sql.NullInt64 `db:"member_id"`
-		ProductCategoryId sql.NullInt64 `db:"product_category_id"`
+		Id                int64 `db:"id"`
+		MemberId          int64 `db:"member_id"`
+		ProductCategoryId int64 `db:"product_category_id"`
 	}
 )
 

@@ -25,6 +25,10 @@ func NewMemberMemberTagRelationDeleteLogic(ctx context.Context, svcCtx *svc.Serv
 
 func (l *MemberMemberTagRelationDeleteLogic) MemberMemberTagRelationDelete(in *umsclient.MemberMemberTagRelationDeleteReq) (*umsclient.MemberMemberTagRelationDeleteResp, error) {
 	// todo: add your logic here and delete this line
+	err := l.svcCtx.UmsMemberMemberTagRelationModel.Delete(l.ctx, in.Id)
 
+	if err != nil {
+		return nil, err
+	}
 	return &umsclient.MemberMemberTagRelationDeleteResp{}, nil
 }

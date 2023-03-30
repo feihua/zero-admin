@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 
+	"zero-admin/rpc/model/umsmodel"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -25,6 +26,13 @@ func NewMemberTagAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Memb
 
 func (l *MemberTagAddLogic) MemberTagAdd(in *umsclient.MemberTagAddReq) (*umsclient.MemberTagAddResp, error) {
 	// todo: add your logic here and delete this line
-
+	_, err := l.svcCtx.UmsMemberTagModel.Insert(l.ctx, &umsmodel.UmsMemberTag{
+		Name:              in.Name,
+		FinishOrderCount:  in.FinishOrderCount,
+		FinishOrderAmount: float64(in.FinishOrderAmount),
+	})
+	if err != nil {
+		return nil, err
+	}
 	return &umsclient.MemberTagAddResp{}, nil
 }

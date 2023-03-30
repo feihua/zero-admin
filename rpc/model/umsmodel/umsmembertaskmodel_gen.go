@@ -37,11 +37,11 @@ type (
 	}
 
 	UmsMemberTask struct {
-		Id           int64          `db:"id"`
-		Name         sql.NullString `db:"name"`
-		Growth       sql.NullInt64  `db:"growth"`       // 赠送成长值
-		Intergration sql.NullInt64  `db:"intergration"` // 赠送积分
-		Type         sql.NullInt64  `db:"type"`         // 任务类型：0->新手任务；1->日常任务
+		Id           int64  `db:"id"`
+		Name         string `db:"name"`
+		Growth       int64  `db:"growth"`       // 赠送成长值
+		Intergration int64  `db:"intergration"` // 赠送积分
+		Type         int64  `db:"type"`         // 任务类型：0->新手任务；1->日常任务
 	}
 )
 

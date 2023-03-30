@@ -37,11 +37,11 @@ type (
 	}
 
 	UmsIntegrationConsumeSetting struct {
-		Id                 int64         `db:"id"`
-		DeductionPerAmount sql.NullInt64 `db:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
-		MaxPercentPerOrder sql.NullInt64 `db:"max_percent_per_order"` // 每笔订单最高抵用百分比
-		UseUnit            sql.NullInt64 `db:"use_unit"`              // 每次使用积分最小单位100
-		CouponStatus       sql.NullInt64 `db:"coupon_status"`         // 是否可以和优惠券同用；0->不可以；1->可以
+		Id                 int64 `db:"id"`
+		DeductionPerAmount int64 `db:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
+		MaxPercentPerOrder int64 `db:"max_percent_per_order"` // 每笔订单最高抵用百分比
+		UseUnit            int64 `db:"use_unit"`              // 每次使用积分最小单位100
+		CouponStatus       int64 `db:"coupon_status"`         // 是否可以和优惠券同用；0->不可以；1->可以
 	}
 )
 
