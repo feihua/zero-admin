@@ -41,6 +41,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: address.AddressDetailHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/address"),
 	)
 
@@ -55,6 +56,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/register",
 				Handler: auth.RegisterHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/wxMiniAuth",
+				Handler: auth.WxMiniAuthHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api/auth"),

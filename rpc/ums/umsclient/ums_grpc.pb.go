@@ -24,6 +24,12 @@ const (
 	Ums_MemberList_FullMethodName                          = "/umsclient.Ums/MemberList"
 	Ums_MemberUpdate_FullMethodName                        = "/umsclient.Ums/MemberUpdate"
 	Ums_MemberDelete_FullMethodName                        = "/umsclient.Ums/MemberDelete"
+	Ums_Login_FullMethodName                               = "/umsclient.Ums/login"
+	Ums_Register_FullMethodName                            = "/umsclient.Ums/register"
+	Ums_MemberInfo_FullMethodName                          = "/umsclient.Ums/MemberInfo"
+	Ums_MemberAuthByAuthKey_FullMethodName                 = "/umsclient.Ums/MemberAuthByAuthKey"
+	Ums_MemberAuthByMemberId_FullMethodName                = "/umsclient.Ums/MemberAuthByMemberId"
+	Ums_GenerateToken_FullMethodName                       = "/umsclient.Ums/GenerateToken"
 	Ums_GrowthChangeHistoryAdd_FullMethodName              = "/umsclient.Ums/GrowthChangeHistoryAdd"
 	Ums_GrowthChangeHistoryList_FullMethodName             = "/umsclient.Ums/GrowthChangeHistoryList"
 	Ums_GrowthChangeHistoryUpdate_FullMethodName           = "/umsclient.Ums/GrowthChangeHistoryUpdate"
@@ -88,6 +94,12 @@ type UmsClient interface {
 	MemberList(ctx context.Context, in *MemberListReq, opts ...grpc.CallOption) (*MemberListResp, error)
 	MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts ...grpc.CallOption) (*MemberUpdateResp, error)
 	MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error)
+	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
+	Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
+	MemberInfo(ctx context.Context, in *MemberInfoReq, opts ...grpc.CallOption) (*MemberInfoResp, error)
+	MemberAuthByAuthKey(ctx context.Context, in *MemberAuthByAuthKeyReq, opts ...grpc.CallOption) (*MemberAuthByAuthKeyResp, error)
+	MemberAuthByMemberId(ctx context.Context, in *MemberAuthByMemberIdReq, opts ...grpc.CallOption) (*MemberAuthyMemberIdResp, error)
+	GenerateToken(ctx context.Context, in *GenerateTokenReq, opts ...grpc.CallOption) (*GenerateTokenResp, error)
 	GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error)
 	GrowthChangeHistoryList(ctx context.Context, in *GrowthChangeHistoryListReq, opts ...grpc.CallOption) (*GrowthChangeHistoryListResp, error)
 	GrowthChangeHistoryUpdate(ctx context.Context, in *GrowthChangeHistoryUpdateReq, opts ...grpc.CallOption) (*GrowthChangeHistoryUpdateResp, error)
@@ -190,6 +202,60 @@ func (c *umsClient) MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts 
 func (c *umsClient) MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error) {
 	out := new(MemberDeleteResp)
 	err := c.cc.Invoke(ctx, Ums_MemberDelete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+	out := new(LoginResp)
+	err := c.cc.Invoke(ctx, Ums_Login_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {
+	out := new(RegisterResp)
+	err := c.cc.Invoke(ctx, Ums_Register_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberInfo(ctx context.Context, in *MemberInfoReq, opts ...grpc.CallOption) (*MemberInfoResp, error) {
+	out := new(MemberInfoResp)
+	err := c.cc.Invoke(ctx, Ums_MemberInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberAuthByAuthKey(ctx context.Context, in *MemberAuthByAuthKeyReq, opts ...grpc.CallOption) (*MemberAuthByAuthKeyResp, error) {
+	out := new(MemberAuthByAuthKeyResp)
+	err := c.cc.Invoke(ctx, Ums_MemberAuthByAuthKey_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberAuthByMemberId(ctx context.Context, in *MemberAuthByMemberIdReq, opts ...grpc.CallOption) (*MemberAuthyMemberIdResp, error) {
+	out := new(MemberAuthyMemberIdResp)
+	err := c.cc.Invoke(ctx, Ums_MemberAuthByMemberId_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) GenerateToken(ctx context.Context, in *GenerateTokenReq, opts ...grpc.CallOption) (*GenerateTokenResp, error) {
+	out := new(GenerateTokenResp)
+	err := c.cc.Invoke(ctx, Ums_GenerateToken_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -682,6 +748,12 @@ type UmsServer interface {
 	MemberList(context.Context, *MemberListReq) (*MemberListResp, error)
 	MemberUpdate(context.Context, *MemberUpdateReq) (*MemberUpdateResp, error)
 	MemberDelete(context.Context, *MemberDeleteReq) (*MemberDeleteResp, error)
+	Login(context.Context, *LoginReq) (*LoginResp, error)
+	Register(context.Context, *RegisterReq) (*RegisterResp, error)
+	MemberInfo(context.Context, *MemberInfoReq) (*MemberInfoResp, error)
+	MemberAuthByAuthKey(context.Context, *MemberAuthByAuthKeyReq) (*MemberAuthByAuthKeyResp, error)
+	MemberAuthByMemberId(context.Context, *MemberAuthByMemberIdReq) (*MemberAuthyMemberIdResp, error)
+	GenerateToken(context.Context, *GenerateTokenReq) (*GenerateTokenResp, error)
 	GrowthChangeHistoryAdd(context.Context, *GrowthChangeHistoryAddReq) (*GrowthChangeHistoryAddResp, error)
 	GrowthChangeHistoryList(context.Context, *GrowthChangeHistoryListReq) (*GrowthChangeHistoryListResp, error)
 	GrowthChangeHistoryUpdate(context.Context, *GrowthChangeHistoryUpdateReq) (*GrowthChangeHistoryUpdateResp, error)
@@ -756,6 +828,24 @@ func (UnimplementedUmsServer) MemberUpdate(context.Context, *MemberUpdateReq) (*
 }
 func (UnimplementedUmsServer) MemberDelete(context.Context, *MemberDeleteReq) (*MemberDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberDelete not implemented")
+}
+func (UnimplementedUmsServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedUmsServer) Register(context.Context, *RegisterReq) (*RegisterResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedUmsServer) MemberInfo(context.Context, *MemberInfoReq) (*MemberInfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberInfo not implemented")
+}
+func (UnimplementedUmsServer) MemberAuthByAuthKey(context.Context, *MemberAuthByAuthKeyReq) (*MemberAuthByAuthKeyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberAuthByAuthKey not implemented")
+}
+func (UnimplementedUmsServer) MemberAuthByMemberId(context.Context, *MemberAuthByMemberIdReq) (*MemberAuthyMemberIdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberAuthByMemberId not implemented")
+}
+func (UnimplementedUmsServer) GenerateToken(context.Context, *GenerateTokenReq) (*GenerateTokenResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenerateToken not implemented")
 }
 func (UnimplementedUmsServer) GrowthChangeHistoryAdd(context.Context, *GrowthChangeHistoryAddReq) (*GrowthChangeHistoryAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GrowthChangeHistoryAdd not implemented")
@@ -1015,6 +1105,114 @@ func _Ums_MemberDelete_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UmsServer).MemberDelete(ctx, req.(*MemberDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_Login_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).Login(ctx, req.(*LoginReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_Register_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).Register(ctx, req.(*RegisterReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_MemberInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberInfo(ctx, req.(*MemberInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberAuthByAuthKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberAuthByAuthKeyReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberAuthByAuthKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_MemberAuthByAuthKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberAuthByAuthKey(ctx, req.(*MemberAuthByAuthKeyReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberAuthByMemberId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberAuthByMemberIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberAuthByMemberId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_MemberAuthByMemberId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberAuthByMemberId(ctx, req.(*MemberAuthByMemberIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_GenerateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateTokenReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).GenerateToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_GenerateToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).GenerateToken(ctx, req.(*GenerateTokenReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1999,6 +2197,30 @@ var Ums_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberDelete",
 			Handler:    _Ums_MemberDelete_Handler,
+		},
+		{
+			MethodName: "login",
+			Handler:    _Ums_Login_Handler,
+		},
+		{
+			MethodName: "register",
+			Handler:    _Ums_Register_Handler,
+		},
+		{
+			MethodName: "MemberInfo",
+			Handler:    _Ums_MemberInfo_Handler,
+		},
+		{
+			MethodName: "MemberAuthByAuthKey",
+			Handler:    _Ums_MemberAuthByAuthKey_Handler,
+		},
+		{
+			MethodName: "MemberAuthByMemberId",
+			Handler:    _Ums_MemberAuthByMemberId_Handler,
+		},
+		{
+			MethodName: "GenerateToken",
+			Handler:    _Ums_GenerateToken_Handler,
 		},
 		{
 			MethodName: "GrowthChangeHistoryAdd",

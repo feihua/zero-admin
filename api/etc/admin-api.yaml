@@ -1,6 +1,6 @@
 Name: admin-api
 Host: 0.0.0.0
-Port: 8888
+Port: 6666
 
 #系统
 SysRpc:

@@ -100,7 +100,7 @@ type AddressDetailData struct {
 }
 
 @server(
-    //    jwt: Auth
+    jwt: Auth
     group: address
     prefix: /api/address
 )

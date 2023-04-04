@@ -13,6 +13,8 @@ import (
 )
 
 type (
+	GenerateTokenReq                        = umsclient.GenerateTokenReq
+	GenerateTokenResp                       = umsclient.GenerateTokenResp
 	GrowthChangeHistoryAddReq               = umsclient.GrowthChangeHistoryAddReq
 	GrowthChangeHistoryAddResp              = umsclient.GrowthChangeHistoryAddResp
 	GrowthChangeHistoryDeleteReq            = umsclient.GrowthChangeHistoryDeleteReq
@@ -40,10 +42,20 @@ type (
 	IntegrationConsumeSettingListResp       = umsclient.IntegrationConsumeSettingListResp
 	IntegrationConsumeSettingUpdateReq      = umsclient.IntegrationConsumeSettingUpdateReq
 	IntegrationConsumeSettingUpdateResp     = umsclient.IntegrationConsumeSettingUpdateResp
+	LoginReq                                = umsclient.LoginReq
+	LoginResp                               = umsclient.LoginResp
+	Member                                  = umsclient.Member
 	MemberAddReq                            = umsclient.MemberAddReq
 	MemberAddResp                           = umsclient.MemberAddResp
+	MemberAuth                              = umsclient.MemberAuth
+	MemberAuthByAuthKeyReq                  = umsclient.MemberAuthByAuthKeyReq
+	MemberAuthByAuthKeyResp                 = umsclient.MemberAuthByAuthKeyResp
+	MemberAuthByMemberIdReq                 = umsclient.MemberAuthByMemberIdReq
+	MemberAuthyMemberIdResp                 = umsclient.MemberAuthyMemberIdResp
 	MemberDeleteReq                         = umsclient.MemberDeleteReq
 	MemberDeleteResp                        = umsclient.MemberDeleteResp
+	MemberInfoReq                           = umsclient.MemberInfoReq
+	MemberInfoResp                          = umsclient.MemberInfoResp
 	MemberLevelAddReq                       = umsclient.MemberLevelAddReq
 	MemberLevelAddResp                      = umsclient.MemberLevelAddResp
 	MemberLevelDeleteReq                    = umsclient.MemberLevelDeleteReq
@@ -143,6 +155,8 @@ type (
 	MemberTaskUpdateResp                    = umsclient.MemberTaskUpdateResp
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	RegisterReq                             = umsclient.RegisterReq
+	RegisterResp                            = umsclient.RegisterResp
 
 	Ums interface {
 		MemberAdd(ctx context.Context, in *MemberAddReq, opts ...grpc.CallOption) (*MemberAddResp, error)
@@ -150,6 +164,12 @@ type (
 		MemberList(ctx context.Context, in *MemberListReq, opts ...grpc.CallOption) (*MemberListResp, error)
 		MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts ...grpc.CallOption) (*MemberUpdateResp, error)
 		MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error)
+		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
+		Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
+		MemberInfo(ctx context.Context, in *MemberInfoReq, opts ...grpc.CallOption) (*MemberInfoResp, error)
+		MemberAuthByAuthKey(ctx context.Context, in *MemberAuthByAuthKeyReq, opts ...grpc.CallOption) (*MemberAuthByAuthKeyResp, error)
+		MemberAuthByMemberId(ctx context.Context, in *MemberAuthByMemberIdReq, opts ...grpc.CallOption) (*MemberAuthyMemberIdResp, error)
+		GenerateToken(ctx context.Context, in *GenerateTokenReq, opts ...grpc.CallOption) (*GenerateTokenResp, error)
 		GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error)
 		GrowthChangeHistoryList(ctx context.Context, in *GrowthChangeHistoryListReq, opts ...grpc.CallOption) (*GrowthChangeHistoryListResp, error)
 		GrowthChangeHistoryUpdate(ctx context.Context, in *GrowthChangeHistoryUpdateReq, opts ...grpc.CallOption) (*GrowthChangeHistoryUpdateResp, error)
@@ -239,6 +259,36 @@ func (m *defaultUms) MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts
 func (m *defaultUms) MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error) {
 	client := umsclient.NewUmsClient(m.cli.Conn())
 	return client.MemberDelete(ctx, in, opts...)
+}
+
+func (m *defaultUms) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.Login(ctx, in, opts...)
+}
+
+func (m *defaultUms) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.Register(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberInfo(ctx context.Context, in *MemberInfoReq, opts ...grpc.CallOption) (*MemberInfoResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberInfo(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberAuthByAuthKey(ctx context.Context, in *MemberAuthByAuthKeyReq, opts ...grpc.CallOption) (*MemberAuthByAuthKeyResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberAuthByAuthKey(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberAuthByMemberId(ctx context.Context, in *MemberAuthByMemberIdReq, opts ...grpc.CallOption) (*MemberAuthyMemberIdResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberAuthByMemberId(ctx, in, opts...)
+}
+
+func (m *defaultUms) GenerateToken(ctx context.Context, in *GenerateTokenReq, opts ...grpc.CallOption) (*GenerateTokenResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.GenerateToken(ctx, in, opts...)
 }
 
 func (m *defaultUms) GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error) {

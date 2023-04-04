@@ -26,7 +26,7 @@ func NewMemberReceiveAddressQueryDetailLogic(ctx context.Context, svcCtx *svc.Se
 
 func (l *MemberReceiveAddressQueryDetailLogic) MemberReceiveAddressQueryDetail(in *umsclient.MemberReceiveAddressQueryDetailReq) (*umsclient.MemberReceiveAddressQueryDetailResp, error) {
 	// todo: add your logic here and delete this line
-	address, err := l.svcCtx.UmsMemberReceiveAddressModel.FindByIdAndMemberId(l.ctx, in.AddressID, in.UserId)
+	address, err := l.svcCtx.UmsMemberReceiveAddressModel.FindByIdAndMemberId(l.ctx, in.AddressID, in.MemberId)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

@@ -94,6 +94,77 @@ message MemberDeleteResp {
   string pong = 1;
 }
 
+message Member {
+  int64 id = 1;
+  string phone = 2;
+  string nickname =3;
+  int64  gender = 4;
+  string icon = 5;
+  string personalized_signature = 6;
+}
+
+message MemberAuth {
+  int64  id = 1;
+  int64  memberId = 2;
+  string authType = 3;
+  string authKey = 4;
+}
+
+message RegisterReq {
+  string phone = 1;
+  string nickname = 2;
+  string password = 3;
+  string authKey = 4;
+  string authType = 5;
+}
+message RegisterResp {
+  string accessToken = 1;
+  int64  accessExpire = 2;
+  int64  refreshAfter = 3;
+}
+
+message LoginReq {
+  string  authType = 1;
+  string authKey = 2;
+  string  password = 3;
+}
+message LoginResp {
+  string accessToken = 1;
+  int64  accessExpire = 2;
+  int64  refreshAfter = 3;
+}
+
+message MemberInfoReq {
+  int64  id = 1;
+}
+message MemberInfoResp {
+   Member member = 1;
+}
+
+message MemberAuthByAuthKeyReq {
+  string  authKey = 1;
+  string  authType = 2;
+}
+message MemberAuthByAuthKeyResp {
+   MemberAuth memberAuth = 1;
+}
+
+message MemberAuthByMemberIdReq {
+  int64  memberId = 1;
+  string  authType = 2;
+}
+message MemberAuthyMemberIdResp {
+   MemberAuth memberAuth = 1;
+}
+
+message GenerateTokenReq {
+  int64 memberId = 1;
+}
+message GenerateTokenResp {
+  string accessToken = 1;
+  int64  accessExpire = 2;
+  int64  refreshAfter = 3;
+}
 
 message GrowthChangeHistoryAddReq {
   int64      MemberId = 2;
@@ -537,7 +608,7 @@ message MemberReceiveAddressAddResp {
 message MemberReceiveAddressListReq {
   int64 current = 1;
   int64 pageSize = 2;
-  int64 userId = 3;
+  int64 MemberId = 3;
 }
 
 message MemberReceiveAddressListData{
@@ -586,7 +657,7 @@ message MemberReceiveAddressDeleteResp {
 
 
 message MemberReceiveAddressQueryDetailReq {
-  int64 UserId = 1;
+  int64 MemberId = 1;
   int64 AddressID = 2;
 }
 
@@ -844,7 +915,12 @@ service Ums {
   rpc MemberList(MemberListReq) returns(MemberListResp);
   rpc MemberUpdate(MemberUpdateReq) returns(MemberUpdateResp);
   rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);
-
+  rpc login(LoginReq) returns(LoginResp);
+  rpc register(RegisterReq) returns(RegisterResp);
+  rpc MemberInfo(MemberInfoReq) returns(MemberInfoResp);
+  rpc MemberAuthByAuthKey(MemberAuthByAuthKeyReq) returns(MemberAuthByAuthKeyResp);
+  rpc MemberAuthByMemberId(MemberAuthByMemberIdReq) returns(MemberAuthyMemberIdResp);
+  rpc GenerateToken(GenerateTokenReq) returns(GenerateTokenResp);
 
   rpc GrowthChangeHistoryAdd(GrowthChangeHistoryAddReq) returns(GrowthChangeHistoryAddResp);
   rpc GrowthChangeHistoryList(GrowthChangeHistoryListReq) returns(GrowthChangeHistoryListResp);

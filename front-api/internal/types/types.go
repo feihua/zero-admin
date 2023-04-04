@@ -125,6 +125,18 @@ type RegisterReq struct {
 	Mobile   string `json:"mobile"`
 }
 
+type WXMiniAuthReq struct {
+	Code          string `json:"code"`
+	IV            string `json:"iv"`
+	EncryptedData string `json:"encryptedData"`
+}
+
+type WXMiniAuthResp struct {
+	AccessToken  string `json:"accessToken"`
+	AccessExpire int64  `json:"accessExpire"`
+	RefreshAfter int64  `json:"refreshAfter"`
+}
+
 type CartListReq struct {
 	UserId int64 `path:"userId"`
 }

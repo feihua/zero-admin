@@ -47,6 +47,36 @@ func (s *UmsServer) MemberDelete(ctx context.Context, in *umsclient.MemberDelete
 	return l.MemberDelete(in)
 }
 
+func (s *UmsServer) Login(ctx context.Context, in *umsclient.LoginReq) (*umsclient.LoginResp, error) {
+	l := logic.NewLoginLogic(ctx, s.svcCtx)
+	return l.Login(in)
+}
+
+func (s *UmsServer) Register(ctx context.Context, in *umsclient.RegisterReq) (*umsclient.RegisterResp, error) {
+	l := logic.NewRegisterLogic(ctx, s.svcCtx)
+	return l.Register(in)
+}
+
+func (s *UmsServer) MemberInfo(ctx context.Context, in *umsclient.MemberInfoReq) (*umsclient.MemberInfoResp, error) {
+	l := logic.NewMemberInfoLogic(ctx, s.svcCtx)
+	return l.MemberInfo(in)
+}
+
+func (s *UmsServer) MemberAuthByAuthKey(ctx context.Context, in *umsclient.MemberAuthByAuthKeyReq) (*umsclient.MemberAuthByAuthKeyResp, error) {
+	l := logic.NewMemberAuthByAuthKeyLogic(ctx, s.svcCtx)
+	return l.MemberAuthByAuthKey(in)
+}
+
+func (s *UmsServer) MemberAuthByMemberId(ctx context.Context, in *umsclient.MemberAuthByMemberIdReq) (*umsclient.MemberAuthyMemberIdResp, error) {
+	l := logic.NewMemberAuthByMemberIdLogic(ctx, s.svcCtx)
+	return l.MemberAuthByMemberId(in)
+}
+
+func (s *UmsServer) GenerateToken(ctx context.Context, in *umsclient.GenerateTokenReq) (*umsclient.GenerateTokenResp, error) {
+	l := logic.NewGenerateTokenLogic(ctx, s.svcCtx)
+	return l.GenerateToken(in)
+}
+
 func (s *UmsServer) GrowthChangeHistoryAdd(ctx context.Context, in *umsclient.GrowthChangeHistoryAddReq) (*umsclient.GrowthChangeHistoryAddResp, error) {
 	l := logic.NewGrowthChangeHistoryAddLogic(ctx, s.svcCtx)
 	return l.GrowthChangeHistoryAdd(in)

@@ -14,6 +14,7 @@ type ServiceContext struct {
 	UmsIntegrationChangeHistoryModel      umsmodel.UmsIntegrationChangeHistoryModel
 	UmsIntegrationConsumeSettingModel     umsmodel.UmsIntegrationConsumeSettingModel
 	UmsMemberModel                        umsmodel.UmsMemberModel
+	UmsMemberAuthModel                    umsmodel.UmsMemberAuthModel
 	UmsMemberLevelModel                   umsmodel.UmsMemberLevelModel
 	UmsMemberLoginLogModel                umsmodel.UmsMemberLoginLogModel
 	UmsMemberMemberTagRelationModel       umsmodel.UmsMemberMemberTagRelationModel
@@ -36,6 +37,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		UmsIntegrationChangeHistoryModel:      umsmodel.NewUmsIntegrationChangeHistoryModel(sqlConn),
 		UmsIntegrationConsumeSettingModel:     umsmodel.NewUmsIntegrationConsumeSettingModel(sqlConn),
 		UmsMemberModel:                        umsmodel.NewUmsMemberModel(sqlConn),
+		UmsMemberAuthModel:                    umsmodel.NewUmsMemberAuthModel(sqlConn),
 		UmsMemberLevelModel:                   umsmodel.NewUmsMemberLevelModel(sqlConn),
 		UmsMemberLoginLogModel:                umsmodel.NewUmsMemberLoginLogModel(sqlConn),
 		UmsMemberMemberTagRelationModel:       umsmodel.NewUmsMemberMemberTagRelationModel(sqlConn),

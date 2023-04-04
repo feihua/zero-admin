@@ -1,7 +1,13 @@
 Name: front-api
 Host: 0.0.0.0
 Port: 7777
-
+Auth:
+  AccessSecret: rtghyu67-c7a4-4063-9236-6bfc35d54b7d
+  AccessExpire: 86400
+#WxMiniConf
+WxMiniConf:
+  AppId: wx2add729fadddddd
+  Secret: 20365395b3de9b2a9351ddddddd
 #系统
 SysRpc:
   Etcd:

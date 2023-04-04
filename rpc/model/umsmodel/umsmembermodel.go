@@ -1,6 +1,10 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"context"
+
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsMemberModel = (*customUmsMemberModel)(nil)
 
@@ -9,6 +13,7 @@ type (
 	// and implement the added methods in customUmsMemberModel.
 	UmsMemberModel interface {
 		umsMemberModel
+		Trans(ctx context.Context, fn func(context context.Context, session sqlx.Session) error) error
 	}
 
 	customUmsMemberModel struct {
@@ -21,4 +26,12 @@ func NewUmsMemberModel(conn sqlx.SqlConn) UmsMemberModel {
 	return &customUmsMemberModel{
 		defaultUmsMemberModel: newUmsMemberModel(conn),
 	}
+}
+
+func (m *defaultUmsMemberModel) Trans(ctx context.Context, fn func(ctx context.Context, session sqlx.Session) error) error {
+
+	return m.conn.TransactCtx(ctx, func(ctx context.Context, session sqlx.Session) error {
+		return fn(ctx, session)
+	})
+
 }
