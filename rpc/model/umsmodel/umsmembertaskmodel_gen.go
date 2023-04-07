@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -19,20 +20,23 @@ var (
 	umsMemberTaskRows                = strings.Join(umsMemberTaskFieldNames, ",")
 	umsMemberTaskRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberTaskFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsMemberTaskRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberTaskFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsMemberTaskIdPrefix = "cache:gozero:umsMemberTask:id:"
 )
 
 type (
 	umsMemberTaskModel interface {
 		Insert(ctx context.Context, data *UmsMemberTask) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberTask) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsMemberTask, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberTask, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsMemberTask) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberTask) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsMemberTaskModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -45,23 +49,41 @@ type (
 	}
 )
 
-func newUmsMemberTaskModel(conn sqlx.SqlConn) *defaultUmsMemberTaskModel {
+func newUmsMemberTaskModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsMemberTaskModel {
 	return &defaultUmsMemberTaskModel{
-		conn:  conn,
-		table: "`ums_member_task`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_member_task`",
 	}
 }
 
 func (m *defaultUmsMemberTaskModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsMemberTaskIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberTaskIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberTaskIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberTaskModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsMemberTaskIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberTaskIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberTaskIdKey)
 	return err
 }
 
 func (m *defaultUmsMemberTaskModel) FindOne(ctx context.Context, id int64) (*UmsMemberTask, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberTaskRows, m.table)
+	gozeroUmsMemberTaskIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberTaskIdPrefix, id)
 	var resp UmsMemberTask
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsMemberTaskIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberTaskRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -69,47 +91,57 @@ func (m *defaultUmsMemberTaskModel) FindOne(ctx context.Context, id int64) (*Ums
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberTaskModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberTask, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberTaskRows, m.table)
-	var resp []UmsMemberTask
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberTaskModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsMemberTaskModel) Insert(ctx context.Context, data *UmsMemberTask) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, umsMemberTaskRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.Growth, data.Intergration, data.Type)
+	gozeroUmsMemberTaskIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberTaskIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, umsMemberTaskRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.Name, data.Growth, data.Intergration, data.Type)
+	}, gozeroUmsMemberTaskIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsMemberTaskModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberTask) (sql.Result, error) {
+	gozeroUmsMemberTaskIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberTaskIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, umsMemberTaskRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.Name, data.Growth, data.Intergration, data.Type)
+		}
+		return conn.ExecCtx(ctx, query, data.Name, data.Growth, data.Intergration, data.Type)
+	}, gozeroUmsMemberTaskIdKey)
+	return ret, err
+}
 func (m *defaultUmsMemberTaskModel) Update(ctx context.Context, data *UmsMemberTask) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberTaskRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.Name, data.Growth, data.Intergration, data.Type, data.Id)
+	gozeroUmsMemberTaskIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberTaskIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberTaskRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.Name, data.Growth, data.Intergration, data.Type, data.Id)
+	}, gozeroUmsMemberTaskIdKey)
 	return err
+}
+
+func (m *defaultUmsMemberTaskModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberTask) error {
+	gozeroUmsMemberTaskIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberTaskIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberTaskRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.Name, data.Growth, data.Intergration, data.Type, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.Name, data.Growth, data.Intergration, data.Type, data.Id)
+	}, gozeroUmsMemberTaskIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberTaskModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsMemberTaskIdPrefix, primary)
+}
+
+func (m *defaultUmsMemberTaskModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberTaskRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsMemberTaskModel) tableName() string {

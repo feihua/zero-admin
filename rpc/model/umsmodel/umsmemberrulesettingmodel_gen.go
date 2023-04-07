@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -19,20 +20,23 @@ var (
 	umsMemberRuleSettingRows                = strings.Join(umsMemberRuleSettingFieldNames, ",")
 	umsMemberRuleSettingRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberRuleSettingFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsMemberRuleSettingRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberRuleSettingFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsMemberRuleSettingIdPrefix = "cache:gozero:umsMemberRuleSetting:id:"
 )
 
 type (
 	umsMemberRuleSettingModel interface {
 		Insert(ctx context.Context, data *UmsMemberRuleSetting) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberRuleSetting) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsMemberRuleSetting, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberRuleSetting, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsMemberRuleSetting) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberRuleSetting) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsMemberRuleSettingModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -47,23 +51,41 @@ type (
 	}
 )
 
-func newUmsMemberRuleSettingModel(conn sqlx.SqlConn) *defaultUmsMemberRuleSettingModel {
+func newUmsMemberRuleSettingModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsMemberRuleSettingModel {
 	return &defaultUmsMemberRuleSettingModel{
-		conn:  conn,
-		table: "`ums_member_rule_setting`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_member_rule_setting`",
 	}
 }
 
 func (m *defaultUmsMemberRuleSettingModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsMemberRuleSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberRuleSettingIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberRuleSettingIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberRuleSettingModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsMemberRuleSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberRuleSettingIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberRuleSettingIdKey)
 	return err
 }
 
 func (m *defaultUmsMemberRuleSettingModel) FindOne(ctx context.Context, id int64) (*UmsMemberRuleSetting, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberRuleSettingRows, m.table)
+	gozeroUmsMemberRuleSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberRuleSettingIdPrefix, id)
 	var resp UmsMemberRuleSetting
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsMemberRuleSettingIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberRuleSettingRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -71,47 +93,57 @@ func (m *defaultUmsMemberRuleSettingModel) FindOne(ctx context.Context, id int64
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberRuleSettingModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberRuleSetting, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberRuleSettingRows, m.table)
-	var resp []UmsMemberRuleSetting
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberRuleSettingModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsMemberRuleSettingModel) Insert(ctx context.Context, data *UmsMemberRuleSetting) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, umsMemberRuleSettingRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.ContinueSignDay, data.ContinueSignPoint, data.ConsumePerPoint, data.LowOrderAmount, data.MaxPointPerOrder, data.Type)
+	gozeroUmsMemberRuleSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberRuleSettingIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, umsMemberRuleSettingRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.ContinueSignDay, data.ContinueSignPoint, data.ConsumePerPoint, data.LowOrderAmount, data.MaxPointPerOrder, data.Type)
+	}, gozeroUmsMemberRuleSettingIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsMemberRuleSettingModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberRuleSetting) (sql.Result, error) {
+	gozeroUmsMemberRuleSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberRuleSettingIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, umsMemberRuleSettingRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.ContinueSignDay, data.ContinueSignPoint, data.ConsumePerPoint, data.LowOrderAmount, data.MaxPointPerOrder, data.Type)
+		}
+		return conn.ExecCtx(ctx, query, data.ContinueSignDay, data.ContinueSignPoint, data.ConsumePerPoint, data.LowOrderAmount, data.MaxPointPerOrder, data.Type)
+	}, gozeroUmsMemberRuleSettingIdKey)
+	return ret, err
+}
 func (m *defaultUmsMemberRuleSettingModel) Update(ctx context.Context, data *UmsMemberRuleSetting) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberRuleSettingRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.ContinueSignDay, data.ContinueSignPoint, data.ConsumePerPoint, data.LowOrderAmount, data.MaxPointPerOrder, data.Type, data.Id)
+	gozeroUmsMemberRuleSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberRuleSettingIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberRuleSettingRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.ContinueSignDay, data.ContinueSignPoint, data.ConsumePerPoint, data.LowOrderAmount, data.MaxPointPerOrder, data.Type, data.Id)
+	}, gozeroUmsMemberRuleSettingIdKey)
 	return err
+}
+
+func (m *defaultUmsMemberRuleSettingModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberRuleSetting) error {
+	gozeroUmsMemberRuleSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberRuleSettingIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberRuleSettingRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.ContinueSignDay, data.ContinueSignPoint, data.ConsumePerPoint, data.LowOrderAmount, data.MaxPointPerOrder, data.Type, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.ContinueSignDay, data.ContinueSignPoint, data.ConsumePerPoint, data.LowOrderAmount, data.MaxPointPerOrder, data.Type, data.Id)
+	}, gozeroUmsMemberRuleSettingIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberRuleSettingModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsMemberRuleSettingIdPrefix, primary)
+}
+
+func (m *defaultUmsMemberRuleSettingModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberRuleSettingRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsMemberRuleSettingModel) tableName() string {

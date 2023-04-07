@@ -41,7 +41,6 @@ func (l *GenerateTokenLogic) GenerateToken(in *umsclient.GenerateTokenReq) (*ums
 }
 
 func (l *GenerateTokenLogic) getJwtToken(secretKey string, iat, seconds, memberId int64) (string, error) {
-
 	claims := make(jwt.MapClaims)
 	claims["exp"] = iat + seconds
 	claims["iat"] = iat

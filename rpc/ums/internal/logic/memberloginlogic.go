@@ -6,8 +6,8 @@ import (
 	"errors"
 	"time"
 
+	"zero-admin/common/cryptox"
 	"zero-admin/rpc/model/umsmodel"
-	"zero-admin/rpc/ums/internal/common/cryptox"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 

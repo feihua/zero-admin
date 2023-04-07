@@ -99,7 +99,7 @@ type AddressDetailData struct {
 }
 
 type LoginReq struct {
-	Username string `json:"username"`
+	Phone    string `json:"phone"`
 	Password string `json:"password"`
 }
 
@@ -110,31 +110,28 @@ type LoginAndRegisterResp struct {
 }
 
 type LoginAndRegisterData struct {
-	UserInfo UserInfo `json:"userInfo"` //用户基本信息
-	Token    string   `json:"token"`    //服务端返回的token值
+	UserInfo     UserInfo `json:"userInfo"` //用户基本信息
+	Token        string   `json:"token"`    //服务端返回的token值
+	AccessExpire int64    `json:"accessExpire"`
+	RefreshAfter int64    `json:"refreshAfter"`
 }
 
 type UserInfo struct {
-	NickName  string `json:"nickName"`  //昵称
-	AvatarURL string `json:"avatarUrl"` //头像地址
+	NickName string `json:"nickName"` //昵称
+	Phone    string `json:"phone"`
+	Icon     string `json:"icon"` //头像地址
 }
 
 type RegisterReq struct {
-	Username string `json:"username"`
+	Phone    string `json:"phone"`
 	Password string `json:"password"`
-	Mobile   string `json:"mobile"`
 }
 
 type WXMiniAuthReq struct {
 	Code          string `json:"code"`
 	IV            string `json:"iv"`
 	EncryptedData string `json:"encryptedData"`
-}
-
-type WXMiniAuthResp struct {
-	AccessToken  string `json:"accessToken"`
-	AccessExpire int64  `json:"accessExpire"`
-	RefreshAfter int64  `json:"refreshAfter"`
+	PNCode        string `json:"pncode"`
 }
 
 type CartListReq struct {

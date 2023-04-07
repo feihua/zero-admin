@@ -1,6 +1,9 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsMemberProductCategoryRelationModel = (*customUmsMemberProductCategoryRelationModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewUmsMemberProductCategoryRelationModel returns a model for the database table.
-func NewUmsMemberProductCategoryRelationModel(conn sqlx.SqlConn) UmsMemberProductCategoryRelationModel {
+func NewUmsMemberProductCategoryRelationModel(conn sqlx.SqlConn, c cache.CacheConf) UmsMemberProductCategoryRelationModel {
 	return &customUmsMemberProductCategoryRelationModel{
-		defaultUmsMemberProductCategoryRelationModel: newUmsMemberProductCategoryRelationModel(conn),
+		defaultUmsMemberProductCategoryRelationModel: newUmsMemberProductCategoryRelationModel(conn, c),
 	}
 }

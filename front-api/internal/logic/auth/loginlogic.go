@@ -2,9 +2,7 @@ package auth
 
 import (
 	"context"
-	"encoding/json"
 	"zero-admin/rpc/ums/ums"
-	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -40,8 +38,8 @@ func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginAndRegisterResp
 // 构建返回数据
 func buildLoginResp(memberAddResp *ums.MemberLoginResp) (*types.LoginAndRegisterResp, error) {
 	userInfo := types.UserInfo{
-		NickName:  memberAddResp.Nickname,
-		AvatarURL: memberAddResp.Icon,
+		NickName: memberAddResp.Nickname,
+		Icon:     memberAddResp.Icon,
 	}
 
 	data := types.LoginAndRegisterData{
@@ -57,19 +55,19 @@ func buildLoginResp(memberAddResp *ums.MemberLoginResp) (*types.LoginAndRegister
 
 // 调用rpc方法登录
 func callLoginRpc(req types.LoginReq, err error, l *LoginLogic) (*ums.MemberLoginResp, *types.LoginAndRegisterResp, error, bool) {
-	loginResp, err := l.svcCtx.Ums.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
-		Username: req.Username,
-		Password: req.Password,
-		Phone:    "req.Mobile",
-	})
+	// loginResp, err = l.svcCtx.Ums.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
+	// 	Username: req.Username,
+	// 	Password: req.Password,
+	// 	Phone:    "req.Mobile",
+	// })
 
-	if err != nil {
-		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("会员登录失败,参数: %s,响应：%s", reqStr, err.Error())
-		return nil, &types.LoginAndRegisterResp{
-			Errno:  1,
-			Errmsg: err.Error(),
-		}, nil, true
-	}
-	return loginResp, nil, nil, false
+	// if err != nil {
+	// 	reqStr, _ := json.Marshal(req)
+	// 	logx.WithContext(l.ctx).Errorf("会员登录失败,参数: %s,响应：%s", reqStr, err.Error())
+	// 	return nil, &types.LoginAndRegisterResp{
+	// 		Errno:  1,
+	// 		Errmsg: err.Error(),
+	// 	}, nil, true
+	// }
+	return nil, nil, nil, false
 }

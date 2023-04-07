@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -19,20 +20,23 @@ var (
 	umsMemberPrepaidCardRows                = strings.Join(umsMemberPrepaidCardFieldNames, ",")
 	umsMemberPrepaidCardRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberPrepaidCardFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsMemberPrepaidCardRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberPrepaidCardFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsMemberPrepaidCardIdPrefix = "cache:gozero:umsMemberPrepaidCard:id:"
 )
 
 type (
 	umsMemberPrepaidCardModel interface {
 		Insert(ctx context.Context, data *UmsMemberPrepaidCard) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberPrepaidCard) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsMemberPrepaidCard, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberPrepaidCard, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsMemberPrepaidCard) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberPrepaidCard) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsMemberPrepaidCardModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -49,23 +53,41 @@ type (
 	}
 )
 
-func newUmsMemberPrepaidCardModel(conn sqlx.SqlConn) *defaultUmsMemberPrepaidCardModel {
+func newUmsMemberPrepaidCardModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsMemberPrepaidCardModel {
 	return &defaultUmsMemberPrepaidCardModel{
-		conn:  conn,
-		table: "`ums_member_prepaid_card`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_member_prepaid_card`",
 	}
 }
 
 func (m *defaultUmsMemberPrepaidCardModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberPrepaidCardIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberPrepaidCardModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberPrepaidCardIdKey)
 	return err
 }
 
 func (m *defaultUmsMemberPrepaidCardModel) FindOne(ctx context.Context, id int64) (*UmsMemberPrepaidCard, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberPrepaidCardRows, m.table)
+	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, id)
 	var resp UmsMemberPrepaidCard
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsMemberPrepaidCardIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberPrepaidCardRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -73,47 +95,57 @@ func (m *defaultUmsMemberPrepaidCardModel) FindOne(ctx context.Context, id int64
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberPrepaidCardModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberPrepaidCard, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberPrepaidCardRows, m.table)
-	var resp []UmsMemberPrepaidCard
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberPrepaidCardModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsMemberPrepaidCardModel) Insert(ctx context.Context, data *UmsMemberPrepaidCard) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberPrepaidCardRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note)
+	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberPrepaidCardRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note)
+	}, gozeroUmsMemberPrepaidCardIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsMemberPrepaidCardModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberPrepaidCard) (sql.Result, error) {
+	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberPrepaidCardRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note)
+		}
+		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note)
+	}, gozeroUmsMemberPrepaidCardIdKey)
+	return ret, err
+}
 func (m *defaultUmsMemberPrepaidCardModel) Update(ctx context.Context, data *UmsMemberPrepaidCard) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberPrepaidCardRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note, data.Id)
+	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberPrepaidCardRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note, data.Id)
+	}, gozeroUmsMemberPrepaidCardIdKey)
 	return err
+}
+
+func (m *defaultUmsMemberPrepaidCardModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberPrepaidCard) error {
+	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberPrepaidCardRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note, data.Id)
+	}, gozeroUmsMemberPrepaidCardIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberPrepaidCardModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, primary)
+}
+
+func (m *defaultUmsMemberPrepaidCardModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberPrepaidCardRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsMemberPrepaidCardModel) tableName() string {

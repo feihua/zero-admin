@@ -1,6 +1,9 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsMemberAuthModel = (*customUmsMemberAuthModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewUmsMemberAuthModel returns a model for the database table.
-func NewUmsMemberAuthModel(conn sqlx.SqlConn) UmsMemberAuthModel {
+func NewUmsMemberAuthModel(conn sqlx.SqlConn, c cache.CacheConf) UmsMemberAuthModel {
 	return &customUmsMemberAuthModel{
-		defaultUmsMemberAuthModel: newUmsMemberAuthModel(conn),
+		defaultUmsMemberAuthModel: newUmsMemberAuthModel(conn, c),
 	}
 }

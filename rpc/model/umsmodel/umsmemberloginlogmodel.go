@@ -1,6 +1,9 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsMemberLoginLogModel = (*customUmsMemberLoginLogModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewUmsMemberLoginLogModel returns a model for the database table.
-func NewUmsMemberLoginLogModel(conn sqlx.SqlConn) UmsMemberLoginLogModel {
+func NewUmsMemberLoginLogModel(conn sqlx.SqlConn, c cache.CacheConf) UmsMemberLoginLogModel {
 	return &customUmsMemberLoginLogModel{
-		defaultUmsMemberLoginLogModel: newUmsMemberLoginLogModel(conn),
+		defaultUmsMemberLoginLogModel: newUmsMemberLoginLogModel(conn, c),
 	}
 }

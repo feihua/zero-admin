@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -19,20 +20,23 @@ var (
 	umsIntegrationConsumeSettingRows                = strings.Join(umsIntegrationConsumeSettingFieldNames, ",")
 	umsIntegrationConsumeSettingRowsExpectAutoSet   = strings.Join(stringx.Remove(umsIntegrationConsumeSettingFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsIntegrationConsumeSettingRowsWithPlaceHolder = strings.Join(stringx.Remove(umsIntegrationConsumeSettingFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsIntegrationConsumeSettingIdPrefix = "cache:gozero:umsIntegrationConsumeSetting:id:"
 )
 
 type (
 	umsIntegrationConsumeSettingModel interface {
 		Insert(ctx context.Context, data *UmsIntegrationConsumeSetting) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsIntegrationConsumeSetting) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsIntegrationConsumeSetting, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsIntegrationConsumeSetting, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsIntegrationConsumeSetting) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsIntegrationConsumeSetting) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsIntegrationConsumeSettingModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -45,23 +49,41 @@ type (
 	}
 )
 
-func newUmsIntegrationConsumeSettingModel(conn sqlx.SqlConn) *defaultUmsIntegrationConsumeSettingModel {
+func newUmsIntegrationConsumeSettingModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsIntegrationConsumeSettingModel {
 	return &defaultUmsIntegrationConsumeSettingModel{
-		conn:  conn,
-		table: "`ums_integration_consume_setting`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_integration_consume_setting`",
 	}
 }
 
 func (m *defaultUmsIntegrationConsumeSettingModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsIntegrationConsumeSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationConsumeSettingIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsIntegrationConsumeSettingIdKey)
+	return err
+}
+
+func (m *defaultUmsIntegrationConsumeSettingModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsIntegrationConsumeSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationConsumeSettingIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsIntegrationConsumeSettingIdKey)
 	return err
 }
 
 func (m *defaultUmsIntegrationConsumeSettingModel) FindOne(ctx context.Context, id int64) (*UmsIntegrationConsumeSetting, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsIntegrationConsumeSettingRows, m.table)
+	gozeroUmsIntegrationConsumeSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationConsumeSettingIdPrefix, id)
 	var resp UmsIntegrationConsumeSetting
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsIntegrationConsumeSettingIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsIntegrationConsumeSettingRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -69,47 +91,57 @@ func (m *defaultUmsIntegrationConsumeSettingModel) FindOne(ctx context.Context, 
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsIntegrationConsumeSettingModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsIntegrationConsumeSetting, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsIntegrationConsumeSettingRows, m.table)
-	var resp []UmsIntegrationConsumeSetting
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsIntegrationConsumeSettingModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsIntegrationConsumeSettingModel) Insert(ctx context.Context, data *UmsIntegrationConsumeSetting) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, umsIntegrationConsumeSettingRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.DeductionPerAmount, data.MaxPercentPerOrder, data.UseUnit, data.CouponStatus)
+	gozeroUmsIntegrationConsumeSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationConsumeSettingIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, umsIntegrationConsumeSettingRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.DeductionPerAmount, data.MaxPercentPerOrder, data.UseUnit, data.CouponStatus)
+	}, gozeroUmsIntegrationConsumeSettingIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsIntegrationConsumeSettingModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsIntegrationConsumeSetting) (sql.Result, error) {
+	gozeroUmsIntegrationConsumeSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationConsumeSettingIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, umsIntegrationConsumeSettingRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.DeductionPerAmount, data.MaxPercentPerOrder, data.UseUnit, data.CouponStatus)
+		}
+		return conn.ExecCtx(ctx, query, data.DeductionPerAmount, data.MaxPercentPerOrder, data.UseUnit, data.CouponStatus)
+	}, gozeroUmsIntegrationConsumeSettingIdKey)
+	return ret, err
+}
 func (m *defaultUmsIntegrationConsumeSettingModel) Update(ctx context.Context, data *UmsIntegrationConsumeSetting) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsIntegrationConsumeSettingRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.DeductionPerAmount, data.MaxPercentPerOrder, data.UseUnit, data.CouponStatus, data.Id)
+	gozeroUmsIntegrationConsumeSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationConsumeSettingIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsIntegrationConsumeSettingRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.DeductionPerAmount, data.MaxPercentPerOrder, data.UseUnit, data.CouponStatus, data.Id)
+	}, gozeroUmsIntegrationConsumeSettingIdKey)
 	return err
+}
+
+func (m *defaultUmsIntegrationConsumeSettingModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsIntegrationConsumeSetting) error {
+	gozeroUmsIntegrationConsumeSettingIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationConsumeSettingIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsIntegrationConsumeSettingRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.DeductionPerAmount, data.MaxPercentPerOrder, data.UseUnit, data.CouponStatus, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.DeductionPerAmount, data.MaxPercentPerOrder, data.UseUnit, data.CouponStatus, data.Id)
+	}, gozeroUmsIntegrationConsumeSettingIdKey)
+	return err
+}
+
+func (m *defaultUmsIntegrationConsumeSettingModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationConsumeSettingIdPrefix, primary)
+}
+
+func (m *defaultUmsIntegrationConsumeSettingModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsIntegrationConsumeSettingRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsIntegrationConsumeSettingModel) tableName() string {

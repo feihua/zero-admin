@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -20,20 +21,23 @@ var (
 	umsMemberStatisticsInfoRows                = strings.Join(umsMemberStatisticsInfoFieldNames, ",")
 	umsMemberStatisticsInfoRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberStatisticsInfoFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsMemberStatisticsInfoRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberStatisticsInfoFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsMemberStatisticsInfoIdPrefix = "cache:gozero:umsMemberStatisticsInfo:id:"
 )
 
 type (
 	umsMemberStatisticsInfoModel interface {
 		Insert(ctx context.Context, data *UmsMemberStatisticsInfo) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberStatisticsInfo) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsMemberStatisticsInfo, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberStatisticsInfo, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsMemberStatisticsInfo) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberStatisticsInfo) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsMemberStatisticsInfoModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -57,23 +61,41 @@ type (
 	}
 )
 
-func newUmsMemberStatisticsInfoModel(conn sqlx.SqlConn) *defaultUmsMemberStatisticsInfoModel {
+func newUmsMemberStatisticsInfoModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsMemberStatisticsInfoModel {
 	return &defaultUmsMemberStatisticsInfoModel{
-		conn:  conn,
-		table: "`ums_member_statistics_info`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_member_statistics_info`",
 	}
 }
 
 func (m *defaultUmsMemberStatisticsInfoModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsMemberStatisticsInfoIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberStatisticsInfoIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberStatisticsInfoIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberStatisticsInfoModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsMemberStatisticsInfoIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberStatisticsInfoIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberStatisticsInfoIdKey)
 	return err
 }
 
 func (m *defaultUmsMemberStatisticsInfoModel) FindOne(ctx context.Context, id int64) (*UmsMemberStatisticsInfo, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberStatisticsInfoRows, m.table)
+	gozeroUmsMemberStatisticsInfoIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberStatisticsInfoIdPrefix, id)
 	var resp UmsMemberStatisticsInfo
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsMemberStatisticsInfoIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberStatisticsInfoRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -81,47 +103,57 @@ func (m *defaultUmsMemberStatisticsInfoModel) FindOne(ctx context.Context, id in
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberStatisticsInfoModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberStatisticsInfo, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberStatisticsInfoRows, m.table)
-	var resp []UmsMemberStatisticsInfo
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberStatisticsInfoModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsMemberStatisticsInfoModel) Insert(ctx context.Context, data *UmsMemberStatisticsInfo) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberStatisticsInfoRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.ConsumeAmount, data.OrderCount, data.CouponCount, data.CommentCount, data.ReturnOrderCount, data.LoginCount, data.AttendCount, data.FansCount, data.CollectProductCount, data.CollectSubjectCount, data.CollectTopicCount, data.CollectCommentCount, data.InviteFriendCount, data.RecentOrderTime)
+	gozeroUmsMemberStatisticsInfoIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberStatisticsInfoIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberStatisticsInfoRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ConsumeAmount, data.OrderCount, data.CouponCount, data.CommentCount, data.ReturnOrderCount, data.LoginCount, data.AttendCount, data.FansCount, data.CollectProductCount, data.CollectSubjectCount, data.CollectTopicCount, data.CollectCommentCount, data.InviteFriendCount, data.RecentOrderTime)
+	}, gozeroUmsMemberStatisticsInfoIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsMemberStatisticsInfoModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberStatisticsInfo) (sql.Result, error) {
+	gozeroUmsMemberStatisticsInfoIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberStatisticsInfoIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberStatisticsInfoRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.ConsumeAmount, data.OrderCount, data.CouponCount, data.CommentCount, data.ReturnOrderCount, data.LoginCount, data.AttendCount, data.FansCount, data.CollectProductCount, data.CollectSubjectCount, data.CollectTopicCount, data.CollectCommentCount, data.InviteFriendCount, data.RecentOrderTime)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ConsumeAmount, data.OrderCount, data.CouponCount, data.CommentCount, data.ReturnOrderCount, data.LoginCount, data.AttendCount, data.FansCount, data.CollectProductCount, data.CollectSubjectCount, data.CollectTopicCount, data.CollectCommentCount, data.InviteFriendCount, data.RecentOrderTime)
+	}, gozeroUmsMemberStatisticsInfoIdKey)
+	return ret, err
+}
 func (m *defaultUmsMemberStatisticsInfoModel) Update(ctx context.Context, data *UmsMemberStatisticsInfo) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberStatisticsInfoRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.ConsumeAmount, data.OrderCount, data.CouponCount, data.CommentCount, data.ReturnOrderCount, data.LoginCount, data.AttendCount, data.FansCount, data.CollectProductCount, data.CollectSubjectCount, data.CollectTopicCount, data.CollectCommentCount, data.InviteFriendCount, data.RecentOrderTime, data.Id)
+	gozeroUmsMemberStatisticsInfoIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberStatisticsInfoIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberStatisticsInfoRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ConsumeAmount, data.OrderCount, data.CouponCount, data.CommentCount, data.ReturnOrderCount, data.LoginCount, data.AttendCount, data.FansCount, data.CollectProductCount, data.CollectSubjectCount, data.CollectTopicCount, data.CollectCommentCount, data.InviteFriendCount, data.RecentOrderTime, data.Id)
+	}, gozeroUmsMemberStatisticsInfoIdKey)
 	return err
+}
+
+func (m *defaultUmsMemberStatisticsInfoModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberStatisticsInfo) error {
+	gozeroUmsMemberStatisticsInfoIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberStatisticsInfoIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberStatisticsInfoRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.ConsumeAmount, data.OrderCount, data.CouponCount, data.CommentCount, data.ReturnOrderCount, data.LoginCount, data.AttendCount, data.FansCount, data.CollectProductCount, data.CollectSubjectCount, data.CollectTopicCount, data.CollectCommentCount, data.InviteFriendCount, data.RecentOrderTime, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ConsumeAmount, data.OrderCount, data.CouponCount, data.CommentCount, data.ReturnOrderCount, data.LoginCount, data.AttendCount, data.FansCount, data.CollectProductCount, data.CollectSubjectCount, data.CollectTopicCount, data.CollectCommentCount, data.InviteFriendCount, data.RecentOrderTime, data.Id)
+	}, gozeroUmsMemberStatisticsInfoIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberStatisticsInfoModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsMemberStatisticsInfoIdPrefix, primary)
+}
+
+func (m *defaultUmsMemberStatisticsInfoModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberStatisticsInfoRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsMemberStatisticsInfoModel) tableName() string {

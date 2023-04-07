@@ -1,6 +1,9 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsGrowthChangeHistoryModel = (*customUmsGrowthChangeHistoryModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewUmsGrowthChangeHistoryModel returns a model for the database table.
-func NewUmsGrowthChangeHistoryModel(conn sqlx.SqlConn) UmsGrowthChangeHistoryModel {
+func NewUmsGrowthChangeHistoryModel(conn sqlx.SqlConn, c cache.CacheConf) UmsGrowthChangeHistoryModel {
 	return &customUmsGrowthChangeHistoryModel{
-		defaultUmsGrowthChangeHistoryModel: newUmsGrowthChangeHistoryModel(conn),
+		defaultUmsGrowthChangeHistoryModel: newUmsGrowthChangeHistoryModel(conn, c),
 	}
 }

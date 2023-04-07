@@ -1,6 +1,9 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsMemberMemberTagRelationModel = (*customUmsMemberMemberTagRelationModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewUmsMemberMemberTagRelationModel returns a model for the database table.
-func NewUmsMemberMemberTagRelationModel(conn sqlx.SqlConn) UmsMemberMemberTagRelationModel {
+func NewUmsMemberMemberTagRelationModel(conn sqlx.SqlConn, c cache.CacheConf) UmsMemberMemberTagRelationModel {
 	return &customUmsMemberMemberTagRelationModel{
-		defaultUmsMemberMemberTagRelationModel: newUmsMemberMemberTagRelationModel(conn),
+		defaultUmsMemberMemberTagRelationModel: newUmsMemberMemberTagRelationModel(conn, c),
 	}
 }

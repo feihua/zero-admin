@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -19,20 +20,23 @@ var (
 	umsMemberProductCategoryRelationRows                = strings.Join(umsMemberProductCategoryRelationFieldNames, ",")
 	umsMemberProductCategoryRelationRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberProductCategoryRelationFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsMemberProductCategoryRelationRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberProductCategoryRelationFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsMemberProductCategoryRelationIdPrefix = "cache:gozero:umsMemberProductCategoryRelation:id:"
 )
 
 type (
 	umsMemberProductCategoryRelationModel interface {
 		Insert(ctx context.Context, data *UmsMemberProductCategoryRelation) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberProductCategoryRelation) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsMemberProductCategoryRelation, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberProductCategoryRelation, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsMemberProductCategoryRelation) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberProductCategoryRelation) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsMemberProductCategoryRelationModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -43,23 +47,41 @@ type (
 	}
 )
 
-func newUmsMemberProductCategoryRelationModel(conn sqlx.SqlConn) *defaultUmsMemberProductCategoryRelationModel {
+func newUmsMemberProductCategoryRelationModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsMemberProductCategoryRelationModel {
 	return &defaultUmsMemberProductCategoryRelationModel{
-		conn:  conn,
-		table: "`ums_member_product_category_relation`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_member_product_category_relation`",
 	}
 }
 
 func (m *defaultUmsMemberProductCategoryRelationModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsMemberProductCategoryRelationIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberProductCategoryRelationIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberProductCategoryRelationIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberProductCategoryRelationModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsMemberProductCategoryRelationIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberProductCategoryRelationIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberProductCategoryRelationIdKey)
 	return err
 }
 
 func (m *defaultUmsMemberProductCategoryRelationModel) FindOne(ctx context.Context, id int64) (*UmsMemberProductCategoryRelation, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberProductCategoryRelationRows, m.table)
+	gozeroUmsMemberProductCategoryRelationIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberProductCategoryRelationIdPrefix, id)
 	var resp UmsMemberProductCategoryRelation
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsMemberProductCategoryRelationIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberProductCategoryRelationRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -67,47 +89,57 @@ func (m *defaultUmsMemberProductCategoryRelationModel) FindOne(ctx context.Conte
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberProductCategoryRelationModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberProductCategoryRelation, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberProductCategoryRelationRows, m.table)
-	var resp []UmsMemberProductCategoryRelation
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberProductCategoryRelationModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsMemberProductCategoryRelationModel) Insert(ctx context.Context, data *UmsMemberProductCategoryRelation) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?)", m.table, umsMemberProductCategoryRelationRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.ProductCategoryId)
+	gozeroUmsMemberProductCategoryRelationIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberProductCategoryRelationIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?)", m.table, umsMemberProductCategoryRelationRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ProductCategoryId)
+	}, gozeroUmsMemberProductCategoryRelationIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsMemberProductCategoryRelationModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberProductCategoryRelation) (sql.Result, error) {
+	gozeroUmsMemberProductCategoryRelationIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberProductCategoryRelationIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?)", m.table, umsMemberProductCategoryRelationRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.ProductCategoryId)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ProductCategoryId)
+	}, gozeroUmsMemberProductCategoryRelationIdKey)
+	return ret, err
+}
 func (m *defaultUmsMemberProductCategoryRelationModel) Update(ctx context.Context, data *UmsMemberProductCategoryRelation) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberProductCategoryRelationRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.ProductCategoryId, data.Id)
+	gozeroUmsMemberProductCategoryRelationIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberProductCategoryRelationIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberProductCategoryRelationRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ProductCategoryId, data.Id)
+	}, gozeroUmsMemberProductCategoryRelationIdKey)
 	return err
+}
+
+func (m *defaultUmsMemberProductCategoryRelationModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberProductCategoryRelation) error {
+	gozeroUmsMemberProductCategoryRelationIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberProductCategoryRelationIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberProductCategoryRelationRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.ProductCategoryId, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ProductCategoryId, data.Id)
+	}, gozeroUmsMemberProductCategoryRelationIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberProductCategoryRelationModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsMemberProductCategoryRelationIdPrefix, primary)
+}
+
+func (m *defaultUmsMemberProductCategoryRelationModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberProductCategoryRelationRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsMemberProductCategoryRelationModel) tableName() string {

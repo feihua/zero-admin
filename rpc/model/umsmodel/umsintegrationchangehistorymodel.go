@@ -1,6 +1,9 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsIntegrationChangeHistoryModel = (*customUmsIntegrationChangeHistoryModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewUmsIntegrationChangeHistoryModel returns a model for the database table.
-func NewUmsIntegrationChangeHistoryModel(conn sqlx.SqlConn) UmsIntegrationChangeHistoryModel {
+func NewUmsIntegrationChangeHistoryModel(conn sqlx.SqlConn, c cache.CacheConf) UmsIntegrationChangeHistoryModel {
 	return &customUmsIntegrationChangeHistoryModel{
-		defaultUmsIntegrationChangeHistoryModel: newUmsIntegrationChangeHistoryModel(conn),
+		defaultUmsIntegrationChangeHistoryModel: newUmsIntegrationChangeHistoryModel(conn, c),
 	}
 }

@@ -77,6 +77,6 @@ func (l *LoginLogic) loginByMobile(mobile, password string) (int64, error) {
 	return user.Id, nil
 }
 
-func (l *LoginLogic) loginBySmallWx() error {
-	return nil
-}
+// func (l *LoginLogic) loginBySmallWx() error {
+// 	return nil
+// }

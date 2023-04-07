@@ -6,7 +6,7 @@ info(
 
 
 type LoginReq struct {
-    Username string `json:"username"`
+    Phone string `json:"phone"`
     Password string `json:"password"`
 }
 
@@ -19,17 +19,19 @@ type LoginAndRegisterResp struct {
 type LoginAndRegisterData struct {
     UserInfo UserInfo `json:"userInfo"` //用户基本信息
     Token string `json:"token"`         //服务端返回的token值
+    AccessExpire int64  `json:"accessExpire"`
+	RefreshAfter int64  `json:"refreshAfter"`
 }
 
 type UserInfo struct {
     NickName string `json:"nickName"`   //昵称
-    AvatarURL string `json:"avatarUrl"` //头像地址
+    Phone string `json:"phone"`
+    Icon string `json:"icon"` //头像地址
 }
 
 type RegisterReq struct {
-    Username string `json:"username"`
+    Phone string `json:"phone"`
     Password string `json:"password"`
-    Mobile string `json:"mobile"`
 }
 
 type (
@@ -37,11 +39,7 @@ type (
 		Code          string `json:"code"`
 		IV            string `json:"iv"`
 		EncryptedData string `json:"encryptedData"`
-	}
-	WXMiniAuthResp {
-		AccessToken  string `json:"accessToken"`
-		AccessExpire int64  `json:"accessExpire"`
-		RefreshAfter int64  `json:"refreshAfter"`
+        PNCode          string `json:"pncode"`
 	}
 )
 
@@ -58,5 +56,5 @@ service front-api {
 
     @doc "wechat mini auth"
 	@handler wxMiniAuth
-	post /wxMiniAuth (WXMiniAuthReq) returns (WXMiniAuthResp)
+	post /wxMiniAuth (WXMiniAuthReq) returns (LoginAndRegisterResp)
 }

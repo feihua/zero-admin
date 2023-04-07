@@ -28,7 +28,7 @@ func NewAddressDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addr
 func (l *AddressDetailLogic) AddressDetail(req types.AddressDetailReq) (resp *types.AddressDetailResp, err error) {
 
 	addressQueryDetail, err := l.svcCtx.Ums.MemberReceiveAddressQueryDetail(l.ctx, &umsclient.MemberReceiveAddressQueryDetailReq{
-		UserId:    req.UserID,
+		MemberId:  req.UserID,
 		AddressID: req.AddressID,
 	})
 

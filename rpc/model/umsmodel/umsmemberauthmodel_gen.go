@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -20,22 +21,27 @@ var (
 	umsMemberAuthRows                = strings.Join(umsMemberAuthFieldNames, ",")
 	umsMemberAuthRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberAuthFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsMemberAuthRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberAuthFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsMemberAuthIdPrefix               = "cache:gozero:umsMemberAuth:id:"
+	cacheGozeroUmsMemberAuthAuthTypeAuthKeyPrefix  = "cache:gozero:umsMemberAuth:authType:authKey:"
+	cacheGozeroUmsMemberAuthMemberIdAuthTypePrefix = "cache:gozero:umsMemberAuth:memberId:authType:"
 )
 
 type (
 	umsMemberAuthModel interface {
 		Insert(ctx context.Context, data *UmsMemberAuth) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberAuth) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsMemberAuth, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberAuth, error)
-		Count(ctx context.Context) (int64, error)
 		FindOneByAuthTypeAuthKey(ctx context.Context, authType string, authKey string) (*UmsMemberAuth, error)
 		FindOneByMemberIdAuthType(ctx context.Context, memberId int64, authType string) (*UmsMemberAuth, error)
 		Update(ctx context.Context, data *UmsMemberAuth) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberAuth) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsMemberAuthModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -52,23 +58,55 @@ type (
 	}
 )
 
-func newUmsMemberAuthModel(conn sqlx.SqlConn) *defaultUmsMemberAuthModel {
+func newUmsMemberAuthModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsMemberAuthModel {
 	return &defaultUmsMemberAuthModel{
-		conn:  conn,
-		table: "`ums_member_auth`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_member_auth`",
 	}
 }
 
 func (m *defaultUmsMemberAuthModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	data, err := m.FindOne(ctx, id)
+	if err != nil {
+		return err
+	}
+
+	gozeroUmsMemberAuthAuthTypeAuthKeyKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthAuthTypeAuthKeyPrefix, data.AuthType, data.AuthKey)
+	gozeroUmsMemberAuthIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberAuthIdPrefix, id)
+	gozeroUmsMemberAuthMemberIdAuthTypeKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthMemberIdAuthTypePrefix, data.MemberId, data.AuthType)
+	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberAuthAuthTypeAuthKeyKey, gozeroUmsMemberAuthIdKey, gozeroUmsMemberAuthMemberIdAuthTypeKey)
+	return err
+}
+
+func (m *defaultUmsMemberAuthModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	data, err := m.FindOne(ctx, id)
+	if err != nil {
+		return err
+	}
+
+	gozeroUmsMemberAuthAuthTypeAuthKeyKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthAuthTypeAuthKeyPrefix, data.AuthType, data.AuthKey)
+	gozeroUmsMemberAuthIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberAuthIdPrefix, id)
+	gozeroUmsMemberAuthMemberIdAuthTypeKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthMemberIdAuthTypePrefix, data.MemberId, data.AuthType)
+	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberAuthAuthTypeAuthKeyKey, gozeroUmsMemberAuthIdKey, gozeroUmsMemberAuthMemberIdAuthTypeKey)
 	return err
 }
 
 func (m *defaultUmsMemberAuthModel) FindOne(ctx context.Context, id int64) (*UmsMemberAuth, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberAuthRows, m.table)
+	gozeroUmsMemberAuthIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberAuthIdPrefix, id)
 	var resp UmsMemberAuth
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsMemberAuthIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberAuthRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -76,41 +114,19 @@ func (m *defaultUmsMemberAuthModel) FindOne(ctx context.Context, id int64) (*Ums
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberAuthModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberAuth, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberAuthRows, m.table)
-	var resp []UmsMemberAuth
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberAuthModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsMemberAuthModel) FindOneByAuthTypeAuthKey(ctx context.Context, authType string, authKey string) (*UmsMemberAuth, error) {
+	gozeroUmsMemberAuthAuthTypeAuthKeyKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthAuthTypeAuthKeyPrefix, authType, authKey)
 	var resp UmsMemberAuth
-	query := fmt.Sprintf("select %s from %s where `auth_type` = ? and `auth_key` = ? limit 1", umsMemberAuthRows, m.table)
-	err := m.conn.QueryRowCtx(ctx, &resp, query, authType, authKey)
+	err := m.QueryRowIndexCtx(ctx, &resp, gozeroUmsMemberAuthAuthTypeAuthKeyKey, m.formatPrimary, func(ctx context.Context, conn sqlx.SqlConn, v any) (i any, e error) {
+		query := fmt.Sprintf("select %s from %s where `auth_type` = ? and `auth_key` = ? limit 1", umsMemberAuthRows, m.table)
+		if err := conn.QueryRowCtx(ctx, &resp, query, authType, authKey); err != nil {
+			return nil, err
+		}
+		return resp.Id, nil
+	}, m.queryPrimary)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -122,9 +138,15 @@ func (m *defaultUmsMemberAuthModel) FindOneByAuthTypeAuthKey(ctx context.Context
 }
 
 func (m *defaultUmsMemberAuthModel) FindOneByMemberIdAuthType(ctx context.Context, memberId int64, authType string) (*UmsMemberAuth, error) {
+	gozeroUmsMemberAuthMemberIdAuthTypeKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthMemberIdAuthTypePrefix, memberId, authType)
 	var resp UmsMemberAuth
-	query := fmt.Sprintf("select %s from %s where `member_id` = ? and `auth_type` = ? limit 1", umsMemberAuthRows, m.table)
-	err := m.conn.QueryRowCtx(ctx, &resp, query, memberId, authType)
+	err := m.QueryRowIndexCtx(ctx, &resp, gozeroUmsMemberAuthMemberIdAuthTypeKey, m.formatPrimary, func(ctx context.Context, conn sqlx.SqlConn, v any) (i any, e error) {
+		query := fmt.Sprintf("select %s from %s where `member_id` = ? and `auth_type` = ? limit 1", umsMemberAuthRows, m.table)
+		if err := conn.QueryRowCtx(ctx, &resp, query, memberId, authType); err != nil {
+			return nil, err
+		}
+		return resp.Id, nil
+	}, m.queryPrimary)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -136,15 +158,71 @@ func (m *defaultUmsMemberAuthModel) FindOneByMemberIdAuthType(ctx context.Contex
 }
 
 func (m *defaultUmsMemberAuthModel) Insert(ctx context.Context, data *UmsMemberAuth) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, umsMemberAuthRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.DeleteTime, data.DelState, data.Version, data.MemberId, data.AuthKey, data.AuthType)
+	gozeroUmsMemberAuthAuthTypeAuthKeyKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthAuthTypeAuthKeyPrefix, data.AuthType, data.AuthKey)
+	gozeroUmsMemberAuthIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberAuthIdPrefix, data.Id)
+	gozeroUmsMemberAuthMemberIdAuthTypeKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthMemberIdAuthTypePrefix, data.MemberId, data.AuthType)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, umsMemberAuthRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.DeleteTime, data.DelState, data.Version, data.MemberId, data.AuthKey, data.AuthType)
+	}, gozeroUmsMemberAuthAuthTypeAuthKeyKey, gozeroUmsMemberAuthIdKey, gozeroUmsMemberAuthMemberIdAuthTypeKey)
 	return ret, err
 }
 
+func (m *defaultUmsMemberAuthModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberAuth) (sql.Result, error) {
+	gozeroUmsMemberAuthAuthTypeAuthKeyKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthAuthTypeAuthKeyPrefix, data.AuthType, data.AuthKey)
+	gozeroUmsMemberAuthIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberAuthIdPrefix, data.Id)
+	gozeroUmsMemberAuthMemberIdAuthTypeKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthMemberIdAuthTypePrefix, data.MemberId, data.AuthType)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, umsMemberAuthRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.DeleteTime, data.DelState, data.Version, data.MemberId, data.AuthKey, data.AuthType)
+		}
+		return conn.ExecCtx(ctx, query, data.DeleteTime, data.DelState, data.Version, data.MemberId, data.AuthKey, data.AuthType)
+	}, gozeroUmsMemberAuthAuthTypeAuthKeyKey, gozeroUmsMemberAuthIdKey, gozeroUmsMemberAuthMemberIdAuthTypeKey)
+	return ret, err
+}
 func (m *defaultUmsMemberAuthModel) Update(ctx context.Context, newData *UmsMemberAuth) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberAuthRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, newData.DeleteTime, newData.DelState, newData.Version, newData.MemberId, newData.AuthKey, newData.AuthType, newData.Id)
+	data, err := m.FindOne(ctx, newData.Id)
+	if err != nil {
+		return err
+	}
+
+	gozeroUmsMemberAuthAuthTypeAuthKeyKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthAuthTypeAuthKeyPrefix, data.AuthType, data.AuthKey)
+	gozeroUmsMemberAuthIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberAuthIdPrefix, data.Id)
+	gozeroUmsMemberAuthMemberIdAuthTypeKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthMemberIdAuthTypePrefix, data.MemberId, data.AuthType)
+	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberAuthRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, newData.DeleteTime, newData.DelState, newData.Version, newData.MemberId, newData.AuthKey, newData.AuthType, newData.Id)
+	}, gozeroUmsMemberAuthAuthTypeAuthKeyKey, gozeroUmsMemberAuthIdKey, gozeroUmsMemberAuthMemberIdAuthTypeKey)
 	return err
+}
+
+func (m *defaultUmsMemberAuthModel) UpdateTx(ctx context.Context, session sqlx.Session, newData *UmsMemberAuth) error {
+	data, err := m.FindOne(ctx, newData.Id)
+	if err != nil {
+		return err
+	}
+
+	gozeroUmsMemberAuthAuthTypeAuthKeyKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthAuthTypeAuthKeyPrefix, data.AuthType, data.AuthKey)
+	gozeroUmsMemberAuthIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberAuthIdPrefix, data.Id)
+	gozeroUmsMemberAuthMemberIdAuthTypeKey := fmt.Sprintf("%s%v:%v", cacheGozeroUmsMemberAuthMemberIdAuthTypePrefix, data.MemberId, data.AuthType)
+	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberAuthRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, newData.DeleteTime, newData.DelState, newData.Version, newData.MemberId, newData.AuthKey, newData.AuthType, newData.Id)
+		}
+		return conn.ExecCtx(ctx, query, newData.DeleteTime, newData.DelState, newData.Version, newData.MemberId, newData.AuthKey, newData.AuthType, newData.Id)
+	}, gozeroUmsMemberAuthAuthTypeAuthKeyKey, gozeroUmsMemberAuthIdKey, gozeroUmsMemberAuthMemberIdAuthTypeKey)
+	return err
+}
+
+func (m *defaultUmsMemberAuthModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsMemberAuthIdPrefix, primary)
+}
+
+func (m *defaultUmsMemberAuthModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberAuthRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsMemberAuthModel) tableName() string {

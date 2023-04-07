@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -19,20 +20,23 @@ var (
 	umsMemberLevelRows                = strings.Join(umsMemberLevelFieldNames, ",")
 	umsMemberLevelRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberLevelFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsMemberLevelRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberLevelFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsMemberLevelIdPrefix = "cache:gozero:umsMemberLevel:id:"
 )
 
 type (
 	umsMemberLevelModel interface {
 		Insert(ctx context.Context, data *UmsMemberLevel) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberLevel) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsMemberLevel, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberLevel, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsMemberLevel) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberLevel) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsMemberLevelModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -53,23 +57,41 @@ type (
 	}
 )
 
-func newUmsMemberLevelModel(conn sqlx.SqlConn) *defaultUmsMemberLevelModel {
+func newUmsMemberLevelModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsMemberLevelModel {
 	return &defaultUmsMemberLevelModel{
-		conn:  conn,
-		table: "`ums_member_level`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_member_level`",
 	}
 }
 
 func (m *defaultUmsMemberLevelModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberLevelIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberLevelModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberLevelIdKey)
 	return err
 }
 
 func (m *defaultUmsMemberLevelModel) FindOne(ctx context.Context, id int64) (*UmsMemberLevel, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberLevelRows, m.table)
+	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, id)
 	var resp UmsMemberLevel
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsMemberLevelIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberLevelRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -77,47 +99,57 @@ func (m *defaultUmsMemberLevelModel) FindOne(ctx context.Context, id int64) (*Um
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberLevelModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberLevel, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberLevelRows, m.table)
-	var resp []UmsMemberLevel
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberLevelModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsMemberLevelModel) Insert(ctx context.Context, data *UmsMemberLevel) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberLevelRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note)
+	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberLevelRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note)
+	}, gozeroUmsMemberLevelIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsMemberLevelModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberLevel) (sql.Result, error) {
+	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberLevelRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note)
+		}
+		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note)
+	}, gozeroUmsMemberLevelIdKey)
+	return ret, err
+}
 func (m *defaultUmsMemberLevelModel) Update(ctx context.Context, data *UmsMemberLevel) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberLevelRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note, data.Id)
+	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberLevelRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note, data.Id)
+	}, gozeroUmsMemberLevelIdKey)
 	return err
+}
+
+func (m *defaultUmsMemberLevelModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberLevel) error {
+	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberLevelRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note, data.Id)
+	}, gozeroUmsMemberLevelIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberLevelModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, primary)
+}
+
+func (m *defaultUmsMemberLevelModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberLevelRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsMemberLevelModel) tableName() string {

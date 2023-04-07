@@ -3,6 +3,7 @@ package umsmodel
 import (
 	"context"
 
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
@@ -22,15 +23,15 @@ type (
 )
 
 // NewUmsMemberModel returns a model for the database table.
-func NewUmsMemberModel(conn sqlx.SqlConn) UmsMemberModel {
+func NewUmsMemberModel(conn sqlx.SqlConn, c cache.CacheConf) UmsMemberModel {
 	return &customUmsMemberModel{
-		defaultUmsMemberModel: newUmsMemberModel(conn),
+		defaultUmsMemberModel: newUmsMemberModel(conn, c),
 	}
 }
 
 func (m *defaultUmsMemberModel) Trans(ctx context.Context, fn func(ctx context.Context, session sqlx.Session) error) error {
 
-	return m.conn.TransactCtx(ctx, func(ctx context.Context, session sqlx.Session) error {
+	return m.TransactCtx(ctx, func(ctx context.Context, session sqlx.Session) error {
 		return fn(ctx, session)
 	})
 

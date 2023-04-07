@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -20,20 +21,23 @@ var (
 	umsIntegrationChangeHistoryRows                = strings.Join(umsIntegrationChangeHistoryFieldNames, ",")
 	umsIntegrationChangeHistoryRowsExpectAutoSet   = strings.Join(stringx.Remove(umsIntegrationChangeHistoryFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsIntegrationChangeHistoryRowsWithPlaceHolder = strings.Join(stringx.Remove(umsIntegrationChangeHistoryFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsIntegrationChangeHistoryIdPrefix = "cache:gozero:umsIntegrationChangeHistory:id:"
 )
 
 type (
 	umsIntegrationChangeHistoryModel interface {
 		Insert(ctx context.Context, data *UmsIntegrationChangeHistory) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsIntegrationChangeHistory) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsIntegrationChangeHistory, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsIntegrationChangeHistory, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsIntegrationChangeHistory) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsIntegrationChangeHistory) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsIntegrationChangeHistoryModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -49,23 +53,41 @@ type (
 	}
 )
 
-func newUmsIntegrationChangeHistoryModel(conn sqlx.SqlConn) *defaultUmsIntegrationChangeHistoryModel {
+func newUmsIntegrationChangeHistoryModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsIntegrationChangeHistoryModel {
 	return &defaultUmsIntegrationChangeHistoryModel{
-		conn:  conn,
-		table: "`ums_integration_change_history`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_integration_change_history`",
 	}
 }
 
 func (m *defaultUmsIntegrationChangeHistoryModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsIntegrationChangeHistoryIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationChangeHistoryIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsIntegrationChangeHistoryIdKey)
+	return err
+}
+
+func (m *defaultUmsIntegrationChangeHistoryModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsIntegrationChangeHistoryIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationChangeHistoryIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsIntegrationChangeHistoryIdKey)
 	return err
 }
 
 func (m *defaultUmsIntegrationChangeHistoryModel) FindOne(ctx context.Context, id int64) (*UmsIntegrationChangeHistory, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsIntegrationChangeHistoryRows, m.table)
+	gozeroUmsIntegrationChangeHistoryIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationChangeHistoryIdPrefix, id)
 	var resp UmsIntegrationChangeHistory
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsIntegrationChangeHistoryIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsIntegrationChangeHistoryRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -73,47 +95,57 @@ func (m *defaultUmsIntegrationChangeHistoryModel) FindOne(ctx context.Context, i
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsIntegrationChangeHistoryModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsIntegrationChangeHistory, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsIntegrationChangeHistoryRows, m.table)
-	var resp []UmsIntegrationChangeHistory
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsIntegrationChangeHistoryModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsIntegrationChangeHistoryModel) Insert(ctx context.Context, data *UmsIntegrationChangeHistory) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, umsIntegrationChangeHistoryRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.ChangeType, data.ChangeCount, data.OperateMan, data.OperateNote, data.SourceType)
+	gozeroUmsIntegrationChangeHistoryIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationChangeHistoryIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, umsIntegrationChangeHistoryRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ChangeType, data.ChangeCount, data.OperateMan, data.OperateNote, data.SourceType)
+	}, gozeroUmsIntegrationChangeHistoryIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsIntegrationChangeHistoryModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsIntegrationChangeHistory) (sql.Result, error) {
+	gozeroUmsIntegrationChangeHistoryIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationChangeHistoryIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, umsIntegrationChangeHistoryRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.ChangeType, data.ChangeCount, data.OperateMan, data.OperateNote, data.SourceType)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ChangeType, data.ChangeCount, data.OperateMan, data.OperateNote, data.SourceType)
+	}, gozeroUmsIntegrationChangeHistoryIdKey)
+	return ret, err
+}
 func (m *defaultUmsIntegrationChangeHistoryModel) Update(ctx context.Context, data *UmsIntegrationChangeHistory) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsIntegrationChangeHistoryRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.ChangeType, data.ChangeCount, data.OperateMan, data.OperateNote, data.SourceType, data.Id)
+	gozeroUmsIntegrationChangeHistoryIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationChangeHistoryIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsIntegrationChangeHistoryRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ChangeType, data.ChangeCount, data.OperateMan, data.OperateNote, data.SourceType, data.Id)
+	}, gozeroUmsIntegrationChangeHistoryIdKey)
 	return err
+}
+
+func (m *defaultUmsIntegrationChangeHistoryModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsIntegrationChangeHistory) error {
+	gozeroUmsIntegrationChangeHistoryIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationChangeHistoryIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsIntegrationChangeHistoryRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.ChangeType, data.ChangeCount, data.OperateMan, data.OperateNote, data.SourceType, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.ChangeType, data.ChangeCount, data.OperateMan, data.OperateNote, data.SourceType, data.Id)
+	}, gozeroUmsIntegrationChangeHistoryIdKey)
+	return err
+}
+
+func (m *defaultUmsIntegrationChangeHistoryModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsIntegrationChangeHistoryIdPrefix, primary)
+}
+
+func (m *defaultUmsIntegrationChangeHistoryModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsIntegrationChangeHistoryRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsIntegrationChangeHistoryModel) tableName() string {

@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -20,20 +21,23 @@ var (
 	umsMemberLoginLogRows                = strings.Join(umsMemberLoginLogFieldNames, ",")
 	umsMemberLoginLogRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberLoginLogFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsMemberLoginLogRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberLoginLogFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsMemberLoginLogIdPrefix = "cache:gozero:umsMemberLoginLog:id:"
 )
 
 type (
 	umsMemberLoginLogModel interface {
 		Insert(ctx context.Context, data *UmsMemberLoginLog) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberLoginLog) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsMemberLoginLog, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberLoginLog, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsMemberLoginLog) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberLoginLog) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsMemberLoginLogModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -48,23 +52,41 @@ type (
 	}
 )
 
-func newUmsMemberLoginLogModel(conn sqlx.SqlConn) *defaultUmsMemberLoginLogModel {
+func newUmsMemberLoginLogModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsMemberLoginLogModel {
 	return &defaultUmsMemberLoginLogModel{
-		conn:  conn,
-		table: "`ums_member_login_log`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_member_login_log`",
 	}
 }
 
 func (m *defaultUmsMemberLoginLogModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsMemberLoginLogIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLoginLogIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberLoginLogIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberLoginLogModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsMemberLoginLogIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLoginLogIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberLoginLogIdKey)
 	return err
 }
 
 func (m *defaultUmsMemberLoginLogModel) FindOne(ctx context.Context, id int64) (*UmsMemberLoginLog, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberLoginLogRows, m.table)
+	gozeroUmsMemberLoginLogIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLoginLogIdPrefix, id)
 	var resp UmsMemberLoginLog
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsMemberLoginLogIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberLoginLogRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -72,47 +94,57 @@ func (m *defaultUmsMemberLoginLogModel) FindOne(ctx context.Context, id int64) (
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberLoginLogModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberLoginLog, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberLoginLogRows, m.table)
-	var resp []UmsMemberLoginLog
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberLoginLogModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsMemberLoginLogModel) Insert(ctx context.Context, data *UmsMemberLoginLog) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?)", m.table, umsMemberLoginLogRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.Ip, data.City, data.LoginType, data.Province)
+	gozeroUmsMemberLoginLogIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLoginLogIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?)", m.table, umsMemberLoginLogRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.Ip, data.City, data.LoginType, data.Province)
+	}, gozeroUmsMemberLoginLogIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsMemberLoginLogModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberLoginLog) (sql.Result, error) {
+	gozeroUmsMemberLoginLogIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLoginLogIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?)", m.table, umsMemberLoginLogRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.Ip, data.City, data.LoginType, data.Province)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.Ip, data.City, data.LoginType, data.Province)
+	}, gozeroUmsMemberLoginLogIdKey)
+	return ret, err
+}
 func (m *defaultUmsMemberLoginLogModel) Update(ctx context.Context, data *UmsMemberLoginLog) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberLoginLogRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.Ip, data.City, data.LoginType, data.Province, data.Id)
+	gozeroUmsMemberLoginLogIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLoginLogIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberLoginLogRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.Ip, data.City, data.LoginType, data.Province, data.Id)
+	}, gozeroUmsMemberLoginLogIdKey)
 	return err
+}
+
+func (m *defaultUmsMemberLoginLogModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberLoginLog) error {
+	gozeroUmsMemberLoginLogIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLoginLogIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberLoginLogRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.Ip, data.City, data.LoginType, data.Province, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.Ip, data.City, data.LoginType, data.Province, data.Id)
+	}, gozeroUmsMemberLoginLogIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberLoginLogModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsMemberLoginLogIdPrefix, primary)
+}
+
+func (m *defaultUmsMemberLoginLogModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberLoginLogRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsMemberLoginLogModel) tableName() string {

@@ -2,7 +2,7 @@ package auth
 
 import (
 	"context"
-	"encoding/json"
+	"fmt"
 	"zero-admin/rpc/ums/ums"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -42,8 +42,8 @@ func (l *RegisterLogic) Register(req types.RegisterReq) (resp *types.LoginAndReg
 // 构建返回数据
 func buildRegisterMemberResp(memberAddResp *ums.MemberAddResp) (*types.LoginAndRegisterResp, error) {
 	userInfo := types.UserInfo{
-		NickName:  memberAddResp.Nickname,
-		AvatarURL: memberAddResp.Icon,
+		NickName: memberAddResp.Nickname,
+		Icon:     memberAddResp.Icon,
 	}
 
 	data := types.LoginAndRegisterData{
@@ -60,19 +60,62 @@ func buildRegisterMemberResp(memberAddResp *ums.MemberAddResp) (*types.LoginAndR
 
 // RegisterMemberRpc 调用rpc方法注册会员
 func RegisterMemberRpc(req types.RegisterReq, err error, l *RegisterLogic) (*ums.MemberAddResp, *types.LoginAndRegisterResp, error, bool) {
-	memberAddResp, err := l.svcCtx.Ums.MemberAdd(l.ctx, &umsclient.MemberAddReq{
-		Username: req.Username,
-		Password: req.Password,
-		Phone:    req.Mobile,
-	})
+	// memberAddResp, err := l.svcCtx.Ums.MemberAdd(l.ctx, &umsclient.MemberAddReq{
+	// 	Username: req.Username,
+	// 	Password: req.Password,
+	// 	Phone:    req.Mobile,
+	// })
 
+	// if err != nil {
+	// 	reqStr, _ := json.Marshal(req)
+	// 	logx.WithContext(l.ctx).Errorf("会员注册失败,参数: %s,响应：%s", reqStr, err.Error())
+	// 	return nil, &types.LoginAndRegisterResp{
+	// 		Errno:  1,
+	// 		Errmsg: err.Error(),
+	// 	}, nil, true
+	// }
+
+	// mobile := req.Phone
+	// nickName := fmt.Sprintf("LookLook%s", mobile[7:])
+	// registerRsp, err := l.svcCtx.Ums.Register(l.ctx, &umsclient.RegisterReq{
+	// 	AuthKey:  req.Phone,
+	// 	AuthType: UserAuthTypeSmallWX,
+	// 	Phone:    mobile,
+	// 	Nickname: nickName,
+	// 	Password: tool.GenerateUuid(),
+	// })
+	// if err != nil {
+	// 	return nil, nil, err, false
+	// }
+
+	memberinfo, err := l.svcCtx.Ums.MemberInfo(l.ctx, &umsclient.MemberInfoReq{Id: 22})
 	if err != nil {
-		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("会员注册失败,参数: %s,响应：%s", reqStr, err.Error())
-		return nil, &types.LoginAndRegisterResp{
-			Errno:  1,
-			Errmsg: err.Error(),
-		}, nil, true
+		return nil, nil, nil, false
 	}
-	return memberAddResp, nil, nil, false
+
+	var data types.LoginAndRegisterData
+	fmt.Println(memberinfo)
+	fmt.Println(memberinfo.Member.Nickname)
+	data = types.LoginAndRegisterData{
+		// UserInfo: types.UserInfo{
+		// 	NickName: memberinfo.Member.Nickname,
+		// 	Phone:    memberinfo.Member.Phone,
+		// 	Icon:     memberinfo.Member.Icon,
+		// },
+		Token:        "",
+		AccessExpire: 86400,
+		RefreshAfter: 86400,
+	}
+	data.UserInfo = types.UserInfo{
+		NickName: memberinfo.Member.Nickname,
+		Phone:    memberinfo.Member.Phone,
+		Icon:     memberinfo.Member.Icon,
+	}
+
+	return nil, &types.LoginAndRegisterResp{
+		Errno:  1,
+		Data:   data,
+		Errmsg: "",
+	}, nil, true
+
 }

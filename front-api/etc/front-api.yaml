@@ -6,8 +6,8 @@ Auth:
   AccessExpire: 86400
 #WxMiniConf
 WxMiniConf:
-  AppId: wx2add729fadddddd
-  Secret: 20365395b3de9b2a9351ddddddd
+  AppId: wxa985ef2dab08b118
+  Secret: 49bfcb1c4cf9a477a8902b4cf19289a7
 #系统
 SysRpc:
   Etcd:

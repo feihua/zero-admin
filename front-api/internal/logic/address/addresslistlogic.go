@@ -30,7 +30,7 @@ func (l *AddressListLogic) AddressList(req types.AddressListReq) (resp *types.Ad
 	result, err := l.svcCtx.Ums.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
-		UserId:   req.UserId,
+		MemberId: req.UserId,
 	})
 
 	if err != nil {

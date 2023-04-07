@@ -116,11 +116,13 @@ message RegisterReq {
   string password = 3;
   string authKey = 4;
   string authType = 5;
+  string icon = 6;
 }
 message RegisterResp {
   string accessToken = 1;
   int64  accessExpire = 2;
   int64  refreshAfter = 3;
+  int64 memberId=4;
 }
 
 message LoginReq {

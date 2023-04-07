@@ -1,6 +1,9 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsMemberPrepaidCardLogModel = (*customUmsMemberPrepaidCardLogModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewUmsMemberPrepaidCardLogModel returns a model for the database table.
-func NewUmsMemberPrepaidCardLogModel(conn sqlx.SqlConn) UmsMemberPrepaidCardLogModel {
+func NewUmsMemberPrepaidCardLogModel(conn sqlx.SqlConn, c cache.CacheConf) UmsMemberPrepaidCardLogModel {
 	return &customUmsMemberPrepaidCardLogModel{
-		defaultUmsMemberPrepaidCardLogModel: newUmsMemberPrepaidCardLogModel(conn),
+		defaultUmsMemberPrepaidCardLogModel: newUmsMemberPrepaidCardLogModel(conn, c),
 	}
 }

@@ -1,6 +1,9 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsMemberStatisticsInfoModel = (*customUmsMemberStatisticsInfoModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewUmsMemberStatisticsInfoModel returns a model for the database table.
-func NewUmsMemberStatisticsInfoModel(conn sqlx.SqlConn) UmsMemberStatisticsInfoModel {
+func NewUmsMemberStatisticsInfoModel(conn sqlx.SqlConn, c cache.CacheConf) UmsMemberStatisticsInfoModel {
 	return &customUmsMemberStatisticsInfoModel{
-		defaultUmsMemberStatisticsInfoModel: newUmsMemberStatisticsInfoModel(conn),
+		defaultUmsMemberStatisticsInfoModel: newUmsMemberStatisticsInfoModel(conn, c),
 	}
 }

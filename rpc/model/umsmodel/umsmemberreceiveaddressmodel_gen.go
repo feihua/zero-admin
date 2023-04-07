@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -19,20 +20,23 @@ var (
 	umsMemberReceiveAddressRows                = strings.Join(umsMemberReceiveAddressFieldNames, ",")
 	umsMemberReceiveAddressRowsExpectAutoSet   = strings.Join(stringx.Remove(umsMemberReceiveAddressFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	umsMemberReceiveAddressRowsWithPlaceHolder = strings.Join(stringx.Remove(umsMemberReceiveAddressFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheGozeroUmsMemberReceiveAddressIdPrefix = "cache:gozero:umsMemberReceiveAddress:id:"
 )
 
 type (
 	umsMemberReceiveAddressModel interface {
 		Insert(ctx context.Context, data *UmsMemberReceiveAddress) (sql.Result, error)
+		InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberReceiveAddress) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*UmsMemberReceiveAddress, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberReceiveAddress, error)
-		Count(ctx context.Context) (int64, error)
 		Update(ctx context.Context, data *UmsMemberReceiveAddress) error
+		UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberReceiveAddress) error
 		Delete(ctx context.Context, id int64) error
+		DeleteTx(ctx context.Context, session sqlx.Session, id int64) error
 	}
 
 	defaultUmsMemberReceiveAddressModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -50,23 +54,41 @@ type (
 	}
 )
 
-func newUmsMemberReceiveAddressModel(conn sqlx.SqlConn) *defaultUmsMemberReceiveAddressModel {
+func newUmsMemberReceiveAddressModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultUmsMemberReceiveAddressModel {
 	return &defaultUmsMemberReceiveAddressModel{
-		conn:  conn,
-		table: "`ums_member_receive_address`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`ums_member_receive_address`",
 	}
 }
 
 func (m *defaultUmsMemberReceiveAddressModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	gozeroUmsMemberReceiveAddressIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberReceiveAddressIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberReceiveAddressIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberReceiveAddressModel) DeleteTx(ctx context.Context, session sqlx.Session, id int64) error {
+	gozeroUmsMemberReceiveAddressIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberReceiveAddressIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		if session != nil {
+			return session.ExecCtx(ctx, query, id)
+		}
+		return conn.ExecCtx(ctx, query, id)
+	}, gozeroUmsMemberReceiveAddressIdKey)
 	return err
 }
 
 func (m *defaultUmsMemberReceiveAddressModel) FindOne(ctx context.Context, id int64) (*UmsMemberReceiveAddress, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberReceiveAddressRows, m.table)
+	gozeroUmsMemberReceiveAddressIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberReceiveAddressIdPrefix, id)
 	var resp UmsMemberReceiveAddress
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, gozeroUmsMemberReceiveAddressIdKey, func(ctx context.Context, conn sqlx.SqlConn, v any) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberReceiveAddressRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -74,47 +96,57 @@ func (m *defaultUmsMemberReceiveAddressModel) FindOne(ctx context.Context, id in
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberReceiveAddressModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberReceiveAddress, error) {
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberReceiveAddressRows, m.table)
-	var resp []UmsMemberReceiveAddress
-	err := m.conn.QueryRowsCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *defaultUmsMemberReceiveAddressModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-	var count int64
-	err := m.conn.QueryRowCtx(ctx, &count, query)
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 
 func (m *defaultUmsMemberReceiveAddressModel) Insert(ctx context.Context, data *UmsMemberReceiveAddress) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberReceiveAddressRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.Name, data.PhoneNumber, data.DefaultStatus, data.PostCode, data.Province, data.City, data.Region, data.DetailAddress)
+	gozeroUmsMemberReceiveAddressIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberReceiveAddressIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberReceiveAddressRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.Name, data.PhoneNumber, data.DefaultStatus, data.PostCode, data.Province, data.City, data.Region, data.DetailAddress)
+	}, gozeroUmsMemberReceiveAddressIdKey)
 	return ret, err
 }
 
+func (m *defaultUmsMemberReceiveAddressModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberReceiveAddress) (sql.Result, error) {
+	gozeroUmsMemberReceiveAddressIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberReceiveAddressIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberReceiveAddressRowsExpectAutoSet)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.Name, data.PhoneNumber, data.DefaultStatus, data.PostCode, data.Province, data.City, data.Region, data.DetailAddress)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.Name, data.PhoneNumber, data.DefaultStatus, data.PostCode, data.Province, data.City, data.Region, data.DetailAddress)
+	}, gozeroUmsMemberReceiveAddressIdKey)
+	return ret, err
+}
 func (m *defaultUmsMemberReceiveAddressModel) Update(ctx context.Context, data *UmsMemberReceiveAddress) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberReceiveAddressRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.MemberId, data.Name, data.PhoneNumber, data.DefaultStatus, data.PostCode, data.Province, data.City, data.Region, data.DetailAddress, data.Id)
+	gozeroUmsMemberReceiveAddressIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberReceiveAddressIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberReceiveAddressRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.MemberId, data.Name, data.PhoneNumber, data.DefaultStatus, data.PostCode, data.Province, data.City, data.Region, data.DetailAddress, data.Id)
+	}, gozeroUmsMemberReceiveAddressIdKey)
 	return err
+}
+
+func (m *defaultUmsMemberReceiveAddressModel) UpdateTx(ctx context.Context, session sqlx.Session, data *UmsMemberReceiveAddress) error {
+	gozeroUmsMemberReceiveAddressIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberReceiveAddressIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberReceiveAddressRowsWithPlaceHolder)
+		if session != nil {
+			return session.ExecCtx(ctx, query, data.MemberId, data.Name, data.PhoneNumber, data.DefaultStatus, data.PostCode, data.Province, data.City, data.Region, data.DetailAddress, data.Id)
+		}
+		return conn.ExecCtx(ctx, query, data.MemberId, data.Name, data.PhoneNumber, data.DefaultStatus, data.PostCode, data.Province, data.City, data.Region, data.DetailAddress, data.Id)
+	}, gozeroUmsMemberReceiveAddressIdKey)
+	return err
+}
+
+func (m *defaultUmsMemberReceiveAddressModel) formatPrimary(primary any) string {
+	return fmt.Sprintf("%s%v", cacheGozeroUmsMemberReceiveAddressIdPrefix, primary)
+}
+
+func (m *defaultUmsMemberReceiveAddressModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary any) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", umsMemberReceiveAddressRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultUmsMemberReceiveAddressModel) tableName() string {

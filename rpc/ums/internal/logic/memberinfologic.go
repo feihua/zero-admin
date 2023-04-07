@@ -7,7 +7,10 @@ import (
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 
+	"github.com/jinzhu/copier"
+	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/tools/goctl/model/sql/test/model"
 )
 
 var ErrUserNoExistsError = xerr.NewErrMsg("用户不存在")
@@ -27,7 +30,16 @@ func NewMemberInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Member
 }
 
 func (l *MemberInfoLogic) MemberInfo(in *umsclient.MemberInfoReq) (*umsclient.MemberInfoResp, error) {
-	// todo: add your logic here and delete this line
-
-	return &umsclient.MemberInfoResp{}, nil
+	member, err := l.svcCtx.UmsMemberModel.FindOne(l.ctx, in.Id)
+	if err != nil && err != model.ErrNotFound {
+		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "GetUserInfo find user db err , id:%d , err:%v", in.Id, err)
+	}
+	if member == nil {
+		return nil, errors.Wrapf(ErrUserNoExistsError, "id:%d", in.Id)
+	}
+	var respMember umsclient.Member
+	_ = copier.Copy(&respMember, member)
+	return &umsclient.MemberInfoResp{
+		Member: &respMember,
+	}, nil
 }

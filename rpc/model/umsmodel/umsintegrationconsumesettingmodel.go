@@ -1,6 +1,9 @@
 package umsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ UmsIntegrationConsumeSettingModel = (*customUmsIntegrationConsumeSettingModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewUmsIntegrationConsumeSettingModel returns a model for the database table.
-func NewUmsIntegrationConsumeSettingModel(conn sqlx.SqlConn) UmsIntegrationConsumeSettingModel {
+func NewUmsIntegrationConsumeSettingModel(conn sqlx.SqlConn, c cache.CacheConf) UmsIntegrationConsumeSettingModel {
 	return &customUmsIntegrationConsumeSettingModel{
-		defaultUmsIntegrationConsumeSettingModel: newUmsIntegrationConsumeSettingModel(conn),
+		defaultUmsIntegrationConsumeSettingModel: newUmsIntegrationConsumeSettingModel(conn, c),
 	}
 }
