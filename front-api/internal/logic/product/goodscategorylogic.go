@@ -39,7 +39,7 @@ func (l *GoodsCategoryLogic) GoodsCategory(req types.GoodsCategoryReq) (resp *ty
 			IsNew:        false,
 			IsHot:        false,
 			CounterPrice: item.Price,
-			RetailPrice:  item.PromotionPrice,
+			RetailPrice:  item.Price * 0.7,
 		})
 	}
 

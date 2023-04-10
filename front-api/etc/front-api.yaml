@@ -2,7 +2,7 @@ Name: front-api
 Host: 0.0.0.0
 Port: 7777
 Auth:
-  AccessSecret: rtghyu67-c7a4-4063-9236-6bfc35d54b7d
+  AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
   AccessExpire: 86400
 #WxMiniConf
 WxMiniConf:

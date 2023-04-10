@@ -113,11 +113,11 @@ type GoodsCategoryList struct {
     IsHot bool `json:"isHot"`               //是否为热卖商品
     CounterPrice float64 `json:"counterPrice"`//专柜价格
     RetailPrice float64 `json:"retailPrice"`  //零售价格
-
+    Sale int64 `json:"sale"`
 }
 
 @server(
-    //    jwt: Auth
+    jwt: Auth
     group: product
     prefix: /api/goods
 )
