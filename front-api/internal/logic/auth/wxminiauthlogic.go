@@ -2,10 +2,10 @@ package auth
 
 import (
 	"context"
-	"fmt"
 
 	"zero-admin/common/tool"
 	"zero-admin/common/xerr"
+
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
 	"zero-admin/rpc/ums/umsclient"
@@ -36,6 +36,10 @@ func NewWxMiniAuthLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxMini
 }
 
 func (l *WxMiniAuthLogic) WxMiniAuth(req *types.WXMiniAuthReq) (resp *types.LoginAndRegisterResp, err error) {
+	// if len(strings.TrimSpace(req.Code)) == 0 {
+	// 	return nil, errorx.NewDefaultError("用户名或密码不能为空")
+	// }
+
 	//1、Wechat-Mini
 	miniprogram := wechat.NewWechat().GetMiniProgram(&miniConfig.Config{
 		AppID:     l.svcCtx.Config.WxMiniConf.AppId,
@@ -66,7 +70,8 @@ func (l *WxMiniAuthLogic) WxMiniAuth(req *types.WXMiniAuthReq) (resp *types.Logi
 
 	var data types.LoginAndRegisterData
 	if rpcRsp.MemberAuth == nil || rpcRsp.MemberAuth.Id == 0 {
-		//bind user.
+
+		//bind phone.
 		authPhoneNumberInfo, err := miniprogram.GetAuth().GetPhoneNumberContext(l.ctx, req.PNCode)
 		if err != nil {
 			return nil, errors.Wrapf(ErrWxMiniAuthFailError, "发起手机号授权请求失败 err : %v , code : %s  , authPhoneNumberInfo : %+v", err, req.PNCode, authPhoneNumberInfo)
@@ -114,7 +119,7 @@ func (l *WxMiniAuthLogic) WxMiniAuth(req *types.WXMiniAuthReq) (resp *types.Logi
 	if err != nil {
 		return nil, errors.Wrapf(ErrWxMiniAuthFailError, "usercenterRpc.GenerateToken err :%v, userId : %d", err, userId)
 	}
-	fmt.Println(memberinfo)
+
 	data.UserInfo = types.UserInfo{
 		NickName: memberinfo.Member.Nickname,
 		Phone:    memberinfo.Member.Phone,

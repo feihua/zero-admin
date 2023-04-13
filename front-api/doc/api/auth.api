@@ -39,7 +39,7 @@ type (
 		Code          string `json:"code"`
 		IV            string `json:"iv"`
 		EncryptedData string `json:"encryptedData"`
-        PNCode          string `json:"pncode"`
+        PNCode        string `json:"pncode"`
 	}
 )
 

@@ -27,7 +27,7 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) RegisterL
 }
 
 // Register 会员注册
-func (l *RegisterLogic) Register(req types.RegisterReq) (resp *types.LoginAndRegisterResp, err error) {
+func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.LoginAndRegisterResp, err error) {
 
 	//调用rpc方法注册会员
 	memberAddResp, registerResp, err2, done := RegisterMemberRpc(req, err, l)
@@ -59,7 +59,7 @@ func buildRegisterMemberResp(memberAddResp *ums.MemberAddResp) (*types.LoginAndR
 }
 
 // RegisterMemberRpc 调用rpc方法注册会员
-func RegisterMemberRpc(req types.RegisterReq, err error, l *RegisterLogic) (*ums.MemberAddResp, *types.LoginAndRegisterResp, error, bool) {
+func RegisterMemberRpc(req *types.RegisterReq, err error, l *RegisterLogic) (*ums.MemberAddResp, *types.LoginAndRegisterResp, error, bool) {
 	// memberAddResp, err := l.svcCtx.Ums.MemberAdd(l.ctx, &umsclient.MemberAddReq{
 	// 	Username: req.Username,
 	// 	Password: req.Password,
