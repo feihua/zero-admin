@@ -33,7 +33,7 @@ func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 	switch err {
 	case nil:
 	case sqlc.ErrNotFound:
-		logx.WithContext(l.ctx).Infof("用户不存在userId: %s", in.UserId)
+		logx.WithContext(l.ctx).Errorf("用户不存在userId: %s", in.UserId)
 		return nil, errors.New(fmt.Sprintf("用户不存在userId: %s", strconv.FormatInt(in.UserId, 10)))
 	default:
 		return nil, err
@@ -62,17 +62,19 @@ func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 
 func listTrees(menus *[]sysmodel.SysMenu, list []*sys.MenuListTree, listUrls []string) ([]*sys.MenuListTree, []string) {
 	for _, menu := range *menus {
-		list = append(list, &sys.MenuListTree{
-			Id:           menu.Id,
-			Name:         menu.Name,
-			Icon:         menu.Icon,
-			ParentId:     menu.ParentId,
-			Path:         menu.Url,
-			VuePath:      menu.VuePath,
-			VueComponent: menu.VueComponent,
-			VueIcon:      menu.VueIcon,
-			VueRedirect:  menu.VueRedirect,
-		})
+		if menu.Type == 1 || menu.Type == 0 {
+			list = append(list, &sys.MenuListTree{
+				Id:           menu.Id,
+				Name:         menu.Name,
+				Icon:         menu.Icon,
+				ParentId:     menu.ParentId,
+				Path:         menu.Url,
+				VuePath:      menu.VuePath,
+				VueComponent: menu.VueComponent,
+				VueIcon:      menu.VueIcon,
+				VueRedirect:  menu.VueRedirect,
+			})
+		}
 
 		if len(strings.TrimSpace(menu.BackgroundUrl)) != 0 {
 			listUrls = append(listUrls, menu.BackgroundUrl)
