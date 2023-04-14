@@ -25,7 +25,7 @@ func NewAlbumUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Album
 }
 
 func (l *AlbumUpdateLogic) AlbumUpdate(in *pms.AlbumUpdateReq) (*pms.AlbumUpdateResp, error) {
-	err := l.svcCtx.PmsAlbumModel.Update(pmsmodel.PmsAlbum{
+	err := l.svcCtx.PmsAlbumModel.Update(l.ctx, &pmsmodel.PmsAlbum{
 		Id:          in.Id,
 		Name:        in.Name,
 		CoverPic:    in.CoverPic,

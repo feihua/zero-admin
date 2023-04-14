@@ -3,9 +3,9 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/pms/pms"
 
 	"zero-admin/rpc/pms/internal/svc"
+	"zero-admin/rpc/pms/pms"
 	"zero-admin/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -27,7 +27,7 @@ func NewProductListByCategoryIdLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *ProductListByCategoryIdLogic) ProductListByCategoryId(in *pmsclient.ProductListByCategoryIdReq) (*pmsclient.ProductListByCategoryIdResp, error) {
 	all, err := l.svcCtx.PmsProductModel.ProductListByCategoryId(in.ProductCategoryId, 1, 1000)
-	count, _ := l.svcCtx.PmsProductModel.Count()
+	count, _ := l.svcCtx.PmsProductModel.CountByCategoryId(l.ctx, in.ProductCategoryId)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

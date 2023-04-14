@@ -25,7 +25,7 @@ func NewProductFullReductionAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *ProductFullReductionAddLogic) ProductFullReductionAdd(in *pms.ProductFullReductionAddReq) (*pms.ProductFullReductionAddResp, error) {
-	_, err := l.svcCtx.PmsProductFullReductionModel.Insert(pmsmodel.PmsProductFullReduction{
+	_, err := l.svcCtx.PmsProductFullReductionModel.Insert(l.ctx, &pmsmodel.PmsProductFullReduction{
 		ProductId:   in.ProductId,
 		FullPrice:   float64(in.FullPrice),
 		ReducePrice: float64(in.ReducePrice),

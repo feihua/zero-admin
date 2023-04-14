@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
 	"zero-admin/rpc/pms/internal/svc"
 	"zero-admin/rpc/pms/pms"
+	"zero-admin/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,39 +24,40 @@ func NewProductOperateLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pms.ProductOperateLogListReq) (*pms.ProductOperateLogListResp, error) {
-	all, err := l.svcCtx.PmsProductOperateLogModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductOperateLogModel.Count()
+	// all, err := l.svcCtx.PmsProductOperateLogModel.FindAll(in.Current, in.PageSize)
+	// count, _ := l.svcCtx.PmsProductOperateLogModel.Count()
 
-	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询商品操作历史列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
-		return nil, err
-	}
+	// if err != nil {
+	// 	reqStr, _ := json.Marshal(in)
+	// 	logx.WithContext(l.ctx).Errorf("查询商品操作历史列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+	// 	return nil, err
+	// }
 
-	var list []*pms.ProductOperateLogListData
-	for _, item := range *all {
+	// var list []*pms.ProductOperateLogListData
+	// for _, item := range *all {
 
-		list = append(list, &pms.ProductOperateLogListData{
-			Id:               item.Id,
-			ProductId:        item.ProductId,
-			PriceOld:         int64(item.PriceOld),
-			PriceNew:         int64(item.PriceNew),
-			SalePriceOld:     int64(item.SalePriceOld),
-			SalePriceNew:     int64(item.SalePriceNew),
-			GiftPointOld:     item.GiftPointOld,
-			GiftPointNew:     item.GiftPointNew,
-			UsePointLimitOld: item.UsePointLimitOld,
-			UsePointLimitNew: item.UsePointLimitNew,
-			OperateMan:       item.OperateMan,
-			CreateTime:       item.CreateTime.Format("2006-01-02 15:04:05"),
-		})
-	}
+	// 	list = append(list, &pms.ProductOperateLogListData{
+	// 		Id:               item.Id,
+	// 		ProductId:        item.ProductId,
+	// 		PriceOld:         int64(item.PriceOld),
+	// 		PriceNew:         int64(item.PriceNew),
+	// 		SalePriceOld:     int64(item.SalePriceOld),
+	// 		SalePriceNew:     int64(item.SalePriceNew),
+	// 		GiftPointOld:     item.GiftPointOld,
+	// 		GiftPointNew:     item.GiftPointNew,
+	// 		UsePointLimitOld: item.UsePointLimitOld,
+	// 		UsePointLimitNew: item.UsePointLimitNew,
+	// 		OperateMan:       item.OperateMan,
+	// 		CreateTime:       item.CreateTime.Format("2006-01-02 15:04:05"),
+	// 	})
+	// }
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询商品操作历史列表信息,参数：%s,响应：%s", reqStr, listStr)
-	return &pms.ProductOperateLogListResp{
-		Total: count,
-		List:  list,
-	}, nil
+	// reqStr, _ := json.Marshal(in)
+	// listStr, _ := json.Marshal(list)
+	// logx.WithContext(l.ctx).Infof("查询商品操作历史列表信息,参数：%s,响应：%s", reqStr, listStr)
+	// return &pms.ProductOperateLogListResp{
+	// 	Total: count,
+	// 	List:  list,
+	// }, nil
+	return &pmsclient.ProductOperateLogListResp{}, nil
 }

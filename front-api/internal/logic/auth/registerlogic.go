@@ -2,13 +2,14 @@ package auth
 
 import (
 	"context"
-	"fmt"
+	"zero-admin/common/xerr"
 	"zero-admin/rpc/ums/ums"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
 
+	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -88,24 +89,36 @@ func RegisterMemberRpc(req *types.RegisterReq, err error, l *RegisterLogic) (*um
 	// 	return nil, nil, err, false
 	// }
 
+	tokenResp, err := l.svcCtx.Ums.GenerateToken(l.ctx, &umsclient.GenerateTokenReq{
+		MemberId: 22,
+	})
+	if err != nil {
+		return nil, nil, errors.Wrapf(xerr.NewErrMsg("获取token有误"), "usercenterRpc.GenerateToken err :%v, userId : %d", err, 22), false
+	}
+	data := types.LoginAndRegisterData{
+		Token:        tokenResp.AccessToken,
+		AccessExpire: tokenResp.AccessExpire,
+		RefreshAfter: tokenResp.RefreshAfter,
+	}
+
 	memberinfo, err := l.svcCtx.Ums.MemberInfo(l.ctx, &umsclient.MemberInfoReq{Id: 22})
 	if err != nil {
 		return nil, nil, nil, false
 	}
 
-	var data types.LoginAndRegisterData
-	fmt.Println(memberinfo)
-	fmt.Println(memberinfo.Member.Nickname)
-	data = types.LoginAndRegisterData{
-		// UserInfo: types.UserInfo{
-		// 	NickName: memberinfo.Member.Nickname,
-		// 	Phone:    memberinfo.Member.Phone,
-		// 	Icon:     memberinfo.Member.Icon,
-		// },
-		Token:        "",
-		AccessExpire: 86400,
-		RefreshAfter: 86400,
-	}
+	// var data types.LoginAndRegisterData
+	// fmt.Println(memberinfo)
+	// fmt.Println(memberinfo.Member.Nickname)
+	// data = types.LoginAndRegisterData{
+	// 	// UserInfo: types.UserInfo{
+	// 	// 	NickName: memberinfo.Member.Nickname,
+	// 	// 	Phone:    memberinfo.Member.Phone,
+	// 	// 	Icon:     memberinfo.Member.Icon,
+	// 	// },
+	// 	Token:        "",
+	// 	AccessExpire: 86400,
+	// 	RefreshAfter: 86400,
+	// }
 	data.UserInfo = types.UserInfo{
 		NickName: memberinfo.Member.Nickname,
 		Phone:    memberinfo.Member.Phone,

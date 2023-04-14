@@ -1,33 +1,34 @@
 package svc
 
 import (
-	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"zero-admin/rpc/model/pmsmodel"
 	"zero-admin/rpc/pms/internal/config"
+
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
 type ServiceContext struct {
 	c config.Config
 
-	PmsAlbumModel                            *pmsmodel.PmsAlbumModel
-	PmsAlbumPicModel                         *pmsmodel.PmsAlbumPicModel
-	PmsBrandModel                            *pmsmodel.PmsBrandModel
-	PmsCommentModel                          *pmsmodel.PmsCommentModel
-	PmsCommentReplayModel                    *pmsmodel.PmsCommentReplayModel
-	PmsFeightTemplateModel                   *pmsmodel.PmsFeightTemplateModel
-	PmsMemberPriceModel                      *pmsmodel.PmsMemberPriceModel
-	PmsProductAttributeCategoryModel         *pmsmodel.PmsProductAttributeCategoryModel
-	PmsProductAttributeModel                 *pmsmodel.PmsProductAttributeModel
-	PmsProductAttributeValueModel            *pmsmodel.PmsProductAttributeValueModel
-	PmsProductCategoryAttributeRelationModel *pmsmodel.PmsProductCategoryAttributeRelationModel
-	PmsProductCategoryModel                  *pmsmodel.PmsProductCategoryModel
-	PmsProductFullReductionModel             *pmsmodel.PmsProductFullReductionModel
-	PmsProductLadderModel                    *pmsmodel.PmsProductLadderModel
-	PmsProductModel                          *pmsmodel.PmsProductModel
-	PmsProductOperateLogModel                *pmsmodel.PmsProductOperateLogModel
-	PmsProductVertifyRecordModel             *pmsmodel.PmsProductVertifyRecordModel
-	PmsSkuStockModel                         *pmsmodel.PmsSkuStockModel
-	PmsCollectModel                          *pmsmodel.PmsCollectModel
+	PmsAlbumModel                            pmsmodel.PmsAlbumModel
+	PmsAlbumPicModel                         pmsmodel.PmsAlbumPicModel
+	PmsBrandModel                            pmsmodel.PmsBrandModel
+	PmsCommentModel                          pmsmodel.PmsCommentModel
+	PmsCommentReplayModel                    pmsmodel.PmsCommentReplayModel
+	PmsFeightTemplateModel                   pmsmodel.PmsFeightTemplateModel
+	PmsMemberPriceModel                      pmsmodel.PmsMemberPriceModel
+	PmsProductAttributeCategoryModel         pmsmodel.PmsProductAttributeCategoryModel
+	PmsProductAttributeModel                 pmsmodel.PmsProductAttributeModel
+	PmsProductAttributeValueModel            pmsmodel.PmsProductAttributeValueModel
+	PmsProductCategoryAttributeRelationModel pmsmodel.PmsProductCategoryAttributeRelationModel
+	PmsProductCategoryModel                  pmsmodel.PmsProductCategoryModel
+	PmsProductFullReductionModel             pmsmodel.PmsProductFullReductionModel
+	PmsProductLadderModel                    pmsmodel.PmsProductLadderModel
+	PmsProductModel                          pmsmodel.PmsProductModel
+	PmsProductOperateLogModel                pmsmodel.PmsProductOperateLogModel
+	PmsProductVertifyRecordModel             pmsmodel.PmsProductVertifyRecordModel
+	PmsSkuStockModel                         pmsmodel.PmsSkuStockModel
+	PmsCollectModel                          pmsmodel.PmsCollectModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -36,23 +37,23 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		c: c,
 
-		PmsAlbumModel:                            pmsmodel.NewPmsAlbumModel(sqlConn),
-		PmsAlbumPicModel:                         pmsmodel.NewPmsAlbumPicModel(sqlConn),
-		PmsBrandModel:                            pmsmodel.NewPmsBrandModel(sqlConn),
-		PmsCommentModel:                          pmsmodel.NewPmsCommentModel(sqlConn),
-		PmsCommentReplayModel:                    pmsmodel.NewPmsCommentReplayModel(sqlConn),
-		PmsFeightTemplateModel:                   pmsmodel.NewPmsFeightTemplateModel(sqlConn),
-		PmsMemberPriceModel:                      pmsmodel.NewPmsMemberPriceModel(sqlConn),
-		PmsProductAttributeCategoryModel:         pmsmodel.NewPmsProductAttributeCategoryModel(sqlConn),
-		PmsProductAttributeModel:                 pmsmodel.NewPmsProductAttributeModel(sqlConn),
-		PmsProductAttributeValueModel:            pmsmodel.NewPmsProductAttributeValueModel(sqlConn),
-		PmsProductCategoryAttributeRelationModel: pmsmodel.NewPmsProductCategoryAttributeRelationModel(sqlConn),
-		PmsProductCategoryModel:                  pmsmodel.NewPmsProductCategoryModel(sqlConn),
-		PmsProductFullReductionModel:             pmsmodel.NewPmsProductFullReductionModel(sqlConn),
-		PmsProductLadderModel:                    pmsmodel.NewPmsProductLadderModel(sqlConn),
-		PmsProductModel:                          pmsmodel.NewPmsProductModel(sqlConn),
-		PmsProductOperateLogModel:                pmsmodel.NewPmsProductOperateLogModel(sqlConn),
-		PmsProductVertifyRecordModel:             pmsmodel.NewPmsProductVertifyRecordModel(sqlConn),
-		PmsSkuStockModel:                         pmsmodel.NewPmsSkuStockModel(sqlConn),
+		PmsAlbumModel:                            pmsmodel.NewPmsAlbumModel(sqlConn, c.Cache),
+		PmsAlbumPicModel:                         pmsmodel.NewPmsAlbumPicModel(sqlConn, c.Cache),
+		PmsBrandModel:                            pmsmodel.NewPmsBrandModel(sqlConn, c.Cache),
+		PmsCommentModel:                          pmsmodel.NewPmsCommentModel(sqlConn, c.Cache),
+		PmsCommentReplayModel:                    pmsmodel.NewPmsCommentReplayModel(sqlConn, c.Cache),
+		PmsFeightTemplateModel:                   pmsmodel.NewPmsFeightTemplateModel(sqlConn, c.Cache),
+		PmsMemberPriceModel:                      pmsmodel.NewPmsMemberPriceModel(sqlConn, c.Cache),
+		PmsProductAttributeCategoryModel:         pmsmodel.NewPmsProductAttributeCategoryModel(sqlConn, c.Cache),
+		PmsProductAttributeModel:                 pmsmodel.NewPmsProductAttributeModel(sqlConn, c.Cache),
+		PmsProductAttributeValueModel:            pmsmodel.NewPmsProductAttributeValueModel(sqlConn, c.Cache),
+		PmsProductCategoryAttributeRelationModel: pmsmodel.NewPmsProductCategoryAttributeRelationModel(sqlConn, c.Cache),
+		PmsProductCategoryModel:                  pmsmodel.NewPmsProductCategoryModel(sqlConn, c.Cache),
+		PmsProductFullReductionModel:             pmsmodel.NewPmsProductFullReductionModel(sqlConn, c.Cache),
+		PmsProductLadderModel:                    pmsmodel.NewPmsProductLadderModel(sqlConn, c.Cache),
+		PmsProductModel:                          pmsmodel.NewPmsProductModel(sqlConn, c.Cache),
+		PmsProductOperateLogModel:                pmsmodel.NewPmsProductOperateLogModel(sqlConn, c.Cache),
+		PmsProductVertifyRecordModel:             pmsmodel.NewPmsProductVertifyRecordModel(sqlConn, c.Cache),
+		PmsSkuStockModel:                         pmsmodel.NewPmsSkuStockModel(sqlConn, c.Cache),
 	}
 }

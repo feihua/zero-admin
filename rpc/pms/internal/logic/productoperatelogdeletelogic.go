@@ -24,7 +24,7 @@ func NewProductOperateLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *ProductOperateLogDeleteLogic) ProductOperateLogDelete(in *pms.ProductOperateLogDeleteReq) (*pms.ProductOperateLogDeleteResp, error) {
-	err := l.svcCtx.PmsProductOperateLogModel.Delete(in.Id)
+	err := l.svcCtx.PmsProductOperateLogModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

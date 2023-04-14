@@ -25,7 +25,7 @@ func NewProductLadderUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *ProductLadderUpdateLogic) ProductLadderUpdate(in *pms.ProductLadderUpdateReq) (*pms.ProductLadderUpdateResp, error) {
-	err := l.svcCtx.PmsProductLadderModel.Update(pmsmodel.PmsProductLadder{
+	err := l.svcCtx.PmsProductLadderModel.Update(l.ctx, &pmsmodel.PmsProductLadder{
 		Id:        in.Id,
 		ProductId: in.ProductId,
 		Count:     in.Count,

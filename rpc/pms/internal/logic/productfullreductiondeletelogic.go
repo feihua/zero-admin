@@ -24,7 +24,7 @@ func NewProductFullReductionDeleteLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *ProductFullReductionDeleteLogic) ProductFullReductionDelete(in *pms.ProductFullReductionDeleteReq) (*pms.ProductFullReductionDeleteResp, error) {
-	err := l.svcCtx.PmsProductFullReductionModel.Delete(in.Id)
+	err := l.svcCtx.PmsProductFullReductionModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

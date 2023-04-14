@@ -24,7 +24,7 @@ func NewProductDetailByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ProductDetailByIdLogic) ProductDetailById(in *pmsclient.ProductDetailByIdReq) (*pmsclient.ProductDetailByIdResp, error) {
-	product, err := l.svcCtx.PmsProductModel.FindOne(in.Id)
+	product, err := l.svcCtx.PmsProductModel.FindOne(l.ctx, in.Id)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

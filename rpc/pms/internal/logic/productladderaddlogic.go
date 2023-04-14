@@ -25,7 +25,7 @@ func NewProductLadderAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *ProductLadderAddLogic) ProductLadderAdd(in *pms.ProductLadderAddReq) (*pms.ProductLadderAddResp, error) {
-	_, err := l.svcCtx.PmsProductLadderModel.Insert(pmsmodel.PmsProductLadder{
+	_, err := l.svcCtx.PmsProductLadderModel.Insert(l.ctx, &pmsmodel.PmsProductLadder{
 		ProductId: in.ProductId,
 		Count:     in.Count,
 		Discount:  float64(in.Discount),

@@ -25,7 +25,7 @@ func NewProductCategoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *ProductCategoryUpdateLogic) ProductCategoryUpdate(in *pms.ProductCategoryUpdateReq) (*pms.ProductCategoryUpdateResp, error) {
-	err := l.svcCtx.PmsProductCategoryModel.Update(pmsmodel.PmsProductCategory{
+	err := l.svcCtx.PmsProductCategoryModel.Update(l.ctx, &pmsmodel.PmsProductCategory{
 		Id:           in.Id,
 		ParentId:     in.ParentId,
 		Name:         in.Name,

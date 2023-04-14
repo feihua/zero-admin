@@ -2,12 +2,14 @@ package auth
 
 import (
 	"context"
+	"strings"
 
 	"zero-admin/common/tool"
 	"zero-admin/common/xerr"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
+	"zero-admin/rpc/model/umsmodel"
 	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/pkg/errors"
@@ -18,8 +20,6 @@ import (
 )
 
 var ErrWxMiniAuthFailError = xerr.NewErrMsg("wechat mini auth fail")
-var UserAuthTypeSystem string = "system"  //平台内部
-var UserAuthTypeSmallWX string = "wxMini" //微信小程序
 
 type WxMiniAuthLogic struct {
 	logx.Logger
@@ -36,9 +36,9 @@ func NewWxMiniAuthLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxMini
 }
 
 func (l *WxMiniAuthLogic) WxMiniAuth(req *types.WXMiniAuthReq) (resp *types.LoginAndRegisterResp, err error) {
-	// if len(strings.TrimSpace(req.Code)) == 0 {
-	// 	return nil, errorx.NewDefaultError("用户名或密码不能为空")
-	// }
+	if len(strings.TrimSpace(req.Code)) == 0 {
+		return nil, errors.Wrapf(xerr.NewErrMsg("参数有误"), "登录时获取的 code：%s", req.Code)
+	}
 
 	//1、Wechat-Mini
 	miniprogram := wechat.NewWechat().GetMiniProgram(&miniConfig.Config{
@@ -61,7 +61,7 @@ func (l *WxMiniAuthLogic) WxMiniAuth(req *types.WXMiniAuthReq) (resp *types.Logi
 	//3、bind user or login.
 	var userId int64
 	rpcRsp, err := l.svcCtx.Ums.MemberAuthByAuthKey(l.ctx, &umsclient.MemberAuthByAuthKeyReq{
-		AuthType: UserAuthTypeSmallWX,
+		AuthType: umsmodel.UserAuthTypeSmallWX,
 		AuthKey:  authResult.OpenID,
 	})
 	if err != nil {
@@ -70,7 +70,9 @@ func (l *WxMiniAuthLogic) WxMiniAuth(req *types.WXMiniAuthReq) (resp *types.Logi
 
 	var data types.LoginAndRegisterData
 	if rpcRsp.MemberAuth == nil || rpcRsp.MemberAuth.Id == 0 {
-
+		if len(strings.TrimSpace(req.PNCode)) == 0 {
+			return nil, errors.Wrapf(xerr.NewErrMsg("参数有误"), "手机号获取凭证 code：%s 无效", req.Code)
+		}
 		//bind phone.
 		authPhoneNumberInfo, err := miniprogram.GetAuth().GetPhoneNumberContext(l.ctx, req.PNCode)
 		if err != nil {
@@ -88,7 +90,7 @@ func (l *WxMiniAuthLogic) WxMiniAuth(req *types.WXMiniAuthReq) (resp *types.Logi
 			Nickname: nickName,
 			Password: tool.GenerateUuid(),
 			AuthKey:  authResult.OpenID,
-			AuthType: UserAuthTypeSmallWX,
+			AuthType: umsmodel.UserAuthTypeSmallWX,
 		})
 		if err != nil {
 			return nil, errors.Wrapf(ErrWxMiniAuthFailError, "UsercenterRpc.Register err :%v, authResult : %+v", err, authResult)

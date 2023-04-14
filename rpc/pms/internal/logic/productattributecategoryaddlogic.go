@@ -25,7 +25,7 @@ func NewProductAttributeCategoryAddLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *ProductAttributeCategoryAddLogic) ProductAttributeCategoryAdd(in *pms.ProductAttributeCategoryAddReq) (*pms.ProductAttributeCategoryAddResp, error) {
-	_, err := l.svcCtx.PmsProductAttributeCategoryModel.Insert(pmsmodel.PmsProductAttributeCategory{
+	_, err := l.svcCtx.PmsProductAttributeCategoryModel.Insert(l.ctx, &pmsmodel.PmsProductAttributeCategory{
 		Name:           in.Name,
 		AttributeCount: in.AttributeCount,
 		ParamCount:     in.ParamCount,

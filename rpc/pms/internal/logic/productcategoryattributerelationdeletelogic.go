@@ -24,7 +24,7 @@ func NewProductCategoryAttributeRelationDeleteLogic(ctx context.Context, svcCtx 
 }
 
 func (l *ProductCategoryAttributeRelationDeleteLogic) ProductCategoryAttributeRelationDelete(in *pms.ProductCategoryAttributeRelationDeleteReq) (*pms.ProductCategoryAttributeRelationDeleteResp, error) {
-	err := l.svcCtx.PmsProductCategoryAttributeRelationModel.Delete(in.Id)
+	err := l.svcCtx.PmsProductCategoryAttributeRelationModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

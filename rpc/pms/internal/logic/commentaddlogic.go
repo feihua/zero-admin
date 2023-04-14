@@ -27,7 +27,7 @@ func NewCommentAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Commen
 
 func (l *CommentAddLogic) CommentAdd(in *pms.CommentAddReq) (*pms.CommentAddResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	_, err := l.svcCtx.PmsCommentModel.Insert(pmsmodel.PmsComment{
+	_, err := l.svcCtx.PmsCommentModel.Insert(l.ctx, &pmsmodel.PmsComment{
 		ProductId:        in.ProductId,
 		MemberNickName:   in.MemberNickName,
 		ProductName:      in.ProductName,

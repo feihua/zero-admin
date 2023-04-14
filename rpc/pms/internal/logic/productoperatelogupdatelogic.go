@@ -27,7 +27,7 @@ func NewProductOperateLogUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *ProductOperateLogUpdateLogic) ProductOperateLogUpdate(in *pms.ProductOperateLogUpdateReq) (*pms.ProductOperateLogUpdateResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.PmsProductOperateLogModel.Update(pmsmodel.PmsProductOperateLog{
+	err := l.svcCtx.PmsProductOperateLogModel.Update(l.ctx, &pmsmodel.PmsProductOperateLog{
 		Id:               in.Id,
 		ProductId:        in.ProductId,
 		PriceOld:         float64(in.PriceOld),

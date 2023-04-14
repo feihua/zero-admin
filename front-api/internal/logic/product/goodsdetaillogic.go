@@ -2,9 +2,12 @@ package product
 
 import (
 	"context"
+	"zero-admin/common/xerr"
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
 	"zero-admin/rpc/pms/pmsclient"
+
+	"github.com/pkg/errors"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,10 +27,12 @@ func NewGoodsDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) GoodsD
 }
 
 func (l *GoodsDetailLogic) GoodsDetail(req types.GoodsDetailReq) (resp *types.GoodsDetailResp, err error) {
-	_, _ = l.svcCtx.Pms.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
+	productDetail, err := l.svcCtx.Pms.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
 		Id: req.Id,
 	})
-
+	if err != nil {
+		return nil, errors.Wrapf(xerr.NewErrMsg("参数有误"), "根据产品ID %d 获取产品详情有误", req.Id)
+	}
 	data := types.GoodsDetailData{
 		SpecificationList: nil,
 		Issue:             nil,

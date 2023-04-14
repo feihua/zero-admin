@@ -25,7 +25,7 @@ func NewProductAttributeValueAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *ProductAttributeValueAddLogic) ProductAttributeValueAdd(in *pms.ProductAttributeValueAddReq) (*pms.ProductAttributeValueAddResp, error) {
-	_, err := l.svcCtx.PmsProductAttributeValueModel.Insert(pmsmodel.PmsProductAttributeValue{
+	_, err := l.svcCtx.PmsProductAttributeValueModel.Insert(l.ctx, &pmsmodel.PmsProductAttributeValue{
 		ProductId:          in.ProductId,
 		ProductAttributeId: in.ProductAttributeId,
 		Value:              in.Value,

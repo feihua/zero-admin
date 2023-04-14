@@ -28,7 +28,7 @@ func NewProductUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Pro
 func (l *ProductUpdateLogic) ProductUpdate(in *pms.ProductUpdateReq) (*pms.ProductUpdateResp, error) {
 	PromotionStartTime, _ := time.Parse("2006-01-02 15:04:05", in.PromotionStartTime)
 	PromotionEndTime, _ := time.Parse("2006-01-02 15:04:05", in.PromotionEndTime)
-	err := l.svcCtx.PmsProductModel.Update(pmsmodel.PmsProduct{
+	err := l.svcCtx.PmsProductModel.Update(l.ctx, &pmsmodel.PmsProduct{
 		Id:                         in.Id,
 		BrandId:                    in.BrandId,
 		ProductCategoryId:          in.ProductCategoryId,

@@ -332,6 +332,7 @@ message AlbumPicAddResp {
 message AlbumPicListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  int64 albumId=3;
 }
 
 message AlbumPicListData{

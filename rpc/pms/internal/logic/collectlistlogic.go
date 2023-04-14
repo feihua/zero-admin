@@ -38,7 +38,7 @@ func (l *CollectListLogic) CollectList(in *pmsclient.CollectListReq) (*pmsclient
 
 	var listData []*pms.CollectListData
 	for _, item := range *collectList {
-		product, _ := l.svcCtx.PmsProductModel.FindOne(in.MemberId)
+		product, _ := l.svcCtx.PmsProductModel.FindOne(l.ctx, in.MemberId)
 		listData = append(listData, &pms.CollectListData{
 			Id:          item.Id,
 			Type:        item.CollectType,
