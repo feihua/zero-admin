@@ -31,6 +31,8 @@ func (l *FlashPromotionListLogic) FlashPromotionList(req types.ListFlashPromotio
 	resp, err := l.svcCtx.Sms.FlashPromotionList(l.ctx, &smsclient.FlashPromotionListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		Title:    req.Title,
+		Status:   req.Status,
 	})
 
 	if err != nil {

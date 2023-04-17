@@ -2105,11 +2105,10 @@ type DeleteCouponHistoryResp struct {
 }
 
 type AddFlashPromotionReq struct {
-	Title      string `json:"title"`
-	StartDate  string `json:"startDate"`  // 开始日期
-	EndDate    string `json:"endDate"`    // 结束日期
-	Status     int64  `json:"status"`     // 上下线状态
-	CreateTime string `json:"createTime"` // 秒杀时间段名称
+	Title     string `json:"title"`
+	StartDate string `json:"startDate"` // 开始日期
+	EndDate   string `json:"endDate"`   // 结束日期
+	Status    int64  `json:"status"`    // 上下线状态
 }
 
 type AddFlashPromotionResp struct {
@@ -2118,13 +2117,15 @@ type AddFlashPromotionResp struct {
 }
 
 type ListFlashPromotionReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64  `json:"current,default=1"`
+	PageSize int64  `json:"pageSize,default=20"`
+	Title    string `json:"title,optional"`  //标题
+	Status   int64  `json:"status,optional"` // 上下线状态
 }
 
 type ListtFlashPromotionData struct {
 	Id         int64  `json:"id"`
-	Title      string `json:"title"`
+	Title      string `json:"title"`      //标题
 	StartDate  string `json:"startDate"`  // 开始日期
 	EndDate    string `json:"endDate"`    // 结束日期
 	Status     int64  `json:"status"`     // 上下线状态
@@ -2170,7 +2171,6 @@ type AddFlashPromotionLogReq struct {
 	MemberPhone   string `json:"memberPhone"`
 	ProductName   string `json:"productName"`
 	SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-	SendTime      string `json:"sendTime"`
 }
 
 type AddFlashPromotionLogResp struct {
@@ -2228,11 +2228,10 @@ type DeleteFlashPromotionLogResp struct {
 }
 
 type AddFlashPromotionSessionReq struct {
-	Name       string `json:"name"`       // 场次名称
-	StartTime  string `json:"startTime"`  // 每日开始时间
-	EndTime    string `json:"endTime"`    // 每日结束时间
-	Status     int64  `json:"status"`     // 启用状态：0->不启用；1->启用
-	CreateTime string `json:"createTime"` // 创建时间
+	Name      string `json:"name"`      // 场次名称
+	StartTime string `json:"startTime"` // 每日开始时间
+	EndTime   string `json:"endTime"`   // 每日结束时间
+	Status    int64  `json:"status"`    // 启用状态：0->不启用；1->启用
 }
 
 type AddFlashPromotionSessionResp struct {
@@ -2265,12 +2264,11 @@ type ListFlashPromotionSessionResp struct {
 }
 
 type UpdateFlashPromotionSessionReq struct {
-	Id         int64  `json:"id"`         // 编号
-	Name       string `json:"name"`       // 场次名称
-	StartTime  string `json:"startTime"`  // 每日开始时间
-	EndTime    string `json:"endTime"`    // 每日结束时间
-	Status     int64  `json:"status"`     // 启用状态：0->不启用；1->启用
-	CreateTime string `json:"createTime"` // 创建时间
+	Id        int64  `json:"id"`        // 编号
+	Name      string `json:"name"`      // 场次名称
+	StartTime string `json:"startTime"` // 每日开始时间
+	EndTime   string `json:"endTime"`   // 每日结束时间
+	Status    int64  `json:"status"`    // 启用状态：0->不启用；1->启用
 }
 
 type UpdateFlashPromotionSessionResp struct {

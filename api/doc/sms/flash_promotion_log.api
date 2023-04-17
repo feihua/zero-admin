@@ -11,7 +11,6 @@ type (
         MemberPhone string `json:"memberPhone"`
         ProductName string `json:"productName"`
         SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-        SendTime string `json:"sendTime"`
     }
     addFlashPromotionLogResp struct {
         Code string `json:"code"`

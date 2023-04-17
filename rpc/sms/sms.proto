@@ -263,12 +263,10 @@ message CouponProductRelationDeleteResp {
 }
 
 message FlashPromotionAddReq {
-  int32 Id = 1; //编号
-  string Title = 2; //标题
-  string StartDate = 3; //开始日期
-  string EndDate = 4; //结束日期
-  int32 Status = 5; //上下线状态
-  string CreateTime = 6; //创建时间
+  string Title = 1; //标题
+  string StartDate = 2; //开始日期
+  string EndDate = 3; //结束日期
+  int64 Status = 4; //上下线状态
 
 }
 
@@ -285,11 +283,11 @@ message FlashPromotionDeleteResp {
 }
 
 message FlashPromotionUpdateReq {
-  int32 Id = 1; //编号
+  int64 Id = 1; //编号
   string Title = 2; //标题
   string StartDate = 3; //开始日期
   string EndDate = 4; //结束日期
-  int32 Status = 5; //上下线状态
+  int64 Status = 5; //上下线状态
   string CreateTime = 6; //创建时间
 
 }
@@ -299,21 +297,21 @@ message FlashPromotionUpdateResp {
 }
 
 message FlashPromotionListReq {
-  int32 Id = 1; //编号
-  string Title = 2; //标题
-  string StartDate = 3; //开始日期
-  string EndDate = 4; //结束日期
-  int32 Status = 5; //上下线状态
-  string CreateTime = 6; //创建时间
+  int64 current = 1;
+  int64 pageSize = 2;
+  string Title = 3; //标题
+  string StartDate = 4; //开始日期
+  string EndDate = 5; //结束日期
+  int64 Status = 6; //上下线状态
 
 }
 
 message FlashPromotionListData {
-  int32 Id = 1; //编号
+  int64 Id = 1; //编号
   string Title = 2; //标题
   string StartDate = 3; //开始日期
   string EndDate = 4; //结束日期
-  int32 Status = 5; //上下线状态
+  int64 Status = 5; //上下线状态
   string CreateTime = 6; //创建时间
 
 }
@@ -325,13 +323,11 @@ message FlashPromotionListResp {
 
 
 message FlashPromotionLogAddReq {
-  int32 Id = 1; //编号
-  int32 MemberId = 2; //会员id
-  int32 ProductId = 3; //商品id
-  string MemberPhone = 4; //会员电话
-  string ProductName = 5; //商品名称
-  string SubscribeTime = 6; //会员订阅时间
-  string SendTime = 7; //发送时间
+  int64 MemberId = 1; //会员id
+  int64 ProductId = 2; //商品id
+  string MemberPhone = 3; //会员电话
+  string ProductName = 4; //商品名称
+  string SubscribeTime = 5; //会员订阅时间
 
 }
 
@@ -348,9 +344,9 @@ message FlashPromotionLogDeleteResp {
 }
 
 message FlashPromotionLogUpdateReq {
-  int32 Id = 1; //编号
-  int32 MemberId = 2; //会员id
-  int32 ProductId = 3; //商品id
+  int64 Id = 1; //编号
+  int64 MemberId = 2; //会员id
+  int64 ProductId = 3; //商品id
   string MemberPhone = 4; //会员电话
   string ProductName = 5; //商品名称
   string SubscribeTime = 6; //会员订阅时间
@@ -363,20 +359,15 @@ message FlashPromotionLogUpdateResp {
 }
 
 message FlashPromotionLogListReq {
-  int32 Id = 1; //编号
-  int32 MemberId = 2; //会员id
-  int32 ProductId = 3; //商品id
-  string MemberPhone = 4; //会员电话
-  string ProductName = 5; //商品名称
-  string SubscribeTime = 6; //会员订阅时间
-  string SendTime = 7; //发送时间
+  int64 current = 1;
+  int64 pageSize = 2;
 
 }
 
 message FlashPromotionLogListData {
-  int32 Id = 1; //编号
-  int32 MemberId = 2; //会员id
-  int32 ProductId = 3; //商品id
+  int64 Id = 1; //编号
+  int64 MemberId = 2; //会员id
+  int64 ProductId = 3; //商品id
   string MemberPhone = 4; //会员电话
   string ProductName = 5; //商品名称
   string SubscribeTime = 6; //会员订阅时间
@@ -391,14 +382,13 @@ message FlashPromotionLogListResp {
 
 
 message FlashPromotionProductRelationAddReq {
-  int32 Id = 1; //编号
-  int32 FlashPromotionId = 2; //限时购id
-  int32 FlashPromotionSessionId = 3; //编号
-  int32 ProductId = 4; //商品id
-  double FlashPromotionPrice = 5; //限时购价格
-  int32 FlashPromotionCount = 6; //限时购数量
-  int32 FlashPromotionLimit = 7; //每人限购数量
-  int32 Sort = 8; //排序
+  int64 FlashPromotionId = 1; //限时购id
+  int64 FlashPromotionSessionId = 2; //编号
+  int64 ProductId = 3; //商品id
+  double FlashPromotionPrice = 4; //限时购价格
+  int64 FlashPromotionCount = 5; //限时购数量
+  int64 FlashPromotionLimit = 6; //每人限购数量
+  int64 Sort = 7; //排序
 
 }
 
@@ -415,14 +405,14 @@ message FlashPromotionProductRelationDeleteResp {
 }
 
 message FlashPromotionProductRelationUpdateReq {
-  int32 Id = 1; //编号
-  int32 FlashPromotionId = 2; //限时购id
-  int32 FlashPromotionSessionId = 3; //编号
-  int32 ProductId = 4; //商品id
+  int64 Id = 1; //编号
+  int64 FlashPromotionId = 2; //限时购id
+  int64 FlashPromotionSessionId = 3; //编号
+  int64 ProductId = 4; //商品id
   double FlashPromotionPrice = 5; //限时购价格
-  int32 FlashPromotionCount = 6; //限时购数量
-  int32 FlashPromotionLimit = 7; //每人限购数量
-  int32 Sort = 8; //排序
+  int64 FlashPromotionCount = 6; //限时购数量
+  int64 FlashPromotionLimit = 7; //每人限购数量
+  int64 Sort = 8; //排序
 
 }
 
@@ -431,26 +421,20 @@ message FlashPromotionProductRelationUpdateResp {
 }
 
 message FlashPromotionProductRelationListReq {
-  int32 Id = 1; //编号
-  int32 FlashPromotionId = 2; //限时购id
-  int32 FlashPromotionSessionId = 3; //编号
-  int32 ProductId = 4; //商品id
-  double FlashPromotionPrice = 5; //限时购价格
-  int32 FlashPromotionCount = 6; //限时购数量
-  int32 FlashPromotionLimit = 7; //每人限购数量
-  int32 Sort = 8; //排序
+  int64 current = 1;
+  int64 pageSize = 2;
 
 }
 
 message FlashPromotionProductRelationListData {
-  int32 Id = 1; //编号
-  int32 FlashPromotionId = 2; //限时购id
-  int32 FlashPromotionSessionId = 3; //编号
-  int32 ProductId = 4; //商品id
+  int64 Id = 1; //编号
+  int64 FlashPromotionId = 2; //限时购id
+  int64 FlashPromotionSessionId = 3; //编号
+  int64 ProductId = 4; //商品id
   double FlashPromotionPrice = 5; //限时购价格
-  int32 FlashPromotionCount = 6; //限时购数量
-  int32 FlashPromotionLimit = 7; //每人限购数量
-  int32 Sort = 8; //排序
+  int64 FlashPromotionCount = 6; //限时购数量
+  int64 FlashPromotionLimit = 7; //每人限购数量
+  int64 Sort = 8; //排序
 
 }
 
@@ -461,12 +445,10 @@ message FlashPromotionProductRelationListResp {
 
 
 message FlashPromotionSessionAddReq {
-  int32 Id = 1; //编号
-  string Name = 2; //场次名称
-  string StartTime = 3; //每日开始时间
-  string EndTime = 4; //每日结束时间
-  int32 Status = 5; //启用状态：0->不启用；1->启用
-  string CreateTime = 6; //创建时间
+  string Name = 1; //场次名称
+  string StartTime = 2; //每日开始时间
+  string EndTime = 3; //每日结束时间
+  int64 Status = 4; //启用状态：0->不启用；1->启用
 
 }
 
@@ -483,12 +465,11 @@ message FlashPromotionSessionDeleteResp {
 }
 
 message FlashPromotionSessionUpdateReq {
-  int32 Id = 1; //编号
+  int64 Id = 1; //编号
   string Name = 2; //场次名称
   string StartTime = 3; //每日开始时间
   string EndTime = 4; //每日结束时间
-  int32 Status = 5; //启用状态：0->不启用；1->启用
-  string CreateTime = 6; //创建时间
+  int64 Status = 5; //启用状态：0->不启用；1->启用
 
 }
 
@@ -497,21 +478,20 @@ message FlashPromotionSessionUpdateResp {
 }
 
 message FlashPromotionSessionListReq {
-  int32 Id = 1; //编号
-  string Name = 2; //场次名称
+  int64 current = 1;
+  int64 pageSize = 2;
   string StartTime = 3; //每日开始时间
   string EndTime = 4; //每日结束时间
-  int32 Status = 5; //启用状态：0->不启用；1->启用
-  string CreateTime = 6; //创建时间
+  int64 Status = 5; //启用状态：0->不启用；1->启用
 
 }
 
 message FlashPromotionSessionListData {
-  int32 Id = 1; //编号
+  int64 Id = 1; //编号
   string Name = 2; //场次名称
   string StartTime = 3; //每日开始时间
   string EndTime = 4; //每日结束时间
-  int32 Status = 5; //启用状态：0->不启用；1->启用
+  int64 Status = 5; //启用状态：0->不启用；1->启用
   string CreateTime = 6; //创建时间
 
 }

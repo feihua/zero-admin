@@ -33,7 +33,6 @@ func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(req types.AddFlashPromo
 		MemberPhone:   req.MemberPhone,
 		ProductName:   req.ProductName,
 		SubscribeTime: req.SubscribeTime,
-		SendTime:      req.SendTime,
 	})
 
 	if err != nil {

@@ -26,14 +26,13 @@ func NewFlashPromotionSessionUpdateLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *FlashPromotionSessionUpdateLogic) FlashPromotionSessionUpdate(in *sms.FlashPromotionSessionUpdateReq) (*sms.FlashPromotionSessionUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
 	err := l.svcCtx.SmsFlashPromotionSessionModel.Update(smsmodel.SmsFlashPromotionSession{
 		Id:         in.Id,
 		Name:       in.Name,
 		StartTime:  in.StartTime,
 		EndTime:    in.EndTime,
 		Status:     in.Status,
-		CreateTime: CreateTime,
+		CreateTime: time.Now(),
 	})
 	if err != nil {
 		return nil, err

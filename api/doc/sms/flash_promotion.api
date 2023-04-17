@@ -10,7 +10,6 @@ type (
         StartDate string `json:"startDate"`   // 开始日期
         EndDate string `json:"endDate"`       // 结束日期
         Status int64 `json:"status"`          // 上下线状态
-        CreateTime string `json:"createTime"` // 秒杀时间段名称
     }
     addFlashPromotionResp struct {
         Code string `json:"code"`
@@ -19,10 +18,12 @@ type (
     ListFlashPromotionReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
+        Title string `json:"title,optional"`            //标题
+        Status int64 `json:"status,optional"`          // 上下线状态
     }
     ListtFlashPromotionData struct {
         Id int64 `json:"id"`
-        Title string `json:"title"`
+        Title string `json:"title"`           //标题
         StartDate string `json:"startDate"`   // 开始日期
         EndDate string `json:"endDate"`       // 结束日期
         Status int64 `json:"status"`          // 上下线状态

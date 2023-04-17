@@ -41,7 +41,7 @@ func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationLi
 			FlashPromotionId:        item.FlashPromotionId,
 			FlashPromotionSessionId: item.FlashPromotionSessionId,
 			ProductId:               item.ProductId,
-			FlashPromotionPrice:     int64(item.FlashPromotionPrice),
+			FlashPromotionPrice:     item.FlashPromotionPrice,
 			FlashPromotionCount:     item.FlashPromotionCount,
 			FlashPromotionLimit:     item.FlashPromotionLimit,
 			Sort:                    item.Sort,
