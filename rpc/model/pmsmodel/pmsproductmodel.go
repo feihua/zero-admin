@@ -2,7 +2,9 @@ package pmsmodel
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -18,6 +20,7 @@ type (
 		pmsProductModel
 		ProductListByCategoryId(CategoryId int64, Current int64, PageSize int64) (*[]PmsProduct, error)
 		CountByCategoryId(ctx context.Context, categoryId int64) (int64, error)
+		ProductListByIds(Ids ...int64) (*[]PmsProduct, error)
 	}
 
 	customPmsProductModel struct {
@@ -57,5 +60,28 @@ func (m *customPmsProductModel) CountByCategoryId(ctx context.Context, categoryI
 		return 0, ErrNotFound
 	default:
 		return 0, err
+	}
+}
+
+func (m *customPmsProductModel) ProductListByIds(Ids ...int64) (*[]PmsProduct, error) {
+
+	ids, err := json.Marshal(Ids)
+	if err != nil {
+		panic(err)
+	}
+	var idsString = string(ids)
+	// 最后如果不要中括号，直接trim掉即可
+	idsString = strings.Trim(idsString, "[]")
+
+	query := fmt.Sprintf("select %s from %s where id in(?)", pmsProductRows, m.table)
+	var resp []PmsProduct
+	err = m.QueryRowsNoCache(&resp, query, idsString)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
 	}
 }

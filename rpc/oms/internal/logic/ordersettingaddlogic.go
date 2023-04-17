@@ -24,7 +24,7 @@ func NewOrderSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *O
 }
 
 func (l *OrderSettingAddLogic) OrderSettingAdd(in *oms.OrderSettingAddReq) (*oms.OrderSettingAddResp, error) {
-	_, err := l.svcCtx.OmsOrderSettingModel.Insert(omsmodel.OmsOrderSetting{
+	_, err := l.svcCtx.OmsOrderSettingModel.Insert(l.ctx, &omsmodel.OmsOrderSetting{
 		FlashOrderOvertime:  in.FinishOvertime,
 		NormalOrderOvertime: in.NormalOrderOvertime,
 		ConfirmOvertime:     in.ConfirmOvertime,

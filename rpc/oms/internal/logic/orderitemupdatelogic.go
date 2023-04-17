@@ -25,7 +25,7 @@ func NewOrderItemUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *O
 }
 
 func (l *OrderItemUpdateLogic) OrderItemUpdate(in *oms.OrderItemUpdateReq) (*oms.OrderItemUpdateResp, error) {
-	err := l.svcCtx.OmsOrderItemModel.Update(omsmodel.OmsOrderItem{
+	err := l.svcCtx.OmsOrderItemModel.Update(l.ctx, &omsmodel.OmsOrderItem{
 		Id:                in.Id,
 		OrderId:           in.OrderId,
 		OrderSn:           in.OrderSn,

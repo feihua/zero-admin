@@ -28,7 +28,7 @@ func NewOrderDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Order
 
 func (l *OrderDeleteLogic) OrderDelete(in *oms.OrderDeleteReq) (*oms.OrderDeleteResp, error) {
 
-	order, err := l.svcCtx.OmsOrderModel.FindOne(in.OrderId)
+	order, err := l.svcCtx.OmsOrderModel.FindOne(l.ctx, in.OrderId)
 
 	if err != nil {
 		return nil, err
@@ -42,7 +42,7 @@ func (l *OrderDeleteLogic) OrderDelete(in *oms.OrderDeleteReq) (*oms.OrderDelete
 	//订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 	//如果订单已经取消或是已完成，则可删除
 	if order.Status == 3 || order.Status == 4 || order.Status == 5 {
-		if l.svcCtx.OmsOrderModel.Delete(in.OrderId) != nil {
+		if l.svcCtx.OmsOrderModel.Delete(l.ctx, in.OrderId) != nil {
 			return nil, errors.New("删除用户订单失败")
 		}
 		return &omsclient.OrderDeleteResp{}, nil

@@ -26,7 +26,7 @@ func NewOrderRefundLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Order
 }
 
 func (l *OrderRefundLogic) OrderRefund(in *omsclient.OrderRefundReq) (*omsclient.OrderRefundResp, error) {
-	order, err := l.svcCtx.OmsOrderModel.FindOne(in.OrderId)
+	order, err := l.svcCtx.OmsOrderModel.FindOne(l.ctx, in.OrderId)
 
 	if err != nil {
 		return nil, err
@@ -46,9 +46,9 @@ func (l *OrderRefundLogic) OrderRefund(in *omsclient.OrderRefundReq) (*omsclient
 	}
 
 	//设置订单申请退款状态
-	if l.svcCtx.OmsOrderModel.UpdateOrderStatus(4, order.Id) != nil {
-		return nil, errors.New("设置订单申请退款状态失败")
-	}
+	// if l.svcCtx.OmsOrderModel.UpdateOrderStatus(4, order.Id) != nil {
+	// 	return nil, errors.New("设置订单申请退款状态失败")
+	// }
 
 	//todo 发送邮件和短信通知，这里采用异步发送，有用户申请退款，邮件通知运营人员
 

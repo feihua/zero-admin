@@ -48,6 +48,6 @@ goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -tabl
 
 goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="ums*" -dir ./model/umsmodel -c
 goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="pms*" -dir ./model/pmsmodel -c
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="oms*" -dir ./model/omsmodel
+goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="oms*" -dir ./model/omsmodel -c
 goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="sms*" -dir ./model/smsmodel
 goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="pay*" -dir ./model/paymodel

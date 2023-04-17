@@ -3,7 +3,17 @@ info(
     author: "koobe"
     email: "1002219331@qq.com"
 )
+type OrderReq struct {
+    GoodsIds []int64 `json:"goodsIds"`
+    AddressId int64 `json:"addressId"`
+    PaymentId int64 `json:"paymentId"`
+}
 
+type OrderResp struct {
+    Errno int64 `json:"errno"`
+    Data string `json:"data"`
+    Errmsg string `json:"errmsg"`
+}
 
 type OrderListReq struct {
     Page int64 `json:"page"`
@@ -112,11 +122,14 @@ type OrderCommentResp struct {
 }
 
 @server(
-    //    jwt: Auth
+    jwt: Auth
     group: order
     prefix: /api/order
 )
 service front-api {
+    @handler Order
+    post /create (OrderReq) returns (OrderResp)
+
     @handler OrderList
     get /list (OrderListReq) returns (OrderListResp)
 

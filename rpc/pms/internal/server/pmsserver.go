@@ -52,6 +52,11 @@ func (s *PmsServer) ProductListByCategoryId(ctx context.Context, in *pmsclient.P
 	return l.ProductListByCategoryId(in)
 }
 
+func (s *PmsServer) ProductListByIds(ctx context.Context, in *pmsclient.ProductListByIdsReq) (*pmsclient.ProductListByIdsResp, error) {
+	l := logic.NewProductListByIdsLogic(ctx, s.svcCtx)
+	return l.ProductListByIds(in)
+}
+
 func (s *PmsServer) AlbumAdd(ctx context.Context, in *pmsclient.AlbumAddReq) (*pmsclient.AlbumAddResp, error) {
 	l := logic.NewAlbumAddLogic(ctx, s.svcCtx)
 	return l.AlbumAdd(in)

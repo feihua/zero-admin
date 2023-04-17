@@ -24,7 +24,7 @@ func NewCompanyAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *CompanyAddressDeleteLogic) CompanyAddressDelete(in *oms.CompanyAddressDeleteReq) (*oms.CompanyAddressDeleteResp, error) {
-	err := l.svcCtx.OmsCompanyAddressModel.Delete(in.Id)
+	err := l.svcCtx.OmsCompanyAddressModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

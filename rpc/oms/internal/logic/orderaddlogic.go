@@ -6,6 +6,7 @@ import (
 	"zero-admin/rpc/model/omsmodel"
 	"zero-admin/rpc/oms/internal/svc"
 	"zero-admin/rpc/oms/oms"
+	"zero-admin/rpc/oms/omsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,7 +34,7 @@ func (l *OrderAddLogic) OrderAdd(in *oms.OrderAddReq) (*oms.OrderAddResp, error)
 	commentTime, _ := time.Parse("2006-01-02 15:04:05", in.CommentTime)
 	modifyTime, _ := time.Parse("2006-01-02 15:04:05", in.ModifyTime)
 
-	_, err := l.svcCtx.OmsOrderModel.Insert(omsmodel.OmsOrder{
+	result, err := l.svcCtx.OmsOrderModel.Insert(l.ctx, &omsmodel.OmsOrder{
 		MemberId:              in.MemberId,
 		CouponId:              in.CouponId,
 		OrderSn:               in.OrderSn,
@@ -81,6 +82,9 @@ func (l *OrderAddLogic) OrderAdd(in *oms.OrderAddReq) (*oms.OrderAddResp, error)
 	if err != nil {
 		return nil, err
 	}
+	lastInsertId, err := result.LastInsertId()
+	return &omsclient.OrderAddResp{
+		OrderId: lastInsertId,
+	}, nil
 
-	return &oms.OrderAddResp{}, nil
 }

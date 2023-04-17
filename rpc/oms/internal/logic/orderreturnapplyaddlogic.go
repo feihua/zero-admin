@@ -29,7 +29,7 @@ func (l *OrderReturnApplyAddLogic) OrderReturnApplyAdd(in *oms.OrderReturnApplyA
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
 	HandleTime, _ := time.Parse("2006-01-02 15:04:05", in.HandleTime)
 	ReceiveTime, _ := time.Parse("2006-01-02 15:04:05", in.ReceiveTime)
-	_, err := l.svcCtx.OmsOrderReturnApplyModel.Insert(omsmodel.OmsOrderReturnApply{
+	_, err := l.svcCtx.OmsOrderReturnApplyModel.Insert(l.ctx, &omsmodel.OmsOrderReturnApply{
 		OrderId:          in.OrderId,
 		CompanyAddressId: in.CompanyAddressId,
 		ProductId:        in.ProductId,

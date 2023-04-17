@@ -152,6 +152,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
+				Method:  http.MethodPost,
+				Path:    "/create",
+				Handler: order.OrderHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodGet,
 				Path:    "/list",
 				Handler: order.OrderListHandler(serverCtx),
@@ -187,6 +192,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: order.OrderCommentHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/order"),
 	)
 

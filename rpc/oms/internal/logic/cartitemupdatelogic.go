@@ -28,7 +28,7 @@ func NewCartItemUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 func (l *CartItemUpdateLogic) CartItemUpdate(in *oms.CartItemUpdateReq) (*oms.CartItemUpdateResp, error) {
 	createDate, _ := time.Parse("2006-01-02 15:04:05", in.CreateDate)
 	modifyDate, _ := time.Parse("2006-01-02 15:04:05", in.ModifyDate)
-	err := l.svcCtx.OmsCartItemModel.Update(omsmodel.OmsCartItem{
+	err := l.svcCtx.OmsCartItemModel.Update(l.ctx, &omsmodel.OmsCartItem{
 		Id:                in.Id,
 		ProductId:         in.ProductId,
 		ProductSkuId:      in.ProductSkuId,

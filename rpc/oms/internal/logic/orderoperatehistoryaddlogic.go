@@ -27,7 +27,7 @@ func NewOrderOperateHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceCont
 
 func (l *OrderOperateHistoryAddLogic) OrderOperateHistoryAdd(in *oms.OrderOperateHistoryAddReq) (*oms.OrderOperateHistoryAddResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	_, err := l.svcCtx.OmsOrderOperateHistoryModel.Insert(omsmodel.OmsOrderOperateHistory{
+	_, err := l.svcCtx.OmsOrderOperateHistoryModel.Insert(l.ctx, &omsmodel.OmsOrderOperateHistory{
 		OrderId:     in.OrderId,
 		OperateMan:  in.OperateMan,
 		CreateTime:  CreateTime,

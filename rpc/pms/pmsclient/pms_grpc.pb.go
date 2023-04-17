@@ -25,6 +25,7 @@ const (
 	Pms_ProductDelete_FullMethodName                          = "/pmsclient.Pms/ProductDelete"
 	Pms_ProductDetailById_FullMethodName                      = "/pmsclient.Pms/ProductDetailById"
 	Pms_ProductListByCategoryId_FullMethodName                = "/pmsclient.Pms/ProductListByCategoryId"
+	Pms_ProductListByIds_FullMethodName                       = "/pmsclient.Pms/ProductListByIds"
 	Pms_AlbumAdd_FullMethodName                               = "/pmsclient.Pms/AlbumAdd"
 	Pms_AlbumList_FullMethodName                              = "/pmsclient.Pms/AlbumList"
 	Pms_AlbumUpdate_FullMethodName                            = "/pmsclient.Pms/AlbumUpdate"
@@ -109,6 +110,7 @@ type PmsClient interface {
 	ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
 	ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
 	ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error)
+	ProductListByIds(ctx context.Context, in *ProductListByIdsReq, opts ...grpc.CallOption) (*ProductListByIdsResp, error)
 	AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error)
 	AlbumList(ctx context.Context, in *AlbumListReq, opts ...grpc.CallOption) (*AlbumListResp, error)
 	AlbumUpdate(ctx context.Context, in *AlbumUpdateReq, opts ...grpc.CallOption) (*AlbumUpdateResp, error)
@@ -239,6 +241,15 @@ func (c *pmsClient) ProductDetailById(ctx context.Context, in *ProductDetailById
 func (c *pmsClient) ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error) {
 	out := new(ProductListByCategoryIdResp)
 	err := c.cc.Invoke(ctx, Pms_ProductListByCategoryId_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pmsClient) ProductListByIds(ctx context.Context, in *ProductListByIdsReq, opts ...grpc.CallOption) (*ProductListByIdsResp, error) {
+	out := new(ProductListByIdsResp)
+	err := c.cc.Invoke(ctx, Pms_ProductListByIds_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -903,6 +914,7 @@ type PmsServer interface {
 	ProductDelete(context.Context, *ProductDeleteReq) (*ProductDeleteResp, error)
 	ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error)
 	ProductListByCategoryId(context.Context, *ProductListByCategoryIdReq) (*ProductListByCategoryIdResp, error)
+	ProductListByIds(context.Context, *ProductListByIdsReq) (*ProductListByIdsResp, error)
 	AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error)
 	AlbumList(context.Context, *AlbumListReq) (*AlbumListResp, error)
 	AlbumUpdate(context.Context, *AlbumUpdateReq) (*AlbumUpdateResp, error)
@@ -999,6 +1011,9 @@ func (UnimplementedPmsServer) ProductDetailById(context.Context, *ProductDetailB
 }
 func (UnimplementedPmsServer) ProductListByCategoryId(context.Context, *ProductListByCategoryIdReq) (*ProductListByCategoryIdResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductListByCategoryId not implemented")
+}
+func (UnimplementedPmsServer) ProductListByIds(context.Context, *ProductListByIdsReq) (*ProductListByIdsResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductListByIds not implemented")
 }
 func (UnimplementedPmsServer) AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AlbumAdd not implemented")
@@ -1333,6 +1348,24 @@ func _Pms_ProductListByCategoryId_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PmsServer).ProductListByCategoryId(ctx, req.(*ProductListByCategoryIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pms_ProductListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductListByIdsReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PmsServer).ProductListByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Pms_ProductListByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PmsServer).ProductListByIds(ctx, req.(*ProductListByIdsReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2663,6 +2696,10 @@ var Pms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductListByCategoryId",
 			Handler:    _Pms_ProductListByCategoryId_Handler,
+		},
+		{
+			MethodName: "ProductListByIds",
+			Handler:    _Pms_ProductListByIds_Handler,
 		},
 		{
 			MethodName: "AlbumAdd",

@@ -400,6 +400,18 @@ type GoodsList struct {
 	RetailPrice  int64  `json:"retailPrice"`  //零售价格
 }
 
+type OrderReq struct {
+	GoodsIds  []int64 `json:"goodsIds"`
+	AddressId int64   `json:"addressId"`
+	PaymentId int64   `json:"paymentId"`
+}
+
+type OrderResp struct {
+	Errno  int64  `json:"errno"`
+	Data   string `json:"data"`
+	Errmsg string `json:"errmsg"`
+}
+
 type OrderListReq struct {
 	Page   int64 `json:"page"`
 	Limit  int64 `json:"limit"`

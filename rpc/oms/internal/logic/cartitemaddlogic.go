@@ -27,7 +27,7 @@ func NewCartItemAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartI
 func (l *CartItemAddLogic) CartItemAdd(in *oms.CartItemAddReq) (*oms.CartItemAddResp, error) {
 	createDate, _ := time.Parse("2006-01-02 15:04:05", in.CreateDate)
 	modifyDate, _ := time.Parse("2006-01-02 15:04:05", in.ModifyDate)
-	_, err := l.svcCtx.OmsCartItemModel.Insert(omsmodel.OmsCartItem{
+	_, err := l.svcCtx.OmsCartItemModel.Insert(l.ctx, &omsmodel.OmsCartItem{
 		ProductId:         in.ProductId,
 		ProductSkuId:      in.ProductSkuId,
 		MemberId:          in.MemberId,
