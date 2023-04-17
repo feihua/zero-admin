@@ -29,7 +29,7 @@ func (l *FlashPromotionUpdateLogic) FlashPromotionUpdate(in *sms.FlashPromotionU
 	StartDate, _ := time.Parse("2006-01-02 15:04:05", in.StartDate)
 	EndDate, _ := time.Parse("2006-01-02 15:04:05", in.EndDate)
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.SmsFlashPromotionModel.Update(smsmodel.SmsFlashPromotion{
+	err := l.svcCtx.SmsFlashPromotionModel.Update(l.ctx, &smsmodel.SmsFlashPromotion{
 		Id:         in.Id,
 		Title:      in.Title,
 		StartDate:  StartDate,

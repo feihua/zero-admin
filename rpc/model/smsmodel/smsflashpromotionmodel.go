@@ -1,68 +1,36 @@
 package smsmodel
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
-	"strings"
-	"time"
-
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"github.com/zeromicro/go-zero/core/stringx"
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/builderx"
 )
 
-var (
-	smsFlashPromotionFieldNames          = builderx.FieldNames(&SmsFlashPromotion{})
-	smsFlashPromotionRows                = strings.Join(smsFlashPromotionFieldNames, ",")
-	smsFlashPromotionRowsExpectAutoSet   = strings.Join(stringx.Remove(smsFlashPromotionFieldNames, "id", "create_time", "update_time"), ",")
-	smsFlashPromotionRowsWithPlaceHolder = strings.Join(stringx.Remove(smsFlashPromotionFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
-)
+var _ SmsFlashPromotionModel = (*customSmsFlashPromotionModel)(nil)
 
 type (
-	SmsFlashPromotionModel struct {
-		conn  sqlx.SqlConn
-		table string
+	// SmsFlashPromotionModel is an interface to be customized, add more methods here,
+	// and implement the added methods in customSmsFlashPromotionModel.
+	SmsFlashPromotionModel interface {
+		smsFlashPromotionModel
+		Count(ctx context.Context) (int64, error)
+		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsFlashPromotion, error)
 	}
 
-	SmsFlashPromotion struct {
-		Id         int64     `db:"id"`
-		Title      string    `db:"title"`
-		StartDate  time.Time `db:"start_date"`  // 开始日期
-		EndDate    time.Time `db:"end_date"`    // 结束日期
-		Status     int64     `db:"status"`      // 上下线状态
-		CreateTime time.Time `db:"create_time"` // 秒杀时间段名称
+	customSmsFlashPromotionModel struct {
+		*defaultSmsFlashPromotionModel
 	}
 )
 
-func NewSmsFlashPromotionModel(conn sqlx.SqlConn) *SmsFlashPromotionModel {
-	return &SmsFlashPromotionModel{
-		conn:  conn,
-		table: "sms_flash_promotion",
+// NewSmsFlashPromotionModel returns a model for the database table.
+func NewSmsFlashPromotionModel(conn sqlx.SqlConn) SmsFlashPromotionModel {
+	return &customSmsFlashPromotionModel{
+		defaultSmsFlashPromotionModel: newSmsFlashPromotionModel(conn),
 	}
 }
 
-func (m *SmsFlashPromotionModel) Insert(data SmsFlashPromotion) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, smsFlashPromotionRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.Title, data.StartDate, data.EndDate, data.Status)
-	return ret, err
-}
-
-func (m *SmsFlashPromotionModel) FindOne(id int64) (*SmsFlashPromotion, error) {
-	query := fmt.Sprintf("select %s from %s where id = ? limit 1", smsFlashPromotionRows, m.table)
-	var resp SmsFlashPromotion
-	err := m.conn.QueryRow(&resp, query, id)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *SmsFlashPromotionModel) FindAll(Current int64, PageSize int64) (*[]SmsFlashPromotion, error) {
+func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsFlashPromotion, error) {
 
 	query := fmt.Sprintf("select %s from %s limit ?,?", smsFlashPromotionRows, m.table)
 	var resp []SmsFlashPromotion
@@ -77,7 +45,7 @@ func (m *SmsFlashPromotionModel) FindAll(Current int64, PageSize int64) (*[]SmsF
 	}
 }
 
-func (m *SmsFlashPromotionModel) Count() (int64, error) {
+func (m *customSmsFlashPromotionModel) Count(ctx context.Context) (int64, error) {
 	query := fmt.Sprintf("select count(*) as count from %s", m.table)
 
 	var count int64
@@ -91,16 +59,4 @@ func (m *SmsFlashPromotionModel) Count() (int64, error) {
 	default:
 		return 0, err
 	}
-}
-
-func (m *SmsFlashPromotionModel) Update(data SmsFlashPromotion) error {
-	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsFlashPromotionRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.Title, data.StartDate, data.EndDate, data.Status, data.Id)
-	return err
-}
-
-func (m *SmsFlashPromotionModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id = ?", m.table)
-	_, err := m.conn.Exec(query, id)
-	return err
 }
