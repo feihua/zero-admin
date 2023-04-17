@@ -262,105 +262,18 @@ message CouponProductRelationDeleteResp {
   string pong = 1;
 }
 
-message FlashPromotionLogAddReq {
-  int64     	MemberId    = 2;
-  int64     	ProductId    = 3;
-  string    	MemberPhone   = 4;
-  string    	ProductName   = 5;
-  string 	SubscribeTime = 6;
-  string 	SendTime      = 7;
-}
-
-message FlashPromotionLogAddResp {
-  string pong = 1;
-}
-
-message FlashPromotionLogListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message FlashPromotionLogListData{
-  int64     	Id      = 1;
-  int64     	MemberId    = 2;
-  int64     	ProductId    = 3;
-  string    	MemberPhone   = 4;
-  string    	ProductName   = 5;
-  string 	SubscribeTime = 6;
-  string 	SendTime      = 7;
-
-}
-
-message FlashPromotionLogListResp {
-  int64 total = 1;
-  repeated  FlashPromotionLogListData list = 2;
-}
-
-message FlashPromotionLogUpdateReq {
-  int64     	Id      = 1;
-  int64     	MemberId    = 2;
-  int64     	ProductId    = 3;
-  string    	MemberPhone   = 4;
-  string    	ProductName   = 5;
-  string 	SubscribeTime = 6;
-  string 	SendTime      = 7;
-}
-
-message FlashPromotionLogUpdateResp {
-  string pong = 1;
-}
-
-message FlashPromotionLogDeleteReq {
-  int64 id = 1;
-}
-
-message FlashPromotionLogDeleteResp {
-  string pong = 1;
-}
-
 
 message FlashPromotionAddReq {
-  string    	Title = 2;
-  string 	StartDate  = 3;
-  string 	EndDate    = 4;
-  int64     	Status     = 5;
-  string 	CreateTime = 6;
+  int32 id = 1; //编号
+  string title = 2; //标题
+  string start_date = 3; //开始日期
+  string end_date = 4; //结束日期
+  int32 status = 5; //上下线状态
+  string create_time = 6; //秒杀时间段名称
+
 }
 
 message FlashPromotionAddResp {
-  string pong = 1;
-}
-
-message FlashPromotionListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message FlashPromotionListData{
-  int64     	Id         = 1;
-  string    	Title = 2;
-  string 	StartDate  = 3;
-  string 	EndDate    = 4;
-  int64     	Status     = 5;
-  string 	CreateTime = 6;
-
-}
-
-message FlashPromotionListResp {
-  int64 total = 1;
-  repeated  FlashPromotionListData list = 2;
-}
-
-message FlashPromotionUpdateReq {
-  int64     	Id         = 1;
-  string    	Title = 2;
-  string 	StartDate  = 3;
-  string 	EndDate    = 4;
-  int64     	Status     = 5;
-  string 	CreateTime = 6;
-}
-
-message FlashPromotionUpdateResp {
   string pong = 1;
 }
 
@@ -372,55 +285,125 @@ message FlashPromotionDeleteResp {
   string pong = 1;
 }
 
+message FlashPromotionUpdateReq {
+  int32 id = 1; //编号
+  string title = 2; //标题
+  string start_date = 3; //开始日期
+  string end_date = 4; //结束日期
+  int32 status = 5; //上下线状态
+  string create_time = 6; //秒杀时间段名称
 
-message FlashPromotionProductRelationAddReq {
-  int64   	FlashPromotionId     = 2;
-  int64   	FlashPromotionSessionId = 3;
-  int64   	ProductId               = 4;
-  int64 	FlashPromotionPrice     = 5;
-  int64   	FlashPromotionCount     = 6;
-  int64   	FlashPromotionLimit     = 7;
-  int64   	Sort                   = 8;
 }
 
-message FlashPromotionProductRelationAddResp {
+message FlashPromotionUpdateResp {
   string pong = 1;
 }
 
-message FlashPromotionProductRelationListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message FlashPromotionProductRelationListData{
-  int64   	Id        = 1;
-  int64   	FlashPromotionId     = 2;
-  int64   	FlashPromotionSessionId = 3;
-  int64   	ProductId               = 4;
-  int64 	FlashPromotionPrice     = 5;
-  int64   	FlashPromotionCount     = 6;
-  int64   	FlashPromotionLimit     = 7;
-  int64   	Sort                   = 8;
+message FlashPromotionListReq {
+  int32 id = 1; //编号
+  string title = 2; //标题
+  string start_date = 3; //开始日期
+  string end_date = 4; //结束日期
+  int32 status = 5; //上下线状态
+  string create_time = 6; //秒杀时间段名称
 
 }
 
-message FlashPromotionProductRelationListResp {
+message FlashPromotionListData {
+  int32 id = 1; //编号
+  string title = 2; //标题
+  string start_date = 3; //开始日期
+  string end_date = 4; //结束日期
+  int32 status = 5; //上下线状态
+  string create_time = 6; //秒杀时间段名称
+
+}
+
+message FlashPromotionListResp {
   int64 total = 1;
-  repeated  FlashPromotionProductRelationListData list = 2;
+  repeated  FlashPromotionListData list = 2;
 }
 
-message FlashPromotionProductRelationUpdateReq {
-  int64   	Id        = 1;
-  int64   	FlashPromotionId     = 2;
-  int64   	FlashPromotionSessionId = 3;
-  int64   	ProductId               = 4;
-  int64 	FlashPromotionPrice     = 5;
-  int64   	FlashPromotionCount     = 6;
-  int64   	FlashPromotionLimit     = 7;
-  int64   	Sort                   = 8;
+
+message FlashPromotionLogAddReq {
+  int32 id = 1; //编号
+  int32 member_id = 2; //会员id
+  int32 product_id = 3; //商品id
+  string member_phone = 4; //会员电话
+  string product_name = 5; //商品名称
+  string subscribe_time = 6; //会员订阅时间
+  string send_time = 7; //发送时间
+
 }
 
-message FlashPromotionProductRelationUpdateResp {
+message FlashPromotionLogAddResp {
+  string pong = 1;
+}
+
+message FlashPromotionLogDeleteReq {
+  int64 id = 1;
+}
+
+message FlashPromotionLogDeleteResp {
+  string pong = 1;
+}
+
+message FlashPromotionLogUpdateReq {
+  int32 id = 1; //编号
+  int32 member_id = 2; //会员id
+  int32 product_id = 3; //商品id
+  string member_phone = 4; //会员电话
+  string product_name = 5; //商品名称
+  string subscribe_time = 6; //会员订阅时间
+  string send_time = 7; //发送时间
+
+}
+
+message FlashPromotionLogUpdateResp {
+  string pong = 1;
+}
+
+message FlashPromotionLogListReq {
+  int32 id = 1; //编号
+  int32 member_id = 2; //会员id
+  int32 product_id = 3; //商品id
+  string member_phone = 4; //会员电话
+  string product_name = 5; //商品名称
+  string subscribe_time = 6; //会员订阅时间
+  string send_time = 7; //发送时间
+
+}
+
+message FlashPromotionLogListData {
+  int32 id = 1; //编号
+  int32 member_id = 2; //会员id
+  int32 product_id = 3; //商品id
+  string member_phone = 4; //会员电话
+  string product_name = 5; //商品名称
+  string subscribe_time = 6; //会员订阅时间
+  string send_time = 7; //发送时间
+
+}
+
+message FlashPromotionLogListResp {
+  int64 total = 1;
+  repeated  FlashPromotionLogListData list = 2;
+}
+
+
+message FlashPromotionProductRelationAddReq {
+  int32 id = 1; //编号
+  int32 flash_promotion_id = 2; //限时购id
+  int32 flash_promotion_session_id = 3; //编号
+  int32 product_id = 4; //商品id
+  double flash_promotion_price = 5; //限时购价格
+  int32 flash_promotion_count = 6; //限时购数量
+  int32 flash_promotion_limit = 7; //每人限购数量
+  int32 sort = 8; //排序
+
+}
+
+message FlashPromotionProductRelationAddResp {
   string pong = 1;
 }
 
@@ -432,49 +415,63 @@ message FlashPromotionProductRelationDeleteResp {
   string pong = 1;
 }
 
+message FlashPromotionProductRelationUpdateReq {
+  int32 id = 1; //编号
+  int32 flash_promotion_id = 2; //限时购id
+  int32 flash_promotion_session_id = 3; //编号
+  int32 product_id = 4; //商品id
+  double flash_promotion_price = 5; //限时购价格
+  int32 flash_promotion_count = 6; //限时购数量
+  int32 flash_promotion_limit = 7; //每人限购数量
+  int32 sort = 8; //排序
 
-message FlashPromotionSessionAddReq {
-  string    	Name    = 2;
-  string    	StartTime  = 3;
-  string    	EndTime    = 4;
-  int64     	Status     = 5;
-  string 	CreateTime = 6;
 }
 
-message FlashPromotionSessionAddResp {
+message FlashPromotionProductRelationUpdateResp {
   string pong = 1;
 }
 
-message FlashPromotionSessionListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message FlashPromotionSessionListData{
-  int64     	Id    = 1;
-  string    	Name    = 2;
-  string    	StartTime  = 3;
-  string    	EndTime    = 4;
-  int64     	Status     = 5;
-  string 	CreateTime = 6;
+message FlashPromotionProductRelationListReq {
+  int32 id = 1; //编号
+  int32 flash_promotion_id = 2; //限时购id
+  int32 flash_promotion_session_id = 3; //编号
+  int32 product_id = 4; //商品id
+  double flash_promotion_price = 5; //限时购价格
+  int32 flash_promotion_count = 6; //限时购数量
+  int32 flash_promotion_limit = 7; //每人限购数量
+  int32 sort = 8; //排序
 
 }
 
-message FlashPromotionSessionListResp {
+message FlashPromotionProductRelationListData {
+  int32 id = 1; //编号
+  int32 flash_promotion_id = 2; //限时购id
+  int32 flash_promotion_session_id = 3; //编号
+  int32 product_id = 4; //商品id
+  double flash_promotion_price = 5; //限时购价格
+  int32 flash_promotion_count = 6; //限时购数量
+  int32 flash_promotion_limit = 7; //每人限购数量
+  int32 sort = 8; //排序
+
+}
+
+message FlashPromotionProductRelationListResp {
   int64 total = 1;
-  repeated  FlashPromotionSessionListData list = 2;
+  repeated  FlashPromotionProductRelationListData list = 2;
 }
 
-message FlashPromotionSessionUpdateReq {
-  int64     	Id    = 1;
-  string    	Name    = 2;
-  string    	StartTime  = 3;
-  string    	EndTime    = 4;
-  int64     	Status     = 5;
-  string 	CreateTime = 6;
+
+message FlashPromotionSessionAddReq {
+  int32 id = 1; //编号
+  string name = 2; //场次名称
+  string start_time = 3; //每日开始时间
+  string end_time = 4; //每日结束时间
+  int32 status = 5; //启用状态：0->不启用；1->启用
+  string create_time = 6; //创建时间
+
 }
 
-message FlashPromotionSessionUpdateResp {
+message FlashPromotionSessionAddResp {
   string pong = 1;
 }
 
@@ -485,6 +482,46 @@ message FlashPromotionSessionDeleteReq {
 message FlashPromotionSessionDeleteResp {
   string pong = 1;
 }
+
+message FlashPromotionSessionUpdateReq {
+  int32 id = 1; //编号
+  string name = 2; //场次名称
+  string start_time = 3; //每日开始时间
+  string end_time = 4; //每日结束时间
+  int32 status = 5; //启用状态：0->不启用；1->启用
+  string create_time = 6; //创建时间
+
+}
+
+message FlashPromotionSessionUpdateResp {
+  string pong = 1;
+}
+
+message FlashPromotionSessionListReq {
+  int32 id = 1; //编号
+  string name = 2; //场次名称
+  string start_time = 3; //每日开始时间
+  string end_time = 4; //每日结束时间
+  int32 status = 5; //启用状态：0->不启用；1->启用
+  string create_time = 6; //创建时间
+
+}
+
+message FlashPromotionSessionListData {
+  int32 id = 1; //编号
+  string name = 2; //场次名称
+  string start_time = 3; //每日开始时间
+  string end_time = 4; //每日结束时间
+  int32 status = 5; //启用状态：0->不启用；1->启用
+  string create_time = 6; //创建时间
+
+}
+
+message FlashPromotionSessionListResp {
+  int64 total = 1;
+  repeated  FlashPromotionSessionListData list = 2;
+}
+
 
 
 message HomeAdvertiseAddReq {
