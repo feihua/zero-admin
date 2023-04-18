@@ -3,6 +3,7 @@ package address
 import (
 	"context"
 	"encoding/json"
+	"zero-admin/common/ctxdata"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -26,7 +27,20 @@ func NewAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addr
 }
 
 func (l *AddressDeleteLogic) AddressDelete(req types.AddressDeleteReq) (resp *types.AddressDeleteResp, err error) {
+	memberId := ctxdata.GetUidFromCtx(l.ctx)
+	addressQueryDetail, err := l.svcCtx.Ums.MemberReceiveAddressQueryDetail(l.ctx, &umsclient.MemberReceiveAddressQueryDetailReq{
+		MemberId:  memberId,
+		AddressID: req.AddressID,
+	})
 
+	if addressQueryDetail == nil || err != nil {
+		// reqStr, _ := json.Marshal(req)
+		// logx.WithContext(l.ctx).Errorf("查询会员收货详细地址失败,参数：%s,响应：%s", reqStr, err.Error())
+		return &types.AddressDeleteResp{
+			Code: 1,
+			Msg:  "参数有误",
+		}, nil
+	}
 	_, err = l.svcCtx.Ums.MemberReceiveAddressDelete(l.ctx, &umsclient.MemberReceiveAddressDeleteReq{
 		Id: req.AddressID,
 	})
@@ -35,14 +49,14 @@ func (l *AddressDeleteLogic) AddressDelete(req types.AddressDeleteReq) (resp *ty
 		reqStr, _ := json.Marshal(req)
 		logx.WithContext(l.ctx).Errorf("删除会员收货地址失败,参数：%s,响应：%s", reqStr, err.Error())
 		return &types.AddressDeleteResp{
-			Errno:  1,
-			Errmsg: err.Error(),
+			Code: 1,
+			Msg:  err.Error(),
 		}, nil
 	}
 
 	return &types.AddressDeleteResp{
-		Errno:  0,
-		Errmsg: "删除会员收货地址成功",
+		Code: 0,
+		Msg:  "删除会员收货地址成功",
 	}, nil
 
 }

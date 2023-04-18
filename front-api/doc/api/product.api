@@ -10,9 +10,9 @@ type GoodsDetailReq struct {
 }
 
 type GoodsDetailResp struct {
-    Errno int64 `json:"errno"`
+    Errno int64 `json:"code"`
     Data GoodsDetailData `json:"data"`
-    Errmsg string `json:"errmsg"`
+    Errmsg string `json:"msg"`
 }
 
 type GoodsDetailData struct {
@@ -91,9 +91,9 @@ type GoodsCategoryReq struct {
 }
 
 type GoodsCategoryResp struct {
-    Errno int64 `json:"errno"`
+    Errno int64 `json:"code"`
     Data GoodsCategoryData `json:"data"`
-    Errmsg string `json:"errmsg"`
+    Errmsg string `json:"msg"`
 }
 
 type GoodsCategoryData struct {

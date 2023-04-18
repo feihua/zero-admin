@@ -37,7 +37,7 @@ func NewWxMiniAuthLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxMini
 
 func (l *WxMiniAuthLogic) WxMiniAuth(req *types.WXMiniAuthReq) (resp *types.LoginAndRegisterResp, err error) {
 	if len(strings.TrimSpace(req.Code)) == 0 {
-		return nil, errors.Wrapf(xerr.NewErrMsg("参数有误"), "登录时获取的 code：%s", req.Code)
+		return nil, errors.Wrapf(xerr.NewErrMsg("CODE参数有误"), "登录时获取的 code：%s", req.Code)
 	}
 
 	//1、Wechat-Mini
@@ -71,7 +71,7 @@ func (l *WxMiniAuthLogic) WxMiniAuth(req *types.WXMiniAuthReq) (resp *types.Logi
 	var data types.LoginAndRegisterData
 	if rpcRsp.MemberAuth == nil || rpcRsp.MemberAuth.Id == 0 {
 		if len(strings.TrimSpace(req.PNCode)) == 0 {
-			return nil, errors.Wrapf(xerr.NewErrMsg("参数有误"), "手机号获取凭证 code：%s 无效", req.Code)
+			return nil, errors.Wrapf(xerr.NewErrMsg("PNCODE参数有误"), "手机号获取凭证 code：%s 无效", req.Code)
 		}
 		//bind phone.
 		authPhoneNumberInfo, err := miniprogram.GetAuth().GetPhoneNumberContext(l.ctx, req.PNCode)

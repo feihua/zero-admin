@@ -36,8 +36,8 @@ func (l *AddressDetailLogic) AddressDetail(req types.AddressDetailReq) (resp *ty
 		reqStr, _ := json.Marshal(req)
 		logx.WithContext(l.ctx).Errorf("查询会员收货详细地址失败,参数：%s,响应：%s", reqStr, err.Error())
 		return &types.AddressDetailResp{
-			Errno:  1,
-			Errmsg: err.Error(),
+			Code: 1,
+			Msg:  err.Error(),
 		}, nil
 	}
 
@@ -61,8 +61,8 @@ func (l *AddressDetailLogic) AddressDetail(req types.AddressDetailReq) (resp *ty
 	}
 
 	return &types.AddressDetailResp{
-		Errno:  0,
-		Data:   data,
-		Errmsg: "查询会员收货详细地址成功",
+		Code: 0,
+		Data: data,
+		Msg:  "查询会员收货详细地址成功",
 	}, nil
 }

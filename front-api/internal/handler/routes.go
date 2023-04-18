@@ -26,9 +26,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: address.AddressListHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/save",
 				Handler: address.AddressSaveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/update",
+				Handler: address.AddressUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
@@ -154,7 +159,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/create",
-				Handler: order.OrderHandler(serverCtx),
+				Handler: order.OrderCreateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,

@@ -26,7 +26,7 @@ func NewProductListByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *ProductListByIdsLogic) ProductListByIds(in *pmsclient.ProductListByIdsReq) (*pmsclient.ProductListByIdsResp, error) {
-	all, err := l.svcCtx.PmsProductModel.ProductListByIds(in.Ids...)
+	all, err := l.svcCtx.PmsProductModel.ProductListByIds(in.Ids)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

@@ -12,9 +12,9 @@ type AddressListReq struct {
 }
 
 type AddressListResp struct {
-    Errno int64 `json:"errno"`
+    Code int64 `json:"code"`
     Data AddressListData `json:"data"`
-    Errmsg string `json:"errmsg"`
+    Msg string `json:"msg"`
 }
 
 type AddressListData struct {
@@ -42,32 +42,39 @@ type AddressList struct {
 }
 
 type AddressSaveReq struct {
-    IsDeleted bool `json:"IS_DELETED"`
-    NotDeleted bool `json:"NOT_DELETED"`
-    ID int64 `json:"id"`
     Name string `json:"name"`
-    UserID int64 `json:"userId"`
+    Tel string `json:"tel"`
     Province string `json:"province"`
     City string `json:"city"`
-    County string `json:"county"`
+    Region string `json:"region"`
     AddressDetail string `json:"addressDetail"`
-    AreaCode string `json:"areaCode"`
     PostalCode string `json:"postalCode"`
-    Tel string `json:"tel"`
-    IsDefault bool `json:"isDefault"`
 }
 type AddressSaveResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
+    Code int64 `json:"code"`
+    Msg string `json:"msg"`
 }
 
+type AddressUpdateReq struct {
+    AddressID int64 `json:"addressID"`
+    Name string `json:"name"`
+    Tel string `json:"tel"`
+    Province string `json:"province"`
+    City string `json:"city"`
+    Region string `json:"region"`
+    AddressDetail string `json:"addressDetail"`
+    PostalCode string `json:"postalCode"`
+}
+type AddressUpdateResp struct {
+    Code int64 `json:"code"`
+    Msg string `json:"msg"`
+}
 type AddressDeleteReq struct {
-    UserID int64 `json:"userId"`
     AddressID int64 `json:"addressID"`
 }
 type AddressDeleteResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
+    Code int64 `json:"code"`
+    Msg string `json:"msg"`
 }
 
 type AddressDetailReq struct {
@@ -75,9 +82,9 @@ type AddressDetailReq struct {
     AddressID int64 `json:"addressID"`
 }
 type AddressDetailResp struct {
-    Errno int64 `json:"errno"`
+    Code int64 `json:"code"`
     Data AddressDetailData `json:"data"`
-    Errmsg string `json:"errmsg"`
+    Msg string `json:"msg"`
 }
 
 type AddressDetailData struct {
@@ -109,7 +116,11 @@ service front-api {
     get /list (AddressListReq) returns (AddressListResp)
 
     @handler AddressSave
-    get /save (AddressSaveReq) returns (AddressSaveResp)
+    post /save (AddressSaveReq) returns (AddressSaveResp)
+
+    @handler AddressUpdate
+    post /update (AddressUpdateReq) returns (AddressUpdateResp)
+
 
     @handler AddressDelete
     get /delete (AddressDeleteReq) returns (AddressDeleteResp)

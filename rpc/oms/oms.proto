@@ -48,11 +48,13 @@ message OrderAddReq {
   string   ReceiveTime = 42;
   string   CommentTime = 43;
   string   ModifyTime = 44;
+  repeated int64 Ids = 45;
 }
 
 message OrderAddResp {
   string pong = 1;
   int64 orderId =2;
+  string orderSn=3;
 }
 
 message OrderListReq {

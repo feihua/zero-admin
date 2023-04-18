@@ -5,9 +5,9 @@ info(
 )
 
 type CategoryResp struct {
-    Errno int64 `json:"errno"`
+    Errno int64 `json:"code"`
     Data []CategoryData `json:"data"`
-    Errmsg string `json:"errmsg"`
+    Errmsg string `json:"msg"`
 }
 
 type CategoryData struct {

@@ -3,6 +3,7 @@ package address
 import (
 	"context"
 	"encoding/json"
+	"zero-admin/common/ctxdata"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -26,19 +27,19 @@ func NewAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addres
 }
 
 func (l *AddressListLogic) AddressList(req types.AddressListReq) (resp *types.AddressListResp, err error) {
-
+	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	result, err := l.svcCtx.Ums.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
-		MemberId: req.UserId,
+		MemberId: memberId,
 	})
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
 		logx.WithContext(l.ctx).Errorf("查询用户收货地址列表失败,参数：%s,响应：%s", reqStr, err.Error())
 		return &types.AddressListResp{
-			Errno:  1,
-			Errmsg: err.Error(),
+			Code: 1,
+			Msg:  err.Error(),
 		}, nil
 	}
 
@@ -60,7 +61,7 @@ func (l *AddressListLogic) AddressList(req types.AddressListReq) (resp *types.Ad
 	}
 
 	return &types.AddressListResp{
-		Errno: 0,
+		Code: 0,
 		Data: types.AddressListData{
 			Total: 0,
 			Pages: 0,
@@ -68,6 +69,6 @@ func (l *AddressListLogic) AddressList(req types.AddressListReq) (resp *types.Ad
 			Page:  0,
 			List:  list,
 		},
-		Errmsg: "查询用户收货地址列表成功",
+		Msg: "查询用户收货地址列表成功",
 	}, nil
 }

@@ -11,38 +11,49 @@ import (
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
 	"zero-admin/rpc/oms/omsclient"
-	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type OrderLogic struct {
+type OrderCreateLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderLogic {
-	return &OrderLogic{
+func NewOrderCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderCreateLogic {
+	return &OrderCreateLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *OrderLogic) Order(req *types.OrderReq) (resp *types.OrderResp, err error) {
+func (l *OrderCreateLogic) OrderCreate(req *types.OrderReq) (resp *types.OrderResp, err error) {
 	goodsIds := req.GoodsIds
 	// paymenetId := req.PaymentId
-	// addressId := req.AddressId
-	userId := ctxdata.GetUidFromCtx(l.ctx)
+	addressId := req.AddressId
+	memberId := ctxdata.GetUidFromCtx(l.ctx)
+
+	addressDetail, err := l.svcCtx.Ums.MemberReceiveAddressQueryDetail(l.ctx, &umsclient.MemberReceiveAddressQueryDetailReq{
+		MemberId:  memberId,
+		AddressID: addressId,
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
 	totalAmount := 0.00
 	for _, goodsId := range goodsIds {
 		fmt.Println(goodsId)
 		totalAmount += 20
 	}
 	orderSn := uniqueid.GenSn(uniqueid.SN_PREFIX_HOMESTAY_ORDER)
+
 	OrderAddResp, err := l.svcCtx.Oms.OrderAdd(l.ctx, &omsclient.OrderAddReq{
-		MemberId:              userId,
+		MemberId:              memberId,
 		CouponId:              0,
 		OrderSn:               orderSn,
 		CreateTime:            "",
@@ -69,17 +80,18 @@ func (l *OrderLogic) Order(req *types.OrderReq) (resp *types.OrderResp, err erro
 		BillContent:           "",
 		BillReceiverPhone:     "",
 		BillReceiverEmail:     "",
-		ReceiverName:          "",
-		ReceiverPhone:         "",
-		ReceiverPostCode:      "",
-		ReceiverProvince:      "",
-		ReceiverCity:          "",
-		ReceiverRegion:        "",
-		ReceiverDetailAddress: "",
+		ReceiverName:          addressDetail.Name,
+		ReceiverPhone:         addressDetail.PhoneNumber,
+		ReceiverPostCode:      addressDetail.PostCode,
+		ReceiverProvince:      addressDetail.Province,
+		ReceiverCity:          addressDetail.City,
+		ReceiverRegion:        addressDetail.Region,
+		ReceiverDetailAddress: addressDetail.DetailAddress,
 		Note:                  "",
 		ConfirmStatus:         0,
 		DeleteStatus:          0,
 		UseIntegration:        0,
+		Ids:                   goodsIds,
 	})
 
 	if err != nil {
@@ -88,46 +100,12 @@ func (l *OrderLogic) Order(req *types.OrderReq) (resp *types.OrderResp, err erro
 		return nil, errorx.NewDefaultError("添加订单信息失败")
 	}
 
-	productList, err := l.svcCtx.Pms.ProductListByIds(l.ctx, &pmsclient.ProductListByIdsReq{
-		Ids: goodsIds,
-	})
-	if err != nil {
-		return nil, errorx.NewDefaultError("查找订单商品有误")
-	}
-
-	for _, v := range productList.List {
-		fmt.Println(v)
-		_, err := l.svcCtx.Oms.OrderItemAdd(l.ctx, &omsclient.OrderItemAddReq{
-			OrderId:           OrderAddResp.OrderId,
-			OrderSn:           orderSn,
-			ProductId:         v.Id,
-			ProductPic:        v.Pic,
-			ProductName:       v.Name,
-			ProductBrand:      v.BrandName,
-			ProductSn:         v.ProductSn,
-			ProductPrice:      int64(v.Price),
-			ProductQuantity:   0,
-			ProductSkuId:      0,
-			ProductSkuCode:    "",
-			ProductCategoryId: v.ProductCategoryId,
-			PromotionName:     "",
-			PromotionAmount:   0.00,
-			CouponAmount:      0.00,
-			IntegrationAmount: 0.00,
-			RealAmount:        0.00,
-			GiftIntegration:   0,
-			GiftGrowth:        v.GiftGrowth,
-			ProductAttr:       "",
-		})
-		if err != nil {
-			return nil, errorx.NewDefaultError("添加订单商品有误")
-		}
-	}
-
-	fmt.Println(OrderAddResp)
 	return &types.OrderResp{
-		Errno:  0,
-		Data:   "2020041715070001",
+		Errno: 0,
+		Data: types.OrderData{
+			OrderId: OrderAddResp.OrderId,
+			OrderSn: OrderAddResp.OrderSn,
+		},
 		Errmsg: "下单完成",
 	}, nil
 }

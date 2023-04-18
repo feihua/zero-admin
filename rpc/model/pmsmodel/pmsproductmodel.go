@@ -20,7 +20,7 @@ type (
 		pmsProductModel
 		ProductListByCategoryId(CategoryId int64, Current int64, PageSize int64) (*[]PmsProduct, error)
 		CountByCategoryId(ctx context.Context, categoryId int64) (int64, error)
-		ProductListByIds(Ids ...int64) (*[]PmsProduct, error)
+		ProductListByIds(Ids []int64) (*[]PmsProduct, error)
 	}
 
 	customPmsProductModel struct {
@@ -33,6 +33,7 @@ func NewPmsProductModel(conn sqlx.SqlConn, c cache.CacheConf) PmsProductModel {
 	return &customPmsProductModel{
 		defaultPmsProductModel: newPmsProductModel(conn, c),
 	}
+
 }
 
 func (m *customPmsProductModel) ProductListByCategoryId(CategoryId int64, Current int64, PageSize int64) (*[]PmsProduct, error) {
@@ -63,7 +64,7 @@ func (m *customPmsProductModel) CountByCategoryId(ctx context.Context, categoryI
 	}
 }
 
-func (m *customPmsProductModel) ProductListByIds(Ids ...int64) (*[]PmsProduct, error) {
+func (m *customPmsProductModel) ProductListByIds(Ids []int64) (*[]PmsProduct, error) {
 
 	ids, err := json.Marshal(Ids)
 	if err != nil {
@@ -74,8 +75,21 @@ func (m *customPmsProductModel) ProductListByIds(Ids ...int64) (*[]PmsProduct, e
 	idsString = strings.Trim(idsString, "[]")
 
 	query := fmt.Sprintf("select %s from %s where id in(?)", pmsProductRows, m.table)
+
+	// 动态填充id
+	// query, args, _ := officialSqlx.In("SELECT %s FROM %s WHERE id IN (?)", pmsProductRows, m.table, Ids)
+	// if err != nil {
+	// 	return
+	// }
+
+	// sqlx.In 返回带 `?` bindvar的查询语句, 我们使用Rebind()重新绑定它
+	// query = DB.Rebind(query)
+
+	// err = DB.Select(&resp, query, args...)
+
 	var resp []PmsProduct
 	err = m.QueryRowsNoCache(&resp, query, idsString)
+
 	switch err {
 	case nil:
 		return &resp, nil

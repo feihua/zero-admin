@@ -10,9 +10,9 @@ type OrderReq struct {
 }
 
 type OrderResp struct {
-    Errno int64 `json:"errno"`
-    Data string `json:"data"`
-    Errmsg string `json:"errmsg"`
+    Errno int64 `json:"code"`
+    Data OrderData `json:"data"`
+    Errmsg string `json:"msg"`
 }
 
 type OrderListReq struct {
@@ -20,11 +20,14 @@ type OrderListReq struct {
     Limit int64 `json:"limit"`
     UserId int64 `json:"userId"`
 }
-
+type OrderData struct {
+    OrderId int64 `json:"orderId"`
+    OrderSn string `json:"orderSn"`
+}
 type OrderListResp struct {
-    Errno int64 `json:"errno"`
+    Errno int64 `json:"code"`
     Data   []OrderListData `json:"data"`
-    Errmsg string `json:"errmsg"`
+    Errmsg string `json:"msg"`
 }
 
 type OrderListData struct {
@@ -49,8 +52,8 @@ type OrderCancelReq struct {
     OrderId int64 `json:"orderId"`
 }
 type OrderCancelResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
+    Errno int64 `json:"code"`
+    Errmsg string `json:"msg"`
 }
 
 type OrderRefundReq struct {
@@ -58,8 +61,8 @@ type OrderRefundReq struct {
     OrderId int64 `json:"orderId"`
 }
 type OrderRefundResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
+    Errno int64 `json:"code"`
+    Errmsg string `json:"msg"`
 }
 
 type OrderConfirmReq struct {
@@ -67,8 +70,8 @@ type OrderConfirmReq struct {
     OrderId int64 `json:"orderId"`
 }
 type OrderConfirmResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
+    Errno int64 `json:"code"`
+    Errmsg string `json:"msg"`
 }
 
 type OrderDeleteReq struct {
@@ -76,8 +79,8 @@ type OrderDeleteReq struct {
     OrderId int64 `json:"orderId"`
 }
 type OrderDeleteResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
+    Errno int64 `json:"code"`
+    Errmsg string `json:"msg"`
 }
 
 type OrderGoodsReq struct {
@@ -86,9 +89,9 @@ type OrderGoodsReq struct {
     GoodsId int64 `json:"goodsId"`
 }
 type OrderGoodsResp struct {
-    Errno int64 `json:"errno"`
+    Errno int64 `json:"code"`
     Data []OrderGoodsData `json:"data"`
-    Errmsg string `json:"errmsg"`
+    Errmsg string `json:"msg"`
 }
 
 type OrderGoodsData struct {
@@ -117,8 +120,8 @@ type OrderCommentReq struct {
     PicUrls []string `json:"picUrls"`
 }
 type OrderCommentResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
+    Errno int64 `json:"code"`
+    Errmsg string `json:"msg"`
 }
 
 @server(
@@ -127,7 +130,7 @@ type OrderCommentResp struct {
     prefix: /api/order
 )
 service front-api {
-    @handler Order
+    @handler OrderCreate
     post /create (OrderReq) returns (OrderResp)
 
     @handler OrderList

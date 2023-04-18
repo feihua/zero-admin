@@ -2,6 +2,7 @@ package svc
 
 import (
 	"zero-admin/rpc/model/omsmodel"
+	"zero-admin/rpc/model/pmsmodel"
 	"zero-admin/rpc/oms/internal/config"
 
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
@@ -18,6 +19,7 @@ type ServiceContext struct {
 	OmsOrderReturnApplyModel    omsmodel.OmsOrderReturnApplyModel
 	OmsOrderReturnReasonModel   omsmodel.OmsOrderReturnReasonModel
 	OmsOrderSettingModel        omsmodel.OmsOrderSettingModel
+	PmsProductModel             pmsmodel.PmsProductModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -34,5 +36,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		OmsOrderReturnApplyModel:    omsmodel.NewOmsOrderReturnApplyModel(sqlConn, c.Cache),
 		OmsOrderReturnReasonModel:   omsmodel.NewOmsOrderReturnReasonModel(sqlConn, c.Cache),
 		OmsOrderSettingModel:        omsmodel.NewOmsOrderSettingModel(sqlConn, c.Cache),
+		PmsProductModel:             pmsmodel.NewPmsProductModel(sqlConn, c.Cache),
 	}
 }

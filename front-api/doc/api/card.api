@@ -1,0 +1,47 @@
+info(
+    desc: "预付卡"
+    author: "evl"
+    email: "285021077@qq.com"
+)
+
+type CardListReq struct {
+}
+
+type CardListResp struct {
+    Errno int64 `json:"errno"`
+    Data CardListData `json:"data"`
+    Errmsg string `json:"errmsg"`
+}
+
+type CardListData struct {
+    CardTotal CardTotal `json:"cardTotal"` //统计数据
+    CardList []CartList `json:"cardList"`  //商品数据列表
+}
+
+type CartList struct {
+    ID int64 `json:"id"`                            //id
+    Name string `json:"name"`                    //名称
+    FaceValue float64 `json:"faceValue"`                  //面值
+    ExpiredYear int64 `json:"expiredYear"`                 //失效周期（年）
+    Status int64 `json:"status"`             //状态
+    CommissionRate float64 `json:"commissionRate"`              //佣金率
+    DiscountRate int64 `json:"discountRate"`                      //折扣率
+    Note string `json:"note"`                    //备注
+}
+
+
+@server(
+    //    jwt: Auth
+    group: cart
+    prefix: /api/cart
+)
+service front-api {
+    @handler CartList
+    get /index/:userId (CartListReq) returns (CartListResp)
+
+    @handler CartAdd
+    get /add (CartAddReq) returns (CartAddResp)
+
+    @handler CartFastAdd
+    get /fastadd (CartFastAddReq) returns (CartFastAddResp)
+}

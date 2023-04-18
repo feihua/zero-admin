@@ -8,9 +8,9 @@ type AddressListReq struct {
 }
 
 type AddressListResp struct {
-	Errno  int64           `json:"errno"`
-	Data   AddressListData `json:"data"`
-	Errmsg string          `json:"errmsg"`
+	Code int64           `json:"code"`
+	Data AddressListData `json:"data"`
+	Msg  string          `json:"msg"`
 }
 
 type AddressListData struct {
@@ -38,34 +38,43 @@ type AddressList struct {
 }
 
 type AddressSaveReq struct {
-	IsDeleted     bool   `json:"IS_DELETED"`
-	NotDeleted    bool   `json:"NOT_DELETED"`
-	ID            int64  `json:"id"`
 	Name          string `json:"name"`
-	UserID        int64  `json:"userId"`
+	Tel           string `json:"tel"`
 	Province      string `json:"province"`
 	City          string `json:"city"`
-	County        string `json:"county"`
+	Region        string `json:"region"`
 	AddressDetail string `json:"addressDetail"`
-	AreaCode      string `json:"areaCode"`
 	PostalCode    string `json:"postalCode"`
-	Tel           string `json:"tel"`
-	IsDefault     bool   `json:"isDefault"`
 }
 
 type AddressSaveResp struct {
-	Errno  int64  `json:"errno"`
-	Errmsg string `json:"errmsg"`
+	Code int64  `json:"code"`
+	Msg  string `json:"msg"`
+}
+
+type AddressUpdateReq struct {
+	AddressID     int64  `json:"addressID"`
+	Name          string `json:"name"`
+	Tel           string `json:"tel"`
+	Province      string `json:"province"`
+	City          string `json:"city"`
+	Region        string `json:"region"`
+	AddressDetail string `json:"addressDetail"`
+	PostalCode    string `json:"postalCode"`
+}
+
+type AddressUpdateResp struct {
+	Code int64  `json:"code"`
+	Msg  string `json:"msg"`
 }
 
 type AddressDeleteReq struct {
-	UserID    int64 `json:"userId"`
 	AddressID int64 `json:"addressID"`
 }
 
 type AddressDeleteResp struct {
-	Errno  int64  `json:"errno"`
-	Errmsg string `json:"errmsg"`
+	Code int64  `json:"code"`
+	Msg  string `json:"msg"`
 }
 
 type AddressDetailReq struct {
@@ -74,9 +83,9 @@ type AddressDetailReq struct {
 }
 
 type AddressDetailResp struct {
-	Errno  int64             `json:"errno"`
-	Data   AddressDetailData `json:"data"`
-	Errmsg string            `json:"errmsg"`
+	Code int64             `json:"code"`
+	Data AddressDetailData `json:"data"`
+	Msg  string            `json:"msg"`
 }
 
 type AddressDetailData struct {
@@ -302,9 +311,9 @@ type CartUpdateResp struct {
 }
 
 type CategoryResp struct {
-	Errno  int64          `json:"errno"`
+	Errno  int64          `json:"code"`
 	Data   []CategoryData `json:"data"`
-	Errmsg string         `json:"errmsg"`
+	Errmsg string         `json:"msg"`
 }
 
 type CategoryData struct {
@@ -407,9 +416,9 @@ type OrderReq struct {
 }
 
 type OrderResp struct {
-	Errno  int64  `json:"errno"`
-	Data   string `json:"data"`
-	Errmsg string `json:"errmsg"`
+	Errno  int64     `json:"code"`
+	Data   OrderData `json:"data"`
+	Errmsg string    `json:"msg"`
 }
 
 type OrderListReq struct {
@@ -418,10 +427,15 @@ type OrderListReq struct {
 	UserId int64 `json:"userId"`
 }
 
+type OrderData struct {
+	OrderId int64  `json:"orderId"`
+	OrderSn string `json:"orderSn"`
+}
+
 type OrderListResp struct {
-	Errno  int64           `json:"errno"`
+	Errno  int64           `json:"code"`
 	Data   []OrderListData `json:"data"`
-	Errmsg string          `json:"errmsg"`
+	Errmsg string          `json:"msg"`
 }
 
 type OrderListData struct {
@@ -448,8 +462,8 @@ type OrderCancelReq struct {
 }
 
 type OrderCancelResp struct {
-	Errno  int64  `json:"errno"`
-	Errmsg string `json:"errmsg"`
+	Errno  int64  `json:"code"`
+	Errmsg string `json:"msg"`
 }
 
 type OrderRefundReq struct {
@@ -458,8 +472,8 @@ type OrderRefundReq struct {
 }
 
 type OrderRefundResp struct {
-	Errno  int64  `json:"errno"`
-	Errmsg string `json:"errmsg"`
+	Errno  int64  `json:"code"`
+	Errmsg string `json:"msg"`
 }
 
 type OrderConfirmReq struct {
@@ -468,8 +482,8 @@ type OrderConfirmReq struct {
 }
 
 type OrderConfirmResp struct {
-	Errno  int64  `json:"errno"`
-	Errmsg string `json:"errmsg"`
+	Errno  int64  `json:"code"`
+	Errmsg string `json:"msg"`
 }
 
 type OrderDeleteReq struct {
@@ -478,8 +492,8 @@ type OrderDeleteReq struct {
 }
 
 type OrderDeleteResp struct {
-	Errno  int64  `json:"errno"`
-	Errmsg string `json:"errmsg"`
+	Errno  int64  `json:"code"`
+	Errmsg string `json:"msg"`
 }
 
 type OrderGoodsReq struct {
@@ -489,9 +503,9 @@ type OrderGoodsReq struct {
 }
 
 type OrderGoodsResp struct {
-	Errno  int64            `json:"errno"`
+	Errno  int64            `json:"code"`
 	Data   []OrderGoodsData `json:"data"`
-	Errmsg string           `json:"errmsg"`
+	Errmsg string           `json:"msg"`
 }
 
 type OrderGoodsData struct {
@@ -521,8 +535,8 @@ type OrderCommentReq struct {
 }
 
 type OrderCommentResp struct {
-	Errno  int64  `json:"errno"`
-	Errmsg string `json:"errmsg"`
+	Errno  int64  `json:"code"`
+	Errmsg string `json:"msg"`
 }
 
 type GoodsDetailReq struct {
@@ -530,9 +544,9 @@ type GoodsDetailReq struct {
 }
 
 type GoodsDetailResp struct {
-	Errno  int64           `json:"errno"`
+	Errno  int64           `json:"code"`
 	Data   GoodsDetailData `json:"data"`
-	Errmsg string          `json:"errmsg"`
+	Errmsg string          `json:"msg"`
 }
 
 type GoodsDetailData struct {
@@ -611,9 +625,9 @@ type GoodsCategoryReq struct {
 }
 
 type GoodsCategoryResp struct {
-	Errno  int64             `json:"errno"`
+	Errno  int64             `json:"code"`
 	Data   GoodsCategoryData `json:"data"`
-	Errmsg string            `json:"errmsg"`
+	Errmsg string            `json:"msg"`
 }
 
 type GoodsCategoryData struct {

@@ -3,6 +3,7 @@ package address
 import (
 	"context"
 	"encoding/json"
+	"zero-admin/common/ctxdata"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -26,57 +27,16 @@ func NewAddressSaveLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addres
 }
 
 func (l *AddressSaveLogic) AddressSave(req types.AddressSaveReq) (resp *types.AddressSaveResp, err error) {
-
-	if req.ID == 0 {
-		//新增会员地址
-		return addMemberAddress(req, l)
-	} else {
-		//更新会员地址
-		return updateMemberAddress(req, l)
-	}
-}
-
-// 更新会员地址
-func updateMemberAddress(req types.AddressSaveReq, l *AddressSaveLogic) (resp *types.AddressSaveResp, err error) {
-	_, err = l.svcCtx.Ums.MemberReceiveAddressUpdate(l.ctx, &umsclient.MemberReceiveAddressUpdateReq{
-		Id:            req.ID,
-		MemberId:      req.UserID,
-		Name:          req.Name,
-		PhoneNumber:   req.Tel,
-		DefaultStatus: 0,
-		PostCode:      req.PostalCode,
-		Province:      req.Province,
-		City:          req.City,
-		Region:        req.AreaCode,
-		DetailAddress: req.AddressDetail,
-	})
-
-	if err != nil {
-		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("更新会员收货地址失败,参数：%s,响应：%s", reqStr, err.Error())
-		return &types.AddressSaveResp{
-			Errno:  1,
-			Errmsg: err.Error(),
-		}, nil
-	}
-
-	return &types.AddressSaveResp{
-		Errno:  0,
-		Errmsg: "更新会员收货地址成功",
-	}, nil
-}
-
-// 新增会员地址
-func addMemberAddress(req types.AddressSaveReq, l *AddressSaveLogic) (resp *types.AddressSaveResp, err error) {
+	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	_, err = l.svcCtx.Ums.MemberReceiveAddressAdd(l.ctx, &umsclient.MemberReceiveAddressAddReq{
-		MemberId:      req.UserID,
+		MemberId:      memberId,
 		Name:          req.Name,
 		PhoneNumber:   req.Tel,
 		DefaultStatus: 0,
 		PostCode:      req.PostalCode,
 		Province:      req.Province,
 		City:          req.City,
-		Region:        req.AreaCode,
+		Region:        req.Region,
 		DetailAddress: req.AddressDetail,
 	})
 
@@ -84,13 +44,13 @@ func addMemberAddress(req types.AddressSaveReq, l *AddressSaveLogic) (resp *type
 		reqStr, _ := json.Marshal(req)
 		logx.WithContext(l.ctx).Errorf("新增会员收货地址失败,参数：%s,响应：%s", reqStr, err.Error())
 		return &types.AddressSaveResp{
-			Errno:  1,
-			Errmsg: err.Error(),
+			Code: 1,
+			Msg:  err.Error(),
 		}, nil
 	}
 
 	return &types.AddressSaveResp{
-		Errno:  0,
-		Errmsg: "新增会员收货地址成功",
+		Code: 0,
+		Msg:  "新增会员收货地址成功",
 	}, nil
 }

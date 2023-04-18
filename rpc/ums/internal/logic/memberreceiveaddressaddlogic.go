@@ -25,7 +25,6 @@ func NewMemberReceiveAddressAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *MemberReceiveAddressAddLogic) MemberReceiveAddressAdd(in *umsclient.MemberReceiveAddressAddReq) (*umsclient.MemberReceiveAddressAddResp, error) {
-	// todo: add your logic here and delete this line
 	_, err := l.svcCtx.UmsMemberReceiveAddressModel.Insert(l.ctx, &umsmodel.UmsMemberReceiveAddress{
 		MemberId:      in.MemberId,
 		Name:          in.Name,
