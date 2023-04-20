@@ -2119,8 +2119,8 @@ type AddFlashPromotionResp struct {
 type ListFlashPromotionReq struct {
 	Current  int64  `json:"current,default=1"`
 	PageSize int64  `json:"pageSize,default=20"`
-	Title    string `json:"title,optional"`  //标题
-	Status   int64  `json:"status,optional"` // 上下线状态
+	Title    string `json:"title,optional"`    //标题
+	Status   int64  `json:"status,,default=2"` // 上下线状态
 }
 
 type ListtFlashPromotionData struct {
