@@ -14,8 +14,8 @@ type (
 	// and implement the added methods in customSmsFlashPromotionModel.
 	SmsFlashPromotionModel interface {
 		smsFlashPromotionModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsFlashPromotion, error)
+		Count(ctx context.Context, title string, status int64) (int64, error)
+		FindAll(ctx context.Context, title string, status int64, Current int64, PageSize int64) (*[]SmsFlashPromotion, error)
 	}
 
 	customSmsFlashPromotionModel struct {
@@ -30,9 +30,16 @@ func NewSmsFlashPromotionModel(conn sqlx.SqlConn) SmsFlashPromotionModel {
 	}
 }
 
-func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsFlashPromotion, error) {
+func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, title string, status int64, Current int64, PageSize int64) (*[]SmsFlashPromotion, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", smsFlashPromotionRows, m.table)
+	where := "1=1"
+	if len(title) > 0 {
+		where = where + fmt.Sprintf(" AND title like '%%%s%%'", title)
+	}
+	if status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", status)
+	}
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", smsFlashPromotionRows, m.table, where)
 	var resp []SmsFlashPromotion
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
 	switch err {
@@ -45,8 +52,15 @@ func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, Current int6
 	}
 }
 
-func (m *customSmsFlashPromotionModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customSmsFlashPromotionModel) Count(ctx context.Context, title string, status int64) (int64, error) {
+	where := "1=1"
+	if len(title) > 0 {
+		where = where + fmt.Sprintf(" AND title like '%%%s%%'", title)
+	}
+	if status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", status)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)
