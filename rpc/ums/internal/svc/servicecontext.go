@@ -18,6 +18,8 @@ type ServiceContext struct {
 	UmsMemberLevelModel                   umsmodel.UmsMemberLevelModel
 	UmsMemberLoginLogModel                umsmodel.UmsMemberLoginLogModel
 	UmsMemberMemberTagRelationModel       umsmodel.UmsMemberMemberTagRelationModel
+	UmsMemberPrepaidCardModel             umsmodel.UmsMemberPrepaidCardModel
+	UmsMemberPrepaidCardLogModel          umsmodel.UmsMemberPrepaidCardLogModel
 	UmsMemberPrepaidCardRelationModel     umsmodel.UmsMemberPrepaidCardRelationModel
 	UmsMemberProductCategoryRelationModel umsmodel.UmsMemberProductCategoryRelationModel
 	UmsMemberReceiveAddressModel          umsmodel.UmsMemberReceiveAddressModel
@@ -41,6 +43,8 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		UmsMemberLevelModel:                   umsmodel.NewUmsMemberLevelModel(sqlConn, c.Cache),
 		UmsMemberLoginLogModel:                umsmodel.NewUmsMemberLoginLogModel(sqlConn, c.Cache),
 		UmsMemberMemberTagRelationModel:       umsmodel.NewUmsMemberMemberTagRelationModel(sqlConn, c.Cache),
+		UmsMemberPrepaidCardModel:             umsmodel.NewUmsMemberPrepaidCardModel(sqlConn, c.Cache),
+		UmsMemberPrepaidCardLogModel:          umsmodel.NewUmsMemberPrepaidCardLogModel(sqlConn, c.Cache),
 		UmsMemberPrepaidCardRelationModel:     umsmodel.NewUmsMemberPrepaidCardRelationModel(sqlConn, c.Cache),
 		UmsMemberProductCategoryRelationModel: umsmodel.NewUmsMemberProductCategoryRelationModel(sqlConn, c.Cache),
 		UmsMemberReceiveAddressModel:          umsmodel.NewUmsMemberReceiveAddressModel(sqlConn, c.Cache),

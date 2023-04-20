@@ -5,10 +5,14 @@ import (
 	"zero-admin/rpc/pms/internal/config"
 
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
 type ServiceContext struct {
-	c config.Config
+	c       config.Config
+	DbEngin *gorm.DB
 
 	PmsAlbumModel                            pmsmodel.PmsAlbumModel
 	PmsAlbumPicModel                         pmsmodel.PmsAlbumPicModel
@@ -33,9 +37,24 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 
+	// 启动Gorm支持
+	db, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			// TablePrefix:   "ums_", // 表名前缀，`User` 的表名应该是 `t_users`
+			SingularTable: true, // 使用单数表名，启用该选项，此时，`User` 的表名应该是 `t_user`
+		},
+	})
+	// 如果出错就GameOver了
+	if err != nil {
+		panic(err)
+	}
+	// 自动同步更新表结构,不要建表了O(∩_∩)O哈哈~
+	// db.AutoMigrate(&models.UmsMember{})
+
 	sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
 	return &ServiceContext{
-		c: c,
+		c:       c,
+		DbEngin: db,
 
 		PmsAlbumModel:                            pmsmodel.NewPmsAlbumModel(sqlConn, c.Cache),
 		PmsAlbumPicModel:                         pmsmodel.NewPmsAlbumPicModel(sqlConn, c.Cache),

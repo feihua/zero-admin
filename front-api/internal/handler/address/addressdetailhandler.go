@@ -18,7 +18,7 @@ func AddressDetailHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		}
 
 		l := address.NewAddressDetailLogic(r.Context(), svcCtx)
-		resp, err := l.AddressDetail(req)
+		resp, err := l.AddressDetail(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

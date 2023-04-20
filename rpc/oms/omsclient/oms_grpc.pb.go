@@ -23,6 +23,7 @@ const (
 	Oms_OrderList_FullMethodName                 = "/omsclient.Oms/OrderList"
 	Oms_OrderUpdate_FullMethodName               = "/omsclient.Oms/OrderUpdate"
 	Oms_OrderDelete_FullMethodName               = "/omsclient.Oms/OrderDelete"
+	Oms_OrderByOrderId_FullMethodName            = "/omsclient.Oms/OrderByOrderId"
 	Oms_OrderListByMemberId_FullMethodName       = "/omsclient.Oms/OrderListByMemberId"
 	Oms_OrderCancel_FullMethodName               = "/omsclient.Oms/OrderCancel"
 	Oms_OrderConfirm_FullMethodName              = "/omsclient.Oms/OrderConfirm"
@@ -68,6 +69,7 @@ type OmsClient interface {
 	OrderList(ctx context.Context, in *OrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
 	OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*OrderUpdateResp, error)
 	OrderDelete(ctx context.Context, in *OrderDeleteReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
+	OrderByOrderId(ctx context.Context, in *OrderByOrderIdReq, opts ...grpc.CallOption) (*OrderByOrderIdResp, error)
 	OrderListByMemberId(ctx context.Context, in *OrderListByMemberIdReq, opts ...grpc.CallOption) (*OrderListByMemberIdResp, error)
 	OrderCancel(ctx context.Context, in *OrderCancelReq, opts ...grpc.CallOption) (*OrderCancelResp, error)
 	OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error)
@@ -143,6 +145,15 @@ func (c *omsClient) OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ..
 func (c *omsClient) OrderDelete(ctx context.Context, in *OrderDeleteReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
 	out := new(OrderDeleteResp)
 	err := c.cc.Invoke(ctx, Oms_OrderDelete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omsClient) OrderByOrderId(ctx context.Context, in *OrderByOrderIdReq, opts ...grpc.CallOption) (*OrderByOrderIdResp, error) {
+	out := new(OrderByOrderIdResp)
+	err := c.cc.Invoke(ctx, Oms_OrderByOrderId_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -472,6 +483,7 @@ type OmsServer interface {
 	OrderList(context.Context, *OrderListReq) (*OrderListResp, error)
 	OrderUpdate(context.Context, *OrderUpdateReq) (*OrderUpdateResp, error)
 	OrderDelete(context.Context, *OrderDeleteReq) (*OrderDeleteResp, error)
+	OrderByOrderId(context.Context, *OrderByOrderIdReq) (*OrderByOrderIdResp, error)
 	OrderListByMemberId(context.Context, *OrderListByMemberIdReq) (*OrderListByMemberIdResp, error)
 	OrderCancel(context.Context, *OrderCancelReq) (*OrderCancelResp, error)
 	OrderConfirm(context.Context, *OrderConfirmReq) (*OrderConfirmResp, error)
@@ -525,6 +537,9 @@ func (UnimplementedOmsServer) OrderUpdate(context.Context, *OrderUpdateReq) (*Or
 }
 func (UnimplementedOmsServer) OrderDelete(context.Context, *OrderDeleteReq) (*OrderDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderDelete not implemented")
+}
+func (UnimplementedOmsServer) OrderByOrderId(context.Context, *OrderByOrderIdReq) (*OrderByOrderIdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderByOrderId not implemented")
 }
 func (UnimplementedOmsServer) OrderListByMemberId(context.Context, *OrderListByMemberIdReq) (*OrderListByMemberIdResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderListByMemberId not implemented")
@@ -712,6 +727,24 @@ func _Oms_OrderDelete_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OmsServer).OrderDelete(ctx, req.(*OrderDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Oms_OrderByOrderId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderByOrderIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmsServer).OrderByOrderId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Oms_OrderByOrderId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmsServer).OrderByOrderId(ctx, req.(*OrderByOrderIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1368,6 +1401,10 @@ var Oms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OrderDelete",
 			Handler:    _Oms_OrderDelete_Handler,
+		},
+		{
+			MethodName: "OrderByOrderId",
+			Handler:    _Oms_OrderByOrderId_Handler,
 		},
 		{
 			MethodName: "OrderListByMemberId",

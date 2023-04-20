@@ -26,7 +26,7 @@ func NewAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addr
 	}
 }
 
-func (l *AddressDeleteLogic) AddressDelete(req types.AddressDeleteReq) (resp *types.AddressDeleteResp, err error) {
+func (l *AddressDeleteLogic) AddressDelete(req *types.AddressDeleteReq) (resp *types.AddressDeleteResp, err error) {
 	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	addressQueryDetail, err := l.svcCtx.Ums.MemberReceiveAddressQueryDetail(l.ctx, &umsclient.MemberReceiveAddressQueryDetailReq{
 		MemberId:  memberId,

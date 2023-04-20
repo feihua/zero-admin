@@ -4,7 +4,6 @@ package types
 type AddressListReq struct {
 	Current  int64 `json:"current,default=1"`
 	PageSize int64 `json:"pageSize,default=20"`
-	UserId   int64 `json:"userId"`
 }
 
 type AddressListResp struct {
@@ -27,7 +26,7 @@ type AddressList struct {
 	UserID        int64  `json:"userId"`        //用户Id
 	Province      string `json:"province"`      //省
 	City          string `json:"city"`          //市
-	County        string `json:"county"`        //国家
+	Region        string `json:"region"`        //区
 	AddressDetail string `json:"addressDetail"` //详情地址
 	AreaCode      string `json:"areaCode"`      //地区编码
 	Tel           string `json:"tel"`           //电话
@@ -78,7 +77,6 @@ type AddressDeleteResp struct {
 }
 
 type AddressDetailReq struct {
-	UserID    int64 `json:"userId"`
 	AddressID int64 `json:"addressID"`
 }
 
@@ -310,6 +308,68 @@ type CartUpdateResp struct {
 	Errmsg string `json:"errmsg"`
 }
 
+type CardListReq struct {
+	Page  int64 `form:"page"`
+	Limit int64 `form:"limit"`
+}
+
+type CardListResp struct {
+	Errno  int64        `json:"code"`
+	Data   CardListData `json:"data"`
+	Errmsg string       `json:"msg"`
+}
+
+type CardListData struct {
+	CardList []CardList `json:"cardList"` //商品数据列表
+}
+
+type CardList struct {
+	ID             int64   `json:"id"`             //id
+	Name           string  `json:"name"`           //名称
+	FaceValue      float64 `json:"faceValue"`      //面值
+	ExpiredDay     int64   `json:"expiredDay"`     //失效周期（天）
+	Status         int64   `json:"status"`         //状态
+	CommissionRate float64 `json:"commissionRate"` //佣金率
+	DiscountRate   float64 `json:"discountRate"`   //折扣率
+	Note           string  `json:"note"`           //备注
+}
+
+type CardBuyReq struct {
+	CardId int64 `form:"cardId"` //卡号
+}
+
+type CardBuyResp struct {
+	Errno  int64  `json:"code"`
+	Errmsg string `json:"msg"`
+}
+
+type CardMyListReq struct {
+	Page  int64 `form:"page"`
+	Limit int64 `form:"limit"`
+}
+
+type CardMyListResp struct {
+	Errno  int64          `json:"code"`
+	Data   CardMyListData `json:"data"`
+	Errmsg string         `json:"msg"`
+}
+
+type CardMyListData struct {
+	CardMyList []CardMyList `json:"cardMyList"` //商品数据列表
+}
+
+type CardMyList struct {
+	ID            int64   `json:"id"`
+	PrepaidCardId int64   `json:"prepaidCardId"`
+	PrepaidCardSn string  `json:"prepaidCardSn"`
+	Balance       float64 `json:"balance"`
+	Status        int64   `json:"status"`
+	CreateTime    string  `json:"createTime"` //状态
+	ExpiredTime   string  `json:"expiredTime"`
+	UpdateTime    string  `json:"updateTime"`
+	Note          string  `json:"note"` //备注
+}
+
 type CategoryResp struct {
 	Errno  int64          `json:"code"`
 	Data   []CategoryData `json:"data"`
@@ -409,27 +469,54 @@ type GoodsList struct {
 	RetailPrice  int64  `json:"retailPrice"`  //零售价格
 }
 
-type OrderReq struct {
-	GoodsIds  []int64 `json:"goodsIds"`
-	AddressId int64   `json:"addressId"`
-	PaymentId int64   `json:"paymentId"`
+type Good struct {
+	Id  int64 `json:"id"`
+	Num int64 `json:"num"`
 }
 
-type OrderResp struct {
+type OrderCreateReq struct {
+	Goods     []Good `json:"goods"`
+	AddressId int64  `json:"addressId"`
+	PaymentId int64  `json:"paymentId"`
+	Note      string `json:"note"`
+}
+
+type OrderCreateResp struct {
 	Errno  int64     `json:"code"`
 	Data   OrderData `json:"data"`
 	Errmsg string    `json:"msg"`
 }
 
-type OrderListReq struct {
-	Page   int64 `json:"page"`
-	Limit  int64 `json:"limit"`
-	UserId int64 `json:"userId"`
-}
-
 type OrderData struct {
 	OrderId int64  `json:"orderId"`
 	OrderSn string `json:"orderSn"`
+}
+
+type OrderDetailReq struct {
+	OrderId int64 `form:"orderId"`
+}
+
+type OrderDetailResp struct {
+	Errno  int64           `json:"code"`
+	Data   OrderDetailData `json:"data"`
+	Errmsg string          `json:"msg"`
+}
+
+type OrderDetailData struct {
+	Id              int32           `json:"id"`
+	OrderSn         string          `json:"orderSn"`
+	ActualPrice     string          `json:"actualPrice"`
+	OrderStatusText string          `json:"orderStatusText"`
+	HandleOption    string          `json:"handleOption"`
+	CreateTime      string          `json:"createTime"`
+	GoodsList       []GoodsListData `json:"goodsList"`
+	IsDelivery      int64           `json:"isDelivery"`
+}
+
+type OrderListReq struct {
+	Page   int64 `form:"page"`
+	Limit  int64 `form:"limit"`
+	Status int64 `form:"status"`
 }
 
 type OrderListResp struct {
@@ -444,7 +531,9 @@ type OrderListData struct {
 	ActualPrice     string          `json:"actualPrice"`
 	OrderStatusText string          `json:"orderStatusText"`
 	HandleOption    string          `json:"handleOption"`
+	CreateTime      string          `json:"createTime"`
 	GoodsList       []GoodsListData `json:"goodsList"`
+	IsDelivery      int64           `json:"isDelivery"`
 }
 
 type GoodsListData struct {
@@ -454,11 +543,11 @@ type GoodsListData struct {
 	PicUrl         string `json:"picUrl"`
 	Specifications string `json:"specifications"`
 	Price          string `json:"price"`
+	Quantity       int64  `json:"quantity"`
 }
 
 type OrderCancelReq struct {
-	UserId  int64 `json:"userId"`
-	OrderId int64 `json:"orderId"`
+	OrderId int64 `form:"orderId"`
 }
 
 type OrderCancelResp struct {
@@ -467,8 +556,7 @@ type OrderCancelResp struct {
 }
 
 type OrderRefundReq struct {
-	UserId  int64 `json:"userId"`
-	OrderId int64 `json:"orderId"`
+	OrderId int64 `form:"orderId"`
 }
 
 type OrderRefundResp struct {
@@ -477,8 +565,7 @@ type OrderRefundResp struct {
 }
 
 type OrderConfirmReq struct {
-	UserId  int64 `json:"userId"`
-	OrderId int64 `json:"orderId"`
+	OrderId int64 `form:"orderId"`
 }
 
 type OrderConfirmResp struct {
@@ -497,9 +584,8 @@ type OrderDeleteResp struct {
 }
 
 type OrderGoodsReq struct {
-	UserId  int64 `json:"userId"`
-	OrderId int64 `json:"orderId"`
-	GoodsId int64 `json:"goodsId"`
+	OrderId int64 `form:"orderId"`
+	GoodsId int64 `form:"goodsId"`
 }
 
 type OrderGoodsResp struct {

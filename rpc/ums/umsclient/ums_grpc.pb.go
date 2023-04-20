@@ -43,6 +43,7 @@ const (
 	Ums_IntegrationConsumeSettingUpdate_FullMethodName     = "/umsclient.Ums/IntegrationConsumeSettingUpdate"
 	Ums_IntegrationConsumeSettingDelete_FullMethodName     = "/umsclient.Ums/IntegrationConsumeSettingDelete"
 	Ums_MemberLevelAdd_FullMethodName                      = "/umsclient.Ums/MemberLevelAdd"
+	Ums_MemberLevelInfo_FullMethodName                     = "/umsclient.Ums/MemberLevelInfo"
 	Ums_MemberLevelList_FullMethodName                     = "/umsclient.Ums/MemberLevelList"
 	Ums_MemberLevelUpdate_FullMethodName                   = "/umsclient.Ums/MemberLevelUpdate"
 	Ums_MemberLevelDelete_FullMethodName                   = "/umsclient.Ums/MemberLevelDelete"
@@ -54,6 +55,9 @@ const (
 	Ums_MemberMemberTagRelationList_FullMethodName         = "/umsclient.Ums/MemberMemberTagRelationList"
 	Ums_MemberMemberTagRelationUpdate_FullMethodName       = "/umsclient.Ums/MemberMemberTagRelationUpdate"
 	Ums_MemberMemberTagRelationDelete_FullMethodName       = "/umsclient.Ums/MemberMemberTagRelationDelete"
+	Ums_MemberPrepaidCardList_FullMethodName               = "/umsclient.Ums/MemberPrepaidCardList"
+	Ums_MemberPrepaidCardLogAdd_FullMethodName             = "/umsclient.Ums/MemberPrepaidCardLogAdd"
+	Ums_MemberPrepaidCardLogList_FullMethodName            = "/umsclient.Ums/MemberPrepaidCardLogList"
 	Ums_MemberPrepaidCardRelationAdd_FullMethodName        = "/umsclient.Ums/MemberPrepaidCardRelationAdd"
 	Ums_MemberPrepaidCardRelationList_FullMethodName       = "/umsclient.Ums/MemberPrepaidCardRelationList"
 	Ums_MemberPrepaidCardRelationUpdate_FullMethodName     = "/umsclient.Ums/MemberPrepaidCardRelationUpdate"
@@ -113,6 +117,7 @@ type UmsClient interface {
 	IntegrationConsumeSettingUpdate(ctx context.Context, in *IntegrationConsumeSettingUpdateReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingUpdateResp, error)
 	IntegrationConsumeSettingDelete(ctx context.Context, in *IntegrationConsumeSettingDeleteReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingDeleteResp, error)
 	MemberLevelAdd(ctx context.Context, in *MemberLevelAddReq, opts ...grpc.CallOption) (*MemberLevelAddResp, error)
+	MemberLevelInfo(ctx context.Context, in *MemberLevelInfoReq, opts ...grpc.CallOption) (*MemberLevelInfoResp, error)
 	MemberLevelList(ctx context.Context, in *MemberLevelListReq, opts ...grpc.CallOption) (*MemberLevelListResp, error)
 	MemberLevelUpdate(ctx context.Context, in *MemberLevelUpdateReq, opts ...grpc.CallOption) (*MemberLevelUpdateResp, error)
 	MemberLevelDelete(ctx context.Context, in *MemberLevelDeleteReq, opts ...grpc.CallOption) (*MemberLevelDeleteResp, error)
@@ -124,6 +129,9 @@ type UmsClient interface {
 	MemberMemberTagRelationList(ctx context.Context, in *MemberMemberTagRelationListReq, opts ...grpc.CallOption) (*MemberMemberTagRelationListResp, error)
 	MemberMemberTagRelationUpdate(ctx context.Context, in *MemberMemberTagRelationUpdateReq, opts ...grpc.CallOption) (*MemberMemberTagRelationUpdateResp, error)
 	MemberMemberTagRelationDelete(ctx context.Context, in *MemberMemberTagRelationDeleteReq, opts ...grpc.CallOption) (*MemberMemberTagRelationDeleteResp, error)
+	MemberPrepaidCardList(ctx context.Context, in *MemberPrepaidCardListReq, opts ...grpc.CallOption) (*MemberPrepaidCardListResp, error)
+	MemberPrepaidCardLogAdd(ctx context.Context, in *MemberPrepaidCardLogAddReq, opts ...grpc.CallOption) (*MemberPrepaidCardLogAddResp, error)
+	MemberPrepaidCardLogList(ctx context.Context, in *MemberPrepaidCardLogListReq, opts ...grpc.CallOption) (*MemberPrepaidCardLogListResp, error)
 	MemberPrepaidCardRelationAdd(ctx context.Context, in *MemberPrepaidCardRelationAddReq, opts ...grpc.CallOption) (*MemberPrepaidCardRelationAddResp, error)
 	MemberPrepaidCardRelationList(ctx context.Context, in *MemberPrepaidCardRelationListReq, opts ...grpc.CallOption) (*MemberPrepaidCardRelationListResp, error)
 	MemberPrepaidCardRelationUpdate(ctx context.Context, in *MemberPrepaidCardRelationUpdateReq, opts ...grpc.CallOption) (*MemberPrepaidCardRelationUpdateResp, error)
@@ -379,6 +387,15 @@ func (c *umsClient) MemberLevelAdd(ctx context.Context, in *MemberLevelAddReq, o
 	return out, nil
 }
 
+func (c *umsClient) MemberLevelInfo(ctx context.Context, in *MemberLevelInfoReq, opts ...grpc.CallOption) (*MemberLevelInfoResp, error) {
+	out := new(MemberLevelInfoResp)
+	err := c.cc.Invoke(ctx, Ums_MemberLevelInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *umsClient) MemberLevelList(ctx context.Context, in *MemberLevelListReq, opts ...grpc.CallOption) (*MemberLevelListResp, error) {
 	out := new(MemberLevelListResp)
 	err := c.cc.Invoke(ctx, Ums_MemberLevelList_FullMethodName, in, out, opts...)
@@ -472,6 +489,33 @@ func (c *umsClient) MemberMemberTagRelationUpdate(ctx context.Context, in *Membe
 func (c *umsClient) MemberMemberTagRelationDelete(ctx context.Context, in *MemberMemberTagRelationDeleteReq, opts ...grpc.CallOption) (*MemberMemberTagRelationDeleteResp, error) {
 	out := new(MemberMemberTagRelationDeleteResp)
 	err := c.cc.Invoke(ctx, Ums_MemberMemberTagRelationDelete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberPrepaidCardList(ctx context.Context, in *MemberPrepaidCardListReq, opts ...grpc.CallOption) (*MemberPrepaidCardListResp, error) {
+	out := new(MemberPrepaidCardListResp)
+	err := c.cc.Invoke(ctx, Ums_MemberPrepaidCardList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberPrepaidCardLogAdd(ctx context.Context, in *MemberPrepaidCardLogAddReq, opts ...grpc.CallOption) (*MemberPrepaidCardLogAddResp, error) {
+	out := new(MemberPrepaidCardLogAddResp)
+	err := c.cc.Invoke(ctx, Ums_MemberPrepaidCardLogAdd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberPrepaidCardLogList(ctx context.Context, in *MemberPrepaidCardLogListReq, opts ...grpc.CallOption) (*MemberPrepaidCardLogListResp, error) {
+	out := new(MemberPrepaidCardLogListResp)
+	err := c.cc.Invoke(ctx, Ums_MemberPrepaidCardLogList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -767,6 +811,7 @@ type UmsServer interface {
 	IntegrationConsumeSettingUpdate(context.Context, *IntegrationConsumeSettingUpdateReq) (*IntegrationConsumeSettingUpdateResp, error)
 	IntegrationConsumeSettingDelete(context.Context, *IntegrationConsumeSettingDeleteReq) (*IntegrationConsumeSettingDeleteResp, error)
 	MemberLevelAdd(context.Context, *MemberLevelAddReq) (*MemberLevelAddResp, error)
+	MemberLevelInfo(context.Context, *MemberLevelInfoReq) (*MemberLevelInfoResp, error)
 	MemberLevelList(context.Context, *MemberLevelListReq) (*MemberLevelListResp, error)
 	MemberLevelUpdate(context.Context, *MemberLevelUpdateReq) (*MemberLevelUpdateResp, error)
 	MemberLevelDelete(context.Context, *MemberLevelDeleteReq) (*MemberLevelDeleteResp, error)
@@ -778,6 +823,9 @@ type UmsServer interface {
 	MemberMemberTagRelationList(context.Context, *MemberMemberTagRelationListReq) (*MemberMemberTagRelationListResp, error)
 	MemberMemberTagRelationUpdate(context.Context, *MemberMemberTagRelationUpdateReq) (*MemberMemberTagRelationUpdateResp, error)
 	MemberMemberTagRelationDelete(context.Context, *MemberMemberTagRelationDeleteReq) (*MemberMemberTagRelationDeleteResp, error)
+	MemberPrepaidCardList(context.Context, *MemberPrepaidCardListReq) (*MemberPrepaidCardListResp, error)
+	MemberPrepaidCardLogAdd(context.Context, *MemberPrepaidCardLogAddReq) (*MemberPrepaidCardLogAddResp, error)
+	MemberPrepaidCardLogList(context.Context, *MemberPrepaidCardLogListReq) (*MemberPrepaidCardLogListResp, error)
 	MemberPrepaidCardRelationAdd(context.Context, *MemberPrepaidCardRelationAddReq) (*MemberPrepaidCardRelationAddResp, error)
 	MemberPrepaidCardRelationList(context.Context, *MemberPrepaidCardRelationListReq) (*MemberPrepaidCardRelationListResp, error)
 	MemberPrepaidCardRelationUpdate(context.Context, *MemberPrepaidCardRelationUpdateReq) (*MemberPrepaidCardRelationUpdateResp, error)
@@ -886,6 +934,9 @@ func (UnimplementedUmsServer) IntegrationConsumeSettingDelete(context.Context, *
 func (UnimplementedUmsServer) MemberLevelAdd(context.Context, *MemberLevelAddReq) (*MemberLevelAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberLevelAdd not implemented")
 }
+func (UnimplementedUmsServer) MemberLevelInfo(context.Context, *MemberLevelInfoReq) (*MemberLevelInfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberLevelInfo not implemented")
+}
 func (UnimplementedUmsServer) MemberLevelList(context.Context, *MemberLevelListReq) (*MemberLevelListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberLevelList not implemented")
 }
@@ -918,6 +969,15 @@ func (UnimplementedUmsServer) MemberMemberTagRelationUpdate(context.Context, *Me
 }
 func (UnimplementedUmsServer) MemberMemberTagRelationDelete(context.Context, *MemberMemberTagRelationDeleteReq) (*MemberMemberTagRelationDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberMemberTagRelationDelete not implemented")
+}
+func (UnimplementedUmsServer) MemberPrepaidCardList(context.Context, *MemberPrepaidCardListReq) (*MemberPrepaidCardListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberPrepaidCardList not implemented")
+}
+func (UnimplementedUmsServer) MemberPrepaidCardLogAdd(context.Context, *MemberPrepaidCardLogAddReq) (*MemberPrepaidCardLogAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberPrepaidCardLogAdd not implemented")
+}
+func (UnimplementedUmsServer) MemberPrepaidCardLogList(context.Context, *MemberPrepaidCardLogListReq) (*MemberPrepaidCardLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberPrepaidCardLogList not implemented")
 }
 func (UnimplementedUmsServer) MemberPrepaidCardRelationAdd(context.Context, *MemberPrepaidCardRelationAddReq) (*MemberPrepaidCardRelationAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberPrepaidCardRelationAdd not implemented")
@@ -1451,6 +1511,24 @@ func _Ums_MemberLevelAdd_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Ums_MemberLevelInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberLevelInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberLevelInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_MemberLevelInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberLevelInfo(ctx, req.(*MemberLevelInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Ums_MemberLevelList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MemberLevelListReq)
 	if err := dec(in); err != nil {
@@ -1645,6 +1723,60 @@ func _Ums_MemberMemberTagRelationDelete_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UmsServer).MemberMemberTagRelationDelete(ctx, req.(*MemberMemberTagRelationDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberPrepaidCardList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberPrepaidCardListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberPrepaidCardList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_MemberPrepaidCardList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberPrepaidCardList(ctx, req.(*MemberPrepaidCardListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberPrepaidCardLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberPrepaidCardLogAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberPrepaidCardLogAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_MemberPrepaidCardLogAdd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberPrepaidCardLogAdd(ctx, req.(*MemberPrepaidCardLogAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberPrepaidCardLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberPrepaidCardLogListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberPrepaidCardLogList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ums_MemberPrepaidCardLogList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberPrepaidCardLogList(ctx, req.(*MemberPrepaidCardLogListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2275,6 +2407,10 @@ var Ums_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Ums_MemberLevelAdd_Handler,
 		},
 		{
+			MethodName: "MemberLevelInfo",
+			Handler:    _Ums_MemberLevelInfo_Handler,
+		},
+		{
 			MethodName: "MemberLevelList",
 			Handler:    _Ums_MemberLevelList_Handler,
 		},
@@ -2317,6 +2453,18 @@ var Ums_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberMemberTagRelationDelete",
 			Handler:    _Ums_MemberMemberTagRelationDelete_Handler,
+		},
+		{
+			MethodName: "MemberPrepaidCardList",
+			Handler:    _Ums_MemberPrepaidCardList_Handler,
+		},
+		{
+			MethodName: "MemberPrepaidCardLogAdd",
+			Handler:    _Ums_MemberPrepaidCardLogAdd_Handler,
+		},
+		{
+			MethodName: "MemberPrepaidCardLogList",
+			Handler:    _Ums_MemberPrepaidCardLogList_Handler,
 		},
 		{
 			MethodName: "MemberPrepaidCardRelationAdd",

@@ -3,12 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
+	"zero-admin/common/errorx"
 	"zero-admin/front-api/internal/config"
 	"zero-admin/front-api/internal/handler"
 	"zero-admin/front-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 var configFile = flag.String("f", "front-api/etc/front-api.yaml", "the config file")
@@ -26,14 +29,14 @@ func main() {
 	handler.RegisterHandlers(server, ctx)
 
 	// 自定义错误
-	// httpx.SetErrorHandler(func(err error) (int, interface{}) {
-	// 	switch e := err.(type) {
-	// 	case *errorx.CodeError:
-	// 		return http.StatusOK, e.Data()
-	// 	default:
-	// 		return http.StatusInternalServerError, nil
-	// 	}
-	// })
+	httpx.SetErrorHandler(func(err error) (int, interface{}) {
+		switch e := err.(type) {
+		case *errorx.CodeError:
+			return http.StatusOK, e.Data()
+		default:
+			return http.StatusInternalServerError, nil
+		}
+	})
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()

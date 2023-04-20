@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/golang-jwt/jwt/v4 v4.5.0
+	github.com/google/uuid v1.3.0
 	github.com/jinzhu/copier v0.3.0
 	github.com/pkg/errors v0.9.1
 	github.com/shopspring/decimal v1.3.1
@@ -16,6 +16,8 @@ require (
 	golang.org/x/crypto v0.6.0
 	google.golang.org/grpc v1.53.0
 	google.golang.org/protobuf v1.28.2-0.20220831092852-f930b1dc76e8
+	gorm.io/driver/mysql v1.5.0
+	gorm.io/gorm v1.24.7-0.20230306060331-85eaf9eeda11
 )
 
 require (
@@ -39,6 +41,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
+	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gomodule/redigo v1.8.1 // indirect
@@ -46,9 +49,9 @@ require (
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/pprof v0.0.0-20211214055906-6f57359322fd // indirect
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.0 // indirect
-	github.com/jmoiron/sqlx v1.3.5 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kr/pretty v0.3.0 // indirect

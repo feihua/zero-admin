@@ -6,10 +6,14 @@ import (
 	"zero-admin/rpc/oms/internal/config"
 
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
 type ServiceContext struct {
-	c config.Config
+	c       config.Config
+	DbEngin *gorm.DB
 
 	OmsCartItemModel            omsmodel.OmsCartItemModel
 	OmsCompanyAddressModel      omsmodel.OmsCompanyAddressModel
@@ -24,9 +28,20 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 
+	db, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			// TablePrefix:   "ums_", // 表名前缀，`User` 的表名应该是 `t_users`
+			SingularTable: true, // 使用单数表名，启用该选项，此时，`User` 的表名应该是 `t_user`
+		},
+	})
+	// 如果出错就GameOver了
+	if err != nil {
+		panic(err)
+	}
 	sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
 	return &ServiceContext{
-		c: c,
+		c:       c,
+		DbEngin: db,
 
 		OmsCartItemModel:            omsmodel.NewOmsCartItemModel(sqlConn, c.Cache),
 		OmsCompanyAddressModel:      omsmodel.NewOmsCompanyAddressModel(sqlConn, c.Cache),

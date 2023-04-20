@@ -37,7 +37,7 @@ func (l *OrderRefundLogic) OrderRefund(in *omsclient.OrderRefundReq) (*omsclient
 	}
 
 	//检测是否能够退款
-	//订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	//订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单; 6->已退款已关闭；
 	//如果订单已付款，没有发货，则可退款
 	if order.Status != 1 {
 		reqStr, _ := json.Marshal(in)
@@ -46,9 +46,9 @@ func (l *OrderRefundLogic) OrderRefund(in *omsclient.OrderRefundReq) (*omsclient
 	}
 
 	//设置订单申请退款状态
-	// if l.svcCtx.OmsOrderModel.UpdateOrderStatus(4, order.Id) != nil {
-	// 	return nil, errors.New("设置订单申请退款状态失败")
-	// }
+	if l.svcCtx.OmsOrderModel.UpdateOrderStatus(l.ctx, 6, order.Id) != nil {
+		return nil, errors.New("设置订单申请退款状态失败")
+	}
 
 	//todo 发送邮件和短信通知，这里采用异步发送，有用户申请退款，邮件通知运营人员
 

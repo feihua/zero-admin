@@ -18,7 +18,7 @@ func AddressDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		}
 
 		l := address.NewAddressDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.AddressDelete(req)
+		resp, err := l.AddressDelete(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

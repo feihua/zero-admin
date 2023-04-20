@@ -12,6 +12,7 @@ type SnPrefix string
 const (
 	SN_PREFIX_HOMESTAY_ORDER SnPrefix = "HSO" //民宿订单前缀 looklook_order/homestay_order
 	SN_PREFIX_THIRD_PAYMENT  SnPrefix = "PMT" //第三方支付流水记录前缀 looklook_payment/third_payment
+	SN_PREFIX_PREPAID_CARD   SnPrefix = "PPC" //第三方支付流水记录前缀 looklook_payment/third_payment
 )
 
 // 生成单号

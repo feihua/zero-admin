@@ -101,6 +101,12 @@ message Member {
   int64  gender = 4;
   string icon = 5;
   string personalized_signature = 6;
+  string username=7;
+  int64 levelId = 8;
+  int64 parentId =9;
+  double balance =10;
+  string invitationCode =11;
+  
 }
 
 message MemberAuth {
@@ -352,6 +358,14 @@ message MemberLevelAddResp {
   string pong = 1;
 }
 
+message MemberLevelInfoReq {
+  int64 id = 1;
+}
+
+message MemberLevelInfoResp {
+  MemberLevelListData info = 2;
+}
+
 message MemberLevelListReq {
   int64 current = 1;
   int64 pageSize = 2;
@@ -371,6 +385,7 @@ message MemberLevelListData{
   int64   	PriviledgeMemberPrice = 11;
   int64   	PriviledgeBirthday   = 12;
   string  	Note           = 13;
+  double  	DiscountRate           = 14;
 }
 
 message MemberLevelListResp {
@@ -504,9 +519,71 @@ message MemberMemberTagRelationDeleteResp {
   string pong = 1;
 }
 
+message MemberPrepaidCardListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message MemberPrepaidCardListData{
+  int64	Id           = 1;
+  string	name     = 2;
+  double	FaceValue = 3;
+  int64	ExpiredDay = 4;
+  int64	status = 5;
+  double	CommissionRate = 6;
+  double	DiscountRate = 7;
+  string	note = 8;
+}
+
+message MemberPrepaidCardListResp {
+  int64 total = 1;
+  repeated  MemberPrepaidCardListData list = 2;
+}
+
+message MemberPrepaidCardLogAddReq {
+  int64	MemberId     = 2;
+  int64	PrepaidCardId = 3;
+  int64	OrderId = 4;
+  string	OrderSn = 5;
+  int64	FundsType = 6;
+  int64	Amount = 7;
+  string	CreateTime = 8;
+  string	UpdateTime = 9;
+  string Note = 10;
+}
+
+message MemberPrepaidCardLogAddResp {
+  string pong = 1;
+}
+
+message MemberPrepaidCardLogListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message MemberPrepaidCardLogListData{
+  int64	Id           = 1;
+  int64	MemberId     = 2;
+  int64	PrepaidCardId = 3;
+  int64	OrderId = 4;
+  string	OrderSn = 5;
+  int64	FundsType = 6;
+  int64	Amount = 7;
+  string	CreateTime = 8;
+  string	UpdateTime = 9;
+  string Note = 10;
+}
+
+message MemberPrepaidCardLogListResp {
+  int64 total = 1;
+  repeated  MemberPrepaidCardLogListData list = 2;
+}
+
+
 message MemberPrepaidCardRelationAddReq {
   int64	MemberId     = 2;
   int64	PrepaidCardId = 3;
+  string	PrepaidCardSn = 4;
 }
 
 message MemberPrepaidCardRelationAddResp {
@@ -516,12 +593,20 @@ message MemberPrepaidCardRelationAddResp {
 message MemberPrepaidCardRelationListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  int64 MemberId=3;
 }
 
 message MemberPrepaidCardRelationListData{
   int64	Id           = 1;
   int64	MemberId     = 2;
   int64	PrepaidCardId = 3;
+  string	PrepaidCardSn = 4;
+  double	Balance = 5;
+  int64	status = 6;
+  string	CreateTime = 7;
+  string	ExpiredTime = 8;
+  string	UpdateTime = 9;
+  string	note = 10;
 }
 
 message MemberPrepaidCardRelationListResp {
@@ -917,6 +1002,7 @@ service Ums {
   rpc MemberList(MemberListReq) returns(MemberListResp);
   rpc MemberUpdate(MemberUpdateReq) returns(MemberUpdateResp);
   rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);
+
   rpc login(LoginReq) returns(LoginResp);
   rpc register(RegisterReq) returns(RegisterResp);
   rpc MemberInfo(MemberInfoReq) returns(MemberInfoResp);
@@ -940,6 +1026,7 @@ service Ums {
   rpc IntegrationConsumeSettingDelete(IntegrationConsumeSettingDeleteReq) returns(IntegrationConsumeSettingDeleteResp);
 
   rpc MemberLevelAdd(MemberLevelAddReq) returns(MemberLevelAddResp);
+  rpc MemberLevelInfo(MemberLevelInfoReq) returns(MemberLevelInfoResp);
   rpc MemberLevelList(MemberLevelListReq) returns(MemberLevelListResp);
   rpc MemberLevelUpdate(MemberLevelUpdateReq) returns(MemberLevelUpdateResp);
   rpc MemberLevelDelete(MemberLevelDeleteReq) returns(MemberLevelDeleteResp);
@@ -954,6 +1041,11 @@ service Ums {
   rpc MemberMemberTagRelationUpdate(MemberMemberTagRelationUpdateReq) returns(MemberMemberTagRelationUpdateResp);
   rpc MemberMemberTagRelationDelete(MemberMemberTagRelationDeleteReq) returns(MemberMemberTagRelationDeleteResp);
 
+  rpc MemberPrepaidCardList(MemberPrepaidCardListReq) returns(MemberPrepaidCardListResp);
+
+  rpc MemberPrepaidCardLogAdd(MemberPrepaidCardLogAddReq) returns(MemberPrepaidCardLogAddResp);
+  rpc MemberPrepaidCardLogList(MemberPrepaidCardLogListReq) returns(MemberPrepaidCardLogListResp);
+ 
   rpc MemberPrepaidCardRelationAdd(MemberPrepaidCardRelationAddReq) returns(MemberPrepaidCardRelationAddResp);
   rpc MemberPrepaidCardRelationList(MemberPrepaidCardRelationListReq) returns(MemberPrepaidCardRelationListResp);
   rpc MemberPrepaidCardRelationUpdate(MemberPrepaidCardRelationUpdateReq) returns(MemberPrepaidCardRelationUpdateResp);

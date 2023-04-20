@@ -48,9 +48,13 @@ message OrderAddReq {
   string   ReceiveTime = 42;
   string   CommentTime = 43;
   string   ModifyTime = 44;
-  repeated int64 Ids = 45;
+  repeated good goods = 45;
+  int64      IsDelivery = 46;
 }
-
+message good {
+  int64 Id =1;
+  int64 Num=2;
+}
 message OrderAddResp {
   string pong = 1;
   int64 orderId =2;
@@ -174,8 +178,32 @@ message OrderDeleteResp {
   string pong = 1;
 }
 
+message OrderByOrderIdReq {
+  int64 OrderId = 1;
+  int64 MemberId = 2;
+}
+
+message OrderByOrderIdData{
+  int32       Id = 1;
+  string      OrderSn = 2;
+  string      actualPrice = 3;
+  string      orderStatusText = 4;
+  string      handleOption = 5;
+  string createTime=6;
+  repeated GoodsListByMemberIdData     goodsList = 7;
+  int64 IsDelivery=8;
+}
+
+message OrderByOrderIdResp {
+  int64 total = 1;
+  OrderByOrderIdData list = 2;
+}
+
 message OrderListByMemberIdReq {
-  int64 MemberId = 1;
+  int64 current = 1;
+  int64 pageSize = 2;
+  int64 MemberId = 3;
+  int64 status=4;
 }
 
 message OrderListByMemberIdData{
@@ -184,8 +212,9 @@ message OrderListByMemberIdData{
   string      actualPrice = 3;
   string      orderStatusText = 4;
   string      handleOption = 5;
-  repeated GoodsListByMemberIdData     goodsList = 6;
-
+  string createTime=6;
+  repeated GoodsListByMemberIdData     goodsList = 7;
+  int64 IsDelivery=8;
 }
 message GoodsListByMemberIdData{
   int32       Id = 1;
@@ -194,7 +223,7 @@ message GoodsListByMemberIdData{
   string      picUrl = 4;
   string      specifications = 5;
   string      price = 6;
-
+  int64 Quantity=7;
 }
 
 message OrderListByMemberIdResp {
@@ -776,6 +805,7 @@ service Oms {
   rpc OrderList(OrderListReq) returns(OrderListResp);
   rpc OrderUpdate(OrderUpdateReq) returns(OrderUpdateResp);
   rpc OrderDelete(OrderDeleteReq) returns(OrderDeleteResp);
+  rpc OrderByOrderId(OrderByOrderIdReq) returns(OrderByOrderIdResp);
   rpc OrderListByMemberId(OrderListByMemberIdReq) returns(OrderListByMemberIdResp);
   rpc OrderCancel(OrderCancelReq) returns(OrderCancelResp);
   rpc OrderConfirm(OrderConfirmReq) returns(OrderConfirmResp);

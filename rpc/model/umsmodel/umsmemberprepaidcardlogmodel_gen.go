@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/cache"
@@ -41,16 +42,16 @@ type (
 	}
 
 	UmsMemberPrepaidCardLog struct {
-		Id            int64   `db:"id"`
-		MemberId      int64   `db:"member_id"`
-		PrepaidCardId int64   `db:"prepaid_card_id"`
-		OrderId       int64   `db:"order_id"`    // 订单编号
-		OrderSn       string  `db:"order_sn"`    // 订单号码
-		FundsType     int64   `db:"funds_type"`  // 资金类型：0进，1出
-		Amount        float64 `db:"amount"`      // 金额
-		CreateTime    int64   `db:"create_time"` // 创建时间
-		UpdateTime    int64   `db:"update_time"` // 更新时间
-		Note          string  `db:"note"`
+		Id            int64     `db:"id"`
+		MemberId      int64     `db:"member_id"`
+		PrepaidCardId int64     `db:"prepaid_card_id"`
+		OrderId       int64     `db:"order_id"`    // 订单编号
+		OrderSn       string    `db:"order_sn"`    // 订单号码
+		FundsType     int64     `db:"funds_type"`  // 资金类型：0进，1出
+		Amount        float64   `db:"amount"`      // 金额
+		CreateTime    time.Time `db:"create_time"` // 创建时间
+		UpdateTime    time.Time `db:"update_time"` // 更新时间
+		Note          string    `db:"note"`
 	}
 )
 

@@ -65,6 +65,9 @@ type (
 		Growth                int64     `db:"growth"`                 // 成长值
 		LuckeyCount           int64     `db:"luckey_count"`           // 剩余抽奖次数
 		HistoryIntegration    int64     `db:"history_integration"`    // 历史积分数量
+		ParentId              int64     `db:"parent_id"`              // 父ID
+		Balance               float64   `db:"balance"`                // 余额
+		InvitationCode        string    `db:"invitation_code"`        // 邀请码
 	}
 )
 
@@ -172,8 +175,8 @@ func (m *defaultUmsMemberModel) Insert(ctx context.Context, data *UmsMember) (sq
 	gozeroUmsMemberPhoneKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPhonePrefix, data.Phone)
 	gozeroUmsMemberUsernameKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberUsernamePrefix, data.Username)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.MemberLevelId, data.Username, data.Password, data.Nickname, data.Phone, data.Status, data.Icon, data.Gender, data.Birthday, data.City, data.Job, data.PersonalizedSignature, data.SourceType, data.Integration, data.Growth, data.LuckeyCount, data.HistoryIntegration)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.MemberLevelId, data.Username, data.Password, data.Nickname, data.Phone, data.Status, data.Icon, data.Gender, data.Birthday, data.City, data.Job, data.PersonalizedSignature, data.SourceType, data.Integration, data.Growth, data.LuckeyCount, data.HistoryIntegration, data.ParentId, data.Balance, data.InvitationCode)
 	}, gozeroUmsMemberIdKey, gozeroUmsMemberPhoneKey, gozeroUmsMemberUsernameKey)
 	return ret, err
 }
@@ -183,11 +186,11 @@ func (m *defaultUmsMemberModel) InsertTx(ctx context.Context, session sqlx.Sessi
 	gozeroUmsMemberPhoneKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPhonePrefix, data.Phone)
 	gozeroUmsMemberUsernameKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberUsernamePrefix, data.Username)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberRowsExpectAutoSet)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberRowsExpectAutoSet)
 		if session != nil {
-			return session.ExecCtx(ctx, query, data.MemberLevelId, data.Username, data.Password, data.Nickname, data.Phone, data.Status, data.Icon, data.Gender, data.Birthday, data.City, data.Job, data.PersonalizedSignature, data.SourceType, data.Integration, data.Growth, data.LuckeyCount, data.HistoryIntegration)
+			return session.ExecCtx(ctx, query, data.MemberLevelId, data.Username, data.Password, data.Nickname, data.Phone, data.Status, data.Icon, data.Gender, data.Birthday, data.City, data.Job, data.PersonalizedSignature, data.SourceType, data.Integration, data.Growth, data.LuckeyCount, data.HistoryIntegration, data.ParentId, data.Balance, data.InvitationCode)
 		}
-		return conn.ExecCtx(ctx, query, data.MemberLevelId, data.Username, data.Password, data.Nickname, data.Phone, data.Status, data.Icon, data.Gender, data.Birthday, data.City, data.Job, data.PersonalizedSignature, data.SourceType, data.Integration, data.Growth, data.LuckeyCount, data.HistoryIntegration)
+		return conn.ExecCtx(ctx, query, data.MemberLevelId, data.Username, data.Password, data.Nickname, data.Phone, data.Status, data.Icon, data.Gender, data.Birthday, data.City, data.Job, data.PersonalizedSignature, data.SourceType, data.Integration, data.Growth, data.LuckeyCount, data.HistoryIntegration, data.ParentId, data.Balance, data.InvitationCode)
 	}, gozeroUmsMemberIdKey, gozeroUmsMemberPhoneKey, gozeroUmsMemberUsernameKey)
 	return ret, err
 }
@@ -202,7 +205,7 @@ func (m *defaultUmsMemberModel) Update(ctx context.Context, newData *UmsMember) 
 	gozeroUmsMemberUsernameKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberUsernamePrefix, data.Username)
 	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, newData.MemberLevelId, newData.Username, newData.Password, newData.Nickname, newData.Phone, newData.Status, newData.Icon, newData.Gender, newData.Birthday, newData.City, newData.Job, newData.PersonalizedSignature, newData.SourceType, newData.Integration, newData.Growth, newData.LuckeyCount, newData.HistoryIntegration, newData.Id)
+		return conn.ExecCtx(ctx, query, newData.MemberLevelId, newData.Username, newData.Password, newData.Nickname, newData.Phone, newData.Status, newData.Icon, newData.Gender, newData.Birthday, newData.City, newData.Job, newData.PersonalizedSignature, newData.SourceType, newData.Integration, newData.Growth, newData.LuckeyCount, newData.HistoryIntegration, newData.ParentId, newData.Balance, newData.InvitationCode, newData.Id)
 	}, gozeroUmsMemberIdKey, gozeroUmsMemberPhoneKey, gozeroUmsMemberUsernameKey)
 	return err
 }
@@ -219,9 +222,9 @@ func (m *defaultUmsMemberModel) UpdateTx(ctx context.Context, session sqlx.Sessi
 	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberRowsWithPlaceHolder)
 		if session != nil {
-			return session.ExecCtx(ctx, query, newData.MemberLevelId, newData.Username, newData.Password, newData.Nickname, newData.Phone, newData.Status, newData.Icon, newData.Gender, newData.Birthday, newData.City, newData.Job, newData.PersonalizedSignature, newData.SourceType, newData.Integration, newData.Growth, newData.LuckeyCount, newData.HistoryIntegration, newData.Id)
+			return session.ExecCtx(ctx, query, newData.MemberLevelId, newData.Username, newData.Password, newData.Nickname, newData.Phone, newData.Status, newData.Icon, newData.Gender, newData.Birthday, newData.City, newData.Job, newData.PersonalizedSignature, newData.SourceType, newData.Integration, newData.Growth, newData.LuckeyCount, newData.HistoryIntegration, newData.ParentId, newData.Balance, newData.InvitationCode, newData.Id)
 		}
-		return conn.ExecCtx(ctx, query, newData.MemberLevelId, newData.Username, newData.Password, newData.Nickname, newData.Phone, newData.Status, newData.Icon, newData.Gender, newData.Birthday, newData.City, newData.Job, newData.PersonalizedSignature, newData.SourceType, newData.Integration, newData.Growth, newData.LuckeyCount, newData.HistoryIntegration, newData.Id)
+		return conn.ExecCtx(ctx, query, newData.MemberLevelId, newData.Username, newData.Password, newData.Nickname, newData.Phone, newData.Status, newData.Icon, newData.Gender, newData.Birthday, newData.City, newData.Job, newData.PersonalizedSignature, newData.SourceType, newData.Integration, newData.Growth, newData.LuckeyCount, newData.HistoryIntegration, newData.ParentId, newData.Balance, newData.InvitationCode, newData.Id)
 	}, gozeroUmsMemberIdKey, gozeroUmsMemberPhoneKey, gozeroUmsMemberUsernameKey)
 	return err
 }

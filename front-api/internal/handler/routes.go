@@ -6,6 +6,7 @@ import (
 
 	address "zero-admin/front-api/internal/handler/address"
 	auth "zero-admin/front-api/internal/handler/auth"
+	card "zero-admin/front-api/internal/handler/card"
 	cart "zero-admin/front-api/internal/handler/cart"
 	category "zero-admin/front-api/internal/handler/category"
 	collect "zero-admin/front-api/internal/handler/collect"
@@ -36,7 +37,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: address.AddressUpdateHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/delete",
 				Handler: address.AddressDeleteHandler(serverCtx),
 			},
@@ -116,6 +117,28 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
+				Path:    "/list",
+				Handler: card.CardListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/buy",
+				Handler: card.CardBuyHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/mylist",
+				Handler: card.CardMyListHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/card"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
 				Path:    "/getfirstcategory",
 				Handler: category.GetFirstCategoryHandler(serverCtx),
 			},
@@ -160,6 +183,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/create",
 				Handler: order.OrderCreateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/detail",
+				Handler: order.OrderDetailHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,

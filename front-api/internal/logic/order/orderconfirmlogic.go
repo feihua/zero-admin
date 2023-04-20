@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"encoding/json"
+	"zero-admin/common/ctxdata"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -26,8 +27,9 @@ func NewOrderConfirmLogic(ctx context.Context, svcCtx *svc.ServiceContext) Order
 }
 
 func (l *OrderConfirmLogic) OrderConfirm(req types.OrderConfirmReq) (resp *types.OrderConfirmResp, err error) {
+	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	_, err = l.svcCtx.Oms.OrderConfirm(l.ctx, &omsclient.OrderConfirmReq{
-		UserId:  req.UserId,
+		UserId:  memberId,
 		OrderId: req.OrderId,
 	})
 

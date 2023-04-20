@@ -37,18 +37,18 @@ func (l *OrderConfirmLogic) OrderConfirm(in *omsclient.OrderConfirmReq) (*omscli
 	}
 
 	//检测是否能够确认收货
-	//订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	//订单状态：0->待付款；1->已付款待收件；2->已收件服务中；3->上挂待取件；4->已取件；5->无效订单
 	//如果订单已经发货，没有收货，则可收货操作,
-	if order.Status != 2 {
+	if order.Status != 3 {
 		reqStr, _ := json.Marshal(in)
 		logx.WithContext(l.ctx).Errorf("确认收货失败,参数：%s,订单状态：%s", reqStr, order.Status)
 		return nil, errors.New("确认收货失败")
 	}
 
 	//设置订单已确认状态
-	// if l.svcCtx.OmsOrderModel.UpdateOrderStatus(3, order.Id) != nil {
-	// 	return nil, errors.New("设置订单已确认状态失败")
-	// }
+	if l.svcCtx.OmsOrderModel.UpdateOrderStatus(l.ctx, 4, order.Id) != nil {
+		return nil, errors.New("设置订单已确认状态失败")
+	}
 	return &omsclient.OrderConfirmResp{}, nil
 
 }

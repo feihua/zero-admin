@@ -26,7 +26,7 @@ func NewAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addres
 	}
 }
 
-func (l *AddressListLogic) AddressList(req types.AddressListReq) (resp *types.AddressListResp, err error) {
+func (l *AddressListLogic) AddressList(req *types.AddressListReq) (resp *types.AddressListResp, err error) {
 	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	result, err := l.svcCtx.Ums.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
 		Current:  req.Current,
@@ -52,7 +52,7 @@ func (l *AddressListLogic) AddressList(req types.AddressListReq) (resp *types.Ad
 			UserID:        address.MemberId,
 			Province:      address.Province,
 			City:          address.City,
-			County:        "",
+			Region:        address.Region,
 			AddressDetail: address.DetailAddress,
 			AreaCode:      "",
 			Tel:           address.PhoneNumber,

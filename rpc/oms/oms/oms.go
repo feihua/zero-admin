@@ -37,9 +37,13 @@ type (
 	CompanyAddressListResp        = omsclient.CompanyAddressListResp
 	CompanyAddressUpdateReq       = omsclient.CompanyAddressUpdateReq
 	CompanyAddressUpdateResp      = omsclient.CompanyAddressUpdateResp
+	Good                          = omsclient.Good
 	GoodsListByMemberIdData       = omsclient.GoodsListByMemberIdData
 	OrderAddReq                   = omsclient.OrderAddReq
 	OrderAddResp                  = omsclient.OrderAddResp
+	OrderByOrderIdData            = omsclient.OrderByOrderIdData
+	OrderByOrderIdReq             = omsclient.OrderByOrderIdReq
+	OrderByOrderIdResp            = omsclient.OrderByOrderIdResp
 	OrderCancelReq                = omsclient.OrderCancelReq
 	OrderCancelResp               = omsclient.OrderCancelResp
 	OrderConfirmReq               = omsclient.OrderConfirmReq
@@ -107,6 +111,7 @@ type (
 		OrderList(ctx context.Context, in *OrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
 		OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*OrderUpdateResp, error)
 		OrderDelete(ctx context.Context, in *OrderDeleteReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
+		OrderByOrderId(ctx context.Context, in *OrderByOrderIdReq, opts ...grpc.CallOption) (*OrderByOrderIdResp, error)
 		OrderListByMemberId(ctx context.Context, in *OrderListByMemberIdReq, opts ...grpc.CallOption) (*OrderListByMemberIdResp, error)
 		OrderCancel(ctx context.Context, in *OrderCancelReq, opts ...grpc.CallOption) (*OrderCancelResp, error)
 		OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error)
@@ -173,6 +178,11 @@ func (m *defaultOms) OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts .
 func (m *defaultOms) OrderDelete(ctx context.Context, in *OrderDeleteReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
 	client := omsclient.NewOmsClient(m.cli.Conn())
 	return client.OrderDelete(ctx, in, opts...)
+}
+
+func (m *defaultOms) OrderByOrderId(ctx context.Context, in *OrderByOrderIdReq, opts ...grpc.CallOption) (*OrderByOrderIdResp, error) {
+	client := omsclient.NewOmsClient(m.cli.Conn())
+	return client.OrderByOrderId(ctx, in, opts...)
 }
 
 func (m *defaultOms) OrderListByMemberId(ctx context.Context, in *OrderListByMemberIdReq, opts ...grpc.CallOption) (*OrderListByMemberIdResp, error) {

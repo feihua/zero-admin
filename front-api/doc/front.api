@@ -1,6 +1,7 @@
 import "api/address.api"
 import "api/auth.api"
 import "api/cart.api"
+import "api/card.api"
 import "api/category.api"
 import "api/collect.api"
 import "api/home.api"

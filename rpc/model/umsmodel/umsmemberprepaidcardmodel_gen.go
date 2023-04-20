@@ -41,15 +41,14 @@ type (
 	}
 
 	UmsMemberPrepaidCard struct {
-		Id              int64   `db:"id"`
-		Name            string  `db:"name"`
-		FaceValue       float64 `db:"face_value"`       // 面值
-		ExpiredDays     int64   `db:"expired_days"`     // 失效天数
-		Status          int64   `db:"status"`           // 状态：0->正常；1->禁用
-		CommissionRate  float64 `db:"commission_rate"`  // 佣金率
-		FirstCommission float64 `db:"first_commission"` // 首次出售佣金
-		DiscountRate    float64 `db:"discount_rate"`    // 折扣率
-		Note            string  `db:"note"`
+		Id             int64   `db:"id"`
+		Name           string  `db:"name"`
+		FaceValue      float64 `db:"face_value"`      // 面值
+		ExpiredDay     int64   `db:"expired_day"`     // 失效周期（天）
+		Status         int64   `db:"status"`          // 状态：0->正常；1->禁用
+		CommissionRate float64 `db:"commission_rate"` // 佣金率
+		DiscountRate   float64 `db:"discount_rate"`   // 折扣率
+		Note           string  `db:"note"`
 	}
 )
 
@@ -101,8 +100,8 @@ func (m *defaultUmsMemberPrepaidCardModel) FindOne(ctx context.Context, id int64
 func (m *defaultUmsMemberPrepaidCardModel) Insert(ctx context.Context, data *UmsMemberPrepaidCard) (sql.Result, error) {
 	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, data.Id)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberPrepaidCardRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberPrepaidCardRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDay, data.Status, data.CommissionRate, data.DiscountRate, data.Note)
 	}, gozeroUmsMemberPrepaidCardIdKey)
 	return ret, err
 }
@@ -110,11 +109,11 @@ func (m *defaultUmsMemberPrepaidCardModel) Insert(ctx context.Context, data *Ums
 func (m *defaultUmsMemberPrepaidCardModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberPrepaidCard) (sql.Result, error) {
 	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, data.Id)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberPrepaidCardRowsExpectAutoSet)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberPrepaidCardRowsExpectAutoSet)
 		if session != nil {
-			return session.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note)
+			return session.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDay, data.Status, data.CommissionRate, data.DiscountRate, data.Note)
 		}
-		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note)
+		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDay, data.Status, data.CommissionRate, data.DiscountRate, data.Note)
 	}, gozeroUmsMemberPrepaidCardIdKey)
 	return ret, err
 }
@@ -122,7 +121,7 @@ func (m *defaultUmsMemberPrepaidCardModel) Update(ctx context.Context, data *Ums
 	gozeroUmsMemberPrepaidCardIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberPrepaidCardIdPrefix, data.Id)
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberPrepaidCardRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note, data.Id)
+		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDay, data.Status, data.CommissionRate, data.DiscountRate, data.Note, data.Id)
 	}, gozeroUmsMemberPrepaidCardIdKey)
 	return err
 }
@@ -132,9 +131,9 @@ func (m *defaultUmsMemberPrepaidCardModel) UpdateTx(ctx context.Context, session
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberPrepaidCardRowsWithPlaceHolder)
 		if session != nil {
-			return session.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note, data.Id)
+			return session.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDay, data.Status, data.CommissionRate, data.DiscountRate, data.Note, data.Id)
 		}
-		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDays, data.Status, data.CommissionRate, data.FirstCommission, data.DiscountRate, data.Note, data.Id)
+		return conn.ExecCtx(ctx, query, data.Name, data.FaceValue, data.ExpiredDay, data.Status, data.CommissionRate, data.DiscountRate, data.Note, data.Id)
 	}, gozeroUmsMemberPrepaidCardIdKey)
 	return err
 }

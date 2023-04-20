@@ -142,6 +142,11 @@ func (s *UmsServer) MemberLevelAdd(ctx context.Context, in *umsclient.MemberLeve
 	return l.MemberLevelAdd(in)
 }
 
+func (s *UmsServer) MemberLevelInfo(ctx context.Context, in *umsclient.MemberLevelInfoReq) (*umsclient.MemberLevelInfoResp, error) {
+	l := logic.NewMemberLevelInfoLogic(ctx, s.svcCtx)
+	return l.MemberLevelInfo(in)
+}
+
 func (s *UmsServer) MemberLevelList(ctx context.Context, in *umsclient.MemberLevelListReq) (*umsclient.MemberLevelListResp, error) {
 	l := logic.NewMemberLevelListLogic(ctx, s.svcCtx)
 	return l.MemberLevelList(in)
@@ -195,6 +200,21 @@ func (s *UmsServer) MemberMemberTagRelationUpdate(ctx context.Context, in *umscl
 func (s *UmsServer) MemberMemberTagRelationDelete(ctx context.Context, in *umsclient.MemberMemberTagRelationDeleteReq) (*umsclient.MemberMemberTagRelationDeleteResp, error) {
 	l := logic.NewMemberMemberTagRelationDeleteLogic(ctx, s.svcCtx)
 	return l.MemberMemberTagRelationDelete(in)
+}
+
+func (s *UmsServer) MemberPrepaidCardList(ctx context.Context, in *umsclient.MemberPrepaidCardListReq) (*umsclient.MemberPrepaidCardListResp, error) {
+	l := logic.NewMemberPrepaidCardListLogic(ctx, s.svcCtx)
+	return l.MemberPrepaidCardList(in)
+}
+
+func (s *UmsServer) MemberPrepaidCardLogAdd(ctx context.Context, in *umsclient.MemberPrepaidCardLogAddReq) (*umsclient.MemberPrepaidCardLogAddResp, error) {
+	l := logic.NewMemberPrepaidCardLogAddLogic(ctx, s.svcCtx)
+	return l.MemberPrepaidCardLogAdd(in)
+}
+
+func (s *UmsServer) MemberPrepaidCardLogList(ctx context.Context, in *umsclient.MemberPrepaidCardLogListReq) (*umsclient.MemberPrepaidCardLogListResp, error) {
+	l := logic.NewMemberPrepaidCardLogListLogic(ctx, s.svcCtx)
+	return l.MemberPrepaidCardLogList(in)
 }
 
 func (s *UmsServer) MemberPrepaidCardRelationAdd(ctx context.Context, in *umsclient.MemberPrepaidCardRelationAddReq) (*umsclient.MemberPrepaidCardRelationAddResp, error) {

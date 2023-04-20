@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"fmt"
 	"time"
 	"zero-admin/common/errorx"
 	"zero-admin/rpc/model/omsmodel"
+	"zero-admin/rpc/model/pmsmodel"
 	"zero-admin/rpc/oms/internal/svc"
 	"zero-admin/rpc/oms/oms"
 	"zero-admin/rpc/oms/omsclient"
@@ -56,6 +56,7 @@ func (l *OrderAddLogic) OrderAdd(in *oms.OrderAddReq) (*oms.OrderAddResp, error)
 			SourceType:            in.SourceType,
 			Status:                in.Status,
 			OrderType:             in.OrderType,
+			IsDelivery:            in.IsDelivery,
 			DeliveryCompany:       in.DeliveryCompany,
 			DeliverySn:            in.DeliverySn,
 			AutoConfirmDay:        in.AutoConfirmDay,
@@ -87,17 +88,22 @@ func (l *OrderAddLogic) OrderAdd(in *oms.OrderAddReq) (*oms.OrderAddResp, error)
 		if err != nil {
 			return err
 		}
-		lastInsertId, err := result.LastInsertId()
+		lastInsertId, err = result.LastInsertId()
 		if err != nil {
 			return err
 		}
-		fmt.Println(lastInsertId)
-		productList, err := l.svcCtx.PmsProductModel.ProductListByIds(in.Ids)
+		var goodsIds []int64
+		for _, good := range in.Goods {
+			goodsIds = append(goodsIds, good.Id)
+		}
+		var productList *[]pmsmodel.PmsProduct
+		err = l.svcCtx.DbEngin.Find(&productList, goodsIds).Error
+		// productList, err := l.svcCtx.PmsProductModel.ProductListByIds(in.Ids)
 		if err != nil {
+			logx.WithContext(l.ctx).Infof(err.Error())
 			return err
 		}
-		for _, v := range *productList {
-			fmt.Println(v)
+		for k, v := range *productList {
 			_, err := l.svcCtx.OmsOrderItemModel.InsertTx(l.ctx, session, &omsmodel.OmsOrderItem{
 				OrderId:           lastInsertId,
 				OrderSn:           in.OrderSn,
@@ -107,7 +113,7 @@ func (l *OrderAddLogic) OrderAdd(in *oms.OrderAddReq) (*oms.OrderAddResp, error)
 				ProductBrand:      v.BrandName,
 				ProductSn:         v.ProductSn,
 				ProductPrice:      float64(v.Price),
-				ProductQuantity:   0,
+				ProductQuantity:   in.Goods[k].Num,
 				ProductSkuId:      0,
 				ProductSkuCode:    "",
 				ProductCategoryId: v.ProductCategoryId,

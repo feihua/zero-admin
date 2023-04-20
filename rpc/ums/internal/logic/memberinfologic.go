@@ -7,7 +7,6 @@ import (
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 
-	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/tools/goctl/model/sql/test/model"
@@ -37,9 +36,22 @@ func (l *MemberInfoLogic) MemberInfo(in *umsclient.MemberInfoReq) (*umsclient.Me
 	if member == nil {
 		return nil, errors.Wrapf(ErrUserNoExistsError, "id:%d", in.Id)
 	}
-	var respMember umsclient.Member
-	_ = copier.Copy(&respMember, member)
+	// var respMember umsclient.Member
+	// _ = copier.Copy(&respMember, member)
+	// return &umsclient.MemberInfoResp{
+	// 	Member: &respMember,
+	// }, nil
+
 	return &umsclient.MemberInfoResp{
-		Member: &respMember,
+		Member: &umsclient.Member{
+			Id:             member.Id,
+			Phone:          member.Phone,
+			Nickname:       member.Nickname,
+			Icon:           member.Icon,
+			LevelId:        member.MemberLevelId,
+			ParentId:       member.ParentId,
+			Balance:        member.Balance,
+			InvitationCode: member.InvitationCode,
+		},
 	}, nil
 }

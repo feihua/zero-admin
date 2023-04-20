@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"encoding/json"
+	"zero-admin/common/ctxdata"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -26,8 +27,10 @@ func NewOrderCancelLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderC
 }
 
 func (l *OrderCancelLogic) OrderCancel(req types.OrderCancelReq) (resp *types.OrderCancelResp, err error) {
+
+	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	_, err = l.svcCtx.Oms.OrderCancel(l.ctx, &omsclient.OrderCancelReq{
-		UserId:  req.UserId,
+		UserId:  memberId,
 		OrderId: req.OrderId,
 	})
 

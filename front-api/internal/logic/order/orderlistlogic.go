@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"encoding/json"
+	"zero-admin/common/ctxdata"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -26,8 +27,13 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderLis
 }
 
 func (l *OrderListLogic) OrderList(req types.OrderListReq) (resp *types.OrderListResp, err error) {
+
+	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	orderList, err := l.svcCtx.Oms.OrderListByMemberId(l.ctx, &omsclient.OrderListByMemberIdReq{
-		MemberId: req.UserId,
+		MemberId: memberId,
+		Current:  req.Page,
+		PageSize: req.Limit,
+		Status:   req.Status,
 	})
 
 	if err != nil {
@@ -62,8 +68,10 @@ func (l *OrderListLogic) OrderList(req types.OrderListReq) (resp *types.OrderLis
 			ActualPrice:     item.ActualPrice,
 			OrderStatusText: item.OrderStatusText,
 			HandleOption:    item.HandleOption,
+			CreateTime:      item.CreateTime,
 			//商品信息
-			GoodsList: goodsListData,
+			GoodsList:  goodsListData,
+			IsDelivery: item.IsDelivery,
 		})
 	}
 

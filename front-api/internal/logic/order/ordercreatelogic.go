@@ -3,7 +3,6 @@ package order
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"zero-admin/common/ctxdata"
 	"zero-admin/common/errorx"
@@ -11,6 +10,7 @@ import (
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
 	"zero-admin/rpc/oms/omsclient"
+	"zero-admin/rpc/pms/pmsclient"
 	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -30,28 +30,68 @@ func NewOrderCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Order
 	}
 }
 
-func (l *OrderCreateLogic) OrderCreate(req *types.OrderReq) (resp *types.OrderResp, err error) {
-	goodsIds := req.GoodsIds
-	// paymenetId := req.PaymentId
+func (l *OrderCreateLogic) OrderCreate(req *types.OrderCreateReq) (resp *types.OrderCreateResp, err error) {
+	goods := req.Goods
+	l.Logger.Infof("goods", goods)
+	paymenetId := req.PaymentId
 	addressId := req.AddressId
 	memberId := ctxdata.GetUidFromCtx(l.ctx)
+	addressDetail := &umsclient.MemberReceiveAddressQueryDetailResp{
+		Name:          "",
+		PhoneNumber:   "",
+		PostCode:      "",
+		Province:      "",
+		City:          "",
+		Region:        "",
+		DetailAddress: "",
+	}
+	var (
+		resulterr  error
+		isDelivery int64
+	)
 
-	addressDetail, err := l.svcCtx.Ums.MemberReceiveAddressQueryDetail(l.ctx, &umsclient.MemberReceiveAddressQueryDetailReq{
-		MemberId:  memberId,
-		AddressID: addressId,
-	})
+	//0自取，>0配送（选择配送地址）
+	if addressId != 0 {
+		isDelivery = 1
+		addressDetail, resulterr = l.svcCtx.Ums.MemberReceiveAddressQueryDetail(l.ctx, &umsclient.MemberReceiveAddressQueryDetailReq{
+			MemberId:  memberId,
+			AddressID: addressId,
+		})
 
-	if err != nil {
+		if resulterr != nil {
+			return nil, resulterr
+		}
+	} else {
+		isDelivery = 0
+	}
+	// 根据产品ID计算产品价格
+	var omsgoods []*omsclient.Good
+	totalAmount := 0.00
+
+	for _, good := range goods {
+		product, err := l.svcCtx.Pms.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{Id: good.Id})
+		if err != nil {
+			return nil, err
+		}
+		omsgoods = append(omsgoods, &omsclient.Good{
+			Id:  good.Id,
+			Num: good.Num,
+		})
+		totalAmount += product.Price * float64(good.Num)
+	}
+
+	member, err := l.svcCtx.Ums.MemberInfo(l.ctx, &umsclient.MemberInfoReq{Id: memberId})
+	if member == nil || err != nil {
+		return nil, err
+	}
+	l.Logger.Infof("会员等级ID：%s", member.Member.LevelId)
+	memberLevel, err := l.svcCtx.Ums.MemberLevelInfo(l.ctx, &umsclient.MemberLevelInfoReq{Id: member.Member.LevelId})
+	if memberLevel == nil || err != nil {
 		return nil, err
 	}
 
-	totalAmount := 0.00
-	for _, goodsId := range goodsIds {
-		fmt.Println(goodsId)
-		totalAmount += 20
-	}
+	// 组装提交订单
 	orderSn := uniqueid.GenSn(uniqueid.SN_PREFIX_HOMESTAY_ORDER)
-
 	OrderAddResp, err := l.svcCtx.Oms.OrderAdd(l.ctx, &omsclient.OrderAddReq{
 		MemberId:              memberId,
 		CouponId:              0,
@@ -59,16 +99,17 @@ func (l *OrderCreateLogic) OrderCreate(req *types.OrderReq) (resp *types.OrderRe
 		CreateTime:            "",
 		MemberUsername:        "",
 		TotalAmount:           totalAmount,
-		PayAmount:             totalAmount * 0.7,
+		PayAmount:             totalAmount * memberLevel.Info.DiscountRate,
 		FreightAmount:         0.00,
 		PromotionAmount:       0.00,
 		IntegrationAmount:     0.00,
 		CouponAmount:          0.00,
 		DiscountAmount:        0.00,
-		PayType:               0,
+		PayType:               paymenetId,
 		SourceType:            1,
 		Status:                0,
 		OrderType:             0,
+		IsDelivery:            isDelivery,
 		DeliveryCompany:       "",
 		DeliverySn:            "",
 		AutoConfirmDay:        15,
@@ -91,7 +132,7 @@ func (l *OrderCreateLogic) OrderCreate(req *types.OrderReq) (resp *types.OrderRe
 		ConfirmStatus:         0,
 		DeleteStatus:          0,
 		UseIntegration:        0,
-		Ids:                   goodsIds,
+		Goods:                 omsgoods,
 	})
 
 	if err != nil {
@@ -100,7 +141,7 @@ func (l *OrderCreateLogic) OrderCreate(req *types.OrderReq) (resp *types.OrderRe
 		return nil, errorx.NewDefaultError("添加订单信息失败")
 	}
 
-	return &types.OrderResp{
+	return &types.OrderCreateResp{
 		Errno: 0,
 		Data: types.OrderData{
 			OrderId: OrderAddResp.OrderId,

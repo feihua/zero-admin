@@ -43,7 +43,7 @@ type (
 	UmsMemberLevel struct {
 		Id                    int64   `db:"id"`
 		Name                  string  `db:"name"`
-		GrowthPoint           int64   `db:"growth_point"`
+		GrowthPoint           int64   `db:"growth_point"`            // 成长点位
 		DefaultStatus         int64   `db:"default_status"`          // 是否为默认等级：0->不是；1->是
 		FreeFreightPoint      float64 `db:"free_freight_point"`      // 免运费标准
 		CommentGrowthPoint    int64   `db:"comment_growth_point"`    // 每次评价获取的成长值
@@ -53,6 +53,7 @@ type (
 		PriviledgePromotion   int64   `db:"priviledge_promotion"`    // 是否有专享活动特权
 		PriviledgeMemberPrice int64   `db:"priviledge_member_price"` // 是否有会员价格特权
 		PriviledgeBirthday    int64   `db:"priviledge_birthday"`     // 是否有生日特权
+		DiscountRate          float64 `db:"discount_rate"`           // 折扣率
 		Note                  string  `db:"note"`
 	}
 )
@@ -105,8 +106,8 @@ func (m *defaultUmsMemberLevelModel) FindOne(ctx context.Context, id int64) (*Um
 func (m *defaultUmsMemberLevelModel) Insert(ctx context.Context, data *UmsMemberLevel) (sql.Result, error) {
 	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, data.Id)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberLevelRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberLevelRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.DiscountRate, data.Note)
 	}, gozeroUmsMemberLevelIdKey)
 	return ret, err
 }
@@ -114,11 +115,11 @@ func (m *defaultUmsMemberLevelModel) Insert(ctx context.Context, data *UmsMember
 func (m *defaultUmsMemberLevelModel) InsertTx(ctx context.Context, session sqlx.Session, data *UmsMemberLevel) (sql.Result, error) {
 	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, data.Id)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberLevelRowsExpectAutoSet)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, umsMemberLevelRowsExpectAutoSet)
 		if session != nil {
-			return session.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note)
+			return session.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.DiscountRate, data.Note)
 		}
-		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note)
+		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.DiscountRate, data.Note)
 	}, gozeroUmsMemberLevelIdKey)
 	return ret, err
 }
@@ -126,7 +127,7 @@ func (m *defaultUmsMemberLevelModel) Update(ctx context.Context, data *UmsMember
 	gozeroUmsMemberLevelIdKey := fmt.Sprintf("%s%v", cacheGozeroUmsMemberLevelIdPrefix, data.Id)
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberLevelRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note, data.Id)
+		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.DiscountRate, data.Note, data.Id)
 	}, gozeroUmsMemberLevelIdKey)
 	return err
 }
@@ -136,9 +137,9 @@ func (m *defaultUmsMemberLevelModel) UpdateTx(ctx context.Context, session sqlx.
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, umsMemberLevelRowsWithPlaceHolder)
 		if session != nil {
-			return session.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note, data.Id)
+			return session.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.DiscountRate, data.Note, data.Id)
 		}
-		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.Note, data.Id)
+		return conn.ExecCtx(ctx, query, data.Name, data.GrowthPoint, data.DefaultStatus, data.FreeFreightPoint, data.CommentGrowthPoint, data.PriviledgeFreeFreight, data.PriviledgeSignIn, data.PriviledgeComment, data.PriviledgePromotion, data.PriviledgeMemberPrice, data.PriviledgeBirthday, data.DiscountRate, data.Note, data.Id)
 	}, gozeroUmsMemberLevelIdKey)
 	return err
 }

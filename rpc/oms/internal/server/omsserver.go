@@ -42,6 +42,11 @@ func (s *OmsServer) OrderDelete(ctx context.Context, in *omsclient.OrderDeleteRe
 	return l.OrderDelete(in)
 }
 
+func (s *OmsServer) OrderByOrderId(ctx context.Context, in *omsclient.OrderByOrderIdReq) (*omsclient.OrderByOrderIdResp, error) {
+	l := logic.NewOrderByOrderIdLogic(ctx, s.svcCtx)
+	return l.OrderByOrderId(in)
+}
+
 func (s *OmsServer) OrderListByMemberId(ctx context.Context, in *omsclient.OrderListByMemberIdReq) (*omsclient.OrderListByMemberIdResp, error) {
 	l := logic.NewOrderListByMemberIdLogic(ctx, s.svcCtx)
 	return l.OrderListByMemberId(in)

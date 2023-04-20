@@ -2,7 +2,9 @@ package logic
 
 import (
 	"context"
+	"time"
 
+	"zero-admin/rpc/model/umsmodel"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -24,7 +26,20 @@ func NewMemberPrepaidCardRelationAddLogic(ctx context.Context, svcCtx *svc.Servi
 }
 
 func (l *MemberPrepaidCardRelationAddLogic) MemberPrepaidCardRelationAdd(in *umsclient.MemberPrepaidCardRelationAddReq) (*umsclient.MemberPrepaidCardRelationAddResp, error) {
-	// todo: add your logic here and delete this line
+	currentTime := time.Now()
+	_, err := l.svcCtx.UmsMemberPrepaidCardRelationModel.Insert(l.ctx, &umsmodel.UmsMemberPrepaidCardRelation{
+		MemberId:      in.MemberId,
+		PrepaidCardId: in.PrepaidCardId,
+		PrepaidCardSn: in.PrepaidCardSn,
+		Balance:       0.00,
+		Status:        0,
+		CreateTime:    currentTime,
+		ExpiredTime:   currentTime.AddDate(3, 0, 0),
+		Note:          "",
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &umsclient.MemberPrepaidCardRelationAddResp{}, nil
 }

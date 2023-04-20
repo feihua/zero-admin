@@ -18,7 +18,7 @@ func AddressListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		}
 
 		l := address.NewAddressListLogic(r.Context(), svcCtx)
-		resp, err := l.AddressList(req)
+		resp, err := l.AddressList(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

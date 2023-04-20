@@ -25,7 +25,6 @@ func NewMemberProductCategoryRelationAddLogic(ctx context.Context, svcCtx *svc.S
 }
 
 func (l *MemberProductCategoryRelationAddLogic) MemberProductCategoryRelationAdd(in *umsclient.MemberProductCategoryRelationAddReq) (*umsclient.MemberProductCategoryRelationAddResp, error) {
-	// todo: add your logic here and delete this line
 	_, err := l.svcCtx.UmsMemberProductCategoryRelationModel.Insert(l.ctx, &umsmodel.UmsMemberProductCategoryRelation{
 		MemberId:          in.MemberId,
 		ProductCategoryId: in.ProductCategoryId,

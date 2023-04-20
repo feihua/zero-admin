@@ -1,25 +1,24 @@
-package order
+package card
 
 import (
 	"net/http"
 
-	"zero-admin/front-api/internal/logic/order"
+	"github.com/zeromicro/go-zero/rest/httpx"
+	"zero-admin/front-api/internal/logic/card"
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
-
-	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func OrderCreateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func CardBuyHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.OrderCreateReq
+		var req types.CardBuyReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := order.NewOrderCreateLogic(r.Context(), svcCtx)
-		resp, err := l.OrderCreate(&req)
+		l := card.NewCardBuyLogic(r.Context(), svcCtx)
+		resp, err := l.CardBuy(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -3,27 +3,54 @@ info(
     author: "koobe"
     email: "1002219331@qq.com"
 )
-type OrderReq struct {
-    GoodsIds []int64 `json:"goodsIds"`
+type Good struct {
+    Id int64 `json:"id"`
+    Num int64 `json:"num"`
+}
+type OrderCreateReq struct {
+    Goods []Good `json:"goods"`
     AddressId int64 `json:"addressId"`
     PaymentId int64 `json:"paymentId"`
+    Note string `json:"note"`
 }
 
-type OrderResp struct {
+type OrderCreateResp struct {
     Errno int64 `json:"code"`
     Data OrderData `json:"data"`
     Errmsg string `json:"msg"`
-}
-
-type OrderListReq struct {
-    Page int64 `json:"page"`
-    Limit int64 `json:"limit"`
-    UserId int64 `json:"userId"`
 }
 type OrderData struct {
     OrderId int64 `json:"orderId"`
     OrderSn string `json:"orderSn"`
 }
+
+type OrderDetailReq struct {
+    OrderId int64 `form:"orderId"`
+}
+
+type OrderDetailResp struct {
+    Errno int64 `json:"code"`
+    Data   OrderDetailData `json:"data"`
+    Errmsg string `json:"msg"`
+}
+
+type OrderDetailData struct {
+    Id int32 `json:"id"`
+    OrderSn string `json:"orderSn"`
+    ActualPrice string `json:"actualPrice"`
+    OrderStatusText string `json:"orderStatusText"`
+    HandleOption string `json:"handleOption"`
+    CreateTime string `json:"createTime"`
+    GoodsList []GoodsListData `json:"goodsList"`
+    IsDelivery int64 `json:"isDelivery"`
+}
+
+type OrderListReq struct {
+    Page int64 `form:"page"`
+    Limit int64 `form:"limit"`
+    status int64 `form:"status"`
+}
+
 type OrderListResp struct {
     Errno int64 `json:"code"`
     Data   []OrderListData `json:"data"`
@@ -36,8 +63,11 @@ type OrderListData struct {
     ActualPrice string `json:"actualPrice"`
     OrderStatusText string `json:"orderStatusText"`
     HandleOption string `json:"handleOption"`
+    CreateTime string `json:"createTime"`
     GoodsList []GoodsListData `json:"goodsList"`
+    IsDelivery int64 `json:"isDelivery"`
 }
+
 type GoodsListData struct {
     Id int32 `json:"id"`
     GoodsName string `json:"goodsName"`
@@ -45,11 +75,11 @@ type GoodsListData struct {
     PicUrl string `json:"picUrl"`
     Specifications string `json:"specifications"`
     Price string `json:"price"`
+    Quantity int64 `json:"quantity"`
 }
 
 type OrderCancelReq struct {
-    UserId int64 `json:"userId"`
-    OrderId int64 `json:"orderId"`
+    OrderId int64 `form:"orderId"`
 }
 type OrderCancelResp struct {
     Errno int64 `json:"code"`
@@ -57,8 +87,7 @@ type OrderCancelResp struct {
 }
 
 type OrderRefundReq struct {
-    UserId int64 `json:"userId"`
-    OrderId int64 `json:"orderId"`
+    OrderId int64 `form:"orderId"`
 }
 type OrderRefundResp struct {
     Errno int64 `json:"code"`
@@ -66,8 +95,7 @@ type OrderRefundResp struct {
 }
 
 type OrderConfirmReq struct {
-    UserId int64 `json:"userId"`
-    OrderId int64 `json:"orderId"`
+    OrderId int64 `form:"orderId"`
 }
 type OrderConfirmResp struct {
     Errno int64 `json:"code"`
@@ -84,9 +112,8 @@ type OrderDeleteResp struct {
 }
 
 type OrderGoodsReq struct {
-    UserId int64 `json:"userId"`
-    OrderId int64 `json:"orderId"`
-    GoodsId int64 `json:"goodsId"`
+    OrderId int64 `form:"orderId"`
+    GoodsId int64 `form:"goodsId"`
 }
 type OrderGoodsResp struct {
     Errno int64 `json:"code"`
@@ -131,7 +158,10 @@ type OrderCommentResp struct {
 )
 service front-api {
     @handler OrderCreate
-    post /create (OrderReq) returns (OrderResp)
+    post /create (OrderCreateReq) returns (OrderCreateResp)
+
+    @handler OrderDetail
+    get /detail (OrderDetailReq) returns (OrderDetailResp)
 
     @handler OrderList
     get /list (OrderListReq) returns (OrderListResp)

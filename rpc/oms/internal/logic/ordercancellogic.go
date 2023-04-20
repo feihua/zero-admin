@@ -37,7 +37,7 @@ func (l *OrderCancelLogic) OrderCancel(in *omsclient.OrderCancelReq) (*omsclient
 	}
 
 	//检测是否能够取消
-	//订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	//订单状态：0->待付款；1->已付款待收件；2->已收件服务中；3->上挂待取件；4->已取件；5->无效订单
 	//例如订单没有被取消，且没有支付，则可支付，可取消
 	if order.Status != 0 {
 		reqStr, _ := json.Marshal(in)
@@ -46,9 +46,9 @@ func (l *OrderCancelLogic) OrderCancel(in *omsclient.OrderCancelReq) (*omsclient
 	}
 
 	//设置订单已取消状态
-	// if l.svcCtx.OmsOrderModel.UpdateOrderStatus(5, order.Id) != nil {
-	// 	return nil, errors.New("设置订单已取消状态失败")
-	// }
+	if l.svcCtx.OmsOrderModel.UpdateOrderStatus(l.ctx, 5, order.Id) != nil {
+		return nil, errors.New("设置订单已取消状态失败")
+	}
 
 	//todo 商品货品数量增加
 

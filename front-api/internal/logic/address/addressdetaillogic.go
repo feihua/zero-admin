@@ -3,6 +3,7 @@ package address
 import (
 	"context"
 	"encoding/json"
+	"zero-admin/common/ctxdata"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -25,10 +26,10 @@ func NewAddressDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addr
 	}
 }
 
-func (l *AddressDetailLogic) AddressDetail(req types.AddressDetailReq) (resp *types.AddressDetailResp, err error) {
-
+func (l *AddressDetailLogic) AddressDetail(req *types.AddressDetailReq) (resp *types.AddressDetailResp, err error) {
+	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	addressQueryDetail, err := l.svcCtx.Ums.MemberReceiveAddressQueryDetail(l.ctx, &umsclient.MemberReceiveAddressQueryDetailReq{
-		MemberId:  req.UserID,
+		MemberId:  memberId,
 		AddressID: req.AddressID,
 	})
 

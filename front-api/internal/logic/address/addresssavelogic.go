@@ -26,7 +26,7 @@ func NewAddressSaveLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addres
 	}
 }
 
-func (l *AddressSaveLogic) AddressSave(req types.AddressSaveReq) (resp *types.AddressSaveResp, err error) {
+func (l *AddressSaveLogic) AddressSave(req *types.AddressSaveReq) (resp *types.AddressSaveResp, err error) {
 	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	_, err = l.svcCtx.Ums.MemberReceiveAddressAdd(l.ctx, &umsclient.MemberReceiveAddressAddReq{
 		MemberId:      memberId,

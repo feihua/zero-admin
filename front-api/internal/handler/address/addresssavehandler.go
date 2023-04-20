@@ -18,7 +18,7 @@ func AddressSaveHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		}
 
 		l := address.NewAddressSaveLogic(r.Context(), svcCtx)
-		resp, err := l.AddressSave(req)
+		resp, err := l.AddressSave(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

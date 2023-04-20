@@ -60,6 +60,8 @@ type (
 	MemberLevelAddResp                      = umsclient.MemberLevelAddResp
 	MemberLevelDeleteReq                    = umsclient.MemberLevelDeleteReq
 	MemberLevelDeleteResp                   = umsclient.MemberLevelDeleteResp
+	MemberLevelInfoReq                      = umsclient.MemberLevelInfoReq
+	MemberLevelInfoResp                     = umsclient.MemberLevelInfoResp
 	MemberLevelListData                     = umsclient.MemberLevelListData
 	MemberLevelListReq                      = umsclient.MemberLevelListReq
 	MemberLevelListResp                     = umsclient.MemberLevelListResp
@@ -88,6 +90,14 @@ type (
 	MemberMemberTagRelationListResp         = umsclient.MemberMemberTagRelationListResp
 	MemberMemberTagRelationUpdateReq        = umsclient.MemberMemberTagRelationUpdateReq
 	MemberMemberTagRelationUpdateResp       = umsclient.MemberMemberTagRelationUpdateResp
+	MemberPrepaidCardListData               = umsclient.MemberPrepaidCardListData
+	MemberPrepaidCardListReq                = umsclient.MemberPrepaidCardListReq
+	MemberPrepaidCardListResp               = umsclient.MemberPrepaidCardListResp
+	MemberPrepaidCardLogAddReq              = umsclient.MemberPrepaidCardLogAddReq
+	MemberPrepaidCardLogAddResp             = umsclient.MemberPrepaidCardLogAddResp
+	MemberPrepaidCardLogListData            = umsclient.MemberPrepaidCardLogListData
+	MemberPrepaidCardLogListReq             = umsclient.MemberPrepaidCardLogListReq
+	MemberPrepaidCardLogListResp            = umsclient.MemberPrepaidCardLogListResp
 	MemberPrepaidCardRelationAddReq         = umsclient.MemberPrepaidCardRelationAddReq
 	MemberPrepaidCardRelationAddResp        = umsclient.MemberPrepaidCardRelationAddResp
 	MemberPrepaidCardRelationDeleteReq      = umsclient.MemberPrepaidCardRelationDeleteReq
@@ -183,6 +193,7 @@ type (
 		IntegrationConsumeSettingUpdate(ctx context.Context, in *IntegrationConsumeSettingUpdateReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingUpdateResp, error)
 		IntegrationConsumeSettingDelete(ctx context.Context, in *IntegrationConsumeSettingDeleteReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingDeleteResp, error)
 		MemberLevelAdd(ctx context.Context, in *MemberLevelAddReq, opts ...grpc.CallOption) (*MemberLevelAddResp, error)
+		MemberLevelInfo(ctx context.Context, in *MemberLevelInfoReq, opts ...grpc.CallOption) (*MemberLevelInfoResp, error)
 		MemberLevelList(ctx context.Context, in *MemberLevelListReq, opts ...grpc.CallOption) (*MemberLevelListResp, error)
 		MemberLevelUpdate(ctx context.Context, in *MemberLevelUpdateReq, opts ...grpc.CallOption) (*MemberLevelUpdateResp, error)
 		MemberLevelDelete(ctx context.Context, in *MemberLevelDeleteReq, opts ...grpc.CallOption) (*MemberLevelDeleteResp, error)
@@ -194,6 +205,9 @@ type (
 		MemberMemberTagRelationList(ctx context.Context, in *MemberMemberTagRelationListReq, opts ...grpc.CallOption) (*MemberMemberTagRelationListResp, error)
 		MemberMemberTagRelationUpdate(ctx context.Context, in *MemberMemberTagRelationUpdateReq, opts ...grpc.CallOption) (*MemberMemberTagRelationUpdateResp, error)
 		MemberMemberTagRelationDelete(ctx context.Context, in *MemberMemberTagRelationDeleteReq, opts ...grpc.CallOption) (*MemberMemberTagRelationDeleteResp, error)
+		MemberPrepaidCardList(ctx context.Context, in *MemberPrepaidCardListReq, opts ...grpc.CallOption) (*MemberPrepaidCardListResp, error)
+		MemberPrepaidCardLogAdd(ctx context.Context, in *MemberPrepaidCardLogAddReq, opts ...grpc.CallOption) (*MemberPrepaidCardLogAddResp, error)
+		MemberPrepaidCardLogList(ctx context.Context, in *MemberPrepaidCardLogListReq, opts ...grpc.CallOption) (*MemberPrepaidCardLogListResp, error)
 		MemberPrepaidCardRelationAdd(ctx context.Context, in *MemberPrepaidCardRelationAddReq, opts ...grpc.CallOption) (*MemberPrepaidCardRelationAddResp, error)
 		MemberPrepaidCardRelationList(ctx context.Context, in *MemberPrepaidCardRelationListReq, opts ...grpc.CallOption) (*MemberPrepaidCardRelationListResp, error)
 		MemberPrepaidCardRelationUpdate(ctx context.Context, in *MemberPrepaidCardRelationUpdateReq, opts ...grpc.CallOption) (*MemberPrepaidCardRelationUpdateResp, error)
@@ -356,6 +370,11 @@ func (m *defaultUms) MemberLevelAdd(ctx context.Context, in *MemberLevelAddReq, 
 	return client.MemberLevelAdd(ctx, in, opts...)
 }
 
+func (m *defaultUms) MemberLevelInfo(ctx context.Context, in *MemberLevelInfoReq, opts ...grpc.CallOption) (*MemberLevelInfoResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberLevelInfo(ctx, in, opts...)
+}
+
 func (m *defaultUms) MemberLevelList(ctx context.Context, in *MemberLevelListReq, opts ...grpc.CallOption) (*MemberLevelListResp, error) {
 	client := umsclient.NewUmsClient(m.cli.Conn())
 	return client.MemberLevelList(ctx, in, opts...)
@@ -409,6 +428,21 @@ func (m *defaultUms) MemberMemberTagRelationUpdate(ctx context.Context, in *Memb
 func (m *defaultUms) MemberMemberTagRelationDelete(ctx context.Context, in *MemberMemberTagRelationDeleteReq, opts ...grpc.CallOption) (*MemberMemberTagRelationDeleteResp, error) {
 	client := umsclient.NewUmsClient(m.cli.Conn())
 	return client.MemberMemberTagRelationDelete(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberPrepaidCardList(ctx context.Context, in *MemberPrepaidCardListReq, opts ...grpc.CallOption) (*MemberPrepaidCardListResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberPrepaidCardList(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberPrepaidCardLogAdd(ctx context.Context, in *MemberPrepaidCardLogAddReq, opts ...grpc.CallOption) (*MemberPrepaidCardLogAddResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberPrepaidCardLogAdd(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberPrepaidCardLogList(ctx context.Context, in *MemberPrepaidCardLogListReq, opts ...grpc.CallOption) (*MemberPrepaidCardLogListResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberPrepaidCardLogList(ctx, in, opts...)
 }
 
 func (m *defaultUms) MemberPrepaidCardRelationAdd(ctx context.Context, in *MemberPrepaidCardRelationAddReq, opts ...grpc.CallOption) (*MemberPrepaidCardRelationAddResp, error) {

@@ -8,7 +8,6 @@ info(
 type AddressListReq struct {
     Current int64 `json:"current,default=1"`
     PageSize int64 `json:"pageSize,default=20"`
-    UserId int64 `json:"userId"`
 }
 
 type AddressListResp struct {
@@ -31,7 +30,7 @@ type AddressList struct {
     UserID int64 `json:"userId"`                //用户Id
     Province string `json:"province"`           //省
     City string `json:"city"`                   //市
-    County string `json:"county"`               //国家
+    Region string `json:"region"`               //区
     AddressDetail string `json:"addressDetail"` //详情地址
     AreaCode string `json:"areaCode"`           //地区编码
     Tel string `json:"tel"`                     //电话
@@ -78,7 +77,6 @@ type AddressDeleteResp struct {
 }
 
 type AddressDetailReq struct {
-    UserID int64 `json:"userId"`
     AddressID int64 `json:"addressID"`
 }
 type AddressDetailResp struct {
@@ -121,9 +119,8 @@ service front-api {
     @handler AddressUpdate
     post /update (AddressUpdateReq) returns (AddressUpdateResp)
 
-
     @handler AddressDelete
-    get /delete (AddressDeleteReq) returns (AddressDeleteResp)
+    post /delete (AddressDeleteReq) returns (AddressDeleteResp)
 
     @handler AddressDetail
     get /detail (AddressDetailReq) returns (AddressDetailResp)

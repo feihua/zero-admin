@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"encoding/json"
+	"zero-admin/common/ctxdata"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -26,8 +27,9 @@ func NewOrderRefundLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderR
 }
 
 func (l *OrderRefundLogic) OrderRefund(req types.OrderRefundReq) (resp *types.OrderRefundResp, err error) {
+	memberId := ctxdata.GetUidFromCtx(l.ctx)
 	_, err = l.svcCtx.Oms.OrderRefund(l.ctx, &omsclient.OrderRefundReq{
-		UserId:  req.UserId,
+		UserId:  memberId,
 		OrderId: req.OrderId,
 	})
 

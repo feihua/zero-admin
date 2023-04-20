@@ -5,43 +5,81 @@ info(
 )
 
 type CardListReq struct {
+    Page int64 `form:"page"`
+    Limit int64 `form:"limit"`
 }
 
 type CardListResp struct {
-    Errno int64 `json:"errno"`
+    Errno int64 `json:"code"`
     Data CardListData `json:"data"`
-    Errmsg string `json:"errmsg"`
+    Errmsg string `json:"msg"`
 }
 
 type CardListData struct {
-    CardTotal CardTotal `json:"cardTotal"` //统计数据
-    CardList []CartList `json:"cardList"`  //商品数据列表
+    CardList []CardList `json:"cardList"`  //商品数据列表
 }
 
-type CartList struct {
+type CardList struct {
     ID int64 `json:"id"`                            //id
     Name string `json:"name"`                    //名称
     FaceValue float64 `json:"faceValue"`                  //面值
-    ExpiredYear int64 `json:"expiredYear"`                 //失效周期（年）
+    ExpiredDay int64 `json:"expiredDay"`                 //失效周期（天）
     Status int64 `json:"status"`             //状态
     CommissionRate float64 `json:"commissionRate"`              //佣金率
-    DiscountRate int64 `json:"discountRate"`                      //折扣率
+    DiscountRate float64 `json:"discountRate"`    //折扣率
     Note string `json:"note"`                    //备注
 }
 
+type CardBuyReq struct {
+    CardId int64 `form:"cardId"` //卡号
+}
+
+type CardBuyResp struct {
+    Errno int64 `json:"code"`
+    Errmsg string `json:"msg"`
+}
+
+
+type CardMyListReq struct {
+    Page int64 `form:"page"`
+    Limit int64 `form:"limit"`
+}
+
+type CardMyListResp struct {
+    Errno int64 `json:"code"`
+    Data CardMyListData `json:"data"`
+    Errmsg string `json:"msg"`
+}
+
+type CardMyListData struct {
+    CardMyList []CardMyList `json:"cardMyList"`  //商品数据列表
+}
+
+type CardMyList struct {
+    ID int64 `json:"id"`                            
+    PrepaidCardId int64 `json:"prepaidCardId"` 
+    PrepaidCardSn string `json:"prepaidCardSn"`             
+    Balance float64 `json:"balance"`                  
+    Status int64 `json:"status"`                
+    CreateTime string `json:"createTime"`             //状态
+    ExpiredTime string `json:"expiredTime"`              
+    UpdateTime string `json:"updateTime"`                      
+    Note string `json:"note"`                    //备注
+}
 
 @server(
-    //    jwt: Auth
-    group: cart
-    prefix: /api/cart
+    jwt: Auth
+    group: card
+    prefix: /api/card
 )
 service front-api {
-    @handler CartList
-    get /index/:userId (CartListReq) returns (CartListResp)
+    @handler CardList
+    get /list (CardListReq) returns (CardListResp)
 
-    @handler CartAdd
-    get /add (CartAddReq) returns (CartAddResp)
+    @handler CardBuy
+    get /buy (CardBuyReq) returns (CardBuyResp)
 
-    @handler CartFastAdd
-    get /fastadd (CartFastAddReq) returns (CartFastAddResp)
+    @handler CardMyList
+    get /mylist (CardMyListReq) returns (CardMyListResp)
+
 }
