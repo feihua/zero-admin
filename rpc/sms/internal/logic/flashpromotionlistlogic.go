@@ -25,7 +25,7 @@ func NewFlashPromotionListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 func (l *FlashPromotionListLogic) FlashPromotionList(in *sms.FlashPromotionListReq) (*sms.FlashPromotionListResp, error) {
 	all, err := l.svcCtx.SmsFlashPromotionModel.FindAll(l.ctx, in.Title, in.Status, in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsFlashPromotionModel.Count(l.ctx)
+	count, _ := l.svcCtx.SmsFlashPromotionModel.Count(l.ctx, in.Title, in.Status)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
