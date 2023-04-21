@@ -27,11 +27,11 @@ func NewFlashPromotionLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *FlashPromotionLogDeleteLogic) FlashPromotionLogDelete(req types.DeleteFlashPromotionLogReq) (*types.DeleteFlashPromotionLogResp, error) {
 	_, err := l.svcCtx.Sms.FlashPromotionLogDelete(l.ctx, &smsclient.FlashPromotionLogDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除限时购通知记录异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %v,删除限时购通知记录异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除限时购通知记录失败")
 	}
 	return &types.DeleteFlashPromotionLogResp{

@@ -28,7 +28,7 @@ func NewFlashPromotionLogUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 func (l *FlashPromotionLogUpdateLogic) FlashPromotionLogUpdate(in *sms.FlashPromotionLogUpdateReq) (*sms.FlashPromotionLogUpdateResp, error) {
 	SubscribeTime, _ := time.Parse("2006-01-02 15:04:05", in.SubscribeTime)
 	SendTime, _ := time.Parse("2006-01-02 15:04:05", in.SendTime)
-	err := l.svcCtx.SmsFlashPromotionLogModel.Update(smsmodel.SmsFlashPromotionLog{
+	err := l.svcCtx.SmsFlashPromotionLogModel.Update(l.ctx, &smsmodel.SmsFlashPromotionLog{
 		Id:            in.Id,
 		MemberId:      in.MemberId,
 		ProductId:     in.ProductId,

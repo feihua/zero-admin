@@ -26,8 +26,8 @@ func NewFlashPromotionAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *FlashPromotionAddLogic) FlashPromotionAdd(in *sms.FlashPromotionAddReq) (*sms.FlashPromotionAddResp, error) {
-	StartDate, _ := time.Parse("2006-01-02 15:04:05", in.StartDate)
-	EndDate, _ := time.Parse("2006-01-02 15:04:05", in.EndDate)
+	StartDate, _ := time.Parse("2006-01-02", in.StartDate)
+	EndDate, _ := time.Parse("2006-01-02", in.EndDate)
 	_, err := l.svcCtx.SmsFlashPromotionModel.Insert(l.ctx, &smsmodel.SmsFlashPromotion{
 		Title:      in.Title,
 		StartDate:  StartDate,

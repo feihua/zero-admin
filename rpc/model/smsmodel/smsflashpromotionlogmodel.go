@@ -1,69 +1,38 @@
 package smsmodel
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
-	"strings"
-	"time"
-
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"github.com/zeromicro/go-zero/core/stringx"
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/builderx"
+	"strings"
 )
 
-var (
-	smsFlashPromotionLogFieldNames          = builderx.FieldNames(&SmsFlashPromotionLog{})
-	smsFlashPromotionLogRows                = strings.Join(smsFlashPromotionLogFieldNames, ",")
-	smsFlashPromotionLogRowsExpectAutoSet   = strings.Join(stringx.Remove(smsFlashPromotionLogFieldNames, "id", "create_time", "update_time"), ",")
-	smsFlashPromotionLogRowsWithPlaceHolder = strings.Join(stringx.Remove(smsFlashPromotionLogFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
-)
+var _ SmsFlashPromotionLogModel = (*customSmsFlashPromotionLogModel)(nil)
 
 type (
-	SmsFlashPromotionLogModel struct {
-		conn  sqlx.SqlConn
-		table string
+	// SmsFlashPromotionLogModel is an interface to be customized, add more methods here,
+	// and implement the added methods in customSmsFlashPromotionLogModel.
+	SmsFlashPromotionLogModel interface {
+		smsFlashPromotionLogModel
+		Count(ctx context.Context) (int64, error)
+		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsFlashPromotionLog, error)
+		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
-	SmsFlashPromotionLog struct {
-		Id            int64     `db:"id"`
-		MemberId      int64     `db:"member_id"`
-		ProductId     int64     `db:"product_id"`
-		MemberPhone   string    `db:"member_phone"`
-		ProductName   string    `db:"product_name"`
-		SubscribeTime time.Time `db:"subscribe_time"` // 会员订阅时间
-		SendTime      time.Time `db:"send_time"`
+	customSmsFlashPromotionLogModel struct {
+		*defaultSmsFlashPromotionLogModel
 	}
 )
 
-func NewSmsFlashPromotionLogModel(conn sqlx.SqlConn) *SmsFlashPromotionLogModel {
-	return &SmsFlashPromotionLogModel{
-		conn:  conn,
-		table: "sms_flash_promotion_log",
+// NewSmsFlashPromotionLogModel returns a model for the database table.
+func NewSmsFlashPromotionLogModel(conn sqlx.SqlConn) SmsFlashPromotionLogModel {
+	return &customSmsFlashPromotionLogModel{
+		defaultSmsFlashPromotionLogModel: newSmsFlashPromotionLogModel(conn),
 	}
 }
 
-func (m *SmsFlashPromotionLogModel) Insert(data SmsFlashPromotionLog) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, smsFlashPromotionLogRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.MemberId, data.ProductId, data.MemberPhone, data.ProductName, data.SubscribeTime, data.SendTime)
-	return ret, err
-}
-
-func (m *SmsFlashPromotionLogModel) FindOne(id int64) (*SmsFlashPromotionLog, error) {
-	query := fmt.Sprintf("select %s from %s where id = ? limit 1", smsFlashPromotionLogRows, m.table)
-	var resp SmsFlashPromotionLog
-	err := m.conn.QueryRow(&resp, query, id)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
-
-func (m *SmsFlashPromotionLogModel) FindAll(Current int64, PageSize int64) (*[]SmsFlashPromotionLog, error) {
+func (m *customSmsFlashPromotionLogModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsFlashPromotionLog, error) {
 
 	query := fmt.Sprintf("select %s from %s limit ?,?", smsFlashPromotionLogRows, m.table)
 	var resp []SmsFlashPromotionLog
@@ -78,7 +47,7 @@ func (m *SmsFlashPromotionLogModel) FindAll(Current int64, PageSize int64) (*[]S
 	}
 }
 
-func (m *SmsFlashPromotionLogModel) Count() (int64, error) {
+func (m *customSmsFlashPromotionLogModel) Count(ctx context.Context) (int64, error) {
 	query := fmt.Sprintf("select count(*) as count from %s", m.table)
 
 	var count int64
@@ -94,14 +63,8 @@ func (m *SmsFlashPromotionLogModel) Count() (int64, error) {
 	}
 }
 
-func (m *SmsFlashPromotionLogModel) Update(data SmsFlashPromotionLog) error {
-	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsFlashPromotionLogRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.MemberId, data.ProductId, data.MemberPhone, data.ProductName, data.SubscribeTime, data.SendTime, data.Id)
-	return err
-}
-
-func (m *SmsFlashPromotionLogModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id = ?", m.table)
-	_, err := m.conn.Exec(query, id)
+func (m *customSmsFlashPromotionLogModel) DeleteByIds(ctx context.Context, ids []int64) error {
+	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
 	return err
 }

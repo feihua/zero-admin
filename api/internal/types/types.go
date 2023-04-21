@@ -2143,12 +2143,11 @@ type ListFlashPromotionResp struct {
 }
 
 type UpdateFlashPromotionReq struct {
-	Id         int64  `json:"id"`
-	Title      string `json:"title"`
-	StartDate  string `json:"startDate"`  // 开始日期
-	EndDate    string `json:"endDate"`    // 结束日期
-	Status     int64  `json:"status"`     // 上下线状态
-	CreateTime string `json:"createTime"` // 秒杀时间段名称
+	Id        int64  `json:"id"`
+	Title     string `json:"title"`
+	StartDate string `json:"startDate"` // 开始日期
+	EndDate   string `json:"endDate"`   // 结束日期
+	Status    int64  `json:"status"`    // 上下线状态
 }
 
 type UpdateFlashPromotionResp struct {
@@ -2157,7 +2156,7 @@ type UpdateFlashPromotionResp struct {
 }
 
 type DeleteFlashPromotionReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteFlashPromotionResp struct {
@@ -2219,7 +2218,7 @@ type UpdateFlashPromotionLogResp struct {
 }
 
 type DeleteFlashPromotionLogReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteFlashPromotionLogResp struct {

@@ -27,7 +27,7 @@ func NewFlashPromotionLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(in *sms.FlashPromotionLogAddReq) (*sms.FlashPromotionLogAddResp, error) {
 	SubscribeTime, _ := time.Parse("2006-01-02 15:04:05", in.SubscribeTime)
-	_, err := l.svcCtx.SmsFlashPromotionLogModel.Insert(smsmodel.SmsFlashPromotionLog{
+	_, err := l.svcCtx.SmsFlashPromotionLogModel.Insert(l.ctx, &smsmodel.SmsFlashPromotionLog{
 		MemberId:      in.MemberId,
 		ProductId:     in.ProductId,
 		MemberPhone:   in.MemberPhone,

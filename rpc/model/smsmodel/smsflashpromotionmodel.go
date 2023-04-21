@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
+	"strings"
 )
 
 var _ SmsFlashPromotionModel = (*customSmsFlashPromotionModel)(nil)
@@ -16,6 +17,7 @@ type (
 		smsFlashPromotionModel
 		Count(ctx context.Context, title string, status int64) (int64, error)
 		FindAll(ctx context.Context, title string, status int64, Current int64, PageSize int64) (*[]SmsFlashPromotion, error)
+		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
 	customSmsFlashPromotionModel struct {
@@ -73,4 +75,10 @@ func (m *customSmsFlashPromotionModel) Count(ctx context.Context, title string, 
 	default:
 		return 0, err
 	}
+}
+
+func (m *defaultSmsFlashPromotionModel) DeleteByIds(ctx context.Context, ids []int64) error {
+	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	return err
 }

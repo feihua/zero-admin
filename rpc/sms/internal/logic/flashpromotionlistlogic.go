@@ -39,8 +39,8 @@ func (l *FlashPromotionListLogic) FlashPromotionList(in *sms.FlashPromotionListR
 		list = append(list, &sms.FlashPromotionListData{
 			Id:         item.Id,
 			Title:      item.Title,
-			StartDate:  item.StartDate.Format("2006-01-02 15:04:05"),
-			EndDate:    item.EndDate.Format("2006-01-02 15:04:05"),
+			StartDate:  item.StartDate.Format("2006-01-02"),
+			EndDate:    item.EndDate.Format("2006-01-02"),
 			Status:     item.Status,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
 		})

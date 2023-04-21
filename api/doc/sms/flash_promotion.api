@@ -44,14 +44,13 @@ type (
         StartDate string `json:"startDate"`   // 开始日期
         EndDate string `json:"endDate"`       // 结束日期
         Status int64 `json:"status"`          // 上下线状态
-        CreateTime string `json:"createTime"` // 秒杀时间段名称
     }
     UpdateFlashPromotionResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
     }
     DeleteFlashPromotionReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteFlashPromotionResp struct {
         Code string `json:"code"`

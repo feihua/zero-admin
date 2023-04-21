@@ -275,7 +275,7 @@ message FlashPromotionAddResp {
 }
 
 message FlashPromotionDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message FlashPromotionDeleteResp {
@@ -288,7 +288,6 @@ message FlashPromotionUpdateReq {
   string StartDate = 3; //开始日期
   string EndDate = 4; //结束日期
   int64 Status = 5; //上下线状态
-  string CreateTime = 6; //创建时间
 
 }
 
@@ -336,7 +335,7 @@ message FlashPromotionLogAddResp {
 }
 
 message FlashPromotionLogDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message FlashPromotionLogDeleteResp {

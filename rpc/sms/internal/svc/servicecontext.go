@@ -13,7 +13,7 @@ type ServiceContext struct {
 	SmsCouponModel                        *smsmodel.SmsCouponModel
 	SmsCouponProductCategoryRelationModel *smsmodel.SmsCouponProductCategoryRelationModel
 	SmsCouponProductRelationModel         *smsmodel.SmsCouponProductRelationModel
-	SmsFlashPromotionLogModel             *smsmodel.SmsFlashPromotionLogModel
+	SmsFlashPromotionLogModel             smsmodel.SmsFlashPromotionLogModel
 	SmsFlashPromotionModel                smsmodel.SmsFlashPromotionModel
 	SmsFlashPromotionProductRelationModel *smsmodel.SmsFlashPromotionProductRelationModel
 	SmsFlashPromotionSessionModel         *smsmodel.SmsFlashPromotionSessionModel
