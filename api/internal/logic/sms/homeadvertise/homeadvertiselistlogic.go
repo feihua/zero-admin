@@ -29,8 +29,13 @@ func NewHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseReq) (*types.ListHomeAdvertiseResp, error) {
 	resp, err := l.svcCtx.Sms.HomeAdvertiseList(l.ctx, &smsclient.HomeAdvertiseListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
+		Name:      req.Name,
+		Type:      req.Type,
+		StartTime: req.StartTime,
+		EndTime:   req.EndTime,
+		Status:    req.Status,
+		Current:   req.Current,
+		PageSize:  req.PageSize,
 	})
 
 	if err != nil {

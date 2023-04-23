@@ -25,7 +25,7 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *HomeNewProductAddLogic) HomeNewProductAdd(in *sms.HomeNewProductAddReq) (*sms.HomeNewProductAddResp, error) {
-	_, err := l.svcCtx.SmsHomeNewProductModel.Insert(smsmodel.SmsHomeNewProduct{
+	_, err := l.svcCtx.SmsHomeNewProductModel.Insert(l.ctx, &smsmodel.SmsHomeNewProduct{
 		ProductId:       in.ProductId,
 		ProductName:     in.ProductName,
 		RecommendStatus: in.RecommendStatus,

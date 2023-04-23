@@ -6,10 +6,10 @@ info(
 
 type (
     addHomeNewProductReq struct {
-        ProductId int64 `json:"productId"`
-        ProductName string `json:"productName"`
-        RecommendStatus int64 `json:"recommendStatus"`
-        Sort int64 `json:"sort"`
+        ProductId int64 `json:"productId"`             // 商品id
+        ProductName string `json:"productName"`        // 商品名称
+        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+        Sort int64 `json:"sort"`                       // 排序
     }
     addHomeNewProductResp struct {
         Code string `json:"code"`
@@ -18,13 +18,15 @@ type (
     ListHomeNewProductReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
+        ProductName string `json:"productName,optional"`         // 商品名称
+        RecommendStatus int64 `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
     }
     ListtHomeNewProductData struct {
         Id int64 `json:"id"`
-        ProductId int64 `json:"productId"`
-        ProductName string `json:"productName"`
-        RecommendStatus int64 `json:"recommendStatus"`
-        Sort int64 `json:"sort"`
+        ProductId int64 `json:"productId"`             // 商品id
+        ProductName string `json:"productName"`        // 商品名称
+        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+        Sort int64 `json:"sort"`                       // 排序
     }
     ListHomeNewProductResp struct {
         Code string `json:"code"`
@@ -37,17 +39,17 @@ type (
     }
     UpdateHomeNewProductReq struct {
         Id int64 `json:"id"`
-        ProductId int64 `json:"productId"`
-        ProductName string `json:"productName"`
-        RecommendStatus int64 `json:"recommendStatus"`
-        Sort int64 `json:"sort"`
+        ProductId int64 `json:"productId"`             // 商品id
+        ProductName string `json:"productName"`        // 商品名称
+        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+        Sort int64 `json:"sort"`                       // 排序
     }
     UpdateHomeNewProductResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
     }
     DeleteHomeNewProductReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteHomeNewProductResp struct {
         Code string `json:"code"`

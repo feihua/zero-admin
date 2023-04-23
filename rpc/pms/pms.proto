@@ -386,6 +386,10 @@ message BrandListReq {
   int64 pageSize = 2;
 }
 
+message BrandListByIdsReq {
+  repeated int64 ids = 1;
+}
+
 message BrandListData{
   int64    Id = 1;
   string  Name = 2;
@@ -1311,6 +1315,7 @@ service Pms {
 
   rpc BrandAdd(BrandAddReq) returns(BrandAddResp);
   rpc BrandList(BrandListReq) returns(BrandListResp);
+  rpc BrandListByIds(BrandListByIdsReq) returns(BrandListResp);
   rpc BrandUpdate(BrandUpdateReq) returns(BrandUpdateResp);
   rpc BrandDelete(BrandDeleteReq) returns(BrandDeleteResp);
 

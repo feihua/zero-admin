@@ -24,7 +24,7 @@ func NewHomeRecommendProductDeleteLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(in *sms.HomeRecommendProductDeleteReq) (*sms.HomeRecommendProductDeleteResp, error) {
-	err := l.svcCtx.SmsHomeRecommendProductModel.Delete(in.Id)
+	err := l.svcCtx.SmsHomeRecommendProductModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

@@ -1,70 +1,50 @@
 package smsmodel
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
-	"strings"
-
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"github.com/zeromicro/go-zero/core/stringx"
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/builderx"
+	"strings"
+	"zero-admin/rpc/sms/sms"
 )
 
-var (
-	smsHomeRecommendProductFieldNames          = builderx.FieldNames(&SmsHomeRecommendProduct{})
-	smsHomeRecommendProductRows                = strings.Join(smsHomeRecommendProductFieldNames, ",")
-	smsHomeRecommendProductRowsExpectAutoSet   = strings.Join(stringx.Remove(smsHomeRecommendProductFieldNames, "id", "create_time", "update_time"), ",")
-	smsHomeRecommendProductRowsWithPlaceHolder = strings.Join(stringx.Remove(smsHomeRecommendProductFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
-)
+var _ SmsHomeRecommendProductModel = (*customSmsHomeRecommendProductModel)(nil)
 
 type (
-	SmsHomeRecommendProductModel struct {
-		conn  sqlx.SqlConn
-		table string
+	// SmsHomeRecommendProductModel is an interface to be customized, add more methods here,
+	// and implement the added methods in customSmsHomeRecommendProductModel.
+	SmsHomeRecommendProductModel interface {
+		smsHomeRecommendProductModel
+		Count(ctx context.Context, in *sms.HomeRecommendProductListReq) (int64, error)
+		FindAll(ctx context.Context, in *sms.HomeRecommendProductListReq) (*[]SmsHomeRecommendProduct, error)
+		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
-	SmsHomeRecommendProduct struct {
-		Id              int64  `db:"id"`
-		ProductId       int64  `db:"product_id"`
-		ProductName     string `db:"product_name"`
-		RecommendStatus int64  `db:"recommend_status"`
-		Sort            int64  `db:"sort"`
+	customSmsHomeRecommendProductModel struct {
+		*defaultSmsHomeRecommendProductModel
 	}
 )
 
-func NewSmsHomeRecommendProductModel(conn sqlx.SqlConn) *SmsHomeRecommendProductModel {
-	return &SmsHomeRecommendProductModel{
-		conn:  conn,
-		table: "sms_home_recommend_product",
+// NewSmsHomeRecommendProductModel returns a model for the database table.
+func NewSmsHomeRecommendProductModel(conn sqlx.SqlConn) SmsHomeRecommendProductModel {
+	return &customSmsHomeRecommendProductModel{
+		defaultSmsHomeRecommendProductModel: newSmsHomeRecommendProductModel(conn),
 	}
 }
 
-func (m *SmsHomeRecommendProductModel) Insert(data SmsHomeRecommendProduct) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, smsHomeRecommendProductRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.ProductId, data.ProductName, data.RecommendStatus, data.Sort)
-	return ret, err
-}
+func (m *customSmsHomeRecommendProductModel) FindAll(ctx context.Context, in *sms.HomeRecommendProductListReq) (*[]SmsHomeRecommendProduct, error) {
 
-func (m *SmsHomeRecommendProductModel) FindOne(id int64) (*SmsHomeRecommendProduct, error) {
-	query := fmt.Sprintf("select %s from %s where id = ? limit 1", smsHomeRecommendProductRows, m.table)
-	var resp SmsHomeRecommendProduct
-	err := m.conn.QueryRow(&resp, query, id)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
+	where := "1=1"
+	if len(in.ProductName) > 0 {
+		where = where + fmt.Sprintf(" AND title like '%%%s%%'", in.ProductName)
 	}
-}
-
-func (m *SmsHomeRecommendProductModel) FindAll(Current int64, PageSize int64) (*[]SmsHomeRecommendProduct, error) {
-
-	query := fmt.Sprintf("select %s from %s limit ?,?", smsHomeRecommendProductRows, m.table)
+	if in.RecommendStatus != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.RecommendStatus)
+	}
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", smsHomeRecommendProductRows, m.table, where)
 	var resp []SmsHomeRecommendProduct
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -75,8 +55,15 @@ func (m *SmsHomeRecommendProductModel) FindAll(Current int64, PageSize int64) (*
 	}
 }
 
-func (m *SmsHomeRecommendProductModel) Count() (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customSmsHomeRecommendProductModel) Count(ctx context.Context, in *sms.HomeRecommendProductListReq) (int64, error) {
+	where := "1=1"
+	if len(in.ProductName) > 0 {
+		where = where + fmt.Sprintf(" AND title like '%%%s%%'", in.ProductName)
+	}
+	if in.RecommendStatus != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.RecommendStatus)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)
@@ -91,14 +78,8 @@ func (m *SmsHomeRecommendProductModel) Count() (int64, error) {
 	}
 }
 
-func (m *SmsHomeRecommendProductModel) Update(data SmsHomeRecommendProduct) error {
-	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsHomeRecommendProductRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.ProductId, data.ProductName, data.RecommendStatus, data.Sort, data.Id)
-	return err
-}
-
-func (m *SmsHomeRecommendProductModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id = ?", m.table)
-	_, err := m.conn.Exec(query, id)
+func (m *customSmsHomeRecommendProductModel) DeleteByIds(ctx context.Context, ids []int64) error {
+	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
 	return err
 }

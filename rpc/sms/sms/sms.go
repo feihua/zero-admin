@@ -94,6 +94,7 @@ type (
 	HomeAdvertiseListResp                   = smsclient.HomeAdvertiseListResp
 	HomeAdvertiseUpdateReq                  = smsclient.HomeAdvertiseUpdateReq
 	HomeAdvertiseUpdateResp                 = smsclient.HomeAdvertiseUpdateResp
+	HomeBrandAddData                        = smsclient.HomeBrandAddData
 	HomeBrandAddReq                         = smsclient.HomeBrandAddReq
 	HomeBrandAddResp                        = smsclient.HomeBrandAddResp
 	HomeBrandDeleteReq                      = smsclient.HomeBrandDeleteReq

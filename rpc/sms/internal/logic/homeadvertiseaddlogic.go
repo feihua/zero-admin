@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/smsmodel"
 
@@ -28,7 +29,8 @@ func NewHomeAdvertiseAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(in *sms.HomeAdvertiseAddReq) (*sms.HomeAdvertiseAddResp, error) {
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
-	_, err := l.svcCtx.SmsHomeAdvertiseModel.Insert(smsmodel.SmsHomeAdvertise{
+	note := sql.NullString{String: in.Note, Valid: true}
+	_, err := l.svcCtx.SmsHomeAdvertiseModel.Insert(l.ctx, &smsmodel.SmsHomeAdvertise{
 		Name:       in.Name,
 		Type:       in.Type,
 		Pic:        in.Pic,
@@ -38,7 +40,7 @@ func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(in *sms.HomeAdvertiseAddReq) (*
 		ClickCount: in.ClickCount,
 		OrderCount: in.OrderCount,
 		Url:        in.Url,
-		Note:       in.Note,
+		Note:       note,
 		Sort:       in.Sort,
 	})
 	if err != nil {

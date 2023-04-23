@@ -29,8 +29,10 @@ func NewHomeRecommendSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req types.ListHomeRecommendSubjectReq) (*types.ListHomeRecommendSubjectResp, error) {
 	resp, err := l.svcCtx.Sms.HomeRecommendSubjectList(l.ctx, &smsclient.HomeRecommendSubjectListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
+		Current:         req.Current,
+		PageSize:        req.PageSize,
+		SubjectName:     req.SubjectName,
+		RecommendStatus: req.RecommendStatus,
 	})
 
 	if err != nil {

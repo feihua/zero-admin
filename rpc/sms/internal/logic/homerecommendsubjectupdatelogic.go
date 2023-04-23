@@ -25,7 +25,7 @@ func NewHomeRecommendSubjectUpdateLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *HomeRecommendSubjectUpdateLogic) HomeRecommendSubjectUpdate(in *sms.HomeRecommendSubjectUpdateReq) (*sms.HomeRecommendSubjectUpdateResp, error) {
-	err := l.svcCtx.SmsHomeRecommendSubjectModel.Update(smsmodel.SmsHomeRecommendSubject{
+	err := l.svcCtx.SmsHomeRecommendSubjectModel.Update(l.ctx, &smsmodel.SmsHomeRecommendSubject{
 		Id:              in.Id,
 		SubjectId:       in.SubjectId,
 		SubjectName:     in.SubjectName,

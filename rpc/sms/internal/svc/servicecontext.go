@@ -17,11 +17,11 @@ type ServiceContext struct {
 	SmsFlashPromotionModel                smsmodel.SmsFlashPromotionModel
 	SmsFlashPromotionProductRelationModel *smsmodel.SmsFlashPromotionProductRelationModel
 	SmsFlashPromotionSessionModel         *smsmodel.SmsFlashPromotionSessionModel
-	SmsHomeAdvertiseModel                 *smsmodel.SmsHomeAdvertiseModel
-	SmsHomeBrandModel                     *smsmodel.SmsHomeBrandModel
-	SmsHomeNewProductModel                *smsmodel.SmsHomeNewProductModel
-	SmsHomeRecommendProductModel          *smsmodel.SmsHomeRecommendProductModel
-	SmsHomeRecommendSubjectModel          *smsmodel.SmsHomeRecommendSubjectModel
+	SmsHomeAdvertiseModel                 smsmodel.SmsHomeAdvertiseModel
+	SmsHomeBrandModel                     smsmodel.SmsHomeBrandModel
+	SmsHomeNewProductModel                smsmodel.SmsHomeNewProductModel
+	SmsHomeRecommendProductModel          smsmodel.SmsHomeRecommendProductModel
+	SmsHomeRecommendSubjectModel          smsmodel.SmsHomeRecommendSubjectModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {

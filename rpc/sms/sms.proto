@@ -513,41 +513,76 @@ message FlashPromotionSessionListResp {
 
 
 message HomeAdvertiseAddReq {
-  string    	Name       = 2;
-  int64     	Type       = 3;
-  string    	Pic        = 4;
-  string 	StartTime  = 5;
-  string 	EndTime    = 6;
-  int64     	Status     = 7;
-  int64     	ClickCount = 8;
-  int64     	OrderCount = 9;
-  string    	Url        = 10;
-  string    	Note       = 11;
-  int64     	Sort       = 12;
+  int64 Id = 1; //
+  string Name = 2; //名称
+  int64 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
+  string Pic = 4; //图片地址
+  string StartTime = 5; //开始时间
+  string EndTime = 6; //结束时间
+  int64 Status = 7; //上下线状态：0->下线；1->上线
+  int64 ClickCount = 8; //点击数
+  int64 OrderCount = 9; //下单数
+  string Url = 10; //链接地址
+  string Note = 11; //备注
+  int64 Sort = 12; //排序
+
 }
 
 message HomeAdvertiseAddResp {
   string pong = 1;
 }
 
-message HomeAdvertiseListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
+message HomeAdvertiseDeleteReq {
+  repeated int64 ids = 1;
 }
 
-message HomeAdvertiseListData{
-  int64     	Id         = 1;
-  string    	Name       = 2;
-  int64     	Type       = 3;
-  string    	Pic        = 4;
-  string 	StartTime  = 5;
-  string 	EndTime    = 6;
-  int64     	Status     = 7;
-  int64     	ClickCount = 8;
-  int64     	OrderCount = 9;
-  string    	Url        = 10;
-  string    	Note       = 11;
-  int64     	Sort       = 12;
+message HomeAdvertiseDeleteResp {
+  string pong = 1;
+}
+
+message HomeAdvertiseUpdateReq {
+  int64 Id = 1; //
+  string Name = 2; //名称
+  int64 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
+  string Pic = 4; //图片地址
+  string StartTime = 5; //开始时间
+  string EndTime = 6; //结束时间
+  int64 Status = 7; //上下线状态：0->下线；1->上线
+  int64 ClickCount = 8; //点击数
+  int64 OrderCount = 9; //下单数
+  string Url = 10; //链接地址
+  string Note = 11; //备注
+  int64 Sort = 12; //排序
+
+}
+
+message HomeAdvertiseUpdateResp {
+  string pong = 1;
+}
+
+message HomeAdvertiseListReq {
+  string Name = 1; //名称
+  int64 Type = 2; //轮播位置：0->PC首页轮播；1->app首页轮播
+  string StartTime = 3; //开始时间
+  string EndTime = 4; //结束时间
+  int64 Status = 5; //上下线状态：0->下线；1->上线
+  int64 current = 6;
+  int64 pageSize = 7;
+}
+
+message HomeAdvertiseListData {
+  int64 Id = 1; //
+  string Name = 2; //名称
+  int64 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
+  string Pic = 4; //图片地址
+  string StartTime = 5; //开始时间
+  string EndTime = 6; //结束时间
+  int64 Status = 7; //上下线状态：0->下线；1->上线
+  int64 ClickCount = 8; //点击数
+  int64 OrderCount = 9; //下单数
+  string Url = 10; //链接地址
+  string Note = 11; //备注
+  int64 Sort = 12; //排序
 
 }
 
@@ -556,56 +591,58 @@ message HomeAdvertiseListResp {
   repeated  HomeAdvertiseListData list = 2;
 }
 
-message HomeAdvertiseUpdateReq {
-  int64     	Id         = 1;
-  string    	Name       = 2;
-  int64     	Type       = 3;
-  string    	Pic        = 4;
-  string 	StartTime  = 5;
-  string 	EndTime    = 6;
-  int64     	Status     = 7;
-  int64     	ClickCount = 8;
-  int64     	OrderCount = 9;
-  string    	Url        = 10;
-  string    	Note       = 11;
-  int64     	Sort       = 12;
-}
-
-message HomeAdvertiseUpdateResp {
-  string pong = 1;
-}
-
-message HomeAdvertiseDeleteReq {
-  int64 id = 1;
-}
-
-message HomeAdvertiseDeleteResp {
-  string pong = 1;
-}
-
 
 message HomeBrandAddReq {
-  int64 	BrandId   = 2;
-  string	BrandName   = 3;
-  int64 	RecommendStatus = 4;
-  int64 	Sort          = 5;
+  repeated HomeBrandAddData BrandAddData = 1; //
+
+}
+message HomeBrandAddData {
+  int64 BrandId = 1; //商品品牌id
+  string BrandName = 2; //商品品牌名称
+  int64 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 4; //排序
+
 }
 
 message HomeBrandAddResp {
   string pong = 1;
 }
 
-message HomeBrandListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
+message HomeBrandDeleteReq {
+  repeated int64 ids = 1;
 }
 
-message HomeBrandListData{
-  int64 	Id      = 1;
-  int64 	BrandId   = 2;
-  string	BrandName   = 3;
-  int64 	RecommendStatus = 4;
-  int64 	Sort          = 5;
+message HomeBrandDeleteResp {
+  string pong = 1;
+}
+
+message HomeBrandUpdateReq {
+  int64 Id = 1; //
+  int64 BrandId = 2; //商品品牌id
+  string BrandName = 3; //商品品牌名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
+
+}
+
+message HomeBrandUpdateResp {
+  string pong = 1;
+}
+
+message HomeBrandListReq {
+  string BrandName = 1; //商品品牌名称
+  int64 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
+  int64 current = 3;
+  int64 pageSize = 4;
+
+}
+
+message HomeBrandListData {
+  int64 Id = 1; //
+  int64 BrandId = 2; //商品品牌id
+  string BrandName = 3; //商品品牌名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
 
 }
 
@@ -614,49 +651,55 @@ message HomeBrandListResp {
   repeated  HomeBrandListData list = 2;
 }
 
-message HomeBrandUpdateReq {
-  int64 	Id      = 1;
-  int64 	BrandId   = 2;
-  string	BrandName   = 3;
-  int64 	RecommendStatus = 4;
-  int64 	Sort          = 5;
-}
-
-message HomeBrandUpdateResp {
-  string pong = 1;
-}
-
-message HomeBrandDeleteReq {
-  int64 id = 1;
-}
-
-message HomeBrandDeleteResp {
-  string pong = 1;
-}
-
 
 message HomeNewProductAddReq {
-  int64  	ProductId      = 2;
-  string 	ProductName    = 3;
-  int64  	RecommendStatus  = 4;
-  int64  	Sort             = 5;
+  int64 Id = 1; //
+  int64 ProductId = 2; //商品id
+  string ProductName = 3; //商品名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
+
 }
 
 message HomeNewProductAddResp {
   string pong = 1;
 }
 
+message HomeNewProductDeleteReq {
+  repeated int64 ids = 1;
+}
+
+message HomeNewProductDeleteResp {
+  string pong = 1;
+}
+
+message HomeNewProductUpdateReq {
+  int64 Id = 1; //
+  int64 ProductId = 2; //商品id
+  string ProductName = 3; //商品名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
+
+}
+
+message HomeNewProductUpdateResp {
+  string pong = 1;
+}
+
 message HomeNewProductListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string ProductName = 3; //商品名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+
 }
 
-message HomeNewProductListData{
-  int64  	Id          = 1;
-  int64  	ProductId      = 2;
-  string 	ProductName    = 3;
-  int64  	RecommendStatus  = 4;
-  int64  	Sort             = 5;
+message HomeNewProductListData {
+  int64 Id = 1; //
+  int64 ProductId = 2; //商品id
+  string ProductName = 3; //商品名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
 
 }
 
@@ -665,49 +708,55 @@ message HomeNewProductListResp {
   repeated  HomeNewProductListData list = 2;
 }
 
-message HomeNewProductUpdateReq {
-  int64  	Id          = 1;
-  int64  	ProductId      = 2;
-  string 	ProductName    = 3;
-  int64  	RecommendStatus  = 4;
-  int64  	Sort             = 5;
-}
-
-message HomeNewProductUpdateResp {
-  string pong = 1;
-}
-
-message HomeNewProductDeleteReq {
-  int64 id = 1;
-}
-
-message HomeNewProductDeleteResp {
-  string pong = 1;
-}
-
 
 message HomeRecommendProductAddReq {
-  int64 	ProductId    = 2;
-  string	ProductName      = 3;
-  int64 	RecommendStatus  = 4;
-  int64 	Sort           = 5;
+  int64 Id = 1; //
+  int64 ProductId = 2; //商品id
+  string ProductName = 3; //商品名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
+
 }
 
 message HomeRecommendProductAddResp {
   string pong = 1;
 }
 
+message HomeRecommendProductDeleteReq {
+ repeated int64 ids = 1;
+}
+
+message HomeRecommendProductDeleteResp {
+  string pong = 1;
+}
+
+message HomeRecommendProductUpdateReq {
+  int64 Id = 1; //
+  int64 ProductId = 2; //商品id
+  string ProductName = 3; //商品名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
+
+}
+
+message HomeRecommendProductUpdateResp {
+  string pong = 1;
+}
+
 message HomeRecommendProductListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string ProductName = 3; //商品名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+
 }
 
-message HomeRecommendProductListData{
-  int64 	Id           = 1;
-  int64 	ProductId    = 2;
-  string	ProductName      = 3;
-  int64 	RecommendStatus  = 4;
-  int64 	Sort           = 5;
+message HomeRecommendProductListData {
+  int64 Id = 1; //
+  int64 ProductId = 2; //商品id
+  string ProductName = 3; //商品名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
 
 }
 
@@ -716,49 +765,56 @@ message HomeRecommendProductListResp {
   repeated  HomeRecommendProductListData list = 2;
 }
 
-message HomeRecommendProductUpdateReq {
-  int64 	Id           = 1;
-  int64 	ProductId    = 2;
-  string	ProductName      = 3;
-  int64 	RecommendStatus  = 4;
-  int64 	Sort           = 5;
-}
-
-message HomeRecommendProductUpdateResp {
-  string pong = 1;
-}
-
-message HomeRecommendProductDeleteReq {
-  int64 id = 1;
-}
-
-message HomeRecommendProductDeleteResp {
-  string pong = 1;
-}
 
 
 message HomeRecommendSubjectAddReq {
-  int64  	SubjectId     = 2;
-  string 	SubjectName      = 3;
-  int64  	RecommendStatus  = 4;
-  int64  	Sort           = 5;
+  int64 Id = 1; //
+  int64 SubjectId = 2; //专题id
+  string SubjectName = 3; //专题名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
+
 }
 
 message HomeRecommendSubjectAddResp {
   string pong = 1;
 }
 
+message HomeRecommendSubjectDeleteReq {
+  repeated int64 ids = 1;
+}
+
+message HomeRecommendSubjectDeleteResp {
+  string pong = 1;
+}
+
+message HomeRecommendSubjectUpdateReq {
+  int64 Id = 1; //
+  int64 SubjectId = 2; //专题id
+  string SubjectName = 3; //专题名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
+
+}
+
+message HomeRecommendSubjectUpdateResp {
+  string pong = 1;
+}
+
 message HomeRecommendSubjectListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string SubjectName = 3; //专题名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+
 }
 
-message HomeRecommendSubjectListData{
-  int64  	Id     = 1;
-  int64  	SubjectId     = 2;
-  string 	SubjectName      = 3;
-  int64  	RecommendStatus  = 4;
-  int64  	Sort           = 5;
+message HomeRecommendSubjectListData {
+  int64 Id = 1; //
+  int64 SubjectId = 2; //专题id
+  string SubjectName = 3; //专题名称
+  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 5; //排序
 
 }
 
@@ -767,25 +823,6 @@ message HomeRecommendSubjectListResp {
   repeated  HomeRecommendSubjectListData list = 2;
 }
 
-message HomeRecommendSubjectUpdateReq {
-  int64  	Id     = 1;
-  int64  	SubjectId     = 2;
-  string 	SubjectName      = 3;
-  int64  	RecommendStatus  = 4;
-  int64  	Sort           = 5;
-}
-
-message HomeRecommendSubjectUpdateResp {
-  string pong = 1;
-}
-
-message HomeRecommendSubjectDeleteReq {
-  int64 id = 1;
-}
-
-message HomeRecommendSubjectDeleteResp {
-  string pong = 1;
-}
 
 service Sms {
 

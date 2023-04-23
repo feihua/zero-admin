@@ -1,78 +1,61 @@
 package smsmodel
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
-	"strings"
-	"time"
-
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"github.com/zeromicro/go-zero/core/stringx"
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/builderx"
+	"strings"
+	"zero-admin/rpc/sms/sms"
 )
 
-var (
-	smsHomeAdvertiseFieldNames          = builderx.FieldNames(&SmsHomeAdvertise{})
-	smsHomeAdvertiseRows                = strings.Join(smsHomeAdvertiseFieldNames, ",")
-	smsHomeAdvertiseRowsExpectAutoSet   = strings.Join(stringx.Remove(smsHomeAdvertiseFieldNames, "id", "create_time", "update_time"), ",")
-	smsHomeAdvertiseRowsWithPlaceHolder = strings.Join(stringx.Remove(smsHomeAdvertiseFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
-)
+var _ SmsHomeAdvertiseModel = (*customSmsHomeAdvertiseModel)(nil)
 
 type (
-	SmsHomeAdvertiseModel struct {
-		conn  sqlx.SqlConn
-		table string
+	// SmsHomeAdvertiseModel is an interface to be customized, add more methods here,
+	// and implement the added methods in customSmsHomeAdvertiseModel.
+	SmsHomeAdvertiseModel interface {
+		smsHomeAdvertiseModel
+		Count(ctx context.Context, in *sms.HomeAdvertiseListReq) (int64, error)
+		FindAll(ctx context.Context, in *sms.HomeAdvertiseListReq) (*[]SmsHomeAdvertise, error)
+		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
-	SmsHomeAdvertise struct {
-		Id         int64     `db:"id"`
-		Name       string    `db:"name"`
-		Type       int64     `db:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-		Pic        string    `db:"pic"`
-		StartTime  time.Time `db:"start_time"`
-		EndTime    time.Time `db:"end_time"`
-		Status     int64     `db:"status"`      // 上下线状态：0->下线；1->上线
-		ClickCount int64     `db:"click_count"` // 点击数
-		OrderCount int64     `db:"order_count"` // 下单数
-		Url        string    `db:"url"`         // 链接地址
-		Note       string    `db:"note"`        // 备注
-		Sort       int64     `db:"sort"`        // 排序
+	customSmsHomeAdvertiseModel struct {
+		*defaultSmsHomeAdvertiseModel
 	}
 )
 
-func NewSmsHomeAdvertiseModel(conn sqlx.SqlConn) *SmsHomeAdvertiseModel {
-	return &SmsHomeAdvertiseModel{
-		conn:  conn,
-		table: "sms_home_advertise",
+// NewSmsHomeAdvertiseModel returns a model for the database table.
+func NewSmsHomeAdvertiseModel(conn sqlx.SqlConn) SmsHomeAdvertiseModel {
+	return &customSmsHomeAdvertiseModel{
+		defaultSmsHomeAdvertiseModel: newSmsHomeAdvertiseModel(conn),
 	}
 }
 
-func (m *SmsHomeAdvertiseModel) Insert(data SmsHomeAdvertise) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, smsHomeAdvertiseRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.Name, data.Type, data.Pic, data.StartTime, data.EndTime, data.Status, data.ClickCount, data.OrderCount, data.Url, data.Note, data.Sort)
-	return ret, err
-}
+func (m *customSmsHomeAdvertiseModel) FindAll(ctx context.Context, in *sms.HomeAdvertiseListReq) (*[]SmsHomeAdvertise, error) {
 
-func (m *SmsHomeAdvertiseModel) FindOne(id int64) (*SmsHomeAdvertise, error) {
-	query := fmt.Sprintf("select %s from %s where id = ? limit 1", smsHomeAdvertiseRows, m.table)
-	var resp SmsHomeAdvertise
-	err := m.conn.QueryRow(&resp, query, id)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
+	where := "1=1"
+	if in.Type != 2 {
+		where = where + fmt.Sprintf(" AND type = %d", in.Type)
 	}
-}
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
 
-func (m *SmsHomeAdvertiseModel) FindAll(Current int64, PageSize int64) (*[]SmsHomeAdvertise, error) {
+	if len(in.StartTime) > 0 {
+		where = where + fmt.Sprintf(" AND start_time >= '%s'", in.StartTime)
+	}
+	if len(in.EndTime) > 0 {
+		where = where + fmt.Sprintf(" AND end_time <= '%s'", in.EndTime)
+	}
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", smsHomeAdvertiseRows, m.table)
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", smsHomeAdvertiseRows, m.table, where)
 	var resp []SmsHomeAdvertise
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -83,8 +66,25 @@ func (m *SmsHomeAdvertiseModel) FindAll(Current int64, PageSize int64) (*[]SmsHo
 	}
 }
 
-func (m *SmsHomeAdvertiseModel) Count() (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customSmsHomeAdvertiseModel) Count(ctx context.Context, in *sms.HomeAdvertiseListReq) (int64, error) {
+	where := "1=1"
+	if in.Type != 2 {
+		where = where + fmt.Sprintf(" AND type = %d", in.Type)
+	}
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+
+	if len(in.StartTime) > 0 {
+		where = where + fmt.Sprintf(" AND start_time >= '%s'", in.StartTime)
+	}
+	if len(in.EndTime) > 0 {
+		where = where + fmt.Sprintf(" AND end_time <= '%s'", in.EndTime)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)
@@ -99,14 +99,8 @@ func (m *SmsHomeAdvertiseModel) Count() (int64, error) {
 	}
 }
 
-func (m *SmsHomeAdvertiseModel) Update(data SmsHomeAdvertise) error {
-	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsHomeAdvertiseRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.Name, data.Type, data.Pic, data.StartTime, data.EndTime, data.Status, data.ClickCount, data.OrderCount, data.Url, data.Note, data.Sort, data.Id)
-	return err
-}
-
-func (m *SmsHomeAdvertiseModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id = ?", m.table)
-	_, err := m.conn.Exec(query, id)
+func (m *customSmsHomeAdvertiseModel) DeleteByIds(ctx context.Context, ids []int64) error {
+	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
 	return err
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/smsmodel"
 
@@ -28,7 +29,9 @@ func NewHomeAdvertiseUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(in *sms.HomeAdvertiseUpdateReq) (*sms.HomeAdvertiseUpdateResp, error) {
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
-	err := l.svcCtx.SmsHomeAdvertiseModel.Update(smsmodel.SmsHomeAdvertise{
+
+	note := sql.NullString{String: in.Note, Valid: true}
+	err := l.svcCtx.SmsHomeAdvertiseModel.Update(l.ctx, &smsmodel.SmsHomeAdvertise{
 		Id:         in.Id,
 		Name:       in.Name,
 		Type:       in.Type,
@@ -39,7 +42,7 @@ func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(in *sms.HomeAdvertiseUpda
 		ClickCount: in.ClickCount,
 		OrderCount: in.OrderCount,
 		Url:        in.Url,
-		Note:       in.Note,
+		Note:       note,
 		Sort:       in.Sort,
 	})
 	if err != nil {

@@ -24,7 +24,7 @@ func NewHomeBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *H
 }
 
 func (l *HomeBrandDeleteLogic) HomeBrandDelete(in *sms.HomeBrandDeleteReq) (*sms.HomeBrandDeleteResp, error) {
-	err := l.svcCtx.SmsHomeBrandModel.Delete(in.Id)
+	err := l.svcCtx.SmsHomeBrandModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

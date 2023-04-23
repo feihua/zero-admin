@@ -24,8 +24,8 @@ func NewHomeRecommendProductListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *HomeRecommendProductListLogic) HomeRecommendProductList(in *sms.HomeRecommendProductListReq) (*sms.HomeRecommendProductListResp, error) {
-	all, err := l.svcCtx.SmsHomeRecommendProductModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsHomeRecommendProductModel.Count()
+	all, err := l.svcCtx.SmsHomeRecommendProductModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.SmsHomeRecommendProductModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

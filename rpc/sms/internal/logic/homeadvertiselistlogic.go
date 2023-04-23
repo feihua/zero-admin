@@ -24,8 +24,8 @@ func NewHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *sms.HomeAdvertiseListReq) (*sms.HomeAdvertiseListResp, error) {
-	all, err := l.svcCtx.SmsHomeAdvertiseModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsHomeAdvertiseModel.Count()
+	all, err := l.svcCtx.SmsHomeAdvertiseModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.SmsHomeAdvertiseModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -47,7 +47,7 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *sms.HomeAdvertiseListReq)
 			ClickCount: item.ClickCount,
 			OrderCount: item.OrderCount,
 			Url:        item.Url,
-			Note:       item.Note,
+			Note:       item.Note.String,
 			Sort:       item.Sort,
 		})
 	}

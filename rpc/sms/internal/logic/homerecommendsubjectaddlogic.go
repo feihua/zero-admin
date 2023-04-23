@@ -25,7 +25,7 @@ func NewHomeRecommendSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(in *sms.HomeRecommendSubjectAddReq) (*sms.HomeRecommendSubjectAddResp, error) {
-	_, err := l.svcCtx.SmsHomeRecommendSubjectModel.Insert(smsmodel.SmsHomeRecommendSubject{
+	_, err := l.svcCtx.SmsHomeRecommendSubjectModel.Insert(l.ctx, &smsmodel.SmsHomeRecommendSubject{
 		SubjectId:       in.SubjectId,
 		SubjectName:     in.SubjectName,
 		RecommendStatus: in.RecommendStatus,

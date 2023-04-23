@@ -27,11 +27,11 @@ func NewHomeRecommendProductDeleteLogic(ctx context.Context, svcCtx *svc.Service
 
 func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(req types.DeleteHomeRecommendProductReq) (*types.DeleteHomeRecommendProductResp, error) {
 	_, err := l.svcCtx.Sms.HomeRecommendProductDelete(l.ctx, &smsclient.HomeRecommendProductDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除人气推荐商品异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除人气推荐商品异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除人气推荐商品失败")
 	}
 	return &types.DeleteHomeRecommendProductResp{

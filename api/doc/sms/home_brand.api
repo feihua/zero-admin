@@ -6,10 +6,8 @@ info(
 
 type (
     addHomeBrandReq struct {
-        BrandId int64 `json:"brandId"`
-        BrandName string `json:"brandName"`
-        RecommendStatus int64 `json:"recommendStatus"`
-        Sort int64 `json:"sort"`
+        brandIds []int64 `json:"brandIds"`                 // 商品品牌id
+
     }
     addHomeBrandResp struct {
         Code string `json:"code"`
@@ -18,13 +16,15 @@ type (
     ListHomeBrandReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
+        BrandName string `json:"brandName,optional"`             // 商品品牌名称
+        RecommendStatus int64 `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
     }
     ListtHomeBrandData struct {
         Id int64 `json:"id"`
-        BrandId int64 `json:"brandId"`
-        BrandName string `json:"brandName"`
-        RecommendStatus int64 `json:"recommendStatus"`
-        Sort int64 `json:"sort"`
+        BrandId int64 `json:"brandId"`                 // 商品品牌id
+        BrandName string `json:"brandName"`            // 商品品牌名称
+        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+        Sort int64 `json:"sort"`                       // 排序
     }
     ListHomeBrandResp struct {
         Code string `json:"code"`
@@ -37,17 +37,17 @@ type (
     }
     UpdateHomeBrandReq struct {
         Id int64 `json:"id"`
-        BrandId int64 `json:"brandId"`
-        BrandName string `json:"brandName"`
-        RecommendStatus int64 `json:"recommendStatus"`
-        Sort int64 `json:"sort"`
+        BrandId int64 `json:"brandId"`                 // 商品品牌id
+        BrandName string `json:"brandName"`            // 商品品牌名称
+        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+        Sort int64 `json:"sort"`                       // 排序
     }
     UpdateHomeBrandResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
     }
     DeleteHomeBrandReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteHomeBrandResp struct {
         Code string `json:"code"`

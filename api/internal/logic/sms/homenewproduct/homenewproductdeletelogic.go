@@ -27,11 +27,11 @@ func NewHomeNewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *HomeNewProductDeleteLogic) HomeNewProductDelete(req types.DeleteHomeNewProductReq) (*types.DeleteHomeNewProductResp, error) {
 	_, err := l.svcCtx.Sms.HomeNewProductDelete(l.ctx, &smsclient.HomeNewProductDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除新鲜好物异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除新鲜好物异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除新鲜好物失败")
 	}
 

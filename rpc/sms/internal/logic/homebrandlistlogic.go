@@ -24,8 +24,8 @@ func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Hom
 }
 
 func (l *HomeBrandListLogic) HomeBrandList(in *sms.HomeBrandListReq) (*sms.HomeBrandListResp, error) {
-	all, err := l.svcCtx.SmsHomeBrandModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsHomeBrandModel.Count()
+	all, err := l.svcCtx.SmsHomeBrandModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.SmsHomeBrandModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

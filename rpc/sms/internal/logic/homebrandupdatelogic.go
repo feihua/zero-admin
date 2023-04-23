@@ -25,7 +25,7 @@ func NewHomeBrandUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *H
 }
 
 func (l *HomeBrandUpdateLogic) HomeBrandUpdate(in *sms.HomeBrandUpdateReq) (*sms.HomeBrandUpdateResp, error) {
-	err := l.svcCtx.SmsHomeBrandModel.Update(smsmodel.SmsHomeBrand{
+	err := l.svcCtx.SmsHomeBrandModel.Update(l.ctx, &smsmodel.SmsHomeBrand{
 		Id:              in.Id,
 		BrandId:         in.BrandId,
 		BrandName:       in.BrandName,

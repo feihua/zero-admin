@@ -29,8 +29,10 @@ func NewHomeNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 func (l *HomeNewProductListLogic) HomeNewProductList(req types.ListHomeNewProductReq) (*types.ListHomeNewProductResp, error) {
 	resp, err := l.svcCtx.Sms.HomeNewProductList(l.ctx, &smsclient.HomeNewProductListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
+		Current:         req.Current,
+		PageSize:        req.PageSize,
+		ProductName:     req.ProductName,
+		RecommendStatus: req.RecommendStatus,
 	})
 
 	if err != nil {

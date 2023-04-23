@@ -25,7 +25,7 @@ func NewHomeNewProductUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *HomeNewProductUpdateLogic) HomeNewProductUpdate(in *sms.HomeNewProductUpdateReq) (*sms.HomeNewProductUpdateResp, error) {
-	err := l.svcCtx.SmsHomeNewProductModel.Update(smsmodel.SmsHomeNewProduct{
+	err := l.svcCtx.SmsHomeNewProductModel.Update(l.ctx, &smsmodel.SmsHomeNewProduct{
 		Id:              in.Id,
 		ProductId:       in.ProductId,
 		ProductName:     in.ProductName,

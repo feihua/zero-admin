@@ -24,7 +24,7 @@ func NewHomeNewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *HomeNewProductDeleteLogic) HomeNewProductDelete(in *sms.HomeNewProductDeleteReq) (*sms.HomeNewProductDeleteResp, error) {
-	err := l.svcCtx.SmsHomeNewProductModel.Delete(in.Id)
+	err := l.svcCtx.SmsHomeNewProductModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

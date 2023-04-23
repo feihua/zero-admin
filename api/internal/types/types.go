@@ -2287,11 +2287,11 @@ type DeleteFlashPromotionSessionResp struct {
 }
 
 type AddHomeAdvertiseReq struct {
-	Name       string `json:"name"`
-	Type       int64  `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-	Pic        string `json:"pic"`
-	StartTime  string `json:"startTime"`
-	EndTime    string `json:"endTime"`
+	Name       string `json:"name"`       // 名称
+	Type       int64  `json:"type"`       // 轮播位置：0->PC首页轮播；1->app首页轮播
+	Pic        string `json:"pic"`        // 图片地址
+	StartTime  string `json:"startTime"`  // 开始时间
+	EndTime    string `json:"endTime"`    // 结束时间
 	Status     int64  `json:"status"`     // 上下线状态：0->下线；1->上线
 	ClickCount int64  `json:"clickCount"` // 点击数
 	OrderCount int64  `json:"orderCount"` // 下单数
@@ -2306,17 +2306,22 @@ type AddHomeAdvertiseResp struct {
 }
 
 type ListHomeAdvertiseReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current   int64  `json:"current,default=1"`
+	PageSize  int64  `json:"pageSize,default=20"`
+	Name      string `json:"name,optional"`      // 名称
+	Type      int64  `json:"type,default=2"`     // 轮播位置：0->PC首页轮播；1->app首页轮播
+	StartTime string `json:"startTime,optional"` // 开始时间
+	EndTime   string `json:"endTime,optional"`   // 结束时间
+	Status    int64  `json:"status,default=2"`   // 上下线状态：0->下线；1->上线
 }
 
 type ListtHomeAdvertiseData struct {
 	Id         int64  `json:"id"`
-	Name       string `json:"name"`
-	Type       int64  `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-	Pic        string `json:"pic"`
-	StartTime  string `json:"startTime"`
-	EndTime    string `json:"endTime"`
+	Name       string `json:"name"`       // 名称
+	Type       int64  `json:"type"`       // 轮播位置：0->PC首页轮播；1->app首页轮播
+	Pic        string `json:"pic"`        // 图片地址
+	StartTime  string `json:"startTime"`  // 开始时间
+	EndTime    string `json:"endTime"`    // 结束时间
 	Status     int64  `json:"status"`     // 上下线状态：0->下线；1->上线
 	ClickCount int64  `json:"clickCount"` // 点击数
 	OrderCount int64  `json:"orderCount"` // 下单数
@@ -2337,11 +2342,11 @@ type ListHomeAdvertiseResp struct {
 
 type UpdateHomeAdvertiseReq struct {
 	Id         int64  `json:"id"`
-	Name       string `json:"name"`
-	Type       int64  `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-	Pic        string `json:"pic"`
-	StartTime  string `json:"startTime"`
-	EndTime    string `json:"endTime"`
+	Name       string `json:"name"`       // 名称
+	Type       int64  `json:"type"`       // 轮播位置：0->PC首页轮播；1->app首页轮播
+	Pic        string `json:"pic"`        // 图片地址
+	StartTime  string `json:"startTime"`  // 开始时间
+	EndTime    string `json:"endTime"`    // 结束时间
 	Status     int64  `json:"status"`     // 上下线状态：0->下线；1->上线
 	ClickCount int64  `json:"clickCount"` // 点击数
 	OrderCount int64  `json:"orderCount"` // 下单数
@@ -2356,7 +2361,7 @@ type UpdateHomeAdvertiseResp struct {
 }
 
 type DeleteHomeAdvertiseReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteHomeAdvertiseResp struct {
@@ -2365,10 +2370,7 @@ type DeleteHomeAdvertiseResp struct {
 }
 
 type AddHomeBrandReq struct {
-	BrandId         int64  `json:"brandId"`
-	BrandName       string `json:"brandName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	BrandIds []int64 `json:"brandIds"` // 商品品牌id
 }
 
 type AddHomeBrandResp struct {
@@ -2377,16 +2379,18 @@ type AddHomeBrandResp struct {
 }
 
 type ListHomeBrandReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current         int64  `json:"current,default=1"`
+	PageSize        int64  `json:"pageSize,default=20"`
+	BrandName       string `json:"brandName,optional"`        // 商品品牌名称
+	RecommendStatus int64  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
 type ListtHomeBrandData struct {
 	Id              int64  `json:"id"`
-	BrandId         int64  `json:"brandId"`
-	BrandName       string `json:"brandName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	BrandId         int64  `json:"brandId"`         // 商品品牌id
+	BrandName       string `json:"brandName"`       // 商品品牌名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type ListHomeBrandResp struct {
@@ -2401,10 +2405,10 @@ type ListHomeBrandResp struct {
 
 type UpdateHomeBrandReq struct {
 	Id              int64  `json:"id"`
-	BrandId         int64  `json:"brandId"`
-	BrandName       string `json:"brandName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	BrandId         int64  `json:"brandId"`         // 商品品牌id
+	BrandName       string `json:"brandName"`       // 商品品牌名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type UpdateHomeBrandResp struct {
@@ -2413,7 +2417,7 @@ type UpdateHomeBrandResp struct {
 }
 
 type DeleteHomeBrandReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteHomeBrandResp struct {
@@ -2422,10 +2426,10 @@ type DeleteHomeBrandResp struct {
 }
 
 type AddHomeNewProductReq struct {
-	ProductId       int64  `json:"productId"`
-	ProductName     string `json:"productName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	ProductId       int64  `json:"productId"`       // 商品id
+	ProductName     string `json:"productName"`     // 商品名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type AddHomeNewProductResp struct {
@@ -2434,16 +2438,18 @@ type AddHomeNewProductResp struct {
 }
 
 type ListHomeNewProductReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current         int64  `json:"current,default=1"`
+	PageSize        int64  `json:"pageSize,default=20"`
+	ProductName     string `json:"productName,optional"`      // 商品名称
+	RecommendStatus int64  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
 type ListtHomeNewProductData struct {
 	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`
-	ProductName     string `json:"productName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	ProductId       int64  `json:"productId"`       // 商品id
+	ProductName     string `json:"productName"`     // 商品名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type ListHomeNewProductResp struct {
@@ -2458,10 +2464,10 @@ type ListHomeNewProductResp struct {
 
 type UpdateHomeNewProductReq struct {
 	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`
-	ProductName     string `json:"productName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	ProductId       int64  `json:"productId"`       // 商品id
+	ProductName     string `json:"productName"`     // 商品名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type UpdateHomeNewProductResp struct {
@@ -2470,7 +2476,7 @@ type UpdateHomeNewProductResp struct {
 }
 
 type DeleteHomeNewProductReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteHomeNewProductResp struct {
@@ -2479,10 +2485,10 @@ type DeleteHomeNewProductResp struct {
 }
 
 type AddHomeRecommendProductReq struct {
-	ProductId       int64  `json:"productId"`
-	ProductName     string `json:"productName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	ProductId       int64  `json:"productId"`       // 商品id
+	ProductName     string `json:"productName"`     // 商品名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type AddHomeRecommendProductResp struct {
@@ -2491,16 +2497,18 @@ type AddHomeRecommendProductResp struct {
 }
 
 type ListHomeRecommendProductReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current         int64  `json:"current,default=1"`
+	PageSize        int64  `json:"pageSize,default=20"`
+	ProductName     string `json:"productName,optional"`      // 商品名称
+	RecommendStatus int64  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
 type ListtHomeRecommendProductData struct {
 	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`
-	ProductName     string `json:"productName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	ProductId       int64  `json:"productId"`       // 商品id
+	ProductName     string `json:"productName"`     // 商品名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type ListHomeRecommendProductResp struct {
@@ -2515,10 +2523,10 @@ type ListHomeRecommendProductResp struct {
 
 type UpdateHomeRecommendProductReq struct {
 	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`
-	ProductName     string `json:"productName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	ProductId       int64  `json:"productId"`       // 商品id
+	ProductName     string `json:"productName"`     // 商品名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type UpdateHomeRecommendProductResp struct {
@@ -2527,7 +2535,7 @@ type UpdateHomeRecommendProductResp struct {
 }
 
 type DeleteHomeRecommendProductReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteHomeRecommendProductResp struct {
@@ -2536,10 +2544,10 @@ type DeleteHomeRecommendProductResp struct {
 }
 
 type AddHomeRecommendSubjectReq struct {
-	SubjectId       int64  `json:"subjectId"`
-	SubjectName     string `json:"subjectName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	SubjectId       int64  `json:"subjectId"`       // 专题id
+	SubjectName     string `json:"subjectName"`     // 专题名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type AddHomeRecommendSubjectResp struct {
@@ -2548,16 +2556,18 @@ type AddHomeRecommendSubjectResp struct {
 }
 
 type ListHomeRecommendSubjectReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current         int64  `json:"current,default=1"`
+	PageSize        int64  `json:"pageSize,default=20"`
+	SubjectName     string `json:"subjectName,optional"`      // 专题名称
+	RecommendStatus int64  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
 type ListtHomeRecommendSubjectData struct {
 	Id              int64  `json:"id"`
-	SubjectId       int64  `json:"subjectId"`
-	SubjectName     string `json:"subjectName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	SubjectId       int64  `json:"subjectId"`       // 专题id
+	SubjectName     string `json:"subjectName"`     // 专题名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type ListHomeRecommendSubjectResp struct {
@@ -2572,10 +2582,10 @@ type ListHomeRecommendSubjectResp struct {
 
 type UpdateHomeRecommendSubjectReq struct {
 	Id              int64  `json:"id"`
-	SubjectId       int64  `json:"subjectId"`
-	SubjectName     string `json:"subjectName"`
-	RecommendStatus int64  `json:"recommendStatus"`
-	Sort            int64  `json:"sort"`
+	SubjectId       int64  `json:"subjectId"`       // 专题id
+	SubjectName     string `json:"subjectName"`     // 专题名称
+	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int64  `json:"sort"`            // 排序
 }
 
 type UpdateHomeRecommendSubjectResp struct {
@@ -2584,7 +2594,7 @@ type UpdateHomeRecommendSubjectResp struct {
 }
 
 type DeleteHomeRecommendSubjectReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteHomeRecommendSubjectResp struct {

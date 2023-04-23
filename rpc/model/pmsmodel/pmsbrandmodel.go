@@ -80,7 +80,19 @@ func (m *PmsBrandModel) FindAll(Current int64, PageSize int64) (*[]PmsBrand, err
 		return nil, err
 	}
 }
-
+func (m *PmsBrandModel) FindAllByIds(ids []int64) (*[]PmsBrand, error) {
+	query := fmt.Sprintf("select %s from %s where `id` in (?)", pmsBrandRows, m.table)
+	var resp []PmsBrand
+	err := m.conn.QueryRows(&resp, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
 func (m *PmsBrandModel) Count() (int64, error) {
 	query := fmt.Sprintf("select count(*) as count from %s", m.table)
 

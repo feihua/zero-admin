@@ -1,70 +1,51 @@
 package smsmodel
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
-	"strings"
-
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"github.com/zeromicro/go-zero/core/stringx"
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/builderx"
+	"strings"
+	"zero-admin/rpc/sms/sms"
 )
 
-var (
-	smsHomeBrandFieldNames          = builderx.FieldNames(&SmsHomeBrand{})
-	smsHomeBrandRows                = strings.Join(smsHomeBrandFieldNames, ",")
-	smsHomeBrandRowsExpectAutoSet   = strings.Join(stringx.Remove(smsHomeBrandFieldNames, "id", "create_time", "update_time"), ",")
-	smsHomeBrandRowsWithPlaceHolder = strings.Join(stringx.Remove(smsHomeBrandFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
-)
+var _ SmsHomeBrandModel = (*customSmsHomeBrandModel)(nil)
 
 type (
-	SmsHomeBrandModel struct {
-		conn  sqlx.SqlConn
-		table string
+	// SmsHomeBrandModel is an interface to be customized, add more methods here,
+	// and implement the added methods in customSmsHomeBrandModel.
+	SmsHomeBrandModel interface {
+		smsHomeBrandModel
+		Count(ctx context.Context, in *sms.HomeBrandListReq) (int64, error)
+		FindAll(ctx context.Context, in *sms.HomeBrandListReq) (*[]SmsHomeBrand, error)
+		FindOneByBrandId(ctx context.Context, brandId int64) (*SmsHomeBrand, error)
+		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
-	SmsHomeBrand struct {
-		Id              int64  `db:"id"`
-		BrandId         int64  `db:"brand_id"`
-		BrandName       string `db:"brand_name"`
-		RecommendStatus int64  `db:"recommend_status"`
-		Sort            int64  `db:"sort"`
+	customSmsHomeBrandModel struct {
+		*defaultSmsHomeBrandModel
 	}
 )
 
-func NewSmsHomeBrandModel(conn sqlx.SqlConn) *SmsHomeBrandModel {
-	return &SmsHomeBrandModel{
-		conn:  conn,
-		table: "sms_home_brand",
+// NewSmsHomeBrandModel returns a model for the database table.
+func NewSmsHomeBrandModel(conn sqlx.SqlConn) SmsHomeBrandModel {
+	return &customSmsHomeBrandModel{
+		defaultSmsHomeBrandModel: newSmsHomeBrandModel(conn),
 	}
 }
 
-func (m *SmsHomeBrandModel) Insert(data SmsHomeBrand) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, smsHomeBrandRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.BrandId, data.BrandName, data.RecommendStatus, data.Sort)
-	return ret, err
-}
+func (m *customSmsHomeBrandModel) FindAll(ctx context.Context, in *sms.HomeBrandListReq) (*[]SmsHomeBrand, error) {
 
-func (m *SmsHomeBrandModel) FindOne(id int64) (*SmsHomeBrand, error) {
-	query := fmt.Sprintf("select %s from %s where id = ? limit 1", smsHomeBrandRows, m.table)
-	var resp SmsHomeBrand
-	err := m.conn.QueryRow(&resp, query, id)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
+	where := "1=1"
+	if len(in.BrandName) > 0 {
+		where = where + fmt.Sprintf(" AND brand_name like '%%%s%%'", in.BrandName)
 	}
-}
-
-func (m *SmsHomeBrandModel) FindAll(Current int64, PageSize int64) (*[]SmsHomeBrand, error) {
-
-	query := fmt.Sprintf("select %s from %s limit ?,?", smsHomeBrandRows, m.table)
+	if in.RecommendStatus != 2 {
+		where = where + fmt.Sprintf(" AND recommend_status = %d", in.RecommendStatus)
+	}
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", smsHomeBrandRows, m.table, where)
 	var resp []SmsHomeBrand
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -75,8 +56,31 @@ func (m *SmsHomeBrandModel) FindAll(Current int64, PageSize int64) (*[]SmsHomeBr
 	}
 }
 
-func (m *SmsHomeBrandModel) Count() (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customSmsHomeBrandModel) FindOneByBrandId(ctx context.Context, brandId int64) (*SmsHomeBrand, error) {
+
+	where := fmt.Sprintf("brand_id = %d", brandId)
+	query := fmt.Sprintf("select %s from %s where %s ", smsHomeBrandRows, m.table, where)
+	var resp SmsHomeBrand
+	err := m.conn.QueryRow(&resp, query)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *customSmsHomeBrandModel) Count(ctx context.Context, in *sms.HomeBrandListReq) (int64, error) {
+	where := "1=1"
+	if len(in.BrandName) > 0 {
+		where = where + fmt.Sprintf(" AND brand_name like '%%%s%%'", in.BrandName)
+	}
+	if in.RecommendStatus != 2 {
+		where = where + fmt.Sprintf(" AND recommend_status = %d", in.RecommendStatus)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)
@@ -91,14 +95,8 @@ func (m *SmsHomeBrandModel) Count() (int64, error) {
 	}
 }
 
-func (m *SmsHomeBrandModel) Update(data SmsHomeBrand) error {
-	query := fmt.Sprintf("update %s set %s where id = ?", m.table, smsHomeBrandRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.BrandId, data.BrandName, data.RecommendStatus, data.Sort, data.Id)
-	return err
-}
-
-func (m *SmsHomeBrandModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id = ?", m.table)
-	_, err := m.conn.Exec(query, id)
+func (m *customSmsHomeBrandModel) DeleteByIds(ctx context.Context, ids []int64) error {
+	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
 	return err
 }

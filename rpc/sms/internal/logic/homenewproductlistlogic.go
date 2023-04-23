@@ -24,8 +24,8 @@ func NewHomeNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *HomeNewProductListLogic) HomeNewProductList(in *sms.HomeNewProductListReq) (*sms.HomeNewProductListResp, error) {
-	all, err := l.svcCtx.SmsHomeNewProductModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsHomeNewProductModel.Count()
+	all, err := l.svcCtx.SmsHomeNewProductModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.SmsHomeNewProductModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

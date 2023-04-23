@@ -27,11 +27,11 @@ func NewHomeBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Ho
 
 func (l *HomeBrandDeleteLogic) HomeBrandDelete(req types.DeleteHomeBrandReq) (*types.DeleteHomeBrandResp, error) {
 	_, err := l.svcCtx.Sms.HomeBrandDelete(l.ctx, &smsclient.HomeBrandDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除首页品牌异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除首页品牌异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除首页品牌失败")
 	}
 
