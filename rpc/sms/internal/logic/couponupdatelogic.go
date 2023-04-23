@@ -29,7 +29,7 @@ func (l *CouponUpdateLogic) CouponUpdate(in *sms.CouponUpdateReq) (*sms.CouponUp
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
 	EnableTime, _ := time.Parse("2006-01-02 15:04:05", in.EnableTime)
-	err := l.svcCtx.SmsCouponModel.Update(smsmodel.SmsCoupon{
+	err := l.svcCtx.SmsCouponModel.Update(l.ctx, &smsmodel.SmsCoupon{
 		Id:           in.Id,
 		Type:         in.Type,
 		Name:         in.Name,

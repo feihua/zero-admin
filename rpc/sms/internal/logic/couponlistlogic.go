@@ -24,8 +24,8 @@ func NewCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Coupon
 }
 
 func (l *CouponListLogic) CouponList(in *sms.CouponListReq) (*sms.CouponListResp, error) {
-	all, err := l.svcCtx.SmsCouponModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsCouponModel.Count()
+	all, err := l.svcCtx.SmsCouponModel.FindAll(l.ctx, in.Current, in.PageSize, in)
+	count, _ := l.svcCtx.SmsCouponModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

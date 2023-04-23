@@ -10,7 +10,7 @@ type ServiceContext struct {
 	c config.Config
 
 	SmsCouponHistoryModel                 *smsmodel.SmsCouponHistoryModel
-	SmsCouponModel                        *smsmodel.SmsCouponModel
+	SmsCouponModel                        smsmodel.SmsCouponModel
 	SmsCouponProductCategoryRelationModel *smsmodel.SmsCouponProductCategoryRelationModel
 	SmsCouponProductRelationModel         *smsmodel.SmsCouponProductRelationModel
 	SmsFlashPromotionLogModel             smsmodel.SmsFlashPromotionLogModel

@@ -40,8 +40,6 @@ func (l *CouponAddLogic) CouponAdd(req types.AddCouponReq) (*types.AddCouponResp
 		UseType:      req.UseType,
 		Note:         req.Note,
 		PublishCount: req.PublishCount,
-		UseCount:     req.UseCount,
-		ReceiveCount: req.ReceiveCount,
 		EnableTime:   req.EnableTime,
 		Code:         req.Code,
 		MemberLevel:  req.MemberLevel,

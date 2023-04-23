@@ -41,8 +41,6 @@ func (l *CouponUpdateLogic) CouponUpdate(req types.UpdateCouponReq) (*types.Upda
 		UseType:      req.UseType,
 		Note:         req.Note,
 		PublishCount: req.PublishCount,
-		UseCount:     req.UseCount,
-		ReceiveCount: req.ReceiveCount,
 		EnableTime:   req.EnableTime,
 		Code:         req.Code,
 		MemberLevel:  req.MemberLevel,
