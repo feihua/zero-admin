@@ -686,6 +686,7 @@ message MemberReceiveAddressAddReq {
   string 	City          = 8;
   string 	Region        = 9;
   string 	DetailAddress = 10;
+  string  Address       = 11;
 }
 
 message MemberReceiveAddressAddResp {
@@ -709,6 +710,7 @@ message MemberReceiveAddressListData{
   string 	City          = 8;
   string 	Region        = 9;
   string 	DetailAddress = 10;
+  string  Address       = 11;
 }
 
 message MemberReceiveAddressListResp {
@@ -727,6 +729,7 @@ message MemberReceiveAddressUpdateReq {
   string 	City          = 8;
   string 	Region        = 9;
   string 	DetailAddress = 10;
+  string  Address       = 11;
 }
 
 message MemberReceiveAddressUpdateResp {
@@ -759,6 +762,7 @@ message MemberReceiveAddressQueryDetailResp {
   string 	City          = 8;
   string 	Region        = 9;
   string 	DetailAddress = 10;
+  string  Address       = 11;
 }
 
 message MemberRuleSettingAddReq {

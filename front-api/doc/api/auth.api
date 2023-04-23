@@ -30,8 +30,7 @@ type UserInfo struct {
 }
 
 type RegisterReq struct {
-    Phone string `json:"phone"`
-    Password string `json:"password"`
+    ID        int64  `form:"id"`
 }
 
 type (

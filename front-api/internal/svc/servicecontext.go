@@ -26,11 +26,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config: c,
 
-		Sys: sys.NewSys(zrpc.MustNewClient(c.SysRpc)),
+		//Sys: sys.NewSys(zrpc.MustNewClient(c.SysRpc)),
 		Ums: ums.NewUms(zrpc.MustNewClient(c.UmsRpc)),
-		Pms: pms.NewPms(zrpc.MustNewClient(c.PmsRpc)),
-		Oms: oms.NewOms(zrpc.MustNewClient(c.OmsRpc)),
-		Sms: sms.NewSms(zrpc.MustNewClient(c.SmsRpc)),
-		Pay: pay.NewPay(zrpc.MustNewClient(c.PayRpc)),
+		//Pms: pms.NewPms(zrpc.MustNewClient(c.PmsRpc)),
+		//Oms: oms.NewOms(zrpc.MustNewClient(c.OmsRpc)),
+		//Sms: sms.NewSms(zrpc.MustNewClient(c.SmsRpc)),
+		//Pay: pay.NewPay(zrpc.MustNewClient(c.PayRpc)),
 	}
 }

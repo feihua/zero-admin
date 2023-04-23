@@ -90,7 +90,7 @@ func RegisterMemberRpc(req *types.RegisterReq, err error, l *RegisterLogic) (*um
 	// }
 
 	tokenResp, err := l.svcCtx.Ums.GenerateToken(l.ctx, &umsclient.GenerateTokenReq{
-		MemberId: 25,
+		MemberId: req.ID,
 	})
 	if err != nil {
 		return nil, nil, errors.Wrapf(xerr.NewErrMsg("获取token有误"), "usercenterRpc.GenerateToken err :%v, userId : %d", err, 22), false
@@ -101,7 +101,7 @@ func RegisterMemberRpc(req *types.RegisterReq, err error, l *RegisterLogic) (*um
 		RefreshAfter: tokenResp.RefreshAfter,
 	}
 
-	memberinfo, err := l.svcCtx.Ums.MemberInfo(l.ctx, &umsclient.MemberInfoReq{Id: 25})
+	memberinfo, err := l.svcCtx.Ums.MemberInfo(l.ctx, &umsclient.MemberInfoReq{Id: req.ID})
 	if err != nil {
 		return nil, nil, nil, false
 	}

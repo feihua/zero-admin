@@ -10,10 +10,11 @@ create table ums_member_receive_address
     province       varchar(100) null comment '省份/直辖市',
     city           varchar(100) null comment '城市',
     region         varchar(100) null comment '区',
-    detail_address varchar(128) null comment '详细地址(街道)'
+    detail_address varchar(128) null comment '详细地址(街道)',
+    address        varchar(255) null comment '地址'
 )
     comment '会员收货地址表';
 
-INSERT INTO gozero.ums_member_receive_address (id, member_id, name, phone_number, default_status, post_code, province, city, region, detail_address) VALUES (1, 1, '大梨', '18033441849', 0, '518000', '广东省', '深圳市', '南山区', '科兴科学园');
-INSERT INTO gozero.ums_member_receive_address (id, member_id, name, phone_number, default_status, post_code, province, city, region, detail_address) VALUES (3, 1, '大梨', '18033441849', 0, '518000', '广东省', '深圳市', '福田区', '清水河街道');
-INSERT INTO gozero.ums_member_receive_address (id, member_id, name, phone_number, default_status, post_code, province, city, region, detail_address) VALUES (4, 1, '大梨', '18033441849', 1, '518000', '广东省', '深圳市', '福田区', '东晓街道');
+INSERT INTO gozero.ums_member_receive_address (id, member_id, name, phone_number, default_status, post_code, province, city, region, detail_address,address) VALUES (1, 1, '大梨', '18033441849', 0, '518000', '广东省', '深圳市', '南山区', '科兴科学园',"广东省深圳市南山区");
+INSERT INTO gozero.ums_member_receive_address (id, member_id, name, phone_number, default_status, post_code, province, city, region, detail_address,address) VALUES (3, 1, '大梨', '18033441849', 0, '518000', '广东省', '深圳市', '福田区', '清水河街道',"广东省深圳市南山区");
+INSERT INTO gozero.ums_member_receive_address (id, member_id, name, phone_number, default_status, post_code, province, city, region, detail_address,address) VALUES (4, 1, '大梨', '18033441849', 1, '518000', '广东省', '深圳市', '福田区', '东晓街道',"广东省深圳市南山区");

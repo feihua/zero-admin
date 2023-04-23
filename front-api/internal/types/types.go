@@ -2,8 +2,8 @@
 package types
 
 type AddressListReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type AddressListResp struct {
@@ -27,6 +27,7 @@ type AddressList struct {
 	Province      string `json:"province"`      //省
 	City          string `json:"city"`          //市
 	Region        string `json:"region"`        //区
+	Address       string `json:"address"`       //地址
 	AddressDetail string `json:"addressDetail"` //详情地址
 	AreaCode      string `json:"areaCode"`      //地区编码
 	Tel           string `json:"tel"`           //电话
@@ -42,6 +43,7 @@ type AddressSaveReq struct {
 	Province      string `json:"province"`
 	City          string `json:"city"`
 	Region        string `json:"region"`
+	Address       string `json:"address"`
 	AddressDetail string `json:"addressDetail"`
 	PostalCode    string `json:"postalCode"`
 }
@@ -58,6 +60,7 @@ type AddressUpdateReq struct {
 	Province      string `json:"province"`
 	City          string `json:"city"`
 	Region        string `json:"region"`
+	Address       string `json:"address"`
 	AddressDetail string `json:"addressDetail"`
 	PostalCode    string `json:"postalCode"`
 }
@@ -68,7 +71,7 @@ type AddressUpdateResp struct {
 }
 
 type AddressDeleteReq struct {
-	AddressID int64 `json:"addressID"`
+	AddressID int64 `form:"addressID"`
 }
 
 type AddressDeleteResp struct {
@@ -77,7 +80,7 @@ type AddressDeleteResp struct {
 }
 
 type AddressDetailReq struct {
-	AddressID int64 `json:"addressID"`
+	AddressID int64 `form:"addressID"`
 }
 
 type AddressDetailResp struct {
@@ -86,15 +89,25 @@ type AddressDetailResp struct {
 	Msg  string            `json:"msg"`
 }
 
+type AdressDefaultReq struct {
+	AddressID int64 `json:"addressID"`
+}
+
+type AdressDefaultResp struct {
+	Code int64  `json:"code"`
+	Msg  string `json:"msg"`
+}
+
 type AddressDetailData struct {
 	IsDeleted     bool   `json:"IS_DELETED"`
 	NotDeleted    bool   `json:"NOT_DELETED"`
-	ID            int64  `json:"id"`            //id
-	Name          string `json:"name"`          //用户名
-	UserID        int64  `json:"userId"`        //用户Id
-	Province      string `json:"province"`      //省
-	City          string `json:"city"`          //市
-	County        string `json:"county"`        //国家
+	ID            int64  `json:"id"`       //id
+	Name          string `json:"name"`     //用户名
+	UserID        int64  `json:"userId"`   //用户Id
+	Province      string `json:"province"` //省
+	City          string `json:"city"`     //市
+	County        string `json:"county"`   //国家
+	Address       string `json:"address"`
 	AddressDetail string `json:"addressDetail"` //详情地址
 	AreaCode      string `json:"areaCode"`      //地区编码
 	PostalCode    string `json:"postalCode"`
@@ -130,8 +143,7 @@ type UserInfo struct {
 }
 
 type RegisterReq struct {
-	Phone    string `json:"phone"`
-	Password string `json:"password"`
+	ID int64 `form:"id"`
 }
 
 type WXMiniAuthReq struct {

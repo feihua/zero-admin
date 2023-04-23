@@ -6,8 +6,8 @@ info(
 
 
 type AddressListReq struct {
-    Current int64 `json:"current,default=1"`
-    PageSize int64 `json:"pageSize,default=20"`
+    Current int64 `form:"current,default=1"`
+    PageSize int64 `form:"pageSize,default=20"`
 }
 
 type AddressListResp struct {
@@ -31,6 +31,7 @@ type AddressList struct {
     Province string `json:"province"`           //省
     City string `json:"city"`                   //市
     Region string `json:"region"`               //区
+    Address string `json:"address"`             //地址
     AddressDetail string `json:"addressDetail"` //详情地址
     AreaCode string `json:"areaCode"`           //地区编码
     Tel string `json:"tel"`                     //电话
@@ -46,6 +47,7 @@ type AddressSaveReq struct {
     Province string `json:"province"`
     City string `json:"city"`
     Region string `json:"region"`
+    Address string `json:"address"`
     AddressDetail string `json:"addressDetail"`
     PostalCode string `json:"postalCode"`
 }
@@ -61,6 +63,7 @@ type AddressUpdateReq struct {
     Province string `json:"province"`
     City string `json:"city"`
     Region string `json:"region"`
+    Address string `json:"address"`
     AddressDetail string `json:"addressDetail"`
     PostalCode string `json:"postalCode"`
 }
@@ -69,7 +72,7 @@ type AddressUpdateResp struct {
     Msg string `json:"msg"`
 }
 type AddressDeleteReq struct {
-    AddressID int64 `json:"addressID"`
+    AddressID int64 `form:"addressID"`
 }
 type AddressDeleteResp struct {
     Code int64 `json:"code"`
@@ -77,11 +80,20 @@ type AddressDeleteResp struct {
 }
 
 type AddressDetailReq struct {
-    AddressID int64 `json:"addressID"`
+    AddressID int64 `form:"addressID"`
 }
 type AddressDetailResp struct {
     Code int64 `json:"code"`
     Data AddressDetailData `json:"data"`
+    Msg string `json:"msg"`
+}
+
+type AdressDefaultReq struct{
+   AddressID int64 `json:"addressID"`
+}
+
+type AdressDefaultResp struct {
+    Code int64 `json:"code"`
     Msg string `json:"msg"`
 }
 
@@ -94,6 +106,7 @@ type AddressDetailData struct {
     Province string `json:"province"`           //省
     City string `json:"city"`                   //市
     County string `json:"county"`               //国家
+    Address string `json:"address"`
     AddressDetail string `json:"addressDetail"` //详情地址
     AreaCode string `json:"areaCode"`           //地区编码
     PostalCode string `json:"postalCode"`
@@ -117,11 +130,14 @@ service front-api {
     post /save (AddressSaveReq) returns (AddressSaveResp)
 
     @handler AddressUpdate
-    post /update (AddressUpdateReq) returns (AddressUpdateResp)
+    put /update (AddressUpdateReq) returns (AddressUpdateResp)
 
     @handler AddressDelete
-    post /delete (AddressDeleteReq) returns (AddressDeleteResp)
+    delete /delete (AddressDeleteReq) returns (AddressDeleteResp)
 
     @handler AddressDetail
     get /detail (AddressDetailReq) returns (AddressDetailResp)
+
+    @handler AddressDefault
+    put /default (AdressDefaultReq) returns (AdressDefaultResp)
 }

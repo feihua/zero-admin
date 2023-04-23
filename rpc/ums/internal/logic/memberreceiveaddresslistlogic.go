@@ -48,6 +48,7 @@ func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *umsclient.M
 			City:          item.City,
 			Region:        item.Region,
 			DetailAddress: item.DetailAddress,
+			Address:       item.Address,
 		})
 	}
 

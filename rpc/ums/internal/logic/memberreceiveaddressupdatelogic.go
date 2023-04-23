@@ -37,6 +37,7 @@ func (l *MemberReceiveAddressUpdateLogic) MemberReceiveAddressUpdate(in *umsclie
 		City:          in.City,
 		Region:        in.Region,
 		DetailAddress: in.DetailAddress,
+		Address:       in.Address,
 	})
 	if err != nil {
 		return nil, err

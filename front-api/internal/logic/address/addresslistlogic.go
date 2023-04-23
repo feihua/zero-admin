@@ -57,6 +57,7 @@ func (l *AddressListLogic) AddressList(req *types.AddressListReq) (resp *types.A
 			AreaCode:      "",
 			Tel:           address.PhoneNumber,
 			IsDefault:     false,
+			Address:       address.Address,
 		})
 	}
 

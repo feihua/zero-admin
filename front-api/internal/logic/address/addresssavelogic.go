@@ -38,6 +38,7 @@ func (l *AddressSaveLogic) AddressSave(req *types.AddressSaveReq) (resp *types.A
 		City:          req.City,
 		Region:        req.Region,
 		DetailAddress: req.AddressDetail,
+		Address:       req.Address,
 	})
 
 	if err != nil {

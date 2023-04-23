@@ -32,12 +32,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: address.AddressSaveHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodPut,
 				Path:    "/update",
 				Handler: address.AddressUpdateHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodDelete,
 				Path:    "/delete",
 				Handler: address.AddressDeleteHandler(serverCtx),
 			},
@@ -45,6 +45,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodGet,
 				Path:    "/detail",
 				Handler: address.AddressDetailHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/default",
+				Handler: address.AddressDefaultHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

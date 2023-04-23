@@ -45,6 +45,7 @@ func (l *MemberReceiveAddressQueryDetailLogic) MemberReceiveAddressQueryDetail(i
 		City:          address.City,
 		Region:        address.Region,
 		DetailAddress: address.DetailAddress,
+		Address:       address.Address,
 	}
 
 	reqStr, _ := json.Marshal(in)

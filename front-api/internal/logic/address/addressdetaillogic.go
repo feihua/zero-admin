@@ -56,6 +56,7 @@ func (l *AddressDetailLogic) AddressDetail(req *types.AddressDetailReq) (resp *t
 		PostalCode:    addressQueryDetail.PostCode,
 		Tel:           addressQueryDetail.PhoneNumber,
 		IsDefault:     true,
+		Address:       addressQueryDetail.Address,
 		//AddTime:       addressQueryDetail,
 		//UpdateTime:    "",
 		//Deleted:       false,

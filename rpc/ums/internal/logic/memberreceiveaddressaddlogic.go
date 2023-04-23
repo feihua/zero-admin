@@ -35,6 +35,7 @@ func (l *MemberReceiveAddressAddLogic) MemberReceiveAddressAdd(in *umsclient.Mem
 		City:          in.City,
 		Region:        in.Region,
 		DetailAddress: in.DetailAddress,
+		Address:       in.Address,
 	})
 	if err != nil {
 		return nil, err
