@@ -128,6 +128,20 @@ func (m *PmsProductModel) FindAll(Current int64, PageSize int64) (*[]PmsProduct,
 	}
 }
 
+func (m *PmsProductModel) FindAllByIds(ids []int64) (*[]PmsProduct, error) {
+	query := fmt.Sprintf("select %s from %s where `id` in (?)", pmsProductRows, m.table)
+	var resp []PmsProduct
+	err := m.conn.QueryRows(&resp, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *PmsProductModel) Count() (int64, error) {
 	query := fmt.Sprintf("select count(*) as count from %s", m.table)
 

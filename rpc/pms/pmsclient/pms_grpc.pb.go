@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type PmsClient interface {
 	ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error)
 	ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error)
+	ProductListByIds(ctx context.Context, in *ProductByIdsReq, opts ...grpc.CallOption) (*ProductListResp, error)
 	ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
 	ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
 	ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
@@ -123,6 +124,15 @@ func (c *pmsClient) ProductAdd(ctx context.Context, in *ProductAddReq, opts ...g
 func (c *pmsClient) ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error) {
 	out := new(ProductListResp)
 	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pmsClient) ProductListByIds(ctx context.Context, in *ProductByIdsReq, opts ...grpc.CallOption) (*ProductListResp, error) {
+	out := new(ProductListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductListByIds", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -828,6 +838,7 @@ func (c *pmsClient) CollectAddOrDelete(ctx context.Context, in *CollectAddOrDele
 type PmsServer interface {
 	ProductAdd(context.Context, *ProductAddReq) (*ProductAddResp, error)
 	ProductList(context.Context, *ProductListReq) (*ProductListResp, error)
+	ProductListByIds(context.Context, *ProductByIdsReq) (*ProductListResp, error)
 	ProductUpdate(context.Context, *ProductUpdateReq) (*ProductUpdateResp, error)
 	ProductDelete(context.Context, *ProductDeleteReq) (*ProductDeleteResp, error)
 	ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error)
@@ -917,6 +928,9 @@ func (UnimplementedPmsServer) ProductAdd(context.Context, *ProductAddReq) (*Prod
 }
 func (UnimplementedPmsServer) ProductList(context.Context, *ProductListReq) (*ProductListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductList not implemented")
+}
+func (UnimplementedPmsServer) ProductListByIds(context.Context, *ProductByIdsReq) (*ProductListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductListByIds not implemented")
 }
 func (UnimplementedPmsServer) ProductUpdate(context.Context, *ProductUpdateReq) (*ProductUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductUpdate not implemented")
@@ -1194,6 +1208,24 @@ func _Pms_ProductList_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PmsServer).ProductList(ctx, req.(*ProductListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pms_ProductListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductByIdsReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PmsServer).ProductListByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pmsclient.Pms/ProductListByIds",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PmsServer).ProductListByIds(ctx, req.(*ProductByIdsReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2598,6 +2630,10 @@ var Pms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductList",
 			Handler:    _Pms_ProductList_Handler,
+		},
+		{
+			MethodName: "ProductListByIds",
+			Handler:    _Pms_ProductListByIds_Handler,
 		},
 		{
 			MethodName: "ProductUpdate",

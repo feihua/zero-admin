@@ -32,6 +32,11 @@ func (s *PmsServer) ProductList(ctx context.Context, in *pmsclient.ProductListRe
 	return l.ProductList(in)
 }
 
+func (s *PmsServer) ProductListByIds(ctx context.Context, in *pmsclient.ProductByIdsReq) (*pmsclient.ProductListResp, error) {
+	l := logic.NewProductListByIdsLogic(ctx, s.svcCtx)
+	return l.ProductListByIds(in)
+}
+
 func (s *PmsServer) ProductUpdate(ctx context.Context, in *pmsclient.ProductUpdateReq) (*pmsclient.ProductUpdateResp, error) {
 	l := logic.NewProductUpdateLogic(ctx, s.svcCtx)
 	return l.ProductUpdate(in)

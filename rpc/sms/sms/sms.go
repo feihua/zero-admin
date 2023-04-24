@@ -104,6 +104,7 @@ type (
 	HomeBrandListResp                       = smsclient.HomeBrandListResp
 	HomeBrandUpdateReq                      = smsclient.HomeBrandUpdateReq
 	HomeBrandUpdateResp                     = smsclient.HomeBrandUpdateResp
+	HomeNewProductAddData                   = smsclient.HomeNewProductAddData
 	HomeNewProductAddReq                    = smsclient.HomeNewProductAddReq
 	HomeNewProductAddResp                   = smsclient.HomeNewProductAddResp
 	HomeNewProductDeleteReq                 = smsclient.HomeNewProductDeleteReq
@@ -113,6 +114,7 @@ type (
 	HomeNewProductListResp                  = smsclient.HomeNewProductListResp
 	HomeNewProductUpdateReq                 = smsclient.HomeNewProductUpdateReq
 	HomeNewProductUpdateResp                = smsclient.HomeNewProductUpdateResp
+	HomeRecommendProductAddData             = smsclient.HomeRecommendProductAddData
 	HomeRecommendProductAddReq              = smsclient.HomeRecommendProductAddReq
 	HomeRecommendProductAddResp             = smsclient.HomeRecommendProductAddResp
 	HomeRecommendProductDeleteReq           = smsclient.HomeRecommendProductDeleteReq

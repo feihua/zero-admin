@@ -111,6 +111,7 @@ type (
 	ProductAttributeValueListResp              = pmsclient.ProductAttributeValueListResp
 	ProductAttributeValueUpdateReq             = pmsclient.ProductAttributeValueUpdateReq
 	ProductAttributeValueUpdateResp            = pmsclient.ProductAttributeValueUpdateResp
+	ProductByIdsReq                            = pmsclient.ProductByIdsReq
 	ProductCategoryAddReq                      = pmsclient.ProductCategoryAddReq
 	ProductCategoryAddResp                     = pmsclient.ProductCategoryAddResp
 	ProductCategoryAttributeRelationAddReq     = pmsclient.ProductCategoryAttributeRelationAddReq
@@ -192,6 +193,7 @@ type (
 	Pms interface {
 		ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error)
 		ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error)
+		ProductListByIds(ctx context.Context, in *ProductByIdsReq, opts ...grpc.CallOption) (*ProductListResp, error)
 		ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
 		ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
 		ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
@@ -290,6 +292,11 @@ func (m *defaultPms) ProductAdd(ctx context.Context, in *ProductAddReq, opts ...
 func (m *defaultPms) ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error) {
 	client := pmsclient.NewPmsClient(m.cli.Conn())
 	return client.ProductList(ctx, in, opts...)
+}
+
+func (m *defaultPms) ProductListByIds(ctx context.Context, in *ProductByIdsReq, opts ...grpc.CallOption) (*ProductListResp, error) {
+	client := pmsclient.NewPmsClient(m.cli.Conn())
+	return client.ProductListByIds(ctx, in, opts...)
 }
 
 func (m *defaultPms) ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error) {

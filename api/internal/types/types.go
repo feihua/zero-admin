@@ -2426,10 +2426,7 @@ type DeleteHomeBrandResp struct {
 }
 
 type AddHomeNewProductReq struct {
-	ProductId       int64  `json:"productId"`       // 商品id
-	ProductName     string `json:"productName"`     // 商品名称
-	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int64  `json:"sort"`            // 排序
+	ProductIds []int64 `json:"productIds"` // 商品id
 }
 
 type AddHomeNewProductResp struct {
@@ -2485,10 +2482,7 @@ type DeleteHomeNewProductResp struct {
 }
 
 type AddHomeRecommendProductReq struct {
-	ProductId       int64  `json:"productId"`       // 商品id
-	ProductName     string `json:"productName"`     // 商品名称
-	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int64  `json:"sort"`            // 排序
+	ProductIds []int64 `json:"productIds"` // 商品id
 }
 
 type AddHomeRecommendProductResp struct {

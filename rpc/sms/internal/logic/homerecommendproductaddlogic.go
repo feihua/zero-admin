@@ -25,14 +25,20 @@ func NewHomeRecommendProductAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(in *sms.HomeRecommendProductAddReq) (*sms.HomeRecommendProductAddResp, error) {
-	_, err := l.svcCtx.SmsHomeRecommendProductModel.Insert(l.ctx, &smsmodel.SmsHomeRecommendProduct{
-		ProductId:       in.ProductId,
-		ProductName:     in.ProductName,
-		RecommendStatus: in.RecommendStatus,
-		Sort:            in.Sort,
-	})
-	if err != nil {
-		return nil, err
+	for _, data := range in.RecommendProductAddData {
+		homeBrand, _ := l.svcCtx.SmsHomeBrandModel.FindOneByBrandId(l.ctx, data.ProductId)
+		if homeBrand == nil {
+			_, err := l.svcCtx.SmsHomeRecommendProductModel.Insert(l.ctx, &smsmodel.SmsHomeRecommendProduct{
+				ProductId:       data.ProductId,
+				ProductName:     data.ProductName,
+				RecommendStatus: data.RecommendStatus,
+				Sort:            data.Sort,
+			})
+			if err != nil {
+				return nil, err
+			}
+		}
+
 	}
 
 	return &sms.HomeRecommendProductAddResp{}, nil

@@ -57,6 +57,10 @@ message ProductListReq {
   int64 pageSize = 2;
 }
 
+message ProductByIdsReq {
+  repeated int64  Ids = 1;
+}
+
 message ProductListData{
   int64       Id = 1;
   int64       BrandId = 2;
@@ -1298,6 +1302,7 @@ service Pms {
 
   rpc ProductAdd(ProductAddReq) returns(ProductAddResp);
   rpc ProductList(ProductListReq) returns(ProductListResp);
+  rpc ProductListByIds(ProductByIdsReq) returns(ProductListResp);
   rpc ProductUpdate(ProductUpdateReq) returns(ProductUpdateResp);
   rpc ProductDelete(ProductDeleteReq) returns(ProductDeleteResp);
   rpc ProductDetailById(ProductDetailByIdReq) returns(ProductDetailByIdResp);

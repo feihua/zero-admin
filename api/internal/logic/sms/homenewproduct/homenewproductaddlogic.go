@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"zero-admin/api/internal/common/errorx"
+	"zero-admin/rpc/pms/pmsclient"
 	"zero-admin/rpc/sms/smsclient"
 
 	"zero-admin/api/internal/svc"
@@ -27,11 +28,21 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductReq) (*types.AddHomeNewProductResp, error) {
+	brandListResp, _ := l.svcCtx.Pms.ProductListByIds(l.ctx, &pmsclient.ProductByIdsReq{Ids: req.ProductIds})
+
+	var list []*smsclient.HomeNewProductAddData
+
+	for _, item := range brandListResp.List {
+		list = append(list, &smsclient.HomeNewProductAddData{
+			ProductId:       item.Id,
+			ProductName:     item.Name,
+			RecommendStatus: 1,
+			Sort:            item.Sort,
+		})
+	}
+
 	_, err := l.svcCtx.Sms.HomeNewProductAdd(l.ctx, &smsclient.HomeNewProductAddReq{
-		ProductId:       req.ProductId,
-		ProductName:     req.ProductName,
-		RecommendStatus: req.RecommendStatus,
-		Sort:            req.Sort,
+		NewProductAddData: list,
 	})
 
 	if err != nil {

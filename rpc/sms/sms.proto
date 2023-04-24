@@ -653,11 +653,16 @@ message HomeBrandListResp {
 
 
 message HomeNewProductAddReq {
-  int64 Id = 1; //
-  int64 ProductId = 2; //商品id
-  string ProductName = 3; //商品名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  repeated HomeNewProductAddData NewProductAddData = 1;
+
+
+}
+
+message HomeNewProductAddData {
+  int64 ProductId = 1; //商品id
+  string ProductName = 2; //商品名称
+  int64 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 4; //排序
 
 }
 
@@ -710,11 +715,15 @@ message HomeNewProductListResp {
 
 
 message HomeRecommendProductAddReq {
-  int64 Id = 1; //
-  int64 ProductId = 2; //商品id
-  string ProductName = 3; //商品名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  repeated HomeRecommendProductAddData RecommendProductAddData = 1; //
+
+}
+
+message HomeRecommendProductAddData {
+  int64 ProductId = 1; //商品id
+  string ProductName = 2; //商品名称
+  int64 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 4; //排序
 
 }
 

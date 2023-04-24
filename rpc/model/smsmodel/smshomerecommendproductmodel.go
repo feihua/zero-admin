@@ -18,6 +18,7 @@ type (
 		smsHomeRecommendProductModel
 		Count(ctx context.Context, in *sms.HomeRecommendProductListReq) (int64, error)
 		FindAll(ctx context.Context, in *sms.HomeRecommendProductListReq) (*[]SmsHomeRecommendProduct, error)
+		FindOneByBrandId(ctx context.Context, brandId int64) (*SmsHomeRecommendProduct, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -37,10 +38,10 @@ func (m *customSmsHomeRecommendProductModel) FindAll(ctx context.Context, in *sm
 
 	where := "1=1"
 	if len(in.ProductName) > 0 {
-		where = where + fmt.Sprintf(" AND title like '%%%s%%'", in.ProductName)
+		where = where + fmt.Sprintf(" AND product_name like '%%%s%%'", in.ProductName)
 	}
 	if in.RecommendStatus != 2 {
-		where = where + fmt.Sprintf(" AND status = %d", in.RecommendStatus)
+		where = where + fmt.Sprintf(" AND recommend_status = %d", in.RecommendStatus)
 	}
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", smsHomeRecommendProductRows, m.table, where)
 	var resp []SmsHomeRecommendProduct
@@ -55,13 +56,28 @@ func (m *customSmsHomeRecommendProductModel) FindAll(ctx context.Context, in *sm
 	}
 }
 
+func (m *customSmsHomeRecommendProductModel) FindOneByBrandId(ctx context.Context, brandId int64) (*SmsHomeRecommendProduct, error) {
+
+	where := fmt.Sprintf("product_id = %d", brandId)
+	query := fmt.Sprintf("select %s from %s where %s ", smsHomeRecommendProductRows, m.table, where)
+	var resp SmsHomeRecommendProduct
+	err := m.conn.QueryRow(&resp, query)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
 func (m *customSmsHomeRecommendProductModel) Count(ctx context.Context, in *sms.HomeRecommendProductListReq) (int64, error) {
 	where := "1=1"
 	if len(in.ProductName) > 0 {
-		where = where + fmt.Sprintf(" AND title like '%%%s%%'", in.ProductName)
+		where = where + fmt.Sprintf(" AND product_name like '%%%s%%'", in.ProductName)
 	}
 	if in.RecommendStatus != 2 {
-		where = where + fmt.Sprintf(" AND status = %d", in.RecommendStatus)
+		where = where + fmt.Sprintf(" AND recommend_status = %d", in.RecommendStatus)
 	}
 	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
