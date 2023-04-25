@@ -13,7 +13,7 @@ type (
         EndTime string `json:"endTime"`      // 结束时间
         Status int64 `json:"status"`         // 上下线状态：0->下线；1->上线
         Url string `json:"url"`              // 链接地址
-        Note string `json:"note"`            // 备注
+        Note string `json:"note,optional"`            // 备注
         Sort int64 `json:"sort"`             // 排序
     }
     addHomeAdvertiseResp struct {
@@ -61,7 +61,7 @@ type (
         EndTime string `json:"endTime"`      // 结束时间
         Status int64 `json:"status"`         // 上下线状态：0->下线；1->上线
         Url string `json:"url"`              // 链接地址
-        Note string `json:"note"`            // 备注
+        Note string `json:"note,optional"`            // 备注
         Sort int64 `json:"sort"`             // 排序
     }
     UpdateHomeAdvertiseResp struct {

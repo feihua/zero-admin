@@ -2287,15 +2287,15 @@ type DeleteFlashPromotionSessionResp struct {
 }
 
 type AddHomeAdvertiseReq struct {
-	Name      string `json:"name"`         // 名称
-	Type      int64  `json:"type"`         // 轮播位置：0->PC首页轮播；1->app首页轮播
-	Pic       string `json:"pic,optional"` // 图片地址
-	StartTime string `json:"startTime"`    // 开始时间
-	EndTime   string `json:"endTime"`      // 结束时间
-	Status    int64  `json:"status"`       // 上下线状态：0->下线；1->上线
-	Url       string `json:"url"`          // 链接地址
-	Note      string `json:"note"`         // 备注
-	Sort      int64  `json:"sort"`         // 排序
+	Name      string `json:"name"`          // 名称
+	Type      int64  `json:"type"`          // 轮播位置：0->PC首页轮播；1->app首页轮播
+	Pic       string `json:"pic,optional"`  // 图片地址
+	StartTime string `json:"startTime"`     // 开始时间
+	EndTime   string `json:"endTime"`       // 结束时间
+	Status    int64  `json:"status"`        // 上下线状态：0->下线；1->上线
+	Url       string `json:"url"`           // 链接地址
+	Note      string `json:"note,optional"` // 备注
+	Sort      int64  `json:"sort"`          // 排序
 }
 
 type AddHomeAdvertiseResp struct {
@@ -2340,15 +2340,15 @@ type ListHomeAdvertiseResp struct {
 
 type UpdateHomeAdvertiseReq struct {
 	Id        int64  `json:"id"`
-	Name      string `json:"name"`         // 名称
-	Type      int64  `json:"type"`         // 轮播位置：0->PC首页轮播；1->app首页轮播
-	Pic       string `json:"pic,optional"` // 图片地址
-	StartTime string `json:"startTime"`    // 开始时间
-	EndTime   string `json:"endTime"`      // 结束时间
-	Status    int64  `json:"status"`       // 上下线状态：0->下线；1->上线
-	Url       string `json:"url"`          // 链接地址
-	Note      string `json:"note"`         // 备注
-	Sort      int64  `json:"sort"`         // 排序
+	Name      string `json:"name"`          // 名称
+	Type      int64  `json:"type"`          // 轮播位置：0->PC首页轮播；1->app首页轮播
+	Pic       string `json:"pic,optional"`  // 图片地址
+	StartTime string `json:"startTime"`     // 开始时间
+	EndTime   string `json:"endTime"`       // 结束时间
+	Status    int64  `json:"status"`        // 上下线状态：0->下线；1->上线
+	Url       string `json:"url"`           // 链接地址
+	Note      string `json:"note,optional"` // 备注
+	Sort      int64  `json:"sort"`          // 排序
 }
 
 type UpdateHomeAdvertiseResp struct {
