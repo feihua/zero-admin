@@ -28,17 +28,15 @@ func NewHomeAdvertiseAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) H
 
 func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(req types.AddHomeAdvertiseReq) (*types.AddHomeAdvertiseResp, error) {
 	_, err := l.svcCtx.Sms.HomeAdvertiseAdd(l.ctx, &smsclient.HomeAdvertiseAddReq{
-		Name:       req.Name,
-		Type:       req.Type,
-		Pic:        req.Pic,
-		StartTime:  req.StartTime,
-		EndTime:    req.EndTime,
-		Status:     req.Status,
-		ClickCount: req.ClickCount,
-		OrderCount: req.OrderCount,
-		Url:        req.Url,
-		Note:       req.Note,
-		Sort:       req.Sort,
+		Name:      req.Name,
+		Type:      req.Type,
+		Pic:       "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20181113/movie_ad.jpg", //暂时没有上传,用这个当默认
+		StartTime: req.StartTime,
+		EndTime:   req.EndTime,
+		Status:    req.Status,
+		Url:       req.Url,
+		Note:      req.Note,
+		Sort:      req.Sort,
 	})
 
 	if err != nil {

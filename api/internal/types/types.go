@@ -2287,17 +2287,15 @@ type DeleteFlashPromotionSessionResp struct {
 }
 
 type AddHomeAdvertiseReq struct {
-	Name       string `json:"name"`       // 名称
-	Type       int64  `json:"type"`       // 轮播位置：0->PC首页轮播；1->app首页轮播
-	Pic        string `json:"pic"`        // 图片地址
-	StartTime  string `json:"startTime"`  // 开始时间
-	EndTime    string `json:"endTime"`    // 结束时间
-	Status     int64  `json:"status"`     // 上下线状态：0->下线；1->上线
-	ClickCount int64  `json:"clickCount"` // 点击数
-	OrderCount int64  `json:"orderCount"` // 下单数
-	Url        string `json:"url"`        // 链接地址
-	Note       string `json:"note"`       // 备注
-	Sort       int64  `json:"sort"`       // 排序
+	Name      string `json:"name"`         // 名称
+	Type      int64  `json:"type"`         // 轮播位置：0->PC首页轮播；1->app首页轮播
+	Pic       string `json:"pic,optional"` // 图片地址
+	StartTime string `json:"startTime"`    // 开始时间
+	EndTime   string `json:"endTime"`      // 结束时间
+	Status    int64  `json:"status"`       // 上下线状态：0->下线；1->上线
+	Url       string `json:"url"`          // 链接地址
+	Note      string `json:"note"`         // 备注
+	Sort      int64  `json:"sort"`         // 排序
 }
 
 type AddHomeAdvertiseResp struct {
@@ -2341,18 +2339,16 @@ type ListHomeAdvertiseResp struct {
 }
 
 type UpdateHomeAdvertiseReq struct {
-	Id         int64  `json:"id"`
-	Name       string `json:"name"`       // 名称
-	Type       int64  `json:"type"`       // 轮播位置：0->PC首页轮播；1->app首页轮播
-	Pic        string `json:"pic"`        // 图片地址
-	StartTime  string `json:"startTime"`  // 开始时间
-	EndTime    string `json:"endTime"`    // 结束时间
-	Status     int64  `json:"status"`     // 上下线状态：0->下线；1->上线
-	ClickCount int64  `json:"clickCount"` // 点击数
-	OrderCount int64  `json:"orderCount"` // 下单数
-	Url        string `json:"url"`        // 链接地址
-	Note       string `json:"note"`       // 备注
-	Sort       int64  `json:"sort"`       // 排序
+	Id        int64  `json:"id"`
+	Name      string `json:"name"`         // 名称
+	Type      int64  `json:"type"`         // 轮播位置：0->PC首页轮播；1->app首页轮播
+	Pic       string `json:"pic,optional"` // 图片地址
+	StartTime string `json:"startTime"`    // 开始时间
+	EndTime   string `json:"endTime"`      // 结束时间
+	Status    int64  `json:"status"`       // 上下线状态：0->下线；1->上线
+	Url       string `json:"url"`          // 链接地址
+	Note      string `json:"note"`         // 备注
+	Sort      int64  `json:"sort"`         // 排序
 }
 
 type UpdateHomeAdvertiseResp struct {
@@ -2538,10 +2534,7 @@ type DeleteHomeRecommendProductResp struct {
 }
 
 type AddHomeRecommendSubjectReq struct {
-	SubjectId       int64  `json:"subjectId"`       // 专题id
-	SubjectName     string `json:"subjectName"`     // 专题名称
-	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int64  `json:"sort"`            // 排序
+	SubjectIds []int64 `json:"subjectIds"` // 专题id
 }
 
 type AddHomeRecommendSubjectResp struct {
@@ -3334,6 +3327,97 @@ type DeleteMemberTaskReq struct {
 }
 
 type DeleteMemberTaskResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type AddSubjectReq struct {
+	CategoryId      int64  `json:"categoryId"`
+	Title           string `json:"title"`
+	Pic             string `json:"pic"`          // 专题主图
+	ProductCount    int64  `json:"productCount"` // 关联产品数量
+	RecommendStatus int64  `json:"recommendStatus"`
+	CollectCount    int64  `json:"collectCount"`
+	ReadCount       int64  `json:"readCount"`
+	CommentCount    int64  `json:"commentCount"`
+	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
+	Description     string `json:"description"`
+	ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Content         string `json:"content"`
+	ForwardCount    int64  `json:"forwardCount"` // 转发数
+	CategoryName    string `json:"categoryName"` // 专题分类名称
+}
+
+type AddSubjectResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type ListSubjectReq struct {
+	Current         int64  `json:"current,default=1"`
+	PageSize        int64  `json:"pageSize,default=20"`
+	Title           string `json:"title,optional"`
+	RecommendStatus int64  `json:"recommendStatus,default=2"`
+	ShowStatus      int64  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+}
+
+type ListtSubjectData struct {
+	Id              int64  `json:"id"`
+	CategoryId      int64  `json:"categoryId"`
+	Title           string `json:"title"`
+	Pic             string `json:"pic"`          // 专题主图
+	ProductCount    int64  `json:"productCount"` // 关联产品数量
+	RecommendStatus int64  `json:"recommendStatus"`
+	CreateTime      string `json:"createTime"`
+	CollectCount    int64  `json:"collectCount"`
+	ReadCount       int64  `json:"readCount"`
+	CommentCount    int64  `json:"commentCount"`
+	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
+	Description     string `json:"description"`
+	ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Content         string `json:"content"`
+	ForwardCount    int64  `json:"forwardCount"` // 转发数
+	CategoryName    string `json:"categoryName"` // 专题分类名称
+}
+
+type ListSubjectResp struct {
+	Code     string              `json:"code"`
+	Message  string              `json:"message"`
+	Current  int64               `json:"current,default=1"`
+	Data     []*ListtSubjectData `json:"data"`
+	PageSize int64               `json:"pageSize,default=20"`
+	Success  bool                `json:"success"`
+	Total    int64               `json:"total"`
+}
+
+type UpdateSubjectReq struct {
+	Id              int64  `json:"id"`
+	CategoryId      int64  `json:"categoryId"`
+	Title           string `json:"title"`
+	Pic             string `json:"pic"`          // 专题主图
+	ProductCount    int64  `json:"productCount"` // 关联产品数量
+	RecommendStatus int64  `json:"recommendStatus"`
+	CollectCount    int64  `json:"collectCount"`
+	ReadCount       int64  `json:"readCount"`
+	CommentCount    int64  `json:"commentCount"`
+	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
+	Description     string `json:"description"`
+	ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Content         string `json:"content"`
+	ForwardCount    int64  `json:"forwardCount"` // 转发数
+	CategoryName    string `json:"categoryName"` // 专题分类名称
+}
+
+type UpdateSubjectResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type DeleteSubjectReq struct {
+	Id int64 `json:"id"`
+}
+
+type DeleteSubjectResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

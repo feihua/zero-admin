@@ -4,14 +4,105 @@ package cmsclient;
 
 option go_package = "./cmsclient";
 
-message StreamReq {
-  string name = 1;
+message SubjectAddReq {
+  int64 Id = 1; //
+  int64 CategoryId = 2; //
+  string Title = 3; //
+  string Pic = 4; //专题主图
+  int64 ProductCount = 5; //关联产品数量
+  int64 RecommendStatus = 6; //
+  string CreateTime = 7; //
+  int64 CollectCount = 8; //
+  int64 ReadCount = 9; //
+  int64 CommentCount = 10; //
+  string AlbumPics = 11; //画册图片用逗号分割
+  string Description = 12; //
+  int64 ShowStatus = 13; //显示状态：0->不显示；1->显示
+  string Content = 14; //
+  int64 ForwardCount = 15; //转发数
+  string CategoryName = 16; //专题分类名称
+
 }
 
-message StreamResp {
-  string greet = 1;
+message SubjectAddResp {
+  string pong = 1;
+}
+
+message SubjectDeleteReq {
+  int64 id = 1;
+}
+
+message SubjectDeleteResp {
+  string pong = 1;
+}
+
+message SubjectUpdateReq {
+  int64 Id = 1; //
+  int64 CategoryId = 2; //
+  string Title = 3; //
+  string Pic = 4; //专题主图
+  int64 ProductCount = 5; //关联产品数量
+  int64 RecommendStatus = 6; //
+  string CreateTime = 7; //
+  int64 CollectCount = 8; //
+  int64 ReadCount = 9; //
+  int64 CommentCount = 10; //
+  string AlbumPics = 11; //画册图片用逗号分割
+  string Description = 12; //
+  int64 ShowStatus = 13; //显示状态：0->不显示；1->显示
+  string Content = 14; //
+  int64 ForwardCount = 15; //转发数
+  string CategoryName = 16; //专题分类名称
+
+}
+
+message SubjectUpdateResp {
+  string pong = 1;
+}
+
+message SubjectListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+  string Title = 3; //
+  int64 RecommendStatus = 6; //
+  int64 ShowStatus = 13; //显示状态：0->不显示；1->显示
+
+}
+
+message SubjectListByIdsReq {
+  repeated int64 ids = 1;
+
+}
+
+message SubjectListData {
+  int64 Id = 1; //
+  int64 CategoryId = 2; //
+  string Title = 3; //
+  string Pic = 4; //专题主图
+  int64 ProductCount = 5; //关联产品数量
+  int64 RecommendStatus = 6; //
+  string CreateTime = 7; //
+  int64 CollectCount = 8; //
+  int64 ReadCount = 9; //
+  int64 CommentCount = 10; //
+  string AlbumPics = 11; //画册图片用逗号分割
+  string Description = 12; //
+  int64 ShowStatus = 13; //显示状态：0->不显示；1->显示
+  string Content = 14; //
+  int64 ForwardCount = 15; //转发数
+  string CategoryName = 16; //专题分类名称
+
+}
+
+message SubjectListResp {
+  int64 total = 1;
+  repeated  SubjectListData list = 2;
 }
 
 service Cms {
-  rpc greet(StreamReq) returns (StreamResp);
+  rpc SubjectAdd(SubjectAddReq) returns (SubjectAddResp){}
+  rpc SubjectDelete(SubjectDeleteReq) returns (SubjectDeleteResp){}
+  rpc SubjectUpdate(SubjectUpdateReq) returns (SubjectUpdateResp ){}
+  rpc SubjectList(SubjectListReq) returns (SubjectListResp){}
+  rpc SubjectListByIds(SubjectListByIdsReq) returns (SubjectListResp){}
 }

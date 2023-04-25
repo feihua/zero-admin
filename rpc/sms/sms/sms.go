@@ -124,6 +124,7 @@ type (
 	HomeRecommendProductListResp            = smsclient.HomeRecommendProductListResp
 	HomeRecommendProductUpdateReq           = smsclient.HomeRecommendProductUpdateReq
 	HomeRecommendProductUpdateResp          = smsclient.HomeRecommendProductUpdateResp
+	HomeRecommendSubjectAddData             = smsclient.HomeRecommendSubjectAddData
 	HomeRecommendSubjectAddReq              = smsclient.HomeRecommendSubjectAddReq
 	HomeRecommendSubjectAddResp             = smsclient.HomeRecommendSubjectAddResp
 	HomeRecommendSubjectDeleteReq           = smsclient.HomeRecommendSubjectDeleteReq

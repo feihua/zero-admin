@@ -47,6 +47,8 @@ import "ums/member_statistics_info.api"
 import "ums/member_tag.api"
 import "ums/member_task.api"
 
+import "cms/subject.api"
+
 info(
 	desc: "go zero admin"
 	author: "koobe"

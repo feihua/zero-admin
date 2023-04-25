@@ -25,14 +25,19 @@ func NewHomeRecommendSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(in *sms.HomeRecommendSubjectAddReq) (*sms.HomeRecommendSubjectAddResp, error) {
-	_, err := l.svcCtx.SmsHomeRecommendSubjectModel.Insert(l.ctx, &smsmodel.SmsHomeRecommendSubject{
-		SubjectId:       in.SubjectId,
-		SubjectName:     in.SubjectName,
-		RecommendStatus: in.RecommendStatus,
-		Sort:            in.Sort,
-	})
-	if err != nil {
-		return nil, err
+	for _, data := range in.RecommendSubjectAddData {
+		homeBrand, _ := l.svcCtx.SmsHomeRecommendSubjectModel.FindOneBySubjectId(l.ctx, data.SubjectId)
+		if homeBrand == nil {
+			_, err := l.svcCtx.SmsHomeRecommendSubjectModel.Insert(l.ctx, &smsmodel.SmsHomeRecommendSubject{
+				SubjectId:       data.SubjectId,
+				SubjectName:     data.SubjectName,
+				RecommendStatus: data.RecommendStatus,
+				Sort:            data.Sort,
+			})
+			if err != nil {
+				return nil, err
+			}
+		}
 	}
 
 	return &sms.HomeRecommendSubjectAddResp{}, nil

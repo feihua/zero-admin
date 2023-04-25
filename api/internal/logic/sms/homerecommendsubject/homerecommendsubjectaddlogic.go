@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"zero-admin/api/internal/common/errorx"
+	"zero-admin/rpc/cms/cms"
 	"zero-admin/rpc/sms/smsclient"
 
 	"zero-admin/api/internal/svc"
@@ -27,11 +28,23 @@ func NewHomeRecommendSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHomeRecommendSubjectReq) (*types.AddHomeRecommendSubjectResp, error) {
+	listResp, _ := l.svcCtx.Cms.SubjectListByIds(l.ctx, &cms.SubjectListByIdsReq{
+		Ids: req.SubjectIds,
+	})
+
+	var list []*smsclient.HomeRecommendSubjectAddData
+
+	for _, item := range listResp.List {
+		list = append(list, &smsclient.HomeRecommendSubjectAddData{
+			SubjectId:       item.Id,
+			SubjectName:     item.Title,
+			RecommendStatus: item.RecommendStatus,
+			Sort:            1,
+		})
+	}
+
 	_, err := l.svcCtx.Sms.HomeRecommendSubjectAdd(l.ctx, &smsclient.HomeRecommendSubjectAddReq{
-		SubjectId:       req.SubjectId,
-		SubjectName:     req.SubjectName,
-		RecommendStatus: req.RecommendStatus,
-		Sort:            req.Sort,
+		RecommendSubjectAddData: list,
 	})
 
 	if err != nil {

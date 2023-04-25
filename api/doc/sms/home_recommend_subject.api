@@ -6,10 +6,7 @@ info(
 
 type (
     addHomeRecommendSubjectReq struct {
-        SubjectId int64 `json:"subjectId"`             // 专题id
-        SubjectName string `json:"subjectName"`        // 专题名称
-        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-        Sort int64 `json:"sort"`                       // 排序
+        SubjectIds []int64 `json:"subjectIds"`             // 专题id
     }
     addHomeRecommendSubjectResp struct {
         Code string `json:"code"`
@@ -71,7 +68,7 @@ service admin-api {
     post /list (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
 
     @handler HomeRecommendSubjectUpdate
-    post /apisms/homerecommendsubject/update (UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp)
+    post /update (UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp)
 
     @handler HomeRecommendSubjectDelete
     post /delete (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)

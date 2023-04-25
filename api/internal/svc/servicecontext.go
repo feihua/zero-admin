@@ -36,6 +36,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Pms:      pms.NewPms(zrpc.MustNewClient(c.PmsRpc)),
 		Oms:      oms.NewOms(zrpc.MustNewClient(c.OmsRpc)),
 		Sms:      sms.NewSms(zrpc.MustNewClient(c.SmsRpc)),
+		Cms:      cms.NewCms(zrpc.MustNewClient(c.CmsRpc)),
 		Redis:    newRedis,
 	}
 }

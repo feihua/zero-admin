@@ -777,11 +777,15 @@ message HomeRecommendProductListResp {
 
 
 message HomeRecommendSubjectAddReq {
-  int64 Id = 1; //
-  int64 SubjectId = 2; //专题id
-  string SubjectName = 3; //专题名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  repeated HomeRecommendSubjectAddData RecommendSubjectAddData = 1; //
+
+}
+
+message HomeRecommendSubjectAddData {
+  int64 SubjectId = 1; //专题id
+  string SubjectName = 2; //专题名称
+  int64 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int64 Sort = 4; //排序
 
 }
 

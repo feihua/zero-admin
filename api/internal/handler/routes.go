@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	cmssubject "zero-admin/api/internal/handler/cms/subject"
 	memberaddress "zero-admin/api/internal/handler/member/address"
 	membergrowthchangehistory "zero-admin/api/internal/handler/member/growthchangehistory"
 	memberintegrationchangehistory "zero-admin/api/internal/handler/member/integrationchangehistory"
@@ -1054,7 +1055,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/apisms/homerecommendsubject/update",
+					Path:    "/update",
 					Handler: smshomerecommendsubject.HomeRecommendSubjectUpdateHandler(serverCtx),
 				},
 				{
@@ -1391,5 +1392,35 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/member/task"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/add",
+					Handler: cmssubject.SubjectAddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/list",
+					Handler: cmssubject.SubjectListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/update",
+					Handler: cmssubject.SubjectUpdateHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
+					Handler: cmssubject.SubjectDeleteHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cms/subject"),
 	)
 }

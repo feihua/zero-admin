@@ -19,6 +19,7 @@ type Config struct {
 	//营销
 	SmsRpc zrpc.RpcClientConf
 
+	//内容
 	CmsRpc zrpc.RpcClientConf
 
 	Auth struct {

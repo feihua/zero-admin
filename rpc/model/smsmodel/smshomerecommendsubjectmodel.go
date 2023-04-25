@@ -19,6 +19,7 @@ type (
 		Count(ctx context.Context, in *sms.HomeRecommendSubjectListReq) (int64, error)
 		FindAll(ctx context.Context, in *sms.HomeRecommendSubjectListReq) (*[]SmsHomeRecommendSubject, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		FindOneBySubjectId(ctx context.Context, subjectId int64) (*SmsHomeRecommendSubject, error)
 	}
 
 	customSmsHomeRecommendSubjectModel struct {
@@ -37,10 +38,10 @@ func (m *customSmsHomeRecommendSubjectModel) FindAll(ctx context.Context, in *sm
 
 	where := "1=1"
 	if len(in.SubjectName) > 0 {
-		where = where + fmt.Sprintf(" AND title like '%%%s%%'", in.SubjectName)
+		where = where + fmt.Sprintf(" AND subject_name like '%%%s%%'", in.SubjectName)
 	}
 	if in.RecommendStatus != 2 {
-		where = where + fmt.Sprintf(" AND status = %d", in.RecommendStatus)
+		where = where + fmt.Sprintf(" AND recommend_status = %d", in.RecommendStatus)
 	}
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", smsHomeRecommendSubjectRows, m.table, where)
 	var resp []SmsHomeRecommendSubject
@@ -58,10 +59,10 @@ func (m *customSmsHomeRecommendSubjectModel) FindAll(ctx context.Context, in *sm
 func (m *customSmsHomeRecommendSubjectModel) Count(ctx context.Context, in *sms.HomeRecommendSubjectListReq) (int64, error) {
 	where := "1=1"
 	if len(in.SubjectName) > 0 {
-		where = where + fmt.Sprintf(" AND title like '%%%s%%'", in.SubjectName)
+		where = where + fmt.Sprintf(" AND subject_name like '%%%s%%'", in.SubjectName)
 	}
 	if in.RecommendStatus != 2 {
-		where = where + fmt.Sprintf(" AND status = %d", in.RecommendStatus)
+		where = where + fmt.Sprintf(" AND recommend_status = %d", in.RecommendStatus)
 	}
 	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
@@ -82,4 +83,20 @@ func (m *customSmsHomeRecommendSubjectModel) DeleteByIds(ctx context.Context, id
 	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
 	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
 	return err
+}
+
+func (m *customSmsHomeRecommendSubjectModel) FindOneBySubjectId(ctx context.Context, subjectId int64) (*SmsHomeRecommendSubject, error) {
+
+	where := fmt.Sprintf("subject_id = %d", subjectId)
+	query := fmt.Sprintf("select %s from %s where %s ", smsHomeRecommendSubjectRows, m.table, where)
+	var resp SmsHomeRecommendSubject
+	err := m.conn.QueryRow(&resp, query)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }
