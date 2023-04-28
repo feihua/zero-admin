@@ -1,6 +1,12 @@
 package smsmodel
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"context"
+	"fmt"
+	"github.com/zeromicro/go-zero/core/stores/sqlc"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+	"strings"
+)
 
 var _ SmsCouponHistoryModel = (*customSmsCouponHistoryModel)(nil)
 
@@ -9,6 +15,9 @@ type (
 	// and implement the added methods in customSmsCouponHistoryModel.
 	SmsCouponHistoryModel interface {
 		smsCouponHistoryModel
+		Count(ctx context.Context) (int64, error)
+		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsCouponHistory, error)
+		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
 	customSmsCouponHistoryModel struct {
@@ -21,4 +30,41 @@ func NewSmsCouponHistoryModel(conn sqlx.SqlConn) SmsCouponHistoryModel {
 	return &customSmsCouponHistoryModel{
 		defaultSmsCouponHistoryModel: newSmsCouponHistoryModel(conn),
 	}
+}
+
+func (m *customSmsCouponHistoryModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsCouponHistory, error) {
+
+	query := fmt.Sprintf("select %s from %s limit ?,?", smsCouponHistoryRows, m.table)
+	var resp []SmsCouponHistory
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *customSmsCouponHistoryModel) Count(ctx context.Context) (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
+func (m *customSmsCouponHistoryModel) DeleteByIds(ctx context.Context, ids []int64) error {
+	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	return err
 }
