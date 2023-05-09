@@ -24,8 +24,8 @@ func NewCartItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cart
 }
 
 func (l *CartItemListLogic) CartItemList(in *oms.CartItemListReq) (*oms.CartItemListResp, error) {
-	all, err := l.svcCtx.OmsCartItemModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.OmsCartItemModel.Count()
+	all, err := l.svcCtx.OmsCartItemModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.OmsCartItemModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

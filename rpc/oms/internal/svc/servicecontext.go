@@ -9,14 +9,14 @@ import (
 type ServiceContext struct {
 	c config.Config
 
-	OmsCartItemModel            *omsmodel.OmsCartItemModel
-	OmsCompanyAddressModel      *omsmodel.OmsCompanyAddressModel
-	OmsOrderItemModel           *omsmodel.OmsOrderItemModel
-	OmsOrderModel               *omsmodel.OmsOrderModel
-	OmsOrderOperateHistoryModel *omsmodel.OmsOrderOperateHistoryModel
-	OmsOrderReturnApplyModel    *omsmodel.OmsOrderReturnApplyModel
-	OmsOrderReturnReasonModel   *omsmodel.OmsOrderReturnReasonModel
-	OmsOrderSettingModel        *omsmodel.OmsOrderSettingModel
+	OmsCartItemModel            omsmodel.OmsCartItemModel
+	OmsCompanyAddressModel      omsmodel.OmsCompanyAddressModel
+	OmsOrderItemModel           omsmodel.OmsOrderItemModel
+	OmsOrderModel               omsmodel.OmsOrderModel
+	OmsOrderOperateHistoryModel omsmodel.OmsOrderOperateHistoryModel
+	OmsOrderReturnApplyModel    omsmodel.OmsOrderReturnApplyModel
+	OmsOrderReturnReasonModel   omsmodel.OmsOrderReturnReasonModel
+	OmsOrderSettingModel        omsmodel.OmsOrderSettingModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {

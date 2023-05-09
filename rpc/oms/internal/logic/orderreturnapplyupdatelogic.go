@@ -29,7 +29,7 @@ func (l *OrderReturnApplyUpdateLogic) OrderReturnApplyUpdate(in *oms.OrderReturn
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
 	HandleTime, _ := time.Parse("2006-01-02 15:04:05", in.HandleTime)
 	ReceiveTime, _ := time.Parse("2006-01-02 15:04:05", in.ReceiveTime)
-	err := l.svcCtx.OmsOrderReturnApplyModel.Update(omsmodel.OmsOrderReturnApply{
+	err := l.svcCtx.OmsOrderReturnApplyModel.Update(l.ctx, &omsmodel.OmsOrderReturnApply{
 		Id:               in.Id,
 		OrderId:          in.OrderId,
 		CompanyAddressId: in.CompanyAddressId,

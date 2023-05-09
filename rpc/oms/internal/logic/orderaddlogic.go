@@ -33,7 +33,7 @@ func (l *OrderAddLogic) OrderAdd(in *oms.OrderAddReq) (*oms.OrderAddResp, error)
 	commentTime, _ := time.Parse("2006-01-02 15:04:05", in.CommentTime)
 	modifyTime, _ := time.Parse("2006-01-02 15:04:05", in.ModifyTime)
 
-	_, err := l.svcCtx.OmsOrderModel.Insert(omsmodel.OmsOrder{
+	_, err := l.svcCtx.OmsOrderModel.Insert(l.ctx, &omsmodel.OmsOrder{
 		MemberId:              in.MemberId,
 		CouponId:              in.CouponId,
 		OrderSn:               in.OrderSn,

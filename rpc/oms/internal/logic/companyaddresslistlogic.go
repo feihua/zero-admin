@@ -24,8 +24,8 @@ func NewCompanyAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *CompanyAddressListLogic) CompanyAddressList(in *oms.CompanyAddressListReq) (*oms.CompanyAddressListResp, error) {
-	all, err := l.svcCtx.OmsCompanyAddressModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.OmsCompanyAddressModel.Count()
+	all, err := l.svcCtx.OmsCompanyAddressModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.OmsCompanyAddressModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

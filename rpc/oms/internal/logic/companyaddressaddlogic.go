@@ -24,7 +24,7 @@ func NewCompanyAddressAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *CompanyAddressAddLogic) CompanyAddressAdd(in *oms.CompanyAddressAddReq) (*oms.CompanyAddressAddResp, error) {
-	_, err := l.svcCtx.OmsCompanyAddressModel.Insert(omsmodel.OmsCompanyAddress{
+	_, err := l.svcCtx.OmsCompanyAddressModel.Insert(l.ctx, &omsmodel.OmsCompanyAddress{
 		AddressName:   in.AddressName,
 		SendStatus:    in.SendStatus,
 		ReceiveStatus: in.ReceiveStatus,

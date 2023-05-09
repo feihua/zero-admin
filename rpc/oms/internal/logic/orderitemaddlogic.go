@@ -25,7 +25,7 @@ func NewOrderItemAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Orde
 
 func (l *OrderItemAddLogic) OrderItemAdd(in *oms.OrderItemAddReq) (*oms.OrderItemAddResp, error) {
 
-	_, err := l.svcCtx.OmsOrderItemModel.Insert(omsmodel.OmsOrderItem{
+	_, err := l.svcCtx.OmsOrderItemModel.Insert(l.ctx, &omsmodel.OmsOrderItem{
 		OrderId:           in.OrderId,
 		OrderSn:           in.OrderSn,
 		ProductId:         in.ProductId,

@@ -25,7 +25,7 @@ func NewCompanyAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *CompanyAddressUpdateLogic) CompanyAddressUpdate(in *oms.CompanyAddressUpdateReq) (*oms.CompanyAddressUpdateResp, error) {
-	err := l.svcCtx.OmsCompanyAddressModel.Update(omsmodel.OmsCompanyAddress{
+	err := l.svcCtx.OmsCompanyAddressModel.Update(l.ctx, &omsmodel.OmsCompanyAddress{
 		Id:            in.Id,
 		AddressName:   in.AddressName,
 		SendStatus:    in.SendStatus,

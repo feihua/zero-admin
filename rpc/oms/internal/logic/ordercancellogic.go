@@ -26,7 +26,7 @@ func NewOrderCancelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Order
 }
 
 func (l *OrderCancelLogic) OrderCancel(in *omsclient.OrderCancelReq) (*omsclient.OrderCancelResp, error) {
-	order, err := l.svcCtx.OmsOrderModel.FindOne(in.OrderId)
+	order, err := l.svcCtx.OmsOrderModel.FindOne(l.ctx, in.OrderId)
 
 	if err != nil {
 		return nil, err
@@ -46,9 +46,9 @@ func (l *OrderCancelLogic) OrderCancel(in *omsclient.OrderCancelReq) (*omsclient
 	}
 
 	//设置订单已取消状态
-	if l.svcCtx.OmsOrderModel.UpdateOrderStatus(5, order.Id) != nil {
-		return nil, errors.New("设置订单已取消状态失败")
-	}
+	//if l.svcCtx.OmsOrderModel.UpdateOrderStatus(5, order.Id) != nil {
+	//	return nil, errors.New("设置订单已取消状态失败")
+	//}
 
 	//todo 商品货品数量增加
 

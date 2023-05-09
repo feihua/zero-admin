@@ -24,8 +24,8 @@ func NewOrderReturnApplyListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *oms.OrderReturnApplyListReq) (*oms.OrderReturnApplyListResp, error) {
-	all, err := l.svcCtx.OmsOrderReturnApplyModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.OmsOrderReturnApplyModel.Count()
+	all, err := l.svcCtx.OmsOrderReturnApplyModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.OmsOrderReturnApplyModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -63,7 +63,7 @@ func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *oms.OrderReturnAppl
 			HandleMan:        item.HandleMan,
 			ReceiveMan:       item.ReceiveMan,
 			ReceiveTime:      item.ReceiveTime.Format("2006-01-02 15:04:05"),
-			ReceiveNote:      item.ReceiveNote,
+			ReceiveNote:      item.ReceiveNote.String,
 		})
 	}
 

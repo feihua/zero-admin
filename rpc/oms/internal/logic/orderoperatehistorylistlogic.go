@@ -24,8 +24,8 @@ func NewOrderOperateHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *OrderOperateHistoryListLogic) OrderOperateHistoryList(in *oms.OrderOperateHistoryListReq) (*oms.OrderOperateHistoryListResp, error) {
-	all, err := l.svcCtx.OmsOrderOperateHistoryModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.OmsOrderOperateHistoryModel.Count()
+	all, err := l.svcCtx.OmsOrderOperateHistoryModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.OmsOrderOperateHistoryModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -42,7 +42,7 @@ func (l *OrderOperateHistoryListLogic) OrderOperateHistoryList(in *oms.OrderOper
 			OperateMan:  item.OperateMan,
 			CreateTime:  item.CreateTime.Format("2006-01-02 15:04:05"),
 			OrderStatus: item.OrderStatus,
-			Note:        item.Note,
+			Note:        item.Note.String,
 		})
 	}
 

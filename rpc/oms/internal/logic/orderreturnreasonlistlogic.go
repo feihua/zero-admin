@@ -24,8 +24,8 @@ func NewOrderReturnReasonListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *OrderReturnReasonListLogic) OrderReturnReasonList(in *oms.OrderReturnReasonListReq) (*oms.OrderReturnReasonListResp, error) {
-	all, err := l.svcCtx.OmsOrderReturnReasonModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.OmsOrderReturnReasonModel.Count()
+	all, err := l.svcCtx.OmsOrderReturnReasonModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.OmsOrderReturnReasonModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

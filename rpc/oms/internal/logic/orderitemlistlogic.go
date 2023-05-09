@@ -24,8 +24,8 @@ func NewOrderItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ord
 }
 
 func (l *OrderItemListLogic) OrderItemList(in *oms.OrderItemListReq) (*oms.OrderItemListResp, error) {
-	all, err := l.svcCtx.OmsOrderItemModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.OmsOrderItemModel.Count()
+	all, err := l.svcCtx.OmsOrderItemModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.OmsOrderItemModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

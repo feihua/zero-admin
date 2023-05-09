@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/omsmodel"
 
@@ -27,12 +28,12 @@ func NewOrderOperateHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceC
 
 func (l *OrderOperateHistoryUpdateLogic) OrderOperateHistoryUpdate(in *oms.OrderOperateHistoryUpdateReq) (*oms.OrderOperateHistoryUpdateResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.OmsOrderOperateHistoryModel.Update(omsmodel.OmsOrderOperateHistory{
+	err := l.svcCtx.OmsOrderOperateHistoryModel.Update(l.ctx, &omsmodel.OmsOrderOperateHistory{
 		OrderId:     in.OrderId,
 		OperateMan:  in.OperateMan,
 		CreateTime:  CreateTime,
 		OrderStatus: in.OrderStatus,
-		Note:        in.Note,
+		Note:        sql.NullString{String: in.Note, Valid: true},
 	})
 	if err != nil {
 		return nil, err

@@ -26,7 +26,7 @@ func NewOrderConfirmLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Orde
 }
 
 func (l *OrderConfirmLogic) OrderConfirm(in *omsclient.OrderConfirmReq) (*omsclient.OrderConfirmResp, error) {
-	order, err := l.svcCtx.OmsOrderModel.FindOne(in.OrderId)
+	order, err := l.svcCtx.OmsOrderModel.FindOne(l.ctx, in.OrderId)
 
 	if err != nil {
 		return nil, err
@@ -46,9 +46,9 @@ func (l *OrderConfirmLogic) OrderConfirm(in *omsclient.OrderConfirmReq) (*omscli
 	}
 
 	//设置订单已确认状态
-	if l.svcCtx.OmsOrderModel.UpdateOrderStatus(3, order.Id) != nil {
-		return nil, errors.New("设置订单已确认状态失败")
-	}
+	//if l.svcCtx.OmsOrderModel.UpdateOrderStatus(3, order.Id) != nil {
+	//	return nil, errors.New("设置订单已确认状态失败")
+	//}
 	return &omsclient.OrderConfirmResp{}, nil
 
 }

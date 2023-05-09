@@ -24,8 +24,8 @@ func NewOrderSettingListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *OrderSettingListLogic) OrderSettingList(in *oms.OrderSettingListReq) (*oms.OrderSettingListResp, error) {
-	all, err := l.svcCtx.OmsOrderSettingModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.OmsOrderSettingModel.Count()
+	all, err := l.svcCtx.OmsOrderSettingModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.OmsOrderSettingModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

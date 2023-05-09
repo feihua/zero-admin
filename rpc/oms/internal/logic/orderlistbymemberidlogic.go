@@ -28,7 +28,7 @@ func NewOrderListByMemberIdLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *OrderListByMemberIdLogic) OrderListByMemberId(in *omsclient.OrderListByMemberIdReq) (*omsclient.OrderListByMemberIdResp, error) {
-	orderList, err := l.svcCtx.OmsOrderModel.FindListByMemberId(in.MemberId)
+	orderList, err := l.svcCtx.OmsOrderModel.FindListByMemberId(l.ctx, in.MemberId)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -40,7 +40,7 @@ func (l *OrderListByMemberIdLogic) OrderListByMemberId(in *omsclient.OrderListBy
 	var list []*oms.OrderListByMemberIdData
 	for _, order := range *orderList {
 		statusText := strconv.FormatInt(order.Status, 10)
-		productListByOrderId, _ := l.svcCtx.OmsOrderItemModel.FindProductListByOrderId(order.Id)
+		productListByOrderId, _ := l.svcCtx.OmsOrderItemModel.FindProductListByOrderId(l.ctx, order.Id)
 
 		var goodList []*oms.GoodsListByMemberIdData
 		for _, orderItem := range *productListByOrderId {

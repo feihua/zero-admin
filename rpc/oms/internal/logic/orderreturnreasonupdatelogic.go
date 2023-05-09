@@ -27,7 +27,7 @@ func NewOrderReturnReasonUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *OrderReturnReasonUpdateLogic) OrderReturnReasonUpdate(in *oms.OrderReturnReasonUpdateReq) (*oms.OrderReturnReasonUpdateResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.OmsOrderReturnReasonModel.Update(omsmodel.OmsOrderReturnReason{
+	err := l.svcCtx.OmsOrderReturnReasonModel.Update(l.ctx, &omsmodel.OmsOrderReturnReason{
 		Id:         in.Id,
 		Name:       in.Name,
 		Sort:       in.Sort,
