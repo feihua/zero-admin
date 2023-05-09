@@ -9,4 +9,4 @@ create table sms_coupon_product_relation
 )
     comment '优惠券和产品的关系表';
 
-INSERT INTO gozero.sms_coupon_product_relation (id, coupon_id, product_id, product_name, product_sn) VALUES (9, 21, 33, '小米（MI）小米电视4A ', '4609652');
+INSERT INTO sms_coupon_product_relation (id, coupon_id, product_id, product_name, product_sn) VALUES (9, 21, 33, '小米（MI）小米电视4A ', '4609652');

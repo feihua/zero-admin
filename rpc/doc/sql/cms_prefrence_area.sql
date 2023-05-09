@@ -10,7 +10,7 @@ create table cms_prefrence_area
 )
     comment '优选专区' charset = utf8;
 
-INSERT INTO gozero.cms_prefrence_area (id, name, sub_title, pic, sort, show_status) VALUES (1, '让音质更出众', '音质不打折 完美现场感', 0xEFBBBF20, 1, 1);
-INSERT INTO gozero.cms_prefrence_area (id, name, sub_title, pic, sort, show_status) VALUES (2, '让音质更出众22', '让音质更出众22', 0xEFBBBF20, 2, 1);
-INSERT INTO gozero.cms_prefrence_area (id, name, sub_title, pic, sort, show_status) VALUES (3, '让音质更出众33', ' ', 0xEFBBBF20, 3, 1);
-INSERT INTO gozero.cms_prefrence_area (id, name, sub_title, pic, sort, show_status) VALUES (4, '让音质更出众44', ' ', 0xEFBBBF20, 4, 1);
+INSERT INTO cms_prefrence_area (id, name, sub_title, pic, sort, show_status) VALUES (1, '让音质更出众', '音质不打折 完美现场感', 0xEFBBBF20, 1, 1);
+INSERT INTO cms_prefrence_area (id, name, sub_title, pic, sort, show_status) VALUES (2, '让音质更出众22', '让音质更出众22', 0xEFBBBF20, 2, 1);
+INSERT INTO cms_prefrence_area (id, name, sub_title, pic, sort, show_status) VALUES (3, '让音质更出众33', ' ', 0xEFBBBF20, 3, 1);
+INSERT INTO cms_prefrence_area (id, name, sub_title, pic, sort, show_status) VALUES (4, '让音质更出众44', ' ', 0xEFBBBF20, 4, 1);

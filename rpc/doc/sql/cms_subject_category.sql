@@ -10,5 +10,5 @@ create table cms_subject_category
 )
     comment '专题分类表' charset = utf8;
 
-INSERT INTO gozero.cms_subject_category (id, name, icon, subject_count, show_status, sort) VALUES (1, '服装专题', ' ', 1, 1, 1);
-INSERT INTO gozero.cms_subject_category (id, name, icon, subject_count, show_status, sort) VALUES (2, '手机专题', ' ', 1, 1, 1);
+INSERT INTO cms_subject_category (id, name, icon, subject_count, show_status, sort) VALUES (1, '服装专题', ' ', 1, 1, 1);
+INSERT INTO cms_subject_category (id, name, icon, subject_count, show_status, sort) VALUES (2, '手机专题', ' ', 1, 1, 1);

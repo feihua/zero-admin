@@ -12,4 +12,4 @@ create table ums_growth_change_history
 )
     comment '成长值变化历史记录表';
 
-INSERT INTO gozero.ums_growth_change_history (id, member_id, create_time, change_type, change_count, operate_man, operate_note, source_type) VALUES (1, 1, '2018-08-29 17:16:35', 0, 1000, 'test', '测试使用', 1);
+INSERT INTO ums_growth_change_history (id, member_id, create_time, change_type, change_count, operate_man, operate_note, source_type) VALUES (1, 1, '2018-08-29 17:16:35', 0, 1000, 'test', '测试使用', 1);

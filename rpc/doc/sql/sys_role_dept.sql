@@ -9,6 +9,6 @@ create table sys_role_dept
 )
     comment '角色机构';
 
-INSERT INTO gozero.sys_role_dept (id, role_id, dept_id, create_by, create_time) VALUES (1, 1, 1, 'admin', '2019-01-11 08:30:37');
-INSERT INTO gozero.sys_role_dept (id, role_id, dept_id, create_by, create_time) VALUES (2, 2, 2, 'admin', '2019-01-11 08:31:01');
-INSERT INTO gozero.sys_role_dept (id, role_id, dept_id, create_by, create_time) VALUES (3, 3, 3, 'admin', '2019-01-11 08:31:18');
+INSERT INTO sys_role_dept (id, role_id, dept_id, create_by, create_time) VALUES (1, 1, 1, 'admin', '2019-01-11 08:30:37');
+INSERT INTO sys_role_dept (id, role_id, dept_id, create_by, create_time) VALUES (2, 2, 2, 'admin', '2019-01-11 08:31:01');
+INSERT INTO sys_role_dept (id, role_id, dept_id, create_by, create_time) VALUES (3, 3, 3, 'admin', '2019-01-11 08:31:18');

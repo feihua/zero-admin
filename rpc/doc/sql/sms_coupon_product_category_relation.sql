@@ -9,4 +9,4 @@ create table sms_coupon_product_category_relation
 )
     comment '优惠券和产品分类关系表';
 
-INSERT INTO gozero.sms_coupon_product_category_relation (id, coupon_id, product_category_id, product_category_name, parent_category_name) VALUES (4, 19, 30, '手机配件', '手机数码');
+INSERT INTO sms_coupon_product_category_relation (id, coupon_id, product_category_id, product_category_name, parent_category_name) VALUES (4, 19, 30, '手机配件', '手机数码');

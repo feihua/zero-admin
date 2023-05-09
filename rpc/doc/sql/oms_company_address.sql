@@ -14,6 +14,6 @@ create table oms_company_address
 )
     comment '公司收发货地址表';
 
-INSERT INTO gozero.oms_company_address (id, address_name, send_status, receive_status, name, phone, province, city, region, detail_address) VALUES (1, '深圳发货点', 1, 1, '大梨', '18000000000', '广东省', '深圳市', '南山区', '科兴科学园');
-INSERT INTO gozero.oms_company_address (id, address_name, send_status, receive_status, name, phone, province, city, region, detail_address) VALUES (2, '北京发货点', 0, 0, '大梨', '18000000000', '北京市', ' ', '南山区', '科兴科学园');
-INSERT INTO gozero.oms_company_address (id, address_name, send_status, receive_status, name, phone, province, city, region, detail_address) VALUES (3, '南京发货点', 0, 0, '大梨', '18000000000', '江苏省', '南京市', '南山区', '科兴科学园');
+INSERT INTO oms_company_address (id, address_name, send_status, receive_status, name, phone, province, city, region, detail_address) VALUES (1, '深圳发货点', 1, 1, '大梨', '18000000000', '广东省', '深圳市', '南山区', '科兴科学园');
+INSERT INTO oms_company_address (id, address_name, send_status, receive_status, name, phone, province, city, region, detail_address) VALUES (2, '北京发货点', 0, 0, '大梨', '18000000000', '北京市', ' ', '南山区', '科兴科学园');
+INSERT INTO oms_company_address (id, address_name, send_status, receive_status, name, phone, province, city, region, detail_address) VALUES (3, '南京发货点', 0, 0, '大梨', '18000000000', '江苏省', '南京市', '南山区', '科兴科学园');

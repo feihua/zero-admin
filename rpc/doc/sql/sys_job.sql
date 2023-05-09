@@ -13,5 +13,5 @@ create table sys_job
 )
     comment '职位管理';
 
-INSERT INTO gozero.sys_job (id, job_name, order_num, create_by, create_time, update_by, update_time, del_flag, remarks) VALUES (1, '董事长', 1, 'admin', '2021-04-26 15:50:45', 'admin', '2021-04-26 16:17:07', 0, '测试1');
-INSERT INTO gozero.sys_job (id, job_name, order_num, create_by, create_time, update_by, update_time, del_flag, remarks) VALUES (2, '经理', 2, 'admin', '2021-04-26 16:05:11', 'admin', '2021-04-26 16:16:36', 0, '管理人员1');
+INSERT INTO sys_job (id, job_name, order_num, create_by, create_time, update_by, update_time, del_flag, remarks) VALUES (1, '董事长', 1, 'admin', '2021-04-26 15:50:45', 'admin', '2021-04-26 16:17:07', 0, '测试1');
+INSERT INTO sys_job (id, job_name, order_num, create_by, create_time, update_by, update_time, del_flag, remarks) VALUES (2, '经理', 2, 'admin', '2021-04-26 16:05:11', 'admin', '2021-04-26 16:16:36', 0, '管理人员1');

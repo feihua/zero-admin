@@ -9,4 +9,4 @@ create table ums_integration_consume_setting
 )
     comment '积分消费设置';
 
-INSERT INTO gozero.ums_integration_consume_setting (id, deduction_per_amount, max_percent_per_order, use_unit, coupon_status) VALUES (1, 100, 50, 100, 1);
+INSERT INTO ums_integration_consume_setting (id, deduction_per_amount, max_percent_per_order, use_unit, coupon_status) VALUES (1, 100, 50, 100, 1);

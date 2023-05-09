@@ -13,9 +13,9 @@ create table sys_role
 )
     comment '角色管理';
 
-INSERT INTO gozero.sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (1, 'admin', '超级管理员', 'admin', '2019-01-19 11:11:11', 'admin', '2019-01-19 19:07:18', 0, 1);
-INSERT INTO gozero.sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (2, 'mng', '项目经理', 'admin', '2019-01-19 11:11:11', 'admin', '2019-01-19 11:39:28', 0, 1);
-INSERT INTO gozero.sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (3, 'dev', '开发人员', 'admin', '2019-01-19 11:11:11', 'admin', '2019-01-19 11:39:28', 0, 1);
-INSERT INTO gozero.sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (4, 'test', '测试人员', 'admin', '2019-01-19 11:11:11', 'admin', '2019-01-19 11:11:11', 0, 1);
-INSERT INTO gozero.sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (5, 'demo', '1', 'admin', '2020-11-26 14:52:20', 'admin', '2020-11-26 14:50:18', 0, 1);
-INSERT INTO gozero.sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (6, '1', '1', 'admin', '2020-11-26 15:35:42', 'admin', '2020-11-26 15:01:45', 0, 1);
+INSERT INTO sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (1, 'admin', '超级管理员', 'admin', '2019-01-19 11:11:11', 'admin', '2019-01-19 19:07:18', 0, 1);
+INSERT INTO sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (2, 'mng', '项目经理', 'admin', '2019-01-19 11:11:11', 'admin', '2019-01-19 11:39:28', 0, 1);
+INSERT INTO sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (3, 'dev', '开发人员', 'admin', '2019-01-19 11:11:11', 'admin', '2019-01-19 11:39:28', 0, 1);
+INSERT INTO sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (4, 'test', '测试人员', 'admin', '2019-01-19 11:11:11', 'admin', '2019-01-19 11:11:11', 0, 1);
+INSERT INTO sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (5, 'demo', '1', 'admin', '2020-11-26 14:52:20', 'admin', '2020-11-26 14:50:18', 0, 1);
+INSERT INTO sys_role (id, name, remark, create_by, create_time, update_by, update_time, del_flag, status) VALUES (6, '1', '1', 'admin', '2020-11-26 15:35:42', 'admin', '2020-11-26 15:01:45', 0, 1);
