@@ -35,9 +35,9 @@ type (
 	}
 
 	CmsSubjectProductRelation struct {
-		Id        int64         `db:"id"`
-		SubjectId sql.NullInt64 `db:"subject_id"`
-		ProductId sql.NullInt64 `db:"product_id"`
+		Id        int64 `db:"id"`
+		SubjectId int64 `db:"subject_id"`
+		ProductId int64 `db:"product_id"`
 	}
 )
 

@@ -2,8 +2,8 @@ create table cms_subject_product_relation
 (
     id         bigint auto_increment
         primary key,
-    subject_id bigint null,
-    product_id bigint null
+    subject_id bigint not null,
+    product_id bigint not null
 )
     comment '专题商品关系表' charset = utf8;
 

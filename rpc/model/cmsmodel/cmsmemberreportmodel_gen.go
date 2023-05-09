@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -36,12 +37,12 @@ type (
 
 	CmsMemberReport struct {
 		Id               int64          `db:"id"`
-		ReportType       sql.NullInt64  `db:"report_type"`        // 举报类型：0->商品评价；1->话题内容；2->用户评论
-		ReportMemberName sql.NullString `db:"report_member_name"` // 举报人
-		CreateTime       sql.NullTime   `db:"create_time"`
-		ReportObject     sql.NullString `db:"report_object"`
-		ReportStatus     sql.NullInt64  `db:"report_status"` // 举报状态：0->未处理；1->已处理
-		HandleStatus     sql.NullInt64  `db:"handle_status"` // 处理结果：0->无效；1->有效；2->恶意
+		ReportType       int64          `db:"report_type"`        // 举报类型：0->商品评价；1->话题内容；2->用户评论
+		ReportMemberName string         `db:"report_member_name"` // 举报人
+		CreateTime       time.Time      `db:"create_time"`
+		ReportObject     string         `db:"report_object"`
+		ReportStatus     int64          `db:"report_status"` // 举报状态：0->未处理；1->已处理
+		HandleStatus     int64          `db:"handle_status"` // 处理结果：0->无效；1->有效；2->恶意
 		Note             sql.NullString `db:"note"`
 	}
 )

@@ -35,12 +35,12 @@ type (
 	}
 
 	CmsPrefrenceArea struct {
-		Id         int64          `db:"id"`
-		Name       sql.NullString `db:"name"`
-		SubTitle   sql.NullString `db:"sub_title"`
-		Pic        sql.NullString `db:"pic"` // 展示图片
-		Sort       sql.NullInt64  `db:"sort"`
-		ShowStatus sql.NullInt64  `db:"show_status"`
+		Id         int64  `db:"id"`
+		Name       string `db:"name"`
+		SubTitle   string `db:"sub_title"`
+		Pic        string `db:"pic"` // 展示图片
+		Sort       int64  `db:"sort"`
+		ShowStatus int64  `db:"show_status"`
 	}
 )
 

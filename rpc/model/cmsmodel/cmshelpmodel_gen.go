@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -35,14 +36,14 @@ type (
 	}
 
 	CmsHelp struct {
-		Id         int64          `db:"id"`
-		CategoryId sql.NullInt64  `db:"category_id"`
-		Icon       sql.NullString `db:"icon"`
-		Title      sql.NullString `db:"title"`
-		ShowStatus sql.NullInt64  `db:"show_status"`
-		CreateTime sql.NullTime   `db:"create_time"`
-		ReadCount  sql.NullInt64  `db:"read_count"`
-		Content    sql.NullString `db:"content"`
+		Id         int64     `db:"id"`
+		CategoryId int64     `db:"category_id"`
+		Icon       string    `db:"icon"`
+		Title      string    `db:"title"`
+		ShowStatus int64     `db:"show_status"`
+		CreateTime time.Time `db:"create_time"`
+		ReadCount  int64     `db:"read_count"`
+		Content    string    `db:"content"`
 	}
 )
 

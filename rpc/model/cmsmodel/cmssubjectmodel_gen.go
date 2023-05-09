@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -36,21 +37,21 @@ type (
 
 	CmsSubject struct {
 		Id              int64          `db:"id"`
-		CategoryId      sql.NullInt64  `db:"category_id"`
-		Title           sql.NullString `db:"title"`
-		Pic             sql.NullString `db:"pic"`           // 专题主图
-		ProductCount    sql.NullInt64  `db:"product_count"` // 关联产品数量
-		RecommendStatus sql.NullInt64  `db:"recommend_status"`
-		CreateTime      sql.NullTime   `db:"create_time"`
-		CollectCount    sql.NullInt64  `db:"collect_count"`
-		ReadCount       sql.NullInt64  `db:"read_count"`
-		CommentCount    sql.NullInt64  `db:"comment_count"`
-		AlbumPics       sql.NullString `db:"album_pics"` // 画册图片用逗号分割
+		CategoryId      int64          `db:"category_id"`
+		Title           string         `db:"title"`
+		Pic             string         `db:"pic"`           // 专题主图
+		ProductCount    int64          `db:"product_count"` // 关联产品数量
+		RecommendStatus int64          `db:"recommend_status"`
+		CreateTime      time.Time      `db:"create_time"`
+		CollectCount    int64          `db:"collect_count"`
+		ReadCount       int64          `db:"read_count"`
+		CommentCount    int64          `db:"comment_count"`
+		AlbumPics       string         `db:"album_pics"` // 画册图片用逗号分割
 		Description     sql.NullString `db:"description"`
-		ShowStatus      sql.NullInt64  `db:"show_status"` // 显示状态：0->不显示；1->显示
-		Content         sql.NullString `db:"content"`
-		ForwardCount    sql.NullInt64  `db:"forward_count"` // 转发数
-		CategoryName    sql.NullString `db:"category_name"` // 专题分类名称
+		ShowStatus      int64          `db:"show_status"` // 显示状态：0->不显示；1->显示
+		Content         string         `db:"content"`
+		ForwardCount    int64          `db:"forward_count"` // 转发数
+		CategoryName    string         `db:"category_name"` // 专题分类名称
 	}
 )
 

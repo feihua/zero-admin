@@ -35,12 +35,12 @@ type (
 	}
 
 	CmsHelpCategory struct {
-		Id         int64          `db:"id"`
-		Name       sql.NullString `db:"name"`
-		Icon       sql.NullString `db:"icon"`       // 分类图标
-		HelpCount  sql.NullInt64  `db:"help_count"` // 专题数量
-		ShowStatus sql.NullInt64  `db:"show_status"`
-		Sort       sql.NullInt64  `db:"sort"`
+		Id         int64  `db:"id"`
+		Name       string `db:"name"`
+		Icon       string `db:"icon"`       // 分类图标
+		HelpCount  int64  `db:"help_count"` // 专题数量
+		ShowStatus int64  `db:"show_status"`
+		Sort       int64  `db:"sort"`
 	}
 )
 

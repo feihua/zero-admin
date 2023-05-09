@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -35,13 +36,13 @@ type (
 	}
 
 	CmsTopicComment struct {
-		Id             int64          `db:"id"`
-		MemberNickName sql.NullString `db:"member_nick_name"`
-		TopicId        sql.NullInt64  `db:"topic_id"`
-		MemberIcon     sql.NullString `db:"member_icon"`
-		Content        sql.NullString `db:"content"`
-		CreateTime     sql.NullTime   `db:"create_time"`
-		ShowStatus     sql.NullInt64  `db:"show_status"`
+		Id             int64     `db:"id"`
+		MemberNickName string    `db:"member_nick_name"`
+		TopicId        int64     `db:"topic_id"`
+		MemberIcon     string    `db:"member_icon"`
+		Content        string    `db:"content"`
+		CreateTime     time.Time `db:"create_time"`
+		ShowStatus     int64     `db:"show_status"`
 	}
 )
 

@@ -35,9 +35,9 @@ type (
 	}
 
 	CmsPrefrenceAreaProductRelation struct {
-		Id              int64         `db:"id"`
-		PrefrenceAreaId sql.NullInt64 `db:"prefrence_area_id"`
-		ProductId       sql.NullInt64 `db:"product_id"`
+		Id              int64 `db:"id"`
+		PrefrenceAreaId int64 `db:"prefrence_area_id"`
+		ProductId       int64 `db:"product_id"`
 	}
 )
 

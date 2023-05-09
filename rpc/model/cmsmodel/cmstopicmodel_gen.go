@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -35,18 +36,18 @@ type (
 	}
 
 	CmsTopic struct {
-		Id             int64          `db:"id"`
-		CategoryId     sql.NullInt64  `db:"category_id"`
-		Name           sql.NullString `db:"name"`
-		CreateTime     sql.NullTime   `db:"create_time"`
-		StartTime      sql.NullTime   `db:"start_time"`
-		EndTime        sql.NullTime   `db:"end_time"`
-		AttendCount    sql.NullInt64  `db:"attend_count"`    // 参与人数
-		AttentionCount sql.NullInt64  `db:"attention_count"` // 关注人数
-		ReadCount      sql.NullInt64  `db:"read_count"`
-		AwardName      sql.NullString `db:"award_name"`  // 奖品名称
-		AttendType     sql.NullString `db:"attend_type"` // 参与方式
-		Content        sql.NullString `db:"content"`     // 话题内容
+		Id             int64     `db:"id"`
+		CategoryId     int64     `db:"category_id"`
+		Name           string    `db:"name"`
+		CreateTime     time.Time `db:"create_time"`
+		StartTime      time.Time `db:"start_time"`
+		EndTime        time.Time `db:"end_time"`
+		AttendCount    int64     `db:"attend_count"`    // 参与人数
+		AttentionCount int64     `db:"attention_count"` // 关注人数
+		ReadCount      int64     `db:"read_count"`
+		AwardName      string    `db:"award_name"`  // 奖品名称
+		AttendType     string    `db:"attend_type"` // 参与方式
+		Content        string    `db:"content"`     // 话题内容
 	}
 )
 
