@@ -2,13 +2,13 @@ create table sms_flash_promotion_product_relation
 (
     id                         bigint auto_increment comment '编号'
         primary key,
-    flash_promotion_id         bigint         null,
-    flash_promotion_session_id bigint         null comment '编号',
-    product_id                 bigint         null,
-    flash_promotion_price      decimal(10, 2) null comment '限时购价格',
-    flash_promotion_count      int            null comment '限时购数量',
-    flash_promotion_limit      int            null comment '每人限购数量',
-    sort                       int            null comment '排序'
+    flash_promotion_id         bigint         not null comment '限时购id',
+    flash_promotion_session_id bigint         not null comment '编号',
+    product_id                 bigint         not null comment '商品id',
+    flash_promotion_price      decimal(10, 2) not null comment '限时购价格',
+    flash_promotion_count      int            not null comment '限时购数量',
+    flash_promotion_limit      int            not null comment '每人限购数量',
+    sort                       int            not null comment '排序'
 )
     comment '商品限时购与商品关系表';
 

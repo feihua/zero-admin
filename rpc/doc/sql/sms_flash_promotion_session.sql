@@ -2,11 +2,11 @@ create table sms_flash_promotion_session
 (
     id          bigint auto_increment comment '编号'
         primary key,
-    name        varchar(200) null comment '场次名称',
-    start_time  time         null comment '每日开始时间',
-    end_time    time         null comment '每日结束时间',
-    status      int(1)       null comment '启用状态：0->不启用；1->启用',
-    create_time datetime     null comment '创建时间'
+    name        varchar(200) not null comment '场次名称',
+    start_time  time         not null comment '每日开始时间',
+    end_time    time         not null comment '每日结束时间',
+    status      int(1)       not null comment '启用状态：0->不启用；1->启用',
+    create_time datetime     not null comment '创建时间'
 )
     comment '限时购场次表';
 
