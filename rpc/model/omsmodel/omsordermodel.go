@@ -18,6 +18,7 @@ type (
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrder, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		FindListByMemberId(ctx context.Context, MemberId int64) (*[]OmsOrder, error)
 	}
 
 	customOmsOrderModel struct {
@@ -67,4 +68,20 @@ func (m *customOmsOrderModel) DeleteByIds(ctx context.Context, ids []int64) erro
 	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
 	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
 	return err
+}
+
+// FindListByMemberId 根据用户id查询订单
+func (m *customOmsOrderModel) FindListByMemberId(ctx context.Context, MemberId int64) (*[]OmsOrder, error) {
+
+	query := fmt.Sprintf("select %s from %s where member_id = ? limit 1", omsOrderRows, m.table)
+	var resp []OmsOrder
+	err := m.conn.QueryRows(&resp, query, MemberId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }

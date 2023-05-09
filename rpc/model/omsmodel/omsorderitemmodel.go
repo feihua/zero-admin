@@ -18,6 +18,7 @@ type (
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrderItem, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		FindProductListByOrderId(ctx context.Context, OrderId int64) (*[]OmsOrderItem, error)
 	}
 
 	customOmsOrderItemModel struct {
@@ -67,4 +68,19 @@ func (m *customOmsOrderItemModel) DeleteByIds(ctx context.Context, ids []int64) 
 	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
 	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
 	return err
+}
+
+func (m *customOmsOrderItemModel) FindProductListByOrderId(ctx context.Context, OrderId int64) (*[]OmsOrderItem, error) {
+
+	query := fmt.Sprintf("select %s from %s where order_id = ?", omsOrderItemRows, m.table)
+	var resp []OmsOrderItem
+	err := m.conn.QueryRows(&resp, query, OrderId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }

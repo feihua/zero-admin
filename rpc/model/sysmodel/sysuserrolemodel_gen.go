@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -35,11 +36,11 @@ type (
 	}
 
 	SysUserRole struct {
-		Id         int64          `db:"id"`          // 编号
-		UserId     int64          `db:"user_id"`     // 用户ID
-		RoleId     int64          `db:"role_id"`     // 角色ID
-		CreateBy   sql.NullString `db:"create_by"`   // 创建人
-		CreateTime sql.NullTime   `db:"create_time"` // 创建时间
+		Id         int64     `db:"id"`          // 编号
+		UserId     int64     `db:"user_id"`     // 用户ID
+		RoleId     int64     `db:"role_id"`     // 角色ID
+		CreateBy   string    `db:"create_by"`   // 创建人
+		CreateTime time.Time `db:"create_time"` // 创建时间
 	}
 )
 

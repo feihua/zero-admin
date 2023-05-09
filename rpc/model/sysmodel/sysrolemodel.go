@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/sys/sys"
 )
 
 var _ SysRoleModel = (*customSysRoleModel)(nil)
@@ -16,7 +17,7 @@ type (
 	SysRoleModel interface {
 		sysRoleModel
 		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysRole, error)
+		FindAll(ctx context.Context, in *sys.RoleListReq) (*[]SysRole, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +33,11 @@ func NewSysRoleModel(conn sqlx.SqlConn) SysRoleModel {
 	}
 }
 
-func (m *customSysRoleModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysRole, error) {
+func (m *customSysRoleModel) FindAll(ctx context.Context, in *sys.RoleListReq) (*[]SysRole, error) {
 
 	query := fmt.Sprintf("select %s from %s limit ?,?", sysRoleRows, m.table)
 	var resp []SysRole
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil

@@ -18,6 +18,8 @@ type (
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProduct, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		ProductListByCategoryId(ctx context.Context, CategoryId int64, Current int64, PageSize int64) (*[]PmsProduct, error)
+		FindAllByIds(ctx context.Context, ids []int64) (*[]PmsProduct, error)
 	}
 
 	customPmsProductModel struct {
@@ -67,4 +69,33 @@ func (m *customPmsProductModel) DeleteByIds(ctx context.Context, ids []int64) er
 	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
 	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
 	return err
+}
+
+func (m *customPmsProductModel) ProductListByCategoryId(ctx context.Context, CategoryId int64, Current int64, PageSize int64) (*[]PmsProduct, error) {
+
+	query := fmt.Sprintf("select %s from %s where product_category_id = ?  limit ?,?", pmsProductRows, m.table)
+	var resp []PmsProduct
+	err := m.conn.QueryRows(&resp, query, CategoryId, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *customPmsProductModel) FindAllByIds(ctx context.Context, ids []int64) (*[]PmsProduct, error) {
+	query := fmt.Sprintf("select %s from %s where `id` in (?)", pmsProductRows, m.table)
+	var resp []PmsProduct
+	err := m.conn.QueryRows(&resp, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }

@@ -18,6 +18,7 @@ type (
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsBrand, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		FindAllByIds(ctx context.Context, ids []int64) (*[]PmsBrand, error)
 	}
 
 	customPmsBrandModel struct {
@@ -67,4 +68,18 @@ func (m *customPmsBrandModel) DeleteByIds(ctx context.Context, ids []int64) erro
 	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
 	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
 	return err
+}
+
+func (m *customPmsBrandModel) FindAllByIds(ctx context.Context, ids []int64) (*[]PmsBrand, error) {
+	query := fmt.Sprintf("select %s from %s where `id` in (?)", pmsBrandRows, m.table)
+	var resp []PmsBrand
+	err := m.conn.QueryRows(&resp, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }
