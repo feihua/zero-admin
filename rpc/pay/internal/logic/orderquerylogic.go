@@ -32,7 +32,7 @@ func NewOrderQueryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderQ
 
 func (l *OrderQueryLogic) OrderQuery(in *pay.OrderQueryReq) (*pay.OrderQueryResp, error) {
 	// 查询本地订单是否已经支付
-	result, err := l.svcCtx.WxRecordModel.FindOneByBusinessId(in.BusinessId)
+	result, err := l.svcCtx.WxRecordModel.FindOneByBusinessId(l.ctx, in.BusinessId)
 	if err != nil {
 		return nil, err
 	}
@@ -41,11 +41,11 @@ func (l *OrderQueryLogic) OrderQuery(in *pay.OrderQueryReq) (*pay.OrderQueryResp
 		return &pay.OrderQueryResp{}, nil
 	}
 
-	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, in.PayType)
+	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(l.ctx, in.MerId, in.PayType)
 
 	res, _ := searchTrade(merchants, in.BusinessId)
 
-	_ = l.svcCtx.WxRecordModel.Update(paymodel.PayWxRecord{
+	_ = l.svcCtx.WxRecordModel.Update(l.ctx, &paymodel.PayWxRecord{
 		Id:         result.Id,
 		BusinessId: in.BusinessId,
 		Amount:     result.Amount,

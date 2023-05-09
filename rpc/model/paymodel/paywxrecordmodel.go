@@ -1,71 +1,42 @@
 package paymodel
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
-	"strings"
-	"time"
-
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"github.com/zeromicro/go-zero/core/stringx"
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/builderx"
+	"strings"
 )
 
-var (
-	payWxRecordFieldNames          = builderx.FieldNames(&PayWxRecord{})
-	payWxRecordRows                = strings.Join(payWxRecordFieldNames, ",")
-	payWxRecordRowsExpectAutoSet   = strings.Join(stringx.Remove(payWxRecordFieldNames, "id", "create_time", "update_time"), ",")
-	payWxRecordRowsWithPlaceHolder = strings.Join(stringx.Remove(payWxRecordFieldNames, "id", "pay_type", "create_time", "update_time"), "=?,") + "=?"
-)
+var _ PayWxRecordModel = (*customPayWxRecordModel)(nil)
 
 type (
+	// PayWxRecordModel is an interface to be customized, add more methods here,
+	// and implement the added methods in customPayWxRecordModel.
 	PayWxRecordModel interface {
-		Insert(data PayWxRecord) (sql.Result, error)
-		FindOne(id int64) (*PayWxRecord, error)
-		FindOneByBusinessId(businessId string) (*PayWxRecord, error)
-		Update(data PayWxRecord) error
-		Delete(id int64) error
+		payWxRecordModel
+		Count(ctx context.Context) (int64, error)
+		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PayWxRecord, error)
+		DeleteByIds(ctx context.Context, ids []int64) error
+		FindOneByBusinessId(ctx context.Context, businessId string) (*PayWxRecord, error)
 	}
 
-	defaultPayWxRecordModel struct {
-		conn  sqlx.SqlConn
-		table string
-	}
-
-	PayWxRecord struct {
-		Id         int64     `db:"id"`         // 主键
-		BusinessId string    `db:"businessId"` // 业务编号
-		Amount     string    `db:"amount"`     // 金额
-		PayType    string    `db:"pay_type"`   // 支付类型(APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付)
-		Remarks    string    `db:"remarks"`    // 备注
-		ReturnCode string    `db:"return_code"`
-		ReturnMsg  string    `db:"return_msg"`
-		ResultCode string    `db:"result_code"`
-		ResultMsg  string    `db:"result_msg"`
-		PayStatus  int64     `db:"pay_status"`  // 0：初始化 1：已发送 2：成功 3：失败
-		CreateTime time.Time `db:"create_time"` // 创建时间
-		UpdateTime time.Time `db:"update_time"` // 更新时间
+	customPayWxRecordModel struct {
+		*defaultPayWxRecordModel
 	}
 )
 
+// NewPayWxRecordModel returns a model for the database table.
 func NewPayWxRecordModel(conn sqlx.SqlConn) PayWxRecordModel {
-	return &defaultPayWxRecordModel{
-		conn:  conn,
-		table: "pay_wx_record",
+	return &customPayWxRecordModel{
+		defaultPayWxRecordModel: newPayWxRecordModel(conn),
 	}
 }
+func (m *customPayWxRecordModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PayWxRecord, error) {
 
-func (m *defaultPayWxRecordModel) Insert(data PayWxRecord) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, payWxRecordRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.BusinessId, data.Amount, data.PayType, data.Remarks, data.ReturnCode, data.ReturnMsg, data.ResultCode, data.ResultMsg, data.PayStatus)
-	return ret, err
-}
-
-func (m *defaultPayWxRecordModel) FindOne(id int64) (*PayWxRecord, error) {
-	query := fmt.Sprintf("select %s from %s where id = ? limit 1", payWxRecordRows, m.table)
-	var resp PayWxRecord
-	err := m.conn.QueryRow(&resp, query, id)
+	query := fmt.Sprintf("select %s from %s limit ?,?", payWxRecordRows, m.table)
+	var resp []PayWxRecord
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -76,7 +47,29 @@ func (m *defaultPayWxRecordModel) FindOne(id int64) (*PayWxRecord, error) {
 	}
 }
 
-func (m *defaultPayWxRecordModel) FindOneByBusinessId(businessId string) (*PayWxRecord, error) {
+func (m *customPayWxRecordModel) Count(ctx context.Context) (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
+func (m *customPayWxRecordModel) DeleteByIds(ctx context.Context, ids []int64) error {
+	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	return err
+}
+
+func (m *defaultPayWxRecordModel) FindOneByBusinessId(ctx context.Context, businessId string) (*PayWxRecord, error) {
 	query := fmt.Sprintf("select %s from %s where businessId = ? limit 1", payWxRecordRows, m.table)
 	var resp PayWxRecord
 	err := m.conn.QueryRow(&resp, query, businessId)
@@ -88,16 +81,4 @@ func (m *defaultPayWxRecordModel) FindOneByBusinessId(businessId string) (*PayWx
 	default:
 		return nil, err
 	}
-}
-
-func (m *defaultPayWxRecordModel) Update(data PayWxRecord) error {
-	query := fmt.Sprintf("update %s set %s where id = ?", m.table, payWxRecordRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.BusinessId, data.Amount, data.Remarks, data.ReturnCode, data.ReturnMsg, data.ResultCode, data.ResultMsg, data.PayStatus, data.Id)
-	return err
-}
-
-func (m *defaultPayWxRecordModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id = ?", m.table)
-	_, err := m.conn.Exec(query, id)
-	return err
 }

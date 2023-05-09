@@ -32,7 +32,7 @@ func NewH5UnifiedOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *H5
 }
 
 func (l *H5UnifiedOrderLogic) H5UnifiedOrder(in *pay.UnifiedOrderReq) (*pay.H5UnifiedOrderResp, error) {
-	result, err := l.svcCtx.WxRecordModel.Insert(paymodel.PayWxRecord{
+	result, err := l.svcCtx.WxRecordModel.Insert(l.ctx, &paymodel.PayWxRecord{
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
 		PayType:    in.PayType,
@@ -46,11 +46,11 @@ func (l *H5UnifiedOrderLogic) H5UnifiedOrder(in *pay.UnifiedOrderReq) (*pay.H5Un
 	}
 	id, _ := result.LastInsertId()
 
-	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, in.PayType)
+	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(l.ctx, in.MerId, in.PayType)
 
 	res, _ := h5Pay(merchants)
 
-	_ = l.svcCtx.WxRecordModel.Update(paymodel.PayWxRecord{
+	_ = l.svcCtx.WxRecordModel.Update(l.ctx, &paymodel.PayWxRecord{
 		Id:         id,
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,

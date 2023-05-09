@@ -31,7 +31,7 @@ func NewAppUnifiedOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *A
 }
 
 func (l *AppUnifiedOrderLogic) AppUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.UnifiedOrderResp, error) {
-	result, err := l.svcCtx.WxRecordModel.Insert(paymodel.PayWxRecord{
+	result, err := l.svcCtx.WxRecordModel.Insert(l.ctx, &paymodel.PayWxRecord{
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,
 		PayType:    in.PayType,
@@ -45,11 +45,11 @@ func (l *AppUnifiedOrderLogic) AppUnifiedOrder(in *pay.UnifiedOrderReq) (*pay.Un
 	}
 	id, _ := result.LastInsertId()
 
-	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(in.MerId, in.PayType)
+	merchants, _ := l.svcCtx.WxMerchantsModel.FindOneByMerId(l.ctx, in.MerId, in.PayType)
 
 	res, _ := appPay(merchants)
 
-	_ = l.svcCtx.WxRecordModel.Update(paymodel.PayWxRecord{
+	_ = l.svcCtx.WxRecordModel.Update(l.ctx, &paymodel.PayWxRecord{
 		Id:         id,
 		BusinessId: in.BusinessId,
 		Amount:     in.Amount,

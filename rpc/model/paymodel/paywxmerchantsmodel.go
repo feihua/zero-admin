@@ -1,69 +1,42 @@
 package paymodel
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
-	"strings"
-	"time"
-
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"github.com/zeromicro/go-zero/core/stringx"
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/builderx"
+	"strings"
 )
 
-var (
-	payWxMerchantsFieldNames          = builderx.FieldNames(&PayWxMerchants{})
-	payWxMerchantsRows                = strings.Join(payWxMerchantsFieldNames, ",")
-	payWxMerchantsRowsExpectAutoSet   = strings.Join(stringx.Remove(payWxMerchantsFieldNames, "id", "create_time", "update_time"), ",")
-	payWxMerchantsRowsWithPlaceHolder = strings.Join(stringx.Remove(payWxMerchantsFieldNames, "id", "create_time", "update_time"), "=?,") + "=?"
-)
+var _ PayWxMerchantsModel = (*customPayWxMerchantsModel)(nil)
 
 type (
+	// PayWxMerchantsModel is an interface to be customized, add more methods here,
+	// and implement the added methods in customPayWxMerchantsModel.
 	PayWxMerchantsModel interface {
-		Insert(data PayWxMerchants) (sql.Result, error)
-		FindOne(id int64) (*PayWxMerchants, error)
-		Update(data PayWxMerchants) error
-		Delete(id int64) error
-		FindOneByMerId(merId string, payType string) (*PayWxMerchants, error)
+		payWxMerchantsModel
+		Count(ctx context.Context) (int64, error)
+		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PayWxMerchants, error)
+		DeleteByIds(ctx context.Context, ids []int64) error
+		FindOneByMerId(ctx context.Context, merId string, payType string) (*PayWxMerchants, error)
 	}
 
-	defaultPayWxMerchantsModel struct {
-		conn  sqlx.SqlConn
-		table string
-	}
-
-	PayWxMerchants struct {
-		Id         int64     `db:"id"`
-		MerId      string    `db:"mer_id"`     // 本地系统商户Id,分配给调用方
-		AppId      string    `db:"app_id"`     // 应用ID 微信开放平台审核通过的应用APPID
-		MchId      string    `db:"mch_id"`     // 微信支付分配的商户号
-		MchKey     string    `db:"mch_key"`    // 微信支付分配的商户秘钥
-		PayType    string    `db:"pay_type"`   // APP:APP支付 JSAPI:小程序,公众号 MWEB:H5支付
-		NotifyUrl  string    `db:"notify_url"` // 微信支付回调地址
-		Remarks    string    `db:"remarks"`    // 备注
-		CreateTime time.Time `db:"create_time"`
-		UpdateTime time.Time `db:"update_time"`
+	customPayWxMerchantsModel struct {
+		*defaultPayWxMerchantsModel
 	}
 )
 
+// NewPayWxMerchantsModel returns a model for the database table.
 func NewPayWxMerchantsModel(conn sqlx.SqlConn) PayWxMerchantsModel {
-	return &defaultPayWxMerchantsModel{
-		conn:  conn,
-		table: "pay_wx_merchants",
+	return &customPayWxMerchantsModel{
+		defaultPayWxMerchantsModel: newPayWxMerchantsModel(conn),
 	}
 }
+func (m *customPayWxMerchantsModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PayWxMerchants, error) {
 
-func (m *defaultPayWxMerchantsModel) Insert(data PayWxMerchants) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, payWxMerchantsRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.MerId, data.AppId, data.MchId, data.MchKey, data.PayType, data.NotifyUrl, data.Remarks)
-	return ret, err
-}
-
-func (m *defaultPayWxMerchantsModel) FindOne(id int64) (*PayWxMerchants, error) {
-	query := fmt.Sprintf("select %s from %s where id = ? limit 1", payWxMerchantsRows, m.table)
-	var resp PayWxMerchants
-	err := m.conn.QueryRow(&resp, query, id)
+	query := fmt.Sprintf("select %s from %s limit ?,?", payWxMerchantsRows, m.table)
+	var resp []PayWxMerchants
+	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -74,7 +47,29 @@ func (m *defaultPayWxMerchantsModel) FindOne(id int64) (*PayWxMerchants, error) 
 	}
 }
 
-func (m *defaultPayWxMerchantsModel) FindOneByMerId(merId string, payType string) (*PayWxMerchants, error) {
+func (m *customPayWxMerchantsModel) Count(ctx context.Context) (int64, error) {
+	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
+}
+
+func (m *customPayWxMerchantsModel) DeleteByIds(ctx context.Context, ids []int64) error {
+	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	return err
+}
+
+func (m *defaultPayWxMerchantsModel) FindOneByMerId(ctx context.Context, merId string, payType string) (*PayWxMerchants, error) {
 	query := fmt.Sprintf("select %s from %s where mer_id = ? and pay_type = ? limit 1", payWxMerchantsRows, m.table)
 	var resp PayWxMerchants
 	err := m.conn.QueryRow(&resp, query, merId, payType)
@@ -86,16 +81,4 @@ func (m *defaultPayWxMerchantsModel) FindOneByMerId(merId string, payType string
 	default:
 		return nil, err
 	}
-}
-
-func (m *defaultPayWxMerchantsModel) Update(data PayWxMerchants) error {
-	query := fmt.Sprintf("update %s set %s where id = ?", m.table, payWxMerchantsRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.MerId, data.AppId, data.MchId, data.MchKey, data.PayType, data.NotifyUrl, data.Remarks, data.Id)
-	return err
-}
-
-func (m *defaultPayWxMerchantsModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id = ?", m.table)
-	_, err := m.conn.Exec(query, id)
-	return err
 }
