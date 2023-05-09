@@ -27,7 +27,7 @@ func NewProductOperateLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *ProductOperateLogAddLogic) ProductOperateLogAdd(in *pms.ProductOperateLogAddReq) (*pms.ProductOperateLogAddResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	_, err := l.svcCtx.PmsProductOperateLogModel.Insert(pmsmodel.PmsProductOperateLog{
+	_, err := l.svcCtx.PmsProductOperateLogModel.Insert(l.ctx, &pmsmodel.PmsProductOperateLog{
 		ProductId:        in.ProductId,
 		PriceOld:         float64(in.PriceOld),
 		PriceNew:         float64(in.PriceNew),

@@ -24,8 +24,8 @@ func NewGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(in *ums.GrowthChangeHistoryListReq) (*ums.GrowthChangeHistoryListResp, error) {
-	all, err := l.svcCtx.UmsGrowthChangeHistoryModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsGrowthChangeHistoryModel.Count()
+	all, err := l.svcCtx.UmsGrowthChangeHistoryModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsGrowthChangeHistoryModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -43,7 +43,7 @@ func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(in *ums.GrowthCha
 			ChangeType:  item.ChangeType,
 			ChangeCount: item.ChangeCount,
 			OperateMan:  item.OperateMan,
-			OperateNote: item.OperateNote,
+			OperateNote: item.OperateNote.String,
 			SourceType:  item.SourceType,
 		})
 	}

@@ -24,7 +24,7 @@ func NewProductLadderDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *ProductLadderDeleteLogic) ProductLadderDelete(in *pms.ProductLadderDeleteReq) (*pms.ProductLadderDeleteResp, error) {
-	err := l.svcCtx.PmsProductLadderModel.Delete(in.Id)
+	err := l.svcCtx.PmsProductLadderModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

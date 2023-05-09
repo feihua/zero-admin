@@ -26,8 +26,8 @@ func NewJobListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobListLo
 }
 
 func (l *JobListLogic) JobList(in *sys.JobListReq) (*sys.JobListResp, error) {
-	all, err := l.svcCtx.JobModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.JobModel.Count()
+	all, err := l.svcCtx.JobModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.JobModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -44,10 +44,10 @@ func (l *JobListLogic) JobList(in *sys.JobListReq) (*sys.JobListResp, error) {
 			OrderNum:       job.OrderNum,
 			CreateBy:       job.CreateBy,
 			CreateTime:     job.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   job.LastUpdateBy,
-			LastUpdateTime: job.LastUpdateTime.Format("2006-01-02 15:04:05"),
+			LastUpdateBy:   job.UpdateBy.String,
+			LastUpdateTime: job.UpdateTime.Time.Format("2006-01-02 15:04:05"),
 			DelFlag:        job.DelFlag,
-			Remarks:        job.Remarks,
+			Remarks:        job.Remarks.String,
 		})
 	}
 

@@ -24,8 +24,8 @@ func NewFlashPromotionSessionListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(in *sms.FlashPromotionSessionListReq) (*sms.FlashPromotionSessionListResp, error) {
-	all, err := l.svcCtx.SmsFlashPromotionSessionModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsFlashPromotionSessionModel.Count()
+	all, err := l.svcCtx.SmsFlashPromotionSessionModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.SmsFlashPromotionSessionModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

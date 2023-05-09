@@ -25,7 +25,7 @@ func NewMemberTaskAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mem
 }
 
 func (l *MemberTaskAddLogic) MemberTaskAdd(in *ums.MemberTaskAddReq) (*ums.MemberTaskAddResp, error) {
-	_, err := l.svcCtx.UmsMemberTaskModel.Insert(umsmodel.UmsMemberTask{
+	_, err := l.svcCtx.UmsMemberTaskModel.Insert(l.ctx, &umsmodel.UmsMemberTask{
 		Name:         in.Name,
 		Growth:       in.Growth,
 		Intergration: in.Intergration,

@@ -24,8 +24,8 @@ func NewMemberStatisticsInfoListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(in *ums.MemberStatisticsInfoListReq) (*ums.MemberStatisticsInfoListResp, error) {
-	all, err := l.svcCtx.UmsMemberStatisticsInfoModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberStatisticsInfoModel.Count()
+	all, err := l.svcCtx.UmsMemberStatisticsInfoModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsMemberStatisticsInfoModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

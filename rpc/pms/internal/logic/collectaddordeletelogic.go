@@ -26,7 +26,8 @@ func NewCollectAddOrDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *CollectAddOrDeleteLogic) CollectAddOrDelete(in *pmsclient.CollectAddOrDeleteReq) (*pmsclient.CollectAddOrDeleteResp, error) {
-	collect, _ := l.svcCtx.PmsCollectModel.FindOne(in.MemberId, in.ValueID)
+	//collect, _ := l.svcCtx.PmsCollectModel.FindOne(l.ctx, in.MemberId, in.ValueID)
+	collect, _ := l.svcCtx.PmsCollectModel.FindOne(l.ctx, int64(in.MemberId))
 
 	if collect == nil {
 		//不存在，则添加
@@ -39,8 +40,8 @@ func (l *CollectAddOrDeleteLogic) CollectAddOrDelete(in *pmsclient.CollectAddOrD
 }
 
 //删除收藏
-func deleteCollect(l *CollectAddOrDeleteLogic, collect *pmsmodel.PmsCollect) (*pmsclient.CollectAddOrDeleteResp, error) {
-	err := l.svcCtx.PmsCollectModel.Delete(int64(collect.Id))
+func deleteCollect(l *CollectAddOrDeleteLogic, collect *pmsmodel.PmsProductCollect) (*pmsclient.CollectAddOrDeleteResp, error) {
+	err := l.svcCtx.PmsCollectModel.Delete(l.ctx, collect.Id)
 	return &pmsclient.CollectAddOrDeleteResp{
 		Pong: "pong",
 	}, err
@@ -48,9 +49,9 @@ func deleteCollect(l *CollectAddOrDeleteLogic, collect *pmsmodel.PmsCollect) (*p
 
 //添加收藏
 func insertCollect(in *pmsclient.CollectAddOrDeleteReq, l *CollectAddOrDeleteLogic) (*pmsclient.CollectAddOrDeleteResp, error) {
-	_, err := l.svcCtx.PmsCollectModel.Insert(pmsmodel.PmsCollect{
-		UserId:      in.MemberId,
-		ValueId:     in.ValueID,
+	_, err := l.svcCtx.PmsCollectModel.Insert(l.ctx, &pmsmodel.PmsProductCollect{
+		UserId:      int64(in.MemberId),
+		ValueId:     int64(in.ValueID),
 		CollectType: 0,
 		AddTime:     time.Now(),
 		Deleted:     0,

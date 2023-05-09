@@ -25,7 +25,7 @@ func NewProductCategoryAttributeRelationUpdateLogic(ctx context.Context, svcCtx 
 }
 
 func (l *ProductCategoryAttributeRelationUpdateLogic) ProductCategoryAttributeRelationUpdate(in *pms.ProductCategoryAttributeRelationUpdateReq) (*pms.ProductCategoryAttributeRelationUpdateResp, error) {
-	err := l.svcCtx.PmsProductCategoryAttributeRelationModel.Update(pmsmodel.PmsProductCategoryAttributeRelation{
+	err := l.svcCtx.PmsProductCategoryAttributeRelationModel.Update(l.ctx, &pmsmodel.PmsProductCategoryAttributeRelation{
 		Id:                 in.Id,
 		ProductCategoryId:  in.ProductCategoryId,
 		ProductAttributeId: in.ProductAttributeId,

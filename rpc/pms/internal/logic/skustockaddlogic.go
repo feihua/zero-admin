@@ -25,7 +25,7 @@ func NewSkuStockAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SkuSt
 }
 
 func (l *SkuStockAddLogic) SkuStockAdd(in *pms.SkuStockAddReq) (*pms.SkuStockAddResp, error) {
-	_, err := l.svcCtx.PmsSkuStockModel.Insert(pmsmodel.PmsSkuStock{
+	_, err := l.svcCtx.PmsSkuStockModel.Insert(l.ctx, &pmsmodel.PmsSkuStock{
 		ProductId:      in.ProductId,
 		SkuCode:        in.SkuCode,
 		Price:          float64(in.Price),

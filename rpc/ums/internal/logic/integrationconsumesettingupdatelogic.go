@@ -25,7 +25,7 @@ func NewIntegrationConsumeSettingUpdateLogic(ctx context.Context, svcCtx *svc.Se
 }
 
 func (l *IntegrationConsumeSettingUpdateLogic) IntegrationConsumeSettingUpdate(in *ums.IntegrationConsumeSettingUpdateReq) (*ums.IntegrationConsumeSettingUpdateResp, error) {
-	err := l.svcCtx.UmsIntegrationConsumeSettingModel.Update(umsmodel.UmsIntegrationConsumeSetting{
+	err := l.svcCtx.UmsIntegrationConsumeSettingModel.Update(l.ctx, &umsmodel.UmsIntegrationConsumeSetting{
 		Id:                 in.Id,
 		DeductionPerAmount: in.DeductionPerAmount,
 		MaxPercentPerOrder: in.MaxPercentPerOrder,

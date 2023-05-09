@@ -24,8 +24,8 @@ func NewProductAttributeListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *ProductAttributeListLogic) ProductAttributeList(in *pms.ProductAttributeListReq) (*pms.ProductAttributeListResp, error) {
-	all, err := l.svcCtx.PmsProductAttributeModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductAttributeModel.Count()
+	all, err := l.svcCtx.PmsProductAttributeModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsProductAttributeModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

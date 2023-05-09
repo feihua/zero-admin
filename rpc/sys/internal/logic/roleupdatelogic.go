@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/sysmodel"
 
@@ -26,16 +27,14 @@ func NewRoleUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleUp
 }
 
 func (l *RoleUpdateLogic) RoleUpdate(in *sys.RoleUpdateReq) (*sys.RoleUpdateResp, error) {
-	_ = l.svcCtx.RoleModel.Update(sysmodel.SysRole{
-		Id:             in.Id,
-		Name:           in.Name,
-		Remark:         in.Remark,
-		CreateBy:       "admin",
-		CreateTime:     time.Time{},
-		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Now(),
-		DelFlag:        0,
-		Status:         in.Status,
+	_ = l.svcCtx.RoleModel.Update(l.ctx, &sysmodel.SysRole{
+		Id:         in.Id,
+		Name:       in.Name,
+		Remark:     sql.NullString{String: in.Remark},
+		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
+		UpdateTime: sql.NullTime{Time: time.Now()},
+		DelFlag:    0,
+		Status:     in.Status,
 	})
 
 	return &sys.RoleUpdateResp{}, nil

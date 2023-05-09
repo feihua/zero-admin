@@ -27,7 +27,7 @@ func NewMemberStatisticsInfoAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *MemberStatisticsInfoAddLogic) MemberStatisticsInfoAdd(in *ums.MemberStatisticsInfoAddReq) (*ums.MemberStatisticsInfoAddResp, error) {
 	RecentOrderTime, _ := time.Parse("2006-01-02 15:04:05", in.RecentOrderTime)
-	_, err := l.svcCtx.UmsMemberStatisticsInfoModel.Insert(umsmodel.UmsMemberStatisticsInfo{
+	_, err := l.svcCtx.UmsMemberStatisticsInfoModel.Insert(l.ctx, &umsmodel.UmsMemberStatisticsInfo{
 		MemberId:            in.MemberId,
 		ConsumeAmount:       float64(in.ConsumeAmount),
 		OrderCount:          in.OrderCount,

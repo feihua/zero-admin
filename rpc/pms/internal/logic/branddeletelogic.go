@@ -24,7 +24,7 @@ func NewBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Brand
 }
 
 func (l *BrandDeleteLogic) BrandDelete(in *pms.BrandDeleteReq) (*pms.BrandDeleteResp, error) {
-	err := l.svcCtx.PmsBrandModel.Delete(in.Id)
+	err := l.svcCtx.PmsBrandModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

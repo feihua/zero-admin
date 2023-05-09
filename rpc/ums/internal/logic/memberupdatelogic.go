@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/umsmodel"
 
@@ -28,7 +29,7 @@ func NewMemberUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Memb
 func (l *MemberUpdateLogic) MemberUpdate(in *ums.MemberUpdateReq) (*ums.MemberUpdateResp, error) {
 	createTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
 	birthday, _ := time.Parse("2006-01-02 15:04:05", in.Birthday)
-	l.svcCtx.UmsMemberModel.Update(umsmodel.UmsMember{
+	l.svcCtx.UmsMemberModel.Update(l.ctx, &umsmodel.UmsMember{
 		Id:                    in.Id,
 		MemberLevelId:         in.MemberLevelId,
 		Username:              in.Username,
@@ -37,12 +38,12 @@ func (l *MemberUpdateLogic) MemberUpdate(in *ums.MemberUpdateReq) (*ums.MemberUp
 		Phone:                 in.Phone,
 		Status:                in.Status,
 		CreateTime:            createTime,
-		Icon:                  in.Icon,
-		Gender:                in.Gender,
-		Birthday:              birthday,
-		City:                  in.City,
-		Job:                   in.Job,
-		PersonalizedSignature: in.PersonalizedSignature,
+		Icon:                  sql.NullString{String: in.Icon, Valid: true},
+		Gender:                sql.NullInt64{Int64: in.Gender, Valid: true},
+		Birthday:              sql.NullTime{Time: birthday, Valid: true},
+		City:                  sql.NullString{String: in.City, Valid: true},
+		Job:                   sql.NullString{String: in.Job, Valid: true},
+		PersonalizedSignature: sql.NullString{String: in.PersonalizedSignature, Valid: true},
 		SourceType:            in.SourceType,
 		Integration:           in.Integration,
 		Growth:                in.Growth,

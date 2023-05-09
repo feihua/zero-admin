@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/sysmodel"
 	"zero-admin/rpc/sys/internal/svc"
@@ -25,17 +26,16 @@ func NewConfigAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ConfigA
 }
 
 func (l *ConfigAddLogic) ConfigAdd(in *sys.ConfigAddReq) (*sys.ConfigAddResp, error) {
-	_, err := l.svcCtx.ConfigModel.Insert(sysmodel.SysConfig{
-		Value:          in.Value,
-		Label:          in.Label,
-		Type:           in.Type,
-		Description:    in.Description,
-		Sort:           float64(in.Sort),
-		CreateBy:       in.CreateBy,
-		LastUpdateTime: time.Now(),
-		LastUpdateBy:   in.CreateBy,
-		Remarks:        in.Remarks,
-		DelFlag:        0,
+	_, err := l.svcCtx.ConfigModel.Insert(l.ctx, &sysmodel.SysConfig{
+		Value:       in.Value,
+		Label:       in.Label,
+		Type:        in.Type,
+		Description: in.Description,
+		Sort:        float64(in.Sort),
+		CreateBy:    sql.NullString{String: in.CreateBy, Valid: true},
+		CreateTime:  time.Now(),
+		Remarks:     sql.NullString{String: in.Remarks, Valid: true},
+		DelFlag:     0,
 	})
 	if err != nil {
 		return nil, err

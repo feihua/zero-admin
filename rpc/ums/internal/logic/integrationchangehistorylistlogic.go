@@ -24,8 +24,8 @@ func NewIntegrationChangeHistoryListLogic(ctx context.Context, svcCtx *svc.Servi
 }
 
 func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(in *ums.IntegrationChangeHistoryListReq) (*ums.IntegrationChangeHistoryListResp, error) {
-	all, err := l.svcCtx.UmsIntegrationChangeHistoryModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsIntegrationChangeHistoryModel.Count()
+	all, err := l.svcCtx.UmsIntegrationChangeHistoryModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsIntegrationChangeHistoryModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -43,7 +43,7 @@ func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(in *ums
 			ChangeType:  item.ChangeType,
 			ChangeCount: item.ChangeCount,
 			OperateMan:  item.OperateMan,
-			OperateNote: item.OperateNote,
+			OperateNote: item.OperateNote.String,
 			SourceType:  item.SourceType,
 		})
 	}

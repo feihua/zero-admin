@@ -26,8 +26,8 @@ func NewProductCategorySecondListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *ProductCategorySecondListLogic) ProductCategorySecondList(in *pmsclient.ProductCategorySecondListReq) (*pmsclient.ProductCategoryListResp, error) {
-	all, err := l.svcCtx.PmsProductCategoryModel.FindByParentId(in.ParentId)
-	count, _ := l.svcCtx.PmsProductCategoryModel.Count()
+	all, err := l.svcCtx.PmsProductCategoryModel.FindByParentId(l.ctx, in.ParentId)
+	count, _ := l.svcCtx.PmsProductCategoryModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -50,7 +50,7 @@ func (l *ProductCategorySecondListLogic) ProductCategorySecondList(in *pmsclient
 			Sort:         item.Sort,
 			Icon:         item.Icon,
 			Keywords:     item.Keywords,
-			Description:  item.Description,
+			Description:  item.Description.String,
 		})
 	}
 

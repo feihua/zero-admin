@@ -25,7 +25,7 @@ func NewBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandAdd
 }
 
 func (l *BrandAddLogic) BrandAdd(in *pms.BrandAddReq) (*pms.BrandAddResp, error) {
-	_, err := l.svcCtx.PmsBrandModel.Insert(pmsmodel.PmsBrand{
+	_, err := l.svcCtx.PmsBrandModel.Insert(l.ctx, &pmsmodel.PmsBrand{
 		Name:                in.Name,
 		FirstLetter:         in.FirstLetter,
 		Sort:                in.Sort,

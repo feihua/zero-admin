@@ -25,7 +25,7 @@ func NewMemberRuleSettingUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *MemberRuleSettingUpdateLogic) MemberRuleSettingUpdate(in *ums.MemberRuleSettingUpdateReq) (*ums.MemberRuleSettingUpdateResp, error) {
-	err := l.svcCtx.UmsMemberRuleSettingModel.Update(umsmodel.UmsMemberRuleSetting{
+	err := l.svcCtx.UmsMemberRuleSettingModel.Update(l.ctx, &umsmodel.UmsMemberRuleSetting{
 		Id:                in.Id,
 		ContinueSignDay:   in.ContinueSignDay,
 		ContinueSignPoint: in.ContinueSignPoint,

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"zero-admin/rpc/model/pmsmodel"
 
 	"zero-admin/rpc/pms/internal/svc"
@@ -25,10 +26,10 @@ func NewProductAttributeValueAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *ProductAttributeValueAddLogic) ProductAttributeValueAdd(in *pms.ProductAttributeValueAddReq) (*pms.ProductAttributeValueAddResp, error) {
-	_, err := l.svcCtx.PmsProductAttributeValueModel.Insert(pmsmodel.PmsProductAttributeValue{
+	_, err := l.svcCtx.PmsProductAttributeValueModel.Insert(l.ctx, &pmsmodel.PmsProductAttributeValue{
 		ProductId:          in.ProductId,
 		ProductAttributeId: in.ProductAttributeId,
-		Value:              in.Value,
+		Value:              sql.NullString{String: in.Value},
 	})
 	if err != nil {
 		return nil, err

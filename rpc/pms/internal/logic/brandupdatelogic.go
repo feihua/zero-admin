@@ -25,7 +25,7 @@ func NewBrandUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Brand
 }
 
 func (l *BrandUpdateLogic) BrandUpdate(in *pms.BrandUpdateReq) (*pms.BrandUpdateResp, error) {
-	err := l.svcCtx.PmsBrandModel.Update(pmsmodel.PmsBrand{
+	err := l.svcCtx.PmsBrandModel.Update(l.ctx, &pmsmodel.PmsBrand{
 		Id:                  in.Id,
 		Name:                in.Name,
 		FirstLetter:         in.FirstLetter,

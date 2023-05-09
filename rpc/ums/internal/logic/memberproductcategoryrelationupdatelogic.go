@@ -25,7 +25,7 @@ func NewMemberProductCategoryRelationUpdateLogic(ctx context.Context, svcCtx *sv
 }
 
 func (l *MemberProductCategoryRelationUpdateLogic) MemberProductCategoryRelationUpdate(in *ums.MemberProductCategoryRelationUpdateReq) (*ums.MemberProductCategoryRelationUpdateResp, error) {
-	err := l.svcCtx.UmsMemberProductCategoryRelationModel.Update(umsmodel.UmsMemberProductCategoryRelation{
+	err := l.svcCtx.UmsMemberProductCategoryRelationModel.Update(l.ctx, &umsmodel.UmsMemberProductCategoryRelation{
 		Id:                in.Id,
 		MemberId:          in.MemberId,
 		ProductCategoryId: in.ProductCategoryId,

@@ -24,8 +24,8 @@ func NewMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Member
 }
 
 func (l *MemberListLogic) MemberList(in *ums.MemberListReq) (*ums.MemberListResp, error) {
-	all, err := l.svcCtx.UmsMemberModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberModel.Count()
+	all, err := l.svcCtx.UmsMemberModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsMemberModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -44,12 +44,12 @@ func (l *MemberListLogic) MemberList(in *ums.MemberListReq) (*ums.MemberListResp
 			Phone:                 member.Phone,
 			Status:                member.Status,
 			CreateTime:            member.CreateTime.Format("2006-01-02 15:04:05"),
-			Icon:                  member.Icon,
-			Gender:                member.Gender,
-			Birthday:              member.Birthday.Format("2006-01-02 15:04:05"),
-			City:                  member.City,
-			Job:                   member.Job,
-			PersonalizedSignature: member.PersonalizedSignature,
+			Icon:                  member.Icon.String,
+			Gender:                member.Gender.Int64,
+			Birthday:              member.Birthday.Time.Format("2006-01-02 15:04:05"),
+			City:                  member.City.String,
+			Job:                   member.Job.String,
+			PersonalizedSignature: member.PersonalizedSignature.String,
 			SourceType:            member.SourceType,
 			Integration:           member.Integration,
 			Growth:                member.Growth,

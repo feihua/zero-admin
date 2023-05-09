@@ -26,14 +26,12 @@ func NewLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 }
 
 func (l *LoginLogAddLogic) LoginLogAdd(in *sys.LoginLogAddReq) (*sys.LoginLogAddResp, error) {
-	_, err := l.svcCtx.LoginLogModel.Insert(sysmodel.SysLoginLog{
-		UserName:       in.UserName,
-		Status:         in.Status,
-		Ip:             in.Ip,
-		CreateTime:     time.Now(),
-		CreateBy:       in.CreateBy,
-		LastUpdateBy:   in.CreateBy,
-		LastUpdateTime: time.Now(),
+	_, err := l.svcCtx.LoginLogModel.Insert(l.ctx, &sysmodel.SysLoginLog{
+		UserName:   in.UserName,
+		Status:     in.Status,
+		Ip:         in.Ip,
+		CreateTime: time.Now(),
+		CreateBy:   in.CreateBy,
 	})
 
 	if err != nil {

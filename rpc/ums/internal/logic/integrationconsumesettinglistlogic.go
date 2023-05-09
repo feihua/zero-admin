@@ -24,8 +24,8 @@ func NewIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *ums.IntegrationConsumeSettingListReq) (*ums.IntegrationConsumeSettingListResp, error) {
-	all, err := l.svcCtx.UmsIntegrationConsumeSettingModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsIntegrationConsumeSettingModel.Count()
+	all, err := l.svcCtx.UmsIntegrationConsumeSettingModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsIntegrationConsumeSettingModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

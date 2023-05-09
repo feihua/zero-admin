@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/sysmodel"
 
@@ -26,17 +27,17 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictUp
 }
 
 func (l *DictUpdateLogic) DictUpdate(in *sys.DictUpdateReq) (*sys.DictUpdateResp, error) {
-	err := l.svcCtx.DictModel.Update(sysmodel.SysDict{
-		Id:             in.Id,
-		Value:          in.Value,
-		Label:          in.Label,
-		Type:           in.Type,
-		Description:    in.Description,
-		Sort:           float64(in.Sort),
-		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Now(),
-		Remarks:        in.Remarks,
-		DelFlag:        0,
+	err := l.svcCtx.DictModel.Update(l.ctx, &sysmodel.SysDict{
+		Id:          in.Id,
+		Value:       in.Value,
+		Label:       in.Label,
+		Type:        in.Type,
+		Description: in.Description,
+		Sort:        float64(in.Sort),
+		UpdateBy:    sql.NullString{String: in.LastUpdateBy, Valid: true},
+		UpdateTime:  time.Now(),
+		Remarks:     sql.NullString{String: in.Remarks},
+		DelFlag:     0,
 	})
 
 	if err != nil {

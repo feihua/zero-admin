@@ -24,8 +24,8 @@ func NewProductOperateLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pms.ProductOperateLogListReq) (*pms.ProductOperateLogListResp, error) {
-	all, err := l.svcCtx.PmsProductOperateLogModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductOperateLogModel.Count()
+	all, err := l.svcCtx.PmsProductOperateLogModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsProductOperateLogModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

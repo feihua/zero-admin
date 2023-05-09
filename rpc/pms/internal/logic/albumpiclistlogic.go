@@ -24,8 +24,8 @@ func NewAlbumPicListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Albu
 }
 
 func (l *AlbumPicListLogic) AlbumPicList(in *pms.AlbumPicListReq) (*pms.AlbumPicListResp, error) {
-	all, err := l.svcCtx.PmsAlbumPicModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsAlbumPicModel.Count()
+	all, err := l.svcCtx.PmsAlbumPicModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsAlbumPicModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

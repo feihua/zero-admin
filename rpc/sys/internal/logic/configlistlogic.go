@@ -24,9 +24,9 @@ func NewConfigListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Config
 }
 
 func (l *ConfigListLogic) ConfigList(in *sys.ConfigListReq) (*sys.ConfigListResp, error) {
-	all, err := l.svcCtx.ConfigModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.ConfigModel.FindAll(l.ctx, in.Current, in.PageSize)
 
-	count, _ := l.svcCtx.ConfigModel.Count()
+	count, _ := l.svcCtx.ConfigModel.Count(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -41,12 +41,12 @@ func (l *ConfigListLogic) ConfigList(in *sys.ConfigListReq) (*sys.ConfigListResp
 			Type:           config.Type,
 			Description:    config.Description,
 			Sort:           int64(config.Sort),
-			Remarks:        config.Remarks,
+			Remarks:        config.Remarks.String,
 			DelFlag:        config.DelFlag,
-			CreateBy:       config.CreateBy,
+			CreateBy:       config.CreateBy.String,
 			CreateTime:     config.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   config.LastUpdateBy,
-			LastUpdateTime: config.LastUpdateTime.Format("2006-01-02 15:04:05"),
+			LastUpdateBy:   config.UpdateBy.String,
+			LastUpdateTime: config.UpdateTime.Time.Format("2006-01-02 15:04:05"),
 		})
 	}
 

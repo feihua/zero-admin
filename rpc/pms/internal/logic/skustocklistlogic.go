@@ -24,8 +24,8 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SkuS
 }
 
 func (l *SkuStockListLogic) SkuStockList(in *pms.SkuStockListReq) (*pms.SkuStockListResp, error) {
-	all, err := l.svcCtx.PmsSkuStockModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsSkuStockModel.Count()
+	all, err := l.svcCtx.PmsSkuStockModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsSkuStockModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

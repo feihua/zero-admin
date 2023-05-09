@@ -27,7 +27,7 @@ func NewCommentReplayUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 func (l *CommentReplayUpdateLogic) CommentReplayUpdate(in *pms.CommentReplayUpdateReq) (*pms.CommentReplayUpdateResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.PmsCommentReplayModel.Update(pmsmodel.PmsCommentReplay{
+	err := l.svcCtx.PmsCommentReplayModel.Update(l.ctx, &pmsmodel.PmsCommentReplay{
 		Id:             in.Id,
 		CommentId:      in.CommentId,
 		MemberNickName: in.MemberNickName,

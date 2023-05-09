@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/umsmodel"
 
@@ -27,13 +28,13 @@ func NewGrowthChangeHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceCont
 
 func (l *GrowthChangeHistoryAddLogic) GrowthChangeHistoryAdd(in *ums.GrowthChangeHistoryAddReq) (*ums.GrowthChangeHistoryAddResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	_, err := l.svcCtx.UmsGrowthChangeHistoryModel.Insert(umsmodel.UmsGrowthChangeHistory{
+	_, err := l.svcCtx.UmsGrowthChangeHistoryModel.Insert(l.ctx, &umsmodel.UmsGrowthChangeHistory{
 		MemberId:    in.MemberId,
 		CreateTime:  CreateTime,
 		ChangeType:  in.ChangeType,
 		ChangeCount: in.ChangeCount,
 		OperateMan:  in.OperateMan,
-		OperateNote: in.OperateNote,
+		OperateNote: sql.NullString{String: in.OperateNote, Valid: true},
 		SourceType:  in.SourceType,
 	})
 	if err != nil {

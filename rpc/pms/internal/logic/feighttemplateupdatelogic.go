@@ -25,7 +25,7 @@ func NewFeightTemplateUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FeightTemplateUpdateLogic) FeightTemplateUpdate(in *pms.FeightTemplateUpdateReq) (*pms.FeightTemplateUpdateResp, error) {
-	err := l.svcCtx.PmsFeightTemplateModel.Update(pmsmodel.PmsFeightTemplate{
+	err := l.svcCtx.PmsFeightTemplateModel.Update(l.ctx, &pmsmodel.PmsFeightTemplate{
 		Id:             in.Id,
 		Name:           in.Name,
 		ChargeType:     in.ChargeType,

@@ -24,8 +24,8 @@ func NewProductVertifyRecordListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *ProductVertifyRecordListLogic) ProductVertifyRecordList(in *pms.ProductVertifyRecordListReq) (*pms.ProductVertifyRecordListResp, error) {
-	all, err := l.svcCtx.PmsProductVertifyRecordModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductVertifyRecordModel.Count()
+	all, err := l.svcCtx.PmsProductVertifyRecordModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsProductVertifyRecordModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

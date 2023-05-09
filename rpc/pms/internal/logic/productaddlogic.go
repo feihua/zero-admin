@@ -28,7 +28,7 @@ func NewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Produc
 func (l *ProductAddLogic) ProductAdd(in *pms.ProductAddReq) (*pms.ProductAddResp, error) {
 	PromotionStartTime, _ := time.Parse("2006-01-02 15:04:05", in.PromotionStartTime)
 	PromotionEndTime, _ := time.Parse("2006-01-02 15:04:05", in.PromotionEndTime)
-	_, err := l.svcCtx.PmsProductModel.Insert(pmsmodel.PmsProduct{
+	_, err := l.svcCtx.PmsProductModel.Insert(l.ctx, &pmsmodel.PmsProduct{
 		BrandId:                    in.BrandId,
 		ProductCategoryId:          in.ProductCategoryId,
 		FeightTemplateId:           in.FeightTemplateId,

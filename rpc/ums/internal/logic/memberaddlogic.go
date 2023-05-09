@@ -45,19 +45,20 @@ func (l *MemberAddLogic) MemberAdd(in *ums.MemberAddReq) (*ums.MemberAddResp, er
 }
 
 func insertMember(in *ums.MemberAddReq, l *MemberAddLogic) sql.Result {
-	result, _ := l.svcCtx.UmsMemberModel.Insert(umsmodel.UmsMember{
+	result, _ := l.svcCtx.UmsMemberModel.Insert(l.ctx, &umsmodel.UmsMember{
 		MemberLevelId:         4, //默认是普通会员
 		Username:              in.Username,
 		Password:              in.Password,
 		Nickname:              in.Username,
 		Phone:                 in.Phone,
 		Status:                0,
-		Icon:                  "",
-		Gender:                0,
-		Birthday:              time.Now(),
-		City:                  "",
-		Job:                   "",
-		PersonalizedSignature: "",
+		CreateTime:            time.Now(),
+		Icon:                  sql.NullString{},
+		Gender:                sql.NullInt64{},
+		Birthday:              sql.NullTime{},
+		City:                  sql.NullString{},
+		Job:                   sql.NullString{},
+		PersonalizedSignature: sql.NullString{},
 		SourceType:            0,
 		Integration:           0,
 		Growth:                0,
@@ -69,13 +70,13 @@ func insertMember(in *ums.MemberAddReq, l *MemberAddLogic) sql.Result {
 
 //校验参数
 func checkParams(in *ums.MemberAddReq, l *MemberAddLogic) error {
-	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(in.Username)
+	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(l.ctx, in.Username)
 	if member != nil {
 		logx.WithContext(l.ctx).Errorf("用户名已注册,参数Username:%s", in.Username)
 		return errors.New("用户名已注册")
 	}
 
-	phone, _ := l.svcCtx.UmsMemberModel.FindOneByPhone(in.Phone)
+	phone, _ := l.svcCtx.UmsMemberModel.FindOneByPhone(l.ctx, in.Phone)
 	if phone != nil {
 		logx.WithContext(l.ctx).Errorf("手机号已注册,参数Phone:%s", in.Phone)
 		return errors.New("手机号已注册")

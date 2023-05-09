@@ -24,8 +24,8 @@ func NewFeightTemplateListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *FeightTemplateListLogic) FeightTemplateList(in *pms.FeightTemplateListReq) (*pms.FeightTemplateListResp, error) {
-	all, err := l.svcCtx.PmsFeightTemplateModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsFeightTemplateModel.Count()
+	all, err := l.svcCtx.PmsFeightTemplateModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsFeightTemplateModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

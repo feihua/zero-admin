@@ -25,7 +25,7 @@ func NewCouponProductRelationAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *CouponProductRelationAddLogic) CouponProductRelationAdd(in *sms.CouponProductRelationAddReq) (*sms.CouponProductRelationAddResp, error) {
-	_, err := l.svcCtx.SmsCouponProductRelationModel.Insert(smsmodel.SmsCouponProductRelation{
+	_, err := l.svcCtx.SmsCouponProductRelationModel.Insert(l.ctx, &smsmodel.SmsCouponProductRelation{
 		CouponId:    in.CouponId,
 		ProductId:   in.ProductId,
 		ProductName: in.ProductName,

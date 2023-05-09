@@ -24,8 +24,8 @@ func NewProductCategoryAttributeRelationListLogic(ctx context.Context, svcCtx *s
 }
 
 func (l *ProductCategoryAttributeRelationListLogic) ProductCategoryAttributeRelationList(in *pms.ProductCategoryAttributeRelationListReq) (*pms.ProductCategoryAttributeRelationListResp, error) {
-	all, err := l.svcCtx.PmsProductCategoryAttributeRelationModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductCategoryAttributeRelationModel.Count()
+	all, err := l.svcCtx.PmsProductCategoryAttributeRelationModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsProductCategoryAttributeRelationModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

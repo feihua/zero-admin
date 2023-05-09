@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"zero-admin/rpc/model/pmsmodel"
 
 	"zero-admin/rpc/pms/internal/svc"
@@ -25,7 +26,7 @@ func NewProductCategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *ProductCategoryAddLogic) ProductCategoryAdd(in *pms.ProductCategoryAddReq) (*pms.ProductCategoryAddResp, error) {
-	_, err := l.svcCtx.PmsProductCategoryModel.Insert(pmsmodel.PmsProductCategory{
+	_, err := l.svcCtx.PmsProductCategoryModel.Insert(l.ctx, &pmsmodel.PmsProductCategory{
 		ParentId:     in.ParentId,
 		Name:         in.Name,
 		Level:        in.Level,
@@ -36,7 +37,7 @@ func (l *ProductCategoryAddLogic) ProductCategoryAdd(in *pms.ProductCategoryAddR
 		Sort:         in.Sort,
 		Icon:         in.Icon,
 		Keywords:     in.Keywords,
-		Description:  in.Description,
+		Description:  sql.NullString{String: in.Description},
 	})
 	if err != nil {
 		return nil, err

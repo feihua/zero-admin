@@ -27,7 +27,7 @@ func NewMemberLoginLogUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *MemberLoginLogUpdateLogic) MemberLoginLogUpdate(in *ums.MemberLoginLogUpdateReq) (*ums.MemberLoginLogUpdateResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.UmsMemberLoginLogModel.Update(umsmodel.UmsMemberLoginLog{
+	err := l.svcCtx.UmsMemberLoginLogModel.Update(l.ctx, &umsmodel.UmsMemberLoginLog{
 		Id:         in.Id,
 		MemberId:   in.MemberId,
 		CreateTime: CreateTime,

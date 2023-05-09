@@ -9,25 +9,25 @@ import (
 type ServiceContext struct {
 	c config.Config
 
-	PmsAlbumModel                            *pmsmodel.PmsAlbumModel
-	PmsAlbumPicModel                         *pmsmodel.PmsAlbumPicModel
-	PmsBrandModel                            *pmsmodel.PmsBrandModel
-	PmsCommentModel                          *pmsmodel.PmsCommentModel
-	PmsCommentReplayModel                    *pmsmodel.PmsCommentReplayModel
-	PmsFeightTemplateModel                   *pmsmodel.PmsFeightTemplateModel
-	PmsMemberPriceModel                      *pmsmodel.PmsMemberPriceModel
-	PmsProductAttributeCategoryModel         *pmsmodel.PmsProductAttributeCategoryModel
-	PmsProductAttributeModel                 *pmsmodel.PmsProductAttributeModel
-	PmsProductAttributeValueModel            *pmsmodel.PmsProductAttributeValueModel
-	PmsProductCategoryAttributeRelationModel *pmsmodel.PmsProductCategoryAttributeRelationModel
-	PmsProductCategoryModel                  *pmsmodel.PmsProductCategoryModel
-	PmsProductFullReductionModel             *pmsmodel.PmsProductFullReductionModel
-	PmsProductLadderModel                    *pmsmodel.PmsProductLadderModel
-	PmsProductModel                          *pmsmodel.PmsProductModel
-	PmsProductOperateLogModel                *pmsmodel.PmsProductOperateLogModel
-	PmsProductVertifyRecordModel             *pmsmodel.PmsProductVertifyRecordModel
-	PmsSkuStockModel                         *pmsmodel.PmsSkuStockModel
-	PmsCollectModel                          *pmsmodel.PmsCollectModel
+	PmsAlbumModel                            pmsmodel.PmsAlbumModel
+	PmsAlbumPicModel                         pmsmodel.PmsAlbumPicModel
+	PmsBrandModel                            pmsmodel.PmsBrandModel
+	PmsCommentModel                          pmsmodel.PmsCommentModel
+	PmsCommentReplayModel                    pmsmodel.PmsCommentReplayModel
+	PmsFeightTemplateModel                   pmsmodel.PmsFeightTemplateModel
+	PmsMemberPriceModel                      pmsmodel.PmsMemberPriceModel
+	PmsProductAttributeCategoryModel         pmsmodel.PmsProductAttributeCategoryModel
+	PmsProductAttributeModel                 pmsmodel.PmsProductAttributeModel
+	PmsProductAttributeValueModel            pmsmodel.PmsProductAttributeValueModel
+	PmsProductCategoryAttributeRelationModel pmsmodel.PmsProductCategoryAttributeRelationModel
+	PmsProductCategoryModel                  pmsmodel.PmsProductCategoryModel
+	PmsProductFullReductionModel             pmsmodel.PmsProductFullReductionModel
+	PmsProductLadderModel                    pmsmodel.PmsProductLadderModel
+	PmsProductModel                          pmsmodel.PmsProductModel
+	PmsProductOperateLogModel                pmsmodel.PmsProductOperateLogModel
+	PmsProductVertifyRecordModel             pmsmodel.PmsProductVertifyRecordModel
+	PmsSkuStockModel                         pmsmodel.PmsSkuStockModel
+	PmsCollectModel                          pmsmodel.PmsProductCollectModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -54,5 +54,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		PmsProductOperateLogModel:                pmsmodel.NewPmsProductOperateLogModel(sqlConn),
 		PmsProductVertifyRecordModel:             pmsmodel.NewPmsProductVertifyRecordModel(sqlConn),
 		PmsSkuStockModel:                         pmsmodel.NewPmsSkuStockModel(sqlConn),
+		PmsCollectModel:                          pmsmodel.NewPmsProductCollectModel(sqlConn),
 	}
 }

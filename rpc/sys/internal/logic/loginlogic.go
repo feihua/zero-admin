@@ -29,7 +29,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 
 //根据用户名和密码登录
 func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
-	userInfo, err := l.svcCtx.UserModel.FindOneByName(in.UserName)
+	userInfo, err := l.svcCtx.UserModel.FindOneByName(l.ctx, in.UserName)
 
 	switch err {
 	case nil:

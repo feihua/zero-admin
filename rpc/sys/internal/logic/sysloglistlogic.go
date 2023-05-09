@@ -25,8 +25,8 @@ func NewSysLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLog
 }
 
 func (l *SysLogListLogic) SysLogList(in *sys.SysLogListReq) (*sys.SysLogListResp, error) {
-	all, err := l.svcCtx.SysLogModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.SysLogModel.Count()
+	all, err := l.svcCtx.SysLogModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.SysLogModel.Count(l.ctx)
 
 	if err != nil {
 		return nil, err
@@ -35,17 +35,15 @@ func (l *SysLogListLogic) SysLogList(in *sys.SysLogListReq) (*sys.SysLogListResp
 	for _, log := range *all {
 		fmt.Println(log)
 		list = append(list, &sys.SysLogListData{
-			Id:             log.Id,
-			UserName:       log.UserName,
-			Operation:      log.Operation,
-			Method:         log.Method,
-			Params:         log.Params,
-			Time:           log.Time,
-			Ip:             log.Ip,
-			CreateBy:       log.CreateBy,
-			CreateTime:     log.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   log.LastUpdateBy,
-			LastUpdateTime: log.LastUpdateTime.Format("2006-01-02 15:04:05"),
+			Id:         log.Id,
+			UserName:   log.UserName,
+			Operation:  log.Operation,
+			Method:     log.Method,
+			Params:     log.Params,
+			Time:       log.Time,
+			Ip:         log.Ip.String,
+			CreateBy:   log.CreateBy,
+			CreateTime: log.CreateTime.Format("2006-01-02 15:04:05"),
 		})
 	}
 

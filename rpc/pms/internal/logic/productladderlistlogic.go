@@ -24,8 +24,8 @@ func NewProductLadderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ProductLadderListLogic) ProductLadderList(in *pms.ProductLadderListReq) (*pms.ProductLadderListResp, error) {
-	all, err := l.svcCtx.PmsProductLadderModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductLadderModel.Count()
+	all, err := l.svcCtx.PmsProductLadderModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsProductLadderModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

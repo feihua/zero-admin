@@ -28,7 +28,7 @@ func NewCouponHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *CouponHistoryUpdateLogic) CouponHistoryUpdate(in *sms.CouponHistoryUpdateReq) (*sms.CouponHistoryUpdateResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
 	UseTime, _ := time.Parse("2006-01-02 15:04:05", in.UseTime)
-	err := l.svcCtx.SmsCouponHistoryModel.Update(smsmodel.SmsCouponHistory{
+	err := l.svcCtx.SmsCouponHistoryModel.Update(l.ctx, &smsmodel.SmsCouponHistory{
 		Id:             in.Id,
 		CouponId:       in.CouponId,
 		MemberId:       in.MemberId,

@@ -24,8 +24,8 @@ func NewCommentListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Comme
 }
 
 func (l *CommentListLogic) CommentList(in *pms.CommentListReq) (*pms.CommentListResp, error) {
-	all, err := l.svcCtx.PmsCommentModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsCommentModel.Count()
+	all, err := l.svcCtx.PmsCommentModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsCommentModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

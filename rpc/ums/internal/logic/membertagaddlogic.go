@@ -25,7 +25,7 @@ func NewMemberTagAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Memb
 }
 
 func (l *MemberTagAddLogic) MemberTagAdd(in *ums.MemberTagAddReq) (*ums.MemberTagAddResp, error) {
-	_, err := l.svcCtx.UmsMemberTagModel.Insert(umsmodel.UmsMemberTag{
+	_, err := l.svcCtx.UmsMemberTagModel.Insert(l.ctx, &umsmodel.UmsMemberTag{
 		Name:              in.Name,
 		FinishOrderCount:  in.FinishOrderCount,
 		FinishOrderAmount: float64(in.FinishOrderAmount),

@@ -26,8 +26,8 @@ func NewMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuList
 }
 
 func (l *MenuListLogic) MenuList(in *sys.MenuListReq) (*sys.MenuListResp, error) {
-	count, _ := l.svcCtx.MenuModel.Count()
-	all, err := l.svcCtx.MenuModel.FindAll(1, count)
+	count, _ := l.svcCtx.MenuModel.Count(l.ctx)
+	all, err := l.svcCtx.MenuModel.FindAll(l.ctx, 1, count)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -41,20 +41,20 @@ func (l *MenuListLogic) MenuList(in *sys.MenuListReq) (*sys.MenuListResp, error)
 			Id:             menu.Id,
 			Name:           menu.Name,
 			ParentId:       menu.ParentId,
-			Url:            menu.Url,
-			Perms:          menu.Perms,
+			Url:            menu.Url.String,
+			Perms:          menu.Perms.String,
 			Type:           menu.Type,
-			Icon:           menu.Icon,
-			OrderNum:       menu.OrderNum,
+			Icon:           menu.Icon.String,
+			OrderNum:       menu.OrderNum.Int64,
 			CreateBy:       menu.CreateBy,
 			CreateTime:     menu.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   menu.LastUpdateBy,
-			LastUpdateTime: menu.LastUpdateTime.Format("2006-01-02 15:04:05"),
+			LastUpdateBy:   menu.UpdateBy.String,
+			LastUpdateTime: menu.UpdateTime.Time.Format("2006-01-02 15:04:05"),
 			DelFlag:        menu.DelFlag,
-			VuePath:        menu.VuePath,
-			VueComponent:   menu.VueComponent,
-			VueIcon:        menu.VueIcon,
-			VueRedirect:    menu.VueRedirect,
+			VuePath:        menu.VuePath.String,
+			VueComponent:   menu.VueComponent.String,
+			VueIcon:        menu.VueIcon.String,
+			VueRedirect:    menu.VueRedirect.String,
 		})
 	}
 

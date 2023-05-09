@@ -9,14 +9,14 @@ import (
 type ServiceContext struct {
 	c config.Config
 
-	SmsCouponHistoryModel                 *smsmodel.SmsCouponHistoryModel
+	SmsCouponHistoryModel                 smsmodel.SmsCouponHistoryModel
 	SmsCouponModel                        smsmodel.SmsCouponModel
-	SmsCouponProductCategoryRelationModel *smsmodel.SmsCouponProductCategoryRelationModel
-	SmsCouponProductRelationModel         *smsmodel.SmsCouponProductRelationModel
+	SmsCouponProductCategoryRelationModel smsmodel.SmsCouponProductCategoryRelationModel
+	SmsCouponProductRelationModel         smsmodel.SmsCouponProductRelationModel
 	SmsFlashPromotionLogModel             smsmodel.SmsFlashPromotionLogModel
 	SmsFlashPromotionModel                smsmodel.SmsFlashPromotionModel
-	SmsFlashPromotionProductRelationModel *smsmodel.SmsFlashPromotionProductRelationModel
-	SmsFlashPromotionSessionModel         *smsmodel.SmsFlashPromotionSessionModel
+	SmsFlashPromotionProductRelationModel smsmodel.SmsFlashPromotionProductRelationModel
+	SmsFlashPromotionSessionModel         smsmodel.SmsFlashPromotionSessionModel
 	SmsHomeAdvertiseModel                 smsmodel.SmsHomeAdvertiseModel
 	SmsHomeBrandModel                     smsmodel.SmsHomeBrandModel
 	SmsHomeNewProductModel                smsmodel.SmsHomeNewProductModel

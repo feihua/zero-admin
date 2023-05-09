@@ -24,8 +24,8 @@ func NewProductCategoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *ProductCategoryListLogic) ProductCategoryList(in *pms.ProductCategoryListReq) (*pms.ProductCategoryListResp, error) {
-	all, err := l.svcCtx.PmsProductCategoryModel.FindAll(in.Current, 1000)
-	count, _ := l.svcCtx.PmsProductCategoryModel.Count()
+	all, err := l.svcCtx.PmsProductCategoryModel.FindAll(l.ctx, in.Current, 1000)
+	count, _ := l.svcCtx.PmsProductCategoryModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -48,7 +48,7 @@ func (l *ProductCategoryListLogic) ProductCategoryList(in *pms.ProductCategoryLi
 			Sort:         item.Sort,
 			Icon:         item.Icon,
 			Keywords:     item.Keywords,
-			Description:  item.Description,
+			Description:  item.Description.String,
 		})
 	}
 

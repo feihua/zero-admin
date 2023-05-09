@@ -24,17 +24,15 @@ func NewUpdateMenuRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 }
 
 func (l *UpdateMenuRoleLogic) UpdateMenuRole(in *sys.UpdateMenuRoleReq) (*sys.UpdateMenuRoleResp, error) {
-	_ = l.svcCtx.RoleMenuModel.Delete(in.RoleId)
+	_ = l.svcCtx.RoleMenuModel.Delete(l.ctx, in.RoleId)
 
 	ids := in.MenuIds
 	for _, id := range ids {
-		_, _ = l.svcCtx.RoleMenuModel.Insert(sysmodel.SysRoleMenu{
-			RoleId:         in.RoleId,
-			MenuId:         id,
-			CreateBy:       "admin",
-			CreateTime:     time.Now(),
-			LastUpdateBy:   "admin",
-			LastUpdateTime: time.Now(),
+		_, _ = l.svcCtx.RoleMenuModel.Insert(l.ctx, &sysmodel.SysRoleMenu{
+			RoleId:     in.RoleId,
+			MenuId:     id,
+			CreateBy:   "admin",
+			CreateTime: time.Now(),
 		})
 	}
 

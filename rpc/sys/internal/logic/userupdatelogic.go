@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/sysmodel"
 
@@ -27,29 +28,27 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserUp
 
 func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp, error) {
 
-	_ = l.svcCtx.UserModel.Update(sysmodel.SysUser{
-		Id:             in.Id,
-		Name:           in.Name,
-		NickName:       in.NickName,
-		Avatar:         in.Avatar,
-		Email:          in.Email,
-		Mobile:         in.Mobile,
-		DeptId:         in.DeptId,
-		LastUpdateBy:   in.LastUpdateBy,
-		Status:         in.Status,
-		LastUpdateTime: time.Now(),
-		JobId:          in.JobId,
+	_ = l.svcCtx.UserModel.Update(l.ctx, &sysmodel.SysUser{
+		Id:         in.Id,
+		Name:       in.Name,
+		NickName:   sql.NullString{String: in.NickName},
+		Avatar:     sql.NullString{String: in.Avatar},
+		Email:      sql.NullString{String: in.Email},
+		Mobile:     sql.NullString{String: in.Mobile},
+		DeptId:     in.DeptId,
+		UpdateBy:   sql.NullString{String: in.LastUpdateBy},
+		Status:     in.Status,
+		UpdateTime: sql.NullTime{Time: time.Now()},
+		JobId:      in.JobId,
 	})
 
-	_ = l.svcCtx.UserRoleModel.Delete(in.Id)
+	_ = l.svcCtx.UserRoleModel.Delete(l.ctx, in.Id)
 
-	_, _ = l.svcCtx.UserRoleModel.Insert(sysmodel.SysUserRole{
-		UserId:         in.Id,
-		RoleId:         in.RoleId,
-		CreateBy:       "admin",
-		CreateTime:     time.Now(),
-		LastUpdateBy:   "admin",
-		LastUpdateTime: time.Now(),
+	_, _ = l.svcCtx.UserRoleModel.Insert(l.ctx, &sysmodel.SysUserRole{
+		UserId:     in.Id,
+		RoleId:     in.RoleId,
+		CreateBy:   "admin",
+		CreateTime: time.Now(),
 	})
 
 	return &sys.UserUpdateResp{}, nil

@@ -25,12 +25,12 @@ func NewFlashPromotionProductRelationUpdateLogic(ctx context.Context, svcCtx *sv
 }
 
 func (l *FlashPromotionProductRelationUpdateLogic) FlashPromotionProductRelationUpdate(in *sms.FlashPromotionProductRelationUpdateReq) (*sms.FlashPromotionProductRelationUpdateResp, error) {
-	err := l.svcCtx.SmsFlashPromotionProductRelationModel.Update(smsmodel.SmsFlashPromotionProductRelation{
+	err := l.svcCtx.SmsFlashPromotionProductRelationModel.Update(l.ctx, &smsmodel.SmsFlashPromotionProductRelation{
 		Id:                      in.Id,
 		FlashPromotionId:        in.FlashPromotionId,
 		FlashPromotionSessionId: in.FlashPromotionSessionId,
 		ProductId:               in.ProductId,
-		FlashPromotionPrice:     float64(in.FlashPromotionPrice),
+		FlashPromotionPrice:     in.FlashPromotionPrice,
 		FlashPromotionCount:     in.FlashPromotionCount,
 		FlashPromotionLimit:     in.FlashPromotionLimit,
 		Sort:                    in.Sort,

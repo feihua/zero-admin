@@ -25,7 +25,7 @@ func NewAlbumAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AlbumAdd
 }
 
 func (l *AlbumAddLogic) AlbumAdd(in *pms.AlbumAddReq) (*pms.AlbumAddResp, error) {
-	_, err := l.svcCtx.PmsAlbumModel.Insert(pmsmodel.PmsAlbum{
+	_, err := l.svcCtx.PmsAlbumModel.Insert(l.ctx, &pmsmodel.PmsAlbum{
 		Name:        in.Name,
 		CoverPic:    in.CoverPic,
 		PicCount:    in.PicCount,

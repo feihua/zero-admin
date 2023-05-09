@@ -9,19 +9,19 @@ import (
 type ServiceContext struct {
 	Config config.Config
 
-	UmsGrowthChangeHistoryModel           *umsmodel.UmsGrowthChangeHistoryModel
-	UmsIntegrationChangeHistoryModel      *umsmodel.UmsIntegrationChangeHistoryModel
-	UmsIntegrationConsumeSettingModel     *umsmodel.UmsIntegrationConsumeSettingModel
-	UmsMemberModel                        *umsmodel.UmsMemberModel
-	UmsMemberLevelModel                   *umsmodel.UmsMemberLevelModel
-	UmsMemberLoginLogModel                *umsmodel.UmsMemberLoginLogModel
-	UmsMemberMemberTagRelationModel       *umsmodel.UmsMemberMemberTagRelationModel
-	UmsMemberProductCategoryRelationModel *umsmodel.UmsMemberProductCategoryRelationModel
-	UmsMemberReceiveAddressModel          *umsmodel.UmsMemberReceiveAddressModel
-	UmsMemberRuleSettingModel             *umsmodel.UmsMemberRuleSettingModel
-	UmsMemberStatisticsInfoModel          *umsmodel.UmsMemberStatisticsInfoModel
-	UmsMemberTaskModel                    *umsmodel.UmsMemberTaskModel
-	UmsMemberTagModel                     *umsmodel.UmsMemberTagModel
+	UmsGrowthChangeHistoryModel           umsmodel.UmsGrowthChangeHistoryModel
+	UmsIntegrationChangeHistoryModel      umsmodel.UmsIntegrationChangeHistoryModel
+	UmsIntegrationConsumeSettingModel     umsmodel.UmsIntegrationConsumeSettingModel
+	UmsMemberModel                        umsmodel.UmsMemberModel
+	UmsMemberLevelModel                   umsmodel.UmsMemberLevelModel
+	UmsMemberLoginLogModel                umsmodel.UmsMemberLoginLogModel
+	UmsMemberMemberTagRelationModel       umsmodel.UmsMemberMemberTagRelationModel
+	UmsMemberProductCategoryRelationModel umsmodel.UmsMemberProductCategoryRelationModel
+	UmsMemberReceiveAddressModel          umsmodel.UmsMemberReceiveAddressModel
+	UmsMemberRuleSettingModel             umsmodel.UmsMemberRuleSettingModel
+	UmsMemberStatisticsInfoModel          umsmodel.UmsMemberStatisticsInfoModel
+	UmsMemberTaskModel                    umsmodel.UmsMemberTaskModel
+	UmsMemberTagModel                     umsmodel.UmsMemberTagModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {

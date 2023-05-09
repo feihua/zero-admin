@@ -25,7 +25,7 @@ func NewMemberPriceAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 }
 
 func (l *MemberPriceAddLogic) MemberPriceAdd(in *pms.MemberPriceAddReq) (*pms.MemberPriceAddResp, error) {
-	_, err := l.svcCtx.PmsMemberPriceModel.Insert(pmsmodel.PmsMemberPrice{
+	_, err := l.svcCtx.PmsMemberPriceModel.Insert(l.ctx, &pmsmodel.PmsMemberPrice{
 		ProductId:       in.ProductId,
 		MemberLevelId:   in.MemberLevelId,
 		MemberPrice:     float64(in.MemberPrice),

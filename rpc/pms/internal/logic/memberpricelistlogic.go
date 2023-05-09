@@ -24,8 +24,8 @@ func NewMemberPriceListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 }
 
 func (l *MemberPriceListLogic) MemberPriceList(in *pms.MemberPriceListReq) (*pms.MemberPriceListResp, error) {
-	all, err := l.svcCtx.PmsMemberPriceModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsMemberPriceModel.Count()
+	all, err := l.svcCtx.PmsMemberPriceModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsMemberPriceModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

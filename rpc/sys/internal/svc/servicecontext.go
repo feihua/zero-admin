@@ -9,16 +9,16 @@ import (
 type ServiceContext struct {
 	Config config.Config
 
-	UserModel     *sysmodel.SysUserModel
-	UserRoleModel *sysmodel.SysUserRoleModel
-	RoleModel     *sysmodel.SysRoleModel
-	RoleMenuModel *sysmodel.SysRoleMenuModel
-	MenuModel     *sysmodel.SysMenuModel
-	DictModel     *sysmodel.SysDictModel
-	DeptModel     *sysmodel.SysDeptModel
-	LoginLogModel *sysmodel.SysLoginLogModel
-	SysLogModel   *sysmodel.SysLogModel
-	ConfigModel   *sysmodel.SysConfigModel
+	UserModel     sysmodel.SysUserModel
+	UserRoleModel sysmodel.SysUserRoleModel
+	RoleModel     sysmodel.SysRoleModel
+	RoleMenuModel sysmodel.SysRoleMenuModel
+	MenuModel     sysmodel.SysMenuModel
+	DictModel     sysmodel.SysDictModel
+	DeptModel     sysmodel.SysDeptModel
+	LoginLogModel sysmodel.SysLoginLogModel
+	SysLogModel   sysmodel.SysLogModel
+	ConfigModel   sysmodel.SysConfigModel
 	JobModel      sysmodel.SysJobModel
 }
 

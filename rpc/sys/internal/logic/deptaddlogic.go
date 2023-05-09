@@ -26,14 +26,13 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptAddLo
 }
 
 func (l *DeptAddLogic) DeptAdd(in *sys.DeptAddReq) (*sys.DeptAddResp, error) {
-	_, err := l.svcCtx.DeptModel.Insert(sysmodel.SysDept{
-		Name:           in.Name,
-		ParentId:       in.ParentId,
-		OrderNum:       in.OrderNum,
-		CreateBy:       in.CreateBy,
-		LastUpdateBy:   in.CreateBy,
-		LastUpdateTime: time.Now(),
-		DelFlag:        0,
+	_, err := l.svcCtx.DeptModel.Insert(l.ctx, &sysmodel.SysDept{
+		Name:       in.Name,
+		ParentId:   in.ParentId,
+		OrderNum:   in.OrderNum,
+		CreateBy:   in.CreateBy,
+		CreateTime: time.Now(),
+		DelFlag:    0,
 	})
 
 	if err != nil {

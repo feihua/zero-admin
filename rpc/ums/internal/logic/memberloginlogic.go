@@ -70,7 +70,7 @@ func buildLoginResp(in *umsclient.MemberLoginReq, l *MemberLoginLogic, member *u
 
 func checkLoginParams(in *umsclient.MemberLoginReq, l *MemberLoginLogic) (*umsmodel.UmsMember, error) {
 	//根据用户名查询账号
-	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(in.Username)
+	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(l.ctx, in.Username)
 	if member == nil {
 		logx.WithContext(l.ctx).Errorf("账号不存在,参数:%s", in.Username)
 		return nil, errors.New("账号不存在")
@@ -86,15 +86,15 @@ func checkLoginParams(in *umsclient.MemberLoginReq, l *MemberLoginLogic) (*umsmo
 
 //插入登录日志
 func insertLoginLog(l *MemberLoginLogic, m *umsmodel.UmsMember) {
-	memberLoginLog := umsmodel.UmsMemberLoginLog{
+	memberLoginLog := &umsmodel.UmsMemberLoginLog{
 		MemberId:   m.Id,
 		CreateTime: time.Now(),
 		Ip:         "",
-		City:       m.City,
+		City:       m.City.String,
 		LoginType:  0,
 		Province:   "",
 	}
-	_, _ = l.svcCtx.UmsMemberLoginLogModel.Insert(memberLoginLog)
+	_, _ = l.svcCtx.UmsMemberLoginLogModel.Insert(l.ctx, memberLoginLog)
 }
 
 //生成token

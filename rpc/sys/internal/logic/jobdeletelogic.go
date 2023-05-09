@@ -24,7 +24,7 @@ func NewJobDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobDele
 }
 
 func (l *JobDeleteLogic) JobDelete(in *sys.JobDeleteReq) (*sys.JobDeleteResp, error) {
-	err := l.svcCtx.JobModel.Delete(in.Id)
+	err := l.svcCtx.JobModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

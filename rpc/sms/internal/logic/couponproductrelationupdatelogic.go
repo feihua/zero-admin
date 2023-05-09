@@ -25,7 +25,7 @@ func NewCouponProductRelationUpdateLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *CouponProductRelationUpdateLogic) CouponProductRelationUpdate(in *sms.CouponProductRelationUpdateReq) (*sms.CouponProductRelationUpdateResp, error) {
-	err := l.svcCtx.SmsCouponProductRelationModel.Update(smsmodel.SmsCouponProductRelation{
+	err := l.svcCtx.SmsCouponProductRelationModel.Update(l.ctx, &smsmodel.SmsCouponProductRelation{
 		Id:          in.Id,
 		CouponId:    in.CouponId,
 		ProductId:   in.ProductId,

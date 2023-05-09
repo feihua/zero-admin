@@ -25,7 +25,7 @@ func NewMemberPriceUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberPriceUpdateLogic) MemberPriceUpdate(in *pms.MemberPriceUpdateReq) (*pms.MemberPriceUpdateResp, error) {
-	err := l.svcCtx.PmsMemberPriceModel.Update(pmsmodel.PmsMemberPrice{
+	err := l.svcCtx.PmsMemberPriceModel.Update(l.ctx, &pmsmodel.PmsMemberPrice{
 		Id:              in.Id,
 		ProductId:       in.ProductId,
 		MemberLevelId:   in.MemberLevelId,

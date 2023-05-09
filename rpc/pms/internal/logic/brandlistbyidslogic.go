@@ -26,7 +26,7 @@ func NewBrandListByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Br
 }
 
 func (l *BrandListByIdsLogic) BrandListByIds(in *pmsclient.BrandListByIdsReq) (*pmsclient.BrandListResp, error) {
-	all, err := l.svcCtx.PmsBrandModel.FindAllByIds(in.Ids)
+	all, err := l.svcCtx.PmsBrandModel.FindAllByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

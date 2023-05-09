@@ -25,7 +25,7 @@ func NewProductFullReductionUpdateLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *ProductFullReductionUpdateLogic) ProductFullReductionUpdate(in *pms.ProductFullReductionUpdateReq) (*pms.ProductFullReductionUpdateResp, error) {
-	err := l.svcCtx.PmsProductFullReductionModel.Update(pmsmodel.PmsProductFullReduction{
+	err := l.svcCtx.PmsProductFullReductionModel.Update(l.ctx, &pmsmodel.PmsProductFullReduction{
 		Id:          in.Id,
 		ProductId:   in.ProductId,
 		FullPrice:   float64(in.FullPrice),

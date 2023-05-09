@@ -25,7 +25,7 @@ func NewMemberTaskUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *MemberTaskUpdateLogic) MemberTaskUpdate(in *ums.MemberTaskUpdateReq) (*ums.MemberTaskUpdateResp, error) {
-	err := l.svcCtx.UmsMemberTaskModel.Update(umsmodel.UmsMemberTask{
+	err := l.svcCtx.UmsMemberTaskModel.Update(l.ctx, &umsmodel.UmsMemberTask{
 		Id:           in.Id,
 		Name:         in.Name,
 		Growth:       in.Growth,

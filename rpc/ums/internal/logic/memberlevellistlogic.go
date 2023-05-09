@@ -24,8 +24,8 @@ func NewMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 }
 
 func (l *MemberLevelListLogic) MemberLevelList(in *ums.MemberLevelListReq) (*ums.MemberLevelListResp, error) {
-	all, err := l.svcCtx.UmsMemberLevelModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberLevelModel.Count()
+	all, err := l.svcCtx.UmsMemberLevelModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsMemberLevelModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -48,7 +48,7 @@ func (l *MemberLevelListLogic) MemberLevelList(in *ums.MemberLevelListReq) (*ums
 			PriviledgePromotion:   item.PriviledgePromotion,
 			PriviledgeMemberPrice: item.PriviledgeMemberPrice,
 			PriviledgeBirthday:    item.PriviledgeBirthday,
-			Note:                  item.Note,
+			Note:                  item.Note.String,
 		})
 	}
 

@@ -25,7 +25,7 @@ func NewCouponProductCategoryRelationAddLogic(ctx context.Context, svcCtx *svc.S
 }
 
 func (l *CouponProductCategoryRelationAddLogic) CouponProductCategoryRelationAdd(in *sms.CouponProductCategoryRelationAddReq) (*sms.CouponProductCategoryRelationAddResp, error) {
-	_, err := l.svcCtx.SmsCouponProductCategoryRelationModel.Insert(smsmodel.SmsCouponProductCategoryRelation{
+	_, err := l.svcCtx.SmsCouponProductCategoryRelationModel.Insert(l.ctx, &smsmodel.SmsCouponProductCategoryRelation{
 		CouponId:            in.CouponId,
 		ProductCategoryId:   in.ProductCategoryId,
 		ProductCategoryName: in.ProductCategoryName,

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/sysmodel"
 
@@ -26,11 +27,11 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sys.UserStatusReq) (*sys.UserStatusResp, error) {
-	_ = l.svcCtx.UserModel.Update(sysmodel.SysUser{
-		Id:             in.Id,
-		Status:         in.Status,
-		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Now(),
+	_ = l.svcCtx.UserModel.Update(l.ctx, &sysmodel.SysUser{
+		Id:         in.Id,
+		Status:     in.Status,
+		UpdateBy:   sql.NullString{String: in.LastUpdateBy},
+		UpdateTime: sql.NullTime{Time: time.Now()},
 	})
 
 	return &sys.UserStatusResp{}, nil

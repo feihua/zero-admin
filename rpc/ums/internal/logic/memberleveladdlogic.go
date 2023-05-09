@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"zero-admin/rpc/model/umsmodel"
 
 	"zero-admin/rpc/ums/internal/svc"
@@ -25,7 +26,7 @@ func NewMemberLevelAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 }
 
 func (l *MemberLevelAddLogic) MemberLevelAdd(in *ums.MemberLevelAddReq) (*ums.MemberLevelAddResp, error) {
-	_, err := l.svcCtx.UmsMemberLevelModel.Insert(umsmodel.UmsMemberLevel{
+	_, err := l.svcCtx.UmsMemberLevelModel.Insert(l.ctx, &umsmodel.UmsMemberLevel{
 		Name:                  in.Name,
 		GrowthPoint:           in.GrowthPoint,
 		DefaultStatus:         in.DefaultStatus,
@@ -37,7 +38,7 @@ func (l *MemberLevelAddLogic) MemberLevelAdd(in *ums.MemberLevelAddReq) (*ums.Me
 		PriviledgePromotion:   in.PriviledgePromotion,
 		PriviledgeMemberPrice: in.PriviledgeMemberPrice,
 		PriviledgeBirthday:    in.PriviledgeBirthday,
-		Note:                  in.Note,
+		Note:                  sql.NullString{String: in.Note, Valid: true},
 	})
 	if err != nil {
 		return nil, err

@@ -24,7 +24,7 @@ func NewCommentReplayDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *CommentReplayDeleteLogic) CommentReplayDelete(in *pms.CommentReplayDeleteReq) (*pms.CommentReplayDeleteResp, error) {
-	err := l.svcCtx.PmsCommentReplayModel.Delete(in.Id)
+	err := l.svcCtx.PmsCommentReplayModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

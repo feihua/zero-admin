@@ -24,7 +24,7 @@ func NewSysLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysL
 }
 
 func (l *SysLogDeleteLogic) SysLogDelete(in *sys.SysLogDeleteReq) (*sys.SysLogDeleteResp, error) {
-	err := l.svcCtx.SysLogModel.Delete(in.Id)
+	err := l.svcCtx.SysLogModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

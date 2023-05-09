@@ -24,8 +24,8 @@ func NewMemberTaskListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 }
 
 func (l *MemberTaskListLogic) MemberTaskList(in *ums.MemberTaskListReq) (*ums.MemberTaskListResp, error) {
-	all, err := l.svcCtx.UmsMemberTaskModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberTaskModel.Count()
+	all, err := l.svcCtx.UmsMemberTaskModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsMemberTaskModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

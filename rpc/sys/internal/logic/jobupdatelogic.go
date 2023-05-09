@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/sysmodel"
 
@@ -26,13 +27,13 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobUpda
 }
 
 func (l *JobUpdateLogic) JobUpdate(in *sys.JobUpdateReq) (*sys.JobUpdateResp, error) {
-	err := l.svcCtx.JobModel.Update(sysmodel.SysJob{
-		Id:             in.Id,
-		JobName:        in.JobName,
-		OrderNum:       in.OrderNum,
-		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Now(),
-		Remarks:        in.Remarks,
+	err := l.svcCtx.JobModel.Update(l.ctx, &sysmodel.SysJob{
+		Id:         in.Id,
+		JobName:    in.JobName,
+		OrderNum:   in.OrderNum,
+		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
+		UpdateTime: sql.NullTime{Time: time.Now()},
+		Remarks:    sql.NullString{String: in.Remarks},
 	})
 
 	if err != nil {

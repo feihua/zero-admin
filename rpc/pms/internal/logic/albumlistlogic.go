@@ -24,8 +24,8 @@ func NewAlbumListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AlbumLi
 }
 
 func (l *AlbumListLogic) AlbumList(in *pms.AlbumListReq) (*pms.AlbumListResp, error) {
-	all, err := l.svcCtx.PmsAlbumModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsAlbumModel.Count()
+	all, err := l.svcCtx.PmsAlbumModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsAlbumModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

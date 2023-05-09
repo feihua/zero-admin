@@ -24,8 +24,8 @@ func NewMemberProductCategoryRelationListLogic(ctx context.Context, svcCtx *svc.
 }
 
 func (l *MemberProductCategoryRelationListLogic) MemberProductCategoryRelationList(in *ums.MemberProductCategoryRelationListReq) (*ums.MemberProductCategoryRelationListResp, error) {
-	all, err := l.svcCtx.UmsMemberProductCategoryRelationModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberProductCategoryRelationModel.Count()
+	all, err := l.svcCtx.UmsMemberProductCategoryRelationModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsMemberProductCategoryRelationModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

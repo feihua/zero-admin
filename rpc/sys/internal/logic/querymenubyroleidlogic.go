@@ -23,7 +23,7 @@ func NewQueryMenuByRoleIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(in *sys.QueryMenuByRoleIdReq) (*sys.QueryMenuByRoleIdResp, error) {
-	RoleMenus, _ := l.svcCtx.RoleMenuModel.FindByRoleId(in.Id)
+	RoleMenus, _ := l.svcCtx.RoleMenuModel.FindByRoleId(l.ctx, in.Id)
 
 	var list []int64
 	for _, user := range *RoleMenus {

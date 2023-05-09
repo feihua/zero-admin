@@ -24,8 +24,8 @@ func NewProductAttributeValueListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *ProductAttributeValueListLogic) ProductAttributeValueList(in *pms.ProductAttributeValueListReq) (*pms.ProductAttributeValueListResp, error) {
-	all, err := l.svcCtx.PmsProductAttributeValueModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductAttributeValueModel.Count()
+	all, err := l.svcCtx.PmsProductAttributeValueModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsProductAttributeValueModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -40,7 +40,7 @@ func (l *ProductAttributeValueListLogic) ProductAttributeValueList(in *pms.Produ
 			Id:                 item.Id,
 			ProductId:          item.ProductId,
 			ProductAttributeId: item.ProductAttributeId,
-			Value:              item.Value,
+			Value:              item.Value.String,
 		})
 	}
 

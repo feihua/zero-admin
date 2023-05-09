@@ -24,8 +24,8 @@ func NewMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *ums.MemberRuleSettingListReq) (*ums.MemberRuleSettingListResp, error) {
-	all, err := l.svcCtx.UmsMemberRuleSettingModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberRuleSettingModel.Count()
+	all, err := l.svcCtx.UmsMemberRuleSettingModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsMemberRuleSettingModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

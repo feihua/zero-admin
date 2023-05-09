@@ -25,7 +25,7 @@ func NewMemberMemberTagRelationAddLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *MemberMemberTagRelationAddLogic) MemberMemberTagRelationAdd(in *ums.MemberMemberTagRelationAddReq) (*ums.MemberMemberTagRelationAddResp, error) {
-	_, err := l.svcCtx.UmsMemberMemberTagRelationModel.Insert(umsmodel.UmsMemberMemberTagRelation{
+	_, err := l.svcCtx.UmsMemberMemberTagRelationModel.Insert(l.ctx, &umsmodel.UmsMemberMemberTagRelation{
 		MemberId: in.MemberId,
 		TagId:    in.TagId,
 	})

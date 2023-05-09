@@ -24,8 +24,8 @@ func NewProductFullReductionListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *ProductFullReductionListLogic) ProductFullReductionList(in *pms.ProductFullReductionListReq) (*pms.ProductFullReductionListResp, error) {
-	all, err := l.svcCtx.PmsProductFullReductionModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductFullReductionModel.Count()
+	all, err := l.svcCtx.PmsProductFullReductionModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsProductFullReductionModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

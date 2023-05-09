@@ -26,8 +26,8 @@ func NewDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictList
 }
 
 func (l *DictListLogic) DictList(in *sys.DictListReq) (*sys.DictListResp, error) {
-	all, err := l.svcCtx.DictModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.DictModel.Count()
+	all, err := l.svcCtx.DictModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.DictModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -44,11 +44,11 @@ func (l *DictListLogic) DictList(in *sys.DictListReq) (*sys.DictListResp, error)
 			Type:           dict.Type,
 			Description:    dict.Description,
 			Sort:           int64(dict.Sort),
-			Remarks:        dict.Remarks,
+			Remarks:        dict.Remarks.String,
 			CreateBy:       dict.CreateBy,
 			CreateTime:     dict.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   dict.LastUpdateBy,
-			LastUpdateTime: dict.LastUpdateTime.Format("2006-01-02 15:04:05"),
+			LastUpdateBy:   dict.UpdateBy.String,
+			LastUpdateTime: dict.UpdateTime.Format("2006-01-02 15:04:05"),
 			DelFlag:        dict.DelFlag,
 		})
 	}

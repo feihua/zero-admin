@@ -26,7 +26,7 @@ func NewFlashPromotionSessionUpdateLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *FlashPromotionSessionUpdateLogic) FlashPromotionSessionUpdate(in *sms.FlashPromotionSessionUpdateReq) (*sms.FlashPromotionSessionUpdateResp, error) {
-	err := l.svcCtx.SmsFlashPromotionSessionModel.Update(smsmodel.SmsFlashPromotionSession{
+	err := l.svcCtx.SmsFlashPromotionSessionModel.Update(l.ctx, &smsmodel.SmsFlashPromotionSession{
 		Id:         in.Id,
 		Name:       in.Name,
 		StartTime:  in.StartTime,

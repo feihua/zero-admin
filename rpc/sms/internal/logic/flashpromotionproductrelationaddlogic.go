@@ -25,7 +25,7 @@ func NewFlashPromotionProductRelationAddLogic(ctx context.Context, svcCtx *svc.S
 }
 
 func (l *FlashPromotionProductRelationAddLogic) FlashPromotionProductRelationAdd(in *sms.FlashPromotionProductRelationAddReq) (*sms.FlashPromotionProductRelationAddResp, error) {
-	_, err := l.svcCtx.SmsFlashPromotionProductRelationModel.Insert(smsmodel.SmsFlashPromotionProductRelation{
+	_, err := l.svcCtx.SmsFlashPromotionProductRelationModel.Insert(l.ctx, &smsmodel.SmsFlashPromotionProductRelation{
 		FlashPromotionId:        in.FlashPromotionId,
 		FlashPromotionSessionId: in.FlashPromotionSessionId,
 		ProductId:               in.ProductId,

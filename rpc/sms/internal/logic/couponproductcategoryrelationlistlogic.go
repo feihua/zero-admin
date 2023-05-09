@@ -24,8 +24,8 @@ func NewCouponProductCategoryRelationListLogic(ctx context.Context, svcCtx *svc.
 }
 
 func (l *CouponProductCategoryRelationListLogic) CouponProductCategoryRelationList(in *sms.CouponProductCategoryRelationListReq) (*sms.CouponProductCategoryRelationListResp, error) {
-	all, err := l.svcCtx.SmsCouponProductCategoryRelationModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsCouponProductCategoryRelationModel.Count()
+	all, err := l.svcCtx.SmsCouponProductCategoryRelationModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.SmsCouponProductCategoryRelationModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

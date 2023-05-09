@@ -25,8 +25,8 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptList
 }
 
 func (l *DeptListLogic) DeptList(in *sys.DeptListReq) (*sys.DeptListResp, error) {
-	count, _ := l.svcCtx.DeptModel.Count()
-	all, err := l.svcCtx.DeptModel.FindAll(1, count)
+	count, _ := l.svcCtx.DeptModel.Count(l.ctx)
+	all, err := l.svcCtx.DeptModel.FindAll(l.ctx, 1, count)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -44,8 +44,8 @@ func (l *DeptListLogic) DeptList(in *sys.DeptListReq) (*sys.DeptListResp, error)
 			OrderNum:       dept.OrderNum,
 			CreateBy:       dept.CreateBy,
 			CreateTime:     dept.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   dept.LastUpdateBy,
-			LastUpdateTime: dept.LastUpdateTime.Format("2006-01-02 15:04:05"),
+			LastUpdateBy:   dept.UpdateBy.String,
+			LastUpdateTime: dept.UpdateTime.Time.Format("2006-01-02 15:04:05"),
 			DelFlag:        dept.DelFlag,
 		})
 	}

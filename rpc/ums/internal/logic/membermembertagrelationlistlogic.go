@@ -24,8 +24,8 @@ func NewMemberMemberTagRelationListLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *MemberMemberTagRelationListLogic) MemberMemberTagRelationList(in *ums.MemberMemberTagRelationListReq) (*ums.MemberMemberTagRelationListResp, error) {
-	all, err := l.svcCtx.UmsMemberMemberTagRelationModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberMemberTagRelationModel.Count()
+	all, err := l.svcCtx.UmsMemberMemberTagRelationModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsMemberMemberTagRelationModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

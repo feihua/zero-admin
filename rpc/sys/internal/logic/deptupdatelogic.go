@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/sysmodel"
 
@@ -26,13 +27,13 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptUp
 }
 
 func (l *DeptUpdateLogic) DeptUpdate(in *sys.DeptUpdateReq) (*sys.DeptUpdateResp, error) {
-	err := l.svcCtx.DeptModel.Update(sysmodel.SysDept{
-		Id:             in.Id,
-		Name:           in.Name,
-		ParentId:       in.ParentId,
-		OrderNum:       in.OrderNum,
-		LastUpdateBy:   in.LastUpdateBy,
-		LastUpdateTime: time.Now(),
+	err := l.svcCtx.DeptModel.Update(l.ctx, &sysmodel.SysDept{
+		Id:         in.Id,
+		Name:       in.Name,
+		ParentId:   in.ParentId,
+		OrderNum:   in.OrderNum,
+		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
+		UpdateTime: sql.NullTime{Time: time.Now()},
 	})
 
 	if err != nil {

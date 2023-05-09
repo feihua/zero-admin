@@ -24,8 +24,8 @@ func NewProductAttributeCategoryListLogic(ctx context.Context, svcCtx *svc.Servi
 }
 
 func (l *ProductAttributeCategoryListLogic) ProductAttributeCategoryList(in *pms.ProductAttributeCategoryListReq) (*pms.ProductAttributeCategoryListResp, error) {
-	all, err := l.svcCtx.PmsProductAttributeCategoryModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductAttributeCategoryModel.Count()
+	all, err := l.svcCtx.PmsProductAttributeCategoryModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.PmsProductAttributeCategoryModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

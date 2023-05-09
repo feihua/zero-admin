@@ -25,7 +25,7 @@ func NewSkuStockUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sk
 }
 
 func (l *SkuStockUpdateLogic) SkuStockUpdate(in *pms.SkuStockUpdateReq) (*pms.SkuStockUpdateResp, error) {
-	err := l.svcCtx.PmsSkuStockModel.Update(pmsmodel.PmsSkuStock{
+	err := l.svcCtx.PmsSkuStockModel.Update(l.ctx, &pmsmodel.PmsSkuStock{
 		Id:             in.Id,
 		ProductId:      in.ProductId,
 		SkuCode:        in.SkuCode,

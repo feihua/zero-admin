@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/sysmodel"
 
@@ -26,15 +27,13 @@ func NewJobAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobAddLogi
 }
 
 func (l *JobAddLogic) JobAdd(in *sys.JobAddReq) (*sys.JobAddResp, error) {
-	_, err := l.svcCtx.JobModel.Insert(sysmodel.SysJob{
-		JobName:        in.JobName,
-		OrderNum:       in.OrderNum,
-		CreateBy:       in.CreateBy,
-		CreateTime:     time.Now(),
-		LastUpdateBy:   in.CreateBy,
-		LastUpdateTime: time.Now(),
-		Remarks:        in.Remarks,
-		DelFlag:        0,
+	_, err := l.svcCtx.JobModel.Insert(l.ctx, &sysmodel.SysJob{
+		JobName:    in.JobName,
+		OrderNum:   in.OrderNum,
+		CreateBy:   in.CreateBy,
+		CreateTime: time.Now(),
+		Remarks:    sql.NullString{String: in.Remarks},
+		DelFlag:    0,
 	})
 
 	if err != nil {

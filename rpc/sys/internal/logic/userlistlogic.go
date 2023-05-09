@@ -24,7 +24,7 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserList
 
 func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error) {
 
-	all, err := l.svcCtx.UserModel.FindAll(in.Current, in.PageSize)
+	all, err := l.svcCtx.UserModel.FindAll(l.ctx, in.Current, in.PageSize)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -32,25 +32,25 @@ func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error)
 		return nil, err
 	}
 
-	count, _ := l.svcCtx.UserModel.Count()
+	count, _ := l.svcCtx.UserModel.Count(l.ctx)
 
 	var list []*sys.UserListData
 	for _, user := range *all {
 		list = append(list, &sys.UserListData{
 			Id:             user.Id,
 			Name:           user.Name,
-			NickName:       user.NickName,
-			Avatar:         user.Avatar,
+			NickName:       user.NickName.String,
+			Avatar:         user.Avatar.String,
 			Password:       user.Password,
 			Salt:           user.Salt,
-			Email:          user.Email,
-			Mobile:         user.Mobile,
+			Email:          user.Email.String,
+			Mobile:         user.Mobile.String,
 			DeptId:         user.DeptId,
 			Status:         user.Status,
 			CreateBy:       user.CreateBy,
 			CreateTime:     user.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   user.LastUpdateBy,
-			LastUpdateTime: user.LastUpdateTime.Format("2006-01-02 15:04:05"),
+			LastUpdateBy:   user.UpdateBy.String,
+			LastUpdateTime: user.UpdateTime.Time.Format("2006-01-02 15:04:05"),
 			DelFlag:        user.DelFlag,
 			JobId:          user.JobId,
 			RoleId:         user.RoleId,

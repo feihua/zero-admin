@@ -25,7 +25,7 @@ func NewMemberMemberTagRelationUpdateLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 func (l *MemberMemberTagRelationUpdateLogic) MemberMemberTagRelationUpdate(in *ums.MemberMemberTagRelationUpdateReq) (*ums.MemberMemberTagRelationUpdateResp, error) {
-	err := l.svcCtx.UmsMemberMemberTagRelationModel.Update(umsmodel.UmsMemberMemberTagRelation{
+	err := l.svcCtx.UmsMemberMemberTagRelationModel.Update(l.ctx, &umsmodel.UmsMemberMemberTagRelation{
 		Id:       in.Id,
 		MemberId: in.MemberId,
 		TagId:    in.TagId,

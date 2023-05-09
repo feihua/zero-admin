@@ -25,7 +25,7 @@ func NewMemberReceiveAddressUpdateLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *MemberReceiveAddressUpdateLogic) MemberReceiveAddressUpdate(in *ums.MemberReceiveAddressUpdateReq) (*ums.MemberReceiveAddressUpdateResp, error) {
-	err := l.svcCtx.UmsMemberReceiveAddressModel.Update(umsmodel.UmsMemberReceiveAddress{
+	err := l.svcCtx.UmsMemberReceiveAddressModel.Update(l.ctx, &umsmodel.UmsMemberReceiveAddress{
 		Id:            in.Id,
 		MemberId:      in.MemberId,
 		Name:          in.Name,

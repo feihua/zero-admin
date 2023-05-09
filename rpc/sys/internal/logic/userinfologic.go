@@ -28,7 +28,7 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 }
 
 func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
-	userInfo, err := l.svcCtx.UserModel.FindOne(in.UserId)
+	userInfo, err := l.svcCtx.UserModel.FindOne(l.ctx, in.UserId)
 
 	switch err {
 	case nil:
@@ -43,11 +43,11 @@ func (l *UserInfoLogic) UserInfo(in *sys.InfoReq) (*sys.InfoResp, error) {
 	var listUrls []string
 
 	if in.UserId == 1 {
-		menus, _ := l.svcCtx.MenuModel.FindAll(1, 1000)
+		menus, _ := l.svcCtx.MenuModel.FindAll(l.ctx, 1, 1000)
 		list, listUrls = listTrees(menus, list, listUrls)
 		logx.WithContext(l.ctx).Infof("超级管理员: %s登录,菜单: %+v", userInfo.Name, list)
 	} else {
-		menus, _ := l.svcCtx.MenuModel.FindAllByUserId(in.UserId)
+		menus, _ := l.svcCtx.MenuModel.FindAllByUserId(l.ctx, in.UserId)
 		list, listUrls = listTrees(menus, list, listUrls)
 		logx.WithContext(l.ctx).Infof("普通管理员: %s登录,菜单: %+v", userInfo.Name, list)
 	}
@@ -66,13 +66,13 @@ func listTrees(menus *[]sysmodel.SysMenu, list []*sys.MenuListTree, listUrls []s
 			list = append(list, &sys.MenuListTree{
 				Id:           menu.Id,
 				Name:         menu.Name,
-				Icon:         menu.Icon,
+				Icon:         menu.Icon.String,
 				ParentId:     menu.ParentId,
-				Path:         menu.Url,
-				VuePath:      menu.VuePath,
-				VueComponent: menu.VueComponent,
-				VueIcon:      menu.VueIcon,
-				VueRedirect:  menu.VueRedirect,
+				Path:         menu.Url.String,
+				VuePath:      menu.VuePath.String,
+				VueComponent: menu.VueComponent.String,
+				VueIcon:      menu.VueIcon.String,
+				VueRedirect:  menu.VueRedirect.String,
 			})
 		}
 

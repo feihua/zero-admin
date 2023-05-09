@@ -24,8 +24,8 @@ func NewMemberTagListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mem
 }
 
 func (l *MemberTagListLogic) MemberTagList(in *ums.MemberTagListReq) (*ums.MemberTagListResp, error) {
-	all, err := l.svcCtx.UmsMemberTagModel.FindAll(in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberTagModel.Count()
+	all, err := l.svcCtx.UmsMemberTagModel.FindAll(l.ctx, in.Current, in.PageSize)
+	count, _ := l.svcCtx.UmsMemberTagModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

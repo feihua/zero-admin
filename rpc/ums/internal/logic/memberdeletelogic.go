@@ -24,7 +24,7 @@ func NewMemberDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Memb
 }
 
 func (l *MemberDeleteLogic) MemberDelete(in *ums.MemberDeleteReq) (*ums.MemberDeleteResp, error) {
-	err := l.svcCtx.UmsMemberModel.Delete(in.Id)
+	err := l.svcCtx.UmsMemberModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

@@ -27,7 +27,7 @@ func NewProductVertifyRecordUpdateLogic(ctx context.Context, svcCtx *svc.Service
 
 func (l *ProductVertifyRecordUpdateLogic) ProductVertifyRecordUpdate(in *pms.ProductVertifyRecordUpdateReq) (*pms.ProductVertifyRecordUpdateResp, error) {
 	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.PmsProductVertifyRecordModel.Update(pmsmodel.PmsProductVertifyRecord{
+	err := l.svcCtx.PmsProductVertifyRecordModel.Update(l.ctx, &pmsmodel.PmsProductVertifyRecord{
 		Id:         in.Id,
 		ProductId:  in.ProductId,
 		CreateTime: CreateTime,

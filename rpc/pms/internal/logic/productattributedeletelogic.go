@@ -24,7 +24,7 @@ func NewProductAttributeDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 func (l *ProductAttributeDeleteLogic) ProductAttributeDelete(in *pms.ProductAttributeDeleteReq) (*pms.ProductAttributeDeleteResp, error) {
-	err := l.svcCtx.PmsProductAttributeModel.Delete(in.Id)
+	err := l.svcCtx.PmsProductAttributeModel.Delete(l.ctx, in.Id)
 
 	if err != nil {
 		return nil, err

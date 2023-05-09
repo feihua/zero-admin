@@ -27,7 +27,7 @@ func NewMemberStatisticsInfoUpdateLogic(ctx context.Context, svcCtx *svc.Service
 
 func (l *MemberStatisticsInfoUpdateLogic) MemberStatisticsInfoUpdate(in *ums.MemberStatisticsInfoUpdateReq) (*ums.MemberStatisticsInfoUpdateResp, error) {
 	RecentOrderTime, _ := time.Parse("2006-01-02 15:04:05", in.RecentOrderTime)
-	err := l.svcCtx.UmsMemberStatisticsInfoModel.Update(umsmodel.UmsMemberStatisticsInfo{
+	err := l.svcCtx.UmsMemberStatisticsInfoModel.Update(l.ctx, &umsmodel.UmsMemberStatisticsInfo{
 		Id:                  in.Id,
 		MemberId:            in.MemberId,
 		ConsumeAmount:       float64(in.ConsumeAmount),
