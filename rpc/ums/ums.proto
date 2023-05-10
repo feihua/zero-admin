@@ -31,6 +31,9 @@ message MemberLoginResp {
 message MemberListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string Username = 3;
+  string Phone = 4;
+  int64  Status = 5;
 }
 
 message MemberListData{
@@ -327,7 +330,7 @@ message MemberLevelUpdateResp {
 }
 
 message MemberLevelDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberLevelDeleteResp {
@@ -350,6 +353,7 @@ message MemberLoginLogAddResp {
 message MemberLoginLogListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  int64 MemberId  = 3;
 }
 
 message MemberLoginLogListData{
@@ -495,7 +499,7 @@ message MemberReceiveAddressAddResp {
 message MemberReceiveAddressListReq {
   int64 current = 1;
   int64 pageSize = 2;
-  int64 userId = 3;
+  int64 MemberId = 3;
 }
 
 message MemberReceiveAddressListData{

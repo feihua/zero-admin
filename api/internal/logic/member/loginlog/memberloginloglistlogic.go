@@ -31,6 +31,7 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLo
 	resp, err := l.svcCtx.Ums.MemberLoginLogList(l.ctx, &umsclient.MemberLoginLogListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		MemberId: req.MemberId,
 	})
 
 	if err != nil {

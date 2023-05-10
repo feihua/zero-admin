@@ -30,6 +30,9 @@ func (l *MemberListLogic) MemberList(req types.ListMemberReq) (*types.ListMember
 	resp, err := l.svcCtx.Ums.MemberList(l.ctx, &umsclient.MemberListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		Username: req.Username,
+		Phone:    req.Phone,
+		Status:   req.Status,
 	})
 
 	if err != nil {

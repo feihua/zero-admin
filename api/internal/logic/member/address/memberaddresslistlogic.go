@@ -31,6 +31,7 @@ func (l *MemberAddressListLogic) MemberAddressList(req types.ListMemberAddressRe
 	resp, err := l.svcCtx.Ums.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		MemberId: req.MemberId,
 	})
 
 	if err != nil {

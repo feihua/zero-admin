@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/ums/ums"
 )
 
 var _ UmsMemberReceiveAddressModel = (*customUmsMemberReceiveAddressModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customUmsMemberReceiveAddressModel.
 	UmsMemberReceiveAddressModel interface {
 		umsMemberReceiveAddressModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberReceiveAddress, error)
+		Count(ctx context.Context, in *ums.MemberReceiveAddressListReq) (int64, error)
+		FindAll(ctx context.Context, in *ums.MemberReceiveAddressListReq) (*[]UmsMemberReceiveAddress, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindByIdAndMemberId(ctx context.Context, id int64, memberId int64) (*UmsMemberReceiveAddress, error)
 	}
@@ -33,11 +34,18 @@ func NewUmsMemberReceiveAddressModel(conn sqlx.SqlConn) UmsMemberReceiveAddressM
 	}
 }
 
-func (m *customUmsMemberReceiveAddressModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberReceiveAddress, error) {
+func (m *customUmsMemberReceiveAddressModel) FindAll(ctx context.Context, in *ums.MemberReceiveAddressListReq) (*[]UmsMemberReceiveAddress, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberReceiveAddressRows, m.table)
+	where := "1=1"
+
+	if in.MemberId != 0 {
+		where = where + fmt.Sprintf(" AND member_id = '%d'", in.MemberId)
+	}
+
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", umsMemberReceiveAddressRows, m.table, where)
+
 	var resp []UmsMemberReceiveAddress
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -48,8 +56,13 @@ func (m *customUmsMemberReceiveAddressModel) FindAll(ctx context.Context, Curren
 	}
 }
 
-func (m *customUmsMemberReceiveAddressModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customUmsMemberReceiveAddressModel) Count(ctx context.Context, in *ums.MemberReceiveAddressListReq) (int64, error) {
+	where := "1=1"
+
+	if in.MemberId != 0 {
+		where = where + fmt.Sprintf(" AND member_id = '%d'", in.MemberId)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

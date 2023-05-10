@@ -24,8 +24,8 @@ func NewMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Member
 }
 
 func (l *MemberListLogic) MemberList(in *ums.MemberListReq) (*ums.MemberListResp, error) {
-	all, err := l.svcCtx.UmsMemberModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberModel.Count(l.ctx)
+	all, err := l.svcCtx.UmsMemberModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.UmsMemberModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

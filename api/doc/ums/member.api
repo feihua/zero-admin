@@ -8,6 +8,9 @@ type (
     ListMemberReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
+        Username string `json:"username,optional"`                               // 用户名
+        Phone string `json:"phone,optional"`                                     // 手机号码
+        Status int64 `json:"status,default=2"`                                    // 帐号启用状态:0->禁用；1->启用
     }
     ListtMemberData struct {
         Id int64 `json:"id"`

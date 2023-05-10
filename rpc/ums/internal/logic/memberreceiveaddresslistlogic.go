@@ -24,8 +24,8 @@ func NewMemberReceiveAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *ums.MemberReceiveAddressListReq) (*ums.MemberReceiveAddressListResp, error) {
-	all, err := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberReceiveAddressModel.Count(l.ctx)
+	all, err := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.UmsMemberReceiveAddressModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/ums/ums"
 )
 
 var _ UmsMemberModel = (*customUmsMemberModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customUmsMemberModel.
 	UmsMemberModel interface {
 		umsMemberModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMember, error)
+		Count(ctx context.Context, in *ums.MemberListReq) (int64, error)
+		FindAll(ctx context.Context, in *ums.MemberListReq) (*[]UmsMember, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +33,23 @@ func NewUmsMemberModel(conn sqlx.SqlConn) UmsMemberModel {
 	}
 }
 
-func (m *customUmsMemberModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMember, error) {
+func (m *customUmsMemberModel) FindAll(ctx context.Context, in *ums.MemberListReq) (*[]UmsMember, error) {
+	where := "1=1"
+	if len(in.Username) > 0 {
+		where = where + fmt.Sprintf(" AND username like '%%%s%%'", in.Username)
+	}
+	if len(in.Phone) > 0 {
+		where = where + fmt.Sprintf(" AND phone like '%%%s%%'", in.Phone)
+	}
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberRows, m.table)
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = '%d'", in.Status)
+	}
+
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", umsMemberRows, m.table, where)
+
 	var resp []UmsMember
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -47,8 +60,20 @@ func (m *customUmsMemberModel) FindAll(ctx context.Context, Current int64, PageS
 	}
 }
 
-func (m *customUmsMemberModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customUmsMemberModel) Count(ctx context.Context, in *ums.MemberListReq) (int64, error) {
+	where := "1=1"
+	if len(in.Username) > 0 {
+		where = where + fmt.Sprintf(" AND username like '%%%s%%'", in.Username)
+	}
+	if len(in.Phone) > 0 {
+		where = where + fmt.Sprintf(" AND phone like '%%%s%%'", in.Phone)
+	}
+
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = '%d'", in.Status)
+	}
+
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

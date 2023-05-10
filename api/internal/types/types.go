@@ -2590,8 +2590,11 @@ type DeleteHomeRecommendSubjectResp struct {
 }
 
 type ListMemberReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64  `json:"current,default=1"`
+	PageSize int64  `json:"pageSize,default=20"`
+	Username string `json:"username,optional"` // 用户名
+	Phone    string `json:"phone,optional"`    // 手机号码
+	Status   int64  `json:"status,default=2"`  // 帐号启用状态:0->禁用；1->启用
 }
 
 type ListtMemberData struct {
@@ -2682,6 +2685,7 @@ type AddMemberAddressResp struct {
 type ListMemberAddressReq struct {
 	Current  int64 `json:"current,default=1"`
 	PageSize int64 `json:"pageSize,default=20"`
+	MemberId int64 `json:"memberId,default=0"`
 }
 
 type ListtMemberAddressData struct {
@@ -2935,7 +2939,7 @@ type AddMemberLevelReq struct {
 	PriviledgePromotion   int64   `json:"priviledgePromotion"`   // 是否有专享活动特权
 	PriviledgeMemberPrice int64   `json:"priviledgeMemberPrice"` // 是否有会员价格特权
 	PriviledgeBirthday    int64   `json:"priviledgeBirthday"`    // 是否有生日特权
-	Note                  string  `json:"note"`
+	Note                  string  `json:"note,optional"`
 }
 
 type AddMemberLevelResp struct {
@@ -2997,7 +3001,7 @@ type UpdateMemberLevelResp struct {
 }
 
 type DeleteMemberLevelReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMemberLevelResp struct {
@@ -3022,6 +3026,7 @@ type AddMemberLoginLogResp struct {
 type ListMemberLoginLogReq struct {
 	Current  int64 `json:"current,default=1"`
 	PageSize int64 `json:"pageSize,default=20"`
+	MemberId int64 `json:"memberId,default=0"`
 }
 
 type ListtMemberLoginLogData struct {

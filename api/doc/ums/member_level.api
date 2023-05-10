@@ -17,7 +17,7 @@ type (
         PriviledgePromotion int64 `json:"priviledgePromotion"`     // 是否有专享活动特权
         PriviledgeMemberPrice int64 `json:"priviledgeMemberPrice"` // 是否有会员价格特权
         PriviledgeBirthday int64 `json:"priviledgeBirthday"`       // 是否有生日特权
-        Note string `json:"note"`
+        Note string `json:"note,optional"`
     }
     addMemberLevelResp struct {
         Code string `json:"code"`
@@ -72,7 +72,7 @@ type (
         Message string `json:"message"`
     }
     DeleteMemberLevelReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteMemberLevelResp struct {
         Code string `json:"code"`

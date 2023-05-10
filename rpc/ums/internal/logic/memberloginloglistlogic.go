@@ -24,8 +24,8 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *MemberLoginLogListLogic) MemberLoginLogList(in *ums.MemberLoginLogListReq) (*ums.MemberLoginLogListResp, error) {
-	all, err := l.svcCtx.UmsMemberLoginLogModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsMemberLoginLogModel.Count(l.ctx)
+	all, err := l.svcCtx.UmsMemberLoginLogModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.UmsMemberLoginLogModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

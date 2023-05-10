@@ -23,6 +23,7 @@ type (
     ListMemberAddressReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
+        MemberId int64 `json:"memberId,default=0"`
     }
     ListtMemberAddressData struct {
         Id int64 `json:"id"`
