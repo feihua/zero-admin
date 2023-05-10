@@ -15,8 +15,8 @@ type (
 	// and implement the added methods in customUmsMemberLevelModel.
 	UmsMemberLevelModel interface {
 		umsMemberLevelModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberLevel, error)
+		Count(ctx context.Context, Name string) (int64, error)
+		FindAll(ctx context.Context, Current int64, PageSize int64, Name string) (*[]UmsMemberLevel, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,9 +32,15 @@ func NewUmsMemberLevelModel(conn sqlx.SqlConn) UmsMemberLevelModel {
 	}
 }
 
-func (m *customUmsMemberLevelModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]UmsMemberLevel, error) {
+func (m *customUmsMemberLevelModel) FindAll(ctx context.Context, Current int64, PageSize int64, Name string) (*[]UmsMemberLevel, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", umsMemberLevelRows, m.table)
+	where := "1=1"
+	if len(Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", Name)
+	}
+
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", umsMemberLevelRows, m.table, where)
+
 	var resp []UmsMemberLevel
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
 	switch err {
@@ -47,8 +53,12 @@ func (m *customUmsMemberLevelModel) FindAll(ctx context.Context, Current int64, 
 	}
 }
 
-func (m *customUmsMemberLevelModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customUmsMemberLevelModel) Count(ctx context.Context, Name string) (int64, error) {
+	where := "1=1"
+	if len(Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", Name)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

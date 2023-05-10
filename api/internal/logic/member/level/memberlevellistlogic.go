@@ -31,6 +31,7 @@ func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*t
 	resp, err := l.svcCtx.Ums.MemberLevelList(l.ctx, &umsclient.MemberLevelListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		Name:     req.Name,
 	})
 
 	if err != nil {

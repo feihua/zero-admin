@@ -282,6 +282,7 @@ message MemberLevelAddResp {
 message MemberLevelListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string Name = 3;
 }
 
 message MemberLevelListData{

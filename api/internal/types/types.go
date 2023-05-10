@@ -2944,8 +2944,9 @@ type AddMemberLevelResp struct {
 }
 
 type ListMemberLevelReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64  `json:"current,default=1"`
+	PageSize int64  `json:"pageSize,default=20"`
+	Name     string `json:"name,optional"`
 }
 
 type ListtMemberLevelData struct {
