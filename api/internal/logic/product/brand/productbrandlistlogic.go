@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/pms/pmsclient"
 
@@ -29,8 +28,11 @@ func NewProductBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) P
 
 func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) (*types.ListProductBrandResp, error) {
 	resp, err := l.svcCtx.Pms.BrandList(l.ctx, &pmsclient.BrandListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
+		Current:       req.Current,
+		PageSize:      req.PageSize,
+		Name:          req.Name,
+		FactoryStatus: req.FactoryStatus,
+		ShowStatus:    req.ShowStatus,
 	})
 
 	if err != nil {
@@ -39,9 +41,6 @@ func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) 
 		return nil, errorx.NewDefaultError("查询商品品牌失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtProductBrandData
 
 	for _, item := range resp.List {

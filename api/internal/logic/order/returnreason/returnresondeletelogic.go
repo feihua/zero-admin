@@ -26,11 +26,11 @@ func NewReturnResonDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *ReturnResonDeleteLogic) ReturnResonDelete(req types.DeleteReturnResonReq) (*types.DeleteReturnResonResp, error) {
 	_, err := l.svcCtx.Oms.OrderReturnReasonDelete(l.ctx, &omsclient.OrderReturnReasonDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除退货原因异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除退货原因异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除退货原因失败")
 	}
 	return &types.DeleteReturnResonResp{

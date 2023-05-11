@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
@@ -30,6 +29,7 @@ func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCate
 	resp, err := l.svcCtx.Pms.ProductCategoryList(l.ctx, &pmsclient.ProductCategoryListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		Name:     req.Name,
 	})
 
 	if err != nil {
@@ -38,9 +38,6 @@ func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCate
 		return nil, errorx.NewDefaultError("查询商品分类失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtProductCategoryData
 
 	for _, item := range resp.List {

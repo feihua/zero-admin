@@ -23,6 +23,8 @@ import "pms/product_comment.api"
 import "pms/product_feight_template.api"
 import "pms/product_member_price.api"
 import "pms/product_sku_stock.api"
+import "pms/product_attribute.api"
+import "pms/product_attribute_category.api"
 
 import "sms/coupon.api"
 import "sms/coupon_history.api"

@@ -24,6 +24,9 @@ type (
     ListProductBrandReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
+        Name   string `json:"name,optional"`
+        FactoryStatus int64 `json:"factoryStatus,default=2"`                // 是否为品牌制造商：0->不是；1->是
+        ShowStatus int64 `json:"showStatus,default=2"`
     }
     ListtProductBrandData struct {
         Id int64 `json:"id"`
@@ -65,7 +68,7 @@ type (
         Message string `json:"message"`
     }
     DeleteProductBrandReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteProductBrandResp struct {
         Code string `json:"code"`

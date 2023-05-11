@@ -23,6 +23,8 @@ import (
 	orderreturnapply "zero-admin/api/internal/handler/order/returnapply"
 	orderreturnreason "zero-admin/api/internal/handler/order/returnreason"
 	ordersetting "zero-admin/api/internal/handler/order/setting"
+	productattribute "zero-admin/api/internal/handler/product/attribute"
+	productattributecategory "zero-admin/api/internal/handler/product/attributecategory"
 	productbrand "zero-admin/api/internal/handler/product/brand"
 	productcategory "zero-admin/api/internal/handler/product/category"
 	productcomment "zero-admin/api/internal/handler/product/comment"
@@ -767,6 +769,66 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/product/skustock"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/add",
+					Handler: productattribute.ProductAttributeAddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/list",
+					Handler: productattribute.ProductAttributeListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/update",
+					Handler: productattribute.ProductAttributeUpdateHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
+					Handler: productattribute.ProductAttributeDeleteHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/attribute"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/add",
+					Handler: productattributecategory.ProductAttributecategoryAddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/list",
+					Handler: productattributecategory.ProductAttributecategoryListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/update",
+					Handler: productattributecategory.ProductAttributecategoryUpdateHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
+					Handler: productattributecategory.ProductAttributecategoryDeleteHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/attributecategory"),
 	)
 
 	server.AddRoutes(

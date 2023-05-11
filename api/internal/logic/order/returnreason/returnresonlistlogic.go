@@ -31,6 +31,8 @@ func (l *ReturnResonListLogic) ReturnResonList(req types.ListReturnResonReq) (*t
 	resp, err := l.svcCtx.Oms.OrderReturnReasonList(l.ctx, &omsclient.OrderReturnReasonListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		Name:     req.Name,
+		Status:   req.Status,
 	})
 
 	if err != nil {

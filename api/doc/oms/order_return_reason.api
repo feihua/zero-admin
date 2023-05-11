@@ -17,6 +17,8 @@ type (
     ListReturnResonReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
+        Name string `json:"name,optional"`             // 退货类型
+        Status int64 `json:"status,default=2"`          // 状态：0->不启用；1->启用
     }
     ListtReturnResonData struct {
         Id int64 `json:"id"`
@@ -45,7 +47,7 @@ type (
         Message string `json:"message"`
     }
     DeleteReturnResonReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteReturnResonResp struct {
         Code string `json:"code"`

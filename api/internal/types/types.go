@@ -1224,8 +1224,10 @@ type AddReturnResonResp struct {
 }
 
 type ListReturnResonReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64  `json:"current,default=1"`
+	PageSize int64  `json:"pageSize,default=20"`
+	Name     string `json:"name,optional"`    // 退货类型
+	Status   int64  `json:"status,default=2"` // 状态：0->不启用；1->启用
 }
 
 type ListtReturnResonData struct {
@@ -1259,7 +1261,7 @@ type UpdateReturnResonResp struct {
 }
 
 type DeleteReturnResonReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteReturnResonResp struct {
@@ -1514,8 +1516,11 @@ type AddProductBrandResp struct {
 }
 
 type ListProductBrandReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current       int64  `json:"current,default=1"`
+	PageSize      int64  `json:"pageSize,default=20"`
+	Name          string `json:"name,optional"`
+	FactoryStatus int64  `json:"factoryStatus,default=2"` // 是否为品牌制造商：0->不是；1->是
+	ShowStatus    int64  `json:"showStatus,default=2"`
 }
 
 type ListtProductBrandData struct {
@@ -1562,7 +1567,7 @@ type UpdateProductBrandResp struct {
 }
 
 type DeleteProductBrandReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteProductBrandResp struct {
@@ -1590,8 +1595,9 @@ type AddProductCategoryResp struct {
 }
 
 type ListProductCategoryReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64  `json:"current,default=1"`
+	PageSize int64  `json:"pageSize,default=20"`
+	Name     string `json:"name,optional"`
 }
 
 type ListtProductCategoryData struct {
@@ -1640,7 +1646,7 @@ type UpdateProductCategoryResp struct {
 }
 
 type DeleteProductCategoryReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteProductCategoryResp struct {
@@ -1929,6 +1935,140 @@ type DeleteSkuStockReq struct {
 }
 
 type DeleteSkuStockResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type AddProductAttributeReq struct {
+	ProductAttributeCategoryId int64  `json:"productAttributeCategory_id"`
+	Name                       string `json:"name"`
+	SelectType                 int64  `json:"selectType"`    // 属性选择类型：0->唯一；1->单选；2->多选
+	InputType                  int64  `json:"inputType"`     // 属性录入方式：0->手工录入；1->从列表中选取
+	InputList                  string `json:"inputList"`     // 可选值列表，以逗号隔开
+	Sort                       int64  `json:"sort"`          // 排序字段：最高的可以单独上传图片
+	FilterType                 int64  `json:"filterType"`    // 分类筛选样式：1->普通；1->颜色
+	SearchType                 int64  `json:"searchType"`    // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
+	RelatedStatus              int64  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
+	HandAddStatus              int64  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
+	Type                       int64  `json:"type"`          // 属性的类型；0->规格；1->参数
+}
+
+type AddProductAttributeResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type ListProductAttributeReq struct {
+	Current  int64  `json:"current,default=1"`
+	PageSize int64  `json:"pageSize,default=20"`
+	Name     string `json:"name,optional"`
+}
+
+type ListtProductAttributeData struct {
+	Id                         int64  `json:"id"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategory_id"`
+	Name                       string `json:"name"`
+	SelectType                 int64  `json:"selectType"`    // 属性选择类型：0->唯一；1->单选；2->多选
+	InputType                  int64  `json:"inputType"`     // 属性录入方式：0->手工录入；1->从列表中选取
+	InputList                  string `json:"inputList"`     // 可选值列表，以逗号隔开
+	Sort                       int64  `json:"sort"`          // 排序字段：最高的可以单独上传图片
+	FilterType                 int64  `json:"filterType"`    // 分类筛选样式：1->普通；1->颜色
+	SearchType                 int64  `json:"searchType"`    // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
+	RelatedStatus              int64  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
+	HandAddStatus              int64  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
+	Type                       int64  `json:"type"`          // 属性的类型；0->规格；1->参数
+}
+
+type ListProductAttributeResp struct {
+	Code     string                       `json:"code"`
+	Message  string                       `json:"message"`
+	Current  int64                        `json:"current,default=1"`
+	Data     []*ListtProductAttributeData `json:"data"`
+	PageSize int64                        `json:"pageSize,default=20"`
+	Success  bool                         `json:"success"`
+	Total    int64                        `json:"total"`
+}
+
+type UpdateProductAttributeReq struct {
+	Id                         int64  `json:"id"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategory_id"`
+	Name                       string `json:"name"`
+	SelectType                 int64  `json:"selectType"`    // 属性选择类型：0->唯一；1->单选；2->多选
+	InputType                  int64  `json:"inputType"`     // 属性录入方式：0->手工录入；1->从列表中选取
+	InputList                  string `json:"inputList"`     // 可选值列表，以逗号隔开
+	Sort                       int64  `json:"sort"`          // 排序字段：最高的可以单独上传图片
+	FilterType                 int64  `json:"filterType"`    // 分类筛选样式：1->普通；1->颜色
+	SearchType                 int64  `json:"searchType"`    // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
+	RelatedStatus              int64  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
+	HandAddStatus              int64  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
+	Type                       int64  `json:"type"`          // 属性的类型；0->规格；1->参数
+}
+
+type UpdateProductAttributeResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type DeleteProductAttributeReq struct {
+	Ids []int64 `json:"ids"`
+}
+
+type DeleteProductAttributeResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type AddProductAttributecategoryReq struct {
+	Name                   string `json:"name"`
+	AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
+	ParamCount             int64  `json:"paramCount"`     // 参数数量
+}
+
+type AddProductAttributecategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type ListProductAttributecategoryReq struct {
+	Current  int64  `json:"current,default=1"`
+	PageSize int64  `json:"pageSize,default=20"`
+	Name     string `json:"name,optional"`
+}
+
+type ListtProductAttributecategoryData struct {
+	Id                     int64  `json:"id"`
+	Name                   string `json:"name"`
+	AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
+	ParamCount             int64  `json:"paramCount"`     // 参数数量
+}
+
+type ListProductAttributecategoryResp struct {
+	Code     string                               `json:"code"`
+	Message  string                               `json:"message"`
+	Current  int64                                `json:"current,default=1"`
+	Data     []*ListtProductAttributecategoryData `json:"data"`
+	PageSize int64                                `json:"pageSize,default=20"`
+	Success  bool                                 `json:"success"`
+	Total    int64                                `json:"total"`
+}
+
+type UpdateProductAttributecategoryReq struct {
+	Id                     int64  `json:"id"`
+	Name                   string `json:"name"`
+	AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
+	ParamCount             int64  `json:"paramCount"`     // 参数数量
+}
+
+type UpdateProductAttributecategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type DeleteProductAttributecategoryReq struct {
+	Ids []int64 `json:"ids"`
+}
+
+type DeleteProductAttributecategoryResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

@@ -25,6 +25,7 @@ type (
     ListProductCategoryReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
+        Name   string `json:"name,optional"`
     }
     ListtProductCategoryData struct {
         Id int64 `json:"id"`
@@ -68,7 +69,7 @@ type (
         Message string `json:"message"`
     }
     DeleteProductCategoryReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteProductCategoryResp struct {
         Code string `json:"code"`

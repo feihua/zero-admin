@@ -27,11 +27,11 @@ func NewProductBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 func (l *ProductBrandDeleteLogic) ProductBrandDelete(req types.DeleteProductBrandReq) (*types.DeleteProductBrandResp, error) {
 	_, err := l.svcCtx.Pms.BrandDelete(l.ctx, &pmsclient.BrandDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除商品品牌异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除商品品牌异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除商品品牌失败")
 	}
 
