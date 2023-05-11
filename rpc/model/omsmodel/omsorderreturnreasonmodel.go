@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/oms/oms"
 )
 
 var _ OmsOrderReturnReasonModel = (*customOmsOrderReturnReasonModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customOmsOrderReturnReasonModel.
 	OmsOrderReturnReasonModel interface {
 		omsOrderReturnReasonModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrderReturnReason, error)
+		Count(ctx context.Context, in *oms.OrderReturnReasonListReq) (int64, error)
+		FindAll(ctx context.Context, in *oms.OrderReturnReasonListReq) (*[]OmsOrderReturnReason, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +33,17 @@ func NewOmsOrderReturnReasonModel(conn sqlx.SqlConn) OmsOrderReturnReasonModel {
 	}
 }
 
-func (m *customOmsOrderReturnReasonModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrderReturnReason, error) {
-
-	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderReturnReasonRows, m.table)
+func (m *customOmsOrderReturnReasonModel) FindAll(ctx context.Context, in *oms.OrderReturnReasonListReq) (*[]OmsOrderReturnReason, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", omsOrderReturnReasonRows, m.table, where)
 	var resp []OmsOrderReturnReason
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -47,8 +54,15 @@ func (m *customOmsOrderReturnReasonModel) FindAll(ctx context.Context, Current i
 	}
 }
 
-func (m *customOmsOrderReturnReasonModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customOmsOrderReturnReasonModel) Count(ctx context.Context, in *oms.OrderReturnReasonListReq) (int64, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

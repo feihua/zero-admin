@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/pms/pms"
 )
 
 var _ PmsBrandModel = (*customPmsBrandModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customPmsBrandModel.
 	PmsBrandModel interface {
 		pmsBrandModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsBrand, error)
+		Count(ctx context.Context, in *pms.BrandListReq) (int64, error)
+		FindAll(ctx context.Context, in *pms.BrandListReq) (*[]PmsBrand, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindAllByIds(ctx context.Context, ids []int64) (*[]PmsBrand, error)
 	}
@@ -33,11 +34,20 @@ func NewPmsBrandModel(conn sqlx.SqlConn) PmsBrandModel {
 	}
 }
 
-func (m *customPmsBrandModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsBrand, error) {
-
-	query := fmt.Sprintf("select %s from %s limit ?,?", pmsBrandRows, m.table)
+func (m *customPmsBrandModel) FindAll(ctx context.Context, in *pms.BrandListReq) (*[]PmsBrand, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	if in.FactoryStatus != 2 {
+		where = where + fmt.Sprintf(" AND factory_status = '%d'", in.FactoryStatus)
+	}
+	if in.ShowStatus != 2 {
+		where = where + fmt.Sprintf(" AND show_status = '%d'", in.ShowStatus)
+	}
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", pmsBrandRows, m.table, where)
 	var resp []PmsBrand
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -48,8 +58,18 @@ func (m *customPmsBrandModel) FindAll(ctx context.Context, Current int64, PageSi
 	}
 }
 
-func (m *customPmsBrandModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customPmsBrandModel) Count(ctx context.Context, in *pms.BrandListReq) (int64, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	if in.FactoryStatus != 2 {
+		where = where + fmt.Sprintf(" AND factory_status = '%d'", in.FactoryStatus)
+	}
+	if in.ShowStatus != 2 {
+		where = where + fmt.Sprintf(" AND show_status = '%d'", in.ShowStatus)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

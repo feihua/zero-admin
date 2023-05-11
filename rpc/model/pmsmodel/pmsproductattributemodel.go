@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/pms/pms"
 )
 
 var _ PmsProductAttributeModel = (*customPmsProductAttributeModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customPmsProductAttributeModel.
 	PmsProductAttributeModel interface {
 		pmsProductAttributeModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductAttribute, error)
+		Count(ctx context.Context, in *pms.ProductAttributeListReq) (int64, error)
+		FindAll(ctx context.Context, in *pms.ProductAttributeListReq) (*[]PmsProductAttribute, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +33,14 @@ func NewPmsProductAttributeModel(conn sqlx.SqlConn) PmsProductAttributeModel {
 	}
 }
 
-func (m *customPmsProductAttributeModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductAttribute, error) {
-
-	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductAttributeRows, m.table)
+func (m *customPmsProductAttributeModel) FindAll(ctx context.Context, in *pms.ProductAttributeListReq) (*[]PmsProductAttribute, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", pmsProductAttributeRows, m.table, where)
 	var resp []PmsProductAttribute
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -47,8 +51,12 @@ func (m *customPmsProductAttributeModel) FindAll(ctx context.Context, Current in
 	}
 }
 
-func (m *customPmsProductAttributeModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customPmsProductAttributeModel) Count(ctx context.Context, in *pms.ProductAttributeListReq) (int64, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)
