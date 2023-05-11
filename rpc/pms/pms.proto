@@ -388,6 +388,9 @@ message BrandAddResp {
 message BrandListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string  Name = 3;
+  int64    FactoryStatus = 4;
+  int64    ShowStatus = 5;
 }
 
 message BrandListByIdsReq {
@@ -433,7 +436,7 @@ message BrandUpdateResp {
 }
 
 message BrandDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message BrandDeleteResp {
@@ -702,6 +705,7 @@ message ProductAttributeCategoryAddResp {
 message ProductAttributeCategoryListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string  Name = 3;
 }
 
 message ProductAttributeCategoryListData{
@@ -729,7 +733,7 @@ message ProductAttributeCategoryUpdateResp {
 }
 
 message ProductAttributeCategoryDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message ProductAttributeCategoryDeleteResp {
@@ -758,6 +762,7 @@ message ProductAttributeAddResp {
 message ProductAttributeListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string  Name = 3;
 }
 
 message ProductAttributeListData{
@@ -801,7 +806,7 @@ message ProductAttributeUpdateResp {
 }
 
 message ProductAttributeDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message ProductAttributeDeleteResp {
@@ -921,6 +926,7 @@ message ProductCategoryAddResp {
 message ProductCategoryListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string  Name = 3;
 }
 
 message ProductCategoryFirstListReq {
@@ -972,7 +978,7 @@ message ProductCategoryUpdateResp {
 }
 
 message ProductCategoryDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message ProductCategoryDeleteResp {

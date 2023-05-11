@@ -681,6 +681,8 @@ message OrderReturnReasonAddResp {
 message OrderReturnReasonListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string  Name= 3;
+  int64 Status  = 4;
 }
 
 message OrderReturnReasonListData{
@@ -709,7 +711,7 @@ message OrderReturnReasonUpdateResp {
 }
 
 message OrderReturnReasonDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message OrderReturnReasonDeleteResp {

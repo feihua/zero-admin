@@ -24,8 +24,8 @@ func NewBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandLi
 }
 
 func (l *BrandListLogic) BrandList(in *pms.BrandListReq) (*pms.BrandListResp, error) {
-	all, err := l.svcCtx.PmsBrandModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsBrandModel.Count(l.ctx)
+	all, err := l.svcCtx.PmsBrandModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.PmsBrandModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
