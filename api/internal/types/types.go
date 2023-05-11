@@ -1498,16 +1498,14 @@ type DeleteProductResp struct {
 }
 
 type AddProductBrandReq struct {
-	Name                string `json:"name"`
-	FirstLetter         string `json:"firstLetter"` // 首字母
-	Sort                int64  `json:"sort"`
-	FactoryStatus       int64  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
-	ShowStatus          int64  `json:"showStatus"`
-	ProductCount        int64  `json:"productCount"`        // 产品数量
-	ProductCommentCount int64  `json:"productCommentCount"` // 产品评论数量
-	Logo                string `json:"logo"`                // 品牌logo
-	BigPic              string `json:"bigPic"`              // 专区大图
-	BrandStory          string `json:"brandStory"`          // 品牌故事
+	Name          string `json:"name"`
+	FirstLetter   string `json:"firstLetter"` // 首字母
+	Sort          int64  `json:"sort"`
+	FactoryStatus int64  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
+	ShowStatus    int64  `json:"showStatus"`
+	Logo          string `json:"logo"`       // 品牌logo
+	BigPic        string `json:"bigPic"`     // 专区大图
+	BrandStory    string `json:"brandStory"` // 品牌故事
 }
 
 type AddProductBrandResp struct {
