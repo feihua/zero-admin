@@ -6,17 +6,16 @@ info(
 
 type (
     addProductCategoryReq struct {
-        ParentId int64 `json:"parentId"`        // 上机分类的编号：0表示一级分类
+        ParentId int64 `json:"parentId"`        // 上级分类的编号：0表示一级分类
         Name string `json:"name"`
         Level int64 `json:"level"`              // 分类级别：0->1级；1->2级
-        ProductCount int64 `json:"productCount"`
-        ProductUnit string `json:"productUnit"`
         NavStatus int64 `json:"navStatus"`      // 是否显示在导航栏：0->不显示；1->显示
         ShowStatus int64 `json:"showStatus"`    // 显示状态：0->不显示；1->显示
+        ProductUnit string `json:"productUnit"`
         Sort int64 `json:"sort"`
         Icon string `json:"icon"`               // 图标
-        Keywords string `json:"keywords"`
-        Description string `json:"description"` // 描述
+        Keywords string `json:"keywords,optional"`
+        Description string `json:"description,optional"` // 描述
     }
     addProductCategoryResp struct {
         Code string `json:"code"`
@@ -26,10 +25,11 @@ type (
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
         Name   string `json:"name,optional"`
+        ParentId int64 `json:"parentId,default=2"`         // 上级分类的编号：0表示一级分类
     }
     ListtProductCategoryData struct {
         Id int64 `json:"id"`
-        ParentId int64 `json:"parentId"`         // 上机分类的编号：0表示一级分类
+        ParentId int64 `json:"parentId"`         // 上级分类的编号：0表示一级分类
         Name string `json:"name"`
         Level int64 `json:"level"`               // 分类级别：0->1级；1->2级
         ProductCount int64 `json:"productCount"`
@@ -52,7 +52,7 @@ type (
     }
     UpdateProductCategoryReq struct {
         Id int64 `json:"id"`
-        ParentId int64 `json:"parentId"`        // 上机分类的编号：0表示一级分类
+        ParentId int64 `json:"parentId"`        // 上级分类的编号：0表示一级分类
         Name string `json:"name"`
         Level int64 `json:"level"`              // 分类级别：0->1级；1->2级
         ProductCount int64 `json:"productCount"`

@@ -927,6 +927,7 @@ message ProductCategoryListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string  Name = 3;
+  int64 ParentId = 4;
 }
 
 message ProductCategoryFirstListReq {

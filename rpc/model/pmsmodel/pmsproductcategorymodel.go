@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/pms/pms"
 )
 
 var _ PmsProductCategoryModel = (*customPmsProductCategoryModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customPmsProductCategoryModel.
 	PmsProductCategoryModel interface {
 		pmsProductCategoryModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductCategory, error)
+		Count(ctx context.Context, in *pms.ProductCategoryListReq) (int64, error)
+		FindAll(ctx context.Context, in *pms.ProductCategoryListReq) (*[]PmsProductCategory, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindByParentId(ctx context.Context, parentId int64) (*[]PmsProductCategory, error)
 	}
@@ -33,11 +34,15 @@ func NewPmsProductCategoryModel(conn sqlx.SqlConn) PmsProductCategoryModel {
 	}
 }
 
-func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductCategory, error) {
+func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, in *pms.ProductCategoryListReq) (*[]PmsProductCategory, error) {
+	where := "1=1"
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductCategoryRows, m.table)
+	if in.ParentId != 2 {
+		where = where + fmt.Sprintf(" AND parent_id = '%d'", in.ParentId)
+	}
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", pmsProductCategoryRows, m.table, where)
 	var resp []PmsProductCategory
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, 0, 1000)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -48,8 +53,13 @@ func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, Current int
 	}
 }
 
-func (m *customPmsProductCategoryModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customPmsProductCategoryModel) Count(ctx context.Context, in *pms.ProductCategoryListReq) (int64, error) {
+	where := "1=1"
+
+	if in.ParentId != 2 {
+		where = where + fmt.Sprintf(" AND parent_id = '%d'", in.ParentId)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

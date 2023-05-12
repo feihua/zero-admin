@@ -31,7 +31,7 @@ func (l *ProductCategoryAddLogic) ProductCategoryAdd(req types.AddProductCategor
 		ParentId:     req.ParentId,
 		Name:         req.Name,
 		Level:        req.Level,
-		ProductCount: req.ProductCount,
+		ProductCount: 0,
 		ProductUnit:  req.ProductUnit,
 		NavStatus:    req.NavStatus,
 		ShowStatus:   req.ShowStatus,

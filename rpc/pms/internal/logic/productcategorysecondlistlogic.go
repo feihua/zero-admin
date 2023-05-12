@@ -27,7 +27,6 @@ func NewProductCategorySecondListLogic(ctx context.Context, svcCtx *svc.ServiceC
 
 func (l *ProductCategorySecondListLogic) ProductCategorySecondList(in *pmsclient.ProductCategorySecondListReq) (*pmsclient.ProductCategoryListResp, error) {
 	all, err := l.svcCtx.PmsProductCategoryModel.FindByParentId(l.ctx, in.ParentId)
-	count, _ := l.svcCtx.PmsProductCategoryModel.Count(l.ctx)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -58,7 +57,7 @@ func (l *ProductCategorySecondListLogic) ProductCategorySecondList(in *pmsclient
 	listStr, _ := json.Marshal(list)
 	logx.WithContext(l.ctx).Infof("查询商品类别列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.ProductCategoryListResp{
-		Total: count,
+		Total: 0,
 		List:  list,
 	}, nil
 }

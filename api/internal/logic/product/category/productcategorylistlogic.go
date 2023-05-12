@@ -30,6 +30,7 @@ func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCate
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		Name:     req.Name,
+		ParentId: req.ParentId,
 	})
 
 	if err != nil {
