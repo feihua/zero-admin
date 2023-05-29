@@ -693,9 +693,7 @@ message MemberPriceDeleteResp {
 
 
 message ProductAttributeCategoryAddReq {
-  string  Name = 2;
-  int64    AttributeCount = 3;
-  int64    ParamCount = 4;
+  string  Name = 1;
 }
 
 message ProductAttributeCategoryAddResp {

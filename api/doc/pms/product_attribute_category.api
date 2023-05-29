@@ -7,13 +7,12 @@ info(
 type (
     addProductAttributecategoryReq struct {
         Name           string `json:"name"`
-        AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
-        ParamCount     int64  `json:"paramCount"`     // 参数数量
     }
     addProductAttributecategoryResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
     }
+
     ListProductAttributecategoryReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`

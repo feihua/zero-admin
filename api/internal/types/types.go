@@ -2017,9 +2017,7 @@ type DeleteProductAttributeResp struct {
 }
 
 type AddProductAttributecategoryReq struct {
-	Name                   string `json:"name"`
-	AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
-	ParamCount             int64  `json:"paramCount"`     // 参数数量
+	Name string `json:"name"`
 }
 
 type AddProductAttributecategoryResp struct {
