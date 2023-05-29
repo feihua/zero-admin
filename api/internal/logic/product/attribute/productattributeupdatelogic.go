@@ -44,12 +44,12 @@ func (l *ProductAttributeUpdateLogic) ProductAttributeUpdate(req *types.UpdatePr
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("更新属性分类信息失败,参数:%s,异常:%s", reqStr, err.Error())
-		return nil, errorx.NewDefaultError("更新属性分类失败")
+		logx.WithContext(l.ctx).Errorf("更新属性信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, errorx.NewDefaultError("更新属性失败")
 	}
 
 	return &types.UpdateProductAttributeResp{
 		Code:    "000000",
-		Message: "更新属性分类成功",
+		Message: "更新属性成功",
 	}, nil
 }

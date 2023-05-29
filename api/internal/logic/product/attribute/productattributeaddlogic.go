@@ -43,12 +43,12 @@ func (l *ProductAttributeAddLogic) ProductAttributeAdd(req *types.AddProductAttr
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("添加属性分类信息失败,参数:%s,异常:%s", reqStr, err.Error())
-		return nil, errorx.NewDefaultError("添加属性分类失败")
+		logx.WithContext(l.ctx).Errorf("添加属性信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, errorx.NewDefaultError("添加属性失败")
 	}
 
 	return &types.AddProductAttributeResp{
 		Code:    "000000",
-		Message: "添加属性分类成功",
+		Message: "添加属性成功",
 	}, nil
 }

@@ -761,6 +761,8 @@ message ProductAttributeListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string  Name = 3;
+  int64   Type = 4;
+  int64    ProductAttributeCategoryId = 5;
 }
 
 message ProductAttributeListData{

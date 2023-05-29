@@ -31,8 +31,8 @@ func (l *ProductAttributeDeleteLogic) ProductAttributeDelete(req *types.DeletePr
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除属性分类异常:%s", req.Ids, err.Error())
-		return nil, errorx.NewDefaultError("删除属性分类失败")
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除属性异常:%s", req.Ids, err.Error())
+		return nil, errorx.NewDefaultError("删除属性失败")
 	}
 
 	return &types.DeleteProductAttributeResp{

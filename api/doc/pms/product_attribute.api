@@ -6,11 +6,11 @@ info(
 
 type (
     addProductAttributeReq struct {
-        ProductAttributeCategoryId int64  `json:"productAttributeCategory_id"`
+        ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"` // 属性分类id
         Name                       string `json:"name"`
         SelectType                 int64  `json:"selectType"`     // 属性选择类型：0->唯一；1->单选；2->多选
         InputType                  int64  `json:"inputType"`      // 属性录入方式：0->手工录入；1->从列表中选取
-        InputList                  string `json:"inputList"`      // 可选值列表，以逗号隔开
+        InputList                  string `json:"inputList,optional"`      // 可选值列表，以逗号隔开
         Sort                       int64  `json:"sort"`            // 排序字段：最高的可以单独上传图片
         FilterType                 int64  `json:"filterType"`     // 分类筛选样式：1->普通；1->颜色
         SearchType                 int64  `json:"searchType"`     // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
@@ -26,10 +26,12 @@ type (
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
         Name   string `json:"name,optional"`
+        Type  int64  `json:"type,default=2"`            // 属性的类型；0->规格；1->参数
+        ProductAttributeCategoryId int64  `json:"productAttributeCategoryId,default=0"`
     }
     ListtProductAttributeData struct {
         Id                         int64  `json:"id"`
-        ProductAttributeCategoryId int64  `json:"productAttributeCategory_id"`
+        ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
         Name                       string `json:"name"`
         SelectType                 int64  `json:"selectType"`     // 属性选择类型：0->唯一；1->单选；2->多选
         InputType                  int64  `json:"inputType"`      // 属性录入方式：0->手工录入；1->从列表中选取
@@ -52,11 +54,11 @@ type (
     }
     UpdateProductAttributeReq struct {
         Id                         int64  `json:"id"`
-        ProductAttributeCategoryId int64  `json:"productAttributeCategory_id"`
+        ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
         Name                       string `json:"name"`
         SelectType                 int64  `json:"selectType"`     // 属性选择类型：0->唯一；1->单选；2->多选
         InputType                  int64  `json:"inputType"`      // 属性录入方式：0->手工录入；1->从列表中选取
-        InputList                  string `json:"inputList"`      // 可选值列表，以逗号隔开
+        InputList                  string `json:"inputList,optional"`      // 可选值列表，以逗号隔开
         Sort                       int64  `json:"sort"`            // 排序字段：最高的可以单独上传图片
         FilterType                 int64  `json:"filterType"`     // 分类筛选样式：1->普通；1->颜色
         SearchType                 int64  `json:"searchType"`     // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索

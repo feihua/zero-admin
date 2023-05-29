@@ -28,15 +28,17 @@ func NewProductAttributeListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *ProductAttributeListLogic) ProductAttributeList(req *types.ListProductAttributeReq) (resp *types.ListProductAttributeResp, err error) {
 	attributeList, er := l.svcCtx.Pms.ProductAttributeList(l.ctx, &pmsclient.ProductAttributeListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		Name:     req.Name,
+		Current:                    req.Current,
+		PageSize:                   req.PageSize,
+		Name:                       req.Name,
+		Type:                       req.Type,
+		ProductAttributeCategoryId: req.ProductAttributeCategoryId,
 	})
 
 	if er != nil {
 		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询属性分类列表异常:%s", string(data), er.Error())
-		return nil, errorx.NewDefaultError("查询属性分类失败")
+		logx.WithContext(l.ctx).Errorf("参数: %s,查询属性列表异常:%s", string(data), er.Error())
+		return nil, errorx.NewDefaultError("查询属性失败")
 	}
 
 	var list []*types.ListtProductAttributeData
@@ -65,6 +67,6 @@ func (l *ProductAttributeListLogic) ProductAttributeList(req *types.ListProductA
 		Success:  true,
 		Total:    attributeList.Total,
 		Code:     "000000",
-		Message:  "查询属性分类成功",
+		Message:  "查询属性成功",
 	}, nil
 }
