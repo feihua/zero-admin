@@ -593,6 +593,11 @@ message OrderReturnApplyAddResp {
 message OrderReturnApplyListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string  OrderSn          = 3;
+  string  MemberUsername    = 4;
+  string 	HandleTime        = 5;
+  string 	CreateTime        = 6;
+  int64   Status            = 7;
 }
 
 message OrderReturnApplyListData{

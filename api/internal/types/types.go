@@ -1130,8 +1130,13 @@ type AddReturnApplyResp struct {
 }
 
 type ListReturnApplyReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current        int64  `json:"current,default=1"`
+	PageSize       int64  `json:"pageSize,default=20"`
+	OrderSn        string `json:"orderSn,optional"`        // 订单编号
+	Status         int64  `json:"status,default=4"`        // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleTime     string `json:"handleTime,optional"`     // 处理时间
+	CreateTime     string `json:"createTime,optional"`     // 申请时间
+	MemberUsername string `json:"memberUserName,optional"` // 会员用户名
 }
 
 type ListtReturnApplyData struct {

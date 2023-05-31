@@ -29,14 +29,19 @@ func NewReturnApplyListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Re
 
 func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*types.ListReturnApplyResp, error) {
 	resp, err := l.svcCtx.Oms.OrderReturnApplyList(l.ctx, &omsclient.OrderReturnApplyListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
+		Current:        req.Current,
+		PageSize:       req.PageSize,
+		OrderSn:        req.OrderSn,
+		MemberUsername: req.MemberUsername,
+		HandleTime:     req.HandleTime,
+		CreateTime:     req.CreateTime,
+		Status:         req.Status,
 	})
 
 	if err != nil {
 		data, _ := json.Marshal(req)
 		logx.WithContext(l.ctx).Errorf("参数: %s,查询退货申请列表异常:%s", string(data), err.Error())
-		return nil, errorx.NewDefaultError("查询退货申请失败")
+		return nil, errorx.NewDefaultError("查询退货申请列表失败")
 	}
 
 	for _, data := range resp.List {
@@ -83,6 +88,6 @@ func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*t
 		Success:  true,
 		Total:    resp.Total,
 		Code:     "000000",
-		Message:  "查询退货申请失败",
+		Message:  "查询退货申请列表成功",
 	}, nil
 }
