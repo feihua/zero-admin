@@ -6,6 +6,7 @@ docker stop ums
 docker stop oms
 docker stop pms
 docker stop sms
+docker stop cms
 docker stop api
 
 #删除容器
@@ -14,6 +15,7 @@ docker rm ums
 docker rm oms
 docker rm pms
 docker rm sms
+docker rm cms
 docker rm api
 
 #删除镜像
@@ -22,6 +24,7 @@ docker rmi ums:v1
 docker rmi oms:v1
 docker rmi pms:v1
 docker rmi sms:v1
+docker rmi cms:v1
 docker rmi api:v1
 
 #删除none镜像
@@ -33,6 +36,7 @@ docker build -t ums:v1 -f rpc/ums/Dockerfile .
 docker build -t oms:v1 -f rpc/oms/Dockerfile .
 docker build -t pms:v1 -f rpc/pms/Dockerfile .
 docker build -t sms:v1 -f rpc/sms/Dockerfile .
+docker build -t cms:v1 -f rpc/cms/Dockerfile .
 docker build -t api:v1 -f api/Dockerfile .
 
 #启动服务
@@ -41,4 +45,5 @@ docker run -itd --net=host --name=ums ums:v1
 docker run -itd --net=host --name=oms oms:v1
 docker run -itd --net=host --name=pms pms:v1
 docker run -itd --net=host --name=sms sms:v1
+docker run -itd --net=host --name=cms cms:v1
 docker run -itd --net=host --name=api api:v1
