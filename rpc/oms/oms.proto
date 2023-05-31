@@ -57,6 +57,12 @@ message OrderAddResp {
 message OrderListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string      OrderSn = 3;
+  string      MemberUsername = 4;
+  int64       PayType = 5;
+  int64       SourceType = 6;
+  int64       Status = 7;
+  int64       OrderType = 8;
 }
 
 message OrderListData{

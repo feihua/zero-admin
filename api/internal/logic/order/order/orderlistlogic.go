@@ -28,8 +28,14 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderLis
 
 func (l *OrderListLogic) OrderList(req types.ListOrderReq) (*types.ListOrderResp, error) {
 	resp, err := l.svcCtx.Oms.OrderList(l.ctx, &omsclient.OrderListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
+		Current:        req.Current,
+		PageSize:       req.PageSize,
+		OrderSn:        req.OrderSn,
+		MemberUsername: req.MemberUsername,
+		PayType:        req.PayType,
+		SourceType:     req.SourceType,
+		Status:         req.Status,
+		OrderType:      req.OrderType,
 	})
 
 	if err != nil {

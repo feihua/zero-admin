@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/oms/oms"
 )
 
 var _ OmsOrderModel = (*customOmsOrderModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customOmsOrderModel.
 	OmsOrderModel interface {
 		omsOrderModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrder, error)
+		Count(ctx context.Context, in *oms.OrderListReq) (int64, error)
+		FindAll(ctx context.Context, in *oms.OrderListReq) (*[]OmsOrder, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindListByMemberId(ctx context.Context, MemberId int64) (*[]OmsOrder, error)
 	}
@@ -33,11 +34,31 @@ func NewOmsOrderModel(conn sqlx.SqlConn) OmsOrderModel {
 	}
 }
 
-func (m *customOmsOrderModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrder, error) {
+func (m *customOmsOrderModel) FindAll(ctx context.Context, in *oms.OrderListReq) (*[]OmsOrder, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderRows, m.table)
+	where := "1=1"
+	if len(in.OrderSn) > 0 {
+		where = where + fmt.Sprintf(" AND order_sn like '%%%s%%'", in.OrderSn)
+	}
+	if len(in.MemberUsername) > 0 {
+		where = where + fmt.Sprintf(" AND member_username like '%%%s%%'", in.MemberUsername)
+	}
+	if in.PayType != 3 {
+		where = where + fmt.Sprintf(" AND pay_type = %d", in.PayType)
+	}
+	if in.SourceType != 2 {
+		where = where + fmt.Sprintf(" AND source_type = %d", in.SourceType)
+	}
+	if in.Status != 6 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	if in.OrderType != 2 {
+		where = where + fmt.Sprintf(" AND order_type = %d", in.OrderType)
+	}
+
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", omsOrderRows, m.table, where)
 	var resp []OmsOrder
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -48,8 +69,29 @@ func (m *customOmsOrderModel) FindAll(ctx context.Context, Current int64, PageSi
 	}
 }
 
-func (m *customOmsOrderModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customOmsOrderModel) Count(ctx context.Context, in *oms.OrderListReq) (int64, error) {
+
+	where := "1=1"
+	if len(in.OrderSn) > 0 {
+		where = where + fmt.Sprintf(" AND order_sn like '%%%s%%'", in.OrderSn)
+	}
+	if len(in.MemberUsername) > 0 {
+		where = where + fmt.Sprintf(" AND member_username like '%%%s%%'", in.MemberUsername)
+	}
+	if in.PayType != 3 {
+		where = where + fmt.Sprintf(" AND pay_type = %d", in.PayType)
+	}
+	if in.SourceType != 2 {
+		where = where + fmt.Sprintf(" AND source_type = %d", in.SourceType)
+	}
+	if in.Status != 6 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	if in.OrderType != 2 {
+		where = where + fmt.Sprintf(" AND order_type = %d", in.OrderType)
+	}
+
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)
