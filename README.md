@@ -43,3 +43,9 @@
 ## 1.7职位列表
 
 ![image-20210427204732978](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204732978.png)
+
+# 2.感谢
+[go-zero](https://github.com/zeromicro/go-zero)
+<p></p>
+
+[mall](https://github.com/macrozheng/mall)
