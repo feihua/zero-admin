@@ -12,7 +12,7 @@ create table sys_menu
     create_by      varchar(50)                         not null comment '创建人',
     create_time    timestamp default CURRENT_TIMESTAMP null comment '创建时间',
     update_by      varchar(50)                         null comment '更新人',
-    update_time    datetime                            null comment '更新时间',
+    update_time datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
     del_flag       tinyint   default 0                 not null comment '是否删除  -1：已删除  0：正常',
     vue_path       varchar(64)                         null comment 'vue系统的path',
     vue_component  varchar(64)                         null comment 'vue的页面',

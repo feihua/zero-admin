@@ -10,7 +10,7 @@ create table sys_dict
     create_by   varchar(50)                         not null comment '创建人',
     create_time timestamp default CURRENT_TIMESTAMP null comment '创建时间',
     update_by   varchar(50)                         null comment '更新人',
-    update_time timestamp default CURRENT_TIMESTAMP null comment '更新时间',
+    update_time datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
     remarks     varchar(255)                        null comment '备注信息',
     del_flag    tinyint   default 0                 not null comment '是否删除  -1：已删除  0：正常'
 )
