@@ -6,7 +6,7 @@
 
 # 1.项目预览
 
-**预览地址**http://129.204.22.242/ <span  style="color: red;"> 账号：admin 密码: 123456</span>
+**预览地址**http://139.159.180.129:81/mall <span  style="color: red;"> 账号：admin 密码: 123456</span>
 
 ## 1.1用户
 
