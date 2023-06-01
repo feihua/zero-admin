@@ -26,8 +26,8 @@ func NewDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictList
 }
 
 func (l *DictListLogic) DictList(in *sys.DictListReq) (*sys.DictListResp, error) {
-	all, err := l.svcCtx.DictModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.DictModel.Count(l.ctx)
+	all, err := l.svcCtx.DictModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.DictModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

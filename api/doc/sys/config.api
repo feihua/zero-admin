@@ -33,7 +33,7 @@ type (
         LastUpdateBy string `json:"lastUpdateBy"`          // 更新人
         LastUpdateTime string `json:"lastUpdateTime"`      // 更新时间
         Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"delFlag"`                     // 是否删除  -1：已删除  0：正常
+        DelFlag int64 `json:"delFlag"`                     // 是否删除  0：已删除  1：正常
     }
     ListConfigResp struct {
         Code string `json:"code"`

@@ -27,15 +27,26 @@ func NewRoleUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleUp
 }
 
 func (l *RoleUpdateLogic) RoleUpdate(in *sys.RoleUpdateReq) (*sys.RoleUpdateResp, error) {
-	_ = l.svcCtx.RoleModel.Update(l.ctx, &sysmodel.SysRole{
+	role, err := l.svcCtx.RoleModel.FindOne(l.ctx, in.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	err = l.svcCtx.RoleModel.Update(l.ctx, &sysmodel.SysRole{
 		Id:         in.Id,
 		Name:       in.Name,
 		Remark:     sql.NullString{String: in.Remark},
+		CreateBy:   role.CreateBy,
+		CreateTime: role.CreateTime,
 		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
 		UpdateTime: sql.NullTime{Time: time.Now()},
 		DelFlag:    0,
 		Status:     in.Status,
 	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sys.RoleUpdateResp{}, nil
 }

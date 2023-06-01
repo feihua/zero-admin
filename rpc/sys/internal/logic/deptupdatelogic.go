@@ -27,13 +27,20 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptUp
 }
 
 func (l *DeptUpdateLogic) DeptUpdate(in *sys.DeptUpdateReq) (*sys.DeptUpdateResp, error) {
-	err := l.svcCtx.DeptModel.Update(l.ctx, &sysmodel.SysDept{
+	dept, err := l.svcCtx.DeptModel.FindOne(l.ctx, in.Id)
+	if err != nil {
+		return nil, err
+	}
+	err = l.svcCtx.DeptModel.Update(l.ctx, &sysmodel.SysDept{
 		Id:         in.Id,
 		Name:       in.Name,
 		ParentId:   in.ParentId,
 		OrderNum:   in.OrderNum,
+		CreateBy:   dept.CreateBy,
+		CreateTime: dept.CreateTime,
 		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
 		UpdateTime: sql.NullTime{Time: time.Now()},
+		DelFlag:    0,
 	})
 
 	if err != nil {

@@ -1,83 +1,83 @@
 info(
-    desc: "职位"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "职位"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
-
 type (
-    addJobReq struct {
-        JobName        string `json:"jobName"`         // 职位名称
-        Remarks        string `json:"remarks"`         // 备注
-        OrderNum       int64  `json:"orderNum"`        // 排序
-        DelFlag        int64 `json:"delFlag"`                    // 是否删除  0：已删除  1：正常
-    }
-    addJobResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListJobReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        JobName string `json:"jobName,optional"`
-        DelFlag        int64 `json:"delFlag,default=2"`                    // 是否删除  0：已删除  1：正常
-    }
-    ListJobData struct {
-        Id int64 `json:"id"`                              // 编号
-        JobName string `json:"jobName"`                   // 职位名称
-        OrderNum int64 `json:"orderNum"`                  // 排序
-        CreateBy string `json:"createBy"`                 // 创建人
-        CreateTime string `json:"createTime"`             // 创建时间
-        LastUpdateBy string `json:"lastUpdateBy"`         // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`     // 更新时间
-        DelFlag int64 `json:"delFlag"`                    // 是否删除  0：已删除  1：正常
-        Remarks        string `json:"remarks"`         // 备注
-    }
-    ListJobResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListJobData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateJobReq struct {
-        Id             int64          `json:"id"`               // 编号
-        JobName        string `json:"jobName"`         // 职位名称
-        OrderNum       int64  `json:"orderNum"`        // 排序
-        Remarks        string `json:"remarks"`         // 备注
-        DelFlag        int64 `json:"delFlag"`                    // 是否删除  0：已删除  1：正常
-    }
-    UpdateJobResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteJobReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteJobResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addJobReq {
+		JobName  string `json:"jobName"`  // 职位名称
+		Remarks  string `json:"remarks"`  // 备注
+		OrderNum int64  `json:"orderNum"` // 排序
+		DelFlag  int64  `json:"delFlag"`  // 是否删除  0：已删除  1：正常
+	}
+	addJobResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListJobReq {
+		Current  int64  `json:"current,default=1"`
+		PageSize int64  `json:"pageSize,default=20"`
+		JobName  string `json:"jobName,optional"`
+		DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+	}
+	ListJobData {
+		Id             int64  `json:"id"`             // 编号
+		JobName        string `json:"jobName"`        // 职位名称
+		OrderNum       int64  `json:"orderNum"`       // 排序
+		CreateBy       string `json:"createBy"`       // 创建人
+		CreateTime     string `json:"createTime"`     // 创建时间
+		LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
+		LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
+		DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
+		Remarks        string `json:"remarks"`        // 备注
+	}
+
+	ListJobResp {
+		Code     string         `json:"code"`
+		Message  string         `json:"message"`
+		Current  int64          `json:"current,default=1"`
+		Data     []*ListJobData `json:"data"`
+		PageSize int64          `json:"pageSize,default=20"`
+		Success  bool           `json:"success"`
+		Total    int64          `json:"total"`
+	}
+	UpdateJobReq {
+		Id       int64  `json:"id"`       // 编号
+		JobName  string `json:"jobName"`  // 职位名称
+		OrderNum int64  `json:"orderNum"` // 排序
+		Remarks  string `json:"remarks"`  // 备注
+		DelFlag  int64  `json:"delFlag"`  // 是否删除  0：已删除  1：正常
+	}
+	UpdateJobResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteJobReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteJobResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: sys/job
-    prefix: /api/sys/job
+	jwt: Auth
+	middleware: CheckUrl
+	group: sys/job
+	prefix: /api/sys/job
 )
 service admin-api {
-    @handler JobAdd
-    post /add (addJobReq) returns (addJobResp)
-
-    @handler JobList
-    post /list (ListJobReq) returns (ListJobResp)
-
-    @handler JobUpdate
-    post /update (UpdateJobReq) returns (UpdateJobResp)
-
-    @handler JobDelete
-    post /delete (DeleteJobReq) returns (DeleteJobResp)
+	@handler JobAdd
+	post /add (addJobReq) returns (addJobResp)
+	
+	@handler JobList
+	post /list (ListJobReq) returns (ListJobResp)
+	
+	@handler JobUpdate
+	post /update (UpdateJobReq) returns (UpdateJobResp)
+	
+	@handler JobDelete
+	post /delete (DeleteJobReq) returns (DeleteJobResp)
 }

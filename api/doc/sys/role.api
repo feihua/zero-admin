@@ -28,10 +28,10 @@ type (
         CreateTime string `json:"createTime"`               // 创建时间
         LastUpdateBy string `json:"lastUpdateBy"`           // 更新人
         LastUpdateTime string `json:"lastUpdateTime"`       // 更新时间
-        DelFlag int64 `json:"delFlag"`                      // 是否删除  -1：已删除  0：正常
+        DelFlag int64 `json:"delFlag"`                      // 是否删除  0：已删除  1：正常
         Label string `json:"label"`                         // 编号
         Value string `json:"value"`                         // 角色名称
-        Status int64 `json:"status"`                        // 角色名称
+        Status int64 `json:"status"`                        // 状态
     }
     ListRoleResp struct {
         Code string `json:"code"`

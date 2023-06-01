@@ -60,6 +60,7 @@ type AddUserReq struct {
 	DeptId   int64  `json:"deptId"`
 	RoleId   int64  `json:"roleId"`
 	JobId    int64  `json:"jobId"`
+	DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 }
 
 type AddUserResp struct {
@@ -122,6 +123,7 @@ type UpdateUserReq struct {
 	RoleId   int64  `json:"roleId"`
 	Status   int64  `json:"status"`
 	JobId    int64  `json:"jobId"`
+	DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 }
 
 type UpdateUserResp struct {
@@ -217,7 +219,7 @@ type ListRoleData struct {
 	DelFlag        int64  `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
 	Label          string `json:"label"`          // 编号
 	Value          string `json:"value"`          // 角色名称
-	Status         int64  `json:"status"`         // 角色名称
+	Status         int64  `json:"status"`         // 状态
 }
 
 type ListRoleResp struct {
@@ -300,6 +302,7 @@ type AddMenuReq struct {
 	VueComponent string `json:"vueComponent,optional"` // vue的页面
 	VueIcon      string `json:"vueIcon,optional"`      // vue的图标
 	VueRedirect  string `json:"vueRedirect,optional"`  // vue的路由重定向
+	DelFlag      int64  `json:"delFlag,default=2"`     // 是否删除  0：已删除  1：正常
 }
 
 type AddMenuResp struct {
@@ -355,6 +358,7 @@ type UpdateMenuReq struct {
 	VueComponent string `json:"vueComponent,optional"` // vue的页面
 	VueIcon      string `json:"vueIcon,optional"`      // vue的图标
 	VueRedirect  string `json:"vueRedirect,optional"`  // vue的路由重定向
+	DelFlag      int64  `json:"delFlag,default=2"`     // 是否删除  0：已删除  1：正常
 }
 
 type UpdateMenuResp struct {
@@ -390,7 +394,7 @@ type ListDictReq struct {
 	PageSize int64  `json:"pageSize,default=20"`
 	Value    string `json:"value,optional"`
 	Label    string `json:"label,optional"`
-	DelFlag  int64  `json:"delFlag,optional"`
+	DelFlag  int64  `json:"delFlag,default=2"`
 	Type     string `json:"type,optional "`
 }
 
@@ -447,6 +451,7 @@ type AddDeptReq struct {
 	Name     string `json:"name"`              // 机构名称
 	ParentId int64  `json:"parentId,optional"` // 上级机构ID，一级机构为0
 	OrderNum int64  `json:"orderNum"`          // 排序
+	DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 }
 
 type AddDeptResp struct {
@@ -480,10 +485,11 @@ type ListDeptResp struct {
 }
 
 type UpdateDeptReq struct {
-	Id       int64  `json:"id"`       // 编号
-	Name     string `json:"name"`     // 机构名称
-	ParentId int64  `json:"parentId"` // 上级机构ID，一级机构为0
-	OrderNum int64  `json:"orderNum"` // 排序
+	Id       int64  `json:"id"`                // 编号
+	Name     string `json:"name"`              // 机构名称
+	ParentId int64  `json:"parentId"`          // 上级机构ID，一级机构为0
+	OrderNum int64  `json:"orderNum"`          // 排序
+	DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 }
 
 type UpdateDeptResp struct {

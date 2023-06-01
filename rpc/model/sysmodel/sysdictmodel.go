@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/sys/sys"
 )
 
 var _ SysDictModel = (*customSysDictModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customSysDictModel.
 	SysDictModel interface {
 		sysDictModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysDict, error)
+		Count(ctx context.Context, in *sys.DictListReq) (int64, error)
+		FindAll(ctx context.Context, in *sys.DictListReq) (*[]SysDict, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +33,20 @@ func NewSysDictModel(conn sqlx.SqlConn) SysDictModel {
 	}
 }
 
-func (m *customSysDictModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysDict, error) {
-
-	query := fmt.Sprintf("select %s from %s limit ?,?", sysDictRows, m.table)
+func (m *customSysDictModel) FindAll(ctx context.Context, in *sys.DictListReq) (*[]SysDict, error) {
+	where := "1=1"
+	if len(in.Type) > 0 {
+		where = where + fmt.Sprintf(" AND type like '%%%s%%'", in.Type)
+	}
+	if len(in.Label) > 0 {
+		where = where + fmt.Sprintf(" AND label like '%%%s%%'", in.Label)
+	}
+	if in.DelFlag != 2 {
+		where = where + fmt.Sprintf(" AND del_flag = %d", in.DelFlag)
+	}
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", sysDictRows, m.table, where)
 	var resp []SysDict
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -47,8 +57,18 @@ func (m *customSysDictModel) FindAll(ctx context.Context, Current int64, PageSiz
 	}
 }
 
-func (m *customSysDictModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customSysDictModel) Count(ctx context.Context, in *sys.DictListReq) (int64, error) {
+	where := "1=1"
+	if len(in.Type) > 0 {
+		where = where + fmt.Sprintf(" AND type like '%%%s%%'", in.Type)
+	}
+	if len(in.Label) > 0 {
+		where = where + fmt.Sprintf(" AND label like '%%%s%%'", in.Label)
+	}
+	if in.DelFlag != 2 {
+		where = where + fmt.Sprintf(" AND del_flag = %d", in.DelFlag)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

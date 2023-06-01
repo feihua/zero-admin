@@ -27,13 +27,21 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictUp
 }
 
 func (l *DictUpdateLogic) DictUpdate(in *sys.DictUpdateReq) (*sys.DictUpdateResp, error) {
-	err := l.svcCtx.DictModel.Update(l.ctx, &sysmodel.SysDict{
+	//更新之前查询记录是否存在
+	dict, err := l.svcCtx.DictModel.FindOne(l.ctx, in.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	err = l.svcCtx.DictModel.Update(l.ctx, &sysmodel.SysDict{
 		Id:          in.Id,
 		Value:       in.Value,
 		Label:       in.Label,
 		Type:        in.Type,
 		Description: in.Description,
 		Sort:        float64(in.Sort),
+		CreateBy:    dict.CreateBy,
+		CreateTime:  dict.CreateTime,
 		UpdateBy:    sql.NullString{String: in.LastUpdateBy, Valid: true},
 		UpdateTime:  time.Now(),
 		Remarks:     sql.NullString{String: in.Remarks},
