@@ -3,9 +3,6 @@ package logic
 import (
 	"context"
 	"database/sql"
-	"time"
-	"zero-admin/rpc/model/sysmodel"
-
 	"zero-admin/rpc/sys/internal/svc"
 	"zero-admin/rpc/sys/sys"
 
@@ -27,14 +24,19 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobUpda
 }
 
 func (l *JobUpdateLogic) JobUpdate(in *sys.JobUpdateReq) (*sys.JobUpdateResp, error) {
-	err := l.svcCtx.JobModel.Update(l.ctx, &sysmodel.SysJob{
-		Id:         in.Id,
-		JobName:    in.JobName,
-		OrderNum:   in.OrderNum,
-		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
-		UpdateTime: sql.NullTime{Time: time.Now()},
-		Remarks:    sql.NullString{String: in.Remarks},
-	})
+	//更新之前查询记录是否存在
+	job, err := l.svcCtx.JobModel.FindOne(l.ctx, in.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	job.JobName = in.JobName
+	job.OrderNum = in.OrderNum
+	job.UpdateBy = sql.NullString{String: in.LastUpdateBy, Valid: true}
+	job.Remarks = sql.NullString{String: in.Remarks, Valid: true}
+	job.DelFlag = in.DelFlag
+
+	err = l.svcCtx.JobModel.Update(l.ctx, job)
 
 	if err != nil {
 		return nil, err

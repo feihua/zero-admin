@@ -31,6 +31,7 @@ func (l *JobAddLogic) JobAdd(req types.AddJobReq) (*types.AddJobResp, error) {
 		OrderNum: req.OrderNum,
 		CreateBy: "admin",
 		Remarks:  req.Remarks,
+		DelFlag:  req.DelFlag,
 	})
 
 	if err != nil {

@@ -31,6 +31,7 @@ func (l *JobListLogic) JobList(req types.ListJobReq) (*types.ListJobResp, error)
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		JobName:  req.JobName,
+		DelFlag:  req.DelFlag,
 	})
 
 	if err != nil {

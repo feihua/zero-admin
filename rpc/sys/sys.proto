@@ -597,6 +597,7 @@ message JobAddReq {
   int64 orderNum = 2;
   string create_by = 3;
   string remarks = 4;
+  int64 delFlag = 5;
 }
 
 message JobAddResp {
@@ -607,6 +608,7 @@ message JobListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string jobName = 3;
+  int64 delFlag = 4;
 }
 
 message JobListData {
@@ -632,6 +634,7 @@ message JobUpdateReq {
   int64 orderNum = 3;
   string lastUpdateBy = 4;
   string remarks = 5;
+  int64 delFlag = 6;
 }
 
 message JobUpdateResp {
@@ -639,7 +642,7 @@ message JobUpdateResp {
 }
 
 message JobDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message JobDeleteResp {

@@ -34,6 +34,7 @@ func (l *JobUpdateLogic) JobUpdate(req types.UpdateJobReq) (*types.UpdateJobResp
 		Remarks:  req.Remarks,
 		//todo 从token里面拿
 		LastUpdateBy: "admin",
+		DelFlag:      req.DelFlag,
 	})
 
 	if err != nil {

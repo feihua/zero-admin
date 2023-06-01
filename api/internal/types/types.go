@@ -645,6 +645,7 @@ type AddJobReq struct {
 	JobName  string `json:"jobName"`  // 职位名称
 	Remarks  string `json:"remarks"`  // 备注
 	OrderNum int64  `json:"orderNum"` // 排序
+	DelFlag  int64  `json:"delFlag"`  // 是否删除  0：已删除  1：正常
 }
 
 type AddJobResp struct {
@@ -656,6 +657,7 @@ type ListJobReq struct {
 	Current  int64  `json:"current,default=1"`
 	PageSize int64  `json:"pageSize,default=20"`
 	JobName  string `json:"jobName,optional"`
+	DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 }
 
 type ListJobData struct {
@@ -666,7 +668,7 @@ type ListJobData struct {
 	CreateTime     string `json:"createTime"`     // 创建时间
 	LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
 	LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
-	DelFlag        int64  `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
+	DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
 	Remarks        string `json:"remarks"`        // 备注
 }
 
@@ -685,6 +687,7 @@ type UpdateJobReq struct {
 	JobName  string `json:"jobName"`  // 职位名称
 	OrderNum int64  `json:"orderNum"` // 排序
 	Remarks  string `json:"remarks"`  // 备注
+	DelFlag  int64  `json:"delFlag"`  // 是否删除  0：已删除  1：正常
 }
 
 type UpdateJobResp struct {
@@ -693,7 +696,7 @@ type UpdateJobResp struct {
 }
 
 type DeleteJobReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteJobResp struct {

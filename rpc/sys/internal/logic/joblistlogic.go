@@ -26,8 +26,8 @@ func NewJobListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobListLo
 }
 
 func (l *JobListLogic) JobList(in *sys.JobListReq) (*sys.JobListResp, error) {
-	all, err := l.svcCtx.JobModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.JobModel.Count(l.ctx)
+	all, err := l.svcCtx.JobModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.JobModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

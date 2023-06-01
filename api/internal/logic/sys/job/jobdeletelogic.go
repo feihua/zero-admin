@@ -27,11 +27,11 @@ func NewJobDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) JobDelet
 
 func (l *JobDeleteLogic) JobDelete(req types.DeleteJobReq) (*types.DeleteJobResp, error) {
 	_, err := l.svcCtx.Sys.JobDelete(l.ctx, &sysclient.JobDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据jobId: %d,删除岗位异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据jobId: %d,删除岗位异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除岗位失败")
 	}
 
