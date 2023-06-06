@@ -33,8 +33,8 @@ func (l *DictAddLogic) DictAdd(in *sys.DictAddReq) (*sys.DictAddResp, error) {
 		Description: in.Description,
 		Sort:        float64(in.Sort),
 		CreateBy:    in.CreateBy,
-		Remarks:     sql.NullString{String: in.Remarks},
-		DelFlag:     0,
+		Remarks:     sql.NullString{String: in.Remarks, Valid: true},
+		DelFlag:     in.DelFlag,
 	})
 
 	if err != nil {

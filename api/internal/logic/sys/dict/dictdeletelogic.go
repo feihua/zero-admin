@@ -27,11 +27,11 @@ func NewDictDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictDel
 
 func (l *DictDeleteLogic) DictDelete(req types.DeleteDictReq) (*types.DeleteDictResp, error) {
 	_, err := l.svcCtx.Sys.DictDelete(l.ctx, &sysclient.DictDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据dictId: %d,删除字典异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据dictId: %d,删除字典异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除字典失败")
 	}
 

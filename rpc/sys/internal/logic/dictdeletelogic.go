@@ -24,7 +24,7 @@ func NewDictDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictDe
 }
 
 func (l *DictDeleteLogic) DictDelete(in *sys.DictDeleteReq) (*sys.DictDeleteResp, error) {
-	err := l.svcCtx.DictModel.Delete(l.ctx, in.Id)
+	err := l.svcCtx.DictModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

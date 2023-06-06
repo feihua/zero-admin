@@ -33,10 +33,11 @@ func (l *DictUpdateLogic) DictUpdate(req types.UpdateDictReq) (*types.UpdateDict
 		Label:       req.Label,
 		Type:        req.Type,
 		Description: req.Description,
-		Sort:        int64(req.Sort),
+		Sort:        req.Sort,
 		Remarks:     req.Remarks,
 		//todo 从token里面拿
 		LastUpdateBy: "admin",
+		DelFlag:      req.DelFlag,
 	})
 
 	if err != nil {

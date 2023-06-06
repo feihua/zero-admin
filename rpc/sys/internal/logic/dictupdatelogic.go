@@ -44,8 +44,8 @@ func (l *DictUpdateLogic) DictUpdate(in *sys.DictUpdateReq) (*sys.DictUpdateResp
 		CreateTime:  dict.CreateTime,
 		UpdateBy:    sql.NullString{String: in.LastUpdateBy, Valid: true},
 		UpdateTime:  time.Now(),
-		Remarks:     sql.NullString{String: in.Remarks},
-		DelFlag:     0,
+		Remarks:     sql.NullString{String: in.Remarks, Valid: true},
+		DelFlag:     in.DelFlag,
 	})
 
 	if err != nil {

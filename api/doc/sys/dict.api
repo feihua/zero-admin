@@ -10,9 +10,10 @@ type (
         Value string `json:"value"`                        // 数据值
         Label string `json:"label"`                        // 标签名
         Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort string `json:"sort"`                          // 排序（升序）
-        Remarks string `json:"remarks"`                    // 备注信息
+        Description string `json:"description,optional"`            // 描述
+        Sort int64 `json:"sort"`                          // 排序（升序）
+        Remarks string `json:"remarks,optional"`                    // 备注信息
+        DelFlag int64 `json:"delFlag"`                     // 是否删除  0：已删除  1：正常
     }
     addDictResp struct {
         Code string `json:"code"`
@@ -55,15 +56,16 @@ type (
         Label string `json:"label"`                        // 标签名
         Type string `json:"type"`                          // 类型
         Description string `json:"description"`            // 描述
-        Sort float64 `json:"sort"`                         // 排序（升序）
+        Sort int64 `json:"sort"`                         // 排序（升序）
         Remarks string `json:"remarks"`                    // 备注信息
+        DelFlag int64 `json:"delFlag"`                     // 是否删除  0：已删除  1：正常
     }
     UpdateDictResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
     }
     DeleteDictReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteDictResp struct {
         Code string `json:"code"`

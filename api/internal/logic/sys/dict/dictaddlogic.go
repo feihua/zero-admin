@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"strconv"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sys/sysclient"
 
@@ -28,16 +27,16 @@ func NewDictAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictAddLog
 }
 
 func (l *DictAddLogic) DictAdd(req types.AddDictReq) (*types.AddDictResp, error) {
-	sort, _ := strconv.ParseInt(req.Sort, 10, 64)
 	_, err := l.svcCtx.Sys.DictAdd(l.ctx, &sysclient.DictAddReq{
 		Value:       req.Value,
 		Label:       req.Label,
 		Type:        req.Type,
 		Description: req.Description,
-		Sort:        sort,
+		Sort:        req.Sort,
 		Remarks:     req.Remarks,
 		//todo 从token里面拿
 		CreateBy: "admin",
+		DelFlag:  req.DelFlag,
 	})
 
 	if err != nil {

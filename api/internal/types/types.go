@@ -95,7 +95,7 @@ type ListUserData struct {
 	CreateTime     string `json:"createTime"`     // 创建时间
 	LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
 	LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
-	DelFlag        int64  `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
+	DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
 	JobId          int64  `json:"jobId"`
 	RoleId         int64  `json:"roleId"`
 	RoleName       string `json:"roleName"`
@@ -216,7 +216,7 @@ type ListRoleData struct {
 	CreateTime     string `json:"createTime"`     // 创建时间
 	LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
 	LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
-	DelFlag        int64  `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
+	DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
 	Label          string `json:"label"`          // 编号
 	Value          string `json:"value"`          // 角色名称
 	Status         int64  `json:"status"`         // 状态
@@ -330,7 +330,7 @@ type ListtMenuData struct {
 	CreateTime     string `json:"createTime"`     // 创建时间
 	LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
 	LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
-	DelFlag        int64  `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
+	DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
 	VuePath        string `json:"vuePath"`        // vue系统的path
 	VueComponent   string `json:"vueComponent"`   // vue的页面
 	VueIcon        string `json:"vueIcon"`        // vue的图标
@@ -376,12 +376,13 @@ type DeleteMenuResp struct {
 }
 
 type AddDictReq struct {
-	Value       string `json:"value"`       // 数据值
-	Label       string `json:"label"`       // 标签名
-	Type        string `json:"type"`        // 类型
-	Description string `json:"description"` // 描述
-	Sort        string `json:"sort"`        // 排序（升序）
-	Remarks     string `json:"remarks"`     // 备注信息
+	Value       string `json:"value"`                // 数据值
+	Label       string `json:"label"`                // 标签名
+	Type        string `json:"type"`                 // 类型
+	Description string `json:"description,optional"` // 描述
+	Sort        int64  `json:"sort"`                 // 排序（升序）
+	Remarks     string `json:"remarks,optional"`     // 备注信息
+	DelFlag     int64  `json:"delFlag"`              // 是否删除  0：已删除  1：正常
 }
 
 type AddDictResp struct {
@@ -410,7 +411,7 @@ type ListDictData struct {
 	LastUpdateBy   string  `json:"lastUpdateBy"`   // 更新人
 	LastUpdateTime string  `json:"lastUpdateTime"` // 更新时间
 	Remarks        string  `json:"remarks"`        // 备注信息
-	DelFlag        int64   `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
+	DelFlag        int64   `json:"delFlag"`        // 是否删除  0：已删除  1：正常
 }
 
 type ListDictResp struct {
@@ -424,13 +425,14 @@ type ListDictResp struct {
 }
 
 type UpdateDictReq struct {
-	Id          int64   `json:"id"`          // 编号
-	Value       string  `json:"value"`       // 数据值
-	Label       string  `json:"label"`       // 标签名
-	Type        string  `json:"type"`        // 类型
-	Description string  `json:"description"` // 描述
-	Sort        float64 `json:"sort"`        // 排序（升序）
-	Remarks     string  `json:"remarks"`     // 备注信息
+	Id          int64  `json:"id"`          // 编号
+	Value       string `json:"value"`       // 数据值
+	Label       string `json:"label"`       // 标签名
+	Type        string `json:"type"`        // 类型
+	Description string `json:"description"` // 描述
+	Sort        int64  `json:"sort"`        // 排序（升序）
+	Remarks     string `json:"remarks"`     // 备注信息
+	DelFlag     int64  `json:"delFlag"`     // 是否删除  0：已删除  1：正常
 }
 
 type UpdateDictResp struct {
@@ -439,7 +441,7 @@ type UpdateDictResp struct {
 }
 
 type DeleteDictReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteDictResp struct {
@@ -473,7 +475,7 @@ type ListDeptData struct {
 	CreateTime     string `json:"createTime"`     // 创建时间
 	LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
 	LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
-	DelFlag        int64  `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
+	DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
 }
 
 type ListDeptResp struct {
@@ -610,7 +612,7 @@ type ListConfigData struct {
 	LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
 	LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
 	Remarks        string `json:"remarks"`        // 备注信息
-	DelFlag        int64  `json:"delFlag"`        // 是否删除  -1：已删除  0：正常
+	DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
 }
 
 type ListConfigResp struct {
