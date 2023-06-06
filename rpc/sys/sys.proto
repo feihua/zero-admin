@@ -384,6 +384,8 @@ message DeptAddReq {
   int64 parent_id = 2;
   int64 order_num = 3;
   string create_by = 4;
+  repeated int64 parent_ids = 5;
+  int64 del_flag = 6;
 }
 
 message DeptAddResp {
@@ -407,6 +409,7 @@ message DeptListData {
   string last_update_by = 7;
   string last_update_time = 8;
   int64 del_flag = 9;
+  repeated int64 parent_ids = 10;
 }
 
 message DeptListResp{
@@ -419,6 +422,8 @@ message DeptUpdateReq {
   int64 parent_id = 3;
   int64 order_num = 4;
   string last_update_by = 7;
+  repeated int64 parent_ids = 8;
+  int64 del_flag = 9;
 }
 
 message DeptUpdateResp {
@@ -426,7 +431,7 @@ message DeptUpdateResp {
 }
 
 message DeptDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message DeptDeleteResp {

@@ -45,6 +45,7 @@ type (
 		UpdateBy   sql.NullString `db:"update_by"`   // 更新人
 		UpdateTime sql.NullTime   `db:"update_time"` // 更新时间
 		DelFlag    int64          `db:"del_flag"`    // 是否删除  -1：已删除  0：正常
+		ParentIds  string         `db:"parent_ids"`  // 上级机构IDs，一级机构为0
 	}
 )
 
@@ -76,14 +77,14 @@ func (m *defaultSysDeptModel) FindOne(ctx context.Context, id int64) (*SysDept, 
 }
 
 func (m *defaultSysDeptModel) Insert(ctx context.Context, data *SysDept) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, sysDeptRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.ParentId, data.OrderNum, data.CreateBy, data.UpdateBy, data.DelFlag)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, sysDeptRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.ParentId, data.OrderNum, data.CreateBy, data.UpdateBy, data.DelFlag, data.ParentIds)
 	return ret, err
 }
 
 func (m *defaultSysDeptModel) Update(ctx context.Context, data *SysDept) error {
 	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, sysDeptRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.Name, data.ParentId, data.OrderNum, data.CreateBy, data.UpdateBy, data.DelFlag, data.Id)
+	_, err := m.conn.ExecCtx(ctx, query, data.Name, data.ParentId, data.OrderNum, data.CreateBy, data.UpdateBy, data.DelFlag, data.ParentIds, data.Id)
 	return err
 }
 

@@ -32,7 +32,9 @@ func (l *DeptAddLogic) DeptAdd(req types.AddDeptReq) (*types.AddDeptResp, error)
 		ParentId: req.ParentId,
 		OrderNum: req.OrderNum,
 		//todo 从token里面拿
-		CreateBy: "admin",
+		CreateBy:  "admin",
+		ParentIds: req.ParentIds,
+		DelFlag:   req.DelFlag,
 	})
 
 	if err != nil {

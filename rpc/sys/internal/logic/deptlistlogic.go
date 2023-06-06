@@ -3,6 +3,8 @@ package logic
 import (
 	"context"
 	"encoding/json"
+	"strconv"
+	"strings"
 
 	"zero-admin/rpc/sys/internal/svc"
 	"zero-admin/rpc/sys/sys"
@@ -35,7 +37,15 @@ func (l *DeptListLogic) DeptList(in *sys.DeptListReq) (*sys.DeptListResp, error)
 	}
 
 	var list []*sys.DeptListData
+
 	for _, dept := range *all {
+		var parentIds []int64
+		if len(dept.ParentIds) > 0 {
+			for _, i := range strings.Split(dept.ParentIds, ",") {
+				p, _ := strconv.ParseInt(i, 10, 64)
+				parentIds = append(parentIds, p)
+			}
+		}
 
 		list = append(list, &sys.DeptListData{
 			Id:             dept.Id,
@@ -47,6 +57,7 @@ func (l *DeptListLogic) DeptList(in *sys.DeptListReq) (*sys.DeptListResp, error)
 			LastUpdateBy:   dept.UpdateBy.String,
 			LastUpdateTime: dept.UpdateTime.Time.Format("2006-01-02 15:04:05"),
 			DelFlag:        dept.DelFlag,
+			ParentIds:      parentIds,
 		})
 	}
 

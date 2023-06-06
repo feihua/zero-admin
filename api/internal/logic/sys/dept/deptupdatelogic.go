@@ -34,6 +34,8 @@ func (l *DeptUpdateLogic) DeptUpdate(req types.UpdateDeptReq) (*types.UpdateDept
 		OrderNum: req.OrderNum,
 		//todo 从token里面拿
 		LastUpdateBy: "admin",
+		ParentIds:    req.ParentIds,
+		DelFlag:      req.DelFlag,
 	})
 
 	if err != nil {

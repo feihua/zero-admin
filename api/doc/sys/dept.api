@@ -7,7 +7,8 @@ info(
 type (
     addDeptReq struct {
         Name string `json:"name"`                                  // 机构名称
-        ParentId int64 `json:"parentId,optional"`                  // 上级机构ID，一级机构为0
+        ParentId int64 `json:"parentId"`                  // 上级机构ID，一级机构为0
+        ParentIds []int64 `json:"parentIds"`                // 上级机构IDs
         OrderNum int64 `json:"orderNum"`                           // 排序
         DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
     }
@@ -23,6 +24,7 @@ type (
         Id int64 `json:"id"`                               // 编号
         Name string `json:"name"`                          // 机构名称
         ParentId int64 `json:"parentId"`                   // 上级机构ID，一级机构为0
+        ParentIds []int64 `json:"parentIds"`               // 上级机构ID
         OrderNum int64 `json:"orderNum"`                   // 排序
         CreateBy string `json:"createBy"`                  // 创建人
         CreateTime string `json:"createTime"`              // 创建时间
@@ -41,15 +43,16 @@ type (
         Id int64 `json:"id"`                               // 编号
         Name string `json:"name"`                          // 机构名称
         ParentId int64 `json:"parentId"`                   // 上级机构ID，一级机构为0
+        ParentIds []int64 `json:"parentIds"`               // 上级机构ID
         OrderNum int64 `json:"orderNum"`                   // 排序
-        DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+        DelFlag  int64  `json:"delFlag,default=2"`         // 是否删除  0：已删除  1：正常
     }
     UpdateDeptResp struct {
         Code string `json:"code"`
         Message string `json:"message"`
     }
     DeleteDeptReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteDeptResp struct {
         Code string `json:"code"`

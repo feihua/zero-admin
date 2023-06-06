@@ -27,11 +27,11 @@ func NewDeptDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptDel
 
 func (l *DeptDeleteLogic) DeptDelete(req types.DeleteDeptReq) (*types.DeleteDeptResp, error) {
 	_, err := l.svcCtx.Sys.DeptDelete(l.ctx, &sysclient.DeptDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据deptId: %d,删除部门异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据deptId: %d,删除部门异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除机构失败")
 	}
 

@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"database/sql"
-	"time"
+	"fmt"
+	"strings"
 	"zero-admin/rpc/model/sysmodel"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -39,8 +40,8 @@ func (l *DeptUpdateLogic) DeptUpdate(in *sys.DeptUpdateReq) (*sys.DeptUpdateResp
 		CreateBy:   dept.CreateBy,
 		CreateTime: dept.CreateTime,
 		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
-		UpdateTime: sql.NullTime{Time: time.Now()},
-		DelFlag:    0,
+		DelFlag:    in.DelFlag,
+		ParentIds:  strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1),
 	})
 
 	if err != nil {

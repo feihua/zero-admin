@@ -49,6 +49,7 @@ func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, er
 			LastUpdateBy:   dept.LastUpdateBy,
 			LastUpdateTime: dept.LastUpdateTime,
 			DelFlag:        dept.DelFlag,
+			ParentIds:      dept.ParentIds,
 		})
 	}
 
