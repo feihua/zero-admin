@@ -8,6 +8,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
 	"time"
+	"zero-admin/rpc/sys/sys"
 )
 
 var _ SysUserModel = (*customSysUserModel)(nil)
@@ -17,8 +18,8 @@ type (
 	// and implement the added methods in customSysUserModel.
 	SysUserModel interface {
 		sysUserModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysUserList, error)
+		Count(ctx context.Context, in *sys.UserListReq) (int64, error)
+		FindAll(ctx context.Context, in *sys.UserListReq) (*[]SysUserList, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -57,11 +58,20 @@ func NewSysUserModel(conn sqlx.SqlConn) SysUserModel {
 	}
 }
 
-func (m *customSysUserModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysUserList, error) {
-
-	query := "select sys_user.*, ifnull(sj.job_name,'') as job_name, ifnull(sd.name ,'')as dept_name, ifnull(sys_role.name,'') as role_name,ifnull(sys_role.id ,'1')as role_id from sys_user   left join sys_user_role sur on sys_user.id = sur.user_id   left join sys_role on sur.role_id = sys_role.id    left join sys_job sj on sys_user.job_id = sj.id left join sys_dept sd on sys_user.dept_id = sd.id limit ?,?"
+func (m *customSysUserModel) FindAll(ctx context.Context, in *sys.UserListReq) (*[]SysUserList, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND sys_user.name like '%%%s%%'", in.Name)
+	}
+	if len(in.Mobile) > 0 {
+		where = where + fmt.Sprintf(" AND sys_user.mobile like '%%%s%%'", in.Mobile)
+	}
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND sys_user.status = %d", in.Status)
+	}
+	query := fmt.Sprintf("select sys_user.*, ifnull(sj.job_name,'') as job_name, ifnull(sd.name ,'')as dept_name, ifnull(sys_role.name,'') as role_name,ifnull(sys_role.id ,'1')as role_id from sys_user   left join sys_user_role sur on sys_user.id = sur.user_id   left join sys_role on sur.role_id = sys_role.id    left join sys_job sj on sys_user.job_id = sj.id left join sys_dept sd on sys_user.dept_id = sd.id where %s limit ?,?", where)
 	var resp []SysUserList
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -72,8 +82,18 @@ func (m *customSysUserModel) FindAll(ctx context.Context, Current int64, PageSiz
 	}
 }
 
-func (m *customSysUserModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customSysUserModel) Count(ctx context.Context, in *sys.UserListReq) (int64, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	if len(in.Mobile) > 0 {
+		where = where + fmt.Sprintf(" AND mobile like '%%%s%%'", in.Mobile)
+	}
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

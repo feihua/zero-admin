@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logx"
-	"time"
 	"zero-admin/rpc/model/sysmodel"
 	"zero-admin/rpc/sys/internal/svc"
 	"zero-admin/rpc/sys/sys"
@@ -24,15 +23,13 @@ func NewUpdateMenuRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 }
 
 func (l *UpdateMenuRoleLogic) UpdateMenuRole(in *sys.UpdateMenuRoleReq) (*sys.UpdateMenuRoleResp, error) {
-	_ = l.svcCtx.RoleMenuModel.Delete(l.ctx, in.RoleId)
+	_ = l.svcCtx.RoleMenuModel.DeleteByRoleId(l.ctx, in.RoleId)
 
-	ids := in.MenuIds
-	for _, id := range ids {
+	for _, menuId := range in.MenuIds {
 		_, _ = l.svcCtx.RoleMenuModel.Insert(l.ctx, &sysmodel.SysRoleMenu{
-			RoleId:     in.RoleId,
-			MenuId:     id,
-			CreateBy:   "admin",
-			CreateTime: time.Now(),
+			RoleId:   in.RoleId,
+			MenuId:   menuId,
+			CreateBy: "admin",
 		})
 	}
 

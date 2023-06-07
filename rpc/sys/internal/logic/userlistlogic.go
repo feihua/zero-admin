@@ -24,7 +24,7 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserList
 
 func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error) {
 
-	all, err := l.svcCtx.UserModel.FindAll(l.ctx, in.Current, in.PageSize)
+	all, err := l.svcCtx.UserModel.FindAll(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -32,7 +32,7 @@ func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error)
 		return nil, err
 	}
 
-	count, _ := l.svcCtx.UserModel.Count(l.ctx)
+	count, _ := l.svcCtx.UserModel.Count(l.ctx, in)
 
 	var list []*sys.UserListData
 	for _, user := range *all {
@@ -41,8 +41,6 @@ func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error)
 			Name:           user.Name,
 			NickName:       user.NickName.String,
 			Avatar:         user.Avatar.String,
-			Password:       user.Password,
-			Salt:           user.Salt,
 			Email:          user.Email.String,
 			Mobile:         user.Mobile.String,
 			DeptId:         user.DeptId,

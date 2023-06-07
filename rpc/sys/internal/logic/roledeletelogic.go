@@ -23,7 +23,7 @@ func NewRoleDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleDe
 }
 
 func (l *RoleDeleteLogic) RoleDelete(in *sys.RoleDeleteReq) (*sys.RoleDeleteResp, error) {
-	l.svcCtx.RoleModel.Delete(l.ctx, in.Id)
+	l.svcCtx.RoleModel.DeleteByIds(l.ctx, in.Ids)
 
 	return &sys.RoleDeleteResp{}, nil
 }

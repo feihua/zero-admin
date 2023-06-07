@@ -7,8 +7,8 @@ info(
 type (
     addRoleReq struct {
         Name string `json:"name"`                                  // 角色名称
-        Remark string `json:"remark"`                              // 备注
-        Status int64 `json:"status,optional"`                      // 状态
+        Remark string `json:"remark,optional"`                              // 备注
+        Status int64 `json:"status"`                      // 状态
     }
     addRoleResp struct {
         Code string `json:"code"`
@@ -18,7 +18,7 @@ type (
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
         Name string `json:"name,optional "`
-        Status int64 `json:"delFlag,optional "`
+        Status int64 `json:"status,default=2"`
     }
     ListRoleData struct {
         Id int64 `json:"id"`                                // 编号
@@ -53,7 +53,7 @@ type (
         Message string `json:"message"`
     }
     DeleteRoleReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteRoleResp struct {
         Code string `json:"code"`

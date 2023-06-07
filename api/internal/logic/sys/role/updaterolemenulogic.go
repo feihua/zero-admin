@@ -32,6 +32,7 @@ func (l *UpdateRoleMenuLogic) UpdateRoleMenu(req types.UpdateRoleMenuReq) (*type
 	})
 
 	if err != nil {
+		logx.Error(err)
 		return nil, errorx.NewDefaultError("更新角色菜单失败")
 	}
 

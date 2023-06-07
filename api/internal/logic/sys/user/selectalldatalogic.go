@@ -30,6 +30,7 @@ func (l *SelectAllDataLogic) SelectAllData(req types.SelectDataReq) (*types.Sele
 	roleList, roleErr := l.svcCtx.Sys.RoleList(l.ctx, &sysclient.RoleListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		Status:   1,
 	})
 
 	if roleErr != nil {
@@ -49,6 +50,7 @@ func (l *SelectAllDataLogic) SelectAllData(req types.SelectDataReq) (*types.Sele
 	jobList, jobErr := l.svcCtx.Sys.JobList(l.ctx, &sysclient.JobListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		DelFlag:  1,
 	})
 
 	if jobErr != nil {

@@ -60,7 +60,7 @@ type AddUserReq struct {
 	DeptId   int64  `json:"deptId"`
 	RoleId   int64  `json:"roleId"`
 	JobId    int64  `json:"jobId"`
-	DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+	Status   int64  `json:"status"` // 状态  0：禁用   1：正常
 }
 
 type AddUserResp struct {
@@ -75,7 +75,7 @@ type ListUserReq struct {
 	NickName string `json:"nickName,optional"`
 	Mobile   string `json:"mobile,optional"`
 	Email    string `json:"email,optional"`
-	Status   int64  `json:"status,optional"`
+	Status   int64  `json:"status,optional,default=2"`
 	DeptId   int64  `json:"deptId,optional"`
 	JobId    int64  `json:"deptId,optional"`
 }
@@ -85,8 +85,6 @@ type ListUserData struct {
 	Name           string `json:"name"`           // 用户名
 	NickName       string `json:"nickName"`       // 昵称
 	Avatar         string `json:"avatar"`         // 头像
-	Password       string `json:"password"`       // 密码
-	Salt           string `json:"salt"`           // 加密盐
 	Email          string `json:"email"`          // 邮箱
 	Mobile         string `json:"mobile"`         // 手机号
 	Status         int64  `json:"status"`         // 状态  0：禁用   1：正常
@@ -132,7 +130,7 @@ type UpdateUserResp struct {
 }
 
 type DeleteUserReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteUserResp struct {
@@ -192,8 +190,8 @@ type SelectDataResp struct {
 
 type AddRoleReq struct {
 	Name   string `json:"name"`            // 角色名称
-	Remark string `json:"remark"`          // 备注
-	Status int64  `json:"status,optional"` // 状态
+	Remark string `json:"remark,optional"` // 备注
+	Status int64  `json:"status"`          // 状态
 }
 
 type AddRoleResp struct {
@@ -205,7 +203,7 @@ type ListRoleReq struct {
 	Current  int64  `json:"current,default=1"`
 	PageSize int64  `json:"pageSize,default=20"`
 	Name     string `json:"name,optional "`
-	Status   int64  `json:"delFlag,optional "`
+	Status   int64  `json:"status,default=2"`
 }
 
 type ListRoleData struct {
@@ -245,7 +243,7 @@ type UpdateRoleResp struct {
 }
 
 type DeleteRoleReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteRoleResp struct {

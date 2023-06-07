@@ -41,6 +41,7 @@ message UserAddReq {
   string create_by = 7;
   int64 role_id = 8;
   int64 job_id = 9;
+  int64 status = 10;
 }
 
 message UserAddResp {
@@ -105,7 +106,7 @@ message UserUpdateResp {
 }
 
 message UserDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message UserDeleteResp {
@@ -182,7 +183,7 @@ message RoleUpdateResp {
 }
 
 message RoleDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message RoleDeleteResp {

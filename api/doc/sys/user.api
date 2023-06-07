@@ -64,7 +64,7 @@ type (
         DeptId int64 `json:"deptId"`
         RoleId int64 `json:"roleId"`
         JobId int64 `json:"jobId"`
-        DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+        Status int64 `json:"status"`                       // 状态  0：禁用   1：正常
     }
     addUserResp struct {
         Code string `json:"code"`
@@ -78,7 +78,7 @@ type (
         NickName string `json:"nickName,optional"`
         Mobile string `json:"mobile,optional"`
         Email string `json:"email,optional"`
-        Status int64 `json:"status,optional"`
+        Status int64 `json:"status,optional,default=2"`
         DeptId int64 `json:"deptId,optional"`
         JobId int64 `json:"deptId,optional"`
     }
@@ -88,8 +88,6 @@ type (
         Name string `json:"name"`                          // 用户名
         NickName string `json:"nickName"`                  // 昵称
         Avatar string `json:"avatar"`                      // 头像
-        Password string `json:"password"`                  // 密码
-        Salt string `json:"salt"`                          // 加密盐
         Email string `json:"email"`                        // 邮箱
         Mobile string `json:"mobile"`                      // 手机号
         Status int64 `json:"status"`                       // 状态  0：禁用   1：正常
@@ -131,7 +129,7 @@ type (
         Message string `json:"message"`
     }
     DeleteUserReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteUserResp struct {
         Code string `json:"code"`
@@ -194,7 +192,7 @@ type (
 )
 service admin-api {
     @handler UserInfo
-    get /currentUser () returns (userInfoResp)
+    get /currentUser returns (userInfoResp)
 
     @handler UserAdd
     post /add (addUserReq) returns (addUserResp)

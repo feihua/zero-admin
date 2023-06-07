@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"database/sql"
-	"time"
 	"zero-admin/rpc/model/sysmodel"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -35,19 +34,17 @@ func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp
 	err = l.svcCtx.UserModel.Update(l.ctx, &sysmodel.SysUser{
 		Id:         in.Id,
 		Name:       in.Name,
-		NickName:   sql.NullString{String: in.NickName},
-		Avatar:     sql.NullString{String: in.Avatar},
+		NickName:   sql.NullString{String: in.NickName, Valid: true},
+		Avatar:     sql.NullString{String: in.Avatar, Valid: true},
 		Password:   user.Password,
 		Salt:       user.Salt,
-		Email:      sql.NullString{String: in.Email},
-		Mobile:     sql.NullString{String: in.Mobile},
+		Email:      sql.NullString{String: in.Email, Valid: true},
+		Mobile:     sql.NullString{String: in.Mobile, Valid: true},
 		Status:     in.Status,
 		DeptId:     in.DeptId,
 		CreateBy:   user.CreateBy,
 		CreateTime: user.CreateTime,
-		UpdateBy:   sql.NullString{String: in.LastUpdateBy},
-		UpdateTime: sql.NullTime{Time: time.Now()},
-		DelFlag:    0,
+		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
 		JobId:      in.JobId,
 	})
 	if err != nil {
@@ -60,10 +57,9 @@ func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp
 	}
 
 	_, err = l.svcCtx.UserRoleModel.Insert(l.ctx, &sysmodel.SysUserRole{
-		UserId:     in.Id,
-		RoleId:     in.RoleId,
-		CreateBy:   "admin",
-		CreateTime: time.Now(),
+		UserId:   in.Id,
+		RoleId:   in.RoleId,
+		CreateBy: "admin",
 	})
 	if err != nil {
 		return nil, err

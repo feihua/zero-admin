@@ -23,7 +23,7 @@ func NewUserDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserDe
 }
 
 func (l *UserDeleteLogic) UserDelete(in *sys.UserDeleteReq) (*sys.UserDeleteResp, error) {
-	_ = l.svcCtx.UserModel.Delete(l.ctx, in.Id)
+	_ = l.svcCtx.UserModel.DeleteByIds(l.ctx, in.Ids)
 
 	return &sys.UserDeleteResp{}, nil
 }

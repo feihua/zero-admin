@@ -25,7 +25,7 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleList
 
 func (l *RoleListLogic) RoleList(in *sys.RoleListReq) (*sys.RoleListResp, error) {
 	all, err := l.svcCtx.RoleModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.RoleModel.Count(l.ctx)
+	count, _ := l.svcCtx.RoleModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

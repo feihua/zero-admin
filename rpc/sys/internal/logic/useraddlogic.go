@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"database/sql"
-	"time"
 	"zero-admin/rpc/model/sysmodel"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -30,13 +29,13 @@ func (l *UserAddLogic) UserAdd(in *sys.UserAddReq) (*sys.UserAddResp, error) {
 
 	insert, _ := l.svcCtx.UserModel.Insert(l.ctx, &sysmodel.SysUser{
 		Name:     in.Name,
-		NickName: sql.NullString{String: in.NickName},
-		Avatar:   sql.NullString{String: in.Avatar},
+		NickName: sql.NullString{String: in.NickName, Valid: true},
+		Avatar:   sql.NullString{String: in.Avatar, Valid: true},
 		Password: "123456",
 		Salt:     "123456",
-		Email:    sql.NullString{String: in.Email},
-		Mobile:   sql.NullString{String: in.Mobile},
-		Status:   1,
+		Email:    sql.NullString{String: in.Email, Valid: true},
+		Mobile:   sql.NullString{String: in.Mobile, Valid: true},
+		Status:   in.Status,
 		DeptId:   in.DeptId,
 		CreateBy: "admin",
 		DelFlag:  0,
@@ -47,10 +46,9 @@ func (l *UserAddLogic) UserAdd(in *sys.UserAddReq) (*sys.UserAddResp, error) {
 	_ = l.svcCtx.UserRoleModel.Delete(l.ctx, id)
 
 	_, _ = l.svcCtx.UserRoleModel.Insert(l.ctx, &sysmodel.SysUserRole{
-		UserId:     id,
-		RoleId:     in.RoleId,
-		CreateBy:   "admin",
-		CreateTime: time.Now(),
+		UserId:   id,
+		RoleId:   in.RoleId,
+		CreateBy: "admin",
 	})
 
 	return &sys.UserAddResp{}, nil

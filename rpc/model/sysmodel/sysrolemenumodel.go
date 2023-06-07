@@ -18,6 +18,7 @@ type (
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysRoleMenu, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		DeleteByRoleId(ctx context.Context, RoleId int64) error
 		FindByRoleId(ctx context.Context, RoleId int64) (*[]SysRoleMenu, error)
 	}
 
@@ -67,6 +68,12 @@ func (m *customSysRoleMenuModel) Count(ctx context.Context) (int64, error) {
 func (m *customSysRoleMenuModel) DeleteByIds(ctx context.Context, ids []int64) error {
 	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
 	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	return err
+}
+
+func (m *customSysRoleMenuModel) DeleteByRoleId(ctx context.Context, roleId int64) error {
+	query := fmt.Sprintf("delete from %s where `role_id` = ?", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, roleId)
 	return err
 }
 

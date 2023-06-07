@@ -35,6 +35,7 @@ func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error)
 		CreateBy: "admin",
 		RoleId:   req.RoleId,
 		JobId:    req.JobId,
+		Status:   req.Status,
 	})
 
 	if err != nil {

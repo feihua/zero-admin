@@ -16,7 +16,7 @@ type (
 	// and implement the added methods in customSysRoleModel.
 	SysRoleModel interface {
 		sysRoleModel
-		Count(ctx context.Context) (int64, error)
+		Count(ctx context.Context, in *sys.RoleListReq) (int64, error)
 		FindAll(ctx context.Context, in *sys.RoleListReq) (*[]SysRole, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
@@ -35,7 +35,15 @@ func NewSysRoleModel(conn sqlx.SqlConn) SysRoleModel {
 
 func (m *customSysRoleModel) FindAll(ctx context.Context, in *sys.RoleListReq) (*[]SysRole, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", sysRoleRows, m.table)
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", sysRoleRows, m.table, where)
 	var resp []SysRole
 	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
@@ -48,8 +56,15 @@ func (m *customSysRoleModel) FindAll(ctx context.Context, in *sys.RoleListReq) (
 	}
 }
 
-func (m *customSysRoleModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customSysRoleModel) Count(ctx context.Context, in *sys.RoleListReq) (int64, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)
