@@ -18,8 +18,17 @@ func UserLoginHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
+		//获取客户端真实的ip
+		//nginx的配置
+		//location /api {
+		//		proxy_set_header Host $host;
+		//		proxy_set_header X-Real-IP $remote_addr;
+		//		proxy_set_header REMOTE-HOST $remote_addr;
+		//		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		//		proxy_pass http://127.0.0.1:8888;
+		//}
 		l := logic.NewUserLoginLogic(r.Context(), ctx)
-		resp, err := l.UserLogin(req, r.RemoteAddr)
+		resp, err := l.UserLogin(req, httpx.GetRemoteAddr(r))
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

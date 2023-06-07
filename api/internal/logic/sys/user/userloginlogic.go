@@ -27,7 +27,7 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 	}
 }
 
-// 根据用户名和密码登录
+// UserLogin 根据用户名和密码登录
 func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginResp, error) {
 
 	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
