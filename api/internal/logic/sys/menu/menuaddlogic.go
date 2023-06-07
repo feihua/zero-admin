@@ -41,6 +41,7 @@ func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error)
 		VueComponent: req.VueComponent,
 		VueIcon:      req.VueIcon,
 		VueRedirect:  req.VueRedirect,
+		DelFlag:      req.DelFlag,
 	})
 
 	if err != nil {
@@ -51,6 +52,6 @@ func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error)
 
 	return &types.AddMenuResp{
 		Code:    "000000",
-		Message: "添加菜单成功",
+		Message: "添加菜单成功!",
 	}, nil
 }

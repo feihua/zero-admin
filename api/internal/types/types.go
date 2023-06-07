@@ -300,7 +300,7 @@ type AddMenuReq struct {
 	VueComponent string `json:"vueComponent,optional"` // vue的页面
 	VueIcon      string `json:"vueIcon,optional"`      // vue的图标
 	VueRedirect  string `json:"vueRedirect,optional"`  // vue的路由重定向
-	DelFlag      int64  `json:"delFlag,default=2"`     // 是否删除  0：已删除  1：正常
+	DelFlag      int64  `json:"delFlag"`               // 是否删除  0：已删除  1：正常
 }
 
 type AddMenuResp struct {
@@ -356,7 +356,7 @@ type UpdateMenuReq struct {
 	VueComponent string `json:"vueComponent,optional"` // vue的页面
 	VueIcon      string `json:"vueIcon,optional"`      // vue的图标
 	VueRedirect  string `json:"vueRedirect,optional"`  // vue的路由重定向
-	DelFlag      int64  `json:"delFlag,default=2"`     // 是否删除  0：已删除  1：正常
+	DelFlag      int64  `json:"delFlag"`               // 是否删除  0：已删除  1：正常
 }
 
 type UpdateMenuResp struct {

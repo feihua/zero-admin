@@ -221,7 +221,8 @@ message MenuAddReq {
   string vuePath =9;
   string vueComponent =10;
   string vueIcon =11;
-  string vueRedirect =12;
+  string vueRedirect = 12;
+  int64 del_flag = 13;
 }
 
 message MenuAddResp {
@@ -284,7 +285,8 @@ message MenuUpdateReq {
   string vuePath =10;
   string vueComponent =11;
   string vueIcon =12;
-  string vueRedirect =13;
+  string vueRedirect = 13;
+  int64 del_flag = 14;
 }
 
 message MenuUpdateResp {

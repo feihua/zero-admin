@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"database/sql"
-	"time"
 	"zero-admin/rpc/model/sysmodel"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -28,21 +27,19 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuAddLo
 
 func (l *MenuAddLogic) MenuAdd(in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
 	_, err := l.svcCtx.MenuModel.Insert(l.ctx, &sysmodel.SysMenu{
-		Id:           0,
 		Name:         in.Name,
 		ParentId:     in.ParentId,
-		Url:          sql.NullString{String: in.Url},
-		Perms:        sql.NullString{String: in.Perms},
+		Url:          sql.NullString{String: in.Url, Valid: true},
+		Perms:        sql.NullString{String: in.Perms, Valid: true},
 		Type:         in.Type,
-		Icon:         sql.NullString{String: in.Icon},
-		OrderNum:     sql.NullInt64{Int64: in.OrderNum},
+		Icon:         sql.NullString{String: in.Icon, Valid: true},
+		OrderNum:     sql.NullInt64{Int64: in.OrderNum, Valid: true},
 		CreateBy:     in.CreateBy,
-		CreateTime:   time.Time{},
-		DelFlag:      0,
-		VuePath:      sql.NullString{String: in.VuePath},
-		VueComponent: sql.NullString{String: in.VueComponent},
-		VueIcon:      sql.NullString{String: in.VueIcon},
-		VueRedirect:  sql.NullString{String: in.VueRedirect},
+		DelFlag:      in.DelFlag,
+		VuePath:      sql.NullString{String: in.VuePath, Valid: true},
+		VueComponent: sql.NullString{String: in.VueComponent, Valid: true},
+		VueIcon:      sql.NullString{String: in.VueIcon, Valid: true},
+		VueRedirect:  sql.NullString{String: in.VueRedirect, Valid: true},
 	})
 	//count, _ := l.svcCtx.UserModel.Count(l.ctx)
 

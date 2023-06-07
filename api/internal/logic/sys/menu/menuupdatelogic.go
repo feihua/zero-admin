@@ -41,6 +41,7 @@ func (l *MenuUpdateLogic) MenuUpdate(req types.UpdateMenuReq) (*types.UpdateMenu
 		VueComponent: req.VueComponent,
 		VueIcon:      req.VueIcon,
 		VueRedirect:  req.VueRedirect,
+		DelFlag:      req.DelFlag,
 	})
 
 	if err != nil {
@@ -49,6 +50,6 @@ func (l *MenuUpdateLogic) MenuUpdate(req types.UpdateMenuReq) (*types.UpdateMenu
 	}
 	return &types.UpdateMenuResp{
 		Code:    "000000",
-		Message: "",
+		Message: "更新菜单信息成功!",
 	}, nil
 }
