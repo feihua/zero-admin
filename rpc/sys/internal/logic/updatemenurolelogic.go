@@ -29,7 +29,7 @@ func (l *UpdateMenuRoleLogic) UpdateMenuRole(in *sys.UpdateMenuRoleReq) (*sys.Up
 		_, _ = l.svcCtx.RoleMenuModel.Insert(l.ctx, &sysmodel.SysRoleMenu{
 			RoleId:   in.RoleId,
 			MenuId:   menuId,
-			CreateBy: "admin",
+			CreateBy: in.CreateBy,
 		})
 	}
 

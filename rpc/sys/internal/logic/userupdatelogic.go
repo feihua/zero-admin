@@ -51,7 +51,7 @@ func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp
 		return nil, err
 	}
 
-	err = l.svcCtx.UserRoleModel.Delete(l.ctx, in.Id)
+	err = l.svcCtx.UserRoleModel.DeleteByUserId(l.ctx, in.Id)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp
 	_, err = l.svcCtx.UserRoleModel.Insert(l.ctx, &sysmodel.SysUserRole{
 		UserId:   in.Id,
 		RoleId:   in.RoleId,
-		CreateBy: "admin",
+		CreateBy: in.LastUpdateBy,
 	})
 	if err != nil {
 		return nil, err

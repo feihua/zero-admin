@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"strings"
 )
 
 var _ SysRoleMenuModel = (*customSysRoleMenuModel)(nil)
@@ -17,7 +16,6 @@ type (
 		sysRoleMenuModel
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysRoleMenu, error)
-		DeleteByIds(ctx context.Context, ids []int64) error
 		DeleteByRoleId(ctx context.Context, RoleId int64) error
 		FindByRoleId(ctx context.Context, RoleId int64) (*[]SysRoleMenu, error)
 	}
@@ -63,12 +61,6 @@ func (m *customSysRoleMenuModel) Count(ctx context.Context) (int64, error) {
 	default:
 		return 0, err
 	}
-}
-
-func (m *customSysRoleMenuModel) DeleteByIds(ctx context.Context, ids []int64) error {
-	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
-	return err
 }
 
 func (m *customSysRoleMenuModel) DeleteByRoleId(ctx context.Context, roleId int64) error {

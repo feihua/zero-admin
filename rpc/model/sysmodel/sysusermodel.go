@@ -69,7 +69,8 @@ func (m *customSysUserModel) FindAll(ctx context.Context, in *sys.UserListReq) (
 	if in.Status != 2 {
 		where = where + fmt.Sprintf(" AND sys_user.status = %d", in.Status)
 	}
-	query := fmt.Sprintf("select sys_user.*, ifnull(sj.job_name,'') as job_name, ifnull(sd.name ,'')as dept_name, ifnull(sys_role.name,'') as role_name,ifnull(sys_role.id ,'1')as role_id from sys_user   left join sys_user_role sur on sys_user.id = sur.user_id   left join sys_role on sur.role_id = sys_role.id    left join sys_job sj on sys_user.job_id = sj.id left join sys_dept sd on sys_user.dept_id = sd.id where %s limit ?,?", where)
+	where = where + fmt.Sprint(" ORDER BY create_time DESC")
+	query := fmt.Sprintf("select sys_user.*, ifnull(sj.job_name,'') as job_name, ifnull(sd.name ,'')as dept_name, ifnull(sys_role.name,'') as role_name,ifnull(sys_role.id ,'0')as role_id from sys_user   left join sys_user_role sur on sys_user.id = sur.user_id   left join sys_role on sur.role_id = sys_role.id    left join sys_job sj on sys_user.job_id = sj.id left join sys_dept sd on sys_user.dept_id = sd.id where %s limit ?,?", where)
 	var resp []SysUserList
 	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {

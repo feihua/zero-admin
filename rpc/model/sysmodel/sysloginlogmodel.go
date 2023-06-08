@@ -41,6 +41,7 @@ func (m *customSysLoginLogModel) FindAll(ctx context.Context, in *sys.LoginLogLi
 	if len(in.Ip) > 0 {
 		where = where + fmt.Sprintf(" AND ip like '%%%s%%'", in.Ip)
 	}
+	where = where + fmt.Sprint(" ORDER BY create_time DESC")
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", sysLoginLogRows, m.table, where)
 	var resp []SysLoginLog
 	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)

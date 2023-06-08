@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"strings"
 )
 
 var _ SysUserRoleModel = (*customSysUserRoleModel)(nil)
@@ -17,7 +16,7 @@ type (
 		sysUserRoleModel
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysUserRole, error)
-		DeleteByIds(ctx context.Context, ids []int64) error
+		DeleteByUserId(ctx context.Context, UserId int64) error
 	}
 
 	customSysUserRoleModel struct {
@@ -63,8 +62,8 @@ func (m *customSysUserRoleModel) Count(ctx context.Context) (int64, error) {
 	}
 }
 
-func (m *customSysUserRoleModel) DeleteByIds(ctx context.Context, ids []int64) error {
-	query := fmt.Sprintf("delete from %s where `id` in (?)", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+func (m *customSysUserRoleModel) DeleteByUserId(ctx context.Context, UserId int64) error {
+	query := fmt.Sprintf("delete from %s where user_id = ?", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, UserId)
 	return err
 }

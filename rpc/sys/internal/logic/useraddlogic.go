@@ -37,18 +37,18 @@ func (l *UserAddLogic) UserAdd(in *sys.UserAddReq) (*sys.UserAddResp, error) {
 		Mobile:   sql.NullString{String: in.Mobile, Valid: true},
 		Status:   in.Status,
 		DeptId:   in.DeptId,
-		CreateBy: "admin",
+		CreateBy: in.CreateBy,
 		DelFlag:  0,
 		JobId:    in.JobId,
 	})
 
 	id, _ := insert.LastInsertId()
-	_ = l.svcCtx.UserRoleModel.Delete(l.ctx, id)
+	_ = l.svcCtx.UserRoleModel.DeleteByUserId(l.ctx, id)
 
 	_, _ = l.svcCtx.UserRoleModel.Insert(l.ctx, &sysmodel.SysUserRole{
 		UserId:   id,
 		RoleId:   in.RoleId,
-		CreateBy: "admin",
+		CreateBy: in.CreateBy,
 	})
 
 	return &sys.UserAddResp{}, nil

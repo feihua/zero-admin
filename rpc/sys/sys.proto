@@ -308,6 +308,7 @@ message MenuDeleteResp {
 message UpdateMenuRoleReq {
   int64 roleId = 1;
   repeated int64 menuIds = 2;
+  string create_by = 3;
 }
 
 message UpdateMenuRoleResp {
