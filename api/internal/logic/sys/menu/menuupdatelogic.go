@@ -27,16 +27,15 @@ func NewMenuUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuUpd
 
 func (l *MenuUpdateLogic) MenuUpdate(req types.UpdateMenuReq) (*types.UpdateMenuResp, error) {
 	_, err := l.svcCtx.Sys.MenuUpdate(l.ctx, &sysclient.MenuUpdateReq{
-		Id:       req.Id,
-		Name:     req.Name,
-		ParentId: req.ParentId,
-		Url:      req.Url,
-		Perms:    req.Perms,
-		Type:     req.Type,
-		Icon:     req.Icon,
-		OrderNum: req.OrderNum,
-		//todo 从token里面拿
-		LastUpdateBy: "admin",
+		Id:           req.Id,
+		Name:         req.Name,
+		ParentId:     req.ParentId,
+		Url:          req.Url,
+		Perms:        req.Perms,
+		Type:         req.Type,
+		Icon:         req.Icon,
+		OrderNum:     req.OrderNum,
+		LastUpdateBy: l.ctx.Value("userName").(string),
 		VuePath:      req.VuePath,
 		VueComponent: req.VueComponent,
 		VueIcon:      req.VueIcon,

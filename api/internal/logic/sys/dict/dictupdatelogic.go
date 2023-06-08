@@ -28,15 +28,14 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictUpd
 
 func (l *DictUpdateLogic) DictUpdate(req types.UpdateDictReq) (*types.UpdateDictResp, error) {
 	_, err := l.svcCtx.Sys.DictUpdate(l.ctx, &sysclient.DictUpdateReq{
-		Id:          req.Id,
-		Value:       req.Value,
-		Label:       req.Label,
-		Type:        req.Type,
-		Description: req.Description,
-		Sort:        req.Sort,
-		Remarks:     req.Remarks,
-		//todo 从token里面拿
-		LastUpdateBy: "admin",
+		Id:           req.Id,
+		Value:        req.Value,
+		Label:        req.Label,
+		Type:         req.Type,
+		Description:  req.Description,
+		Sort:         req.Sort,
+		Remarks:      req.Remarks,
+		LastUpdateBy: l.ctx.Value("userName").(string),
 		DelFlag:      req.DelFlag,
 	})
 

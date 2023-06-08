@@ -32,7 +32,7 @@ func (l *SysLogAddLogic) SysLogAdd(in *sys.SysLogAddReq) (*sys.SysLogAddResp, er
 		Method:    in.Method,
 		Params:    in.Params,
 		Time:      in.Time,
-		Ip:        sql.NullString{String: in.Ip},
+		Ip:        sql.NullString{String: in.Ip, Valid: true},
 		CreateBy:  in.CreateBy,
 	})
 

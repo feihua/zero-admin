@@ -28,6 +28,8 @@ func (l *SysLogListLogic) SysLogList(req types.ListSysLogReq) (*types.ListSysLog
 	resp, err := l.svcCtx.Sys.SysLogList(l.ctx, &sysclient.SysLogListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		UserName: req.UserName,
+		Method:   req.Method,
 	})
 
 	if err != nil {

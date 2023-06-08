@@ -8,6 +8,8 @@ type (
     ListLoginLogReq struct {
         Current int64 `json:"current,default=1"`
         PageSize int64 `json:"pageSize,default=20"`
+        UserName string `json:"userName,optional"`
+        Ip string `json:"ip,optional"`                              // IP地址
     }
     ListLoginLogData struct {
         Id int64 `json:"id"`                               // 编号
@@ -29,7 +31,7 @@ type (
         Total int64 `json:"total"`
     }
     DeleteLoginLogReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteLoginLogResp struct {
         Code string `json:"code"`

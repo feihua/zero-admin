@@ -29,6 +29,7 @@ func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.List
 	resp, err := l.svcCtx.Sys.LoginLogList(l.ctx, &sysclient.LoginLogListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		UserName: req.UserName,
 	})
 
 	if err != nil {

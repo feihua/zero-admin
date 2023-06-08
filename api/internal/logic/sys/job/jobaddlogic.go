@@ -29,7 +29,7 @@ func (l *JobAddLogic) JobAdd(req types.AddJobReq) (*types.AddJobResp, error) {
 	_, err := l.svcCtx.Sys.JobAdd(l.ctx, &sysclient.JobAddReq{
 		JobName:  req.JobName,
 		OrderNum: req.OrderNum,
-		CreateBy: "admin",
+		CreateBy: l.ctx.Value("userName").(string),
 		Remarks:  req.Remarks,
 		DelFlag:  req.DelFlag,
 	})

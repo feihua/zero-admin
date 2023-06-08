@@ -294,7 +294,7 @@ message MenuUpdateResp {
 }
 
 message MenuDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MenuDeleteResp {
@@ -457,6 +457,8 @@ message LoginLogAddResp {
 message LoginLogListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string user_name = 3;
+  string ip = 4;
 }
 
 message LoginLogListData {
@@ -475,7 +477,7 @@ message LoginLogListResp{
   repeated  LoginLogListData list = 2;
 }
 message LoginLogDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message LoginLogDeleteResp {
@@ -501,6 +503,8 @@ message SysLogAddResp {
 message SysLogListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  string user_name = 3;
+  string method = 4;
 }
 
 message SysLogListData {
@@ -522,7 +526,7 @@ message SysLogListResp{
   repeated  SysLogListData list = 2;
 }
 message SysLogDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message SysLogDeleteResp {

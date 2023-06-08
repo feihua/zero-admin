@@ -25,8 +25,8 @@ func NewSysLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLog
 }
 
 func (l *SysLogListLogic) SysLogList(in *sys.SysLogListReq) (*sys.SysLogListResp, error) {
-	all, err := l.svcCtx.SysLogModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.SysLogModel.Count(l.ctx)
+	all, err := l.svcCtx.SysLogModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.SysLogModel.Count(l.ctx, in)
 
 	if err != nil {
 		return nil, err

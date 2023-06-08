@@ -17,6 +17,7 @@ import (
 type ServiceContext struct {
 	Config   config.Config
 	CheckUrl rest.Middleware
+	AddLog   rest.Middleware
 	Sys      sys.Sys
 	Ums      ums.Ums
 	Pms      pms.Pms
@@ -28,10 +29,12 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	newRedis := redis.New(c.Redis.Address, redisConfig(c))
+	newSys := sys.NewSys(zrpc.MustNewClient(c.SysRpc))
 	return &ServiceContext{
 		Config:   c,
+		Sys:      newSys,
 		CheckUrl: middleware.NewCheckUrlMiddleware(newRedis).Handle,
-		Sys:      sys.NewSys(zrpc.MustNewClient(c.SysRpc)),
+		AddLog:   middleware.NewAddLogMiddleware(newSys).Handle,
 		Ums:      ums.NewUms(zrpc.MustNewClient(c.UmsRpc)),
 		Pms:      pms.NewPms(zrpc.MustNewClient(c.PmsRpc)),
 		Oms:      oms.NewOms(zrpc.MustNewClient(c.OmsRpc)),

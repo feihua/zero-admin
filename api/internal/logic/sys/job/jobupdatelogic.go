@@ -28,12 +28,11 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) JobUpdat
 
 func (l *JobUpdateLogic) JobUpdate(req types.UpdateJobReq) (*types.UpdateJobResp, error) {
 	_, err := l.svcCtx.Sys.JobUpdate(l.ctx, &sysclient.JobUpdateReq{
-		Id:       req.Id,
-		JobName:  req.JobName,
-		OrderNum: req.OrderNum,
-		Remarks:  req.Remarks,
-		//todo 从token里面拿
-		LastUpdateBy: "admin",
+		Id:           req.Id,
+		JobName:      req.JobName,
+		OrderNum:     req.OrderNum,
+		Remarks:      req.Remarks,
+		LastUpdateBy: l.ctx.Value("userName").(string),
 		DelFlag:      req.DelFlag,
 	})
 

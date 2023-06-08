@@ -27,7 +27,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 	}
 }
 
-//根据用户名和密码登录
+// Login 根据用户名和密码登录
 func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
 	userInfo, err := l.svcCtx.UserModel.FindOneByName(l.ctx, in.UserName)
 
@@ -48,7 +48,8 @@ func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
 
 	now := time.Now().Unix()
 	accessExpire := l.svcCtx.Config.JWT.AccessExpire
-	jwtToken, err := l.getJwtToken(l.svcCtx.Config.JWT.AccessSecret, now, l.svcCtx.Config.JWT.AccessExpire, userInfo.Id)
+	accessSecret := l.svcCtx.Config.JWT.AccessSecret
+	jwtToken, err := l.getJwtToken(accessSecret, now, accessExpire, userInfo.Id, userInfo.Name)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -72,11 +73,12 @@ func (l *LoginLogic) Login(in *sys.LoginReq) (*sys.LoginResp, error) {
 	return resp, nil
 }
 
-func (l *LoginLogic) getJwtToken(secretKey string, iat, seconds, userId int64) (string, error) {
+func (l *LoginLogic) getJwtToken(secretKey string, iat, seconds, userId int64, userName string) (string, error) {
 	claims := make(jwt.MapClaims)
 	claims["exp"] = iat + seconds
 	claims["iat"] = iat
 	claims["userId"] = userId
+	claims["userName"] = userName
 	token := jwt.New(jwt.SigningMethodHS256)
 	token.Claims = claims
 	return token.SignedString([]byte(secretKey))

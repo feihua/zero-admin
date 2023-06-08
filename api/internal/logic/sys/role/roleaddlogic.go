@@ -28,10 +28,9 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleAddLog
 
 func (l *RoleAddLogic) RoleAdd(req types.AddRoleReq) (*types.AddRoleResp, error) {
 	_, err := l.svcCtx.Sys.RoleAdd(l.ctx, &sysclient.RoleAddReq{
-		Name:   req.Name,
-		Remark: req.Remark,
-		//todo 从token里面拿
-		CreateBy: "admin",
+		Name:     req.Name,
+		Remark:   req.Remark,
+		CreateBy: l.ctx.Value("userName").(string),
 		Status:   req.Status,
 	})
 

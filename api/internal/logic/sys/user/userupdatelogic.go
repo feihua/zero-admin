@@ -33,7 +33,7 @@ func (l *UserUpdateLogic) UserUpdate(req types.UpdateUserReq) (*types.UpdateUser
 		Name:         req.Name,
 		NickName:     req.NickName,
 		DeptId:       req.DeptId,
-		LastUpdateBy: "admin",
+		LastUpdateBy: l.ctx.Value("userName").(string),
 		RoleId:       req.RoleId,
 		Status:       req.Status,
 		JobId:        req.JobId,

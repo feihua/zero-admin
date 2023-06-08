@@ -34,9 +34,8 @@ func (l *DictAddLogic) DictAdd(req types.AddDictReq) (*types.AddDictResp, error)
 		Description: req.Description,
 		Sort:        req.Sort,
 		Remarks:     req.Remarks,
-		//todo 从token里面拿
-		CreateBy: "admin",
-		DelFlag:  req.DelFlag,
+		CreateBy:    l.ctx.Value("userName").(string),
+		DelFlag:     req.DelFlag,
 	})
 
 	if err != nil {

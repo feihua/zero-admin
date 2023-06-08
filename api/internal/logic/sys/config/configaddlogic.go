@@ -33,8 +33,7 @@ func (l *ConfigAddLogic) ConfigAdd(req types.AddConfigReq) (*types.AddConfigResp
 		Description: req.Description,
 		Sort:        req.Sort,
 		Remarks:     req.Remarks,
-		//todo 从token里面拿
-		CreateBy: "admin",
+		CreateBy:    l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

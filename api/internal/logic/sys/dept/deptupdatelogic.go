@@ -28,12 +28,11 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptUpd
 
 func (l *DeptUpdateLogic) DeptUpdate(req types.UpdateDeptReq) (*types.UpdateDeptResp, error) {
 	_, err := l.svcCtx.Sys.DeptUpdate(l.ctx, &sysclient.DeptUpdateReq{
-		Id:       req.Id,
-		Name:     req.Name,
-		ParentId: req.ParentId,
-		OrderNum: req.OrderNum,
-		//todo 从token里面拿
-		LastUpdateBy: "admin",
+		Id:           req.Id,
+		Name:         req.Name,
+		ParentId:     req.ParentId,
+		OrderNum:     req.OrderNum,
+		LastUpdateBy: l.ctx.Value("userName").(string),
 		ParentIds:    req.ParentIds,
 		DelFlag:      req.DelFlag,
 	})

@@ -365,7 +365,7 @@ type UpdateMenuResp struct {
 }
 
 type DeleteMenuReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMenuResp struct {
@@ -510,8 +510,10 @@ type DeleteDeptResp struct {
 }
 
 type ListLoginLogReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64  `json:"current,default=1"`
+	PageSize int64  `json:"pageSize,default=20"`
+	UserName string `json:"userName,optional"`
+	Ip       string `json:"ip,optional"` // IP地址
 }
 
 type ListLoginLogData struct {
@@ -536,7 +538,7 @@ type ListLoginLogResp struct {
 }
 
 type DeleteLoginLogReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteLoginLogResp struct {
@@ -545,8 +547,10 @@ type DeleteLoginLogResp struct {
 }
 
 type ListSysLogReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64  `json:"current,default=1"`
+	PageSize int64  `json:"pageSize,default=20"`
+	UserName string `json:"userName,optional"` // 用户名
+	Method   string `json:"method,optional"`   // 请求方法
 }
 
 type ListSysLogData struct {
@@ -574,7 +578,7 @@ type ListSysLogResp struct {
 }
 
 type DeleteSysLogReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteSysLogResp struct {

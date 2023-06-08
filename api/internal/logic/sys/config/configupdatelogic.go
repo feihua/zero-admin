@@ -27,15 +27,14 @@ func NewConfigUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Confi
 
 func (l *ConfigUpdateLogic) ConfigUpdate(req types.UpdateConfigReq) (*types.UpdateConfigResp, error) {
 	_, err := l.svcCtx.Sys.ConfigUpdate(l.ctx, &sysclient.ConfigUpdateReq{
-		Id:          req.Id,
-		Value:       req.Value,
-		Label:       req.Label,
-		Type:        req.Type,
-		Description: req.Description,
-		Sort:        req.Sort,
-		Remarks:     req.Remarks,
-		//todo 从token里面拿
-		LastUpdateBy: "admin",
+		Id:           req.Id,
+		Value:        req.Value,
+		Label:        req.Label,
+		Type:         req.Type,
+		Description:  req.Description,
+		Sort:         req.Sort,
+		Remarks:      req.Remarks,
+		LastUpdateBy: l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

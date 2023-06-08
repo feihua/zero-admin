@@ -32,7 +32,7 @@ func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error)
 		Name:     req.Name,
 		NickName: req.NickName,
 		DeptId:   req.DeptId,
-		CreateBy: "admin",
+		CreateBy: l.ctx.Value("userName").(string),
 		RoleId:   req.RoleId,
 		JobId:    req.JobId,
 		Status:   req.Status,

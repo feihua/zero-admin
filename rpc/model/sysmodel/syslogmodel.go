@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/sys/sys"
 )
 
 var _ SysLogModel = (*customSysLogModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customSysLogModel.
 	SysLogModel interface {
 		sysLogModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysLog, error)
+		Count(ctx context.Context, in *sys.SysLogListReq) (int64, error)
+		FindAll(ctx context.Context, in *sys.SysLogListReq) (*[]SysLog, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +33,17 @@ func NewSysLogModel(conn sqlx.SqlConn) SysLogModel {
 	}
 }
 
-func (m *customSysLogModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SysLog, error) {
-
-	query := fmt.Sprintf("select %s from %s limit ?,?", sysLogRows, m.table)
+func (m *customSysLogModel) FindAll(ctx context.Context, in *sys.SysLogListReq) (*[]SysLog, error) {
+	where := "1=1"
+	if len(in.UserName) > 0 {
+		where = where + fmt.Sprintf(" AND user_name like '%%%s%%'", in.UserName)
+	}
+	if len(in.Method) > 0 {
+		where = where + fmt.Sprintf(" AND method like '%%%s%%'", in.Method)
+	}
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", sysLogRows, m.table, where)
 	var resp []SysLog
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -47,8 +54,15 @@ func (m *customSysLogModel) FindAll(ctx context.Context, Current int64, PageSize
 	}
 }
 
-func (m *customSysLogModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customSysLogModel) Count(ctx context.Context, in *sys.SysLogListReq) (int64, error) {
+	where := "1=1"
+	if len(in.UserName) > 0 {
+		where = where + fmt.Sprintf(" AND user_name like '%%%s%%'", in.UserName)
+	}
+	if len(in.Method) > 0 {
+		where = where + fmt.Sprintf(" AND method like '%%%s%%'", in.Method)
+	}
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

@@ -28,11 +28,10 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptAddLog
 
 func (l *DeptAddLogic) DeptAdd(req types.AddDeptReq) (*types.AddDeptResp, error) {
 	_, err := l.svcCtx.Sys.DeptAdd(l.ctx, &sysclient.DeptAddReq{
-		Name:     req.Name,
-		ParentId: req.ParentId,
-		OrderNum: req.OrderNum,
-		//todo 从token里面拿
-		CreateBy:  "admin",
+		Name:      req.Name,
+		ParentId:  req.ParentId,
+		OrderNum:  req.OrderNum,
+		CreateBy:  l.ctx.Value("userName").(string),
 		ParentIds: req.ParentIds,
 		DelFlag:   req.DelFlag,
 	})
