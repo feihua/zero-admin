@@ -32,21 +32,22 @@ func (l *MenuUpdateLogic) MenuUpdate(in *sys.MenuUpdateReq) (*sys.MenuUpdateResp
 	}
 
 	err = l.svcCtx.MenuModel.Update(l.ctx, &sysmodel.SysMenu{
-		Id:           in.Id,
-		Name:         in.Name,
-		ParentId:     in.ParentId,
-		Url:          sql.NullString{String: in.Url, Valid: true},
-		Perms:        sql.NullString{String: in.Perms, Valid: true},
-		Type:         in.Type,
-		Icon:         sql.NullString{String: in.Icon, Valid: true},
-		OrderNum:     sql.NullInt64{Int64: in.OrderNum, Valid: true},
-		CreateBy:     menu.CreateBy,
-		UpdateBy:     sql.NullString{String: in.LastUpdateBy, Valid: true},
-		DelFlag:      in.DelFlag,
-		VuePath:      sql.NullString{String: in.VuePath, Valid: true},
-		VueComponent: sql.NullString{String: in.VueComponent, Valid: true},
-		VueIcon:      sql.NullString{String: in.VueIcon, Valid: true},
-		VueRedirect:  sql.NullString{String: in.VueRedirect, Valid: true},
+		Id:            in.Id,
+		Name:          in.Name,
+		ParentId:      in.ParentId,
+		Url:           sql.NullString{String: in.Url, Valid: true},
+		Perms:         sql.NullString{String: in.Perms, Valid: true},
+		Type:          in.Type,
+		Icon:          sql.NullString{String: in.Icon, Valid: true},
+		OrderNum:      sql.NullInt64{Int64: in.OrderNum, Valid: true},
+		CreateBy:      menu.CreateBy,
+		UpdateBy:      sql.NullString{String: in.LastUpdateBy, Valid: true},
+		DelFlag:       in.DelFlag,
+		VuePath:       sql.NullString{String: in.VuePath, Valid: true},
+		VueComponent:  sql.NullString{String: in.VueComponent, Valid: true},
+		VueIcon:       sql.NullString{String: in.VueIcon, Valid: true},
+		VueRedirect:   sql.NullString{String: in.VueRedirect, Valid: true},
+		BackgroundUrl: in.BackgroundUrl,
 	})
 
 	if err != nil {

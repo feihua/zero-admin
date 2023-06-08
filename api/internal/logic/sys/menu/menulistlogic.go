@@ -61,6 +61,7 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 			VueComponent:   menu.VueComponent,
 			VueIcon:        menu.VueIcon,
 			VueRedirect:    menu.VueRedirect,
+			BackgroundUrl:  menu.BackgroundUrl,
 		})
 	}
 

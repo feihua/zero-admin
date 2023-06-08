@@ -55,6 +55,7 @@ func (l *MenuListLogic) MenuList(in *sys.MenuListReq) (*sys.MenuListResp, error)
 			VueComponent:   menu.VueComponent.String,
 			VueIcon:        menu.VueIcon.String,
 			VueRedirect:    menu.VueRedirect.String,
+			BackgroundUrl:  menu.BackgroundUrl,
 		})
 	}
 

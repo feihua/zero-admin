@@ -18,6 +18,7 @@ type (
         VueIcon string `json:"vueIcon,optional"`                    // vue的图标
         VueRedirect string `json:"vueRedirect,optional"`            // vue的路由重定向
         DelFlag int64 `json:"delFlag"`                              // 是否删除  0：已删除  1：正常
+        BackgroundUrl string `json:"backgroundUrl,optional"`        // 后台地址
     }
     addMenuResp struct {
         Code string `json:"code"`
@@ -47,6 +48,7 @@ type (
         VueComponent string `json:"vueComponent"`            // vue的页面
         VueIcon string `json:"vueIcon"`                      // vue的图标
         VueRedirect string `json:"vueRedirect"`              // vue的路由重定向
+        BackgroundUrl string `json:"backgroundUrl"`          // 后台地址
     }
     ListMenuResp struct {
         Code string `json:"code"`
@@ -69,6 +71,7 @@ type (
         VueIcon string `json:"vueIcon,optional"`                    // vue的图标
         VueRedirect string `json:"vueRedirect,optional"`            // vue的路由重定向
         DelFlag int64 `json:"delFlag"`                              // 是否删除  0：已删除  1：正常
+        BackgroundUrl string `json:"backgroundUrl,optional"`        // 后台地址
     }
     UpdateMenuResp struct {
         Code string `json:"code"`

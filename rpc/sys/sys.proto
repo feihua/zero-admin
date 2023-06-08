@@ -223,6 +223,7 @@ message MenuAddReq {
   string vueIcon =11;
   string vueRedirect = 12;
   int64 del_flag = 13;
+  string background_url = 14;
 }
 
 message MenuAddResp {
@@ -253,7 +254,8 @@ message MenuListData {
   string vuePath =15;
   string vueComponent =16;
   string vueIcon =17;
-  string vueRedirect =18;
+  string vueRedirect = 18;
+  string background_url = 19;
 }
 
 message MenuListTree {
@@ -282,11 +284,13 @@ message MenuUpdateReq {
   string icon = 7;
   int64 order_num = 8;
   string last_update_by = 9;
-  string vuePath =10;
-  string vueComponent =11;
-  string vueIcon =12;
+  string vuePath = 10;
+  string vueComponent = 11;
+  string vueIcon = 12;
   string vueRedirect = 13;
   int64 del_flag = 14;
+  string background_url = 15;
+
 }
 
 message MenuUpdateResp {

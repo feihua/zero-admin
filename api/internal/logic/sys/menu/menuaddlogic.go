@@ -28,19 +28,20 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuAddLog
 
 func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error) {
 	_, err := l.svcCtx.Sys.MenuAdd(l.ctx, &sysclient.MenuAddReq{
-		Name:         req.Name,
-		ParentId:     req.ParentId,
-		Url:          req.Url,
-		Perms:        req.Perms,
-		Type:         req.Type,
-		Icon:         req.Icon,
-		OrderNum:     req.OrderNum,
-		CreateBy:     l.ctx.Value("userName").(string),
-		VuePath:      req.VuePath,
-		VueComponent: req.VueComponent,
-		VueIcon:      req.VueIcon,
-		VueRedirect:  req.VueRedirect,
-		DelFlag:      req.DelFlag,
+		Name:          req.Name,
+		ParentId:      req.ParentId,
+		Url:           req.Url,
+		Perms:         req.Perms,
+		Type:          req.Type,
+		Icon:          req.Icon,
+		OrderNum:      req.OrderNum,
+		CreateBy:      l.ctx.Value("userName").(string),
+		VuePath:       req.VuePath,
+		VueComponent:  req.VueComponent,
+		VueIcon:       req.VueIcon,
+		VueRedirect:   req.VueRedirect,
+		DelFlag:       req.DelFlag,
+		BackgroundUrl: req.BackgroundUrl,
 	})
 
 	if err != nil {
