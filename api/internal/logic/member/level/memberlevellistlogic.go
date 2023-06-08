@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -40,9 +39,6 @@ func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*t
 		return nil, errorx.NewDefaultError("查询会员等级失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtMemberLevelData
 
 	for _, item := range resp.List {

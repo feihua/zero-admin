@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sms/smsclient"
 
@@ -39,10 +38,6 @@ func (l *FlashPromotionLogListLogic) FlashPromotionLogList(req types.ListFlashPr
 		return nil, errorx.NewDefaultError("查询限时购通知记录失败")
 	}
 
-	for _, data := range resp.List {
-
-		fmt.Println(data)
-	}
 	var list []*types.ListtFlashPromotionLogData
 
 	for _, item := range resp.List {

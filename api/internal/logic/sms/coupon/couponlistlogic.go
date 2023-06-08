@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
@@ -43,10 +42,6 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 		return nil, errorx.NewDefaultError("查询优惠券失败")
 	}
 
-	for _, data := range resp.List {
-
-		fmt.Println(data)
-	}
 	var list []*types.ListtCouponData
 
 	for _, item := range resp.List {

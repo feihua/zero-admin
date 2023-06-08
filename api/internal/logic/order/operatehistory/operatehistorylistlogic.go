@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
@@ -38,9 +37,6 @@ func (l *OperateHistoryListLogic) OperateHistoryList(req types.ListOperateHistor
 		return nil, errorx.NewDefaultError("查询订单操作历史失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtOperateHistoryData
 
 	for _, item := range resp.List {

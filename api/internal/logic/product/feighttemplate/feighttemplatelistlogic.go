@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/pms/pmsclient"
 
@@ -39,9 +38,6 @@ func (l *FeightTemplateListLogic) FeightTemplateList(req types.ListFeightTemplat
 		return nil, errorx.NewDefaultError("查询运费模版失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtFeightTemplateData
 
 	for _, item := range resp.List {

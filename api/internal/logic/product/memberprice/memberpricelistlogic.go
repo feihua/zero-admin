@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/pms/pmsclient"
 
@@ -39,9 +38,6 @@ func (l *MemberPriceListLogic) MemberPriceList(req types.ListMemberPriceReq) (*t
 		return nil, errorx.NewDefaultError("查询会员价格失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtMemberPriceData
 
 	for _, item := range resp.List {

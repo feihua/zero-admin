@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sms/smsclient"
 
@@ -41,10 +40,6 @@ func (l *HomeRecommendProductListLogic) HomeRecommendProductList(req types.ListH
 		return nil, errorx.NewDefaultError("查询人气推荐商品失败")
 	}
 
-	for _, data := range resp.List {
-
-		fmt.Println(data)
-	}
 	var list []*types.ListtHomeRecommendProductData
 
 	for _, item := range resp.List {

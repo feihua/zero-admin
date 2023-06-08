@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sms/smsclient"
 
@@ -39,10 +38,6 @@ func (l *CouponHistoryListLogic) CouponHistoryList(req types.ListCouponHistoryRe
 		return nil, errorx.NewDefaultError("查询优惠券使用记录失败")
 	}
 
-	for _, data := range resp.List {
-
-		fmt.Println(data)
-	}
 	var list []*types.ListtCouponHistoryData
 
 	for _, item := range resp.List {

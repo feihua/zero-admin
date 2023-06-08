@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -39,9 +38,6 @@ func (l *MemberTaskListLogic) MemberTaskList(req types.ListMemberTaskReq) (*type
 		return nil, errorx.NewDefaultError("查询会员任务失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtMemberTaskData
 
 	for _, item := range resp.List {

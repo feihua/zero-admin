@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sms/smsclient"
 
@@ -41,10 +40,6 @@ func (l *HomeNewProductListLogic) HomeNewProductList(req types.ListHomeNewProduc
 		return nil, errorx.NewDefaultError("查询新鲜好物表失败")
 	}
 
-	for _, data := range resp.List {
-
-		fmt.Println(data)
-	}
 	var list []*types.ListtHomeNewProductData
 
 	for _, item := range resp.List {

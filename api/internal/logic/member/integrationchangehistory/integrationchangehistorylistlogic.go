@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -39,9 +38,6 @@ func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(req typ
 		return nil, errorx.NewDefaultError("查询积分变化历史记录失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtIntegrationChangeHistoryData
 
 	for _, item := range resp.List {

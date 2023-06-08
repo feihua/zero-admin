@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/oms/omsclient"
 
@@ -41,9 +40,6 @@ func (l *ReturnResonListLogic) ReturnResonList(req types.ListReturnResonReq) (*t
 		return nil, errorx.NewDefaultError("查询退货原因失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtReturnResonData
 
 	for _, item := range resp.List {

@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sms/smsclient"
 
@@ -41,10 +40,6 @@ func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.L
 		return nil, errorx.NewDefaultError("查询首页品牌失败")
 	}
 
-	for _, data := range resp.List {
-
-		fmt.Println(data)
-	}
 	var list []*types.ListtHomeBrandData
 
 	for _, item := range resp.List {

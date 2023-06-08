@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
@@ -38,9 +37,6 @@ func (l *SkuStockListLogic) SkuStockList(req types.ListSkuStockReq) (*types.List
 		return nil, errorx.NewDefaultError("查询商品库存失败")
 	}
 
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
 	var list []*types.ListtSkuStockData
 
 	for _, item := range resp.List {
