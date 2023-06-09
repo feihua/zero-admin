@@ -30,6 +30,7 @@ func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.List
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		UserName: req.UserName,
+		Ip:       req.Ip,
 	})
 
 	if err != nil {
