@@ -63,90 +63,27 @@ INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, cr
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (39, '删除角色', 4, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0, '', '', '', '', '/api/sys/role/delete');
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (40, '根据角色查询菜单', 4, '', '', 2, '', 4, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0, '', '', '', '', '/api/sys/role/queryMenuByRoleId');
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (41, '根据角色更新菜单', 4, '', '', 2, '', 5, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0, '', '', '', '', '/api/sys/role/updateRoleMenu');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (42, '新增菜单', 5, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0,
-        '', '', '', '', '/api/sys/menu/add');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (43, '更新菜单', 5, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0,
-        '', '', '', '', '/api/sys/menu/update');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (44, '删除菜单', 5, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0,
-        '', '', '', '', '/api/sys/menu/delete');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (45, '新增机构', 6, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0,
-        '', '', '', '', '/api/sys/dept/add');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (46, '更新机构', 6, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0,
-        '', '', '', '', '/api/sys/dept/update');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (47, '删除机构', 6, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0,
-        '', '', '', '', '/api/sys/dept/delete');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (48, '新增字典', 7, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0,
-        '', '', '', '', '/api/sys/dict/add');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (49, '更新字典', 7, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0,
-        '', '', '', '', '/api/sys/dict/update');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (50, '删除字典', 7, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0,
-        '', '', '', '', '/api/sys/dict/delete');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (51, '登录日志', 9, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0,
-        '', '', '', '', '/api/sys/loginLog/delete');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (52, '操作日志', 10, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0,
-        '', '', '', '', '/api/sys/sysLog/delete');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (53, '新增会员', 12, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0,
-        '', '', '', '', '/api/member/member/add');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (54, '更新会员', 12, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0,
-        '', '', '', '', '/api/member/member/update');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (55, '删除会员', 12, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0,
-        '', '', '', '', '/api/member/member/delete');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (56, '新增会员等级', 13, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua',
-        '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/level/add');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (57, '更新会员等级', 13, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua',
-        '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/level/update');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (58, '删除会员等级', 13, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua',
-        '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/level/delete');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (59, '新增会员地址', 14, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua',
-        '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/address/add');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (60, '更新会员地址', 14, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua',
-        '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/address/update');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (61, '删除会员地址', 14, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua',
-        '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/address/delete');
-INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by,
-                      update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url)
-VALUES (62, '删除登录记录', 15, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua',
-        '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/loginlog/delete');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (42, '新增菜单', 5, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0, '', '', '', '', '/api/sys/menu/add');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (43, '更新菜单', 5, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0, '', '', '', '', '/api/sys/menu/update');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (44, '删除菜单', 5, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0, '', '', '', '', '/api/sys/menu/delete');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (45, '新增机构', 6, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0, '', '', '', '', '/api/sys/dept/add');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (46, '更新机构', 6, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0, '', '', '', '', '/api/sys/dept/update');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (47, '删除机构', 6, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:04', 'liufeihua', '2021-02-26 14:45:04', 0, '', '', '', '', '/api/sys/dept/delete');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (48, '新增字典', 7, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/sys/dict/add');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (49, '更新字典', 7, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/sys/dict/update');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (50, '删除字典', 7, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/sys/dict/delete');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (51, '登录日志', 9, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/sys/loginLog/delete');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (52, '操作日志', 10, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/sys/sysLog/delete');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (53, '新增会员', 12, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/member/add');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (54, '更新会员', 12, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/member/update');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (55, '删除会员', 12, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/member/delete');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (56, '新增会员等级', 13, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/level/add');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (57, '更新会员等级', 13, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/level/update');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (58, '删除会员等级', 13, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/level/delete');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (59, '新增会员地址', 14, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/address/add');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (60, '更新会员地址', 14, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/address/update');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (61, '删除会员地址', 14, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/address/delete');
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (62, '删除登录记录', 15, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/member/loginlog/delete');
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (63, '新增商品类别', 17, '', '', 2, '', 1, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/product/category/add');
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (64, '更新商品类别', 17, '', '', 2, '', 2, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/product/category/update');
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (65, '删除商品类别', 17, '', '', 2, '', 3, 'liufeihua', '2021-02-26 14:45:05', 'liufeihua', '2021-02-26 14:45:05', 0, '', '', '', '', '/api/product/category/delete');
