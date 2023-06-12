@@ -27,11 +27,11 @@ func NewMemberTaskDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) M
 
 func (l *MemberTaskDeleteLogic) MemberTaskDelete(req types.DeleteMemberTaskReq) (*types.DeleteMemberTaskResp, error) {
 	_, err := l.svcCtx.Ums.MemberTaskDelete(l.ctx, &umsclient.MemberTaskDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员任务异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员任务异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除会员任务失败")
 	}
 

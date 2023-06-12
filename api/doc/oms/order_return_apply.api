@@ -118,7 +118,7 @@ type (
         Message string `json:"message"`
     }
     DeleteReturnApplyReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteReturnApplyResp struct {
         Code string `json:"code"`

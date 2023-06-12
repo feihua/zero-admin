@@ -90,7 +90,7 @@ message MemberUpdateResp {
 }
 
 message MemberDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberDeleteResp {
@@ -149,7 +149,7 @@ message GrowthChangeHistoryUpdateResp {
 }
 
 message GrowthChangeHistoryDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message GrowthChangeHistoryDeleteResp {
@@ -207,7 +207,7 @@ message IntegrationChangeHistoryUpdateResp {
 }
 
 message IntegrationChangeHistoryDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message IntegrationChangeHistoryDeleteResp {
@@ -256,7 +256,7 @@ message IntegrationConsumeSettingUpdateResp {
 }
 
 message IntegrationConsumeSettingDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message IntegrationConsumeSettingDeleteResp {
@@ -386,7 +386,7 @@ message MemberLoginLogUpdateResp {
 }
 
 message MemberLoginLogDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberLoginLogDeleteResp {
@@ -429,7 +429,7 @@ message MemberMemberTagRelationUpdateResp {
 }
 
 message MemberMemberTagRelationDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberMemberTagRelationDeleteResp {
@@ -472,7 +472,7 @@ message MemberProductCategoryRelationUpdateResp {
 }
 
 message MemberProductCategoryRelationDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberProductCategoryRelationDeleteResp {
@@ -538,7 +538,7 @@ message MemberReceiveAddressUpdateResp {
 }
 
 message MemberReceiveAddressDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberReceiveAddressDeleteResp {
@@ -613,7 +613,7 @@ message MemberRuleSettingUpdateResp {
 }
 
 message MemberRuleSettingDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberRuleSettingDeleteResp {
@@ -695,7 +695,7 @@ message MemberStatisticsInfoUpdateResp {
 }
 
 message MemberStatisticsInfoDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberStatisticsInfoDeleteResp {
@@ -742,7 +742,7 @@ message MemberTagUpdateResp {
 }
 
 message MemberTagDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberTagDeleteResp {
@@ -792,7 +792,7 @@ message MemberTaskUpdateResp {
 }
 
 message MemberTaskDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberTaskDeleteResp {

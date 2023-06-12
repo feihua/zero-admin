@@ -47,7 +47,7 @@ type (
         Message string `json:"message"`
     }
     DeleteIntegrationConsumeSettingReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteIntegrationConsumeSettingResp struct {
         Code string `json:"code"`

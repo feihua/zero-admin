@@ -27,11 +27,11 @@ func NewCouponHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 func (l *CouponHistoryDeleteLogic) CouponHistoryDelete(req types.DeleteCouponHistoryReq) (*types.DeleteCouponHistoryResp, error) {
 	_, err := l.svcCtx.Sms.CouponHistoryDelete(l.ctx, &smsclient.CouponHistoryDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除优惠券使用记录异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除优惠券使用记录异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除优惠券使用记录失败")
 	}
 	return &types.DeleteCouponHistoryResp{

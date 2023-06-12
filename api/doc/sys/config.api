@@ -58,7 +58,7 @@ type (
         Message string `json:"message"`
     }
     DeleteConfigReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteConfigResp struct {
         Code string `json:"code"`

@@ -50,7 +50,7 @@ type (
         Message string `json:"message"`
     }
     DeleteOrderSettingReq struct {
-        id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteOrderSettingResp struct {
         Code string `json:"code"`

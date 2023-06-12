@@ -27,11 +27,11 @@ func NewMemberLoginLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *MemberLoginLogDeleteLogic) MemberLoginLogDelete(req types.DeleteMemberLoginLogReq) (*types.DeleteMemberLoginLogResp, error) {
 	_, err := l.svcCtx.Ums.MemberLoginLogDelete(l.ctx, &umsclient.MemberLoginLogDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员登录记录异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员登录记录异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除会员登录记录失败")
 	}
 	return &types.DeleteMemberLoginLogResp{

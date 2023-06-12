@@ -47,7 +47,7 @@ type (
         Message string `json:"message"`
     }
     DeleteMemberTaskReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteMemberTaskResp struct {
         Code string `json:"code"`

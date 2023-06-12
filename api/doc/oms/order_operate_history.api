@@ -50,7 +50,7 @@ type (
         Message string `json:"message"`
     }
     DeleteOperateHistoryReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteOperateHistoryResp struct {
         Code string `json:"code"`

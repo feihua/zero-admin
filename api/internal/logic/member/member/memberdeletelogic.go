@@ -27,11 +27,11 @@ func NewMemberDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Membe
 
 func (l *MemberDeleteLogic) MemberDelete(req types.DeleteMemberReq) (*types.DeleteMemberResp, error) {
 	_, err := l.svcCtx.Ums.MemberDelete(l.ctx, &umsclient.MemberDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员信息异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员信息异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除会员信息失败")
 	}
 	return &types.DeleteMemberResp{

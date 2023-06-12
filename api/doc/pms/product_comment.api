@@ -77,7 +77,7 @@ type (
         Message string `json:"message"`
     }
     DeleteProductCommentReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteProductCommentResp struct {
         Code string `json:"code"`

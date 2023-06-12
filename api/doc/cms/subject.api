@@ -81,7 +81,7 @@ type (
         Message string `json:"message"`
     }
     DeleteSubjectReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteSubjectResp struct {
         Code string `json:"code"`

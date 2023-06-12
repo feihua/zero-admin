@@ -27,11 +27,11 @@ func NewMemberTagDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Me
 
 func (l *MemberTagDeleteLogic) MemberTagDelete(req types.DeleteMemberTagReq) (*types.DeleteMemberTagResp, error) {
 	_, err := l.svcCtx.Ums.MemberTagDelete(l.ctx, &umsclient.MemberTagDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员标签异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员标签异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除会员标签失败")
 	}
 	return &types.DeleteMemberTagResp{

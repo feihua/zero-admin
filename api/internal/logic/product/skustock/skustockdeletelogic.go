@@ -27,11 +27,11 @@ func NewSkuStockDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Sku
 
 func (l *SkuStockDeleteLogic) SkuStockDelete(req types.DeleteSkuStockReq) (*types.DeleteSkuStockResp, error) {
 	_, err := l.svcCtx.Pms.SkuStockDelete(l.ctx, &pmsclient.SkuStockDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除库存异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除库存异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除库存失败")
 	}
 

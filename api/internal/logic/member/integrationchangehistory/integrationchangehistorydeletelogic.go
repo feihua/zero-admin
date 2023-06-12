@@ -27,11 +27,11 @@ func NewIntegrationChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.Ser
 
 func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(req types.DeleteIntegrationChangeHistoryReq) (*types.DeleteIntegrationChangeHistoryResp, error) {
 	_, err := l.svcCtx.Ums.IntegrationChangeHistoryDelete(l.ctx, &umsclient.IntegrationChangeHistoryDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除积分变化历史记录异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除积分变化历史记录异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除积分变化历史记录失败")
 	}
 	return &types.DeleteIntegrationChangeHistoryResp{

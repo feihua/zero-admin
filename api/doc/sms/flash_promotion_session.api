@@ -48,7 +48,7 @@ type (
         Message string `json:"message"`
     }
     DeleteFlashPromotionSessionReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteFlashPromotionSessionResp struct {
         Code string `json:"code"`

@@ -24,7 +24,7 @@ func NewMemberProductCategoryRelationDeleteLogic(ctx context.Context, svcCtx *sv
 }
 
 func (l *MemberProductCategoryRelationDeleteLogic) MemberProductCategoryRelationDelete(in *ums.MemberProductCategoryRelationDeleteReq) (*ums.MemberProductCategoryRelationDeleteResp, error) {
-	err := l.svcCtx.UmsMemberProductCategoryRelationModel.Delete(l.ctx, in.Id)
+	err := l.svcCtx.UmsMemberProductCategoryRelationModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

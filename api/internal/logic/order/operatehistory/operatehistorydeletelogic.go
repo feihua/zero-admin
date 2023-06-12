@@ -26,11 +26,11 @@ func NewOperateHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *OperateHistoryDeleteLogic) OperateHistoryDelete(req types.DeleteOperateHistoryReq) (*types.DeleteOperateHistoryResp, error) {
 	_, err := l.svcCtx.Oms.OrderOperateHistoryDelete(l.ctx, &omsclient.OrderOperateHistoryDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除订单操作历史异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除订单操作历史异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除订单操作历史签失败")
 	}
 

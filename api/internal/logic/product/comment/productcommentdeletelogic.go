@@ -27,11 +27,11 @@ func NewProductCommentDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *ProductCommentDeleteLogic) ProductCommentDelete(req types.DeleteProductCommentReq) (*types.DeleteProductCommentResp, error) {
 	_, err := l.svcCtx.Pms.CommentDelete(l.ctx, &pmsclient.CommentDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除商品评价异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除商品评价异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除商品评价失败")
 	}
 

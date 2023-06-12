@@ -27,11 +27,11 @@ func NewMemberRuleSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *MemberRuleSettingDeleteLogic) MemberRuleSettingDelete(req types.DeleteMemberRuleSettingReq) (*types.DeleteMemberRuleSettingResp, error) {
 	_, err := l.svcCtx.Ums.MemberRuleSettingDelete(l.ctx, &umsclient.MemberRuleSettingDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除积分规则异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除积分规则异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除积分规则失败")
 	}
 	return &types.DeleteMemberRuleSettingResp{

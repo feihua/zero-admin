@@ -26,11 +26,11 @@ func NewCompayAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 func (l *CompayAddressDeleteLogic) CompayAddressDelete(req types.DeleteCompayAddressReq) (*types.DeleteCompayAddressResp, error) {
 	_, err := l.svcCtx.Oms.CompanyAddressDelete(l.ctx, &omsclient.CompanyAddressDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除公司地址异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除公司地址异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除公司地址失败")
 	}
 

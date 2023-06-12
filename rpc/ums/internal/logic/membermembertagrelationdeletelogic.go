@@ -24,7 +24,7 @@ func NewMemberMemberTagRelationDeleteLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 func (l *MemberMemberTagRelationDeleteLogic) MemberMemberTagRelationDelete(in *ums.MemberMemberTagRelationDeleteReq) (*ums.MemberMemberTagRelationDeleteResp, error) {
-	err := l.svcCtx.UmsMemberMemberTagRelationModel.Delete(l.ctx, in.Id)
+	err := l.svcCtx.UmsMemberMemberTagRelationModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

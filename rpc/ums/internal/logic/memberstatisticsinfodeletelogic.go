@@ -24,7 +24,7 @@ func NewMemberStatisticsInfoDeleteLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *MemberStatisticsInfoDeleteLogic) MemberStatisticsInfoDelete(in *ums.MemberStatisticsInfoDeleteReq) (*ums.MemberStatisticsInfoDeleteResp, error) {
-	err := l.svcCtx.UmsMemberStatisticsInfoModel.Delete(l.ctx, in.Id)
+	err := l.svcCtx.UmsMemberStatisticsInfoModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

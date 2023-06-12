@@ -56,7 +56,7 @@ type (
         Message string `json:"message"`
     }
     DeleteFeightTemplateReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteFeightTemplateResp struct {
         Code string `json:"code"`

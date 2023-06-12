@@ -24,7 +24,7 @@ func NewMemberPriceDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberPriceDeleteLogic) MemberPriceDelete(in *pms.MemberPriceDeleteReq) (*pms.MemberPriceDeleteResp, error) {
-	err := l.svcCtx.PmsMemberPriceModel.Delete(l.ctx, in.Id)
+	err := l.svcCtx.PmsMemberPriceModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

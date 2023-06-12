@@ -649,7 +649,7 @@ type UpdateConfigResp struct {
 }
 
 type DeleteConfigReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteConfigResp struct {
@@ -804,7 +804,7 @@ type UpdateCartItemResp struct {
 }
 
 type DeleteCartItemReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteCartItemResp struct {
@@ -1046,7 +1046,7 @@ type UpdateCompayAddressResp struct {
 }
 
 type DeleteCompayAddressReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteCompayAddressResp struct {
@@ -1106,7 +1106,7 @@ type UpdateOperateHistoryResp struct {
 }
 
 type DeleteOperateHistoryReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteOperateHistoryResp struct {
@@ -1234,7 +1234,7 @@ type UpdateReturnApplyResp struct {
 }
 
 type DeleteReturnApplyReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteReturnApplyResp struct {
@@ -1351,7 +1351,7 @@ type UpdateOrderSettingResp struct {
 }
 
 type DeleteOrderSettingReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteOrderSettingResp struct {
@@ -1519,7 +1519,7 @@ type UpdateProductResp struct {
 }
 
 type DeleteProductReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteProductResp struct {
@@ -1761,7 +1761,7 @@ type UpdateProductCommentResp struct {
 }
 
 type DeleteProductCommentReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteProductCommentResp struct {
@@ -1827,7 +1827,7 @@ type UpdateFeightTemplateResp struct {
 }
 
 type DeleteFeightTemplateReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteFeightTemplateResp struct {
@@ -1884,7 +1884,7 @@ type UpdateMemberPriceResp struct {
 }
 
 type DeleteMemberPriceReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMemberPriceResp struct {
@@ -1959,7 +1959,7 @@ type UpdateSkuStockResp struct {
 }
 
 type DeleteSkuStockReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteSkuStockResp struct {
@@ -2266,7 +2266,7 @@ type UpdateCouponHistoryResp struct {
 }
 
 type DeleteCouponHistoryReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteCouponHistoryResp struct {
@@ -2446,7 +2446,7 @@ type UpdateFlashPromotionSessionResp struct {
 }
 
 type DeleteFlashPromotionSessionReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteFlashPromotionSessionResp struct {
@@ -2825,7 +2825,7 @@ type UpdateMemberResp struct {
 }
 
 type DeleteMemberReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMemberResp struct {
@@ -2898,7 +2898,7 @@ type UpdateMemberAddressResp struct {
 }
 
 type DeleteMemberAddressReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMemberAddressResp struct {
@@ -2964,7 +2964,7 @@ type UpdateGrowthChangeHistoryResp struct {
 }
 
 type DeleteGrowthChangeHistoryReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteGrowthChangeHistoryResp struct {
@@ -3030,7 +3030,7 @@ type UpdateIntegrationChangeHistoryResp struct {
 }
 
 type DeleteIntegrationChangeHistoryReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteIntegrationChangeHistoryResp struct {
@@ -3087,7 +3087,7 @@ type UpdateIntegrationConsumeSettingResp struct {
 }
 
 type DeleteIntegrationConsumeSettingReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteIntegrationConsumeSettingResp struct {
@@ -3233,7 +3233,7 @@ type UpdateMemberLoginLogResp struct {
 }
 
 type DeleteMemberLoginLogReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMemberLoginLogResp struct {
@@ -3296,7 +3296,7 @@ type UpdateMemberRuleSettingResp struct {
 }
 
 type DeleteMemberRuleSettingReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMemberRuleSettingResp struct {
@@ -3386,7 +3386,7 @@ type UpdateMemberStatisticsInfoResp struct {
 }
 
 type DeleteMemberStatisticsInfoReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMemberStatisticsInfoResp struct {
@@ -3440,7 +3440,7 @@ type UpdateMemberTagResp struct {
 }
 
 type DeleteMemberTagReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMemberTagResp struct {
@@ -3497,7 +3497,7 @@ type UpdateMemberTaskResp struct {
 }
 
 type DeleteMemberTaskReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteMemberTaskResp struct {
@@ -3588,7 +3588,7 @@ type UpdateSubjectResp struct {
 }
 
 type DeleteSubjectReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteSubjectResp struct {

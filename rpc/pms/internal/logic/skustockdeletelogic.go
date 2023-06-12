@@ -24,7 +24,7 @@ func NewSkuStockDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sk
 }
 
 func (l *SkuStockDeleteLogic) SkuStockDelete(in *pms.SkuStockDeleteReq) (*pms.SkuStockDeleteResp, error) {
-	err := l.svcCtx.PmsSkuStockModel.Delete(l.ctx, in.Id)
+	err := l.svcCtx.PmsSkuStockModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

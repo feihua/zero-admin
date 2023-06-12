@@ -27,11 +27,11 @@ func NewGrowthChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceC
 
 func (l *GrowthChangeHistoryDeleteLogic) GrowthChangeHistoryDelete(req types.DeleteGrowthChangeHistoryReq) (*types.DeleteGrowthChangeHistoryResp, error) {
 	_, err := l.svcCtx.Ums.GrowthChangeHistoryDelete(l.ctx, &umsclient.GrowthChangeHistoryDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除成长值变化历史记录异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除成长值变化历史记录异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除成长值变化历史记录失败")
 	}
 	return &types.DeleteGrowthChangeHistoryResp{

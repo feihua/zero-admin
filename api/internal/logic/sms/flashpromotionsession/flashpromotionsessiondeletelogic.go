@@ -27,11 +27,11 @@ func NewFlashPromotionSessionDeleteLogic(ctx context.Context, svcCtx *svc.Servic
 
 func (l *FlashPromotionSessionDeleteLogic) FlashPromotionSessionDelete(req types.DeleteFlashPromotionSessionReq) (*types.DeleteFlashPromotionSessionResp, error) {
 	_, err := l.svcCtx.Sms.FlashPromotionSessionDelete(l.ctx, &smsclient.FlashPromotionSessionDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除限时购场次信息异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除限时购场次信息异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除限时购场次信息失败")
 	}
 	return &types.DeleteFlashPromotionSessionResp{

@@ -27,11 +27,11 @@ func NewMemberStatisticsInfoDeleteLogic(ctx context.Context, svcCtx *svc.Service
 
 func (l *MemberStatisticsInfoDeleteLogic) MemberStatisticsInfoDelete(req types.DeleteMemberStatisticsInfoReq) (*types.DeleteMemberStatisticsInfoResp, error) {
 	_, err := l.svcCtx.Ums.MemberStatisticsInfoDelete(l.ctx, &umsclient.MemberStatisticsInfoDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员统计信息异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员统计信息异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除会员统计信息失败")
 	}
 	return &types.DeleteMemberStatisticsInfoResp{

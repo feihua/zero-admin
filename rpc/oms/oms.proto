@@ -313,7 +313,7 @@ message CartItemUpdateResp {
 }
 
 message CartItemDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message CartItemDeleteResp {
@@ -401,7 +401,7 @@ message CompanyAddressUpdateResp {
 }
 
 message CompanyAddressDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message CompanyAddressDeleteResp {
@@ -498,7 +498,7 @@ message OrderItemUpdateResp {
 }
 
 message OrderItemDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message OrderItemDeleteResp {
@@ -550,7 +550,7 @@ message OrderOperateHistoryUpdateResp {
 }
 
 message OrderOperateHistoryDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message OrderOperateHistoryDeleteResp {
@@ -670,7 +670,7 @@ message OrderReturnApplyUpdateResp {
 }
 
 message OrderReturnApplyDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message OrderReturnApplyDeleteResp {
@@ -774,7 +774,7 @@ message OrderSettingUpdateResp {
 }
 
 message OrderSettingDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message OrderSettingDeleteResp {

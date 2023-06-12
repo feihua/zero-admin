@@ -24,7 +24,7 @@ func NewGrowthChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *GrowthChangeHistoryDeleteLogic) GrowthChangeHistoryDelete(in *ums.GrowthChangeHistoryDeleteReq) (*ums.GrowthChangeHistoryDeleteResp, error) {
-	err := l.svcCtx.UmsGrowthChangeHistoryModel.Delete(l.ctx, in.Id)
+	err := l.svcCtx.UmsGrowthChangeHistoryModel.DeleteByIds(l.ctx, in.Ids)
 
 	if err != nil {
 		return nil, err

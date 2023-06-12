@@ -161,7 +161,7 @@ message ProductUpdateResp {
 }
 
 message ProductDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message ProductDeleteResp {
@@ -317,7 +317,7 @@ message AlbumUpdateResp {
 }
 
 message AlbumDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message AlbumDeleteResp {
@@ -361,7 +361,7 @@ message AlbumPicUpdateResp {
 }
 
 message AlbumPicDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message AlbumPicDeleteResp {
@@ -516,7 +516,7 @@ message CommentUpdateResp {
 }
 
 message CommentDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message CommentDeleteResp {
@@ -573,7 +573,7 @@ message CommentReplayUpdateResp {
 }
 
 message CommentReplayDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message CommentReplayDeleteResp {
@@ -633,7 +633,7 @@ message FeightTemplateUpdateResp {
 }
 
 message FeightTemplateDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message FeightTemplateDeleteResp {
@@ -684,7 +684,7 @@ message MemberPriceUpdateResp {
 }
 
 message MemberPriceDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message MemberPriceDeleteResp {
@@ -1271,7 +1271,7 @@ message SkuStockUpdateResp {
 }
 
 message SkuStockDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message SkuStockDeleteResp {

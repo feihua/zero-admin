@@ -27,11 +27,11 @@ func NewIntegrationConsumeSettingDeleteLogic(ctx context.Context, svcCtx *svc.Se
 
 func (l *IntegrationConsumeSettingDeleteLogic) IntegrationConsumeSettingDelete(req types.DeleteIntegrationConsumeSettingReq) (*types.DeleteIntegrationConsumeSettingResp, error) {
 	_, err := l.svcCtx.Ums.IntegrationConsumeSettingDelete(l.ctx, &umsclient.IntegrationConsumeSettingDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除积分消费设置异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除积分消费设置异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除积分消费设置失败")
 	}
 	return &types.DeleteIntegrationConsumeSettingResp{

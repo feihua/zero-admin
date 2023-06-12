@@ -27,11 +27,11 @@ func NewOrderSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 func (l *OrderSettingDeleteLogic) OrderSettingDelete(req types.DeleteOrderSettingReq) (*types.DeleteOrderSettingResp, error) {
 	_, err := l.svcCtx.Oms.OrderSettingDelete(l.ctx, &omsclient.OrderSettingDeleteReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除订单设置异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除订单设置异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除订单设置失败")
 	}
 

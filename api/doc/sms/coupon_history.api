@@ -65,7 +65,7 @@ type (
         Message string `json:"message"`
     }
     DeleteCouponHistoryReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteCouponHistoryResp struct {
         Code string `json:"code"`

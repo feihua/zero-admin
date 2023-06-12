@@ -164,7 +164,7 @@ message CouponHistoryUpdateResp {
 }
 
 message CouponHistoryDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message CouponHistoryDeleteResp {
@@ -215,7 +215,7 @@ message CouponProductCategoryRelationUpdateResp {
 }
 
 message CouponProductCategoryRelationDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message CouponProductCategoryRelationDeleteResp {
@@ -266,7 +266,7 @@ message CouponProductRelationUpdateResp {
 }
 
 message CouponProductRelationDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message CouponProductRelationDeleteResp {
@@ -407,7 +407,7 @@ message FlashPromotionProductRelationAddResp {
 }
 
 message FlashPromotionProductRelationDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message FlashPromotionProductRelationDeleteResp {
@@ -467,7 +467,7 @@ message FlashPromotionSessionAddResp {
 }
 
 message FlashPromotionSessionDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message FlashPromotionSessionDeleteResp {

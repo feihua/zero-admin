@@ -80,7 +80,7 @@ type (
         Message string `json:"message"`
     }
     DeleteMemberStatisticsInfoReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteMemberStatisticsInfoResp struct {
         Code string `json:"code"`
