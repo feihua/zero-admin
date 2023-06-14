@@ -43,10 +43,11 @@ func (l *OrderListLogic) OrderList(req types.ListOrderReq) (*types.ListOrderResp
 		return nil, errorx.NewDefaultError("查询订单信息失败")
 	}
 
-	var list []*types.ListtOrderData
+	var list []*types.ListOrderData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtOrderData{
+
+		list = append(list, &types.ListOrderData{
 			Id:                    item.Id,
 			MemberId:              item.MemberId,
 			CouponId:              item.CouponId,
@@ -91,6 +92,8 @@ func (l *OrderListLogic) OrderList(req types.ListOrderReq) (*types.ListOrderResp
 			ReceiveTime:           item.ReceiveTime,
 			CommentTime:           item.CommentTime,
 			ModifyTime:            item.ModifyTime,
+			ListOperateHistory:    queryHistoryRecord(item),
+			ListOrderItem:         queryOrderItems(item),
 		})
 	}
 
@@ -103,4 +106,52 @@ func (l *OrderListLogic) OrderList(req types.ListOrderReq) (*types.ListOrderResp
 		Code:     "000000",
 		Message:  "查询订单信息成功",
 	}, nil
+}
+
+//获取商品项
+func queryOrderItems(item1 *omsclient.OrderListData) []types.ListOrderItemData {
+	var itemListData []types.ListOrderItemData
+	for _, item := range item1.ItemListData {
+		itemListData = append(itemListData, types.ListOrderItemData{
+			Id:                item.OrderId,
+			OrderId:           item.OrderId,
+			OrderSn:           item.OrderSn,
+			ProductId:         item.ProductId,
+			ProductPic:        item.ProductSn,
+			ProductName:       item.ProductName,
+			ProductBrand:      item.ProductBrand,
+			ProductSn:         item.ProductSn,
+			ProductPrice:      item.ProductPrice,
+			ProductQuantity:   item.ProductQuantity,
+			ProductSkuId:      item.ProductSkuId,
+			ProductSkuCode:    item.ProductSkuCode,
+			ProductCategoryId: item.ProductCategoryId,
+			PromotionName:     item.PromotionName,
+			PromotionAmount:   item.PromotionAmount,
+			CouponAmount:      item.CouponAmount,
+			IntegrationAmount: item.IntegrationAmount,
+			RealAmount:        item.RealAmount,
+			GiftIntegration:   item.GiftIntegration,
+			GiftGrowth:        item.GiftGrowth,
+			ProductAttr:       item.ProductAttr,
+		})
+	}
+
+	return itemListData
+}
+
+// 获取操作记录
+func queryHistoryRecord(item *omsclient.OrderListData) []types.ListOperateHistoryData {
+	var historyListData []types.ListOperateHistoryData
+	for _, operateHistory := range item.HistoryListData {
+		historyListData = append(historyListData, types.ListOperateHistoryData{
+			Id:          operateHistory.Id,
+			OrderId:     operateHistory.OrderId,
+			OperateMan:  operateHistory.OperateMan,
+			CreateTime:  operateHistory.CreateTime,
+			OrderStatus: operateHistory.OrderStatus,
+			Note:        operateHistory.Note,
+		})
+	}
+	return historyListData
 }

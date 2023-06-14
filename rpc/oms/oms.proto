@@ -110,6 +110,8 @@ message OrderListData{
   string   ReceiveTime = 42;
   string   CommentTime = 43;
   string   ModifyTime = 44;
+  repeated  OrderItemListData itemListData = 45;
+  repeated  OrderOperateHistoryListData historyListData = 46;
 }
 
 message OrderListResp {
@@ -233,23 +235,23 @@ message OrderRefundResp {
 }
 
 message CartItemAddReq {
-  int64     	ProductId   = 2;
-  int64     	ProductSkuId   = 3;
-  int64     	MemberId      = 4;
-  int64     	Quantity     = 5;
-  int64   	Price         = 6;
-  string    	ProductPic    = 7;
-  string    	ProductName       = 8;
-  string    	ProductSubTitle   = 9;
-  string    	ProductSkuCode    = 10;
-  string    	MemberNickname   = 11;
-  string 	CreateDate       = 12;
-  string 	ModifyDate        = 13;
-  int64     	DeleteStatus     = 14;
-  int64     	ProductCategoryId = 15;
-  string    	ProductBrand     = 16;
-  string    	ProductSn        = 17;
-  string    	ProductAttr       = 18;
+  int64      ProductId = 2;
+  int64      ProductSkuId = 3;
+  int64      MemberId = 4;
+  int64      Quantity = 5;
+  int64    Price = 6;
+  string      ProductPic = 7;
+  string      ProductName = 8;
+  string      ProductSubTitle = 9;
+  string      ProductSkuCode = 10;
+  string      MemberNickname = 11;
+  string  CreateDate = 12;
+  string  ModifyDate = 13;
+  int64      DeleteStatus = 14;
+  int64      ProductCategoryId = 15;
+  string      ProductBrand = 16;
+  string      ProductSn = 17;
+  string      ProductAttr = 18;
 }
 
 message CartItemAddResp {
@@ -262,24 +264,24 @@ message CartItemListReq {
 }
 
 message CartItemListData{
-  int64     	Id      = 1;
-  int64     	ProductId   = 2;
-  int64     	ProductSkuId   = 3;
-  int64     	MemberId      = 4;
-  int64     	Quantity     = 5;
-  int64   	Price         = 6;
-  string    	ProductPic    = 7;
-  string    	ProductName       = 8;
-  string    	ProductSubTitle   = 9;
-  string    	ProductSkuCode    = 10;
-  string    	MemberNickname   = 11;
-  string 	CreateDate       = 12;
-  string 	ModifyDate        = 13;
-  int64     	DeleteStatus     = 14;
-  int64     	ProductCategoryId = 15;
-  string    	ProductBrand     = 16;
-  string    	ProductSn        = 17;
-  string    	ProductAttr       = 18;
+  int64      Id = 1;
+  int64      ProductId = 2;
+  int64      ProductSkuId = 3;
+  int64      MemberId = 4;
+  int64      Quantity = 5;
+  int64    Price = 6;
+  string      ProductPic = 7;
+  string      ProductName = 8;
+  string      ProductSubTitle = 9;
+  string      ProductSkuCode = 10;
+  string      MemberNickname = 11;
+  string  CreateDate = 12;
+  string  ModifyDate = 13;
+  int64      DeleteStatus = 14;
+  int64      ProductCategoryId = 15;
+  string      ProductBrand = 16;
+  string      ProductSn = 17;
+  string      ProductAttr = 18;
 }
 
 message CartItemListResp {
@@ -288,24 +290,24 @@ message CartItemListResp {
 }
 
 message CartItemUpdateReq {
-  int64     	Id      = 1;
-  int64     	ProductId   = 2;
-  int64     	ProductSkuId   = 3;
-  int64     	MemberId      = 4;
-  int64     	Quantity     = 5;
-  int64   	Price         = 6;
-  string    	ProductPic    = 7;
-  string    	ProductName       = 8;
-  string    	ProductSubTitle   = 9;
-  string    	ProductSkuCode    = 10;
-  string    	MemberNickname   = 11;
-  string 	CreateDate       = 12;
-  string 	ModifyDate        = 13;
-  int64     	DeleteStatus     = 14;
-  int64     	ProductCategoryId = 15;
-  string    	ProductBrand     = 16;
-  string    	ProductSn        = 17;
-  string    	ProductAttr       = 18;
+  int64      Id = 1;
+  int64      ProductId = 2;
+  int64      ProductSkuId = 3;
+  int64      MemberId = 4;
+  int64      Quantity = 5;
+  int64    Price = 6;
+  string      ProductPic = 7;
+  string      ProductName = 8;
+  string      ProductSubTitle = 9;
+  string      ProductSkuCode = 10;
+  string      MemberNickname = 11;
+  string  CreateDate = 12;
+  string  ModifyDate = 13;
+  int64      DeleteStatus = 14;
+  int64      ProductCategoryId = 15;
+  string      ProductBrand = 16;
+  string      ProductSn = 17;
+  string      ProductAttr = 18;
 }
 
 message CartItemUpdateResp {
@@ -345,15 +347,15 @@ message CartItemFastAddResp {
 
 
 message CompanyAddressAddReq {
-  string 	AddressName = 2;
-  int64  	SendStatus  = 3;
-  int64  	ReceiveStatus = 4;
-  string 	Name       = 5;
-  string 	Phone     = 6;
-  string 	Province   = 7;
-  string 	City       = 8;
-  string 	Region     = 9;
-  string 	DetailAddress = 10;
+  string  AddressName = 2;
+  int64    SendStatus = 3;
+  int64    ReceiveStatus = 4;
+  string  Name = 5;
+  string  Phone = 6;
+  string  Province = 7;
+  string  City = 8;
+  string  Region = 9;
+  string  DetailAddress = 10;
 }
 
 message CompanyAddressAddResp {
@@ -366,16 +368,16 @@ message CompanyAddressListReq {
 }
 
 message CompanyAddressListData{
-  int64  	Id     = 1;
-  string 	AddressName = 2;
-  int64  	SendStatus  = 3;
-  int64  	ReceiveStatus = 4;
-  string 	Name       = 5;
-  string 	Phone     = 6;
-  string 	Province   = 7;
-  string 	City       = 8;
-  string 	Region     = 9;
-  string 	DetailAddress = 10;
+  int64    Id = 1;
+  string  AddressName = 2;
+  int64    SendStatus = 3;
+  int64    ReceiveStatus = 4;
+  string  Name = 5;
+  string  Phone = 6;
+  string  Province = 7;
+  string  City = 8;
+  string  Region = 9;
+  string  DetailAddress = 10;
 }
 
 message CompanyAddressListResp {
@@ -384,16 +386,16 @@ message CompanyAddressListResp {
 }
 
 message CompanyAddressUpdateReq {
-  int64  	Id     = 1;
-  string 	AddressName = 2;
-  int64  	SendStatus  = 3;
-  int64  	ReceiveStatus = 4;
-  string 	Name       = 5;
-  string 	Phone     = 6;
-  string 	Province   = 7;
-  string 	City       = 8;
-  string 	Region     = 9;
-  string 	DetailAddress = 10;
+  int64    Id = 1;
+  string  AddressName = 2;
+  int64    SendStatus = 3;
+  int64    ReceiveStatus = 4;
+  string  Name = 5;
+  string  Phone = 6;
+  string  Province = 7;
+  string  City = 8;
+  string  Region = 9;
+  string  DetailAddress = 10;
 }
 
 message CompanyAddressUpdateResp {
@@ -409,26 +411,26 @@ message CompanyAddressDeleteResp {
 }
 
 message OrderItemAddReq {
-  int64   	OrderId   = 2;
-  string  	OrderSn   = 3;
-  int64   	ProductId   = 4;
-  string  	ProductPic    = 5;
-  string  	ProductName   = 6;
-  string  	ProductBrand    = 7;
-  string  	ProductSn       = 8;
-  int64 	ProductPrice    = 9;
-  int64   	ProductQuantity   = 10;
-  int64   	ProductSkuId      = 11;
-  string  	ProductSkuCode    = 12;
-  int64   	ProductCategoryId = 13;
-  string  	PromotionName     = 14;
-  int64 	PromotionAmount   = 15;
-  int64 	CouponAmount      = 17;
-  int64 	IntegrationAmount = 18;
-  int64 	RealAmount        = 19;
-  int64   	GiftIntegration   = 20;
-  int64   	GiftGrowth        = 21;
-  string  	ProductAttr      = 22;
+  int64    OrderId = 2;
+  string    OrderSn = 3;
+  int64    ProductId = 4;
+  string    ProductPic = 5;
+  string    ProductName = 6;
+  string    ProductBrand = 7;
+  string    ProductSn = 8;
+  float  ProductPrice = 9;
+  int64    ProductQuantity = 10;
+  int64    ProductSkuId = 11;
+  string    ProductSkuCode = 12;
+  int64    ProductCategoryId = 13;
+  string    PromotionName = 14;
+  float  PromotionAmount = 15;
+  float  CouponAmount = 17;
+  float  IntegrationAmount = 18;
+  float  RealAmount = 19;
+  int64    GiftIntegration = 20;
+  int64    GiftGrowth = 21;
+  string    ProductAttr = 22;
 }
 
 message OrderItemAddResp {
@@ -441,27 +443,27 @@ message OrderItemListReq {
 }
 
 message OrderItemListData{
-  int64   	Id    = 1;
-  int64   	OrderId   = 2;
-  string  	OrderSn   = 3;
-  int64   	ProductId   = 4;
-  string  	ProductPic    = 5;
-  string  	ProductName   = 6;
-  string  	ProductBrand    = 7;
-  string  	ProductSn       = 8;
-  int64 	ProductPrice    = 9;
-  int64   	ProductQuantity   = 10;
-  int64   	ProductSkuId      = 11;
-  string  	ProductSkuCode    = 12;
-  int64   	ProductCategoryId = 13;
-  string  	PromotionName     = 14;
-  int64 	PromotionAmount   = 15;
-  int64 	CouponAmount      = 17;
-  int64 	IntegrationAmount = 18;
-  int64 	RealAmount        = 19;
-  int64   	GiftIntegration   = 20;
-  int64   	GiftGrowth        = 21;
-  string  	ProductAttr      = 22;
+  int64    Id = 1;
+  int64    OrderId = 2;
+  string    OrderSn = 3;
+  int64    ProductId = 4;
+  string    ProductPic = 5;
+  string    ProductName = 6;
+  string    ProductBrand = 7;
+  string    ProductSn = 8;
+  float  ProductPrice = 9;
+  int64    ProductQuantity = 10;
+  int64    ProductSkuId = 11;
+  string    ProductSkuCode = 12;
+  int64    ProductCategoryId = 13;
+  string    PromotionName = 14;
+  float  PromotionAmount = 15;
+  float  CouponAmount = 17;
+  float  IntegrationAmount = 18;
+  float  RealAmount = 19;
+  int64    GiftIntegration = 20;
+  int64    GiftGrowth = 21;
+  string    ProductAttr = 22;
 }
 
 message OrderItemListResp {
@@ -470,27 +472,27 @@ message OrderItemListResp {
 }
 
 message OrderItemUpdateReq {
-  int64   	Id    = 1;
-  int64   	OrderId   = 2;
-  string  	OrderSn   = 3;
-  int64   	ProductId   = 4;
-  string  	ProductPic    = 5;
-  string  	ProductName   = 6;
-  string  	ProductBrand    = 7;
-  string  	ProductSn       = 8;
-  int64 	ProductPrice    = 9;
-  int64   	ProductQuantity   = 10;
-  int64   	ProductSkuId      = 11;
-  string  	ProductSkuCode    = 12;
-  int64   	ProductCategoryId = 13;
-  string  	PromotionName     = 14;
-  int64 	PromotionAmount   = 15;
-  int64 	CouponAmount      = 17;
-  int64 	IntegrationAmount = 18;
-  int64 	RealAmount        = 19;
-  int64   	GiftIntegration   = 20;
-  int64   	GiftGrowth        = 21;
-  string  	ProductAttr      = 22;
+  int64    Id = 1;
+  int64    OrderId = 2;
+  string    OrderSn = 3;
+  int64    ProductId = 4;
+  string    ProductPic = 5;
+  string    ProductName = 6;
+  string    ProductBrand = 7;
+  string    ProductSn = 8;
+  float  ProductPrice = 9;
+  int64    ProductQuantity = 10;
+  int64    ProductSkuId = 11;
+  string    ProductSkuCode = 12;
+  int64    ProductCategoryId = 13;
+  string    PromotionName = 14;
+  float  PromotionAmount = 15;
+  float  CouponAmount = 17;
+  float  IntegrationAmount = 18;
+  float  RealAmount = 19;
+  int64    GiftIntegration = 20;
+  int64    GiftGrowth = 21;
+  string    ProductAttr = 22;
 }
 
 message OrderItemUpdateResp {
@@ -506,11 +508,11 @@ message OrderItemDeleteResp {
 }
 
 message OrderOperateHistoryAddReq {
-  int64    	OrderId   = 2;
-  string   	OperateMan  = 3;
-  string	CreateTime  = 4;
-  int64    	OrderStatus = 5;
-  string   	Note       = 6;
+  int64      OrderId = 2;
+  string    OperateMan = 3;
+  string  CreateTime = 4;
+  int64      OrderStatus = 5;
+  string    Note = 6;
 }
 
 message OrderOperateHistoryAddResp {
@@ -523,12 +525,12 @@ message OrderOperateHistoryListReq {
 }
 
 message OrderOperateHistoryListData{
-  int64    	Id     = 1;
-  int64    	OrderId   = 2;
-  string   	OperateMan  = 3;
-  string	CreateTime  = 4;
-  int64    	OrderStatus = 5;
-  string   	Note       = 6;
+  int64      Id = 1;
+  int64      OrderId = 2;
+  string    OperateMan = 3;
+  string  CreateTime = 4;
+  int64      OrderStatus = 5;
+  string    Note = 6;
 }
 
 message OrderOperateHistoryListResp {
@@ -537,12 +539,12 @@ message OrderOperateHistoryListResp {
 }
 
 message OrderOperateHistoryUpdateReq {
-  int64    	Id     = 1;
-  int64    	OrderId   = 2;
-  string   	OperateMan  = 3;
-  string	CreateTime  = 4;
-  int64    	OrderStatus = 5;
-  string   	Note       = 6;
+  int64      Id = 1;
+  int64      OrderId = 2;
+  string    OperateMan = 3;
+  string  CreateTime = 4;
+  int64      OrderStatus = 5;
+  string    Note = 6;
 }
 
 message OrderOperateHistoryUpdateResp {
@@ -558,32 +560,32 @@ message OrderOperateHistoryDeleteResp {
 }
 
 message OrderReturnApplyAddReq {
-  int64     	OrderId     = 2;
-  int64     	CompanyAddressId  = 3;
-  int64     	ProductId         = 4;
-  string    	OrderSn          = 5;
-  string 	CreateTime        = 6;
-  string    	MemberUsername    = 7;
-  int64   	ReturnAmount      = 8;
-  string    	ReturnName        = 9;
-  string    	ReturnPhone       = 10;
-  int64     	Status            = 11;
-  string 	HandleTime        = 12;
-  string    	ProductPic       = 13;
-  string    	ProductName       = 14;
-  string    	ProductBrand      = 15;
-  string    	ProductAttr       = 16;
-  int64     	ProductCount      = 17;
-  int64   	ProductPrice      = 18;
-  int64   	ProductRealPrice  = 19;
-  string    	Reason            = 20;
-  string    	Description       = 21;
-  string    	ProofPics         = 22;
-  string    	HandleNote        = 23;
-  string    	HandleMan         = 24;
-  string    	ReceiveMan        = 25;
-  string 	ReceiveTime       = 26;
-  string    	ReceiveNote       = 27;
+  int64      OrderId = 2;
+  int64      CompanyAddressId = 3;
+  int64      ProductId = 4;
+  string      OrderSn = 5;
+  string  CreateTime = 6;
+  string      MemberUsername = 7;
+  int64    ReturnAmount = 8;
+  string      ReturnName = 9;
+  string      ReturnPhone = 10;
+  int64      Status = 11;
+  string  HandleTime = 12;
+  string      ProductPic = 13;
+  string      ProductName = 14;
+  string      ProductBrand = 15;
+  string      ProductAttr = 16;
+  int64      ProductCount = 17;
+  int64    ProductPrice = 18;
+  int64    ProductRealPrice = 19;
+  string      Reason = 20;
+  string      Description = 21;
+  string      ProofPics = 22;
+  string      HandleNote = 23;
+  string      HandleMan = 24;
+  string      ReceiveMan = 25;
+  string  ReceiveTime = 26;
+  string      ReceiveNote = 27;
 }
 
 message OrderReturnApplyAddResp {
@@ -593,41 +595,41 @@ message OrderReturnApplyAddResp {
 message OrderReturnApplyListReq {
   int64 current = 1;
   int64 pageSize = 2;
-  string  OrderSn          = 3;
-  string  MemberUsername    = 4;
-  string 	HandleTime        = 5;
-  string 	CreateTime        = 6;
-  int64   Status            = 7;
+  string  OrderSn = 3;
+  string  MemberUsername = 4;
+  string  HandleTime = 5;
+  string  CreateTime = 6;
+  int64   Status = 7;
 }
 
 message OrderReturnApplyListData{
-  int64     	Id       = 1;
-  int64     	OrderId     = 2;
-  int64     	CompanyAddressId  = 3;
-  int64     	ProductId         = 4;
-  string    	OrderSn          = 5;
-  string 	CreateTime        = 6;
-  string    	MemberUsername    = 7;
-  int64   	ReturnAmount      = 8;
-  string    	ReturnName        = 9;
-  string    	ReturnPhone       = 10;
-  int64     	Status            = 11;
-  string 	HandleTime        = 12;
-  string    	ProductPic       = 13;
-  string    	ProductName       = 14;
-  string    	ProductBrand      = 15;
-  string    	ProductAttr       = 16;
-  int64     	ProductCount      = 17;
-  int64   	ProductPrice      = 18;
-  int64   	ProductRealPrice  = 19;
-  string    	Reason            = 20;
-  string    	Description       = 21;
-  string    	ProofPics         = 22;
-  string    	HandleNote        = 23;
-  string    	HandleMan         = 24;
-  string    	ReceiveMan        = 25;
-  string 	ReceiveTime       = 26;
-  string    	ReceiveNote       = 27;
+  int64      Id = 1;
+  int64      OrderId = 2;
+  int64      CompanyAddressId = 3;
+  int64      ProductId = 4;
+  string      OrderSn = 5;
+  string  CreateTime = 6;
+  string      MemberUsername = 7;
+  int64    ReturnAmount = 8;
+  string      ReturnName = 9;
+  string      ReturnPhone = 10;
+  int64      Status = 11;
+  string  HandleTime = 12;
+  string      ProductPic = 13;
+  string      ProductName = 14;
+  string      ProductBrand = 15;
+  string      ProductAttr = 16;
+  int64      ProductCount = 17;
+  int64    ProductPrice = 18;
+  int64    ProductRealPrice = 19;
+  string      Reason = 20;
+  string      Description = 21;
+  string      ProofPics = 22;
+  string      HandleNote = 23;
+  string      HandleMan = 24;
+  string      ReceiveMan = 25;
+  string  ReceiveTime = 26;
+  string      ReceiveNote = 27;
 }
 
 message OrderReturnApplyListResp {
@@ -636,13 +638,13 @@ message OrderReturnApplyListResp {
 }
 
 message OrderReturnApplyUpdateReq {
-  int64     	Id       = 1;
-  int64     	CompanyAddressId  = 2;
-  int64     	Status            = 3;
-  string    	HandleNote        = 4;
-  string    	HandleMan         = 5;
-  string    	ReceiveMan        = 6;
-  string    	ReceiveNote       = 7;
+  int64      Id = 1;
+  int64      CompanyAddressId = 2;
+  int64      Status = 3;
+  string      HandleNote = 4;
+  string      HandleMan = 5;
+  string      ReceiveMan = 6;
+  string      ReceiveNote = 7;
 }
 
 message OrderReturnApplyUpdateResp {
@@ -659,10 +661,10 @@ message OrderReturnApplyDeleteResp {
 
 
 message OrderReturnReasonAddReq {
-  string    	Name= 2;
-  int64     	Sort      = 3;
-  int64     	Status      = 4;
-  string 	CreateTime  = 5;
+  string      Name = 2;
+  int64      Sort = 3;
+  int64      Status = 4;
+  string  CreateTime = 5;
 }
 
 message OrderReturnReasonAddResp {
@@ -672,16 +674,16 @@ message OrderReturnReasonAddResp {
 message OrderReturnReasonListReq {
   int64 current = 1;
   int64 pageSize = 2;
-  string  Name= 3;
-  int64 Status  = 4;
+  string  Name = 3;
+  int64 Status = 4;
 }
 
 message OrderReturnReasonListData{
-  int64     	Id  = 1;
-  string    	Name= 2;
-  int64     	Sort      = 3;
-  int64     	Status      = 4;
-  string 	CreateTime  = 5;
+  int64      Id = 1;
+  string      Name = 2;
+  int64      Sort = 3;
+  int64      Status = 4;
+  string  CreateTime = 5;
 }
 
 message OrderReturnReasonListResp {
@@ -690,11 +692,11 @@ message OrderReturnReasonListResp {
 }
 
 message OrderReturnReasonUpdateReq {
-  int64     	Id  = 1;
-  string    	Name= 2;
-  int64     	Sort      = 3;
-  int64     	Status      = 4;
-  string 	CreateTime  = 5;
+  int64      Id = 1;
+  string      Name = 2;
+  int64      Sort = 3;
+  int64      Status = 4;
+  string  CreateTime = 5;
 }
 
 message OrderReturnReasonUpdateResp {
@@ -710,11 +712,11 @@ message OrderReturnReasonDeleteResp {
 }
 
 message OrderSettingAddReq {
-  int64 	FlashOrderOvertime  = 2;
-  int64 	NormalOrderOvertime = 3;
-  int64 	ConfirmOvertime     = 4;
-  int64 	FinishOvertime      = 5;
-  int64 	CommentOvertime     = 6;
+  int64  FlashOrderOvertime = 2;
+  int64  NormalOrderOvertime = 3;
+  int64  ConfirmOvertime = 4;
+  int64  FinishOvertime = 5;
+  int64  CommentOvertime = 6;
 }
 
 message OrderSettingAddResp {
@@ -727,12 +729,12 @@ message OrderSettingListReq {
 }
 
 message OrderSettingListData{
-  int64 	Id    = 1;
-  int64 	FlashOrderOvertime  = 2;
-  int64 	NormalOrderOvertime = 3;
-  int64 	ConfirmOvertime     = 4;
-  int64 	FinishOvertime      = 5;
-  int64 	CommentOvertime     = 6;
+  int64  Id = 1;
+  int64  FlashOrderOvertime = 2;
+  int64  NormalOrderOvertime = 3;
+  int64  ConfirmOvertime = 4;
+  int64  FinishOvertime = 5;
+  int64  CommentOvertime = 6;
 }
 
 message OrderSettingListResp {
@@ -741,12 +743,12 @@ message OrderSettingListResp {
 }
 
 message OrderSettingUpdateReq {
-  int64 	Id    = 1;
-  int64 	FlashOrderOvertime  = 2;
-  int64 	NormalOrderOvertime = 3;
-  int64 	ConfirmOvertime     = 4;
-  int64 	FinishOvertime      = 5;
-  int64 	CommentOvertime     = 6;
+  int64  Id = 1;
+  int64  FlashOrderOvertime = 2;
+  int64  NormalOrderOvertime = 3;
+  int64  ConfirmOvertime = 4;
+  int64  FinishOvertime = 5;
+  int64  CommentOvertime = 6;
 }
 
 message OrderSettingUpdateResp {

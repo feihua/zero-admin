@@ -16,7 +16,7 @@ type (
 	OmsOrderOperateHistoryModel interface {
 		omsOrderOperateHistoryModel
 		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrderOperateHistory, error)
+		FindAll(ctx context.Context, Current int64, PageSize int64, OrderId int64) (*[]OmsOrderOperateHistory, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +32,11 @@ func NewOmsOrderOperateHistoryModel(conn sqlx.SqlConn) OmsOrderOperateHistoryMod
 	}
 }
 
-func (m *customOmsOrderOperateHistoryModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrderOperateHistory, error) {
+func (m *customOmsOrderOperateHistoryModel) FindAll(ctx context.Context, Current int64, PageSize int64, OrderId int64) (*[]OmsOrderOperateHistory, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderOperateHistoryRows, m.table)
+	query := fmt.Sprintf("select %s from %s where order_id = ? limit ?,?", omsOrderOperateHistoryRows, m.table)
 	var resp []OmsOrderOperateHistory
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, OrderId, (Current-1)*PageSize, PageSize)
 	switch err {
 	case nil:
 		return &resp, nil

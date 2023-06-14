@@ -35,6 +35,7 @@ func (l *OrderListLogic) OrderList(in *oms.OrderListReq) (*oms.OrderListResp, er
 
 	var list []*oms.OrderListData
 	for _, order := range *all {
+
 		list = append(list, &oms.OrderListData{
 			Id:                    order.Id,
 			MemberId:              order.MemberId,
@@ -80,6 +81,8 @@ func (l *OrderListLogic) OrderList(in *oms.OrderListReq) (*oms.OrderListResp, er
 			ReceiveTime:           order.ReceiveTime.Format("2006-01-02 15:04:05"),
 			CommentTime:           order.CommentTime.Format("2006-01-02 15:04:05"),
 			ModifyTime:            order.ModifyTime.Format("2006-01-02 15:04:05"),
+			ItemListData:          queryOrderItems(l, order.Id),
+			HistoryListData:       queryHistoryRecord(l, order.Id),
 		})
 	}
 
@@ -90,4 +93,53 @@ func (l *OrderListLogic) OrderList(in *oms.OrderListReq) (*oms.OrderListResp, er
 		Total: count,
 		List:  list,
 	}, nil
+}
+
+func queryOrderItems(l *OrderListLogic, OrderId int64) []*oms.OrderItemListData {
+	orderItem, _ := l.svcCtx.OmsOrderItemModel.FindAll(l.ctx, 1, 100, OrderId)
+	var itemListData []*oms.OrderItemListData
+	for _, item := range *orderItem {
+		itemListData = append(itemListData, &oms.OrderItemListData{
+			Id:                item.OrderId,
+			OrderId:           item.OrderId,
+			OrderSn:           item.OrderSn,
+			ProductId:         item.ProductId,
+			ProductPic:        item.ProductSn,
+			ProductName:       item.ProductName,
+			ProductBrand:      item.ProductBrand,
+			ProductSn:         item.ProductSn,
+			ProductPrice:      float32(item.ProductPrice),
+			ProductQuantity:   item.ProductQuantity,
+			ProductSkuId:      item.ProductSkuId,
+			ProductSkuCode:    item.ProductSkuCode,
+			ProductCategoryId: item.ProductCategoryId,
+			PromotionName:     item.PromotionName,
+			PromotionAmount:   float32(item.PromotionAmount),
+			CouponAmount:      float32(item.CouponAmount),
+			IntegrationAmount: float32(item.IntegrationAmount),
+			RealAmount:        float32(item.RealAmount),
+			GiftIntegration:   item.GiftIntegration,
+			GiftGrowth:        item.GiftGrowth,
+			ProductAttr:       item.ProductAttr,
+		})
+	}
+	return itemListData
+}
+
+// 获取操作记录
+func queryHistoryRecord(l *OrderListLogic, OrderId int64) []*oms.OrderOperateHistoryListData {
+	history, _ := l.svcCtx.OmsOrderOperateHistoryModel.FindAll(l.ctx, 1, 100, OrderId)
+	var historyListData []*oms.OrderOperateHistoryListData
+
+	for _, operateHistory := range *history {
+		historyListData = append(historyListData, &oms.OrderOperateHistoryListData{
+			Id:          operateHistory.Id,
+			OrderId:     operateHistory.OrderId,
+			OperateMan:  operateHistory.OperateMan,
+			CreateTime:  operateHistory.CreateTime.Format("2006-01-02 15:04:05"),
+			OrderStatus: operateHistory.OrderStatus,
+			Note:        operateHistory.Note.String,
+		})
+	}
+	return historyListData
 }

@@ -24,7 +24,7 @@ func NewOrderOperateHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *OrderOperateHistoryListLogic) OrderOperateHistoryList(in *oms.OrderOperateHistoryListReq) (*oms.OrderOperateHistoryListResp, error) {
-	all, err := l.svcCtx.OmsOrderOperateHistoryModel.FindAll(l.ctx, in.Current, in.PageSize)
+	all, err := l.svcCtx.OmsOrderOperateHistoryModel.FindAll(l.ctx, in.Current, in.PageSize, 0)
 	count, _ := l.svcCtx.OmsOrderOperateHistoryModel.Count(l.ctx)
 
 	if err != nil {

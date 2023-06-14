@@ -24,7 +24,7 @@ func NewOrderItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ord
 }
 
 func (l *OrderItemListLogic) OrderItemList(in *oms.OrderItemListReq) (*oms.OrderItemListResp, error) {
-	all, err := l.svcCtx.OmsOrderItemModel.FindAll(l.ctx, in.Current, in.PageSize)
+	all, err := l.svcCtx.OmsOrderItemModel.FindAll(l.ctx, in.Current, in.PageSize, 0)
 	count, _ := l.svcCtx.OmsOrderItemModel.Count(l.ctx)
 
 	if err != nil {
@@ -45,16 +45,16 @@ func (l *OrderItemListLogic) OrderItemList(in *oms.OrderItemListReq) (*oms.Order
 			ProductName:       item.ProductName,
 			ProductBrand:      item.ProductBrand,
 			ProductSn:         item.ProductSn,
-			ProductPrice:      int64(item.ProductPrice),
+			ProductPrice:      float32(item.ProductPrice),
 			ProductQuantity:   item.ProductQuantity,
 			ProductSkuId:      item.ProductSkuId,
 			ProductSkuCode:    item.ProductSkuCode,
 			ProductCategoryId: item.ProductCategoryId,
 			PromotionName:     item.PromotionName,
-			PromotionAmount:   int64(item.PromotionAmount),
-			CouponAmount:      int64(item.CouponAmount),
-			IntegrationAmount: int64(item.IntegrationAmount),
-			RealAmount:        int64(item.RealAmount),
+			PromotionAmount:   float32(item.PromotionAmount),
+			CouponAmount:      float32(item.CouponAmount),
+			IntegrationAmount: float32(item.IntegrationAmount),
+			RealAmount:        float32(item.RealAmount),
 			GiftIntegration:   item.GiftIntegration,
 			GiftGrowth:        item.GiftGrowth,
 			ProductAttr:       item.ProductAttr,

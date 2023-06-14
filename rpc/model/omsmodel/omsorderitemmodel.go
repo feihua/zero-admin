@@ -16,7 +16,7 @@ type (
 	OmsOrderItemModel interface {
 		omsOrderItemModel
 		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrderItem, error)
+		FindAll(ctx context.Context, Current int64, PageSize int64, OrderId int64) (*[]OmsOrderItem, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindProductListByOrderId(ctx context.Context, OrderId int64) (*[]OmsOrderItem, error)
 	}
@@ -33,11 +33,11 @@ func NewOmsOrderItemModel(conn sqlx.SqlConn) OmsOrderItemModel {
 	}
 }
 
-func (m *customOmsOrderItemModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsOrderItem, error) {
+func (m *customOmsOrderItemModel) FindAll(ctx context.Context, Current int64, PageSize int64, OrderId int64) (*[]OmsOrderItem, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", omsOrderItemRows, m.table)
+	query := fmt.Sprintf("select %s from %s where order_id = ? limit ?,?", omsOrderItemRows, m.table)
 	var resp []OmsOrderItem
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, OrderId, (Current-1)*PageSize, PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
