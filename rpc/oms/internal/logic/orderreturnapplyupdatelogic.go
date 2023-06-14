@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"database/sql"
 	"time"
 	"zero-admin/rpc/model/omsmodel"
 
@@ -26,36 +27,44 @@ func NewOrderReturnApplyUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 func (l *OrderReturnApplyUpdateLogic) OrderReturnApplyUpdate(in *oms.OrderReturnApplyUpdateReq) (*oms.OrderReturnApplyUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	HandleTime, _ := time.Parse("2006-01-02 15:04:05", in.HandleTime)
-	ReceiveTime, _ := time.Parse("2006-01-02 15:04:05", in.ReceiveTime)
-	err := l.svcCtx.OmsOrderReturnApplyModel.Update(l.ctx, &omsmodel.OmsOrderReturnApply{
+	returnApply, err := l.svcCtx.OmsOrderReturnApplyModel.FindOne(l.ctx, in.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	// 退货中处理退货中的就要设置公司地址
+	if in.Status == 1 {
+		returnApply.CompanyAddressId = in.CompanyAddressId
+	}
+
+	err = l.svcCtx.OmsOrderReturnApplyModel.Update(l.ctx, &omsmodel.OmsOrderReturnApply{
 		Id:               in.Id,
-		OrderId:          in.OrderId,
-		CompanyAddressId: in.CompanyAddressId,
-		ProductId:        in.ProductId,
-		OrderSn:          in.OrderSn,
-		CreateTime:       CreateTime,
-		MemberUsername:   in.MemberUsername,
-		ReturnAmount:     float64(in.ReturnAmount),
-		ReturnName:       in.ReturnName,
-		ReturnPhone:      in.ReturnPhone,
+		OrderId:          returnApply.OrderId,
+		CompanyAddressId: returnApply.CompanyAddressId,
+		ProductId:        returnApply.ProductId,
+		OrderSn:          returnApply.OrderSn,
+		CreateTime:       returnApply.CreateTime,
+		MemberUsername:   returnApply.MemberUsername,
+		ReturnAmount:     returnApply.ReturnAmount,
+		ReturnName:       returnApply.ReturnName,
+		ReturnPhone:      returnApply.ReturnPhone,
 		Status:           in.Status,
-		HandleTime:       HandleTime,
-		ProductPic:       in.ProductPic,
-		ProductName:      in.ProductName,
-		ProductBrand:     in.ProductBrand,
-		ProductAttr:      in.ProductAttr,
-		ProductCount:     in.ProductCount,
-		ProductPrice:     float64(in.ProductPrice),
-		ProductRealPrice: float64(in.ProductRealPrice),
-		Reason:           in.Reason,
-		Description:      in.Description,
-		ProofPics:        in.ProofPics,
+		HandleTime:       time.Now(),
+		ProductPic:       returnApply.ProductPic,
+		ProductName:      returnApply.ProductName,
+		ProductBrand:     returnApply.ProductBrand,
+		ProductAttr:      returnApply.ProductAttr,
+		ProductCount:     returnApply.ProductCount,
+		ProductPrice:     returnApply.ProductPrice,
+		ProductRealPrice: returnApply.ProductRealPrice,
+		Reason:           returnApply.Reason,
+		Description:      returnApply.Description,
+		ProofPics:        returnApply.ProofPics,
 		HandleNote:       in.HandleNote,
 		HandleMan:        in.HandleMan,
 		ReceiveMan:       in.ReceiveMan,
-		ReceiveTime:      ReceiveTime,
+		ReceiveTime:      time.Now(),
+		ReceiveNote:      sql.NullString{String: in.ReceiveNote, Valid: true},
 	})
 	if err != nil {
 		return nil, err
