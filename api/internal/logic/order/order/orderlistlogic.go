@@ -113,11 +113,11 @@ func queryOrderItems(item1 *omsclient.OrderListData) []types.ListOrderItemData {
 	var itemListData []types.ListOrderItemData
 	for _, item := range item1.ItemListData {
 		itemListData = append(itemListData, types.ListOrderItemData{
-			Id:                item.OrderId,
+			Id:                item.Id,
 			OrderId:           item.OrderId,
 			OrderSn:           item.OrderSn,
 			ProductId:         item.ProductId,
-			ProductPic:        item.ProductSn,
+			ProductPic:        item.ProductPic,
 			ProductName:       item.ProductName,
 			ProductBrand:      item.ProductBrand,
 			ProductSn:         item.ProductSn,

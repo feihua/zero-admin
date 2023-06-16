@@ -100,11 +100,11 @@ func queryOrderItems(l *OrderListLogic, OrderId int64) []*oms.OrderItemListData 
 	var itemListData []*oms.OrderItemListData
 	for _, item := range *orderItem {
 		itemListData = append(itemListData, &oms.OrderItemListData{
-			Id:                item.OrderId,
+			Id:                item.Id,
 			OrderId:           item.OrderId,
 			OrderSn:           item.OrderSn,
 			ProductId:         item.ProductId,
-			ProductPic:        item.ProductSn,
+			ProductPic:        item.ProductPic,
 			ProductName:       item.ProductName,
 			ProductBrand:      item.ProductBrand,
 			ProductSn:         item.ProductSn,
