@@ -44,6 +44,7 @@ type (
 	OrderCancelResp               = omsclient.OrderCancelResp
 	OrderConfirmReq               = omsclient.OrderConfirmReq
 	OrderConfirmResp              = omsclient.OrderConfirmResp
+	OrderDeleteByIdReq            = omsclient.OrderDeleteByIdReq
 	OrderDeleteReq                = omsclient.OrderDeleteReq
 	OrderDeleteResp               = omsclient.OrderDeleteResp
 	OrderItemAddReq               = omsclient.OrderItemAddReq
@@ -111,6 +112,7 @@ type (
 		OrderCancel(ctx context.Context, in *OrderCancelReq, opts ...grpc.CallOption) (*OrderCancelResp, error)
 		OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error)
 		OrderRefund(ctx context.Context, in *OrderRefundReq, opts ...grpc.CallOption) (*OrderRefundResp, error)
+		OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
 		CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error)
 		CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error)
 		CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
@@ -193,6 +195,11 @@ func (m *defaultOms) OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts
 func (m *defaultOms) OrderRefund(ctx context.Context, in *OrderRefundReq, opts ...grpc.CallOption) (*OrderRefundResp, error) {
 	client := omsclient.NewOmsClient(m.cli.Conn())
 	return client.OrderRefund(ctx, in, opts...)
+}
+
+func (m *defaultOms) OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
+	client := omsclient.NewOmsClient(m.cli.Conn())
+	return client.OrderDeleteById(ctx, in, opts...)
 }
 
 func (m *defaultOms) CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error) {

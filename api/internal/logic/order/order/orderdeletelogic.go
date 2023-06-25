@@ -26,13 +26,12 @@ func NewOrderDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderD
 }
 
 func (l *OrderDeleteLogic) OrderDelete(req types.DeleteOrderReq) (*types.DeleteOrderResp, error) {
-	_, err := l.svcCtx.Oms.OrderDelete(l.ctx, &omsclient.OrderDeleteReq{
-		UserId:  req.Id,
-		OrderId: req.Id,
+	_, err := l.svcCtx.Oms.OrderDeleteById(l.ctx, &omsclient.OrderDeleteByIdReq{
+		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除订单信息异常:%s", req.Id, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除订单信息异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除订单信息失败")
 	}
 	return &types.DeleteOrderResp{

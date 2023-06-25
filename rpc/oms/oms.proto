@@ -131,6 +131,10 @@ message OrderUpdateResp {
   string pong = 1;
 }
 
+message OrderDeleteByIdReq {
+  repeated int64 Ids = 1;
+}
+
 message OrderDeleteReq {
   int64 UserId = 1;
   int64 OrderId = 2;
@@ -733,6 +737,7 @@ service Oms {
   rpc OrderCancel(OrderCancelReq) returns(OrderCancelResp);
   rpc OrderConfirm(OrderConfirmReq) returns(OrderConfirmResp);
   rpc OrderRefund(OrderRefundReq) returns(OrderRefundResp);
+  rpc OrderDeleteById(OrderDeleteByIdReq) returns(OrderDeleteResp);
 
   rpc CartItemAdd(CartItemAddReq) returns(CartItemAddResp);
   rpc CartItemList(CartItemListReq) returns(CartItemListResp);

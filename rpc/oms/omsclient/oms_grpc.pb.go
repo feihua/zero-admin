@@ -30,6 +30,7 @@ type OmsClient interface {
 	OrderCancel(ctx context.Context, in *OrderCancelReq, opts ...grpc.CallOption) (*OrderCancelResp, error)
 	OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error)
 	OrderRefund(ctx context.Context, in *OrderRefundReq, opts ...grpc.CallOption) (*OrderRefundResp, error)
+	OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
 	CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error)
 	CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error)
 	CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
@@ -137,6 +138,15 @@ func (c *omsClient) OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts 
 func (c *omsClient) OrderRefund(ctx context.Context, in *OrderRefundReq, opts ...grpc.CallOption) (*OrderRefundResp, error) {
 	out := new(OrderRefundResp)
 	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderRefund", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omsClient) OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
+	out := new(OrderDeleteResp)
+	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderDeleteById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -434,6 +444,7 @@ type OmsServer interface {
 	OrderCancel(context.Context, *OrderCancelReq) (*OrderCancelResp, error)
 	OrderConfirm(context.Context, *OrderConfirmReq) (*OrderConfirmResp, error)
 	OrderRefund(context.Context, *OrderRefundReq) (*OrderRefundResp, error)
+	OrderDeleteById(context.Context, *OrderDeleteByIdReq) (*OrderDeleteResp, error)
 	CartItemAdd(context.Context, *CartItemAddReq) (*CartItemAddResp, error)
 	CartItemList(context.Context, *CartItemListReq) (*CartItemListResp, error)
 	CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
@@ -495,6 +506,9 @@ func (UnimplementedOmsServer) OrderConfirm(context.Context, *OrderConfirmReq) (*
 }
 func (UnimplementedOmsServer) OrderRefund(context.Context, *OrderRefundReq) (*OrderRefundResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderRefund not implemented")
+}
+func (UnimplementedOmsServer) OrderDeleteById(context.Context, *OrderDeleteByIdReq) (*OrderDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderDeleteById not implemented")
 }
 func (UnimplementedOmsServer) CartItemAdd(context.Context, *CartItemAddReq) (*CartItemAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CartItemAdd not implemented")
@@ -742,6 +756,24 @@ func _Oms_OrderRefund_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OmsServer).OrderRefund(ctx, req.(*OrderRefundReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Oms_OrderDeleteById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderDeleteByIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmsServer).OrderDeleteById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omsclient.Oms/OrderDeleteById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmsServer).OrderDeleteById(ctx, req.(*OrderDeleteByIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1342,6 +1374,10 @@ var Oms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OrderRefund",
 			Handler:    _Oms_OrderRefund_Handler,
+		},
+		{
+			MethodName: "OrderDeleteById",
+			Handler:    _Oms_OrderDeleteById_Handler,
 		},
 		{
 			MethodName: "CartItemAdd",

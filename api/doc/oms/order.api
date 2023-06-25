@@ -161,7 +161,7 @@ type (
         Message string `json:"message"`
     }
     DeleteOrderReq struct {
-        Id int64 `json:"id"`
+        Ids []int64 `json:"ids"`
     }
     DeleteOrderResp struct {
         Code string `json:"code"`

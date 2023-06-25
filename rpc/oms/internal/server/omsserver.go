@@ -62,6 +62,11 @@ func (s *OmsServer) OrderRefund(ctx context.Context, in *omsclient.OrderRefundRe
 	return l.OrderRefund(in)
 }
 
+func (s *OmsServer) OrderDeleteById(ctx context.Context, in *omsclient.OrderDeleteByIdReq) (*omsclient.OrderDeleteResp, error) {
+	l := logic.NewOrderDeleteByIdLogic(ctx, s.svcCtx)
+	return l.OrderDeleteById(in)
+}
+
 func (s *OmsServer) CartItemAdd(ctx context.Context, in *omsclient.CartItemAddReq) (*omsclient.CartItemAddResp, error) {
 	l := logic.NewCartItemAddLogic(ctx, s.svcCtx)
 	return l.CartItemAdd(in)

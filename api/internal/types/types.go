@@ -975,7 +975,7 @@ type UpdateOrderResp struct {
 }
 
 type DeleteOrderReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `json:"ids"`
 }
 
 type DeleteOrderResp struct {
