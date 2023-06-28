@@ -1,0 +1,82 @@
+info(
+    desc: "商品优选列表"
+    author: "koobe"
+    email: "1002219331@qq.com"
+)
+
+type (
+    addPrefrenceAreaReq struct {
+        Name       string `json:"name"`
+        SubTitle   string `json:"subTitle"`
+        Pic        string `json:"pic"` // 展示图片
+        Sort       int64  `json:"sort"`
+        ShowStatus int64  `json:"showStatus"`
+    }
+    addPrefrenceAreaResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
+    ListPrefrenceAreaReq struct {
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
+        Name           string `json:"name,optional"`
+        SubTitle           string `json:"subTitle,optional"`
+        ShowStatus      int64  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+    }
+    ListtPrefrenceAreaData struct {
+        Id         int64  `json:"id"`
+        Name       string `json:"name"`
+        SubTitle   string `json:"subTitle"`
+        Pic        string `json:"pic"` // 展示图片
+        Sort       int64  `json:"sort"`
+        ShowStatus int64  `json:"showStatus"`
+    }
+    ListPrefrenceAreaResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
+        Current int64 `json:"current,default=1"`
+        Data []*ListtPrefrenceAreaData `json:"data"`
+        PageSize int64 `json:"pageSize,default=20"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+    UpdatePrefrenceAreaReq struct {
+        Id         int64  `json:"id"`
+        Name       string `json:"name"`
+        SubTitle   string `json:"subTitle"`
+        Pic        string `json:"pic"` // 展示图片
+        Sort       int64  `json:"sort"`
+        ShowStatus int64  `json:"showStatus"`
+    }
+    UpdatePrefrenceAreaResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
+    DeletePrefrenceAreaReq struct {
+        Ids []int64 `json:"ids"`
+    }
+    DeletePrefrenceAreaResp struct {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
+)
+
+@server(
+    jwt: Auth
+    middleware: CheckUrl
+    group: cms/PrefrenceArea
+    prefix: /api/cms/prefrenceArea
+)
+service admin-api {
+    @handler PrefrenceAreaAdd
+    post /add (addPrefrenceAreaReq) returns (addPrefrenceAreaResp)
+
+    @handler PrefrenceAreaList
+    post /list (ListPrefrenceAreaReq) returns (ListPrefrenceAreaResp)
+
+    @handler PrefrenceAreaUpdate
+    post /update (UpdatePrefrenceAreaReq) returns (UpdatePrefrenceAreaResp)
+
+    @handler PrefrenceAreaDelete
+    post /delete (DeletePrefrenceAreaReq) returns (DeletePrefrenceAreaResp)
+}

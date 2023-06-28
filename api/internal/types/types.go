@@ -3574,3 +3574,66 @@ type DeleteSubjectResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
+
+type AddPrefrenceAreaReq struct {
+	Name       string `json:"name"`
+	SubTitle   string `json:"subTitle"`
+	Pic        string `json:"pic"` // 展示图片
+	Sort       int64  `json:"sort"`
+	ShowStatus int64  `json:"showStatus"`
+}
+
+type AddPrefrenceAreaResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type ListPrefrenceAreaReq struct {
+	Current    int64  `json:"current,default=1"`
+	PageSize   int64  `json:"pageSize,default=20"`
+	Name       string `json:"name,optional"`
+	SubTitle   string `json:"subTitle,optional"`
+	ShowStatus int64  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+}
+
+type ListtPrefrenceAreaData struct {
+	Id         int64  `json:"id"`
+	Name       string `json:"name"`
+	SubTitle   string `json:"subTitle"`
+	Pic        string `json:"pic"` // 展示图片
+	Sort       int64  `json:"sort"`
+	ShowStatus int64  `json:"showStatus"`
+}
+
+type ListPrefrenceAreaResp struct {
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
+	Current  int64                     `json:"current,default=1"`
+	Data     []*ListtPrefrenceAreaData `json:"data"`
+	PageSize int64                     `json:"pageSize,default=20"`
+	Success  bool                      `json:"success"`
+	Total    int64                     `json:"total"`
+}
+
+type UpdatePrefrenceAreaReq struct {
+	Id         int64  `json:"id"`
+	Name       string `json:"name"`
+	SubTitle   string `json:"subTitle"`
+	Pic        string `json:"pic"` // 展示图片
+	Sort       int64  `json:"sort"`
+	ShowStatus int64  `json:"showStatus"`
+}
+
+type UpdatePrefrenceAreaResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type DeletePrefrenceAreaReq struct {
+	Ids []int64 `json:"ids"`
+}
+
+type DeletePrefrenceAreaResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}

@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	cmsPrefrenceArea "zero-admin/api/internal/handler/cms/PrefrenceArea"
 	cmssubject "zero-admin/api/internal/handler/cms/subject"
 	memberaddress "zero-admin/api/internal/handler/member/address"
 	membergrowthchangehistory "zero-admin/api/internal/handler/member/growthchangehistory"
@@ -1484,5 +1485,35 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/cms/subject"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/add",
+					Handler: cmsPrefrenceArea.PrefrenceAreaAddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/list",
+					Handler: cmsPrefrenceArea.PrefrenceAreaListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/update",
+					Handler: cmsPrefrenceArea.PrefrenceAreaUpdateHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
+					Handler: cmsPrefrenceArea.PrefrenceAreaDeleteHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cms/prefrenceArea"),
 	)
 }

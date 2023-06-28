@@ -50,6 +50,7 @@ import "ums/member_tag.api"
 import "ums/member_task.api"
 
 import "cms/subject.api"
+import "cms/prefrence_area.api"
 
 info(
 	desc: "go zero admin"
