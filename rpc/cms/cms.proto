@@ -99,10 +99,76 @@ message SubjectListResp {
   repeated  SubjectListData list = 2;
 }
 
+//商品优选
+message PrefrenceAreaAddReq {
+  int64 Id = 1; //
+  string Name = 2; //
+  string SubTitle = 3; //
+  string Pic = 4; //展示图片
+  int64 Sort = 5; //
+  int64 ShowStatus = 6; //
+
+}
+
+message PrefrenceAreaAddResp {
+  string pong = 1;
+}
+
+message PrefrenceAreaDeleteReq {
+  repeated int64 ids = 1;
+}
+
+message PrefrenceAreaDeleteResp {
+  string pong = 1;
+}
+
+message PrefrenceAreaUpdateReq {
+  int64 Id = 1; //
+  string Name = 2; //
+  string SubTitle = 3; //
+  string Pic = 4; //展示图片
+  int64 Sort = 5; //
+  int64 ShowStatus = 6; //
+
+}
+
+message PrefrenceAreaUpdateResp {
+  string pong = 1;
+}
+
+message PrefrenceAreaListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+  string Name = 3; //
+  string SubTitle = 4; //
+  int64 ShowStatus = 5; //显示状态：0->不显示；1->显示
+}
+
+message PrefrenceAreaListData {
+  int64 Id = 1; //
+  string Name = 2; //
+  string SubTitle = 3; //
+  string Pic = 4; //展示图片
+  int64 Sort = 5; //
+  int64 ShowStatus = 6; //
+
+}
+
+message PrefrenceAreaListResp {
+  int64 total = 1;
+  repeated  PrefrenceAreaListData list = 2;
+}
+
 service Cms {
   rpc SubjectAdd(SubjectAddReq) returns (SubjectAddResp){}
   rpc SubjectDelete(SubjectDeleteReq) returns (SubjectDeleteResp){}
-  rpc SubjectUpdate(SubjectUpdateReq) returns (SubjectUpdateResp ){}
+  rpc SubjectUpdate(SubjectUpdateReq) returns (SubjectUpdateResp){}
   rpc SubjectList(SubjectListReq) returns (SubjectListResp){}
   rpc SubjectListByIds(SubjectListByIdsReq) returns (SubjectListResp){}
+
+  // 商品优选
+  rpc PrefrenceAreaAdd(PrefrenceAreaAddReq) returns (PrefrenceAreaAddResp){}
+  rpc PrefrenceAreaDelete(PrefrenceAreaDeleteReq) returns (PrefrenceAreaDeleteResp){}
+  rpc PrefrenceAreaUpdate(PrefrenceAreaUpdateReq) returns (PrefrenceAreaUpdateResp){}
+  rpc PrefrenceAreaList(PrefrenceAreaListReq) returns (PrefrenceAreaListResp){}
 }

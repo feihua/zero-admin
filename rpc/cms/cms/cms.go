@@ -13,16 +13,25 @@ import (
 )
 
 type (
-	SubjectAddReq       = cmsclient.SubjectAddReq
-	SubjectAddResp      = cmsclient.SubjectAddResp
-	SubjectDeleteReq    = cmsclient.SubjectDeleteReq
-	SubjectDeleteResp   = cmsclient.SubjectDeleteResp
-	SubjectListByIdsReq = cmsclient.SubjectListByIdsReq
-	SubjectListData     = cmsclient.SubjectListData
-	SubjectListReq      = cmsclient.SubjectListReq
-	SubjectListResp     = cmsclient.SubjectListResp
-	SubjectUpdateReq    = cmsclient.SubjectUpdateReq
-	SubjectUpdateResp   = cmsclient.SubjectUpdateResp
+	PrefrenceAreaAddReq     = cmsclient.PrefrenceAreaAddReq
+	PrefrenceAreaAddResp    = cmsclient.PrefrenceAreaAddResp
+	PrefrenceAreaDeleteReq  = cmsclient.PrefrenceAreaDeleteReq
+	PrefrenceAreaDeleteResp = cmsclient.PrefrenceAreaDeleteResp
+	PrefrenceAreaListData   = cmsclient.PrefrenceAreaListData
+	PrefrenceAreaListReq    = cmsclient.PrefrenceAreaListReq
+	PrefrenceAreaListResp   = cmsclient.PrefrenceAreaListResp
+	PrefrenceAreaUpdateReq  = cmsclient.PrefrenceAreaUpdateReq
+	PrefrenceAreaUpdateResp = cmsclient.PrefrenceAreaUpdateResp
+	SubjectAddReq           = cmsclient.SubjectAddReq
+	SubjectAddResp          = cmsclient.SubjectAddResp
+	SubjectDeleteReq        = cmsclient.SubjectDeleteReq
+	SubjectDeleteResp       = cmsclient.SubjectDeleteResp
+	SubjectListByIdsReq     = cmsclient.SubjectListByIdsReq
+	SubjectListData         = cmsclient.SubjectListData
+	SubjectListReq          = cmsclient.SubjectListReq
+	SubjectListResp         = cmsclient.SubjectListResp
+	SubjectUpdateReq        = cmsclient.SubjectUpdateReq
+	SubjectUpdateResp       = cmsclient.SubjectUpdateResp
 
 	Cms interface {
 		SubjectAdd(ctx context.Context, in *SubjectAddReq, opts ...grpc.CallOption) (*SubjectAddResp, error)
@@ -30,6 +39,11 @@ type (
 		SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error)
 		SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error)
 		SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error)
+		// 商品优选
+		PrefrenceAreaAdd(ctx context.Context, in *PrefrenceAreaAddReq, opts ...grpc.CallOption) (*PrefrenceAreaAddResp, error)
+		PrefrenceAreaDelete(ctx context.Context, in *PrefrenceAreaDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaDeleteResp, error)
+		PrefrenceAreaUpdate(ctx context.Context, in *PrefrenceAreaUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaUpdateResp, error)
+		PrefrenceAreaList(ctx context.Context, in *PrefrenceAreaListReq, opts ...grpc.CallOption) (*PrefrenceAreaListResp, error)
 	}
 
 	defaultCms struct {
@@ -66,4 +80,25 @@ func (m *defaultCms) SubjectList(ctx context.Context, in *SubjectListReq, opts .
 func (m *defaultCms) SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
 	client := cmsclient.NewCmsClient(m.cli.Conn())
 	return client.SubjectListByIds(ctx, in, opts...)
+}
+
+// 商品优选
+func (m *defaultCms) PrefrenceAreaAdd(ctx context.Context, in *PrefrenceAreaAddReq, opts ...grpc.CallOption) (*PrefrenceAreaAddResp, error) {
+	client := cmsclient.NewCmsClient(m.cli.Conn())
+	return client.PrefrenceAreaAdd(ctx, in, opts...)
+}
+
+func (m *defaultCms) PrefrenceAreaDelete(ctx context.Context, in *PrefrenceAreaDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaDeleteResp, error) {
+	client := cmsclient.NewCmsClient(m.cli.Conn())
+	return client.PrefrenceAreaDelete(ctx, in, opts...)
+}
+
+func (m *defaultCms) PrefrenceAreaUpdate(ctx context.Context, in *PrefrenceAreaUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaUpdateResp, error) {
+	client := cmsclient.NewCmsClient(m.cli.Conn())
+	return client.PrefrenceAreaUpdate(ctx, in, opts...)
+}
+
+func (m *defaultCms) PrefrenceAreaList(ctx context.Context, in *PrefrenceAreaListReq, opts ...grpc.CallOption) (*PrefrenceAreaListResp, error) {
+	client := cmsclient.NewCmsClient(m.cli.Conn())
+	return client.PrefrenceAreaList(ctx, in, opts...)
 }

@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/cms/cmsclient"
 )
 
 var _ CmsPrefrenceAreaModel = (*customCmsPrefrenceAreaModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customCmsPrefrenceAreaModel.
 	CmsPrefrenceAreaModel interface {
 		cmsPrefrenceAreaModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]CmsPrefrenceArea, error)
+		Count(ctx context.Context, in *cmsclient.PrefrenceAreaListReq) (int64, error)
+		FindAll(ctx context.Context, in *cmsclient.PrefrenceAreaListReq) (*[]CmsPrefrenceArea, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +33,11 @@ func NewCmsPrefrenceAreaModel(conn sqlx.SqlConn) CmsPrefrenceAreaModel {
 	}
 }
 
-func (m *customCmsPrefrenceAreaModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]CmsPrefrenceArea, error) {
+func (m *customCmsPrefrenceAreaModel) FindAll(ctx context.Context, in *cmsclient.PrefrenceAreaListReq) (*[]CmsPrefrenceArea, error) {
 
 	query := fmt.Sprintf("select %s from %s limit ?,?", cmsPrefrenceAreaRows, m.table)
 	var resp []CmsPrefrenceArea
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -47,7 +48,7 @@ func (m *customCmsPrefrenceAreaModel) FindAll(ctx context.Context, Current int64
 	}
 }
 
-func (m *customCmsPrefrenceAreaModel) Count(ctx context.Context) (int64, error) {
+func (m *customCmsPrefrenceAreaModel) Count(ctx context.Context, in *cmsclient.PrefrenceAreaListReq) (int64, error) {
 	query := fmt.Sprintf("select count(*) as count from %s", m.table)
 
 	var count int64

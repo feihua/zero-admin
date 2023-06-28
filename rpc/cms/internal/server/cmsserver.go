@@ -46,3 +46,24 @@ func (s *CmsServer) SubjectListByIds(ctx context.Context, in *cmsclient.SubjectL
 	l := logic.NewSubjectListByIdsLogic(ctx, s.svcCtx)
 	return l.SubjectListByIds(in)
 }
+
+// 商品优选
+func (s *CmsServer) PrefrenceAreaAdd(ctx context.Context, in *cmsclient.PrefrenceAreaAddReq) (*cmsclient.PrefrenceAreaAddResp, error) {
+	l := logic.NewPrefrenceAreaAddLogic(ctx, s.svcCtx)
+	return l.PrefrenceAreaAdd(in)
+}
+
+func (s *CmsServer) PrefrenceAreaDelete(ctx context.Context, in *cmsclient.PrefrenceAreaDeleteReq) (*cmsclient.PrefrenceAreaDeleteResp, error) {
+	l := logic.NewPrefrenceAreaDeleteLogic(ctx, s.svcCtx)
+	return l.PrefrenceAreaDelete(in)
+}
+
+func (s *CmsServer) PrefrenceAreaUpdate(ctx context.Context, in *cmsclient.PrefrenceAreaUpdateReq) (*cmsclient.PrefrenceAreaUpdateResp, error) {
+	l := logic.NewPrefrenceAreaUpdateLogic(ctx, s.svcCtx)
+	return l.PrefrenceAreaUpdate(in)
+}
+
+func (s *CmsServer) PrefrenceAreaList(ctx context.Context, in *cmsclient.PrefrenceAreaListReq) (*cmsclient.PrefrenceAreaListResp, error) {
+	l := logic.NewPrefrenceAreaListLogic(ctx, s.svcCtx)
+	return l.PrefrenceAreaList(in)
+}

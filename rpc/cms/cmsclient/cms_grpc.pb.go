@@ -27,6 +27,11 @@ type CmsClient interface {
 	SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error)
 	SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error)
 	SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error)
+	// 商品优选
+	PrefrenceAreaAdd(ctx context.Context, in *PrefrenceAreaAddReq, opts ...grpc.CallOption) (*PrefrenceAreaAddResp, error)
+	PrefrenceAreaDelete(ctx context.Context, in *PrefrenceAreaDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaDeleteResp, error)
+	PrefrenceAreaUpdate(ctx context.Context, in *PrefrenceAreaUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaUpdateResp, error)
+	PrefrenceAreaList(ctx context.Context, in *PrefrenceAreaListReq, opts ...grpc.CallOption) (*PrefrenceAreaListResp, error)
 }
 
 type cmsClient struct {
@@ -82,6 +87,42 @@ func (c *cmsClient) SubjectListByIds(ctx context.Context, in *SubjectListByIdsRe
 	return out, nil
 }
 
+func (c *cmsClient) PrefrenceAreaAdd(ctx context.Context, in *PrefrenceAreaAddReq, opts ...grpc.CallOption) (*PrefrenceAreaAddResp, error) {
+	out := new(PrefrenceAreaAddResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cmsClient) PrefrenceAreaDelete(ctx context.Context, in *PrefrenceAreaDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaDeleteResp, error) {
+	out := new(PrefrenceAreaDeleteResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cmsClient) PrefrenceAreaUpdate(ctx context.Context, in *PrefrenceAreaUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaUpdateResp, error) {
+	out := new(PrefrenceAreaUpdateResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cmsClient) PrefrenceAreaList(ctx context.Context, in *PrefrenceAreaListReq, opts ...grpc.CallOption) (*PrefrenceAreaListResp, error) {
+	out := new(PrefrenceAreaListResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CmsServer is the server API for Cms service.
 // All implementations must embed UnimplementedCmsServer
 // for forward compatibility
@@ -91,6 +132,11 @@ type CmsServer interface {
 	SubjectUpdate(context.Context, *SubjectUpdateReq) (*SubjectUpdateResp, error)
 	SubjectList(context.Context, *SubjectListReq) (*SubjectListResp, error)
 	SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error)
+	// 商品优选
+	PrefrenceAreaAdd(context.Context, *PrefrenceAreaAddReq) (*PrefrenceAreaAddResp, error)
+	PrefrenceAreaDelete(context.Context, *PrefrenceAreaDeleteReq) (*PrefrenceAreaDeleteResp, error)
+	PrefrenceAreaUpdate(context.Context, *PrefrenceAreaUpdateReq) (*PrefrenceAreaUpdateResp, error)
+	PrefrenceAreaList(context.Context, *PrefrenceAreaListReq) (*PrefrenceAreaListResp, error)
 	mustEmbedUnimplementedCmsServer()
 }
 
@@ -112,6 +158,18 @@ func (UnimplementedCmsServer) SubjectList(context.Context, *SubjectListReq) (*Su
 }
 func (UnimplementedCmsServer) SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubjectListByIds not implemented")
+}
+func (UnimplementedCmsServer) PrefrenceAreaAdd(context.Context, *PrefrenceAreaAddReq) (*PrefrenceAreaAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaAdd not implemented")
+}
+func (UnimplementedCmsServer) PrefrenceAreaDelete(context.Context, *PrefrenceAreaDeleteReq) (*PrefrenceAreaDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaDelete not implemented")
+}
+func (UnimplementedCmsServer) PrefrenceAreaUpdate(context.Context, *PrefrenceAreaUpdateReq) (*PrefrenceAreaUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaUpdate not implemented")
+}
+func (UnimplementedCmsServer) PrefrenceAreaList(context.Context, *PrefrenceAreaListReq) (*PrefrenceAreaListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaList not implemented")
 }
 func (UnimplementedCmsServer) mustEmbedUnimplementedCmsServer() {}
 
@@ -216,6 +274,78 @@ func _Cms_SubjectListByIds_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cms_PrefrenceAreaAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrefrenceAreaAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CmsServer).PrefrenceAreaAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.Cms/PrefrenceAreaAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CmsServer).PrefrenceAreaAdd(ctx, req.(*PrefrenceAreaAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cms_PrefrenceAreaDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrefrenceAreaDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CmsServer).PrefrenceAreaDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.Cms/PrefrenceAreaDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CmsServer).PrefrenceAreaDelete(ctx, req.(*PrefrenceAreaDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cms_PrefrenceAreaUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrefrenceAreaUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CmsServer).PrefrenceAreaUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.Cms/PrefrenceAreaUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CmsServer).PrefrenceAreaUpdate(ctx, req.(*PrefrenceAreaUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cms_PrefrenceAreaList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrefrenceAreaListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CmsServer).PrefrenceAreaList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.Cms/PrefrenceAreaList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CmsServer).PrefrenceAreaList(ctx, req.(*PrefrenceAreaListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cms_ServiceDesc is the grpc.ServiceDesc for Cms service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +372,22 @@ var Cms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SubjectListByIds",
 			Handler:    _Cms_SubjectListByIds_Handler,
+		},
+		{
+			MethodName: "PrefrenceAreaAdd",
+			Handler:    _Cms_PrefrenceAreaAdd_Handler,
+		},
+		{
+			MethodName: "PrefrenceAreaDelete",
+			Handler:    _Cms_PrefrenceAreaDelete_Handler,
+		},
+		{
+			MethodName: "PrefrenceAreaUpdate",
+			Handler:    _Cms_PrefrenceAreaUpdate_Handler,
+		},
+		{
+			MethodName: "PrefrenceAreaList",
+			Handler:    _Cms_PrefrenceAreaList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
