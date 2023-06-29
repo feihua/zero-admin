@@ -77,6 +77,7 @@ type (
 	MemberPriceAddResp                         = pmsclient.MemberPriceAddResp
 	MemberPriceDeleteReq                       = pmsclient.MemberPriceDeleteReq
 	MemberPriceDeleteResp                      = pmsclient.MemberPriceDeleteResp
+	MemberPriceList                            = pmsclient.MemberPriceList
 	MemberPriceListData                        = pmsclient.MemberPriceListData
 	MemberPriceListReq                         = pmsclient.MemberPriceListReq
 	MemberPriceListResp                        = pmsclient.MemberPriceListResp
@@ -106,6 +107,7 @@ type (
 	ProductAttributeValueAddResp               = pmsclient.ProductAttributeValueAddResp
 	ProductAttributeValueDeleteReq             = pmsclient.ProductAttributeValueDeleteReq
 	ProductAttributeValueDeleteResp            = pmsclient.ProductAttributeValueDeleteResp
+	ProductAttributeValueList                  = pmsclient.ProductAttributeValueList
 	ProductAttributeValueListData              = pmsclient.ProductAttributeValueListData
 	ProductAttributeValueListReq               = pmsclient.ProductAttributeValueListReq
 	ProductAttributeValueListResp              = pmsclient.ProductAttributeValueListResp
@@ -140,6 +142,7 @@ type (
 	ProductFullReductionAddResp                = pmsclient.ProductFullReductionAddResp
 	ProductFullReductionDeleteReq              = pmsclient.ProductFullReductionDeleteReq
 	ProductFullReductionDeleteResp             = pmsclient.ProductFullReductionDeleteResp
+	ProductFullReductionList                   = pmsclient.ProductFullReductionList
 	ProductFullReductionListData               = pmsclient.ProductFullReductionListData
 	ProductFullReductionListReq                = pmsclient.ProductFullReductionListReq
 	ProductFullReductionListResp               = pmsclient.ProductFullReductionListResp
@@ -149,6 +152,7 @@ type (
 	ProductLadderAddResp                       = pmsclient.ProductLadderAddResp
 	ProductLadderDeleteReq                     = pmsclient.ProductLadderDeleteReq
 	ProductLadderDeleteResp                    = pmsclient.ProductLadderDeleteResp
+	ProductLadderList                          = pmsclient.ProductLadderList
 	ProductLadderListData                      = pmsclient.ProductLadderListData
 	ProductLadderListReq                       = pmsclient.ProductLadderListReq
 	ProductLadderListResp                      = pmsclient.ProductLadderListResp
@@ -184,6 +188,7 @@ type (
 	SkuStockAddResp                            = pmsclient.SkuStockAddResp
 	SkuStockDeleteReq                          = pmsclient.SkuStockDeleteReq
 	SkuStockDeleteResp                         = pmsclient.SkuStockDeleteResp
+	SkuStockList                               = pmsclient.SkuStockList
 	SkuStockListData                           = pmsclient.SkuStockListData
 	SkuStockListReq                            = pmsclient.SkuStockListReq
 	SkuStockListResp                           = pmsclient.SkuStockListResp

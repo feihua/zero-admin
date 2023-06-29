@@ -99,6 +99,56 @@ message SubjectListResp {
   repeated  SubjectListData list = 2;
 }
 
+//关联专题
+message SubjectProductRelationAddReq {
+  int64 Id = 1; //
+  int64 SubjectId = 2; //
+  int64 ProductId = 3; //
+
+}
+
+message SubjectProductRelationAddResp {
+  string pong = 1;
+}
+
+message SubjectProductRelationDeleteReq {
+  int64 id = 1;
+}
+
+message SubjectProductRelationDeleteResp {
+  string pong = 1;
+}
+
+message SubjectProductRelationUpdateReq {
+  int64 Id = 1; //
+  int64 SubjectId = 2; //
+  int64 ProductId = 3; //
+
+}
+
+message SubjectProductRelationUpdateResp {
+  string pong = 1;
+}
+
+message SubjectProductRelationListReq {
+  int64 Id = 1; //
+  int64 SubjectId = 2; //
+  int64 ProductId = 3; //
+
+}
+
+message SubjectProductRelationListData {
+  int64 Id = 1; //
+  int64 SubjectId = 2; //
+  int64 ProductId = 3; //
+
+}
+
+message SubjectProductRelationListResp {
+  int64 total = 1;
+  repeated  SubjectProductRelationListData list = 2;
+}
+
 //商品优选
 message PrefrenceAreaAddReq {
   int64 Id = 1; //
@@ -159,16 +209,78 @@ message PrefrenceAreaListResp {
   repeated  PrefrenceAreaListData list = 2;
 }
 
+//优选商品关联
+message PrefrenceAreaProductRelationAddReq {
+  int64 PrefrenceAreaId = 1; //
+  int64 ProductId = 2; //
+
+}
+
+message PrefrenceAreaProductRelationAddResp {
+  string pong = 1;
+}
+
+message PrefrenceAreaProductRelationDeleteReq {
+  int64 id = 1;
+}
+
+message PrefrenceAreaProductRelationDeleteResp {
+  string pong = 1;
+}
+
+message PrefrenceAreaProductRelationUpdateReq {
+  int64 Id = 1; //
+  int64 PrefrenceAreaId = 2; //
+  int64 ProductId = 3; //
+
+}
+
+message PrefrenceAreaProductRelationUpdateResp {
+  string pong = 1;
+}
+
+message PrefrenceAreaProductRelationListReq {
+  int64 Id = 1; //
+  int64 PrefrenceAreaId = 2; //
+  int64 ProductId = 3; //
+
+}
+
+message PrefrenceAreaProductRelationListData {
+  int64 Id = 1; //
+  int64 PrefrenceAreaId = 2; //
+  int64 ProductId = 3; //
+
+}
+
+message PrefrenceAreaProductRelationListResp {
+  int64 total = 1;
+  repeated  PrefrenceAreaProductRelationListData list = 2;
+}
+
 service Cms {
+  // 专题
   rpc SubjectAdd(SubjectAddReq) returns (SubjectAddResp){}
   rpc SubjectDelete(SubjectDeleteReq) returns (SubjectDeleteResp){}
   rpc SubjectUpdate(SubjectUpdateReq) returns (SubjectUpdateResp){}
   rpc SubjectList(SubjectListReq) returns (SubjectListResp){}
   rpc SubjectListByIds(SubjectListByIdsReq) returns (SubjectListResp){}
 
+  // 专题关联
+  rpc SubjectProductRelationAdd(SubjectProductRelationAddReq) returns (SubjectProductRelationAddResp){}
+  rpc SubjectProductRelationDelete(SubjectProductRelationDeleteReq) returns (SubjectProductRelationDeleteResp){}
+  rpc SubjectProductRelationUpdate(SubjectProductRelationUpdateReq) returns (SubjectProductRelationUpdateResp){}
+  rpc SubjectProductRelationList(SubjectProductRelationListReq) returns (SubjectProductRelationListResp){}
+
   // 商品优选
   rpc PrefrenceAreaAdd(PrefrenceAreaAddReq) returns (PrefrenceAreaAddResp){}
   rpc PrefrenceAreaDelete(PrefrenceAreaDeleteReq) returns (PrefrenceAreaDeleteResp){}
   rpc PrefrenceAreaUpdate(PrefrenceAreaUpdateReq) returns (PrefrenceAreaUpdateResp){}
   rpc PrefrenceAreaList(PrefrenceAreaListReq) returns (PrefrenceAreaListResp){}
+
+  // 优选商品关联
+  rpc PrefrenceAreaProductRelationAdd(PrefrenceAreaProductRelationAddReq) returns (PrefrenceAreaProductRelationAddResp){}
+  rpc PrefrenceAreaProductRelationDelete(PrefrenceAreaProductRelationDeleteReq) returns (PrefrenceAreaProductRelationDeleteResp){}
+  rpc PrefrenceAreaProductRelationUpdate(PrefrenceAreaProductRelationUpdateReq) returns (PrefrenceAreaProductRelationUpdateResp){}
+  rpc PrefrenceAreaProductRelationList(PrefrenceAreaProductRelationListReq) returns (PrefrenceAreaProductRelationListResp){}
 }

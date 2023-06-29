@@ -18,6 +18,7 @@ type (
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductFullReduction, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		DeleteByProductId(ctx context.Context, productId int64) error
 	}
 
 	customPmsProductFullReductionModel struct {
@@ -81,5 +82,10 @@ func (m *customPmsProductFullReductionModel) DeleteByIds(ctx context.Context, id
 
 	// 执行删除语句
 	_, err := m.conn.ExecCtx(ctx, query, args...)
+	return err
+}
+func (m *customPmsProductFullReductionModel) DeleteByProductId(ctx context.Context, productId int64) error {
+	query := fmt.Sprintf("delete from %s where `product_id` = ?", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, productId)
 	return err
 }

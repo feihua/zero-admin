@@ -4,6 +4,35 @@ package pmsclient;
 
 option go_package = "./pmsclient";
 
+message MemberPriceList {
+  int64    MemberLevelId = 1;
+  float  MemberPrice = 2;
+  string    MemberLevelName = 3;
+}
+message ProductAttributeValueList {
+  int64    ProductAttributeId = 1;
+  string  AttributeValues = 2;
+}
+message ProductFullReductionList {
+  float  FullPrice = 1;
+  float  ReducePrice = 2;
+}
+message ProductLadderList {
+  int64    Count = 2;
+  float  Discount = 3;
+  float  Price = 4;
+}
+message SkuStockList {
+  string    SkuCode = 1;
+  float  Price = 2;
+  int64    Stock = 3;
+  int64    LowStock = 4;
+  string    Pic = 5;
+  int64    Sale = 6;
+  float  PromotionPrice = 7;
+  int64    LockStock = 8;
+  string    SpData = 9;
+}
 message ProductAddReq {
   int64       BrandId = 2;
   int64       ProductCategoryId = 3;
@@ -46,10 +75,15 @@ message ProductAddReq {
   int64       PromotionType = 40;
   string      BrandName = 41;
   string      ProductCategoryName = 42;
+  repeated MemberPriceList      MemberPriceList = 43;
+  repeated ProductAttributeValueList      ProductAttributeValueList = 44;
+  repeated ProductFullReductionList      ProductFullReductionList = 45;
+  repeated ProductLadderList      ProductLadderList = 46;
+  repeated SkuStockList      SkuStockList = 47;
 }
 
 message ProductAddResp {
-  string pong = 1;
+  int32 productId = 1;
 }
 
 message ProductListReq {
@@ -154,6 +188,11 @@ message ProductUpdateReq {
   int64       PromotionType = 40;
   string      BrandName = 41;
   string      ProductCategoryName = 42;
+  repeated MemberPriceList      MemberPriceList = 43;
+  repeated ProductAttributeValueList      ProductAttributeValueList = 44;
+  repeated ProductFullReductionList      ProductFullReductionList = 45;
+  repeated ProductLadderList      ProductLadderList = 46;
+  repeated SkuStockList      SkuStockList = 47;
 }
 
 message ProductUpdateResp {
@@ -642,10 +681,10 @@ message FeightTemplateDeleteResp {
 
 
 message MemberPriceAddReq {
-  int64    ProductId = 2;
-  int64    MemberLevelId = 3;
-  int64  MemberPrice = 4;
-  string    MemberLevelName = 5;
+  int64    ProductId = 1;
+  int64    MemberLevelId = 2;
+  int64  MemberPrice = 3;
+  string    MemberLevelName = 4;
 }
 
 message MemberPriceAddResp {
@@ -815,9 +854,9 @@ message ProductAttributeDeleteResp {
 
 
 message ProductAttributeValueAddReq {
-  int64    ProductId = 2;
-  int64    ProductAttributeId = 3;
-  string  Value = 4;
+  int64    ProductId = 1;
+  int64    ProductAttributeId = 2;
+  string  Value = 3;
 }
 
 message ProductAttributeValueAddResp {
@@ -987,9 +1026,9 @@ message ProductCategoryDeleteResp {
 }
 
 message ProductFullReductionAddReq {
-  int64    ProductId = 2;
-  int64  FullPrice = 3;
-  int64  ReducePrice = 4;
+  int64    ProductId = 1;
+  int64  FullPrice = 2;
+  int64  ReducePrice = 3;
 }
 
 message ProductFullReductionAddResp {
@@ -1034,10 +1073,10 @@ message ProductFullReductionDeleteResp {
 }
 
 message ProductLadderAddReq {
-  int64    ProductId = 2;
-  int64    Count = 3;
-  int64  Discount = 4;
-  int64  Price = 5;
+  int64    ProductId = 1;
+  int64    Count = 2;
+  int64  Discount = 3;
+  int64  Price = 4;
 }
 
 message ProductLadderAddResp {

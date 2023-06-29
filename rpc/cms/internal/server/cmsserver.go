@@ -22,6 +22,7 @@ func NewCmsServer(svcCtx *svc.ServiceContext) *CmsServer {
 	}
 }
 
+// 专题
 func (s *CmsServer) SubjectAdd(ctx context.Context, in *cmsclient.SubjectAddReq) (*cmsclient.SubjectAddResp, error) {
 	l := logic.NewSubjectAddLogic(ctx, s.svcCtx)
 	return l.SubjectAdd(in)
@@ -47,6 +48,27 @@ func (s *CmsServer) SubjectListByIds(ctx context.Context, in *cmsclient.SubjectL
 	return l.SubjectListByIds(in)
 }
 
+// 专题关联
+func (s *CmsServer) SubjectProductRelationAdd(ctx context.Context, in *cmsclient.SubjectProductRelationAddReq) (*cmsclient.SubjectProductRelationAddResp, error) {
+	l := logic.NewSubjectProductRelationAddLogic(ctx, s.svcCtx)
+	return l.SubjectProductRelationAdd(in)
+}
+
+func (s *CmsServer) SubjectProductRelationDelete(ctx context.Context, in *cmsclient.SubjectProductRelationDeleteReq) (*cmsclient.SubjectProductRelationDeleteResp, error) {
+	l := logic.NewSubjectProductRelationDeleteLogic(ctx, s.svcCtx)
+	return l.SubjectProductRelationDelete(in)
+}
+
+func (s *CmsServer) SubjectProductRelationUpdate(ctx context.Context, in *cmsclient.SubjectProductRelationUpdateReq) (*cmsclient.SubjectProductRelationUpdateResp, error) {
+	l := logic.NewSubjectProductRelationUpdateLogic(ctx, s.svcCtx)
+	return l.SubjectProductRelationUpdate(in)
+}
+
+func (s *CmsServer) SubjectProductRelationList(ctx context.Context, in *cmsclient.SubjectProductRelationListReq) (*cmsclient.SubjectProductRelationListResp, error) {
+	l := logic.NewSubjectProductRelationListLogic(ctx, s.svcCtx)
+	return l.SubjectProductRelationList(in)
+}
+
 // 商品优选
 func (s *CmsServer) PrefrenceAreaAdd(ctx context.Context, in *cmsclient.PrefrenceAreaAddReq) (*cmsclient.PrefrenceAreaAddResp, error) {
 	l := logic.NewPrefrenceAreaAddLogic(ctx, s.svcCtx)
@@ -66,4 +88,25 @@ func (s *CmsServer) PrefrenceAreaUpdate(ctx context.Context, in *cmsclient.Prefr
 func (s *CmsServer) PrefrenceAreaList(ctx context.Context, in *cmsclient.PrefrenceAreaListReq) (*cmsclient.PrefrenceAreaListResp, error) {
 	l := logic.NewPrefrenceAreaListLogic(ctx, s.svcCtx)
 	return l.PrefrenceAreaList(in)
+}
+
+// 优选商品关联
+func (s *CmsServer) PrefrenceAreaProductRelationAdd(ctx context.Context, in *cmsclient.PrefrenceAreaProductRelationAddReq) (*cmsclient.PrefrenceAreaProductRelationAddResp, error) {
+	l := logic.NewPrefrenceAreaProductRelationAddLogic(ctx, s.svcCtx)
+	return l.PrefrenceAreaProductRelationAdd(in)
+}
+
+func (s *CmsServer) PrefrenceAreaProductRelationDelete(ctx context.Context, in *cmsclient.PrefrenceAreaProductRelationDeleteReq) (*cmsclient.PrefrenceAreaProductRelationDeleteResp, error) {
+	l := logic.NewPrefrenceAreaProductRelationDeleteLogic(ctx, s.svcCtx)
+	return l.PrefrenceAreaProductRelationDelete(in)
+}
+
+func (s *CmsServer) PrefrenceAreaProductRelationUpdate(ctx context.Context, in *cmsclient.PrefrenceAreaProductRelationUpdateReq) (*cmsclient.PrefrenceAreaProductRelationUpdateResp, error) {
+	l := logic.NewPrefrenceAreaProductRelationUpdateLogic(ctx, s.svcCtx)
+	return l.PrefrenceAreaProductRelationUpdate(in)
+}
+
+func (s *CmsServer) PrefrenceAreaProductRelationList(ctx context.Context, in *cmsclient.PrefrenceAreaProductRelationListReq) (*cmsclient.PrefrenceAreaProductRelationListResp, error) {
+	l := logic.NewPrefrenceAreaProductRelationListLogic(ctx, s.svcCtx)
+	return l.PrefrenceAreaProductRelationList(in)
 }
