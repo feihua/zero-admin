@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/pms/pms"
 )
 
 var _ PmsProductModel = (*customPmsProductModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customPmsProductModel.
 	PmsProductModel interface {
 		pmsProductModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProduct, error)
+		Count(ctx context.Context, in *pms.ProductListReq) (int64, error)
+		FindAll(ctx context.Context, in *pms.ProductListReq) (*[]PmsProduct, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		ProductListByCategoryId(ctx context.Context, CategoryId int64, Current int64, PageSize int64) (*[]PmsProduct, error)
 		FindAllByIds(ctx context.Context, ids []int64) (*[]PmsProduct, error)
@@ -34,11 +35,19 @@ func NewPmsProductModel(conn sqlx.SqlConn) PmsProductModel {
 	}
 }
 
-func (m *customPmsProductModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProduct, error) {
+func (m *customPmsProductModel) FindAll(ctx context.Context, in *pms.ProductListReq) (*[]PmsProduct, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductRows, m.table)
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	if in.VerifyStatus != 2 {
+		where = where + fmt.Sprintf(" AND verify_status = '%d'", in.VerifyStatus)
+	}
+
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", pmsProductRows, m.table, where)
 	var resp []PmsProduct
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -49,8 +58,20 @@ func (m *customPmsProductModel) FindAll(ctx context.Context, Current int64, Page
 	}
 }
 
-func (m *customPmsProductModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customPmsProductModel) Count(ctx context.Context, in *pms.ProductListReq) (int64, error) {
+	where := "1=1"
+	if len(in.Name) > 0 {
+		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
+	}
+	if in.VerifyStatus != 2 {
+		where = where + fmt.Sprintf(" AND verify_status = '%d'", in.VerifyStatus)
+	}
+
+	if in.ProductCategoryId != 0 {
+		where = where + fmt.Sprintf(" AND product_category_id = '%d'", in.ProductCategoryId)
+	}
+
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

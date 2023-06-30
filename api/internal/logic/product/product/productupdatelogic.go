@@ -44,6 +44,7 @@ func (l *ProductUpdateLogic) ProductUpdate(req types.UpdateProductReq) (*types.U
 		Id:                         productId,
 		BrandId:                    req.BrandId,
 		ProductCategoryId:          req.ProductCategoryId,
+		ProductCategoryIdArray:     req.ProductCategoryIdArray,
 		FeightTemplateId:           req.FeightTemplateId,
 		ProductAttributeCategoryId: req.ProductAttributeCategoryId,
 		Name:                       req.Name,
@@ -83,6 +84,11 @@ func (l *ProductUpdateLogic) ProductUpdate(req types.UpdateProductReq) (*types.U
 		PromotionType:              req.PromotionType,
 		BrandName:                  req.BrandName,
 		ProductCategoryName:        req.ProductCategoryName,
+		MemberPriceList:            buildUpdateMemberPriceList(req),
+		ProductAttributeValueList:  buildUpdateProductAttributeValueList(req),
+		ProductFullReductionList:   buildUpdateProductFullReductionList(req),
+		ProductLadderList:          buildUpdateProductLadderList(req),
+		SkuStockList:               buildUpdateSkuStockList(req),
 	})
 
 	if err != nil {
@@ -103,15 +109,84 @@ func (l *ProductUpdateLogic) ProductUpdate(req types.UpdateProductReq) (*types.U
 	}, nil
 }
 
+// 商品会员价格设置
+func buildUpdateMemberPriceList(req types.UpdateProductReq) []*pmsclient.MemberPriceList {
+	var memberPriceLists []*pmsclient.MemberPriceList
+	for _, item := range req.MemberPriceList {
+		memberPriceLists = append(memberPriceLists, &pmsclient.MemberPriceList{
+			MemberLevelId:   item.MemberLevelID,
+			MemberPrice:     item.MemberPrice,
+			MemberLevelName: item.MemberLevelName,
+		})
+	}
+	return memberPriceLists
+}
+
+// 商品参数及自定义规格属性
+func buildUpdateProductAttributeValueList(req types.UpdateProductReq) []*pmsclient.ProductAttributeValueList {
+	var attributeValueLists []*pmsclient.ProductAttributeValueList
+	for _, item := range req.ProductAttributeValueList {
+		attributeValueLists = append(attributeValueLists, &pmsclient.ProductAttributeValueList{
+			ProductAttributeId: item.ProductAttributeID,
+			AttributeValues:    item.Value,
+		})
+	}
+	return attributeValueLists
+}
+
+// 商品满减价格设置
+func buildUpdateProductFullReductionList(req types.UpdateProductReq) []*pmsclient.ProductFullReductionList {
+	var fullReductionLists []*pmsclient.ProductFullReductionList
+	for _, item := range req.ProductFullReductionList {
+		fullReductionLists = append(fullReductionLists, &pmsclient.ProductFullReductionList{
+			FullPrice:   item.FullPrice,
+			ReducePrice: item.ReducePrice,
+		})
+	}
+	return fullReductionLists
+}
+
+// 商品阶梯价格设置
+func buildUpdateProductLadderList(req types.UpdateProductReq) []*pmsclient.ProductLadderList {
+	var ladderLists []*pmsclient.ProductLadderList
+	for _, item := range req.ProductLadderList {
+		ladderLists = append(ladderLists, &pmsclient.ProductLadderList{
+			Count:    item.Count,
+			Discount: item.Discount,
+			Price:    item.Price,
+		})
+	}
+	return ladderLists
+}
+
+// 商品的sku库存信息
+func buildUpdateSkuStockList(req types.UpdateProductReq) []*pmsclient.SkuStockList {
+	var skuStockLists []*pmsclient.SkuStockList
+	for _, item := range req.SkuStockList {
+		skuStockLists = append(skuStockLists, &pmsclient.SkuStockList{
+			SkuCode:        item.SkuCode,
+			Price:          item.Price,
+			Stock:          item.Stock,
+			LowStock:       item.LowStock,
+			Pic:            item.Pic,
+			Sale:           item.Sale,
+			PromotionPrice: item.PromotionPrice,
+			LockStock:      item.LockStock,
+			SpData:         item.SPData,
+		})
+	}
+	return skuStockLists
+}
+
 // 更新专题关联
 func updateSubjectProductRelation(req types.UpdateProductReq, l *ProductUpdateLogic, productId int64) {
 	//1.先删除专题的关联
 	_, _ = l.svcCtx.Cms.SubjectProductRelationDelete(l.ctx, &cmsclient.SubjectProductRelationDeleteReq{Id: productId})
 
 	//2.重新添加专题的关联
-	for _, item := range req.SubjectProductRelationList {
+	for _, subjectId := range req.SubjectProductRelationList {
 		_, _ = l.svcCtx.Cms.SubjectProductRelationAdd(l.ctx, &cmsclient.SubjectProductRelationAddReq{
-			SubjectId: item.SubjectID,
+			SubjectId: subjectId,
 			ProductId: productId,
 		})
 	}
@@ -123,9 +198,9 @@ func updatePrefrenceAreaProductRelation(req types.UpdateProductReq, l *ProductUp
 	_, _ = l.svcCtx.Cms.PrefrenceAreaProductRelationDelete(l.ctx, &cmsclient.PrefrenceAreaProductRelationDeleteReq{Id: productId})
 
 	//2.重新添加优选商品的关联
-	for _, item := range req.PrefrenceAreaProductRelationList {
+	for _, prefrenceAreaId := range req.PrefrenceAreaProductRelationList {
 		_, _ = l.svcCtx.Cms.PrefrenceAreaProductRelationAdd(l.ctx, &cmsclient.PrefrenceAreaProductRelationAddReq{
-			PrefrenceAreaId: item.PrefrenceAreaID,
+			PrefrenceAreaId: prefrenceAreaId,
 			ProductId:       productId,
 		})
 	}

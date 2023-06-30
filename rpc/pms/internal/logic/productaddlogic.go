@@ -37,8 +37,15 @@ func NewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Produc
 //5.添加sku库存信息
 //6.添加商品参数,添加自定义商品规格
 func (l *ProductAddLogic) ProductAdd(in *pms.ProductAddReq) (*pms.ProductAddResp, error) {
-	PromotionStartTime, _ := time.Parse("2006-01-02 15:04:05", in.PromotionStartTime)
-	PromotionEndTime, _ := time.Parse("2006-01-02 15:04:05", in.PromotionEndTime)
+	PromotionStartTime := time.Now()
+	if len(in.PromotionStartTime) > 0 {
+		PromotionStartTime, _ = time.Parse("2006-01-02 15:04:05", in.PromotionStartTime)
+	}
+
+	PromotionEndTime := time.Now()
+	if len(in.PromotionEndTime) > 0 {
+		PromotionEndTime, _ = time.Parse("2006-01-02 15:04:05", in.PromotionEndTime)
+	}
 
 	//1.创建商品
 	result, err := l.svcCtx.PmsProductModel.Insert(l.ctx, &pmsmodel.PmsProduct{
@@ -83,6 +90,7 @@ func (l *ProductAddLogic) ProductAdd(in *pms.ProductAddReq) (*pms.ProductAddResp
 		PromotionType:              in.PromotionType,
 		BrandName:                  in.BrandName,
 		ProductCategoryName:        in.ProductCategoryName,
+		ProductCategoryIdArray:     in.ProductCategoryIdArray,
 	})
 	if err != nil {
 		return nil, err

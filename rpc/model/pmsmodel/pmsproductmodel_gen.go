@@ -38,7 +38,8 @@ type (
 	PmsProduct struct {
 		Id                         int64     `db:"id"`
 		BrandId                    int64     `db:"brand_id"`
-		ProductCategoryId          int64     `db:"product_category_id"`
+		ProductCategoryId          int64     `db:"product_category_id"`       // 商品分类id
+		ProductCategoryIdArray     string    `db:"product_category_id_Array"` // 商品分类id字符串
 		FeightTemplateId           int64     `db:"feight_template_id"`
 		ProductAttributeCategoryId int64     `db:"product_attribute_category_id"`
 		Name                       string    `db:"name"`
@@ -109,14 +110,14 @@ func (m *defaultPmsProductModel) FindOne(ctx context.Context, id int64) (*PmsPro
 }
 
 func (m *defaultPmsProductModel) Insert(ctx context.Context, data *PmsProduct) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, pmsProductRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.BrandId, data.ProductCategoryId, data.FeightTemplateId, data.ProductAttributeCategoryId, data.Name, data.Pic, data.ProductSn, data.DeleteStatus, data.PublishStatus, data.NewStatus, data.RecommandStatus, data.VerifyStatus, data.Sort, data.Sale, data.Price, data.PromotionPrice, data.GiftGrowth, data.GiftPoint, data.UsePointLimit, data.SubTitle, data.Description, data.OriginalPrice, data.Stock, data.LowStock, data.Unit, data.Weight, data.PreviewStatus, data.ServiceIds, data.Keywords, data.Note, data.AlbumPics, data.DetailTitle, data.DetailDesc, data.DetailHtml, data.DetailMobileHtml, data.PromotionStartTime, data.PromotionEndTime, data.PromotionPerLimit, data.PromotionType, data.BrandName, data.ProductCategoryName)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, pmsProductRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.BrandId, data.ProductCategoryId, data.ProductCategoryIdArray, data.FeightTemplateId, data.ProductAttributeCategoryId, data.Name, data.Pic, data.ProductSn, data.DeleteStatus, data.PublishStatus, data.NewStatus, data.RecommandStatus, data.VerifyStatus, data.Sort, data.Sale, data.Price, data.PromotionPrice, data.GiftGrowth, data.GiftPoint, data.UsePointLimit, data.SubTitle, data.Description, data.OriginalPrice, data.Stock, data.LowStock, data.Unit, data.Weight, data.PreviewStatus, data.ServiceIds, data.Keywords, data.Note, data.AlbumPics, data.DetailTitle, data.DetailDesc, data.DetailHtml, data.DetailMobileHtml, data.PromotionStartTime, data.PromotionEndTime, data.PromotionPerLimit, data.PromotionType, data.BrandName, data.ProductCategoryName)
 	return ret, err
 }
 
 func (m *defaultPmsProductModel) Update(ctx context.Context, data *PmsProduct) error {
 	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, pmsProductRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.BrandId, data.ProductCategoryId, data.FeightTemplateId, data.ProductAttributeCategoryId, data.Name, data.Pic, data.ProductSn, data.DeleteStatus, data.PublishStatus, data.NewStatus, data.RecommandStatus, data.VerifyStatus, data.Sort, data.Sale, data.Price, data.PromotionPrice, data.GiftGrowth, data.GiftPoint, data.UsePointLimit, data.SubTitle, data.Description, data.OriginalPrice, data.Stock, data.LowStock, data.Unit, data.Weight, data.PreviewStatus, data.ServiceIds, data.Keywords, data.Note, data.AlbumPics, data.DetailTitle, data.DetailDesc, data.DetailHtml, data.DetailMobileHtml, data.PromotionStartTime, data.PromotionEndTime, data.PromotionPerLimit, data.PromotionType, data.BrandName, data.ProductCategoryName, data.Id)
+	_, err := m.conn.ExecCtx(ctx, query, data.BrandId, data.ProductCategoryId, data.ProductCategoryIdArray, data.FeightTemplateId, data.ProductAttributeCategoryId, data.Name, data.Pic, data.ProductSn, data.DeleteStatus, data.PublishStatus, data.NewStatus, data.RecommandStatus, data.VerifyStatus, data.Sort, data.Sale, data.Price, data.PromotionPrice, data.GiftGrowth, data.GiftPoint, data.UsePointLimit, data.SubTitle, data.Description, data.OriginalPrice, data.Stock, data.LowStock, data.Unit, data.Weight, data.PreviewStatus, data.ServiceIds, data.Keywords, data.Note, data.AlbumPics, data.DetailTitle, data.DetailDesc, data.DetailHtml, data.DetailMobileHtml, data.PromotionStartTime, data.PromotionEndTime, data.PromotionPerLimit, data.PromotionType, data.BrandName, data.ProductCategoryName, data.Id)
 	return err
 }
 

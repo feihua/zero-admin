@@ -28,7 +28,7 @@ func NewAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Addr
 func (l *AddressDeleteLogic) AddressDelete(req types.AddressDeleteReq) (resp *types.AddressDeleteResp, err error) {
 
 	_, err = l.svcCtx.Ums.MemberReceiveAddressDelete(l.ctx, &umsclient.MemberReceiveAddressDeleteReq{
-		Id: req.AddressID,
+		Ids: req.AddressID,
 	})
 
 	if err != nil {

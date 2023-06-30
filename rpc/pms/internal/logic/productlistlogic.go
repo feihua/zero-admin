@@ -24,8 +24,8 @@ func NewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Produ
 }
 
 func (l *ProductListLogic) ProductList(in *pms.ProductListReq) (*pms.ProductListResp, error) {
-	all, err := l.svcCtx.PmsProductModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductModel.Count(l.ctx)
+	all, err := l.svcCtx.PmsProductModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.PmsProductModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

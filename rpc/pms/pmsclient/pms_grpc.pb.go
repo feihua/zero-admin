@@ -28,7 +28,6 @@ type PmsClient interface {
 	ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
 	ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
 	ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
-	ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error)
 	AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error)
 	AlbumList(ctx context.Context, in *AlbumListReq, opts ...grpc.CallOption) (*AlbumListResp, error)
 	AlbumUpdate(ctx context.Context, in *AlbumUpdateReq, opts ...grpc.CallOption) (*AlbumUpdateResp, error)
@@ -160,15 +159,6 @@ func (c *pmsClient) ProductDelete(ctx context.Context, in *ProductDeleteReq, opt
 func (c *pmsClient) ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error) {
 	out := new(ProductDetailByIdResp)
 	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductDetailById", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error) {
-	out := new(ProductListByCategoryIdResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductListByCategoryId", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -842,7 +832,6 @@ type PmsServer interface {
 	ProductUpdate(context.Context, *ProductUpdateReq) (*ProductUpdateResp, error)
 	ProductDelete(context.Context, *ProductDeleteReq) (*ProductDeleteResp, error)
 	ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error)
-	ProductListByCategoryId(context.Context, *ProductListByCategoryIdReq) (*ProductListByCategoryIdResp, error)
 	AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error)
 	AlbumList(context.Context, *AlbumListReq) (*AlbumListResp, error)
 	AlbumUpdate(context.Context, *AlbumUpdateReq) (*AlbumUpdateResp, error)
@@ -940,9 +929,6 @@ func (UnimplementedPmsServer) ProductDelete(context.Context, *ProductDeleteReq) 
 }
 func (UnimplementedPmsServer) ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductDetailById not implemented")
-}
-func (UnimplementedPmsServer) ProductListByCategoryId(context.Context, *ProductListByCategoryIdReq) (*ProductListByCategoryIdResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductListByCategoryId not implemented")
 }
 func (UnimplementedPmsServer) AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AlbumAdd not implemented")
@@ -1280,24 +1266,6 @@ func _Pms_ProductDetailById_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PmsServer).ProductDetailById(ctx, req.(*ProductDetailByIdReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Pms_ProductListByCategoryId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProductListByCategoryIdReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PmsServer).ProductListByCategoryId(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductListByCategoryId",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductListByCategoryId(ctx, req.(*ProductListByCategoryIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2646,10 +2614,6 @@ var Pms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductDetailById",
 			Handler:    _Pms_ProductDetailById_Handler,
-		},
-		{
-			MethodName: "ProductListByCategoryId",
-			Handler:    _Pms_ProductListByCategoryId_Handler,
 		},
 		{
 			MethodName: "AlbumAdd",

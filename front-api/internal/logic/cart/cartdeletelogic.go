@@ -26,7 +26,7 @@ func NewCartDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartDel
 
 func (l *CartDeleteLogic) CartDelete(req types.CartDeleteReq) (resp *types.CartListResp, err error) {
 	l.svcCtx.Oms.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{
-		Id: 0,
+		Ids: req.ProductIds,
 	})
 
 	return &types.CartListResp{

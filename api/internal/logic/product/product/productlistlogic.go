@@ -3,6 +3,8 @@ package logic
 import (
 	"context"
 	"encoding/json"
+	"strconv"
+	"strings"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
@@ -27,8 +29,10 @@ func NewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Produc
 
 func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListProductResp, error) {
 	resp, err := l.svcCtx.Pms.ProductList(l.ctx, &pmsclient.ProductListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
+		Current:      req.Current,
+		PageSize:     req.PageSize,
+		Name:         req.Name,
+		VerifyStatus: req.VerifyStatus,
 	})
 
 	if err != nil {
@@ -40,6 +44,11 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 	var list []*types.ListtProductData
 
 	for _, item := range resp.List {
+		var productCategoryIdArray []int64
+		for _, s := range strings.Split(item.ProductCategoryIdArray, ",") {
+			id, _ := strconv.ParseInt(s, 10, 64)
+			productCategoryIdArray = append(productCategoryIdArray, id)
+		}
 		list = append(list, &types.ListtProductData{
 			Id:                         item.Id,
 			BrandId:                    item.BrandId,
@@ -83,6 +92,7 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 			PromotionType:              item.PromotionType,
 			BrandName:                  item.BrandName,
 			ProductCategoryName:        item.ProductCategoryName,
+			ProductCategoryIdArray:     productCategoryIdArray,
 		})
 	}
 

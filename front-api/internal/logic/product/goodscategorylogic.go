@@ -24,7 +24,7 @@ func NewGoodsCategoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) Good
 }
 
 func (l *GoodsCategoryLogic) GoodsCategory(req types.GoodsCategoryReq) (resp *types.GoodsCategoryResp, err error) {
-	result, _ := l.svcCtx.Pms.ProductListByCategoryId(l.ctx, &pmsclient.ProductListByCategoryIdReq{
+	result, _ := l.svcCtx.Pms.ProductList(l.ctx, &pmsclient.ProductListReq{
 		ProductCategoryId: req.Id,
 	})
 

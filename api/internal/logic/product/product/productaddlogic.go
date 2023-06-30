@@ -43,6 +43,7 @@ func (l *ProductAddLogic) ProductAdd(req types.AddProductReq) (*types.AddProduct
 	result, err := l.svcCtx.Pms.ProductAdd(l.ctx, &pmsclient.ProductAddReq{
 		BrandId:                    req.BrandId,
 		ProductCategoryId:          req.ProductCategoryId,
+		ProductCategoryIdArray:     req.ProductCategoryIdArray,
 		FeightTemplateId:           req.FeightTemplateId,
 		ProductAttributeCategoryId: req.ProductAttributeCategoryId,
 		Name:                       req.Name,
@@ -82,6 +83,11 @@ func (l *ProductAddLogic) ProductAdd(req types.AddProductReq) (*types.AddProduct
 		PromotionType:              req.PromotionType,
 		BrandName:                  req.BrandName,
 		ProductCategoryName:        req.ProductCategoryName,
+		MemberPriceList:            buildMemberPriceList(req),
+		ProductAttributeValueList:  buildProductAttributeValueList(req),
+		ProductFullReductionList:   buildProductFullReductionList(req),
+		ProductLadderList:          buildProductLadderList(req),
+		SkuStockList:               buildSkuStockList(req),
 	})
 
 	if err != nil {
@@ -104,11 +110,80 @@ func (l *ProductAddLogic) ProductAdd(req types.AddProductReq) (*types.AddProduct
 	}, nil
 }
 
+// 商品会员价格设置
+func buildMemberPriceList(req types.AddProductReq) []*pmsclient.MemberPriceList {
+	var memberPriceLists []*pmsclient.MemberPriceList
+	for _, item := range req.MemberPriceList {
+		memberPriceLists = append(memberPriceLists, &pmsclient.MemberPriceList{
+			MemberLevelId:   item.MemberLevelID,
+			MemberPrice:     item.MemberPrice,
+			MemberLevelName: item.MemberLevelName,
+		})
+	}
+	return memberPriceLists
+}
+
+// 商品参数及自定义规格属性
+func buildProductAttributeValueList(req types.AddProductReq) []*pmsclient.ProductAttributeValueList {
+	var attributeValueLists []*pmsclient.ProductAttributeValueList
+	for _, item := range req.ProductAttributeValueList {
+		attributeValueLists = append(attributeValueLists, &pmsclient.ProductAttributeValueList{
+			ProductAttributeId: item.ProductAttributeID,
+			AttributeValues:    item.Value,
+		})
+	}
+	return attributeValueLists
+}
+
+// 商品满减价格设置
+func buildProductFullReductionList(req types.AddProductReq) []*pmsclient.ProductFullReductionList {
+	var fullReductionLists []*pmsclient.ProductFullReductionList
+	for _, item := range req.ProductFullReductionList {
+		fullReductionLists = append(fullReductionLists, &pmsclient.ProductFullReductionList{
+			FullPrice:   item.FullPrice,
+			ReducePrice: item.ReducePrice,
+		})
+	}
+	return fullReductionLists
+}
+
+// 商品阶梯价格设置
+func buildProductLadderList(req types.AddProductReq) []*pmsclient.ProductLadderList {
+	var ladderLists []*pmsclient.ProductLadderList
+	for _, item := range req.ProductLadderList {
+		ladderLists = append(ladderLists, &pmsclient.ProductLadderList{
+			Count:    item.Count,
+			Discount: item.Discount,
+			Price:    item.Price,
+		})
+	}
+	return ladderLists
+}
+
+// 商品的sku库存信息
+func buildSkuStockList(req types.AddProductReq) []*pmsclient.SkuStockList {
+	var skuStockLists []*pmsclient.SkuStockList
+	for _, item := range req.SkuStockList {
+		skuStockLists = append(skuStockLists, &pmsclient.SkuStockList{
+			SkuCode:        item.SkuCode,
+			Price:          item.Price,
+			Stock:          item.Stock,
+			LowStock:       item.LowStock,
+			Pic:            item.Pic,
+			Sale:           item.Sale,
+			PromotionPrice: item.PromotionPrice,
+			LockStock:      item.LockStock,
+			SpData:         item.SPData,
+		})
+	}
+	return skuStockLists
+}
+
 // 添加专题关联
 func addSubjectProductRelation(req types.AddProductReq, l *ProductAddLogic, productId int32) {
-	for _, item := range req.SubjectProductRelationList {
+	for _, subjectId := range req.SubjectProductRelationList {
 		_, _ = l.svcCtx.Cms.SubjectProductRelationAdd(l.ctx, &cmsclient.SubjectProductRelationAddReq{
-			SubjectId: item.SubjectID,
+			SubjectId: subjectId,
 			ProductId: int64(productId),
 		})
 	}
@@ -116,9 +191,9 @@ func addSubjectProductRelation(req types.AddProductReq, l *ProductAddLogic, prod
 
 // 添加优选商品关联
 func addPrefrenceAreaProductRelation(req types.AddProductReq, l *ProductAddLogic, productId int32) {
-	for _, item := range req.PrefrenceAreaProductRelationList {
+	for _, prefrenceAreaId := range req.PrefrenceAreaProductRelationList {
 		_, _ = l.svcCtx.Cms.PrefrenceAreaProductRelationAdd(l.ctx, &cmsclient.PrefrenceAreaProductRelationAddReq{
-			PrefrenceAreaId: item.PrefrenceAreaID,
+			PrefrenceAreaId: prefrenceAreaId,
 			ProductId:       int64(productId),
 		})
 	}

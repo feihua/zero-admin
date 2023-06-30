@@ -85,6 +85,7 @@ func (l *ProductUpdateLogic) ProductUpdate(in *pms.ProductUpdateReq) (*pms.Produ
 		PromotionType:              in.PromotionType,
 		BrandName:                  in.BrandName,
 		ProductCategoryName:        in.ProductCategoryName,
+		ProductCategoryIdArray:     in.ProductCategoryIdArray,
 	})
 	if err != nil {
 		return nil, err

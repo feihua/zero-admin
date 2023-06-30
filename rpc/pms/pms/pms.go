@@ -158,9 +158,6 @@ type (
 	ProductLadderListResp                      = pmsclient.ProductLadderListResp
 	ProductLadderUpdateReq                     = pmsclient.ProductLadderUpdateReq
 	ProductLadderUpdateResp                    = pmsclient.ProductLadderUpdateResp
-	ProductListByCategoryIdData                = pmsclient.ProductListByCategoryIdData
-	ProductListByCategoryIdReq                 = pmsclient.ProductListByCategoryIdReq
-	ProductListByCategoryIdResp                = pmsclient.ProductListByCategoryIdResp
 	ProductListData                            = pmsclient.ProductListData
 	ProductListReq                             = pmsclient.ProductListReq
 	ProductListResp                            = pmsclient.ProductListResp
@@ -202,7 +199,6 @@ type (
 		ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
 		ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
 		ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
-		ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error)
 		AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error)
 		AlbumList(ctx context.Context, in *AlbumListReq, opts ...grpc.CallOption) (*AlbumListResp, error)
 		AlbumUpdate(ctx context.Context, in *AlbumUpdateReq, opts ...grpc.CallOption) (*AlbumUpdateResp, error)
@@ -317,11 +313,6 @@ func (m *defaultPms) ProductDelete(ctx context.Context, in *ProductDeleteReq, op
 func (m *defaultPms) ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error) {
 	client := pmsclient.NewPmsClient(m.cli.Conn())
 	return client.ProductDetailById(ctx, in, opts...)
-}
-
-func (m *defaultPms) ProductListByCategoryId(ctx context.Context, in *ProductListByCategoryIdReq, opts ...grpc.CallOption) (*ProductListByCategoryIdResp, error) {
-	client := pmsclient.NewPmsClient(m.cli.Conn())
-	return client.ProductListByCategoryId(ctx, in, opts...)
 }
 
 func (m *defaultPms) AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error) {

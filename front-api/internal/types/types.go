@@ -59,8 +59,8 @@ type AddressSaveResp struct {
 }
 
 type AddressDeleteReq struct {
-	UserID    int64 `json:"userId"`
-	AddressID int64 `json:"addressID"`
+	UserID    int64   `json:"userId"`
+	AddressID []int64 `json:"addressID"`
 }
 
 type AddressDeleteResp struct {
