@@ -50,6 +50,7 @@ import (
 	syslog "zero-admin/api/internal/handler/sys/log"
 	sysmenu "zero-admin/api/internal/handler/sys/menu"
 	sysrole "zero-admin/api/internal/handler/sys/role"
+	sysupload "zero-admin/api/internal/handler/sys/upload"
 	sysuser "zero-admin/api/internal/handler/sys/user"
 	"zero-admin/api/internal/svc"
 
@@ -350,6 +351,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/job"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/upload",
+					Handler: sysupload.UploadHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys"),
 	)
 
 	server.AddRoutes(

@@ -8,6 +8,8 @@ import "sys/syslog.api"
 import "sys/config.api"
 import "sys/job.api"
 
+import "sys/upload.api"
+
 import "oms/cart_item.api"
 import "oms/order.api"
 import "oms/order_company_address.api"

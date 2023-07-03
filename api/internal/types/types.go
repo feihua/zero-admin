@@ -720,6 +720,12 @@ type DeleteJobResp struct {
 	Message string `json:"message"`
 }
 
+type UploadResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+	Data    string `json:"data"`
+}
+
 type AddCartItemReq struct {
 	ProductId         int64   `json:"productId"`
 	ProductSkuId      int64   `json:"productSkuId"`
@@ -1412,7 +1418,7 @@ type AddProductReq struct {
 	PromotionStartTime               string                      `json:"promotionStartTime,optional"`        // 促销开始时间
 	PromotionEndTime                 string                      `json:"promotionEndTime,optional"`          // 促销结束时间
 	PromotionPerLimit                int64                       `json:"promotionPerLimit,optional"`         // 活动限购数量
-	PromotionType                    int64                       `json:"promotionType"`                      // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+	PromotionType                    int64                       `json:"promotionType,default=0"`            // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
 	BrandName                        string                      `json:"brandName,optional"`                 // 品牌名称
 	ProductCategoryName              string                      `json:"productCategoryName,optional"`       // 商品分类名称
 	ProductLadderList                []ProductLadderList         `json:"productLadderList,optional"`         // 商品阶梯价格设置
