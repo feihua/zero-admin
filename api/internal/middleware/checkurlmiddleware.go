@@ -66,7 +66,6 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		logx.Infof("用户: %s,访问: %s路径", userName, r.RequestURI)
 		next(w, r)
 	}
 }

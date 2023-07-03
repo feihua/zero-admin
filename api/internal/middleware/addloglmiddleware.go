@@ -23,7 +23,9 @@ func NewAddLogMiddleware(Sys sys.Sys) *AddLogMiddleware {
 func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		if r.RequestURI == "/api/sys/user/login" {
+		uri := r.RequestURI
+		if uri == "/api/sys/user/login" || uri == "/api/sys/upload" {
+			logx.Infof("Request: %s %s", r.Method, uri)
 			next(w, r)
 			return
 		}
@@ -42,7 +44,7 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		r.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 
 		// 打印请求参数日志
-		logx.Infof("Request: %s %s %s", r.Method, r.RequestURI, body)
+		logx.Infof("Request: %s %s %s", r.Method, uri, body)
 
 		// 继续处理请求
 		next(w, r)
@@ -63,7 +65,7 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		_, _ = m.Sys.SysLogAdd(r.Context(), &sysclient.SysLogAddReq{
 			UserName:  userName,
 			Operation: r.Method,
-			Method:    r.RequestURI,
+			Method:    uri,
 			Params:    string(body),
 			Time:      duration.Milliseconds(),
 			Ip:        httpx.GetRemoteAddr(r),
