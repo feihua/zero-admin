@@ -13,14 +13,14 @@ type (
     }
     ListSysLogData struct {
         Id int64 `json:"id"`                           // 编号
-        UserName string `json:"user_name"`             // 用户名
+        UserName string `json:"userName"`              // 用户名
         Operation string `json:"operation"`            // 用户操作
         Method string `json:"method"`                  // 请求方法
-        RequestParams string `json:"request_params"`   // 请求参数
-        ResponseParams string `json:"response_params"` // 响应参数
+        RequestParams string `json:"requestParams"`    // 请求参数
+        ResponseParams string `json:"responseParams"`  // 响应参数
         Time int64 `json:"time"`                       // 执行时长(毫秒)
         Ip string `json:"ip"`                          // IP地址
-        OperationTime string `json:"operation_time"`   // 操作时间
+        OperationTime string `json:"operationTime"`    // 操作时间
     }
     ListSysLogResp struct {
         Code string `json:"code"`
