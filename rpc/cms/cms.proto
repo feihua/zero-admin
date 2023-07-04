@@ -131,23 +131,14 @@ message SubjectProductRelationUpdateResp {
 }
 
 message SubjectProductRelationListReq {
-  int64 Id = 1; //
-  int64 SubjectId = 2; //
-  int64 ProductId = 3; //
-
-}
-
-message SubjectProductRelationListData {
-  int64 Id = 1; //
-  int64 SubjectId = 2; //
-  int64 ProductId = 3; //
+  int64 ProductId = 1; // 商品Id
 
 }
 
 message SubjectProductRelationListResp {
-  int64 total = 1;
-  repeated  SubjectProductRelationListData list = 2;
+  repeated int64 SubjectId = 1; // 专题id
 }
+
 
 //商品优选
 message PrefrenceAreaAddReq {
@@ -240,22 +231,13 @@ message PrefrenceAreaProductRelationUpdateResp {
 }
 
 message PrefrenceAreaProductRelationListReq {
-  int64 Id = 1; //
-  int64 PrefrenceAreaId = 2; //
-  int64 ProductId = 3; //
-
-}
-
-message PrefrenceAreaProductRelationListData {
-  int64 Id = 1; //
-  int64 PrefrenceAreaId = 2; //
-  int64 ProductId = 3; //
+  int64 ProductId = 1; //商品id
 
 }
 
 message PrefrenceAreaProductRelationListResp {
-  int64 total = 1;
-  repeated  PrefrenceAreaProductRelationListData list = 2;
+  repeated int64 PrefrenceAreaId = 1; //优选id
+
 }
 
 service Cms {

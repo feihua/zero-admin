@@ -24,7 +24,6 @@ type (
 	PrefrenceAreaProductRelationAddResp    = cmsclient.PrefrenceAreaProductRelationAddResp
 	PrefrenceAreaProductRelationDeleteReq  = cmsclient.PrefrenceAreaProductRelationDeleteReq
 	PrefrenceAreaProductRelationDeleteResp = cmsclient.PrefrenceAreaProductRelationDeleteResp
-	PrefrenceAreaProductRelationListData   = cmsclient.PrefrenceAreaProductRelationListData
 	PrefrenceAreaProductRelationListReq    = cmsclient.PrefrenceAreaProductRelationListReq
 	PrefrenceAreaProductRelationListResp   = cmsclient.PrefrenceAreaProductRelationListResp
 	PrefrenceAreaProductRelationUpdateReq  = cmsclient.PrefrenceAreaProductRelationUpdateReq
@@ -43,7 +42,6 @@ type (
 	SubjectProductRelationAddResp          = cmsclient.SubjectProductRelationAddResp
 	SubjectProductRelationDeleteReq        = cmsclient.SubjectProductRelationDeleteReq
 	SubjectProductRelationDeleteResp       = cmsclient.SubjectProductRelationDeleteResp
-	SubjectProductRelationListData         = cmsclient.SubjectProductRelationListData
 	SubjectProductRelationListReq          = cmsclient.SubjectProductRelationListReq
 	SubjectProductRelationListResp         = cmsclient.SubjectProductRelationListResp
 	SubjectProductRelationUpdateReq        = cmsclient.SubjectProductRelationUpdateReq

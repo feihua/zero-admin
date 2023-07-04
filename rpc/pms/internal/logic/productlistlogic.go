@@ -79,6 +79,7 @@ func (l *ProductListLogic) ProductList(in *pms.ProductListReq) (*pms.ProductList
 			PromotionType:              product.PromotionType,
 			BrandName:                  product.BrandName,
 			ProductCategoryName:        product.ProductCategoryName,
+			ProductCategoryIdArray:     product.ProductCategoryIdArray,
 		})
 	}
 

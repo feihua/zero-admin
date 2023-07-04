@@ -15,8 +15,7 @@ type (
 	// and implement the added methods in customCmsSubjectProductRelationModel.
 	CmsSubjectProductRelationModel interface {
 		cmsSubjectProductRelationModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]CmsSubjectProductRelation, error)
+		FindAll(ctx context.Context, productId int64) (*[]CmsSubjectProductRelation, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		DeleteByProductId(ctx context.Context, productId int64) error
 	}
@@ -33,11 +32,11 @@ func NewCmsSubjectProductRelationModel(conn sqlx.SqlConn) CmsSubjectProductRelat
 	}
 }
 
-func (m *customCmsSubjectProductRelationModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]CmsSubjectProductRelation, error) {
+func (m *customCmsSubjectProductRelationModel) FindAll(ctx context.Context, productId int64) (*[]CmsSubjectProductRelation, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", cmsSubjectProductRelationRows, m.table)
+	query := fmt.Sprintf("select %s from %s where product_id =? ", cmsSubjectProductRelationRows, m.table)
 	var resp []CmsSubjectProductRelation
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, productId)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -45,22 +44,6 @@ func (m *customCmsSubjectProductRelationModel) FindAll(ctx context.Context, Curr
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *customCmsSubjectProductRelationModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-
-	var count int64
-	err := m.conn.QueryRow(&count, query)
-
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 

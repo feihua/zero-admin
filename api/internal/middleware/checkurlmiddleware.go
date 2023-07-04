@@ -26,7 +26,7 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		userId := r.Context().Value("userId").(json.Number).String()
 		userName := r.Context().Value("userName").(string)
 		if userId == "" || userName == "" {
-			logx.Errorf("缺少必要参数x-user-id")
+			logx.WithContext(r.Context()).Errorf("缺少必要参数x-user-id")
 			httpx.Error(w, errorx.NewDefaultError("缺少必要参数x-user-id"))
 			return
 		}
@@ -38,13 +38,13 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		//获取用户能访问的url
 		urls, err := m.Redis.Get(userId)
 		if err != nil {
-			logx.Errorf("用户：%s,获取redis连接异常", userName)
+			logx.WithContext(r.Context()).Errorf("用户：%s,获取redis连接异常", userName)
 			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName)))
 			return
 		}
 
 		if len(strings.TrimSpace(urls)) == 0 {
-			logx.Errorf("用户: %s,还没有登录", userName)
+			logx.WithContext(r.Context()).Errorf("用户: %s,还没有登录", userName)
 			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,还没有登录,请先登录", userName)))
 			return
 		}
@@ -60,7 +60,7 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		}
 
 		if !b {
-			logx.Errorf("用户: %s,没有访问: %s路径的权限", userName, r.RequestURI)
+			logx.WithContext(r.Context()).Errorf("用户: %s,没有访问: %s路径的权限", userName, r.RequestURI)
 			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,没有访问: %s,路径的的权限,请联系管理员", userName, r.RequestURI)))
 			return
 		}

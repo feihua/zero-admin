@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-
+	"encoding/json"
 	"zero-admin/rpc/cms/cmsclient"
 	"zero-admin/rpc/cms/internal/svc"
 
@@ -23,8 +23,26 @@ func NewSubjectProductRelationListLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// SubjectProductRelationList 查询关联专题
 func (l *SubjectProductRelationListLogic) SubjectProductRelationList(in *cmsclient.SubjectProductRelationListReq) (*cmsclient.SubjectProductRelationListResp, error) {
-	// todo: add your logic here and delete this line
+	all, err := l.svcCtx.CmsPrefrenceAreaProductRelationModel.FindAll(l.ctx, in.ProductId)
 
-	return &cmsclient.SubjectProductRelationListResp{}, nil
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.WithContext(l.ctx).Errorf("查询关联专题列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
+
+	var list []int64
+	for _, item := range *all {
+		list = append(list, item.PrefrenceAreaId)
+	}
+
+	reqStr, _ := json.Marshal(in)
+	listStr, _ := json.Marshal(list)
+	logx.WithContext(l.ctx).Infof("查询关联专题列表信息,参数：%s,响应：%s", reqStr, listStr)
+
+	return &cmsclient.SubjectProductRelationListResp{
+		SubjectId: list,
+	}, nil
 }
