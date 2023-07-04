@@ -44,13 +44,11 @@ func (l *SysLogListLogic) SysLogList(req types.ListSysLogReq) (*types.ListSysLog
 			UserName:       log.UserName,
 			Operation:      log.Operation,
 			Method:         log.Method,
-			Params:         log.Params,
+			RequestParams:  log.RequestParams,
 			Time:           log.Time,
 			Ip:             log.Ip,
-			CreateBy:       log.CreateBy,
-			CreateTime:     log.CreateTime,
-			LastUpdateBy:   log.LastUpdateBy,
-			LastUpdateTime: log.LastUpdateTime,
+			ResponseParams: log.ResponseParams,
+			OperationTime:  log.OperationTime,
 		})
 	}
 

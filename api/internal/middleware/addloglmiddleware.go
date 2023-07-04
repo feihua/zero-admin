@@ -46,30 +46,50 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		// 打印请求参数日志
 		logx.Infof("Request: %s %s %s", r.Method, uri, body)
 
-		// 继续处理请求
-		next(w, r)
+		// 创建一个自定义的 ResponseWriter，用于记录响应
+		recorder := &responseRecorder{
+			ResponseWriter: w,
+			statusCode:     http.StatusOK,
+			body:           make([]byte, 0),
+		}
 
-		// 记录响应日志
-		//response := httpx.Response{ResponseWriter: w}
-		//responseData, err := response.DumpBody()
-		//if err != nil {
-		//	logx.Errorf("Failed to read response body: %v", err)
-		//}
+		// 调用下一个处理器，捕获响应
+		next(recorder, r)
 
-		//// 打印响应日志
-		//logx.Infof("Response: %s %s %s", r.Method, r.RequestURI, responseData)
+		// 打印响应日志
+		responseBoy := string(recorder.body)
+		logx.Infof("Response: %s %s %s", r.Method, r.RequestURI, responseBoy)
 
 		// 打印请求和响应耗时
 		duration := time.Since(startTime)
 		//// 添加操作日志
 		_, _ = m.Sys.SysLogAdd(r.Context(), &sysclient.SysLogAddReq{
-			UserName:  userName,
-			Operation: r.Method,
-			Method:    uri,
-			Params:    string(body),
-			Time:      duration.Milliseconds(),
-			Ip:        httpx.GetRemoteAddr(r),
-			CreateBy:  userName,
+			UserName:       userName,
+			Operation:      r.Method,
+			Method:         uri,
+			RequestParams:  string(body),
+			Time:           duration.Milliseconds(),
+			Ip:             httpx.GetRemoteAddr(r),
+			ResponseParams: responseBoy,
 		})
 	}
+}
+
+// 自定义的 ResponseWriter
+type responseRecorder struct {
+	http.ResponseWriter
+	statusCode int
+	body       []byte
+}
+
+// WriteHeader 重写 WriteHeader 方法，捕获状态码
+func (r *responseRecorder) WriteHeader(statusCode int) {
+	r.statusCode = statusCode
+	r.ResponseWriter.WriteHeader(statusCode)
+}
+
+// 重写 Write 方法，捕获响应数据
+func (r *responseRecorder) Write(body []byte) (int, error) {
+	r.body = body
+	return r.ResponseWriter.Write(body)
 }

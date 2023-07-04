@@ -12,17 +12,15 @@ type (
         Method string `json:"method,optional"`                      // 请求方法
     }
     ListSysLogData struct {
-        Id int64 `json:"id"`                               // 编号
-        UserName string `json:"userName"`                  // 用户名
-        Operation string `json:"operation"`                // 用户操作
-        Method string `json:"method"`                      // 请求方法
-        Params string `json:"params"`                      // 请求参数
-        Time int64 `json:"time"`                           // 执行时长(毫秒)
-        Ip string `json:"ip"`                              // IP地址
-        CreateBy string `json:"createBy"`                  // 创建人
-        CreateTime string `json:"createTime"`              // 创建时间
-        LastUpdateBy string `json:"lastUpdateBy"`          // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`      // 更新时间
+        Id int64 `json:"id"`                           // 编号
+        UserName string `json:"user_name"`             // 用户名
+        Operation string `json:"operation"`            // 用户操作
+        Method string `json:"method"`                  // 请求方法
+        RequestParams string `json:"request_params"`   // 请求参数
+        ResponseParams string `json:"response_params"` // 响应参数
+        Time int64 `json:"time"`                       // 执行时长(毫秒)
+        Ip string `json:"ip"`                          // IP地址
+        OperationTime string `json:"operation_time"`   // 操作时间
     }
     ListSysLogResp struct {
         Code string `json:"code"`

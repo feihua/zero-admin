@@ -35,15 +35,15 @@ func (l *SysLogListLogic) SysLogList(in *sys.SysLogListReq) (*sys.SysLogListResp
 	for _, log := range *all {
 		fmt.Println(log)
 		list = append(list, &sys.SysLogListData{
-			Id:         log.Id,
-			UserName:   log.UserName,
-			Operation:  log.Operation,
-			Method:     log.Method,
-			Params:     log.Params,
-			Time:       log.Time,
-			Ip:         log.Ip.String,
-			CreateBy:   log.CreateBy,
-			CreateTime: log.CreateTime.Format("2006-01-02 15:04:05"),
+			Id:             log.Id,
+			UserName:       log.UserName,
+			Operation:      log.Operation,
+			Method:         log.Method,
+			RequestParams:  log.RequestParams,
+			Time:           log.Time,
+			Ip:             log.Ip.String,
+			ResponseParams: log.ResponseParams.String,
+			OperationTime:  log.OperationTime.Format("2006-01-02 15:04:05"),
 		})
 	}
 

@@ -41,7 +41,7 @@ func (m *customSysLogModel) FindAll(ctx context.Context, in *sys.SysLogListReq) 
 	if len(in.Method) > 0 {
 		where = where + fmt.Sprintf(" AND method like '%%%s%%'", in.Method)
 	}
-	where = where + fmt.Sprint(" ORDER BY create_time DESC")
+	where = where + fmt.Sprint(" ORDER BY operation_time DESC")
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", sysLogRows, m.table, where)
 	var resp []SysLog
 	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)

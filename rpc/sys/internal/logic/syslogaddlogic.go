@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"database/sql"
+	"time"
 	"zero-admin/rpc/model/sysmodel"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -27,13 +28,14 @@ func NewSysLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLogA
 
 func (l *SysLogAddLogic) SysLogAdd(in *sys.SysLogAddReq) (*sys.SysLogAddResp, error) {
 	_, err := l.svcCtx.SysLogModel.Insert(l.ctx, &sysmodel.SysLog{
-		UserName:  in.UserName,
-		Operation: in.Operation,
-		Method:    in.Method,
-		Params:    in.Params,
-		Time:      in.Time,
-		Ip:        sql.NullString{String: in.Ip, Valid: true},
-		CreateBy:  in.CreateBy,
+		UserName:       in.UserName,
+		Operation:      in.Operation,
+		Method:         in.Method,
+		RequestParams:  in.RequestParams,
+		ResponseParams: sql.NullString{String: in.ResponseParams, Valid: true},
+		Time:           in.Time,
+		Ip:             sql.NullString{String: in.Ip, Valid: true},
+		OperationTime:  time.Now(),
 	})
 
 	if err != nil {

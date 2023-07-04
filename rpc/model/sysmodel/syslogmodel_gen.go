@@ -36,15 +36,15 @@ type (
 	}
 
 	SysLog struct {
-		Id         int64          `db:"id"`          // 编号
-		UserName   string         `db:"user_name"`   // 用户名
-		Operation  string         `db:"operation"`   // 用户操作
-		Method     string         `db:"method"`      // 请求方法
-		Params     string         `db:"params"`      // 请求参数
-		Time       int64          `db:"time"`        // 执行时长(毫秒)
-		Ip         sql.NullString `db:"ip"`          // IP地址
-		CreateBy   string         `db:"create_by"`   // 创建人
-		CreateTime time.Time      `db:"create_time"` // 创建时间
+		Id             int64          `db:"id"`              // 编号
+		UserName       string         `db:"user_name"`       // 用户名
+		Operation      string         `db:"operation"`       // 用户操作
+		Method         string         `db:"method"`          // 请求方法
+		RequestParams  string         `db:"request_params"`  // 请求参数
+		ResponseParams sql.NullString `db:"response_params"` // 响应参数
+		Time           int64          `db:"time"`            // 执行时长(毫秒)
+		Ip             sql.NullString `db:"ip"`              // IP地址
+		OperationTime  time.Time      `db:"operation_time"`  // 操作时间
 	}
 )
 
@@ -76,14 +76,14 @@ func (m *defaultSysLogModel) FindOne(ctx context.Context, id int64) (*SysLog, er
 }
 
 func (m *defaultSysLogModel) Insert(ctx context.Context, data *SysLog) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, sysLogRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.UserName, data.Operation, data.Method, data.Params, data.Time, data.Ip, data.CreateBy)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysLogRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.UserName, data.Operation, data.Method, data.RequestParams, data.ResponseParams, data.Time, data.Ip, data.OperationTime)
 	return ret, err
 }
 
 func (m *defaultSysLogModel) Update(ctx context.Context, data *SysLog) error {
 	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, sysLogRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.UserName, data.Operation, data.Method, data.Params, data.Time, data.Ip, data.CreateBy, data.Id)
+	_, err := m.conn.ExecCtx(ctx, query, data.UserName, data.Operation, data.Method, data.RequestParams, data.ResponseParams, data.Time, data.Ip, data.OperationTime, data.Id)
 	return err
 }
 

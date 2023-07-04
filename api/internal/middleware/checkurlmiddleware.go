@@ -32,7 +32,6 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		}
 
 		if r.RequestURI == "/api/sys/user/currentUser" || r.RequestURI == "/api/sys/user/selectAllData" || r.RequestURI == "/api/sys/role/queryMenuByRoleId" {
-			logx.Infof("用户: %s,访问: %s路径", userName, r.RequestURI)
 			next(w, r)
 			return
 		}
