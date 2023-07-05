@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/sms/sms"
 )
 
 var _ SmsFlashPromotionModel = (*customSmsFlashPromotionModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customSmsFlashPromotionModel.
 	SmsFlashPromotionModel interface {
 		smsFlashPromotionModel
-		Count(ctx context.Context, title string, status int64) (int64, error)
-		FindAll(ctx context.Context, title string, status int64, Current int64, PageSize int64) (*[]SmsFlashPromotion, error)
+		Count(ctx context.Context, in *sms.FlashPromotionListReq) (int64, error)
+		FindAll(ctx context.Context, in *sms.FlashPromotionListReq) (*[]SmsFlashPromotion, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,18 +33,24 @@ func NewSmsFlashPromotionModel(conn sqlx.SqlConn) SmsFlashPromotionModel {
 	}
 }
 
-func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, title string, status int64, Current int64, PageSize int64) (*[]SmsFlashPromotion, error) {
+func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, in *sms.FlashPromotionListReq) (*[]SmsFlashPromotion, error) {
 
 	where := "1=1"
-	if len(title) > 0 {
-		where = where + fmt.Sprintf(" AND title like '%%%s%%'", title)
+	if len(in.Title) > 0 {
+		where = where + fmt.Sprintf(" AND title like '%%%s%%'", in.Title)
 	}
-	if status != 2 {
-		where = where + fmt.Sprintf(" AND status = %d", status)
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	if len(in.StartDate) > 0 {
+		where = where + fmt.Sprintf(" AND start_date >= '%s'", in.StartDate)
+	}
+	if len(in.EndDate) > 0 {
+		where = where + fmt.Sprintf(" AND end_date <= '%s'", in.EndDate)
 	}
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", smsFlashPromotionRows, m.table, where)
 	var resp []SmsFlashPromotion
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -54,13 +61,19 @@ func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, title string
 	}
 }
 
-func (m *customSmsFlashPromotionModel) Count(ctx context.Context, title string, status int64) (int64, error) {
+func (m *customSmsFlashPromotionModel) Count(ctx context.Context, in *sms.FlashPromotionListReq) (int64, error) {
 	where := "1=1"
-	if len(title) > 0 {
-		where = where + fmt.Sprintf(" AND title like '%%%s%%'", title)
+	if len(in.Title) > 0 {
+		where = where + fmt.Sprintf(" AND title like '%%%s%%'", in.Title)
 	}
-	if status != 2 {
-		where = where + fmt.Sprintf(" AND status = %d", status)
+	if in.Status != 2 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+	if len(in.StartDate) > 0 {
+		where = where + fmt.Sprintf(" AND start_date >= '%s'", in.StartDate)
+	}
+	if len(in.EndDate) > 0 {
+		where = where + fmt.Sprintf(" AND end_date <= '%s'", in.EndDate)
 	}
 	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 

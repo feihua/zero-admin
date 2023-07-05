@@ -2325,10 +2325,12 @@ type AddFlashPromotionResp struct {
 }
 
 type ListFlashPromotionReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	Title    string `json:"title,optional"`    //标题
-	Status   int64  `json:"status,,default=2"` // 上下线状态
+	Current   int64  `json:"current,default=1"`
+	PageSize  int64  `json:"pageSize,default=20"`
+	Title     string `json:"title,optional"`     //标题
+	Status    int64  `json:"status,,default=2"`  // 上下线状态
+	StartDate string `json:"startDate,optional"` // 开始日期
+	EndDate   string `json:"endDate,optional"`   // 结束日期
 }
 
 type ListtFlashPromotionData struct {

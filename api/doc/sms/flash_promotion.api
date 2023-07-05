@@ -20,6 +20,8 @@ type (
         PageSize int64 `json:"pageSize,default=20"`
         Title string `json:"title,optional"`            //标题
         Status int64 `json:"status,,default=2"`         // 上下线状态
+        StartDate string `json:"startDate,optional"`    // 开始日期
+        EndDate string `json:"endDate,optional"`        // 结束日期
     }
     ListtFlashPromotionData struct {
         Id int64 `json:"id"`
