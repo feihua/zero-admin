@@ -3,6 +3,7 @@ package svc
 import (
 	"github.com/zeromicro/go-zero/zrpc"
 	"zero-admin/front-api/internal/config"
+	"zero-admin/rpc/cms/cms"
 	"zero-admin/rpc/oms/oms"
 	"zero-admin/rpc/pay/pay"
 	"zero-admin/rpc/pms/pms"
@@ -20,6 +21,7 @@ type ServiceContext struct {
 	Oms oms.Oms
 	Sms sms.Sms
 	Pay pay.Pay
+	Cms cms.Cms
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -32,5 +34,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Oms: oms.NewOms(zrpc.MustNewClient(c.OmsRpc)),
 		Sms: sms.NewSms(zrpc.MustNewClient(c.SmsRpc)),
 		Pay: pay.NewPay(zrpc.MustNewClient(c.PayRpc)),
+		Cms: cms.NewCms(zrpc.MustNewClient(c.CmsRpc)),
 	}
 }

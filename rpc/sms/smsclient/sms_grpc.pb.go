@@ -46,6 +46,7 @@ type SmsClient interface {
 	FlashPromotionList(ctx context.Context, in *FlashPromotionListReq, opts ...grpc.CallOption) (*FlashPromotionListResp, error)
 	FlashPromotionUpdate(ctx context.Context, in *FlashPromotionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionUpdateResp, error)
 	FlashPromotionDelete(ctx context.Context, in *FlashPromotionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionDeleteResp, error)
+	FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error)
 	FlashPromotionProductRelationAdd(ctx context.Context, in *FlashPromotionProductRelationAddReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationAddResp, error)
 	FlashPromotionProductRelationList(ctx context.Context, in *FlashPromotionProductRelationListReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationListResp, error)
 	FlashPromotionProductRelationUpdate(ctx context.Context, in *FlashPromotionProductRelationUpdateReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationUpdateResp, error)
@@ -54,6 +55,7 @@ type SmsClient interface {
 	FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error)
 	FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error)
 	FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error)
+	FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error)
 	HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error)
 	HomeAdvertiseList(ctx context.Context, in *HomeAdvertiseListReq, opts ...grpc.CallOption) (*HomeAdvertiseListResp, error)
 	HomeAdvertiseUpdate(ctx context.Context, in *HomeAdvertiseUpdateReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error)
@@ -300,6 +302,15 @@ func (c *smsClient) FlashPromotionDelete(ctx context.Context, in *FlashPromotion
 	return out, nil
 }
 
+func (c *smsClient) FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error) {
+	out := new(FlashPromotionListByDateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionListByDate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *smsClient) FlashPromotionProductRelationAdd(ctx context.Context, in *FlashPromotionProductRelationAddReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationAddResp, error) {
 	out := new(FlashPromotionProductRelationAddResp)
 	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionProductRelationAdd", in, out, opts...)
@@ -366,6 +377,15 @@ func (c *smsClient) FlashPromotionSessionUpdate(ctx context.Context, in *FlashPr
 func (c *smsClient) FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error) {
 	out := new(FlashPromotionSessionDeleteResp)
 	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionSessionDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *smsClient) FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error) {
+	out := new(FlashPromotionSessionByTimeResp)
+	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionSessionByTime", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -580,6 +600,7 @@ type SmsServer interface {
 	FlashPromotionList(context.Context, *FlashPromotionListReq) (*FlashPromotionListResp, error)
 	FlashPromotionUpdate(context.Context, *FlashPromotionUpdateReq) (*FlashPromotionUpdateResp, error)
 	FlashPromotionDelete(context.Context, *FlashPromotionDeleteReq) (*FlashPromotionDeleteResp, error)
+	FlashPromotionListByDate(context.Context, *FlashPromotionListByDateReq) (*FlashPromotionListByDateResp, error)
 	FlashPromotionProductRelationAdd(context.Context, *FlashPromotionProductRelationAddReq) (*FlashPromotionProductRelationAddResp, error)
 	FlashPromotionProductRelationList(context.Context, *FlashPromotionProductRelationListReq) (*FlashPromotionProductRelationListResp, error)
 	FlashPromotionProductRelationUpdate(context.Context, *FlashPromotionProductRelationUpdateReq) (*FlashPromotionProductRelationUpdateResp, error)
@@ -588,6 +609,7 @@ type SmsServer interface {
 	FlashPromotionSessionList(context.Context, *FlashPromotionSessionListReq) (*FlashPromotionSessionListResp, error)
 	FlashPromotionSessionUpdate(context.Context, *FlashPromotionSessionUpdateReq) (*FlashPromotionSessionUpdateResp, error)
 	FlashPromotionSessionDelete(context.Context, *FlashPromotionSessionDeleteReq) (*FlashPromotionSessionDeleteResp, error)
+	FlashPromotionSessionByTime(context.Context, *FlashPromotionSessionByTimeReq) (*FlashPromotionSessionByTimeResp, error)
 	HomeAdvertiseAdd(context.Context, *HomeAdvertiseAddReq) (*HomeAdvertiseAddResp, error)
 	HomeAdvertiseList(context.Context, *HomeAdvertiseListReq) (*HomeAdvertiseListResp, error)
 	HomeAdvertiseUpdate(context.Context, *HomeAdvertiseUpdateReq) (*HomeAdvertiseUpdateResp, error)
@@ -687,6 +709,9 @@ func (UnimplementedSmsServer) FlashPromotionUpdate(context.Context, *FlashPromot
 func (UnimplementedSmsServer) FlashPromotionDelete(context.Context, *FlashPromotionDeleteReq) (*FlashPromotionDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionDelete not implemented")
 }
+func (UnimplementedSmsServer) FlashPromotionListByDate(context.Context, *FlashPromotionListByDateReq) (*FlashPromotionListByDateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionListByDate not implemented")
+}
 func (UnimplementedSmsServer) FlashPromotionProductRelationAdd(context.Context, *FlashPromotionProductRelationAddReq) (*FlashPromotionProductRelationAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationAdd not implemented")
 }
@@ -710,6 +735,9 @@ func (UnimplementedSmsServer) FlashPromotionSessionUpdate(context.Context, *Flas
 }
 func (UnimplementedSmsServer) FlashPromotionSessionDelete(context.Context, *FlashPromotionSessionDeleteReq) (*FlashPromotionSessionDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionDelete not implemented")
+}
+func (UnimplementedSmsServer) FlashPromotionSessionByTime(context.Context, *FlashPromotionSessionByTimeReq) (*FlashPromotionSessionByTimeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionByTime not implemented")
 }
 func (UnimplementedSmsServer) HomeAdvertiseAdd(context.Context, *HomeAdvertiseAddReq) (*HomeAdvertiseAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseAdd not implemented")
@@ -1216,6 +1244,24 @@ func _Sms_FlashPromotionDelete_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sms_FlashPromotionListByDate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionListByDateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SmsServer).FlashPromotionListByDate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.Sms/FlashPromotionListByDate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SmsServer).FlashPromotionListByDate(ctx, req.(*FlashPromotionListByDateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Sms_FlashPromotionProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FlashPromotionProductRelationAddReq)
 	if err := dec(in); err != nil {
@@ -1356,6 +1402,24 @@ func _Sms_FlashPromotionSessionDelete_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SmsServer).FlashPromotionSessionDelete(ctx, req.(*FlashPromotionSessionDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sms_FlashPromotionSessionByTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionSessionByTimeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SmsServer).FlashPromotionSessionByTime(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.Sms/FlashPromotionSessionByTime",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SmsServer).FlashPromotionSessionByTime(ctx, req.(*FlashPromotionSessionByTimeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1824,6 +1888,10 @@ var Sms_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Sms_FlashPromotionDelete_Handler,
 		},
 		{
+			MethodName: "FlashPromotionListByDate",
+			Handler:    _Sms_FlashPromotionListByDate_Handler,
+		},
+		{
 			MethodName: "FlashPromotionProductRelationAdd",
 			Handler:    _Sms_FlashPromotionProductRelationAdd_Handler,
 		},
@@ -1854,6 +1922,10 @@ var Sms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FlashPromotionSessionDelete",
 			Handler:    _Sms_FlashPromotionSessionDelete_Handler,
+		},
+		{
+			MethodName: "FlashPromotionSessionByTime",
+			Handler:    _Sms_FlashPromotionSessionByTime_Handler,
 		},
 		{
 			MethodName: "HomeAdvertiseAdd",

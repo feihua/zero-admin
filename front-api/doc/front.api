@@ -8,8 +8,8 @@ import "api/order.api"
 import "api/product.api"
 
 info(
-	title: "shop_flutter"
-	desc: "shop_flutter App接口"
+	title: "zero-front"
+	desc: "App接口"
 	author: "koobe"
 	email: "1002219331@qq.com"
 )

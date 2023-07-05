@@ -24,8 +24,8 @@ func NewFlashPromotionProductRelationListLogic(ctx context.Context, svcCtx *svc.
 }
 
 func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationList(in *sms.FlashPromotionProductRelationListReq) (*sms.FlashPromotionProductRelationListResp, error) {
-	all, err := l.svcCtx.SmsFlashPromotionProductRelationModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsFlashPromotionProductRelationModel.Count(l.ctx)
+	all, err := l.svcCtx.SmsFlashPromotionProductRelationModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.SmsFlashPromotionProductRelationModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

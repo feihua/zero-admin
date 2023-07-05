@@ -53,6 +53,8 @@ type (
 	FlashPromotionAddResp                   = smsclient.FlashPromotionAddResp
 	FlashPromotionDeleteReq                 = smsclient.FlashPromotionDeleteReq
 	FlashPromotionDeleteResp                = smsclient.FlashPromotionDeleteResp
+	FlashPromotionListByDateReq             = smsclient.FlashPromotionListByDateReq
+	FlashPromotionListByDateResp            = smsclient.FlashPromotionListByDateResp
 	FlashPromotionListData                  = smsclient.FlashPromotionListData
 	FlashPromotionListReq                   = smsclient.FlashPromotionListReq
 	FlashPromotionListResp                  = smsclient.FlashPromotionListResp
@@ -76,6 +78,8 @@ type (
 	FlashPromotionProductRelationUpdateResp = smsclient.FlashPromotionProductRelationUpdateResp
 	FlashPromotionSessionAddReq             = smsclient.FlashPromotionSessionAddReq
 	FlashPromotionSessionAddResp            = smsclient.FlashPromotionSessionAddResp
+	FlashPromotionSessionByTimeReq          = smsclient.FlashPromotionSessionByTimeReq
+	FlashPromotionSessionByTimeResp         = smsclient.FlashPromotionSessionByTimeResp
 	FlashPromotionSessionDeleteReq          = smsclient.FlashPromotionSessionDeleteReq
 	FlashPromotionSessionDeleteResp         = smsclient.FlashPromotionSessionDeleteResp
 	FlashPromotionSessionListData           = smsclient.FlashPromotionSessionListData
@@ -160,6 +164,7 @@ type (
 		FlashPromotionList(ctx context.Context, in *FlashPromotionListReq, opts ...grpc.CallOption) (*FlashPromotionListResp, error)
 		FlashPromotionUpdate(ctx context.Context, in *FlashPromotionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionUpdateResp, error)
 		FlashPromotionDelete(ctx context.Context, in *FlashPromotionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionDeleteResp, error)
+		FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error)
 		FlashPromotionProductRelationAdd(ctx context.Context, in *FlashPromotionProductRelationAddReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationAddResp, error)
 		FlashPromotionProductRelationList(ctx context.Context, in *FlashPromotionProductRelationListReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationListResp, error)
 		FlashPromotionProductRelationUpdate(ctx context.Context, in *FlashPromotionProductRelationUpdateReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationUpdateResp, error)
@@ -168,6 +173,7 @@ type (
 		FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error)
 		FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error)
 		FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error)
+		FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error)
 		HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error)
 		HomeAdvertiseList(ctx context.Context, in *HomeAdvertiseListReq, opts ...grpc.CallOption) (*HomeAdvertiseListResp, error)
 		HomeAdvertiseUpdate(ctx context.Context, in *HomeAdvertiseUpdateReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error)
@@ -321,6 +327,11 @@ func (m *defaultSms) FlashPromotionDelete(ctx context.Context, in *FlashPromotio
 	return client.FlashPromotionDelete(ctx, in, opts...)
 }
 
+func (m *defaultSms) FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error) {
+	client := smsclient.NewSmsClient(m.cli.Conn())
+	return client.FlashPromotionListByDate(ctx, in, opts...)
+}
+
 func (m *defaultSms) FlashPromotionProductRelationAdd(ctx context.Context, in *FlashPromotionProductRelationAddReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationAddResp, error) {
 	client := smsclient.NewSmsClient(m.cli.Conn())
 	return client.FlashPromotionProductRelationAdd(ctx, in, opts...)
@@ -359,6 +370,11 @@ func (m *defaultSms) FlashPromotionSessionUpdate(ctx context.Context, in *FlashP
 func (m *defaultSms) FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error) {
 	client := smsclient.NewSmsClient(m.cli.Conn())
 	return client.FlashPromotionSessionDelete(ctx, in, opts...)
+}
+
+func (m *defaultSms) FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error) {
+	client := smsclient.NewSmsClient(m.cli.Conn())
+	return client.FlashPromotionSessionByTime(ctx, in, opts...)
 }
 
 func (m *defaultSms) HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error) {

@@ -18,6 +18,7 @@ type (
 		smsFlashPromotionModel
 		Count(ctx context.Context, in *sms.FlashPromotionListReq) (int64, error)
 		FindAll(ctx context.Context, in *sms.FlashPromotionListReq) (*[]SmsFlashPromotion, error)
+		FindAllByCurrentDate(ctx context.Context, currentDate string) (*[]SmsFlashPromotion, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -109,4 +110,21 @@ func (m *defaultSmsFlashPromotionModel) DeleteByIds(ctx context.Context, ids []i
 	// 执行删除语句
 	_, err := m.conn.ExecCtx(ctx, query, args...)
 	return err
+}
+
+func (m *customSmsFlashPromotionModel) FindAllByCurrentDate(ctx context.Context, currentDate string) (*[]SmsFlashPromotion, error) {
+
+	where := fmt.Sprintf("status = '1' AND start_date <= '%s' AND end_date >= '%s'", currentDate, currentDate)
+
+	query := fmt.Sprintf("select %s from %s where %s", smsFlashPromotionRows, m.table, where)
+	var resp []SmsFlashPromotion
+	err := m.conn.QueryRows(&resp, query)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }

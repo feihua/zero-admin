@@ -20,4 +20,6 @@ type Config struct {
 	SmsRpc zrpc.RpcClientConf
 	//支付
 	PayRpc zrpc.RpcClientConf
+	//内容相关
+	CmsRpc zrpc.RpcClientConf
 }

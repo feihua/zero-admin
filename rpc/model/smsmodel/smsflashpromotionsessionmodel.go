@@ -18,6 +18,7 @@ type (
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsFlashPromotionSession, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		FindAllByCurrentTime(ctx context.Context, CurrentTime string) (*[]SmsFlashPromotionSession, error)
 	}
 
 	customSmsFlashPromotionSessionModel struct {
@@ -82,4 +83,21 @@ func (m *customSmsFlashPromotionSessionModel) DeleteByIds(ctx context.Context, i
 	// 执行删除语句
 	_, err := m.conn.ExecCtx(ctx, query, args...)
 	return err
+}
+
+func (m *customSmsFlashPromotionSessionModel) FindAllByCurrentTime(ctx context.Context, CurrentTime string) (*[]SmsFlashPromotionSession, error) {
+
+	where := fmt.Sprintf("status = '1' AND start_time <= '%s' AND end_timeend_time >= '%s'", CurrentTime, CurrentTime)
+
+	query := fmt.Sprintf("select %s from %s where %s", smsFlashPromotionRows, m.table, where)
+	var resp []SmsFlashPromotionSession
+	err := m.conn.QueryRows(&resp, query)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }

@@ -349,46 +349,156 @@ type AddOrDeleteResp struct {
 }
 
 type HomeResp struct {
-	Errno  int64    `json:"errno"`
-	Data   HomeData `json:"data"`
-	Errmsg string   `json:"errmsg"`
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    Data   `json:"data"`
 }
 
-type HomeData struct {
-	NewGoodsList []GoodsList `json:"newGoodsList"` //新品列表
-	Channel      []Channel   `json:"channel"`      //分类列表
-	Banner       []Banner    `json:"banner"`       //轮播图列表
-	HotGoodsList []GoodsList `json:"hotGoodsList"` //热卖商品列表
+type Data struct {
+	AdvertiseList      []AdvertiseList    `json:"advertiseList"`
+	BrandList          []BrandList        `json:"brandList"`
+	HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"`
+	NewProductList     []ProductList      `json:"newProductList"`
+	HotProductList     []ProductList      `json:"hotProductList"`
+	SubjectList        []SubjectList      `json:"subjectList"`
 }
 
-type Banner struct {
-	ID         int64  `json:"id"`       //轮播图id
-	Name       string `json:"name"`     //名称
-	Link       string `json:"link"`     //轮播图链接
-	URL        string `json:"url"`      //轮播图地址
-	Position   int64  `json:"position"` //位置
-	Content    string `json:"content"`  //内容
-	Enabled    bool   `json:"enabled"`  //是否启用
-	AddTime    string `json:"addTime"`
-	UpdateTime string `json:"updateTime"`
-	Deleted    bool   `json:"deleted"`
+type SubjectList struct {
+	CategoryId      int64  `json:"categoryId"`
+	Title           string `json:"title"`
+	Pic             string `json:"pic"`          // 专题主图
+	ProductCount    int64  `json:"productCount"` // 关联产品数量
+	RecommendStatus int64  `json:"recommendStatus"`
+	CollectCount    int64  `json:"collectCount"`
+	ReadCount       int64  `json:"readCount"`
+	CommentCount    int64  `json:"commentCount"`
+	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
+	Description     string `json:"description"`
+	ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Content         string `json:"content"`
+	ForwardCount    int64  `json:"forwardCount"` // 转发数
+	CategoryName    string `json:"categoryName"` // 专题分类名称
 }
 
-type Channel struct {
-	ID      int64  `json:"id"`      //分类id
-	Name    string `json:"name"`    //分类名称
-	IconURL string `json:"iconUrl"` //分类图标地址
+type AdvertiseList struct {
+	ID         int64  `json:"id"`
+	Name       string `json:"name"`
+	Type       int64  `json:"type"`
+	Pic        string `json:"pic"`
+	StartTime  string `json:"startTime"`
+	EndTime    string `json:"endTime"`
+	Status     int64  `json:"status"`
+	ClickCount int64  `json:"clickCount"`
+	OrderCount int64  `json:"orderCount"`
+	URL        string `json:"url"`
+	Sort       int64  `json:"sort"`
 }
 
-type GoodsList struct {
-	ID           int64  `json:"id"`           //商品id
-	Name         string `json:"name"`         //商品名称
-	Brief        string `json:"brief"`        //商品简介
-	PicURL       string `json:"picUrl"`       //商品图片
-	IsNew        bool   `json:"isNew"`        //是否为新品
-	IsHot        bool   `json:"isHot"`        //是否为热卖商品
-	CounterPrice int64  `json:"counterPrice"` //专柜价格
-	RetailPrice  int64  `json:"retailPrice"`  //零售价格
+type BrandList struct {
+	ID                  int64  `json:"id"`
+	Name                string `json:"name"`
+	FirstLetter         string `json:"firstLetter"`
+	Sort                int64  `json:"sort"`
+	FactoryStatus       int64  `json:"factoryStatus"`
+	ShowStatus          int64  `json:"showStatus"`
+	ProductCount        int64  `json:"productCount"`
+	ProductCommentCount int64  `json:"productCommentCount"`
+	Logo                string `json:"logo"`
+	BigPic              string `json:"bigPic"`
+}
+
+type HomeFlashPromotion struct {
+	StartTime     string        `json:"startTime"`
+	EndTime       string        `json:"endTime"`
+	NextStartTime string        `json:"nextStartTime"`
+	NextEndTime   string        `json:"nextEndTime"`
+	ProductList   []ProductList `json:"productList"`
+}
+
+type ProductList struct {
+	Id                         int64   `json:"id"`
+	BrandId                    int64   `json:"brandId"`
+	ProductCategoryId          int64   `json:"productCategoryId"`
+	FeightTemplateId           int64   `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
+	Name                       string  `json:"name"`
+	Pic                        string  `json:"pic"`
+	ProductSn                  string  `json:"productSn"`
+	DeleteStatus               int64   `json:"deleteStatus"`
+	PublishStatus              int64   `json:"publishStatus"`
+	NewStatus                  int64   `json:"newStatus"`
+	RecommandStatus            int64   `json:"recommandStatus"`
+	VerifyStatus               int64   `json:"verifyStatus"`
+	Sort                       int64   `json:"sort"`
+	Sale                       int64   `json:"sale"`
+	Price                      float64 `json:"price"`
+	PromotionPrice             float64 `json:"promotionPrice,omitempty"`
+	GiftGrowth                 int64   `json:"giftGrowth"`
+	GiftPoint                  int64   `json:"giftPoint"`
+	UsePointLimit              int64   `json:"usePointLimit"`
+	SubTitle                   string  `json:"subTitle"`
+	OriginalPrice              float64 `json:"originalPrice"`
+	Stock                      int64   `json:"stock"`
+	LowStock                   int64   `json:"lowStock"`
+	Unit                       string  `json:"unit"`
+	Weight                     float64 `json:"weight"`
+	PreviewStatus              int64   `json:"previewStatus"`
+	ServiceIDS                 string  `json:"serviceIds"`
+	Keywords                   string  `json:"keywords"`
+	Note                       string  `json:"note"`
+	AlbumPics                  string  `json:"albumPics"`
+	DetailTitle                string  `json:"detailTitle"`
+	PromotionStartTime         string  `json:"promotionStartTime,omitempty"`
+	PromotionEndTime           string  `json:"promotionEndTime,omitempty"`
+	PromotionPerLimit          int64   `json:"promotionPerLimit"`
+	PromotionType              int64   `json:"promotionType"`
+	BrandName                  string  `json:"brandName"`
+	ProductCategoryName        string  `json:"productCategoryName"`
+	Description                string  `json:"description"`
+}
+
+type RecommendProductListReq struct {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
+}
+
+type RecommendProductListResp struct {
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
+	Data    []ProductList `json:"data"`
+}
+
+type RecommendBrandListReq struct {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
+}
+
+type RecommendBrandListResp struct {
+	Code    int64       `json:"code"`
+	Message string      `json:"message"`
+	Data    []BrandList `json:"data"`
+}
+
+type RecommendNewProductListReq struct {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
+}
+
+type RecommendNewProductListResp struct {
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
+	Data    []ProductList `json:"data"`
+}
+
+type RecommendHotProductListReq struct {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
+}
+
+type RecommendHotProductListResp struct {
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
+	Data    []ProductList `json:"data"`
 }
 
 type OrderListReq struct {
@@ -521,7 +631,7 @@ type GoodsDetailData struct {
 	ShareImage        string              `json:"shareImage"`
 	Share             bool                `json:"share"`
 	Attribute         []interface{}       `json:"attribute"`   //商品属性
-	ProductList       []ProductList       `json:"productList"` //商品规格
+	ProductList       []ProductList1      `json:"productList"` //商品规格
 	Info              Info                `json:"info"`        //商品信息
 }
 
@@ -557,7 +667,7 @@ type Issue struct {
 	Deleted    bool   `json:"deleted"`
 }
 
-type ProductList struct {
+type ProductList1 struct {
 	ID             int64    `json:"id"`             //id
 	GoodsID        int64    `json:"goodsId"`        //商品Id
 	Specifications []string `json:"specifications"` //规格值

@@ -17,13 +17,13 @@ type GoodsDetailResp struct {
 
 type GoodsDetailData struct {
     SpecificationList []SpecificationList `json:"specificationList"`
-    Issue []Issue `json:"issue"`                   //常见问题
+    Issue []Issue `json:"issue"`                    //常见问题
     UserHasCollect int64 `json:"userHasCollect"`
     ShareImage string `json:"shareImage"`
     Share bool `json:"share"`
-    Attribute []interface{} `json:"attribute"`     //商品属性
-    ProductList []ProductList `json:"productList"` //商品规格
-    Info Info `json:"info"`                        //商品信息
+    Attribute []interface{} `json:"attribute"`      //商品属性
+    ProductList []ProductList1 `json:"productList"` //商品规格
+    Info Info `json:"info"`                         //商品信息
 }
 
 type Info struct {
@@ -58,7 +58,7 @@ type Issue struct {
     Deleted bool `json:"deleted"`
 }
 
-type ProductList struct {
+type ProductList1 struct {
     ID int64 `json:"id"`                           //id
     GoodsID int64 `json:"goodsId"`                 //商品Id
     Specifications []string `json:"specifications"`//规格值

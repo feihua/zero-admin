@@ -142,6 +142,11 @@ func (s *SmsServer) FlashPromotionDelete(ctx context.Context, in *smsclient.Flas
 	return l.FlashPromotionDelete(in)
 }
 
+func (s *SmsServer) FlashPromotionListByDate(ctx context.Context, in *smsclient.FlashPromotionListByDateReq) (*smsclient.FlashPromotionListByDateResp, error) {
+	l := logic.NewFlashPromotionListByDateLogic(ctx, s.svcCtx)
+	return l.FlashPromotionListByDate(in)
+}
+
 func (s *SmsServer) FlashPromotionProductRelationAdd(ctx context.Context, in *smsclient.FlashPromotionProductRelationAddReq) (*smsclient.FlashPromotionProductRelationAddResp, error) {
 	l := logic.NewFlashPromotionProductRelationAddLogic(ctx, s.svcCtx)
 	return l.FlashPromotionProductRelationAdd(in)
@@ -180,6 +185,11 @@ func (s *SmsServer) FlashPromotionSessionUpdate(ctx context.Context, in *smsclie
 func (s *SmsServer) FlashPromotionSessionDelete(ctx context.Context, in *smsclient.FlashPromotionSessionDeleteReq) (*smsclient.FlashPromotionSessionDeleteResp, error) {
 	l := logic.NewFlashPromotionSessionDeleteLogic(ctx, s.svcCtx)
 	return l.FlashPromotionSessionDelete(in)
+}
+
+func (s *SmsServer) FlashPromotionSessionByTime(ctx context.Context, in *smsclient.FlashPromotionSessionByTimeReq) (*smsclient.FlashPromotionSessionByTimeResp, error) {
+	l := logic.NewFlashPromotionSessionByTimeLogic(ctx, s.svcCtx)
+	return l.FlashPromotionSessionByTime(in)
 }
 
 func (s *SmsServer) HomeAdvertiseAdd(ctx context.Context, in *smsclient.HomeAdvertiseAddReq) (*smsclient.HomeAdvertiseAddResp, error) {

@@ -44,6 +44,12 @@ PayRpc:
       - localhost:2379
     Key: pay.rpc
 
+#内容相关
+CmsRpc:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: cms.rpc
 #Log:
 #  Mode: file
 #  Path: logs/front

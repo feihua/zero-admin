@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"zero-admin/rpc/sms/sms"
 )
 
 var _ SmsFlashPromotionProductRelationModel = (*customSmsFlashPromotionProductRelationModel)(nil)
@@ -15,8 +16,8 @@ type (
 	// and implement the added methods in customSmsFlashPromotionProductRelationModel.
 	SmsFlashPromotionProductRelationModel interface {
 		smsFlashPromotionProductRelationModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsFlashPromotionProductRelation, error)
+		Count(ctx context.Context, in *sms.FlashPromotionProductRelationListReq) (int64, error)
+		FindAll(ctx context.Context, in *sms.FlashPromotionProductRelationListReq) (*[]SmsFlashPromotionProductRelation, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +33,14 @@ func NewSmsFlashPromotionProductRelationModel(conn sqlx.SqlConn) SmsFlashPromoti
 	}
 }
 
-func (m *customSmsFlashPromotionProductRelationModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsFlashPromotionProductRelation, error) {
+func (m *customSmsFlashPromotionProductRelationModel) FindAll(ctx context.Context, in *sms.FlashPromotionProductRelationListReq) (*[]SmsFlashPromotionProductRelation, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", smsFlashPromotionProductRelationRows, m.table)
+	where := fmt.Sprintf(" AND flash_promotion_id = %d", in.FlashPromotionId)
+	where = where + fmt.Sprintf(" AND flash_promotion_session_id = %d", in.FlashPromotionSessionId)
+
+	query := fmt.Sprintf("select %s from %s where % s limit ?,?", smsFlashPromotionProductRelationRows, m.table, where)
 	var resp []SmsFlashPromotionProductRelation
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -47,8 +51,10 @@ func (m *customSmsFlashPromotionProductRelationModel) FindAll(ctx context.Contex
 	}
 }
 
-func (m *customSmsFlashPromotionProductRelationModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
+func (m *customSmsFlashPromotionProductRelationModel) Count(ctx context.Context, in *sms.FlashPromotionProductRelationListReq) (int64, error) {
+	where := fmt.Sprintf(" AND flash_promotion_id = %d", in.FlashPromotionId)
+	where = where + fmt.Sprintf(" AND flash_promotion_session_id = %d", in.FlashPromotionSessionId)
+	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
 	err := m.conn.QueryRow(&count, query)

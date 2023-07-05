@@ -137,10 +137,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/home/index",
+				Path:    "/index",
 				Handler: home.HomeIndexHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/recommendProductList",
+				Handler: home.RecommendProductListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/recommendBrandList",
+				Handler: home.RecommendBrandListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/recommendNewProductList",
+				Handler: home.RecommendNewProductListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/recommendHotProductList",
+				Handler: home.RecommendHotProductListHandler(serverCtx),
+			},
 		},
+		rest.WithPrefix("/api/home"),
 	)
 
 	server.AddRoutes(

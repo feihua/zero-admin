@@ -44,6 +44,17 @@ func (m *customPmsProductModel) FindAll(ctx context.Context, in *pms.ProductList
 	if in.VerifyStatus != 2 {
 		where = where + fmt.Sprintf(" AND verify_status = '%d'", in.VerifyStatus)
 	}
+	if in.ProductCategoryId != 0 {
+		where = where + fmt.Sprintf(" AND product_category_id = '%d'", in.ProductCategoryId)
+	}
+
+	if in.PublishStatus != 2 {
+		where = where + fmt.Sprintf(" AND publish_status = '%d'", in.PublishStatus)
+	}
+
+	if in.DeleteStatus != 2 {
+		where = where + fmt.Sprintf(" AND delete_status = '%d'", in.DeleteStatus)
+	}
 
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", pmsProductRows, m.table, where)
 	var resp []PmsProduct
@@ -70,7 +81,13 @@ func (m *customPmsProductModel) Count(ctx context.Context, in *pms.ProductListRe
 	if in.ProductCategoryId != 0 {
 		where = where + fmt.Sprintf(" AND product_category_id = '%d'", in.ProductCategoryId)
 	}
+	if in.PublishStatus != 2 {
+		where = where + fmt.Sprintf(" AND publish_status = '%d'", in.PublishStatus)
+	}
 
+	if in.DeleteStatus != 2 {
+		where = where + fmt.Sprintf(" AND delete_status = '%d'", in.DeleteStatus)
+	}
 	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64

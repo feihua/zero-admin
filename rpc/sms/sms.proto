@@ -293,6 +293,14 @@ message FlashPromotionDeleteResp {
   string pong = 1;
 }
 
+message FlashPromotionListByDateReq {
+  string currentDate = 1;
+}
+
+message FlashPromotionListByDateResp {
+  repeated  FlashPromotionListData list = 1;
+}
+
 message FlashPromotionUpdateReq {
   int64 Id = 1; //编号
   string Title = 2; //标题
@@ -433,7 +441,8 @@ message FlashPromotionProductRelationUpdateResp {
 message FlashPromotionProductRelationListReq {
   int64 current = 1;
   int64 pageSize = 2;
-
+  int64 FlashPromotionId = 3; //限时购id
+  int64 FlashPromotionSessionId = 4; //编号
 }
 
 message FlashPromotionProductRelationListData {
@@ -472,6 +481,14 @@ message FlashPromotionSessionDeleteReq {
 
 message FlashPromotionSessionDeleteResp {
   string pong = 1;
+}
+
+message FlashPromotionSessionByTimeReq {
+  string currentTIme = 1;
+}
+
+message FlashPromotionSessionByTimeResp {
+  repeated  FlashPromotionSessionListData list = 1;
 }
 
 message FlashPromotionSessionUpdateReq {
@@ -868,6 +885,7 @@ service Sms {
   rpc FlashPromotionList(FlashPromotionListReq) returns(FlashPromotionListResp);
   rpc FlashPromotionUpdate(FlashPromotionUpdateReq) returns(FlashPromotionUpdateResp);
   rpc FlashPromotionDelete(FlashPromotionDeleteReq) returns(FlashPromotionDeleteResp);
+  rpc FlashPromotionListByDate(FlashPromotionListByDateReq) returns(FlashPromotionListByDateResp);
 
   rpc FlashPromotionProductRelationAdd(FlashPromotionProductRelationAddReq) returns(FlashPromotionProductRelationAddResp);
   rpc FlashPromotionProductRelationList(FlashPromotionProductRelationListReq) returns(FlashPromotionProductRelationListResp);
@@ -878,6 +896,7 @@ service Sms {
   rpc FlashPromotionSessionList(FlashPromotionSessionListReq) returns(FlashPromotionSessionListResp);
   rpc FlashPromotionSessionUpdate(FlashPromotionSessionUpdateReq) returns(FlashPromotionSessionUpdateResp);
   rpc FlashPromotionSessionDelete(FlashPromotionSessionDeleteReq) returns(FlashPromotionSessionDeleteResp);
+  rpc FlashPromotionSessionByTime(FlashPromotionSessionByTimeReq) returns(FlashPromotionSessionByTimeResp);
 
   rpc HomeAdvertiseAdd(HomeAdvertiseAddReq) returns(HomeAdvertiseAddResp);
   rpc HomeAdvertiseList(HomeAdvertiseListReq) returns(HomeAdvertiseListResp);

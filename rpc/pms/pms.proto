@@ -93,6 +93,8 @@ message ProductListReq {
   string Name = 3;
   int64  VerifyStatus = 4;
   int64  ProductCategoryId = 5;
+  int64       PublishStatus = 6;
+  int64       DeleteStatus = 7;
 }
 
 message ProductByIdsReq {
