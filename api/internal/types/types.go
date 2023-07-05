@@ -1660,10 +1660,11 @@ type AddProductCategoryResp struct {
 }
 
 type ListProductCategoryReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	Name     string `json:"name,optional"`
-	ParentId int64  `json:"parentId,default=2"` // 上级分类的编号：0表示一级分类
+	Current    int64  `json:"current,default=1"`
+	PageSize   int64  `json:"pageSize,default=20"`
+	Name       string `json:"name,optional"`
+	ParentId   int64  `json:"parentId,default=2"`   // 上级分类的编号：0表示一级分类
+	ShowStatus int64  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
 }
 
 type ListtProductCategoryData struct {

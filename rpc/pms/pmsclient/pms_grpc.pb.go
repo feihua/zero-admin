@@ -75,8 +75,6 @@ type PmsClient interface {
 	ProductCategoryAttributeRelationDelete(ctx context.Context, in *ProductCategoryAttributeRelationDeleteReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationDeleteResp, error)
 	ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq, opts ...grpc.CallOption) (*ProductCategoryAddResp, error)
 	ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
-	ProductCategoryFirstList(ctx context.Context, in *ProductCategoryFirstListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
-	ProductCategorySecondList(ctx context.Context, in *ProductCategorySecondListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
 	ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
 	ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error)
 	ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq, opts ...grpc.CallOption) (*ProductFullReductionAddResp, error)
@@ -588,24 +586,6 @@ func (c *pmsClient) ProductCategoryList(ctx context.Context, in *ProductCategory
 	return out, nil
 }
 
-func (c *pmsClient) ProductCategoryFirstList(ctx context.Context, in *ProductCategoryFirstListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error) {
-	out := new(ProductCategoryListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryFirstList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductCategorySecondList(ctx context.Context, in *ProductCategorySecondListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error) {
-	out := new(ProductCategoryListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategorySecondList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *pmsClient) ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error) {
 	out := new(ProductCategoryUpdateResp)
 	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryUpdate", in, out, opts...)
@@ -879,8 +859,6 @@ type PmsServer interface {
 	ProductCategoryAttributeRelationDelete(context.Context, *ProductCategoryAttributeRelationDeleteReq) (*ProductCategoryAttributeRelationDeleteResp, error)
 	ProductCategoryAdd(context.Context, *ProductCategoryAddReq) (*ProductCategoryAddResp, error)
 	ProductCategoryList(context.Context, *ProductCategoryListReq) (*ProductCategoryListResp, error)
-	ProductCategoryFirstList(context.Context, *ProductCategoryFirstListReq) (*ProductCategoryListResp, error)
-	ProductCategorySecondList(context.Context, *ProductCategorySecondListReq) (*ProductCategoryListResp, error)
 	ProductCategoryUpdate(context.Context, *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error)
 	ProductCategoryDelete(context.Context, *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error)
 	ProductFullReductionAdd(context.Context, *ProductFullReductionAddReq) (*ProductFullReductionAddResp, error)
@@ -1070,12 +1048,6 @@ func (UnimplementedPmsServer) ProductCategoryAdd(context.Context, *ProductCatego
 }
 func (UnimplementedPmsServer) ProductCategoryList(context.Context, *ProductCategoryListReq) (*ProductCategoryListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryList not implemented")
-}
-func (UnimplementedPmsServer) ProductCategoryFirstList(context.Context, *ProductCategoryFirstListReq) (*ProductCategoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryFirstList not implemented")
-}
-func (UnimplementedPmsServer) ProductCategorySecondList(context.Context, *ProductCategorySecondListReq) (*ProductCategoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategorySecondList not implemented")
 }
 func (UnimplementedPmsServer) ProductCategoryUpdate(context.Context, *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryUpdate not implemented")
@@ -2116,42 +2088,6 @@ func _Pms_ProductCategoryList_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductCategoryFirstList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProductCategoryFirstListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PmsServer).ProductCategoryFirstList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategoryFirstList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategoryFirstList(ctx, req.(*ProductCategoryFirstListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Pms_ProductCategorySecondList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProductCategorySecondListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PmsServer).ProductCategorySecondList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategorySecondList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategorySecondList(ctx, req.(*ProductCategorySecondListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Pms_ProductCategoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryUpdateReq)
 	if err := dec(in); err != nil {
@@ -2802,14 +2738,6 @@ var Pms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductCategoryList",
 			Handler:    _Pms_ProductCategoryList_Handler,
-		},
-		{
-			MethodName: "ProductCategoryFirstList",
-			Handler:    _Pms_ProductCategoryFirstList_Handler,
-		},
-		{
-			MethodName: "ProductCategorySecondList",
-			Handler:    _Pms_ProductCategorySecondList_Handler,
 		},
 		{
 			MethodName: "ProductCategoryUpdate",

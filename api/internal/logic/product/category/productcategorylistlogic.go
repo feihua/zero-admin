@@ -27,10 +27,11 @@ func NewProductCategoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCategoryReq) (*types.ListProductCategoryResp, error) {
 	resp, err := l.svcCtx.Pms.ProductCategoryList(l.ctx, &pmsclient.ProductCategoryListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		Name:     req.Name,
-		ParentId: req.ParentId,
+		Current:    req.Current,
+		PageSize:   req.PageSize,
+		Name:       req.Name,
+		ParentId:   req.ParentId,
+		ShowStatus: req.ShowStatus, // 显示状态：0->不显示；1->显示
 	})
 
 	if err != nil {

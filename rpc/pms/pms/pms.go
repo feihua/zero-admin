@@ -127,11 +127,9 @@ type (
 	ProductCategoryAttributeRelationUpdateResp = pmsclient.ProductCategoryAttributeRelationUpdateResp
 	ProductCategoryDeleteReq                   = pmsclient.ProductCategoryDeleteReq
 	ProductCategoryDeleteResp                  = pmsclient.ProductCategoryDeleteResp
-	ProductCategoryFirstListReq                = pmsclient.ProductCategoryFirstListReq
 	ProductCategoryListData                    = pmsclient.ProductCategoryListData
 	ProductCategoryListReq                     = pmsclient.ProductCategoryListReq
 	ProductCategoryListResp                    = pmsclient.ProductCategoryListResp
-	ProductCategorySecondListReq               = pmsclient.ProductCategorySecondListReq
 	ProductCategoryUpdateReq                   = pmsclient.ProductCategoryUpdateReq
 	ProductCategoryUpdateResp                  = pmsclient.ProductCategoryUpdateResp
 	ProductDeleteReq                           = pmsclient.ProductDeleteReq
@@ -246,8 +244,6 @@ type (
 		ProductCategoryAttributeRelationDelete(ctx context.Context, in *ProductCategoryAttributeRelationDeleteReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationDeleteResp, error)
 		ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq, opts ...grpc.CallOption) (*ProductCategoryAddResp, error)
 		ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
-		ProductCategoryFirstList(ctx context.Context, in *ProductCategoryFirstListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
-		ProductCategorySecondList(ctx context.Context, in *ProductCategorySecondListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
 		ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
 		ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error)
 		ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq, opts ...grpc.CallOption) (*ProductFullReductionAddResp, error)
@@ -548,16 +544,6 @@ func (m *defaultPms) ProductCategoryAdd(ctx context.Context, in *ProductCategory
 func (m *defaultPms) ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error) {
 	client := pmsclient.NewPmsClient(m.cli.Conn())
 	return client.ProductCategoryList(ctx, in, opts...)
-}
-
-func (m *defaultPms) ProductCategoryFirstList(ctx context.Context, in *ProductCategoryFirstListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error) {
-	client := pmsclient.NewPmsClient(m.cli.Conn())
-	return client.ProductCategoryFirstList(ctx, in, opts...)
-}
-
-func (m *defaultPms) ProductCategorySecondList(ctx context.Context, in *ProductCategorySecondListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error) {
-	client := pmsclient.NewPmsClient(m.cli.Conn())
-	return client.ProductCategorySecondList(ctx, in, opts...)
 }
 
 func (m *defaultPms) ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error) {

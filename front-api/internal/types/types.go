@@ -292,29 +292,29 @@ type CartUpdateResp struct {
 	Errmsg string `json:"errmsg"`
 }
 
+type CategoryReq struct {
+	ParentId int64 `path:"parentId"` // 上级分类的编号：0表示一级分类
+}
+
 type CategoryResp struct {
-	Errno  int64          `json:"errno"`
-	Data   []CategoryData `json:"data"`
-	Errmsg string         `json:"errmsg"`
+	Code    int64          `json:"code"`
+	Message string         `json:"message"`
+	Data    []CategoryData `json:"data"`
 }
 
 type CategoryData struct {
-	ID         int64  `json:"id"`        //分类id
-	Name       string `json:"name"`      //名称
-	Keywords   string `json:"keywords"`  //关键字
-	Desc       string `json:"desc"`      //描述
-	PID        int64  `json:"pid"`       //父id
-	IconURL    string `json:"iconUrl"`   //图标地址
-	PicURL     string `json:"picUrl"`    //图片地址
-	Level      string `json:"level"`     //等级
-	SortOrder  int64  `json:"sortOrder"` //排序规则
-	AddTime    string `json:"addTime"`
-	UpdateTime string `json:"updateTime"`
-	Deleted    bool   `json:"deleted"`
-}
-
-type SecondCategoryReq struct {
-	Id int64 `form:"id"`
+	Id           int64  `json:"id"`
+	ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
+	Name         string `json:"name"`
+	Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
+	ProductCount int64  `json:"productCount"`
+	ProductUnit  string `json:"productUnit"`
+	NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+	ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Sort         int64  `json:"sort"`
+	Icon         string `json:"icon"` // 图标
+	Keywords     string `json:"keywords"`
+	Description  string `json:"description"` // 描述
 }
 
 type CollectListReq struct {

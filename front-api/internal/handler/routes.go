@@ -105,16 +105,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/getfirstcategory",
-				Handler: category.GetFirstCategoryHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/getsecondcategory",
-				Handler: category.GetSecondCategoryHandler(serverCtx),
+				Path:    "/productCateList/:parentId",
+				Handler: category.ProductCateListHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/api/catalog"),
+		rest.WithPrefix("/api/home"),
 	)
 
 	server.AddRoutes(

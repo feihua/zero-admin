@@ -40,6 +40,10 @@ func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, in *pms.Pro
 	if in.ParentId != 2 {
 		where = where + fmt.Sprintf(" AND parent_id = '%d'", in.ParentId)
 	}
+	if in.ShowStatus != 2 {
+		where = where + fmt.Sprintf(" AND show_status = '%d'", in.ShowStatus)
+	}
+
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", pmsProductCategoryRows, m.table, where)
 	var resp []PmsProductCategory
 	err := m.conn.QueryRows(&resp, query, 0, 1000)
@@ -58,6 +62,9 @@ func (m *customPmsProductCategoryModel) Count(ctx context.Context, in *pms.Produ
 
 	if in.ParentId != 2 {
 		where = where + fmt.Sprintf(" AND parent_id = '%d'", in.ParentId)
+	}
+	if in.ShowStatus != 2 {
+		where = where + fmt.Sprintf(" AND show_status = '%d'", in.ShowStatus)
 	}
 	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 

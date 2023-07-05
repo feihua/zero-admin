@@ -9,20 +9,20 @@ import (
 	"zero-admin/front-api/internal/types"
 )
 
-func GetSecondCategoryHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ProductCateListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.SecondCategoryReq
+		var req types.CategoryReq
 		if err := httpx.Parse(r, &req); err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := category.NewGetSecondCategoryLogic(r.Context(), svcCtx)
-		resp, err := l.GetSecondCategory(req)
+		l := category.NewProductCateListLogic(r.Context(), svcCtx)
+		resp, err := l.ProductCateList(&req)
 		if err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			httpx.OkJsonCtx(r.Context(), w, resp)
 		}
 	}
 }
