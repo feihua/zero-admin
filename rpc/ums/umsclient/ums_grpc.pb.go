@@ -76,6 +76,14 @@ type UmsClient interface {
 	MemberTaskList(ctx context.Context, in *MemberTaskListReq, opts ...grpc.CallOption) (*MemberTaskListResp, error)
 	MemberTaskUpdate(ctx context.Context, in *MemberTaskUpdateReq, opts ...grpc.CallOption) (*MemberTaskUpdateResp, error)
 	MemberTaskDelete(ctx context.Context, in *MemberTaskDeleteReq, opts ...grpc.CallOption) (*MemberTaskDeleteResp, error)
+	MemberProductCollectionAdd(ctx context.Context, in *MemberProductCollectionAddReq, opts ...grpc.CallOption) (*MemberProductCollectionAddResp, error)
+	MemberProductCollectionDelete(ctx context.Context, in *MemberProductCollectionDeleteReq, opts ...grpc.CallOption) (*MemberProductCollectionDeleteResp, error)
+	MemberProductCollectionUpdate(ctx context.Context, in *MemberProductCollectionUpdateReq, opts ...grpc.CallOption) (*MemberProductCollectionUpdateResp, error)
+	MemberProductCollectionList(ctx context.Context, in *MemberProductCollectionListReq, opts ...grpc.CallOption) (*MemberProductCollectionListResp, error)
+	MemberReadHistoryAdd(ctx context.Context, in *MemberReadHistoryAddReq, opts ...grpc.CallOption) (*MemberReadHistoryAddResp, error)
+	MemberReadHistoryDelete(ctx context.Context, in *MemberReadHistoryDeleteReq, opts ...grpc.CallOption) (*MemberReadHistoryDeleteResp, error)
+	MemberReadHistoryUpdate(ctx context.Context, in *MemberReadHistoryUpdateReq, opts ...grpc.CallOption) (*MemberReadHistoryUpdateResp, error)
+	MemberReadHistoryList(ctx context.Context, in *MemberReadHistoryListReq, opts ...grpc.CallOption) (*MemberReadHistoryListResp, error)
 }
 
 type umsClient struct {
@@ -572,6 +580,78 @@ func (c *umsClient) MemberTaskDelete(ctx context.Context, in *MemberTaskDeleteRe
 	return out, nil
 }
 
+func (c *umsClient) MemberProductCollectionAdd(ctx context.Context, in *MemberProductCollectionAddReq, opts ...grpc.CallOption) (*MemberProductCollectionAddResp, error) {
+	out := new(MemberProductCollectionAddResp)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberProductCollectionAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberProductCollectionDelete(ctx context.Context, in *MemberProductCollectionDeleteReq, opts ...grpc.CallOption) (*MemberProductCollectionDeleteResp, error) {
+	out := new(MemberProductCollectionDeleteResp)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberProductCollectionDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberProductCollectionUpdate(ctx context.Context, in *MemberProductCollectionUpdateReq, opts ...grpc.CallOption) (*MemberProductCollectionUpdateResp, error) {
+	out := new(MemberProductCollectionUpdateResp)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberProductCollectionUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberProductCollectionList(ctx context.Context, in *MemberProductCollectionListReq, opts ...grpc.CallOption) (*MemberProductCollectionListResp, error) {
+	out := new(MemberProductCollectionListResp)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberProductCollectionList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberReadHistoryAdd(ctx context.Context, in *MemberReadHistoryAddReq, opts ...grpc.CallOption) (*MemberReadHistoryAddResp, error) {
+	out := new(MemberReadHistoryAddResp)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberReadHistoryAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberReadHistoryDelete(ctx context.Context, in *MemberReadHistoryDeleteReq, opts ...grpc.CallOption) (*MemberReadHistoryDeleteResp, error) {
+	out := new(MemberReadHistoryDeleteResp)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberReadHistoryDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberReadHistoryUpdate(ctx context.Context, in *MemberReadHistoryUpdateReq, opts ...grpc.CallOption) (*MemberReadHistoryUpdateResp, error) {
+	out := new(MemberReadHistoryUpdateResp)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberReadHistoryUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) MemberReadHistoryList(ctx context.Context, in *MemberReadHistoryListReq, opts ...grpc.CallOption) (*MemberReadHistoryListResp, error) {
+	out := new(MemberReadHistoryListResp)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberReadHistoryList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UmsServer is the server API for Ums service.
 // All implementations must embed UnimplementedUmsServer
 // for forward compatibility
@@ -630,6 +710,14 @@ type UmsServer interface {
 	MemberTaskList(context.Context, *MemberTaskListReq) (*MemberTaskListResp, error)
 	MemberTaskUpdate(context.Context, *MemberTaskUpdateReq) (*MemberTaskUpdateResp, error)
 	MemberTaskDelete(context.Context, *MemberTaskDeleteReq) (*MemberTaskDeleteResp, error)
+	MemberProductCollectionAdd(context.Context, *MemberProductCollectionAddReq) (*MemberProductCollectionAddResp, error)
+	MemberProductCollectionDelete(context.Context, *MemberProductCollectionDeleteReq) (*MemberProductCollectionDeleteResp, error)
+	MemberProductCollectionUpdate(context.Context, *MemberProductCollectionUpdateReq) (*MemberProductCollectionUpdateResp, error)
+	MemberProductCollectionList(context.Context, *MemberProductCollectionListReq) (*MemberProductCollectionListResp, error)
+	MemberReadHistoryAdd(context.Context, *MemberReadHistoryAddReq) (*MemberReadHistoryAddResp, error)
+	MemberReadHistoryDelete(context.Context, *MemberReadHistoryDeleteReq) (*MemberReadHistoryDeleteResp, error)
+	MemberReadHistoryUpdate(context.Context, *MemberReadHistoryUpdateReq) (*MemberReadHistoryUpdateResp, error)
+	MemberReadHistoryList(context.Context, *MemberReadHistoryListReq) (*MemberReadHistoryListResp, error)
 	mustEmbedUnimplementedUmsServer()
 }
 
@@ -798,6 +886,30 @@ func (UnimplementedUmsServer) MemberTaskUpdate(context.Context, *MemberTaskUpdat
 }
 func (UnimplementedUmsServer) MemberTaskDelete(context.Context, *MemberTaskDeleteReq) (*MemberTaskDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberTaskDelete not implemented")
+}
+func (UnimplementedUmsServer) MemberProductCollectionAdd(context.Context, *MemberProductCollectionAddReq) (*MemberProductCollectionAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberProductCollectionAdd not implemented")
+}
+func (UnimplementedUmsServer) MemberProductCollectionDelete(context.Context, *MemberProductCollectionDeleteReq) (*MemberProductCollectionDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberProductCollectionDelete not implemented")
+}
+func (UnimplementedUmsServer) MemberProductCollectionUpdate(context.Context, *MemberProductCollectionUpdateReq) (*MemberProductCollectionUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberProductCollectionUpdate not implemented")
+}
+func (UnimplementedUmsServer) MemberProductCollectionList(context.Context, *MemberProductCollectionListReq) (*MemberProductCollectionListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberProductCollectionList not implemented")
+}
+func (UnimplementedUmsServer) MemberReadHistoryAdd(context.Context, *MemberReadHistoryAddReq) (*MemberReadHistoryAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberReadHistoryAdd not implemented")
+}
+func (UnimplementedUmsServer) MemberReadHistoryDelete(context.Context, *MemberReadHistoryDeleteReq) (*MemberReadHistoryDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberReadHistoryDelete not implemented")
+}
+func (UnimplementedUmsServer) MemberReadHistoryUpdate(context.Context, *MemberReadHistoryUpdateReq) (*MemberReadHistoryUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberReadHistoryUpdate not implemented")
+}
+func (UnimplementedUmsServer) MemberReadHistoryList(context.Context, *MemberReadHistoryListReq) (*MemberReadHistoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberReadHistoryList not implemented")
 }
 func (UnimplementedUmsServer) mustEmbedUnimplementedUmsServer() {}
 
@@ -1784,6 +1896,150 @@ func _Ums_MemberTaskDelete_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Ums_MemberProductCollectionAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberProductCollectionAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberProductCollectionAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/MemberProductCollectionAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberProductCollectionAdd(ctx, req.(*MemberProductCollectionAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberProductCollectionDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberProductCollectionDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberProductCollectionDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/MemberProductCollectionDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberProductCollectionDelete(ctx, req.(*MemberProductCollectionDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberProductCollectionUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberProductCollectionUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberProductCollectionUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/MemberProductCollectionUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberProductCollectionUpdate(ctx, req.(*MemberProductCollectionUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberProductCollectionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberProductCollectionListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberProductCollectionList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/MemberProductCollectionList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberProductCollectionList(ctx, req.(*MemberProductCollectionListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberReadHistoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberReadHistoryAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberReadHistoryAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/MemberReadHistoryAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberReadHistoryAdd(ctx, req.(*MemberReadHistoryAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberReadHistoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberReadHistoryDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberReadHistoryDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/MemberReadHistoryDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberReadHistoryDelete(ctx, req.(*MemberReadHistoryDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberReadHistoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberReadHistoryUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberReadHistoryUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/MemberReadHistoryUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberReadHistoryUpdate(ctx, req.(*MemberReadHistoryUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_MemberReadHistoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberReadHistoryListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).MemberReadHistoryList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/MemberReadHistoryList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).MemberReadHistoryList(ctx, req.(*MemberReadHistoryListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Ums_ServiceDesc is the grpc.ServiceDesc for Ums service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2006,6 +2262,38 @@ var Ums_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberTaskDelete",
 			Handler:    _Ums_MemberTaskDelete_Handler,
+		},
+		{
+			MethodName: "MemberProductCollectionAdd",
+			Handler:    _Ums_MemberProductCollectionAdd_Handler,
+		},
+		{
+			MethodName: "MemberProductCollectionDelete",
+			Handler:    _Ums_MemberProductCollectionDelete_Handler,
+		},
+		{
+			MethodName: "MemberProductCollectionUpdate",
+			Handler:    _Ums_MemberProductCollectionUpdate_Handler,
+		},
+		{
+			MethodName: "MemberProductCollectionList",
+			Handler:    _Ums_MemberProductCollectionList_Handler,
+		},
+		{
+			MethodName: "MemberReadHistoryAdd",
+			Handler:    _Ums_MemberReadHistoryAdd_Handler,
+		},
+		{
+			MethodName: "MemberReadHistoryDelete",
+			Handler:    _Ums_MemberReadHistoryDelete_Handler,
+		},
+		{
+			MethodName: "MemberReadHistoryUpdate",
+			Handler:    _Ums_MemberReadHistoryUpdate_Handler,
+		},
+		{
+			MethodName: "MemberReadHistoryList",
+			Handler:    _Ums_MemberReadHistoryList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

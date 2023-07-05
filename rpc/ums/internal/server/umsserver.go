@@ -291,3 +291,43 @@ func (s *UmsServer) MemberTaskDelete(ctx context.Context, in *umsclient.MemberTa
 	l := logic.NewMemberTaskDeleteLogic(ctx, s.svcCtx)
 	return l.MemberTaskDelete(in)
 }
+
+func (s *UmsServer) MemberProductCollectionAdd(ctx context.Context, in *umsclient.MemberProductCollectionAddReq) (*umsclient.MemberProductCollectionAddResp, error) {
+	l := logic.NewMemberProductCollectionAddLogic(ctx, s.svcCtx)
+	return l.MemberProductCollectionAdd(in)
+}
+
+func (s *UmsServer) MemberProductCollectionDelete(ctx context.Context, in *umsclient.MemberProductCollectionDeleteReq) (*umsclient.MemberProductCollectionDeleteResp, error) {
+	l := logic.NewMemberProductCollectionDeleteLogic(ctx, s.svcCtx)
+	return l.MemberProductCollectionDelete(in)
+}
+
+func (s *UmsServer) MemberProductCollectionUpdate(ctx context.Context, in *umsclient.MemberProductCollectionUpdateReq) (*umsclient.MemberProductCollectionUpdateResp, error) {
+	l := logic.NewMemberProductCollectionUpdateLogic(ctx, s.svcCtx)
+	return l.MemberProductCollectionUpdate(in)
+}
+
+func (s *UmsServer) MemberProductCollectionList(ctx context.Context, in *umsclient.MemberProductCollectionListReq) (*umsclient.MemberProductCollectionListResp, error) {
+	l := logic.NewMemberProductCollectionListLogic(ctx, s.svcCtx)
+	return l.MemberProductCollectionList(in)
+}
+
+func (s *UmsServer) MemberReadHistoryAdd(ctx context.Context, in *umsclient.MemberReadHistoryAddReq) (*umsclient.MemberReadHistoryAddResp, error) {
+	l := logic.NewMemberReadHistoryAddLogic(ctx, s.svcCtx)
+	return l.MemberReadHistoryAdd(in)
+}
+
+func (s *UmsServer) MemberReadHistoryDelete(ctx context.Context, in *umsclient.MemberReadHistoryDeleteReq) (*umsclient.MemberReadHistoryDeleteResp, error) {
+	l := logic.NewMemberReadHistoryDeleteLogic(ctx, s.svcCtx)
+	return l.MemberReadHistoryDelete(in)
+}
+
+func (s *UmsServer) MemberReadHistoryUpdate(ctx context.Context, in *umsclient.MemberReadHistoryUpdateReq) (*umsclient.MemberReadHistoryUpdateResp, error) {
+	l := logic.NewMemberReadHistoryUpdateLogic(ctx, s.svcCtx)
+	return l.MemberReadHistoryUpdate(in)
+}
+
+func (s *UmsServer) MemberReadHistoryList(ctx context.Context, in *umsclient.MemberReadHistoryListReq) (*umsclient.MemberReadHistoryListResp, error) {
+	l := logic.NewMemberReadHistoryListLogic(ctx, s.svcCtx)
+	return l.MemberReadHistoryList(in)
+}

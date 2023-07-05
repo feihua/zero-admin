@@ -22,6 +22,8 @@ type ServiceContext struct {
 	UmsMemberStatisticsInfoModel          umsmodel.UmsMemberStatisticsInfoModel
 	UmsMemberTaskModel                    umsmodel.UmsMemberTaskModel
 	UmsMemberTagModel                     umsmodel.UmsMemberTagModel
+	UmsMemberReadHistoryModel             umsmodel.UmsMemberReadHistoryModel
+	UmsMemberProductCollectionModel       umsmodel.UmsMemberProductCollectionModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {

@@ -85,6 +85,24 @@ type (
 	MemberProductCategoryRelationListResp   = umsclient.MemberProductCategoryRelationListResp
 	MemberProductCategoryRelationUpdateReq  = umsclient.MemberProductCategoryRelationUpdateReq
 	MemberProductCategoryRelationUpdateResp = umsclient.MemberProductCategoryRelationUpdateResp
+	MemberProductCollectionAddReq           = umsclient.MemberProductCollectionAddReq
+	MemberProductCollectionAddResp          = umsclient.MemberProductCollectionAddResp
+	MemberProductCollectionDeleteReq        = umsclient.MemberProductCollectionDeleteReq
+	MemberProductCollectionDeleteResp       = umsclient.MemberProductCollectionDeleteResp
+	MemberProductCollectionListData         = umsclient.MemberProductCollectionListData
+	MemberProductCollectionListReq          = umsclient.MemberProductCollectionListReq
+	MemberProductCollectionListResp         = umsclient.MemberProductCollectionListResp
+	MemberProductCollectionUpdateReq        = umsclient.MemberProductCollectionUpdateReq
+	MemberProductCollectionUpdateResp       = umsclient.MemberProductCollectionUpdateResp
+	MemberReadHistoryAddReq                 = umsclient.MemberReadHistoryAddReq
+	MemberReadHistoryAddResp                = umsclient.MemberReadHistoryAddResp
+	MemberReadHistoryDeleteReq              = umsclient.MemberReadHistoryDeleteReq
+	MemberReadHistoryDeleteResp             = umsclient.MemberReadHistoryDeleteResp
+	MemberReadHistoryListData               = umsclient.MemberReadHistoryListData
+	MemberReadHistoryListReq                = umsclient.MemberReadHistoryListReq
+	MemberReadHistoryListResp               = umsclient.MemberReadHistoryListResp
+	MemberReadHistoryUpdateReq              = umsclient.MemberReadHistoryUpdateReq
+	MemberReadHistoryUpdateResp             = umsclient.MemberReadHistoryUpdateResp
 	MemberReceiveAddressAddReq              = umsclient.MemberReceiveAddressAddReq
 	MemberReceiveAddressAddResp             = umsclient.MemberReceiveAddressAddResp
 	MemberReceiveAddressDeleteReq           = umsclient.MemberReceiveAddressDeleteReq
@@ -190,6 +208,14 @@ type (
 		MemberTaskList(ctx context.Context, in *MemberTaskListReq, opts ...grpc.CallOption) (*MemberTaskListResp, error)
 		MemberTaskUpdate(ctx context.Context, in *MemberTaskUpdateReq, opts ...grpc.CallOption) (*MemberTaskUpdateResp, error)
 		MemberTaskDelete(ctx context.Context, in *MemberTaskDeleteReq, opts ...grpc.CallOption) (*MemberTaskDeleteResp, error)
+		MemberProductCollectionAdd(ctx context.Context, in *MemberProductCollectionAddReq, opts ...grpc.CallOption) (*MemberProductCollectionAddResp, error)
+		MemberProductCollectionDelete(ctx context.Context, in *MemberProductCollectionDeleteReq, opts ...grpc.CallOption) (*MemberProductCollectionDeleteResp, error)
+		MemberProductCollectionUpdate(ctx context.Context, in *MemberProductCollectionUpdateReq, opts ...grpc.CallOption) (*MemberProductCollectionUpdateResp, error)
+		MemberProductCollectionList(ctx context.Context, in *MemberProductCollectionListReq, opts ...grpc.CallOption) (*MemberProductCollectionListResp, error)
+		MemberReadHistoryAdd(ctx context.Context, in *MemberReadHistoryAddReq, opts ...grpc.CallOption) (*MemberReadHistoryAddResp, error)
+		MemberReadHistoryDelete(ctx context.Context, in *MemberReadHistoryDeleteReq, opts ...grpc.CallOption) (*MemberReadHistoryDeleteResp, error)
+		MemberReadHistoryUpdate(ctx context.Context, in *MemberReadHistoryUpdateReq, opts ...grpc.CallOption) (*MemberReadHistoryUpdateResp, error)
+		MemberReadHistoryList(ctx context.Context, in *MemberReadHistoryListReq, opts ...grpc.CallOption) (*MemberReadHistoryListResp, error)
 	}
 
 	defaultUms struct {
@@ -471,4 +497,44 @@ func (m *defaultUms) MemberTaskUpdate(ctx context.Context, in *MemberTaskUpdateR
 func (m *defaultUms) MemberTaskDelete(ctx context.Context, in *MemberTaskDeleteReq, opts ...grpc.CallOption) (*MemberTaskDeleteResp, error) {
 	client := umsclient.NewUmsClient(m.cli.Conn())
 	return client.MemberTaskDelete(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberProductCollectionAdd(ctx context.Context, in *MemberProductCollectionAddReq, opts ...grpc.CallOption) (*MemberProductCollectionAddResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberProductCollectionAdd(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberProductCollectionDelete(ctx context.Context, in *MemberProductCollectionDeleteReq, opts ...grpc.CallOption) (*MemberProductCollectionDeleteResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberProductCollectionDelete(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberProductCollectionUpdate(ctx context.Context, in *MemberProductCollectionUpdateReq, opts ...grpc.CallOption) (*MemberProductCollectionUpdateResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberProductCollectionUpdate(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberProductCollectionList(ctx context.Context, in *MemberProductCollectionListReq, opts ...grpc.CallOption) (*MemberProductCollectionListResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberProductCollectionList(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberReadHistoryAdd(ctx context.Context, in *MemberReadHistoryAddReq, opts ...grpc.CallOption) (*MemberReadHistoryAddResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberReadHistoryAdd(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberReadHistoryDelete(ctx context.Context, in *MemberReadHistoryDeleteReq, opts ...grpc.CallOption) (*MemberReadHistoryDeleteResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberReadHistoryDelete(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberReadHistoryUpdate(ctx context.Context, in *MemberReadHistoryUpdateReq, opts ...grpc.CallOption) (*MemberReadHistoryUpdateResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberReadHistoryUpdate(ctx, in, opts...)
+}
+
+func (m *defaultUms) MemberReadHistoryList(ctx context.Context, in *MemberReadHistoryListReq, opts ...grpc.CallOption) (*MemberReadHistoryListResp, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.MemberReadHistoryList(ctx, in, opts...)
 }
