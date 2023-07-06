@@ -58,6 +58,11 @@ type ProductCollectionList struct {
     CreateTime string `json:"createTime"`                     // 浏览时间
 }
 
+type ProductCollectionClearResp struct {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+}
+
 @server(
     jwt: Auth
     group: collection
@@ -72,4 +77,8 @@ service front-api {
 
     @handler ProductCollectionList
     post /list (ProductCollectionListReq) returns (ProductCollectionListResp)
+
+
+    @handler ProductCollectionClear
+    post /clear returns (ProductCollectionClearResp)
 }

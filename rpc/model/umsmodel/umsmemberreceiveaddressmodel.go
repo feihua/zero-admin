@@ -18,7 +18,7 @@ type (
 		umsMemberReceiveAddressModel
 		Count(ctx context.Context, in *ums.MemberReceiveAddressListReq) (int64, error)
 		FindAll(ctx context.Context, in *ums.MemberReceiveAddressListReq) (*[]UmsMemberReceiveAddress, error)
-		DeleteByIds(ctx context.Context, ids []int64) error
+		DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error
 		FindByIdAndMemberId(ctx context.Context, id int64, memberId int64) (*UmsMemberReceiveAddress, error)
 	}
 
@@ -77,7 +77,7 @@ func (m *customUmsMemberReceiveAddressModel) Count(ctx context.Context, in *ums.
 	}
 }
 
-func (m *customUmsMemberReceiveAddressModel) DeleteByIds(ctx context.Context, ids []int64) error {
+func (m *customUmsMemberReceiveAddressModel) DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error {
 	// 拼接占位符 "?"
 	placeholders := make([]string, len(ids))
 	for i := range ids {
@@ -85,7 +85,7 @@ func (m *customUmsMemberReceiveAddressModel) DeleteByIds(ctx context.Context, id
 	}
 
 	// 构建删除语句
-	query := fmt.Sprintf("DELETE FROM %s WHERE id IN (%s)", m.table, strings.Join(placeholders, ","))
+	query := fmt.Sprintf("DELETE FROM %s WHERE member_id = %d and id IN (%s)", m.table, MemberId, strings.Join(placeholders, ","))
 
 	// 构建参数列表
 	args := make([]interface{}, len(ids))

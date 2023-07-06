@@ -221,48 +221,13 @@ message ProductDetailByIdReq {
 }
 
 message ProductDetailByIdResp{
-  int64       Id = 1;
-  int64       BrandId = 2;
-  int64       ProductCategoryId = 3;
-  int64       FeightTemplateId = 4;
-  int64       ProductAttributeCategoryId = 5;
-  string      Name = 6;
-  string      Pic = 7;
-  string      ProductSn = 8;
-  int64       DeleteStatus = 9;
-  int64       PublishStatus = 10;
-  int64       NewStatus = 11;
-  int64       RecommandStatus = 12;
-  int64       VerifyStatus = 13;
-  int64       Sort = 14;
-  int64       Sale = 15;
-  double     Price = 16;
-  double     PromotionPrice = 17;
-  int64       GiftGrowth = 18;
-  int64       GiftPoint = 19;
-  int64       UsePointLimit = 20;
-  string      SubTitle = 21;
-  string      Description = 22;
-  double     OriginalPrice = 23;
-  int64       Stock = 24;
-  int64       LowStock = 25;
-  string      Unit = 26;
-  double     Weight = 27;
-  int64       PreviewStatus = 28;
-  string      ServiceIds = 29;
-  string      Keywords = 30;
-  string      Note = 31;
-  string      AlbumPics = 32;
-  string      DetailTitle = 33;
-  string      DetailDesc = 34;
-  string      DetailHtml = 35;
-  string      DetailMobileHtml = 36;
-  string   PromotionStartTime = 37;
-  string   PromotionEndTime = 38;
-  int64       PromotionPerLimit = 39;
-  int64       PromotionType = 40;
-  string      BrandName = 41;
-  string      ProductCategoryName = 42;
+  ProductListData       Product = 1;
+  BrandListData       Brand = 2;
+  repeated ProductAttributeListData       ProductAttributeList = 3;
+  repeated ProductAttributeValueListData       ProductAttributeValueList = 4;
+  repeated SkuStockListData      SkuStockList = 5;
+  repeated ProductLadderListData      ProductLadderList = 6;
+  repeated ProductFullReductionListData      ProductFullReductionList = 7;
 }
 
 message AlbumAddReq {
@@ -818,8 +783,7 @@ message ProductAttributeValueAddResp {
 }
 
 message ProductAttributeValueListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
+  int64    ProductId = 1;
 }
 
 message ProductAttributeValueListData{
@@ -985,13 +949,14 @@ message ProductFullReductionAddResp {
 message ProductFullReductionListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  int64 ProductId = 3;
 }
 
 message ProductFullReductionListData{
   int64    Id = 1;
   int64    ProductId = 2;
-  int64  FullPrice = 3;
-  int64  ReducePrice = 4;
+  float  FullPrice = 3;
+  float  ReducePrice = 4;
 
 }
 
@@ -1031,8 +996,7 @@ message ProductLadderAddResp {
 }
 
 message ProductLadderListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
+  int64    ProductId = 1;
 }
 
 message ProductLadderListData{
@@ -1040,7 +1004,7 @@ message ProductLadderListData{
   int64    ProductId = 2;
   int64    Count = 3;
   int64  Discount = 4;
-  int64  Price = 5;
+  float  Price = 5;
 
 }
 
@@ -1199,12 +1163,12 @@ message ProductVertifyRecordDeleteResp {
 message SkuStockAddReq {
   int64    ProductId = 2;
   string    SkuCode = 3;
-  int64  Price = 4;
+  float  Price = 4;
   int64    Stock = 5;
   int64    LowStock = 6;
   string    Pic = 7;
   int64    Sale = 8;
-  int64  PromotionPrice = 9;
+  float  PromotionPrice = 9;
   int64    LockStock = 10;
   string    SpData = 11;
 }
@@ -1214,20 +1178,19 @@ message SkuStockAddResp {
 }
 
 message SkuStockListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
+  int64    ProductId = 1;
 }
 
 message SkuStockListData{
   int64    Id = 1;
   int64    ProductId = 2;
   string    SkuCode = 3;
-  int64  Price = 4;
+  float  Price = 4;
   int64    Stock = 5;
   int64    LowStock = 6;
   string    Pic = 7;
   int64    Sale = 8;
-  int64  PromotionPrice = 9;
+  float  PromotionPrice = 9;
   int64    LockStock = 10;
   string    SpData = 11;
 
@@ -1242,12 +1205,12 @@ message SkuStockUpdateReq {
   int64    Id = 1;
   int64    ProductId = 2;
   string    SkuCode = 3;
-  int64  Price = 4;
+  float  Price = 4;
   int64    Stock = 5;
   int64    LowStock = 6;
   string    Pic = 7;
   int64    Sale = 8;
-  int64  PromotionPrice = 9;
+  float  PromotionPrice = 9;
   int64    LockStock = 10;
   string    SpData = 11;
 }
@@ -1264,33 +1227,6 @@ message SkuStockDeleteResp {
   string pong = 1;
 }
 
-message CollectListReq {
-  int64 MemberId = 1;
-}
-
-message CollectListData {
-  int32 Id = 1;
-  int32 type = 2;
-  int32 ValueID = 3;
-  string Name = 4;
-  string Brief = 5;
-  string PicUrl = 6;
-  string RetailPrice = 7;
-}
-
-message CollectListResp {
-  int64 total = 1;
-  repeated  CollectListData list = 2;
-}
-
-message CollectAddOrDeleteReq {
-  int32 MemberId = 1;
-  int32 ValueID = 2;
-}
-
-message CollectAddOrDeleteResp {
-  string pong = 1;
-}
 service Pms {
 
   rpc ProductAdd(ProductAddReq) returns(ProductAddResp);
@@ -1385,8 +1321,5 @@ service Pms {
   rpc SkuStockList(SkuStockListReq) returns(SkuStockListResp);
   rpc SkuStockUpdate(SkuStockUpdateReq) returns(SkuStockUpdateResp);
   rpc SkuStockDelete(SkuStockDeleteReq) returns(SkuStockDeleteResp);
-
-  rpc CollectList(CollectListReq) returns(CollectListResp);
-  rpc CollectAddOrDelete(CollectAddOrDeleteReq) returns(CollectAddOrDeleteResp);
 
 }

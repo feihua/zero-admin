@@ -18,7 +18,7 @@ type (
 		umsMemberReadHistoryModel
 		Count(ctx context.Context, in *ums.MemberReadHistoryListReq) (int64, error)
 		FindAll(ctx context.Context, in *ums.MemberReadHistoryListReq) (*[]UmsMemberReadHistory, error)
-		DeleteByIds(ctx context.Context, ids []int64) error
+		DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error
 	}
 
 	customUmsMemberReadHistoryModel struct {
@@ -37,10 +37,6 @@ func (m *customUmsMemberReadHistoryModel) FindAll(ctx context.Context, in *ums.M
 	where := "1=1"
 	if in.MemberId != 0 {
 		where = where + fmt.Sprintf(" AND member_id = '%d'", in.MemberId)
-	}
-
-	if in.ProductId != 0 {
-		where = where + fmt.Sprintf(" AND product_id = '%d'", in.ProductId)
 	}
 
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", umsMemberRows, m.table, where)
@@ -63,10 +59,6 @@ func (m *customUmsMemberReadHistoryModel) Count(ctx context.Context, in *ums.Mem
 		where = where + fmt.Sprintf(" AND member_id = '%d'", in.MemberId)
 	}
 
-	if in.ProductId != 0 {
-		where = where + fmt.Sprintf(" AND product_id = '%d'", in.ProductId)
-	}
-
 	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
@@ -82,23 +74,28 @@ func (m *customUmsMemberReadHistoryModel) Count(ctx context.Context, in *ums.Mem
 	}
 }
 
-func (m *customUmsMemberReadHistoryModel) DeleteByIds(ctx context.Context, ids []int64) error {
-	// 拼接占位符 "?"
-	placeholders := make([]string, len(ids))
-	for i := range ids {
-		placeholders[i] = "?"
+func (m *customUmsMemberReadHistoryModel) DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error {
+	//删除浏览记录
+	if len(ids) > 0 {
+		placeholders := make([]string, len(ids))
+		for i := range ids {
+			placeholders[i] = "?"
+		}
+
+		query := fmt.Sprintf("DELETE FROM %s WHERE member_id = %d id IN (%s)", m.table, MemberId, strings.Join(placeholders, ","))
+
+		args := make([]interface{}, len(ids))
+		for i, id := range ids {
+			args[i] = id
+		}
+
+		_, err := m.conn.ExecCtx(ctx, query, args...)
+		return err
 	}
 
-	// 构建删除语句
-	query := fmt.Sprintf("DELETE FROM %s WHERE id IN (%s)", m.table, strings.Join(placeholders, ","))
+	//清空除浏览记录
+	query := fmt.Sprintf("DELETE FROM %s WHERE member_id = ? ", m.table)
 
-	// 构建参数列表
-	args := make([]interface{}, len(ids))
-	for i, id := range ids {
-		args[i] = id
-	}
-
-	// 执行删除语句
-	_, err := m.conn.ExecCtx(ctx, query, args...)
+	_, err := m.conn.ExecCtx(ctx, query, MemberId)
 	return err
 }

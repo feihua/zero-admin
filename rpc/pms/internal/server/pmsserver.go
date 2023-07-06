@@ -396,13 +396,3 @@ func (s *PmsServer) SkuStockDelete(ctx context.Context, in *pmsclient.SkuStockDe
 	l := logic.NewSkuStockDeleteLogic(ctx, s.svcCtx)
 	return l.SkuStockDelete(in)
 }
-
-func (s *PmsServer) CollectList(ctx context.Context, in *pmsclient.CollectListReq) (*pmsclient.CollectListResp, error) {
-	l := logic.NewCollectListLogic(ctx, s.svcCtx)
-	return l.CollectList(in)
-}
-
-func (s *PmsServer) CollectAddOrDelete(ctx context.Context, in *pmsclient.CollectAddOrDeleteReq) (*pmsclient.CollectAddOrDeleteResp, error) {
-	l := logic.NewCollectAddOrDeleteLogic(ctx, s.svcCtx)
-	return l.CollectAddOrDelete(in)
-}

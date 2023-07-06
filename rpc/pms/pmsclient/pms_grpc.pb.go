@@ -97,8 +97,6 @@ type PmsClient interface {
 	SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error)
 	SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error)
 	SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error)
-	CollectList(ctx context.Context, in *CollectListReq, opts ...grpc.CallOption) (*CollectListResp, error)
-	CollectAddOrDelete(ctx context.Context, in *CollectAddOrDeleteReq, opts ...grpc.CallOption) (*CollectAddOrDeleteResp, error)
 }
 
 type pmsClient struct {
@@ -784,24 +782,6 @@ func (c *pmsClient) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, o
 	return out, nil
 }
 
-func (c *pmsClient) CollectList(ctx context.Context, in *CollectListReq, opts ...grpc.CallOption) (*CollectListResp, error) {
-	out := new(CollectListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CollectList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) CollectAddOrDelete(ctx context.Context, in *CollectAddOrDeleteReq, opts ...grpc.CallOption) (*CollectAddOrDeleteResp, error) {
-	out := new(CollectAddOrDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CollectAddOrDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // PmsServer is the server API for Pms service.
 // All implementations must embed UnimplementedPmsServer
 // for forward compatibility
@@ -881,8 +861,6 @@ type PmsServer interface {
 	SkuStockList(context.Context, *SkuStockListReq) (*SkuStockListResp, error)
 	SkuStockUpdate(context.Context, *SkuStockUpdateReq) (*SkuStockUpdateResp, error)
 	SkuStockDelete(context.Context, *SkuStockDeleteReq) (*SkuStockDeleteResp, error)
-	CollectList(context.Context, *CollectListReq) (*CollectListResp, error)
-	CollectAddOrDelete(context.Context, *CollectAddOrDeleteReq) (*CollectAddOrDeleteResp, error)
 	mustEmbedUnimplementedPmsServer()
 }
 
@@ -1114,12 +1092,6 @@ func (UnimplementedPmsServer) SkuStockUpdate(context.Context, *SkuStockUpdateReq
 }
 func (UnimplementedPmsServer) SkuStockDelete(context.Context, *SkuStockDeleteReq) (*SkuStockDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SkuStockDelete not implemented")
-}
-func (UnimplementedPmsServer) CollectList(context.Context, *CollectListReq) (*CollectListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CollectList not implemented")
-}
-func (UnimplementedPmsServer) CollectAddOrDelete(context.Context, *CollectAddOrDeleteReq) (*CollectAddOrDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CollectAddOrDelete not implemented")
 }
 func (UnimplementedPmsServer) mustEmbedUnimplementedPmsServer() {}
 
@@ -2484,42 +2456,6 @@ func _Pms_SkuStockDelete_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_CollectList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CollectListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PmsServer).CollectList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CollectList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CollectList(ctx, req.(*CollectListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Pms_CollectAddOrDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CollectAddOrDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PmsServer).CollectAddOrDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CollectAddOrDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CollectAddOrDelete(ctx, req.(*CollectAddOrDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Pms_ServiceDesc is the grpc.ServiceDesc for Pms service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2826,14 +2762,6 @@ var Pms_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SkuStockDelete",
 			Handler:    _Pms_SkuStockDelete_Handler,
-		},
-		{
-			MethodName: "CollectList",
-			Handler:    _Pms_CollectList_Handler,
-		},
-		{
-			MethodName: "CollectAddOrDelete",
-			Handler:    _Pms_CollectAddOrDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

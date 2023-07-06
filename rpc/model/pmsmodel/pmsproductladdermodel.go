@@ -16,7 +16,7 @@ type (
 	PmsProductLadderModel interface {
 		pmsProductLadderModel
 		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductLadder, error)
+		FindAll(ctx context.Context, productId int64) (*[]PmsProductLadder, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		DeleteByProductId(ctx context.Context, productId int64) error
 	}
@@ -33,11 +33,11 @@ func NewPmsProductLadderModel(conn sqlx.SqlConn) PmsProductLadderModel {
 	}
 }
 
-func (m *customPmsProductLadderModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductLadder, error) {
+func (m *customPmsProductLadderModel) FindAll(ctx context.Context, productId int64) (*[]PmsProductLadder, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductLadderRows, m.table)
+	query := fmt.Sprintf("select %s from %s where product_id =?", pmsProductLadderRows, m.table)
 	var resp []PmsProductLadder
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, productId)
 	switch err {
 	case nil:
 		return &resp, nil

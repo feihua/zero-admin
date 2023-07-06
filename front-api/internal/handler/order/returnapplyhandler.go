@@ -9,20 +9,20 @@ import (
 	"zero-admin/front-api/internal/types"
 )
 
-func OrderConfirmHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ReturnApplyHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.OrderConfirmReq
+		var req types.ReturnApplyReq
 		if err := httpx.Parse(r, &req); err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := order.NewOrderConfirmLogic(r.Context(), svcCtx)
-		resp, err := l.OrderConfirm(req)
+		l := order.NewReturnApplyLogic(r.Context(), svcCtx)
+		resp, err := l.ReturnApply(&req)
 		if err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			httpx.OkJsonCtx(r.Context(), w, resp)
 		}
 	}
 }

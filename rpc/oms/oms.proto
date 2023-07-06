@@ -525,32 +525,23 @@ message OrderOperateHistoryDeleteResp {
 }
 
 message OrderReturnApplyAddReq {
-  int64      OrderId = 2;
-  int64      CompanyAddressId = 3;
-  int64      ProductId = 4;
-  string      OrderSn = 5;
-  string  CreateTime = 6;
-  string      MemberUsername = 7;
-  int64    ReturnAmount = 8;
-  string      ReturnName = 9;
-  string      ReturnPhone = 10;
-  int64      Status = 11;
-  string  HandleTime = 12;
-  string      ProductPic = 13;
-  string      ProductName = 14;
-  string      ProductBrand = 15;
-  string      ProductAttr = 16;
-  int64      ProductCount = 17;
-  int64    ProductPrice = 18;
-  int64    ProductRealPrice = 19;
-  string      Reason = 20;
-  string      Description = 21;
-  string      ProofPics = 22;
-  string      HandleNote = 23;
-  string      HandleMan = 24;
-  string      ReceiveMan = 25;
-  string  ReceiveTime = 26;
-  string      ReceiveNote = 27;
+  int64      OrderId = 1;
+  int64      ProductId = 2;
+  string      OrderSn = 3;
+  string      MemberUsername = 4;
+  string      ReturnName = 5;
+  string      ReturnPhone = 6;
+  int64      Status = 7;
+  string      ProductPic = 8;
+  string      ProductName = 9;
+  string      ProductBrand = 10;
+  string      ProductAttr = 11;
+  int64      ProductCount = 12;
+  float    ProductPrice = 13;
+  float    ProductRealPrice = 14;
+  string      Reason = 15;
+  string      Description = 16;
+  string      ProofPics = 17;
 }
 
 message OrderReturnApplyAddResp {

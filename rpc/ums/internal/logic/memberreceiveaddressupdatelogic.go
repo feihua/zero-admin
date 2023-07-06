@@ -25,6 +25,23 @@ func NewMemberReceiveAddressUpdateLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *MemberReceiveAddressUpdateLogic) MemberReceiveAddressUpdate(in *ums.MemberReceiveAddressUpdateReq) (*ums.MemberReceiveAddressUpdateResp, error) {
+	//如果更新的地址为默认地址,则需要把之前的默认地址去除默认标识
+	if in.DefaultStatus == 1 {
+		//查询会员所有有地址
+		memberList, _ := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(l.ctx, &ums.MemberReceiveAddressListReq{
+			Current:  1,
+			PageSize: 100,
+			MemberId: in.MemberId,
+		})
+
+		for _, address := range *memberList {
+			//判断是否为默认,如果是,则修改
+			if address.DefaultStatus == 1 {
+				address.DefaultStatus = 0
+				_ = l.svcCtx.UmsMemberReceiveAddressModel.Update(l.ctx, &address)
+			}
+		}
+	}
 	err := l.svcCtx.UmsMemberReceiveAddressModel.Update(l.ctx, &umsmodel.UmsMemberReceiveAddress{
 		Id:            in.Id,
 		MemberId:      in.MemberId,

@@ -57,6 +57,12 @@ type ReadHistoryList struct {
     CreateTime string `json:"createTime"`                     // 浏览时间
 }
 
+type ReadHistoryClearResp struct {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+}
+
+
 @server(
     jwt: Auth
     group: history
@@ -66,9 +72,12 @@ service front-api {
     @handler AddReadHistoryAdd
     post /add (addReadHistoryReq) returns (addReadHistoryResp)
 
+    @handler ReadHistoryDelete
+    post /delete (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
+
     @handler ReadHistoryList
     post /list (ReadHistoryListReq) returns (ReadHistoryListResp)
 
-    @handler ReadHistoryDelete
-    post /delete (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
+    @handler ReadHistoryClear
+    post /clear returns (ReadHistoryClearResp)
 }

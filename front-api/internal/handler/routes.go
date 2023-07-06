@@ -4,14 +4,13 @@ package handler
 import (
 	"net/http"
 
-	address "zero-admin/front-api/internal/handler/address"
 	auth "zero-admin/front-api/internal/handler/auth"
 	cart "zero-admin/front-api/internal/handler/cart"
 	category "zero-admin/front-api/internal/handler/category"
-	collect "zero-admin/front-api/internal/handler/collect"
 	collection "zero-admin/front-api/internal/handler/collection"
 	history "zero-admin/front-api/internal/handler/history"
 	home "zero-admin/front-api/internal/handler/home"
+	memberaddress "zero-admin/front-api/internal/handler/member/address"
 	order "zero-admin/front-api/internal/handler/order"
 	product "zero-admin/front-api/internal/handler/product"
 	"zero-admin/front-api/internal/svc"
@@ -23,27 +22,28 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
+				Path:    "/add",
+				Handler: memberaddress.MemberAddressAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/list",
-				Handler: address.AddressListHandler(serverCtx),
+				Handler: memberaddress.MemberAddressListHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
-				Path:    "/save",
-				Handler: address.AddressSaveHandler(serverCtx),
+				Method:  http.MethodPost,
+				Path:    "/update",
+				Handler: memberaddress.MemberAddressUpdateHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/delete",
-				Handler: address.AddressDeleteHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/detail",
-				Handler: address.AddressDetailHandler(serverCtx),
+				Handler: memberaddress.MemberAddressDeleteHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/api/address"),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/address"),
 	)
 
 	server.AddRoutes(
@@ -118,22 +118,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/list",
-				Handler: collect.CollectListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/addordelete",
-				Handler: collect.AddordeleteHandler(serverCtx),
-			},
-		},
-		rest.WithPrefix("/api/collect"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
 				Path:    "/index",
 				Handler: home.HomeIndexHandler(serverCtx),
 			},
@@ -164,39 +148,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/list",
-				Handler: order.OrderListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/cancel",
-				Handler: order.OrderCancelHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/refund",
-				Handler: order.OrderRefundHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/confirm",
-				Handler: order.OrderConfirmHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/delete",
-				Handler: order.OrderDeleteHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/goods",
-				Handler: order.OrderGoodsHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/comment",
-				Handler: order.OrderCommentHandler(serverCtx),
+				Method:  http.MethodPost,
+				Path:    "/returnApply",
+				Handler: order.ReturnApplyHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api/order"),
@@ -237,8 +191,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/detail/:productId",
-				Handler: collection.ProductCollectionDetailHandler(serverCtx),
+				Path:    "/clear",
+				Handler: collection.ProductCollectionClearHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
@@ -254,13 +208,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
+				Path:    "/delete",
+				Handler: history.ReadHistoryDeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/list",
 				Handler: history.ReadHistoryListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/delete",
-				Handler: history.ReadHistoryDeleteHandler(serverCtx),
+				Path:    "/clear",
+				Handler: history.ReadHistoryClearHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

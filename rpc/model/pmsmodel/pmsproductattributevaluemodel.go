@@ -14,8 +14,7 @@ type (
 	// and implement the added methods in customPmsProductAttributeValueModel.
 	PmsProductAttributeValueModel interface {
 		pmsProductAttributeValueModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductAttributeValue, error)
+		FindAll(ctx context.Context, productId int64) (*[]PmsProductAttributeValue, error)
 		DeleteByProductId(ctx context.Context, productId int64) error
 	}
 
@@ -31,11 +30,11 @@ func NewPmsProductAttributeValueModel(conn sqlx.SqlConn) PmsProductAttributeValu
 	}
 }
 
-func (m *customPmsProductAttributeValueModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductAttributeValue, error) {
+func (m *customPmsProductAttributeValueModel) FindAll(ctx context.Context, productId int64) (*[]PmsProductAttributeValue, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductAttributeValueRows, m.table)
+	query := fmt.Sprintf("select %s from %s where product_id =?", pmsProductAttributeValueRows, m.table)
 	var resp []PmsProductAttributeValue
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, productId)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -43,22 +42,6 @@ func (m *customPmsProductAttributeValueModel) FindAll(ctx context.Context, Curre
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *customPmsProductAttributeValueModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-
-	var count int64
-	err := m.conn.QueryRow(&count, query)
-
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 

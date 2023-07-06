@@ -22,4 +22,9 @@ type Config struct {
 	PayRpc zrpc.RpcClientConf
 	//内容相关
 	CmsRpc zrpc.RpcClientConf
+
+	Auth struct {
+		AccessSecret string
+		AccessExpire int64
+	}
 }

@@ -16,7 +16,7 @@ type (
 	PmsProductFullReductionModel interface {
 		pmsProductFullReductionModel
 		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductFullReduction, error)
+		FindAll(ctx context.Context, productId int64) (*[]PmsProductFullReduction, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		DeleteByProductId(ctx context.Context, productId int64) error
 	}
@@ -33,11 +33,11 @@ func NewPmsProductFullReductionModel(conn sqlx.SqlConn) PmsProductFullReductionM
 	}
 }
 
-func (m *customPmsProductFullReductionModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsProductFullReduction, error) {
+func (m *customPmsProductFullReductionModel) FindAll(ctx context.Context, productId int64) (*[]PmsProductFullReduction, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", pmsProductFullReductionRows, m.table)
+	query := fmt.Sprintf("select %s from %s where product_id =? ", pmsProductFullReductionRows, m.table)
 	var resp []PmsProductFullReduction
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, productId)
 	switch err {
 	case nil:
 		return &resp, nil

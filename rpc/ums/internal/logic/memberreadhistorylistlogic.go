@@ -43,7 +43,7 @@ func (l *MemberReadHistoryListLogic) MemberReadHistoryList(in *umsclient.MemberR
 			MemberId:        item.MemberId,
 			MemberNickName:  item.MemberNickName,
 			MemberIcon:      item.MemberIcon,
-			ProductId:       in.ProductId,
+			ProductId:       item.ProductId,
 			ProductName:     item.ProductName,
 			ProductPic:      item.ProductPic,
 			ProductSubTitle: item.ProductSubTitle.String,

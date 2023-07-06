@@ -24,7 +24,7 @@ func NewMemberReadHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *MemberReadHistoryDeleteLogic) MemberReadHistoryDelete(in *umsclient.MemberReadHistoryDeleteReq) (*umsclient.MemberReadHistoryDeleteResp, error) {
-	err := l.svcCtx.UmsMemberReadHistoryModel.DeleteByIds(l.ctx, in.Ids)
+	err := l.svcCtx.UmsMemberReadHistoryModel.DeleteByIdsAndMemberId(l.ctx, in.Ids, in.MemberId)
 
 	if err != nil {
 		return nil, err

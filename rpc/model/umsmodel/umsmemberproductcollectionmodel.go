@@ -18,7 +18,7 @@ type (
 		umsMemberProductCollectionModel
 		Count(ctx context.Context, in *ums.MemberProductCollectionListReq) (int64, error)
 		FindAll(ctx context.Context, in *ums.MemberProductCollectionListReq) (*[]UmsMemberProductCollection, error)
-		DeleteByIds(ctx context.Context, ids []int64) error
+		DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error
 	}
 
 	customUmsMemberProductCollectionModel struct {
@@ -83,23 +83,28 @@ func (m *customUmsMemberProductCollectionModel) Count(ctx context.Context, in *u
 	}
 }
 
-func (m *customUmsMemberProductCollectionModel) DeleteByIds(ctx context.Context, ids []int64) error {
-	// 拼接占位符 "?"
-	placeholders := make([]string, len(ids))
-	for i := range ids {
-		placeholders[i] = "?"
+func (m *customUmsMemberProductCollectionModel) DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error {
+	//删除收藏商品
+	if len(ids) > 0 {
+		placeholders := make([]string, len(ids))
+		for i := range ids {
+			placeholders[i] = "?"
+		}
+
+		query := fmt.Sprintf("DELETE FROM %s WHERE member_id = %d id IN (%s)", m.table, MemberId, strings.Join(placeholders, ","))
+
+		args := make([]interface{}, len(ids))
+		for i, id := range ids {
+			args[i] = id
+		}
+
+		_, err := m.conn.ExecCtx(ctx, query, args...)
+		return err
 	}
 
-	// 构建删除语句
-	query := fmt.Sprintf("DELETE FROM %s WHERE id IN (%s)", m.table, strings.Join(placeholders, ","))
+	//清空收藏列表
+	query := fmt.Sprintf("DELETE FROM %s WHERE member_id = ? ", m.table)
 
-	// 构建参数列表
-	args := make([]interface{}, len(ids))
-	for i, id := range ids {
-		args[i] = id
-	}
-
-	// 执行删除语句
-	_, err := m.conn.ExecCtx(ctx, query, args...)
+	_, err := m.conn.ExecCtx(ctx, query, MemberId)
 	return err
 }

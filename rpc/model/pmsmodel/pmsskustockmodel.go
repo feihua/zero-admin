@@ -16,7 +16,7 @@ type (
 	PmsSkuStockModel interface {
 		pmsSkuStockModel
 		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsSkuStock, error)
+		FindAll(ctx context.Context, productId int64) (*[]PmsSkuStock, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		DeleteByProductId(ctx context.Context, productId int64) error
 	}
@@ -33,11 +33,11 @@ func NewPmsSkuStockModel(conn sqlx.SqlConn) PmsSkuStockModel {
 	}
 }
 
-func (m *customPmsSkuStockModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsSkuStock, error) {
+func (m *customPmsSkuStockModel) FindAll(ctx context.Context, productId int64) (*[]PmsSkuStock, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", pmsSkuStockRows, m.table)
+	query := fmt.Sprintf("select %s from %s where product_id =?", pmsSkuStockRows, m.table)
 	var resp []PmsSkuStock
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, productId)
 	switch err {
 	case nil:
 		return &resp, nil

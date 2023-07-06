@@ -26,21 +26,15 @@ func NewOrderReturnApplyAddLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *OrderReturnApplyAddLogic) OrderReturnApplyAdd(in *oms.OrderReturnApplyAddReq) (*oms.OrderReturnApplyAddResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	HandleTime, _ := time.Parse("2006-01-02 15:04:05", in.HandleTime)
-	ReceiveTime, _ := time.Parse("2006-01-02 15:04:05", in.ReceiveTime)
 	_, err := l.svcCtx.OmsOrderReturnApplyModel.Insert(l.ctx, &omsmodel.OmsOrderReturnApply{
 		OrderId:          in.OrderId,
-		CompanyAddressId: in.CompanyAddressId,
 		ProductId:        in.ProductId,
 		OrderSn:          in.OrderSn,
-		CreateTime:       CreateTime,
+		CreateTime:       time.Now(),
 		MemberUsername:   in.MemberUsername,
-		ReturnAmount:     float64(in.ReturnAmount),
 		ReturnName:       in.ReturnName,
 		ReturnPhone:      in.ReturnPhone,
 		Status:           in.Status,
-		HandleTime:       HandleTime,
 		ProductPic:       in.ProductPic,
 		ProductName:      in.ProductName,
 		ProductBrand:     in.ProductBrand,
@@ -51,10 +45,6 @@ func (l *OrderReturnApplyAddLogic) OrderReturnApplyAdd(in *oms.OrderReturnApplyA
 		Reason:           in.Reason,
 		Description:      in.Description,
 		ProofPics:        in.ProofPics,
-		HandleNote:       in.HandleNote,
-		HandleMan:        in.HandleMan,
-		ReceiveMan:       in.ReceiveMan,
-		ReceiveTime:      ReceiveTime,
 	})
 	if err != nil {
 		return nil, err

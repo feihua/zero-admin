@@ -41,11 +41,6 @@ type (
 	BrandListResp                              = pmsclient.BrandListResp
 	BrandUpdateReq                             = pmsclient.BrandUpdateReq
 	BrandUpdateResp                            = pmsclient.BrandUpdateResp
-	CollectAddOrDeleteReq                      = pmsclient.CollectAddOrDeleteReq
-	CollectAddOrDeleteResp                     = pmsclient.CollectAddOrDeleteResp
-	CollectListData                            = pmsclient.CollectListData
-	CollectListReq                             = pmsclient.CollectListReq
-	CollectListResp                            = pmsclient.CollectListResp
 	CommentAddReq                              = pmsclient.CommentAddReq
 	CommentAddResp                             = pmsclient.CommentAddResp
 	CommentDeleteReq                           = pmsclient.CommentDeleteReq
@@ -266,8 +261,6 @@ type (
 		SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error)
 		SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error)
 		SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error)
-		CollectList(ctx context.Context, in *CollectListReq, opts ...grpc.CallOption) (*CollectListResp, error)
-		CollectAddOrDelete(ctx context.Context, in *CollectAddOrDeleteReq, opts ...grpc.CallOption) (*CollectAddOrDeleteResp, error)
 	}
 
 	defaultPms struct {
@@ -654,14 +647,4 @@ func (m *defaultPms) SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, 
 func (m *defaultPms) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error) {
 	client := pmsclient.NewPmsClient(m.cli.Conn())
 	return client.SkuStockDelete(ctx, in, opts...)
-}
-
-func (m *defaultPms) CollectList(ctx context.Context, in *CollectListReq, opts ...grpc.CallOption) (*CollectListResp, error) {
-	client := pmsclient.NewPmsClient(m.cli.Conn())
-	return client.CollectList(ctx, in, opts...)
-}
-
-func (m *defaultPms) CollectAddOrDelete(ctx context.Context, in *CollectAddOrDeleteReq, opts ...grpc.CallOption) (*CollectAddOrDeleteResp, error) {
-	client := pmsclient.NewPmsClient(m.cli.Conn())
-	return client.CollectAddOrDelete(ctx, in, opts...)
 }

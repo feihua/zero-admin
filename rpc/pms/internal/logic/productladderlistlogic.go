@@ -24,8 +24,7 @@ func NewProductLadderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ProductLadderListLogic) ProductLadderList(in *pms.ProductLadderListReq) (*pms.ProductLadderListResp, error) {
-	all, err := l.svcCtx.PmsProductLadderModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductLadderModel.Count(l.ctx)
+	all, err := l.svcCtx.PmsProductLadderModel.FindAll(l.ctx, in.ProductId)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -41,7 +40,7 @@ func (l *ProductLadderListLogic) ProductLadderList(in *pms.ProductLadderListReq)
 			ProductId: item.ProductId,
 			Count:     item.Count,
 			Discount:  int64(item.Discount),
-			Price:     int64(item.Price),
+			Price:     float32(item.Price),
 		})
 	}
 
@@ -49,7 +48,7 @@ func (l *ProductLadderListLogic) ProductLadderList(in *pms.ProductLadderListReq)
 	listStr, _ := json.Marshal(list)
 	logx.WithContext(l.ctx).Infof("查询产品阶梯价格列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.ProductLadderListResp{
-		Total: count,
+		Total: 0,
 		List:  list,
 	}, nil
 }

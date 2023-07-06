@@ -24,8 +24,7 @@ func NewProductFullReductionListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *ProductFullReductionListLogic) ProductFullReductionList(in *pms.ProductFullReductionListReq) (*pms.ProductFullReductionListResp, error) {
-	all, err := l.svcCtx.PmsProductFullReductionModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductFullReductionModel.Count(l.ctx)
+	all, err := l.svcCtx.PmsProductFullReductionModel.FindAll(l.ctx, in.ProductId)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -39,8 +38,8 @@ func (l *ProductFullReductionListLogic) ProductFullReductionList(in *pms.Product
 		list = append(list, &pms.ProductFullReductionListData{
 			Id:          item.Id,
 			ProductId:   item.ProductId,
-			FullPrice:   int64(item.FullPrice),
-			ReducePrice: int64(item.ReducePrice),
+			FullPrice:   float32(item.FullPrice),
+			ReducePrice: float32(item.ReducePrice),
 		})
 	}
 
@@ -48,7 +47,7 @@ func (l *ProductFullReductionListLogic) ProductFullReductionList(in *pms.Product
 	listStr, _ := json.Marshal(list)
 	logx.WithContext(l.ctx).Infof("查询产品满减列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.ProductFullReductionListResp{
-		Total: count,
+		Total: 0,
 		List:  list,
 	}, nil
 }

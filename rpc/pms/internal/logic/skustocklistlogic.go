@@ -24,8 +24,7 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SkuS
 }
 
 func (l *SkuStockListLogic) SkuStockList(in *pms.SkuStockListReq) (*pms.SkuStockListResp, error) {
-	all, err := l.svcCtx.PmsSkuStockModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsSkuStockModel.Count(l.ctx)
+	all, err := l.svcCtx.PmsSkuStockModel.FindAll(l.ctx, in.ProductId)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -40,12 +39,12 @@ func (l *SkuStockListLogic) SkuStockList(in *pms.SkuStockListReq) (*pms.SkuStock
 			Id:             item.Id,
 			ProductId:      item.ProductId,
 			SkuCode:        item.SkuCode,
-			Price:          int64(item.Price),
+			Price:          float32(item.Price),
 			Stock:          item.Stock,
 			LowStock:       item.LowStock,
 			Pic:            item.Pic,
 			Sale:           item.Sale,
-			PromotionPrice: int64(item.PromotionPrice),
+			PromotionPrice: float32(item.PromotionPrice),
 			LockStock:      item.LockStock,
 			SpData:         item.SpData,
 		})
@@ -55,7 +54,7 @@ func (l *SkuStockListLogic) SkuStockList(in *pms.SkuStockListReq) (*pms.SkuStock
 	listStr, _ := json.Marshal(list)
 	logx.WithContext(l.ctx).Infof("查询库存列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &pms.SkuStockListResp{
-		Total: count,
+		Total: 0,
 		List:  list,
 	}, nil
 }

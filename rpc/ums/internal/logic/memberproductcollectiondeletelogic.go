@@ -24,7 +24,7 @@ func NewMemberProductCollectionDeleteLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 func (l *MemberProductCollectionDeleteLogic) MemberProductCollectionDelete(in *umsclient.MemberProductCollectionDeleteReq) (*umsclient.MemberProductCollectionDeleteResp, error) {
-	err := l.svcCtx.UmsMemberProductCollectionModel.DeleteByIds(l.ctx, in.Ids)
+	err := l.svcCtx.UmsMemberProductCollectionModel.DeleteByIdsAndMemberId(l.ctx, in.Ids, in.MemberId)
 
 	if err != nil {
 		return nil, err

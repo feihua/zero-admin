@@ -1,119 +1,91 @@
 info(
-    desc: "收货地址"
+    desc: "会员地址"
     author: "koobe"
     email: "1002219331@qq.com"
 )
 
-
-type AddressListReq struct {
-    Current int64 `json:"current,default=1"`
-    PageSize int64 `json:"pageSize,default=20"`
-    UserId int64 `json:"userId"`
-}
-
-type AddressListResp struct {
-    Errno int64 `json:"errno"`
-    Data AddressListData `json:"data"`
-    Errmsg string `json:"errmsg"`
-}
-
-type AddressListData struct {
-    Total int64 `json:"total"`       //总数
-    Pages int64 `json:"pages"`       //总页数
-    Limit int64 `json:"limit"`       //分页数量
-    Page int64 `json:"page"`         //当前页
-    List []AddressList `json:"list"` //地址列表
-}
-
-type AddressList struct {
-    ID int64 `json:"id"`                        //id
-    Name string `json:"name"`                   //用户名
-    UserID int64 `json:"userId"`                //用户Id
-    Province string `json:"province"`           //省
-    City string `json:"city"`                   //市
-    County string `json:"county"`               //国家
-    AddressDetail string `json:"addressDetail"` //详情地址
-    AreaCode string `json:"areaCode"`           //地区编码
-    Tel string `json:"tel"`                     //电话
-    IsDefault bool `json:"isDefault"`           //是否为默认地址
-    AddTime string `json:"addTime"`             //添加时间
-    UpdateTime string `json:"updateTime"`       //更新时间
-    Deleted bool `json:"deleted"`               //是否删除
-}
-
-type AddressSaveReq struct {
-    IsDeleted bool `json:"IS_DELETED"`
-    NotDeleted bool `json:"NOT_DELETED"`
-    ID int64 `json:"id"`
-    Name string `json:"name"`
-    UserID int64 `json:"userId"`
-    Province string `json:"province"`
-    City string `json:"city"`
-    County string `json:"county"`
-    AddressDetail string `json:"addressDetail"`
-    AreaCode string `json:"areaCode"`
-    PostalCode string `json:"postalCode"`
-    Tel string `json:"tel"`
-    IsDefault bool `json:"isDefault"`
-}
-type AddressSaveResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
-}
-
-type AddressDeleteReq struct {
-    UserID int64 `json:"userId"`
-    AddressID []int64 `json:"addressID"`
-}
-type AddressDeleteResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
-}
-
-type AddressDetailReq struct {
-    UserID int64 `json:"userId"`
-    AddressID int64 `json:"addressID"`
-}
-type AddressDetailResp struct {
-    Errno int64 `json:"errno"`
-    Data AddressDetailData `json:"data"`
-    Errmsg string `json:"errmsg"`
-}
-
-type AddressDetailData struct {
-    IsDeleted bool `json:"IS_DELETED"`
-    NotDeleted bool `json:"NOT_DELETED"`
-    ID int64 `json:"id"`                        //id
-    Name string `json:"name"`                   //用户名
-    UserID int64 `json:"userId"`                //用户Id
-    Province string `json:"province"`           //省
-    City string `json:"city"`                   //市
-    County string `json:"county"`               //国家
-    AddressDetail string `json:"addressDetail"` //详情地址
-    AreaCode string `json:"areaCode"`           //地区编码
-    PostalCode string `json:"postalCode"`
-    Tel string `json:"tel"`                     //电话
-    IsDefault bool `json:"isDefault"`           //是否为默认地址
-    AddTime string `json:"addTime"`             //添加时间
-    UpdateTime string `json:"updateTime"`       //更新时间
-    Deleted bool `json:"deleted"`               //是否删除
-}
+type (
+    addMemberAddressReq struct {
+        MemberId int64 `json:"memberId"`
+        Name string `json:"name"`                   // 收货人名称
+        PhoneNumber string `json:"phoneNumber"`
+        DefaultStatus int64 `json:"defaultStatus"`  // 是否为默认
+        PostCode string `json:"postCode"`           // 邮政编码
+        Province string `json:"province"`           // 省份/直辖市
+        City string `json:"city"`                   // 城市
+        Region string `json:"region"`               // 区
+        DetailAddress string `json:"detailAddress"` // 详细地址(街道)
+    }
+    addMemberAddressResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
+    }
+    ListMemberAddressReq struct {
+        Current int64 `json:"current,default=1"`
+        PageSize int64 `json:"pageSize,default=20"`
+    }
+    ListMemberAddressData struct {
+        Id int64 `json:"id"`
+        MemberId int64 `json:"memberId"`
+        Name string `json:"name"`                    // 收货人名称
+        PhoneNumber string `json:"phoneNumber"`
+        DefaultStatus int64 `json:"defaultStatus"`   // 是否为默认
+        PostCode string `json:"postCode"`            // 邮政编码
+        Province string `json:"province"`            // 省份/直辖市
+        City string `json:"city"`                    // 城市
+        Region string `json:"region"`                // 区
+        DetailAddress string `json:"detailAddress"`  // 详细地址(街道)
+    }
+    ListMemberAddressResp struct {
+        Current int64 `json:"current,default=1"`
+        Data []ListMemberAddressData `json:"data"`
+        PageSize int64 `json:"pageSize,default=20"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+        Code int64 `json:"code"`
+        Message string `json:"message"`
+    }
+    UpdateMemberAddressReq struct {
+        Id int64 `json:"id"`
+        MemberId int64 `json:"memberId"`
+        Name string `json:"name"`                   // 收货人名称
+        PhoneNumber string `json:"phoneNumber"`
+        DefaultStatus int64 `json:"defaultStatus"`  // 是否为默认
+        PostCode string `json:"postCode"`           // 邮政编码
+        Province string `json:"province"`           // 省份/直辖市
+        City string `json:"city"`                   // 城市
+        Region string `json:"region"`               // 区
+        DetailAddress string `json:"detailAddress"` // 详细地址(街道)
+    }
+    UpdateMemberAddressResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
+    }
+    DeleteMemberAddressReq struct {
+        Ids []int64 `json:"ids"`
+    }
+    DeleteMemberAddressResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
+    }
+)
 
 @server(
-    //    jwt: Auth
-    group: address
-    prefix: /api/address
+    jwt: Auth
+    group: member/address
+    prefix: /api/member/address
 )
 service front-api {
-    @handler AddressList
-    get /list (AddressListReq) returns (AddressListResp)
+    @handler MemberAddressAdd
+    post /add (addMemberAddressReq) returns (addMemberAddressResp)
 
-    @handler AddressSave
-    get /save (AddressSaveReq) returns (AddressSaveResp)
+    @handler MemberAddressList
+    post /list (ListMemberAddressReq) returns (ListMemberAddressResp)
 
-    @handler AddressDelete
-    get /delete (AddressDeleteReq) returns (AddressDeleteResp)
+    @handler MemberAddressUpdate
+    post /update (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
 
-    @handler AddressDetail
-    get /detail (AddressDetailReq) returns (AddressDetailResp)
+    @handler MemberAddressDelete
+    post /delete (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
 }
+

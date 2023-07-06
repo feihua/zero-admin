@@ -542,6 +542,7 @@ message MemberReceiveAddressUpdateResp {
 
 message MemberReceiveAddressDeleteReq {
   repeated int64 ids = 1;
+  int64    MemberId = 2;
 }
 
 message MemberReceiveAddressDeleteResp {
@@ -933,7 +934,7 @@ message MemberReadHistoryListData {
   int64 MemberId = 2; //会员id
   string MemberNickName = 3; //会员姓名
   string MemberIcon = 4; //会员头像
-  int64 ProductId = 5; //商品id
+  int64  ProductId = 5; //商品id
   string ProductName = 6; //商品名称
   string ProductPic = 7; //商品图片
   string ProductSubTitle = 8; //商品标题

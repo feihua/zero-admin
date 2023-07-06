@@ -5,111 +5,30 @@ info(
 )
 
 
-type OrderListReq struct {
-    Page int64 `json:"page"`
-    Limit int64 `json:"limit"`
-    UserId int64 `json:"userId"`
-}
-
-type OrderListResp struct {
-    Errno int64 `json:"errno"`
-    Data   []OrderListData `json:"data"`
-    Errmsg string `json:"errmsg"`
-}
-
-type OrderListData struct {
-    Id int32 `json:"id"`
+type ReturnApplyReq struct {
+    OrderID int64 `json:"orderId"`
+    ProductID int64 `json:"productId"`
     OrderSn string `json:"orderSn"`
-    ActualPrice string `json:"actualPrice"`
-    OrderStatusText string `json:"orderStatusText"`
-    HandleOption string `json:"handleOption"`
-    GoodsList []GoodsListData `json:"goodsList"`
-}
-type GoodsListData struct {
-    Id int32 `json:"id"`
-    GoodsName string `json:"goodsName"`
-    Number string `json:"number"`
-    PicUrl string `json:"picUrl"`
-    Specifications string `json:"specifications"`
-    Price string `json:"price"`
-}
-
-type OrderCancelReq struct {
-    UserId int64 `json:"userId"`
-    OrderId int64 `json:"orderId"`
-}
-type OrderCancelResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
+    MemberUsername string `json:"memberUsername"`
+    ReturnName string `json:"returnName"`
+    ReturnPhone string `json:"returnPhone"`
+    ProductPic string `json:"productPic"`
+    ProductName string `json:"productName"`
+    ProductBrand string `json:"productBrand"`
+    ProductAttr string `json:"productAttr"`
+    ProductCount int64 `json:"productCount"`
+    ProductPrice float32 `json:"productPrice"`
+    ProductRealPrice float32 `json:"productRealPrice"`
+    Reason string `json:"reason"`
+    Description string `json:"description"`
+    ProofPics string `json:"proofPics"`
 }
 
-type OrderRefundReq struct {
-    UserId int64 `json:"userId"`
-    OrderId int64 `json:"orderId"`
-}
-type OrderRefundResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
+type ReturnApplyResp struct {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
 }
 
-type OrderConfirmReq struct {
-    UserId int64 `json:"userId"`
-    OrderId int64 `json:"orderId"`
-}
-type OrderConfirmResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
-}
-
-type OrderDeleteReq struct {
-    UserId int64 `json:"userId"`
-    OrderId int64 `json:"orderId"`
-}
-type OrderDeleteResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
-}
-
-type OrderGoodsReq struct {
-    UserId int64 `json:"userId"`
-    OrderId int64 `json:"orderId"`
-    GoodsId int64 `json:"goodsId"`
-}
-type OrderGoodsResp struct {
-    Errno int64 `json:"errno"`
-    Data []OrderGoodsData `json:"data"`
-    Errmsg string `json:"errmsg"`
-}
-
-type OrderGoodsData struct {
-    IsDeleted bool `json:"IS_DELETED"`
-    NotDeleted bool `json:"NOT_DELETED"`
-    ID int64 `json:"id"`               //id
-    OrderID int64 `json:"orderId"`     //订单Id
-    GoodsID int64 `json:"goodsId"`     //商品Id
-    GoodsName string `json:"goodsName"`//商品名称
-    GoodsSn string `json:"goodsSn"`    //商品编号
-    ProductID int64 `json:"productId"` //产品规格Id
-    Number string `json:"number"`      //商品数量
-    Price string `json:"price"`        //商品价格
-    Specifications string `json:"specifications"`
-    PicURL string `json:"picUrl"`      //商品图片
-    Comment int64 `json:"comment"`     //评论
-    AddTime string `json:"addTime"`
-    UpdateTime string `json:"updateTime"`
-    Deleted bool `json:"deleted"`
-}
-
-type OrderCommentReq struct {
-    UserId int64 `json:"userId"`
-    OrderGoodsId int64 `json:"orderGoodsId"`
-    Content string `json:"content"`
-    PicUrls []string `json:"picUrls"`
-}
-type OrderCommentResp struct {
-    Errno int64 `json:"errno"`
-    Errmsg string `json:"errmsg"`
-}
 
 @server(
     //    jwt: Auth
@@ -117,24 +36,6 @@ type OrderCommentResp struct {
     prefix: /api/order
 )
 service front-api {
-    @handler OrderList
-    get /list (OrderListReq) returns (OrderListResp)
-
-    @handler OrderCancel
-    get /cancel (OrderCancelReq) returns (OrderCancelResp)
-
-    @handler OrderRefund
-    get /refund (OrderRefundReq) returns (OrderRefundResp)
-
-    @handler OrderConfirm
-    get /confirm (OrderConfirmReq) returns (OrderConfirmResp)
-
-    @handler OrderDelete
-    get /delete (OrderDeleteReq) returns (OrderDeleteResp)
-
-    @handler OrderGoods
-    get /goods (OrderGoodsReq) returns (OrderGoodsResp)
-
-    @handler OrderComment
-    get /comment (OrderCommentReq) returns (OrderCommentResp)
+    @handler ReturnApply
+    post /returnApply (ReturnApplyReq) returns (ReturnApplyResp)
 }
