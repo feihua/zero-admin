@@ -9,6 +9,8 @@ import (
 	cart "zero-admin/front-api/internal/handler/cart"
 	category "zero-admin/front-api/internal/handler/category"
 	collect "zero-admin/front-api/internal/handler/collect"
+	collection "zero-admin/front-api/internal/handler/collection"
+	history "zero-admin/front-api/internal/handler/history"
 	home "zero-admin/front-api/internal/handler/home"
 	order "zero-admin/front-api/internal/handler/order"
 	product "zero-admin/front-api/internal/handler/product"
@@ -204,15 +206,64 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/detail",
-				Handler: product.GoodsDetailHandler(serverCtx),
+				Path:    "/queryProduct/:id",
+				Handler: product.QueryProductHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/category",
-				Handler: product.GoodsCategoryHandler(serverCtx),
+				Path:    "/queryProductList",
+				Handler: product.QueryProductListHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/api/goods"),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/add",
+				Handler: collection.AddProductCollectionAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/delete",
+				Handler: collection.ProductCollectionDeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list",
+				Handler: collection.ProductCollectionListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/detail/:productId",
+				Handler: collection.ProductCollectionDetailHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/collection"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/add",
+				Handler: history.AddReadHistoryAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list",
+				Handler: history.ReadHistoryListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/delete",
+				Handler: history.ReadHistoryDeleteHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/history"),
 	)
 }

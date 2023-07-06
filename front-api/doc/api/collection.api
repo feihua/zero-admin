@@ -1,0 +1,75 @@
+info(
+    desc: "浏览记录"
+    author: "koobe"
+    email: "1002219331@qq.com"
+)
+
+type addProductCollectionReq struct {
+    ProductId int64 `json:"productId"`                        // 商品id
+    ProductName string `json:"productName"`                   // 商品名称
+    ProductPic string `json:"productPic"`                     // 商品图片
+    ProductSubTitle string `json:"productSubTitle"`           // 商品标题
+    ProductPrice float64 `json:"productPrice"`                // 商品价格
+}
+type addProductCollectionResp struct {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+}
+
+type ProductCollectionDeleteReq struct {
+    Ids []int64 `json:"ids"`
+}
+
+type ProductCollectionDeleteResp struct {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+}
+
+type ProductCollectionListReq struct {
+    Current int64 `json:"current,default=1"`
+    PageSize int64 `json:"pageSize,default=20"`
+    ProductId int64 `json:"productId,default=0"` // 商品id
+}
+
+type ProductCollectionListResp struct {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+    Data ProductCollectionListData `json:"data"`
+}
+
+type ProductCollectionListData struct {
+    Total int64 `json:"total"`                 //总数
+    Pages int64 `json:"pages"`                 //总页数
+    Limit int64 `json:"limit"`                 //分页数量
+    Page int64 `json:"page"`                   //当前页
+    List []ProductCollectionList `json:"list"` //地址列表
+}
+
+type ProductCollectionList struct {
+    Id int64 `json:"id"`                                      // 编号
+    MemberId int64 `json:"memberId"`                          // 会员id
+    MemberNickName string `json:"memberNickName"`             // 会员姓名
+    MemberIcon string `json:"memberIcon"`                     // 会员头像
+    ProductId int64 `json:"productId"`                        // 商品id
+    ProductName string `json:"productName"`                   // 商品名称
+    ProductPic string `json:"productPic"`                     // 商品图片
+    ProductSubTitle string `json:"productSubTitle"`           // 商品标题
+    ProductPrice float64 `json:"productPrice"`                // 商品价格
+    CreateTime string `json:"createTime"`                     // 浏览时间
+}
+
+@server(
+    jwt: Auth
+    group: collection
+    prefix: /api/collection
+)
+service front-api {
+    @handler AddProductCollectionAdd
+    post /add (addProductCollectionReq) returns (addProductCollectionResp)
+
+    @handler ProductCollectionDelete
+    post /delete (ProductCollectionDeleteReq) returns (ProductCollectionDeleteResp)
+
+    @handler ProductCollectionList
+    post /list (ProductCollectionListReq) returns (ProductCollectionListResp)
+}

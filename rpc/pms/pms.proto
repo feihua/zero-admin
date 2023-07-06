@@ -95,6 +95,7 @@ message ProductListReq {
   int64  ProductCategoryId = 5;
   int64       PublishStatus = 6;
   int64       DeleteStatus = 7;
+  int64       BrandId = 8;
 }
 
 message ProductByIdsReq {

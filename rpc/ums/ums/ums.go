@@ -42,6 +42,7 @@ type (
 	IntegrationConsumeSettingUpdateResp     = umsclient.IntegrationConsumeSettingUpdateResp
 	MemberAddReq                            = umsclient.MemberAddReq
 	MemberAddResp                           = umsclient.MemberAddResp
+	MemberByIdReq                           = umsclient.MemberByIdReq
 	MemberDeleteReq                         = umsclient.MemberDeleteReq
 	MemberDeleteResp                        = umsclient.MemberDeleteResp
 	MemberLevelAddReq                       = umsclient.MemberLevelAddReq
@@ -159,6 +160,7 @@ type (
 		MemberList(ctx context.Context, in *MemberListReq, opts ...grpc.CallOption) (*MemberListResp, error)
 		MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts ...grpc.CallOption) (*MemberUpdateResp, error)
 		MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error)
+		QueryMemberById(ctx context.Context, in *MemberByIdReq, opts ...grpc.CallOption) (*MemberListData, error)
 		GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error)
 		GrowthChangeHistoryList(ctx context.Context, in *GrowthChangeHistoryListReq, opts ...grpc.CallOption) (*GrowthChangeHistoryListResp, error)
 		GrowthChangeHistoryUpdate(ctx context.Context, in *GrowthChangeHistoryUpdateReq, opts ...grpc.CallOption) (*GrowthChangeHistoryUpdateResp, error)
@@ -252,6 +254,11 @@ func (m *defaultUms) MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts
 func (m *defaultUms) MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error) {
 	client := umsclient.NewUmsClient(m.cli.Conn())
 	return client.MemberDelete(ctx, in, opts...)
+}
+
+func (m *defaultUms) QueryMemberById(ctx context.Context, in *MemberByIdReq, opts ...grpc.CallOption) (*MemberListData, error) {
+	client := umsclient.NewUmsClient(m.cli.Conn())
+	return client.QueryMemberById(ctx, in, opts...)
 }
 
 func (m *defaultUms) GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error) {

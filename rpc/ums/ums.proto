@@ -97,6 +97,9 @@ message MemberDeleteResp {
   string pong = 1;
 }
 
+message MemberByIdReq {
+  int64 id = 1;
+}
 
 message GrowthChangeHistoryAddReq {
   int64      MemberId = 2;
@@ -820,6 +823,7 @@ message MemberProductCollectionAddResp {
 
 message MemberProductCollectionDeleteReq {
   repeated int64 ids = 1;
+  int64 MemberId = 2; //会员id
 }
 
 message MemberProductCollectionDeleteResp {
@@ -892,6 +896,7 @@ message MemberReadHistoryAddResp {
 
 message MemberReadHistoryDeleteReq {
   repeated int64 ids = 1;
+  int64 MemberId = 2; //会员id
 }
 
 message MemberReadHistoryDeleteResp {
@@ -920,7 +925,6 @@ message MemberReadHistoryListReq {
   int64 current = 1;
   int64 pageSize = 2;
   int64 MemberId = 3; //会员id
-  int64 ProductId = 4; //商品id
 
 }
 
@@ -950,6 +954,7 @@ service Ums {
   rpc MemberList(MemberListReq) returns(MemberListResp);
   rpc MemberUpdate(MemberUpdateReq) returns(MemberUpdateResp);
   rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);
+  rpc QueryMemberById(MemberByIdReq) returns(MemberListData);
 
 
   rpc GrowthChangeHistoryAdd(GrowthChangeHistoryAddReq) returns(GrowthChangeHistoryAddResp);

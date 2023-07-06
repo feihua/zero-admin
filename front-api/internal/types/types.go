@@ -614,112 +614,180 @@ type OrderCommentResp struct {
 	Errmsg string `json:"errmsg"`
 }
 
-type GoodsDetailReq struct {
-	Id int64 `form:"id"`
+type QueryProductReq struct {
+	Id int64 `path:"id"`
 }
 
-type GoodsDetailResp struct {
-	Errno  int64           `json:"errno"`
-	Data   GoodsDetailData `json:"data"`
-	Errmsg string          `json:"errmsg"`
+type QueryProductResp struct {
+	Code    int64                `json:"code"`
+	Message string               `json:"message"`
+	Data    QueryProductListData `json:"data"`
 }
 
-type GoodsDetailData struct {
-	SpecificationList []SpecificationList `json:"specificationList"`
-	Issue             []Issue             `json:"issue"` //常见问题
-	UserHasCollect    int64               `json:"userHasCollect"`
-	ShareImage        string              `json:"shareImage"`
-	Share             bool                `json:"share"`
-	Attribute         []interface{}       `json:"attribute"`   //商品属性
-	ProductList       []ProductList1      `json:"productList"` //商品规格
-	Info              Info                `json:"info"`        //商品信息
+type QueryProductListReq struct {
+	Current           int64 `json:"current,default=1"`
+	PageSize          int64 `json:"pageSize,default=10"`
+	BrandId           int64 `json:"brandId,default=0"`
+	ProductCategoryId int64 `json:"productCategoryId,default=0"`
 }
 
-type Info struct {
-	ID           int64    `json:"id"`           //id
-	GoodsSn      string   `json:"goodsSn"`      //商品编号
-	Name         string   `json:"name"`         //名称
-	CategoryID   int64    `json:"categoryId"`   //分类Id
-	Gallery      []string `json:"gallery"`      //图片
-	Keywords     string   `json:"keywords"`     //关键字
-	Brief        string   `json:"brief"`        //简介
-	IsOnSale     bool     `json:"isOnSale"`     //是否在售
-	SortOrder    int64    `json:"sortOrder"`    //排序规则
-	PicURL       string   `json:"picUrl"`       //图片地址
-	ShareURL     string   `json:"shareUrl"`     //分享地址
-	IsNew        bool     `json:"isNew"`        //是否为新品
-	IsHot        bool     `json:"isHot"`        //是否为热卖商品
-	Unit         string   `json:"unit"`         //单位
-	CounterPrice int64    `json:"counterPrice"` //专柜价格
-	RetailPrice  int64    `json:"retailPrice"`  //零售价格
-	AddTime      string   `json:"addTime"`
-	UpdateTime   string   `json:"updateTime"`
-	Deleted      bool     `json:"deleted"`
-	Detail       string   `json:"detail"`
+type QueryProductListResp struct {
+	Code    int64                  `json:"code"`
+	Message string                 `json:"message"`
+	Data    []QueryProductListData `json:"data"`
 }
 
-type Issue struct {
-	ID         int64  `json:"id"`       //id
-	Question   string `json:"question"` //问
-	Answer     string `json:"answer"`   //答
-	AddTime    string `json:"addTime"`
-	UpdateTime string `json:"updateTime"`
-	Deleted    bool   `json:"deleted"`
+type QueryProductListData struct {
+	Id                         int64   `json:"id"`
+	BrandId                    int64   `json:"brandId"`
+	ProductCategoryId          int64   `json:"productCategoryId"`
+	FeightTemplateId           int64   `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
+	Name                       string  `json:"name"`
+	Pic                        string  `json:"pic"`
+	ProductSn                  string  `json:"productSn"`
+	DeleteStatus               int64   `json:"deleteStatus"`
+	PublishStatus              int64   `json:"publishStatus"`
+	NewStatus                  int64   `json:"newStatus"`
+	RecommandStatus            int64   `json:"recommandStatus"`
+	VerifyStatus               int64   `json:"verifyStatus"`
+	Sort                       int64   `json:"sort"`
+	Sale                       int64   `json:"sale"`
+	Price                      float64 `json:"price"`
+	PromotionPrice             float64 `json:"promotionPrice,omitempty"`
+	GiftGrowth                 int64   `json:"giftGrowth"`
+	GiftPoint                  int64   `json:"giftPoint"`
+	UsePointLimit              int64   `json:"usePointLimit"`
+	SubTitle                   string  `json:"subTitle"`
+	OriginalPrice              float64 `json:"originalPrice"`
+	Stock                      int64   `json:"stock"`
+	LowStock                   int64   `json:"lowStock"`
+	Unit                       string  `json:"unit"`
+	Weight                     float64 `json:"weight"`
+	PreviewStatus              int64   `json:"previewStatus"`
+	ServiceIDS                 string  `json:"serviceIds"`
+	Keywords                   string  `json:"keywords"`
+	Note                       string  `json:"note"`
+	AlbumPics                  string  `json:"albumPics"`
+	DetailTitle                string  `json:"detailTitle"`
+	PromotionStartTime         string  `json:"promotionStartTime,omitempty"`
+	PromotionEndTime           string  `json:"promotionEndTime,omitempty"`
+	PromotionPerLimit          int64   `json:"promotionPerLimit"`
+	PromotionType              int64   `json:"promotionType"`
+	BrandName                  string  `json:"brandName"`
+	ProductCategoryName        string  `json:"productCategoryName"`
+	Description                string  `json:"description"`
 }
 
-type ProductList1 struct {
-	ID             int64    `json:"id"`             //id
-	GoodsID        int64    `json:"goodsId"`        //商品Id
-	Specifications []string `json:"specifications"` //规格值
-	Price          int64    `json:"price"`          //价格
-	Number         int64    `json:"number"`         //数量
-	URL            string   `json:"url"`            //图片路径
-	AddTime        string   `json:"addTime"`
-	UpdateTime     string   `json:"updateTime"`
-	Deleted        bool     `json:"deleted"`
+type AddProductCollectionReq struct {
+	ProductId       int64   `json:"productId"`       // 商品id
+	ProductName     string  `json:"productName"`     // 商品名称
+	ProductPic      string  `json:"productPic"`      // 商品图片
+	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
+	ProductPrice    float64 `json:"productPrice"`    // 商品价格
 }
 
-type SpecificationList struct {
-	Name      string      `json:"name"`
-	ValueList []ValueList `json:"valueList"`
+type AddProductCollectionResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
 }
 
-type ValueList struct {
-	ID            int64  `json:"id"`
-	GoodsID       int64  `json:"goodsId"`
-	Specification string `json:"specification"`
-	Value         string `json:"value"`
-	PicURL        string `json:"picUrl"`
-	AddTime       string `json:"addTime"`
-	UpdateTime    string `json:"updateTime"`
-	Deleted       bool   `json:"deleted"`
+type ProductCollectionDeleteReq struct {
+	Ids []int64 `json:"ids"`
 }
 
-type GoodsCategoryReq struct {
-	Id int64 `form:"id"`
+type ProductCollectionDeleteResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
 }
 
-type GoodsCategoryResp struct {
-	Errno  int64             `json:"errno"`
-	Data   GoodsCategoryData `json:"data"`
-	Errmsg string            `json:"errmsg"`
+type ProductCollectionListReq struct {
+	Current   int64 `json:"current,default=1"`
+	PageSize  int64 `json:"pageSize,default=20"`
+	ProductId int64 `json:"product_id"` // 商品id
 }
 
-type GoodsCategoryData struct {
-	Total int64               `json:"total"`
-	Pages int64               `json:"pages"`
-	Limit int64               `json:"limit"`
-	Page  int64               `json:"page"`
-	List  []GoodsCategoryList `json:"list"`
+type ProductCollectionListResp struct {
+	Code    int64                     `json:"code"`
+	Message string                    `json:"message"`
+	Data    ProductCollectionListData `json:"data"`
 }
 
-type GoodsCategoryList struct {
-	ID           int64   `json:"id"`           //商品id
-	Name         string  `json:"name"`         //商品名称
-	Brief        string  `json:"brief"`        //商品简介
-	PicURL       string  `json:"picUrl"`       //商品图片
-	IsNew        bool    `json:"isNew"`        //是否为新品
-	IsHot        bool    `json:"isHot"`        //是否为热卖商品
-	CounterPrice float64 `json:"counterPrice"` //专柜价格
-	RetailPrice  float64 `json:"retailPrice"`  //零售价格
+type ProductCollectionListData struct {
+	Total int64                   `json:"total"` //总数
+	Pages int64                   `json:"pages"` //总页数
+	Limit int64                   `json:"limit"` //分页数量
+	Page  int64                   `json:"page"`  //当前页
+	List  []ProductCollectionList `json:"list"`  //地址列表
+}
+
+type ProductCollectionList struct {
+	Id              int64   `json:"id"`              // 编号
+	MemberId        int64   `json:"memberId"`        // 会员id
+	MemberNickName  string  `json:"memberNickName"`  // 会员姓名
+	MemberIcon      string  `json:"memberIcon"`      // 会员头像
+	ProductId       int64   `json:"productId"`       // 商品id
+	ProductName     string  `json:"productName"`     // 商品名称
+	ProductPic      string  `json:"productPic"`      // 商品图片
+	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
+	ProductPrice    float64 `json:"productPrice"`    // 商品价格
+	CreateTime      string  `json:"createTime"`      // 浏览时间
+}
+
+type ProductCollectionDetailReq struct {
+	ProductId int64 `path:"productId""` // 商品id
+}
+
+type AddReadHistoryReq struct {
+	ProductId       int64   `json:"productId"`       // 商品id
+	ProductName     string  `json:"productName"`     // 商品名称
+	ProductPic      string  `json:"productPic"`      // 商品图片
+	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
+	ProductPrice    float64 `json:"productPrice"`    // 商品价格
+}
+
+type AddReadHistoryResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
+type ReadHistoryDeleteReq struct {
+	Ids []int64 `json:"ids"`
+}
+
+type ReadHistoryDeleteResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
+type ReadHistoryListReq struct {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=20"`
+}
+
+type ReadHistoryListResp struct {
+	Code    int64               `json:"code"`
+	Message string              `json:"message"`
+	Data    ReadHistoryListData `json:"data"`
+}
+
+type ReadHistoryListData struct {
+	Total int64             `json:"total"` //总数
+	Pages int64             `json:"pages"` //总页数
+	Limit int64             `json:"limit"` //分页数量
+	Page  int64             `json:"page"`  //当前页
+	List  []ReadHistoryList `json:"list"`  //地址列表
+}
+
+type ReadHistoryList struct {
+	Id              int64   `json:"id"`              // 编号
+	MemberId        int64   `json:"memberId"`        // 会员id
+	MemberNickName  string  `json:"memberNickName"`  // 会员姓名
+	MemberIcon      string  `json:"memberIcon"`      // 会员头像
+	ProductId       int64   `json:"productId"`       // 商品id
+	ProductName     string  `json:"productName"`     // 商品名称
+	ProductPic      string  `json:"productPic"`      // 商品图片
+	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
+	ProductPrice    float64 `json:"productPrice"`    // 商品价格
+	CreateTime      string  `json:"createTime"`      // 浏览时间
 }

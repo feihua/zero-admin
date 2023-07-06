@@ -47,6 +47,11 @@ func (s *UmsServer) MemberDelete(ctx context.Context, in *umsclient.MemberDelete
 	return l.MemberDelete(in)
 }
 
+func (s *UmsServer) QueryMemberById(ctx context.Context, in *umsclient.MemberByIdReq) (*umsclient.MemberListData, error) {
+	l := logic.NewQueryMemberByIdLogic(ctx, s.svcCtx)
+	return l.QueryMemberById(in)
+}
+
 func (s *UmsServer) GrowthChangeHistoryAdd(ctx context.Context, in *umsclient.GrowthChangeHistoryAddReq) (*umsclient.GrowthChangeHistoryAddResp, error) {
 	l := logic.NewGrowthChangeHistoryAddLogic(ctx, s.svcCtx)
 	return l.GrowthChangeHistoryAdd(in)

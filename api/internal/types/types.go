@@ -1434,10 +1434,14 @@ type AddProductResp struct {
 }
 
 type ListProductReq struct {
-	Current      int64  `json:"current,default=1"`
-	PageSize     int64  `json:"pageSize,default=20"`
-	Name         string `json:"name,optional"`
-	VerifyStatus int64  `json:"verifyStatus,default=2"`
+	Current           int64  `json:"current,default=1"`
+	PageSize          int64  `json:"pageSize,default=20"`
+	Name              string `json:"name,optional"`
+	VerifyStatus      int64  `json:"verifyStatus,default=2"`
+	BrandId           int64  `json:"brandId,default=0"`
+	ProductCategoryId int64  `json:"productCategoryId,default=0"`
+	DeleteStatus      int64  `json:"deleteStatus,default=2"` // 删除状态：0->未删除；1->已删除
+	PublishStatus     int64  `json:"publishStatus,default=2"`
 }
 
 type ListtProductData struct {

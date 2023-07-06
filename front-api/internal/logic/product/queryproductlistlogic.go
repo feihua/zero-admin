@@ -1,9 +1,7 @@
-package home
+package product
 
 import (
 	"context"
-	"encoding/json"
-	"errors"
 	"zero-admin/rpc/pms/pmsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -12,40 +10,34 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type RecommendProductListLogic struct {
+type QueryProductListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewRecommendProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RecommendProductListLogic {
-	return &RecommendProductListLogic{
+func NewQueryProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryProductListLogic {
+	return &QueryProductListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *RecommendProductListLogic) RecommendProductList(req *types.RecommendProductListReq) (resp *types.RecommendProductListResp, err error) {
-	productListResp, err := l.svcCtx.Pms.ProductList(l.ctx, &pmsclient.ProductListReq{
+func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq) (resp *types.QueryProductListResp, err error) {
+	productListResp, _ := l.svcCtx.Pms.ProductList(l.ctx, &pmsclient.ProductListReq{
 		Current:           req.Current,
 		PageSize:          req.PageSize,
 		VerifyStatus:      1, // 审核状态：0->未审核；1->审核通过
-		ProductCategoryId: 0,
+		ProductCategoryId: req.ProductCategoryId,
 		PublishStatus:     1, // 上架状态：0->下架；1->上架
 		DeleteStatus:      0, // 删除状态：0->未删除；1->已删除
-		BrandId:           0,
+		BrandId:           req.BrandId,
 	})
 
-	if err != nil {
-		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询商品信息列表异常:%s", string(data), err.Error())
-		return nil, errors.New("查询商品信息失败")
-	}
-
-	var productLists []types.ProductList
+	var productLists []types.QueryProductListData
 	for _, item := range productListResp.List {
-		productLists = append(productLists, types.ProductList{
+		productLists = append(productLists, types.QueryProductListData{
 			Id:                         item.Id,
 			BrandId:                    item.BrandId,
 			ProductCategoryId:          item.ProductCategoryId,
@@ -88,7 +80,7 @@ func (l *RecommendProductListLogic) RecommendProductList(req *types.RecommendPro
 		})
 	}
 
-	return &types.RecommendProductListResp{
+	return &types.QueryProductListResp{
 		Code:    0,
 		Message: "操作成功",
 		Data:    productLists,

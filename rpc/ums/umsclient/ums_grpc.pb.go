@@ -27,6 +27,7 @@ type UmsClient interface {
 	MemberList(ctx context.Context, in *MemberListReq, opts ...grpc.CallOption) (*MemberListResp, error)
 	MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts ...grpc.CallOption) (*MemberUpdateResp, error)
 	MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error)
+	QueryMemberById(ctx context.Context, in *MemberByIdReq, opts ...grpc.CallOption) (*MemberListData, error)
 	GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error)
 	GrowthChangeHistoryList(ctx context.Context, in *GrowthChangeHistoryListReq, opts ...grpc.CallOption) (*GrowthChangeHistoryListResp, error)
 	GrowthChangeHistoryUpdate(ctx context.Context, in *GrowthChangeHistoryUpdateReq, opts ...grpc.CallOption) (*GrowthChangeHistoryUpdateResp, error)
@@ -133,6 +134,15 @@ func (c *umsClient) MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts 
 func (c *umsClient) MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error) {
 	out := new(MemberDeleteResp)
 	err := c.cc.Invoke(ctx, "/umsclient.Ums/MemberDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *umsClient) QueryMemberById(ctx context.Context, in *MemberByIdReq, opts ...grpc.CallOption) (*MemberListData, error) {
+	out := new(MemberListData)
+	err := c.cc.Invoke(ctx, "/umsclient.Ums/QueryMemberById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -661,6 +671,7 @@ type UmsServer interface {
 	MemberList(context.Context, *MemberListReq) (*MemberListResp, error)
 	MemberUpdate(context.Context, *MemberUpdateReq) (*MemberUpdateResp, error)
 	MemberDelete(context.Context, *MemberDeleteReq) (*MemberDeleteResp, error)
+	QueryMemberById(context.Context, *MemberByIdReq) (*MemberListData, error)
 	GrowthChangeHistoryAdd(context.Context, *GrowthChangeHistoryAddReq) (*GrowthChangeHistoryAddResp, error)
 	GrowthChangeHistoryList(context.Context, *GrowthChangeHistoryListReq) (*GrowthChangeHistoryListResp, error)
 	GrowthChangeHistoryUpdate(context.Context, *GrowthChangeHistoryUpdateReq) (*GrowthChangeHistoryUpdateResp, error)
@@ -739,6 +750,9 @@ func (UnimplementedUmsServer) MemberUpdate(context.Context, *MemberUpdateReq) (*
 }
 func (UnimplementedUmsServer) MemberDelete(context.Context, *MemberDeleteReq) (*MemberDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberDelete not implemented")
+}
+func (UnimplementedUmsServer) QueryMemberById(context.Context, *MemberByIdReq) (*MemberListData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberById not implemented")
 }
 func (UnimplementedUmsServer) GrowthChangeHistoryAdd(context.Context, *GrowthChangeHistoryAddReq) (*GrowthChangeHistoryAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GrowthChangeHistoryAdd not implemented")
@@ -1010,6 +1024,24 @@ func _Ums_MemberDelete_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UmsServer).MemberDelete(ctx, req.(*MemberDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ums_QueryMemberById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberByIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UmsServer).QueryMemberById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.Ums/QueryMemberById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UmsServer).QueryMemberById(ctx, req.(*MemberByIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2066,6 +2098,10 @@ var Ums_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberDelete",
 			Handler:    _Ums_MemberDelete_Handler,
+		},
+		{
+			MethodName: "QueryMemberById",
+			Handler:    _Ums_QueryMemberById_Handler,
 		},
 		{
 			MethodName: "GrowthChangeHistoryAdd",
