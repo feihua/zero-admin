@@ -9,20 +9,20 @@ import (
 	"zero-admin/front-api/internal/types"
 )
 
-func CartUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func CartItemDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.CartUpdateReq
+		var req types.CartItemDeleteReq
 		if err := httpx.Parse(r, &req); err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := cart.NewCartUpdateLogic(r.Context(), svcCtx)
-		resp, err := l.CartUpdate(req)
+		l := cart.NewCartItemDeleteLogic(r.Context(), svcCtx)
+		resp, err := l.CartItemDelete(&req)
 		if err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			httpx.OkJsonCtx(r.Context(), w, resp)
 		}
 	}
 }

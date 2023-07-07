@@ -15,14 +15,8 @@ import (
 type (
 	CartItemAddReq                = omsclient.CartItemAddReq
 	CartItemAddResp               = omsclient.CartItemAddResp
-	CartItemCheckOutReq           = omsclient.CartItemCheckOutReq
-	CartItemCheckOutResp          = omsclient.CartItemCheckOutResp
-	CartItemCheckedReq            = omsclient.CartItemCheckedReq
-	CartItemCheckedResp           = omsclient.CartItemCheckedResp
 	CartItemDeleteReq             = omsclient.CartItemDeleteReq
 	CartItemDeleteResp            = omsclient.CartItemDeleteResp
-	CartItemFastAddReq            = omsclient.CartItemFastAddReq
-	CartItemFastAddResp           = omsclient.CartItemFastAddResp
 	CartItemListData              = omsclient.CartItemListData
 	CartItemListReq               = omsclient.CartItemListReq
 	CartItemListResp              = omsclient.CartItemListResp
@@ -116,10 +110,8 @@ type (
 		CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error)
 		CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error)
 		CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
+		CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
 		CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error)
-		CartItemChecked(ctx context.Context, in *CartItemCheckedReq, opts ...grpc.CallOption) (*CartItemCheckedResp, error)
-		CartItemCheckOut(ctx context.Context, in *CartItemCheckOutReq, opts ...grpc.CallOption) (*CartItemCheckOutResp, error)
-		CartItemFastAdd(ctx context.Context, in *CartItemFastAddReq, opts ...grpc.CallOption) (*CartItemFastAddResp, error)
 		CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error)
 		CompanyAddressList(ctx context.Context, in *CompanyAddressListReq, opts ...grpc.CallOption) (*CompanyAddressListResp, error)
 		CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq, opts ...grpc.CallOption) (*CompanyAddressUpdateResp, error)
@@ -217,24 +209,14 @@ func (m *defaultOms) CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, 
 	return client.CartItemUpdate(ctx, in, opts...)
 }
 
+func (m *defaultOms) CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error) {
+	client := omsclient.NewOmsClient(m.cli.Conn())
+	return client.CartItemUpdateQuantity(ctx, in, opts...)
+}
+
 func (m *defaultOms) CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error) {
 	client := omsclient.NewOmsClient(m.cli.Conn())
 	return client.CartItemDelete(ctx, in, opts...)
-}
-
-func (m *defaultOms) CartItemChecked(ctx context.Context, in *CartItemCheckedReq, opts ...grpc.CallOption) (*CartItemCheckedResp, error) {
-	client := omsclient.NewOmsClient(m.cli.Conn())
-	return client.CartItemChecked(ctx, in, opts...)
-}
-
-func (m *defaultOms) CartItemCheckOut(ctx context.Context, in *CartItemCheckOutReq, opts ...grpc.CallOption) (*CartItemCheckOutResp, error) {
-	client := omsclient.NewOmsClient(m.cli.Conn())
-	return client.CartItemCheckOut(ctx, in, opts...)
-}
-
-func (m *defaultOms) CartItemFastAdd(ctx context.Context, in *CartItemFastAddReq, opts ...grpc.CallOption) (*CartItemFastAddResp, error) {
-	client := omsclient.NewOmsClient(m.cli.Conn())
-	return client.CartItemFastAdd(ctx, in, opts...)
 }
 
 func (m *defaultOms) CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error) {

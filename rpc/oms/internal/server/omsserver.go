@@ -82,24 +82,14 @@ func (s *OmsServer) CartItemUpdate(ctx context.Context, in *omsclient.CartItemUp
 	return l.CartItemUpdate(in)
 }
 
+func (s *OmsServer) CartItemUpdateQuantity(ctx context.Context, in *omsclient.CartItemUpdateReq) (*omsclient.CartItemUpdateResp, error) {
+	l := logic.NewCartItemUpdateQuantityLogic(ctx, s.svcCtx)
+	return l.CartItemUpdateQuantity(in)
+}
+
 func (s *OmsServer) CartItemDelete(ctx context.Context, in *omsclient.CartItemDeleteReq) (*omsclient.CartItemDeleteResp, error) {
 	l := logic.NewCartItemDeleteLogic(ctx, s.svcCtx)
 	return l.CartItemDelete(in)
-}
-
-func (s *OmsServer) CartItemChecked(ctx context.Context, in *omsclient.CartItemCheckedReq) (*omsclient.CartItemCheckedResp, error) {
-	l := logic.NewCartItemCheckedLogic(ctx, s.svcCtx)
-	return l.CartItemChecked(in)
-}
-
-func (s *OmsServer) CartItemCheckOut(ctx context.Context, in *omsclient.CartItemCheckOutReq) (*omsclient.CartItemCheckOutResp, error) {
-	l := logic.NewCartItemCheckOutLogic(ctx, s.svcCtx)
-	return l.CartItemCheckOut(in)
-}
-
-func (s *OmsServer) CartItemFastAdd(ctx context.Context, in *omsclient.CartItemFastAddReq) (*omsclient.CartItemFastAddResp, error) {
-	l := logic.NewCartItemFastAddLogic(ctx, s.svcCtx)
-	return l.CartItemFastAdd(in)
 }
 
 func (s *OmsServer) CompanyAddressAdd(ctx context.Context, in *omsclient.CompanyAddressAddReq) (*omsclient.CompanyAddressAddResp, error) {

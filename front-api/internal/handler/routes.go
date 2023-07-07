@@ -65,41 +65,47 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/index/:userId",
-				Handler: cart.CartListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/add",
-				Handler: cart.CartAddHandler(serverCtx),
+				Handler: cart.CartItemAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
-				Path:    "/fastadd",
-				Handler: cart.CartFastAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/checked",
-				Handler: cart.CartCheckedHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/checkout",
-				Handler: cart.CartCheckOutHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/delete",
-				Handler: cart.CartDeleteHandler(serverCtx),
+				Handler: cart.CartItemDeleteHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
-				Path:    "/update",
-				Handler: cart.CartUpdateHandler(serverCtx),
+				Method:  http.MethodPost,
+				Path:    "/updateQuantity",
+				Handler: cart.CartUpdateQuantityHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateAttr",
+				Handler: cart.CartUpdateAttrHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list",
+				Handler: cart.CarItemListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list/promotion",
+				Handler: cart.CarItemtListPromotionHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/itemt",
+				Handler: cart.CartProductHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/clear",
+				Handler: cart.CarItemClearHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/cart"),
 	)
 

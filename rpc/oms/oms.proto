@@ -204,7 +204,7 @@ message CartItemAddReq {
   int64      ProductSkuId = 3;
   int64      MemberId = 4;
   int64      Quantity = 5;
-  int64    Price = 6;
+  float    Price = 6;
   string      ProductPic = 7;
   string      ProductName = 8;
   string      ProductSubTitle = 9;
@@ -224,8 +224,7 @@ message CartItemAddResp {
 }
 
 message CartItemListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
+  int64      MemberId = 1;
 }
 
 message CartItemListData{
@@ -260,7 +259,7 @@ message CartItemUpdateReq {
   int64      ProductSkuId = 3;
   int64      MemberId = 4;
   int64      Quantity = 5;
-  int64    Price = 6;
+  float    Price = 6;
   string      ProductPic = 7;
   string      ProductName = 8;
   string      ProductSubTitle = 9;
@@ -280,36 +279,13 @@ message CartItemUpdateResp {
 }
 
 message CartItemDeleteReq {
-  repeated int64 ids = 1;
+  int64      MemberId = 1;
+  repeated int64 ids = 2;
 }
 
 message CartItemDeleteResp {
   string pong = 1;
 }
-message CartItemCheckedReq {
-  int64 id = 1;
-}
-
-message CartItemCheckedResp {
-  string pong = 1;
-}
-
-message CartItemCheckOutReq {
-  int64 id = 1;
-}
-
-message CartItemCheckOutResp {
-  string pong = 1;
-}
-
-message CartItemFastAddReq {
-  int64 id = 1;
-}
-
-message CartItemFastAddResp {
-  string pong = 1;
-}
-
 
 message CompanyAddressAddReq {
   string  AddressName = 2;
@@ -733,10 +709,8 @@ service Oms {
   rpc CartItemAdd(CartItemAddReq) returns(CartItemAddResp);
   rpc CartItemList(CartItemListReq) returns(CartItemListResp);
   rpc CartItemUpdate(CartItemUpdateReq) returns(CartItemUpdateResp);
+  rpc CartItemUpdateQuantity(CartItemUpdateReq) returns(CartItemUpdateResp);
   rpc CartItemDelete(CartItemDeleteReq) returns(CartItemDeleteResp);
-  rpc CartItemChecked(CartItemCheckedReq) returns(CartItemCheckedResp);
-  rpc CartItemCheckOut(CartItemCheckOutReq) returns(CartItemCheckOutResp);
-  rpc CartItemFastAdd(CartItemFastAddReq) returns(CartItemFastAddResp);
 
   rpc CompanyAddressAdd(CompanyAddressAddReq) returns(CompanyAddressAddResp);
   rpc CompanyAddressList(CompanyAddressListReq) returns(CompanyAddressListResp);

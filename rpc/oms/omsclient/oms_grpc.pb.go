@@ -34,10 +34,8 @@ type OmsClient interface {
 	CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error)
 	CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error)
 	CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
+	CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
 	CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error)
-	CartItemChecked(ctx context.Context, in *CartItemCheckedReq, opts ...grpc.CallOption) (*CartItemCheckedResp, error)
-	CartItemCheckOut(ctx context.Context, in *CartItemCheckOutReq, opts ...grpc.CallOption) (*CartItemCheckOutResp, error)
-	CartItemFastAdd(ctx context.Context, in *CartItemFastAddReq, opts ...grpc.CallOption) (*CartItemFastAddResp, error)
 	CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error)
 	CompanyAddressList(ctx context.Context, in *CompanyAddressListReq, opts ...grpc.CallOption) (*CompanyAddressListResp, error)
 	CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq, opts ...grpc.CallOption) (*CompanyAddressUpdateResp, error)
@@ -180,36 +178,18 @@ func (c *omsClient) CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, o
 	return out, nil
 }
 
+func (c *omsClient) CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error) {
+	out := new(CartItemUpdateResp)
+	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemUpdateQuantity", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *omsClient) CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error) {
 	out := new(CartItemDeleteResp)
 	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CartItemChecked(ctx context.Context, in *CartItemCheckedReq, opts ...grpc.CallOption) (*CartItemCheckedResp, error) {
-	out := new(CartItemCheckedResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemChecked", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CartItemCheckOut(ctx context.Context, in *CartItemCheckOutReq, opts ...grpc.CallOption) (*CartItemCheckOutResp, error) {
-	out := new(CartItemCheckOutResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemCheckOut", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CartItemFastAdd(ctx context.Context, in *CartItemFastAddReq, opts ...grpc.CallOption) (*CartItemFastAddResp, error) {
-	out := new(CartItemFastAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemFastAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -448,10 +428,8 @@ type OmsServer interface {
 	CartItemAdd(context.Context, *CartItemAddReq) (*CartItemAddResp, error)
 	CartItemList(context.Context, *CartItemListReq) (*CartItemListResp, error)
 	CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
+	CartItemUpdateQuantity(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
 	CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error)
-	CartItemChecked(context.Context, *CartItemCheckedReq) (*CartItemCheckedResp, error)
-	CartItemCheckOut(context.Context, *CartItemCheckOutReq) (*CartItemCheckOutResp, error)
-	CartItemFastAdd(context.Context, *CartItemFastAddReq) (*CartItemFastAddResp, error)
 	CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error)
 	CompanyAddressList(context.Context, *CompanyAddressListReq) (*CompanyAddressListResp, error)
 	CompanyAddressUpdate(context.Context, *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error)
@@ -519,17 +497,11 @@ func (UnimplementedOmsServer) CartItemList(context.Context, *CartItemListReq) (*
 func (UnimplementedOmsServer) CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CartItemUpdate not implemented")
 }
+func (UnimplementedOmsServer) CartItemUpdateQuantity(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CartItemUpdateQuantity not implemented")
+}
 func (UnimplementedOmsServer) CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CartItemDelete not implemented")
-}
-func (UnimplementedOmsServer) CartItemChecked(context.Context, *CartItemCheckedReq) (*CartItemCheckedResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemChecked not implemented")
-}
-func (UnimplementedOmsServer) CartItemCheckOut(context.Context, *CartItemCheckOutReq) (*CartItemCheckOutResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemCheckOut not implemented")
-}
-func (UnimplementedOmsServer) CartItemFastAdd(context.Context, *CartItemFastAddReq) (*CartItemFastAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemFastAdd not implemented")
 }
 func (UnimplementedOmsServer) CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressAdd not implemented")
@@ -832,6 +804,24 @@ func _Oms_CartItemUpdate_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Oms_CartItemUpdateQuantity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CartItemUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmsServer).CartItemUpdateQuantity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omsclient.Oms/CartItemUpdateQuantity",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmsServer).CartItemUpdateQuantity(ctx, req.(*CartItemUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Oms_CartItemDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CartItemDeleteReq)
 	if err := dec(in); err != nil {
@@ -846,60 +836,6 @@ func _Oms_CartItemDelete_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OmsServer).CartItemDelete(ctx, req.(*CartItemDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Oms_CartItemChecked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CartItemCheckedReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OmsServer).CartItemChecked(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/omsclient.Oms/CartItemChecked",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CartItemChecked(ctx, req.(*CartItemCheckedReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Oms_CartItemCheckOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CartItemCheckOutReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OmsServer).CartItemCheckOut(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/omsclient.Oms/CartItemCheckOut",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CartItemCheckOut(ctx, req.(*CartItemCheckOutReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Oms_CartItemFastAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CartItemFastAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OmsServer).CartItemFastAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/omsclient.Oms/CartItemFastAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CartItemFastAdd(ctx, req.(*CartItemFastAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1392,20 +1328,12 @@ var Oms_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Oms_CartItemUpdate_Handler,
 		},
 		{
+			MethodName: "CartItemUpdateQuantity",
+			Handler:    _Oms_CartItemUpdateQuantity_Handler,
+		},
+		{
 			MethodName: "CartItemDelete",
 			Handler:    _Oms_CartItemDelete_Handler,
-		},
-		{
-			MethodName: "CartItemChecked",
-			Handler:    _Oms_CartItemChecked_Handler,
-		},
-		{
-			MethodName: "CartItemCheckOut",
-			Handler:    _Oms_CartItemCheckOut_Handler,
-		},
-		{
-			MethodName: "CartItemFastAdd",
-			Handler:    _Oms_CartItemFastAdd_Handler,
 		},
 		{
 			MethodName: "CompanyAddressAdd",

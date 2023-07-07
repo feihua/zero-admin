@@ -9,20 +9,20 @@ import (
 	"zero-admin/front-api/internal/types"
 )
 
-func CartCheckOutHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func CartProductHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.CartCheckOutReq
+		var req types.CartProductReq
 		if err := httpx.Parse(r, &req); err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := cart.NewCartCheckOutLogic(r.Context(), svcCtx)
-		resp, err := l.CartCheckOut(req)
+		l := cart.NewCartProductLogic(r.Context(), svcCtx)
+		resp, err := l.CartProduct(&req)
 		if err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			httpx.OkJsonCtx(r.Context(), w, resp)
 		}
 	}
 }
