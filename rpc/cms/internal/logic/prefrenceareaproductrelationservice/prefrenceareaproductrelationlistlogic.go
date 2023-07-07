@@ -1,4 +1,4 @@
-package logic
+package prefrenceareaproductrelationservicelogic
 
 import (
 	"context"
@@ -24,7 +24,6 @@ func NewPrefrenceAreaProductRelationListLogic(ctx context.Context, svcCtx *svc.S
 	}
 }
 
-// PrefrenceAreaProductRelationList 查询优选关联
 func (l *PrefrenceAreaProductRelationListLogic) PrefrenceAreaProductRelationList(in *cmsclient.PrefrenceAreaProductRelationListReq) (*cmsclient.PrefrenceAreaProductRelationListResp, error) {
 	all, err := l.svcCtx.CmsSubjectProductRelationModel.FindAll(l.ctx, in.ProductId)
 

@@ -26,7 +26,7 @@ func NewSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Subje
 }
 
 func (l *SubjectListLogic) SubjectList(req *types.ListSubjectReq) (resp *types.ListSubjectResp, err error) {
-	subjectList, err := l.svcCtx.Cms.SubjectList(l.ctx, &cmsclient.SubjectListReq{
+	subjectList, err := l.svcCtx.SubjectService.SubjectList(l.ctx, &cmsclient.SubjectListReq{
 		Current:         req.Current,
 		PageSize:        req.PageSize,
 		Title:           req.Title,

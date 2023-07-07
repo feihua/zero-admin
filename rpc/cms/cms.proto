@@ -98,6 +98,15 @@ message SubjectListResp {
   int64 total = 1;
   repeated  SubjectListData list = 2;
 }
+service SubjectService {
+  // 专题
+  rpc SubjectAdd(SubjectAddReq) returns (SubjectAddResp){}
+  rpc SubjectDelete(SubjectDeleteReq) returns (SubjectDeleteResp){}
+  rpc SubjectUpdate(SubjectUpdateReq) returns (SubjectUpdateResp){}
+  rpc SubjectList(SubjectListReq) returns (SubjectListResp){}
+  rpc SubjectListByIds(SubjectListByIdsReq) returns (SubjectListResp){}
+
+}
 
 //关联专题
 message SubjectProductRelationAddReq {
@@ -138,7 +147,15 @@ message SubjectProductRelationListReq {
 message SubjectProductRelationListResp {
   repeated int64 SubjectId = 1; // 专题id
 }
+service SubjectProductRelationService {
 
+  // 专题关联
+  rpc SubjectProductRelationAdd(SubjectProductRelationAddReq) returns (SubjectProductRelationAddResp){}
+  rpc SubjectProductRelationDelete(SubjectProductRelationDeleteReq) returns (SubjectProductRelationDeleteResp){}
+  rpc SubjectProductRelationUpdate(SubjectProductRelationUpdateReq) returns (SubjectProductRelationUpdateResp){}
+  rpc SubjectProductRelationList(SubjectProductRelationListReq) returns (SubjectProductRelationListResp){}
+
+}
 
 //商品优选
 message PrefrenceAreaAddReq {
@@ -199,7 +216,15 @@ message PrefrenceAreaListResp {
   int64 total = 1;
   repeated  PrefrenceAreaListData list = 2;
 }
+service PrefrenceAreaService {
 
+  // 商品优选
+  rpc PrefrenceAreaAdd(PrefrenceAreaAddReq) returns (PrefrenceAreaAddResp){}
+  rpc PrefrenceAreaDelete(PrefrenceAreaDeleteReq) returns (PrefrenceAreaDeleteResp){}
+  rpc PrefrenceAreaUpdate(PrefrenceAreaUpdateReq) returns (PrefrenceAreaUpdateResp){}
+  rpc PrefrenceAreaList(PrefrenceAreaListReq) returns (PrefrenceAreaListResp){}
+
+}
 //优选商品关联
 message PrefrenceAreaProductRelationAddReq {
   int64 PrefrenceAreaId = 1; //
@@ -240,26 +265,7 @@ message PrefrenceAreaProductRelationListResp {
 
 }
 
-service Cms {
-  // 专题
-  rpc SubjectAdd(SubjectAddReq) returns (SubjectAddResp){}
-  rpc SubjectDelete(SubjectDeleteReq) returns (SubjectDeleteResp){}
-  rpc SubjectUpdate(SubjectUpdateReq) returns (SubjectUpdateResp){}
-  rpc SubjectList(SubjectListReq) returns (SubjectListResp){}
-  rpc SubjectListByIds(SubjectListByIdsReq) returns (SubjectListResp){}
-
-  // 专题关联
-  rpc SubjectProductRelationAdd(SubjectProductRelationAddReq) returns (SubjectProductRelationAddResp){}
-  rpc SubjectProductRelationDelete(SubjectProductRelationDeleteReq) returns (SubjectProductRelationDeleteResp){}
-  rpc SubjectProductRelationUpdate(SubjectProductRelationUpdateReq) returns (SubjectProductRelationUpdateResp){}
-  rpc SubjectProductRelationList(SubjectProductRelationListReq) returns (SubjectProductRelationListResp){}
-
-  // 商品优选
-  rpc PrefrenceAreaAdd(PrefrenceAreaAddReq) returns (PrefrenceAreaAddResp){}
-  rpc PrefrenceAreaDelete(PrefrenceAreaDeleteReq) returns (PrefrenceAreaDeleteResp){}
-  rpc PrefrenceAreaUpdate(PrefrenceAreaUpdateReq) returns (PrefrenceAreaUpdateResp){}
-  rpc PrefrenceAreaList(PrefrenceAreaListReq) returns (PrefrenceAreaListResp){}
-
+service PrefrenceAreaProductRelationService {
   // 优选商品关联
   rpc PrefrenceAreaProductRelationAdd(PrefrenceAreaProductRelationAddReq) returns (PrefrenceAreaProductRelationAddResp){}
   rpc PrefrenceAreaProductRelationDelete(PrefrenceAreaProductRelationDeleteReq) returns (PrefrenceAreaProductRelationDeleteResp){}

@@ -18,26 +18,635 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// CmsClient is the client API for Cms service.
+// SubjectServiceClient is the client API for SubjectService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CmsClient interface {
+type SubjectServiceClient interface {
 	// 专题
 	SubjectAdd(ctx context.Context, in *SubjectAddReq, opts ...grpc.CallOption) (*SubjectAddResp, error)
 	SubjectDelete(ctx context.Context, in *SubjectDeleteReq, opts ...grpc.CallOption) (*SubjectDeleteResp, error)
 	SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error)
 	SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error)
 	SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error)
+}
+
+type subjectServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSubjectServiceClient(cc grpc.ClientConnInterface) SubjectServiceClient {
+	return &subjectServiceClient{cc}
+}
+
+func (c *subjectServiceClient) SubjectAdd(ctx context.Context, in *SubjectAddReq, opts ...grpc.CallOption) (*SubjectAddResp, error) {
+	out := new(SubjectAddResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.SubjectService/SubjectAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectServiceClient) SubjectDelete(ctx context.Context, in *SubjectDeleteReq, opts ...grpc.CallOption) (*SubjectDeleteResp, error) {
+	out := new(SubjectDeleteResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.SubjectService/SubjectDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectServiceClient) SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error) {
+	out := new(SubjectUpdateResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.SubjectService/SubjectUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectServiceClient) SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
+	out := new(SubjectListResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.SubjectService/SubjectList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectServiceClient) SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
+	out := new(SubjectListResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.SubjectService/SubjectListByIds", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SubjectServiceServer is the server API for SubjectService service.
+// All implementations must embed UnimplementedSubjectServiceServer
+// for forward compatibility
+type SubjectServiceServer interface {
+	// 专题
+	SubjectAdd(context.Context, *SubjectAddReq) (*SubjectAddResp, error)
+	SubjectDelete(context.Context, *SubjectDeleteReq) (*SubjectDeleteResp, error)
+	SubjectUpdate(context.Context, *SubjectUpdateReq) (*SubjectUpdateResp, error)
+	SubjectList(context.Context, *SubjectListReq) (*SubjectListResp, error)
+	SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error)
+	mustEmbedUnimplementedSubjectServiceServer()
+}
+
+// UnimplementedSubjectServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedSubjectServiceServer struct {
+}
+
+func (UnimplementedSubjectServiceServer) SubjectAdd(context.Context, *SubjectAddReq) (*SubjectAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubjectAdd not implemented")
+}
+func (UnimplementedSubjectServiceServer) SubjectDelete(context.Context, *SubjectDeleteReq) (*SubjectDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubjectDelete not implemented")
+}
+func (UnimplementedSubjectServiceServer) SubjectUpdate(context.Context, *SubjectUpdateReq) (*SubjectUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubjectUpdate not implemented")
+}
+func (UnimplementedSubjectServiceServer) SubjectList(context.Context, *SubjectListReq) (*SubjectListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubjectList not implemented")
+}
+func (UnimplementedSubjectServiceServer) SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubjectListByIds not implemented")
+}
+func (UnimplementedSubjectServiceServer) mustEmbedUnimplementedSubjectServiceServer() {}
+
+// UnsafeSubjectServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SubjectServiceServer will
+// result in compilation errors.
+type UnsafeSubjectServiceServer interface {
+	mustEmbedUnimplementedSubjectServiceServer()
+}
+
+func RegisterSubjectServiceServer(s grpc.ServiceRegistrar, srv SubjectServiceServer) {
+	s.RegisterService(&SubjectService_ServiceDesc, srv)
+}
+
+func _SubjectService_SubjectAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubjectAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectServiceServer).SubjectAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.SubjectService/SubjectAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectServiceServer).SubjectAdd(ctx, req.(*SubjectAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectService_SubjectDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubjectDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectServiceServer).SubjectDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.SubjectService/SubjectDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectServiceServer).SubjectDelete(ctx, req.(*SubjectDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectService_SubjectUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubjectUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectServiceServer).SubjectUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.SubjectService/SubjectUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectServiceServer).SubjectUpdate(ctx, req.(*SubjectUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectService_SubjectList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubjectListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectServiceServer).SubjectList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.SubjectService/SubjectList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectServiceServer).SubjectList(ctx, req.(*SubjectListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectService_SubjectListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubjectListByIdsReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectServiceServer).SubjectListByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.SubjectService/SubjectListByIds",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectServiceServer).SubjectListByIds(ctx, req.(*SubjectListByIdsReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// SubjectService_ServiceDesc is the grpc.ServiceDesc for SubjectService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var SubjectService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.SubjectService",
+	HandlerType: (*SubjectServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SubjectAdd",
+			Handler:    _SubjectService_SubjectAdd_Handler,
+		},
+		{
+			MethodName: "SubjectDelete",
+			Handler:    _SubjectService_SubjectDelete_Handler,
+		},
+		{
+			MethodName: "SubjectUpdate",
+			Handler:    _SubjectService_SubjectUpdate_Handler,
+		},
+		{
+			MethodName: "SubjectList",
+			Handler:    _SubjectService_SubjectList_Handler,
+		},
+		{
+			MethodName: "SubjectListByIds",
+			Handler:    _SubjectService_SubjectListByIds_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "cms.proto",
+}
+
+// SubjectProductRelationServiceClient is the client API for SubjectProductRelationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type SubjectProductRelationServiceClient interface {
 	// 专题关联
 	SubjectProductRelationAdd(ctx context.Context, in *SubjectProductRelationAddReq, opts ...grpc.CallOption) (*SubjectProductRelationAddResp, error)
 	SubjectProductRelationDelete(ctx context.Context, in *SubjectProductRelationDeleteReq, opts ...grpc.CallOption) (*SubjectProductRelationDeleteResp, error)
 	SubjectProductRelationUpdate(ctx context.Context, in *SubjectProductRelationUpdateReq, opts ...grpc.CallOption) (*SubjectProductRelationUpdateResp, error)
 	SubjectProductRelationList(ctx context.Context, in *SubjectProductRelationListReq, opts ...grpc.CallOption) (*SubjectProductRelationListResp, error)
+}
+
+type subjectProductRelationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSubjectProductRelationServiceClient(cc grpc.ClientConnInterface) SubjectProductRelationServiceClient {
+	return &subjectProductRelationServiceClient{cc}
+}
+
+func (c *subjectProductRelationServiceClient) SubjectProductRelationAdd(ctx context.Context, in *SubjectProductRelationAddReq, opts ...grpc.CallOption) (*SubjectProductRelationAddResp, error) {
+	out := new(SubjectProductRelationAddResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.SubjectProductRelationService/SubjectProductRelationAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectProductRelationServiceClient) SubjectProductRelationDelete(ctx context.Context, in *SubjectProductRelationDeleteReq, opts ...grpc.CallOption) (*SubjectProductRelationDeleteResp, error) {
+	out := new(SubjectProductRelationDeleteResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.SubjectProductRelationService/SubjectProductRelationDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectProductRelationServiceClient) SubjectProductRelationUpdate(ctx context.Context, in *SubjectProductRelationUpdateReq, opts ...grpc.CallOption) (*SubjectProductRelationUpdateResp, error) {
+	out := new(SubjectProductRelationUpdateResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.SubjectProductRelationService/SubjectProductRelationUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectProductRelationServiceClient) SubjectProductRelationList(ctx context.Context, in *SubjectProductRelationListReq, opts ...grpc.CallOption) (*SubjectProductRelationListResp, error) {
+	out := new(SubjectProductRelationListResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.SubjectProductRelationService/SubjectProductRelationList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SubjectProductRelationServiceServer is the server API for SubjectProductRelationService service.
+// All implementations must embed UnimplementedSubjectProductRelationServiceServer
+// for forward compatibility
+type SubjectProductRelationServiceServer interface {
+	// 专题关联
+	SubjectProductRelationAdd(context.Context, *SubjectProductRelationAddReq) (*SubjectProductRelationAddResp, error)
+	SubjectProductRelationDelete(context.Context, *SubjectProductRelationDeleteReq) (*SubjectProductRelationDeleteResp, error)
+	SubjectProductRelationUpdate(context.Context, *SubjectProductRelationUpdateReq) (*SubjectProductRelationUpdateResp, error)
+	SubjectProductRelationList(context.Context, *SubjectProductRelationListReq) (*SubjectProductRelationListResp, error)
+	mustEmbedUnimplementedSubjectProductRelationServiceServer()
+}
+
+// UnimplementedSubjectProductRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedSubjectProductRelationServiceServer struct {
+}
+
+func (UnimplementedSubjectProductRelationServiceServer) SubjectProductRelationAdd(context.Context, *SubjectProductRelationAddReq) (*SubjectProductRelationAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationAdd not implemented")
+}
+func (UnimplementedSubjectProductRelationServiceServer) SubjectProductRelationDelete(context.Context, *SubjectProductRelationDeleteReq) (*SubjectProductRelationDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationDelete not implemented")
+}
+func (UnimplementedSubjectProductRelationServiceServer) SubjectProductRelationUpdate(context.Context, *SubjectProductRelationUpdateReq) (*SubjectProductRelationUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationUpdate not implemented")
+}
+func (UnimplementedSubjectProductRelationServiceServer) SubjectProductRelationList(context.Context, *SubjectProductRelationListReq) (*SubjectProductRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationList not implemented")
+}
+func (UnimplementedSubjectProductRelationServiceServer) mustEmbedUnimplementedSubjectProductRelationServiceServer() {
+}
+
+// UnsafeSubjectProductRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SubjectProductRelationServiceServer will
+// result in compilation errors.
+type UnsafeSubjectProductRelationServiceServer interface {
+	mustEmbedUnimplementedSubjectProductRelationServiceServer()
+}
+
+func RegisterSubjectProductRelationServiceServer(s grpc.ServiceRegistrar, srv SubjectProductRelationServiceServer) {
+	s.RegisterService(&SubjectProductRelationService_ServiceDesc, srv)
+}
+
+func _SubjectProductRelationService_SubjectProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubjectProductRelationAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.SubjectProductRelationService/SubjectProductRelationAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationAdd(ctx, req.(*SubjectProductRelationAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectProductRelationService_SubjectProductRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubjectProductRelationDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.SubjectProductRelationService/SubjectProductRelationDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationDelete(ctx, req.(*SubjectProductRelationDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectProductRelationService_SubjectProductRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubjectProductRelationUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.SubjectProductRelationService/SubjectProductRelationUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationUpdate(ctx, req.(*SubjectProductRelationUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectProductRelationService_SubjectProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubjectProductRelationListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.SubjectProductRelationService/SubjectProductRelationList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationList(ctx, req.(*SubjectProductRelationListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// SubjectProductRelationService_ServiceDesc is the grpc.ServiceDesc for SubjectProductRelationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var SubjectProductRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.SubjectProductRelationService",
+	HandlerType: (*SubjectProductRelationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SubjectProductRelationAdd",
+			Handler:    _SubjectProductRelationService_SubjectProductRelationAdd_Handler,
+		},
+		{
+			MethodName: "SubjectProductRelationDelete",
+			Handler:    _SubjectProductRelationService_SubjectProductRelationDelete_Handler,
+		},
+		{
+			MethodName: "SubjectProductRelationUpdate",
+			Handler:    _SubjectProductRelationService_SubjectProductRelationUpdate_Handler,
+		},
+		{
+			MethodName: "SubjectProductRelationList",
+			Handler:    _SubjectProductRelationService_SubjectProductRelationList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "cms.proto",
+}
+
+// PrefrenceAreaServiceClient is the client API for PrefrenceAreaService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PrefrenceAreaServiceClient interface {
 	// 商品优选
 	PrefrenceAreaAdd(ctx context.Context, in *PrefrenceAreaAddReq, opts ...grpc.CallOption) (*PrefrenceAreaAddResp, error)
 	PrefrenceAreaDelete(ctx context.Context, in *PrefrenceAreaDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaDeleteResp, error)
 	PrefrenceAreaUpdate(ctx context.Context, in *PrefrenceAreaUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaUpdateResp, error)
 	PrefrenceAreaList(ctx context.Context, in *PrefrenceAreaListReq, opts ...grpc.CallOption) (*PrefrenceAreaListResp, error)
+}
+
+type prefrenceAreaServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPrefrenceAreaServiceClient(cc grpc.ClientConnInterface) PrefrenceAreaServiceClient {
+	return &prefrenceAreaServiceClient{cc}
+}
+
+func (c *prefrenceAreaServiceClient) PrefrenceAreaAdd(ctx context.Context, in *PrefrenceAreaAddReq, opts ...grpc.CallOption) (*PrefrenceAreaAddResp, error) {
+	out := new(PrefrenceAreaAddResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.PrefrenceAreaService/PrefrenceAreaAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prefrenceAreaServiceClient) PrefrenceAreaDelete(ctx context.Context, in *PrefrenceAreaDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaDeleteResp, error) {
+	out := new(PrefrenceAreaDeleteResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.PrefrenceAreaService/PrefrenceAreaDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prefrenceAreaServiceClient) PrefrenceAreaUpdate(ctx context.Context, in *PrefrenceAreaUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaUpdateResp, error) {
+	out := new(PrefrenceAreaUpdateResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.PrefrenceAreaService/PrefrenceAreaUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prefrenceAreaServiceClient) PrefrenceAreaList(ctx context.Context, in *PrefrenceAreaListReq, opts ...grpc.CallOption) (*PrefrenceAreaListResp, error) {
+	out := new(PrefrenceAreaListResp)
+	err := c.cc.Invoke(ctx, "/cmsclient.PrefrenceAreaService/PrefrenceAreaList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PrefrenceAreaServiceServer is the server API for PrefrenceAreaService service.
+// All implementations must embed UnimplementedPrefrenceAreaServiceServer
+// for forward compatibility
+type PrefrenceAreaServiceServer interface {
+	// 商品优选
+	PrefrenceAreaAdd(context.Context, *PrefrenceAreaAddReq) (*PrefrenceAreaAddResp, error)
+	PrefrenceAreaDelete(context.Context, *PrefrenceAreaDeleteReq) (*PrefrenceAreaDeleteResp, error)
+	PrefrenceAreaUpdate(context.Context, *PrefrenceAreaUpdateReq) (*PrefrenceAreaUpdateResp, error)
+	PrefrenceAreaList(context.Context, *PrefrenceAreaListReq) (*PrefrenceAreaListResp, error)
+	mustEmbedUnimplementedPrefrenceAreaServiceServer()
+}
+
+// UnimplementedPrefrenceAreaServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPrefrenceAreaServiceServer struct {
+}
+
+func (UnimplementedPrefrenceAreaServiceServer) PrefrenceAreaAdd(context.Context, *PrefrenceAreaAddReq) (*PrefrenceAreaAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaAdd not implemented")
+}
+func (UnimplementedPrefrenceAreaServiceServer) PrefrenceAreaDelete(context.Context, *PrefrenceAreaDeleteReq) (*PrefrenceAreaDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaDelete not implemented")
+}
+func (UnimplementedPrefrenceAreaServiceServer) PrefrenceAreaUpdate(context.Context, *PrefrenceAreaUpdateReq) (*PrefrenceAreaUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaUpdate not implemented")
+}
+func (UnimplementedPrefrenceAreaServiceServer) PrefrenceAreaList(context.Context, *PrefrenceAreaListReq) (*PrefrenceAreaListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaList not implemented")
+}
+func (UnimplementedPrefrenceAreaServiceServer) mustEmbedUnimplementedPrefrenceAreaServiceServer() {}
+
+// UnsafePrefrenceAreaServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PrefrenceAreaServiceServer will
+// result in compilation errors.
+type UnsafePrefrenceAreaServiceServer interface {
+	mustEmbedUnimplementedPrefrenceAreaServiceServer()
+}
+
+func RegisterPrefrenceAreaServiceServer(s grpc.ServiceRegistrar, srv PrefrenceAreaServiceServer) {
+	s.RegisterService(&PrefrenceAreaService_ServiceDesc, srv)
+}
+
+func _PrefrenceAreaService_PrefrenceAreaAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrefrenceAreaAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.PrefrenceAreaService/PrefrenceAreaAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaAdd(ctx, req.(*PrefrenceAreaAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrefrenceAreaService_PrefrenceAreaDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrefrenceAreaDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.PrefrenceAreaService/PrefrenceAreaDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaDelete(ctx, req.(*PrefrenceAreaDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrefrenceAreaService_PrefrenceAreaUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrefrenceAreaUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.PrefrenceAreaService/PrefrenceAreaUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaUpdate(ctx, req.(*PrefrenceAreaUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrefrenceAreaService_PrefrenceAreaList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrefrenceAreaListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cmsclient.PrefrenceAreaService/PrefrenceAreaList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaList(ctx, req.(*PrefrenceAreaListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PrefrenceAreaService_ServiceDesc is the grpc.ServiceDesc for PrefrenceAreaService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PrefrenceAreaService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.PrefrenceAreaService",
+	HandlerType: (*PrefrenceAreaServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "PrefrenceAreaAdd",
+			Handler:    _PrefrenceAreaService_PrefrenceAreaAdd_Handler,
+		},
+		{
+			MethodName: "PrefrenceAreaDelete",
+			Handler:    _PrefrenceAreaService_PrefrenceAreaDelete_Handler,
+		},
+		{
+			MethodName: "PrefrenceAreaUpdate",
+			Handler:    _PrefrenceAreaService_PrefrenceAreaUpdate_Handler,
+		},
+		{
+			MethodName: "PrefrenceAreaList",
+			Handler:    _PrefrenceAreaService_PrefrenceAreaList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "cms.proto",
+}
+
+// PrefrenceAreaProductRelationServiceClient is the client API for PrefrenceAreaProductRelationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PrefrenceAreaProductRelationServiceClient interface {
 	// 优选商品关联
 	PrefrenceAreaProductRelationAdd(ctx context.Context, in *PrefrenceAreaProductRelationAddReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationAddResp, error)
 	PrefrenceAreaProductRelationDelete(ctx context.Context, in *PrefrenceAreaProductRelationDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationDeleteResp, error)
@@ -45,643 +654,186 @@ type CmsClient interface {
 	PrefrenceAreaProductRelationList(ctx context.Context, in *PrefrenceAreaProductRelationListReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationListResp, error)
 }
 
-type cmsClient struct {
+type prefrenceAreaProductRelationServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewCmsClient(cc grpc.ClientConnInterface) CmsClient {
-	return &cmsClient{cc}
+func NewPrefrenceAreaProductRelationServiceClient(cc grpc.ClientConnInterface) PrefrenceAreaProductRelationServiceClient {
+	return &prefrenceAreaProductRelationServiceClient{cc}
 }
 
-func (c *cmsClient) SubjectAdd(ctx context.Context, in *SubjectAddReq, opts ...grpc.CallOption) (*SubjectAddResp, error) {
-	out := new(SubjectAddResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/SubjectAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) SubjectDelete(ctx context.Context, in *SubjectDeleteReq, opts ...grpc.CallOption) (*SubjectDeleteResp, error) {
-	out := new(SubjectDeleteResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/SubjectDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error) {
-	out := new(SubjectUpdateResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/SubjectUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
-	out := new(SubjectListResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/SubjectList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
-	out := new(SubjectListResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/SubjectListByIds", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) SubjectProductRelationAdd(ctx context.Context, in *SubjectProductRelationAddReq, opts ...grpc.CallOption) (*SubjectProductRelationAddResp, error) {
-	out := new(SubjectProductRelationAddResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/SubjectProductRelationAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) SubjectProductRelationDelete(ctx context.Context, in *SubjectProductRelationDeleteReq, opts ...grpc.CallOption) (*SubjectProductRelationDeleteResp, error) {
-	out := new(SubjectProductRelationDeleteResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/SubjectProductRelationDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) SubjectProductRelationUpdate(ctx context.Context, in *SubjectProductRelationUpdateReq, opts ...grpc.CallOption) (*SubjectProductRelationUpdateResp, error) {
-	out := new(SubjectProductRelationUpdateResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/SubjectProductRelationUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) SubjectProductRelationList(ctx context.Context, in *SubjectProductRelationListReq, opts ...grpc.CallOption) (*SubjectProductRelationListResp, error) {
-	out := new(SubjectProductRelationListResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/SubjectProductRelationList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) PrefrenceAreaAdd(ctx context.Context, in *PrefrenceAreaAddReq, opts ...grpc.CallOption) (*PrefrenceAreaAddResp, error) {
-	out := new(PrefrenceAreaAddResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) PrefrenceAreaDelete(ctx context.Context, in *PrefrenceAreaDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaDeleteResp, error) {
-	out := new(PrefrenceAreaDeleteResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) PrefrenceAreaUpdate(ctx context.Context, in *PrefrenceAreaUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaUpdateResp, error) {
-	out := new(PrefrenceAreaUpdateResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) PrefrenceAreaList(ctx context.Context, in *PrefrenceAreaListReq, opts ...grpc.CallOption) (*PrefrenceAreaListResp, error) {
-	out := new(PrefrenceAreaListResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cmsClient) PrefrenceAreaProductRelationAdd(ctx context.Context, in *PrefrenceAreaProductRelationAddReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationAddResp, error) {
+func (c *prefrenceAreaProductRelationServiceClient) PrefrenceAreaProductRelationAdd(ctx context.Context, in *PrefrenceAreaProductRelationAddReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationAddResp, error) {
 	out := new(PrefrenceAreaProductRelationAddResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaProductRelationAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cmsClient) PrefrenceAreaProductRelationDelete(ctx context.Context, in *PrefrenceAreaProductRelationDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationDeleteResp, error) {
+func (c *prefrenceAreaProductRelationServiceClient) PrefrenceAreaProductRelationDelete(ctx context.Context, in *PrefrenceAreaProductRelationDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationDeleteResp, error) {
 	out := new(PrefrenceAreaProductRelationDeleteResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaProductRelationDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cmsClient) PrefrenceAreaProductRelationUpdate(ctx context.Context, in *PrefrenceAreaProductRelationUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationUpdateResp, error) {
+func (c *prefrenceAreaProductRelationServiceClient) PrefrenceAreaProductRelationUpdate(ctx context.Context, in *PrefrenceAreaProductRelationUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationUpdateResp, error) {
 	out := new(PrefrenceAreaProductRelationUpdateResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaProductRelationUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cmsClient) PrefrenceAreaProductRelationList(ctx context.Context, in *PrefrenceAreaProductRelationListReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationListResp, error) {
+func (c *prefrenceAreaProductRelationServiceClient) PrefrenceAreaProductRelationList(ctx context.Context, in *PrefrenceAreaProductRelationListReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationListResp, error) {
 	out := new(PrefrenceAreaProductRelationListResp)
-	err := c.cc.Invoke(ctx, "/cmsclient.Cms/PrefrenceAreaProductRelationList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// CmsServer is the server API for Cms service.
-// All implementations must embed UnimplementedCmsServer
+// PrefrenceAreaProductRelationServiceServer is the server API for PrefrenceAreaProductRelationService service.
+// All implementations must embed UnimplementedPrefrenceAreaProductRelationServiceServer
 // for forward compatibility
-type CmsServer interface {
-	// 专题
-	SubjectAdd(context.Context, *SubjectAddReq) (*SubjectAddResp, error)
-	SubjectDelete(context.Context, *SubjectDeleteReq) (*SubjectDeleteResp, error)
-	SubjectUpdate(context.Context, *SubjectUpdateReq) (*SubjectUpdateResp, error)
-	SubjectList(context.Context, *SubjectListReq) (*SubjectListResp, error)
-	SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error)
-	// 专题关联
-	SubjectProductRelationAdd(context.Context, *SubjectProductRelationAddReq) (*SubjectProductRelationAddResp, error)
-	SubjectProductRelationDelete(context.Context, *SubjectProductRelationDeleteReq) (*SubjectProductRelationDeleteResp, error)
-	SubjectProductRelationUpdate(context.Context, *SubjectProductRelationUpdateReq) (*SubjectProductRelationUpdateResp, error)
-	SubjectProductRelationList(context.Context, *SubjectProductRelationListReq) (*SubjectProductRelationListResp, error)
-	// 商品优选
-	PrefrenceAreaAdd(context.Context, *PrefrenceAreaAddReq) (*PrefrenceAreaAddResp, error)
-	PrefrenceAreaDelete(context.Context, *PrefrenceAreaDeleteReq) (*PrefrenceAreaDeleteResp, error)
-	PrefrenceAreaUpdate(context.Context, *PrefrenceAreaUpdateReq) (*PrefrenceAreaUpdateResp, error)
-	PrefrenceAreaList(context.Context, *PrefrenceAreaListReq) (*PrefrenceAreaListResp, error)
+type PrefrenceAreaProductRelationServiceServer interface {
 	// 优选商品关联
 	PrefrenceAreaProductRelationAdd(context.Context, *PrefrenceAreaProductRelationAddReq) (*PrefrenceAreaProductRelationAddResp, error)
 	PrefrenceAreaProductRelationDelete(context.Context, *PrefrenceAreaProductRelationDeleteReq) (*PrefrenceAreaProductRelationDeleteResp, error)
 	PrefrenceAreaProductRelationUpdate(context.Context, *PrefrenceAreaProductRelationUpdateReq) (*PrefrenceAreaProductRelationUpdateResp, error)
 	PrefrenceAreaProductRelationList(context.Context, *PrefrenceAreaProductRelationListReq) (*PrefrenceAreaProductRelationListResp, error)
-	mustEmbedUnimplementedCmsServer()
+	mustEmbedUnimplementedPrefrenceAreaProductRelationServiceServer()
 }
 
-// UnimplementedCmsServer must be embedded to have forward compatible implementations.
-type UnimplementedCmsServer struct {
+// UnimplementedPrefrenceAreaProductRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPrefrenceAreaProductRelationServiceServer struct {
 }
 
-func (UnimplementedCmsServer) SubjectAdd(context.Context, *SubjectAddReq) (*SubjectAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectAdd not implemented")
-}
-func (UnimplementedCmsServer) SubjectDelete(context.Context, *SubjectDeleteReq) (*SubjectDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectDelete not implemented")
-}
-func (UnimplementedCmsServer) SubjectUpdate(context.Context, *SubjectUpdateReq) (*SubjectUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectUpdate not implemented")
-}
-func (UnimplementedCmsServer) SubjectList(context.Context, *SubjectListReq) (*SubjectListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectList not implemented")
-}
-func (UnimplementedCmsServer) SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectListByIds not implemented")
-}
-func (UnimplementedCmsServer) SubjectProductRelationAdd(context.Context, *SubjectProductRelationAddReq) (*SubjectProductRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationAdd not implemented")
-}
-func (UnimplementedCmsServer) SubjectProductRelationDelete(context.Context, *SubjectProductRelationDeleteReq) (*SubjectProductRelationDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationDelete not implemented")
-}
-func (UnimplementedCmsServer) SubjectProductRelationUpdate(context.Context, *SubjectProductRelationUpdateReq) (*SubjectProductRelationUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationUpdate not implemented")
-}
-func (UnimplementedCmsServer) SubjectProductRelationList(context.Context, *SubjectProductRelationListReq) (*SubjectProductRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationList not implemented")
-}
-func (UnimplementedCmsServer) PrefrenceAreaAdd(context.Context, *PrefrenceAreaAddReq) (*PrefrenceAreaAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaAdd not implemented")
-}
-func (UnimplementedCmsServer) PrefrenceAreaDelete(context.Context, *PrefrenceAreaDeleteReq) (*PrefrenceAreaDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaDelete not implemented")
-}
-func (UnimplementedCmsServer) PrefrenceAreaUpdate(context.Context, *PrefrenceAreaUpdateReq) (*PrefrenceAreaUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaUpdate not implemented")
-}
-func (UnimplementedCmsServer) PrefrenceAreaList(context.Context, *PrefrenceAreaListReq) (*PrefrenceAreaListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaList not implemented")
-}
-func (UnimplementedCmsServer) PrefrenceAreaProductRelationAdd(context.Context, *PrefrenceAreaProductRelationAddReq) (*PrefrenceAreaProductRelationAddResp, error) {
+func (UnimplementedPrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelationAdd(context.Context, *PrefrenceAreaProductRelationAddReq) (*PrefrenceAreaProductRelationAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaProductRelationAdd not implemented")
 }
-func (UnimplementedCmsServer) PrefrenceAreaProductRelationDelete(context.Context, *PrefrenceAreaProductRelationDeleteReq) (*PrefrenceAreaProductRelationDeleteResp, error) {
+func (UnimplementedPrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelationDelete(context.Context, *PrefrenceAreaProductRelationDeleteReq) (*PrefrenceAreaProductRelationDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaProductRelationDelete not implemented")
 }
-func (UnimplementedCmsServer) PrefrenceAreaProductRelationUpdate(context.Context, *PrefrenceAreaProductRelationUpdateReq) (*PrefrenceAreaProductRelationUpdateResp, error) {
+func (UnimplementedPrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelationUpdate(context.Context, *PrefrenceAreaProductRelationUpdateReq) (*PrefrenceAreaProductRelationUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaProductRelationUpdate not implemented")
 }
-func (UnimplementedCmsServer) PrefrenceAreaProductRelationList(context.Context, *PrefrenceAreaProductRelationListReq) (*PrefrenceAreaProductRelationListResp, error) {
+func (UnimplementedPrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelationList(context.Context, *PrefrenceAreaProductRelationListReq) (*PrefrenceAreaProductRelationListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaProductRelationList not implemented")
 }
-func (UnimplementedCmsServer) mustEmbedUnimplementedCmsServer() {}
+func (UnimplementedPrefrenceAreaProductRelationServiceServer) mustEmbedUnimplementedPrefrenceAreaProductRelationServiceServer() {
+}
 
-// UnsafeCmsServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CmsServer will
+// UnsafePrefrenceAreaProductRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PrefrenceAreaProductRelationServiceServer will
 // result in compilation errors.
-type UnsafeCmsServer interface {
-	mustEmbedUnimplementedCmsServer()
+type UnsafePrefrenceAreaProductRelationServiceServer interface {
+	mustEmbedUnimplementedPrefrenceAreaProductRelationServiceServer()
 }
 
-func RegisterCmsServer(s grpc.ServiceRegistrar, srv CmsServer) {
-	s.RegisterService(&Cms_ServiceDesc, srv)
+func RegisterPrefrenceAreaProductRelationServiceServer(s grpc.ServiceRegistrar, srv PrefrenceAreaProductRelationServiceServer) {
+	s.RegisterService(&PrefrenceAreaProductRelationService_ServiceDesc, srv)
 }
 
-func _Cms_SubjectAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).SubjectAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/SubjectAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).SubjectAdd(ctx, req.(*SubjectAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_SubjectDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).SubjectDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/SubjectDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).SubjectDelete(ctx, req.(*SubjectDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_SubjectUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).SubjectUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/SubjectUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).SubjectUpdate(ctx, req.(*SubjectUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_SubjectList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).SubjectList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/SubjectList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).SubjectList(ctx, req.(*SubjectListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_SubjectListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectListByIdsReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).SubjectListByIds(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/SubjectListByIds",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).SubjectListByIds(ctx, req.(*SubjectListByIdsReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_SubjectProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectProductRelationAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).SubjectProductRelationAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/SubjectProductRelationAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).SubjectProductRelationAdd(ctx, req.(*SubjectProductRelationAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_SubjectProductRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectProductRelationDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).SubjectProductRelationDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/SubjectProductRelationDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).SubjectProductRelationDelete(ctx, req.(*SubjectProductRelationDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_SubjectProductRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectProductRelationUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).SubjectProductRelationUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/SubjectProductRelationUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).SubjectProductRelationUpdate(ctx, req.(*SubjectProductRelationUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_SubjectProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectProductRelationListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).SubjectProductRelationList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/SubjectProductRelationList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).SubjectProductRelationList(ctx, req.(*SubjectProductRelationListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_PrefrenceAreaAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).PrefrenceAreaAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/PrefrenceAreaAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).PrefrenceAreaAdd(ctx, req.(*PrefrenceAreaAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_PrefrenceAreaDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).PrefrenceAreaDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/PrefrenceAreaDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).PrefrenceAreaDelete(ctx, req.(*PrefrenceAreaDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_PrefrenceAreaUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).PrefrenceAreaUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/PrefrenceAreaUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).PrefrenceAreaUpdate(ctx, req.(*PrefrenceAreaUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_PrefrenceAreaList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CmsServer).PrefrenceAreaList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cmsclient.Cms/PrefrenceAreaList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).PrefrenceAreaList(ctx, req.(*PrefrenceAreaListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cms_PrefrenceAreaProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PrefrenceAreaProductRelationAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CmsServer).PrefrenceAreaProductRelationAdd(ctx, in)
+		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cmsclient.Cms/PrefrenceAreaProductRelationAdd",
+		FullMethod: "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).PrefrenceAreaProductRelationAdd(ctx, req.(*PrefrenceAreaProductRelationAddReq))
+		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationAdd(ctx, req.(*PrefrenceAreaProductRelationAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cms_PrefrenceAreaProductRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PrefrenceAreaProductRelationDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CmsServer).PrefrenceAreaProductRelationDelete(ctx, in)
+		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cmsclient.Cms/PrefrenceAreaProductRelationDelete",
+		FullMethod: "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).PrefrenceAreaProductRelationDelete(ctx, req.(*PrefrenceAreaProductRelationDeleteReq))
+		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationDelete(ctx, req.(*PrefrenceAreaProductRelationDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cms_PrefrenceAreaProductRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PrefrenceAreaProductRelationUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CmsServer).PrefrenceAreaProductRelationUpdate(ctx, in)
+		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cmsclient.Cms/PrefrenceAreaProductRelationUpdate",
+		FullMethod: "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).PrefrenceAreaProductRelationUpdate(ctx, req.(*PrefrenceAreaProductRelationUpdateReq))
+		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationUpdate(ctx, req.(*PrefrenceAreaProductRelationUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cms_PrefrenceAreaProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PrefrenceAreaProductRelationListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CmsServer).PrefrenceAreaProductRelationList(ctx, in)
+		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cmsclient.Cms/PrefrenceAreaProductRelationList",
+		FullMethod: "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CmsServer).PrefrenceAreaProductRelationList(ctx, req.(*PrefrenceAreaProductRelationListReq))
+		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationList(ctx, req.(*PrefrenceAreaProductRelationListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Cms_ServiceDesc is the grpc.ServiceDesc for Cms service.
+// PrefrenceAreaProductRelationService_ServiceDesc is the grpc.ServiceDesc for PrefrenceAreaProductRelationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Cms_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.Cms",
-	HandlerType: (*CmsServer)(nil),
+var PrefrenceAreaProductRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.PrefrenceAreaProductRelationService",
+	HandlerType: (*PrefrenceAreaProductRelationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SubjectAdd",
-			Handler:    _Cms_SubjectAdd_Handler,
-		},
-		{
-			MethodName: "SubjectDelete",
-			Handler:    _Cms_SubjectDelete_Handler,
-		},
-		{
-			MethodName: "SubjectUpdate",
-			Handler:    _Cms_SubjectUpdate_Handler,
-		},
-		{
-			MethodName: "SubjectList",
-			Handler:    _Cms_SubjectList_Handler,
-		},
-		{
-			MethodName: "SubjectListByIds",
-			Handler:    _Cms_SubjectListByIds_Handler,
-		},
-		{
-			MethodName: "SubjectProductRelationAdd",
-			Handler:    _Cms_SubjectProductRelationAdd_Handler,
-		},
-		{
-			MethodName: "SubjectProductRelationDelete",
-			Handler:    _Cms_SubjectProductRelationDelete_Handler,
-		},
-		{
-			MethodName: "SubjectProductRelationUpdate",
-			Handler:    _Cms_SubjectProductRelationUpdate_Handler,
-		},
-		{
-			MethodName: "SubjectProductRelationList",
-			Handler:    _Cms_SubjectProductRelationList_Handler,
-		},
-		{
-			MethodName: "PrefrenceAreaAdd",
-			Handler:    _Cms_PrefrenceAreaAdd_Handler,
-		},
-		{
-			MethodName: "PrefrenceAreaDelete",
-			Handler:    _Cms_PrefrenceAreaDelete_Handler,
-		},
-		{
-			MethodName: "PrefrenceAreaUpdate",
-			Handler:    _Cms_PrefrenceAreaUpdate_Handler,
-		},
-		{
-			MethodName: "PrefrenceAreaList",
-			Handler:    _Cms_PrefrenceAreaList_Handler,
-		},
-		{
 			MethodName: "PrefrenceAreaProductRelationAdd",
-			Handler:    _Cms_PrefrenceAreaProductRelationAdd_Handler,
+			Handler:    _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationAdd_Handler,
 		},
 		{
 			MethodName: "PrefrenceAreaProductRelationDelete",
-			Handler:    _Cms_PrefrenceAreaProductRelationDelete_Handler,
+			Handler:    _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationDelete_Handler,
 		},
 		{
 			MethodName: "PrefrenceAreaProductRelationUpdate",
-			Handler:    _Cms_PrefrenceAreaProductRelationUpdate_Handler,
+			Handler:    _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationUpdate_Handler,
 		},
 		{
 			MethodName: "PrefrenceAreaProductRelationList",
-			Handler:    _Cms_PrefrenceAreaProductRelationList_Handler,
+			Handler:    _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

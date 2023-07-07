@@ -5,6 +5,7 @@ package server
 
 import (
 	"context"
+	"zero-admin/rpc/cms/internal/logic/subjectproductrelationservice"
 
 	"zero-admin/rpc/cms/cmsclient"
 	"zero-admin/rpc/cms/internal/logic"
@@ -50,12 +51,12 @@ func (s *CmsServer) SubjectListByIds(ctx context.Context, in *cmsclient.SubjectL
 
 // 专题关联
 func (s *CmsServer) SubjectProductRelationAdd(ctx context.Context, in *cmsclient.SubjectProductRelationAddReq) (*cmsclient.SubjectProductRelationAddResp, error) {
-	l := logic.NewSubjectProductRelationAddLogic(ctx, s.svcCtx)
+	l := subjectproductrelationservicelogic.NewSubjectProductRelationAddLogic(ctx, s.svcCtx)
 	return l.SubjectProductRelationAdd(in)
 }
 
 func (s *CmsServer) SubjectProductRelationDelete(ctx context.Context, in *cmsclient.SubjectProductRelationDeleteReq) (*cmsclient.SubjectProductRelationDeleteResp, error) {
-	l := logic.NewSubjectProductRelationDeleteLogic(ctx, s.svcCtx)
+	l := subjectproductrelationservicelogic.NewSubjectProductRelationDeleteLogic(ctx, s.svcCtx)
 	return l.SubjectProductRelationDelete(in)
 }
 
@@ -65,7 +66,7 @@ func (s *CmsServer) SubjectProductRelationUpdate(ctx context.Context, in *cmscli
 }
 
 func (s *CmsServer) SubjectProductRelationList(ctx context.Context, in *cmsclient.SubjectProductRelationListReq) (*cmsclient.SubjectProductRelationListResp, error) {
-	l := logic.NewSubjectProductRelationListLogic(ctx, s.svcCtx)
+	l := subjectproductrelationservicelogic.NewSubjectProductRelationListLogic(ctx, s.svcCtx)
 	return l.SubjectProductRelationList(in)
 }
 

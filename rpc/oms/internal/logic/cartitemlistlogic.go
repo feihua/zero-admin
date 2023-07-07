@@ -24,8 +24,7 @@ func NewCartItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cart
 }
 
 func (l *CartItemListLogic) CartItemList(in *oms.CartItemListReq) (*oms.CartItemListResp, error) {
-	all, err := l.svcCtx.OmsCartItemModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.OmsCartItemModel.Count(l.ctx)
+	all, err := l.svcCtx.OmsCartItemModel.FindAll(l.ctx, in.MemberId)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -60,7 +59,7 @@ func (l *CartItemListLogic) CartItemList(in *oms.CartItemListReq) (*oms.CartItem
 	listStr, _ := json.Marshal(list)
 	logx.WithContext(l.ctx).Infof("查询购物车lis列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &oms.CartItemListResp{
-		Total: count,
+		Total: 0,
 		List:  list,
 	}, nil
 }

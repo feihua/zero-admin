@@ -1,4 +1,4 @@
-package logic
+package subjectservicelogic
 
 import (
 	"context"
@@ -23,6 +23,7 @@ func NewSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Subjec
 	}
 }
 
+// 专题
 func (l *SubjectAddLogic) SubjectAdd(in *cmsclient.SubjectAddReq) (*cmsclient.SubjectAddResp, error) {
 	// todo: add your logic here and delete this line
 

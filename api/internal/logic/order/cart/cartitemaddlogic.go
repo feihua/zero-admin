@@ -31,7 +31,7 @@ func (l *CartItemAddLogic) CartItemAdd(req types.AddCartItemReq) (*types.AddCart
 		ProductSkuId:      req.ProductSkuId,
 		MemberId:          req.MemberId,
 		Quantity:          req.Quantity,
-		Price:             int64(req.Price),
+		Price:             float32(req.Price),
 		ProductPic:        req.ProductPic,
 		ProductName:       req.ProductName,
 		ProductSubTitle:   req.ProductSubTitle,

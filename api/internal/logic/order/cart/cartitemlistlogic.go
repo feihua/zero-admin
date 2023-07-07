@@ -28,8 +28,7 @@ func NewCartItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartI
 
 func (l *CartItemListLogic) CartItemList(req types.ListCartItemReq) (*types.ListCartItemResp, error) {
 	resp, err := l.svcCtx.Oms.CartItemList(l.ctx, &omsclient.CartItemListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
+		MemberId: 1,
 	})
 
 	if err != nil {

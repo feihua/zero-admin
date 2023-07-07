@@ -39,7 +39,7 @@ goctl rpc protoc pay.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 
 进到rpc/cms/目录操作
 goctl rpc template -o cms.proto
-goctl rpc protoc cms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
+goctl rpc protoc cms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. -m
 
 4.创建model
 进到rpc/目录操作

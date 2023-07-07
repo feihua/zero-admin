@@ -1,9 +1,8 @@
-package logic
+package subjectservicelogic
 
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/cms/cms"
 
 	"zero-admin/rpc/cms/cmsclient"
 	"zero-admin/rpc/cms/internal/svc"
@@ -34,10 +33,10 @@ func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsR
 		return nil, err
 	}
 
-	var list []*cms.SubjectListData
+	var list []*cmsclient.SubjectListData
 	for _, item := range *all {
 
-		list = append(list, &cms.SubjectListData{
+		list = append(list, &cmsclient.SubjectListData{
 			Id:              item.Id,
 			CategoryId:      item.CategoryId,
 			Title:           item.Title,

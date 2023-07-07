@@ -6,7 +6,10 @@ import (
 
 	"zero-admin/rpc/cms/cmsclient"
 	"zero-admin/rpc/cms/internal/config"
-	"zero-admin/rpc/cms/internal/server"
+	prefrenceareaproductrelationserviceServer "zero-admin/rpc/cms/internal/server/prefrenceareaproductrelationservice"
+	prefrenceareaserviceServer "zero-admin/rpc/cms/internal/server/prefrenceareaservice"
+	subjectproductrelationserviceServer "zero-admin/rpc/cms/internal/server/subjectproductrelationservice"
+	subjectserviceServer "zero-admin/rpc/cms/internal/server/subjectservice"
 	"zero-admin/rpc/cms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
@@ -24,10 +27,12 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
-	srv := server.NewCmsServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		cmsclient.RegisterCmsServer(grpcServer, srv)
+		cmsclient.RegisterSubjectServiceServer(grpcServer, subjectserviceServer.NewSubjectServiceServer(ctx))
+		cmsclient.RegisterSubjectProductRelationServiceServer(grpcServer, subjectproductrelationserviceServer.NewSubjectProductRelationServiceServer(ctx))
+		cmsclient.RegisterPrefrenceAreaServiceServer(grpcServer, prefrenceareaserviceServer.NewPrefrenceAreaServiceServer(ctx))
+		cmsclient.RegisterPrefrenceAreaProductRelationServiceServer(grpcServer, prefrenceareaproductrelationserviceServer.NewPrefrenceAreaProductRelationServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

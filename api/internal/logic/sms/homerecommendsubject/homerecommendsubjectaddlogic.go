@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"zero-admin/api/internal/common/errorx"
-	"zero-admin/rpc/cms/cms"
+	"zero-admin/rpc/cms/cmsclient"
 	"zero-admin/rpc/sms/smsclient"
 
 	"zero-admin/api/internal/svc"
@@ -28,7 +28,7 @@ func NewHomeRecommendSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHomeRecommendSubjectReq) (*types.AddHomeRecommendSubjectResp, error) {
-	listResp, _ := l.svcCtx.Cms.SubjectListByIds(l.ctx, &cms.SubjectListByIdsReq{
+	listResp, _ := l.svcCtx.SubjectService.SubjectListByIds(l.ctx, &cmsclient.SubjectListByIdsReq{
 		Ids: req.SubjectIds,
 	})
 

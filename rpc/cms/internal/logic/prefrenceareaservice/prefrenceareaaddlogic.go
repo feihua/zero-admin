@@ -1,4 +1,4 @@
-package logic
+package prefrenceareaservicelogic
 
 import (
 	"context"

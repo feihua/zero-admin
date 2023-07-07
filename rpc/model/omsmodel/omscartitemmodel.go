@@ -15,8 +15,7 @@ type (
 	// and implement the added methods in customOmsCartItemModel.
 	OmsCartItemModel interface {
 		omsCartItemModel
-		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsCartItem, error)
+		FindAll(ctx context.Context, MemberId int64) (*[]OmsCartItem, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -32,11 +31,11 @@ func NewOmsCartItemModel(conn sqlx.SqlConn) OmsCartItemModel {
 	}
 }
 
-func (m *customOmsCartItemModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]OmsCartItem, error) {
+func (m *customOmsCartItemModel) FindAll(ctx context.Context, MemberId int64) (*[]OmsCartItem, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", omsCartItemRows, m.table)
+	query := fmt.Sprintf("select %s from %s where member_id =?", omsCartItemRows, m.table)
 	var resp []OmsCartItem
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, MemberId)
 	switch err {
 	case nil:
 		return &resp, nil
@@ -44,22 +43,6 @@ func (m *customOmsCartItemModel) FindAll(ctx context.Context, Current int64, Pag
 		return nil, ErrNotFound
 	default:
 		return nil, err
-	}
-}
-
-func (m *customOmsCartItemModel) Count(ctx context.Context) (int64, error) {
-	query := fmt.Sprintf("select count(*) as count from %s", m.table)
-
-	var count int64
-	err := m.conn.QueryRow(&count, query)
-
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
 	}
 }
 

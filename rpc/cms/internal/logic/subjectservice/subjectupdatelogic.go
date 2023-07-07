@@ -1,4 +1,4 @@
-package logic
+package subjectservicelogic
 
 import (
 	"context"

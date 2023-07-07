@@ -57,7 +57,7 @@ func querySubjectList(l *HomeIndexLogic) []types.SubjectList {
 		homeRecommendSubjectIdLists = append(homeRecommendSubjectIdLists, item.SubjectId)
 	}
 
-	subjectListResp, _ := l.svcCtx.Cms.SubjectListByIds(l.ctx, &cmsclient.SubjectListByIdsReq{Ids: homeRecommendSubjectIdLists})
+	subjectListResp, _ := l.svcCtx.SubjectService.SubjectListByIds(l.ctx, &cmsclient.SubjectListByIdsReq{Ids: homeRecommendSubjectIdLists})
 	var subjectLists []types.SubjectList
 	for _, item := range subjectListResp.List {
 		subjectLists = append(subjectLists, types.SubjectList{

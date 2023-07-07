@@ -1,9 +1,8 @@
-package logic
+package prefrenceareaservicelogic
 
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/cms/cms"
 
 	"zero-admin/rpc/cms/cmsclient"
 	"zero-admin/rpc/cms/internal/svc"
@@ -35,10 +34,10 @@ func (l *PrefrenceAreaListLogic) PrefrenceAreaList(in *cmsclient.PrefrenceAreaLi
 		return nil, err
 	}
 
-	var list []*cms.PrefrenceAreaListData
+	var list []*cmsclient.PrefrenceAreaListData
 	for _, item := range *all {
 
-		list = append(list, &cms.PrefrenceAreaListData{
+		list = append(list, &cmsclient.PrefrenceAreaListData{
 			Id:         item.Id,
 			Name:       item.Name,
 			SubTitle:   item.SubTitle,
