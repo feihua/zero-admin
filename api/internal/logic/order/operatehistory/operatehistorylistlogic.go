@@ -26,7 +26,7 @@ func NewOperateHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *OperateHistoryListLogic) OperateHistoryList(req types.ListOperateHistoryReq) (*types.ListOperateHistoryResp, error) {
-	resp, err := l.svcCtx.Oms.OrderOperateHistoryList(l.ctx, &omsclient.OrderOperateHistoryListReq{
+	resp, err := l.svcCtx.OrderOperateHistoryService.OrderOperateHistoryList(l.ctx, &omsclient.OrderOperateHistoryListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

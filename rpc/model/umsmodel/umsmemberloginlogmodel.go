@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 )
 
 var _ UmsMemberLoginLogModel = (*customUmsMemberLoginLogModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customUmsMemberLoginLogModel.
 	UmsMemberLoginLogModel interface {
 		umsMemberLoginLogModel
-		Count(ctx context.Context, in *ums.MemberLoginLogListReq) (int64, error)
-		FindAll(ctx context.Context, in *ums.MemberLoginLogListReq) (*[]UmsMemberLoginLog, error)
+		Count(ctx context.Context, in *umsclient.MemberLoginLogListReq) (int64, error)
+		FindAll(ctx context.Context, in *umsclient.MemberLoginLogListReq) (*[]UmsMemberLoginLog, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewUmsMemberLoginLogModel(conn sqlx.SqlConn) UmsMemberLoginLogModel {
 	}
 }
 
-func (m *customUmsMemberLoginLogModel) FindAll(ctx context.Context, in *ums.MemberLoginLogListReq) (*[]UmsMemberLoginLog, error) {
+func (m *customUmsMemberLoginLogModel) FindAll(ctx context.Context, in *umsclient.MemberLoginLogListReq) (*[]UmsMemberLoginLog, error) {
 	where := "1=1"
 
 	if in.MemberId != 0 {
@@ -53,7 +53,7 @@ func (m *customUmsMemberLoginLogModel) FindAll(ctx context.Context, in *ums.Memb
 	}
 }
 
-func (m *customUmsMemberLoginLogModel) Count(ctx context.Context, in *ums.MemberLoginLogListReq) (int64, error) {
+func (m *customUmsMemberLoginLogModel) Count(ctx context.Context, in *umsclient.MemberLoginLogListReq) (int64, error) {
 	where := "1=1"
 
 	if in.MemberId != 0 {

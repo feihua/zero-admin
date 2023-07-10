@@ -27,7 +27,7 @@ func NewMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) MemberL
 }
 
 func (l *MemberListLogic) MemberList(req types.ListMemberReq) (*types.ListMemberResp, error) {
-	resp, err := l.svcCtx.Ums.MemberList(l.ctx, &umsclient.MemberListReq{
+	resp, err := l.svcCtx.MemberService.MemberList(l.ctx, &umsclient.MemberListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		Username: req.Username,

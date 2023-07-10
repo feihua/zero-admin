@@ -26,7 +26,7 @@ func NewSkuStockDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Sku
 }
 
 func (l *SkuStockDeleteLogic) SkuStockDelete(req types.DeleteSkuStockReq) (*types.DeleteSkuStockResp, error) {
-	_, err := l.svcCtx.Pms.SkuStockDelete(l.ctx, &pmsclient.SkuStockDeleteReq{
+	_, err := l.svcCtx.SkuStockService.SkuStockDelete(l.ctx, &pmsclient.SkuStockDeleteReq{
 		Ids: req.Ids,
 	})
 

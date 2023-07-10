@@ -27,7 +27,7 @@ func NewProductCommentAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ProductCommentAddLogic) ProductCommentAdd(req types.AddProductCommentReq) (*types.AddProductCommentResp, error) {
-	_, err := l.svcCtx.Pms.CommentAdd(l.ctx, &pmsclient.CommentAddReq{
+	_, err := l.svcCtx.CommentService.CommentAdd(l.ctx, &pmsclient.CommentAddReq{
 		ProductId:        req.ProductId,
 		MemberNickName:   req.MemberNickName,
 		ProductName:      req.ProductName,

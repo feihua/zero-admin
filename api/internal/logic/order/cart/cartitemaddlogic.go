@@ -26,7 +26,7 @@ func NewCartItemAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartIt
 }
 
 func (l *CartItemAddLogic) CartItemAdd(req types.AddCartItemReq) (*types.AddCartItemResp, error) {
-	_, err := l.svcCtx.Oms.CartItemAdd(l.ctx, &omsclient.CartItemAddReq{
+	_, err := l.svcCtx.CartItemService.CartItemAdd(l.ctx, &omsclient.CartItemAddReq{
 		ProductId:         req.ProductId,
 		ProductSkuId:      req.ProductSkuId,
 		MemberId:          req.MemberId,

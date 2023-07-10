@@ -27,7 +27,7 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) JobUpdat
 }
 
 func (l *JobUpdateLogic) JobUpdate(req types.UpdateJobReq) (*types.UpdateJobResp, error) {
-	_, err := l.svcCtx.Sys.JobUpdate(l.ctx, &sysclient.JobUpdateReq{
+	_, err := l.svcCtx.JobService.JobUpdate(l.ctx, &sysclient.JobUpdateReq{
 		Id:           req.Id,
 		JobName:      req.JobName,
 		OrderNum:     req.OrderNum,

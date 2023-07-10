@@ -25,7 +25,7 @@ func NewMemberAddressAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *MemberAddressAddLogic) MemberAddressAdd(req *types.AddMemberAddressReq) (resp *types.AddMemberAddressResp, err error) {
-	_, err = l.svcCtx.Ums.MemberReceiveAddressAdd(l.ctx, &umsclient.MemberReceiveAddressAddReq{
+	_, err = l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressAdd(l.ctx, &umsclient.MemberReceiveAddressAddReq{
 		MemberId:      l.ctx.Value("memberId").(int64),
 		Name:          req.Name,
 		PhoneNumber:   req.PhoneNumber,

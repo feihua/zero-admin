@@ -25,7 +25,7 @@ func NewProductCollectionListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *ProductCollectionListLogic) ProductCollectionList(req *types.ProductCollectionListReq) (resp *types.ProductCollectionListResp, err error) {
-	collectionList, _ := l.svcCtx.Ums.MemberProductCollectionList(l.ctx, &umsclient.MemberProductCollectionListReq{
+	collectionList, _ := l.svcCtx.MemberProductCollectionService.MemberProductCollectionList(l.ctx, &umsclient.MemberProductCollectionListReq{
 		Current:   req.Current,
 		PageSize:  req.PageSize,
 		MemberId:  l.ctx.Value("memberId").(int64),

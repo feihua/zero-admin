@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 )
 
 var _ UmsMemberProductCollectionModel = (*customUmsMemberProductCollectionModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customUmsMemberProductCollectionModel.
 	UmsMemberProductCollectionModel interface {
 		umsMemberProductCollectionModel
-		Count(ctx context.Context, in *ums.MemberProductCollectionListReq) (int64, error)
-		FindAll(ctx context.Context, in *ums.MemberProductCollectionListReq) (*[]UmsMemberProductCollection, error)
+		Count(ctx context.Context, in *umsclient.MemberProductCollectionListReq) (int64, error)
+		FindAll(ctx context.Context, in *umsclient.MemberProductCollectionListReq) (*[]UmsMemberProductCollection, error)
 		DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewUmsMemberProductCollectionModel(conn sqlx.SqlConn) UmsMemberProductColle
 	}
 }
 
-func (m *customUmsMemberProductCollectionModel) FindAll(ctx context.Context, in *ums.MemberProductCollectionListReq) (*[]UmsMemberProductCollection, error) {
+func (m *customUmsMemberProductCollectionModel) FindAll(ctx context.Context, in *umsclient.MemberProductCollectionListReq) (*[]UmsMemberProductCollection, error) {
 	where := "1=1"
 
 	if in.MemberId != 0 {
@@ -58,7 +58,7 @@ func (m *customUmsMemberProductCollectionModel) FindAll(ctx context.Context, in 
 	}
 }
 
-func (m *customUmsMemberProductCollectionModel) Count(ctx context.Context, in *ums.MemberProductCollectionListReq) (int64, error) {
+func (m *customUmsMemberProductCollectionModel) Count(ctx context.Context, in *umsclient.MemberProductCollectionListReq) (int64, error) {
 	where := "1=1"
 	if in.MemberId != 0 {
 		where = where + fmt.Sprintf(" AND member_id = '%d'", in.MemberId)

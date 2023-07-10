@@ -27,7 +27,7 @@ func NewGrowthChangeHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *GrowthChangeHistoryUpdateLogic) GrowthChangeHistoryUpdate(req types.UpdateGrowthChangeHistoryReq) (*types.UpdateGrowthChangeHistoryResp, error) {
-	_, err := l.svcCtx.Ums.GrowthChangeHistoryUpdate(l.ctx, &umsclient.GrowthChangeHistoryUpdateReq{
+	_, err := l.svcCtx.GrowthChangeHistoryService.GrowthChangeHistoryUpdate(l.ctx, &umsclient.GrowthChangeHistoryUpdateReq{
 		Id:          req.Id,
 		MemberId:    req.MemberId,
 		CreateTime:  req.CreateTime,

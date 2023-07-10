@@ -28,7 +28,7 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductReq) (*types.AddHomeNewProductResp, error) {
-	brandListResp, _ := l.svcCtx.Pms.ProductListByIds(l.ctx, &pmsclient.ProductByIdsReq{Ids: req.ProductIds})
+	brandListResp, _ := l.svcCtx.ProductService.ProductListByIds(l.ctx, &pmsclient.ProductByIdsReq{Ids: req.ProductIds})
 
 	var list []*smsclient.HomeNewProductAddData
 
@@ -41,7 +41,7 @@ func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductRe
 		})
 	}
 
-	_, err := l.svcCtx.Sms.HomeNewProductAdd(l.ctx, &smsclient.HomeNewProductAddReq{
+	_, err := l.svcCtx.HomeNewProductService.HomeNewProductAdd(l.ctx, &smsclient.HomeNewProductAddReq{
 		NewProductAddData: list,
 	})
 

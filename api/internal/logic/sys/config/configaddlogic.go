@@ -26,7 +26,7 @@ func NewConfigAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) ConfigAd
 }
 
 func (l *ConfigAddLogic) ConfigAdd(req types.AddConfigReq) (*types.AddConfigResp, error) {
-	_, err := l.svcCtx.Sys.ConfigAdd(l.ctx, &sysclient.ConfigAddReq{
+	_, err := l.svcCtx.ConfigService.ConfigAdd(l.ctx, &sysclient.ConfigAddReq{
 		Value:       req.Value,
 		Label:       req.Label,
 		Type:        req.Type,

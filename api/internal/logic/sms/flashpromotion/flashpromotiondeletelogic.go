@@ -26,7 +26,7 @@ func NewFlashPromotionDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FlashPromotionDeleteLogic) FlashPromotionDelete(req types.DeleteFlashPromotionReq) (*types.DeleteFlashPromotionResp, error) {
-	_, err := l.svcCtx.Sms.FlashPromotionDelete(l.ctx, &smsclient.FlashPromotionDeleteReq{
+	_, err := l.svcCtx.FlashPromotionService.FlashPromotionDelete(l.ctx, &smsclient.FlashPromotionDeleteReq{
 		Ids: req.Ids,
 	})
 

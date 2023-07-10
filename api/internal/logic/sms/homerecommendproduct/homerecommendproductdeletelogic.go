@@ -26,7 +26,7 @@ func NewHomeRecommendProductDeleteLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(req types.DeleteHomeRecommendProductReq) (*types.DeleteHomeRecommendProductResp, error) {
-	_, err := l.svcCtx.Sms.HomeRecommendProductDelete(l.ctx, &smsclient.HomeRecommendProductDeleteReq{
+	_, err := l.svcCtx.HomeRecommendProductService.HomeRecommendProductDelete(l.ctx, &smsclient.HomeRecommendProductDeleteReq{
 		Ids: req.Ids,
 	})
 

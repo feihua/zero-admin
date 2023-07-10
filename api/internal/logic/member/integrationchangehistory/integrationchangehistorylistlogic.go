@@ -27,7 +27,7 @@ func NewIntegrationChangeHistoryListLogic(ctx context.Context, svcCtx *svc.Servi
 }
 
 func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(req types.ListIntegrationChangeHistoryReq) (*types.ListIntegrationChangeHistoryResp, error) {
-	resp, err := l.svcCtx.Ums.IntegrationChangeHistoryList(l.ctx, &umsclient.IntegrationChangeHistoryListReq{
+	resp, err := l.svcCtx.IntegrationChangeHistoryService.IntegrationChangeHistoryList(l.ctx, &umsclient.IntegrationChangeHistoryListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

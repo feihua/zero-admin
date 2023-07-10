@@ -25,7 +25,7 @@ func NewCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) CouponL
 }
 
 func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCouponResp, error) {
-	resp, err := l.svcCtx.Sms.CouponList(l.ctx, &smsclient.CouponListReq{
+	resp, err := l.svcCtx.CouponService.CouponList(l.ctx, &smsclient.CouponListReq{
 		Current:   req.Current,
 		PageSize:  req.PageSize,
 		Type:      req.Type,

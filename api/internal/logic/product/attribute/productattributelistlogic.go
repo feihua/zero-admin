@@ -27,7 +27,7 @@ func NewProductAttributeListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *ProductAttributeListLogic) ProductAttributeList(req *types.ListProductAttributeReq) (resp *types.ListProductAttributeResp, err error) {
-	attributeList, er := l.svcCtx.Pms.ProductAttributeList(l.ctx, &pmsclient.ProductAttributeListReq{
+	attributeList, er := l.svcCtx.ProductAttributeService.ProductAttributeList(l.ctx, &pmsclient.ProductAttributeListReq{
 		Current:                    req.Current,
 		PageSize:                   req.PageSize,
 		Name:                       req.Name,

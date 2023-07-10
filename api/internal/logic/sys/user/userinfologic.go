@@ -32,7 +32,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	// 这里的key和生成jwt token时传入的key一致
 	userId, _ := l.ctx.Value("userId").(json.Number).Int64()
 
-	resp, err := l.svcCtx.Sys.UserInfo(l.ctx, &sysclient.InfoReq{
+	resp, err := l.svcCtx.UserService.UserInfo(l.ctx, &sysclient.InfoReq{
 		UserId: userId,
 	})
 

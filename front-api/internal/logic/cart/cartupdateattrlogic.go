@@ -25,7 +25,7 @@ func NewCartUpdateAttrLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 }
 
 func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemUpdateAttrReq) (resp *types.CartItemUpdateResp, err error) {
-	_, _ = l.svcCtx.Oms.CartItemUpdate(l.ctx, &omsclient.CartItemUpdateReq{
+	_, _ = l.svcCtx.CartItemService.CartItemUpdate(l.ctx, &omsclient.CartItemUpdateReq{
 		Id:                req.Id,
 		ProductId:         req.ProductId,
 		ProductSkuId:      req.ProductSkuId,

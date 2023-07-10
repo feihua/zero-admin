@@ -25,7 +25,7 @@ func NewConfigListLogic(ctx context.Context, svcCtx *svc.ServiceContext) ConfigL
 }
 
 func (l *ConfigListLogic) ConfigList(req types.ListConfigReq) (*types.ListConfigResp, error) {
-	resp, err := l.svcCtx.Sys.ConfigList(l.ctx, &sysclient.ConfigListReq{
+	resp, err := l.svcCtx.ConfigService.ConfigList(l.ctx, &sysclient.ConfigListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

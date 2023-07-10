@@ -27,7 +27,7 @@ func NewMemberTaskListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Mem
 }
 
 func (l *MemberTaskListLogic) MemberTaskList(req types.ListMemberTaskReq) (*types.ListMemberTaskResp, error) {
-	resp, err := l.svcCtx.Ums.MemberTaskList(l.ctx, &umsclient.MemberTaskListReq{
+	resp, err := l.svcCtx.MemberTaskService.MemberTaskList(l.ctx, &umsclient.MemberTaskListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

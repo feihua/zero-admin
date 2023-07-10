@@ -28,7 +28,7 @@ func NewHomeBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeB
 }
 
 func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddHomeBrandResp, error) {
-	brandListResp, _ := l.svcCtx.Pms.BrandListByIds(l.ctx, &pmsclient.BrandListByIdsReq{Ids: req.BrandIds})
+	brandListResp, _ := l.svcCtx.BrandService.BrandListByIds(l.ctx, &pmsclient.BrandListByIdsReq{Ids: req.BrandIds})
 
 	var list []*smsclient.HomeBrandAddData
 
@@ -41,7 +41,7 @@ func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddH
 		})
 	}
 
-	_, err := l.svcCtx.Sms.HomeBrandAdd(l.ctx, &smsclient.HomeBrandAddReq{
+	_, err := l.svcCtx.HomeBrandService.HomeBrandAdd(l.ctx, &smsclient.HomeBrandAddReq{
 		BrandAddData: list,
 	})
 

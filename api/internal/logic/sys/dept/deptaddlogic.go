@@ -27,7 +27,7 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptAddLog
 }
 
 func (l *DeptAddLogic) DeptAdd(req types.AddDeptReq) (*types.AddDeptResp, error) {
-	_, err := l.svcCtx.Sys.DeptAdd(l.ctx, &sysclient.DeptAddReq{
+	_, err := l.svcCtx.DeptService.DeptAdd(l.ctx, &sysclient.DeptAddReq{
 		Name:      req.Name,
 		ParentId:  req.ParentId,
 		OrderNum:  req.OrderNum,

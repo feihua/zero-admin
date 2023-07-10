@@ -27,7 +27,7 @@ func NewMemberTaskUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) M
 }
 
 func (l *MemberTaskUpdateLogic) MemberTaskUpdate(req types.UpdateMemberTaskReq) (*types.UpdateMemberTaskResp, error) {
-	_, err := l.svcCtx.Ums.MemberTaskUpdate(l.ctx, &umsclient.MemberTaskUpdateReq{
+	_, err := l.svcCtx.MemberTaskService.MemberTaskUpdate(l.ctx, &umsclient.MemberTaskUpdateReq{
 		Id:           req.Id,
 		Name:         req.Name,
 		Growth:       req.Growth,

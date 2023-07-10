@@ -27,7 +27,7 @@ func NewOrderSettingUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *OrderSettingUpdateLogic) OrderSettingUpdate(req types.UpdateOrderSettingReq) (*types.UpdateOrderSettingResp, error) {
-	_, err := l.svcCtx.Oms.OrderSettingUpdate(l.ctx, &omsclient.OrderSettingUpdateReq{
+	_, err := l.svcCtx.OrderSettingService.OrderSettingUpdate(l.ctx, &omsclient.OrderSettingUpdateReq{
 		Id:                  req.Id,
 		FlashOrderOvertime:  req.FlashOrderOvertime,
 		NormalOrderOvertime: req.NormalOrderOvertime,

@@ -27,7 +27,7 @@ func NewIntegrationChangeHistoryUpdateLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 func (l *IntegrationChangeHistoryUpdateLogic) IntegrationChangeHistoryUpdate(req types.UpdateIntegrationChangeHistoryReq) (*types.UpdateIntegrationChangeHistoryResp, error) {
-	_, err := l.svcCtx.Ums.IntegrationChangeHistoryUpdate(l.ctx, &umsclient.IntegrationChangeHistoryUpdateReq{
+	_, err := l.svcCtx.IntegrationChangeHistoryService.IntegrationChangeHistoryUpdate(l.ctx, &umsclient.IntegrationChangeHistoryUpdateReq{
 		Id:          req.Id,
 		MemberId:    req.MemberId,
 		CreateTime:  req.CreateTime,

@@ -40,7 +40,7 @@ func NewProductUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Prod
 //注意: 步骤1到6是在商品(rpc)中操作,步骤7到8是在cms模块中操作
 func (l *ProductUpdateLogic) ProductUpdate(req types.UpdateProductReq) (*types.UpdateProductResp, error) {
 	productId := req.Id
-	_, err := l.svcCtx.Pms.ProductUpdate(l.ctx, &pmsclient.ProductUpdateReq{
+	_, err := l.svcCtx.ProductService.ProductUpdate(l.ctx, &pmsclient.ProductUpdateReq{
 		Id:                         productId,
 		BrandId:                    req.BrandId,
 		ProductCategoryId:          req.ProductCategoryId,

@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/sysclient"
 )
 
 var _ SysLoginLogModel = (*customSysLoginLogModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSysLoginLogModel.
 	SysLoginLogModel interface {
 		sysLoginLogModel
-		Count(ctx context.Context, in *sys.LoginLogListReq) (int64, error)
-		FindAll(ctx context.Context, in *sys.LoginLogListReq) (*[]SysLoginLog, error)
+		Count(ctx context.Context, in *sysclient.LoginLogListReq) (int64, error)
+		FindAll(ctx context.Context, in *sysclient.LoginLogListReq) (*[]SysLoginLog, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewSysLoginLogModel(conn sqlx.SqlConn) SysLoginLogModel {
 	}
 }
 
-func (m *customSysLoginLogModel) FindAll(ctx context.Context, in *sys.LoginLogListReq) (*[]SysLoginLog, error) {
+func (m *customSysLoginLogModel) FindAll(ctx context.Context, in *sysclient.LoginLogListReq) (*[]SysLoginLog, error) {
 	where := "1=1"
 	if len(in.UserName) > 0 {
 		where = where + fmt.Sprintf(" AND user_name like '%%%s%%'", in.UserName)
@@ -55,7 +55,7 @@ func (m *customSysLoginLogModel) FindAll(ctx context.Context, in *sys.LoginLogLi
 	}
 }
 
-func (m *customSysLoginLogModel) Count(ctx context.Context, in *sys.LoginLogListReq) (int64, error) {
+func (m *customSysLoginLogModel) Count(ctx context.Context, in *sysclient.LoginLogListReq) (int64, error) {
 	where := "1=1"
 	if len(in.UserName) > 0 {
 		where = where + fmt.Sprintf(" AND user_name like '%%%s%%'", in.UserName)

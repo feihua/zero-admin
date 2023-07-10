@@ -26,7 +26,7 @@ func NewProductBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *ProductBrandDeleteLogic) ProductBrandDelete(req types.DeleteProductBrandReq) (*types.DeleteProductBrandResp, error) {
-	_, err := l.svcCtx.Pms.BrandDelete(l.ctx, &pmsclient.BrandDeleteReq{
+	_, err := l.svcCtx.BrandService.BrandDelete(l.ctx, &pmsclient.BrandDeleteReq{
 		Ids: req.Ids,
 	})
 

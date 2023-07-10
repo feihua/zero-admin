@@ -26,7 +26,7 @@ func NewMemberPriceDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberPriceDeleteLogic) MemberPriceDelete(req types.DeleteMemberPriceReq) (*types.DeleteMemberPriceResp, error) {
-	_, err := l.svcCtx.Pms.MemberPriceDelete(l.ctx, &pmsclient.MemberPriceDeleteReq{
+	_, err := l.svcCtx.MemberPriceService.MemberPriceDelete(l.ctx, &pmsclient.MemberPriceDeleteReq{
 		Ids: req.Ids,
 	})
 

@@ -26,7 +26,7 @@ func NewCartItemUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Car
 }
 
 func (l *CartItemUpdateLogic) CartItemUpdate(req types.UpdateCartItemReq) (*types.UpdateCartItemResp, error) {
-	_, err := l.svcCtx.Oms.CartItemUpdate(l.ctx, &omsclient.CartItemUpdateReq{
+	_, err := l.svcCtx.CartItemService.CartItemUpdate(l.ctx, &omsclient.CartItemUpdateReq{
 		Id:                req.Id,
 		ProductId:         req.ProductId,
 		ProductSkuId:      req.ProductSkuId,

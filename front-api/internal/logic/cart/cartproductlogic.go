@@ -25,7 +25,7 @@ func NewCartProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartP
 }
 
 func (l *CartProductLogic) CartProduct(req *types.CartProductReq) (resp *types.CartProductResp, err error) {
-	productResp, _ := l.svcCtx.Pms.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
+	productResp, _ := l.svcCtx.ProductService.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
 		Id: req.ProductId,
 	})
 	return &types.CartProductResp{

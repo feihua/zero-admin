@@ -27,7 +27,7 @@ func NewMemberStatisticsInfoAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *MemberStatisticsInfoAddLogic) MemberStatisticsInfoAdd(req types.AddMemberStatisticsInfoReq) (*types.AddMemberStatisticsInfoResp, error) {
-	_, err := l.svcCtx.Ums.MemberStatisticsInfoAdd(l.ctx, &umsclient.MemberStatisticsInfoAddReq{
+	_, err := l.svcCtx.MemberStatisticsInfoService.MemberStatisticsInfoAdd(l.ctx, &umsclient.MemberStatisticsInfoAddReq{
 		MemberId:            req.MemberId,
 		ConsumeAmount:       int64(req.ConsumeAmount),
 		OrderCount:          req.OrderCount,

@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/pms/pms"
+	"zero-admin/rpc/pms/pmsclient"
 )
 
 var _ PmsBrandModel = (*customPmsBrandModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customPmsBrandModel.
 	PmsBrandModel interface {
 		pmsBrandModel
-		Count(ctx context.Context, in *pms.BrandListReq) (int64, error)
-		FindAll(ctx context.Context, in *pms.BrandListReq) (*[]PmsBrand, error)
+		Count(ctx context.Context, in *pmsclient.BrandListReq) (int64, error)
+		FindAll(ctx context.Context, in *pmsclient.BrandListReq) (*[]PmsBrand, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindAllByIds(ctx context.Context, ids []int64) (*[]PmsBrand, error)
 	}
@@ -34,7 +34,7 @@ func NewPmsBrandModel(conn sqlx.SqlConn) PmsBrandModel {
 	}
 }
 
-func (m *customPmsBrandModel) FindAll(ctx context.Context, in *pms.BrandListReq) (*[]PmsBrand, error) {
+func (m *customPmsBrandModel) FindAll(ctx context.Context, in *pmsclient.BrandListReq) (*[]PmsBrand, error) {
 	where := "1=1"
 	if len(in.Name) > 0 {
 		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
@@ -58,7 +58,7 @@ func (m *customPmsBrandModel) FindAll(ctx context.Context, in *pms.BrandListReq)
 	}
 }
 
-func (m *customPmsBrandModel) Count(ctx context.Context, in *pms.BrandListReq) (int64, error) {
+func (m *customPmsBrandModel) Count(ctx context.Context, in *pmsclient.BrandListReq) (int64, error) {
 	where := "1=1"
 	if len(in.Name) > 0 {
 		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)

@@ -26,7 +26,7 @@ func NewConfigDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Confi
 }
 
 func (l *ConfigDeleteLogic) ConfigDelete(req types.DeleteConfigReq) (*types.DeleteConfigResp, error) {
-	_, err := l.svcCtx.Sys.ConfigDelete(l.ctx, &sysclient.ConfigDeleteReq{
+	_, err := l.svcCtx.ConfigService.ConfigDelete(l.ctx, &sysclient.ConfigDeleteReq{
 		Ids: req.Ids,
 	})
 

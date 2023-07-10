@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 )
 
 var _ UmsMemberReceiveAddressModel = (*customUmsMemberReceiveAddressModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customUmsMemberReceiveAddressModel.
 	UmsMemberReceiveAddressModel interface {
 		umsMemberReceiveAddressModel
-		Count(ctx context.Context, in *ums.MemberReceiveAddressListReq) (int64, error)
-		FindAll(ctx context.Context, in *ums.MemberReceiveAddressListReq) (*[]UmsMemberReceiveAddress, error)
+		Count(ctx context.Context, in *umsclient.MemberReceiveAddressListReq) (int64, error)
+		FindAll(ctx context.Context, in *umsclient.MemberReceiveAddressListReq) (*[]UmsMemberReceiveAddress, error)
 		DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error
 		FindByIdAndMemberId(ctx context.Context, id int64, memberId int64) (*UmsMemberReceiveAddress, error)
 	}
@@ -34,7 +34,7 @@ func NewUmsMemberReceiveAddressModel(conn sqlx.SqlConn) UmsMemberReceiveAddressM
 	}
 }
 
-func (m *customUmsMemberReceiveAddressModel) FindAll(ctx context.Context, in *ums.MemberReceiveAddressListReq) (*[]UmsMemberReceiveAddress, error) {
+func (m *customUmsMemberReceiveAddressModel) FindAll(ctx context.Context, in *umsclient.MemberReceiveAddressListReq) (*[]UmsMemberReceiveAddress, error) {
 
 	where := "1=1"
 
@@ -56,7 +56,7 @@ func (m *customUmsMemberReceiveAddressModel) FindAll(ctx context.Context, in *um
 	}
 }
 
-func (m *customUmsMemberReceiveAddressModel) Count(ctx context.Context, in *ums.MemberReceiveAddressListReq) (int64, error) {
+func (m *customUmsMemberReceiveAddressModel) Count(ctx context.Context, in *umsclient.MemberReceiveAddressListReq) (int64, error) {
 	where := "1=1"
 
 	if in.MemberId != 0 {

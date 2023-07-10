@@ -27,7 +27,7 @@ func NewProductCateListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *P
 }
 
 func (l *ProductCateListLogic) ProductCateList(req *types.CategoryReq) (resp *types.CategoryResp, err error) {
-	categoryListResp, err := l.svcCtx.Pms.ProductCategoryList(l.ctx, &pmsclient.ProductCategoryListReq{
+	categoryListResp, err := l.svcCtx.ProductCategoryService.ProductCategoryList(l.ctx, &pmsclient.ProductCategoryListReq{
 		Current:    0,
 		PageSize:   100,
 		ParentId:   req.ParentId,

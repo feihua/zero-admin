@@ -26,7 +26,7 @@ func NewMemberTagDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Me
 }
 
 func (l *MemberTagDeleteLogic) MemberTagDelete(req types.DeleteMemberTagReq) (*types.DeleteMemberTagResp, error) {
-	_, err := l.svcCtx.Ums.MemberTagDelete(l.ctx, &umsclient.MemberTagDeleteReq{
+	_, err := l.svcCtx.MemberTagService.MemberTagDelete(l.ctx, &umsclient.MemberTagDeleteReq{
 		Ids: req.Ids,
 	})
 

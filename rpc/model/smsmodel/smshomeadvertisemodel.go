@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sms/smsclient"
 )
 
 var _ SmsHomeAdvertiseModel = (*customSmsHomeAdvertiseModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSmsHomeAdvertiseModel.
 	SmsHomeAdvertiseModel interface {
 		smsHomeAdvertiseModel
-		Count(ctx context.Context, in *sms.HomeAdvertiseListReq) (int64, error)
-		FindAll(ctx context.Context, in *sms.HomeAdvertiseListReq) (*[]SmsHomeAdvertise, error)
+		Count(ctx context.Context, in *smsclient.HomeAdvertiseListReq) (int64, error)
+		FindAll(ctx context.Context, in *smsclient.HomeAdvertiseListReq) (*[]SmsHomeAdvertise, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewSmsHomeAdvertiseModel(conn sqlx.SqlConn) SmsHomeAdvertiseModel {
 	}
 }
 
-func (m *customSmsHomeAdvertiseModel) FindAll(ctx context.Context, in *sms.HomeAdvertiseListReq) (*[]SmsHomeAdvertise, error) {
+func (m *customSmsHomeAdvertiseModel) FindAll(ctx context.Context, in *smsclient.HomeAdvertiseListReq) (*[]SmsHomeAdvertise, error) {
 
 	where := "1=1"
 	if in.Type != 2 {
@@ -66,7 +66,7 @@ func (m *customSmsHomeAdvertiseModel) FindAll(ctx context.Context, in *sms.HomeA
 	}
 }
 
-func (m *customSmsHomeAdvertiseModel) Count(ctx context.Context, in *sms.HomeAdvertiseListReq) (int64, error) {
+func (m *customSmsHomeAdvertiseModel) Count(ctx context.Context, in *smsclient.HomeAdvertiseListReq) (int64, error) {
 	where := "1=1"
 	if in.Type != 2 {
 		where = where + fmt.Sprintf(" AND type = %d", in.Type)

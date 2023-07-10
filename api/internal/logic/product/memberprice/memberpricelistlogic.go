@@ -27,7 +27,7 @@ func NewMemberPriceListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Me
 }
 
 func (l *MemberPriceListLogic) MemberPriceList(req types.ListMemberPriceReq) (*types.ListMemberPriceResp, error) {
-	resp, err := l.svcCtx.Pms.MemberPriceList(l.ctx, &pmsclient.MemberPriceListReq{
+	resp, err := l.svcCtx.MemberPriceService.MemberPriceList(l.ctx, &pmsclient.MemberPriceListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

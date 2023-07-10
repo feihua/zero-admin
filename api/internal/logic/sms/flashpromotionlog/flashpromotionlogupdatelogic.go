@@ -27,7 +27,7 @@ func NewFlashPromotionLogUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *FlashPromotionLogUpdateLogic) FlashPromotionLogUpdate(req types.UpdateFlashPromotionLogReq) (*types.UpdateFlashPromotionLogResp, error) {
-	_, err := l.svcCtx.Sms.FlashPromotionLogUpdate(l.ctx, &smsclient.FlashPromotionLogUpdateReq{
+	_, err := l.svcCtx.FlashPromotionLogService.FlashPromotionLogUpdate(l.ctx, &smsclient.FlashPromotionLogUpdateReq{
 		Id:            req.Id,
 		MemberId:      req.MemberId,
 		ProductId:     req.ProductId,

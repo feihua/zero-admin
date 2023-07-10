@@ -27,7 +27,7 @@ func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Home
 }
 
 func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.ListHomeBrandResp, error) {
-	resp, err := l.svcCtx.Sms.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
+	resp, err := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
 		BrandName:       req.BrandName,
 		RecommendStatus: req.RecommendStatus,
 		Current:         req.Current,

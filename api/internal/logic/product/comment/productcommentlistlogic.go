@@ -27,7 +27,7 @@ func NewProductCommentListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *ProductCommentListLogic) ProductCommentList(req types.ListProductCommentReq) (*types.ListProductCommentResp, error) {
-	resp, err := l.svcCtx.Pms.CommentList(l.ctx, &pmsclient.CommentListReq{
+	resp, err := l.svcCtx.CommentService.CommentList(l.ctx, &pmsclient.CommentListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

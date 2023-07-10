@@ -27,7 +27,7 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictUpd
 }
 
 func (l *DictUpdateLogic) DictUpdate(req types.UpdateDictReq) (*types.UpdateDictResp, error) {
-	_, err := l.svcCtx.Sys.DictUpdate(l.ctx, &sysclient.DictUpdateReq{
+	_, err := l.svcCtx.DictService.DictUpdate(l.ctx, &sysclient.DictUpdateReq{
 		Id:           req.Id,
 		Value:        req.Value,
 		Label:        req.Label,

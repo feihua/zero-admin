@@ -27,7 +27,7 @@ func NewProductCommentUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *ProductCommentUpdateLogic) ProductCommentUpdate(req types.UpdateProductCommentReq) (*types.UpdateProductCommentResp, error) {
-	_, err := l.svcCtx.Pms.CommentUpdate(l.ctx, &pmsclient.CommentUpdateReq{
+	_, err := l.svcCtx.CommentService.CommentUpdate(l.ctx, &pmsclient.CommentUpdateReq{
 		Id:               req.Id,
 		ProductId:        req.ProductId,
 		MemberNickName:   req.MemberNickName,

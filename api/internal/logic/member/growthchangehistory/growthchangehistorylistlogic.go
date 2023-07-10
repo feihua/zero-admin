@@ -27,7 +27,7 @@ func NewGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(req types.ListGrowthChangeHistoryReq) (*types.ListGrowthChangeHistoryResp, error) {
-	resp, err := l.svcCtx.Ums.GrowthChangeHistoryList(l.ctx, &umsclient.GrowthChangeHistoryListReq{
+	resp, err := l.svcCtx.GrowthChangeHistoryService.GrowthChangeHistoryList(l.ctx, &umsclient.GrowthChangeHistoryListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

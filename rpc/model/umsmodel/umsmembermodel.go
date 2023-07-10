@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 )
 
 var _ UmsMemberModel = (*customUmsMemberModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customUmsMemberModel.
 	UmsMemberModel interface {
 		umsMemberModel
-		Count(ctx context.Context, in *ums.MemberListReq) (int64, error)
-		FindAll(ctx context.Context, in *ums.MemberListReq) (*[]UmsMember, error)
+		Count(ctx context.Context, in *umsclient.MemberListReq) (int64, error)
+		FindAll(ctx context.Context, in *umsclient.MemberListReq) (*[]UmsMember, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewUmsMemberModel(conn sqlx.SqlConn) UmsMemberModel {
 	}
 }
 
-func (m *customUmsMemberModel) FindAll(ctx context.Context, in *ums.MemberListReq) (*[]UmsMember, error) {
+func (m *customUmsMemberModel) FindAll(ctx context.Context, in *umsclient.MemberListReq) (*[]UmsMember, error) {
 	where := "1=1"
 	if len(in.Username) > 0 {
 		where = where + fmt.Sprintf(" AND username like '%%%s%%'", in.Username)
@@ -60,7 +60,7 @@ func (m *customUmsMemberModel) FindAll(ctx context.Context, in *ums.MemberListRe
 	}
 }
 
-func (m *customUmsMemberModel) Count(ctx context.Context, in *ums.MemberListReq) (int64, error) {
+func (m *customUmsMemberModel) Count(ctx context.Context, in *umsclient.MemberListReq) (int64, error) {
 	where := "1=1"
 	if len(in.Username) > 0 {
 		where = where + fmt.Sprintf(" AND username like '%%%s%%'", in.Username)

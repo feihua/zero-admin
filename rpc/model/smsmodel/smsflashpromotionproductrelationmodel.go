@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sms/smsclient"
 )
 
 var _ SmsFlashPromotionProductRelationModel = (*customSmsFlashPromotionProductRelationModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSmsFlashPromotionProductRelationModel.
 	SmsFlashPromotionProductRelationModel interface {
 		smsFlashPromotionProductRelationModel
-		Count(ctx context.Context, in *sms.FlashPromotionProductRelationListReq) (int64, error)
-		FindAll(ctx context.Context, in *sms.FlashPromotionProductRelationListReq) (*[]SmsFlashPromotionProductRelation, error)
+		Count(ctx context.Context, in *smsclient.FlashPromotionProductRelationListReq) (int64, error)
+		FindAll(ctx context.Context, in *smsclient.FlashPromotionProductRelationListReq) (*[]SmsFlashPromotionProductRelation, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewSmsFlashPromotionProductRelationModel(conn sqlx.SqlConn) SmsFlashPromoti
 	}
 }
 
-func (m *customSmsFlashPromotionProductRelationModel) FindAll(ctx context.Context, in *sms.FlashPromotionProductRelationListReq) (*[]SmsFlashPromotionProductRelation, error) {
+func (m *customSmsFlashPromotionProductRelationModel) FindAll(ctx context.Context, in *smsclient.FlashPromotionProductRelationListReq) (*[]SmsFlashPromotionProductRelation, error) {
 
 	where := fmt.Sprintf(" AND flash_promotion_id = %d", in.FlashPromotionId)
 	where = where + fmt.Sprintf(" AND flash_promotion_session_id = %d", in.FlashPromotionSessionId)
@@ -51,7 +51,7 @@ func (m *customSmsFlashPromotionProductRelationModel) FindAll(ctx context.Contex
 	}
 }
 
-func (m *customSmsFlashPromotionProductRelationModel) Count(ctx context.Context, in *sms.FlashPromotionProductRelationListReq) (int64, error) {
+func (m *customSmsFlashPromotionProductRelationModel) Count(ctx context.Context, in *smsclient.FlashPromotionProductRelationListReq) (int64, error) {
 	where := fmt.Sprintf(" AND flash_promotion_id = %d", in.FlashPromotionId)
 	where = where + fmt.Sprintf(" AND flash_promotion_session_id = %d", in.FlashPromotionSessionId)
 	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)

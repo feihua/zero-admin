@@ -27,7 +27,7 @@ func NewMemberPriceAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Mem
 }
 
 func (l *MemberPriceAddLogic) MemberPriceAdd(req types.AddMemberPriceReq) (*types.AddMemberPriceResp, error) {
-	_, err := l.svcCtx.Pms.MemberPriceAdd(l.ctx, &pmsclient.MemberPriceAddReq{
+	_, err := l.svcCtx.MemberPriceService.MemberPriceAdd(l.ctx, &pmsclient.MemberPriceAddReq{
 		ProductId:       req.ProductId,
 		MemberLevelId:   req.MemberLevelId,
 		MemberPrice:     int64(req.MemberPrice),

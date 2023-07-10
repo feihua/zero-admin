@@ -25,7 +25,7 @@ func NewReturnApplyLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Retur
 }
 
 func (l *ReturnApplyLogic) ReturnApply(req *types.ReturnApplyReq) (resp *types.ReturnApplyResp, err error) {
-	_, err = l.svcCtx.Oms.OrderReturnApplyAdd(l.ctx, &omsclient.OrderReturnApplyAddReq{
+	_, err = l.svcCtx.OrderReturnApplyService.OrderReturnApplyAdd(l.ctx, &omsclient.OrderReturnApplyAddReq{
 		OrderId:          req.OrderID,
 		ProductId:        req.ProductID,
 		OrderSn:          req.OrderSn,

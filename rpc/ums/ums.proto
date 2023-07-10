@@ -100,6 +100,16 @@ message MemberDeleteResp {
 message MemberByIdReq {
   int64 id = 1;
 }
+service MemberService {
+
+  rpc MemberAdd(MemberAddReq) returns(MemberAddResp);
+  rpc MemberLogin(MemberLoginReq) returns(MemberLoginResp);
+  rpc MemberList(MemberListReq) returns(MemberListResp);
+  rpc MemberUpdate(MemberUpdateReq) returns(MemberUpdateResp);
+  rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);
+  rpc QueryMemberById(MemberByIdReq) returns(MemberListData);
+
+}
 
 message GrowthChangeHistoryAddReq {
   int64      MemberId = 2;
@@ -159,6 +169,14 @@ message GrowthChangeHistoryDeleteResp {
   string pong = 1;
 }
 
+service GrowthChangeHistoryService {
+
+  rpc GrowthChangeHistoryAdd(GrowthChangeHistoryAddReq) returns(GrowthChangeHistoryAddResp);
+  rpc GrowthChangeHistoryList(GrowthChangeHistoryListReq) returns(GrowthChangeHistoryListResp);
+  rpc GrowthChangeHistoryUpdate(GrowthChangeHistoryUpdateReq) returns(GrowthChangeHistoryUpdateResp);
+  rpc GrowthChangeHistoryDelete(GrowthChangeHistoryDeleteReq) returns(GrowthChangeHistoryDeleteResp);
+}
+
 message IntegrationChangeHistoryAddReq {
   int64      MemberId = 2;
   string  CreateTime = 3;
@@ -216,6 +234,14 @@ message IntegrationChangeHistoryDeleteReq {
 message IntegrationChangeHistoryDeleteResp {
   string pong = 1;
 }
+service IntegrationChangeHistoryService {
+
+  rpc IntegrationChangeHistoryAdd(IntegrationChangeHistoryAddReq) returns(IntegrationChangeHistoryAddResp);
+  rpc IntegrationChangeHistoryList(IntegrationChangeHistoryListReq) returns(IntegrationChangeHistoryListResp);
+  rpc IntegrationChangeHistoryUpdate(IntegrationChangeHistoryUpdateReq) returns(IntegrationChangeHistoryUpdateResp);
+  rpc IntegrationChangeHistoryDelete(IntegrationChangeHistoryDeleteReq) returns(IntegrationChangeHistoryDeleteResp);
+
+}
 
 message IntegrationConsumeSettingAddReq {
   int64  DeductionPerAmount = 2;
@@ -264,6 +290,14 @@ message IntegrationConsumeSettingDeleteReq {
 
 message IntegrationConsumeSettingDeleteResp {
   string pong = 1;
+}
+service IntegrationConsumeSettingService {
+
+  rpc IntegrationConsumeSettingAdd(IntegrationConsumeSettingAddReq) returns(IntegrationConsumeSettingAddResp);
+  rpc IntegrationConsumeSettingList(IntegrationConsumeSettingListReq) returns(IntegrationConsumeSettingListResp);
+  rpc IntegrationConsumeSettingUpdate(IntegrationConsumeSettingUpdateReq) returns(IntegrationConsumeSettingUpdateResp);
+  rpc IntegrationConsumeSettingDelete(IntegrationConsumeSettingDeleteReq) returns(IntegrationConsumeSettingDeleteResp);
+
 }
 
 message MemberLevelAddReq {
@@ -339,7 +373,14 @@ message MemberLevelDeleteReq {
 message MemberLevelDeleteResp {
   string pong = 1;
 }
+service MemberLevelService {
 
+  rpc MemberLevelAdd(MemberLevelAddReq) returns(MemberLevelAddResp);
+  rpc MemberLevelList(MemberLevelListReq) returns(MemberLevelListResp);
+  rpc MemberLevelUpdate(MemberLevelUpdateReq) returns(MemberLevelUpdateResp);
+  rpc MemberLevelDelete(MemberLevelDeleteReq) returns(MemberLevelDeleteResp);
+
+}
 message MemberLoginLogAddReq {
   int64      MemberId = 2;
   string  CreateTime = 3;
@@ -395,7 +436,14 @@ message MemberLoginLogDeleteReq {
 message MemberLoginLogDeleteResp {
   string pong = 1;
 }
+service MemberLoginLogService {
 
+  rpc MemberLoginLogAdd(MemberLoginLogAddReq) returns(MemberLoginLogAddResp);
+  rpc MemberLoginLogList(MemberLoginLogListReq) returns(MemberLoginLogListResp);
+  rpc MemberLoginLogUpdate(MemberLoginLogUpdateReq) returns(MemberLoginLogUpdateResp);
+  rpc MemberLoginLogDelete(MemberLoginLogDeleteReq) returns(MemberLoginLogDeleteResp);
+
+}
 message MemberMemberTagRelationAddReq {
   int64  MemberId = 2;
   int64  TagId = 3;
@@ -438,7 +486,14 @@ message MemberMemberTagRelationDeleteReq {
 message MemberMemberTagRelationDeleteResp {
   string pong = 1;
 }
+service MemberMemberTagRelationService {
 
+  rpc MemberMemberTagRelationAdd(MemberMemberTagRelationAddReq) returns(MemberMemberTagRelationAddResp);
+  rpc MemberMemberTagRelationList(MemberMemberTagRelationListReq) returns(MemberMemberTagRelationListResp);
+  rpc MemberMemberTagRelationUpdate(MemberMemberTagRelationUpdateReq) returns(MemberMemberTagRelationUpdateResp);
+  rpc MemberMemberTagRelationDelete(MemberMemberTagRelationDeleteReq) returns(MemberMemberTagRelationDeleteResp);
+
+}
 message MemberProductCategoryRelationAddReq {
   int64  MemberId = 2;
   int64  ProductCategoryId = 3;
@@ -482,7 +537,15 @@ message MemberProductCategoryRelationDeleteResp {
   string pong = 1;
 }
 
+service MemberProductCategoryRelationService {
 
+  rpc MemberProductCategoryRelationAdd(MemberProductCategoryRelationAddReq) returns(MemberProductCategoryRelationAddResp);
+  rpc MemberProductCategoryRelationList(MemberProductCategoryRelationListReq) returns(MemberProductCategoryRelationListResp);
+  rpc MemberProductCategoryRelationUpdate(MemberProductCategoryRelationUpdateReq) returns(MemberProductCategoryRelationUpdateResp);
+  rpc MemberProductCategoryRelationDelete(MemberProductCategoryRelationDeleteReq) returns(MemberProductCategoryRelationDeleteResp);
+
+
+}
 message MemberReceiveAddressAddReq {
   int64    MemberId = 2;
   string  Name = 3;
@@ -550,7 +613,15 @@ message MemberReceiveAddressDeleteResp {
 }
 
 
+service MemberReceiveAddressService {
 
+  rpc MemberReceiveAddressAdd(MemberReceiveAddressAddReq) returns(MemberReceiveAddressAddResp);
+  rpc MemberReceiveAddressList(MemberReceiveAddressListReq) returns(MemberReceiveAddressListResp);
+  rpc MemberReceiveAddressUpdate(MemberReceiveAddressUpdateReq) returns(MemberReceiveAddressUpdateResp);
+  rpc MemberReceiveAddressDelete(MemberReceiveAddressDeleteReq) returns(MemberReceiveAddressDeleteResp);
+  rpc MemberReceiveAddressQueryDetail(MemberReceiveAddressQueryDetailReq) returns(MemberReceiveAddressQueryDetailResp);
+
+}
 message MemberReceiveAddressQueryDetailReq {
   int64 UserId = 1;
   int64 AddressID = 2;
@@ -623,7 +694,15 @@ message MemberRuleSettingDeleteReq {
 message MemberRuleSettingDeleteResp {
   string pong = 1;
 }
+service MemberRuleSettingService {
 
+  rpc MemberRuleSettingAdd(MemberRuleSettingAddReq) returns(MemberRuleSettingAddResp);
+  rpc MemberRuleSettingList(MemberRuleSettingListReq) returns(MemberRuleSettingListResp);
+  rpc MemberRuleSettingUpdate(MemberRuleSettingUpdateReq) returns(MemberRuleSettingUpdateResp);
+  rpc MemberRuleSettingDelete(MemberRuleSettingDeleteReq) returns(MemberRuleSettingDeleteResp);
+
+
+}
 message MemberStatisticsInfoAddReq {
   int64      MemberId = 2;
   int64    ConsumeAmount = 3;
@@ -706,7 +785,14 @@ message MemberStatisticsInfoDeleteResp {
   string pong = 1;
 }
 
+service MemberStatisticsInfoService {
 
+  rpc MemberStatisticsInfoAdd(MemberStatisticsInfoAddReq) returns(MemberStatisticsInfoAddResp);
+  rpc MemberStatisticsInfoList(MemberStatisticsInfoListReq) returns(MemberStatisticsInfoListResp);
+  rpc MemberStatisticsInfoUpdate(MemberStatisticsInfoUpdateReq) returns(MemberStatisticsInfoUpdateResp);
+  rpc MemberStatisticsInfoDelete(MemberStatisticsInfoDeleteReq) returns(MemberStatisticsInfoDeleteResp);
+
+}
 message MemberTagAddReq {
   string    Name = 2;
   int64    FinishOrderCount = 3;
@@ -753,7 +839,15 @@ message MemberTagDeleteResp {
   string pong = 1;
 }
 
+service MemberTagService {
 
+
+  rpc MemberTagAdd(MemberTagAddReq) returns(MemberTagAddResp);
+  rpc MemberTagList(MemberTagListReq) returns(MemberTagListResp);
+  rpc MemberTagUpdate(MemberTagUpdateReq) returns(MemberTagUpdateResp);
+  rpc MemberTagDelete(MemberTagDeleteReq) returns(MemberTagDeleteResp);
+
+}
 message MemberTaskAddReq {
   string  Name = 2;
   int64    Growth = 3;
@@ -802,7 +896,14 @@ message MemberTaskDeleteReq {
 message MemberTaskDeleteResp {
   string pong = 1;
 }
+service MemberTaskService {
 
+  rpc MemberTaskAdd(MemberTaskAddReq) returns(MemberTaskAddResp);
+  rpc MemberTaskList(MemberTaskListReq) returns(MemberTaskListResp);
+  rpc MemberTaskUpdate(MemberTaskUpdateReq) returns(MemberTaskUpdateResp);
+  rpc MemberTaskDelete(MemberTaskDeleteReq) returns(MemberTaskDeleteResp);
+
+}
 //用户收藏
 message MemberProductCollectionAddReq {
   int64 Id = 1; //编号
@@ -874,6 +975,14 @@ message MemberProductCollectionListData {
 message MemberProductCollectionListResp {
   int64 total = 1;
   repeated  MemberProductCollectionListData list = 2;
+}
+service MemberProductCollectionService {
+
+  rpc MemberProductCollectionAdd(MemberProductCollectionAddReq) returns (MemberProductCollectionAddResp){}
+  rpc MemberProductCollectionDelete(MemberProductCollectionDeleteReq) returns (MemberProductCollectionDeleteResp){}
+  rpc MemberProductCollectionUpdate(MemberProductCollectionUpdateReq) returns (MemberProductCollectionUpdateResp){}
+  rpc MemberProductCollectionList(MemberProductCollectionListReq) returns (MemberProductCollectionListResp){}
+
 }
 
 //用户浏览记录
@@ -948,81 +1057,7 @@ message MemberReadHistoryListResp {
   repeated  MemberReadHistoryListData list = 2;
 }
 
-service Ums {
-
-  rpc MemberAdd(MemberAddReq) returns(MemberAddResp);
-  rpc MemberLogin(MemberLoginReq) returns(MemberLoginResp);
-  rpc MemberList(MemberListReq) returns(MemberListResp);
-  rpc MemberUpdate(MemberUpdateReq) returns(MemberUpdateResp);
-  rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);
-  rpc QueryMemberById(MemberByIdReq) returns(MemberListData);
-
-
-  rpc GrowthChangeHistoryAdd(GrowthChangeHistoryAddReq) returns(GrowthChangeHistoryAddResp);
-  rpc GrowthChangeHistoryList(GrowthChangeHistoryListReq) returns(GrowthChangeHistoryListResp);
-  rpc GrowthChangeHistoryUpdate(GrowthChangeHistoryUpdateReq) returns(GrowthChangeHistoryUpdateResp);
-  rpc GrowthChangeHistoryDelete(GrowthChangeHistoryDeleteReq) returns(GrowthChangeHistoryDeleteResp);
-
-  rpc IntegrationChangeHistoryAdd(IntegrationChangeHistoryAddReq) returns(IntegrationChangeHistoryAddResp);
-  rpc IntegrationChangeHistoryList(IntegrationChangeHistoryListReq) returns(IntegrationChangeHistoryListResp);
-  rpc IntegrationChangeHistoryUpdate(IntegrationChangeHistoryUpdateReq) returns(IntegrationChangeHistoryUpdateResp);
-  rpc IntegrationChangeHistoryDelete(IntegrationChangeHistoryDeleteReq) returns(IntegrationChangeHistoryDeleteResp);
-
-  rpc IntegrationConsumeSettingAdd(IntegrationConsumeSettingAddReq) returns(IntegrationConsumeSettingAddResp);
-  rpc IntegrationConsumeSettingList(IntegrationConsumeSettingListReq) returns(IntegrationConsumeSettingListResp);
-  rpc IntegrationConsumeSettingUpdate(IntegrationConsumeSettingUpdateReq) returns(IntegrationConsumeSettingUpdateResp);
-  rpc IntegrationConsumeSettingDelete(IntegrationConsumeSettingDeleteReq) returns(IntegrationConsumeSettingDeleteResp);
-
-  rpc MemberLevelAdd(MemberLevelAddReq) returns(MemberLevelAddResp);
-  rpc MemberLevelList(MemberLevelListReq) returns(MemberLevelListResp);
-  rpc MemberLevelUpdate(MemberLevelUpdateReq) returns(MemberLevelUpdateResp);
-  rpc MemberLevelDelete(MemberLevelDeleteReq) returns(MemberLevelDeleteResp);
-
-  rpc MemberLoginLogAdd(MemberLoginLogAddReq) returns(MemberLoginLogAddResp);
-  rpc MemberLoginLogList(MemberLoginLogListReq) returns(MemberLoginLogListResp);
-  rpc MemberLoginLogUpdate(MemberLoginLogUpdateReq) returns(MemberLoginLogUpdateResp);
-  rpc MemberLoginLogDelete(MemberLoginLogDeleteReq) returns(MemberLoginLogDeleteResp);
-
-  rpc MemberMemberTagRelationAdd(MemberMemberTagRelationAddReq) returns(MemberMemberTagRelationAddResp);
-  rpc MemberMemberTagRelationList(MemberMemberTagRelationListReq) returns(MemberMemberTagRelationListResp);
-  rpc MemberMemberTagRelationUpdate(MemberMemberTagRelationUpdateReq) returns(MemberMemberTagRelationUpdateResp);
-  rpc MemberMemberTagRelationDelete(MemberMemberTagRelationDeleteReq) returns(MemberMemberTagRelationDeleteResp);
-
-  rpc MemberProductCategoryRelationAdd(MemberProductCategoryRelationAddReq) returns(MemberProductCategoryRelationAddResp);
-  rpc MemberProductCategoryRelationList(MemberProductCategoryRelationListReq) returns(MemberProductCategoryRelationListResp);
-  rpc MemberProductCategoryRelationUpdate(MemberProductCategoryRelationUpdateReq) returns(MemberProductCategoryRelationUpdateResp);
-  rpc MemberProductCategoryRelationDelete(MemberProductCategoryRelationDeleteReq) returns(MemberProductCategoryRelationDeleteResp);
-
-  rpc MemberReceiveAddressAdd(MemberReceiveAddressAddReq) returns(MemberReceiveAddressAddResp);
-  rpc MemberReceiveAddressList(MemberReceiveAddressListReq) returns(MemberReceiveAddressListResp);
-  rpc MemberReceiveAddressUpdate(MemberReceiveAddressUpdateReq) returns(MemberReceiveAddressUpdateResp);
-  rpc MemberReceiveAddressDelete(MemberReceiveAddressDeleteReq) returns(MemberReceiveAddressDeleteResp);
-  rpc MemberReceiveAddressQueryDetail(MemberReceiveAddressQueryDetailReq) returns(MemberReceiveAddressQueryDetailResp);
-
-  rpc MemberRuleSettingAdd(MemberRuleSettingAddReq) returns(MemberRuleSettingAddResp);
-  rpc MemberRuleSettingList(MemberRuleSettingListReq) returns(MemberRuleSettingListResp);
-  rpc MemberRuleSettingUpdate(MemberRuleSettingUpdateReq) returns(MemberRuleSettingUpdateResp);
-  rpc MemberRuleSettingDelete(MemberRuleSettingDeleteReq) returns(MemberRuleSettingDeleteResp);
-
-  rpc MemberStatisticsInfoAdd(MemberStatisticsInfoAddReq) returns(MemberStatisticsInfoAddResp);
-  rpc MemberStatisticsInfoList(MemberStatisticsInfoListReq) returns(MemberStatisticsInfoListResp);
-  rpc MemberStatisticsInfoUpdate(MemberStatisticsInfoUpdateReq) returns(MemberStatisticsInfoUpdateResp);
-  rpc MemberStatisticsInfoDelete(MemberStatisticsInfoDeleteReq) returns(MemberStatisticsInfoDeleteResp);
-
-  rpc MemberTagAdd(MemberTagAddReq) returns(MemberTagAddResp);
-  rpc MemberTagList(MemberTagListReq) returns(MemberTagListResp);
-  rpc MemberTagUpdate(MemberTagUpdateReq) returns(MemberTagUpdateResp);
-  rpc MemberTagDelete(MemberTagDeleteReq) returns(MemberTagDeleteResp);
-
-  rpc MemberTaskAdd(MemberTaskAddReq) returns(MemberTaskAddResp);
-  rpc MemberTaskList(MemberTaskListReq) returns(MemberTaskListResp);
-  rpc MemberTaskUpdate(MemberTaskUpdateReq) returns(MemberTaskUpdateResp);
-  rpc MemberTaskDelete(MemberTaskDeleteReq) returns(MemberTaskDeleteResp);
-
-  rpc MemberProductCollectionAdd(MemberProductCollectionAddReq) returns (MemberProductCollectionAddResp){}
-  rpc MemberProductCollectionDelete(MemberProductCollectionDeleteReq) returns (MemberProductCollectionDeleteResp){}
-  rpc MemberProductCollectionUpdate(MemberProductCollectionUpdateReq) returns (MemberProductCollectionUpdateResp){}
-  rpc MemberProductCollectionList(MemberProductCollectionListReq) returns (MemberProductCollectionListResp){}
+service MemberReadHistoryService {
 
   rpc MemberReadHistoryAdd(MemberReadHistoryAddReq) returns (MemberReadHistoryAddResp){}
   rpc MemberReadHistoryDelete(MemberReadHistoryDeleteReq) returns (MemberReadHistoryDeleteResp){}

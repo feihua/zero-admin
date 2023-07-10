@@ -25,7 +25,7 @@ func NewProductCollectionDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *ProductCollectionDeleteLogic) ProductCollectionDelete(req *types.ProductCollectionDeleteReq) (resp *types.ProductCollectionDeleteResp, err error) {
-	_, _ = l.svcCtx.Ums.MemberProductCollectionDelete(l.ctx, &umsclient.MemberProductCollectionDeleteReq{
+	_, _ = l.svcCtx.MemberProductCollectionService.MemberProductCollectionDelete(l.ctx, &umsclient.MemberProductCollectionDeleteReq{
 		Ids:      req.Ids,
 		MemberId: l.ctx.Value("memberId").(int64),
 	})

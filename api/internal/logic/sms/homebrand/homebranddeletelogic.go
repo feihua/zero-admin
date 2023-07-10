@@ -26,7 +26,7 @@ func NewHomeBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Ho
 }
 
 func (l *HomeBrandDeleteLogic) HomeBrandDelete(req types.DeleteHomeBrandReq) (*types.DeleteHomeBrandResp, error) {
-	_, err := l.svcCtx.Sms.HomeBrandDelete(l.ctx, &smsclient.HomeBrandDeleteReq{
+	_, err := l.svcCtx.HomeBrandService.HomeBrandDelete(l.ctx, &smsclient.HomeBrandDeleteReq{
 		Ids: req.Ids,
 	})
 

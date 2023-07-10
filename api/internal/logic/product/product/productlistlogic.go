@@ -29,7 +29,7 @@ func NewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Produc
 }
 
 func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListProductResp, error) {
-	resp, err := l.svcCtx.Pms.ProductList(l.ctx, &pmsclient.ProductListReq{
+	resp, err := l.svcCtx.ProductService.ProductList(l.ctx, &pmsclient.ProductListReq{
 		Current:           req.Current,
 		PageSize:          req.PageSize,
 		Name:              req.Name,

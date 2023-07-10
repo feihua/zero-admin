@@ -27,7 +27,7 @@ func NewReturnResonUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ReturnResonUpdateLogic) ReturnResonUpdate(req types.UpdateReturnResonReq) (*types.UpdateReturnResonResp, error) {
-	_, err := l.svcCtx.Oms.OrderReturnReasonUpdate(l.ctx, &omsclient.OrderReturnReasonUpdateReq{
+	_, err := l.svcCtx.OrderReturnReasonService.OrderReturnReasonUpdate(l.ctx, &omsclient.OrderReturnReasonUpdateReq{
 		Id:     req.Id,
 		Name:   req.Name,
 		Sort:   req.Sort,

@@ -26,7 +26,7 @@ func NewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Prod
 }
 
 func (l *ProductDeleteLogic) ProductDelete(req types.DeleteProductReq) (*types.DeleteProductResp, error) {
-	_, err := l.svcCtx.Pms.ProductDelete(l.ctx, &pmsclient.ProductDeleteReq{
+	_, err := l.svcCtx.ProductService.ProductDelete(l.ctx, &pmsclient.ProductDeleteReq{
 		Ids: req.Ids,
 	})
 

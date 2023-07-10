@@ -26,7 +26,7 @@ func NewJobAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) JobAddLogic
 }
 
 func (l *JobAddLogic) JobAdd(req types.AddJobReq) (*types.AddJobResp, error) {
-	_, err := l.svcCtx.Sys.JobAdd(l.ctx, &sysclient.JobAddReq{
+	_, err := l.svcCtx.JobService.JobAdd(l.ctx, &sysclient.JobAddReq{
 		JobName:  req.JobName,
 		OrderNum: req.OrderNum,
 		CreateBy: l.ctx.Value("userName").(string),

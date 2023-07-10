@@ -133,6 +133,18 @@ message UserStatusResp {
   string pong = 1;
 }
 //user start---------------------
+service UserService {
+
+  rpc Login(LoginReq) returns(loginResp);
+  rpc UserInfo(InfoReq) returns(InfoResp);
+  rpc UserAdd(UserAddReq) returns(UserAddResp);
+  rpc UserList(UserListReq) returns(UserListResp);
+  rpc UserUpdate(UserUpdateReq) returns(UserUpdateResp);
+  rpc UserDelete(UserDeleteReq) returns(UserDeleteResp);
+  rpc ReSetPassword(ReSetPasswordReq) returns(ReSetPasswordResp);
+  rpc UpdateUserStatus(UserStatusReq) returns(UserStatusResp);
+
+}
 
 //role start---------------------
 message RoleAddReq {
@@ -207,6 +219,17 @@ message QueryMenuByRoleIdResp {
 }
 
 //role end---------------------
+service RoleService {
+
+  rpc RoleAdd(RoleAddReq) returns(RoleAddResp);
+  rpc RoleList(RoleListReq) returns(RoleListResp);
+  rpc RoleUpdate(RoleUpdateReq) returns(RoleUpdateResp);
+  rpc RoleDelete(RoleDeleteReq) returns(RoleDeleteResp);
+  rpc UpdateRoleRole(UpdateRoleRoleReq) returns(UpdateRoleRoleResp);
+  rpc QueryMenuByRoleId(QueryMenuByRoleIdReq) returns(QueryMenuByRoleIdResp);
+  rpc UpdateMenuRole(UpdateMenuRoleReq) returns(UpdateMenuRoleResp);
+
+}
 
 //menu start---------------------
 message MenuAddReq {
@@ -315,6 +338,14 @@ message UpdateMenuRoleResp {
   string pong = 1;
 }
 //menu end---------------------
+service MenuService {
+
+  rpc MenuAdd(MenuAddReq) returns(MenuAddResp);
+  rpc MenuList(MenuListReq) returns(MenuListResp);
+  rpc MenuUpdate(MenuUpdateReq) returns(MenuUpdateResp);
+  rpc MenuDelete(MenuDeleteReq) returns(MenuDeleteResp);
+
+}
 
 //dict start---------------------
 message DictAddReq {
@@ -385,6 +416,14 @@ message DictDeleteResp {
   string pong = 1;
 }
 //dict end---------------------
+service DictService {
+
+  rpc DictAdd(DictAddReq) returns(DictAddResp);
+  rpc DictList(DictListReq) returns(DictListResp);
+  rpc DictUpdate(DictUpdateReq) returns(DictUpdateResp);
+  rpc DictDelete(DictDeleteReq) returns(DictDeleteResp);
+
+}
 
 //dept start---------------------
 message DeptAddReq {
@@ -446,6 +485,14 @@ message DeptDeleteResp {
   string pong = 1;
 }
 //dept end---------------------
+service DeptService {
+
+  rpc DeptAdd(DeptAddReq) returns(DeptAddResp);
+  rpc DeptList(DeptListReq) returns(DeptListResp);
+  rpc DeptUpdate(DeptUpdateReq) returns(DeptUpdateResp);
+  rpc DeptDelete(DeptDeleteReq) returns(DeptDeleteResp);
+
+}
 
 //loginLog start---------------------
 message LoginLogAddReq {
@@ -489,6 +536,13 @@ message LoginLogDeleteResp {
   string pong = 1;
 }
 //loginLog end---------------------
+service LoginLogService {
+
+  rpc LoginLogAdd(LoginLogAddReq) returns(LoginLogAddResp);
+  rpc LoginLogList(LoginLogListReq) returns(LoginLogListResp);
+  rpc LoginLogDelete(LoginLogDeleteReq) returns(LoginLogDeleteResp);
+
+}
 
 //sysLog start---------------------
 message SysLogAddReq {
@@ -536,6 +590,13 @@ message SysLogDeleteResp {
   string pong = 1;
 }
 //sysLog end---------------------
+service SysLogService {
+
+  rpc SysLogAdd(SysLogAddReq) returns(SysLogAddResp);
+  rpc SysLogList(SysLogListReq) returns(SysLogListResp);
+  rpc SysLogDelete(SysLogDeleteReq) returns(SysLogDeleteResp);
+
+}
 
 //config start---------------------
 message ConfigAddReq {
@@ -607,6 +668,15 @@ message UpdateConfigRoleResp {
   string pong = 1;
 }
 //config end---------------------
+service ConfigService {
+
+  rpc ConfigAdd(ConfigAddReq) returns(ConfigAddResp);
+  rpc ConfigList(ConfigListReq) returns(ConfigListResp);
+  rpc ConfigUpdate(ConfigUpdateReq) returns(ConfigUpdateResp);
+  rpc ConfigDelete(ConfigDeleteReq) returns(ConfigDeleteResp);
+  rpc UpdateConfigRole(UpdateConfigRoleReq) returns(UpdateConfigRoleResp);
+
+}
 
 //job start---------------------
 message JobAddReq {
@@ -667,53 +737,7 @@ message JobDeleteResp {
 }
 //job end---------------------
 
-service Sys {
-
-  rpc Login(LoginReq) returns(loginResp);
-  rpc UserInfo(InfoReq) returns(InfoResp);
-  rpc UserAdd(UserAddReq) returns(UserAddResp);
-  rpc UserList(UserListReq) returns(UserListResp);
-  rpc UserUpdate(UserUpdateReq) returns(UserUpdateResp);
-  rpc UserDelete(UserDeleteReq) returns(UserDeleteResp);
-  rpc ReSetPassword(ReSetPasswordReq) returns(ReSetPasswordResp);
-  rpc UpdateUserStatus(UserStatusReq) returns(UserStatusResp);
-
-  rpc RoleAdd(RoleAddReq) returns(RoleAddResp);
-  rpc RoleList(RoleListReq) returns(RoleListResp);
-  rpc RoleUpdate(RoleUpdateReq) returns(RoleUpdateResp);
-  rpc RoleDelete(RoleDeleteReq) returns(RoleDeleteResp);
-  rpc UpdateRoleRole(UpdateRoleRoleReq) returns(UpdateRoleRoleResp);
-  rpc QueryMenuByRoleId(QueryMenuByRoleIdReq) returns(QueryMenuByRoleIdResp);
-  rpc UpdateMenuRole(UpdateMenuRoleReq) returns(UpdateMenuRoleResp);
-
-  rpc MenuAdd(MenuAddReq) returns(MenuAddResp);
-  rpc MenuList(MenuListReq) returns(MenuListResp);
-  rpc MenuUpdate(MenuUpdateReq) returns(MenuUpdateResp);
-  rpc MenuDelete(MenuDeleteReq) returns(MenuDeleteResp);
-
-  rpc DictAdd(DictAddReq) returns(DictAddResp);
-  rpc DictList(DictListReq) returns(DictListResp);
-  rpc DictUpdate(DictUpdateReq) returns(DictUpdateResp);
-  rpc DictDelete(DictDeleteReq) returns(DictDeleteResp);
-
-  rpc DeptAdd(DeptAddReq) returns(DeptAddResp);
-  rpc DeptList(DeptListReq) returns(DeptListResp);
-  rpc DeptUpdate(DeptUpdateReq) returns(DeptUpdateResp);
-  rpc DeptDelete(DeptDeleteReq) returns(DeptDeleteResp);
-
-  rpc LoginLogAdd(LoginLogAddReq) returns(LoginLogAddResp);
-  rpc LoginLogList(LoginLogListReq) returns(LoginLogListResp);
-  rpc LoginLogDelete(LoginLogDeleteReq) returns(LoginLogDeleteResp);
-
-  rpc SysLogAdd(SysLogAddReq) returns(SysLogAddResp);
-  rpc SysLogList(SysLogListReq) returns(SysLogListResp);
-  rpc SysLogDelete(SysLogDeleteReq) returns(SysLogDeleteResp);
-
-  rpc ConfigAdd(ConfigAddReq) returns(ConfigAddResp);
-  rpc ConfigList(ConfigListReq) returns(ConfigListResp);
-  rpc ConfigUpdate(ConfigUpdateReq) returns(ConfigUpdateResp);
-  rpc ConfigDelete(ConfigDeleteReq) returns(ConfigDeleteResp);
-  rpc UpdateConfigRole(UpdateConfigRoleReq) returns(UpdateConfigRoleResp);
+service JobService {
 
   rpc JobAdd(JobAddReq) returns(JobAddResp);
   rpc JobList(JobListReq) returns(JobListResp);

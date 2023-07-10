@@ -25,7 +25,7 @@ func NewRecommendHotProductListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *RecommendHotProductListLogic) RecommendHotProductList(req *types.RecommendHotProductListReq) (resp *types.RecommendHotProductListResp, err error) {
-	homeRecommendProductList, _ := l.svcCtx.Sms.HomeRecommendProductList(l.ctx, &smsclient.HomeRecommendProductListReq{
+	homeRecommendProductList, _ := l.svcCtx.HomeRecommendProductService.HomeRecommendProductList(l.ctx, &smsclient.HomeRecommendProductListReq{
 		Current:         req.Current,
 		PageSize:        req.PageSize,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
@@ -39,6 +39,6 @@ func (l *RecommendHotProductListLogic) RecommendHotProductList(req *types.Recomm
 	return &types.RecommendHotProductListResp{
 		Code:    0,
 		Message: "操作成功",
-		Data:    queryProductList(l.svcCtx.Pms, productIds, l.ctx),
+		Data:    queryProductList(l.svcCtx.ProductService, productIds, l.ctx),
 	}, nil
 }

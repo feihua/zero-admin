@@ -25,7 +25,7 @@ func NewCartUpdateQuantityLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *CartUpdateQuantityLogic) CartUpdateQuantity(req *types.CartItemUpdateQuantityReq) (resp *types.CartItemUpdateResp, err error) {
-	_, _ = l.svcCtx.Oms.CartItemUpdateQuantity(l.ctx, &omsclient.CartItemUpdateReq{Id: req.Id, Quantity: req.Quantity})
+	_, _ = l.svcCtx.CartItemService.CartItemUpdateQuantity(l.ctx, &omsclient.CartItemUpdateReq{Id: req.Id, Quantity: req.Quantity})
 
 	return &types.CartItemUpdateResp{
 		Code:    0,

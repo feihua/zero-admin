@@ -29,10 +29,10 @@ func NewAddProductCollectionAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 func (l *AddProductCollectionAddLogic) AddProductCollectionAdd(req *types.AddProductCollectionReq) (resp *types.AddProductCollectionResp, err error) {
 	//从token中获取会员id
 	memberId := l.ctx.Value("memberId").(int64)
-	member, _ := l.svcCtx.Ums.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
+	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
 
 	//查询是否已经收藏
-	collectionList, _ := l.svcCtx.Ums.MemberProductCollectionList(l.ctx, &umsclient.MemberProductCollectionListReq{
+	collectionList, _ := l.svcCtx.MemberProductCollectionService.MemberProductCollectionList(l.ctx, &umsclient.MemberProductCollectionListReq{
 		Current:   1,
 		PageSize:  10,
 		MemberId:  memberId,
@@ -41,7 +41,7 @@ func (l *AddProductCollectionAddLogic) AddProductCollectionAdd(req *types.AddPro
 
 	//如果查询不到收藏记录,则添加
 	if len(collectionList.List) == 0 {
-		_, err = l.svcCtx.Ums.MemberProductCollectionAdd(l.ctx, &umsclient.MemberProductCollectionAddReq{
+		_, err = l.svcCtx.MemberProductCollectionService.MemberProductCollectionAdd(l.ctx, &umsclient.MemberProductCollectionAddReq{
 			MemberId:        member.Id,
 			MemberNickName:  member.Nickname,
 			MemberIcon:      member.Icon,

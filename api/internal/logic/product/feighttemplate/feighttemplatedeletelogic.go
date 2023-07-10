@@ -26,7 +26,7 @@ func NewFeightTemplateDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *FeightTemplateDeleteLogic) FeightTemplateDelete(req types.DeleteFeightTemplateReq) (*types.DeleteFeightTemplateResp, error) {
-	_, err := l.svcCtx.Pms.FeightTemplateDelete(l.ctx, &pmsclient.FeightTemplateDeleteReq{
+	_, err := l.svcCtx.FeightTemplateService.FeightTemplateDelete(l.ctx, &pmsclient.FeightTemplateDeleteReq{
 		Ids: req.Ids,
 	})
 

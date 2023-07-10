@@ -27,7 +27,7 @@ func NewMemberStatisticsInfoUpdateLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *MemberStatisticsInfoUpdateLogic) MemberStatisticsInfoUpdate(req types.UpdateMemberStatisticsInfoReq) (*types.UpdateMemberStatisticsInfoResp, error) {
-	_, err := l.svcCtx.Ums.MemberStatisticsInfoUpdate(l.ctx, &umsclient.MemberStatisticsInfoUpdateReq{
+	_, err := l.svcCtx.MemberStatisticsInfoService.MemberStatisticsInfoUpdate(l.ctx, &umsclient.MemberStatisticsInfoUpdateReq{
 		Id:                  req.Id,
 		MemberId:            req.MemberId,
 		ConsumeAmount:       int64(req.ConsumeAmount),

@@ -27,7 +27,7 @@ func NewJobListLogic(ctx context.Context, svcCtx *svc.ServiceContext) JobListLog
 }
 
 func (l *JobListLogic) JobList(req types.ListJobReq) (*types.ListJobResp, error) {
-	resp, err := l.svcCtx.Sys.JobList(l.ctx, &sysclient.JobListReq{
+	resp, err := l.svcCtx.JobService.JobList(l.ctx, &sysclient.JobListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		JobName:  req.JobName,

@@ -27,7 +27,7 @@ func NewRoleUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleUpd
 }
 
 func (l *RoleUpdateLogic) RoleUpdate(req types.UpdateRoleReq) (*types.UpdateRoleResp, error) {
-	_, err := l.svcCtx.Sys.RoleUpdate(l.ctx, &sysclient.RoleUpdateReq{
+	_, err := l.svcCtx.RoleService.RoleUpdate(l.ctx, &sysclient.RoleUpdateReq{
 		Id:           req.Id,
 		Name:         req.Name,
 		Remark:       req.Remark,

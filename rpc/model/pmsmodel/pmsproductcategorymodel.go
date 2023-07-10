@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/pms/pms"
+	"zero-admin/rpc/pms/pmsclient"
 )
 
 var _ PmsProductCategoryModel = (*customPmsProductCategoryModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customPmsProductCategoryModel.
 	PmsProductCategoryModel interface {
 		pmsProductCategoryModel
-		Count(ctx context.Context, in *pms.ProductCategoryListReq) (int64, error)
-		FindAll(ctx context.Context, in *pms.ProductCategoryListReq) (*[]PmsProductCategory, error)
+		Count(ctx context.Context, in *pmsclient.ProductCategoryListReq) (int64, error)
+		FindAll(ctx context.Context, in *pmsclient.ProductCategoryListReq) (*[]PmsProductCategory, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindByParentId(ctx context.Context, parentId int64) (*[]PmsProductCategory, error)
 	}
@@ -34,7 +34,7 @@ func NewPmsProductCategoryModel(conn sqlx.SqlConn) PmsProductCategoryModel {
 	}
 }
 
-func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, in *pms.ProductCategoryListReq) (*[]PmsProductCategory, error) {
+func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, in *pmsclient.ProductCategoryListReq) (*[]PmsProductCategory, error) {
 	where := "1=1"
 
 	if in.ParentId != 2 {
@@ -57,7 +57,7 @@ func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, in *pms.Pro
 	}
 }
 
-func (m *customPmsProductCategoryModel) Count(ctx context.Context, in *pms.ProductCategoryListReq) (int64, error) {
+func (m *customPmsProductCategoryModel) Count(ctx context.Context, in *pmsclient.ProductCategoryListReq) (int64, error) {
 	where := "1=1"
 
 	if in.ParentId != 2 {

@@ -27,7 +27,7 @@ func NewProductBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) P
 }
 
 func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) (*types.ListProductBrandResp, error) {
-	resp, err := l.svcCtx.Pms.BrandList(l.ctx, &pmsclient.BrandListReq{
+	resp, err := l.svcCtx.BrandService.BrandList(l.ctx, &pmsclient.BrandListReq{
 		Current:       req.Current,
 		PageSize:      req.PageSize,
 		Name:          req.Name,

@@ -27,7 +27,7 @@ func NewOrderAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderAddL
 }
 
 func (l *OrderAddLogic) OrderAdd(req types.AddOrderReq) (*types.AddOrderResp, error) {
-	_, err := l.svcCtx.Oms.OrderAdd(l.ctx, &omsclient.OrderAddReq{
+	_, err := l.svcCtx.OrderService.OrderAdd(l.ctx, &omsclient.OrderAddReq{
 		MemberId:              req.MemberId,
 		CouponId:              req.CouponId,
 		OrderSn:               req.OrderSn,

@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sms/smsclient"
 )
 
 var _ SmsFlashPromotionModel = (*customSmsFlashPromotionModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSmsFlashPromotionModel.
 	SmsFlashPromotionModel interface {
 		smsFlashPromotionModel
-		Count(ctx context.Context, in *sms.FlashPromotionListReq) (int64, error)
-		FindAll(ctx context.Context, in *sms.FlashPromotionListReq) (*[]SmsFlashPromotion, error)
+		Count(ctx context.Context, in *smsclient.FlashPromotionListReq) (int64, error)
+		FindAll(ctx context.Context, in *smsclient.FlashPromotionListReq) (*[]SmsFlashPromotion, error)
 		FindAllByCurrentDate(ctx context.Context, currentDate string) (*[]SmsFlashPromotion, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
@@ -34,7 +34,7 @@ func NewSmsFlashPromotionModel(conn sqlx.SqlConn) SmsFlashPromotionModel {
 	}
 }
 
-func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, in *sms.FlashPromotionListReq) (*[]SmsFlashPromotion, error) {
+func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, in *smsclient.FlashPromotionListReq) (*[]SmsFlashPromotion, error) {
 
 	where := "1=1"
 	if len(in.Title) > 0 {
@@ -62,7 +62,7 @@ func (m *customSmsFlashPromotionModel) FindAll(ctx context.Context, in *sms.Flas
 	}
 }
 
-func (m *customSmsFlashPromotionModel) Count(ctx context.Context, in *sms.FlashPromotionListReq) (int64, error) {
+func (m *customSmsFlashPromotionModel) Count(ctx context.Context, in *smsclient.FlashPromotionListReq) (int64, error) {
 	where := "1=1"
 	if len(in.Title) > 0 {
 		where = where + fmt.Sprintf(" AND title like '%%%s%%'", in.Title)

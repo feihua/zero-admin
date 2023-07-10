@@ -27,7 +27,7 @@ func NewFeightTemplateAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *FeightTemplateAddLogic) FeightTemplateAdd(req types.AddFeightTemplateReq) (*types.AddFeightTemplateResp, error) {
-	_, err := l.svcCtx.Pms.FeightTemplateAdd(l.ctx, &pmsclient.FeightTemplateAddReq{
+	_, err := l.svcCtx.FeightTemplateService.FeightTemplateAdd(l.ctx, &pmsclient.FeightTemplateAddReq{
 		Name:           req.Name,
 		ChargeType:     req.ChargeType,
 		FirstWeight:    int64(req.FirstWeight),

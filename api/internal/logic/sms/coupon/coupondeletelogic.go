@@ -26,7 +26,7 @@ func NewCouponDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 }
 
 func (l *CouponDeleteLogic) CouponDelete(req types.DeleteCouponReq) (*types.DeleteCouponResp, error) {
-	_, err := l.svcCtx.Sms.CouponDelete(l.ctx, &smsclient.CouponDeleteReq{
+	_, err := l.svcCtx.CouponService.CouponDelete(l.ctx, &smsclient.CouponDeleteReq{
 		Ids: req.Ids,
 	})
 

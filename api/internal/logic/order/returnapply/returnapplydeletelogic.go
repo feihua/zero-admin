@@ -25,7 +25,7 @@ func NewReturnApplyDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ReturnApplyDeleteLogic) ReturnApplyDelete(req types.DeleteReturnApplyReq) (*types.DeleteReturnApplyResp, error) {
-	_, err := l.svcCtx.Oms.OrderReturnApplyDelete(l.ctx, &omsclient.OrderReturnApplyDeleteReq{
+	_, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyDelete(l.ctx, &omsclient.OrderReturnApplyDeleteReq{
 		Ids: req.Ids,
 	})
 

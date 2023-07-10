@@ -26,7 +26,7 @@ func NewDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictListL
 }
 
 func (l *DictListLogic) DictList(req types.ListDictReq) (*types.ListDictResp, error) {
-	resp, err := l.svcCtx.Sys.DictList(l.ctx, &sysclient.DictListReq{
+	resp, err := l.svcCtx.DictService.DictList(l.ctx, &sysclient.DictListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		Value:    req.Value,

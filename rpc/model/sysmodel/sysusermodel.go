@@ -8,7 +8,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
 	"time"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/sysclient"
 )
 
 var _ SysUserModel = (*customSysUserModel)(nil)
@@ -18,8 +18,8 @@ type (
 	// and implement the added methods in customSysUserModel.
 	SysUserModel interface {
 		sysUserModel
-		Count(ctx context.Context, in *sys.UserListReq) (int64, error)
-		FindAll(ctx context.Context, in *sys.UserListReq) (*[]SysUserList, error)
+		Count(ctx context.Context, in *sysclient.UserListReq) (int64, error)
+		FindAll(ctx context.Context, in *sysclient.UserListReq) (*[]SysUserList, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -58,7 +58,7 @@ func NewSysUserModel(conn sqlx.SqlConn) SysUserModel {
 	}
 }
 
-func (m *customSysUserModel) FindAll(ctx context.Context, in *sys.UserListReq) (*[]SysUserList, error) {
+func (m *customSysUserModel) FindAll(ctx context.Context, in *sysclient.UserListReq) (*[]SysUserList, error) {
 	where := "1=1"
 	if len(in.Name) > 0 {
 		where = where + fmt.Sprintf(" AND sys_user.name like '%%%s%%'", in.Name)
@@ -83,7 +83,7 @@ func (m *customSysUserModel) FindAll(ctx context.Context, in *sys.UserListReq) (
 	}
 }
 
-func (m *customSysUserModel) Count(ctx context.Context, in *sys.UserListReq) (int64, error) {
+func (m *customSysUserModel) Count(ctx context.Context, in *sysclient.UserListReq) (int64, error) {
 	where := "1=1"
 	if len(in.Name) > 0 {
 		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)

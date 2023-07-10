@@ -27,7 +27,7 @@ func NewMemberTagListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Memb
 }
 
 func (l *MemberTagListLogic) MemberTagList(req types.ListMemberTagReq) (*types.ListMemberTagResp, error) {
-	resp, err := l.svcCtx.Ums.MemberTagList(l.ctx, &umsclient.MemberTagListReq{
+	resp, err := l.svcCtx.MemberTagService.MemberTagList(l.ctx, &umsclient.MemberTagListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

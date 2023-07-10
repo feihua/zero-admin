@@ -25,7 +25,7 @@ func NewCartItemDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 }
 
 func (l *CartItemDeleteLogic) CartItemDelete(req *types.CartItemDeleteReq) (resp *types.CartItemDeleteResp, err error) {
-	_, _ = l.svcCtx.Oms.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{MemberId: l.ctx.Value("memberId").(int64), Ids: req.Ids})
+	_, _ = l.svcCtx.CartItemService.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{MemberId: l.ctx.Value("memberId").(int64), Ids: req.Ids})
 
 	return &types.CartItemDeleteResp{
 		Code:    0,

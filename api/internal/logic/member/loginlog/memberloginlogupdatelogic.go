@@ -27,7 +27,7 @@ func NewMemberLoginLogUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *MemberLoginLogUpdateLogic) MemberLoginLogUpdate(req types.UpdateMemberLoginLogReq) (*types.UpdateMemberLoginLogResp, error) {
-	_, err := l.svcCtx.Ums.MemberLoginLogUpdate(l.ctx, &umsclient.MemberLoginLogUpdateReq{
+	_, err := l.svcCtx.MemberLoginLogService.MemberLoginLogUpdate(l.ctx, &umsclient.MemberLoginLogUpdateReq{
 		Id:         req.Id,
 		MemberId:   req.MemberId,
 		CreateTime: req.CreateTime,

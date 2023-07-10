@@ -43,7 +43,7 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHome
 		})
 	}
 
-	_, err := l.svcCtx.Sms.HomeRecommendSubjectAdd(l.ctx, &smsclient.HomeRecommendSubjectAddReq{
+	_, err := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectAdd(l.ctx, &smsclient.HomeRecommendSubjectAddReq{
 		RecommendSubjectAddData: list,
 	})
 

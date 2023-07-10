@@ -25,7 +25,7 @@ func NewReadHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *R
 }
 
 func (l *ReadHistoryListLogic) ReadHistoryList(req *types.ReadHistoryListReq) (resp *types.ReadHistoryListResp, err error) {
-	historyList, _ := l.svcCtx.Ums.MemberReadHistoryList(l.ctx, &umsclient.MemberReadHistoryListReq{
+	historyList, _ := l.svcCtx.MemberReadHistoryService.MemberReadHistoryList(l.ctx, &umsclient.MemberReadHistoryListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		MemberId: l.ctx.Value("memberId").(int64),

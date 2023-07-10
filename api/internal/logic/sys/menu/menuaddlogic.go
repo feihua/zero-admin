@@ -27,7 +27,7 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuAddLog
 }
 
 func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error) {
-	_, err := l.svcCtx.Sys.MenuAdd(l.ctx, &sysclient.MenuAddReq{
+	_, err := l.svcCtx.MenuService.MenuAdd(l.ctx, &sysclient.MenuAddReq{
 		Name:          req.Name,
 		ParentId:      req.ParentId,
 		Url:           req.Url,

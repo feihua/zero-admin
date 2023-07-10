@@ -26,7 +26,7 @@ func NewMemberDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Membe
 }
 
 func (l *MemberDeleteLogic) MemberDelete(req types.DeleteMemberReq) (*types.DeleteMemberResp, error) {
-	_, err := l.svcCtx.Ums.MemberDelete(l.ctx, &umsclient.MemberDeleteReq{
+	_, err := l.svcCtx.MemberService.MemberDelete(l.ctx, &umsclient.MemberDeleteReq{
 		Ids: req.Ids,
 	})
 

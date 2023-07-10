@@ -18,10 +18,10 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// OmsClient is the client API for Oms service.
+// OrderServiceClient is the client API for OrderService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type OmsClient interface {
+type OrderServiceClient interface {
 	OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error)
 	OrderList(ctx context.Context, in *OrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
 	OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*OrderUpdateResp, error)
@@ -31,391 +31,101 @@ type OmsClient interface {
 	OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error)
 	OrderRefund(ctx context.Context, in *OrderRefundReq, opts ...grpc.CallOption) (*OrderRefundResp, error)
 	OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
-	CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error)
-	CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error)
-	CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
-	CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
-	CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error)
-	CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error)
-	CompanyAddressList(ctx context.Context, in *CompanyAddressListReq, opts ...grpc.CallOption) (*CompanyAddressListResp, error)
-	CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq, opts ...grpc.CallOption) (*CompanyAddressUpdateResp, error)
-	CompanyAddressDelete(ctx context.Context, in *CompanyAddressDeleteReq, opts ...grpc.CallOption) (*CompanyAddressDeleteResp, error)
-	OrderItemAdd(ctx context.Context, in *OrderItemAddReq, opts ...grpc.CallOption) (*OrderItemAddResp, error)
-	OrderItemList(ctx context.Context, in *OrderItemListReq, opts ...grpc.CallOption) (*OrderItemListResp, error)
-	OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq, opts ...grpc.CallOption) (*OrderItemUpdateResp, error)
-	OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq, opts ...grpc.CallOption) (*OrderItemDeleteResp, error)
-	OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq, opts ...grpc.CallOption) (*OrderOperateHistoryAddResp, error)
-	OrderOperateHistoryList(ctx context.Context, in *OrderOperateHistoryListReq, opts ...grpc.CallOption) (*OrderOperateHistoryListResp, error)
-	OrderOperateHistoryUpdate(ctx context.Context, in *OrderOperateHistoryUpdateReq, opts ...grpc.CallOption) (*OrderOperateHistoryUpdateResp, error)
-	OrderOperateHistoryDelete(ctx context.Context, in *OrderOperateHistoryDeleteReq, opts ...grpc.CallOption) (*OrderOperateHistoryDeleteResp, error)
-	OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq, opts ...grpc.CallOption) (*OrderReturnApplyAddResp, error)
-	OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq, opts ...grpc.CallOption) (*OrderReturnApplyListResp, error)
-	OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq, opts ...grpc.CallOption) (*OrderReturnApplyUpdateResp, error)
-	OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq, opts ...grpc.CallOption) (*OrderReturnApplyDeleteResp, error)
-	OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq, opts ...grpc.CallOption) (*OrderReturnReasonAddResp, error)
-	OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq, opts ...grpc.CallOption) (*OrderReturnReasonListResp, error)
-	OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error)
-	OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error)
-	OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error)
-	OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error)
-	OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error)
-	OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error)
 }
 
-type omsClient struct {
+type orderServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewOmsClient(cc grpc.ClientConnInterface) OmsClient {
-	return &omsClient{cc}
+func NewOrderServiceClient(cc grpc.ClientConnInterface) OrderServiceClient {
+	return &orderServiceClient{cc}
 }
 
-func (c *omsClient) OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error) {
+func (c *orderServiceClient) OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error) {
 	out := new(OrderAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/OrderAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *omsClient) OrderList(ctx context.Context, in *OrderListReq, opts ...grpc.CallOption) (*OrderListResp, error) {
+func (c *orderServiceClient) OrderList(ctx context.Context, in *OrderListReq, opts ...grpc.CallOption) (*OrderListResp, error) {
 	out := new(OrderListResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/OrderList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *omsClient) OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*OrderUpdateResp, error) {
+func (c *orderServiceClient) OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*OrderUpdateResp, error) {
 	out := new(OrderUpdateResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/OrderUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *omsClient) OrderDelete(ctx context.Context, in *OrderDeleteReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
+func (c *orderServiceClient) OrderDelete(ctx context.Context, in *OrderDeleteReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
 	out := new(OrderDeleteResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/OrderDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *omsClient) OrderListByMemberId(ctx context.Context, in *OrderListByMemberIdReq, opts ...grpc.CallOption) (*OrderListByMemberIdResp, error) {
+func (c *orderServiceClient) OrderListByMemberId(ctx context.Context, in *OrderListByMemberIdReq, opts ...grpc.CallOption) (*OrderListByMemberIdResp, error) {
 	out := new(OrderListByMemberIdResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderListByMemberId", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/OrderListByMemberId", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *omsClient) OrderCancel(ctx context.Context, in *OrderCancelReq, opts ...grpc.CallOption) (*OrderCancelResp, error) {
+func (c *orderServiceClient) OrderCancel(ctx context.Context, in *OrderCancelReq, opts ...grpc.CallOption) (*OrderCancelResp, error) {
 	out := new(OrderCancelResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderCancel", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/OrderCancel", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *omsClient) OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error) {
+func (c *orderServiceClient) OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error) {
 	out := new(OrderConfirmResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderConfirm", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/OrderConfirm", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *omsClient) OrderRefund(ctx context.Context, in *OrderRefundReq, opts ...grpc.CallOption) (*OrderRefundResp, error) {
+func (c *orderServiceClient) OrderRefund(ctx context.Context, in *OrderRefundReq, opts ...grpc.CallOption) (*OrderRefundResp, error) {
 	out := new(OrderRefundResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderRefund", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/OrderRefund", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *omsClient) OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
+func (c *orderServiceClient) OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
 	out := new(OrderDeleteResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderDeleteById", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/OrderDeleteById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *omsClient) CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error) {
-	out := new(CartItemAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error) {
-	out := new(CartItemListResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error) {
-	out := new(CartItemUpdateResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error) {
-	out := new(CartItemUpdateResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemUpdateQuantity", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error) {
-	out := new(CartItemDeleteResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CartItemDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error) {
-	out := new(CompanyAddressAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CompanyAddressAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CompanyAddressList(ctx context.Context, in *CompanyAddressListReq, opts ...grpc.CallOption) (*CompanyAddressListResp, error) {
-	out := new(CompanyAddressListResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CompanyAddressList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq, opts ...grpc.CallOption) (*CompanyAddressUpdateResp, error) {
-	out := new(CompanyAddressUpdateResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CompanyAddressUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) CompanyAddressDelete(ctx context.Context, in *CompanyAddressDeleteReq, opts ...grpc.CallOption) (*CompanyAddressDeleteResp, error) {
-	out := new(CompanyAddressDeleteResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/CompanyAddressDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderItemAdd(ctx context.Context, in *OrderItemAddReq, opts ...grpc.CallOption) (*OrderItemAddResp, error) {
-	out := new(OrderItemAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderItemAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderItemList(ctx context.Context, in *OrderItemListReq, opts ...grpc.CallOption) (*OrderItemListResp, error) {
-	out := new(OrderItemListResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderItemList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq, opts ...grpc.CallOption) (*OrderItemUpdateResp, error) {
-	out := new(OrderItemUpdateResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderItemUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq, opts ...grpc.CallOption) (*OrderItemDeleteResp, error) {
-	out := new(OrderItemDeleteResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderItemDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq, opts ...grpc.CallOption) (*OrderOperateHistoryAddResp, error) {
-	out := new(OrderOperateHistoryAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderOperateHistoryAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderOperateHistoryList(ctx context.Context, in *OrderOperateHistoryListReq, opts ...grpc.CallOption) (*OrderOperateHistoryListResp, error) {
-	out := new(OrderOperateHistoryListResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderOperateHistoryList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderOperateHistoryUpdate(ctx context.Context, in *OrderOperateHistoryUpdateReq, opts ...grpc.CallOption) (*OrderOperateHistoryUpdateResp, error) {
-	out := new(OrderOperateHistoryUpdateResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderOperateHistoryUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderOperateHistoryDelete(ctx context.Context, in *OrderOperateHistoryDeleteReq, opts ...grpc.CallOption) (*OrderOperateHistoryDeleteResp, error) {
-	out := new(OrderOperateHistoryDeleteResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderOperateHistoryDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq, opts ...grpc.CallOption) (*OrderReturnApplyAddResp, error) {
-	out := new(OrderReturnApplyAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderReturnApplyAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq, opts ...grpc.CallOption) (*OrderReturnApplyListResp, error) {
-	out := new(OrderReturnApplyListResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderReturnApplyList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq, opts ...grpc.CallOption) (*OrderReturnApplyUpdateResp, error) {
-	out := new(OrderReturnApplyUpdateResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderReturnApplyUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq, opts ...grpc.CallOption) (*OrderReturnApplyDeleteResp, error) {
-	out := new(OrderReturnApplyDeleteResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderReturnApplyDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq, opts ...grpc.CallOption) (*OrderReturnReasonAddResp, error) {
-	out := new(OrderReturnReasonAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderReturnReasonAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq, opts ...grpc.CallOption) (*OrderReturnReasonListResp, error) {
-	out := new(OrderReturnReasonListResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderReturnReasonList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error) {
-	out := new(OrderReturnReasonUpdateResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderReturnReasonUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error) {
-	out := new(OrderReturnReasonDeleteResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderReturnReasonDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error) {
-	out := new(OrderSettingAddResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderSettingAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error) {
-	out := new(OrderSettingListResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderSettingList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error) {
-	out := new(OrderSettingUpdateResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderSettingUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *omsClient) OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error) {
-	out := new(OrderSettingDeleteResp)
-	err := c.cc.Invoke(ctx, "/omsclient.Oms/OrderSettingDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// OmsServer is the server API for Oms service.
-// All implementations must embed UnimplementedOmsServer
+// OrderServiceServer is the server API for OrderService service.
+// All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
-type OmsServer interface {
+type OrderServiceServer interface {
 	OrderAdd(context.Context, *OrderAddReq) (*OrderAddResp, error)
 	OrderList(context.Context, *OrderListReq) (*OrderListResp, error)
 	OrderUpdate(context.Context, *OrderUpdateReq) (*OrderUpdateResp, error)
@@ -425,1011 +135,1654 @@ type OmsServer interface {
 	OrderConfirm(context.Context, *OrderConfirmReq) (*OrderConfirmResp, error)
 	OrderRefund(context.Context, *OrderRefundReq) (*OrderRefundResp, error)
 	OrderDeleteById(context.Context, *OrderDeleteByIdReq) (*OrderDeleteResp, error)
-	CartItemAdd(context.Context, *CartItemAddReq) (*CartItemAddResp, error)
-	CartItemList(context.Context, *CartItemListReq) (*CartItemListResp, error)
-	CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
-	CartItemUpdateQuantity(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
-	CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error)
-	CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error)
-	CompanyAddressList(context.Context, *CompanyAddressListReq) (*CompanyAddressListResp, error)
-	CompanyAddressUpdate(context.Context, *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error)
-	CompanyAddressDelete(context.Context, *CompanyAddressDeleteReq) (*CompanyAddressDeleteResp, error)
-	OrderItemAdd(context.Context, *OrderItemAddReq) (*OrderItemAddResp, error)
-	OrderItemList(context.Context, *OrderItemListReq) (*OrderItemListResp, error)
-	OrderItemUpdate(context.Context, *OrderItemUpdateReq) (*OrderItemUpdateResp, error)
-	OrderItemDelete(context.Context, *OrderItemDeleteReq) (*OrderItemDeleteResp, error)
-	OrderOperateHistoryAdd(context.Context, *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error)
-	OrderOperateHistoryList(context.Context, *OrderOperateHistoryListReq) (*OrderOperateHistoryListResp, error)
-	OrderOperateHistoryUpdate(context.Context, *OrderOperateHistoryUpdateReq) (*OrderOperateHistoryUpdateResp, error)
-	OrderOperateHistoryDelete(context.Context, *OrderOperateHistoryDeleteReq) (*OrderOperateHistoryDeleteResp, error)
-	OrderReturnApplyAdd(context.Context, *OrderReturnApplyAddReq) (*OrderReturnApplyAddResp, error)
-	OrderReturnApplyList(context.Context, *OrderReturnApplyListReq) (*OrderReturnApplyListResp, error)
-	OrderReturnApplyUpdate(context.Context, *OrderReturnApplyUpdateReq) (*OrderReturnApplyUpdateResp, error)
-	OrderReturnApplyDelete(context.Context, *OrderReturnApplyDeleteReq) (*OrderReturnApplyDeleteResp, error)
-	OrderReturnReasonAdd(context.Context, *OrderReturnReasonAddReq) (*OrderReturnReasonAddResp, error)
-	OrderReturnReasonList(context.Context, *OrderReturnReasonListReq) (*OrderReturnReasonListResp, error)
-	OrderReturnReasonUpdate(context.Context, *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error)
-	OrderReturnReasonDelete(context.Context, *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error)
-	OrderSettingAdd(context.Context, *OrderSettingAddReq) (*OrderSettingAddResp, error)
-	OrderSettingList(context.Context, *OrderSettingListReq) (*OrderSettingListResp, error)
-	OrderSettingUpdate(context.Context, *OrderSettingUpdateReq) (*OrderSettingUpdateResp, error)
-	OrderSettingDelete(context.Context, *OrderSettingDeleteReq) (*OrderSettingDeleteResp, error)
-	mustEmbedUnimplementedOmsServer()
+	mustEmbedUnimplementedOrderServiceServer()
 }
 
-// UnimplementedOmsServer must be embedded to have forward compatible implementations.
-type UnimplementedOmsServer struct {
+// UnimplementedOrderServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderServiceServer struct {
 }
 
-func (UnimplementedOmsServer) OrderAdd(context.Context, *OrderAddReq) (*OrderAddResp, error) {
+func (UnimplementedOrderServiceServer) OrderAdd(context.Context, *OrderAddReq) (*OrderAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderAdd not implemented")
 }
-func (UnimplementedOmsServer) OrderList(context.Context, *OrderListReq) (*OrderListResp, error) {
+func (UnimplementedOrderServiceServer) OrderList(context.Context, *OrderListReq) (*OrderListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderList not implemented")
 }
-func (UnimplementedOmsServer) OrderUpdate(context.Context, *OrderUpdateReq) (*OrderUpdateResp, error) {
+func (UnimplementedOrderServiceServer) OrderUpdate(context.Context, *OrderUpdateReq) (*OrderUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderUpdate not implemented")
 }
-func (UnimplementedOmsServer) OrderDelete(context.Context, *OrderDeleteReq) (*OrderDeleteResp, error) {
+func (UnimplementedOrderServiceServer) OrderDelete(context.Context, *OrderDeleteReq) (*OrderDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderDelete not implemented")
 }
-func (UnimplementedOmsServer) OrderListByMemberId(context.Context, *OrderListByMemberIdReq) (*OrderListByMemberIdResp, error) {
+func (UnimplementedOrderServiceServer) OrderListByMemberId(context.Context, *OrderListByMemberIdReq) (*OrderListByMemberIdResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderListByMemberId not implemented")
 }
-func (UnimplementedOmsServer) OrderCancel(context.Context, *OrderCancelReq) (*OrderCancelResp, error) {
+func (UnimplementedOrderServiceServer) OrderCancel(context.Context, *OrderCancelReq) (*OrderCancelResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderCancel not implemented")
 }
-func (UnimplementedOmsServer) OrderConfirm(context.Context, *OrderConfirmReq) (*OrderConfirmResp, error) {
+func (UnimplementedOrderServiceServer) OrderConfirm(context.Context, *OrderConfirmReq) (*OrderConfirmResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderConfirm not implemented")
 }
-func (UnimplementedOmsServer) OrderRefund(context.Context, *OrderRefundReq) (*OrderRefundResp, error) {
+func (UnimplementedOrderServiceServer) OrderRefund(context.Context, *OrderRefundReq) (*OrderRefundResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderRefund not implemented")
 }
-func (UnimplementedOmsServer) OrderDeleteById(context.Context, *OrderDeleteByIdReq) (*OrderDeleteResp, error) {
+func (UnimplementedOrderServiceServer) OrderDeleteById(context.Context, *OrderDeleteByIdReq) (*OrderDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderDeleteById not implemented")
 }
-func (UnimplementedOmsServer) CartItemAdd(context.Context, *CartItemAddReq) (*CartItemAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemAdd not implemented")
-}
-func (UnimplementedOmsServer) CartItemList(context.Context, *CartItemListReq) (*CartItemListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemList not implemented")
-}
-func (UnimplementedOmsServer) CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemUpdate not implemented")
-}
-func (UnimplementedOmsServer) CartItemUpdateQuantity(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemUpdateQuantity not implemented")
-}
-func (UnimplementedOmsServer) CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemDelete not implemented")
-}
-func (UnimplementedOmsServer) CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressAdd not implemented")
-}
-func (UnimplementedOmsServer) CompanyAddressList(context.Context, *CompanyAddressListReq) (*CompanyAddressListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressList not implemented")
-}
-func (UnimplementedOmsServer) CompanyAddressUpdate(context.Context, *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressUpdate not implemented")
-}
-func (UnimplementedOmsServer) CompanyAddressDelete(context.Context, *CompanyAddressDeleteReq) (*CompanyAddressDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressDelete not implemented")
-}
-func (UnimplementedOmsServer) OrderItemAdd(context.Context, *OrderItemAddReq) (*OrderItemAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemAdd not implemented")
-}
-func (UnimplementedOmsServer) OrderItemList(context.Context, *OrderItemListReq) (*OrderItemListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemList not implemented")
-}
-func (UnimplementedOmsServer) OrderItemUpdate(context.Context, *OrderItemUpdateReq) (*OrderItemUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemUpdate not implemented")
-}
-func (UnimplementedOmsServer) OrderItemDelete(context.Context, *OrderItemDeleteReq) (*OrderItemDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemDelete not implemented")
-}
-func (UnimplementedOmsServer) OrderOperateHistoryAdd(context.Context, *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryAdd not implemented")
-}
-func (UnimplementedOmsServer) OrderOperateHistoryList(context.Context, *OrderOperateHistoryListReq) (*OrderOperateHistoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryList not implemented")
-}
-func (UnimplementedOmsServer) OrderOperateHistoryUpdate(context.Context, *OrderOperateHistoryUpdateReq) (*OrderOperateHistoryUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryUpdate not implemented")
-}
-func (UnimplementedOmsServer) OrderOperateHistoryDelete(context.Context, *OrderOperateHistoryDeleteReq) (*OrderOperateHistoryDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryDelete not implemented")
-}
-func (UnimplementedOmsServer) OrderReturnApplyAdd(context.Context, *OrderReturnApplyAddReq) (*OrderReturnApplyAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyAdd not implemented")
-}
-func (UnimplementedOmsServer) OrderReturnApplyList(context.Context, *OrderReturnApplyListReq) (*OrderReturnApplyListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyList not implemented")
-}
-func (UnimplementedOmsServer) OrderReturnApplyUpdate(context.Context, *OrderReturnApplyUpdateReq) (*OrderReturnApplyUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyUpdate not implemented")
-}
-func (UnimplementedOmsServer) OrderReturnApplyDelete(context.Context, *OrderReturnApplyDeleteReq) (*OrderReturnApplyDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyDelete not implemented")
-}
-func (UnimplementedOmsServer) OrderReturnReasonAdd(context.Context, *OrderReturnReasonAddReq) (*OrderReturnReasonAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonAdd not implemented")
-}
-func (UnimplementedOmsServer) OrderReturnReasonList(context.Context, *OrderReturnReasonListReq) (*OrderReturnReasonListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonList not implemented")
-}
-func (UnimplementedOmsServer) OrderReturnReasonUpdate(context.Context, *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonUpdate not implemented")
-}
-func (UnimplementedOmsServer) OrderReturnReasonDelete(context.Context, *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonDelete not implemented")
-}
-func (UnimplementedOmsServer) OrderSettingAdd(context.Context, *OrderSettingAddReq) (*OrderSettingAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingAdd not implemented")
-}
-func (UnimplementedOmsServer) OrderSettingList(context.Context, *OrderSettingListReq) (*OrderSettingListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingList not implemented")
-}
-func (UnimplementedOmsServer) OrderSettingUpdate(context.Context, *OrderSettingUpdateReq) (*OrderSettingUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingUpdate not implemented")
-}
-func (UnimplementedOmsServer) OrderSettingDelete(context.Context, *OrderSettingDeleteReq) (*OrderSettingDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingDelete not implemented")
-}
-func (UnimplementedOmsServer) mustEmbedUnimplementedOmsServer() {}
+func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
-// UnsafeOmsServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to OmsServer will
+// UnsafeOrderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderServiceServer will
 // result in compilation errors.
-type UnsafeOmsServer interface {
-	mustEmbedUnimplementedOmsServer()
+type UnsafeOrderServiceServer interface {
+	mustEmbedUnimplementedOrderServiceServer()
 }
 
-func RegisterOmsServer(s grpc.ServiceRegistrar, srv OmsServer) {
-	s.RegisterService(&Oms_ServiceDesc, srv)
+func RegisterOrderServiceServer(s grpc.ServiceRegistrar, srv OrderServiceServer) {
+	s.RegisterService(&OrderService_ServiceDesc, srv)
 }
 
-func _Oms_OrderAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderService_OrderAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderAdd(ctx, in)
+		return srv.(OrderServiceServer).OrderAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderAdd",
+		FullMethod: "/omsclient.OrderService/OrderAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderAdd(ctx, req.(*OrderAddReq))
+		return srv.(OrderServiceServer).OrderAdd(ctx, req.(*OrderAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderService_OrderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderList(ctx, in)
+		return srv.(OrderServiceServer).OrderList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderList",
+		FullMethod: "/omsclient.OrderService/OrderList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderList(ctx, req.(*OrderListReq))
+		return srv.(OrderServiceServer).OrderList(ctx, req.(*OrderListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderService_OrderUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderUpdate(ctx, in)
+		return srv.(OrderServiceServer).OrderUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderUpdate",
+		FullMethod: "/omsclient.OrderService/OrderUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderUpdate(ctx, req.(*OrderUpdateReq))
+		return srv.(OrderServiceServer).OrderUpdate(ctx, req.(*OrderUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderService_OrderDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderDelete(ctx, in)
+		return srv.(OrderServiceServer).OrderDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderDelete",
+		FullMethod: "/omsclient.OrderService/OrderDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderDelete(ctx, req.(*OrderDeleteReq))
+		return srv.(OrderServiceServer).OrderDelete(ctx, req.(*OrderDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderListByMemberId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderService_OrderListByMemberId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderListByMemberIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderListByMemberId(ctx, in)
+		return srv.(OrderServiceServer).OrderListByMemberId(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderListByMemberId",
+		FullMethod: "/omsclient.OrderService/OrderListByMemberId",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderListByMemberId(ctx, req.(*OrderListByMemberIdReq))
+		return srv.(OrderServiceServer).OrderListByMemberId(ctx, req.(*OrderListByMemberIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderCancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderService_OrderCancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderCancelReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderCancel(ctx, in)
+		return srv.(OrderServiceServer).OrderCancel(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderCancel",
+		FullMethod: "/omsclient.OrderService/OrderCancel",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderCancel(ctx, req.(*OrderCancelReq))
+		return srv.(OrderServiceServer).OrderCancel(ctx, req.(*OrderCancelReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderConfirm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderService_OrderConfirm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderConfirmReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderConfirm(ctx, in)
+		return srv.(OrderServiceServer).OrderConfirm(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderConfirm",
+		FullMethod: "/omsclient.OrderService/OrderConfirm",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderConfirm(ctx, req.(*OrderConfirmReq))
+		return srv.(OrderServiceServer).OrderConfirm(ctx, req.(*OrderConfirmReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderRefund_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderService_OrderRefund_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderRefundReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderRefund(ctx, in)
+		return srv.(OrderServiceServer).OrderRefund(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderRefund",
+		FullMethod: "/omsclient.OrderService/OrderRefund",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderRefund(ctx, req.(*OrderRefundReq))
+		return srv.(OrderServiceServer).OrderRefund(ctx, req.(*OrderRefundReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderDeleteById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderService_OrderDeleteById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderDeleteByIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderDeleteById(ctx, in)
+		return srv.(OrderServiceServer).OrderDeleteById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderDeleteById",
+		FullMethod: "/omsclient.OrderService/OrderDeleteById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderDeleteById(ctx, req.(*OrderDeleteByIdReq))
+		return srv.(OrderServiceServer).OrderDeleteById(ctx, req.(*OrderDeleteByIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_CartItemAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OrderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.OrderService",
+	HandlerType: (*OrderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "OrderAdd",
+			Handler:    _OrderService_OrderAdd_Handler,
+		},
+		{
+			MethodName: "OrderList",
+			Handler:    _OrderService_OrderList_Handler,
+		},
+		{
+			MethodName: "OrderUpdate",
+			Handler:    _OrderService_OrderUpdate_Handler,
+		},
+		{
+			MethodName: "OrderDelete",
+			Handler:    _OrderService_OrderDelete_Handler,
+		},
+		{
+			MethodName: "OrderListByMemberId",
+			Handler:    _OrderService_OrderListByMemberId_Handler,
+		},
+		{
+			MethodName: "OrderCancel",
+			Handler:    _OrderService_OrderCancel_Handler,
+		},
+		{
+			MethodName: "OrderConfirm",
+			Handler:    _OrderService_OrderConfirm_Handler,
+		},
+		{
+			MethodName: "OrderRefund",
+			Handler:    _OrderService_OrderRefund_Handler,
+		},
+		{
+			MethodName: "OrderDeleteById",
+			Handler:    _OrderService_OrderDeleteById_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "oms.proto",
+}
+
+// CartItemServiceClient is the client API for CartItemService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CartItemServiceClient interface {
+	CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error)
+	CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error)
+	CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
+	CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
+	CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error)
+}
+
+type cartItemServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCartItemServiceClient(cc grpc.ClientConnInterface) CartItemServiceClient {
+	return &cartItemServiceClient{cc}
+}
+
+func (c *cartItemServiceClient) CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error) {
+	out := new(CartItemAddResp)
+	err := c.cc.Invoke(ctx, "/omsclient.CartItemService/CartItemAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cartItemServiceClient) CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error) {
+	out := new(CartItemListResp)
+	err := c.cc.Invoke(ctx, "/omsclient.CartItemService/CartItemList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cartItemServiceClient) CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error) {
+	out := new(CartItemUpdateResp)
+	err := c.cc.Invoke(ctx, "/omsclient.CartItemService/CartItemUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cartItemServiceClient) CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error) {
+	out := new(CartItemUpdateResp)
+	err := c.cc.Invoke(ctx, "/omsclient.CartItemService/CartItemUpdateQuantity", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cartItemServiceClient) CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error) {
+	out := new(CartItemDeleteResp)
+	err := c.cc.Invoke(ctx, "/omsclient.CartItemService/CartItemDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CartItemServiceServer is the server API for CartItemService service.
+// All implementations must embed UnimplementedCartItemServiceServer
+// for forward compatibility
+type CartItemServiceServer interface {
+	CartItemAdd(context.Context, *CartItemAddReq) (*CartItemAddResp, error)
+	CartItemList(context.Context, *CartItemListReq) (*CartItemListResp, error)
+	CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
+	CartItemUpdateQuantity(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
+	CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error)
+	mustEmbedUnimplementedCartItemServiceServer()
+}
+
+// UnimplementedCartItemServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCartItemServiceServer struct {
+}
+
+func (UnimplementedCartItemServiceServer) CartItemAdd(context.Context, *CartItemAddReq) (*CartItemAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CartItemAdd not implemented")
+}
+func (UnimplementedCartItemServiceServer) CartItemList(context.Context, *CartItemListReq) (*CartItemListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CartItemList not implemented")
+}
+func (UnimplementedCartItemServiceServer) CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CartItemUpdate not implemented")
+}
+func (UnimplementedCartItemServiceServer) CartItemUpdateQuantity(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CartItemUpdateQuantity not implemented")
+}
+func (UnimplementedCartItemServiceServer) CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CartItemDelete not implemented")
+}
+func (UnimplementedCartItemServiceServer) mustEmbedUnimplementedCartItemServiceServer() {}
+
+// UnsafeCartItemServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CartItemServiceServer will
+// result in compilation errors.
+type UnsafeCartItemServiceServer interface {
+	mustEmbedUnimplementedCartItemServiceServer()
+}
+
+func RegisterCartItemServiceServer(s grpc.ServiceRegistrar, srv CartItemServiceServer) {
+	s.RegisterService(&CartItemService_ServiceDesc, srv)
+}
+
+func _CartItemService_CartItemAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CartItemAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).CartItemAdd(ctx, in)
+		return srv.(CartItemServiceServer).CartItemAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/CartItemAdd",
+		FullMethod: "/omsclient.CartItemService/CartItemAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CartItemAdd(ctx, req.(*CartItemAddReq))
+		return srv.(CartItemServiceServer).CartItemAdd(ctx, req.(*CartItemAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_CartItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CartItemService_CartItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CartItemListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).CartItemList(ctx, in)
+		return srv.(CartItemServiceServer).CartItemList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/CartItemList",
+		FullMethod: "/omsclient.CartItemService/CartItemList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CartItemList(ctx, req.(*CartItemListReq))
+		return srv.(CartItemServiceServer).CartItemList(ctx, req.(*CartItemListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_CartItemUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CartItemService_CartItemUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CartItemUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).CartItemUpdate(ctx, in)
+		return srv.(CartItemServiceServer).CartItemUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/CartItemUpdate",
+		FullMethod: "/omsclient.CartItemService/CartItemUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CartItemUpdate(ctx, req.(*CartItemUpdateReq))
+		return srv.(CartItemServiceServer).CartItemUpdate(ctx, req.(*CartItemUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_CartItemUpdateQuantity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CartItemService_CartItemUpdateQuantity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CartItemUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).CartItemUpdateQuantity(ctx, in)
+		return srv.(CartItemServiceServer).CartItemUpdateQuantity(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/CartItemUpdateQuantity",
+		FullMethod: "/omsclient.CartItemService/CartItemUpdateQuantity",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CartItemUpdateQuantity(ctx, req.(*CartItemUpdateReq))
+		return srv.(CartItemServiceServer).CartItemUpdateQuantity(ctx, req.(*CartItemUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_CartItemDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CartItemService_CartItemDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CartItemDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).CartItemDelete(ctx, in)
+		return srv.(CartItemServiceServer).CartItemDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/CartItemDelete",
+		FullMethod: "/omsclient.CartItemService/CartItemDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CartItemDelete(ctx, req.(*CartItemDeleteReq))
+		return srv.(CartItemServiceServer).CartItemDelete(ctx, req.(*CartItemDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_CompanyAddressAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// CartItemService_ServiceDesc is the grpc.ServiceDesc for CartItemService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CartItemService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.CartItemService",
+	HandlerType: (*CartItemServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CartItemAdd",
+			Handler:    _CartItemService_CartItemAdd_Handler,
+		},
+		{
+			MethodName: "CartItemList",
+			Handler:    _CartItemService_CartItemList_Handler,
+		},
+		{
+			MethodName: "CartItemUpdate",
+			Handler:    _CartItemService_CartItemUpdate_Handler,
+		},
+		{
+			MethodName: "CartItemUpdateQuantity",
+			Handler:    _CartItemService_CartItemUpdateQuantity_Handler,
+		},
+		{
+			MethodName: "CartItemDelete",
+			Handler:    _CartItemService_CartItemDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "oms.proto",
+}
+
+// CompanyAddressServiceClient is the client API for CompanyAddressService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CompanyAddressServiceClient interface {
+	CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error)
+	CompanyAddressList(ctx context.Context, in *CompanyAddressListReq, opts ...grpc.CallOption) (*CompanyAddressListResp, error)
+	CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq, opts ...grpc.CallOption) (*CompanyAddressUpdateResp, error)
+	CompanyAddressDelete(ctx context.Context, in *CompanyAddressDeleteReq, opts ...grpc.CallOption) (*CompanyAddressDeleteResp, error)
+}
+
+type companyAddressServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCompanyAddressServiceClient(cc grpc.ClientConnInterface) CompanyAddressServiceClient {
+	return &companyAddressServiceClient{cc}
+}
+
+func (c *companyAddressServiceClient) CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error) {
+	out := new(CompanyAddressAddResp)
+	err := c.cc.Invoke(ctx, "/omsclient.CompanyAddressService/CompanyAddressAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *companyAddressServiceClient) CompanyAddressList(ctx context.Context, in *CompanyAddressListReq, opts ...grpc.CallOption) (*CompanyAddressListResp, error) {
+	out := new(CompanyAddressListResp)
+	err := c.cc.Invoke(ctx, "/omsclient.CompanyAddressService/CompanyAddressList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *companyAddressServiceClient) CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq, opts ...grpc.CallOption) (*CompanyAddressUpdateResp, error) {
+	out := new(CompanyAddressUpdateResp)
+	err := c.cc.Invoke(ctx, "/omsclient.CompanyAddressService/CompanyAddressUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *companyAddressServiceClient) CompanyAddressDelete(ctx context.Context, in *CompanyAddressDeleteReq, opts ...grpc.CallOption) (*CompanyAddressDeleteResp, error) {
+	out := new(CompanyAddressDeleteResp)
+	err := c.cc.Invoke(ctx, "/omsclient.CompanyAddressService/CompanyAddressDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CompanyAddressServiceServer is the server API for CompanyAddressService service.
+// All implementations must embed UnimplementedCompanyAddressServiceServer
+// for forward compatibility
+type CompanyAddressServiceServer interface {
+	CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error)
+	CompanyAddressList(context.Context, *CompanyAddressListReq) (*CompanyAddressListResp, error)
+	CompanyAddressUpdate(context.Context, *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error)
+	CompanyAddressDelete(context.Context, *CompanyAddressDeleteReq) (*CompanyAddressDeleteResp, error)
+	mustEmbedUnimplementedCompanyAddressServiceServer()
+}
+
+// UnimplementedCompanyAddressServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCompanyAddressServiceServer struct {
+}
+
+func (UnimplementedCompanyAddressServiceServer) CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressAdd not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) CompanyAddressList(context.Context, *CompanyAddressListReq) (*CompanyAddressListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressList not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) CompanyAddressUpdate(context.Context, *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressUpdate not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) CompanyAddressDelete(context.Context, *CompanyAddressDeleteReq) (*CompanyAddressDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressDelete not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) mustEmbedUnimplementedCompanyAddressServiceServer() {}
+
+// UnsafeCompanyAddressServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CompanyAddressServiceServer will
+// result in compilation errors.
+type UnsafeCompanyAddressServiceServer interface {
+	mustEmbedUnimplementedCompanyAddressServiceServer()
+}
+
+func RegisterCompanyAddressServiceServer(s grpc.ServiceRegistrar, srv CompanyAddressServiceServer) {
+	s.RegisterService(&CompanyAddressService_ServiceDesc, srv)
+}
+
+func _CompanyAddressService_CompanyAddressAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CompanyAddressAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).CompanyAddressAdd(ctx, in)
+		return srv.(CompanyAddressServiceServer).CompanyAddressAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/CompanyAddressAdd",
+		FullMethod: "/omsclient.CompanyAddressService/CompanyAddressAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CompanyAddressAdd(ctx, req.(*CompanyAddressAddReq))
+		return srv.(CompanyAddressServiceServer).CompanyAddressAdd(ctx, req.(*CompanyAddressAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_CompanyAddressList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CompanyAddressService_CompanyAddressList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CompanyAddressListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).CompanyAddressList(ctx, in)
+		return srv.(CompanyAddressServiceServer).CompanyAddressList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/CompanyAddressList",
+		FullMethod: "/omsclient.CompanyAddressService/CompanyAddressList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CompanyAddressList(ctx, req.(*CompanyAddressListReq))
+		return srv.(CompanyAddressServiceServer).CompanyAddressList(ctx, req.(*CompanyAddressListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_CompanyAddressUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CompanyAddressService_CompanyAddressUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CompanyAddressUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).CompanyAddressUpdate(ctx, in)
+		return srv.(CompanyAddressServiceServer).CompanyAddressUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/CompanyAddressUpdate",
+		FullMethod: "/omsclient.CompanyAddressService/CompanyAddressUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CompanyAddressUpdate(ctx, req.(*CompanyAddressUpdateReq))
+		return srv.(CompanyAddressServiceServer).CompanyAddressUpdate(ctx, req.(*CompanyAddressUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_CompanyAddressDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CompanyAddressService_CompanyAddressDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CompanyAddressDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).CompanyAddressDelete(ctx, in)
+		return srv.(CompanyAddressServiceServer).CompanyAddressDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/CompanyAddressDelete",
+		FullMethod: "/omsclient.CompanyAddressService/CompanyAddressDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).CompanyAddressDelete(ctx, req.(*CompanyAddressDeleteReq))
+		return srv.(CompanyAddressServiceServer).CompanyAddressDelete(ctx, req.(*CompanyAddressDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderItemAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// CompanyAddressService_ServiceDesc is the grpc.ServiceDesc for CompanyAddressService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CompanyAddressService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.CompanyAddressService",
+	HandlerType: (*CompanyAddressServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CompanyAddressAdd",
+			Handler:    _CompanyAddressService_CompanyAddressAdd_Handler,
+		},
+		{
+			MethodName: "CompanyAddressList",
+			Handler:    _CompanyAddressService_CompanyAddressList_Handler,
+		},
+		{
+			MethodName: "CompanyAddressUpdate",
+			Handler:    _CompanyAddressService_CompanyAddressUpdate_Handler,
+		},
+		{
+			MethodName: "CompanyAddressDelete",
+			Handler:    _CompanyAddressService_CompanyAddressDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "oms.proto",
+}
+
+// OrderItemServiceClient is the client API for OrderItemService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type OrderItemServiceClient interface {
+	OrderItemAdd(ctx context.Context, in *OrderItemAddReq, opts ...grpc.CallOption) (*OrderItemAddResp, error)
+	OrderItemList(ctx context.Context, in *OrderItemListReq, opts ...grpc.CallOption) (*OrderItemListResp, error)
+	OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq, opts ...grpc.CallOption) (*OrderItemUpdateResp, error)
+	OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq, opts ...grpc.CallOption) (*OrderItemDeleteResp, error)
+}
+
+type orderItemServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOrderItemServiceClient(cc grpc.ClientConnInterface) OrderItemServiceClient {
+	return &orderItemServiceClient{cc}
+}
+
+func (c *orderItemServiceClient) OrderItemAdd(ctx context.Context, in *OrderItemAddReq, opts ...grpc.CallOption) (*OrderItemAddResp, error) {
+	out := new(OrderItemAddResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderItemService/OrderItemAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderItemServiceClient) OrderItemList(ctx context.Context, in *OrderItemListReq, opts ...grpc.CallOption) (*OrderItemListResp, error) {
+	out := new(OrderItemListResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderItemService/OrderItemList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderItemServiceClient) OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq, opts ...grpc.CallOption) (*OrderItemUpdateResp, error) {
+	out := new(OrderItemUpdateResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderItemService/OrderItemUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderItemServiceClient) OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq, opts ...grpc.CallOption) (*OrderItemDeleteResp, error) {
+	out := new(OrderItemDeleteResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderItemService/OrderItemDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OrderItemServiceServer is the server API for OrderItemService service.
+// All implementations must embed UnimplementedOrderItemServiceServer
+// for forward compatibility
+type OrderItemServiceServer interface {
+	OrderItemAdd(context.Context, *OrderItemAddReq) (*OrderItemAddResp, error)
+	OrderItemList(context.Context, *OrderItemListReq) (*OrderItemListResp, error)
+	OrderItemUpdate(context.Context, *OrderItemUpdateReq) (*OrderItemUpdateResp, error)
+	OrderItemDelete(context.Context, *OrderItemDeleteReq) (*OrderItemDeleteResp, error)
+	mustEmbedUnimplementedOrderItemServiceServer()
+}
+
+// UnimplementedOrderItemServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderItemServiceServer struct {
+}
+
+func (UnimplementedOrderItemServiceServer) OrderItemAdd(context.Context, *OrderItemAddReq) (*OrderItemAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderItemAdd not implemented")
+}
+func (UnimplementedOrderItemServiceServer) OrderItemList(context.Context, *OrderItemListReq) (*OrderItemListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderItemList not implemented")
+}
+func (UnimplementedOrderItemServiceServer) OrderItemUpdate(context.Context, *OrderItemUpdateReq) (*OrderItemUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderItemUpdate not implemented")
+}
+func (UnimplementedOrderItemServiceServer) OrderItemDelete(context.Context, *OrderItemDeleteReq) (*OrderItemDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderItemDelete not implemented")
+}
+func (UnimplementedOrderItemServiceServer) mustEmbedUnimplementedOrderItemServiceServer() {}
+
+// UnsafeOrderItemServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderItemServiceServer will
+// result in compilation errors.
+type UnsafeOrderItemServiceServer interface {
+	mustEmbedUnimplementedOrderItemServiceServer()
+}
+
+func RegisterOrderItemServiceServer(s grpc.ServiceRegistrar, srv OrderItemServiceServer) {
+	s.RegisterService(&OrderItemService_ServiceDesc, srv)
+}
+
+func _OrderItemService_OrderItemAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderItemAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderItemAdd(ctx, in)
+		return srv.(OrderItemServiceServer).OrderItemAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderItemAdd",
+		FullMethod: "/omsclient.OrderItemService/OrderItemAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderItemAdd(ctx, req.(*OrderItemAddReq))
+		return srv.(OrderItemServiceServer).OrderItemAdd(ctx, req.(*OrderItemAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderItemService_OrderItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderItemListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderItemList(ctx, in)
+		return srv.(OrderItemServiceServer).OrderItemList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderItemList",
+		FullMethod: "/omsclient.OrderItemService/OrderItemList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderItemList(ctx, req.(*OrderItemListReq))
+		return srv.(OrderItemServiceServer).OrderItemList(ctx, req.(*OrderItemListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderItemUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderItemService_OrderItemUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderItemUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderItemUpdate(ctx, in)
+		return srv.(OrderItemServiceServer).OrderItemUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderItemUpdate",
+		FullMethod: "/omsclient.OrderItemService/OrderItemUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderItemUpdate(ctx, req.(*OrderItemUpdateReq))
+		return srv.(OrderItemServiceServer).OrderItemUpdate(ctx, req.(*OrderItemUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderItemDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderItemService_OrderItemDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderItemDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderItemDelete(ctx, in)
+		return srv.(OrderItemServiceServer).OrderItemDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderItemDelete",
+		FullMethod: "/omsclient.OrderItemService/OrderItemDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderItemDelete(ctx, req.(*OrderItemDeleteReq))
+		return srv.(OrderItemServiceServer).OrderItemDelete(ctx, req.(*OrderItemDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderOperateHistoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// OrderItemService_ServiceDesc is the grpc.ServiceDesc for OrderItemService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OrderItemService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.OrderItemService",
+	HandlerType: (*OrderItemServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "OrderItemAdd",
+			Handler:    _OrderItemService_OrderItemAdd_Handler,
+		},
+		{
+			MethodName: "OrderItemList",
+			Handler:    _OrderItemService_OrderItemList_Handler,
+		},
+		{
+			MethodName: "OrderItemUpdate",
+			Handler:    _OrderItemService_OrderItemUpdate_Handler,
+		},
+		{
+			MethodName: "OrderItemDelete",
+			Handler:    _OrderItemService_OrderItemDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "oms.proto",
+}
+
+// OrderOperateHistorServiceClient is the client API for OrderOperateHistorService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type OrderOperateHistorServiceClient interface {
+	OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq, opts ...grpc.CallOption) (*OrderOperateHistoryAddResp, error)
+	OrderOperateHistoryList(ctx context.Context, in *OrderOperateHistoryListReq, opts ...grpc.CallOption) (*OrderOperateHistoryListResp, error)
+	OrderOperateHistoryUpdate(ctx context.Context, in *OrderOperateHistoryUpdateReq, opts ...grpc.CallOption) (*OrderOperateHistoryUpdateResp, error)
+	OrderOperateHistoryDelete(ctx context.Context, in *OrderOperateHistoryDeleteReq, opts ...grpc.CallOption) (*OrderOperateHistoryDeleteResp, error)
+}
+
+type orderOperateHistorServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOrderOperateHistorServiceClient(cc grpc.ClientConnInterface) OrderOperateHistorServiceClient {
+	return &orderOperateHistorServiceClient{cc}
+}
+
+func (c *orderOperateHistorServiceClient) OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq, opts ...grpc.CallOption) (*OrderOperateHistoryAddResp, error) {
+	out := new(OrderOperateHistoryAddResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderOperateHistorService/OrderOperateHistoryAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderOperateHistorServiceClient) OrderOperateHistoryList(ctx context.Context, in *OrderOperateHistoryListReq, opts ...grpc.CallOption) (*OrderOperateHistoryListResp, error) {
+	out := new(OrderOperateHistoryListResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderOperateHistorService/OrderOperateHistoryList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderOperateHistorServiceClient) OrderOperateHistoryUpdate(ctx context.Context, in *OrderOperateHistoryUpdateReq, opts ...grpc.CallOption) (*OrderOperateHistoryUpdateResp, error) {
+	out := new(OrderOperateHistoryUpdateResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderOperateHistorService/OrderOperateHistoryUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderOperateHistorServiceClient) OrderOperateHistoryDelete(ctx context.Context, in *OrderOperateHistoryDeleteReq, opts ...grpc.CallOption) (*OrderOperateHistoryDeleteResp, error) {
+	out := new(OrderOperateHistoryDeleteResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderOperateHistorService/OrderOperateHistoryDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OrderOperateHistorServiceServer is the server API for OrderOperateHistorService service.
+// All implementations must embed UnimplementedOrderOperateHistorServiceServer
+// for forward compatibility
+type OrderOperateHistorServiceServer interface {
+	OrderOperateHistoryAdd(context.Context, *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error)
+	OrderOperateHistoryList(context.Context, *OrderOperateHistoryListReq) (*OrderOperateHistoryListResp, error)
+	OrderOperateHistoryUpdate(context.Context, *OrderOperateHistoryUpdateReq) (*OrderOperateHistoryUpdateResp, error)
+	OrderOperateHistoryDelete(context.Context, *OrderOperateHistoryDeleteReq) (*OrderOperateHistoryDeleteResp, error)
+	mustEmbedUnimplementedOrderOperateHistorServiceServer()
+}
+
+// UnimplementedOrderOperateHistorServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderOperateHistorServiceServer struct {
+}
+
+func (UnimplementedOrderOperateHistorServiceServer) OrderOperateHistoryAdd(context.Context, *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryAdd not implemented")
+}
+func (UnimplementedOrderOperateHistorServiceServer) OrderOperateHistoryList(context.Context, *OrderOperateHistoryListReq) (*OrderOperateHistoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryList not implemented")
+}
+func (UnimplementedOrderOperateHistorServiceServer) OrderOperateHistoryUpdate(context.Context, *OrderOperateHistoryUpdateReq) (*OrderOperateHistoryUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryUpdate not implemented")
+}
+func (UnimplementedOrderOperateHistorServiceServer) OrderOperateHistoryDelete(context.Context, *OrderOperateHistoryDeleteReq) (*OrderOperateHistoryDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryDelete not implemented")
+}
+func (UnimplementedOrderOperateHistorServiceServer) mustEmbedUnimplementedOrderOperateHistorServiceServer() {
+}
+
+// UnsafeOrderOperateHistorServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderOperateHistorServiceServer will
+// result in compilation errors.
+type UnsafeOrderOperateHistorServiceServer interface {
+	mustEmbedUnimplementedOrderOperateHistorServiceServer()
+}
+
+func RegisterOrderOperateHistorServiceServer(s grpc.ServiceRegistrar, srv OrderOperateHistorServiceServer) {
+	s.RegisterService(&OrderOperateHistorService_ServiceDesc, srv)
+}
+
+func _OrderOperateHistorService_OrderOperateHistoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderOperateHistoryAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderOperateHistoryAdd(ctx, in)
+		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderOperateHistoryAdd",
+		FullMethod: "/omsclient.OrderOperateHistorService/OrderOperateHistoryAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderOperateHistoryAdd(ctx, req.(*OrderOperateHistoryAddReq))
+		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryAdd(ctx, req.(*OrderOperateHistoryAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderOperateHistoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderOperateHistorService_OrderOperateHistoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderOperateHistoryListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderOperateHistoryList(ctx, in)
+		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderOperateHistoryList",
+		FullMethod: "/omsclient.OrderOperateHistorService/OrderOperateHistoryList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderOperateHistoryList(ctx, req.(*OrderOperateHistoryListReq))
+		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryList(ctx, req.(*OrderOperateHistoryListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderOperateHistoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderOperateHistorService_OrderOperateHistoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderOperateHistoryUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderOperateHistoryUpdate(ctx, in)
+		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderOperateHistoryUpdate",
+		FullMethod: "/omsclient.OrderOperateHistorService/OrderOperateHistoryUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderOperateHistoryUpdate(ctx, req.(*OrderOperateHistoryUpdateReq))
+		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryUpdate(ctx, req.(*OrderOperateHistoryUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderOperateHistoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderOperateHistorService_OrderOperateHistoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderOperateHistoryDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderOperateHistoryDelete(ctx, in)
+		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderOperateHistoryDelete",
+		FullMethod: "/omsclient.OrderOperateHistorService/OrderOperateHistoryDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderOperateHistoryDelete(ctx, req.(*OrderOperateHistoryDeleteReq))
+		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryDelete(ctx, req.(*OrderOperateHistoryDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderReturnApplyAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// OrderOperateHistorService_ServiceDesc is the grpc.ServiceDesc for OrderOperateHistorService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OrderOperateHistorService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.OrderOperateHistorService",
+	HandlerType: (*OrderOperateHistorServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "OrderOperateHistoryAdd",
+			Handler:    _OrderOperateHistorService_OrderOperateHistoryAdd_Handler,
+		},
+		{
+			MethodName: "OrderOperateHistoryList",
+			Handler:    _OrderOperateHistorService_OrderOperateHistoryList_Handler,
+		},
+		{
+			MethodName: "OrderOperateHistoryUpdate",
+			Handler:    _OrderOperateHistorService_OrderOperateHistoryUpdate_Handler,
+		},
+		{
+			MethodName: "OrderOperateHistoryDelete",
+			Handler:    _OrderOperateHistorService_OrderOperateHistoryDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "oms.proto",
+}
+
+// OrderReturnApplyServiceClient is the client API for OrderReturnApplyService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type OrderReturnApplyServiceClient interface {
+	OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq, opts ...grpc.CallOption) (*OrderReturnApplyAddResp, error)
+	OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq, opts ...grpc.CallOption) (*OrderReturnApplyListResp, error)
+	OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq, opts ...grpc.CallOption) (*OrderReturnApplyUpdateResp, error)
+	OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq, opts ...grpc.CallOption) (*OrderReturnApplyDeleteResp, error)
+}
+
+type orderReturnApplyServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOrderReturnApplyServiceClient(cc grpc.ClientConnInterface) OrderReturnApplyServiceClient {
+	return &orderReturnApplyServiceClient{cc}
+}
+
+func (c *orderReturnApplyServiceClient) OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq, opts ...grpc.CallOption) (*OrderReturnApplyAddResp, error) {
+	out := new(OrderReturnApplyAddResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderReturnApplyService/OrderReturnApplyAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderReturnApplyServiceClient) OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq, opts ...grpc.CallOption) (*OrderReturnApplyListResp, error) {
+	out := new(OrderReturnApplyListResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderReturnApplyService/OrderReturnApplyList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderReturnApplyServiceClient) OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq, opts ...grpc.CallOption) (*OrderReturnApplyUpdateResp, error) {
+	out := new(OrderReturnApplyUpdateResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderReturnApplyService/OrderReturnApplyUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderReturnApplyServiceClient) OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq, opts ...grpc.CallOption) (*OrderReturnApplyDeleteResp, error) {
+	out := new(OrderReturnApplyDeleteResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderReturnApplyService/OrderReturnApplyDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OrderReturnApplyServiceServer is the server API for OrderReturnApplyService service.
+// All implementations must embed UnimplementedOrderReturnApplyServiceServer
+// for forward compatibility
+type OrderReturnApplyServiceServer interface {
+	OrderReturnApplyAdd(context.Context, *OrderReturnApplyAddReq) (*OrderReturnApplyAddResp, error)
+	OrderReturnApplyList(context.Context, *OrderReturnApplyListReq) (*OrderReturnApplyListResp, error)
+	OrderReturnApplyUpdate(context.Context, *OrderReturnApplyUpdateReq) (*OrderReturnApplyUpdateResp, error)
+	OrderReturnApplyDelete(context.Context, *OrderReturnApplyDeleteReq) (*OrderReturnApplyDeleteResp, error)
+	mustEmbedUnimplementedOrderReturnApplyServiceServer()
+}
+
+// UnimplementedOrderReturnApplyServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderReturnApplyServiceServer struct {
+}
+
+func (UnimplementedOrderReturnApplyServiceServer) OrderReturnApplyAdd(context.Context, *OrderReturnApplyAddReq) (*OrderReturnApplyAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyAdd not implemented")
+}
+func (UnimplementedOrderReturnApplyServiceServer) OrderReturnApplyList(context.Context, *OrderReturnApplyListReq) (*OrderReturnApplyListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyList not implemented")
+}
+func (UnimplementedOrderReturnApplyServiceServer) OrderReturnApplyUpdate(context.Context, *OrderReturnApplyUpdateReq) (*OrderReturnApplyUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyUpdate not implemented")
+}
+func (UnimplementedOrderReturnApplyServiceServer) OrderReturnApplyDelete(context.Context, *OrderReturnApplyDeleteReq) (*OrderReturnApplyDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyDelete not implemented")
+}
+func (UnimplementedOrderReturnApplyServiceServer) mustEmbedUnimplementedOrderReturnApplyServiceServer() {
+}
+
+// UnsafeOrderReturnApplyServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderReturnApplyServiceServer will
+// result in compilation errors.
+type UnsafeOrderReturnApplyServiceServer interface {
+	mustEmbedUnimplementedOrderReturnApplyServiceServer()
+}
+
+func RegisterOrderReturnApplyServiceServer(s grpc.ServiceRegistrar, srv OrderReturnApplyServiceServer) {
+	s.RegisterService(&OrderReturnApplyService_ServiceDesc, srv)
+}
+
+func _OrderReturnApplyService_OrderReturnApplyAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderReturnApplyAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderReturnApplyAdd(ctx, in)
+		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderReturnApplyAdd",
+		FullMethod: "/omsclient.OrderReturnApplyService/OrderReturnApplyAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderReturnApplyAdd(ctx, req.(*OrderReturnApplyAddReq))
+		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyAdd(ctx, req.(*OrderReturnApplyAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderReturnApplyList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderReturnApplyService_OrderReturnApplyList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderReturnApplyListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderReturnApplyList(ctx, in)
+		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderReturnApplyList",
+		FullMethod: "/omsclient.OrderReturnApplyService/OrderReturnApplyList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderReturnApplyList(ctx, req.(*OrderReturnApplyListReq))
+		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyList(ctx, req.(*OrderReturnApplyListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderReturnApplyUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderReturnApplyService_OrderReturnApplyUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderReturnApplyUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderReturnApplyUpdate(ctx, in)
+		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderReturnApplyUpdate",
+		FullMethod: "/omsclient.OrderReturnApplyService/OrderReturnApplyUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderReturnApplyUpdate(ctx, req.(*OrderReturnApplyUpdateReq))
+		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyUpdate(ctx, req.(*OrderReturnApplyUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderReturnApplyDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderReturnApplyService_OrderReturnApplyDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderReturnApplyDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderReturnApplyDelete(ctx, in)
+		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderReturnApplyDelete",
+		FullMethod: "/omsclient.OrderReturnApplyService/OrderReturnApplyDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderReturnApplyDelete(ctx, req.(*OrderReturnApplyDeleteReq))
+		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyDelete(ctx, req.(*OrderReturnApplyDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderReturnReasonAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// OrderReturnApplyService_ServiceDesc is the grpc.ServiceDesc for OrderReturnApplyService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OrderReturnApplyService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.OrderReturnApplyService",
+	HandlerType: (*OrderReturnApplyServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "OrderReturnApplyAdd",
+			Handler:    _OrderReturnApplyService_OrderReturnApplyAdd_Handler,
+		},
+		{
+			MethodName: "OrderReturnApplyList",
+			Handler:    _OrderReturnApplyService_OrderReturnApplyList_Handler,
+		},
+		{
+			MethodName: "OrderReturnApplyUpdate",
+			Handler:    _OrderReturnApplyService_OrderReturnApplyUpdate_Handler,
+		},
+		{
+			MethodName: "OrderReturnApplyDelete",
+			Handler:    _OrderReturnApplyService_OrderReturnApplyDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "oms.proto",
+}
+
+// OrderReturnReasonServiceClient is the client API for OrderReturnReasonService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type OrderReturnReasonServiceClient interface {
+	OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq, opts ...grpc.CallOption) (*OrderReturnReasonAddResp, error)
+	OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq, opts ...grpc.CallOption) (*OrderReturnReasonListResp, error)
+	OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error)
+	OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error)
+}
+
+type orderReturnReasonServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOrderReturnReasonServiceClient(cc grpc.ClientConnInterface) OrderReturnReasonServiceClient {
+	return &orderReturnReasonServiceClient{cc}
+}
+
+func (c *orderReturnReasonServiceClient) OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq, opts ...grpc.CallOption) (*OrderReturnReasonAddResp, error) {
+	out := new(OrderReturnReasonAddResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderReturnReasonService/OrderReturnReasonAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderReturnReasonServiceClient) OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq, opts ...grpc.CallOption) (*OrderReturnReasonListResp, error) {
+	out := new(OrderReturnReasonListResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderReturnReasonService/OrderReturnReasonList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderReturnReasonServiceClient) OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error) {
+	out := new(OrderReturnReasonUpdateResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderReturnReasonService/OrderReturnReasonUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderReturnReasonServiceClient) OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error) {
+	out := new(OrderReturnReasonDeleteResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderReturnReasonService/OrderReturnReasonDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OrderReturnReasonServiceServer is the server API for OrderReturnReasonService service.
+// All implementations must embed UnimplementedOrderReturnReasonServiceServer
+// for forward compatibility
+type OrderReturnReasonServiceServer interface {
+	OrderReturnReasonAdd(context.Context, *OrderReturnReasonAddReq) (*OrderReturnReasonAddResp, error)
+	OrderReturnReasonList(context.Context, *OrderReturnReasonListReq) (*OrderReturnReasonListResp, error)
+	OrderReturnReasonUpdate(context.Context, *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error)
+	OrderReturnReasonDelete(context.Context, *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error)
+	mustEmbedUnimplementedOrderReturnReasonServiceServer()
+}
+
+// UnimplementedOrderReturnReasonServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderReturnReasonServiceServer struct {
+}
+
+func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonAdd(context.Context, *OrderReturnReasonAddReq) (*OrderReturnReasonAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonAdd not implemented")
+}
+func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonList(context.Context, *OrderReturnReasonListReq) (*OrderReturnReasonListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonList not implemented")
+}
+func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonUpdate(context.Context, *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonUpdate not implemented")
+}
+func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonDelete(context.Context, *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonDelete not implemented")
+}
+func (UnimplementedOrderReturnReasonServiceServer) mustEmbedUnimplementedOrderReturnReasonServiceServer() {
+}
+
+// UnsafeOrderReturnReasonServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderReturnReasonServiceServer will
+// result in compilation errors.
+type UnsafeOrderReturnReasonServiceServer interface {
+	mustEmbedUnimplementedOrderReturnReasonServiceServer()
+}
+
+func RegisterOrderReturnReasonServiceServer(s grpc.ServiceRegistrar, srv OrderReturnReasonServiceServer) {
+	s.RegisterService(&OrderReturnReasonService_ServiceDesc, srv)
+}
+
+func _OrderReturnReasonService_OrderReturnReasonAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderReturnReasonAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderReturnReasonAdd(ctx, in)
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderReturnReasonAdd",
+		FullMethod: "/omsclient.OrderReturnReasonService/OrderReturnReasonAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderReturnReasonAdd(ctx, req.(*OrderReturnReasonAddReq))
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonAdd(ctx, req.(*OrderReturnReasonAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderReturnReasonList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderReturnReasonService_OrderReturnReasonList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderReturnReasonListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderReturnReasonList(ctx, in)
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderReturnReasonList",
+		FullMethod: "/omsclient.OrderReturnReasonService/OrderReturnReasonList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderReturnReasonList(ctx, req.(*OrderReturnReasonListReq))
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonList(ctx, req.(*OrderReturnReasonListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderReturnReasonUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderReturnReasonService_OrderReturnReasonUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderReturnReasonUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderReturnReasonUpdate(ctx, in)
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderReturnReasonUpdate",
+		FullMethod: "/omsclient.OrderReturnReasonService/OrderReturnReasonUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderReturnReasonUpdate(ctx, req.(*OrderReturnReasonUpdateReq))
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonUpdate(ctx, req.(*OrderReturnReasonUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderReturnReasonDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderReturnReasonService_OrderReturnReasonDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderReturnReasonDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderReturnReasonDelete(ctx, in)
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderReturnReasonDelete",
+		FullMethod: "/omsclient.OrderReturnReasonService/OrderReturnReasonDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderReturnReasonDelete(ctx, req.(*OrderReturnReasonDeleteReq))
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonDelete(ctx, req.(*OrderReturnReasonDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderSettingAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// OrderReturnReasonService_ServiceDesc is the grpc.ServiceDesc for OrderReturnReasonService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OrderReturnReasonService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.OrderReturnReasonService",
+	HandlerType: (*OrderReturnReasonServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "OrderReturnReasonAdd",
+			Handler:    _OrderReturnReasonService_OrderReturnReasonAdd_Handler,
+		},
+		{
+			MethodName: "OrderReturnReasonList",
+			Handler:    _OrderReturnReasonService_OrderReturnReasonList_Handler,
+		},
+		{
+			MethodName: "OrderReturnReasonUpdate",
+			Handler:    _OrderReturnReasonService_OrderReturnReasonUpdate_Handler,
+		},
+		{
+			MethodName: "OrderReturnReasonDelete",
+			Handler:    _OrderReturnReasonService_OrderReturnReasonDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "oms.proto",
+}
+
+// OrderSettingServiceClient is the client API for OrderSettingService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type OrderSettingServiceClient interface {
+	OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error)
+	OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error)
+	OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error)
+	OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error)
+}
+
+type orderSettingServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOrderSettingServiceClient(cc grpc.ClientConnInterface) OrderSettingServiceClient {
+	return &orderSettingServiceClient{cc}
+}
+
+func (c *orderSettingServiceClient) OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error) {
+	out := new(OrderSettingAddResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderSettingService/OrderSettingAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderSettingServiceClient) OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error) {
+	out := new(OrderSettingListResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderSettingService/OrderSettingList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderSettingServiceClient) OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error) {
+	out := new(OrderSettingUpdateResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderSettingService/OrderSettingUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderSettingServiceClient) OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error) {
+	out := new(OrderSettingDeleteResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderSettingService/OrderSettingDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OrderSettingServiceServer is the server API for OrderSettingService service.
+// All implementations must embed UnimplementedOrderSettingServiceServer
+// for forward compatibility
+type OrderSettingServiceServer interface {
+	OrderSettingAdd(context.Context, *OrderSettingAddReq) (*OrderSettingAddResp, error)
+	OrderSettingList(context.Context, *OrderSettingListReq) (*OrderSettingListResp, error)
+	OrderSettingUpdate(context.Context, *OrderSettingUpdateReq) (*OrderSettingUpdateResp, error)
+	OrderSettingDelete(context.Context, *OrderSettingDeleteReq) (*OrderSettingDeleteResp, error)
+	mustEmbedUnimplementedOrderSettingServiceServer()
+}
+
+// UnimplementedOrderSettingServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderSettingServiceServer struct {
+}
+
+func (UnimplementedOrderSettingServiceServer) OrderSettingAdd(context.Context, *OrderSettingAddReq) (*OrderSettingAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingAdd not implemented")
+}
+func (UnimplementedOrderSettingServiceServer) OrderSettingList(context.Context, *OrderSettingListReq) (*OrderSettingListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingList not implemented")
+}
+func (UnimplementedOrderSettingServiceServer) OrderSettingUpdate(context.Context, *OrderSettingUpdateReq) (*OrderSettingUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingUpdate not implemented")
+}
+func (UnimplementedOrderSettingServiceServer) OrderSettingDelete(context.Context, *OrderSettingDeleteReq) (*OrderSettingDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingDelete not implemented")
+}
+func (UnimplementedOrderSettingServiceServer) mustEmbedUnimplementedOrderSettingServiceServer() {}
+
+// UnsafeOrderSettingServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderSettingServiceServer will
+// result in compilation errors.
+type UnsafeOrderSettingServiceServer interface {
+	mustEmbedUnimplementedOrderSettingServiceServer()
+}
+
+func RegisterOrderSettingServiceServer(s grpc.ServiceRegistrar, srv OrderSettingServiceServer) {
+	s.RegisterService(&OrderSettingService_ServiceDesc, srv)
+}
+
+func _OrderSettingService_OrderSettingAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderSettingAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderSettingAdd(ctx, in)
+		return srv.(OrderSettingServiceServer).OrderSettingAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderSettingAdd",
+		FullMethod: "/omsclient.OrderSettingService/OrderSettingAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderSettingAdd(ctx, req.(*OrderSettingAddReq))
+		return srv.(OrderSettingServiceServer).OrderSettingAdd(ctx, req.(*OrderSettingAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderSettingList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderSettingService_OrderSettingList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderSettingListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderSettingList(ctx, in)
+		return srv.(OrderSettingServiceServer).OrderSettingList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderSettingList",
+		FullMethod: "/omsclient.OrderSettingService/OrderSettingList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderSettingList(ctx, req.(*OrderSettingListReq))
+		return srv.(OrderSettingServiceServer).OrderSettingList(ctx, req.(*OrderSettingListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderSettingUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderSettingService_OrderSettingUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderSettingUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderSettingUpdate(ctx, in)
+		return srv.(OrderSettingServiceServer).OrderSettingUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderSettingUpdate",
+		FullMethod: "/omsclient.OrderSettingService/OrderSettingUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderSettingUpdate(ctx, req.(*OrderSettingUpdateReq))
+		return srv.(OrderSettingServiceServer).OrderSettingUpdate(ctx, req.(*OrderSettingUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Oms_OrderSettingDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _OrderSettingService_OrderSettingDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderSettingDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmsServer).OrderSettingDelete(ctx, in)
+		return srv.(OrderSettingServiceServer).OrderSettingDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/omsclient.Oms/OrderSettingDelete",
+		FullMethod: "/omsclient.OrderSettingService/OrderSettingDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmsServer).OrderSettingDelete(ctx, req.(*OrderSettingDeleteReq))
+		return srv.(OrderSettingServiceServer).OrderSettingDelete(ctx, req.(*OrderSettingDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Oms_ServiceDesc is the grpc.ServiceDesc for Oms service.
+// OrderSettingService_ServiceDesc is the grpc.ServiceDesc for OrderSettingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Oms_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.Oms",
-	HandlerType: (*OmsServer)(nil),
+var OrderSettingService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.OrderSettingService",
+	HandlerType: (*OrderSettingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "OrderAdd",
-			Handler:    _Oms_OrderAdd_Handler,
-		},
-		{
-			MethodName: "OrderList",
-			Handler:    _Oms_OrderList_Handler,
-		},
-		{
-			MethodName: "OrderUpdate",
-			Handler:    _Oms_OrderUpdate_Handler,
-		},
-		{
-			MethodName: "OrderDelete",
-			Handler:    _Oms_OrderDelete_Handler,
-		},
-		{
-			MethodName: "OrderListByMemberId",
-			Handler:    _Oms_OrderListByMemberId_Handler,
-		},
-		{
-			MethodName: "OrderCancel",
-			Handler:    _Oms_OrderCancel_Handler,
-		},
-		{
-			MethodName: "OrderConfirm",
-			Handler:    _Oms_OrderConfirm_Handler,
-		},
-		{
-			MethodName: "OrderRefund",
-			Handler:    _Oms_OrderRefund_Handler,
-		},
-		{
-			MethodName: "OrderDeleteById",
-			Handler:    _Oms_OrderDeleteById_Handler,
-		},
-		{
-			MethodName: "CartItemAdd",
-			Handler:    _Oms_CartItemAdd_Handler,
-		},
-		{
-			MethodName: "CartItemList",
-			Handler:    _Oms_CartItemList_Handler,
-		},
-		{
-			MethodName: "CartItemUpdate",
-			Handler:    _Oms_CartItemUpdate_Handler,
-		},
-		{
-			MethodName: "CartItemUpdateQuantity",
-			Handler:    _Oms_CartItemUpdateQuantity_Handler,
-		},
-		{
-			MethodName: "CartItemDelete",
-			Handler:    _Oms_CartItemDelete_Handler,
-		},
-		{
-			MethodName: "CompanyAddressAdd",
-			Handler:    _Oms_CompanyAddressAdd_Handler,
-		},
-		{
-			MethodName: "CompanyAddressList",
-			Handler:    _Oms_CompanyAddressList_Handler,
-		},
-		{
-			MethodName: "CompanyAddressUpdate",
-			Handler:    _Oms_CompanyAddressUpdate_Handler,
-		},
-		{
-			MethodName: "CompanyAddressDelete",
-			Handler:    _Oms_CompanyAddressDelete_Handler,
-		},
-		{
-			MethodName: "OrderItemAdd",
-			Handler:    _Oms_OrderItemAdd_Handler,
-		},
-		{
-			MethodName: "OrderItemList",
-			Handler:    _Oms_OrderItemList_Handler,
-		},
-		{
-			MethodName: "OrderItemUpdate",
-			Handler:    _Oms_OrderItemUpdate_Handler,
-		},
-		{
-			MethodName: "OrderItemDelete",
-			Handler:    _Oms_OrderItemDelete_Handler,
-		},
-		{
-			MethodName: "OrderOperateHistoryAdd",
-			Handler:    _Oms_OrderOperateHistoryAdd_Handler,
-		},
-		{
-			MethodName: "OrderOperateHistoryList",
-			Handler:    _Oms_OrderOperateHistoryList_Handler,
-		},
-		{
-			MethodName: "OrderOperateHistoryUpdate",
-			Handler:    _Oms_OrderOperateHistoryUpdate_Handler,
-		},
-		{
-			MethodName: "OrderOperateHistoryDelete",
-			Handler:    _Oms_OrderOperateHistoryDelete_Handler,
-		},
-		{
-			MethodName: "OrderReturnApplyAdd",
-			Handler:    _Oms_OrderReturnApplyAdd_Handler,
-		},
-		{
-			MethodName: "OrderReturnApplyList",
-			Handler:    _Oms_OrderReturnApplyList_Handler,
-		},
-		{
-			MethodName: "OrderReturnApplyUpdate",
-			Handler:    _Oms_OrderReturnApplyUpdate_Handler,
-		},
-		{
-			MethodName: "OrderReturnApplyDelete",
-			Handler:    _Oms_OrderReturnApplyDelete_Handler,
-		},
-		{
-			MethodName: "OrderReturnReasonAdd",
-			Handler:    _Oms_OrderReturnReasonAdd_Handler,
-		},
-		{
-			MethodName: "OrderReturnReasonList",
-			Handler:    _Oms_OrderReturnReasonList_Handler,
-		},
-		{
-			MethodName: "OrderReturnReasonUpdate",
-			Handler:    _Oms_OrderReturnReasonUpdate_Handler,
-		},
-		{
-			MethodName: "OrderReturnReasonDelete",
-			Handler:    _Oms_OrderReturnReasonDelete_Handler,
-		},
-		{
 			MethodName: "OrderSettingAdd",
-			Handler:    _Oms_OrderSettingAdd_Handler,
+			Handler:    _OrderSettingService_OrderSettingAdd_Handler,
 		},
 		{
 			MethodName: "OrderSettingList",
-			Handler:    _Oms_OrderSettingList_Handler,
+			Handler:    _OrderSettingService_OrderSettingList_Handler,
 		},
 		{
 			MethodName: "OrderSettingUpdate",
-			Handler:    _Oms_OrderSettingUpdate_Handler,
+			Handler:    _OrderSettingService_OrderSettingUpdate_Handler,
 		},
 		{
 			MethodName: "OrderSettingDelete",
-			Handler:    _Oms_OrderSettingDelete_Handler,
+			Handler:    _OrderSettingService_OrderSettingDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

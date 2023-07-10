@@ -25,7 +25,7 @@ func NewCarItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CarIt
 }
 
 func (l *CarItemListLogic) CarItemList() (resp *types.CartItemListResp, err error) {
-	itemListResp, _ := l.svcCtx.Oms.CartItemList(l.ctx, &omsclient.CartItemListReq{MemberId: l.ctx.Value("memberId").(int64)})
+	itemListResp, _ := l.svcCtx.CartItemService.CartItemList(l.ctx, &omsclient.CartItemListReq{MemberId: l.ctx.Value("memberId").(int64)})
 
 	var list []types.CartListData
 

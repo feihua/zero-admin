@@ -26,7 +26,7 @@ func NewMemberLoginLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *MemberLoginLogDeleteLogic) MemberLoginLogDelete(req types.DeleteMemberLoginLogReq) (*types.DeleteMemberLoginLogResp, error) {
-	_, err := l.svcCtx.Ums.MemberLoginLogDelete(l.ctx, &umsclient.MemberLoginLogDeleteReq{
+	_, err := l.svcCtx.MemberLoginLogService.MemberLoginLogDelete(l.ctx, &umsclient.MemberLoginLogDeleteReq{
 		Ids: req.Ids,
 	})
 

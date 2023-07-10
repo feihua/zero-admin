@@ -27,7 +27,7 @@ func NewOrderUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderU
 }
 
 func (l *OrderUpdateLogic) OrderUpdate(req types.UpdateOrderReq) (*types.UpdateOrderResp, error) {
-	_, err := l.svcCtx.Oms.OrderUpdate(l.ctx, &omsclient.OrderUpdateReq{
+	_, err := l.svcCtx.OrderService.OrderUpdate(l.ctx, &omsclient.OrderUpdateReq{
 		Id:              req.Id,
 		Status:          req.Status,
 		DeliveryCompany: req.DeliveryCompany,

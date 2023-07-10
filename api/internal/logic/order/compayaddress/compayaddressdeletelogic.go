@@ -25,7 +25,7 @@ func NewCompayAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *CompayAddressDeleteLogic) CompayAddressDelete(req types.DeleteCompayAddressReq) (*types.DeleteCompayAddressResp, error) {
-	_, err := l.svcCtx.Oms.CompanyAddressDelete(l.ctx, &omsclient.CompanyAddressDeleteReq{
+	_, err := l.svcCtx.CompanyAddressService.CompanyAddressDelete(l.ctx, &omsclient.CompanyAddressDeleteReq{
 		Ids: req.Ids,
 	})
 

@@ -26,7 +26,7 @@ func NewProductCommentDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *ProductCommentDeleteLogic) ProductCommentDelete(req types.DeleteProductCommentReq) (*types.DeleteProductCommentResp, error) {
-	_, err := l.svcCtx.Pms.CommentDelete(l.ctx, &pmsclient.CommentDeleteReq{
+	_, err := l.svcCtx.CommentService.CommentDelete(l.ctx, &pmsclient.CommentDeleteReq{
 		Ids: req.Ids,
 	})
 

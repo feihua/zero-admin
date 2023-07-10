@@ -25,7 +25,7 @@ func NewQueryProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq) (resp *types.QueryProductListResp, err error) {
-	productListResp, _ := l.svcCtx.Pms.ProductList(l.ctx, &pmsclient.ProductListReq{
+	productListResp, _ := l.svcCtx.ProductService.ProductList(l.ctx, &pmsclient.ProductListReq{
 		Current:           req.Current,
 		PageSize:          req.PageSize,
 		VerifyStatus:      1, // 审核状态：0->未审核；1->审核通过

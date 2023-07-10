@@ -27,7 +27,7 @@ func NewSelectAllDataLogic(ctx context.Context, svcCtx *svc.ServiceContext) Sele
 }
 
 func (l *SelectAllDataLogic) SelectAllData(req types.SelectDataReq) (*types.SelectDataResp, error) {
-	roleList, roleErr := l.svcCtx.Sys.RoleList(l.ctx, &sysclient.RoleListReq{
+	roleList, roleErr := l.svcCtx.RoleService.RoleList(l.ctx, &sysclient.RoleListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		Status:   1,
@@ -47,7 +47,7 @@ func (l *SelectAllDataLogic) SelectAllData(req types.SelectDataReq) (*types.Sele
 		})
 	}
 
-	jobList, jobErr := l.svcCtx.Sys.JobList(l.ctx, &sysclient.JobListReq{
+	jobList, jobErr := l.svcCtx.JobService.JobList(l.ctx, &sysclient.JobListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		DelFlag:  1,
@@ -66,7 +66,7 @@ func (l *SelectAllDataLogic) SelectAllData(req types.SelectDataReq) (*types.Sele
 		})
 	}
 
-	deptList, err := l.svcCtx.Sys.DeptList(l.ctx, &sysclient.DeptListReq{})
+	deptList, err := l.svcCtx.DeptService.DeptList(l.ctx, &sysclient.DeptListReq{})
 
 	if err != nil {
 		return nil, errorx.NewDefaultError(" ")

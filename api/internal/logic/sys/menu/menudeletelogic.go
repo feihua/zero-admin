@@ -26,7 +26,7 @@ func NewMenuDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuDel
 }
 
 func (l *MenuDeleteLogic) MenuDelete(req types.DeleteMenuReq) (*types.DeleteMenuResp, error) {
-	_, err := l.svcCtx.Sys.MenuDelete(l.ctx, &sysclient.MenuDeleteReq{
+	_, err := l.svcCtx.MenuService.MenuDelete(l.ctx, &sysclient.MenuDeleteReq{
 		Ids: req.Ids,
 	})
 

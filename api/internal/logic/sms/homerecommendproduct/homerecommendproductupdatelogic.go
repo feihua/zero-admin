@@ -27,7 +27,7 @@ func NewHomeRecommendProductUpdateLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *HomeRecommendProductUpdateLogic) HomeRecommendProductUpdate(req types.UpdateHomeRecommendProductReq) (*types.UpdateHomeRecommendProductResp, error) {
-	_, err := l.svcCtx.Sms.HomeRecommendProductUpdate(l.ctx, &smsclient.HomeRecommendProductUpdateReq{
+	_, err := l.svcCtx.HomeRecommendProductService.HomeRecommendProductUpdate(l.ctx, &smsclient.HomeRecommendProductUpdateReq{
 		Id:              req.Id,
 		ProductId:       req.ProductId,
 		ProductName:     req.ProductName,

@@ -27,7 +27,7 @@ func NewFlashPromotionListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *FlashPromotionListLogic) FlashPromotionList(req types.ListFlashPromotionReq) (*types.ListFlashPromotionResp, error) {
-	resp, err := l.svcCtx.Sms.FlashPromotionList(l.ctx, &smsclient.FlashPromotionListReq{
+	resp, err := l.svcCtx.FlashPromotionService.FlashPromotionList(l.ctx, &smsclient.FlashPromotionListReq{
 		Current:   req.Current,
 		PageSize:  req.PageSize,
 		Title:     req.Title,

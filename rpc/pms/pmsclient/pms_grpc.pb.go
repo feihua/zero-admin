@@ -18,2750 +18,3608 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// PmsClient is the client API for Pms service.
+// ProductServiceClient is the client API for ProductService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PmsClient interface {
+type ProductServiceClient interface {
 	ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error)
 	ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error)
 	ProductListByIds(ctx context.Context, in *ProductByIdsReq, opts ...grpc.CallOption) (*ProductListResp, error)
 	ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
 	ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
 	ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
-	AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error)
-	AlbumList(ctx context.Context, in *AlbumListReq, opts ...grpc.CallOption) (*AlbumListResp, error)
-	AlbumUpdate(ctx context.Context, in *AlbumUpdateReq, opts ...grpc.CallOption) (*AlbumUpdateResp, error)
-	AlbumDelete(ctx context.Context, in *AlbumDeleteReq, opts ...grpc.CallOption) (*AlbumDeleteResp, error)
-	AlbumPicAdd(ctx context.Context, in *AlbumPicAddReq, opts ...grpc.CallOption) (*AlbumPicAddResp, error)
-	AlbumPicList(ctx context.Context, in *AlbumPicListReq, opts ...grpc.CallOption) (*AlbumPicListResp, error)
-	AlbumPicUpdate(ctx context.Context, in *AlbumPicUpdateReq, opts ...grpc.CallOption) (*AlbumPicUpdateResp, error)
-	AlbumPicDelete(ctx context.Context, in *AlbumPicDeleteReq, opts ...grpc.CallOption) (*AlbumPicDeleteResp, error)
-	BrandAdd(ctx context.Context, in *BrandAddReq, opts ...grpc.CallOption) (*BrandAddResp, error)
-	BrandList(ctx context.Context, in *BrandListReq, opts ...grpc.CallOption) (*BrandListResp, error)
-	BrandListByIds(ctx context.Context, in *BrandListByIdsReq, opts ...grpc.CallOption) (*BrandListResp, error)
-	BrandUpdate(ctx context.Context, in *BrandUpdateReq, opts ...grpc.CallOption) (*BrandUpdateResp, error)
-	BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error)
-	CommentAdd(ctx context.Context, in *CommentAddReq, opts ...grpc.CallOption) (*CommentAddResp, error)
-	CommentList(ctx context.Context, in *CommentListReq, opts ...grpc.CallOption) (*CommentListResp, error)
-	CommentUpdate(ctx context.Context, in *CommentUpdateReq, opts ...grpc.CallOption) (*CommentUpdateResp, error)
-	CommentDelete(ctx context.Context, in *CommentDeleteReq, opts ...grpc.CallOption) (*CommentDeleteResp, error)
-	CommentReplayAdd(ctx context.Context, in *CommentReplayAddReq, opts ...grpc.CallOption) (*CommentReplayAddResp, error)
-	CommentReplayList(ctx context.Context, in *CommentReplayListReq, opts ...grpc.CallOption) (*CommentReplayListResp, error)
-	CommentReplayUpdate(ctx context.Context, in *CommentReplayUpdateReq, opts ...grpc.CallOption) (*CommentReplayUpdateResp, error)
-	CommentReplayDelete(ctx context.Context, in *CommentReplayDeleteReq, opts ...grpc.CallOption) (*CommentReplayDeleteResp, error)
-	FeightTemplateAdd(ctx context.Context, in *FeightTemplateAddReq, opts ...grpc.CallOption) (*FeightTemplateAddResp, error)
-	FeightTemplateList(ctx context.Context, in *FeightTemplateListReq, opts ...grpc.CallOption) (*FeightTemplateListResp, error)
-	FeightTemplateUpdate(ctx context.Context, in *FeightTemplateUpdateReq, opts ...grpc.CallOption) (*FeightTemplateUpdateResp, error)
-	FeightTemplateDelete(ctx context.Context, in *FeightTemplateDeleteReq, opts ...grpc.CallOption) (*FeightTemplateDeleteResp, error)
-	MemberPriceAdd(ctx context.Context, in *MemberPriceAddReq, opts ...grpc.CallOption) (*MemberPriceAddResp, error)
-	MemberPriceList(ctx context.Context, in *MemberPriceListReq, opts ...grpc.CallOption) (*MemberPriceListResp, error)
-	MemberPriceUpdate(ctx context.Context, in *MemberPriceUpdateReq, opts ...grpc.CallOption) (*MemberPriceUpdateResp, error)
-	MemberPriceDelete(ctx context.Context, in *MemberPriceDeleteReq, opts ...grpc.CallOption) (*MemberPriceDeleteResp, error)
-	ProductAttributeCategoryAdd(ctx context.Context, in *ProductAttributeCategoryAddReq, opts ...grpc.CallOption) (*ProductAttributeCategoryAddResp, error)
-	ProductAttributeCategoryList(ctx context.Context, in *ProductAttributeCategoryListReq, opts ...grpc.CallOption) (*ProductAttributeCategoryListResp, error)
-	ProductAttributeCategoryUpdate(ctx context.Context, in *ProductAttributeCategoryUpdateReq, opts ...grpc.CallOption) (*ProductAttributeCategoryUpdateResp, error)
-	ProductAttributeCategoryDelete(ctx context.Context, in *ProductAttributeCategoryDeleteReq, opts ...grpc.CallOption) (*ProductAttributeCategoryDeleteResp, error)
-	ProductAttributeAdd(ctx context.Context, in *ProductAttributeAddReq, opts ...grpc.CallOption) (*ProductAttributeAddResp, error)
-	ProductAttributeList(ctx context.Context, in *ProductAttributeListReq, opts ...grpc.CallOption) (*ProductAttributeListResp, error)
-	ProductAttributeUpdate(ctx context.Context, in *ProductAttributeUpdateReq, opts ...grpc.CallOption) (*ProductAttributeUpdateResp, error)
-	ProductAttributeDelete(ctx context.Context, in *ProductAttributeDeleteReq, opts ...grpc.CallOption) (*ProductAttributeDeleteResp, error)
-	ProductAttributeValueAdd(ctx context.Context, in *ProductAttributeValueAddReq, opts ...grpc.CallOption) (*ProductAttributeValueAddResp, error)
-	ProductAttributeValueList(ctx context.Context, in *ProductAttributeValueListReq, opts ...grpc.CallOption) (*ProductAttributeValueListResp, error)
-	ProductAttributeValueUpdate(ctx context.Context, in *ProductAttributeValueUpdateReq, opts ...grpc.CallOption) (*ProductAttributeValueUpdateResp, error)
-	ProductAttributeValueDelete(ctx context.Context, in *ProductAttributeValueDeleteReq, opts ...grpc.CallOption) (*ProductAttributeValueDeleteResp, error)
-	ProductCategoryAttributeRelationAdd(ctx context.Context, in *ProductCategoryAttributeRelationAddReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationAddResp, error)
-	ProductCategoryAttributeRelationList(ctx context.Context, in *ProductCategoryAttributeRelationListReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationListResp, error)
-	ProductCategoryAttributeRelationUpdate(ctx context.Context, in *ProductCategoryAttributeRelationUpdateReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationUpdateResp, error)
-	ProductCategoryAttributeRelationDelete(ctx context.Context, in *ProductCategoryAttributeRelationDeleteReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationDeleteResp, error)
-	ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq, opts ...grpc.CallOption) (*ProductCategoryAddResp, error)
-	ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
-	ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
-	ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error)
-	ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq, opts ...grpc.CallOption) (*ProductFullReductionAddResp, error)
-	ProductFullReductionList(ctx context.Context, in *ProductFullReductionListReq, opts ...grpc.CallOption) (*ProductFullReductionListResp, error)
-	ProductFullReductionUpdate(ctx context.Context, in *ProductFullReductionUpdateReq, opts ...grpc.CallOption) (*ProductFullReductionUpdateResp, error)
-	ProductFullReductionDelete(ctx context.Context, in *ProductFullReductionDeleteReq, opts ...grpc.CallOption) (*ProductFullReductionDeleteResp, error)
-	ProductLadderAdd(ctx context.Context, in *ProductLadderAddReq, opts ...grpc.CallOption) (*ProductLadderAddResp, error)
-	ProductLadderList(ctx context.Context, in *ProductLadderListReq, opts ...grpc.CallOption) (*ProductLadderListResp, error)
-	ProductLadderUpdate(ctx context.Context, in *ProductLadderUpdateReq, opts ...grpc.CallOption) (*ProductLadderUpdateResp, error)
-	ProductLadderDelete(ctx context.Context, in *ProductLadderDeleteReq, opts ...grpc.CallOption) (*ProductLadderDeleteResp, error)
-	ProductOperateLogAdd(ctx context.Context, in *ProductOperateLogAddReq, opts ...grpc.CallOption) (*ProductOperateLogAddResp, error)
-	ProductOperateLogList(ctx context.Context, in *ProductOperateLogListReq, opts ...grpc.CallOption) (*ProductOperateLogListResp, error)
-	ProductOperateLogUpdate(ctx context.Context, in *ProductOperateLogUpdateReq, opts ...grpc.CallOption) (*ProductOperateLogUpdateResp, error)
-	ProductOperateLogDelete(ctx context.Context, in *ProductOperateLogDeleteReq, opts ...grpc.CallOption) (*ProductOperateLogDeleteResp, error)
-	ProductVertifyRecordAdd(ctx context.Context, in *ProductVertifyRecordAddReq, opts ...grpc.CallOption) (*ProductVertifyRecordAddResp, error)
-	ProductVertifyRecordList(ctx context.Context, in *ProductVertifyRecordListReq, opts ...grpc.CallOption) (*ProductVertifyRecordListResp, error)
-	ProductVertifyRecordUpdate(ctx context.Context, in *ProductVertifyRecordUpdateReq, opts ...grpc.CallOption) (*ProductVertifyRecordUpdateResp, error)
-	ProductVertifyRecordDelete(ctx context.Context, in *ProductVertifyRecordDeleteReq, opts ...grpc.CallOption) (*ProductVertifyRecordDeleteResp, error)
-	SkuStockAdd(ctx context.Context, in *SkuStockAddReq, opts ...grpc.CallOption) (*SkuStockAddResp, error)
-	SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error)
-	SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error)
-	SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error)
 }
 
-type pmsClient struct {
+type productServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPmsClient(cc grpc.ClientConnInterface) PmsClient {
-	return &pmsClient{cc}
+func NewProductServiceClient(cc grpc.ClientConnInterface) ProductServiceClient {
+	return &productServiceClient{cc}
 }
 
-func (c *pmsClient) ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error) {
+func (c *productServiceClient) ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error) {
 	out := new(ProductAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductService/ProductAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pmsClient) ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error) {
+func (c *productServiceClient) ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error) {
 	out := new(ProductListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductService/ProductList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pmsClient) ProductListByIds(ctx context.Context, in *ProductByIdsReq, opts ...grpc.CallOption) (*ProductListResp, error) {
+func (c *productServiceClient) ProductListByIds(ctx context.Context, in *ProductByIdsReq, opts ...grpc.CallOption) (*ProductListResp, error) {
 	out := new(ProductListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductListByIds", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductService/ProductListByIds", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pmsClient) ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error) {
+func (c *productServiceClient) ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error) {
 	out := new(ProductUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductService/ProductUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pmsClient) ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error) {
+func (c *productServiceClient) ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error) {
 	out := new(ProductDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductService/ProductDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pmsClient) ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error) {
+func (c *productServiceClient) ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error) {
 	out := new(ProductDetailByIdResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductDetailById", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductService/ProductDetailById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pmsClient) AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error) {
-	out := new(AlbumAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/AlbumAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) AlbumList(ctx context.Context, in *AlbumListReq, opts ...grpc.CallOption) (*AlbumListResp, error) {
-	out := new(AlbumListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/AlbumList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) AlbumUpdate(ctx context.Context, in *AlbumUpdateReq, opts ...grpc.CallOption) (*AlbumUpdateResp, error) {
-	out := new(AlbumUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/AlbumUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) AlbumDelete(ctx context.Context, in *AlbumDeleteReq, opts ...grpc.CallOption) (*AlbumDeleteResp, error) {
-	out := new(AlbumDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/AlbumDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) AlbumPicAdd(ctx context.Context, in *AlbumPicAddReq, opts ...grpc.CallOption) (*AlbumPicAddResp, error) {
-	out := new(AlbumPicAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/AlbumPicAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) AlbumPicList(ctx context.Context, in *AlbumPicListReq, opts ...grpc.CallOption) (*AlbumPicListResp, error) {
-	out := new(AlbumPicListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/AlbumPicList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) AlbumPicUpdate(ctx context.Context, in *AlbumPicUpdateReq, opts ...grpc.CallOption) (*AlbumPicUpdateResp, error) {
-	out := new(AlbumPicUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/AlbumPicUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) AlbumPicDelete(ctx context.Context, in *AlbumPicDeleteReq, opts ...grpc.CallOption) (*AlbumPicDeleteResp, error) {
-	out := new(AlbumPicDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/AlbumPicDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) BrandAdd(ctx context.Context, in *BrandAddReq, opts ...grpc.CallOption) (*BrandAddResp, error) {
-	out := new(BrandAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/BrandAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) BrandList(ctx context.Context, in *BrandListReq, opts ...grpc.CallOption) (*BrandListResp, error) {
-	out := new(BrandListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/BrandList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) BrandListByIds(ctx context.Context, in *BrandListByIdsReq, opts ...grpc.CallOption) (*BrandListResp, error) {
-	out := new(BrandListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/BrandListByIds", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) BrandUpdate(ctx context.Context, in *BrandUpdateReq, opts ...grpc.CallOption) (*BrandUpdateResp, error) {
-	out := new(BrandUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/BrandUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error) {
-	out := new(BrandDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/BrandDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) CommentAdd(ctx context.Context, in *CommentAddReq, opts ...grpc.CallOption) (*CommentAddResp, error) {
-	out := new(CommentAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CommentAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) CommentList(ctx context.Context, in *CommentListReq, opts ...grpc.CallOption) (*CommentListResp, error) {
-	out := new(CommentListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CommentList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) CommentUpdate(ctx context.Context, in *CommentUpdateReq, opts ...grpc.CallOption) (*CommentUpdateResp, error) {
-	out := new(CommentUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CommentUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) CommentDelete(ctx context.Context, in *CommentDeleteReq, opts ...grpc.CallOption) (*CommentDeleteResp, error) {
-	out := new(CommentDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CommentDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) CommentReplayAdd(ctx context.Context, in *CommentReplayAddReq, opts ...grpc.CallOption) (*CommentReplayAddResp, error) {
-	out := new(CommentReplayAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CommentReplayAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) CommentReplayList(ctx context.Context, in *CommentReplayListReq, opts ...grpc.CallOption) (*CommentReplayListResp, error) {
-	out := new(CommentReplayListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CommentReplayList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) CommentReplayUpdate(ctx context.Context, in *CommentReplayUpdateReq, opts ...grpc.CallOption) (*CommentReplayUpdateResp, error) {
-	out := new(CommentReplayUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CommentReplayUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) CommentReplayDelete(ctx context.Context, in *CommentReplayDeleteReq, opts ...grpc.CallOption) (*CommentReplayDeleteResp, error) {
-	out := new(CommentReplayDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/CommentReplayDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) FeightTemplateAdd(ctx context.Context, in *FeightTemplateAddReq, opts ...grpc.CallOption) (*FeightTemplateAddResp, error) {
-	out := new(FeightTemplateAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/FeightTemplateAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) FeightTemplateList(ctx context.Context, in *FeightTemplateListReq, opts ...grpc.CallOption) (*FeightTemplateListResp, error) {
-	out := new(FeightTemplateListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/FeightTemplateList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) FeightTemplateUpdate(ctx context.Context, in *FeightTemplateUpdateReq, opts ...grpc.CallOption) (*FeightTemplateUpdateResp, error) {
-	out := new(FeightTemplateUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/FeightTemplateUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) FeightTemplateDelete(ctx context.Context, in *FeightTemplateDeleteReq, opts ...grpc.CallOption) (*FeightTemplateDeleteResp, error) {
-	out := new(FeightTemplateDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/FeightTemplateDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) MemberPriceAdd(ctx context.Context, in *MemberPriceAddReq, opts ...grpc.CallOption) (*MemberPriceAddResp, error) {
-	out := new(MemberPriceAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/MemberPriceAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) MemberPriceList(ctx context.Context, in *MemberPriceListReq, opts ...grpc.CallOption) (*MemberPriceListResp, error) {
-	out := new(MemberPriceListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/MemberPriceList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) MemberPriceUpdate(ctx context.Context, in *MemberPriceUpdateReq, opts ...grpc.CallOption) (*MemberPriceUpdateResp, error) {
-	out := new(MemberPriceUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/MemberPriceUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) MemberPriceDelete(ctx context.Context, in *MemberPriceDeleteReq, opts ...grpc.CallOption) (*MemberPriceDeleteResp, error) {
-	out := new(MemberPriceDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/MemberPriceDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeCategoryAdd(ctx context.Context, in *ProductAttributeCategoryAddReq, opts ...grpc.CallOption) (*ProductAttributeCategoryAddResp, error) {
-	out := new(ProductAttributeCategoryAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeCategoryAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeCategoryList(ctx context.Context, in *ProductAttributeCategoryListReq, opts ...grpc.CallOption) (*ProductAttributeCategoryListResp, error) {
-	out := new(ProductAttributeCategoryListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeCategoryList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeCategoryUpdate(ctx context.Context, in *ProductAttributeCategoryUpdateReq, opts ...grpc.CallOption) (*ProductAttributeCategoryUpdateResp, error) {
-	out := new(ProductAttributeCategoryUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeCategoryUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeCategoryDelete(ctx context.Context, in *ProductAttributeCategoryDeleteReq, opts ...grpc.CallOption) (*ProductAttributeCategoryDeleteResp, error) {
-	out := new(ProductAttributeCategoryDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeCategoryDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeAdd(ctx context.Context, in *ProductAttributeAddReq, opts ...grpc.CallOption) (*ProductAttributeAddResp, error) {
-	out := new(ProductAttributeAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeList(ctx context.Context, in *ProductAttributeListReq, opts ...grpc.CallOption) (*ProductAttributeListResp, error) {
-	out := new(ProductAttributeListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeUpdate(ctx context.Context, in *ProductAttributeUpdateReq, opts ...grpc.CallOption) (*ProductAttributeUpdateResp, error) {
-	out := new(ProductAttributeUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeDelete(ctx context.Context, in *ProductAttributeDeleteReq, opts ...grpc.CallOption) (*ProductAttributeDeleteResp, error) {
-	out := new(ProductAttributeDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeValueAdd(ctx context.Context, in *ProductAttributeValueAddReq, opts ...grpc.CallOption) (*ProductAttributeValueAddResp, error) {
-	out := new(ProductAttributeValueAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeValueAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeValueList(ctx context.Context, in *ProductAttributeValueListReq, opts ...grpc.CallOption) (*ProductAttributeValueListResp, error) {
-	out := new(ProductAttributeValueListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeValueList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeValueUpdate(ctx context.Context, in *ProductAttributeValueUpdateReq, opts ...grpc.CallOption) (*ProductAttributeValueUpdateResp, error) {
-	out := new(ProductAttributeValueUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeValueUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductAttributeValueDelete(ctx context.Context, in *ProductAttributeValueDeleteReq, opts ...grpc.CallOption) (*ProductAttributeValueDeleteResp, error) {
-	out := new(ProductAttributeValueDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductAttributeValueDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductCategoryAttributeRelationAdd(ctx context.Context, in *ProductCategoryAttributeRelationAddReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationAddResp, error) {
-	out := new(ProductCategoryAttributeRelationAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryAttributeRelationAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductCategoryAttributeRelationList(ctx context.Context, in *ProductCategoryAttributeRelationListReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationListResp, error) {
-	out := new(ProductCategoryAttributeRelationListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryAttributeRelationList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductCategoryAttributeRelationUpdate(ctx context.Context, in *ProductCategoryAttributeRelationUpdateReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationUpdateResp, error) {
-	out := new(ProductCategoryAttributeRelationUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryAttributeRelationUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductCategoryAttributeRelationDelete(ctx context.Context, in *ProductCategoryAttributeRelationDeleteReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationDeleteResp, error) {
-	out := new(ProductCategoryAttributeRelationDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryAttributeRelationDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq, opts ...grpc.CallOption) (*ProductCategoryAddResp, error) {
-	out := new(ProductCategoryAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error) {
-	out := new(ProductCategoryListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error) {
-	out := new(ProductCategoryUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error) {
-	out := new(ProductCategoryDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductCategoryDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq, opts ...grpc.CallOption) (*ProductFullReductionAddResp, error) {
-	out := new(ProductFullReductionAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductFullReductionAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductFullReductionList(ctx context.Context, in *ProductFullReductionListReq, opts ...grpc.CallOption) (*ProductFullReductionListResp, error) {
-	out := new(ProductFullReductionListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductFullReductionList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductFullReductionUpdate(ctx context.Context, in *ProductFullReductionUpdateReq, opts ...grpc.CallOption) (*ProductFullReductionUpdateResp, error) {
-	out := new(ProductFullReductionUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductFullReductionUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductFullReductionDelete(ctx context.Context, in *ProductFullReductionDeleteReq, opts ...grpc.CallOption) (*ProductFullReductionDeleteResp, error) {
-	out := new(ProductFullReductionDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductFullReductionDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductLadderAdd(ctx context.Context, in *ProductLadderAddReq, opts ...grpc.CallOption) (*ProductLadderAddResp, error) {
-	out := new(ProductLadderAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductLadderAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductLadderList(ctx context.Context, in *ProductLadderListReq, opts ...grpc.CallOption) (*ProductLadderListResp, error) {
-	out := new(ProductLadderListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductLadderList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductLadderUpdate(ctx context.Context, in *ProductLadderUpdateReq, opts ...grpc.CallOption) (*ProductLadderUpdateResp, error) {
-	out := new(ProductLadderUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductLadderUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductLadderDelete(ctx context.Context, in *ProductLadderDeleteReq, opts ...grpc.CallOption) (*ProductLadderDeleteResp, error) {
-	out := new(ProductLadderDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductLadderDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductOperateLogAdd(ctx context.Context, in *ProductOperateLogAddReq, opts ...grpc.CallOption) (*ProductOperateLogAddResp, error) {
-	out := new(ProductOperateLogAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductOperateLogAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductOperateLogList(ctx context.Context, in *ProductOperateLogListReq, opts ...grpc.CallOption) (*ProductOperateLogListResp, error) {
-	out := new(ProductOperateLogListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductOperateLogList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductOperateLogUpdate(ctx context.Context, in *ProductOperateLogUpdateReq, opts ...grpc.CallOption) (*ProductOperateLogUpdateResp, error) {
-	out := new(ProductOperateLogUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductOperateLogUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductOperateLogDelete(ctx context.Context, in *ProductOperateLogDeleteReq, opts ...grpc.CallOption) (*ProductOperateLogDeleteResp, error) {
-	out := new(ProductOperateLogDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductOperateLogDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductVertifyRecordAdd(ctx context.Context, in *ProductVertifyRecordAddReq, opts ...grpc.CallOption) (*ProductVertifyRecordAddResp, error) {
-	out := new(ProductVertifyRecordAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductVertifyRecordAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductVertifyRecordList(ctx context.Context, in *ProductVertifyRecordListReq, opts ...grpc.CallOption) (*ProductVertifyRecordListResp, error) {
-	out := new(ProductVertifyRecordListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductVertifyRecordList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductVertifyRecordUpdate(ctx context.Context, in *ProductVertifyRecordUpdateReq, opts ...grpc.CallOption) (*ProductVertifyRecordUpdateResp, error) {
-	out := new(ProductVertifyRecordUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductVertifyRecordUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) ProductVertifyRecordDelete(ctx context.Context, in *ProductVertifyRecordDeleteReq, opts ...grpc.CallOption) (*ProductVertifyRecordDeleteResp, error) {
-	out := new(ProductVertifyRecordDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/ProductVertifyRecordDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) SkuStockAdd(ctx context.Context, in *SkuStockAddReq, opts ...grpc.CallOption) (*SkuStockAddResp, error) {
-	out := new(SkuStockAddResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/SkuStockAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error) {
-	out := new(SkuStockListResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/SkuStockList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error) {
-	out := new(SkuStockUpdateResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/SkuStockUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pmsClient) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error) {
-	out := new(SkuStockDeleteResp)
-	err := c.cc.Invoke(ctx, "/pmsclient.Pms/SkuStockDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// PmsServer is the server API for Pms service.
-// All implementations must embed UnimplementedPmsServer
+// ProductServiceServer is the server API for ProductService service.
+// All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility
-type PmsServer interface {
+type ProductServiceServer interface {
 	ProductAdd(context.Context, *ProductAddReq) (*ProductAddResp, error)
 	ProductList(context.Context, *ProductListReq) (*ProductListResp, error)
 	ProductListByIds(context.Context, *ProductByIdsReq) (*ProductListResp, error)
 	ProductUpdate(context.Context, *ProductUpdateReq) (*ProductUpdateResp, error)
 	ProductDelete(context.Context, *ProductDeleteReq) (*ProductDeleteResp, error)
 	ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error)
-	AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error)
-	AlbumList(context.Context, *AlbumListReq) (*AlbumListResp, error)
-	AlbumUpdate(context.Context, *AlbumUpdateReq) (*AlbumUpdateResp, error)
-	AlbumDelete(context.Context, *AlbumDeleteReq) (*AlbumDeleteResp, error)
-	AlbumPicAdd(context.Context, *AlbumPicAddReq) (*AlbumPicAddResp, error)
-	AlbumPicList(context.Context, *AlbumPicListReq) (*AlbumPicListResp, error)
-	AlbumPicUpdate(context.Context, *AlbumPicUpdateReq) (*AlbumPicUpdateResp, error)
-	AlbumPicDelete(context.Context, *AlbumPicDeleteReq) (*AlbumPicDeleteResp, error)
-	BrandAdd(context.Context, *BrandAddReq) (*BrandAddResp, error)
-	BrandList(context.Context, *BrandListReq) (*BrandListResp, error)
-	BrandListByIds(context.Context, *BrandListByIdsReq) (*BrandListResp, error)
-	BrandUpdate(context.Context, *BrandUpdateReq) (*BrandUpdateResp, error)
-	BrandDelete(context.Context, *BrandDeleteReq) (*BrandDeleteResp, error)
-	CommentAdd(context.Context, *CommentAddReq) (*CommentAddResp, error)
-	CommentList(context.Context, *CommentListReq) (*CommentListResp, error)
-	CommentUpdate(context.Context, *CommentUpdateReq) (*CommentUpdateResp, error)
-	CommentDelete(context.Context, *CommentDeleteReq) (*CommentDeleteResp, error)
-	CommentReplayAdd(context.Context, *CommentReplayAddReq) (*CommentReplayAddResp, error)
-	CommentReplayList(context.Context, *CommentReplayListReq) (*CommentReplayListResp, error)
-	CommentReplayUpdate(context.Context, *CommentReplayUpdateReq) (*CommentReplayUpdateResp, error)
-	CommentReplayDelete(context.Context, *CommentReplayDeleteReq) (*CommentReplayDeleteResp, error)
-	FeightTemplateAdd(context.Context, *FeightTemplateAddReq) (*FeightTemplateAddResp, error)
-	FeightTemplateList(context.Context, *FeightTemplateListReq) (*FeightTemplateListResp, error)
-	FeightTemplateUpdate(context.Context, *FeightTemplateUpdateReq) (*FeightTemplateUpdateResp, error)
-	FeightTemplateDelete(context.Context, *FeightTemplateDeleteReq) (*FeightTemplateDeleteResp, error)
-	MemberPriceAdd(context.Context, *MemberPriceAddReq) (*MemberPriceAddResp, error)
-	MemberPriceList(context.Context, *MemberPriceListReq) (*MemberPriceListResp, error)
-	MemberPriceUpdate(context.Context, *MemberPriceUpdateReq) (*MemberPriceUpdateResp, error)
-	MemberPriceDelete(context.Context, *MemberPriceDeleteReq) (*MemberPriceDeleteResp, error)
-	ProductAttributeCategoryAdd(context.Context, *ProductAttributeCategoryAddReq) (*ProductAttributeCategoryAddResp, error)
-	ProductAttributeCategoryList(context.Context, *ProductAttributeCategoryListReq) (*ProductAttributeCategoryListResp, error)
-	ProductAttributeCategoryUpdate(context.Context, *ProductAttributeCategoryUpdateReq) (*ProductAttributeCategoryUpdateResp, error)
-	ProductAttributeCategoryDelete(context.Context, *ProductAttributeCategoryDeleteReq) (*ProductAttributeCategoryDeleteResp, error)
-	ProductAttributeAdd(context.Context, *ProductAttributeAddReq) (*ProductAttributeAddResp, error)
-	ProductAttributeList(context.Context, *ProductAttributeListReq) (*ProductAttributeListResp, error)
-	ProductAttributeUpdate(context.Context, *ProductAttributeUpdateReq) (*ProductAttributeUpdateResp, error)
-	ProductAttributeDelete(context.Context, *ProductAttributeDeleteReq) (*ProductAttributeDeleteResp, error)
-	ProductAttributeValueAdd(context.Context, *ProductAttributeValueAddReq) (*ProductAttributeValueAddResp, error)
-	ProductAttributeValueList(context.Context, *ProductAttributeValueListReq) (*ProductAttributeValueListResp, error)
-	ProductAttributeValueUpdate(context.Context, *ProductAttributeValueUpdateReq) (*ProductAttributeValueUpdateResp, error)
-	ProductAttributeValueDelete(context.Context, *ProductAttributeValueDeleteReq) (*ProductAttributeValueDeleteResp, error)
-	ProductCategoryAttributeRelationAdd(context.Context, *ProductCategoryAttributeRelationAddReq) (*ProductCategoryAttributeRelationAddResp, error)
-	ProductCategoryAttributeRelationList(context.Context, *ProductCategoryAttributeRelationListReq) (*ProductCategoryAttributeRelationListResp, error)
-	ProductCategoryAttributeRelationUpdate(context.Context, *ProductCategoryAttributeRelationUpdateReq) (*ProductCategoryAttributeRelationUpdateResp, error)
-	ProductCategoryAttributeRelationDelete(context.Context, *ProductCategoryAttributeRelationDeleteReq) (*ProductCategoryAttributeRelationDeleteResp, error)
-	ProductCategoryAdd(context.Context, *ProductCategoryAddReq) (*ProductCategoryAddResp, error)
-	ProductCategoryList(context.Context, *ProductCategoryListReq) (*ProductCategoryListResp, error)
-	ProductCategoryUpdate(context.Context, *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error)
-	ProductCategoryDelete(context.Context, *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error)
-	ProductFullReductionAdd(context.Context, *ProductFullReductionAddReq) (*ProductFullReductionAddResp, error)
-	ProductFullReductionList(context.Context, *ProductFullReductionListReq) (*ProductFullReductionListResp, error)
-	ProductFullReductionUpdate(context.Context, *ProductFullReductionUpdateReq) (*ProductFullReductionUpdateResp, error)
-	ProductFullReductionDelete(context.Context, *ProductFullReductionDeleteReq) (*ProductFullReductionDeleteResp, error)
-	ProductLadderAdd(context.Context, *ProductLadderAddReq) (*ProductLadderAddResp, error)
-	ProductLadderList(context.Context, *ProductLadderListReq) (*ProductLadderListResp, error)
-	ProductLadderUpdate(context.Context, *ProductLadderUpdateReq) (*ProductLadderUpdateResp, error)
-	ProductLadderDelete(context.Context, *ProductLadderDeleteReq) (*ProductLadderDeleteResp, error)
-	ProductOperateLogAdd(context.Context, *ProductOperateLogAddReq) (*ProductOperateLogAddResp, error)
-	ProductOperateLogList(context.Context, *ProductOperateLogListReq) (*ProductOperateLogListResp, error)
-	ProductOperateLogUpdate(context.Context, *ProductOperateLogUpdateReq) (*ProductOperateLogUpdateResp, error)
-	ProductOperateLogDelete(context.Context, *ProductOperateLogDeleteReq) (*ProductOperateLogDeleteResp, error)
-	ProductVertifyRecordAdd(context.Context, *ProductVertifyRecordAddReq) (*ProductVertifyRecordAddResp, error)
-	ProductVertifyRecordList(context.Context, *ProductVertifyRecordListReq) (*ProductVertifyRecordListResp, error)
-	ProductVertifyRecordUpdate(context.Context, *ProductVertifyRecordUpdateReq) (*ProductVertifyRecordUpdateResp, error)
-	ProductVertifyRecordDelete(context.Context, *ProductVertifyRecordDeleteReq) (*ProductVertifyRecordDeleteResp, error)
-	SkuStockAdd(context.Context, *SkuStockAddReq) (*SkuStockAddResp, error)
-	SkuStockList(context.Context, *SkuStockListReq) (*SkuStockListResp, error)
-	SkuStockUpdate(context.Context, *SkuStockUpdateReq) (*SkuStockUpdateResp, error)
-	SkuStockDelete(context.Context, *SkuStockDeleteReq) (*SkuStockDeleteResp, error)
-	mustEmbedUnimplementedPmsServer()
+	mustEmbedUnimplementedProductServiceServer()
 }
 
-// UnimplementedPmsServer must be embedded to have forward compatible implementations.
-type UnimplementedPmsServer struct {
+// UnimplementedProductServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductServiceServer struct {
 }
 
-func (UnimplementedPmsServer) ProductAdd(context.Context, *ProductAddReq) (*ProductAddResp, error) {
+func (UnimplementedProductServiceServer) ProductAdd(context.Context, *ProductAddReq) (*ProductAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductAdd not implemented")
 }
-func (UnimplementedPmsServer) ProductList(context.Context, *ProductListReq) (*ProductListResp, error) {
+func (UnimplementedProductServiceServer) ProductList(context.Context, *ProductListReq) (*ProductListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductList not implemented")
 }
-func (UnimplementedPmsServer) ProductListByIds(context.Context, *ProductByIdsReq) (*ProductListResp, error) {
+func (UnimplementedProductServiceServer) ProductListByIds(context.Context, *ProductByIdsReq) (*ProductListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductListByIds not implemented")
 }
-func (UnimplementedPmsServer) ProductUpdate(context.Context, *ProductUpdateReq) (*ProductUpdateResp, error) {
+func (UnimplementedProductServiceServer) ProductUpdate(context.Context, *ProductUpdateReq) (*ProductUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductUpdate not implemented")
 }
-func (UnimplementedPmsServer) ProductDelete(context.Context, *ProductDeleteReq) (*ProductDeleteResp, error) {
+func (UnimplementedProductServiceServer) ProductDelete(context.Context, *ProductDeleteReq) (*ProductDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductDelete not implemented")
 }
-func (UnimplementedPmsServer) ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error) {
+func (UnimplementedProductServiceServer) ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductDetailById not implemented")
 }
-func (UnimplementedPmsServer) AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AlbumAdd not implemented")
-}
-func (UnimplementedPmsServer) AlbumList(context.Context, *AlbumListReq) (*AlbumListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AlbumList not implemented")
-}
-func (UnimplementedPmsServer) AlbumUpdate(context.Context, *AlbumUpdateReq) (*AlbumUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AlbumUpdate not implemented")
-}
-func (UnimplementedPmsServer) AlbumDelete(context.Context, *AlbumDeleteReq) (*AlbumDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AlbumDelete not implemented")
-}
-func (UnimplementedPmsServer) AlbumPicAdd(context.Context, *AlbumPicAddReq) (*AlbumPicAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AlbumPicAdd not implemented")
-}
-func (UnimplementedPmsServer) AlbumPicList(context.Context, *AlbumPicListReq) (*AlbumPicListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AlbumPicList not implemented")
-}
-func (UnimplementedPmsServer) AlbumPicUpdate(context.Context, *AlbumPicUpdateReq) (*AlbumPicUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AlbumPicUpdate not implemented")
-}
-func (UnimplementedPmsServer) AlbumPicDelete(context.Context, *AlbumPicDeleteReq) (*AlbumPicDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AlbumPicDelete not implemented")
-}
-func (UnimplementedPmsServer) BrandAdd(context.Context, *BrandAddReq) (*BrandAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BrandAdd not implemented")
-}
-func (UnimplementedPmsServer) BrandList(context.Context, *BrandListReq) (*BrandListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BrandList not implemented")
-}
-func (UnimplementedPmsServer) BrandListByIds(context.Context, *BrandListByIdsReq) (*BrandListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BrandListByIds not implemented")
-}
-func (UnimplementedPmsServer) BrandUpdate(context.Context, *BrandUpdateReq) (*BrandUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BrandUpdate not implemented")
-}
-func (UnimplementedPmsServer) BrandDelete(context.Context, *BrandDeleteReq) (*BrandDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BrandDelete not implemented")
-}
-func (UnimplementedPmsServer) CommentAdd(context.Context, *CommentAddReq) (*CommentAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CommentAdd not implemented")
-}
-func (UnimplementedPmsServer) CommentList(context.Context, *CommentListReq) (*CommentListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CommentList not implemented")
-}
-func (UnimplementedPmsServer) CommentUpdate(context.Context, *CommentUpdateReq) (*CommentUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CommentUpdate not implemented")
-}
-func (UnimplementedPmsServer) CommentDelete(context.Context, *CommentDeleteReq) (*CommentDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CommentDelete not implemented")
-}
-func (UnimplementedPmsServer) CommentReplayAdd(context.Context, *CommentReplayAddReq) (*CommentReplayAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CommentReplayAdd not implemented")
-}
-func (UnimplementedPmsServer) CommentReplayList(context.Context, *CommentReplayListReq) (*CommentReplayListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CommentReplayList not implemented")
-}
-func (UnimplementedPmsServer) CommentReplayUpdate(context.Context, *CommentReplayUpdateReq) (*CommentReplayUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CommentReplayUpdate not implemented")
-}
-func (UnimplementedPmsServer) CommentReplayDelete(context.Context, *CommentReplayDeleteReq) (*CommentReplayDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CommentReplayDelete not implemented")
-}
-func (UnimplementedPmsServer) FeightTemplateAdd(context.Context, *FeightTemplateAddReq) (*FeightTemplateAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FeightTemplateAdd not implemented")
-}
-func (UnimplementedPmsServer) FeightTemplateList(context.Context, *FeightTemplateListReq) (*FeightTemplateListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FeightTemplateList not implemented")
-}
-func (UnimplementedPmsServer) FeightTemplateUpdate(context.Context, *FeightTemplateUpdateReq) (*FeightTemplateUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FeightTemplateUpdate not implemented")
-}
-func (UnimplementedPmsServer) FeightTemplateDelete(context.Context, *FeightTemplateDeleteReq) (*FeightTemplateDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FeightTemplateDelete not implemented")
-}
-func (UnimplementedPmsServer) MemberPriceAdd(context.Context, *MemberPriceAddReq) (*MemberPriceAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MemberPriceAdd not implemented")
-}
-func (UnimplementedPmsServer) MemberPriceList(context.Context, *MemberPriceListReq) (*MemberPriceListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MemberPriceList not implemented")
-}
-func (UnimplementedPmsServer) MemberPriceUpdate(context.Context, *MemberPriceUpdateReq) (*MemberPriceUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MemberPriceUpdate not implemented")
-}
-func (UnimplementedPmsServer) MemberPriceDelete(context.Context, *MemberPriceDeleteReq) (*MemberPriceDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MemberPriceDelete not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeCategoryAdd(context.Context, *ProductAttributeCategoryAddReq) (*ProductAttributeCategoryAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeCategoryAdd not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeCategoryList(context.Context, *ProductAttributeCategoryListReq) (*ProductAttributeCategoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeCategoryList not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeCategoryUpdate(context.Context, *ProductAttributeCategoryUpdateReq) (*ProductAttributeCategoryUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeCategoryUpdate not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeCategoryDelete(context.Context, *ProductAttributeCategoryDeleteReq) (*ProductAttributeCategoryDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeCategoryDelete not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeAdd(context.Context, *ProductAttributeAddReq) (*ProductAttributeAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeAdd not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeList(context.Context, *ProductAttributeListReq) (*ProductAttributeListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeList not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeUpdate(context.Context, *ProductAttributeUpdateReq) (*ProductAttributeUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeUpdate not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeDelete(context.Context, *ProductAttributeDeleteReq) (*ProductAttributeDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeDelete not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeValueAdd(context.Context, *ProductAttributeValueAddReq) (*ProductAttributeValueAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeValueAdd not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeValueList(context.Context, *ProductAttributeValueListReq) (*ProductAttributeValueListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeValueList not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeValueUpdate(context.Context, *ProductAttributeValueUpdateReq) (*ProductAttributeValueUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeValueUpdate not implemented")
-}
-func (UnimplementedPmsServer) ProductAttributeValueDelete(context.Context, *ProductAttributeValueDeleteReq) (*ProductAttributeValueDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeValueDelete not implemented")
-}
-func (UnimplementedPmsServer) ProductCategoryAttributeRelationAdd(context.Context, *ProductCategoryAttributeRelationAddReq) (*ProductCategoryAttributeRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAttributeRelationAdd not implemented")
-}
-func (UnimplementedPmsServer) ProductCategoryAttributeRelationList(context.Context, *ProductCategoryAttributeRelationListReq) (*ProductCategoryAttributeRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAttributeRelationList not implemented")
-}
-func (UnimplementedPmsServer) ProductCategoryAttributeRelationUpdate(context.Context, *ProductCategoryAttributeRelationUpdateReq) (*ProductCategoryAttributeRelationUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAttributeRelationUpdate not implemented")
-}
-func (UnimplementedPmsServer) ProductCategoryAttributeRelationDelete(context.Context, *ProductCategoryAttributeRelationDeleteReq) (*ProductCategoryAttributeRelationDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAttributeRelationDelete not implemented")
-}
-func (UnimplementedPmsServer) ProductCategoryAdd(context.Context, *ProductCategoryAddReq) (*ProductCategoryAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAdd not implemented")
-}
-func (UnimplementedPmsServer) ProductCategoryList(context.Context, *ProductCategoryListReq) (*ProductCategoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryList not implemented")
-}
-func (UnimplementedPmsServer) ProductCategoryUpdate(context.Context, *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryUpdate not implemented")
-}
-func (UnimplementedPmsServer) ProductCategoryDelete(context.Context, *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryDelete not implemented")
-}
-func (UnimplementedPmsServer) ProductFullReductionAdd(context.Context, *ProductFullReductionAddReq) (*ProductFullReductionAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductFullReductionAdd not implemented")
-}
-func (UnimplementedPmsServer) ProductFullReductionList(context.Context, *ProductFullReductionListReq) (*ProductFullReductionListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductFullReductionList not implemented")
-}
-func (UnimplementedPmsServer) ProductFullReductionUpdate(context.Context, *ProductFullReductionUpdateReq) (*ProductFullReductionUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductFullReductionUpdate not implemented")
-}
-func (UnimplementedPmsServer) ProductFullReductionDelete(context.Context, *ProductFullReductionDeleteReq) (*ProductFullReductionDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductFullReductionDelete not implemented")
-}
-func (UnimplementedPmsServer) ProductLadderAdd(context.Context, *ProductLadderAddReq) (*ProductLadderAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductLadderAdd not implemented")
-}
-func (UnimplementedPmsServer) ProductLadderList(context.Context, *ProductLadderListReq) (*ProductLadderListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductLadderList not implemented")
-}
-func (UnimplementedPmsServer) ProductLadderUpdate(context.Context, *ProductLadderUpdateReq) (*ProductLadderUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductLadderUpdate not implemented")
-}
-func (UnimplementedPmsServer) ProductLadderDelete(context.Context, *ProductLadderDeleteReq) (*ProductLadderDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductLadderDelete not implemented")
-}
-func (UnimplementedPmsServer) ProductOperateLogAdd(context.Context, *ProductOperateLogAddReq) (*ProductOperateLogAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductOperateLogAdd not implemented")
-}
-func (UnimplementedPmsServer) ProductOperateLogList(context.Context, *ProductOperateLogListReq) (*ProductOperateLogListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductOperateLogList not implemented")
-}
-func (UnimplementedPmsServer) ProductOperateLogUpdate(context.Context, *ProductOperateLogUpdateReq) (*ProductOperateLogUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductOperateLogUpdate not implemented")
-}
-func (UnimplementedPmsServer) ProductOperateLogDelete(context.Context, *ProductOperateLogDeleteReq) (*ProductOperateLogDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductOperateLogDelete not implemented")
-}
-func (UnimplementedPmsServer) ProductVertifyRecordAdd(context.Context, *ProductVertifyRecordAddReq) (*ProductVertifyRecordAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductVertifyRecordAdd not implemented")
-}
-func (UnimplementedPmsServer) ProductVertifyRecordList(context.Context, *ProductVertifyRecordListReq) (*ProductVertifyRecordListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductVertifyRecordList not implemented")
-}
-func (UnimplementedPmsServer) ProductVertifyRecordUpdate(context.Context, *ProductVertifyRecordUpdateReq) (*ProductVertifyRecordUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductVertifyRecordUpdate not implemented")
-}
-func (UnimplementedPmsServer) ProductVertifyRecordDelete(context.Context, *ProductVertifyRecordDeleteReq) (*ProductVertifyRecordDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProductVertifyRecordDelete not implemented")
-}
-func (UnimplementedPmsServer) SkuStockAdd(context.Context, *SkuStockAddReq) (*SkuStockAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SkuStockAdd not implemented")
-}
-func (UnimplementedPmsServer) SkuStockList(context.Context, *SkuStockListReq) (*SkuStockListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SkuStockList not implemented")
-}
-func (UnimplementedPmsServer) SkuStockUpdate(context.Context, *SkuStockUpdateReq) (*SkuStockUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SkuStockUpdate not implemented")
-}
-func (UnimplementedPmsServer) SkuStockDelete(context.Context, *SkuStockDeleteReq) (*SkuStockDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SkuStockDelete not implemented")
-}
-func (UnimplementedPmsServer) mustEmbedUnimplementedPmsServer() {}
+func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 
-// UnsafePmsServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PmsServer will
+// UnsafeProductServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductServiceServer will
 // result in compilation errors.
-type UnsafePmsServer interface {
-	mustEmbedUnimplementedPmsServer()
+type UnsafeProductServiceServer interface {
+	mustEmbedUnimplementedProductServiceServer()
 }
 
-func RegisterPmsServer(s grpc.ServiceRegistrar, srv PmsServer) {
-	s.RegisterService(&Pms_ServiceDesc, srv)
+func RegisterProductServiceServer(s grpc.ServiceRegistrar, srv ProductServiceServer) {
+	s.RegisterService(&ProductService_ServiceDesc, srv)
 }
 
-func _Pms_ProductAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_ProductAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAdd(ctx, in)
+		return srv.(ProductServiceServer).ProductAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAdd",
+		FullMethod: "/pmsclient.ProductService/ProductAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAdd(ctx, req.(*ProductAddReq))
+		return srv.(ProductServiceServer).ProductAdd(ctx, req.(*ProductAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_ProductList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductList(ctx, in)
+		return srv.(ProductServiceServer).ProductList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductList",
+		FullMethod: "/pmsclient.ProductService/ProductList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductList(ctx, req.(*ProductListReq))
+		return srv.(ProductServiceServer).ProductList(ctx, req.(*ProductListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_ProductListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductByIdsReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductListByIds(ctx, in)
+		return srv.(ProductServiceServer).ProductListByIds(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductListByIds",
+		FullMethod: "/pmsclient.ProductService/ProductListByIds",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductListByIds(ctx, req.(*ProductByIdsReq))
+		return srv.(ProductServiceServer).ProductListByIds(ctx, req.(*ProductByIdsReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_ProductUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductUpdate(ctx, in)
+		return srv.(ProductServiceServer).ProductUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductUpdate",
+		FullMethod: "/pmsclient.ProductService/ProductUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductUpdate(ctx, req.(*ProductUpdateReq))
+		return srv.(ProductServiceServer).ProductUpdate(ctx, req.(*ProductUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_ProductDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductDelete(ctx, in)
+		return srv.(ProductServiceServer).ProductDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductDelete",
+		FullMethod: "/pmsclient.ProductService/ProductDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductDelete(ctx, req.(*ProductDeleteReq))
+		return srv.(ProductServiceServer).ProductDelete(ctx, req.(*ProductDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductDetailById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_ProductDetailById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductDetailByIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductDetailById(ctx, in)
+		return srv.(ProductServiceServer).ProductDetailById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductDetailById",
+		FullMethod: "/pmsclient.ProductService/ProductDetailById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductDetailById(ctx, req.(*ProductDetailByIdReq))
+		return srv.(ProductServiceServer).ProductDetailById(ctx, req.(*ProductDetailByIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_AlbumAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductService",
+	HandlerType: (*ProductServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductAdd",
+			Handler:    _ProductService_ProductAdd_Handler,
+		},
+		{
+			MethodName: "ProductList",
+			Handler:    _ProductService_ProductList_Handler,
+		},
+		{
+			MethodName: "ProductListByIds",
+			Handler:    _ProductService_ProductListByIds_Handler,
+		},
+		{
+			MethodName: "ProductUpdate",
+			Handler:    _ProductService_ProductUpdate_Handler,
+		},
+		{
+			MethodName: "ProductDelete",
+			Handler:    _ProductService_ProductDelete_Handler,
+		},
+		{
+			MethodName: "ProductDetailById",
+			Handler:    _ProductService_ProductDetailById_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// AlbumServiceClient is the client API for AlbumService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AlbumServiceClient interface {
+	AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error)
+	AlbumList(ctx context.Context, in *AlbumListReq, opts ...grpc.CallOption) (*AlbumListResp, error)
+	AlbumUpdate(ctx context.Context, in *AlbumUpdateReq, opts ...grpc.CallOption) (*AlbumUpdateResp, error)
+	AlbumDelete(ctx context.Context, in *AlbumDeleteReq, opts ...grpc.CallOption) (*AlbumDeleteResp, error)
+}
+
+type albumServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAlbumServiceClient(cc grpc.ClientConnInterface) AlbumServiceClient {
+	return &albumServiceClient{cc}
+}
+
+func (c *albumServiceClient) AlbumAdd(ctx context.Context, in *AlbumAddReq, opts ...grpc.CallOption) (*AlbumAddResp, error) {
+	out := new(AlbumAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.AlbumService/AlbumAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *albumServiceClient) AlbumList(ctx context.Context, in *AlbumListReq, opts ...grpc.CallOption) (*AlbumListResp, error) {
+	out := new(AlbumListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.AlbumService/AlbumList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *albumServiceClient) AlbumUpdate(ctx context.Context, in *AlbumUpdateReq, opts ...grpc.CallOption) (*AlbumUpdateResp, error) {
+	out := new(AlbumUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.AlbumService/AlbumUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *albumServiceClient) AlbumDelete(ctx context.Context, in *AlbumDeleteReq, opts ...grpc.CallOption) (*AlbumDeleteResp, error) {
+	out := new(AlbumDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.AlbumService/AlbumDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AlbumServiceServer is the server API for AlbumService service.
+// All implementations must embed UnimplementedAlbumServiceServer
+// for forward compatibility
+type AlbumServiceServer interface {
+	AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error)
+	AlbumList(context.Context, *AlbumListReq) (*AlbumListResp, error)
+	AlbumUpdate(context.Context, *AlbumUpdateReq) (*AlbumUpdateResp, error)
+	AlbumDelete(context.Context, *AlbumDeleteReq) (*AlbumDeleteResp, error)
+	mustEmbedUnimplementedAlbumServiceServer()
+}
+
+// UnimplementedAlbumServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedAlbumServiceServer struct {
+}
+
+func (UnimplementedAlbumServiceServer) AlbumAdd(context.Context, *AlbumAddReq) (*AlbumAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AlbumAdd not implemented")
+}
+func (UnimplementedAlbumServiceServer) AlbumList(context.Context, *AlbumListReq) (*AlbumListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AlbumList not implemented")
+}
+func (UnimplementedAlbumServiceServer) AlbumUpdate(context.Context, *AlbumUpdateReq) (*AlbumUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AlbumUpdate not implemented")
+}
+func (UnimplementedAlbumServiceServer) AlbumDelete(context.Context, *AlbumDeleteReq) (*AlbumDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AlbumDelete not implemented")
+}
+func (UnimplementedAlbumServiceServer) mustEmbedUnimplementedAlbumServiceServer() {}
+
+// UnsafeAlbumServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AlbumServiceServer will
+// result in compilation errors.
+type UnsafeAlbumServiceServer interface {
+	mustEmbedUnimplementedAlbumServiceServer()
+}
+
+func RegisterAlbumServiceServer(s grpc.ServiceRegistrar, srv AlbumServiceServer) {
+	s.RegisterService(&AlbumService_ServiceDesc, srv)
+}
+
+func _AlbumService_AlbumAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlbumAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).AlbumAdd(ctx, in)
+		return srv.(AlbumServiceServer).AlbumAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/AlbumAdd",
+		FullMethod: "/pmsclient.AlbumService/AlbumAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).AlbumAdd(ctx, req.(*AlbumAddReq))
+		return srv.(AlbumServiceServer).AlbumAdd(ctx, req.(*AlbumAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_AlbumList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlbumService_AlbumList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlbumListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).AlbumList(ctx, in)
+		return srv.(AlbumServiceServer).AlbumList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/AlbumList",
+		FullMethod: "/pmsclient.AlbumService/AlbumList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).AlbumList(ctx, req.(*AlbumListReq))
+		return srv.(AlbumServiceServer).AlbumList(ctx, req.(*AlbumListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_AlbumUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlbumService_AlbumUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlbumUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).AlbumUpdate(ctx, in)
+		return srv.(AlbumServiceServer).AlbumUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/AlbumUpdate",
+		FullMethod: "/pmsclient.AlbumService/AlbumUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).AlbumUpdate(ctx, req.(*AlbumUpdateReq))
+		return srv.(AlbumServiceServer).AlbumUpdate(ctx, req.(*AlbumUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_AlbumDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlbumService_AlbumDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlbumDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).AlbumDelete(ctx, in)
+		return srv.(AlbumServiceServer).AlbumDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/AlbumDelete",
+		FullMethod: "/pmsclient.AlbumService/AlbumDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).AlbumDelete(ctx, req.(*AlbumDeleteReq))
+		return srv.(AlbumServiceServer).AlbumDelete(ctx, req.(*AlbumDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_AlbumPicAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// AlbumService_ServiceDesc is the grpc.ServiceDesc for AlbumService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AlbumService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.AlbumService",
+	HandlerType: (*AlbumServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AlbumAdd",
+			Handler:    _AlbumService_AlbumAdd_Handler,
+		},
+		{
+			MethodName: "AlbumList",
+			Handler:    _AlbumService_AlbumList_Handler,
+		},
+		{
+			MethodName: "AlbumUpdate",
+			Handler:    _AlbumService_AlbumUpdate_Handler,
+		},
+		{
+			MethodName: "AlbumDelete",
+			Handler:    _AlbumService_AlbumDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// AlbumPicServiceClient is the client API for AlbumPicService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AlbumPicServiceClient interface {
+	AlbumPicAdd(ctx context.Context, in *AlbumPicAddReq, opts ...grpc.CallOption) (*AlbumPicAddResp, error)
+	AlbumPicList(ctx context.Context, in *AlbumPicListReq, opts ...grpc.CallOption) (*AlbumPicListResp, error)
+	AlbumPicUpdate(ctx context.Context, in *AlbumPicUpdateReq, opts ...grpc.CallOption) (*AlbumPicUpdateResp, error)
+	AlbumPicDelete(ctx context.Context, in *AlbumPicDeleteReq, opts ...grpc.CallOption) (*AlbumPicDeleteResp, error)
+}
+
+type albumPicServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAlbumPicServiceClient(cc grpc.ClientConnInterface) AlbumPicServiceClient {
+	return &albumPicServiceClient{cc}
+}
+
+func (c *albumPicServiceClient) AlbumPicAdd(ctx context.Context, in *AlbumPicAddReq, opts ...grpc.CallOption) (*AlbumPicAddResp, error) {
+	out := new(AlbumPicAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.AlbumPicService/AlbumPicAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *albumPicServiceClient) AlbumPicList(ctx context.Context, in *AlbumPicListReq, opts ...grpc.CallOption) (*AlbumPicListResp, error) {
+	out := new(AlbumPicListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.AlbumPicService/AlbumPicList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *albumPicServiceClient) AlbumPicUpdate(ctx context.Context, in *AlbumPicUpdateReq, opts ...grpc.CallOption) (*AlbumPicUpdateResp, error) {
+	out := new(AlbumPicUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.AlbumPicService/AlbumPicUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *albumPicServiceClient) AlbumPicDelete(ctx context.Context, in *AlbumPicDeleteReq, opts ...grpc.CallOption) (*AlbumPicDeleteResp, error) {
+	out := new(AlbumPicDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.AlbumPicService/AlbumPicDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AlbumPicServiceServer is the server API for AlbumPicService service.
+// All implementations must embed UnimplementedAlbumPicServiceServer
+// for forward compatibility
+type AlbumPicServiceServer interface {
+	AlbumPicAdd(context.Context, *AlbumPicAddReq) (*AlbumPicAddResp, error)
+	AlbumPicList(context.Context, *AlbumPicListReq) (*AlbumPicListResp, error)
+	AlbumPicUpdate(context.Context, *AlbumPicUpdateReq) (*AlbumPicUpdateResp, error)
+	AlbumPicDelete(context.Context, *AlbumPicDeleteReq) (*AlbumPicDeleteResp, error)
+	mustEmbedUnimplementedAlbumPicServiceServer()
+}
+
+// UnimplementedAlbumPicServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedAlbumPicServiceServer struct {
+}
+
+func (UnimplementedAlbumPicServiceServer) AlbumPicAdd(context.Context, *AlbumPicAddReq) (*AlbumPicAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AlbumPicAdd not implemented")
+}
+func (UnimplementedAlbumPicServiceServer) AlbumPicList(context.Context, *AlbumPicListReq) (*AlbumPicListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AlbumPicList not implemented")
+}
+func (UnimplementedAlbumPicServiceServer) AlbumPicUpdate(context.Context, *AlbumPicUpdateReq) (*AlbumPicUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AlbumPicUpdate not implemented")
+}
+func (UnimplementedAlbumPicServiceServer) AlbumPicDelete(context.Context, *AlbumPicDeleteReq) (*AlbumPicDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AlbumPicDelete not implemented")
+}
+func (UnimplementedAlbumPicServiceServer) mustEmbedUnimplementedAlbumPicServiceServer() {}
+
+// UnsafeAlbumPicServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AlbumPicServiceServer will
+// result in compilation errors.
+type UnsafeAlbumPicServiceServer interface {
+	mustEmbedUnimplementedAlbumPicServiceServer()
+}
+
+func RegisterAlbumPicServiceServer(s grpc.ServiceRegistrar, srv AlbumPicServiceServer) {
+	s.RegisterService(&AlbumPicService_ServiceDesc, srv)
+}
+
+func _AlbumPicService_AlbumPicAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlbumPicAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).AlbumPicAdd(ctx, in)
+		return srv.(AlbumPicServiceServer).AlbumPicAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/AlbumPicAdd",
+		FullMethod: "/pmsclient.AlbumPicService/AlbumPicAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).AlbumPicAdd(ctx, req.(*AlbumPicAddReq))
+		return srv.(AlbumPicServiceServer).AlbumPicAdd(ctx, req.(*AlbumPicAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_AlbumPicList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlbumPicService_AlbumPicList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlbumPicListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).AlbumPicList(ctx, in)
+		return srv.(AlbumPicServiceServer).AlbumPicList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/AlbumPicList",
+		FullMethod: "/pmsclient.AlbumPicService/AlbumPicList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).AlbumPicList(ctx, req.(*AlbumPicListReq))
+		return srv.(AlbumPicServiceServer).AlbumPicList(ctx, req.(*AlbumPicListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_AlbumPicUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlbumPicService_AlbumPicUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlbumPicUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).AlbumPicUpdate(ctx, in)
+		return srv.(AlbumPicServiceServer).AlbumPicUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/AlbumPicUpdate",
+		FullMethod: "/pmsclient.AlbumPicService/AlbumPicUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).AlbumPicUpdate(ctx, req.(*AlbumPicUpdateReq))
+		return srv.(AlbumPicServiceServer).AlbumPicUpdate(ctx, req.(*AlbumPicUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_AlbumPicDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlbumPicService_AlbumPicDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AlbumPicDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).AlbumPicDelete(ctx, in)
+		return srv.(AlbumPicServiceServer).AlbumPicDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/AlbumPicDelete",
+		FullMethod: "/pmsclient.AlbumPicService/AlbumPicDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).AlbumPicDelete(ctx, req.(*AlbumPicDeleteReq))
+		return srv.(AlbumPicServiceServer).AlbumPicDelete(ctx, req.(*AlbumPicDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_BrandAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// AlbumPicService_ServiceDesc is the grpc.ServiceDesc for AlbumPicService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AlbumPicService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.AlbumPicService",
+	HandlerType: (*AlbumPicServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AlbumPicAdd",
+			Handler:    _AlbumPicService_AlbumPicAdd_Handler,
+		},
+		{
+			MethodName: "AlbumPicList",
+			Handler:    _AlbumPicService_AlbumPicList_Handler,
+		},
+		{
+			MethodName: "AlbumPicUpdate",
+			Handler:    _AlbumPicService_AlbumPicUpdate_Handler,
+		},
+		{
+			MethodName: "AlbumPicDelete",
+			Handler:    _AlbumPicService_AlbumPicDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// BrandServiceClient is the client API for BrandService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BrandServiceClient interface {
+	BrandAdd(ctx context.Context, in *BrandAddReq, opts ...grpc.CallOption) (*BrandAddResp, error)
+	BrandList(ctx context.Context, in *BrandListReq, opts ...grpc.CallOption) (*BrandListResp, error)
+	BrandListByIds(ctx context.Context, in *BrandListByIdsReq, opts ...grpc.CallOption) (*BrandListResp, error)
+	BrandUpdate(ctx context.Context, in *BrandUpdateReq, opts ...grpc.CallOption) (*BrandUpdateResp, error)
+	BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error)
+}
+
+type brandServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBrandServiceClient(cc grpc.ClientConnInterface) BrandServiceClient {
+	return &brandServiceClient{cc}
+}
+
+func (c *brandServiceClient) BrandAdd(ctx context.Context, in *BrandAddReq, opts ...grpc.CallOption) (*BrandAddResp, error) {
+	out := new(BrandAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.BrandService/BrandAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brandServiceClient) BrandList(ctx context.Context, in *BrandListReq, opts ...grpc.CallOption) (*BrandListResp, error) {
+	out := new(BrandListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.BrandService/BrandList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brandServiceClient) BrandListByIds(ctx context.Context, in *BrandListByIdsReq, opts ...grpc.CallOption) (*BrandListResp, error) {
+	out := new(BrandListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.BrandService/BrandListByIds", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brandServiceClient) BrandUpdate(ctx context.Context, in *BrandUpdateReq, opts ...grpc.CallOption) (*BrandUpdateResp, error) {
+	out := new(BrandUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.BrandService/BrandUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brandServiceClient) BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error) {
+	out := new(BrandDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.BrandService/BrandDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BrandServiceServer is the server API for BrandService service.
+// All implementations must embed UnimplementedBrandServiceServer
+// for forward compatibility
+type BrandServiceServer interface {
+	BrandAdd(context.Context, *BrandAddReq) (*BrandAddResp, error)
+	BrandList(context.Context, *BrandListReq) (*BrandListResp, error)
+	BrandListByIds(context.Context, *BrandListByIdsReq) (*BrandListResp, error)
+	BrandUpdate(context.Context, *BrandUpdateReq) (*BrandUpdateResp, error)
+	BrandDelete(context.Context, *BrandDeleteReq) (*BrandDeleteResp, error)
+	mustEmbedUnimplementedBrandServiceServer()
+}
+
+// UnimplementedBrandServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedBrandServiceServer struct {
+}
+
+func (UnimplementedBrandServiceServer) BrandAdd(context.Context, *BrandAddReq) (*BrandAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BrandAdd not implemented")
+}
+func (UnimplementedBrandServiceServer) BrandList(context.Context, *BrandListReq) (*BrandListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BrandList not implemented")
+}
+func (UnimplementedBrandServiceServer) BrandListByIds(context.Context, *BrandListByIdsReq) (*BrandListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BrandListByIds not implemented")
+}
+func (UnimplementedBrandServiceServer) BrandUpdate(context.Context, *BrandUpdateReq) (*BrandUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BrandUpdate not implemented")
+}
+func (UnimplementedBrandServiceServer) BrandDelete(context.Context, *BrandDeleteReq) (*BrandDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BrandDelete not implemented")
+}
+func (UnimplementedBrandServiceServer) mustEmbedUnimplementedBrandServiceServer() {}
+
+// UnsafeBrandServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BrandServiceServer will
+// result in compilation errors.
+type UnsafeBrandServiceServer interface {
+	mustEmbedUnimplementedBrandServiceServer()
+}
+
+func RegisterBrandServiceServer(s grpc.ServiceRegistrar, srv BrandServiceServer) {
+	s.RegisterService(&BrandService_ServiceDesc, srv)
+}
+
+func _BrandService_BrandAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BrandAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).BrandAdd(ctx, in)
+		return srv.(BrandServiceServer).BrandAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/BrandAdd",
+		FullMethod: "/pmsclient.BrandService/BrandAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).BrandAdd(ctx, req.(*BrandAddReq))
+		return srv.(BrandServiceServer).BrandAdd(ctx, req.(*BrandAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_BrandList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BrandService_BrandList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BrandListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).BrandList(ctx, in)
+		return srv.(BrandServiceServer).BrandList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/BrandList",
+		FullMethod: "/pmsclient.BrandService/BrandList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).BrandList(ctx, req.(*BrandListReq))
+		return srv.(BrandServiceServer).BrandList(ctx, req.(*BrandListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_BrandListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BrandService_BrandListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BrandListByIdsReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).BrandListByIds(ctx, in)
+		return srv.(BrandServiceServer).BrandListByIds(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/BrandListByIds",
+		FullMethod: "/pmsclient.BrandService/BrandListByIds",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).BrandListByIds(ctx, req.(*BrandListByIdsReq))
+		return srv.(BrandServiceServer).BrandListByIds(ctx, req.(*BrandListByIdsReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_BrandUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BrandService_BrandUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BrandUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).BrandUpdate(ctx, in)
+		return srv.(BrandServiceServer).BrandUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/BrandUpdate",
+		FullMethod: "/pmsclient.BrandService/BrandUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).BrandUpdate(ctx, req.(*BrandUpdateReq))
+		return srv.(BrandServiceServer).BrandUpdate(ctx, req.(*BrandUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_BrandDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BrandService_BrandDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BrandDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).BrandDelete(ctx, in)
+		return srv.(BrandServiceServer).BrandDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/BrandDelete",
+		FullMethod: "/pmsclient.BrandService/BrandDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).BrandDelete(ctx, req.(*BrandDeleteReq))
+		return srv.(BrandServiceServer).BrandDelete(ctx, req.(*BrandDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_CommentAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// BrandService_ServiceDesc is the grpc.ServiceDesc for BrandService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BrandService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.BrandService",
+	HandlerType: (*BrandServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "BrandAdd",
+			Handler:    _BrandService_BrandAdd_Handler,
+		},
+		{
+			MethodName: "BrandList",
+			Handler:    _BrandService_BrandList_Handler,
+		},
+		{
+			MethodName: "BrandListByIds",
+			Handler:    _BrandService_BrandListByIds_Handler,
+		},
+		{
+			MethodName: "BrandUpdate",
+			Handler:    _BrandService_BrandUpdate_Handler,
+		},
+		{
+			MethodName: "BrandDelete",
+			Handler:    _BrandService_BrandDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// CommentServiceClient is the client API for CommentService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CommentServiceClient interface {
+	CommentAdd(ctx context.Context, in *CommentAddReq, opts ...grpc.CallOption) (*CommentAddResp, error)
+	CommentList(ctx context.Context, in *CommentListReq, opts ...grpc.CallOption) (*CommentListResp, error)
+	CommentUpdate(ctx context.Context, in *CommentUpdateReq, opts ...grpc.CallOption) (*CommentUpdateResp, error)
+	CommentDelete(ctx context.Context, in *CommentDeleteReq, opts ...grpc.CallOption) (*CommentDeleteResp, error)
+}
+
+type commentServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCommentServiceClient(cc grpc.ClientConnInterface) CommentServiceClient {
+	return &commentServiceClient{cc}
+}
+
+func (c *commentServiceClient) CommentAdd(ctx context.Context, in *CommentAddReq, opts ...grpc.CallOption) (*CommentAddResp, error) {
+	out := new(CommentAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.CommentService/CommentAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentServiceClient) CommentList(ctx context.Context, in *CommentListReq, opts ...grpc.CallOption) (*CommentListResp, error) {
+	out := new(CommentListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.CommentService/CommentList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentServiceClient) CommentUpdate(ctx context.Context, in *CommentUpdateReq, opts ...grpc.CallOption) (*CommentUpdateResp, error) {
+	out := new(CommentUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.CommentService/CommentUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentServiceClient) CommentDelete(ctx context.Context, in *CommentDeleteReq, opts ...grpc.CallOption) (*CommentDeleteResp, error) {
+	out := new(CommentDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.CommentService/CommentDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CommentServiceServer is the server API for CommentService service.
+// All implementations must embed UnimplementedCommentServiceServer
+// for forward compatibility
+type CommentServiceServer interface {
+	CommentAdd(context.Context, *CommentAddReq) (*CommentAddResp, error)
+	CommentList(context.Context, *CommentListReq) (*CommentListResp, error)
+	CommentUpdate(context.Context, *CommentUpdateReq) (*CommentUpdateResp, error)
+	CommentDelete(context.Context, *CommentDeleteReq) (*CommentDeleteResp, error)
+	mustEmbedUnimplementedCommentServiceServer()
+}
+
+// UnimplementedCommentServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCommentServiceServer struct {
+}
+
+func (UnimplementedCommentServiceServer) CommentAdd(context.Context, *CommentAddReq) (*CommentAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommentAdd not implemented")
+}
+func (UnimplementedCommentServiceServer) CommentList(context.Context, *CommentListReq) (*CommentListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommentList not implemented")
+}
+func (UnimplementedCommentServiceServer) CommentUpdate(context.Context, *CommentUpdateReq) (*CommentUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommentUpdate not implemented")
+}
+func (UnimplementedCommentServiceServer) CommentDelete(context.Context, *CommentDeleteReq) (*CommentDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommentDelete not implemented")
+}
+func (UnimplementedCommentServiceServer) mustEmbedUnimplementedCommentServiceServer() {}
+
+// UnsafeCommentServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CommentServiceServer will
+// result in compilation errors.
+type UnsafeCommentServiceServer interface {
+	mustEmbedUnimplementedCommentServiceServer()
+}
+
+func RegisterCommentServiceServer(s grpc.ServiceRegistrar, srv CommentServiceServer) {
+	s.RegisterService(&CommentService_ServiceDesc, srv)
+}
+
+func _CommentService_CommentAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommentAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).CommentAdd(ctx, in)
+		return srv.(CommentServiceServer).CommentAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CommentAdd",
+		FullMethod: "/pmsclient.CommentService/CommentAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CommentAdd(ctx, req.(*CommentAddReq))
+		return srv.(CommentServiceServer).CommentAdd(ctx, req.(*CommentAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_CommentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CommentService_CommentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommentListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).CommentList(ctx, in)
+		return srv.(CommentServiceServer).CommentList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CommentList",
+		FullMethod: "/pmsclient.CommentService/CommentList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CommentList(ctx, req.(*CommentListReq))
+		return srv.(CommentServiceServer).CommentList(ctx, req.(*CommentListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_CommentUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CommentService_CommentUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommentUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).CommentUpdate(ctx, in)
+		return srv.(CommentServiceServer).CommentUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CommentUpdate",
+		FullMethod: "/pmsclient.CommentService/CommentUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CommentUpdate(ctx, req.(*CommentUpdateReq))
+		return srv.(CommentServiceServer).CommentUpdate(ctx, req.(*CommentUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_CommentDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CommentService_CommentDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommentDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).CommentDelete(ctx, in)
+		return srv.(CommentServiceServer).CommentDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CommentDelete",
+		FullMethod: "/pmsclient.CommentService/CommentDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CommentDelete(ctx, req.(*CommentDeleteReq))
+		return srv.(CommentServiceServer).CommentDelete(ctx, req.(*CommentDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_CommentReplayAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// CommentService_ServiceDesc is the grpc.ServiceDesc for CommentService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CommentService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.CommentService",
+	HandlerType: (*CommentServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CommentAdd",
+			Handler:    _CommentService_CommentAdd_Handler,
+		},
+		{
+			MethodName: "CommentList",
+			Handler:    _CommentService_CommentList_Handler,
+		},
+		{
+			MethodName: "CommentUpdate",
+			Handler:    _CommentService_CommentUpdate_Handler,
+		},
+		{
+			MethodName: "CommentDelete",
+			Handler:    _CommentService_CommentDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// CommentReplayServiceClient is the client API for CommentReplayService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CommentReplayServiceClient interface {
+	CommentReplayAdd(ctx context.Context, in *CommentReplayAddReq, opts ...grpc.CallOption) (*CommentReplayAddResp, error)
+	CommentReplayList(ctx context.Context, in *CommentReplayListReq, opts ...grpc.CallOption) (*CommentReplayListResp, error)
+	CommentReplayUpdate(ctx context.Context, in *CommentReplayUpdateReq, opts ...grpc.CallOption) (*CommentReplayUpdateResp, error)
+	CommentReplayDelete(ctx context.Context, in *CommentReplayDeleteReq, opts ...grpc.CallOption) (*CommentReplayDeleteResp, error)
+}
+
+type commentReplayServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCommentReplayServiceClient(cc grpc.ClientConnInterface) CommentReplayServiceClient {
+	return &commentReplayServiceClient{cc}
+}
+
+func (c *commentReplayServiceClient) CommentReplayAdd(ctx context.Context, in *CommentReplayAddReq, opts ...grpc.CallOption) (*CommentReplayAddResp, error) {
+	out := new(CommentReplayAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.CommentReplayService/CommentReplayAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentReplayServiceClient) CommentReplayList(ctx context.Context, in *CommentReplayListReq, opts ...grpc.CallOption) (*CommentReplayListResp, error) {
+	out := new(CommentReplayListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.CommentReplayService/CommentReplayList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentReplayServiceClient) CommentReplayUpdate(ctx context.Context, in *CommentReplayUpdateReq, opts ...grpc.CallOption) (*CommentReplayUpdateResp, error) {
+	out := new(CommentReplayUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.CommentReplayService/CommentReplayUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentReplayServiceClient) CommentReplayDelete(ctx context.Context, in *CommentReplayDeleteReq, opts ...grpc.CallOption) (*CommentReplayDeleteResp, error) {
+	out := new(CommentReplayDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.CommentReplayService/CommentReplayDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CommentReplayServiceServer is the server API for CommentReplayService service.
+// All implementations must embed UnimplementedCommentReplayServiceServer
+// for forward compatibility
+type CommentReplayServiceServer interface {
+	CommentReplayAdd(context.Context, *CommentReplayAddReq) (*CommentReplayAddResp, error)
+	CommentReplayList(context.Context, *CommentReplayListReq) (*CommentReplayListResp, error)
+	CommentReplayUpdate(context.Context, *CommentReplayUpdateReq) (*CommentReplayUpdateResp, error)
+	CommentReplayDelete(context.Context, *CommentReplayDeleteReq) (*CommentReplayDeleteResp, error)
+	mustEmbedUnimplementedCommentReplayServiceServer()
+}
+
+// UnimplementedCommentReplayServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCommentReplayServiceServer struct {
+}
+
+func (UnimplementedCommentReplayServiceServer) CommentReplayAdd(context.Context, *CommentReplayAddReq) (*CommentReplayAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommentReplayAdd not implemented")
+}
+func (UnimplementedCommentReplayServiceServer) CommentReplayList(context.Context, *CommentReplayListReq) (*CommentReplayListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommentReplayList not implemented")
+}
+func (UnimplementedCommentReplayServiceServer) CommentReplayUpdate(context.Context, *CommentReplayUpdateReq) (*CommentReplayUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommentReplayUpdate not implemented")
+}
+func (UnimplementedCommentReplayServiceServer) CommentReplayDelete(context.Context, *CommentReplayDeleteReq) (*CommentReplayDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommentReplayDelete not implemented")
+}
+func (UnimplementedCommentReplayServiceServer) mustEmbedUnimplementedCommentReplayServiceServer() {}
+
+// UnsafeCommentReplayServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CommentReplayServiceServer will
+// result in compilation errors.
+type UnsafeCommentReplayServiceServer interface {
+	mustEmbedUnimplementedCommentReplayServiceServer()
+}
+
+func RegisterCommentReplayServiceServer(s grpc.ServiceRegistrar, srv CommentReplayServiceServer) {
+	s.RegisterService(&CommentReplayService_ServiceDesc, srv)
+}
+
+func _CommentReplayService_CommentReplayAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommentReplayAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).CommentReplayAdd(ctx, in)
+		return srv.(CommentReplayServiceServer).CommentReplayAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CommentReplayAdd",
+		FullMethod: "/pmsclient.CommentReplayService/CommentReplayAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CommentReplayAdd(ctx, req.(*CommentReplayAddReq))
+		return srv.(CommentReplayServiceServer).CommentReplayAdd(ctx, req.(*CommentReplayAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_CommentReplayList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CommentReplayService_CommentReplayList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommentReplayListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).CommentReplayList(ctx, in)
+		return srv.(CommentReplayServiceServer).CommentReplayList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CommentReplayList",
+		FullMethod: "/pmsclient.CommentReplayService/CommentReplayList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CommentReplayList(ctx, req.(*CommentReplayListReq))
+		return srv.(CommentReplayServiceServer).CommentReplayList(ctx, req.(*CommentReplayListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_CommentReplayUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CommentReplayService_CommentReplayUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommentReplayUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).CommentReplayUpdate(ctx, in)
+		return srv.(CommentReplayServiceServer).CommentReplayUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CommentReplayUpdate",
+		FullMethod: "/pmsclient.CommentReplayService/CommentReplayUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CommentReplayUpdate(ctx, req.(*CommentReplayUpdateReq))
+		return srv.(CommentReplayServiceServer).CommentReplayUpdate(ctx, req.(*CommentReplayUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_CommentReplayDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CommentReplayService_CommentReplayDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommentReplayDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).CommentReplayDelete(ctx, in)
+		return srv.(CommentReplayServiceServer).CommentReplayDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/CommentReplayDelete",
+		FullMethod: "/pmsclient.CommentReplayService/CommentReplayDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).CommentReplayDelete(ctx, req.(*CommentReplayDeleteReq))
+		return srv.(CommentReplayServiceServer).CommentReplayDelete(ctx, req.(*CommentReplayDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_FeightTemplateAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// CommentReplayService_ServiceDesc is the grpc.ServiceDesc for CommentReplayService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CommentReplayService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.CommentReplayService",
+	HandlerType: (*CommentReplayServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CommentReplayAdd",
+			Handler:    _CommentReplayService_CommentReplayAdd_Handler,
+		},
+		{
+			MethodName: "CommentReplayList",
+			Handler:    _CommentReplayService_CommentReplayList_Handler,
+		},
+		{
+			MethodName: "CommentReplayUpdate",
+			Handler:    _CommentReplayService_CommentReplayUpdate_Handler,
+		},
+		{
+			MethodName: "CommentReplayDelete",
+			Handler:    _CommentReplayService_CommentReplayDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// FeightTemplateServiceClient is the client API for FeightTemplateService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type FeightTemplateServiceClient interface {
+	FeightTemplateAdd(ctx context.Context, in *FeightTemplateAddReq, opts ...grpc.CallOption) (*FeightTemplateAddResp, error)
+	FeightTemplateList(ctx context.Context, in *FeightTemplateListReq, opts ...grpc.CallOption) (*FeightTemplateListResp, error)
+	FeightTemplateUpdate(ctx context.Context, in *FeightTemplateUpdateReq, opts ...grpc.CallOption) (*FeightTemplateUpdateResp, error)
+	FeightTemplateDelete(ctx context.Context, in *FeightTemplateDeleteReq, opts ...grpc.CallOption) (*FeightTemplateDeleteResp, error)
+}
+
+type feightTemplateServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFeightTemplateServiceClient(cc grpc.ClientConnInterface) FeightTemplateServiceClient {
+	return &feightTemplateServiceClient{cc}
+}
+
+func (c *feightTemplateServiceClient) FeightTemplateAdd(ctx context.Context, in *FeightTemplateAddReq, opts ...grpc.CallOption) (*FeightTemplateAddResp, error) {
+	out := new(FeightTemplateAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.FeightTemplateService/FeightTemplateAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *feightTemplateServiceClient) FeightTemplateList(ctx context.Context, in *FeightTemplateListReq, opts ...grpc.CallOption) (*FeightTemplateListResp, error) {
+	out := new(FeightTemplateListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.FeightTemplateService/FeightTemplateList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *feightTemplateServiceClient) FeightTemplateUpdate(ctx context.Context, in *FeightTemplateUpdateReq, opts ...grpc.CallOption) (*FeightTemplateUpdateResp, error) {
+	out := new(FeightTemplateUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.FeightTemplateService/FeightTemplateUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *feightTemplateServiceClient) FeightTemplateDelete(ctx context.Context, in *FeightTemplateDeleteReq, opts ...grpc.CallOption) (*FeightTemplateDeleteResp, error) {
+	out := new(FeightTemplateDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.FeightTemplateService/FeightTemplateDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FeightTemplateServiceServer is the server API for FeightTemplateService service.
+// All implementations must embed UnimplementedFeightTemplateServiceServer
+// for forward compatibility
+type FeightTemplateServiceServer interface {
+	FeightTemplateAdd(context.Context, *FeightTemplateAddReq) (*FeightTemplateAddResp, error)
+	FeightTemplateList(context.Context, *FeightTemplateListReq) (*FeightTemplateListResp, error)
+	FeightTemplateUpdate(context.Context, *FeightTemplateUpdateReq) (*FeightTemplateUpdateResp, error)
+	FeightTemplateDelete(context.Context, *FeightTemplateDeleteReq) (*FeightTemplateDeleteResp, error)
+	mustEmbedUnimplementedFeightTemplateServiceServer()
+}
+
+// UnimplementedFeightTemplateServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedFeightTemplateServiceServer struct {
+}
+
+func (UnimplementedFeightTemplateServiceServer) FeightTemplateAdd(context.Context, *FeightTemplateAddReq) (*FeightTemplateAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FeightTemplateAdd not implemented")
+}
+func (UnimplementedFeightTemplateServiceServer) FeightTemplateList(context.Context, *FeightTemplateListReq) (*FeightTemplateListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FeightTemplateList not implemented")
+}
+func (UnimplementedFeightTemplateServiceServer) FeightTemplateUpdate(context.Context, *FeightTemplateUpdateReq) (*FeightTemplateUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FeightTemplateUpdate not implemented")
+}
+func (UnimplementedFeightTemplateServiceServer) FeightTemplateDelete(context.Context, *FeightTemplateDeleteReq) (*FeightTemplateDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FeightTemplateDelete not implemented")
+}
+func (UnimplementedFeightTemplateServiceServer) mustEmbedUnimplementedFeightTemplateServiceServer() {}
+
+// UnsafeFeightTemplateServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FeightTemplateServiceServer will
+// result in compilation errors.
+type UnsafeFeightTemplateServiceServer interface {
+	mustEmbedUnimplementedFeightTemplateServiceServer()
+}
+
+func RegisterFeightTemplateServiceServer(s grpc.ServiceRegistrar, srv FeightTemplateServiceServer) {
+	s.RegisterService(&FeightTemplateService_ServiceDesc, srv)
+}
+
+func _FeightTemplateService_FeightTemplateAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FeightTemplateAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).FeightTemplateAdd(ctx, in)
+		return srv.(FeightTemplateServiceServer).FeightTemplateAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/FeightTemplateAdd",
+		FullMethod: "/pmsclient.FeightTemplateService/FeightTemplateAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).FeightTemplateAdd(ctx, req.(*FeightTemplateAddReq))
+		return srv.(FeightTemplateServiceServer).FeightTemplateAdd(ctx, req.(*FeightTemplateAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_FeightTemplateList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FeightTemplateService_FeightTemplateList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FeightTemplateListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).FeightTemplateList(ctx, in)
+		return srv.(FeightTemplateServiceServer).FeightTemplateList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/FeightTemplateList",
+		FullMethod: "/pmsclient.FeightTemplateService/FeightTemplateList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).FeightTemplateList(ctx, req.(*FeightTemplateListReq))
+		return srv.(FeightTemplateServiceServer).FeightTemplateList(ctx, req.(*FeightTemplateListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_FeightTemplateUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FeightTemplateService_FeightTemplateUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FeightTemplateUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).FeightTemplateUpdate(ctx, in)
+		return srv.(FeightTemplateServiceServer).FeightTemplateUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/FeightTemplateUpdate",
+		FullMethod: "/pmsclient.FeightTemplateService/FeightTemplateUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).FeightTemplateUpdate(ctx, req.(*FeightTemplateUpdateReq))
+		return srv.(FeightTemplateServiceServer).FeightTemplateUpdate(ctx, req.(*FeightTemplateUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_FeightTemplateDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FeightTemplateService_FeightTemplateDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FeightTemplateDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).FeightTemplateDelete(ctx, in)
+		return srv.(FeightTemplateServiceServer).FeightTemplateDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/FeightTemplateDelete",
+		FullMethod: "/pmsclient.FeightTemplateService/FeightTemplateDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).FeightTemplateDelete(ctx, req.(*FeightTemplateDeleteReq))
+		return srv.(FeightTemplateServiceServer).FeightTemplateDelete(ctx, req.(*FeightTemplateDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_MemberPriceAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// FeightTemplateService_ServiceDesc is the grpc.ServiceDesc for FeightTemplateService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var FeightTemplateService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.FeightTemplateService",
+	HandlerType: (*FeightTemplateServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "FeightTemplateAdd",
+			Handler:    _FeightTemplateService_FeightTemplateAdd_Handler,
+		},
+		{
+			MethodName: "FeightTemplateList",
+			Handler:    _FeightTemplateService_FeightTemplateList_Handler,
+		},
+		{
+			MethodName: "FeightTemplateUpdate",
+			Handler:    _FeightTemplateService_FeightTemplateUpdate_Handler,
+		},
+		{
+			MethodName: "FeightTemplateDelete",
+			Handler:    _FeightTemplateService_FeightTemplateDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// MemberPriceServiceClient is the client API for MemberPriceService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MemberPriceServiceClient interface {
+	MemberPriceAdd(ctx context.Context, in *MemberPriceAddReq, opts ...grpc.CallOption) (*MemberPriceAddResp, error)
+	MemberPriceList(ctx context.Context, in *MemberPriceListReq, opts ...grpc.CallOption) (*MemberPriceListResp, error)
+	MemberPriceUpdate(ctx context.Context, in *MemberPriceUpdateReq, opts ...grpc.CallOption) (*MemberPriceUpdateResp, error)
+	MemberPriceDelete(ctx context.Context, in *MemberPriceDeleteReq, opts ...grpc.CallOption) (*MemberPriceDeleteResp, error)
+}
+
+type memberPriceServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMemberPriceServiceClient(cc grpc.ClientConnInterface) MemberPriceServiceClient {
+	return &memberPriceServiceClient{cc}
+}
+
+func (c *memberPriceServiceClient) MemberPriceAdd(ctx context.Context, in *MemberPriceAddReq, opts ...grpc.CallOption) (*MemberPriceAddResp, error) {
+	out := new(MemberPriceAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.MemberPriceService/MemberPriceAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberPriceServiceClient) MemberPriceList(ctx context.Context, in *MemberPriceListReq, opts ...grpc.CallOption) (*MemberPriceListResp, error) {
+	out := new(MemberPriceListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.MemberPriceService/MemberPriceList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberPriceServiceClient) MemberPriceUpdate(ctx context.Context, in *MemberPriceUpdateReq, opts ...grpc.CallOption) (*MemberPriceUpdateResp, error) {
+	out := new(MemberPriceUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.MemberPriceService/MemberPriceUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberPriceServiceClient) MemberPriceDelete(ctx context.Context, in *MemberPriceDeleteReq, opts ...grpc.CallOption) (*MemberPriceDeleteResp, error) {
+	out := new(MemberPriceDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.MemberPriceService/MemberPriceDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MemberPriceServiceServer is the server API for MemberPriceService service.
+// All implementations must embed UnimplementedMemberPriceServiceServer
+// for forward compatibility
+type MemberPriceServiceServer interface {
+	MemberPriceAdd(context.Context, *MemberPriceAddReq) (*MemberPriceAddResp, error)
+	MemberPriceList(context.Context, *MemberPriceListReq) (*MemberPriceListResp, error)
+	MemberPriceUpdate(context.Context, *MemberPriceUpdateReq) (*MemberPriceUpdateResp, error)
+	MemberPriceDelete(context.Context, *MemberPriceDeleteReq) (*MemberPriceDeleteResp, error)
+	mustEmbedUnimplementedMemberPriceServiceServer()
+}
+
+// UnimplementedMemberPriceServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberPriceServiceServer struct {
+}
+
+func (UnimplementedMemberPriceServiceServer) MemberPriceAdd(context.Context, *MemberPriceAddReq) (*MemberPriceAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberPriceAdd not implemented")
+}
+func (UnimplementedMemberPriceServiceServer) MemberPriceList(context.Context, *MemberPriceListReq) (*MemberPriceListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberPriceList not implemented")
+}
+func (UnimplementedMemberPriceServiceServer) MemberPriceUpdate(context.Context, *MemberPriceUpdateReq) (*MemberPriceUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberPriceUpdate not implemented")
+}
+func (UnimplementedMemberPriceServiceServer) MemberPriceDelete(context.Context, *MemberPriceDeleteReq) (*MemberPriceDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberPriceDelete not implemented")
+}
+func (UnimplementedMemberPriceServiceServer) mustEmbedUnimplementedMemberPriceServiceServer() {}
+
+// UnsafeMemberPriceServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberPriceServiceServer will
+// result in compilation errors.
+type UnsafeMemberPriceServiceServer interface {
+	mustEmbedUnimplementedMemberPriceServiceServer()
+}
+
+func RegisterMemberPriceServiceServer(s grpc.ServiceRegistrar, srv MemberPriceServiceServer) {
+	s.RegisterService(&MemberPriceService_ServiceDesc, srv)
+}
+
+func _MemberPriceService_MemberPriceAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MemberPriceAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).MemberPriceAdd(ctx, in)
+		return srv.(MemberPriceServiceServer).MemberPriceAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/MemberPriceAdd",
+		FullMethod: "/pmsclient.MemberPriceService/MemberPriceAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).MemberPriceAdd(ctx, req.(*MemberPriceAddReq))
+		return srv.(MemberPriceServiceServer).MemberPriceAdd(ctx, req.(*MemberPriceAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_MemberPriceList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MemberPriceService_MemberPriceList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MemberPriceListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).MemberPriceList(ctx, in)
+		return srv.(MemberPriceServiceServer).MemberPriceList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/MemberPriceList",
+		FullMethod: "/pmsclient.MemberPriceService/MemberPriceList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).MemberPriceList(ctx, req.(*MemberPriceListReq))
+		return srv.(MemberPriceServiceServer).MemberPriceList(ctx, req.(*MemberPriceListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_MemberPriceUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MemberPriceService_MemberPriceUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MemberPriceUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).MemberPriceUpdate(ctx, in)
+		return srv.(MemberPriceServiceServer).MemberPriceUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/MemberPriceUpdate",
+		FullMethod: "/pmsclient.MemberPriceService/MemberPriceUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).MemberPriceUpdate(ctx, req.(*MemberPriceUpdateReq))
+		return srv.(MemberPriceServiceServer).MemberPriceUpdate(ctx, req.(*MemberPriceUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_MemberPriceDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MemberPriceService_MemberPriceDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MemberPriceDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).MemberPriceDelete(ctx, in)
+		return srv.(MemberPriceServiceServer).MemberPriceDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/MemberPriceDelete",
+		FullMethod: "/pmsclient.MemberPriceService/MemberPriceDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).MemberPriceDelete(ctx, req.(*MemberPriceDeleteReq))
+		return srv.(MemberPriceServiceServer).MemberPriceDelete(ctx, req.(*MemberPriceDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeCategoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// MemberPriceService_ServiceDesc is the grpc.ServiceDesc for MemberPriceService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MemberPriceService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.MemberPriceService",
+	HandlerType: (*MemberPriceServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "MemberPriceAdd",
+			Handler:    _MemberPriceService_MemberPriceAdd_Handler,
+		},
+		{
+			MethodName: "MemberPriceList",
+			Handler:    _MemberPriceService_MemberPriceList_Handler,
+		},
+		{
+			MethodName: "MemberPriceUpdate",
+			Handler:    _MemberPriceService_MemberPriceUpdate_Handler,
+		},
+		{
+			MethodName: "MemberPriceDelete",
+			Handler:    _MemberPriceService_MemberPriceDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// ProductAttributeCategoryServiceClient is the client API for ProductAttributeCategoryService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductAttributeCategoryServiceClient interface {
+	ProductAttributeCategoryAdd(ctx context.Context, in *ProductAttributeCategoryAddReq, opts ...grpc.CallOption) (*ProductAttributeCategoryAddResp, error)
+	ProductAttributeCategoryList(ctx context.Context, in *ProductAttributeCategoryListReq, opts ...grpc.CallOption) (*ProductAttributeCategoryListResp, error)
+	ProductAttributeCategoryUpdate(ctx context.Context, in *ProductAttributeCategoryUpdateReq, opts ...grpc.CallOption) (*ProductAttributeCategoryUpdateResp, error)
+	ProductAttributeCategoryDelete(ctx context.Context, in *ProductAttributeCategoryDeleteReq, opts ...grpc.CallOption) (*ProductAttributeCategoryDeleteResp, error)
+}
+
+type productAttributeCategoryServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductAttributeCategoryServiceClient(cc grpc.ClientConnInterface) ProductAttributeCategoryServiceClient {
+	return &productAttributeCategoryServiceClient{cc}
+}
+
+func (c *productAttributeCategoryServiceClient) ProductAttributeCategoryAdd(ctx context.Context, in *ProductAttributeCategoryAddReq, opts ...grpc.CallOption) (*ProductAttributeCategoryAddResp, error) {
+	out := new(ProductAttributeCategoryAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeCategoryService/ProductAttributeCategoryAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeCategoryServiceClient) ProductAttributeCategoryList(ctx context.Context, in *ProductAttributeCategoryListReq, opts ...grpc.CallOption) (*ProductAttributeCategoryListResp, error) {
+	out := new(ProductAttributeCategoryListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeCategoryService/ProductAttributeCategoryList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeCategoryServiceClient) ProductAttributeCategoryUpdate(ctx context.Context, in *ProductAttributeCategoryUpdateReq, opts ...grpc.CallOption) (*ProductAttributeCategoryUpdateResp, error) {
+	out := new(ProductAttributeCategoryUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeCategoryService/ProductAttributeCategoryUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeCategoryServiceClient) ProductAttributeCategoryDelete(ctx context.Context, in *ProductAttributeCategoryDeleteReq, opts ...grpc.CallOption) (*ProductAttributeCategoryDeleteResp, error) {
+	out := new(ProductAttributeCategoryDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeCategoryService/ProductAttributeCategoryDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductAttributeCategoryServiceServer is the server API for ProductAttributeCategoryService service.
+// All implementations must embed UnimplementedProductAttributeCategoryServiceServer
+// for forward compatibility
+type ProductAttributeCategoryServiceServer interface {
+	ProductAttributeCategoryAdd(context.Context, *ProductAttributeCategoryAddReq) (*ProductAttributeCategoryAddResp, error)
+	ProductAttributeCategoryList(context.Context, *ProductAttributeCategoryListReq) (*ProductAttributeCategoryListResp, error)
+	ProductAttributeCategoryUpdate(context.Context, *ProductAttributeCategoryUpdateReq) (*ProductAttributeCategoryUpdateResp, error)
+	ProductAttributeCategoryDelete(context.Context, *ProductAttributeCategoryDeleteReq) (*ProductAttributeCategoryDeleteResp, error)
+	mustEmbedUnimplementedProductAttributeCategoryServiceServer()
+}
+
+// UnimplementedProductAttributeCategoryServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductAttributeCategoryServiceServer struct {
+}
+
+func (UnimplementedProductAttributeCategoryServiceServer) ProductAttributeCategoryAdd(context.Context, *ProductAttributeCategoryAddReq) (*ProductAttributeCategoryAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeCategoryAdd not implemented")
+}
+func (UnimplementedProductAttributeCategoryServiceServer) ProductAttributeCategoryList(context.Context, *ProductAttributeCategoryListReq) (*ProductAttributeCategoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeCategoryList not implemented")
+}
+func (UnimplementedProductAttributeCategoryServiceServer) ProductAttributeCategoryUpdate(context.Context, *ProductAttributeCategoryUpdateReq) (*ProductAttributeCategoryUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeCategoryUpdate not implemented")
+}
+func (UnimplementedProductAttributeCategoryServiceServer) ProductAttributeCategoryDelete(context.Context, *ProductAttributeCategoryDeleteReq) (*ProductAttributeCategoryDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeCategoryDelete not implemented")
+}
+func (UnimplementedProductAttributeCategoryServiceServer) mustEmbedUnimplementedProductAttributeCategoryServiceServer() {
+}
+
+// UnsafeProductAttributeCategoryServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductAttributeCategoryServiceServer will
+// result in compilation errors.
+type UnsafeProductAttributeCategoryServiceServer interface {
+	mustEmbedUnimplementedProductAttributeCategoryServiceServer()
+}
+
+func RegisterProductAttributeCategoryServiceServer(s grpc.ServiceRegistrar, srv ProductAttributeCategoryServiceServer) {
+	s.RegisterService(&ProductAttributeCategoryService_ServiceDesc, srv)
+}
+
+func _ProductAttributeCategoryService_ProductAttributeCategoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeCategoryAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeCategoryAdd(ctx, in)
+		return srv.(ProductAttributeCategoryServiceServer).ProductAttributeCategoryAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeCategoryAdd",
+		FullMethod: "/pmsclient.ProductAttributeCategoryService/ProductAttributeCategoryAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeCategoryAdd(ctx, req.(*ProductAttributeCategoryAddReq))
+		return srv.(ProductAttributeCategoryServiceServer).ProductAttributeCategoryAdd(ctx, req.(*ProductAttributeCategoryAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeCategoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductAttributeCategoryService_ProductAttributeCategoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeCategoryListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeCategoryList(ctx, in)
+		return srv.(ProductAttributeCategoryServiceServer).ProductAttributeCategoryList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeCategoryList",
+		FullMethod: "/pmsclient.ProductAttributeCategoryService/ProductAttributeCategoryList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeCategoryList(ctx, req.(*ProductAttributeCategoryListReq))
+		return srv.(ProductAttributeCategoryServiceServer).ProductAttributeCategoryList(ctx, req.(*ProductAttributeCategoryListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeCategoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductAttributeCategoryService_ProductAttributeCategoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeCategoryUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeCategoryUpdate(ctx, in)
+		return srv.(ProductAttributeCategoryServiceServer).ProductAttributeCategoryUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeCategoryUpdate",
+		FullMethod: "/pmsclient.ProductAttributeCategoryService/ProductAttributeCategoryUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeCategoryUpdate(ctx, req.(*ProductAttributeCategoryUpdateReq))
+		return srv.(ProductAttributeCategoryServiceServer).ProductAttributeCategoryUpdate(ctx, req.(*ProductAttributeCategoryUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeCategoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductAttributeCategoryService_ProductAttributeCategoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeCategoryDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeCategoryDelete(ctx, in)
+		return srv.(ProductAttributeCategoryServiceServer).ProductAttributeCategoryDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeCategoryDelete",
+		FullMethod: "/pmsclient.ProductAttributeCategoryService/ProductAttributeCategoryDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeCategoryDelete(ctx, req.(*ProductAttributeCategoryDeleteReq))
+		return srv.(ProductAttributeCategoryServiceServer).ProductAttributeCategoryDelete(ctx, req.(*ProductAttributeCategoryDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductAttributeCategoryService_ServiceDesc is the grpc.ServiceDesc for ProductAttributeCategoryService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductAttributeCategoryService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductAttributeCategoryService",
+	HandlerType: (*ProductAttributeCategoryServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductAttributeCategoryAdd",
+			Handler:    _ProductAttributeCategoryService_ProductAttributeCategoryAdd_Handler,
+		},
+		{
+			MethodName: "ProductAttributeCategoryList",
+			Handler:    _ProductAttributeCategoryService_ProductAttributeCategoryList_Handler,
+		},
+		{
+			MethodName: "ProductAttributeCategoryUpdate",
+			Handler:    _ProductAttributeCategoryService_ProductAttributeCategoryUpdate_Handler,
+		},
+		{
+			MethodName: "ProductAttributeCategoryDelete",
+			Handler:    _ProductAttributeCategoryService_ProductAttributeCategoryDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// ProductAttributeServiceClient is the client API for ProductAttributeService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductAttributeServiceClient interface {
+	ProductAttributeAdd(ctx context.Context, in *ProductAttributeAddReq, opts ...grpc.CallOption) (*ProductAttributeAddResp, error)
+	ProductAttributeList(ctx context.Context, in *ProductAttributeListReq, opts ...grpc.CallOption) (*ProductAttributeListResp, error)
+	ProductAttributeUpdate(ctx context.Context, in *ProductAttributeUpdateReq, opts ...grpc.CallOption) (*ProductAttributeUpdateResp, error)
+	ProductAttributeDelete(ctx context.Context, in *ProductAttributeDeleteReq, opts ...grpc.CallOption) (*ProductAttributeDeleteResp, error)
+}
+
+type productAttributeServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductAttributeServiceClient(cc grpc.ClientConnInterface) ProductAttributeServiceClient {
+	return &productAttributeServiceClient{cc}
+}
+
+func (c *productAttributeServiceClient) ProductAttributeAdd(ctx context.Context, in *ProductAttributeAddReq, opts ...grpc.CallOption) (*ProductAttributeAddResp, error) {
+	out := new(ProductAttributeAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeService/ProductAttributeAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeServiceClient) ProductAttributeList(ctx context.Context, in *ProductAttributeListReq, opts ...grpc.CallOption) (*ProductAttributeListResp, error) {
+	out := new(ProductAttributeListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeService/ProductAttributeList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeServiceClient) ProductAttributeUpdate(ctx context.Context, in *ProductAttributeUpdateReq, opts ...grpc.CallOption) (*ProductAttributeUpdateResp, error) {
+	out := new(ProductAttributeUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeService/ProductAttributeUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeServiceClient) ProductAttributeDelete(ctx context.Context, in *ProductAttributeDeleteReq, opts ...grpc.CallOption) (*ProductAttributeDeleteResp, error) {
+	out := new(ProductAttributeDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeService/ProductAttributeDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductAttributeServiceServer is the server API for ProductAttributeService service.
+// All implementations must embed UnimplementedProductAttributeServiceServer
+// for forward compatibility
+type ProductAttributeServiceServer interface {
+	ProductAttributeAdd(context.Context, *ProductAttributeAddReq) (*ProductAttributeAddResp, error)
+	ProductAttributeList(context.Context, *ProductAttributeListReq) (*ProductAttributeListResp, error)
+	ProductAttributeUpdate(context.Context, *ProductAttributeUpdateReq) (*ProductAttributeUpdateResp, error)
+	ProductAttributeDelete(context.Context, *ProductAttributeDeleteReq) (*ProductAttributeDeleteResp, error)
+	mustEmbedUnimplementedProductAttributeServiceServer()
+}
+
+// UnimplementedProductAttributeServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductAttributeServiceServer struct {
+}
+
+func (UnimplementedProductAttributeServiceServer) ProductAttributeAdd(context.Context, *ProductAttributeAddReq) (*ProductAttributeAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeAdd not implemented")
+}
+func (UnimplementedProductAttributeServiceServer) ProductAttributeList(context.Context, *ProductAttributeListReq) (*ProductAttributeListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeList not implemented")
+}
+func (UnimplementedProductAttributeServiceServer) ProductAttributeUpdate(context.Context, *ProductAttributeUpdateReq) (*ProductAttributeUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeUpdate not implemented")
+}
+func (UnimplementedProductAttributeServiceServer) ProductAttributeDelete(context.Context, *ProductAttributeDeleteReq) (*ProductAttributeDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeDelete not implemented")
+}
+func (UnimplementedProductAttributeServiceServer) mustEmbedUnimplementedProductAttributeServiceServer() {
+}
+
+// UnsafeProductAttributeServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductAttributeServiceServer will
+// result in compilation errors.
+type UnsafeProductAttributeServiceServer interface {
+	mustEmbedUnimplementedProductAttributeServiceServer()
+}
+
+func RegisterProductAttributeServiceServer(s grpc.ServiceRegistrar, srv ProductAttributeServiceServer) {
+	s.RegisterService(&ProductAttributeService_ServiceDesc, srv)
+}
+
+func _ProductAttributeService_ProductAttributeAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeAdd(ctx, in)
+		return srv.(ProductAttributeServiceServer).ProductAttributeAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeAdd",
+		FullMethod: "/pmsclient.ProductAttributeService/ProductAttributeAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeAdd(ctx, req.(*ProductAttributeAddReq))
+		return srv.(ProductAttributeServiceServer).ProductAttributeAdd(ctx, req.(*ProductAttributeAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductAttributeService_ProductAttributeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeList(ctx, in)
+		return srv.(ProductAttributeServiceServer).ProductAttributeList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeList",
+		FullMethod: "/pmsclient.ProductAttributeService/ProductAttributeList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeList(ctx, req.(*ProductAttributeListReq))
+		return srv.(ProductAttributeServiceServer).ProductAttributeList(ctx, req.(*ProductAttributeListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductAttributeService_ProductAttributeUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeUpdate(ctx, in)
+		return srv.(ProductAttributeServiceServer).ProductAttributeUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeUpdate",
+		FullMethod: "/pmsclient.ProductAttributeService/ProductAttributeUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeUpdate(ctx, req.(*ProductAttributeUpdateReq))
+		return srv.(ProductAttributeServiceServer).ProductAttributeUpdate(ctx, req.(*ProductAttributeUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductAttributeService_ProductAttributeDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeDelete(ctx, in)
+		return srv.(ProductAttributeServiceServer).ProductAttributeDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeDelete",
+		FullMethod: "/pmsclient.ProductAttributeService/ProductAttributeDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeDelete(ctx, req.(*ProductAttributeDeleteReq))
+		return srv.(ProductAttributeServiceServer).ProductAttributeDelete(ctx, req.(*ProductAttributeDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeValueAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductAttributeService_ServiceDesc is the grpc.ServiceDesc for ProductAttributeService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductAttributeService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductAttributeService",
+	HandlerType: (*ProductAttributeServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductAttributeAdd",
+			Handler:    _ProductAttributeService_ProductAttributeAdd_Handler,
+		},
+		{
+			MethodName: "ProductAttributeList",
+			Handler:    _ProductAttributeService_ProductAttributeList_Handler,
+		},
+		{
+			MethodName: "ProductAttributeUpdate",
+			Handler:    _ProductAttributeService_ProductAttributeUpdate_Handler,
+		},
+		{
+			MethodName: "ProductAttributeDelete",
+			Handler:    _ProductAttributeService_ProductAttributeDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// ProductAttributeValueServiceClient is the client API for ProductAttributeValueService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductAttributeValueServiceClient interface {
+	ProductAttributeValueAdd(ctx context.Context, in *ProductAttributeValueAddReq, opts ...grpc.CallOption) (*ProductAttributeValueAddResp, error)
+	ProductAttributeValueList(ctx context.Context, in *ProductAttributeValueListReq, opts ...grpc.CallOption) (*ProductAttributeValueListResp, error)
+	ProductAttributeValueUpdate(ctx context.Context, in *ProductAttributeValueUpdateReq, opts ...grpc.CallOption) (*ProductAttributeValueUpdateResp, error)
+	ProductAttributeValueDelete(ctx context.Context, in *ProductAttributeValueDeleteReq, opts ...grpc.CallOption) (*ProductAttributeValueDeleteResp, error)
+}
+
+type productAttributeValueServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductAttributeValueServiceClient(cc grpc.ClientConnInterface) ProductAttributeValueServiceClient {
+	return &productAttributeValueServiceClient{cc}
+}
+
+func (c *productAttributeValueServiceClient) ProductAttributeValueAdd(ctx context.Context, in *ProductAttributeValueAddReq, opts ...grpc.CallOption) (*ProductAttributeValueAddResp, error) {
+	out := new(ProductAttributeValueAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeValueService/ProductAttributeValueAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeValueServiceClient) ProductAttributeValueList(ctx context.Context, in *ProductAttributeValueListReq, opts ...grpc.CallOption) (*ProductAttributeValueListResp, error) {
+	out := new(ProductAttributeValueListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeValueService/ProductAttributeValueList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeValueServiceClient) ProductAttributeValueUpdate(ctx context.Context, in *ProductAttributeValueUpdateReq, opts ...grpc.CallOption) (*ProductAttributeValueUpdateResp, error) {
+	out := new(ProductAttributeValueUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeValueService/ProductAttributeValueUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeValueServiceClient) ProductAttributeValueDelete(ctx context.Context, in *ProductAttributeValueDeleteReq, opts ...grpc.CallOption) (*ProductAttributeValueDeleteResp, error) {
+	out := new(ProductAttributeValueDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductAttributeValueService/ProductAttributeValueDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductAttributeValueServiceServer is the server API for ProductAttributeValueService service.
+// All implementations must embed UnimplementedProductAttributeValueServiceServer
+// for forward compatibility
+type ProductAttributeValueServiceServer interface {
+	ProductAttributeValueAdd(context.Context, *ProductAttributeValueAddReq) (*ProductAttributeValueAddResp, error)
+	ProductAttributeValueList(context.Context, *ProductAttributeValueListReq) (*ProductAttributeValueListResp, error)
+	ProductAttributeValueUpdate(context.Context, *ProductAttributeValueUpdateReq) (*ProductAttributeValueUpdateResp, error)
+	ProductAttributeValueDelete(context.Context, *ProductAttributeValueDeleteReq) (*ProductAttributeValueDeleteResp, error)
+	mustEmbedUnimplementedProductAttributeValueServiceServer()
+}
+
+// UnimplementedProductAttributeValueServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductAttributeValueServiceServer struct {
+}
+
+func (UnimplementedProductAttributeValueServiceServer) ProductAttributeValueAdd(context.Context, *ProductAttributeValueAddReq) (*ProductAttributeValueAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeValueAdd not implemented")
+}
+func (UnimplementedProductAttributeValueServiceServer) ProductAttributeValueList(context.Context, *ProductAttributeValueListReq) (*ProductAttributeValueListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeValueList not implemented")
+}
+func (UnimplementedProductAttributeValueServiceServer) ProductAttributeValueUpdate(context.Context, *ProductAttributeValueUpdateReq) (*ProductAttributeValueUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeValueUpdate not implemented")
+}
+func (UnimplementedProductAttributeValueServiceServer) ProductAttributeValueDelete(context.Context, *ProductAttributeValueDeleteReq) (*ProductAttributeValueDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeValueDelete not implemented")
+}
+func (UnimplementedProductAttributeValueServiceServer) mustEmbedUnimplementedProductAttributeValueServiceServer() {
+}
+
+// UnsafeProductAttributeValueServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductAttributeValueServiceServer will
+// result in compilation errors.
+type UnsafeProductAttributeValueServiceServer interface {
+	mustEmbedUnimplementedProductAttributeValueServiceServer()
+}
+
+func RegisterProductAttributeValueServiceServer(s grpc.ServiceRegistrar, srv ProductAttributeValueServiceServer) {
+	s.RegisterService(&ProductAttributeValueService_ServiceDesc, srv)
+}
+
+func _ProductAttributeValueService_ProductAttributeValueAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeValueAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeValueAdd(ctx, in)
+		return srv.(ProductAttributeValueServiceServer).ProductAttributeValueAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeValueAdd",
+		FullMethod: "/pmsclient.ProductAttributeValueService/ProductAttributeValueAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeValueAdd(ctx, req.(*ProductAttributeValueAddReq))
+		return srv.(ProductAttributeValueServiceServer).ProductAttributeValueAdd(ctx, req.(*ProductAttributeValueAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeValueList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductAttributeValueService_ProductAttributeValueList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeValueListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeValueList(ctx, in)
+		return srv.(ProductAttributeValueServiceServer).ProductAttributeValueList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeValueList",
+		FullMethod: "/pmsclient.ProductAttributeValueService/ProductAttributeValueList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeValueList(ctx, req.(*ProductAttributeValueListReq))
+		return srv.(ProductAttributeValueServiceServer).ProductAttributeValueList(ctx, req.(*ProductAttributeValueListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeValueUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductAttributeValueService_ProductAttributeValueUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeValueUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeValueUpdate(ctx, in)
+		return srv.(ProductAttributeValueServiceServer).ProductAttributeValueUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeValueUpdate",
+		FullMethod: "/pmsclient.ProductAttributeValueService/ProductAttributeValueUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeValueUpdate(ctx, req.(*ProductAttributeValueUpdateReq))
+		return srv.(ProductAttributeValueServiceServer).ProductAttributeValueUpdate(ctx, req.(*ProductAttributeValueUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductAttributeValueDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductAttributeValueService_ProductAttributeValueDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeValueDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductAttributeValueDelete(ctx, in)
+		return srv.(ProductAttributeValueServiceServer).ProductAttributeValueDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductAttributeValueDelete",
+		FullMethod: "/pmsclient.ProductAttributeValueService/ProductAttributeValueDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductAttributeValueDelete(ctx, req.(*ProductAttributeValueDeleteReq))
+		return srv.(ProductAttributeValueServiceServer).ProductAttributeValueDelete(ctx, req.(*ProductAttributeValueDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductCategoryAttributeRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductAttributeValueService_ServiceDesc is the grpc.ServiceDesc for ProductAttributeValueService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductAttributeValueService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductAttributeValueService",
+	HandlerType: (*ProductAttributeValueServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductAttributeValueAdd",
+			Handler:    _ProductAttributeValueService_ProductAttributeValueAdd_Handler,
+		},
+		{
+			MethodName: "ProductAttributeValueList",
+			Handler:    _ProductAttributeValueService_ProductAttributeValueList_Handler,
+		},
+		{
+			MethodName: "ProductAttributeValueUpdate",
+			Handler:    _ProductAttributeValueService_ProductAttributeValueUpdate_Handler,
+		},
+		{
+			MethodName: "ProductAttributeValueDelete",
+			Handler:    _ProductAttributeValueService_ProductAttributeValueDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// ProductCategoryAttributeRelationServiceClient is the client API for ProductCategoryAttributeRelationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductCategoryAttributeRelationServiceClient interface {
+	ProductCategoryAttributeRelationAdd(ctx context.Context, in *ProductCategoryAttributeRelationAddReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationAddResp, error)
+	ProductCategoryAttributeRelationList(ctx context.Context, in *ProductCategoryAttributeRelationListReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationListResp, error)
+	ProductCategoryAttributeRelationUpdate(ctx context.Context, in *ProductCategoryAttributeRelationUpdateReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationUpdateResp, error)
+	ProductCategoryAttributeRelationDelete(ctx context.Context, in *ProductCategoryAttributeRelationDeleteReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationDeleteResp, error)
+}
+
+type productCategoryAttributeRelationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductCategoryAttributeRelationServiceClient(cc grpc.ClientConnInterface) ProductCategoryAttributeRelationServiceClient {
+	return &productCategoryAttributeRelationServiceClient{cc}
+}
+
+func (c *productCategoryAttributeRelationServiceClient) ProductCategoryAttributeRelationAdd(ctx context.Context, in *ProductCategoryAttributeRelationAddReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationAddResp, error) {
+	out := new(ProductCategoryAttributeRelationAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductCategoryAttributeRelationService/ProductCategoryAttributeRelationAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productCategoryAttributeRelationServiceClient) ProductCategoryAttributeRelationList(ctx context.Context, in *ProductCategoryAttributeRelationListReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationListResp, error) {
+	out := new(ProductCategoryAttributeRelationListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductCategoryAttributeRelationService/ProductCategoryAttributeRelationList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productCategoryAttributeRelationServiceClient) ProductCategoryAttributeRelationUpdate(ctx context.Context, in *ProductCategoryAttributeRelationUpdateReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationUpdateResp, error) {
+	out := new(ProductCategoryAttributeRelationUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductCategoryAttributeRelationService/ProductCategoryAttributeRelationUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productCategoryAttributeRelationServiceClient) ProductCategoryAttributeRelationDelete(ctx context.Context, in *ProductCategoryAttributeRelationDeleteReq, opts ...grpc.CallOption) (*ProductCategoryAttributeRelationDeleteResp, error) {
+	out := new(ProductCategoryAttributeRelationDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductCategoryAttributeRelationService/ProductCategoryAttributeRelationDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductCategoryAttributeRelationServiceServer is the server API for ProductCategoryAttributeRelationService service.
+// All implementations must embed UnimplementedProductCategoryAttributeRelationServiceServer
+// for forward compatibility
+type ProductCategoryAttributeRelationServiceServer interface {
+	ProductCategoryAttributeRelationAdd(context.Context, *ProductCategoryAttributeRelationAddReq) (*ProductCategoryAttributeRelationAddResp, error)
+	ProductCategoryAttributeRelationList(context.Context, *ProductCategoryAttributeRelationListReq) (*ProductCategoryAttributeRelationListResp, error)
+	ProductCategoryAttributeRelationUpdate(context.Context, *ProductCategoryAttributeRelationUpdateReq) (*ProductCategoryAttributeRelationUpdateResp, error)
+	ProductCategoryAttributeRelationDelete(context.Context, *ProductCategoryAttributeRelationDeleteReq) (*ProductCategoryAttributeRelationDeleteResp, error)
+	mustEmbedUnimplementedProductCategoryAttributeRelationServiceServer()
+}
+
+// UnimplementedProductCategoryAttributeRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductCategoryAttributeRelationServiceServer struct {
+}
+
+func (UnimplementedProductCategoryAttributeRelationServiceServer) ProductCategoryAttributeRelationAdd(context.Context, *ProductCategoryAttributeRelationAddReq) (*ProductCategoryAttributeRelationAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAttributeRelationAdd not implemented")
+}
+func (UnimplementedProductCategoryAttributeRelationServiceServer) ProductCategoryAttributeRelationList(context.Context, *ProductCategoryAttributeRelationListReq) (*ProductCategoryAttributeRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAttributeRelationList not implemented")
+}
+func (UnimplementedProductCategoryAttributeRelationServiceServer) ProductCategoryAttributeRelationUpdate(context.Context, *ProductCategoryAttributeRelationUpdateReq) (*ProductCategoryAttributeRelationUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAttributeRelationUpdate not implemented")
+}
+func (UnimplementedProductCategoryAttributeRelationServiceServer) ProductCategoryAttributeRelationDelete(context.Context, *ProductCategoryAttributeRelationDeleteReq) (*ProductCategoryAttributeRelationDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAttributeRelationDelete not implemented")
+}
+func (UnimplementedProductCategoryAttributeRelationServiceServer) mustEmbedUnimplementedProductCategoryAttributeRelationServiceServer() {
+}
+
+// UnsafeProductCategoryAttributeRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductCategoryAttributeRelationServiceServer will
+// result in compilation errors.
+type UnsafeProductCategoryAttributeRelationServiceServer interface {
+	mustEmbedUnimplementedProductCategoryAttributeRelationServiceServer()
+}
+
+func RegisterProductCategoryAttributeRelationServiceServer(s grpc.ServiceRegistrar, srv ProductCategoryAttributeRelationServiceServer) {
+	s.RegisterService(&ProductCategoryAttributeRelationService_ServiceDesc, srv)
+}
+
+func _ProductCategoryAttributeRelationService_ProductCategoryAttributeRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryAttributeRelationAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductCategoryAttributeRelationAdd(ctx, in)
+		return srv.(ProductCategoryAttributeRelationServiceServer).ProductCategoryAttributeRelationAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategoryAttributeRelationAdd",
+		FullMethod: "/pmsclient.ProductCategoryAttributeRelationService/ProductCategoryAttributeRelationAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategoryAttributeRelationAdd(ctx, req.(*ProductCategoryAttributeRelationAddReq))
+		return srv.(ProductCategoryAttributeRelationServiceServer).ProductCategoryAttributeRelationAdd(ctx, req.(*ProductCategoryAttributeRelationAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductCategoryAttributeRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductCategoryAttributeRelationService_ProductCategoryAttributeRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryAttributeRelationListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductCategoryAttributeRelationList(ctx, in)
+		return srv.(ProductCategoryAttributeRelationServiceServer).ProductCategoryAttributeRelationList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategoryAttributeRelationList",
+		FullMethod: "/pmsclient.ProductCategoryAttributeRelationService/ProductCategoryAttributeRelationList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategoryAttributeRelationList(ctx, req.(*ProductCategoryAttributeRelationListReq))
+		return srv.(ProductCategoryAttributeRelationServiceServer).ProductCategoryAttributeRelationList(ctx, req.(*ProductCategoryAttributeRelationListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductCategoryAttributeRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductCategoryAttributeRelationService_ProductCategoryAttributeRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryAttributeRelationUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductCategoryAttributeRelationUpdate(ctx, in)
+		return srv.(ProductCategoryAttributeRelationServiceServer).ProductCategoryAttributeRelationUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategoryAttributeRelationUpdate",
+		FullMethod: "/pmsclient.ProductCategoryAttributeRelationService/ProductCategoryAttributeRelationUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategoryAttributeRelationUpdate(ctx, req.(*ProductCategoryAttributeRelationUpdateReq))
+		return srv.(ProductCategoryAttributeRelationServiceServer).ProductCategoryAttributeRelationUpdate(ctx, req.(*ProductCategoryAttributeRelationUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductCategoryAttributeRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductCategoryAttributeRelationService_ProductCategoryAttributeRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryAttributeRelationDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductCategoryAttributeRelationDelete(ctx, in)
+		return srv.(ProductCategoryAttributeRelationServiceServer).ProductCategoryAttributeRelationDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategoryAttributeRelationDelete",
+		FullMethod: "/pmsclient.ProductCategoryAttributeRelationService/ProductCategoryAttributeRelationDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategoryAttributeRelationDelete(ctx, req.(*ProductCategoryAttributeRelationDeleteReq))
+		return srv.(ProductCategoryAttributeRelationServiceServer).ProductCategoryAttributeRelationDelete(ctx, req.(*ProductCategoryAttributeRelationDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductCategoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductCategoryAttributeRelationService_ServiceDesc is the grpc.ServiceDesc for ProductCategoryAttributeRelationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductCategoryAttributeRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductCategoryAttributeRelationService",
+	HandlerType: (*ProductCategoryAttributeRelationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductCategoryAttributeRelationAdd",
+			Handler:    _ProductCategoryAttributeRelationService_ProductCategoryAttributeRelationAdd_Handler,
+		},
+		{
+			MethodName: "ProductCategoryAttributeRelationList",
+			Handler:    _ProductCategoryAttributeRelationService_ProductCategoryAttributeRelationList_Handler,
+		},
+		{
+			MethodName: "ProductCategoryAttributeRelationUpdate",
+			Handler:    _ProductCategoryAttributeRelationService_ProductCategoryAttributeRelationUpdate_Handler,
+		},
+		{
+			MethodName: "ProductCategoryAttributeRelationDelete",
+			Handler:    _ProductCategoryAttributeRelationService_ProductCategoryAttributeRelationDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// ProductCategoryServiceClient is the client API for ProductCategoryService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductCategoryServiceClient interface {
+	ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq, opts ...grpc.CallOption) (*ProductCategoryAddResp, error)
+	ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
+	ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
+	ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error)
+}
+
+type productCategoryServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductCategoryServiceClient(cc grpc.ClientConnInterface) ProductCategoryServiceClient {
+	return &productCategoryServiceClient{cc}
+}
+
+func (c *productCategoryServiceClient) ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq, opts ...grpc.CallOption) (*ProductCategoryAddResp, error) {
+	out := new(ProductCategoryAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductCategoryService/ProductCategoryAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productCategoryServiceClient) ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error) {
+	out := new(ProductCategoryListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductCategoryService/ProductCategoryList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productCategoryServiceClient) ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error) {
+	out := new(ProductCategoryUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductCategoryService/ProductCategoryUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productCategoryServiceClient) ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error) {
+	out := new(ProductCategoryDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductCategoryService/ProductCategoryDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductCategoryServiceServer is the server API for ProductCategoryService service.
+// All implementations must embed UnimplementedProductCategoryServiceServer
+// for forward compatibility
+type ProductCategoryServiceServer interface {
+	ProductCategoryAdd(context.Context, *ProductCategoryAddReq) (*ProductCategoryAddResp, error)
+	ProductCategoryList(context.Context, *ProductCategoryListReq) (*ProductCategoryListResp, error)
+	ProductCategoryUpdate(context.Context, *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error)
+	ProductCategoryDelete(context.Context, *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error)
+	mustEmbedUnimplementedProductCategoryServiceServer()
+}
+
+// UnimplementedProductCategoryServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductCategoryServiceServer struct {
+}
+
+func (UnimplementedProductCategoryServiceServer) ProductCategoryAdd(context.Context, *ProductCategoryAddReq) (*ProductCategoryAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryAdd not implemented")
+}
+func (UnimplementedProductCategoryServiceServer) ProductCategoryList(context.Context, *ProductCategoryListReq) (*ProductCategoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryList not implemented")
+}
+func (UnimplementedProductCategoryServiceServer) ProductCategoryUpdate(context.Context, *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryUpdate not implemented")
+}
+func (UnimplementedProductCategoryServiceServer) ProductCategoryDelete(context.Context, *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryDelete not implemented")
+}
+func (UnimplementedProductCategoryServiceServer) mustEmbedUnimplementedProductCategoryServiceServer() {
+}
+
+// UnsafeProductCategoryServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductCategoryServiceServer will
+// result in compilation errors.
+type UnsafeProductCategoryServiceServer interface {
+	mustEmbedUnimplementedProductCategoryServiceServer()
+}
+
+func RegisterProductCategoryServiceServer(s grpc.ServiceRegistrar, srv ProductCategoryServiceServer) {
+	s.RegisterService(&ProductCategoryService_ServiceDesc, srv)
+}
+
+func _ProductCategoryService_ProductCategoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductCategoryAdd(ctx, in)
+		return srv.(ProductCategoryServiceServer).ProductCategoryAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategoryAdd",
+		FullMethod: "/pmsclient.ProductCategoryService/ProductCategoryAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategoryAdd(ctx, req.(*ProductCategoryAddReq))
+		return srv.(ProductCategoryServiceServer).ProductCategoryAdd(ctx, req.(*ProductCategoryAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductCategoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductCategoryService_ProductCategoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductCategoryList(ctx, in)
+		return srv.(ProductCategoryServiceServer).ProductCategoryList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategoryList",
+		FullMethod: "/pmsclient.ProductCategoryService/ProductCategoryList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategoryList(ctx, req.(*ProductCategoryListReq))
+		return srv.(ProductCategoryServiceServer).ProductCategoryList(ctx, req.(*ProductCategoryListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductCategoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductCategoryService_ProductCategoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductCategoryUpdate(ctx, in)
+		return srv.(ProductCategoryServiceServer).ProductCategoryUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategoryUpdate",
+		FullMethod: "/pmsclient.ProductCategoryService/ProductCategoryUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategoryUpdate(ctx, req.(*ProductCategoryUpdateReq))
+		return srv.(ProductCategoryServiceServer).ProductCategoryUpdate(ctx, req.(*ProductCategoryUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductCategoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductCategoryService_ProductCategoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductCategoryDelete(ctx, in)
+		return srv.(ProductCategoryServiceServer).ProductCategoryDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductCategoryDelete",
+		FullMethod: "/pmsclient.ProductCategoryService/ProductCategoryDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductCategoryDelete(ctx, req.(*ProductCategoryDeleteReq))
+		return srv.(ProductCategoryServiceServer).ProductCategoryDelete(ctx, req.(*ProductCategoryDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductFullReductionAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductCategoryService_ServiceDesc is the grpc.ServiceDesc for ProductCategoryService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductCategoryService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductCategoryService",
+	HandlerType: (*ProductCategoryServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductCategoryAdd",
+			Handler:    _ProductCategoryService_ProductCategoryAdd_Handler,
+		},
+		{
+			MethodName: "ProductCategoryList",
+			Handler:    _ProductCategoryService_ProductCategoryList_Handler,
+		},
+		{
+			MethodName: "ProductCategoryUpdate",
+			Handler:    _ProductCategoryService_ProductCategoryUpdate_Handler,
+		},
+		{
+			MethodName: "ProductCategoryDelete",
+			Handler:    _ProductCategoryService_ProductCategoryDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// ProductFullReductionServiceClient is the client API for ProductFullReductionService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductFullReductionServiceClient interface {
+	ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq, opts ...grpc.CallOption) (*ProductFullReductionAddResp, error)
+	ProductFullReductionList(ctx context.Context, in *ProductFullReductionListReq, opts ...grpc.CallOption) (*ProductFullReductionListResp, error)
+	ProductFullReductionUpdate(ctx context.Context, in *ProductFullReductionUpdateReq, opts ...grpc.CallOption) (*ProductFullReductionUpdateResp, error)
+	ProductFullReductionDelete(ctx context.Context, in *ProductFullReductionDeleteReq, opts ...grpc.CallOption) (*ProductFullReductionDeleteResp, error)
+}
+
+type productFullReductionServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductFullReductionServiceClient(cc grpc.ClientConnInterface) ProductFullReductionServiceClient {
+	return &productFullReductionServiceClient{cc}
+}
+
+func (c *productFullReductionServiceClient) ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq, opts ...grpc.CallOption) (*ProductFullReductionAddResp, error) {
+	out := new(ProductFullReductionAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductFullReductionService/ProductFullReductionAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productFullReductionServiceClient) ProductFullReductionList(ctx context.Context, in *ProductFullReductionListReq, opts ...grpc.CallOption) (*ProductFullReductionListResp, error) {
+	out := new(ProductFullReductionListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductFullReductionService/ProductFullReductionList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productFullReductionServiceClient) ProductFullReductionUpdate(ctx context.Context, in *ProductFullReductionUpdateReq, opts ...grpc.CallOption) (*ProductFullReductionUpdateResp, error) {
+	out := new(ProductFullReductionUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductFullReductionService/ProductFullReductionUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productFullReductionServiceClient) ProductFullReductionDelete(ctx context.Context, in *ProductFullReductionDeleteReq, opts ...grpc.CallOption) (*ProductFullReductionDeleteResp, error) {
+	out := new(ProductFullReductionDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductFullReductionService/ProductFullReductionDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductFullReductionServiceServer is the server API for ProductFullReductionService service.
+// All implementations must embed UnimplementedProductFullReductionServiceServer
+// for forward compatibility
+type ProductFullReductionServiceServer interface {
+	ProductFullReductionAdd(context.Context, *ProductFullReductionAddReq) (*ProductFullReductionAddResp, error)
+	ProductFullReductionList(context.Context, *ProductFullReductionListReq) (*ProductFullReductionListResp, error)
+	ProductFullReductionUpdate(context.Context, *ProductFullReductionUpdateReq) (*ProductFullReductionUpdateResp, error)
+	ProductFullReductionDelete(context.Context, *ProductFullReductionDeleteReq) (*ProductFullReductionDeleteResp, error)
+	mustEmbedUnimplementedProductFullReductionServiceServer()
+}
+
+// UnimplementedProductFullReductionServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductFullReductionServiceServer struct {
+}
+
+func (UnimplementedProductFullReductionServiceServer) ProductFullReductionAdd(context.Context, *ProductFullReductionAddReq) (*ProductFullReductionAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductFullReductionAdd not implemented")
+}
+func (UnimplementedProductFullReductionServiceServer) ProductFullReductionList(context.Context, *ProductFullReductionListReq) (*ProductFullReductionListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductFullReductionList not implemented")
+}
+func (UnimplementedProductFullReductionServiceServer) ProductFullReductionUpdate(context.Context, *ProductFullReductionUpdateReq) (*ProductFullReductionUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductFullReductionUpdate not implemented")
+}
+func (UnimplementedProductFullReductionServiceServer) ProductFullReductionDelete(context.Context, *ProductFullReductionDeleteReq) (*ProductFullReductionDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductFullReductionDelete not implemented")
+}
+func (UnimplementedProductFullReductionServiceServer) mustEmbedUnimplementedProductFullReductionServiceServer() {
+}
+
+// UnsafeProductFullReductionServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductFullReductionServiceServer will
+// result in compilation errors.
+type UnsafeProductFullReductionServiceServer interface {
+	mustEmbedUnimplementedProductFullReductionServiceServer()
+}
+
+func RegisterProductFullReductionServiceServer(s grpc.ServiceRegistrar, srv ProductFullReductionServiceServer) {
+	s.RegisterService(&ProductFullReductionService_ServiceDesc, srv)
+}
+
+func _ProductFullReductionService_ProductFullReductionAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductFullReductionAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductFullReductionAdd(ctx, in)
+		return srv.(ProductFullReductionServiceServer).ProductFullReductionAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductFullReductionAdd",
+		FullMethod: "/pmsclient.ProductFullReductionService/ProductFullReductionAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductFullReductionAdd(ctx, req.(*ProductFullReductionAddReq))
+		return srv.(ProductFullReductionServiceServer).ProductFullReductionAdd(ctx, req.(*ProductFullReductionAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductFullReductionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductFullReductionService_ProductFullReductionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductFullReductionListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductFullReductionList(ctx, in)
+		return srv.(ProductFullReductionServiceServer).ProductFullReductionList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductFullReductionList",
+		FullMethod: "/pmsclient.ProductFullReductionService/ProductFullReductionList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductFullReductionList(ctx, req.(*ProductFullReductionListReq))
+		return srv.(ProductFullReductionServiceServer).ProductFullReductionList(ctx, req.(*ProductFullReductionListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductFullReductionUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductFullReductionService_ProductFullReductionUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductFullReductionUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductFullReductionUpdate(ctx, in)
+		return srv.(ProductFullReductionServiceServer).ProductFullReductionUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductFullReductionUpdate",
+		FullMethod: "/pmsclient.ProductFullReductionService/ProductFullReductionUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductFullReductionUpdate(ctx, req.(*ProductFullReductionUpdateReq))
+		return srv.(ProductFullReductionServiceServer).ProductFullReductionUpdate(ctx, req.(*ProductFullReductionUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductFullReductionDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductFullReductionService_ProductFullReductionDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductFullReductionDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductFullReductionDelete(ctx, in)
+		return srv.(ProductFullReductionServiceServer).ProductFullReductionDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductFullReductionDelete",
+		FullMethod: "/pmsclient.ProductFullReductionService/ProductFullReductionDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductFullReductionDelete(ctx, req.(*ProductFullReductionDeleteReq))
+		return srv.(ProductFullReductionServiceServer).ProductFullReductionDelete(ctx, req.(*ProductFullReductionDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductLadderAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductFullReductionService_ServiceDesc is the grpc.ServiceDesc for ProductFullReductionService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductFullReductionService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductFullReductionService",
+	HandlerType: (*ProductFullReductionServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductFullReductionAdd",
+			Handler:    _ProductFullReductionService_ProductFullReductionAdd_Handler,
+		},
+		{
+			MethodName: "ProductFullReductionList",
+			Handler:    _ProductFullReductionService_ProductFullReductionList_Handler,
+		},
+		{
+			MethodName: "ProductFullReductionUpdate",
+			Handler:    _ProductFullReductionService_ProductFullReductionUpdate_Handler,
+		},
+		{
+			MethodName: "ProductFullReductionDelete",
+			Handler:    _ProductFullReductionService_ProductFullReductionDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// ProductLadderServiceClient is the client API for ProductLadderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductLadderServiceClient interface {
+	ProductLadderAdd(ctx context.Context, in *ProductLadderAddReq, opts ...grpc.CallOption) (*ProductLadderAddResp, error)
+	ProductLadderList(ctx context.Context, in *ProductLadderListReq, opts ...grpc.CallOption) (*ProductLadderListResp, error)
+	ProductLadderUpdate(ctx context.Context, in *ProductLadderUpdateReq, opts ...grpc.CallOption) (*ProductLadderUpdateResp, error)
+	ProductLadderDelete(ctx context.Context, in *ProductLadderDeleteReq, opts ...grpc.CallOption) (*ProductLadderDeleteResp, error)
+}
+
+type productLadderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductLadderServiceClient(cc grpc.ClientConnInterface) ProductLadderServiceClient {
+	return &productLadderServiceClient{cc}
+}
+
+func (c *productLadderServiceClient) ProductLadderAdd(ctx context.Context, in *ProductLadderAddReq, opts ...grpc.CallOption) (*ProductLadderAddResp, error) {
+	out := new(ProductLadderAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductLadderService/ProductLadderAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productLadderServiceClient) ProductLadderList(ctx context.Context, in *ProductLadderListReq, opts ...grpc.CallOption) (*ProductLadderListResp, error) {
+	out := new(ProductLadderListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductLadderService/ProductLadderList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productLadderServiceClient) ProductLadderUpdate(ctx context.Context, in *ProductLadderUpdateReq, opts ...grpc.CallOption) (*ProductLadderUpdateResp, error) {
+	out := new(ProductLadderUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductLadderService/ProductLadderUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productLadderServiceClient) ProductLadderDelete(ctx context.Context, in *ProductLadderDeleteReq, opts ...grpc.CallOption) (*ProductLadderDeleteResp, error) {
+	out := new(ProductLadderDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductLadderService/ProductLadderDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductLadderServiceServer is the server API for ProductLadderService service.
+// All implementations must embed UnimplementedProductLadderServiceServer
+// for forward compatibility
+type ProductLadderServiceServer interface {
+	ProductLadderAdd(context.Context, *ProductLadderAddReq) (*ProductLadderAddResp, error)
+	ProductLadderList(context.Context, *ProductLadderListReq) (*ProductLadderListResp, error)
+	ProductLadderUpdate(context.Context, *ProductLadderUpdateReq) (*ProductLadderUpdateResp, error)
+	ProductLadderDelete(context.Context, *ProductLadderDeleteReq) (*ProductLadderDeleteResp, error)
+	mustEmbedUnimplementedProductLadderServiceServer()
+}
+
+// UnimplementedProductLadderServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductLadderServiceServer struct {
+}
+
+func (UnimplementedProductLadderServiceServer) ProductLadderAdd(context.Context, *ProductLadderAddReq) (*ProductLadderAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductLadderAdd not implemented")
+}
+func (UnimplementedProductLadderServiceServer) ProductLadderList(context.Context, *ProductLadderListReq) (*ProductLadderListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductLadderList not implemented")
+}
+func (UnimplementedProductLadderServiceServer) ProductLadderUpdate(context.Context, *ProductLadderUpdateReq) (*ProductLadderUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductLadderUpdate not implemented")
+}
+func (UnimplementedProductLadderServiceServer) ProductLadderDelete(context.Context, *ProductLadderDeleteReq) (*ProductLadderDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductLadderDelete not implemented")
+}
+func (UnimplementedProductLadderServiceServer) mustEmbedUnimplementedProductLadderServiceServer() {}
+
+// UnsafeProductLadderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductLadderServiceServer will
+// result in compilation errors.
+type UnsafeProductLadderServiceServer interface {
+	mustEmbedUnimplementedProductLadderServiceServer()
+}
+
+func RegisterProductLadderServiceServer(s grpc.ServiceRegistrar, srv ProductLadderServiceServer) {
+	s.RegisterService(&ProductLadderService_ServiceDesc, srv)
+}
+
+func _ProductLadderService_ProductLadderAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductLadderAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductLadderAdd(ctx, in)
+		return srv.(ProductLadderServiceServer).ProductLadderAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductLadderAdd",
+		FullMethod: "/pmsclient.ProductLadderService/ProductLadderAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductLadderAdd(ctx, req.(*ProductLadderAddReq))
+		return srv.(ProductLadderServiceServer).ProductLadderAdd(ctx, req.(*ProductLadderAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductLadderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductLadderService_ProductLadderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductLadderListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductLadderList(ctx, in)
+		return srv.(ProductLadderServiceServer).ProductLadderList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductLadderList",
+		FullMethod: "/pmsclient.ProductLadderService/ProductLadderList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductLadderList(ctx, req.(*ProductLadderListReq))
+		return srv.(ProductLadderServiceServer).ProductLadderList(ctx, req.(*ProductLadderListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductLadderUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductLadderService_ProductLadderUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductLadderUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductLadderUpdate(ctx, in)
+		return srv.(ProductLadderServiceServer).ProductLadderUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductLadderUpdate",
+		FullMethod: "/pmsclient.ProductLadderService/ProductLadderUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductLadderUpdate(ctx, req.(*ProductLadderUpdateReq))
+		return srv.(ProductLadderServiceServer).ProductLadderUpdate(ctx, req.(*ProductLadderUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductLadderDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductLadderService_ProductLadderDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductLadderDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductLadderDelete(ctx, in)
+		return srv.(ProductLadderServiceServer).ProductLadderDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductLadderDelete",
+		FullMethod: "/pmsclient.ProductLadderService/ProductLadderDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductLadderDelete(ctx, req.(*ProductLadderDeleteReq))
+		return srv.(ProductLadderServiceServer).ProductLadderDelete(ctx, req.(*ProductLadderDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductOperateLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductLadderService_ServiceDesc is the grpc.ServiceDesc for ProductLadderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductLadderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductLadderService",
+	HandlerType: (*ProductLadderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductLadderAdd",
+			Handler:    _ProductLadderService_ProductLadderAdd_Handler,
+		},
+		{
+			MethodName: "ProductLadderList",
+			Handler:    _ProductLadderService_ProductLadderList_Handler,
+		},
+		{
+			MethodName: "ProductLadderUpdate",
+			Handler:    _ProductLadderService_ProductLadderUpdate_Handler,
+		},
+		{
+			MethodName: "ProductLadderDelete",
+			Handler:    _ProductLadderService_ProductLadderDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// ProductOperateLogServiceClient is the client API for ProductOperateLogService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductOperateLogServiceClient interface {
+	ProductOperateLogAdd(ctx context.Context, in *ProductOperateLogAddReq, opts ...grpc.CallOption) (*ProductOperateLogAddResp, error)
+	ProductOperateLogList(ctx context.Context, in *ProductOperateLogListReq, opts ...grpc.CallOption) (*ProductOperateLogListResp, error)
+	ProductOperateLogUpdate(ctx context.Context, in *ProductOperateLogUpdateReq, opts ...grpc.CallOption) (*ProductOperateLogUpdateResp, error)
+	ProductOperateLogDelete(ctx context.Context, in *ProductOperateLogDeleteReq, opts ...grpc.CallOption) (*ProductOperateLogDeleteResp, error)
+}
+
+type productOperateLogServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductOperateLogServiceClient(cc grpc.ClientConnInterface) ProductOperateLogServiceClient {
+	return &productOperateLogServiceClient{cc}
+}
+
+func (c *productOperateLogServiceClient) ProductOperateLogAdd(ctx context.Context, in *ProductOperateLogAddReq, opts ...grpc.CallOption) (*ProductOperateLogAddResp, error) {
+	out := new(ProductOperateLogAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductOperateLogService/ProductOperateLogAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productOperateLogServiceClient) ProductOperateLogList(ctx context.Context, in *ProductOperateLogListReq, opts ...grpc.CallOption) (*ProductOperateLogListResp, error) {
+	out := new(ProductOperateLogListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductOperateLogService/ProductOperateLogList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productOperateLogServiceClient) ProductOperateLogUpdate(ctx context.Context, in *ProductOperateLogUpdateReq, opts ...grpc.CallOption) (*ProductOperateLogUpdateResp, error) {
+	out := new(ProductOperateLogUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductOperateLogService/ProductOperateLogUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productOperateLogServiceClient) ProductOperateLogDelete(ctx context.Context, in *ProductOperateLogDeleteReq, opts ...grpc.CallOption) (*ProductOperateLogDeleteResp, error) {
+	out := new(ProductOperateLogDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductOperateLogService/ProductOperateLogDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductOperateLogServiceServer is the server API for ProductOperateLogService service.
+// All implementations must embed UnimplementedProductOperateLogServiceServer
+// for forward compatibility
+type ProductOperateLogServiceServer interface {
+	ProductOperateLogAdd(context.Context, *ProductOperateLogAddReq) (*ProductOperateLogAddResp, error)
+	ProductOperateLogList(context.Context, *ProductOperateLogListReq) (*ProductOperateLogListResp, error)
+	ProductOperateLogUpdate(context.Context, *ProductOperateLogUpdateReq) (*ProductOperateLogUpdateResp, error)
+	ProductOperateLogDelete(context.Context, *ProductOperateLogDeleteReq) (*ProductOperateLogDeleteResp, error)
+	mustEmbedUnimplementedProductOperateLogServiceServer()
+}
+
+// UnimplementedProductOperateLogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductOperateLogServiceServer struct {
+}
+
+func (UnimplementedProductOperateLogServiceServer) ProductOperateLogAdd(context.Context, *ProductOperateLogAddReq) (*ProductOperateLogAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductOperateLogAdd not implemented")
+}
+func (UnimplementedProductOperateLogServiceServer) ProductOperateLogList(context.Context, *ProductOperateLogListReq) (*ProductOperateLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductOperateLogList not implemented")
+}
+func (UnimplementedProductOperateLogServiceServer) ProductOperateLogUpdate(context.Context, *ProductOperateLogUpdateReq) (*ProductOperateLogUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductOperateLogUpdate not implemented")
+}
+func (UnimplementedProductOperateLogServiceServer) ProductOperateLogDelete(context.Context, *ProductOperateLogDeleteReq) (*ProductOperateLogDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductOperateLogDelete not implemented")
+}
+func (UnimplementedProductOperateLogServiceServer) mustEmbedUnimplementedProductOperateLogServiceServer() {
+}
+
+// UnsafeProductOperateLogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductOperateLogServiceServer will
+// result in compilation errors.
+type UnsafeProductOperateLogServiceServer interface {
+	mustEmbedUnimplementedProductOperateLogServiceServer()
+}
+
+func RegisterProductOperateLogServiceServer(s grpc.ServiceRegistrar, srv ProductOperateLogServiceServer) {
+	s.RegisterService(&ProductOperateLogService_ServiceDesc, srv)
+}
+
+func _ProductOperateLogService_ProductOperateLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductOperateLogAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductOperateLogAdd(ctx, in)
+		return srv.(ProductOperateLogServiceServer).ProductOperateLogAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductOperateLogAdd",
+		FullMethod: "/pmsclient.ProductOperateLogService/ProductOperateLogAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductOperateLogAdd(ctx, req.(*ProductOperateLogAddReq))
+		return srv.(ProductOperateLogServiceServer).ProductOperateLogAdd(ctx, req.(*ProductOperateLogAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductOperateLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductOperateLogService_ProductOperateLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductOperateLogListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductOperateLogList(ctx, in)
+		return srv.(ProductOperateLogServiceServer).ProductOperateLogList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductOperateLogList",
+		FullMethod: "/pmsclient.ProductOperateLogService/ProductOperateLogList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductOperateLogList(ctx, req.(*ProductOperateLogListReq))
+		return srv.(ProductOperateLogServiceServer).ProductOperateLogList(ctx, req.(*ProductOperateLogListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductOperateLogUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductOperateLogService_ProductOperateLogUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductOperateLogUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductOperateLogUpdate(ctx, in)
+		return srv.(ProductOperateLogServiceServer).ProductOperateLogUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductOperateLogUpdate",
+		FullMethod: "/pmsclient.ProductOperateLogService/ProductOperateLogUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductOperateLogUpdate(ctx, req.(*ProductOperateLogUpdateReq))
+		return srv.(ProductOperateLogServiceServer).ProductOperateLogUpdate(ctx, req.(*ProductOperateLogUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductOperateLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductOperateLogService_ProductOperateLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductOperateLogDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductOperateLogDelete(ctx, in)
+		return srv.(ProductOperateLogServiceServer).ProductOperateLogDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductOperateLogDelete",
+		FullMethod: "/pmsclient.ProductOperateLogService/ProductOperateLogDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductOperateLogDelete(ctx, req.(*ProductOperateLogDeleteReq))
+		return srv.(ProductOperateLogServiceServer).ProductOperateLogDelete(ctx, req.(*ProductOperateLogDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductVertifyRecordAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductOperateLogService_ServiceDesc is the grpc.ServiceDesc for ProductOperateLogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductOperateLogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductOperateLogService",
+	HandlerType: (*ProductOperateLogServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductOperateLogAdd",
+			Handler:    _ProductOperateLogService_ProductOperateLogAdd_Handler,
+		},
+		{
+			MethodName: "ProductOperateLogList",
+			Handler:    _ProductOperateLogService_ProductOperateLogList_Handler,
+		},
+		{
+			MethodName: "ProductOperateLogUpdate",
+			Handler:    _ProductOperateLogService_ProductOperateLogUpdate_Handler,
+		},
+		{
+			MethodName: "ProductOperateLogDelete",
+			Handler:    _ProductOperateLogService_ProductOperateLogDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// ProductVertifyRecordServiceClient is the client API for ProductVertifyRecordService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductVertifyRecordServiceClient interface {
+	ProductVertifyRecordAdd(ctx context.Context, in *ProductVertifyRecordAddReq, opts ...grpc.CallOption) (*ProductVertifyRecordAddResp, error)
+	ProductVertifyRecordList(ctx context.Context, in *ProductVertifyRecordListReq, opts ...grpc.CallOption) (*ProductVertifyRecordListResp, error)
+	ProductVertifyRecordUpdate(ctx context.Context, in *ProductVertifyRecordUpdateReq, opts ...grpc.CallOption) (*ProductVertifyRecordUpdateResp, error)
+	ProductVertifyRecordDelete(ctx context.Context, in *ProductVertifyRecordDeleteReq, opts ...grpc.CallOption) (*ProductVertifyRecordDeleteResp, error)
+}
+
+type productVertifyRecordServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductVertifyRecordServiceClient(cc grpc.ClientConnInterface) ProductVertifyRecordServiceClient {
+	return &productVertifyRecordServiceClient{cc}
+}
+
+func (c *productVertifyRecordServiceClient) ProductVertifyRecordAdd(ctx context.Context, in *ProductVertifyRecordAddReq, opts ...grpc.CallOption) (*ProductVertifyRecordAddResp, error) {
+	out := new(ProductVertifyRecordAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductVertifyRecordService/ProductVertifyRecordAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productVertifyRecordServiceClient) ProductVertifyRecordList(ctx context.Context, in *ProductVertifyRecordListReq, opts ...grpc.CallOption) (*ProductVertifyRecordListResp, error) {
+	out := new(ProductVertifyRecordListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductVertifyRecordService/ProductVertifyRecordList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productVertifyRecordServiceClient) ProductVertifyRecordUpdate(ctx context.Context, in *ProductVertifyRecordUpdateReq, opts ...grpc.CallOption) (*ProductVertifyRecordUpdateResp, error) {
+	out := new(ProductVertifyRecordUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductVertifyRecordService/ProductVertifyRecordUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productVertifyRecordServiceClient) ProductVertifyRecordDelete(ctx context.Context, in *ProductVertifyRecordDeleteReq, opts ...grpc.CallOption) (*ProductVertifyRecordDeleteResp, error) {
+	out := new(ProductVertifyRecordDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.ProductVertifyRecordService/ProductVertifyRecordDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductVertifyRecordServiceServer is the server API for ProductVertifyRecordService service.
+// All implementations must embed UnimplementedProductVertifyRecordServiceServer
+// for forward compatibility
+type ProductVertifyRecordServiceServer interface {
+	ProductVertifyRecordAdd(context.Context, *ProductVertifyRecordAddReq) (*ProductVertifyRecordAddResp, error)
+	ProductVertifyRecordList(context.Context, *ProductVertifyRecordListReq) (*ProductVertifyRecordListResp, error)
+	ProductVertifyRecordUpdate(context.Context, *ProductVertifyRecordUpdateReq) (*ProductVertifyRecordUpdateResp, error)
+	ProductVertifyRecordDelete(context.Context, *ProductVertifyRecordDeleteReq) (*ProductVertifyRecordDeleteResp, error)
+	mustEmbedUnimplementedProductVertifyRecordServiceServer()
+}
+
+// UnimplementedProductVertifyRecordServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductVertifyRecordServiceServer struct {
+}
+
+func (UnimplementedProductVertifyRecordServiceServer) ProductVertifyRecordAdd(context.Context, *ProductVertifyRecordAddReq) (*ProductVertifyRecordAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductVertifyRecordAdd not implemented")
+}
+func (UnimplementedProductVertifyRecordServiceServer) ProductVertifyRecordList(context.Context, *ProductVertifyRecordListReq) (*ProductVertifyRecordListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductVertifyRecordList not implemented")
+}
+func (UnimplementedProductVertifyRecordServiceServer) ProductVertifyRecordUpdate(context.Context, *ProductVertifyRecordUpdateReq) (*ProductVertifyRecordUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductVertifyRecordUpdate not implemented")
+}
+func (UnimplementedProductVertifyRecordServiceServer) ProductVertifyRecordDelete(context.Context, *ProductVertifyRecordDeleteReq) (*ProductVertifyRecordDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductVertifyRecordDelete not implemented")
+}
+func (UnimplementedProductVertifyRecordServiceServer) mustEmbedUnimplementedProductVertifyRecordServiceServer() {
+}
+
+// UnsafeProductVertifyRecordServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductVertifyRecordServiceServer will
+// result in compilation errors.
+type UnsafeProductVertifyRecordServiceServer interface {
+	mustEmbedUnimplementedProductVertifyRecordServiceServer()
+}
+
+func RegisterProductVertifyRecordServiceServer(s grpc.ServiceRegistrar, srv ProductVertifyRecordServiceServer) {
+	s.RegisterService(&ProductVertifyRecordService_ServiceDesc, srv)
+}
+
+func _ProductVertifyRecordService_ProductVertifyRecordAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductVertifyRecordAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductVertifyRecordAdd(ctx, in)
+		return srv.(ProductVertifyRecordServiceServer).ProductVertifyRecordAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductVertifyRecordAdd",
+		FullMethod: "/pmsclient.ProductVertifyRecordService/ProductVertifyRecordAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductVertifyRecordAdd(ctx, req.(*ProductVertifyRecordAddReq))
+		return srv.(ProductVertifyRecordServiceServer).ProductVertifyRecordAdd(ctx, req.(*ProductVertifyRecordAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductVertifyRecordList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductVertifyRecordService_ProductVertifyRecordList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductVertifyRecordListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductVertifyRecordList(ctx, in)
+		return srv.(ProductVertifyRecordServiceServer).ProductVertifyRecordList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductVertifyRecordList",
+		FullMethod: "/pmsclient.ProductVertifyRecordService/ProductVertifyRecordList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductVertifyRecordList(ctx, req.(*ProductVertifyRecordListReq))
+		return srv.(ProductVertifyRecordServiceServer).ProductVertifyRecordList(ctx, req.(*ProductVertifyRecordListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductVertifyRecordUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductVertifyRecordService_ProductVertifyRecordUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductVertifyRecordUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductVertifyRecordUpdate(ctx, in)
+		return srv.(ProductVertifyRecordServiceServer).ProductVertifyRecordUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductVertifyRecordUpdate",
+		FullMethod: "/pmsclient.ProductVertifyRecordService/ProductVertifyRecordUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductVertifyRecordUpdate(ctx, req.(*ProductVertifyRecordUpdateReq))
+		return srv.(ProductVertifyRecordServiceServer).ProductVertifyRecordUpdate(ctx, req.(*ProductVertifyRecordUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_ProductVertifyRecordDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductVertifyRecordService_ProductVertifyRecordDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductVertifyRecordDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).ProductVertifyRecordDelete(ctx, in)
+		return srv.(ProductVertifyRecordServiceServer).ProductVertifyRecordDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/ProductVertifyRecordDelete",
+		FullMethod: "/pmsclient.ProductVertifyRecordService/ProductVertifyRecordDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).ProductVertifyRecordDelete(ctx, req.(*ProductVertifyRecordDeleteReq))
+		return srv.(ProductVertifyRecordServiceServer).ProductVertifyRecordDelete(ctx, req.(*ProductVertifyRecordDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_SkuStockAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ProductVertifyRecordService_ServiceDesc is the grpc.ServiceDesc for ProductVertifyRecordService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductVertifyRecordService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductVertifyRecordService",
+	HandlerType: (*ProductVertifyRecordServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ProductVertifyRecordAdd",
+			Handler:    _ProductVertifyRecordService_ProductVertifyRecordAdd_Handler,
+		},
+		{
+			MethodName: "ProductVertifyRecordList",
+			Handler:    _ProductVertifyRecordService_ProductVertifyRecordList_Handler,
+		},
+		{
+			MethodName: "ProductVertifyRecordUpdate",
+			Handler:    _ProductVertifyRecordService_ProductVertifyRecordUpdate_Handler,
+		},
+		{
+			MethodName: "ProductVertifyRecordDelete",
+			Handler:    _ProductVertifyRecordService_ProductVertifyRecordDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pms.proto",
+}
+
+// SkuStockServiceClient is the client API for SkuStockService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type SkuStockServiceClient interface {
+	SkuStockAdd(ctx context.Context, in *SkuStockAddReq, opts ...grpc.CallOption) (*SkuStockAddResp, error)
+	SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error)
+	SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error)
+	SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error)
+}
+
+type skuStockServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSkuStockServiceClient(cc grpc.ClientConnInterface) SkuStockServiceClient {
+	return &skuStockServiceClient{cc}
+}
+
+func (c *skuStockServiceClient) SkuStockAdd(ctx context.Context, in *SkuStockAddReq, opts ...grpc.CallOption) (*SkuStockAddResp, error) {
+	out := new(SkuStockAddResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.SkuStockService/SkuStockAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *skuStockServiceClient) SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error) {
+	out := new(SkuStockListResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.SkuStockService/SkuStockList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *skuStockServiceClient) SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error) {
+	out := new(SkuStockUpdateResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.SkuStockService/SkuStockUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *skuStockServiceClient) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error) {
+	out := new(SkuStockDeleteResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.SkuStockService/SkuStockDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SkuStockServiceServer is the server API for SkuStockService service.
+// All implementations must embed UnimplementedSkuStockServiceServer
+// for forward compatibility
+type SkuStockServiceServer interface {
+	SkuStockAdd(context.Context, *SkuStockAddReq) (*SkuStockAddResp, error)
+	SkuStockList(context.Context, *SkuStockListReq) (*SkuStockListResp, error)
+	SkuStockUpdate(context.Context, *SkuStockUpdateReq) (*SkuStockUpdateResp, error)
+	SkuStockDelete(context.Context, *SkuStockDeleteReq) (*SkuStockDeleteResp, error)
+	mustEmbedUnimplementedSkuStockServiceServer()
+}
+
+// UnimplementedSkuStockServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedSkuStockServiceServer struct {
+}
+
+func (UnimplementedSkuStockServiceServer) SkuStockAdd(context.Context, *SkuStockAddReq) (*SkuStockAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SkuStockAdd not implemented")
+}
+func (UnimplementedSkuStockServiceServer) SkuStockList(context.Context, *SkuStockListReq) (*SkuStockListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SkuStockList not implemented")
+}
+func (UnimplementedSkuStockServiceServer) SkuStockUpdate(context.Context, *SkuStockUpdateReq) (*SkuStockUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SkuStockUpdate not implemented")
+}
+func (UnimplementedSkuStockServiceServer) SkuStockDelete(context.Context, *SkuStockDeleteReq) (*SkuStockDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SkuStockDelete not implemented")
+}
+func (UnimplementedSkuStockServiceServer) mustEmbedUnimplementedSkuStockServiceServer() {}
+
+// UnsafeSkuStockServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SkuStockServiceServer will
+// result in compilation errors.
+type UnsafeSkuStockServiceServer interface {
+	mustEmbedUnimplementedSkuStockServiceServer()
+}
+
+func RegisterSkuStockServiceServer(s grpc.ServiceRegistrar, srv SkuStockServiceServer) {
+	s.RegisterService(&SkuStockService_ServiceDesc, srv)
+}
+
+func _SkuStockService_SkuStockAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SkuStockAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).SkuStockAdd(ctx, in)
+		return srv.(SkuStockServiceServer).SkuStockAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/SkuStockAdd",
+		FullMethod: "/pmsclient.SkuStockService/SkuStockAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).SkuStockAdd(ctx, req.(*SkuStockAddReq))
+		return srv.(SkuStockServiceServer).SkuStockAdd(ctx, req.(*SkuStockAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_SkuStockList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SkuStockService_SkuStockList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SkuStockListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).SkuStockList(ctx, in)
+		return srv.(SkuStockServiceServer).SkuStockList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/SkuStockList",
+		FullMethod: "/pmsclient.SkuStockService/SkuStockList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).SkuStockList(ctx, req.(*SkuStockListReq))
+		return srv.(SkuStockServiceServer).SkuStockList(ctx, req.(*SkuStockListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_SkuStockUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SkuStockService_SkuStockUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SkuStockUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).SkuStockUpdate(ctx, in)
+		return srv.(SkuStockServiceServer).SkuStockUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/SkuStockUpdate",
+		FullMethod: "/pmsclient.SkuStockService/SkuStockUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).SkuStockUpdate(ctx, req.(*SkuStockUpdateReq))
+		return srv.(SkuStockServiceServer).SkuStockUpdate(ctx, req.(*SkuStockUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pms_SkuStockDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SkuStockService_SkuStockDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SkuStockDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PmsServer).SkuStockDelete(ctx, in)
+		return srv.(SkuStockServiceServer).SkuStockDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pmsclient.Pms/SkuStockDelete",
+		FullMethod: "/pmsclient.SkuStockService/SkuStockDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PmsServer).SkuStockDelete(ctx, req.(*SkuStockDeleteReq))
+		return srv.(SkuStockServiceServer).SkuStockDelete(ctx, req.(*SkuStockDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Pms_ServiceDesc is the grpc.ServiceDesc for Pms service.
+// SkuStockService_ServiceDesc is the grpc.ServiceDesc for SkuStockService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Pms_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.Pms",
-	HandlerType: (*PmsServer)(nil),
+var SkuStockService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.SkuStockService",
+	HandlerType: (*SkuStockServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ProductAdd",
-			Handler:    _Pms_ProductAdd_Handler,
-		},
-		{
-			MethodName: "ProductList",
-			Handler:    _Pms_ProductList_Handler,
-		},
-		{
-			MethodName: "ProductListByIds",
-			Handler:    _Pms_ProductListByIds_Handler,
-		},
-		{
-			MethodName: "ProductUpdate",
-			Handler:    _Pms_ProductUpdate_Handler,
-		},
-		{
-			MethodName: "ProductDelete",
-			Handler:    _Pms_ProductDelete_Handler,
-		},
-		{
-			MethodName: "ProductDetailById",
-			Handler:    _Pms_ProductDetailById_Handler,
-		},
-		{
-			MethodName: "AlbumAdd",
-			Handler:    _Pms_AlbumAdd_Handler,
-		},
-		{
-			MethodName: "AlbumList",
-			Handler:    _Pms_AlbumList_Handler,
-		},
-		{
-			MethodName: "AlbumUpdate",
-			Handler:    _Pms_AlbumUpdate_Handler,
-		},
-		{
-			MethodName: "AlbumDelete",
-			Handler:    _Pms_AlbumDelete_Handler,
-		},
-		{
-			MethodName: "AlbumPicAdd",
-			Handler:    _Pms_AlbumPicAdd_Handler,
-		},
-		{
-			MethodName: "AlbumPicList",
-			Handler:    _Pms_AlbumPicList_Handler,
-		},
-		{
-			MethodName: "AlbumPicUpdate",
-			Handler:    _Pms_AlbumPicUpdate_Handler,
-		},
-		{
-			MethodName: "AlbumPicDelete",
-			Handler:    _Pms_AlbumPicDelete_Handler,
-		},
-		{
-			MethodName: "BrandAdd",
-			Handler:    _Pms_BrandAdd_Handler,
-		},
-		{
-			MethodName: "BrandList",
-			Handler:    _Pms_BrandList_Handler,
-		},
-		{
-			MethodName: "BrandListByIds",
-			Handler:    _Pms_BrandListByIds_Handler,
-		},
-		{
-			MethodName: "BrandUpdate",
-			Handler:    _Pms_BrandUpdate_Handler,
-		},
-		{
-			MethodName: "BrandDelete",
-			Handler:    _Pms_BrandDelete_Handler,
-		},
-		{
-			MethodName: "CommentAdd",
-			Handler:    _Pms_CommentAdd_Handler,
-		},
-		{
-			MethodName: "CommentList",
-			Handler:    _Pms_CommentList_Handler,
-		},
-		{
-			MethodName: "CommentUpdate",
-			Handler:    _Pms_CommentUpdate_Handler,
-		},
-		{
-			MethodName: "CommentDelete",
-			Handler:    _Pms_CommentDelete_Handler,
-		},
-		{
-			MethodName: "CommentReplayAdd",
-			Handler:    _Pms_CommentReplayAdd_Handler,
-		},
-		{
-			MethodName: "CommentReplayList",
-			Handler:    _Pms_CommentReplayList_Handler,
-		},
-		{
-			MethodName: "CommentReplayUpdate",
-			Handler:    _Pms_CommentReplayUpdate_Handler,
-		},
-		{
-			MethodName: "CommentReplayDelete",
-			Handler:    _Pms_CommentReplayDelete_Handler,
-		},
-		{
-			MethodName: "FeightTemplateAdd",
-			Handler:    _Pms_FeightTemplateAdd_Handler,
-		},
-		{
-			MethodName: "FeightTemplateList",
-			Handler:    _Pms_FeightTemplateList_Handler,
-		},
-		{
-			MethodName: "FeightTemplateUpdate",
-			Handler:    _Pms_FeightTemplateUpdate_Handler,
-		},
-		{
-			MethodName: "FeightTemplateDelete",
-			Handler:    _Pms_FeightTemplateDelete_Handler,
-		},
-		{
-			MethodName: "MemberPriceAdd",
-			Handler:    _Pms_MemberPriceAdd_Handler,
-		},
-		{
-			MethodName: "MemberPriceList",
-			Handler:    _Pms_MemberPriceList_Handler,
-		},
-		{
-			MethodName: "MemberPriceUpdate",
-			Handler:    _Pms_MemberPriceUpdate_Handler,
-		},
-		{
-			MethodName: "MemberPriceDelete",
-			Handler:    _Pms_MemberPriceDelete_Handler,
-		},
-		{
-			MethodName: "ProductAttributeCategoryAdd",
-			Handler:    _Pms_ProductAttributeCategoryAdd_Handler,
-		},
-		{
-			MethodName: "ProductAttributeCategoryList",
-			Handler:    _Pms_ProductAttributeCategoryList_Handler,
-		},
-		{
-			MethodName: "ProductAttributeCategoryUpdate",
-			Handler:    _Pms_ProductAttributeCategoryUpdate_Handler,
-		},
-		{
-			MethodName: "ProductAttributeCategoryDelete",
-			Handler:    _Pms_ProductAttributeCategoryDelete_Handler,
-		},
-		{
-			MethodName: "ProductAttributeAdd",
-			Handler:    _Pms_ProductAttributeAdd_Handler,
-		},
-		{
-			MethodName: "ProductAttributeList",
-			Handler:    _Pms_ProductAttributeList_Handler,
-		},
-		{
-			MethodName: "ProductAttributeUpdate",
-			Handler:    _Pms_ProductAttributeUpdate_Handler,
-		},
-		{
-			MethodName: "ProductAttributeDelete",
-			Handler:    _Pms_ProductAttributeDelete_Handler,
-		},
-		{
-			MethodName: "ProductAttributeValueAdd",
-			Handler:    _Pms_ProductAttributeValueAdd_Handler,
-		},
-		{
-			MethodName: "ProductAttributeValueList",
-			Handler:    _Pms_ProductAttributeValueList_Handler,
-		},
-		{
-			MethodName: "ProductAttributeValueUpdate",
-			Handler:    _Pms_ProductAttributeValueUpdate_Handler,
-		},
-		{
-			MethodName: "ProductAttributeValueDelete",
-			Handler:    _Pms_ProductAttributeValueDelete_Handler,
-		},
-		{
-			MethodName: "ProductCategoryAttributeRelationAdd",
-			Handler:    _Pms_ProductCategoryAttributeRelationAdd_Handler,
-		},
-		{
-			MethodName: "ProductCategoryAttributeRelationList",
-			Handler:    _Pms_ProductCategoryAttributeRelationList_Handler,
-		},
-		{
-			MethodName: "ProductCategoryAttributeRelationUpdate",
-			Handler:    _Pms_ProductCategoryAttributeRelationUpdate_Handler,
-		},
-		{
-			MethodName: "ProductCategoryAttributeRelationDelete",
-			Handler:    _Pms_ProductCategoryAttributeRelationDelete_Handler,
-		},
-		{
-			MethodName: "ProductCategoryAdd",
-			Handler:    _Pms_ProductCategoryAdd_Handler,
-		},
-		{
-			MethodName: "ProductCategoryList",
-			Handler:    _Pms_ProductCategoryList_Handler,
-		},
-		{
-			MethodName: "ProductCategoryUpdate",
-			Handler:    _Pms_ProductCategoryUpdate_Handler,
-		},
-		{
-			MethodName: "ProductCategoryDelete",
-			Handler:    _Pms_ProductCategoryDelete_Handler,
-		},
-		{
-			MethodName: "ProductFullReductionAdd",
-			Handler:    _Pms_ProductFullReductionAdd_Handler,
-		},
-		{
-			MethodName: "ProductFullReductionList",
-			Handler:    _Pms_ProductFullReductionList_Handler,
-		},
-		{
-			MethodName: "ProductFullReductionUpdate",
-			Handler:    _Pms_ProductFullReductionUpdate_Handler,
-		},
-		{
-			MethodName: "ProductFullReductionDelete",
-			Handler:    _Pms_ProductFullReductionDelete_Handler,
-		},
-		{
-			MethodName: "ProductLadderAdd",
-			Handler:    _Pms_ProductLadderAdd_Handler,
-		},
-		{
-			MethodName: "ProductLadderList",
-			Handler:    _Pms_ProductLadderList_Handler,
-		},
-		{
-			MethodName: "ProductLadderUpdate",
-			Handler:    _Pms_ProductLadderUpdate_Handler,
-		},
-		{
-			MethodName: "ProductLadderDelete",
-			Handler:    _Pms_ProductLadderDelete_Handler,
-		},
-		{
-			MethodName: "ProductOperateLogAdd",
-			Handler:    _Pms_ProductOperateLogAdd_Handler,
-		},
-		{
-			MethodName: "ProductOperateLogList",
-			Handler:    _Pms_ProductOperateLogList_Handler,
-		},
-		{
-			MethodName: "ProductOperateLogUpdate",
-			Handler:    _Pms_ProductOperateLogUpdate_Handler,
-		},
-		{
-			MethodName: "ProductOperateLogDelete",
-			Handler:    _Pms_ProductOperateLogDelete_Handler,
-		},
-		{
-			MethodName: "ProductVertifyRecordAdd",
-			Handler:    _Pms_ProductVertifyRecordAdd_Handler,
-		},
-		{
-			MethodName: "ProductVertifyRecordList",
-			Handler:    _Pms_ProductVertifyRecordList_Handler,
-		},
-		{
-			MethodName: "ProductVertifyRecordUpdate",
-			Handler:    _Pms_ProductVertifyRecordUpdate_Handler,
-		},
-		{
-			MethodName: "ProductVertifyRecordDelete",
-			Handler:    _Pms_ProductVertifyRecordDelete_Handler,
-		},
-		{
 			MethodName: "SkuStockAdd",
-			Handler:    _Pms_SkuStockAdd_Handler,
+			Handler:    _SkuStockService_SkuStockAdd_Handler,
 		},
 		{
 			MethodName: "SkuStockList",
-			Handler:    _Pms_SkuStockList_Handler,
+			Handler:    _SkuStockService_SkuStockList_Handler,
 		},
 		{
 			MethodName: "SkuStockUpdate",
-			Handler:    _Pms_SkuStockUpdate_Handler,
+			Handler:    _SkuStockService_SkuStockUpdate_Handler,
 		},
 		{
 			MethodName: "SkuStockDelete",
-			Handler:    _Pms_SkuStockDelete_Handler,
+			Handler:    _SkuStockService_SkuStockDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

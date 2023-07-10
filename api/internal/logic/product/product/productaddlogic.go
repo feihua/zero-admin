@@ -40,7 +40,7 @@ func NewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Product
 //注意: 步骤1到6是在商品(rpc)中操作,步骤7到8是在cms模块中操作
 func (l *ProductAddLogic) ProductAdd(req types.AddProductReq) (*types.AddProductResp, error) {
 	//添加商品成功后返回商品id,然后关联专题和关联优选(因为这二个表在cms模块中,需要通过rpc去调用)
-	result, err := l.svcCtx.Pms.ProductAdd(l.ctx, &pmsclient.ProductAddReq{
+	result, err := l.svcCtx.ProductService.ProductAdd(l.ctx, &pmsclient.ProductAddReq{
 		BrandId:                    req.BrandId,
 		ProductCategoryId:          req.ProductCategoryId,
 		ProductCategoryIdArray:     req.ProductCategoryIdArray,

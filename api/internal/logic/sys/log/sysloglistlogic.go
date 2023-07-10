@@ -25,7 +25,7 @@ func NewSysLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) SysLogL
 }
 
 func (l *SysLogListLogic) SysLogList(req types.ListSysLogReq) (*types.ListSysLogResp, error) {
-	resp, err := l.svcCtx.Sys.SysLogList(l.ctx, &sysclient.SysLogListReq{
+	resp, err := l.svcCtx.SysLogService.SysLogList(l.ctx, &sysclient.SysLogListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		UserName: req.UserName,

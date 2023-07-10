@@ -27,7 +27,7 @@ func NewMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Me
 }
 
 func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*types.ListMemberLevelResp, error) {
-	resp, err := l.svcCtx.Ums.MemberLevelList(l.ctx, &umsclient.MemberLevelListReq{
+	resp, err := l.svcCtx.MemberLevelService.MemberLevelList(l.ctx, &umsclient.MemberLevelListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		Name:     req.Name,

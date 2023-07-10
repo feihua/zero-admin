@@ -26,7 +26,7 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserAddLog
 }
 
 func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error) {
-	_, err := l.svcCtx.Sys.UserAdd(l.ctx, &sysclient.UserAddReq{
+	_, err := l.svcCtx.UserService.UserAdd(l.ctx, &sysclient.UserAddReq{
 		Email:    req.Email,
 		Mobile:   req.Mobile,
 		Name:     req.Name,

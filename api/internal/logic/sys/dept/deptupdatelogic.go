@@ -27,7 +27,7 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptUpd
 }
 
 func (l *DeptUpdateLogic) DeptUpdate(req types.UpdateDeptReq) (*types.UpdateDeptResp, error) {
-	_, err := l.svcCtx.Sys.DeptUpdate(l.ctx, &sysclient.DeptUpdateReq{
+	_, err := l.svcCtx.DeptService.DeptUpdate(l.ctx, &sysclient.DeptUpdateReq{
 		Id:           req.Id,
 		Name:         req.Name,
 		ParentId:     req.ParentId,

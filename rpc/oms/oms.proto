@@ -199,6 +199,20 @@ message OrderRefundResp {
   string pong = 1;
 }
 
+service OrderService {
+  rpc OrderAdd(OrderAddReq) returns(OrderAddResp);
+  rpc OrderList(OrderListReq) returns(OrderListResp);
+  rpc OrderUpdate(OrderUpdateReq) returns(OrderUpdateResp);
+  rpc OrderDelete(OrderDeleteReq) returns(OrderDeleteResp);
+  rpc OrderListByMemberId(OrderListByMemberIdReq) returns(OrderListByMemberIdResp);
+  rpc OrderCancel(OrderCancelReq) returns(OrderCancelResp);
+  rpc OrderConfirm(OrderConfirmReq) returns(OrderConfirmResp);
+  rpc OrderRefund(OrderRefundReq) returns(OrderRefundResp);
+  rpc OrderDeleteById(OrderDeleteByIdReq) returns(OrderDeleteResp);
+
+
+}
+
 message CartItemAddReq {
   int64      ProductId = 2;
   int64      ProductSkuId = 3;
@@ -287,6 +301,17 @@ message CartItemDeleteResp {
   string pong = 1;
 }
 
+service CartItemService {
+
+  rpc CartItemAdd(CartItemAddReq) returns(CartItemAddResp);
+  rpc CartItemList(CartItemListReq) returns(CartItemListResp);
+  rpc CartItemUpdate(CartItemUpdateReq) returns(CartItemUpdateResp);
+  rpc CartItemUpdateQuantity(CartItemUpdateReq) returns(CartItemUpdateResp);
+  rpc CartItemDelete(CartItemDeleteReq) returns(CartItemDeleteResp);
+
+
+}
+
 message CompanyAddressAddReq {
   string  AddressName = 2;
   int64    SendStatus = 3;
@@ -349,6 +374,17 @@ message CompanyAddressDeleteReq {
 
 message CompanyAddressDeleteResp {
   string pong = 1;
+}
+
+service CompanyAddressService {
+
+
+  rpc CompanyAddressAdd(CompanyAddressAddReq) returns(CompanyAddressAddResp);
+  rpc CompanyAddressList(CompanyAddressListReq) returns(CompanyAddressListResp);
+  rpc CompanyAddressUpdate(CompanyAddressUpdateReq) returns(CompanyAddressUpdateResp);
+  rpc CompanyAddressDelete(CompanyAddressDeleteReq) returns(CompanyAddressDeleteResp);
+
+
 }
 
 message OrderItemAddReq {
@@ -448,6 +484,16 @@ message OrderItemDeleteResp {
   string pong = 1;
 }
 
+service OrderItemService {
+
+
+  rpc OrderItemAdd(OrderItemAddReq) returns(OrderItemAddResp);
+  rpc OrderItemList(OrderItemListReq) returns(OrderItemListResp);
+  rpc OrderItemUpdate(OrderItemUpdateReq) returns(OrderItemUpdateResp);
+  rpc OrderItemDelete(OrderItemDeleteReq) returns(OrderItemDeleteResp);
+
+}
+
 message OrderOperateHistoryAddReq {
   int64      OrderId = 2;
   string    OperateMan = 3;
@@ -498,6 +544,16 @@ message OrderOperateHistoryDeleteReq {
 
 message OrderOperateHistoryDeleteResp {
   string pong = 1;
+}
+
+service OrderOperateHistorService {
+
+
+  rpc OrderOperateHistoryAdd(OrderOperateHistoryAddReq) returns(OrderOperateHistoryAddResp);
+  rpc OrderOperateHistoryList(OrderOperateHistoryListReq) returns(OrderOperateHistoryListResp);
+  rpc OrderOperateHistoryUpdate(OrderOperateHistoryUpdateReq) returns(OrderOperateHistoryUpdateResp);
+  rpc OrderOperateHistoryDelete(OrderOperateHistoryDeleteReq) returns(OrderOperateHistoryDeleteResp);
+
 }
 
 message OrderReturnApplyAddReq {
@@ -592,6 +648,16 @@ message OrderReturnApplyDeleteResp {
 }
 
 
+service OrderReturnApplyService {
+
+
+  rpc OrderReturnApplyAdd(OrderReturnApplyAddReq) returns(OrderReturnApplyAddResp);
+  rpc OrderReturnApplyList(OrderReturnApplyListReq) returns(OrderReturnApplyListResp);
+  rpc OrderReturnApplyUpdate(OrderReturnApplyUpdateReq) returns(OrderReturnApplyUpdateResp);
+  rpc OrderReturnApplyDelete(OrderReturnApplyDeleteReq) returns(OrderReturnApplyDeleteResp);
+
+}
+
 message OrderReturnReasonAddReq {
   string      Name = 2;
   int64      Sort = 3;
@@ -641,6 +707,16 @@ message OrderReturnReasonDeleteReq {
 
 message OrderReturnReasonDeleteResp {
   string pong = 1;
+}
+
+service OrderReturnReasonService {
+
+  rpc OrderReturnReasonAdd(OrderReturnReasonAddReq) returns(OrderReturnReasonAddResp);
+  rpc OrderReturnReasonList(OrderReturnReasonListReq) returns(OrderReturnReasonListResp);
+  rpc OrderReturnReasonUpdate(OrderReturnReasonUpdateReq) returns(OrderReturnReasonUpdateResp);
+  rpc OrderReturnReasonDelete(OrderReturnReasonDeleteReq) returns(OrderReturnReasonDeleteResp);
+
+
 }
 
 message OrderSettingAddReq {
@@ -695,47 +771,7 @@ message OrderSettingDeleteResp {
   string pong = 1;
 }
 
-service Oms {
-  rpc OrderAdd(OrderAddReq) returns(OrderAddResp);
-  rpc OrderList(OrderListReq) returns(OrderListResp);
-  rpc OrderUpdate(OrderUpdateReq) returns(OrderUpdateResp);
-  rpc OrderDelete(OrderDeleteReq) returns(OrderDeleteResp);
-  rpc OrderListByMemberId(OrderListByMemberIdReq) returns(OrderListByMemberIdResp);
-  rpc OrderCancel(OrderCancelReq) returns(OrderCancelResp);
-  rpc OrderConfirm(OrderConfirmReq) returns(OrderConfirmResp);
-  rpc OrderRefund(OrderRefundReq) returns(OrderRefundResp);
-  rpc OrderDeleteById(OrderDeleteByIdReq) returns(OrderDeleteResp);
-
-  rpc CartItemAdd(CartItemAddReq) returns(CartItemAddResp);
-  rpc CartItemList(CartItemListReq) returns(CartItemListResp);
-  rpc CartItemUpdate(CartItemUpdateReq) returns(CartItemUpdateResp);
-  rpc CartItemUpdateQuantity(CartItemUpdateReq) returns(CartItemUpdateResp);
-  rpc CartItemDelete(CartItemDeleteReq) returns(CartItemDeleteResp);
-
-  rpc CompanyAddressAdd(CompanyAddressAddReq) returns(CompanyAddressAddResp);
-  rpc CompanyAddressList(CompanyAddressListReq) returns(CompanyAddressListResp);
-  rpc CompanyAddressUpdate(CompanyAddressUpdateReq) returns(CompanyAddressUpdateResp);
-  rpc CompanyAddressDelete(CompanyAddressDeleteReq) returns(CompanyAddressDeleteResp);
-
-  rpc OrderItemAdd(OrderItemAddReq) returns(OrderItemAddResp);
-  rpc OrderItemList(OrderItemListReq) returns(OrderItemListResp);
-  rpc OrderItemUpdate(OrderItemUpdateReq) returns(OrderItemUpdateResp);
-  rpc OrderItemDelete(OrderItemDeleteReq) returns(OrderItemDeleteResp);
-
-  rpc OrderOperateHistoryAdd(OrderOperateHistoryAddReq) returns(OrderOperateHistoryAddResp);
-  rpc OrderOperateHistoryList(OrderOperateHistoryListReq) returns(OrderOperateHistoryListResp);
-  rpc OrderOperateHistoryUpdate(OrderOperateHistoryUpdateReq) returns(OrderOperateHistoryUpdateResp);
-  rpc OrderOperateHistoryDelete(OrderOperateHistoryDeleteReq) returns(OrderOperateHistoryDeleteResp);
-
-  rpc OrderReturnApplyAdd(OrderReturnApplyAddReq) returns(OrderReturnApplyAddResp);
-  rpc OrderReturnApplyList(OrderReturnApplyListReq) returns(OrderReturnApplyListResp);
-  rpc OrderReturnApplyUpdate(OrderReturnApplyUpdateReq) returns(OrderReturnApplyUpdateResp);
-  rpc OrderReturnApplyDelete(OrderReturnApplyDeleteReq) returns(OrderReturnApplyDeleteResp);
-
-  rpc OrderReturnReasonAdd(OrderReturnReasonAddReq) returns(OrderReturnReasonAddResp);
-  rpc OrderReturnReasonList(OrderReturnReasonListReq) returns(OrderReturnReasonListResp);
-  rpc OrderReturnReasonUpdate(OrderReturnReasonUpdateReq) returns(OrderReturnReasonUpdateResp);
-  rpc OrderReturnReasonDelete(OrderReturnReasonDeleteReq) returns(OrderReturnReasonDeleteResp);
+service OrderSettingService {
 
   rpc OrderSettingAdd(OrderSettingAddReq) returns(OrderSettingAddResp);
   rpc OrderSettingList(OrderSettingListReq) returns(OrderSettingListResp);

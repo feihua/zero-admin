@@ -29,7 +29,7 @@ func NewQueryMenuByRoleIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(req types.RoleMenuReq) (*types.RoleMenuResp, error) {
 
 	//查询所有菜单
-	resp, _ := l.svcCtx.Sys.MenuList(l.ctx, &sysclient.MenuListReq{
+	resp, _ := l.svcCtx.MenuService.MenuList(l.ctx, &sysclient.MenuListReq{
 		Name: "",
 		Url:  "",
 	})
@@ -51,7 +51,7 @@ func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(req types.RoleMenuReq) (*type
 
 	//如果角色不是admin则根据roleId查询菜单
 	if req.Id != 1 {
-		QueryMenu, _ := l.svcCtx.Sys.QueryMenuByRoleId(l.ctx, &sysclient.QueryMenuByRoleIdReq{
+		QueryMenu, _ := l.svcCtx.RoleService.QueryMenuByRoleId(l.ctx, &sysclient.QueryMenuByRoleIdReq{
 			Id: req.Id,
 		})
 		listIds = QueryMenu.Ids

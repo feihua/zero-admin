@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sms/smsclient"
 )
 
 var _ SmsHomeBrandModel = (*customSmsHomeBrandModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSmsHomeBrandModel.
 	SmsHomeBrandModel interface {
 		smsHomeBrandModel
-		Count(ctx context.Context, in *sms.HomeBrandListReq) (int64, error)
-		FindAll(ctx context.Context, in *sms.HomeBrandListReq) (*[]SmsHomeBrand, error)
+		Count(ctx context.Context, in *smsclient.HomeBrandListReq) (int64, error)
+		FindAll(ctx context.Context, in *smsclient.HomeBrandListReq) (*[]SmsHomeBrand, error)
 		FindOneByBrandId(ctx context.Context, brandId int64) (*SmsHomeBrand, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
@@ -34,7 +34,7 @@ func NewSmsHomeBrandModel(conn sqlx.SqlConn) SmsHomeBrandModel {
 	}
 }
 
-func (m *customSmsHomeBrandModel) FindAll(ctx context.Context, in *sms.HomeBrandListReq) (*[]SmsHomeBrand, error) {
+func (m *customSmsHomeBrandModel) FindAll(ctx context.Context, in *smsclient.HomeBrandListReq) (*[]SmsHomeBrand, error) {
 
 	where := "1=1"
 	if len(in.BrandName) > 0 {
@@ -72,7 +72,7 @@ func (m *customSmsHomeBrandModel) FindOneByBrandId(ctx context.Context, brandId 
 	}
 }
 
-func (m *customSmsHomeBrandModel) Count(ctx context.Context, in *sms.HomeBrandListReq) (int64, error) {
+func (m *customSmsHomeBrandModel) Count(ctx context.Context, in *smsclient.HomeBrandListReq) (int64, error) {
 	where := "1=1"
 	if len(in.BrandName) > 0 {
 		where = where + fmt.Sprintf(" AND brand_name like '%%%s%%'", in.BrandName)

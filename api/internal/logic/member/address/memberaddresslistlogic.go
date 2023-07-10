@@ -27,7 +27,7 @@ func NewMemberAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberAddressListLogic) MemberAddressList(req types.ListMemberAddressReq) (*types.ListMemberAddressResp, error) {
-	resp, err := l.svcCtx.Ums.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
+	resp, err := l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		MemberId: req.MemberId,

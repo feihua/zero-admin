@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/sysclient"
 )
 
 var _ SysDictModel = (*customSysDictModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSysDictModel.
 	SysDictModel interface {
 		sysDictModel
-		Count(ctx context.Context, in *sys.DictListReq) (int64, error)
-		FindAll(ctx context.Context, in *sys.DictListReq) (*[]SysDict, error)
+		Count(ctx context.Context, in *sysclient.DictListReq) (int64, error)
+		FindAll(ctx context.Context, in *sysclient.DictListReq) (*[]SysDict, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewSysDictModel(conn sqlx.SqlConn) SysDictModel {
 	}
 }
 
-func (m *customSysDictModel) FindAll(ctx context.Context, in *sys.DictListReq) (*[]SysDict, error) {
+func (m *customSysDictModel) FindAll(ctx context.Context, in *sysclient.DictListReq) (*[]SysDict, error) {
 	where := "1=1"
 	if len(in.Type) > 0 {
 		where = where + fmt.Sprintf(" AND type like '%%%s%%'", in.Type)
@@ -57,7 +57,7 @@ func (m *customSysDictModel) FindAll(ctx context.Context, in *sys.DictListReq) (
 	}
 }
 
-func (m *customSysDictModel) Count(ctx context.Context, in *sys.DictListReq) (int64, error) {
+func (m *customSysDictModel) Count(ctx context.Context, in *sysclient.DictListReq) (int64, error) {
 	where := "1=1"
 	if len(in.Type) > 0 {
 		where = where + fmt.Sprintf(" AND type like '%%%s%%'", in.Type)

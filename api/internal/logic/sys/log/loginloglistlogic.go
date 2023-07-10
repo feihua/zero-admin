@@ -26,7 +26,7 @@ func NewLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Login
 }
 
 func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.ListLoginLogResp, error) {
-	resp, err := l.svcCtx.Sys.LoginLogList(l.ctx, &sysclient.LoginLogListReq{
+	resp, err := l.svcCtx.LoginLogService.LoginLogList(l.ctx, &sysclient.LoginLogListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		UserName: req.UserName,

@@ -26,7 +26,7 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) SkuSt
 }
 
 func (l *SkuStockListLogic) SkuStockList(req types.ListSkuStockReq) (*types.ListSkuStockResp, error) {
-	resp, err := l.svcCtx.Pms.SkuStockList(l.ctx, &pmsclient.SkuStockListReq{
+	resp, err := l.svcCtx.SkuStockService.SkuStockList(l.ctx, &pmsclient.SkuStockListReq{
 		ProductId: 1,
 	})
 

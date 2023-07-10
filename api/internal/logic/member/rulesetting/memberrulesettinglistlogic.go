@@ -27,7 +27,7 @@ func NewMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *MemberRuleSettingListLogic) MemberRuleSettingList(req types.ListMemberRuleSettingReq) (*types.ListMemberRuleSettingResp, error) {
-	resp, err := l.svcCtx.Ums.MemberRuleSettingList(l.ctx, &umsclient.MemberRuleSettingListReq{
+	resp, err := l.svcCtx.MemberRuleSettingService.MemberRuleSettingList(l.ctx, &umsclient.MemberRuleSettingListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

@@ -28,7 +28,7 @@ func NewReturnApplyUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *ReturnApplyUpdateLogic) ReturnApplyUpdate(req types.UpdateReturnApplyReq) (*types.UpdateReturnApplyResp, error) {
 	userName := l.ctx.Value("userName").(string)
-	_, err := l.svcCtx.Oms.OrderReturnApplyUpdate(l.ctx, &omsclient.OrderReturnApplyUpdateReq{
+	_, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyUpdate(l.ctx, &omsclient.OrderReturnApplyUpdateReq{
 		Id:               req.Id,
 		CompanyAddressId: req.CompanyAddressId,
 		Status:           req.Status,

@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sms/smsclient"
 )
 
 var _ SmsCouponModel = (*customSmsCouponModel)(nil)
@@ -17,7 +17,7 @@ type (
 	SmsCouponModel interface {
 		smsCouponModel
 		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64, in *sms.CouponListReq) (*[]SmsCoupon, error)
+		FindAll(ctx context.Context, Current int64, PageSize int64, in *smsclient.CouponListReq) (*[]SmsCoupon, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewSmsCouponModel(conn sqlx.SqlConn) SmsCouponModel {
 	}
 }
 
-func (m *customSmsCouponModel) FindAll(ctx context.Context, Current int64, PageSize int64, in *sms.CouponListReq) (*[]SmsCoupon, error) {
+func (m *customSmsCouponModel) FindAll(ctx context.Context, Current int64, PageSize int64, in *smsclient.CouponListReq) (*[]SmsCoupon, error) {
 
 	where := "1=1"
 	if in.Type != 4 {

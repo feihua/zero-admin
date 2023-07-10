@@ -25,7 +25,7 @@ func NewCarItemClearLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CarI
 }
 
 func (l *CarItemClearLogic) CarItemClear() (resp *types.CartItemClearResp, err error) {
-	_, _ = l.svcCtx.Oms.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{MemberId: l.ctx.Value("memberId").(int64)})
+	_, _ = l.svcCtx.CartItemService.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{MemberId: l.ctx.Value("memberId").(int64)})
 
 	return &types.CartItemClearResp{
 		Code:    0,

@@ -27,7 +27,7 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLogReq) (*types.ListMemberLoginLogResp, error) {
-	resp, err := l.svcCtx.Ums.MemberLoginLogList(l.ctx, &umsclient.MemberLoginLogListReq{
+	resp, err := l.svcCtx.MemberLoginLogService.MemberLoginLogList(l.ctx, &umsclient.MemberLoginLogListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		MemberId: req.MemberId,

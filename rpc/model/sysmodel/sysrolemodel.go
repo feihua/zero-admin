@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/sysclient"
 )
 
 var _ SysRoleModel = (*customSysRoleModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSysRoleModel.
 	SysRoleModel interface {
 		sysRoleModel
-		Count(ctx context.Context, in *sys.RoleListReq) (int64, error)
-		FindAll(ctx context.Context, in *sys.RoleListReq) (*[]SysRole, error)
+		Count(ctx context.Context, in *sysclient.RoleListReq) (int64, error)
+		FindAll(ctx context.Context, in *sysclient.RoleListReq) (*[]SysRole, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewSysRoleModel(conn sqlx.SqlConn) SysRoleModel {
 	}
 }
 
-func (m *customSysRoleModel) FindAll(ctx context.Context, in *sys.RoleListReq) (*[]SysRole, error) {
+func (m *customSysRoleModel) FindAll(ctx context.Context, in *sysclient.RoleListReq) (*[]SysRole, error) {
 
 	where := "1=1"
 	if len(in.Name) > 0 {
@@ -56,7 +56,7 @@ func (m *customSysRoleModel) FindAll(ctx context.Context, in *sys.RoleListReq) (
 	}
 }
 
-func (m *customSysRoleModel) Count(ctx context.Context, in *sys.RoleListReq) (int64, error) {
+func (m *customSysRoleModel) Count(ctx context.Context, in *sysclient.RoleListReq) (int64, error) {
 	where := "1=1"
 	if len(in.Name) > 0 {
 		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)

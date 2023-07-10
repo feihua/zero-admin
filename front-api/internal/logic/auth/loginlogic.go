@@ -3,7 +3,6 @@ package auth
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/ums/ums"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -38,7 +37,7 @@ func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginAndRegisterResp
 }
 
 //构建返回数据
-func buildLoginResp(memberAddResp *ums.MemberLoginResp) (*types.LoginAndRegisterResp, error) {
+func buildLoginResp(memberAddResp *umsclient.MemberLoginResp) (*types.LoginAndRegisterResp, error) {
 	userInfo := types.UserInfo{
 		NickName:  memberAddResp.Nickname,
 		AvatarURL: memberAddResp.Icon,
@@ -56,8 +55,8 @@ func buildLoginResp(memberAddResp *ums.MemberLoginResp) (*types.LoginAndRegister
 }
 
 //调用rpc方法登录
-func callLoginRpc(req types.LoginReq, err error, l *LoginLogic) (*ums.MemberLoginResp, *types.LoginAndRegisterResp, error, bool) {
-	loginResp, err := l.svcCtx.Ums.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
+func callLoginRpc(req types.LoginReq, err error, l *LoginLogic) (*umsclient.MemberLoginResp, *types.LoginAndRegisterResp, error, bool) {
+	loginResp, err := l.svcCtx.MemberService.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
 		Username: req.Username,
 		Password: req.Password,
 		Phone:    "req.Mobile",

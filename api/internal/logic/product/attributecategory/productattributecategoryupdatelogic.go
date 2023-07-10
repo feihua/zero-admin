@@ -27,7 +27,7 @@ func NewProductAttributecategoryUpdateLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 func (l *ProductAttributecategoryUpdateLogic) ProductAttributecategoryUpdate(req *types.UpdateProductAttributecategoryReq) (resp *types.UpdateProductAttributecategoryResp, err error) {
-	_, err = l.svcCtx.Pms.ProductAttributeCategoryUpdate(l.ctx, &pmsclient.ProductAttributeCategoryUpdateReq{
+	_, err = l.svcCtx.ProductAttributeCategoryService.ProductAttributeCategoryUpdate(l.ctx, &pmsclient.ProductAttributeCategoryUpdateReq{
 		Id:             req.Id,
 		Name:           req.Name,
 		AttributeCount: req.AttributecategoryCount,

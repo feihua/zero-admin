@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/sysclient"
 )
 
 var _ SysJobModel = (*customSysJobModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSysJobModel.
 	SysJobModel interface {
 		sysJobModel
-		Count(ctx context.Context, in *sys.JobListReq) (int64, error)
-		FindAll(ctx context.Context, in *sys.JobListReq) (*[]SysJob, error)
+		Count(ctx context.Context, in *sysclient.JobListReq) (int64, error)
+		FindAll(ctx context.Context, in *sysclient.JobListReq) (*[]SysJob, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewSysJobModel(conn sqlx.SqlConn) SysJobModel {
 	}
 }
 
-func (m *customSysJobModel) FindAll(ctx context.Context, in *sys.JobListReq) (*[]SysJob, error) {
+func (m *customSysJobModel) FindAll(ctx context.Context, in *sysclient.JobListReq) (*[]SysJob, error) {
 	where := "1=1"
 	if len(in.JobName) > 0 {
 		where = where + fmt.Sprintf(" AND job_name like '%%%s%%'", in.JobName)
@@ -54,7 +54,7 @@ func (m *customSysJobModel) FindAll(ctx context.Context, in *sys.JobListReq) (*[
 	}
 }
 
-func (m *customSysJobModel) Count(ctx context.Context, in *sys.JobListReq) (int64, error) {
+func (m *customSysJobModel) Count(ctx context.Context, in *sysclient.JobListReq) (int64, error) {
 	where := "1=1"
 	if len(in.JobName) > 0 {
 		where = where + fmt.Sprintf(" AND job_name like '%%%s%%'", in.JobName)

@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/ums/ums"
+	"zero-admin/rpc/ums/umsclient"
 )
 
 var _ UmsMemberReadHistoryModel = (*customUmsMemberReadHistoryModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customUmsMemberReadHistoryModel.
 	UmsMemberReadHistoryModel interface {
 		umsMemberReadHistoryModel
-		Count(ctx context.Context, in *ums.MemberReadHistoryListReq) (int64, error)
-		FindAll(ctx context.Context, in *ums.MemberReadHistoryListReq) (*[]UmsMemberReadHistory, error)
+		Count(ctx context.Context, in *umsclient.MemberReadHistoryListReq) (int64, error)
+		FindAll(ctx context.Context, in *umsclient.MemberReadHistoryListReq) (*[]UmsMemberReadHistory, error)
 		DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewUmsMemberReadHistoryModel(conn sqlx.SqlConn) UmsMemberReadHistoryModel {
 	}
 }
 
-func (m *customUmsMemberReadHistoryModel) FindAll(ctx context.Context, in *ums.MemberReadHistoryListReq) (*[]UmsMemberReadHistory, error) {
+func (m *customUmsMemberReadHistoryModel) FindAll(ctx context.Context, in *umsclient.MemberReadHistoryListReq) (*[]UmsMemberReadHistory, error) {
 	where := "1=1"
 	if in.MemberId != 0 {
 		where = where + fmt.Sprintf(" AND member_id = '%d'", in.MemberId)
@@ -53,7 +53,7 @@ func (m *customUmsMemberReadHistoryModel) FindAll(ctx context.Context, in *ums.M
 	}
 }
 
-func (m *customUmsMemberReadHistoryModel) Count(ctx context.Context, in *ums.MemberReadHistoryListReq) (int64, error) {
+func (m *customUmsMemberReadHistoryModel) Count(ctx context.Context, in *umsclient.MemberReadHistoryListReq) (int64, error) {
 	where := "1=1"
 	if in.MemberId != 0 {
 		where = where + fmt.Sprintf(" AND member_id = '%d'", in.MemberId)

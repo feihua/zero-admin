@@ -27,7 +27,7 @@ func NewDictAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictAddLog
 }
 
 func (l *DictAddLogic) DictAdd(req types.AddDictReq) (*types.AddDictResp, error) {
-	_, err := l.svcCtx.Sys.DictAdd(l.ctx, &sysclient.DictAddReq{
+	_, err := l.svcCtx.DictService.DictAdd(l.ctx, &sysclient.DictAddReq{
 		Value:       req.Value,
 		Label:       req.Label,
 		Type:        req.Type,

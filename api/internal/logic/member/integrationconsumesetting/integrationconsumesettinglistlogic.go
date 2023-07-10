@@ -27,7 +27,7 @@ func NewIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req types.ListIntegrationConsumeSettingReq) (*types.ListIntegrationConsumeSettingResp, error) {
-	resp, err := l.svcCtx.Ums.IntegrationConsumeSettingList(l.ctx, &umsclient.IntegrationConsumeSettingListReq{
+	resp, err := l.svcCtx.IntegrationConsumeSettingService.IntegrationConsumeSettingList(l.ctx, &umsclient.IntegrationConsumeSettingListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

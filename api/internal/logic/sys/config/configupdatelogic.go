@@ -26,7 +26,7 @@ func NewConfigUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Confi
 }
 
 func (l *ConfigUpdateLogic) ConfigUpdate(req types.UpdateConfigReq) (*types.UpdateConfigResp, error) {
-	_, err := l.svcCtx.Sys.ConfigUpdate(l.ctx, &sysclient.ConfigUpdateReq{
+	_, err := l.svcCtx.ConfigService.ConfigUpdate(l.ctx, &sysclient.ConfigUpdateReq{
 		Id:           req.Id,
 		Value:        req.Value,
 		Label:        req.Label,

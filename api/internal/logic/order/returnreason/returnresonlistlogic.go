@@ -27,7 +27,7 @@ func NewReturnResonListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Re
 }
 
 func (l *ReturnResonListLogic) ReturnResonList(req types.ListReturnResonReq) (*types.ListReturnResonResp, error) {
-	resp, err := l.svcCtx.Oms.OrderReturnReasonList(l.ctx, &omsclient.OrderReturnReasonListReq{
+	resp, err := l.svcCtx.OrderReturnReasonService.OrderReturnReasonList(l.ctx, &omsclient.OrderReturnReasonListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		Name:     req.Name,

@@ -26,7 +26,7 @@ func NewHomeAdvertiseDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(req types.DeleteHomeAdvertiseReq) (*types.DeleteHomeAdvertiseResp, error) {
-	_, err := l.svcCtx.Sms.HomeAdvertiseDelete(l.ctx, &smsclient.HomeAdvertiseDeleteReq{
+	_, err := l.svcCtx.HomeAdvertiseService.HomeAdvertiseDelete(l.ctx, &smsclient.HomeAdvertiseDeleteReq{
 		Ids: req.Ids,
 	})
 

@@ -7,15 +7,15 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/client/syslogservice"
 	"zero-admin/rpc/sys/sysclient"
 )
 
 type AddLogMiddleware struct {
-	Sys sys.Sys
+	Sys syslogservice.SysLogService
 }
 
-func NewAddLogMiddleware(Sys sys.Sys) *AddLogMiddleware {
+func NewAddLogMiddleware(Sys syslogservice.SysLogService) *AddLogMiddleware {
 	return &AddLogMiddleware{Sys: Sys}
 }
 

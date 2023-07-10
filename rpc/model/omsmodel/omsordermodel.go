@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/oms/oms"
+	"zero-admin/rpc/oms/omsclient"
 )
 
 var _ OmsOrderModel = (*customOmsOrderModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customOmsOrderModel.
 	OmsOrderModel interface {
 		omsOrderModel
-		Count(ctx context.Context, in *oms.OrderListReq) (int64, error)
-		FindAll(ctx context.Context, in *oms.OrderListReq) (*[]OmsOrder, error)
+		Count(ctx context.Context, in *omsclient.OrderListReq) (int64, error)
+		FindAll(ctx context.Context, in *omsclient.OrderListReq) (*[]OmsOrder, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindListByMemberId(ctx context.Context, MemberId int64) (*[]OmsOrder, error)
 	}
@@ -34,7 +34,7 @@ func NewOmsOrderModel(conn sqlx.SqlConn) OmsOrderModel {
 	}
 }
 
-func (m *customOmsOrderModel) FindAll(ctx context.Context, in *oms.OrderListReq) (*[]OmsOrder, error) {
+func (m *customOmsOrderModel) FindAll(ctx context.Context, in *omsclient.OrderListReq) (*[]OmsOrder, error) {
 
 	where := "1=1"
 	if len(in.OrderSn) > 0 {
@@ -69,7 +69,7 @@ func (m *customOmsOrderModel) FindAll(ctx context.Context, in *oms.OrderListReq)
 	}
 }
 
-func (m *customOmsOrderModel) Count(ctx context.Context, in *oms.OrderListReq) (int64, error) {
+func (m *customOmsOrderModel) Count(ctx context.Context, in *omsclient.OrderListReq) (int64, error) {
 
 	where := "1=1"
 	if len(in.OrderSn) > 0 {

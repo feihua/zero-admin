@@ -26,7 +26,7 @@ func NewMemberRuleSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *MemberRuleSettingDeleteLogic) MemberRuleSettingDelete(req types.DeleteMemberRuleSettingReq) (*types.DeleteMemberRuleSettingResp, error) {
-	_, err := l.svcCtx.Ums.MemberRuleSettingDelete(l.ctx, &umsclient.MemberRuleSettingDeleteReq{
+	_, err := l.svcCtx.MemberRuleSettingService.MemberRuleSettingDelete(l.ctx, &umsclient.MemberRuleSettingDeleteReq{
 		Ids: req.Ids,
 	})
 

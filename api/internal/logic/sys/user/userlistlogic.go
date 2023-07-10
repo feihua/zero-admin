@@ -30,7 +30,7 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 
 	userListReq := sysclient.UserListReq{}
 	_ = copier.Copy(&userListReq, &req)
-	resp, err := l.svcCtx.Sys.UserList(l.ctx, &userListReq)
+	resp, err := l.svcCtx.UserService.UserList(l.ctx, &userListReq)
 
 	if err != nil {
 		data, _ := json.Marshal(req)

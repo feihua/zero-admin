@@ -27,7 +27,7 @@ func NewMemberUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Membe
 }
 
 func (l *MemberUpdateLogic) MemberUpdate(req types.UpdateMemberReq) (*types.UpdateMemberResp, error) {
-	_, err := l.svcCtx.Ums.MemberUpdate(l.ctx, &umsclient.MemberUpdateReq{
+	_, err := l.svcCtx.MemberService.MemberUpdate(l.ctx, &umsclient.MemberUpdateReq{
 		Id:                    req.Id,
 		MemberLevelId:         req.MemberLevelId,
 		Username:              req.Username,

@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sys/sys"
+	"zero-admin/rpc/sys/sysclient"
 )
 
 var _ SysLogModel = (*customSysLogModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSysLogModel.
 	SysLogModel interface {
 		sysLogModel
-		Count(ctx context.Context, in *sys.SysLogListReq) (int64, error)
-		FindAll(ctx context.Context, in *sys.SysLogListReq) (*[]SysLog, error)
+		Count(ctx context.Context, in *sysclient.SysLogListReq) (int64, error)
+		FindAll(ctx context.Context, in *sysclient.SysLogListReq) (*[]SysLog, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewSysLogModel(conn sqlx.SqlConn) SysLogModel {
 	}
 }
 
-func (m *customSysLogModel) FindAll(ctx context.Context, in *sys.SysLogListReq) (*[]SysLog, error) {
+func (m *customSysLogModel) FindAll(ctx context.Context, in *sysclient.SysLogListReq) (*[]SysLog, error) {
 	where := "1=1"
 	if len(in.UserName) > 0 {
 		where = where + fmt.Sprintf(" AND user_name like '%%%s%%'", in.UserName)
@@ -55,7 +55,7 @@ func (m *customSysLogModel) FindAll(ctx context.Context, in *sys.SysLogListReq) 
 	}
 }
 
-func (m *customSysLogModel) Count(ctx context.Context, in *sys.SysLogListReq) (int64, error) {
+func (m *customSysLogModel) Count(ctx context.Context, in *sysclient.SysLogListReq) (int64, error) {
 	where := "1=1"
 	if len(in.UserName) > 0 {
 		where = where + fmt.Sprintf(" AND user_name like '%%%s%%'", in.UserName)

@@ -3,12 +3,12 @@ package home
 import (
 	"context"
 	"zero-admin/front-api/internal/types"
-	"zero-admin/rpc/pms/pms"
+	"zero-admin/rpc/pms/client/productservice"
 	"zero-admin/rpc/pms/pmsclient"
 )
 
 //根据商品Ids查询商品
-func queryProductList(pmsClient pms.Pms, productIdLists []int64, ctx context.Context) []types.ProductList {
+func queryProductList(pmsClient productservice.ProductService, productIdLists []int64, ctx context.Context) []types.ProductList {
 	productListResp, _ := pmsClient.ProductListByIds(ctx, &pmsclient.ProductByIdsReq{Ids: productIdLists})
 	var productLists []types.ProductList
 	for _, item := range productListResp.List {

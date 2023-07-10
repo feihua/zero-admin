@@ -25,7 +25,7 @@ func NewProductCollectionClearLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 func (l *ProductCollectionClearLogic) ProductCollectionClear() (resp *types.ProductCollectionClearResp, err error) {
-	_, _ = l.svcCtx.Ums.MemberProductCollectionDelete(l.ctx, &umsclient.MemberProductCollectionDeleteReq{
+	_, _ = l.svcCtx.MemberProductCollectionService.MemberProductCollectionDelete(l.ctx, &umsclient.MemberProductCollectionDeleteReq{
 		Ids:      nil,
 		MemberId: l.ctx.Value("memberId").(int64),
 	})

@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sms/sms"
+	"zero-admin/rpc/sms/smsclient"
 )
 
 var _ SmsHomeRecommendSubjectModel = (*customSmsHomeRecommendSubjectModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customSmsHomeRecommendSubjectModel.
 	SmsHomeRecommendSubjectModel interface {
 		smsHomeRecommendSubjectModel
-		Count(ctx context.Context, in *sms.HomeRecommendSubjectListReq) (int64, error)
-		FindAll(ctx context.Context, in *sms.HomeRecommendSubjectListReq) (*[]SmsHomeRecommendSubject, error)
+		Count(ctx context.Context, in *smsclient.HomeRecommendSubjectListReq) (int64, error)
+		FindAll(ctx context.Context, in *smsclient.HomeRecommendSubjectListReq) (*[]SmsHomeRecommendSubject, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindOneBySubjectId(ctx context.Context, subjectId int64) (*SmsHomeRecommendSubject, error)
 	}
@@ -34,7 +34,7 @@ func NewSmsHomeRecommendSubjectModel(conn sqlx.SqlConn) SmsHomeRecommendSubjectM
 	}
 }
 
-func (m *customSmsHomeRecommendSubjectModel) FindAll(ctx context.Context, in *sms.HomeRecommendSubjectListReq) (*[]SmsHomeRecommendSubject, error) {
+func (m *customSmsHomeRecommendSubjectModel) FindAll(ctx context.Context, in *smsclient.HomeRecommendSubjectListReq) (*[]SmsHomeRecommendSubject, error) {
 
 	where := "1=1"
 	if len(in.SubjectName) > 0 {
@@ -56,7 +56,7 @@ func (m *customSmsHomeRecommendSubjectModel) FindAll(ctx context.Context, in *sm
 	}
 }
 
-func (m *customSmsHomeRecommendSubjectModel) Count(ctx context.Context, in *sms.HomeRecommendSubjectListReq) (int64, error) {
+func (m *customSmsHomeRecommendSubjectModel) Count(ctx context.Context, in *smsclient.HomeRecommendSubjectListReq) (int64, error) {
 	where := "1=1"
 	if len(in.SubjectName) > 0 {
 		where = where + fmt.Sprintf(" AND subject_name like '%%%s%%'", in.SubjectName)

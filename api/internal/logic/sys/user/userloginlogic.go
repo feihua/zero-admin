@@ -36,7 +36,7 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginR
 		return nil, errorx.NewDefaultError("用户名或密码不能为空")
 	}
 
-	resp, err := l.svcCtx.Sys.Login(l.ctx, &sysclient.LoginReq{
+	resp, err := l.svcCtx.UserService.Login(l.ctx, &sysclient.LoginReq{
 		UserName: req.UserName,
 		Password: req.Password,
 	})
@@ -47,7 +47,7 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginR
 	}
 
 	//保存登录日志
-	_, _ = l.svcCtx.Sys.LoginLogAdd(l.ctx, &sysclient.LoginLogAddReq{
+	_, _ = l.svcCtx.LoginLogService.LoginLogAdd(l.ctx, &sysclient.LoginLogAddReq{
 		UserName: resp.UserName,
 		Status:   "login",
 		Ip:       ip,

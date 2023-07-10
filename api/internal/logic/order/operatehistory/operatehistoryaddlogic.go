@@ -27,7 +27,7 @@ func NewOperateHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *OperateHistoryAddLogic) OperateHistoryAdd(req types.AddOperateHistoryReq) (*types.AddOperateHistoryResp, error) {
-	_, err := l.svcCtx.Oms.OrderOperateHistoryAdd(l.ctx, &omsclient.OrderOperateHistoryAddReq{
+	_, err := l.svcCtx.OrderOperateHistoryService.OrderOperateHistoryAdd(l.ctx, &omsclient.OrderOperateHistoryAddReq{
 		OrderId:     req.OrderId,
 		OperateMan:  req.OperateMan,
 		CreateTime:  req.CreateTime,

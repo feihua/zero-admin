@@ -27,7 +27,7 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleListL
 }
 
 func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, error) {
-	resp, err := l.svcCtx.Sys.RoleList(l.ctx, &sysclient.RoleListReq{
+	resp, err := l.svcCtx.RoleService.RoleList(l.ctx, &sysclient.RoleListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		Name:     req.Name,

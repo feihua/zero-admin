@@ -27,7 +27,7 @@ func NewCouponHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) C
 }
 
 func (l *CouponHistoryAddLogic) CouponHistoryAdd(req types.AddCouponHistoryReq) (*types.AddCouponHistoryResp, error) {
-	_, err := l.svcCtx.Sms.CouponHistoryAdd(l.ctx, &smsclient.CouponHistoryAddReq{
+	_, err := l.svcCtx.CouponHistoryService.CouponHistoryAdd(l.ctx, &smsclient.CouponHistoryAddReq{
 		CouponId:       req.CouponId,
 		MemberId:       req.MemberId,
 		CouponCode:     req.CouponCode,

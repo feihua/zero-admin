@@ -18,10 +18,10 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// SysClient is the client API for Sys service.
+// UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SysClient interface {
+type UserServiceClient interface {
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 	UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error)
 	UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
@@ -30,432 +30,92 @@ type SysClient interface {
 	UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
 	ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error)
 	UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error)
-	RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error)
-	RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
-	RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error)
-	RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error)
-	UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, opts ...grpc.CallOption) (*UpdateRoleRoleResp, error)
-	QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error)
-	UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
-	MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
-	MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
-	MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
-	MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error)
-	DictAdd(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error)
-	DictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error)
-	DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error)
-	DictDelete(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error)
-	DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error)
-	DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error)
-	DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error)
-	DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error)
-	LoginLogAdd(ctx context.Context, in *LoginLogAddReq, opts ...grpc.CallOption) (*LoginLogAddResp, error)
-	LoginLogList(ctx context.Context, in *LoginLogListReq, opts ...grpc.CallOption) (*LoginLogListResp, error)
-	LoginLogDelete(ctx context.Context, in *LoginLogDeleteReq, opts ...grpc.CallOption) (*LoginLogDeleteResp, error)
-	SysLogAdd(ctx context.Context, in *SysLogAddReq, opts ...grpc.CallOption) (*SysLogAddResp, error)
-	SysLogList(ctx context.Context, in *SysLogListReq, opts ...grpc.CallOption) (*SysLogListResp, error)
-	SysLogDelete(ctx context.Context, in *SysLogDeleteReq, opts ...grpc.CallOption) (*SysLogDeleteResp, error)
-	ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grpc.CallOption) (*ConfigAddResp, error)
-	ConfigList(ctx context.Context, in *ConfigListReq, opts ...grpc.CallOption) (*ConfigListResp, error)
-	ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts ...grpc.CallOption) (*ConfigUpdateResp, error)
-	ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts ...grpc.CallOption) (*ConfigDeleteResp, error)
-	UpdateConfigRole(ctx context.Context, in *UpdateConfigRoleReq, opts ...grpc.CallOption) (*UpdateConfigRoleResp, error)
-	JobAdd(ctx context.Context, in *JobAddReq, opts ...grpc.CallOption) (*JobAddResp, error)
-	JobList(ctx context.Context, in *JobListReq, opts ...grpc.CallOption) (*JobListResp, error)
-	JobUpdate(ctx context.Context, in *JobUpdateReq, opts ...grpc.CallOption) (*JobUpdateResp, error)
-	JobDelete(ctx context.Context, in *JobDeleteReq, opts ...grpc.CallOption) (*JobDeleteResp, error)
 }
 
-type sysClient struct {
+type userServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewSysClient(cc grpc.ClientConnInterface) SysClient {
-	return &sysClient{cc}
+func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
+	return &userServiceClient{cc}
 }
 
-func (c *sysClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+func (c *userServiceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
 	out := new(LoginResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/Login", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysclient.UserService/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sysClient) UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error) {
+func (c *userServiceClient) UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error) {
 	out := new(InfoResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysclient.UserService/UserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sysClient) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
+func (c *userServiceClient) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
 	out := new(UserAddResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysclient.UserService/UserAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sysClient) UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error) {
+func (c *userServiceClient) UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error) {
 	out := new(UserListResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysclient.UserService/UserList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sysClient) UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*UserUpdateResp, error) {
+func (c *userServiceClient) UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*UserUpdateResp, error) {
 	out := new(UserUpdateResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysclient.UserService/UserUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sysClient) UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error) {
+func (c *userServiceClient) UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error) {
 	out := new(UserDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysclient.UserService/UserDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sysClient) ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error) {
+func (c *userServiceClient) ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error) {
 	out := new(ReSetPasswordResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/ReSetPassword", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysclient.UserService/ReSetPassword", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sysClient) UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error) {
+func (c *userServiceClient) UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error) {
 	out := new(UserStatusResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/UpdateUserStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/sysclient.UserService/UpdateUserStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sysClient) RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error) {
-	out := new(RoleAddResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/RoleAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error) {
-	out := new(RoleListResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/RoleList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error) {
-	out := new(RoleUpdateResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/RoleUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error) {
-	out := new(RoleDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/RoleDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, opts ...grpc.CallOption) (*UpdateRoleRoleResp, error) {
-	out := new(UpdateRoleRoleResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/UpdateRoleRole", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error) {
-	out := new(QueryMenuByRoleIdResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/QueryMenuByRoleId", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
-	out := new(UpdateMenuRoleResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/UpdateMenuRole", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error) {
-	out := new(MenuAddResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/MenuAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error) {
-	out := new(MenuListResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/MenuList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error) {
-	out := new(MenuUpdateResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/MenuUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error) {
-	out := new(MenuDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/MenuDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) DictAdd(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error) {
-	out := new(DictAddResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) DictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error) {
-	out := new(DictListResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error) {
-	out := new(DictUpdateResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) DictDelete(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error) {
-	out := new(DictDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error) {
-	out := new(DeptAddResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/DeptAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error) {
-	out := new(DeptListResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/DeptList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error) {
-	out := new(DeptUpdateResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/DeptUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error) {
-	out := new(DeptDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/DeptDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) LoginLogAdd(ctx context.Context, in *LoginLogAddReq, opts ...grpc.CallOption) (*LoginLogAddResp, error) {
-	out := new(LoginLogAddResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/LoginLogAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) LoginLogList(ctx context.Context, in *LoginLogListReq, opts ...grpc.CallOption) (*LoginLogListResp, error) {
-	out := new(LoginLogListResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/LoginLogList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) LoginLogDelete(ctx context.Context, in *LoginLogDeleteReq, opts ...grpc.CallOption) (*LoginLogDeleteResp, error) {
-	out := new(LoginLogDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/LoginLogDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) SysLogAdd(ctx context.Context, in *SysLogAddReq, opts ...grpc.CallOption) (*SysLogAddResp, error) {
-	out := new(SysLogAddResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/SysLogAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) SysLogList(ctx context.Context, in *SysLogListReq, opts ...grpc.CallOption) (*SysLogListResp, error) {
-	out := new(SysLogListResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/SysLogList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) SysLogDelete(ctx context.Context, in *SysLogDeleteReq, opts ...grpc.CallOption) (*SysLogDeleteResp, error) {
-	out := new(SysLogDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/SysLogDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grpc.CallOption) (*ConfigAddResp, error) {
-	out := new(ConfigAddResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) ConfigList(ctx context.Context, in *ConfigListReq, opts ...grpc.CallOption) (*ConfigListResp, error) {
-	out := new(ConfigListResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts ...grpc.CallOption) (*ConfigUpdateResp, error) {
-	out := new(ConfigUpdateResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts ...grpc.CallOption) (*ConfigDeleteResp, error) {
-	out := new(ConfigDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) UpdateConfigRole(ctx context.Context, in *UpdateConfigRoleReq, opts ...grpc.CallOption) (*UpdateConfigRoleResp, error) {
-	out := new(UpdateConfigRoleResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/UpdateConfigRole", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) JobAdd(ctx context.Context, in *JobAddReq, opts ...grpc.CallOption) (*JobAddResp, error) {
-	out := new(JobAddResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/JobAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) JobList(ctx context.Context, in *JobListReq, opts ...grpc.CallOption) (*JobListResp, error) {
-	out := new(JobListResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/JobList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) JobUpdate(ctx context.Context, in *JobUpdateReq, opts ...grpc.CallOption) (*JobUpdateResp, error) {
-	out := new(JobUpdateResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/JobUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) JobDelete(ctx context.Context, in *JobDeleteReq, opts ...grpc.CallOption) (*JobDeleteResp, error) {
-	out := new(JobDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/JobDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// SysServer is the server API for Sys service.
-// All implementations must embed UnimplementedSysServer
+// UserServiceServer is the server API for UserService service.
+// All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
-type SysServer interface {
+type UserServiceServer interface {
 	Login(context.Context, *LoginReq) (*LoginResp, error)
 	UserInfo(context.Context, *InfoReq) (*InfoResp, error)
 	UserAdd(context.Context, *UserAddReq) (*UserAddResp, error)
@@ -464,6 +124,326 @@ type SysServer interface {
 	UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error)
 	ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error)
 	UpdateUserStatus(context.Context, *UserStatusReq) (*UserStatusResp, error)
+	mustEmbedUnimplementedUserServiceServer()
+}
+
+// UnimplementedUserServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedUserServiceServer struct {
+}
+
+func (UnimplementedUserServiceServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedUserServiceServer) UserInfo(context.Context, *InfoReq) (*InfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
+}
+func (UnimplementedUserServiceServer) UserAdd(context.Context, *UserAddReq) (*UserAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserAdd not implemented")
+}
+func (UnimplementedUserServiceServer) UserList(context.Context, *UserListReq) (*UserListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserList not implemented")
+}
+func (UnimplementedUserServiceServer) UserUpdate(context.Context, *UserUpdateReq) (*UserUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserUpdate not implemented")
+}
+func (UnimplementedUserServiceServer) UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserDelete not implemented")
+}
+func (UnimplementedUserServiceServer) ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReSetPassword not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUserStatus(context.Context, *UserStatusReq) (*UserStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserStatus not implemented")
+}
+func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
+
+// UnsafeUserServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UserServiceServer will
+// result in compilation errors.
+type UnsafeUserServiceServer interface {
+	mustEmbedUnimplementedUserServiceServer()
+}
+
+func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
+	s.RegisterService(&UserService_ServiceDesc, srv)
+}
+
+func _UserService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.UserService/Login",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).Login(ctx, req.(*LoginReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.UserService/UserInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserInfo(ctx, req.(*InfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.UserService/UserAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserAdd(ctx, req.(*UserAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.UserService/UserList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserList(ctx, req.(*UserListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.UserService/UserUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserUpdate(ctx, req.(*UserUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.UserService/UserDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserDelete(ctx, req.(*UserDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ReSetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReSetPasswordReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ReSetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.UserService/ReSetPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ReSetPassword(ctx, req.(*ReSetPasswordReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateUserStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateUserStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.UserService/UpdateUserStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateUserStatus(ctx, req.(*UserStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var UserService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.UserService",
+	HandlerType: (*UserServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Login",
+			Handler:    _UserService_Login_Handler,
+		},
+		{
+			MethodName: "UserInfo",
+			Handler:    _UserService_UserInfo_Handler,
+		},
+		{
+			MethodName: "UserAdd",
+			Handler:    _UserService_UserAdd_Handler,
+		},
+		{
+			MethodName: "UserList",
+			Handler:    _UserService_UserList_Handler,
+		},
+		{
+			MethodName: "UserUpdate",
+			Handler:    _UserService_UserUpdate_Handler,
+		},
+		{
+			MethodName: "UserDelete",
+			Handler:    _UserService_UserDelete_Handler,
+		},
+		{
+			MethodName: "ReSetPassword",
+			Handler:    _UserService_ReSetPassword_Handler,
+		},
+		{
+			MethodName: "UpdateUserStatus",
+			Handler:    _UserService_UpdateUserStatus_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sys.proto",
+}
+
+// RoleServiceClient is the client API for RoleService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type RoleServiceClient interface {
+	RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error)
+	RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
+	RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error)
+	RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error)
+	UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, opts ...grpc.CallOption) (*UpdateRoleRoleResp, error)
+	QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error)
+	UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
+}
+
+type roleServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewRoleServiceClient(cc grpc.ClientConnInterface) RoleServiceClient {
+	return &roleServiceClient{cc}
+}
+
+func (c *roleServiceClient) RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error) {
+	out := new(RoleAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.RoleService/RoleAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error) {
+	out := new(RoleListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.RoleService/RoleList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error) {
+	out := new(RoleUpdateResp)
+	err := c.cc.Invoke(ctx, "/sysclient.RoleService/RoleUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error) {
+	out := new(RoleDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.RoleService/RoleDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, opts ...grpc.CallOption) (*UpdateRoleRoleResp, error) {
+	out := new(UpdateRoleRoleResp)
+	err := c.cc.Invoke(ctx, "/sysclient.RoleService/UpdateRoleRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error) {
+	out := new(QueryMenuByRoleIdResp)
+	err := c.cc.Invoke(ctx, "/sysclient.RoleService/QueryMenuByRoleId", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
+	out := new(UpdateMenuRoleResp)
+	err := c.cc.Invoke(ctx, "/sysclient.RoleService/UpdateMenuRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RoleServiceServer is the server API for RoleService service.
+// All implementations must embed UnimplementedRoleServiceServer
+// for forward compatibility
+type RoleServiceServer interface {
 	RoleAdd(context.Context, *RoleAddReq) (*RoleAddResp, error)
 	RoleList(context.Context, *RoleListReq) (*RoleListResp, error)
 	RoleUpdate(context.Context, *RoleUpdateReq) (*RoleUpdateResp, error)
@@ -471,1109 +451,1529 @@ type SysServer interface {
 	UpdateRoleRole(context.Context, *UpdateRoleRoleReq) (*UpdateRoleRoleResp, error)
 	QueryMenuByRoleId(context.Context, *QueryMenuByRoleIdReq) (*QueryMenuByRoleIdResp, error)
 	UpdateMenuRole(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
-	MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error)
-	MenuList(context.Context, *MenuListReq) (*MenuListResp, error)
-	MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error)
-	MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error)
-	DictAdd(context.Context, *DictAddReq) (*DictAddResp, error)
-	DictList(context.Context, *DictListReq) (*DictListResp, error)
-	DictUpdate(context.Context, *DictUpdateReq) (*DictUpdateResp, error)
-	DictDelete(context.Context, *DictDeleteReq) (*DictDeleteResp, error)
-	DeptAdd(context.Context, *DeptAddReq) (*DeptAddResp, error)
-	DeptList(context.Context, *DeptListReq) (*DeptListResp, error)
-	DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error)
-	DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error)
-	LoginLogAdd(context.Context, *LoginLogAddReq) (*LoginLogAddResp, error)
-	LoginLogList(context.Context, *LoginLogListReq) (*LoginLogListResp, error)
-	LoginLogDelete(context.Context, *LoginLogDeleteReq) (*LoginLogDeleteResp, error)
-	SysLogAdd(context.Context, *SysLogAddReq) (*SysLogAddResp, error)
-	SysLogList(context.Context, *SysLogListReq) (*SysLogListResp, error)
-	SysLogDelete(context.Context, *SysLogDeleteReq) (*SysLogDeleteResp, error)
-	ConfigAdd(context.Context, *ConfigAddReq) (*ConfigAddResp, error)
-	ConfigList(context.Context, *ConfigListReq) (*ConfigListResp, error)
-	ConfigUpdate(context.Context, *ConfigUpdateReq) (*ConfigUpdateResp, error)
-	ConfigDelete(context.Context, *ConfigDeleteReq) (*ConfigDeleteResp, error)
-	UpdateConfigRole(context.Context, *UpdateConfigRoleReq) (*UpdateConfigRoleResp, error)
-	JobAdd(context.Context, *JobAddReq) (*JobAddResp, error)
-	JobList(context.Context, *JobListReq) (*JobListResp, error)
-	JobUpdate(context.Context, *JobUpdateReq) (*JobUpdateResp, error)
-	JobDelete(context.Context, *JobDeleteReq) (*JobDeleteResp, error)
-	mustEmbedUnimplementedSysServer()
+	mustEmbedUnimplementedRoleServiceServer()
 }
 
-// UnimplementedSysServer must be embedded to have forward compatible implementations.
-type UnimplementedSysServer struct {
+// UnimplementedRoleServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedRoleServiceServer struct {
 }
 
-func (UnimplementedSysServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
-}
-func (UnimplementedSysServer) UserInfo(context.Context, *InfoReq) (*InfoResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
-}
-func (UnimplementedSysServer) UserAdd(context.Context, *UserAddReq) (*UserAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserAdd not implemented")
-}
-func (UnimplementedSysServer) UserList(context.Context, *UserListReq) (*UserListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserList not implemented")
-}
-func (UnimplementedSysServer) UserUpdate(context.Context, *UserUpdateReq) (*UserUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserUpdate not implemented")
-}
-func (UnimplementedSysServer) UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserDelete not implemented")
-}
-func (UnimplementedSysServer) ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReSetPassword not implemented")
-}
-func (UnimplementedSysServer) UpdateUserStatus(context.Context, *UserStatusReq) (*UserStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserStatus not implemented")
-}
-func (UnimplementedSysServer) RoleAdd(context.Context, *RoleAddReq) (*RoleAddResp, error) {
+func (UnimplementedRoleServiceServer) RoleAdd(context.Context, *RoleAddReq) (*RoleAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RoleAdd not implemented")
 }
-func (UnimplementedSysServer) RoleList(context.Context, *RoleListReq) (*RoleListResp, error) {
+func (UnimplementedRoleServiceServer) RoleList(context.Context, *RoleListReq) (*RoleListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RoleList not implemented")
 }
-func (UnimplementedSysServer) RoleUpdate(context.Context, *RoleUpdateReq) (*RoleUpdateResp, error) {
+func (UnimplementedRoleServiceServer) RoleUpdate(context.Context, *RoleUpdateReq) (*RoleUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RoleUpdate not implemented")
 }
-func (UnimplementedSysServer) RoleDelete(context.Context, *RoleDeleteReq) (*RoleDeleteResp, error) {
+func (UnimplementedRoleServiceServer) RoleDelete(context.Context, *RoleDeleteReq) (*RoleDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RoleDelete not implemented")
 }
-func (UnimplementedSysServer) UpdateRoleRole(context.Context, *UpdateRoleRoleReq) (*UpdateRoleRoleResp, error) {
+func (UnimplementedRoleServiceServer) UpdateRoleRole(context.Context, *UpdateRoleRoleReq) (*UpdateRoleRoleResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRoleRole not implemented")
 }
-func (UnimplementedSysServer) QueryMenuByRoleId(context.Context, *QueryMenuByRoleIdReq) (*QueryMenuByRoleIdResp, error) {
+func (UnimplementedRoleServiceServer) QueryMenuByRoleId(context.Context, *QueryMenuByRoleIdReq) (*QueryMenuByRoleIdResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryMenuByRoleId not implemented")
 }
-func (UnimplementedSysServer) UpdateMenuRole(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error) {
+func (UnimplementedRoleServiceServer) UpdateMenuRole(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenuRole not implemented")
 }
-func (UnimplementedSysServer) MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MenuAdd not implemented")
-}
-func (UnimplementedSysServer) MenuList(context.Context, *MenuListReq) (*MenuListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MenuList not implemented")
-}
-func (UnimplementedSysServer) MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MenuUpdate not implemented")
-}
-func (UnimplementedSysServer) MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MenuDelete not implemented")
-}
-func (UnimplementedSysServer) DictAdd(context.Context, *DictAddReq) (*DictAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DictAdd not implemented")
-}
-func (UnimplementedSysServer) DictList(context.Context, *DictListReq) (*DictListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DictList not implemented")
-}
-func (UnimplementedSysServer) DictUpdate(context.Context, *DictUpdateReq) (*DictUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DictUpdate not implemented")
-}
-func (UnimplementedSysServer) DictDelete(context.Context, *DictDeleteReq) (*DictDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DictDelete not implemented")
-}
-func (UnimplementedSysServer) DeptAdd(context.Context, *DeptAddReq) (*DeptAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeptAdd not implemented")
-}
-func (UnimplementedSysServer) DeptList(context.Context, *DeptListReq) (*DeptListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeptList not implemented")
-}
-func (UnimplementedSysServer) DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeptUpdate not implemented")
-}
-func (UnimplementedSysServer) DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeptDelete not implemented")
-}
-func (UnimplementedSysServer) LoginLogAdd(context.Context, *LoginLogAddReq) (*LoginLogAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LoginLogAdd not implemented")
-}
-func (UnimplementedSysServer) LoginLogList(context.Context, *LoginLogListReq) (*LoginLogListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LoginLogList not implemented")
-}
-func (UnimplementedSysServer) LoginLogDelete(context.Context, *LoginLogDeleteReq) (*LoginLogDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LoginLogDelete not implemented")
-}
-func (UnimplementedSysServer) SysLogAdd(context.Context, *SysLogAddReq) (*SysLogAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SysLogAdd not implemented")
-}
-func (UnimplementedSysServer) SysLogList(context.Context, *SysLogListReq) (*SysLogListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SysLogList not implemented")
-}
-func (UnimplementedSysServer) SysLogDelete(context.Context, *SysLogDeleteReq) (*SysLogDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SysLogDelete not implemented")
-}
-func (UnimplementedSysServer) ConfigAdd(context.Context, *ConfigAddReq) (*ConfigAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfigAdd not implemented")
-}
-func (UnimplementedSysServer) ConfigList(context.Context, *ConfigListReq) (*ConfigListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfigList not implemented")
-}
-func (UnimplementedSysServer) ConfigUpdate(context.Context, *ConfigUpdateReq) (*ConfigUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfigUpdate not implemented")
-}
-func (UnimplementedSysServer) ConfigDelete(context.Context, *ConfigDeleteReq) (*ConfigDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfigDelete not implemented")
-}
-func (UnimplementedSysServer) UpdateConfigRole(context.Context, *UpdateConfigRoleReq) (*UpdateConfigRoleResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateConfigRole not implemented")
-}
-func (UnimplementedSysServer) JobAdd(context.Context, *JobAddReq) (*JobAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JobAdd not implemented")
-}
-func (UnimplementedSysServer) JobList(context.Context, *JobListReq) (*JobListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JobList not implemented")
-}
-func (UnimplementedSysServer) JobUpdate(context.Context, *JobUpdateReq) (*JobUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JobUpdate not implemented")
-}
-func (UnimplementedSysServer) JobDelete(context.Context, *JobDeleteReq) (*JobDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JobDelete not implemented")
-}
-func (UnimplementedSysServer) mustEmbedUnimplementedSysServer() {}
+func (UnimplementedRoleServiceServer) mustEmbedUnimplementedRoleServiceServer() {}
 
-// UnsafeSysServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SysServer will
+// UnsafeRoleServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RoleServiceServer will
 // result in compilation errors.
-type UnsafeSysServer interface {
-	mustEmbedUnimplementedSysServer()
+type UnsafeRoleServiceServer interface {
+	mustEmbedUnimplementedRoleServiceServer()
 }
 
-func RegisterSysServer(s grpc.ServiceRegistrar, srv SysServer) {
-	s.RegisterService(&Sys_ServiceDesc, srv)
+func RegisterRoleServiceServer(s grpc.ServiceRegistrar, srv RoleServiceServer) {
+	s.RegisterService(&RoleService_ServiceDesc, srv)
 }
 
-func _Sys_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).Login(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/sysclient.Sys/Login",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).Login(ctx, req.(*LoginReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sys_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InfoReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).UserInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/sysclient.Sys/UserInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UserInfo(ctx, req.(*InfoReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sys_UserAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).UserAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/sysclient.Sys/UserAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UserAdd(ctx, req.(*UserAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sys_UserList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).UserList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/sysclient.Sys/UserList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UserList(ctx, req.(*UserListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sys_UserUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).UserUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/sysclient.Sys/UserUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UserUpdate(ctx, req.(*UserUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sys_UserDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).UserDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/sysclient.Sys/UserDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UserDelete(ctx, req.(*UserDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sys_ReSetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReSetPasswordReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).ReSetPassword(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/sysclient.Sys/ReSetPassword",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).ReSetPassword(ctx, req.(*ReSetPasswordReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sys_UpdateUserStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).UpdateUserStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/sysclient.Sys/UpdateUserStatus",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UpdateUserStatus(ctx, req.(*UserStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sys_RoleAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoleService_RoleAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RoleAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).RoleAdd(ctx, in)
+		return srv.(RoleServiceServer).RoleAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/RoleAdd",
+		FullMethod: "/sysclient.RoleService/RoleAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).RoleAdd(ctx, req.(*RoleAddReq))
+		return srv.(RoleServiceServer).RoleAdd(ctx, req.(*RoleAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_RoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoleService_RoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RoleListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).RoleList(ctx, in)
+		return srv.(RoleServiceServer).RoleList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/RoleList",
+		FullMethod: "/sysclient.RoleService/RoleList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).RoleList(ctx, req.(*RoleListReq))
+		return srv.(RoleServiceServer).RoleList(ctx, req.(*RoleListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_RoleUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoleService_RoleUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RoleUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).RoleUpdate(ctx, in)
+		return srv.(RoleServiceServer).RoleUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/RoleUpdate",
+		FullMethod: "/sysclient.RoleService/RoleUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).RoleUpdate(ctx, req.(*RoleUpdateReq))
+		return srv.(RoleServiceServer).RoleUpdate(ctx, req.(*RoleUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_RoleDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoleService_RoleDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RoleDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).RoleDelete(ctx, in)
+		return srv.(RoleServiceServer).RoleDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/RoleDelete",
+		FullMethod: "/sysclient.RoleService/RoleDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).RoleDelete(ctx, req.(*RoleDeleteReq))
+		return srv.(RoleServiceServer).RoleDelete(ctx, req.(*RoleDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_UpdateRoleRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoleService_UpdateRoleRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateRoleRoleReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).UpdateRoleRole(ctx, in)
+		return srv.(RoleServiceServer).UpdateRoleRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/UpdateRoleRole",
+		FullMethod: "/sysclient.RoleService/UpdateRoleRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UpdateRoleRole(ctx, req.(*UpdateRoleRoleReq))
+		return srv.(RoleServiceServer).UpdateRoleRole(ctx, req.(*UpdateRoleRoleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_QueryMenuByRoleId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoleService_QueryMenuByRoleId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryMenuByRoleIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).QueryMenuByRoleId(ctx, in)
+		return srv.(RoleServiceServer).QueryMenuByRoleId(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/QueryMenuByRoleId",
+		FullMethod: "/sysclient.RoleService/QueryMenuByRoleId",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).QueryMenuByRoleId(ctx, req.(*QueryMenuByRoleIdReq))
+		return srv.(RoleServiceServer).QueryMenuByRoleId(ctx, req.(*QueryMenuByRoleIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_UpdateMenuRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoleService_UpdateMenuRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateMenuRoleReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).UpdateMenuRole(ctx, in)
+		return srv.(RoleServiceServer).UpdateMenuRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/UpdateMenuRole",
+		FullMethod: "/sysclient.RoleService/UpdateMenuRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UpdateMenuRole(ctx, req.(*UpdateMenuRoleReq))
+		return srv.(RoleServiceServer).UpdateMenuRole(ctx, req.(*UpdateMenuRoleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_MenuAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// RoleService_ServiceDesc is the grpc.ServiceDesc for RoleService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var RoleService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.RoleService",
+	HandlerType: (*RoleServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "RoleAdd",
+			Handler:    _RoleService_RoleAdd_Handler,
+		},
+		{
+			MethodName: "RoleList",
+			Handler:    _RoleService_RoleList_Handler,
+		},
+		{
+			MethodName: "RoleUpdate",
+			Handler:    _RoleService_RoleUpdate_Handler,
+		},
+		{
+			MethodName: "RoleDelete",
+			Handler:    _RoleService_RoleDelete_Handler,
+		},
+		{
+			MethodName: "UpdateRoleRole",
+			Handler:    _RoleService_UpdateRoleRole_Handler,
+		},
+		{
+			MethodName: "QueryMenuByRoleId",
+			Handler:    _RoleService_QueryMenuByRoleId_Handler,
+		},
+		{
+			MethodName: "UpdateMenuRole",
+			Handler:    _RoleService_UpdateMenuRole_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sys.proto",
+}
+
+// MenuServiceClient is the client API for MenuService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MenuServiceClient interface {
+	MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
+	MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
+	MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
+	MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error)
+}
+
+type menuServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMenuServiceClient(cc grpc.ClientConnInterface) MenuServiceClient {
+	return &menuServiceClient{cc}
+}
+
+func (c *menuServiceClient) MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error) {
+	out := new(MenuAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.MenuService/MenuAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *menuServiceClient) MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error) {
+	out := new(MenuListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.MenuService/MenuList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *menuServiceClient) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error) {
+	out := new(MenuUpdateResp)
+	err := c.cc.Invoke(ctx, "/sysclient.MenuService/MenuUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *menuServiceClient) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error) {
+	out := new(MenuDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.MenuService/MenuDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MenuServiceServer is the server API for MenuService service.
+// All implementations must embed UnimplementedMenuServiceServer
+// for forward compatibility
+type MenuServiceServer interface {
+	MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error)
+	MenuList(context.Context, *MenuListReq) (*MenuListResp, error)
+	MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error)
+	MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error)
+	mustEmbedUnimplementedMenuServiceServer()
+}
+
+// UnimplementedMenuServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMenuServiceServer struct {
+}
+
+func (UnimplementedMenuServiceServer) MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MenuAdd not implemented")
+}
+func (UnimplementedMenuServiceServer) MenuList(context.Context, *MenuListReq) (*MenuListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MenuList not implemented")
+}
+func (UnimplementedMenuServiceServer) MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MenuUpdate not implemented")
+}
+func (UnimplementedMenuServiceServer) MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MenuDelete not implemented")
+}
+func (UnimplementedMenuServiceServer) mustEmbedUnimplementedMenuServiceServer() {}
+
+// UnsafeMenuServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MenuServiceServer will
+// result in compilation errors.
+type UnsafeMenuServiceServer interface {
+	mustEmbedUnimplementedMenuServiceServer()
+}
+
+func RegisterMenuServiceServer(s grpc.ServiceRegistrar, srv MenuServiceServer) {
+	s.RegisterService(&MenuService_ServiceDesc, srv)
+}
+
+func _MenuService_MenuAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MenuAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).MenuAdd(ctx, in)
+		return srv.(MenuServiceServer).MenuAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/MenuAdd",
+		FullMethod: "/sysclient.MenuService/MenuAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).MenuAdd(ctx, req.(*MenuAddReq))
+		return srv.(MenuServiceServer).MenuAdd(ctx, req.(*MenuAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_MenuList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MenuService_MenuList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MenuListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).MenuList(ctx, in)
+		return srv.(MenuServiceServer).MenuList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/MenuList",
+		FullMethod: "/sysclient.MenuService/MenuList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).MenuList(ctx, req.(*MenuListReq))
+		return srv.(MenuServiceServer).MenuList(ctx, req.(*MenuListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_MenuUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MenuService_MenuUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MenuUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).MenuUpdate(ctx, in)
+		return srv.(MenuServiceServer).MenuUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/MenuUpdate",
+		FullMethod: "/sysclient.MenuService/MenuUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).MenuUpdate(ctx, req.(*MenuUpdateReq))
+		return srv.(MenuServiceServer).MenuUpdate(ctx, req.(*MenuUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_MenuDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MenuService_MenuDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MenuDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).MenuDelete(ctx, in)
+		return srv.(MenuServiceServer).MenuDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/MenuDelete",
+		FullMethod: "/sysclient.MenuService/MenuDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).MenuDelete(ctx, req.(*MenuDeleteReq))
+		return srv.(MenuServiceServer).MenuDelete(ctx, req.(*MenuDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_DictAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// MenuService_ServiceDesc is the grpc.ServiceDesc for MenuService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MenuService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.MenuService",
+	HandlerType: (*MenuServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "MenuAdd",
+			Handler:    _MenuService_MenuAdd_Handler,
+		},
+		{
+			MethodName: "MenuList",
+			Handler:    _MenuService_MenuList_Handler,
+		},
+		{
+			MethodName: "MenuUpdate",
+			Handler:    _MenuService_MenuUpdate_Handler,
+		},
+		{
+			MethodName: "MenuDelete",
+			Handler:    _MenuService_MenuDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sys.proto",
+}
+
+// DictServiceClient is the client API for DictService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DictServiceClient interface {
+	DictAdd(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error)
+	DictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error)
+	DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error)
+	DictDelete(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error)
+}
+
+type dictServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDictServiceClient(cc grpc.ClientConnInterface) DictServiceClient {
+	return &dictServiceClient{cc}
+}
+
+func (c *dictServiceClient) DictAdd(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error) {
+	out := new(DictAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.DictService/DictAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictServiceClient) DictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error) {
+	out := new(DictListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.DictService/DictList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictServiceClient) DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error) {
+	out := new(DictUpdateResp)
+	err := c.cc.Invoke(ctx, "/sysclient.DictService/DictUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictServiceClient) DictDelete(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error) {
+	out := new(DictDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.DictService/DictDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DictServiceServer is the server API for DictService service.
+// All implementations must embed UnimplementedDictServiceServer
+// for forward compatibility
+type DictServiceServer interface {
+	DictAdd(context.Context, *DictAddReq) (*DictAddResp, error)
+	DictList(context.Context, *DictListReq) (*DictListResp, error)
+	DictUpdate(context.Context, *DictUpdateReq) (*DictUpdateResp, error)
+	DictDelete(context.Context, *DictDeleteReq) (*DictDeleteResp, error)
+	mustEmbedUnimplementedDictServiceServer()
+}
+
+// UnimplementedDictServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedDictServiceServer struct {
+}
+
+func (UnimplementedDictServiceServer) DictAdd(context.Context, *DictAddReq) (*DictAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictAdd not implemented")
+}
+func (UnimplementedDictServiceServer) DictList(context.Context, *DictListReq) (*DictListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictList not implemented")
+}
+func (UnimplementedDictServiceServer) DictUpdate(context.Context, *DictUpdateReq) (*DictUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictUpdate not implemented")
+}
+func (UnimplementedDictServiceServer) DictDelete(context.Context, *DictDeleteReq) (*DictDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictDelete not implemented")
+}
+func (UnimplementedDictServiceServer) mustEmbedUnimplementedDictServiceServer() {}
+
+// UnsafeDictServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DictServiceServer will
+// result in compilation errors.
+type UnsafeDictServiceServer interface {
+	mustEmbedUnimplementedDictServiceServer()
+}
+
+func RegisterDictServiceServer(s grpc.ServiceRegistrar, srv DictServiceServer) {
+	s.RegisterService(&DictService_ServiceDesc, srv)
+}
+
+func _DictService_DictAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DictAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).DictAdd(ctx, in)
+		return srv.(DictServiceServer).DictAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/DictAdd",
+		FullMethod: "/sysclient.DictService/DictAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).DictAdd(ctx, req.(*DictAddReq))
+		return srv.(DictServiceServer).DictAdd(ctx, req.(*DictAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_DictList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DictService_DictList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DictListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).DictList(ctx, in)
+		return srv.(DictServiceServer).DictList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/DictList",
+		FullMethod: "/sysclient.DictService/DictList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).DictList(ctx, req.(*DictListReq))
+		return srv.(DictServiceServer).DictList(ctx, req.(*DictListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_DictUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DictService_DictUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DictUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).DictUpdate(ctx, in)
+		return srv.(DictServiceServer).DictUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/DictUpdate",
+		FullMethod: "/sysclient.DictService/DictUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).DictUpdate(ctx, req.(*DictUpdateReq))
+		return srv.(DictServiceServer).DictUpdate(ctx, req.(*DictUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_DictDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DictService_DictDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DictDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).DictDelete(ctx, in)
+		return srv.(DictServiceServer).DictDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/DictDelete",
+		FullMethod: "/sysclient.DictService/DictDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).DictDelete(ctx, req.(*DictDeleteReq))
+		return srv.(DictServiceServer).DictDelete(ctx, req.(*DictDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_DeptAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// DictService_ServiceDesc is the grpc.ServiceDesc for DictService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DictService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.DictService",
+	HandlerType: (*DictServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DictAdd",
+			Handler:    _DictService_DictAdd_Handler,
+		},
+		{
+			MethodName: "DictList",
+			Handler:    _DictService_DictList_Handler,
+		},
+		{
+			MethodName: "DictUpdate",
+			Handler:    _DictService_DictUpdate_Handler,
+		},
+		{
+			MethodName: "DictDelete",
+			Handler:    _DictService_DictDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sys.proto",
+}
+
+// DeptServiceClient is the client API for DeptService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DeptServiceClient interface {
+	DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error)
+	DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error)
+	DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error)
+	DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error)
+}
+
+type deptServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDeptServiceClient(cc grpc.ClientConnInterface) DeptServiceClient {
+	return &deptServiceClient{cc}
+}
+
+func (c *deptServiceClient) DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error) {
+	out := new(DeptAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.DeptService/DeptAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deptServiceClient) DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error) {
+	out := new(DeptListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.DeptService/DeptList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deptServiceClient) DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error) {
+	out := new(DeptUpdateResp)
+	err := c.cc.Invoke(ctx, "/sysclient.DeptService/DeptUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deptServiceClient) DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error) {
+	out := new(DeptDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.DeptService/DeptDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DeptServiceServer is the server API for DeptService service.
+// All implementations must embed UnimplementedDeptServiceServer
+// for forward compatibility
+type DeptServiceServer interface {
+	DeptAdd(context.Context, *DeptAddReq) (*DeptAddResp, error)
+	DeptList(context.Context, *DeptListReq) (*DeptListResp, error)
+	DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error)
+	DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error)
+	mustEmbedUnimplementedDeptServiceServer()
+}
+
+// UnimplementedDeptServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedDeptServiceServer struct {
+}
+
+func (UnimplementedDeptServiceServer) DeptAdd(context.Context, *DeptAddReq) (*DeptAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeptAdd not implemented")
+}
+func (UnimplementedDeptServiceServer) DeptList(context.Context, *DeptListReq) (*DeptListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeptList not implemented")
+}
+func (UnimplementedDeptServiceServer) DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeptUpdate not implemented")
+}
+func (UnimplementedDeptServiceServer) DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeptDelete not implemented")
+}
+func (UnimplementedDeptServiceServer) mustEmbedUnimplementedDeptServiceServer() {}
+
+// UnsafeDeptServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DeptServiceServer will
+// result in compilation errors.
+type UnsafeDeptServiceServer interface {
+	mustEmbedUnimplementedDeptServiceServer()
+}
+
+func RegisterDeptServiceServer(s grpc.ServiceRegistrar, srv DeptServiceServer) {
+	s.RegisterService(&DeptService_ServiceDesc, srv)
+}
+
+func _DeptService_DeptAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeptAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).DeptAdd(ctx, in)
+		return srv.(DeptServiceServer).DeptAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/DeptAdd",
+		FullMethod: "/sysclient.DeptService/DeptAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).DeptAdd(ctx, req.(*DeptAddReq))
+		return srv.(DeptServiceServer).DeptAdd(ctx, req.(*DeptAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_DeptList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DeptService_DeptList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeptListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).DeptList(ctx, in)
+		return srv.(DeptServiceServer).DeptList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/DeptList",
+		FullMethod: "/sysclient.DeptService/DeptList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).DeptList(ctx, req.(*DeptListReq))
+		return srv.(DeptServiceServer).DeptList(ctx, req.(*DeptListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_DeptUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DeptService_DeptUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeptUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).DeptUpdate(ctx, in)
+		return srv.(DeptServiceServer).DeptUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/DeptUpdate",
+		FullMethod: "/sysclient.DeptService/DeptUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).DeptUpdate(ctx, req.(*DeptUpdateReq))
+		return srv.(DeptServiceServer).DeptUpdate(ctx, req.(*DeptUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_DeptDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DeptService_DeptDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeptDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).DeptDelete(ctx, in)
+		return srv.(DeptServiceServer).DeptDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/DeptDelete",
+		FullMethod: "/sysclient.DeptService/DeptDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).DeptDelete(ctx, req.(*DeptDeleteReq))
+		return srv.(DeptServiceServer).DeptDelete(ctx, req.(*DeptDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_LoginLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// DeptService_ServiceDesc is the grpc.ServiceDesc for DeptService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DeptService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.DeptService",
+	HandlerType: (*DeptServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DeptAdd",
+			Handler:    _DeptService_DeptAdd_Handler,
+		},
+		{
+			MethodName: "DeptList",
+			Handler:    _DeptService_DeptList_Handler,
+		},
+		{
+			MethodName: "DeptUpdate",
+			Handler:    _DeptService_DeptUpdate_Handler,
+		},
+		{
+			MethodName: "DeptDelete",
+			Handler:    _DeptService_DeptDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sys.proto",
+}
+
+// LoginLogServiceClient is the client API for LoginLogService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type LoginLogServiceClient interface {
+	LoginLogAdd(ctx context.Context, in *LoginLogAddReq, opts ...grpc.CallOption) (*LoginLogAddResp, error)
+	LoginLogList(ctx context.Context, in *LoginLogListReq, opts ...grpc.CallOption) (*LoginLogListResp, error)
+	LoginLogDelete(ctx context.Context, in *LoginLogDeleteReq, opts ...grpc.CallOption) (*LoginLogDeleteResp, error)
+}
+
+type loginLogServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewLoginLogServiceClient(cc grpc.ClientConnInterface) LoginLogServiceClient {
+	return &loginLogServiceClient{cc}
+}
+
+func (c *loginLogServiceClient) LoginLogAdd(ctx context.Context, in *LoginLogAddReq, opts ...grpc.CallOption) (*LoginLogAddResp, error) {
+	out := new(LoginLogAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.LoginLogService/LoginLogAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loginLogServiceClient) LoginLogList(ctx context.Context, in *LoginLogListReq, opts ...grpc.CallOption) (*LoginLogListResp, error) {
+	out := new(LoginLogListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.LoginLogService/LoginLogList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loginLogServiceClient) LoginLogDelete(ctx context.Context, in *LoginLogDeleteReq, opts ...grpc.CallOption) (*LoginLogDeleteResp, error) {
+	out := new(LoginLogDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.LoginLogService/LoginLogDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// LoginLogServiceServer is the server API for LoginLogService service.
+// All implementations must embed UnimplementedLoginLogServiceServer
+// for forward compatibility
+type LoginLogServiceServer interface {
+	LoginLogAdd(context.Context, *LoginLogAddReq) (*LoginLogAddResp, error)
+	LoginLogList(context.Context, *LoginLogListReq) (*LoginLogListResp, error)
+	LoginLogDelete(context.Context, *LoginLogDeleteReq) (*LoginLogDeleteResp, error)
+	mustEmbedUnimplementedLoginLogServiceServer()
+}
+
+// UnimplementedLoginLogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedLoginLogServiceServer struct {
+}
+
+func (UnimplementedLoginLogServiceServer) LoginLogAdd(context.Context, *LoginLogAddReq) (*LoginLogAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginLogAdd not implemented")
+}
+func (UnimplementedLoginLogServiceServer) LoginLogList(context.Context, *LoginLogListReq) (*LoginLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginLogList not implemented")
+}
+func (UnimplementedLoginLogServiceServer) LoginLogDelete(context.Context, *LoginLogDeleteReq) (*LoginLogDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginLogDelete not implemented")
+}
+func (UnimplementedLoginLogServiceServer) mustEmbedUnimplementedLoginLogServiceServer() {}
+
+// UnsafeLoginLogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to LoginLogServiceServer will
+// result in compilation errors.
+type UnsafeLoginLogServiceServer interface {
+	mustEmbedUnimplementedLoginLogServiceServer()
+}
+
+func RegisterLoginLogServiceServer(s grpc.ServiceRegistrar, srv LoginLogServiceServer) {
+	s.RegisterService(&LoginLogService_ServiceDesc, srv)
+}
+
+func _LoginLogService_LoginLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginLogAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).LoginLogAdd(ctx, in)
+		return srv.(LoginLogServiceServer).LoginLogAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/LoginLogAdd",
+		FullMethod: "/sysclient.LoginLogService/LoginLogAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).LoginLogAdd(ctx, req.(*LoginLogAddReq))
+		return srv.(LoginLogServiceServer).LoginLogAdd(ctx, req.(*LoginLogAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_LoginLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LoginLogService_LoginLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginLogListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).LoginLogList(ctx, in)
+		return srv.(LoginLogServiceServer).LoginLogList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/LoginLogList",
+		FullMethod: "/sysclient.LoginLogService/LoginLogList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).LoginLogList(ctx, req.(*LoginLogListReq))
+		return srv.(LoginLogServiceServer).LoginLogList(ctx, req.(*LoginLogListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_LoginLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LoginLogService_LoginLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginLogDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).LoginLogDelete(ctx, in)
+		return srv.(LoginLogServiceServer).LoginLogDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/LoginLogDelete",
+		FullMethod: "/sysclient.LoginLogService/LoginLogDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).LoginLogDelete(ctx, req.(*LoginLogDeleteReq))
+		return srv.(LoginLogServiceServer).LoginLogDelete(ctx, req.(*LoginLogDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_SysLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// LoginLogService_ServiceDesc is the grpc.ServiceDesc for LoginLogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var LoginLogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.LoginLogService",
+	HandlerType: (*LoginLogServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "LoginLogAdd",
+			Handler:    _LoginLogService_LoginLogAdd_Handler,
+		},
+		{
+			MethodName: "LoginLogList",
+			Handler:    _LoginLogService_LoginLogList_Handler,
+		},
+		{
+			MethodName: "LoginLogDelete",
+			Handler:    _LoginLogService_LoginLogDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sys.proto",
+}
+
+// SysLogServiceClient is the client API for SysLogService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type SysLogServiceClient interface {
+	SysLogAdd(ctx context.Context, in *SysLogAddReq, opts ...grpc.CallOption) (*SysLogAddResp, error)
+	SysLogList(ctx context.Context, in *SysLogListReq, opts ...grpc.CallOption) (*SysLogListResp, error)
+	SysLogDelete(ctx context.Context, in *SysLogDeleteReq, opts ...grpc.CallOption) (*SysLogDeleteResp, error)
+}
+
+type sysLogServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSysLogServiceClient(cc grpc.ClientConnInterface) SysLogServiceClient {
+	return &sysLogServiceClient{cc}
+}
+
+func (c *sysLogServiceClient) SysLogAdd(ctx context.Context, in *SysLogAddReq, opts ...grpc.CallOption) (*SysLogAddResp, error) {
+	out := new(SysLogAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.SysLogService/SysLogAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysLogServiceClient) SysLogList(ctx context.Context, in *SysLogListReq, opts ...grpc.CallOption) (*SysLogListResp, error) {
+	out := new(SysLogListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.SysLogService/SysLogList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysLogServiceClient) SysLogDelete(ctx context.Context, in *SysLogDeleteReq, opts ...grpc.CallOption) (*SysLogDeleteResp, error) {
+	out := new(SysLogDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.SysLogService/SysLogDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SysLogServiceServer is the server API for SysLogService service.
+// All implementations must embed UnimplementedSysLogServiceServer
+// for forward compatibility
+type SysLogServiceServer interface {
+	SysLogAdd(context.Context, *SysLogAddReq) (*SysLogAddResp, error)
+	SysLogList(context.Context, *SysLogListReq) (*SysLogListResp, error)
+	SysLogDelete(context.Context, *SysLogDeleteReq) (*SysLogDeleteResp, error)
+	mustEmbedUnimplementedSysLogServiceServer()
+}
+
+// UnimplementedSysLogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedSysLogServiceServer struct {
+}
+
+func (UnimplementedSysLogServiceServer) SysLogAdd(context.Context, *SysLogAddReq) (*SysLogAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SysLogAdd not implemented")
+}
+func (UnimplementedSysLogServiceServer) SysLogList(context.Context, *SysLogListReq) (*SysLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SysLogList not implemented")
+}
+func (UnimplementedSysLogServiceServer) SysLogDelete(context.Context, *SysLogDeleteReq) (*SysLogDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SysLogDelete not implemented")
+}
+func (UnimplementedSysLogServiceServer) mustEmbedUnimplementedSysLogServiceServer() {}
+
+// UnsafeSysLogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SysLogServiceServer will
+// result in compilation errors.
+type UnsafeSysLogServiceServer interface {
+	mustEmbedUnimplementedSysLogServiceServer()
+}
+
+func RegisterSysLogServiceServer(s grpc.ServiceRegistrar, srv SysLogServiceServer) {
+	s.RegisterService(&SysLogService_ServiceDesc, srv)
+}
+
+func _SysLogService_SysLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SysLogAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).SysLogAdd(ctx, in)
+		return srv.(SysLogServiceServer).SysLogAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/SysLogAdd",
+		FullMethod: "/sysclient.SysLogService/SysLogAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).SysLogAdd(ctx, req.(*SysLogAddReq))
+		return srv.(SysLogServiceServer).SysLogAdd(ctx, req.(*SysLogAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_SysLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SysLogService_SysLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SysLogListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).SysLogList(ctx, in)
+		return srv.(SysLogServiceServer).SysLogList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/SysLogList",
+		FullMethod: "/sysclient.SysLogService/SysLogList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).SysLogList(ctx, req.(*SysLogListReq))
+		return srv.(SysLogServiceServer).SysLogList(ctx, req.(*SysLogListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_SysLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SysLogService_SysLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SysLogDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).SysLogDelete(ctx, in)
+		return srv.(SysLogServiceServer).SysLogDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/SysLogDelete",
+		FullMethod: "/sysclient.SysLogService/SysLogDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).SysLogDelete(ctx, req.(*SysLogDeleteReq))
+		return srv.(SysLogServiceServer).SysLogDelete(ctx, req.(*SysLogDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_ConfigAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// SysLogService_ServiceDesc is the grpc.ServiceDesc for SysLogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var SysLogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.SysLogService",
+	HandlerType: (*SysLogServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SysLogAdd",
+			Handler:    _SysLogService_SysLogAdd_Handler,
+		},
+		{
+			MethodName: "SysLogList",
+			Handler:    _SysLogService_SysLogList_Handler,
+		},
+		{
+			MethodName: "SysLogDelete",
+			Handler:    _SysLogService_SysLogDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sys.proto",
+}
+
+// ConfigServiceClient is the client API for ConfigService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ConfigServiceClient interface {
+	ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grpc.CallOption) (*ConfigAddResp, error)
+	ConfigList(ctx context.Context, in *ConfigListReq, opts ...grpc.CallOption) (*ConfigListResp, error)
+	ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts ...grpc.CallOption) (*ConfigUpdateResp, error)
+	ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts ...grpc.CallOption) (*ConfigDeleteResp, error)
+	UpdateConfigRole(ctx context.Context, in *UpdateConfigRoleReq, opts ...grpc.CallOption) (*UpdateConfigRoleResp, error)
+}
+
+type configServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewConfigServiceClient(cc grpc.ClientConnInterface) ConfigServiceClient {
+	return &configServiceClient{cc}
+}
+
+func (c *configServiceClient) ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grpc.CallOption) (*ConfigAddResp, error) {
+	out := new(ConfigAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.ConfigService/ConfigAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configServiceClient) ConfigList(ctx context.Context, in *ConfigListReq, opts ...grpc.CallOption) (*ConfigListResp, error) {
+	out := new(ConfigListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.ConfigService/ConfigList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configServiceClient) ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts ...grpc.CallOption) (*ConfigUpdateResp, error) {
+	out := new(ConfigUpdateResp)
+	err := c.cc.Invoke(ctx, "/sysclient.ConfigService/ConfigUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configServiceClient) ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts ...grpc.CallOption) (*ConfigDeleteResp, error) {
+	out := new(ConfigDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.ConfigService/ConfigDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configServiceClient) UpdateConfigRole(ctx context.Context, in *UpdateConfigRoleReq, opts ...grpc.CallOption) (*UpdateConfigRoleResp, error) {
+	out := new(UpdateConfigRoleResp)
+	err := c.cc.Invoke(ctx, "/sysclient.ConfigService/UpdateConfigRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConfigServiceServer is the server API for ConfigService service.
+// All implementations must embed UnimplementedConfigServiceServer
+// for forward compatibility
+type ConfigServiceServer interface {
+	ConfigAdd(context.Context, *ConfigAddReq) (*ConfigAddResp, error)
+	ConfigList(context.Context, *ConfigListReq) (*ConfigListResp, error)
+	ConfigUpdate(context.Context, *ConfigUpdateReq) (*ConfigUpdateResp, error)
+	ConfigDelete(context.Context, *ConfigDeleteReq) (*ConfigDeleteResp, error)
+	UpdateConfigRole(context.Context, *UpdateConfigRoleReq) (*UpdateConfigRoleResp, error)
+	mustEmbedUnimplementedConfigServiceServer()
+}
+
+// UnimplementedConfigServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedConfigServiceServer struct {
+}
+
+func (UnimplementedConfigServiceServer) ConfigAdd(context.Context, *ConfigAddReq) (*ConfigAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigAdd not implemented")
+}
+func (UnimplementedConfigServiceServer) ConfigList(context.Context, *ConfigListReq) (*ConfigListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigList not implemented")
+}
+func (UnimplementedConfigServiceServer) ConfigUpdate(context.Context, *ConfigUpdateReq) (*ConfigUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigUpdate not implemented")
+}
+func (UnimplementedConfigServiceServer) ConfigDelete(context.Context, *ConfigDeleteReq) (*ConfigDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigDelete not implemented")
+}
+func (UnimplementedConfigServiceServer) UpdateConfigRole(context.Context, *UpdateConfigRoleReq) (*UpdateConfigRoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateConfigRole not implemented")
+}
+func (UnimplementedConfigServiceServer) mustEmbedUnimplementedConfigServiceServer() {}
+
+// UnsafeConfigServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ConfigServiceServer will
+// result in compilation errors.
+type UnsafeConfigServiceServer interface {
+	mustEmbedUnimplementedConfigServiceServer()
+}
+
+func RegisterConfigServiceServer(s grpc.ServiceRegistrar, srv ConfigServiceServer) {
+	s.RegisterService(&ConfigService_ServiceDesc, srv)
+}
+
+func _ConfigService_ConfigAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ConfigAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).ConfigAdd(ctx, in)
+		return srv.(ConfigServiceServer).ConfigAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/ConfigAdd",
+		FullMethod: "/sysclient.ConfigService/ConfigAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).ConfigAdd(ctx, req.(*ConfigAddReq))
+		return srv.(ConfigServiceServer).ConfigAdd(ctx, req.(*ConfigAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_ConfigList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ConfigService_ConfigList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ConfigListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).ConfigList(ctx, in)
+		return srv.(ConfigServiceServer).ConfigList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/ConfigList",
+		FullMethod: "/sysclient.ConfigService/ConfigList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).ConfigList(ctx, req.(*ConfigListReq))
+		return srv.(ConfigServiceServer).ConfigList(ctx, req.(*ConfigListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_ConfigUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ConfigService_ConfigUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ConfigUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).ConfigUpdate(ctx, in)
+		return srv.(ConfigServiceServer).ConfigUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/ConfigUpdate",
+		FullMethod: "/sysclient.ConfigService/ConfigUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).ConfigUpdate(ctx, req.(*ConfigUpdateReq))
+		return srv.(ConfigServiceServer).ConfigUpdate(ctx, req.(*ConfigUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_ConfigDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ConfigService_ConfigDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ConfigDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).ConfigDelete(ctx, in)
+		return srv.(ConfigServiceServer).ConfigDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/ConfigDelete",
+		FullMethod: "/sysclient.ConfigService/ConfigDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).ConfigDelete(ctx, req.(*ConfigDeleteReq))
+		return srv.(ConfigServiceServer).ConfigDelete(ctx, req.(*ConfigDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_UpdateConfigRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ConfigService_UpdateConfigRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateConfigRoleReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).UpdateConfigRole(ctx, in)
+		return srv.(ConfigServiceServer).UpdateConfigRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/UpdateConfigRole",
+		FullMethod: "/sysclient.ConfigService/UpdateConfigRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UpdateConfigRole(ctx, req.(*UpdateConfigRoleReq))
+		return srv.(ConfigServiceServer).UpdateConfigRole(ctx, req.(*UpdateConfigRoleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_JobAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// ConfigService_ServiceDesc is the grpc.ServiceDesc for ConfigService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ConfigService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.ConfigService",
+	HandlerType: (*ConfigServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ConfigAdd",
+			Handler:    _ConfigService_ConfigAdd_Handler,
+		},
+		{
+			MethodName: "ConfigList",
+			Handler:    _ConfigService_ConfigList_Handler,
+		},
+		{
+			MethodName: "ConfigUpdate",
+			Handler:    _ConfigService_ConfigUpdate_Handler,
+		},
+		{
+			MethodName: "ConfigDelete",
+			Handler:    _ConfigService_ConfigDelete_Handler,
+		},
+		{
+			MethodName: "UpdateConfigRole",
+			Handler:    _ConfigService_UpdateConfigRole_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sys.proto",
+}
+
+// JobServiceClient is the client API for JobService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type JobServiceClient interface {
+	JobAdd(ctx context.Context, in *JobAddReq, opts ...grpc.CallOption) (*JobAddResp, error)
+	JobList(ctx context.Context, in *JobListReq, opts ...grpc.CallOption) (*JobListResp, error)
+	JobUpdate(ctx context.Context, in *JobUpdateReq, opts ...grpc.CallOption) (*JobUpdateResp, error)
+	JobDelete(ctx context.Context, in *JobDeleteReq, opts ...grpc.CallOption) (*JobDeleteResp, error)
+}
+
+type jobServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewJobServiceClient(cc grpc.ClientConnInterface) JobServiceClient {
+	return &jobServiceClient{cc}
+}
+
+func (c *jobServiceClient) JobAdd(ctx context.Context, in *JobAddReq, opts ...grpc.CallOption) (*JobAddResp, error) {
+	out := new(JobAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.JobService/JobAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobServiceClient) JobList(ctx context.Context, in *JobListReq, opts ...grpc.CallOption) (*JobListResp, error) {
+	out := new(JobListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.JobService/JobList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobServiceClient) JobUpdate(ctx context.Context, in *JobUpdateReq, opts ...grpc.CallOption) (*JobUpdateResp, error) {
+	out := new(JobUpdateResp)
+	err := c.cc.Invoke(ctx, "/sysclient.JobService/JobUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobServiceClient) JobDelete(ctx context.Context, in *JobDeleteReq, opts ...grpc.CallOption) (*JobDeleteResp, error) {
+	out := new(JobDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.JobService/JobDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// JobServiceServer is the server API for JobService service.
+// All implementations must embed UnimplementedJobServiceServer
+// for forward compatibility
+type JobServiceServer interface {
+	JobAdd(context.Context, *JobAddReq) (*JobAddResp, error)
+	JobList(context.Context, *JobListReq) (*JobListResp, error)
+	JobUpdate(context.Context, *JobUpdateReq) (*JobUpdateResp, error)
+	JobDelete(context.Context, *JobDeleteReq) (*JobDeleteResp, error)
+	mustEmbedUnimplementedJobServiceServer()
+}
+
+// UnimplementedJobServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedJobServiceServer struct {
+}
+
+func (UnimplementedJobServiceServer) JobAdd(context.Context, *JobAddReq) (*JobAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JobAdd not implemented")
+}
+func (UnimplementedJobServiceServer) JobList(context.Context, *JobListReq) (*JobListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JobList not implemented")
+}
+func (UnimplementedJobServiceServer) JobUpdate(context.Context, *JobUpdateReq) (*JobUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JobUpdate not implemented")
+}
+func (UnimplementedJobServiceServer) JobDelete(context.Context, *JobDeleteReq) (*JobDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JobDelete not implemented")
+}
+func (UnimplementedJobServiceServer) mustEmbedUnimplementedJobServiceServer() {}
+
+// UnsafeJobServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to JobServiceServer will
+// result in compilation errors.
+type UnsafeJobServiceServer interface {
+	mustEmbedUnimplementedJobServiceServer()
+}
+
+func RegisterJobServiceServer(s grpc.ServiceRegistrar, srv JobServiceServer) {
+	s.RegisterService(&JobService_ServiceDesc, srv)
+}
+
+func _JobService_JobAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(JobAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).JobAdd(ctx, in)
+		return srv.(JobServiceServer).JobAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/JobAdd",
+		FullMethod: "/sysclient.JobService/JobAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).JobAdd(ctx, req.(*JobAddReq))
+		return srv.(JobServiceServer).JobAdd(ctx, req.(*JobAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_JobList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _JobService_JobList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(JobListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).JobList(ctx, in)
+		return srv.(JobServiceServer).JobList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/JobList",
+		FullMethod: "/sysclient.JobService/JobList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).JobList(ctx, req.(*JobListReq))
+		return srv.(JobServiceServer).JobList(ctx, req.(*JobListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_JobUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _JobService_JobUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(JobUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).JobUpdate(ctx, in)
+		return srv.(JobServiceServer).JobUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/JobUpdate",
+		FullMethod: "/sysclient.JobService/JobUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).JobUpdate(ctx, req.(*JobUpdateReq))
+		return srv.(JobServiceServer).JobUpdate(ctx, req.(*JobUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_JobDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _JobService_JobDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(JobDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).JobDelete(ctx, in)
+		return srv.(JobServiceServer).JobDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/JobDelete",
+		FullMethod: "/sysclient.JobService/JobDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).JobDelete(ctx, req.(*JobDeleteReq))
+		return srv.(JobServiceServer).JobDelete(ctx, req.(*JobDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Sys_ServiceDesc is the grpc.ServiceDesc for Sys service.
+// JobService_ServiceDesc is the grpc.ServiceDesc for JobService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Sys_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.Sys",
-	HandlerType: (*SysServer)(nil),
+var JobService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.JobService",
+	HandlerType: (*JobServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Login",
-			Handler:    _Sys_Login_Handler,
-		},
-		{
-			MethodName: "UserInfo",
-			Handler:    _Sys_UserInfo_Handler,
-		},
-		{
-			MethodName: "UserAdd",
-			Handler:    _Sys_UserAdd_Handler,
-		},
-		{
-			MethodName: "UserList",
-			Handler:    _Sys_UserList_Handler,
-		},
-		{
-			MethodName: "UserUpdate",
-			Handler:    _Sys_UserUpdate_Handler,
-		},
-		{
-			MethodName: "UserDelete",
-			Handler:    _Sys_UserDelete_Handler,
-		},
-		{
-			MethodName: "ReSetPassword",
-			Handler:    _Sys_ReSetPassword_Handler,
-		},
-		{
-			MethodName: "UpdateUserStatus",
-			Handler:    _Sys_UpdateUserStatus_Handler,
-		},
-		{
-			MethodName: "RoleAdd",
-			Handler:    _Sys_RoleAdd_Handler,
-		},
-		{
-			MethodName: "RoleList",
-			Handler:    _Sys_RoleList_Handler,
-		},
-		{
-			MethodName: "RoleUpdate",
-			Handler:    _Sys_RoleUpdate_Handler,
-		},
-		{
-			MethodName: "RoleDelete",
-			Handler:    _Sys_RoleDelete_Handler,
-		},
-		{
-			MethodName: "UpdateRoleRole",
-			Handler:    _Sys_UpdateRoleRole_Handler,
-		},
-		{
-			MethodName: "QueryMenuByRoleId",
-			Handler:    _Sys_QueryMenuByRoleId_Handler,
-		},
-		{
-			MethodName: "UpdateMenuRole",
-			Handler:    _Sys_UpdateMenuRole_Handler,
-		},
-		{
-			MethodName: "MenuAdd",
-			Handler:    _Sys_MenuAdd_Handler,
-		},
-		{
-			MethodName: "MenuList",
-			Handler:    _Sys_MenuList_Handler,
-		},
-		{
-			MethodName: "MenuUpdate",
-			Handler:    _Sys_MenuUpdate_Handler,
-		},
-		{
-			MethodName: "MenuDelete",
-			Handler:    _Sys_MenuDelete_Handler,
-		},
-		{
-			MethodName: "DictAdd",
-			Handler:    _Sys_DictAdd_Handler,
-		},
-		{
-			MethodName: "DictList",
-			Handler:    _Sys_DictList_Handler,
-		},
-		{
-			MethodName: "DictUpdate",
-			Handler:    _Sys_DictUpdate_Handler,
-		},
-		{
-			MethodName: "DictDelete",
-			Handler:    _Sys_DictDelete_Handler,
-		},
-		{
-			MethodName: "DeptAdd",
-			Handler:    _Sys_DeptAdd_Handler,
-		},
-		{
-			MethodName: "DeptList",
-			Handler:    _Sys_DeptList_Handler,
-		},
-		{
-			MethodName: "DeptUpdate",
-			Handler:    _Sys_DeptUpdate_Handler,
-		},
-		{
-			MethodName: "DeptDelete",
-			Handler:    _Sys_DeptDelete_Handler,
-		},
-		{
-			MethodName: "LoginLogAdd",
-			Handler:    _Sys_LoginLogAdd_Handler,
-		},
-		{
-			MethodName: "LoginLogList",
-			Handler:    _Sys_LoginLogList_Handler,
-		},
-		{
-			MethodName: "LoginLogDelete",
-			Handler:    _Sys_LoginLogDelete_Handler,
-		},
-		{
-			MethodName: "SysLogAdd",
-			Handler:    _Sys_SysLogAdd_Handler,
-		},
-		{
-			MethodName: "SysLogList",
-			Handler:    _Sys_SysLogList_Handler,
-		},
-		{
-			MethodName: "SysLogDelete",
-			Handler:    _Sys_SysLogDelete_Handler,
-		},
-		{
-			MethodName: "ConfigAdd",
-			Handler:    _Sys_ConfigAdd_Handler,
-		},
-		{
-			MethodName: "ConfigList",
-			Handler:    _Sys_ConfigList_Handler,
-		},
-		{
-			MethodName: "ConfigUpdate",
-			Handler:    _Sys_ConfigUpdate_Handler,
-		},
-		{
-			MethodName: "ConfigDelete",
-			Handler:    _Sys_ConfigDelete_Handler,
-		},
-		{
-			MethodName: "UpdateConfigRole",
-			Handler:    _Sys_UpdateConfigRole_Handler,
-		},
-		{
 			MethodName: "JobAdd",
-			Handler:    _Sys_JobAdd_Handler,
+			Handler:    _JobService_JobAdd_Handler,
 		},
 		{
 			MethodName: "JobList",
-			Handler:    _Sys_JobList_Handler,
+			Handler:    _JobService_JobList_Handler,
 		},
 		{
 			MethodName: "JobUpdate",
-			Handler:    _Sys_JobUpdate_Handler,
+			Handler:    _JobService_JobUpdate_Handler,
 		},
 		{
 			MethodName: "JobDelete",
-			Handler:    _Sys_JobDelete_Handler,
+			Handler:    _JobService_JobDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

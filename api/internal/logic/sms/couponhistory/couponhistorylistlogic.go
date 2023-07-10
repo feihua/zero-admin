@@ -27,7 +27,7 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *CouponHistoryListLogic) CouponHistoryList(req types.ListCouponHistoryReq) (*types.ListCouponHistoryResp, error) {
-	resp, err := l.svcCtx.Sms.CouponHistoryList(l.ctx, &smsclient.CouponHistoryListReq{
+	resp, err := l.svcCtx.CouponHistoryService.CouponHistoryList(l.ctx, &smsclient.CouponHistoryListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

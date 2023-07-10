@@ -18,1994 +18,2601 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// SmsClient is the client API for Sms service.
+// CouponServiceClient is the client API for CouponService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SmsClient interface {
+type CouponServiceClient interface {
 	CouponAdd(ctx context.Context, in *CouponAddReq, opts ...grpc.CallOption) (*CouponAddResp, error)
 	CouponList(ctx context.Context, in *CouponListReq, opts ...grpc.CallOption) (*CouponListResp, error)
 	CouponUpdate(ctx context.Context, in *CouponUpdateReq, opts ...grpc.CallOption) (*CouponUpdateResp, error)
 	CouponDelete(ctx context.Context, in *CouponDeleteReq, opts ...grpc.CallOption) (*CouponDeleteResp, error)
+}
+
+type couponServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCouponServiceClient(cc grpc.ClientConnInterface) CouponServiceClient {
+	return &couponServiceClient{cc}
+}
+
+func (c *couponServiceClient) CouponAdd(ctx context.Context, in *CouponAddReq, opts ...grpc.CallOption) (*CouponAddResp, error) {
+	out := new(CouponAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponService/CouponAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponServiceClient) CouponList(ctx context.Context, in *CouponListReq, opts ...grpc.CallOption) (*CouponListResp, error) {
+	out := new(CouponListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponService/CouponList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponServiceClient) CouponUpdate(ctx context.Context, in *CouponUpdateReq, opts ...grpc.CallOption) (*CouponUpdateResp, error) {
+	out := new(CouponUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponService/CouponUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponServiceClient) CouponDelete(ctx context.Context, in *CouponDeleteReq, opts ...grpc.CallOption) (*CouponDeleteResp, error) {
+	out := new(CouponDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponService/CouponDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CouponServiceServer is the server API for CouponService service.
+// All implementations must embed UnimplementedCouponServiceServer
+// for forward compatibility
+type CouponServiceServer interface {
+	CouponAdd(context.Context, *CouponAddReq) (*CouponAddResp, error)
+	CouponList(context.Context, *CouponListReq) (*CouponListResp, error)
+	CouponUpdate(context.Context, *CouponUpdateReq) (*CouponUpdateResp, error)
+	CouponDelete(context.Context, *CouponDeleteReq) (*CouponDeleteResp, error)
+	mustEmbedUnimplementedCouponServiceServer()
+}
+
+// UnimplementedCouponServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCouponServiceServer struct {
+}
+
+func (UnimplementedCouponServiceServer) CouponAdd(context.Context, *CouponAddReq) (*CouponAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponAdd not implemented")
+}
+func (UnimplementedCouponServiceServer) CouponList(context.Context, *CouponListReq) (*CouponListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponList not implemented")
+}
+func (UnimplementedCouponServiceServer) CouponUpdate(context.Context, *CouponUpdateReq) (*CouponUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponUpdate not implemented")
+}
+func (UnimplementedCouponServiceServer) CouponDelete(context.Context, *CouponDeleteReq) (*CouponDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponDelete not implemented")
+}
+func (UnimplementedCouponServiceServer) mustEmbedUnimplementedCouponServiceServer() {}
+
+// UnsafeCouponServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CouponServiceServer will
+// result in compilation errors.
+type UnsafeCouponServiceServer interface {
+	mustEmbedUnimplementedCouponServiceServer()
+}
+
+func RegisterCouponServiceServer(s grpc.ServiceRegistrar, srv CouponServiceServer) {
+	s.RegisterService(&CouponService_ServiceDesc, srv)
+}
+
+func _CouponService_CouponAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponServiceServer).CouponAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponService/CouponAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponServiceServer).CouponAdd(ctx, req.(*CouponAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponService_CouponList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponServiceServer).CouponList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponService/CouponList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponServiceServer).CouponList(ctx, req.(*CouponListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponService_CouponUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponServiceServer).CouponUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponService/CouponUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponServiceServer).CouponUpdate(ctx, req.(*CouponUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponService_CouponDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponServiceServer).CouponDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponService/CouponDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponServiceServer).CouponDelete(ctx, req.(*CouponDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CouponService_ServiceDesc is the grpc.ServiceDesc for CouponService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CouponService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.CouponService",
+	HandlerType: (*CouponServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CouponAdd",
+			Handler:    _CouponService_CouponAdd_Handler,
+		},
+		{
+			MethodName: "CouponList",
+			Handler:    _CouponService_CouponList_Handler,
+		},
+		{
+			MethodName: "CouponUpdate",
+			Handler:    _CouponService_CouponUpdate_Handler,
+		},
+		{
+			MethodName: "CouponDelete",
+			Handler:    _CouponService_CouponDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// CouponHistoryServiceClient is the client API for CouponHistoryService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CouponHistoryServiceClient interface {
 	CouponHistoryAdd(ctx context.Context, in *CouponHistoryAddReq, opts ...grpc.CallOption) (*CouponHistoryAddResp, error)
 	CouponHistoryList(ctx context.Context, in *CouponHistoryListReq, opts ...grpc.CallOption) (*CouponHistoryListResp, error)
 	CouponHistoryUpdate(ctx context.Context, in *CouponHistoryUpdateReq, opts ...grpc.CallOption) (*CouponHistoryUpdateResp, error)
 	CouponHistoryDelete(ctx context.Context, in *CouponHistoryDeleteReq, opts ...grpc.CallOption) (*CouponHistoryDeleteResp, error)
+}
+
+type couponHistoryServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCouponHistoryServiceClient(cc grpc.ClientConnInterface) CouponHistoryServiceClient {
+	return &couponHistoryServiceClient{cc}
+}
+
+func (c *couponHistoryServiceClient) CouponHistoryAdd(ctx context.Context, in *CouponHistoryAddReq, opts ...grpc.CallOption) (*CouponHistoryAddResp, error) {
+	out := new(CouponHistoryAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponHistoryService/CouponHistoryAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponHistoryServiceClient) CouponHistoryList(ctx context.Context, in *CouponHistoryListReq, opts ...grpc.CallOption) (*CouponHistoryListResp, error) {
+	out := new(CouponHistoryListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponHistoryService/CouponHistoryList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponHistoryServiceClient) CouponHistoryUpdate(ctx context.Context, in *CouponHistoryUpdateReq, opts ...grpc.CallOption) (*CouponHistoryUpdateResp, error) {
+	out := new(CouponHistoryUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponHistoryService/CouponHistoryUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponHistoryServiceClient) CouponHistoryDelete(ctx context.Context, in *CouponHistoryDeleteReq, opts ...grpc.CallOption) (*CouponHistoryDeleteResp, error) {
+	out := new(CouponHistoryDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponHistoryService/CouponHistoryDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CouponHistoryServiceServer is the server API for CouponHistoryService service.
+// All implementations must embed UnimplementedCouponHistoryServiceServer
+// for forward compatibility
+type CouponHistoryServiceServer interface {
+	CouponHistoryAdd(context.Context, *CouponHistoryAddReq) (*CouponHistoryAddResp, error)
+	CouponHistoryList(context.Context, *CouponHistoryListReq) (*CouponHistoryListResp, error)
+	CouponHistoryUpdate(context.Context, *CouponHistoryUpdateReq) (*CouponHistoryUpdateResp, error)
+	CouponHistoryDelete(context.Context, *CouponHistoryDeleteReq) (*CouponHistoryDeleteResp, error)
+	mustEmbedUnimplementedCouponHistoryServiceServer()
+}
+
+// UnimplementedCouponHistoryServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCouponHistoryServiceServer struct {
+}
+
+func (UnimplementedCouponHistoryServiceServer) CouponHistoryAdd(context.Context, *CouponHistoryAddReq) (*CouponHistoryAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponHistoryAdd not implemented")
+}
+func (UnimplementedCouponHistoryServiceServer) CouponHistoryList(context.Context, *CouponHistoryListReq) (*CouponHistoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponHistoryList not implemented")
+}
+func (UnimplementedCouponHistoryServiceServer) CouponHistoryUpdate(context.Context, *CouponHistoryUpdateReq) (*CouponHistoryUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponHistoryUpdate not implemented")
+}
+func (UnimplementedCouponHistoryServiceServer) CouponHistoryDelete(context.Context, *CouponHistoryDeleteReq) (*CouponHistoryDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponHistoryDelete not implemented")
+}
+func (UnimplementedCouponHistoryServiceServer) mustEmbedUnimplementedCouponHistoryServiceServer() {}
+
+// UnsafeCouponHistoryServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CouponHistoryServiceServer will
+// result in compilation errors.
+type UnsafeCouponHistoryServiceServer interface {
+	mustEmbedUnimplementedCouponHistoryServiceServer()
+}
+
+func RegisterCouponHistoryServiceServer(s grpc.ServiceRegistrar, srv CouponHistoryServiceServer) {
+	s.RegisterService(&CouponHistoryService_ServiceDesc, srv)
+}
+
+func _CouponHistoryService_CouponHistoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponHistoryAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponHistoryServiceServer).CouponHistoryAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponHistoryService/CouponHistoryAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponHistoryServiceServer).CouponHistoryAdd(ctx, req.(*CouponHistoryAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponHistoryService_CouponHistoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponHistoryListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponHistoryServiceServer).CouponHistoryList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponHistoryService/CouponHistoryList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponHistoryServiceServer).CouponHistoryList(ctx, req.(*CouponHistoryListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponHistoryService_CouponHistoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponHistoryUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponHistoryServiceServer).CouponHistoryUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponHistoryService/CouponHistoryUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponHistoryServiceServer).CouponHistoryUpdate(ctx, req.(*CouponHistoryUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponHistoryService_CouponHistoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponHistoryDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponHistoryServiceServer).CouponHistoryDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponHistoryService/CouponHistoryDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponHistoryServiceServer).CouponHistoryDelete(ctx, req.(*CouponHistoryDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CouponHistoryService_ServiceDesc is the grpc.ServiceDesc for CouponHistoryService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CouponHistoryService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.CouponHistoryService",
+	HandlerType: (*CouponHistoryServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CouponHistoryAdd",
+			Handler:    _CouponHistoryService_CouponHistoryAdd_Handler,
+		},
+		{
+			MethodName: "CouponHistoryList",
+			Handler:    _CouponHistoryService_CouponHistoryList_Handler,
+		},
+		{
+			MethodName: "CouponHistoryUpdate",
+			Handler:    _CouponHistoryService_CouponHistoryUpdate_Handler,
+		},
+		{
+			MethodName: "CouponHistoryDelete",
+			Handler:    _CouponHistoryService_CouponHistoryDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// CouponProductCategoryRelationServiceClient is the client API for CouponProductCategoryRelationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CouponProductCategoryRelationServiceClient interface {
 	CouponProductCategoryRelationAdd(ctx context.Context, in *CouponProductCategoryRelationAddReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationAddResp, error)
 	CouponProductCategoryRelationList(ctx context.Context, in *CouponProductCategoryRelationListReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationListResp, error)
 	CouponProductCategoryRelationUpdate(ctx context.Context, in *CouponProductCategoryRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationUpdateResp, error)
 	CouponProductCategoryRelationDelete(ctx context.Context, in *CouponProductCategoryRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationDeleteResp, error)
+}
+
+type couponProductCategoryRelationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCouponProductCategoryRelationServiceClient(cc grpc.ClientConnInterface) CouponProductCategoryRelationServiceClient {
+	return &couponProductCategoryRelationServiceClient{cc}
+}
+
+func (c *couponProductCategoryRelationServiceClient) CouponProductCategoryRelationAdd(ctx context.Context, in *CouponProductCategoryRelationAddReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationAddResp, error) {
+	out := new(CouponProductCategoryRelationAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponProductCategoryRelationServiceClient) CouponProductCategoryRelationList(ctx context.Context, in *CouponProductCategoryRelationListReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationListResp, error) {
+	out := new(CouponProductCategoryRelationListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponProductCategoryRelationServiceClient) CouponProductCategoryRelationUpdate(ctx context.Context, in *CouponProductCategoryRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationUpdateResp, error) {
+	out := new(CouponProductCategoryRelationUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponProductCategoryRelationServiceClient) CouponProductCategoryRelationDelete(ctx context.Context, in *CouponProductCategoryRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationDeleteResp, error) {
+	out := new(CouponProductCategoryRelationDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CouponProductCategoryRelationServiceServer is the server API for CouponProductCategoryRelationService service.
+// All implementations must embed UnimplementedCouponProductCategoryRelationServiceServer
+// for forward compatibility
+type CouponProductCategoryRelationServiceServer interface {
+	CouponProductCategoryRelationAdd(context.Context, *CouponProductCategoryRelationAddReq) (*CouponProductCategoryRelationAddResp, error)
+	CouponProductCategoryRelationList(context.Context, *CouponProductCategoryRelationListReq) (*CouponProductCategoryRelationListResp, error)
+	CouponProductCategoryRelationUpdate(context.Context, *CouponProductCategoryRelationUpdateReq) (*CouponProductCategoryRelationUpdateResp, error)
+	CouponProductCategoryRelationDelete(context.Context, *CouponProductCategoryRelationDeleteReq) (*CouponProductCategoryRelationDeleteResp, error)
+	mustEmbedUnimplementedCouponProductCategoryRelationServiceServer()
+}
+
+// UnimplementedCouponProductCategoryRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCouponProductCategoryRelationServiceServer struct {
+}
+
+func (UnimplementedCouponProductCategoryRelationServiceServer) CouponProductCategoryRelationAdd(context.Context, *CouponProductCategoryRelationAddReq) (*CouponProductCategoryRelationAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationAdd not implemented")
+}
+func (UnimplementedCouponProductCategoryRelationServiceServer) CouponProductCategoryRelationList(context.Context, *CouponProductCategoryRelationListReq) (*CouponProductCategoryRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationList not implemented")
+}
+func (UnimplementedCouponProductCategoryRelationServiceServer) CouponProductCategoryRelationUpdate(context.Context, *CouponProductCategoryRelationUpdateReq) (*CouponProductCategoryRelationUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationUpdate not implemented")
+}
+func (UnimplementedCouponProductCategoryRelationServiceServer) CouponProductCategoryRelationDelete(context.Context, *CouponProductCategoryRelationDeleteReq) (*CouponProductCategoryRelationDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationDelete not implemented")
+}
+func (UnimplementedCouponProductCategoryRelationServiceServer) mustEmbedUnimplementedCouponProductCategoryRelationServiceServer() {
+}
+
+// UnsafeCouponProductCategoryRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CouponProductCategoryRelationServiceServer will
+// result in compilation errors.
+type UnsafeCouponProductCategoryRelationServiceServer interface {
+	mustEmbedUnimplementedCouponProductCategoryRelationServiceServer()
+}
+
+func RegisterCouponProductCategoryRelationServiceServer(s grpc.ServiceRegistrar, srv CouponProductCategoryRelationServiceServer) {
+	s.RegisterService(&CouponProductCategoryRelationService_ServiceDesc, srv)
+}
+
+func _CouponProductCategoryRelationService_CouponProductCategoryRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponProductCategoryRelationAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationAdd(ctx, req.(*CouponProductCategoryRelationAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponProductCategoryRelationService_CouponProductCategoryRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponProductCategoryRelationListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationList(ctx, req.(*CouponProductCategoryRelationListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponProductCategoryRelationService_CouponProductCategoryRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponProductCategoryRelationUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationUpdate(ctx, req.(*CouponProductCategoryRelationUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponProductCategoryRelationService_CouponProductCategoryRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponProductCategoryRelationDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationDelete(ctx, req.(*CouponProductCategoryRelationDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CouponProductCategoryRelationService_ServiceDesc is the grpc.ServiceDesc for CouponProductCategoryRelationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CouponProductCategoryRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.CouponProductCategoryRelationService",
+	HandlerType: (*CouponProductCategoryRelationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CouponProductCategoryRelationAdd",
+			Handler:    _CouponProductCategoryRelationService_CouponProductCategoryRelationAdd_Handler,
+		},
+		{
+			MethodName: "CouponProductCategoryRelationList",
+			Handler:    _CouponProductCategoryRelationService_CouponProductCategoryRelationList_Handler,
+		},
+		{
+			MethodName: "CouponProductCategoryRelationUpdate",
+			Handler:    _CouponProductCategoryRelationService_CouponProductCategoryRelationUpdate_Handler,
+		},
+		{
+			MethodName: "CouponProductCategoryRelationDelete",
+			Handler:    _CouponProductCategoryRelationService_CouponProductCategoryRelationDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// CouponProductRelationServiceClient is the client API for CouponProductRelationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CouponProductRelationServiceClient interface {
 	CouponProductRelationAdd(ctx context.Context, in *CouponProductRelationAddReq, opts ...grpc.CallOption) (*CouponProductRelationAddResp, error)
 	CouponProductRelationList(ctx context.Context, in *CouponProductRelationListReq, opts ...grpc.CallOption) (*CouponProductRelationListResp, error)
 	CouponProductRelationUpdate(ctx context.Context, in *CouponProductRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductRelationUpdateResp, error)
 	CouponProductRelationDelete(ctx context.Context, in *CouponProductRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductRelationDeleteResp, error)
-	FlashPromotionLogAdd(ctx context.Context, in *FlashPromotionLogAddReq, opts ...grpc.CallOption) (*FlashPromotionLogAddResp, error)
-	FlashPromotionLogList(ctx context.Context, in *FlashPromotionLogListReq, opts ...grpc.CallOption) (*FlashPromotionLogListResp, error)
-	FlashPromotionLogUpdate(ctx context.Context, in *FlashPromotionLogUpdateReq, opts ...grpc.CallOption) (*FlashPromotionLogUpdateResp, error)
-	FlashPromotionLogDelete(ctx context.Context, in *FlashPromotionLogDeleteReq, opts ...grpc.CallOption) (*FlashPromotionLogDeleteResp, error)
+}
+
+type couponProductRelationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCouponProductRelationServiceClient(cc grpc.ClientConnInterface) CouponProductRelationServiceClient {
+	return &couponProductRelationServiceClient{cc}
+}
+
+func (c *couponProductRelationServiceClient) CouponProductRelationAdd(ctx context.Context, in *CouponProductRelationAddReq, opts ...grpc.CallOption) (*CouponProductRelationAddResp, error) {
+	out := new(CouponProductRelationAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponProductRelationService/CouponProductRelationAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponProductRelationServiceClient) CouponProductRelationList(ctx context.Context, in *CouponProductRelationListReq, opts ...grpc.CallOption) (*CouponProductRelationListResp, error) {
+	out := new(CouponProductRelationListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponProductRelationService/CouponProductRelationList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponProductRelationServiceClient) CouponProductRelationUpdate(ctx context.Context, in *CouponProductRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductRelationUpdateResp, error) {
+	out := new(CouponProductRelationUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponProductRelationService/CouponProductRelationUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponProductRelationServiceClient) CouponProductRelationDelete(ctx context.Context, in *CouponProductRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductRelationDeleteResp, error) {
+	out := new(CouponProductRelationDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponProductRelationService/CouponProductRelationDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CouponProductRelationServiceServer is the server API for CouponProductRelationService service.
+// All implementations must embed UnimplementedCouponProductRelationServiceServer
+// for forward compatibility
+type CouponProductRelationServiceServer interface {
+	CouponProductRelationAdd(context.Context, *CouponProductRelationAddReq) (*CouponProductRelationAddResp, error)
+	CouponProductRelationList(context.Context, *CouponProductRelationListReq) (*CouponProductRelationListResp, error)
+	CouponProductRelationUpdate(context.Context, *CouponProductRelationUpdateReq) (*CouponProductRelationUpdateResp, error)
+	CouponProductRelationDelete(context.Context, *CouponProductRelationDeleteReq) (*CouponProductRelationDeleteResp, error)
+	mustEmbedUnimplementedCouponProductRelationServiceServer()
+}
+
+// UnimplementedCouponProductRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCouponProductRelationServiceServer struct {
+}
+
+func (UnimplementedCouponProductRelationServiceServer) CouponProductRelationAdd(context.Context, *CouponProductRelationAddReq) (*CouponProductRelationAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationAdd not implemented")
+}
+func (UnimplementedCouponProductRelationServiceServer) CouponProductRelationList(context.Context, *CouponProductRelationListReq) (*CouponProductRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationList not implemented")
+}
+func (UnimplementedCouponProductRelationServiceServer) CouponProductRelationUpdate(context.Context, *CouponProductRelationUpdateReq) (*CouponProductRelationUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationUpdate not implemented")
+}
+func (UnimplementedCouponProductRelationServiceServer) CouponProductRelationDelete(context.Context, *CouponProductRelationDeleteReq) (*CouponProductRelationDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationDelete not implemented")
+}
+func (UnimplementedCouponProductRelationServiceServer) mustEmbedUnimplementedCouponProductRelationServiceServer() {
+}
+
+// UnsafeCouponProductRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CouponProductRelationServiceServer will
+// result in compilation errors.
+type UnsafeCouponProductRelationServiceServer interface {
+	mustEmbedUnimplementedCouponProductRelationServiceServer()
+}
+
+func RegisterCouponProductRelationServiceServer(s grpc.ServiceRegistrar, srv CouponProductRelationServiceServer) {
+	s.RegisterService(&CouponProductRelationService_ServiceDesc, srv)
+}
+
+func _CouponProductRelationService_CouponProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponProductRelationAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponProductRelationServiceServer).CouponProductRelationAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponProductRelationService/CouponProductRelationAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponProductRelationServiceServer).CouponProductRelationAdd(ctx, req.(*CouponProductRelationAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponProductRelationService_CouponProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponProductRelationListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponProductRelationServiceServer).CouponProductRelationList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponProductRelationService/CouponProductRelationList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponProductRelationServiceServer).CouponProductRelationList(ctx, req.(*CouponProductRelationListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponProductRelationService_CouponProductRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponProductRelationUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponProductRelationServiceServer).CouponProductRelationUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponProductRelationService/CouponProductRelationUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponProductRelationServiceServer).CouponProductRelationUpdate(ctx, req.(*CouponProductRelationUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponProductRelationService_CouponProductRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponProductRelationDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponProductRelationServiceServer).CouponProductRelationDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponProductRelationService/CouponProductRelationDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponProductRelationServiceServer).CouponProductRelationDelete(ctx, req.(*CouponProductRelationDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CouponProductRelationService_ServiceDesc is the grpc.ServiceDesc for CouponProductRelationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CouponProductRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.CouponProductRelationService",
+	HandlerType: (*CouponProductRelationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CouponProductRelationAdd",
+			Handler:    _CouponProductRelationService_CouponProductRelationAdd_Handler,
+		},
+		{
+			MethodName: "CouponProductRelationList",
+			Handler:    _CouponProductRelationService_CouponProductRelationList_Handler,
+		},
+		{
+			MethodName: "CouponProductRelationUpdate",
+			Handler:    _CouponProductRelationService_CouponProductRelationUpdate_Handler,
+		},
+		{
+			MethodName: "CouponProductRelationDelete",
+			Handler:    _CouponProductRelationService_CouponProductRelationDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// FlashPromotionServiceClient is the client API for FlashPromotionService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type FlashPromotionServiceClient interface {
 	FlashPromotionAdd(ctx context.Context, in *FlashPromotionAddReq, opts ...grpc.CallOption) (*FlashPromotionAddResp, error)
 	FlashPromotionList(ctx context.Context, in *FlashPromotionListReq, opts ...grpc.CallOption) (*FlashPromotionListResp, error)
 	FlashPromotionUpdate(ctx context.Context, in *FlashPromotionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionUpdateResp, error)
 	FlashPromotionDelete(ctx context.Context, in *FlashPromotionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionDeleteResp, error)
 	FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error)
+}
+
+type flashPromotionServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFlashPromotionServiceClient(cc grpc.ClientConnInterface) FlashPromotionServiceClient {
+	return &flashPromotionServiceClient{cc}
+}
+
+func (c *flashPromotionServiceClient) FlashPromotionAdd(ctx context.Context, in *FlashPromotionAddReq, opts ...grpc.CallOption) (*FlashPromotionAddResp, error) {
+	out := new(FlashPromotionAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionService/FlashPromotionAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionServiceClient) FlashPromotionList(ctx context.Context, in *FlashPromotionListReq, opts ...grpc.CallOption) (*FlashPromotionListResp, error) {
+	out := new(FlashPromotionListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionService/FlashPromotionList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionServiceClient) FlashPromotionUpdate(ctx context.Context, in *FlashPromotionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionUpdateResp, error) {
+	out := new(FlashPromotionUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionService/FlashPromotionUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionServiceClient) FlashPromotionDelete(ctx context.Context, in *FlashPromotionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionDeleteResp, error) {
+	out := new(FlashPromotionDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionService/FlashPromotionDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionServiceClient) FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error) {
+	out := new(FlashPromotionListByDateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionService/FlashPromotionListByDate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FlashPromotionServiceServer is the server API for FlashPromotionService service.
+// All implementations must embed UnimplementedFlashPromotionServiceServer
+// for forward compatibility
+type FlashPromotionServiceServer interface {
+	FlashPromotionAdd(context.Context, *FlashPromotionAddReq) (*FlashPromotionAddResp, error)
+	FlashPromotionList(context.Context, *FlashPromotionListReq) (*FlashPromotionListResp, error)
+	FlashPromotionUpdate(context.Context, *FlashPromotionUpdateReq) (*FlashPromotionUpdateResp, error)
+	FlashPromotionDelete(context.Context, *FlashPromotionDeleteReq) (*FlashPromotionDeleteResp, error)
+	FlashPromotionListByDate(context.Context, *FlashPromotionListByDateReq) (*FlashPromotionListByDateResp, error)
+	mustEmbedUnimplementedFlashPromotionServiceServer()
+}
+
+// UnimplementedFlashPromotionServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedFlashPromotionServiceServer struct {
+}
+
+func (UnimplementedFlashPromotionServiceServer) FlashPromotionAdd(context.Context, *FlashPromotionAddReq) (*FlashPromotionAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionAdd not implemented")
+}
+func (UnimplementedFlashPromotionServiceServer) FlashPromotionList(context.Context, *FlashPromotionListReq) (*FlashPromotionListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionList not implemented")
+}
+func (UnimplementedFlashPromotionServiceServer) FlashPromotionUpdate(context.Context, *FlashPromotionUpdateReq) (*FlashPromotionUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionUpdate not implemented")
+}
+func (UnimplementedFlashPromotionServiceServer) FlashPromotionDelete(context.Context, *FlashPromotionDeleteReq) (*FlashPromotionDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionDelete not implemented")
+}
+func (UnimplementedFlashPromotionServiceServer) FlashPromotionListByDate(context.Context, *FlashPromotionListByDateReq) (*FlashPromotionListByDateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionListByDate not implemented")
+}
+func (UnimplementedFlashPromotionServiceServer) mustEmbedUnimplementedFlashPromotionServiceServer() {}
+
+// UnsafeFlashPromotionServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FlashPromotionServiceServer will
+// result in compilation errors.
+type UnsafeFlashPromotionServiceServer interface {
+	mustEmbedUnimplementedFlashPromotionServiceServer()
+}
+
+func RegisterFlashPromotionServiceServer(s grpc.ServiceRegistrar, srv FlashPromotionServiceServer) {
+	s.RegisterService(&FlashPromotionService_ServiceDesc, srv)
+}
+
+func _FlashPromotionService_FlashPromotionAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionServiceServer).FlashPromotionAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionService/FlashPromotionAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionServiceServer).FlashPromotionAdd(ctx, req.(*FlashPromotionAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionService_FlashPromotionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionServiceServer).FlashPromotionList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionService/FlashPromotionList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionServiceServer).FlashPromotionList(ctx, req.(*FlashPromotionListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionService_FlashPromotionUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionServiceServer).FlashPromotionUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionService/FlashPromotionUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionServiceServer).FlashPromotionUpdate(ctx, req.(*FlashPromotionUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionService_FlashPromotionDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionServiceServer).FlashPromotionDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionService/FlashPromotionDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionServiceServer).FlashPromotionDelete(ctx, req.(*FlashPromotionDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionService_FlashPromotionListByDate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionListByDateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionServiceServer).FlashPromotionListByDate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionService/FlashPromotionListByDate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionServiceServer).FlashPromotionListByDate(ctx, req.(*FlashPromotionListByDateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// FlashPromotionService_ServiceDesc is the grpc.ServiceDesc for FlashPromotionService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var FlashPromotionService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.FlashPromotionService",
+	HandlerType: (*FlashPromotionServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "FlashPromotionAdd",
+			Handler:    _FlashPromotionService_FlashPromotionAdd_Handler,
+		},
+		{
+			MethodName: "FlashPromotionList",
+			Handler:    _FlashPromotionService_FlashPromotionList_Handler,
+		},
+		{
+			MethodName: "FlashPromotionUpdate",
+			Handler:    _FlashPromotionService_FlashPromotionUpdate_Handler,
+		},
+		{
+			MethodName: "FlashPromotionDelete",
+			Handler:    _FlashPromotionService_FlashPromotionDelete_Handler,
+		},
+		{
+			MethodName: "FlashPromotionListByDate",
+			Handler:    _FlashPromotionService_FlashPromotionListByDate_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// FlashPromotionLogServiceClient is the client API for FlashPromotionLogService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type FlashPromotionLogServiceClient interface {
+	FlashPromotionLogAdd(ctx context.Context, in *FlashPromotionLogAddReq, opts ...grpc.CallOption) (*FlashPromotionLogAddResp, error)
+	FlashPromotionLogList(ctx context.Context, in *FlashPromotionLogListReq, opts ...grpc.CallOption) (*FlashPromotionLogListResp, error)
+	FlashPromotionLogUpdate(ctx context.Context, in *FlashPromotionLogUpdateReq, opts ...grpc.CallOption) (*FlashPromotionLogUpdateResp, error)
+	FlashPromotionLogDelete(ctx context.Context, in *FlashPromotionLogDeleteReq, opts ...grpc.CallOption) (*FlashPromotionLogDeleteResp, error)
+}
+
+type flashPromotionLogServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFlashPromotionLogServiceClient(cc grpc.ClientConnInterface) FlashPromotionLogServiceClient {
+	return &flashPromotionLogServiceClient{cc}
+}
+
+func (c *flashPromotionLogServiceClient) FlashPromotionLogAdd(ctx context.Context, in *FlashPromotionLogAddReq, opts ...grpc.CallOption) (*FlashPromotionLogAddResp, error) {
+	out := new(FlashPromotionLogAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionLogService/FlashPromotionLogAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionLogServiceClient) FlashPromotionLogList(ctx context.Context, in *FlashPromotionLogListReq, opts ...grpc.CallOption) (*FlashPromotionLogListResp, error) {
+	out := new(FlashPromotionLogListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionLogService/FlashPromotionLogList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionLogServiceClient) FlashPromotionLogUpdate(ctx context.Context, in *FlashPromotionLogUpdateReq, opts ...grpc.CallOption) (*FlashPromotionLogUpdateResp, error) {
+	out := new(FlashPromotionLogUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionLogService/FlashPromotionLogUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionLogServiceClient) FlashPromotionLogDelete(ctx context.Context, in *FlashPromotionLogDeleteReq, opts ...grpc.CallOption) (*FlashPromotionLogDeleteResp, error) {
+	out := new(FlashPromotionLogDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionLogService/FlashPromotionLogDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FlashPromotionLogServiceServer is the server API for FlashPromotionLogService service.
+// All implementations must embed UnimplementedFlashPromotionLogServiceServer
+// for forward compatibility
+type FlashPromotionLogServiceServer interface {
+	FlashPromotionLogAdd(context.Context, *FlashPromotionLogAddReq) (*FlashPromotionLogAddResp, error)
+	FlashPromotionLogList(context.Context, *FlashPromotionLogListReq) (*FlashPromotionLogListResp, error)
+	FlashPromotionLogUpdate(context.Context, *FlashPromotionLogUpdateReq) (*FlashPromotionLogUpdateResp, error)
+	FlashPromotionLogDelete(context.Context, *FlashPromotionLogDeleteReq) (*FlashPromotionLogDeleteResp, error)
+	mustEmbedUnimplementedFlashPromotionLogServiceServer()
+}
+
+// UnimplementedFlashPromotionLogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedFlashPromotionLogServiceServer struct {
+}
+
+func (UnimplementedFlashPromotionLogServiceServer) FlashPromotionLogAdd(context.Context, *FlashPromotionLogAddReq) (*FlashPromotionLogAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionLogAdd not implemented")
+}
+func (UnimplementedFlashPromotionLogServiceServer) FlashPromotionLogList(context.Context, *FlashPromotionLogListReq) (*FlashPromotionLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionLogList not implemented")
+}
+func (UnimplementedFlashPromotionLogServiceServer) FlashPromotionLogUpdate(context.Context, *FlashPromotionLogUpdateReq) (*FlashPromotionLogUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionLogUpdate not implemented")
+}
+func (UnimplementedFlashPromotionLogServiceServer) FlashPromotionLogDelete(context.Context, *FlashPromotionLogDeleteReq) (*FlashPromotionLogDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionLogDelete not implemented")
+}
+func (UnimplementedFlashPromotionLogServiceServer) mustEmbedUnimplementedFlashPromotionLogServiceServer() {
+}
+
+// UnsafeFlashPromotionLogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FlashPromotionLogServiceServer will
+// result in compilation errors.
+type UnsafeFlashPromotionLogServiceServer interface {
+	mustEmbedUnimplementedFlashPromotionLogServiceServer()
+}
+
+func RegisterFlashPromotionLogServiceServer(s grpc.ServiceRegistrar, srv FlashPromotionLogServiceServer) {
+	s.RegisterService(&FlashPromotionLogService_ServiceDesc, srv)
+}
+
+func _FlashPromotionLogService_FlashPromotionLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionLogAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionLogServiceServer).FlashPromotionLogAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionLogService/FlashPromotionLogAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionLogServiceServer).FlashPromotionLogAdd(ctx, req.(*FlashPromotionLogAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionLogService_FlashPromotionLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionLogListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionLogServiceServer).FlashPromotionLogList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionLogService/FlashPromotionLogList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionLogServiceServer).FlashPromotionLogList(ctx, req.(*FlashPromotionLogListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionLogService_FlashPromotionLogUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionLogUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionLogServiceServer).FlashPromotionLogUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionLogService/FlashPromotionLogUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionLogServiceServer).FlashPromotionLogUpdate(ctx, req.(*FlashPromotionLogUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionLogService_FlashPromotionLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionLogDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionLogServiceServer).FlashPromotionLogDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionLogService/FlashPromotionLogDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionLogServiceServer).FlashPromotionLogDelete(ctx, req.(*FlashPromotionLogDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// FlashPromotionLogService_ServiceDesc is the grpc.ServiceDesc for FlashPromotionLogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var FlashPromotionLogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.FlashPromotionLogService",
+	HandlerType: (*FlashPromotionLogServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "FlashPromotionLogAdd",
+			Handler:    _FlashPromotionLogService_FlashPromotionLogAdd_Handler,
+		},
+		{
+			MethodName: "FlashPromotionLogList",
+			Handler:    _FlashPromotionLogService_FlashPromotionLogList_Handler,
+		},
+		{
+			MethodName: "FlashPromotionLogUpdate",
+			Handler:    _FlashPromotionLogService_FlashPromotionLogUpdate_Handler,
+		},
+		{
+			MethodName: "FlashPromotionLogDelete",
+			Handler:    _FlashPromotionLogService_FlashPromotionLogDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// FlashPromotionProductRelationServiceClient is the client API for FlashPromotionProductRelationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type FlashPromotionProductRelationServiceClient interface {
 	FlashPromotionProductRelationAdd(ctx context.Context, in *FlashPromotionProductRelationAddReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationAddResp, error)
 	FlashPromotionProductRelationList(ctx context.Context, in *FlashPromotionProductRelationListReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationListResp, error)
 	FlashPromotionProductRelationUpdate(ctx context.Context, in *FlashPromotionProductRelationUpdateReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationUpdateResp, error)
 	FlashPromotionProductRelationDelete(ctx context.Context, in *FlashPromotionProductRelationDeleteReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationDeleteResp, error)
+}
+
+type flashPromotionProductRelationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFlashPromotionProductRelationServiceClient(cc grpc.ClientConnInterface) FlashPromotionProductRelationServiceClient {
+	return &flashPromotionProductRelationServiceClient{cc}
+}
+
+func (c *flashPromotionProductRelationServiceClient) FlashPromotionProductRelationAdd(ctx context.Context, in *FlashPromotionProductRelationAddReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationAddResp, error) {
+	out := new(FlashPromotionProductRelationAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionProductRelationService/FlashPromotionProductRelationAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionProductRelationServiceClient) FlashPromotionProductRelationList(ctx context.Context, in *FlashPromotionProductRelationListReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationListResp, error) {
+	out := new(FlashPromotionProductRelationListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionProductRelationService/FlashPromotionProductRelationList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionProductRelationServiceClient) FlashPromotionProductRelationUpdate(ctx context.Context, in *FlashPromotionProductRelationUpdateReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationUpdateResp, error) {
+	out := new(FlashPromotionProductRelationUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionProductRelationService/FlashPromotionProductRelationUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionProductRelationServiceClient) FlashPromotionProductRelationDelete(ctx context.Context, in *FlashPromotionProductRelationDeleteReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationDeleteResp, error) {
+	out := new(FlashPromotionProductRelationDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionProductRelationService/FlashPromotionProductRelationDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FlashPromotionProductRelationServiceServer is the server API for FlashPromotionProductRelationService service.
+// All implementations must embed UnimplementedFlashPromotionProductRelationServiceServer
+// for forward compatibility
+type FlashPromotionProductRelationServiceServer interface {
+	FlashPromotionProductRelationAdd(context.Context, *FlashPromotionProductRelationAddReq) (*FlashPromotionProductRelationAddResp, error)
+	FlashPromotionProductRelationList(context.Context, *FlashPromotionProductRelationListReq) (*FlashPromotionProductRelationListResp, error)
+	FlashPromotionProductRelationUpdate(context.Context, *FlashPromotionProductRelationUpdateReq) (*FlashPromotionProductRelationUpdateResp, error)
+	FlashPromotionProductRelationDelete(context.Context, *FlashPromotionProductRelationDeleteReq) (*FlashPromotionProductRelationDeleteResp, error)
+	mustEmbedUnimplementedFlashPromotionProductRelationServiceServer()
+}
+
+// UnimplementedFlashPromotionProductRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedFlashPromotionProductRelationServiceServer struct {
+}
+
+func (UnimplementedFlashPromotionProductRelationServiceServer) FlashPromotionProductRelationAdd(context.Context, *FlashPromotionProductRelationAddReq) (*FlashPromotionProductRelationAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationAdd not implemented")
+}
+func (UnimplementedFlashPromotionProductRelationServiceServer) FlashPromotionProductRelationList(context.Context, *FlashPromotionProductRelationListReq) (*FlashPromotionProductRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationList not implemented")
+}
+func (UnimplementedFlashPromotionProductRelationServiceServer) FlashPromotionProductRelationUpdate(context.Context, *FlashPromotionProductRelationUpdateReq) (*FlashPromotionProductRelationUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationUpdate not implemented")
+}
+func (UnimplementedFlashPromotionProductRelationServiceServer) FlashPromotionProductRelationDelete(context.Context, *FlashPromotionProductRelationDeleteReq) (*FlashPromotionProductRelationDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationDelete not implemented")
+}
+func (UnimplementedFlashPromotionProductRelationServiceServer) mustEmbedUnimplementedFlashPromotionProductRelationServiceServer() {
+}
+
+// UnsafeFlashPromotionProductRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FlashPromotionProductRelationServiceServer will
+// result in compilation errors.
+type UnsafeFlashPromotionProductRelationServiceServer interface {
+	mustEmbedUnimplementedFlashPromotionProductRelationServiceServer()
+}
+
+func RegisterFlashPromotionProductRelationServiceServer(s grpc.ServiceRegistrar, srv FlashPromotionProductRelationServiceServer) {
+	s.RegisterService(&FlashPromotionProductRelationService_ServiceDesc, srv)
+}
+
+func _FlashPromotionProductRelationService_FlashPromotionProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionProductRelationAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionProductRelationServiceServer).FlashPromotionProductRelationAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionProductRelationService/FlashPromotionProductRelationAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionProductRelationServiceServer).FlashPromotionProductRelationAdd(ctx, req.(*FlashPromotionProductRelationAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionProductRelationService_FlashPromotionProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionProductRelationListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionProductRelationServiceServer).FlashPromotionProductRelationList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionProductRelationService/FlashPromotionProductRelationList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionProductRelationServiceServer).FlashPromotionProductRelationList(ctx, req.(*FlashPromotionProductRelationListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionProductRelationService_FlashPromotionProductRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionProductRelationUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionProductRelationServiceServer).FlashPromotionProductRelationUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionProductRelationService/FlashPromotionProductRelationUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionProductRelationServiceServer).FlashPromotionProductRelationUpdate(ctx, req.(*FlashPromotionProductRelationUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionProductRelationService_FlashPromotionProductRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionProductRelationDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionProductRelationServiceServer).FlashPromotionProductRelationDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionProductRelationService/FlashPromotionProductRelationDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionProductRelationServiceServer).FlashPromotionProductRelationDelete(ctx, req.(*FlashPromotionProductRelationDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// FlashPromotionProductRelationService_ServiceDesc is the grpc.ServiceDesc for FlashPromotionProductRelationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var FlashPromotionProductRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.FlashPromotionProductRelationService",
+	HandlerType: (*FlashPromotionProductRelationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "FlashPromotionProductRelationAdd",
+			Handler:    _FlashPromotionProductRelationService_FlashPromotionProductRelationAdd_Handler,
+		},
+		{
+			MethodName: "FlashPromotionProductRelationList",
+			Handler:    _FlashPromotionProductRelationService_FlashPromotionProductRelationList_Handler,
+		},
+		{
+			MethodName: "FlashPromotionProductRelationUpdate",
+			Handler:    _FlashPromotionProductRelationService_FlashPromotionProductRelationUpdate_Handler,
+		},
+		{
+			MethodName: "FlashPromotionProductRelationDelete",
+			Handler:    _FlashPromotionProductRelationService_FlashPromotionProductRelationDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// FlashPromotionSessionServiceClient is the client API for FlashPromotionSessionService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type FlashPromotionSessionServiceClient interface {
 	FlashPromotionSessionAdd(ctx context.Context, in *FlashPromotionSessionAddReq, opts ...grpc.CallOption) (*FlashPromotionSessionAddResp, error)
 	FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error)
 	FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error)
 	FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error)
 	FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error)
+}
+
+type flashPromotionSessionServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFlashPromotionSessionServiceClient(cc grpc.ClientConnInterface) FlashPromotionSessionServiceClient {
+	return &flashPromotionSessionServiceClient{cc}
+}
+
+func (c *flashPromotionSessionServiceClient) FlashPromotionSessionAdd(ctx context.Context, in *FlashPromotionSessionAddReq, opts ...grpc.CallOption) (*FlashPromotionSessionAddResp, error) {
+	out := new(FlashPromotionSessionAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionSessionService/FlashPromotionSessionAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionSessionServiceClient) FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error) {
+	out := new(FlashPromotionSessionListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionSessionService/FlashPromotionSessionList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionSessionServiceClient) FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error) {
+	out := new(FlashPromotionSessionUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionSessionService/FlashPromotionSessionUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionSessionServiceClient) FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error) {
+	out := new(FlashPromotionSessionDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionSessionService/FlashPromotionSessionDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flashPromotionSessionServiceClient) FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error) {
+	out := new(FlashPromotionSessionByTimeResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionSessionService/FlashPromotionSessionByTime", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FlashPromotionSessionServiceServer is the server API for FlashPromotionSessionService service.
+// All implementations must embed UnimplementedFlashPromotionSessionServiceServer
+// for forward compatibility
+type FlashPromotionSessionServiceServer interface {
+	FlashPromotionSessionAdd(context.Context, *FlashPromotionSessionAddReq) (*FlashPromotionSessionAddResp, error)
+	FlashPromotionSessionList(context.Context, *FlashPromotionSessionListReq) (*FlashPromotionSessionListResp, error)
+	FlashPromotionSessionUpdate(context.Context, *FlashPromotionSessionUpdateReq) (*FlashPromotionSessionUpdateResp, error)
+	FlashPromotionSessionDelete(context.Context, *FlashPromotionSessionDeleteReq) (*FlashPromotionSessionDeleteResp, error)
+	FlashPromotionSessionByTime(context.Context, *FlashPromotionSessionByTimeReq) (*FlashPromotionSessionByTimeResp, error)
+	mustEmbedUnimplementedFlashPromotionSessionServiceServer()
+}
+
+// UnimplementedFlashPromotionSessionServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedFlashPromotionSessionServiceServer struct {
+}
+
+func (UnimplementedFlashPromotionSessionServiceServer) FlashPromotionSessionAdd(context.Context, *FlashPromotionSessionAddReq) (*FlashPromotionSessionAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionAdd not implemented")
+}
+func (UnimplementedFlashPromotionSessionServiceServer) FlashPromotionSessionList(context.Context, *FlashPromotionSessionListReq) (*FlashPromotionSessionListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionList not implemented")
+}
+func (UnimplementedFlashPromotionSessionServiceServer) FlashPromotionSessionUpdate(context.Context, *FlashPromotionSessionUpdateReq) (*FlashPromotionSessionUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionUpdate not implemented")
+}
+func (UnimplementedFlashPromotionSessionServiceServer) FlashPromotionSessionDelete(context.Context, *FlashPromotionSessionDeleteReq) (*FlashPromotionSessionDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionDelete not implemented")
+}
+func (UnimplementedFlashPromotionSessionServiceServer) FlashPromotionSessionByTime(context.Context, *FlashPromotionSessionByTimeReq) (*FlashPromotionSessionByTimeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionByTime not implemented")
+}
+func (UnimplementedFlashPromotionSessionServiceServer) mustEmbedUnimplementedFlashPromotionSessionServiceServer() {
+}
+
+// UnsafeFlashPromotionSessionServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FlashPromotionSessionServiceServer will
+// result in compilation errors.
+type UnsafeFlashPromotionSessionServiceServer interface {
+	mustEmbedUnimplementedFlashPromotionSessionServiceServer()
+}
+
+func RegisterFlashPromotionSessionServiceServer(s grpc.ServiceRegistrar, srv FlashPromotionSessionServiceServer) {
+	s.RegisterService(&FlashPromotionSessionService_ServiceDesc, srv)
+}
+
+func _FlashPromotionSessionService_FlashPromotionSessionAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionSessionAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionSessionService/FlashPromotionSessionAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionAdd(ctx, req.(*FlashPromotionSessionAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionSessionService_FlashPromotionSessionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionSessionListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionSessionService/FlashPromotionSessionList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionList(ctx, req.(*FlashPromotionSessionListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionSessionService_FlashPromotionSessionUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionSessionUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionSessionService/FlashPromotionSessionUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionUpdate(ctx, req.(*FlashPromotionSessionUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionSessionService_FlashPromotionSessionDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionSessionDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionSessionService/FlashPromotionSessionDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionDelete(ctx, req.(*FlashPromotionSessionDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlashPromotionSessionService_FlashPromotionSessionByTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlashPromotionSessionByTimeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionByTime(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionSessionService/FlashPromotionSessionByTime",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionSessionServiceServer).FlashPromotionSessionByTime(ctx, req.(*FlashPromotionSessionByTimeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// FlashPromotionSessionService_ServiceDesc is the grpc.ServiceDesc for FlashPromotionSessionService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var FlashPromotionSessionService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.FlashPromotionSessionService",
+	HandlerType: (*FlashPromotionSessionServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "FlashPromotionSessionAdd",
+			Handler:    _FlashPromotionSessionService_FlashPromotionSessionAdd_Handler,
+		},
+		{
+			MethodName: "FlashPromotionSessionList",
+			Handler:    _FlashPromotionSessionService_FlashPromotionSessionList_Handler,
+		},
+		{
+			MethodName: "FlashPromotionSessionUpdate",
+			Handler:    _FlashPromotionSessionService_FlashPromotionSessionUpdate_Handler,
+		},
+		{
+			MethodName: "FlashPromotionSessionDelete",
+			Handler:    _FlashPromotionSessionService_FlashPromotionSessionDelete_Handler,
+		},
+		{
+			MethodName: "FlashPromotionSessionByTime",
+			Handler:    _FlashPromotionSessionService_FlashPromotionSessionByTime_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// HomeAdvertiseServiceClient is the client API for HomeAdvertiseService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type HomeAdvertiseServiceClient interface {
 	HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error)
 	HomeAdvertiseList(ctx context.Context, in *HomeAdvertiseListReq, opts ...grpc.CallOption) (*HomeAdvertiseListResp, error)
 	HomeAdvertiseUpdate(ctx context.Context, in *HomeAdvertiseUpdateReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error)
 	HomeAdvertiseDelete(ctx context.Context, in *HomeAdvertiseDeleteReq, opts ...grpc.CallOption) (*HomeAdvertiseDeleteResp, error)
+}
+
+type homeAdvertiseServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewHomeAdvertiseServiceClient(cc grpc.ClientConnInterface) HomeAdvertiseServiceClient {
+	return &homeAdvertiseServiceClient{cc}
+}
+
+func (c *homeAdvertiseServiceClient) HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error) {
+	out := new(HomeAdvertiseAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeAdvertiseService/HomeAdvertiseAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeAdvertiseServiceClient) HomeAdvertiseList(ctx context.Context, in *HomeAdvertiseListReq, opts ...grpc.CallOption) (*HomeAdvertiseListResp, error) {
+	out := new(HomeAdvertiseListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeAdvertiseService/HomeAdvertiseList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeAdvertiseServiceClient) HomeAdvertiseUpdate(ctx context.Context, in *HomeAdvertiseUpdateReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error) {
+	out := new(HomeAdvertiseUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeAdvertiseService/HomeAdvertiseUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeAdvertiseServiceClient) HomeAdvertiseDelete(ctx context.Context, in *HomeAdvertiseDeleteReq, opts ...grpc.CallOption) (*HomeAdvertiseDeleteResp, error) {
+	out := new(HomeAdvertiseDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeAdvertiseService/HomeAdvertiseDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// HomeAdvertiseServiceServer is the server API for HomeAdvertiseService service.
+// All implementations must embed UnimplementedHomeAdvertiseServiceServer
+// for forward compatibility
+type HomeAdvertiseServiceServer interface {
+	HomeAdvertiseAdd(context.Context, *HomeAdvertiseAddReq) (*HomeAdvertiseAddResp, error)
+	HomeAdvertiseList(context.Context, *HomeAdvertiseListReq) (*HomeAdvertiseListResp, error)
+	HomeAdvertiseUpdate(context.Context, *HomeAdvertiseUpdateReq) (*HomeAdvertiseUpdateResp, error)
+	HomeAdvertiseDelete(context.Context, *HomeAdvertiseDeleteReq) (*HomeAdvertiseDeleteResp, error)
+	mustEmbedUnimplementedHomeAdvertiseServiceServer()
+}
+
+// UnimplementedHomeAdvertiseServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedHomeAdvertiseServiceServer struct {
+}
+
+func (UnimplementedHomeAdvertiseServiceServer) HomeAdvertiseAdd(context.Context, *HomeAdvertiseAddReq) (*HomeAdvertiseAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseAdd not implemented")
+}
+func (UnimplementedHomeAdvertiseServiceServer) HomeAdvertiseList(context.Context, *HomeAdvertiseListReq) (*HomeAdvertiseListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseList not implemented")
+}
+func (UnimplementedHomeAdvertiseServiceServer) HomeAdvertiseUpdate(context.Context, *HomeAdvertiseUpdateReq) (*HomeAdvertiseUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseUpdate not implemented")
+}
+func (UnimplementedHomeAdvertiseServiceServer) HomeAdvertiseDelete(context.Context, *HomeAdvertiseDeleteReq) (*HomeAdvertiseDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseDelete not implemented")
+}
+func (UnimplementedHomeAdvertiseServiceServer) mustEmbedUnimplementedHomeAdvertiseServiceServer() {}
+
+// UnsafeHomeAdvertiseServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to HomeAdvertiseServiceServer will
+// result in compilation errors.
+type UnsafeHomeAdvertiseServiceServer interface {
+	mustEmbedUnimplementedHomeAdvertiseServiceServer()
+}
+
+func RegisterHomeAdvertiseServiceServer(s grpc.ServiceRegistrar, srv HomeAdvertiseServiceServer) {
+	s.RegisterService(&HomeAdvertiseService_ServiceDesc, srv)
+}
+
+func _HomeAdvertiseService_HomeAdvertiseAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeAdvertiseAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeAdvertiseServiceServer).HomeAdvertiseAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeAdvertiseService/HomeAdvertiseAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeAdvertiseServiceServer).HomeAdvertiseAdd(ctx, req.(*HomeAdvertiseAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeAdvertiseService_HomeAdvertiseList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeAdvertiseListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeAdvertiseServiceServer).HomeAdvertiseList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeAdvertiseService/HomeAdvertiseList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeAdvertiseServiceServer).HomeAdvertiseList(ctx, req.(*HomeAdvertiseListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeAdvertiseService_HomeAdvertiseUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeAdvertiseUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeAdvertiseServiceServer).HomeAdvertiseUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeAdvertiseService/HomeAdvertiseUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeAdvertiseServiceServer).HomeAdvertiseUpdate(ctx, req.(*HomeAdvertiseUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeAdvertiseService_HomeAdvertiseDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeAdvertiseDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeAdvertiseServiceServer).HomeAdvertiseDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeAdvertiseService/HomeAdvertiseDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeAdvertiseServiceServer).HomeAdvertiseDelete(ctx, req.(*HomeAdvertiseDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// HomeAdvertiseService_ServiceDesc is the grpc.ServiceDesc for HomeAdvertiseService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var HomeAdvertiseService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.HomeAdvertiseService",
+	HandlerType: (*HomeAdvertiseServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "HomeAdvertiseAdd",
+			Handler:    _HomeAdvertiseService_HomeAdvertiseAdd_Handler,
+		},
+		{
+			MethodName: "HomeAdvertiseList",
+			Handler:    _HomeAdvertiseService_HomeAdvertiseList_Handler,
+		},
+		{
+			MethodName: "HomeAdvertiseUpdate",
+			Handler:    _HomeAdvertiseService_HomeAdvertiseUpdate_Handler,
+		},
+		{
+			MethodName: "HomeAdvertiseDelete",
+			Handler:    _HomeAdvertiseService_HomeAdvertiseDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// HomeBrandServiceClient is the client API for HomeBrandService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type HomeBrandServiceClient interface {
 	HomeBrandAdd(ctx context.Context, in *HomeBrandAddReq, opts ...grpc.CallOption) (*HomeBrandAddResp, error)
 	HomeBrandList(ctx context.Context, in *HomeBrandListReq, opts ...grpc.CallOption) (*HomeBrandListResp, error)
 	HomeBrandUpdate(ctx context.Context, in *HomeBrandUpdateReq, opts ...grpc.CallOption) (*HomeBrandUpdateResp, error)
 	HomeBrandDelete(ctx context.Context, in *HomeBrandDeleteReq, opts ...grpc.CallOption) (*HomeBrandDeleteResp, error)
+}
+
+type homeBrandServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewHomeBrandServiceClient(cc grpc.ClientConnInterface) HomeBrandServiceClient {
+	return &homeBrandServiceClient{cc}
+}
+
+func (c *homeBrandServiceClient) HomeBrandAdd(ctx context.Context, in *HomeBrandAddReq, opts ...grpc.CallOption) (*HomeBrandAddResp, error) {
+	out := new(HomeBrandAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeBrandService/HomeBrandAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeBrandServiceClient) HomeBrandList(ctx context.Context, in *HomeBrandListReq, opts ...grpc.CallOption) (*HomeBrandListResp, error) {
+	out := new(HomeBrandListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeBrandService/HomeBrandList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeBrandServiceClient) HomeBrandUpdate(ctx context.Context, in *HomeBrandUpdateReq, opts ...grpc.CallOption) (*HomeBrandUpdateResp, error) {
+	out := new(HomeBrandUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeBrandService/HomeBrandUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeBrandServiceClient) HomeBrandDelete(ctx context.Context, in *HomeBrandDeleteReq, opts ...grpc.CallOption) (*HomeBrandDeleteResp, error) {
+	out := new(HomeBrandDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeBrandService/HomeBrandDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// HomeBrandServiceServer is the server API for HomeBrandService service.
+// All implementations must embed UnimplementedHomeBrandServiceServer
+// for forward compatibility
+type HomeBrandServiceServer interface {
+	HomeBrandAdd(context.Context, *HomeBrandAddReq) (*HomeBrandAddResp, error)
+	HomeBrandList(context.Context, *HomeBrandListReq) (*HomeBrandListResp, error)
+	HomeBrandUpdate(context.Context, *HomeBrandUpdateReq) (*HomeBrandUpdateResp, error)
+	HomeBrandDelete(context.Context, *HomeBrandDeleteReq) (*HomeBrandDeleteResp, error)
+	mustEmbedUnimplementedHomeBrandServiceServer()
+}
+
+// UnimplementedHomeBrandServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedHomeBrandServiceServer struct {
+}
+
+func (UnimplementedHomeBrandServiceServer) HomeBrandAdd(context.Context, *HomeBrandAddReq) (*HomeBrandAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandAdd not implemented")
+}
+func (UnimplementedHomeBrandServiceServer) HomeBrandList(context.Context, *HomeBrandListReq) (*HomeBrandListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandList not implemented")
+}
+func (UnimplementedHomeBrandServiceServer) HomeBrandUpdate(context.Context, *HomeBrandUpdateReq) (*HomeBrandUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandUpdate not implemented")
+}
+func (UnimplementedHomeBrandServiceServer) HomeBrandDelete(context.Context, *HomeBrandDeleteReq) (*HomeBrandDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandDelete not implemented")
+}
+func (UnimplementedHomeBrandServiceServer) mustEmbedUnimplementedHomeBrandServiceServer() {}
+
+// UnsafeHomeBrandServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to HomeBrandServiceServer will
+// result in compilation errors.
+type UnsafeHomeBrandServiceServer interface {
+	mustEmbedUnimplementedHomeBrandServiceServer()
+}
+
+func RegisterHomeBrandServiceServer(s grpc.ServiceRegistrar, srv HomeBrandServiceServer) {
+	s.RegisterService(&HomeBrandService_ServiceDesc, srv)
+}
+
+func _HomeBrandService_HomeBrandAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeBrandAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeBrandServiceServer).HomeBrandAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeBrandService/HomeBrandAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeBrandServiceServer).HomeBrandAdd(ctx, req.(*HomeBrandAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeBrandService_HomeBrandList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeBrandListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeBrandServiceServer).HomeBrandList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeBrandService/HomeBrandList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeBrandServiceServer).HomeBrandList(ctx, req.(*HomeBrandListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeBrandService_HomeBrandUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeBrandUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeBrandServiceServer).HomeBrandUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeBrandService/HomeBrandUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeBrandServiceServer).HomeBrandUpdate(ctx, req.(*HomeBrandUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeBrandService_HomeBrandDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeBrandDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeBrandServiceServer).HomeBrandDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeBrandService/HomeBrandDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeBrandServiceServer).HomeBrandDelete(ctx, req.(*HomeBrandDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// HomeBrandService_ServiceDesc is the grpc.ServiceDesc for HomeBrandService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var HomeBrandService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.HomeBrandService",
+	HandlerType: (*HomeBrandServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "HomeBrandAdd",
+			Handler:    _HomeBrandService_HomeBrandAdd_Handler,
+		},
+		{
+			MethodName: "HomeBrandList",
+			Handler:    _HomeBrandService_HomeBrandList_Handler,
+		},
+		{
+			MethodName: "HomeBrandUpdate",
+			Handler:    _HomeBrandService_HomeBrandUpdate_Handler,
+		},
+		{
+			MethodName: "HomeBrandDelete",
+			Handler:    _HomeBrandService_HomeBrandDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// HomeNewProductServiceClient is the client API for HomeNewProductService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type HomeNewProductServiceClient interface {
 	HomeNewProductAdd(ctx context.Context, in *HomeNewProductAddReq, opts ...grpc.CallOption) (*HomeNewProductAddResp, error)
 	HomeNewProductList(ctx context.Context, in *HomeNewProductListReq, opts ...grpc.CallOption) (*HomeNewProductListResp, error)
 	HomeNewProductUpdate(ctx context.Context, in *HomeNewProductUpdateReq, opts ...grpc.CallOption) (*HomeNewProductUpdateResp, error)
 	HomeNewProductDelete(ctx context.Context, in *HomeNewProductDeleteReq, opts ...grpc.CallOption) (*HomeNewProductDeleteResp, error)
+}
+
+type homeNewProductServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewHomeNewProductServiceClient(cc grpc.ClientConnInterface) HomeNewProductServiceClient {
+	return &homeNewProductServiceClient{cc}
+}
+
+func (c *homeNewProductServiceClient) HomeNewProductAdd(ctx context.Context, in *HomeNewProductAddReq, opts ...grpc.CallOption) (*HomeNewProductAddResp, error) {
+	out := new(HomeNewProductAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeNewProductService/HomeNewProductAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeNewProductServiceClient) HomeNewProductList(ctx context.Context, in *HomeNewProductListReq, opts ...grpc.CallOption) (*HomeNewProductListResp, error) {
+	out := new(HomeNewProductListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeNewProductService/HomeNewProductList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeNewProductServiceClient) HomeNewProductUpdate(ctx context.Context, in *HomeNewProductUpdateReq, opts ...grpc.CallOption) (*HomeNewProductUpdateResp, error) {
+	out := new(HomeNewProductUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeNewProductService/HomeNewProductUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeNewProductServiceClient) HomeNewProductDelete(ctx context.Context, in *HomeNewProductDeleteReq, opts ...grpc.CallOption) (*HomeNewProductDeleteResp, error) {
+	out := new(HomeNewProductDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeNewProductService/HomeNewProductDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// HomeNewProductServiceServer is the server API for HomeNewProductService service.
+// All implementations must embed UnimplementedHomeNewProductServiceServer
+// for forward compatibility
+type HomeNewProductServiceServer interface {
+	HomeNewProductAdd(context.Context, *HomeNewProductAddReq) (*HomeNewProductAddResp, error)
+	HomeNewProductList(context.Context, *HomeNewProductListReq) (*HomeNewProductListResp, error)
+	HomeNewProductUpdate(context.Context, *HomeNewProductUpdateReq) (*HomeNewProductUpdateResp, error)
+	HomeNewProductDelete(context.Context, *HomeNewProductDeleteReq) (*HomeNewProductDeleteResp, error)
+	mustEmbedUnimplementedHomeNewProductServiceServer()
+}
+
+// UnimplementedHomeNewProductServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedHomeNewProductServiceServer struct {
+}
+
+func (UnimplementedHomeNewProductServiceServer) HomeNewProductAdd(context.Context, *HomeNewProductAddReq) (*HomeNewProductAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductAdd not implemented")
+}
+func (UnimplementedHomeNewProductServiceServer) HomeNewProductList(context.Context, *HomeNewProductListReq) (*HomeNewProductListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductList not implemented")
+}
+func (UnimplementedHomeNewProductServiceServer) HomeNewProductUpdate(context.Context, *HomeNewProductUpdateReq) (*HomeNewProductUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductUpdate not implemented")
+}
+func (UnimplementedHomeNewProductServiceServer) HomeNewProductDelete(context.Context, *HomeNewProductDeleteReq) (*HomeNewProductDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductDelete not implemented")
+}
+func (UnimplementedHomeNewProductServiceServer) mustEmbedUnimplementedHomeNewProductServiceServer() {}
+
+// UnsafeHomeNewProductServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to HomeNewProductServiceServer will
+// result in compilation errors.
+type UnsafeHomeNewProductServiceServer interface {
+	mustEmbedUnimplementedHomeNewProductServiceServer()
+}
+
+func RegisterHomeNewProductServiceServer(s grpc.ServiceRegistrar, srv HomeNewProductServiceServer) {
+	s.RegisterService(&HomeNewProductService_ServiceDesc, srv)
+}
+
+func _HomeNewProductService_HomeNewProductAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeNewProductAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeNewProductServiceServer).HomeNewProductAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeNewProductService/HomeNewProductAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeNewProductServiceServer).HomeNewProductAdd(ctx, req.(*HomeNewProductAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeNewProductService_HomeNewProductList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeNewProductListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeNewProductServiceServer).HomeNewProductList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeNewProductService/HomeNewProductList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeNewProductServiceServer).HomeNewProductList(ctx, req.(*HomeNewProductListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeNewProductService_HomeNewProductUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeNewProductUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeNewProductServiceServer).HomeNewProductUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeNewProductService/HomeNewProductUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeNewProductServiceServer).HomeNewProductUpdate(ctx, req.(*HomeNewProductUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeNewProductService_HomeNewProductDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeNewProductDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeNewProductServiceServer).HomeNewProductDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeNewProductService/HomeNewProductDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeNewProductServiceServer).HomeNewProductDelete(ctx, req.(*HomeNewProductDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// HomeNewProductService_ServiceDesc is the grpc.ServiceDesc for HomeNewProductService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var HomeNewProductService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.HomeNewProductService",
+	HandlerType: (*HomeNewProductServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "HomeNewProductAdd",
+			Handler:    _HomeNewProductService_HomeNewProductAdd_Handler,
+		},
+		{
+			MethodName: "HomeNewProductList",
+			Handler:    _HomeNewProductService_HomeNewProductList_Handler,
+		},
+		{
+			MethodName: "HomeNewProductUpdate",
+			Handler:    _HomeNewProductService_HomeNewProductUpdate_Handler,
+		},
+		{
+			MethodName: "HomeNewProductDelete",
+			Handler:    _HomeNewProductService_HomeNewProductDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// HomeRecommendProductServiceClient is the client API for HomeRecommendProductService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type HomeRecommendProductServiceClient interface {
 	HomeRecommendProductAdd(ctx context.Context, in *HomeRecommendProductAddReq, opts ...grpc.CallOption) (*HomeRecommendProductAddResp, error)
 	HomeRecommendProductList(ctx context.Context, in *HomeRecommendProductListReq, opts ...grpc.CallOption) (*HomeRecommendProductListResp, error)
 	HomeRecommendProductUpdate(ctx context.Context, in *HomeRecommendProductUpdateReq, opts ...grpc.CallOption) (*HomeRecommendProductUpdateResp, error)
 	HomeRecommendProductDelete(ctx context.Context, in *HomeRecommendProductDeleteReq, opts ...grpc.CallOption) (*HomeRecommendProductDeleteResp, error)
+}
+
+type homeRecommendProductServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewHomeRecommendProductServiceClient(cc grpc.ClientConnInterface) HomeRecommendProductServiceClient {
+	return &homeRecommendProductServiceClient{cc}
+}
+
+func (c *homeRecommendProductServiceClient) HomeRecommendProductAdd(ctx context.Context, in *HomeRecommendProductAddReq, opts ...grpc.CallOption) (*HomeRecommendProductAddResp, error) {
+	out := new(HomeRecommendProductAddResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeRecommendProductService/HomeRecommendProductAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeRecommendProductServiceClient) HomeRecommendProductList(ctx context.Context, in *HomeRecommendProductListReq, opts ...grpc.CallOption) (*HomeRecommendProductListResp, error) {
+	out := new(HomeRecommendProductListResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeRecommendProductService/HomeRecommendProductList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeRecommendProductServiceClient) HomeRecommendProductUpdate(ctx context.Context, in *HomeRecommendProductUpdateReq, opts ...grpc.CallOption) (*HomeRecommendProductUpdateResp, error) {
+	out := new(HomeRecommendProductUpdateResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeRecommendProductService/HomeRecommendProductUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeRecommendProductServiceClient) HomeRecommendProductDelete(ctx context.Context, in *HomeRecommendProductDeleteReq, opts ...grpc.CallOption) (*HomeRecommendProductDeleteResp, error) {
+	out := new(HomeRecommendProductDeleteResp)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeRecommendProductService/HomeRecommendProductDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// HomeRecommendProductServiceServer is the server API for HomeRecommendProductService service.
+// All implementations must embed UnimplementedHomeRecommendProductServiceServer
+// for forward compatibility
+type HomeRecommendProductServiceServer interface {
+	HomeRecommendProductAdd(context.Context, *HomeRecommendProductAddReq) (*HomeRecommendProductAddResp, error)
+	HomeRecommendProductList(context.Context, *HomeRecommendProductListReq) (*HomeRecommendProductListResp, error)
+	HomeRecommendProductUpdate(context.Context, *HomeRecommendProductUpdateReq) (*HomeRecommendProductUpdateResp, error)
+	HomeRecommendProductDelete(context.Context, *HomeRecommendProductDeleteReq) (*HomeRecommendProductDeleteResp, error)
+	mustEmbedUnimplementedHomeRecommendProductServiceServer()
+}
+
+// UnimplementedHomeRecommendProductServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedHomeRecommendProductServiceServer struct {
+}
+
+func (UnimplementedHomeRecommendProductServiceServer) HomeRecommendProductAdd(context.Context, *HomeRecommendProductAddReq) (*HomeRecommendProductAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductAdd not implemented")
+}
+func (UnimplementedHomeRecommendProductServiceServer) HomeRecommendProductList(context.Context, *HomeRecommendProductListReq) (*HomeRecommendProductListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductList not implemented")
+}
+func (UnimplementedHomeRecommendProductServiceServer) HomeRecommendProductUpdate(context.Context, *HomeRecommendProductUpdateReq) (*HomeRecommendProductUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductUpdate not implemented")
+}
+func (UnimplementedHomeRecommendProductServiceServer) HomeRecommendProductDelete(context.Context, *HomeRecommendProductDeleteReq) (*HomeRecommendProductDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductDelete not implemented")
+}
+func (UnimplementedHomeRecommendProductServiceServer) mustEmbedUnimplementedHomeRecommendProductServiceServer() {
+}
+
+// UnsafeHomeRecommendProductServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to HomeRecommendProductServiceServer will
+// result in compilation errors.
+type UnsafeHomeRecommendProductServiceServer interface {
+	mustEmbedUnimplementedHomeRecommendProductServiceServer()
+}
+
+func RegisterHomeRecommendProductServiceServer(s grpc.ServiceRegistrar, srv HomeRecommendProductServiceServer) {
+	s.RegisterService(&HomeRecommendProductService_ServiceDesc, srv)
+}
+
+func _HomeRecommendProductService_HomeRecommendProductAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeRecommendProductAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeRecommendProductService/HomeRecommendProductAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductAdd(ctx, req.(*HomeRecommendProductAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeRecommendProductService_HomeRecommendProductList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeRecommendProductListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeRecommendProductService/HomeRecommendProductList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductList(ctx, req.(*HomeRecommendProductListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeRecommendProductService_HomeRecommendProductUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeRecommendProductUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeRecommendProductService/HomeRecommendProductUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductUpdate(ctx, req.(*HomeRecommendProductUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeRecommendProductService_HomeRecommendProductDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HomeRecommendProductDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.HomeRecommendProductService/HomeRecommendProductDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductDelete(ctx, req.(*HomeRecommendProductDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// HomeRecommendProductService_ServiceDesc is the grpc.ServiceDesc for HomeRecommendProductService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var HomeRecommendProductService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.HomeRecommendProductService",
+	HandlerType: (*HomeRecommendProductServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "HomeRecommendProductAdd",
+			Handler:    _HomeRecommendProductService_HomeRecommendProductAdd_Handler,
+		},
+		{
+			MethodName: "HomeRecommendProductList",
+			Handler:    _HomeRecommendProductService_HomeRecommendProductList_Handler,
+		},
+		{
+			MethodName: "HomeRecommendProductUpdate",
+			Handler:    _HomeRecommendProductService_HomeRecommendProductUpdate_Handler,
+		},
+		{
+			MethodName: "HomeRecommendProductDelete",
+			Handler:    _HomeRecommendProductService_HomeRecommendProductDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "sms.proto",
+}
+
+// HomeRecommendSubjectServiceClient is the client API for HomeRecommendSubjectService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type HomeRecommendSubjectServiceClient interface {
 	HomeRecommendSubjectAdd(ctx context.Context, in *HomeRecommendSubjectAddReq, opts ...grpc.CallOption) (*HomeRecommendSubjectAddResp, error)
 	HomeRecommendSubjectList(ctx context.Context, in *HomeRecommendSubjectListReq, opts ...grpc.CallOption) (*HomeRecommendSubjectListResp, error)
 	HomeRecommendSubjectUpdate(ctx context.Context, in *HomeRecommendSubjectUpdateReq, opts ...grpc.CallOption) (*HomeRecommendSubjectUpdateResp, error)
 	HomeRecommendSubjectDelete(ctx context.Context, in *HomeRecommendSubjectDeleteReq, opts ...grpc.CallOption) (*HomeRecommendSubjectDeleteResp, error)
 }
 
-type smsClient struct {
+type homeRecommendSubjectServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewSmsClient(cc grpc.ClientConnInterface) SmsClient {
-	return &smsClient{cc}
+func NewHomeRecommendSubjectServiceClient(cc grpc.ClientConnInterface) HomeRecommendSubjectServiceClient {
+	return &homeRecommendSubjectServiceClient{cc}
 }
 
-func (c *smsClient) CouponAdd(ctx context.Context, in *CouponAddReq, opts ...grpc.CallOption) (*CouponAddResp, error) {
-	out := new(CouponAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponList(ctx context.Context, in *CouponListReq, opts ...grpc.CallOption) (*CouponListResp, error) {
-	out := new(CouponListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponUpdate(ctx context.Context, in *CouponUpdateReq, opts ...grpc.CallOption) (*CouponUpdateResp, error) {
-	out := new(CouponUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponDelete(ctx context.Context, in *CouponDeleteReq, opts ...grpc.CallOption) (*CouponDeleteResp, error) {
-	out := new(CouponDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponHistoryAdd(ctx context.Context, in *CouponHistoryAddReq, opts ...grpc.CallOption) (*CouponHistoryAddResp, error) {
-	out := new(CouponHistoryAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponHistoryAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponHistoryList(ctx context.Context, in *CouponHistoryListReq, opts ...grpc.CallOption) (*CouponHistoryListResp, error) {
-	out := new(CouponHistoryListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponHistoryList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponHistoryUpdate(ctx context.Context, in *CouponHistoryUpdateReq, opts ...grpc.CallOption) (*CouponHistoryUpdateResp, error) {
-	out := new(CouponHistoryUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponHistoryUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponHistoryDelete(ctx context.Context, in *CouponHistoryDeleteReq, opts ...grpc.CallOption) (*CouponHistoryDeleteResp, error) {
-	out := new(CouponHistoryDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponHistoryDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponProductCategoryRelationAdd(ctx context.Context, in *CouponProductCategoryRelationAddReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationAddResp, error) {
-	out := new(CouponProductCategoryRelationAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponProductCategoryRelationAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponProductCategoryRelationList(ctx context.Context, in *CouponProductCategoryRelationListReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationListResp, error) {
-	out := new(CouponProductCategoryRelationListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponProductCategoryRelationList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponProductCategoryRelationUpdate(ctx context.Context, in *CouponProductCategoryRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationUpdateResp, error) {
-	out := new(CouponProductCategoryRelationUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponProductCategoryRelationUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponProductCategoryRelationDelete(ctx context.Context, in *CouponProductCategoryRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationDeleteResp, error) {
-	out := new(CouponProductCategoryRelationDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponProductCategoryRelationDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponProductRelationAdd(ctx context.Context, in *CouponProductRelationAddReq, opts ...grpc.CallOption) (*CouponProductRelationAddResp, error) {
-	out := new(CouponProductRelationAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponProductRelationAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponProductRelationList(ctx context.Context, in *CouponProductRelationListReq, opts ...grpc.CallOption) (*CouponProductRelationListResp, error) {
-	out := new(CouponProductRelationListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponProductRelationList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponProductRelationUpdate(ctx context.Context, in *CouponProductRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductRelationUpdateResp, error) {
-	out := new(CouponProductRelationUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponProductRelationUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) CouponProductRelationDelete(ctx context.Context, in *CouponProductRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductRelationDeleteResp, error) {
-	out := new(CouponProductRelationDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/CouponProductRelationDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionLogAdd(ctx context.Context, in *FlashPromotionLogAddReq, opts ...grpc.CallOption) (*FlashPromotionLogAddResp, error) {
-	out := new(FlashPromotionLogAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionLogAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionLogList(ctx context.Context, in *FlashPromotionLogListReq, opts ...grpc.CallOption) (*FlashPromotionLogListResp, error) {
-	out := new(FlashPromotionLogListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionLogList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionLogUpdate(ctx context.Context, in *FlashPromotionLogUpdateReq, opts ...grpc.CallOption) (*FlashPromotionLogUpdateResp, error) {
-	out := new(FlashPromotionLogUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionLogUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionLogDelete(ctx context.Context, in *FlashPromotionLogDeleteReq, opts ...grpc.CallOption) (*FlashPromotionLogDeleteResp, error) {
-	out := new(FlashPromotionLogDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionLogDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionAdd(ctx context.Context, in *FlashPromotionAddReq, opts ...grpc.CallOption) (*FlashPromotionAddResp, error) {
-	out := new(FlashPromotionAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionList(ctx context.Context, in *FlashPromotionListReq, opts ...grpc.CallOption) (*FlashPromotionListResp, error) {
-	out := new(FlashPromotionListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionUpdate(ctx context.Context, in *FlashPromotionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionUpdateResp, error) {
-	out := new(FlashPromotionUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionDelete(ctx context.Context, in *FlashPromotionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionDeleteResp, error) {
-	out := new(FlashPromotionDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error) {
-	out := new(FlashPromotionListByDateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionListByDate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionProductRelationAdd(ctx context.Context, in *FlashPromotionProductRelationAddReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationAddResp, error) {
-	out := new(FlashPromotionProductRelationAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionProductRelationAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionProductRelationList(ctx context.Context, in *FlashPromotionProductRelationListReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationListResp, error) {
-	out := new(FlashPromotionProductRelationListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionProductRelationList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionProductRelationUpdate(ctx context.Context, in *FlashPromotionProductRelationUpdateReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationUpdateResp, error) {
-	out := new(FlashPromotionProductRelationUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionProductRelationUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionProductRelationDelete(ctx context.Context, in *FlashPromotionProductRelationDeleteReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationDeleteResp, error) {
-	out := new(FlashPromotionProductRelationDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionProductRelationDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionSessionAdd(ctx context.Context, in *FlashPromotionSessionAddReq, opts ...grpc.CallOption) (*FlashPromotionSessionAddResp, error) {
-	out := new(FlashPromotionSessionAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionSessionAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error) {
-	out := new(FlashPromotionSessionListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionSessionList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error) {
-	out := new(FlashPromotionSessionUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionSessionUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error) {
-	out := new(FlashPromotionSessionDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionSessionDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error) {
-	out := new(FlashPromotionSessionByTimeResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/FlashPromotionSessionByTime", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error) {
-	out := new(HomeAdvertiseAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeAdvertiseAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeAdvertiseList(ctx context.Context, in *HomeAdvertiseListReq, opts ...grpc.CallOption) (*HomeAdvertiseListResp, error) {
-	out := new(HomeAdvertiseListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeAdvertiseList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeAdvertiseUpdate(ctx context.Context, in *HomeAdvertiseUpdateReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error) {
-	out := new(HomeAdvertiseUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeAdvertiseUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeAdvertiseDelete(ctx context.Context, in *HomeAdvertiseDeleteReq, opts ...grpc.CallOption) (*HomeAdvertiseDeleteResp, error) {
-	out := new(HomeAdvertiseDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeAdvertiseDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeBrandAdd(ctx context.Context, in *HomeBrandAddReq, opts ...grpc.CallOption) (*HomeBrandAddResp, error) {
-	out := new(HomeBrandAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeBrandAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeBrandList(ctx context.Context, in *HomeBrandListReq, opts ...grpc.CallOption) (*HomeBrandListResp, error) {
-	out := new(HomeBrandListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeBrandList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeBrandUpdate(ctx context.Context, in *HomeBrandUpdateReq, opts ...grpc.CallOption) (*HomeBrandUpdateResp, error) {
-	out := new(HomeBrandUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeBrandUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeBrandDelete(ctx context.Context, in *HomeBrandDeleteReq, opts ...grpc.CallOption) (*HomeBrandDeleteResp, error) {
-	out := new(HomeBrandDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeBrandDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeNewProductAdd(ctx context.Context, in *HomeNewProductAddReq, opts ...grpc.CallOption) (*HomeNewProductAddResp, error) {
-	out := new(HomeNewProductAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeNewProductAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeNewProductList(ctx context.Context, in *HomeNewProductListReq, opts ...grpc.CallOption) (*HomeNewProductListResp, error) {
-	out := new(HomeNewProductListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeNewProductList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeNewProductUpdate(ctx context.Context, in *HomeNewProductUpdateReq, opts ...grpc.CallOption) (*HomeNewProductUpdateResp, error) {
-	out := new(HomeNewProductUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeNewProductUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeNewProductDelete(ctx context.Context, in *HomeNewProductDeleteReq, opts ...grpc.CallOption) (*HomeNewProductDeleteResp, error) {
-	out := new(HomeNewProductDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeNewProductDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeRecommendProductAdd(ctx context.Context, in *HomeRecommendProductAddReq, opts ...grpc.CallOption) (*HomeRecommendProductAddResp, error) {
-	out := new(HomeRecommendProductAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeRecommendProductAdd", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeRecommendProductList(ctx context.Context, in *HomeRecommendProductListReq, opts ...grpc.CallOption) (*HomeRecommendProductListResp, error) {
-	out := new(HomeRecommendProductListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeRecommendProductList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeRecommendProductUpdate(ctx context.Context, in *HomeRecommendProductUpdateReq, opts ...grpc.CallOption) (*HomeRecommendProductUpdateResp, error) {
-	out := new(HomeRecommendProductUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeRecommendProductUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeRecommendProductDelete(ctx context.Context, in *HomeRecommendProductDeleteReq, opts ...grpc.CallOption) (*HomeRecommendProductDeleteResp, error) {
-	out := new(HomeRecommendProductDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeRecommendProductDelete", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smsClient) HomeRecommendSubjectAdd(ctx context.Context, in *HomeRecommendSubjectAddReq, opts ...grpc.CallOption) (*HomeRecommendSubjectAddResp, error) {
+func (c *homeRecommendSubjectServiceClient) HomeRecommendSubjectAdd(ctx context.Context, in *HomeRecommendSubjectAddReq, opts ...grpc.CallOption) (*HomeRecommendSubjectAddResp, error) {
 	out := new(HomeRecommendSubjectAddResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeRecommendSubjectAdd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectAdd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *smsClient) HomeRecommendSubjectList(ctx context.Context, in *HomeRecommendSubjectListReq, opts ...grpc.CallOption) (*HomeRecommendSubjectListResp, error) {
+func (c *homeRecommendSubjectServiceClient) HomeRecommendSubjectList(ctx context.Context, in *HomeRecommendSubjectListReq, opts ...grpc.CallOption) (*HomeRecommendSubjectListResp, error) {
 	out := new(HomeRecommendSubjectListResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeRecommendSubjectList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *smsClient) HomeRecommendSubjectUpdate(ctx context.Context, in *HomeRecommendSubjectUpdateReq, opts ...grpc.CallOption) (*HomeRecommendSubjectUpdateResp, error) {
+func (c *homeRecommendSubjectServiceClient) HomeRecommendSubjectUpdate(ctx context.Context, in *HomeRecommendSubjectUpdateReq, opts ...grpc.CallOption) (*HomeRecommendSubjectUpdateResp, error) {
 	out := new(HomeRecommendSubjectUpdateResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeRecommendSubjectUpdate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectUpdate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *smsClient) HomeRecommendSubjectDelete(ctx context.Context, in *HomeRecommendSubjectDeleteReq, opts ...grpc.CallOption) (*HomeRecommendSubjectDeleteResp, error) {
+func (c *homeRecommendSubjectServiceClient) HomeRecommendSubjectDelete(ctx context.Context, in *HomeRecommendSubjectDeleteReq, opts ...grpc.CallOption) (*HomeRecommendSubjectDeleteResp, error) {
 	out := new(HomeRecommendSubjectDeleteResp)
-	err := c.cc.Invoke(ctx, "/smsclient.Sms/HomeRecommendSubjectDelete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// SmsServer is the server API for Sms service.
-// All implementations must embed UnimplementedSmsServer
+// HomeRecommendSubjectServiceServer is the server API for HomeRecommendSubjectService service.
+// All implementations must embed UnimplementedHomeRecommendSubjectServiceServer
 // for forward compatibility
-type SmsServer interface {
-	CouponAdd(context.Context, *CouponAddReq) (*CouponAddResp, error)
-	CouponList(context.Context, *CouponListReq) (*CouponListResp, error)
-	CouponUpdate(context.Context, *CouponUpdateReq) (*CouponUpdateResp, error)
-	CouponDelete(context.Context, *CouponDeleteReq) (*CouponDeleteResp, error)
-	CouponHistoryAdd(context.Context, *CouponHistoryAddReq) (*CouponHistoryAddResp, error)
-	CouponHistoryList(context.Context, *CouponHistoryListReq) (*CouponHistoryListResp, error)
-	CouponHistoryUpdate(context.Context, *CouponHistoryUpdateReq) (*CouponHistoryUpdateResp, error)
-	CouponHistoryDelete(context.Context, *CouponHistoryDeleteReq) (*CouponHistoryDeleteResp, error)
-	CouponProductCategoryRelationAdd(context.Context, *CouponProductCategoryRelationAddReq) (*CouponProductCategoryRelationAddResp, error)
-	CouponProductCategoryRelationList(context.Context, *CouponProductCategoryRelationListReq) (*CouponProductCategoryRelationListResp, error)
-	CouponProductCategoryRelationUpdate(context.Context, *CouponProductCategoryRelationUpdateReq) (*CouponProductCategoryRelationUpdateResp, error)
-	CouponProductCategoryRelationDelete(context.Context, *CouponProductCategoryRelationDeleteReq) (*CouponProductCategoryRelationDeleteResp, error)
-	CouponProductRelationAdd(context.Context, *CouponProductRelationAddReq) (*CouponProductRelationAddResp, error)
-	CouponProductRelationList(context.Context, *CouponProductRelationListReq) (*CouponProductRelationListResp, error)
-	CouponProductRelationUpdate(context.Context, *CouponProductRelationUpdateReq) (*CouponProductRelationUpdateResp, error)
-	CouponProductRelationDelete(context.Context, *CouponProductRelationDeleteReq) (*CouponProductRelationDeleteResp, error)
-	FlashPromotionLogAdd(context.Context, *FlashPromotionLogAddReq) (*FlashPromotionLogAddResp, error)
-	FlashPromotionLogList(context.Context, *FlashPromotionLogListReq) (*FlashPromotionLogListResp, error)
-	FlashPromotionLogUpdate(context.Context, *FlashPromotionLogUpdateReq) (*FlashPromotionLogUpdateResp, error)
-	FlashPromotionLogDelete(context.Context, *FlashPromotionLogDeleteReq) (*FlashPromotionLogDeleteResp, error)
-	FlashPromotionAdd(context.Context, *FlashPromotionAddReq) (*FlashPromotionAddResp, error)
-	FlashPromotionList(context.Context, *FlashPromotionListReq) (*FlashPromotionListResp, error)
-	FlashPromotionUpdate(context.Context, *FlashPromotionUpdateReq) (*FlashPromotionUpdateResp, error)
-	FlashPromotionDelete(context.Context, *FlashPromotionDeleteReq) (*FlashPromotionDeleteResp, error)
-	FlashPromotionListByDate(context.Context, *FlashPromotionListByDateReq) (*FlashPromotionListByDateResp, error)
-	FlashPromotionProductRelationAdd(context.Context, *FlashPromotionProductRelationAddReq) (*FlashPromotionProductRelationAddResp, error)
-	FlashPromotionProductRelationList(context.Context, *FlashPromotionProductRelationListReq) (*FlashPromotionProductRelationListResp, error)
-	FlashPromotionProductRelationUpdate(context.Context, *FlashPromotionProductRelationUpdateReq) (*FlashPromotionProductRelationUpdateResp, error)
-	FlashPromotionProductRelationDelete(context.Context, *FlashPromotionProductRelationDeleteReq) (*FlashPromotionProductRelationDeleteResp, error)
-	FlashPromotionSessionAdd(context.Context, *FlashPromotionSessionAddReq) (*FlashPromotionSessionAddResp, error)
-	FlashPromotionSessionList(context.Context, *FlashPromotionSessionListReq) (*FlashPromotionSessionListResp, error)
-	FlashPromotionSessionUpdate(context.Context, *FlashPromotionSessionUpdateReq) (*FlashPromotionSessionUpdateResp, error)
-	FlashPromotionSessionDelete(context.Context, *FlashPromotionSessionDeleteReq) (*FlashPromotionSessionDeleteResp, error)
-	FlashPromotionSessionByTime(context.Context, *FlashPromotionSessionByTimeReq) (*FlashPromotionSessionByTimeResp, error)
-	HomeAdvertiseAdd(context.Context, *HomeAdvertiseAddReq) (*HomeAdvertiseAddResp, error)
-	HomeAdvertiseList(context.Context, *HomeAdvertiseListReq) (*HomeAdvertiseListResp, error)
-	HomeAdvertiseUpdate(context.Context, *HomeAdvertiseUpdateReq) (*HomeAdvertiseUpdateResp, error)
-	HomeAdvertiseDelete(context.Context, *HomeAdvertiseDeleteReq) (*HomeAdvertiseDeleteResp, error)
-	HomeBrandAdd(context.Context, *HomeBrandAddReq) (*HomeBrandAddResp, error)
-	HomeBrandList(context.Context, *HomeBrandListReq) (*HomeBrandListResp, error)
-	HomeBrandUpdate(context.Context, *HomeBrandUpdateReq) (*HomeBrandUpdateResp, error)
-	HomeBrandDelete(context.Context, *HomeBrandDeleteReq) (*HomeBrandDeleteResp, error)
-	HomeNewProductAdd(context.Context, *HomeNewProductAddReq) (*HomeNewProductAddResp, error)
-	HomeNewProductList(context.Context, *HomeNewProductListReq) (*HomeNewProductListResp, error)
-	HomeNewProductUpdate(context.Context, *HomeNewProductUpdateReq) (*HomeNewProductUpdateResp, error)
-	HomeNewProductDelete(context.Context, *HomeNewProductDeleteReq) (*HomeNewProductDeleteResp, error)
-	HomeRecommendProductAdd(context.Context, *HomeRecommendProductAddReq) (*HomeRecommendProductAddResp, error)
-	HomeRecommendProductList(context.Context, *HomeRecommendProductListReq) (*HomeRecommendProductListResp, error)
-	HomeRecommendProductUpdate(context.Context, *HomeRecommendProductUpdateReq) (*HomeRecommendProductUpdateResp, error)
-	HomeRecommendProductDelete(context.Context, *HomeRecommendProductDeleteReq) (*HomeRecommendProductDeleteResp, error)
+type HomeRecommendSubjectServiceServer interface {
 	HomeRecommendSubjectAdd(context.Context, *HomeRecommendSubjectAddReq) (*HomeRecommendSubjectAddResp, error)
 	HomeRecommendSubjectList(context.Context, *HomeRecommendSubjectListReq) (*HomeRecommendSubjectListResp, error)
 	HomeRecommendSubjectUpdate(context.Context, *HomeRecommendSubjectUpdateReq) (*HomeRecommendSubjectUpdateResp, error)
 	HomeRecommendSubjectDelete(context.Context, *HomeRecommendSubjectDeleteReq) (*HomeRecommendSubjectDeleteResp, error)
-	mustEmbedUnimplementedSmsServer()
+	mustEmbedUnimplementedHomeRecommendSubjectServiceServer()
 }
 
-// UnimplementedSmsServer must be embedded to have forward compatible implementations.
-type UnimplementedSmsServer struct {
+// UnimplementedHomeRecommendSubjectServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedHomeRecommendSubjectServiceServer struct {
 }
 
-func (UnimplementedSmsServer) CouponAdd(context.Context, *CouponAddReq) (*CouponAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponAdd not implemented")
-}
-func (UnimplementedSmsServer) CouponList(context.Context, *CouponListReq) (*CouponListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponList not implemented")
-}
-func (UnimplementedSmsServer) CouponUpdate(context.Context, *CouponUpdateReq) (*CouponUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponUpdate not implemented")
-}
-func (UnimplementedSmsServer) CouponDelete(context.Context, *CouponDeleteReq) (*CouponDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponDelete not implemented")
-}
-func (UnimplementedSmsServer) CouponHistoryAdd(context.Context, *CouponHistoryAddReq) (*CouponHistoryAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponHistoryAdd not implemented")
-}
-func (UnimplementedSmsServer) CouponHistoryList(context.Context, *CouponHistoryListReq) (*CouponHistoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponHistoryList not implemented")
-}
-func (UnimplementedSmsServer) CouponHistoryUpdate(context.Context, *CouponHistoryUpdateReq) (*CouponHistoryUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponHistoryUpdate not implemented")
-}
-func (UnimplementedSmsServer) CouponHistoryDelete(context.Context, *CouponHistoryDeleteReq) (*CouponHistoryDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponHistoryDelete not implemented")
-}
-func (UnimplementedSmsServer) CouponProductCategoryRelationAdd(context.Context, *CouponProductCategoryRelationAddReq) (*CouponProductCategoryRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationAdd not implemented")
-}
-func (UnimplementedSmsServer) CouponProductCategoryRelationList(context.Context, *CouponProductCategoryRelationListReq) (*CouponProductCategoryRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationList not implemented")
-}
-func (UnimplementedSmsServer) CouponProductCategoryRelationUpdate(context.Context, *CouponProductCategoryRelationUpdateReq) (*CouponProductCategoryRelationUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationUpdate not implemented")
-}
-func (UnimplementedSmsServer) CouponProductCategoryRelationDelete(context.Context, *CouponProductCategoryRelationDeleteReq) (*CouponProductCategoryRelationDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationDelete not implemented")
-}
-func (UnimplementedSmsServer) CouponProductRelationAdd(context.Context, *CouponProductRelationAddReq) (*CouponProductRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationAdd not implemented")
-}
-func (UnimplementedSmsServer) CouponProductRelationList(context.Context, *CouponProductRelationListReq) (*CouponProductRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationList not implemented")
-}
-func (UnimplementedSmsServer) CouponProductRelationUpdate(context.Context, *CouponProductRelationUpdateReq) (*CouponProductRelationUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationUpdate not implemented")
-}
-func (UnimplementedSmsServer) CouponProductRelationDelete(context.Context, *CouponProductRelationDeleteReq) (*CouponProductRelationDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationDelete not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionLogAdd(context.Context, *FlashPromotionLogAddReq) (*FlashPromotionLogAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionLogAdd not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionLogList(context.Context, *FlashPromotionLogListReq) (*FlashPromotionLogListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionLogList not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionLogUpdate(context.Context, *FlashPromotionLogUpdateReq) (*FlashPromotionLogUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionLogUpdate not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionLogDelete(context.Context, *FlashPromotionLogDeleteReq) (*FlashPromotionLogDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionLogDelete not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionAdd(context.Context, *FlashPromotionAddReq) (*FlashPromotionAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionAdd not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionList(context.Context, *FlashPromotionListReq) (*FlashPromotionListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionList not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionUpdate(context.Context, *FlashPromotionUpdateReq) (*FlashPromotionUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionUpdate not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionDelete(context.Context, *FlashPromotionDeleteReq) (*FlashPromotionDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionDelete not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionListByDate(context.Context, *FlashPromotionListByDateReq) (*FlashPromotionListByDateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionListByDate not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionProductRelationAdd(context.Context, *FlashPromotionProductRelationAddReq) (*FlashPromotionProductRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationAdd not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionProductRelationList(context.Context, *FlashPromotionProductRelationListReq) (*FlashPromotionProductRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationList not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionProductRelationUpdate(context.Context, *FlashPromotionProductRelationUpdateReq) (*FlashPromotionProductRelationUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationUpdate not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionProductRelationDelete(context.Context, *FlashPromotionProductRelationDeleteReq) (*FlashPromotionProductRelationDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationDelete not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionSessionAdd(context.Context, *FlashPromotionSessionAddReq) (*FlashPromotionSessionAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionAdd not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionSessionList(context.Context, *FlashPromotionSessionListReq) (*FlashPromotionSessionListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionList not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionSessionUpdate(context.Context, *FlashPromotionSessionUpdateReq) (*FlashPromotionSessionUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionUpdate not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionSessionDelete(context.Context, *FlashPromotionSessionDeleteReq) (*FlashPromotionSessionDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionDelete not implemented")
-}
-func (UnimplementedSmsServer) FlashPromotionSessionByTime(context.Context, *FlashPromotionSessionByTimeReq) (*FlashPromotionSessionByTimeResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionByTime not implemented")
-}
-func (UnimplementedSmsServer) HomeAdvertiseAdd(context.Context, *HomeAdvertiseAddReq) (*HomeAdvertiseAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseAdd not implemented")
-}
-func (UnimplementedSmsServer) HomeAdvertiseList(context.Context, *HomeAdvertiseListReq) (*HomeAdvertiseListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseList not implemented")
-}
-func (UnimplementedSmsServer) HomeAdvertiseUpdate(context.Context, *HomeAdvertiseUpdateReq) (*HomeAdvertiseUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseUpdate not implemented")
-}
-func (UnimplementedSmsServer) HomeAdvertiseDelete(context.Context, *HomeAdvertiseDeleteReq) (*HomeAdvertiseDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseDelete not implemented")
-}
-func (UnimplementedSmsServer) HomeBrandAdd(context.Context, *HomeBrandAddReq) (*HomeBrandAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandAdd not implemented")
-}
-func (UnimplementedSmsServer) HomeBrandList(context.Context, *HomeBrandListReq) (*HomeBrandListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandList not implemented")
-}
-func (UnimplementedSmsServer) HomeBrandUpdate(context.Context, *HomeBrandUpdateReq) (*HomeBrandUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandUpdate not implemented")
-}
-func (UnimplementedSmsServer) HomeBrandDelete(context.Context, *HomeBrandDeleteReq) (*HomeBrandDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandDelete not implemented")
-}
-func (UnimplementedSmsServer) HomeNewProductAdd(context.Context, *HomeNewProductAddReq) (*HomeNewProductAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductAdd not implemented")
-}
-func (UnimplementedSmsServer) HomeNewProductList(context.Context, *HomeNewProductListReq) (*HomeNewProductListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductList not implemented")
-}
-func (UnimplementedSmsServer) HomeNewProductUpdate(context.Context, *HomeNewProductUpdateReq) (*HomeNewProductUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductUpdate not implemented")
-}
-func (UnimplementedSmsServer) HomeNewProductDelete(context.Context, *HomeNewProductDeleteReq) (*HomeNewProductDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductDelete not implemented")
-}
-func (UnimplementedSmsServer) HomeRecommendProductAdd(context.Context, *HomeRecommendProductAddReq) (*HomeRecommendProductAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductAdd not implemented")
-}
-func (UnimplementedSmsServer) HomeRecommendProductList(context.Context, *HomeRecommendProductListReq) (*HomeRecommendProductListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductList not implemented")
-}
-func (UnimplementedSmsServer) HomeRecommendProductUpdate(context.Context, *HomeRecommendProductUpdateReq) (*HomeRecommendProductUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductUpdate not implemented")
-}
-func (UnimplementedSmsServer) HomeRecommendProductDelete(context.Context, *HomeRecommendProductDeleteReq) (*HomeRecommendProductDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductDelete not implemented")
-}
-func (UnimplementedSmsServer) HomeRecommendSubjectAdd(context.Context, *HomeRecommendSubjectAddReq) (*HomeRecommendSubjectAddResp, error) {
+func (UnimplementedHomeRecommendSubjectServiceServer) HomeRecommendSubjectAdd(context.Context, *HomeRecommendSubjectAddReq) (*HomeRecommendSubjectAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendSubjectAdd not implemented")
 }
-func (UnimplementedSmsServer) HomeRecommendSubjectList(context.Context, *HomeRecommendSubjectListReq) (*HomeRecommendSubjectListResp, error) {
+func (UnimplementedHomeRecommendSubjectServiceServer) HomeRecommendSubjectList(context.Context, *HomeRecommendSubjectListReq) (*HomeRecommendSubjectListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendSubjectList not implemented")
 }
-func (UnimplementedSmsServer) HomeRecommendSubjectUpdate(context.Context, *HomeRecommendSubjectUpdateReq) (*HomeRecommendSubjectUpdateResp, error) {
+func (UnimplementedHomeRecommendSubjectServiceServer) HomeRecommendSubjectUpdate(context.Context, *HomeRecommendSubjectUpdateReq) (*HomeRecommendSubjectUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendSubjectUpdate not implemented")
 }
-func (UnimplementedSmsServer) HomeRecommendSubjectDelete(context.Context, *HomeRecommendSubjectDeleteReq) (*HomeRecommendSubjectDeleteResp, error) {
+func (UnimplementedHomeRecommendSubjectServiceServer) HomeRecommendSubjectDelete(context.Context, *HomeRecommendSubjectDeleteReq) (*HomeRecommendSubjectDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendSubjectDelete not implemented")
 }
-func (UnimplementedSmsServer) mustEmbedUnimplementedSmsServer() {}
+func (UnimplementedHomeRecommendSubjectServiceServer) mustEmbedUnimplementedHomeRecommendSubjectServiceServer() {
+}
 
-// UnsafeSmsServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SmsServer will
+// UnsafeHomeRecommendSubjectServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to HomeRecommendSubjectServiceServer will
 // result in compilation errors.
-type UnsafeSmsServer interface {
-	mustEmbedUnimplementedSmsServer()
+type UnsafeHomeRecommendSubjectServiceServer interface {
+	mustEmbedUnimplementedHomeRecommendSubjectServiceServer()
 }
 
-func RegisterSmsServer(s grpc.ServiceRegistrar, srv SmsServer) {
-	s.RegisterService(&Sms_ServiceDesc, srv)
+func RegisterHomeRecommendSubjectServiceServer(s grpc.ServiceRegistrar, srv HomeRecommendSubjectServiceServer) {
+	s.RegisterService(&HomeRecommendSubjectService_ServiceDesc, srv)
 }
 
-func _Sms_CouponAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponAdd(ctx, req.(*CouponAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponList(ctx, req.(*CouponListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponUpdate(ctx, req.(*CouponUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponDelete(ctx, req.(*CouponDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponHistoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponHistoryAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponHistoryAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponHistoryAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponHistoryAdd(ctx, req.(*CouponHistoryAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponHistoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponHistoryListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponHistoryList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponHistoryList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponHistoryList(ctx, req.(*CouponHistoryListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponHistoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponHistoryUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponHistoryUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponHistoryUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponHistoryUpdate(ctx, req.(*CouponHistoryUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponHistoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponHistoryDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponHistoryDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponHistoryDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponHistoryDelete(ctx, req.(*CouponHistoryDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponProductCategoryRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductCategoryRelationAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponProductCategoryRelationAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponProductCategoryRelationAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponProductCategoryRelationAdd(ctx, req.(*CouponProductCategoryRelationAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponProductCategoryRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductCategoryRelationListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponProductCategoryRelationList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponProductCategoryRelationList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponProductCategoryRelationList(ctx, req.(*CouponProductCategoryRelationListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponProductCategoryRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductCategoryRelationUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponProductCategoryRelationUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponProductCategoryRelationUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponProductCategoryRelationUpdate(ctx, req.(*CouponProductCategoryRelationUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponProductCategoryRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductCategoryRelationDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponProductCategoryRelationDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponProductCategoryRelationDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponProductCategoryRelationDelete(ctx, req.(*CouponProductCategoryRelationDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductRelationAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponProductRelationAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponProductRelationAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponProductRelationAdd(ctx, req.(*CouponProductRelationAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductRelationListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponProductRelationList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponProductRelationList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponProductRelationList(ctx, req.(*CouponProductRelationListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponProductRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductRelationUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponProductRelationUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponProductRelationUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponProductRelationUpdate(ctx, req.(*CouponProductRelationUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_CouponProductRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductRelationDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).CouponProductRelationDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/CouponProductRelationDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).CouponProductRelationDelete(ctx, req.(*CouponProductRelationDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionLogAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionLogAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionLogAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionLogAdd(ctx, req.(*FlashPromotionLogAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionLogListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionLogList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionLogList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionLogList(ctx, req.(*FlashPromotionLogListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionLogUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionLogUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionLogUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionLogUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionLogUpdate(ctx, req.(*FlashPromotionLogUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionLogDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionLogDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionLogDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionLogDelete(ctx, req.(*FlashPromotionLogDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionAdd(ctx, req.(*FlashPromotionAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionList(ctx, req.(*FlashPromotionListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionUpdate(ctx, req.(*FlashPromotionUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionDelete(ctx, req.(*FlashPromotionDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionListByDate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionListByDateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionListByDate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionListByDate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionListByDate(ctx, req.(*FlashPromotionListByDateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionProductRelationAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionProductRelationAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionProductRelationAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionProductRelationAdd(ctx, req.(*FlashPromotionProductRelationAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionProductRelationListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionProductRelationList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionProductRelationList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionProductRelationList(ctx, req.(*FlashPromotionProductRelationListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionProductRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionProductRelationUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionProductRelationUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionProductRelationUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionProductRelationUpdate(ctx, req.(*FlashPromotionProductRelationUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionProductRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionProductRelationDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionProductRelationDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionProductRelationDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionProductRelationDelete(ctx, req.(*FlashPromotionProductRelationDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionSessionAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionSessionAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionSessionAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionSessionAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionSessionAdd(ctx, req.(*FlashPromotionSessionAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionSessionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionSessionListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionSessionList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionSessionList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionSessionList(ctx, req.(*FlashPromotionSessionListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionSessionUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionSessionUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionSessionUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionSessionUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionSessionUpdate(ctx, req.(*FlashPromotionSessionUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionSessionDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionSessionDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionSessionDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionSessionDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionSessionDelete(ctx, req.(*FlashPromotionSessionDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_FlashPromotionSessionByTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FlashPromotionSessionByTimeReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).FlashPromotionSessionByTime(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/FlashPromotionSessionByTime",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).FlashPromotionSessionByTime(ctx, req.(*FlashPromotionSessionByTimeReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeAdvertiseAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeAdvertiseAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeAdvertiseAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeAdvertiseAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeAdvertiseAdd(ctx, req.(*HomeAdvertiseAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeAdvertiseList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeAdvertiseListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeAdvertiseList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeAdvertiseList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeAdvertiseList(ctx, req.(*HomeAdvertiseListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeAdvertiseUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeAdvertiseUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeAdvertiseUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeAdvertiseUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeAdvertiseUpdate(ctx, req.(*HomeAdvertiseUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeAdvertiseDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeAdvertiseDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeAdvertiseDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeAdvertiseDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeAdvertiseDelete(ctx, req.(*HomeAdvertiseDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeBrandAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeBrandAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeBrandAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeBrandAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeBrandAdd(ctx, req.(*HomeBrandAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeBrandList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeBrandListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeBrandList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeBrandList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeBrandList(ctx, req.(*HomeBrandListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeBrandUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeBrandUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeBrandUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeBrandUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeBrandUpdate(ctx, req.(*HomeBrandUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeBrandDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeBrandDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeBrandDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeBrandDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeBrandDelete(ctx, req.(*HomeBrandDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeNewProductAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeNewProductAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeNewProductAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeNewProductAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeNewProductAdd(ctx, req.(*HomeNewProductAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeNewProductList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeNewProductListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeNewProductList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeNewProductList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeNewProductList(ctx, req.(*HomeNewProductListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeNewProductUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeNewProductUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeNewProductUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeNewProductUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeNewProductUpdate(ctx, req.(*HomeNewProductUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeNewProductDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeNewProductDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeNewProductDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeNewProductDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeNewProductDelete(ctx, req.(*HomeNewProductDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeRecommendProductAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeRecommendProductAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeRecommendProductAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeRecommendProductAdd",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeRecommendProductAdd(ctx, req.(*HomeRecommendProductAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeRecommendProductList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeRecommendProductListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeRecommendProductList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeRecommendProductList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeRecommendProductList(ctx, req.(*HomeRecommendProductListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeRecommendProductUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeRecommendProductUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeRecommendProductUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeRecommendProductUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeRecommendProductUpdate(ctx, req.(*HomeRecommendProductUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeRecommendProductDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeRecommendProductDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmsServer).HomeRecommendProductDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeRecommendProductDelete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeRecommendProductDelete(ctx, req.(*HomeRecommendProductDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sms_HomeRecommendSubjectAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HomeRecommendSubjectService_HomeRecommendSubjectAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HomeRecommendSubjectAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SmsServer).HomeRecommendSubjectAdd(ctx, in)
+		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeRecommendSubjectAdd",
+		FullMethod: "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectAdd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeRecommendSubjectAdd(ctx, req.(*HomeRecommendSubjectAddReq))
+		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectAdd(ctx, req.(*HomeRecommendSubjectAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sms_HomeRecommendSubjectList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HomeRecommendSubjectService_HomeRecommendSubjectList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HomeRecommendSubjectListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SmsServer).HomeRecommendSubjectList(ctx, in)
+		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeRecommendSubjectList",
+		FullMethod: "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeRecommendSubjectList(ctx, req.(*HomeRecommendSubjectListReq))
+		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectList(ctx, req.(*HomeRecommendSubjectListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sms_HomeRecommendSubjectUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HomeRecommendSubjectService_HomeRecommendSubjectUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HomeRecommendSubjectUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SmsServer).HomeRecommendSubjectUpdate(ctx, in)
+		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeRecommendSubjectUpdate",
+		FullMethod: "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectUpdate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeRecommendSubjectUpdate(ctx, req.(*HomeRecommendSubjectUpdateReq))
+		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectUpdate(ctx, req.(*HomeRecommendSubjectUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sms_HomeRecommendSubjectDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HomeRecommendSubjectService_HomeRecommendSubjectDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HomeRecommendSubjectDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SmsServer).HomeRecommendSubjectDelete(ctx, in)
+		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/smsclient.Sms/HomeRecommendSubjectDelete",
+		FullMethod: "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectDelete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmsServer).HomeRecommendSubjectDelete(ctx, req.(*HomeRecommendSubjectDeleteReq))
+		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectDelete(ctx, req.(*HomeRecommendSubjectDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Sms_ServiceDesc is the grpc.ServiceDesc for Sms service.
+// HomeRecommendSubjectService_ServiceDesc is the grpc.ServiceDesc for HomeRecommendSubjectService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Sms_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.Sms",
-	HandlerType: (*SmsServer)(nil),
+var HomeRecommendSubjectService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "smsclient.HomeRecommendSubjectService",
+	HandlerType: (*HomeRecommendSubjectServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CouponAdd",
-			Handler:    _Sms_CouponAdd_Handler,
-		},
-		{
-			MethodName: "CouponList",
-			Handler:    _Sms_CouponList_Handler,
-		},
-		{
-			MethodName: "CouponUpdate",
-			Handler:    _Sms_CouponUpdate_Handler,
-		},
-		{
-			MethodName: "CouponDelete",
-			Handler:    _Sms_CouponDelete_Handler,
-		},
-		{
-			MethodName: "CouponHistoryAdd",
-			Handler:    _Sms_CouponHistoryAdd_Handler,
-		},
-		{
-			MethodName: "CouponHistoryList",
-			Handler:    _Sms_CouponHistoryList_Handler,
-		},
-		{
-			MethodName: "CouponHistoryUpdate",
-			Handler:    _Sms_CouponHistoryUpdate_Handler,
-		},
-		{
-			MethodName: "CouponHistoryDelete",
-			Handler:    _Sms_CouponHistoryDelete_Handler,
-		},
-		{
-			MethodName: "CouponProductCategoryRelationAdd",
-			Handler:    _Sms_CouponProductCategoryRelationAdd_Handler,
-		},
-		{
-			MethodName: "CouponProductCategoryRelationList",
-			Handler:    _Sms_CouponProductCategoryRelationList_Handler,
-		},
-		{
-			MethodName: "CouponProductCategoryRelationUpdate",
-			Handler:    _Sms_CouponProductCategoryRelationUpdate_Handler,
-		},
-		{
-			MethodName: "CouponProductCategoryRelationDelete",
-			Handler:    _Sms_CouponProductCategoryRelationDelete_Handler,
-		},
-		{
-			MethodName: "CouponProductRelationAdd",
-			Handler:    _Sms_CouponProductRelationAdd_Handler,
-		},
-		{
-			MethodName: "CouponProductRelationList",
-			Handler:    _Sms_CouponProductRelationList_Handler,
-		},
-		{
-			MethodName: "CouponProductRelationUpdate",
-			Handler:    _Sms_CouponProductRelationUpdate_Handler,
-		},
-		{
-			MethodName: "CouponProductRelationDelete",
-			Handler:    _Sms_CouponProductRelationDelete_Handler,
-		},
-		{
-			MethodName: "FlashPromotionLogAdd",
-			Handler:    _Sms_FlashPromotionLogAdd_Handler,
-		},
-		{
-			MethodName: "FlashPromotionLogList",
-			Handler:    _Sms_FlashPromotionLogList_Handler,
-		},
-		{
-			MethodName: "FlashPromotionLogUpdate",
-			Handler:    _Sms_FlashPromotionLogUpdate_Handler,
-		},
-		{
-			MethodName: "FlashPromotionLogDelete",
-			Handler:    _Sms_FlashPromotionLogDelete_Handler,
-		},
-		{
-			MethodName: "FlashPromotionAdd",
-			Handler:    _Sms_FlashPromotionAdd_Handler,
-		},
-		{
-			MethodName: "FlashPromotionList",
-			Handler:    _Sms_FlashPromotionList_Handler,
-		},
-		{
-			MethodName: "FlashPromotionUpdate",
-			Handler:    _Sms_FlashPromotionUpdate_Handler,
-		},
-		{
-			MethodName: "FlashPromotionDelete",
-			Handler:    _Sms_FlashPromotionDelete_Handler,
-		},
-		{
-			MethodName: "FlashPromotionListByDate",
-			Handler:    _Sms_FlashPromotionListByDate_Handler,
-		},
-		{
-			MethodName: "FlashPromotionProductRelationAdd",
-			Handler:    _Sms_FlashPromotionProductRelationAdd_Handler,
-		},
-		{
-			MethodName: "FlashPromotionProductRelationList",
-			Handler:    _Sms_FlashPromotionProductRelationList_Handler,
-		},
-		{
-			MethodName: "FlashPromotionProductRelationUpdate",
-			Handler:    _Sms_FlashPromotionProductRelationUpdate_Handler,
-		},
-		{
-			MethodName: "FlashPromotionProductRelationDelete",
-			Handler:    _Sms_FlashPromotionProductRelationDelete_Handler,
-		},
-		{
-			MethodName: "FlashPromotionSessionAdd",
-			Handler:    _Sms_FlashPromotionSessionAdd_Handler,
-		},
-		{
-			MethodName: "FlashPromotionSessionList",
-			Handler:    _Sms_FlashPromotionSessionList_Handler,
-		},
-		{
-			MethodName: "FlashPromotionSessionUpdate",
-			Handler:    _Sms_FlashPromotionSessionUpdate_Handler,
-		},
-		{
-			MethodName: "FlashPromotionSessionDelete",
-			Handler:    _Sms_FlashPromotionSessionDelete_Handler,
-		},
-		{
-			MethodName: "FlashPromotionSessionByTime",
-			Handler:    _Sms_FlashPromotionSessionByTime_Handler,
-		},
-		{
-			MethodName: "HomeAdvertiseAdd",
-			Handler:    _Sms_HomeAdvertiseAdd_Handler,
-		},
-		{
-			MethodName: "HomeAdvertiseList",
-			Handler:    _Sms_HomeAdvertiseList_Handler,
-		},
-		{
-			MethodName: "HomeAdvertiseUpdate",
-			Handler:    _Sms_HomeAdvertiseUpdate_Handler,
-		},
-		{
-			MethodName: "HomeAdvertiseDelete",
-			Handler:    _Sms_HomeAdvertiseDelete_Handler,
-		},
-		{
-			MethodName: "HomeBrandAdd",
-			Handler:    _Sms_HomeBrandAdd_Handler,
-		},
-		{
-			MethodName: "HomeBrandList",
-			Handler:    _Sms_HomeBrandList_Handler,
-		},
-		{
-			MethodName: "HomeBrandUpdate",
-			Handler:    _Sms_HomeBrandUpdate_Handler,
-		},
-		{
-			MethodName: "HomeBrandDelete",
-			Handler:    _Sms_HomeBrandDelete_Handler,
-		},
-		{
-			MethodName: "HomeNewProductAdd",
-			Handler:    _Sms_HomeNewProductAdd_Handler,
-		},
-		{
-			MethodName: "HomeNewProductList",
-			Handler:    _Sms_HomeNewProductList_Handler,
-		},
-		{
-			MethodName: "HomeNewProductUpdate",
-			Handler:    _Sms_HomeNewProductUpdate_Handler,
-		},
-		{
-			MethodName: "HomeNewProductDelete",
-			Handler:    _Sms_HomeNewProductDelete_Handler,
-		},
-		{
-			MethodName: "HomeRecommendProductAdd",
-			Handler:    _Sms_HomeRecommendProductAdd_Handler,
-		},
-		{
-			MethodName: "HomeRecommendProductList",
-			Handler:    _Sms_HomeRecommendProductList_Handler,
-		},
-		{
-			MethodName: "HomeRecommendProductUpdate",
-			Handler:    _Sms_HomeRecommendProductUpdate_Handler,
-		},
-		{
-			MethodName: "HomeRecommendProductDelete",
-			Handler:    _Sms_HomeRecommendProductDelete_Handler,
-		},
-		{
 			MethodName: "HomeRecommendSubjectAdd",
-			Handler:    _Sms_HomeRecommendSubjectAdd_Handler,
+			Handler:    _HomeRecommendSubjectService_HomeRecommendSubjectAdd_Handler,
 		},
 		{
 			MethodName: "HomeRecommendSubjectList",
-			Handler:    _Sms_HomeRecommendSubjectList_Handler,
+			Handler:    _HomeRecommendSubjectService_HomeRecommendSubjectList_Handler,
 		},
 		{
 			MethodName: "HomeRecommendSubjectUpdate",
-			Handler:    _Sms_HomeRecommendSubjectUpdate_Handler,
+			Handler:    _HomeRecommendSubjectService_HomeRecommendSubjectUpdate_Handler,
 		},
 		{
 			MethodName: "HomeRecommendSubjectDelete",
-			Handler:    _Sms_HomeRecommendSubjectDelete_Handler,
+			Handler:    _HomeRecommendSubjectService_HomeRecommendSubjectDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

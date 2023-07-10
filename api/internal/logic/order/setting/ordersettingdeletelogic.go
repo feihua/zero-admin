@@ -26,7 +26,7 @@ func NewOrderSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *OrderSettingDeleteLogic) OrderSettingDelete(req types.DeleteOrderSettingReq) (*types.DeleteOrderSettingResp, error) {
-	_, err := l.svcCtx.Oms.OrderSettingDelete(l.ctx, &omsclient.OrderSettingDeleteReq{
+	_, err := l.svcCtx.OrderSettingService.OrderSettingDelete(l.ctx, &omsclient.OrderSettingDeleteReq{
 		Ids: req.Ids,
 	})
 

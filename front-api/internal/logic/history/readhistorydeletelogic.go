@@ -25,7 +25,7 @@ func NewReadHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ReadHistoryDeleteLogic) ReadHistoryDelete(req *types.ReadHistoryDeleteReq) (resp *types.ReadHistoryDeleteResp, err error) {
-	_, _ = l.svcCtx.Ums.MemberReadHistoryDelete(l.ctx, &umsclient.MemberReadHistoryDeleteReq{
+	_, _ = l.svcCtx.MemberReadHistoryService.MemberReadHistoryDelete(l.ctx, &umsclient.MemberReadHistoryDeleteReq{
 		Ids:      req.Ids,
 		MemberId: l.ctx.Value("memberId").(int64),
 	})

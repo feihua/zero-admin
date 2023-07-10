@@ -26,7 +26,7 @@ func NewCouponHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *CouponHistoryDeleteLogic) CouponHistoryDelete(req types.DeleteCouponHistoryReq) (*types.DeleteCouponHistoryResp, error) {
-	_, err := l.svcCtx.Sms.CouponHistoryDelete(l.ctx, &smsclient.CouponHistoryDeleteReq{
+	_, err := l.svcCtx.CouponHistoryService.CouponHistoryDelete(l.ctx, &smsclient.CouponHistoryDeleteReq{
 		Ids: req.Ids,
 	})
 

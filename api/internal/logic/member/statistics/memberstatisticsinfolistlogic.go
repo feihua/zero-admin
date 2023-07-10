@@ -27,7 +27,7 @@ func NewMemberStatisticsInfoListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(req types.ListMemberStatisticsInfoReq) (*types.ListMemberStatisticsInfoResp, error) {
-	resp, err := l.svcCtx.Ums.MemberStatisticsInfoList(l.ctx, &umsclient.MemberStatisticsInfoListReq{
+	resp, err := l.svcCtx.MemberStatisticsInfoService.MemberStatisticsInfoList(l.ctx, &umsclient.MemberStatisticsInfoListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

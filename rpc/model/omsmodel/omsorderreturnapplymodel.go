@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/oms/oms"
+	"zero-admin/rpc/oms/omsclient"
 )
 
 var _ OmsOrderReturnApplyModel = (*customOmsOrderReturnApplyModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customOmsOrderReturnApplyModel.
 	OmsOrderReturnApplyModel interface {
 		omsOrderReturnApplyModel
-		Count(ctx context.Context, in *oms.OrderReturnApplyListReq) (int64, error)
-		FindAll(ctx context.Context, in *oms.OrderReturnApplyListReq) (*[]OmsOrderReturnApply, error)
+		Count(ctx context.Context, in *omsclient.OrderReturnApplyListReq) (int64, error)
+		FindAll(ctx context.Context, in *omsclient.OrderReturnApplyListReq) (*[]OmsOrderReturnApply, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewOmsOrderReturnApplyModel(conn sqlx.SqlConn) OmsOrderReturnApplyModel {
 	}
 }
 
-func (m *customOmsOrderReturnApplyModel) FindAll(ctx context.Context, in *oms.OrderReturnApplyListReq) (*[]OmsOrderReturnApply, error) {
+func (m *customOmsOrderReturnApplyModel) FindAll(ctx context.Context, in *omsclient.OrderReturnApplyListReq) (*[]OmsOrderReturnApply, error) {
 
 	where := "1=1"
 	if len(in.OrderSn) > 0 {
@@ -66,7 +66,7 @@ func (m *customOmsOrderReturnApplyModel) FindAll(ctx context.Context, in *oms.Or
 	}
 }
 
-func (m *customOmsOrderReturnApplyModel) Count(ctx context.Context, in *oms.OrderReturnApplyListReq) (int64, error) {
+func (m *customOmsOrderReturnApplyModel) Count(ctx context.Context, in *omsclient.OrderReturnApplyListReq) (int64, error) {
 	where := "1=1"
 	if len(in.OrderSn) > 0 {
 		where = where + fmt.Sprintf(" AND order_sn like '%%%s%%'", in.OrderSn)

@@ -27,7 +27,7 @@ func NewFeightTemplateListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *FeightTemplateListLogic) FeightTemplateList(req types.ListFeightTemplateReq) (*types.ListFeightTemplateResp, error) {
-	resp, err := l.svcCtx.Pms.FeightTemplateList(l.ctx, &pmsclient.FeightTemplateListReq{
+	resp, err := l.svcCtx.FeightTemplateService.FeightTemplateList(l.ctx, &pmsclient.FeightTemplateListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

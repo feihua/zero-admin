@@ -27,7 +27,7 @@ func NewOrderSettingListLogic(ctx context.Context, svcCtx *svc.ServiceContext) O
 }
 
 func (l *OrderSettingListLogic) OrderSettingList(req types.ListOrderSettingReq) (*types.ListOrderSettingResp, error) {
-	resp, err := l.svcCtx.Oms.OrderSettingList(l.ctx, &omsclient.OrderSettingListReq{
+	resp, err := l.svcCtx.OrderSettingService.OrderSettingList(l.ctx, &omsclient.OrderSettingListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

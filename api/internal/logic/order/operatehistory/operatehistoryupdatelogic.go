@@ -27,7 +27,7 @@ func NewOperateHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *OperateHistoryUpdateLogic) OperateHistoryUpdate(req types.UpdateOperateHistoryReq) (*types.UpdateOperateHistoryResp, error) {
-	_, err := l.svcCtx.Oms.OrderOperateHistoryUpdate(l.ctx, &omsclient.OrderOperateHistoryUpdateReq{
+	_, err := l.svcCtx.OrderOperateHistoryService.OrderOperateHistoryUpdate(l.ctx, &omsclient.OrderOperateHistoryUpdateReq{
 		Id:          req.Id,
 		OrderId:     req.OrderId,
 		OperateMan:  req.OperateMan,

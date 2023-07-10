@@ -102,18 +102,26 @@ message CouponListResp {
   int64 total = 1;
   repeated  CouponListData list = 2;
 }
+service CouponService {
 
+  rpc CouponAdd(CouponAddReq) returns(CouponAddResp);
+  rpc CouponList(CouponListReq) returns(CouponListResp);
+  rpc CouponUpdate(CouponUpdateReq) returns(CouponUpdateResp);
+  rpc CouponDelete(CouponDeleteReq) returns(CouponDeleteResp);
+
+
+}
 message CouponHistoryAddReq {
-  int64     	CouponId   = 2;
-  int64     	MemberId      = 3;
-  string    	CouponCode     = 4;
-  string    	MemberNickname = 5;
-  int64     	GetType        = 6;
-  string 	CreateTime     = 7;
-  int64     	UseStatus      = 8;
-  string 	UseTime        = 9;
-  int64     	OrderId        = 10;
-  string    	OrderSn        = 11;
+  int64      CouponId = 2;
+  int64      MemberId = 3;
+  string      CouponCode = 4;
+  string      MemberNickname = 5;
+  int64      GetType = 6;
+  string  CreateTime = 7;
+  int64      UseStatus = 8;
+  string  UseTime = 9;
+  int64      OrderId = 10;
+  string      OrderSn = 11;
 }
 
 message CouponHistoryAddResp {
@@ -126,17 +134,17 @@ message CouponHistoryListReq {
 }
 
 message CouponHistoryListData{
-  int64     	Id       = 1;
-  int64     	CouponId   = 2;
-  int64     	MemberId      = 3;
-  string    	CouponCode     = 4;
-  string    	MemberNickname = 5;
-  int64     	GetType        = 6;
-  string 	CreateTime     = 7;
-  int64     	UseStatus      = 8;
-  string 	UseTime        = 9;
-  int64     	OrderId        = 10;
-  string    	OrderSn        = 11;
+  int64      Id = 1;
+  int64      CouponId = 2;
+  int64      MemberId = 3;
+  string      CouponCode = 4;
+  string      MemberNickname = 5;
+  int64      GetType = 6;
+  string  CreateTime = 7;
+  int64      UseStatus = 8;
+  string  UseTime = 9;
+  int64      OrderId = 10;
+  string      OrderSn = 11;
 
 }
 
@@ -146,17 +154,17 @@ message CouponHistoryListResp {
 }
 
 message CouponHistoryUpdateReq {
-  int64     	Id       = 1;
-  int64     	CouponId   = 2;
-  int64     	MemberId      = 3;
-  string    	CouponCode     = 4;
-  string    	MemberNickname = 5;
-  int64     	GetType        = 6;
-  string 	CreateTime     = 7;
-  int64     	UseStatus      = 8;
-  string 	UseTime        = 9;
-  int64     	OrderId        = 10;
-  string    	OrderSn        = 11;
+  int64      Id = 1;
+  int64      CouponId = 2;
+  int64      MemberId = 3;
+  string      CouponCode = 4;
+  string      MemberNickname = 5;
+  int64      GetType = 6;
+  string  CreateTime = 7;
+  int64      UseStatus = 8;
+  string  UseTime = 9;
+  int64      OrderId = 10;
+  string      OrderSn = 11;
 }
 
 message CouponHistoryUpdateResp {
@@ -170,13 +178,21 @@ message CouponHistoryDeleteReq {
 message CouponHistoryDeleteResp {
   string pong = 1;
 }
+service CouponHistoryService {
 
+  rpc CouponHistoryAdd(CouponHistoryAddReq) returns(CouponHistoryAddResp);
+  rpc CouponHistoryList(CouponHistoryListReq) returns(CouponHistoryListResp);
+  rpc CouponHistoryUpdate(CouponHistoryUpdateReq) returns(CouponHistoryUpdateResp);
+  rpc CouponHistoryDelete(CouponHistoryDeleteReq) returns(CouponHistoryDeleteResp);
+
+
+}
 
 message CouponProductCategoryRelationAddReq {
-  int64 	CouponId  = 2;
-  int64 	ProductCategoryId = 3;
-  string	ProductCategoryName  = 4;
-  string	ParentCategoryName  = 5;
+  int64  CouponId = 2;
+  int64  ProductCategoryId = 3;
+  string  ProductCategoryName = 4;
+  string  ParentCategoryName = 5;
 }
 
 message CouponProductCategoryRelationAddResp {
@@ -189,11 +205,11 @@ message CouponProductCategoryRelationListReq {
 }
 
 message CouponProductCategoryRelationListData{
-  int64 	Id      = 1;
-  int64 	CouponId  = 2;
-  int64 	ProductCategoryId = 3;
-  string	ProductCategoryName  = 4;
-  string	ParentCategoryName  = 5;
+  int64  Id = 1;
+  int64  CouponId = 2;
+  int64  ProductCategoryId = 3;
+  string  ProductCategoryName = 4;
+  string  ParentCategoryName = 5;
 
 }
 
@@ -203,11 +219,11 @@ message CouponProductCategoryRelationListResp {
 }
 
 message CouponProductCategoryRelationUpdateReq {
-  int64 	Id      = 1;
-  int64 	CouponId  = 2;
-  int64 	ProductCategoryId = 3;
-  string	ProductCategoryName  = 4;
-  string	ParentCategoryName  = 5;
+  int64  Id = 1;
+  int64  CouponId = 2;
+  int64  ProductCategoryId = 3;
+  string  ProductCategoryName = 4;
+  string  ParentCategoryName = 5;
 }
 
 message CouponProductCategoryRelationUpdateResp {
@@ -222,12 +238,20 @@ message CouponProductCategoryRelationDeleteResp {
   string pong = 1;
 }
 
+service CouponProductCategoryRelationService {
 
+  rpc CouponProductCategoryRelationAdd(CouponProductCategoryRelationAddReq) returns(CouponProductCategoryRelationAddResp);
+  rpc CouponProductCategoryRelationList(CouponProductCategoryRelationListReq) returns(CouponProductCategoryRelationListResp);
+  rpc CouponProductCategoryRelationUpdate(CouponProductCategoryRelationUpdateReq) returns(CouponProductCategoryRelationUpdateResp);
+  rpc CouponProductCategoryRelationDelete(CouponProductCategoryRelationDeleteReq) returns(CouponProductCategoryRelationDeleteResp);
+
+
+}
 message CouponProductRelationAddReq {
-  int64  	CouponId   = 2;
-  int64  	ProductId   = 3;
-  string 	ProductName = 4;
-  string 	ProductSn   = 5;
+  int64    CouponId = 2;
+  int64    ProductId = 3;
+  string  ProductName = 4;
+  string  ProductSn = 5;
 }
 
 message CouponProductRelationAddResp {
@@ -240,11 +264,11 @@ message CouponProductRelationListReq {
 }
 
 message CouponProductRelationListData{
-  int64  	Id      = 1;
-  int64  	CouponId   = 2;
-  int64  	ProductId   = 3;
-  string 	ProductName = 4;
-  string 	ProductSn   = 5;
+  int64    Id = 1;
+  int64    CouponId = 2;
+  int64    ProductId = 3;
+  string  ProductName = 4;
+  string  ProductSn = 5;
 
 }
 
@@ -254,11 +278,11 @@ message CouponProductRelationListResp {
 }
 
 message CouponProductRelationUpdateReq {
-  int64  	Id      = 1;
-  int64  	CouponId   = 2;
-  int64  	ProductId   = 3;
-  string 	ProductName = 4;
-  string 	ProductSn   = 5;
+  int64    Id = 1;
+  int64    CouponId = 2;
+  int64    ProductId = 3;
+  string  ProductName = 4;
+  string  ProductSn = 5;
 }
 
 message CouponProductRelationUpdateResp {
@@ -272,7 +296,15 @@ message CouponProductRelationDeleteReq {
 message CouponProductRelationDeleteResp {
   string pong = 1;
 }
+service CouponProductRelationService {
 
+  rpc CouponProductRelationAdd(CouponProductRelationAddReq) returns(CouponProductRelationAddResp);
+  rpc CouponProductRelationList(CouponProductRelationListReq) returns(CouponProductRelationListResp);
+  rpc CouponProductRelationUpdate(CouponProductRelationUpdateReq) returns(CouponProductRelationUpdateResp);
+  rpc CouponProductRelationDelete(CouponProductRelationDeleteReq) returns(CouponProductRelationDeleteResp);
+
+
+}
 message FlashPromotionAddReq {
   string Title = 1; //标题
   string StartDate = 2; //开始日期
@@ -338,7 +370,15 @@ message FlashPromotionListResp {
   int64 total = 1;
   repeated  FlashPromotionListData list = 2;
 }
+service FlashPromotionService {
 
+  rpc FlashPromotionAdd(FlashPromotionAddReq) returns(FlashPromotionAddResp);
+  rpc FlashPromotionList(FlashPromotionListReq) returns(FlashPromotionListResp);
+  rpc FlashPromotionUpdate(FlashPromotionUpdateReq) returns(FlashPromotionUpdateResp);
+  rpc FlashPromotionDelete(FlashPromotionDeleteReq) returns(FlashPromotionDeleteResp);
+  rpc FlashPromotionListByDate(FlashPromotionListByDateReq) returns(FlashPromotionListByDateResp);
+
+}
 
 message FlashPromotionLogAddReq {
   int64 MemberId = 1; //会员id
@@ -398,7 +438,15 @@ message FlashPromotionLogListResp {
   repeated  FlashPromotionLogListData list = 2;
 }
 
+service FlashPromotionLogService {
 
+  rpc FlashPromotionLogAdd(FlashPromotionLogAddReq) returns(FlashPromotionLogAddResp);
+  rpc FlashPromotionLogList(FlashPromotionLogListReq) returns(FlashPromotionLogListResp);
+  rpc FlashPromotionLogUpdate(FlashPromotionLogUpdateReq) returns(FlashPromotionLogUpdateResp);
+  rpc FlashPromotionLogDelete(FlashPromotionLogDeleteReq) returns(FlashPromotionLogDeleteResp);
+
+
+}
 message FlashPromotionProductRelationAddReq {
   int64 FlashPromotionId = 1; //限时购id
   int64 FlashPromotionSessionId = 2; //编号
@@ -462,7 +510,15 @@ message FlashPromotionProductRelationListResp {
   repeated  FlashPromotionProductRelationListData list = 2;
 }
 
+service FlashPromotionProductRelationService {
 
+  rpc FlashPromotionProductRelationAdd(FlashPromotionProductRelationAddReq) returns(FlashPromotionProductRelationAddResp);
+  rpc FlashPromotionProductRelationList(FlashPromotionProductRelationListReq) returns(FlashPromotionProductRelationListResp);
+  rpc FlashPromotionProductRelationUpdate(FlashPromotionProductRelationUpdateReq) returns(FlashPromotionProductRelationUpdateResp);
+  rpc FlashPromotionProductRelationDelete(FlashPromotionProductRelationDeleteReq) returns(FlashPromotionProductRelationDeleteResp);
+
+
+}
 message FlashPromotionSessionAddReq {
   string Name = 1; //场次名称
   string StartTime = 2; //每日开始时间
@@ -528,7 +584,17 @@ message FlashPromotionSessionListResp {
   repeated  FlashPromotionSessionListData list = 2;
 }
 
+service FlashPromotionSessionService {
 
+
+  rpc FlashPromotionSessionAdd(FlashPromotionSessionAddReq) returns(FlashPromotionSessionAddResp);
+  rpc FlashPromotionSessionList(FlashPromotionSessionListReq) returns(FlashPromotionSessionListResp);
+  rpc FlashPromotionSessionUpdate(FlashPromotionSessionUpdateReq) returns(FlashPromotionSessionUpdateResp);
+  rpc FlashPromotionSessionDelete(FlashPromotionSessionDeleteReq) returns(FlashPromotionSessionDeleteResp);
+  rpc FlashPromotionSessionByTime(FlashPromotionSessionByTimeReq) returns(FlashPromotionSessionByTimeResp);
+
+
+}
 message HomeAdvertiseAddReq {
   int64 Id = 1; //
   string Name = 2; //名称
@@ -608,7 +674,15 @@ message HomeAdvertiseListResp {
   repeated  HomeAdvertiseListData list = 2;
 }
 
+service HomeAdvertiseService {
 
+  rpc HomeAdvertiseAdd(HomeAdvertiseAddReq) returns(HomeAdvertiseAddResp);
+  rpc HomeAdvertiseList(HomeAdvertiseListReq) returns(HomeAdvertiseListResp);
+  rpc HomeAdvertiseUpdate(HomeAdvertiseUpdateReq) returns(HomeAdvertiseUpdateResp);
+  rpc HomeAdvertiseDelete(HomeAdvertiseDeleteReq) returns(HomeAdvertiseDeleteResp);
+
+
+}
 message HomeBrandAddReq {
   repeated HomeBrandAddData BrandAddData = 1; //
 
@@ -668,7 +742,15 @@ message HomeBrandListResp {
   repeated  HomeBrandListData list = 2;
 }
 
+service HomeBrandService {
 
+  rpc HomeBrandAdd(HomeBrandAddReq) returns(HomeBrandAddResp);
+  rpc HomeBrandList(HomeBrandListReq) returns(HomeBrandListResp);
+  rpc HomeBrandUpdate(HomeBrandUpdateReq) returns(HomeBrandUpdateResp);
+  rpc HomeBrandDelete(HomeBrandDeleteReq) returns(HomeBrandDeleteResp);
+
+
+}
 message HomeNewProductAddReq {
   repeated HomeNewProductAddData NewProductAddData = 1;
 
@@ -730,7 +812,15 @@ message HomeNewProductListResp {
   repeated  HomeNewProductListData list = 2;
 }
 
+service HomeNewProductService {
 
+  rpc HomeNewProductAdd(HomeNewProductAddReq) returns(HomeNewProductAddResp);
+  rpc HomeNewProductList(HomeNewProductListReq) returns(HomeNewProductListResp);
+  rpc HomeNewProductUpdate(HomeNewProductUpdateReq) returns(HomeNewProductUpdateResp);
+  rpc HomeNewProductDelete(HomeNewProductDeleteReq) returns(HomeNewProductDeleteResp);
+
+
+}
 message HomeRecommendProductAddReq {
   repeated HomeRecommendProductAddData RecommendProductAddData = 1; //
 
@@ -749,7 +839,7 @@ message HomeRecommendProductAddResp {
 }
 
 message HomeRecommendProductDeleteReq {
- repeated int64 ids = 1;
+  repeated int64 ids = 1;
 }
 
 message HomeRecommendProductDeleteResp {
@@ -792,7 +882,15 @@ message HomeRecommendProductListResp {
 }
 
 
+service HomeRecommendProductService {
 
+  rpc HomeRecommendProductAdd(HomeRecommendProductAddReq) returns(HomeRecommendProductAddResp);
+  rpc HomeRecommendProductList(HomeRecommendProductListReq) returns(HomeRecommendProductListResp);
+  rpc HomeRecommendProductUpdate(HomeRecommendProductUpdateReq) returns(HomeRecommendProductUpdateResp);
+  rpc HomeRecommendProductDelete(HomeRecommendProductDeleteReq) returns(HomeRecommendProductDeleteResp);
+
+
+}
 message HomeRecommendSubjectAddReq {
   repeated HomeRecommendSubjectAddData RecommendSubjectAddData = 1; //
 
@@ -854,69 +952,7 @@ message HomeRecommendSubjectListResp {
 }
 
 
-service Sms {
-
-  rpc CouponAdd(CouponAddReq) returns(CouponAddResp);
-  rpc CouponList(CouponListReq) returns(CouponListResp);
-  rpc CouponUpdate(CouponUpdateReq) returns(CouponUpdateResp);
-  rpc CouponDelete(CouponDeleteReq) returns(CouponDeleteResp);
-
-  rpc CouponHistoryAdd(CouponHistoryAddReq) returns(CouponHistoryAddResp);
-  rpc CouponHistoryList(CouponHistoryListReq) returns(CouponHistoryListResp);
-  rpc CouponHistoryUpdate(CouponHistoryUpdateReq) returns(CouponHistoryUpdateResp);
-  rpc CouponHistoryDelete(CouponHistoryDeleteReq) returns(CouponHistoryDeleteResp);
-
-  rpc CouponProductCategoryRelationAdd(CouponProductCategoryRelationAddReq) returns(CouponProductCategoryRelationAddResp);
-  rpc CouponProductCategoryRelationList(CouponProductCategoryRelationListReq) returns(CouponProductCategoryRelationListResp);
-  rpc CouponProductCategoryRelationUpdate(CouponProductCategoryRelationUpdateReq) returns(CouponProductCategoryRelationUpdateResp);
-  rpc CouponProductCategoryRelationDelete(CouponProductCategoryRelationDeleteReq) returns(CouponProductCategoryRelationDeleteResp);
-
-  rpc CouponProductRelationAdd(CouponProductRelationAddReq) returns(CouponProductRelationAddResp);
-  rpc CouponProductRelationList(CouponProductRelationListReq) returns(CouponProductRelationListResp);
-  rpc CouponProductRelationUpdate(CouponProductRelationUpdateReq) returns(CouponProductRelationUpdateResp);
-  rpc CouponProductRelationDelete(CouponProductRelationDeleteReq) returns(CouponProductRelationDeleteResp);
-
-  rpc FlashPromotionLogAdd(FlashPromotionLogAddReq) returns(FlashPromotionLogAddResp);
-  rpc FlashPromotionLogList(FlashPromotionLogListReq) returns(FlashPromotionLogListResp);
-  rpc FlashPromotionLogUpdate(FlashPromotionLogUpdateReq) returns(FlashPromotionLogUpdateResp);
-  rpc FlashPromotionLogDelete(FlashPromotionLogDeleteReq) returns(FlashPromotionLogDeleteResp);
-
-  rpc FlashPromotionAdd(FlashPromotionAddReq) returns(FlashPromotionAddResp);
-  rpc FlashPromotionList(FlashPromotionListReq) returns(FlashPromotionListResp);
-  rpc FlashPromotionUpdate(FlashPromotionUpdateReq) returns(FlashPromotionUpdateResp);
-  rpc FlashPromotionDelete(FlashPromotionDeleteReq) returns(FlashPromotionDeleteResp);
-  rpc FlashPromotionListByDate(FlashPromotionListByDateReq) returns(FlashPromotionListByDateResp);
-
-  rpc FlashPromotionProductRelationAdd(FlashPromotionProductRelationAddReq) returns(FlashPromotionProductRelationAddResp);
-  rpc FlashPromotionProductRelationList(FlashPromotionProductRelationListReq) returns(FlashPromotionProductRelationListResp);
-  rpc FlashPromotionProductRelationUpdate(FlashPromotionProductRelationUpdateReq) returns(FlashPromotionProductRelationUpdateResp);
-  rpc FlashPromotionProductRelationDelete(FlashPromotionProductRelationDeleteReq) returns(FlashPromotionProductRelationDeleteResp);
-
-  rpc FlashPromotionSessionAdd(FlashPromotionSessionAddReq) returns(FlashPromotionSessionAddResp);
-  rpc FlashPromotionSessionList(FlashPromotionSessionListReq) returns(FlashPromotionSessionListResp);
-  rpc FlashPromotionSessionUpdate(FlashPromotionSessionUpdateReq) returns(FlashPromotionSessionUpdateResp);
-  rpc FlashPromotionSessionDelete(FlashPromotionSessionDeleteReq) returns(FlashPromotionSessionDeleteResp);
-  rpc FlashPromotionSessionByTime(FlashPromotionSessionByTimeReq) returns(FlashPromotionSessionByTimeResp);
-
-  rpc HomeAdvertiseAdd(HomeAdvertiseAddReq) returns(HomeAdvertiseAddResp);
-  rpc HomeAdvertiseList(HomeAdvertiseListReq) returns(HomeAdvertiseListResp);
-  rpc HomeAdvertiseUpdate(HomeAdvertiseUpdateReq) returns(HomeAdvertiseUpdateResp);
-  rpc HomeAdvertiseDelete(HomeAdvertiseDeleteReq) returns(HomeAdvertiseDeleteResp);
-
-  rpc HomeBrandAdd(HomeBrandAddReq) returns(HomeBrandAddResp);
-  rpc HomeBrandList(HomeBrandListReq) returns(HomeBrandListResp);
-  rpc HomeBrandUpdate(HomeBrandUpdateReq) returns(HomeBrandUpdateResp);
-  rpc HomeBrandDelete(HomeBrandDeleteReq) returns(HomeBrandDeleteResp);
-
-  rpc HomeNewProductAdd(HomeNewProductAddReq) returns(HomeNewProductAddResp);
-  rpc HomeNewProductList(HomeNewProductListReq) returns(HomeNewProductListResp);
-  rpc HomeNewProductUpdate(HomeNewProductUpdateReq) returns(HomeNewProductUpdateResp);
-  rpc HomeNewProductDelete(HomeNewProductDeleteReq) returns(HomeNewProductDeleteResp);
-
-  rpc HomeRecommendProductAdd(HomeRecommendProductAddReq) returns(HomeRecommendProductAddResp);
-  rpc HomeRecommendProductList(HomeRecommendProductListReq) returns(HomeRecommendProductListResp);
-  rpc HomeRecommendProductUpdate(HomeRecommendProductUpdateReq) returns(HomeRecommendProductUpdateResp);
-  rpc HomeRecommendProductDelete(HomeRecommendProductDeleteReq) returns(HomeRecommendProductDeleteResp);
+service HomeRecommendSubjectService {
 
   rpc HomeRecommendSubjectAdd(HomeRecommendSubjectAddReq) returns(HomeRecommendSubjectAddResp);
   rpc HomeRecommendSubjectList(HomeRecommendSubjectListReq) returns(HomeRecommendSubjectListResp);

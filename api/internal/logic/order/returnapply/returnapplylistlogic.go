@@ -27,7 +27,7 @@ func NewReturnApplyListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Re
 }
 
 func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*types.ListReturnApplyResp, error) {
-	resp, err := l.svcCtx.Oms.OrderReturnApplyList(l.ctx, &omsclient.OrderReturnApplyListReq{
+	resp, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyList(l.ctx, &omsclient.OrderReturnApplyListReq{
 		Current:        req.Current,
 		PageSize:       req.PageSize,
 		OrderSn:        req.OrderSn,

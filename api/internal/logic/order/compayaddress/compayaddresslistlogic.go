@@ -27,7 +27,7 @@ func NewCompayAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *CompayAddressListLogic) CompayAddressList(req types.ListCompayAddressReq) (*types.ListCompayAddressResp, error) {
-	resp, err := l.svcCtx.Oms.CompanyAddressList(l.ctx, &omsclient.CompanyAddressListReq{
+	resp, err := l.svcCtx.CompanyAddressService.CompanyAddressList(l.ctx, &omsclient.CompanyAddressListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})

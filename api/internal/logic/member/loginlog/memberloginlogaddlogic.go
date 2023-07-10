@@ -27,7 +27,7 @@ func NewMemberLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberLoginLogAddLogic) MemberLoginLogAdd(req types.AddMemberLoginLogReq) (*types.AddMemberLoginLogResp, error) {
-	_, err := l.svcCtx.Ums.MemberLoginLogAdd(l.ctx, &umsclient.MemberLoginLogAddReq{
+	_, err := l.svcCtx.MemberLoginLogService.MemberLoginLogAdd(l.ctx, &umsclient.MemberLoginLogAddReq{
 		MemberId:   req.MemberId,
 		CreateTime: req.CreateTime,
 		Ip:         req.Ip,

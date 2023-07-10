@@ -26,7 +26,7 @@ func NewUpdateRoleMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) Upd
 }
 
 func (l *UpdateRoleMenuLogic) UpdateRoleMenu(req types.UpdateRoleMenuReq) (*types.UpdateRoleMenuResp, error) {
-	_, err := l.svcCtx.Sys.UpdateMenuRole(l.ctx, &sysclient.UpdateMenuRoleReq{
+	_, err := l.svcCtx.RoleService.UpdateMenuRole(l.ctx, &sysclient.UpdateMenuRoleReq{
 		RoleId:   req.RoleId,
 		MenuIds:  req.MenuIds,
 		CreateBy: l.ctx.Value("userName").(string),

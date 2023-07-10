@@ -25,7 +25,7 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) ReSe
 }
 
 func (l *ReSetPasswordLogic) ReSetPassword(req types.ReSetPasswordReq) (*types.ReSetPasswordResp, error) {
-	_, _ = l.svcCtx.Sys.ReSetPassword(l.ctx, &sysclient.ReSetPasswordReq{
+	_, _ = l.svcCtx.UserService.ReSetPassword(l.ctx, &sysclient.ReSetPasswordReq{
 		Id:           req.Id,
 		LastUpdateBy: l.ctx.Value("userName").(string),
 	})

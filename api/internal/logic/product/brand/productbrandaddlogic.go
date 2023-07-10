@@ -27,7 +27,7 @@ func NewProductBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Pr
 }
 
 func (l *ProductBrandAddLogic) ProductBrandAdd(req types.AddProductBrandReq) (*types.AddProductBrandResp, error) {
-	_, err := l.svcCtx.Pms.BrandAdd(l.ctx, &pmsclient.BrandAddReq{
+	_, err := l.svcCtx.BrandService.BrandAdd(l.ctx, &pmsclient.BrandAddReq{
 		Name:                req.Name,
 		FirstLetter:         req.FirstLetter,
 		Sort:                req.Sort,

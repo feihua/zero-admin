@@ -26,9 +26,9 @@ func NewAddReadHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *AddReadHistoryAddLogic) AddReadHistoryAdd(req *types.AddReadHistoryReq) (resp *types.AddReadHistoryResp, err error) {
-	member, _ := l.svcCtx.Ums.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: l.ctx.Value("memberId").(int64)})
+	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: l.ctx.Value("memberId").(int64)})
 
-	_, err = l.svcCtx.Ums.MemberProductCollectionAdd(l.ctx, &umsclient.MemberProductCollectionAddReq{
+	_, err = l.svcCtx.MemberReadHistoryService.MemberReadHistoryAdd(l.ctx, &umsclient.MemberReadHistoryAddReq{
 		MemberId:        member.Id,
 		MemberNickName:  member.Nickname,
 		MemberIcon:      member.Icon,

@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/pms/pms"
+	"zero-admin/rpc/pms/pmsclient"
 )
 
 var _ PmsProductAttributeCategoryModel = (*customPmsProductAttributeCategoryModel)(nil)
@@ -16,8 +16,8 @@ type (
 	// and implement the added methods in customPmsProductAttributeCategoryModel.
 	PmsProductAttributeCategoryModel interface {
 		pmsProductAttributeCategoryModel
-		Count(ctx context.Context, in *pms.ProductAttributeCategoryListReq) (int64, error)
-		FindAll(ctx context.Context, in *pms.ProductAttributeCategoryListReq) (*[]PmsProductAttributeCategory, error)
+		Count(ctx context.Context, in *pmsclient.ProductAttributeCategoryListReq) (int64, error)
+		FindAll(ctx context.Context, in *pmsclient.ProductAttributeCategoryListReq) (*[]PmsProductAttributeCategory, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -33,7 +33,7 @@ func NewPmsProductAttributeCategoryModel(conn sqlx.SqlConn) PmsProductAttributeC
 	}
 }
 
-func (m *customPmsProductAttributeCategoryModel) FindAll(ctx context.Context, in *pms.ProductAttributeCategoryListReq) (*[]PmsProductAttributeCategory, error) {
+func (m *customPmsProductAttributeCategoryModel) FindAll(ctx context.Context, in *pmsclient.ProductAttributeCategoryListReq) (*[]PmsProductAttributeCategory, error) {
 	where := "1=1"
 	if len(in.Name) > 0 {
 		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
@@ -51,7 +51,7 @@ func (m *customPmsProductAttributeCategoryModel) FindAll(ctx context.Context, in
 	}
 }
 
-func (m *customPmsProductAttributeCategoryModel) Count(ctx context.Context, in *pms.ProductAttributeCategoryListReq) (int64, error) {
+func (m *customPmsProductAttributeCategoryModel) Count(ctx context.Context, in *pmsclient.ProductAttributeCategoryListReq) (int64, error) {
 	where := "1=1"
 	if len(in.Name) > 0 {
 		where = where + fmt.Sprintf(" AND name like '%%%s%%'", in.Name)
