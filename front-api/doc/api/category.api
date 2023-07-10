@@ -1,42 +1,40 @@
 info(
-    desc: "分类相关"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "分类相关"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
-type CategoryReq struct {
-    ParentId int64 `path:"parentId"`         // 上级分类的编号：0表示一级分类
+type CategoryReq {
+	ParentId int64 `path:"parentId"` // 上级分类的编号：0表示一级分类
 }
 
-
-type CategoryResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data []CategoryData `json:"data"`
+type CategoryResp {
+	Code    int64          `json:"code"`
+	Message string         `json:"message"`
+	Data    []CategoryData `json:"data"`
 }
 
-type CategoryData struct {
-    Id int64 `json:"id"`
-    ParentId int64 `json:"parentId"`         // 上级分类的编号：0表示一级分类
-    Name string `json:"name"`
-    Level int64 `json:"level"`               // 分类级别：0->1级；1->2级
-    ProductCount int64 `json:"productCount"`
-    ProductUnit string `json:"productUnit"`
-    NavStatus int64 `json:"navStatus"`       // 是否显示在导航栏：0->不显示；1->显示
-    ShowStatus int64 `json:"showStatus"`     // 显示状态：0->不显示；1->显示
-    Sort int64 `json:"sort"`
-    Icon string `json:"icon"`                // 图标
-    Keywords string `json:"keywords"`
-    Description string `json:"description"`  // 描述
+type CategoryData {
+	Id           int64  `json:"id"`
+	ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
+	Name         string `json:"name"`
+	Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
+	ProductCount int64  `json:"productCount"`
+	ProductUnit  string `json:"productUnit"`
+	NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+	ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Sort         int64  `json:"sort"`
+	Icon         string `json:"icon"` // 图标
+	Keywords     string `json:"keywords"`
+	Description  string `json:"description"` // 描述
 }
-
 
 @server(
-    group: category
-    prefix: /api/home
+	group: category
+	prefix: /api/home
 )
 
 service front-api {
-    @handler ProductCateList
-    get /productCateList/:parentId (CategoryReq) returns (CategoryResp)
+	@handler ProductCateList
+	get /productCateList/:parentId (CategoryReq) returns (CategoryResp)
 }

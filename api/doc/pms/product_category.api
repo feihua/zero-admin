@@ -1,99 +1,99 @@
 info(
-    desc: "商品分类"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "商品分类"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addProductCategoryReq struct {
-        ParentId int64 `json:"parentId"`        // 上级分类的编号：0表示一级分类
-        Name string `json:"name"`
-        Level int64 `json:"level"`              // 分类级别：0->1级；1->2级
-        NavStatus int64 `json:"navStatus"`      // 是否显示在导航栏：0->不显示；1->显示
-        ShowStatus int64 `json:"showStatus"`    // 显示状态：0->不显示；1->显示
-        ProductUnit string `json:"productUnit"`
-        Sort int64 `json:"sort"`
-        Icon string `json:"icon"`               // 图标
-        Keywords string `json:"keywords,optional"`
-        Description string `json:"description,optional"` // 描述
-    }
-    addProductCategoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListProductCategoryReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Name string `json:"name,optional"`
-        ParentId int64 `json:"parentId,default=2"`         // 上级分类的编号：0表示一级分类
-        ShowStatus int64 `json:"showStatus,default=2"`     // 显示状态：0->不显示；1->显示
-    }
-    ListtProductCategoryData struct {
-        Id int64 `json:"id"`
-        ParentId int64 `json:"parentId"`         // 上级分类的编号：0表示一级分类
-        Name string `json:"name"`
-        Level int64 `json:"level"`               // 分类级别：0->1级；1->2级
-        ProductCount int64 `json:"productCount"`
-        ProductUnit string `json:"productUnit"`
-        NavStatus int64 `json:"navStatus"`       // 是否显示在导航栏：0->不显示；1->显示
-        ShowStatus int64 `json:"showStatus"`     // 显示状态：0->不显示；1->显示
-        Sort int64 `json:"sort"`
-        Icon string `json:"icon"`                // 图标
-        Keywords string `json:"keywords"`
-        Description string `json:"description"`  // 描述
-    }
-    ListProductCategoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtProductCategoryData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateProductCategoryReq struct {
-        Id int64 `json:"id"`
-        ParentId int64 `json:"parentId"`        // 上级分类的编号：0表示一级分类
-        Name string `json:"name"`
-        Level int64 `json:"level"`              // 分类级别：0->1级；1->2级
-        ProductCount int64 `json:"productCount"`
-        ProductUnit string `json:"productUnit"`
-        NavStatus int64 `json:"navStatus"`      // 是否显示在导航栏：0->不显示；1->显示
-        ShowStatus int64 `json:"showStatus"`    // 显示状态：0->不显示；1->显示
-        Sort int64 `json:"sort"`
-        Icon string `json:"icon"`               // 图标
-        Keywords string `json:"keywords"`
-        Description string `json:"description"` // 描述
-    }
-    UpdateProductCategoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteProductCategoryReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteProductCategoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addProductCategoryReq {
+		ParentId    int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
+		Name        string `json:"name"`
+		Level       int64  `json:"level"`      // 分类级别：0->1级；1->2级
+		NavStatus   int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+		ShowStatus  int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+		ProductUnit string `json:"productUnit"`
+		Sort        int64  `json:"sort"`
+		Icon        string `json:"icon"` // 图标
+		Keywords    string `json:"keywords,optional"`
+		Description string `json:"description,optional"` // 描述
+	}
+	addProductCategoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListProductCategoryReq {
+		Current    int64  `json:"current,default=1"`
+		PageSize   int64  `json:"pageSize,default=20"`
+		Name       string `json:"name,optional"`
+		ParentId   int64  `json:"parentId,default=2"`   // 上级分类的编号：0表示一级分类
+		ShowStatus int64  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+	}
+	ListtProductCategoryData {
+		Id           int64  `json:"id"`
+		ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
+		Name         string `json:"name"`
+		Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
+		ProductCount int64  `json:"productCount"`
+		ProductUnit  string `json:"productUnit"`
+		NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+		ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+		Sort         int64  `json:"sort"`
+		Icon         string `json:"icon"` // 图标
+		Keywords     string `json:"keywords"`
+		Description  string `json:"description"` // 描述
+	}
+	ListProductCategoryResp {
+		Code     string                      `json:"code"`
+		Message  string                      `json:"message"`
+		Current  int64                       `json:"current,default=1"`
+		Data     []*ListtProductCategoryData `json:"data"`
+		PageSize int64                       `json:"pageSize,default=20"`
+		Success  bool                        `json:"success"`
+		Total    int64                       `json:"total"`
+	}
+	UpdateProductCategoryReq {
+		Id           int64  `json:"id"`
+		ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
+		Name         string `json:"name"`
+		Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
+		ProductCount int64  `json:"productCount"`
+		ProductUnit  string `json:"productUnit"`
+		NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+		ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+		Sort         int64  `json:"sort"`
+		Icon         string `json:"icon"` // 图标
+		Keywords     string `json:"keywords"`
+		Description  string `json:"description"` // 描述
+	}
+	UpdateProductCategoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteProductCategoryReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteProductCategoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: product/category
-    prefix: /api/product/category
+	jwt: Auth
+	middleware: CheckUrl
+	group: product/category
+	prefix: /api/product/category
 )
 service admin-api {
-    @handler ProductCategoryAdd
-    post /add (addProductCategoryReq) returns (addProductCategoryResp)
-
-    @handler ProductCategoryList
-    post /list (ListProductCategoryReq) returns (ListProductCategoryResp)
-
-    @handler ProductCategoryUpdate
-    post /update (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
-
-    @handler ProductCategoryDelete
-    post /delete (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
+	@handler ProductCategoryAdd
+	post /add (addProductCategoryReq) returns (addProductCategoryResp)
+	
+	@handler ProductCategoryList
+	post /list (ListProductCategoryReq) returns (ListProductCategoryResp)
+	
+	@handler ProductCategoryUpdate
+	post /update (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
+	
+	@handler ProductCategoryDelete
+	post /delete (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
 }

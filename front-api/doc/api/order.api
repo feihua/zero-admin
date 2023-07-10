@@ -1,41 +1,39 @@
 info(
-    desc: "订单信息"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "订单信息"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
-
-type ReturnApplyReq struct {
-    OrderID int64 `json:"orderId"`
-    ProductID int64 `json:"productId"`
-    OrderSn string `json:"orderSn"`
-    MemberUsername string `json:"memberUsername"`
-    ReturnName string `json:"returnName"`
-    ReturnPhone string `json:"returnPhone"`
-    ProductPic string `json:"productPic"`
-    ProductName string `json:"productName"`
-    ProductBrand string `json:"productBrand"`
-    ProductAttr string `json:"productAttr"`
-    ProductCount int64 `json:"productCount"`
-    ProductPrice float32 `json:"productPrice"`
-    ProductRealPrice float32 `json:"productRealPrice"`
-    Reason string `json:"reason"`
-    Description string `json:"description"`
-    ProofPics string `json:"proofPics"`
+type ReturnApplyReq {
+	OrderID          int64   `json:"orderId"`
+	ProductID        int64   `json:"productId"`
+	OrderSn          string  `json:"orderSn"`
+	MemberUsername   string  `json:"memberUsername"`
+	ReturnName       string  `json:"returnName"`
+	ReturnPhone      string  `json:"returnPhone"`
+	ProductPic       string  `json:"productPic"`
+	ProductName      string  `json:"productName"`
+	ProductBrand     string  `json:"productBrand"`
+	ProductAttr      string  `json:"productAttr"`
+	ProductCount     int64   `json:"productCount"`
+	ProductPrice     float32 `json:"productPrice"`
+	ProductRealPrice float32 `json:"productRealPrice"`
+	Reason           string  `json:"reason"`
+	Description      string  `json:"description"`
+	ProofPics        string  `json:"proofPics"`
 }
 
-type ReturnApplyResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
+type ReturnApplyResp {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
 }
-
 
 @server(
-    //    jwt: Auth
-    group: order
-    prefix: /api/order
+	//    jwt: Auth
+	group: order
+	prefix: /api/order
 )
 service front-api {
-    @handler ReturnApply
-    post /returnApply (ReturnApplyReq) returns (ReturnApplyResp)
+	@handler ReturnApply
+	post /returnApply (ReturnApplyReq) returns (ReturnApplyResp)
 }

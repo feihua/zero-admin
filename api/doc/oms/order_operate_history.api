@@ -1,79 +1,79 @@
 info(
-    desc: "订单操作历史"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "订单操作历史"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addOperateHistoryReq struct {
-        OrderId int64 `json:"orderId"`         // 订单id
-        OperateMan string `json:"operateMan"`  // 操作人：用户；系统；后台管理员
-        CreateTime string `json:"createTime"`  // 操作时间
-        OrderStatus int64 `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-        Note string `json:"note"`              // 备注
-    }
-    addOperateHistoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListOperateHistoryReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-    }
-    ListtOperateHistoryData struct {
-        Id int64 `json:"id"`
-        OrderId int64 `json:"orderId"`         // 订单id
-        OperateMan string `json:"operateMan"`  // 操作人：用户；系统；后台管理员
-        CreateTime string `json:"createTime"`  // 操作时间
-        OrderStatus int64 `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-        Note string `json:"note"`              // 备注
-    }
-    ListOperateHistoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtOperateHistoryData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateOperateHistoryReq struct {
-        Id int64 `json:"id"`
-        OrderId int64 `json:"orderId"`         // 订单id
-        OperateMan string `json:"operateMan"`  // 操作人：用户；系统；后台管理员
-        CreateTime string `json:"createTime"`  // 操作时间
-        OrderStatus int64 `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-        Note string `json:"note"`              // 备注
-    }
-    UpdateOperateHistoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteOperateHistoryReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteOperateHistoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addOperateHistoryReq {
+		OrderId     int64  `json:"orderId"`     // 订单id
+		OperateMan  string `json:"operateMan"`  // 操作人：用户；系统；后台管理员
+		CreateTime  string `json:"createTime"`  // 操作时间
+		OrderStatus int64  `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+		Note        string `json:"note"`        // 备注
+	}
+	addOperateHistoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListOperateHistoryReq {
+		Current  int64 `json:"current,default=1"`
+		PageSize int64 `json:"pageSize,default=20"`
+	}
+	ListtOperateHistoryData {
+		Id          int64  `json:"id"`
+		OrderId     int64  `json:"orderId"`     // 订单id
+		OperateMan  string `json:"operateMan"`  // 操作人：用户；系统；后台管理员
+		CreateTime  string `json:"createTime"`  // 操作时间
+		OrderStatus int64  `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+		Note        string `json:"note"`        // 备注
+	}
+	ListOperateHistoryResp {
+		Code     string                     `json:"code"`
+		Message  string                     `json:"message"`
+		Current  int64                      `json:"current,default=1"`
+		Data     []*ListtOperateHistoryData `json:"data"`
+		PageSize int64                      `json:"pageSize,default=20"`
+		Success  bool                       `json:"success"`
+		Total    int64                      `json:"total"`
+	}
+	UpdateOperateHistoryReq {
+		Id          int64  `json:"id"`
+		OrderId     int64  `json:"orderId"`     // 订单id
+		OperateMan  string `json:"operateMan"`  // 操作人：用户；系统；后台管理员
+		CreateTime  string `json:"createTime"`  // 操作时间
+		OrderStatus int64  `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+		Note        string `json:"note"`        // 备注
+	}
+	UpdateOperateHistoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteOperateHistoryReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteOperateHistoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: order/operatehistory
-    prefix: /api/order/operatehistory
+	jwt: Auth
+	middleware: CheckUrl
+	group: order/operatehistory
+	prefix: /api/order/operatehistory
 )
 service admin-api {
-    @handler OperateHistoryAdd
-    post /add (addOperateHistoryReq) returns (addOperateHistoryResp)
-
-    @handler OperateHistoryList
-    post /list (ListOperateHistoryReq) returns (ListOperateHistoryResp)
-
-    @handler OperateHistoryUpdate
-    post /update (UpdateOperateHistoryReq) returns (UpdateOperateHistoryResp)
-
-    @handler OperateHistoryDelete
-    post /delete (DeleteOperateHistoryReq) returns (DeleteOperateHistoryResp)
+	@handler OperateHistoryAdd
+	post /add (addOperateHistoryReq) returns (addOperateHistoryResp)
+	
+	@handler OperateHistoryList
+	post /list (ListOperateHistoryReq) returns (ListOperateHistoryResp)
+	
+	@handler OperateHistoryUpdate
+	post /update (UpdateOperateHistoryReq) returns (UpdateOperateHistoryResp)
+	
+	@handler OperateHistoryDelete
+	post /delete (DeleteOperateHistoryReq) returns (DeleteOperateHistoryResp)
 }

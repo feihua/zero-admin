@@ -1,87 +1,87 @@
 info(
-    desc: "配置参数"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "配置参数"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addConfigReq struct {
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort int64 `json:"sort"`                           // 排序（升序）
-        Remarks string `json:"remarks"`                    // 备注信息
-    }
-    addConfigResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListConfigReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-    }
-    ListConfigData struct {
-        Id int64 `json:"id"`                               // 编号
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort int64 `json:"sort"`                           // 排序（升序）
-        CreateBy string `json:"createBy"`                  // 创建人
-        CreateTime string `json:"createTime"`              // 创建时间
-        LastUpdateBy string `json:"lastUpdateBy"`          // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`      // 更新时间
-        Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"delFlag"`                     // 是否删除  0：已删除  1：正常
-    }
-    ListConfigResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListConfigData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateConfigReq struct {
-        Id int64 `json:"id"`                               // 编号
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort int64 `json:"sort"`                           // 排序（升序）
-        Remarks string `json:"remarks"`                    // 备注信息
-    }
-    UpdateConfigResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteConfigReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteConfigResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addConfigReq {
+		Value       string `json:"value"`       // 数据值
+		Label       string `json:"label"`       // 标签名
+		Type        string `json:"type"`        // 类型
+		Description string `json:"description"` // 描述
+		Sort        int64  `json:"sort"`        // 排序（升序）
+		Remarks     string `json:"remarks"`     // 备注信息
+	}
+	addConfigResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListConfigReq {
+		Current  int64 `json:"current,default=1"`
+		PageSize int64 `json:"pageSize,default=20"`
+	}
+	ListConfigData {
+		Id             int64  `json:"id"`             // 编号
+		Value          string `json:"value"`          // 数据值
+		Label          string `json:"label"`          // 标签名
+		Type           string `json:"type"`           // 类型
+		Description    string `json:"description"`    // 描述
+		Sort           int64  `json:"sort"`           // 排序（升序）
+		CreateBy       string `json:"createBy"`       // 创建人
+		CreateTime     string `json:"createTime"`     // 创建时间
+		LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
+		LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
+		Remarks        string `json:"remarks"`        // 备注信息
+		DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
+	}
+	ListConfigResp {
+		Code     string            `json:"code"`
+		Message  string            `json:"message"`
+		Current  int64             `json:"current,default=1"`
+		Data     []*ListConfigData `json:"data"`
+		PageSize int64             `json:"pageSize,default=20"`
+		Success  bool              `json:"success"`
+		Total    int64             `json:"total"`
+	}
+	UpdateConfigReq {
+		Id          int64  `json:"id"`          // 编号
+		Value       string `json:"value"`       // 数据值
+		Label       string `json:"label"`       // 标签名
+		Type        string `json:"type"`        // 类型
+		Description string `json:"description"` // 描述
+		Sort        int64  `json:"sort"`        // 排序（升序）
+		Remarks     string `json:"remarks"`     // 备注信息
+	}
+	UpdateConfigResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteConfigReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteConfigResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: sys/config
-    prefix: /api/sys/config
+	jwt: Auth
+	middleware: CheckUrl
+	group: sys/config
+	prefix: /api/sys/config
 )
 service admin-api {
-    @handler ConfigAdd
-    post /add (addConfigReq) returns (addConfigResp)
-
-    @handler ConfigList
-    post /list (ListConfigReq) returns (ListConfigResp)
-
-    @handler ConfigUpdate
-    post /update (UpdateConfigReq) returns (UpdateConfigResp)
-
-    @handler ConfigDelete
-    post /delete (DeleteConfigReq) returns (DeleteConfigResp)
+	@handler ConfigAdd
+	post /add (addConfigReq) returns (addConfigResp)
+	
+	@handler ConfigList
+	post /list (ListConfigReq) returns (ListConfigResp)
+	
+	@handler ConfigUpdate
+	post /update (UpdateConfigReq) returns (UpdateConfigResp)
+	
+	@handler ConfigDelete
+	post /delete (DeleteConfigReq) returns (DeleteConfigResp)
 }

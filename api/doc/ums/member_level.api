@@ -1,101 +1,101 @@
 info(
-    desc: "会员等级"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "会员等级"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addMemberLevelReq struct {
-        Name string `json:"name"`
-        GrowthPoint int64 `json:"growthPoint"`
-        DefaultStatus int64 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
-        FreeFreightPoint float64 `json:"freeFreightPoint"`         // 免运费标准
-        CommentGrowthPoint int64 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
-        PriviledgeFreeFreight int64 `json:"priviledgeFreeFreight"` // 是否有免邮特权
-        PriviledgeSignIn int64 `json:"priviledgeSignIn"`           // 是否有签到特权
-        PriviledgeComment int64 `json:"priviledgeComment"`         // 是否有评论获奖励特权
-        PriviledgePromotion int64 `json:"priviledgePromotion"`     // 是否有专享活动特权
-        PriviledgeMemberPrice int64 `json:"priviledgeMemberPrice"` // 是否有会员价格特权
-        PriviledgeBirthday int64 `json:"priviledgeBirthday"`       // 是否有生日特权
-        Note string `json:"note,optional"`
-    }
-    addMemberLevelResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListMemberLevelReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Name string `json:"name,optional"`
-    }
-    ListtMemberLevelData struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        GrowthPoint int64 `json:"growthPoint"`
-        DefaultStatus int64 `json:"defaultStatus"`                    // 是否为默认等级：0->不是；1->是
-        FreeFreightPoint float64 `json:"freeFreightPoint"`            // 免运费标准
-        CommentGrowthPoint int64 `json:"commentGrowthPoint"`          // 每次评价获取的成长值
-        PriviledgeFreeFreight int64 `json:"priviledgeFreeFreight"`    // 是否有免邮特权
-        PriviledgeSignIn int64 `json:"priviledgeSignIn"`              // 是否有签到特权
-        PriviledgeComment int64 `json:"priviledgeComment"`            // 是否有评论获奖励特权
-        PriviledgePromotion int64 `json:"priviledgePromotion"`        // 是否有专享活动特权
-        PriviledgeMemberPrice int64 `json:"priviledgeMemberPrice"`    // 是否有会员价格特权
-        PriviledgeBirthday int64 `json:"priviledgeBirthday"`          // 是否有生日特权
-        Note string `json:"note"`
-    }
-    ListMemberLevelResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtMemberLevelData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateMemberLevelReq struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        GrowthPoint int64 `json:"growthPoint"`
-        DefaultStatus int64 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
-        FreeFreightPoint float64 `json:"freeFreightPoint"`         // 免运费标准
-        CommentGrowthPoint int64 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
-        PriviledgeFreeFreight int64 `json:"priviledgeFreeFreight"` // 是否有免邮特权
-        PriviledgeSignIn int64 `json:"priviledgeSignIn"`           // 是否有签到特权
-        PriviledgeComment int64 `json:"priviledgeComment"`         // 是否有评论获奖励特权
-        PriviledgePromotion int64 `json:"priviledgePromotion"`     // 是否有专享活动特权
-        PriviledgeMemberPrice int64 `json:"priviledgeMemberPrice"` // 是否有会员价格特权
-        PriviledgeBirthday int64 `json:"priviledgeBirthday"`       // 是否有生日特权
-        Note string `json:"note"`
-    }
-    UpdateMemberLevelResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteMemberLevelReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteMemberLevelResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addMemberLevelReq {
+		Name                  string  `json:"name"`
+		GrowthPoint           int64   `json:"growthPoint"`
+		DefaultStatus         int64   `json:"defaultStatus"`         // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint      float64 `json:"freeFreightPoint"`      // 免运费标准
+		CommentGrowthPoint    int64   `json:"commentGrowthPoint"`    // 每次评价获取的成长值
+		PriviledgeFreeFreight int64   `json:"priviledgeFreeFreight"` // 是否有免邮特权
+		PriviledgeSignIn      int64   `json:"priviledgeSignIn"`      // 是否有签到特权
+		PriviledgeComment     int64   `json:"priviledgeComment"`     // 是否有评论获奖励特权
+		PriviledgePromotion   int64   `json:"priviledgePromotion"`   // 是否有专享活动特权
+		PriviledgeMemberPrice int64   `json:"priviledgeMemberPrice"` // 是否有会员价格特权
+		PriviledgeBirthday    int64   `json:"priviledgeBirthday"`    // 是否有生日特权
+		Note                  string  `json:"note,optional"`
+	}
+	addMemberLevelResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListMemberLevelReq {
+		Current  int64  `json:"current,default=1"`
+		PageSize int64  `json:"pageSize,default=20"`
+		Name     string `json:"name,optional"`
+	}
+	ListtMemberLevelData {
+		Id                    int64   `json:"id"`
+		Name                  string  `json:"name"`
+		GrowthPoint           int64   `json:"growthPoint"`
+		DefaultStatus         int64   `json:"defaultStatus"`         // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint      float64 `json:"freeFreightPoint"`      // 免运费标准
+		CommentGrowthPoint    int64   `json:"commentGrowthPoint"`    // 每次评价获取的成长值
+		PriviledgeFreeFreight int64   `json:"priviledgeFreeFreight"` // 是否有免邮特权
+		PriviledgeSignIn      int64   `json:"priviledgeSignIn"`      // 是否有签到特权
+		PriviledgeComment     int64   `json:"priviledgeComment"`     // 是否有评论获奖励特权
+		PriviledgePromotion   int64   `json:"priviledgePromotion"`   // 是否有专享活动特权
+		PriviledgeMemberPrice int64   `json:"priviledgeMemberPrice"` // 是否有会员价格特权
+		PriviledgeBirthday    int64   `json:"priviledgeBirthday"`    // 是否有生日特权
+		Note                  string  `json:"note"`
+	}
+	ListMemberLevelResp {
+		Code     string                  `json:"code"`
+		Message  string                  `json:"message"`
+		Current  int64                   `json:"current,default=1"`
+		Data     []*ListtMemberLevelData `json:"data"`
+		PageSize int64                   `json:"pageSize,default=20"`
+		Success  bool                    `json:"success"`
+		Total    int64                   `json:"total"`
+	}
+	UpdateMemberLevelReq {
+		Id                    int64   `json:"id"`
+		Name                  string  `json:"name"`
+		GrowthPoint           int64   `json:"growthPoint"`
+		DefaultStatus         int64   `json:"defaultStatus"`         // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint      float64 `json:"freeFreightPoint"`      // 免运费标准
+		CommentGrowthPoint    int64   `json:"commentGrowthPoint"`    // 每次评价获取的成长值
+		PriviledgeFreeFreight int64   `json:"priviledgeFreeFreight"` // 是否有免邮特权
+		PriviledgeSignIn      int64   `json:"priviledgeSignIn"`      // 是否有签到特权
+		PriviledgeComment     int64   `json:"priviledgeComment"`     // 是否有评论获奖励特权
+		PriviledgePromotion   int64   `json:"priviledgePromotion"`   // 是否有专享活动特权
+		PriviledgeMemberPrice int64   `json:"priviledgeMemberPrice"` // 是否有会员价格特权
+		PriviledgeBirthday    int64   `json:"priviledgeBirthday"`    // 是否有生日特权
+		Note                  string  `json:"note"`
+	}
+	UpdateMemberLevelResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteMemberLevelReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteMemberLevelResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: member/level
-    prefix: /api/member/level
+	jwt: Auth
+	middleware: CheckUrl
+	group: member/level
+	prefix: /api/member/level
 )
 service admin-api {
-    @handler MemberLevelAdd
-    post /add (addMemberLevelReq) returns (addMemberLevelResp)
-
-    @handler MemberLevelList
-    post /list (ListMemberLevelReq) returns (ListMemberLevelResp)
-
-    @handler MemberLevelUpdate
-    post /update (UpdateMemberLevelReq) returns (UpdateMemberLevelResp)
-
-    @handler MemberLevelDelete
-    post /delete (DeleteMemberLevelReq) returns (DeleteMemberLevelResp)
+	@handler MemberLevelAdd
+	post /add (addMemberLevelReq) returns (addMemberLevelResp)
+	
+	@handler MemberLevelList
+	post /list (ListMemberLevelReq) returns (ListMemberLevelResp)
+	
+	@handler MemberLevelUpdate
+	post /update (UpdateMemberLevelReq) returns (UpdateMemberLevelResp)
+	
+	@handler MemberLevelDelete
+	post /delete (DeleteMemberLevelReq) returns (DeleteMemberLevelResp)
 }

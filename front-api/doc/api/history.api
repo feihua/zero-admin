@@ -1,83 +1,82 @@
 info(
-    desc: "浏览记录"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "浏览记录"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
-type addReadHistoryReq struct {
-    ProductId int64 `json:"productId"`                       // 商品id
-    ProductName string `json:"productName"`                  // 商品名称
-    ProductPic string `json:"productPic"`                    // 商品图片
-    ProductSubTitle string `json:"productSubTitle"`          // 商品标题
-    ProductPrice float64 `json:"productPrice"`               // 商品价格
+type addReadHistoryReq {
+	ProductId       int64   `json:"productId"`       // 商品id
+	ProductName     string  `json:"productName"`     // 商品名称
+	ProductPic      string  `json:"productPic"`      // 商品图片
+	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
+	ProductPrice    float64 `json:"productPrice"`    // 商品价格
 }
-type addReadHistoryResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-}
-
-type ReadHistoryDeleteReq struct {
-    Ids []int64 `json:"ids"`
+type addReadHistoryResp {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
 }
 
-type ReadHistoryDeleteResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
+type ReadHistoryDeleteReq {
+	Ids []int64 `json:"ids"`
 }
 
-type ReadHistoryListReq struct {
-    Current int64 `json:"current,default=1"`
-    PageSize int64 `json:"pageSize,default=20"`
+type ReadHistoryDeleteResp {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
 }
 
-type ReadHistoryListResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data ReadHistoryListData `json:"data"`
+type ReadHistoryListReq {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=20"`
 }
 
-type ReadHistoryListData struct {
-    Total int64 `json:"total"`           //总数
-    Pages int64 `json:"pages"`           //总页数
-    Limit int64 `json:"limit"`           //分页数量
-    Page int64 `json:"page"`             //当前页
-    List []ReadHistoryList `json:"list"` //地址列表
+type ReadHistoryListResp {
+	Code    int64               `json:"code"`
+	Message string              `json:"message"`
+	Data    ReadHistoryListData `json:"data"`
 }
 
-type ReadHistoryList struct {
-    Id int64 `json:"id"`                                      // 编号
-    MemberId int64 `json:"memberId"`                          // 会员id
-    MemberNickName string `json:"memberNickName"`             // 会员姓名
-    MemberIcon string `json:"memberIcon"`                     // 会员头像
-    ProductId int64 `json:"productId"`                        // 商品id
-    ProductName string `json:"productName"`                   // 商品名称
-    ProductPic string `json:"productPic"`                     // 商品图片
-    ProductSubTitle string `json:"productSubTitle"`           // 商品标题
-    ProductPrice float64 `json:"productPrice"`                // 商品价格
-    CreateTime string `json:"createTime"`                     // 浏览时间
+type ReadHistoryListData {
+	Total int64             `json:"total"` //总数
+	Pages int64             `json:"pages"` //总页数
+	Limit int64             `json:"limit"` //分页数量
+	Page  int64             `json:"page"`  //当前页
+	List  []ReadHistoryList `json:"list"`  //地址列表
 }
 
-type ReadHistoryClearResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
+type ReadHistoryList {
+	Id              int64   `json:"id"`              // 编号
+	MemberId        int64   `json:"memberId"`        // 会员id
+	MemberNickName  string  `json:"memberNickName"`  // 会员姓名
+	MemberIcon      string  `json:"memberIcon"`      // 会员头像
+	ProductId       int64   `json:"productId"`       // 商品id
+	ProductName     string  `json:"productName"`     // 商品名称
+	ProductPic      string  `json:"productPic"`      // 商品图片
+	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
+	ProductPrice    float64 `json:"productPrice"`    // 商品价格
+	CreateTime      string  `json:"createTime"`      // 浏览时间
 }
 
+type ReadHistoryClearResp {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
 
 @server(
-    jwt: Auth
-    group: history
-    prefix: /api/history
+	jwt: Auth
+	group: history
+	prefix: /api/history
 )
 service front-api {
-    @handler AddReadHistoryAdd
-    post /add (addReadHistoryReq) returns (addReadHistoryResp)
-
-    @handler ReadHistoryDelete
-    post /delete (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
-
-    @handler ReadHistoryList
-    post /list (ReadHistoryListReq) returns (ReadHistoryListResp)
-
-    @handler ReadHistoryClear
-    post /clear returns (ReadHistoryClearResp)
+	@handler AddReadHistoryAdd
+	post /add (addReadHistoryReq) returns (addReadHistoryResp)
+	
+	@handler ReadHistoryDelete
+	post /delete (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
+	
+	@handler ReadHistoryList
+	post /list (ReadHistoryListReq) returns (ReadHistoryListResp)
+	
+	@handler ReadHistoryClear
+	post /clear returns (ReadHistoryClearResp)
 }

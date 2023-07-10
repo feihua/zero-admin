@@ -1,77 +1,77 @@
 info(
-    desc: "秒杀场次"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "秒杀场次"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addFlashPromotionSessionReq struct {
-        Name string `json:"name"`             // 场次名称
-        StartTime string `json:"startTime"`   // 每日开始时间
-        EndTime string `json:"endTime"`       // 每日结束时间
-        Status int64 `json:"status"`          // 启用状态：0->不启用；1->启用
-    }
-    addFlashPromotionSessionResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListFlashPromotionSessionReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-    }
-    ListtFlashPromotionSessionData struct {
-        Id int64 `json:"id"`                  // 编号
-        Name string `json:"name"`             // 场次名称
-        StartTime string `json:"startTime"`   // 每日开始时间
-        EndTime string `json:"endTime"`       // 每日结束时间
-        Status int64 `json:"status"`          // 启用状态：0->不启用；1->启用
-        CreateTime string `json:"createTime"` // 创建时间
-    }
-    ListFlashPromotionSessionResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtFlashPromotionSessionData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateFlashPromotionSessionReq struct {
-        Id int64 `json:"id"`                  // 编号
-        Name string `json:"name"`             // 场次名称
-        StartTime string `json:"startTime"`   // 每日开始时间
-        EndTime string `json:"endTime"`       // 每日结束时间
-        Status int64 `json:"status"`          // 启用状态：0->不启用；1->启用
-    }
-    UpdateFlashPromotionSessionResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteFlashPromotionSessionReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteFlashPromotionSessionResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addFlashPromotionSessionReq {
+		Name      string `json:"name"`      // 场次名称
+		StartTime string `json:"startTime"` // 每日开始时间
+		EndTime   string `json:"endTime"`   // 每日结束时间
+		Status    int64  `json:"status"`    // 启用状态：0->不启用；1->启用
+	}
+	addFlashPromotionSessionResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListFlashPromotionSessionReq {
+		Current  int64 `json:"current,default=1"`
+		PageSize int64 `json:"pageSize,default=20"`
+	}
+	ListtFlashPromotionSessionData {
+		Id         int64  `json:"id"`         // 编号
+		Name       string `json:"name"`       // 场次名称
+		StartTime  string `json:"startTime"`  // 每日开始时间
+		EndTime    string `json:"endTime"`    // 每日结束时间
+		Status     int64  `json:"status"`     // 启用状态：0->不启用；1->启用
+		CreateTime string `json:"createTime"` // 创建时间
+	}
+	ListFlashPromotionSessionResp {
+		Code     string                            `json:"code"`
+		Message  string                            `json:"message"`
+		Current  int64                             `json:"current,default=1"`
+		Data     []*ListtFlashPromotionSessionData `json:"data"`
+		PageSize int64                             `json:"pageSize,default=20"`
+		Success  bool                              `json:"success"`
+		Total    int64                             `json:"total"`
+	}
+	UpdateFlashPromotionSessionReq {
+		Id        int64  `json:"id"`        // 编号
+		Name      string `json:"name"`      // 场次名称
+		StartTime string `json:"startTime"` // 每日开始时间
+		EndTime   string `json:"endTime"`   // 每日结束时间
+		Status    int64  `json:"status"`    // 启用状态：0->不启用；1->启用
+	}
+	UpdateFlashPromotionSessionResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteFlashPromotionSessionReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteFlashPromotionSessionResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: sms/flashpromotionsession
-    prefix: /api/sms/flashpromotionsession
+	jwt: Auth
+	middleware: CheckUrl
+	group: sms/flashpromotionsession
+	prefix: /api/sms/flashpromotionsession
 )
 service admin-api {
-    @handler FlashPromotionSessionAdd
-    post /add (addFlashPromotionSessionReq) returns (addFlashPromotionSessionResp)
-
-    @handler FlashPromotionSessionList
-    post /list (ListFlashPromotionSessionReq) returns (ListFlashPromotionSessionResp)
-
-    @handler FlashPromotionSessionUpdate
-    post /update (UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp)
-
-    @handler FlashPromotionSessionDelete
-    post /delete (DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp)
+	@handler FlashPromotionSessionAdd
+	post /add (addFlashPromotionSessionReq) returns (addFlashPromotionSessionResp)
+	
+	@handler FlashPromotionSessionList
+	post /list (ListFlashPromotionSessionReq) returns (ListFlashPromotionSessionResp)
+	
+	@handler FlashPromotionSessionUpdate
+	post /update (UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp)
+	
+	@handler FlashPromotionSessionDelete
+	post /delete (DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp)
 }

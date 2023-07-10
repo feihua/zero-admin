@@ -1,56 +1,55 @@
 info(
-    desc: "系统日志"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "系统日志"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    ListSysLogReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        UserName string `json:"userName,optional"`                  // 用户名
-        Method string `json:"method,optional"`                      // 请求方法
-    }
-    ListSysLogData struct {
-        Id int64 `json:"id"`                           // 编号
-        UserName string `json:"userName"`              // 用户名
-        Operation string `json:"operation"`            // 用户操作
-        Method string `json:"method"`                  // 请求方法
-        RequestParams string `json:"requestParams"`    // 请求参数
-        ResponseParams string `json:"responseParams"`  // 响应参数
-        Time int64 `json:"time"`                       // 执行时长(毫秒)
-        Ip string `json:"ip"`                          // IP地址
-        OperationTime string `json:"operationTime"`    // 操作时间
-    }
-    ListSysLogResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListSysLogData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    DeleteSysLogReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteSysLogResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	ListSysLogReq {
+		Current  int64  `json:"current,default=1"`
+		PageSize int64  `json:"pageSize,default=20"`
+		UserName string `json:"userName,optional"` // 用户名
+		Method   string `json:"method,optional"`   // 请求方法
+	}
+	ListSysLogData {
+		Id             int64  `json:"id"`             // 编号
+		UserName       string `json:"userName"`       // 用户名
+		Operation      string `json:"operation"`      // 用户操作
+		Method         string `json:"method"`         // 请求方法
+		RequestParams  string `json:"requestParams"`  // 请求参数
+		ResponseParams string `json:"responseParams"` // 响应参数
+		Time           int64  `json:"time"`           // 执行时长(毫秒)
+		Ip             string `json:"ip"`             // IP地址
+		OperationTime  string `json:"operationTime"`  // 操作时间
+	}
+	ListSysLogResp {
+		Code     string            `json:"code"`
+		Message  string            `json:"message"`
+		Current  int64             `json:"current,default=1"`
+		Data     []*ListSysLogData `json:"data"`
+		PageSize int64             `json:"pageSize,default=20"`
+		Success  bool              `json:"success"`
+		Total    int64             `json:"total"`
+	}
+	DeleteSysLogReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteSysLogResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: sys/log
-    prefix: /api/sys/sysLog
+	jwt: Auth
+	middleware: CheckUrl
+	group: sys/log
+	prefix: /api/sys/sysLog
 )
 service admin-api {
-    @handler SysLogList
-    post /list (ListSysLogReq) returns (ListSysLogResp)
-
-    @handler SysLogDelete
-    post /delete (DeleteSysLogReq) returns (DeleteSysLogResp)
+	@handler SysLogList
+	post /list (ListSysLogReq) returns (ListSysLogResp)
+	
+	@handler SysLogDelete
+	post /delete (DeleteSysLogReq) returns (DeleteSysLogResp)
 }
-

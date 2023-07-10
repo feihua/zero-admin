@@ -1,75 +1,75 @@
 info(
-    desc: "首页新鲜好物"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "首页新鲜好物"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addHomeNewProductReq struct {
-        ProductIds []int64 `json:"productIds"`             // 商品id
-    }
-    addHomeNewProductResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListHomeNewProductReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        ProductName string `json:"productName,optional"`         // 商品名称
-        RecommendStatus int64 `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
-    }
-    ListtHomeNewProductData struct {
-        Id int64 `json:"id"`
-        ProductId int64 `json:"productId"`             // 商品id
-        ProductName string `json:"productName"`        // 商品名称
-        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-        Sort int64 `json:"sort"`                       // 排序
-    }
-    ListHomeNewProductResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtHomeNewProductData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateHomeNewProductReq struct {
-        Id int64 `json:"id"`
-        ProductId int64 `json:"productId"`             // 商品id
-        ProductName string `json:"productName"`        // 商品名称
-        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-        Sort int64 `json:"sort"`                       // 排序
-    }
-    UpdateHomeNewProductResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteHomeNewProductReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteHomeNewProductResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addHomeNewProductReq {
+		ProductIds []int64 `json:"productIds"` // 商品id
+	}
+	addHomeNewProductResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListHomeNewProductReq {
+		Current         int64  `json:"current,default=1"`
+		PageSize        int64  `json:"pageSize,default=20"`
+		ProductName     string `json:"productName,optional"`      // 商品名称
+		RecommendStatus int64  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+	}
+	ListtHomeNewProductData {
+		Id              int64  `json:"id"`
+		ProductId       int64  `json:"productId"`       // 商品id
+		ProductName     string `json:"productName"`     // 商品名称
+		RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int64  `json:"sort"`            // 排序
+	}
+	ListHomeNewProductResp {
+		Code     string                     `json:"code"`
+		Message  string                     `json:"message"`
+		Current  int64                      `json:"current,default=1"`
+		Data     []*ListtHomeNewProductData `json:"data"`
+		PageSize int64                      `json:"pageSize,default=20"`
+		Success  bool                       `json:"success"`
+		Total    int64                      `json:"total"`
+	}
+	UpdateHomeNewProductReq {
+		Id              int64  `json:"id"`
+		ProductId       int64  `json:"productId"`       // 商品id
+		ProductName     string `json:"productName"`     // 商品名称
+		RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int64  `json:"sort"`            // 排序
+	}
+	UpdateHomeNewProductResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteHomeNewProductReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteHomeNewProductResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: sms/homenewproduct
-    prefix: /api/sms/homenewproduct
+	jwt: Auth
+	middleware: CheckUrl
+	group: sms/homenewproduct
+	prefix: /api/sms/homenewproduct
 )
 service admin-api {
-    @handler HomeNewProductAdd
-    post /add (addHomeNewProductReq) returns (addHomeNewProductResp)
-
-    @handler HomeNewProductList
-    post /list (ListHomeNewProductReq) returns (ListHomeNewProductResp)
-
-    @handler HomeNewProductUpdate
-    post /update (UpdateHomeNewProductReq) returns (UpdateHomeNewProductResp)
-
-    @handler HomeNewProductDelete
-    post /delete (DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp)
+	@handler HomeNewProductAdd
+	post /add (addHomeNewProductReq) returns (addHomeNewProductResp)
+	
+	@handler HomeNewProductList
+	post /list (ListHomeNewProductReq) returns (ListHomeNewProductResp)
+	
+	@handler HomeNewProductUpdate
+	post /update (UpdateHomeNewProductReq) returns (UpdateHomeNewProductResp)
+	
+	@handler HomeNewProductDelete
+	post /delete (DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp)
 }

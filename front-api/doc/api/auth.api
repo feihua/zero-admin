@@ -1,45 +1,44 @@
 info(
-    desc: "认证相关"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "认证相关"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
-
-type LoginReq struct {
-    Username string `json:"username"`
-    Password string `json:"password"`
+type LoginReq {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
-type LoginAndRegisterResp struct {
-    Errno int64 `json:"errno"`
-    Data LoginAndRegisterData `json:"data"`
-    Errmsg string `json:"errmsg"`
+type LoginAndRegisterResp {
+	Errno  int64                `json:"errno"`
+	Data   LoginAndRegisterData `json:"data"`
+	Errmsg string               `json:"errmsg"`
 }
 
-type LoginAndRegisterData struct {
-    UserInfo UserInfo `json:"userInfo"` //用户基本信息
-    Token string `json:"token"`         //服务端返回的token值
+type LoginAndRegisterData {
+	UserInfo UserInfo `json:"userInfo"` //用户基本信息
+	Token    string   `json:"token"`    //服务端返回的token值
 }
 
-type UserInfo struct {
-    NickName string `json:"nickName"`   //昵称
-    AvatarURL string `json:"avatarUrl"` //头像地址
+type UserInfo {
+	NickName  string `json:"nickName"`  //昵称
+	AvatarURL string `json:"avatarUrl"` //头像地址
 }
 
-type RegisterReq struct {
-    Username string `json:"username"`
-    Password string `json:"password"`
-    Mobile string `json:"mobile"`
+type RegisterReq {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Mobile   string `json:"mobile"`
 }
 
 @server(
-    group: auth
-    prefix: /api/auth
+	group: auth
+	prefix: /api/auth
 )
 service front-api {
-    @handler Login
-    post /login (LoginReq) returns (LoginAndRegisterResp)
-
-    @handler Register
-    post /register (RegisterReq) returns (LoginAndRegisterResp)
+	@handler Login
+	post /login (LoginReq) returns (LoginAndRegisterResp)
+	
+	@handler Register
+	post /register (RegisterReq) returns (LoginAndRegisterResp)
 }

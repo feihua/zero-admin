@@ -1,76 +1,76 @@
 info(
-    desc: "首页品牌"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "首页品牌"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addHomeBrandReq struct {
-        brandIds []int64 `json:"brandIds"`                 // 商品品牌id
+	addHomeBrandReq {
+		BrandIds []int64 `json:"brandIds"` // 商品品牌id
 
-    }
-    addHomeBrandResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListHomeBrandReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        BrandName string `json:"brandName,optional"`             // 商品品牌名称
-        RecommendStatus int64 `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
-    }
-    ListtHomeBrandData struct {
-        Id int64 `json:"id"`
-        BrandId int64 `json:"brandId"`                 // 商品品牌id
-        BrandName string `json:"brandName"`            // 商品品牌名称
-        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-        Sort int64 `json:"sort"`                       // 排序
-    }
-    ListHomeBrandResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtHomeBrandData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateHomeBrandReq struct {
-        Id int64 `json:"id"`
-        BrandId int64 `json:"brandId"`                 // 商品品牌id
-        BrandName string `json:"brandName"`            // 商品品牌名称
-        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-        Sort int64 `json:"sort"`                       // 排序
-    }
-    UpdateHomeBrandResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteHomeBrandReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteHomeBrandResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	}
+	addHomeBrandResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListHomeBrandReq {
+		Current         int64  `json:"current,default=1"`
+		PageSize        int64  `json:"pageSize,default=20"`
+		BrandName       string `json:"brandName,optional"`        // 商品品牌名称
+		RecommendStatus int64  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+	}
+	ListtHomeBrandData {
+		Id              int64  `json:"id"`
+		BrandId         int64  `json:"brandId"`         // 商品品牌id
+		BrandName       string `json:"brandName"`       // 商品品牌名称
+		RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int64  `json:"sort"`            // 排序
+	}
+	ListHomeBrandResp {
+		Code     string                `json:"code"`
+		Message  string                `json:"message"`
+		Current  int64                 `json:"current,default=1"`
+		Data     []*ListtHomeBrandData `json:"data"`
+		PageSize int64                 `json:"pageSize,default=20"`
+		Success  bool                  `json:"success"`
+		Total    int64                 `json:"total"`
+	}
+	UpdateHomeBrandReq {
+		Id              int64  `json:"id"`
+		BrandId         int64  `json:"brandId"`         // 商品品牌id
+		BrandName       string `json:"brandName"`       // 商品品牌名称
+		RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int64  `json:"sort"`            // 排序
+	}
+	UpdateHomeBrandResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteHomeBrandReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteHomeBrandResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: sms/homebrand
-    prefix: /api/sms/homebrand
+	jwt: Auth
+	middleware: CheckUrl
+	group: sms/homebrand
+	prefix: /api/sms/homebrand
 )
 service admin-api {
-    @handler HomeBrandAdd
-    post /add (addHomeBrandReq) returns (addHomeBrandResp)
-
-    @handler HomeBrandList
-    post /list (ListHomeBrandReq) returns (ListHomeBrandResp)
-
-    @handler HomeBrandUpdate
-    post /update (UpdateHomeBrandReq) returns (UpdateHomeBrandResp)
-
-    @handler HomeBrandDelete
-    post /delete (DeleteHomeBrandReq) returns (DeleteHomeBrandResp)
+	@handler HomeBrandAdd
+	post /add (addHomeBrandReq) returns (addHomeBrandResp)
+	
+	@handler HomeBrandList
+	post /list (ListHomeBrandReq) returns (ListHomeBrandResp)
+	
+	@handler HomeBrandUpdate
+	post /update (UpdateHomeBrandReq) returns (UpdateHomeBrandResp)
+	
+	@handler HomeBrandDelete
+	post /delete (DeleteHomeBrandReq) returns (DeleteHomeBrandResp)
 }

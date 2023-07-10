@@ -1,179 +1,178 @@
 info(
-    desc: "首页数据"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "首页数据"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
-type HomeResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data Data `json:"data"`
+type HomeResp {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    Data   `json:"data"`
 }
 
-type Data struct {
-    AdvertiseList []AdvertiseList `json:"advertiseList"`
-    BrandList []BrandList `json:"brandList"`
-    HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"`
-    NewProductList []ProductList `json:"newProductList"`
-    HotProductList []ProductList `json:"hotProductList"`
-    SubjectList []SubjectList `json:"subjectList"`
+type Data {
+	AdvertiseList      []AdvertiseList    `json:"advertiseList"`
+	BrandList          []BrandList        `json:"brandList"`
+	HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"`
+	NewProductList     []ProductList      `json:"newProductList"`
+	HotProductList     []ProductList      `json:"hotProductList"`
+	SubjectList        []SubjectList      `json:"subjectList"`
 }
 
-type SubjectList struct {
-    CategoryId int64 `json:"categoryId"`
-    Title string `json:"title"`
-    Pic string `json:"pic"`                   // 专题主图
-    ProductCount int64 `json:"productCount"`  // 关联产品数量
-    RecommendStatus int64 `json:"recommendStatus"`
-    CollectCount int64 `json:"collectCount"`
-    ReadCount int64 `json:"readCount"`
-    CommentCount int64 `json:"commentCount"`
-    AlbumPics string `json:"albumPics"`       // 画册图片用逗号分割
-    Description string `json:"description"`
-    ShowStatus int64 `json:"showStatus"`      // 显示状态：0->不显示；1->显示
-    Content string `json:"content"`
-    ForwardCount int64 `json:"forwardCount"`  // 转发数
-    CategoryName string `json:"categoryName"` // 专题分类名称
+type SubjectList {
+	CategoryId      int64  `json:"categoryId"`
+	Title           string `json:"title"`
+	Pic             string `json:"pic"`          // 专题主图
+	ProductCount    int64  `json:"productCount"` // 关联产品数量
+	RecommendStatus int64  `json:"recommendStatus"`
+	CollectCount    int64  `json:"collectCount"`
+	ReadCount       int64  `json:"readCount"`
+	CommentCount    int64  `json:"commentCount"`
+	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
+	Description     string `json:"description"`
+	ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Content         string `json:"content"`
+	ForwardCount    int64  `json:"forwardCount"` // 转发数
+	CategoryName    string `json:"categoryName"` // 专题分类名称
 }
 
-type AdvertiseList struct {
-    ID int64 `json:"id"`
-    Name string `json:"name"`
-    Type int64 `json:"type"`
-    Pic string `json:"pic"`
-    StartTime string `json:"startTime"`
-    EndTime string `json:"endTime"`
-    Status int64 `json:"status"`
-    ClickCount int64 `json:"clickCount"`
-    OrderCount int64 `json:"orderCount"`
-    URL string `json:"url"`
-    Sort int64 `json:"sort"`
+type AdvertiseList {
+	ID         int64  `json:"id"`
+	Name       string `json:"name"`
+	Type       int64  `json:"type"`
+	Pic        string `json:"pic"`
+	StartTime  string `json:"startTime"`
+	EndTime    string `json:"endTime"`
+	Status     int64  `json:"status"`
+	ClickCount int64  `json:"clickCount"`
+	OrderCount int64  `json:"orderCount"`
+	URL        string `json:"url"`
+	Sort       int64  `json:"sort"`
 }
 
-type BrandList struct {
-    ID int64 `json:"id"`
-    Name string `json:"name"`
-    FirstLetter string `json:"firstLetter"`
-    Sort int64 `json:"sort"`
-    FactoryStatus int64 `json:"factoryStatus"`
-    ShowStatus int64 `json:"showStatus"`
-    ProductCount int64 `json:"productCount"`
-    ProductCommentCount int64 `json:"productCommentCount"`
-    Logo string `json:"logo"`
-    BigPic string `json:"bigPic"`
+type BrandList {
+	ID                  int64  `json:"id"`
+	Name                string `json:"name"`
+	FirstLetter         string `json:"firstLetter"`
+	Sort                int64  `json:"sort"`
+	FactoryStatus       int64  `json:"factoryStatus"`
+	ShowStatus          int64  `json:"showStatus"`
+	ProductCount        int64  `json:"productCount"`
+	ProductCommentCount int64  `json:"productCommentCount"`
+	Logo                string `json:"logo"`
+	BigPic              string `json:"bigPic"`
 }
 
-type HomeFlashPromotion struct {
-    StartTime string `json:"startTime"`
-    EndTime string `json:"endTime"`
-    NextStartTime string `json:"nextStartTime"`
-    NextEndTime string `json:"nextEndTime"`
-    ProductList []ProductList `json:"productList"`
+type HomeFlashPromotion {
+	StartTime     string        `json:"startTime"`
+	EndTime       string        `json:"endTime"`
+	NextStartTime string        `json:"nextStartTime"`
+	NextEndTime   string        `json:"nextEndTime"`
+	ProductList   []ProductList `json:"productList"`
 }
 
-type ProductList struct {
-    Id int64 `json:"id"`
-    BrandId int64 `json:"brandId"`
-    ProductCategoryId int64 `json:"productCategoryId"`
-    FeightTemplateId int64 `json:"feightTemplateId"`
-    ProductAttributeCategoryId int64 `json:"productAttributeCategoryId"`
-    Name string `json:"name"`
-    Pic string `json:"pic"`
-    ProductSn string `json:"productSn"`
-    DeleteStatus int64 `json:"deleteStatus"`
-    PublishStatus int64 `json:"publishStatus"`
-    NewStatus int64 `json:"newStatus"`
-    RecommandStatus int64 `json:"recommandStatus"`
-    VerifyStatus int64 `json:"verifyStatus"`
-    Sort int64 `json:"sort"`
-    Sale int64 `json:"sale"`
-    Price float64 `json:"price"`
-    PromotionPrice float64 `json:"promotionPrice,omitempty"`
-    GiftGrowth int64 `json:"giftGrowth"`
-    GiftPoint int64 `json:"giftPoint"`
-    UsePointLimit int64 `json:"usePointLimit"`
-    SubTitle string `json:"subTitle"`
-    OriginalPrice float64 `json:"originalPrice"`
-    Stock int64 `json:"stock"`
-    LowStock int64 `json:"lowStock"`
-    Unit string `json:"unit"`
-    Weight float64 `json:"weight"`
-    PreviewStatus int64 `json:"previewStatus"`
-    ServiceIDS string `json:"serviceIds"`
-    Keywords string `json:"keywords"`
-    Note string `json:"note"`
-    AlbumPics string `json:"albumPics"`
-    DetailTitle string `json:"detailTitle"`
-    PromotionStartTime string `json:"promotionStartTime,omitempty"`
-    PromotionEndTime string `json:"promotionEndTime,omitempty"`
-    PromotionPerLimit int64 `json:"promotionPerLimit"`
-    PromotionType int64 `json:"promotionType"`
-    BrandName string `json:"brandName"`
-    ProductCategoryName string `json:"productCategoryName"`
-    Description string `json:"description"`
+type ProductList {
+	Id                         int64   `json:"id"`
+	BrandId                    int64   `json:"brandId"`
+	ProductCategoryId          int64   `json:"productCategoryId"`
+	FeightTemplateId           int64   `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
+	Name                       string  `json:"name"`
+	Pic                        string  `json:"pic"`
+	ProductSn                  string  `json:"productSn"`
+	DeleteStatus               int64   `json:"deleteStatus"`
+	PublishStatus              int64   `json:"publishStatus"`
+	NewStatus                  int64   `json:"newStatus"`
+	RecommandStatus            int64   `json:"recommandStatus"`
+	VerifyStatus               int64   `json:"verifyStatus"`
+	Sort                       int64   `json:"sort"`
+	Sale                       int64   `json:"sale"`
+	Price                      float64 `json:"price"`
+	PromotionPrice             float64 `json:"promotionPrice,omitempty"`
+	GiftGrowth                 int64   `json:"giftGrowth"`
+	GiftPoint                  int64   `json:"giftPoint"`
+	UsePointLimit              int64   `json:"usePointLimit"`
+	SubTitle                   string  `json:"subTitle"`
+	OriginalPrice              float64 `json:"originalPrice"`
+	Stock                      int64   `json:"stock"`
+	LowStock                   int64   `json:"lowStock"`
+	Unit                       string  `json:"unit"`
+	Weight                     float64 `json:"weight"`
+	PreviewStatus              int64   `json:"previewStatus"`
+	ServiceIDS                 string  `json:"serviceIds"`
+	Keywords                   string  `json:"keywords"`
+	Note                       string  `json:"note"`
+	AlbumPics                  string  `json:"albumPics"`
+	DetailTitle                string  `json:"detailTitle"`
+	PromotionStartTime         string  `json:"promotionStartTime,omitempty"`
+	PromotionEndTime           string  `json:"promotionEndTime,omitempty"`
+	PromotionPerLimit          int64   `json:"promotionPerLimit"`
+	PromotionType              int64   `json:"promotionType"`
+	BrandName                  string  `json:"brandName"`
+	ProductCategoryName        string  `json:"productCategoryName"`
+	Description                string  `json:"description"`
 }
 
-type RecommendProductListReq struct {
-    Current int64 `json:"current,default=1"`
-    PageSize int64 `json:"pageSize,default=10"`
+type RecommendProductListReq {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
 }
 
-type RecommendProductListResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data []ProductList `json:"data"`
+type RecommendProductListResp {
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
+	Data    []ProductList `json:"data"`
 }
 
-
-type RecommendBrandListReq struct {
-    Current int64 `json:"current,default=1"`
-    PageSize int64 `json:"pageSize,default=10"`
+type RecommendBrandListReq {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
 }
 
-type RecommendBrandListResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data []BrandList `json:"data"`
+type RecommendBrandListResp {
+	Code    int64       `json:"code"`
+	Message string      `json:"message"`
+	Data    []BrandList `json:"data"`
 }
 
-type RecommendNewProductListReq struct {
-    Current int64 `json:"current,default=1"`
-    PageSize int64 `json:"pageSize,default=10"`
+type RecommendNewProductListReq {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
 }
 
-type RecommendNewProductListResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data []ProductList `json:"data"`
+type RecommendNewProductListResp {
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
+	Data    []ProductList `json:"data"`
 }
 
-type RecommendHotProductListReq struct {
-    Current int64 `json:"current,default=1"`
-    PageSize int64 `json:"pageSize,default=10"`
+type RecommendHotProductListReq {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
 }
 
-type RecommendHotProductListResp struct {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data []ProductList `json:"data"`
+type RecommendHotProductListResp {
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
+	Data    []ProductList `json:"data"`
 }
 @server(
-    group: home
-    prefix: /api/home
+	group: home
+	prefix: /api/home
 )
 service front-api {
-    @handler HomeIndex
-    get /index returns (HomeResp)
-
-    @handler RecommendProductList
-    post /recommendProductList (RecommendProductListReq) returns (RecommendProductListResp)
-
-    @handler RecommendBrandList
-    post /recommendBrandList (RecommendBrandListReq) returns (RecommendBrandListResp)
-
-    @handler RecommendNewProductList
-    post /recommendNewProductList (RecommendNewProductListReq) returns (RecommendNewProductListResp)
-
-    @handler RecommendHotProductList
-    post /recommendHotProductList (RecommendHotProductListReq) returns (RecommendHotProductListResp)
+	@handler HomeIndex
+	get /index returns (HomeResp)
+	
+	@handler RecommendProductList
+	post /recommendProductList (RecommendProductListReq) returns (RecommendProductListResp)
+	
+	@handler RecommendBrandList
+	post /recommendBrandList (RecommendBrandListReq) returns (RecommendBrandListResp)
+	
+	@handler RecommendNewProductList
+	post /recommendNewProductList (RecommendNewProductListReq) returns (RecommendNewProductListResp)
+	
+	@handler RecommendHotProductList
+	post /recommendHotProductList (RecommendHotProductListReq) returns (RecommendHotProductListResp)
 }

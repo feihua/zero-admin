@@ -1,75 +1,75 @@
 info(
-    desc: "首页推荐商品"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "首页推荐商品"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addHomeRecommendProductReq struct {
-        ProductIds []int64 `json:"productIds"`             // 商品id
-    }
-    addHomeRecommendProductResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListHomeRecommendProductReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        ProductName string `json:"productName,optional"`         // 商品名称
-        RecommendStatus int64 `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
-    }
-    ListtHomeRecommendProductData struct {
-        Id int64 `json:"id"`
-        ProductId int64 `json:"productId"`             // 商品id
-        ProductName string `json:"productName"`        // 商品名称
-        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-        Sort int64 `json:"sort"`                       // 排序
-    }
-    ListHomeRecommendProductResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtHomeRecommendProductData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateHomeRecommendProductReq struct {
-        Id int64 `json:"id"`
-        ProductId int64 `json:"productId"`             // 商品id
-        ProductName string `json:"productName"`        // 商品名称
-        RecommendStatus int64 `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-        Sort int64 `json:"sort"`                       // 排序
-    }
-    UpdateHomeRecommendProductResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteHomeRecommendProductReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteHomeRecommendProductResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addHomeRecommendProductReq {
+		ProductIds []int64 `json:"productIds"` // 商品id
+	}
+	addHomeRecommendProductResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListHomeRecommendProductReq {
+		Current         int64  `json:"current,default=1"`
+		PageSize        int64  `json:"pageSize,default=20"`
+		ProductName     string `json:"productName,optional"`      // 商品名称
+		RecommendStatus int64  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+	}
+	ListtHomeRecommendProductData {
+		Id              int64  `json:"id"`
+		ProductId       int64  `json:"productId"`       // 商品id
+		ProductName     string `json:"productName"`     // 商品名称
+		RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int64  `json:"sort"`            // 排序
+	}
+	ListHomeRecommendProductResp {
+		Code     string                           `json:"code"`
+		Message  string                           `json:"message"`
+		Current  int64                            `json:"current,default=1"`
+		Data     []*ListtHomeRecommendProductData `json:"data"`
+		PageSize int64                            `json:"pageSize,default=20"`
+		Success  bool                             `json:"success"`
+		Total    int64                            `json:"total"`
+	}
+	UpdateHomeRecommendProductReq {
+		Id              int64  `json:"id"`
+		ProductId       int64  `json:"productId"`       // 商品id
+		ProductName     string `json:"productName"`     // 商品名称
+		RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int64  `json:"sort"`            // 排序
+	}
+	UpdateHomeRecommendProductResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteHomeRecommendProductReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteHomeRecommendProductResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: sms/homerecommendproduct
-    prefix: /api/sms/homerecommendproduct
+	jwt: Auth
+	middleware: CheckUrl
+	group: sms/homerecommendproduct
+	prefix: /api/sms/homerecommendproduct
 )
 service admin-api {
-    @handler HomeRecommendProductAdd
-    post /add (addHomeRecommendProductReq) returns (addHomeRecommendProductResp)
-
-    @handler HomeRecommendProductList
-    post /list (ListHomeRecommendProductReq) returns (ListHomeRecommendProductResp)
-
-    @handler HomeRecommendProductUpdate
-    post /update (UpdateHomeRecommendProductReq) returns (UpdateHomeRecommendProductResp)
-
-    @handler HomeRecommendProductDelete
-    post /delete (DeleteHomeRecommendProductReq) returns (DeleteHomeRecommendProductResp)
+	@handler HomeRecommendProductAdd
+	post /add (addHomeRecommendProductReq) returns (addHomeRecommendProductResp)
+	
+	@handler HomeRecommendProductList
+	post /list (ListHomeRecommendProductReq) returns (ListHomeRecommendProductResp)
+	
+	@handler HomeRecommendProductUpdate
+	post /update (UpdateHomeRecommendProductReq) returns (UpdateHomeRecommendProductResp)
+	
+	@handler HomeRecommendProductDelete
+	post /delete (DeleteHomeRecommendProductReq) returns (DeleteHomeRecommendProductResp)
 }

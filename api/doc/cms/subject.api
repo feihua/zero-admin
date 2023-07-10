@@ -1,110 +1,110 @@
 info(
-    desc: "专题列表"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "专题列表"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addSubjectReq struct {
-        CategoryId      int64  `json:"categoryId"`
-        Title           string `json:"title"`
-        Pic             string `json:"pic"`           // 专题主图
-        ProductCount    int64  `json:"productCount"` // 关联产品数量
-        RecommendStatus int64  `json:"recommendStatus"`
-        CollectCount    int64  `json:"collectCount"`
-        ReadCount       int64  `json:"readCount"`
-        CommentCount    int64  `json:"commentCount"`
-        AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-        Description     string `json:"description"`
-        ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-        Content         string `json:"content"`
-        ForwardCount    int64  `json:"forwardCount"` // 转发数
-        CategoryName    string `json:"categoryName"` // 专题分类名称
-    }
-    addSubjectResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListSubjectReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Title           string `json:"title,optional"`
-        RecommendStatus int64  `json:"recommendStatus,default=2"`
-        ShowStatus      int64  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
-    }
-    ListtSubjectData struct {
-        Id              int64          `json:"id"`
-        CategoryId      int64  `json:"categoryId"`
-        Title           string `json:"title"`
-        Pic             string `json:"pic"`           // 专题主图
-        ProductCount    int64  `json:"productCount"` // 关联产品数量
-        RecommendStatus int64  `json:"recommendStatus"`
-        CreateTime      string   `json:"createTime"`
-        CollectCount    int64  `json:"collectCount"`
-        ReadCount       int64  `json:"readCount"`
-        CommentCount    int64  `json:"commentCount"`
-        AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-        Description     string `json:"description"`
-        ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-        Content         string `json:"content"`
-        ForwardCount    int64  `json:"forwardCount"` // 转发数
-        CategoryName    string `json:"categoryName"` // 专题分类名称
-    }
-    ListSubjectResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtSubjectData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateSubjectReq struct {
-        Id              int64          `json:"id"`
-        CategoryId      int64  `json:"categoryId"`
-        Title           string `json:"title"`
-        Pic             string `json:"pic"`           // 专题主图
-        ProductCount    int64  `json:"productCount"` // 关联产品数量
-        RecommendStatus int64  `json:"recommendStatus"`
-        CollectCount    int64  `json:"collectCount"`
-        ReadCount       int64  `json:"readCount"`
-        CommentCount    int64  `json:"commentCount"`
-        AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-        Description     string `json:"description"`
-        ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-        Content         string `json:"content"`
-        ForwardCount    int64  `json:"forwardCount"` // 转发数
-        CategoryName    string `json:"categoryName"` // 专题分类名称
-    }
-    UpdateSubjectResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteSubjectReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteSubjectResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addSubjectReq {
+		CategoryId      int64  `json:"categoryId"`
+		Title           string `json:"title"`
+		Pic             string `json:"pic"`          // 专题主图
+		ProductCount    int64  `json:"productCount"` // 关联产品数量
+		RecommendStatus int64  `json:"recommendStatus"`
+		CollectCount    int64  `json:"collectCount"`
+		ReadCount       int64  `json:"readCount"`
+		CommentCount    int64  `json:"commentCount"`
+		AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
+		Description     string `json:"description"`
+		ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+		Content         string `json:"content"`
+		ForwardCount    int64  `json:"forwardCount"` // 转发数
+		CategoryName    string `json:"categoryName"` // 专题分类名称
+	}
+	addSubjectResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListSubjectReq {
+		Current         int64  `json:"current,default=1"`
+		PageSize        int64  `json:"pageSize,default=20"`
+		Title           string `json:"title,optional"`
+		RecommendStatus int64  `json:"recommendStatus,default=2"`
+		ShowStatus      int64  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+	}
+	ListtSubjectData {
+		Id              int64  `json:"id"`
+		CategoryId      int64  `json:"categoryId"`
+		Title           string `json:"title"`
+		Pic             string `json:"pic"`          // 专题主图
+		ProductCount    int64  `json:"productCount"` // 关联产品数量
+		RecommendStatus int64  `json:"recommendStatus"`
+		CreateTime      string `json:"createTime"`
+		CollectCount    int64  `json:"collectCount"`
+		ReadCount       int64  `json:"readCount"`
+		CommentCount    int64  `json:"commentCount"`
+		AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
+		Description     string `json:"description"`
+		ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+		Content         string `json:"content"`
+		ForwardCount    int64  `json:"forwardCount"` // 转发数
+		CategoryName    string `json:"categoryName"` // 专题分类名称
+	}
+	ListSubjectResp {
+		Code     string              `json:"code"`
+		Message  string              `json:"message"`
+		Current  int64               `json:"current,default=1"`
+		Data     []*ListtSubjectData `json:"data"`
+		PageSize int64               `json:"pageSize,default=20"`
+		Success  bool                `json:"success"`
+		Total    int64               `json:"total"`
+	}
+	UpdateSubjectReq {
+		Id              int64  `json:"id"`
+		CategoryId      int64  `json:"categoryId"`
+		Title           string `json:"title"`
+		Pic             string `json:"pic"`          // 专题主图
+		ProductCount    int64  `json:"productCount"` // 关联产品数量
+		RecommendStatus int64  `json:"recommendStatus"`
+		CollectCount    int64  `json:"collectCount"`
+		ReadCount       int64  `json:"readCount"`
+		CommentCount    int64  `json:"commentCount"`
+		AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
+		Description     string `json:"description"`
+		ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+		Content         string `json:"content"`
+		ForwardCount    int64  `json:"forwardCount"` // 转发数
+		CategoryName    string `json:"categoryName"` // 专题分类名称
+	}
+	UpdateSubjectResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteSubjectReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteSubjectResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: cms/subject
-    prefix: /api/cms/subject
+	jwt: Auth
+	middleware: CheckUrl
+	group: cms/subject
+	prefix: /api/cms/subject
 )
 service admin-api {
-    @handler SubjectAdd
-    post /add (addSubjectReq) returns (addSubjectResp)
-
-    @handler SubjectList
-    post /list (ListSubjectReq) returns (ListSubjectResp)
-
-    @handler SubjectUpdate
-    post /update (UpdateSubjectReq) returns (UpdateSubjectResp)
-
-    @handler SubjectDelete
-    post /delete (DeleteSubjectReq) returns (DeleteSubjectResp)
+	@handler SubjectAdd
+	post /add (addSubjectReq) returns (addSubjectResp)
+	
+	@handler SubjectList
+	post /list (ListSubjectReq) returns (ListSubjectResp)
+	
+	@handler SubjectUpdate
+	post /update (UpdateSubjectReq) returns (UpdateSubjectResp)
+	
+	@handler SubjectDelete
+	post /delete (DeleteSubjectReq) returns (DeleteSubjectResp)
 }

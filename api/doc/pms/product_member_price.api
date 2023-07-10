@@ -1,76 +1,76 @@
 info(
-    desc: "会员价格"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "会员价格"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addMemberPriceReq struct {
-        ProductId int64 `json:"productId"`
-        MemberLevelId int64 `json:"memberLevelId"`
-        MemberPrice float64 `json:"memberPrice"` // 会员价格
-        MemberLevelName string `json:"memberLevelName"`
-    }
-    addMemberPriceResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListMemberPriceReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-    }
-    ListtMemberPriceData struct {
-        Id int64 `json:"id"`
-        ProductId int64 `json:"productId"`
-        MemberLevelId int64 `json:"memberLevelId"`
-        MemberPrice float64 `json:"memberPrice"` // 会员价格
-        MemberLevelName string `json:"memberLevelName"`
-    }
-    ListMemberPriceResp struct {
-        Current int64 `json:"current,default=1"`
-        Data []*ListtMemberPriceData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    UpdateMemberPriceReq struct {
-        Id int64 `json:"id"`
-        ProductId int64 `json:"productId"`
-        MemberLevelId int64 `json:"memberLevelId"`
-        MemberPrice float64 `json:"memberPrice"` // 会员价格
-        MemberLevelName string `json:"memberLevelName"`
-    }
-    UpdateMemberPriceResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteMemberPriceReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteMemberPriceResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addMemberPriceReq {
+		ProductId       int64   `json:"productId"`
+		MemberLevelId   int64   `json:"memberLevelId"`
+		MemberPrice     float64 `json:"memberPrice"` // 会员价格
+		MemberLevelName string  `json:"memberLevelName"`
+	}
+	addMemberPriceResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListMemberPriceReq {
+		Current  int64 `json:"current,default=1"`
+		PageSize int64 `json:"pageSize,default=20"`
+	}
+	ListtMemberPriceData {
+		Id              int64   `json:"id"`
+		ProductId       int64   `json:"productId"`
+		MemberLevelId   int64   `json:"memberLevelId"`
+		MemberPrice     float64 `json:"memberPrice"` // 会员价格
+		MemberLevelName string  `json:"memberLevelName"`
+	}
+	ListMemberPriceResp {
+		Current  int64                   `json:"current,default=1"`
+		Data     []*ListtMemberPriceData `json:"data"`
+		PageSize int64                   `json:"pageSize,default=20"`
+		Success  bool                    `json:"success"`
+		Total    int64                   `json:"total"`
+		Code     string                  `json:"code"`
+		Message  string                  `json:"message"`
+	}
+	UpdateMemberPriceReq {
+		Id              int64   `json:"id"`
+		ProductId       int64   `json:"productId"`
+		MemberLevelId   int64   `json:"memberLevelId"`
+		MemberPrice     float64 `json:"memberPrice"` // 会员价格
+		MemberLevelName string  `json:"memberLevelName"`
+	}
+	UpdateMemberPriceResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteMemberPriceReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteMemberPriceResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: product/memberprice
-    prefix: /api/product/memberprice
+	jwt: Auth
+	middleware: CheckUrl
+	group: product/memberprice
+	prefix: /api/product/memberprice
 )
 service admin-api {
-    @handler MemberPriceAdd
-    post /add (addMemberPriceReq) returns (addMemberPriceResp)
-
-    @handler MemberPriceList
-    post /list (ListMemberPriceReq) returns (ListMemberPriceResp)
-
-    @handler MemberPriceUpdate
-    post /update (UpdateMemberPriceReq) returns (UpdateMemberPriceResp)
-
-    @handler MemberPriceDelete
-    post /delete (DeleteMemberPriceReq) returns (DeleteMemberPriceResp)
+	@handler MemberPriceAdd
+	post /add (addMemberPriceReq) returns (addMemberPriceResp)
+	
+	@handler MemberPriceList
+	post /list (ListMemberPriceReq) returns (ListMemberPriceResp)
+	
+	@handler MemberPriceUpdate
+	post /update (UpdateMemberPriceReq) returns (UpdateMemberPriceResp)
+	
+	@handler MemberPriceDelete
+	post /delete (DeleteMemberPriceReq) returns (DeleteMemberPriceResp)
 }

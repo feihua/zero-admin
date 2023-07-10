@@ -1,91 +1,91 @@
 info(
-    desc: "地址"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "地址"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addCompayAddressReq struct {
-        AddressName string `json:"addressName"`     // 地址名称
-        SendStatus int64 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
-        ReceiveStatus int64 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
-        Name string `json:"name"`                   // 收发货人姓名
-        Phone string `json:"phone"`                 // 收货人电话
-        Province string `json:"province"`           // 省/直辖市
-        City string `json:"city"`                   // 市
-        Region string `json:"region"`               // 区
-        DetailAddress string `json:"detailAddress"` // 详细地址
-    }
-    addCompayAddressResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListCompayAddressReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-    }
-    ListtCompayAddressData struct {
-        Id int64 `json:"id"`
-        AddressName string `json:"addressName"`      // 地址名称
-        SendStatus int64 `json:"sendStatus"`         // 默认发货地址：0->否；1->是
-        ReceiveStatus int64 `json:"receiveStatus"`   // 是否默认收货地址：0->否；1->是
-        Name string `json:"name"`                    // 收发货人姓名
-        Phone string `json:"phone"`                  // 收货人电话
-        Province string `json:"province"`            // 省/直辖市
-        City string `json:"city"`                    // 市
-        Region string `json:"region"`                // 区
-        DetailAddress string `json:"detailAddress"`  // 详细地址
-    }
-    ListCompayAddressResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtCompayAddressData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateCompayAddressReq struct {
-        Id int64 `json:"id"`
-        AddressName string `json:"addressName"`     // 地址名称
-        SendStatus int64 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
-        ReceiveStatus int64 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
-        Name string `json:"name"`                   // 收发货人姓名
-        Phone string `json:"phone"`                 // 收货人电话
-        Province string `json:"province"`           // 省/直辖市
-        City string `json:"city"`                   // 市
-        Region string `json:"region"`               // 区
-        DetailAddress string `json:"detailAddress"` // 详细地址
-    }
-    UpdateCompayAddressResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteCompayAddressReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteCompayAddressResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addCompayAddressReq {
+		AddressName   string `json:"addressName"`   // 地址名称
+		SendStatus    int64  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
+		ReceiveStatus int64  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+		Name          string `json:"name"`          // 收发货人姓名
+		Phone         string `json:"phone"`         // 收货人电话
+		Province      string `json:"province"`      // 省/直辖市
+		City          string `json:"city"`          // 市
+		Region        string `json:"region"`        // 区
+		DetailAddress string `json:"detailAddress"` // 详细地址
+	}
+	addCompayAddressResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListCompayAddressReq {
+		Current  int64 `json:"current,default=1"`
+		PageSize int64 `json:"pageSize,default=20"`
+	}
+	ListtCompayAddressData {
+		Id            int64  `json:"id"`
+		AddressName   string `json:"addressName"`   // 地址名称
+		SendStatus    int64  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
+		ReceiveStatus int64  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+		Name          string `json:"name"`          // 收发货人姓名
+		Phone         string `json:"phone"`         // 收货人电话
+		Province      string `json:"province"`      // 省/直辖市
+		City          string `json:"city"`          // 市
+		Region        string `json:"region"`        // 区
+		DetailAddress string `json:"detailAddress"` // 详细地址
+	}
+	ListCompayAddressResp {
+		Code     string                    `json:"code"`
+		Message  string                    `json:"message"`
+		Current  int64                     `json:"current,default=1"`
+		Data     []*ListtCompayAddressData `json:"data"`
+		PageSize int64                     `json:"pageSize,default=20"`
+		Success  bool                      `json:"success"`
+		Total    int64                     `json:"total"`
+	}
+	UpdateCompayAddressReq {
+		Id            int64  `json:"id"`
+		AddressName   string `json:"addressName"`   // 地址名称
+		SendStatus    int64  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
+		ReceiveStatus int64  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+		Name          string `json:"name"`          // 收发货人姓名
+		Phone         string `json:"phone"`         // 收货人电话
+		Province      string `json:"province"`      // 省/直辖市
+		City          string `json:"city"`          // 市
+		Region        string `json:"region"`        // 区
+		DetailAddress string `json:"detailAddress"` // 详细地址
+	}
+	UpdateCompayAddressResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteCompayAddressReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteCompayAddressResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: order/compayaddress
-    prefix: /api/order/compayaddress
+	jwt: Auth
+	middleware: CheckUrl
+	group: order/compayaddress
+	prefix: /api/order/compayaddress
 )
 service admin-api {
-    @handler CompayAddressAdd
-    post /add (addCompayAddressReq) returns (addCompayAddressResp)
-
-    @handler CompayAddressList
-    post /list (ListCompayAddressReq) returns (ListCompayAddressResp)
-
-    @handler CompayAddressUpdate
-    post /update (UpdateCompayAddressReq) returns (UpdateCompayAddressResp)
-
-    @handler CompayAddressDelete
-    post /delete (DeleteCompayAddressReq) returns (DeleteCompayAddressResp)
+	@handler CompayAddressAdd
+	post /add (addCompayAddressReq) returns (addCompayAddressResp)
+	
+	@handler CompayAddressList
+	post /list (ListCompayAddressReq) returns (ListCompayAddressResp)
+	
+	@handler CompayAddressUpdate
+	post /update (UpdateCompayAddressReq) returns (UpdateCompayAddressResp)
+	
+	@handler CompayAddressDelete
+	post /delete (DeleteCompayAddressReq) returns (DeleteCompayAddressResp)
 }

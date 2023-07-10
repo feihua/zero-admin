@@ -1,73 +1,73 @@
 info(
-    desc: "属性分类"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "属性分类"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addProductAttributecategoryReq struct {
-        Name           string `json:"name"`
-    }
-    addProductAttributecategoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addProductAttributecategoryReq {
+		Name string `json:"name"`
+	}
+	addProductAttributecategoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 
-    ListProductAttributecategoryReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Name   string `json:"name,optional"`
-    }
-    ListtProductAttributecategoryData struct {
-        Id             int64  `json:"id"`
-        Name           string `json:"name"`
-        AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
-        ParamCount     int64  `json:"paramCount"`     // 参数数量
-    }
-    ListProductAttributecategoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtProductAttributecategoryData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateProductAttributecategoryReq struct {
-        Id             int64  `json:"id"`
-        Name           string `json:"name"`
-        AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
-        ParamCount     int64  `json:"paramCount"`     // 参数数量
-    }
-    UpdateProductAttributecategoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteProductAttributecategoryReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteProductAttributecategoryResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	ListProductAttributecategoryReq {
+		Current  int64  `json:"current,default=1"`
+		PageSize int64  `json:"pageSize,default=20"`
+		Name     string `json:"name,optional"`
+	}
+	ListtProductAttributecategoryData {
+		Id                     int64  `json:"id"`
+		Name                   string `json:"name"`
+		AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
+		ParamCount             int64  `json:"paramCount"`     // 参数数量
+	}
+	ListProductAttributecategoryResp {
+		Code     string                               `json:"code"`
+		Message  string                               `json:"message"`
+		Current  int64                                `json:"current,default=1"`
+		Data     []*ListtProductAttributecategoryData `json:"data"`
+		PageSize int64                                `json:"pageSize,default=20"`
+		Success  bool                                 `json:"success"`
+		Total    int64                                `json:"total"`
+	}
+	UpdateProductAttributecategoryReq {
+		Id                     int64  `json:"id"`
+		Name                   string `json:"name"`
+		AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
+		ParamCount             int64  `json:"paramCount"`     // 参数数量
+	}
+	UpdateProductAttributecategoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteProductAttributecategoryReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteProductAttributecategoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: product/attributecategory
-    prefix: /api/product/attributecategory
+	jwt: Auth
+	middleware: CheckUrl
+	group: product/attributecategory
+	prefix: /api/product/attributecategory
 )
 service admin-api {
-    @handler ProductAttributecategoryAdd
-    post /add (addProductAttributecategoryReq) returns (addProductAttributecategoryResp)
-
-    @handler ProductAttributecategoryList
-    post /list (ListProductAttributecategoryReq) returns (ListProductAttributecategoryResp)
-
-    @handler ProductAttributecategoryUpdate
-    post /update (UpdateProductAttributecategoryReq) returns (UpdateProductAttributecategoryResp)
-
-    @handler ProductAttributecategoryDelete
-    post /delete (DeleteProductAttributecategoryReq) returns (DeleteProductAttributecategoryResp)
+	@handler ProductAttributecategoryAdd
+	post /add (addProductAttributecategoryReq) returns (addProductAttributecategoryResp)
+	
+	@handler ProductAttributecategoryList
+	post /list (ListProductAttributecategoryReq) returns (ListProductAttributecategoryResp)
+	
+	@handler ProductAttributecategoryUpdate
+	post /update (UpdateProductAttributecategoryReq) returns (UpdateProductAttributecategoryResp)
+	
+	@handler ProductAttributecategoryDelete
+	post /delete (DeleteProductAttributecategoryReq) returns (DeleteProductAttributecategoryResp)
 }

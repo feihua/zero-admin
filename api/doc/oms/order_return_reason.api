@@ -1,76 +1,76 @@
 info(
-    desc: "退货原因"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "退货原因"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
 type (
-    addReturnResonReq struct {
-        Name string `json:"name"`         // 退货类型
-        Sort int64 `json:"sort"`
-        Status int64 `json:"status"`      // 状态：0->不启用；1->启用
-    }
-    addReturnResonResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListReturnResonReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Name string `json:"name,optional"`             // 退货类型
-        Status int64 `json:"status,default=2"`          // 状态：0->不启用；1->启用
-    }
-    ListtReturnResonData struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`             // 退货类型
-        Sort int64 `json:"sort"`
-        Status int64 `json:"status"`          // 状态：0->不启用；1->启用
-        CreateTime string `json:"createTime"` // 添加时间
-    }
-    ListReturnResonResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListtReturnResonData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateReturnResonReq struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`         // 退货类型
-        Sort int64 `json:"sort"`
-        Status int64 `json:"status"`      // 状态：0->不启用；1->启用
-    }
-    UpdateReturnResonResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteReturnResonReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteReturnResonResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addReturnResonReq {
+		Name   string `json:"name"` // 退货类型
+		Sort   int64  `json:"sort"`
+		Status int64  `json:"status"` // 状态：0->不启用；1->启用
+	}
+	addReturnResonResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListReturnResonReq {
+		Current  int64  `json:"current,default=1"`
+		PageSize int64  `json:"pageSize,default=20"`
+		Name     string `json:"name,optional"`    // 退货类型
+		Status   int64  `json:"status,default=2"` // 状态：0->不启用；1->启用
+	}
+	ListtReturnResonData {
+		Id         int64  `json:"id"`
+		Name       string `json:"name"` // 退货类型
+		Sort       int64  `json:"sort"`
+		Status     int64  `json:"status"`     // 状态：0->不启用；1->启用
+		CreateTime string `json:"createTime"` // 添加时间
+	}
+	ListReturnResonResp {
+		Code     string                  `json:"code"`
+		Message  string                  `json:"message"`
+		Current  int64                   `json:"current,default=1"`
+		Data     []*ListtReturnResonData `json:"data"`
+		PageSize int64                   `json:"pageSize,default=20"`
+		Success  bool                    `json:"success"`
+		Total    int64                   `json:"total"`
+	}
+	UpdateReturnResonReq {
+		Id     int64  `json:"id"`
+		Name   string `json:"name"` // 退货类型
+		Sort   int64  `json:"sort"`
+		Status int64  `json:"status"` // 状态：0->不启用；1->启用
+	}
+	UpdateReturnResonResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteReturnResonReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteReturnResonResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: order/returnreason
-    prefix: /api/order/returnreason
+	jwt: Auth
+	middleware: CheckUrl
+	group: order/returnreason
+	prefix: /api/order/returnreason
 )
 service admin-api {
-    @handler ReturnResonAdd
-    post /add (addReturnResonReq) returns (addReturnResonResp)
-
-    @handler ReturnResonList
-    post /list (ListReturnResonReq) returns (ListReturnResonResp)
-
-    @handler ReturnResonUpdate
-    post /update (UpdateReturnResonReq) returns (UpdateReturnResonResp)
-
-    @handler ReturnResonDelete
-    post /delete (DeleteReturnResonReq) returns (DeleteReturnResonResp)
+	@handler ReturnResonAdd
+	post /add (addReturnResonReq) returns (addReturnResonResp)
+	
+	@handler ReturnResonList
+	post /list (ListReturnResonReq) returns (ListReturnResonResp)
+	
+	@handler ReturnResonUpdate
+	post /update (UpdateReturnResonReq) returns (UpdateReturnResonResp)
+	
+	@handler ReturnResonDelete
+	post /delete (DeleteReturnResonReq) returns (DeleteReturnResonResp)
 }

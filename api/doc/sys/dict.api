@@ -1,94 +1,93 @@
 info(
-    desc: "字典"
-    author: "koobe"
-    email: "1002219331@qq.com"
+	desc: "字典"
+	author: "koobe"
+	email: "1002219331@qq.com"
 )
 
-
 type (
-    addDictReq struct {
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description,optional"`            // 描述
-        Sort int64 `json:"sort"`                          // 排序（升序）
-        Remarks string `json:"remarks,optional"`                    // 备注信息
-        DelFlag int64 `json:"delFlag"`                     // 是否删除  0：已删除  1：正常
-    }
-    addDictResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListDictReq struct {
-        Current int64 `json:"current,default=1"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Value string `json:"value,optional"`
-        Label string `json:"label,optional"`
-        DelFlag int64 `json:"delFlag,default=2"`
-        Type string `json:"type,optional "`
-    }
-    ListDictData struct {
-        Id int64 `json:"id"`                               // 编号
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort float64 `json:"sort"`                         // 排序（升序）
-        CreateBy string `json:"createBy"`                  // 创建人
-        CreateTime string `json:"createTime"`              // 创建时间
-        LastUpdateBy string `json:"lastUpdateBy"`          // 更新人
-        LastUpdateTime string `json:"lastUpdateTime"`      // 更新时间
-        Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"delFlag"`                     // 是否删除  0：已删除  1：正常
-    }
-    ListDictResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `json:"current,default=1"`
-        Data []*ListDictData `json:"data"`
-        PageSize int64 `json:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateDictReq struct {
-        Id int64 `json:"id"`                               // 编号
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort int64 `json:"sort"`                         // 排序（升序）
-        Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"delFlag"`                     // 是否删除  0：已删除  1：正常
-    }
-    UpdateDictResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteDictReq struct {
-        Ids []int64 `json:"ids"`
-    }
-    DeleteDictResp struct {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addDictReq {
+		Value       string `json:"value"`                // 数据值
+		Label       string `json:"label"`                // 标签名
+		Type        string `json:"type"`                 // 类型
+		Description string `json:"description,optional"` // 描述
+		Sort        int64  `json:"sort"`                 // 排序（升序）
+		Remarks     string `json:"remarks,optional"`     // 备注信息
+		DelFlag     int64  `json:"delFlag"`              // 是否删除  0：已删除  1：正常
+	}
+	addDictResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListDictReq {
+		Current  int64  `json:"current,default=1"`
+		PageSize int64  `json:"pageSize,default=20"`
+		Value    string `json:"value,optional"`
+		Label    string `json:"label,optional"`
+		DelFlag  int64  `json:"delFlag,default=2"`
+		Type     string `json:"type,optional "`
+	}
+	ListDictData {
+		Id             int64   `json:"id"`             // 编号
+		Value          string  `json:"value"`          // 数据值
+		Label          string  `json:"label"`          // 标签名
+		Type           string  `json:"type"`           // 类型
+		Description    string  `json:"description"`    // 描述
+		Sort           float64 `json:"sort"`           // 排序（升序）
+		CreateBy       string  `json:"createBy"`       // 创建人
+		CreateTime     string  `json:"createTime"`     // 创建时间
+		LastUpdateBy   string  `json:"lastUpdateBy"`   // 更新人
+		LastUpdateTime string  `json:"lastUpdateTime"` // 更新时间
+		Remarks        string  `json:"remarks"`        // 备注信息
+		DelFlag        int64   `json:"delFlag"`        // 是否删除  0：已删除  1：正常
+	}
+	ListDictResp {
+		Code     string          `json:"code"`
+		Message  string          `json:"message"`
+		Current  int64           `json:"current,default=1"`
+		Data     []*ListDictData `json:"data"`
+		PageSize int64           `json:"pageSize,default=20"`
+		Success  bool            `json:"success"`
+		Total    int64           `json:"total"`
+	}
+	UpdateDictReq {
+		Id          int64  `json:"id"`          // 编号
+		Value       string `json:"value"`       // 数据值
+		Label       string `json:"label"`       // 标签名
+		Type        string `json:"type"`        // 类型
+		Description string `json:"description"` // 描述
+		Sort        int64  `json:"sort"`        // 排序（升序）
+		Remarks     string `json:"remarks"`     // 备注信息
+		DelFlag     int64  `json:"delFlag"`     // 是否删除  0：已删除  1：正常
+	}
+	UpdateDictResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteDictReq {
+		Ids []int64 `json:"ids"`
+	}
+	DeleteDictResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: sys/dict
-    prefix: /api/sys/dict
+	jwt: Auth
+	middleware: CheckUrl
+	group: sys/dict
+	prefix: /api/sys/dict
 )
 service admin-api {
-    @handler DictAdd
-    post /add (addDictReq) returns (addDictResp)
-
-    @handler DictList
-    post /list (ListDictReq) returns (ListDictResp)
-
-    @handler DictUpdate
-    post /update (UpdateDictReq) returns (UpdateDictResp)
-
-    @handler DictDelete
-    post /delete (DeleteDictReq) returns (DeleteDictResp)
+	@handler DictAdd
+	post /add (addDictReq) returns (addDictResp)
+	
+	@handler DictList
+	post /list (ListDictReq) returns (ListDictResp)
+	
+	@handler DictUpdate
+	post /update (UpdateDictReq) returns (UpdateDictResp)
+	
+	@handler DictDelete
+	post /delete (DeleteDictReq) returns (DeleteDictResp)
 }
