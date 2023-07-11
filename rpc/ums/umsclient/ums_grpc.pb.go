@@ -28,6 +28,7 @@ type MemberServiceClient interface {
 	MemberUpdate(ctx context.Context, in *MemberUpdateReq, opts ...grpc.CallOption) (*MemberUpdateResp, error)
 	MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error)
 	QueryMemberById(ctx context.Context, in *MemberByIdReq, opts ...grpc.CallOption) (*MemberListData, error)
+	MemberUpdatePassword(ctx context.Context, in *MemberUpdatePasswordReq, opts ...grpc.CallOption) (*MemberUpdateResp, error)
 }
 
 type memberServiceClient struct {
@@ -92,6 +93,15 @@ func (c *memberServiceClient) QueryMemberById(ctx context.Context, in *MemberByI
 	return out, nil
 }
 
+func (c *memberServiceClient) MemberUpdatePassword(ctx context.Context, in *MemberUpdatePasswordReq, opts ...grpc.CallOption) (*MemberUpdateResp, error) {
+	out := new(MemberUpdateResp)
+	err := c.cc.Invoke(ctx, "/umsclient.MemberService/MemberUpdatePassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MemberServiceServer is the server API for MemberService service.
 // All implementations must embed UnimplementedMemberServiceServer
 // for forward compatibility
@@ -102,6 +112,7 @@ type MemberServiceServer interface {
 	MemberUpdate(context.Context, *MemberUpdateReq) (*MemberUpdateResp, error)
 	MemberDelete(context.Context, *MemberDeleteReq) (*MemberDeleteResp, error)
 	QueryMemberById(context.Context, *MemberByIdReq) (*MemberListData, error)
+	MemberUpdatePassword(context.Context, *MemberUpdatePasswordReq) (*MemberUpdateResp, error)
 	mustEmbedUnimplementedMemberServiceServer()
 }
 
@@ -126,6 +137,9 @@ func (UnimplementedMemberServiceServer) MemberDelete(context.Context, *MemberDel
 }
 func (UnimplementedMemberServiceServer) QueryMemberById(context.Context, *MemberByIdReq) (*MemberListData, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberById not implemented")
+}
+func (UnimplementedMemberServiceServer) MemberUpdatePassword(context.Context, *MemberUpdatePasswordReq) (*MemberUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberUpdatePassword not implemented")
 }
 func (UnimplementedMemberServiceServer) mustEmbedUnimplementedMemberServiceServer() {}
 
@@ -248,6 +262,24 @@ func _MemberService_QueryMemberById_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberService_MemberUpdatePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberUpdatePasswordReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberServiceServer).MemberUpdatePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.MemberService/MemberUpdatePassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberServiceServer).MemberUpdatePassword(ctx, req.(*MemberUpdatePasswordReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MemberService_ServiceDesc is the grpc.ServiceDesc for MemberService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -278,6 +310,10 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMemberById",
 			Handler:    _MemberService_QueryMemberById_Handler,
+		},
+		{
+			MethodName: "MemberUpdatePassword",
+			Handler:    _MemberService_MemberUpdatePassword_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

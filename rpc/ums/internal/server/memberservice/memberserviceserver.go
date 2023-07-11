@@ -51,3 +51,8 @@ func (s *MemberServiceServer) QueryMemberById(ctx context.Context, in *umsclient
 	l := memberservicelogic.NewQueryMemberByIdLogic(ctx, s.svcCtx)
 	return l.QueryMemberById(in)
 }
+
+func (s *MemberServiceServer) MemberUpdatePassword(ctx context.Context, in *umsclient.MemberUpdatePasswordReq) (*umsclient.MemberUpdateResp, error) {
+	l := memberservicelogic.NewMemberUpdatePasswordLogic(ctx, s.svcCtx)
+	return l.MemberUpdatePassword(in)
+}

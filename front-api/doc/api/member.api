@@ -1,0 +1,113 @@
+info(
+    desc: "会员相关"
+    author: "koobe"
+    email: "1002219331@qq.com"
+)
+
+type LoginReq {
+    Username string `json:"usernam,optional"` //会员名称
+    Password string `json:"password"`         //密码
+    Mobile string `json:"mobile,optional"`    //手机号码
+}
+
+type LoginResp {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+    Data string `json:"data"`//token
+}
+
+type RegisterReq {
+    Username string `json:"username"`         //会员名称
+    Password string `json:"password"`         //密码
+    Mobile string `json:"mobile"`             //手机号码
+}
+type RegisterResp {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+    Data string `json:"data"`//token
+}
+
+type InfoReq {
+    Username string `json:"username,optional"`//会员名称
+}
+type InfoResp {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+    Data MemberData `json:"data"`
+}
+
+type MemberData {
+    Id int64 `json:"id"`
+    MemberLevelId int64 `json:"memberLevelId"`
+    Username string `json:"username"`                           // 用户名
+    Nickname string `json:"nickname"`                           // 昵称
+    Phone string `json:"phone"`                                 // 手机号码
+    Status int64 `json:"status"`                                // 帐号启用状态:0->禁用；1->启用
+    CreateTime string `json:"createTime"`                       // 注册时间
+    Icon string `json:"icon"`                                   // 头像
+    Gender int64 `json:"gender"`                                // 性别：0->未知；1->男；2->女
+    Birthday string `json:"birthday"`                           // 生日
+    City string `json:"city"`                                   // 所做城市
+    Job string `json:"job"`                                     // 职业
+    PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
+    SourceType int64 `json:"sourceType"`                        // 用户来源
+    Integration int64 `json:"integration"`                      // 积分
+    Growth int64 `json:"growth"`                                // 成长值
+    LuckeyCount int64 `json:"luckeyCount"`                      // 剩余抽奖次数
+    HistoryIntegration int64 `json:"historyIntegration"`        // 历史积分数量
+}
+
+type UpdatePasswordReq {
+    Password string `json:"password"`//密码
+}
+
+type UpdatePasswordResp {
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+}
+
+type UpdateMemberReq {
+    Id int64 `json:"id"`
+    MemberLevelId int64 `json:"memberLevelId"`
+    Username string `json:"username"`                           // 用户名
+    Password string `json:"password"`                           // 密码
+    Nickname string `json:"nickname"`                           // 昵称
+    Phone string `json:"phone"`                                 // 手机号码
+    Status int64 `json:"status"`                                // 帐号启用状态:0->禁用；1->启用
+    CreateTime string `json:"createTime"`                       // 注册时间
+    Icon string `json:"icon"`                                   // 头像
+    Gender int64 `json:"gender"`                                // 性别：0->未知；1->男；2->女
+    Birthday string `json:"birthday"`                           // 生日
+    City string `json:"city"`                                   // 所做城市
+    Job string `json:"job"`                                     // 职业
+    PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
+    SourceType int64 `json:"sourceType"`                        // 用户来源
+    Integration int64 `json:"integration"`                      // 积分
+    Growth int64 `json:"growth"`                                // 成长值
+    LuckeyCount int64 `json:"luckeyCount"`                      // 剩余抽奖次数
+    HistoryIntegration int64 `json:"historyIntegration"`        // 历史积分数量
+}
+type UpdateMemberResp {
+    Code string `json:"code"`
+    Message string `json:"message"`
+}
+@server(
+    group: member/member
+    prefix: /api/member
+)
+service front-api {
+    @handler Login
+    post /login (LoginReq) returns (LoginResp)
+
+    @handler Register
+    post /register (RegisterReq) returns (RegisterResp)
+
+    @handler Info
+    post /info (InfoReq) returns (InfoResp)
+
+    @handler UpdatePassword
+    post /updatePassword (UpdatePasswordReq) returns (UpdatePasswordResp)
+
+    @handler UpdateMember
+    post /updateMember (UpdateMemberReq) returns (UpdateMemberResp)
+}

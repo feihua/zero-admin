@@ -4,13 +4,13 @@ package handler
 import (
 	"net/http"
 
-	auth "zero-admin/front-api/internal/handler/auth"
 	cart "zero-admin/front-api/internal/handler/cart"
 	category "zero-admin/front-api/internal/handler/category"
 	collection "zero-admin/front-api/internal/handler/collection"
 	history "zero-admin/front-api/internal/handler/history"
 	home "zero-admin/front-api/internal/handler/home"
 	memberaddress "zero-admin/front-api/internal/handler/member/address"
+	membermember "zero-admin/front-api/internal/handler/member/member"
 	order "zero-admin/front-api/internal/handler/order"
 	product "zero-admin/front-api/internal/handler/product"
 	"zero-admin/front-api/internal/svc"
@@ -51,15 +51,30 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/login",
-				Handler: auth.LoginHandler(serverCtx),
+				Handler: membermember.LoginHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/register",
-				Handler: auth.RegisterHandler(serverCtx),
+				Handler: membermember.RegisterHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/info",
+				Handler: membermember.InfoHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updatePassword",
+				Handler: membermember.UpdatePasswordHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateMember",
+				Handler: membermember.UpdateMemberHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/api/auth"),
+		rest.WithPrefix("/api/member"),
 	)
 
 	server.AddRoutes(

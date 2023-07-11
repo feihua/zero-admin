@@ -151,6 +151,7 @@ type (
 	MemberTaskListResp                      = umsclient.MemberTaskListResp
 	MemberTaskUpdateReq                     = umsclient.MemberTaskUpdateReq
 	MemberTaskUpdateResp                    = umsclient.MemberTaskUpdateResp
+	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
 

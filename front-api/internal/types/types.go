@@ -74,30 +74,94 @@ type DeleteMemberAddressResp struct {
 }
 
 type LoginReq struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `json:"usernam,optional"` //会员名称
+	Password string `json:"password"`         //密码
+	Mobile   string `json:"mobile,optional"`  //手机号码
 }
 
-type LoginAndRegisterResp struct {
-	Errno  int64                `json:"errno"`
-	Data   LoginAndRegisterData `json:"data"`
-	Errmsg string               `json:"errmsg"`
-}
-
-type LoginAndRegisterData struct {
-	UserInfo UserInfo `json:"userInfo"` //用户基本信息
-	Token    string   `json:"token"`    //服务端返回的token值
-}
-
-type UserInfo struct {
-	NickName  string `json:"nickName"`  //昵称
-	AvatarURL string `json:"avatarUrl"` //头像地址
+type LoginResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    string `json:"data"` //token
 }
 
 type RegisterReq struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Mobile   string `json:"mobile"`
+	Username string `json:"username"` //会员名称
+	Password string `json:"password"` //密码
+	Mobile   string `json:"mobile"`   //手机号码
+}
+
+type RegisterResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    string `json:"data"` //token
+}
+
+type InfoReq struct {
+	Username string `json:"username,optional"` //会员名称
+}
+
+type InfoResp struct {
+	Code    int64      `json:"code"`
+	Message string     `json:"message"`
+	Data    MemberData `json:"data"`
+}
+
+type MemberData struct {
+	Id                    int64  `json:"id"`
+	MemberLevelId         int64  `json:"memberLevelId"`
+	Username              string `json:"username"`              // 用户名
+	Nickname              string `json:"nickname"`              // 昵称
+	Phone                 string `json:"phone"`                 // 手机号码
+	Status                int64  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
+	CreateTime            string `json:"createTime"`            // 注册时间
+	Icon                  string `json:"icon"`                  // 头像
+	Gender                int64  `json:"gender"`                // 性别：0->未知；1->男；2->女
+	Birthday              string `json:"birthday"`              // 生日
+	City                  string `json:"city"`                  // 所做城市
+	Job                   string `json:"job"`                   // 职业
+	PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
+	SourceType            int64  `json:"sourceType"`            // 用户来源
+	Integration           int64  `json:"integration"`           // 积分
+	Growth                int64  `json:"growth"`                // 成长值
+	LuckeyCount           int64  `json:"luckeyCount"`           // 剩余抽奖次数
+	HistoryIntegration    int64  `json:"historyIntegration"`    // 历史积分数量
+}
+
+type UpdatePasswordReq struct {
+	Password string `json:"password"` //密码
+}
+
+type UpdatePasswordResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateMemberReq struct {
+	Id                    int64  `json:"id"`
+	MemberLevelId         int64  `json:"memberLevelId"`
+	Username              string `json:"username"`              // 用户名
+	Password              string `json:"password"`              // 密码
+	Nickname              string `json:"nickname"`              // 昵称
+	Phone                 string `json:"phone"`                 // 手机号码
+	Status                int64  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
+	CreateTime            string `json:"createTime"`            // 注册时间
+	Icon                  string `json:"icon"`                  // 头像
+	Gender                int64  `json:"gender"`                // 性别：0->未知；1->男；2->女
+	Birthday              string `json:"birthday"`              // 生日
+	City                  string `json:"city"`                  // 所做城市
+	Job                   string `json:"job"`                   // 职业
+	PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
+	SourceType            int64  `json:"sourceType"`            // 用户来源
+	Integration           int64  `json:"integration"`           // 积分
+	Growth                int64  `json:"growth"`                // 成长值
+	LuckeyCount           int64  `json:"luckeyCount"`           // 剩余抽奖次数
+	HistoryIntegration    int64  `json:"historyIntegration"`    // 历史积分数量
+}
+
+type UpdateMemberResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type CartItemAddReq struct {

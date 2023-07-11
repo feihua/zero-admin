@@ -1,5 +1,5 @@
 import "api/address.api"
-import "api/auth.api"
+import "api/member.api"
 import "api/cart.api"
 import "api/category.api"
 import "api/home.api"
