@@ -24,6 +24,7 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// CouponHistoryList 获取用户优惠券列表
 func (l *CouponHistoryListLogic) CouponHistoryList(req *types.ListCouponHistoryReq) (resp *types.ListCouponHistoryResp, err error) {
 	historyList, err := l.svcCtx.CouponHistoryService.CouponHistoryList(l.ctx, &smsclient.CouponHistoryListReq{
 		Current:   req.Current,

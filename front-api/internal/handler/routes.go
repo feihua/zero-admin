@@ -260,6 +260,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/list",
 				Handler: membercoupon.CouponHistoryListHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/listByProductId",
+				Handler: membercoupon.CouponListByProductIdHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/member/coupon"),

@@ -47,3 +47,9 @@ func (s *CouponServiceServer) CouponFindById(ctx context.Context, in *smsclient.
 	l := couponservicelogic.NewCouponFindByIdLogic(ctx, s.svcCtx)
 	return l.CouponFindById(in)
 }
+
+// 根据优惠券ids查询优惠券
+func (s *CouponServiceServer) CouponFindByIds(ctx context.Context, in *smsclient.CouponFindByIdsReq) (*smsclient.CouponFindByIdsResp, error) {
+	l := couponservicelogic.NewCouponFindByIdsLogic(ctx, s.svcCtx)
+	return l.CouponFindByIds(in)
+}

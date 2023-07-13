@@ -19,6 +19,8 @@ type (
 	CouponDeleteResp                        = smsclient.CouponDeleteResp
 	CouponFindByIdReq                       = smsclient.CouponFindByIdReq
 	CouponFindByIdResp                      = smsclient.CouponFindByIdResp
+	CouponFindByIdsReq                      = smsclient.CouponFindByIdsReq
+	CouponFindByIdsResp                     = smsclient.CouponFindByIdsResp
 	CouponHistoryAddReq                     = smsclient.CouponHistoryAddReq
 	CouponHistoryAddResp                    = smsclient.CouponHistoryAddResp
 	CouponHistoryDeleteReq                  = smsclient.CouponHistoryDeleteReq
@@ -148,6 +150,8 @@ type (
 		CouponDelete(ctx context.Context, in *CouponDeleteReq, opts ...grpc.CallOption) (*CouponDeleteResp, error)
 		// 根据优惠券id查询优惠券
 		CouponFindById(ctx context.Context, in *CouponFindByIdReq, opts ...grpc.CallOption) (*CouponFindByIdResp, error)
+		// 根据优惠券ids查询优惠券
+		CouponFindByIds(ctx context.Context, in *CouponFindByIdsReq, opts ...grpc.CallOption) (*CouponFindByIdsResp, error)
 	}
 
 	defaultCouponService struct {
@@ -185,4 +189,10 @@ func (m *defaultCouponService) CouponDelete(ctx context.Context, in *CouponDelet
 func (m *defaultCouponService) CouponFindById(ctx context.Context, in *CouponFindByIdReq, opts ...grpc.CallOption) (*CouponFindByIdResp, error) {
 	client := smsclient.NewCouponServiceClient(m.cli.Conn())
 	return client.CouponFindById(ctx, in, opts...)
+}
+
+// 根据优惠券ids查询优惠券
+func (m *defaultCouponService) CouponFindByIds(ctx context.Context, in *CouponFindByIdsReq, opts ...grpc.CallOption) (*CouponFindByIdsResp, error) {
+	client := smsclient.NewCouponServiceClient(m.cli.Conn())
+	return client.CouponFindByIds(ctx, in, opts...)
 }

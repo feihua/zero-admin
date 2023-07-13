@@ -26,6 +26,7 @@ func NewCouponAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CouponA
 	}
 }
 
+// CouponAdd 领取指定优惠券
 func (l *CouponAddLogic) CouponAdd(req *types.AddCouponReq) (resp *types.AddCouponResp, err error) {
 	coupon, err := l.svcCtx.CouponService.CouponFindById(l.ctx, &smsclient.CouponFindByIdReq{CouponId: req.CouponId})
 

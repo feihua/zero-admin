@@ -19,6 +19,7 @@ type (
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64, in *smsclient.CouponListReq) (*[]SmsCoupon, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		FindAllByIds(ctx context.Context, ids []int64) (*[]SmsCoupon, error)
 	}
 
 	customSmsCouponModel struct {
@@ -105,4 +106,18 @@ func (m *customSmsCouponModel) DeleteByIds(ctx context.Context, ids []int64) err
 	// 执行删除语句
 	_, err := m.conn.ExecCtx(ctx, query, args...)
 	return err
+}
+
+func (m *customSmsCouponModel) FindAllByIds(ctx context.Context, ids []int64) (*[]SmsCoupon, error) {
+	query := fmt.Sprintf("select %s from %s where `id` in (?)", smsCouponRows, m.table)
+	var resp []SmsCoupon
+	err := m.conn.QueryRows(&resp, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }
