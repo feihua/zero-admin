@@ -161,6 +161,7 @@ message CouponHistoryListReq {
   int64 pageSize = 2;
   int64      CouponId = 3;
   int64      MemberId = 4;
+  int64      UseStatus = 5;
 }
 
 message CouponHistoryListData{

@@ -255,6 +255,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/add",
 				Handler: membercoupon.CouponAddHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list",
+				Handler: membercoupon.CouponHistoryListHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/member/coupon"),

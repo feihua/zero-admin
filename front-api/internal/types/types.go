@@ -860,10 +860,36 @@ type ReadHistoryClearResp struct {
 }
 
 type AddCouponReq struct {
-	CouponId int64 `json:"couponId"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	CouponId int64 `json:"couponId"`
 }
 
 type AddCouponResp struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
+}
+
+type ListCouponHistoryReq struct {
+	Current   int64 `json:"current,default=1"`
+	PageSize  int64 `json:"pageSize,default=20"`
+	UseStatus int64 `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
+}
+
+type ListCouponHistoryData struct {
+	Id             int64  `json:"id"`
+	CouponId       int64  `json:"couponId"`
+	MemberId       int64  `json:"memberId"`
+	CouponCode     string `json:"couponCode"`
+	MemberNickname string `json:"memberNickName"` // 领取人昵称
+	GetType        int64  `json:"getType"`        // 获取类型：0->后台赠送；1->主动获取
+	CreateTime     string `json:"createTime"`
+	UseStatus      int64  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
+	UseTime        string `json:"useTime"`   // 使用时间
+	OrderId        int64  `json:"orderId"`   // 订单编号
+	OrderSn        string `json:"orderSn"`   // 订单号码
+}
+
+type ListCouponHistoryResp struct {
+	Code    int64                    `json:"code"`
+	Message string                   `json:"message"`
+	Data    []*ListCouponHistoryData `json:"data"`
 }

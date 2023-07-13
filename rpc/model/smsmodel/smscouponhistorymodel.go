@@ -43,6 +43,10 @@ func (m *customSmsCouponHistoryModel) FindAll(ctx context.Context, in *smsclient
 		where = where + fmt.Sprintf(" AND member_id = %d", in.MemberId)
 	}
 
+	if in.UseStatus != 3 {
+		where = where + fmt.Sprintf(" AND use_status = %d", in.UseStatus)
+	}
+
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", smsCouponHistoryRows, m.table, where)
 	var resp []SmsCouponHistory
 	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
@@ -64,7 +68,9 @@ func (m *customSmsCouponHistoryModel) Count(ctx context.Context, in *smsclient.C
 	if in.MemberId != 0 {
 		where = where + fmt.Sprintf(" AND member_id = %d", in.MemberId)
 	}
-
+	if in.UseStatus != 3 {
+		where = where + fmt.Sprintf(" AND use_status = %d", in.UseStatus)
+	}
 	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
