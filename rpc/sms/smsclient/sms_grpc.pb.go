@@ -26,6 +26,8 @@ type CouponServiceClient interface {
 	CouponList(ctx context.Context, in *CouponListReq, opts ...grpc.CallOption) (*CouponListResp, error)
 	CouponUpdate(ctx context.Context, in *CouponUpdateReq, opts ...grpc.CallOption) (*CouponUpdateResp, error)
 	CouponDelete(ctx context.Context, in *CouponDeleteReq, opts ...grpc.CallOption) (*CouponDeleteResp, error)
+	//根据优惠券id查询优惠券
+	CouponFindById(ctx context.Context, in *CouponFindByIdReq, opts ...grpc.CallOption) (*CouponFindByIdResp, error)
 }
 
 type couponServiceClient struct {
@@ -72,6 +74,15 @@ func (c *couponServiceClient) CouponDelete(ctx context.Context, in *CouponDelete
 	return out, nil
 }
 
+func (c *couponServiceClient) CouponFindById(ctx context.Context, in *CouponFindByIdReq, opts ...grpc.CallOption) (*CouponFindByIdResp, error) {
+	out := new(CouponFindByIdResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponService/CouponFindById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CouponServiceServer is the server API for CouponService service.
 // All implementations must embed UnimplementedCouponServiceServer
 // for forward compatibility
@@ -80,6 +91,8 @@ type CouponServiceServer interface {
 	CouponList(context.Context, *CouponListReq) (*CouponListResp, error)
 	CouponUpdate(context.Context, *CouponUpdateReq) (*CouponUpdateResp, error)
 	CouponDelete(context.Context, *CouponDeleteReq) (*CouponDeleteResp, error)
+	//根据优惠券id查询优惠券
+	CouponFindById(context.Context, *CouponFindByIdReq) (*CouponFindByIdResp, error)
 	mustEmbedUnimplementedCouponServiceServer()
 }
 
@@ -98,6 +111,9 @@ func (UnimplementedCouponServiceServer) CouponUpdate(context.Context, *CouponUpd
 }
 func (UnimplementedCouponServiceServer) CouponDelete(context.Context, *CouponDeleteReq) (*CouponDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CouponDelete not implemented")
+}
+func (UnimplementedCouponServiceServer) CouponFindById(context.Context, *CouponFindByIdReq) (*CouponFindByIdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CouponFindById not implemented")
 }
 func (UnimplementedCouponServiceServer) mustEmbedUnimplementedCouponServiceServer() {}
 
@@ -184,6 +200,24 @@ func _CouponService_CouponDelete_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CouponService_CouponFindById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CouponFindByIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponServiceServer).CouponFindById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponService/CouponFindById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponServiceServer).CouponFindById(ctx, req.(*CouponFindByIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CouponService_ServiceDesc is the grpc.ServiceDesc for CouponService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -206,6 +240,10 @@ var CouponService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CouponDelete",
 			Handler:    _CouponService_CouponDelete_Handler,
+		},
+		{
+			MethodName: "CouponFindById",
+			Handler:    _CouponService_CouponFindById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

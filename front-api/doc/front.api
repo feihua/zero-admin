@@ -7,6 +7,7 @@ import "api/order.api"
 import "api/product.api"
 import "api/collection.api"
 import "api/history.api"
+import "api/coupon.api"
 
 info(
 	title: "zero-front"

@@ -858,3 +858,12 @@ type ReadHistoryClearResp struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
 }
+
+type AddCouponReq struct {
+	CouponId int64 `json:"couponId"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+}
+
+type AddCouponResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}

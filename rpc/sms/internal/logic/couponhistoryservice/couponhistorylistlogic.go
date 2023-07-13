@@ -24,8 +24,8 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *CouponHistoryListLogic) CouponHistoryList(in *smsclient.CouponHistoryListReq) (*smsclient.CouponHistoryListResp, error) {
-	all, err := l.svcCtx.SmsCouponHistoryModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.SmsCouponHistoryModel.Count(l.ctx)
+	all, err := l.svcCtx.SmsCouponHistoryModel.FindAll(l.ctx, in)
+	count, _ := l.svcCtx.SmsCouponHistoryModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)

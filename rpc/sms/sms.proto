@@ -102,15 +102,43 @@ message CouponListResp {
   int64 total = 1;
   repeated  CouponListData list = 2;
 }
+
+message CouponFindByIdReq {
+  int64 CouponId = 1;
+}
+
+message CouponFindByIdResp {
+  int64 Id = 1; //
+  int64 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string Name = 3; //名称
+  int64 Platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int64 Count = 5; //数量
+  double Amount = 6; //金额
+  int64 PerLimit = 7; //每人限领张数
+  double MinPoint = 8; //使用门槛；0表示无门槛
+  string StartTime = 9; //开始时间
+  string EndTime = 10; //结束时间
+  int64 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  string Note = 12; //备注
+  int64 PublishCount = 13; //发行数量
+  int64 UseCount = 14; //已使用数量
+  int64 ReceiveCount = 15; //领取数量
+  string EnableTime = 16; //可以领取的日期
+  string Code = 17; //优惠码
+  int64 MemberLevel = 18; //可领取的会员类型：0->无限时
+}
 service CouponService {
 
   rpc CouponAdd(CouponAddReq) returns(CouponAddResp);
   rpc CouponList(CouponListReq) returns(CouponListResp);
   rpc CouponUpdate(CouponUpdateReq) returns(CouponUpdateResp);
   rpc CouponDelete(CouponDeleteReq) returns(CouponDeleteResp);
+  //根据优惠券id查询优惠券
+  rpc CouponFindById(CouponFindByIdReq) returns(CouponFindByIdResp);
 
 
 }
+
 message CouponHistoryAddReq {
   int64      CouponId = 2;
   int64      MemberId = 3;
@@ -131,6 +159,8 @@ message CouponHistoryAddResp {
 message CouponHistoryListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  int64      CouponId = 3;
+  int64      MemberId = 4;
 }
 
 message CouponHistoryListData{

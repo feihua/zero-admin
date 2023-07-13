@@ -10,6 +10,7 @@ import (
 	history "zero-admin/front-api/internal/handler/history"
 	home "zero-admin/front-api/internal/handler/home"
 	memberaddress "zero-admin/front-api/internal/handler/member/address"
+	membercoupon "zero-admin/front-api/internal/handler/member/coupon"
 	membermember "zero-admin/front-api/internal/handler/member/member"
 	order "zero-admin/front-api/internal/handler/order"
 	product "zero-admin/front-api/internal/handler/product"
@@ -245,5 +246,17 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/history"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/add",
+				Handler: membercoupon.CouponAddHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/coupon"),
 	)
 }

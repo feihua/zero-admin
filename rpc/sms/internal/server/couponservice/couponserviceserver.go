@@ -41,3 +41,9 @@ func (s *CouponServiceServer) CouponDelete(ctx context.Context, in *smsclient.Co
 	l := couponservicelogic.NewCouponDeleteLogic(ctx, s.svcCtx)
 	return l.CouponDelete(in)
 }
+
+// 根据优惠券id查询优惠券
+func (s *CouponServiceServer) CouponFindById(ctx context.Context, in *smsclient.CouponFindByIdReq) (*smsclient.CouponFindByIdResp, error) {
+	l := couponservicelogic.NewCouponFindByIdLogic(ctx, s.svcCtx)
+	return l.CouponFindById(in)
+}
