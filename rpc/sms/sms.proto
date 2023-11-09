@@ -300,7 +300,9 @@ message CouponProductRelationAddResp {
 }
 
 message CouponProductRelationListReq {
-  int64    ProductId = 1;
+  int64 ProductId = 1;
+  int64 Current = 2;
+  int64 PageSize = 3;
 }
 
 message CouponProductRelationListData{
