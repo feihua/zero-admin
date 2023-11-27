@@ -4,45 +4,29 @@ package payclient;
 
 option go_package = "./payclient";
 
-message UnifiedOrderReq {
+message PayReq {
   string BusinessId = 1;
   string Amount = 2;
   string Remarks = 3;
-  string Code = 4;
-  string MerId = 5;
-  string PayType = 6;
 }
 
-message UnifiedOrderResp {
-  string AppId = 1;
-  string PartnerId = 2;
-  string prepayId = 3;
-  string PackageStr = 4;
-  string NonceStr = 5;
-  string Timestamp = 6;
-  string Sign = 7;
-  string MWebUrl = 8;
+message PayResp {
+  string PayInfo = 1;
 }
 
-message H5UnifiedOrderResp {
-  string MWebUrl = 1;
-}
-
-message OrderQueryReq {
+message PayQueryReq {
   string BusinessId = 1;
-  string MerId = 2;
-  string PayType = 6;
 }
 
-message OrderQueryResp {
-  string PayMessage = 1;
+message PayQueryResp {
+  string BusinessId = 1;
   string PayStatus = 2;
 }
 
-service Pay {
-  rpc AppUnifiedOrder(UnifiedOrderReq) returns(UnifiedOrderResp);
-  rpc H5UnifiedOrder(UnifiedOrderReq) returns(H5UnifiedOrderResp);
-  rpc JsUnifiedOrder(UnifiedOrderReq) returns(UnifiedOrderResp);
+// 支付
+service PayService {
 
-  rpc OrderQuery(OrderQueryReq) returns(OrderQueryResp);
+  rpc Pay(PayReq) returns(PayResp);
+
+  rpc PayQuery(PayQueryResp) returns(PayQueryReq);
 }
