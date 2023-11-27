@@ -8,6 +8,7 @@ message PayReq {
   string BusinessId = 1;
   string Amount = 2;
   string Remarks = 3;
+  int32 PayType = 4;//1:支付宝,2:微信
 }
 
 message PayResp {
