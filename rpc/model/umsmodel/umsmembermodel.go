@@ -18,6 +18,7 @@ type (
 		umsMemberModel
 		Count(ctx context.Context, in *umsclient.MemberListReq) (int64, error)
 		FindAll(ctx context.Context, in *umsclient.MemberListReq) (*[]UmsMember, error)
+		FindMemberByNameOrPhone(ctx context.Context, name, phone string) (*UmsMember, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -85,6 +86,20 @@ func (m *customUmsMemberModel) Count(ctx context.Context, in *umsclient.MemberLi
 		return 0, ErrNotFound
 	default:
 		return 0, err
+	}
+}
+
+func (m *customUmsMemberModel) FindMemberByNameOrPhone(ctx context.Context, name, phone string) (*UmsMember, error) {
+	var resp UmsMember
+	query := fmt.Sprintf("select %s from %s where `username` = ? or `phone` = ? limit 1", umsMemberRows, m.table)
+	err := m.conn.QueryRowCtx(ctx, &resp, query, name, phone)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
 	}
 }
 

@@ -5,7 +5,7 @@ info(
 )
 
 type LoginReq {
-    Username string `json:"usernam,optional"` //会员名称
+    Username string `json:"username,optional"` //会员名称
     Password string `json:"password"`         //密码
     Mobile string `json:"mobile,optional"`    //手机号码
 }

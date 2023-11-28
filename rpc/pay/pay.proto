@@ -5,10 +5,11 @@ package payclient;
 option go_package = "./payclient";
 
 message PayReq {
-  string BusinessId = 1;
-  string Amount = 2;
-  string Remarks = 3;
-  int32 PayType = 4;//1:支付宝,2:微信
+  string BusinessId = 1;//业务编号
+  string Amount = 2;//支付金额
+  string Remarks = 3;//备注
+  int32  Channel = 4;//1:支付宝,2:微信
+  int32 PayType = 5;//1:app,2:网页,3:小程序
 }
 
 message PayResp {

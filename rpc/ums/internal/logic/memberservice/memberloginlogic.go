@@ -30,7 +30,7 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 
 	//1.校验参数
 	//根据用户名查询账号
-	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(l.ctx, in.Username)
+	member, _ := l.svcCtx.UmsMemberModel.FindMemberByNameOrPhone(l.ctx, in.Username, in.Phone)
 	if member == nil {
 		logx.WithContext(l.ctx).Errorf("账号不存在,参数:%s", in.Username)
 		return nil, errors.New("账号不存在")

@@ -74,9 +74,9 @@ type DeleteMemberAddressResp struct {
 }
 
 type LoginReq struct {
-	Username string `json:"usernam,optional"` //会员名称
-	Password string `json:"password"`         //密码
-	Mobile   string `json:"mobile,optional"`  //手机号码
+	Username string `json:"username,optional"` //会员名称
+	Password string `json:"password"`          //密码
+	Mobile   string `json:"mobile,optional"`   //手机号码
 }
 
 type LoginResp struct {
