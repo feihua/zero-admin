@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponCountLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/28 15:16
+*/
 type CouponCountLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext

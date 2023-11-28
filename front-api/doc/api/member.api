@@ -32,9 +32,6 @@ type RegisterResp {
     Data string `json:"data"`//token
 }
 
-type InfoReq {
-    Username string `json:"username,optional"`//会员名称
-}
 type InfoResp {
     Code int64 `json:"code"`
     Message string `json:"message"`
@@ -105,6 +102,14 @@ service front-api {
     // 会员登录
     @handler Login
     post /login (LoginReq) returns (LoginResp)
+}
+
+@server(
+    jwt: Auth
+    group: member/member
+    prefix: /api/member
+)
+service front-api {
 
     // 会员注册
     @handler Register
@@ -112,7 +117,7 @@ service front-api {
 
     // 获取会员个人信息
     @handler Info
-    post /info (InfoReq) returns (InfoResp)
+    post /info returns (InfoResp)
 
     // 更新会员密码
     @handler UpdatePassword

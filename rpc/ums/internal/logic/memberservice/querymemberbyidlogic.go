@@ -3,6 +3,7 @@ package memberservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// QueryMemberByIdLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/28 15:07
+*/
 type QueryMemberByIdLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,12 +30,13 @@ func NewQueryMemberByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 	}
 }
 
+// QueryMemberById 获取个人信息
 func (l *QueryMemberByIdLogic) QueryMemberById(in *umsclient.MemberByIdReq) (*umsclient.MemberListData, error) {
 	member, err := l.svcCtx.UmsMemberModel.FindOne(l.ctx, in.Id)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("根据会员id查询会员信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "根据会员id查询会员信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -57,7 +64,7 @@ func (l *QueryMemberByIdLogic) QueryMemberById(in *umsclient.MemberByIdReq) (*um
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(resp)
-	logx.WithContext(l.ctx).Infof("根据会员id查询会员信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "根据会员id查询会员信息,参数：%s,响应：%s", reqStr, listStr)
 
 	return resp, nil
 }

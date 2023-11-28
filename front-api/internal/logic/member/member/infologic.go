@@ -2,6 +2,7 @@ package member
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/sms/smsclient"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// InfoLogic 获取会员个人信息
+/*
+Author: LiuFeiHua
+Date: 2023/11/28 14:53
+*/
 type InfoLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,14 +31,22 @@ func NewInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *InfoLogic {
 	}
 }
 
-func (l *InfoLogic) Info(req *types.InfoReq) (resp *types.InfoResp, err error) {
-	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: l.ctx.Value("memberId").(int64)})
+// Info 获取个人信息
+func (l *InfoLogic) Info() (resp *types.InfoResp, err error) {
+	//从jwt中提取会员id
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
 
 	// 获取用户优惠券
 	result, err := l.svcCtx.CouponHistoryService.CouponCount(l.ctx, &smsclient.CouponCountReq{
-		MemberId: l.ctx.Value("memberId").(int64),
+		MemberId: memberId,
 	})
 
+	var count int64 = 0
+	//获取不到优惠券数量的时候,默认返回0
+	if result != nil {
+		count = result.Total
+	}
 	return &types.InfoResp{
 		Code:    0,
 		Message: "查询会员信息",
@@ -55,7 +69,7 @@ func (l *InfoLogic) Info(req *types.InfoReq) (resp *types.InfoResp, err error) {
 			Growth:                member.Growth,
 			LuckeyCount:           member.LuckeyCount,
 			HistoryIntegration:    member.HistoryIntegration,
-			CouponCount:           result.Total,
+			CouponCount:           count,
 		},
 	}, nil
 }

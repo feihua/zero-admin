@@ -102,10 +102,6 @@ type RegisterResp struct {
 	Data    string `json:"data"` //token
 }
 
-type InfoReq struct {
-	Username string `json:"username,optional"` //会员名称
-}
-
 type InfoResp struct {
 	Code    int64      `json:"code"`
 	Message string     `json:"message"`
