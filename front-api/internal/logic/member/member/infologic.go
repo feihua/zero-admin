@@ -2,6 +2,7 @@ package member
 
 import (
 	"context"
+	"zero-admin/rpc/sms/smsclient"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -27,6 +28,11 @@ func NewInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *InfoLogic {
 func (l *InfoLogic) Info(req *types.InfoReq) (resp *types.InfoResp, err error) {
 	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: l.ctx.Value("memberId").(int64)})
 
+	// 获取用户优惠券
+	result, err := l.svcCtx.CouponHistoryService.CouponCount(l.ctx, &smsclient.CouponCountReq{
+		MemberId: l.ctx.Value("memberId").(int64),
+	})
+
 	return &types.InfoResp{
 		Code:    0,
 		Message: "查询会员信息",
@@ -49,6 +55,7 @@ func (l *InfoLogic) Info(req *types.InfoReq) (resp *types.InfoResp, err error) {
 			Growth:                member.Growth,
 			LuckeyCount:           member.LuckeyCount,
 			HistoryIntegration:    member.HistoryIntegration,
+			CouponCount:           result.Total,
 		},
 	}, nil
 }

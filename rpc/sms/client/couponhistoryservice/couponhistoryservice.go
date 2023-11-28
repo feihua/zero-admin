@@ -15,6 +15,8 @@ import (
 type (
 	CouponAddReq                            = smsclient.CouponAddReq
 	CouponAddResp                           = smsclient.CouponAddResp
+	CouponCountReq                          = smsclient.CouponCountReq
+	CouponCountResp                         = smsclient.CouponCountResp
 	CouponDeleteReq                         = smsclient.CouponDeleteReq
 	CouponDeleteResp                        = smsclient.CouponDeleteResp
 	CouponFindByIdReq                       = smsclient.CouponFindByIdReq
@@ -148,6 +150,8 @@ type (
 		CouponHistoryList(ctx context.Context, in *CouponHistoryListReq, opts ...grpc.CallOption) (*CouponHistoryListResp, error)
 		CouponHistoryUpdate(ctx context.Context, in *CouponHistoryUpdateReq, opts ...grpc.CallOption) (*CouponHistoryUpdateResp, error)
 		CouponHistoryDelete(ctx context.Context, in *CouponHistoryDeleteReq, opts ...grpc.CallOption) (*CouponHistoryDeleteResp, error)
+		// 登录时获取用户还没有使用的获取优惠券数量
+		CouponCount(ctx context.Context, in *CouponCountReq, opts ...grpc.CallOption) (*CouponCountResp, error)
 	}
 
 	defaultCouponHistoryService struct {
@@ -179,4 +183,10 @@ func (m *defaultCouponHistoryService) CouponHistoryUpdate(ctx context.Context, i
 func (m *defaultCouponHistoryService) CouponHistoryDelete(ctx context.Context, in *CouponHistoryDeleteReq, opts ...grpc.CallOption) (*CouponHistoryDeleteResp, error) {
 	client := smsclient.NewCouponHistoryServiceClient(m.cli.Conn())
 	return client.CouponHistoryDelete(ctx, in, opts...)
+}
+
+// 登录时获取用户还没有使用的获取优惠券数量
+func (m *defaultCouponHistoryService) CouponCount(ctx context.Context, in *CouponCountReq, opts ...grpc.CallOption) (*CouponCountResp, error) {
+	client := smsclient.NewCouponHistoryServiceClient(m.cli.Conn())
+	return client.CouponCount(ctx, in, opts...)
 }

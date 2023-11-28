@@ -151,16 +151,16 @@ service CouponService {
 }
 
 message CouponHistoryAddReq {
-  int64      CouponId = 2;
-  int64      MemberId = 3;
-  string      CouponCode = 4;
-  string      MemberNickname = 5;
-  int64      GetType = 6;
-  string  CreateTime = 7;
-  int64      UseStatus = 8;
-  string  UseTime = 9;
-  int64      OrderId = 10;
-  string      OrderSn = 11;
+  int64      CouponId = 1;
+  int64      MemberId = 2;
+  string      CouponCode = 3;
+  string      MemberNickname = 4;
+  int64      GetType = 5;
+  string  CreateTime = 6;
+  int64      UseStatus = 7;
+  string  UseTime = 8;
+  int64      OrderId = 9;
+  string      OrderSn = 10;
 }
 
 message CouponHistoryAddResp {
@@ -220,6 +220,13 @@ message CouponHistoryDeleteReq {
 message CouponHistoryDeleteResp {
   string pong = 1;
 }
+
+message CouponCountReq {
+  int64 memberId = 1;
+}
+message CouponCountResp {
+  int64 total = 1;
+}
 service CouponHistoryService {
 
   rpc CouponHistoryAdd(CouponHistoryAddReq) returns(CouponHistoryAddResp);
@@ -227,7 +234,8 @@ service CouponHistoryService {
   rpc CouponHistoryUpdate(CouponHistoryUpdateReq) returns(CouponHistoryUpdateResp);
   rpc CouponHistoryDelete(CouponHistoryDeleteReq) returns(CouponHistoryDeleteResp);
 
-
+  //登录时获取用户还没有使用的获取优惠券数量
+  rpc CouponCount(CouponCountReq) returns(CouponCountResp);
 }
 
 message CouponProductCategoryRelationAddReq {

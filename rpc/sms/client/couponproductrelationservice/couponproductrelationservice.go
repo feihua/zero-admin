@@ -15,6 +15,8 @@ import (
 type (
 	CouponAddReq                            = smsclient.CouponAddReq
 	CouponAddResp                           = smsclient.CouponAddResp
+	CouponCountReq                          = smsclient.CouponCountReq
+	CouponCountResp                         = smsclient.CouponCountResp
 	CouponDeleteReq                         = smsclient.CouponDeleteReq
 	CouponDeleteResp                        = smsclient.CouponDeleteResp
 	CouponFindByIdReq                       = smsclient.CouponFindByIdReq

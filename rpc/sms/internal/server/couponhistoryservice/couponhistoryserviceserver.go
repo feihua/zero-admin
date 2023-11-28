@@ -41,3 +41,9 @@ func (s *CouponHistoryServiceServer) CouponHistoryDelete(ctx context.Context, in
 	l := couponhistoryservicelogic.NewCouponHistoryDeleteLogic(ctx, s.svcCtx)
 	return l.CouponHistoryDelete(in)
 }
+
+// 登录时获取用户还没有使用的获取优惠券数量
+func (s *CouponHistoryServiceServer) CouponCount(ctx context.Context, in *smsclient.CouponCountReq) (*smsclient.CouponCountResp, error) {
+	l := couponhistoryservicelogic.NewCouponCountLogic(ctx, s.svcCtx)
+	return l.CouponCount(in)
+}
