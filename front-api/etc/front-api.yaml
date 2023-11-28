@@ -58,7 +58,9 @@ CmsRpc:
     Key: cms.rpc
   NonBlock: true
 
-#Log:
+Log:
+  ServiceName: front-api
+  Stat: false # go-zero 版本 >= 1.5.0 才支持
 #  Mode: file
 #  Path: logs/front
 Prometheus:
