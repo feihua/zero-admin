@@ -55,6 +55,7 @@ type MemberData {
     Growth int64 `json:"growth"`                                // 成长值
     LuckeyCount int64 `json:"luckeyCount"`                      // 剩余抽奖次数
     HistoryIntegration int64 `json:"historyIntegration"`        // 历史积分数量
+    CouponCount int64 `json:"couponCount"`                      // 优惠券数量
 }
 
 type UpdatePasswordReq {
