@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 	"zero-admin/rpc/model/umsmodel"
 	"zero-admin/rpc/ums/internal/svc"
@@ -12,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberLoginLogic 会员登录
+/*
+Author: LiuFeiHua
+Date: 2023/11/28 14:33
+*/
 type MemberLoginLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -32,13 +38,13 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 	//根据用户名查询账号
 	member, _ := l.svcCtx.UmsMemberModel.FindMemberByNameOrPhone(l.ctx, in.Username, in.Phone)
 	if member == nil {
-		logx.WithContext(l.ctx).Errorf("账号不存在,参数:%s", in.Username)
+		logc.Errorf(l.ctx, "账号不存在,参数:%s", in.Username)
 		return nil, errors.New("账号不存在")
 	}
 
 	//判断密码
 	if member.Password != in.Password {
-		logx.WithContext(l.ctx).Errorf("账号密码不对,参数:%s", in.Password)
+		logc.Errorf(l.ctx, "账号密码不对,参数:%s", in.Password)
 		return nil, errors.New("账号密码不对")
 	}
 
@@ -52,7 +58,7 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("生成token失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "生成token失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 

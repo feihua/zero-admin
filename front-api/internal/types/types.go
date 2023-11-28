@@ -80,9 +80,14 @@ type LoginReq struct {
 }
 
 type LoginResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-	Data    string `json:"data"` //token
+	Code    int64     `json:"code"`
+	Message string    `json:"message"`
+	Data    LoginData `json:"data"`
+}
+
+type LoginData struct {
+	Token     string `json:"token"`
+	TokenHead string `json:"tokenHead"`
 }
 
 type RegisterReq struct {
