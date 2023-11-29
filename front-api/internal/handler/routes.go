@@ -66,7 +66,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membermember.RegisterHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/info",
 				Handler: membermember.InfoHandler(serverCtx),
 			},
@@ -263,8 +263,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membercoupon.CouponAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/list",
+				Method:  http.MethodGet,
+				Path:    "/list/:useStatus",
 				Handler: membercoupon.CouponHistoryListHandler(serverCtx),
 			},
 			{

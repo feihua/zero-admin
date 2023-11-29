@@ -871,9 +871,7 @@ type AddCouponResp struct {
 }
 
 type ListCouponHistoryReq struct {
-	Current   int64 `json:"current,default=1"`
-	PageSize  int64 `json:"pageSize,default=20"`
-	UseStatus int64 `json:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
+	UseStatus int64 `path:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
 }
 
 type ListCouponHistoryData struct {

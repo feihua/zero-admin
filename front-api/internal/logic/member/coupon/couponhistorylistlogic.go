@@ -2,6 +2,7 @@ package coupon
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/sms/smsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponHistoryListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/29 11:24
+*/
 type CouponHistoryListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,11 +32,12 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // CouponHistoryList 获取用户优惠券列表
 func (l *CouponHistoryListLogic) CouponHistoryList(req *types.ListCouponHistoryReq) (resp *types.ListCouponHistoryResp, err error) {
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	historyList, err := l.svcCtx.CouponHistoryService.CouponHistoryList(l.ctx, &smsclient.CouponHistoryListReq{
-		Current:   req.Current,
-		PageSize:  req.PageSize,
+		Current:   1,
+		PageSize:  100,
 		CouponId:  0,
-		MemberId:  l.ctx.Value("memberId").(int64),
+		MemberId:  memberId,
 		UseStatus: req.UseStatus,
 	})
 	if err != nil {
@@ -57,6 +64,6 @@ func (l *CouponHistoryListLogic) CouponHistoryList(req *types.ListCouponHistoryR
 	return &types.ListCouponHistoryResp{
 		Data:    list,
 		Code:    0,
-		Message: "查询优惠券使用记录成功",
+		Message: "查询会员优惠券成功",
 	}, nil
 }

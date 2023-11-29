@@ -117,7 +117,7 @@ service front-api {
 
     // 获取会员个人信息
     @handler Info
-    post /info returns (InfoResp)
+    get /info returns (InfoResp)
 
     // 更新会员密码
     @handler UpdatePassword
