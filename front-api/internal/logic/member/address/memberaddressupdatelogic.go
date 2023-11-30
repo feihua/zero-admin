@@ -2,6 +2,7 @@ package address
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -25,9 +26,10 @@ func NewMemberAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *MemberAddressUpdateLogic) MemberAddressUpdate(req *types.UpdateMemberAddressReq) (resp *types.UpdateMemberAddressResp, err error) {
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, err = l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressUpdate(l.ctx, &umsclient.MemberReceiveAddressUpdateReq{
 		Id:            req.Id,
-		MemberId:      l.ctx.Value("memberId").(int64),
+		MemberId:      memberId,
 		Name:          req.Name,
 		PhoneNumber:   req.PhoneNumber,
 		DefaultStatus: req.DefaultStatus,

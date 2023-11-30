@@ -15,3 +15,57 @@ Authorization: Bearer {{token}}
 ### 获取会员个人的优惠券
 GET {{host}}/api/member/coupon/list/1
 Authorization: Bearer {{token}}
+
+### 添加会员个人的收货地址
+POST {{host}}/api/member/address/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "大梨",
+  "phoneNumber": "18033441849",
+  "defaultStatus": 1,
+  "postCode": "518000",
+  "province": "广东省",
+  "city": "深圳市",
+  "region": "福田区",
+  "detailAddress": "东晓街道"
+}
+
+### 删除会员个人的收货地址
+GET {{host}}/api/member/address/delete/5
+Authorization: Bearer {{token}}
+
+### 修改会员个人的收货地址
+POST {{host}}/api/member/address/update
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+      "id": 5,
+      "memberId": 11,
+      "name": "大梨123123",
+      "phoneNumber": "18033441849",
+      "defaultStatus": 1,
+      "postCode": "518000",
+      "province": "广东省",
+      "city": "深圳市",
+      "region": "福田区",
+      "detailAddress": "东晓街道"
+    }
+
+### 获取会员个人的收货地址
+GET {{host}}/api/member/address/list
+Authorization: Bearer {{token}}
+
+### 获取会员个人的浏览记录
+GET {{host}}/api/history/list/
+Authorization: Bearer {{token}}
+
+### 获取会员个人的收藏
+GET {{host}}/api/collection/list
+Authorization: Bearer {{token}}
+
+### 获取商品分类
+GET {{host}}/api/category/productCateList/0
+Authorization: Bearer {{token}}

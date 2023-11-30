@@ -607,7 +607,7 @@ message MemberReceiveAddressUpdateResp {
 }
 
 message MemberReceiveAddressDeleteReq {
-  repeated int64 ids = 1;
+  int64 id = 1;
   int64    MemberId = 2;
 }
 

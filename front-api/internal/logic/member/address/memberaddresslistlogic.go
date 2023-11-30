@@ -2,6 +2,7 @@ package address
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberAddressListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/29 16:13
+*/
 type MemberAddressListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,11 +30,13 @@ func NewMemberAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-func (l *MemberAddressListLogic) MemberAddressList(req *types.ListMemberAddressReq) (resp *types.ListMemberAddressResp, err error) {
+// MemberAddressList 查询会员收货地址
+func (l *MemberAddressListLogic) MemberAddressList() (resp *types.ListMemberAddressResp, err error) {
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	addressList, _ := l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		MemberId: l.ctx.Value("memberId").(int64),
+		Current:  1,
+		PageSize: 100,
+		MemberId: memberId,
 	})
 
 	var list []types.ListMemberAddressData
@@ -49,12 +57,9 @@ func (l *MemberAddressListLogic) MemberAddressList(req *types.ListMemberAddressR
 	}
 
 	return &types.ListMemberAddressResp{
-		Current:  0,
-		Data:     list,
-		PageSize: 0,
-		Success:  false,
-		Total:    0,
-		Code:     0,
-		Message:  "",
+		Data:    list,
+		Success: true,
+		Code:    0,
+		Message: "操作成功",
 	}, nil
 }

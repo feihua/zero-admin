@@ -25,24 +25,12 @@ type ReadHistoryDeleteResp {
 	Message string `json:"message"`
 }
 
-type ReadHistoryListReq {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
-}
-
 type ReadHistoryListResp {
 	Code    int64               `json:"code"`
 	Message string              `json:"message"`
-	Data    ReadHistoryListData `json:"data"`
+	Data  []ReadHistoryList `json:"data"`  //浏览列表
 }
 
-type ReadHistoryListData {
-	Total int64             `json:"total"` //总数
-	Pages int64             `json:"pages"` //总页数
-	Limit int64             `json:"limit"` //分页数量
-	Page  int64             `json:"page"`  //当前页
-	List  []ReadHistoryList `json:"list"`  //地址列表
-}
 
 type ReadHistoryList {
 	Id              int64   `json:"id"`              // 编号
@@ -75,7 +63,7 @@ service front-api {
 	post /delete (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
 	
 	@handler ReadHistoryList
-	post /list (ReadHistoryListReq) returns (ReadHistoryListResp)
+	get /list returns (ReadHistoryListResp)
 	
 	@handler ReadHistoryClear
 	post /clear returns (ReadHistoryClearResp)

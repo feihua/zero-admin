@@ -24,7 +24,7 @@ func NewMemberReceiveAddressDeleteLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *MemberReceiveAddressDeleteLogic) MemberReceiveAddressDelete(in *umsclient.MemberReceiveAddressDeleteReq) (*umsclient.MemberReceiveAddressDeleteResp, error) {
-	err := l.svcCtx.UmsMemberReceiveAddressModel.DeleteByIdsAndMemberId(l.ctx, in.Ids, in.MemberId)
+	err := l.svcCtx.UmsMemberReceiveAddressModel.DeleteByIdAndMemberId(l.ctx, in.Id, in.MemberId)
 
 	if err != nil {
 		return nil, err

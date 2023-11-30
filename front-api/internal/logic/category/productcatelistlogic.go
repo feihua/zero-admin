@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/pms/pmsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -12,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCateListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/29 16:44
+*/
 type ProductCateListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +32,7 @@ func NewProductCateListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *P
 	}
 }
 
+// ProductCateList 查询商品分类
 func (l *ProductCateListLogic) ProductCateList(req *types.CategoryReq) (resp *types.CategoryResp, err error) {
 	categoryListResp, err := l.svcCtx.ProductCategoryService.ProductCategoryList(l.ctx, &pmsclient.ProductCategoryListReq{
 		Current:    0,
@@ -36,7 +43,7 @@ func (l *ProductCateListLogic) ProductCateList(req *types.CategoryReq) (resp *ty
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询商品分类列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %s,查询商品分类列表异常:%s", string(data), err.Error())
 		return nil, errors.New("查询商品分类失败")
 	}
 

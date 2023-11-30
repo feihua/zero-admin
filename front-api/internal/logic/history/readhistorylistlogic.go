@@ -2,6 +2,7 @@ package history
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ReadHistoryListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/29 16:34
+*/
 type ReadHistoryListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,17 +30,19 @@ func NewReadHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *R
 	}
 }
 
-func (l *ReadHistoryListLogic) ReadHistoryList(req *types.ReadHistoryListReq) (resp *types.ReadHistoryListResp, err error) {
+// ReadHistoryList 查询会员浏览商品的记录
+func (l *ReadHistoryListLogic) ReadHistoryList() (resp *types.ReadHistoryListResp, err error) {
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	historyList, _ := l.svcCtx.MemberReadHistoryService.MemberReadHistoryList(l.ctx, &umsclient.MemberReadHistoryListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		MemberId: l.ctx.Value("memberId").(int64),
+		Current:  1,
+		PageSize: 100,
+		MemberId: memberId,
 	})
 
-	var list []*types.ReadHistoryList
+	var list []types.ReadHistoryList
 
 	for _, member := range historyList.List {
-		list = append(list, &types.ReadHistoryList{
+		list = append(list, types.ReadHistoryList{
 			Id:              member.Id,
 			MemberId:        member.MemberId,
 			MemberNickName:  member.MemberNickName,
@@ -51,12 +59,6 @@ func (l *ReadHistoryListLogic) ReadHistoryList(req *types.ReadHistoryListReq) (r
 	return &types.ReadHistoryListResp{
 		Code:    0,
 		Message: "操作成功",
-		Data: types.ReadHistoryListData{
-			Total: historyList.Total,
-			Pages: historyList.Total,
-			Limit: req.PageSize,
-			Page:  req.Current,
-			List:  nil,
-		},
+		Data:    list,
 	}, nil
 }

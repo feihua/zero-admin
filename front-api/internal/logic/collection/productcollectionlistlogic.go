@@ -2,6 +2,7 @@ package collection
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCollectionListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/29 16:31
+*/
 type ProductCollectionListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,18 +30,20 @@ func NewProductCollectionListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
-func (l *ProductCollectionListLogic) ProductCollectionList(req *types.ProductCollectionListReq) (resp *types.ProductCollectionListResp, err error) {
+// ProductCollectionList 查询会员收藏的商品
+func (l *ProductCollectionListLogic) ProductCollectionList() (resp *types.ProductCollectionListResp, err error) {
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	collectionList, _ := l.svcCtx.MemberProductCollectionService.MemberProductCollectionList(l.ctx, &umsclient.MemberProductCollectionListReq{
-		Current:   req.Current,
-		PageSize:  req.PageSize,
-		MemberId:  l.ctx.Value("memberId").(int64),
-		ProductId: req.ProductId,
+		Current:   1,
+		PageSize:  100,
+		MemberId:  memberId,
+		ProductId: 0,
 	})
 
-	var list []*types.ProductCollectionList
+	var list []types.ProductCollectionList
 
 	for _, member := range collectionList.List {
-		list = append(list, &types.ProductCollectionList{
+		list = append(list, types.ProductCollectionList{
 			Id:              member.Id,
 			MemberId:        member.MemberId,
 			MemberNickName:  member.MemberNickName,
@@ -52,12 +60,6 @@ func (l *ProductCollectionListLogic) ProductCollectionList(req *types.ProductCol
 	return &types.ProductCollectionListResp{
 		Code:    0,
 		Message: "操作成功",
-		Data: types.ProductCollectionListData{
-			Total: collectionList.Total,
-			Pages: collectionList.Total,
-			Limit: req.PageSize,
-			Page:  req.Current,
-			List:  nil,
-		},
+		Data:    list,
 	}, nil
 }

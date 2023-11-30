@@ -2,7 +2,6 @@
 package types
 
 type AddMemberAddressReq struct {
-	MemberId      int64  `json:"memberId"`
 	Name          string `json:"name"` // 收货人名称
 	PhoneNumber   string `json:"phoneNumber"`
 	DefaultStatus int64  `json:"defaultStatus"` // 是否为默认
@@ -16,11 +15,6 @@ type AddMemberAddressReq struct {
 type AddMemberAddressResp struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
-}
-
-type ListMemberAddressReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
 }
 
 type ListMemberAddressData struct {
@@ -37,18 +31,14 @@ type ListMemberAddressData struct {
 }
 
 type ListMemberAddressResp struct {
-	Current  int64                   `json:"current,default=1"`
-	Data     []ListMemberAddressData `json:"data"`
-	PageSize int64                   `json:"pageSize,default=20"`
-	Success  bool                    `json:"success"`
-	Total    int64                   `json:"total"`
-	Code     int64                   `json:"code"`
-	Message  string                  `json:"message"`
+	Data    []ListMemberAddressData `json:"data"`
+	Success bool                    `json:"success"`
+	Code    int64                   `json:"code"`
+	Message string                  `json:"message"`
 }
 
 type UpdateMemberAddressReq struct {
 	Id            int64  `json:"id"`
-	MemberId      int64  `json:"memberId"`
 	Name          string `json:"name"` // 收货人名称
 	PhoneNumber   string `json:"phoneNumber"`
 	DefaultStatus int64  `json:"defaultStatus"` // 是否为默认
@@ -65,7 +55,7 @@ type UpdateMemberAddressResp struct {
 }
 
 type DeleteMemberAddressReq struct {
-	Ids []int64 `json:"ids"`
+	Id int64 `json:"id"`
 }
 
 type DeleteMemberAddressResp struct {
@@ -764,24 +754,10 @@ type ProductCollectionDeleteResp struct {
 	Message string `json:"message"`
 }
 
-type ProductCollectionListReq struct {
-	Current   int64 `json:"current,default=1"`
-	PageSize  int64 `json:"pageSize,default=20"`
-	ProductId int64 `json:"productId,default=0"` // 商品id
-}
-
 type ProductCollectionListResp struct {
-	Code    int64                     `json:"code"`
-	Message string                    `json:"message"`
-	Data    ProductCollectionListData `json:"data"`
-}
-
-type ProductCollectionListData struct {
-	Total int64                   `json:"total"` //总数
-	Pages int64                   `json:"pages"` //总页数
-	Limit int64                   `json:"limit"` //分页数量
-	Page  int64                   `json:"page"`  //当前页
-	List  []ProductCollectionList `json:"list"`  //地址列表
+	Code    int64                   `json:"code"`
+	Message string                  `json:"message"`
+	Data    []ProductCollectionList `json:"data"` //收藏列表
 }
 
 type ProductCollectionList struct {
@@ -824,23 +800,10 @@ type ReadHistoryDeleteResp struct {
 	Message string `json:"message"`
 }
 
-type ReadHistoryListReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
-}
-
 type ReadHistoryListResp struct {
-	Code    int64               `json:"code"`
-	Message string              `json:"message"`
-	Data    ReadHistoryListData `json:"data"`
-}
-
-type ReadHistoryListData struct {
-	Total int64             `json:"total"` //总数
-	Pages int64             `json:"pages"` //总页数
-	Limit int64             `json:"limit"` //分页数量
-	Page  int64             `json:"page"`  //当前页
-	List  []ReadHistoryList `json:"list"`  //地址列表
+	Code    int64             `json:"code"`
+	Message string            `json:"message"`
+	Data    []ReadHistoryList `json:"data"` //浏览列表
 }
 
 type ReadHistoryList struct {

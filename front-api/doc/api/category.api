@@ -31,7 +31,7 @@ type CategoryData {
 
 @server(
 	group: category
-	prefix: /api/home
+	prefix: /api/category
 )
 
 service front-api {

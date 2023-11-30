@@ -6,7 +6,6 @@ info(
 
 type (
 	addMemberAddressReq {
-		MemberId      int64  `json:"memberId"`
 		Name          string `json:"name"` // 收货人名称
 		PhoneNumber   string `json:"phoneNumber"`
 		DefaultStatus int64  `json:"defaultStatus"` // 是否为默认
@@ -20,10 +19,7 @@ type (
 		Code    int64  `json:"code"`
 		Message string `json:"message"`
 	}
-	ListMemberAddressReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
-	}
+
 	ListMemberAddressData {
 		Id            int64  `json:"id"`
 		MemberId      int64  `json:"memberId"`
@@ -37,17 +33,13 @@ type (
 		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
 	}
 	ListMemberAddressResp {
-		Current  int64                   `json:"current,default=1"`
 		Data     []ListMemberAddressData `json:"data"`
-		PageSize int64                   `json:"pageSize,default=20"`
 		Success  bool                    `json:"success"`
-		Total    int64                   `json:"total"`
 		Code     int64                   `json:"code"`
 		Message  string                  `json:"message"`
 	}
 	UpdateMemberAddressReq {
 		Id            int64  `json:"id"`
-		MemberId      int64  `json:"memberId"`
 		Name          string `json:"name"` // 收货人名称
 		PhoneNumber   string `json:"phoneNumber"`
 		DefaultStatus int64  `json:"defaultStatus"` // 是否为默认
@@ -62,7 +54,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteMemberAddressReq {
-		Ids []int64 `json:"ids"`
+		Id int64 `json:"id"`
 	}
 	DeleteMemberAddressResp {
 		Code    int64  `json:"code"`
@@ -80,11 +72,11 @@ service front-api {
 	post /add (addMemberAddressReq) returns (addMemberAddressResp)
 	
 	@handler MemberAddressList
-	post /list (ListMemberAddressReq) returns (ListMemberAddressResp)
+	get /list returns (ListMemberAddressResp)
 	
 	@handler MemberAddressUpdate
 	post /update (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
 	
 	@handler MemberAddressDelete
-	post /delete (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
+	get /delete/:id (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
 }

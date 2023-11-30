@@ -28,7 +28,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberaddress.MemberAddressAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/list",
 				Handler: memberaddress.MemberAddressListHandler(serverCtx),
 			},
@@ -38,8 +38,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberaddress.MemberAddressUpdateHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/delete",
+				Method:  http.MethodGet,
+				Path:    "/delete/:id",
 				Handler: memberaddress.MemberAddressDeleteHandler(serverCtx),
 			},
 		},
@@ -140,7 +140,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: category.ProductCateListHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/api/home"),
+		rest.WithPrefix("/api/category"),
 	)
 
 	server.AddRoutes(
@@ -214,7 +214,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: collection.ProductCollectionDeleteHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/list",
 				Handler: collection.ProductCollectionListHandler(serverCtx),
 			},
@@ -241,7 +241,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: history.ReadHistoryDeleteHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/list",
 				Handler: history.ReadHistoryListHandler(serverCtx),
 			},

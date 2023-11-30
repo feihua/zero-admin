@@ -39,7 +39,7 @@ func (m *customUmsMemberReadHistoryModel) FindAll(ctx context.Context, in *umscl
 		where = where + fmt.Sprintf(" AND member_id = '%d'", in.MemberId)
 	}
 
-	query := fmt.Sprintf("select %s from %s where %s limit ?,?", umsMemberRows, m.table, where)
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", umsMemberReadHistoryRows, m.table, where)
 
 	var resp []UmsMemberReadHistory
 	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)

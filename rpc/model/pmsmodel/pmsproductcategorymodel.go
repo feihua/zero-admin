@@ -16,8 +16,7 @@ type (
 	// and implement the added methods in customPmsProductCategoryModel.
 	PmsProductCategoryModel interface {
 		pmsProductCategoryModel
-		Count(ctx context.Context, in *pmsclient.ProductCategoryListReq) (int64, error)
-		FindAll(ctx context.Context, in *pmsclient.ProductCategoryListReq) (*[]PmsProductCategory, error)
+		FindAll(ctx context.Context, in *pmsclient.ProductCategoryListReq) (*[]PmsProductCategory, int64, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindByParentId(ctx context.Context, parentId int64) (*[]PmsProductCategory, error)
 	}
@@ -34,7 +33,7 @@ func NewPmsProductCategoryModel(conn sqlx.SqlConn) PmsProductCategoryModel {
 	}
 }
 
-func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, in *pmsclient.ProductCategoryListReq) (*[]PmsProductCategory, error) {
+func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, in *pmsclient.ProductCategoryListReq) (*[]PmsProductCategory, int64, error) {
 	where := "1=1"
 
 	if in.ParentId != 2 {
@@ -46,39 +45,21 @@ func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, in *pmsclie
 
 	query := fmt.Sprintf("select %s from %s where %s limit ?,?", pmsProductCategoryRows, m.table, where)
 	var resp []PmsProductCategory
-	err := m.conn.QueryRows(&resp, query, 0, 1000)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
-	}
-}
+	err := m.conn.QueryRowsCtx(ctx, &resp, query, 0, 1000)
 
-func (m *customPmsProductCategoryModel) Count(ctx context.Context, in *pmsclient.ProductCategoryListReq) (int64, error) {
-	where := "1=1"
-
-	if in.ParentId != 2 {
-		where = where + fmt.Sprintf(" AND parent_id = '%d'", in.ParentId)
+	if err != nil {
+		return nil, 0, err
 	}
-	if in.ShowStatus != 2 {
-		where = where + fmt.Sprintf(" AND show_status = '%d'", in.ShowStatus)
-	}
-	query := fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
+	query = fmt.Sprintf("select count(*) as count from %s where %s", m.table, where)
 
 	var count int64
-	err := m.conn.QueryRow(&count, query)
+	err = m.conn.QueryRow(&count, query)
 
-	switch err {
-	case nil:
-		return count, nil
-	case sqlc.ErrNotFound:
-		return 0, ErrNotFound
-	default:
-		return 0, err
+	if err != nil {
+		return nil, 0, err
 	}
+
+	return &resp, count, nil
 }
 
 func (m *customPmsProductCategoryModel) DeleteByIds(ctx context.Context, ids []int64) error {

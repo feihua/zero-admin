@@ -45,5 +45,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		UmsMemberStatisticsInfoModel:          umsmodel.NewUmsMemberStatisticsInfoModel(sqlConn),
 		UmsMemberTaskModel:                    umsmodel.NewUmsMemberTaskModel(sqlConn),
 		UmsMemberTagModel:                     umsmodel.NewUmsMemberTagModel(sqlConn),
+		UmsMemberReadHistoryModel:             umsmodel.NewUmsMemberReadHistoryModel(sqlConn),
+		UmsMemberProductCollectionModel:       umsmodel.NewUmsMemberProductCollectionModel(sqlConn),
 	}
 }

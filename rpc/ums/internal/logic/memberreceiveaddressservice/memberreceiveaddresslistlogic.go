@@ -3,12 +3,18 @@ package memberreceiveaddressservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberReceiveAddressListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/29 16:17
+*/
 type MemberReceiveAddressListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,13 +29,14 @@ func NewMemberReceiveAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
+// MemberReceiveAddressList 查询会员收货地址列表
 func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *umsclient.MemberReceiveAddressListReq) (*umsclient.MemberReceiveAddressListResp, error) {
 	all, err := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(l.ctx, in)
 	count, _ := l.svcCtx.UmsMemberReceiveAddressModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询会员地址列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询会员地址列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 	var list []*umsclient.MemberReceiveAddressListData
@@ -51,7 +58,7 @@ func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *umsclient.M
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询会员地址列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询会员地址列表信息,参数：%s,响应：%s", reqStr, listStr)
 	return &umsclient.MemberReceiveAddressListResp{
 		Total: count,
 		List:  list,

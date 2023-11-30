@@ -25,24 +25,11 @@ type ProductCollectionDeleteResp {
 	Message string `json:"message"`
 }
 
-type ProductCollectionListReq {
-	Current   int64 `json:"current,default=1"`
-	PageSize  int64 `json:"pageSize,default=20"`
-	ProductId int64 `json:"productId,default=0"` // 商品id
-}
 
 type ProductCollectionListResp {
 	Code    int64                     `json:"code"`
 	Message string                    `json:"message"`
-	Data    ProductCollectionListData `json:"data"`
-}
-
-type ProductCollectionListData {
-	Total int64                   `json:"total"` //总数
-	Pages int64                   `json:"pages"` //总页数
-	Limit int64                   `json:"limit"` //分页数量
-	Page  int64                   `json:"page"`  //当前页
-	List  []ProductCollectionList `json:"list"`  //地址列表
+	Data  []ProductCollectionList `json:"data"`  //收藏列表
 }
 
 type ProductCollectionList {
@@ -76,7 +63,7 @@ service front-api {
 	post /delete (ProductCollectionDeleteReq) returns (ProductCollectionDeleteResp)
 	
 	@handler ProductCollectionList
-	post /list (ProductCollectionListReq) returns (ProductCollectionListResp)
+	get /list returns (ProductCollectionListResp)
 	
 	@handler ProductCollectionClear
 	post /clear returns (ProductCollectionClearResp)

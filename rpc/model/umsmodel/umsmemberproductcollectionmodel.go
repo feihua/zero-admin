@@ -44,7 +44,7 @@ func (m *customUmsMemberProductCollectionModel) FindAll(ctx context.Context, in 
 		where = where + fmt.Sprintf(" AND product_id = '%d'", in.ProductId)
 	}
 
-	query := fmt.Sprintf("select %s from %s where %s limit ?,?", umsMemberRows, m.table, where)
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", umsMemberProductCollectionRows, m.table, where)
 
 	var resp []UmsMemberProductCollection
 	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
