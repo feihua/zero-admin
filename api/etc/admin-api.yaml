@@ -8,6 +8,7 @@ SysRpc:
     Hosts:
       - localhost:2379
     Key: sys.rpc
+  NonBlock: true
 
 #会员
 UmsRpc:
@@ -15,6 +16,7 @@ UmsRpc:
     Hosts:
       - localhost:2379
     Key: ums.rpc
+  NonBlock: true
 
 #商品
 PmsRpc:
@@ -22,6 +24,7 @@ PmsRpc:
     Hosts:
       - localhost:2379
     Key: pms.rpc
+  NonBlock: true
 
 #订单
 OmsRpc:
@@ -29,6 +32,7 @@ OmsRpc:
     Hosts:
       - localhost:2379
     Key: oms.rpc
+  NonBlock: true
 
 #营销
 SmsRpc:
@@ -36,6 +40,7 @@ SmsRpc:
     Hosts:
       - localhost:2379
     Key: sms.rpc
+  NonBlock: true
 
 #内容
 CmsRpc:
@@ -43,6 +48,7 @@ CmsRpc:
     Hosts:
       - localhost:2379
     Key: cms.rpc
+  NonBlock: true
 
 Auth:
   AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d

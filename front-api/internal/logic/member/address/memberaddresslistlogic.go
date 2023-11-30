@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MemberAddressListLogic
+// MemberAddressListLogic 收货地址相关
 /*
 Author: LiuFeiHua
 Date: 2023/11/29 16:13

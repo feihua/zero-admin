@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberAddressUpdateLogic 收货地址相关
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 11:22
+*/
 type MemberAddressUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewMemberAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// MemberAddressUpdate 修改会员收货地址
 func (l *MemberAddressUpdateLogic) MemberAddressUpdate(req *types.UpdateMemberAddressReq) (resp *types.UpdateMemberAddressResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, err = l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressUpdate(l.ctx, &umsclient.MemberReceiveAddressUpdateReq{

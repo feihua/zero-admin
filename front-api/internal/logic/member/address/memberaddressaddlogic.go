@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberAddressAddLogic 收货地址相关
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 11:20
+*/
 type MemberAddressAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewMemberAddressAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
+// MemberAddressAdd 添加会员收货地址
 func (l *MemberAddressAddLogic) MemberAddressAdd(req *types.AddMemberAddressReq) (resp *types.AddMemberAddressResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, err = l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressAdd(l.ctx, &umsclient.MemberReceiveAddressAddReq{

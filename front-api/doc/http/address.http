@@ -34,7 +34,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 5,
+  "id": 6,
   "memberId": 11,
   "name": "大梨123123",
   "phoneNumber": "18033441849",

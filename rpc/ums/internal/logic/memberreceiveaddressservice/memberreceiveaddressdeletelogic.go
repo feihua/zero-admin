@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberReceiveAddressDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 11:24
+*/
 type MemberReceiveAddressDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewMemberReceiveAddressDeleteLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// MemberReceiveAddressDelete 删除会员收货地址
 func (l *MemberReceiveAddressDeleteLogic) MemberReceiveAddressDelete(in *umsclient.MemberReceiveAddressDeleteReq) (*umsclient.MemberReceiveAddressDeleteResp, error) {
 	err := l.svcCtx.UmsMemberReceiveAddressModel.DeleteByIdAndMemberId(l.ctx, in.Id, in.MemberId)
 

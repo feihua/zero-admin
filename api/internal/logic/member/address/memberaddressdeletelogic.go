@@ -27,11 +27,11 @@ func NewMemberAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 func (l *MemberAddressDeleteLogic) MemberAddressDelete(req types.DeleteMemberAddressReq) (*types.DeleteMemberAddressResp, error) {
 	_, err := l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressDelete(l.ctx, &umsclient.MemberReceiveAddressDeleteReq{
-		Ids: req.Ids,
+		Id: req.Id,
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员地址异常:%s", req.Ids, err.Error())
+		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员地址异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除会员地址失败")
 	}
 	return &types.DeleteMemberAddressResp{

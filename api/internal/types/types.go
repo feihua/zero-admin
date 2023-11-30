@@ -2944,7 +2944,7 @@ type UpdateMemberAddressResp struct {
 }
 
 type DeleteMemberAddressReq struct {
-	Ids []int64 `json:"ids"`
+	Id int64 `json:"id"`
 }
 
 type DeleteMemberAddressResp struct {

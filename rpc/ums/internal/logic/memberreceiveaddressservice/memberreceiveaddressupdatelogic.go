@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberReceiveAddressUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 11:25
+*/
 type MemberReceiveAddressUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewMemberReceiveAddressUpdateLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// MemberReceiveAddressUpdate 修改会员收货地址
 func (l *MemberReceiveAddressUpdateLogic) MemberReceiveAddressUpdate(in *umsclient.MemberReceiveAddressUpdateReq) (*umsclient.MemberReceiveAddressUpdateResp, error) {
 	//如果更新的地址为默认地址,则需要把之前的默认地址去除默认标识
 	if in.DefaultStatus == 1 {

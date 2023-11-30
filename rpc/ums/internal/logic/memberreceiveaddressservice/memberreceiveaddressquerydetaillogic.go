@@ -3,12 +3,18 @@ package memberreceiveaddressservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/ums/internal/svc"
 	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberReceiveAddressQueryDetailLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 11:25
+*/
 type MemberReceiveAddressQueryDetailLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -28,7 +34,7 @@ func (l *MemberReceiveAddressQueryDetailLogic) MemberReceiveAddressQueryDetail(i
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询会员地址信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询会员地址信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -47,7 +53,7 @@ func (l *MemberReceiveAddressQueryDetailLogic) MemberReceiveAddressQueryDetail(i
 
 	reqStr, _ := json.Marshal(in)
 	listStr, _ := json.Marshal(resp)
-	logx.WithContext(l.ctx).Infof("查询会员地址信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询会员地址信息,参数：%s,响应：%s", reqStr, listStr)
 
 	return resp, nil
 }
