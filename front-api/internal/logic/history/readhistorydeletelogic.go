@@ -2,6 +2,7 @@ package history
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -25,9 +26,10 @@ func NewReadHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ReadHistoryDeleteLogic) ReadHistoryDelete(req *types.ReadHistoryDeleteReq) (resp *types.ReadHistoryDeleteResp, err error) {
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.MemberReadHistoryService.MemberReadHistoryDelete(l.ctx, &umsclient.MemberReadHistoryDeleteReq{
-		Ids:      req.Ids,
-		MemberId: l.ctx.Value("memberId").(int64),
+		Id:       req.Id,
+		MemberId: memberId,
 	})
 
 	return &types.ReadHistoryDeleteResp{

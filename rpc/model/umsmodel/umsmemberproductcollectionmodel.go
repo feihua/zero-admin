@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"strings"
 	"zero-admin/rpc/ums/umsclient"
 )
 
@@ -18,7 +17,7 @@ type (
 		umsMemberProductCollectionModel
 		Count(ctx context.Context, in *umsclient.MemberProductCollectionListReq) (int64, error)
 		FindAll(ctx context.Context, in *umsclient.MemberProductCollectionListReq) (*[]UmsMemberProductCollection, error)
-		DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error
+		DeleteByIdAndMemberId(ctx context.Context, id int64, MemberId int64) error
 	}
 
 	customUmsMemberProductCollectionModel struct {
@@ -83,24 +82,7 @@ func (m *customUmsMemberProductCollectionModel) Count(ctx context.Context, in *u
 	}
 }
 
-func (m *customUmsMemberProductCollectionModel) DeleteByIdsAndMemberId(ctx context.Context, ids []int64, MemberId int64) error {
-	//删除收藏商品
-	if len(ids) > 0 {
-		placeholders := make([]string, len(ids))
-		for i := range ids {
-			placeholders[i] = "?"
-		}
-
-		query := fmt.Sprintf("DELETE FROM %s WHERE member_id = %d id IN (%s)", m.table, MemberId, strings.Join(placeholders, ","))
-
-		args := make([]interface{}, len(ids))
-		for i, id := range ids {
-			args[i] = id
-		}
-
-		_, err := m.conn.ExecCtx(ctx, query, args...)
-		return err
-	}
+func (m *customUmsMemberProductCollectionModel) DeleteByIdAndMemberId(ctx context.Context, id int64, MemberId int64) error {
 
 	//清空收藏列表
 	query := fmt.Sprintf("DELETE FROM %s WHERE member_id = ? ", m.table)

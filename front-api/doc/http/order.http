@@ -7,8 +7,3 @@ Content-Type: application/json
   "password": "123456"
 }
 > {% client.global.set("token", response.body.data.token); %}
-
-### 获取会员个人信息
-GET {{host}}/api/member/info
-Authorization: Bearer {{token}}
-

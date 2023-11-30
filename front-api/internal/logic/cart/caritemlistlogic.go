@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -25,7 +26,8 @@ func NewCarItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CarIt
 }
 
 func (l *CarItemListLogic) CarItemList() (resp *types.CartItemListResp, err error) {
-	itemListResp, _ := l.svcCtx.CartItemService.CartItemList(l.ctx, &omsclient.CartItemListReq{MemberId: l.ctx.Value("memberId").(int64)})
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	itemListResp, _ := l.svcCtx.CartItemService.CartItemList(l.ctx, &omsclient.CartItemListReq{MemberId: memberId})
 
 	var list []types.CartListData
 

@@ -55,7 +55,7 @@ type UpdateMemberAddressResp struct {
 }
 
 type DeleteMemberAddressReq struct {
-	Id int64 `json:"id"`
+	Id int64 `path:"id"`
 }
 
 type DeleteMemberAddressResp struct {
@@ -746,7 +746,7 @@ type AddProductCollectionResp struct {
 }
 
 type ProductCollectionDeleteReq struct {
-	Ids []int64 `json:"ids"`
+	Id int64 `path:"id"`
 }
 
 type ProductCollectionDeleteResp struct {
@@ -792,7 +792,7 @@ type AddReadHistoryResp struct {
 }
 
 type ReadHistoryDeleteReq struct {
-	Ids []int64 `json:"ids"`
+	Id int64 `path:"id"`
 }
 
 type ReadHistoryDeleteResp struct {
@@ -858,7 +858,7 @@ type ListCouponHistoryResp struct {
 }
 
 type ListCouponReq struct {
-	ProductId int64 `json:"productId"` // 商品id
+	ProductId int64 `path:"productId"` // 商品id
 }
 
 type ListtCouponData struct {

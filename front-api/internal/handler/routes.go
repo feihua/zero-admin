@@ -209,8 +209,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: collection.AddProductCollectionAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/delete",
+				Method:  http.MethodGet,
+				Path:    "/delete/:id",
 				Handler: collection.ProductCollectionDeleteHandler(serverCtx),
 			},
 			{
@@ -219,7 +219,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: collection.ProductCollectionListHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/clear",
 				Handler: collection.ProductCollectionClearHandler(serverCtx),
 			},
@@ -236,8 +236,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: history.AddReadHistoryAddHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/delete",
+				Method:  http.MethodGet,
+				Path:    "/delete/:id",
 				Handler: history.ReadHistoryDeleteHandler(serverCtx),
 			},
 			{
@@ -246,7 +246,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: history.ReadHistoryListHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/clear",
 				Handler: history.ReadHistoryClearHandler(serverCtx),
 			},
@@ -268,8 +268,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membercoupon.CouponHistoryListHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/listByProductId",
+				Method:  http.MethodGet,
+				Path:    "/listByProductId/:productId",
 				Handler: membercoupon.CouponListByProductIdHandler(serverCtx),
 			},
 		},

@@ -1,0 +1,29 @@
+### app会员登录
+POST {{host}}/api/member/login
+Content-Type: application/json
+
+{
+  "mobile": "18613030352",
+  "password": "123456"
+}
+> {% client.global.set("token", response.body.data.token); %}
+
+
+
+### 添加会员个人的收藏
+POST {{host}}/api/collection/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 删除会员个人的收藏
+GET {{host}}/api/collection/delete
+Authorization: Bearer {{token}}
+
+### 获取会员个人的收藏
+GET {{host}}/api/collection/list
+Authorization: Bearer {{token}}
+
+### 清空会员个人的收藏
+GET {{host}}/api/collection/clear
+Authorization: Bearer {{token}}
+

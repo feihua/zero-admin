@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 > {% client.global.set("token", response.body.data.token); %}
 
-### 获取会员个人信息
-GET {{host}}/api/member/info
-Authorization: Bearer {{token}}
 
+### 获取会员个人的优惠券
+GET {{host}}/api/member/coupon/list/1
+Authorization: Bearer {{token}}

@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -25,7 +26,8 @@ func NewCarItemClearLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CarI
 }
 
 func (l *CarItemClearLogic) CarItemClear() (resp *types.CartItemClearResp, err error) {
-	_, _ = l.svcCtx.CartItemService.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{MemberId: l.ctx.Value("memberId").(int64)})
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	_, _ = l.svcCtx.CartItemService.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{MemberId: memberId})
 
 	return &types.CartItemClearResp{
 		Code:    0,

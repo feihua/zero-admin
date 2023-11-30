@@ -35,7 +35,7 @@ type (
         Data []*ListCouponHistoryData `json:"data"`
     }
     ListCouponReq {
-        ProductId int64 `json:"productId"`         // 商品id
+        ProductId int64 `path:"productId"`         // 商品id
     }
     ListtCouponData {
         Id int64 `json:"id"`
@@ -78,6 +78,6 @@ service front-api {
     get /list/:useStatus (ListCouponHistoryReq) returns (ListCouponHistoryResp)
 
     @handler CouponListByProductId
-    post /listByProductId (ListCouponReq) returns (ListCouponResp)
+    get /listByProductId/:productId (ListCouponReq) returns (ListCouponResp)
 
 }

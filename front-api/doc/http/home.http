@@ -1,0 +1,3 @@
+### 获取首页数据
+GET {{host}}/api/home/index
+

@@ -17,7 +17,7 @@ type addProductCollectionResp {
 }
 
 type ProductCollectionDeleteReq {
-	Ids []int64 `json:"ids"`
+	Id int64 `path:"id"`
 }
 
 type ProductCollectionDeleteResp {
@@ -60,11 +60,11 @@ service front-api {
 	post /add (addProductCollectionReq) returns (addProductCollectionResp)
 	
 	@handler ProductCollectionDelete
-	post /delete (ProductCollectionDeleteReq) returns (ProductCollectionDeleteResp)
+	get /delete/:id (ProductCollectionDeleteReq) returns (ProductCollectionDeleteResp)
 	
 	@handler ProductCollectionList
 	get /list returns (ProductCollectionListResp)
 	
 	@handler ProductCollectionClear
-	post /clear returns (ProductCollectionClearResp)
+	get /clear returns (ProductCollectionClearResp)
 }

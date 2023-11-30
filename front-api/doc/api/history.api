@@ -17,7 +17,7 @@ type addReadHistoryResp {
 }
 
 type ReadHistoryDeleteReq {
-	Ids []int64 `json:"ids"`
+	Id int64 `path:"id"`
 }
 
 type ReadHistoryDeleteResp {
@@ -60,11 +60,11 @@ service front-api {
 	post /add (addReadHistoryReq) returns (addReadHistoryResp)
 	
 	@handler ReadHistoryDelete
-	post /delete (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
+	get /delete/:id (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
 	
 	@handler ReadHistoryList
 	get /list returns (ReadHistoryListResp)
 	
 	@handler ReadHistoryClear
-	post /clear returns (ReadHistoryClearResp)
+	get /clear returns (ReadHistoryClearResp)
 }

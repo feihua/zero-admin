@@ -2,6 +2,7 @@ package collection
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -25,9 +26,10 @@ func NewProductCollectionDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *ProductCollectionDeleteLogic) ProductCollectionDelete(req *types.ProductCollectionDeleteReq) (resp *types.ProductCollectionDeleteResp, err error) {
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.MemberProductCollectionService.MemberProductCollectionDelete(l.ctx, &umsclient.MemberProductCollectionDeleteReq{
-		Ids:      req.Ids,
-		MemberId: l.ctx.Value("memberId").(int64),
+		Id:       req.Id,
+		MemberId: memberId,
 	})
 
 	return &types.ProductCollectionDeleteResp{

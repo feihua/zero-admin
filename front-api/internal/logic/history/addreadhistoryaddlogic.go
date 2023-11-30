@@ -2,6 +2,7 @@ package history
 
 import (
 	"context"
+	"encoding/json"
 	"time"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -26,7 +27,8 @@ func NewAddReadHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *AddReadHistoryAddLogic) AddReadHistoryAdd(req *types.AddReadHistoryReq) (resp *types.AddReadHistoryResp, err error) {
-	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: l.ctx.Value("memberId").(int64)})
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
 
 	_, err = l.svcCtx.MemberReadHistoryService.MemberReadHistoryAdd(l.ctx, &umsclient.MemberReadHistoryAddReq{
 		MemberId:        member.Id,
