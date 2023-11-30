@@ -85,8 +85,8 @@ func (m *customUmsMemberProductCollectionModel) Count(ctx context.Context, in *u
 func (m *customUmsMemberProductCollectionModel) DeleteByIdAndMemberId(ctx context.Context, id int64, MemberId int64) error {
 
 	//清空收藏列表
-	query := fmt.Sprintf("DELETE FROM %s WHERE member_id = ? ", m.table)
+	query := fmt.Sprintf("DELETE FROM %s WHERE member_id = ? and id = ?", m.table)
 
-	_, err := m.conn.ExecCtx(ctx, query, MemberId)
+	_, err := m.conn.ExecCtx(ctx, query, MemberId, id)
 	return err
 }

@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCollectionDeleteLogic 收藏相关
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 12:02
+*/
 type ProductCollectionDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewProductCollectionDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// ProductCollectionDelete 删除收藏的商品
 func (l *ProductCollectionDeleteLogic) ProductCollectionDelete(req *types.ProductCollectionDeleteReq) (resp *types.ProductCollectionDeleteResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.MemberProductCollectionService.MemberProductCollectionDelete(l.ctx, &umsclient.MemberProductCollectionDeleteReq{

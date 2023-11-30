@@ -2,6 +2,7 @@ package collection
 
 import (
 	"context"
+	"encoding/json"
 	"time"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// AddProductCollectionAddLogic 收藏相关
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 11:40
+*/
 type AddProductCollectionAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -28,7 +34,7 @@ func NewAddProductCollectionAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // AddProductCollectionAdd 会员收藏商品
 func (l *AddProductCollectionAddLogic) AddProductCollectionAdd(req *types.AddProductCollectionReq) (resp *types.AddProductCollectionResp, err error) {
 	//从token中获取会员id
-	memberId := l.ctx.Value("memberId").(int64)
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
 
 	//查询是否已经收藏

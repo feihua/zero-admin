@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberProductCollectionDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 12:02
+*/
 type MemberProductCollectionDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewMemberProductCollectionDeleteLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
+// MemberProductCollectionDelete 删除收藏的商品
 func (l *MemberProductCollectionDeleteLogic) MemberProductCollectionDelete(in *umsclient.MemberProductCollectionDeleteReq) (*umsclient.MemberProductCollectionDeleteResp, error) {
 	err := l.svcCtx.UmsMemberProductCollectionModel.DeleteByIdAndMemberId(l.ctx, in.Id, in.MemberId)
 

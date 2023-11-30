@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberProductCollectionAddLogic 收藏相关
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 11:52
+*/
 type MemberProductCollectionAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewMemberProductCollectionAddLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// MemberProductCollectionAdd 添加收藏商品
 func (l *MemberProductCollectionAddLogic) MemberProductCollectionAdd(in *umsclient.MemberProductCollectionAddReq) (*umsclient.MemberProductCollectionAddResp, error) {
 	_, err := l.svcCtx.UmsMemberProductCollectionModel.Insert(l.ctx, &umsmodel.UmsMemberProductCollection{
 		MemberId:        in.MemberId,

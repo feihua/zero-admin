@@ -15,8 +15,17 @@ POST {{host}}/api/collection/add
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
+{
+  "memberIcon": "1",
+  "productId": 1,
+  "productName": "1",
+  "productPic": "1",
+  "productSubTitle": "1",
+  "productPrice": 1
+}
+
 ### 删除会员个人的收藏
-GET {{host}}/api/collection/delete
+GET {{host}}/api/collection/delete/2
 Authorization: Bearer {{token}}
 
 ### 获取会员个人的收藏
