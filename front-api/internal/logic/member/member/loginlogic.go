@@ -55,7 +55,7 @@ func (l *LoginLogic) Login(req *types.LoginReq, ip string) (resp *types.LoginRes
 		Message: "登录成功",
 		Data: types.LoginData{
 			Token:     loginResp.Token,
-			TokenHead: "Bearer ",
+			TokenHead: "Bearer",
 		},
 	}, nil
 }

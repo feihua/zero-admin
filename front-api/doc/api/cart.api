@@ -188,7 +188,7 @@ service front-api {
 	post /updateAttr (CartItemUpdateAttrReq) returns (CartItemUpdateResp)
 	
 	@handler CarItemList
-	post /list returns (CartItemListResp)
+	get /list returns (CartItemListResp)
 	
 	@handler CarItemtListPromotion
 	post /list/promotion (CarItemListPromotionReq) returns (CarItemtListPromotionResp)

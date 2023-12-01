@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CartItemListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:45
+*/
 type CartItemListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewCartItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cart
 	}
 }
 
+// CartItemList 查询购物车列表
 func (l *CartItemListLogic) CartItemList(in *omsclient.CartItemListReq) (*omsclient.CartItemListResp, error) {
 	all, err := l.svcCtx.OmsCartItemModel.FindAll(l.ctx, in.MemberId)
 

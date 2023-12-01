@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// QueryProductListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:35
+*/
 type QueryProductListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +29,7 @@ func NewQueryProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
+// QueryProductList 查询商品列表
 func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq) (resp *types.QueryProductListResp, err error) {
 	productListResp, _ := l.svcCtx.ProductService.ProductList(l.ctx, &pmsclient.ProductListReq{
 		Current:           req.Current,

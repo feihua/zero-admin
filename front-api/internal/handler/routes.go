@@ -108,7 +108,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: cart.CartUpdateAttrHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/list",
 				Handler: cart.CarItemListHandler(serverCtx),
 			},

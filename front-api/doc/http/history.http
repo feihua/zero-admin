@@ -10,11 +10,22 @@ Content-Type: application/json
 
 
 ### 添加会员个人的浏览记录
-GET {{host}}/api/history/add
+POST {{host}}/api/history/add
+Content-Type: application/json
 Authorization: Bearer {{token}}
 
+{
+  "memberNickName": "1",
+  "memberIcon": "1",
+  "productId": 1,
+  "productName": "1",
+  "productPic": "1",
+  "productSubTitle": "1",
+  "productPrice": 1
+}
+
 ### 删除会员个人的浏览记录
-GET {{host}}/api/history/delete
+GET {{host}}/api/history/delete/1
 Authorization: Bearer {{token}}
 
 ### 获取会员个人的浏览记录

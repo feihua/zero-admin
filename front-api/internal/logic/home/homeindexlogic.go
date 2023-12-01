@@ -13,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeIndexLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 17:33
+*/
 type HomeIndexLogic struct {
 	logx.Logger
 	ctx    context.Context

@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// AddReadHistoryAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:29
+*/
 type AddReadHistoryAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewAddReadHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// AddReadHistoryAdd 添加浏览商品记录
 func (l *AddReadHistoryAddLogic) AddReadHistoryAdd(req *types.AddReadHistoryReq) (resp *types.AddReadHistoryResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})

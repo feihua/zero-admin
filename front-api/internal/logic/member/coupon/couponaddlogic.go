@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:32
+*/
 type CouponAddLogic struct {
 	logx.Logger
 	ctx    context.Context

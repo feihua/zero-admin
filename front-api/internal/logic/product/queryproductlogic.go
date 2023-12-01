@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// QueryProductLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:34
+*/
 type QueryProductLogic struct {
 	logx.Logger
 	ctx    context.Context

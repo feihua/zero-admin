@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CarItemListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:36
+*/
 type CarItemListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewCarItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CarIt
 	}
 }
 
+// CarItemList 购物车列表
 func (l *CarItemListLogic) CarItemList() (resp *types.CartItemListResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	itemListResp, _ := l.svcCtx.CartItemService.CartItemList(l.ctx, &omsclient.CartItemListReq{MemberId: memberId})

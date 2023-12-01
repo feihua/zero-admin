@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:44
+*/
 type ProductListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Produ
 	}
 }
 
+// ProductList 查询商品列表
 func (l *ProductListLogic) ProductList(in *pmsclient.ProductListReq) (*pmsclient.ProductListResp, error) {
 	all, err := l.svcCtx.PmsProductModel.FindAll(l.ctx, in)
 	count, _ := l.svcCtx.PmsProductModel.Count(l.ctx, in)

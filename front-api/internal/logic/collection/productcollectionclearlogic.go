@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCollectionClearLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:31
+*/
 type ProductCollectionClearLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewProductCollectionClearLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
+// ProductCollectionClear 清空收藏记录
 func (l *ProductCollectionClearLogic) ProductCollectionClear() (resp *types.ProductCollectionClearResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.MemberProductCollectionService.MemberProductCollectionDelete(l.ctx, &umsclient.MemberProductCollectionDeleteReq{

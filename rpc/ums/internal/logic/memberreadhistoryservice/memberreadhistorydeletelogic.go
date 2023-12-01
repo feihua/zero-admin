@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberReadHistoryDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:43
+*/
 type MemberReadHistoryDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewMemberReadHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// MemberReadHistoryDelete 删除浏览记录
 func (l *MemberReadHistoryDeleteLogic) MemberReadHistoryDelete(in *umsclient.MemberReadHistoryDeleteReq) (*umsclient.MemberReadHistoryDeleteResp, error) {
 	err := l.svcCtx.UmsMemberReadHistoryModel.DeleteByIdAndMemberId(l.ctx, in.Id, in.MemberId)
 

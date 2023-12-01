@@ -129,9 +129,24 @@ func (m *customPmsProductModel) DeleteByIds(ctx context.Context, ids []int64) er
 }
 
 func (m *customPmsProductModel) FindAllByIds(ctx context.Context, ids []int64) (*[]PmsProduct, error) {
-	query := fmt.Sprintf("select %s from %s where `id` in (?)", pmsProductRows, m.table)
+	// 拼接占位符 "?"
+	placeholders := make([]string, len(ids))
+	for i := range ids {
+		placeholders[i] = "?"
+	}
+
+	// 构建删除语句
+	//query := fmt.Sprintf("DELETE FROM %s WHERE id IN (%s)", m.table, strings.Join(placeholders, ","))
+
+	// 构建参数列表
+	args := make([]interface{}, len(ids))
+	for i, id := range ids {
+		args[i] = id
+	}
+
+	query := fmt.Sprintf("select %s from %s where `id` in (%s)", pmsProductRows, m.table, strings.Join(placeholders, ","))
 	var resp []PmsProduct
-	err := m.conn.QueryRows(&resp, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	err := m.conn.QueryRows(&resp, query, args...)
 	switch err {
 	case nil:
 		return &resp, nil

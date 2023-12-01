@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberReadHistoryAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/11/30 16:43
+*/
 type MemberReadHistoryAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewMemberReadHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// MemberReadHistoryAdd 添加浏览商品记录
 func (l *MemberReadHistoryAddLogic) MemberReadHistoryAdd(in *umsclient.MemberReadHistoryAddReq) (*umsclient.MemberReadHistoryAddResp, error) {
 	_, err := l.svcCtx.UmsMemberReadHistoryModel.Insert(l.ctx, &umsmodel.UmsMemberReadHistory{
 		MemberId:        in.MemberId,

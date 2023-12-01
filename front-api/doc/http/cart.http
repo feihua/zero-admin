@@ -8,3 +8,6 @@ Content-Type: application/json
 }
 > {% client.global.set("token", response.body.data.token); %}
 
+### 购物车信息
+GET {{host}}/api/cart/list
+Authorization: Bearer {{token}}
