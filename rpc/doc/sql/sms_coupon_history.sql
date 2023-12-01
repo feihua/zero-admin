@@ -2,12 +2,12 @@ create table sms_coupon_history
 (
     id              bigint auto_increment
         primary key,
-    coupon_id       bigint       not null comment '优惠券id',,
-    member_id       bigint       not null comment '会员id',,
-    coupon_code     varchar(64)  not null comment '优惠码',,
+    coupon_id       bigint       not null comment '优惠券id',
+    member_id       bigint       not null comment '会员id',
+    coupon_code     varchar(64)  not null comment '优惠码',
     member_nickname varchar(64)  not null comment '领取人昵称',
     get_type        int(1)       not null comment '获取类型：0->后台赠送；1->主动获取',
-    create_time     datetime     not null comment '领取时间',,
+    create_time     datetime     not null comment '领取时间',
     use_status      int(1)       not null comment '使用状态：0->未使用；1->已使用；2->已过期',
     use_time        datetime     not null comment '使用时间',
     order_id        bigint       not null comment '订单编号',
