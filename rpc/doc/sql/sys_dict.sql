@@ -16,7 +16,5 @@ create table sys_dict
 )
     comment '字典表';
 
-INSERT INTO sys_dict (id, value, label, type, description, sort, create_by, create_time, update_by, update_time, remarks, del_flag) VALUES (1, 'male', '男', 'sex', '性别', 0, 'admin', '2018-09-23 19:52:54', 'admin', '2020-11-19 18:21:55', '性别', 0);
-INSERT INTO sys_dict (id, value, label, type, description, sort, create_by, create_time, update_by, update_time, remarks, del_flag) VALUES (2, 'female', '女', 'sex', '性别', 1, 'admin', '2018-09-23 19:53:17', 'admin', '2020-11-19 18:22:00', '性别', 0);
-INSERT INTO sys_dict (id, value, label, type, description, sort, create_by, create_time, update_by, update_time, remarks, del_flag) VALUES (9, '123', '1', '1', '12222222222222', 0, '', '2020-11-26 15:10:42', 'admin', '2020-11-26 15:26:59', '12222222222222', 0);
-INSERT INTO sys_dict (id, value, label, type, description, sort, create_by, create_time, update_by, update_time, remarks, del_flag) VALUES (11, '1', '1', '1', '1', 1, 'admin', '2020-11-26 15:27:08', 'admin', '2020-11-26 15:27:09', '1', 0);
+INSERT INTO sys_dict (id, value, label, type, description, sort, create_by, create_time, update_by, update_time, remarks, del_flag) VALUES (1, 'male', '男', 'sex', '性别', 0, 'admin', current_time, 'admin', current_time, '性别', 0);
+INSERT INTO sys_dict (id, value, label, type, description, sort, create_by, create_time, update_by, update_time, remarks, del_flag) VALUES (2, 'female', '女', 'sex', '性别', 1, 'admin', current_time, 'admin', current_time, '性别', 0);

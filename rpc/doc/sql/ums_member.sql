@@ -2,7 +2,7 @@ create table ums_member
 (
     id                     bigint auto_increment
         primary key,
-    member_level_id        bigint                              not null,
+    member_level_id        bigint                              not null comment '会员等级id',
     username               varchar(64)                         not null comment '用户名',
     password               varchar(64)                         not null comment '密码',
     nickname               varchar(64)                         not null comment '昵称',
@@ -27,5 +27,5 @@ create table ums_member
 )
     comment '会员表';
 
-INSERT INTO ums_member (id, member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job, personalized_signature, source_type, integration, growth, luckey_count, history_integration) VALUES (11, 4, 'koobe', '123456', 'koobe', '18613030352', 1, '2021-03-16 20:40:55', '', 1, '2021-03-16', '深圳', 'go开发', 'test', 1, 100, 20, 1000, 1000);
-INSERT INTO ums_member (id, member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job, personalized_signature, source_type, integration, growth, luckey_count, history_integration) VALUES (22, 1, 'koobe1', '123456', 'koobe1', '18613030351', 0, '2022-06-22 22:25:05', '', 0, '2022-06-22', '', '', '', 0, 0, 0, 0, 0);
+INSERT INTO ums_member (id, member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job, personalized_signature, source_type, integration, growth, luckey_count, history_integration) VALUES (1, 4, 'koobe', '123456', 'koobe', '18613030352', 1, current_time, '', 1, '2021-03-16', '深圳', 'go开发', 'test', 1, 100, 20, 1000, 1000);
+INSERT INTO ums_member (id, member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job, personalized_signature, source_type, integration, growth, luckey_count, history_integration) VALUES (2, 1, 'koobe1', '123456', 'koobe1', '18613030351', 0, current_time, '', 0, '2022-06-22', '', '', '', 0, 0, 0, 0, 0);

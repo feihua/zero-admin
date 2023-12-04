@@ -2,8 +2,8 @@ create table ums_member_level
 (
     id                      bigint auto_increment
         primary key,
-    name                    varchar(100)   not null,
-    growth_point            int            not null,
+    name                    varchar(100)   not null comment '等级名称',
+    growth_point            int            not null comment '成长点',
     default_status          int(1)         not null comment '是否为默认等级：0->不是；1->是',
     free_freight_point      decimal(10, 2) not null comment '免运费标准',
     comment_growth_point    int            not null comment '每次评价获取的成长值',
@@ -13,7 +13,7 @@ create table ums_member_level
     priviledge_promotion    int(1)         not null comment '是否有专享活动特权',
     priviledge_member_price int(1)         not null comment '是否有会员价格特权',
     priviledge_birthday     int(1)         not null comment '是否有生日特权',
-    note                    varchar(200)   null
+    note                    varchar(200)   null comment '备注'
 )
     comment '会员等级表';
 

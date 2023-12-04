@@ -2,9 +2,9 @@ create table ums_member_receive_address
 (
     id             bigint auto_increment
         primary key,
-    member_id      bigint       not null,
+    member_id      bigint       not null comment '会员id',
     name           varchar(100) not null comment '收货人名称',
-    phone_number   varchar(64)  not null,
+    phone_number   varchar(64)  not null comment '收货人电话',
     default_status int(1)       not null comment '是否为默认',
     post_code      varchar(100) not null comment '邮政编码',
     province       varchar(100) not null comment '省份/直辖市',

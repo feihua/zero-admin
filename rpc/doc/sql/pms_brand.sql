@@ -2,11 +2,11 @@ create table pms_brand
 (
     id                    bigint auto_increment
         primary key,
-    name                  varchar(64)  not null,
+    name                  varchar(64)  not null comment '品牌名称',
     first_letter          varchar(8)   not null comment '首字母',
-    sort                  int          not null,
+    sort                  int          not null comment '排序',
     factory_status        int(1)       not null comment '是否为品牌制造商：0->不是；1->是',
-    show_status           int(1)       not null,
+    show_status           int(1)       not null comment '订单编号',
     product_count         int          not null comment '产品数量',
     product_comment_count int          not null comment '产品评论数量',
     logo                  varchar(255) not null comment '品牌logo',

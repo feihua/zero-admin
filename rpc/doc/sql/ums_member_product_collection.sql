@@ -1,6 +1,6 @@
 create table ums_member_product_collection
 (
-    id                bigint auto_increment comment '编号'
+    id                bigint auto_increment
         primary key,
     member_id         bigint                              not null comment '会员id',
     member_nick_name  varchar(50)                         not null comment '会员姓名',

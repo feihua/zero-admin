@@ -2,8 +2,8 @@ create table ums_integration_change_history
 (
     id           bigint auto_increment
         primary key,
-    member_id    bigint       not null,
-    create_time  datetime     not null,
+    member_id    bigint       not null comment '会员id',
+    create_time  datetime     not null comment '创建时间',
     change_type  int(1)       not null comment '改变类型：0->增加；1->减少',
     change_count int          not null comment '积分改变数量',
     operate_man  varchar(100) not null comment '操作人员',

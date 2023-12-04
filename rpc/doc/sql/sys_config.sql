@@ -16,4 +16,4 @@ create table sys_config
 )
     comment '系统配置表';
 
-INSERT INTO sys_config (id, value, label, type, description, sort, create_by, create_time, update_by, update_time, remarks, del_flag) VALUES (1, '#14889A', 'theme', 'color', '主题色', 0, 'admin', '2018-09-23 19:52:54', 'admin', '2020-11-19 18:14:02', '主题色', 0);
+INSERT INTO sys_config (id, value, label, type, description, sort, create_by, create_time, update_by, update_time, remarks, del_flag) VALUES (1, '#14889A', 'theme', 'color', '主题色', 0, 'admin', current_time, 'admin', current_time, '主题色', 0);
