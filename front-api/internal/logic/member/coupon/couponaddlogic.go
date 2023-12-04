@@ -2,6 +2,7 @@ package coupon
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"time"
 	"zero-admin/rpc/sms/smsclient"
@@ -32,7 +33,12 @@ func NewCouponAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CouponA
 }
 
 // CouponAdd 领取指定优惠券
+//1.查询优惠券是否存在
+//2.查询是否已经领取过优惠券了
+//3.添加领取优惠券记录
+//4.更新优惠券数量
 func (l *CouponAddLogic) CouponAdd(req *types.AddCouponReq) (resp *types.AddCouponResp, err error) {
+	//1.查询优惠券是否存在
 	coupon, err := l.svcCtx.CouponService.CouponFindById(l.ctx, &smsclient.CouponFindByIdReq{CouponId: req.CouponId})
 
 	if err != nil {
@@ -43,6 +49,7 @@ func (l *CouponAddLogic) CouponAdd(req *types.AddCouponReq) (resp *types.AddCoup
 		return nil, errors.New("优惠券已经领完了")
 	}
 
+	//2.查询是否已经领取过优惠券了
 	couponHistoryList, _ := l.svcCtx.CouponHistoryService.CouponHistoryList(l.ctx, &smsclient.CouponHistoryListReq{
 		Current:  1,
 		PageSize: 100,
@@ -54,14 +61,16 @@ func (l *CouponAddLogic) CouponAdd(req *types.AddCouponReq) (resp *types.AddCoup
 		return nil, errors.New("您已经领取过该优惠券")
 	}
 
+	//3.添加领取优惠券记录
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, err = l.svcCtx.CouponHistoryService.CouponHistoryAdd(l.ctx, &smsclient.CouponHistoryAddReq{
 		CouponId:       req.CouponId,
-		MemberId:       l.ctx.Value("memberId").(int64),
+		MemberId:       memberId,
 		CouponCode:     "fsdf",
 		MemberNickname: l.ctx.Value("memberName").(string),
-		GetType:        1,
+		GetType:        1, //主动领取
 		CreateTime:     time.Now().Format("2006-01-02 15:04:05"),
-		UseStatus:      0,
+		UseStatus:      0, //未使用
 	})
 
 	if err != nil {
@@ -71,6 +80,7 @@ func (l *CouponAddLogic) CouponAdd(req *types.AddCouponReq) (resp *types.AddCoup
 	coupon.Count = coupon.Count - 1
 	coupon.ReceiveCount = coupon.ReceiveCount + 1
 
+	//4.更新优惠券数量
 	_, err = l.svcCtx.CouponService.CouponUpdate(l.ctx, &smsclient.CouponUpdateReq{
 		Id:           coupon.Id,
 		Type:         coupon.Type,

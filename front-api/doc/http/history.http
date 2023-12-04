@@ -15,17 +15,16 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "memberNickName": "1",
-  "memberIcon": "1",
-  "productId": 1,
-  "productName": "1",
-  "productPic": "1",
-  "productSubTitle": "1",
-  "productPrice": 1
+  "memberIcon": "https://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/icon/github_icon_02.png",
+  "productId": 13,
+  "productName": "华为 HUAWEI P20",
+  "productPic": "https://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20221028/iphone14_001.jpg",
+  "productSubTitle": "AI智慧全面屏 6GB +64GB 亮黑色 全网通版 移动联通电信4G手机 双卡双待手机 双卡双待",
+  "productPrice": 3788
 }
 
 ### 删除会员个人的浏览记录
-GET {{host}}/api/history/delete/1
+GET {{host}}/api/history/delete/2
 Authorization: Bearer {{token}}
 
 ### 获取会员个人的浏览记录

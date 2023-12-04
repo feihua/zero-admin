@@ -31,9 +31,12 @@ func NewCouponListByProductIdLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // CouponListByProductId 获取当前商品相关优惠券
+//1.获取指定商品优惠券
+//2.获取指定分类优惠券
+//3.所有优惠券
 func (l *CouponListByProductIdLogic) CouponListByProductId(req *types.ListCouponReq) (resp *types.ListCouponResp, err error) {
 	var couponIds []int64
-	//获取指定商品优惠券
+	//1.获取指定商品优惠券
 	productRelationList, _ := l.svcCtx.CouponProductRelationService.CouponProductRelationList(l.ctx, &smsclient.CouponProductRelationListReq{
 		ProductId: req.ProductId,
 	})
@@ -42,7 +45,7 @@ func (l *CouponListByProductIdLogic) CouponListByProductId(req *types.ListCoupon
 		couponIds = append(couponIds, i.CouponId)
 	}
 
-	//获取指定分类优惠券
+	//2.获取指定分类优惠券
 	var ids []int64
 	ids = append(ids, req.ProductId)
 	productListByIds, _ := l.svcCtx.ProductService.ProductListByIds(l.ctx, &pmsclient.ProductByIdsReq{Ids: ids})
@@ -56,7 +59,7 @@ func (l *CouponListByProductIdLogic) CouponListByProductId(req *types.ListCoupon
 		couponIds = append(couponIds, i.CouponId)
 	}
 
-	//所有优惠券
+	//3.所有优惠券
 	couponFindByIds, _ := l.svcCtx.CouponService.CouponFindByIds(l.ctx, &smsclient.CouponFindByIdsReq{CouponIds: couponIds})
 
 	var list []*types.ListtCouponData

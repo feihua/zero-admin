@@ -887,3 +887,89 @@ type ListCouponResp struct {
 	Message string             `json:"message"`
 	Data    []*ListtCouponData `json:"data"`
 }
+
+type BrandListResp struct {
+	Code    int64           `json:"code"`
+	Message string          `json:"message"`
+	Data    []BrandListData `json:"data"`
+}
+
+type BrandListData struct {
+	Id                  int64  `json:"id"`
+	Name                string `json:"name"`
+	FirstLetter         string `json:"firstLetter"`
+	Sort                int64  `json:"sort"`
+	FactoryStatus       int64  `json:"factoryStatus"`
+	ShowStatus          int64  `json:"showStatus"`
+	ProductCount        int64  `json:"productCount"`
+	ProductCommentCount int64  `json:"productCommentCount"`
+	Logo                string `json:"logo"`
+	BigPic              string `json:"bigPic"`
+}
+
+type BrandDetailReq struct {
+	BrandId int64 `path:"brandId"`
+}
+
+type BrandDetailResp struct {
+	Code    int64           `json:"code"`
+	Message string          `json:"message"`
+	Data    BrandDetailData `json:"data"`
+}
+
+type BrandDetailData struct {
+	Id                  int64              `json:"id"`
+	Name                string             `json:"name"`
+	FirstLetter         string             `json:"firstLetter"`
+	Sort                int64              `json:"sort"`
+	FactoryStatus       int64              `json:"factoryStatus"`
+	ShowStatus          int64              `json:"showStatus"`
+	ProductCount        int64              `json:"productCount"`
+	ProductCommentCount int64              `json:"productCommentCount"`
+	Logo                string             `json:"logo"`
+	BigPic              string             `json:"bigPic"`
+	BrandStory          string             `json:"brand_story"` // 品牌故事
+	ProductList         []BrandProductList `json:"productList"`
+}
+
+type BrandProductList struct {
+	Id                         int64   `json:"id"`
+	BrandId                    int64   `json:"brandId"`
+	ProductCategoryId          int64   `json:"productCategoryId"`
+	FeightTemplateId           int64   `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
+	Name                       string  `json:"name"`
+	Pic                        string  `json:"pic"`
+	ProductSn                  string  `json:"productSn"`
+	DeleteStatus               int64   `json:"deleteStatus"`
+	PublishStatus              int64   `json:"publishStatus"`
+	NewStatus                  int64   `json:"newStatus"`
+	RecommandStatus            int64   `json:"recommandStatus"`
+	VerifyStatus               int64   `json:"verifyStatus"`
+	Sort                       int64   `json:"sort"`
+	Sale                       int64   `json:"sale"`
+	Price                      float64 `json:"price"`
+	PromotionPrice             float64 `json:"promotionPrice,omitempty"`
+	GiftGrowth                 int64   `json:"giftGrowth"`
+	GiftPoint                  int64   `json:"giftPoint"`
+	UsePointLimit              int64   `json:"usePointLimit"`
+	SubTitle                   string  `json:"subTitle"`
+	OriginalPrice              float64 `json:"originalPrice"`
+	Stock                      int64   `json:"stock"`
+	LowStock                   int64   `json:"lowStock"`
+	Unit                       string  `json:"unit"`
+	Weight                     float64 `json:"weight"`
+	PreviewStatus              int64   `json:"previewStatus"`
+	ServiceIDS                 string  `json:"serviceIds"`
+	Keywords                   string  `json:"keywords"`
+	Note                       string  `json:"note"`
+	AlbumPics                  string  `json:"albumPics"`
+	DetailTitle                string  `json:"detailTitle"`
+	PromotionStartTime         string  `json:"promotionStartTime,omitempty"`
+	PromotionEndTime           string  `json:"promotionEndTime,omitempty"`
+	PromotionPerLimit          int64   `json:"promotionPerLimit"`
+	PromotionType              int64   `json:"promotionType"`
+	BrandName                  string  `json:"brandName"`
+	ProductCategoryName        string  `json:"productCategoryName"`
+	Description                string  `json:"description"`
+}

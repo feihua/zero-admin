@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	brand "zero-admin/front-api/internal/handler/brand"
 	cart "zero-admin/front-api/internal/handler/cart"
 	category "zero-admin/front-api/internal/handler/category"
 	collection "zero-admin/front-api/internal/handler/collection"
@@ -275,5 +276,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/member/coupon"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/list",
+				Handler: brand.BrandListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/detail/:brandId",
+				Handler: brand.BrandDetailHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/brand"),
 	)
 }

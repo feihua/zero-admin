@@ -1,0 +1,7 @@
+### 品牌列表
+GET {{host}}/api/brand/list
+
+### 品牌详情
+GET {{host}}/api/brand/detail/50
+
+
