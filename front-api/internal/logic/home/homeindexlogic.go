@@ -51,11 +51,17 @@ func (l *HomeIndexLogic) HomeIndex() (resp *types.HomeResp, err error) {
 
 //推荐专题
 func querySubjectList(l *HomeIndexLogic) []types.SubjectList {
-	homeRecommendSubjectList, _ := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectList(l.ctx, &smsclient.HomeRecommendSubjectListReq{
+	var subjectLists []types.SubjectList
+	homeRecommendSubjectList, err := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectList(l.ctx, &smsclient.HomeRecommendSubjectListReq{
 		Current:         1,
 		PageSize:        4,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})
+
+	//没有推荐专题的时候返回空数据
+	if err != nil {
+		return subjectLists
+	}
 
 	var homeRecommendSubjectIdLists []int64
 	for _, item := range homeRecommendSubjectList.List {
@@ -63,7 +69,6 @@ func querySubjectList(l *HomeIndexLogic) []types.SubjectList {
 	}
 
 	subjectListResp, _ := l.svcCtx.SubjectService.SubjectListByIds(l.ctx, &cmsclient.SubjectListByIdsReq{Ids: homeRecommendSubjectIdLists})
-	var subjectLists []types.SubjectList
 	for _, item := range subjectListResp.List {
 		subjectLists = append(subjectLists, types.SubjectList{
 			CategoryId:      item.CategoryId,
@@ -153,6 +158,8 @@ func queryHomeFlashPromotion(l *HomeIndexLogic) types.HomeFlashPromotion {
 				FlashPromotionSessionId: sessionListData[0].Id,
 			})
 
+			//todo 为了测试有数据,这里先注释,用下面模拟的数据
+			//todo =====================开始==========================
 			//var productIdLists []int64
 			//for _, item := range listResp.List {
 			//	productIdLists = append(productIdLists, item.ProductId)
@@ -163,7 +170,7 @@ func queryHomeFlashPromotion(l *HomeIndexLogic) types.HomeFlashPromotion {
 			productIdLists = append(productIdLists, 28)
 			productIdLists = append(productIdLists, 29)
 			productIdLists = append(productIdLists, 32)
-
+			//todo =====================结束==========================
 			//设置商品
 			resp.ProductList = queryProductList(l.svcCtx.ProductService, productIdLists, l.ctx)
 		}

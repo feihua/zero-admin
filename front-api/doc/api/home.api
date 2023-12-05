@@ -11,12 +11,12 @@ type HomeResp {
 }
 
 type Data {
-	AdvertiseList      []AdvertiseList    `json:"advertiseList"`
-	BrandList          []BrandList        `json:"brandList"`
-	HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"`
-	NewProductList     []ProductList      `json:"newProductList"`
-	HotProductList     []ProductList      `json:"hotProductList"`
-	SubjectList        []SubjectList      `json:"subjectList"`
+	AdvertiseList      []AdvertiseList    `json:"advertiseList"`//获取首页广告
+	BrandList          []BrandList        `json:"brandList"` //获取推荐品牌
+	HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"`//获取秒杀信息
+	NewProductList     []ProductList      `json:"newProductList"`//获取新品推荐
+	HotProductList     []ProductList      `json:"hotProductList"`//获取人气推荐
+	SubjectList        []SubjectList      `json:"subjectList"`//获取推荐专题
 }
 
 type SubjectList {
@@ -163,16 +163,19 @@ type RecommendHotProductListResp {
 service front-api {
 	@handler HomeIndex
 	get /index returns (HomeResp)
-	
+
+	//获取推荐商品
 	@handler RecommendProductList
 	post /recommendProductList (RecommendProductListReq) returns (RecommendProductListResp)
-	
+
+	//获取推荐品牌
 	@handler RecommendBrandList
 	post /recommendBrandList (RecommendBrandListReq) returns (RecommendBrandListResp)
-	
+
+	//获取新品推荐商品
 	@handler RecommendNewProductList
 	post /recommendNewProductList (RecommendNewProductListReq) returns (RecommendNewProductListResp)
-	
+	//获取人气推荐商品
 	@handler RecommendHotProductList
 	post /recommendHotProductList (RecommendHotProductListReq) returns (RecommendHotProductListResp)
 }

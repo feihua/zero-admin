@@ -87,9 +87,10 @@ func (m *customSmsFlashPromotionSessionModel) DeleteByIds(ctx context.Context, i
 
 func (m *customSmsFlashPromotionSessionModel) FindAllByCurrentTime(ctx context.Context, CurrentTime string) (*[]SmsFlashPromotionSession, error) {
 
-	where := fmt.Sprintf("status = '1' AND start_time <= '%s' AND end_timeend_time >= '%s'", CurrentTime, CurrentTime)
+	times := strings.Split(CurrentTime, " ")[1]
+	where := fmt.Sprintf("status = '1' AND start_time <= '%s' AND end_time >= '%s'", times, times)
 
-	query := fmt.Sprintf("select %s from %s where %s", smsFlashPromotionRows, m.table, where)
+	query := fmt.Sprintf("select %s from %s where %s", smsFlashPromotionSessionRows, m.table, where)
 	var resp []SmsFlashPromotionSession
 	err := m.conn.QueryRows(&resp, query)
 	switch err {

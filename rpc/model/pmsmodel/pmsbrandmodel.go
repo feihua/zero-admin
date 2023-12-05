@@ -106,9 +106,22 @@ func (m *customPmsBrandModel) DeleteByIds(ctx context.Context, ids []int64) erro
 }
 
 func (m *customPmsBrandModel) FindAllByIds(ctx context.Context, ids []int64) (*[]PmsBrand, error) {
-	query := fmt.Sprintf("select %s from %s where `id` in (?)", pmsBrandRows, m.table)
+	// 拼接占位符 "?"
+	placeholders := make([]string, len(ids))
+	for i := range ids {
+		placeholders[i] = "?"
+	}
+
+	// 构建参数列表
+	args := make([]interface{}, len(ids))
+	for i, id := range ids {
+		args[i] = id
+	}
+
+	query := fmt.Sprintf("select %s from %s where `id` in (%s)", pmsBrandRows, m.table, strings.Join(placeholders, ","))
+
 	var resp []PmsBrand
-	err := m.conn.QueryRows(&resp, query, strings.Replace(strings.Trim(fmt.Sprint(ids), "[]"), " ", ",", -1))
+	err := m.conn.QueryRows(&resp, query, args...)
 	switch err {
 	case nil:
 		return &resp, nil

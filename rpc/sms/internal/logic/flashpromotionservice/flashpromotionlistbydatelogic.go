@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionListByDateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/5 13:53
+*/
 type FlashPromotionListByDateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewFlashPromotionListByDateLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
+// FlashPromotionListByDate 查询当前时间是否有秒杀活动
 func (l *FlashPromotionListByDateLogic) FlashPromotionListByDate(in *smsclient.FlashPromotionListByDateReq) (*smsclient.FlashPromotionListByDateResp, error) {
 	all, err := l.svcCtx.SmsFlashPromotionModel.FindAllByCurrentDate(l.ctx, in.CurrentDate)
 
