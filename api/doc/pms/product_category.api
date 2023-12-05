@@ -25,7 +25,7 @@ type (
 		Current    int64  `json:"current,default=1"`
 		PageSize   int64  `json:"pageSize,default=20"`
 		Name       string `json:"name,optional"`
-		ParentId   int64  `json:"parentId,default=2"`   // 上级分类的编号：0表示一级分类
+		ParentId   int64  `json:"parentId,default=2000"`   // 上级分类的编号：0表示一级分类(默认值是无意义的,只是在查询的时候当一个标志使用)
 		ShowStatus int64  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
 	}
 	ListtProductCategoryData {
