@@ -1,2 +1,5 @@
 ### 获取商品列表
 GET {{host}}/api/product/queryProductList
+
+### 获取商品详情
+GET {{host}}/api/product/queryProduct/28

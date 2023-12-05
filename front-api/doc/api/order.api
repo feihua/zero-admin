@@ -29,7 +29,7 @@ type ReturnApplyResp {
 }
 
 @server(
-	//    jwt: Auth
+	    jwt: Auth
 	group: order
 	prefix: /api/order
 )

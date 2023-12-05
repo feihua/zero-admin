@@ -136,6 +136,16 @@ message CouponFindByIdsResp {
   repeated  CouponListData list = 2;
 }
 
+message CouponFindByProductIdAndProductCategoryIdReq {
+  int64 productId = 1;
+  int64 ProductCategoryId = 2;
+}
+message CouponFindByProductIdAndProductCategoryIdResp {
+  int64 total = 1;
+  repeated  CouponListData list = 2;
+}
+
+
 service CouponService {
 
   rpc CouponAdd(CouponAddReq) returns(CouponAddResp);
@@ -146,6 +156,8 @@ service CouponService {
   rpc CouponFindById(CouponFindByIdReq) returns(CouponFindByIdResp);
   //根据优惠券ids查询优惠券
   rpc CouponFindByIds(CouponFindByIdsReq) returns(CouponFindByIdsResp);
+  //根据商品Id和分类id查询可用的优惠券(app)
+  rpc CouponFindByProductIdAndProductCategoryId(CouponFindByProductIdAndProductCategoryIdReq) returns(CouponFindByProductIdAndProductCategoryIdResp);
 
 
 }

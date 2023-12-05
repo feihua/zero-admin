@@ -3,6 +3,7 @@ package product
 import (
 	"context"
 	"zero-admin/rpc/pms/pmsclient"
+	"zero-admin/rpc/sms/smsclient"
 
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
@@ -45,8 +46,12 @@ func (l *QueryProductLogic) QueryProduct(req *types.QueryProductReq) (resp *type
 		Id: req.Id,
 	})
 
-	//8.商品可用优惠券
-	//l.svcCtx.Sms.CouponList()
+	//8.商品可用优惠券(根据商品id和分类id查询)
+	couponList, _ := l.svcCtx.CouponService.CouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
+		ProductId:         req.Id,
+		ProductCategoryId: productResp.Product.ProductCategoryId,
+	})
+
 	return &types.QueryProductResp{
 		Code:    0,
 		Message: "操作成功",
@@ -58,7 +63,7 @@ func (l *QueryProductLogic) QueryProduct(req *types.QueryProductReq) (resp *type
 			SkuStockList:              buildSkuStockListData(productResp),
 			ProductLadderList:         buildProductLadderListData(productResp),
 			ProductFullReductionList:  buildProductFullReductionListData(productResp),
-			CouponList:                nil,
+			CouponList:                buildCouponListData(couponList),
 		},
 	}, nil
 }
@@ -221,6 +226,34 @@ func buildProductFullReductionListData(resp *pmsclient.ProductDetailByIdResp) []
 			ProductId:   item.ProductId,
 			FullPrice:   item.FullPrice,
 			ReducePrice: item.ReducePrice,
+		})
+	}
+	return list
+
+}
+
+//8.商品优惠券
+func buildCouponListData(resp *smsclient.CouponFindByProductIdAndProductCategoryIdResp) []types.CouponList {
+
+	var list []types.CouponList
+	for _, item := range resp.List {
+
+		list = append(list, types.CouponList{
+			Id:           item.Id,
+			Type:         item.Type,
+			Name:         item.Name,
+			Platform:     item.Platform,
+			Count:        item.Count,
+			Amount:       item.Amount,
+			PerLimit:     item.PerLimit,
+			MinPoint:     item.MinPoint,
+			StartTime:    item.StartTime,
+			EndTime:      item.EndTime,
+			UseType:      item.UseType,
+			PublishCount: item.PublishCount,
+			UseCount:     item.UseCount,
+			ReceiveCount: item.ReceiveCount,
+			EnableTime:   item.EnableTime,
 		})
 	}
 	return list

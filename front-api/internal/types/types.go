@@ -564,21 +564,21 @@ type Brand struct {
 }
 
 type CouponList struct {
-	Id           int64  `json:"id"`
-	Type         int64  `json:"type"`
-	Name         string `json:"name"`
-	Platform     int64  `json:"platform"`
-	Count        int64  `json:"count"`
-	Amount       int64  `json:"amount"`
-	PerLimit     int64  `json:"perLimit"`
-	MinPoint     int64  `json:"minPoint"`
-	StartTime    string `json:"startTime"`
-	EndTime      string `json:"endTime"`
-	UseType      int64  `json:"useType"`
-	PublishCount int64  `json:"publishCount"`
-	UseCount     int64  `json:"useCount"`
-	ReceiveCount int64  `json:"receiveCount"`
-	EnableTime   string `json:"enableTime"`
+	Id           int64   `json:"id"`
+	Type         int64   `json:"type"`
+	Name         string  `json:"name"`
+	Platform     int64   `json:"platform"`
+	Count        int64   `json:"count"`
+	Amount       float64 `json:"amount"`
+	PerLimit     int64   `json:"perLimit"`
+	MinPoint     float64 `json:"minPoint"`
+	StartTime    string  `json:"startTime"`
+	EndTime      string  `json:"endTime"`
+	UseType      int64   `json:"useType"`
+	PublishCount int64   `json:"publishCount"`
+	UseCount     int64   `json:"useCount"`
+	ReceiveCount int64   `json:"receiveCount"`
+	EnableTime   string  `json:"enableTime"`
 }
 
 type Product struct {

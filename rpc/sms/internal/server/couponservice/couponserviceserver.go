@@ -53,3 +53,9 @@ func (s *CouponServiceServer) CouponFindByIds(ctx context.Context, in *smsclient
 	l := couponservicelogic.NewCouponFindByIdsLogic(ctx, s.svcCtx)
 	return l.CouponFindByIds(in)
 }
+
+// 根据商品Id和分类id查询可用的优惠券(app)
+func (s *CouponServiceServer) CouponFindByProductIdAndProductCategoryId(ctx context.Context, in *smsclient.CouponFindByProductIdAndProductCategoryIdReq) (*smsclient.CouponFindByProductIdAndProductCategoryIdResp, error) {
+	l := couponservicelogic.NewCouponFindByProductIdAndProductCategoryIdLogic(ctx, s.svcCtx)
+	return l.CouponFindByProductIdAndProductCategoryId(in)
+}

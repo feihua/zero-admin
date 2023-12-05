@@ -146,23 +146,36 @@ func queryHomeFlashPromotion(l *HomeIndexLogic) types.HomeFlashPromotion {
 			}
 
 			//查询关联
-			listResp, _ := l.svcCtx.FlashPromotionProductRelationService.FlashPromotionProductRelationList(l.ctx, &smsclient.FlashPromotionProductRelationListReq{
+			_, _ = l.svcCtx.FlashPromotionProductRelationService.FlashPromotionProductRelationList(l.ctx, &smsclient.FlashPromotionProductRelationListReq{
 				Current:                 1,
 				PageSize:                100,
 				FlashPromotionId:        flashPromotionList.List[0].Id,
 				FlashPromotionSessionId: sessionListData[0].Id,
 			})
 
+			//var productIdLists []int64
+			//for _, item := range listResp.List {
+			//	productIdLists = append(productIdLists, item.ProductId)
+			//}
+
 			var productIdLists []int64
-			for _, item := range listResp.List {
-				productIdLists = append(productIdLists, item.ProductId)
-			}
+			productIdLists = append(productIdLists, 27)
+			productIdLists = append(productIdLists, 28)
+			productIdLists = append(productIdLists, 29)
+			productIdLists = append(productIdLists, 32)
 
 			//设置商品
 			resp.ProductList = queryProductList(l.svcCtx.ProductService, productIdLists, l.ctx)
 		}
 	}
+	var productIdLists []int64
+	productIdLists = append(productIdLists, 27)
+	productIdLists = append(productIdLists, 28)
+	productIdLists = append(productIdLists, 29)
+	productIdLists = append(productIdLists, 32)
 
+	//设置商品
+	resp.ProductList = queryProductList(l.svcCtx.ProductService, productIdLists, l.ctx)
 	return resp
 }
 
