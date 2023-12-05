@@ -11,6 +11,7 @@ import (
 	history "zero-admin/front-api/internal/handler/history"
 	home "zero-admin/front-api/internal/handler/home"
 	memberaddress "zero-admin/front-api/internal/handler/member/address"
+	memberattention "zero-admin/front-api/internal/handler/member/attention"
 	membercoupon "zero-admin/front-api/internal/handler/member/coupon"
 	membermember "zero-admin/front-api/internal/handler/member/member"
 	order "zero-admin/front-api/internal/handler/order"
@@ -292,5 +293,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithPrefix("/api/brand"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/add",
+				Handler: memberattention.AttentionAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/list",
+				Handler: memberattention.AttentionListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/delete/:id",
+				Handler: memberattention.AttentionDeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/clear",
+				Handler: memberattention.AttentionClearHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member/attention"),
 	)
 }

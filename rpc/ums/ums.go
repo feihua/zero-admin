@@ -3,11 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-
 	"zero-admin/rpc/ums/internal/config"
 	growthchangehistoryserviceServer "zero-admin/rpc/ums/internal/server/growthchangehistoryservice"
 	integrationchangehistoryserviceServer "zero-admin/rpc/ums/internal/server/integrationchangehistoryservice"
 	integrationconsumesettingserviceServer "zero-admin/rpc/ums/internal/server/integrationconsumesettingservice"
+	memberattentionservicer "zero-admin/rpc/ums/internal/server/memberattentionservice"
 	memberlevelserviceServer "zero-admin/rpc/ums/internal/server/memberlevelservice"
 	memberloginlogserviceServer "zero-admin/rpc/ums/internal/server/memberloginlogservice"
 	membermembertagrelationserviceServer "zero-admin/rpc/ums/internal/server/membermembertagrelationservice"
@@ -53,6 +53,7 @@ func main() {
 		umsclient.RegisterMemberTaskServiceServer(grpcServer, membertaskserviceServer.NewMemberTaskServiceServer(ctx))
 		umsclient.RegisterMemberProductCollectionServiceServer(grpcServer, memberproductcollectionserviceServer.NewMemberProductCollectionServiceServer(ctx))
 		umsclient.RegisterMemberReadHistoryServiceServer(grpcServer, memberreadhistoryserviceServer.NewMemberReadHistoryServiceServer(ctx))
+		umsclient.RegisterMemberAttentionServiceServer(grpcServer, memberattentionservicer.NewMemberAttentionServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

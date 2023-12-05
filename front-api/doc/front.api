@@ -9,6 +9,7 @@ import "api/collection.api"
 import "api/history.api"
 import "api/coupon.api"
 import "api/brand.api"
+import "api/attention.api"
 
 info(
 	title: "zero-front"

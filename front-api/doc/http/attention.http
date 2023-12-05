@@ -1,0 +1,34 @@
+### app会员登录
+POST {{host}}/api/member/login
+Content-Type: application/json
+
+{
+  "mobile": "18613030352",
+  "password": "123456"
+}
+> {% client.global.set("token", response.body.data.token); %}
+
+### 添加会员品牌关注
+POST {{host}}/api/member/attention/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "memberId": 11,
+  "brandId": 51,
+  "brandName": "苹果",
+  "brandCity": "广东省",
+  "brandLogo": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20200607/49b30bb0377030d1.jpg"
+}
+
+### 清空会员品牌关注
+GET {{host}}/api/member/attention/clear
+Authorization: Bearer {{token}}
+
+### 删除会员品牌关注
+GET {{host}}/api/member/attention/delete/5
+Authorization: Bearer {{token}}
+
+### 获取会员品牌关注
+GET {{host}}/api/member/attention/list
+Authorization: Bearer {{token}}

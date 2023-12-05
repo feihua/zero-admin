@@ -3081,3 +3081,234 @@ var MemberReadHistoryService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "ums.proto",
 }
+
+// MemberAttentionServiceClient is the client API for MemberAttentionService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MemberAttentionServiceClient interface {
+	MemberBrandAttentionAdd(ctx context.Context, in *MemberBrandAttentionAddReq, opts ...grpc.CallOption) (*MemberBrandAttentionAddResp, error)
+	MemberBrandAttentionDelete(ctx context.Context, in *MemberBrandAttentionDeleteReq, opts ...grpc.CallOption) (*MemberBrandAttentionDeleteResp, error)
+	MemberBrandAttentionUpdate(ctx context.Context, in *MemberBrandAttentionUpdateReq, opts ...grpc.CallOption) (*MemberBrandAttentionUpdateResp, error)
+	MemberBrandAttentionClear(ctx context.Context, in *MemberBrandAttentionClearReq, opts ...grpc.CallOption) (*MemberBrandAttentionClearResp, error)
+	MemberBrandAttentionList(ctx context.Context, in *MemberBrandAttentionListReq, opts ...grpc.CallOption) (*MemberBrandAttentionListResp, error)
+}
+
+type memberAttentionServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMemberAttentionServiceClient(cc grpc.ClientConnInterface) MemberAttentionServiceClient {
+	return &memberAttentionServiceClient{cc}
+}
+
+func (c *memberAttentionServiceClient) MemberBrandAttentionAdd(ctx context.Context, in *MemberBrandAttentionAddReq, opts ...grpc.CallOption) (*MemberBrandAttentionAddResp, error) {
+	out := new(MemberBrandAttentionAddResp)
+	err := c.cc.Invoke(ctx, "/umsclient.MemberAttentionService/MemberBrandAttentionAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberAttentionServiceClient) MemberBrandAttentionDelete(ctx context.Context, in *MemberBrandAttentionDeleteReq, opts ...grpc.CallOption) (*MemberBrandAttentionDeleteResp, error) {
+	out := new(MemberBrandAttentionDeleteResp)
+	err := c.cc.Invoke(ctx, "/umsclient.MemberAttentionService/MemberBrandAttentionDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberAttentionServiceClient) MemberBrandAttentionUpdate(ctx context.Context, in *MemberBrandAttentionUpdateReq, opts ...grpc.CallOption) (*MemberBrandAttentionUpdateResp, error) {
+	out := new(MemberBrandAttentionUpdateResp)
+	err := c.cc.Invoke(ctx, "/umsclient.MemberAttentionService/MemberBrandAttentionUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberAttentionServiceClient) MemberBrandAttentionClear(ctx context.Context, in *MemberBrandAttentionClearReq, opts ...grpc.CallOption) (*MemberBrandAttentionClearResp, error) {
+	out := new(MemberBrandAttentionClearResp)
+	err := c.cc.Invoke(ctx, "/umsclient.MemberAttentionService/MemberBrandAttentionClear", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberAttentionServiceClient) MemberBrandAttentionList(ctx context.Context, in *MemberBrandAttentionListReq, opts ...grpc.CallOption) (*MemberBrandAttentionListResp, error) {
+	out := new(MemberBrandAttentionListResp)
+	err := c.cc.Invoke(ctx, "/umsclient.MemberAttentionService/MemberBrandAttentionList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MemberAttentionServiceServer is the server API for MemberAttentionService service.
+// All implementations must embed UnimplementedMemberAttentionServiceServer
+// for forward compatibility
+type MemberAttentionServiceServer interface {
+	MemberBrandAttentionAdd(context.Context, *MemberBrandAttentionAddReq) (*MemberBrandAttentionAddResp, error)
+	MemberBrandAttentionDelete(context.Context, *MemberBrandAttentionDeleteReq) (*MemberBrandAttentionDeleteResp, error)
+	MemberBrandAttentionUpdate(context.Context, *MemberBrandAttentionUpdateReq) (*MemberBrandAttentionUpdateResp, error)
+	MemberBrandAttentionClear(context.Context, *MemberBrandAttentionClearReq) (*MemberBrandAttentionClearResp, error)
+	MemberBrandAttentionList(context.Context, *MemberBrandAttentionListReq) (*MemberBrandAttentionListResp, error)
+	mustEmbedUnimplementedMemberAttentionServiceServer()
+}
+
+// UnimplementedMemberAttentionServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberAttentionServiceServer struct {
+}
+
+func (UnimplementedMemberAttentionServiceServer) MemberBrandAttentionAdd(context.Context, *MemberBrandAttentionAddReq) (*MemberBrandAttentionAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberBrandAttentionAdd not implemented")
+}
+func (UnimplementedMemberAttentionServiceServer) MemberBrandAttentionDelete(context.Context, *MemberBrandAttentionDeleteReq) (*MemberBrandAttentionDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberBrandAttentionDelete not implemented")
+}
+func (UnimplementedMemberAttentionServiceServer) MemberBrandAttentionUpdate(context.Context, *MemberBrandAttentionUpdateReq) (*MemberBrandAttentionUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberBrandAttentionUpdate not implemented")
+}
+func (UnimplementedMemberAttentionServiceServer) MemberBrandAttentionClear(context.Context, *MemberBrandAttentionClearReq) (*MemberBrandAttentionClearResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberBrandAttentionClear not implemented")
+}
+func (UnimplementedMemberAttentionServiceServer) MemberBrandAttentionList(context.Context, *MemberBrandAttentionListReq) (*MemberBrandAttentionListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MemberBrandAttentionList not implemented")
+}
+func (UnimplementedMemberAttentionServiceServer) mustEmbedUnimplementedMemberAttentionServiceServer() {
+}
+
+// UnsafeMemberAttentionServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberAttentionServiceServer will
+// result in compilation errors.
+type UnsafeMemberAttentionServiceServer interface {
+	mustEmbedUnimplementedMemberAttentionServiceServer()
+}
+
+func RegisterMemberAttentionServiceServer(s grpc.ServiceRegistrar, srv MemberAttentionServiceServer) {
+	s.RegisterService(&MemberAttentionService_ServiceDesc, srv)
+}
+
+func _MemberAttentionService_MemberBrandAttentionAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberBrandAttentionAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.MemberAttentionService/MemberBrandAttentionAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionAdd(ctx, req.(*MemberBrandAttentionAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberAttentionService_MemberBrandAttentionDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberBrandAttentionDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.MemberAttentionService/MemberBrandAttentionDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionDelete(ctx, req.(*MemberBrandAttentionDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberAttentionService_MemberBrandAttentionUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberBrandAttentionUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.MemberAttentionService/MemberBrandAttentionUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionUpdate(ctx, req.(*MemberBrandAttentionUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberAttentionService_MemberBrandAttentionClear_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberBrandAttentionClearReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionClear(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.MemberAttentionService/MemberBrandAttentionClear",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionClear(ctx, req.(*MemberBrandAttentionClearReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberAttentionService_MemberBrandAttentionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemberBrandAttentionListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.MemberAttentionService/MemberBrandAttentionList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberAttentionServiceServer).MemberBrandAttentionList(ctx, req.(*MemberBrandAttentionListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MemberAttentionService_ServiceDesc is the grpc.ServiceDesc for MemberAttentionService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MemberAttentionService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "umsclient.MemberAttentionService",
+	HandlerType: (*MemberAttentionServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "MemberBrandAttentionAdd",
+			Handler:    _MemberAttentionService_MemberBrandAttentionAdd_Handler,
+		},
+		{
+			MethodName: "MemberBrandAttentionDelete",
+			Handler:    _MemberAttentionService_MemberBrandAttentionDelete_Handler,
+		},
+		{
+			MethodName: "MemberBrandAttentionUpdate",
+			Handler:    _MemberAttentionService_MemberBrandAttentionUpdate_Handler,
+		},
+		{
+			MethodName: "MemberBrandAttentionClear",
+			Handler:    _MemberAttentionService_MemberBrandAttentionClear_Handler,
+		},
+		{
+			MethodName: "MemberBrandAttentionList",
+			Handler:    _MemberAttentionService_MemberBrandAttentionList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "ums.proto",
+}

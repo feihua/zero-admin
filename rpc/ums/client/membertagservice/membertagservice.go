@@ -42,6 +42,17 @@ type (
 	IntegrationConsumeSettingUpdateResp     = umsclient.IntegrationConsumeSettingUpdateResp
 	MemberAddReq                            = umsclient.MemberAddReq
 	MemberAddResp                           = umsclient.MemberAddResp
+	MemberBrandAttentionAddReq              = umsclient.MemberBrandAttentionAddReq
+	MemberBrandAttentionAddResp             = umsclient.MemberBrandAttentionAddResp
+	MemberBrandAttentionClearReq            = umsclient.MemberBrandAttentionClearReq
+	MemberBrandAttentionClearResp           = umsclient.MemberBrandAttentionClearResp
+	MemberBrandAttentionDeleteReq           = umsclient.MemberBrandAttentionDeleteReq
+	MemberBrandAttentionDeleteResp          = umsclient.MemberBrandAttentionDeleteResp
+	MemberBrandAttentionListData            = umsclient.MemberBrandAttentionListData
+	MemberBrandAttentionListReq             = umsclient.MemberBrandAttentionListReq
+	MemberBrandAttentionListResp            = umsclient.MemberBrandAttentionListResp
+	MemberBrandAttentionUpdateReq           = umsclient.MemberBrandAttentionUpdateReq
+	MemberBrandAttentionUpdateResp          = umsclient.MemberBrandAttentionUpdateResp
 	MemberByIdReq                           = umsclient.MemberByIdReq
 	MemberDeleteReq                         = umsclient.MemberDeleteReq
 	MemberDeleteResp                        = umsclient.MemberDeleteResp

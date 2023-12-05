@@ -58,6 +58,7 @@ import (
 	"zero-admin/rpc/ums/client/growthchangehistoryservice"
 	"zero-admin/rpc/ums/client/integrationchangehistoryservice"
 	"zero-admin/rpc/ums/client/integrationconsumesettingservice"
+	"zero-admin/rpc/ums/client/memberattentionservice"
 	"zero-admin/rpc/ums/client/memberlevelservice"
 	"zero-admin/rpc/ums/client/memberloginlogservice"
 	"zero-admin/rpc/ums/client/membermembertagrelationservice"
@@ -91,6 +92,8 @@ type ServiceContext struct {
 	MemberStatisticsInfoService          memberstatisticsinfoservice.MemberStatisticsInfoService
 	MemberTagService                     membertagservice.MemberTagService
 	MemberTaskService                    membertaskservice.MemberTaskService
+	MemberAttentionService               memberattentionservice.MemberAttentionService
+
 	//系统相关
 	ConfigService   configservice.ConfigService
 	DeptService     deptservice.DeptService
@@ -174,6 +177,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		MemberStatisticsInfoService:          memberstatisticsinfoservice.NewMemberStatisticsInfoService(umsClient),
 		MemberTagService:                     membertagservice.NewMemberTagService(umsClient),
 		MemberTaskService:                    membertaskservice.NewMemberTaskService(umsClient),
+		MemberAttentionService:               memberattentionservice.NewMemberAttentionService(umsClient),
 
 		ConfigService:   configservice.NewConfigService(sysClient),
 		DeptService:     deptservice.NewDeptService(sysClient),

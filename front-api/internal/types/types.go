@@ -973,3 +973,48 @@ type BrandProductList struct {
 	ProductCategoryName        string  `json:"productCategoryName"`
 	Description                string  `json:"description"`
 }
+
+type AddAttentionReq struct {
+	BrandId   int64  `json:"brandId"`   // 品牌id
+	BrandName string `json:"brandName"` // 品牌名称
+	BrandLogo string `json:"brandLogo"` // 品牌Logo
+	BrandCity string `json:"brandCity"` // 品牌所在城市
+}
+
+type AddAttentionResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
+type ListAttentionData struct {
+	Id             int64  `json:"id"`
+	MemberId       int64  `json:"memberId"`       // 会员id
+	MemberNickName string `json:"memberNickName"` // 会员姓名
+	MemberIcon     string `json:"memberIcon"`     // 会员头像
+	BrandId        int64  `json:"brandId"`        // 品牌id
+	BrandName      string `json:"brandName"`      // 品牌名称
+	BrandLogo      string `json:"brandLogo"`      // 品牌Logo
+	BrandCity      string `json:"brandCity"`      // 品牌所在城市
+	CreateTime     string `json:"createTime"`     // 关注时间
+}
+
+type ListAttentionResp struct {
+	Data    []ListAttentionData `json:"data"`
+	Success bool                `json:"success"`
+	Code    int64               `json:"code"`
+	Message string              `json:"message"`
+}
+
+type ClearAttentionResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
+type DeleteAttentionReq struct {
+	Id int64 `path:"id"`
+}
+
+type DeleteAttentionResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}

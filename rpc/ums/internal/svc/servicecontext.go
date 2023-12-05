@@ -24,6 +24,7 @@ type ServiceContext struct {
 	UmsMemberTagModel                     umsmodel.UmsMemberTagModel
 	UmsMemberReadHistoryModel             umsmodel.UmsMemberReadHistoryModel
 	UmsMemberProductCollectionModel       umsmodel.UmsMemberProductCollectionModel
+	UmsMemberBrandAttentionModel          umsmodel.UmsMemberBrandAttentionModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -47,5 +48,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		UmsMemberTagModel:                     umsmodel.NewUmsMemberTagModel(sqlConn),
 		UmsMemberReadHistoryModel:             umsmodel.NewUmsMemberReadHistoryModel(sqlConn),
 		UmsMemberProductCollectionModel:       umsmodel.NewUmsMemberProductCollectionModel(sqlConn),
+		UmsMemberBrandAttentionModel:          umsmodel.NewUmsMemberBrandAttentionModel(sqlConn),
 	}
 }
