@@ -239,6 +239,15 @@ message CouponCountReq {
 message CouponCountResp {
   int64 total = 1;
 }
+
+message QueryMemberCouponListReq {
+  int64 memberId = 1;
+  int64  UseStatus = 2;
+}
+message QueryMemberCouponListResp {
+  repeated  CouponListData list = 1;
+}
+
 service CouponHistoryService {
 
   rpc CouponHistoryAdd(CouponHistoryAddReq) returns(CouponHistoryAddResp);
@@ -248,6 +257,8 @@ service CouponHistoryService {
 
   //登录时获取用户还没有使用的获取优惠券数量
   rpc CouponCount(CouponCountReq) returns(CouponCountResp);
+  //获取会员优惠券
+  rpc QueryMemberCouponList(QueryMemberCouponListReq) returns(QueryMemberCouponListResp);
 }
 
 message CouponProductCategoryRelationAddReq {

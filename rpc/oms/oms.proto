@@ -301,6 +301,14 @@ message CartItemDeleteResp {
   string pong = 1;
 }
 
+message CartItemClearReq {
+  int64      MemberId = 1;
+}
+
+message CartItemClearResp {
+  string pong = 1;
+}
+
 service CartItemService {
 
   rpc CartItemAdd(CartItemAddReq) returns(CartItemAddResp);
@@ -308,6 +316,7 @@ service CartItemService {
   rpc CartItemUpdate(CartItemUpdateReq) returns(CartItemUpdateResp);
   rpc CartItemUpdateQuantity(CartItemUpdateReq) returns(CartItemUpdateResp);
   rpc CartItemDelete(CartItemDeleteReq) returns(CartItemDeleteResp);
+  rpc CartItemClear(CartItemClearReq) returns(CartItemClearResp);
 
 
 }

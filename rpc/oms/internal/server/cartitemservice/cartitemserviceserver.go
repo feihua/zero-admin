@@ -46,3 +46,8 @@ func (s *CartItemServiceServer) CartItemDelete(ctx context.Context, in *omsclien
 	l := cartitemservicelogic.NewCartItemDeleteLogic(ctx, s.svcCtx)
 	return l.CartItemDelete(in)
 }
+
+func (s *CartItemServiceServer) CartItemClear(ctx context.Context, in *omsclient.CartItemClearReq) (*omsclient.CartItemClearResp, error) {
+	l := cartitemservicelogic.NewCartItemClearLogic(ctx, s.svcCtx)
+	return l.CartItemClear(in)
+}

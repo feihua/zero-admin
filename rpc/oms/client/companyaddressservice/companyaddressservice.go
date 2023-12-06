@@ -15,6 +15,8 @@ import (
 type (
 	CartItemAddReq                = omsclient.CartItemAddReq
 	CartItemAddResp               = omsclient.CartItemAddResp
+	CartItemClearReq              = omsclient.CartItemClearReq
+	CartItemClearResp             = omsclient.CartItemClearResp
 	CartItemDeleteReq             = omsclient.CartItemDeleteReq
 	CartItemDeleteResp            = omsclient.CartItemDeleteResp
 	CartItemListData              = omsclient.CartItemListData

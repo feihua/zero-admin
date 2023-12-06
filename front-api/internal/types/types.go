@@ -177,7 +177,7 @@ type CartItemAddResp struct {
 }
 
 type CartItemDeleteReq struct {
-	Ids []int64 `json:"Ids"`
+	Ids []int64 `json:"ids"`
 }
 
 type CartItemDeleteResp struct {
@@ -194,14 +194,12 @@ type CartItemUpdateAttrReq struct {
 	Id                int64   `json:"id"`
 	ProductId         int64   `json:"productId"`
 	ProductSkuId      int64   `json:"productSkuId"`
-	MemberId          int64   `json:"memberId"`
 	Quantity          int64   `json:"quantity"`          // 购买数量
 	Price             float64 `json:"price"`             // 添加到购物车的价格
 	ProductPic        string  `json:"productPic"`        // 商品主图
 	ProductName       string  `json:"productName"`       // 商品名称
 	ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
 	ProductSkuCode    string  `json:"productSkuCode"`    // 商品sku条码
-	MemberNickname    string  `json:"memberNickname"`    // 会员昵称
 	DeleteStatus      int64   `json:"deleteStatus"`      // 是否删除
 	ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
 	ProductBrand      string  `json:"productBrand"`
@@ -269,16 +267,16 @@ type CarItemtPromotionListData struct {
 	ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
 	ProductBrand      string  `json:"productBrand"`
 	ProductSn         string  `json:"productSn"`
-	ProductAttr       string  `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-	PromotionMessage  string  `json:"promotionMessage"`
-	ReduceAmount      string  `json:"reduceAmount"`
-	RealStock         int64   `json:"realStock"`
-	Integration       int64   `json:"integration"`
-	Growth            int64   `json:"growth"`
+	ProductAttr       string  `json:"productAttr"`      // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	PromotionMessage  string  `json:"promotionMessage"` //促销活动信息
+	ReduceAmount      string  `json:"reduceAmount"`     //促销活动减去的金额，针对每个商品
+	RealStock         int64   `json:"realStock"`        //商品的真实库存（剩余库存-锁定库存）
+	Integration       int64   `json:"integration"`      //购买商品赠送积分
+	Growth            int64   `json:"growth"`           //购买商品赠送成长值
 }
 
 type CartProductReq struct {
-	ProductId int64 `json:"productId"`
+	ProductId int64 `path:"productId"`
 }
 
 type CartProductResp struct {
@@ -358,12 +356,12 @@ type HomeResp struct {
 }
 
 type Data struct {
-	AdvertiseList      []AdvertiseList    `json:"advertiseList"`
-	BrandList          []BrandList        `json:"brandList"`
-	HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"`
-	NewProductList     []ProductList      `json:"newProductList"`
-	HotProductList     []ProductList      `json:"hotProductList"`
-	SubjectList        []SubjectList      `json:"subjectList"`
+	AdvertiseList      []AdvertiseList    `json:"advertiseList"`      //获取首页广告
+	BrandList          []BrandList        `json:"brandList"`          //获取推荐品牌
+	HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"` //获取秒杀信息
+	NewProductList     []ProductList      `json:"newProductList"`     //获取新品推荐
+	HotProductList     []ProductList      `json:"hotProductList"`     //获取人气推荐
+	SubjectList        []SubjectList      `json:"subjectList"`        //获取推荐专题
 }
 
 type SubjectList struct {
@@ -678,10 +676,10 @@ type ProductFullReductionList struct {
 }
 
 type QueryProductListReq struct {
-	Current           int64 `json:"current,default=1"`
-	PageSize          int64 `json:"pageSize,default=10"`
-	BrandId           int64 `json:"brandId,default=0"`
-	ProductCategoryId int64 `json:"productCategoryId,default=0"`
+	Current           int64 `path:"current,default=1"`
+	PageSize          int64 `path:"pageSize,default=10"`
+	BrandId           int64 `path:"brandId,default=0"`
+	ProductCategoryId int64 `path:"productCategoryId,default=0"`
 }
 
 type QueryProductListResp struct {
@@ -838,17 +836,24 @@ type ListCouponHistoryReq struct {
 }
 
 type ListCouponHistoryData struct {
-	Id             int64  `json:"id"`
-	CouponId       int64  `json:"couponId"`
-	MemberId       int64  `json:"memberId"`
-	CouponCode     string `json:"couponCode"`
-	MemberNickname string `json:"memberNickName"` // 领取人昵称
-	GetType        int64  `json:"getType"`        // 获取类型：0->后台赠送；1->主动获取
-	CreateTime     string `json:"createTime"`
-	UseStatus      int64  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
-	UseTime        string `json:"useTime"`   // 使用时间
-	OrderId        int64  `json:"orderId"`   // 订单编号
-	OrderSn        string `json:"orderSn"`   // 订单号码
+	Id           int64   `json:"id"`
+	Type         int64   `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         string  `json:"name"`
+	Platform     int64   `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
+	Count        int64   `json:"count"`    // 数量
+	Amount       float64 `json:"amount"`   // 金额
+	PerLimit     int64   `json:"perLimit"` // 每人限领张数
+	MinPoint     float64 `json:"minPoint"` // 使用门槛；0表示无门槛
+	StartTime    string  `json:"startTime"`
+	EndTime      string  `json:"endTime"`
+	UseType      int64   `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         string  `json:"note"`         // 备注
+	PublishCount int64   `json:"publishCount"` // 发行数量
+	UseCount     int64   `json:"useCount"`     // 已使用数量
+	ReceiveCount int64   `json:"receiveCount"` // 领取数量
+	EnableTime   string  `json:"enableTime"`   // 可以领取的日期
+	Code         string  `json:"code"`         // 优惠码
+	MemberLevel  int64   `json:"memberLevel"`  // 可领取的会员类型：0->无限时
 }
 
 type ListCouponHistoryResp struct {
@@ -928,7 +933,7 @@ type BrandDetailData struct {
 	ProductCommentCount int64              `json:"productCommentCount"`
 	Logo                string             `json:"logo"`
 	BigPic              string             `json:"bigPic"`
-	BrandStory          string             `json:"brand_story"` // 品牌故事
+	BrandStory          string             `json:"brandStory"` // 品牌故事
 	ProductList         []BrandProductList `json:"productList"`
 }
 
@@ -949,7 +954,7 @@ type BrandProductList struct {
 	Sort                       int64   `json:"sort"`
 	Sale                       int64   `json:"sale"`
 	Price                      float64 `json:"price"`
-	PromotionPrice             float64 `json:"promotionPrice,omitempty"`
+	PromotionPrice             float64 `json:"promotionPrice"`
 	GiftGrowth                 int64   `json:"giftGrowth"`
 	GiftPoint                  int64   `json:"giftPoint"`
 	UsePointLimit              int64   `json:"usePointLimit"`
@@ -965,8 +970,8 @@ type BrandProductList struct {
 	Note                       string  `json:"note"`
 	AlbumPics                  string  `json:"albumPics"`
 	DetailTitle                string  `json:"detailTitle"`
-	PromotionStartTime         string  `json:"promotionStartTime,omitempty"`
-	PromotionEndTime           string  `json:"promotionEndTime,omitempty"`
+	PromotionStartTime         string  `json:"promotionStartTime"`
+	PromotionEndTime           string  `json:"promotionEndTime"`
 	PromotionPerLimit          int64   `json:"promotionPerLimit"`
 	PromotionType              int64   `json:"promotionType"`
 	BrandName                  string  `json:"brandName"`

@@ -33,10 +33,7 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // CouponHistoryList 获取用户优惠券列表
 func (l *CouponHistoryListLogic) CouponHistoryList(req *types.ListCouponHistoryReq) (resp *types.ListCouponHistoryResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	historyList, err := l.svcCtx.CouponHistoryService.CouponHistoryList(l.ctx, &smsclient.CouponHistoryListReq{
-		Current:   1,
-		PageSize:  100,
-		CouponId:  0,
+	historyList, err := l.svcCtx.CouponHistoryService.QueryMemberCouponList(l.ctx, &smsclient.QueryMemberCouponListReq{
 		MemberId:  memberId,
 		UseStatus: req.UseStatus,
 	})
@@ -47,17 +44,24 @@ func (l *CouponHistoryListLogic) CouponHistoryList(req *types.ListCouponHistoryR
 
 	for _, item := range historyList.List {
 		list = append(list, &types.ListCouponHistoryData{
-			Id:             item.Id,
-			CouponId:       item.CouponId,
-			MemberId:       item.MemberId,
-			CouponCode:     item.CouponCode,
-			MemberNickname: item.MemberNickname,
-			GetType:        item.GetType,
-			CreateTime:     item.CreateTime,
-			UseStatus:      item.UseStatus,
-			UseTime:        item.UseTime,
-			OrderId:        item.OrderId,
-			OrderSn:        item.OrderSn,
+			Id:           item.Id,
+			Type:         item.Type,
+			Name:         item.Name,
+			Platform:     item.Platform,
+			Count:        item.Count,
+			Amount:       item.Amount,
+			PerLimit:     item.PerLimit,
+			MinPoint:     item.MinPoint,
+			StartTime:    item.StartTime,
+			EndTime:      item.EndTime,
+			UseType:      item.UseType,
+			Note:         item.Note,
+			PublishCount: item.PublishCount,
+			UseCount:     item.UseCount,
+			ReceiveCount: item.ReceiveCount,
+			EnableTime:   item.EnableTime,
+			Code:         item.Code,
+			MemberLevel:  item.MemberLevel,
 		})
 	}
 

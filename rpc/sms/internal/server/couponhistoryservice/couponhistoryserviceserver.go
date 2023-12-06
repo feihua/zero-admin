@@ -47,3 +47,9 @@ func (s *CouponHistoryServiceServer) CouponCount(ctx context.Context, in *smscli
 	l := couponhistoryservicelogic.NewCouponCountLogic(ctx, s.svcCtx)
 	return l.CouponCount(in)
 }
+
+// 获取会员优惠券
+func (s *CouponHistoryServiceServer) QueryMemberCouponList(ctx context.Context, in *smsclient.QueryMemberCouponListReq) (*smsclient.QueryMemberCouponListResp, error) {
+	l := couponhistoryservicelogic.NewQueryMemberCouponListLogic(ctx, s.svcCtx)
+	return l.QueryMemberCouponList(in)
+}

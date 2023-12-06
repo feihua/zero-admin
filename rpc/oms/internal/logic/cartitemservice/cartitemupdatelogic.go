@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CartItemUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/6 16:01
+*/
 type CartItemUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,11 +30,18 @@ func NewCartItemUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 	}
 }
 
+// CartItemUpdate 更新购物车商品
+//1.先更加id删除原来的
+//2.添加新的
 func (l *CartItemUpdateLogic) CartItemUpdate(in *omsclient.CartItemUpdateReq) (*omsclient.CartItemUpdateResp, error) {
-	createDate, _ := time.Parse("2006-01-02 15:04:05", in.CreateDate)
-	modifyDate, _ := time.Parse("2006-01-02 15:04:05", in.ModifyDate)
-	err := l.svcCtx.OmsCartItemModel.Update(l.ctx, &omsmodel.OmsCartItem{
-		Id:                in.Id,
+	//1.先更加id删除原来的
+	err := l.svcCtx.OmsCartItemModel.Delete(l.ctx, in.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	//2.添加新的
+	_, err = l.svcCtx.OmsCartItemModel.Insert(l.ctx, &omsmodel.OmsCartItem{
 		ProductId:         in.ProductId,
 		ProductSkuId:      in.ProductSkuId,
 		MemberId:          in.MemberId,
@@ -40,14 +52,15 @@ func (l *CartItemUpdateLogic) CartItemUpdate(in *omsclient.CartItemUpdateReq) (*
 		ProductSubTitle:   in.ProductSubTitle,
 		ProductSkuCode:    in.ProductSkuCode,
 		MemberNickname:    in.MemberNickname,
-		CreateDate:        createDate,
-		ModifyDate:        modifyDate,
+		CreateDate:        time.Now(),
+		ModifyDate:        time.Now(),
 		DeleteStatus:      in.DeleteStatus,
 		ProductCategoryId: in.ProductCategoryId,
 		ProductBrand:      in.ProductBrand,
 		ProductSn:         in.ProductSn,
 		ProductAttr:       in.ProductAttr,
 	})
+
 	if err != nil {
 		return nil, err
 	}

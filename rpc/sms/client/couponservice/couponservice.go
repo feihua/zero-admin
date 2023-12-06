@@ -146,6 +146,8 @@ type (
 	HomeRecommendSubjectListResp                  = smsclient.HomeRecommendSubjectListResp
 	HomeRecommendSubjectUpdateReq                 = smsclient.HomeRecommendSubjectUpdateReq
 	HomeRecommendSubjectUpdateResp                = smsclient.HomeRecommendSubjectUpdateResp
+	QueryMemberCouponListReq                      = smsclient.QueryMemberCouponListReq
+	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
 
 	CouponService interface {
 		CouponAdd(ctx context.Context, in *CouponAddReq, opts ...grpc.CallOption) (*CouponAddResp, error)

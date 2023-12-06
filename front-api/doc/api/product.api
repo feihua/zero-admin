@@ -154,10 +154,10 @@ type ProductFullReductionList {
 }
 
 type QueryProductListReq {
-	Current           int64 `json:"current,default=1"`
-	PageSize          int64 `json:"pageSize,default=10"`
-	BrandId           int64 `json:"brandId,default=0"`
-	ProductCategoryId int64 `json:"productCategoryId,default=0"`
+	Current           int64 `path:"current,default=1"`
+	PageSize          int64 `path:"pageSize,default=10"`
+	BrandId           int64 `path:"brandId,default=0"`
+	ProductCategoryId int64 `path:"productCategoryId,default=0"`
 }
 
 type QueryProductListResp {
@@ -217,5 +217,5 @@ service front-api {
 	get /queryProduct/:id (QueryProductReq) returns (QueryProductResp)
 	
 	@handler QueryProductList
-	get /queryProductList (QueryProductListReq) returns (QueryProductListResp)
+	get /queryProductList/:productCategoryId (QueryProductListReq) returns (QueryProductListResp)
 }

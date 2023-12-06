@@ -30,12 +30,12 @@ func NewCarItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CarIt
 	}
 }
 
-// CarItemList 购物车列表
+// CarItemList 获取某个会员的购物车列表
 func (l *CarItemListLogic) CarItemList() (resp *types.CartItemListResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	itemListResp, _ := l.svcCtx.CartItemService.CartItemList(l.ctx, &omsclient.CartItemListReq{MemberId: memberId})
 
-	var list []types.CartListData
+	list := make([]types.CartListData, 0)
 
 	for _, item := range itemListResp.List {
 		list = append(list, types.CartListData{

@@ -19,6 +19,7 @@ type (
 		Count(ctx context.Context, in *smsclient.CouponHistoryListReq) (int64, error)
 		FindAll(ctx context.Context, in *smsclient.CouponHistoryListReq) (*[]SmsCouponHistory, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		QueryMemberCouponList(ctx context.Context, memberId, status int64) (*[]SmsCoupon, error)
 	}
 
 	customSmsCouponHistoryModel struct {
@@ -105,4 +106,23 @@ func (m *customSmsCouponHistoryModel) DeleteByIds(ctx context.Context, ids []int
 	// 执行删除语句
 	_, err := m.conn.ExecCtx(ctx, query, args...)
 	return err
+}
+
+func (m *customSmsCouponHistoryModel) QueryMemberCouponList(ctx context.Context, memberId, status int64) (*[]SmsCoupon, error) {
+
+	query := `select t2.*
+from sms_coupon_history t1
+         left join sms_coupon t2 on t1.coupon_id = t2.id
+where t1.member_id = ?
+  and t1.use_status = ?`
+	var resp []SmsCoupon
+	err := m.conn.QueryRows(&resp, query, memberId, status)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }

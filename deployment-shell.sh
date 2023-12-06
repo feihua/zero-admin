@@ -41,7 +41,7 @@ docker build -t pms:v1 -f rpc/pms/Dockerfile .
 docker build -t sms:v1 -f rpc/sms/Dockerfile .
 docker build -t cms:v1 -f rpc/cms/Dockerfile .
 docker build -t api:v1 -f api/Dockerfile .
-docker build -t api:v1 -f front-api/Dockerfile .
+docker build -t front-api:v1 -f front-api/Dockerfile .
 
 #启动服务
 docker run -itd --net=host --name=sys sys:v1
@@ -51,4 +51,4 @@ docker run -itd --net=host --name=pms pms:v1
 docker run -itd --net=host --name=sms sms:v1
 docker run -itd --net=host --name=cms cms:v1
 docker run -itd --net=host --name=api api:v1
-docker run -itd --net=host --name=api front-api:v1
+docker run -itd --net=host --name=front-api front-api:v1

@@ -138,7 +138,7 @@ func buildBrandListData(resp *pmsclient.ProductDetailByIdResp) types.Brand {
 
 //3.获取商品属性信息
 func buildProductAttributeListData(resp *pmsclient.ProductDetailByIdResp) []types.ProductAttributeList {
-	var list []types.ProductAttributeList
+	list := make([]types.ProductAttributeList, 0)
 	for _, item := range resp.ProductAttributeList {
 		list = append(list, types.ProductAttributeList{
 			Id:                         item.Id,
@@ -161,7 +161,7 @@ func buildProductAttributeListData(resp *pmsclient.ProductDetailByIdResp) []type
 
 //4.获取商品属性值信息
 func buildProductAttributeValueListData(resp *pmsclient.ProductDetailByIdResp) []types.ProductAttributeValueList {
-	var list []types.ProductAttributeValueList
+	list := make([]types.ProductAttributeValueList, 0)
 	for _, item := range resp.ProductAttributeValueList {
 		list = append(list, types.ProductAttributeValueList{
 			Id:                 item.Id,
@@ -176,7 +176,7 @@ func buildProductAttributeValueListData(resp *pmsclient.ProductDetailByIdResp) [
 
 //5.获取商品SKU库存信息
 func buildSkuStockListData(resp *pmsclient.ProductDetailByIdResp) []types.SkuStockList {
-	var list []types.SkuStockList
+	list := make([]types.SkuStockList, 0)
 	for _, item := range resp.SkuStockList {
 
 		list = append(list, types.SkuStockList{
@@ -199,7 +199,7 @@ func buildSkuStockListData(resp *pmsclient.ProductDetailByIdResp) []types.SkuSto
 
 //6.商品阶梯价格设置
 func buildProductLadderListData(resp *pmsclient.ProductDetailByIdResp) []types.ProductLadderList {
-	var list []types.ProductLadderList
+	list := make([]types.ProductLadderList, 0)
 	for _, item := range resp.ProductLadderList {
 
 		list = append(list, types.ProductLadderList{
@@ -217,8 +217,7 @@ func buildProductLadderListData(resp *pmsclient.ProductDetailByIdResp) []types.P
 
 //7.商品满减价格设置
 func buildProductFullReductionListData(resp *pmsclient.ProductDetailByIdResp) []types.ProductFullReductionList {
-
-	var list []types.ProductFullReductionList
+	list := make([]types.ProductFullReductionList, 0)
 	for _, item := range resp.ProductFullReductionList {
 
 		list = append(list, types.ProductFullReductionList{
@@ -234,8 +233,7 @@ func buildProductFullReductionListData(resp *pmsclient.ProductDetailByIdResp) []
 
 //8.商品优惠券
 func buildCouponListData(resp *smsclient.CouponFindByProductIdAndProductCategoryIdResp) []types.CouponList {
-
-	var list []types.CouponList
+	list := make([]types.CouponList, 0)
 	for _, item := range resp.List {
 
 		list = append(list, types.CouponList{

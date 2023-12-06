@@ -9,6 +9,6 @@ Content-Type: application/json
 > {% client.global.set("token", response.body.data.token); %}
 
 ### 获取商品分类
-GET {{host}}/api/category/productCateList/0
+GET {{host}}/api/category/productCateList/2
 Authorization: Bearer {{token}}
 

@@ -146,6 +146,8 @@ type (
 	HomeRecommendSubjectListResp                  = smsclient.HomeRecommendSubjectListResp
 	HomeRecommendSubjectUpdateReq                 = smsclient.HomeRecommendSubjectUpdateReq
 	HomeRecommendSubjectUpdateResp                = smsclient.HomeRecommendSubjectUpdateResp
+	QueryMemberCouponListReq                      = smsclient.QueryMemberCouponListReq
+	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
 
 	CouponHistoryService interface {
 		CouponHistoryAdd(ctx context.Context, in *CouponHistoryAddReq, opts ...grpc.CallOption) (*CouponHistoryAddResp, error)
@@ -154,6 +156,8 @@ type (
 		CouponHistoryDelete(ctx context.Context, in *CouponHistoryDeleteReq, opts ...grpc.CallOption) (*CouponHistoryDeleteResp, error)
 		// 登录时获取用户还没有使用的获取优惠券数量
 		CouponCount(ctx context.Context, in *CouponCountReq, opts ...grpc.CallOption) (*CouponCountResp, error)
+		// 获取会员优惠券
+		QueryMemberCouponList(ctx context.Context, in *QueryMemberCouponListReq, opts ...grpc.CallOption) (*QueryMemberCouponListResp, error)
 	}
 
 	defaultCouponHistoryService struct {
@@ -191,4 +195,10 @@ func (m *defaultCouponHistoryService) CouponHistoryDelete(ctx context.Context, i
 func (m *defaultCouponHistoryService) CouponCount(ctx context.Context, in *CouponCountReq, opts ...grpc.CallOption) (*CouponCountResp, error) {
 	client := smsclient.NewCouponHistoryServiceClient(m.cli.Conn())
 	return client.CouponCount(ctx, in, opts...)
+}
+
+// 获取会员优惠券
+func (m *defaultCouponHistoryService) QueryMemberCouponList(ctx context.Context, in *QueryMemberCouponListReq, opts ...grpc.CallOption) (*QueryMemberCouponListResp, error) {
+	client := smsclient.NewCouponHistoryServiceClient(m.cli.Conn())
+	return client.QueryMemberCouponList(ctx, in, opts...)
 }

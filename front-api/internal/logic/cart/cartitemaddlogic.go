@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CartItemAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/6 15:46
+*/
 type CartItemAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,11 +30,13 @@ func NewCartItemAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartI
 	}
 }
 
+// CartItemAdd 添加商品进购物车
 func (l *CartItemAddLogic) CartItemAdd(req *types.CartItemAddReq) (resp *types.CartItemAddResp, err error) {
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.CartItemService.CartItemAdd(l.ctx, &omsclient.CartItemAddReq{
 		ProductId:         req.ProductId,
 		ProductSkuId:      req.ProductSkuId,
-		MemberId:          req.ProductCategoryId,
+		MemberId:          memberId,
 		Quantity:          req.Quantity,
 		Price:             float32(req.Price),
 		ProductPic:        req.ProductPic,

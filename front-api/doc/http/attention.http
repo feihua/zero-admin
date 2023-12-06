@@ -14,11 +14,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "memberId": 11,
-  "brandId": 51,
-  "brandName": "苹果",
+  "brandId": 6,
+  "brandName": "小米",
   "brandCity": "广东省",
-  "brandLogo": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20200607/49b30bb0377030d1.jpg"
+  "brandLogo": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20200607/5565f5a2N0b8169ae.jpg"
 }
 
 ### 清空会员品牌关注

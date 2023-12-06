@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CartUpdateQuantityLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/6 15:15
+*/
 type CartUpdateQuantityLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,8 +30,10 @@ func NewCartUpdateQuantityLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// CartUpdateQuantity 修改购物车中某个商品的数量
 func (l *CartUpdateQuantityLogic) CartUpdateQuantity(req *types.CartItemUpdateQuantityReq) (resp *types.CartItemUpdateResp, err error) {
-	_, _ = l.svcCtx.CartItemService.CartItemUpdateQuantity(l.ctx, &omsclient.CartItemUpdateReq{Id: req.Id, Quantity: req.Quantity})
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	_, _ = l.svcCtx.CartItemService.CartItemUpdateQuantity(l.ctx, &omsclient.CartItemUpdateReq{Id: req.Id, Quantity: req.Quantity, MemberId: memberId})
 
 	return &types.CartItemUpdateResp{
 		Code:    0,

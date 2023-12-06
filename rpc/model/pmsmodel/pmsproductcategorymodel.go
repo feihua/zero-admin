@@ -36,7 +36,7 @@ func NewPmsProductCategoryModel(conn sqlx.SqlConn) PmsProductCategoryModel {
 func (m *customPmsProductCategoryModel) FindAll(ctx context.Context, in *pmsclient.ProductCategoryListReq) (*[]PmsProductCategory, int64, error) {
 	where := "1=1"
 
-	if in.ParentId != 2 {
+	if in.ParentId != 2000 {
 		where = where + fmt.Sprintf(" AND parent_id = '%d'", in.ParentId)
 	}
 	if in.ShowStatus != 2 {

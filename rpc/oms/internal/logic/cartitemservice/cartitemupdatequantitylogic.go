@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CartItemUpdateQuantityLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/6 15:31
+*/
 type CartItemUpdateQuantityLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +28,12 @@ func NewCartItemUpdateQuantityLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
+// CartItemUpdateQuantity 修改购物车中某个商品的数量
 func (l *CartItemUpdateQuantityLogic) CartItemUpdateQuantity(in *omsclient.CartItemUpdateReq) (*omsclient.CartItemUpdateResp, error) {
-	// todo: add your logic here and delete this line
+	err := l.svcCtx.OmsCartItemModel.CartItemUpdateQuantity(l.ctx, in.Id, in.MemberId, in.Quantity)
 
+	if err != nil {
+		return nil, err
+	}
 	return &omsclient.CartItemUpdateResp{}, nil
 }

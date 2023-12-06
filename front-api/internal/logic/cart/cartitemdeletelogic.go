@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CartItemDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/6 14:35
+*/
 type CartItemDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewCartItemDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 	}
 }
 
+// CartItemDelete 删除购物车中的某个商品
 func (l *CartItemDeleteLogic) CartItemDelete(req *types.CartItemDeleteReq) (resp *types.CartItemDeleteResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.CartItemService.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{MemberId: memberId, Ids: req.Ids})

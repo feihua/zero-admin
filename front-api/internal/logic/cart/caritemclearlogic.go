@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CarItemClearLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/6 14:34
+*/
 type CarItemClearLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,12 +30,13 @@ func NewCarItemClearLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CarI
 	}
 }
 
+// CarItemClear 清空购物车
 func (l *CarItemClearLogic) CarItemClear() (resp *types.CartItemClearResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.CartItemService.CartItemDelete(l.ctx, &omsclient.CartItemDeleteReq{MemberId: memberId})
+	_, _ = l.svcCtx.CartItemService.CartItemClear(l.ctx, &omsclient.CartItemClearReq{MemberId: memberId})
 
 	return &types.CartItemClearResp{
 		Code:    0,
-		Message: "操作成功",
+		Message: "清空购物车成功",
 	}, nil
 }

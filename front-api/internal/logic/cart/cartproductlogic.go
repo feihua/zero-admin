@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CartProductLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/6 16:07
+*/
 type CartProductLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +29,7 @@ func NewCartProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartP
 	}
 }
 
+// CartProduct 获取购物车中某个商品的规格,用于重选规格
 func (l *CartProductLogic) CartProduct(req *types.CartProductReq) (resp *types.CartProductResp, err error) {
 	productResp, _ := l.svcCtx.ProductService.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
 		Id: req.ProductId,

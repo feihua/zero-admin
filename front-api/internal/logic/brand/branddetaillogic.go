@@ -55,7 +55,8 @@ func (l *BrandDetailLogic) BrandDetail(req *types.BrandDetailReq) (*types.BrandD
 		DeleteStatus:      2,
 		BrandId:           brandId,
 	})
-	var productLists []types.BrandProductList
+	productLists := make([]types.BrandProductList, 0)
+
 	for _, item := range productListResp.List {
 		productLists = append(productLists, types.BrandProductList{
 			Id:                         item.Id,

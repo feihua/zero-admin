@@ -15,6 +15,8 @@ import (
 type (
 	CartItemAddReq                = omsclient.CartItemAddReq
 	CartItemAddResp               = omsclient.CartItemAddResp
+	CartItemClearReq              = omsclient.CartItemClearReq
+	CartItemClearResp             = omsclient.CartItemClearResp
 	CartItemDeleteReq             = omsclient.CartItemDeleteReq
 	CartItemDeleteResp            = omsclient.CartItemDeleteResp
 	CartItemListData              = omsclient.CartItemListData
@@ -103,6 +105,7 @@ type (
 		CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
 		CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
 		CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error)
+		CartItemClear(ctx context.Context, in *CartItemClearReq, opts ...grpc.CallOption) (*CartItemClearResp, error)
 	}
 
 	defaultCartItemService struct {
@@ -139,4 +142,9 @@ func (m *defaultCartItemService) CartItemUpdateQuantity(ctx context.Context, in 
 func (m *defaultCartItemService) CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error) {
 	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
 	return client.CartItemDelete(ctx, in, opts...)
+}
+
+func (m *defaultCartItemService) CartItemClear(ctx context.Context, in *CartItemClearReq, opts ...grpc.CallOption) (*CartItemClearResp, error) {
+	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
+	return client.CartItemClear(ctx, in, opts...)
 }

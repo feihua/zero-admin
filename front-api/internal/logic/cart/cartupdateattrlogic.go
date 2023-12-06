@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+	"encoding/json"
 	"zero-admin/rpc/oms/omsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CartUpdateAttrLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/6 15:58
+*/
 type CartUpdateAttrLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,12 +30,14 @@ func NewCartUpdateAttrLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 	}
 }
 
+// CartUpdateAttr 修改购物车中商品的规格
 func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemUpdateAttrReq) (resp *types.CartItemUpdateResp, err error) {
+	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.CartItemService.CartItemUpdate(l.ctx, &omsclient.CartItemUpdateReq{
 		Id:                req.Id,
 		ProductId:         req.ProductId,
 		ProductSkuId:      req.ProductSkuId,
-		MemberId:          req.ProductCategoryId,
+		MemberId:          memberId,
 		Quantity:          req.Quantity,
 		Price:             float32(req.Price),
 		ProductPic:        req.ProductPic,
@@ -48,5 +56,4 @@ func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemUpdateAttrReq) (
 		Message: "操作成功",
 	}, nil
 
-	return
 }

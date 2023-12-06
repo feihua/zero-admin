@@ -44,7 +44,7 @@ type BrandDetailData {
 	ProductCommentCount int64  `json:"productCommentCount"`
 	Logo                string `json:"logo"`
 	BigPic              string `json:"bigPic"`
-	BrandStory          string `json:"brand_story"`           // 品牌故事
+	BrandStory          string `json:"brandStory"`           // 品牌故事
 	ProductList   []BrandProductList `json:"productList"`
 }
 
@@ -65,7 +65,7 @@ type BrandProductList {
 	Sort                       int64   `json:"sort"`
 	Sale                       int64   `json:"sale"`
 	Price                      float64 `json:"price"`
-	PromotionPrice             float64 `json:"promotionPrice,omitempty"`
+	PromotionPrice             float64 `json:"promotionPrice"`
 	GiftGrowth                 int64   `json:"giftGrowth"`
 	GiftPoint                  int64   `json:"giftPoint"`
 	UsePointLimit              int64   `json:"usePointLimit"`
@@ -81,8 +81,8 @@ type BrandProductList {
 	Note                       string  `json:"note"`
 	AlbumPics                  string  `json:"albumPics"`
 	DetailTitle                string  `json:"detailTitle"`
-	PromotionStartTime         string  `json:"promotionStartTime,omitempty"`
-	PromotionEndTime           string  `json:"promotionEndTime,omitempty"`
+	PromotionStartTime         string  `json:"promotionStartTime"`
+	PromotionEndTime           string  `json:"promotionEndTime"`
 	PromotionPerLimit          int64   `json:"promotionPerLimit"`
 	PromotionType              int64   `json:"promotionType"`
 	BrandName                  string  `json:"brandName"`
