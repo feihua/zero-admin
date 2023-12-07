@@ -63,6 +63,7 @@ message OrderListReq {
   int64       SourceType = 6;
   int64       Status = 7;
   int64       OrderType = 8;
+  int64       MemberId = 9;
 }
 
 message OrderListData{
@@ -136,7 +137,7 @@ message OrderDeleteByIdReq {
 }
 
 message OrderDeleteReq {
-  int64 UserId = 1;
+  int64 MemberId = 1;
   int64 OrderId = 2;
 }
 
@@ -145,44 +146,34 @@ message OrderDeleteResp {
 }
 
 message OrderListByMemberIdReq {
-  int64 MemberId = 1;
+  int64       Id = 1;
+  int64 MemberId = 2;
 }
 
-message OrderListByMemberIdData{
-  int32       Id = 1;
-  string      OrderSn = 2;
-  string      actualPrice = 3;
-  string      orderStatusText = 4;
-  string      handleOption = 5;
-  repeated GoodsListByMemberIdData     goodsList = 6;
-
-}
-message GoodsListByMemberIdData{
-  int32       Id = 1;
-  string      goodsName = 2;
-  string      number = 3;
-  string      picUrl = 4;
-  string      specifications = 5;
-  string      price = 6;
-
-}
 
 message OrderListByMemberIdResp {
   int64 total = 1;
-  repeated  OrderListByMemberIdData list = 2;
+  OrderListData data = 2;
 }
 
 message OrderCancelReq {
-  int64 UserId = 1;
+  int64 MemberId = 1;
   int64 OrderId = 2;
 }
 
+message ReleaseSkuStockLockData {
+  int64    ProductSkuId = 1;
+  int64    ProductQuantity = 2;
+}
+
 message OrderCancelResp {
-  string pong = 1;
+  int64 CouponId = 1;//优惠券id
+  int64 Integration = 2;//积分
+  repeated ReleaseSkuStockLockData data = 3;//释放库存
 }
 
 message OrderConfirmReq {
-  int64 UserId = 1;
+  int64 MemberId = 1;
   int64 OrderId = 2;
 }
 
@@ -199,6 +190,15 @@ message OrderRefundResp {
   string pong = 1;
 }
 
+message QueryOrderListReq {
+  int64 MemberId = 1;
+  int64 Status = 2;
+  int64 current = 3;
+  int64 pageSize = 4;
+}
+
+
+
 service OrderService {
   rpc OrderAdd(OrderAddReq) returns(OrderAddResp);
   rpc OrderList(OrderListReq) returns(OrderListResp);
@@ -209,7 +209,8 @@ service OrderService {
   rpc OrderConfirm(OrderConfirmReq) returns(OrderConfirmResp);
   rpc OrderRefund(OrderRefundReq) returns(OrderRefundResp);
   rpc OrderDeleteById(OrderDeleteByIdReq) returns(OrderDeleteResp);
-
+  //app端查询会员的订单列表信息
+  rpc QueryOrderList(QueryOrderListReq) returns(OrderListResp);
 
 }
 

@@ -20,6 +20,7 @@ type (
 		FindAll(ctx context.Context, in *umsclient.MemberListReq) (*[]UmsMember, error)
 		FindMemberByNameOrPhone(ctx context.Context, name, phone string) (*UmsMember, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		UpdateMemberIntegration(ctx context.Context, id, integration int64) error
 	}
 
 	customUmsMemberModel struct {
@@ -121,5 +122,10 @@ func (m *customUmsMemberModel) DeleteByIds(ctx context.Context, ids []int64) err
 
 	// 执行删除语句
 	_, err := m.conn.ExecCtx(ctx, query, args...)
+	return err
+}
+func (m *defaultUmsMemberModel) UpdateMemberIntegration(ctx context.Context, id, integration int64) error {
+	query := fmt.Sprintf("update %s set integration=? where `id` = ?", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, integration, id)
 	return err
 }

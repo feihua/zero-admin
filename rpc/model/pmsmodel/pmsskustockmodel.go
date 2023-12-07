@@ -19,6 +19,7 @@ type (
 		FindAll(ctx context.Context, productId int64) (*[]PmsSkuStock, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		DeleteByProductId(ctx context.Context, productId int64) error
+		ReleaseSkuStockLock(ctx context.Context, ProductSkuId, ProductQuantity int64) error
 	}
 
 	customPmsSkuStockModel struct {
@@ -88,5 +89,12 @@ func (m *customPmsSkuStockModel) DeleteByIds(ctx context.Context, ids []int64) e
 func (m *customPmsSkuStockModel) DeleteByProductId(ctx context.Context, productId int64) error {
 	query := fmt.Sprintf("delete from %s where `product_id` = ?", m.table)
 	_, err := m.conn.ExecCtx(ctx, query, productId)
+	return err
+}
+
+// ReleaseSkuStockLock 想法库存,暂时没有添加事务
+func (m *defaultPmsSkuStockModel) ReleaseSkuStockLock(ctx context.Context, ProductSkuId, ProductQuantity int64) error {
+	query := fmt.Sprintf("update %s set lock_stock=lock_stock-? where `id` = ?", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, ProductQuantity, ProductSkuId)
 	return err
 }

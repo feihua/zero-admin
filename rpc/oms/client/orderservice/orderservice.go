@@ -33,7 +33,6 @@ type (
 	CompanyAddressListResp        = omsclient.CompanyAddressListResp
 	CompanyAddressUpdateReq       = omsclient.CompanyAddressUpdateReq
 	CompanyAddressUpdateResp      = omsclient.CompanyAddressUpdateResp
-	GoodsListByMemberIdData       = omsclient.GoodsListByMemberIdData
 	OrderAddReq                   = omsclient.OrderAddReq
 	OrderAddResp                  = omsclient.OrderAddResp
 	OrderCancelReq                = omsclient.OrderCancelReq
@@ -52,7 +51,6 @@ type (
 	OrderItemListResp             = omsclient.OrderItemListResp
 	OrderItemUpdateReq            = omsclient.OrderItemUpdateReq
 	OrderItemUpdateResp           = omsclient.OrderItemUpdateResp
-	OrderListByMemberIdData       = omsclient.OrderListByMemberIdData
 	OrderListByMemberIdReq        = omsclient.OrderListByMemberIdReq
 	OrderListByMemberIdResp       = omsclient.OrderListByMemberIdResp
 	OrderListData                 = omsclient.OrderListData
@@ -98,6 +96,8 @@ type (
 	OrderSettingUpdateResp        = omsclient.OrderSettingUpdateResp
 	OrderUpdateReq                = omsclient.OrderUpdateReq
 	OrderUpdateResp               = omsclient.OrderUpdateResp
+	QueryOrderListReq             = omsclient.QueryOrderListReq
+	ReleaseSkuStockLockData       = omsclient.ReleaseSkuStockLockData
 
 	OrderService interface {
 		OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error)
@@ -109,6 +109,8 @@ type (
 		OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error)
 		OrderRefund(ctx context.Context, in *OrderRefundReq, opts ...grpc.CallOption) (*OrderRefundResp, error)
 		OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
+		// app端查询会员的订单列表信息
+		QueryOrderList(ctx context.Context, in *QueryOrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
 	}
 
 	defaultOrderService struct {
@@ -165,4 +167,10 @@ func (m *defaultOrderService) OrderRefund(ctx context.Context, in *OrderRefundRe
 func (m *defaultOrderService) OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
 	client := omsclient.NewOrderServiceClient(m.cli.Conn())
 	return client.OrderDeleteById(ctx, in, opts...)
+}
+
+// app端查询会员的订单列表信息
+func (m *defaultOrderService) QueryOrderList(ctx context.Context, in *QueryOrderListReq, opts ...grpc.CallOption) (*OrderListResp, error) {
+	client := omsclient.NewOrderServiceClient(m.cli.Conn())
+	return client.QueryOrderList(ctx, in, opts...)
 }

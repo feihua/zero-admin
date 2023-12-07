@@ -174,6 +174,9 @@ type (
 	ProductVertifyRecordListResp               = pmsclient.ProductVertifyRecordListResp
 	ProductVertifyRecordUpdateReq              = pmsclient.ProductVertifyRecordUpdateReq
 	ProductVertifyRecordUpdateResp             = pmsclient.ProductVertifyRecordUpdateResp
+	ReleaseSkuStockLockData                    = pmsclient.ReleaseSkuStockLockData
+	ReleaseSkuStockLockReq                     = pmsclient.ReleaseSkuStockLockReq
+	ReleaseSkuStockLockResp                    = pmsclient.ReleaseSkuStockLockResp
 	SkuStockAddReq                             = pmsclient.SkuStockAddReq
 	SkuStockAddResp                            = pmsclient.SkuStockAddResp
 	SkuStockDeleteReq                          = pmsclient.SkuStockDeleteReq
@@ -190,6 +193,7 @@ type (
 		SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error)
 		SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error)
 		SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error)
+		ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error)
 	}
 
 	defaultSkuStockService struct {
@@ -221,4 +225,9 @@ func (m *defaultSkuStockService) SkuStockUpdate(ctx context.Context, in *SkuStoc
 func (m *defaultSkuStockService) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error) {
 	client := pmsclient.NewSkuStockServiceClient(m.cli.Conn())
 	return client.SkuStockDelete(ctx, in, opts...)
+}
+
+func (m *defaultSkuStockService) ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error) {
+	client := pmsclient.NewSkuStockServiceClient(m.cli.Conn())
+	return client.ReleaseSkuStockLock(ctx, in, opts...)
 }

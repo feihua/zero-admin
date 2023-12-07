@@ -200,7 +200,7 @@ func queryBrandList(l *HomeIndexLogic) []types.BrandList {
 	}
 
 	brandListResp, _ := l.svcCtx.BrandService.BrandListByIds(l.ctx, &pmsclient.BrandListByIdsReq{Ids: brandIdLists})
-	var brandLists []types.BrandList
+	brandLists := make([]types.BrandList, 0)
 	for _, item := range brandListResp.List {
 
 		brandLists = append(brandLists, types.BrandList{
@@ -228,7 +228,7 @@ func queryAdvertiseList(l *HomeIndexLogic) []types.AdvertiseList {
 		Status:   1, //上下线状态：0->下线；1->上线
 	})
 
-	var advertiseLists []types.AdvertiseList
+	advertiseLists := make([]types.AdvertiseList, 0)
 	for _, item := range homeAdvertiseList.List {
 		advertiseLists = append(advertiseLists, types.AdvertiseList{
 			ID:         item.Id,

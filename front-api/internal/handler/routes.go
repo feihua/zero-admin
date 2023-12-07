@@ -180,6 +180,46 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
+				Path:    "/generateConfirmOrder",
+				Handler: order.GenerateConfirmOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/generateOrder",
+				Handler: order.GenerateOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/payCallback",
+				Handler: order.PayCallbackHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/orderList/:status/:current",
+				Handler: order.OrderListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/orderDetail/:orderId",
+				Handler: order.OrderDetailHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/cancelUserOrder/:orderId",
+				Handler: order.CancelUserOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/confirmReceiveOrder/:orderId",
+				Handler: order.ConfirmReceiveOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/deleteOrder/:orderId",
+				Handler: order.DeleteOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/returnApply",
 				Handler: order.ReturnApplyHandler(serverCtx),
 			},

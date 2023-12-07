@@ -31,6 +31,8 @@ type OrderServiceClient interface {
 	OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error)
 	OrderRefund(ctx context.Context, in *OrderRefundReq, opts ...grpc.CallOption) (*OrderRefundResp, error)
 	OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
+	//app端查询会员的订单列表信息
+	QueryOrderList(ctx context.Context, in *QueryOrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
 }
 
 type orderServiceClient struct {
@@ -122,6 +124,15 @@ func (c *orderServiceClient) OrderDeleteById(ctx context.Context, in *OrderDelet
 	return out, nil
 }
 
+func (c *orderServiceClient) QueryOrderList(ctx context.Context, in *QueryOrderListReq, opts ...grpc.CallOption) (*OrderListResp, error) {
+	out := new(OrderListResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/QueryOrderList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
@@ -135,6 +146,8 @@ type OrderServiceServer interface {
 	OrderConfirm(context.Context, *OrderConfirmReq) (*OrderConfirmResp, error)
 	OrderRefund(context.Context, *OrderRefundReq) (*OrderRefundResp, error)
 	OrderDeleteById(context.Context, *OrderDeleteByIdReq) (*OrderDeleteResp, error)
+	//app端查询会员的订单列表信息
+	QueryOrderList(context.Context, *QueryOrderListReq) (*OrderListResp, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -168,6 +181,9 @@ func (UnimplementedOrderServiceServer) OrderRefund(context.Context, *OrderRefund
 }
 func (UnimplementedOrderServiceServer) OrderDeleteById(context.Context, *OrderDeleteByIdReq) (*OrderDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderDeleteById not implemented")
+}
+func (UnimplementedOrderServiceServer) QueryOrderList(context.Context, *QueryOrderListReq) (*OrderListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderList not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -344,6 +360,24 @@ func _OrderService_OrderDeleteById_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_QueryOrderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).QueryOrderList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omsclient.OrderService/QueryOrderList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).QueryOrderList(ctx, req.(*QueryOrderListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -386,6 +420,10 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OrderDeleteById",
 			Handler:    _OrderService_OrderDeleteById_Handler,
+		},
+		{
+			MethodName: "QueryOrderList",
+			Handler:    _OrderService_QueryOrderList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

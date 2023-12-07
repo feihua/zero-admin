@@ -148,6 +148,8 @@ type (
 	HomeRecommendSubjectUpdateResp                = smsclient.HomeRecommendSubjectUpdateResp
 	QueryMemberCouponListReq                      = smsclient.QueryMemberCouponListReq
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
+	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
+	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
 
 	FlashPromotionSessionService interface {
 		FlashPromotionSessionAdd(ctx context.Context, in *FlashPromotionSessionAddReq, opts ...grpc.CallOption) (*FlashPromotionSessionAddResp, error)

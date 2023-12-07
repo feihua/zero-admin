@@ -41,3 +41,8 @@ func (s *SkuStockServiceServer) SkuStockDelete(ctx context.Context, in *pmsclien
 	l := skustockservicelogic.NewSkuStockDeleteLogic(ctx, s.svcCtx)
 	return l.SkuStockDelete(in)
 }
+
+func (s *SkuStockServiceServer) ReleaseSkuStockLock(ctx context.Context, in *pmsclient.ReleaseSkuStockLockReq) (*pmsclient.ReleaseSkuStockLockResp, error) {
+	l := skustockservicelogic.NewReleaseSkuStockLockLogic(ctx, s.svcCtx)
+	return l.ReleaseSkuStockLock(in)
+}

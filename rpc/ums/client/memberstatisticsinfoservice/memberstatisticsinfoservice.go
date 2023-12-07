@@ -165,6 +165,8 @@ type (
 	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	UpdateMemberIntegrationReq              = umsclient.UpdateMemberIntegrationReq
+	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	MemberStatisticsInfoService interface {
 		MemberStatisticsInfoAdd(ctx context.Context, in *MemberStatisticsInfoAddReq, opts ...grpc.CallOption) (*MemberStatisticsInfoAddResp, error)

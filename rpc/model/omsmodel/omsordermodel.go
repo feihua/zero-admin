@@ -6,6 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
+	"time"
 	"zero-admin/rpc/oms/omsclient"
 )
 
@@ -20,6 +21,9 @@ type (
 		FindAll(ctx context.Context, in *omsclient.OrderListReq) (*[]OmsOrder, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindListByMemberId(ctx context.Context, MemberId int64) (*[]OmsOrder, error)
+		FindOneByMemberIdAndOrderId(ctx context.Context, memberId, orderId int64) (*OmsOrder, error)
+		UpdateOrderStatus(ctx context.Context, confirmStatus, status, orderId int64) error
+		QueryOrderList(ctx context.Context, in *omsclient.QueryOrderListReq) (*[]OmsOrder, error)
 	}
 
 	customOmsOrderModel struct {
@@ -42,6 +46,9 @@ func (m *customOmsOrderModel) FindAll(ctx context.Context, in *omsclient.OrderLi
 	}
 	if len(in.MemberUsername) > 0 {
 		where = where + fmt.Sprintf(" AND member_username like '%%%s%%'", in.MemberUsername)
+	}
+	if in.MemberId != 0 {
+		where = where + fmt.Sprintf(" AND member_id = %d", in.MemberId)
 	}
 	if in.PayType != 3 {
 		where = where + fmt.Sprintf(" AND pay_type = %d", in.PayType)
@@ -133,6 +140,50 @@ func (m *customOmsOrderModel) FindListByMemberId(ctx context.Context, MemberId i
 	query := fmt.Sprintf("select %s from %s where member_id = ? limit 1", omsOrderRows, m.table)
 	var resp []OmsOrder
 	err := m.conn.QueryRows(&resp, query, MemberId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+// FindOneByMemberIdAndOrderId 根据用户id和订单id查询订单
+func (m *customOmsOrderModel) FindOneByMemberIdAndOrderId(ctx context.Context, memberId, orderId int64) (*OmsOrder, error) {
+
+	query := fmt.Sprintf("select %s from %s where member_id = ? and id = ?", omsOrderRows, m.table)
+	var resp OmsOrder
+	err := m.conn.QueryRow(&resp, query, memberId, orderId)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *defaultOmsOrderModel) UpdateOrderStatus(ctx context.Context, confirmStatus, status, orderId int64) error {
+	query := fmt.Sprintf("update %s set confirm_status=?,status=?,receive_time=? where `id` = ?", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, confirmStatus, status, time.Now(), orderId)
+	return err
+}
+func (m *customOmsOrderModel) QueryOrderList(ctx context.Context, in *omsclient.QueryOrderListReq) (*[]OmsOrder, error) {
+
+	where := "1=1"
+	if in.MemberId != 0 {
+		where = where + fmt.Sprintf(" AND member_id = %d", in.MemberId)
+	}
+	if in.Status != 6 {
+		where = where + fmt.Sprintf(" AND status = %d", in.Status)
+	}
+
+	query := fmt.Sprintf("select %s from %s where %s limit ?,?", omsOrderRows, m.table, where)
+	var resp []OmsOrder
+	err := m.conn.QueryRows(&resp, query, (in.Current-1)*in.PageSize, in.PageSize)
 	switch err {
 	case nil:
 		return &resp, nil

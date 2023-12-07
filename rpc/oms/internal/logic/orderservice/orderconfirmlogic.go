@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderConfirmLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/7 9:37
+*/
 type OrderConfirmLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,14 +30,11 @@ func NewOrderConfirmLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Orde
 	}
 }
 
+// OrderConfirm 确认收货
 func (l *OrderConfirmLogic) OrderConfirm(in *omsclient.OrderConfirmReq) (*omsclient.OrderConfirmResp, error) {
-	order, err := l.svcCtx.OmsOrderModel.FindOne(l.ctx, in.OrderId)
+	order, err := l.svcCtx.OmsOrderModel.FindOneByMemberIdAndOrderId(l.ctx, in.MemberId, in.OrderId)
 
 	if err != nil {
-		return nil, err
-	}
-
-	if order.MemberId != in.UserId {
 		return nil, errors.New("用户订单不存在,确认收货失败")
 	}
 
@@ -46,9 +48,9 @@ func (l *OrderConfirmLogic) OrderConfirm(in *omsclient.OrderConfirmReq) (*omscli
 	}
 
 	//设置订单已确认状态
-	//if l.svcCtx.OmsOrderModel.UpdateOrderStatus(3, order.Id) != nil {
-	//	return nil, errors.New("设置订单已确认状态失败")
-	//}
+	if l.svcCtx.OmsOrderModel.UpdateOrderStatus(l.ctx, 1, 3, order.Id) != nil {
+		return nil, errors.New("设置订单已确认状态失败")
+	}
 	return &omsclient.OrderConfirmResp{}, nil
 
 }

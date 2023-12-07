@@ -165,6 +165,8 @@ type (
 	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	UpdateMemberIntegrationReq              = umsclient.UpdateMemberIntegrationReq
+	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	MemberService interface {
 		MemberAdd(ctx context.Context, in *MemberAddReq, opts ...grpc.CallOption) (*MemberAddResp, error)
@@ -174,6 +176,7 @@ type (
 		MemberDelete(ctx context.Context, in *MemberDeleteReq, opts ...grpc.CallOption) (*MemberDeleteResp, error)
 		QueryMemberById(ctx context.Context, in *MemberByIdReq, opts ...grpc.CallOption) (*MemberListData, error)
 		MemberUpdatePassword(ctx context.Context, in *MemberUpdatePasswordReq, opts ...grpc.CallOption) (*MemberUpdateResp, error)
+		UpdateMemberIntegration(ctx context.Context, in *UpdateMemberIntegrationReq, opts ...grpc.CallOption) (*UpdateMemberIntegrationResp, error)
 	}
 
 	defaultMemberService struct {
@@ -220,4 +223,9 @@ func (m *defaultMemberService) QueryMemberById(ctx context.Context, in *MemberBy
 func (m *defaultMemberService) MemberUpdatePassword(ctx context.Context, in *MemberUpdatePasswordReq, opts ...grpc.CallOption) (*MemberUpdateResp, error) {
 	client := umsclient.NewMemberServiceClient(m.cli.Conn())
 	return client.MemberUpdatePassword(ctx, in, opts...)
+}
+
+func (m *defaultMemberService) UpdateMemberIntegration(ctx context.Context, in *UpdateMemberIntegrationReq, opts ...grpc.CallOption) (*UpdateMemberIntegrationResp, error) {
+	client := umsclient.NewMemberServiceClient(m.cli.Conn())
+	return client.UpdateMemberIntegration(ctx, in, opts...)
 }

@@ -33,7 +33,6 @@ type (
 	CompanyAddressListResp        = omsclient.CompanyAddressListResp
 	CompanyAddressUpdateReq       = omsclient.CompanyAddressUpdateReq
 	CompanyAddressUpdateResp      = omsclient.CompanyAddressUpdateResp
-	GoodsListByMemberIdData       = omsclient.GoodsListByMemberIdData
 	OrderAddReq                   = omsclient.OrderAddReq
 	OrderAddResp                  = omsclient.OrderAddResp
 	OrderCancelReq                = omsclient.OrderCancelReq
@@ -52,7 +51,6 @@ type (
 	OrderItemListResp             = omsclient.OrderItemListResp
 	OrderItemUpdateReq            = omsclient.OrderItemUpdateReq
 	OrderItemUpdateResp           = omsclient.OrderItemUpdateResp
-	OrderListByMemberIdData       = omsclient.OrderListByMemberIdData
 	OrderListByMemberIdReq        = omsclient.OrderListByMemberIdReq
 	OrderListByMemberIdResp       = omsclient.OrderListByMemberIdResp
 	OrderListData                 = omsclient.OrderListData
@@ -98,6 +96,8 @@ type (
 	OrderSettingUpdateResp        = omsclient.OrderSettingUpdateResp
 	OrderUpdateReq                = omsclient.OrderUpdateReq
 	OrderUpdateResp               = omsclient.OrderUpdateResp
+	QueryOrderListReq             = omsclient.QueryOrderListReq
+	ReleaseSkuStockLockData       = omsclient.ReleaseSkuStockLockData
 
 	OrderOperateHistorService interface {
 		OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq, opts ...grpc.CallOption) (*OrderOperateHistoryAddResp, error)

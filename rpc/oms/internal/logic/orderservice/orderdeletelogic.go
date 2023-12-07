@@ -27,13 +27,9 @@ func NewOrderDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Order
 
 func (l *OrderDeleteLogic) OrderDelete(in *omsclient.OrderDeleteReq) (*omsclient.OrderDeleteResp, error) {
 
-	order, err := l.svcCtx.OmsOrderModel.FindOne(l.ctx, in.OrderId)
+	order, err := l.svcCtx.OmsOrderModel.FindOneByMemberIdAndOrderId(l.ctx, in.MemberId, in.OrderId)
 
 	if err != nil {
-		return nil, err
-	}
-
-	if order.MemberId != in.UserId {
 		return nil, errors.New("用户订单不存在,删除用户订单失败")
 	}
 

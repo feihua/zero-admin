@@ -165,6 +165,8 @@ type (
 	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	UpdateMemberIntegrationReq              = umsclient.UpdateMemberIntegrationReq
+	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	MemberRuleSettingService interface {
 		MemberRuleSettingAdd(ctx context.Context, in *MemberRuleSettingAddReq, opts ...grpc.CallOption) (*MemberRuleSettingAddResp, error)

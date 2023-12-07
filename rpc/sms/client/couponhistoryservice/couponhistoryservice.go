@@ -148,6 +148,8 @@ type (
 	HomeRecommendSubjectUpdateResp                = smsclient.HomeRecommendSubjectUpdateResp
 	QueryMemberCouponListReq                      = smsclient.QueryMemberCouponListReq
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
+	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
+	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
 
 	CouponHistoryService interface {
 		CouponHistoryAdd(ctx context.Context, in *CouponHistoryAddReq, opts ...grpc.CallOption) (*CouponHistoryAddResp, error)
@@ -158,6 +160,8 @@ type (
 		CouponCount(ctx context.Context, in *CouponCountReq, opts ...grpc.CallOption) (*CouponCountResp, error)
 		// 获取会员优惠券
 		QueryMemberCouponList(ctx context.Context, in *QueryMemberCouponListReq, opts ...grpc.CallOption) (*QueryMemberCouponListResp, error)
+		// 更新优惠券状态
+		UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateCouponStatusResp, error)
 	}
 
 	defaultCouponHistoryService struct {
@@ -201,4 +205,10 @@ func (m *defaultCouponHistoryService) CouponCount(ctx context.Context, in *Coupo
 func (m *defaultCouponHistoryService) QueryMemberCouponList(ctx context.Context, in *QueryMemberCouponListReq, opts ...grpc.CallOption) (*QueryMemberCouponListResp, error) {
 	client := smsclient.NewCouponHistoryServiceClient(m.cli.Conn())
 	return client.QueryMemberCouponList(ctx, in, opts...)
+}
+
+// 更新优惠券状态
+func (m *defaultCouponHistoryService) UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateCouponStatusResp, error) {
+	client := smsclient.NewCouponHistoryServiceClient(m.cli.Conn())
+	return client.UpdateCouponStatus(ctx, in, opts...)
 }

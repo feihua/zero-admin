@@ -102,6 +102,15 @@ message MemberUpdatePasswordReq {
   int64       Id = 1;
   string      Password = 2;
 }
+
+message UpdateMemberIntegrationReq {
+  int64 id = 1;
+  int64 Integration = 2;
+}
+
+message UpdateMemberIntegrationResp {
+  string pong = 1;
+}
 service MemberService {
 
   rpc MemberAdd(MemberAddReq) returns(MemberAddResp);
@@ -111,6 +120,7 @@ service MemberService {
   rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);
   rpc QueryMemberById(MemberByIdReq) returns(MemberListData);
   rpc MemberUpdatePassword(MemberUpdatePasswordReq) returns(MemberUpdateResp);
+  rpc UpdateMemberIntegration(UpdateMemberIntegrationReq) returns(UpdateMemberIntegrationResp);
 
 }
 

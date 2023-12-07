@@ -165,6 +165,8 @@ type (
 	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	UpdateMemberIntegrationReq              = umsclient.UpdateMemberIntegrationReq
+	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	MemberAttentionService interface {
 		MemberBrandAttentionAdd(ctx context.Context, in *MemberBrandAttentionAddReq, opts ...grpc.CallOption) (*MemberBrandAttentionAddResp, error)

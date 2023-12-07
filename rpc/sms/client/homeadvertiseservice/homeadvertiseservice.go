@@ -148,6 +148,8 @@ type (
 	HomeRecommendSubjectUpdateResp                = smsclient.HomeRecommendSubjectUpdateResp
 	QueryMemberCouponListReq                      = smsclient.QueryMemberCouponListReq
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
+	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
+	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
 
 	HomeAdvertiseService interface {
 		HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error)

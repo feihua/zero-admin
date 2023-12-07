@@ -165,6 +165,8 @@ type (
 	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	UpdateMemberIntegrationReq              = umsclient.UpdateMemberIntegrationReq
+	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	MemberProductCategoryRelationService interface {
 		MemberProductCategoryRelationAdd(ctx context.Context, in *MemberProductCategoryRelationAddReq, opts ...grpc.CallOption) (*MemberProductCategoryRelationAddResp, error)

@@ -66,3 +66,9 @@ func (s *OrderServiceServer) OrderDeleteById(ctx context.Context, in *omsclient.
 	l := orderservicelogic.NewOrderDeleteByIdLogic(ctx, s.svcCtx)
 	return l.OrderDeleteById(in)
 }
+
+// app端查询会员的订单列表信息
+func (s *OrderServiceServer) QueryOrderList(ctx context.Context, in *omsclient.QueryOrderListReq) (*omsclient.OrderListResp, error) {
+	l := orderservicelogic.NewQueryOrderListLogic(ctx, s.svcCtx)
+	return l.QueryOrderList(in)
+}

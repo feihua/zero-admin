@@ -165,6 +165,8 @@ type (
 	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	UpdateMemberIntegrationReq              = umsclient.UpdateMemberIntegrationReq
+	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	GrowthChangeHistoryService interface {
 		GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error)

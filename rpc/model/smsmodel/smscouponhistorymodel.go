@@ -20,6 +20,7 @@ type (
 		FindAll(ctx context.Context, in *smsclient.CouponHistoryListReq) (*[]SmsCouponHistory, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		QueryMemberCouponList(ctx context.Context, memberId, status int64) (*[]SmsCoupon, error)
+		UpdateCouponStatus(ctx context.Context, CouponId, memberId, status int64) error
 	}
 
 	customSmsCouponHistoryModel struct {
@@ -125,4 +126,10 @@ where t1.member_id = ?
 	default:
 		return nil, err
 	}
+}
+
+func (m *defaultSmsCouponHistoryModel) UpdateCouponStatus(ctx context.Context, CouponId, memberId, status int64) error {
+	query := fmt.Sprintf("update %s set use_status=?,member_id=? where `coupon_id` = ?", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, status, memberId, CouponId)
+	return err
 }

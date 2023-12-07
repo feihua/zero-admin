@@ -338,6 +338,8 @@ type CouponHistoryServiceClient interface {
 	CouponCount(ctx context.Context, in *CouponCountReq, opts ...grpc.CallOption) (*CouponCountResp, error)
 	//获取会员优惠券
 	QueryMemberCouponList(ctx context.Context, in *QueryMemberCouponListReq, opts ...grpc.CallOption) (*QueryMemberCouponListResp, error)
+	//更新优惠券状态
+	UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateCouponStatusResp, error)
 }
 
 type couponHistoryServiceClient struct {
@@ -402,6 +404,15 @@ func (c *couponHistoryServiceClient) QueryMemberCouponList(ctx context.Context, 
 	return out, nil
 }
 
+func (c *couponHistoryServiceClient) UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateCouponStatusResp, error) {
+	out := new(UpdateCouponStatusResp)
+	err := c.cc.Invoke(ctx, "/smsclient.CouponHistoryService/UpdateCouponStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CouponHistoryServiceServer is the server API for CouponHistoryService service.
 // All implementations must embed UnimplementedCouponHistoryServiceServer
 // for forward compatibility
@@ -414,6 +425,8 @@ type CouponHistoryServiceServer interface {
 	CouponCount(context.Context, *CouponCountReq) (*CouponCountResp, error)
 	//获取会员优惠券
 	QueryMemberCouponList(context.Context, *QueryMemberCouponListReq) (*QueryMemberCouponListResp, error)
+	//更新优惠券状态
+	UpdateCouponStatus(context.Context, *UpdateCouponStatusReq) (*UpdateCouponStatusResp, error)
 	mustEmbedUnimplementedCouponHistoryServiceServer()
 }
 
@@ -438,6 +451,9 @@ func (UnimplementedCouponHistoryServiceServer) CouponCount(context.Context, *Cou
 }
 func (UnimplementedCouponHistoryServiceServer) QueryMemberCouponList(context.Context, *QueryMemberCouponListReq) (*QueryMemberCouponListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberCouponList not implemented")
+}
+func (UnimplementedCouponHistoryServiceServer) UpdateCouponStatus(context.Context, *UpdateCouponStatusReq) (*UpdateCouponStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCouponStatus not implemented")
 }
 func (UnimplementedCouponHistoryServiceServer) mustEmbedUnimplementedCouponHistoryServiceServer() {}
 
@@ -560,6 +576,24 @@ func _CouponHistoryService_QueryMemberCouponList_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CouponHistoryService_UpdateCouponStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCouponStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponHistoryServiceServer).UpdateCouponStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.CouponHistoryService/UpdateCouponStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponHistoryServiceServer).UpdateCouponStatus(ctx, req.(*UpdateCouponStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CouponHistoryService_ServiceDesc is the grpc.ServiceDesc for CouponHistoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -590,6 +624,10 @@ var CouponHistoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMemberCouponList",
 			Handler:    _CouponHistoryService_QueryMemberCouponList_Handler,
+		},
+		{
+			MethodName: "UpdateCouponStatus",
+			Handler:    _CouponHistoryService_UpdateCouponStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -165,6 +165,8 @@ type (
 	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	UpdateMemberIntegrationReq              = umsclient.UpdateMemberIntegrationReq
+	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	MemberMemberTagRelationService interface {
 		MemberMemberTagRelationAdd(ctx context.Context, in *MemberMemberTagRelationAddReq, opts ...grpc.CallOption) (*MemberMemberTagRelationAddResp, error)

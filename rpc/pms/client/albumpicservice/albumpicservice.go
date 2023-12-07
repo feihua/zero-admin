@@ -174,6 +174,9 @@ type (
 	ProductVertifyRecordListResp               = pmsclient.ProductVertifyRecordListResp
 	ProductVertifyRecordUpdateReq              = pmsclient.ProductVertifyRecordUpdateReq
 	ProductVertifyRecordUpdateResp             = pmsclient.ProductVertifyRecordUpdateResp
+	ReleaseSkuStockLockData                    = pmsclient.ReleaseSkuStockLockData
+	ReleaseSkuStockLockReq                     = pmsclient.ReleaseSkuStockLockReq
+	ReleaseSkuStockLockResp                    = pmsclient.ReleaseSkuStockLockResp
 	SkuStockAddReq                             = pmsclient.SkuStockAddReq
 	SkuStockAddResp                            = pmsclient.SkuStockAddResp
 	SkuStockDeleteReq                          = pmsclient.SkuStockDeleteReq

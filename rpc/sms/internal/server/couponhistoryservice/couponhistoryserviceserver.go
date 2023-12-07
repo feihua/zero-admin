@@ -53,3 +53,9 @@ func (s *CouponHistoryServiceServer) QueryMemberCouponList(ctx context.Context, 
 	l := couponhistoryservicelogic.NewQueryMemberCouponListLogic(ctx, s.svcCtx)
 	return l.QueryMemberCouponList(in)
 }
+
+// 更新优惠券状态
+func (s *CouponHistoryServiceServer) UpdateCouponStatus(ctx context.Context, in *smsclient.UpdateCouponStatusReq) (*smsclient.UpdateCouponStatusResp, error) {
+	l := couponhistoryservicelogic.NewUpdateCouponStatusLogic(ctx, s.svcCtx)
+	return l.UpdateCouponStatus(in)
+}

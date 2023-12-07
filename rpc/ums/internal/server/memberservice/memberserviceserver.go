@@ -56,3 +56,8 @@ func (s *MemberServiceServer) MemberUpdatePassword(ctx context.Context, in *umsc
 	l := memberservicelogic.NewMemberUpdatePasswordLogic(ctx, s.svcCtx)
 	return l.MemberUpdatePassword(in)
 }
+
+func (s *MemberServiceServer) UpdateMemberIntegration(ctx context.Context, in *umsclient.UpdateMemberIntegrationReq) (*umsclient.UpdateMemberIntegrationResp, error) {
+	l := memberservicelogic.NewUpdateMemberIntegrationLogic(ctx, s.svcCtx)
+	return l.UpdateMemberIntegration(in)
+}

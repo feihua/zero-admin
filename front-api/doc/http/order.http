@@ -7,3 +7,11 @@ Content-Type: application/json
   "password": "123456"
 }
 > {% client.global.set("token", response.body.data.token); %}
+
+### 获取订单列表
+GET {{host}}/api/order/orderList/0/1
+Authorization: Bearer {{token}}
+
+### 获取订单详情
+GET {{host}}/api/order/orderDetail/27
+Authorization: Bearer {{token}}

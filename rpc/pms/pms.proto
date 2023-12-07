@@ -1372,11 +1372,25 @@ message SkuStockDeleteResp {
   string pong = 1;
 }
 
+message ReleaseSkuStockLockReq {
+  repeated ReleaseSkuStockLockData data = 1;
+}
+
+message ReleaseSkuStockLockData {
+  int64    ProductSkuId = 1;
+  int64    ProductQuantity = 2;
+}
+message ReleaseSkuStockLockResp {
+  string pong = 1;
+}
+
+
 service SkuStockService {
 
   rpc SkuStockAdd(SkuStockAddReq) returns(SkuStockAddResp);
   rpc SkuStockList(SkuStockListReq) returns(SkuStockListResp);
   rpc SkuStockUpdate(SkuStockUpdateReq) returns(SkuStockUpdateResp);
   rpc SkuStockDelete(SkuStockDeleteReq) returns(SkuStockDeleteResp);
+  rpc ReleaseSkuStockLock(ReleaseSkuStockLockReq) returns(ReleaseSkuStockLockResp);
 
 }
