@@ -57,16 +57,27 @@ func NewCarItemtListPromotionLogic(ctx context.Context, svcCtx *svc.ServiceConte
 // 6.6如果promotionType为5,限时购
 //从sms_flash_promotion_product_relation表获取价格
 func (l *CarItemtListPromotionLogic) CarItemtListPromotion(req *types.CarItemListPromotionReq) (resp *types.CarItemtListPromotionResp, err error) {
+	cartPromotionItemList := QueryCartListPromotion(req.Ids, l.ctx, l.svcCtx)
+
+	return &types.CarItemtListPromotionResp{
+		Code:    0,
+		Message: "操作成功",
+		Data:    cartPromotionItemList,
+	}, nil
+}
+
+// QueryCartListPromotion 抽取单独方法(方便在下单确认的使用)
+func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.ServiceContext) []types.CarItemtPromotionListData {
 	//1.获取会员购物车里面所有商品信息(根据会员id查询购物车所有商品,(表：oms_cart))
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	cartItemListResp, _ := l.svcCtx.CartItemService.CartItemList(l.ctx, &omsclient.CartItemListReq{MemberId: memberId})
+	memberId, _ := ctx.Value("memberId").(json.Number).Int64()
+	cartItemListResp, _ := svcCtx.CartItemService.CartItemList(ctx, &omsclient.CartItemListReq{MemberId: memberId})
 
 	//2.判断是否会员选中购物车中的商品,如果没有就是会员购物车中所有有商品进行计算
 	cartItemListData := cartItemListResp.List
 	itemListData := make([]*omsclient.CartItemListData, 0)
-	if len(req.Ids) > 0 {
+	if len(ids) > 0 {
 		for _, item := range cartItemListData {
-			for _, id := range req.Ids {
+			for _, id := range ids {
 				if item.Id == id {
 					cartItemListData1 := omsclient.CartItemListData{}
 					_ = copier.Copy(&cartItemListData1, &item)
@@ -97,7 +108,7 @@ func (l *CarItemtListPromotionLogic) CarItemtListPromotion(req *types.CarItemLis
 	productList := make([]*pmsclient.ProductDetailByIdResp, 0)            //方便后面统计金额
 	productListMap := make(map[int64]*pmsclient.ProductDetailByIdResp, 0) //方便取数判断
 	for _, item := range cartItemListData {
-		productResp, _ := l.svcCtx.ProductService.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
+		productResp, _ := svcCtx.ProductService.ProductDetailById(ctx, &pmsclient.ProductDetailByIdReq{
 			Id: item.ProductId,
 		})
 		productList = append(productList, productResp)
@@ -139,7 +150,7 @@ func (l *CarItemtListPromotionLogic) CarItemtListPromotion(req *types.CarItemLis
 			//从pms_member_price表中查询
 		} else if promotionType == 2 {
 			//获取会员等级
-			member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{
+			member, _ := svcCtx.MemberService.QueryMemberById(ctx, &umsclient.MemberByIdReq{
 				Id: memberId,
 			})
 			//获取会员价格
@@ -244,7 +255,7 @@ func (l *CarItemtListPromotionLogic) CarItemtListPromotion(req *types.CarItemLis
 			//从sms_flash_promotion_product_relation表获取价格
 		} else if promotionType == 5 {
 			for _, item := range itemList {
-				promotionByProduct, _ := l.svcCtx.FlashPromotionProductRelationService.QueryFlashPromotionByProduct(l.ctx, &smsclient.QueryFlashPromotionByProductReq{
+				promotionByProduct, _ := svcCtx.FlashPromotionProductRelationService.QueryFlashPromotionByProduct(ctx, &smsclient.QueryFlashPromotionByProductReq{
 					ProductId: item.ProductId,
 				})
 				skuStock := getSkuStock(skuStockList, item.ProductSkuId)
@@ -261,12 +272,7 @@ func (l *CarItemtListPromotionLogic) CarItemtListPromotion(req *types.CarItemLis
 		}
 
 	}
-
-	return &types.CarItemtListPromotionResp{
-		Code:    0,
-		Message: "操作成功",
-		Data:    cartPromotionItemList,
-	}, nil
+	return cartPromotionItemList
 }
 
 //对没满足优惠条件的商品进行处理
