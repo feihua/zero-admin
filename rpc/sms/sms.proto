@@ -593,12 +593,28 @@ message FlashPromotionProductRelationListResp {
   repeated  FlashPromotionProductRelationListData list = 2;
 }
 
+message QueryFlashPromotionByProductReq {
+  int64 ProductId = 4; //商品id
+}
+message QueryFlashPromotionByProductResp {
+  int64 Id = 1; //编号
+  int64 FlashPromotionId = 2; //限时购id
+  int64 FlashPromotionSessionId = 3; //编号
+  int64 ProductId = 4; //商品id
+  float FlashPromotionPrice = 5; //限时购价格
+  int64 FlashPromotionCount = 6; //限时购数量
+  int64 FlashPromotionLimit = 7; //每人限购数量
+  int64 Sort = 8; //排序
+}
+
 service FlashPromotionProductRelationService {
 
   rpc FlashPromotionProductRelationAdd(FlashPromotionProductRelationAddReq) returns(FlashPromotionProductRelationAddResp);
   rpc FlashPromotionProductRelationList(FlashPromotionProductRelationListReq) returns(FlashPromotionProductRelationListResp);
   rpc FlashPromotionProductRelationUpdate(FlashPromotionProductRelationUpdateReq) returns(FlashPromotionProductRelationUpdateResp);
   rpc FlashPromotionProductRelationDelete(FlashPromotionProductRelationDeleteReq) returns(FlashPromotionProductRelationDeleteResp);
+  //根据商品id查询
+  rpc QueryFlashPromotionByProduct(QueryFlashPromotionByProductReq) returns(QueryFlashPromotionByProductResp);
 
 
 }

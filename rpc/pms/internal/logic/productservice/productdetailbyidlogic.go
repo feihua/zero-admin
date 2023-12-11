@@ -206,7 +206,7 @@ func buildProductLadderListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.
 				Id:        item.Id,
 				ProductId: item.ProductId,
 				Count:     item.Count,
-				Discount:  int64(item.Discount),
+				Discount:  float32(item.Discount),
 				Price:     float32(item.Price),
 			})
 		}

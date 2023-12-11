@@ -146,6 +146,8 @@ type (
 	HomeRecommendSubjectListResp                  = smsclient.HomeRecommendSubjectListResp
 	HomeRecommendSubjectUpdateReq                 = smsclient.HomeRecommendSubjectUpdateReq
 	HomeRecommendSubjectUpdateResp                = smsclient.HomeRecommendSubjectUpdateResp
+	QueryFlashPromotionByProductReq               = smsclient.QueryFlashPromotionByProductReq
+	QueryFlashPromotionByProductResp              = smsclient.QueryFlashPromotionByProductResp
 	QueryMemberCouponListReq                      = smsclient.QueryMemberCouponListReq
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
 	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
@@ -156,6 +158,8 @@ type (
 		FlashPromotionProductRelationList(ctx context.Context, in *FlashPromotionProductRelationListReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationListResp, error)
 		FlashPromotionProductRelationUpdate(ctx context.Context, in *FlashPromotionProductRelationUpdateReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationUpdateResp, error)
 		FlashPromotionProductRelationDelete(ctx context.Context, in *FlashPromotionProductRelationDeleteReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationDeleteResp, error)
+		// 根据商品id查询
+		QueryFlashPromotionByProduct(ctx context.Context, in *QueryFlashPromotionByProductReq, opts ...grpc.CallOption) (*QueryFlashPromotionByProductResp, error)
 	}
 
 	defaultFlashPromotionProductRelationService struct {
@@ -187,4 +191,10 @@ func (m *defaultFlashPromotionProductRelationService) FlashPromotionProductRelat
 func (m *defaultFlashPromotionProductRelationService) FlashPromotionProductRelationDelete(ctx context.Context, in *FlashPromotionProductRelationDeleteReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationDeleteResp, error) {
 	client := smsclient.NewFlashPromotionProductRelationServiceClient(m.cli.Conn())
 	return client.FlashPromotionProductRelationDelete(ctx, in, opts...)
+}
+
+// 根据商品id查询
+func (m *defaultFlashPromotionProductRelationService) QueryFlashPromotionByProduct(ctx context.Context, in *QueryFlashPromotionByProductReq, opts ...grpc.CallOption) (*QueryFlashPromotionByProductResp, error) {
+	client := smsclient.NewFlashPromotionProductRelationServiceClient(m.cli.Conn())
+	return client.QueryFlashPromotionByProduct(ctx, in, opts...)
 }

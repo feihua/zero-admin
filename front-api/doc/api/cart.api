@@ -85,7 +85,7 @@ type CartListData {
 }
 
 type CarItemListPromotionReq {
-	Ids []int64 `path:"ids"`
+	Ids []int64 `json:"ids,optional"`
 }
 type CarItemtListPromotionResp {
 	Code    int64                       `json:"code"`
@@ -196,7 +196,7 @@ service front-api {
 
 	//获取某个会员的购物车列表,包括促销信息
 	@handler CarItemtListPromotion
-	post /list/promotion/:ids (CarItemListPromotionReq) returns (CarItemtListPromotionResp)
+	post /promotionList (CarItemListPromotionReq) returns (CarItemtListPromotionResp)
 
 	//获取购物车中某个商品的规格,用于重选规格
 	@handler CartProduct

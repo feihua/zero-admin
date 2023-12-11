@@ -75,8 +75,13 @@ GET {{host}}/api/cart/list
 Authorization: Bearer {{token}}
 
 ### 获取某个会员的购物车列表,包括促销信息
-GET {{host}}/api/cart/list/promotion
+POST {{host}}/api/cart/promotionList
+Content-Type: application/json
 Authorization: Bearer {{token}}
+
+//{
+//  "ids": [27]
+//}
 
 ### 获取购物车中某个商品的规格,用于重选规格
 GET {{host}}/api/cart/product/32

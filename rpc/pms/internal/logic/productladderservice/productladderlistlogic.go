@@ -39,7 +39,7 @@ func (l *ProductLadderListLogic) ProductLadderList(in *pmsclient.ProductLadderLi
 			Id:        item.Id,
 			ProductId: item.ProductId,
 			Count:     item.Count,
-			Discount:  int64(item.Discount),
+			Discount:  float32(item.Discount),
 			Price:     float32(item.Price),
 		})
 	}

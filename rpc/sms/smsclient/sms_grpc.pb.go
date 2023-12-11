@@ -1457,6 +1457,8 @@ type FlashPromotionProductRelationServiceClient interface {
 	FlashPromotionProductRelationList(ctx context.Context, in *FlashPromotionProductRelationListReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationListResp, error)
 	FlashPromotionProductRelationUpdate(ctx context.Context, in *FlashPromotionProductRelationUpdateReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationUpdateResp, error)
 	FlashPromotionProductRelationDelete(ctx context.Context, in *FlashPromotionProductRelationDeleteReq, opts ...grpc.CallOption) (*FlashPromotionProductRelationDeleteResp, error)
+	//根据商品id查询
+	QueryFlashPromotionByProduct(ctx context.Context, in *QueryFlashPromotionByProductReq, opts ...grpc.CallOption) (*QueryFlashPromotionByProductResp, error)
 }
 
 type flashPromotionProductRelationServiceClient struct {
@@ -1503,6 +1505,15 @@ func (c *flashPromotionProductRelationServiceClient) FlashPromotionProductRelati
 	return out, nil
 }
 
+func (c *flashPromotionProductRelationServiceClient) QueryFlashPromotionByProduct(ctx context.Context, in *QueryFlashPromotionByProductReq, opts ...grpc.CallOption) (*QueryFlashPromotionByProductResp, error) {
+	out := new(QueryFlashPromotionByProductResp)
+	err := c.cc.Invoke(ctx, "/smsclient.FlashPromotionProductRelationService/QueryFlashPromotionByProduct", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlashPromotionProductRelationServiceServer is the server API for FlashPromotionProductRelationService service.
 // All implementations must embed UnimplementedFlashPromotionProductRelationServiceServer
 // for forward compatibility
@@ -1511,6 +1522,8 @@ type FlashPromotionProductRelationServiceServer interface {
 	FlashPromotionProductRelationList(context.Context, *FlashPromotionProductRelationListReq) (*FlashPromotionProductRelationListResp, error)
 	FlashPromotionProductRelationUpdate(context.Context, *FlashPromotionProductRelationUpdateReq) (*FlashPromotionProductRelationUpdateResp, error)
 	FlashPromotionProductRelationDelete(context.Context, *FlashPromotionProductRelationDeleteReq) (*FlashPromotionProductRelationDeleteResp, error)
+	//根据商品id查询
+	QueryFlashPromotionByProduct(context.Context, *QueryFlashPromotionByProductReq) (*QueryFlashPromotionByProductResp, error)
 	mustEmbedUnimplementedFlashPromotionProductRelationServiceServer()
 }
 
@@ -1529,6 +1542,9 @@ func (UnimplementedFlashPromotionProductRelationServiceServer) FlashPromotionPro
 }
 func (UnimplementedFlashPromotionProductRelationServiceServer) FlashPromotionProductRelationDelete(context.Context, *FlashPromotionProductRelationDeleteReq) (*FlashPromotionProductRelationDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionProductRelationDelete not implemented")
+}
+func (UnimplementedFlashPromotionProductRelationServiceServer) QueryFlashPromotionByProduct(context.Context, *QueryFlashPromotionByProductReq) (*QueryFlashPromotionByProductResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryFlashPromotionByProduct not implemented")
 }
 func (UnimplementedFlashPromotionProductRelationServiceServer) mustEmbedUnimplementedFlashPromotionProductRelationServiceServer() {
 }
@@ -1616,6 +1632,24 @@ func _FlashPromotionProductRelationService_FlashPromotionProductRelationDelete_H
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FlashPromotionProductRelationService_QueryFlashPromotionByProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryFlashPromotionByProductReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionProductRelationServiceServer).QueryFlashPromotionByProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/smsclient.FlashPromotionProductRelationService/QueryFlashPromotionByProduct",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionProductRelationServiceServer).QueryFlashPromotionByProduct(ctx, req.(*QueryFlashPromotionByProductReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FlashPromotionProductRelationService_ServiceDesc is the grpc.ServiceDesc for FlashPromotionProductRelationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1638,6 +1672,10 @@ var FlashPromotionProductRelationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FlashPromotionProductRelationDelete",
 			Handler:    _FlashPromotionProductRelationService_FlashPromotionProductRelationDelete_Handler,
+		},
+		{
+			MethodName: "QueryFlashPromotionByProduct",
+			Handler:    _FlashPromotionProductRelationService_QueryFlashPromotionByProduct_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -128,7 +128,7 @@ type ProductLadderList {
 	Id        int64   `json:"id"`
 	ProductId int64   `json:"productId"`
 	Count     int64   `json:"count"`
-	Discount  int64   `json:"discount"`
+	Discount  float32   `json:"discount"`
 	Price     float32 `json:"price"`
 }
 

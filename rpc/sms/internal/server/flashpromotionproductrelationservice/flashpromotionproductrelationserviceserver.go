@@ -41,3 +41,9 @@ func (s *FlashPromotionProductRelationServiceServer) FlashPromotionProductRelati
 	l := flashpromotionproductrelationservicelogic.NewFlashPromotionProductRelationDeleteLogic(ctx, s.svcCtx)
 	return l.FlashPromotionProductRelationDelete(in)
 }
+
+// 根据商品id查询
+func (s *FlashPromotionProductRelationServiceServer) QueryFlashPromotionByProduct(ctx context.Context, in *smsclient.QueryFlashPromotionByProductReq) (*smsclient.QueryFlashPromotionByProductResp, error) {
+	l := flashpromotionproductrelationservicelogic.NewQueryFlashPromotionByProductLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionByProduct(in)
+}

@@ -1111,7 +1111,7 @@ service ProductFullReductionService {
 message ProductLadderAddReq {
   int64    ProductId = 1;
   int64    Count = 2;
-  int64  Discount = 3;
+  float  Discount = 3;
   int64  Price = 4;
 }
 
@@ -1127,7 +1127,7 @@ message ProductLadderListData{
   int64    Id = 1;
   int64    ProductId = 2;
   int64    Count = 3;
-  int64  Discount = 4;
+  float  Discount = 4;
   float  Price = 5;
 
 }
@@ -1141,7 +1141,7 @@ message ProductLadderUpdateReq {
   int64    Id = 1;
   int64    ProductId = 2;
   int64    Count = 3;
-  int64  Discount = 4;
+  float  Discount = 4;
   int64  Price = 5;
 }
 

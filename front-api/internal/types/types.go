@@ -240,7 +240,7 @@ type CartListData struct {
 }
 
 type CarItemListPromotionReq struct {
-	Ids []int64 `path:"ids"`
+	Ids []int64 `json:"ids,optional"`
 }
 
 type CarItemtListPromotionResp struct {
@@ -801,7 +801,7 @@ type ProductLadderList struct {
 	Id        int64   `json:"id"`
 	ProductId int64   `json:"productId"`
 	Count     int64   `json:"count"`
-	Discount  int64   `json:"discount"`
+	Discount  float32 `json:"discount"`
 	Price     float32 `json:"price"`
 }
 

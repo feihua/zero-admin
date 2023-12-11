@@ -116,7 +116,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/list/promotion/:ids",
+				Path:    "/promotionList",
 				Handler: cart.CarItemtListPromotionHandler(serverCtx),
 			},
 			{

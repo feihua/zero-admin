@@ -24,7 +24,7 @@ func NewMemberPriceListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 }
 
 func (l *MemberPriceListLogic) MemberPriceList(in *pmsclient.MemberPriceListReq) (*pmsclient.MemberPriceListResp, error) {
-	all, err := l.svcCtx.PmsMemberPriceModel.FindAll(l.ctx, in.Current, in.PageSize)
+	all, err := l.svcCtx.PmsMemberPriceModel.FindAll(l.ctx, in.Current)
 	count, _ := l.svcCtx.PmsMemberPriceModel.Count(l.ctx)
 
 	if err != nil {
@@ -39,7 +39,7 @@ func (l *MemberPriceListLogic) MemberPriceList(in *pmsclient.MemberPriceListReq)
 			Id:              item.Id,
 			ProductId:       item.ProductId,
 			MemberLevelId:   item.MemberLevelId,
-			MemberPrice:     int64(item.MemberPrice),
+			MemberPrice:     float32(item.MemberPrice),
 			MemberLevelName: item.MemberLevelName,
 		})
 	}
