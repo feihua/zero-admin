@@ -228,6 +228,7 @@ message ProductDetailByIdResp{
   repeated SkuStockListData      SkuStockList = 5;
   repeated ProductLadderListData      ProductLadderList = 6;
   repeated ProductFullReductionListData      ProductFullReductionList = 7;
+  repeated MemberPriceListData      MemberPriceList = 8;
 }
 service ProductService {
 
@@ -683,7 +684,7 @@ message MemberPriceListData{
   int64    Id = 1;
   int64    ProductId = 2;
   int64    MemberLevelId = 3;
-  int64  MemberPrice = 4;
+  float  MemberPrice = 4;
   string    MemberLevelName = 5;
 
 }

@@ -16,7 +16,7 @@ type (
 	PmsMemberPriceModel interface {
 		pmsMemberPriceModel
 		Count(ctx context.Context) (int64, error)
-		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsMemberPrice, error)
+		FindAll(ctx context.Context, productId int64) (*[]PmsMemberPrice, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 		DeleteByProductId(ctx context.Context, productId int64) error
 	}
@@ -33,11 +33,11 @@ func NewPmsMemberPriceModel(conn sqlx.SqlConn) PmsMemberPriceModel {
 	}
 }
 
-func (m *customPmsMemberPriceModel) FindAll(ctx context.Context, Current int64, PageSize int64) (*[]PmsMemberPrice, error) {
+func (m *customPmsMemberPriceModel) FindAll(ctx context.Context, productId int64) (*[]PmsMemberPrice, error) {
 
-	query := fmt.Sprintf("select %s from %s limit ?,?", pmsMemberPriceRows, m.table)
+	query := fmt.Sprintf("select %s from %s where product_id=? ", pmsMemberPriceRows, m.table)
 	var resp []PmsMemberPrice
-	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	err := m.conn.QueryRows(&resp, query, productId)
 	switch err {
 	case nil:
 		return &resp, nil

@@ -32,6 +32,7 @@ func NewProductDetailByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 //5.获取商品SKU库存信息
 //6.商品阶梯价格设置
 //7.商品满减价格设置
+//8.获取商品的会员价格
 func (l *ProductDetailByIdLogic) ProductDetailById(in *pmsclient.ProductDetailByIdReq) (*pmsclient.ProductDetailByIdResp, error) {
 	//1.获取商品信息
 	productListData, product := buildProductListData(l, in.Id)
@@ -45,6 +46,7 @@ func (l *ProductDetailByIdLogic) ProductDetailById(in *pmsclient.ProductDetailBy
 		SkuStockList:              buildSkuStockListData(l, product),
 		ProductLadderList:         buildProductLadderListData(l, product),
 		ProductFullReductionList:  buildProductFullReductionListData(l, product),
+		MemberPriceList:           buildProductMemberListData(l, product),
 	}, nil
 }
 
@@ -228,6 +230,28 @@ func buildProductFullReductionListData(l *ProductDetailByIdLogic, pmsProduct *pm
 				ProductId:   item.ProductId,
 				FullPrice:   float32(item.FullPrice),
 				ReducePrice: float32(item.ReducePrice),
+			})
+		}
+		return list
+	}
+	return nil
+
+}
+
+//8.获取商品的会员价格
+func buildProductMemberListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) []*pmsclient.MemberPriceListData {
+	if pmsProduct.PromotionType == 2 {
+		all, _ := l.svcCtx.PmsMemberPriceModel.FindAll(l.ctx, pmsProduct.Id)
+
+		var list []*pmsclient.MemberPriceListData
+		for _, item := range *all {
+
+			list = append(list, &pmsclient.MemberPriceListData{
+				Id:              item.Id,
+				ProductId:       item.ProductId,
+				MemberLevelId:   item.MemberLevelId,
+				MemberPrice:     float32(item.MemberPrice),
+				MemberLevelName: item.MemberLevelName,
 			})
 		}
 		return list

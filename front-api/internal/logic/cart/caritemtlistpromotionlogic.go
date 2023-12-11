@@ -3,12 +3,13 @@ package cart
 import (
 	"context"
 	"encoding/json"
+	"github.com/jinzhu/copier"
+	"github.com/zeromicro/go-zero/core/logx"
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
 	"zero-admin/rpc/oms/omsclient"
 	"zero-admin/rpc/pms/pmsclient"
-
-	"github.com/zeromicro/go-zero/core/logx"
+	"zero-admin/rpc/ums/umsclient"
 )
 
 // CarItemtListPromotionLogic
@@ -138,36 +139,43 @@ func (l *CarItemtListPromotionLogic) CarItemtListPromotion(req *types.CarItemLis
 		} else if promotionType == 1 {
 			for _, item := range itemList {
 				skuStock := getSkuStock(skuStockList, item.ProductSkuId)
-				cartPromotionItem := types.CarItemtPromotionListData{
-					Id:                item.Id,
-					ProductId:         item.ProductId,
-					ProductSkuId:      item.ProductSkuId,
-					MemberId:          item.MemberId,
-					Quantity:          item.Quantity,
-					Price:             skuStock.Price, //单品促销使用原价
-					ProductPic:        item.ProductPic,
-					ProductName:       item.ProductName,
-					ProductSubTitle:   item.ProductSubTitle,
-					ProductSkuCode:    item.ProductSkuCode,
-					MemberNickname:    item.MemberNickname,
-					CreateDate:        item.CreateDate,
-					ModifyDate:        item.ModifyDate,
-					DeleteStatus:      item.DeleteStatus,
-					ProductCategoryId: item.ProductCategoryId,
-					ProductBrand:      item.ProductBrand,
-					ProductSn:         item.ProductSn,
-					ProductAttr:       item.ProductAttr,
-					PromotionMessage:  "单品促销",
-					ReduceAmount:      skuStock.Price - skuStock.PromotionPrice, //商品原价-促销价
-					RealStock:         skuStock.Stock - skuStock.LockStock,
-					Integration:       product.GiftPoint,
-					Growth:            product.GiftGrowth,
-				}
+				cartPromotionItem := types.CarItemtPromotionListData{}
+				_ = copier.Copy(&cartPromotionItem, &item)
+				cartPromotionItem.Price = skuStock.Price //单品促销使用原价
+				cartPromotionItem.PromotionMessage = "单品促销"
+				cartPromotionItem.ReduceAmount = skuStock.Price - skuStock.PromotionPrice //商品原价-促销价
+				cartPromotionItem.RealStock = skuStock.Stock - skuStock.LockStock
+				cartPromotionItem.Integration = product.GiftPoint
+				cartPromotionItem.Growth = product.GiftGrowth
 				cartPromotionItemList = append(cartPromotionItemList, cartPromotionItem)
 			}
 			//6.3如果promotionType为2,会员价格
 			//从pms_member_price表中查询
 		} else if promotionType == 2 {
+			//获取会员等级
+			member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{
+				Id: memberId,
+			})
+			//获取会员价格
+			var memberPrice float32
+			memberPriceList := promotionProduct.MemberPriceList
+			for _, item := range memberPriceList {
+				if item.MemberLevelId == member.MemberLevelId {
+					memberPrice = item.MemberPrice
+				}
+			}
+			for _, item := range itemList {
+				skuStock := getSkuStock(skuStockList, item.ProductSkuId)
+				cartPromotionItem := types.CarItemtPromotionListData{}
+				_ = copier.Copy(&cartPromotionItem, &item)
+				cartPromotionItem.Price = skuStock.Price //单品促销使用原价
+				cartPromotionItem.PromotionMessage = "会员价格"
+				cartPromotionItem.ReduceAmount = memberPrice //会员价
+				cartPromotionItem.RealStock = skuStock.Stock - skuStock.LockStock
+				cartPromotionItem.Integration = product.GiftPoint
+				cartPromotionItem.Growth = product.GiftGrowth
+				cartPromotionItemList = append(cartPromotionItemList, cartPromotionItem)
+			}
 			//6.4如果promotionType为3,打折优惠(商品原价-折扣*商品原价)
 			//从pms_sku_stock中获取price原价-折扣*商品原价(表pms_ladder),即可
 		} else if promotionType == 3 {
@@ -177,50 +185,37 @@ func (l *CarItemtListPromotionLogic) CarItemtListPromotion(req *types.CarItemLis
 		} else if promotionType == 4 {
 			//6.6如果promotionType为5,限时购
 			//从sms_flash_promotion_product_relation表获取价格
-		} else if promotionType == 4 {
+		} else if promotionType == 5 {
 
 		}
 
 	}
 
-	return
+	return &types.CarItemtListPromotionResp{
+		Code:    0,
+		Message: "操作成功",
+		Data:    cartPromotionItemList,
+	}, nil
 }
 
 //对没满足优惠条件的商品进行处理
 func handleNoReduce(itemList []*omsclient.CartItemListData, skuStockList []*pmsclient.SkuStockListData, product *pmsclient.ProductListData, cartPromotionItemList []types.CarItemtPromotionListData) []types.CarItemtPromotionListData {
 	for _, item := range itemList {
 		skuStock := getSkuStock(skuStockList, item.ProductSkuId)
-		cartPromotionItem := types.CarItemtPromotionListData{
-			Id:                item.Id,
-			ProductId:         item.ProductId,
-			ProductSkuId:      item.ProductSkuId,
-			MemberId:          item.MemberId,
-			Quantity:          item.Quantity,
-			Price:             skuStock.Price,
-			ProductPic:        item.ProductPic,
-			ProductName:       item.ProductName,
-			ProductSubTitle:   item.ProductSubTitle,
-			ProductSkuCode:    item.ProductSkuCode,
-			MemberNickname:    item.MemberNickname,
-			CreateDate:        item.CreateDate,
-			ModifyDate:        item.ModifyDate,
-			DeleteStatus:      item.DeleteStatus,
-			ProductCategoryId: item.ProductCategoryId,
-			ProductBrand:      item.ProductBrand,
-			ProductSn:         item.ProductSn,
-			ProductAttr:       item.ProductAttr,
-			PromotionMessage:  "无优惠",
-			ReduceAmount:      0,
-			RealStock:         skuStock.Stock - skuStock.LockStock,
-			Integration:       product.GiftPoint,
-			Growth:            product.GiftGrowth,
-		}
+		cartPromotionItem := types.CarItemtPromotionListData{}
+		_ = copier.Copy(&cartPromotionItem, &item)
+		cartPromotionItem.Price = skuStock.Price
+		cartPromotionItem.PromotionMessage = "无优惠"
+		cartPromotionItem.ReduceAmount = 0
+		cartPromotionItem.RealStock = skuStock.Stock - skuStock.LockStock
+		cartPromotionItem.Integration = product.GiftPoint
+		cartPromotionItem.Growth = product.GiftGrowth
 		cartPromotionItemList = append(cartPromotionItemList, cartPromotionItem)
 	}
 	return cartPromotionItemList
 }
 
-////获取sku
+//获取sku
 func getSkuStock(skuStockList []*pmsclient.SkuStockListData, productSkuId int64) *pmsclient.SkuStockListData {
 	var skuStock *pmsclient.SkuStockListData
 	for _, sku := range skuStockList {
