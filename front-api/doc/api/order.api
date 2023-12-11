@@ -109,7 +109,7 @@ type ListOrderItemData {
     IntegrationAmount float32 `json:"integrationAmount"` // 积分优惠分解金额
     RealAmount        float32 `json:"realAmount"`        // 该商品经过优惠后的分解金额
     GiftIntegration   int64   `json:"giftIntegration"`
-    GiftGrowth        int64   `json:"gift_growth"`
+    GiftGrowth        int64   `json:"giftGrowth"`
     ProductAttr       string  `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 }
 type OrderListResp {

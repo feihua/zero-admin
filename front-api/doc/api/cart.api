@@ -85,7 +85,7 @@ type CartListData {
 }
 
 type CarItemListPromotionReq {
-	Id int64 `json:"id"`
+	Ids []int64 `path:"ids"`
 }
 type CarItemtListPromotionResp {
 	Code    int64                       `json:"code"`
@@ -114,7 +114,7 @@ type CarItemtPromotionListData {
 	ProductAttr       string  `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 
 	PromotionMessage string `json:"promotionMessage"` //促销活动信息
-	ReduceAmount     string `json:"reduceAmount"`//促销活动减去的金额，针对每个商品
+	ReduceAmount     float32 `json:"reduceAmount"`//促销活动减去的金额，针对每个商品
 	RealStock        int64  `json:"realStock"` //商品的真实库存（剩余库存-锁定库存）
 	Integration      int64  `json:"integration"` //购买商品赠送积分
 	Growth           int64  `json:"growth"`//购买商品赠送成长值
@@ -196,7 +196,7 @@ service front-api {
 
 	//获取某个会员的购物车列表,包括促销信息
 	@handler CarItemtListPromotion
-	post /list/promotion (CarItemListPromotionReq) returns (CarItemtListPromotionResp)
+	post /list/promotion/:ids (CarItemListPromotionReq) returns (CarItemtListPromotionResp)
 
 	//获取购物车中某个商品的规格,用于重选规格
 	@handler CartProduct

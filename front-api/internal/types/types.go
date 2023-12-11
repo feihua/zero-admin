@@ -240,7 +240,7 @@ type CartListData struct {
 }
 
 type CarItemListPromotionReq struct {
-	Id int64 `json:"id"`
+	Ids []int64 `path:"ids"`
 }
 
 type CarItemtListPromotionResp struct {
@@ -269,7 +269,7 @@ type CarItemtPromotionListData struct {
 	ProductSn         string  `json:"productSn"`
 	ProductAttr       string  `json:"productAttr"`      // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 	PromotionMessage  string  `json:"promotionMessage"` //促销活动信息
-	ReduceAmount      string  `json:"reduceAmount"`     //促销活动减去的金额，针对每个商品
+	ReduceAmount      float32 `json:"reduceAmount"`     //促销活动减去的金额，针对每个商品
 	RealStock         int64   `json:"realStock"`        //商品的真实库存（剩余库存-锁定库存）
 	Integration       int64   `json:"integration"`      //购买商品赠送积分
 	Growth            int64   `json:"growth"`           //购买商品赠送成长值
@@ -606,7 +606,7 @@ type ListOrderItemData struct {
 	IntegrationAmount float32 `json:"integrationAmount"` // 积分优惠分解金额
 	RealAmount        float32 `json:"realAmount"`        // 该商品经过优惠后的分解金额
 	GiftIntegration   int64   `json:"giftIntegration"`
-	GiftGrowth        int64   `json:"gift_growth"`
+	GiftGrowth        int64   `json:"giftGrowth"`
 	ProductAttr       string  `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 }
 
