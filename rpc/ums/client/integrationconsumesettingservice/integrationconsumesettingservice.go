@@ -165,6 +165,7 @@ type (
 	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	QueryIntegrationConsumeSettingByIdReq   = umsclient.QueryIntegrationConsumeSettingByIdReq
 	UpdateMemberIntegrationReq              = umsclient.UpdateMemberIntegrationReq
 	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
@@ -173,6 +174,7 @@ type (
 		IntegrationConsumeSettingList(ctx context.Context, in *IntegrationConsumeSettingListReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingListResp, error)
 		IntegrationConsumeSettingUpdate(ctx context.Context, in *IntegrationConsumeSettingUpdateReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingUpdateResp, error)
 		IntegrationConsumeSettingDelete(ctx context.Context, in *IntegrationConsumeSettingDeleteReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingDeleteResp, error)
+		QueryIntegrationConsumeSettingById(ctx context.Context, in *QueryIntegrationConsumeSettingByIdReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingListData, error)
 	}
 
 	defaultIntegrationConsumeSettingService struct {
@@ -204,4 +206,9 @@ func (m *defaultIntegrationConsumeSettingService) IntegrationConsumeSettingUpdat
 func (m *defaultIntegrationConsumeSettingService) IntegrationConsumeSettingDelete(ctx context.Context, in *IntegrationConsumeSettingDeleteReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingDeleteResp, error) {
 	client := umsclient.NewIntegrationConsumeSettingServiceClient(m.cli.Conn())
 	return client.IntegrationConsumeSettingDelete(ctx, in, opts...)
+}
+
+func (m *defaultIntegrationConsumeSettingService) QueryIntegrationConsumeSettingById(ctx context.Context, in *QueryIntegrationConsumeSettingByIdReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingListData, error) {
+	client := umsclient.NewIntegrationConsumeSettingServiceClient(m.cli.Conn())
+	return client.QueryIntegrationConsumeSettingById(ctx, in, opts...)
 }

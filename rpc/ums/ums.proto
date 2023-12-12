@@ -304,12 +304,18 @@ message IntegrationConsumeSettingDeleteReq {
 message IntegrationConsumeSettingDeleteResp {
   string pong = 1;
 }
+
+message QueryIntegrationConsumeSettingByIdReq {
+  int64 id = 1;
+}
+
 service IntegrationConsumeSettingService {
 
   rpc IntegrationConsumeSettingAdd(IntegrationConsumeSettingAddReq) returns(IntegrationConsumeSettingAddResp);
   rpc IntegrationConsumeSettingList(IntegrationConsumeSettingListReq) returns(IntegrationConsumeSettingListResp);
   rpc IntegrationConsumeSettingUpdate(IntegrationConsumeSettingUpdateReq) returns(IntegrationConsumeSettingUpdateResp);
   rpc IntegrationConsumeSettingDelete(IntegrationConsumeSettingDeleteReq) returns(IntegrationConsumeSettingDeleteResp);
+  rpc QueryIntegrationConsumeSettingById(QueryIntegrationConsumeSettingByIdReq) returns(IntegrationConsumeSettingListData);
 
 }
 
@@ -1147,7 +1153,7 @@ message MemberBrandAttentionListResp {
 service MemberAttentionService {
   rpc MemberBrandAttentionAdd(MemberBrandAttentionAddReq) returns (MemberBrandAttentionAddResp){}
   rpc MemberBrandAttentionDelete(MemberBrandAttentionDeleteReq) returns (MemberBrandAttentionDeleteResp){}
-  rpc MemberBrandAttentionUpdate(MemberBrandAttentionUpdateReq) returns (MemberBrandAttentionUpdateResp ){}
-  rpc MemberBrandAttentionClear(MemberBrandAttentionClearReq) returns (MemberBrandAttentionClearResp ){}
+  rpc MemberBrandAttentionUpdate(MemberBrandAttentionUpdateReq) returns (MemberBrandAttentionUpdateResp){}
+  rpc MemberBrandAttentionClear(MemberBrandAttentionClearReq) returns (MemberBrandAttentionClearResp){}
   rpc MemberBrandAttentionList(MemberBrandAttentionListReq) returns (MemberBrandAttentionListResp){}
 }

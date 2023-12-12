@@ -17,6 +17,7 @@ type (
 		smsCouponProductCategoryRelationModel
 		Count(ctx context.Context) (int64, error)
 		FindAll(ctx context.Context, Current int64, PageSize int64) (*[]SmsCouponProductCategoryRelation, error)
+		FindAllByCouponId(ctx context.Context, CouponId int64) (*[]SmsCouponProductCategoryRelation, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
 	}
 
@@ -37,6 +38,21 @@ func (m *customSmsCouponProductCategoryRelationModel) FindAll(ctx context.Contex
 	query := fmt.Sprintf("select %s from %s limit ?,?", smsCouponProductCategoryRelationRows, m.table)
 	var resp []SmsCouponProductCategoryRelation
 	err := m.conn.QueryRows(&resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *customSmsCouponProductCategoryRelationModel) FindAllByCouponId(ctx context.Context, CouponId int64) (*[]SmsCouponProductCategoryRelation, error) {
+
+	query := fmt.Sprintf("select %s from %s where coupon_id=?", smsCouponProductCategoryRelationRows, m.table)
+	var resp []SmsCouponProductCategoryRelation
+	err := m.conn.QueryRows(&resp, query, CouponId)
 	switch err {
 	case nil:
 		return &resp, nil

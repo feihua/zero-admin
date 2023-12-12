@@ -38,7 +38,7 @@ func (l *QueryCouponHistoryDetailListLogic) QueryCouponHistoryDetailList(in *sms
 		PageSize:  100,
 		CouponId:  0,
 		MemberId:  in.MemberId,
-		UseStatus: 3,
+		UseStatus: 0,
 	})
 
 	if err != nil {
@@ -113,7 +113,7 @@ func (l *QueryCouponHistoryDetailListLogic) QueryCouponHistoryDetailList(in *sms
 				MemberLevel:  coupon.MemberLevel,
 			},
 			ProductRelationList:  productRelationList,
-			CategoryRelationList: nil,
+			CategoryRelationList: productCategoryRelationList,
 		})
 	}
 

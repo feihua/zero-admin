@@ -41,3 +41,8 @@ func (s *IntegrationConsumeSettingServiceServer) IntegrationConsumeSettingDelete
 	l := integrationconsumesettingservicelogic.NewIntegrationConsumeSettingDeleteLogic(ctx, s.svcCtx)
 	return l.IntegrationConsumeSettingDelete(in)
 }
+
+func (s *IntegrationConsumeSettingServiceServer) QueryIntegrationConsumeSettingById(ctx context.Context, in *umsclient.QueryIntegrationConsumeSettingByIdReq) (*umsclient.IntegrationConsumeSettingListData, error) {
+	l := integrationconsumesettingservicelogic.NewQueryIntegrationConsumeSettingByIdLogic(ctx, s.svcCtx)
+	return l.QueryIntegrationConsumeSettingById(in)
+}

@@ -34,7 +34,7 @@ func (l *DeleteOrderLogic) DeleteOrder(req *types.DeleteOrderReq) (resp *types.D
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, err = l.svcCtx.OrderService.OrderDelete(l.ctx, &omsclient.OrderDeleteReq{
 		MemberId: memberId,
-		OrderId:  req.OrderID,
+		OrderId:  req.OrderId,
 	})
 
 	if err != nil {

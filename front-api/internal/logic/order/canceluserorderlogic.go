@@ -42,7 +42,7 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (r
 	//2.修改订单状态
 	result, err := l.svcCtx.OrderService.OrderCancel(l.ctx, &omsclient.OrderCancelReq{
 		MemberId: memberId,
-		OrderId:  req.OrderID,
+		OrderId:  req.OrderId,
 	})
 
 	var data []*pmsclient.ReleaseSkuStockLockData

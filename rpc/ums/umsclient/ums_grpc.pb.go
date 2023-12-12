@@ -754,6 +754,7 @@ type IntegrationConsumeSettingServiceClient interface {
 	IntegrationConsumeSettingList(ctx context.Context, in *IntegrationConsumeSettingListReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingListResp, error)
 	IntegrationConsumeSettingUpdate(ctx context.Context, in *IntegrationConsumeSettingUpdateReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingUpdateResp, error)
 	IntegrationConsumeSettingDelete(ctx context.Context, in *IntegrationConsumeSettingDeleteReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingDeleteResp, error)
+	QueryIntegrationConsumeSettingById(ctx context.Context, in *QueryIntegrationConsumeSettingByIdReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingListData, error)
 }
 
 type integrationConsumeSettingServiceClient struct {
@@ -800,6 +801,15 @@ func (c *integrationConsumeSettingServiceClient) IntegrationConsumeSettingDelete
 	return out, nil
 }
 
+func (c *integrationConsumeSettingServiceClient) QueryIntegrationConsumeSettingById(ctx context.Context, in *QueryIntegrationConsumeSettingByIdReq, opts ...grpc.CallOption) (*IntegrationConsumeSettingListData, error) {
+	out := new(IntegrationConsumeSettingListData)
+	err := c.cc.Invoke(ctx, "/umsclient.IntegrationConsumeSettingService/QueryIntegrationConsumeSettingById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IntegrationConsumeSettingServiceServer is the server API for IntegrationConsumeSettingService service.
 // All implementations must embed UnimplementedIntegrationConsumeSettingServiceServer
 // for forward compatibility
@@ -808,6 +818,7 @@ type IntegrationConsumeSettingServiceServer interface {
 	IntegrationConsumeSettingList(context.Context, *IntegrationConsumeSettingListReq) (*IntegrationConsumeSettingListResp, error)
 	IntegrationConsumeSettingUpdate(context.Context, *IntegrationConsumeSettingUpdateReq) (*IntegrationConsumeSettingUpdateResp, error)
 	IntegrationConsumeSettingDelete(context.Context, *IntegrationConsumeSettingDeleteReq) (*IntegrationConsumeSettingDeleteResp, error)
+	QueryIntegrationConsumeSettingById(context.Context, *QueryIntegrationConsumeSettingByIdReq) (*IntegrationConsumeSettingListData, error)
 	mustEmbedUnimplementedIntegrationConsumeSettingServiceServer()
 }
 
@@ -826,6 +837,9 @@ func (UnimplementedIntegrationConsumeSettingServiceServer) IntegrationConsumeSet
 }
 func (UnimplementedIntegrationConsumeSettingServiceServer) IntegrationConsumeSettingDelete(context.Context, *IntegrationConsumeSettingDeleteReq) (*IntegrationConsumeSettingDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IntegrationConsumeSettingDelete not implemented")
+}
+func (UnimplementedIntegrationConsumeSettingServiceServer) QueryIntegrationConsumeSettingById(context.Context, *QueryIntegrationConsumeSettingByIdReq) (*IntegrationConsumeSettingListData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryIntegrationConsumeSettingById not implemented")
 }
 func (UnimplementedIntegrationConsumeSettingServiceServer) mustEmbedUnimplementedIntegrationConsumeSettingServiceServer() {
 }
@@ -913,6 +927,24 @@ func _IntegrationConsumeSettingService_IntegrationConsumeSettingDelete_Handler(s
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IntegrationConsumeSettingService_QueryIntegrationConsumeSettingById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryIntegrationConsumeSettingByIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationConsumeSettingServiceServer).QueryIntegrationConsumeSettingById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/umsclient.IntegrationConsumeSettingService/QueryIntegrationConsumeSettingById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationConsumeSettingServiceServer).QueryIntegrationConsumeSettingById(ctx, req.(*QueryIntegrationConsumeSettingByIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IntegrationConsumeSettingService_ServiceDesc is the grpc.ServiceDesc for IntegrationConsumeSettingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -935,6 +967,10 @@ var IntegrationConsumeSettingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "IntegrationConsumeSettingDelete",
 			Handler:    _IntegrationConsumeSettingService_IntegrationConsumeSettingDelete_Handler,
+		},
+		{
+			MethodName: "QueryIntegrationConsumeSettingById",
+			Handler:    _IntegrationConsumeSettingService_QueryIntegrationConsumeSettingById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

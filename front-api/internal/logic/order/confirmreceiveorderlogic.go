@@ -35,7 +35,7 @@ func (l *ConfirmReceiveOrderLogic) ConfirmReceiveOrder(req *types.ConfirmReceive
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, err = l.svcCtx.OrderService.OrderConfirm(l.ctx, &omsclient.OrderConfirmReq{
 		MemberId: memberId,
-		OrderId:  req.OrderID,
+		OrderId:  req.OrderId,
 	})
 
 	if err != nil {

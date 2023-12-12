@@ -69,7 +69,19 @@ type (
         Message string `json:"message"`
         Data []*ListtCouponData `json:"data"`
     }
+    CouponListByCartReq {
+        UseStatus int64 `path:"useStatus"`         // 使用状态-使用可用:0->不可用；1->可用
+    }
 
+    CouponListByCartResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
+        Data ListCouponData `json:"data"`
+    }
+    ListCouponData struct {
+        EnableList interface{} `json:"enableList"`
+        DisableList interface{} `json:"disableList"`
+    }
 )
 
 @server(
@@ -87,4 +99,6 @@ service front-api {
     @handler CouponListByProductId
     get /listByProductId/:productId (ListCouponReq) returns (ListCouponResp)
 
+    @handler CouponListByCart
+    get /listByCart/:useStatus (CouponListByCartReq) returns (CouponListByCartResp)
 }

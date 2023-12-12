@@ -35,7 +35,7 @@ func NewOrderDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Order
 func (l *OrderDetailLogic) OrderDetail(req *types.OrderDetailReq) (*types.OrderDetailResp, error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	resp, err := l.svcCtx.OrderService.OrderListByMemberId(l.ctx, &omsclient.OrderListByMemberIdReq{
-		Id:       req.OrderID,
+		Id:       req.OrderId,
 		MemberId: memberId,
 	})
 

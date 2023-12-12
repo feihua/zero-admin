@@ -165,6 +165,7 @@ type (
 	MemberUpdatePasswordReq                 = umsclient.MemberUpdatePasswordReq
 	MemberUpdateReq                         = umsclient.MemberUpdateReq
 	MemberUpdateResp                        = umsclient.MemberUpdateResp
+	QueryIntegrationConsumeSettingByIdReq   = umsclient.QueryIntegrationConsumeSettingByIdReq
 	UpdateMemberIntegrationReq              = umsclient.UpdateMemberIntegrationReq
 	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 

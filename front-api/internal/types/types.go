@@ -503,18 +503,125 @@ type RecommendHotProductListResp struct {
 }
 
 type GenerateConfirmOrderReq struct {
-	OrderID   int64 `json:"orderId"`
-	ProductID int64 `json:"productId"`
+	Ids []int64 `json:"ids"`
 }
 
 type GenerateConfirmOrderResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	Code    int64            `json:"code"`
+	Message string           `json:"message"`
+	Data    OrderDetailModel `json:"data"`
+}
+
+type OrderDetailModel struct {
+	CartPromotionItemList     []CartPromotionItemList    `json:"cartPromotionItemList"`
+	MemberReceiveAddressList  []MemberReceiveAddressList `json:"memberReceiveAddressList"`
+	CouponHistoryDetailList   []CouponHistoryDetailList  `json:"couponHistoryDetailList"`
+	IntegrationConsumeSetting IntegrationConsumeSetting  `json:"integrationConsumeSetting"`
+	MemberIntegration         int64                      `json:"memberIntegration"`
+	CalcAmount                CalcAmount                 `json:"calcAmount"`
+}
+
+type CalcAmount struct {
+	TotalAmount     float32 `json:"totalAmount"`
+	FreightAmount   float32 `json:"freightAmount"`
+	PromotionAmount float32 `json:"promotionAmount"`
+	PayAmount       float32 `json:"payAmount"`
+}
+
+type CartPromotionItemList struct {
+	Id                int64   `json:"id"`
+	ProductId         int64   `json:"productId"`
+	ProductSkuId      int64   `json:"productSkuId"`
+	MemberId          int64   `json:"memberId"`
+	Quantity          int64   `json:"quantity"`          // 购买数量
+	Price             float32 `json:"price"`             // 添加到购物车的价格
+	ProductPic        string  `json:"productPic"`        // 商品主图
+	ProductName       string  `json:"productName"`       // 商品名称
+	ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
+	ProductSkuCode    string  `json:"productSkuCode"`    // 商品sku条码
+	MemberNickname    string  `json:"memberNickname"`    // 会员昵称
+	CreateDate        string  `json:"createDate"`        // 创建时间
+	ModifyDate        string  `json:"modifyDate"`        // 修改时间
+	DeleteStatus      int64   `json:"deleteStatus"`      // 是否删除
+	ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
+	ProductBrand      string  `json:"productBrand"`
+	ProductSn         string  `json:"productSn"`
+	ProductAttr       string  `json:"productAttr"`      // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	PromotionMessage  string  `json:"promotionMessage"` //促销活动信息
+	ReduceAmount      float32 `json:"reduceAmount"`     //促销活动减去的金额，针对每个商品
+	RealStock         int64   `json:"realStock"`        //商品的真实库存（剩余库存-锁定库存）
+	Integration       int64   `json:"integration"`      //购买商品赠送积分
+	Growth            int64   `json:"growth"`           //购买商品赠送成长值
+}
+
+type CouponHistoryDetailList struct {
+	Coupon               Coupon                 `json:"coupon"`
+	ProductRelationList  []ProductRelationList  `json:"productRelationList"`
+	CategoryRelationList []CategoryRelationList `json:"categoryRelationList"`
+}
+
+type CategoryRelationList struct {
+	Id                  int64  `json:"id"`
+	CouponId            int64  `json:"couponId"`
+	ProductCategoryId   int64  `json:"productCategoryId"`
+	ProductCategoryName string `json:"productCategoryName"`
+	ParentCategoryName  string `json:"parentCategoryName"`
+	SerialVersionUId    int64  `json:"serialVersionUId"`
+}
+
+type Coupon struct {
+	Id           int64  `json:"id"`
+	Type         int64  `json:"type"`
+	Name         string `json:"name"`
+	Platform     int64  `json:"platform"`
+	Count        int64  `json:"count"`
+	Amount       string `json:"amount"`
+	PerLimit     int64  `json:"perLimit"`
+	MinPoint     string `json:"minPoint"`
+	StartTime    int64  `json:"startTime"`
+	EndTime      int64  `json:"endTime"`
+	UseType      int64  `json:"useType"`
+	Note         string `json:"note"`
+	PublishCount int64  `json:"publishCount"`
+	UseCount     int64  `json:"useCount"`
+	ReceiveCount int64  `json:"receiveCount"`
+	EnableTime   int64  `json:"enableTime"`
+	Code         string `json:"code"`
+	MemberLevel  int64  `json:"memberLevel"`
+}
+
+type ProductRelationList struct {
+	Id          int64  `json:"id"`
+	CouponId    int64  `json:"couponId"`
+	ProductId   int64  `json:"productId"`
+	ProductName string `json:"productName"`
+	ProductSn   string `json:"productSn"`
+}
+
+type IntegrationConsumeSetting struct {
+	Id                 int64 `json:"id"`
+	DeductionPerAmount int64 `json:"deductionPerAmount"`
+	MaxPercentPerOrder int64 `json:"maxPercentPerOrder"`
+	UseUnit            int64 `json:"useUnit"`
+	CouponStatus       int64 `json:"couponStatus"`
+}
+
+type MemberReceiveAddressList struct {
+	Id            int64  `json:"id"`
+	MemberId      int64  `json:"memberId"`
+	Name          string `json:"name"`
+	PhoneNumber   string `json:"phoneNumber"`
+	DefaultStatus int64  `json:"defaultStatus"`
+	PostCode      string `json:"postCode"`
+	Province      string `json:"province"`
+	City          string `json:"city"`
+	Region        string `json:"region"`
+	DetailAddress string `json:"detailAddress"`
 }
 
 type GenerateOrderReq struct {
-	OrderID   int64 `json:"orderId"`
-	ProductID int64 `json:"productId"`
+	OrderId   int64 `json:"orderId"`
+	ProductId int64 `json:"productId"`
 }
 
 type GenerateOrderResp struct {
@@ -523,8 +630,8 @@ type GenerateOrderResp struct {
 }
 
 type PayCallbackReq struct {
-	OrderID   int64 `json:"orderId"`
-	ProductID int64 `json:"productId"`
+	OrderId   int64 `json:"orderId"`
+	ProductId int64 `json:"productId"`
 }
 
 type PayCallbackResp struct {
@@ -617,7 +724,7 @@ type OrderListResp struct {
 }
 
 type OrderDetailReq struct {
-	OrderID int64 `path:"orderId"`
+	OrderId int64 `path:"orderId"`
 }
 
 type OrderDetailResp struct {
@@ -627,7 +734,7 @@ type OrderDetailResp struct {
 }
 
 type CancelUserOrderReq struct {
-	OrderID int64 `path:"orderId"`
+	OrderId int64 `path:"orderId"`
 }
 
 type CancelUserOrderResp struct {
@@ -636,7 +743,7 @@ type CancelUserOrderResp struct {
 }
 
 type ConfirmReceiveOrderReq struct {
-	OrderID int64 `path:"orderId"`
+	OrderId int64 `path:"orderId"`
 }
 
 type ConfirmReceiveOrderResp struct {
@@ -645,7 +752,7 @@ type ConfirmReceiveOrderResp struct {
 }
 
 type DeleteOrderReq struct {
-	OrderID int64 `path:"orderId"`
+	OrderId int64 `path:"orderId"`
 }
 
 type DeleteOrderResp struct {
@@ -654,8 +761,8 @@ type DeleteOrderResp struct {
 }
 
 type ReturnApplyReq struct {
-	OrderID          int64   `json:"orderId"`
-	ProductID        int64   `json:"productId"`
+	OrderId          int64   `json:"orderId"`
+	ProductId        int64   `json:"productId"`
 	OrderSn          string  `json:"orderSn"`
 	MemberUsername   string  `json:"memberUsername"`
 	ReturnName       string  `json:"returnName"`
@@ -1042,6 +1149,21 @@ type ListCouponResp struct {
 	Code    int64              `json:"code"`
 	Message string             `json:"message"`
 	Data    []*ListtCouponData `json:"data"`
+}
+
+type CouponListByCartReq struct {
+	UseStatus int64 `path:"useStatus"` // 使用状态-使用可用:0->不可用；1->可用
+}
+
+type CouponListByCartResp struct {
+	Code    int64          `json:"code"`
+	Message string         `json:"message"`
+	Data    ListCouponData `json:"data"`
+}
+
+type ListCouponData struct {
+	EnableList  interface{} `json:"enableList"`
+	DisableList interface{} `json:"disableList"`
 }
 
 type BrandListResp struct {
