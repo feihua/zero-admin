@@ -199,7 +199,6 @@ message CouponHistoryListData{
   string  UseTime = 9;
   int64      OrderId = 10;
   string      OrderSn = 11;
-
 }
 
 message CouponHistoryListResp {
@@ -256,6 +255,22 @@ message UpdateCouponStatusReq {
 message UpdateCouponStatusResp {
   string pong = 1;
 }
+
+message CouponHistoryDetailListReq {
+  int64      MemberId = 1;
+}
+
+message CouponHistoryDetailListData{
+  CouponHistoryListData couponHistoryListData = 1;//用户领取的优惠券
+  CouponListData couponListData = 2;//优惠券
+  repeated  CouponProductRelationListData productRelationList = 3;//商品和优惠券的关联关糸
+  repeated  CouponProductCategoryRelationListData categoryRelationList = 4;//商品分类和优惠券的关联关糸
+}
+
+message CouponHistoryDetailListResp {
+  repeated  CouponHistoryDetailListData list = 2;
+}
+
 service CouponHistoryService {
 
   rpc CouponHistoryAdd(CouponHistoryAddReq) returns(CouponHistoryAddResp);
@@ -269,6 +284,8 @@ service CouponHistoryService {
   rpc QueryMemberCouponList(QueryMemberCouponListReq) returns(QueryMemberCouponListResp);
   //更新优惠券状态
   rpc UpdateCouponStatus(UpdateCouponStatusReq) returns(UpdateCouponStatusResp);
+  //获取该用户所有优惠券(包括商品和优惠券,商品分类和优惠券的关联关糸)
+  rpc QueryCouponHistoryDetailList(CouponHistoryDetailListReq) returns(CouponHistoryDetailListResp);
 }
 
 message CouponProductCategoryRelationAddReq {

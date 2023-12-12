@@ -59,3 +59,9 @@ func (s *CouponHistoryServiceServer) UpdateCouponStatus(ctx context.Context, in 
 	l := couponhistoryservicelogic.NewUpdateCouponStatusLogic(ctx, s.svcCtx)
 	return l.UpdateCouponStatus(in)
 }
+
+// 获取该用户所有优惠券(包括商品和优惠券,商品分类和优惠券的关联关糸)
+func (s *CouponHistoryServiceServer) QueryCouponHistoryDetailList(ctx context.Context, in *smsclient.CouponHistoryDetailListReq) (*smsclient.CouponHistoryDetailListResp, error) {
+	l := couponhistoryservicelogic.NewQueryCouponHistoryDetailListLogic(ctx, s.svcCtx)
+	return l.QueryCouponHistoryDetailList(in)
+}

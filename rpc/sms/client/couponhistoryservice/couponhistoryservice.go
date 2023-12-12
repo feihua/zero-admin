@@ -29,6 +29,9 @@ type (
 	CouponHistoryAddResp                          = smsclient.CouponHistoryAddResp
 	CouponHistoryDeleteReq                        = smsclient.CouponHistoryDeleteReq
 	CouponHistoryDeleteResp                       = smsclient.CouponHistoryDeleteResp
+	CouponHistoryDetailListData                   = smsclient.CouponHistoryDetailListData
+	CouponHistoryDetailListReq                    = smsclient.CouponHistoryDetailListReq
+	CouponHistoryDetailListResp                   = smsclient.CouponHistoryDetailListResp
 	CouponHistoryListData                         = smsclient.CouponHistoryListData
 	CouponHistoryListReq                          = smsclient.CouponHistoryListReq
 	CouponHistoryListResp                         = smsclient.CouponHistoryListResp
@@ -164,6 +167,8 @@ type (
 		QueryMemberCouponList(ctx context.Context, in *QueryMemberCouponListReq, opts ...grpc.CallOption) (*QueryMemberCouponListResp, error)
 		// 更新优惠券状态
 		UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateCouponStatusResp, error)
+		// 获取该用户所有优惠券(包括商品和优惠券,商品分类和优惠券的关联关糸)
+		QueryCouponHistoryDetailList(ctx context.Context, in *CouponHistoryDetailListReq, opts ...grpc.CallOption) (*CouponHistoryDetailListResp, error)
 	}
 
 	defaultCouponHistoryService struct {
@@ -213,4 +218,10 @@ func (m *defaultCouponHistoryService) QueryMemberCouponList(ctx context.Context,
 func (m *defaultCouponHistoryService) UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateCouponStatusResp, error) {
 	client := smsclient.NewCouponHistoryServiceClient(m.cli.Conn())
 	return client.UpdateCouponStatus(ctx, in, opts...)
+}
+
+// 获取该用户所有优惠券(包括商品和优惠券,商品分类和优惠券的关联关糸)
+func (m *defaultCouponHistoryService) QueryCouponHistoryDetailList(ctx context.Context, in *CouponHistoryDetailListReq, opts ...grpc.CallOption) (*CouponHistoryDetailListResp, error) {
+	client := smsclient.NewCouponHistoryServiceClient(m.cli.Conn())
+	return client.QueryCouponHistoryDetailList(ctx, in, opts...)
 }

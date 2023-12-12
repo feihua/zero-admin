@@ -29,6 +29,9 @@ type (
 	CouponHistoryAddResp                          = smsclient.CouponHistoryAddResp
 	CouponHistoryDeleteReq                        = smsclient.CouponHistoryDeleteReq
 	CouponHistoryDeleteResp                       = smsclient.CouponHistoryDeleteResp
+	CouponHistoryDetailListData                   = smsclient.CouponHistoryDetailListData
+	CouponHistoryDetailListReq                    = smsclient.CouponHistoryDetailListReq
+	CouponHistoryDetailListResp                   = smsclient.CouponHistoryDetailListResp
 	CouponHistoryListData                         = smsclient.CouponHistoryListData
 	CouponHistoryListReq                          = smsclient.CouponHistoryListReq
 	CouponHistoryListResp                         = smsclient.CouponHistoryListResp
