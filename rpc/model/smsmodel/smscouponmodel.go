@@ -21,6 +21,7 @@ type (
 		DeleteByIds(ctx context.Context, ids []int64) error
 		FindAllByIds(ctx context.Context, ids []int64) (*[]SmsCoupon, error)
 		CouponFindByProductIdAndProductCategoryId(ctx context.Context, productId, categoryId int64) (*[]SmsCoupon, error)
+		UpdateUseCount(ctx context.Context, flag bool, id int64) error
 	}
 
 	customSmsCouponModel struct {
@@ -155,4 +156,16 @@ UNION
 	default:
 		return nil, err
 	}
+}
+
+func (m *defaultSmsCouponModel) UpdateUseCount(ctx context.Context, flag bool, id int64) error {
+	var query = ""
+	if flag {
+		query = fmt.Sprintf("update %s set use_count=use_count+1 where `id` = ?", m.table)
+
+	} else {
+		query = fmt.Sprintf("update %s set use_count=use_count-1 where `id` = ?", m.table)
+	}
+	_, err := m.conn.ExecCtx(ctx, query, id)
+	return err
 }

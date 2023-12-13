@@ -18,8 +18,24 @@ Authorization: Bearer {{token}}
 
 ### 根据购物车信息生成确认单信息
 POST {{host}}/api/order/generateConfirmOrder
+Content-Type: application/json
 Authorization: Bearer {{token}}
 
 //{
 //  "ids": [27]
 //}
+
+### 根据购物车信息生成订单
+POST {{host}}/api/order/generateOrder
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "memberReceiveAddressId": 0,
+  "couponId": 0,
+  "useIntegration": 0,
+  "payType": 0,
+  "cartIds": [
+    "Long"
+  ]
+}

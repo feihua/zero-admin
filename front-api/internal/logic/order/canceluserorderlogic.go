@@ -40,13 +40,17 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (*
 	//todo 暂时没有分布式事务
 	//1.查询订单是否存在
 	//2.修改订单状态
-	result, err := l.svcCtx.OrderService.OrderCancel(l.ctx, &omsclient.OrderCancelReq{
+	resp, err := l.svcCtx.OrderService.OrderCancel(l.ctx, &omsclient.OrderCancelReq{
 		MemberId: memberId,
 		OrderId:  req.OrderId,
 	})
 
+	couponId := resp.CouponId
+	integration := resp.Integration
+	stockLockData := resp.Data
+
 	var data []*pmsclient.ReleaseSkuStockLockData
-	for _, item := range result.Data {
+	for _, item := range stockLockData {
 		data = append(data, &pmsclient.ReleaseSkuStockLockData{
 			ProductSkuId:    item.ProductSkuId,
 			ProductQuantity: item.ProductQuantity,
@@ -63,11 +67,11 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (*
 	//4.如果使用优惠券,更新优惠券使用状态
 	//4.1修改sms_coupon_history表的use_status字段
 	//4.2记得修改sms_coupon的use_count字段,下单的时候要加1,取消订单的时候,要减1
-	if result.CouponId > 0 {
+	if couponId > 0 {
 		_, err = l.svcCtx.CouponHistoryService.UpdateCouponStatus(l.ctx, &smsclient.UpdateCouponStatusReq{
 			MemberId:  memberId,
 			UseStatus: 0,
-			CouponId:  result.CouponId,
+			CouponId:  couponId,
 		})
 		if err != nil {
 			return nil, err
@@ -76,7 +80,7 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (*
 
 	//5.返还使用积分
 	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
-	i := member.Integration + result.Integration
+	i := member.Integration + integration
 	_, err = l.svcCtx.MemberService.UpdateMemberIntegration(l.ctx, &umsclient.UpdateMemberIntegrationReq{Id: memberId, Integration: i})
 	if err != nil {
 		return nil, err

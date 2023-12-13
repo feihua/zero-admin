@@ -28,8 +28,17 @@ func NewUpdateCouponStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // UpdateCouponStatus 更新优惠券状态
+//1.更新用户优惠券状态
+//2.更新优惠券数量
 func (l *UpdateCouponStatusLogic) UpdateCouponStatus(in *smsclient.UpdateCouponStatusReq) (*smsclient.UpdateCouponStatusResp, error) {
+	//1.更新用户优惠券状态
 	err := l.svcCtx.SmsCouponHistoryModel.UpdateCouponStatus(l.ctx, in.CouponId, in.MemberId, in.UseStatus)
+	if err != nil {
+		return nil, err
+	}
+
+	//2.更新优惠券数量
+	err = l.svcCtx.SmsCouponModel.UpdateUseCount(l.ctx, in.UseStatus == 0, in.CouponId)
 	if err != nil {
 		return nil, err
 	}
