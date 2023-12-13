@@ -3440,7 +3440,12 @@ type SkuStockServiceClient interface {
 	SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error)
 	SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error)
 	SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error)
+	//取消订单的时候,释放库存
 	ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error)
+	//下单的时候,锁定库存
+	LockSkuStockLock(ctx context.Context, in *LockSkuStockLockReq, opts ...grpc.CallOption) (*LockSkuStockLockResp, error)
+	//根据ProductSkuId查询sku
+	QuerySkuStockByProductSkuId(ctx context.Context, in *QuerySkuStockByProductSkuIdReq, opts ...grpc.CallOption) (*SkuStockListData, error)
 }
 
 type skuStockServiceClient struct {
@@ -3496,6 +3501,24 @@ func (c *skuStockServiceClient) ReleaseSkuStockLock(ctx context.Context, in *Rel
 	return out, nil
 }
 
+func (c *skuStockServiceClient) LockSkuStockLock(ctx context.Context, in *LockSkuStockLockReq, opts ...grpc.CallOption) (*LockSkuStockLockResp, error) {
+	out := new(LockSkuStockLockResp)
+	err := c.cc.Invoke(ctx, "/pmsclient.SkuStockService/LockSkuStockLock", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *skuStockServiceClient) QuerySkuStockByProductSkuId(ctx context.Context, in *QuerySkuStockByProductSkuIdReq, opts ...grpc.CallOption) (*SkuStockListData, error) {
+	out := new(SkuStockListData)
+	err := c.cc.Invoke(ctx, "/pmsclient.SkuStockService/QuerySkuStockByProductSkuId", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SkuStockServiceServer is the server API for SkuStockService service.
 // All implementations must embed UnimplementedSkuStockServiceServer
 // for forward compatibility
@@ -3504,7 +3527,12 @@ type SkuStockServiceServer interface {
 	SkuStockList(context.Context, *SkuStockListReq) (*SkuStockListResp, error)
 	SkuStockUpdate(context.Context, *SkuStockUpdateReq) (*SkuStockUpdateResp, error)
 	SkuStockDelete(context.Context, *SkuStockDeleteReq) (*SkuStockDeleteResp, error)
+	//取消订单的时候,释放库存
 	ReleaseSkuStockLock(context.Context, *ReleaseSkuStockLockReq) (*ReleaseSkuStockLockResp, error)
+	//下单的时候,锁定库存
+	LockSkuStockLock(context.Context, *LockSkuStockLockReq) (*LockSkuStockLockResp, error)
+	//根据ProductSkuId查询sku
+	QuerySkuStockByProductSkuId(context.Context, *QuerySkuStockByProductSkuIdReq) (*SkuStockListData, error)
 	mustEmbedUnimplementedSkuStockServiceServer()
 }
 
@@ -3526,6 +3554,12 @@ func (UnimplementedSkuStockServiceServer) SkuStockDelete(context.Context, *SkuSt
 }
 func (UnimplementedSkuStockServiceServer) ReleaseSkuStockLock(context.Context, *ReleaseSkuStockLockReq) (*ReleaseSkuStockLockResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReleaseSkuStockLock not implemented")
+}
+func (UnimplementedSkuStockServiceServer) LockSkuStockLock(context.Context, *LockSkuStockLockReq) (*LockSkuStockLockResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LockSkuStockLock not implemented")
+}
+func (UnimplementedSkuStockServiceServer) QuerySkuStockByProductSkuId(context.Context, *QuerySkuStockByProductSkuIdReq) (*SkuStockListData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySkuStockByProductSkuId not implemented")
 }
 func (UnimplementedSkuStockServiceServer) mustEmbedUnimplementedSkuStockServiceServer() {}
 
@@ -3630,6 +3664,42 @@ func _SkuStockService_ReleaseSkuStockLock_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SkuStockService_LockSkuStockLock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LockSkuStockLockReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SkuStockServiceServer).LockSkuStockLock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pmsclient.SkuStockService/LockSkuStockLock",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SkuStockServiceServer).LockSkuStockLock(ctx, req.(*LockSkuStockLockReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SkuStockService_QuerySkuStockByProductSkuId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySkuStockByProductSkuIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SkuStockServiceServer).QuerySkuStockByProductSkuId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pmsclient.SkuStockService/QuerySkuStockByProductSkuId",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SkuStockServiceServer).QuerySkuStockByProductSkuId(ctx, req.(*QuerySkuStockByProductSkuIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SkuStockService_ServiceDesc is the grpc.ServiceDesc for SkuStockService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3656,6 +3726,14 @@ var SkuStockService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReleaseSkuStockLock",
 			Handler:    _SkuStockService_ReleaseSkuStockLock_Handler,
+		},
+		{
+			MethodName: "LockSkuStockLock",
+			Handler:    _SkuStockService_LockSkuStockLock_Handler,
+		},
+		{
+			MethodName: "QuerySkuStockByProductSkuId",
+			Handler:    _SkuStockService_QuerySkuStockByProductSkuId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

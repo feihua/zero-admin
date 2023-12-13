@@ -1385,6 +1385,22 @@ message ReleaseSkuStockLockResp {
   string pong = 1;
 }
 
+message LockSkuStockLockReq {
+  repeated LockSkuStockLockData data = 1;
+}
+
+message LockSkuStockLockData {
+  int64    ProductSkuId = 1;
+  int64    ProductQuantity = 2;
+}
+message LockSkuStockLockResp {
+  string pong = 1;
+}
+
+message QuerySkuStockByProductSkuIdReq {
+  int64    ProductSkuId = 1;
+}
+
 
 service SkuStockService {
 
@@ -1392,6 +1408,11 @@ service SkuStockService {
   rpc SkuStockList(SkuStockListReq) returns(SkuStockListResp);
   rpc SkuStockUpdate(SkuStockUpdateReq) returns(SkuStockUpdateResp);
   rpc SkuStockDelete(SkuStockDeleteReq) returns(SkuStockDeleteResp);
+  //取消订单的时候,释放库存
   rpc ReleaseSkuStockLock(ReleaseSkuStockLockReq) returns(ReleaseSkuStockLockResp);
+  //下单的时候,锁定库存
+  rpc LockSkuStockLock(LockSkuStockLockReq) returns(LockSkuStockLockResp);
+  //根据ProductSkuId查询sku
+  rpc QuerySkuStockByProductSkuId(QuerySkuStockByProductSkuIdReq) returns(SkuStockListData);
 
 }

@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/13 9:29
+*/
 type OrderAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,28 +29,26 @@ func NewOrderAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderAdd
 	}
 }
 
+// OrderAdd 创建订单
+//1.插入order表
+//2.插入order_item表
+//2.删除购物车中的下单商品(删除cart_item表)
 func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAddResp, error) {
 
-	createTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	paymentTime, _ := time.Parse("2006-01-02 15:04:05", in.PaymentTime)
-	deliveryTime, _ := time.Parse("2006-01-02 15:04:05", in.DeliveryTime)
-	receiveTime, _ := time.Parse("2006-01-02 15:04:05", in.ReceiveTime)
-	commentTime, _ := time.Parse("2006-01-02 15:04:05", in.CommentTime)
-	modifyTime, _ := time.Parse("2006-01-02 15:04:05", in.ModifyTime)
-
+	//1.插入order表
 	_, err := l.svcCtx.OmsOrderModel.Insert(l.ctx, &omsmodel.OmsOrder{
 		MemberId:              in.MemberId,
 		CouponId:              in.CouponId,
 		OrderSn:               in.OrderSn,
-		CreateTime:            createTime,
+		CreateTime:            time.Now(),
 		MemberUsername:        in.MemberUsername,
-		TotalAmount:           in.TotalAmount,
-		PayAmount:             in.PayAmount,
-		FreightAmount:         in.FreightAmount,
-		PromotionAmount:       in.PromotionAmount,
-		IntegrationAmount:     in.IntegrationAmount,
-		CouponAmount:          in.CouponAmount,
-		DiscountAmount:        in.DiscountAmount,
+		TotalAmount:           float64(in.TotalAmount),
+		PayAmount:             float64(in.PayAmount),
+		FreightAmount:         float64(in.FreightAmount),
+		PromotionAmount:       float64(in.PromotionAmount),
+		IntegrationAmount:     float64(in.IntegrationAmount),
+		CouponAmount:          float64(in.CouponAmount),
+		DiscountAmount:        float64(in.DiscountAmount),
 		PayType:               in.PayType,
 		SourceType:            in.SourceType,
 		Status:                in.Status,
@@ -72,15 +75,46 @@ func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAdd
 		ConfirmStatus:         in.ConfirmStatus,
 		DeleteStatus:          in.DeleteStatus,
 		UseIntegration:        in.UseIntegration,
-		PaymentTime:           paymentTime,
-		DeliveryTime:          deliveryTime,
-		ReceiveTime:           receiveTime,
-		CommentTime:           commentTime,
-		ModifyTime:            modifyTime,
+		PaymentTime:           time.Now(),
+		DeliveryTime:          time.Now(),
+		ReceiveTime:           time.Now(),
+		CommentTime:           time.Now(),
+		ModifyTime:            time.Now(),
 	})
 	if err != nil {
 		return nil, err
 	}
+	//2.插入order_item表
+	for _, orderItem := range in.OrderItemList {
+		_, _ = l.svcCtx.OmsOrderItemModel.Insert(l.ctx, &omsmodel.OmsOrderItem{
+			OrderId:           0,
+			OrderSn:           "",
+			ProductId:         orderItem.ProductId,
+			ProductPic:        orderItem.ProductPic,
+			ProductName:       orderItem.ProductName,
+			ProductBrand:      orderItem.ProductBrand,
+			ProductSn:         orderItem.ProductSn,
+			ProductPrice:      float64(orderItem.ProductPrice),
+			ProductQuantity:   orderItem.ProductQuantity,
+			ProductSkuId:      orderItem.ProductSkuId,
+			ProductSkuCode:    orderItem.ProductSkuCode,
+			ProductCategoryId: orderItem.ProductCategoryId,
+			PromotionName:     orderItem.PromotionName,
+			PromotionAmount:   float64(orderItem.PromotionAmount),
+			CouponAmount:      float64(orderItem.CouponAmount),
+			IntegrationAmount: float64(orderItem.IntegrationAmount),
+			RealAmount:        float64(orderItem.RealAmount),
+			GiftIntegration:   orderItem.GiftIntegration,
+			GiftGrowth:        orderItem.GiftGrowth,
+			ProductAttr:       orderItem.ProductAttr,
+		})
 
+	}
+	//2.删除购物车中的下单商品(删除cart_item表)
+	err = l.svcCtx.OmsCartItemModel.DeleteByIds(l.ctx, in.MemberId, in.CartItemIds)
+
+	if err != nil {
+		return nil, err
+	}
 	return &omsclient.OrderAddResp{}, nil
 }

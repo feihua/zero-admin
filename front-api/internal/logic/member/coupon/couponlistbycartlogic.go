@@ -35,12 +35,25 @@ func NewCouponListByCartLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // CouponListByCart 获取登录会员购物车的相关优惠券
 func (l *CouponListByCartLogic) CouponListByCart(req *types.CouponListByCartReq) (resp *types.CouponListByCartResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+
 	//1.获取购物车信息
 	cartPromotionItemList := cart.QueryCartListPromotion(nil, l.ctx, l.svcCtx)
 
 	//获取该用户所有优惠券
-	historyDetailList, _ := l.svcCtx.CouponHistoryService.QueryCouponHistoryDetailList(l.ctx, &smsclient.CouponHistoryDetailListReq{
+	enableList, disableList := QueryCouponList(l.svcCtx, l.ctx, cartPromotionItemList)
+	return &types.CouponListByCartResp{
+		Data: types.ListCouponData{
+			EnableList:  enableList,
+			DisableList: disableList,
+		},
+		Code:    0,
+		Message: "查询会员优惠券成功",
+	}, nil
+}
+
+func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromotionItemList []types.CarItemtPromotionListData) ([]*smsclient.CouponHistoryDetailListData, []*smsclient.CouponHistoryDetailListData) {
+	memberId, _ := ctx.Value("memberId").(json.Number).Int64()
+	historyDetailList, _ := svcCtx.CouponHistoryService.QueryCouponHistoryDetailList(ctx, &smsclient.CouponHistoryDetailListReq{
 		MemberId: memberId,
 	})
 
@@ -115,14 +128,7 @@ func (l *CouponListByCartLogic) CouponListByCart(req *types.CouponListByCartReq)
 	}
 	enableListStr, _ := json.Marshal(enableList)
 	disableListStr, _ := json.Marshal(disableList)
-	logc.Errorf(l.ctx, "可用的优惠券,参数:%s", enableListStr)
-	logc.Errorf(l.ctx, "不可用的优惠券,参数:%s", disableListStr)
-	return &types.CouponListByCartResp{
-		Data: types.ListCouponData{
-			EnableList:  enableList,
-			DisableList: disableList,
-		},
-		Code:    0,
-		Message: "查询会员优惠券成功",
-	}, nil
+	logc.Errorf(ctx, "可用的优惠券,参数:%s", enableListStr)
+	logc.Errorf(ctx, "不可用的优惠券,参数:%s", disableListStr)
+	return enableList, disableList
 }

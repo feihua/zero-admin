@@ -42,7 +42,20 @@ func (s *SkuStockServiceServer) SkuStockDelete(ctx context.Context, in *pmsclien
 	return l.SkuStockDelete(in)
 }
 
+// 取消订单的时候,释放库存
 func (s *SkuStockServiceServer) ReleaseSkuStockLock(ctx context.Context, in *pmsclient.ReleaseSkuStockLockReq) (*pmsclient.ReleaseSkuStockLockResp, error) {
 	l := skustockservicelogic.NewReleaseSkuStockLockLogic(ctx, s.svcCtx)
 	return l.ReleaseSkuStockLock(in)
+}
+
+// 下单的时候,锁定库存
+func (s *SkuStockServiceServer) LockSkuStockLock(ctx context.Context, in *pmsclient.LockSkuStockLockReq) (*pmsclient.LockSkuStockLockResp, error) {
+	l := skustockservicelogic.NewLockSkuStockLockLogic(ctx, s.svcCtx)
+	return l.LockSkuStockLock(in)
+}
+
+// 根据ProductSkuId查询sku
+func (s *SkuStockServiceServer) QuerySkuStockByProductSkuId(ctx context.Context, in *pmsclient.QuerySkuStockByProductSkuIdReq) (*pmsclient.SkuStockListData, error) {
+	l := skustockservicelogic.NewQuerySkuStockByProductSkuIdLogic(ctx, s.svcCtx)
+	return l.QuerySkuStockByProductSkuId(in)
 }

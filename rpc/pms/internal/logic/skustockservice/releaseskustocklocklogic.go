@@ -2,7 +2,6 @@ package skustockservicelogic
 
 import (
 	"context"
-
 	"zero-admin/rpc/pms/internal/svc"
 	"zero-admin/rpc/pms/pmsclient"
 
@@ -30,7 +29,12 @@ func NewReleaseSkuStockLockLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // ReleaseSkuStockLock 更新商品库存
 func (l *ReleaseSkuStockLockLogic) ReleaseSkuStockLock(in *pmsclient.ReleaseSkuStockLockReq) (*pmsclient.ReleaseSkuStockLockResp, error) {
-	// todo: add your logic here and delete this line
+	for _, item := range in.Data {
+		err := l.svcCtx.PmsSkuStockModel.ReleaseSkuStockLock(l.ctx, item.ProductSkuId, item.ProductQuantity)
+		if err != nil {
+			return nil, err
+		}
+	}
 
 	return &pmsclient.ReleaseSkuStockLockResp{}, nil
 }

@@ -20,6 +20,7 @@ type (
 		DeleteByIds(ctx context.Context, ids []int64) error
 		DeleteByProductId(ctx context.Context, productId int64) error
 		ReleaseSkuStockLock(ctx context.Context, ProductSkuId, ProductQuantity int64) error
+		LockSkuStockLock(ctx context.Context, ProductSkuId, ProductQuantity int64) error
 	}
 
 	customPmsSkuStockModel struct {
@@ -92,9 +93,16 @@ func (m *customPmsSkuStockModel) DeleteByProductId(ctx context.Context, productI
 	return err
 }
 
-// ReleaseSkuStockLock 想法库存,暂时没有添加事务
+// ReleaseSkuStockLock 释放库存,暂时没有添加事务
 func (m *defaultPmsSkuStockModel) ReleaseSkuStockLock(ctx context.Context, ProductSkuId, ProductQuantity int64) error {
-	query := fmt.Sprintf("update %s set lock_stock=lock_stock-? where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, ProductQuantity, ProductSkuId)
+	query := fmt.Sprintf("update %s set stock=stock+?,lock_stock=lock_stock-? where `id` = ? and lock_stock>=?", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, ProductQuantity, ProductQuantity, ProductSkuId, ProductQuantity)
+	return err
+}
+
+// LockSkuStockLock 锁库存,暂时没有添加事务
+func (m *defaultPmsSkuStockModel) LockSkuStockLock(ctx context.Context, ProductSkuId, ProductQuantity int64) error {
+	query := fmt.Sprintf("update %s set stock=stock-?,lock_stock=lock_stock+? where `id` = ? and stock>=?", m.table)
+	_, err := m.conn.ExecCtx(ctx, query, ProductQuantity, ProductQuantity, ProductSkuId, ProductQuantity)
 	return err
 }

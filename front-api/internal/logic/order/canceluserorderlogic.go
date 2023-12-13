@@ -34,7 +34,7 @@ func NewCancelUserOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *C
 }
 
 // CancelUserOrder 取消订单
-func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (resp *types.CancelUserOrderResp, err error) {
+func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (*types.CancelUserOrderResp, error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 
 	//todo 暂时没有分布式事务
@@ -60,19 +60,23 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (r
 		return nil, err
 	}
 
-	//4.修改优惠券使用状态
-	_, err = l.svcCtx.CouponHistoryService.UpdateCouponStatus(l.ctx, &smsclient.UpdateCouponStatusReq{
-		MemberId:  memberId,
-		UseStatus: 0,
-		CouponId:  result.CouponId,
-	})
-	if err != nil {
-		return nil, err
+	//4.如果使用优惠券,更新优惠券使用状态
+	//4.1修改sms_coupon_history表的use_status字段
+	//4.2记得修改sms_coupon的use_count字段,下单的时候要加1,取消订单的时候,要减1
+	if result.CouponId > 0 {
+		_, err = l.svcCtx.CouponHistoryService.UpdateCouponStatus(l.ctx, &smsclient.UpdateCouponStatusReq{
+			MemberId:  memberId,
+			UseStatus: 0,
+			CouponId:  result.CouponId,
+		})
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	//5.返还使用积分
 	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
-	i := member.Integration - result.Integration
+	i := member.Integration + result.Integration
 	_, err = l.svcCtx.MemberService.UpdateMemberIntegration(l.ctx, &umsclient.UpdateMemberIntegrationReq{Id: memberId, Integration: i})
 	if err != nil {
 		return nil, err

@@ -68,6 +68,9 @@ type (
 	FeightTemplateListResp                     = pmsclient.FeightTemplateListResp
 	FeightTemplateUpdateReq                    = pmsclient.FeightTemplateUpdateReq
 	FeightTemplateUpdateResp                   = pmsclient.FeightTemplateUpdateResp
+	LockSkuStockLockData                       = pmsclient.LockSkuStockLockData
+	LockSkuStockLockReq                        = pmsclient.LockSkuStockLockReq
+	LockSkuStockLockResp                       = pmsclient.LockSkuStockLockResp
 	MemberPriceAddReq                          = pmsclient.MemberPriceAddReq
 	MemberPriceAddResp                         = pmsclient.MemberPriceAddResp
 	MemberPriceDeleteReq                       = pmsclient.MemberPriceDeleteReq
@@ -174,6 +177,7 @@ type (
 	ProductVertifyRecordListResp               = pmsclient.ProductVertifyRecordListResp
 	ProductVertifyRecordUpdateReq              = pmsclient.ProductVertifyRecordUpdateReq
 	ProductVertifyRecordUpdateResp             = pmsclient.ProductVertifyRecordUpdateResp
+	QuerySkuStockByProductSkuIdReq             = pmsclient.QuerySkuStockByProductSkuIdReq
 	ReleaseSkuStockLockData                    = pmsclient.ReleaseSkuStockLockData
 	ReleaseSkuStockLockReq                     = pmsclient.ReleaseSkuStockLockReq
 	ReleaseSkuStockLockResp                    = pmsclient.ReleaseSkuStockLockResp
@@ -193,7 +197,12 @@ type (
 		SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error)
 		SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error)
 		SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error)
+		// 取消订单的时候,释放库存
 		ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error)
+		// 下单的时候,锁定库存
+		LockSkuStockLock(ctx context.Context, in *LockSkuStockLockReq, opts ...grpc.CallOption) (*LockSkuStockLockResp, error)
+		// 根据ProductSkuId查询sku
+		QuerySkuStockByProductSkuId(ctx context.Context, in *QuerySkuStockByProductSkuIdReq, opts ...grpc.CallOption) (*SkuStockListData, error)
 	}
 
 	defaultSkuStockService struct {
@@ -227,7 +236,20 @@ func (m *defaultSkuStockService) SkuStockDelete(ctx context.Context, in *SkuStoc
 	return client.SkuStockDelete(ctx, in, opts...)
 }
 
+// 取消订单的时候,释放库存
 func (m *defaultSkuStockService) ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error) {
 	client := pmsclient.NewSkuStockServiceClient(m.cli.Conn())
 	return client.ReleaseSkuStockLock(ctx, in, opts...)
+}
+
+// 下单的时候,锁定库存
+func (m *defaultSkuStockService) LockSkuStockLock(ctx context.Context, in *LockSkuStockLockReq, opts ...grpc.CallOption) (*LockSkuStockLockResp, error) {
+	client := pmsclient.NewSkuStockServiceClient(m.cli.Conn())
+	return client.LockSkuStockLock(ctx, in, opts...)
+}
+
+// 根据ProductSkuId查询sku
+func (m *defaultSkuStockService) QuerySkuStockByProductSkuId(ctx context.Context, in *QuerySkuStockByProductSkuIdReq, opts ...grpc.CallOption) (*SkuStockListData, error) {
+	client := pmsclient.NewSkuStockServiceClient(m.cli.Conn())
+	return client.QuerySkuStockByProductSkuId(ctx, in, opts...)
 }

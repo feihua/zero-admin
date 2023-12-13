@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"zero-admin/front-api/internal/logic/cart"
-	"zero-admin/rpc/sms/smsclient"
+	"zero-admin/front-api/internal/logic/member/coupon"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -95,11 +95,8 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 			DetailAddress: item.DetailAddress,
 		})
 	}
-	//3.获取用户可用优惠券列表
-	l.svcCtx.CouponHistoryService.QueryMemberCouponList(l.ctx, &smsclient.QueryMemberCouponListReq{
-		MemberId:  memberId,
-		UseStatus: 0,
-	})
+	//3.获取该用户所有未使用优惠券
+	enableList, disableList := coupon.QueryCouponList(l.svcCtx, l.ctx, cartPromotionItemList)
 	//4.获取用户积分
 	memberInfo, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{
 		Id: memberId,
@@ -124,7 +121,10 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 		Data: types.OrderDetailModel{
 			CartPromotionItemList:    cartPromotionList,
 			MemberReceiveAddressList: memberReceiveAddressList,
-			CouponHistoryDetailList:  nil,
+			CouponHistoryDetailList: types.ListCouponData{
+				EnableList:  enableList,
+				DisableList: disableList,
+			},
 			IntegrationConsumeSetting: types.IntegrationConsumeSetting{
 				Id:                 settingInfo.Id,
 				DeductionPerAmount: settingInfo.DeductionPerAmount,

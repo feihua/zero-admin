@@ -15,3 +15,11 @@ Authorization: Bearer {{token}}
 ### 获取订单详情
 GET {{host}}/api/order/orderDetail/27
 Authorization: Bearer {{token}}
+
+### 根据购物车信息生成确认单信息
+POST {{host}}/api/order/generateConfirmOrder
+Authorization: Bearer {{token}}
+
+//{
+//  "ids": [27]
+//}

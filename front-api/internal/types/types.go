@@ -503,7 +503,7 @@ type RecommendHotProductListResp struct {
 }
 
 type GenerateConfirmOrderReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `json:"ids,optional"`
 }
 
 type GenerateConfirmOrderResp struct {
@@ -515,7 +515,7 @@ type GenerateConfirmOrderResp struct {
 type OrderDetailModel struct {
 	CartPromotionItemList     []CartPromotionItemList    `json:"cartPromotionItemList"`
 	MemberReceiveAddressList  []MemberReceiveAddressList `json:"memberReceiveAddressList"`
-	CouponHistoryDetailList   []CouponHistoryDetailList  `json:"couponHistoryDetailList"`
+	CouponHistoryDetailList   interface{}                `json:"couponHistoryDetailList"`
 	IntegrationConsumeSetting IntegrationConsumeSetting  `json:"integrationConsumeSetting"`
 	MemberIntegration         int64                      `json:"memberIntegration"`
 	CalcAmount                CalcAmount                 `json:"calcAmount"`
@@ -554,50 +554,6 @@ type CartPromotionItemList struct {
 	Growth            int64   `json:"growth"`           //购买商品赠送成长值
 }
 
-type CouponHistoryDetailList struct {
-	Coupon               Coupon                 `json:"coupon"`
-	ProductRelationList  []ProductRelationList  `json:"productRelationList"`
-	CategoryRelationList []CategoryRelationList `json:"categoryRelationList"`
-}
-
-type CategoryRelationList struct {
-	Id                  int64  `json:"id"`
-	CouponId            int64  `json:"couponId"`
-	ProductCategoryId   int64  `json:"productCategoryId"`
-	ProductCategoryName string `json:"productCategoryName"`
-	ParentCategoryName  string `json:"parentCategoryName"`
-	SerialVersionUId    int64  `json:"serialVersionUId"`
-}
-
-type Coupon struct {
-	Id           int64  `json:"id"`
-	Type         int64  `json:"type"`
-	Name         string `json:"name"`
-	Platform     int64  `json:"platform"`
-	Count        int64  `json:"count"`
-	Amount       string `json:"amount"`
-	PerLimit     int64  `json:"perLimit"`
-	MinPoint     string `json:"minPoint"`
-	StartTime    int64  `json:"startTime"`
-	EndTime      int64  `json:"endTime"`
-	UseType      int64  `json:"useType"`
-	Note         string `json:"note"`
-	PublishCount int64  `json:"publishCount"`
-	UseCount     int64  `json:"useCount"`
-	ReceiveCount int64  `json:"receiveCount"`
-	EnableTime   int64  `json:"enableTime"`
-	Code         string `json:"code"`
-	MemberLevel  int64  `json:"memberLevel"`
-}
-
-type ProductRelationList struct {
-	Id          int64  `json:"id"`
-	CouponId    int64  `json:"couponId"`
-	ProductId   int64  `json:"productId"`
-	ProductName string `json:"productName"`
-	ProductSn   string `json:"productSn"`
-}
-
 type IntegrationConsumeSetting struct {
 	Id                 int64 `json:"id"`
 	DeductionPerAmount int64 `json:"deductionPerAmount"`
@@ -620,13 +576,22 @@ type MemberReceiveAddressList struct {
 }
 
 type GenerateOrderReq struct {
-	OrderId   int64 `json:"orderId"`
-	ProductId int64 `json:"productId"`
+	CartIds                []int64 `json:"cartIds"`                //购物车id
+	CouponId               int64   `json:"couponId"`               //优惠券id
+	MemberReceiveAddressId int64   `json:"memberReceiveAddressId"` //
+	PayType                int64   `json:"payType"`                //支付方式
+	UseIntegration         int64   `json:"useIntegration"`         //使用的积分
+}
+
+type GenerateOrderData struct {
+	OrderInfo     interface{} `json:"orderInfo"`
+	OrderItemList interface{} `json:"orderItemList"`
 }
 
 type GenerateOrderResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	Code    int64             `json:"code"`
+	Message string            `json:"message"`
+	Data    GenerateOrderData `json:"data"`
 }
 
 type PayCallbackReq struct {

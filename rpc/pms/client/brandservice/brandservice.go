@@ -68,6 +68,9 @@ type (
 	FeightTemplateListResp                     = pmsclient.FeightTemplateListResp
 	FeightTemplateUpdateReq                    = pmsclient.FeightTemplateUpdateReq
 	FeightTemplateUpdateResp                   = pmsclient.FeightTemplateUpdateResp
+	LockSkuStockLockData                       = pmsclient.LockSkuStockLockData
+	LockSkuStockLockReq                        = pmsclient.LockSkuStockLockReq
+	LockSkuStockLockResp                       = pmsclient.LockSkuStockLockResp
 	MemberPriceAddReq                          = pmsclient.MemberPriceAddReq
 	MemberPriceAddResp                         = pmsclient.MemberPriceAddResp
 	MemberPriceDeleteReq                       = pmsclient.MemberPriceDeleteReq
@@ -174,6 +177,7 @@ type (
 	ProductVertifyRecordListResp               = pmsclient.ProductVertifyRecordListResp
 	ProductVertifyRecordUpdateReq              = pmsclient.ProductVertifyRecordUpdateReq
 	ProductVertifyRecordUpdateResp             = pmsclient.ProductVertifyRecordUpdateResp
+	QuerySkuStockByProductSkuIdReq             = pmsclient.QuerySkuStockByProductSkuIdReq
 	ReleaseSkuStockLockData                    = pmsclient.ReleaseSkuStockLockData
 	ReleaseSkuStockLockReq                     = pmsclient.ReleaseSkuStockLockReq
 	ReleaseSkuStockLockResp                    = pmsclient.ReleaseSkuStockLockResp

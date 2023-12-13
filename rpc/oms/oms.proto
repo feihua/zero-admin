@@ -5,18 +5,19 @@ package omsclient;
 option go_package = "./omsclient";
 
 message OrderAddReq {
+  repeated int64  CartItemIds = 1;
   int64       MemberId = 2;
   int64       CouponId = 3;
   string      OrderSn = 4;
   string   CreateTime = 5;
   string      MemberUsername = 6;
-  double     TotalAmount = 7;
-  double     PayAmount = 8;
-  double     FreightAmount = 9;
-  double     PromotionAmount = 10;
-  double     IntegrationAmount = 11;
-  double     CouponAmount = 12;
-  double     DiscountAmount = 13;
+  float     TotalAmount = 7;
+  float     PayAmount = 8;
+  float     FreightAmount = 9;
+  float     PromotionAmount = 10;
+  float     IntegrationAmount = 11;
+  float     CouponAmount = 12;
+  float     DiscountAmount = 13;
   int64       PayType = 14;
   int64       SourceType = 15;
   int64       Status = 16;
@@ -48,6 +49,7 @@ message OrderAddReq {
   string   ReceiveTime = 42;
   string   CommentTime = 43;
   string   ModifyTime = 44;
+  repeated OrderItemListData orderItemList = 45;
 }
 
 message OrderAddResp {
