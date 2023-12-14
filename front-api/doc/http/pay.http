@@ -1,0 +1,23 @@
+### app会员登录
+POST {{host}}/api/member/login
+Content-Type: application/json
+
+{
+  "mobile": "18613030352",
+  "password": "123456"
+}
+> {% client.global.set("token", response.body.data.token); %}
+
+###预下单支付
+POST {{host}}/api/pay/orderPay
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "orderId": 29,
+  "channel": 1,
+  "payType": 1,
+  "price": 2999.00,
+  "remark": "测试"
+}
+

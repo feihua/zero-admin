@@ -42,7 +42,7 @@ SmsRpc:
     Key: sms.rpc
   NonBlock: true
 
-#营销
+#支付
 PayRpc:
   Etcd:
     Hosts:

@@ -1278,3 +1278,26 @@ type DeleteAttentionResp struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
 }
+
+type OrderPayReq struct {
+	OrderId int64  `json:"orderId"`
+	Channel int64  `json:"channel"`
+	PayType int64  `json:"payType"`
+	Remark  string `json:"remark,optional"`
+}
+
+type OrderPayResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    string `json:"data"`
+}
+
+type OrderPayQueryReq struct {
+	OrderId int64 `json:"orderId"`
+}
+
+type OrderPayQueryResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    string `json:"data"`
+}

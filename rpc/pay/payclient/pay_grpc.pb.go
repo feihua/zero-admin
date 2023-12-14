@@ -18,122 +18,126 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// PayServiceClient is the client API for PayService service.
+// OrderPayServiceClient is the client API for OrderPayService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PayServiceClient interface {
-	Pay(ctx context.Context, in *PayReq, opts ...grpc.CallOption) (*PayResp, error)
-	PayQuery(ctx context.Context, in *PayQueryResp, opts ...grpc.CallOption) (*PayQueryReq, error)
+type OrderPayServiceClient interface {
+	//预下单,返回信息给app唤起客户端进行支付
+	OrderPay(ctx context.Context, in *OrderPayReq, opts ...grpc.CallOption) (*OrderPayResp, error)
+	//订单状态查询
+	OrderPayQuery(ctx context.Context, in *OrderPayQueryReq, opts ...grpc.CallOption) (*OrderPayQueryResp, error)
 }
 
-type payServiceClient struct {
+type orderPayServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPayServiceClient(cc grpc.ClientConnInterface) PayServiceClient {
-	return &payServiceClient{cc}
+func NewOrderPayServiceClient(cc grpc.ClientConnInterface) OrderPayServiceClient {
+	return &orderPayServiceClient{cc}
 }
 
-func (c *payServiceClient) Pay(ctx context.Context, in *PayReq, opts ...grpc.CallOption) (*PayResp, error) {
-	out := new(PayResp)
-	err := c.cc.Invoke(ctx, "/payclient.PayService/Pay", in, out, opts...)
+func (c *orderPayServiceClient) OrderPay(ctx context.Context, in *OrderPayReq, opts ...grpc.CallOption) (*OrderPayResp, error) {
+	out := new(OrderPayResp)
+	err := c.cc.Invoke(ctx, "/payclient.OrderPayService/OrderPay", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *payServiceClient) PayQuery(ctx context.Context, in *PayQueryResp, opts ...grpc.CallOption) (*PayQueryReq, error) {
-	out := new(PayQueryReq)
-	err := c.cc.Invoke(ctx, "/payclient.PayService/PayQuery", in, out, opts...)
+func (c *orderPayServiceClient) OrderPayQuery(ctx context.Context, in *OrderPayQueryReq, opts ...grpc.CallOption) (*OrderPayQueryResp, error) {
+	out := new(OrderPayQueryResp)
+	err := c.cc.Invoke(ctx, "/payclient.OrderPayService/OrderPayQuery", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PayServiceServer is the server API for PayService service.
-// All implementations must embed UnimplementedPayServiceServer
+// OrderPayServiceServer is the server API for OrderPayService service.
+// All implementations must embed UnimplementedOrderPayServiceServer
 // for forward compatibility
-type PayServiceServer interface {
-	Pay(context.Context, *PayReq) (*PayResp, error)
-	PayQuery(context.Context, *PayQueryResp) (*PayQueryReq, error)
-	mustEmbedUnimplementedPayServiceServer()
+type OrderPayServiceServer interface {
+	//预下单,返回信息给app唤起客户端进行支付
+	OrderPay(context.Context, *OrderPayReq) (*OrderPayResp, error)
+	//订单状态查询
+	OrderPayQuery(context.Context, *OrderPayQueryReq) (*OrderPayQueryResp, error)
+	mustEmbedUnimplementedOrderPayServiceServer()
 }
 
-// UnimplementedPayServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedPayServiceServer struct {
+// UnimplementedOrderPayServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderPayServiceServer struct {
 }
 
-func (UnimplementedPayServiceServer) Pay(context.Context, *PayReq) (*PayResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Pay not implemented")
+func (UnimplementedOrderPayServiceServer) OrderPay(context.Context, *OrderPayReq) (*OrderPayResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderPay not implemented")
 }
-func (UnimplementedPayServiceServer) PayQuery(context.Context, *PayQueryResp) (*PayQueryReq, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PayQuery not implemented")
+func (UnimplementedOrderPayServiceServer) OrderPayQuery(context.Context, *OrderPayQueryReq) (*OrderPayQueryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderPayQuery not implemented")
 }
-func (UnimplementedPayServiceServer) mustEmbedUnimplementedPayServiceServer() {}
+func (UnimplementedOrderPayServiceServer) mustEmbedUnimplementedOrderPayServiceServer() {}
 
-// UnsafePayServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PayServiceServer will
+// UnsafeOrderPayServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderPayServiceServer will
 // result in compilation errors.
-type UnsafePayServiceServer interface {
-	mustEmbedUnimplementedPayServiceServer()
+type UnsafeOrderPayServiceServer interface {
+	mustEmbedUnimplementedOrderPayServiceServer()
 }
 
-func RegisterPayServiceServer(s grpc.ServiceRegistrar, srv PayServiceServer) {
-	s.RegisterService(&PayService_ServiceDesc, srv)
+func RegisterOrderPayServiceServer(s grpc.ServiceRegistrar, srv OrderPayServiceServer) {
+	s.RegisterService(&OrderPayService_ServiceDesc, srv)
 }
 
-func _PayService_Pay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PayReq)
+func _OrderPayService_OrderPay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderPayReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PayServiceServer).Pay(ctx, in)
+		return srv.(OrderPayServiceServer).OrderPay(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/payclient.PayService/Pay",
+		FullMethod: "/payclient.OrderPayService/OrderPay",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PayServiceServer).Pay(ctx, req.(*PayReq))
+		return srv.(OrderPayServiceServer).OrderPay(ctx, req.(*OrderPayReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PayService_PayQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PayQueryResp)
+func _OrderPayService_OrderPayQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderPayQueryReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PayServiceServer).PayQuery(ctx, in)
+		return srv.(OrderPayServiceServer).OrderPayQuery(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/payclient.PayService/PayQuery",
+		FullMethod: "/payclient.OrderPayService/OrderPayQuery",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PayServiceServer).PayQuery(ctx, req.(*PayQueryResp))
+		return srv.(OrderPayServiceServer).OrderPayQuery(ctx, req.(*OrderPayQueryReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// PayService_ServiceDesc is the grpc.ServiceDesc for PayService service.
+// OrderPayService_ServiceDesc is the grpc.ServiceDesc for OrderPayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PayService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "payclient.PayService",
-	HandlerType: (*PayServiceServer)(nil),
+var OrderPayService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "payclient.OrderPayService",
+	HandlerType: (*OrderPayServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Pay",
-			Handler:    _PayService_Pay_Handler,
+			MethodName: "OrderPay",
+			Handler:    _OrderPayService_OrderPay_Handler,
 		},
 		{
-			MethodName: "PayQuery",
-			Handler:    _PayService_PayQuery_Handler,
+			MethodName: "OrderPayQuery",
+			Handler:    _OrderPayService_OrderPayQuery_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

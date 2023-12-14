@@ -15,6 +15,7 @@ import (
 	"zero-admin/rpc/oms/client/orderreturnreasonservice"
 	"zero-admin/rpc/oms/client/orderservice"
 	"zero-admin/rpc/oms/client/ordersettingservice"
+	"zero-admin/rpc/pay/client/orderpayservice"
 	"zero-admin/rpc/pms/client/albumpicservice"
 	"zero-admin/rpc/pms/client/albumservice"
 	"zero-admin/rpc/pms/client/brandservice"
@@ -132,6 +133,8 @@ type ServiceContext struct {
 	OrderReturnReasonService   orderreturnreasonservice.OrderReturnReasonService
 	OrderService               orderservice.OrderService
 	OrderSettingService        ordersettingservice.OrderSettingService
+	//支付相关
+	OrderPayService orderpayservice.OrderPayService
 	//营销相关
 	CouponHistoryService                 couponhistoryservice.CouponHistoryService
 	CouponProductCategoryRelationService couponproductcategoryrelationservice.CouponProductCategoryRelationService
@@ -158,6 +161,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	sysClient := zrpc.MustNewClient(c.SysRpc)
 	pmsClient := zrpc.MustNewClient(c.PmsRpc)
 	omsClient := zrpc.MustNewClient(c.OmsRpc)
+	payClient := zrpc.MustNewClient(c.PayRpc)
 	smsClient := zrpc.MustNewClient(c.SmsRpc)
 	cmsClient := zrpc.MustNewClient(c.CmsRpc)
 	return &ServiceContext{
@@ -217,6 +221,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		OrderService:               orderservice.NewOrderService(omsClient),
 		OrderSettingService:        ordersettingservice.NewOrderSettingService(omsClient),
 
+		OrderPayService:                      orderpayservice.NewOrderPayService(payClient),
 		CouponHistoryService:                 couponhistoryservice.NewCouponHistoryService(smsClient),
 		CouponProductCategoryRelationService: couponproductcategoryrelationservice.NewCouponProductCategoryRelationService(smsClient),
 		CouponProductRelationService:         couponproductrelationservice.NewCouponProductRelationService(smsClient),

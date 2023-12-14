@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/jinzhu/copier v0.3.5
+	github.com/smartwalle/alipay/v3 v3.2.20
 	github.com/zeromicro/go-zero v1.5.1
 	google.golang.org/grpc v1.54.0
 	google.golang.org/protobuf v1.30.0
@@ -54,6 +55,9 @@ require (
 	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
+	github.com/smartwalle/ncrypto v1.0.4 // indirect
+	github.com/smartwalle/ngx v1.0.9 // indirect
+	github.com/smartwalle/nsign v1.0.9 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.7 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.7 // indirect
