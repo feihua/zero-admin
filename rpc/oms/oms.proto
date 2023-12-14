@@ -199,8 +199,14 @@ message QueryOrderListReq {
   int64 current = 3;
   int64 pageSize = 4;
 }
+message UpdateOrderStatusByOutTradeNoReq {
+  string OutTradeNo = 1;
+  int64 OrderStatus = 2;
+}
 
-
+message UpdateOrderStatusByOutTradeNoResp {
+  string pong = 1;
+}
 
 service OrderService {
   rpc OrderAdd(OrderAddReq) returns(OrderAddResp);
@@ -214,6 +220,8 @@ service OrderService {
   rpc OrderDeleteById(OrderDeleteByIdReq) returns(OrderDeleteResp);
   //app端查询会员的订单列表信息
   rpc QueryOrderList(QueryOrderListReq) returns(OrderListResp);
+  //更新订单状态
+  rpc UpdateOrderStatusByOutTradeNo(UpdateOrderStatusByOutTradeNoReq) returns(UpdateOrderStatusByOutTradeNoResp);
 
 }
 

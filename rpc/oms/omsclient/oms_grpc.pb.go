@@ -33,6 +33,8 @@ type OrderServiceClient interface {
 	OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
 	//app端查询会员的订单列表信息
 	QueryOrderList(ctx context.Context, in *QueryOrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
+	//第三方支付回调用的时候,更新订单状态(目前对接的是支付宝支付)
+	UpdateOrderStatusByOutTradeNo(ctx context.Context, in *UpdateOrderStatusByOutTradeNoReq, opts ...grpc.CallOption) (*UpdateOrderStatusByOutTradeNoResp, error)
 }
 
 type orderServiceClient struct {
@@ -133,6 +135,15 @@ func (c *orderServiceClient) QueryOrderList(ctx context.Context, in *QueryOrderL
 	return out, nil
 }
 
+func (c *orderServiceClient) UpdateOrderStatusByOutTradeNo(ctx context.Context, in *UpdateOrderStatusByOutTradeNoReq, opts ...grpc.CallOption) (*UpdateOrderStatusByOutTradeNoResp, error) {
+	out := new(UpdateOrderStatusByOutTradeNoResp)
+	err := c.cc.Invoke(ctx, "/omsclient.OrderService/UpdateOrderStatusByOutTradeNo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
@@ -148,6 +159,8 @@ type OrderServiceServer interface {
 	OrderDeleteById(context.Context, *OrderDeleteByIdReq) (*OrderDeleteResp, error)
 	//app端查询会员的订单列表信息
 	QueryOrderList(context.Context, *QueryOrderListReq) (*OrderListResp, error)
+	//第三方支付回调用的时候,更新订单状态(目前对接的是支付宝支付)
+	UpdateOrderStatusByOutTradeNo(context.Context, *UpdateOrderStatusByOutTradeNoReq) (*UpdateOrderStatusByOutTradeNoResp, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -184,6 +197,9 @@ func (UnimplementedOrderServiceServer) OrderDeleteById(context.Context, *OrderDe
 }
 func (UnimplementedOrderServiceServer) QueryOrderList(context.Context, *QueryOrderListReq) (*OrderListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderList not implemented")
+}
+func (UnimplementedOrderServiceServer) UpdateOrderStatusByOutTradeNo(context.Context, *UpdateOrderStatusByOutTradeNoReq) (*UpdateOrderStatusByOutTradeNoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderStatusByOutTradeNo not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -378,6 +394,24 @@ func _OrderService_QueryOrderList_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_UpdateOrderStatusByOutTradeNo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrderStatusByOutTradeNoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).UpdateOrderStatusByOutTradeNo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omsclient.OrderService/UpdateOrderStatusByOutTradeNo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).UpdateOrderStatusByOutTradeNo(ctx, req.(*UpdateOrderStatusByOutTradeNoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -424,6 +458,10 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryOrderList",
 			Handler:    _OrderService_QueryOrderList_Handler,
+		},
+		{
+			MethodName: "UpdateOrderStatusByOutTradeNo",
+			Handler:    _OrderService_UpdateOrderStatusByOutTradeNo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

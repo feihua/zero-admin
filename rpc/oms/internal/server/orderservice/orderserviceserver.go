@@ -72,3 +72,9 @@ func (s *OrderServiceServer) QueryOrderList(ctx context.Context, in *omsclient.Q
 	l := orderservicelogic.NewQueryOrderListLogic(ctx, s.svcCtx)
 	return l.QueryOrderList(in)
 }
+
+// 第三方支付回调用的时候,更新订单状态(目前对接的是支付宝支付)
+func (s *OrderServiceServer) UpdateOrderStatusByOutTradeNo(ctx context.Context, in *omsclient.UpdateOrderStatusByOutTradeNoReq) (*omsclient.UpdateOrderStatusByOutTradeNoResp, error) {
+	l := orderservicelogic.NewUpdateOrderStatusByOutTradeNoLogic(ctx, s.svcCtx)
+	return l.UpdateOrderStatusByOutTradeNo(in)
+}
