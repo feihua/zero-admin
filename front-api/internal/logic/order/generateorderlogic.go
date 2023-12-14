@@ -53,6 +53,9 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	memberInfo, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
 	//1.获取购物车及优惠信息
 	cartPromotionItemList := cart.QueryCartListPromotion(req.CartIds, l.ctx, l.svcCtx)
+	if len(cartPromotionItemList) == 0 {
+		return result(1, "购物车还没有商品,请先添加商品到购物车!"), nil
+	}
 	//2.生成下单商品信息
 	var flag = false //用于判断库存
 	var totalAmount float32 = 0
@@ -282,7 +285,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		OrderItemList:         orderItemList,                            //
 	}
 	//9.转化为订单信息并插入数据库(插入order表和order_item表)
-	_, err = l.svcCtx.OrderService.OrderAdd(l.ctx, orderInfo)
+	orderAddResp, err := l.svcCtx.OrderService.OrderAdd(l.ctx, orderInfo)
 	if err != nil {
 		return result(1, "提交订单异常"), nil
 	}
@@ -311,8 +314,25 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		Code:    0,
 		Message: "下单成功",
 		Data: types.GenerateOrderData{
-			OrderInfo:     orderInfo,
-			OrderItemList: cartItemIds,
+			Id:                orderAddResp.Id,
+			MemberId:          memberId,
+			MemberUsername:    memberInfo.Username,
+			TotalAmount:       orderInfo.TotalAmount,
+			PayAmount:         orderInfo.PayAmount,
+			FreightAmount:     orderInfo.FreightAmount,
+			PromotionAmount:   orderInfo.PromotionAmount,
+			IntegrationAmount: orderInfo.IntegrationAmount,
+			CouponAmount:      orderInfo.CouponAmount,
+			DiscountAmount:    orderInfo.DiscountAmount,
+			PayType:           orderInfo.PayType,
+			SourceType:        orderInfo.SourceType,
+			Status:            orderInfo.Status,
+			OrderType:         orderInfo.OrderType,
+			Integration:       orderInfo.Integration,
+			Growth:            orderInfo.Growth,
+			PromotionInfo:     orderInfo.PromotionInfo,
+			Note:              orderInfo.Note,
+			UseIntegration:    orderInfo.UseIntegration,
 		},
 	}, nil
 }

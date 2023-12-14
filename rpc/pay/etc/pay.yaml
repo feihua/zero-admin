@@ -2,7 +2,7 @@ Name: pay.rpc
 ListenOn: 127.0.0.1:8085
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+    - 127.0.0.1:2379
   Key: pay.rpc
 
 Mysql:

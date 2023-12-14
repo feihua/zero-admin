@@ -25,17 +25,37 @@ Authorization: Bearer {{token}}
 //  "ids": [27]
 //}
 
+### 添加商品进购物车
+POST {{host}}/api/cart/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "productId": 27,
+  "productSkuId": 163,
+  "quantity": 3,
+  "price": 2999.00,
+  "productPic": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20221104/xiaomi_12_pro_01.jpg",
+  "productName": "小米12 Pro 天玑版 天玑9000+处理器 5000万疾速影像 2K超视感屏 120Hz高刷 67W快充",
+  "productSubTitle": "天玑9000+处理器、5160mAh大电量、2KAmoled超视感屏【点击购买小米11Ultra，戳】 ",
+  "productSkuCode": "202211040040001",
+  "productCategoryId": 19,
+  "productBrand": "小米",
+  "productSn": "100027789721",
+  "productAttr": "[{\"key\":\"颜色\",\"value\":\"黑色\"},{\"key\":\"容量\",\"value\":\"128G\"}]"
+}
+
 ### 根据购物车信息生成订单
 POST {{host}}/api/order/generateOrder
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "memberReceiveAddressId": 0,
+  "memberReceiveAddressId": 1,
   "couponId": 0,
   "useIntegration": 0,
   "payType": 0,
   "cartIds": [
-    "Long"
+
   ]
 }

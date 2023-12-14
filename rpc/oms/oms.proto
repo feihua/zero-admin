@@ -50,10 +50,11 @@ message OrderAddReq {
   string   CommentTime = 43;
   string   ModifyTime = 44;
   repeated OrderItemListData orderItemList = 45;
+  int64       OrderId = 46;//订单创建后,返回
 }
 
 message OrderAddResp {
-  string pong = 1;
+  int64 Id = 1;//订单创建成功后,返回订单id
 }
 
 message OrderListReq {
