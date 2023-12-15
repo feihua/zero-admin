@@ -1,10 +1,10 @@
-package pay
+package order
 
 import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/pay"
+	"zero-admin/front-api/internal/logic/order"
 	"zero-admin/front-api/internal/svc"
 	"zero-admin/front-api/internal/types"
 )
@@ -17,7 +17,7 @@ func OrderPayHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := pay.NewOrderPayLogic(r.Context(), svcCtx)
+		l := order.NewOrderPayLogic(r.Context(), svcCtx)
 		resp, err := l.OrderPay(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)

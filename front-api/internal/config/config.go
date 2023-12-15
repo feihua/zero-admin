@@ -33,7 +33,7 @@ type Config struct {
 		AppId        string
 		PrivateKey   string
 		ServerDomain string
+		NotifyURL    string
 		IsProduction bool
-
 	}
 }

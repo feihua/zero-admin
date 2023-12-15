@@ -1281,8 +1281,6 @@ type DeleteAttentionResp struct {
 
 type OrderPayReq struct {
 	OrderId int64  `json:"orderId"`
-	Channel int64  `json:"channel"`
-	PayType int64  `json:"payType"`
 	Remark  string `json:"remark,optional"`
 }
 

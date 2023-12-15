@@ -15,7 +15,6 @@ import (
 	membercoupon "zero-admin/front-api/internal/handler/member/coupon"
 	membermember "zero-admin/front-api/internal/handler/member/member"
 	order "zero-admin/front-api/internal/handler/order"
-	pay "zero-admin/front-api/internal/handler/pay"
 	product "zero-admin/front-api/internal/handler/product"
 	"zero-admin/front-api/internal/svc"
 
@@ -374,15 +373,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/orderPay",
-				Handler: pay.OrderPayHandler(serverCtx),
+				Handler: order.OrderPayHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
 				Path:    "/orderPayQuery/:orderId",
-				Handler: pay.OrderPayQueryHandler(serverCtx),
+				Handler: order.OrderPayQueryHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/pay"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/notify",
+				Handler: order.NotifyHandler(serverCtx),
+			},
+		},
 		rest.WithPrefix("/api/pay"),
 	)
 }

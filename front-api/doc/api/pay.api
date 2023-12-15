@@ -6,8 +6,6 @@ info(
 
 type OrderPayReq {
     OrderId int64 `json:"orderId"`
-    Channel int64 `json:"channel"`
-    PayType int64 `json:"payType"`
     Remark string `json:"remark,optional"`
 }
 
@@ -30,7 +28,7 @@ type OrderPayQueryResp {
 
 @server(
     jwt: Auth
-    group: pay
+    group: order
     prefix: /api/pay
 )
 service front-api {
@@ -42,4 +40,15 @@ service front-api {
     //查询订单支付状态
     @handler OrderPayQuery
     get /orderPayQuery/:orderId (OrderPayQueryReq) returns (OrderPayQueryResp)
+}
+
+@server(
+    group: order
+    prefix: /api/pay
+)
+service front-api {
+
+    //支付回调用通知
+    @handler Notify
+    post /notify
 }
