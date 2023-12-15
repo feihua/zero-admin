@@ -27,4 +27,13 @@ type Config struct {
 		AccessSecret string
 		AccessExpire int64
 	}
+
+	//支付宝支付配置
+	Alipay struct {
+		AppId        string
+		PrivateKey   string
+		ServerDomain string
+		IsProduction bool
+
+	}
 }
