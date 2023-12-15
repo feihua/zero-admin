@@ -1,12 +1,12 @@
-#### 项目前端是基于Ant Design Pro来创建的，后端是基于go-zero来创建的一个前后端分离的管理系统
+# 项目介绍
+zero-admin项目是一套电商系统，包括前台商城系统及后台管理系统，基于go-zero实现，采用Docker容器化部署。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、权限管理、设置等模块。
+(参考[mall的一个实现](https://github.com/macrozheng/mall))
+#
+[zero-admin-ui是后台的pc管理端](https://github.com/feihua/zero-admin-ui)是一个基于react实现的管理后台
 
-[如果喜欢Ant Design Pro前端版本的，可以点击查看](https://github.com/feihua/go-zero-admin-ui)
-
-[如果喜欢Element Admin UI前端版本的，可以点击查看](https://github.com/feihua/zero-vue-admin)
+[flutter_mall是zero-admin的app端](https://github.com/feihua/flutter_mall)是一个Flutter的电商实战项目，包括首页、列表页、详细页、购物车页、会员中心和支付(支付对接的是支付宝)
 
 # 1.项目预览
-
-**预览地址**http://139.159.180.129:81/mall <span  style="color: red;"> 账号：admin 密码: 123456</span>
 
 ## 1.1用户
 

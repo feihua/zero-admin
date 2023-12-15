@@ -50,8 +50,9 @@ func (l *OrderPayLogic) OrderPay(req *types.OrderPayReq) (resp *types.OrderPayRe
 	if err != nil {
 		return orderPayResp(1, message, "")
 	}
+
 	//3.返回唤起客户端的信息
-	return orderPayResp(0, "预下单成功", "message")
+	return orderPayResp(0, "预下单成功", message)
 
 }
 

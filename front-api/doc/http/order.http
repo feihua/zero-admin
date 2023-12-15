@@ -61,14 +61,11 @@ Authorization: Bearer {{token}}
 }
 
 ###预下单支付
-POST {{host}}/api/order/orderPay
+POST {{host}}/api/pay/orderPay
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
   "orderId": 29,
-  "channel": 1,
-  "payType": 1,
-  "price": 2999.00,
   "remark": "测试"
 }
