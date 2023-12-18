@@ -3,6 +3,7 @@ package menuservicelogic
 import (
 	"context"
 	"database/sql"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/model/sysmodel"
 	"zero-admin/rpc/sys/sysclient"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MenuAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:44
+*/
 type MenuAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +31,7 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuAddLo
 	}
 }
 
+// MenuAdd 新增菜单
 func (l *MenuAddLogic) MenuAdd(in *sysclient.MenuAddReq) (*sysclient.MenuAddResp, error) {
 	_, err := l.svcCtx.MenuModel.Insert(l.ctx, &sysmodel.SysMenu{
 		Name:          in.Name,
@@ -42,9 +49,9 @@ func (l *MenuAddLogic) MenuAdd(in *sysclient.MenuAddReq) (*sysclient.MenuAddResp
 		VueRedirect:   sql.NullString{String: in.VueRedirect, Valid: true},
 		BackgroundUrl: in.BackgroundUrl,
 	})
-	//count, _ := l.svcCtx.UserModel.Count(l.ctx)
 
 	if err != nil {
+		logc.Errorf(l.ctx, "新增菜单信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 

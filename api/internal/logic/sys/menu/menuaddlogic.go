@@ -1,8 +1,8 @@
-package logic
+package menu
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sys/sysclient"
 
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MenuAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:24
+*/
 type MenuAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,8 +31,9 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuAddLog
 	}
 }
 
+// MenuAdd 新增菜单
 func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error) {
-	_, err := l.svcCtx.MenuService.MenuAdd(l.ctx, &sysclient.MenuAddReq{
+	menuAddReq := sysclient.MenuAddReq{
 		Name:          req.Name,
 		ParentId:      req.ParentId,
 		Url:           req.Url,
@@ -42,11 +48,9 @@ func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error)
 		VueRedirect:   req.VueRedirect,
 		DelFlag:       req.DelFlag,
 		BackgroundUrl: req.BackgroundUrl,
-	})
-
-	if err != nil {
-		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("添加菜单信息失败,参数:%s,异常:%s", reqStr, err.Error())
+	}
+	if _, err := l.svcCtx.MenuService.MenuAdd(l.ctx, &menuAddReq); err != nil {
+		logc.Errorf(l.ctx, "添加菜单信息失败,参数:%+v,异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("添加菜单失败")
 	}
 

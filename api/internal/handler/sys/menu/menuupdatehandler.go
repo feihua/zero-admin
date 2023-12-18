@@ -1,9 +1,9 @@
-package handler
+package menu
 
 import (
 	"net/http"
-
 	"zero-admin/api/internal/logic/sys/menu"
+
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
 
@@ -18,7 +18,7 @@ func MenuUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewMenuUpdateLogic(r.Context(), ctx)
+		l := menu.NewMenuUpdateLogic(r.Context(), ctx)
 		resp, err := l.MenuUpdate(req)
 		if err != nil {
 			httpx.Error(w, err)

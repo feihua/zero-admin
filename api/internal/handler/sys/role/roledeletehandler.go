@@ -1,9 +1,9 @@
-package handler
+package role
 
 import (
 	"net/http"
-
 	"zero-admin/api/internal/logic/sys/role"
+
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
 
@@ -18,7 +18,7 @@ func RoleDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewRoleDeleteLogic(r.Context(), ctx)
+		l := role.NewRoleDeleteLogic(r.Context(), ctx)
 		resp, err := l.RoleDelete(req)
 		if err != nil {
 			httpx.Error(w, err)

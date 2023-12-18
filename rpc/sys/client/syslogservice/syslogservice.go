@@ -94,8 +94,6 @@ type (
 	UpdateConfigRoleResp  = sysclient.UpdateConfigRoleResp
 	UpdateMenuRoleReq     = sysclient.UpdateMenuRoleReq
 	UpdateMenuRoleResp    = sysclient.UpdateMenuRoleResp
-	UpdateRoleRoleReq     = sysclient.UpdateRoleRoleReq
-	UpdateRoleRoleResp    = sysclient.UpdateRoleRoleResp
 	UserAddReq            = sysclient.UserAddReq
 	UserAddResp           = sysclient.UserAddResp
 	UserDeleteReq         = sysclient.UserDeleteReq

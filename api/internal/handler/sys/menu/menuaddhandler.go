@@ -1,4 +1,4 @@
-package handler
+package menu
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func MenuAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewMenuAddLogic(r.Context(), ctx)
+		l := menu.NewMenuAddLogic(r.Context(), ctx)
 		resp, err := l.MenuAdd(req)
 		if err != nil {
 			httpx.Error(w, err)

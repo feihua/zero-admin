@@ -2,7 +2,6 @@ package user
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
@@ -33,7 +32,7 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserAddLog
 
 // UserAdd 新增用户
 func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error) {
-	_, err := l.svcCtx.UserService.UserAdd(l.ctx, &sysclient.UserAddReq{
+	userAddReq := sysclient.UserAddReq{
 		Email:    req.Email,
 		Mobile:   req.Mobile,
 		Name:     req.Name,
@@ -43,11 +42,11 @@ func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error)
 		RoleId:   req.RoleId,
 		JobId:    req.JobId,
 		Status:   req.Status,
-	})
+	}
+	_, err := l.svcCtx.UserService.UserAdd(l.ctx, &userAddReq)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(req)
-		logc.Errorf(l.ctx, "添加用户信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "添加用户信息失败,参数:%+v,异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("添加用户失败")
 	}
 

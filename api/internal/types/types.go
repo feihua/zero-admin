@@ -255,14 +255,6 @@ type DeleteRoleResp struct {
 	Message string `json:"message"`
 }
 
-type RoleMenuIdsReq struct {
-}
-
-type RoleMenuIdsResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateRoleMenuReq struct {
 	RoleId  int64   `json:"roleId"`
 	MenuIds []int64 `json:"menuIds"`

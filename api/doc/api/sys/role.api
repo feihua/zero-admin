@@ -59,12 +59,7 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	RoleMenuIdsReq {
-	}
-	RoleMenuIdsResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+
 	UpdateRoleMenuReq {
 		RoleId  int64   `json:"roleId"`
 		MenuIds []int64 `json:"menuIds"`
@@ -100,24 +95,27 @@ type (
 	prefix: /api/sys/role
 )
 service admin-api {
+	//新增角色信息
 	@handler RoleAdd
 	post /add (addRoleReq) returns (addRoleResp)
-	
+
+	//角色列表信息
 	@handler RoleList
 	post /list (ListRoleReq) returns (ListRoleResp)
-	
+
+	//更新角色信息
 	@handler RoleUpdate
 	post /update (UpdateRoleReq) returns (UpdateRoleResp)
-	
+
+	//删除角色信息
 	@handler RoleDelete
 	post /delete (DeleteRoleReq) returns (DeleteRoleResp)
-	
-	@handler RoleMenuIds
-	post /roleMenuIds (RoleMenuIdsReq) returns (RoleMenuIdsResp)
-	
+
+	//查询角色与菜单的关联
 	@handler QueryMenuByRoleId
 	post /queryMenuByRoleId (RoleMenuReq) returns (RoleMenuResp)
-	
+
+	//更新角色与菜单的关联
 	@handler UpdateRoleMenu
 	post /updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
 }

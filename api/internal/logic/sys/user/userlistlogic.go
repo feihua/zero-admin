@@ -2,7 +2,6 @@ package user
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/api/internal/common/errorx"
@@ -40,8 +39,7 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 	resp, err := l.svcCtx.UserService.UserList(l.ctx, &userListReq)
 
 	if err != nil {
-		data, _ := json.Marshal(req)
-		logc.Errorf(l.ctx, "参数: %s,查询用户列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %+v,查询用户列表异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("查询失败")
 	}
 

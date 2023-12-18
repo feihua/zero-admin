@@ -1,8 +1,10 @@
-package logic
+package role
 
 import (
 	"context"
+	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
+	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sys/sysclient"
 
 	"zero-admin/api/internal/svc"
@@ -11,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// QueryMenuByRoleIdLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:32
+*/
 type QueryMenuByRoleIdLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -29,10 +36,15 @@ func NewQueryMenuByRoleIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(req types.RoleMenuReq) (*types.RoleMenuResp, error) {
 
 	//查询所有菜单
-	resp, _ := l.svcCtx.MenuService.MenuList(l.ctx, &sysclient.MenuListReq{
+	resp, err := l.svcCtx.MenuService.MenuList(l.ctx, &sysclient.MenuListReq{
 		Name: "",
 		Url:  "",
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询菜单信息失败,参数:%+v,异常:%s", req, err.Error())
+		return nil, errorx.NewDefaultError("查询菜单信息失败")
+	}
 
 	var list []*types.ListMenuData
 	var listIds []int64
@@ -51,9 +63,13 @@ func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(req types.RoleMenuReq) (*type
 
 	//如果角色不是admin则根据roleId查询菜单
 	if req.Id != 1 {
-		QueryMenu, _ := l.svcCtx.RoleService.QueryMenuByRoleId(l.ctx, &sysclient.QueryMenuByRoleIdReq{
+		QueryMenu, err1 := l.svcCtx.RoleService.QueryMenuByRoleId(l.ctx, &sysclient.QueryMenuByRoleIdReq{
 			Id: req.Id,
 		})
+		if err1 != nil {
+			logc.Errorf(l.ctx, "根据roleId查询菜单失败,参数:%+v,异常:%s", req, err1.Error())
+			return nil, errorx.NewDefaultError("根据roleId查询菜单失败")
+		}
 		listIds = QueryMenu.Ids
 	}
 

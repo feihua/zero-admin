@@ -1,9 +1,9 @@
-package handler
+package role
 
 import (
 	"net/http"
-
 	"zero-admin/api/internal/logic/sys/role"
+
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
 
@@ -18,7 +18,7 @@ func QueryMenuByRoleIdHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewQueryMenuByRoleIdLogic(r.Context(), ctx)
+		l := role.NewQueryMenuByRoleIdLogic(r.Context(), ctx)
 		resp, err := l.QueryMenuByRoleId(req)
 		if err != nil {
 			httpx.Error(w, err)

@@ -1,8 +1,8 @@
-package logic
+package menu
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MenuListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:27
+*/
 type MenuListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuListL
 	}
 }
 
+// MenuList 菜单列表
 func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, error) {
 	resp, err := l.svcCtx.MenuService.MenuList(l.ctx, &sysclient.MenuListReq{
 		Name: req.Name,
@@ -33,15 +39,14 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 	})
 
 	if err != nil {
-		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询菜单列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %+v,查询菜单列表异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("查询菜单失败")
 	}
 
 	var list []*types.ListtMenuData
 
 	for _, menu := range resp.List {
-		list = append(list, &types.ListtMenuData{
+		menuItem := &types.ListtMenuData{
 			Id:             menu.Id,
 			Key:            strconv.FormatInt(menu.Id, 10),
 			Name:           menu.Name,
@@ -62,7 +67,9 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 			VueIcon:        menu.VueIcon,
 			VueRedirect:    menu.VueRedirect,
 			BackgroundUrl:  menu.BackgroundUrl,
-		})
+		}
+
+		list = append(list, menuItem)
 	}
 
 	return &types.ListMenuResp{

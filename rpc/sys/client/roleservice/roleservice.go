@@ -94,8 +94,6 @@ type (
 	UpdateConfigRoleResp  = sysclient.UpdateConfigRoleResp
 	UpdateMenuRoleReq     = sysclient.UpdateMenuRoleReq
 	UpdateMenuRoleResp    = sysclient.UpdateMenuRoleResp
-	UpdateRoleRoleReq     = sysclient.UpdateRoleRoleReq
-	UpdateRoleRoleResp    = sysclient.UpdateRoleRoleResp
 	UserAddReq            = sysclient.UserAddReq
 	UserAddResp           = sysclient.UserAddResp
 	UserDeleteReq         = sysclient.UserDeleteReq
@@ -113,7 +111,6 @@ type (
 		RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
 		RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error)
 		RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error)
-		UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, opts ...grpc.CallOption) (*UpdateRoleRoleResp, error)
 		QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error)
 		UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
 	}
@@ -147,11 +144,6 @@ func (m *defaultRoleService) RoleUpdate(ctx context.Context, in *RoleUpdateReq, 
 func (m *defaultRoleService) RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error) {
 	client := sysclient.NewRoleServiceClient(m.cli.Conn())
 	return client.RoleDelete(ctx, in, opts...)
-}
-
-func (m *defaultRoleService) UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, opts ...grpc.CallOption) (*UpdateRoleRoleResp, error) {
-	client := sysclient.NewRoleServiceClient(m.cli.Conn())
-	return client.UpdateRoleRole(ctx, in, opts...)
 }
 
 func (m *defaultRoleService) QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error) {

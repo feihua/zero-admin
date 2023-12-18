@@ -1,7 +1,8 @@
-package logic
+package menu
 
 import (
 	"context"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sys/sysclient"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MenuDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:25
+*/
 type MenuDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,13 +31,12 @@ func NewMenuDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuDel
 	}
 }
 
+// MenuDelete 删除菜单
 func (l *MenuDeleteLogic) MenuDelete(req types.DeleteMenuReq) (*types.DeleteMenuResp, error) {
-	_, err := l.svcCtx.MenuService.MenuDelete(l.ctx, &sysclient.MenuDeleteReq{
+	if _, err := l.svcCtx.MenuService.MenuDelete(l.ctx, &sysclient.MenuDeleteReq{
 		Ids: req.Ids,
-	})
-
-	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据menuId: %d,删除菜单异常:%s", req.Ids, err.Error())
+	}); err != nil {
+		logc.Errorf(l.ctx, "根据menuId: %+v,删除菜单异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除菜单失败")
 	}
 

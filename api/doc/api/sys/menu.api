@@ -93,15 +93,20 @@ type (
 	prefix: /api/sys/menu
 )
 service admin-api {
+
+	//新增菜单信息
 	@handler MenuAdd
 	post /add (addMenuReq) returns (addMenuResp)
-	
+
+	//菜单列表信息
 	@handler MenuList
 	post /list (ListMenuReq) returns (ListMenuResp)
-	
+
+	//更新菜单信息
 	@handler MenuUpdate
 	post /update (UpdateMenuReq) returns (UpdateMenuResp)
-	
+
+	//删除菜单信息
 	@handler MenuDelete
 	post /delete (DeleteMenuReq) returns (DeleteMenuResp)
 }

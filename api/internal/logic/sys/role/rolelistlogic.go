@@ -1,8 +1,8 @@
-package logic
+package role
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// RoleListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:39
+*/
 type RoleListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleListL
 	}
 }
 
+// RoleList 角色列表
 func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, error) {
 	resp, err := l.svcCtx.RoleService.RoleList(l.ctx, &sysclient.RoleListReq{
 		Current:  req.Current,
@@ -35,8 +41,7 @@ func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, er
 	})
 
 	if err != nil {
-		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询角色列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %+v,查询角色列表异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("查询角色失败")
 	}
 

@@ -3,6 +3,7 @@ package menuservicelogic
 import (
 	"context"
 	"database/sql"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/model/sysmodel"
 	"zero-admin/rpc/sys/sysclient"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MenuUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:46
+*/
 type MenuUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,9 +31,11 @@ func NewMenuUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuUp
 	}
 }
 
+// MenuUpdate 更新菜单
 func (l *MenuUpdateLogic) MenuUpdate(in *sysclient.MenuUpdateReq) (*sysclient.MenuUpdateResp, error) {
 	menu, err := l.svcCtx.MenuModel.FindOne(l.ctx, in.Id)
 	if err != nil {
+		logc.Errorf(l.ctx, "更新菜单信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
@@ -51,6 +59,7 @@ func (l *MenuUpdateLogic) MenuUpdate(in *sysclient.MenuUpdateReq) (*sysclient.Me
 	})
 
 	if err != nil {
+		logc.Errorf(l.ctx, "更新菜单信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 

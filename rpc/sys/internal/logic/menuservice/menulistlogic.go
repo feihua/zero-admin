@@ -2,8 +2,8 @@ package menuservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/sys/sysclient"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MenuListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:45
+*/
 type MenuListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,13 +30,13 @@ func NewMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuList
 	}
 }
 
+// MenuList 菜单列表
 func (l *MenuListLogic) MenuList(in *sysclient.MenuListReq) (*sysclient.MenuListResp, error) {
 	count, _ := l.svcCtx.MenuModel.Count(l.ctx)
 	all, err := l.svcCtx.MenuModel.FindAll(l.ctx, 1, count)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询菜单列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询菜单列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 	var list []*sysclient.MenuListData
@@ -59,9 +64,7 @@ func (l *MenuListLogic) MenuList(in *sysclient.MenuListReq) (*sysclient.MenuList
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询菜单列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询菜单列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.MenuListResp{
 		Total: count,
 		List:  list,

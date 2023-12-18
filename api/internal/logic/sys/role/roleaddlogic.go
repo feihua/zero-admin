@@ -1,8 +1,8 @@
-package logic
+package role
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sys/sysclient"
 
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// RoleAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:34
+*/
 type RoleAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,17 +31,19 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleAddLog
 	}
 }
 
+// RoleAdd 新增角色
 func (l *RoleAddLogic) RoleAdd(req types.AddRoleReq) (*types.AddRoleResp, error) {
-	_, err := l.svcCtx.RoleService.RoleAdd(l.ctx, &sysclient.RoleAddReq{
+	roleAddReq := sysclient.RoleAddReq{
 		Name:     req.Name,
 		Remark:   req.Remark,
 		CreateBy: l.ctx.Value("userName").(string),
 		Status:   req.Status,
-	})
+	}
+
+	_, err := l.svcCtx.RoleService.RoleAdd(l.ctx, &roleAddReq)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("添加角色信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "添加角色信息失败,参数:%+v,异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("添加角色失败")
 	}
 

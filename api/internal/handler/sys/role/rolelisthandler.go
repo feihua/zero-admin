@@ -1,9 +1,9 @@
-package handler
+package role
 
 import (
 	"net/http"
-
 	"zero-admin/api/internal/logic/sys/role"
+
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
 
@@ -18,7 +18,7 @@ func RoleListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewRoleListLogic(r.Context(), ctx)
+		l := role.NewRoleListLogic(r.Context(), ctx)
 		resp, err := l.RoleList(req)
 		if err != nil {
 			httpx.Error(w, err)

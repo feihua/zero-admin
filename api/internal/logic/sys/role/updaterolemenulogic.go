@@ -1,7 +1,8 @@
-package logic
+package role
 
 import (
 	"context"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sys/sysclient"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UpdateRoleMenuLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 15:43
+*/
 type UpdateRoleMenuLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +31,7 @@ func NewUpdateRoleMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) Upd
 	}
 }
 
+// UpdateRoleMenu 更新角色与菜单的关联
 func (l *UpdateRoleMenuLogic) UpdateRoleMenu(req types.UpdateRoleMenuReq) (*types.UpdateRoleMenuResp, error) {
 	_, err := l.svcCtx.RoleService.UpdateMenuRole(l.ctx, &sysclient.UpdateMenuRoleReq{
 		RoleId:   req.RoleId,
@@ -33,7 +40,7 @@ func (l *UpdateRoleMenuLogic) UpdateRoleMenu(req types.UpdateRoleMenuReq) (*type
 	})
 
 	if err != nil {
-		logx.Error(err)
+		logc.Errorf(l.ctx, "更新角色菜单失败,参数:%+v,异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("更新角色菜单失败")
 	}
 

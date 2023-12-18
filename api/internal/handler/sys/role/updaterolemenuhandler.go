@@ -1,9 +1,9 @@
-package handler
+package role
 
 import (
 	"net/http"
-
 	"zero-admin/api/internal/logic/sys/role"
+
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
 
@@ -18,7 +18,7 @@ func UpdateRoleMenuHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewUpdateRoleMenuLogic(r.Context(), ctx)
+		l := role.NewUpdateRoleMenuLogic(r.Context(), ctx)
 		resp, err := l.UpdateRoleMenu(req)
 		if err != nil {
 			httpx.Error(w, err)

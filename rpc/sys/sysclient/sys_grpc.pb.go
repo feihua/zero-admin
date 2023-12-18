@@ -364,7 +364,6 @@ type RoleServiceClient interface {
 	RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
 	RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error)
 	RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error)
-	UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, opts ...grpc.CallOption) (*UpdateRoleRoleResp, error)
 	QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error)
 	UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
 }
@@ -413,15 +412,6 @@ func (c *roleServiceClient) RoleDelete(ctx context.Context, in *RoleDeleteReq, o
 	return out, nil
 }
 
-func (c *roleServiceClient) UpdateRoleRole(ctx context.Context, in *UpdateRoleRoleReq, opts ...grpc.CallOption) (*UpdateRoleRoleResp, error) {
-	out := new(UpdateRoleRoleResp)
-	err := c.cc.Invoke(ctx, "/sysclient.RoleService/UpdateRoleRole", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *roleServiceClient) QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error) {
 	out := new(QueryMenuByRoleIdResp)
 	err := c.cc.Invoke(ctx, "/sysclient.RoleService/QueryMenuByRoleId", in, out, opts...)
@@ -448,7 +438,6 @@ type RoleServiceServer interface {
 	RoleList(context.Context, *RoleListReq) (*RoleListResp, error)
 	RoleUpdate(context.Context, *RoleUpdateReq) (*RoleUpdateResp, error)
 	RoleDelete(context.Context, *RoleDeleteReq) (*RoleDeleteResp, error)
-	UpdateRoleRole(context.Context, *UpdateRoleRoleReq) (*UpdateRoleRoleResp, error)
 	QueryMenuByRoleId(context.Context, *QueryMenuByRoleIdReq) (*QueryMenuByRoleIdResp, error)
 	UpdateMenuRole(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
 	mustEmbedUnimplementedRoleServiceServer()
@@ -469,9 +458,6 @@ func (UnimplementedRoleServiceServer) RoleUpdate(context.Context, *RoleUpdateReq
 }
 func (UnimplementedRoleServiceServer) RoleDelete(context.Context, *RoleDeleteReq) (*RoleDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RoleDelete not implemented")
-}
-func (UnimplementedRoleServiceServer) UpdateRoleRole(context.Context, *UpdateRoleRoleReq) (*UpdateRoleRoleResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateRoleRole not implemented")
 }
 func (UnimplementedRoleServiceServer) QueryMenuByRoleId(context.Context, *QueryMenuByRoleIdReq) (*QueryMenuByRoleIdResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryMenuByRoleId not implemented")
@@ -564,24 +550,6 @@ func _RoleService_RoleDelete_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RoleService_UpdateRoleRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateRoleRoleReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoleServiceServer).UpdateRoleRole(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/sysclient.RoleService/UpdateRoleRole",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).UpdateRoleRole(ctx, req.(*UpdateRoleRoleReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _RoleService_QueryMenuByRoleId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryMenuByRoleIdReq)
 	if err := dec(in); err != nil {
@@ -640,10 +608,6 @@ var RoleService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RoleDelete",
 			Handler:    _RoleService_RoleDelete_Handler,
-		},
-		{
-			MethodName: "UpdateRoleRole",
-			Handler:    _RoleService_UpdateRoleRole_Handler,
 		},
 		{
 			MethodName: "QueryMenuByRoleId",

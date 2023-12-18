@@ -2,13 +2,18 @@ package roleservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/sys/internal/svc"
 	"zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// RoleListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 16:06
+*/
 type RoleListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,13 +28,13 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleList
 	}
 }
 
+// RoleList 角色列表
 func (l *RoleListLogic) RoleList(in *sysclient.RoleListReq) (*sysclient.RoleListResp, error) {
 	all, err := l.svcCtx.RoleModel.FindAll(l.ctx, in)
 	count, _ := l.svcCtx.RoleModel.Count(l.ctx, in)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询角色列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询角色列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
@@ -48,9 +53,7 @@ func (l *RoleListLogic) RoleList(in *sysclient.RoleListReq) (*sysclient.RoleList
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询角色列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询角色列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.RoleListResp{
 		Total: count,
 		List:  list,

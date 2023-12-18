@@ -42,11 +42,6 @@ func (s *RoleServiceServer) RoleDelete(ctx context.Context, in *sysclient.RoleDe
 	return l.RoleDelete(in)
 }
 
-func (s *RoleServiceServer) UpdateRoleRole(ctx context.Context, in *sysclient.UpdateRoleRoleReq) (*sysclient.UpdateRoleRoleResp, error) {
-	l := roleservicelogic.NewUpdateRoleRoleLogic(ctx, s.svcCtx)
-	return l.UpdateRoleRole(in)
-}
-
 func (s *RoleServiceServer) QueryMenuByRoleId(ctx context.Context, in *sysclient.QueryMenuByRoleIdReq) (*sysclient.QueryMenuByRoleIdResp, error) {
 	l := roleservicelogic.NewQueryMenuByRoleIdLogic(ctx, s.svcCtx)
 	return l.QueryMenuByRoleId(in)

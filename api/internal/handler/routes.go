@@ -144,11 +144,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/roleMenuIds",
-					Handler: sysrole.RoleMenuIdsHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
 					Path:    "/queryMenuByRoleId",
 					Handler: sysrole.QueryMenuByRoleIdHandler(serverCtx),
 				},
