@@ -1,7 +1,8 @@
-package logic
+package user
 
 import (
 	"context"
+	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sys/sysclient"
 
 	"zero-admin/api/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ReSetPasswordLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 13:54
+*/
 type ReSetPasswordLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,14 +30,20 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) ReSe
 	}
 }
 
+// ReSetPassword 重置用户密码
 func (l *ReSetPasswordLogic) ReSetPassword(req types.ReSetPasswordReq) (*types.ReSetPasswordResp, error) {
-	_, _ = l.svcCtx.UserService.ReSetPassword(l.ctx, &sysclient.ReSetPasswordReq{
+
+	_, err := l.svcCtx.UserService.ReSetPassword(l.ctx, &sysclient.ReSetPasswordReq{
 		Id:           req.Id,
 		LastUpdateBy: l.ctx.Value("userName").(string),
 	})
 
+	if err != nil {
+		return nil, errorx.NewDefaultError("重置用户密码异常")
+	}
+
 	return &types.ReSetPasswordResp{
 		Code:    "000000",
-		Message: "",
+		Message: "重置用户密码成功",
 	}, nil
 }

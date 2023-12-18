@@ -1,9 +1,10 @@
-package logic
+package user
 
 import (
 	"context"
 	"encoding/json"
 	"github.com/jinzhu/copier"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
@@ -12,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UserListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:04
+*/
 type UserListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +32,7 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserListL
 	}
 }
 
+// UserList 查询用户列表信息
 func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, error) {
 
 	userListReq := sysclient.UserListReq{}
@@ -34,7 +41,7 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询用户列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %s,查询用户列表异常:%s", string(data), err.Error())
 		return nil, errorx.NewDefaultError("查询失败")
 	}
 

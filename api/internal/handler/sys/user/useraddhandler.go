@@ -1,4 +1,4 @@
-package handler
+package user
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func UserAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewUserAddLogic(r.Context(), ctx)
+		l := user.NewUserAddLogic(r.Context(), ctx)
 		resp, err := l.UserAdd(req)
 		if err != nil {
 			httpx.Error(w, err)

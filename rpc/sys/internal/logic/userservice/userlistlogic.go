@@ -3,11 +3,17 @@ package userservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"zero-admin/rpc/sys/internal/svc"
 	"zero-admin/rpc/sys/sysclient"
 )
 
+// UserListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:35
+*/
 type UserListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -22,13 +28,14 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserList
 	}
 }
 
+// UserList 查询用户列表信息
 func (l *UserListLogic) UserList(in *sysclient.UserListReq) (*sysclient.UserListResp, error) {
 
 	all, err := l.svcCtx.UserModel.FindAll(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询用户列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询用户列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
@@ -58,9 +65,7 @@ func (l *UserListLogic) UserList(in *sysclient.UserListReq) (*sysclient.UserList
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询用户列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询用户列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.UserListResp{
 		Total: count,
 		List:  list,

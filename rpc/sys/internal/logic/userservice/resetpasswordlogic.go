@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ReSetPasswordLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:12
+*/
 type ReSetPasswordLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ReS
 	}
 }
 
+// ReSetPassword 重置用户密码
 func (l *ReSetPasswordLogic) ReSetPassword(in *sysclient.ReSetPasswordReq) (*sysclient.ReSetPasswordResp, error) {
 
 	_ = l.svcCtx.UserModel.Update(l.ctx, &sysmodel.SysUser{

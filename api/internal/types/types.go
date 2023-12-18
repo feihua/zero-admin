@@ -157,35 +157,39 @@ type UserStatusResp struct {
 	Message string `json:"message"`
 }
 
-type RoleAllResp struct {
+type RoleRelations struct {
 	Id     int64  `json:"id"`
 	Name   string `json:"name"`
 	Remark string `json:"remark"`
 }
 
-type DeptAllResp struct {
+type DeptRelations struct {
 	Id       int64  `json:"id"`
 	Value    string `json:"value"`
 	Title    string `json:"title"`
 	ParentId int64  `json:"parentId"`
 }
 
-type JobAllResp struct {
+type JobRelations struct {
 	Id      int64  `json:"id"`
 	JobName string `json:"jobName"`
 }
 
-type SelectDataReq struct {
+type QueryAllRelationsReq struct {
 	Current  int64 `json:"current,default=1"`
 	PageSize int64 `json:"pageSize,default=20"`
 }
 
-type SelectDataResp struct {
-	Code    string         `json:"code"`
-	Message string         `json:"message"`
-	RoleAll []*RoleAllResp `json:"roleAll"`
-	DeptAll []*DeptAllResp `json:"deptAll"`
-	JobAll  []*JobAllResp  `json:"jobAll"`
+type QueryAllRelationsData struct {
+	RoleRelations []*RoleRelations `json:"roleRelations"`
+	DeptRelations []*DeptRelations `json:"deptRelations"`
+	JobRelations  []*JobRelations  `json:"jobRelations"`
+}
+
+type QueryAllRelationsResp struct {
+	Code    string                `json:"code"`
+	Message string                `json:"message"`
+	Data    QueryAllRelationsData `json:"data"`
 }
 
 type AddRoleReq struct {
@@ -822,13 +826,13 @@ type AddOrderReq struct {
 	OrderSn               string  `json:"orderSn"`               // 订单编号
 	CreateTime            string  `json:"createTime"`            // 提交时间
 	MemberUsername        string  `json:"memberUserName"`        // 用户帐号
-	TotalAmount           float64 `json:"totalAmount"`           // 订单总金额
-	PayAmount             float64 `json:"payAmount"`             // 应付金额（实际支付金额）
-	FreightAmount         float64 `json:"freightAmount"`         // 运费金额
-	PromotionAmount       float64 `json:"promotionAmount"`       // 促销优化金额（促销价、满减、阶梯价）
-	IntegrationAmount     float64 `json:"integrationAmount"`     // 积分抵扣金额
-	CouponAmount          float64 `json:"couponAmount"`          // 优惠券抵扣金额
-	DiscountAmount        float64 `json:"discountAmount"`        // 管理员后台调整订单使用的折扣金额
+	TotalAmount           float32 `json:"totalAmount"`           // 订单总金额
+	PayAmount             float32 `json:"payAmount"`             // 应付金额（实际支付金额）
+	FreightAmount         float32 `json:"freightAmount"`         // 运费金额
+	PromotionAmount       float32 `json:"promotionAmount"`       // 促销优化金额（促销价、满减、阶梯价）
+	IntegrationAmount     float32 `json:"integrationAmount"`     // 积分抵扣金额
+	CouponAmount          float32 `json:"couponAmount"`          // 优惠券抵扣金额
+	DiscountAmount        float32 `json:"discountAmount"`        // 管理员后台调整订单使用的折扣金额
 	PayType               int64   `json:"payType"`               // 支付方式：0->未支付；1->支付宝；2->微信
 	SourceType            int64   `json:"sourceType"`            // 订单来源：0->PC订单；1->app订单
 	Status                int64   `json:"status"`                // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单

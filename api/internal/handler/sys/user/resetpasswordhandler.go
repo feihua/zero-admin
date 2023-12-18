@@ -1,4 +1,4 @@
-package handler
+package user
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func ReSetPasswordHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewReSetPasswordLogic(r.Context(), ctx)
+		l := user.NewReSetPasswordLogic(r.Context(), ctx)
 		resp, err := l.ReSetPassword(req)
 		if err != nil {
 			httpx.Error(w, err)

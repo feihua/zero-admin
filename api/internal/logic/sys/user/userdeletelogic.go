@@ -1,7 +1,8 @@
-package logic
+package user
 
 import (
 	"context"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UserDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 13:59
+*/
 type UserDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +30,7 @@ func NewUserDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserDel
 	}
 }
 
+// UserDelete 删除用户
 func (l *UserDeleteLogic) UserDelete(req types.DeleteUserReq) (*types.DeleteUserResp, error) {
 
 	_, err := l.svcCtx.UserService.UserDelete(l.ctx, &sysclient.UserDeleteReq{
@@ -31,7 +38,7 @@ func (l *UserDeleteLogic) UserDelete(req types.DeleteUserReq) (*types.DeleteUser
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据userId: %d,删除用户异常:%s", req.Ids, err.Error())
+		logc.Errorf(l.ctx, "根据userId: %d,删除用户异常:%s", req.Ids, err.Error())
 		return nil, errorx.NewDefaultError("删除用户失败")
 	}
 

@@ -2,9 +2,9 @@ package userservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"time"
 	"zero-admin/rpc/sys/internal/svc"
@@ -13,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// LoginLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:08
+*/
 type LoginLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -34,15 +39,15 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	switch err {
 	case nil:
 	case sqlc.ErrNotFound:
-		logx.WithContext(l.ctx).Errorf("用户不存在,参数:%s,异常:%s", in.UserName, err.Error())
+		logc.Errorf(l.ctx, "用户不存在,参数:%s,异常:%s", in.UserName, err.Error())
 		return nil, errors.New("用户不存在")
 	default:
-		logx.WithContext(l.ctx).Errorf("用户登录失败,参数:%s,异常:%s", in.UserName, err.Error())
+		logc.Errorf(l.ctx, "用户登录失败,参数:%s,异常:%s", in.UserName, err.Error())
 		return nil, err
 	}
 
 	if userInfo.Password != in.Password {
-		logx.WithContext(l.ctx).Errorf("用户密码不正确,参数:%s", in.Password)
+		logc.Errorf(l.ctx, "用户密码不正确,参数:%s", in.Password)
 		return nil, errors.New("用户密码不正确")
 	}
 
@@ -52,8 +57,7 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	jwtToken, err := l.getJwtToken(accessSecret, now, accessExpire, userInfo.Id, userInfo.Name)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("生成token失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "生成token失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
@@ -67,12 +71,11 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 		RefreshAfter:     now + accessExpire/2,
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(resp)
-	logx.WithContext(l.ctx).Infof("登录成功,参数:%s,响应:%s", reqStr, listStr)
+	logc.Infof(l.ctx, "登录成功,参数:%+v,响应:%+v", in, resp)
 	return resp, nil
 }
 
+//生成jwt的token
 func (l *LoginLogic) getJwtToken(secretKey string, iat, seconds, userId int64, userName string) (string, error) {
 	claims := make(jwt.MapClaims)
 	claims["exp"] = iat + seconds

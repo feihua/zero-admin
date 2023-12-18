@@ -151,35 +151,38 @@ type (
 		Message string `json:"message"`
 	}
 
-	RoleAllResp {
+	RoleRelations {
 		Id     int64  `json:"id"`
 		Name   string `json:"name"`
 		Remark string `json:"remark"`
 	}
 
-	DeptAllResp {
+	DeptRelations {
 		Id       int64  `json:"id"`
 		Value    string `json:"value"`
 		Title    string `json:"title"`
 		ParentId int64  `json:"parentId"`
 	}
 
-	JobAllResp {
+	JobRelations {
 		Id      int64  `json:"id"`
 		JobName string `json:"jobName"`
 	}
 
-	SelectDataReq {
+	QueryAllRelationsReq {
 		Current  int64 `json:"current,default=1"`
 		PageSize int64 `json:"pageSize,default=20"`
 	}
 
-	SelectDataResp {
+	QueryAllRelationsData {
+		RoleRelations []*RoleRelations `json:"roleRelations"`
+		DeptRelations []*DeptRelations `json:"deptRelations"`
+		JobRelations  []*JobRelations  `json:"jobRelations"`
+	}
+	QueryAllRelationsResp {
 		Code    string         `json:"code"`
 		Message string         `json:"message"`
-		RoleAll []*RoleAllResp `json:"roleAll"`
-		DeptAll []*DeptAllResp `json:"deptAll"`
-		JobAll  []*JobAllResp  `json:"jobAll"`
+		Data QueryAllRelationsData `json:"data"`
 	}
 )
 
@@ -190,30 +193,38 @@ type (
 	prefix: /api/sys/user
 )
 service admin-api {
+
+	//获取用户信息
 	@handler UserInfo
 	get /info returns (userInfoResp)
-	
+
+	//添加用户
 	@handler UserAdd
 	post /add (addUserReq) returns (addUserResp)
-	
+
+	//查询用户列表
 	@handler UserList
 	post /list (ListUserReq) returns (ListUserResp)
-	
+
+	//更新用户信息
 	@handler UserUpdate
 	post /update (UpdateUserReq) returns (UpdateUserResp)
-	
+
+	//删除用户
 	@handler UserDelete
 	post /delete (DeleteUserReq) returns (DeleteUserResp)
-	
+
+	//重置用户密码
 	@handler ReSetPassword
 	post /reSetPassword (ReSetPasswordReq) returns (ReSetPasswordResp)
-	
+
+	//更新用户状态
 	@handler UpdateUserStatus
-	
 	post /UpdateUserStatus (UserStatusReq) returns (UserStatusResp)
-	
-	@handler SelectAllData
-	post /selectAllData (SelectDataReq) returns (SelectDataResp)
+
+	//查询用户角色,单位,岗位的关系
+	@handler QueryAllRelations
+	post /queryAllRelations (QueryAllRelationsReq) returns (QueryAllRelationsResp)
 }
 
 @server(

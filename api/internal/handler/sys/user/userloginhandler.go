@@ -1,4 +1,4 @@
-package handler
+package user
 
 import (
 	"net/http"
@@ -27,7 +27,7 @@ func UserLoginHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 		//		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 		//		proxy_pass http://127.0.0.1:8888;
 		//}
-		l := logic.NewUserLoginLogic(r.Context(), ctx)
+		l := user.NewUserLoginLogic(r.Context(), ctx)
 		resp, err := l.UserLogin(req, httpx.GetRemoteAddr(r))
 		if err != nil {
 			httpx.Error(w, err)

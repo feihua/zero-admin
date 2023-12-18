@@ -4,15 +4,20 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
-	"strconv"
 	"strings"
 	"zero-admin/rpc/model/sysmodel"
 	"zero-admin/rpc/sys/internal/svc"
 	"zero-admin/rpc/sys/sysclient"
 )
 
+// UserInfoLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:30
+*/
 type UserInfoLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -27,14 +32,16 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 	}
 }
 
+// UserInfo 获取用户信息
 func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, error) {
+	//根据id查询用户信息
 	userInfo, err := l.svcCtx.UserModel.FindOne(l.ctx, in.UserId)
 
 	switch err {
 	case nil:
 	case sqlc.ErrNotFound:
-		logx.WithContext(l.ctx).Errorf("用户不存在userId: %s", in.UserId)
-		return nil, errors.New(fmt.Sprintf("用户不存在userId: %s", strconv.FormatInt(in.UserId, 10)))
+		logc.Errorf(l.ctx, "用户不存在userId: %s", in.UserId)
+		return nil, errors.New(fmt.Sprintf("用户不存在userId: %d", in.UserId))
 	default:
 		return nil, err
 	}
@@ -42,6 +49,7 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 	var list []*sysclient.MenuListTree
 	var listUrls []string
 
+	//id为1是系统预留超级管理员,它获取的是全部权限
 	if in.UserId == 1 {
 		menus, _ := l.svcCtx.MenuModel.FindAll(l.ctx, 1, 1000)
 		list, listUrls = listTrees(menus, list, listUrls)

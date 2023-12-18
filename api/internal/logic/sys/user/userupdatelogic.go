@@ -1,8 +1,9 @@
-package logic
+package user
 
 import (
 	"context"
 	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/api/internal/svc"
 	"zero-admin/api/internal/types"
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UserUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:05
+*/
 type UserUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +31,7 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserUpd
 	}
 }
 
+// UserUpdate 更新用户信息
 func (l *UserUpdateLogic) UserUpdate(req types.UpdateUserReq) (*types.UpdateUserResp, error) {
 	_, err := l.svcCtx.UserService.UserUpdate(l.ctx, &sysclient.UserUpdateReq{
 		Id:           req.Id,
@@ -41,7 +48,7 @@ func (l *UserUpdateLogic) UserUpdate(req types.UpdateUserReq) (*types.UpdateUser
 
 	if err != nil {
 		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("更新用户信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "更新用户信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, errorx.NewDefaultError("更新用户失败")
 	}
 

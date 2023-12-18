@@ -1,8 +1,9 @@
-package logic
+package user
 
 import (
 	"context"
 	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"strings"
 	"zero-admin/api/internal/common/errorx"
 	"zero-admin/rpc/sys/sysclient"
@@ -13,6 +14,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UserLoginLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:07
+*/
 type UserLoginLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -32,7 +38,7 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginR
 
 	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
 		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("用户名或密码不能为空,请求信息失败,参数:%s", reqStr)
+		logc.Errorf(l.ctx, "用户名或密码不能为空,请求信息失败,参数:%s", reqStr)
 		return nil, errorx.NewDefaultError("用户名或密码不能为空")
 	}
 
@@ -42,7 +48,7 @@ func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginR
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据用户名: %s和密码: %s查询用户异常:%s", req.UserName, req.Password, err.Error())
+		logc.Errorf(l.ctx, "根据用户名: %s和密码: %s查询用户异常:%s", req.UserName, req.Password, err.Error())
 		return nil, errorx.NewDefaultError("登录失败")
 	}
 

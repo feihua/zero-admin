@@ -1,4 +1,4 @@
-package handler
+package user
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func UserDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewUserDeleteLogic(r.Context(), ctx)
+		l := user.NewUserDeleteLogic(r.Context(), ctx)
 		resp, err := l.UserDelete(req)
 		if err != nil {
 			httpx.Error(w, err)

@@ -99,8 +99,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/selectAllData",
-					Handler: sysuser.SelectAllDataHandler(serverCtx),
+					Path:    "/queryAllRelations",
+					Handler: sysuser.QueryAllRelationsHandler(serverCtx),
 				},
 			}...,
 		),

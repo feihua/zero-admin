@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UpdateUserStatusLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:13
+*/
 type UpdateUserStatusLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
+// UpdateUserStatus 更新用户状态
 func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UserStatusReq) (*sysclient.UserStatusResp, error) {
 	_ = l.svcCtx.UserModel.Update(l.ctx, &sysmodel.SysUser{
 		Id:         in.Id,

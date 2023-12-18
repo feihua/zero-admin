@@ -1,4 +1,4 @@
-package handler
+package user
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func UpdateUserStatusHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewUpdateUserStatusLogic(r.Context(), ctx)
+		l := user.NewUpdateUserStatusLogic(r.Context(), ctx)
 		resp, err := l.UpdateUserStatus(req)
 		if err != nil {
 			httpx.Error(w, err)

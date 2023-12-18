@@ -1,4 +1,4 @@
-package handler
+package user
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func UserListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewUserListLogic(r.Context(), ctx)
+		l := user.NewUserListLogic(r.Context(), ctx)
 		resp, err := l.UserList(req)
 		if err != nil {
 			httpx.Error(w, err)

@@ -1,8 +1,9 @@
-package logic
+package user
 
 import (
 	"context"
 	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
 	"strings"
 	"zero-admin/api/internal/common/errorx"
@@ -14,6 +15,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UserInfoLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:01
+*/
 type UserInfoLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -28,6 +34,7 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserInfoL
 	}
 }
 
+// UserInfo 获取用户信息
 func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	// 这里的key和生成jwt token时传入的key一致
 	userId, _ := l.ctx.Value("userId").(json.Number).Int64()
@@ -37,13 +44,13 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据userId: %s,查询用户异常:%s", strconv.FormatInt(userId, 10), err.Error())
-		return nil, errorx.NewDefaultError("查询用户失败")
+		logc.Errorf(l.ctx, "根据userId: %d,查询用户信息异常:%s", userId, err.Error())
+		return nil, errorx.NewDefaultError("查询用户信息失败")
 	}
 
 	var MenuTree []*types.ListMenuTree
 
-	//组装ant ui中的菜单
+	//组装antd ui中的菜单
 	for _, item := range resp.MenuListTree {
 		MenuTree = append(MenuTree, &types.ListMenuTree{
 			Id:       item.Id,
@@ -82,7 +89,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	err = l.svcCtx.Redis.Set(strconv.FormatInt(userId, 10), strings.Join(resp.BackgroundUrls, ","))
 
 	if err != nil {
-		logx.Errorf("设置用户：%s,权限到redis异常: %+v", resp.Name, err)
+		logc.Errorf(l.ctx, "设置用户：%s,权限到redis异常: %+v", resp.Name, err)
 	}
 
 	return &types.UserInfoResp{
