@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DeptDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:16
+*/
 type DeptDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewDeptDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptDel
 	}
 }
 
+// DeptDelete 删除部门信息
 func (l *DeptDeleteLogic) DeptDelete(req types.DeleteDeptReq) (*types.DeleteDeptResp, error) {
 	_, err := l.svcCtx.DeptService.DeptDelete(l.ctx, &sysclient.DeptDeleteReq{
 		Ids: req.Ids,

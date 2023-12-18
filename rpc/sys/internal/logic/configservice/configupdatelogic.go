@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ConfigUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 16:58
+*/
 type ConfigUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewConfigUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Conf
 	}
 }
 
+// ConfigUpdate 更新配置信息
 func (l *ConfigUpdateLogic) ConfigUpdate(in *sysclient.ConfigUpdateReq) (*sysclient.ConfigUpdateResp, error) {
 	err := l.svcCtx.ConfigModel.Update(l.ctx, &sysmodel.SysConfig{
 		Id:          in.Id,

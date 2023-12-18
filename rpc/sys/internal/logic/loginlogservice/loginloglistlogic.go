@@ -3,7 +3,7 @@ package loginlogservicelogic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/sys/sysclient"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// LoginLogListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:07
+*/
 type LoginLogListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +30,7 @@ func NewLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Logi
 	}
 }
 
+// LoginLogList 登录日志列表
 func (l *LoginLogListLogic) LoginLogList(in *sysclient.LoginLogListReq) (*sysclient.LoginLogListResp, error) {
 	all, err := l.svcCtx.LoginLogModel.FindAll(l.ctx, in)
 	count, _ := l.svcCtx.LoginLogModel.Count(l.ctx, in)
@@ -37,7 +43,6 @@ func (l *LoginLogListLogic) LoginLogList(in *sysclient.LoginLogListReq) (*syscli
 
 	var list []*sysclient.LoginLogListData
 	for _, log := range *all {
-		fmt.Println(log)
 		list = append(list, &sysclient.LoginLogListData{
 			Id:         log.Id,
 			UserName:   log.UserName,
@@ -48,9 +53,7 @@ func (l *LoginLogListLogic) LoginLogList(in *sysclient.LoginLogListReq) (*syscli
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询登录记录列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询登录记录列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.LoginLogListResp{
 		Total: count,
 		List:  list,

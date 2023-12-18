@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// JobUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:06
+*/
 type JobUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobUpda
 	}
 }
 
+// JobUpdate 更新岗位信息
 func (l *JobUpdateLogic) JobUpdate(in *sysclient.JobUpdateReq) (*sysclient.JobUpdateResp, error) {
 	//更新之前查询记录是否存在
 	job, err := l.svcCtx.JobModel.FindOne(l.ctx, in.Id)

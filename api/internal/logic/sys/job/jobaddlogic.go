@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// JobAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:18
+*/
 type JobAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewJobAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) JobAddLogic
 	}
 }
 
+// JobAdd 添加岗位信息
 func (l *JobAddLogic) JobAdd(req types.AddJobReq) (*types.AddJobResp, error) {
 	_, err := l.svcCtx.JobService.JobAdd(l.ctx, &sysclient.JobAddReq{
 		JobName:  req.JobName,

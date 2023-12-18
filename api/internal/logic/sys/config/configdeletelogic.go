@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ConfigDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:11
+*/
 type ConfigDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewConfigDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Confi
 	}
 }
 
+// ConfigDelete 删除配置
 func (l *ConfigDeleteLogic) ConfigDelete(req types.DeleteConfigReq) (*types.DeleteConfigResp, error) {
 	_, err := l.svcCtx.ConfigService.ConfigDelete(l.ctx, &sysclient.ConfigDeleteReq{
 		Ids: req.Ids,

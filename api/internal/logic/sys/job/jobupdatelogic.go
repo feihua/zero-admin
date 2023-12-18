@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// JobUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:19
+*/
 type JobUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) JobUpdat
 	}
 }
 
+// JobUpdate 更新岗位信息
 func (l *JobUpdateLogic) JobUpdate(req types.UpdateJobReq) (*types.UpdateJobResp, error) {
 	_, err := l.svcCtx.JobService.JobUpdate(l.ctx, &sysclient.JobUpdateReq{
 		Id:           req.Id,

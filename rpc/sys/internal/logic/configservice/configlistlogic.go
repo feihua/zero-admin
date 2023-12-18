@@ -2,13 +2,17 @@ package configservicelogic
 
 import (
 	"context"
-	"fmt"
 	"zero-admin/rpc/sys/internal/svc"
 	"zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ConfigListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 16:54
+*/
 type ConfigListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +27,7 @@ func NewConfigListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Config
 	}
 }
 
+// ConfigList 配置信息列表
 func (l *ConfigListLogic) ConfigList(in *sysclient.ConfigListReq) (*sysclient.ConfigListResp, error) {
 	all, err := l.svcCtx.ConfigModel.FindAll(l.ctx, in.Current, in.PageSize)
 
@@ -33,8 +38,7 @@ func (l *ConfigListLogic) ConfigList(in *sysclient.ConfigListReq) (*sysclient.Co
 
 	var list []*sysclient.ConfigListData
 	for _, config := range *all {
-		fmt.Println(config)
-		list = append(list, &sysclient.ConfigListData{
+		conf := &sysclient.ConfigListData{
 			Id:             config.Id,
 			Value:          config.Value,
 			Label:          config.Label,
@@ -47,7 +51,8 @@ func (l *ConfigListLogic) ConfigList(in *sysclient.ConfigListReq) (*sysclient.Co
 			CreateTime:     config.CreateTime.Format("2006-01-02 15:04:05"),
 			LastUpdateBy:   config.UpdateBy.String,
 			LastUpdateTime: config.UpdateTime.Time.Format("2006-01-02 15:04:05"),
-		})
+		}
+		list = append(list, conf)
 	}
 
 	return &sysclient.ConfigListResp{

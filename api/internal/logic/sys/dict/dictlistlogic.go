@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DictListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:17
+*/
 type DictListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictListL
 	}
 }
 
+// DictList 字典列表
 func (l *DictListLogic) DictList(req types.ListDictReq) (*types.ListDictResp, error) {
 	resp, err := l.svcCtx.DictService.DictList(l.ctx, &sysclient.DictListReq{
 		Current:  req.Current,

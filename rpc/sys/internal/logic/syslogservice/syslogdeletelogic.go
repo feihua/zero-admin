@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SysLogDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:08
+*/
 type SysLogDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewSysLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysL
 	}
 }
 
+// SysLogDelete 删除操作日志
 func (l *SysLogDeleteLogic) SysLogDelete(in *sysclient.SysLogDeleteReq) (*sysclient.SysLogDeleteResp, error) {
 	err := l.svcCtx.SysLogModel.DeleteByIds(l.ctx, in.Ids)
 

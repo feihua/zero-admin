@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DeptAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 16:59
+*/
 type DeptAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,17 +31,17 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptAddLo
 	}
 }
 
+// DeptAdd 添加部门信息
 func (l *DeptAddLogic) DeptAdd(in *sysclient.DeptAddReq) (*sysclient.DeptAddResp, error) {
-	_, err := l.svcCtx.DeptModel.Insert(l.ctx, &sysmodel.SysDept{
+	dept := &sysmodel.SysDept{
 		Name:      in.Name,
 		ParentId:  in.ParentId,
 		OrderNum:  in.OrderNum,
 		CreateBy:  in.CreateBy,
 		DelFlag:   in.DelFlag,
 		ParentIds: strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1),
-	})
-
-	if err != nil {
+	}
+	if _, err := l.svcCtx.DeptModel.Insert(l.ctx, dept); err != nil {
 		return nil, err
 	}
 

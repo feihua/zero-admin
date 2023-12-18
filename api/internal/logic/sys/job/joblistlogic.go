@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// JobListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:19
+*/
 type JobListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewJobListLogic(ctx context.Context, svcCtx *svc.ServiceContext) JobListLog
 	}
 }
 
+// JobList 岗位信息列表
 func (l *JobListLogic) JobList(req types.ListJobReq) (*types.ListJobResp, error) {
 	resp, err := l.svcCtx.JobService.JobList(l.ctx, &sysclient.JobListReq{
 		Current:  req.Current,

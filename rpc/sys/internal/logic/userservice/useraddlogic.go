@@ -35,7 +35,7 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserAddLo
 // UserAdd 新增用户
 func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp, error) {
 
-	insert, err := l.svcCtx.UserModel.Insert(l.ctx, &sysmodel.SysUser{
+	user := &sysmodel.SysUser{
 		Name:     in.Name,
 		NickName: sql.NullString{String: in.NickName, Valid: true},
 		Avatar:   sql.NullString{String: in.Avatar, Valid: true},
@@ -48,7 +48,8 @@ func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp
 		CreateBy: in.CreateBy,
 		DelFlag:  0,
 		JobId:    in.JobId,
-	})
+	}
+	insert, err := l.svcCtx.UserModel.Insert(l.ctx, user)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "新增用户异常,参数:%+v,异常:%s", in, err.Error())

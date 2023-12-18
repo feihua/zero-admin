@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SysLogAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:08
+*/
 type SysLogAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,8 +31,9 @@ func NewSysLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLogA
 	}
 }
 
+// SysLogAdd 添加操作日志
 func (l *SysLogAddLogic) SysLogAdd(in *sysclient.SysLogAddReq) (*sysclient.SysLogAddResp, error) {
-	_, err := l.svcCtx.SysLogModel.Insert(l.ctx, &sysmodel.SysLog{
+	sysLog := &sysmodel.SysLog{
 		UserName:       in.UserName,
 		Operation:      in.Operation,
 		Method:         in.Method,
@@ -36,9 +42,8 @@ func (l *SysLogAddLogic) SysLogAdd(in *sysclient.SysLogAddReq) (*sysclient.SysLo
 		Time:           in.Time,
 		Ip:             sql.NullString{String: in.Ip, Valid: true},
 		OperationTime:  time.Now(),
-	})
-
-	if err != nil {
+	}
+	if _, err := l.svcCtx.SysLogModel.Insert(l.ctx, sysLog); err != nil {
 		return nil, err
 	}
 

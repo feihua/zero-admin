@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// LoginLogAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:07
+*/
 type LoginLogAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,16 +30,16 @@ func NewLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 	}
 }
 
+// LoginLogAdd 添加登录日志
 func (l *LoginLogAddLogic) LoginLogAdd(in *sysclient.LoginLogAddReq) (*sysclient.LoginLogAddResp, error) {
-	_, err := l.svcCtx.LoginLogModel.Insert(l.ctx, &sysmodel.SysLoginLog{
+	loginLog := &sysmodel.SysLoginLog{
 		UserName:   in.UserName,
 		Status:     in.Status,
 		Ip:         in.Ip,
 		CreateTime: time.Now(),
 		CreateBy:   in.CreateBy,
-	})
-
-	if err != nil {
+	}
+	if _, err := l.svcCtx.LoginLogModel.Insert(l.ctx, loginLog); err != nil {
 		return nil, err
 	}
 

@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DictAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:17
+*/
 type DictAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewDictAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictAddLog
 	}
 }
 
+// DictAdd 添加字典信息
 func (l *DictAddLogic) DictAdd(req types.AddDictReq) (*types.AddDictResp, error) {
 	_, err := l.svcCtx.DictService.DictAdd(l.ctx, &sysclient.DictAddReq{
 		Value:       req.Value,

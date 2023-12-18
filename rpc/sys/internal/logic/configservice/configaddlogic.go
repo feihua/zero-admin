@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ConfigAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 16:47
+*/
 type ConfigAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,8 +31,9 @@ func NewConfigAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ConfigA
 	}
 }
 
+// ConfigAdd 添加配置信息
 func (l *ConfigAddLogic) ConfigAdd(in *sysclient.ConfigAddReq) (*sysclient.ConfigAddResp, error) {
-	_, err := l.svcCtx.ConfigModel.Insert(l.ctx, &sysmodel.SysConfig{
+	config := &sysmodel.SysConfig{
 		Value:       in.Value,
 		Label:       in.Label,
 		Type:        in.Type,
@@ -37,7 +43,9 @@ func (l *ConfigAddLogic) ConfigAdd(in *sysclient.ConfigAddReq) (*sysclient.Confi
 		CreateTime:  time.Now(),
 		Remarks:     sql.NullString{String: in.Remarks, Valid: true},
 		DelFlag:     0,
-	})
+	}
+	_, err := l.svcCtx.ConfigModel.Insert(l.ctx, config)
+
 	if err != nil {
 		return nil, err
 	}

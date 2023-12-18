@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DeptUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:17
+*/
 type DeptUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptUpd
 	}
 }
 
+// DeptUpdate 更新部门信息
 func (l *DeptUpdateLogic) DeptUpdate(req types.UpdateDeptReq) (*types.UpdateDeptResp, error) {
 	_, err := l.svcCtx.DeptService.DeptUpdate(l.ctx, &sysclient.DeptUpdateReq{
 		Id:           req.Id,

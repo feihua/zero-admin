@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// LoginLogDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:07
+*/
 type LoginLogDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewLoginLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Lo
 	}
 }
 
+// LoginLogDelete 删除登录日志
 func (l *LoginLogDeleteLogic) LoginLogDelete(in *sysclient.LoginLogDeleteReq) (*sysclient.LoginLogDeleteResp, error) {
 	err := l.svcCtx.LoginLogModel.DeleteByIds(l.ctx, in.Ids)
 

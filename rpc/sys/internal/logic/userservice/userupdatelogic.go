@@ -48,7 +48,7 @@ func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.Us
 		return nil, errors.New("查询用户异常")
 	}
 
-	err = l.svcCtx.UserModel.Update(l.ctx, &sysmodel.SysUser{
+	sysUser := &sysmodel.SysUser{
 		Id:         in.Id,
 		Name:       in.Name,
 		NickName:   sql.NullString{String: in.NickName, Valid: true},
@@ -63,7 +63,8 @@ func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.Us
 		CreateTime: user.CreateTime,
 		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
 		JobId:      in.JobId,
-	})
+	}
+	err = l.svcCtx.UserModel.Update(l.ctx, sysUser)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新用户异常,参数userId:%d,异常:%s", in.Id, err.Error())

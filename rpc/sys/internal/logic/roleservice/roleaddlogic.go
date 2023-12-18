@@ -33,13 +33,14 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleAddLo
 
 // RoleAdd 新增角色
 func (l *RoleAddLogic) RoleAdd(in *sysclient.RoleAddReq) (*sysclient.RoleAddResp, error) {
-	_, err := l.svcCtx.RoleModel.Insert(l.ctx, &sysmodel.SysRole{
+	role := &sysmodel.SysRole{
 		Name:     in.Name,
 		Remark:   sql.NullString{String: in.Remark, Valid: true},
 		CreateBy: in.CreateBy,
 		DelFlag:  0,
 		Status:   in.Status,
-	})
+	}
+	_, err := l.svcCtx.RoleModel.Insert(l.ctx, role)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "新增角色信息失败,参数:%+v,异常:%s", in, err.Error())

@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// LoginLogListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:20
+*/
 type LoginLogListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Login
 	}
 }
 
+// LoginLogList 登录日志列表
 func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.ListLoginLogResp, error) {
 	resp, err := l.svcCtx.LoginLogService.LoginLogList(l.ctx, &sysclient.LoginLogListReq{
 		Current:  req.Current,

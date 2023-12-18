@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// JobDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:04
+*/
 type JobDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewJobDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobDele
 	}
 }
 
+// JobDelete 删除岗位
 func (l *JobDeleteLogic) JobDelete(in *sysclient.JobDeleteReq) (*sysclient.JobDeleteResp, error) {
 	err := l.svcCtx.JobModel.DeleteByIds(l.ctx, in.Ids)
 

@@ -10,6 +10,11 @@ import (
 	"zero-admin/rpc/sys/sysclient"
 )
 
+// DeptListLogic 部门列表
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:16
+*/
 type DeptListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +29,7 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptListL
 	}
 }
 
+// DeptList 部门列表
 func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, error) {
 	resp, err := l.svcCtx.DeptService.DeptList(l.ctx, &sysclient.DeptListReq{
 		Name:     req.Name,

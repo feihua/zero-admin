@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ConfigListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:11
+*/
 type ConfigListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +29,7 @@ func NewConfigListLogic(ctx context.Context, svcCtx *svc.ServiceContext) ConfigL
 	}
 }
 
+// ConfigList 配置列表
 func (l *ConfigListLogic) ConfigList(req types.ListConfigReq) (*types.ListConfigResp, error) {
 	resp, err := l.svcCtx.ConfigService.ConfigList(l.ctx, &sysclient.ConfigListReq{
 		Current:  req.Current,

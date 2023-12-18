@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DictUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:03
+*/
 type DictUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictUp
 	}
 }
 
+// DictUpdate 更新字典信息
 func (l *DictUpdateLogic) DictUpdate(in *sysclient.DictUpdateReq) (*sysclient.DictUpdateResp, error) {
 	//更新之前查询记录是否存在
 	dict, err := l.svcCtx.DictModel.FindOne(l.ctx, in.Id)

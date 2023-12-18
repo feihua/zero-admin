@@ -3,7 +3,7 @@ package dictservicelogic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/sys/sysclient"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DictListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:03
+*/
 type DictListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +30,7 @@ func NewDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictList
 	}
 }
 
+// DictList 字典列表
 func (l *DictListLogic) DictList(in *sysclient.DictListReq) (*sysclient.DictListResp, error) {
 	all, err := l.svcCtx.DictModel.FindAll(l.ctx, in)
 	count, _ := l.svcCtx.DictModel.Count(l.ctx, in)
@@ -36,7 +42,6 @@ func (l *DictListLogic) DictList(in *sysclient.DictListReq) (*sysclient.DictList
 	}
 	var list []*sysclient.DictListData
 	for _, dict := range *all {
-		fmt.Println(dict)
 		list = append(list, &sysclient.DictListData{
 			Id:             dict.Id,
 			Value:          dict.Value,
@@ -53,9 +58,7 @@ func (l *DictListLogic) DictList(in *sysclient.DictListReq) (*sysclient.DictList
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询字典列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询字典列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.DictListResp{
 		Total: count,
 		List:  list,

@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SysLogListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:20
+*/
 type SysLogListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +29,7 @@ func NewSysLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) SysLogL
 	}
 }
 
+// SysLogList 操作日志列表
 func (l *SysLogListLogic) SysLogList(req types.ListSysLogReq) (*types.ListSysLogResp, error) {
 	resp, err := l.svcCtx.SysLogService.SysLogList(l.ctx, &sysclient.SysLogListReq{
 		Current:  req.Current,

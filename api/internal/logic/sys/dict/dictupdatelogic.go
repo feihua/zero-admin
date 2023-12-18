@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DictUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:18
+*/
 type DictUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictUpd
 	}
 }
 
+// DictUpdate 更新字典信息
 func (l *DictUpdateLogic) DictUpdate(req types.UpdateDictReq) (*types.UpdateDictResp, error) {
 	_, err := l.svcCtx.DictService.DictUpdate(l.ctx, &sysclient.DictUpdateReq{
 		Id:           req.Id,

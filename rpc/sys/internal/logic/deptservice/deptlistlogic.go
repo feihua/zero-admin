@@ -2,7 +2,7 @@ package deptservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
 	"strings"
 	"zero-admin/rpc/sys/sysclient"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DeptListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:00
+*/
 type DeptListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,13 +31,13 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptList
 	}
 }
 
+// DeptList 部门信息列表
 func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptListResp, error) {
 	count, _ := l.svcCtx.DeptModel.Count(l.ctx)
 	all, err := l.svcCtx.DeptModel.FindAll(l.ctx, 1, count)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询机构列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logx.WithContext(l.ctx).Errorf("查询机构列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
@@ -61,9 +66,7 @@ func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptList
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询机构列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询机构列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.DeptListResp{
 		Total: count,
 		List:  list,

@@ -39,7 +39,7 @@ func (l *MenuUpdateLogic) MenuUpdate(in *sysclient.MenuUpdateReq) (*sysclient.Me
 		return nil, err
 	}
 
-	err = l.svcCtx.MenuModel.Update(l.ctx, &sysmodel.SysMenu{
+	sysMenu := &sysmodel.SysMenu{
 		Id:            in.Id,
 		Name:          in.Name,
 		ParentId:      in.ParentId,
@@ -56,7 +56,8 @@ func (l *MenuUpdateLogic) MenuUpdate(in *sysclient.MenuUpdateReq) (*sysclient.Me
 		VueIcon:       sql.NullString{String: in.VueIcon, Valid: true},
 		VueRedirect:   sql.NullString{String: in.VueRedirect, Valid: true},
 		BackgroundUrl: in.BackgroundUrl,
-	})
+	}
+	err = l.svcCtx.MenuModel.Update(l.ctx, sysMenu)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新菜单信息失败,参数:%+v,异常:%s", in, err.Error())

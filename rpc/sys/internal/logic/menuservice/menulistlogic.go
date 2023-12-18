@@ -2,7 +2,6 @@ package menuservicelogic
 
 import (
 	"context"
-	"fmt"
 	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/sys/sysclient"
 
@@ -41,7 +40,6 @@ func (l *MenuListLogic) MenuList(in *sysclient.MenuListReq) (*sysclient.MenuList
 	}
 	var list []*sysclient.MenuListData
 	for _, menu := range *all {
-		fmt.Println(menu)
 		list = append(list, &sysclient.MenuListData{
 			Id:             menu.Id,
 			Name:           menu.Name,

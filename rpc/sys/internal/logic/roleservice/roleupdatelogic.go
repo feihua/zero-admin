@@ -45,7 +45,7 @@ func (l *RoleUpdateLogic) RoleUpdate(in *sysclient.RoleUpdateReq) (*sysclient.Ro
 		return nil, err
 	}
 
-	if err1 := l.svcCtx.RoleModel.Update(l.ctx, &sysmodel.SysRole{
+	sysRole := &sysmodel.SysRole{
 		Id:         in.Id,
 		Name:       in.Name,
 		Remark:     sql.NullString{String: in.Remark, Valid: true},
@@ -54,7 +54,8 @@ func (l *RoleUpdateLogic) RoleUpdate(in *sysclient.RoleUpdateReq) (*sysclient.Ro
 		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
 		DelFlag:    0,
 		Status:     in.Status,
-	}); err1 != nil {
+	}
+	if err1 := l.svcCtx.RoleModel.Update(l.ctx, sysRole); err1 != nil {
 		logc.Errorf(l.ctx, "更新角色信息失败,参数:%+v,异常:%s", in, err1.Error())
 		return nil, err1
 	}

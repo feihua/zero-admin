@@ -2,7 +2,6 @@ package syslogservicelogic
 
 import (
 	"context"
-	"fmt"
 	"zero-admin/rpc/sys/sysclient"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -10,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SysLogListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:09
+*/
 type SysLogListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +28,7 @@ func NewSysLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLog
 	}
 }
 
+// SysLogList 操作日志列表
 func (l *SysLogListLogic) SysLogList(in *sysclient.SysLogListReq) (*sysclient.SysLogListResp, error) {
 	all, err := l.svcCtx.SysLogModel.FindAll(l.ctx, in)
 	count, _ := l.svcCtx.SysLogModel.Count(l.ctx, in)
@@ -33,7 +38,6 @@ func (l *SysLogListLogic) SysLogList(in *sysclient.SysLogListReq) (*sysclient.Sy
 	}
 	var list []*sysclient.SysLogListData
 	for _, log := range *all {
-		fmt.Println(log)
 		list = append(list, &sysclient.SysLogListData{
 			Id:             log.Id,
 			UserName:       log.UserName,

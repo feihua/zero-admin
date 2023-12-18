@@ -3,7 +3,7 @@ package jobservicelogic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/sys/sysclient"
 
 	"zero-admin/rpc/sys/internal/svc"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// JobListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:05
+*/
 type JobListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,19 +30,19 @@ func NewJobListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobListLo
 	}
 }
 
+// JobList 岗位列表
 func (l *JobListLogic) JobList(in *sysclient.JobListReq) (*sysclient.JobListResp, error) {
 	all, err := l.svcCtx.JobModel.FindAll(l.ctx, in)
 	count, _ := l.svcCtx.JobModel.Count(l.ctx, in)
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询岗位列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询岗位列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
 		return nil, err
 	}
 
 	var list []*sysclient.JobListData
 	for _, job := range *all {
-		fmt.Println(job)
 		list = append(list, &sysclient.JobListData{
 			Id:             job.Id,
 			JobName:        job.JobName,
@@ -51,9 +56,7 @@ func (l *JobListLogic) JobList(in *sysclient.JobListReq) (*sysclient.JobListResp
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询岗位列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询岗位列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.JobListResp{
 		Total: count,
 		List:  list,

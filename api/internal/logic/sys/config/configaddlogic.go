@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ConfigAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:10
+*/
 type ConfigAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewConfigAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) ConfigAd
 	}
 }
 
+// ConfigAdd 添加配置
 func (l *ConfigAddLogic) ConfigAdd(req types.AddConfigReq) (*types.AddConfigResp, error) {
 	_, err := l.svcCtx.ConfigService.ConfigAdd(l.ctx, &sysclient.ConfigAddReq{
 		Value:       req.Value,

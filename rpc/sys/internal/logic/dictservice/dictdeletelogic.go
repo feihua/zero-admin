@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DictDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:02
+*/
 type DictDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewDictDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictDe
 	}
 }
 
+// DictDelete 删除字典信息
 func (l *DictDeleteLogic) DictDelete(in *sysclient.DictDeleteReq) (*sysclient.DictDeleteResp, error) {
 	err := l.svcCtx.DictModel.DeleteByIds(l.ctx, in.Ids)
 

@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// DeptAddLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 17:16
+*/
 type DeptAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptAddLog
 	}
 }
 
+// DeptAdd 添加部门信息
 func (l *DeptAddLogic) DeptAdd(req types.AddDeptReq) (*types.AddDeptResp, error) {
 	_, err := l.svcCtx.DeptService.DeptAdd(l.ctx, &sysclient.DeptAddReq{
 		Name:      req.Name,
