@@ -191,7 +191,7 @@ type (
 )
 service admin-api {
 	@handler UserInfo
-	get /currentUser returns (userInfoResp)
+	get /info returns (userInfoResp)
 	
 	@handler UserAdd
 	post /add (addUserReq) returns (addUserResp)
