@@ -31,7 +31,7 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		if r.RequestURI == "/api/sys/user/currentUser" || r.RequestURI == "/api/sys/user/selectAllData" || r.RequestURI == "/api/sys/role/queryMenuByRoleId" {
+		if r.RequestURI == "/api/sys/user/info" || r.RequestURI == "/api/sys/user/queryAllRelations" || r.RequestURI == "/api/sys/role/queryMenuByRoleId" {
 			next(w, r)
 			return
 		}
