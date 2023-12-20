@@ -49,6 +49,7 @@ func (l *PaymentOperationsUtils) AliPayNotify(writer http.ResponseWriter, reques
 		return
 	}
 
+	l.WithContext(l.ctx).Infof("支付宝支付回调参数：%+v", notification)
 	var outTradeNo = notification.OutTradeNo
 	var tradeStatus = notification.TradeStatus
 
