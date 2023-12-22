@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ums-rpc
+  namespace: zero-admin
+  labels:
+    app: ums-rpc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: ums-rpc
+  template:
+    metadata:
+      labels:
+        app: ums-rpc
+    spec:
+      containers:
+        - name: ums-rpc
+          image: ums-rpc:0.0.1
+          ports:
+            - containerPort: 8081
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ums-rpc-svc
+  namespace: zero-admin
+  labels:
+    app: ums-rpc-svc
+spec:
+  ports:
+    - port: 8081
+      name: ums-rpc
+      targetPort: 8081
+  selector:
+    app: ums-rpc

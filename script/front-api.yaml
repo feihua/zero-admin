@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-api
+  namespace: zero-admin
+  labels:
+    app: front-api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: front-api
+  template:
+    metadata:
+      labels:
+        app: front-api
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: front-api
+          image: front-api:0.0.1
+          ports:
+            - containerPort: 9999
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-api-svc
+  namespace: zero-admin
+  labels:
+    app: front-api-svc
+spec:
+  ports:
+    - port: 9999
+      name: front-api
+      targetPort: 9999
+  selector:
+    app: front-api
+  type: NodePort

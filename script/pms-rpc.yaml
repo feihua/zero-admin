@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pms-rpc
+  namespace: zero-admin
+  labels:
+    app: pms-rpc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: pms-rpc
+  template:
+    metadata:
+      labels:
+        app: pms-rpc
+    spec:
+      containers:
+        - name: pms-rpc
+          image: pms-rpc:0.0.1
+          ports:
+            - containerPort: 8082
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pms-rpc-svc
+  namespace: zero-admin
+  labels:
+    app: pms-rpc-svc
+spec:
+  ports:
+    - port: 8082
+      name: pms-rpc
+      targetPort: 8082
+  selector:
+    app: pms-rpc

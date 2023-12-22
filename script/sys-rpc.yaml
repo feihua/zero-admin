@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sys-rpc
+  namespace: zero-admin
+  labels:
+    app: sys-rpc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: sys-rpc
+  template:
+    metadata:
+      labels:
+        app: sys-rpc
+    spec:
+      containers:
+        - name: sys-rpc
+          image: sys-rpc:0.0.1
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sys-rpc-svc
+  namespace: zero-admin
+  labels:
+    app: sys-rpc-svc
+spec:
+  ports:
+    - port: 8080
+      name: sys-rpc
+      targetPort: 8080
+  selector:
+    app: sys-rpc
