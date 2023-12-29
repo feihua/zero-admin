@@ -21,9 +21,10 @@ RUN apk update --no-cache
 RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache tzdata
 ENV TZ Asia/Shanghai
+ENV CONFIG_FILE etc/admin-api.yaml
 
 WORKDIR /app
 COPY --from=builder /app/admin /app/admin
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./admin", "-f", "etc/admin-api.yaml"]
+CMD ["./admin", "-f", "${CONFIG_FILE}"]

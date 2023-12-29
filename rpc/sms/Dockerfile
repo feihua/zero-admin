@@ -21,9 +21,10 @@ RUN apk update --no-cache
 RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache tzdata
 ENV TZ Asia/Shanghai
+ENV CONFIG_FILE etc/sms.yaml
 
 WORKDIR /app
 COPY --from=builder /app/sms /app/sms
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./sms", "-f", "etc/sms.yaml"]
+CMD ["./sms", "-f", "${CONFIG_FILE}"]

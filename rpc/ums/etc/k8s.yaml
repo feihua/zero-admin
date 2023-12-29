@@ -1,0 +1,14 @@
+Name: ums.rpc
+ListenOn: 0.0.0.0:8081
+
+Mysql:
+  Datasource: root:r-wz9wop62956dh5k9ed@tcp(110.41.179.89:30395)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+JWT:
+  AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
+  AccessExpire: 86400
+Log:
+  ServiceName: ums-service
+  Stat: false # go-zero 版本 >= 1.5.0 才支持
+#  Mode: file
+#  Path: logs/ums

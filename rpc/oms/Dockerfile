@@ -21,9 +21,10 @@ RUN apk update --no-cache
 RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache tzdata
 ENV TZ Asia/Shanghai
+ENV CONFIG_FILE etc/oms.yaml
 
 WORKDIR /app
 COPY --from=builder /app/oms /app/oms
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./oms", "-f", "etc/oms.yaml"]
+CMD ["./oms", "-f", "${CONFIG_FILE}"]

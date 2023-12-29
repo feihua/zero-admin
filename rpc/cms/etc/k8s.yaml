@@ -1,0 +1,5 @@
+Name: cms.rpc
+ListenOn: 0.0.0.0:8086
+
+Mysql:
+  Datasource: root:r-wz9wop62956dh5k9ed@tcp(110.41.179.89:30395)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

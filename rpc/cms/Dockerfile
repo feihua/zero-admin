@@ -21,9 +21,10 @@ RUN apk update --no-cache
 RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache tzdata
 ENV TZ Asia/Shanghai
+ENV CONFIG_FILE etc/cms.yaml
 
 WORKDIR /app
 COPY --from=builder /app/cms /app/cms
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./cms", "-f", "etc/cms.yaml"]
+CMD ["./cms", "-f", "${CONFIG_FILE}"]

@@ -21,9 +21,10 @@ RUN apk update --no-cache
 RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache tzdata
 ENV TZ Asia/Shanghai
+ENV CONFIG_FILE etc/pms.yaml
 
 WORKDIR /app
 COPY --from=builder /app/pms /app/pms
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./pms", "-f", "etc/pms.yaml"]
+CMD ["./pms", "-f", "${CONFIG_FILE}"]

@@ -1,0 +1,48 @@
+Name: admin-api
+Host: 0.0.0.0
+Port: 8888
+
+#系统
+SysRpc:
+  Target: k8s://zero-admin/sys-rpc-svc:8080
+  NonBlock: true
+
+#会员
+UmsRpc:
+  Target: k8s://zero-admin/ums-rpc-svc:8081
+  NonBlock: true
+
+#商品
+PmsRpc:
+  Target: k8s://zero-admin/pms-rpc-svc:8082
+  NonBlock: true
+
+#订单
+OmsRpc:
+  Target: k8s://zero-admin/oms-rpc-svc:8083
+  NonBlock: true
+
+#营销
+SmsRpc:
+  Target: k8s://zero-admin/sms-rpc-svc:8084
+  NonBlock: true
+
+#内容
+CmsRpc:
+  Target: k8s://zero-admin/cms-rpc-svc:8086
+  NonBlock: true
+
+
+Auth:
+  AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
+  AccessExpire: 86400
+
+
+Redis:
+  Address: 110.41.179.89:30195
+  Pass: r-wz9wop62956dh5k9ed
+Log:
+  ServiceName: admin-api
+  Stat: false # go-zero 版本 >= 1.5.0 才支持
+#  Mode: file
+#  Path: logs/front
