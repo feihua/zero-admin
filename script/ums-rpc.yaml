@@ -21,6 +21,9 @@ spec:
           image: ums-rpc:0.0.1
           ports:
             - containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: zero-admin-config
 
 ---
 apiVersion: v1

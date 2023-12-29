@@ -21,6 +21,9 @@ spec:
           image: oms-rpc:0.0.1
           ports:
             - containerPort: 8083
+          envFrom:
+            - configMapRef:
+                name: zero-admin-config
 
 ---
 apiVersion: v1

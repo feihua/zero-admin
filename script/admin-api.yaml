@@ -22,6 +22,9 @@ spec:
           image: admin-api:0.0.1
           ports:
             - containerPort: 8888
+          envFrom:
+            - configMapRef:
+                name: zero-admin-config
 
 ---
 apiVersion: v1
