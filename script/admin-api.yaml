@@ -16,7 +16,7 @@ spec:
       labels:
         app: admin-api
     spec:
-      serviceAccountName: default
+      serviceAccountName: koobe
       containers:
         - name: admin-api
           image: admin-api:0.0.1

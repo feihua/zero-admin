@@ -16,7 +16,7 @@ spec:
       labels:
         app: front-api
     spec:
-      serviceAccountName: default
+      serviceAccountName: koobe
       containers:
         - name: front-api
           image: front-api:0.0.1
