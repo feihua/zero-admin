@@ -55,3 +55,59 @@ restart: stop run
 
 # 默认构建目标是 "all"
 .DEFAULT_GOAL := all
+
+# 安装goctl工具
+goctl:
+	go install github.com/zeromicro/go-zero/tools/goctl@latest
+
+GOCTL=/home/koobe/go/bin/goctl
+
+# 生成admin-api代码
+admin:
+	$(GOCTL) api go -api ./api/doc/api/admin.api -dir ./api/
+
+# 生成front-api代码
+front:
+	/$(GOCTL) api go -api ./front-api/doc/api/front.api -dir ./front-api/
+
+# 生成sys-rpc代码
+sys:
+	$(GOCTL) rpc protoc rpc/sys/sys.proto --go_out=./rpc/sys/ --go-grpc_out=./rpc/sys/ --zrpc_out=./rpc/sys/ -m
+
+# 生成ums-rpc代码
+ums:
+	$(GOCTL) rpc protoc rpc/ums/ums.proto --go_out=./rpc/ums/ --go-grpc_out=./rpc/ums/ --zrpc_out=./rpc/ums/ -m
+
+# pms-rpc代码
+pms:
+	$(GOCTL) rpc protoc rpc/pms/pms.proto --go_out=./rpc/pms/ --go-grpc_out=./rpc/pms/ --zrpc_out=./rpc/pms/ -m
+
+# 生成oms-rpc代码
+oms:
+	$(GOCTL) rpc protoc rpc/oms/oms.proto --go_out=./rpc/oms/ --go-grpc_out=./rpc/oms/ --zrpc_out=./rpc/oms/ -m
+
+# 生成sms-rpc代码
+sms:
+	$(GOCTL) rpc protoc rpc/sms/sms.proto --go_out=./rpc/sms/ --go-grpc_out=./rpc/sms/ --zrpc_out=./rpc/sms/ -m
+
+# 生成cmsrpc代码
+cms:
+	$(GOCTL) rpc protoc rpc/cms/cms.proto --go_out=./rpc/cms/ --go-grpc_out=./rpc/cms/ --zrpc_out=./rpc/cms/ -m
+
+# 生成所有模块代码
+gen:
+	$(GOCTL) api go -api ./api/doc/api/admin.api -dir ./api/
+	# 生成front-api代码
+	/$(GOCTL) api go -api ./front-api/doc/api/front.api -dir ./front-api/
+	# 生成sys-rpc代码
+	$(GOCTL) rpc protoc rpc/sys/sys.proto --go_out=./rpc/sys/ --go-grpc_out=./rpc/sys/ --zrpc_out=./rpc/sys/ -m
+	# 生成ums-rpc代码
+	$(GOCTL) rpc protoc rpc/ums/ums.proto --go_out=./rpc/ums/ --go-grpc_out=./rpc/ums/ --zrpc_out=./rpc/ums/ -m
+	# pms-rpc代码
+	$(GOCTL) rpc protoc rpc/pms/pms.proto --go_out=./rpc/pms/ --go-grpc_out=./rpc/pms/ --zrpc_out=./rpc/pms/ -m
+	# 生成oms-rpc代码
+	$(GOCTL) rpc protoc rpc/oms/oms.proto --go_out=./rpc/oms/ --go-grpc_out=./rpc/oms/ --zrpc_out=./rpc/oms/ -m
+	# 生成sms-rpc代码
+	$(GOCTL) rpc protoc rpc/sms/sms.proto --go_out=./rpc/sms/ --go-grpc_out=./rpc/sms/ --zrpc_out=./rpc/sms/ -m
+	# 生成cmsrpc代码
+	$(GOCTL) rpc protoc rpc/cms/cms.proto --go_out=./rpc/cms/ --go-grpc_out=./rpc/cms/ --zrpc_out=./rpc/cms/ -m
