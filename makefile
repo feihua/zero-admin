@@ -9,21 +9,23 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOGET=$(GOCMD) mod tidy
 
-# 默认的构建目标
-all: clean deps build run
+MYSQL_INFO=root:r-wz9wop62956dh5k9ed@tcp(110.41.179.89:30395)/gozero
 
-# 清理目标
-clean:
+
+all: clean deps build run ## 默认的构建目标
+
+
+clean: ## 清理目标
 	$(GOCLEAN)
 	rm -rf target
  
-# 安装依赖目标
-deps:
+
+deps: ## 安装依赖目标
 	@export GOPROXY=https://goproxy.cn,direct
 	$(GOGET) -v
  
-# 构建目标
-build:
+
+build: ## 构建目标
 	$(GOBUILD) -o target/admin-api -v ./api/admin.go
 	$(GOBUILD) -o target/front-api -v ./front-api/front.go
 	$(GOBUILD) -o target/sys-rpc -v ./rpc/sys/sys.go
@@ -33,8 +35,8 @@ build:
 	$(GOBUILD) -o target/cms-rpc -v ./rpc/cms/cms.go
 	$(GOBUILD) -o target/sms-rpc -v ./rpc/sms/sms.go
 
-# 运行目标
-run:
+
+run: ## 运行目标
 	nohup ./target/admin-api -f api/etc/admin-api.yaml > /dev/null 2>&1 &
 	nohup ./target/front-api -f front-api/etc/front-api.yaml  > /dev/null 2>&1 &
 	nohup ./target/sys-rpc -f rpc/sys/etc/sys.yaml  > /dev/null 2>&1 &
@@ -44,8 +46,8 @@ run:
 	nohup ./target/cms-rpc -f rpc/cms/etc/cms.yaml  > /dev/null 2>&1 &
 	nohup ./target/sms-rpc -f rpc/sms/etc/sms.yaml  > /dev/null 2>&1 &
 
-# 停止目标
-stop:
+
+stop: ## 停止目标
 	pkill -f admin-api
 	pkill -f front-api
 	pkill -f sys-rpc
@@ -55,49 +57,49 @@ stop:
 	pkill -f oms-rpc
 	pkill -f pms-rpc 
 
-# 重启
-restart: stop run
 
-# 默认构建目标是 "all"
-.DEFAULT_GOAL := all
+restart: stop run ## 重启项目
 
-# goctl
-GOCTL=$(GOBIN)/goctl
 
-# 生成admin-api代码
-admin:
+.DEFAULT_GOAL := all ## 默认构建目标是
+
+
+GOCTL=$(GOBIN)/goctl ## goctl
+
+
+admin: ## 生成admin-api代码
 	$(GOCTL) api go -api ./api/doc/api/admin.api -dir ./api/
 
-# 生成front-api代码
-front:
+
+front: ## 生成front-api代码
 	/$(GOCTL) api go -api ./front-api/doc/api/front.api -dir ./front-api/
 
-# 生成sys-rpc代码
-sys:
+
+sys: ## 生成sys-rpc代码
 	$(GOCTL) rpc protoc rpc/sys/sys.proto --go_out=./rpc/sys/ --go-grpc_out=./rpc/sys/ --zrpc_out=./rpc/sys/ -m
 
-# 生成ums-rpc代码
-ums:
+
+ums:## 生成ums-rpc代码
 	$(GOCTL) rpc protoc rpc/ums/ums.proto --go_out=./rpc/ums/ --go-grpc_out=./rpc/ums/ --zrpc_out=./rpc/ums/ -m
 
-# pms-rpc代码
-pms:
+
+pms:## pms-rpc代码
 	$(GOCTL) rpc protoc rpc/pms/pms.proto --go_out=./rpc/pms/ --go-grpc_out=./rpc/pms/ --zrpc_out=./rpc/pms/ -m
 
-# 生成oms-rpc代码
-oms:
+
+oms: ## 生成oms-rpc代码
 	$(GOCTL) rpc protoc rpc/oms/oms.proto --go_out=./rpc/oms/ --go-grpc_out=./rpc/oms/ --zrpc_out=./rpc/oms/ -m
 
-# 生成sms-rpc代码
-sms:
+
+sms: ## 生成sms-rpc代码
 	$(GOCTL) rpc protoc rpc/sms/sms.proto --go_out=./rpc/sms/ --go-grpc_out=./rpc/sms/ --zrpc_out=./rpc/sms/ -m
 
-# 生成cmsrpc代码
-cms:
+
+cms: ## 生成cmsrpc代码
 	$(GOCTL) rpc protoc rpc/cms/cms.proto --go_out=./rpc/cms/ --go-grpc_out=./rpc/cms/ --zrpc_out=./rpc/cms/ -m
 
-# 生成所有模块代码
-gen:
+
+gen:	## 生成所有模块代码
 	$(GOCTL) api go -api ./api/doc/api/admin.api -dir ./api/
 	# 生成front-api代码
 	/$(GOCTL) api go -api ./front-api/doc/api/front.api -dir ./front-api/
@@ -113,3 +115,16 @@ gen:
 	$(GOCTL) rpc protoc rpc/sms/sms.proto --go_out=./rpc/sms/ --go-grpc_out=./rpc/sms/ --zrpc_out=./rpc/sms/ -m
 	# 生成cmsrpc代码
 	$(GOCTL) rpc protoc rpc/cms/cms.proto --go_out=./rpc/cms/ --go-grpc_out=./rpc/cms/ --zrpc_out=./rpc/cms/ -m
+
+model:
+	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="sys*" -dir=./rpc/model/sysmodel
+	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="ums*" -dir=./rpc/model/umsmodel
+	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="sms*" -dir=./rpc/model/smsmodel
+	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="oms*" -dir=./rpc/model/omsmodel
+	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="pms*" -dir=./rpc/model/pmsmodel
+	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="cms*" -dir=./rpc/model/cmsmodel
+
+
+
+help: ## show help message
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m\033[0m\n"} /^[$$()% 0-9a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
