@@ -113,7 +113,7 @@ type (
 		OrderDeleteById(ctx context.Context, in *OrderDeleteByIdReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
 		// app端查询会员的订单列表信息
 		QueryOrderList(ctx context.Context, in *QueryOrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
-		// 第三方支付回调用的时候,更新订单状态(目前对接的是支付宝支付)
+		// 更新订单状态
 		UpdateOrderStatusByOutTradeNo(ctx context.Context, in *UpdateOrderStatusByOutTradeNoReq, opts ...grpc.CallOption) (*UpdateOrderStatusByOutTradeNoResp, error)
 	}
 
@@ -179,7 +179,7 @@ func (m *defaultOrderService) QueryOrderList(ctx context.Context, in *QueryOrder
 	return client.QueryOrderList(ctx, in, opts...)
 }
 
-// 第三方支付回调用的时候,更新订单状态(目前对接的是支付宝支付)
+// 更新订单状态
 func (m *defaultOrderService) UpdateOrderStatusByOutTradeNo(ctx context.Context, in *UpdateOrderStatusByOutTradeNoReq, opts ...grpc.CallOption) (*UpdateOrderStatusByOutTradeNoResp, error) {
 	client := omsclient.NewOrderServiceClient(m.cli.Conn())
 	return client.UpdateOrderStatusByOutTradeNo(ctx, in, opts...)

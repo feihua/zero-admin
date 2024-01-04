@@ -7,9 +7,7 @@ import "sys/loginlog.api"
 import "sys/syslog.api"
 import "sys/config.api"
 import "sys/job.api"
-
 import "sys/upload.api"
-
 import "oms/cart_item.api"
 import "oms/order.api"
 import "oms/order_company_address.api"
@@ -17,7 +15,6 @@ import "oms/order_operate_history.api"
 import "oms/order_return_apply.api"
 import "oms/order_return_reason.api"
 import "oms/order_setting.api"
-
 import "pms/product.api"
 import "pms/product_brand.api"
 import "pms/product_category.api"
@@ -27,7 +24,6 @@ import "pms/product_member_price.api"
 import "pms/product_sku_stock.api"
 import "pms/product_attribute.api"
 import "pms/product_attribute_category.api"
-
 import "sms/coupon.api"
 import "sms/coupon_history.api"
 import "sms/flash_promotion.api"
@@ -38,7 +34,6 @@ import "sms/home_brand.api"
 import "sms/home_new_product.api"
 import "sms/home_recommend_product.api"
 import "sms/home_recommend_subject.api"
-
 import "ums/member.api"
 import "ums/member_address.api"
 import "ums/member_growth_change_history.api"
@@ -50,12 +45,12 @@ import "ums/member_rule_setting.api"
 import "ums/member_statistics_info.api"
 import "ums/member_tag.api"
 import "ums/member_task.api"
-
 import "cms/subject.api"
 import "cms/prefrence_area.api"
 
-info(
-	desc: "go zero admin"
+info (
+	desc:   "go zero admin"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
+

@@ -14,7 +14,7 @@ type GenerateConfirmOrderResp {
     Data OrderDetailModel `json:"data"`
 }
 
-type OrderDetailModel struct {
+type OrderDetailModel {
     CartPromotionItemList []CartPromotionItemList `json:"cartPromotionItemList"`
     MemberReceiveAddressList []MemberReceiveAddressList `json:"memberReceiveAddressList"`
     CouponHistoryDetailList interface{} `json:"couponHistoryDetailList"`
@@ -23,14 +23,14 @@ type OrderDetailModel struct {
     CalcAmount CalcAmount `json:"calcAmount"`
 }
 
-type CalcAmount struct {
+type CalcAmount {
     TotalAmount float32 `json:"totalAmount"`
     FreightAmount float32 `json:"freightAmount"`
     PromotionAmount float32 `json:"promotionAmount"`
     PayAmount float32 `json:"payAmount"`
 }
 
-type CartPromotionItemList struct {
+type CartPromotionItemList {
     Id int64 `json:"id"`
     ProductId int64 `json:"productId"`
     ProductSkuId int64 `json:"productSkuId"`
@@ -57,7 +57,7 @@ type CartPromotionItemList struct {
     Growth int64 `json:"growth"`                       //购买商品赠送成长值
 }
 
-type IntegrationConsumeSetting struct {
+type IntegrationConsumeSetting {
     Id int64 `json:"id"`
     DeductionPerAmount int64 `json:"deductionPerAmount"`
     MaxPercentPerOrder int64 `json:"maxPercentPerOrder"`
@@ -65,7 +65,7 @@ type IntegrationConsumeSetting struct {
     CouponStatus int64 `json:"couponStatus"`
 }
 
-type MemberReceiveAddressList struct {
+type MemberReceiveAddressList {
     Id int64 `json:"id"`
     MemberId int64 `json:"memberId"`
     Name string `json:"name"`

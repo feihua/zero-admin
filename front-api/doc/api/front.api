@@ -1,0 +1,21 @@
+import "address.api"
+import "member.api"
+import "cart.api"
+import "category.api"
+import "home.api"
+import "order.api"
+import "product.api"
+import "collection.api"
+import "history.api"
+import "coupon.api"
+import "brand.api"
+import "attention.api"
+import "pay.api"
+
+info (
+	title:  "zero-front"
+	desc:   "App接口"
+	author: "koobe"
+	email:  "1002219331@qq.com"
+)
+

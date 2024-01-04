@@ -73,12 +73,12 @@ type (
         UseStatus int64 `path:"useStatus"`         // 使用状态-使用可用:0->不可用；1->可用
     }
 
-    CouponListByCartResp struct {
+    CouponListByCartResp {
         Code int64 `json:"code"`
         Message string `json:"message"`
         Data ListCouponData `json:"data"`
     }
-    ListCouponData struct {
+    ListCouponData {
         EnableList interface{} `json:"enableList"`
         DisableList interface{} `json:"disableList"`
     }
