@@ -1,4 +1,9 @@
 # 定义变量
+ifndef GOPATH
+	GOPATH := $(shell go env GOPATH)
+endif
+
+GOBIN=$(GOPATH)/bin
 GOCMD=go
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
@@ -56,11 +61,8 @@ restart: stop run
 # 默认构建目标是 "all"
 .DEFAULT_GOAL := all
 
-# 安装goctl工具
-goctl:
-	go install github.com/zeromicro/go-zero/tools/goctl@latest
-
-GOCTL=/home/koobe/go/bin/goctl
+# goctl
+GOCTL=$(GOBIN)/goctl
 
 # 生成admin-api代码
 admin:
