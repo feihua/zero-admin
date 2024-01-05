@@ -135,7 +135,6 @@ image: ## 构建docker镜像
 	docker build -t front-api:0.0.1 -f front-api/Dockerfile .
 
 run: ## 启动docker容器
-	docker run --rm --net=host --name=sys sys-rpc:0.0.1; \
 	docker run -itd --net=host --name=sys sys-rpc:0.0.1; \
     docker run -itd --net=host --name=ums ums-rpc:0.0.1; \
     docker run -itd --net=host --name=oms oms-rpc:0.0.1; \
