@@ -27,4 +27,4 @@ WORKDIR /app
 COPY --from=builder /app/pms /app/pms
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./pms", "-f", "${CONFIG_FILE}"]
+CMD ["sh", "-c", "./pms -f ${CONFIG_FILE}"]

@@ -27,4 +27,4 @@ WORKDIR /app
 COPY --from=builder /app/oms /app/oms
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./oms", "-f", "${CONFIG_FILE}"]
+CMD ["sh", "-c", "./oms -f ${CONFIG_FILE}"]

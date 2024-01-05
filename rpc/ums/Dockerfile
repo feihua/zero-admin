@@ -27,4 +27,4 @@ WORKDIR /app
 COPY --from=builder /app/ums /app/ums
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./ums", "-f", "${CONFIG_FILE}"]
+CMD ["sh", "-c", "./ums -f ${CONFIG_FILE}"]

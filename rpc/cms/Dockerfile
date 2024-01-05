@@ -27,4 +27,4 @@ WORKDIR /app
 COPY --from=builder /app/cms /app/cms
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./cms", "-f", "${CONFIG_FILE}"]
+CMD ["sh", "-c", "./cms -f ${CONFIG_FILE}"]

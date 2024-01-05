@@ -27,4 +27,4 @@ WORKDIR /app
 COPY --from=builder /app/sms /app/sms
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./sms", "-f", "${CONFIG_FILE}"]
+CMD ["sh", "-c", "./sms -f ${CONFIG_FILE}"]

@@ -27,4 +27,4 @@ WORKDIR /app
 COPY --from=builder /app/admin /app/admin
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./admin", "-f", "${CONFIG_FILE}"]
+CMD ["sh", "-c", "./admin -f ${CONFIG_FILE}"]

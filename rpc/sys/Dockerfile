@@ -21,10 +21,10 @@ RUN apk update --no-cache
 RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache tzdata
 ENV TZ Asia/Shanghai
-ENV CONFIG_FILE etc/sys.yaml
+ENV CONFIG_FILE=etc/sys.yaml
 
 WORKDIR /app
 COPY --from=builder /app/sys /app/sys
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./sys", "-f", "${CONFIG_FILE}"]
+CMD ["sh", "-c", "./sys -f ${CONFIG_FILE}"]

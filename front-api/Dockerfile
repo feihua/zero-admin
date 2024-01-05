@@ -27,4 +27,4 @@ WORKDIR /app
 COPY --from=builder /app/front /app/front
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./front", "-f", "${CONFIG_FILE}"]
+CMD ["sh", "-c", "./front -f ${CONFIG_FILE}"]
