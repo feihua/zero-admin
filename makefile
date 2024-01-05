@@ -12,7 +12,7 @@ GOGET=$(GOCMD) mod tidy
 MYSQL_INFO=root:r-wz9wop62956dh5k9ed@tcp(110.41.179.89:30395)/gozero
 
 
-all: clean deps build run ## 默认的构建目标
+all: deps build ## 默认的构建目标
 
 
 clean: ## 清理目标
@@ -36,7 +36,7 @@ build: ## 构建目标
 	$(GOBUILD) -o target/sms-rpc -v ./rpc/sms/sms.go
 
 
-run: ## 运行目标
+start: ## 运行目标
 	nohup ./target/admin-api -f api/etc/admin-api.yaml > /dev/null 2>&1 &
 	nohup ./target/front-api -f front-api/etc/front-api.yaml  > /dev/null 2>&1 &
 	nohup ./target/sys-rpc -f rpc/sys/etc/sys.yaml  > /dev/null 2>&1 &
@@ -116,7 +116,7 @@ gen:	## 生成所有模块代码
 	# 生成cmsrpc代码
 	$(GOCTL) rpc protoc rpc/cms/cms.proto --go_out=./rpc/cms/ --go-grpc_out=./rpc/cms/ --zrpc_out=./rpc/cms/ -m
 
-model:
+model: ## 生成model代码
 	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="sys*" -dir=./rpc/model/sysmodel
 	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="ums*" -dir=./rpc/model/umsmodel
 	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="sms*" -dir=./rpc/model/smsmodel
@@ -124,7 +124,38 @@ model:
 	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="pms*" -dir=./rpc/model/pmsmodel
 	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="cms*" -dir=./rpc/model/cmsmodel
 
+image: ## 构建docker镜像
+	docker build -t sys-rpc:0.0.1 -f rpc/sys/Dockerfile .
+	docker build -t ums-rpc:0.0.1 -f rpc/ums/Dockerfile .
+	docker build -t oms-rpc:0.0.1 -f rpc/oms/Dockerfile .
+	docker build -t pms-rpc:0.0.1 -f rpc/pms/Dockerfile .
+	docker build -t sms-rpc:0.0.1 -f rpc/sms/Dockerfile .
+	docker build -t cms-rpc:0.0.1 -f rpc/cms/Dockerfile .
+	docker build -t admin-api:0.0.1 -f api/Dockerfile .
+	docker build -t front-api:0.0.1 -f front-api/Dockerfile .
 
+run: ## 启动docker容器
+	docker run --rm --net=host --name=sys sys-rpc:0.0.1; \
+	docker run -itd --net=host --name=sys sys-rpc:0.0.1; \
+    docker run -itd --net=host --name=ums ums-rpc:0.0.1; \
+    docker run -itd --net=host --name=oms oms-rpc:0.0.1; \
+    docker run -itd --net=host --name=pms pms-rpc:0.0.1; \
+    docker run -itd --net=host --name=sms sms-rpc:0.0.1; \
+    docker run -itd --net=host --name=cms cms-rpc:0.0.1; \
+    docker run -itd --net=host --name=admin-api admin-api:0.0.1; \
+    docker run -itd --net=host --name=front-api front-api:0.0.1 \
+
+kubectl: ## 部署k8s容器
+	kubectl apply -f script/account/service-account.yaml; \
+    kubectl apply -f script/register.yaml; \
+    kubectl apply -f script/sys-rpc.yaml; \
+    kubectl apply -f script/ums-rpc.yaml; \
+    kubectl apply -f script/sms-rpc.yaml; \
+    kubectl apply -f script/pms-rpc.yaml; \
+    kubectl apply -f script/oms-rpc.yaml; \
+    kubectl apply -f script/cms-rpc.yaml; \
+    kubectl apply -f script/admin-api.yaml; \
+    kubectl apply -f script/front-api.yaml; \
 
 help: ## show help message
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m\033[0m\n"} /^[$$()% 0-9a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
