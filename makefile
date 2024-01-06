@@ -145,8 +145,8 @@ run: ## 启动docker容器
     docker run -itd --net=host --name=front-api front-api:0.0.1 \
 
 kubectl: ## 部署k8s容器
-	kubectl apply -f script/account/service-account.yaml; \
-    kubectl apply -f script/register.yaml; \
+	kubectl apply -f script/account/serviceaccount.yaml; \
+    kubectl apply -f script/configmap/register.yaml; \
     kubectl apply -f script/sys-rpc.yaml; \
     kubectl apply -f script/ums-rpc.yaml; \
     kubectl apply -f script/sms-rpc.yaml; \
