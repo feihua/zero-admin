@@ -67,38 +67,6 @@ restart: stop run ## 重启项目
 GOCTL=$(GOBIN)/goctl ## goctl
 
 
-admin: ## 生成admin-api代码
-	$(GOCTL) api go -api ./api/doc/api/admin.api -dir ./api/
-
-
-front: ## 生成front-api代码
-	/$(GOCTL) api go -api ./front-api/doc/api/front.api -dir ./front-api/
-
-
-sys: ## 生成sys-rpc代码
-	$(GOCTL) rpc protoc rpc/sys/sys.proto --go_out=./rpc/sys/ --go-grpc_out=./rpc/sys/ --zrpc_out=./rpc/sys/ -m
-
-
-ums:## 生成ums-rpc代码
-	$(GOCTL) rpc protoc rpc/ums/ums.proto --go_out=./rpc/ums/ --go-grpc_out=./rpc/ums/ --zrpc_out=./rpc/ums/ -m
-
-
-pms:## pms-rpc代码
-	$(GOCTL) rpc protoc rpc/pms/pms.proto --go_out=./rpc/pms/ --go-grpc_out=./rpc/pms/ --zrpc_out=./rpc/pms/ -m
-
-
-oms: ## 生成oms-rpc代码
-	$(GOCTL) rpc protoc rpc/oms/oms.proto --go_out=./rpc/oms/ --go-grpc_out=./rpc/oms/ --zrpc_out=./rpc/oms/ -m
-
-
-sms: ## 生成sms-rpc代码
-	$(GOCTL) rpc protoc rpc/sms/sms.proto --go_out=./rpc/sms/ --go-grpc_out=./rpc/sms/ --zrpc_out=./rpc/sms/ -m
-
-
-cms: ## 生成cmsrpc代码
-	$(GOCTL) rpc protoc rpc/cms/cms.proto --go_out=./rpc/cms/ --go-grpc_out=./rpc/cms/ --zrpc_out=./rpc/cms/ -m
-
-
 gen:	## 生成所有模块代码
 	$(GOCTL) api go -api ./api/doc/api/admin.api -dir ./api/
 	# 生成front-api代码
