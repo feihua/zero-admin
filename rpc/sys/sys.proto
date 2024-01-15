@@ -527,12 +527,28 @@ message LoginLogDeleteReq {
 message LoginLogDeleteResp {
   string pong = 1;
 }
+
+message StatisticsLoginLogReq {
+  string status = 1;
+}
+
+message StatisticsLoginLogResp {
+  //查询当天登录人数（根据IP）
+  int32 current_day_login_count = 1;
+  //统计当前周登录人数（根据IP）
+  int32 current_week_login_count = 2;
+  //统计当前月登录人数（根据IP）
+  int32 current_month_login_count = 3;
+}
+
 //loginLog end---------------------
 service LoginLogService {
 
   rpc LoginLogAdd(LoginLogAddReq) returns(LoginLogAddResp);
   rpc LoginLogList(LoginLogListReq) returns(LoginLogListResp);
   rpc LoginLogDelete(LoginLogDeleteReq) returns(LoginLogDeleteResp);
+  // 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
+  rpc StatisticsLoginLog(StatisticsLoginLogReq) returns(StatisticsLoginLogResp);
 
 }
 
