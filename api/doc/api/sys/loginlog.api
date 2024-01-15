@@ -39,7 +39,7 @@ type (
 	}
 
 	StatisticsLoginLogReq {
-		Ids []int64 `json:"ids"`
+
 	}
 	StatisticsLoginLogResp {
 		Code    string `json:"code"`
@@ -47,9 +47,9 @@ type (
 		Data StatisticsLoginLogData `json:"data"`
 	}
 	StatisticsLoginLogData {
-		DayLoginCount             int64  `json:"dayLoginCount"` //查询当天登录人数（根据IP）
-		WeekLoginCount             int64  `json:"weekLoginCount"` //统计当前周登录人数（根据IP）
-		MonthLoginCount             int64  `json:"monthLoginCount"` //统计当前月登录人数（根据IP）
+		DayLoginCount             int32  `json:"dayLoginCount"` //查询当天登录人数（根据IP）
+		WeekLoginCount             int32  `json:"weekLoginCount"` //统计当前周登录人数（根据IP）
+		MonthLoginCount             int32  `json:"monthLoginCount"` //统计当前月登录人数（根据IP）
 	}
 )
 
@@ -68,5 +68,5 @@ service admin-api {
 
 	// 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
 	@handler StatisticsLoginLog
-	post /statisticsLoginLog (StatisticsLoginLogReq) returns (StatisticsLoginLogResp)
+	get /statisticsLoginLog returns (StatisticsLoginLogResp)
 }

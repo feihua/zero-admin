@@ -19,6 +19,7 @@ type (
 		Count(ctx context.Context, in *sysclient.LoginLogListReq) (int64, error)
 		FindAll(ctx context.Context, in *sysclient.LoginLogListReq) (*[]SysLoginLog, error)
 		DeleteByIds(ctx context.Context, ids []int64) error
+		StatisticsLoginLog(ctx context.Context, flag int64) (int32, error)
 	}
 
 	customSysLoginLogModel struct {
@@ -97,4 +98,28 @@ func (m *customSysLoginLogModel) DeleteByIds(ctx context.Context, ids []int64) e
 	// 执行删除语句
 	_, err := m.conn.ExecCtx(ctx, query, args...)
 	return err
+}
+
+func (m *customSysLoginLogModel) StatisticsLoginLog(ctx context.Context, flag int64) (int32, error) {
+	query := ""
+	if flag == 1 {
+		query = "select count(distinct ip) current_day_login_count from sys_login_log where date(create_time) = curdate()"
+	}
+	if flag == 2 {
+		query = "SELECT COUNT(DISTINCT ip) AS current_week_login_count FROM sys_login_log WHERE YEARWEEK(create_time, 1) = YEARWEEK(CURDATE(), 1)"
+	}
+	if flag == 3 {
+		query = "SELECT COUNT(DISTINCT ip) AS current_month_login_count FROM sys_login_log WHERE MONTH(create_time) = MONTH(CURDATE())   AND YEAR(create_time) = YEAR(CURDATE())"
+	}
+	var count int32
+	err := m.conn.QueryRow(&count, query)
+
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
 }

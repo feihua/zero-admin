@@ -1350,26 +1350,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/delete",
-					Handler: syslog.LoginLogDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/list",
-					Handler: syslog.LoginLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/loginLog"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/delete",
 					Handler: syslog.SysLogDeleteHandler(serverCtx),
 				},
 				{
@@ -1381,6 +1361,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/sysLog"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
+					Handler: syslog.LoginLogDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/list",
+					Handler: syslog.LoginLogListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/statisticsLoginLog",
+					Handler: syslog.StatisticsLoginLogHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/loginLog"),
 	)
 
 	server.AddRoutes(

@@ -1246,9 +1246,10 @@ var DeptService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	LoginLogService_LoginLogAdd_FullMethodName    = "/sysclient.LoginLogService/LoginLogAdd"
-	LoginLogService_LoginLogList_FullMethodName   = "/sysclient.LoginLogService/LoginLogList"
-	LoginLogService_LoginLogDelete_FullMethodName = "/sysclient.LoginLogService/LoginLogDelete"
+	LoginLogService_LoginLogAdd_FullMethodName        = "/sysclient.LoginLogService/LoginLogAdd"
+	LoginLogService_LoginLogList_FullMethodName       = "/sysclient.LoginLogService/LoginLogList"
+	LoginLogService_LoginLogDelete_FullMethodName     = "/sysclient.LoginLogService/LoginLogDelete"
+	LoginLogService_StatisticsLoginLog_FullMethodName = "/sysclient.LoginLogService/StatisticsLoginLog"
 )
 
 // LoginLogServiceClient is the client API for LoginLogService service.
@@ -1258,6 +1259,8 @@ type LoginLogServiceClient interface {
 	LoginLogAdd(ctx context.Context, in *LoginLogAddReq, opts ...grpc.CallOption) (*LoginLogAddResp, error)
 	LoginLogList(ctx context.Context, in *LoginLogListReq, opts ...grpc.CallOption) (*LoginLogListResp, error)
 	LoginLogDelete(ctx context.Context, in *LoginLogDeleteReq, opts ...grpc.CallOption) (*LoginLogDeleteResp, error)
+	// 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
+	StatisticsLoginLog(ctx context.Context, in *StatisticsLoginLogReq, opts ...grpc.CallOption) (*StatisticsLoginLogResp, error)
 }
 
 type loginLogServiceClient struct {
@@ -1295,6 +1298,15 @@ func (c *loginLogServiceClient) LoginLogDelete(ctx context.Context, in *LoginLog
 	return out, nil
 }
 
+func (c *loginLogServiceClient) StatisticsLoginLog(ctx context.Context, in *StatisticsLoginLogReq, opts ...grpc.CallOption) (*StatisticsLoginLogResp, error) {
+	out := new(StatisticsLoginLogResp)
+	err := c.cc.Invoke(ctx, LoginLogService_StatisticsLoginLog_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LoginLogServiceServer is the server API for LoginLogService service.
 // All implementations must embed UnimplementedLoginLogServiceServer
 // for forward compatibility
@@ -1302,6 +1314,8 @@ type LoginLogServiceServer interface {
 	LoginLogAdd(context.Context, *LoginLogAddReq) (*LoginLogAddResp, error)
 	LoginLogList(context.Context, *LoginLogListReq) (*LoginLogListResp, error)
 	LoginLogDelete(context.Context, *LoginLogDeleteReq) (*LoginLogDeleteResp, error)
+	// 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
+	StatisticsLoginLog(context.Context, *StatisticsLoginLogReq) (*StatisticsLoginLogResp, error)
 	mustEmbedUnimplementedLoginLogServiceServer()
 }
 
@@ -1317,6 +1331,9 @@ func (UnimplementedLoginLogServiceServer) LoginLogList(context.Context, *LoginLo
 }
 func (UnimplementedLoginLogServiceServer) LoginLogDelete(context.Context, *LoginLogDeleteReq) (*LoginLogDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginLogDelete not implemented")
+}
+func (UnimplementedLoginLogServiceServer) StatisticsLoginLog(context.Context, *StatisticsLoginLogReq) (*StatisticsLoginLogResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StatisticsLoginLog not implemented")
 }
 func (UnimplementedLoginLogServiceServer) mustEmbedUnimplementedLoginLogServiceServer() {}
 
@@ -1385,6 +1402,24 @@ func _LoginLogService_LoginLogDelete_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LoginLogService_StatisticsLoginLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StatisticsLoginLogReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoginLogServiceServer).StatisticsLoginLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LoginLogService_StatisticsLoginLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoginLogServiceServer).StatisticsLoginLog(ctx, req.(*StatisticsLoginLogReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LoginLogService_ServiceDesc is the grpc.ServiceDesc for LoginLogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1403,6 +1438,10 @@ var LoginLogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LoginLogDelete",
 			Handler:    _LoginLogService_LoginLogDelete_Handler,
+		},
+		{
+			MethodName: "StatisticsLoginLog",
+			Handler:    _LoginLogService_StatisticsLoginLog_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

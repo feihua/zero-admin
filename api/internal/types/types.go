@@ -2086,6 +2086,21 @@ type SkuStockList struct {
 	SPData         string  `json:"spData"`
 }
 
+type StatisticsLoginLogData struct {
+	DayLoginCount   int32 `json:"dayLoginCount"`   //查询当天登录人数（根据IP）
+	WeekLoginCount  int32 `json:"weekLoginCount"`  //统计当前周登录人数（根据IP）
+	MonthLoginCount int32 `json:"monthLoginCount"` //统计当前月登录人数（根据IP）
+}
+
+type StatisticsLoginLogReq struct {
+}
+
+type StatisticsLoginLogResp struct {
+	Code    string                 `json:"code"`
+	Message string                 `json:"message"`
+	Data    StatisticsLoginLogData `json:"data"`
+}
+
 type UpdateCartItemReq struct {
 	Id                int64   `json:"id"`
 	ProductId         int64   `json:"productId"`
