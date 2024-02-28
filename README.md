@@ -65,10 +65,16 @@ Zero-Admin 是一套基于 go-zero 框架实现的电商系统，采用 Docker �
 # android版本
 android版本体验地址 [flutter-mall-app](https://www.pgyer.com/OoW2Zy)
 
+
+# 项目模板
+[zero-admin-template](https://github.com/feihua/zero-admin-template)(只包含基础的rbac权限)
+
 # 1.项目预览
 
 **预览地址**http://110.41.179.89/mall <span  style="color: red;"> 账号：admin 密码: 123456</span>
 > 注：演示账号部分功能修改删除权限未开放。
+
+
 
 ## 1.1用户
 
