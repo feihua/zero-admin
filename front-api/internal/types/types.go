@@ -339,18 +339,10 @@ type CartPromotionItemList struct {
 }
 
 type CategoryData struct {
-	Id           int64  `json:"id"`
-	ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
-	Name         string `json:"name"`
-	Level        int64  `json:"level"` // 分类级别：0->1级；1->2级
-	ProductCount int64  `json:"productCount"`
-	ProductUnit  string `json:"productUnit"`
-	NavStatus    int64  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus   int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	Sort         int64  `json:"sort"`
-	Icon         string `json:"icon"` // 图标
-	Keywords     string `json:"keywords"`
-	Description  string `json:"description"` // 描述
+	Id       int64          `json:"id"`
+	Name     string         `json:"name"`
+	ImageUrl string         `json:"imageUrl"`
+	Children []CategoryData `json:"children"`
 }
 
 type CategoryReq struct {
@@ -973,6 +965,12 @@ type ProductList struct {
 	BrandName                  string  `json:"brandName"`
 	ProductCategoryName        string  `json:"productCategoryName"`
 	Description                string  `json:"description"`
+}
+
+type QueryProductCateListResp struct {
+	Code    int64          `json:"code"`
+	Message string         `json:"message"`
+	Data    []CategoryData `json:"data"`
 }
 
 type QueryProductListData struct {

@@ -2546,10 +2546,11 @@ var ProductCategoryAttributeRelationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductCategoryService_ProductCategoryAdd_FullMethodName    = "/pmsclient.ProductCategoryService/ProductCategoryAdd"
-	ProductCategoryService_ProductCategoryList_FullMethodName   = "/pmsclient.ProductCategoryService/ProductCategoryList"
-	ProductCategoryService_ProductCategoryUpdate_FullMethodName = "/pmsclient.ProductCategoryService/ProductCategoryUpdate"
-	ProductCategoryService_ProductCategoryDelete_FullMethodName = "/pmsclient.ProductCategoryService/ProductCategoryDelete"
+	ProductCategoryService_ProductCategoryAdd_FullMethodName       = "/pmsclient.ProductCategoryService/ProductCategoryAdd"
+	ProductCategoryService_ProductCategoryList_FullMethodName      = "/pmsclient.ProductCategoryService/ProductCategoryList"
+	ProductCategoryService_ProductCategoryUpdate_FullMethodName    = "/pmsclient.ProductCategoryService/ProductCategoryUpdate"
+	ProductCategoryService_ProductCategoryDelete_FullMethodName    = "/pmsclient.ProductCategoryService/ProductCategoryDelete"
+	ProductCategoryService_QueryProductCategoryList_FullMethodName = "/pmsclient.ProductCategoryService/QueryProductCategoryList"
 )
 
 // ProductCategoryServiceClient is the client API for ProductCategoryService service.
@@ -2560,6 +2561,7 @@ type ProductCategoryServiceClient interface {
 	ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
 	ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
 	ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error)
+	QueryProductCategoryList(ctx context.Context, in *QueryProductCategoryListReq, opts ...grpc.CallOption) (*QueryProductCategoryListResp, error)
 }
 
 type productCategoryServiceClient struct {
@@ -2606,6 +2608,15 @@ func (c *productCategoryServiceClient) ProductCategoryDelete(ctx context.Context
 	return out, nil
 }
 
+func (c *productCategoryServiceClient) QueryProductCategoryList(ctx context.Context, in *QueryProductCategoryListReq, opts ...grpc.CallOption) (*QueryProductCategoryListResp, error) {
+	out := new(QueryProductCategoryListResp)
+	err := c.cc.Invoke(ctx, ProductCategoryService_QueryProductCategoryList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductCategoryServiceServer is the server API for ProductCategoryService service.
 // All implementations must embed UnimplementedProductCategoryServiceServer
 // for forward compatibility
@@ -2614,6 +2625,7 @@ type ProductCategoryServiceServer interface {
 	ProductCategoryList(context.Context, *ProductCategoryListReq) (*ProductCategoryListResp, error)
 	ProductCategoryUpdate(context.Context, *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error)
 	ProductCategoryDelete(context.Context, *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error)
+	QueryProductCategoryList(context.Context, *QueryProductCategoryListReq) (*QueryProductCategoryListResp, error)
 	mustEmbedUnimplementedProductCategoryServiceServer()
 }
 
@@ -2632,6 +2644,9 @@ func (UnimplementedProductCategoryServiceServer) ProductCategoryUpdate(context.C
 }
 func (UnimplementedProductCategoryServiceServer) ProductCategoryDelete(context.Context, *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryDelete not implemented")
+}
+func (UnimplementedProductCategoryServiceServer) QueryProductCategoryList(context.Context, *QueryProductCategoryListReq) (*QueryProductCategoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductCategoryList not implemented")
 }
 func (UnimplementedProductCategoryServiceServer) mustEmbedUnimplementedProductCategoryServiceServer() {
 }
@@ -2719,6 +2734,24 @@ func _ProductCategoryService_ProductCategoryDelete_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductCategoryService_QueryProductCategoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductCategoryListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductCategoryServiceServer).QueryProductCategoryList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductCategoryService_QueryProductCategoryList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductCategoryServiceServer).QueryProductCategoryList(ctx, req.(*QueryProductCategoryListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductCategoryService_ServiceDesc is the grpc.ServiceDesc for ProductCategoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2741,6 +2774,10 @@ var ProductCategoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductCategoryDelete",
 			Handler:    _ProductCategoryService_ProductCategoryDelete_Handler,
+		},
+		{
+			MethodName: "QueryProductCategoryList",
+			Handler:    _ProductCategoryService_QueryProductCategoryList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

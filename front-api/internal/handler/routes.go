@@ -92,6 +92,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/productCateList/:parentId",
 				Handler: category.ProductCateListHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryProductCateList",
+				Handler: category.QueryProductCateListHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/api/category"),
 	)

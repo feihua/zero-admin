@@ -1,14 +1,5 @@
-### app会员登录
-POST {{host}}/api/member/login
-Content-Type: application/json
-
-{
-  "mobile": "18613030352",
-  "password": "123456"
-}
-> {% client.global.set("token", response.body.data.token); %}
-
 ### 获取商品分类
 GET {{host}}/api/category/productCateList/2
-Authorization: Bearer {{token}}
 
+### 获取商品分类(嵌套children)
+GET {{host}}/api/category/queryProductCateList

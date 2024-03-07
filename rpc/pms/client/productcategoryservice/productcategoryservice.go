@@ -177,6 +177,9 @@ type (
 	ProductVertifyRecordListResp               = pmsclient.ProductVertifyRecordListResp
 	ProductVertifyRecordUpdateReq              = pmsclient.ProductVertifyRecordUpdateReq
 	ProductVertifyRecordUpdateResp             = pmsclient.ProductVertifyRecordUpdateResp
+	QueryProductCategoryListData               = pmsclient.QueryProductCategoryListData
+	QueryProductCategoryListReq                = pmsclient.QueryProductCategoryListReq
+	QueryProductCategoryListResp               = pmsclient.QueryProductCategoryListResp
 	QuerySkuStockByProductSkuIdReq             = pmsclient.QuerySkuStockByProductSkuIdReq
 	ReleaseSkuStockLockData                    = pmsclient.ReleaseSkuStockLockData
 	ReleaseSkuStockLockReq                     = pmsclient.ReleaseSkuStockLockReq
@@ -197,6 +200,7 @@ type (
 		ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
 		ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
 		ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error)
+		QueryProductCategoryList(ctx context.Context, in *QueryProductCategoryListReq, opts ...grpc.CallOption) (*QueryProductCategoryListResp, error)
 	}
 
 	defaultProductCategoryService struct {
@@ -228,4 +232,9 @@ func (m *defaultProductCategoryService) ProductCategoryUpdate(ctx context.Contex
 func (m *defaultProductCategoryService) ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error) {
 	client := pmsclient.NewProductCategoryServiceClient(m.cli.Conn())
 	return client.ProductCategoryDelete(ctx, in, opts...)
+}
+
+func (m *defaultProductCategoryService) QueryProductCategoryList(ctx context.Context, in *QueryProductCategoryListReq, opts ...grpc.CallOption) (*QueryProductCategoryListResp, error) {
+	client := pmsclient.NewProductCategoryServiceClient(m.cli.Conn())
+	return client.QueryProductCategoryList(ctx, in, opts...)
 }

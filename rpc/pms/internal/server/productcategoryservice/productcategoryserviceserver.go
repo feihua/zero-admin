@@ -41,3 +41,8 @@ func (s *ProductCategoryServiceServer) ProductCategoryDelete(ctx context.Context
 	l := productcategoryservicelogic.NewProductCategoryDeleteLogic(ctx, s.svcCtx)
 	return l.ProductCategoryDelete(in)
 }
+
+func (s *ProductCategoryServiceServer) QueryProductCategoryList(ctx context.Context, in *pmsclient.QueryProductCategoryListReq) (*pmsclient.QueryProductCategoryListResp, error) {
+	l := productcategoryservicelogic.NewQueryProductCategoryListLogic(ctx, s.svcCtx)
+	return l.QueryProductCategoryList(in)
+}

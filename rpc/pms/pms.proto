@@ -1043,14 +1043,28 @@ message ProductCategoryDeleteReq {
 message ProductCategoryDeleteResp {
   string pong = 1;
 }
-service ProductCategoryService {
 
+message QueryProductCategoryListReq {
+
+}
+message QueryProductCategoryListData{
+  int64    Id = 1;
+  string  Name = 2;
+  string  ImageUrl = 3;
+  repeated QueryProductCategoryListData  Children = 4;
+}
+
+message QueryProductCategoryListResp {
+  repeated  QueryProductCategoryListData list = 1;
+}
+service ProductCategoryService {
 
   rpc ProductCategoryAdd(ProductCategoryAddReq) returns(ProductCategoryAddResp);
   rpc ProductCategoryList(ProductCategoryListReq) returns(ProductCategoryListResp);
   rpc ProductCategoryUpdate(ProductCategoryUpdateReq) returns(ProductCategoryUpdateResp);
   rpc ProductCategoryDelete(ProductCategoryDeleteReq) returns(ProductCategoryDeleteResp);
 
+  rpc QueryProductCategoryList(QueryProductCategoryListReq) returns(QueryProductCategoryListResp);
 
 }
 message ProductFullReductionAddReq {

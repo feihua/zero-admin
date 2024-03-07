@@ -47,23 +47,12 @@ func (l *ProductCateListLogic) ProductCateList(req *types.CategoryReq) (resp *ty
 		return nil, errors.New("查询商品分类失败")
 	}
 
-	var list []types.CategoryData
-
+	list := make([]types.CategoryData, 0)
 	for _, item := range categoryListResp.List {
 		list = append(list, types.CategoryData{
-			Id:           item.Id,
-			ParentId:     item.ParentId,
-			Name:         item.Name,
-			Level:        item.Level,
-			ProductCount: item.ProductCount,
-			//ProductUnit:  strconv.FormatInt( item.ProductCount,10)+item.ProductUnit,
-			ProductUnit: item.ProductUnit,
-			NavStatus:   item.NavStatus,
-			ShowStatus:  item.ShowStatus,
-			Sort:        item.Sort,
-			Icon:        item.Icon,
-			Keywords:    item.Keywords,
-			Description: item.Description,
+			Id:       item.Id,
+			Name:     item.Name,
+			ImageUrl: item.Icon,
 		})
 	}
 
