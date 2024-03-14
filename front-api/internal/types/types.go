@@ -1116,15 +1116,16 @@ type RecommendProductListResp struct {
 }
 
 type RegisterReq struct {
-	Username string `json:"username"` //会员名称
-	Password string `json:"password"` //密码
-	Mobile   string `json:"mobile"`   //手机号码
+	Username        string `json:"username"`  //会员名称
+	Password        string `json:"password"`  //密码
+	ConfirmPassword string `confirmPassword"` //确认密码
+	Mobile          string `json:"mobile"`    //手机号码
 }
 
 type RegisterResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-	Data    string `json:"data"` //token
+	Code    int64     `json:"code"`
+	Message string    `json:"message"`
+	Data    LoginData `json:"data"`
 }
 
 type ReturnApplyReq struct {

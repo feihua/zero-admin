@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// RegisterLogic
+/*
+Author: LiuFeiHua
+Date: 2024/3/14 上午9:48
+*/
 type RegisterLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,8 +30,15 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 	}
 }
 
+// Register 会员注册
 func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterResp, err error) {
-	memberAddResp, err := l.svcCtx.MemberService.MemberAdd(l.ctx, &umsclient.MemberAddReq{
+	if req.Password != req.ConfirmPassword {
+		return &types.RegisterResp{
+			Code:    1,
+			Message: "两次密码不一致",
+		}, nil
+	}
+	rpcResult, err := l.svcCtx.MemberService.MemberAdd(l.ctx, &umsclient.MemberAddReq{
 		Username: req.Username,
 		Password: req.Password,
 		Phone:    req.Mobile,
@@ -43,6 +55,9 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterRe
 	return &types.RegisterResp{
 		Code:    0,
 		Message: "注册成功",
-		Data:    memberAddResp.Token,
+		Data: types.LoginData{
+			Token:     rpcResult.Token,
+			TokenHead: "Bearer",
+		},
 	}, nil
 }
