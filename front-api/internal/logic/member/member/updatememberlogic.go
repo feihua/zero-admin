@@ -2,8 +2,8 @@ package member
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -50,8 +50,7 @@ func (l *UpdateMemberLogic) UpdateMember(req *types.UpdateMemberReq) (resp *type
 	})
 
 	if err != nil {
-		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("更新会员信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "更新会员信息失败,参数:%+v,异常:%s", req, err.Error())
 		return nil, errors.New("更新会员信息失败")
 	}
 

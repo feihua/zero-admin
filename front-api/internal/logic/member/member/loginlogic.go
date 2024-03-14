@@ -2,7 +2,6 @@ package member
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/ums/umsclient"
 
@@ -42,8 +41,7 @@ func (l *LoginLogic) Login(req *types.LoginReq, ip string) (resp *types.LoginRes
 	})
 
 	if err != nil {
-		reqStr, _ := json.Marshal(req)
-		logc.Errorf(l.ctx, "会员登录失败,参数: %s,响应：%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "会员登录失败,参数: %+v,响应：%s", req, err.Error())
 		return &types.LoginResp{
 			Code:    1,
 			Message: "登录失败",

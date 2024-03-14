@@ -24,7 +24,7 @@ type LoginData {
 type RegisterReq {
     Username string `json:"username"`         //会员名称
     Password string `json:"password"`         //密码
-    ConfirmPassword string `confirmPassword"` //确认密码
+    ConfirmPassword string `json:"confirmPassword"` //确认密码
     Mobile string `json:"mobile"`             //手机号码
 }
 type RegisterResp {
@@ -100,6 +100,11 @@ type UpdateMemberResp {
     prefix: /api/member
 )
 service front-api {
+
+    // 会员注册
+    @handler Register
+    post /register (RegisterReq) returns (RegisterResp)
+
     // 会员登录
     @handler Login
     post /login (LoginReq) returns (LoginResp)
@@ -111,10 +116,6 @@ service front-api {
     prefix: /api/member
 )
 service front-api {
-
-    // 会员注册
-    @handler Register
-    post /register (RegisterReq) returns (RegisterResp)
 
     // 获取会员个人信息
     @handler Info

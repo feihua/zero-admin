@@ -2,7 +2,7 @@ package member
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/zeromicro/go-zero/core/logc"
 	"zero-admin/rpc/ums/umsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -45,8 +45,7 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterRe
 	})
 
 	if err != nil {
-		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("会员登录失败,参数: %s,响应：%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "会员注册失败,参数: %+v,响应：%s", req, err.Error())
 		return &types.RegisterResp{
 			Code:    1,
 			Message: "注册失败",
