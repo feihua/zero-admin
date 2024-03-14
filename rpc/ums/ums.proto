@@ -15,10 +15,9 @@ message MemberAddResp {
 }
 
 message MemberLoginReq {
-  string      Username = 1;
+  string      Account = 1;
   string      Password = 2;
-  string      Phone = 3;
-  string      Ip = 4;
+  string      Ip = 3;
 }
 
 message MemberLoginResp {

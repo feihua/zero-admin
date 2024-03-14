@@ -691,9 +691,8 @@ type LoginData struct {
 }
 
 type LoginReq struct {
-	Username string `json:"username,optional"` //会员名称
-	Password string `json:"password"`          //密码
-	Mobile   string `json:"mobile,optional"`   //手机号码
+	Account  string `json:"account"`  //会员名称或者手机号码
+	Password string `json:"password"` //密码
 }
 
 type LoginResp struct {

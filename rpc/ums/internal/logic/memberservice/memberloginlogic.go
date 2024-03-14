@@ -36,9 +36,9 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 
 	//1.校验参数
 	//根据用户名查询账号
-	member, _ := l.svcCtx.UmsMemberModel.FindMemberByNameOrPhone(l.ctx, in.Username, in.Phone)
+	member, _ := l.svcCtx.UmsMemberModel.FindMemberByNameOrPhone(l.ctx, in.Account, in.Account)
 	if member == nil {
-		logc.Errorf(l.ctx, "账号不存在,参数:%s", in.Username)
+		logc.Errorf(l.ctx, "账号不存在,参数:%s", in.Account)
 		return nil, errors.New("账号不存在")
 	}
 
@@ -67,7 +67,7 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 	}, nil
 }
 
-//插入登录日志
+// 插入登录日志
 func insertLoginLog(l *MemberLoginLogic, m *umsmodel.UmsMember, Ip string) {
 	memberLoginLog := &umsmodel.UmsMemberLoginLog{
 		MemberId:   m.Id,

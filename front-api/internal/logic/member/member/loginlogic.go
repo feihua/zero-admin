@@ -34,9 +34,8 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 func (l *LoginLogic) Login(req *types.LoginReq, ip string) (resp *types.LoginResp, err error) {
 	//根据用户名,密码和手机号调用rpc会员登录方法
 	rpcResult, err := l.svcCtx.MemberService.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
-		Username: req.Username,
+		Account:  req.Account,
 		Password: req.Password,
-		Phone:    req.Mobile,
 		Ip:       ip,
 	})
 
