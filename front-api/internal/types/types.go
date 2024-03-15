@@ -340,7 +340,7 @@ type CartPromotionItemList struct {
 
 type CategoryData struct {
 	Id       int64          `json:"id"`
-	Key      int64          `json:"key"`
+	Key      string         `json:"key"`
 	Name     string         `json:"name"`
 	Label    string         `json:"label"`
 	ImageUrl string         `json:"imageUrl"`

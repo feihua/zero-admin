@@ -2,6 +2,7 @@ package category
 
 import (
 	"context"
+	"strconv"
 	"zero-admin/rpc/pms/pmsclient"
 
 	"zero-admin/front-api/internal/svc"
@@ -41,7 +42,7 @@ func (l *QueryProductCateListLogic) QueryProductCateList() (resp *types.QueryPro
 		for _, child := range item.Children {
 			children = append(children, types.CategoryData{
 				Id:       child.Id,
-				Key:      child.Id,
+				Key:      strconv.FormatInt(child.Id, 10),
 				Label:    child.Name,
 				Name:     child.Name,
 				ImageUrl: child.ImageUrl,
@@ -51,7 +52,7 @@ func (l *QueryProductCateListLogic) QueryProductCateList() (resp *types.QueryPro
 		list = append(list, types.CategoryData{
 			Id:       item.Id,
 			Name:     item.Name,
-			Key:      item.Id,
+			Key:      strconv.FormatInt(item.Id, 10),
 			Label:    item.Name,
 			ImageUrl: item.ImageUrl,
 			Children: children,
