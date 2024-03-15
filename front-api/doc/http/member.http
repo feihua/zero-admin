@@ -16,7 +16,7 @@ POST {{host}}/api/member/login
 Content-Type: application/json
 
 {
-  "mobile": "18613030352",
+  "account": "18613030352",
   "password": "123456"
 }
 > {% client.global.set("token", response.body.data.token); %}

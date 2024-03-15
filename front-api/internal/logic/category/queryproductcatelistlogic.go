@@ -41,6 +41,8 @@ func (l *QueryProductCateListLogic) QueryProductCateList() (resp *types.QueryPro
 		for _, child := range item.Children {
 			children = append(children, types.CategoryData{
 				Id:       child.Id,
+				Key:      child.Id,
+				Label:    child.Name,
 				Name:     child.Name,
 				ImageUrl: child.ImageUrl,
 			})
@@ -49,6 +51,8 @@ func (l *QueryProductCateListLogic) QueryProductCateList() (resp *types.QueryPro
 		list = append(list, types.CategoryData{
 			Id:       item.Id,
 			Name:     item.Name,
+			Key:      item.Id,
+			Label:    item.Name,
 			ImageUrl: item.ImageUrl,
 			Children: children,
 		})
