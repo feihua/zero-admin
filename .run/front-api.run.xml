@@ -3,7 +3,7 @@
     <module name="zero-admin" />
     <working_directory value="$PROJECT_DIR$" />
     <kind value="PACKAGE" />
-    <package value="zero-admin/front-api" />
+    <package value="github.com/feihua/zero-admin/front-api"/>
     <directory value="$PROJECT_DIR$" />
     <filePath value="$PROJECT_DIR$/front-api/front.go" />
     <method v="2" />

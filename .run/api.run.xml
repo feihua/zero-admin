@@ -3,7 +3,7 @@
     <module name="zero-admin" />
     <working_directory value="$PROJECT_DIR$" />
     <kind value="PACKAGE" />
-    <package value="zero-admin/api" />
+    <package value="github.com/feihua/zero-admin/api"/>
     <directory value="$PROJECT_DIR$" />
     <filePath value="$PROJECT_DIR$/api/admin.go" />
     <method v="2" />

@@ -3,7 +3,7 @@
     <module name="zero-admin" />
     <working_directory value="$PROJECT_DIR$" />
     <kind value="PACKAGE" />
-    <package value="zero-admin/rpc/sms" />
+    <package value="github.com/feihua/zero-admin/rpc/sms"/>
     <directory value="$PROJECT_DIR$" />
     <filePath value="$PROJECT_DIR$/rpc/sms/sms.go" />
     <method v="2" />
