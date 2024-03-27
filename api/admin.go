@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/feihua/zero-admin/api/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/internal/config"
+	"github.com/feihua/zero-admin/api/internal/handler"
+	"github.com/feihua/zero-admin/api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/api/internal/config"
-	"zero-admin/api/internal/handler"
-	"zero-admin/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

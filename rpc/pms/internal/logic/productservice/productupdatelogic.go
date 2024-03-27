@@ -3,13 +3,13 @@ package productservicelogic
 import (
 	"context"
 	"database/sql"
+	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"math/rand"
 	"strconv"
 	"time"
-	"zero-admin/rpc/model/pmsmodel"
-	"zero-admin/rpc/pms/pmsclient"
 
-	"zero-admin/rpc/pms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -29,13 +29,13 @@ func NewProductUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Pro
 }
 
 // ProductUpdate 更新商品
-//逻辑步骤：
-//1.更新商品基本信息
-//2.会员价格
-//3.阶梯价格
-//4.满减价格
-//5.更新sku库存信息
-//6.更新商品参数,添加自定义商品规格
+// 逻辑步骤：
+// 1.更新商品基本信息
+// 2.会员价格
+// 3.阶梯价格
+// 4.满减价格
+// 5.更新sku库存信息
+// 6.更新商品参数,添加自定义商品规格
 func (l *ProductUpdateLogic) ProductUpdate(in *pmsclient.ProductUpdateReq) (*pmsclient.ProductUpdateResp, error) {
 	PromotionStartTime, _ := time.Parse("2006-01-02 15:04:05", in.PromotionStartTime)
 	PromotionEndTime, _ := time.Parse("2006-01-02 15:04:05", in.PromotionEndTime)

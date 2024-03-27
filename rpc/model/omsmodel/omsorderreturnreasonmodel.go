@@ -3,10 +3,10 @@ package omsmodel
 import (
 	"context"
 	"fmt"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/oms/omsclient"
 )
 
 var _ OmsOrderReturnReasonModel = (*customOmsOrderReturnReasonModel)(nil)

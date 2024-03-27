@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/oms/internal/logic/orderservice"
-	"zero-admin/rpc/oms/internal/svc"
-	"zero-admin/rpc/oms/omsclient"
+	"github.com/feihua/zero-admin/rpc/oms/internal/logic/orderservice"
+	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 )
 
 type OrderServiceServer struct {

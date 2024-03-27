@@ -1,12 +1,12 @@
 package handler
 
 import (
+	logic "github.com/feihua/zero-admin/api/internal/logic/sys/log"
 	"net/http"
-	logic "zero-admin/api/internal/logic/sys/log"
 
+	"github.com/feihua/zero-admin/api/internal/svc"
+	"github.com/feihua/zero-admin/api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
 )
 
 func StatisticsLoginLogHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

@@ -3,10 +3,10 @@ package cmsmodel
 import (
 	"context"
 	"fmt"
+	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/cms/cmsclient"
 )
 
 var _ CmsSubjectModel = (*customCmsSubjectModel)(nil)

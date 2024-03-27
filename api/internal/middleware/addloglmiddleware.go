@@ -2,13 +2,13 @@ package middleware
 
 import (
 	"bytes"
+	"github.com/feihua/zero-admin/rpc/sys/client/syslogservice"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"io/ioutil"
 	"net/http"
 	"time"
-	"zero-admin/rpc/sys/client/syslogservice"
-	"zero-admin/rpc/sys/sysclient"
 )
 
 type AddLogMiddleware struct {

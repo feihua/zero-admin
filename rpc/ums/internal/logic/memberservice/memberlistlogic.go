@@ -3,8 +3,8 @@ package memberservicelogic
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/umsclient"
+	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

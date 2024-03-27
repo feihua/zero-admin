@@ -4,9 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"zero-admin/rpc/oms/omsclient"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
-	"zero-admin/rpc/oms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

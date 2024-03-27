@@ -3,9 +3,9 @@ package category
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/logic/category"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/category"
-	"zero-admin/front-api/internal/svc"
 )
 
 func QueryProductCateListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

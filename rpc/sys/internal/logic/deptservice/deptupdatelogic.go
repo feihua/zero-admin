@@ -4,11 +4,11 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"strings"
-	"zero-admin/rpc/model/sysmodel"
-	"zero-admin/rpc/sys/sysclient"
 
-	"zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

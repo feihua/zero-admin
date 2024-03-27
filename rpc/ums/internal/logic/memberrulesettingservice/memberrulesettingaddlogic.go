@@ -2,10 +2,10 @@ package memberrulesettingservicelogic
 
 import (
 	"context"
-	"zero-admin/rpc/model/umsmodel"
-	"zero-admin/rpc/ums/umsclient"
+	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
-	"zero-admin/rpc/ums/internal/svc"
+	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

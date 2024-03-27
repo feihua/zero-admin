@@ -3,10 +3,10 @@ package PrefrenceArea
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/api/internal/logic/cms/PrefrenceArea"
+	"github.com/feihua/zero-admin/api/internal/svc"
+	"github.com/feihua/zero-admin/api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/api/internal/logic/cms/PrefrenceArea"
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
 )
 
 func PrefrenceAreaAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

@@ -6,7 +6,7 @@ package orderitemservice
 import (
 	"context"
 
-	"zero-admin/rpc/oms/omsclient"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

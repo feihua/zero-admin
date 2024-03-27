@@ -2,9 +2,9 @@ package productcategoryservicelogic
 
 import (
 	"context"
-	"zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
-	"zero-admin/rpc/pms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

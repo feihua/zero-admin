@@ -6,7 +6,7 @@ package productvertifyrecordservice
 import (
 	"context"
 
-	"zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

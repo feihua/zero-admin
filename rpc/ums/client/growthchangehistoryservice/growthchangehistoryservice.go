@@ -6,7 +6,7 @@ package growthchangehistoryservice
 import (
 	"context"
 
-	"zero-admin/rpc/ums/umsclient"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

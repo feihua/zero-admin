@@ -1,9 +1,9 @@
 package svc
 
 import (
+	"github.com/feihua/zero-admin/rpc/cms/internal/config"
+	"github.com/feihua/zero-admin/rpc/model/cmsmodel"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"zero-admin/rpc/cms/internal/config"
-	"zero-admin/rpc/model/cmsmodel"
 )
 
 type ServiceContext struct {

@@ -3,10 +3,10 @@ package loginlogservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"zero-admin/rpc/sys/sysclient"
 
-	"zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

@@ -2,13 +2,13 @@ package home
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
-	"zero-admin/rpc/cms/cmsclient"
-	"zero-admin/rpc/pms/pmsclient"
-	"zero-admin/rpc/sms/smsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -49,7 +49,7 @@ func (l *HomeIndexLogic) HomeIndex() (resp *types.HomeResp, err error) {
 	}, nil
 }
 
-//推荐专题
+// 推荐专题
 func querySubjectList(l *HomeIndexLogic) []types.SubjectList {
 	var subjectLists []types.SubjectList
 	homeRecommendSubjectList, err := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectList(l.ctx, &smsclient.HomeRecommendSubjectListReq{
@@ -90,7 +90,7 @@ func querySubjectList(l *HomeIndexLogic) []types.SubjectList {
 	return subjectLists
 }
 
-//人气推荐
+// 人气推荐
 func queryHotProductList(l *HomeIndexLogic) []types.ProductList {
 	homeRecommendProductList, _ := l.svcCtx.HomeRecommendProductService.HomeRecommendProductList(l.ctx, &smsclient.HomeRecommendProductListReq{
 		Current:         1,
@@ -106,7 +106,7 @@ func queryHotProductList(l *HomeIndexLogic) []types.ProductList {
 	return queryProductList(l.svcCtx.ProductService, productIds, l.ctx)
 }
 
-//新品推荐
+// 新品推荐
 func queryNewProductList(l *HomeIndexLogic) []types.ProductList {
 	homeNewProductList, _ := l.svcCtx.HomeNewProductService.HomeNewProductList(l.ctx, &smsclient.HomeNewProductListReq{
 		Current:         1,
@@ -122,7 +122,7 @@ func queryNewProductList(l *HomeIndexLogic) []types.ProductList {
 	return queryProductList(l.svcCtx.ProductService, productIds, l.ctx)
 }
 
-//当前秒杀场次
+// 当前秒杀场次
 func queryHomeFlashPromotion(l *HomeIndexLogic) types.HomeFlashPromotion {
 	var resp types.HomeFlashPromotion
 	currentDate := time.Now().Format("2006-01-02")
@@ -186,7 +186,7 @@ func queryHomeFlashPromotion(l *HomeIndexLogic) types.HomeFlashPromotion {
 	return resp
 }
 
-//推荐品牌
+// 推荐品牌
 func queryBrandList(l *HomeIndexLogic) []types.BrandList {
 	homeBrandList, _ := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
 		Current:         1,
@@ -219,7 +219,7 @@ func queryBrandList(l *HomeIndexLogic) []types.BrandList {
 	return brandLists
 }
 
-//获取轮播广告
+// 获取轮播广告
 func queryAdvertiseList(l *HomeIndexLogic) []types.AdvertiseList {
 	homeAdvertiseList, _ := l.svcCtx.HomeAdvertiseService.HomeAdvertiseList(l.ctx, &smsclient.HomeAdvertiseListReq{
 		Current:  1,

@@ -3,11 +3,11 @@ package omsmodel
 import (
 	"context"
 	"fmt"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
 	"time"
-	"zero-admin/rpc/oms/omsclient"
 )
 
 var _ OmsOrderModel = (*customOmsOrderModel)(nil)

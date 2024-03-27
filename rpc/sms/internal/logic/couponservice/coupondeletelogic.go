@@ -2,10 +2,10 @@ package couponservicelogic
 
 import (
 	"context"
-	"zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
+	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/zeromicro/go-zero/core/logx"
-	"zero-admin/rpc/sms/internal/svc"
 )
 
 type CouponDeleteLogic struct {

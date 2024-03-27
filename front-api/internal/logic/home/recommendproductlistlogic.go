@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

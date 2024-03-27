@@ -3,8 +3,8 @@ package companyaddressservicelogic
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/oms/internal/svc"
-	"zero-admin/rpc/oms/omsclient"
+	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

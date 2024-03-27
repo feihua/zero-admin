@@ -3,10 +3,10 @@ package address
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/logic/member/address"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/member/address"
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
 )
 
 func MemberAddressAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

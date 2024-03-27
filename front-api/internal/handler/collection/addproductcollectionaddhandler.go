@@ -3,10 +3,10 @@ package collection
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/logic/collection"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/collection"
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
 )
 
 func AddProductCollectionAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

@@ -3,9 +3,9 @@ package order
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
-	"zero-admin/rpc/oms/omsclient"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

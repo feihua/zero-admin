@@ -2,9 +2,9 @@ package companyaddressservicelogic
 
 import (
 	"context"
-	"zero-admin/rpc/model/omsmodel"
-	"zero-admin/rpc/oms/internal/svc"
-	"zero-admin/rpc/oms/omsclient"
+	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

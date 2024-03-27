@@ -3,10 +3,10 @@ package brand
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/logic/brand"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/brand"
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
 )
 
 func BrandDetailHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

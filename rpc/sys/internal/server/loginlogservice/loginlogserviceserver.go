@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/sys/internal/logic/loginlogservice"
-	"zero-admin/rpc/sys/internal/svc"
-	"zero-admin/rpc/sys/sysclient"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/loginlogservice"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 )
 
 type LoginLogServiceServer struct {

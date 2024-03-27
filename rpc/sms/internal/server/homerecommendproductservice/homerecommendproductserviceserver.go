@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/sms/internal/logic/homerecommendproductservice"
-	"zero-admin/rpc/sms/internal/svc"
-	"zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/sms/internal/logic/homerecommendproductservice"
+	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 )
 
 type HomeRecommendProductServiceServer struct {

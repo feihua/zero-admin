@@ -3,9 +3,9 @@ package productcategoryservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"zero-admin/rpc/pms/internal/svc"
-	"zero-admin/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

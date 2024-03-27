@@ -2,12 +2,12 @@ package deptservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
 	"strings"
-	"zero-admin/rpc/sys/sysclient"
 
-	"zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

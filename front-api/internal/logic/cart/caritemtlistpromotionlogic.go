@@ -4,15 +4,15 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 	"strconv"
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
-	"zero-admin/rpc/oms/omsclient"
-	"zero-admin/rpc/pms/pmsclient"
-	"zero-admin/rpc/sms/smsclient"
-	"zero-admin/rpc/ums/umsclient"
 )
 
 // CarItemtListPromotionLogic
@@ -35,27 +35,27 @@ func NewCarItemtListPromotionLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // CarItemtListPromotion 获取某个会员的购物车列表,包括促销信息
-//1.获取会员购物车里面所有商品信息(根据会员id查询购物车所有商品,(表：oms_cart))
-//2.判断是否会员选中购物车中的商品,如果没有就是会员购物车中所有有商品进行计算
-//3.先根据productId对CartItem进行分组，以spu为单位进行计算优惠
-//比如：购物车中有二台iphone15 pro max,其中一台是iphone15 pro max 是粉色,另外一台是黑色。{'productId':[iphone15 pro max 是粉色,iphone15 pro max 是黑色]}
-//4.查询所有商品的优惠相关信息(商品的促销信息，包括sku、打折优惠、满减优惠)
-//过滤出所有商品的id,查询表pms_product,pms_sku_stock,pms_product_ladder,pms_product_full_reduction
-//5.根据商品促销类型计算商品促销优惠价格
-//根据productId从第4步返回优惠列表中,查询出优惠信息
-//6.根据表pms_product中的promotionType字段判断优惠类型:促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-//6.1如果promotionType为0,没有促销使用原价
-//6.2如果promotionType为1,单品促销(商品原价-促销价)
-//从pms_sku_stock中获取price原价-单品促销价格pms_sku_stock中的promotionPrice字段,即可
-//6.3如果promotionType为2,会员价格
-//从pms_member_price表中查询
-//6.4如果promotionType为3,打折优惠(商品原价-折扣*商品原价)
-//从pms_sku_stock中获取price原价-折扣*商品原价(表pms_ladder),即可
-//6.5如果promotionType为4,满减,
-//6.5.1 计算分组中的总优惠金额
-//6.5.2 (商品原价/总价)*满减金额(平摊到每件商品上的优惠金额)
+// 1.获取会员购物车里面所有商品信息(根据会员id查询购物车所有商品,(表：oms_cart))
+// 2.判断是否会员选中购物车中的商品,如果没有就是会员购物车中所有有商品进行计算
+// 3.先根据productId对CartItem进行分组，以spu为单位进行计算优惠
+// 比如：购物车中有二台iphone15 pro max,其中一台是iphone15 pro max 是粉色,另外一台是黑色。{'productId':[iphone15 pro max 是粉色,iphone15 pro max 是黑色]}
+// 4.查询所有商品的优惠相关信息(商品的促销信息，包括sku、打折优惠、满减优惠)
+// 过滤出所有商品的id,查询表pms_product,pms_sku_stock,pms_product_ladder,pms_product_full_reduction
+// 5.根据商品促销类型计算商品促销优惠价格
+// 根据productId从第4步返回优惠列表中,查询出优惠信息
+// 6.根据表pms_product中的promotionType字段判断优惠类型:促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+// 6.1如果promotionType为0,没有促销使用原价
+// 6.2如果promotionType为1,单品促销(商品原价-促销价)
+// 从pms_sku_stock中获取price原价-单品促销价格pms_sku_stock中的promotionPrice字段,即可
+// 6.3如果promotionType为2,会员价格
+// 从pms_member_price表中查询
+// 6.4如果promotionType为3,打折优惠(商品原价-折扣*商品原价)
+// 从pms_sku_stock中获取price原价-折扣*商品原价(表pms_ladder),即可
+// 6.5如果promotionType为4,满减,
+// 6.5.1 计算分组中的总优惠金额
+// 6.5.2 (商品原价/总价)*满减金额(平摊到每件商品上的优惠金额)
 // 6.6如果promotionType为5,限时购
-//从sms_flash_promotion_product_relation表获取价格
+// 从sms_flash_promotion_product_relation表获取价格
 func (l *CarItemtListPromotionLogic) CarItemtListPromotion(req *types.CarItemListPromotionReq) (resp *types.CarItemtListPromotionResp, err error) {
 	cartPromotionItemList := QueryCartListPromotion(req.Ids, l.ctx, l.svcCtx)
 
@@ -275,7 +275,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 	return cartPromotionItemList
 }
 
-//对没满足优惠条件的商品进行处理
+// 对没满足优惠条件的商品进行处理
 func handleNoReduce(itemList []*omsclient.CartItemListData, skuStockList []*pmsclient.SkuStockListData, product *pmsclient.ProductListData, cartPromotionItemList []types.CarItemtPromotionListData) []types.CarItemtPromotionListData {
 	for _, item := range itemList {
 		skuStock := getSkuStock(skuStockList, item.ProductSkuId)
@@ -292,7 +292,7 @@ func handleNoReduce(itemList []*omsclient.CartItemListData, skuStockList []*pmsc
 	return cartPromotionItemList
 }
 
-//获取sku
+// 获取sku
 func getSkuStock(skuStockList []*pmsclient.SkuStockListData, productSkuId int64) *pmsclient.SkuStockListData {
 	var skuStock *pmsclient.SkuStockListData
 	for _, sku := range skuStockList {

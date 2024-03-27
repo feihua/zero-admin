@@ -3,9 +3,9 @@ package home
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/logic/home"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/home"
-	"zero-admin/front-api/internal/svc"
 )
 
 func HomeIndexHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

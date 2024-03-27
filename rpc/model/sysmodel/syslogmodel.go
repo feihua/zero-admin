@@ -3,10 +3,10 @@ package sysmodel
 import (
 	"context"
 	"fmt"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sys/sysclient"
 )
 
 var _ SysLogModel = (*customSysLogModel)(nil)

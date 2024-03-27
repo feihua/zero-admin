@@ -6,7 +6,7 @@ package configservice
 import (
 	"context"
 
-	"zero-admin/rpc/sys/sysclient"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

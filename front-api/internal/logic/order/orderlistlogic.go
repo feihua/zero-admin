@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"zero-admin/rpc/oms/omsclient"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -107,7 +107,7 @@ func (l *OrderListLogic) OrderList(req *types.OrderListReq) (*types.OrderListRes
 	}, nil
 }
 
-//获取商品项
+// 获取商品项
 func queryOrderItems(item1 *omsclient.OrderListData) []types.ListOrderItemData {
 	itemListData := make([]types.ListOrderItemData, 0)
 	for _, item := range item1.ItemListData {

@@ -2,10 +2,10 @@ package productservicelogic
 
 import (
 	"context"
-	"zero-admin/rpc/model/pmsmodel"
-	"zero-admin/rpc/pms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 
-	"zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,14 +25,14 @@ func NewProductDetailByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 // ProductDetailById 获取商品详情
-//1.获取商品信息
-//2.获取品牌信息
-//3.获取商品属性信息
-//4.获取商品属性值信息
-//5.获取商品SKU库存信息
-//6.商品阶梯价格设置
-//7.商品满减价格设置
-//8.获取商品的会员价格
+// 1.获取商品信息
+// 2.获取品牌信息
+// 3.获取商品属性信息
+// 4.获取商品属性值信息
+// 5.获取商品SKU库存信息
+// 6.商品阶梯价格设置
+// 7.商品满减价格设置
+// 8.获取商品的会员价格
 func (l *ProductDetailByIdLogic) ProductDetailById(in *pmsclient.ProductDetailByIdReq) (*pmsclient.ProductDetailByIdResp, error) {
 	//1.获取商品信息
 	productListData, product := buildProductListData(l, in.Id)
@@ -50,7 +50,7 @@ func (l *ProductDetailByIdLogic) ProductDetailById(in *pmsclient.ProductDetailBy
 	}, nil
 }
 
-//1.获取商品信息
+// 1.获取商品信息
 func buildProductListData(l *ProductDetailByIdLogic, productId int64) (*pmsclient.ProductListData, *pmsmodel.PmsProduct) {
 	pmsProduct, _ := l.svcCtx.PmsProductModel.FindOne(l.ctx, productId)
 
@@ -101,7 +101,7 @@ func buildProductListData(l *ProductDetailByIdLogic, productId int64) (*pmsclien
 	}, pmsProduct
 }
 
-//2.获取品牌信息
+// 2.获取品牌信息
 func buildBrandListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) *pmsclient.BrandListData {
 	item, _ := l.svcCtx.PmsBrandModel.FindOne(l.ctx, pmsProduct.BrandId)
 	return &pmsclient.BrandListData{
@@ -119,7 +119,7 @@ func buildBrandListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProdu
 	}
 }
 
-//3.获取商品属性信息
+// 3.获取商品属性信息
 func buildProductAttributeListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) ([]*pmsclient.ProductAttributeListData, []int64) {
 	all, _ := l.svcCtx.PmsProductAttributeModel.FindAll(l.ctx, &pmsclient.ProductAttributeListReq{
 		Current:                    1,
@@ -151,7 +151,7 @@ func buildProductAttributeListData(l *ProductDetailByIdLogic, pmsProduct *pmsmod
 	return list, attributeIds
 }
 
-//4.获取商品属性值信息
+// 4.获取商品属性值信息
 func buildProductAttributeValueListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct, attributeIds []int64) []*pmsclient.ProductAttributeValueListData {
 	if len(attributeIds) > 0 {
 		all, _ := l.svcCtx.PmsProductAttributeValueModel.FindAll(l.ctx, pmsProduct.Id)
@@ -171,7 +171,7 @@ func buildProductAttributeValueListData(l *ProductDetailByIdLogic, pmsProduct *p
 	return nil
 }
 
-//5.获取商品SKU库存信息
+// 5.获取商品SKU库存信息
 func buildSkuStockListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) []*pmsclient.SkuStockListData {
 	all, _ := l.svcCtx.PmsSkuStockModel.FindAll(l.ctx, pmsProduct.Id)
 	var list []*pmsclient.SkuStockListData
@@ -195,7 +195,7 @@ func buildSkuStockListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsPr
 	return list
 }
 
-//6.商品阶梯价格设置
+// 6.商品阶梯价格设置
 func buildProductLadderListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) []*pmsclient.ProductLadderListData {
 	if pmsProduct.PromotionType == 3 {
 		all, _ := l.svcCtx.PmsProductLadderModel.FindAll(l.ctx, pmsProduct.Id)
@@ -217,7 +217,7 @@ func buildProductLadderListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.
 	return nil
 }
 
-//7.商品满减价格设置
+// 7.商品满减价格设置
 func buildProductFullReductionListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) []*pmsclient.ProductFullReductionListData {
 	if pmsProduct.PromotionType == 4 {
 		all, _ := l.svcCtx.PmsProductFullReductionModel.FindAll(l.ctx, pmsProduct.Id)
@@ -238,7 +238,7 @@ func buildProductFullReductionListData(l *ProductDetailByIdLogic, pmsProduct *pm
 
 }
 
-//8.获取商品的会员价格
+// 8.获取商品的会员价格
 func buildProductMemberListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) []*pmsclient.MemberPriceListData {
 	if pmsProduct.PromotionType == 2 {
 		all, _ := l.svcCtx.PmsMemberPriceModel.FindAll(l.ctx, pmsProduct.Id)

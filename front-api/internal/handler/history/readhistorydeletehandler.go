@@ -3,10 +3,10 @@ package history
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/logic/history"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/history"
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
 )
 
 func ReadHistoryDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

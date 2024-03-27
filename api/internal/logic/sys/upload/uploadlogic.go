@@ -7,8 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
+	"github.com/feihua/zero-admin/api/internal/svc"
+	"github.com/feihua/zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,7 +30,7 @@ func NewUploadLogic(r *http.Request, ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 // Upload 文件上传
-//参考：https://github.com/zeromicro/zero-examples/blob/main/monolithic/internal/logic/uploadlogic.go
+// 参考：https://github.com/zeromicro/zero-examples/blob/main/monolithic/internal/logic/uploadlogic.go
 func (l *UploadLogic) Upload() (resp *types.UploadResp, err error) {
 	file, handler, err := l.r.FormFile("file")
 	logx.WithContext(l.ctx).Infof("File uploaded successfully: %s", handler.Filename)

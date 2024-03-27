@@ -3,15 +3,15 @@ package order
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/front-api/internal/logic/cart"
-	"zero-admin/front-api/internal/logic/member/coupon"
-	"zero-admin/rpc/oms/omsclient"
-	"zero-admin/rpc/pms/pmsclient"
-	"zero-admin/rpc/sms/smsclient"
-	"zero-admin/rpc/ums/umsclient"
+	"github.com/feihua/zero-admin/front-api/internal/logic/cart"
+	"github.com/feihua/zero-admin/front-api/internal/logic/member/coupon"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -36,18 +36,18 @@ func NewGenerateOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Gen
 }
 
 // GenerateOrder 根据提交信息生成订单
-//1.获取购物车及优惠信息
-//2.生成下单商品信息
-//3.判断购物车中商品是否都有库存
-//4.判断是否使用了优惠券
-//5.判断是否使用积分
-//6.计算order_item的实付金额
-//7.进行库存锁定
-//8.根据商品合计、运费、活动优惠、优惠券、积分计算应付金额
-//9.转化为订单信息并插入数据库(删除购物车中的下单商品)
-//10.如果使用优惠券,更新优惠券使用状态
-//11.如果使用积分,需要扣除积分
-//12.发送延迟消息取消订单
+// 1.获取购物车及优惠信息
+// 2.生成下单商品信息
+// 3.判断购物车中商品是否都有库存
+// 4.判断是否使用了优惠券
+// 5.判断是否使用积分
+// 6.计算order_item的实付金额
+// 7.进行库存锁定
+// 8.根据商品合计、运费、活动优惠、优惠券、积分计算应付金额
+// 9.转化为订单信息并插入数据库(删除购物车中的下单商品)
+// 10.如果使用优惠券,更新优惠券使用状态
+// 11.如果使用积分,需要扣除积分
+// 12.发送延迟消息取消订单
 func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.GenerateOrderResp, error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	memberInfo, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})

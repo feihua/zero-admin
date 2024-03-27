@@ -2,11 +2,11 @@ package coupon
 
 import (
 	"context"
-	"zero-admin/rpc/pms/pmsclient"
-	"zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -31,9 +31,9 @@ func NewCouponListByProductIdLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // CouponListByProductId 获取当前商品相关优惠券
-//1.获取指定商品优惠券
-//2.获取指定分类优惠券
-//3.所有优惠券
+// 1.获取指定商品优惠券
+// 2.获取指定分类优惠券
+// 3.所有优惠券
 func (l *CouponListByProductIdLogic) CouponListByProductId(req *types.ListCouponReq) (resp *types.ListCouponResp, err error) {
 	var couponIds []int64
 	//1.获取指定商品优惠券

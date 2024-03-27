@@ -2,11 +2,11 @@ package cartitemservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"time"
-	"zero-admin/rpc/model/omsmodel"
-	"zero-admin/rpc/oms/omsclient"
 
-	"zero-admin/rpc/oms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -31,8 +31,8 @@ func NewCartItemUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 }
 
 // CartItemUpdate 更新购物车商品
-//1.先更加id删除原来的
-//2.添加新的
+// 1.先更加id删除原来的
+// 2.添加新的
 func (l *CartItemUpdateLogic) CartItemUpdate(in *omsclient.CartItemUpdateReq) (*omsclient.CartItemUpdateResp, error) {
 	//1.先更加id删除原来的
 	err := l.svcCtx.OmsCartItemModel.Delete(l.ctx, in.Id)

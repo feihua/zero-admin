@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/ums/internal/logic/memberservice"
-	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/umsclient"
+	"github.com/feihua/zero-admin/rpc/ums/internal/logic/memberservice"
+	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 )
 
 type MemberServiceServer struct {

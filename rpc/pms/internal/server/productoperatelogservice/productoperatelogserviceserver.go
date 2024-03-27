@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/pms/internal/logic/productoperatelogservice"
-	"zero-admin/rpc/pms/internal/svc"
-	"zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/pms/internal/logic/productoperatelogservice"
+	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 )
 
 type ProductOperateLogServiceServer struct {

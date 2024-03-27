@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/ums/internal/logic/memberreceiveaddressservice"
-	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/umsclient"
+	"github.com/feihua/zero-admin/rpc/ums/internal/logic/memberreceiveaddressservice"
+	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 )
 
 type MemberReceiveAddressServiceServer struct {

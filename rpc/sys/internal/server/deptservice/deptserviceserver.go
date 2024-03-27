@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/sys/internal/logic/deptservice"
-	"zero-admin/rpc/sys/internal/svc"
-	"zero-admin/rpc/sys/sysclient"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/deptservice"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 )
 
 type DeptServiceServer struct {

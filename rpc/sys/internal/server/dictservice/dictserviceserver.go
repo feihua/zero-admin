@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/sys/internal/logic/dictservice"
-	"zero-admin/rpc/sys/internal/svc"
-	"zero-admin/rpc/sys/sysclient"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/dictservice"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 )
 
 type DictServiceServer struct {

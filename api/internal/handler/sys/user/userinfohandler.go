@@ -3,9 +3,9 @@ package user
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/api/internal/logic/sys/user"
+	"github.com/feihua/zero-admin/api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/api/internal/logic/sys/user"
-	"zero-admin/api/internal/svc"
 )
 
 func UserInfoHandler(ctx *svc.ServiceContext) http.HandlerFunc {

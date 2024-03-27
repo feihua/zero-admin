@@ -2,10 +2,10 @@ package cart
 
 import (
 	"context"
-	"zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -44,7 +44,7 @@ func (l *CartProductLogic) CartProduct(req *types.CartProductReq) (resp *types.C
 	}, nil
 }
 
-//3.获取商品属性信息
+// 3.获取商品属性信息
 func buildProductAttributeListData(resp *pmsclient.ProductDetailByIdResp) []types.CartItemProductAttributeList {
 	var list []types.CartItemProductAttributeList
 	for _, item := range resp.ProductAttributeList {
@@ -67,7 +67,7 @@ func buildProductAttributeListData(resp *pmsclient.ProductDetailByIdResp) []type
 	return list
 }
 
-//5.获取商品SKU库存信息
+// 5.获取商品SKU库存信息
 func buildSkuStockListData(resp *pmsclient.ProductDetailByIdResp) []types.CartItemSkuStockList {
 	var list []types.CartItemSkuStockList
 	for _, item := range resp.SkuStockList {

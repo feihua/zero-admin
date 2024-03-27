@@ -3,10 +3,10 @@ package smsmodel
 import (
 	"context"
 	"fmt"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"strings"
-	"zero-admin/rpc/sms/smsclient"
 )
 
 var _ SmsCouponModel = (*customSmsCouponModel)(nil)

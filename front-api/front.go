@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"zero-admin/front-api/internal/config"
-	"zero-admin/front-api/internal/handler"
-	"zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/config"
+	"github.com/feihua/zero-admin/front-api/internal/handler"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

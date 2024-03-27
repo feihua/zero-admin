@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/pms/internal/logic/productvertifyrecordservice"
-	"zero-admin/rpc/pms/internal/svc"
-	"zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/pms/internal/logic/productvertifyrecordservice"
+	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 )
 
 type ProductVertifyRecordServiceServer struct {

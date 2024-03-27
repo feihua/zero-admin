@@ -3,11 +3,11 @@ package order
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/smartwalle/alipay/v3"
 	"github.com/zeromicro/go-zero/core/logx"
 	"net/http"
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/rpc/oms/omsclient"
 )
 
 // PaymentOperationsUtils 支付相关工具
@@ -72,7 +72,7 @@ func (l *PaymentOperationsUtils) AliPayNotify(writer http.ResponseWriter, reques
 	_, _ = writer.Write([]byte("error"))
 }
 
-//TradeQuery 查询订单
+// TradeQuery 查询订单
 func (l *PaymentOperationsUtils) TradeQuery(outTradeNo string) (string, int64, error) {
 	var p = alipay.TradeQuery{}
 	p.OutTradeNo = outTradeNo

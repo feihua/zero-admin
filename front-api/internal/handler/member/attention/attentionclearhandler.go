@@ -3,9 +3,9 @@ package attention
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/logic/member/attention"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/member/attention"
-	"zero-admin/front-api/internal/svc"
 )
 
 func AttentionClearHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

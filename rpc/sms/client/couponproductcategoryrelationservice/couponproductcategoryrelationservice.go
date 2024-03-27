@@ -6,7 +6,7 @@ package couponproductcategoryrelationservice
 import (
 	"context"
 
-	"zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

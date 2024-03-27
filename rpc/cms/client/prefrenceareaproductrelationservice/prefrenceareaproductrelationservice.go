@@ -6,7 +6,7 @@ package prefrenceareaproductrelationservice
 import (
 	"context"
 
-	"zero-admin/rpc/cms/cmsclient"
+	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

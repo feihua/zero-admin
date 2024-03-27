@@ -4,11 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
-	"zero-admin/rpc/sms/smsclient"
 
-	"zero-admin/front-api/internal/svc"
-	"zero-admin/front-api/internal/types"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,10 +33,10 @@ func NewCouponAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CouponA
 }
 
 // CouponAdd 领取指定优惠券
-//1.查询优惠券是否存在
-//2.查询是否已经领取过优惠券了
-//3.添加领取优惠券记录
-//4.更新优惠券数量
+// 1.查询优惠券是否存在
+// 2.查询是否已经领取过优惠券了
+// 3.添加领取优惠券记录
+// 4.更新优惠券数量
 func (l *CouponAddLogic) CouponAdd(req *types.AddCouponReq) (resp *types.AddCouponResp, err error) {
 	//1.查询优惠券是否存在
 	coupon, err := l.svcCtx.CouponService.CouponFindById(l.ctx, &smsclient.CouponFindByIdReq{CouponId: req.CouponId})

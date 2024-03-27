@@ -2,10 +2,10 @@ package homenewproductservicelogic
 
 import (
 	"context"
-	"zero-admin/rpc/model/smsmodel"
-	"zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
-	"zero-admin/rpc/sms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

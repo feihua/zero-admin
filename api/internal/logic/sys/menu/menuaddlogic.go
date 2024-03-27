@@ -2,12 +2,12 @@ package menu
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/api/internal/common/errorx"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/rpc/sys/sysclient"
 
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
+	"github.com/feihua/zero-admin/api/internal/svc"
+	"github.com/feihua/zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

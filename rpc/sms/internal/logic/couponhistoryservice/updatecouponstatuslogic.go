@@ -2,8 +2,8 @@ package couponhistoryservicelogic
 
 import (
 	"context"
-	"zero-admin/rpc/sms/internal/svc"
-	"zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -28,8 +28,8 @@ func NewUpdateCouponStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // UpdateCouponStatus 更新优惠券状态
-//1.更新用户优惠券状态
-//2.更新优惠券数量
+// 1.更新用户优惠券状态
+// 2.更新优惠券数量
 func (l *UpdateCouponStatusLogic) UpdateCouponStatus(in *smsclient.UpdateCouponStatusReq) (*smsclient.UpdateCouponStatusResp, error) {
 	//1.更新用户优惠券状态
 	err := l.svcCtx.SmsCouponHistoryModel.UpdateCouponStatus(l.ctx, in.CouponId, in.MemberId, in.UseStatus)

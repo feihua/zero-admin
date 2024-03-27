@@ -3,9 +3,9 @@ package memberreceiveaddressservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"zero-admin/rpc/ums/internal/svc"
-	"zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

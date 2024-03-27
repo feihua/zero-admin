@@ -3,12 +3,12 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/rpc/pms/pmsclient"
-	"zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/api/internal/common/errorx"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
+	"github.com/feihua/zero-admin/api/internal/svc"
+	"github.com/feihua/zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

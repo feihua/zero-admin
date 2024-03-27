@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/cms/cmsclient"
-	"zero-admin/rpc/cms/internal/logic/prefrenceareaproductrelationservice"
-	"zero-admin/rpc/cms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
+	"github.com/feihua/zero-admin/rpc/cms/internal/logic/prefrenceareaproductrelationservice"
+	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
 )
 
 type PrefrenceAreaProductRelationServiceServer struct {

@@ -3,10 +3,10 @@ package attributecategory
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/api/internal/logic/product/attributecategory"
+	"github.com/feihua/zero-admin/api/internal/svc"
+	"github.com/feihua/zero-admin/api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/api/internal/logic/product/attributecategory"
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
 )
 
 func ProductAttributecategoryListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

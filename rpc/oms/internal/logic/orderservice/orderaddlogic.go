@@ -2,10 +2,10 @@ package orderservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"time"
-	"zero-admin/rpc/model/omsmodel"
-	"zero-admin/rpc/oms/internal/svc"
-	"zero-admin/rpc/oms/omsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,9 +30,9 @@ func NewOrderAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderAdd
 }
 
 // OrderAdd 创建订单
-//1.插入order表
-//2.插入order_item表
-//2.删除cart_item表(删除购物车中的下单商品)
+// 1.插入order表
+// 2.插入order_item表
+// 2.删除cart_item表(删除购物车中的下单商品)
 func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAddResp, error) {
 
 	//1.插入order表
@@ -65,7 +65,7 @@ func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAdd
 	}, nil
 }
 
-//2.构建下单商品信息
+// 2.构建下单商品信息
 func buildOrderItem(l *OrderAddLogic, orderItem *omsclient.OrderItemListData) {
 	_, err := l.svcCtx.OmsOrderItemModel.Insert(l.ctx, &omsmodel.OmsOrderItem{
 		OrderId:           0,
@@ -94,7 +94,7 @@ func buildOrderItem(l *OrderAddLogic, orderItem *omsclient.OrderItemListData) {
 	}
 }
 
-//1.构建订单信息
+// 1.构建订单信息
 func buildOrderInfo(in *omsclient.OrderAddReq) *omsmodel.OmsOrder {
 	return &omsmodel.OmsOrder{
 		MemberId:              in.MemberId,

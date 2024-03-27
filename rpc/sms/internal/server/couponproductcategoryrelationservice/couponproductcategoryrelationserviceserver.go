@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/sms/internal/logic/couponproductcategoryrelationservice"
-	"zero-admin/rpc/sms/internal/svc"
-	"zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/sms/internal/logic/couponproductcategoryrelationservice"
+	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 )
 
 type CouponProductCategoryRelationServiceServer struct {

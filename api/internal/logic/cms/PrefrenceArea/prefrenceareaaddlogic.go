@@ -3,8 +3,8 @@ package PrefrenceArea
 import (
 	"context"
 
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
+	"github.com/feihua/zero-admin/api/internal/svc"
+	"github.com/feihua/zero-admin/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

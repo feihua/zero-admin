@@ -3,13 +3,13 @@ package productservicelogic
 import (
 	"context"
 	"database/sql"
+	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"math/rand"
 	"strconv"
 	"time"
-	"zero-admin/rpc/model/pmsmodel"
-	"zero-admin/rpc/pms/pmsclient"
 
-	"zero-admin/rpc/pms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -29,13 +29,13 @@ func NewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Produc
 }
 
 // ProductAdd 添加商品,返回商品id
-//逻辑步骤：
-//1.创建商品基本信息
-//2.会员价格
-//3.阶梯价格
-//4.满减价格
-//5.添加sku库存信息
-//6.添加商品参数,添加自定义商品规格
+// 逻辑步骤：
+// 1.创建商品基本信息
+// 2.会员价格
+// 3.阶梯价格
+// 4.满减价格
+// 5.添加sku库存信息
+// 6.添加商品参数,添加自定义商品规格
 func (l *ProductAddLogic) ProductAdd(in *pmsclient.ProductAddReq) (*pmsclient.ProductAddResp, error) {
 	PromotionStartTime := time.Now()
 	if len(in.PromotionStartTime) > 0 {

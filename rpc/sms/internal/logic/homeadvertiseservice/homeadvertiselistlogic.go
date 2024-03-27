@@ -3,8 +3,8 @@ package homeadvertiseservicelogic
 import (
 	"context"
 	"encoding/json"
-	"zero-admin/rpc/sms/internal/svc"
-	"zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

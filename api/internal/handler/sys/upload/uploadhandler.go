@@ -3,9 +3,9 @@ package upload
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/api/internal/logic/sys/upload"
+	"github.com/feihua/zero-admin/api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/api/internal/logic/sys/upload"
-	"zero-admin/api/internal/svc"
 )
 
 func UploadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

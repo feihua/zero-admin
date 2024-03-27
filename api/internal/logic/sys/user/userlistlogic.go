@@ -2,12 +2,12 @@ package user
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/api/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/internal/svc"
+	"github.com/feihua/zero-admin/api/internal/types"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logc"
-	"zero-admin/api/internal/common/errorx"
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
-	"zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

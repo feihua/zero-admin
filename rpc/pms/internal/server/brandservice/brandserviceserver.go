@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"zero-admin/rpc/pms/internal/logic/brandservice"
-	"zero-admin/rpc/pms/internal/svc"
-	"zero-admin/rpc/pms/pmsclient"
+	"github.com/feihua/zero-admin/rpc/pms/internal/logic/brandservice"
+	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 )
 
 type BrandServiceServer struct {

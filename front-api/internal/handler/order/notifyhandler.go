@@ -3,8 +3,8 @@ package order
 import (
 	"net/http"
 
-	"zero-admin/front-api/internal/logic/order"
-	"zero-admin/front-api/internal/svc"
+	"github.com/feihua/zero-admin/front-api/internal/logic/order"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
 )
 
 func NotifyHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

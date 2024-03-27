@@ -3,9 +3,9 @@ package brand
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/logic/brand"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/brand"
-	"zero-admin/front-api/internal/svc"
 )
 
 func BrandListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

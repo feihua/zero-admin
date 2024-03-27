@@ -3,9 +3,9 @@ package member
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/logic/member/member"
+	"github.com/feihua/zero-admin/front-api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/front-api/internal/logic/member/member"
-	"zero-admin/front-api/internal/svc"
 )
 
 func InfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

@@ -3,10 +3,10 @@ package subject
 import (
 	"net/http"
 
+	"github.com/feihua/zero-admin/api/internal/logic/cms/subject"
+	"github.com/feihua/zero-admin/api/internal/svc"
+	"github.com/feihua/zero-admin/api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"zero-admin/api/internal/logic/cms/subject"
-	"zero-admin/api/internal/svc"
-	"zero-admin/api/internal/types"
 )
 
 func SubjectUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

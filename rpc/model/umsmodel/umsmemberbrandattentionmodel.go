@@ -3,8 +3,8 @@ package umsmodel
 import (
 	"context"
 	"fmt"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"zero-admin/rpc/ums/umsclient"
 )
 
 var _ UmsMemberBrandAttentionModel = (*customUmsMemberBrandAttentionModel)(nil)

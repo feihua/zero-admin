@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/feihua/zero-admin/front-api/internal/svc"
 	"github.com/zeromicro/go-zero/core/logx"
-	"zero-admin/front-api/internal/svc"
 )
 
 // NotifyLogic

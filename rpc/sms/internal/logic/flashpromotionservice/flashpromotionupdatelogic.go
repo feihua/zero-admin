@@ -2,12 +2,12 @@ package flashpromotionservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
-	"zero-admin/rpc/model/smsmodel"
-	"zero-admin/rpc/sms/smsclient"
 
+	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/zeromicro/go-zero/core/logx"
-	"zero-admin/rpc/sms/internal/svc"
 )
 
 type FlashPromotionUpdateLogic struct {

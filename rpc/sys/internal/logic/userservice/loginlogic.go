@@ -4,11 +4,11 @@ import (
 	"context"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"time"
-	"zero-admin/rpc/sys/internal/svc"
-	"zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -75,7 +75,7 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	return resp, nil
 }
 
-//生成jwt的token
+// 生成jwt的token
 func (l *LoginLogic) getJwtToken(secretKey string, iat, seconds, userId int64, userName string) (string, error) {
 	claims := make(jwt.MapClaims)
 	claims["exp"] = iat + seconds

@@ -1,4 +1,4 @@
-module zero-admin
+module github.com/feihua/zero-admin
 
 go 1.22
 

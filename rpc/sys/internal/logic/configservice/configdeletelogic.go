@@ -2,9 +2,9 @@ package configservicelogic
 
 import (
 	"context"
-	"zero-admin/rpc/sys/sysclient"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
-	"zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

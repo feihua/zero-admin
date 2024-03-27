@@ -2,10 +2,10 @@ package menuservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"zero-admin/rpc/sys/sysclient"
 
-	"zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
