@@ -94,6 +94,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
+				Path:    "/queryPcProductCateList",
+				Handler: category.QueryPcProductCateListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
 				Path:    "/queryProductCateList",
 				Handler: category.QueryProductCateListHandler(serverCtx),
 			},

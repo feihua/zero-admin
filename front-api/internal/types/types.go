@@ -790,6 +790,12 @@ type OrderPayResp struct {
 	Data    string `json:"data"`
 }
 
+type PCCategoryData struct {
+	Key      string           `json:"key"`
+	Label    string           `json:"label"`
+	Children []PCCategoryData `json:"children"`
+}
+
 type PayCallbackReq struct {
 	OrderId   int64 `json:"orderId"`
 	ProductId int64 `json:"productId"`
@@ -966,6 +972,12 @@ type ProductList struct {
 	BrandName                  string  `json:"brandName"`
 	ProductCategoryName        string  `json:"productCategoryName"`
 	Description                string  `json:"description"`
+}
+
+type QueryPCProductCateListResp struct {
+	Code    int64            `json:"code"`
+	Message string           `json:"message"`
+	Data    []PCCategoryData `json:"data"`
 }
 
 type QueryProductCateListResp struct {

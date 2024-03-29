@@ -29,6 +29,18 @@ type CategoryData {
 	Children    []CategoryData `json:"children"`
 }
 
+type QueryPCProductCateListResp {
+	Code int64 `json:"code"`
+	Message string `json:"message"`
+	Data []PCCategoryData `json:"data"`
+}
+
+type PCCategoryData {
+	Key string `json:"key"`
+	Label string `json:"label"`
+	Children []PCCategoryData `json:"children"`
+}
+
 @server(
 	group: category
 	prefix: /api/category
@@ -40,7 +52,11 @@ service front-api {
 	@handler ProductCateList
 	get /productCateList/:parentId (CategoryReq) returns (CategoryResp)
 
-	// 查询所有分类(嵌套children)
+	// 查询所有分类(嵌套children)(app端)
 	@handler queryProductCateList
 	get /queryProductCateList returns (QueryProductCateListResp)
+
+	// 查询所有分类(嵌套children)(pc web端专用)
+	@handler queryPcProductCateList
+	get /queryPcProductCateList returns (QueryProductCateListResp)
 }
