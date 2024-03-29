@@ -58,7 +58,7 @@ stop: ## 停止目标
 	pkill -f pms-rpc 
 
 
-restart: stop run ## 重启项目
+restart: stop start ## 重启项目
 
 
 .DEFAULT_GOAL := all ## 默认构建目标是
