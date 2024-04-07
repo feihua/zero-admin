@@ -69,6 +69,11 @@ restart: stop start ## 重启项目
 GOCTL=$(GOBIN)/goctl ## goctl
 
 
+format: ## 格式化代码
+	$(GOCTL) api format --dir api/admin/doc/api
+	$(GOCTL) api format --dir api/front/doc/api
+	$(GOCTL) api format --dir api/web/doc/api
+
 gen:	## 生成所有模块代码
 	$(GOCTL) api go -api ./api/admin/doc/api/admin.api -dir ./api/admin/
 	# 生成front-api代码
