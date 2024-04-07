@@ -29,7 +29,7 @@ func NewCouponFindByProductIdAndProductCategoryIdLogic(ctx context.Context, svcC
 	}
 }
 
-// CouponFindByProductIdAndProductCategoryId 根据商品Id和分类id查询可用的优惠券(app)
+// CouponFindByProductIdAndProductCategoryId 根据商品Id和分类id查询可用的优惠券(front)
 func (l *CouponFindByProductIdAndProductCategoryIdLogic) CouponFindByProductIdAndProductCategoryId(in *smsclient.CouponFindByProductIdAndProductCategoryIdReq) (*smsclient.CouponFindByProductIdAndProductCategoryIdResp, error) {
 	all, err := l.svcCtx.SmsCouponModel.CouponFindByProductIdAndProductCategoryId(l.ctx, in.ProductId, in.ProductCategoryId)
 
