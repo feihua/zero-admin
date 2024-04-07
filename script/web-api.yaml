@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-api
+  namespace: zero-admin
+  labels:
+    app: web-api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: web-api
+  template:
+    metadata:
+      labels:
+        app: web-api
+    spec:
+      serviceAccountName: koobe
+      containers:
+        - name: web-api
+          image: web-api:0.0.1
+          ports:
+            - containerPort: 7777
+          envFrom:
+            - configMapRef:
+                name: zero-admin-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-api-svc
+  namespace: zero-admin
+  labels:
+    app: web-api-svc
+spec:
+  ports:
+    - port: 7777
+      name: web-api
+      targetPort: 7777
+  selector:
+    app: web-api
+  type: NodePort
