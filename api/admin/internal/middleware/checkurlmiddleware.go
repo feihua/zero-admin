@@ -36,13 +36,6 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		//todo 演示环境暂无修改权限，如需修改数据可本地搭建后台服务！
-		if strings.Contains(r.RequestURI, "add") || strings.Contains(r.RequestURI, "update") || strings.Contains(r.RequestURI, "delete") {
-			logx.WithContext(r.Context()).Errorf("用户：%s,演示环境暂无修改权限，如需修改数据可本地搭建后台服务！", userName)
-			httpx.OkJson(w, errorx.NewDefaultError(fmt.Sprintf("用户：%s,演示环境暂无修改权限，如需修改数据可本地搭建后台服务！", userName)))
-			return
-		}
-
 		//获取用户能访问的url
 		urls, err := m.Redis.Get(userId)
 		if err != nil {
