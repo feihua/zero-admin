@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// BrandListLogic
+/*
+Author: LiuFeiHua
+Date: 2024/4/7 17:37
+*/
 type BrandListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandLi
 	}
 }
 
+// BrandList 查询品牌列表
 func (l *BrandListLogic) BrandList(in *pmsclient.BrandListReq) (*pmsclient.BrandListResp, error) {
 	all, err := l.svcCtx.PmsBrandModel.FindAll(l.ctx, in)
 	count, _ := l.svcCtx.PmsBrandModel.Count(l.ctx, in)

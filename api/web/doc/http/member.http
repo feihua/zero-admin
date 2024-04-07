@@ -1,0 +1,31 @@
+### app会员注册
+POST {{host}}/api/member/register
+Content-Type: application/json
+
+{
+  "username": "test",
+  "mobile": "18613030355",
+  "confirmPassword": "123456",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.data.token);
+%}
+
+
+### app会员登录
+POST {{host}}/api/member/login
+Content-Type: application/json
+
+{
+  "account": "18613030352",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.data.token);
+%}
+
+### 获取会员个人信息
+GET {{host}}/api/member/info
+Authorization: Bearer {{token}}
+
