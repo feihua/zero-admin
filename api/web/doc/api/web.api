@@ -1,15 +1,12 @@
-syntax = "v1"
+import "member.api"
+import "category.api"
+import "home.api"
+import "brand.api"
 
-type Request {
-    Name string `path:"name,options=you|me"`
-}
-
-type Response {
-    Message string `json:"message"`
-}
-
-service web-api {
-    @handler WebHandler
-    get /from/:name (Request) returns (Response)
-}
+info(
+	title: "zero-web"
+	desc: "pc-web接口"
+	author: "koobe"
+	email: "1002219331@qq.com"
+)
 

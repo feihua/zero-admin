@@ -4,6 +4,10 @@ package handler
 import (
 	"net/http"
 
+	brand "github.com/feihua/zero-admin/api/web/internal/handler/brand"
+	category "github.com/feihua/zero-admin/api/web/internal/handler/category"
+	home "github.com/feihua/zero-admin/api/web/internal/handler/home"
+	membermember "github.com/feihua/zero-admin/api/web/internal/handler/member/member"
 	"github.com/feihua/zero-admin/api/web/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -14,9 +18,60 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/from/:name",
-				Handler: WebHandler(serverCtx),
+				Path:    "/list",
+				Handler: brand.BrandListHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/brand"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryProductCateList",
+				Handler: category.QueryProductCateListHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/category"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/index",
+				Handler: home.HomeIndexHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/home"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/login",
+				Handler: membermember.LoginHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/register",
+				Handler: membermember.RegisterHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/member"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/info",
+				Handler: membermember.InfoHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member"),
 	)
 }
