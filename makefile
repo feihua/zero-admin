@@ -26,25 +26,27 @@ deps: ## 安装依赖目标
  
 
 build: ## 构建目标
-	$(GOBUILD) -o target/admin-api -v ./api/admin/admin.go
-	$(GOBUILD) -o target/front-api -v ./api/front/front.go
 	$(GOBUILD) -o target/sys-rpc -v ./rpc/sys/sys.go
 	$(GOBUILD) -o target/ums-rpc -v ./rpc/ums/ums.go
 	$(GOBUILD) -o target/oms-rpc -v ./rpc/oms/oms.go
 	$(GOBUILD) -o target/pms-rpc -v ./rpc/pms/pms.go
 	$(GOBUILD) -o target/cms-rpc -v ./rpc/cms/cms.go
 	$(GOBUILD) -o target/sms-rpc -v ./rpc/sms/sms.go
+	$(GOBUILD) -o target/admin-api -v ./api/admin/admin.go
+	$(GOBUILD) -o target/front-api -v ./api/front/front.go
+	$(GOBUILD) -o target/web-api -v ./api/web/web.go
 
 
 start: ## 运行目标
-	nohup ./target/admin-api -f api/admin/etc/admin-api.yaml > /dev/null 2>&1 &
-	nohup ./target/front-api -f api/front/etc/front-api.yaml  > /dev/null 2>&1 &
 	nohup ./target/sys-rpc -f rpc/sys/etc/sys.yaml  > /dev/null 2>&1 &
 	nohup ./target/ums-rpc -f rpc/ums/etc/ums.yaml  > /dev/null 2>&1 &
 	nohup ./target/oms-rpc -f rpc/oms/etc/oms.yaml  > /dev/null 2>&1 &
 	nohup ./target/pms-rpc -f rpc/pms/etc/pms.yaml  > /dev/null 2>&1 &
 	nohup ./target/cms-rpc -f rpc/cms/etc/cms.yaml  > /dev/null 2>&1 &
 	nohup ./target/sms-rpc -f rpc/sms/etc/sms.yaml  > /dev/null 2>&1 &
+	nohup ./target/admin-api -f api/admin/etc/admin-api.yaml > /dev/null 2>&1 &
+	nohup ./target/front-api -f api/front/etc/front-api.yaml  > /dev/null 2>&1 &
+	nohup ./target/web-api -f api/web/etc/web-api.yaml  > /dev/null 2>&1 &
 
 
 stop: ## 停止目标
@@ -71,6 +73,8 @@ gen:	## 生成所有模块代码
 	$(GOCTL) api go -api ./api/admin/doc/api/admin.api -dir ./api/admin/
 	# 生成front-api代码
 	$(GOCTL) api go -api ./api/front/doc/api/front.api -dir ./api/front/
+	# 生成web-api代码
+	$(GOCTL) api go -api ./api/web/doc/api/web.api -dir ./api/web/
 	# 生成sys-rpc代码
 	$(GOCTL) rpc protoc rpc/sys/sys.proto --go_out=./rpc/sys/ --go-grpc_out=./rpc/sys/ --zrpc_out=./rpc/sys/ -m
 	# 生成ums-rpc代码
@@ -101,6 +105,7 @@ image: ## 构建docker镜像
 	docker build -t cms-rpc:0.0.1 -f rpc/cms/Dockerfile .
 	docker build -t admin-api:0.0.1 -f api/admin/Dockerfile .
 	docker build -t front-api:0.0.1 -f api/front/Dockerfile .
+	docker build -t web-api:0.0.1 -f api/web/Dockerfile .
 
 run: ## 启动docker容器
 	docker run -itd --net=host --name=sys sys-rpc:0.0.1; \
@@ -111,6 +116,7 @@ run: ## 启动docker容器
     docker run -itd --net=host --name=cms cms-rpc:0.0.1; \
     docker run -itd --net=host --name=admin-api admin-api:0.0.1; \
     docker run -itd --net=host --name=front-api front-api:0.0.1 \
+    docker run -itd --net=host --name=web-api web-api:0.0.1 \
 
 kubectl: ## 部署k8s容器
 	kubectl apply -f script/account/serviceaccount.yaml; \
@@ -123,6 +129,7 @@ kubectl: ## 部署k8s容器
     kubectl apply -f script/cms-rpc.yaml; \
     kubectl apply -f script/admin-api.yaml; \
     kubectl apply -f script/front-api.yaml; \
+    kubectl apply -f script/web-api.yaml; \
 
 help: ## show help message
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m\033[0m\n"} /^[$$()% 0-9a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
