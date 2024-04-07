@@ -1,53 +1,51 @@
-1.安装
-框架安装 go get -u github.com/zeromicro/go-zero
-框架代码生成工具安装 go get -u github.com/zeromicro/go-zero/tools/goctl
+# 项目常用命令
 
-2.创建api
-进到api/doc/目录执行
-goctl api -o admin.api
-goctl api go -api admin.api -dir ../../
+## 1.相关工具安装
 
-front-pai
-front-api/doc
-goctl api -o front.api
-goctl api go -api front.api -dir ../
+```shell
+go get -u github.com/zeromicro/go-zero/tools/goctl
+```
 
-3.创建rpc
-进到rpc/sys/目录操作
-goctl rpc template -o sys.proto
-goctl rpc protoc sys.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. -m
+<font face="宋体" color=red size=3>以下操作,在项目根目录操作</font>
 
-进到rpc/ums/目录操作
-goctl rpc template -o ums.proto
-goctl rpc protoc ums.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. -m
+## 2.生成api代码
 
-进到rpc/pms/目录操作
-goctl rpc template -o pms.proto
-goctl rpc protoc pms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. -m
+```shell
+2.1后端管理代码
+goctl api go -api ./api/admin/doc/api/admin.api -dir ./api/admin/
 
-进到rpc/oms/目录操作
-goctl rpc template -o oms.proto
-goctl rpc protoc oms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. -m
+2.2移动端app代码
+goctl api go -api ./api/front/doc/api/front.api -dir ./api/front/
 
-进到rpc/sms/目录操作
-goctl rpc template -o sms.proto
-goctl rpc protoc sms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. -m
+2.2网页端web代码
+goctl api go -api ./api/web/doc/api/web.api -dir ./api/web/
+```
 
-进到rpc/pay/目录操作
-goctl rpc template -o pay.proto
-goctl rpc protoc pay.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. -m
+## 3.生成rpc代码
 
-进到rpc/cms/目录操作
-goctl rpc template -o cms.proto
-goctl rpc protoc cms.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. -m
+```shell
+3.1生成sys-rpc代码
+goctl rpc protoc rpc/sys/sys.proto --go_out=./rpc/sys/ --go-grpc_out=./rpc/sys/ --zrpc_out=./rpc/sys/ -m
+3.2生成ums-rpc代码
+goctl rpc protoc rpc/ums/ums.proto --go_out=./rpc/ums/ --go-grpc_out=./rpc/ums/ --zrpc_out=./rpc/ums/ -m
+3.3pms-rpc代码
+goctl rpc protoc rpc/pms/pms.proto --go_out=./rpc/pms/ --go-grpc_out=./rpc/pms/ --zrpc_out=./rpc/pms/ -m
+3.4生成oms-rpc代码
+goctl rpc protoc rpc/oms/oms.proto --go_out=./rpc/oms/ --go-grpc_out=./rpc/oms/ --zrpc_out=./rpc/oms/ -m
+3.5生成sms-rpc代码
+goctl rpc protoc rpc/sms/sms.proto --go_out=./rpc/sms/ --go-grpc_out=./rpc/sms/ --zrpc_out=./rpc/sms/ -m
+3.6生成cmsrpc代码
+goctl rpc protoc rpc/cms/cms.proto --go_out=./rpc/cms/ --go-grpc_out=./rpc/cms/ --zrpc_out=./rpc/cms/ -m
 
-4.创建model
-进到rpc/目录操作
-goctl model mysql ddl -c -src book.sql -dir .
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="sys*" -dir ./model/sysmodel
+```
 
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="ums*" -dir ./model/umsmodel
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="pms*" -dir ./model/pmsmodel
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="oms*" -dir ./model/omsmodel
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="sms*" -dir ./model/smsmodel
-goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="pay*" -dir ./model/paymodel
+## 4.生成model代码
+
+```shell
+goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="sys*" -dir=./rpc/model/sysmodel
+goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="ums*" -dir=./rpc/model/umsmodel
+goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="sms*" -dir=./rpc/model/smsmodel
+goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="oms*" -dir=./rpc/model/omsmodel
+goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="pms*" -dir=./rpc/model/pmsmodel
+goctl model mysql datasource -url="root:123456@tcp(127.0.0.1:3306)/gozero" -table="cms*" -dir=./rpc/model/cmsmodel
+```
