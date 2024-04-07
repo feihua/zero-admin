@@ -26,7 +26,7 @@ deps: ## 安装依赖目标
  
 
 build: ## 构建目标
-	$(GOBUILD) -o target/admin-api -v ./api/admin.go
+	$(GOBUILD) -o target/admin-api -v ./api/admin/admin.go
 	$(GOBUILD) -o target/front-api -v ./front-api/front.go
 	$(GOBUILD) -o target/sys-rpc -v ./rpc/sys/sys.go
 	$(GOBUILD) -o target/ums-rpc -v ./rpc/ums/ums.go
@@ -37,7 +37,7 @@ build: ## 构建目标
 
 
 start: ## 运行目标
-	nohup ./target/admin-api -f api/etc/admin-api.yaml > /dev/null 2>&1 &
+	nohup ./target/admin-api -f api/admin/etc/admin-api.yaml > /dev/null 2>&1 &
 	nohup ./target/front-api -f front-api/etc/front-api.yaml  > /dev/null 2>&1 &
 	nohup ./target/sys-rpc -f rpc/sys/etc/sys.yaml  > /dev/null 2>&1 &
 	nohup ./target/ums-rpc -f rpc/ums/etc/ums.yaml  > /dev/null 2>&1 &
@@ -68,7 +68,7 @@ GOCTL=$(GOBIN)/goctl ## goctl
 
 
 gen:	## 生成所有模块代码
-	$(GOCTL) api go -api ./api/doc/api/admin.api -dir ./api/
+	$(GOCTL) api go -api ./api/admin/doc/api/admin.api -dir ./api/admin/
 	# 生成front-api代码
 	/$(GOCTL) api go -api ./front-api/doc/api/front.api -dir ./front-api/
 	# 生成sys-rpc代码
@@ -99,7 +99,7 @@ image: ## 构建docker镜像
 	docker build -t pms-rpc:0.0.1 -f rpc/pms/Dockerfile .
 	docker build -t sms-rpc:0.0.1 -f rpc/sms/Dockerfile .
 	docker build -t cms-rpc:0.0.1 -f rpc/cms/Dockerfile .
-	docker build -t admin-api:0.0.1 -f api/Dockerfile .
+	docker build -t admin-api:0.0.1 -f api/admin/Dockerfile .
 	docker build -t front-api:0.0.1 -f front-api/Dockerfile .
 
 run: ## 启动docker容器
