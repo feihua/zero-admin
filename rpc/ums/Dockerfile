@@ -10,7 +10,7 @@ WORKDIR /build/zero
 COPY . .
 RUN sh -c "[ -f go.mod ]" || exit
 COPY rpc/ums/etc /app/etc
-RUN go build -ldflags="-s -w" -o /front/ums rpc/ums/ums.go
+RUN go build -ldflags="-s -w" -o /app/ums rpc/ums/ums.go
 
 
 FROM alpine

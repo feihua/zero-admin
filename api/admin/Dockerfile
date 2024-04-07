@@ -9,8 +9,8 @@ ENV GOPROXY https://goproxy.cn,direct
 WORKDIR /build/zero
 COPY . .
 RUN sh -c "[ -f go.mod ]" || exit
-COPY api/etc /app/etc
-RUN go build -ldflags="-s -w" -o /app/admin api/admin.go
+COPY api/admin/etc /app/etc
+RUN go build -ldflags="-s -w" -o /app/admin api/admin/admin.go
 
 
 FROM alpine
