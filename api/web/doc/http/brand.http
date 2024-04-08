@@ -1,4 +1,4 @@
 ### 品牌列表
-GET {{host}}/api/brand/list
+GET {{host}}/api/brand/queryBrandList
 
 

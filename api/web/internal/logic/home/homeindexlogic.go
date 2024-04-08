@@ -166,20 +166,36 @@ func queryHomeFlashPromotion(l *HomeIndexLogic) types.HomeFlashPromotion {
 			//}
 
 			var productIdLists []int64
+			productIdLists = append(productIdLists, 1)
+			productIdLists = append(productIdLists, 2)
+			productIdLists = append(productIdLists, 3)
+			productIdLists = append(productIdLists, 4)
+			productIdLists = append(productIdLists, 5)
 			productIdLists = append(productIdLists, 27)
 			productIdLists = append(productIdLists, 28)
 			productIdLists = append(productIdLists, 29)
 			productIdLists = append(productIdLists, 32)
+			productIdLists = append(productIdLists, 33)
+			productIdLists = append(productIdLists, 34)
+			productIdLists = append(productIdLists, 35)
 			//todo =====================结束==========================
 			//设置商品
 			resp.ProductList = queryProductList(l.svcCtx.ProductService, productIdLists, l.ctx)
 		}
 	}
 	var productIdLists []int64
+	productIdLists = append(productIdLists, 1)
+	productIdLists = append(productIdLists, 2)
+	productIdLists = append(productIdLists, 3)
+	productIdLists = append(productIdLists, 4)
+	productIdLists = append(productIdLists, 5)
 	productIdLists = append(productIdLists, 27)
 	productIdLists = append(productIdLists, 28)
 	productIdLists = append(productIdLists, 29)
 	productIdLists = append(productIdLists, 32)
+	productIdLists = append(productIdLists, 33)
+	productIdLists = append(productIdLists, 34)
+	productIdLists = append(productIdLists, 35)
 
 	//设置商品
 	resp.ProductList = queryProductList(l.svcCtx.ProductService, productIdLists, l.ctx)
@@ -190,7 +206,7 @@ func queryHomeFlashPromotion(l *HomeIndexLogic) types.HomeFlashPromotion {
 func queryBrandList(l *HomeIndexLogic) []types.BrandList {
 	homeBrandList, _ := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
 		Current:         1,
-		PageSize:        12,
+		PageSize:        6,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})
 
@@ -224,7 +240,7 @@ func queryAdvertiseList(l *HomeIndexLogic) []types.AdvertiseList {
 	homeAdvertiseList, _ := l.svcCtx.HomeAdvertiseService.HomeAdvertiseList(l.ctx, &smsclient.HomeAdvertiseListReq{
 		Current:  1,
 		PageSize: 100,
-		Type:     0, //轮播位置：0->PC首页轮播；1->app首页轮播
+		Type:     1, //轮播位置：0->PC首页轮播；1->app首页轮播
 		Status:   1, //上下线状态：0->下线；1->上线
 	})
 

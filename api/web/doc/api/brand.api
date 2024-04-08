@@ -21,6 +21,6 @@ type BrandListData {
 )
 service web-api {
     @handler BrandList
-    get /list returns (BrandListResp)
+        get /queryBrandList returns (BrandListResp)
 }
 
