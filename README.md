@@ -62,6 +62,9 @@ Zero-Admin 是一套基于 go-zero 框架实现的电商系统，采用 Docker �
 
 [flutter_mall是zero-admin的app端](https://github.com/feihua/flutter_mall)是一个Flutter的电商实战项目，包括首页、列表页、详细页、购物车页、会员中心和支付(支付对接的是支付宝)
 
+[zero-pc-web 是 zero-admin 的网页端](https://github.com/feihua/zero-pc-web)zero-pc-web 是一个基于 React 框架实现的 web
+端电商系统(预览地址[http://110.41.179.89/pc/](http://110.41.179.89/pc/))
+
 # android版本
 android版本体验地址 [flutter-mall-app](https://www.pgyer.com/OoW2Zy)
 
