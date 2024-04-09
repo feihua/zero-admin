@@ -9,6 +9,7 @@ import (
 	category "github.com/feihua/zero-admin/api/web/internal/handler/category"
 	home "github.com/feihua/zero-admin/api/web/internal/handler/home"
 	membermember "github.com/feihua/zero-admin/api/web/internal/handler/member/member"
+	product "github.com/feihua/zero-admin/api/web/internal/handler/product"
 	"github.com/feihua/zero-admin/api/web/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -121,5 +122,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/member"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryProduct/:id",
+				Handler: product.QueryProductHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryProductList/:productCategoryId",
+				Handler: product.QueryProductListHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/product"),
 	)
 }

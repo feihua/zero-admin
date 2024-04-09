@@ -3,6 +3,7 @@ import "category.api"
 import "home.api"
 import "brand.api"
 import "cart.api"
+import "product.api"
 
 info(
 	title: "zero-web"

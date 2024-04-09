@@ -15,6 +15,20 @@ type AdvertiseList struct {
 	Sort       int64  `json:"sort"`
 }
 
+type Brand struct {
+	Id                  int64  `json:"id"`
+	Name                string `json:"name"`
+	FirstLetter         string `json:"firstLetter"`
+	Sort                int64  `json:"sort"`
+	FactoryStatus       int64  `json:"factoryStatus"`
+	ShowStatus          int64  `json:"showStatus"`
+	ProductCount        int64  `json:"productCount"`
+	ProductCommentCount int64  `json:"productCommentCount"`
+	Logo                string `json:"logo"`
+	BigPic              string `json:"bigPic"`
+	BrandStory          string `json:"brandStory"`
+}
+
 type BrandList struct {
 	ID                  int64  `json:"id"`
 	Name                string `json:"name"`
@@ -213,6 +227,24 @@ type CategoryData struct {
 	Children []CategoryData `json:"children"`
 }
 
+type CouponList struct {
+	Id           int64   `json:"id"`
+	Type         int64   `json:"type"`
+	Name         string  `json:"name"`
+	Platform     int64   `json:"platform"`
+	Count        int64   `json:"count"`
+	Amount       float64 `json:"amount"`
+	PerLimit     int64   `json:"perLimit"`
+	MinPoint     float64 `json:"minPoint"`
+	StartTime    string  `json:"startTime"`
+	EndTime      string  `json:"endTime"`
+	UseType      int64   `json:"useType"`
+	PublishCount int64   `json:"publishCount"`
+	UseCount     int64   `json:"useCount"`
+	ReceiveCount int64   `json:"receiveCount"`
+	EnableTime   string  `json:"enableTime"`
+}
+
 type HomeData struct {
 	AdvertiseList      []AdvertiseList    `json:"advertiseList"`      //获取首页广告
 	BrandList          []BrandList        `json:"brandList"`          //获取推荐品牌
@@ -280,6 +312,99 @@ type MemberData struct {
 	CouponCount           int64  `json:"couponCount"`           // 优惠券数量
 }
 
+type Product struct {
+	Id                         int64   `json:"id"`
+	BrandId                    int64   `json:"brandId"`
+	ProductCategoryId          int64   `json:"productCategoryId"`
+	FeightTemplateId           int64   `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
+	Name                       string  `json:"name"`
+	Pic                        string  `json:"pic"`
+	ProductSn                  string  `json:"productSn"`
+	DeleteStatus               int64   `json:"deleteStatus"`
+	PublishStatus              int64   `json:"publishStatus"`
+	NewStatus                  int64   `json:"newStatus"`
+	RecommandStatus            int64   `json:"recommandStatus"`
+	VerifyStatus               int64   `json:"verifyStatus"`
+	Sort                       int64   `json:"sort"`
+	Sale                       int64   `json:"sale"`
+	Price                      float64 `json:"price"`
+	PromotionPrice             float64 `json:"promotionPrice"`
+	GiftGrowth                 int64   `json:"giftGrowth"`
+	GiftPoint                  int64   `json:"giftPoint"`
+	UsePointLimit              int64   `json:"usePointLimit"`
+	SubTitle                   string  `json:"subTitle"`
+	OriginalPrice              float64 `json:"originalPrice"`
+	Stock                      int64   `json:"stock"`
+	LowStock                   int64   `json:"lowStock"`
+	Unit                       string  `json:"unit"`
+	Weight                     float64 `json:"weight"`
+	PreviewStatus              int64   `json:"previewStatus"`
+	ServiceIds                 string  `json:"serviceIds"`
+	Keywords                   string  `json:"keywords"`
+	Note                       string  `json:"note"`
+	AlbumPics                  string  `json:"albumPics"`
+	DetailTitle                string  `json:"detailTitle"`
+	PromotionStartTime         string  `json:"promotionStartTime"`
+	PromotionEndTime           string  `json:"promotionEndTime"`
+	PromotionPerLimit          int64   `json:"promotionPerLimit"`
+	PromotionType              int64   `json:"promotionType"`
+	BrandName                  string  `json:"brandName"`
+	ProductCategoryName        string  `json:"productCategoryName"`
+	Description                string  `json:"description"`
+	DetailDesc                 string  `json:"detailDesc"`
+	DetailHtml                 string  `json:"detailHtml"`
+	DetailMobileHtml           string  `json:"detailMobileHtml"`
+}
+
+type ProductAttributeList struct {
+	Id                         int64  `json:"id"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+	Name                       string `json:"name"`
+	SelectType                 int64  `json:"selectType"`
+	InputType                  int64  `json:"inputType"`
+	InputList                  string `json:"inputList"`
+	Sort                       int64  `json:"sort"`
+	FilterType                 int64  `json:"filterType"`
+	SearchType                 int64  `json:"searchType"`
+	RelatedStatus              int64  `json:"relatedStatus"`
+	HandAddStatus              int64  `json:"handAddStatus"`
+	Type                       int64  `json:"type"`
+}
+
+type ProductAttributeValueList struct {
+	Id                 int64  `json:"id"`
+	ProductId          int64  `json:"productId"`
+	ProductAttributeId int64  `json:"productAttributeId"`
+	Value              string `json:"value"`
+}
+
+type ProductData struct {
+	Product                   Product                     `json:"product"`
+	Brand                     Brand                       `json:"brand"`
+	ProductAttributeList      []ProductAttributeList      `json:"productAttributeList"`
+	ProductAttributeValueList []ProductAttributeValueList `json:"productAttributeValueList"`
+	SkuStockList              []SkuStockList              `json:"skuStockList"`
+	ProductLadderList         []ProductLadderList         `json:"productLadderList"`
+	ProductFullReductionList  []ProductFullReductionList  `json:"productFullReductionList"`
+	CouponList                []CouponList                `json:"couponList"`
+}
+
+type ProductFullReductionList struct {
+	Id          int64   `json:"id"`
+	ProductId   int64   `json:"productId"`
+	FullPrice   float32 `json:"fullPrice"`
+	ReducePrice float32 `json:"reducePrice"`
+}
+
+type ProductLadderList struct {
+	Id        int64   `json:"id"`
+	ProductId int64   `json:"productId"`
+	Count     int64   `json:"count"`
+	Discount  float32 `json:"discount"`
+	Price     float32 `json:"price"`
+}
+
 type ProductList struct {
 	Id                         int64   `json:"id"`
 	BrandId                    int64   `json:"brandId"`
@@ -328,6 +453,71 @@ type QueryProductCateListResp struct {
 	Data    []CategoryData `json:"data"`
 }
 
+type QueryProductListData struct {
+	Id                         int64   `json:"id"`
+	BrandId                    int64   `json:"brandId"`
+	ProductCategoryId          int64   `json:"productCategoryId"`
+	FeightTemplateId           int64   `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
+	Name                       string  `json:"name"`
+	Pic                        string  `json:"pic"`
+	ProductSn                  string  `json:"productSn"`
+	DeleteStatus               int64   `json:"deleteStatus"`
+	PublishStatus              int64   `json:"publishStatus"`
+	NewStatus                  int64   `json:"newStatus"`
+	RecommandStatus            int64   `json:"recommandStatus"`
+	VerifyStatus               int64   `json:"verifyStatus"`
+	Sort                       int64   `json:"sort"`
+	Sale                       int64   `json:"sale"`
+	Price                      float64 `json:"price"`
+	PromotionPrice             float64 `json:"promotionPrice,omitempty"`
+	GiftGrowth                 int64   `json:"giftGrowth"`
+	GiftPoint                  int64   `json:"giftPoint"`
+	UsePointLimit              int64   `json:"usePointLimit"`
+	SubTitle                   string  `json:"subTitle"`
+	OriginalPrice              float64 `json:"originalPrice"`
+	Stock                      int64   `json:"stock"`
+	LowStock                   int64   `json:"lowStock"`
+	Unit                       string  `json:"unit"`
+	Weight                     float64 `json:"weight"`
+	PreviewStatus              int64   `json:"previewStatus"`
+	ServiceIDS                 string  `json:"serviceIds"`
+	Keywords                   string  `json:"keywords"`
+	Note                       string  `json:"note"`
+	AlbumPics                  string  `json:"albumPics"`
+	DetailTitle                string  `json:"detailTitle"`
+	PromotionStartTime         string  `json:"promotionStartTime,omitempty"`
+	PromotionEndTime           string  `json:"promotionEndTime,omitempty"`
+	PromotionPerLimit          int64   `json:"promotionPerLimit"`
+	PromotionType              int64   `json:"promotionType"`
+	BrandName                  string  `json:"brandName"`
+	ProductCategoryName        string  `json:"productCategoryName"`
+	Description                string  `json:"description"`
+}
+
+type QueryProductListReq struct {
+	Current           int64 `path:"current,default=1"`
+	PageSize          int64 `path:"pageSize,default=10"`
+	BrandId           int64 `path:"brandId,default=0"`
+	ProductCategoryId int64 `path:"productCategoryId,default=0"`
+}
+
+type QueryProductListResp struct {
+	Code    int64                  `json:"code"`
+	Message string                 `json:"message"`
+	Data    []QueryProductListData `json:"data"`
+}
+
+type QueryProductReq struct {
+	Id int64 `path:"id"`
+}
+
+type QueryProductResp struct {
+	Code    int64       `json:"code"`
+	Message string      `json:"message"`
+	Data    ProductData `json:"data"`
+}
+
 type RegisterReq struct {
 	Username        string `json:"username"`        //会员名称
 	Password        string `json:"password"`        //密码
@@ -339,6 +529,20 @@ type RegisterResp struct {
 	Code    int64     `json:"code"`
 	Message string    `json:"message"`
 	Data    LoginData `json:"data"`
+}
+
+type SkuStockList struct {
+	Id             int64   `json:"id"`
+	ProductId      int64   `json:"productId"`
+	SkuCode        string  `json:"skuCode"` // sku编码
+	Price          float32 `json:"price"`
+	Stock          int64   `json:"stock"`          // 库存
+	LowStock       int64   `json:"lowStock"`       // 预警库存
+	Pic            string  `json:"pic"`            // 展示图片
+	Sale           int64   `json:"sale"`           // 销量
+	PromotionPrice float32 `json:"promotionPrice"` // 单品促销价格
+	LockStock      int64   `json:"lockStock"`      // 锁定库存
+	SpData         string  `json:"spData"`         // 商品销售属性，json格式
 }
 
 type SubjectList struct {
