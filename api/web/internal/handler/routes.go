@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	brand "github.com/feihua/zero-admin/api/web/internal/handler/brand"
+	cart "github.com/feihua/zero-admin/api/web/internal/handler/cart"
 	category "github.com/feihua/zero-admin/api/web/internal/handler/category"
 	home "github.com/feihua/zero-admin/api/web/internal/handler/home"
 	membermember "github.com/feihua/zero-admin/api/web/internal/handler/member/member"
@@ -23,6 +24,53 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithPrefix("/api/brand"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/addCartItem",
+				Handler: cart.CartItemAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/clear",
+				Handler: cart.CarItemClearHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/deleteCartItem",
+				Handler: cart.CartItemDeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/product/:productId",
+				Handler: cart.CartProductHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryCarItemList",
+				Handler: cart.CarItemListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/queryPromotionList",
+				Handler: cart.CarItemtListPromotionHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateAttr",
+				Handler: cart.CartUpdateAttrHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateQuantity",
+				Handler: cart.CartUpdateQuantityHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cart"),
 	)
 
 	server.AddRoutes(

@@ -1,0 +1,98 @@
+### app会员登录
+POST {{host}}/api/member/login
+Content-Type: application/json
+
+{
+  "account": "18613030352",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.data.token);
+%}
+
+### 添加商品进购物车
+POST {{host}}/api/cart/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "productId": 27,
+  "productSkuId": 163,
+  "quantity": 3,
+  "price": 2999.00,
+  "productPic": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20221104/xiaomi_12_pro_01.jpg",
+  "productName": "小米12 Pro 天玑版 天玑9000+处理器 5000万疾速影像 2K超视感屏 120Hz高刷 67W快充",
+  "productSubTitle": "天玑9000+处理器、5160mAh大电量、2KAmoled超视感屏【点击购买小米11Ultra，戳】 ",
+  "productSkuCode": "202211040040001",
+  "productCategoryId": 19,
+  "productBrand": "小米",
+  "productSn": "100027789721",
+  "productAttr": "[{\"key\":\"颜色\",\"value\":\"黑色\"},{\"key\":\"容量\",\"value\":\"128G\"}]"
+}
+
+### 删除购物车中的某个商品
+POST {{host}}/api/cart/delete
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [
+    3,
+    4
+  ]
+}
+
+### 修改购物车中某个商品的数量
+POST {{host}}/api/cart/updateQuantity
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 5,
+  "quantity": 221
+}
+
+### 修改购物车中商品的规格
+POST {{host}}/api/cart/updateAttr
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 6,
+  "productId": 40,
+  "productSkuId": 221,
+  "quantity": 3,
+  "price": 2999,
+  "productPic": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20221104/xiaomi_12_pro_01.jpg",
+  "productName": "小米12 Pro 天玑版 天玑9000+处理器 5000万疾速影像 2K超视感屏 120Hz高刷 67W快充",
+  "productSubTitle": "天玑9000+处理器、5160mAh大电量、2KAmoled超视感屏【点击购买小米11Ultra，戳】 ",
+  "productSkuCode": "202211040040001",
+  "createDate": "",
+  "modifyDate": "",
+  "deleteStatus": 0,
+  "productCategoryId": 19,
+  "productBrand": "小米",
+  "productSn": "100027789721",
+  "productAttr": "[{\"key\":\"颜色\",\"value\":\"黑色123123\"},{\"key\":\"容量\",\"value\":\"128G\"}]"
+}
+
+### 获取某个会员的购物车列表
+GET {{host}}/api/cart/queryCarItemList
+Authorization: Bearer {{token}}
+
+### 获取某个会员的购物车列表,包括促销信息
+POST {{host}}/api/cart/queryPromotionList
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+//{
+//  "ids": [27]
+//}
+
+### 获取购物车中某个商品的规格,用于重选规格
+GET {{host}}/api/cart/product/32
+Authorization: Bearer {{token}}
+
+### 清空购物车
+GET {{host}}/api/cart/clear
+Authorization: Bearer {{token}}
