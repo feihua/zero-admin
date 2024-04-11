@@ -496,10 +496,10 @@ type QueryProductListData struct {
 }
 
 type QueryProductListReq struct {
-	Current           int64 `path:"current,default=1"`
-	PageSize          int64 `path:"pageSize,default=10"`
-	BrandId           int64 `path:"brandId,default=0"`
-	ProductCategoryId int64 `path:"productCategoryId,default=0"`
+	Current           int64 `form:"current,default=1"`
+	PageSize          int64 `form:"pageSize,default=60"`
+	BrandId           int64 `form:"brandId,default=0"`
+	ProductCategoryId int64 `form:"productCategoryId,default=0"`
 }
 
 type QueryProductListResp struct {

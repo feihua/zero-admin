@@ -133,7 +133,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/queryProductList/:productCategoryId",
+				Path:    "/queryProductList",
 				Handler: product.QueryProductListHandler(serverCtx),
 			},
 		},
