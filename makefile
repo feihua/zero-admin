@@ -50,15 +50,15 @@ start: ## 运行目标
 
 
 stop: ## 停止目标
-	pkill -f admin-api
-	pkill -f front-api
-	pkill -f web-api
-	pkill -f sys-rpc
-	pkill -f sms-rpc
-	pkill -f cms-rpc
-	pkill -f ums-rpc
-	pkill -f oms-rpc
-	pkill -f pms-rpc 
+	-pkill -f admin-api
+	-pkill -f front-api
+	-pkill -f web-api
+	-pkill -f sys-rpc
+	-pkill -f sms-rpc
+	-pkill -f cms-rpc
+	-pkill -f ums-rpc
+	-pkill -f oms-rpc
+	-pkill -f pms-rpc
 
 
 restart: stop start ## 重启项目
