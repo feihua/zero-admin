@@ -26,6 +26,16 @@ deps: ## 安装依赖目标
  
 
 build: ## 构建目标
+	copy rpc\sys\etc\sys.yaml target\sys.yaml
+	copy rpc\ums\etc\ums.yaml target\ums.yaml
+	copy rpc\oms\etc\oms.yaml target\oms.yaml
+	copy rpc\pms\etc\pms.yaml target\pms.yaml
+	copy rpc\cms\etc\cms.yaml target\cms.yaml
+	copy rpc\sms\etc\sms.yaml target\sms.yaml
+	copy api\admin\etc\admin-api.yaml target\admin-api.yaml
+	copy api\web\etc\web-api.yaml target\web-api.yaml
+	copy api\front\etc\front-api.yaml target\front-api.yaml
+
 	$(GOBUILD) -o target/sys-rpc -v ./rpc/sys/sys.go
 	$(GOBUILD) -o target/ums-rpc -v ./rpc/ums/ums.go
 	$(GOBUILD) -o target/oms-rpc -v ./rpc/oms/oms.go
@@ -38,15 +48,15 @@ build: ## 构建目标
 
 
 start: ## 运行目标
-	nohup ./target/sys-rpc -f rpc/sys/etc/sys.yaml  > /dev/null 2>&1 &
-	nohup ./target/ums-rpc -f rpc/ums/etc/ums.yaml  > /dev/null 2>&1 &
-	nohup ./target/oms-rpc -f rpc/oms/etc/oms.yaml  > /dev/null 2>&1 &
-	nohup ./target/pms-rpc -f rpc/pms/etc/pms.yaml  > /dev/null 2>&1 &
-	nohup ./target/cms-rpc -f rpc/cms/etc/cms.yaml  > /dev/null 2>&1 &
-	nohup ./target/sms-rpc -f rpc/sms/etc/sms.yaml  > /dev/null 2>&1 &
-	nohup ./target/admin-api -f api/admin/etc/admin-api.yaml > /dev/null 2>&1 &
-	nohup ./target/front-api -f api/front/etc/front-api.yaml  > /dev/null 2>&1 &
-	nohup ./target/web-api -f api/web/etc/web-api.yaml  > /dev/null 2>&1 &
+	nohup ./target/sys-rpc -f ./target/sys.yaml  > /dev/null 2>&1 &
+	nohup ./target/ums-rpc -f ./target/ums.yaml  > /dev/null 2>&1 &
+	nohup ./target/oms-rpc -f ./target/oms.yaml  > /dev/null 2>&1 &
+	nohup ./target/pms-rpc -f ./target/pms.yaml  > /dev/null 2>&1 &
+	nohup ./target/cms-rpc -f ./target/cms.yaml  > /dev/null 2>&1 &
+	nohup ./target/sms-rpc -f ./target/sms.yaml  > /dev/null 2>&1 &
+	nohup ./target/admin-api -f ./target/admin-api.yaml > /dev/null 2>&1 &
+	nohup ./target/front-api -f ./target/front-api.yaml  > /dev/null 2>&1 &
+	nohup ./target/web-api -f ./target/web-api.yaml  > /dev/null 2>&1 &
 
 
 stop: ## 停止目标
@@ -59,6 +69,12 @@ stop: ## 停止目标
 	-pkill -f ums-rpc
 	-pkill -f oms-rpc
 	-pkill -f pms-rpc
+	@for i in 5 4 3 2 1; do\
+      echo -n "stop $$i";\
+      sleep 1; \
+      echo " "; \
+    done
+
 
 
 restart: stop start ## 重启项目
