@@ -1,0 +1,39 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="zero-dev" type="DEPLOY_HOST_RUN_CONFIGURATION" factoryName="Deploy to Host">
+        <option name="accountModel"/>
+        <option name="accountModels"/>
+        <option name="address"/>
+        <option name="afterCommand" value="chomd +x target/* make restart"/>
+        <option name="alreadyReset" value="true"/>
+        <option name="autoOpen" value="false"/>
+        <option name="beforeCommand" value=""/>
+        <option name="defaultTabIdx" value="0"/>
+        <option name="ecsInstance">
+            <EcsInstance>
+                <option name="OSType"/>
+                <option name="instanceId"/>
+                <option name="instanceName"/>
+                <option name="netType"/>
+                <option name="privateIps"/>
+                <option name="publicIps"/>
+                <option name="regionId"/>
+                <option name="tags"/>
+            </EcsInstance>
+        </option>
+        <option name="ecsInstances"/>
+        <option name="hostIds">
+            <list>
+                <option value="2"/>
+            </list>
+        </option>
+        <option name="hostTagId" value="0"/>
+        <option name="location" value="/root/zero-admin"/>
+        <option name="pathOrUrl"
+                value="D:\workspace\go\zero-admin\target\admin-api,D:\workspace\go\zero-admin\target\cms-rpc,D:\workspace\go\zero-admin\target\front-api,D:\workspace\go\zero-admin\target\oms-rpc,D:\workspace\go\zero-admin\target\pms-rpc,D:\workspace\go\zero-admin\target\sms-rpc,D:\workspace\go\zero-admin\target\sys-rpc,D:\workspace\go\zero-admin\target\ums-rpc,D:\workspace\go\zero-admin\target\web-api"/>
+        <option name="tagId" value="0"/>
+        <option name="terminalCommand"/>
+        <option name="type" value="HOST"/>
+        <option name="uploadType" value="FILE"/>
+        <method v="2"/>
+    </configuration>
+</component>

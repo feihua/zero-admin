@@ -1,0 +1,39 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="zero-web-api" type="DEPLOY_HOST_RUN_CONFIGURATION"
+                   factoryName="Deploy to Host">
+        <option name="accountModel"/>
+        <option name="accountModels"/>
+        <option name="address"/>
+        <option name="afterCommand" value="cd web-api &amp;&amp; sh start.sh web-api"/>
+        <option name="alreadyReset" value="true"/>
+        <option name="autoOpen" value="false"/>
+        <option name="beforeCommand" value=""/>
+        <option name="defaultTabIdx" value="0"/>
+        <option name="ecsInstance">
+            <EcsInstance>
+                <option name="OSType"/>
+                <option name="instanceId"/>
+                <option name="instanceName"/>
+                <option name="netType"/>
+                <option name="privateIps"/>
+                <option name="publicIps"/>
+                <option name="regionId"/>
+                <option name="tags"/>
+            </EcsInstance>
+        </option>
+        <option name="ecsInstances"/>
+        <option name="hostIds">
+            <list>
+                <option value="2"/>
+            </list>
+        </option>
+        <option name="hostTagId" value="0"/>
+        <option name="location" value="/root/zero-admin"/>
+        <option name="pathOrUrl" value="D:\workspace\go\zero-admin\target\web-api"/>
+        <option name="tagId" value="0"/>
+        <option name="terminalCommand"/>
+        <option name="type" value="HOST"/>
+        <option name="uploadType" value="FILE"/>
+        <method v="2"/>
+    </configuration>
+</component>

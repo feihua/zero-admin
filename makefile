@@ -24,39 +24,39 @@ deps: ## 安装依赖目标
 	@export GOPROXY=https://goproxy.cn,direct
 	$(GOGET) -v
  
+copy_config:
+	copy rpc/sys/etc/sys.yaml target/sys-rpc/sys-rpc.yaml
+	copy rpc/ums/etc/ums.yaml target/ums-rpc/ums-rpc.yaml
+	copy rpc/oms/etc/oms.yaml target/oms-rpc/oms-rpc.yaml
+	copy rpc/pms/etc/pms.yaml target/pms-rpc/pms-rpc.yaml
+	copy rpc/cms/etc/cms.yaml target/cms-rpc/cms-rpc.yaml
+	copy rpc/sms/etc/sms.yaml target/sms-rpc/sms-rpc.yaml
+	copy api/admin/etc/admin-api.yaml target/admin-api/admin-api.yaml
+	copy api/web/etc/web-api.yaml target/web-api/web-api.yaml
+	copy api/front/etc/front-api.yaml target/front-api/front-api.yaml
 
-build: ## 构建目标
-	copy rpc\sys\etc\sys.yaml target\sys.yaml
-	copy rpc\ums\etc\ums.yaml target\ums.yaml
-	copy rpc\oms\etc\oms.yaml target\oms.yaml
-	copy rpc\pms\etc\pms.yaml target\pms.yaml
-	copy rpc\cms\etc\cms.yaml target\cms.yaml
-	copy rpc\sms\etc\sms.yaml target\sms.yaml
-	copy api\admin\etc\admin-api.yaml target\admin-api.yaml
-	copy api\web\etc\web-api.yaml target\web-api.yaml
-	copy api\front\etc\front-api.yaml target\front-api.yaml
-
-	$(GOBUILD) -o target/sys-rpc -v ./rpc/sys/sys.go
-	$(GOBUILD) -o target/ums-rpc -v ./rpc/ums/ums.go
-	$(GOBUILD) -o target/oms-rpc -v ./rpc/oms/oms.go
-	$(GOBUILD) -o target/pms-rpc -v ./rpc/pms/pms.go
-	$(GOBUILD) -o target/cms-rpc -v ./rpc/cms/cms.go
-	$(GOBUILD) -o target/sms-rpc -v ./rpc/sms/sms.go
-	$(GOBUILD) -o target/admin-api -v ./api/admin/admin.go
-	$(GOBUILD) -o target/front-api -v ./api/front/front.go
-	$(GOBUILD) -o target/web-api -v ./api/web/web.go
+build: copy_config ## 构建目标
+	$(GOBUILD) -o target/sys-rpc/sys-rpc -v ./rpc/sys/sys.go
+	$(GOBUILD) -o target/ums-rpc/ums-rpc -v ./rpc/ums/ums.go
+	$(GOBUILD) -o target/oms-rpc/oms-rpc -v ./rpc/oms/oms.go
+	$(GOBUILD) -o target/pms-rpc/pms-rpc -v ./rpc/pms/pms.go
+	$(GOBUILD) -o target/cms-rpc/cms-rpc -v ./rpc/cms/cms.go
+	$(GOBUILD) -o target/sms-rpc/sms-rpc -v ./rpc/sms/sms.go
+	$(GOBUILD) -o target/admin-api/admin-api -v ./api/admin/admin.go
+	$(GOBUILD) -o target/front-api/front-api -v ./api/front/front.go
+	$(GOBUILD) -o target/web-api/web-api -v ./api/web/web.go
 
 
 start: ## 运行目标
-	nohup ./target/sys-rpc -f ./target/sys.yaml  > /dev/null 2>&1 &
-	nohup ./target/ums-rpc -f ./target/ums.yaml  > /dev/null 2>&1 &
-	nohup ./target/oms-rpc -f ./target/oms.yaml  > /dev/null 2>&1 &
-	nohup ./target/pms-rpc -f ./target/pms.yaml  > /dev/null 2>&1 &
-	nohup ./target/cms-rpc -f ./target/cms.yaml  > /dev/null 2>&1 &
-	nohup ./target/sms-rpc -f ./target/sms.yaml  > /dev/null 2>&1 &
-	nohup ./target/admin-api -f ./target/admin-api.yaml > /dev/null 2>&1 &
-	nohup ./target/front-api -f ./target/front-api.yaml  > /dev/null 2>&1 &
-	nohup ./target/web-api -f ./target/web-api.yaml  > /dev/null 2>&1 &
+	nohup ./target/sys-rpc/sys-rpc -f ./target/sys-rpc/sys-rpc.yaml  > /dev/null 2>&1 &
+	nohup ./target/ums-rpc/ums-rpc -f ./target/ums-rpc/ums-rpc.yaml  > /dev/null 2>&1 &
+	nohup ./target/oms-rpc/oms-rpc -f ./target/oms-rpc/oms-rpc.yaml  > /dev/null 2>&1 &
+	nohup ./target/pms-rpc/pms-rpc -f ./target/pms-rpc/pms-rpc.yaml  > /dev/null 2>&1 &
+	nohup ./target/cms-rpc/cms-rpc -f ./target/cms-rpc/cms-rpc.yaml  > /dev/null 2>&1 &
+	nohup ./target/sms-rpc/sms-rpc -f ./target/sms-rpc/sms-rpc.yaml  > /dev/null 2>&1 &
+	nohup ./target/admin-api/admin-api -f ./target/admin-api/admin-api.yaml > /dev/null 2>&1 &
+	nohup ./target/front-api/front-api -f ./target/front-api/front-api.yaml  > /dev/null 2>&1 &
+	nohup ./target/web-api/web-api -f ./target/web-api/web-api.yaml  > /dev/null 2>&1 &
 
 
 stop: ## 停止目标
