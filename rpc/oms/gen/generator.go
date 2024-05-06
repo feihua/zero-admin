@@ -10,7 +10,7 @@ import (
 func main() {
 	// Initialize the generator with configuration
 	g := gen.NewGenerator(gen.Config{
-		OutPath:       "./rpc/cms/gen/query", // output directory, default value is ./query
+		OutPath:       "./rpc/oms/gen/query", // output directory, default value is ./query
 		Mode:          gen.WithDefaultQuery | gen.WithQueryInterface,
 		FieldNullable: true,
 	})
@@ -25,18 +25,14 @@ func main() {
 	g.UseDB(db)
 
 	g.ApplyBasic(
-		g.GenerateModel("cms_help"),
-		g.GenerateModel("cms_help_category"),
-		g.GenerateModel("cms_member_report"),
-		g.GenerateModel("cms_prefrence_area"),
-		g.GenerateModel("cms_prefrence_area_product_relation"),
-		g.GenerateModel("cms_subject"),
-		g.GenerateModel("cms_subject_category"),
-		g.GenerateModel("cms_subject_comment"),
-		g.GenerateModel("cms_subject_product_relation"),
-		g.GenerateModel("cms_topic"),
-		g.GenerateModel("cms_topic_category"),
-		g.GenerateModel("cms_topic_comment"),
+		g.GenerateModel("oms_cart_item"),
+		g.GenerateModel("oms_company_address"),
+		g.GenerateModel("oms_order"),
+		g.GenerateModel("oms_order_item"),
+		g.GenerateModel("oms_order_operate_history"),
+		g.GenerateModel("oms_order_return_apply"),
+		g.GenerateModel("oms_order_return_reason"),
+		g.GenerateModel("oms_order_setting"),
 	)
 
 	// Execute the generator

@@ -10,7 +10,7 @@ import (
 func main() {
 	// Initialize the generator with configuration
 	g := gen.NewGenerator(gen.Config{
-		OutPath:       "./rpc/cms/gen/query", // output directory, default value is ./query
+		OutPath:       "./rpc/pms/gen/query", // output directory, default value is ./query
 		Mode:          gen.WithDefaultQuery | gen.WithQueryInterface,
 		FieldNullable: true,
 	})
@@ -25,18 +25,25 @@ func main() {
 	g.UseDB(db)
 
 	g.ApplyBasic(
-		g.GenerateModel("cms_help"),
-		g.GenerateModel("cms_help_category"),
-		g.GenerateModel("cms_member_report"),
-		g.GenerateModel("cms_prefrence_area"),
-		g.GenerateModel("cms_prefrence_area_product_relation"),
-		g.GenerateModel("cms_subject"),
-		g.GenerateModel("cms_subject_category"),
-		g.GenerateModel("cms_subject_comment"),
-		g.GenerateModel("cms_subject_product_relation"),
-		g.GenerateModel("cms_topic"),
-		g.GenerateModel("cms_topic_category"),
-		g.GenerateModel("cms_topic_comment"),
+		g.GenerateModel("pms_album"),
+		g.GenerateModel("pms_album_pic"),
+		g.GenerateModel("pms_brand"),
+		g.GenerateModel("pms_comment"),
+		g.GenerateModel("pms_comment_replay"),
+		g.GenerateModel("pms_feight_template"),
+		g.GenerateModel("pms_member_price"),
+		g.GenerateModel("pms_product"),
+		g.GenerateModel("pms_product_attribute"),
+		g.GenerateModel("pms_product_attribute_category"),
+		g.GenerateModel("pms_product_attribute_value"),
+		g.GenerateModel("pms_product_category"),
+		g.GenerateModel("pms_product_category_attribute_relation"),
+		g.GenerateModel("pms_product_collect"),
+		g.GenerateModel("pms_product_full_reduction"),
+		g.GenerateModel("pms_product_ladder"),
+		g.GenerateModel("pms_product_operate_log"),
+		g.GenerateModel("pms_product_vertify_record"),
+		g.GenerateModel("pms_sku_stock"),
 	)
 
 	// Execute the generator

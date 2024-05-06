@@ -10,7 +10,7 @@ import (
 func main() {
 	// Initialize the generator with configuration
 	g := gen.NewGenerator(gen.Config{
-		OutPath:       "./rpc/cms/gen/query", // output directory, default value is ./query
+		OutPath:       "./rpc/sys/gen/query", // output directory, default value is ./query
 		Mode:          gen.WithDefaultQuery | gen.WithQueryInterface,
 		FieldNullable: true,
 	})
@@ -25,18 +25,18 @@ func main() {
 	g.UseDB(db)
 
 	g.ApplyBasic(
-		g.GenerateModel("cms_help"),
-		g.GenerateModel("cms_help_category"),
-		g.GenerateModel("cms_member_report"),
-		g.GenerateModel("cms_prefrence_area"),
-		g.GenerateModel("cms_prefrence_area_product_relation"),
-		g.GenerateModel("cms_subject"),
-		g.GenerateModel("cms_subject_category"),
-		g.GenerateModel("cms_subject_comment"),
-		g.GenerateModel("cms_subject_product_relation"),
-		g.GenerateModel("cms_topic"),
-		g.GenerateModel("cms_topic_category"),
-		g.GenerateModel("cms_topic_comment"),
+		g.GenerateModel("sys_config"),
+		g.GenerateModel("sys_dept"),
+		g.GenerateModel("sys_dict"),
+		g.GenerateModel("sys_job"),
+		g.GenerateModel("sys_log"),
+		g.GenerateModel("sys_login_log"),
+		g.GenerateModel("sys_menu"),
+		g.GenerateModel("sys_role"),
+		g.GenerateModel("sys_role_dept"),
+		g.GenerateModel("sys_role_menu"),
+		g.GenerateModel("sys_user"),
+		g.GenerateModel("sys_user_role"),
 	)
 
 	// Execute the generator

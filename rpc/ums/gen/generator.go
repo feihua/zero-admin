@@ -10,7 +10,7 @@ import (
 func main() {
 	// Initialize the generator with configuration
 	g := gen.NewGenerator(gen.Config{
-		OutPath:       "./rpc/cms/gen/query", // output directory, default value is ./query
+		OutPath:       "./rpc/ums/gen/query", // output directory, default value is ./query
 		Mode:          gen.WithDefaultQuery | gen.WithQueryInterface,
 		FieldNullable: true,
 	})
@@ -25,18 +25,24 @@ func main() {
 	g.UseDB(db)
 
 	g.ApplyBasic(
-		g.GenerateModel("cms_help"),
-		g.GenerateModel("cms_help_category"),
-		g.GenerateModel("cms_member_report"),
-		g.GenerateModel("cms_prefrence_area"),
-		g.GenerateModel("cms_prefrence_area_product_relation"),
-		g.GenerateModel("cms_subject"),
-		g.GenerateModel("cms_subject_category"),
-		g.GenerateModel("cms_subject_comment"),
+		g.GenerateModel("ums_growth_change_history"),
+		g.GenerateModel("ums_integration_change_history"),
+		g.GenerateModel("ums_integration_consume_setting"),
+		g.GenerateModel("ums_member"),
+		g.GenerateModel("ums_member_brand_attention"),
+		g.GenerateModel("ums_member_level"),
+		g.GenerateModel("ums_member_login_log"),
+		g.GenerateModel("ums_member_member_tag_relation"),
 		g.GenerateModel("cms_subject_product_relation"),
-		g.GenerateModel("cms_topic"),
-		g.GenerateModel("cms_topic_category"),
-		g.GenerateModel("cms_topic_comment"),
+		g.GenerateModel("ums_member_product_category_relation"),
+		g.GenerateModel("ums_member_product_collection"),
+		g.GenerateModel("ums_member_read_history"),
+
+		g.GenerateModel("ums_member_receive_address"),
+		g.GenerateModel("ums_member_rule_setting"),
+		g.GenerateModel("ums_member_statistics_info"),
+		g.GenerateModel("ums_member_tag"),
+		g.GenerateModel("ums_member_task"),
 	)
 
 	// Execute the generator
