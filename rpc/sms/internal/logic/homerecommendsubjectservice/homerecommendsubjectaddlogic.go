@@ -2,7 +2,8 @@ package homerecommendsubjectservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeRecommendSubjectAddLogic
+/*
+Author: LiuFeiHua
+Date: 2024/5/6 17:28
+*/
 type HomeRecommendSubjectAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,19 +30,20 @@ func NewHomeRecommendSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// HomeRecommendSubjectAdd 添加推荐专题
 func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(in *smsclient.HomeRecommendSubjectAddReq) (*smsclient.HomeRecommendSubjectAddResp, error) {
+
 	for _, data := range in.RecommendSubjectAddData {
-		homeBrand, _ := l.svcCtx.SmsHomeRecommendSubjectModel.FindOneBySubjectId(l.ctx, data.SubjectId)
-		if homeBrand == nil {
-			_, err := l.svcCtx.SmsHomeRecommendSubjectModel.Insert(l.ctx, &smsmodel.SmsHomeRecommendSubject{
-				SubjectId:       data.SubjectId,
+		q := query.SmsHomeRecommendSubject
+		count, _ := q.WithContext(l.ctx).Where(q.SubjectID.Eq(data.SubjectId)).Count()
+		if count == 0 {
+			_ = q.WithContext(l.ctx).Create(&model.SmsHomeRecommendSubject{
+				SubjectID:       data.SubjectId,
 				SubjectName:     data.SubjectName,
 				RecommendStatus: data.RecommendStatus,
 				Sort:            data.Sort,
 			})
-			if err != nil {
-				return nil, err
-			}
+
 		}
 	}
 

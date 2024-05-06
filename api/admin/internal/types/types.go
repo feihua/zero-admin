@@ -756,7 +756,7 @@ type ListHomeRecommendSubjectReq struct {
 	Current         int64  `json:"current,default=1"`
 	PageSize        int64  `json:"pageSize,default=20"`
 	SubjectName     string `json:"subjectName,optional"`      // 专题名称
-	RecommendStatus int64  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+	RecommendStatus int32  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
 type ListHomeRecommendSubjectResp struct {
@@ -1630,8 +1630,8 @@ type ListtHomeRecommendSubjectData struct {
 	Id              int64  `json:"id"`
 	SubjectId       int64  `json:"subjectId"`       // 专题id
 	SubjectName     string `json:"subjectName"`     // 专题名称
-	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int64  `json:"sort"`            // 排序
+	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            // 排序
 }
 
 type ListtIntegrationChangeHistoryData struct {
@@ -1812,8 +1812,8 @@ type ListtPrefrenceAreaData struct {
 	Name       string `json:"name"`
 	SubTitle   string `json:"subTitle"`
 	Pic        string `json:"pic"` // 展示图片
-	Sort       int64  `json:"sort"`
-	ShowStatus int64  `json:"showStatus"`
+	Sort       int32  `json:"sort"`
+	ShowStatus int32  `json:"showStatus"`
 }
 
 type ListtProductAttributeData struct {
@@ -1990,17 +1990,17 @@ type ListtSubjectData struct {
 	CategoryId      int64  `json:"categoryId"`
 	Title           string `json:"title"`
 	Pic             string `json:"pic"`          // 专题主图
-	ProductCount    int64  `json:"productCount"` // 关联产品数量
-	RecommendStatus int64  `json:"recommendStatus"`
+	ProductCount    int32  `json:"productCount"` // 关联产品数量
+	RecommendStatus int32  `json:"recommendStatus"`
 	CreateTime      string `json:"createTime"`
-	CollectCount    int64  `json:"collectCount"`
-	ReadCount       int64  `json:"readCount"`
-	CommentCount    int64  `json:"commentCount"`
+	CollectCount    int32  `json:"collectCount"`
+	ReadCount       int32  `json:"readCount"`
+	CommentCount    int32  `json:"commentCount"`
 	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
 	Description     string `json:"description"`
-	ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
 	Content         string `json:"content"`
-	ForwardCount    int64  `json:"forwardCount"` // 转发数
+	ForwardCount    int32  `json:"forwardCount"` // 转发数
 	CategoryName    string `json:"categoryName"` // 专题分类名称
 }
 
@@ -2365,8 +2365,8 @@ type UpdateHomeRecommendSubjectReq struct {
 	Id              int64  `json:"id"`
 	SubjectId       int64  `json:"subjectId"`       // 专题id
 	SubjectName     string `json:"subjectName"`     // 专题名称
-	RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int64  `json:"sort"`            // 排序
+	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            // 排序
 }
 
 type UpdateHomeRecommendSubjectResp struct {
@@ -2985,9 +2985,9 @@ type AddCouponHistoryReq struct {
 	MemberId       int64  `json:"memberId"`
 	CouponCode     string `json:"couponCode"`
 	MemberNickname string `json:"memberNickName"` // 领取人昵称
-	GetType        int64  `json:"getType"`        // 获取类型：0->后台赠送；1->主动获取
+	GetType        int32  `json:"getType"`        // 获取类型：0->后台赠送；1->主动获取
 	CreateTime     string `json:"createTime"`
-	UseStatus      int64  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
+	UseStatus      int32  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
 	UseTime        string `json:"useTime"`   // 使用时间
 	OrderId        int64  `json:"orderId"`   // 订单编号
 	OrderSn        string `json:"orderSn"`   // 订单号码

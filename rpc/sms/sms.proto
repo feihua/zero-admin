@@ -167,9 +167,9 @@ message CouponHistoryAddReq {
   int64      MemberId = 2;
   string      CouponCode = 3;
   string      MemberNickname = 4;
-  int64      GetType = 5;
+  int32      GetType = 5;
   string  CreateTime = 6;
-  int64      UseStatus = 7;
+  int32      UseStatus = 7;
   string  UseTime = 8;
   int64      OrderId = 9;
   string      OrderSn = 10;
@@ -1015,8 +1015,8 @@ message HomeRecommendSubjectAddReq {
 message HomeRecommendSubjectAddData {
   int64 SubjectId = 1; //专题id
   string SubjectName = 2; //专题名称
-  int64 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 4; //排序
+  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 4; //排序
 
 }
 
@@ -1036,8 +1036,8 @@ message HomeRecommendSubjectUpdateReq {
   int64 Id = 1; //
   int64 SubjectId = 2; //专题id
   string SubjectName = 3; //专题名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 5; //排序
 
 }
 
@@ -1049,7 +1049,7 @@ message HomeRecommendSubjectListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string SubjectName = 3; //专题名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
 
 }
 
@@ -1057,8 +1057,8 @@ message HomeRecommendSubjectListData {
   int64 Id = 1; //
   int64 SubjectId = 2; //专题id
   string SubjectName = 3; //专题名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 5; //排序
 
 }
 

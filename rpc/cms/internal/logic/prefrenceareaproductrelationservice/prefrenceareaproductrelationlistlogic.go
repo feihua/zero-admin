@@ -2,7 +2,8 @@ package prefrenceareaproductrelationservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/cms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// PrefrenceAreaProductRelationListLogic
+/*
+Author: LiuFeiHua
+Date: 2024/5/6 10:22
+*/
 type PrefrenceAreaProductRelationListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,25 +30,19 @@ func NewPrefrenceAreaProductRelationListLogic(ctx context.Context, svcCtx *svc.S
 	}
 }
 
+// PrefrenceAreaProductRelationList 优选商品关联查询
 func (l *PrefrenceAreaProductRelationListLogic) PrefrenceAreaProductRelationList(in *cmsclient.PrefrenceAreaProductRelationListReq) (*cmsclient.PrefrenceAreaProductRelationListResp, error) {
-	all, err := l.svcCtx.CmsSubjectProductRelationModel.FindAll(l.ctx, in.ProductId)
+
+	var ids []int64
+	productRelation := query.CmsPrefrenceAreaProductRelation
+	err := productRelation.WithContext(l.ctx).Select(productRelation.PrefrenceAreaID).Where(productRelation.ProductID.Eq(in.ProductId)).Scan(&ids)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询关联优选列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询关联优选列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
-	var list []int64
-	for _, item := range *all {
-		list = append(list, item.SubjectId)
-	}
-
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询关联优选列表信息,参数：%s,响应：%s", reqStr, listStr)
-
 	return &cmsclient.PrefrenceAreaProductRelationListResp{
-		PrefrenceAreaId: list,
+		PrefrenceAreaId: ids,
 	}, nil
 }

@@ -1,4 +1,4 @@
-package PrefrenceArea
+package prefrenceArea
 
 import (
 	"context"

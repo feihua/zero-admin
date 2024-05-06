@@ -13,47 +13,37 @@ import (
 )
 
 type (
-	PrefrenceAreaAddReq                    = cmsclient.PrefrenceAreaAddReq
-	PrefrenceAreaAddResp                   = cmsclient.PrefrenceAreaAddResp
-	PrefrenceAreaDeleteReq                 = cmsclient.PrefrenceAreaDeleteReq
-	PrefrenceAreaDeleteResp                = cmsclient.PrefrenceAreaDeleteResp
-	PrefrenceAreaListData                  = cmsclient.PrefrenceAreaListData
-	PrefrenceAreaListReq                   = cmsclient.PrefrenceAreaListReq
-	PrefrenceAreaListResp                  = cmsclient.PrefrenceAreaListResp
-	PrefrenceAreaProductRelationAddReq     = cmsclient.PrefrenceAreaProductRelationAddReq
-	PrefrenceAreaProductRelationAddResp    = cmsclient.PrefrenceAreaProductRelationAddResp
-	PrefrenceAreaProductRelationDeleteReq  = cmsclient.PrefrenceAreaProductRelationDeleteReq
-	PrefrenceAreaProductRelationDeleteResp = cmsclient.PrefrenceAreaProductRelationDeleteResp
-	PrefrenceAreaProductRelationListReq    = cmsclient.PrefrenceAreaProductRelationListReq
-	PrefrenceAreaProductRelationListResp   = cmsclient.PrefrenceAreaProductRelationListResp
-	PrefrenceAreaProductRelationUpdateReq  = cmsclient.PrefrenceAreaProductRelationUpdateReq
-	PrefrenceAreaProductRelationUpdateResp = cmsclient.PrefrenceAreaProductRelationUpdateResp
-	PrefrenceAreaUpdateReq                 = cmsclient.PrefrenceAreaUpdateReq
-	PrefrenceAreaUpdateResp                = cmsclient.PrefrenceAreaUpdateResp
-	SubjectAddReq                          = cmsclient.SubjectAddReq
-	SubjectAddResp                         = cmsclient.SubjectAddResp
-	SubjectDeleteReq                       = cmsclient.SubjectDeleteReq
-	SubjectDeleteResp                      = cmsclient.SubjectDeleteResp
-	SubjectListByIdsReq                    = cmsclient.SubjectListByIdsReq
-	SubjectListData                        = cmsclient.SubjectListData
-	SubjectListReq                         = cmsclient.SubjectListReq
-	SubjectListResp                        = cmsclient.SubjectListResp
-	SubjectProductRelationAddReq           = cmsclient.SubjectProductRelationAddReq
-	SubjectProductRelationAddResp          = cmsclient.SubjectProductRelationAddResp
-	SubjectProductRelationDeleteReq        = cmsclient.SubjectProductRelationDeleteReq
-	SubjectProductRelationDeleteResp       = cmsclient.SubjectProductRelationDeleteResp
-	SubjectProductRelationListReq          = cmsclient.SubjectProductRelationListReq
-	SubjectProductRelationListResp         = cmsclient.SubjectProductRelationListResp
-	SubjectProductRelationUpdateReq        = cmsclient.SubjectProductRelationUpdateReq
-	SubjectProductRelationUpdateResp       = cmsclient.SubjectProductRelationUpdateResp
-	SubjectUpdateReq                       = cmsclient.SubjectUpdateReq
-	SubjectUpdateResp                      = cmsclient.SubjectUpdateResp
+	PrefrenceAreaAddReq                  = cmsclient.PrefrenceAreaAddReq
+	PrefrenceAreaAddResp                 = cmsclient.PrefrenceAreaAddResp
+	PrefrenceAreaDeleteReq               = cmsclient.PrefrenceAreaDeleteReq
+	PrefrenceAreaDeleteResp              = cmsclient.PrefrenceAreaDeleteResp
+	PrefrenceAreaListData                = cmsclient.PrefrenceAreaListData
+	PrefrenceAreaListReq                 = cmsclient.PrefrenceAreaListReq
+	PrefrenceAreaListResp                = cmsclient.PrefrenceAreaListResp
+	PrefrenceAreaProductRelationAddReq   = cmsclient.PrefrenceAreaProductRelationAddReq
+	PrefrenceAreaProductRelationAddResp  = cmsclient.PrefrenceAreaProductRelationAddResp
+	PrefrenceAreaProductRelationListReq  = cmsclient.PrefrenceAreaProductRelationListReq
+	PrefrenceAreaProductRelationListResp = cmsclient.PrefrenceAreaProductRelationListResp
+	PrefrenceAreaUpdateReq               = cmsclient.PrefrenceAreaUpdateReq
+	PrefrenceAreaUpdateResp              = cmsclient.PrefrenceAreaUpdateResp
+	SubjectAddReq                        = cmsclient.SubjectAddReq
+	SubjectAddResp                       = cmsclient.SubjectAddResp
+	SubjectDeleteReq                     = cmsclient.SubjectDeleteReq
+	SubjectDeleteResp                    = cmsclient.SubjectDeleteResp
+	SubjectListByIdsReq                  = cmsclient.SubjectListByIdsReq
+	SubjectListData                      = cmsclient.SubjectListData
+	SubjectListReq                       = cmsclient.SubjectListReq
+	SubjectListResp                      = cmsclient.SubjectListResp
+	SubjectProductRelationAddReq         = cmsclient.SubjectProductRelationAddReq
+	SubjectProductRelationAddResp        = cmsclient.SubjectProductRelationAddResp
+	SubjectProductRelationListReq        = cmsclient.SubjectProductRelationListReq
+	SubjectProductRelationListResp       = cmsclient.SubjectProductRelationListResp
+	SubjectUpdateReq                     = cmsclient.SubjectUpdateReq
+	SubjectUpdateResp                    = cmsclient.SubjectUpdateResp
 
 	PrefrenceAreaProductRelationService interface {
 		// 优选商品关联
 		PrefrenceAreaProductRelationAdd(ctx context.Context, in *PrefrenceAreaProductRelationAddReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationAddResp, error)
-		PrefrenceAreaProductRelationDelete(ctx context.Context, in *PrefrenceAreaProductRelationDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationDeleteResp, error)
-		PrefrenceAreaProductRelationUpdate(ctx context.Context, in *PrefrenceAreaProductRelationUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationUpdateResp, error)
 		PrefrenceAreaProductRelationList(ctx context.Context, in *PrefrenceAreaProductRelationListReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationListResp, error)
 	}
 
@@ -72,16 +62,6 @@ func NewPrefrenceAreaProductRelationService(cli zrpc.Client) PrefrenceAreaProduc
 func (m *defaultPrefrenceAreaProductRelationService) PrefrenceAreaProductRelationAdd(ctx context.Context, in *PrefrenceAreaProductRelationAddReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationAddResp, error) {
 	client := cmsclient.NewPrefrenceAreaProductRelationServiceClient(m.cli.Conn())
 	return client.PrefrenceAreaProductRelationAdd(ctx, in, opts...)
-}
-
-func (m *defaultPrefrenceAreaProductRelationService) PrefrenceAreaProductRelationDelete(ctx context.Context, in *PrefrenceAreaProductRelationDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationDeleteResp, error) {
-	client := cmsclient.NewPrefrenceAreaProductRelationServiceClient(m.cli.Conn())
-	return client.PrefrenceAreaProductRelationDelete(ctx, in, opts...)
-}
-
-func (m *defaultPrefrenceAreaProductRelationService) PrefrenceAreaProductRelationUpdate(ctx context.Context, in *PrefrenceAreaProductRelationUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationUpdateResp, error) {
-	client := cmsclient.NewPrefrenceAreaProductRelationServiceClient(m.cli.Conn())
-	return client.PrefrenceAreaProductRelationUpdate(ctx, in, opts...)
 }
 
 func (m *defaultPrefrenceAreaProductRelationService) PrefrenceAreaProductRelationList(ctx context.Context, in *PrefrenceAreaProductRelationListReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationListResp, error) {

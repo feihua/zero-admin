@@ -165,7 +165,7 @@ type (
 		CouponFindById(ctx context.Context, in *CouponFindByIdReq, opts ...grpc.CallOption) (*CouponFindByIdResp, error)
 		// 根据优惠券ids查询优惠券
 		CouponFindByIds(ctx context.Context, in *CouponFindByIdsReq, opts ...grpc.CallOption) (*CouponFindByIdsResp, error)
-		// 根据商品Id和分类id查询可用的优惠券(front)
+		// 根据商品Id和分类id查询可用的优惠券(app)
 		CouponFindByProductIdAndProductCategoryId(ctx context.Context, in *CouponFindByProductIdAndProductCategoryIdReq, opts ...grpc.CallOption) (*CouponFindByProductIdAndProductCategoryIdResp, error)
 	}
 
@@ -212,7 +212,7 @@ func (m *defaultCouponService) CouponFindByIds(ctx context.Context, in *CouponFi
 	return client.CouponFindByIds(ctx, in, opts...)
 }
 
-// 根据商品Id和分类id查询可用的优惠券(front)
+// 根据商品Id和分类id查询可用的优惠券(app)
 func (m *defaultCouponService) CouponFindByProductIdAndProductCategoryId(ctx context.Context, in *CouponFindByProductIdAndProductCategoryIdReq, opts ...grpc.CallOption) (*CouponFindByProductIdAndProductCategoryIdResp, error) {
 	client := smsclient.NewCouponServiceClient(m.cli.Conn())
 	return client.CouponFindByProductIdAndProductCategoryId(ctx, in, opts...)

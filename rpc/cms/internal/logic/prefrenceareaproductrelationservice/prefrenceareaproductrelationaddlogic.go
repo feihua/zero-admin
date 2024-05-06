@@ -2,14 +2,19 @@ package prefrenceareaproductrelationservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/cmsmodel"
-
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
+	"github.com/feihua/zero-admin/rpc/cms/gen/model"
+	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// PrefrenceAreaProductRelationAddLogic
+/*
+Author: LiuFeiHua
+Date: 2024/5/6 10:00
+*/
 type PrefrenceAreaProductRelationAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,12 +29,25 @@ func NewPrefrenceAreaProductRelationAddLogic(ctx context.Context, svcCtx *svc.Se
 	}
 }
 
-// 优选商品关联
+// PrefrenceAreaProductRelationAdd 优选商品关联
 func (l *PrefrenceAreaProductRelationAddLogic) PrefrenceAreaProductRelationAdd(in *cmsclient.PrefrenceAreaProductRelationAddReq) (*cmsclient.PrefrenceAreaProductRelationAddResp, error) {
-	_, err := l.svcCtx.CmsPrefrenceAreaProductRelationModel.Insert(l.ctx, &cmsmodel.CmsPrefrenceAreaProductRelation{
-		PrefrenceAreaId: in.PrefrenceAreaId,
-		ProductId:       in.ProductId,
-	})
+	//1.先删除优选商品的关联
+	productRelation := query.CmsPrefrenceAreaProductRelation
+	_, err := productRelation.WithContext(l.ctx).Where(productRelation.ProductID.Eq(in.ProductId)).Delete()
+	if err != nil {
+		return nil, err
+	}
+
+	//2.重新添加优选商品的关联
+	productRelations := make([]*model.CmsPrefrenceAreaProductRelation, 0)
+	for _, id := range in.PrefrenceAreaId {
+		productRelations = append(productRelations, &model.CmsPrefrenceAreaProductRelation{
+			PrefrenceAreaID: id,
+			ProductID:       in.ProductId,
+		})
+	}
+
+	err = productRelation.WithContext(l.ctx).CreateInBatches(productRelations, len(productRelations))
 	if err != nil {
 		return nil, err
 	}

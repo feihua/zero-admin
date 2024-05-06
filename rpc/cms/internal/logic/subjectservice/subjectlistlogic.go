@@ -2,7 +2,8 @@ package subjectservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/cms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -25,21 +26,21 @@ func NewSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Subje
 }
 
 func (l *SubjectListLogic) SubjectList(in *cmsclient.SubjectListReq) (*cmsclient.SubjectListResp, error) {
-	all, err := l.svcCtx.CmsSubjectModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.CmsSubjectModel.Count(l.ctx, in)
+	q := query.CmsSubject.WithContext(l.ctx)
+	subjects, err := q.Find()
+	count, _ := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询专题列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询专题列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*cmsclient.SubjectListData
-	for _, item := range *all {
+	for _, item := range subjects {
 
 		list = append(list, &cmsclient.SubjectListData{
-			Id:              item.Id,
-			CategoryId:      item.CategoryId,
+			Id:              item.ID,
+			CategoryId:      item.CategoryID,
 			Title:           item.Title,
 			Pic:             item.Pic,
 			ProductCount:    item.ProductCount,
@@ -49,7 +50,7 @@ func (l *SubjectListLogic) SubjectList(in *cmsclient.SubjectListReq) (*cmsclient
 			ReadCount:       item.ReadCount,
 			CommentCount:    item.CommentCount,
 			AlbumPics:       item.AlbumPics,
-			Description:     item.Description.String,
+			Description:     *item.Description,
 			ShowStatus:      item.ShowStatus,
 			Content:         item.Content,
 			ForwardCount:    item.ForwardCount,
@@ -57,9 +58,7 @@ func (l *SubjectListLogic) SubjectList(in *cmsclient.SubjectListReq) (*cmsclient
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询专题列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询专题列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &cmsclient.SubjectListResp{
 		Total: count,

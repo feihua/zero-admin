@@ -28,8 +28,8 @@ type (
 		Name       string `json:"name"`
 		SubTitle   string `json:"subTitle"`
 		Pic        string `json:"pic"` // 展示图片
-		Sort       int64  `json:"sort"`
-		ShowStatus int64  `json:"showStatus"`
+        Sort int32 `json:"sort"`
+        ShowStatus int32 `json:"showStatus"`
 	}
 	ListPrefrenceAreaResp {
 		Code     string                    `json:"code"`
@@ -64,7 +64,7 @@ type (
 @server(
 	jwt: Auth
 	middleware: CheckUrl
-	group: cms/PrefrenceArea
+    group: cms/prefrenceArea
 	prefix: /api/cms/prefrenceArea
 )
 service admin-api {

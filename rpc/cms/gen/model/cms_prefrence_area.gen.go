@@ -11,7 +11,7 @@ type CmsPrefrenceArea struct {
 	ID         int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	Name       string `gorm:"column:name;not null" json:"name"`
 	SubTitle   string `gorm:"column:sub_title;not null" json:"sub_title"`
-	Pic        []byte `gorm:"column:pic;not null;comment:展示图片" json:"pic"` // 展示图片
+	Pic        string `gorm:"column:pic;not null;comment:展示图片" json:"pic"` // 展示图片
 	Sort       int32  `gorm:"column:sort;not null" json:"sort"`
 	ShowStatus int32  `gorm:"column:show_status;not null" json:"show_status"`
 }

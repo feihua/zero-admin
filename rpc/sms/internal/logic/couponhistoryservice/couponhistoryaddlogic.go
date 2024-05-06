@@ -2,7 +2,8 @@ package couponhistoryservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponHistoryAddLogic
+/*
+Author: LiuFeiHua
+Date: 2024/5/6 11:34
+*/
 type CouponHistoryAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,19 +31,18 @@ func NewCouponHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
+// CouponHistoryAdd 添加优惠券使用记录
 func (l *CouponHistoryAddLogic) CouponHistoryAdd(in *smsclient.CouponHistoryAddReq) (*smsclient.CouponHistoryAddResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	UseTime, _ := time.Parse("2006-01-02 15:04:05", in.UseTime)
-	_, err := l.svcCtx.SmsCouponHistoryModel.Insert(l.ctx, &smsmodel.SmsCouponHistory{
-		CouponId:       in.CouponId,
-		MemberId:       in.MemberId,
+	err := query.SmsCouponHistory.WithContext(l.ctx).Create(&model.SmsCouponHistory{
+		CouponID:       in.CouponId,
+		MemberID:       in.MemberId,
 		CouponCode:     in.CouponCode,
 		MemberNickname: in.MemberNickname,
 		GetType:        in.GetType,
-		CreateTime:     CreateTime,
+		CreateTime:     time.Now(),
 		UseStatus:      in.UseStatus,
-		UseTime:        UseTime,
-		OrderId:        in.OrderId,
+		UseTime:        time.Now(),
+		OrderID:        in.OrderId,
 		OrderSn:        in.OrderSn,
 	})
 	if err != nil {

@@ -2,7 +2,8 @@ package homerecommendsubjectservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeRecommendSubjectUpdateLogic
+/*
+Author: LiuFeiHua
+Date: 2024/5/6 17:29
+*/
 type HomeRecommendSubjectUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,10 +30,12 @@ func NewHomeRecommendSubjectUpdateLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// HomeRecommendSubjectUpdate 更新专题
 func (l *HomeRecommendSubjectUpdateLogic) HomeRecommendSubjectUpdate(in *smsclient.HomeRecommendSubjectUpdateReq) (*smsclient.HomeRecommendSubjectUpdateResp, error) {
-	err := l.svcCtx.SmsHomeRecommendSubjectModel.Update(l.ctx, &smsmodel.SmsHomeRecommendSubject{
-		Id:              in.Id,
-		SubjectId:       in.SubjectId,
+
+	_, err := query.SmsHomeRecommendSubject.WithContext(l.ctx).Updates(&model.SmsHomeRecommendSubject{
+		ID:              in.Id,
+		SubjectID:       in.SubjectId,
 		SubjectName:     in.SubjectName,
 		RecommendStatus: in.RecommendStatus,
 		Sort:            in.Sort,

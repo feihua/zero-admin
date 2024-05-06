@@ -2,13 +2,19 @@ package subjectproductrelationservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
+	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SubjectProductRelationListLogic
+/*
+Author: LiuFeiHua
+Date: 2024/5/6 10:53
+*/
 type SubjectProductRelationListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,24 +31,17 @@ func NewSubjectProductRelationListLogic(ctx context.Context, svcCtx *svc.Service
 
 // SubjectProductRelationList 查询关联专题
 func (l *SubjectProductRelationListLogic) SubjectProductRelationList(in *cmsclient.SubjectProductRelationListReq) (*cmsclient.SubjectProductRelationListResp, error) {
-	all, err := l.svcCtx.CmsPrefrenceAreaProductRelationModel.FindAll(l.ctx, in.ProductId)
+	var ids []int64
+	q := query.CmsSubjectProductRelation
+	err := q.WithContext(l.ctx).Select(q.SubjectID).Where(q.ProductID.Eq(in.ProductId)).Scan(&ids)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询关联专题列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询关联专题列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
-	var list []int64
-	for _, item := range *all {
-		list = append(list, item.PrefrenceAreaId)
-	}
-
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询关联专题列表信息,参数：%s,响应：%s", reqStr, listStr)
-
 	return &cmsclient.SubjectProductRelationListResp{
-		SubjectId: list,
+		SubjectId: ids,
 	}, nil
+
 }

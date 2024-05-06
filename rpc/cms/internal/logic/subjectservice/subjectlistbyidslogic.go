@@ -3,6 +3,8 @@ package subjectservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/cms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -25,7 +27,8 @@ func NewSubjectListByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsReq) (*cmsclient.SubjectListResp, error) {
-	all, err := l.svcCtx.CmsSubjectModel.FindAllByIds(l.ctx, in.Ids)
+	q := query.CmsSubject
+	subjects, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Find()
 
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
@@ -34,11 +37,11 @@ func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsR
 	}
 
 	var list []*cmsclient.SubjectListData
-	for _, item := range *all {
+	for _, item := range subjects {
 
 		list = append(list, &cmsclient.SubjectListData{
-			Id:              item.Id,
-			CategoryId:      item.CategoryId,
+			Id:              item.ID,
+			CategoryId:      item.CategoryID,
 			Title:           item.Title,
 			Pic:             item.Pic,
 			ProductCount:    item.ProductCount,
@@ -48,7 +51,7 @@ func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsR
 			ReadCount:       item.ReadCount,
 			CommentCount:    item.CommentCount,
 			AlbumPics:       item.AlbumPics,
-			Description:     item.Description.String,
+			Description:     *item.Description,
 			ShowStatus:      item.ShowStatus,
 			Content:         item.Content,
 			ForwardCount:    item.ForwardCount,
@@ -56,9 +59,7 @@ func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsR
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询专题列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询专题列表信息,参数：%s,响应：%s", in, list)
 
 	return &cmsclient.SubjectListResp{
 		Total: 0,

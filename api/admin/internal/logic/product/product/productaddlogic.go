@@ -181,20 +181,17 @@ func buildSkuStockList(req types.AddProductReq) []*pmsclient.SkuStockList {
 
 // 添加专题关联
 func addSubjectProductRelation(req types.AddProductReq, l *ProductAddLogic, productId int32) {
-	for _, subjectId := range req.SubjectProductRelationList {
-		_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationAdd(l.ctx, &cmsclient.SubjectProductRelationAddReq{
-			SubjectId: subjectId,
-			ProductId: int64(productId),
-		})
-	}
+	_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationAdd(l.ctx, &cmsclient.SubjectProductRelationAddReq{
+		SubjectId: req.SubjectProductRelationList,
+		ProductId: int64(productId),
+	})
 }
 
 // 添加优选商品关联
 func addPrefrenceAreaProductRelation(req types.AddProductReq, l *ProductAddLogic, productId int32) {
-	for _, prefrenceAreaId := range req.PrefrenceAreaProductRelationList {
-		_, _ = l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationAdd(l.ctx, &cmsclient.PrefrenceAreaProductRelationAddReq{
-			PrefrenceAreaId: prefrenceAreaId,
-			ProductId:       int64(productId),
-		})
-	}
+	_, _ = l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationAdd(l.ctx, &cmsclient.PrefrenceAreaProductRelationAddReq{
+		PrefrenceAreaId: req.PrefrenceAreaProductRelationList,
+		ProductId:       int64(productId),
+	})
+
 }

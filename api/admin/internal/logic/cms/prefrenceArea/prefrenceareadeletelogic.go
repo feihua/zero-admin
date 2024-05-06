@@ -1,4 +1,4 @@
-package PrefrenceArea
+package prefrenceArea
 
 import (
 	"context"
@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type PrefrenceAreaUpdateLogic struct {
+type PrefrenceAreaDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewPrefrenceAreaUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PrefrenceAreaUpdateLogic {
-	return &PrefrenceAreaUpdateLogic{
+func NewPrefrenceAreaDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PrefrenceAreaDeleteLogic {
+	return &PrefrenceAreaDeleteLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *PrefrenceAreaUpdateLogic) PrefrenceAreaUpdate(req *types.UpdatePrefrenceAreaReq) (resp *types.UpdatePrefrenceAreaResp, err error) {
+func (l *PrefrenceAreaDeleteLogic) PrefrenceAreaDelete(req *types.DeletePrefrenceAreaReq) (resp *types.DeletePrefrenceAreaResp, err error) {
 	// todo: add your logic here and delete this line
 
 	return

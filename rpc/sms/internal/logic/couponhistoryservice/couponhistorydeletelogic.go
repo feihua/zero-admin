@@ -2,6 +2,7 @@ package couponhistoryservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponHistoryDeleteLogic
+/*
+Author: LiuFeiHua
+Date: 2024/5/6 11:35
+*/
 type CouponHistoryDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +29,10 @@ func NewCouponHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// CouponHistoryDelete 删除优惠券使用记录
 func (l *CouponHistoryDeleteLogic) CouponHistoryDelete(in *smsclient.CouponHistoryDeleteReq) (*smsclient.CouponHistoryDeleteResp, error) {
-	err := l.svcCtx.SmsCouponHistoryModel.DeleteByIds(l.ctx, in.Ids)
-
+	q := query.SmsCouponHistory
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
 		return nil, err
 	}

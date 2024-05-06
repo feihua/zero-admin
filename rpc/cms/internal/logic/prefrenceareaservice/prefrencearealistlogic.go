@@ -2,7 +2,8 @@ package prefrenceareaservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/cms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// PrefrenceAreaListLogic
+/*
+Author: LiuFeiHua
+Date: 2024/5/6 10:33
+*/
 type PrefrenceAreaListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,21 +30,23 @@ func NewPrefrenceAreaListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// PrefrenceAreaList 查询商品优选列表
 func (l *PrefrenceAreaListLogic) PrefrenceAreaList(in *cmsclient.PrefrenceAreaListReq) (*cmsclient.PrefrenceAreaListResp, error) {
-	all, err := l.svcCtx.CmsPrefrenceAreaModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.CmsPrefrenceAreaModel.Count(l.ctx, in)
+
+	q := query.CmsPrefrenceArea.WithContext(l.ctx)
+	prefrenceAreas, err := q.Find()
+	count, _ := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询商品优选列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询商品优选列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*cmsclient.PrefrenceAreaListData
-	for _, item := range *all {
+	for _, item := range prefrenceAreas {
 
 		list = append(list, &cmsclient.PrefrenceAreaListData{
-			Id:         item.Id,
+			Id:         item.ID,
 			Name:       item.Name,
 			SubTitle:   item.SubTitle,
 			Pic:        item.Pic,
@@ -47,9 +55,7 @@ func (l *PrefrenceAreaListLogic) PrefrenceAreaList(in *cmsclient.PrefrenceAreaLi
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询专题列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询专题列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &cmsclient.PrefrenceAreaListResp{
 		Total: count,

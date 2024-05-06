@@ -30,7 +30,7 @@ func newCmsPrefrenceArea(db *gorm.DB, opts ...gen.DOOption) cmsPrefrenceArea {
 	_cmsPrefrenceArea.ID = field.NewInt64(tableName, "id")
 	_cmsPrefrenceArea.Name = field.NewString(tableName, "name")
 	_cmsPrefrenceArea.SubTitle = field.NewString(tableName, "sub_title")
-	_cmsPrefrenceArea.Pic = field.NewBytes(tableName, "pic")
+	_cmsPrefrenceArea.Pic = field.NewString(tableName, "pic")
 	_cmsPrefrenceArea.Sort = field.NewInt32(tableName, "sort")
 	_cmsPrefrenceArea.ShowStatus = field.NewInt32(tableName, "show_status")
 
@@ -47,7 +47,7 @@ type cmsPrefrenceArea struct {
 	ID         field.Int64
 	Name       field.String
 	SubTitle   field.String
-	Pic        field.Bytes // 展示图片
+	Pic        field.String // 展示图片
 	Sort       field.Int32
 	ShowStatus field.Int32
 
@@ -69,7 +69,7 @@ func (c *cmsPrefrenceArea) updateTableName(table string) *cmsPrefrenceArea {
 	c.ID = field.NewInt64(table, "id")
 	c.Name = field.NewString(table, "name")
 	c.SubTitle = field.NewString(table, "sub_title")
-	c.Pic = field.NewBytes(table, "pic")
+	c.Pic = field.NewString(table, "pic")
 	c.Sort = field.NewInt32(table, "sort")
 	c.ShowStatus = field.NewInt32(table, "show_status")
 

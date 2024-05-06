@@ -28,16 +28,6 @@ func (s *PrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelation
 	return l.PrefrenceAreaProductRelationAdd(in)
 }
 
-func (s *PrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelationDelete(ctx context.Context, in *cmsclient.PrefrenceAreaProductRelationDeleteReq) (*cmsclient.PrefrenceAreaProductRelationDeleteResp, error) {
-	l := prefrenceareaproductrelationservicelogic.NewPrefrenceAreaProductRelationDeleteLogic(ctx, s.svcCtx)
-	return l.PrefrenceAreaProductRelationDelete(in)
-}
-
-func (s *PrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelationUpdate(ctx context.Context, in *cmsclient.PrefrenceAreaProductRelationUpdateReq) (*cmsclient.PrefrenceAreaProductRelationUpdateResp, error) {
-	l := prefrenceareaproductrelationservicelogic.NewPrefrenceAreaProductRelationUpdateLogic(ctx, s.svcCtx)
-	return l.PrefrenceAreaProductRelationUpdate(in)
-}
-
 func (s *PrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelationList(ctx context.Context, in *cmsclient.PrefrenceAreaProductRelationListReq) (*cmsclient.PrefrenceAreaProductRelationListResp, error) {
 	l := prefrenceareaproductrelationservicelogic.NewPrefrenceAreaProductRelationListLogic(ctx, s.svcCtx)
 	return l.PrefrenceAreaProductRelationList(in)

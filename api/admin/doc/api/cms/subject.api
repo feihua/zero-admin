@@ -37,17 +37,17 @@ type (
 		CategoryId      int64  `json:"categoryId"`
 		Title           string `json:"title"`
 		Pic             string `json:"pic"`          // 专题主图
-		ProductCount    int64  `json:"productCount"` // 关联产品数量
-		RecommendStatus int64  `json:"recommendStatus"`
+        ProductCount int32 `json:"productCount"`     // 关联产品数量
+        RecommendStatus int32 `json:"recommendStatus"`
 		CreateTime      string `json:"createTime"`
-		CollectCount    int64  `json:"collectCount"`
-		ReadCount       int64  `json:"readCount"`
-		CommentCount    int64  `json:"commentCount"`
+        CollectCount int32 `json:"collectCount"`
+        ReadCount int32 `json:"readCount"`
+        CommentCount int32 `json:"commentCount"`
 		AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
 		Description     string `json:"description"`
-		ShowStatus      int64  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+        ShowStatus int32 `json:"showStatus"`         // 显示状态：0->不显示；1->显示
 		Content         string `json:"content"`
-		ForwardCount    int64  `json:"forwardCount"` // 转发数
+        ForwardCount int32 `json:"forwardCount"`     // 转发数
 		CategoryName    string `json:"categoryName"` // 专题分类名称
 	}
 	ListSubjectResp {

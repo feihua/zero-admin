@@ -40,7 +40,7 @@ type CouponServiceClient interface {
 	CouponFindById(ctx context.Context, in *CouponFindByIdReq, opts ...grpc.CallOption) (*CouponFindByIdResp, error)
 	// 根据优惠券ids查询优惠券
 	CouponFindByIds(ctx context.Context, in *CouponFindByIdsReq, opts ...grpc.CallOption) (*CouponFindByIdsResp, error)
-	// 根据商品Id和分类id查询可用的优惠券(front)
+	// 根据商品Id和分类id查询可用的优惠券(app)
 	CouponFindByProductIdAndProductCategoryId(ctx context.Context, in *CouponFindByProductIdAndProductCategoryIdReq, opts ...grpc.CallOption) (*CouponFindByProductIdAndProductCategoryIdResp, error)
 }
 
@@ -127,7 +127,7 @@ type CouponServiceServer interface {
 	CouponFindById(context.Context, *CouponFindByIdReq) (*CouponFindByIdResp, error)
 	// 根据优惠券ids查询优惠券
 	CouponFindByIds(context.Context, *CouponFindByIdsReq) (*CouponFindByIdsResp, error)
-	// 根据商品Id和分类id查询可用的优惠券(front)
+	// 根据商品Id和分类id查询可用的优惠券(app)
 	CouponFindByProductIdAndProductCategoryId(context.Context, *CouponFindByProductIdAndProductCategoryIdReq) (*CouponFindByProductIdAndProductCategoryIdResp, error)
 	mustEmbedUnimplementedCouponServiceServer()
 }

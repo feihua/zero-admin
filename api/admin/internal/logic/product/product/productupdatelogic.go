@@ -181,27 +181,24 @@ func buildUpdateSkuStockList(req types.UpdateProductReq) []*pmsclient.SkuStockLi
 // 更新专题关联
 func updateSubjectProductRelation(req types.UpdateProductReq, l *ProductUpdateLogic, productId int64) {
 	//1.先删除专题的关联
-	_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationDelete(l.ctx, &cmsclient.SubjectProductRelationDeleteReq{Id: productId})
+	//_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationDelete(l.ctx, &cmsclient.SubjectProductRelationDeleteReq{Id: productId})
 
 	//2.重新添加专题的关联
-	for _, subjectId := range req.SubjectProductRelationList {
-		_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationAdd(l.ctx, &cmsclient.SubjectProductRelationAddReq{
-			SubjectId: subjectId,
-			ProductId: productId,
-		})
-	}
+	_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationAdd(l.ctx, &cmsclient.SubjectProductRelationAddReq{
+		SubjectId: req.SubjectProductRelationList,
+		ProductId: productId,
+	})
 }
 
 // 更新优选商品关联
 func updatePrefrenceAreaProductRelation(req types.UpdateProductReq, l *ProductUpdateLogic, productId int64) {
-	//1.先删除优选商品的关联
-	_, _ = l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationDelete(l.ctx, &cmsclient.PrefrenceAreaProductRelationDeleteReq{Id: productId})
+	//1.先删除优选商品的关联(由rpc实现)
+	//_, _ = l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationDelete(l.ctx, &cmsclient.PrefrenceAreaProductRelationDeleteReq{Id: productId})
 
 	//2.重新添加优选商品的关联
-	for _, prefrenceAreaId := range req.PrefrenceAreaProductRelationList {
-		_, _ = l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationAdd(l.ctx, &cmsclient.PrefrenceAreaProductRelationAddReq{
-			PrefrenceAreaId: prefrenceAreaId,
-			ProductId:       productId,
-		})
-	}
+	_, _ = l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationAdd(l.ctx, &cmsclient.PrefrenceAreaProductRelationAddReq{
+		PrefrenceAreaId: req.PrefrenceAreaProductRelationList,
+		ProductId:       int64(productId),
+	})
+
 }

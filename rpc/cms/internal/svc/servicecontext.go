@@ -3,9 +3,7 @@ package svc
 import (
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/config"
-	"github.com/feihua/zero-admin/rpc/model/cmsmodel"
 	"github.com/zeromicro/go-zero/core/logx"
-	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -15,19 +13,6 @@ import (
 type ServiceContext struct {
 	Config config.Config
 	DB     *gorm.DB
-
-	CmsHelpModel                         cmsmodel.CmsHelpModel
-	CmsHelpCategoryModel                 cmsmodel.CmsHelpCategoryModel
-	CmsMemberReportModel                 cmsmodel.CmsMemberReportModel
-	CmsPrefrenceAreaModel                cmsmodel.CmsPrefrenceAreaModel
-	CmsPrefrenceAreaProductRelationModel cmsmodel.CmsPrefrenceAreaProductRelationModel
-	CmsSubjectModel                      cmsmodel.CmsSubjectModel
-	CmsSubjectCategoryModel              cmsmodel.CmsSubjectCategoryModel
-	CmsSubjectCommentModel               cmsmodel.CmsSubjectCommentModel
-	CmsSubjectProductRelationModel       cmsmodel.CmsSubjectProductRelationModel
-	CmsTopicModel                        cmsmodel.CmsTopicModel
-	CmsTopicCategoryModel                cmsmodel.CmsTopicCategoryModel
-	CmsTopicCommentModel                 cmsmodel.CmsTopicCommentModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -44,22 +29,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	logx.Debug("mysql已连接")
 	query.SetDefault(DB)
 
-	sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
 	return &ServiceContext{
-		Config:                               c,
-		DB:                                   DB,
-		CmsHelpModel:                         cmsmodel.NewCmsHelpModel(sqlConn),
-		CmsHelpCategoryModel:                 cmsmodel.NewCmsHelpCategoryModel(sqlConn),
-		CmsMemberReportModel:                 cmsmodel.NewCmsMemberReportModel(sqlConn),
-		CmsPrefrenceAreaModel:                cmsmodel.NewCmsPrefrenceAreaModel(sqlConn),
-		CmsPrefrenceAreaProductRelationModel: cmsmodel.NewCmsPrefrenceAreaProductRelationModel(sqlConn),
-		CmsSubjectModel:                      cmsmodel.NewCmsSubjectModel(sqlConn),
-		CmsSubjectCategoryModel:              cmsmodel.NewCmsSubjectCategoryModel(sqlConn),
-		CmsSubjectCommentModel:               cmsmodel.NewCmsSubjectCommentModel(sqlConn),
-		CmsSubjectProductRelationModel:       cmsmodel.NewCmsSubjectProductRelationModel(sqlConn),
-		CmsTopicModel:                        cmsmodel.NewCmsTopicModel(sqlConn),
-		CmsTopicCategoryModel:                cmsmodel.NewCmsTopicCategoryModel(sqlConn),
-		CmsTopicCommentModel:                 cmsmodel.NewCmsTopicCommentModel(sqlConn),
+		Config: c,
+		DB:     DB,
 	}
 }
 

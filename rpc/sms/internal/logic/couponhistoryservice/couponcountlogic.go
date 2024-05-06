@@ -2,6 +2,7 @@ package couponhistoryservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -30,13 +31,8 @@ func NewCouponCountLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Coupo
 
 // CouponCount 登录时获取用户还没有使用的获取优惠券数量
 func (l *CouponCountLogic) CouponCount(in *smsclient.CouponCountReq) (*smsclient.CouponCountResp, error) {
-	count, _ := l.svcCtx.SmsCouponHistoryModel.Count(l.ctx, &smsclient.CouponHistoryListReq{
-		Current:   1,
-		PageSize:  100,
-		CouponId:  0,
-		MemberId:  in.MemberId,
-		UseStatus: 0, //'使用状态：0->未使用；1->已使用；2->已过期',
-	})
+	q := query.SmsCouponHistory
+	count, _ := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId)).Count()
 
 	return &smsclient.CouponCountResp{
 		Total: count,

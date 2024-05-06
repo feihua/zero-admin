@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	cmsPrefrenceArea "github.com/feihua/zero-admin/api/admin/internal/handler/cms/PrefrenceArea"
+	cmsprefrenceArea "github.com/feihua/zero-admin/api/admin/internal/handler/cms/prefrenceArea"
 	cmssubject "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject"
 	memberaddress "github.com/feihua/zero-admin/api/admin/internal/handler/member/address"
 	membergrowthchangehistory "github.com/feihua/zero-admin/api/admin/internal/handler/member/growthchangehistory"
@@ -65,22 +65,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/add",
-					Handler: cmsPrefrenceArea.PrefrenceAreaAddHandler(serverCtx),
+					Handler: cmsprefrenceArea.PrefrenceAreaAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/delete",
-					Handler: cmsPrefrenceArea.PrefrenceAreaDeleteHandler(serverCtx),
+					Handler: cmsprefrenceArea.PrefrenceAreaDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/list",
-					Handler: cmsPrefrenceArea.PrefrenceAreaListHandler(serverCtx),
+					Handler: cmsprefrenceArea.PrefrenceAreaListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/update",
-					Handler: cmsPrefrenceArea.PrefrenceAreaUpdateHandler(serverCtx),
+					Handler: cmsprefrenceArea.PrefrenceAreaUpdateHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1350,26 +1350,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/delete",
-					Handler: syslog.SysLogDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/list",
-					Handler: syslog.SysLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/sysLog"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/delete",
 					Handler: syslog.LoginLogDeleteHandler(serverCtx),
 				},
 				{
@@ -1386,6 +1366,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/loginLog"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
+					Handler: syslog.SysLogDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/list",
+					Handler: syslog.SysLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/sysLog"),
 	)
 
 	server.AddRoutes(
