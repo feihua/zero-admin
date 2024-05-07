@@ -2,6 +2,7 @@ package memberreceiveaddressservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -9,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MemberReceiveAddressDeleteLogic
+// MemberReceiveAddressDeleteLogic 会员收货地址
 /*
 Author: LiuFeiHua
 Date: 2023/11/30 11:24
@@ -30,8 +31,8 @@ func NewMemberReceiveAddressDeleteLogic(ctx context.Context, svcCtx *svc.Service
 
 // MemberReceiveAddressDelete 删除会员收货地址
 func (l *MemberReceiveAddressDeleteLogic) MemberReceiveAddressDelete(in *umsclient.MemberReceiveAddressDeleteReq) (*umsclient.MemberReceiveAddressDeleteResp, error) {
-	err := l.svcCtx.UmsMemberReceiveAddressModel.DeleteByIdAndMemberId(l.ctx, in.Id, in.MemberId)
-
+	q := query.UmsMemberReceiveAddress
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).Delete()
 	if err != nil {
 		return nil, err
 	}

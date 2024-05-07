@@ -2,8 +2,8 @@ package memberattentionservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -34,21 +34,19 @@ func NewMemberBrandAttentionAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // MemberBrandAttentionAdd 添加品牌关注
 func (l *MemberBrandAttentionAddLogic) MemberBrandAttentionAdd(in *umsclient.MemberBrandAttentionAddReq) (*umsclient.MemberBrandAttentionAddResp, error) {
 	//1.查询会员信息
-	member, _ := l.svcCtx.UmsMemberModel.FindOne(l.ctx, in.MemberId)
+	member, _ := query.UmsMember.WithContext(l.ctx).Where(query.UmsMember.ID.Eq(in.MemberId)).First()
 	//2.添加品牌关注
-	_, err := l.svcCtx.UmsMemberBrandAttentionModel.Insert(l.ctx, &umsmodel.UmsMemberBrandAttention{
-		MemberId:       member.Id,
+	err := query.UmsMemberBrandAttention.WithContext(l.ctx).Create(&model.UmsMemberBrandAttention{
+		MemberID:       member.ID,
 		MemberNickName: member.Nickname,
-		MemberIcon:     member.Icon.String,
-		BrandId:        in.BrandId,
+		MemberIcon:     *member.Icon,
+		BrandID:        in.BrandId,
 		BrandName:      in.BrandName,
 		BrandLogo:      in.BrandLogo,
-		BrandCity: sql.NullString{
-			String: in.BrandCity,
-			Valid:  true,
-		},
-		CreateTime: time.Now(),
+		BrandCity:      &in.BrandCity,
+		CreateTime:     time.Now(),
 	})
+
 	if err != nil {
 		return nil, err
 	}

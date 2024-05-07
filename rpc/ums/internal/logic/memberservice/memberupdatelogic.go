@@ -2,8 +2,8 @@ package memberservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"time"
 
@@ -12,6 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberUpdateLogic 会员信息
 type MemberUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,30 +27,34 @@ func NewMemberUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Memb
 	}
 }
 
+// MemberUpdate 更新会员信息
 func (l *MemberUpdateLogic) MemberUpdate(in *umsclient.MemberUpdateReq) (*umsclient.MemberUpdateResp, error) {
 	createTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
 	birthday, _ := time.Parse("2006-01-02 15:04:05", in.Birthday)
-	l.svcCtx.UmsMemberModel.Update(l.ctx, &umsmodel.UmsMember{
-		Id:                    in.Id,
-		MemberLevelId:         in.MemberLevelId,
+	_, err := query.UmsMember.WithContext(l.ctx).Updates(&model.UmsMember{
+		ID:                    in.Id,
+		MemberLevelID:         in.MemberLevelId,
 		Username:              in.Username,
 		Password:              in.Password,
 		Nickname:              in.Nickname,
 		Phone:                 in.Phone,
 		Status:                in.Status,
 		CreateTime:            createTime,
-		Icon:                  sql.NullString{String: in.Icon, Valid: true},
-		Gender:                sql.NullInt64{Int64: in.Gender, Valid: true},
-		Birthday:              sql.NullTime{Time: birthday, Valid: true},
-		City:                  sql.NullString{String: in.City, Valid: true},
-		Job:                   sql.NullString{String: in.Job, Valid: true},
-		PersonalizedSignature: sql.NullString{String: in.PersonalizedSignature, Valid: true},
+		Icon:                  &in.Icon,
+		Gender:                &in.Gender,
+		Birthday:              &birthday,
+		City:                  &in.City,
+		Job:                   &in.Job,
+		PersonalizedSignature: &in.PersonalizedSignature,
 		SourceType:            in.SourceType,
 		Integration:           in.Integration,
 		Growth:                in.Growth,
 		LuckeyCount:           in.LuckeyCount,
 		HistoryIntegration:    in.HistoryIntegration,
 	})
+	if err != nil {
+		return nil, err
+	}
 
 	return &umsclient.MemberUpdateResp{}, nil
 }

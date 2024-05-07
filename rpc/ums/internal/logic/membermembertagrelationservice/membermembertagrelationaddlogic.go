@@ -2,13 +2,19 @@ package membermembertagrelationservicelogic
 
 import (
 	"context"
-
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberMemberTagRelationAddLogic 用户和标签关系
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 10:12
+*/
 type MemberMemberTagRelationAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,16 @@ func NewMemberMemberTagRelationAddLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// MemberMemberTagRelationAdd 添加用户和标签关系
 func (l *MemberMemberTagRelationAddLogic) MemberMemberTagRelationAdd(in *umsclient.MemberMemberTagRelationAddReq) (*umsclient.MemberMemberTagRelationAddResp, error) {
-	// todo: add your logic here and delete this line
+	err := query.UmsMemberMemberTagRelation.WithContext(l.ctx).Create(&model.UmsMemberMemberTagRelation{
+		MemberID: in.MemberId,
+		TagID:    in.TagId,
+	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &umsclient.MemberMemberTagRelationAddResp{}, nil
 }

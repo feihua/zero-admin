@@ -2,9 +2,10 @@ package memberloginlogservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,31 +25,33 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *MemberLoginLogListLogic) MemberLoginLogList(in *umsclient.MemberLoginLogListReq) (*umsclient.MemberLoginLogListResp, error) {
-	all, err := l.svcCtx.UmsMemberLoginLogModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.UmsMemberLoginLogModel.Count(l.ctx, in)
+	q := query.UmsMemberLoginLog.WithContext(l.ctx)
+	if in.MemberId != 0 {
+		q = q.Where(query.UmsMemberLoginLog.MemberID.Eq(in.MemberId))
+	}
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询会员登录记录列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询会员登录记录列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*umsclient.MemberLoginLogListData
-	for _, item := range *all {
+	for _, item := range result {
 		list = append(list, &umsclient.MemberLoginLogListData{
-			Id:         item.Id,
-			MemberId:   item.MemberId,
+			Id:         item.ID,
+			MemberId:   item.MemberID,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
-			Ip:         item.Ip,
+			Ip:         item.IP,
 			City:       item.City,
 			LoginType:  item.LoginType,
 			Province:   item.Province,
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询会员登录记录列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询会员登录记录列表信息,参数：%+v,响应：%+v", in, list)
 	return &umsclient.MemberLoginLogListResp{
 		Total: count,
 		List:  list,

@@ -45,8 +45,8 @@ func (l *MemberRuleSettingListLogic) MemberRuleSettingList(req types.ListMemberR
 			Id:                item.Id,
 			ContinueSignDay:   item.ContinueSignDay,
 			ContinueSignPoint: item.ContinueSignPoint,
-			ConsumePerPoint:   float64(item.ConsumePerPoint),
-			LowOrderAmount:    float64(item.LowOrderAmount),
+			ConsumePerPoint:   item.ConsumePerPoint,
+			LowOrderAmount:    item.LowOrderAmount,
 			MaxPointPerOrder:  item.MaxPointPerOrder,
 			Type:              item.Type,
 		})

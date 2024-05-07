@@ -31,7 +31,7 @@ func (l *MemberTagUpdateLogic) MemberTagUpdate(req types.UpdateMemberTagReq) (*t
 		Id:                req.Id,
 		Name:              req.Name,
 		FinishOrderCount:  req.FinishOrderCount,
-		FinishOrderAmount: int64(req.FinishOrderAmount),
+		FinishOrderAmount: req.FinishOrderAmount,
 	})
 
 	if err != nil {

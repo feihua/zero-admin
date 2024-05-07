@@ -2,6 +2,7 @@ package memberproductcollectionservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -9,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MemberProductCollectionDeleteLogic
+// MemberProductCollectionDeleteLogic 会员收藏的商品
 /*
 Author: LiuFeiHua
 Date: 2023/11/30 12:02
@@ -28,10 +29,10 @@ func NewMemberProductCollectionDeleteLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
-// MemberProductCollectionDelete 删除收藏的商品
+// MemberProductCollectionDelete 删除会员收藏的商品
 func (l *MemberProductCollectionDeleteLogic) MemberProductCollectionDelete(in *umsclient.MemberProductCollectionDeleteReq) (*umsclient.MemberProductCollectionDeleteResp, error) {
-	err := l.svcCtx.UmsMemberProductCollectionModel.DeleteByIdAndMemberId(l.ctx, in.Id, in.MemberId)
-
+	q := query.UmsMemberProductCollection
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).Delete()
 	if err != nil {
 		return nil, err
 	}

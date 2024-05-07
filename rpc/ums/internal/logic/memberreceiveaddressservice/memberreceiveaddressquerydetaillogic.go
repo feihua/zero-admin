@@ -2,7 +2,7 @@ package memberreceiveaddressservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -30,17 +30,17 @@ func NewMemberReceiveAddressQueryDetailLogic(ctx context.Context, svcCtx *svc.Se
 }
 
 func (l *MemberReceiveAddressQueryDetailLogic) MemberReceiveAddressQueryDetail(in *umsclient.MemberReceiveAddressQueryDetailReq) (*umsclient.MemberReceiveAddressQueryDetailResp, error) {
-	address, err := l.svcCtx.UmsMemberReceiveAddressModel.FindByIdAndMemberId(l.ctx, in.AddressID, in.UserId)
+	q := query.UmsMemberReceiveAddress
+	address, err := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.UserId), q.ID.Eq(in.AddressID)).First()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logc.Errorf(l.ctx, "查询会员地址信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询会员地址信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	resp := &umsclient.MemberReceiveAddressQueryDetailResp{
-		Id:            address.Id,
-		MemberId:      address.MemberId,
+		Id:            address.ID,
+		MemberId:      address.MemberID,
 		Name:          address.Name,
 		PhoneNumber:   address.PhoneNumber,
 		DefaultStatus: address.DefaultStatus,
@@ -51,9 +51,7 @@ func (l *MemberReceiveAddressQueryDetailLogic) MemberReceiveAddressQueryDetail(i
 		DetailAddress: address.DetailAddress,
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(resp)
-	logc.Infof(l.ctx, "查询会员地址信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询会员地址信息,参数：%+v,响应：%+v", in, resp)
 
 	return resp, nil
 }

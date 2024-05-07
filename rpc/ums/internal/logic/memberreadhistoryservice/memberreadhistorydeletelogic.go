@@ -2,6 +2,7 @@ package memberreadhistoryservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -9,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MemberReadHistoryDeleteLogic
+// MemberReadHistoryDeleteLogic 会员浏览记录
 /*
 Author: LiuFeiHua
 Date: 2023/11/30 16:43
@@ -28,10 +29,10 @@ func NewMemberReadHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// MemberReadHistoryDelete 删除浏览记录
+// MemberReadHistoryDelete 删除会员浏览记录
 func (l *MemberReadHistoryDeleteLogic) MemberReadHistoryDelete(in *umsclient.MemberReadHistoryDeleteReq) (*umsclient.MemberReadHistoryDeleteResp, error) {
-	err := l.svcCtx.UmsMemberReadHistoryModel.DeleteByIdAndMemberId(l.ctx, in.Id, in.MemberId)
-
+	q := query.UmsMemberReadHistory
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).Delete()
 	if err != nil {
 		return nil, err
 	}

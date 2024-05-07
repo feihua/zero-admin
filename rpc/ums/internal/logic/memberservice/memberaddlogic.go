@@ -2,12 +2,12 @@ package memberservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"encoding/json"
 	"errors"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -30,27 +30,24 @@ func NewMemberAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MemberA
 // MemberAdd 会员注册
 func (l *MemberAddLogic) MemberAdd(in *umsclient.MemberAddReq) (*umsclient.MemberAddResp, error) {
 
-	username := in.Username
-	member, _ := l.svcCtx.UmsMemberModel.FindOneByUsername(l.ctx, username)
-	if member != nil {
-		logx.WithContext(l.ctx).Errorf("用户名已注册,参数Username:%s", username)
-		return nil, errors.New("用户名已注册")
-	}
-
-	p := in.Phone
-	phone, _ := l.svcCtx.UmsMemberModel.FindOneByPhone(l.ctx, p)
-	if phone != nil {
-		logx.WithContext(l.ctx).Errorf("手机号已注册,参数Phone:%s", p)
-		return nil, errors.New("手机号已注册")
+	q := query.UmsMember
+	count, _ := q.WithContext(l.ctx).Where(q.Username.Eq(in.Username)).Or(q.Phone.Eq(in.Phone)).Count()
+	if count > 0 {
+		logc.Errorf(l.ctx, "用户名或手机号已注册,参数: %+v", in)
+		return nil, errors.New("用户名或手机号已注册")
 	}
 
 	accessExpire := l.svcCtx.Config.JWT.AccessExpire
 	secret := l.svcCtx.Config.JWT.AccessSecret
-	token, err := createJwtToken(secret, username, p, accessExpire, insertMember(in, l))
+	id, err := insertMember(in, l)
+	if err != nil {
+		logc.Errorf(l.ctx, "新增会员失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("新增会员失败")
+	}
+	token, err := createJwtToken(secret, in.Username, in.Phone, accessExpire, id)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("生成token失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "生成token失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
@@ -59,27 +56,32 @@ func (l *MemberAddLogic) MemberAdd(in *umsclient.MemberAddReq) (*umsclient.Membe
 	}, nil
 }
 
-func insertMember(in *umsclient.MemberAddReq, l *MemberAddLogic) int64 {
-	result, _ := l.svcCtx.UmsMemberModel.Insert(l.ctx, &umsmodel.UmsMember{
-		MemberLevelId:         4, //默认是普通会员
+func insertMember(in *umsclient.MemberAddReq, l *MemberAddLogic) (int64, error) {
+	member := &model.UmsMember{
+		MemberLevelID:         4, //默认是普通会员
 		Username:              in.Username,
 		Password:              in.Password,
 		Nickname:              in.Username,
 		Phone:                 in.Phone,
 		Status:                0,
 		CreateTime:            time.Now(),
-		Icon:                  sql.NullString{},
-		Gender:                sql.NullInt64{},
-		Birthday:              sql.NullTime{},
-		City:                  sql.NullString{},
-		Job:                   sql.NullString{},
-		PersonalizedSignature: sql.NullString{},
+		Icon:                  nil,
+		Gender:                nil,
+		Birthday:              nil,
+		City:                  nil,
+		Job:                   nil,
+		PersonalizedSignature: nil,
 		SourceType:            0,
 		Integration:           0,
 		Growth:                0,
 		LuckeyCount:           0,
 		HistoryIntegration:    0,
-	})
-	memberId, _ := result.LastInsertId()
-	return memberId
+	}
+	err := query.UmsMember.WithContext(l.ctx).Create(member)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return member.ID, nil
 }

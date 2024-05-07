@@ -2,7 +2,7 @@ package memberproductcollectionservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -32,35 +32,41 @@ func NewMemberProductCollectionListLogic(ctx context.Context, svcCtx *svc.Servic
 
 // MemberProductCollectionList 收藏列表
 func (l *MemberProductCollectionListLogic) MemberProductCollectionList(in *umsclient.MemberProductCollectionListReq) (*umsclient.MemberProductCollectionListResp, error) {
-	all, err := l.svcCtx.UmsMemberProductCollectionModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.UmsMemberProductCollectionModel.Count(l.ctx, in)
+	q := query.UmsMemberProductCollection.WithContext(l.ctx)
+	if in.MemberId != 0 {
+		q.Where(query.UmsMemberProductCollection.MemberID.Eq(in.MemberId))
+	}
+	if in.ProductId != 0 {
+		q.Where(query.UmsMemberProductCollection.ProductID.Eq(in.ProductId))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logc.Errorf(l.ctx, "查询会员收藏列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询会员收藏列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*umsclient.MemberProductCollectionListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &umsclient.MemberProductCollectionListData{
-			Id:              item.Id,
-			MemberId:        item.MemberId,
+			Id:              item.ID,
+			MemberId:        item.MemberID,
 			MemberNickName:  item.MemberNickName,
 			MemberIcon:      item.MemberIcon,
 			ProductId:       in.ProductId,
 			ProductName:     item.ProductName,
 			ProductPic:      item.ProductPic,
-			ProductSubTitle: item.ProductSubTitle.String,
+			ProductSubTitle: *item.ProductSubTitle,
 			ProductPrice:    item.ProductPrice,
 			CreateTime:      item.CreateTime.Format("2006-01-02 15:04:05"),
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logc.Infof(l.ctx, "查询会员收藏列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询会员收藏列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &umsclient.MemberProductCollectionListResp{
 		Total: count,

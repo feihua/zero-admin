@@ -30,7 +30,7 @@ func (l *MemberTagAddLogic) MemberTagAdd(req types.AddMemberTagReq) (*types.AddM
 	_, err := l.svcCtx.MemberTagService.MemberTagAdd(l.ctx, &umsclient.MemberTagAddReq{
 		Name:              req.Name,
 		FinishOrderCount:  req.FinishOrderCount,
-		FinishOrderAmount: int64(req.FinishOrderAmount),
+		FinishOrderAmount: float32(req.FinishOrderAmount),
 	})
 
 	if err != nil {

@@ -2,7 +2,8 @@ package memberloginlogservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"time"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberLoginLogAddLogic 会员登录日志
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 10:09
+*/
 type MemberLoginLogAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,16 +31,17 @@ func NewMemberLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// MemberLoginLogAdd 添加会员登录日志
 func (l *MemberLoginLogAddLogic) MemberLoginLogAdd(in *umsclient.MemberLoginLogAddReq) (*umsclient.MemberLoginLogAddResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	_, err := l.svcCtx.UmsMemberLoginLogModel.Insert(l.ctx, &umsmodel.UmsMemberLoginLog{
-		MemberId:   in.MemberId,
-		CreateTime: CreateTime,
-		Ip:         in.Ip,
+	err := query.UmsMemberLoginLog.WithContext(l.ctx).Create(&model.UmsMemberLoginLog{
+		MemberID:   in.MemberId,
+		CreateTime: time.Now(),
+		IP:         in.Ip,
 		City:       in.City,
 		LoginType:  in.LoginType,
 		Province:   in.Province,
 	})
+
 	if err != nil {
 		return nil, err
 	}

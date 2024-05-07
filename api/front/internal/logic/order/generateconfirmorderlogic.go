@@ -132,7 +132,7 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 				UseUnit:            settingInfo.UseUnit,
 				CouponStatus:       settingInfo.CouponStatus,
 			},
-			MemberIntegration: memberInfo.Integration,
+			MemberIntegration: int64(memberInfo.Integration),
 			CalcAmount: types.CalcAmount{
 				TotalAmount:     totalAmount,
 				FreightAmount:   freightAmount,

@@ -47,7 +47,7 @@ func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*t
 			Name:                  item.Name,
 			GrowthPoint:           item.GrowthPoint,
 			DefaultStatus:         item.DefaultStatus,
-			FreeFreightPoint:      float64(item.FreeFreightPoint),
+			FreeFreightPoint:      item.FreeFreightPoint,
 			CommentGrowthPoint:    item.CommentGrowthPoint,
 			PriviledgeFreeFreight: item.PriviledgeFreeFreight,
 			PriviledgeSignIn:      item.PriviledgeSignIn,

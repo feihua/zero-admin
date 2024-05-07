@@ -32,11 +32,6 @@ func (s *MemberLoginLogServiceServer) MemberLoginLogList(ctx context.Context, in
 	return l.MemberLoginLogList(in)
 }
 
-func (s *MemberLoginLogServiceServer) MemberLoginLogUpdate(ctx context.Context, in *umsclient.MemberLoginLogUpdateReq) (*umsclient.MemberLoginLogUpdateResp, error) {
-	l := memberloginlogservicelogic.NewMemberLoginLogUpdateLogic(ctx, s.svcCtx)
-	return l.MemberLoginLogUpdate(in)
-}
-
 func (s *MemberLoginLogServiceServer) MemberLoginLogDelete(ctx context.Context, in *umsclient.MemberLoginLogDeleteReq) (*umsclient.MemberLoginLogDeleteResp, error) {
 	l := memberloginlogservicelogic.NewMemberLoginLogDeleteLogic(ctx, s.svcCtx)
 	return l.MemberLoginLogDelete(in)

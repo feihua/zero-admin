@@ -30,7 +30,7 @@ func (l *MemberStatisticsInfoUpdateLogic) MemberStatisticsInfoUpdate(req types.U
 	_, err := l.svcCtx.MemberStatisticsInfoService.MemberStatisticsInfoUpdate(l.ctx, &umsclient.MemberStatisticsInfoUpdateReq{
 		Id:                  req.Id,
 		MemberId:            req.MemberId,
-		ConsumeAmount:       int64(req.ConsumeAmount),
+		ConsumeAmount:       req.ConsumeAmount,
 		OrderCount:          req.OrderCount,
 		CouponCount:         req.CouponCount,
 		CommentCount:        req.CommentCount,

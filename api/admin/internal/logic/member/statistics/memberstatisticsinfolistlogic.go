@@ -44,7 +44,7 @@ func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(req types.ListM
 		list = append(list, &types.ListtMemberStatisticsInfoData{
 			Id:                  item.Id,
 			MemberId:            item.MemberId,
-			ConsumeAmount:       float64(item.ConsumeAmount),
+			ConsumeAmount:       item.ConsumeAmount,
 			OrderCount:          item.OrderCount,
 			CouponCount:         item.CouponCount,
 			CommentCount:        item.CommentCount,

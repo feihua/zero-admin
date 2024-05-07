@@ -2,7 +2,7 @@ package memberservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -32,29 +32,29 @@ func NewQueryMemberByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 
 // QueryMemberById 获取个人信息
 func (l *QueryMemberByIdLogic) QueryMemberById(in *umsclient.MemberByIdReq) (*umsclient.MemberListData, error) {
-	member, err := l.svcCtx.UmsMemberModel.FindOne(l.ctx, in.Id)
+	q := query.UmsMember
+	member, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logc.Errorf(l.ctx, "根据会员id查询会员信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "根据会员id查询会员信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	resp := &umsclient.MemberListData{
-		Id:                    member.Id,
-		MemberLevelId:         member.MemberLevelId,
+		Id:                    member.ID,
+		MemberLevelId:         member.MemberLevelID,
 		Username:              member.Username,
 		Password:              member.Password,
 		Nickname:              member.Nickname,
 		Phone:                 member.Phone,
 		Status:                member.Status,
 		CreateTime:            member.CreateTime.Format("2006-01-02 15:04:05"),
-		Icon:                  member.Icon.String,
-		Gender:                member.Gender.Int64,
-		Birthday:              member.Birthday.Time.Format("2006-01-02 15:04:05"),
-		City:                  member.City.String,
-		Job:                   member.Job.String,
-		PersonalizedSignature: member.PersonalizedSignature.String,
+		Icon:                  *member.Icon,
+		Gender:                *member.Gender,
+		Birthday:              member.Birthday.Format("2006-01-02 15:04:05"),
+		City:                  *member.City,
+		Job:                   *member.Job,
+		PersonalizedSignature: *member.PersonalizedSignature,
 		SourceType:            member.SourceType,
 		Integration:           member.Integration,
 		Growth:                member.Growth,
@@ -62,9 +62,7 @@ func (l *QueryMemberByIdLogic) QueryMemberById(in *umsclient.MemberByIdReq) (*um
 		HistoryIntegration:    member.HistoryIntegration,
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(resp)
-	logc.Infof(l.ctx, "根据会员id查询会员信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "根据会员id查询会员信息,参数：%+v,响应：%+v", in, resp)
 
 	return resp, nil
 }

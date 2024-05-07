@@ -2,6 +2,7 @@ package memberservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
@@ -23,10 +24,11 @@ func NewMemberUpdatePasswordLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *MemberUpdatePasswordLogic) MemberUpdatePassword(in *umsclient.MemberUpdatePasswordReq) (*umsclient.MemberUpdateResp, error) {
-	member, _ := l.svcCtx.UmsMemberModel.FindOne(l.ctx, in.Id)
+	q := query.UmsMember
+	member, _ := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 	member.Password = in.Password
 
-	err := l.svcCtx.UmsMemberModel.Update(l.ctx, member)
+	_, err := q.WithContext(l.ctx).Updates(member)
 	if err != nil {
 		return nil, err
 	}

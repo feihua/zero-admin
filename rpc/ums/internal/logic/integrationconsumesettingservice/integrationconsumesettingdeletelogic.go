@@ -2,6 +2,7 @@ package integrationconsumesettingservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// IntegrationConsumeSettingDeleteLogic 积分消费设置
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 9:37
+*/
 type IntegrationConsumeSettingDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +29,10 @@ func NewIntegrationConsumeSettingDeleteLogic(ctx context.Context, svcCtx *svc.Se
 	}
 }
 
+// IntegrationConsumeSettingDelete 删除积分消费设置
 func (l *IntegrationConsumeSettingDeleteLogic) IntegrationConsumeSettingDelete(in *umsclient.IntegrationConsumeSettingDeleteReq) (*umsclient.IntegrationConsumeSettingDeleteResp, error) {
-	err := l.svcCtx.UmsIntegrationConsumeSettingModel.DeleteByIds(l.ctx, in.Ids)
-
+	q := query.UmsIntegrationConsumeSetting
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
 		return nil, err
 	}

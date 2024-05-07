@@ -2,7 +2,8 @@ package memberreceiveaddressservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -31,26 +32,23 @@ func NewMemberReceiveAddressUpdateLogic(ctx context.Context, svcCtx *svc.Service
 
 // MemberReceiveAddressUpdate 修改会员收货地址
 func (l *MemberReceiveAddressUpdateLogic) MemberReceiveAddressUpdate(in *umsclient.MemberReceiveAddressUpdateReq) (*umsclient.MemberReceiveAddressUpdateResp, error) {
+	q := query.UmsMemberReceiveAddress
 	//如果更新的地址为默认地址,则需要把之前的默认地址去除默认标识
 	if in.DefaultStatus == 1 {
 		//查询会员所有有地址
-		memberList, _ := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(l.ctx, &umsclient.MemberReceiveAddressListReq{
-			Current:  1,
-			PageSize: 100,
-			MemberId: in.MemberId,
-		})
+		memberList, _ := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId)).Find()
 
-		for _, address := range *memberList {
+		for _, address := range memberList {
 			//判断是否为默认,如果是,则修改
 			if address.DefaultStatus == 1 {
 				address.DefaultStatus = 0
-				_ = l.svcCtx.UmsMemberReceiveAddressModel.Update(l.ctx, &address)
+				_, _ = q.WithContext(l.ctx).Where(q.ID.Eq(address.ID)).Updates(address)
 			}
 		}
 	}
-	err := l.svcCtx.UmsMemberReceiveAddressModel.Update(l.ctx, &umsmodel.UmsMemberReceiveAddress{
-		Id:            in.Id,
-		MemberId:      in.MemberId,
+	_, err := q.WithContext(l.ctx).Updates(&model.UmsMemberReceiveAddress{
+		ID:            in.Id,
+		MemberID:      in.MemberId,
 		Name:          in.Name,
 		PhoneNumber:   in.PhoneNumber,
 		DefaultStatus: in.DefaultStatus,
@@ -60,6 +58,7 @@ func (l *MemberReceiveAddressUpdateLogic) MemberReceiveAddressUpdate(in *umsclie
 		Region:        in.Region,
 		DetailAddress: in.DetailAddress,
 	})
+
 	if err != nil {
 		return nil, err
 	}

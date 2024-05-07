@@ -32,11 +32,6 @@ func (s *MemberReadHistoryServiceServer) MemberReadHistoryDelete(ctx context.Con
 	return l.MemberReadHistoryDelete(in)
 }
 
-func (s *MemberReadHistoryServiceServer) MemberReadHistoryUpdate(ctx context.Context, in *umsclient.MemberReadHistoryUpdateReq) (*umsclient.MemberReadHistoryUpdateResp, error) {
-	l := memberreadhistoryservicelogic.NewMemberReadHistoryUpdateLogic(ctx, s.svcCtx)
-	return l.MemberReadHistoryUpdate(in)
-}
-
 func (s *MemberReadHistoryServiceServer) MemberReadHistoryList(ctx context.Context, in *umsclient.MemberReadHistoryListReq) (*umsclient.MemberReadHistoryListResp, error) {
 	l := memberreadhistoryservicelogic.NewMemberReadHistoryListLogic(ctx, s.svcCtx)
 	return l.MemberReadHistoryList(in)

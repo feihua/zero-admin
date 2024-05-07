@@ -2,7 +2,8 @@ package memberstatisticsinfoservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"time"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberStatisticsInfoUpdateLogic 更新会员统计信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 10:43
+*/
 type MemberStatisticsInfoUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,11 +31,11 @@ func NewMemberStatisticsInfoUpdateLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// MemberStatisticsInfoUpdate 更新会员统计信息
 func (l *MemberStatisticsInfoUpdateLogic) MemberStatisticsInfoUpdate(in *umsclient.MemberStatisticsInfoUpdateReq) (*umsclient.MemberStatisticsInfoUpdateResp, error) {
-	RecentOrderTime, _ := time.Parse("2006-01-02 15:04:05", in.RecentOrderTime)
-	err := l.svcCtx.UmsMemberStatisticsInfoModel.Update(l.ctx, &umsmodel.UmsMemberStatisticsInfo{
-		Id:                  in.Id,
-		MemberId:            in.MemberId,
+	_, err := query.UmsMemberStatisticsInfo.WithContext(l.ctx).Updates(&model.UmsMemberStatisticsInfo{
+		ID:                  in.Id,
+		MemberID:            in.MemberId,
 		ConsumeAmount:       float64(in.ConsumeAmount),
 		OrderCount:          in.OrderCount,
 		CouponCount:         in.CouponCount,
@@ -43,8 +49,9 @@ func (l *MemberStatisticsInfoUpdateLogic) MemberStatisticsInfoUpdate(in *umsclie
 		CollectTopicCount:   in.CollectTopicCount,
 		CollectCommentCount: in.CollectCommentCount,
 		InviteFriendCount:   in.InviteFriendCount,
-		RecentOrderTime:     RecentOrderTime,
+		RecentOrderTime:     time.Now(),
 	})
+
 	if err != nil {
 		return nil, err
 	}

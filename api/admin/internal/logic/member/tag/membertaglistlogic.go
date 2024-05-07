@@ -45,7 +45,7 @@ func (l *MemberTagListLogic) MemberTagList(req types.ListMemberTagReq) (*types.L
 			Id:                item.Id,
 			Name:              item.Name,
 			FinishOrderCount:  item.FinishOrderCount,
-			FinishOrderAmount: float64(item.FinishOrderAmount),
+			FinishOrderAmount: item.FinishOrderAmount,
 		})
 	}
 

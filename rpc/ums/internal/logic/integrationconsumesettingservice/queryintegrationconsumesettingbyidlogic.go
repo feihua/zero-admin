@@ -2,7 +2,8 @@ package integrationconsumesettingservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -31,19 +32,16 @@ func NewQueryIntegrationConsumeSettingByIdLogic(ctx context.Context, svcCtx *svc
 
 // QueryIntegrationConsumeSettingById 获取积分使用规则
 func (l *QueryIntegrationConsumeSettingByIdLogic) QueryIntegrationConsumeSettingById(in *umsclient.QueryIntegrationConsumeSettingByIdReq) (*umsclient.IntegrationConsumeSettingListData, error) {
-	item, err := l.svcCtx.UmsIntegrationConsumeSettingModel.FindOne(l.ctx, in.Id)
+	item, err := query.UmsIntegrationConsumeSetting.WithContext(l.ctx).Where(query.UmsIntegrationConsumeSetting.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询积分消费设置列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询积分消费设置列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(item)
-	logx.WithContext(l.ctx).Infof("查询积分消费设置列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询积分消费设置列表信息,参数：%+v,响应：%+v", in, item)
 	return &umsclient.IntegrationConsumeSettingListData{
-		Id:                 item.Id,
+		Id:                 item.ID,
 		DeductionPerAmount: item.DeductionPerAmount,
 		MaxPercentPerOrder: item.MaxPercentPerOrder,
 		UseUnit:            item.UseUnit,

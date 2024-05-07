@@ -29,7 +29,7 @@ message MemberListReq {
   int64 pageSize = 2;
   string Username = 3;
   string Phone = 4;
-  int64  Status = 5;
+  int32  Status = 5;
 }
 
 message MemberListData{
@@ -39,19 +39,19 @@ message MemberListData{
   string      Password = 4;
   string      Nickname = 5;
   string      Phone = 6;
-  int64       Status = 7;
+  int32       Status = 7;
   string      CreateTime = 8;
   string      Icon = 9;
-  int64       Gender = 10;
+  int32       Gender = 10;
   string      Birthday = 11;
   string      City = 12;
   string      Job = 13;
   string      PersonalizedSignature = 14;
-  int64       SourceType = 15;
-  int64       Integration = 16;
-  int64       Growth = 17;
-  int64       LuckeyCount = 18;
-  int64       HistoryIntegration = 19;
+  int32       SourceType = 15;
+  int32       Integration = 16;
+  int32       Growth = 17;
+  int32       LuckeyCount = 18;
+  int32       HistoryIntegration = 19;
 }
 
 message MemberListResp {
@@ -66,19 +66,19 @@ message MemberUpdateReq {
   string      Password = 4;
   string      Nickname = 5;
   string      Phone = 6;
-  int64       Status = 7;
+  int32       Status = 7;
   string      CreateTime = 8;
   string      Icon = 9;
-  int64       Gender = 10;
+  int32       Gender = 10;
   string      Birthday = 11;
   string      City = 12;
   string      Job = 13;
   string      PersonalizedSignature = 14;
-  int64       SourceType = 15;
-  int64       Integration = 16;
-  int64       Growth = 17;
-  int64       LuckeyCount = 18;
-  int64       HistoryIntegration = 19;
+  int32       SourceType = 15;
+  int32       Integration = 16;
+  int32       Growth = 17;
+  int32       LuckeyCount = 18;
+  int32       HistoryIntegration = 19;
 }
 
 message MemberUpdateResp {
@@ -126,11 +126,11 @@ service MemberService {
 message GrowthChangeHistoryAddReq {
   int64      MemberId = 2;
   string      CreateTime = 3;
-  int64      ChangeType = 4;
-  int64      ChangeCount = 5;
+  int32      ChangeType = 4;
+  int32      ChangeCount = 5;
   string      OperateMan = 6;
   string      OperateNote = 7;
-  int64      SourceType = 8;
+  int32      SourceType = 8;
 }
 
 message GrowthChangeHistoryAddResp {
@@ -146,11 +146,11 @@ message GrowthChangeHistoryListData{
   int64      Id = 1;
   int64      MemberId = 2;
   string      CreateTime = 3;
-  int64      ChangeType = 4;
-  int64      ChangeCount = 5;
+  int32      ChangeType = 4;
+  int32      ChangeCount = 5;
   string      OperateMan = 6;
   string      OperateNote = 7;
-  int64      SourceType = 8;
+  int32      SourceType = 8;
 }
 
 message GrowthChangeHistoryListResp {
@@ -162,11 +162,11 @@ message GrowthChangeHistoryUpdateReq {
   int64      Id = 1;
   int64      MemberId = 2;
   string      CreateTime = 3;
-  int64      ChangeType = 4;
-  int64      ChangeCount = 5;
+  int32      ChangeType = 4;
+  int32      ChangeCount = 5;
   string      OperateMan = 6;
   string      OperateNote = 7;
-  int64      SourceType = 8;
+  int32      SourceType = 8;
 }
 
 message GrowthChangeHistoryUpdateResp {
@@ -192,11 +192,11 @@ service GrowthChangeHistoryService {
 message IntegrationChangeHistoryAddReq {
   int64      MemberId = 2;
   string  CreateTime = 3;
-  int64      ChangeType = 4;
-  int64      ChangeCount = 5;
+  int32      ChangeType = 4;
+  int32      ChangeCount = 5;
   string      OperateMan = 6;
   string      OperateNote = 7;
-  int64      SourceType = 8;
+  int32      SourceType = 8;
 }
 
 message IntegrationChangeHistoryAddResp {
@@ -212,11 +212,11 @@ message IntegrationChangeHistoryListData{
   int64      Id = 1;
   int64      MemberId = 2;
   string  CreateTime = 3;
-  int64      ChangeType = 4;
-  int64      ChangeCount = 5;
+  int32      ChangeType = 4;
+  int32      ChangeCount = 5;
   string      OperateMan = 6;
   string      OperateNote = 7;
-  int64      SourceType = 8;
+  int32      SourceType = 8;
 }
 
 message IntegrationChangeHistoryListResp {
@@ -228,11 +228,11 @@ message IntegrationChangeHistoryUpdateReq {
   int64      Id = 1;
   int64      MemberId = 2;
   string  CreateTime = 3;
-  int64      ChangeType = 4;
-  int64      ChangeCount = 5;
+  int32      ChangeType = 4;
+  int32      ChangeCount = 5;
   string      OperateMan = 6;
   string      OperateNote = 7;
-  int64      SourceType = 8;
+  int32      SourceType = 8;
 }
 
 message IntegrationChangeHistoryUpdateResp {
@@ -256,10 +256,10 @@ service IntegrationChangeHistoryService {
 }
 
 message IntegrationConsumeSettingAddReq {
-  int64  DeductionPerAmount = 2;
-  int64  MaxPercentPerOrder = 3;
-  int64  UseUnit = 4;
-  int64  CouponStatus = 5;
+  int32  DeductionPerAmount = 2;
+  int32  MaxPercentPerOrder = 3;
+  int32  UseUnit = 4;
+  int32  CouponStatus = 5;
 }
 
 message IntegrationConsumeSettingAddResp {
@@ -273,10 +273,10 @@ message IntegrationConsumeSettingListReq {
 
 message IntegrationConsumeSettingListData{
   int64  Id = 1;
-  int64  DeductionPerAmount = 2;
-  int64  MaxPercentPerOrder = 3;
-  int64  UseUnit = 4;
-  int64  CouponStatus = 5;
+  int32  DeductionPerAmount = 2;
+  int32  MaxPercentPerOrder = 3;
+  int32  UseUnit = 4;
+  int32  CouponStatus = 5;
 }
 
 message IntegrationConsumeSettingListResp {
@@ -286,10 +286,10 @@ message IntegrationConsumeSettingListResp {
 
 message IntegrationConsumeSettingUpdateReq {
   int64  Id = 1;
-  int64  DeductionPerAmount = 2;
-  int64  MaxPercentPerOrder = 3;
-  int64  UseUnit = 4;
-  int64  CouponStatus = 5;
+  int32  DeductionPerAmount = 2;
+  int32  MaxPercentPerOrder = 3;
+  int32  UseUnit = 4;
+  int32  CouponStatus = 5;
 }
 
 message IntegrationConsumeSettingUpdateResp {
@@ -320,16 +320,16 @@ service IntegrationConsumeSettingService {
 
 message MemberLevelAddReq {
   string    Name = 2;
-  int64    GrowthPoint = 3;
-  int64    DefaultStatus = 4;
-  int64  FreeFreightPoint = 5;
-  int64    CommentGrowthPoint = 6;
-  int64    PriviledgeFreeFreight = 7;
-  int64    PriviledgeSignIn = 8;
-  int64    PriviledgeComment = 9;
-  int64    PriviledgePromotion = 10;
-  int64    PriviledgeMemberPrice = 11;
-  int64    PriviledgeBirthday = 12;
+  int32    GrowthPoint = 3;
+  int32    DefaultStatus = 4;
+  float  FreeFreightPoint = 5;
+  int32    CommentGrowthPoint = 6;
+  int32    PriviledgeFreeFreight = 7;
+  int32    PriviledgeSignIn = 8;
+  int32    PriviledgeComment = 9;
+  int32    PriviledgePromotion = 10;
+  int32    PriviledgeMemberPrice = 11;
+  int32    PriviledgeBirthday = 12;
   string    Note = 13;
 }
 
@@ -346,16 +346,16 @@ message MemberLevelListReq {
 message MemberLevelListData{
   int64    Id = 1;
   string    Name = 2;
-  int64    GrowthPoint = 3;
-  int64    DefaultStatus = 4;
-  int64  FreeFreightPoint = 5;
-  int64    CommentGrowthPoint = 6;
-  int64    PriviledgeFreeFreight = 7;
-  int64    PriviledgeSignIn = 8;
-  int64    PriviledgeComment = 9;
-  int64    PriviledgePromotion = 10;
-  int64    PriviledgeMemberPrice = 11;
-  int64    PriviledgeBirthday = 12;
+  int32    GrowthPoint = 3;
+  int32    DefaultStatus = 4;
+  float  FreeFreightPoint = 5;
+  int32    CommentGrowthPoint = 6;
+  int32    PriviledgeFreeFreight = 7;
+  int32    PriviledgeSignIn = 8;
+  int32    PriviledgeComment = 9;
+  int32    PriviledgePromotion = 10;
+  int32    PriviledgeMemberPrice = 11;
+  int32    PriviledgeBirthday = 12;
   string    Note = 13;
 }
 
@@ -367,16 +367,16 @@ message MemberLevelListResp {
 message MemberLevelUpdateReq {
   int64    Id = 1;
   string    Name = 2;
-  int64    GrowthPoint = 3;
-  int64    DefaultStatus = 4;
-  int64  FreeFreightPoint = 5;
-  int64    CommentGrowthPoint = 6;
-  int64    PriviledgeFreeFreight = 7;
-  int64    PriviledgeSignIn = 8;
-  int64    PriviledgeComment = 9;
-  int64    PriviledgePromotion = 10;
-  int64    PriviledgeMemberPrice = 11;
-  int64    PriviledgeBirthday = 12;
+  int32    GrowthPoint = 3;
+  int32    DefaultStatus = 4;
+  float  FreeFreightPoint = 5;
+  int32    CommentGrowthPoint = 6;
+  int32    PriviledgeFreeFreight = 7;
+  int32    PriviledgeSignIn = 8;
+  int32    PriviledgeComment = 9;
+  int32    PriviledgePromotion = 10;
+  int32    PriviledgeMemberPrice = 11;
+  int32    PriviledgeBirthday = 12;
   string    Note = 13;
 }
 
@@ -404,7 +404,7 @@ message MemberLoginLogAddReq {
   string  CreateTime = 3;
   string      Ip = 4;
   string      City = 5;
-  int64      LoginType = 6;
+  int32      LoginType = 6;
   string      Province = 7;
 }
 
@@ -424,7 +424,7 @@ message MemberLoginLogListData{
   string  CreateTime = 3;
   string      Ip = 4;
   string      City = 5;
-  int64      LoginType = 6;
+  int32      LoginType = 6;
   string      Province = 7;
 }
 
@@ -433,19 +433,6 @@ message MemberLoginLogListResp {
   repeated  MemberLoginLogListData list = 2;
 }
 
-message MemberLoginLogUpdateReq {
-  int64      Id = 1;
-  int64      MemberId = 2;
-  string  CreateTime = 3;
-  string      Ip = 4;
-  string      City = 5;
-  int64      LoginType = 6;
-  string      Province = 7;
-}
-
-message MemberLoginLogUpdateResp {
-  string pong = 1;
-}
 
 message MemberLoginLogDeleteReq {
   repeated int64 ids = 1;
@@ -458,7 +445,6 @@ service MemberLoginLogService {
 
   rpc MemberLoginLogAdd(MemberLoginLogAddReq) returns(MemberLoginLogAddResp);
   rpc MemberLoginLogList(MemberLoginLogListReq) returns(MemberLoginLogListResp);
-  rpc MemberLoginLogUpdate(MemberLoginLogUpdateReq) returns(MemberLoginLogUpdateResp);
   rpc MemberLoginLogDelete(MemberLoginLogDeleteReq) returns(MemberLoginLogDeleteResp);
 
 }
@@ -568,7 +554,7 @@ message MemberReceiveAddressAddReq {
   int64    MemberId = 2;
   string  Name = 3;
   string  PhoneNumber = 4;
-  int64    DefaultStatus = 5;
+  int32    DefaultStatus = 5;
   string  PostCode = 6;
   string  Province = 7;
   string  City = 8;
@@ -591,7 +577,7 @@ message MemberReceiveAddressListData{
   int64    MemberId = 2;
   string  Name = 3;
   string  PhoneNumber = 4;
-  int64    DefaultStatus = 5;
+  int32    DefaultStatus = 5;
   string  PostCode = 6;
   string  Province = 7;
   string  City = 8;
@@ -609,7 +595,7 @@ message MemberReceiveAddressUpdateReq {
   int64    MemberId = 2;
   string  Name = 3;
   string  PhoneNumber = 4;
-  int64    DefaultStatus = 5;
+  int32    DefaultStatus = 5;
   string  PostCode = 6;
   string  Province = 7;
   string  City = 8;
@@ -650,7 +636,7 @@ message MemberReceiveAddressQueryDetailResp {
   int64    MemberId = 2;
   string  Name = 3;
   string  PhoneNumber = 4;
-  int64    DefaultStatus = 5;
+  int32    DefaultStatus = 5;
   string  PostCode = 6;
   string  Province = 7;
   string  City = 8;
@@ -659,12 +645,12 @@ message MemberReceiveAddressQueryDetailResp {
 }
 
 message MemberRuleSettingAddReq {
-  int64    ContinueSignDay = 2;
-  int64    ContinueSignPoint = 3;
-  int64  ConsumePerPoint = 4;
-  int64  LowOrderAmount = 5;
-  int64    MaxPointPerOrder = 6;
-  int64    Type = 7;
+  int32    ContinueSignDay = 2;
+  int32    ContinueSignPoint = 3;
+  float  ConsumePerPoint = 4;
+  float  LowOrderAmount = 5;
+  int32    MaxPointPerOrder = 6;
+  int32    Type = 7;
 }
 
 message MemberRuleSettingAddResp {
@@ -678,12 +664,12 @@ message MemberRuleSettingListReq {
 
 message MemberRuleSettingListData{
   int64    Id = 1;
-  int64    ContinueSignDay = 2;
-  int64    ContinueSignPoint = 3;
-  int64  ConsumePerPoint = 4;
-  int64  LowOrderAmount = 5;
-  int64    MaxPointPerOrder = 6;
-  int64    Type = 7;
+  int32    ContinueSignDay = 2;
+  int32    ContinueSignPoint = 3;
+  float  ConsumePerPoint = 4;
+  float  LowOrderAmount = 5;
+  int32    MaxPointPerOrder = 6;
+  int32    Type = 7;
 }
 
 message MemberRuleSettingListResp {
@@ -693,12 +679,12 @@ message MemberRuleSettingListResp {
 
 message MemberRuleSettingUpdateReq {
   int64    Id = 1;
-  int64    ContinueSignDay = 2;
-  int64    ContinueSignPoint = 3;
-  int64  ConsumePerPoint = 4;
-  int64  LowOrderAmount = 5;
-  int64    MaxPointPerOrder = 6;
-  int64    Type = 7;
+  int32    ContinueSignDay = 2;
+  int32    ContinueSignPoint = 3;
+  float  ConsumePerPoint = 4;
+  float  LowOrderAmount = 5;
+  int32    MaxPointPerOrder = 6;
+  int32    Type = 7;
 }
 
 message MemberRuleSettingUpdateResp {
@@ -723,19 +709,19 @@ service MemberRuleSettingService {
 }
 message MemberStatisticsInfoAddReq {
   int64      MemberId = 2;
-  int64    ConsumeAmount = 3;
-  int64      OrderCount = 4;
-  int64      CouponCount = 5;
-  int64      CommentCount = 6;
-  int64      ReturnOrderCount = 7;
-  int64      LoginCount = 8;
-  int64      AttendCount = 9;
-  int64      FansCount = 10;
-  int64      CollectProductCount = 11;
-  int64      CollectSubjectCount = 12;
-  int64      CollectTopicCount = 13;
-  int64      CollectCommentCount = 14;
-  int64      InviteFriendCount = 15;
+  float    ConsumeAmount = 3;
+  int32      OrderCount = 4;
+  int32      CouponCount = 5;
+  int32      CommentCount = 6;
+  int32      ReturnOrderCount = 7;
+  int32      LoginCount = 8;
+  int32      AttendCount = 9;
+  int32      FansCount = 10;
+  int32      CollectProductCount = 11;
+  int32      CollectSubjectCount = 12;
+  int32      CollectTopicCount = 13;
+  int32      CollectCommentCount = 14;
+  int32      InviteFriendCount = 15;
   string  RecentOrderTime = 16;
 }
 
@@ -751,19 +737,19 @@ message MemberStatisticsInfoListReq {
 message MemberStatisticsInfoListData{
   int64      Id = 1;
   int64      MemberId = 2;
-  int64    ConsumeAmount = 3;
-  int64      OrderCount = 4;
-  int64      CouponCount = 5;
-  int64      CommentCount = 6;
-  int64      ReturnOrderCount = 7;
-  int64      LoginCount = 8;
-  int64      AttendCount = 9;
-  int64      FansCount = 10;
-  int64      CollectProductCount = 11;
-  int64      CollectSubjectCount = 12;
-  int64      CollectTopicCount = 13;
-  int64      CollectCommentCount = 14;
-  int64      InviteFriendCount = 15;
+  float    ConsumeAmount = 3;
+  int32      OrderCount = 4;
+  int32      CouponCount = 5;
+  int32      CommentCount = 6;
+  int32      ReturnOrderCount = 7;
+  int32      LoginCount = 8;
+  int32      AttendCount = 9;
+  int32      FansCount = 10;
+  int32      CollectProductCount = 11;
+  int32      CollectSubjectCount = 12;
+  int32      CollectTopicCount = 13;
+  int32      CollectCommentCount = 14;
+  int32      InviteFriendCount = 15;
   string  RecentOrderTime = 16;
 }
 
@@ -775,19 +761,19 @@ message MemberStatisticsInfoListResp {
 message MemberStatisticsInfoUpdateReq {
   int64      Id = 1;
   int64      MemberId = 2;
-  int64    ConsumeAmount = 3;
-  int64      OrderCount = 4;
-  int64      CouponCount = 5;
-  int64      CommentCount = 6;
-  int64      ReturnOrderCount = 7;
-  int64      LoginCount = 8;
-  int64      AttendCount = 9;
-  int64      FansCount = 10;
-  int64      CollectProductCount = 11;
-  int64      CollectSubjectCount = 12;
-  int64      CollectTopicCount = 13;
-  int64      CollectCommentCount = 14;
-  int64      InviteFriendCount = 15;
+  float    ConsumeAmount = 3;
+  int32      OrderCount = 4;
+  int32      CouponCount = 5;
+  int32      CommentCount = 6;
+  int32      ReturnOrderCount = 7;
+  int32      LoginCount = 8;
+  int32      AttendCount = 9;
+  int32      FansCount = 10;
+  int32      CollectProductCount = 11;
+  int32      CollectSubjectCount = 12;
+  int32      CollectTopicCount = 13;
+  int32      CollectCommentCount = 14;
+  int32      InviteFriendCount = 15;
   string  RecentOrderTime = 16;
 }
 
@@ -813,8 +799,8 @@ service MemberStatisticsInfoService {
 }
 message MemberTagAddReq {
   string    Name = 2;
-  int64    FinishOrderCount = 3;
-  int64  FinishOrderAmount = 4;
+  int32    FinishOrderCount = 3;
+  float  FinishOrderAmount = 4;
 }
 
 message MemberTagAddResp {
@@ -829,8 +815,8 @@ message MemberTagListReq {
 message MemberTagListData{
   int64    Id = 1;
   string    Name = 2;
-  int64    FinishOrderCount = 3;
-  int64  FinishOrderAmount = 4;
+  int32    FinishOrderCount = 3;
+  float  FinishOrderAmount = 4;
 }
 
 message MemberTagListResp {
@@ -841,8 +827,8 @@ message MemberTagListResp {
 message MemberTagUpdateReq {
   int64    Id = 1;
   string    Name = 2;
-  int64    FinishOrderCount = 3;
-  int64  FinishOrderAmount = 4;
+  int32    FinishOrderCount = 3;
+  float  FinishOrderAmount = 4;
 }
 
 message MemberTagUpdateResp {
@@ -868,9 +854,9 @@ service MemberTagService {
 }
 message MemberTaskAddReq {
   string  Name = 2;
-  int64    Growth = 3;
-  int64    Intergration = 4;
-  int64    Type = 5;
+  int32    Growth = 3;
+  int32    Intergration = 4;
+  int32    Type = 5;
 }
 
 message MemberTaskAddResp {
@@ -885,9 +871,9 @@ message MemberTaskListReq {
 message MemberTaskListData{
   int64    Id = 1;
   string  Name = 2;
-  int64    Growth = 3;
-  int64    Intergration = 4;
-  int64    Type = 5;
+  int32    Growth = 3;
+  int32    Intergration = 4;
+  int32    Type = 5;
 }
 
 message MemberTaskListResp {
@@ -898,9 +884,9 @@ message MemberTaskListResp {
 message MemberTaskUpdateReq {
   int64    Id = 1;
   string  Name = 2;
-  int64    Growth = 3;
-  int64    Intergration = 4;
-  int64    Type = 5;
+  int32    Growth = 3;
+  int32    Intergration = 4;
+  int32    Type = 5;
 }
 
 message MemberTaskUpdateResp {
@@ -950,23 +936,6 @@ message MemberProductCollectionDeleteResp {
   string pong = 1;
 }
 
-message MemberProductCollectionUpdateReq {
-  int64 Id = 1; //编号
-  int64 MemberId = 2; //会员id
-  string MemberNickName = 3; //会员姓名
-  string MemberIcon = 4; //会员头像
-  int64 ProductId = 5; //商品id
-  string ProductName = 6; //商品名称
-  string ProductPic = 7; //商品图片
-  string ProductSubTitle = 8; //商品标题
-  double ProductPrice = 9; //商品价格
-  string CreateTime = 10; //收藏时间
-
-}
-
-message MemberProductCollectionUpdateResp {
-  string pong = 1;
-}
 
 message MemberProductCollectionListReq {
   int64 current = 1;
@@ -998,7 +967,6 @@ service MemberProductCollectionService {
 
   rpc MemberProductCollectionAdd(MemberProductCollectionAddReq) returns (MemberProductCollectionAddResp){}
   rpc MemberProductCollectionDelete(MemberProductCollectionDeleteReq) returns (MemberProductCollectionDeleteResp){}
-  rpc MemberProductCollectionUpdate(MemberProductCollectionUpdateReq) returns (MemberProductCollectionUpdateResp){}
   rpc MemberProductCollectionList(MemberProductCollectionListReq) returns (MemberProductCollectionListResp){}
 
 }
@@ -1031,23 +999,7 @@ message MemberReadHistoryDeleteResp {
   string pong = 1;
 }
 
-message MemberReadHistoryUpdateReq {
-  int64 Id = 1; //编号
-  int64 MemberId = 2; //会员id
-  string MemberNickName = 3; //会员姓名
-  string MemberIcon = 4; //会员头像
-  int64 ProductId = 5; //商品id
-  string ProductName = 6; //商品名称
-  string ProductPic = 7; //商品图片
-  string ProductSubTitle = 8; //商品标题
-  double ProductPrice = 9; //商品价格
-  string CreateTime = 10; //浏览时间
 
-}
-
-message MemberReadHistoryUpdateResp {
-  string pong = 1;
-}
 
 message MemberReadHistoryListReq {
   int64 current = 1;
@@ -1079,7 +1031,7 @@ service MemberReadHistoryService {
 
   rpc MemberReadHistoryAdd(MemberReadHistoryAddReq) returns (MemberReadHistoryAddResp){}
   rpc MemberReadHistoryDelete(MemberReadHistoryDeleteReq) returns (MemberReadHistoryDeleteResp){}
-  rpc MemberReadHistoryUpdate(MemberReadHistoryUpdateReq) returns (MemberReadHistoryUpdateResp){}
+
   rpc MemberReadHistoryList(MemberReadHistoryListReq) returns (MemberReadHistoryListResp){}
 }
 
@@ -1104,19 +1056,6 @@ message MemberBrandAttentionDeleteReq {
 message MemberBrandAttentionDeleteResp {
   string pong = 1;
 
-}
-
-message MemberBrandAttentionUpdateReq {
-  int64 Id = 1; //
-  int64 BrandId = 2; //品牌id
-  string BrandName = 3; //品牌名称
-  string BrandLogo = 4; //品牌Logo
-  string BrandCity = 5; //品牌所在城市
-  int64 MemberId = 6; //会员id
-}
-
-message MemberBrandAttentionUpdateResp {
-  string pong = 1;
 }
 
 message MemberBrandAttentionClearReq {
@@ -1152,7 +1091,6 @@ message MemberBrandAttentionListResp {
 service MemberAttentionService {
   rpc MemberBrandAttentionAdd(MemberBrandAttentionAddReq) returns (MemberBrandAttentionAddResp){}
   rpc MemberBrandAttentionDelete(MemberBrandAttentionDeleteReq) returns (MemberBrandAttentionDeleteResp){}
-  rpc MemberBrandAttentionUpdate(MemberBrandAttentionUpdateReq) returns (MemberBrandAttentionUpdateResp){}
   rpc MemberBrandAttentionClear(MemberBrandAttentionClearReq) returns (MemberBrandAttentionClearResp){}
   rpc MemberBrandAttentionList(MemberBrandAttentionListReq) returns (MemberBrandAttentionListResp){}
 }

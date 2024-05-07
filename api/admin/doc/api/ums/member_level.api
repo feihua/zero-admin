@@ -7,16 +7,16 @@ info(
 type (
 	addMemberLevelReq {
 		Name                  string  `json:"name"`
-		GrowthPoint           int64   `json:"growthPoint"`
-		DefaultStatus         int64   `json:"defaultStatus"`         // 是否为默认等级：0->不是；1->是
-		FreeFreightPoint      float64 `json:"freeFreightPoint"`      // 免运费标准
-		CommentGrowthPoint    int64   `json:"commentGrowthPoint"`    // 每次评价获取的成长值
-		PriviledgeFreeFreight int64   `json:"priviledgeFreeFreight"` // 是否有免邮特权
-		PriviledgeSignIn      int64   `json:"priviledgeSignIn"`      // 是否有签到特权
-		PriviledgeComment     int64   `json:"priviledgeComment"`     // 是否有评论获奖励特权
-		PriviledgePromotion   int64   `json:"priviledgePromotion"`   // 是否有专享活动特权
-		PriviledgeMemberPrice int64   `json:"priviledgeMemberPrice"` // 是否有会员价格特权
-		PriviledgeBirthday    int64   `json:"priviledgeBirthday"`    // 是否有生日特权
+		GrowthPoint int32 `json:"growthPoint"`
+		DefaultStatus int32 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint float32 `json:"freeFreightPoint"`         // 免运费标准
+		CommentGrowthPoint int32 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
+		PriviledgeFreeFreight int32 `json:"priviledgeFreeFreight"` // 是否有免邮特权
+		PriviledgeSignIn int32 `json:"priviledgeSignIn"`           // 是否有签到特权
+		PriviledgeComment int32 `json:"priviledgeComment"`         // 是否有评论获奖励特权
+		PriviledgePromotion int32 `json:"priviledgePromotion"`     // 是否有专享活动特权
+		PriviledgeMemberPrice int32 `json:"priviledgeMemberPrice"` // 是否有会员价格特权
+		PriviledgeBirthday int32 `json:"priviledgeBirthday"`       // 是否有生日特权
 		Note                  string  `json:"note,optional"`
 	}
 	addMemberLevelResp {
@@ -31,16 +31,16 @@ type (
 	ListtMemberLevelData {
 		Id                    int64   `json:"id"`
 		Name                  string  `json:"name"`
-		GrowthPoint           int64   `json:"growthPoint"`
-		DefaultStatus         int64   `json:"defaultStatus"`         // 是否为默认等级：0->不是；1->是
-		FreeFreightPoint      float64 `json:"freeFreightPoint"`      // 免运费标准
-		CommentGrowthPoint    int64   `json:"commentGrowthPoint"`    // 每次评价获取的成长值
-		PriviledgeFreeFreight int64   `json:"priviledgeFreeFreight"` // 是否有免邮特权
-		PriviledgeSignIn      int64   `json:"priviledgeSignIn"`      // 是否有签到特权
-		PriviledgeComment     int64   `json:"priviledgeComment"`     // 是否有评论获奖励特权
-		PriviledgePromotion   int64   `json:"priviledgePromotion"`   // 是否有专享活动特权
-		PriviledgeMemberPrice int64   `json:"priviledgeMemberPrice"` // 是否有会员价格特权
-		PriviledgeBirthday    int64   `json:"priviledgeBirthday"`    // 是否有生日特权
+		GrowthPoint int32 `json:"growthPoint"`
+		DefaultStatus int32 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint float32 `json:"freeFreightPoint"`         // 免运费标准
+		CommentGrowthPoint int32 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
+		PriviledgeFreeFreight int32 `json:"priviledgeFreeFreight"` // 是否有免邮特权
+		PriviledgeSignIn int32 `json:"priviledgeSignIn"`           // 是否有签到特权
+		PriviledgeComment int32 `json:"priviledgeComment"`         // 是否有评论获奖励特权
+		PriviledgePromotion int32 `json:"priviledgePromotion"`     // 是否有专享活动特权
+		PriviledgeMemberPrice int32 `json:"priviledgeMemberPrice"` // 是否有会员价格特权
+		PriviledgeBirthday int32 `json:"priviledgeBirthday"`       // 是否有生日特权
 		Note                  string  `json:"note"`
 	}
 	ListMemberLevelResp {
@@ -55,16 +55,16 @@ type (
 	UpdateMemberLevelReq {
 		Id                    int64   `json:"id"`
 		Name                  string  `json:"name"`
-		GrowthPoint           int64   `json:"growthPoint"`
-		DefaultStatus         int64   `json:"defaultStatus"`         // 是否为默认等级：0->不是；1->是
-		FreeFreightPoint      float64 `json:"freeFreightPoint"`      // 免运费标准
-		CommentGrowthPoint    int64   `json:"commentGrowthPoint"`    // 每次评价获取的成长值
-		PriviledgeFreeFreight int64   `json:"priviledgeFreeFreight"` // 是否有免邮特权
-		PriviledgeSignIn      int64   `json:"priviledgeSignIn"`      // 是否有签到特权
-		PriviledgeComment     int64   `json:"priviledgeComment"`     // 是否有评论获奖励特权
-		PriviledgePromotion   int64   `json:"priviledgePromotion"`   // 是否有专享活动特权
-		PriviledgeMemberPrice int64   `json:"priviledgeMemberPrice"` // 是否有会员价格特权
-		PriviledgeBirthday    int64   `json:"priviledgeBirthday"`    // 是否有生日特权
+		GrowthPoint int32 `json:"growthPoint"`
+		DefaultStatus int32 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint float32 `json:"freeFreightPoint"`         // 免运费标准
+		CommentGrowthPoint int32 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
+		PriviledgeFreeFreight int32 `json:"priviledgeFreeFreight"` // 是否有免邮特权
+		PriviledgeSignIn int32 `json:"priviledgeSignIn"`           // 是否有签到特权
+		PriviledgeComment int32 `json:"priviledgeComment"`         // 是否有评论获奖励特权
+		PriviledgePromotion int32 `json:"priviledgePromotion"`     // 是否有专享活动特权
+		PriviledgeMemberPrice int32 `json:"priviledgeMemberPrice"` // 是否有会员价格特权
+		PriviledgeBirthday int32 `json:"priviledgeBirthday"`       // 是否有生日特权
 		Note                  string  `json:"note"`
 	}
 	UpdateMemberLevelResp {

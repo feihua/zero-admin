@@ -7,19 +7,19 @@ info(
 type (
 	addMemberStatisticsInfoReq {
 		MemberId            int64   `json:"memberId"`
-		ConsumeAmount       float64 `json:"consumeAmount"`    // 累计消费金额
-		OrderCount          int64   `json:"orderCount"`       // 订单数量
-		CouponCount         int64   `json:"couponCount"`      // 优惠券数量
-		CommentCount        int64   `json:"commentCount"`     // 评价数
-		ReturnOrderCount    int64   `json:"returnOrderCount"` // 退货数量
-		LoginCount          int64   `json:"loginCount"`       // 登录次数
-		AttendCount         int64   `json:"attendCount"`      // 关注数量
-		FansCount           int64   `json:"fansCount"`        // 粉丝数量
-		CollectProductCount int64   `json:"collectProductCount"`
-		CollectSubjectCount int64   `json:"collectSubjectCount"`
-		CollectTopicCount   int64   `json:"collectTopicCount"`
-		CollectCommentCount int64   `json:"collectCommentCount"`
-		InviteFriendCount   int64   `json:"inviteFriendCount"`
+		ConsumeAmount float32 `json:"consumeAmount"`         // 累计消费金额
+		OrderCount int32 `json:"orderCount"`                 // 订单数量
+		CouponCount int32 `json:"couponCount"`               // 优惠券数量
+		CommentCount int32 `json:"commentCount"`             // 评价数
+		ReturnOrderCount int32 `json:"returnOrderCount"`     // 退货数量
+		LoginCount int32 `json:"loginCount"`                 // 登录次数
+		AttendCount int32 `json:"attendCount"`               // 关注数量
+		FansCount int32 `json:"fansCount"`                   // 粉丝数量
+		CollectProductCount int32 `json:"collectProductCount"`
+		CollectSubjectCount int32 `json:"collectSubjectCount"`
+		CollectTopicCount int32 `json:"collectTopicCount"`
+		CollectCommentCount int32 `json:"collectCommentCount"`
+		InviteFriendCount int32 `json:"inviteFriendCount"`
 		RecentOrderTime     string  `json:"recentOrderTime"` // 最后一次下订单时间
 	}
 	addMemberStatisticsInfoResp {
@@ -33,19 +33,19 @@ type (
 	ListtMemberStatisticsInfoData {
 		Id                  int64   `json:"id"`
 		MemberId            int64   `json:"memberId"`
-		ConsumeAmount       float64 `json:"consumeAmount"`    // 累计消费金额
-		OrderCount          int64   `json:"orderCount"`       // 订单数量
-		CouponCount         int64   `json:"couponCount"`      // 优惠券数量
-		CommentCount        int64   `json:"commentCount"`     // 评价数
-		ReturnOrderCount    int64   `json:"returnOrderCount"` // 退货数量
-		LoginCount          int64   `json:"loginCount"`       // 登录次数
-		AttendCount         int64   `json:"attendCount"`      // 关注数量
-		FansCount           int64   `json:"fansCount"`        // 粉丝数量
-		CollectProductCount int64   `json:"collectProductCount"`
-		CollectSubjectCount int64   `json:"collectSubjectCount"`
-		CollectTopicCount   int64   `json:"collectTopicCount"`
-		CollectCommentCount int64   `json:"collectCommentCount"`
-		InviteFriendCount   int64   `json:"inviteFriendCount"`
+		ConsumeAmount float32 `json:"consumeAmount"`         // 累计消费金额
+		OrderCount int32 `json:"orderCount"`                 // 订单数量
+		CouponCount int32 `json:"couponCount"`               // 优惠券数量
+		CommentCount int32 `json:"commentCount"`             // 评价数
+		ReturnOrderCount int32 `json:"returnOrderCount"`     // 退货数量
+		LoginCount int32 `json:"loginCount"`                 // 登录次数
+		AttendCount int32 `json:"attendCount"`               // 关注数量
+		FansCount int32 `json:"fansCount"`                   // 粉丝数量
+		CollectProductCount int32 `json:"collectProductCount"`
+		CollectSubjectCount int32 `json:"collectSubjectCount"`
+		CollectTopicCount int32 `json:"collectTopicCount"`
+		CollectCommentCount int32 `json:"collectCommentCount"`
+		InviteFriendCount int32 `json:"inviteFriendCount"`
 		RecentOrderTime     string  `json:"recentOrderTime"` // 最后一次下订单时间
 	}
 	ListMemberStatisticsInfoResp {
@@ -60,19 +60,19 @@ type (
 	UpdateMemberStatisticsInfoReq {
 		Id                  int64   `json:"id"`
 		MemberId            int64   `json:"memberId"`
-		ConsumeAmount       float64 `json:"consumeAmount"`    // 累计消费金额
-		OrderCount          int64   `json:"orderCount"`       // 订单数量
-		CouponCount         int64   `json:"couponCount"`      // 优惠券数量
-		CommentCount        int64   `json:"commentCount"`     // 评价数
-		ReturnOrderCount    int64   `json:"returnOrderCount"` // 退货数量
-		LoginCount          int64   `json:"loginCount"`       // 登录次数
-		AttendCount         int64   `json:"attendCount"`      // 关注数量
-		FansCount           int64   `json:"fansCount"`        // 粉丝数量
-		CollectProductCount int64   `json:"collectProductCount"`
-		CollectSubjectCount int64   `json:"collectSubjectCount"`
-		CollectTopicCount   int64   `json:"collectTopicCount"`
-		CollectCommentCount int64   `json:"collectCommentCount"`
-		InviteFriendCount   int64   `json:"inviteFriendCount"`
+		ConsumeAmount float32 `json:"consumeAmount"`         // 累计消费金额
+		OrderCount int32 `json:"orderCount"`                 // 订单数量
+		CouponCount int32 `json:"couponCount"`               // 优惠券数量
+		CommentCount int32 `json:"commentCount"`             // 评价数
+		ReturnOrderCount int32 `json:"returnOrderCount"`     // 退货数量
+		LoginCount int32 `json:"loginCount"`                 // 登录次数
+		AttendCount int32 `json:"attendCount"`               // 关注数量
+		FansCount int32 `json:"fansCount"`                   // 粉丝数量
+		CollectProductCount int32 `json:"collectProductCount"`
+		CollectSubjectCount int32 `json:"collectSubjectCount"`
+		CollectTopicCount int32 `json:"collectTopicCount"`
+		CollectCommentCount int32 `json:"collectCommentCount"`
+		InviteFriendCount int32 `json:"inviteFriendCount"`
 		RecentOrderTime     string  `json:"recentOrderTime"` // 最后一次下订单时间
 	}
 	UpdateMemberStatisticsInfoResp {

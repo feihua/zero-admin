@@ -12,15 +12,15 @@ const TableNameUmsMemberBrandAttention = "ums_member_brand_attention"
 
 // UmsMemberBrandAttention 会员关注品牌管理
 type UmsMemberBrandAttention struct {
-	ID             int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	MemberID       int64      `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`                      // 会员id
-	MemberNickName string     `gorm:"column:member_nick_name;not null;comment:会员姓名" json:"member_nick_name"`        // 会员姓名
-	MemberIcon     string     `gorm:"column:member_icon;not null;comment:会员头像" json:"member_icon"`                  // 会员头像
-	BrandID        int64      `gorm:"column:brand_id;not null;comment:品牌id" json:"brand_id"`                        // 品牌id
-	BrandName      string     `gorm:"column:brand_name;not null;comment:品牌名称" json:"brand_name"`                    // 品牌名称
-	BrandLogo      string     `gorm:"column:brand_logo;not null;comment:品牌Logo" json:"brand_logo"`                  // 品牌Logo
-	BrandCity      *string    `gorm:"column:brand_city;comment:品牌所在城市" json:"brand_city"`                           // 品牌所在城市
-	CreateTime     *time.Time `gorm:"column:create_time;default:CURRENT_TIMESTAMP;comment:关注时间" json:"create_time"` // 关注时间
+	ID             int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	MemberID       int64     `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`                               // 会员id
+	MemberNickName string    `gorm:"column:member_nick_name;not null;comment:会员姓名" json:"member_nick_name"`                 // 会员姓名
+	MemberIcon     string    `gorm:"column:member_icon;not null;comment:会员头像" json:"member_icon"`                           // 会员头像
+	BrandID        int64     `gorm:"column:brand_id;not null;comment:品牌id" json:"brand_id"`                                 // 品牌id
+	BrandName      string    `gorm:"column:brand_name;not null;comment:品牌名称" json:"brand_name"`                             // 品牌名称
+	BrandLogo      string    `gorm:"column:brand_logo;not null;comment:品牌Logo" json:"brand_logo"`                           // 品牌Logo
+	BrandCity      *string   `gorm:"column:brand_city;comment:品牌所在城市" json:"brand_city"`                                    // 品牌所在城市
+	CreateTime     time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:关注时间" json:"create_time"` // 关注时间
 }
 
 // TableName UmsMemberBrandAttention's table name

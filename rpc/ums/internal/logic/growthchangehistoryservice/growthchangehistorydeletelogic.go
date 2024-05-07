@@ -2,6 +2,7 @@ package growthchangehistoryservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// GrowthChangeHistoryDeleteLogic 成长值变化历史记录
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 9:39
+*/
 type GrowthChangeHistoryDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +29,10 @@ func NewGrowthChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceC
 	}
 }
 
+// GrowthChangeHistoryDelete 删除成长值变化历史记录
 func (l *GrowthChangeHistoryDeleteLogic) GrowthChangeHistoryDelete(in *umsclient.GrowthChangeHistoryDeleteReq) (*umsclient.GrowthChangeHistoryDeleteResp, error) {
-	err := l.svcCtx.UmsGrowthChangeHistoryModel.DeleteByIds(l.ctx, in.Ids)
-
+	q := query.UmsGrowthChangeHistory
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
 		return nil, err
 	}

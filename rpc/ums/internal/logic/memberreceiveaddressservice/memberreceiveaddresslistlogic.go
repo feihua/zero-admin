@@ -2,7 +2,7 @@ package memberreceiveaddressservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -31,20 +31,24 @@ func NewMemberReceiveAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // MemberReceiveAddressList 查询会员收货地址列表
 func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *umsclient.MemberReceiveAddressListReq) (*umsclient.MemberReceiveAddressListResp, error) {
-	all, err := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.UmsMemberReceiveAddressModel.Count(l.ctx, in)
+	q := query.UmsMemberReceiveAddress.WithContext(l.ctx)
+	if in.MemberId != 0 {
+		q = q.Where(query.UmsMemberLoginLog.MemberID.Eq(in.MemberId))
+	}
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logc.Errorf(l.ctx, "查询会员地址列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询会员地址列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 	var list []*umsclient.MemberReceiveAddressListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &umsclient.MemberReceiveAddressListData{
-			Id:            item.Id,
-			MemberId:      item.MemberId,
+			Id:            item.ID,
+			MemberId:      item.MemberID,
 			Name:          item.Name,
 			PhoneNumber:   item.PhoneNumber,
 			DefaultStatus: item.DefaultStatus,
@@ -56,9 +60,7 @@ func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *umsclient.M
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logc.Infof(l.ctx, "查询会员地址列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询会员地址列表信息,参数：%+v,响应：%+v", in, list)
 	return &umsclient.MemberReceiveAddressListResp{
 		Total: count,
 		List:  list,

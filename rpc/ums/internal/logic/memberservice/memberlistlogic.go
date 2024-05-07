@@ -2,9 +2,10 @@ package memberservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,32 +25,44 @@ func NewMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Member
 }
 
 func (l *MemberListLogic) MemberList(in *umsclient.MemberListReq) (*umsclient.MemberListResp, error) {
-	all, err := l.svcCtx.UmsMemberModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.UmsMemberModel.Count(l.ctx, in)
+	q := query.UmsMember.WithContext(l.ctx)
+	if len(in.Username) > 0 {
+		q.Where(query.UmsMember.Username.Like("%" + in.Username + "%"))
+	}
+	if len(in.Phone) > 0 {
+		q.Where(query.UmsMember.Phone.Like("%" + in.Phone + "%"))
+	}
+
+	if in.Status != 2 {
+		q.Where(query.UmsMember.Status.Eq(in.Status))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询会员列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询会员列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 	var list []*umsclient.MemberListData
-	for _, member := range *all {
+	for _, member := range result {
 
 		list = append(list, &umsclient.MemberListData{
-			Id:                    member.Id,
-			MemberLevelId:         member.MemberLevelId,
+			Id:                    member.ID,
+			MemberLevelId:         member.MemberLevelID,
 			Username:              member.Username,
 			Password:              member.Password,
 			Nickname:              member.Nickname,
 			Phone:                 member.Phone,
 			Status:                member.Status,
 			CreateTime:            member.CreateTime.Format("2006-01-02 15:04:05"),
-			Icon:                  member.Icon.String,
-			Gender:                member.Gender.Int64,
-			Birthday:              member.Birthday.Time.Format("2006-01-02 15:04:05"),
-			City:                  member.City.String,
-			Job:                   member.Job.String,
-			PersonalizedSignature: member.PersonalizedSignature.String,
+			Icon:                  *member.Icon,
+			Gender:                *member.Gender,
+			Birthday:              member.Birthday.Format("2006-01-02 15:04:05"),
+			City:                  *member.City,
+			Job:                   *member.Job,
+			PersonalizedSignature: *member.PersonalizedSignature,
 			SourceType:            member.SourceType,
 			Integration:           member.Integration,
 			Growth:                member.Growth,
@@ -58,9 +71,7 @@ func (l *MemberListLogic) MemberList(in *umsclient.MemberListReq) (*umsclient.Me
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询会员列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询会员列表信息,参数：%+v,响应：%+v", in, list)
 	return &umsclient.MemberListResp{
 		Total: count,
 		List:  list,

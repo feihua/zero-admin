@@ -30,8 +30,8 @@ func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(req types.AddMemberRule
 	_, err := l.svcCtx.MemberRuleSettingService.MemberRuleSettingAdd(l.ctx, &umsclient.MemberRuleSettingAddReq{
 		ContinueSignDay:   req.ContinueSignDay,
 		ContinueSignPoint: req.ContinueSignPoint,
-		ConsumePerPoint:   int64(req.ConsumePerPoint),
-		LowOrderAmount:    int64(req.LowOrderAmount),
+		ConsumePerPoint:   req.ConsumePerPoint,
+		LowOrderAmount:    req.LowOrderAmount,
 		MaxPointPerOrder:  req.MaxPointPerOrder,
 		Type:              req.Type,
 	})

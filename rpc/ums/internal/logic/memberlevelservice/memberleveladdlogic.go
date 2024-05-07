@@ -2,15 +2,19 @@ package memberlevelservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
-	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberLevelAddLogic 会员等级
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 10:04
+*/
 type MemberLevelAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,8 +29,9 @@ func NewMemberLevelAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 	}
 }
 
+// MemberLevelAdd 添加会员等级
 func (l *MemberLevelAddLogic) MemberLevelAdd(in *umsclient.MemberLevelAddReq) (*umsclient.MemberLevelAddResp, error) {
-	_, err := l.svcCtx.UmsMemberLevelModel.Insert(l.ctx, &umsmodel.UmsMemberLevel{
+	err := query.UmsMemberLevel.WithContext(l.ctx).Create(&model.UmsMemberLevel{
 		Name:                  in.Name,
 		GrowthPoint:           in.GrowthPoint,
 		DefaultStatus:         in.DefaultStatus,
@@ -38,8 +43,9 @@ func (l *MemberLevelAddLogic) MemberLevelAdd(in *umsclient.MemberLevelAddReq) (*
 		PriviledgePromotion:   in.PriviledgePromotion,
 		PriviledgeMemberPrice: in.PriviledgeMemberPrice,
 		PriviledgeBirthday:    in.PriviledgeBirthday,
-		Note:                  sql.NullString{String: in.Note, Valid: true},
+		Note:                  &in.Note,
 	})
+
 	if err != nil {
 		return nil, err
 	}

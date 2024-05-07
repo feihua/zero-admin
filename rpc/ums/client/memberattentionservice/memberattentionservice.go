@@ -51,8 +51,6 @@ type (
 	MemberBrandAttentionListData            = umsclient.MemberBrandAttentionListData
 	MemberBrandAttentionListReq             = umsclient.MemberBrandAttentionListReq
 	MemberBrandAttentionListResp            = umsclient.MemberBrandAttentionListResp
-	MemberBrandAttentionUpdateReq           = umsclient.MemberBrandAttentionUpdateReq
-	MemberBrandAttentionUpdateResp          = umsclient.MemberBrandAttentionUpdateResp
 	MemberByIdReq                           = umsclient.MemberByIdReq
 	MemberDeleteReq                         = umsclient.MemberDeleteReq
 	MemberDeleteResp                        = umsclient.MemberDeleteResp
@@ -75,8 +73,6 @@ type (
 	MemberLoginLogListData                  = umsclient.MemberLoginLogListData
 	MemberLoginLogListReq                   = umsclient.MemberLoginLogListReq
 	MemberLoginLogListResp                  = umsclient.MemberLoginLogListResp
-	MemberLoginLogUpdateReq                 = umsclient.MemberLoginLogUpdateReq
-	MemberLoginLogUpdateResp                = umsclient.MemberLoginLogUpdateResp
 	MemberLoginReq                          = umsclient.MemberLoginReq
 	MemberLoginResp                         = umsclient.MemberLoginResp
 	MemberMemberTagRelationAddReq           = umsclient.MemberMemberTagRelationAddReq
@@ -104,8 +100,6 @@ type (
 	MemberProductCollectionListData         = umsclient.MemberProductCollectionListData
 	MemberProductCollectionListReq          = umsclient.MemberProductCollectionListReq
 	MemberProductCollectionListResp         = umsclient.MemberProductCollectionListResp
-	MemberProductCollectionUpdateReq        = umsclient.MemberProductCollectionUpdateReq
-	MemberProductCollectionUpdateResp       = umsclient.MemberProductCollectionUpdateResp
 	MemberReadHistoryAddReq                 = umsclient.MemberReadHistoryAddReq
 	MemberReadHistoryAddResp                = umsclient.MemberReadHistoryAddResp
 	MemberReadHistoryDeleteReq              = umsclient.MemberReadHistoryDeleteReq
@@ -113,8 +107,6 @@ type (
 	MemberReadHistoryListData               = umsclient.MemberReadHistoryListData
 	MemberReadHistoryListReq                = umsclient.MemberReadHistoryListReq
 	MemberReadHistoryListResp               = umsclient.MemberReadHistoryListResp
-	MemberReadHistoryUpdateReq              = umsclient.MemberReadHistoryUpdateReq
-	MemberReadHistoryUpdateResp             = umsclient.MemberReadHistoryUpdateResp
 	MemberReceiveAddressAddReq              = umsclient.MemberReceiveAddressAddReq
 	MemberReceiveAddressAddResp             = umsclient.MemberReceiveAddressAddResp
 	MemberReceiveAddressDeleteReq           = umsclient.MemberReceiveAddressDeleteReq
@@ -172,7 +164,6 @@ type (
 	MemberAttentionService interface {
 		MemberBrandAttentionAdd(ctx context.Context, in *MemberBrandAttentionAddReq, opts ...grpc.CallOption) (*MemberBrandAttentionAddResp, error)
 		MemberBrandAttentionDelete(ctx context.Context, in *MemberBrandAttentionDeleteReq, opts ...grpc.CallOption) (*MemberBrandAttentionDeleteResp, error)
-		MemberBrandAttentionUpdate(ctx context.Context, in *MemberBrandAttentionUpdateReq, opts ...grpc.CallOption) (*MemberBrandAttentionUpdateResp, error)
 		MemberBrandAttentionClear(ctx context.Context, in *MemberBrandAttentionClearReq, opts ...grpc.CallOption) (*MemberBrandAttentionClearResp, error)
 		MemberBrandAttentionList(ctx context.Context, in *MemberBrandAttentionListReq, opts ...grpc.CallOption) (*MemberBrandAttentionListResp, error)
 	}
@@ -196,11 +187,6 @@ func (m *defaultMemberAttentionService) MemberBrandAttentionAdd(ctx context.Cont
 func (m *defaultMemberAttentionService) MemberBrandAttentionDelete(ctx context.Context, in *MemberBrandAttentionDeleteReq, opts ...grpc.CallOption) (*MemberBrandAttentionDeleteResp, error) {
 	client := umsclient.NewMemberAttentionServiceClient(m.cli.Conn())
 	return client.MemberBrandAttentionDelete(ctx, in, opts...)
-}
-
-func (m *defaultMemberAttentionService) MemberBrandAttentionUpdate(ctx context.Context, in *MemberBrandAttentionUpdateReq, opts ...grpc.CallOption) (*MemberBrandAttentionUpdateResp, error) {
-	client := umsclient.NewMemberAttentionServiceClient(m.cli.Conn())
-	return client.MemberBrandAttentionUpdate(ctx, in, opts...)
 }
 
 func (m *defaultMemberAttentionService) MemberBrandAttentionClear(ctx context.Context, in *MemberBrandAttentionClearReq, opts ...grpc.CallOption) (*MemberBrandAttentionClearResp, error) {

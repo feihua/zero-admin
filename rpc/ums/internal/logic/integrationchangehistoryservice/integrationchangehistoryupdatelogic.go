@@ -2,8 +2,8 @@ package integrationchangehistoryservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"time"
 
@@ -12,6 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// IntegrationChangeHistoryUpdateLogic 积分变化历史记录
 type IntegrationChangeHistoryUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,18 +27,19 @@ func NewIntegrationChangeHistoryUpdateLogic(ctx context.Context, svcCtx *svc.Ser
 	}
 }
 
+// IntegrationChangeHistoryUpdate 更新积分变化历史记录
 func (l *IntegrationChangeHistoryUpdateLogic) IntegrationChangeHistoryUpdate(in *umsclient.IntegrationChangeHistoryUpdateReq) (*umsclient.IntegrationChangeHistoryUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.UmsIntegrationChangeHistoryModel.Update(l.ctx, &umsmodel.UmsIntegrationChangeHistory{
-		Id:          in.Id,
-		MemberId:    in.MemberId,
-		CreateTime:  CreateTime,
+	_, err := query.UmsIntegrationChangeHistory.WithContext(l.ctx).Updates(&model.UmsIntegrationChangeHistory{
+		ID:          in.Id,
+		MemberID:    in.MemberId,
+		CreateTime:  time.Now(),
 		ChangeType:  in.ChangeType,
 		ChangeCount: in.ChangeCount,
 		OperateMan:  in.OperateMan,
-		OperateNote: sql.NullString{String: in.OperateNote, Valid: true},
+		OperateNote: &in.OperateNote,
 		SourceType:  in.SourceType,
 	})
+
 	if err != nil {
 		return nil, err
 	}

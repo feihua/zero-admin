@@ -2,7 +2,8 @@ package memberrulesettingservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberRuleSettingUpdateLogic 会员积分成长规则
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 10:34
+*/
 type MemberRuleSettingUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,9 +30,10 @@ func NewMemberRuleSettingUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// MemberRuleSettingUpdate 更新会员积分成长规则
 func (l *MemberRuleSettingUpdateLogic) MemberRuleSettingUpdate(in *umsclient.MemberRuleSettingUpdateReq) (*umsclient.MemberRuleSettingUpdateResp, error) {
-	err := l.svcCtx.UmsMemberRuleSettingModel.Update(l.ctx, &umsmodel.UmsMemberRuleSetting{
-		Id:                in.Id,
+	_, err := query.UmsMemberRuleSetting.WithContext(l.ctx).Updates(&model.UmsMemberRuleSetting{
+		ID:                in.Id,
 		ContinueSignDay:   in.ContinueSignDay,
 		ContinueSignPoint: in.ContinueSignPoint,
 		ConsumePerPoint:   float64(in.ConsumePerPoint),
@@ -34,6 +41,7 @@ func (l *MemberRuleSettingUpdateLogic) MemberRuleSettingUpdate(in *umsclient.Mem
 		MaxPointPerOrder:  in.MaxPointPerOrder,
 		Type:              in.Type,
 	})
+
 	if err != nil {
 		return nil, err
 	}

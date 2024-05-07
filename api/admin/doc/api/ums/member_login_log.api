@@ -10,7 +10,7 @@ type (
 		CreateTime string `json:"createTime"`
 		Ip         string `json:"ip"`
 		City       string `json:"city"`
-		LoginType  int64  `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
+		LoginType int32 `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
 		Province   string `json:"province"`
 	}
 	addMemberLoginLogResp {
@@ -28,7 +28,7 @@ type (
 		CreateTime string `json:"createTime"`
 		Ip         string `json:"ip"`
 		City       string `json:"city"`
-		LoginType  int64  `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
+		LoginType int32 `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
 		Province   string `json:"province"`
 	}
 	ListMemberLoginLogResp {
@@ -40,19 +40,7 @@ type (
 		Success  bool                       `json:"success"`
 		Total    int64                      `json:"total"`
 	}
-	UpdateMemberLoginLogReq {
-		Id         int64  `json:"id"`
-		MemberId   int64  `json:"memberId"`
-		CreateTime string `json:"createTime"`
-		Ip         string `json:"ip"`
-		City       string `json:"city"`
-		LoginType  int64  `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
-		Province   string `json:"province"`
-	}
-	UpdateMemberLoginLogResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+
 	DeleteMemberLoginLogReq {
 		Ids []int64 `json:"ids"`
 	}
@@ -74,10 +62,7 @@ service admin-api {
 	
 	@handler MemberLoginLogList
 	post /list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
-	
-	@handler MemberLoginLogUpdate
-	post /update (UpdateMemberLoginLogReq) returns (UpdateMemberLoginLogResp)
-	
-	@handler MemberLoginLogDelete
+
+@handler MemberLoginLogDelete
 	post /delete (DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp)
 }

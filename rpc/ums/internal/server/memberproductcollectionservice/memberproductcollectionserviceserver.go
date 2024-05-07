@@ -32,11 +32,6 @@ func (s *MemberProductCollectionServiceServer) MemberProductCollectionDelete(ctx
 	return l.MemberProductCollectionDelete(in)
 }
 
-func (s *MemberProductCollectionServiceServer) MemberProductCollectionUpdate(ctx context.Context, in *umsclient.MemberProductCollectionUpdateReq) (*umsclient.MemberProductCollectionUpdateResp, error) {
-	l := memberproductcollectionservicelogic.NewMemberProductCollectionUpdateLogic(ctx, s.svcCtx)
-	return l.MemberProductCollectionUpdate(in)
-}
-
 func (s *MemberProductCollectionServiceServer) MemberProductCollectionList(ctx context.Context, in *umsclient.MemberProductCollectionListReq) (*umsclient.MemberProductCollectionListResp, error) {
 	l := memberproductcollectionservicelogic.NewMemberProductCollectionListLogic(ctx, s.svcCtx)
 	return l.MemberProductCollectionList(in)

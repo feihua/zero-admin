@@ -42,10 +42,10 @@ func (l *InfoLogic) Info() (*types.InfoResp, error) {
 		MemberId: memberId,
 	})
 
-	var count int64 = 0
+	var count int32 = 0
 	//获取不到优惠券数量的时候,默认返回0
 	if result != nil {
-		count = result.Total
+		count = int32(result.Total)
 	}
 
 	data := types.MemberData{

@@ -2,8 +2,8 @@ package memberreadhistoryservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -33,17 +33,18 @@ func NewMemberReadHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // MemberReadHistoryAdd 添加浏览商品记录
 func (l *MemberReadHistoryAddLogic) MemberReadHistoryAdd(in *umsclient.MemberReadHistoryAddReq) (*umsclient.MemberReadHistoryAddResp, error) {
-	_, err := l.svcCtx.UmsMemberReadHistoryModel.Insert(l.ctx, &umsmodel.UmsMemberReadHistory{
-		MemberId:        in.MemberId,
+	err := query.UmsMemberReadHistory.WithContext(l.ctx).Create(&model.UmsMemberReadHistory{
+		MemberID:        in.MemberId,
 		MemberNickName:  in.MemberNickName,
 		MemberIcon:      in.MemberIcon,
-		ProductId:       in.ProductId,
+		ProductID:       in.ProductId,
 		ProductName:     in.ProductName,
 		ProductPic:      in.ProductPic,
-		ProductSubTitle: sql.NullString{String: in.ProductSubTitle, Valid: true},
+		ProductSubTitle: &in.ProductSubTitle,
 		ProductPrice:    in.ProductPrice,
 		CreateTime:      time.Now(),
 	})
+
 	if err != nil {
 		return nil, err
 	}

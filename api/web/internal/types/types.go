@@ -296,20 +296,20 @@ type MemberData struct {
 	Username              string `json:"username"`              // 用户名
 	Nickname              string `json:"nickname"`              // 昵称
 	Phone                 string `json:"phone"`                 // 手机号码
-	Status                int64  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
+	Status                int32  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
 	CreateTime            string `json:"createTime"`            // 注册时间
 	Icon                  string `json:"icon"`                  // 头像
-	Gender                int64  `json:"gender"`                // 性别：0->未知；1->男；2->女
+	Gender                int32  `json:"gender"`                // 性别：0->未知；1->男；2->女
 	Birthday              string `json:"birthday"`              // 生日
 	City                  string `json:"city"`                  // 所做城市
 	Job                   string `json:"job"`                   // 职业
 	PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
-	SourceType            int64  `json:"sourceType"`            // 用户来源
-	Integration           int64  `json:"integration"`           // 积分
-	Growth                int64  `json:"growth"`                // 成长值
-	LuckeyCount           int64  `json:"luckeyCount"`           // 剩余抽奖次数
-	HistoryIntegration    int64  `json:"historyIntegration"`    // 历史积分数量
-	CouponCount           int64  `json:"couponCount"`           // 优惠券数量
+	SourceType            int32  `json:"sourceType"`            // 用户来源
+	Integration           int32  `json:"integration"`           // 积分
+	Growth                int32  `json:"growth"`                // 成长值
+	LuckeyCount           int32  `json:"luckeyCount"`           // 剩余抽奖次数
+	HistoryIntegration    int32  `json:"historyIntegration"`    // 历史积分数量
+	CouponCount           int32  `json:"couponCount"`           // 优惠券数量
 }
 
 type Product struct {

@@ -2,14 +2,19 @@ package membertaskservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
-	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberTaskAddLogic 会员任务
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 9:44
+*/
 type MemberTaskAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,13 +29,15 @@ func NewMemberTaskAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mem
 	}
 }
 
+// MemberTaskAdd 添加会员任务
 func (l *MemberTaskAddLogic) MemberTaskAdd(in *umsclient.MemberTaskAddReq) (*umsclient.MemberTaskAddResp, error) {
-	_, err := l.svcCtx.UmsMemberTaskModel.Insert(l.ctx, &umsmodel.UmsMemberTask{
+	err := query.UmsMemberTask.WithContext(l.ctx).Create(&model.UmsMemberTask{
 		Name:         in.Name,
 		Growth:       in.Growth,
 		Intergration: in.Intergration,
 		Type:         in.Type,
 	})
+
 	if err != nil {
 		return nil, err
 	}

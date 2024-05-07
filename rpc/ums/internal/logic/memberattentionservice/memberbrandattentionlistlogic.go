@@ -2,7 +2,7 @@ package memberattentionservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -31,33 +31,36 @@ func NewMemberBrandAttentionListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberBrandAttentionListLogic) MemberBrandAttentionList(in *umsclient.MemberBrandAttentionListReq) (*umsclient.MemberBrandAttentionListResp, error) {
-	attentionList, count, err := l.svcCtx.UmsMemberBrandAttentionModel.FindAll(l.ctx, in)
+	q := query.UmsMemberBrandAttention.WithContext(l.ctx)
+	if in.MemberId != 0 {
+		q = q.Where(query.UmsMemberBrandAttention.MemberID.Eq(in.MemberId))
+	}
+
+	result, err := q.Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logc.Errorf(l.ctx, "查询品牌关注列表失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询品牌关注列表失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*umsclient.MemberBrandAttentionListData
-	for _, item := range *attentionList {
+	for _, item := range result {
 
 		list = append(list, &umsclient.MemberBrandAttentionListData{
-			Id:             item.Id,
-			MemberId:       item.MemberId,
+			Id:             item.ID,
+			MemberId:       item.MemberID,
 			MemberNickName: item.MemberNickName,
 			MemberIcon:     item.MemberIcon,
-			BrandId:        item.BrandId,
+			BrandId:        item.BrandID,
 			BrandName:      item.BrandName,
 			BrandLogo:      item.BrandLogo,
-			BrandCity:      item.BrandCity.String,
+			BrandCity:      *item.BrandCity,
 			CreateTime:     item.CreateTime.Format("2006-01-02 15:04:05"),
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logc.Infof(l.ctx, "查询商品类别列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询商品类别列表信息,参数：%+v,响应：%+v", in, list)
 	return &umsclient.MemberBrandAttentionListResp{
 		Total: count,
 		List:  list,

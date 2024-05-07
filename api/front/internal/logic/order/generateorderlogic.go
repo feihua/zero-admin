@@ -281,7 +281,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		Note:                  "",                                       //
 		ConfirmStatus:         0,                                        //确认收货状态：0->未确认；1->已确认
 		DeleteStatus:          0,                                        //删除状态：0->未删除；1->已删除
-		UseIntegration:        req.UseIntegration,                       //下单时使用的积分
+		UseIntegration:        int64(req.UseIntegration),                //下单时使用的积分
 		OrderItemList:         orderItemList,                            //
 	}
 	//9.转化为订单信息并插入数据库(插入order表和order_item表)
@@ -304,7 +304,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	}
 	//11.如果使用积分,需要扣除积分
 	i := memberInfo.Integration - req.UseIntegration
-	_, err = l.svcCtx.MemberService.UpdateMemberIntegration(l.ctx, &umsclient.UpdateMemberIntegrationReq{Id: memberId, Integration: i})
+	_, err = l.svcCtx.MemberService.UpdateMemberIntegration(l.ctx, &umsclient.UpdateMemberIntegrationReq{Id: memberId, Integration: int64(i)})
 	if err != nil {
 		return result(1, "扣除积分异常"), nil
 	}

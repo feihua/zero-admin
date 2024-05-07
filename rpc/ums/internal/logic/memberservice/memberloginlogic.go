@@ -4,7 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -34,9 +35,10 @@ func NewMemberLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Membe
 
 func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient.MemberLoginResp, error) {
 
+	q := query.UmsMember
 	//1.校验参数
 	//根据用户名查询账号
-	member, _ := l.svcCtx.UmsMemberModel.FindMemberByNameOrPhone(l.ctx, in.Account, in.Account)
+	member, _ := q.WithContext(l.ctx).Where(q.Username.Eq(in.Account)).Or(q.Phone.Eq(in.Account)).First()
 	if member == nil {
 		logc.Errorf(l.ctx, "账号不存在,参数:%s", in.Account)
 		return nil, errors.New("账号不存在")
@@ -49,33 +51,28 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 	}
 
 	//2.添加登录日志
-	insertLoginLog(l, member, in.Ip)
+	log := &model.UmsMemberLoginLog{
+		MemberID:   member.ID,
+		CreateTime: time.Now(),
+		IP:         in.Ip,
+		City:       *member.City,
+		LoginType:  0,
+		Province:   "",
+	}
+	_ = query.UmsMemberLoginLog.WithContext(l.ctx).Create(log)
 
 	//3.返回数据
 	accessExpire := l.svcCtx.Config.JWT.AccessExpire
 	secret := l.svcCtx.Config.JWT.AccessSecret
-	token, err := createJwtToken(secret, member.Username, member.Phone, accessExpire, member.Id)
+	token, err := createJwtToken(secret, member.Username, member.Phone, accessExpire, member.ID)
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logc.Errorf(l.ctx, "生成token失败,参数:%s,异常:%s", reqStr, err.Error())
+		in, _ := json.Marshal(in)
+		logc.Errorf(l.ctx, "生成token失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	return &umsclient.MemberLoginResp{
 		Token: token,
 	}, nil
-}
-
-// 插入登录日志
-func insertLoginLog(l *MemberLoginLogic, m *umsmodel.UmsMember, Ip string) {
-	memberLoginLog := &umsmodel.UmsMemberLoginLog{
-		MemberId:   m.Id,
-		CreateTime: time.Now(),
-		Ip:         Ip,
-		City:       m.City.String,
-		LoginType:  0,
-		Province:   "",
-	}
-	_, _ = l.svcCtx.UmsMemberLoginLogModel.Insert(l.ctx, memberLoginLog)
 }

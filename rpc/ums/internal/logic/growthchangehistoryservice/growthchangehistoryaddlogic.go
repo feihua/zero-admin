@@ -2,8 +2,8 @@ package growthchangehistoryservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"time"
 
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// GrowthChangeHistoryAddLogic 成长值变化历史记录
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 9:11
+*/
 type GrowthChangeHistoryAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,20 +31,20 @@ func NewGrowthChangeHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
+// GrowthChangeHistoryAdd 添加成长值变化历史记录
 func (l *GrowthChangeHistoryAddLogic) GrowthChangeHistoryAdd(in *umsclient.GrowthChangeHistoryAddReq) (*umsclient.GrowthChangeHistoryAddResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	_, err := l.svcCtx.UmsGrowthChangeHistoryModel.Insert(l.ctx, &umsmodel.UmsGrowthChangeHistory{
-		MemberId:    in.MemberId,
-		CreateTime:  CreateTime,
+	err := query.UmsGrowthChangeHistory.WithContext(l.ctx).Create(&model.UmsGrowthChangeHistory{
+		MemberID:    in.MemberId,
+		CreateTime:  time.Now(),
 		ChangeType:  in.ChangeType,
 		ChangeCount: in.ChangeCount,
 		OperateMan:  in.OperateMan,
-		OperateNote: sql.NullString{String: in.OperateNote, Valid: true},
+		OperateNote: &in.OperateNote,
 		SourceType:  in.SourceType,
 	})
+
 	if err != nil {
 		return nil, err
 	}
-
 	return &umsclient.GrowthChangeHistoryAddResp{}, nil
 }

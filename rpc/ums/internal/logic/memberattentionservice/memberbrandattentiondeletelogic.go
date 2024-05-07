@@ -2,6 +2,7 @@ package memberattentionservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -30,8 +31,8 @@ func NewMemberBrandAttentionDeleteLogic(ctx context.Context, svcCtx *svc.Service
 
 // MemberBrandAttentionDelete 取消关注
 func (l *MemberBrandAttentionDeleteLogic) MemberBrandAttentionDelete(in *umsclient.MemberBrandAttentionDeleteReq) (*umsclient.MemberBrandAttentionDeleteResp, error) {
-	err := l.svcCtx.UmsMemberBrandAttentionModel.DeleteByIdAndMemberId(l.ctx, in.Id, in.MemberId)
-
+	q := query.UmsMemberBrandAttention
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).Delete()
 	if err != nil {
 		return nil, err
 	}

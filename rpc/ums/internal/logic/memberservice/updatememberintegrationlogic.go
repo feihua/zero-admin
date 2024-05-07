@@ -2,6 +2,7 @@ package memberservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -30,8 +31,8 @@ func NewUpdateMemberIntegrationLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // UpdateMemberIntegration 更新会员积分
 func (l *UpdateMemberIntegrationLogic) UpdateMemberIntegration(in *umsclient.UpdateMemberIntegrationReq) (*umsclient.UpdateMemberIntegrationResp, error) {
-	err := l.svcCtx.UmsMemberModel.UpdateMemberIntegration(l.ctx, in.Id, in.Integration)
-
+	q := query.UmsMember
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Update(q.Integration, in.Integration)
 	if err != nil {
 		return nil, err
 	}

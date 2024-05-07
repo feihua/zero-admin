@@ -31,8 +31,8 @@ func (l *MemberRuleSettingUpdateLogic) MemberRuleSettingUpdate(req types.UpdateM
 		Id:                req.Id,
 		ContinueSignDay:   req.ContinueSignDay,
 		ContinueSignPoint: req.ContinueSignPoint,
-		ConsumePerPoint:   int64(req.ConsumePerPoint),
-		LowOrderAmount:    int64(req.LowOrderAmount),
+		ConsumePerPoint:   req.ConsumePerPoint,
+		LowOrderAmount:    req.LowOrderAmount,
 		MaxPointPerOrder:  req.MaxPointPerOrder,
 		Type:              req.Type,
 	})

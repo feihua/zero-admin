@@ -10,7 +10,7 @@ create table ums_member_read_history
     product_pic       varchar(200)                        not null comment '商品图片',
     product_sub_title varchar(128)                        null comment '商品标题',
     product_price     decimal(10, 2)                      not null comment '商品价格',
-    create_time       timestamp default CURRENT_TIMESTAMP null comment '浏览时间'
+    create_time timestamp default CURRENT_TIMESTAMP not null comment '浏览时间'
 )
     comment '用户商品浏览历史记录';
 

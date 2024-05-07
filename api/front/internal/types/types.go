@@ -168,7 +168,7 @@ type CarItemtPromotionListData struct {
 	MemberNickname    string  `json:"memberNickname"`    // 会员昵称
 	CreateDate        string  `json:"createDate"`        // 创建时间
 	ModifyDate        string  `json:"modifyDate"`        // 修改时间
-	DeleteStatus      int64   `json:"deleteStatus"`      // 是否删除
+	DeleteStatus      int32   `json:"deleteStatus"`      // 是否删除
 	ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
 	ProductBrand      string  `json:"productBrand"`
 	ProductSn         string  `json:"productSn"`
@@ -326,7 +326,7 @@ type CartPromotionItemList struct {
 	MemberNickname    string  `json:"memberNickname"`    // 会员昵称
 	CreateDate        string  `json:"createDate"`        // 创建时间
 	ModifyDate        string  `json:"modifyDate"`        // 修改时间
-	DeleteStatus      int64   `json:"deleteStatus"`      // 是否删除
+	DeleteStatus      int32   `json:"deleteStatus"`      // 是否删除
 	ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
 	ProductBrand      string  `json:"productBrand"`
 	ProductSn         string  `json:"productSn"`
@@ -472,7 +472,7 @@ type GenerateOrderReq struct {
 	CouponId               int64   `json:"couponId"`               //优惠券id
 	MemberReceiveAddressId int64   `json:"memberReceiveAddressId"` //
 	PayType                int64   `json:"payType"`                //支付方式
-	UseIntegration         int64   `json:"useIntegration"`         //使用的积分
+	UseIntegration         int32   `json:"useIntegration"`         //使用的积分
 }
 
 type GenerateOrderResp struct {
@@ -503,10 +503,10 @@ type InfoResp struct {
 
 type IntegrationConsumeSetting struct {
 	Id                 int64 `json:"id"`
-	DeductionPerAmount int64 `json:"deductionPerAmount"`
-	MaxPercentPerOrder int64 `json:"maxPercentPerOrder"`
-	UseUnit            int64 `json:"useUnit"`
-	CouponStatus       int64 `json:"couponStatus"`
+	DeductionPerAmount int32 `json:"deductionPerAmount"`
+	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"`
+	UseUnit            int32 `json:"useUnit"`
+	CouponStatus       int32 `json:"couponStatus"`
 }
 
 type ListAttentionData struct {
@@ -579,7 +579,7 @@ type ListMemberAddressData struct {
 	MemberId      int64  `json:"memberId"`
 	Name          string `json:"name"` // 收货人名称
 	PhoneNumber   string `json:"phoneNumber"`
-	DefaultStatus int64  `json:"defaultStatus"` // 是否为默认
+	DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
 	PostCode      string `json:"postCode"`      // 邮政编码
 	Province      string `json:"province"`      // 省份/直辖市
 	City          string `json:"city"`          // 城市
@@ -709,20 +709,20 @@ type MemberData struct {
 	Username              string `json:"username"`              // 用户名
 	Nickname              string `json:"nickname"`              // 昵称
 	Phone                 string `json:"phone"`                 // 手机号码
-	Status                int64  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
+	Status                int32  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
 	CreateTime            string `json:"createTime"`            // 注册时间
 	Icon                  string `json:"icon"`                  // 头像
-	Gender                int64  `json:"gender"`                // 性别：0->未知；1->男；2->女
+	Gender                int32  `json:"gender"`                // 性别：0->未知；1->男；2->女
 	Birthday              string `json:"birthday"`              // 生日
 	City                  string `json:"city"`                  // 所做城市
 	Job                   string `json:"job"`                   // 职业
 	PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
-	SourceType            int64  `json:"sourceType"`            // 用户来源
-	Integration           int64  `json:"integration"`           // 积分
-	Growth                int64  `json:"growth"`                // 成长值
-	LuckeyCount           int64  `json:"luckeyCount"`           // 剩余抽奖次数
-	HistoryIntegration    int64  `json:"historyIntegration"`    // 历史积分数量
-	CouponCount           int64  `json:"couponCount"`           // 优惠券数量
+	SourceType            int32  `json:"sourceType"`            // 用户来源
+	Integration           int32  `json:"integration"`           // 积分
+	Growth                int32  `json:"growth"`                // 成长值
+	LuckeyCount           int32  `json:"luckeyCount"`           // 剩余抽奖次数
+	HistoryIntegration    int32  `json:"historyIntegration"`    // 历史积分数量
+	CouponCount           int32  `json:"couponCount"`           // 优惠券数量
 }
 
 type MemberReceiveAddressList struct {
@@ -730,7 +730,7 @@ type MemberReceiveAddressList struct {
 	MemberId      int64  `json:"memberId"`
 	Name          string `json:"name"`
 	PhoneNumber   string `json:"phoneNumber"`
-	DefaultStatus int64  `json:"defaultStatus"`
+	DefaultStatus int32  `json:"defaultStatus"`
 	PostCode      string `json:"postCode"`
 	Province      string `json:"province"`
 	City          string `json:"city"`
@@ -1200,7 +1200,7 @@ type UpdateMemberAddressReq struct {
 	Id            int64  `json:"id"`
 	Name          string `json:"name"` // 收货人名称
 	PhoneNumber   string `json:"phoneNumber"`
-	DefaultStatus int64  `json:"defaultStatus"` // 是否为默认
+	DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
 	PostCode      string `json:"postCode"`      // 邮政编码
 	Province      string `json:"province"`      // 省份/直辖市
 	City          string `json:"city"`          // 城市
@@ -1220,19 +1220,19 @@ type UpdateMemberReq struct {
 	Password              string `json:"password"`              // 密码
 	Nickname              string `json:"nickname"`              // 昵称
 	Phone                 string `json:"phone"`                 // 手机号码
-	Status                int64  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
+	Status                int32  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
 	CreateTime            string `json:"createTime"`            // 注册时间
 	Icon                  string `json:"icon"`                  // 头像
-	Gender                int64  `json:"gender"`                // 性别：0->未知；1->男；2->女
+	Gender                int32  `json:"gender"`                // 性别：0->未知；1->男；2->女
 	Birthday              string `json:"birthday"`              // 生日
 	City                  string `json:"city"`                  // 所做城市
 	Job                   string `json:"job"`                   // 职业
 	PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
-	SourceType            int64  `json:"sourceType"`            // 用户来源
-	Integration           int64  `json:"integration"`           // 积分
-	Growth                int64  `json:"growth"`                // 成长值
-	LuckeyCount           int64  `json:"luckeyCount"`           // 剩余抽奖次数
-	HistoryIntegration    int64  `json:"historyIntegration"`    // 历史积分数量
+	SourceType            int32  `json:"sourceType"`            // 用户来源
+	Integration           int32  `json:"integration"`           // 积分
+	Growth                int32  `json:"growth"`                // 成长值
+	LuckeyCount           int32  `json:"luckeyCount"`           // 剩余抽奖次数
+	HistoryIntegration    int32  `json:"historyIntegration"`    // 历史积分数量
 }
 
 type UpdateMemberResp struct {
@@ -1273,7 +1273,7 @@ type AddCouponResp struct {
 type AddMemberAddressReq struct {
 	Name          string `json:"name"` // 收货人名称
 	PhoneNumber   string `json:"phoneNumber"`
-	DefaultStatus int64  `json:"defaultStatus"` // 是否为默认
+	DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
 	PostCode      string `json:"postCode"`      // 邮政编码
 	Province      string `json:"province"`      // 省份/直辖市
 	City          string `json:"city"`          // 城市

@@ -51,8 +51,6 @@ type (
 	MemberBrandAttentionListData            = umsclient.MemberBrandAttentionListData
 	MemberBrandAttentionListReq             = umsclient.MemberBrandAttentionListReq
 	MemberBrandAttentionListResp            = umsclient.MemberBrandAttentionListResp
-	MemberBrandAttentionUpdateReq           = umsclient.MemberBrandAttentionUpdateReq
-	MemberBrandAttentionUpdateResp          = umsclient.MemberBrandAttentionUpdateResp
 	MemberByIdReq                           = umsclient.MemberByIdReq
 	MemberDeleteReq                         = umsclient.MemberDeleteReq
 	MemberDeleteResp                        = umsclient.MemberDeleteResp
@@ -75,8 +73,6 @@ type (
 	MemberLoginLogListData                  = umsclient.MemberLoginLogListData
 	MemberLoginLogListReq                   = umsclient.MemberLoginLogListReq
 	MemberLoginLogListResp                  = umsclient.MemberLoginLogListResp
-	MemberLoginLogUpdateReq                 = umsclient.MemberLoginLogUpdateReq
-	MemberLoginLogUpdateResp                = umsclient.MemberLoginLogUpdateResp
 	MemberLoginReq                          = umsclient.MemberLoginReq
 	MemberLoginResp                         = umsclient.MemberLoginResp
 	MemberMemberTagRelationAddReq           = umsclient.MemberMemberTagRelationAddReq
@@ -104,8 +100,6 @@ type (
 	MemberProductCollectionListData         = umsclient.MemberProductCollectionListData
 	MemberProductCollectionListReq          = umsclient.MemberProductCollectionListReq
 	MemberProductCollectionListResp         = umsclient.MemberProductCollectionListResp
-	MemberProductCollectionUpdateReq        = umsclient.MemberProductCollectionUpdateReq
-	MemberProductCollectionUpdateResp       = umsclient.MemberProductCollectionUpdateResp
 	MemberReadHistoryAddReq                 = umsclient.MemberReadHistoryAddReq
 	MemberReadHistoryAddResp                = umsclient.MemberReadHistoryAddResp
 	MemberReadHistoryDeleteReq              = umsclient.MemberReadHistoryDeleteReq
@@ -113,8 +107,6 @@ type (
 	MemberReadHistoryListData               = umsclient.MemberReadHistoryListData
 	MemberReadHistoryListReq                = umsclient.MemberReadHistoryListReq
 	MemberReadHistoryListResp               = umsclient.MemberReadHistoryListResp
-	MemberReadHistoryUpdateReq              = umsclient.MemberReadHistoryUpdateReq
-	MemberReadHistoryUpdateResp             = umsclient.MemberReadHistoryUpdateResp
 	MemberReceiveAddressAddReq              = umsclient.MemberReceiveAddressAddReq
 	MemberReceiveAddressAddResp             = umsclient.MemberReceiveAddressAddResp
 	MemberReceiveAddressDeleteReq           = umsclient.MemberReceiveAddressDeleteReq

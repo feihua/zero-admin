@@ -2,8 +2,8 @@ package memberproductcollectionservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -33,17 +33,18 @@ func NewMemberProductCollectionAddLogic(ctx context.Context, svcCtx *svc.Service
 
 // MemberProductCollectionAdd 添加收藏商品
 func (l *MemberProductCollectionAddLogic) MemberProductCollectionAdd(in *umsclient.MemberProductCollectionAddReq) (*umsclient.MemberProductCollectionAddResp, error) {
-	_, err := l.svcCtx.UmsMemberProductCollectionModel.Insert(l.ctx, &umsmodel.UmsMemberProductCollection{
-		MemberId:        in.MemberId,
+	err := query.UmsMemberProductCollection.WithContext(l.ctx).Create(&model.UmsMemberProductCollection{
+		MemberID:        in.MemberId,
 		MemberNickName:  in.MemberNickName,
 		MemberIcon:      in.MemberIcon,
-		ProductId:       in.ProductId,
+		ProductID:       in.ProductId,
 		ProductName:     in.ProductName,
 		ProductPic:      in.ProductPic,
-		ProductSubTitle: sql.NullString{String: in.ProductSubTitle, Valid: true},
+		ProductSubTitle: &in.ProductSubTitle,
 		ProductPrice:    in.ProductPrice,
 		CreateTime:      time.Now(),
 	})
+
 	if err != nil {
 		return nil, err
 	}

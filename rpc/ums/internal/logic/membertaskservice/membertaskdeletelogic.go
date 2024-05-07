@@ -2,6 +2,7 @@ package membertaskservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberTaskDeleteLogic 会员任务
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 9:20
+*/
 type MemberTaskDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +29,10 @@ func NewMemberTaskDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
+// MemberTaskDelete 删除会员任务
 func (l *MemberTaskDeleteLogic) MemberTaskDelete(in *umsclient.MemberTaskDeleteReq) (*umsclient.MemberTaskDeleteResp, error) {
-	err := l.svcCtx.UmsMemberTaskModel.DeleteByIds(l.ctx, in.Ids)
-
+	q := query.UmsMemberTask
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
 		return nil, err
 	}

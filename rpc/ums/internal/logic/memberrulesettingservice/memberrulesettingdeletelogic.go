@@ -2,6 +2,7 @@ package memberrulesettingservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberRuleSettingDeleteLogic 会员积分成长规则
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 9:23
+*/
 type MemberRuleSettingDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +29,10 @@ func NewMemberRuleSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// MemberRuleSettingDelete 删除会员积分成长规则
 func (l *MemberRuleSettingDeleteLogic) MemberRuleSettingDelete(in *umsclient.MemberRuleSettingDeleteReq) (*umsclient.MemberRuleSettingDeleteResp, error) {
-	err := l.svcCtx.UmsMemberRuleSettingModel.DeleteByIds(l.ctx, in.Ids)
-
+	q := query.UmsMemberRuleSetting
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
 		return nil, err
 	}

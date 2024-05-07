@@ -32,11 +32,6 @@ func (s *MemberAttentionServiceServer) MemberBrandAttentionDelete(ctx context.Co
 	return l.MemberBrandAttentionDelete(in)
 }
 
-func (s *MemberAttentionServiceServer) MemberBrandAttentionUpdate(ctx context.Context, in *umsclient.MemberBrandAttentionUpdateReq) (*umsclient.MemberBrandAttentionUpdateResp, error) {
-	l := memberattentionservicelogic.NewMemberBrandAttentionUpdateLogic(ctx, s.svcCtx)
-	return l.MemberBrandAttentionUpdate(in)
-}
-
 func (s *MemberAttentionServiceServer) MemberBrandAttentionClear(ctx context.Context, in *umsclient.MemberBrandAttentionClearReq) (*umsclient.MemberBrandAttentionClearResp, error) {
 	l := memberattentionservicelogic.NewMemberBrandAttentionClearLogic(ctx, s.svcCtx)
 	return l.MemberBrandAttentionClear(in)

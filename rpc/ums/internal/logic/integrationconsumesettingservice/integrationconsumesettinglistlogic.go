@@ -2,9 +2,10 @@ package integrationconsumesettingservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,20 +25,21 @@ func NewIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *umsclient.IntegrationConsumeSettingListReq) (*umsclient.IntegrationConsumeSettingListResp, error) {
-	all, err := l.svcCtx.UmsIntegrationConsumeSettingModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.UmsIntegrationConsumeSettingModel.Count(l.ctx)
+	q := query.UmsIntegrationConsumeSetting.WithContext(l.ctx)
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询积分消费设置列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询积分消费设置列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*umsclient.IntegrationConsumeSettingListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &umsclient.IntegrationConsumeSettingListData{
-			Id:                 item.Id,
+			Id:                 item.ID,
 			DeductionPerAmount: item.DeductionPerAmount,
 			MaxPercentPerOrder: item.MaxPercentPerOrder,
 			UseUnit:            item.UseUnit,
@@ -45,9 +47,7 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *u
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询积分消费设置列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询积分消费设置列表信息,参数：%+v,响应：%+v", in, list)
 	return &umsclient.IntegrationConsumeSettingListResp{
 		Total: count,
 		List:  list,

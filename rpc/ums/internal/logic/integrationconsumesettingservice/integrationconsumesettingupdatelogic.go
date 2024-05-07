@@ -2,7 +2,8 @@ package integrationconsumesettingservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/umsmodel"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// IntegrationConsumeSettingUpdateLogic 积分消费设置
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 10:03
+*/
 type IntegrationConsumeSettingUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,14 +30,16 @@ func NewIntegrationConsumeSettingUpdateLogic(ctx context.Context, svcCtx *svc.Se
 	}
 }
 
+// IntegrationConsumeSettingUpdate 更新积分消费设置
 func (l *IntegrationConsumeSettingUpdateLogic) IntegrationConsumeSettingUpdate(in *umsclient.IntegrationConsumeSettingUpdateReq) (*umsclient.IntegrationConsumeSettingUpdateResp, error) {
-	err := l.svcCtx.UmsIntegrationConsumeSettingModel.Update(l.ctx, &umsmodel.UmsIntegrationConsumeSetting{
-		Id:                 in.Id,
+	_, err := query.UmsIntegrationConsumeSetting.WithContext(l.ctx).Updates(&model.UmsIntegrationConsumeSetting{
+		ID:                 in.Id,
 		DeductionPerAmount: in.DeductionPerAmount,
 		MaxPercentPerOrder: in.MaxPercentPerOrder,
 		UseUnit:            in.UseUnit,
 		CouponStatus:       in.CouponStatus,
 	})
+
 	if err != nil {
 		return nil, err
 	}
