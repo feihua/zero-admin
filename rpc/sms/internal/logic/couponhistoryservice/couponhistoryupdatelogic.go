@@ -2,7 +2,8 @@ package couponhistoryservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
 
@@ -26,21 +27,21 @@ func NewCouponHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *CouponHistoryUpdateLogic) CouponHistoryUpdate(in *smsclient.CouponHistoryUpdateReq) (*smsclient.CouponHistoryUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	UseTime, _ := time.Parse("2006-01-02 15:04:05", in.UseTime)
-	err := l.svcCtx.SmsCouponHistoryModel.Update(l.ctx, &smsmodel.SmsCouponHistory{
-		Id:             in.Id,
-		CouponId:       in.CouponId,
-		MemberId:       in.MemberId,
+	q := query.SmsCouponHistory
+	_, err := q.WithContext(l.ctx).Updates(&model.SmsCouponHistory{
+		ID:             in.Id,
+		CouponID:       in.CouponId,
+		MemberID:       in.MemberId,
 		CouponCode:     in.CouponCode,
 		MemberNickname: in.MemberNickname,
 		GetType:        in.GetType,
-		CreateTime:     CreateTime,
+		CreateTime:     time.Now(),
 		UseStatus:      in.UseStatus,
-		UseTime:        UseTime,
-		OrderId:        in.OrderId,
+		UseTime:        time.Now(),
+		OrderID:        in.OrderId,
 		OrderSn:        in.OrderSn,
 	})
+
 	if err != nil {
 		return nil, err
 	}

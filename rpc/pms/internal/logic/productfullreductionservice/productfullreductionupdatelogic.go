@@ -2,7 +2,8 @@ package productfullreductionservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductFullReductionUpdateLogic 产品满减
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 11:01
+*/
 type ProductFullReductionUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,13 +30,16 @@ func NewProductFullReductionUpdateLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// ProductFullReductionUpdate 更新产品满减
 func (l *ProductFullReductionUpdateLogic) ProductFullReductionUpdate(in *pmsclient.ProductFullReductionUpdateReq) (*pmsclient.ProductFullReductionUpdateResp, error) {
-	err := l.svcCtx.PmsProductFullReductionModel.Update(l.ctx, &pmsmodel.PmsProductFullReduction{
-		Id:          in.Id,
-		ProductId:   in.ProductId,
+	q := query.PmsProductFullReduction
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductFullReduction{
+		ID:          in.Id,
+		ProductID:   in.ProductId,
 		FullPrice:   float64(in.FullPrice),
 		ReducePrice: float64(in.ReducePrice),
 	})
+
 	if err != nil {
 		return nil, err
 	}

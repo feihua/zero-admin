@@ -17,7 +17,7 @@ type SysDict struct {
 	Label       string     `gorm:"column:label;not null;comment:标签名" json:"label"`                               // 标签名
 	Type        string     `gorm:"column:type;not null;comment:类型" json:"type"`                                  // 类型
 	Description string     `gorm:"column:description;not null;comment:描述" json:"description"`                    // 描述
-	Sort        float64    `gorm:"column:sort;not null;comment:排序（升序）" json:"sort"`                              // 排序（升序）
+	Sort        int32      `gorm:"column:sort;not null;comment:排序（升序）" json:"sort"`                              // 排序（升序）
 	CreateBy    string     `gorm:"column:create_by;not null;comment:创建人" json:"create_by"`                       // 创建人
 	CreateTime  *time.Time `gorm:"column:create_time;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateBy    *string    `gorm:"column:update_by;comment:更新人" json:"update_by"`                                // 更新人

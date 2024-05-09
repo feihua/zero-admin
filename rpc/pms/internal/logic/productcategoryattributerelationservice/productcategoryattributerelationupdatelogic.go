@@ -2,7 +2,8 @@ package productcategoryattributerelationservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCategoryAttributeRelationUpdateLogic 产品分类和属性关糸
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:57
+*/
 type ProductCategoryAttributeRelationUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,12 +30,15 @@ func NewProductCategoryAttributeRelationUpdateLogic(ctx context.Context, svcCtx 
 	}
 }
 
+// ProductCategoryAttributeRelationUpdate 更新产品分类和属性关糸
 func (l *ProductCategoryAttributeRelationUpdateLogic) ProductCategoryAttributeRelationUpdate(in *pmsclient.ProductCategoryAttributeRelationUpdateReq) (*pmsclient.ProductCategoryAttributeRelationUpdateResp, error) {
-	err := l.svcCtx.PmsProductCategoryAttributeRelationModel.Update(l.ctx, &pmsmodel.PmsProductCategoryAttributeRelation{
-		Id:                 in.Id,
-		ProductCategoryId:  in.ProductCategoryId,
-		ProductAttributeId: in.ProductAttributeId,
+	q := query.PmsProductCategoryAttributeRelation
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductCategoryAttributeRelation{
+		ID:                 in.Id,
+		ProductCategoryID:  in.ProductCategoryId,
+		ProductAttributeID: in.ProductAttributeId,
 	})
+
 	if err != nil {
 		return nil, err
 	}

@@ -30,10 +30,10 @@ func (l *FeightTemplateAddLogic) FeightTemplateAdd(req types.AddFeightTemplateRe
 	_, err := l.svcCtx.FeightTemplateService.FeightTemplateAdd(l.ctx, &pmsclient.FeightTemplateAddReq{
 		Name:           req.Name,
 		ChargeType:     req.ChargeType,
-		FirstWeight:    int64(req.FirstWeight),
-		FirstFee:       int64(req.FirstFee),
-		ContinueWeight: int64(req.ContinueWeight),
-		ContinmeFee:    int64(req.FirstFee),
+		FirstWeight:    req.FirstWeight,
+		FirstFee:       req.FirstFee,
+		ContinueWeight: req.ContinueWeight,
+		ContinmeFee:    req.FirstFee,
 		Dest:           req.Dest,
 	})
 

@@ -2,6 +2,7 @@ package productcategoryservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCategoryDeleteLogic 商品类别
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 9:58
+*/
 type ProductCategoryDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewProductCategoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
+// ProductCategoryDelete 删除商品类别
 func (l *ProductCategoryDeleteLogic) ProductCategoryDelete(in *pmsclient.ProductCategoryDeleteReq) (*pmsclient.ProductCategoryDeleteResp, error) {
-	err := l.svcCtx.PmsProductCategoryModel.DeleteByIds(l.ctx, in.Ids)
+	q := query.PmsProductCategory
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
 		return nil, err

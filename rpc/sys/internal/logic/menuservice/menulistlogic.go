@@ -2,6 +2,7 @@ package menuservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -31,34 +32,36 @@ func NewMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuList
 
 // MenuList 菜单列表
 func (l *MenuListLogic) MenuList(in *sysclient.MenuListReq) (*sysclient.MenuListResp, error) {
-	count, _ := l.svcCtx.MenuModel.Count(l.ctx)
-	all, err := l.svcCtx.MenuModel.FindAll(l.ctx, 1, count)
+	q := query.SysMenu.WithContext(l.ctx)
+
+	result, err := q.Find()
+	count, err := q.Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 	var list []*sysclient.MenuListData
-	for _, menu := range *all {
+	for _, menu := range result {
 		list = append(list, &sysclient.MenuListData{
-			Id:             menu.Id,
-			Name:           menu.Name,
-			ParentId:       menu.ParentId,
-			Url:            menu.Url.String,
-			Perms:          menu.Perms.String,
-			Type:           menu.Type,
-			Icon:           menu.Icon.String,
-			OrderNum:       menu.OrderNum.Int64,
-			CreateBy:       menu.CreateBy,
-			CreateTime:     menu.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   menu.UpdateBy.String,
-			LastUpdateTime: menu.UpdateTime.Time.Format("2006-01-02 15:04:05"),
-			DelFlag:        menu.DelFlag,
-			VuePath:        menu.VuePath.String,
-			VueComponent:   menu.VueComponent.String,
-			VueIcon:        menu.VueIcon.String,
-			VueRedirect:    menu.VueRedirect.String,
-			BackgroundUrl:  menu.BackgroundUrl,
+			Id:            menu.ID,
+			Name:          menu.Name,
+			ParentId:      menu.ParentID,
+			Url:           *menu.URL,
+			Perms:         *menu.Perms,
+			Type:          menu.Type,
+			Icon:          *menu.Icon,
+			OrderNum:      menu.OrderNum,
+			CreateBy:      menu.CreateBy,
+			CreateTime:    menu.CreateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:      *menu.UpdateBy,
+			UpdateTime:    menu.UpdateTime.Format("2006-01-02 15:04:05"),
+			DelFlag:       menu.DelFlag,
+			VuePath:       *menu.VuePath,
+			VueComponent:  *menu.VueComponent,
+			VueIcon:       *menu.VueIcon,
+			VueRedirect:   *menu.VueRedirect,
+			BackgroundUrl: menu.BackgroundURL,
 		})
 	}
 

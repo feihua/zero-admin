@@ -2,6 +2,7 @@ package roleservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
@@ -29,15 +30,14 @@ func NewQueryMenuByRoleIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // QueryMenuByRoleId 查询角色权限
 func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(in *sysclient.QueryMenuByRoleIdReq) (*sysclient.QueryMenuByRoleIdResp, error) {
-	RoleMenus, _ := l.svcCtx.RoleMenuModel.FindByRoleId(l.ctx, in.Id)
+	var ids []int64
+	q := query.SysRoleMenu
+	err := q.WithContext(l.ctx).Select(q.MenuID).Where(q.RoleID.Eq(in.Id)).Scan(&ids)
 
-	var list []int64
-	for _, user := range *RoleMenus {
-
-		list = append(list, user.MenuId)
+	if err != nil {
+		return nil, err
 	}
-
 	return &sysclient.QueryMenuByRoleIdResp{
-		Ids: list,
+		Ids: ids,
 	}, nil
 }

@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/config"
-	configserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/configservice"
 	deptserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/deptservice"
 	dictserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/dictservice"
 	jobserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/jobservice"
@@ -41,7 +40,6 @@ func main() {
 		sysclient.RegisterDeptServiceServer(grpcServer, deptserviceServer.NewDeptServiceServer(ctx))
 		sysclient.RegisterLoginLogServiceServer(grpcServer, loginlogserviceServer.NewLoginLogServiceServer(ctx))
 		sysclient.RegisterSysLogServiceServer(grpcServer, syslogserviceServer.NewSysLogServiceServer(ctx))
-		sysclient.RegisterConfigServiceServer(grpcServer, configserviceServer.NewConfigServiceServer(ctx))
 		sysclient.RegisterJobServiceServer(grpcServer, jobserviceServer.NewJobServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {

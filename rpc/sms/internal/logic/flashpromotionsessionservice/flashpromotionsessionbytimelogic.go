@@ -2,7 +2,10 @@ package flashpromotionsessionservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
+	"time"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -25,30 +28,30 @@ func NewFlashPromotionSessionByTimeLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 func (l *FlashPromotionSessionByTimeLogic) FlashPromotionSessionByTime(in *smsclient.FlashPromotionSessionByTimeReq) (*smsclient.FlashPromotionSessionByTimeResp, error) {
-	all, err := l.svcCtx.SmsFlashPromotionSessionModel.FindAllByCurrentTime(l.ctx, in.CurrentTIme)
+	times := strings.Split(in.CurrentTIme, " ")[1]
+	currentTIme, _ := time.Parse("15:04:05", times)
+	q := query.SmsFlashPromotionSession
+	result, err := q.WithContext(l.ctx).Where(q.Status.Eq(1), q.StartTime.Lte(currentTIme), q.EndTime.Gte(currentTIme)).Find()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询限时购场次列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询限时购场次列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*smsclient.FlashPromotionSessionListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &smsclient.FlashPromotionSessionListData{
-			Id:         item.Id,
+			Id:         item.ID,
 			Name:       item.Name,
-			StartTime:  item.StartTime,
-			EndTime:    item.EndTime,
+			StartTime:  item.StartTime.Format("2006-01-02 15:04:05"),
+			EndTime:    item.EndTime.Format("2006-01-02 15:04:05"),
 			Status:     item.Status,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询限时购场次列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询限时购场次列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &smsclient.FlashPromotionSessionByTimeResp{}, nil
 }

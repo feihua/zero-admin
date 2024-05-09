@@ -2,9 +2,10 @@ package orderservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,22 +25,46 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderLi
 }
 
 func (l *OrderListLogic) OrderList(in *omsclient.OrderListReq) (*omsclient.OrderListResp, error) {
-	all, err := l.svcCtx.OmsOrderModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.OmsOrderModel.Count(l.ctx, in)
+	q := query.OmsOrder.WithContext(l.ctx)
+	if len(in.OrderSn) > 0 {
+		q = q.Where(query.OmsOrder.OrderSn.Like("%" + in.OrderSn + "%"))
+	}
+	if len(in.MemberUsername) > 0 {
+		q = q.Where(query.OmsOrder.OrderSn.Like("%" + in.MemberUsername + "%"))
+	}
+
+	if in.MemberId != 0 {
+		q = q.Where(query.OmsOrder.MemberID.Eq(in.MemberId))
+	}
+	if in.PayType != 3 {
+		q = q.Where(query.OmsOrder.PayType.Eq(in.PayType))
+	}
+	if in.SourceType != 2 {
+		q = q.Where(query.OmsOrder.SourceType.Eq(in.SourceType))
+	}
+	if in.Status != 6 {
+		q = q.Where(query.OmsOrder.Status.Eq(in.Status))
+	}
+	if in.OrderType != 2 {
+		q = q.Where(query.OmsOrder.OrderType.Eq(in.OrderType))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询订单列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询订单列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*omsclient.OrderListData
-	for _, order := range *all {
+	for _, order := range result {
 
 		list = append(list, &omsclient.OrderListData{
-			Id:                    order.Id,
-			MemberId:              order.MemberId,
-			CouponId:              order.CouponId,
+			Id:                    order.ID,
+			MemberId:              order.MemberID,
+			CouponId:              order.CouponID,
 			OrderSn:               order.OrderSn,
 			CreateTime:            order.CreateTime.Format("2006-01-02 15:04:05"),
 			MemberUsername:        order.MemberUsername,
@@ -81,14 +106,12 @@ func (l *OrderListLogic) OrderList(in *omsclient.OrderListReq) (*omsclient.Order
 			ReceiveTime:           order.ReceiveTime.Format("2006-01-02 15:04:05"),
 			CommentTime:           order.CommentTime.Format("2006-01-02 15:04:05"),
 			ModifyTime:            order.ModifyTime.Format("2006-01-02 15:04:05"),
-			ItemListData:          queryOrderItems(l, order.Id),
-			HistoryListData:       queryHistoryRecord(l, order.Id),
+			ItemListData:          queryOrderItems(l, order.ID),
+			HistoryListData:       queryHistoryRecord(l, order.ID),
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询订单列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询订单列表信息,参数：%+v,响应：%+v", in, list)
 	return &omsclient.OrderListResp{
 		Total: count,
 		List:  list,
@@ -96,23 +119,23 @@ func (l *OrderListLogic) OrderList(in *omsclient.OrderListReq) (*omsclient.Order
 }
 
 func queryOrderItems(l *OrderListLogic, OrderId int64) []*omsclient.OrderItemListData {
-	orderItem, _ := l.svcCtx.OmsOrderItemModel.FindAll(l.ctx, 1, 100, OrderId)
+	result, _ := query.OmsOrderItem.WithContext(l.ctx).Where(query.OmsOrderItem.OrderID.Eq(OrderId)).Find()
 	var itemListData []*omsclient.OrderItemListData
-	for _, item := range *orderItem {
+	for _, item := range result {
 		itemListData = append(itemListData, &omsclient.OrderItemListData{
-			Id:                item.Id,
-			OrderId:           item.OrderId,
+			Id:                item.ID,
+			OrderId:           item.OrderID,
 			OrderSn:           item.OrderSn,
-			ProductId:         item.ProductId,
+			ProductId:         item.ProductID,
 			ProductPic:        item.ProductPic,
 			ProductName:       item.ProductName,
 			ProductBrand:      item.ProductBrand,
 			ProductSn:         item.ProductSn,
 			ProductPrice:      float32(item.ProductPrice),
 			ProductQuantity:   item.ProductQuantity,
-			ProductSkuId:      item.ProductSkuId,
+			ProductSkuId:      item.ProductSkuID,
 			ProductSkuCode:    item.ProductSkuCode,
-			ProductCategoryId: item.ProductCategoryId,
+			ProductCategoryId: item.ProductCategoryID,
 			PromotionName:     item.PromotionName,
 			PromotionAmount:   float32(item.PromotionAmount),
 			CouponAmount:      float32(item.CouponAmount),
@@ -128,17 +151,17 @@ func queryOrderItems(l *OrderListLogic, OrderId int64) []*omsclient.OrderItemLis
 
 // 获取操作记录
 func queryHistoryRecord(l *OrderListLogic, OrderId int64) []*omsclient.OrderOperateHistoryListData {
-	history, _ := l.svcCtx.OmsOrderOperateHistoryModel.FindAll(l.ctx, 1, 100, OrderId)
+	result, _ := query.OmsOrderOperateHistory.WithContext(l.ctx).Where(query.OmsOrderOperateHistory.OrderID.Eq(OrderId)).Find()
 	var historyListData []*omsclient.OrderOperateHistoryListData
 
-	for _, operateHistory := range *history {
+	for _, operateHistory := range result {
 		historyListData = append(historyListData, &omsclient.OrderOperateHistoryListData{
-			Id:          operateHistory.Id,
-			OrderId:     operateHistory.OrderId,
+			Id:          operateHistory.ID,
+			OrderId:     operateHistory.OrderID,
 			OperateMan:  operateHistory.OperateMan,
 			CreateTime:  operateHistory.CreateTime.Format("2006-01-02 15:04:05"),
 			OrderStatus: operateHistory.OrderStatus,
-			Note:        operateHistory.Note.String,
+			Note:        *operateHistory.Note,
 		})
 	}
 	return historyListData

@@ -3,12 +3,19 @@ package orderreturnapplyservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderReturnApplyListLogic 退货申请
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 9:32
+*/
 type OrderReturnApplyListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,28 +30,48 @@ func NewOrderReturnApplyListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// OrderReturnApplyList 查询退货申请列表
 func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *omsclient.OrderReturnApplyListReq) (*omsclient.OrderReturnApplyListResp, error) {
-	all, err := l.svcCtx.OmsOrderReturnApplyModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.OmsOrderReturnApplyModel.Count(l.ctx, in)
+	q := query.OmsOrderReturnApply.WithContext(l.ctx)
+	if len(in.OrderSn) > 0 {
+		q = q.Where(query.OmsOrderReturnApply.OrderSn.Like("%" + in.OrderSn + "%"))
+	}
+	if len(in.MemberUsername) > 0 {
+		q = q.Where(query.OmsOrderReturnApply.OrderSn.Like("%" + in.MemberUsername + "%"))
+	}
+
+	if in.Status != 4 {
+		q = q.Where(query.OmsOrderReturnApply.Status.Eq(in.Status))
+	}
+	//if len(in.CreateTime) > 0 {
+	//	q.Where(query.OmsOrderReturnApply.CreateTime.Eq(in.CreateTime))
+	//}
+	//if len(in.HandleTime) > 0 {
+	//	q.Where(query.OmsOrderReturnApply.HandleTime.(in.HandleTime))
+	//}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询退货申请列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		in, _ := json.Marshal(in)
+		logc.Errorf(l.ctx, "查询退货申请列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*omsclient.OrderReturnApplyListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &omsclient.OrderReturnApplyListData{
-			Id:               item.Id,
-			OrderId:          item.OrderId,
-			CompanyAddressId: item.CompanyAddressId,
-			ProductId:        item.ProductId,
+			Id:               item.ID,
+			OrderId:          item.OrderID,
+			CompanyAddressId: item.CompanyAddressID,
+			ProductId:        item.ProductID,
 			OrderSn:          item.OrderSn,
 			CreateTime:       item.CreateTime.Format("2006-01-02 15:04:05"),
 			MemberUsername:   item.MemberUsername,
-			ReturnAmount:     int64(item.ReturnAmount),
+			ReturnAmount:     float32(item.ReturnAmount),
 			ReturnName:       item.ReturnName,
 			ReturnPhone:      item.ReturnPhone,
 			Status:           item.Status,
@@ -54,8 +81,8 @@ func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *omsclient.OrderRetu
 			ProductBrand:     item.ProductBrand,
 			ProductAttr:      item.ProductAttr,
 			ProductCount:     item.ProductCount,
-			ProductPrice:     int64(item.ProductPrice),
-			ProductRealPrice: int64(item.ProductRealPrice),
+			ProductPrice:     float32(item.ProductPrice),
+			ProductRealPrice: float32(item.ProductRealPrice),
 			Reason:           item.Reason,
 			Description:      item.Description,
 			ProofPics:        item.ProofPics,
@@ -63,13 +90,11 @@ func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *omsclient.OrderRetu
 			HandleMan:        item.HandleMan,
 			ReceiveMan:       item.ReceiveMan,
 			ReceiveTime:      item.ReceiveTime.Format("2006-01-02 15:04:05"),
-			ReceiveNote:      item.ReceiveNote.String,
+			ReceiveNote:      *item.ReceiveNote,
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询退货申请列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询退货申请列表信息,参数：%+v,响应：%+v", in, list)
 	return &omsclient.OrderReturnApplyListResp{
 		Total: count,
 		List:  list,

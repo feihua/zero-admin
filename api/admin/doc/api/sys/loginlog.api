@@ -18,8 +18,8 @@ type (
 		Ip             string `json:"ip"`             // IP地址
 		CreateBy       string `json:"createBy"`       // 创建人
 		CreateTime     string `json:"createTime"`     // 创建时间
-		LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
-		LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
+        UpdateBy string `json:"updateBy"`             // 更新人
+        UpdateTime string `json:"updateTime"`         // 更新时间
 	}
 	ListLoginLogResp {
 		Code     string              `json:"code"`

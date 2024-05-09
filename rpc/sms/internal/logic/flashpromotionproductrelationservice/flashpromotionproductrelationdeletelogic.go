@@ -2,6 +2,7 @@ package flashpromotionproductrelationservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionProductRelationDeleteLogic 限时购与产品关糸
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:13
+*/
 type FlashPromotionProductRelationDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewFlashPromotionProductRelationDeleteLogic(ctx context.Context, svcCtx *sv
 	}
 }
 
+// FlashPromotionProductRelationDelete 删除限时购与产品关糸
 func (l *FlashPromotionProductRelationDeleteLogic) FlashPromotionProductRelationDelete(in *smsclient.FlashPromotionProductRelationDeleteReq) (*smsclient.FlashPromotionProductRelationDeleteResp, error) {
-	err := l.svcCtx.SmsFlashPromotionProductRelationModel.DeleteByIds(l.ctx, in.Ids)
+	q := query.SmsFlashPromotionProductRelation
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
 		return nil, err

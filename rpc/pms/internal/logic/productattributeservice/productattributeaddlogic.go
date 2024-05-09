@@ -2,7 +2,8 @@ package productattributeservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductAttributeAddLogic 商品属性
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:51
+*/
 type ProductAttributeAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,9 +30,10 @@ func NewProductAttributeAddLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// ProductAttributeAdd 添加商品属性
 func (l *ProductAttributeAddLogic) ProductAttributeAdd(in *pmsclient.ProductAttributeAddReq) (*pmsclient.ProductAttributeAddResp, error) {
-	_, err := l.svcCtx.PmsProductAttributeModel.Insert(l.ctx, &pmsmodel.PmsProductAttribute{
-		ProductAttributeCategoryId: in.ProductAttributeCategoryId,
+	err := query.PmsProductAttribute.WithContext(l.ctx).Create(&model.PmsProductAttribute{
+		ProductAttributeCategoryID: in.ProductAttributeCategoryId,
 		Name:                       in.Name,
 		SelectType:                 in.SelectType,
 		InputType:                  in.InputType,
@@ -38,6 +45,7 @@ func (l *ProductAttributeAddLogic) ProductAttributeAdd(in *pmsclient.ProductAttr
 		HandAddStatus:              in.HandAddStatus,
 		Type:                       in.Type,
 	})
+
 	if err != nil {
 		return nil, err
 	}

@@ -2,7 +2,8 @@ package loginlogservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"time"
 
@@ -32,14 +33,14 @@ func NewLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 
 // LoginLogAdd 添加登录日志
 func (l *LoginLogAddLogic) LoginLogAdd(in *sysclient.LoginLogAddReq) (*sysclient.LoginLogAddResp, error) {
-	loginLog := &sysmodel.SysLoginLog{
+	err := query.SysLoginLog.WithContext(l.ctx).Create(&model.SysLoginLog{
 		UserName:   in.UserName,
 		Status:     in.Status,
-		Ip:         in.Ip,
+		IP:         in.Ip,
 		CreateTime: time.Now(),
 		CreateBy:   in.CreateBy,
-	}
-	if _, err := l.svcCtx.LoginLogModel.Insert(l.ctx, loginLog); err != nil {
+	})
+	if err != nil {
 		return nil, err
 	}
 

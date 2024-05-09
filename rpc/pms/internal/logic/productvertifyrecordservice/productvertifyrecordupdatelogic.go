@@ -2,7 +2,8 @@ package productvertifyrecordservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"time"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductVertifyRecordUpdateLogic 商品审核
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 11:09
+*/
 type ProductVertifyRecordUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,16 +31,18 @@ func NewProductVertifyRecordUpdateLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// ProductVertifyRecordUpdate 更新商品审核
 func (l *ProductVertifyRecordUpdateLogic) ProductVertifyRecordUpdate(in *pmsclient.ProductVertifyRecordUpdateReq) (*pmsclient.ProductVertifyRecordUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.PmsProductVertifyRecordModel.Update(l.ctx, &pmsmodel.PmsProductVertifyRecord{
-		Id:         in.Id,
-		ProductId:  in.ProductId,
-		CreateTime: CreateTime,
+	q := query.PmsProductVertifyRecord
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductVertifyRecord{
+		ID:         in.Id,
+		ProductID:  in.ProductId,
+		CreateTime: time.Now(),
 		VertifyMan: in.VertifyMan,
 		Status:     in.Status,
 		Detail:     in.Detail,
 	})
+
 	if err != nil {
 		return nil, err
 	}

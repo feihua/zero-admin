@@ -2,9 +2,10 @@ package homeadvertiseservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,20 +25,38 @@ func NewHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *smsclient.HomeAdvertiseListReq) (*smsclient.HomeAdvertiseListResp, error) {
-	all, err := l.svcCtx.SmsHomeAdvertiseModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.SmsHomeAdvertiseModel.Count(l.ctx, in)
+	q := query.SmsHomeAdvertise.WithContext(l.ctx)
+	if len(in.Name) > 0 {
+		q = q.Where(query.SmsHomeAdvertise.Name.Like("%" + in.Name + "%"))
+	}
+
+	if in.Type != 2 {
+		q = q.Where(query.SmsHomeAdvertise.Type.Eq(in.Type))
+	}
+	if in.Status != 2 {
+		q = q.Where(query.SmsHomeAdvertise.Status.Eq(in.Status))
+	}
+
+	//if len(in.StartTime) > 0 {
+	//		where = where + fmt.Sprintf(" AND start_time >= '%s'", in.StartTime)
+	//	}
+	//	if len(in.EndTime) > 0 {
+	//		where = where + fmt.Sprintf(" AND end_time <= '%s'", in.EndTime)
+	//	}
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询首页广告列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询首页广告列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*smsclient.HomeAdvertiseListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &smsclient.HomeAdvertiseListData{
-			Id:         item.Id,
+			Id:         item.ID,
 			Name:       item.Name,
 			Type:       item.Type,
 			Pic:        item.Pic,
@@ -46,15 +65,13 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *smsclient.HomeAdvertiseLi
 			Status:     item.Status,
 			ClickCount: item.ClickCount,
 			OrderCount: item.OrderCount,
-			Url:        item.Url,
-			Note:       item.Note.String,
+			Url:        item.URL,
+			Note:       *item.Note,
 			Sort:       item.Sort,
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询首页广告列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询首页广告列表信息,参数：%+v,响应：%+v", in, list)
 	return &smsclient.HomeAdvertiseListResp{
 		Total: count,
 		List:  list,

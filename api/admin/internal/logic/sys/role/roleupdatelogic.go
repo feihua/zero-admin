@@ -34,11 +34,11 @@ func NewRoleUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleUpd
 // RoleUpdate 更新角色(id为1的是系统预留超级管理员角色,不能更新)
 func (l *RoleUpdateLogic) RoleUpdate(req types.UpdateRoleReq) (*types.UpdateRoleResp, error) {
 	roleUpdateReq := sysclient.RoleUpdateReq{
-		Id:           req.Id,
-		Name:         req.Name,
-		Remark:       req.Remark,
-		LastUpdateBy: l.ctx.Value("userName").(string),
-		Status:       req.Status,
+		Id:       req.Id,
+		Name:     req.Name,
+		Remark:   req.Remark,
+		UpdateBy: l.ctx.Value("userName").(string),
+		Status:   req.Status,
 	}
 	_, err := l.svcCtx.RoleService.RoleUpdate(l.ctx, &roleUpdateReq)
 

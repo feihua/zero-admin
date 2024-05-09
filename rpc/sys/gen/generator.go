@@ -25,7 +25,6 @@ func main() {
 	g.UseDB(db)
 
 	g.ApplyBasic(
-		g.GenerateModel("sys_config"),
 		g.GenerateModel("sys_dept"),
 		g.GenerateModel("sys_dict"),
 		g.GenerateModel("sys_job"),

@@ -2,7 +2,8 @@ package homenewproductservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -26,10 +27,11 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *HomeNewProductAddLogic) HomeNewProductAdd(in *smsclient.HomeNewProductAddReq) (*smsclient.HomeNewProductAddResp, error) {
 	for _, data := range in.NewProductAddData {
-		homeBrand, _ := l.svcCtx.SmsHomeBrandModel.FindOneByBrandId(l.ctx, data.ProductId)
+		q := query.SmsHomeNewProduct
+		homeBrand, _ := q.WithContext(l.ctx).Where(q.ProductID.Eq(data.ProductId)).First()
 		if homeBrand == nil {
-			_, err := l.svcCtx.SmsHomeNewProductModel.Insert(l.ctx, &smsmodel.SmsHomeNewProduct{
-				ProductId:       data.ProductId,
+			err := q.WithContext(l.ctx).Create(&model.SmsHomeNewProduct{
+				ProductID:       data.ProductId,
 				ProductName:     data.ProductName,
 				RecommendStatus: data.RecommendStatus,
 				Sort:            data.Sort,

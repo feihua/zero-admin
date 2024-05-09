@@ -2,6 +2,7 @@ package homebrandservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeBrandDeleteLogic 首页品牌
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:18
+*/
 type HomeBrandDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewHomeBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *H
 	}
 }
 
+// HomeBrandDelete 删除首页品牌
 func (l *HomeBrandDeleteLogic) HomeBrandDelete(in *smsclient.HomeBrandDeleteReq) (*smsclient.HomeBrandDeleteResp, error) {
-	err := l.svcCtx.SmsHomeBrandModel.DeleteByIds(l.ctx, in.Ids)
+	q := query.SmsHomeBrand
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
 		return nil, err

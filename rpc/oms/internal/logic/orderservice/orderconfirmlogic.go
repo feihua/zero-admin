@@ -2,8 +2,11 @@ package orderservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
+	"time"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -32,7 +35,9 @@ func NewOrderConfirmLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Orde
 
 // OrderConfirm 确认收货
 func (l *OrderConfirmLogic) OrderConfirm(in *omsclient.OrderConfirmReq) (*omsclient.OrderConfirmResp, error) {
-	order, err := l.svcCtx.OmsOrderModel.FindOneByMemberIdAndOrderId(l.ctx, in.MemberId, in.OrderId)
+	q := query.OmsOrder
+	//1.查询订单是否存在
+	order, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId), q.MemberID.Eq(in.MemberId)).First()
 
 	if err != nil {
 		return nil, errors.New("用户订单不存在,确认收货失败")
@@ -42,15 +47,21 @@ func (l *OrderConfirmLogic) OrderConfirm(in *omsclient.OrderConfirmReq) (*omscli
 	//订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 	//如果订单已经发货，没有收货，则可收货操作,
 	if order.Status != 2 {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("确认收货失败,参数：%s,订单状态：%s", reqStr, order.Status)
+		logc.Errorf(l.ctx, "确认收货失败,参数：%+v,订单状态：%d", in, order.Status)
 		return nil, errors.New("确认收货失败")
 	}
 
 	//设置订单已确认状态
-	if l.svcCtx.OmsOrderModel.UpdateOrderStatus(l.ctx, 1, 3, order.Id) != nil {
-		return nil, errors.New("设置订单已确认状态失败")
+	item := model.OmsOrder{}
+	item.ID = in.OrderId
+	item.ConfirmStatus = 1
+	item.Status = 3
+	item.ReceiveTime = time.Now()
+	_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId)).Updates(item)
+	if err != nil {
+		return nil, err
 	}
+
 	return &omsclient.OrderConfirmResp{}, nil
 
 }

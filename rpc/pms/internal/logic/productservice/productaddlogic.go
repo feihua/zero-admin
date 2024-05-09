@@ -2,8 +2,8 @@ package productservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"math/rand"
 	"strconv"
@@ -48,11 +48,11 @@ func (l *ProductAddLogic) ProductAdd(in *pmsclient.ProductAddReq) (*pmsclient.Pr
 	}
 
 	//1.创建商品
-	result, err := l.svcCtx.PmsProductModel.Insert(l.ctx, &pmsmodel.PmsProduct{
-		BrandId:                    in.BrandId,
-		ProductCategoryId:          in.ProductCategoryId,
-		FeightTemplateId:           in.FeightTemplateId,
-		ProductAttributeCategoryId: in.ProductAttributeCategoryId,
+	product := model.PmsProduct{
+		BrandID:                    in.BrandId,
+		ProductCategoryID:          in.ProductCategoryId,
+		FeightTemplateID:           in.FeightTemplateId,
+		ProductAttributeCategoryID: in.ProductAttributeCategoryId,
 		Name:                       in.Name,
 		Pic:                        in.Pic,
 		ProductSn:                  in.ProductSn,
@@ -82,54 +82,65 @@ func (l *ProductAddLogic) ProductAdd(in *pmsclient.ProductAddReq) (*pmsclient.Pr
 		AlbumPics:                  in.AlbumPics,
 		DetailTitle:                in.DetailTitle,
 		DetailDesc:                 in.DetailDesc,
-		DetailHtml:                 in.DetailHtml,
-		DetailMobileHtml:           in.DetailMobileHtml,
+		DetailHTML:                 in.DetailHtml,
+		DetailMobileHTML:           in.DetailMobileHtml,
 		PromotionStartTime:         PromotionStartTime,
 		PromotionEndTime:           PromotionEndTime,
 		PromotionPerLimit:          in.PromotionPerLimit,
 		PromotionType:              in.PromotionType,
 		BrandName:                  in.BrandName,
 		ProductCategoryName:        in.ProductCategoryName,
-		ProductCategoryIdArray:     in.ProductCategoryIdArray,
-	})
+		ProductCategoryIDArray:     in.ProductCategoryIdArray,
+	}
+	err := query.PmsProduct.WithContext(l.ctx).Create(&product)
+
 	if err != nil {
 		return nil, err
 	}
 
-	productId, _ := result.LastInsertId()
+	productId := product.ID
+	//根据促销类型设置价格：会员价格、阶梯价格、满减价格
 	//根据促销类型设置价格：会员价格、阶梯价格、满减价格
 	//2.会员价格
+	memberPrice := query.PmsMemberPrice.WithContext(l.ctx)
 	for _, list := range in.MemberPriceList {
-		_, _ = l.svcCtx.PmsMemberPriceModel.Insert(l.ctx, &pmsmodel.PmsMemberPrice{
-			ProductId:       productId,
-			MemberLevelId:   list.MemberLevelId,
+		_ = memberPrice.Create(&model.PmsMemberPrice{
+			ProductID:       productId,
+			MemberLevelID:   list.MemberLevelId,
 			MemberPrice:     float64(list.MemberPrice),
 			MemberLevelName: list.MemberLevelName,
 		})
 	}
 
 	//3.阶梯价格
+	ladder := query.PmsProductLadder.WithContext(l.ctx)
 	for _, list := range in.ProductLadderList {
-		_, _ = l.svcCtx.PmsProductLadderModel.Insert(l.ctx, &pmsmodel.PmsProductLadder{
-			ProductId: productId,
+		_ = ladder.Create(&model.PmsProductLadder{
+			ProductID: productId,
 			Count:     list.Count,
 			Discount:  float64(list.Discount),
 			Price:     float64(list.Price),
 		})
 	}
 	//4.满减价格
+	full := query.PmsProductFullReduction.WithContext(l.ctx)
 	for _, list := range in.ProductFullReductionList {
-		_, _ = l.svcCtx.PmsProductFullReductionModel.Insert(l.ctx, &pmsmodel.PmsProductFullReduction{
-			ProductId:   productId,
+		_ = full.Create(&model.PmsProductFullReduction{
+			ProductID:   productId,
 			FullPrice:   float64(list.FullPrice),
 			ReducePrice: float64(list.ReducePrice),
 		})
 	}
-	//5.添加sku库存信息
+
+	//5.更新sku库存信息
+	sku := query.PmsSkuStock.WithContext(l.ctx)
 	for _, list := range in.SkuStockList {
-		_, _ = l.svcCtx.PmsSkuStockModel.Insert(l.ctx, &pmsmodel.PmsSkuStock{
-			ProductId:      productId,
-			SkuCode:        time.Now().Format("200601021504") + strconv.Itoa(rand.Intn(10)),
+		if list.SkuCode == "" {
+			list.SkuCode = time.Now().Format("200601021504") + strconv.Itoa(rand.Intn(10))
+		}
+		_ = sku.Create(&model.PmsSkuStock{
+			ProductID:      productId,
+			SkuCode:        list.SkuCode,
 			Price:          float64(list.Price),
 			Stock:          list.Stock,
 			LowStock:       list.LowStock,
@@ -140,14 +151,16 @@ func (l *ProductAddLogic) ProductAdd(in *pmsclient.ProductAddReq) (*pmsclient.Pr
 			SpData:         list.SpData,
 		})
 	}
-	//6.添加商品参数,添加自定义商品规格
+	//6.更新商品参数,添加自定义商品规格
+	attr := query.PmsProductAttributeValue.WithContext(l.ctx)
 	for _, list := range in.ProductAttributeValueList {
-		_, _ = l.svcCtx.PmsProductAttributeValueModel.Insert(l.ctx, &pmsmodel.PmsProductAttributeValue{
-			ProductId:          productId,
-			ProductAttributeId: list.ProductAttributeId,
-			Value:              sql.NullString{String: list.AttributeValues, Valid: true},
+		_ = attr.Create(&model.PmsProductAttributeValue{
+			ProductID:          productId,
+			ProductAttributeID: list.ProductAttributeId,
+			Value:              &list.AttributeValues,
 		})
 	}
+
 	return &pmsclient.ProductAddResp{
 		ProductId: int32(productId),
 	}, nil

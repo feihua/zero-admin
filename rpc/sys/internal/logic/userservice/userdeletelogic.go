@@ -3,6 +3,7 @@ package userservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -47,16 +48,16 @@ func (l *UserDeleteLogic) UserDelete(in *sysclient.UserDeleteReq) (*sysclient.Us
 		return nil, errors.New("删除用户异常")
 	}
 
-	err := l.svcCtx.UserModel.DeleteByIds(l.ctx, in.Ids)
+	q := query.SysUser
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
+	if err != nil {
+		return nil, err
+	}
 
 	//删除用户与角色的关联
 	for _, id := range in.Ids {
-		_ = l.svcCtx.UserRoleModel.DeleteByUserId(l.ctx, id)
+		_, _ = query.SysUserRole.WithContext(l.ctx).Where(query.SysUserRole.UserID.Eq(id)).Delete()
 	}
 
-	if err != nil {
-		logc.Errorf(l.ctx, "删除用户异常,参数userId:%+v,异常:%s", in.Ids, err.Error())
-		return nil, errors.New("删除用户异常")
-	}
 	return &sysclient.UserDeleteResp{}, nil
 }

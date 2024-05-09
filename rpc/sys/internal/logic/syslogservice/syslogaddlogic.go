@@ -2,8 +2,8 @@ package syslogservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"time"
 
@@ -33,17 +33,17 @@ func NewSysLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLogA
 
 // SysLogAdd 添加操作日志
 func (l *SysLogAddLogic) SysLogAdd(in *sysclient.SysLogAddReq) (*sysclient.SysLogAddResp, error) {
-	sysLog := &sysmodel.SysLog{
+	err := query.SysLog.WithContext(l.ctx).Create(&model.SysLog{
 		UserName:       in.UserName,
 		Operation:      in.Operation,
 		Method:         in.Method,
 		RequestParams:  in.RequestParams,
-		ResponseParams: sql.NullString{String: in.ResponseParams, Valid: true},
+		ResponseParams: &in.ResponseParams,
 		Time:           in.Time,
-		Ip:             sql.NullString{String: in.Ip, Valid: true},
+		IP:             &in.Ip,
 		OperationTime:  time.Now(),
-	}
-	if _, err := l.svcCtx.SysLogModel.Insert(l.ctx, sysLog); err != nil {
+	})
+	if err != nil {
 		return nil, err
 	}
 

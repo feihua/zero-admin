@@ -34,10 +34,10 @@ func NewMemberProductCollectionListLogic(ctx context.Context, svcCtx *svc.Servic
 func (l *MemberProductCollectionListLogic) MemberProductCollectionList(in *umsclient.MemberProductCollectionListReq) (*umsclient.MemberProductCollectionListResp, error) {
 	q := query.UmsMemberProductCollection.WithContext(l.ctx)
 	if in.MemberId != 0 {
-		q.Where(query.UmsMemberProductCollection.MemberID.Eq(in.MemberId))
+		q = q.Where(query.UmsMemberProductCollection.MemberID.Eq(in.MemberId))
 	}
 	if in.ProductId != 0 {
-		q.Where(query.UmsMemberProductCollection.ProductID.Eq(in.ProductId))
+		q = q.Where(query.UmsMemberProductCollection.ProductID.Eq(in.ProductId))
 	}
 
 	offset := (in.Current - 1) * in.PageSize

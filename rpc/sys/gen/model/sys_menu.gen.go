@@ -19,7 +19,7 @@ type SysMenu struct {
 	Perms         *string    `gorm:"column:perms" json:"perms"`
 	Type          int32      `gorm:"column:type;not null;comment:类型 0：目录,1：菜单,2：按钮,3：外链" json:"type"`              // 类型 0：目录,1：菜单,2：按钮,3：外链
 	Icon          *string    `gorm:"column:icon;comment:菜单图标" json:"icon"`                                         // 菜单图标
-	OrderNum      *int32     `gorm:"column:order_num;comment:排序" json:"order_num"`                                 // 排序
+	OrderNum      int32      `gorm:"column:order_num;not null;comment:排序" json:"order_num"`                        // 排序
 	CreateBy      string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                       // 创建者
 	CreateTime    *time.Time `gorm:"column:create_time;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateBy      *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                // 更新者

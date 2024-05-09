@@ -37,7 +37,7 @@ func newSysUser(db *gorm.DB, opts ...gen.DOOption) sysUser {
 	_sysUser.Mobile = field.NewString(tableName, "mobile")
 	_sysUser.Status = field.NewInt32(tableName, "status")
 	_sysUser.DeptID = field.NewInt64(tableName, "dept_id")
-	_sysUser.JobID = field.NewInt32(tableName, "job_id")
+	_sysUser.JobID = field.NewInt64(tableName, "job_id")
 	_sysUser.CreateBy = field.NewString(tableName, "create_by")
 	_sysUser.CreateTime = field.NewTime(tableName, "create_time")
 	_sysUser.UpdateBy = field.NewString(tableName, "update_by")
@@ -64,7 +64,7 @@ type sysUser struct {
 	Mobile     field.String // 手机号
 	Status     field.Int32  // 状态  0：禁用   1：正常
 	DeptID     field.Int64  // 部门id
-	JobID      field.Int32  // 岗位id
+	JobID      field.Int64  // 岗位id
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
@@ -96,7 +96,7 @@ func (s *sysUser) updateTableName(table string) *sysUser {
 	s.Mobile = field.NewString(table, "mobile")
 	s.Status = field.NewInt32(table, "status")
 	s.DeptID = field.NewInt64(table, "dept_id")
-	s.JobID = field.NewInt32(table, "job_id")
+	s.JobID = field.NewInt64(table, "job_id")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")

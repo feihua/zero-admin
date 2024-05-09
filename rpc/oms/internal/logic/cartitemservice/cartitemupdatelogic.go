@@ -2,7 +2,8 @@ package cartitemservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"time"
 
@@ -34,17 +35,18 @@ func NewCartItemUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 // 1.先更加id删除原来的
 // 2.添加新的
 func (l *CartItemUpdateLogic) CartItemUpdate(in *omsclient.CartItemUpdateReq) (*omsclient.CartItemUpdateResp, error) {
+	q := query.OmsCartItem
 	//1.先更加id删除原来的
-	err := l.svcCtx.OmsCartItemModel.Delete(l.ctx, in.Id)
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Delete()
 	if err != nil {
 		return nil, err
 	}
 
 	//2.添加新的
-	_, err = l.svcCtx.OmsCartItemModel.Insert(l.ctx, &omsmodel.OmsCartItem{
-		ProductId:         in.ProductId,
-		ProductSkuId:      in.ProductSkuId,
-		MemberId:          in.MemberId,
+	err = q.WithContext(l.ctx).Create(&model.OmsCartItem{
+		ProductID:         in.ProductId,
+		ProductSkuID:      in.ProductSkuId,
+		MemberID:          in.MemberId,
 		Quantity:          in.Quantity,
 		Price:             float64(in.Price),
 		ProductPic:        in.ProductPic,
@@ -55,7 +57,7 @@ func (l *CartItemUpdateLogic) CartItemUpdate(in *omsclient.CartItemUpdateReq) (*
 		CreateDate:        time.Now(),
 		ModifyDate:        time.Now(),
 		DeleteStatus:      in.DeleteStatus,
-		ProductCategoryId: in.ProductCategoryId,
+		ProductCategoryID: in.ProductCategoryId,
 		ProductBrand:      in.ProductBrand,
 		ProductSn:         in.ProductSn,
 		ProductAttr:       in.ProductAttr,

@@ -2,7 +2,8 @@ package flashpromotionproductrelationservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -24,16 +25,18 @@ func NewFlashPromotionProductRelationUpdateLogic(ctx context.Context, svcCtx *sv
 }
 
 func (l *FlashPromotionProductRelationUpdateLogic) FlashPromotionProductRelationUpdate(in *smsclient.FlashPromotionProductRelationUpdateReq) (*smsclient.FlashPromotionProductRelationUpdateResp, error) {
-	err := l.svcCtx.SmsFlashPromotionProductRelationModel.Update(l.ctx, &smsmodel.SmsFlashPromotionProductRelation{
-		Id:                      in.Id,
-		FlashPromotionId:        in.FlashPromotionId,
-		FlashPromotionSessionId: in.FlashPromotionSessionId,
-		ProductId:               in.ProductId,
+	q := query.SmsFlashPromotionProductRelation
+	_, err := q.WithContext(l.ctx).Updates(&model.SmsFlashPromotionProductRelation{
+		ID:                      in.Id,
+		FlashPromotionID:        in.FlashPromotionId,
+		FlashPromotionSessionID: in.FlashPromotionSessionId,
+		ProductID:               in.ProductId,
 		FlashPromotionPrice:     in.FlashPromotionPrice,
 		FlashPromotionCount:     in.FlashPromotionCount,
 		FlashPromotionLimit:     in.FlashPromotionLimit,
 		Sort:                    in.Sort,
 	})
+
 	if err != nil {
 		return nil, err
 	}

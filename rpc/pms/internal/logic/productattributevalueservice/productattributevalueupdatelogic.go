@@ -2,8 +2,8 @@ package productattributevalueservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductAttributeValueUpdateLogic 属性值
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:54
+*/
 type ProductAttributeValueUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,13 +30,16 @@ func NewProductAttributeValueUpdateLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
+// ProductAttributeValueUpdate 更新属性值
 func (l *ProductAttributeValueUpdateLogic) ProductAttributeValueUpdate(in *pmsclient.ProductAttributeValueUpdateReq) (*pmsclient.ProductAttributeValueUpdateResp, error) {
-	err := l.svcCtx.PmsProductAttributeValueModel.Update(l.ctx, &pmsmodel.PmsProductAttributeValue{
-		Id:                 in.Id,
-		ProductId:          in.ProductId,
-		ProductAttributeId: in.ProductAttributeId,
-		Value:              sql.NullString{String: in.Value},
+	q := query.PmsProductAttributeValue
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductAttributeValue{
+		ID:                 in.Id,
+		ProductID:          in.ProductId,
+		ProductAttributeID: in.ProductAttributeId,
+		Value:              &in.Value,
 	})
+
 	if err != nil {
 		return nil, err
 	}

@@ -2,9 +2,10 @@ package orderreturnreasonservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,19 +25,28 @@ func NewOrderReturnReasonListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *OrderReturnReasonListLogic) OrderReturnReasonList(in *omsclient.OrderReturnReasonListReq) (*omsclient.OrderReturnReasonListResp, error) {
-	all, err := l.svcCtx.OmsOrderReturnReasonModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.OmsOrderReturnReasonModel.Count(l.ctx, in)
+	q := query.OmsOrderReturnReason.WithContext(l.ctx)
+	if len(in.Name) > 0 {
+		q = q.Where(query.OmsOrderReturnReason.Name.Like("%" + in.Name + "%"))
+	}
+
+	if in.Status != 2 {
+		q = q.Where(query.OmsOrderReturnReason.Status.Eq(in.Status))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询退货原因列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询退货原因列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*omsclient.OrderReturnReasonListData
-	for _, item := range *all {
+	for _, item := range result {
 		list = append(list, &omsclient.OrderReturnReasonListData{
-			Id:         item.Id,
+			Id:         item.ID,
 			Name:       item.Name,
 			Sort:       item.Sort,
 			Status:     item.Status,
@@ -44,9 +54,7 @@ func (l *OrderReturnReasonListLogic) OrderReturnReasonList(in *omsclient.OrderRe
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询退货原因列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询退货原因列表信息,参数：%+v,响应：%+v", in, list)
 	return &omsclient.OrderReturnReasonListResp{
 		Total: count,
 		List:  list,

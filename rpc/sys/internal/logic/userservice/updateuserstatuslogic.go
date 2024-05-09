@@ -2,8 +2,8 @@ package userservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"time"
 
@@ -33,12 +33,18 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // UpdateUserStatus 更新用户状态
 func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UserStatusReq) (*sysclient.UserStatusResp, error) {
-	_ = l.svcCtx.UserModel.Update(l.ctx, &sysmodel.SysUser{
-		Id:         in.Id,
+	q := query.SysUser
+	now := time.Now()
+	_, err := q.WithContext(l.ctx).Updates(&model.SysUser{
+		ID:         in.Id,
 		Status:     in.Status,
-		UpdateBy:   sql.NullString{String: in.LastUpdateBy},
-		UpdateTime: sql.NullTime{Time: time.Now()},
+		UpdateBy:   &in.UpdateBy,
+		UpdateTime: &now,
 	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sysclient.UserStatusResp{}, nil
 }

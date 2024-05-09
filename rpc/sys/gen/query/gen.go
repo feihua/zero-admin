@@ -17,7 +17,6 @@ import (
 
 var (
 	Q           = new(Query)
-	SysConfig   *sysConfig
 	SysDept     *sysDept
 	SysDict     *sysDict
 	SysJob      *sysJob
@@ -33,7 +32,6 @@ var (
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
-	SysConfig = &Q.SysConfig
 	SysDept = &Q.SysDept
 	SysDict = &Q.SysDict
 	SysJob = &Q.SysJob
@@ -50,7 +48,6 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:          db,
-		SysConfig:   newSysConfig(db, opts...),
 		SysDept:     newSysDept(db, opts...),
 		SysDict:     newSysDict(db, opts...),
 		SysJob:      newSysJob(db, opts...),
@@ -68,7 +65,6 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 type Query struct {
 	db *gorm.DB
 
-	SysConfig   sysConfig
 	SysDept     sysDept
 	SysDict     sysDict
 	SysJob      sysJob
@@ -87,7 +83,6 @@ func (q *Query) Available() bool { return q.db != nil }
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:          db,
-		SysConfig:   q.SysConfig.clone(db),
 		SysDept:     q.SysDept.clone(db),
 		SysDict:     q.SysDict.clone(db),
 		SysJob:      q.SysJob.clone(db),
@@ -113,7 +108,6 @@ func (q *Query) WriteDB() *Query {
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:          db,
-		SysConfig:   q.SysConfig.replaceDB(db),
 		SysDept:     q.SysDept.replaceDB(db),
 		SysDict:     q.SysDict.replaceDB(db),
 		SysJob:      q.SysJob.replaceDB(db),
@@ -129,7 +123,6 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 }
 
 type queryCtx struct {
-	SysConfig   ISysConfigDo
 	SysDept     ISysDeptDo
 	SysDict     ISysDictDo
 	SysJob      ISysJobDo
@@ -145,7 +138,6 @@ type queryCtx struct {
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		SysConfig:   q.SysConfig.WithContext(ctx),
 		SysDept:     q.SysDept.WithContext(ctx),
 		SysDict:     q.SysDict.WithContext(ctx),
 		SysJob:      q.SysJob.WithContext(ctx),

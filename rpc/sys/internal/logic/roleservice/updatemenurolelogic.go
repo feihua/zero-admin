@@ -2,7 +2,8 @@ package roleservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -36,17 +37,20 @@ func (l *UpdateMenuRoleLogic) UpdateMenuRole(in *sysclient.UpdateMenuRoleReq) (*
 		return &sysclient.UpdateMenuRoleResp{}, nil
 	}
 
-	if err := l.svcCtx.RoleMenuModel.DeleteByRoleId(l.ctx, in.RoleId); err != nil {
+	q := query.SysRoleMenu
+	_, err := q.WithContext(l.ctx).Where(q.RoleID.Eq(in.RoleId)).Delete()
+	if err != nil {
 		logc.Errorf(l.ctx, "删除角色与菜单的关联失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	for _, menuId := range in.MenuIds {
-		_, _ = l.svcCtx.RoleMenuModel.Insert(l.ctx, &sysmodel.SysRoleMenu{
-			RoleId:   in.RoleId,
-			MenuId:   menuId,
+		_ = q.WithContext(l.ctx).Create(&model.SysRoleMenu{
+			RoleID:   in.RoleId,
+			MenuID:   menuId,
 			CreateBy: in.CreateBy,
 		})
+
 	}
 
 	return &sysclient.UpdateMenuRoleResp{}, nil

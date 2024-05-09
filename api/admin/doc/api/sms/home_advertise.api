@@ -7,14 +7,14 @@ info(
 type (
 	addHomeAdvertiseReq {
 		Name      string `json:"name"`          // 名称
-		Type      int64  `json:"type"`          // 轮播位置：0->PC首页轮播；1->app首页轮播
+        Type int32 `json:"type"`                // 轮播位置：0->PC首页轮播；1->app首页轮播
 		Pic       string `json:"pic,optional"`  // 图片地址
 		StartTime string `json:"startTime"`     // 开始时间
 		EndTime   string `json:"endTime"`       // 结束时间
-		Status    int64  `json:"status"`        // 上下线状态：0->下线；1->上线
+        Status int32 `json:"status"`            // 上下线状态：0->下线；1->上线
 		Url       string `json:"url"`           // 链接地址
 		Note      string `json:"note,optional"` // 备注
-		Sort      int64  `json:"sort"`          // 排序
+        Sort int32 `json:"sort"`                // 排序
 	}
 	addHomeAdvertiseResp {
 		Code    string `json:"code"`
@@ -24,24 +24,24 @@ type (
 		Current   int64  `json:"current,default=1"`
 		PageSize  int64  `json:"pageSize,default=20"`
 		Name      string `json:"name,optional"`      // 名称
-		Type      int64  `json:"type,default=2"`     // 轮播位置：0->PC首页轮播；1->app首页轮播
+        Type int32 `json:"type,default=2"`           // 轮播位置：0->PC首页轮播；1->app首页轮播
 		StartTime string `json:"startTime,optional"` // 开始时间
 		EndTime   string `json:"endTime,optional"`   // 结束时间
-		Status    int64  `json:"status,default=2"`   // 上下线状态：0->下线；1->上线
+        Status int32 `json:"status,default=2"`       // 上下线状态：0->下线；1->上线
 	}
 	ListtHomeAdvertiseData {
 		Id         int64  `json:"id"`
 		Name       string `json:"name"`       // 名称
-		Type       int64  `json:"type"`       // 轮播位置：0->PC首页轮播；1->app首页轮播
+        Type int32 `json:"type"`              // 轮播位置：0->PC首页轮播；1->app首页轮播
 		Pic        string `json:"pic"`        // 图片地址
 		StartTime  string `json:"startTime"`  // 开始时间
 		EndTime    string `json:"endTime"`    // 结束时间
-		Status     int64  `json:"status"`     // 上下线状态：0->下线；1->上线
-		ClickCount int64  `json:"clickCount"` // 点击数
-		OrderCount int64  `json:"orderCount"` // 下单数
+        Status int32 `json:"status"`          // 上下线状态：0->下线；1->上线
+        ClickCount int32 `json:"clickCount"`  // 点击数
+        OrderCount int32 `json:"orderCount"`  // 下单数
 		Url        string `json:"url"`        // 链接地址
 		Note       string `json:"note"`       // 备注
-		Sort       int64  `json:"sort"`       // 排序
+        Sort int32 `json:"sort"`              // 排序
 	}
 	ListHomeAdvertiseResp {
 		Code     string                    `json:"code"`
@@ -55,14 +55,14 @@ type (
 	UpdateHomeAdvertiseReq {
 		Id        int64  `json:"id"`
 		Name      string `json:"name"`          // 名称
-		Type      int64  `json:"type"`          // 轮播位置：0->PC首页轮播；1->app首页轮播
+        Type int32 `json:"type"`                // 轮播位置：0->PC首页轮播；1->app首页轮播
 		Pic       string `json:"pic,optional"`  // 图片地址
 		StartTime string `json:"startTime"`     // 开始时间
 		EndTime   string `json:"endTime"`       // 结束时间
-		Status    int64  `json:"status"`        // 上下线状态：0->下线；1->上线
+        Status int32 `json:"status"`            // 上下线状态：0->下线；1->上线
 		Url       string `json:"url"`           // 链接地址
 		Note      string `json:"note,optional"` // 备注
-		Sort      int64  `json:"sort"`          // 排序
+        Sort int32 `json:"sort"`                // 排序
 	}
 	UpdateHomeAdvertiseResp {
 		Code    string `json:"code"`

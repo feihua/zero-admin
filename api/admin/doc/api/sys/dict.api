@@ -10,9 +10,9 @@ type (
 		Label       string `json:"label"`                // 标签名
 		Type        string `json:"type"`                 // 类型
 		Description string `json:"description,optional"` // 描述
-		Sort        int64  `json:"sort"`                 // 排序（升序）
+        Sort int32 `json:"sort"`                         // 排序（升序）
 		Remarks     string `json:"remarks,optional"`     // 备注信息
-		DelFlag     int64  `json:"delFlag"`              // 是否删除  0：已删除  1：正常
+        DelFlag int32 `json:"delFlag"`                   // 是否删除  0：已删除  1：正常
 	}
 	addDictResp {
 		Code    string `json:"code"`
@@ -23,7 +23,7 @@ type (
 		PageSize int64  `json:"pageSize,default=20"`
 		Value    string `json:"value,optional"`
 		Label    string `json:"label,optional"`
-		DelFlag  int64  `json:"delFlag,default=2"`
+        DelFlag int32 `json:"delFlag,default=2"`
 		Type     string `json:"type,optional "`
 	}
 	ListDictData {
@@ -35,10 +35,10 @@ type (
 		Sort           float64 `json:"sort"`           // 排序（升序）
 		CreateBy       string  `json:"createBy"`       // 创建人
 		CreateTime     string  `json:"createTime"`     // 创建时间
-		LastUpdateBy   string  `json:"lastUpdateBy"`   // 更新人
-		LastUpdateTime string  `json:"lastUpdateTime"` // 更新时间
+        UpdateBy string `json:"updateBy"`              // 更新人
+        UpdateTime string `json:"updateTime"`          // 更新时间
 		Remarks        string  `json:"remarks"`        // 备注信息
-		DelFlag        int64   `json:"delFlag"`        // 是否删除  0：已删除  1：正常
+        DelFlag int32 `json:"delFlag"`                 // 是否删除  0：已删除  1：正常
 	}
 	ListDictResp {
 		Code     string          `json:"code"`
@@ -55,9 +55,9 @@ type (
 		Label       string `json:"label"`       // 标签名
 		Type        string `json:"type"`        // 类型
 		Description string `json:"description"` // 描述
-		Sort        int64  `json:"sort"`        // 排序（升序）
+        Sort int32 `json:"sort"`                // 排序（升序）
 		Remarks     string `json:"remarks"`     // 备注信息
-		DelFlag     int64  `json:"delFlag"`     // 是否删除  0：已删除  1：正常
+        DelFlag int32 `json:"delFlag"`          // 是否删除  0：已删除  1：正常
 	}
 	UpdateDictResp {
 		Code    string `json:"code"`

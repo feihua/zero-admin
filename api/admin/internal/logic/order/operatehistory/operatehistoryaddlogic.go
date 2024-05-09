@@ -30,7 +30,6 @@ func (l *OperateHistoryAddLogic) OperateHistoryAdd(req types.AddOperateHistoryRe
 	_, err := l.svcCtx.OrderOperateHistoryService.OrderOperateHistoryAdd(l.ctx, &omsclient.OrderOperateHistoryAddReq{
 		OrderId:     req.OrderId,
 		OperateMan:  req.OperateMan,
-		CreateTime:  req.CreateTime,
 		OrderStatus: req.OrderStatus,
 		Note:        req.Note,
 	})

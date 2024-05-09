@@ -9,7 +9,7 @@ type (
 		Name      string `json:"name"`      // 场次名称
 		StartTime string `json:"startTime"` // 每日开始时间
 		EndTime   string `json:"endTime"`   // 每日结束时间
-		Status    int64  `json:"status"`    // 启用状态：0->不启用；1->启用
+        Status int32 `json:"status"`        // 启用状态：0->不启用；1->启用
 	}
 	addFlashPromotionSessionResp {
 		Code    string `json:"code"`
@@ -24,7 +24,7 @@ type (
 		Name       string `json:"name"`       // 场次名称
 		StartTime  string `json:"startTime"`  // 每日开始时间
 		EndTime    string `json:"endTime"`    // 每日结束时间
-		Status     int64  `json:"status"`     // 启用状态：0->不启用；1->启用
+        Status int32 `json:"status"`          // 启用状态：0->不启用；1->启用
 		CreateTime string `json:"createTime"` // 创建时间
 	}
 	ListFlashPromotionSessionResp {
@@ -41,7 +41,7 @@ type (
 		Name      string `json:"name"`      // 场次名称
 		StartTime string `json:"startTime"` // 每日开始时间
 		EndTime   string `json:"endTime"`   // 每日结束时间
-		Status    int64  `json:"status"`    // 启用状态：0->不启用；1->启用
+        Status int32 `json:"status"`        // 启用状态：0->不启用；1->启用
 	}
 	UpdateFlashPromotionSessionResp {
 		Code    string `json:"code"`

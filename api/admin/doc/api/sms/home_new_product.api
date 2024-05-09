@@ -16,14 +16,14 @@ type (
 		Current         int64  `json:"current,default=1"`
 		PageSize        int64  `json:"pageSize,default=20"`
 		ProductName     string `json:"productName,optional"`      // 商品名称
-		RecommendStatus int64  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+        RecommendStatus int32 `json:"recommendStatus,default=2"`  // 推荐状态：0->不推荐;1->推荐
 	}
 	ListtHomeNewProductData {
 		Id              int64  `json:"id"`
 		ProductId       int64  `json:"productId"`       // 商品id
 		ProductName     string `json:"productName"`     // 商品名称
-		RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-		Sort            int64  `json:"sort"`            // 排序
+        RecommendStatus int32 `json:"recommendStatus"`  // 推荐状态：0->不推荐;1->推荐
+        Sort int32 `json:"sort"`                        // 排序
 	}
 	ListHomeNewProductResp {
 		Code     string                     `json:"code"`
@@ -38,8 +38,8 @@ type (
 		Id              int64  `json:"id"`
 		ProductId       int64  `json:"productId"`       // 商品id
 		ProductName     string `json:"productName"`     // 商品名称
-		RecommendStatus int64  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-		Sort            int64  `json:"sort"`            // 排序
+        RecommendStatus int32 `json:"recommendStatus"`  // 推荐状态：0->不推荐;1->推荐
+        Sort int32 `json:"sort"`                        // 排序
 	}
 	UpdateHomeNewProductResp {
 		Code    string `json:"code"`

@@ -2,7 +2,8 @@ package commentservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"time"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CommentUpdateLogic 商品评价
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:43
+*/
 type CommentUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,16 +31,17 @@ func NewCommentUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Com
 	}
 }
 
+// CommentUpdate 更新商品评价
 func (l *CommentUpdateLogic) CommentUpdate(in *pmsclient.CommentUpdateReq) (*pmsclient.CommentUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.PmsCommentModel.Update(l.ctx, &pmsmodel.PmsComment{
-		Id:               in.Id,
-		ProductId:        in.ProductId,
+	q := query.PmsComment
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsComment{
+		ID:               in.Id,
+		ProductID:        in.ProductId,
 		MemberNickName:   in.MemberNickName,
 		ProductName:      in.ProductName,
 		Star:             in.Star,
-		MemberIp:         in.MemberIp,
-		CreateTime:       CreateTime,
+		MemberIP:         in.MemberIp,
+		CreateTime:       time.Now(),
 		ShowStatus:       in.ShowStatus,
 		ProductAttribute: in.ProductAttribute,
 		CollectCouont:    in.CollectCouont,
@@ -44,6 +51,7 @@ func (l *CommentUpdateLogic) CommentUpdate(in *pmsclient.CommentUpdateReq) (*pms
 		MemberIcon:       in.MemberIcon,
 		ReplayCount:      in.ReplayCount,
 	})
+
 	if err != nil {
 		return nil, err
 	}

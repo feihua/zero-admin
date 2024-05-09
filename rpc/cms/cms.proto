@@ -9,17 +9,17 @@ message SubjectAddReq {
   int64 CategoryId = 2; //
   string Title = 3; //
   string Pic = 4; //专题主图
-  int64 ProductCount = 5; //关联产品数量
-  int64 RecommendStatus = 6; //
+  int32 ProductCount = 5; //关联产品数量
+  int32 RecommendStatus = 6; //
   string CreateTime = 7; //
-  int64 CollectCount = 8; //
-  int64 ReadCount = 9; //
-  int64 CommentCount = 10; //
+  int32 CollectCount = 8; //
+  int32 ReadCount = 9; //
+  int32 CommentCount = 10; //
   string AlbumPics = 11; //画册图片用逗号分割
   string Description = 12; //
-  int64 ShowStatus = 13; //显示状态：0->不显示；1->显示
+  int32 ShowStatus = 13; //显示状态：0->不显示；1->显示
   string Content = 14; //
-  int64 ForwardCount = 15; //转发数
+  int32 ForwardCount = 15; //转发数
   string CategoryName = 16; //专题分类名称
 
 }
@@ -41,17 +41,17 @@ message SubjectUpdateReq {
   int64 CategoryId = 2; //
   string Title = 3; //
   string Pic = 4; //专题主图
-  int64 ProductCount = 5; //关联产品数量
-  int64 RecommendStatus = 6; //
+  int32 ProductCount = 5; //关联产品数量
+  int32 RecommendStatus = 6; //
   string CreateTime = 7; //
-  int64 CollectCount = 8; //
-  int64 ReadCount = 9; //
-  int64 CommentCount = 10; //
+  int32 CollectCount = 8; //
+  int32 ReadCount = 9; //
+  int32 CommentCount = 10; //
   string AlbumPics = 11; //画册图片用逗号分割
   string Description = 12; //
-  int64 ShowStatus = 13; //显示状态：0->不显示；1->显示
+  int32 ShowStatus = 13; //显示状态：0->不显示；1->显示
   string Content = 14; //
-  int64 ForwardCount = 15; //转发数
+  int32 ForwardCount = 15; //转发数
   string CategoryName = 16; //专题分类名称
 
 }
@@ -64,8 +64,8 @@ message SubjectListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string Title = 3; //
-  int64 RecommendStatus = 6; //
-  int64 ShowStatus = 13; //显示状态：0->不显示；1->显示
+  int32 RecommendStatus = 6; //
+  int32 ShowStatus = 13; //显示状态：0->不显示；1->显示
 
 }
 
@@ -142,8 +142,8 @@ message PrefrenceAreaAddReq {
   string Name = 2; //
   string SubTitle = 3; //
   string Pic = 4; //展示图片
-  int64 Sort = 5; //
-  int64 ShowStatus = 6; //
+  int32 Sort = 5; //
+  int32 ShowStatus = 6; //
 
 }
 
@@ -164,8 +164,8 @@ message PrefrenceAreaUpdateReq {
   string Name = 2; //
   string SubTitle = 3; //
   string Pic = 4; //展示图片
-  int64 Sort = 5; //
-  int64 ShowStatus = 6; //
+  int32 Sort = 5; //
+  int32 ShowStatus = 6; //
 
 }
 
@@ -178,7 +178,7 @@ message PrefrenceAreaListReq {
   int64 pageSize = 2;
   string Name = 3; //
   string SubTitle = 4; //
-  int64 ShowStatus = 5; //显示状态：0->不显示；1->显示
+  int32 ShowStatus = 5; //显示状态：0->不显示；1->显示
 }
 
 message PrefrenceAreaListData {

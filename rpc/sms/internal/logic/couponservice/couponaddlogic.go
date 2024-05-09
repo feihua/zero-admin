@@ -2,7 +2,8 @@ package couponservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
 
@@ -28,7 +29,8 @@ func (l *CouponAddLogic) CouponAdd(in *smsclient.CouponAddReq) (*smsclient.Coupo
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
 	EnableTime, _ := time.Parse("2006-01-02 15:04:05", in.EnableTime)
-	_, err := l.svcCtx.SmsCouponModel.Insert(l.ctx, &smsmodel.SmsCoupon{
+
+	err := query.SmsCoupon.WithContext(l.ctx).Create(&model.SmsCoupon{
 		Type:         in.Type,
 		Name:         in.Name,
 		Platform:     in.Platform,
@@ -47,6 +49,7 @@ func (l *CouponAddLogic) CouponAdd(in *smsclient.CouponAddReq) (*smsclient.Coupo
 		Code:         in.Code,
 		MemberLevel:  in.MemberLevel,
 	})
+
 	if err != nil {
 		return nil, err
 	}

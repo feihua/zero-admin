@@ -2,8 +2,8 @@ package homeadvertiseservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
 
@@ -29,8 +29,8 @@ func NewHomeAdvertiseAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(in *smsclient.HomeAdvertiseAddReq) (*smsclient.HomeAdvertiseAddResp, error) {
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
-	note := sql.NullString{String: in.Note, Valid: true}
-	_, err := l.svcCtx.SmsHomeAdvertiseModel.Insert(l.ctx, &smsmodel.SmsHomeAdvertise{
+
+	err := query.SmsHomeAdvertise.WithContext(l.ctx).Create(&model.SmsHomeAdvertise{
 		Name:       in.Name,
 		Type:       in.Type,
 		Pic:        in.Pic,
@@ -39,13 +39,13 @@ func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(in *smsclient.HomeAdvertiseAddR
 		Status:     in.Status,
 		ClickCount: in.ClickCount,
 		OrderCount: in.OrderCount,
-		Url:        in.Url,
-		Note:       note,
+		URL:        in.Url,
+		Note:       &in.Note,
 		Sort:       in.Sort,
 	})
+
 	if err != nil {
 		return nil, err
 	}
-
 	return &smsclient.HomeAdvertiseAddResp{}, nil
 }

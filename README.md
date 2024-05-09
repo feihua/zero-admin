@@ -1,5 +1,7 @@
 # Zero-Admin 电商系统
 
+> 注：ORM持久层已经整体切换成gorm
+
 Zero-Admin 是一套基于 go-zero 框架实现的电商系统，采用 Docker 容器化部署，包含前台商城系统和后台管理系统。
 
 ## 前台商城系统

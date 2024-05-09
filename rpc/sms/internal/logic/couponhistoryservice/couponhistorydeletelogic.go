@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// CouponHistoryDeleteLogic
+// CouponHistoryDeleteLogic 优惠券
 /*
 Author: LiuFeiHua
 Date: 2024/5/6 11:35

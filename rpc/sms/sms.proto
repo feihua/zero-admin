@@ -6,23 +6,23 @@ option go_package = "./smsclient";
 
 message CouponAddReq {
   int64 Id = 1; //
-  int64 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
   string Name = 3; //名称
-  int64 Platform = 4; //使用平台：0->全部；1->移动；2->PC
-  int64 Count = 5; //数量
+  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 Count = 5; //数量
   double Amount = 6; //金额
-  int64 PerLimit = 7; //每人限领张数
+  int32 PerLimit = 7; //每人限领张数
   double MinPoint = 8; //使用门槛；0表示无门槛
   string StartTime = 9; //开始时间
   string EndTime = 10; //结束时间
-  int64 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
   string Note = 12; //备注
-  int64 PublishCount = 13; //发行数量
-  int64 UseCount = 14; //已使用数量
-  int64 ReceiveCount = 15; //领取数量
+  int32 PublishCount = 13; //发行数量
+  int32 UseCount = 14; //已使用数量
+  int32 ReceiveCount = 15; //领取数量
   string EnableTime = 16; //可以领取的日期
   string Code = 17; //优惠码
-  int64 MemberLevel = 18; //可领取的会员类型：0->无限时
+  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
 
 }
 
@@ -40,23 +40,23 @@ message CouponDeleteResp {
 
 message CouponUpdateReq {
   int64 Id = 1; //
-  int64 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
   string Name = 3; //名称
-  int64 Platform = 4; //使用平台：0->全部；1->移动；2->PC
-  int64 Count = 5; //数量
+  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 Count = 5; //数量
   double Amount = 6; //金额
-  int64 PerLimit = 7; //每人限领张数
+  int32 PerLimit = 7; //每人限领张数
   double MinPoint = 8; //使用门槛；0表示无门槛
   string StartTime = 9; //开始时间
   string EndTime = 10; //结束时间
-  int64 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
   string Note = 12; //备注
-  int64 PublishCount = 13; //发行数量
-  int64 UseCount = 14; //已使用数量
-  int64 ReceiveCount = 15; //领取数量
+  int32 PublishCount = 13; //发行数量
+  int32 UseCount = 14; //已使用数量
+  int32 ReceiveCount = 15; //领取数量
   string EnableTime = 16; //可以领取的日期
   string Code = 17; //优惠码
-  int64 MemberLevel = 18; //可领取的会员类型：0->无限时
+  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
 
 }
 
@@ -67,34 +67,34 @@ message CouponUpdateResp {
 message CouponListReq {
   int64 current = 1;
   int64 pageSize = 2;
-  int64 Type = 3; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  int32 Type = 3; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
   string Name = 4; //名称
-  int64 Platform = 5; //使用平台：0->全部；1->移动；2->PC
+  int32 Platform = 5; //使用平台：0->全部；1->移动；2->PC
   string StartTime = 6; //开始时间
   string EndTime = 7; //结束时间
-  int64 UseType = 8; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  int32 UseType = 8; //使用类型：0->全场通用；1->指定分类；2->指定商品
 
 }
 
 message CouponListData {
   int64 Id = 1; //
-  int64 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
   string Name = 3; //名称
-  int64 Platform = 4; //使用平台：0->全部；1->移动；2->PC
-  int64 Count = 5; //数量
+  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 Count = 5; //数量
   double Amount = 6; //金额
-  int64 PerLimit = 7; //每人限领张数
+  int32 PerLimit = 7; //每人限领张数
   double MinPoint = 8; //使用门槛；0表示无门槛
   string StartTime = 9; //开始时间
   string EndTime = 10; //结束时间
-  int64 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
   string Note = 12; //备注
-  int64 PublishCount = 13; //发行数量
-  int64 UseCount = 14; //已使用数量
-  int64 ReceiveCount = 15; //领取数量
+  int32 PublishCount = 13; //发行数量
+  int32 UseCount = 14; //已使用数量
+  int32 ReceiveCount = 15; //领取数量
   string EnableTime = 16; //可以领取的日期
   string Code = 17; //优惠码
-  int64 MemberLevel = 18; //可领取的会员类型：0->无限时
+  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
 
 }
 
@@ -109,23 +109,23 @@ message CouponFindByIdReq {
 
 message CouponFindByIdResp {
   int64 Id = 1; //
-  int64 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
   string Name = 3; //名称
-  int64 Platform = 4; //使用平台：0->全部；1->移动；2->PC
-  int64 Count = 5; //数量
+  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 Count = 5; //数量
   double Amount = 6; //金额
-  int64 PerLimit = 7; //每人限领张数
+  int32 PerLimit = 7; //每人限领张数
   double MinPoint = 8; //使用门槛；0表示无门槛
   string StartTime = 9; //开始时间
   string EndTime = 10; //结束时间
-  int64 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
   string Note = 12; //备注
-  int64 PublishCount = 13; //发行数量
-  int64 UseCount = 14; //已使用数量
-  int64 ReceiveCount = 15; //领取数量
+  int32 PublishCount = 13; //发行数量
+  int32 UseCount = 14; //已使用数量
+  int32 ReceiveCount = 15; //领取数量
   string EnableTime = 16; //可以领取的日期
   string Code = 17; //优惠码
-  int64 MemberLevel = 18; //可领取的会员类型：0->无限时
+  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
 }
 
 message CouponFindByIdsReq {
@@ -184,7 +184,7 @@ message CouponHistoryListReq {
   int64 pageSize = 2;
   int64      CouponId = 3;
   int64      MemberId = 4;
-  int64      UseStatus = 5;
+  int32      UseStatus = 5;
 }
 
 message CouponHistoryListData{
@@ -193,9 +193,9 @@ message CouponHistoryListData{
   int64      MemberId = 3;
   string      CouponCode = 4;
   string      MemberNickname = 5;
-  int64      GetType = 6;
+  int32      GetType = 6;
   string  CreateTime = 7;
-  int64      UseStatus = 8;
+  int32      UseStatus = 8;
   string  UseTime = 9;
   int64      OrderId = 10;
   string      OrderSn = 11;
@@ -212,9 +212,9 @@ message CouponHistoryUpdateReq {
   int64      MemberId = 3;
   string      CouponCode = 4;
   string      MemberNickname = 5;
-  int64      GetType = 6;
+  int32      GetType = 6;
   string  CreateTime = 7;
-  int64      UseStatus = 8;
+  int32      UseStatus = 8;
   string  UseTime = 9;
   int64      OrderId = 10;
   string      OrderSn = 11;
@@ -241,7 +241,7 @@ message CouponCountResp {
 
 message QueryMemberCouponListReq {
   int64 memberId = 1;
-  int64  UseStatus = 2;
+  int32  UseStatus = 2;
 }
 message QueryMemberCouponListResp {
   repeated  CouponListData list = 1;
@@ -249,7 +249,7 @@ message QueryMemberCouponListResp {
 
 message UpdateCouponStatusReq {
   int64 memberId = 1;
-  int64  UseStatus = 2;
+  int32  UseStatus = 2;
   int64  CouponId = 3;
 }
 message UpdateCouponStatusResp {
@@ -409,7 +409,7 @@ message FlashPromotionAddReq {
   string Title = 1; //标题
   string StartDate = 2; //开始日期
   string EndDate = 3; //结束日期
-  int64 Status = 4; //上下线状态
+  int32 Status = 4; //上下线状态
 
 }
 
@@ -438,7 +438,7 @@ message FlashPromotionUpdateReq {
   string Title = 2; //标题
   string StartDate = 3; //开始日期
   string EndDate = 4; //结束日期
-  int64 Status = 5; //上下线状态
+  int32 Status = 5; //上下线状态
 
 }
 
@@ -452,7 +452,7 @@ message FlashPromotionListReq {
   string Title = 3; //标题
   string StartDate = 4; //开始日期
   string EndDate = 5; //结束日期
-  int64 Status = 6; //上下线状态
+  int32 Status = 6; //上下线状态
 
 }
 
@@ -461,7 +461,7 @@ message FlashPromotionListData {
   string Title = 2; //标题
   string StartDate = 3; //开始日期
   string EndDate = 4; //结束日期
-  int64 Status = 5; //上下线状态
+  int32 Status = 5; //上下线状态
   string CreateTime = 6; //创建时间
 
 }
@@ -552,9 +552,9 @@ message FlashPromotionProductRelationAddReq {
   int64 FlashPromotionSessionId = 2; //编号
   int64 ProductId = 3; //商品id
   double FlashPromotionPrice = 4; //限时购价格
-  int64 FlashPromotionCount = 5; //限时购数量
-  int64 FlashPromotionLimit = 6; //每人限购数量
-  int64 Sort = 7; //排序
+  int32 FlashPromotionCount = 5; //限时购数量
+  int32 FlashPromotionLimit = 6; //每人限购数量
+  int32 Sort = 7; //排序
 
 }
 
@@ -576,9 +576,9 @@ message FlashPromotionProductRelationUpdateReq {
   int64 FlashPromotionSessionId = 3; //编号
   int64 ProductId = 4; //商品id
   double FlashPromotionPrice = 5; //限时购价格
-  int64 FlashPromotionCount = 6; //限时购数量
-  int64 FlashPromotionLimit = 7; //每人限购数量
-  int64 Sort = 8; //排序
+  int32 FlashPromotionCount = 6; //限时购数量
+  int32 FlashPromotionLimit = 7; //每人限购数量
+  int32 Sort = 8; //排序
 
 }
 
@@ -599,9 +599,9 @@ message FlashPromotionProductRelationListData {
   int64 FlashPromotionSessionId = 3; //编号
   int64 ProductId = 4; //商品id
   double FlashPromotionPrice = 5; //限时购价格
-  int64 FlashPromotionCount = 6; //限时购数量
-  int64 FlashPromotionLimit = 7; //每人限购数量
-  int64 Sort = 8; //排序
+  int32 FlashPromotionCount = 6; //限时购数量
+  int32 FlashPromotionLimit = 7; //每人限购数量
+  int32 Sort = 8; //排序
 
 }
 
@@ -619,9 +619,9 @@ message QueryFlashPromotionByProductResp {
   int64 FlashPromotionSessionId = 3; //编号
   int64 ProductId = 4; //商品id
   float FlashPromotionPrice = 5; //限时购价格
-  int64 FlashPromotionCount = 6; //限时购数量
-  int64 FlashPromotionLimit = 7; //每人限购数量
-  int64 Sort = 8; //排序
+  int32 FlashPromotionCount = 6; //限时购数量
+  int32 FlashPromotionLimit = 7; //每人限购数量
+  int32 Sort = 8; //排序
 }
 
 service FlashPromotionProductRelationService {
@@ -639,7 +639,7 @@ message FlashPromotionSessionAddReq {
   string Name = 1; //场次名称
   string StartTime = 2; //每日开始时间
   string EndTime = 3; //每日结束时间
-  int64 Status = 4; //启用状态：0->不启用；1->启用
+  int32 Status = 4; //启用状态：0->不启用；1->启用
 
 }
 
@@ -668,7 +668,7 @@ message FlashPromotionSessionUpdateReq {
   string Name = 2; //场次名称
   string StartTime = 3; //每日开始时间
   string EndTime = 4; //每日结束时间
-  int64 Status = 5; //启用状态：0->不启用；1->启用
+  int32 Status = 5; //启用状态：0->不启用；1->启用
 
 }
 
@@ -681,7 +681,7 @@ message FlashPromotionSessionListReq {
   int64 pageSize = 2;
   string StartTime = 3; //每日开始时间
   string EndTime = 4; //每日结束时间
-  int64 Status = 5; //启用状态：0->不启用；1->启用
+  int32 Status = 5; //启用状态：0->不启用；1->启用
 
 }
 
@@ -690,7 +690,7 @@ message FlashPromotionSessionListData {
   string Name = 2; //场次名称
   string StartTime = 3; //每日开始时间
   string EndTime = 4; //每日结束时间
-  int64 Status = 5; //启用状态：0->不启用；1->启用
+  int32 Status = 5; //启用状态：0->不启用；1->启用
   string CreateTime = 6; //创建时间
 
 }
@@ -714,16 +714,16 @@ service FlashPromotionSessionService {
 message HomeAdvertiseAddReq {
   int64 Id = 1; //
   string Name = 2; //名称
-  int64 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
+  int32 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
   string Pic = 4; //图片地址
   string StartTime = 5; //开始时间
   string EndTime = 6; //结束时间
-  int64 Status = 7; //上下线状态：0->下线；1->上线
-  int64 ClickCount = 8; //点击数
-  int64 OrderCount = 9; //下单数
+  int32 Status = 7; //上下线状态：0->下线；1->上线
+  int32 ClickCount = 8; //点击数
+  int32 OrderCount = 9; //下单数
   string Url = 10; //链接地址
   string Note = 11; //备注
-  int64 Sort = 12; //排序
+  int32 Sort = 12; //排序
 
 }
 
@@ -742,16 +742,16 @@ message HomeAdvertiseDeleteResp {
 message HomeAdvertiseUpdateReq {
   int64 Id = 1; //
   string Name = 2; //名称
-  int64 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
+  int32 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
   string Pic = 4; //图片地址
   string StartTime = 5; //开始时间
   string EndTime = 6; //结束时间
-  int64 Status = 7; //上下线状态：0->下线；1->上线
-  int64 ClickCount = 8; //点击数
-  int64 OrderCount = 9; //下单数
+  int32 Status = 7; //上下线状态：0->下线；1->上线
+  int32 ClickCount = 8; //点击数
+  int32 OrderCount = 9; //下单数
   string Url = 10; //链接地址
   string Note = 11; //备注
-  int64 Sort = 12; //排序
+  int32 Sort = 12; //排序
 
 }
 
@@ -761,10 +761,10 @@ message HomeAdvertiseUpdateResp {
 
 message HomeAdvertiseListReq {
   string Name = 1; //名称
-  int64 Type = 2; //轮播位置：0->PC首页轮播；1->app首页轮播
+  int32 Type = 2; //轮播位置：0->PC首页轮播；1->app首页轮播
   string StartTime = 3; //开始时间
   string EndTime = 4; //结束时间
-  int64 Status = 5; //上下线状态：0->下线；1->上线
+  int32 Status = 5; //上下线状态：0->下线；1->上线
   int64 current = 6;
   int64 pageSize = 7;
 }
@@ -772,16 +772,16 @@ message HomeAdvertiseListReq {
 message HomeAdvertiseListData {
   int64 Id = 1; //
   string Name = 2; //名称
-  int64 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
+  int32 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
   string Pic = 4; //图片地址
   string StartTime = 5; //开始时间
   string EndTime = 6; //结束时间
-  int64 Status = 7; //上下线状态：0->下线；1->上线
-  int64 ClickCount = 8; //点击数
-  int64 OrderCount = 9; //下单数
+  int32 Status = 7; //上下线状态：0->下线；1->上线
+  int32 ClickCount = 8; //点击数
+  int32 OrderCount = 9; //下单数
   string Url = 10; //链接地址
   string Note = 11; //备注
-  int64 Sort = 12; //排序
+  int32 Sort = 12; //排序
 
 }
 
@@ -806,8 +806,8 @@ message HomeBrandAddReq {
 message HomeBrandAddData {
   int64 BrandId = 1; //商品品牌id
   string BrandName = 2; //商品品牌名称
-  int64 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 4; //排序
+  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 4; //排序
 
 }
 
@@ -827,8 +827,8 @@ message HomeBrandUpdateReq {
   int64 Id = 1; //
   int64 BrandId = 2; //商品品牌id
   string BrandName = 3; //商品品牌名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 5; //排序
 
 }
 
@@ -838,7 +838,7 @@ message HomeBrandUpdateResp {
 
 message HomeBrandListReq {
   string BrandName = 1; //商品品牌名称
-  int64 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
+  int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
   int64 current = 3;
   int64 pageSize = 4;
 
@@ -848,8 +848,8 @@ message HomeBrandListData {
   int64 Id = 1; //
   int64 BrandId = 2; //商品品牌id
   string BrandName = 3; //商品品牌名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 5; //排序
 
 }
 
@@ -876,8 +876,8 @@ message HomeNewProductAddReq {
 message HomeNewProductAddData {
   int64 ProductId = 1; //商品id
   string ProductName = 2; //商品名称
-  int64 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 4; //排序
+  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 4; //排序
 
 }
 
@@ -897,8 +897,8 @@ message HomeNewProductUpdateReq {
   int64 Id = 1; //
   int64 ProductId = 2; //商品id
   string ProductName = 3; //商品名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 5; //排序
 
 }
 
@@ -910,7 +910,7 @@ message HomeNewProductListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string ProductName = 3; //商品名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
 
 }
 
@@ -918,8 +918,8 @@ message HomeNewProductListData {
   int64 Id = 1; //
   int64 ProductId = 2; //商品id
   string ProductName = 3; //商品名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 5; //排序
 
 }
 
@@ -945,8 +945,8 @@ message HomeRecommendProductAddReq {
 message HomeRecommendProductAddData {
   int64 ProductId = 1; //商品id
   string ProductName = 2; //商品名称
-  int64 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 4; //排序
+  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 4; //排序
 
 }
 
@@ -966,8 +966,8 @@ message HomeRecommendProductUpdateReq {
   int64 Id = 1; //
   int64 ProductId = 2; //商品id
   string ProductName = 3; //商品名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 5; //排序
 
 }
 
@@ -979,7 +979,7 @@ message HomeRecommendProductListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string ProductName = 3; //商品名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
 
 }
 
@@ -987,8 +987,8 @@ message HomeRecommendProductListData {
   int64 Id = 1; //
   int64 ProductId = 2; //商品id
   string ProductName = 3; //商品名称
-  int64 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int64 Sort = 5; //排序
+  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 5; //排序
 
 }
 

@@ -3,6 +3,7 @@ package couponservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -26,14 +27,14 @@ func NewCouponFindByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Co
 
 // CouponFindById 根据优惠券id查询优惠券
 func (l *CouponFindByIdLogic) CouponFindById(in *smsclient.CouponFindByIdReq) (*smsclient.CouponFindByIdResp, error) {
-	coupon, err := l.svcCtx.SmsCouponModel.FindOne(l.ctx, in.CouponId)
+	coupon, err := query.SmsCoupon.WithContext(l.ctx).Where(query.SmsCoupon.ID.Eq(in.CouponId)).First()
 
 	if err != nil {
-		errors.New("根据优惠券id查询优惠券异常")
+		return nil, errors.New("根据优惠券id查询优惠券异常")
 	}
 
 	return &smsclient.CouponFindByIdResp{
-		Id:           coupon.Id,
+		Id:           coupon.ID,
 		Type:         coupon.Type,
 		Name:         coupon.Name,
 		Platform:     coupon.Platform,

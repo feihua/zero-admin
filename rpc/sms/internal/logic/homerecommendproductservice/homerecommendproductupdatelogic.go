@@ -2,7 +2,8 @@ package homerecommendproductservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -25,13 +26,15 @@ func NewHomeRecommendProductUpdateLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *HomeRecommendProductUpdateLogic) HomeRecommendProductUpdate(in *smsclient.HomeRecommendProductUpdateReq) (*smsclient.HomeRecommendProductUpdateResp, error) {
-	err := l.svcCtx.SmsHomeRecommendProductModel.Update(l.ctx, &smsmodel.SmsHomeRecommendProduct{
-		Id:              in.Id,
-		ProductId:       in.ProductId,
+	q := query.SmsHomeRecommendProduct
+	_, err := q.WithContext(l.ctx).Updates(&model.SmsHomeRecommendProduct{
+		ID:              in.Id,
+		ProductID:       in.ProductId,
 		ProductName:     in.ProductName,
 		RecommendStatus: in.RecommendStatus,
 		Sort:            in.Sort,
 	})
+
 	if err != nil {
 		return nil, err
 	}

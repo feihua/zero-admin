@@ -2,7 +2,8 @@ package ordersettingservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
@@ -24,13 +25,14 @@ func NewOrderSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *O
 }
 
 func (l *OrderSettingAddLogic) OrderSettingAdd(in *omsclient.OrderSettingAddReq) (*omsclient.OrderSettingAddResp, error) {
-	_, err := l.svcCtx.OmsOrderSettingModel.Insert(l.ctx, &omsmodel.OmsOrderSetting{
+	err := query.OmsOrderSetting.WithContext(l.ctx).Create(&model.OmsOrderSetting{
 		FlashOrderOvertime:  in.FinishOvertime,
 		NormalOrderOvertime: in.NormalOrderOvertime,
 		ConfirmOvertime:     in.ConfirmOvertime,
 		FinishOvertime:      in.FinishOvertime,
 		CommentOvertime:     in.CommentOvertime,
 	})
+
 	if err != nil {
 		return nil, err
 	}

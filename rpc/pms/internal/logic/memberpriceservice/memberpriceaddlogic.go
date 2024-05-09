@@ -2,7 +2,8 @@ package memberpriceservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberPriceAddLogic 会员价格
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:47
+*/
 type MemberPriceAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,13 +30,15 @@ func NewMemberPriceAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 	}
 }
 
+// MemberPriceAdd 添加会员价格
 func (l *MemberPriceAddLogic) MemberPriceAdd(in *pmsclient.MemberPriceAddReq) (*pmsclient.MemberPriceAddResp, error) {
-	_, err := l.svcCtx.PmsMemberPriceModel.Insert(l.ctx, &pmsmodel.PmsMemberPrice{
-		ProductId:       in.ProductId,
-		MemberLevelId:   in.MemberLevelId,
+	err := query.PmsMemberPrice.WithContext(l.ctx).Create(&model.PmsMemberPrice{
+		ProductID:       in.ProductId,
+		MemberLevelID:   in.MemberLevelId,
 		MemberPrice:     float64(in.MemberPrice),
 		MemberLevelName: in.MemberLevelName,
 	})
+
 	if err != nil {
 		return nil, err
 	}

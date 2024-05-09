@@ -64,7 +64,7 @@ type (
 		DeptId   int64  `json:"deptId"`
 		RoleId   int64  `json:"roleId"`
 		JobId    int64  `json:"jobId"`
-		Status   int64  `json:"status"` // 状态  0：禁用   1：正常
+        Status int32 `json:"status"` // 状态  0：禁用   1：正常
 	}
 	addUserResp {
 		Code    string `json:"code"`
@@ -78,7 +78,7 @@ type (
 		NickName string `json:"nickName,optional"`
 		Mobile   string `json:"mobile,optional"`
 		Email    string `json:"email,optional"`
-		Status   int64  `json:"status,optional,default=2"`
+        Status int32 `json:"status,optional,default=2"`
 		DeptId   int64  `json:"deptId,optional"`
 		JobId    int64  `json:"deptId,optional"`
 	}
@@ -90,13 +90,13 @@ type (
 		Avatar         string `json:"avatar"`         // 头像
 		Email          string `json:"email"`          // 邮箱
 		Mobile         string `json:"mobile"`         // 手机号
-		Status         int64  `json:"status"`         // 状态  0：禁用   1：正常
+        Status int32 `json:"status"`                  // 状态  0：禁用   1：正常
 		DeptId         int64  `json:"deptId"`         // 机构ID
 		CreateBy       string `json:"createBy"`       // 创建人
 		CreateTime     string `json:"createTime"`     // 创建时间
-		LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
-		LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
-		DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
+        UpdateBy string `json:"updateBy"`             // 更新人
+        UpdateTime string `json:"updateTime"`         // 更新时间
+        DelFlag int32 `json:"delFlag"`                // 是否删除  0：已删除  1：正常
 		JobId          int64  `json:"jobId"`
 		RoleId         int64  `json:"roleId"`
 		RoleName       string `json:"roleName"`
@@ -120,7 +120,7 @@ type (
 		NickName string `json:"nickName"`
 		DeptId   int64  `json:"deptId"`
 		RoleId   int64  `json:"roleId"`
-		Status   int64  `json:"status"`
+        Status int32 `json:"status"`
 		JobId    int64  `json:"jobId"`
 		DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 	}
@@ -144,7 +144,7 @@ type (
 	}
 	UserStatusReq {
 		Id     int64 `json:"id"`
-		Status int64 `json:"status"` // 状态  0：禁用   1：正常
+        Status int32 `json:"status"` // 状态  0：禁用   1：正常
 	}
 	UserStatusResp {
 		Code    string `json:"code"`

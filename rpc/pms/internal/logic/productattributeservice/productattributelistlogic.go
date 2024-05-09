@@ -2,9 +2,10 @@ package productattributeservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,21 +25,34 @@ func NewProductAttributeListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *ProductAttributeListLogic) ProductAttributeList(in *pmsclient.ProductAttributeListReq) (*pmsclient.ProductAttributeListResp, error) {
-	all, err := l.svcCtx.PmsProductAttributeModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.PmsProductAttributeModel.Count(l.ctx, in)
+	q := query.PmsProductAttribute.WithContext(l.ctx)
+	if len(in.Name) > 0 {
+		q = q.Where(query.PmsProductAttribute.Name.Like("%" + in.Name + "%"))
+	}
+
+	if in.Type != 2 {
+		q = q.Where(query.PmsProductAttribute.Type.Eq(in.Type))
+	}
+
+	if in.ProductAttributeCategoryId != 0 {
+		q = q.Where(query.PmsProductAttribute.ProductAttributeCategoryID.Eq(in.ProductAttributeCategoryId))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询商品属性列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询商品属性列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*pmsclient.ProductAttributeListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductAttributeListData{
-			Id:                         item.Id,
-			ProductAttributeCategoryId: item.ProductAttributeCategoryId,
+			Id:                         item.ID,
+			ProductAttributeCategoryId: item.ProductAttributeCategoryID,
 			Name:                       item.Name,
 			SelectType:                 item.SelectType,
 			InputType:                  item.InputType,
@@ -52,9 +66,7 @@ func (l *ProductAttributeListLogic) ProductAttributeList(in *pmsclient.ProductAt
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询商品属性列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询商品属性列表信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.ProductAttributeListResp{
 		Total: count,
 		List:  list,

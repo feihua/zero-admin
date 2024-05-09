@@ -15,13 +15,13 @@ type (
 		ReturnAmount     float64 `json:"returnAmount"`     // 退款金额
 		ReturnName       string  `json:"returnName"`       // 退货人姓名
 		ReturnPhone      string  `json:"returnPhone"`      // 退货人电话
-		Status           int64   `json:"status"`           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+        Status int32 `json:"status"`                       // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
 		HandleTime       string  `json:"handleTime"`       // 处理时间
 		ProductPic       string  `json:"productPic"`       // 商品图片
 		ProductName      string  `json:"productName"`      // 商品名称
 		ProductBrand     string  `json:"productBrand"`     // 商品品牌
 		ProductAttr      string  `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
-		ProductCount     int64   `json:"productCount"`     // 退货数量
+        ProductCount int32 `json:"productCount"`           // 退货数量
 		ProductPrice     float64 `json:"productPrice"`     // 商品单价
 		ProductRealPrice float64 `json:"productRealPrice"` // 商品实际支付单价
 		Reason           string  `json:"reason"`           // 原因
@@ -41,7 +41,7 @@ type (
 		Current        int64  `json:"current,default=1"`
 		PageSize       int64  `json:"pageSize,default=20"`
 		OrderSn        string `json:"orderSn,optional"`        // 订单编号
-		Status         int64  `json:"status,default=4"`        // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+        Status int32 `json:"status,default=4"`                 // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
 		HandleTime     string `json:"handleTime,optional"`     // 处理时间
 		CreateTime     string `json:"createTime,optional"`     // 申请时间
 		MemberUsername string `json:"memberUserName,optional"` // 会员用户名
@@ -57,13 +57,13 @@ type (
 		ReturnAmount     float64 `json:"returnAmount"`     // 退款金额
 		ReturnName       string  `json:"returnName"`       // 退货人姓名
 		ReturnPhone      string  `json:"returnPhone"`      // 退货人电话
-		Status           int64   `json:"status"`           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+        Status int32 `json:"status"`                       // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
 		HandleTime       string  `json:"handleTime"`       // 处理时间
 		ProductPic       string  `json:"productPic"`       // 商品图片
 		ProductName      string  `json:"productName"`      // 商品名称
 		ProductBrand     string  `json:"productBrand"`     // 商品品牌
 		ProductAttr      string  `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
-		ProductCount     int64   `json:"productCount"`     // 退货数量
+        ProductCount int32 `json:"productCount"`           // 退货数量
 		ProductPrice     float64 `json:"productPrice"`     // 商品单价
 		ProductRealPrice float64 `json:"productRealPrice"` // 商品实际支付单价
 		Reason           string  `json:"reason"`           // 原因
@@ -87,7 +87,7 @@ type (
 	UpdateReturnApplyReq {
 		Id               int64  `json:"id"`
 		CompanyAddressId int64  `json:"companyAddressId,optional"` // 收货地址表id
-		Status           int64  `json:"status"`                    // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+        Status int32 `json:"status"`                               // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
 		HandleNote       string `json:"handleNote,optional"`       // 处理备注
 		ReceiveNote      string `json:"receiveNote,optional"`      // 收货备注
 	}

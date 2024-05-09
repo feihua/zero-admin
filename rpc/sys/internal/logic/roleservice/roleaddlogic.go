@@ -2,12 +2,11 @@ package roleservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-
-	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,14 +32,13 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleAddLo
 
 // RoleAdd 新增角色
 func (l *RoleAddLogic) RoleAdd(in *sysclient.RoleAddReq) (*sysclient.RoleAddResp, error) {
-	role := &sysmodel.SysRole{
+	err := query.SysRole.WithContext(l.ctx).Create(&model.SysRole{
 		Name:     in.Name,
-		Remark:   sql.NullString{String: in.Remark, Valid: true},
+		Remark:   &in.Remark,
 		CreateBy: in.CreateBy,
-		DelFlag:  0,
+		DelFlag:  1,
 		Status:   in.Status,
-	}
-	_, err := l.svcCtx.RoleModel.Insert(l.ctx, role)
+	})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "新增角色信息失败,参数:%+v,异常:%s", in, err.Error())

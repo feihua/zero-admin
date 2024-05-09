@@ -2,10 +2,10 @@ package couponservicelogic
 
 import (
 	"context"
-	"encoding/json"
-
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -31,19 +31,42 @@ func NewCouponFindByProductIdAndProductCategoryIdLogic(ctx context.Context, svcC
 
 // CouponFindByProductIdAndProductCategoryId 根据商品Id和分类id查询可用的优惠券(front)
 func (l *CouponFindByProductIdAndProductCategoryIdLogic) CouponFindByProductIdAndProductCategoryId(in *smsclient.CouponFindByProductIdAndProductCategoryIdReq) (*smsclient.CouponFindByProductIdAndProductCategoryIdResp, error) {
-	all, err := l.svcCtx.SmsCouponModel.CouponFindByProductIdAndProductCategoryId(l.ctx, in.ProductId, in.ProductCategoryId)
+	sql := `SELECT *
+FROM sms_coupon
+WHERE use_type = 0
+  AND start_time < now()
+  AND end_time > now()
+UNION
+(SELECT c.*
+ FROM sms_coupon_product_category_relation cpc
+          LEFT JOIN sms_coupon c ON cpc.coupon_id = c.id
+ WHERE c.use_type = 1
+   AND c.start_time < now()
+   AND c.end_time > now()
+   AND cpc.product_category_id = ?)
+UNION
+(SELECT c.*
+ FROM sms_coupon_product_relation cp
+          LEFT JOIN sms_coupon c ON cp.coupon_id = c.id
+ WHERE c.use_type = 2
+   AND c.start_time < now()
+   AND c.end_time > now()
+   AND cp.product_id = ?)`
+
+	var result []model.SmsCoupon
+	db := l.svcCtx.DB
+	err := db.WithContext(l.ctx).Raw(sql, in.ProductCategoryId, in.ProductId).Scan(&result).Error
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询商品优惠券列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询商品优惠券列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*smsclient.CouponListData
-	for _, coupon := range *all {
+	for _, coupon := range result {
 
 		list = append(list, &smsclient.CouponListData{
-			Id:           coupon.Id,
+			Id:           coupon.ID,
 			Type:         coupon.Type,
 			Name:         coupon.Name,
 			Platform:     coupon.Platform,
@@ -63,9 +86,7 @@ func (l *CouponFindByProductIdAndProductCategoryIdLogic) CouponFindByProductIdAn
 			MemberLevel:  coupon.MemberLevel,
 		})
 
-		reqStr, _ := json.Marshal(in)
-		listStr, _ := json.Marshal(list)
-		logx.WithContext(l.ctx).Infof("查询商品优惠券列表信息,参数：%s,响应：%s", reqStr, listStr)
+		logc.Infof(l.ctx, "查询商品优惠券列表信息,参数：%+v,响应：%+v", in, list)
 	}
 
 	return &smsclient.CouponFindByProductIdAndProductCategoryIdResp{

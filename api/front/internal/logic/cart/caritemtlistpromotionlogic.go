@@ -177,7 +177,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 			//从pms_sku_stock中获取price原价-折扣*商品原价(表pms_ladder),即可
 		} else if promotionType == 3 {
 			//获取购物车中指定商品的数量
-			var count int64 = 0
+			var count int32 = 0
 			for _, item := range itemList {
 				count = count + item.Quantity
 			}
@@ -196,7 +196,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 					cartPromotionItem := types.CarItemtPromotionListData{}
 					_ = copier.Copy(&cartPromotionItem, &item)
 					cartPromotionItem.Price = skuStock.Price
-					c := strconv.FormatInt(productLadder.Count, 10)
+					c := strconv.FormatInt(int64(productLadder.Count), 10)
 					d := fmt.Sprintf("%1.0f", productLadder.Discount*10)
 					cartPromotionItem.PromotionMessage = "打折优惠：满" + c + "件,打" + d + "折"
 					//商品原价-折扣*商品原价

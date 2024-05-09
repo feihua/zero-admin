@@ -2,6 +2,7 @@ package jobservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -30,8 +31,8 @@ func NewJobDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobDele
 
 // JobDelete 删除岗位
 func (l *JobDeleteLogic) JobDelete(in *sysclient.JobDeleteReq) (*sysclient.JobDeleteResp, error) {
-	err := l.svcCtx.JobModel.DeleteByIds(l.ctx, in.Ids)
-
+	q := query.SysJob
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
 		return nil, err
 	}

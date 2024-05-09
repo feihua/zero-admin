@@ -2,9 +2,11 @@ package flashpromotionservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,19 +32,20 @@ func NewFlashPromotionListByDateLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // FlashPromotionListByDate 查询当前时间是否有秒杀活动
 func (l *FlashPromotionListByDateLogic) FlashPromotionListByDate(in *smsclient.FlashPromotionListByDateReq) (*smsclient.FlashPromotionListByDateResp, error) {
-	all, err := l.svcCtx.SmsFlashPromotionModel.FindAllByCurrentDate(l.ctx, in.CurrentDate)
+	currentDate, _ := time.Parse("2006-01-02", in.CurrentDate)
+	q := query.SmsFlashPromotion
+	result, err := q.WithContext(l.ctx).Where(q.Status.Eq(1), q.StartDate.Lte(currentDate), q.EndDate.Gte(currentDate)).Find()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询限时购列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询限时购列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*smsclient.FlashPromotionListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &smsclient.FlashPromotionListData{
-			Id:         item.Id,
+			Id:         item.ID,
 			Title:      item.Title,
 			StartDate:  item.StartDate.Format("2006-01-02"),
 			EndDate:    item.EndDate.Format("2006-01-02"),
@@ -51,9 +54,7 @@ func (l *FlashPromotionListByDateLogic) FlashPromotionListByDate(in *smsclient.F
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询限时购列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询限时购列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &smsclient.FlashPromotionListByDateResp{List: list}, nil
 }

@@ -45,7 +45,7 @@ func (l *MemberPriceListLogic) MemberPriceList(req types.ListMemberPriceReq) (*t
 			Id:              item.Id,
 			ProductId:       item.ProductId,
 			MemberLevelId:   item.MemberLevelId,
-			MemberPrice:     float64(item.MemberPrice),
+			MemberPrice:     item.MemberPrice,
 			MemberLevelName: item.MemberLevelName,
 		})
 	}

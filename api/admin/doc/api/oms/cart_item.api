@@ -9,14 +9,14 @@ type (
 		ProductId         int64   `json:"productId"`
 		ProductSkuId      int64   `json:"productSkuId"`
 		MemberId          int64   `json:"memberId"`
-		Quantity          int64   `json:"quantity"`          // 购买数量
+        Quantity int32 `json:"quantity"`                     // 购买数量
 		Price             float64 `json:"price"`             // 添加到购物车的价格
 		ProductPic        string  `json:"productPic"`        // 商品主图
 		ProductName       string  `json:"productName"`       // 商品名称
 		ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
 		ProductSkuCode    string  `json:"productSkuCode"`    // 商品sku条码
 		MemberNickname    string  `json:"memberNickName"`    // 会员昵称
-		DeleteStatus      int64   `json:"deleteStatus"`      // 是否删除
+        DeleteStatus int32 `json:"deleteStatus"`             // 是否删除
 		ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
 		ProductBrand      string  `json:"productBrand"`
 		ProductSn         string  `json:"productSn"`
@@ -35,7 +35,7 @@ type (
 		ProductId         int64   `json:"productId"`
 		ProductSkuId      int64   `json:"productSkuId"`
 		MemberId          int64   `json:"memberId"`
-		Quantity          int64   `json:"quantity"`          // 购买数量
+        Quantity int32 `json:"quantity"`                     // 购买数量
 		Price             float64 `json:"price"`             // 添加到购物车的价格
 		ProductPic        string  `json:"productPic"`        // 商品主图
 		ProductName       string  `json:"productName"`       // 商品名称
@@ -44,7 +44,7 @@ type (
 		MemberNickname    string  `json:"memberNickName"`    // 会员昵称
 		CreateDate        string  `json:"createDate"`        // 创建时间
 		ModifyDate        string  `json:"modifyDate"`        // 修改时间
-		DeleteStatus      int64   `json:"deleteStatus"`      // 是否删除
+        DeleteStatus int32 `json:"deleteStatus"`             // 是否删除
 		ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
 		ProductBrand      string  `json:"productBrand"`
 		ProductSn         string  `json:"productSn"`
@@ -64,14 +64,14 @@ type (
 		ProductId         int64   `json:"productId"`
 		ProductSkuId      int64   `json:"productSkuId"`
 		MemberId          int64   `json:"memberId"`
-		Quantity          int64   `json:"quantity"`          // 购买数量
+        Quantity int32 `json:"quantity"`                     // 购买数量
 		Price             float64 `json:"price"`             // 添加到购物车的价格
 		ProductPic        string  `json:"productPic"`        // 商品主图
 		ProductName       string  `json:"productName"`       // 商品名称
 		ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
 		ProductSkuCode    string  `json:"productSkuCode"`    // 商品sku条码
 		MemberNickname    string  `json:"memberNickName"`    // 会员昵称
-		DeleteStatus      int64   `json:"deleteStatus"`      // 是否删除
+        DeleteStatus int32 `json:"deleteStatus"`             // 是否删除
 		ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
 		ProductBrand      string  `json:"productBrand"`
 		ProductSn         string  `json:"productSn"`

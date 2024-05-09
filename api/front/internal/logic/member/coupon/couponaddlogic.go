@@ -57,7 +57,7 @@ func (l *CouponAddLogic) CouponAdd(req *types.AddCouponReq) (resp *types.AddCoup
 		MemberId: l.ctx.Value("memberId").(int64),
 	})
 
-	if couponHistoryList.Total >= coupon.PerLimit {
+	if couponHistoryList.Total >= int64(coupon.PerLimit) {
 		return nil, errors.New("您已经领取过该优惠券")
 	}
 

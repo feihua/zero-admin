@@ -2,7 +2,8 @@ package productservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -51,15 +52,15 @@ func (l *ProductDetailByIdLogic) ProductDetailById(in *pmsclient.ProductDetailBy
 }
 
 // 1.获取商品信息
-func buildProductListData(l *ProductDetailByIdLogic, productId int64) (*pmsclient.ProductListData, *pmsmodel.PmsProduct) {
-	pmsProduct, _ := l.svcCtx.PmsProductModel.FindOne(l.ctx, productId)
+func buildProductListData(l *ProductDetailByIdLogic, productId int64) (*pmsclient.ProductListData, *model.PmsProduct) {
+	pmsProduct, _ := query.PmsProduct.WithContext(l.ctx).Where(query.PmsProduct.ID.Eq(productId)).First()
 
 	return &pmsclient.ProductListData{
-		Id:                         pmsProduct.Id,
-		BrandId:                    pmsProduct.BrandId,
-		ProductCategoryId:          pmsProduct.ProductCategoryId,
-		FeightTemplateId:           pmsProduct.FeightTemplateId,
-		ProductAttributeCategoryId: pmsProduct.ProductAttributeCategoryId,
+		Id:                         pmsProduct.ID,
+		BrandId:                    pmsProduct.BrandID,
+		ProductCategoryId:          pmsProduct.ProductCategoryID,
+		FeightTemplateId:           pmsProduct.FeightTemplateID,
+		ProductAttributeCategoryId: pmsProduct.ProductAttributeCategoryID,
 		Name:                       pmsProduct.Name,
 		Pic:                        pmsProduct.Pic,
 		ProductSn:                  pmsProduct.ProductSn,
@@ -89,23 +90,23 @@ func buildProductListData(l *ProductDetailByIdLogic, productId int64) (*pmsclien
 		AlbumPics:                  pmsProduct.AlbumPics,
 		DetailTitle:                pmsProduct.DetailTitle,
 		DetailDesc:                 pmsProduct.DetailDesc,
-		DetailHtml:                 pmsProduct.DetailHtml,
-		DetailMobileHtml:           pmsProduct.DetailMobileHtml,
+		DetailHtml:                 pmsProduct.DetailHTML,
+		DetailMobileHtml:           pmsProduct.DetailMobileHTML,
 		PromotionStartTime:         pmsProduct.PromotionStartTime.Format("2006-01-02 15:04:05"),
 		PromotionEndTime:           pmsProduct.PromotionEndTime.Format("2006-01-02 15:04:05"),
 		PromotionPerLimit:          pmsProduct.PromotionPerLimit,
 		PromotionType:              pmsProduct.PromotionType,
 		BrandName:                  pmsProduct.BrandName,
 		ProductCategoryName:        pmsProduct.ProductCategoryName,
-		ProductCategoryIdArray:     pmsProduct.ProductCategoryIdArray,
+		ProductCategoryIdArray:     pmsProduct.ProductCategoryIDArray,
 	}, pmsProduct
 }
 
 // 2.获取品牌信息
-func buildBrandListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) *pmsclient.BrandListData {
-	item, _ := l.svcCtx.PmsBrandModel.FindOne(l.ctx, pmsProduct.BrandId)
+func buildBrandListData(l *ProductDetailByIdLogic, pmsProduct *model.PmsProduct) *pmsclient.BrandListData {
+	item, _ := query.PmsBrand.WithContext(l.ctx).Where(query.PmsBrand.ID.Eq(pmsProduct.BrandID)).First()
 	return &pmsclient.BrandListData{
-		Id:                  item.Id,
+		Id:                  item.ID,
 		Name:                item.Name,
 		FirstLetter:         item.FirstLetter,
 		Sort:                item.Sort,
@@ -120,21 +121,18 @@ func buildBrandListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProdu
 }
 
 // 3.获取商品属性信息
-func buildProductAttributeListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) ([]*pmsclient.ProductAttributeListData, []int64) {
-	all, _ := l.svcCtx.PmsProductAttributeModel.FindAll(l.ctx, &pmsclient.ProductAttributeListReq{
-		Current:                    1,
-		PageSize:                   100,
-		Name:                       "",
-		Type:                       2,
-		ProductAttributeCategoryId: pmsProduct.ProductAttributeCategoryId,
-	})
+func buildProductAttributeListData(l *ProductDetailByIdLogic, pmsProduct *model.PmsProduct) ([]*pmsclient.ProductAttributeListData, []int64) {
+
+	q := query.PmsProductAttribute
+	result, _ := q.WithContext(l.ctx).Where(q.Type.Eq(2), q.ProductAttributeCategoryID.Eq(pmsProduct.ProductAttributeCategoryID)).Find()
+
 	var list []*pmsclient.ProductAttributeListData
 	var attributeIds []int64
-	for _, item := range *all {
-		attributeIds = append(attributeIds, item.Id)
+	for _, item := range result {
+		attributeIds = append(attributeIds, item.ID)
 		list = append(list, &pmsclient.ProductAttributeListData{
-			Id:                         item.Id,
-			ProductAttributeCategoryId: item.ProductAttributeCategoryId,
+			Id:                         item.ID,
+			ProductAttributeCategoryId: item.ProductAttributeCategoryID,
 			Name:                       item.Name,
 			SelectType:                 item.SelectType,
 			InputType:                  item.InputType,
@@ -152,16 +150,18 @@ func buildProductAttributeListData(l *ProductDetailByIdLogic, pmsProduct *pmsmod
 }
 
 // 4.获取商品属性值信息
-func buildProductAttributeValueListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct, attributeIds []int64) []*pmsclient.ProductAttributeValueListData {
+func buildProductAttributeValueListData(l *ProductDetailByIdLogic, pmsProduct *model.PmsProduct, attributeIds []int64) []*pmsclient.ProductAttributeValueListData {
 	if len(attributeIds) > 0 {
-		all, _ := l.svcCtx.PmsProductAttributeValueModel.FindAll(l.ctx, pmsProduct.Id)
+		q := query.PmsProductAttributeValue
+		result, _ := q.WithContext(l.ctx).Where(q.ProductID.Eq(pmsProduct.ID)).Find()
+
 		var list []*pmsclient.ProductAttributeValueListData
-		for _, item := range *all {
+		for _, item := range result {
 			list = append(list, &pmsclient.ProductAttributeValueListData{
-				Id:                 item.Id,
-				ProductId:          item.ProductId,
-				ProductAttributeId: item.ProductAttributeId,
-				Value:              item.Value.String,
+				Id:                 item.ID,
+				ProductId:          item.ProductID,
+				ProductAttributeId: item.ProductAttributeID,
+				Value:              *item.Value,
 			})
 		}
 
@@ -172,14 +172,15 @@ func buildProductAttributeValueListData(l *ProductDetailByIdLogic, pmsProduct *p
 }
 
 // 5.获取商品SKU库存信息
-func buildSkuStockListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) []*pmsclient.SkuStockListData {
-	all, _ := l.svcCtx.PmsSkuStockModel.FindAll(l.ctx, pmsProduct.Id)
+func buildSkuStockListData(l *ProductDetailByIdLogic, pmsProduct *model.PmsProduct) []*pmsclient.SkuStockListData {
+	q := query.PmsSkuStock
+	result, _ := q.WithContext(l.ctx).Where(q.ProductID.Eq(pmsProduct.ID)).Find()
 	var list []*pmsclient.SkuStockListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &pmsclient.SkuStockListData{
-			Id:             item.Id,
-			ProductId:      item.ProductId,
+			Id:             item.ID,
+			ProductId:      item.ProductID,
 			SkuCode:        item.SkuCode,
 			Price:          float32(item.Price),
 			Stock:          item.Stock,
@@ -196,15 +197,16 @@ func buildSkuStockListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsPr
 }
 
 // 6.商品阶梯价格设置
-func buildProductLadderListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) []*pmsclient.ProductLadderListData {
+func buildProductLadderListData(l *ProductDetailByIdLogic, pmsProduct *model.PmsProduct) []*pmsclient.ProductLadderListData {
 	if pmsProduct.PromotionType == 3 {
-		all, _ := l.svcCtx.PmsProductLadderModel.FindAll(l.ctx, pmsProduct.Id)
+		q := query.PmsProductLadder
+		result, _ := q.WithContext(l.ctx).Where(q.ProductID.Eq(pmsProduct.ID)).Find()
 		var list []*pmsclient.ProductLadderListData
-		for _, item := range *all {
+		for _, item := range result {
 
 			list = append(list, &pmsclient.ProductLadderListData{
-				Id:        item.Id,
-				ProductId: item.ProductId,
+				Id:        item.ID,
+				ProductId: item.ProductID,
 				Count:     item.Count,
 				Discount:  float32(item.Discount),
 				Price:     float32(item.Price),
@@ -218,16 +220,17 @@ func buildProductLadderListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.
 }
 
 // 7.商品满减价格设置
-func buildProductFullReductionListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) []*pmsclient.ProductFullReductionListData {
+func buildProductFullReductionListData(l *ProductDetailByIdLogic, pmsProduct *model.PmsProduct) []*pmsclient.ProductFullReductionListData {
 	if pmsProduct.PromotionType == 4 {
-		all, _ := l.svcCtx.PmsProductFullReductionModel.FindAll(l.ctx, pmsProduct.Id)
+		q := query.PmsProductFullReduction
+		result, _ := q.WithContext(l.ctx).Where(q.ProductID.Eq(pmsProduct.ID)).Find()
 
 		var list []*pmsclient.ProductFullReductionListData
-		for _, item := range *all {
+		for _, item := range result {
 
 			list = append(list, &pmsclient.ProductFullReductionListData{
-				Id:          item.Id,
-				ProductId:   item.ProductId,
+				Id:          item.ID,
+				ProductId:   item.ProductID,
 				FullPrice:   float32(item.FullPrice),
 				ReducePrice: float32(item.ReducePrice),
 			})
@@ -239,17 +242,18 @@ func buildProductFullReductionListData(l *ProductDetailByIdLogic, pmsProduct *pm
 }
 
 // 8.获取商品的会员价格
-func buildProductMemberListData(l *ProductDetailByIdLogic, pmsProduct *pmsmodel.PmsProduct) []*pmsclient.MemberPriceListData {
+func buildProductMemberListData(l *ProductDetailByIdLogic, pmsProduct *model.PmsProduct) []*pmsclient.MemberPriceListData {
 	if pmsProduct.PromotionType == 2 {
-		all, _ := l.svcCtx.PmsMemberPriceModel.FindAll(l.ctx, pmsProduct.Id)
+		q := query.PmsMemberPrice
+		result, _ := q.WithContext(l.ctx).Where(q.ProductID.Eq(pmsProduct.ID)).Find()
 
 		var list []*pmsclient.MemberPriceListData
-		for _, item := range *all {
+		for _, item := range result {
 
 			list = append(list, &pmsclient.MemberPriceListData{
-				Id:              item.Id,
-				ProductId:       item.ProductId,
-				MemberLevelId:   item.MemberLevelId,
+				Id:              item.ID,
+				ProductId:       item.ProductID,
+				MemberLevelId:   item.MemberLevelID,
 				MemberPrice:     float32(item.MemberPrice),
 				MemberLevelName: item.MemberLevelName,
 			})

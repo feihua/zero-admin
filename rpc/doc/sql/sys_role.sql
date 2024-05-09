@@ -9,7 +9,7 @@ create table sys_role
     update_by   varchar(50)                         null comment '更新者',
     update_time datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
     del_flag    tinyint   default 1                 not null comment '是否删除  0：已删除  1：正常',
-    status      bigint    default 1                 not null comment '状态  1:启用,0:禁用'
+    status tinyint default 1 not null comment '状态  1:启用,0:禁用'
 )
     comment '角色管理';
 

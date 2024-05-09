@@ -31,8 +31,8 @@ func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsR
 	subjects, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Find()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询商品品牌列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		in, _ := json.Marshal(in)
+		logc.Errorf(l.ctx, "查询商品品牌列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
@@ -59,7 +59,7 @@ func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsR
 		})
 	}
 
-	logc.Infof(l.ctx, "查询专题列表信息,参数：%s,响应：%s", in, list)
+	logc.Infof(l.ctx, "查询专题列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &cmsclient.SubjectListResp{
 		Total: 0,

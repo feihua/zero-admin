@@ -2,7 +2,8 @@ package brandservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -25,19 +26,18 @@ func NewBrandListByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Br
 }
 
 func (l *BrandListByIdsLogic) BrandListByIds(in *pmsclient.BrandListByIdsReq) (*pmsclient.BrandListResp, error) {
-	all, err := l.svcCtx.PmsBrandModel.FindAllByIds(l.ctx, in.Ids)
+	result, err := query.PmsBrand.WithContext(l.ctx).Where(query.PmsBrand.ID.In(in.Ids...)).Find()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询商品品牌列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询商品品牌列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*pmsclient.BrandListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &pmsclient.BrandListData{
-			Id:                  item.Id,
+			Id:                  item.ID,
 			Name:                item.Name,
 			FirstLetter:         item.FirstLetter,
 			Sort:                item.Sort,
@@ -51,9 +51,7 @@ func (l *BrandListByIdsLogic) BrandListByIds(in *pmsclient.BrandListByIdsReq) (*
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询商品品牌列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询商品品牌列表信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.BrandListResp{
 		Total: 0,
 		List:  list,

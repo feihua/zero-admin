@@ -22,7 +22,7 @@ type SysUser struct {
 	Mobile     *string    `gorm:"column:mobile;comment:手机号" json:"mobile"`                                               // 手机号
 	Status     int32      `gorm:"column:status;not null;comment:状态  0：禁用   1：正常" json:"status"`                          // 状态  0：禁用   1：正常
 	DeptID     int64      `gorm:"column:dept_id;not null;comment:部门id" json:"dept_id"`                                   // 部门id
-	JobID      int32      `gorm:"column:job_id;not null;comment:岗位id" json:"job_id"`                                     // 岗位id
+	JobID      int64      `gorm:"column:job_id;not null;comment:岗位id" json:"job_id"`                                     // 岗位id
 	CreateBy   string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateBy   *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                         // 更新者

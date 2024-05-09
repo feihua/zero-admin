@@ -7,8 +7,8 @@ info(
 type (
 	addCompayAddressReq {
 		AddressName   string `json:"addressName"`   // 地址名称
-		SendStatus    int64  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
-		ReceiveStatus int64  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+        SendStatus int32 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
+        ReceiveStatus int32 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
 		Name          string `json:"name"`          // 收发货人姓名
 		Phone         string `json:"phone"`         // 收货人电话
 		Province      string `json:"province"`      // 省/直辖市
@@ -27,8 +27,8 @@ type (
 	ListtCompayAddressData {
 		Id            int64  `json:"id"`
 		AddressName   string `json:"addressName"`   // 地址名称
-		SendStatus    int64  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
-		ReceiveStatus int64  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+        SendStatus int32 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
+        ReceiveStatus int32 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
 		Name          string `json:"name"`          // 收发货人姓名
 		Phone         string `json:"phone"`         // 收货人电话
 		Province      string `json:"province"`      // 省/直辖市
@@ -48,8 +48,8 @@ type (
 	UpdateCompayAddressReq {
 		Id            int64  `json:"id"`
 		AddressName   string `json:"addressName"`   // 地址名称
-		SendStatus    int64  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
-		ReceiveStatus int64  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+        SendStatus int32 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
+        ReceiveStatus int32 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
 		Name          string `json:"name"`          // 收发货人姓名
 		Phone         string `json:"phone"`         // 收货人电话
 		Province      string `json:"province"`      // 省/直辖市

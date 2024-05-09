@@ -46,16 +46,16 @@ func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, er
 
 	for _, dept := range resp.List {
 		list = append(list, &types.ListDeptData{
-			Id:             dept.Id,
-			Name:           dept.Name,
-			ParentId:       dept.ParentId,
-			OrderNum:       dept.OrderNum,
-			CreateBy:       dept.CreateBy,
-			CreateTime:     dept.CreateTime,
-			LastUpdateBy:   dept.LastUpdateBy,
-			LastUpdateTime: dept.LastUpdateTime,
-			DelFlag:        dept.DelFlag,
-			ParentIds:      dept.ParentIds,
+			Id:         dept.Id,
+			Name:       dept.Name,
+			ParentId:   dept.ParentId,
+			OrderNum:   dept.OrderNum,
+			CreateBy:   dept.CreateBy,
+			CreateTime: dept.CreateTime,
+			UpdateBy:   dept.UpdateBy,
+			UpdateTime: dept.UpdateTime,
+			DelFlag:    dept.DelFlag,
+			ParentIds:  dept.ParentIds,
 		})
 	}
 

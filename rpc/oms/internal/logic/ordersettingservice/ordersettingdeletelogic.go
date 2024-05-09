@@ -2,6 +2,7 @@ package ordersettingservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderSettingDeleteLogic 订单设置
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 9:34
+*/
 type OrderSettingDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewOrderSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// OrderSettingDelete 删除订单设置
 func (l *OrderSettingDeleteLogic) OrderSettingDelete(in *omsclient.OrderSettingDeleteReq) (*omsclient.OrderSettingDeleteResp, error) {
-	err := l.svcCtx.OmsOrderSettingModel.DeleteByIds(l.ctx, in.Ids)
+	q := query.OmsOrderSetting
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
 		return nil, err

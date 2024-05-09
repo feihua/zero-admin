@@ -2,10 +2,12 @@ package couponservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"time"
 )
 
 type CouponListLogic struct {
@@ -23,20 +25,44 @@ func NewCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Coupon
 }
 
 func (l *CouponListLogic) CouponList(in *smsclient.CouponListReq) (*smsclient.CouponListResp, error) {
-	all, err := l.svcCtx.SmsCouponModel.FindAll(l.ctx, in.Current, in.PageSize, in)
-	count, _ := l.svcCtx.SmsCouponModel.Count(l.ctx)
+
+	q := query.SmsCoupon.WithContext(l.ctx)
+	if len(in.Name) > 0 {
+		q = q.Where(query.SmsCoupon.Name.Like("%" + in.Name + "%"))
+	}
+
+	if in.Type != 4 {
+		q = q.Where(query.SmsCoupon.Type.Eq(in.Type))
+	}
+	if in.Platform != 3 {
+		q = q.Where(query.SmsCoupon.Platform.Eq(in.Platform))
+	}
+	if in.UseType != 3 {
+		q = q.Where(query.SmsCoupon.UseType.Eq(in.UseType))
+	}
+	if len(in.StartTime) > 0 {
+		startTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
+		q = q.Where(query.SmsCoupon.StartTime.Gte(startTime))
+	}
+	if len(in.EndTime) > 0 {
+		endTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
+		q = q.Where(query.SmsCoupon.EndTime.Lte(endTime))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询优惠券列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询优惠券列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*smsclient.CouponListData
-	for _, coupon := range *all {
+	for _, coupon := range result {
 
 		list = append(list, &smsclient.CouponListData{
-			Id:           coupon.Id,
+			Id:           coupon.ID,
 			Type:         coupon.Type,
 			Name:         coupon.Name,
 			Platform:     coupon.Platform,
@@ -56,9 +82,7 @@ func (l *CouponListLogic) CouponList(in *smsclient.CouponListReq) (*smsclient.Co
 			MemberLevel:  coupon.MemberLevel,
 		})
 
-		reqStr, _ := json.Marshal(in)
-		listStr, _ := json.Marshal(list)
-		logx.WithContext(l.ctx).Infof("查询优惠券列表信息,参数：%s,响应：%s", reqStr, listStr)
+		logc.Infof(l.ctx, "查询优惠券列表信息,参数：%+v,响应：%+v", in, list)
 	}
 
 	return &smsclient.CouponListResp{

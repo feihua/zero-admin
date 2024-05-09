@@ -2,6 +2,7 @@ package productcategoryservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
@@ -50,18 +51,19 @@ func (l *QueryProductCategoryListLogic) QueryProductCategoryList(in *pmsclient.Q
 
 // 查询分类
 func queryLevel2(l *QueryProductCategoryListLogic, id int64) []*pmsclient.QueryProductCategoryListData {
-	level2categoryList, _, _ := l.svcCtx.PmsProductCategoryModel.FindAll(l.ctx, &pmsclient.ProductCategoryListReq{
-		Current:    0,
-		PageSize:   100,
-		Name:       "",
-		ParentId:   id,
-		ShowStatus: 1,
-	})
+	q := query.PmsProductCategory.WithContext(l.ctx)
+
+	q = q.Where(query.PmsProductCategory.ShowStatus.Eq(1))
+	if id != 2000 {
+		q = q.Where(query.PmsProductCategory.ParentID.Eq(id))
+	}
+
+	level2categoryList, _ := q.Find()
 
 	var list []*pmsclient.QueryProductCategoryListData
-	for _, category := range *level2categoryList {
+	for _, category := range level2categoryList {
 		list = append(list, &pmsclient.QueryProductCategoryListData{
-			Id:       category.Id,
+			Id:       category.ID,
 			Name:     category.Name,
 			ImageUrl: category.Icon,
 		})

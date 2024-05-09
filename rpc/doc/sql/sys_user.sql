@@ -11,7 +11,7 @@ create table sys_user
     mobile      varchar(100)                        null comment '手机号',
     status      tinyint                             not null comment '状态  0：禁用   1：正常',
     dept_id     bigint                              not null comment '部门id',
-    job_id      int                                 not null comment '岗位id',
+    job_id bigint not null comment '岗位id',
     create_by   varchar(50)                         not null comment '创建者',
     create_time timestamp default CURRENT_TIMESTAMP not null comment '创建时间',
     update_by   varchar(50)                         null comment '更新者',

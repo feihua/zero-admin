@@ -2,8 +2,8 @@ package productattributevalueservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductAttributeValueAddLogic 属性值
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:53
+*/
 type ProductAttributeValueAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,12 +30,14 @@ func NewProductAttributeValueAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
+// ProductAttributeValueAdd 添加属性值
 func (l *ProductAttributeValueAddLogic) ProductAttributeValueAdd(in *pmsclient.ProductAttributeValueAddReq) (*pmsclient.ProductAttributeValueAddResp, error) {
-	_, err := l.svcCtx.PmsProductAttributeValueModel.Insert(l.ctx, &pmsmodel.PmsProductAttributeValue{
-		ProductId:          in.ProductId,
-		ProductAttributeId: in.ProductAttributeId,
-		Value:              sql.NullString{String: in.Value},
+	err := query.PmsProductAttributeValue.WithContext(l.ctx).Create(&model.PmsProductAttributeValue{
+		ProductID:          in.ProductId,
+		ProductAttributeID: in.ProductAttributeId,
+		Value:              &in.Value,
 	})
+
 	if err != nil {
 		return nil, err
 	}

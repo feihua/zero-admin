@@ -2,6 +2,7 @@ package roleservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -30,8 +31,18 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleList
 
 // RoleList 角色列表
 func (l *RoleListLogic) RoleList(in *sysclient.RoleListReq) (*sysclient.RoleListResp, error) {
-	all, err := l.svcCtx.RoleModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.RoleModel.Count(l.ctx, in)
+	q := query.SysRole.WithContext(l.ctx)
+	if len(in.Name) > 0 {
+		q = q.Where(query.SysRole.Name.Like("%" + in.Name + "%"))
+	}
+
+	if in.Status != 2 {
+		q = q.Where(query.SysRole.Status.Eq(in.Status))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询角色列表信息失败,参数:%+v,异常:%s", in, err.Error())
@@ -39,17 +50,17 @@ func (l *RoleListLogic) RoleList(in *sysclient.RoleListReq) (*sysclient.RoleList
 	}
 
 	var list []*sysclient.RoleListData
-	for _, role := range *all {
+	for _, role := range result {
 		list = append(list, &sysclient.RoleListData{
-			Id:             role.Id,
-			Name:           role.Name,
-			Remark:         role.Remark.String,
-			CreateBy:       role.CreateBy,
-			CreateTime:     role.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   role.UpdateBy.String,
-			LastUpdateTime: role.UpdateTime.Time.Format("2006-01-02 15:04:05"),
-			DelFlag:        role.DelFlag,
-			Status:         role.Status,
+			Id:         role.ID,
+			Name:       role.Name,
+			Remark:     *role.Remark,
+			CreateBy:   role.CreateBy,
+			CreateTime: role.CreateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:   *role.UpdateBy,
+			UpdateTime: role.UpdateTime.Format("2006-01-02 15:04:05"),
+			DelFlag:    role.DelFlag,
+			Status:     role.Status,
 		})
 	}
 

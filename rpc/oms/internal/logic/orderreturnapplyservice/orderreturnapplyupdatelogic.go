@@ -2,8 +2,7 @@ package orderreturnapplyservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"time"
 
@@ -27,48 +26,27 @@ func NewOrderReturnApplyUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 func (l *OrderReturnApplyUpdateLogic) OrderReturnApplyUpdate(in *omsclient.OrderReturnApplyUpdateReq) (*omsclient.OrderReturnApplyUpdateResp, error) {
-	returnApply, err := l.svcCtx.OmsOrderReturnApplyModel.FindOne(l.ctx, in.Id)
+
+	q := query.OmsOrderReturnApply
+	returnApply, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 	if err != nil {
 		return nil, err
 	}
 
 	// 退货中处理退货中的就要设置公司地址
 	if in.Status == 1 {
-		returnApply.CompanyAddressId = in.CompanyAddressId
+		returnApply.CompanyAddressID = in.CompanyAddressId
 	}
 
-	err = l.svcCtx.OmsOrderReturnApplyModel.Update(l.ctx, &omsmodel.OmsOrderReturnApply{
-		Id:               in.Id,
-		OrderId:          returnApply.OrderId,
-		CompanyAddressId: returnApply.CompanyAddressId,
-		ProductId:        returnApply.ProductId,
-		OrderSn:          returnApply.OrderSn,
-		CreateTime:       returnApply.CreateTime,
-		MemberUsername:   returnApply.MemberUsername,
-		ReturnAmount:     returnApply.ReturnAmount,
-		ReturnName:       returnApply.ReturnName,
-		ReturnPhone:      returnApply.ReturnPhone,
-		Status:           in.Status,
-		HandleTime:       time.Now(),
-		ProductPic:       returnApply.ProductPic,
-		ProductName:      returnApply.ProductName,
-		ProductBrand:     returnApply.ProductBrand,
-		ProductAttr:      returnApply.ProductAttr,
-		ProductCount:     returnApply.ProductCount,
-		ProductPrice:     returnApply.ProductPrice,
-		ProductRealPrice: returnApply.ProductRealPrice,
-		Reason:           returnApply.Reason,
-		Description:      returnApply.Description,
-		ProofPics:        returnApply.ProofPics,
-		HandleNote:       in.HandleNote,
-		HandleMan:        in.HandleMan,
-		ReceiveMan:       in.ReceiveMan,
-		ReceiveTime:      time.Now(),
-		ReceiveNote:      sql.NullString{String: in.ReceiveNote, Valid: true},
-	})
-	if err != nil {
-		return nil, err
-	}
+	returnApply.Status = in.Status
+	returnApply.HandleTime = time.Now()
+	returnApply.HandleNote = in.HandleNote
+	returnApply.HandleMan = in.HandleMan
+	returnApply.ReceiveMan = in.ReceiveMan
+	returnApply.ReceiveTime = time.Now()
+	returnApply.ReceiveNote = &in.ReceiveNote
+
+	_, err = q.WithContext(l.ctx).Updates(returnApply)
 
 	return &omsclient.OrderReturnApplyUpdateResp{}, nil
 }

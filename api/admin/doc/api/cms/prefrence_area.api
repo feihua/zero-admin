@@ -9,8 +9,8 @@ type (
 		Name       string `json:"name"`
 		SubTitle   string `json:"subTitle"`
 		Pic        string `json:"pic"` // 展示图片
-		Sort       int64  `json:"sort"`
-		ShowStatus int64  `json:"showStatus"`
+        Sort int32 `json:"sort"`
+        ShowStatus int32 `json:"showStatus"`
 	}
 	addPrefrenceAreaResp {
 		Code    string `json:"code"`
@@ -21,7 +21,7 @@ type (
 		PageSize   int64  `json:"pageSize,default=20"`
 		Name       string `json:"name,optional"`
 		SubTitle   string `json:"subTitle,optional"`
-		ShowStatus int64  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+        ShowStatus int32 `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
 	}
 	ListtPrefrenceAreaData {
 		Id         int64  `json:"id"`
@@ -45,8 +45,8 @@ type (
 		Name       string `json:"name"`
 		SubTitle   string `json:"subTitle"`
 		Pic        string `json:"pic"` // 展示图片
-		Sort       int64  `json:"sort"`
-		ShowStatus int64  `json:"showStatus"`
+        Sort int32 `json:"sort"`
+        ShowStatus int32 `json:"showStatus"`
 	}
 	UpdatePrefrenceAreaResp {
 		Code    string `json:"code"`

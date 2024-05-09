@@ -2,7 +2,8 @@ package productoperatelogservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"time"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductOperateLogUpdateLogic 商品操作历史
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 11:07
+*/
 type ProductOperateLogUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,11 +31,12 @@ func NewProductOperateLogUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// ProductOperateLogUpdate 更新商品操作历史
 func (l *ProductOperateLogUpdateLogic) ProductOperateLogUpdate(in *pmsclient.ProductOperateLogUpdateReq) (*pmsclient.ProductOperateLogUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.PmsProductOperateLogModel.Update(l.ctx, &pmsmodel.PmsProductOperateLog{
-		Id:               in.Id,
-		ProductId:        in.ProductId,
+	q := query.PmsProductOperateLog
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductOperateLog{
+		ID:               in.Id,
+		ProductID:        in.ProductId,
 		PriceOld:         float64(in.PriceOld),
 		PriceNew:         float64(in.PriceNew),
 		SalePriceOld:     float64(in.SalePriceOld),
@@ -39,8 +46,9 @@ func (l *ProductOperateLogUpdateLogic) ProductOperateLogUpdate(in *pmsclient.Pro
 		UsePointLimitOld: in.UsePointLimitOld,
 		UsePointLimitNew: in.UsePointLimitNew,
 		OperateMan:       in.OperateMan,
-		CreateTime:       CreateTime,
+		CreateTime:       time.Now(),
 	})
+
 	if err != nil {
 		return nil, err
 	}

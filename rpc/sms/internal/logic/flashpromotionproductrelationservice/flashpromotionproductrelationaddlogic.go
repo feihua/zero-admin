@@ -2,7 +2,8 @@ package flashpromotionproductrelationservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -25,15 +26,16 @@ func NewFlashPromotionProductRelationAddLogic(ctx context.Context, svcCtx *svc.S
 }
 
 func (l *FlashPromotionProductRelationAddLogic) FlashPromotionProductRelationAdd(in *smsclient.FlashPromotionProductRelationAddReq) (*smsclient.FlashPromotionProductRelationAddResp, error) {
-	_, err := l.svcCtx.SmsFlashPromotionProductRelationModel.Insert(l.ctx, &smsmodel.SmsFlashPromotionProductRelation{
-		FlashPromotionId:        in.FlashPromotionId,
-		FlashPromotionSessionId: in.FlashPromotionSessionId,
-		ProductId:               in.ProductId,
+	err := query.SmsFlashPromotionProductRelation.WithContext(l.ctx).Create(&model.SmsFlashPromotionProductRelation{
+		FlashPromotionID:        in.FlashPromotionId,
+		FlashPromotionSessionID: in.FlashPromotionSessionId,
+		ProductID:               in.ProductId,
 		FlashPromotionPrice:     float64(in.FlashPromotionPrice),
 		FlashPromotionCount:     in.FlashPromotionCount,
 		FlashPromotionLimit:     in.FlashPromotionLimit,
 		Sort:                    in.Sort,
 	})
+
 	if err != nil {
 		return nil, err
 	}

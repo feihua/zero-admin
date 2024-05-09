@@ -2,6 +2,7 @@ package couponhistoryservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
@@ -32,13 +33,22 @@ func NewUpdateCouponStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // 2.更新优惠券数量
 func (l *UpdateCouponStatusLogic) UpdateCouponStatus(in *smsclient.UpdateCouponStatusReq) (*smsclient.UpdateCouponStatusResp, error) {
 	//1.更新用户优惠券状态
-	err := l.svcCtx.SmsCouponHistoryModel.UpdateCouponStatus(l.ctx, in.CouponId, in.MemberId, in.UseStatus)
+	q := query.SmsCouponHistory
+	_, err := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId), q.CouponID.Eq(in.CouponId)).Update(q.UseStatus, in.UseStatus)
 	if err != nil {
 		return nil, err
 	}
 
 	//2.更新优惠券数量
-	err = l.svcCtx.SmsCouponModel.UpdateUseCount(l.ctx, in.UseStatus == 0, in.CouponId)
+	var sql string
+	if in.UseStatus == 0 {
+		sql = "update sms_coupon set use_count=use_count+1 where `id` = ? and use_count<count"
+	} else {
+		sql = "update sms_coupon set use_count=use_count-1 where `id` = ? and use_count>0"
+	}
+
+	db := l.svcCtx.DB
+	err = db.Exec(sql, in.CouponId).Error
 	if err != nil {
 		return nil, err
 	}

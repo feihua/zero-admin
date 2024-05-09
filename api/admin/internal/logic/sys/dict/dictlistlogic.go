@@ -59,8 +59,8 @@ func (l *DictListLogic) DictList(req types.ListDictReq) (*types.ListDictResp, er
 			0,
 			dict.CreateBy,
 			dict.CreateTime,
-			dict.LastUpdateBy,
-			dict.LastUpdateTime,
+			dict.UpdateBy,
+			dict.UpdateTime,
 			dict.Remarks,
 			dict.DelFlag,
 		})

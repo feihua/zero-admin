@@ -2,7 +2,8 @@ package flashpromotionlogservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
 
@@ -28,15 +29,17 @@ func NewFlashPromotionLogUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 func (l *FlashPromotionLogUpdateLogic) FlashPromotionLogUpdate(in *smsclient.FlashPromotionLogUpdateReq) (*smsclient.FlashPromotionLogUpdateResp, error) {
 	SubscribeTime, _ := time.Parse("2006-01-02 15:04:05", in.SubscribeTime)
 	SendTime, _ := time.Parse("2006-01-02 15:04:05", in.SendTime)
-	err := l.svcCtx.SmsFlashPromotionLogModel.Update(l.ctx, &smsmodel.SmsFlashPromotionLog{
-		Id:            in.Id,
-		MemberId:      in.MemberId,
-		ProductId:     in.ProductId,
+	q := query.SmsFlashPromotionLog
+	_, err := q.WithContext(l.ctx).Updates(&model.SmsFlashPromotionLog{
+		ID:            in.Id,
+		MemberID:      in.MemberId,
+		ProductID:     in.ProductId,
 		MemberPhone:   in.MemberPhone,
 		ProductName:   in.ProductName,
 		SubscribeTime: SubscribeTime,
 		SendTime:      SendTime,
 	})
+
 	if err != nil {
 		return nil, err
 	}

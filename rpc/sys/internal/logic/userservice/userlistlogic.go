@@ -2,7 +2,7 @@ package userservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -31,37 +31,48 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserList
 // UserList 查询用户列表信息
 func (l *UserListLogic) UserList(in *sysclient.UserListReq) (*sysclient.UserListResp, error) {
 
-	all, err := l.svcCtx.UserModel.FindAll(l.ctx, in)
+	q := query.SysUser.WithContext(l.ctx)
+	if len(in.Name) > 0 {
+		q = q.Where(query.SysUser.Name.Like("%" + in.Name + "%"))
+	}
+	if len(in.Mobile) > 0 {
+		q = q.Where(query.SysUser.Name.Like("%" + in.Mobile + "%"))
+	}
+
+	if in.Status != 2 {
+		q = q.Where(query.SysUser.Status.Eq(in.Status))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logc.Errorf(l.ctx, "查询用户列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
-	count, _ := l.svcCtx.UserModel.Count(l.ctx, in)
-
 	var list []*sysclient.UserListData
-	for _, user := range *all {
+	for _, user := range result {
 		list = append(list, &sysclient.UserListData{
-			Id:             user.Id,
-			Name:           user.Name,
-			NickName:       user.NickName.String,
-			Avatar:         user.Avatar.String,
-			Email:          user.Email.String,
-			Mobile:         user.Mobile.String,
-			DeptId:         user.DeptId,
-			Status:         user.Status,
-			CreateBy:       user.CreateBy,
-			CreateTime:     user.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   user.UpdateBy.String,
-			LastUpdateTime: user.UpdateTime.Time.Format("2006-01-02 15:04:05"),
-			DelFlag:        user.DelFlag,
-			JobId:          user.JobId,
-			RoleId:         user.RoleId,
-			RoleName:       user.RoleName,
-			JobName:        user.JobName,
-			DeptName:       user.DeptName,
+			Id:         user.ID,
+			Name:       user.Name,
+			NickName:   *user.NickName,
+			Avatar:     *user.Avatar,
+			Email:      *user.Email,
+			Mobile:     *user.Mobile,
+			DeptId:     user.DeptID,
+			Status:     user.Status,
+			CreateBy:   user.CreateBy,
+			CreateTime: user.CreateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:   *user.UpdateBy,
+			UpdateTime: user.UpdateTime.Format("2006-01-02 15:04:05"),
+			DelFlag:    user.DelFlag,
+			JobId:      user.JobID,
+			//RoleId:         user.RoleId,
+			//RoleName:       user.RoleName,
+			//JobName:        user.JobName,
+			//DeptName:       user.DeptName,
 		})
 	}
 

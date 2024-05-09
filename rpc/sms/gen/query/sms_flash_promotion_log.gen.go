@@ -27,8 +27,8 @@ func newSmsFlashPromotionLog(db *gorm.DB, opts ...gen.DOOption) smsFlashPromotio
 
 	tableName := _smsFlashPromotionLog.smsFlashPromotionLogDo.TableName()
 	_smsFlashPromotionLog.ALL = field.NewAsterisk(tableName)
-	_smsFlashPromotionLog.ID = field.NewInt32(tableName, "id")
-	_smsFlashPromotionLog.MemberID = field.NewInt32(tableName, "member_id")
+	_smsFlashPromotionLog.ID = field.NewInt64(tableName, "id")
+	_smsFlashPromotionLog.MemberID = field.NewInt64(tableName, "member_id")
 	_smsFlashPromotionLog.ProductID = field.NewInt64(tableName, "product_id")
 	_smsFlashPromotionLog.MemberPhone = field.NewString(tableName, "member_phone")
 	_smsFlashPromotionLog.ProductName = field.NewString(tableName, "product_name")
@@ -45,8 +45,8 @@ type smsFlashPromotionLog struct {
 	smsFlashPromotionLogDo smsFlashPromotionLogDo
 
 	ALL           field.Asterisk
-	ID            field.Int32  // 编号
-	MemberID      field.Int32  // 会员id
+	ID            field.Int64  // 编号
+	MemberID      field.Int64  // 会员id
 	ProductID     field.Int64  // 商品id
 	MemberPhone   field.String // 会员电话
 	ProductName   field.String // 商品名称
@@ -68,8 +68,8 @@ func (s smsFlashPromotionLog) As(alias string) *smsFlashPromotionLog {
 
 func (s *smsFlashPromotionLog) updateTableName(table string) *smsFlashPromotionLog {
 	s.ALL = field.NewAsterisk(table)
-	s.ID = field.NewInt32(table, "id")
-	s.MemberID = field.NewInt32(table, "member_id")
+	s.ID = field.NewInt64(table, "id")
+	s.MemberID = field.NewInt64(table, "member_id")
 	s.ProductID = field.NewInt64(table, "product_id")
 	s.MemberPhone = field.NewString(table, "member_phone")
 	s.ProductName = field.NewString(table, "product_name")

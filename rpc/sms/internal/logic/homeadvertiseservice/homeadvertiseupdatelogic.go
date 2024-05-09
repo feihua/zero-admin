@@ -2,8 +2,8 @@ package homeadvertiseservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
 
@@ -30,9 +30,9 @@ func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(in *smsclient.HomeAdverti
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
 
-	note := sql.NullString{String: in.Note, Valid: true}
-	err := l.svcCtx.SmsHomeAdvertiseModel.Update(l.ctx, &smsmodel.SmsHomeAdvertise{
-		Id:         in.Id,
+	q := query.SmsHomeAdvertise
+	_, err := q.WithContext(l.ctx).Updates(&model.SmsHomeAdvertise{
+		ID:         in.Id,
 		Name:       in.Name,
 		Type:       in.Type,
 		Pic:        in.Pic,
@@ -41,10 +41,11 @@ func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(in *smsclient.HomeAdverti
 		Status:     in.Status,
 		ClickCount: in.ClickCount,
 		OrderCount: in.OrderCount,
-		Url:        in.Url,
-		Note:       note,
+		URL:        in.Url,
+		Note:       &in.Note,
 		Sort:       in.Sort,
 	})
+
 	if err != nil {
 		return nil, err
 	}

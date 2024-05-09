@@ -6,7 +6,7 @@ create table sys_dict
     label       varchar(100)                        not null comment '标签名',
     type        varchar(100)                        not null comment '类型',
     description varchar(100)                        not null comment '描述',
-    sort        decimal                             not null comment '排序（升序）',
+    sort int not null comment '排序（升序）',
     create_by   varchar(50)                         not null comment '创建人',
     create_time timestamp default CURRENT_TIMESTAMP null comment '创建时间',
     update_by   varchar(50)                         null comment '更新人',

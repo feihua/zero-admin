@@ -3,8 +3,10 @@ package productattributevalueservicelogic
 import (
 	"context"
 	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,28 +26,27 @@ func NewProductAttributeValueListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *ProductAttributeValueListLogic) ProductAttributeValueList(in *pmsclient.ProductAttributeValueListReq) (*pmsclient.ProductAttributeValueListResp, error) {
-	all, err := l.svcCtx.PmsProductAttributeValueModel.FindAll(l.ctx, in.ProductId)
+	q := query.PmsProductAttributeValue
+	result, err := q.WithContext(l.ctx).Where(q.ProductID.Eq(in.ProductId)).Find()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询产品参数列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		in, _ := json.Marshal(in)
+		logc.Errorf(l.ctx, "查询产品参数列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*pmsclient.ProductAttributeValueListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductAttributeValueListData{
-			Id:                 item.Id,
-			ProductId:          item.ProductId,
-			ProductAttributeId: item.ProductAttributeId,
-			Value:              item.Value.String,
+			Id:                 item.ID,
+			ProductId:          item.ProductID,
+			ProductAttributeId: item.ProductAttributeID,
+			Value:              *item.Value,
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询产品参数信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询产品参数信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.ProductAttributeValueListResp{
 		Total: 0,
 		List:  list,

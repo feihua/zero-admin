@@ -2,7 +2,8 @@ package albumservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// AlbumUpdateLogic 商品相册
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 9:40
+*/
 type AlbumUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,15 +30,18 @@ func NewAlbumUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Album
 	}
 }
 
+// AlbumUpdate 修改商品相册
 func (l *AlbumUpdateLogic) AlbumUpdate(in *pmsclient.AlbumUpdateReq) (*pmsclient.AlbumUpdateResp, error) {
-	err := l.svcCtx.PmsAlbumModel.Update(l.ctx, &pmsmodel.PmsAlbum{
-		Id:          in.Id,
+	q := query.PmsAlbum
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsAlbum{
+		ID:          in.Id,
 		Name:        in.Name,
 		CoverPic:    in.CoverPic,
 		PicCount:    in.PicCount,
 		Sort:        in.Sort,
 		Description: in.Description,
 	})
+
 	if err != nil {
 		return nil, err
 	}

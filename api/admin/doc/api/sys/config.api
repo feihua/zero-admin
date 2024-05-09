@@ -30,8 +30,8 @@ type (
 		Sort           int64  `json:"sort"`           // 排序（升序）
 		CreateBy       string `json:"createBy"`       // 创建人
 		CreateTime     string `json:"createTime"`     // 创建时间
-		LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
-		LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
+        UpdateBy string `json:"updateBy"`             // 更新人
+        UpdateTime string `json:"updateTime"`         // 更新时间
 		Remarks        string `json:"remarks"`        // 备注信息
 		DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
 	}

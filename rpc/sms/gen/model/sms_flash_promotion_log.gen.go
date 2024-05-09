@@ -12,8 +12,8 @@ const TableNameSmsFlashPromotionLog = "sms_flash_promotion_log"
 
 // SmsFlashPromotionLog 限时购通知记录
 type SmsFlashPromotionLog struct {
-	ID            int32     `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`        // 编号
-	MemberID      int32     `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`             // 会员id
+	ID            int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`        // 编号
+	MemberID      int64     `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`             // 会员id
 	ProductID     int64     `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`           // 商品id
 	MemberPhone   string    `gorm:"column:member_phone;not null;comment:会员电话" json:"member_phone"`       // 会员电话
 	ProductName   string    `gorm:"column:product_name;not null;comment:商品名称" json:"product_name"`       // 商品名称

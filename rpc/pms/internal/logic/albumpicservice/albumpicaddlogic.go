@@ -2,7 +2,8 @@ package albumpicservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// AlbumPicAddLogic 相册表图片
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:24
+*/
 type AlbumPicAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,11 +30,13 @@ func NewAlbumPicAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Album
 	}
 }
 
+// AlbumPicAdd 添加相册表图片
 func (l *AlbumPicAddLogic) AlbumPicAdd(in *pmsclient.AlbumPicAddReq) (*pmsclient.AlbumPicAddResp, error) {
-	_, err := l.svcCtx.PmsAlbumPicModel.Insert(l.ctx, &pmsmodel.PmsAlbumPic{
-		AlbumId: in.AlbumId,
+	err := query.PmsAlbumPic.WithContext(l.ctx).Create(&model.PmsAlbumPic{
+		AlbumID: in.AlbumId,
 		Pic:     in.Pic,
 	})
+
 	if err != nil {
 		return nil, err
 	}

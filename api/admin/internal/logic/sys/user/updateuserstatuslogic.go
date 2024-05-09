@@ -34,9 +34,9 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) U
 func (l *UpdateUserStatusLogic) UpdateUserStatus(req types.UserStatusReq) (*types.UserStatusResp, error) {
 
 	_, err := l.svcCtx.UserService.UpdateUserStatus(l.ctx, &sysclient.UserStatusReq{
-		Id:           req.Id,
-		Status:       req.Status,
-		LastUpdateBy: l.ctx.Value("userName").(string),
+		Id:       req.Id,
+		Status:   req.Status,
+		UpdateBy: l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

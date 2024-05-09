@@ -2,8 +2,8 @@ package productcategoryservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCategoryUpdateLogic 商品类别
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:59
+*/
 type ProductCategoryUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,10 +30,12 @@ func NewProductCategoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
+// ProductCategoryUpdate 更新商品类别
 func (l *ProductCategoryUpdateLogic) ProductCategoryUpdate(in *pmsclient.ProductCategoryUpdateReq) (*pmsclient.ProductCategoryUpdateResp, error) {
-	err := l.svcCtx.PmsProductCategoryModel.Update(l.ctx, &pmsmodel.PmsProductCategory{
-		Id:           in.Id,
-		ParentId:     in.ParentId,
+	q := query.PmsProductCategory
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductCategory{
+		ID:           in.Id,
+		ParentID:     in.ParentId,
 		Name:         in.Name,
 		Level:        in.Level,
 		ProductCount: in.ProductCount,
@@ -38,8 +45,9 @@ func (l *ProductCategoryUpdateLogic) ProductCategoryUpdate(in *pmsclient.Product
 		Sort:         in.Sort,
 		Icon:         in.Icon,
 		Keywords:     in.Keywords,
-		Description:  sql.NullString{String: in.Description},
+		Description:  &in.Description,
 	})
+
 	if err != nil {
 		return nil, err
 	}

@@ -49,14 +49,14 @@ func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.List
 
 	for _, log := range resp.List {
 		list = append(list, &types.ListLoginLogData{
-			Id:             log.Id,
-			UserName:       log.UserName,
-			Status:         log.Status,
-			Ip:             log.Ip,
-			CreateBy:       log.CreateBy,
-			CreateTime:     log.CreateTime,
-			LastUpdateBy:   log.LastUpdateBy,
-			LastUpdateTime: log.LastUpdateTime,
+			Id:         log.Id,
+			UserName:   log.UserName,
+			Status:     log.Status,
+			Ip:         log.Ip,
+			CreateBy:   log.CreateBy,
+			CreateTime: log.CreateTime,
+			UpdateBy:   log.UpdateBy,
+			UpdateTime: log.UpdateTime,
 		})
 	}
 

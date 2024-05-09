@@ -29,8 +29,10 @@ func NewReleaseSkuStockLockLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // ReleaseSkuStockLock 更新商品库存
 func (l *ReleaseSkuStockLockLogic) ReleaseSkuStockLock(in *pmsclient.ReleaseSkuStockLockReq) (*pmsclient.ReleaseSkuStockLockResp, error) {
+	sql := "update pms_sku_stock set stock=stock+?,lock_stock=lock_stock-? where `id` = ? and lock_stock>=?"
 	for _, item := range in.Data {
-		err := l.svcCtx.PmsSkuStockModel.ReleaseSkuStockLock(l.ctx, item.ProductSkuId, item.ProductQuantity)
+		db := l.svcCtx.DB
+		err := db.Exec(sql, item.ProductSkuId, item.ProductQuantity).Error
 		if err != nil {
 			return nil, err
 		}

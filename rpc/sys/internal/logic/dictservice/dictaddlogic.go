@@ -2,11 +2,10 @@ package dictservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
-	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -32,17 +31,17 @@ func NewDictAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictAddLo
 
 // DictAdd 添加字典信息
 func (l *DictAddLogic) DictAdd(in *sysclient.DictAddReq) (*sysclient.DictAddResp, error) {
-	dict := &sysmodel.SysDict{
+	err := query.SysDict.WithContext(l.ctx).Create(&model.SysDict{
 		Value:       in.Value,
 		Label:       in.Label,
 		Type:        in.Type,
 		Description: in.Description,
-		Sort:        float64(in.Sort),
+		Sort:        in.Sort,
 		CreateBy:    in.CreateBy,
-		Remarks:     sql.NullString{String: in.Remarks, Valid: true},
+		Remarks:     &in.Remarks,
 		DelFlag:     in.DelFlag,
-	}
-	if _, err := l.svcCtx.DictModel.Insert(l.ctx, dict); err != nil {
+	})
+	if err != nil {
 		return nil, err
 	}
 

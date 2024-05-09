@@ -2,9 +2,10 @@ package homerecommendproductservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -23,30 +24,37 @@ func NewHomeRecommendProductListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *HomeRecommendProductListLogic) HomeRecommendProductList(in *smsclient.HomeRecommendProductListReq) (*smsclient.HomeRecommendProductListResp, error) {
-	all, err := l.svcCtx.SmsHomeRecommendProductModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.SmsHomeRecommendProductModel.Count(l.ctx, in)
+	q := query.SmsHomeRecommendProduct.WithContext(l.ctx)
+	if len(in.ProductName) > 0 {
+		q = q.Where(query.SmsHomeRecommendProduct.ProductName.Like("%" + in.ProductName + "%"))
+	}
+
+	if in.RecommendStatus != 2 {
+		q = q.Where(query.SmsHomeRecommendProduct.RecommendStatus.Eq(in.RecommendStatus))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询人气商品推荐列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询人气商品推荐列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*smsclient.HomeRecommendProductListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &smsclient.HomeRecommendProductListData{
-			Id:              item.Id,
-			ProductId:       item.ProductId,
+			Id:              item.ID,
+			ProductId:       item.ProductID,
 			ProductName:     item.ProductName,
 			RecommendStatus: item.RecommendStatus,
 			Sort:            item.Sort,
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询人气商品推荐列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询人气商品推荐列表信息,参数：%+v,响应：%+v", in, list)
 	return &smsclient.HomeRecommendProductListResp{
 		Total: count,
 		List:  list,

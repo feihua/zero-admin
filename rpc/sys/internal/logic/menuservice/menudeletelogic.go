@@ -2,10 +2,9 @@ package menuservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-	"github.com/zeromicro/go-zero/core/logc"
-
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -31,10 +30,9 @@ func NewMenuDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuDe
 
 // MenuDelete 删除菜单
 func (l *MenuDeleteLogic) MenuDelete(in *sysclient.MenuDeleteReq) (*sysclient.MenuDeleteResp, error) {
-	err := l.svcCtx.MenuModel.DeleteByIds(l.ctx, in.Ids)
-
+	q := query.SysMenu
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
-		logc.Errorf(l.ctx, "删除菜单信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 

@@ -42,7 +42,7 @@ func (l *MenuUpdateLogic) MenuUpdate(req types.UpdateMenuReq) (*types.UpdateMenu
 		Type:          req.Type,
 		Icon:          req.Icon,
 		OrderNum:      req.OrderNum,
-		LastUpdateBy:  l.ctx.Value("userName").(string),
+		UpdateBy:      l.ctx.Value("userName").(string),
 		VuePath:       req.VuePath,
 		VueComponent:  req.VueComponent,
 		VueIcon:       req.VueIcon,

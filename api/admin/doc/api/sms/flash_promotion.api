@@ -9,7 +9,7 @@ type (
 		Title     string `json:"title"`
 		StartDate string `json:"startDate"` // 开始日期
 		EndDate   string `json:"endDate"`   // 结束日期
-		Status    int64  `json:"status"`    // 上下线状态
+        Status int32 `json:"status"`        // 上下线状态
 	}
 	addFlashPromotionResp {
 		Code    string `json:"code"`
@@ -19,7 +19,7 @@ type (
 		Current   int64  `json:"current,default=1"`
 		PageSize  int64  `json:"pageSize,default=20"`
 		Title     string `json:"title,optional"`     //标题
-		Status    int64  `json:"status,,default=2"`  // 上下线状态
+        Status int32 `json:"status,,default=2"`      // 上下线状态
 		StartDate string `json:"startDate,optional"` // 开始日期
 		EndDate   string `json:"endDate,optional"`   // 结束日期
 	}
@@ -28,7 +28,7 @@ type (
 		Title      string `json:"title"`      //标题
 		StartDate  string `json:"startDate"`  // 开始日期
 		EndDate    string `json:"endDate"`    // 结束日期
-		Status     int64  `json:"status"`     // 上下线状态
+        Status int32 `json:"status"`          // 上下线状态
 		CreateTime string `json:"createTime"` // 秒杀时间段名称
 	}
 	ListFlashPromotionResp {
@@ -45,7 +45,7 @@ type (
 		Title     string `json:"title"`
 		StartDate string `json:"startDate"` // 开始日期
 		EndDate   string `json:"endDate"`   // 结束日期
-		Status    int64  `json:"status"`    // 上下线状态
+        Status int32 `json:"status"`        // 上下线状态
 	}
 	UpdateFlashPromotionResp {
 		Code    string `json:"code"`

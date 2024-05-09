@@ -31,7 +31,9 @@ func NewHomeRecommendSubjectDeleteLogic(ctx context.Context, svcCtx *svc.Service
 
 // HomeRecommendSubjectDelete 删除专题推荐
 func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(in *smsclient.HomeRecommendSubjectDeleteReq) (*smsclient.HomeRecommendSubjectDeleteResp, error) {
-	_, err := query.SmsHomeRecommendSubject.WithContext(l.ctx).Where(query.SmsHomeRecommendSubject.ID.In(in.Ids...)).Delete()
+	q := query.SmsHomeRecommendSubject
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
+
 	if err != nil {
 		return nil, err
 	}

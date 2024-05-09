@@ -2,6 +2,7 @@ package deptservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -30,8 +31,8 @@ func NewDeptDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptDe
 
 // DeptDelete 删除部门信息
 func (l *DeptDeleteLogic) DeptDelete(in *sysclient.DeptDeleteReq) (*sysclient.DeptDeleteResp, error) {
-	err := l.svcCtx.DeptModel.DeleteByIds(l.ctx, in.Ids)
-
+	q := query.SysDept
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
 		return nil, err
 	}

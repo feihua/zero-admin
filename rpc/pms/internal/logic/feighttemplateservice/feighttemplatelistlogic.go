@@ -2,9 +2,10 @@ package feighttemplateservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,33 +25,33 @@ func NewFeightTemplateListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *FeightTemplateListLogic) FeightTemplateList(in *pmsclient.FeightTemplateListReq) (*pmsclient.FeightTemplateListResp, error) {
-	all, err := l.svcCtx.PmsFeightTemplateModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsFeightTemplateModel.Count(l.ctx)
+	q := query.PmsFeightTemplate.WithContext(l.ctx)
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询运费模板列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询运费模板列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*pmsclient.FeightTemplateListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &pmsclient.FeightTemplateListData{
-			Id:             item.Id,
+			Id:             item.ID,
 			Name:           item.Name,
 			ChargeType:     item.ChargeType,
-			FirstWeight:    int64(item.FirstWeight),
-			FirstFee:       int64(item.FirstFee),
-			ContinueWeight: int64(item.ContinueWeight),
-			ContinmeFee:    int64(item.ContinmeFee),
+			FirstWeight:    float32(item.FirstWeight),
+			FirstFee:       float32(item.FirstFee),
+			ContinueWeight: float32(item.ContinueWeight),
+			ContinmeFee:    float32(item.ContinmeFee),
 			Dest:           item.Dest,
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询运费模板列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询运费模板列表信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.FeightTemplateListResp{
 		Total: count,
 		List:  list,

@@ -50,15 +50,15 @@ func (l *JobListLogic) JobList(req types.ListJobReq) (*types.ListJobResp, error)
 
 	for _, job := range resp.List {
 		list = append(list, &types.ListJobData{
-			Id:             job.Id,
-			JobName:        job.JobName,
-			OrderNum:       job.OrderNum,
-			CreateBy:       job.CreateBy,
-			CreateTime:     job.CreateTime,
-			LastUpdateBy:   job.LastUpdateBy,
-			LastUpdateTime: job.LastUpdateTime,
-			DelFlag:        job.DelFlag,
-			Remarks:        job.Remarks,
+			Id:         job.Id,
+			JobName:    job.JobName,
+			OrderNum:   job.OrderNum,
+			CreateBy:   job.CreateBy,
+			CreateTime: job.CreateTime,
+			UpdateBy:   job.UpdateBy,
+			UpdateTime: job.UpdateTime,
+			DelFlag:    job.DelFlag,
+			Remarks:    job.Remarks,
 		})
 	}
 

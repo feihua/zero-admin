@@ -2,14 +2,12 @@ package userservicelogic
 
 import (
 	"context"
-	"database/sql"
 	"errors"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-
-	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -34,22 +32,21 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserAddLo
 
 // UserAdd 新增用户
 func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp, error) {
-
-	user := &sysmodel.SysUser{
+	user := &model.SysUser{
 		Name:     in.Name,
-		NickName: sql.NullString{String: in.NickName, Valid: true},
-		Avatar:   sql.NullString{String: in.Avatar, Valid: true},
+		NickName: &in.NickName,
+		Avatar:   &in.Avatar,
 		Password: "123456",
 		Salt:     "123456",
-		Email:    sql.NullString{String: in.Email, Valid: true},
-		Mobile:   sql.NullString{String: in.Mobile, Valid: true},
+		Email:    &in.Email,
+		Mobile:   &in.Mobile,
 		Status:   in.Status,
-		DeptId:   in.DeptId,
+		DeptID:   in.DeptId,
 		CreateBy: in.CreateBy,
-		DelFlag:  0,
-		JobId:    in.JobId,
+		DelFlag:  1,
+		JobID:    in.JobId,
 	}
-	insert, err := l.svcCtx.UserModel.Insert(l.ctx, user)
+	err := query.SysUser.WithContext(l.ctx).Create(user)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "新增用户异常,参数:%+v,异常:%s", in, err.Error())
@@ -57,14 +54,14 @@ func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp
 	}
 
 	//获取新增用户的id
-	id, _ := insert.LastInsertId()
+	id := user.ID
 
 	//新增用户的时候,要删除它的关联信息(预防之前的数据导致查询权限的时候出问题)
-	_ = l.svcCtx.UserRoleModel.DeleteByUserId(l.ctx, id)
+	_, _ = query.SysUserRole.WithContext(l.ctx).Where(query.SysUserRole.UserID.Eq(id)).Delete()
 
-	_, err = l.svcCtx.UserRoleModel.Insert(l.ctx, &sysmodel.SysUserRole{
-		UserId:   id,
-		RoleId:   in.RoleId,
+	err = query.SysUserRole.WithContext(l.ctx).Create(&model.SysUserRole{
+		UserID:   id,
+		RoleID:   in.RoleId,
 		CreateBy: in.CreateBy,
 	})
 

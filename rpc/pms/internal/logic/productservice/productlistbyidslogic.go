@@ -2,7 +2,8 @@ package productservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -25,23 +26,23 @@ func NewProductListByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *ProductListByIdsLogic) ProductListByIds(in *pmsclient.ProductByIdsReq) (*pmsclient.ProductListResp, error) {
-	all, err := l.svcCtx.PmsProductModel.FindAllByIds(l.ctx, in.Ids)
+	q := query.PmsProduct
+	result, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Find()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询商品列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询商品列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*pmsclient.ProductListData
-	for _, product := range *all {
+	for _, product := range result {
 
 		list = append(list, &pmsclient.ProductListData{
-			Id:                         product.Id,
-			BrandId:                    product.BrandId,
-			ProductCategoryId:          product.ProductCategoryId,
-			FeightTemplateId:           product.FeightTemplateId,
-			ProductAttributeCategoryId: product.ProductAttributeCategoryId,
+			Id:                         product.ID,
+			BrandId:                    product.BrandID,
+			ProductCategoryId:          product.ProductCategoryID,
+			FeightTemplateId:           product.FeightTemplateID,
+			ProductAttributeCategoryId: product.ProductAttributeCategoryID,
 			Name:                       product.Name,
 			Pic:                        product.Pic,
 			ProductSn:                  product.ProductSn,
@@ -71,8 +72,8 @@ func (l *ProductListByIdsLogic) ProductListByIds(in *pmsclient.ProductByIdsReq) 
 			AlbumPics:                  product.AlbumPics,
 			DetailTitle:                product.DetailTitle,
 			DetailDesc:                 product.DetailDesc,
-			DetailHtml:                 product.DetailHtml,
-			DetailMobileHtml:           product.DetailMobileHtml,
+			DetailHtml:                 product.DetailHTML,
+			DetailMobileHtml:           product.DetailMobileHTML,
 			PromotionStartTime:         product.PromotionStartTime.Format("2006-01-02 15:04:05"),
 			PromotionEndTime:           product.PromotionEndTime.Format("2006-01-02 15:04:05"),
 			PromotionPerLimit:          product.PromotionPerLimit,
@@ -82,9 +83,7 @@ func (l *ProductListByIdsLogic) ProductListByIds(in *pmsclient.ProductByIdsReq) 
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询商品列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询商品列表信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.ProductListResp{
 		Total: 0,
 		List:  list,

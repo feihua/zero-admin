@@ -30,7 +30,7 @@ func (l *MemberPriceAddLogic) MemberPriceAdd(req types.AddMemberPriceReq) (*type
 	_, err := l.svcCtx.MemberPriceService.MemberPriceAdd(l.ctx, &pmsclient.MemberPriceAddReq{
 		ProductId:       req.ProductId,
 		MemberLevelId:   req.MemberLevelId,
-		MemberPrice:     int64(req.MemberPrice),
+		MemberPrice:     req.MemberPrice,
 		MemberLevelName: req.MemberLevelName,
 	})
 

@@ -2,9 +2,11 @@ package orderservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -37,26 +39,27 @@ func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAdd
 
 	//1.插入order表
 	orderInfo := buildOrderInfo(in)
-	logx.WithContext(l.ctx).Infof("插入order表,参数：%+v", orderInfo)
-	orderResp, err := l.svcCtx.OmsOrderModel.Insert(l.ctx, orderInfo)
+	logc.Infof(l.ctx, "插入order表,参数：%+v", orderInfo)
+	err := query.OmsOrder.WithContext(l.ctx).Create(orderInfo)
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("插入order表失败,参数：%+v,异常：%s", orderInfo, err.Error())
+		logc.Errorf(l.ctx, "插入order表失败,参数：%+v,异常：%s", orderInfo, err.Error())
 		return nil, err
 	}
 
 	//获取订单id
-	orderId, _ := orderResp.LastInsertId()
+	orderId := orderInfo.ID
 	//2.插入order_item表
 	for _, orderItem := range in.OrderItemList {
 		buildOrderItem(l, orderItem)
 	}
 
 	//3.删除cart_item表(删除购物车中的下单商品)
-	logx.WithContext(l.ctx).Infof("删除购物车中的下单商品,参数ids：%+v", in.CartItemIds)
-	err = l.svcCtx.OmsCartItemModel.DeleteByIds(l.ctx, in.MemberId, in.CartItemIds)
+	logc.Infof(l.ctx, "删除购物车中的下单商品,参数ids：%+v", in.CartItemIds)
+	item := query.OmsCartItem
+	_, err = item.WithContext(l.ctx).Where(item.MemberID.Eq(in.MemberId), item.ID.In(in.CartItemIds...)).Delete()
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("删除购物车中的下单商品失败,参数：%+v,异常：%s", in.CartItemIds, err.Error())
+		logc.Errorf(l.ctx, "删除购物车中的下单商品失败,参数：%+v,异常：%s", in.CartItemIds, err.Error())
 		return nil, err
 	}
 
@@ -67,19 +70,19 @@ func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAdd
 
 // 2.构建下单商品信息
 func buildOrderItem(l *OrderAddLogic, orderItem *omsclient.OrderItemListData) {
-	_, err := l.svcCtx.OmsOrderItemModel.Insert(l.ctx, &omsmodel.OmsOrderItem{
-		OrderId:           0,
+	err := query.OmsOrderItem.WithContext(l.ctx).Create(&model.OmsOrderItem{
+		OrderID:           0,
 		OrderSn:           "",
-		ProductId:         orderItem.ProductId,
+		ProductID:         orderItem.ProductId,
 		ProductPic:        orderItem.ProductPic,
 		ProductName:       orderItem.ProductName,
 		ProductBrand:      orderItem.ProductBrand,
 		ProductSn:         orderItem.ProductSn,
 		ProductPrice:      float64(orderItem.ProductPrice),
 		ProductQuantity:   orderItem.ProductQuantity,
-		ProductSkuId:      orderItem.ProductSkuId,
+		ProductSkuID:      orderItem.ProductSkuId,
 		ProductSkuCode:    orderItem.ProductSkuCode,
-		ProductCategoryId: orderItem.ProductCategoryId,
+		ProductCategoryID: orderItem.ProductCategoryId,
 		PromotionName:     orderItem.PromotionName,
 		PromotionAmount:   float64(orderItem.PromotionAmount),
 		CouponAmount:      float64(orderItem.CouponAmount),
@@ -89,16 +92,17 @@ func buildOrderItem(l *OrderAddLogic, orderItem *omsclient.OrderItemListData) {
 		GiftGrowth:        orderItem.GiftGrowth,
 		ProductAttr:       orderItem.ProductAttr,
 	})
+
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("插入order_item失败,参数：%+v,异常：%s", orderItem, err.Error())
+		logc.Errorf(l.ctx, "插入order_item失败,参数：%+v,异常：%s", orderItem, err.Error())
 	}
 }
 
 // 1.构建订单信息
-func buildOrderInfo(in *omsclient.OrderAddReq) *omsmodel.OmsOrder {
-	return &omsmodel.OmsOrder{
-		MemberId:              in.MemberId,
-		CouponId:              in.CouponId,
+func buildOrderInfo(in *omsclient.OrderAddReq) *model.OmsOrder {
+	return &model.OmsOrder{
+		MemberID:              in.MemberId,
+		CouponID:              in.CouponId,
 		OrderSn:               in.OrderSn,
 		CreateTime:            time.Now(),
 		MemberUsername:        in.MemberUsername,

@@ -2,9 +2,10 @@ package productservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,24 +31,44 @@ func NewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Produ
 
 // ProductList 查询商品列表
 func (l *ProductListLogic) ProductList(in *pmsclient.ProductListReq) (*pmsclient.ProductListResp, error) {
-	all, err := l.svcCtx.PmsProductModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.PmsProductModel.Count(l.ctx, in)
+	q := query.PmsProduct.WithContext(l.ctx)
+	if len(in.Name) > 0 {
+		q = q.Where(query.PmsProduct.Name.Like("%" + in.Name + "%"))
+	}
+	if in.VerifyStatus != 2 {
+		q = q.Where(query.PmsProduct.VerifyStatus.Eq(in.VerifyStatus))
+	}
+	if in.ProductCategoryId != 0 {
+		q = q.Where(query.PmsProduct.ProductCategoryID.Eq(in.ProductCategoryId))
+	}
+	if in.BrandId != 0 {
+		q = q.Where(query.PmsProduct.BrandID.Eq(in.BrandId))
+	}
+	if in.PublishStatus != 2 {
+		q = q.Where(query.PmsProduct.PublishStatus.Eq(in.PublishStatus))
+	}
+	if in.DeleteStatus != 2 {
+		q = q.Where(query.PmsProduct.DeleteStatus.Eq(in.DeleteStatus))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询商品列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询商品列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*pmsclient.ProductListData
-	for _, product := range *all {
+	for _, product := range result {
 
 		list = append(list, &pmsclient.ProductListData{
-			Id:                         product.Id,
-			BrandId:                    product.BrandId,
-			ProductCategoryId:          product.ProductCategoryId,
-			FeightTemplateId:           product.FeightTemplateId,
-			ProductAttributeCategoryId: product.ProductAttributeCategoryId,
+			Id:                         product.ID,
+			BrandId:                    product.BrandID,
+			ProductCategoryId:          product.ProductCategoryID,
+			FeightTemplateId:           product.FeightTemplateID,
+			ProductAttributeCategoryId: product.ProductAttributeCategoryID,
 			Name:                       product.Name,
 			Pic:                        product.Pic,
 			ProductSn:                  product.ProductSn,
@@ -77,21 +98,19 @@ func (l *ProductListLogic) ProductList(in *pmsclient.ProductListReq) (*pmsclient
 			AlbumPics:                  product.AlbumPics,
 			DetailTitle:                product.DetailTitle,
 			DetailDesc:                 product.DetailDesc,
-			DetailHtml:                 product.DetailHtml,
-			DetailMobileHtml:           product.DetailMobileHtml,
+			DetailHtml:                 product.DetailHTML,
+			DetailMobileHtml:           product.DetailMobileHTML,
 			PromotionStartTime:         product.PromotionStartTime.Format("2006-01-02 15:04:05"),
 			PromotionEndTime:           product.PromotionEndTime.Format("2006-01-02 15:04:05"),
 			PromotionPerLimit:          product.PromotionPerLimit,
 			PromotionType:              product.PromotionType,
 			BrandName:                  product.BrandName,
 			ProductCategoryName:        product.ProductCategoryName,
-			ProductCategoryIdArray:     product.ProductCategoryIdArray,
+			ProductCategoryIdArray:     product.ProductCategoryIDArray,
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询商品列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询商品列表信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.ProductListResp{
 		Total: count,
 		List:  list,

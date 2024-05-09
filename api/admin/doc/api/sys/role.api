@@ -8,7 +8,7 @@ type (
 	addRoleReq {
 		Name   string `json:"name"`            // 角色名称
 		Remark string `json:"remark,optional"` // 备注
-		Status int64  `json:"status"`          // 状态
+        Status int32 `json:"status"`           // 状态
 	}
 	addRoleResp {
 		Code    string `json:"code"`
@@ -18,7 +18,7 @@ type (
 		Current  int64  `json:"current,default=1"`
 		PageSize int64  `json:"pageSize,default=20"`
 		Name     string `json:"name,optional "`
-		Status   int64  `json:"status,default=2"`
+        Status int32 `json:"status,default=2"`
 	}
 	ListRoleData {
 		Id             int64  `json:"id"`             // 编号
@@ -26,12 +26,12 @@ type (
 		Remark         string `json:"remark"`         // 备注
 		CreateBy       string `json:"createBy"`       // 创建人
 		CreateTime     string `json:"createTime"`     // 创建时间
-		LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
-		LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
-		DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
+        UpdateBy string `json:"updateBy"`             // 更新人
+        UpdateTime string `json:"updateTime"`         // 更新时间
+        DelFlag int32 `json:"delFlag"`                // 是否删除  0：已删除  1：正常
 		Label          string `json:"label"`          // 编号
 		Value          string `json:"value"`          // 角色名称
-		Status         int64  `json:"status"`         // 状态
+        Status int32 `json:"status"`                  // 状态
 	}
 	ListRoleResp {
 		Code     string          `json:"code"`
@@ -46,7 +46,7 @@ type (
 		Id     int64  `json:"id"`     // 编号
 		Name   string `json:"name"`   // 角色名称
 		Remark string `json:"remark"` // 备注
-		Status int64  `json:"status"` // 状态
+        Status int32 `json:"status"`  // 状态
 	}
 	UpdateRoleResp {
 		Code    string `json:"code"`

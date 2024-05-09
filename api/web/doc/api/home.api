@@ -39,26 +39,26 @@ type SubjectList {
 type AdvertiseList {
     ID int64 `json:"id"`
     Name string `json:"name"`
-    Type int64 `json:"type"`
+    Type int32 `json:"type"`
     Pic string `json:"pic"`
     StartTime string `json:"startTime"`
     EndTime string `json:"endTime"`
-    Status int64 `json:"status"`
-    ClickCount int64 `json:"clickCount"`
-    OrderCount int64 `json:"orderCount"`
+    Status int32 `json:"status"`
+    ClickCount int32 `json:"clickCount"`
+    OrderCount int32 `json:"orderCount"`
     URL string `json:"url"`
-    Sort int64 `json:"sort"`
+    Sort int32 `json:"sort"`
 }
 
 type BrandList {
     ID int64 `json:"id"`
     Name string `json:"name"`
     FirstLetter string `json:"firstLetter"`
-    Sort int64 `json:"sort"`
-    FactoryStatus int64 `json:"factoryStatus"`
-    ShowStatus int64 `json:"showStatus"`
-    ProductCount int64 `json:"productCount"`
-    ProductCommentCount int64 `json:"productCommentCount"`
+    Sort int32 `json:"sort"`
+    FactoryStatus int32 `json:"factoryStatus"`
+    ShowStatus int32 `json:"showStatus"`
+    ProductCount int32 `json:"productCount"`
+    ProductCommentCount int32 `json:"productCommentCount"`
     Logo string `json:"logo"`
     BigPic string `json:"bigPic"`
 }
@@ -80,25 +80,25 @@ type ProductList {
     Name string `json:"name"`
     Pic string `json:"pic"`
     ProductSn string `json:"productSn"`
-    DeleteStatus int64 `json:"deleteStatus"`
-    PublishStatus int64 `json:"publishStatus"`
-    NewStatus int64 `json:"newStatus"`
-    RecommandStatus int64 `json:"recommandStatus"`
-    VerifyStatus int64 `json:"verifyStatus"`
-    Sort int64 `json:"sort"`
-    Sale int64 `json:"sale"`
+    DeleteStatus int32 `json:"deleteStatus"`
+    PublishStatus int32 `json:"publishStatus"`
+    NewStatus int32 `json:"newStatus"`
+    RecommandStatus int32 `json:"recommandStatus"`
+    VerifyStatus int32 `json:"verifyStatus"`
+    Sort int32 `json:"sort"`
+    Sale int32 `json:"sale"`
     Price float64 `json:"price"`
     PromotionPrice float64 `json:"promotionPrice,omitempty"`
-    GiftGrowth int64 `json:"giftGrowth"`
-    GiftPoint int64 `json:"giftPoint"`
-    UsePointLimit int64 `json:"usePointLimit"`
+    GiftGrowth int32 `json:"giftGrowth"`
+    GiftPoint int32 `json:"giftPoint"`
+    UsePointLimit int32 `json:"usePointLimit"`
     SubTitle string `json:"subTitle"`
     OriginalPrice float64 `json:"originalPrice"`
-    Stock int64 `json:"stock"`
-    LowStock int64 `json:"lowStock"`
+    Stock int32 `json:"stock"`
+    LowStock int32 `json:"lowStock"`
     Unit string `json:"unit"`
     Weight float64 `json:"weight"`
-    PreviewStatus int64 `json:"previewStatus"`
+    PreviewStatus int32 `json:"previewStatus"`
     ServiceIDS string `json:"serviceIds"`
     Keywords string `json:"keywords"`
     Note string `json:"note"`
@@ -106,8 +106,8 @@ type ProductList {
     DetailTitle string `json:"detailTitle"`
     PromotionStartTime string `json:"promotionStartTime,omitempty"`
     PromotionEndTime string `json:"promotionEndTime,omitempty"`
-    PromotionPerLimit int64 `json:"promotionPerLimit"`
-    PromotionType int64 `json:"promotionType"`
+    PromotionPerLimit int32 `json:"promotionPerLimit"`
+    PromotionType int32 `json:"promotionType"`
     BrandName string `json:"brandName"`
     ProductCategoryName string `json:"productCategoryName"`
     Description string `json:"description"`

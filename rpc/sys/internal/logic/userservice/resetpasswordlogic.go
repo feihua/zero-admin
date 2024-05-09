@@ -2,8 +2,8 @@ package userservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"time"
 
@@ -34,13 +34,19 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ReS
 // ReSetPassword 重置用户密码
 func (l *ReSetPasswordLogic) ReSetPassword(in *sysclient.ReSetPasswordReq) (*sysclient.ReSetPasswordResp, error) {
 
-	_ = l.svcCtx.UserModel.Update(l.ctx, &sysmodel.SysUser{
-		Id:         in.Id,
+	q := query.SysUser
+	now := time.Now()
+	_, err := q.WithContext(l.ctx).Updates(&model.SysUser{
+		ID:         in.Id,
 		Password:   "123456",
 		Salt:       "123456",
-		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
-		UpdateTime: sql.NullTime{Time: time.Now()},
+		UpdateBy:   &in.UpdateBy,
+		UpdateTime: &now,
 	})
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &sysclient.ReSetPasswordResp{}, nil
 }

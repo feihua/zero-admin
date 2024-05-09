@@ -2,6 +2,7 @@ package homeadvertiseservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeAdvertiseDeleteLogic 首页广告
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:17
+*/
 type HomeAdvertiseDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewHomeAdvertiseDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// HomeAdvertiseDelete 删除首页广告
 func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(in *smsclient.HomeAdvertiseDeleteReq) (*smsclient.HomeAdvertiseDeleteResp, error) {
-	err := l.svcCtx.SmsHomeAdvertiseModel.DeleteByIds(l.ctx, in.Ids)
+	q := query.SmsHomeAdvertise
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
 		return nil, err

@@ -2,11 +2,10 @@ package jobservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
-	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -32,14 +31,14 @@ func NewJobAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobAddLogi
 
 // JobAdd 添加岗位
 func (l *JobAddLogic) JobAdd(in *sysclient.JobAddReq) (*sysclient.JobAddResp, error) {
-	job := &sysmodel.SysJob{
+	err := query.SysJob.WithContext(l.ctx).Create(&model.SysJob{
 		JobName:  in.JobName,
 		OrderNum: in.OrderNum,
 		CreateBy: in.CreateBy,
-		Remarks:  sql.NullString{String: in.Remarks, Valid: true},
+		Remarks:  &in.Remarks,
 		DelFlag:  in.DelFlag,
-	}
-	if _, err := l.svcCtx.JobModel.Insert(l.ctx, job); err != nil {
+	})
+	if err != nil {
 		return nil, err
 	}
 

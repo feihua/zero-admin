@@ -2,12 +2,11 @@ package menuservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-
-	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,23 +32,22 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuAddLo
 
 // MenuAdd 新增菜单
 func (l *MenuAddLogic) MenuAdd(in *sysclient.MenuAddReq) (*sysclient.MenuAddResp, error) {
-	menu := &sysmodel.SysMenu{
+	err := query.SysMenu.WithContext(l.ctx).Create(&model.SysMenu{
 		Name:          in.Name,
-		ParentId:      in.ParentId,
-		Url:           sql.NullString{String: in.Url, Valid: true},
-		Perms:         sql.NullString{String: in.Perms, Valid: true},
+		ParentID:      in.ParentId,
+		URL:           &in.Url,
+		Perms:         &in.Perms,
 		Type:          in.Type,
-		Icon:          sql.NullString{String: in.Icon, Valid: true},
-		OrderNum:      sql.NullInt64{Int64: in.OrderNum, Valid: true},
+		Icon:          &in.Icon,
+		OrderNum:      in.OrderNum,
 		CreateBy:      in.CreateBy,
 		DelFlag:       in.DelFlag,
-		VuePath:       sql.NullString{String: in.VuePath, Valid: true},
-		VueComponent:  sql.NullString{String: in.VueComponent, Valid: true},
-		VueIcon:       sql.NullString{String: in.VueIcon, Valid: true},
-		VueRedirect:   sql.NullString{String: in.VueRedirect, Valid: true},
-		BackgroundUrl: in.BackgroundUrl,
-	}
-	_, err := l.svcCtx.MenuModel.Insert(l.ctx, menu)
+		VuePath:       &in.VuePath,
+		VueComponent:  &in.VueComponent,
+		VueIcon:       &in.VueIcon,
+		VueRedirect:   &in.VueRedirect,
+		BackgroundURL: in.BackgroundUrl,
+	})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "新增菜单信息失败,参数:%+v,异常:%s", in, err.Error())

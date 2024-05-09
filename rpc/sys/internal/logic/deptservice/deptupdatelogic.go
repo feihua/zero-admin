@@ -2,9 +2,9 @@ package deptservicelogic
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"strings"
 
@@ -34,18 +34,19 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptUp
 
 // DeptUpdate 更新部门信息
 func (l *DeptUpdateLogic) DeptUpdate(in *sysclient.DeptUpdateReq) (*sysclient.DeptUpdateResp, error) {
-	dept, err := l.svcCtx.DeptModel.FindOne(l.ctx, in.Id)
+	q := query.SysDept
+	dept, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 	if err != nil {
 		return nil, err
 	}
-	err = l.svcCtx.DeptModel.Update(l.ctx, &sysmodel.SysDept{
-		Id:         in.Id,
+	_, err = q.WithContext(l.ctx).Updates(&model.SysDept{
+		ID:         in.Id,
 		Name:       in.Name,
-		ParentId:   in.ParentId,
+		ParentID:   in.ParentId,
 		OrderNum:   in.OrderNum,
 		CreateBy:   dept.CreateBy,
 		CreateTime: dept.CreateTime,
-		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
+		UpdateBy:   &in.UpdateBy,
 		DelFlag:    in.DelFlag,
 		ParentIds:  strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1),
 	})

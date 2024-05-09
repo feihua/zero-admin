@@ -11,3 +11,14 @@ Content-Type: application/json
 ### 获取个人信息
 GET {{host}}/api/sys/user/info
 Authorization: Bearer {{token}}
+
+### 用户列表
+POST {{host}}/api/sys/user/list
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "current": 1,
+  "pageSize": 10,
+  "name": "123"
+}

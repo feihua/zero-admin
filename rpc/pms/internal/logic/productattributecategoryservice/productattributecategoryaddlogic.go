@@ -2,7 +2,8 @@ package productattributecategoryservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductAttributeCategoryAddLogic 商品属性类别
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:49
+*/
 type ProductAttributeCategoryAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,12 +30,14 @@ func NewProductAttributeCategoryAddLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
+// ProductAttributeCategoryAdd 添加商品属性类别
 func (l *ProductAttributeCategoryAddLogic) ProductAttributeCategoryAdd(in *pmsclient.ProductAttributeCategoryAddReq) (*pmsclient.ProductAttributeCategoryAddResp, error) {
-	_, err := l.svcCtx.PmsProductAttributeCategoryModel.Insert(l.ctx, &pmsmodel.PmsProductAttributeCategory{
+	err := query.PmsProductAttributeCategory.WithContext(l.ctx).Create(&model.PmsProductAttributeCategory{
 		Name:           in.Name,
 		AttributeCount: 0,
 		ParamCount:     0,
 	})
+
 	if err != nil {
 		return nil, err
 	}

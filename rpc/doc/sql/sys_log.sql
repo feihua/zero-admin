@@ -9,7 +9,7 @@ create table sys_log
     response_params text                                null comment '响应参数',
     time            bigint                              not null comment '执行时长(毫秒)',
     ip              varchar(64)                         null comment 'IP地址',
-    operation_time  timestamp default CURRENT_TIMESTAMP null comment '操作时间'
+    operation_time timestamp default CURRENT_TIMESTAMP not null comment '操作时间'
 )
     comment '系统操作日志';
 

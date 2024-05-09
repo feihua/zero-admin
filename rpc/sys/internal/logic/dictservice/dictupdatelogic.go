@@ -2,8 +2,8 @@ package dictservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"time"
 
@@ -33,27 +33,28 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictUp
 
 // DictUpdate 更新字典信息
 func (l *DictUpdateLogic) DictUpdate(in *sysclient.DictUpdateReq) (*sysclient.DictUpdateResp, error) {
+	q := query.SysDict
 	//更新之前查询记录是否存在
-	dict, err := l.svcCtx.DictModel.FindOne(l.ctx, in.Id)
+	dict, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 	if err != nil {
 		return nil, err
 	}
 
-	err = l.svcCtx.DictModel.Update(l.ctx, &sysmodel.SysDict{
-		Id:          in.Id,
+	now := time.Now()
+	_, err = q.WithContext(l.ctx).Updates(&model.SysDict{
+		ID:          in.Id,
 		Value:       in.Value,
 		Label:       in.Label,
 		Type:        in.Type,
 		Description: in.Description,
-		Sort:        float64(in.Sort),
+		Sort:        in.Sort,
 		CreateBy:    dict.CreateBy,
 		CreateTime:  dict.CreateTime,
-		UpdateBy:    sql.NullString{String: in.LastUpdateBy, Valid: true},
-		UpdateTime:  time.Now(),
-		Remarks:     sql.NullString{String: in.Remarks, Valid: true},
+		UpdateBy:    &in.UpdateBy,
+		UpdateTime:  &now,
+		Remarks:     &in.Remarks,
 		DelFlag:     in.DelFlag,
 	})
-
 	if err != nil {
 		return nil, err
 	}

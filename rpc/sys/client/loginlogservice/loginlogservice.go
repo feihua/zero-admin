@@ -13,15 +13,6 @@ import (
 )
 
 type (
-	ConfigAddReq           = sysclient.ConfigAddReq
-	ConfigAddResp          = sysclient.ConfigAddResp
-	ConfigDeleteReq        = sysclient.ConfigDeleteReq
-	ConfigDeleteResp       = sysclient.ConfigDeleteResp
-	ConfigListData         = sysclient.ConfigListData
-	ConfigListReq          = sysclient.ConfigListReq
-	ConfigListResp         = sysclient.ConfigListResp
-	ConfigUpdateReq        = sysclient.ConfigUpdateReq
-	ConfigUpdateResp       = sysclient.ConfigUpdateResp
 	DeptAddReq             = sysclient.DeptAddReq
 	DeptAddResp            = sysclient.DeptAddResp
 	DeptDeleteReq          = sysclient.DeptDeleteReq
@@ -92,8 +83,6 @@ type (
 	SysLogListData         = sysclient.SysLogListData
 	SysLogListReq          = sysclient.SysLogListReq
 	SysLogListResp         = sysclient.SysLogListResp
-	UpdateConfigRoleReq    = sysclient.UpdateConfigRoleReq
-	UpdateConfigRoleResp   = sysclient.UpdateConfigRoleResp
 	UpdateMenuRoleReq      = sysclient.UpdateMenuRoleReq
 	UpdateMenuRoleResp     = sysclient.UpdateMenuRoleResp
 	UserAddReq             = sysclient.UserAddReq

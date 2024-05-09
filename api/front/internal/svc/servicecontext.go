@@ -45,7 +45,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/client/homenewproductservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendproductservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendsubjectservice"
-	"github.com/feihua/zero-admin/rpc/sys/client/configservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/deptservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/dictservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/jobservice"
@@ -96,7 +95,6 @@ type ServiceContext struct {
 	MemberAttentionService               memberattentionservice.MemberAttentionService
 
 	//系统相关
-	ConfigService   configservice.ConfigService
 	DeptService     deptservice.DeptService
 	DictService     dictservice.DictService
 	JobService      jobservice.JobService
@@ -187,7 +185,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		MemberTaskService:                    membertaskservice.NewMemberTaskService(umsClient),
 		MemberAttentionService:               memberattentionservice.NewMemberAttentionService(umsClient),
 
-		ConfigService:   configservice.NewConfigService(sysClient),
 		DeptService:     deptservice.NewDeptService(sysClient),
 		DictService:     dictservice.NewDictService(sysClient),
 		JobService:      jobservice.NewJobService(sysClient),

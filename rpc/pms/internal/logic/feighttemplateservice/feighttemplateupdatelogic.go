@@ -2,7 +2,8 @@ package feighttemplateservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FeightTemplateUpdateLogic 运费模板
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:46
+*/
 type FeightTemplateUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,9 +30,11 @@ func NewFeightTemplateUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// FeightTemplateUpdate 更新运费模板
 func (l *FeightTemplateUpdateLogic) FeightTemplateUpdate(in *pmsclient.FeightTemplateUpdateReq) (*pmsclient.FeightTemplateUpdateResp, error) {
-	err := l.svcCtx.PmsFeightTemplateModel.Update(l.ctx, &pmsmodel.PmsFeightTemplate{
-		Id:             in.Id,
+	q := query.PmsFeightTemplate
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsFeightTemplate{
+		ID:             in.Id,
 		Name:           in.Name,
 		ChargeType:     in.ChargeType,
 		FirstWeight:    float64(in.FirstWeight),
@@ -35,6 +43,7 @@ func (l *FeightTemplateUpdateLogic) FeightTemplateUpdate(in *pmsclient.FeightTem
 		ContinmeFee:    float64(in.ContinmeFee),
 		Dest:           in.Dest,
 	})
+
 	if err != nil {
 		return nil, err
 	}

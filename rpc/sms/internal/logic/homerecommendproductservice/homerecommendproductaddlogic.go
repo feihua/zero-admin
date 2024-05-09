@@ -2,7 +2,8 @@ package homerecommendproductservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -25,15 +26,17 @@ func NewHomeRecommendProductAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(in *smsclient.HomeRecommendProductAddReq) (*smsclient.HomeRecommendProductAddResp, error) {
+	q := query.SmsHomeRecommendProduct
 	for _, data := range in.RecommendProductAddData {
-		homeBrand, _ := l.svcCtx.SmsHomeBrandModel.FindOneByBrandId(l.ctx, data.ProductId)
+		homeBrand, _ := q.WithContext(l.ctx).Where(q.ProductID.Eq(data.ProductId)).First()
 		if homeBrand == nil {
-			_, err := l.svcCtx.SmsHomeRecommendProductModel.Insert(l.ctx, &smsmodel.SmsHomeRecommendProduct{
-				ProductId:       data.ProductId,
+			err := q.WithContext(l.ctx).Create(&model.SmsHomeRecommendProduct{
+				ProductID:       data.ProductId,
 				ProductName:     data.ProductName,
 				RecommendStatus: data.RecommendStatus,
 				Sort:            data.Sort,
 			})
+
 			if err != nil {
 				return nil, err
 			}

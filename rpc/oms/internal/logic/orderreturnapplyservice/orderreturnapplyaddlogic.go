@@ -2,7 +2,8 @@ package orderreturnapplyservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"time"
 
@@ -26,9 +27,9 @@ func NewOrderReturnApplyAddLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *OrderReturnApplyAddLogic) OrderReturnApplyAdd(in *omsclient.OrderReturnApplyAddReq) (*omsclient.OrderReturnApplyAddResp, error) {
-	_, err := l.svcCtx.OmsOrderReturnApplyModel.Insert(l.ctx, &omsmodel.OmsOrderReturnApply{
-		OrderId:          in.OrderId,
-		ProductId:        in.ProductId,
+	err := query.OmsOrderReturnApply.WithContext(l.ctx).Create(&model.OmsOrderReturnApply{
+		OrderID:          in.OrderId,
+		ProductID:        in.ProductId,
 		OrderSn:          in.OrderSn,
 		CreateTime:       time.Now(),
 		MemberUsername:   in.MemberUsername,
@@ -46,6 +47,7 @@ func (l *OrderReturnApplyAddLogic) OrderReturnApplyAdd(in *omsclient.OrderReturn
 		Description:      in.Description,
 		ProofPics:        in.ProofPics,
 	})
+
 	if err != nil {
 		return nil, err
 	}

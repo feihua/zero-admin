@@ -31,7 +31,7 @@ func (l *MemberPriceUpdateLogic) MemberPriceUpdate(req types.UpdateMemberPriceRe
 		Id:              req.Id,
 		ProductId:       req.ProductId,
 		MemberLevelId:   req.MemberLevelId,
-		MemberPrice:     int64(req.MemberPrice),
+		MemberPrice:     req.MemberPrice,
 		MemberLevelName: req.MemberLevelName,
 	})
 

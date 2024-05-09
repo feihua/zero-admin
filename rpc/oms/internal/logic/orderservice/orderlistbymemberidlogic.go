@@ -2,9 +2,10 @@ package orderservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,18 +25,19 @@ func NewOrderListByMemberIdLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *OrderListByMemberIdLogic) OrderListByMemberId(in *omsclient.OrderListByMemberIdReq) (*omsclient.OrderListByMemberIdResp, error) {
-	order, err := l.svcCtx.OmsOrderModel.FindOneByMemberIdAndOrderId(l.ctx, in.MemberId, in.Id)
+	q := query.OmsOrder
+	//1.查询订单是否存在
+	order, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).First()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询订单列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询订单列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	data := &omsclient.OrderListData{
-		Id:                    order.Id,
-		MemberId:              order.MemberId,
-		CouponId:              order.CouponId,
+		Id:                    order.ID,
+		MemberId:              order.MemberID,
+		CouponId:              order.CouponID,
 		OrderSn:               order.OrderSn,
 		CreateTime:            order.CreateTime.Format("2006-01-02 15:04:05"),
 		MemberUsername:        order.MemberUsername,
@@ -77,13 +79,10 @@ func (l *OrderListByMemberIdLogic) OrderListByMemberId(in *omsclient.OrderListBy
 		ReceiveTime:           order.ReceiveTime.Format("2006-01-02 15:04:05"),
 		CommentTime:           order.CommentTime.Format("2006-01-02 15:04:05"),
 		ModifyTime:            order.ModifyTime.Format("2006-01-02 15:04:05"),
-		ItemListData:          queryOrderItemsById(l, order.Id),
+		ItemListData:          queryOrderItemsById(l, order.ID),
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(data)
-
-	logx.WithContext(l.ctx).Infof("查询订单列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询订单列表信息,参数：%+v,响应：%+v", in, data)
 	return &omsclient.OrderListByMemberIdResp{
 		Total: 0,
 		Data:  data,
@@ -91,23 +90,23 @@ func (l *OrderListByMemberIdLogic) OrderListByMemberId(in *omsclient.OrderListBy
 }
 
 func queryOrderItemsById(l *OrderListByMemberIdLogic, OrderId int64) []*omsclient.OrderItemListData {
-	orderItem, _ := l.svcCtx.OmsOrderItemModel.FindAll(l.ctx, 1, 100, OrderId)
+	result, _ := query.OmsOrderItem.WithContext(l.ctx).Where(query.OmsOrderItem.OrderID.Eq(OrderId)).Find()
 	var itemListData []*omsclient.OrderItemListData
-	for _, item := range *orderItem {
+	for _, item := range result {
 		itemListData = append(itemListData, &omsclient.OrderItemListData{
-			Id:                item.Id,
-			OrderId:           item.OrderId,
+			Id:                item.ID,
+			OrderId:           item.OrderID,
 			OrderSn:           item.OrderSn,
-			ProductId:         item.ProductId,
+			ProductId:         item.ProductID,
 			ProductPic:        item.ProductPic,
 			ProductName:       item.ProductName,
 			ProductBrand:      item.ProductBrand,
 			ProductSn:         item.ProductSn,
 			ProductPrice:      float32(item.ProductPrice),
 			ProductQuantity:   item.ProductQuantity,
-			ProductSkuId:      item.ProductSkuId,
+			ProductSkuId:      item.ProductSkuID,
 			ProductSkuCode:    item.ProductSkuCode,
-			ProductCategoryId: item.ProductCategoryId,
+			ProductCategoryId: item.ProductCategoryID,
 			PromotionName:     item.PromotionName,
 			PromotionAmount:   float32(item.PromotionAmount),
 			CouponAmount:      float32(item.CouponAmount),

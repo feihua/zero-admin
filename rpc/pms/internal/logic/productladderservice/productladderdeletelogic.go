@@ -2,6 +2,7 @@ package productladderservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductLadderDeleteLogic 产品阶梯价格
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:00
+*/
 type ProductLadderDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewProductLadderDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// ProductLadderDelete 删除产品阶梯价格
 func (l *ProductLadderDeleteLogic) ProductLadderDelete(in *pmsclient.ProductLadderDeleteReq) (*pmsclient.ProductLadderDeleteResp, error) {
-	err := l.svcCtx.PmsProductLadderModel.Delete(l.ctx, in.Id)
+	q := query.PmsProductLadder
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Delete()
 
 	if err != nil {
 		return nil, err

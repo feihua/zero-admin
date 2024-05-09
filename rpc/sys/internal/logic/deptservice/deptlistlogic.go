@@ -2,6 +2,7 @@ package deptservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
@@ -33,17 +34,19 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptList
 
 // DeptList 部门信息列表
 func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptListResp, error) {
-	count, _ := l.svcCtx.DeptModel.Count(l.ctx)
-	all, err := l.svcCtx.DeptModel.FindAll(l.ctx, 1, count)
+	q := query.SysDept.WithContext(l.ctx)
+
+	result, err := q.Find()
+	count, err := q.Count()
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("查询机构列表信息失败,参数:%+v,异常:%s", in, err.Error())
+		logc.Errorf(l.ctx, "查询机构列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*sysclient.DeptListData
 
-	for _, dept := range *all {
+	for _, dept := range result {
 		var parentIds []int64
 		if len(dept.ParentIds) > 0 {
 			for _, i := range strings.Split(dept.ParentIds, ",") {
@@ -53,16 +56,16 @@ func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptList
 		}
 
 		list = append(list, &sysclient.DeptListData{
-			Id:             dept.Id,
-			Name:           dept.Name,
-			ParentId:       dept.ParentId,
-			OrderNum:       dept.OrderNum,
-			CreateBy:       dept.CreateBy,
-			CreateTime:     dept.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   dept.UpdateBy.String,
-			LastUpdateTime: dept.UpdateTime.Time.Format("2006-01-02 15:04:05"),
-			DelFlag:        dept.DelFlag,
-			ParentIds:      parentIds,
+			Id:         dept.ID,
+			Name:       dept.Name,
+			ParentId:   dept.ParentID,
+			OrderNum:   dept.OrderNum,
+			CreateBy:   dept.CreateBy,
+			CreateTime: dept.CreateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:   *dept.UpdateBy,
+			UpdateTime: dept.UpdateTime.Format("2006-01-02 15:04:05"),
+			DelFlag:    dept.DelFlag,
+			ParentIds:  parentIds,
 		})
 	}
 

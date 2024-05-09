@@ -27,14 +27,14 @@ func NewMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Member
 func (l *MemberListLogic) MemberList(in *umsclient.MemberListReq) (*umsclient.MemberListResp, error) {
 	q := query.UmsMember.WithContext(l.ctx)
 	if len(in.Username) > 0 {
-		q.Where(query.UmsMember.Username.Like("%" + in.Username + "%"))
+		q = q.Where(query.UmsMember.Username.Like("%" + in.Username + "%"))
 	}
 	if len(in.Phone) > 0 {
-		q.Where(query.UmsMember.Phone.Like("%" + in.Phone + "%"))
+		q = q.Where(query.UmsMember.Phone.Like("%" + in.Phone + "%"))
 	}
 
 	if in.Status != 2 {
-		q.Where(query.UmsMember.Status.Eq(in.Status))
+		q = q.Where(query.UmsMember.Status.Eq(in.Status))
 	}
 
 	offset := (in.Current - 1) * in.PageSize

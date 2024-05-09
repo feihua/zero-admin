@@ -35,7 +35,7 @@ func newSysRole(db *gorm.DB, opts ...gen.DOOption) sysRole {
 	_sysRole.UpdateBy = field.NewString(tableName, "update_by")
 	_sysRole.UpdateTime = field.NewTime(tableName, "update_time")
 	_sysRole.DelFlag = field.NewInt32(tableName, "del_flag")
-	_sysRole.Status = field.NewInt64(tableName, "status")
+	_sysRole.Status = field.NewInt32(tableName, "status")
 
 	_sysRole.fillFieldMap()
 
@@ -55,7 +55,7 @@ type sysRole struct {
 	UpdateBy   field.String // 更新者
 	UpdateTime field.Time   // 更新时间
 	DelFlag    field.Int32  // 是否删除  0：已删除  1：正常
-	Status     field.Int64  // 状态  1:启用,0:禁用
+	Status     field.Int32  // 状态  1:启用,0:禁用
 
 	fieldMap map[string]field.Expr
 }
@@ -80,7 +80,7 @@ func (s *sysRole) updateTableName(table string) *sysRole {
 	s.UpdateBy = field.NewString(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
 	s.DelFlag = field.NewInt32(table, "del_flag")
-	s.Status = field.NewInt64(table, "status")
+	s.Status = field.NewInt32(table, "status")
 
 	s.fillFieldMap()
 

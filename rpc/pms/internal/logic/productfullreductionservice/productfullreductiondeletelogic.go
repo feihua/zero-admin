@@ -2,6 +2,7 @@ package productfullreductionservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductFullReductionDeleteLogic 产品满减
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 9:59
+*/
 type ProductFullReductionDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewProductFullReductionDeleteLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// ProductFullReductionDelete 删除产品满减
 func (l *ProductFullReductionDeleteLogic) ProductFullReductionDelete(in *pmsclient.ProductFullReductionDeleteReq) (*pmsclient.ProductFullReductionDeleteResp, error) {
-	err := l.svcCtx.PmsProductFullReductionModel.Delete(l.ctx, in.Id)
+	q := query.PmsProductFullReduction
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Delete()
 
 	if err != nil {
 		return nil, err

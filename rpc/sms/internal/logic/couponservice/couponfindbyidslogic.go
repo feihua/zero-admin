@@ -2,7 +2,8 @@ package couponservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -26,19 +27,20 @@ func NewCouponFindByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *C
 
 // CouponFindByIds 根据优惠券ids查询优惠券
 func (l *CouponFindByIdsLogic) CouponFindByIds(in *smsclient.CouponFindByIdsReq) (*smsclient.CouponFindByIdsResp, error) {
-	all, err := l.svcCtx.SmsCouponModel.FindAllByIds(l.ctx, in.CouponIds)
+
+	q := query.SmsCoupon
+	result, err := q.WithContext(l.ctx).Where(q.ID.In(in.CouponIds...)).Find()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询优惠券列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询优惠券列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*smsclient.CouponListData
-	for _, coupon := range *all {
+	for _, coupon := range result {
 
 		list = append(list, &smsclient.CouponListData{
-			Id:           coupon.Id,
+			Id:           coupon.ID,
 			Type:         coupon.Type,
 			Name:         coupon.Name,
 			Platform:     coupon.Platform,
@@ -58,9 +60,7 @@ func (l *CouponFindByIdsLogic) CouponFindByIds(in *smsclient.CouponFindByIdsReq)
 			MemberLevel:  coupon.MemberLevel,
 		})
 
-		reqStr, _ := json.Marshal(in)
-		listStr, _ := json.Marshal(list)
-		logx.WithContext(l.ctx).Infof("查询优惠券列表信息,参数：%s,响应：%s", reqStr, listStr)
+		logc.Infof(l.ctx, "查询优惠券列表信息,参数：%+v,响应：%+v", in, list)
 	}
 
 	return &smsclient.CouponFindByIdsResp{

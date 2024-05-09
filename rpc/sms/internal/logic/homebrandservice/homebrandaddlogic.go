@@ -2,7 +2,8 @@ package homebrandservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
@@ -24,12 +25,13 @@ func NewHomeBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Home
 }
 
 func (l *HomeBrandAddLogic) HomeBrandAdd(in *smsclient.HomeBrandAddReq) (*smsclient.HomeBrandAddResp, error) {
+	q := query.SmsHomeBrand
 	for _, data := range in.BrandAddData {
-		homeBrand, _ := l.svcCtx.SmsHomeBrandModel.FindOneByBrandId(l.ctx, data.BrandId)
+		homeBrand, _ := q.WithContext(l.ctx).Where(q.BrandID.Eq(data.BrandId)).First()
 		//存在的时候不添加
 		if homeBrand == nil {
-			_, err := l.svcCtx.SmsHomeBrandModel.Insert(l.ctx, &smsmodel.SmsHomeBrand{
-				BrandId:         data.BrandId,
+			err := q.WithContext(l.ctx).Create(&model.SmsHomeBrand{
+				BrandID:         data.BrandId,
 				BrandName:       data.BrandName,
 				RecommendStatus: data.RecommendStatus,
 				Sort:            data.Sort,

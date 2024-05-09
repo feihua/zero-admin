@@ -2,9 +2,10 @@ package skustockservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,20 +25,19 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SkuS
 }
 
 func (l *SkuStockListLogic) SkuStockList(in *pmsclient.SkuStockListReq) (*pmsclient.SkuStockListResp, error) {
-	all, err := l.svcCtx.PmsSkuStockModel.FindAll(l.ctx, in.ProductId)
+	result, err := query.PmsSkuStock.WithContext(l.ctx).Where(query.PmsSkuStock.ProductID.Eq(in.ProductId)).Find()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询库存列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询库存列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*pmsclient.SkuStockListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &pmsclient.SkuStockListData{
-			Id:             item.Id,
-			ProductId:      item.ProductId,
+			Id:             item.ID,
+			ProductId:      item.ProductID,
 			SkuCode:        item.SkuCode,
 			Price:          float32(item.Price),
 			Stock:          item.Stock,
@@ -50,9 +50,7 @@ func (l *SkuStockListLogic) SkuStockList(in *pmsclient.SkuStockListReq) (*pmscli
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询库存列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询库存列表信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.SkuStockListResp{
 		Total: 0,
 		List:  list,

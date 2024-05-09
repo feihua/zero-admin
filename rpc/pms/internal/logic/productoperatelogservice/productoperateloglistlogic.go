@@ -2,9 +2,10 @@ package productoperatelogservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,25 +25,27 @@ func NewProductOperateLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pmsclient.ProductOperateLogListReq) (*pmsclient.ProductOperateLogListResp, error) {
-	all, err := l.svcCtx.PmsProductOperateLogModel.FindAll(l.ctx, in.Current, in.PageSize)
-	count, _ := l.svcCtx.PmsProductOperateLogModel.Count(l.ctx)
+	q := query.PmsProductOperateLog.WithContext(l.ctx)
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询商品操作历史列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询商品操作历史列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*pmsclient.ProductOperateLogListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductOperateLogListData{
-			Id:               item.Id,
-			ProductId:        item.ProductId,
-			PriceOld:         int64(item.PriceOld),
-			PriceNew:         int64(item.PriceNew),
-			SalePriceOld:     int64(item.SalePriceOld),
-			SalePriceNew:     int64(item.SalePriceNew),
+			Id:               item.ID,
+			ProductId:        item.ProductID,
+			PriceOld:         float32(item.PriceOld),
+			PriceNew:         float32(item.PriceNew),
+			SalePriceOld:     float32(item.SalePriceOld),
+			SalePriceNew:     float32(item.SalePriceNew),
 			GiftPointOld:     item.GiftPointOld,
 			GiftPointNew:     item.GiftPointNew,
 			UsePointLimitOld: item.UsePointLimitOld,
@@ -52,9 +55,7 @@ func (l *ProductOperateLogListLogic) ProductOperateLogList(in *pmsclient.Product
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询商品操作历史列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询商品操作历史列表信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.ProductOperateLogListResp{
 		Total: count,
 		List:  list,

@@ -2,6 +2,7 @@ package feighttemplateservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FeightTemplateDeleteLogic 运费模板
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 9:51
+*/
 type FeightTemplateDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewFeightTemplateDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// FeightTemplateDelete 删除运费模板
 func (l *FeightTemplateDeleteLogic) FeightTemplateDelete(in *pmsclient.FeightTemplateDeleteReq) (*pmsclient.FeightTemplateDeleteResp, error) {
-	err := l.svcCtx.PmsFeightTemplateModel.DeleteByIds(l.ctx, in.Ids)
+	q := query.PmsFeightTemplate
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
 		return nil, err

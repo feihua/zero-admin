@@ -2,7 +2,8 @@ package companyaddressservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -25,8 +26,9 @@ func NewCompanyAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *CompanyAddressUpdateLogic) CompanyAddressUpdate(in *omsclient.CompanyAddressUpdateReq) (*omsclient.CompanyAddressUpdateResp, error) {
-	err := l.svcCtx.OmsCompanyAddressModel.Update(l.ctx, &omsmodel.OmsCompanyAddress{
-		Id:            in.Id,
+	q := query.OmsCompanyAddress
+	_, err := q.WithContext(l.ctx).Updates(&model.OmsCompanyAddress{
+		ID:            in.Id,
 		AddressName:   in.AddressName,
 		SendStatus:    in.SendStatus,
 		ReceiveStatus: in.ReceiveStatus,

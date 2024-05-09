@@ -45,10 +45,10 @@ func (l *FeightTemplateListLogic) FeightTemplateList(req types.ListFeightTemplat
 			Id:             item.Id,
 			Name:           item.Name,
 			ChargeType:     item.ChargeType,
-			FirstWeight:    float64(item.FirstWeight),
-			FirstFee:       float64(item.FirstFee),
-			ContinueWeight: float64(item.ContinueWeight),
-			ContinmeFee:    float64(item.FirstFee),
+			FirstWeight:    item.FirstWeight,
+			FirstFee:       item.FirstFee,
+			ContinueWeight: item.ContinueWeight,
+			ContinmeFee:    item.FirstFee,
 			Dest:           item.Dest,
 		})
 	}

@@ -2,6 +2,7 @@ package loginlogservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -30,8 +31,8 @@ func NewLoginLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Lo
 
 // LoginLogDelete 删除登录日志
 func (l *LoginLogDeleteLogic) LoginLogDelete(in *sysclient.LoginLogDeleteReq) (*sysclient.LoginLogDeleteResp, error) {
-	err := l.svcCtx.LoginLogModel.DeleteByIds(l.ctx, in.Ids)
-
+	q := query.SysLoginLog
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
 		return nil, err
 	}

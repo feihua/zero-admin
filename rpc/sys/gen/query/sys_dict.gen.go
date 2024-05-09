@@ -32,7 +32,7 @@ func newSysDict(db *gorm.DB, opts ...gen.DOOption) sysDict {
 	_sysDict.Label = field.NewString(tableName, "label")
 	_sysDict.Type = field.NewString(tableName, "type")
 	_sysDict.Description = field.NewString(tableName, "description")
-	_sysDict.Sort = field.NewFloat64(tableName, "sort")
+	_sysDict.Sort = field.NewInt32(tableName, "sort")
 	_sysDict.CreateBy = field.NewString(tableName, "create_by")
 	_sysDict.CreateTime = field.NewTime(tableName, "create_time")
 	_sysDict.UpdateBy = field.NewString(tableName, "update_by")
@@ -50,18 +50,18 @@ type sysDict struct {
 	sysDictDo sysDictDo
 
 	ALL         field.Asterisk
-	ID          field.Int64   // 编号
-	Value       field.String  // 数据值
-	Label       field.String  // 标签名
-	Type        field.String  // 类型
-	Description field.String  // 描述
-	Sort        field.Float64 // 排序（升序）
-	CreateBy    field.String  // 创建人
-	CreateTime  field.Time    // 创建时间
-	UpdateBy    field.String  // 更新人
-	UpdateTime  field.Time    // 更新时间
-	Remarks     field.String  // 备注信息
-	DelFlag     field.Int32   // 是否删除  -1：已删除  0：正常
+	ID          field.Int64  // 编号
+	Value       field.String // 数据值
+	Label       field.String // 标签名
+	Type        field.String // 类型
+	Description field.String // 描述
+	Sort        field.Int32  // 排序（升序）
+	CreateBy    field.String // 创建人
+	CreateTime  field.Time   // 创建时间
+	UpdateBy    field.String // 更新人
+	UpdateTime  field.Time   // 更新时间
+	Remarks     field.String // 备注信息
+	DelFlag     field.Int32  // 是否删除  -1：已删除  0：正常
 
 	fieldMap map[string]field.Expr
 }
@@ -83,7 +83,7 @@ func (s *sysDict) updateTableName(table string) *sysDict {
 	s.Label = field.NewString(table, "label")
 	s.Type = field.NewString(table, "type")
 	s.Description = field.NewString(table, "description")
-	s.Sort = field.NewFloat64(table, "sort")
+	s.Sort = field.NewInt32(table, "sort")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")

@@ -2,7 +2,7 @@ package jobservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,27 +32,36 @@ func NewJobListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobListLo
 
 // JobList 岗位列表
 func (l *JobListLogic) JobList(in *sysclient.JobListReq) (*sysclient.JobListResp, error) {
-	all, err := l.svcCtx.JobModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.JobModel.Count(l.ctx, in)
+	q := query.SysJob.WithContext(l.ctx)
+	if len(in.JobName) > 0 {
+		q = q.Where(query.SysJob.JobName.Like("%" + in.JobName + "%"))
+	}
+
+	if in.DelFlag != 2 {
+		q = q.Where(query.SysJob.DelFlag.Eq(in.DelFlag))
+	}
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logc.Errorf(l.ctx, "查询岗位列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询岗位列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*sysclient.JobListData
-	for _, job := range *all {
+	for _, job := range result {
 		list = append(list, &sysclient.JobListData{
-			Id:             job.Id,
-			JobName:        job.JobName,
-			OrderNum:       job.OrderNum,
-			CreateBy:       job.CreateBy,
-			CreateTime:     job.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   job.UpdateBy.String,
-			LastUpdateTime: job.UpdateTime.Time.Format("2006-01-02 15:04:05"),
-			DelFlag:        job.DelFlag,
-			Remarks:        job.Remarks.String,
+			Id:         job.ID,
+			JobName:    job.JobName,
+			OrderNum:   job.OrderNum,
+			CreateBy:   job.CreateBy,
+			CreateTime: job.CreateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:   *job.UpdateBy,
+			UpdateTime: job.UpdateTime.Format("2006-01-02 15:04:05"),
+			DelFlag:    job.DelFlag,
+			Remarks:    *job.Remarks,
 		})
 	}
 

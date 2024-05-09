@@ -43,7 +43,6 @@ import (
 	smshomenewproduct "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homenewproduct"
 	smshomerecommendproduct "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homerecommendproduct"
 	smshomerecommendsubject "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homerecommendsubject"
-	sysconfig "github.com/feihua/zero-admin/api/admin/internal/handler/sys/config"
 	sysdept "github.com/feihua/zero-admin/api/admin/internal/handler/sys/dept"
 	sysdict "github.com/feihua/zero-admin/api/admin/internal/handler/sys/dict"
 	sysjob "github.com/feihua/zero-admin/api/admin/internal/handler/sys/job"
@@ -1225,36 +1224,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/add",
-					Handler: sysconfig.ConfigAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/delete",
-					Handler: sysconfig.ConfigDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/list",
-					Handler: sysconfig.ConfigListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/update",
-					Handler: sysconfig.ConfigUpdateHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/config"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/add",
 					Handler: sysdept.DeptAddHandler(serverCtx),
 				},
 				{
@@ -1345,26 +1314,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/delete",
-					Handler: syslog.SysLogDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/list",
-					Handler: syslog.SysLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/sysLog"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/delete",
 					Handler: syslog.LoginLogDeleteHandler(serverCtx),
 				},
 				{
@@ -1381,6 +1330,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/loginLog"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
+					Handler: syslog.SysLogDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/list",
+					Handler: syslog.SysLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/sysLog"),
 	)
 
 	server.AddRoutes(

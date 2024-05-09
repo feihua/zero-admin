@@ -2,6 +2,7 @@ package productcategoryattributerelationservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCategoryAttributeRelationDeleteLogic 产品分类和属性关糸
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 9:57
+*/
 type ProductCategoryAttributeRelationDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewProductCategoryAttributeRelationDeleteLogic(ctx context.Context, svcCtx 
 	}
 }
 
+// ProductCategoryAttributeRelationDelete 删除产品分类和属性关糸
 func (l *ProductCategoryAttributeRelationDeleteLogic) ProductCategoryAttributeRelationDelete(in *pmsclient.ProductCategoryAttributeRelationDeleteReq) (*pmsclient.ProductCategoryAttributeRelationDeleteResp, error) {
-	err := l.svcCtx.PmsProductCategoryAttributeRelationModel.Delete(l.ctx, in.Id)
+	q := query.PmsProductCategoryAttributeRelation
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Delete()
 
 	if err != nil {
 		return nil, err

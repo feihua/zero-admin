@@ -2,7 +2,8 @@ package orderitemservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
@@ -25,19 +26,19 @@ func NewOrderItemAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Orde
 
 func (l *OrderItemAddLogic) OrderItemAdd(in *omsclient.OrderItemAddReq) (*omsclient.OrderItemAddResp, error) {
 
-	_, err := l.svcCtx.OmsOrderItemModel.Insert(l.ctx, &omsmodel.OmsOrderItem{
-		OrderId:           in.OrderId,
+	err := query.OmsOrderItem.WithContext(l.ctx).Create(&model.OmsOrderItem{
+		OrderID:           in.OrderId,
 		OrderSn:           in.OrderSn,
-		ProductId:         in.ProductId,
+		ProductID:         in.ProductId,
 		ProductPic:        in.ProductPic,
 		ProductName:       in.ProductName,
 		ProductBrand:      in.ProductBrand,
 		ProductSn:         in.ProductSn,
 		ProductPrice:      float64(in.ProductPrice),
 		ProductQuantity:   in.ProductQuantity,
-		ProductSkuId:      in.ProductSkuId,
+		ProductSkuID:      in.ProductSkuId,
 		ProductSkuCode:    in.ProductSkuCode,
-		ProductCategoryId: in.ProductCategoryId,
+		ProductCategoryID: in.ProductCategoryId,
 		PromotionName:     in.PromotionName,
 		PromotionAmount:   float64(in.PromotionAmount),
 		CouponAmount:      float64(in.CouponAmount),
@@ -47,6 +48,7 @@ func (l *OrderItemAddLogic) OrderItemAdd(in *omsclient.OrderItemAddReq) (*omscli
 		GiftGrowth:        in.GiftGrowth,
 		ProductAttr:       in.ProductAttr,
 	})
+
 	if err != nil {
 		return nil, err
 	}

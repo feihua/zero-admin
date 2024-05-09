@@ -2,7 +2,8 @@ package flashpromotionservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"time"
 
@@ -27,13 +28,16 @@ func NewFlashPromotionUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 func (l *FlashPromotionUpdateLogic) FlashPromotionUpdate(in *smsclient.FlashPromotionUpdateReq) (*smsclient.FlashPromotionUpdateResp, error) {
 	StartDate, _ := time.Parse("2006-01-02", in.StartDate)
 	EndDate, _ := time.Parse("2006-01-02", in.EndDate)
-	err := l.svcCtx.SmsFlashPromotionModel.Update(l.ctx, &smsmodel.SmsFlashPromotion{
-		Id:        in.Id,
+
+	q := query.SmsFlashPromotion
+	_, err := q.WithContext(l.ctx).Updates(&model.SmsFlashPromotion{
+		ID:        in.Id,
 		Title:     in.Title,
 		StartDate: StartDate,
 		EndDate:   EndDate,
 		Status:    in.Status,
 	})
+
 	if err != nil {
 		return nil, err
 	}

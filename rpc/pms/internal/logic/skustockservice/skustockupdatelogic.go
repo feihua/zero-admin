@@ -2,7 +2,8 @@ package skustockservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SkuStockUpdateLogic 库存
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 11:11
+*/
 type SkuStockUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,10 +30,12 @@ func NewSkuStockUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sk
 	}
 }
 
+// SkuStockUpdate 更新库存
 func (l *SkuStockUpdateLogic) SkuStockUpdate(in *pmsclient.SkuStockUpdateReq) (*pmsclient.SkuStockUpdateResp, error) {
-	err := l.svcCtx.PmsSkuStockModel.Update(l.ctx, &pmsmodel.PmsSkuStock{
-		Id:             in.Id,
-		ProductId:      in.ProductId,
+	q := query.PmsSkuStock
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsSkuStock{
+		ID:             in.Id,
+		ProductID:      in.ProductId,
 		SkuCode:        in.SkuCode,
 		Price:          float64(in.Price),
 		Stock:          in.Stock,
@@ -38,6 +46,7 @@ func (l *SkuStockUpdateLogic) SkuStockUpdate(in *pmsclient.SkuStockUpdateReq) (*
 		LockStock:      in.LockStock,
 		SpData:         in.SpData,
 	})
+
 	if err != nil {
 		return nil, err
 	}

@@ -49,17 +49,17 @@ func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, er
 
 	for _, role := range resp.List {
 		list = append(list, &types.ListRoleData{
-			Id:             role.Id,
-			Name:           role.Name,
-			Remark:         role.Remark,
-			CreateBy:       role.CreateBy,
-			CreateTime:     role.CreateTime,
-			LastUpdateBy:   role.LastUpdateBy,
-			LastUpdateTime: role.LastUpdateTime,
-			DelFlag:        role.DelFlag,
-			Label:          role.Name,
-			Value:          strconv.FormatInt(role.Id, 10),
-			Status:         role.Status,
+			Id:         role.Id,
+			Name:       role.Name,
+			Remark:     role.Remark,
+			CreateBy:   role.CreateBy,
+			CreateTime: role.CreateTime,
+			UpdateBy:   role.UpdateBy,
+			UpdateTime: role.UpdateTime,
+			DelFlag:    role.DelFlag,
+			Label:      role.Name,
+			Value:      strconv.FormatInt(role.Id, 10),
+			Status:     role.Status,
 		})
 	}
 

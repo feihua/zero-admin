@@ -7,8 +7,8 @@ info(
 type (
 	addReturnResonReq {
 		Name   string `json:"name"` // 退货类型
-		Sort   int64  `json:"sort"`
-		Status int64  `json:"status"` // 状态：0->不启用；1->启用
+        Sort int32 `json:"sort"`
+        Status int32 `json:"status"` // 状态：0->不启用；1->启用
 	}
 	addReturnResonResp {
 		Code    string `json:"code"`
@@ -18,13 +18,13 @@ type (
 		Current  int64  `json:"current,default=1"`
 		PageSize int64  `json:"pageSize,default=20"`
 		Name     string `json:"name,optional"`    // 退货类型
-		Status   int64  `json:"status,default=2"` // 状态：0->不启用；1->启用
+        Status int32 `json:"status,default=2"`    // 状态：0->不启用；1->启用
 	}
 	ListtReturnResonData {
 		Id         int64  `json:"id"`
 		Name       string `json:"name"` // 退货类型
-		Sort       int64  `json:"sort"`
-		Status     int64  `json:"status"`     // 状态：0->不启用；1->启用
+        Sort int32 `json:"sort"`
+        Status int32 `json:"status"`     // 状态：0->不启用；1->启用
 		CreateTime string `json:"createTime"` // 添加时间
 	}
 	ListReturnResonResp {
@@ -39,8 +39,8 @@ type (
 	UpdateReturnResonReq {
 		Id     int64  `json:"id"`
 		Name   string `json:"name"` // 退货类型
-		Sort   int64  `json:"sort"`
-		Status int64  `json:"status"` // 状态：0->不启用；1->启用
+        Sort int32 `json:"sort"`
+        Status int32 `json:"status"` // 状态：0->不启用；1->启用
 	}
 	UpdateReturnResonResp {
 		Code    string `json:"code"`

@@ -8,7 +8,7 @@ create table sys_menu
     perms          varchar(500)                        null,
     type           int                                 not null comment '类型 0：目录,1：菜单,2：按钮,3：外链',
     icon           varchar(50)                         null comment '菜单图标',
-    order_num      int                                 null comment '排序',
+    order_num int not null comment '排序',
     create_by      varchar(50)                         not null comment '创建者',
     create_time    timestamp default CURRENT_TIMESTAMP null comment '创建时间',
     update_by      varchar(50)                         null comment '更新者',

@@ -2,9 +2,9 @@ package userservicelogic
 
 import (
 	"context"
-	"database/sql"
 	"errors"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -42,45 +42,47 @@ func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.Us
 	}
 
 	//查询用户是否存在
-	user, err := l.svcCtx.UserModel.FindOne(l.ctx, in.Id)
+	q := query.SysUser
+	user, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 	if err != nil {
 		logc.Errorf(l.ctx, "更新用户异常,参数userId:%d,异常:%s", in.Id, "用户不存在")
 		return nil, errors.New("查询用户异常")
 	}
 
-	sysUser := &sysmodel.SysUser{
-		Id:         in.Id,
+	sysUser := &model.SysUser{
+		ID:         in.Id,
 		Name:       in.Name,
-		NickName:   sql.NullString{String: in.NickName, Valid: true},
-		Avatar:     sql.NullString{String: in.Avatar, Valid: true},
+		NickName:   &in.NickName,
+		Avatar:     &in.Avatar,
 		Password:   user.Password,
 		Salt:       user.Salt,
-		Email:      sql.NullString{String: in.Email, Valid: true},
-		Mobile:     sql.NullString{String: in.Mobile, Valid: true},
+		Email:      &in.Email,
+		Mobile:     &in.Mobile,
 		Status:     in.Status,
-		DeptId:     in.DeptId,
+		DeptID:     in.DeptId,
 		CreateBy:   user.CreateBy,
 		CreateTime: user.CreateTime,
-		UpdateBy:   sql.NullString{String: in.LastUpdateBy, Valid: true},
-		JobId:      in.JobId,
+		UpdateBy:   &in.UpdateBy,
+		JobID:      in.JobId,
 	}
-	err = l.svcCtx.UserModel.Update(l.ctx, sysUser)
+
+	_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Updates(sysUser)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新用户异常,参数userId:%d,异常:%s", in.Id, err.Error())
 		return nil, errors.New("更新用户异常")
 	}
 
-	err = l.svcCtx.UserRoleModel.DeleteByUserId(l.ctx, in.Id)
+	_, err = query.SysUserRole.WithContext(l.ctx).Where(query.SysUserRole.UserID.Eq(in.Id)).Delete()
 	if err != nil {
 		logc.Errorf(l.ctx, "删除用户与角色关联异常,参数userId:%d,异常:%s", in.Id, err.Error())
 		return nil, errors.New("更新用户异常")
 	}
 
-	_, err = l.svcCtx.UserRoleModel.Insert(l.ctx, &sysmodel.SysUserRole{
-		UserId:   in.Id,
-		RoleId:   in.RoleId,
-		CreateBy: in.LastUpdateBy,
+	err = query.SysUserRole.WithContext(l.ctx).Create(&model.SysUserRole{
+		UserID:   in.Id,
+		RoleID:   in.RoleId,
+		CreateBy: in.UpdateBy,
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "添加用户与角色关联异常,参数userId:%d, roleId: %d,异常:%s", in.Id, in.RoleId, err.Error())

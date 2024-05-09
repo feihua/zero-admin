@@ -4,7 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -35,7 +36,8 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 // UserInfo 获取用户信息
 func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, error) {
 	//根据id查询用户信息
-	userInfo, err := l.svcCtx.UserModel.FindOne(l.ctx, in.UserId)
+	q := query.SysUser
+	userInfo, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.UserId)).First()
 
 	switch err {
 	case nil:
@@ -51,13 +53,16 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 
 	//id为1是系统预留超级管理员,它获取的是全部权限
 	if in.UserId == 1 {
-		menus, _ := l.svcCtx.MenuModel.FindAll(l.ctx, 1, 1000)
+		menus, _ := query.SysMenu.WithContext(l.ctx).Find()
 		list, listUrls = listTrees(menus, list, listUrls)
-		logx.WithContext(l.ctx).Infof("超级管理员: %s登录,菜单: %+v", userInfo.Name, list)
+		logc.Infof(l.ctx, "超级管理员: %s登录,菜单: %+v", userInfo.Name, list)
 	} else {
-		menus, _ := l.svcCtx.MenuModel.FindAllByUserId(l.ctx, in.UserId)
-		list, listUrls = listTrees(menus, list, listUrls)
-		logx.WithContext(l.ctx).Infof("普通管理员: %s登录,菜单: %+v", userInfo.Name, list)
+		var result []*model.SysMenu
+		sql := "select sm.* from sys_user_role sur left join sys_role sr on sur.role_id = sr.id left join sys_role_menu srm on sr.id = srm.role_id left join sys_menu sm on srm.menu_id = sm.id where sur.user_id=? order by sm.id"
+		db := l.svcCtx.DB
+		_ = db.WithContext(l.ctx).Raw(sql, in.UserId).Scan(&result).Error
+		list, listUrls = listTrees(result, list, listUrls)
+		logc.Infof(l.ctx, "普通管理员: %s登录,菜单: %+v", userInfo.Name, list)
 	}
 
 	return &sysclient.InfoResp{
@@ -68,24 +73,24 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 	}, nil
 }
 
-func listTrees(menus *[]sysmodel.SysMenu, list []*sysclient.MenuListTree, listUrls []string) ([]*sysclient.MenuListTree, []string) {
-	for _, menu := range *menus {
+func listTrees(menus []*model.SysMenu, list []*sysclient.MenuListTree, listUrls []string) ([]*sysclient.MenuListTree, []string) {
+	for _, menu := range menus {
 		if menu.Type == 1 || menu.Type == 0 {
 			list = append(list, &sysclient.MenuListTree{
-				Id:           menu.Id,
+				Id:           menu.ID,
 				Name:         menu.Name,
-				Icon:         menu.Icon.String,
-				ParentId:     menu.ParentId,
-				Path:         menu.Url.String,
-				VuePath:      menu.VuePath.String,
-				VueComponent: menu.VueComponent.String,
-				VueIcon:      menu.VueIcon.String,
-				VueRedirect:  menu.VueRedirect.String,
+				Icon:         *menu.Icon,
+				ParentId:     menu.ParentID,
+				Path:         *menu.URL,
+				VuePath:      *menu.VuePath,
+				VueComponent: *menu.VueComponent,
+				VueIcon:      *menu.VueIcon,
+				VueRedirect:  *menu.VueRedirect,
 			})
 		}
 
-		if len(strings.TrimSpace(menu.BackgroundUrl)) != 0 {
-			listUrls = append(listUrls, menu.BackgroundUrl)
+		if len(strings.TrimSpace(menu.BackgroundURL)) != 0 {
+			listUrls = append(listUrls, menu.BackgroundURL)
 		}
 
 	}

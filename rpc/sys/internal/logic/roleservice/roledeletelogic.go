@@ -3,6 +3,7 @@ package roleservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -45,10 +46,10 @@ func (l *RoleDeleteLogic) RoleDelete(in *sysclient.RoleDeleteReq) (*sysclient.Ro
 		return nil, errors.New("不能删除超级管理员角色")
 	}
 
-	if err := l.svcCtx.RoleModel.DeleteByIds(l.ctx, in.Ids); err != nil {
-		logc.Errorf(l.ctx, "删除角色信息失败,参数:%+v,异常:%s", in, err.Error())
+	q := query.SysRole
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
+	if err != nil {
 		return nil, err
 	}
-
 	return &sysclient.RoleDeleteResp{}, nil
 }

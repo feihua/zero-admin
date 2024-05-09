@@ -2,8 +2,8 @@ package orderoperatehistorservicelogic
 
 import (
 	"context"
-	"database/sql"
-	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"time"
 
@@ -27,14 +27,14 @@ func NewOrderOperateHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 func (l *OrderOperateHistoryAddLogic) OrderOperateHistoryAdd(in *omsclient.OrderOperateHistoryAddReq) (*omsclient.OrderOperateHistoryAddResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	_, err := l.svcCtx.OmsOrderOperateHistoryModel.Insert(l.ctx, &omsmodel.OmsOrderOperateHistory{
-		OrderId:     in.OrderId,
+	err := query.OmsOrderOperateHistory.WithContext(l.ctx).Create(&model.OmsOrderOperateHistory{
+		OrderID:     in.OrderId,
 		OperateMan:  in.OperateMan,
-		CreateTime:  CreateTime,
+		CreateTime:  time.Now(),
 		OrderStatus: in.OrderStatus,
-		Note:        sql.NullString{String: in.Note, Valid: true},
+		Note:        &in.Note,
 	})
+
 	if err != nil {
 		return nil, err
 	}

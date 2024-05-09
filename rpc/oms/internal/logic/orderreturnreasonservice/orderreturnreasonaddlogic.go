@@ -2,7 +2,8 @@ package orderreturnreasonservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/omsmodel"
+	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"time"
@@ -25,13 +26,13 @@ func NewOrderReturnReasonAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *OrderReturnReasonAddLogic) OrderReturnReasonAdd(in *omsclient.OrderReturnReasonAddReq) (*omsclient.OrderReturnReasonAddResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	_, err := l.svcCtx.OmsOrderReturnReasonModel.Insert(l.ctx, &omsmodel.OmsOrderReturnReason{
+	err := query.OmsOrderReturnReason.WithContext(l.ctx).Create(&model.OmsOrderReturnReason{
 		Name:       in.Name,
 		Sort:       in.Sort,
 		Status:     in.Status,
-		CreateTime: CreateTime,
+		CreateTime: time.Now(),
 	})
+
 	if err != nil {
 		return nil, err
 	}

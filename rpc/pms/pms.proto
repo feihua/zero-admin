@@ -18,19 +18,19 @@ message ProductFullReductionList {
   float  ReducePrice = 2;
 }
 message ProductLadderList {
-  int64    Count = 2;
+  int32    Count = 2;
   float  Discount = 3;
   float  Price = 4;
 }
 message SkuStockList {
   string    SkuCode = 1;
   float  Price = 2;
-  int64    Stock = 3;
-  int64    LowStock = 4;
+  int32    Stock = 3;
+  int32    LowStock = 4;
   string    Pic = 5;
-  int64    Sale = 6;
+  int32    Sale = 6;
   float  PromotionPrice = 7;
-  int64    LockStock = 8;
+  int32    LockStock = 8;
   string    SpData = 9;
 }
 message ProductAddReq {
@@ -42,26 +42,26 @@ message ProductAddReq {
   string      Name = 6;
   string      Pic = 7;
   string      ProductSn = 8;
-  int64       DeleteStatus = 9;
-  int64       PublishStatus = 10;
-  int64       NewStatus = 11;
-  int64       RecommandStatus = 12;
-  int64       VerifyStatus = 13;
-  int64       Sort = 14;
-  int64       Sale = 15;
+  int32       DeleteStatus = 9;
+  int32       PublishStatus = 10;
+  int32       NewStatus = 11;
+  int32       RecommandStatus = 12;
+  int32       VerifyStatus = 13;
+  int32       Sort = 14;
+  int32       Sale = 15;
   double     Price = 16;
   double     PromotionPrice = 17;
-  int64       GiftGrowth = 18;
-  int64       GiftPoint = 19;
-  int64       UsePointLimit = 20;
+  int32       GiftGrowth = 18;
+  int32       GiftPoint = 19;
+  int32       UsePointLimit = 20;
   string      SubTitle = 21;
   string      Description = 22;
   double     OriginalPrice = 23;
-  int64       Stock = 24;
-  int64       LowStock = 25;
+  int32       Stock = 24;
+  int32       LowStock = 25;
   string      Unit = 26;
   double     Weight = 27;
-  int64       PreviewStatus = 28;
+  int32       PreviewStatus = 28;
   string      ServiceIds = 29;
   string      Keywords = 30;
   string      Note = 31;
@@ -72,8 +72,8 @@ message ProductAddReq {
   string      DetailMobileHtml = 36;
   string   PromotionStartTime = 37;
   string   PromotionEndTime = 38;
-  int64       PromotionPerLimit = 39;
-  int64       PromotionType = 40;
+  int32       PromotionPerLimit = 39;
+  int32       PromotionType = 40;
   string      BrandName = 41;
   string      ProductCategoryName = 42;
   repeated MemberPriceList      MemberPriceList = 43;
@@ -91,10 +91,10 @@ message ProductListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string Name = 3;
-  int64  VerifyStatus = 4;
+  int32  VerifyStatus = 4;
   int64  ProductCategoryId = 5;
-  int64       PublishStatus = 6;
-  int64       DeleteStatus = 7;
+  int32       PublishStatus = 6;
+  int32       DeleteStatus = 7;
   int64       BrandId = 8;
 }
 
@@ -111,26 +111,26 @@ message ProductListData{
   string      Name = 6;
   string      Pic = 7;
   string      ProductSn = 8;
-  int64       DeleteStatus = 9;
-  int64       PublishStatus = 10;
-  int64       NewStatus = 11;
-  int64       RecommandStatus = 12;
-  int64       VerifyStatus = 13;
-  int64       Sort = 14;
-  int64       Sale = 15;
+  int32       DeleteStatus = 9;
+  int32       PublishStatus = 10;
+  int32       NewStatus = 11;
+  int32       RecommandStatus = 12;
+  int32       VerifyStatus = 13;
+  int32       Sort = 14;
+  int32       Sale = 15;
   double     Price = 16;
   double     PromotionPrice = 17;
-  int64       GiftGrowth = 18;
-  int64       GiftPoint = 19;
-  int64       UsePointLimit = 20;
+  int32       GiftGrowth = 18;
+  int32       GiftPoint = 19;
+  int32       UsePointLimit = 20;
   string      SubTitle = 21;
   string      Description = 22;
   double     OriginalPrice = 23;
-  int64       Stock = 24;
-  int64       LowStock = 25;
+  int32       Stock = 24;
+  int32       LowStock = 25;
   string      Unit = 26;
   double     Weight = 27;
-  int64       PreviewStatus = 28;
+  int32       PreviewStatus = 28;
   string      ServiceIds = 29;
   string      Keywords = 30;
   string      Note = 31;
@@ -141,8 +141,8 @@ message ProductListData{
   string      DetailMobileHtml = 36;
   string      PromotionStartTime = 37;
   string      PromotionEndTime = 38;
-  int64       PromotionPerLimit = 39;
-  int64       PromotionType = 40;
+  int32       PromotionPerLimit = 39;
+  int32       PromotionType = 40;
   string      BrandName = 41;
   string      ProductCategoryName = 42;
   string       ProductCategoryIdArray = 43;
@@ -162,26 +162,26 @@ message ProductUpdateReq {
   string      Name = 6;
   string      Pic = 7;
   string      ProductSn = 8;
-  int64       DeleteStatus = 9;
-  int64       PublishStatus = 10;
-  int64       NewStatus = 11;
-  int64       RecommandStatus = 12;
-  int64       VerifyStatus = 13;
-  int64       Sort = 14;
-  int64       Sale = 15;
+  int32       DeleteStatus = 9;
+  int32       PublishStatus = 10;
+  int32       NewStatus = 11;
+  int32       RecommandStatus = 12;
+  int32       VerifyStatus = 13;
+  int32       Sort = 14;
+  int32       Sale = 15;
   double     Price = 16;
   double     PromotionPrice = 17;
-  int64       GiftGrowth = 18;
-  int64       GiftPoint = 19;
-  int64       UsePointLimit = 20;
+  int32       GiftGrowth = 18;
+  int32       GiftPoint = 19;
+  int32       UsePointLimit = 20;
   string      SubTitle = 21;
   string      Description = 22;
   double     OriginalPrice = 23;
-  int64       Stock = 24;
-  int64       LowStock = 25;
+  int32       Stock = 24;
+  int32       LowStock = 25;
   string      Unit = 26;
   double     Weight = 27;
-  int64       PreviewStatus = 28;
+  int32       PreviewStatus = 28;
   string      ServiceIds = 29;
   string      Keywords = 30;
   string      Note = 31;
@@ -192,8 +192,8 @@ message ProductUpdateReq {
   string      DetailMobileHtml = 36;
   string   PromotionStartTime = 37;
   string   PromotionEndTime = 38;
-  int64       PromotionPerLimit = 39;
-  int64       PromotionType = 40;
+  int32       PromotionPerLimit = 39;
+  int32       PromotionType = 40;
   string      BrandName = 41;
   string      ProductCategoryName = 42;
   repeated MemberPriceList      MemberPriceList = 43;
@@ -244,8 +244,8 @@ service ProductService {
 message AlbumAddReq {
   string  Name = 2;
   string  CoverPic = 3;
-  int64    PicCount = 4;
-  int64    Sort = 5;
+  int32    PicCount = 4;
+  int32    Sort = 5;
   string  Description = 6;
 }
 
@@ -262,8 +262,8 @@ message AlbumListData{
   int64    Id = 1;
   string  Name = 2;
   string  CoverPic = 3;
-  int64    PicCount = 4;
-  int64    Sort = 5;
+  int32    PicCount = 4;
+  int32    Sort = 5;
   string  Description = 6;
 }
 
@@ -276,8 +276,8 @@ message AlbumUpdateReq {
   int64    Id = 1;
   string  Name = 2;
   string  CoverPic = 3;
-  int64    PicCount = 4;
-  int64    Sort = 5;
+  int32    PicCount = 4;
+  int32    Sort = 5;
   string  Description = 6;
 }
 
@@ -358,11 +358,11 @@ service AlbumPicService {
 message BrandAddReq {
   string  Name = 2;
   string  FirstLetter = 3;
-  int64    Sort = 4;
-  int64    FactoryStatus = 5;
-  int64    ShowStatus = 6;
-  int64    ProductCount = 7;
-  int64    ProductCommentCount = 8;
+  int32    Sort = 4;
+  int32    FactoryStatus = 5;
+  int32    ShowStatus = 6;
+  int32    ProductCount = 7;
+  int32    ProductCommentCount = 8;
   string  Logo = 9;
   string  BigPic = 10;
   string  BrandStory = 11;
@@ -376,8 +376,8 @@ message BrandListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string  Name = 3;
-  int64    FactoryStatus = 4;
-  int64    ShowStatus = 5;
+  int32    FactoryStatus = 4;
+  int32    ShowStatus = 5;
 }
 
 message BrandListByIdsReq {
@@ -388,11 +388,11 @@ message BrandListData{
   int64    Id = 1;
   string  Name = 2;
   string  FirstLetter = 3;
-  int64    Sort = 4;
-  int64    FactoryStatus = 5;
-  int64    ShowStatus = 6;
-  int64    ProductCount = 7;
-  int64    ProductCommentCount = 8;
+  int32    Sort = 4;
+  int32    FactoryStatus = 5;
+  int32    ShowStatus = 6;
+  int32    ProductCount = 7;
+  int32    ProductCommentCount = 8;
   string  Logo = 9;
   string  BigPic = 10;
   string  BrandStory = 11;
@@ -408,11 +408,11 @@ message BrandUpdateReq {
   int64    Id = 1;
   string  Name = 2;
   string  FirstLetter = 3;
-  int64    Sort = 4;
-  int64    FactoryStatus = 5;
-  int64    ShowStatus = 6;
-  int64    ProductCount = 7;
-  int64    ProductCommentCount = 8;
+  int32    Sort = 4;
+  int32    FactoryStatus = 5;
+  int32    ShowStatus = 6;
+  int32    ProductCount = 7;
+  int32    ProductCommentCount = 8;
   string  Logo = 9;
   string  BigPic = 10;
   string  BrandStory = 11;
@@ -444,17 +444,17 @@ message CommentAddReq {
   int64      ProductId = 2;
   string      MemberNickName = 3;
   string      ProductName = 4;
-  int64      Star = 5;
+  int32      Star = 5;
   string      MemberIp = 6;
   string  CreateTime = 7;
-  int64      ShowStatus = 8;
+  int32      ShowStatus = 8;
   string      ProductAttribute = 9;
-  int64      CollectCouont = 10;
-  int64      ReadCount = 11;
+  int32      CollectCouont = 10;
+  int32      ReadCount = 11;
   string      Content = 12;
   string      Pics = 13;
   string      MemberIcon = 14;
-  int64      ReplayCount = 15;
+  int32      ReplayCount = 15;
 }
 
 message CommentAddResp {
@@ -471,17 +471,17 @@ message CommentListData{
   int64      ProductId = 2;
   string      MemberNickName = 3;
   string      ProductName = 4;
-  int64      Star = 5;
+  int32      Star = 5;
   string      MemberIp = 6;
   string  CreateTime = 7;
-  int64      ShowStatus = 8;
+  int32      ShowStatus = 8;
   string      ProductAttribute = 9;
-  int64      CollectCouont = 10;
-  int64      ReadCount = 11;
+  int32      CollectCouont = 10;
+  int32      ReadCount = 11;
   string      Content = 12;
   string      Pics = 13;
   string      MemberIcon = 14;
-  int64      ReplayCount = 15;
+  int32      ReplayCount = 15;
 
 }
 
@@ -495,17 +495,17 @@ message CommentUpdateReq {
   int64      ProductId = 2;
   string      MemberNickName = 3;
   string      ProductName = 4;
-  int64      Star = 5;
+  int32      Star = 5;
   string      MemberIp = 6;
   string  CreateTime = 7;
-  int64      ShowStatus = 8;
+  int32      ShowStatus = 8;
   string      ProductAttribute = 9;
-  int64      CollectCouont = 10;
-  int64      ReadCount = 11;
+  int32      CollectCouont = 10;
+  int32      ReadCount = 11;
   string      Content = 12;
   string      Pics = 13;
   string      MemberIcon = 14;
-  int64      ReplayCount = 15;
+  int32      ReplayCount = 15;
 }
 
 message CommentUpdateResp {
@@ -536,7 +536,7 @@ message CommentReplayAddReq {
   string      MemberIcon = 4;
   string      Content = 5;
   string  CreateTime = 6;
-  int64      Type = 7;
+  int32      Type = 7;
 }
 
 message CommentReplayAddResp {
@@ -555,7 +555,7 @@ message CommentReplayListData{
   string      MemberIcon = 4;
   string      Content = 5;
   string  CreateTime = 6;
-  int64      Type = 7;
+  int32      Type = 7;
 
 }
 
@@ -571,7 +571,7 @@ message CommentReplayUpdateReq {
   string      MemberIcon = 4;
   string      Content = 5;
   string  CreateTime = 6;
-  int64      Type = 7;
+  int32      Type = 7;
 }
 
 message CommentReplayUpdateResp {
@@ -597,11 +597,11 @@ service CommentReplayService {
 }
 message FeightTemplateAddReq {
   string    Name = 2;
-  int64    ChargeType = 3;
-  int64  FirstWeight = 4;
-  int64  FirstFee = 5;
-  int64  ContinueWeight = 61;
-  int64  ContinmeFee = 7;
+  int32    ChargeType = 3;
+  float  FirstWeight = 4;
+  float  FirstFee = 5;
+  float  ContinueWeight = 61;
+  float  ContinmeFee = 7;
   string    Dest = 8;
 }
 
@@ -617,11 +617,11 @@ message FeightTemplateListReq {
 message FeightTemplateListData{
   int64    Id = 1;
   string    Name = 2;
-  int64    ChargeType = 3;
-  int64  FirstWeight = 4;
-  int64  FirstFee = 5;
-  int64  ContinueWeight = 61;
-  int64  ContinmeFee = 7;
+  int32    ChargeType = 3;
+  float  FirstWeight = 4;
+  float  FirstFee = 5;
+  float  ContinueWeight = 61;
+  float  ContinmeFee = 7;
   string    Dest = 8;
 
 }
@@ -634,11 +634,11 @@ message FeightTemplateListResp {
 message FeightTemplateUpdateReq {
   int64    Id = 1;
   string    Name = 2;
-  int64    ChargeType = 3;
-  int64  FirstWeight = 4;
-  int64  FirstFee = 5;
-  int64  ContinueWeight = 61;
-  int64  ContinmeFee = 7;
+  int32    ChargeType = 3;
+  float  FirstWeight = 4;
+  float  FirstFee = 5;
+  float  ContinueWeight = 61;
+  float  ContinmeFee = 7;
   string    Dest = 8;
 }
 
@@ -667,7 +667,7 @@ service FeightTemplateService {
 message MemberPriceAddReq {
   int64    ProductId = 1;
   int64    MemberLevelId = 2;
-  int64  MemberPrice = 3;
+  float  MemberPrice = 3;
   string    MemberLevelName = 4;
 }
 
@@ -698,7 +698,7 @@ message MemberPriceUpdateReq {
   int64    Id = 1;
   int64    ProductId = 2;
   int64    MemberLevelId = 3;
-  int64  MemberPrice = 4;
+  float  MemberPrice = 4;
   string    MemberLevelName = 5;
 }
 
@@ -740,8 +740,8 @@ message ProductAttributeCategoryListReq {
 message ProductAttributeCategoryListData{
   int64    Id = 1;
   string  Name = 2;
-  int64    AttributeCount = 3;
-  int64    ParamCount = 4;
+  int32    AttributeCount = 3;
+  int32    ParamCount = 4;
 
 }
 
@@ -753,8 +753,8 @@ message ProductAttributeCategoryListResp {
 message ProductAttributeCategoryUpdateReq {
   int64    Id = 1;
   string  Name = 2;
-  int64    AttributeCount = 3;
-  int64    ParamCount = 4;
+  int32    AttributeCount = 3;
+  int32    ParamCount = 4;
 }
 
 message ProductAttributeCategoryUpdateResp {
@@ -782,15 +782,15 @@ service ProductAttributeCategoryService {
 message ProductAttributeAddReq {
   int64    ProductAttributeCategoryId = 2;
   string  Name = 3;
-  int64    SelectType = 4;
-  int64    InputType = 5;
+  int32    SelectType = 4;
+  int32    InputType = 5;
   string  InputList = 6;
-  int64    Sort = 7;
-  int64    FilterType = 8;
-  int64    SearchType = 9;
-  int64    RelatedStatus = 10;
-  int64    HandAddStatus = 11;
-  int64    Type = 12;
+  int32    Sort = 7;
+  int32    FilterType = 8;
+  int32    SearchType = 9;
+  int32    RelatedStatus = 10;
+  int32    HandAddStatus = 11;
+  int32    Type = 12;
 }
 
 message ProductAttributeAddResp {
@@ -801,7 +801,7 @@ message ProductAttributeListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string  Name = 3;
-  int64   Type = 4;
+  int32   Type = 4;
   int64    ProductAttributeCategoryId = 5;
 }
 
@@ -809,15 +809,15 @@ message ProductAttributeListData{
   int64    Id = 1;
   int64    ProductAttributeCategoryId = 2;
   string  Name = 3;
-  int64    SelectType = 4;
-  int64    InputType = 5;
+  int32    SelectType = 4;
+  int32    InputType = 5;
   string  InputList = 6;
-  int64    Sort = 7;
-  int64    FilterType = 8;
-  int64    SearchType = 9;
-  int64    RelatedStatus = 10;
-  int64    HandAddStatus = 11;
-  int64    Type = 12;
+  int32    Sort = 7;
+  int32    FilterType = 8;
+  int32    SearchType = 9;
+  int32    RelatedStatus = 10;
+  int32    HandAddStatus = 11;
+  int32    Type = 12;
 
 }
 
@@ -830,15 +830,15 @@ message ProductAttributeUpdateReq {
   int64    Id = 1;
   int64    ProductAttributeCategoryId = 2;
   string  Name = 3;
-  int64    SelectType = 4;
-  int64    InputType = 5;
+  int32    SelectType = 4;
+  int32    InputType = 5;
   string  InputList = 6;
-  int64    Sort = 7;
-  int64    FilterType = 8;
-  int64    SearchType = 9;
-  int64    RelatedStatus = 10;
-  int64    HandAddStatus = 11;
-  int64    Type = 12;
+  int32    Sort = 7;
+  int32    FilterType = 8;
+  int32    SearchType = 9;
+  int32    RelatedStatus = 10;
+  int32    HandAddStatus = 11;
+  int32    Type = 12;
 }
 
 message ProductAttributeUpdateResp {
@@ -973,12 +973,12 @@ service ProductCategoryAttributeRelationService {
 message ProductCategoryAddReq {
   int64    ParentId = 2;
   string  Name = 3;
-  int64    Level = 4;
-  int64    ProductCount = 5;
+  int32    Level = 4;
+  int32    ProductCount = 5;
   string  ProductUnit = 6;
-  int64    NavStatus = 7;
-  int64    ShowStatus = 8;
-  int64    Sort = 9;
+  int32    NavStatus = 7;
+  int32    ShowStatus = 8;
+  int32    Sort = 9;
   string  Icon = 10;
   string  Keywords = 11;
   string  Description = 12;
@@ -993,19 +993,19 @@ message ProductCategoryListReq {
   int64 pageSize = 2;
   string  Name = 3;
   int64 ParentId = 4;
-  int64    ShowStatus = 5;
+  int32    ShowStatus = 5;
 }
 
 message ProductCategoryListData{
   int64    Id = 1;
   int64    ParentId = 2;
   string  Name = 3;
-  int64    Level = 4;
-  int64    ProductCount = 5;
+  int32    Level = 4;
+  int32    ProductCount = 5;
   string  ProductUnit = 6;
-  int64    NavStatus = 7;
-  int64    ShowStatus = 8;
-  int64    Sort = 9;
+  int32    NavStatus = 7;
+  int32    ShowStatus = 8;
+  int32    Sort = 9;
   string  Icon = 10;
   string  Keywords = 11;
   string  Description = 12;
@@ -1021,12 +1021,12 @@ message ProductCategoryUpdateReq {
   int64    Id = 1;
   int64    ParentId = 2;
   string  Name = 3;
-  int64    Level = 4;
-  int64    ProductCount = 5;
+  int32    Level = 4;
+  int32    ProductCount = 5;
   string  ProductUnit = 6;
-  int64    NavStatus = 7;
-  int64    ShowStatus = 8;
-  int64    Sort = 9;
+  int32    NavStatus = 7;
+  int32    ShowStatus = 8;
+  int32    Sort = 9;
   string  Icon = 10;
   string  Keywords = 11;
   string  Description = 12;
@@ -1069,8 +1069,8 @@ service ProductCategoryService {
 }
 message ProductFullReductionAddReq {
   int64    ProductId = 1;
-  int64  FullPrice = 2;
-  int64  ReducePrice = 3;
+  float  FullPrice = 2;
+  float  ReducePrice = 3;
 }
 
 message ProductFullReductionAddResp {
@@ -1099,8 +1099,8 @@ message ProductFullReductionListResp {
 message ProductFullReductionUpdateReq {
   int64    Id = 1;
   int64    ProductId = 2;
-  int64  FullPrice = 3;
-  int64  ReducePrice = 4;
+  float  FullPrice = 3;
+  float  ReducePrice = 4;
 }
 
 message ProductFullReductionUpdateResp {
@@ -1124,9 +1124,9 @@ service ProductFullReductionService {
 }
 message ProductLadderAddReq {
   int64    ProductId = 1;
-  int64    Count = 2;
+  int32    Count = 2;
   float  Discount = 3;
-  int64  Price = 4;
+  float  Price = 4;
 }
 
 message ProductLadderAddResp {
@@ -1140,7 +1140,7 @@ message ProductLadderListReq {
 message ProductLadderListData{
   int64    Id = 1;
   int64    ProductId = 2;
-  int64    Count = 3;
+  int32    Count = 3;
   float  Discount = 4;
   float  Price = 5;
 
@@ -1154,9 +1154,9 @@ message ProductLadderListResp {
 message ProductLadderUpdateReq {
   int64    Id = 1;
   int64    ProductId = 2;
-  int64    Count = 3;
+  int32    Count = 3;
   float  Discount = 4;
-  int64  Price = 5;
+  float  Price = 5;
 }
 
 message ProductLadderUpdateResp {
@@ -1181,14 +1181,14 @@ service ProductLadderService {
 }
 message ProductOperateLogAddReq {
   int64      ProductId = 2;
-  int64    PriceOld = 3;
-  int64    PriceNew = 4;
-  int64    SalePriceOld = 5;
-  int64    SalePriceNew = 6;
-  int64      GiftPointOld = 7;
-  int64      GiftPointNew = 8;
-  int64      UsePointLimitOld = 9;
-  int64      UsePointLimitNew = 10;
+  float    PriceOld = 3;
+  float    PriceNew = 4;
+  float    SalePriceOld = 5;
+  float    SalePriceNew = 6;
+  int32      GiftPointOld = 7;
+  int32      GiftPointNew = 8;
+  int32      UsePointLimitOld = 9;
+  int32      UsePointLimitNew = 10;
   string      OperateMan = 11;
   string  CreateTime = 12;
 }
@@ -1205,14 +1205,14 @@ message ProductOperateLogListReq {
 message ProductOperateLogListData{
   int64      Id = 1;
   int64      ProductId = 2;
-  int64    PriceOld = 3;
-  int64    PriceNew = 4;
-  int64    SalePriceOld = 5;
-  int64    SalePriceNew = 6;
-  int64      GiftPointOld = 7;
-  int64      GiftPointNew = 8;
-  int64      UsePointLimitOld = 9;
-  int64      UsePointLimitNew = 10;
+  float    PriceOld = 3;
+  float    PriceNew = 4;
+  float    SalePriceOld = 5;
+  float    SalePriceNew = 6;
+  int32      GiftPointOld = 7;
+  int32      GiftPointNew = 8;
+  int32      UsePointLimitOld = 9;
+  int32      UsePointLimitNew = 10;
   string      OperateMan = 11;
   string  CreateTime = 12;
 
@@ -1226,14 +1226,14 @@ message ProductOperateLogListResp {
 message ProductOperateLogUpdateReq {
   int64      Id = 1;
   int64      ProductId = 2;
-  int64    PriceOld = 3;
-  int64    PriceNew = 4;
-  int64    SalePriceOld = 5;
-  int64    SalePriceNew = 6;
-  int64      GiftPointOld = 7;
-  int64      GiftPointNew = 8;
-  int64      UsePointLimitOld = 9;
-  int64      UsePointLimitNew = 10;
+  float    PriceOld = 3;
+  float    PriceNew = 4;
+  float    SalePriceOld = 5;
+  float    SalePriceNew = 6;
+  int32      GiftPointOld = 7;
+  int32      GiftPointNew = 8;
+  int32      UsePointLimitOld = 9;
+  int32      UsePointLimitNew = 10;
   string      OperateMan = 11;
   string  CreateTime = 12;
 }
@@ -1262,7 +1262,7 @@ message ProductVertifyRecordAddReq {
   int64      ProductId = 2;
   string  CreateTime = 3;
   string    VertifyMan = 4;
-  int64      Status = 5;
+  int32      Status = 5;
   string    Detail = 6;
 }
 
@@ -1280,7 +1280,7 @@ message ProductVertifyRecordListData{
   int64      ProductId = 2;
   string  CreateTime = 3;
   string    VertifyMan = 4;
-  int64      Status = 5;
+  int32      Status = 5;
   string    Detail = 6;
 
 }
@@ -1295,7 +1295,7 @@ message ProductVertifyRecordUpdateReq {
   int64      ProductId = 2;
   string  CreateTime = 3;
   string    VertifyMan = 4;
-  int64      Status = 5;
+  int32      Status = 5;
   string    Detail = 6;
 }
 
@@ -1324,12 +1324,12 @@ message SkuStockAddReq {
   int64    ProductId = 2;
   string    SkuCode = 3;
   float  Price = 4;
-  int64    Stock = 5;
-  int64    LowStock = 6;
+  int32    Stock = 5;
+  int32    LowStock = 6;
   string    Pic = 7;
-  int64    Sale = 8;
+  int32    Sale = 8;
   float  PromotionPrice = 9;
-  int64    LockStock = 10;
+  int32    LockStock = 10;
   string    SpData = 11;
 }
 
@@ -1346,12 +1346,12 @@ message SkuStockListData{
   int64    ProductId = 2;
   string    SkuCode = 3;
   float  Price = 4;
-  int64    Stock = 5;
-  int64    LowStock = 6;
+  int32    Stock = 5;
+  int32    LowStock = 6;
   string    Pic = 7;
-  int64    Sale = 8;
+  int32    Sale = 8;
   float  PromotionPrice = 9;
-  int64    LockStock = 10;
+  int32    LockStock = 10;
   string    SpData = 11;
 
 }
@@ -1366,12 +1366,12 @@ message SkuStockUpdateReq {
   int64    ProductId = 2;
   string    SkuCode = 3;
   float  Price = 4;
-  int64    Stock = 5;
-  int64    LowStock = 6;
+  int32    Stock = 5;
+  int32    LowStock = 6;
   string    Pic = 7;
-  int64    Sale = 8;
+  int32    Sale = 8;
   float  PromotionPrice = 9;
-  int64    LockStock = 10;
+  int32    LockStock = 10;
   string    SpData = 11;
 }
 
@@ -1393,7 +1393,7 @@ message ReleaseSkuStockLockReq {
 
 message ReleaseSkuStockLockData {
   int64    ProductSkuId = 1;
-  int64    ProductQuantity = 2;
+  int32    ProductQuantity = 2;
 }
 message ReleaseSkuStockLockResp {
   string pong = 1;
@@ -1405,7 +1405,7 @@ message LockSkuStockLockReq {
 
 message LockSkuStockLockData {
   int64    ProductSkuId = 1;
-  int64    ProductQuantity = 2;
+  int32    ProductQuantity = 2;
 }
 message LockSkuStockLockResp {
   string pong = 1;

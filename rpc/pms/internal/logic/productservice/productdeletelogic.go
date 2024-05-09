@@ -2,6 +2,7 @@ package productservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -9,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductDeleteLogic 商品
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:03
+*/
 type ProductDeleteLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,8 +29,10 @@ func NewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Pro
 	}
 }
 
+// ProductDelete 删除商品
 func (l *ProductDeleteLogic) ProductDelete(in *pmsclient.ProductDeleteReq) (*pmsclient.ProductDeleteResp, error) {
-	err := l.svcCtx.PmsProductModel.DeleteByIds(l.ctx, in.Ids)
+	q := query.PmsProduct
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
 		return nil, err

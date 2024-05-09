@@ -34,12 +34,12 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) JobUpdat
 // JobUpdate 更新岗位信息
 func (l *JobUpdateLogic) JobUpdate(req types.UpdateJobReq) (*types.UpdateJobResp, error) {
 	_, err := l.svcCtx.JobService.JobUpdate(l.ctx, &sysclient.JobUpdateReq{
-		Id:           req.Id,
-		JobName:      req.JobName,
-		OrderNum:     req.OrderNum,
-		Remarks:      req.Remarks,
-		LastUpdateBy: l.ctx.Value("userName").(string),
-		DelFlag:      req.DelFlag,
+		Id:       req.Id,
+		JobName:  req.JobName,
+		OrderNum: req.OrderNum,
+		Remarks:  req.Remarks,
+		UpdateBy: l.ctx.Value("userName").(string),
+		DelFlag:  req.DelFlag,
 	})
 
 	if err != nil {

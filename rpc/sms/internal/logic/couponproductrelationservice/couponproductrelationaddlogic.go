@@ -2,7 +2,8 @@ package couponproductrelationservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -25,12 +26,13 @@ func NewCouponProductRelationAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *CouponProductRelationAddLogic) CouponProductRelationAdd(in *smsclient.CouponProductRelationAddReq) (*smsclient.CouponProductRelationAddResp, error) {
-	_, err := l.svcCtx.SmsCouponProductRelationModel.Insert(l.ctx, &smsmodel.SmsCouponProductRelation{
-		CouponId:    in.CouponId,
-		ProductId:   in.ProductId,
+	err := query.SmsCouponProductRelation.WithContext(l.ctx).Create(&model.SmsCouponProductRelation{
+		CouponID:    in.CouponId,
+		ProductID:   in.ProductId,
 		ProductName: in.ProductName,
 		ProductSn:   in.ProductSn,
 	})
+
 	if err != nil {
 		return nil, err
 	}

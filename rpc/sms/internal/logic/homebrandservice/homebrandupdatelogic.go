@@ -2,7 +2,8 @@ package homebrandservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/smsmodel"
+	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -24,13 +25,15 @@ func NewHomeBrandUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *H
 }
 
 func (l *HomeBrandUpdateLogic) HomeBrandUpdate(in *smsclient.HomeBrandUpdateReq) (*smsclient.HomeBrandUpdateResp, error) {
-	err := l.svcCtx.SmsHomeBrandModel.Update(l.ctx, &smsmodel.SmsHomeBrand{
-		Id:              in.Id,
-		BrandId:         in.BrandId,
+	q := query.SmsHomeBrand
+	_, err := q.WithContext(l.ctx).Updates(&model.SmsHomeBrand{
+		ID:              in.Id,
+		BrandID:         in.BrandId,
 		BrandName:       in.BrandName,
 		RecommendStatus: in.RecommendStatus,
 		Sort:            in.Sort,
 	})
+
 	if err != nil {
 		return nil, err
 	}

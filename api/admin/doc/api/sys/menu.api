@@ -10,14 +10,14 @@ type (
 		ParentId      int64  `json:"parentId,optional"`      // 父菜单ID，一级菜单为0
 		Url           string `json:"url,optional"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
 		Perms         string `json:"perms,optional"`         // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
-		Type          int64  `json:"type,optional"`          // 类型   0：目录   1：菜单   2：按钮
+        Type int32 `json:"type,optional"`                    // 类型   0：目录   1：菜单   2：按钮
 		Icon          string `json:"icon,optional"`          // 菜单图标
-		OrderNum      int64  `json:"orderNum,optional"`      // 排序
+        OrderNum int32 `json:"orderNum,optional"`            // 排序
 		VuePath       string `json:"vuePath,optional"`       // vue系统的path
 		VueComponent  string `json:"vueComponent,optional"`  // vue的页面
 		VueIcon       string `json:"vueIcon,optional"`       // vue的图标
 		VueRedirect   string `json:"vueRedirect,optional"`   // vue的路由重定向
-		DelFlag       int64  `json:"delFlag"`                // 是否删除  0：已删除  1：正常
+        DelFlag int32 `json:"delFlag"`                       // 是否删除  0：已删除  1：正常
 		BackgroundUrl string `json:"backgroundUrl,optional"` // 后台地址
 	}
 	addMenuResp {
@@ -36,14 +36,14 @@ type (
 		ParentId       int64  `json:"parentId"`       // 父菜单ID，一级菜单为0
 		Url            string `json:"url"`            // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
 		Perms          string `json:"perms"`          // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
-		Type           int64  `json:"type"`           // 类型   0：目录   1：菜单   2：按钮
+        Type int32 `json:"type"`                      // 类型   0：目录   1：菜单   2：按钮
 		Icon           string `json:"icon"`           // 菜单图标
-		OrderNum       int64  `json:"orderNum"`       // 排序
+        OrderNum int32 `json:"orderNum"`              // 排序
 		CreateBy       string `json:"createBy"`       // 创建人
 		CreateTime     string `json:"createTime"`     // 创建时间
-		LastUpdateBy   string `json:"lastUpdateBy"`   // 更新人
-		LastUpdateTime string `json:"lastUpdateTime"` // 更新时间
-		DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
+        UpdateBy string `json:"updateBy"`             // 更新人
+        UpdateTime string `json:"updateTime"`         // 更新时间
+        DelFlag int32 `json:"delFlag"`                // 是否删除  0：已删除  1：正常
 		VuePath        string `json:"vuePath"`        // vue系统的path
 		VueComponent   string `json:"vueComponent"`   // vue的页面
 		VueIcon        string `json:"vueIcon"`        // vue的图标
@@ -63,14 +63,14 @@ type (
 		ParentId      int64  `json:"parentId"`               // 父菜单ID，一级菜单为0
 		Url           string `json:"url,optional"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
 		Perms         string `json:"perms,optional"`         // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
-		Type          int64  `json:"type,optional"`          // 类型   0：目录   1：菜单   2：按钮
+        Type int32 `json:"type,optional"`                    // 类型   0：目录   1：菜单   2：按钮
 		Icon          string `json:"icon,optional"`          // 菜单图标
-		OrderNum      int64  `json:"orderNum,optional"`      // 排序
+        OrderNum int32 `json:"orderNum,optional"`            // 排序
 		VuePath       string `json:"vuePath,optional"`       // vue系统的path
 		VueComponent  string `json:"vueComponent,optional"`  // vue的页面
 		VueIcon       string `json:"vueIcon,optional"`       // vue的图标
 		VueRedirect   string `json:"vueRedirect,optional"`   // vue的路由重定向
-		DelFlag       int64  `json:"delFlag"`                // 是否删除  0：已删除  1：正常
+        DelFlag int32 `json:"delFlag"`                       // 是否删除  0：已删除  1：正常
 		BackgroundUrl string `json:"backgroundUrl,optional"` // 后台地址
 	}
 	UpdateMenuResp {

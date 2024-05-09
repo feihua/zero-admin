@@ -215,9 +215,9 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	//计算积分抵扣金额
 	var integrationAmount float32
 	//计算该订单赠送的积分
-	var giftIntegration int64
+	var giftIntegration int32
 	//计算赠送成长值
-	var giftGrowth int64
+	var giftGrowth int32
 	for _, item := range orderItemList {
 		promotionAmount = promotionAmount + item.PromotionAmount*float32(item.ProductQuantity)
 		promotionInfo = promotionInfo + item.PromotionName
@@ -281,7 +281,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		Note:                  "",                                       //
 		ConfirmStatus:         0,                                        //确认收货状态：0->未确认；1->已确认
 		DeleteStatus:          0,                                        //删除状态：0->未删除；1->已删除
-		UseIntegration:        int64(req.UseIntegration),                //下单时使用的积分
+		UseIntegration:        req.UseIntegration,                       //下单时使用的积分
 		OrderItemList:         orderItemList,                            //
 	}
 	//9.转化为订单信息并插入数据库(插入order表和order_item表)

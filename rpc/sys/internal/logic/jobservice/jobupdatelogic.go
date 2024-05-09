@@ -2,7 +2,7 @@ package jobservicelogic
 
 import (
 	"context"
-	"database/sql"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
@@ -31,18 +31,19 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobUpda
 // JobUpdate 更新岗位信息
 func (l *JobUpdateLogic) JobUpdate(in *sysclient.JobUpdateReq) (*sysclient.JobUpdateResp, error) {
 	//更新之前查询记录是否存在
-	job, err := l.svcCtx.JobModel.FindOne(l.ctx, in.Id)
+	q := query.SysJob
+	job, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 	if err != nil {
 		return nil, err
 	}
 
 	job.JobName = in.JobName
 	job.OrderNum = in.OrderNum
-	job.UpdateBy = sql.NullString{String: in.LastUpdateBy, Valid: true}
-	job.Remarks = sql.NullString{String: in.Remarks, Valid: true}
+	job.UpdateBy = &in.UpdateBy
+	job.Remarks = &in.Remarks
 	job.DelFlag = in.DelFlag
 
-	err = l.svcCtx.JobModel.Update(l.ctx, job)
+	_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Updates(job)
 
 	if err != nil {
 		return nil, err

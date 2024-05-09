@@ -2,7 +2,8 @@ package commentreplayservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/model/pmsmodel"
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
+	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"time"
 
@@ -11,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CommentReplayUpdateLogic 评价回复
+/*
+Author: LiuFeiHua
+Date: 2024/5/8 10:41
+*/
 type CommentReplayUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,17 +31,19 @@ func NewCommentReplayUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// CommentReplayUpdate 更新评价回复
 func (l *CommentReplayUpdateLogic) CommentReplayUpdate(in *pmsclient.CommentReplayUpdateReq) (*pmsclient.CommentReplayUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.PmsCommentReplayModel.Update(l.ctx, &pmsmodel.PmsCommentReplay{
-		Id:             in.Id,
-		CommentId:      in.CommentId,
+	q := query.PmsCommentReplay
+	_, err := q.WithContext(l.ctx).Updates(&model.PmsCommentReplay{
+		ID:             in.Id,
+		CommentID:      in.CommentId,
 		MemberNickName: in.MemberNickName,
 		MemberIcon:     in.MemberIcon,
 		Content:        in.Content,
-		CreateTime:     CreateTime,
+		CreateTime:     time.Now(),
 		Type:           in.Type,
 	})
+
 	if err != nil {
 		return nil, err
 	}

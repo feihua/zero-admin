@@ -3,7 +3,8 @@ package deptservicelogic
 import (
 	"context"
 	"fmt"
-	"github.com/feihua/zero-admin/rpc/model/sysmodel"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"strings"
 
@@ -33,15 +34,15 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptAddLo
 
 // DeptAdd 添加部门信息
 func (l *DeptAddLogic) DeptAdd(in *sysclient.DeptAddReq) (*sysclient.DeptAddResp, error) {
-	dept := &sysmodel.SysDept{
+	err := query.SysDept.WithContext(l.ctx).Create(&model.SysDept{
 		Name:      in.Name,
-		ParentId:  in.ParentId,
+		ParentID:  in.ParentId,
 		OrderNum:  in.OrderNum,
 		CreateBy:  in.CreateBy,
 		DelFlag:   in.DelFlag,
 		ParentIds: strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1),
-	}
-	if _, err := l.svcCtx.DeptModel.Insert(l.ctx, dept); err != nil {
+	})
+	if err != nil {
 		return nil, err
 	}
 

@@ -33,10 +33,10 @@ func NewHomeRecommendSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(in *smsclient.HomeRecommendSubjectListReq) (*smsclient.HomeRecommendSubjectListResp, error) {
 	q := query.SmsHomeRecommendSubject.WithContext(l.ctx)
 	if len(in.SubjectName) > 0 {
-		q.Where(query.SmsHomeRecommendSubject.SubjectName.Like("%" + in.SubjectName + "%"))
+		q = q.Where(query.SmsHomeRecommendSubject.SubjectName.Like("%" + in.SubjectName + "%"))
 	}
 	if in.RecommendStatus != 2 {
-		q.Where(query.SmsHomeRecommendSubject.RecommendStatus.Eq(in.RecommendStatus))
+		q = q.Where(query.SmsHomeRecommendSubject.RecommendStatus.Eq(in.RecommendStatus))
 	}
 	offset := (in.Current - 1) * in.PageSize
 	subjects, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()

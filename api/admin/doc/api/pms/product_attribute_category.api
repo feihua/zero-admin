@@ -21,8 +21,8 @@ type (
 	ListtProductAttributecategoryData {
 		Id                     int64  `json:"id"`
 		Name                   string `json:"name"`
-		AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
-		ParamCount             int64  `json:"paramCount"`     // 参数数量
+        AttributecategoryCount int32 `json:"attributeCount"` // 属性数量
+        ParamCount int32 `json:"paramCount"`                 // 参数数量
 	}
 	ListProductAttributecategoryResp {
 		Code     string                               `json:"code"`
@@ -36,8 +36,8 @@ type (
 	UpdateProductAttributecategoryReq {
 		Id                     int64  `json:"id"`
 		Name                   string `json:"name"`
-		AttributecategoryCount int64  `json:"attributeCount"` // 属性数量
-		ParamCount             int64  `json:"paramCount"`     // 参数数量
+        AttributecategoryCount int32 `json:"attributeCount"` // 属性数量
+        ParamCount int32 `json:"paramCount"`                 // 参数数量
 	}
 	UpdateProductAttributecategoryResp {
 		Code    string `json:"code"`

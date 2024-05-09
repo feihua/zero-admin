@@ -2,9 +2,10 @@ package flashpromotionproductrelationservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,23 +25,26 @@ func NewFlashPromotionProductRelationListLogic(ctx context.Context, svcCtx *svc.
 }
 
 func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationList(in *smsclient.FlashPromotionProductRelationListReq) (*smsclient.FlashPromotionProductRelationListResp, error) {
-	all, err := l.svcCtx.SmsFlashPromotionProductRelationModel.FindAll(l.ctx, in)
-	count, _ := l.svcCtx.SmsFlashPromotionProductRelationModel.Count(l.ctx, in)
+	q := query.SmsFlashPromotionProductRelation
+	q.WithContext(l.ctx).Where(q.FlashPromotionID.Eq(in.FlashPromotionId), q.FlashPromotionSessionID.Eq(in.FlashPromotionSessionId))
+
+	offset := (in.Current - 1) * in.PageSize
+	result, err := q.WithContext(l.ctx).Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.WithContext(l.ctx).Count()
 
 	if err != nil {
-		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询限时购与产品关糸列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
+		logc.Errorf(l.ctx, "查询限时购与产品关糸列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
 	var list []*smsclient.FlashPromotionProductRelationListData
-	for _, item := range *all {
+	for _, item := range result {
 
 		list = append(list, &smsclient.FlashPromotionProductRelationListData{
-			Id:                      item.Id,
-			FlashPromotionId:        item.FlashPromotionId,
-			FlashPromotionSessionId: item.FlashPromotionSessionId,
-			ProductId:               item.ProductId,
+			Id:                      item.ID,
+			FlashPromotionId:        item.FlashPromotionID,
+			FlashPromotionSessionId: item.FlashPromotionSessionID,
+			ProductId:               item.ProductID,
 			FlashPromotionPrice:     item.FlashPromotionPrice,
 			FlashPromotionCount:     item.FlashPromotionCount,
 			FlashPromotionLimit:     item.FlashPromotionLimit,
@@ -48,9 +52,7 @@ func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationLi
 		})
 	}
 
-	reqStr, _ := json.Marshal(in)
-	listStr, _ := json.Marshal(list)
-	logx.WithContext(l.ctx).Infof("查询限时购与产品关糸列表信息,参数：%s,响应：%s", reqStr, listStr)
+	logc.Infof(l.ctx, "查询限时购与产品关糸列表信息,参数：%+v,响应：%+v", in, list)
 	return &smsclient.FlashPromotionProductRelationListResp{
 		Total: count,
 		List:  list,
