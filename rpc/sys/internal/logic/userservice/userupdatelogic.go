@@ -51,14 +51,14 @@ func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.Us
 
 	sysUser := &model.SysUser{
 		ID:         in.Id,
-		Name:       in.Name,
+		UserName:   in.UserName,
 		NickName:   &in.NickName,
 		Avatar:     &in.Avatar,
 		Password:   user.Password,
 		Salt:       user.Salt,
 		Email:      &in.Email,
 		Mobile:     &in.Mobile,
-		Status:     in.Status,
+		UserStatus: in.UserStatus,
 		DeptID:     in.DeptId,
 		CreateBy:   user.CreateBy,
 		CreateTime: user.CreateTime,

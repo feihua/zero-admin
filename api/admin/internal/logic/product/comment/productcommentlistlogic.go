@@ -51,7 +51,7 @@ func (l *ProductCommentListLogic) ProductCommentList(req types.ListProductCommen
 			CreateTime:       item.CreateTime,
 			ShowStatus:       item.ShowStatus,
 			ProductAttribute: item.ProductAttribute,
-			CollectCouont:    item.CollectCouont,
+			CollectCount:     item.CollectCount,
 			ReadCount:        item.ReadCount,
 			Content:          item.Content,
 			Pics:             item.Pics,

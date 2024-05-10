@@ -35,11 +35,11 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptAddLo
 // DeptAdd 添加部门信息
 func (l *DeptAddLogic) DeptAdd(in *sysclient.DeptAddReq) (*sysclient.DeptAddResp, error) {
 	err := query.SysDept.WithContext(l.ctx).Create(&model.SysDept{
-		Name:      in.Name,
+		DeptName:  in.DeptName,
 		ParentID:  in.ParentId,
 		OrderNum:  in.OrderNum,
 		CreateBy:  in.CreateBy,
-		DelFlag:   in.DelFlag,
+		DelFlag:   1, //0：已删除  1：正常'
 		ParentIds: strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1),
 	})
 	if err != nil {

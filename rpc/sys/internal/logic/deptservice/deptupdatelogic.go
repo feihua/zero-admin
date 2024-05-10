@@ -41,7 +41,7 @@ func (l *DeptUpdateLogic) DeptUpdate(in *sysclient.DeptUpdateReq) (*sysclient.De
 	}
 	_, err = q.WithContext(l.ctx).Updates(&model.SysDept{
 		ID:         in.Id,
-		Name:       in.Name,
+		DeptName:   in.DeptName,
 		ParentID:   in.ParentId,
 		OrderNum:   in.OrderNum,
 		CreateBy:   dept.CreateBy,

@@ -33,18 +33,18 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserAddLo
 // UserAdd 新增用户
 func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp, error) {
 	user := &model.SysUser{
-		Name:     in.Name,
-		NickName: &in.NickName,
-		Avatar:   &in.Avatar,
-		Password: "123456",
-		Salt:     "123456",
-		Email:    &in.Email,
-		Mobile:   &in.Mobile,
-		Status:   in.Status,
-		DeptID:   in.DeptId,
-		CreateBy: in.CreateBy,
-		DelFlag:  1,
-		JobID:    in.JobId,
+		UserName:   in.UserName,
+		NickName:   &in.NickName,
+		Avatar:     &in.Avatar,
+		Password:   "123456",
+		Salt:       "123456",
+		Email:      &in.Email,
+		Mobile:     &in.Mobile,
+		UserStatus: in.UserStatus,
+		DeptID:     in.DeptId,
+		CreateBy:   in.CreateBy,
+		DelFlag:    1,
+		JobID:      in.JobId,
 	}
 	err := query.SysUser.WithContext(l.ctx).Create(user)
 

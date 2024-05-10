@@ -36,7 +36,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 // Login 根据用户名和密码登录
 func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error) {
 	q := query.SysUser
-	userInfo, err := q.WithContext(l.ctx).Where(q.Name.Eq(in.UserName)).First()
+	userInfo, err := q.WithContext(l.ctx).Where(q.UserName.Eq(in.UserName)).First()
 
 	switch err {
 	case nil:
@@ -56,7 +56,7 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	now := time.Now().Unix()
 	accessExpire := l.svcCtx.Config.JWT.AccessExpire
 	accessSecret := l.svcCtx.Config.JWT.AccessSecret
-	jwtToken, err := l.getJwtToken(accessSecret, now, accessExpire, userInfo.ID, userInfo.Name)
+	jwtToken, err := l.getJwtToken(accessSecret, now, accessExpire, userInfo.ID, userInfo.UserName)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "生成token失败,参数:%+v,异常:%s", in, err.Error())
@@ -67,7 +67,7 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 		Status:           "ok",
 		CurrentAuthority: "admin",
 		Id:               userInfo.ID,
-		UserName:         userInfo.Name,
+		UserName:         userInfo.UserName,
 		AccessToken:      jwtToken,
 		AccessExpire:     now + accessExpire,
 		RefreshAfter:     now + accessExpire/2,

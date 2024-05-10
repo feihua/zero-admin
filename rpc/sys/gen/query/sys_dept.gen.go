@@ -28,7 +28,7 @@ func newSysDept(db *gorm.DB, opts ...gen.DOOption) sysDept {
 	tableName := _sysDept.sysDeptDo.TableName()
 	_sysDept.ALL = field.NewAsterisk(tableName)
 	_sysDept.ID = field.NewInt64(tableName, "id")
-	_sysDept.Name = field.NewString(tableName, "name")
+	_sysDept.DeptName = field.NewString(tableName, "dept_name")
 	_sysDept.ParentID = field.NewInt64(tableName, "parent_id")
 	_sysDept.OrderNum = field.NewInt32(tableName, "order_num")
 	_sysDept.CreateBy = field.NewString(tableName, "create_by")
@@ -49,7 +49,7 @@ type sysDept struct {
 
 	ALL        field.Asterisk
 	ID         field.Int64  // 编号
-	Name       field.String // 机构名称
+	DeptName   field.String // 机构名称
 	ParentID   field.Int64  // 上级机构ID，一级机构为0
 	OrderNum   field.Int32  // 排序
 	CreateBy   field.String // 创建者
@@ -75,7 +75,7 @@ func (s sysDept) As(alias string) *sysDept {
 func (s *sysDept) updateTableName(table string) *sysDept {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.Name = field.NewString(table, "name")
+	s.DeptName = field.NewString(table, "dept_name")
 	s.ParentID = field.NewInt64(table, "parent_id")
 	s.OrderNum = field.NewInt32(table, "order_num")
 	s.CreateBy = field.NewString(table, "create_by")
@@ -110,7 +110,7 @@ func (s *sysDept) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 func (s *sysDept) fillFieldMap() {
 	s.fieldMap = make(map[string]field.Expr, 10)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["name"] = s.Name
+	s.fieldMap["dept_name"] = s.DeptName
 	s.fieldMap["parent_id"] = s.ParentID
 	s.fieldMap["order_num"] = s.OrderNum
 	s.fieldMap["create_by"] = s.CreateBy

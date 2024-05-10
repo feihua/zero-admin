@@ -55,19 +55,19 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 	if in.UserId == 1 {
 		menus, _ := query.SysMenu.WithContext(l.ctx).Find()
 		list, listUrls = listTrees(menus, list, listUrls)
-		logc.Infof(l.ctx, "超级管理员: %s登录,菜单: %+v", userInfo.Name, list)
+		logc.Infof(l.ctx, "超级管理员: %s登录,菜单: %+v", userInfo.UserName, list)
 	} else {
 		var result []*model.SysMenu
 		sql := "select sm.* from sys_user_role sur left join sys_role sr on sur.role_id = sr.id left join sys_role_menu srm on sr.id = srm.role_id left join sys_menu sm on srm.menu_id = sm.id where sur.user_id=? order by sm.id"
 		db := l.svcCtx.DB
 		_ = db.WithContext(l.ctx).Raw(sql, in.UserId).Scan(&result).Error
 		list, listUrls = listTrees(result, list, listUrls)
-		logc.Infof(l.ctx, "普通管理员: %s登录,菜单: %+v", userInfo.Name, list)
+		logc.Infof(l.ctx, "普通管理员: %s登录,菜单: %+v", userInfo.UserName, list)
 	}
 
 	return &sysclient.InfoResp{
 		Avatar:         "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
-		Name:           userInfo.Name,
+		Name:           userInfo.UserName,
 		MenuListTree:   list,
 		BackgroundUrls: listUrls,
 	}, nil

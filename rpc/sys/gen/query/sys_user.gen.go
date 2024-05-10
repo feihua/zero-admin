@@ -28,14 +28,14 @@ func newSysUser(db *gorm.DB, opts ...gen.DOOption) sysUser {
 	tableName := _sysUser.sysUserDo.TableName()
 	_sysUser.ALL = field.NewAsterisk(tableName)
 	_sysUser.ID = field.NewInt64(tableName, "id")
-	_sysUser.Name = field.NewString(tableName, "name")
+	_sysUser.UserName = field.NewString(tableName, "user_name")
 	_sysUser.NickName = field.NewString(tableName, "nick_name")
 	_sysUser.Avatar = field.NewString(tableName, "avatar")
 	_sysUser.Password = field.NewString(tableName, "password")
 	_sysUser.Salt = field.NewString(tableName, "salt")
 	_sysUser.Email = field.NewString(tableName, "email")
 	_sysUser.Mobile = field.NewString(tableName, "mobile")
-	_sysUser.Status = field.NewInt32(tableName, "status")
+	_sysUser.UserStatus = field.NewInt32(tableName, "user_status")
 	_sysUser.DeptID = field.NewInt64(tableName, "dept_id")
 	_sysUser.JobID = field.NewInt64(tableName, "job_id")
 	_sysUser.CreateBy = field.NewString(tableName, "create_by")
@@ -55,14 +55,14 @@ type sysUser struct {
 
 	ALL        field.Asterisk
 	ID         field.Int64  // 编号
-	Name       field.String // 用户名
+	UserName   field.String // 用户名
 	NickName   field.String // 昵称
 	Avatar     field.String // 头像
 	Password   field.String // 密码
 	Salt       field.String // 加密盐
 	Email      field.String // 邮箱
 	Mobile     field.String // 手机号
-	Status     field.Int32  // 状态  0：禁用   1：正常
+	UserStatus field.Int32  // 状态  0：禁用   1：正常
 	DeptID     field.Int64  // 部门id
 	JobID      field.Int64  // 岗位id
 	CreateBy   field.String // 创建者
@@ -87,14 +87,14 @@ func (s sysUser) As(alias string) *sysUser {
 func (s *sysUser) updateTableName(table string) *sysUser {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.Name = field.NewString(table, "name")
+	s.UserName = field.NewString(table, "user_name")
 	s.NickName = field.NewString(table, "nick_name")
 	s.Avatar = field.NewString(table, "avatar")
 	s.Password = field.NewString(table, "password")
 	s.Salt = field.NewString(table, "salt")
 	s.Email = field.NewString(table, "email")
 	s.Mobile = field.NewString(table, "mobile")
-	s.Status = field.NewInt32(table, "status")
+	s.UserStatus = field.NewInt32(table, "user_status")
 	s.DeptID = field.NewInt64(table, "dept_id")
 	s.JobID = field.NewInt64(table, "job_id")
 	s.CreateBy = field.NewString(table, "create_by")
@@ -128,14 +128,14 @@ func (s *sysUser) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 func (s *sysUser) fillFieldMap() {
 	s.fieldMap = make(map[string]field.Expr, 16)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["name"] = s.Name
+	s.fieldMap["user_name"] = s.UserName
 	s.fieldMap["nick_name"] = s.NickName
 	s.fieldMap["avatar"] = s.Avatar
 	s.fieldMap["password"] = s.Password
 	s.fieldMap["salt"] = s.Salt
 	s.fieldMap["email"] = s.Email
 	s.fieldMap["mobile"] = s.Mobile
-	s.fieldMap["status"] = s.Status
+	s.fieldMap["user_status"] = s.UserStatus
 	s.fieldMap["dept_id"] = s.DeptID
 	s.fieldMap["job_id"] = s.JobID
 	s.fieldMap["create_by"] = s.CreateBy

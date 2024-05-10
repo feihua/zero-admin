@@ -32,15 +32,15 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserList
 func (l *UserListLogic) UserList(in *sysclient.UserListReq) (*sysclient.UserListResp, error) {
 
 	q := query.SysUser.WithContext(l.ctx)
-	if len(in.Name) > 0 {
-		q = q.Where(query.SysUser.Name.Like("%" + in.Name + "%"))
+	if len(in.UserName) > 0 {
+		q = q.Where(query.SysUser.UserName.Like("%" + in.UserName + "%"))
 	}
 	if len(in.Mobile) > 0 {
-		q = q.Where(query.SysUser.Name.Like("%" + in.Mobile + "%"))
+		q = q.Where(query.SysUser.Mobile.Like("%" + in.Mobile + "%"))
 	}
 
-	if in.Status != 2 {
-		q = q.Where(query.SysUser.Status.Eq(in.Status))
+	if in.UserStatus != 2 {
+		q = q.Where(query.SysUser.UserStatus.Eq(in.UserStatus))
 	}
 
 	offset := (in.Current - 1) * in.PageSize
@@ -56,13 +56,13 @@ func (l *UserListLogic) UserList(in *sysclient.UserListReq) (*sysclient.UserList
 	for _, user := range result {
 		list = append(list, &sysclient.UserListData{
 			Id:         user.ID,
-			Name:       user.Name,
+			UserName:   user.UserName,
 			NickName:   *user.NickName,
 			Avatar:     *user.Avatar,
 			Email:      *user.Email,
 			Mobile:     *user.Mobile,
 			DeptId:     user.DeptID,
-			Status:     user.Status,
+			UserStatus: user.UserStatus,
 			CreateBy:   user.CreateBy,
 			CreateTime: user.CreateTime.Format("2006-01-02 15:04:05"),
 			UpdateBy:   *user.UpdateBy,

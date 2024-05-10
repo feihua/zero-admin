@@ -57,7 +57,7 @@ func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptList
 
 		list = append(list, &sysclient.DeptListData{
 			Id:         dept.ID,
-			Name:       dept.Name,
+			DeptName:   dept.DeptName,
 			ParentId:   dept.ParentID,
 			OrderNum:   dept.OrderNum,
 			CreateBy:   dept.CreateBy,

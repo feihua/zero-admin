@@ -85,12 +85,12 @@ type (
 
 	ListUserData {
 		Id             int64  `json:"id"`             // 编号
-		Name           string `json:"name"`           // 用户名
+		UserName string `json:"name"`                 // 用户名
 		NickName       string `json:"nickName"`       // 昵称
 		Avatar         string `json:"avatar"`         // 头像
 		Email          string `json:"email"`          // 邮箱
 		Mobile         string `json:"mobile"`         // 手机号
-        Status int32 `json:"status"`                  // 状态  0：禁用   1：正常
+		UserStatus int32 `json:"status"`                  // 状态  0：禁用   1：正常
 		DeptId         int64  `json:"deptId"`         // 机构ID
 		CreateBy       string `json:"createBy"`       // 创建人
 		CreateTime     string `json:"createTime"`     // 创建时间

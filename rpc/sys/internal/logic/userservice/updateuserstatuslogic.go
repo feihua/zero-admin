@@ -37,7 +37,7 @@ func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UserStatusReq) (*
 	now := time.Now()
 	_, err := q.WithContext(l.ctx).Updates(&model.SysUser{
 		ID:         in.Id,
-		Status:     in.Status,
+		UserStatus: in.UserStatus,
 		UpdateBy:   &in.UpdateBy,
 		UpdateTime: &now,
 	})

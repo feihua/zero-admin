@@ -34,14 +34,14 @@ message InfoResp {
 message UserAddReq {
   string email = 1;
   string mobile = 2;
-  string name = 3;
+  string user_name = 3;
   string nick_name = 4;
   string avatar = 5;
   int64 dept_id = 6;
   string create_by = 7;
   int64 role_id = 8;
   int64 job_id = 9;
-  int32 status = 10;
+  int32 user_status = 10;
 }
 
 message UserAddResp {
@@ -51,24 +51,24 @@ message UserAddResp {
 message UserListReq {
   int64 current = 1;
   int64 pageSize = 2;
-  string name = 3;
+  string user_name = 3;
   string nick_name = 4;
   string mobile = 5;
   string email = 6;
-  int32 status = 7;
+  int32 user_status = 7;
   int64 dept_id = 8;
 }
 
 message UserListData{
   int64 id = 1;
-  string name = 2;
+  string user_name = 2;
   string nick_name = 3;
   string avatar = 4;
   string password = 5;
   string salt = 6;
   string email = 7;
   string mobile = 8;
-  int32 status = 9;
+  int32 user_status = 9;
   int64 dept_id = 10;
   string create_by = 11;
   string create_time = 12;
@@ -91,13 +91,13 @@ message UserUpdateReq {
   int64 id = 1;
   string email = 2;
   string mobile = 3;
-  string name = 4;
+  string user_name = 4;
   string nick_name = 5;
   string avatar = 6;
   int64 dept_id = 7;
   string update_by = 8;
   int64 role_id = 9;
-  int32 status = 10;
+  int32 user_status = 10;
   int64 job_id = 11;
 }
 
@@ -125,7 +125,7 @@ message ReSetPasswordResp {
 
 message UserStatusReq {
   int64 id = 1;
-  int32 status = 2;
+  int32 user_status = 2;
   string update_by = 3;
 }
 
@@ -419,12 +419,11 @@ service DictService {
 
 //dept start---------------------
 message DeptAddReq {
-  string name = 1;
+  string DeptName = 1;
   int64 parent_id = 2;
   int32 order_num = 3;
   string create_by = 4;
   repeated int64 parent_ids = 5;
-  int32 del_flag = 6;
 }
 
 message DeptAddResp {
@@ -432,15 +431,12 @@ message DeptAddResp {
 }
 
 message DeptListReq {
-//  int64 current = 1;
-//  int64 pageSize = 2;
-  string name = 1;
-  string create_by = 2;
+  string DeptName = 1;
 }
 
 message DeptListData {
   int64 id = 1;
-  string name = 2;
+  string DeptName = 2;
   int64 parent_id = 3;
   int32 order_num = 4;
   string create_by = 5;
@@ -457,7 +453,7 @@ message DeptListResp{
 }
 message DeptUpdateReq {
   int64 id = 1;
-  string name = 2;
+  string DeptName = 2;
   int64 parent_id = 3;
   int32 order_num = 4;
   string update_by = 7;

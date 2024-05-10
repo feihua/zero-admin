@@ -2,7 +2,7 @@ create table sys_user
 (
     id          bigint auto_increment comment '编号'
         primary key,
-    name        varchar(50)                         not null comment '用户名',
+    user_name varchar(50) not null comment '用户名',
     nick_name   varchar(150)                        null comment '昵称',
     avatar      varchar(150)                        null comment '头像',
     password    varchar(100)                        not null comment '密码',
@@ -18,19 +18,19 @@ create table sys_user
     update_time datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
     del_flag    tinyint   default 1                 not null comment '是否删除  0：已删除  1：正常',
     constraint name
-        unique (name)
+        unique (user_name)
 )
     comment '用户管理';
 
-INSERT INTO sys_user (id, name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
+INSERT INTO sys_user (id, user_name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
                       create_time, update_by, update_time, del_flag, job_id)
 VALUES (1, 'admin', '超管管理员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030352', 1, 4, 'admin',
         current_time, 'admin', current_time, 1, 1);
-INSERT INTO sys_user (id, name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
+INSERT INTO sys_user (id, user_name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
                       create_time, update_by, update_time, del_flag, job_id)
 VALUES (2, 'developer', '开发人员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030351', 1, 4, 'admin',
         current_time, 'admin', current_time, 1, 1);
-INSERT INTO sys_user (id, name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
+INSERT INTO sys_user (id, user_name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
                       create_time, update_by, update_time, del_flag, job_id)
 VALUES (3, 'test', '测试人员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030350', 1, 4, 'admin',
         current_time, 'admin', current_time, 1, 1);

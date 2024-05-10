@@ -84,7 +84,7 @@ func (l *QueryAllRelationsLogic) QueryAllRelations(req *types.QueryAllRelationsR
 		deptRelations = append(deptRelations, &types.DeptRelations{
 			Id:       dept.Id,
 			Value:    strconv.FormatInt(dept.Id, 10),
-			Title:    dept.Name,
+			Title:    dept.DeptName,
 			ParentId: dept.ParentId,
 		})
 	}

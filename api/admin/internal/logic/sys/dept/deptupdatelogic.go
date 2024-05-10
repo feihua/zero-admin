@@ -35,7 +35,7 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptUpd
 func (l *DeptUpdateLogic) DeptUpdate(req types.UpdateDeptReq) (*types.UpdateDeptResp, error) {
 	_, err := l.svcCtx.DeptService.DeptUpdate(l.ctx, &sysclient.DeptUpdateReq{
 		Id:        req.Id,
-		Name:      req.Name,
+		DeptName:  req.DeptName,
 		ParentId:  req.ParentId,
 		OrderNum:  req.OrderNum,
 		UpdateBy:  l.ctx.Value("userName").(string),

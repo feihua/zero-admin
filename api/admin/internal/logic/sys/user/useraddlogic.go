@@ -33,15 +33,15 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserAddLog
 // UserAdd 新增用户
 func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error) {
 	userAddReq := sysclient.UserAddReq{
-		Email:    req.Email,
-		Mobile:   req.Mobile,
-		Name:     req.Name,
-		NickName: req.NickName,
-		DeptId:   req.DeptId,
-		CreateBy: l.ctx.Value("userName").(string),
-		RoleId:   req.RoleId,
-		JobId:    req.JobId,
-		Status:   req.Status,
+		Email:      req.Email,
+		Mobile:     req.Mobile,
+		UserName:   req.Name,
+		NickName:   req.NickName,
+		DeptId:     req.DeptId,
+		CreateBy:   l.ctx.Value("userName").(string),
+		RoleId:     req.RoleId,
+		JobId:      req.JobId,
+		UserStatus: req.Status,
 	}
 	_, err := l.svcCtx.UserService.UserAdd(l.ctx, &userAddReq)
 

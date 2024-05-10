@@ -32,8 +32,7 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptListL
 // DeptList 部门列表
 func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, error) {
 	resp, err := l.svcCtx.DeptService.DeptList(l.ctx, &sysclient.DeptListReq{
-		Name:     req.Name,
-		CreateBy: req.CreateBy,
+		DeptName: req.Name,
 	})
 
 	if err != nil {
@@ -47,7 +46,7 @@ func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, er
 	for _, dept := range resp.List {
 		list = append(list, &types.ListDeptData{
 			Id:         dept.Id,
-			Name:       dept.Name,
+			DeptName:   dept.DeptName,
 			ParentId:   dept.ParentId,
 			OrderNum:   dept.OrderNum,
 			CreateBy:   dept.CreateBy,

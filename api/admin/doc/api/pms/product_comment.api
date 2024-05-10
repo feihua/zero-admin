@@ -14,7 +14,7 @@ type (
 		CreateTime       string `json:"createTime"`
         ShowStatus int32 `json:"showStatus"`
 		ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
-        CollectCouont int32 `json:"collectCouont"`
+		CollectCount int32 `json:"collectCount"`
         ReadCount int32 `json:"readCount"`
 		Content          string `json:"content"`
 		Pics             string `json:"pics"`       // 上传图片地址，以逗号隔开
@@ -39,7 +39,7 @@ type (
 		CreateTime       string `json:"createTime"`
         ShowStatus int32 `json:"showStatus"`
 		ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
-        CollectCouont int32 `json:"collectCouont"`
+		CollectCount int32 `json:"collectCount"`
         ReadCount int32 `json:"readCount"`
 		Content          string `json:"content"`
 		Pics             string `json:"pics"`       // 上传图片地址，以逗号隔开
@@ -65,7 +65,7 @@ type (
 		CreateTime       string `json:"createTime"`
         ShowStatus int32 `json:"showStatus"`
 		ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
-        CollectCouont int32 `json:"collectCouont"`
+		CollectCount int32 `json:"collectCount"`
         ReadCount int32 `json:"readCount"`
 		Content          string `json:"content"`
 		Pics             string `json:"pics"`       // 上传图片地址，以逗号隔开

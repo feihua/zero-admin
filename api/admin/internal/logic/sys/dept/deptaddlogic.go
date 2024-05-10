@@ -34,12 +34,11 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptAddLog
 // DeptAdd 添加部门信息
 func (l *DeptAddLogic) DeptAdd(req types.AddDeptReq) (*types.AddDeptResp, error) {
 	_, err := l.svcCtx.DeptService.DeptAdd(l.ctx, &sysclient.DeptAddReq{
-		Name:      req.Name,
+		DeptName:  req.DeptName,
 		ParentId:  req.ParentId,
 		OrderNum:  req.OrderNum,
 		CreateBy:  l.ctx.Value("userName").(string),
 		ParentIds: req.ParentIds,
-		DelFlag:   req.DelFlag,
 	})
 
 	if err != nil {

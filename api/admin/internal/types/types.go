@@ -505,7 +505,7 @@ type ListCouponResp struct {
 
 type ListDeptData struct {
 	Id         int64   `json:"id"`         // 编号
-	Name       string  `json:"name"`       // 机构名称
+	DeptName   string  `json:"deptName"`   // 机构名称
 	ParentId   int64   `json:"parentId"`   // 上级机构ID，一级机构为0
 	ParentIds  []int64 `json:"parentIds"`  // 上级机构ID
 	OrderNum   int32   `json:"orderNum"`   // 排序
@@ -1388,12 +1388,12 @@ type ListSysLogResp struct {
 
 type ListUserData struct {
 	Id         int64  `json:"id"`         // 编号
-	Name       string `json:"name"`       // 用户名
+	UserName   string `json:"name"`       // 用户名
 	NickName   string `json:"nickName"`   // 昵称
 	Avatar     string `json:"avatar"`     // 头像
 	Email      string `json:"email"`      // 邮箱
 	Mobile     string `json:"mobile"`     // 手机号
-	Status     int32  `json:"status"`     // 状态  0：禁用   1：正常
+	UserStatus int32  `json:"status"`     // 状态  0：禁用   1：正常
 	DeptId     int64  `json:"deptId"`     // 机构ID
 	CreateBy   string `json:"createBy"`   // 创建人
 	CreateTime string `json:"createTime"` // 创建时间
@@ -1838,7 +1838,7 @@ type ListtProductCommentData struct {
 	CreateTime       string `json:"createTime"`
 	ShowStatus       int32  `json:"showStatus"`
 	ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
-	CollectCouont    int32  `json:"collectCouont"`
+	CollectCount     int32  `json:"collectCount"`
 	ReadCount        int32  `json:"readCount"`
 	Content          string `json:"content"`
 	Pics             string `json:"pics"`       // 上传图片地址，以逗号隔开
@@ -2149,7 +2149,7 @@ type UpdateCouponResp struct {
 
 type UpdateDeptReq struct {
 	Id        int64   `json:"id"`                // 编号
-	Name      string  `json:"name"`              // 机构名称
+	DeptName  string  `json:"deptName"`          // 机构名称
 	ParentId  int64   `json:"parentId"`          // 上级机构ID，一级机构为0
 	ParentIds []int64 `json:"parentIds"`         // 上级机构ID
 	OrderNum  int32   `json:"orderNum"`          // 排序
@@ -2663,7 +2663,7 @@ type UpdateProductCommentReq struct {
 	CreateTime       string `json:"createTime"`
 	ShowStatus       int32  `json:"showStatus"`
 	ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
-	CollectCouont    int32  `json:"collectCouont"`
+	CollectCount     int32  `json:"collectCount"`
 	ReadCount        int32  `json:"readCount"`
 	Content          string `json:"content"`
 	Pics             string `json:"pics"`       // 上传图片地址，以逗号隔开
@@ -2939,7 +2939,7 @@ type AddCouponResp struct {
 }
 
 type AddDeptReq struct {
-	Name      string  `json:"name"`              // 机构名称
+	DeptName  string  `json:"deptName"`          // 机构名称
 	ParentId  int64   `json:"parentId"`          // 上级机构ID，一级机构为0
 	ParentIds []int64 `json:"parentIds"`         // 上级机构IDs
 	OrderNum  int32   `json:"orderNum"`          // 排序
@@ -3424,7 +3424,7 @@ type AddProductCommentReq struct {
 	CreateTime       string `json:"createTime"`
 	ShowStatus       int32  `json:"showStatus"`
 	ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
-	CollectCouont    int32  `json:"collectCouont"`
+	CollectCount     int32  `json:"collectCount"`
 	ReadCount        int32  `json:"readCount"`
 	Content          string `json:"content"`
 	Pics             string `json:"pics"`       // 上传图片地址，以逗号隔开

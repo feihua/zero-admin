@@ -36,7 +36,7 @@ func (l *ProductCommentAddLogic) ProductCommentAdd(req types.AddProductCommentRe
 		CreateTime:       req.CreateTime,
 		ShowStatus:       req.ShowStatus,
 		ProductAttribute: req.ProductAttribute,
-		CollectCouont:    req.CollectCouont,
+		CollectCount:     req.CollectCount,
 		ReadCount:        req.ReadCount,
 		Content:          req.Content,
 		Pics:             req.Pics,
