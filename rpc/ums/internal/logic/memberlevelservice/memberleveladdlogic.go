@@ -32,18 +32,18 @@ func NewMemberLevelAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 // MemberLevelAdd 添加会员等级
 func (l *MemberLevelAddLogic) MemberLevelAdd(in *umsclient.MemberLevelAddReq) (*umsclient.MemberLevelAddResp, error) {
 	err := query.UmsMemberLevel.WithContext(l.ctx).Create(&model.UmsMemberLevel{
-		Name:                  in.Name,
-		GrowthPoint:           in.GrowthPoint,
-		DefaultStatus:         in.DefaultStatus,
-		FreeFreightPoint:      float64(in.FreeFreightPoint),
-		CommentGrowthPoint:    in.CommentGrowthPoint,
-		PriviledgeFreeFreight: in.PriviledgeFreeFreight,
-		PriviledgeSignIn:      in.PriviledgeSignIn,
-		PriviledgeComment:     in.PriviledgeComment,
-		PriviledgePromotion:   in.PriviledgePromotion,
-		PriviledgeMemberPrice: in.PriviledgeMemberPrice,
-		PriviledgeBirthday:    in.PriviledgeBirthday,
-		Note:                  &in.Note,
+		LevelName:          in.LevelName,
+		GrowthPoint:        in.GrowthPoint,
+		DefaultStatus:      in.DefaultStatus,
+		FreeFreightPoint:   float64(in.FreeFreightPoint),
+		CommentGrowthPoint: in.CommentGrowthPoint,
+		IsFreeFreight:      in.IsFreeFreight,
+		IsSignIn:           in.IsSignIn,
+		IsComment:          in.IsComment,
+		IsPromotion:        in.IsPromotion,
+		IsMemberPrice:      in.IsMemberPrice,
+		IsBirthday:         in.IsBirthday,
+		Remark:             &in.Remark,
 	})
 
 	if err != nil {

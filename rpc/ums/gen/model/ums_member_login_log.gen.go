@@ -14,11 +14,11 @@ const TableNameUmsMemberLoginLog = "ums_member_login_log"
 type UmsMemberLoginLog struct {
 	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	MemberID   int64     `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`                                  // 会员id
-	CreateTime time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:登录时间" json:"create_time"`    // 登录时间
-	IP         string    `gorm:"column:ip;not null;comment:登录ip" json:"ip"`                                                // 登录ip
+	MemberIP   string    `gorm:"column:member_ip;not null;comment:登录ip" json:"member_ip"`                                  // 登录ip
 	City       string    `gorm:"column:city;not null;comment:登录城市" json:"city"`                                            // 登录城市
 	LoginType  int32     `gorm:"column:login_type;not null;comment:登录类型：0->PC；1->android;2->ios;3->小程序" json:"login_type"` // 登录类型：0->PC；1->android;2->ios;3->小程序
 	Province   string    `gorm:"column:province;not null;comment:登录省份" json:"province"`                                    // 登录省份
+	CreateTime time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:登录时间" json:"create_time"`    // 登录时间
 }
 
 // TableName UmsMemberLoginLog's table name

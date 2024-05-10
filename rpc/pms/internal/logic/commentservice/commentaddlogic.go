@@ -42,7 +42,7 @@ func (l *CommentAddLogic) CommentAdd(in *pmsclient.CommentAddReq) (*pmsclient.Co
 		CreateTime:       time.Now(),
 		ShowStatus:       in.ShowStatus,
 		ProductAttribute: in.ProductAttribute,
-		CollectCouont:    in.CollectCouont,
+		CollectCount:     in.CollectCount,
 		ReadCount:        in.ReadCount,
 		Content:          in.Content,
 		Pics:             in.Pics,

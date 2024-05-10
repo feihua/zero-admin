@@ -33,7 +33,7 @@ func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(req types.AddMemberRule
 		ConsumePerPoint:   req.ConsumePerPoint,
 		LowOrderAmount:    req.LowOrderAmount,
 		MaxPointPerOrder:  req.MaxPointPerOrder,
-		Type:              req.Type,
+		RuleType:          req.Type,
 	})
 
 	if err != nil {

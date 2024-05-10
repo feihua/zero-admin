@@ -3,8 +3,8 @@ create table oms_company_address
     id             bigint auto_increment
         primary key,
     address_name   varchar(200) not null comment '地址名称',
-    send_status    int(1)       not null comment '默认发货地址：0->否；1->是',
-    receive_status int(1)       not null comment '是否默认收货地址：0->否；1->是',
+    send_status    tinyint not null comment '默认发货地址：0->否；1->是',
+    receive_status tinyint not null comment '是否默认收货地址：0->否；1->是',
     name           varchar(64)  not null comment '收发货人姓名',
     phone          varchar(64)  not null comment '收货人电话',
     province       varchar(64)  not null comment '省/直辖市',

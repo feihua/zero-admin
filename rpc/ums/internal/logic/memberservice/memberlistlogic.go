@@ -27,14 +27,14 @@ func NewMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Member
 func (l *MemberListLogic) MemberList(in *umsclient.MemberListReq) (*umsclient.MemberListResp, error) {
 	q := query.UmsMember.WithContext(l.ctx)
 	if len(in.Username) > 0 {
-		q = q.Where(query.UmsMember.Username.Like("%" + in.Username + "%"))
+		q = q.Where(query.UmsMember.MemberName.Like("%" + in.Username + "%"))
 	}
 	if len(in.Phone) > 0 {
 		q = q.Where(query.UmsMember.Phone.Like("%" + in.Phone + "%"))
 	}
 
 	if in.Status != 2 {
-		q = q.Where(query.UmsMember.Status.Eq(in.Status))
+		q = q.Where(query.UmsMember.MemberStatus.Eq(in.Status))
 	}
 
 	offset := (in.Current - 1) * in.PageSize
@@ -51,11 +51,11 @@ func (l *MemberListLogic) MemberList(in *umsclient.MemberListReq) (*umsclient.Me
 		list = append(list, &umsclient.MemberListData{
 			Id:                    member.ID,
 			MemberLevelId:         member.MemberLevelID,
-			Username:              member.Username,
+			Username:              member.MemberName,
 			Password:              member.Password,
 			Nickname:              member.Nickname,
 			Phone:                 member.Phone,
-			Status:                member.Status,
+			Status:                member.MemberStatus,
 			CreateTime:            member.CreateTime.Format("2006-01-02 15:04:05"),
 			Icon:                  *member.Icon,
 			Gender:                *member.Gender,
@@ -66,7 +66,7 @@ func (l *MemberListLogic) MemberList(in *umsclient.MemberListReq) (*umsclient.Me
 			SourceType:            member.SourceType,
 			Integration:           member.Integration,
 			Growth:                member.Growth,
-			LuckeyCount:           member.LuckeyCount,
+			LuckeyCount:           member.LotteryCount,
 			HistoryIntegration:    member.HistoryIntegration,
 		})
 	}

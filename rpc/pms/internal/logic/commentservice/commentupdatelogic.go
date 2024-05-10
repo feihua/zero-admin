@@ -44,7 +44,7 @@ func (l *CommentUpdateLogic) CommentUpdate(in *pmsclient.CommentUpdateReq) (*pms
 		CreateTime:       time.Now(),
 		ShowStatus:       in.ShowStatus,
 		ProductAttribute: in.ProductAttribute,
-		CollectCouont:    in.CollectCouont,
+		CollectCount:     in.CollectCount,
 		ReadCount:        in.ReadCount,
 		Content:          in.Content,
 		Pics:             in.Pics,

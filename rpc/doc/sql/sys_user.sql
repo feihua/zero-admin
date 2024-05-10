@@ -9,9 +9,9 @@ create table sys_user
     salt        varchar(40)                         not null comment '加密盐',
     email       varchar(100)                        null comment '邮箱',
     mobile      varchar(100)                        null comment '手机号',
-    status      tinyint                             not null comment '状态  0：禁用   1：正常',
+    user_status tinyint not null comment '状态  0：禁用   1：正常',
     dept_id     bigint                              not null comment '部门id',
-    job_id bigint not null comment '岗位id',
+    job_id      bigint  not null comment '岗位id',
     create_by   varchar(50)                         not null comment '创建者',
     create_time timestamp default CURRENT_TIMESTAMP not null comment '创建时间',
     update_by   varchar(50)                         null comment '更新者',
@@ -22,6 +22,15 @@ create table sys_user
 )
     comment '用户管理';
 
-INSERT INTO sys_user (id, name, nick_name, avatar, password, salt, email, mobile, status, dept_id, create_by, create_time, update_by, update_time, del_flag, job_id) VALUES (1, 'admin', '超管管理员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030352', 1, 4, 'admin', current_time, 'admin', current_time, 1, 1);
-INSERT INTO sys_user (id, name, nick_name, avatar, password, salt, email, mobile, status, dept_id, create_by, create_time, update_by, update_time, del_flag, job_id) VALUES (2, 'developer', '开发人员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030351', 1, 4, 'admin', current_time, 'admin', current_time, 1, 1);
-INSERT INTO sys_user (id, name, nick_name, avatar, password, salt, email, mobile, status, dept_id, create_by, create_time, update_by, update_time, del_flag, job_id) VALUES (3, 'test', '测试人员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030350', 1, 4, 'admin', current_time, 'admin', current_time, 1, 1);
+INSERT INTO sys_user (id, name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
+                      create_time, update_by, update_time, del_flag, job_id)
+VALUES (1, 'admin', '超管管理员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030352', 1, 4, 'admin',
+        current_time, 'admin', current_time, 1, 1);
+INSERT INTO sys_user (id, name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
+                      create_time, update_by, update_time, del_flag, job_id)
+VALUES (2, 'developer', '开发人员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030351', 1, 4, 'admin',
+        current_time, 'admin', current_time, 1, 1);
+INSERT INTO sys_user (id, name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
+                      create_time, update_by, update_time, del_flag, job_id)
+VALUES (3, 'test', '测试人员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030350', 1, 4, 'admin',
+        current_time, 'admin', current_time, 1, 1);

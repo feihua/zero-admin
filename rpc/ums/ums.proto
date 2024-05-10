@@ -319,18 +319,18 @@ service IntegrationConsumeSettingService {
 }
 
 message MemberLevelAddReq {
-  string    Name = 2;
+  string    LevelName = 2;
   int32    GrowthPoint = 3;
   int32    DefaultStatus = 4;
   float  FreeFreightPoint = 5;
   int32    CommentGrowthPoint = 6;
-  int32    PriviledgeFreeFreight = 7;
-  int32    PriviledgeSignIn = 8;
-  int32    PriviledgeComment = 9;
-  int32    PriviledgePromotion = 10;
-  int32    PriviledgeMemberPrice = 11;
-  int32    PriviledgeBirthday = 12;
-  string    Note = 13;
+  int32    IsFreeFreight = 7;
+  int32    IsSignIn = 8;
+  int32    IsComment = 9;
+  int32    IsPromotion = 10;
+  int32    IsMemberPrice = 11;
+  int32    IsBirthday = 12;
+  string    Remark = 13;
 }
 
 message MemberLevelAddResp {
@@ -345,18 +345,18 @@ message MemberLevelListReq {
 
 message MemberLevelListData{
   int64    Id = 1;
-  string    Name = 2;
+  string    LevelName = 2;
   int32    GrowthPoint = 3;
   int32    DefaultStatus = 4;
   float  FreeFreightPoint = 5;
   int32    CommentGrowthPoint = 6;
-  int32    PriviledgeFreeFreight = 7;
-  int32    PriviledgeSignIn = 8;
-  int32    PriviledgeComment = 9;
-  int32    PriviledgePromotion = 10;
-  int32    PriviledgeMemberPrice = 11;
-  int32    PriviledgeBirthday = 12;
-  string    Note = 13;
+  int32    IsFreeFreight = 7;
+  int32    IsSignIn = 8;
+  int32    IsComment = 9;
+  int32    IsPromotion = 10;
+  int32    IsMemberPrice = 11;
+  int32    IsBirthday = 12;
+  string    Remark = 13;
 }
 
 message MemberLevelListResp {
@@ -366,18 +366,18 @@ message MemberLevelListResp {
 
 message MemberLevelUpdateReq {
   int64    Id = 1;
-  string    Name = 2;
+  string    LevelName = 2;
   int32    GrowthPoint = 3;
   int32    DefaultStatus = 4;
   float  FreeFreightPoint = 5;
   int32    CommentGrowthPoint = 6;
-  int32    PriviledgeFreeFreight = 7;
-  int32    PriviledgeSignIn = 8;
-  int32    PriviledgeComment = 9;
-  int32    PriviledgePromotion = 10;
-  int32    PriviledgeMemberPrice = 11;
-  int32    PriviledgeBirthday = 12;
-  string    Note = 13;
+  int32    IsFreeFreight = 7;
+  int32    IsSignIn = 8;
+  int32    IsComment = 9;
+  int32    IsPromotion = 10;
+  int32    IsMemberPrice = 11;
+  int32    IsBirthday = 12;
+  string    Remark = 13;
 }
 
 message MemberLevelUpdateResp {
@@ -402,7 +402,7 @@ service MemberLevelService {
 message MemberLoginLogAddReq {
   int64      MemberId = 2;
   string  CreateTime = 3;
-  string      Ip = 4;
+  string      MemberIP = 4;
   string      City = 5;
   int32      LoginType = 6;
   string      Province = 7;
@@ -422,7 +422,7 @@ message MemberLoginLogListData{
   int64      Id = 1;
   int64      MemberId = 2;
   string  CreateTime = 3;
-  string      Ip = 4;
+  string      MemberIP = 4;
   string      City = 5;
   int32      LoginType = 6;
   string      Province = 7;
@@ -552,7 +552,7 @@ service MemberProductCategoryRelationService {
 }
 message MemberReceiveAddressAddReq {
   int64    MemberId = 2;
-  string  Name = 3;
+  string  MemberName = 3;
   string  PhoneNumber = 4;
   int32    DefaultStatus = 5;
   string  PostCode = 6;
@@ -575,7 +575,7 @@ message MemberReceiveAddressListReq {
 message MemberReceiveAddressListData{
   int64    Id = 1;
   int64    MemberId = 2;
-  string  Name = 3;
+  string  MemberName = 3;
   string  PhoneNumber = 4;
   int32    DefaultStatus = 5;
   string  PostCode = 6;
@@ -583,6 +583,8 @@ message MemberReceiveAddressListData{
   string  City = 8;
   string  Region = 9;
   string  DetailAddress = 10;
+  string  CreateTime = 11;
+  string  UpdateTime = 12;
 }
 
 message MemberReceiveAddressListResp {
@@ -593,7 +595,7 @@ message MemberReceiveAddressListResp {
 message MemberReceiveAddressUpdateReq {
   int64    Id = 1;
   int64    MemberId = 2;
-  string  Name = 3;
+  string  MemberName = 3;
   string  PhoneNumber = 4;
   int32    DefaultStatus = 5;
   string  PostCode = 6;
@@ -634,7 +636,7 @@ message MemberReceiveAddressQueryDetailReq {
 message MemberReceiveAddressQueryDetailResp {
   int64    Id = 1;
   int64    MemberId = 2;
-  string  Name = 3;
+  string  MemberName = 3;
   string  PhoneNumber = 4;
   int32    DefaultStatus = 5;
   string  PostCode = 6;
@@ -642,15 +644,18 @@ message MemberReceiveAddressQueryDetailResp {
   string  City = 8;
   string  Region = 9;
   string  DetailAddress = 10;
+  string  CreateTime = 11;
+  string  UpdateTime = 12;
 }
 
 message MemberRuleSettingAddReq {
-  int32    ContinueSignDay = 2;
-  int32    ContinueSignPoint = 3;
-  float  ConsumePerPoint = 4;
-  float  LowOrderAmount = 5;
-  int32    MaxPointPerOrder = 6;
-  int32    Type = 7;
+  int32    ContinueSignDay = 1;
+  int32    ContinueSignPoint = 2;
+  float  ConsumePerPoint = 3;
+  float  LowOrderAmount = 4;
+  int32    MaxPointPerOrder = 5;
+  int32    RuleType = 6;
+  string    CreateBy = 7;
 }
 
 message MemberRuleSettingAddResp {
@@ -669,7 +674,11 @@ message MemberRuleSettingListData{
   float  ConsumePerPoint = 4;
   float  LowOrderAmount = 5;
   int32    MaxPointPerOrder = 6;
-  int32    Type = 7;
+  int32    RuleType = 7;
+  string    CreateBy = 8;
+  string    CreateTime = 9;
+  string    UpdateBy = 10;
+  string    UpdateTime = 11;
 }
 
 message MemberRuleSettingListResp {
@@ -684,7 +693,8 @@ message MemberRuleSettingUpdateReq {
   float  ConsumePerPoint = 4;
   float  LowOrderAmount = 5;
   int32    MaxPointPerOrder = 6;
-  int32    Type = 7;
+  int32    RuleType = 7;
+  string    UpdateBy = 8;
 }
 
 message MemberRuleSettingUpdateResp {
@@ -853,10 +863,11 @@ service MemberTagService {
 
 }
 message MemberTaskAddReq {
-  string  Name = 2;
-  int32    Growth = 3;
-  int32    Intergration = 4;
-  int32    Type = 5;
+  string  TaskName = 1;
+  int32    TaskGrowth = 2;
+  int32    TaskIntegral = 3;
+  int32    TaskType = 4;
+  string    CreateBy = 5;
 }
 
 message MemberTaskAddResp {
@@ -870,10 +881,14 @@ message MemberTaskListReq {
 
 message MemberTaskListData{
   int64    Id = 1;
-  string  Name = 2;
-  int32    Growth = 3;
-  int32    Intergration = 4;
-  int32    Type = 5;
+  string  TaskName = 2;
+  int32    TaskGrowth = 3;
+  int32    TaskIntegral = 4;
+  int32    TaskType = 5;
+  string    CreateTime = 6;
+  string    CreateBy = 7;
+  string    UpdateTime = 8;
+  string    UpdateBy = 9;
 }
 
 message MemberTaskListResp {
@@ -883,10 +898,11 @@ message MemberTaskListResp {
 
 message MemberTaskUpdateReq {
   int64    Id = 1;
-  string  Name = 2;
-  int32    Growth = 3;
-  int32    Intergration = 4;
-  int32    Type = 5;
+  string  TaskName = 2;
+  int32   TaskGrowth = 3;
+  int32    TaskIntegral = 4;
+  int32    TaskType = 5;
+  string    UpdateBy = 6;
 }
 
 message MemberTaskUpdateResp {

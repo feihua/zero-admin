@@ -34,10 +34,11 @@ func NewMemberTaskUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 func (l *MemberTaskUpdateLogic) MemberTaskUpdate(in *umsclient.MemberTaskUpdateReq) (*umsclient.MemberTaskUpdateResp, error) {
 	_, err := query.UmsMemberTask.WithContext(l.ctx).Updates(&model.UmsMemberTask{
 		ID:           in.Id,
-		Name:         in.Name,
-		Growth:       in.Growth,
-		Intergration: in.Intergration,
-		Type:         in.Type,
+		TaskName:     in.TaskName,
+		TaskGrowth:   in.TaskGrowth,
+		TaskIntegral: in.TaskIntegral,
+		TaskType:     in.TaskType,
+		UpdateBy:     &in.UpdateBy,
 	})
 	if err != nil {
 		return nil, err

@@ -6,7 +6,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -37,7 +36,8 @@ func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(in *umsclient.MemberRul
 		ConsumePerPoint:   float64(in.ConsumePerPoint),
 		LowOrderAmount:    float64(in.LowOrderAmount),
 		MaxPointPerOrder:  in.MaxPointPerOrder,
-		Type:              in.Type,
+		RuleType:          in.RuleType,
+		CreateBy:          in.CreateBy,
 	})
 
 	if err != nil {

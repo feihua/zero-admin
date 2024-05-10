@@ -29,11 +29,11 @@ func newUmsMemberLoginLog(db *gorm.DB, opts ...gen.DOOption) umsMemberLoginLog {
 	_umsMemberLoginLog.ALL = field.NewAsterisk(tableName)
 	_umsMemberLoginLog.ID = field.NewInt64(tableName, "id")
 	_umsMemberLoginLog.MemberID = field.NewInt64(tableName, "member_id")
-	_umsMemberLoginLog.CreateTime = field.NewTime(tableName, "create_time")
-	_umsMemberLoginLog.IP = field.NewString(tableName, "ip")
+	_umsMemberLoginLog.MemberIP = field.NewString(tableName, "member_ip")
 	_umsMemberLoginLog.City = field.NewString(tableName, "city")
 	_umsMemberLoginLog.LoginType = field.NewInt32(tableName, "login_type")
 	_umsMemberLoginLog.Province = field.NewString(tableName, "province")
+	_umsMemberLoginLog.CreateTime = field.NewTime(tableName, "create_time")
 
 	_umsMemberLoginLog.fillFieldMap()
 
@@ -47,11 +47,11 @@ type umsMemberLoginLog struct {
 	ALL        field.Asterisk
 	ID         field.Int64
 	MemberID   field.Int64  // 会员id
-	CreateTime field.Time   // 登录时间
-	IP         field.String // 登录ip
+	MemberIP   field.String // 登录ip
 	City       field.String // 登录城市
 	LoginType  field.Int32  // 登录类型：0->PC；1->android;2->ios;3->小程序
 	Province   field.String // 登录省份
+	CreateTime field.Time   // 登录时间
 
 	fieldMap map[string]field.Expr
 }
@@ -70,11 +70,11 @@ func (u *umsMemberLoginLog) updateTableName(table string) *umsMemberLoginLog {
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt64(table, "id")
 	u.MemberID = field.NewInt64(table, "member_id")
-	u.CreateTime = field.NewTime(table, "create_time")
-	u.IP = field.NewString(table, "ip")
+	u.MemberIP = field.NewString(table, "member_ip")
 	u.City = field.NewString(table, "city")
 	u.LoginType = field.NewInt32(table, "login_type")
 	u.Province = field.NewString(table, "province")
+	u.CreateTime = field.NewTime(table, "create_time")
 
 	u.fillFieldMap()
 
@@ -106,11 +106,11 @@ func (u *umsMemberLoginLog) fillFieldMap() {
 	u.fieldMap = make(map[string]field.Expr, 7)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["member_id"] = u.MemberID
-	u.fieldMap["create_time"] = u.CreateTime
-	u.fieldMap["ip"] = u.IP
+	u.fieldMap["member_ip"] = u.MemberIP
 	u.fieldMap["city"] = u.City
 	u.fieldMap["login_type"] = u.LoginType
 	u.fieldMap["province"] = u.Province
+	u.fieldMap["create_time"] = u.CreateTime
 }
 
 func (u umsMemberLoginLog) clone(db *gorm.DB) umsMemberLoginLog {

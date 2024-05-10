@@ -34,11 +34,11 @@ func (l *MemberUpdateLogic) MemberUpdate(in *umsclient.MemberUpdateReq) (*umscli
 	_, err := query.UmsMember.WithContext(l.ctx).Updates(&model.UmsMember{
 		ID:                    in.Id,
 		MemberLevelID:         in.MemberLevelId,
-		Username:              in.Username,
+		MemberName:            in.Username,
 		Password:              in.Password,
 		Nickname:              in.Nickname,
 		Phone:                 in.Phone,
-		Status:                in.Status,
+		MemberStatus:          in.Status,
 		CreateTime:            createTime,
 		Icon:                  &in.Icon,
 		Gender:                &in.Gender,
@@ -49,7 +49,7 @@ func (l *MemberUpdateLogic) MemberUpdate(in *umsclient.MemberUpdateReq) (*umscli
 		SourceType:            in.SourceType,
 		Integration:           in.Integration,
 		Growth:                in.Growth,
-		LuckeyCount:           in.LuckeyCount,
+		LotteryCount:          in.LuckeyCount,
 		HistoryIntegration:    in.HistoryIntegration,
 	})
 	if err != nil {

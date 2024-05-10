@@ -31,7 +31,7 @@ func NewMemberAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MemberA
 func (l *MemberAddLogic) MemberAdd(in *umsclient.MemberAddReq) (*umsclient.MemberAddResp, error) {
 
 	q := query.UmsMember
-	count, _ := q.WithContext(l.ctx).Where(q.Username.Eq(in.Username)).Or(q.Phone.Eq(in.Phone)).Count()
+	count, _ := q.WithContext(l.ctx).Where(q.MemberName.Eq(in.Username)).Or(q.Phone.Eq(in.Phone)).Count()
 	if count > 0 {
 		logc.Errorf(l.ctx, "用户名或手机号已注册,参数: %+v", in)
 		return nil, errors.New("用户名或手机号已注册")
@@ -59,11 +59,11 @@ func (l *MemberAddLogic) MemberAdd(in *umsclient.MemberAddReq) (*umsclient.Membe
 func insertMember(in *umsclient.MemberAddReq, l *MemberAddLogic) (int64, error) {
 	member := &model.UmsMember{
 		MemberLevelID:         4, //默认是普通会员
-		Username:              in.Username,
+		MemberName:            in.Username,
 		Password:              in.Password,
 		Nickname:              in.Username,
 		Phone:                 in.Phone,
-		Status:                0,
+		MemberStatus:          0,
 		CreateTime:            time.Now(),
 		Icon:                  nil,
 		Gender:                nil,
@@ -74,7 +74,7 @@ func insertMember(in *umsclient.MemberAddReq, l *MemberAddLogic) (int64, error) 
 		SourceType:            0,
 		Integration:           0,
 		Growth:                0,
-		LuckeyCount:           0,
+		LotteryCount:          0,
 		HistoryIntegration:    0,
 	}
 	err := query.UmsMember.WithContext(l.ctx).Create(member)

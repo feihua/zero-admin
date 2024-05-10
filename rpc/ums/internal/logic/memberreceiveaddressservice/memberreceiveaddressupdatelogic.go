@@ -4,9 +4,8 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -49,7 +48,7 @@ func (l *MemberReceiveAddressUpdateLogic) MemberReceiveAddressUpdate(in *umsclie
 	_, err := q.WithContext(l.ctx).Updates(&model.UmsMemberReceiveAddress{
 		ID:            in.Id,
 		MemberID:      in.MemberId,
-		Name:          in.Name,
+		MemberName:    in.MemberName,
 		PhoneNumber:   in.PhoneNumber,
 		DefaultStatus: in.DefaultStatus,
 		PostCode:      in.PostCode,

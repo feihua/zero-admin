@@ -49,7 +49,7 @@ func (l *CommentListLogic) CommentList(in *pmsclient.CommentListReq) (*pmsclient
 			CreateTime:       item.CreateTime.Format("2006-01-02 15:04:05"),
 			ShowStatus:       item.ShowStatus,
 			ProductAttribute: item.ProductAttribute,
-			CollectCouont:    item.CollectCouont,
+			CollectCount:     item.CollectCount,
 			ReadCount:        item.ReadCount,
 			Content:          item.Content,
 			Pics:             item.Pics,

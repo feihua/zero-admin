@@ -14,7 +14,7 @@ create table oms_cart_item
     member_nickname     varchar(500)     not null comment '会员昵称',
     create_date         datetime         not null comment '创建时间',
     modify_date         datetime         not null comment '修改时间',
-    delete_status       int(1) default 0 not null comment '是否删除',
+    delete_status tinyint default 0 not null comment '是否删除',
     product_category_id bigint           not null comment '商品分类',
     product_brand       varchar(200)     not null comment '商品品牌',
     product_sn          varchar(200)     not null comment '货号',

@@ -449,7 +449,7 @@ message CommentAddReq {
   string  CreateTime = 7;
   int32      ShowStatus = 8;
   string      ProductAttribute = 9;
-  int32      CollectCouont = 10;
+  int32      CollectCount = 10;
   int32      ReadCount = 11;
   string      Content = 12;
   string      Pics = 13;
@@ -476,7 +476,7 @@ message CommentListData{
   string  CreateTime = 7;
   int32      ShowStatus = 8;
   string      ProductAttribute = 9;
-  int32      CollectCouont = 10;
+  int32      CollectCount = 10;
   int32      ReadCount = 11;
   string      Content = 12;
   string      Pics = 13;
@@ -500,7 +500,7 @@ message CommentUpdateReq {
   string  CreateTime = 7;
   int32      ShowStatus = 8;
   string      ProductAttribute = 9;
-  int32      CollectCouont = 10;
+  int32      CollectCount = 10;
   int32      ReadCount = 11;
   string      Content = 12;
   string      Pics = 13;

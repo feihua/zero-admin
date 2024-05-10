@@ -6,7 +6,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -49,7 +48,7 @@ func (l *MemberReceiveAddressAddLogic) MemberReceiveAddressAdd(in *umsclient.Mem
 
 	err := q.WithContext(l.ctx).Create(&model.UmsMemberReceiveAddress{
 		MemberID:      in.MemberId,
-		Name:          in.Name,
+		MemberName:    in.MemberName,
 		PhoneNumber:   in.PhoneNumber,
 		DefaultStatus: in.DefaultStatus,
 		PostCode:      in.PostCode,

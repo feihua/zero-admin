@@ -36,7 +36,7 @@ func (l *MemberLoginLogAddLogic) MemberLoginLogAdd(in *umsclient.MemberLoginLogA
 	err := query.UmsMemberLoginLog.WithContext(l.ctx).Create(&model.UmsMemberLoginLog{
 		MemberID:   in.MemberId,
 		CreateTime: time.Now(),
-		IP:         in.Ip,
+		MemberIP:   in.MemberIP,
 		City:       in.City,
 		LoginType:  in.LoginType,
 		Province:   in.Province,

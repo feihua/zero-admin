@@ -271,7 +271,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		BillContent:           "",                                       //
 		BillReceiverPhone:     "",                                       //
 		BillReceiverEmail:     "",                                       //
-		ReceiverName:          address.Name,                             //收货人名称
+		ReceiverName:          address.MemberName,                       //收货人名称
 		ReceiverPhone:         address.PhoneNumber,                      //收货人电话
 		ReceiverPostCode:      address.PostCode,                         //邮政编码
 		ReceiverProvince:      address.Province,                         //省份/直辖市

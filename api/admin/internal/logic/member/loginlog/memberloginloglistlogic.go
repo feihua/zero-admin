@@ -46,7 +46,7 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLo
 			Id:         item.Id,
 			MemberId:   item.MemberId,
 			CreateTime: item.CreateTime,
-			Ip:         item.Ip,
+			Ip:         item.MemberIP,
 			City:       item.City,
 			LoginType:  item.LoginType,
 			Province:   item.Province,

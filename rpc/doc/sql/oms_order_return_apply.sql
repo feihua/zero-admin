@@ -11,7 +11,7 @@ create table oms_order_return_apply
     return_amount      decimal(10, 2) not null comment '退款金额',
     return_name        varchar(100)   not null comment '退货人姓名',
     return_phone       varchar(100)   not null comment '退货人电话',
-    status             int(1)         not null comment '申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝',
+    status tinyint not null comment '申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝',
     handle_time        datetime       not null comment '处理时间',
     product_pic        varchar(500)   not null comment '商品图片',
     product_name       varchar(200)   not null comment '商品名称',

@@ -30,7 +30,7 @@ func (l *MemberAddressUpdateLogic) MemberAddressUpdate(req types.UpdateMemberAdd
 	_, err := l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressUpdate(l.ctx, &umsclient.MemberReceiveAddressUpdateReq{
 		Id:            req.Id,
 		MemberId:      req.MemberId,
-		Name:          req.Name,
+		MemberName:    req.Name,
 		PhoneNumber:   req.PhoneNumber,
 		DefaultStatus: req.DefaultStatus,
 		PostCode:      req.PostCode,

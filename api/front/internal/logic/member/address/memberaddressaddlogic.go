@@ -35,7 +35,7 @@ func (l *MemberAddressAddLogic) MemberAddressAdd(req *types.AddMemberAddressReq)
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, err = l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressAdd(l.ctx, &umsclient.MemberReceiveAddressAddReq{
 		MemberId:      memberId,
-		Name:          req.Name,
+		MemberName:    req.Name,
 		PhoneNumber:   req.PhoneNumber,
 		DefaultStatus: req.DefaultStatus,
 		PostCode:      req.PostCode,

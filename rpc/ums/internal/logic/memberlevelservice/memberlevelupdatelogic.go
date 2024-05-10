@@ -29,19 +29,19 @@ func NewMemberLevelUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // MemberLevelUpdate 更新会员等级
 func (l *MemberLevelUpdateLogic) MemberLevelUpdate(in *umsclient.MemberLevelUpdateReq) (*umsclient.MemberLevelUpdateResp, error) {
 	_, err := query.UmsMemberLevel.WithContext(l.ctx).Updates(&model.UmsMemberLevel{
-		ID:                    in.Id,
-		Name:                  in.Name,
-		GrowthPoint:           in.GrowthPoint,
-		DefaultStatus:         in.DefaultStatus,
-		FreeFreightPoint:      float64(in.FreeFreightPoint),
-		CommentGrowthPoint:    in.CommentGrowthPoint,
-		PriviledgeFreeFreight: in.PriviledgeFreeFreight,
-		PriviledgeSignIn:      in.PriviledgeSignIn,
-		PriviledgeComment:     in.PriviledgeComment,
-		PriviledgePromotion:   in.PriviledgePromotion,
-		PriviledgeMemberPrice: in.PriviledgeMemberPrice,
-		PriviledgeBirthday:    in.PriviledgeBirthday,
-		Note:                  &in.Note,
+		ID:                 in.Id,
+		LevelName:          in.LevelName,
+		GrowthPoint:        in.GrowthPoint,
+		DefaultStatus:      in.DefaultStatus,
+		FreeFreightPoint:   float64(in.FreeFreightPoint),
+		CommentGrowthPoint: in.CommentGrowthPoint,
+		IsFreeFreight:      in.IsFreeFreight,
+		IsSignIn:           in.IsSignIn,
+		IsComment:          in.IsComment,
+		IsPromotion:        in.IsPromotion,
+		IsMemberPrice:      in.IsMemberPrice,
+		IsBirthday:         in.IsBirthday,
+		Remark:             &in.Remark,
 	})
 
 	if err != nil {

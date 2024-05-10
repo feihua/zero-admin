@@ -27,7 +27,7 @@ func NewMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 func (l *MemberLevelListLogic) MemberLevelList(in *umsclient.MemberLevelListReq) (*umsclient.MemberLevelListResp, error) {
 	q := query.UmsMemberLevel.WithContext(l.ctx)
 	if len(in.Name) > 0 {
-		q = q.Where(query.UmsMemberLevel.Name.Like("%" + in.Name + "%"))
+		q = q.Where(query.UmsMemberLevel.LevelName.Like("%" + in.Name + "%"))
 	}
 	offset := (in.Current - 1) * in.PageSize
 	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
@@ -38,22 +38,22 @@ func (l *MemberLevelListLogic) MemberLevelList(in *umsclient.MemberLevelListReq)
 		return nil, err
 	}
 	var list []*umsclient.MemberLevelListData
-	for _, item := range result {
+	for _, level := range result {
 
 		list = append(list, &umsclient.MemberLevelListData{
-			Id:                    item.ID,
-			Name:                  item.Name,
-			GrowthPoint:           item.GrowthPoint,
-			DefaultStatus:         item.DefaultStatus,
-			FreeFreightPoint:      float32(item.FreeFreightPoint),
-			CommentGrowthPoint:    item.CommentGrowthPoint,
-			PriviledgeFreeFreight: item.PriviledgeFreeFreight,
-			PriviledgeSignIn:      item.PriviledgeSignIn,
-			PriviledgeComment:     item.PriviledgeComment,
-			PriviledgePromotion:   item.PriviledgePromotion,
-			PriviledgeMemberPrice: item.PriviledgeMemberPrice,
-			PriviledgeBirthday:    item.PriviledgeBirthday,
-			Note:                  *item.Note,
+			Id:                 level.ID,
+			LevelName:          level.LevelName,
+			GrowthPoint:        level.GrowthPoint,
+			DefaultStatus:      level.DefaultStatus,
+			FreeFreightPoint:   float32(level.FreeFreightPoint),
+			CommentGrowthPoint: level.CommentGrowthPoint,
+			IsFreeFreight:      level.IsFreeFreight,
+			IsSignIn:           level.IsSignIn,
+			IsComment:          level.IsComment,
+			IsPromotion:        level.IsPromotion,
+			IsMemberPrice:      level.IsMemberPrice,
+			IsBirthday:         level.IsBirthday,
+			Remark:             *level.Remark,
 		})
 	}
 

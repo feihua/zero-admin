@@ -6,7 +6,7 @@ create table cms_prefrence_area
     sub_title   varchar(255)   not null,
     pic varchar(500) not null comment '展示图片',
     sort        int            not null,
-    show_status int(1)         not null
+    show_status tinyint not null
 )
     comment '优选专区' charset = utf8;
 

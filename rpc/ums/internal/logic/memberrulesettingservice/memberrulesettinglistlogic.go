@@ -45,7 +45,11 @@ func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *umsclient.MemberR
 			ConsumePerPoint:   float32(item.ConsumePerPoint),
 			LowOrderAmount:    float32(item.LowOrderAmount),
 			MaxPointPerOrder:  item.MaxPointPerOrder,
-			Type:              item.Type,
+			RuleType:          item.RuleType,
+			CreateBy:          item.CreateBy,
+			CreateTime:        item.CreateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:          *item.UpdateBy,
+			UpdateTime:        item.UpdateTime.Format("2006-01-02 15:04:05"),
 		})
 	}
 

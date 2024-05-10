@@ -4,15 +4,23 @@
 
 package model
 
+import (
+	"time"
+)
+
 const TableNameUmsMemberTask = "ums_member_task"
 
 // UmsMemberTask 会员任务表
 type UmsMemberTask struct {
-	ID           int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Name         string `gorm:"column:name;not null;comment:任务名称" json:"name"`                 // 任务名称
-	Growth       int32  `gorm:"column:growth;not null;comment:赠送成长值" json:"growth"`            // 赠送成长值
-	Intergration int32  `gorm:"column:intergration;not null;comment:赠送积分" json:"intergration"` // 赠送积分
-	Type         int32  `gorm:"column:type;not null;comment:任务类型：0->新手任务；1->日常任务" json:"type"` // 任务类型：0->新手任务；1->日常任务
+	ID           int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	TaskName     string     `gorm:"column:task_name;not null;comment:任务名称" json:"task_name"`                               // 任务名称
+	TaskGrowth   int32      `gorm:"column:task_growth;not null;comment:赠送成长值" json:"task_growth"`                          // 赠送成长值
+	TaskIntegral int32      `gorm:"column:task_integral;not null;comment:赠送积分" json:"task_integral"`                       // 赠送积分
+	TaskType     int32      `gorm:"column:task_type;not null;comment:任务类型：0->新手任务；1->日常任务" json:"task_type"`               // 任务类型：0->新手任务；1->日常任务
+	CreateBy     string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
+	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateBy     *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                         // 更新者
+	UpdateTime   *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 
 // TableName UmsMemberTask's table name

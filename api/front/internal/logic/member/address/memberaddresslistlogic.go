@@ -45,7 +45,7 @@ func (l *MemberAddressListLogic) MemberAddressList() (resp *types.ListMemberAddr
 		list = append(list, types.ListMemberAddressData{
 			Id:            member.Id,
 			MemberId:      member.MemberId,
-			Name:          member.Name,
+			Name:          member.MemberName,
 			PhoneNumber:   member.PhoneNumber,
 			DefaultStatus: member.DefaultStatus,
 			PostCode:      member.PostCode,

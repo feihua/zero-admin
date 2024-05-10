@@ -40,10 +40,14 @@ func (l *MemberTaskListLogic) MemberTaskList(in *umsclient.MemberTaskListReq) (*
 
 		list = append(list, &umsclient.MemberTaskListData{
 			Id:           item.ID,
-			Name:         item.Name,
-			Growth:       item.Growth,
-			Intergration: item.Intergration,
-			Type:         item.Type,
+			TaskName:     item.TaskName,
+			TaskGrowth:   item.TaskGrowth,
+			TaskIntegral: item.TaskIntegral,
+			TaskType:     item.TaskType,
+			CreateTime:   item.CreateTime.Format("2006-01-02 15:04:05"),
+			CreateBy:     item.CreateBy,
+			UpdateTime:   item.UpdateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:     *item.UpdateBy,
 		})
 	}
 

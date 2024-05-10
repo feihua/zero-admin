@@ -9,7 +9,7 @@ create table pay_wx_record
     return_msg  varchar(12)   not null,
     result_code varchar(12)   not null,
     result_msg  varchar(12)   not null,
-    pay_status  int default 0 not null comment '0：初始化 1：已发送 2：成功 3：失败',
+    pay_status tinyint default 0 not null comment '0：初始化 1：已发送 2：成功 3：失败',
     create_time date          not null comment '创建时间',
     update_time date          not null comment '更新时间',
     constraint pay_record_id_uindex

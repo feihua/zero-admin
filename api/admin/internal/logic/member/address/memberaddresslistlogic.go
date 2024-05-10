@@ -45,7 +45,7 @@ func (l *MemberAddressListLogic) MemberAddressList(req types.ListMemberAddressRe
 		list = append(list, &types.ListtMemberAddressData{
 			Id:            item.Id,
 			MemberId:      item.MemberId,
-			Name:          item.Name,
+			Name:          item.MemberName,
 			PhoneNumber:   item.PhoneNumber,
 			DefaultStatus: item.DefaultStatus,
 			PostCode:      item.PostCode,

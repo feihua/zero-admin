@@ -29,12 +29,11 @@ func newUmsMember(db *gorm.DB, opts ...gen.DOOption) umsMember {
 	_umsMember.ALL = field.NewAsterisk(tableName)
 	_umsMember.ID = field.NewInt64(tableName, "id")
 	_umsMember.MemberLevelID = field.NewInt64(tableName, "member_level_id")
-	_umsMember.Username = field.NewString(tableName, "username")
+	_umsMember.MemberName = field.NewString(tableName, "member_name")
 	_umsMember.Password = field.NewString(tableName, "password")
 	_umsMember.Nickname = field.NewString(tableName, "nickname")
 	_umsMember.Phone = field.NewString(tableName, "phone")
-	_umsMember.Status = field.NewInt32(tableName, "status")
-	_umsMember.CreateTime = field.NewTime(tableName, "create_time")
+	_umsMember.MemberStatus = field.NewInt32(tableName, "member_status")
 	_umsMember.Icon = field.NewString(tableName, "icon")
 	_umsMember.Gender = field.NewInt32(tableName, "gender")
 	_umsMember.Birthday = field.NewTime(tableName, "birthday")
@@ -44,8 +43,10 @@ func newUmsMember(db *gorm.DB, opts ...gen.DOOption) umsMember {
 	_umsMember.SourceType = field.NewInt32(tableName, "source_type")
 	_umsMember.Integration = field.NewInt32(tableName, "integration")
 	_umsMember.Growth = field.NewInt32(tableName, "growth")
-	_umsMember.LuckeyCount = field.NewInt32(tableName, "luckey_count")
+	_umsMember.LotteryCount = field.NewInt32(tableName, "lottery_count")
 	_umsMember.HistoryIntegration = field.NewInt32(tableName, "history_integration")
+	_umsMember.CreateTime = field.NewTime(tableName, "create_time")
+	_umsMember.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_umsMember.fillFieldMap()
 
@@ -59,12 +60,11 @@ type umsMember struct {
 	ALL                   field.Asterisk
 	ID                    field.Int64
 	MemberLevelID         field.Int64  // 会员等级id
-	Username              field.String // 用户名
+	MemberName            field.String // 用户名
 	Password              field.String // 密码
 	Nickname              field.String // 昵称
 	Phone                 field.String // 手机号码
-	Status                field.Int32  // 帐号启用状态:0->禁用；1->启用
-	CreateTime            field.Time   // 注册时间
+	MemberStatus          field.Int32  // 帐号启用状态:0->禁用；1->启用
 	Icon                  field.String // 头像
 	Gender                field.Int32  // 性别：0->未知；1->男；2->女
 	Birthday              field.Time   // 生日
@@ -74,8 +74,10 @@ type umsMember struct {
 	SourceType            field.Int32  // 用户来源
 	Integration           field.Int32  // 积分
 	Growth                field.Int32  // 成长值
-	LuckeyCount           field.Int32  // 剩余抽奖次数
+	LotteryCount          field.Int32  // 剩余抽奖次数
 	HistoryIntegration    field.Int32  // 历史积分数量
+	CreateTime            field.Time   // 创建时间
+	UpdateTime            field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -94,12 +96,11 @@ func (u *umsMember) updateTableName(table string) *umsMember {
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt64(table, "id")
 	u.MemberLevelID = field.NewInt64(table, "member_level_id")
-	u.Username = field.NewString(table, "username")
+	u.MemberName = field.NewString(table, "member_name")
 	u.Password = field.NewString(table, "password")
 	u.Nickname = field.NewString(table, "nickname")
 	u.Phone = field.NewString(table, "phone")
-	u.Status = field.NewInt32(table, "status")
-	u.CreateTime = field.NewTime(table, "create_time")
+	u.MemberStatus = field.NewInt32(table, "member_status")
 	u.Icon = field.NewString(table, "icon")
 	u.Gender = field.NewInt32(table, "gender")
 	u.Birthday = field.NewTime(table, "birthday")
@@ -109,8 +110,10 @@ func (u *umsMember) updateTableName(table string) *umsMember {
 	u.SourceType = field.NewInt32(table, "source_type")
 	u.Integration = field.NewInt32(table, "integration")
 	u.Growth = field.NewInt32(table, "growth")
-	u.LuckeyCount = field.NewInt32(table, "luckey_count")
+	u.LotteryCount = field.NewInt32(table, "lottery_count")
 	u.HistoryIntegration = field.NewInt32(table, "history_integration")
+	u.CreateTime = field.NewTime(table, "create_time")
+	u.UpdateTime = field.NewTime(table, "update_time")
 
 	u.fillFieldMap()
 
@@ -137,15 +140,14 @@ func (u *umsMember) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (u *umsMember) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 19)
+	u.fieldMap = make(map[string]field.Expr, 20)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["member_level_id"] = u.MemberLevelID
-	u.fieldMap["username"] = u.Username
+	u.fieldMap["member_name"] = u.MemberName
 	u.fieldMap["password"] = u.Password
 	u.fieldMap["nickname"] = u.Nickname
 	u.fieldMap["phone"] = u.Phone
-	u.fieldMap["status"] = u.Status
-	u.fieldMap["create_time"] = u.CreateTime
+	u.fieldMap["member_status"] = u.MemberStatus
 	u.fieldMap["icon"] = u.Icon
 	u.fieldMap["gender"] = u.Gender
 	u.fieldMap["birthday"] = u.Birthday
@@ -155,8 +157,10 @@ func (u *umsMember) fillFieldMap() {
 	u.fieldMap["source_type"] = u.SourceType
 	u.fieldMap["integration"] = u.Integration
 	u.fieldMap["growth"] = u.Growth
-	u.fieldMap["luckey_count"] = u.LuckeyCount
+	u.fieldMap["lottery_count"] = u.LotteryCount
 	u.fieldMap["history_integration"] = u.HistoryIntegration
+	u.fieldMap["create_time"] = u.CreateTime
+	u.fieldMap["update_time"] = u.UpdateTime
 }
 
 func (u umsMember) clone(db *gorm.DB) umsMember {

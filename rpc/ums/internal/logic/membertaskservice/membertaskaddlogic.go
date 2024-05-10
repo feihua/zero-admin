@@ -6,7 +6,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -32,10 +31,11 @@ func NewMemberTaskAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mem
 // MemberTaskAdd 添加会员任务
 func (l *MemberTaskAddLogic) MemberTaskAdd(in *umsclient.MemberTaskAddReq) (*umsclient.MemberTaskAddResp, error) {
 	err := query.UmsMemberTask.WithContext(l.ctx).Create(&model.UmsMemberTask{
-		Name:         in.Name,
-		Growth:       in.Growth,
-		Intergration: in.Intergration,
-		Type:         in.Type,
+		TaskName:     in.TaskName,
+		TaskGrowth:   in.TaskGrowth,
+		TaskIntegral: in.TaskIntegral,
+		TaskType:     in.TaskType,
+		CreateBy:     in.CreateBy,
 	})
 
 	if err != nil {

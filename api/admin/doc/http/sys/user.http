@@ -19,6 +19,5 @@ Authorization: Bearer {{token}}
 
 {
   "current": 1,
-  "pageSize": 10,
-  "name": "123"
+  "pageSize": 10
 }

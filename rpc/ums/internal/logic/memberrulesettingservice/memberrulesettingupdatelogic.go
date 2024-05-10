@@ -39,7 +39,8 @@ func (l *MemberRuleSettingUpdateLogic) MemberRuleSettingUpdate(in *umsclient.Mem
 		ConsumePerPoint:   float64(in.ConsumePerPoint),
 		LowOrderAmount:    float64(in.LowOrderAmount),
 		MaxPointPerOrder:  in.MaxPointPerOrder,
-		Type:              in.Type,
+		RuleType:          in.RuleType,
+		UpdateBy:          &in.UpdateBy,
 	})
 
 	if err != nil {

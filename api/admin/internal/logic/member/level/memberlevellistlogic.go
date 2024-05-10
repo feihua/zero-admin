@@ -43,19 +43,19 @@ func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*t
 
 	for _, item := range resp.List {
 		list = append(list, &types.ListtMemberLevelData{
-			Id:                    item.Id,
-			Name:                  item.Name,
-			GrowthPoint:           item.GrowthPoint,
-			DefaultStatus:         item.DefaultStatus,
-			FreeFreightPoint:      item.FreeFreightPoint,
-			CommentGrowthPoint:    item.CommentGrowthPoint,
-			PriviledgeFreeFreight: item.PriviledgeFreeFreight,
-			PriviledgeSignIn:      item.PriviledgeSignIn,
-			PriviledgeComment:     item.PriviledgeComment,
-			PriviledgePromotion:   item.PriviledgePromotion,
-			PriviledgeMemberPrice: item.PriviledgeMemberPrice,
-			PriviledgeBirthday:    item.PriviledgeBirthday,
-			Note:                  item.Note,
+			Id:                 item.Id,
+			Name:               item.LevelName,
+			GrowthPoint:        item.GrowthPoint,
+			DefaultStatus:      item.DefaultStatus,
+			FreeFreightPoint:   item.FreeFreightPoint,
+			CommentGrowthPoint: item.CommentGrowthPoint,
+			IsFreeFreight:      item.IsFreeFreight,
+			IsSignIn:           item.IsSignIn,
+			IsComment:          item.IsComment,
+			IsPromotion:        item.IsPromotion,
+			IsMemberPrice:      item.IsMemberPrice,
+			IsBirthday:         item.IsBirthday,
+			Note:               item.Remark,
 		})
 	}
 

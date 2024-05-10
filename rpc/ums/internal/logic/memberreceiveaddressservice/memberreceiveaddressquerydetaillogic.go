@@ -41,7 +41,7 @@ func (l *MemberReceiveAddressQueryDetailLogic) MemberReceiveAddressQueryDetail(i
 	resp := &umsclient.MemberReceiveAddressQueryDetailResp{
 		Id:            address.ID,
 		MemberId:      address.MemberID,
-		Name:          address.Name,
+		MemberName:    address.MemberName,
 		PhoneNumber:   address.PhoneNumber,
 		DefaultStatus: address.DefaultStatus,
 		PostCode:      address.PostCode,
@@ -49,6 +49,8 @@ func (l *MemberReceiveAddressQueryDetailLogic) MemberReceiveAddressQueryDetail(i
 		City:          address.City,
 		Region:        address.Region,
 		DetailAddress: address.DetailAddress,
+		CreateTime:    address.CreateTime.Format("2006-01-02 15:04:05"),
+		UpdateTime:    address.UpdateTime.Format("2006-01-02 15:04:05"),
 	}
 
 	logc.Infof(l.ctx, "查询会员地址信息,参数：%+v,响应：%+v", in, resp)

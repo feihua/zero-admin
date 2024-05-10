@@ -44,7 +44,7 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(in *umsclient.MemberLoginLo
 			Id:         item.ID,
 			MemberId:   item.MemberID,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
-			Ip:         item.IP,
+			MemberIP:   item.MemberIP,
 			City:       item.City,
 			LoginType:  item.LoginType,
 			Province:   item.Province,

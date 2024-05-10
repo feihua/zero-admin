@@ -44,19 +44,21 @@ func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *umsclient.M
 		return nil, err
 	}
 	var list []*umsclient.MemberReceiveAddressListData
-	for _, item := range result {
+	for _, address := range result {
 
 		list = append(list, &umsclient.MemberReceiveAddressListData{
-			Id:            item.ID,
-			MemberId:      item.MemberID,
-			Name:          item.Name,
-			PhoneNumber:   item.PhoneNumber,
-			DefaultStatus: item.DefaultStatus,
-			PostCode:      item.PostCode,
-			Province:      item.Province,
-			City:          item.City,
-			Region:        item.Region,
-			DetailAddress: item.DetailAddress,
+			Id:            address.ID,
+			MemberId:      address.MemberID,
+			MemberName:    address.MemberName,
+			PhoneNumber:   address.PhoneNumber,
+			DefaultStatus: address.DefaultStatus,
+			PostCode:      address.PostCode,
+			Province:      address.Province,
+			City:          address.City,
+			Region:        address.Region,
+			DetailAddress: address.DetailAddress,
+			CreateTime:    address.CreateTime.Format("2006-01-02 15:04:05"),
+			UpdateTime:    address.UpdateTime.Format("2006-01-02 15:04:05"),
 		})
 	}
 

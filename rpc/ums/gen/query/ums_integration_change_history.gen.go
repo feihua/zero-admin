@@ -29,12 +29,12 @@ func newUmsIntegrationChangeHistory(db *gorm.DB, opts ...gen.DOOption) umsIntegr
 	_umsIntegrationChangeHistory.ALL = field.NewAsterisk(tableName)
 	_umsIntegrationChangeHistory.ID = field.NewInt64(tableName, "id")
 	_umsIntegrationChangeHistory.MemberID = field.NewInt64(tableName, "member_id")
-	_umsIntegrationChangeHistory.CreateTime = field.NewTime(tableName, "create_time")
 	_umsIntegrationChangeHistory.ChangeType = field.NewInt32(tableName, "change_type")
 	_umsIntegrationChangeHistory.ChangeCount = field.NewInt32(tableName, "change_count")
 	_umsIntegrationChangeHistory.OperateMan = field.NewString(tableName, "operate_man")
 	_umsIntegrationChangeHistory.OperateNote = field.NewString(tableName, "operate_note")
 	_umsIntegrationChangeHistory.SourceType = field.NewInt32(tableName, "source_type")
+	_umsIntegrationChangeHistory.CreateTime = field.NewTime(tableName, "create_time")
 
 	_umsIntegrationChangeHistory.fillFieldMap()
 
@@ -48,12 +48,12 @@ type umsIntegrationChangeHistory struct {
 	ALL         field.Asterisk
 	ID          field.Int64
 	MemberID    field.Int64  // 会员id
-	CreateTime  field.Time   // 创建时间
 	ChangeType  field.Int32  // 改变类型：0->增加；1->减少
 	ChangeCount field.Int32  // 积分改变数量
 	OperateMan  field.String // 操作人员
 	OperateNote field.String // 操作备注
 	SourceType  field.Int32  // 积分来源：0->购物；1->管理员修改
+	CreateTime  field.Time   // 创建时间
 
 	fieldMap map[string]field.Expr
 }
@@ -72,12 +72,12 @@ func (u *umsIntegrationChangeHistory) updateTableName(table string) *umsIntegrat
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt64(table, "id")
 	u.MemberID = field.NewInt64(table, "member_id")
-	u.CreateTime = field.NewTime(table, "create_time")
 	u.ChangeType = field.NewInt32(table, "change_type")
 	u.ChangeCount = field.NewInt32(table, "change_count")
 	u.OperateMan = field.NewString(table, "operate_man")
 	u.OperateNote = field.NewString(table, "operate_note")
 	u.SourceType = field.NewInt32(table, "source_type")
+	u.CreateTime = field.NewTime(table, "create_time")
 
 	u.fillFieldMap()
 
@@ -111,12 +111,12 @@ func (u *umsIntegrationChangeHistory) fillFieldMap() {
 	u.fieldMap = make(map[string]field.Expr, 8)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["member_id"] = u.MemberID
-	u.fieldMap["create_time"] = u.CreateTime
 	u.fieldMap["change_type"] = u.ChangeType
 	u.fieldMap["change_count"] = u.ChangeCount
 	u.fieldMap["operate_man"] = u.OperateMan
 	u.fieldMap["operate_note"] = u.OperateNote
 	u.fieldMap["source_type"] = u.SourceType
+	u.fieldMap["create_time"] = u.CreateTime
 }
 
 func (u umsIntegrationChangeHistory) clone(db *gorm.DB) umsIntegrationChangeHistory {

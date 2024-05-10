@@ -43,10 +43,10 @@ func (l *MemberTaskListLogic) MemberTaskList(req types.ListMemberTaskReq) (*type
 	for _, item := range resp.List {
 		list = append(list, &types.ListtMemberTaskData{
 			Id:           item.Id,
-			Name:         item.Name,
-			Growth:       item.Growth,
-			Intergration: item.Intergration,
-			Type:         item.Type,
+			Name:         item.TaskName,
+			Growth:       item.TaskGrowth,
+			Intergration: item.TaskIntegral,
+			Type:         item.TaskType,
 		})
 	}
 

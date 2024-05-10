@@ -21,7 +21,7 @@ type PmsComment struct {
 	CreateTime       time.Time `gorm:"column:create_time;not null" json:"create_time"`
 	ShowStatus       int32     `gorm:"column:show_status;not null" json:"show_status"`
 	ProductAttribute string    `gorm:"column:product_attribute;not null;comment:购买时的商品属性" json:"product_attribute"` // 购买时的商品属性
-	CollectCouont    int32     `gorm:"column:collect_couont;not null" json:"collect_couont"`
+	CollectCount     int32     `gorm:"column:collect_count;not null" json:"collect_count"`
 	ReadCount        int32     `gorm:"column:read_count;not null" json:"read_count"`
 	Content          string    `gorm:"column:content;not null" json:"content"`
 	Pics             string    `gorm:"column:pics;not null;comment:上传图片地址，以逗号隔开" json:"pics"`         // 上传图片地址，以逗号隔开

@@ -28,10 +28,10 @@ func NewMemberTaskAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Memb
 
 func (l *MemberTaskAddLogic) MemberTaskAdd(req types.AddMemberTaskReq) (*types.AddMemberTaskResp, error) {
 	_, err := l.svcCtx.MemberTaskService.MemberTaskAdd(l.ctx, &umsclient.MemberTaskAddReq{
-		Name:         req.Name,
-		Growth:       req.Growth,
-		Intergration: req.Intergration,
-		Type:         req.Type,
+		TaskName:     req.Name,
+		TaskGrowth:   req.Growth,
+		TaskIntegral: req.Intergration,
+		TaskType:     req.Type,
 	})
 
 	if err != nil {

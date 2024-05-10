@@ -85,7 +85,7 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 		memberReceiveAddressList = append(memberReceiveAddressList, types.MemberReceiveAddressList{
 			Id:            item.Id,
 			MemberId:      item.MemberId,
-			Name:          item.Name,
+			Name:          item.MemberName,
 			PhoneNumber:   item.PhoneNumber,
 			DefaultStatus: item.DefaultStatus,
 			PostCode:      item.PostCode,

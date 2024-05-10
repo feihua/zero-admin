@@ -38,7 +38,7 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 	q := query.UmsMember
 	//1.校验参数
 	//根据用户名查询账号
-	member, _ := q.WithContext(l.ctx).Where(q.Username.Eq(in.Account)).Or(q.Phone.Eq(in.Account)).First()
+	member, _ := q.WithContext(l.ctx).Where(q.MemberName.Eq(in.Account)).Or(q.Phone.Eq(in.Account)).First()
 	if member == nil {
 		logc.Errorf(l.ctx, "账号不存在,参数:%s", in.Account)
 		return nil, errors.New("账号不存在")
@@ -54,7 +54,7 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 	log := &model.UmsMemberLoginLog{
 		MemberID:   member.ID,
 		CreateTime: time.Now(),
-		IP:         in.Ip,
+		MemberIP:   in.Ip,
 		City:       *member.City,
 		LoginType:  0,
 		Province:   "",
@@ -64,7 +64,7 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 	//3.返回数据
 	accessExpire := l.svcCtx.Config.JWT.AccessExpire
 	secret := l.svcCtx.Config.JWT.AccessSecret
-	token, err := createJwtToken(secret, member.Username, member.Phone, accessExpire, member.ID)
+	token, err := createJwtToken(secret, member.MemberName, member.Phone, accessExpire, member.ID)
 
 	if err != nil {
 		in, _ := json.Marshal(in)

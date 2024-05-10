@@ -30,7 +30,7 @@ func (l *MemberLoginLogAddLogic) MemberLoginLogAdd(req types.AddMemberLoginLogRe
 	_, err := l.svcCtx.MemberLoginLogService.MemberLoginLogAdd(l.ctx, &umsclient.MemberLoginLogAddReq{
 		MemberId:   req.MemberId,
 		CreateTime: req.CreateTime,
-		Ip:         req.Ip,
+		MemberIP:   req.Ip,
 		City:       req.City,
 		LoginType:  req.LoginType,
 		Province:   req.Province,

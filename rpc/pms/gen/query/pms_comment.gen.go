@@ -36,7 +36,7 @@ func newPmsComment(db *gorm.DB, opts ...gen.DOOption) pmsComment {
 	_pmsComment.CreateTime = field.NewTime(tableName, "create_time")
 	_pmsComment.ShowStatus = field.NewInt32(tableName, "show_status")
 	_pmsComment.ProductAttribute = field.NewString(tableName, "product_attribute")
-	_pmsComment.CollectCouont = field.NewInt32(tableName, "collect_couont")
+	_pmsComment.CollectCount = field.NewInt32(tableName, "collect_count")
 	_pmsComment.ReadCount = field.NewInt32(tableName, "read_count")
 	_pmsComment.Content = field.NewString(tableName, "content")
 	_pmsComment.Pics = field.NewString(tableName, "pics")
@@ -62,7 +62,7 @@ type pmsComment struct {
 	CreateTime       field.Time
 	ShowStatus       field.Int32
 	ProductAttribute field.String // 购买时的商品属性
-	CollectCouont    field.Int32
+	CollectCount     field.Int32
 	ReadCount        field.Int32
 	Content          field.String
 	Pics             field.String // 上传图片地址，以逗号隔开
@@ -93,7 +93,7 @@ func (p *pmsComment) updateTableName(table string) *pmsComment {
 	p.CreateTime = field.NewTime(table, "create_time")
 	p.ShowStatus = field.NewInt32(table, "show_status")
 	p.ProductAttribute = field.NewString(table, "product_attribute")
-	p.CollectCouont = field.NewInt32(table, "collect_couont")
+	p.CollectCount = field.NewInt32(table, "collect_count")
 	p.ReadCount = field.NewInt32(table, "read_count")
 	p.Content = field.NewString(table, "content")
 	p.Pics = field.NewString(table, "pics")
@@ -135,7 +135,7 @@ func (p *pmsComment) fillFieldMap() {
 	p.fieldMap["create_time"] = p.CreateTime
 	p.fieldMap["show_status"] = p.ShowStatus
 	p.fieldMap["product_attribute"] = p.ProductAttribute
-	p.fieldMap["collect_couont"] = p.CollectCouont
+	p.fieldMap["collect_count"] = p.CollectCount
 	p.fieldMap["read_count"] = p.ReadCount
 	p.fieldMap["content"] = p.Content
 	p.fieldMap["pics"] = p.Pics

@@ -43,11 +43,11 @@ func (l *QueryMemberByIdLogic) QueryMemberById(in *umsclient.MemberByIdReq) (*um
 	resp := &umsclient.MemberListData{
 		Id:                    member.ID,
 		MemberLevelId:         member.MemberLevelID,
-		Username:              member.Username,
+		Username:              member.MemberName,
 		Password:              member.Password,
 		Nickname:              member.Nickname,
 		Phone:                 member.Phone,
-		Status:                member.Status,
+		Status:                member.MemberStatus,
 		CreateTime:            member.CreateTime.Format("2006-01-02 15:04:05"),
 		Icon:                  *member.Icon,
 		Gender:                *member.Gender,
@@ -58,7 +58,7 @@ func (l *QueryMemberByIdLogic) QueryMemberById(in *umsclient.MemberByIdReq) (*um
 		SourceType:            member.SourceType,
 		Integration:           member.Integration,
 		Growth:                member.Growth,
-		LuckeyCount:           member.LuckeyCount,
+		LuckeyCount:           member.LotteryCount,
 		HistoryIntegration:    member.HistoryIntegration,
 	}
 

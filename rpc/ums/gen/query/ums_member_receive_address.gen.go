@@ -29,7 +29,7 @@ func newUmsMemberReceiveAddress(db *gorm.DB, opts ...gen.DOOption) umsMemberRece
 	_umsMemberReceiveAddress.ALL = field.NewAsterisk(tableName)
 	_umsMemberReceiveAddress.ID = field.NewInt64(tableName, "id")
 	_umsMemberReceiveAddress.MemberID = field.NewInt64(tableName, "member_id")
-	_umsMemberReceiveAddress.Name = field.NewString(tableName, "name")
+	_umsMemberReceiveAddress.MemberName = field.NewString(tableName, "member_name")
 	_umsMemberReceiveAddress.PhoneNumber = field.NewString(tableName, "phone_number")
 	_umsMemberReceiveAddress.DefaultStatus = field.NewInt32(tableName, "default_status")
 	_umsMemberReceiveAddress.PostCode = field.NewString(tableName, "post_code")
@@ -37,6 +37,8 @@ func newUmsMemberReceiveAddress(db *gorm.DB, opts ...gen.DOOption) umsMemberRece
 	_umsMemberReceiveAddress.City = field.NewString(tableName, "city")
 	_umsMemberReceiveAddress.Region = field.NewString(tableName, "region")
 	_umsMemberReceiveAddress.DetailAddress = field.NewString(tableName, "detail_address")
+	_umsMemberReceiveAddress.CreateTime = field.NewTime(tableName, "create_time")
+	_umsMemberReceiveAddress.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_umsMemberReceiveAddress.fillFieldMap()
 
@@ -50,7 +52,7 @@ type umsMemberReceiveAddress struct {
 	ALL           field.Asterisk
 	ID            field.Int64
 	MemberID      field.Int64  // 会员id
-	Name          field.String // 收货人名称
+	MemberName    field.String // 收货人名称
 	PhoneNumber   field.String // 收货人电话
 	DefaultStatus field.Int32  // 是否为默认
 	PostCode      field.String // 邮政编码
@@ -58,6 +60,8 @@ type umsMemberReceiveAddress struct {
 	City          field.String // 城市
 	Region        field.String // 区
 	DetailAddress field.String // 详细地址(街道)
+	CreateTime    field.Time   // 创建时间
+	UpdateTime    field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -76,7 +80,7 @@ func (u *umsMemberReceiveAddress) updateTableName(table string) *umsMemberReceiv
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt64(table, "id")
 	u.MemberID = field.NewInt64(table, "member_id")
-	u.Name = field.NewString(table, "name")
+	u.MemberName = field.NewString(table, "member_name")
 	u.PhoneNumber = field.NewString(table, "phone_number")
 	u.DefaultStatus = field.NewInt32(table, "default_status")
 	u.PostCode = field.NewString(table, "post_code")
@@ -84,6 +88,8 @@ func (u *umsMemberReceiveAddress) updateTableName(table string) *umsMemberReceiv
 	u.City = field.NewString(table, "city")
 	u.Region = field.NewString(table, "region")
 	u.DetailAddress = field.NewString(table, "detail_address")
+	u.CreateTime = field.NewTime(table, "create_time")
+	u.UpdateTime = field.NewTime(table, "update_time")
 
 	u.fillFieldMap()
 
@@ -112,10 +118,10 @@ func (u *umsMemberReceiveAddress) GetFieldByName(fieldName string) (field.OrderE
 }
 
 func (u *umsMemberReceiveAddress) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 10)
+	u.fieldMap = make(map[string]field.Expr, 12)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["member_id"] = u.MemberID
-	u.fieldMap["name"] = u.Name
+	u.fieldMap["member_name"] = u.MemberName
 	u.fieldMap["phone_number"] = u.PhoneNumber
 	u.fieldMap["default_status"] = u.DefaultStatus
 	u.fieldMap["post_code"] = u.PostCode
@@ -123,6 +129,8 @@ func (u *umsMemberReceiveAddress) fillFieldMap() {
 	u.fieldMap["city"] = u.City
 	u.fieldMap["region"] = u.Region
 	u.fieldMap["detail_address"] = u.DetailAddress
+	u.fieldMap["create_time"] = u.CreateTime
+	u.fieldMap["update_time"] = u.UpdateTime
 }
 
 func (u umsMemberReceiveAddress) clone(db *gorm.DB) umsMemberReceiveAddress {
