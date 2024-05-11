@@ -58,7 +58,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	}
 	//2.生成下单商品信息
 	var flag = false //用于判断库存
-	var totalAmount float32 = 0
+	var totalAmount int64 = 0
 	orderItemList := make([]*omsclient.OrderItemListData, 0)
 	cartItemIds := make([]int64, 0) //方便提交订单成功,后删除购物车中的商品
 	for _, item := range cartPromotionItemList {
@@ -116,7 +116,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 			//全场通用
 			//(商品价格/可用商品总价)*优惠券面额
 			for _, item := range orderItemList {
-				item.CouponAmount = (item.ProductPrice / totalAmount) * float32(couponData.Amount)
+				item.CouponAmount = (item.ProductPrice / totalAmount) * couponData.Amount
 			}
 		} else if useType == 1 {
 			//指定分类
@@ -125,7 +125,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 				categoryIdList[item.ProductCategoryId] = item.ProductCategoryId
 			}
 			orderItemListByCategoryId := make([]*omsclient.OrderItemListData, 0)
-			var totalAmountByCategoryId float32
+			var totalAmountByCategoryId int64
 			for _, item := range orderItemList {
 				_, ok := categoryIdList[item.ProductCategoryId]
 				if ok {
@@ -134,7 +134,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 				}
 			}
 			for _, item := range orderItemListByCategoryId {
-				item.CouponAmount = (item.ProductPrice / totalAmountByCategoryId) * float32(couponData.Amount)
+				item.CouponAmount = (item.ProductPrice / totalAmountByCategoryId) * couponData.Amount
 			}
 		} else if useType == 2 {
 			//指定商品
@@ -143,7 +143,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 				productIdList[item.ProductId] = item.ProductId
 			}
 			orderItemListByProductId := make([]*omsclient.OrderItemListData, 0)
-			var totalAmountByProductId float32
+			var totalAmountByProductId int64
 			for _, item := range orderItemList {
 				_, ok := productIdList[item.ProductCategoryId]
 				if ok {
@@ -152,7 +152,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 			}
 
 			for _, item := range orderItemListByProductId {
-				item.CouponAmount = (item.ProductPrice / totalAmountByProductId) * float32(couponData.Amount)
+				item.CouponAmount = (item.ProductPrice / totalAmountByProductId) * couponData.Amount
 			}
 		}
 
@@ -175,8 +175,8 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 			return result(1, "未达到最低使用积分门槛"), nil
 		}
 		//1.4是否超过订单抵用最高百分比
-		integrationAmount := float32(req.UseIntegration / consumeSetting.UseUnit)
-		var maxPercent = float32(consumeSetting.MaxPercentPerOrder / 100)
+		integrationAmount := int64(req.UseIntegration / consumeSetting.UseUnit)
+		var maxPercent = int64(consumeSetting.MaxPercentPerOrder / 100)
 		if integrationAmount > maxPercent*totalAmount {
 			return result(1, "超过订单抵用最高百分比"), nil
 		}
@@ -207,22 +207,22 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	}
 	//8.根据商品合计、运费、活动优惠、优惠券、积分计算应付金额
 	//计算订单优惠(促销价、满减、阶梯价)
-	var promotionAmount float32
+	var promotionAmount int64
 	//获取订单促销信息
 	var promotionInfo string
 	//计算订单优惠券抵扣金额
-	var couponAmount float32
+	var couponAmount int64
 	//计算积分抵扣金额
-	var integrationAmount float32
+	var integrationAmount int64
 	//计算该订单赠送的积分
 	var giftIntegration int32
 	//计算赠送成长值
 	var giftGrowth int32
 	for _, item := range orderItemList {
-		promotionAmount = promotionAmount + item.PromotionAmount*float32(item.ProductQuantity)
+		promotionAmount = promotionAmount + item.PromotionAmount*int64(item.ProductQuantity)
 		promotionInfo = promotionInfo + item.PromotionName
-		couponAmount = couponAmount + item.CouponAmount*float32(item.ProductQuantity)
-		integrationAmount = integrationAmount + item.IntegrationAmount*float32(item.ProductQuantity)
+		couponAmount = couponAmount + item.CouponAmount*int64(item.ProductQuantity)
+		integrationAmount = integrationAmount + item.IntegrationAmount*int64(item.ProductQuantity)
 		giftIntegration = giftIntegration + item.GiftIntegration*item.ProductQuantity
 		giftGrowth = giftGrowth + item.GiftGrowth*item.ProductQuantity
 	}

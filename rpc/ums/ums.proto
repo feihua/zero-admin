@@ -322,7 +322,7 @@ message MemberLevelAddReq {
   string    LevelName = 2;
   int32    GrowthPoint = 3;
   int32    DefaultStatus = 4;
-  float  FreeFreightPoint = 5;
+  int64  FreeFreightPoint = 5;
   int32    CommentGrowthPoint = 6;
   int32    IsFreeFreight = 7;
   int32    IsSignIn = 8;
@@ -348,7 +348,7 @@ message MemberLevelListData{
   string    LevelName = 2;
   int32    GrowthPoint = 3;
   int32    DefaultStatus = 4;
-  float  FreeFreightPoint = 5;
+  int64  FreeFreightPoint = 5;
   int32    CommentGrowthPoint = 6;
   int32    IsFreeFreight = 7;
   int32    IsSignIn = 8;
@@ -369,7 +369,7 @@ message MemberLevelUpdateReq {
   string    LevelName = 2;
   int32    GrowthPoint = 3;
   int32    DefaultStatus = 4;
-  float  FreeFreightPoint = 5;
+  int64  FreeFreightPoint = 5;
   int32    CommentGrowthPoint = 6;
   int32    IsFreeFreight = 7;
   int32    IsSignIn = 8;
@@ -651,8 +651,8 @@ message MemberReceiveAddressQueryDetailResp {
 message MemberRuleSettingAddReq {
   int32    ContinueSignDay = 1;
   int32    ContinueSignPoint = 2;
-  float  ConsumePerPoint = 3;
-  float  LowOrderAmount = 4;
+  int64  ConsumePerPoint = 3;
+  int64  LowOrderAmount = 4;
   int32    MaxPointPerOrder = 5;
   int32    RuleType = 6;
   string    CreateBy = 7;
@@ -671,8 +671,8 @@ message MemberRuleSettingListData{
   int64    Id = 1;
   int32    ContinueSignDay = 2;
   int32    ContinueSignPoint = 3;
-  float  ConsumePerPoint = 4;
-  float  LowOrderAmount = 5;
+  int64  ConsumePerPoint = 4;
+  int64  LowOrderAmount = 5;
   int32    MaxPointPerOrder = 6;
   int32    RuleType = 7;
   string    CreateBy = 8;
@@ -690,8 +690,8 @@ message MemberRuleSettingUpdateReq {
   int64    Id = 1;
   int32    ContinueSignDay = 2;
   int32    ContinueSignPoint = 3;
-  float  ConsumePerPoint = 4;
-  float  LowOrderAmount = 5;
+  int64  ConsumePerPoint = 4;
+  int64  LowOrderAmount = 5;
   int32    MaxPointPerOrder = 6;
   int32    RuleType = 7;
   string    UpdateBy = 8;
@@ -719,7 +719,7 @@ service MemberRuleSettingService {
 }
 message MemberStatisticsInfoAddReq {
   int64      MemberId = 2;
-  float    ConsumeAmount = 3;
+  int64    ConsumeAmount = 3;
   int32      OrderCount = 4;
   int32      CouponCount = 5;
   int32      CommentCount = 6;
@@ -747,7 +747,7 @@ message MemberStatisticsInfoListReq {
 message MemberStatisticsInfoListData{
   int64      Id = 1;
   int64      MemberId = 2;
-  float    ConsumeAmount = 3;
+  int64    ConsumeAmount = 3;
   int32      OrderCount = 4;
   int32      CouponCount = 5;
   int32      CommentCount = 6;
@@ -771,7 +771,7 @@ message MemberStatisticsInfoListResp {
 message MemberStatisticsInfoUpdateReq {
   int64      Id = 1;
   int64      MemberId = 2;
-  float    ConsumeAmount = 3;
+  int64    ConsumeAmount = 3;
   int32      OrderCount = 4;
   int32      CouponCount = 5;
   int32      CommentCount = 6;
@@ -810,7 +810,7 @@ service MemberStatisticsInfoService {
 message MemberTagAddReq {
   string    Name = 2;
   int32    FinishOrderCount = 3;
-  float  FinishOrderAmount = 4;
+  int64  FinishOrderAmount = 4;
 }
 
 message MemberTagAddResp {
@@ -826,7 +826,7 @@ message MemberTagListData{
   int64    Id = 1;
   string    Name = 2;
   int32    FinishOrderCount = 3;
-  float  FinishOrderAmount = 4;
+  int64  FinishOrderAmount = 4;
 }
 
 message MemberTagListResp {
@@ -838,7 +838,7 @@ message MemberTagUpdateReq {
   int64    Id = 1;
   string    Name = 2;
   int32    FinishOrderCount = 3;
-  float  FinishOrderAmount = 4;
+  int64  FinishOrderAmount = 4;
 }
 
 message MemberTagUpdateResp {
@@ -934,7 +934,7 @@ message MemberProductCollectionAddReq {
   string ProductName = 6; //商品名称
   string ProductPic = 7; //商品图片
   string ProductSubTitle = 8; //商品标题
-  double ProductPrice = 9; //商品价格
+  int64 ProductPrice = 9; //商品价格
   string CreateTime = 10; //收藏时间
 
 }
@@ -970,7 +970,7 @@ message MemberProductCollectionListData {
   string ProductName = 6; //商品名称
   string ProductPic = 7; //商品图片
   string ProductSubTitle = 8; //商品标题
-  double ProductPrice = 9; //商品价格
+  int64 ProductPrice = 9; //商品价格
   string CreateTime = 10; //收藏时间
 
 }
@@ -997,7 +997,7 @@ message MemberReadHistoryAddReq {
   string ProductName = 6; //商品名称
   string ProductPic = 7; //商品图片
   string ProductSubTitle = 8; //商品标题
-  double ProductPrice = 9; //商品价格
+  int64 ProductPrice = 9; //商品价格
   string CreateTime = 10; //浏览时间
 
 }
@@ -1033,7 +1033,7 @@ message MemberReadHistoryListData {
   string ProductName = 6; //商品名称
   string ProductPic = 7; //商品图片
   string ProductSubTitle = 8; //商品标题
-  double ProductPrice = 9; //商品价格
+  int64 ProductPrice = 9; //商品价格
   string CreateTime = 10; //浏览时间
 
 }

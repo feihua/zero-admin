@@ -6,9 +6,9 @@ import "cart.api"
 import "product.api"
 
 info(
-	title: "zero-web"
-	desc: "pc-web接口"
+    title: "zero-web"
+    desc: "pc-web接口"
 	author: "koobe"
-	email: "1002219331@qq.com"
+    email: "1002219331@qq.com"
 )
 

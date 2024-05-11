@@ -1088,7 +1088,7 @@ func (x *SubjectProductRelationListResp) GetSubjectId() []int64 {
 }
 
 // 商品优选
-type PrefrenceAreaAddReq struct {
+type PreferredAreaAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1101,8 +1101,8 @@ type PrefrenceAreaAddReq struct {
 	ShowStatus int32  `protobuf:"varint,6,opt,name=ShowStatus,proto3" json:"ShowStatus,omitempty"` //
 }
 
-func (x *PrefrenceAreaAddReq) Reset() {
-	*x = PrefrenceAreaAddReq{}
+func (x *PreferredAreaAddReq) Reset() {
+	*x = PreferredAreaAddReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1110,13 +1110,13 @@ func (x *PrefrenceAreaAddReq) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaAddReq) String() string {
+func (x *PreferredAreaAddReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaAddReq) ProtoMessage() {}
+func (*PreferredAreaAddReq) ProtoMessage() {}
 
-func (x *PrefrenceAreaAddReq) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaAddReq) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1128,54 +1128,54 @@ func (x *PrefrenceAreaAddReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaAddReq.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaAddReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaAddReq.ProtoReflect.Descriptor instead.
+func (*PreferredAreaAddReq) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *PrefrenceAreaAddReq) GetId() int64 {
+func (x *PreferredAreaAddReq) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *PrefrenceAreaAddReq) GetName() string {
+func (x *PreferredAreaAddReq) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaAddReq) GetSubTitle() string {
+func (x *PreferredAreaAddReq) GetSubTitle() string {
 	if x != nil {
 		return x.SubTitle
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaAddReq) GetPic() string {
+func (x *PreferredAreaAddReq) GetPic() string {
 	if x != nil {
 		return x.Pic
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaAddReq) GetSort() int32 {
+func (x *PreferredAreaAddReq) GetSort() int32 {
 	if x != nil {
 		return x.Sort
 	}
 	return 0
 }
 
-func (x *PrefrenceAreaAddReq) GetShowStatus() int32 {
+func (x *PreferredAreaAddReq) GetShowStatus() int32 {
 	if x != nil {
 		return x.ShowStatus
 	}
 	return 0
 }
 
-type PrefrenceAreaAddResp struct {
+type PreferredAreaAddResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1183,8 +1183,8 @@ type PrefrenceAreaAddResp struct {
 	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
 }
 
-func (x *PrefrenceAreaAddResp) Reset() {
-	*x = PrefrenceAreaAddResp{}
+func (x *PreferredAreaAddResp) Reset() {
+	*x = PreferredAreaAddResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1192,13 +1192,13 @@ func (x *PrefrenceAreaAddResp) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaAddResp) String() string {
+func (x *PreferredAreaAddResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaAddResp) ProtoMessage() {}
+func (*PreferredAreaAddResp) ProtoMessage() {}
 
-func (x *PrefrenceAreaAddResp) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaAddResp) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1210,19 +1210,19 @@ func (x *PrefrenceAreaAddResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaAddResp.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaAddResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaAddResp.ProtoReflect.Descriptor instead.
+func (*PreferredAreaAddResp) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *PrefrenceAreaAddResp) GetPong() string {
+func (x *PreferredAreaAddResp) GetPong() string {
 	if x != nil {
 		return x.Pong
 	}
 	return ""
 }
 
-type PrefrenceAreaDeleteReq struct {
+type PreferredAreaDeleteReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1230,8 +1230,8 @@ type PrefrenceAreaDeleteReq struct {
 	Ids []int64 `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 }
 
-func (x *PrefrenceAreaDeleteReq) Reset() {
-	*x = PrefrenceAreaDeleteReq{}
+func (x *PreferredAreaDeleteReq) Reset() {
+	*x = PreferredAreaDeleteReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1239,13 +1239,13 @@ func (x *PrefrenceAreaDeleteReq) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaDeleteReq) String() string {
+func (x *PreferredAreaDeleteReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaDeleteReq) ProtoMessage() {}
+func (*PreferredAreaDeleteReq) ProtoMessage() {}
 
-func (x *PrefrenceAreaDeleteReq) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaDeleteReq) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1257,19 +1257,19 @@ func (x *PrefrenceAreaDeleteReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaDeleteReq.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaDeleteReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaDeleteReq.ProtoReflect.Descriptor instead.
+func (*PreferredAreaDeleteReq) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *PrefrenceAreaDeleteReq) GetIds() []int64 {
+func (x *PreferredAreaDeleteReq) GetIds() []int64 {
 	if x != nil {
 		return x.Ids
 	}
 	return nil
 }
 
-type PrefrenceAreaDeleteResp struct {
+type PreferredAreaDeleteResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1277,8 +1277,8 @@ type PrefrenceAreaDeleteResp struct {
 	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
 }
 
-func (x *PrefrenceAreaDeleteResp) Reset() {
-	*x = PrefrenceAreaDeleteResp{}
+func (x *PreferredAreaDeleteResp) Reset() {
+	*x = PreferredAreaDeleteResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1286,13 +1286,13 @@ func (x *PrefrenceAreaDeleteResp) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaDeleteResp) String() string {
+func (x *PreferredAreaDeleteResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaDeleteResp) ProtoMessage() {}
+func (*PreferredAreaDeleteResp) ProtoMessage() {}
 
-func (x *PrefrenceAreaDeleteResp) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaDeleteResp) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1304,19 +1304,19 @@ func (x *PrefrenceAreaDeleteResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaDeleteResp.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaDeleteResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaDeleteResp.ProtoReflect.Descriptor instead.
+func (*PreferredAreaDeleteResp) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *PrefrenceAreaDeleteResp) GetPong() string {
+func (x *PreferredAreaDeleteResp) GetPong() string {
 	if x != nil {
 		return x.Pong
 	}
 	return ""
 }
 
-type PrefrenceAreaUpdateReq struct {
+type PreferredAreaUpdateReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1329,8 +1329,8 @@ type PrefrenceAreaUpdateReq struct {
 	ShowStatus int32  `protobuf:"varint,6,opt,name=ShowStatus,proto3" json:"ShowStatus,omitempty"` //
 }
 
-func (x *PrefrenceAreaUpdateReq) Reset() {
-	*x = PrefrenceAreaUpdateReq{}
+func (x *PreferredAreaUpdateReq) Reset() {
+	*x = PreferredAreaUpdateReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1338,13 +1338,13 @@ func (x *PrefrenceAreaUpdateReq) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaUpdateReq) String() string {
+func (x *PreferredAreaUpdateReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaUpdateReq) ProtoMessage() {}
+func (*PreferredAreaUpdateReq) ProtoMessage() {}
 
-func (x *PrefrenceAreaUpdateReq) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaUpdateReq) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1356,54 +1356,54 @@ func (x *PrefrenceAreaUpdateReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaUpdateReq.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaUpdateReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaUpdateReq.ProtoReflect.Descriptor instead.
+func (*PreferredAreaUpdateReq) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *PrefrenceAreaUpdateReq) GetId() int64 {
+func (x *PreferredAreaUpdateReq) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *PrefrenceAreaUpdateReq) GetName() string {
+func (x *PreferredAreaUpdateReq) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaUpdateReq) GetSubTitle() string {
+func (x *PreferredAreaUpdateReq) GetSubTitle() string {
 	if x != nil {
 		return x.SubTitle
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaUpdateReq) GetPic() string {
+func (x *PreferredAreaUpdateReq) GetPic() string {
 	if x != nil {
 		return x.Pic
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaUpdateReq) GetSort() int32 {
+func (x *PreferredAreaUpdateReq) GetSort() int32 {
 	if x != nil {
 		return x.Sort
 	}
 	return 0
 }
 
-func (x *PrefrenceAreaUpdateReq) GetShowStatus() int32 {
+func (x *PreferredAreaUpdateReq) GetShowStatus() int32 {
 	if x != nil {
 		return x.ShowStatus
 	}
 	return 0
 }
 
-type PrefrenceAreaUpdateResp struct {
+type PreferredAreaUpdateResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1411,8 +1411,8 @@ type PrefrenceAreaUpdateResp struct {
 	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
 }
 
-func (x *PrefrenceAreaUpdateResp) Reset() {
-	*x = PrefrenceAreaUpdateResp{}
+func (x *PreferredAreaUpdateResp) Reset() {
+	*x = PreferredAreaUpdateResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1420,13 +1420,13 @@ func (x *PrefrenceAreaUpdateResp) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaUpdateResp) String() string {
+func (x *PreferredAreaUpdateResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaUpdateResp) ProtoMessage() {}
+func (*PreferredAreaUpdateResp) ProtoMessage() {}
 
-func (x *PrefrenceAreaUpdateResp) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaUpdateResp) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1438,19 +1438,19 @@ func (x *PrefrenceAreaUpdateResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaUpdateResp.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaUpdateResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaUpdateResp.ProtoReflect.Descriptor instead.
+func (*PreferredAreaUpdateResp) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *PrefrenceAreaUpdateResp) GetPong() string {
+func (x *PreferredAreaUpdateResp) GetPong() string {
 	if x != nil {
 		return x.Pong
 	}
 	return ""
 }
 
-type PrefrenceAreaListReq struct {
+type PreferredAreaListReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1462,8 +1462,8 @@ type PrefrenceAreaListReq struct {
 	ShowStatus int32  `protobuf:"varint,5,opt,name=ShowStatus,proto3" json:"ShowStatus,omitempty"` //显示状态：0->不显示；1->显示
 }
 
-func (x *PrefrenceAreaListReq) Reset() {
-	*x = PrefrenceAreaListReq{}
+func (x *PreferredAreaListReq) Reset() {
+	*x = PreferredAreaListReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1471,13 +1471,13 @@ func (x *PrefrenceAreaListReq) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaListReq) String() string {
+func (x *PreferredAreaListReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaListReq) ProtoMessage() {}
+func (*PreferredAreaListReq) ProtoMessage() {}
 
-func (x *PrefrenceAreaListReq) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaListReq) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1489,47 +1489,47 @@ func (x *PrefrenceAreaListReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaListReq.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaListReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaListReq.ProtoReflect.Descriptor instead.
+func (*PreferredAreaListReq) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *PrefrenceAreaListReq) GetCurrent() int64 {
+func (x *PreferredAreaListReq) GetCurrent() int64 {
 	if x != nil {
 		return x.Current
 	}
 	return 0
 }
 
-func (x *PrefrenceAreaListReq) GetPageSize() int64 {
+func (x *PreferredAreaListReq) GetPageSize() int64 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *PrefrenceAreaListReq) GetName() string {
+func (x *PreferredAreaListReq) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaListReq) GetSubTitle() string {
+func (x *PreferredAreaListReq) GetSubTitle() string {
 	if x != nil {
 		return x.SubTitle
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaListReq) GetShowStatus() int32 {
+func (x *PreferredAreaListReq) GetShowStatus() int32 {
 	if x != nil {
 		return x.ShowStatus
 	}
 	return 0
 }
 
-type PrefrenceAreaListData struct {
+type PreferredAreaListData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1542,8 +1542,8 @@ type PrefrenceAreaListData struct {
 	ShowStatus int32  `protobuf:"varint,6,opt,name=ShowStatus,proto3" json:"ShowStatus,omitempty"` //
 }
 
-func (x *PrefrenceAreaListData) Reset() {
-	*x = PrefrenceAreaListData{}
+func (x *PreferredAreaListData) Reset() {
+	*x = PreferredAreaListData{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1551,13 +1551,13 @@ func (x *PrefrenceAreaListData) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaListData) String() string {
+func (x *PreferredAreaListData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaListData) ProtoMessage() {}
+func (*PreferredAreaListData) ProtoMessage() {}
 
-func (x *PrefrenceAreaListData) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaListData) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1569,64 +1569,64 @@ func (x *PrefrenceAreaListData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaListData.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaListData) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaListData.ProtoReflect.Descriptor instead.
+func (*PreferredAreaListData) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *PrefrenceAreaListData) GetId() int64 {
+func (x *PreferredAreaListData) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *PrefrenceAreaListData) GetName() string {
+func (x *PreferredAreaListData) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaListData) GetSubTitle() string {
+func (x *PreferredAreaListData) GetSubTitle() string {
 	if x != nil {
 		return x.SubTitle
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaListData) GetPic() string {
+func (x *PreferredAreaListData) GetPic() string {
 	if x != nil {
 		return x.Pic
 	}
 	return ""
 }
 
-func (x *PrefrenceAreaListData) GetSort() int32 {
+func (x *PreferredAreaListData) GetSort() int32 {
 	if x != nil {
 		return x.Sort
 	}
 	return 0
 }
 
-func (x *PrefrenceAreaListData) GetShowStatus() int32 {
+func (x *PreferredAreaListData) GetShowStatus() int32 {
 	if x != nil {
 		return x.ShowStatus
 	}
 	return 0
 }
 
-type PrefrenceAreaListResp struct {
+type PreferredAreaListResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Total int64                    `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
-	List  []*PrefrenceAreaListData `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
+	List  []*PreferredAreaListData `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
 }
 
-func (x *PrefrenceAreaListResp) Reset() {
-	*x = PrefrenceAreaListResp{}
+func (x *PreferredAreaListResp) Reset() {
+	*x = PreferredAreaListResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1634,13 +1634,13 @@ func (x *PrefrenceAreaListResp) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaListResp) String() string {
+func (x *PreferredAreaListResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaListResp) ProtoMessage() {}
+func (*PreferredAreaListResp) ProtoMessage() {}
 
-func (x *PrefrenceAreaListResp) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaListResp) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1652,19 +1652,19 @@ func (x *PrefrenceAreaListResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaListResp.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaListResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaListResp.ProtoReflect.Descriptor instead.
+func (*PreferredAreaListResp) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *PrefrenceAreaListResp) GetTotal() int64 {
+func (x *PreferredAreaListResp) GetTotal() int64 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-func (x *PrefrenceAreaListResp) GetList() []*PrefrenceAreaListData {
+func (x *PreferredAreaListResp) GetList() []*PreferredAreaListData {
 	if x != nil {
 		return x.List
 	}
@@ -1672,17 +1672,17 @@ func (x *PrefrenceAreaListResp) GetList() []*PrefrenceAreaListData {
 }
 
 // 优选商品关联
-type PrefrenceAreaProductRelationAddReq struct {
+type PreferredAreaProductRelationAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PrefrenceAreaId []int64 `protobuf:"varint,1,rep,packed,name=PrefrenceAreaId,proto3" json:"PrefrenceAreaId,omitempty"` //
+	PreferredAreaId []int64 `protobuf:"varint,1,rep,packed,name=PreferredAreaId,proto3" json:"PreferredAreaId,omitempty"` //
 	ProductId       int64   `protobuf:"varint,2,opt,name=ProductId,proto3" json:"ProductId,omitempty"`                    //
 }
 
-func (x *PrefrenceAreaProductRelationAddReq) Reset() {
-	*x = PrefrenceAreaProductRelationAddReq{}
+func (x *PreferredAreaProductRelationAddReq) Reset() {
+	*x = PreferredAreaProductRelationAddReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1690,13 +1690,13 @@ func (x *PrefrenceAreaProductRelationAddReq) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaProductRelationAddReq) String() string {
+func (x *PreferredAreaProductRelationAddReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaProductRelationAddReq) ProtoMessage() {}
+func (*PreferredAreaProductRelationAddReq) ProtoMessage() {}
 
-func (x *PrefrenceAreaProductRelationAddReq) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaProductRelationAddReq) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1708,26 +1708,26 @@ func (x *PrefrenceAreaProductRelationAddReq) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaProductRelationAddReq.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaProductRelationAddReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaProductRelationAddReq.ProtoReflect.Descriptor instead.
+func (*PreferredAreaProductRelationAddReq) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{23}
 }
 
-func (x *PrefrenceAreaProductRelationAddReq) GetPrefrenceAreaId() []int64 {
+func (x *PreferredAreaProductRelationAddReq) GetPreferredAreaId() []int64 {
 	if x != nil {
-		return x.PrefrenceAreaId
+		return x.PreferredAreaId
 	}
 	return nil
 }
 
-func (x *PrefrenceAreaProductRelationAddReq) GetProductId() int64 {
+func (x *PreferredAreaProductRelationAddReq) GetProductId() int64 {
 	if x != nil {
 		return x.ProductId
 	}
 	return 0
 }
 
-type PrefrenceAreaProductRelationAddResp struct {
+type PreferredAreaProductRelationAddResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1735,8 +1735,8 @@ type PrefrenceAreaProductRelationAddResp struct {
 	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
 }
 
-func (x *PrefrenceAreaProductRelationAddResp) Reset() {
-	*x = PrefrenceAreaProductRelationAddResp{}
+func (x *PreferredAreaProductRelationAddResp) Reset() {
+	*x = PreferredAreaProductRelationAddResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1744,13 +1744,13 @@ func (x *PrefrenceAreaProductRelationAddResp) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaProductRelationAddResp) String() string {
+func (x *PreferredAreaProductRelationAddResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaProductRelationAddResp) ProtoMessage() {}
+func (*PreferredAreaProductRelationAddResp) ProtoMessage() {}
 
-func (x *PrefrenceAreaProductRelationAddResp) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaProductRelationAddResp) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1762,19 +1762,19 @@ func (x *PrefrenceAreaProductRelationAddResp) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaProductRelationAddResp.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaProductRelationAddResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaProductRelationAddResp.ProtoReflect.Descriptor instead.
+func (*PreferredAreaProductRelationAddResp) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *PrefrenceAreaProductRelationAddResp) GetPong() string {
+func (x *PreferredAreaProductRelationAddResp) GetPong() string {
 	if x != nil {
 		return x.Pong
 	}
 	return ""
 }
 
-type PrefrenceAreaProductRelationListReq struct {
+type PreferredAreaProductRelationListReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1782,8 +1782,8 @@ type PrefrenceAreaProductRelationListReq struct {
 	ProductId int64 `protobuf:"varint,1,opt,name=ProductId,proto3" json:"ProductId,omitempty"` //商品id
 }
 
-func (x *PrefrenceAreaProductRelationListReq) Reset() {
-	*x = PrefrenceAreaProductRelationListReq{}
+func (x *PreferredAreaProductRelationListReq) Reset() {
+	*x = PreferredAreaProductRelationListReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1791,13 +1791,13 @@ func (x *PrefrenceAreaProductRelationListReq) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaProductRelationListReq) String() string {
+func (x *PreferredAreaProductRelationListReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaProductRelationListReq) ProtoMessage() {}
+func (*PreferredAreaProductRelationListReq) ProtoMessage() {}
 
-func (x *PrefrenceAreaProductRelationListReq) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaProductRelationListReq) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1809,28 +1809,28 @@ func (x *PrefrenceAreaProductRelationListReq) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaProductRelationListReq.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaProductRelationListReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaProductRelationListReq.ProtoReflect.Descriptor instead.
+func (*PreferredAreaProductRelationListReq) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *PrefrenceAreaProductRelationListReq) GetProductId() int64 {
+func (x *PreferredAreaProductRelationListReq) GetProductId() int64 {
 	if x != nil {
 		return x.ProductId
 	}
 	return 0
 }
 
-type PrefrenceAreaProductRelationListResp struct {
+type PreferredAreaProductRelationListResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PrefrenceAreaId []int64 `protobuf:"varint,1,rep,packed,name=PrefrenceAreaId,proto3" json:"PrefrenceAreaId,omitempty"` //优选id
+	PreferredAreaId []int64 `protobuf:"varint,1,rep,packed,name=PreferredAreaId,proto3" json:"PreferredAreaId,omitempty"` //优选id
 }
 
-func (x *PrefrenceAreaProductRelationListResp) Reset() {
-	*x = PrefrenceAreaProductRelationListResp{}
+func (x *PreferredAreaProductRelationListResp) Reset() {
+	*x = PreferredAreaProductRelationListResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_cms_cms_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1838,13 +1838,13 @@ func (x *PrefrenceAreaProductRelationListResp) Reset() {
 	}
 }
 
-func (x *PrefrenceAreaProductRelationListResp) String() string {
+func (x *PreferredAreaProductRelationListResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrefrenceAreaProductRelationListResp) ProtoMessage() {}
+func (*PreferredAreaProductRelationListResp) ProtoMessage() {}
 
-func (x *PrefrenceAreaProductRelationListResp) ProtoReflect() protoreflect.Message {
+func (x *PreferredAreaProductRelationListResp) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_cms_cms_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1856,14 +1856,14 @@ func (x *PrefrenceAreaProductRelationListResp) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrefrenceAreaProductRelationListResp.ProtoReflect.Descriptor instead.
-func (*PrefrenceAreaProductRelationListResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use PreferredAreaProductRelationListResp.ProtoReflect.Descriptor instead.
+func (*PreferredAreaProductRelationListResp) Descriptor() ([]byte, []int) {
 	return file_rpc_cms_cms_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *PrefrenceAreaProductRelationListResp) GetPrefrenceAreaId() []int64 {
+func (x *PreferredAreaProductRelationListResp) GetPreferredAreaId() []int64 {
 	if x != nil {
-		return x.PrefrenceAreaId
+		return x.PreferredAreaId
 	}
 	return nil
 }
@@ -2015,7 +2015,7 @@ var file_rpc_cms_cms_proto_rawDesc = []byte{
 	0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x1c,
 	0x0a, 0x09, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x03, 0x28,
 	0x03, 0x52, 0x09, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x22, 0x9b, 0x01, 0x0a,
-	0x13, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x41, 0x64,
+	0x13, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x41, 0x64,
 	0x64, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x02, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x53, 0x75, 0x62, 0x54,
@@ -2025,15 +2025,15 @@ var file_rpc_cms_cms_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x53, 0x6f, 0x72, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x53, 0x68,
 	0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a,
 	0x53, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x2a, 0x0a, 0x14, 0x50, 0x72,
-	0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x41, 0x64, 0x64, 0x52, 0x65,
+	0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x41, 0x64, 0x64, 0x52, 0x65,
 	0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x22, 0x2a, 0x0a, 0x16, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65,
-	0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71,
+	0x52, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x22, 0x2a, 0x0a, 0x16, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72,
+	0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71,
 	0x12, 0x10, 0x0a, 0x03, 0x69, 0x64, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x03, 0x52, 0x03, 0x69,
-	0x64, 0x73, 0x22, 0x2d, 0x0a, 0x17, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41,
+	0x64, 0x73, 0x22, 0x2d, 0x0a, 0x17, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41,
 	0x72, 0x65, 0x61, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a,
 	0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x6f, 0x6e,
-	0x67, 0x22, 0x9e, 0x01, 0x0a, 0x16, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41,
+	0x67, 0x22, 0x9e, 0x01, 0x0a, 0x16, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41,
 	0x72, 0x65, 0x61, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02,
 	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04,
 	0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65,
@@ -2043,10 +2043,10 @@ var file_rpc_cms_cms_proto_rawDesc = []byte{
 	0x0a, 0x04, 0x53, 0x6f, 0x72, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x53, 0x6f,
 	0x72, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x53, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
 	0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x53, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74,
-	0x75, 0x73, 0x22, 0x2d, 0x0a, 0x17, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41,
+	0x75, 0x73, 0x22, 0x2d, 0x0a, 0x17, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41,
 	0x72, 0x65, 0x61, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a,
 	0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x6f, 0x6e,
-	0x67, 0x22, 0x9c, 0x01, 0x0a, 0x14, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41,
+	0x67, 0x22, 0x9c, 0x01, 0x0a, 0x14, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41,
 	0x72, 0x65, 0x61, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x75,
 	0x72, 0x72, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x75, 0x72,
 	0x72, 0x65, 0x6e, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65,
@@ -2056,7 +2056,7 @@ var file_rpc_cms_cms_proto_rawDesc = []byte{
 	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x53, 0x75, 0x62, 0x54, 0x69, 0x74, 0x6c, 0x65,
 	0x12, 0x1e, 0x0a, 0x0a, 0x53, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x05,
 	0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x53, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x22, 0x9d, 0x01, 0x0a, 0x15, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72,
+	0x22, 0x9d, 0x01, 0x0a, 0x15, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72,
 	0x65, 0x61, 0x4c, 0x69, 0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x64,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x4e, 0x61,
 	0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a,
@@ -2066,32 +2066,32 @@ var file_rpc_cms_cms_proto_rawDesc = []byte{
 	0x53, 0x6f, 0x72, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x53, 0x6f, 0x72, 0x74,
 	0x12, 0x1e, 0x0a, 0x0a, 0x53, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06,
 	0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x53, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x22, 0x63, 0x0a, 0x15, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65,
+	0x22, 0x63, 0x0a, 0x15, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65,
 	0x61, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74,
 	0x61, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x12,
 	0x34, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x20, 0x2e,
-	0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65,
-	0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x4c, 0x69, 0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52,
-	0x04, 0x6c, 0x69, 0x73, 0x74, 0x22, 0x6c, 0x0a, 0x22, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e,
-	0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c,
+	0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72,
+	0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x4c, 0x69, 0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52,
+	0x04, 0x6c, 0x69, 0x73, 0x74, 0x22, 0x6c, 0x0a, 0x22, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72,
+	0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x12, 0x28, 0x0a, 0x0f, 0x50,
-	0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x49, 0x64, 0x18, 0x01,
-	0x20, 0x03, 0x28, 0x03, 0x52, 0x0f, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41,
+	0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x49, 0x64, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x03, 0x52, 0x0f, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41,
 	0x72, 0x65, 0x61, 0x49, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
 	0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63,
-	0x74, 0x49, 0x64, 0x22, 0x39, 0x0a, 0x23, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65,
+	0x74, 0x49, 0x64, 0x22, 0x39, 0x0a, 0x23, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64,
 	0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61, 0x74,
 	0x69, 0x6f, 0x6e, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f,
 	0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x22, 0x43,
-	0x0a, 0x23, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x50,
+	0x0a, 0x23, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x50,
 	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x69,
 	0x73, 0x74, 0x52, 0x65, 0x71, 0x12, 0x1c, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
 	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63,
-	0x74, 0x49, 0x64, 0x22, 0x50, 0x0a, 0x24, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65,
+	0x74, 0x49, 0x64, 0x22, 0x50, 0x0a, 0x24, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64,
 	0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61, 0x74,
 	0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x28, 0x0a, 0x0f, 0x50,
-	0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x49, 0x64, 0x18, 0x01,
-	0x20, 0x03, 0x28, 0x03, 0x52, 0x0f, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41,
+	0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x49, 0x64, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x03, 0x52, 0x0f, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41,
 	0x72, 0x65, 0x61, 0x49, 0x64, 0x32, 0x8b, 0x03, 0x0a, 0x0e, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63,
 	0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x43, 0x0a, 0x0a, 0x53, 0x75, 0x62, 0x6a,
 	0x65, 0x63, 0x74, 0x41, 0x64, 0x64, 0x12, 0x18, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65,
@@ -2134,48 +2134,48 @@ var file_rpc_cms_cms_proto_rawDesc = []byte{
 	0x29, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x53, 0x75, 0x62, 0x6a,
 	0x65, 0x63, 0x74, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69,
 	0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x22, 0x00, 0x32, 0x87, 0x03, 0x0a,
-	0x14, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x55, 0x0a, 0x10, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e,
-	0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x41, 0x64, 0x64, 0x12, 0x1e, 0x2e, 0x63, 0x6d, 0x73, 0x63,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41,
+	0x14, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x53, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x55, 0x0a, 0x10, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72,
+	0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x41, 0x64, 0x64, 0x12, 0x1e, 0x2e, 0x63, 0x6d, 0x73, 0x63,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41,
 	0x72, 0x65, 0x61, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x1f, 0x2e, 0x63, 0x6d, 0x73, 0x63,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41,
 	0x72, 0x65, 0x61, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x22, 0x00, 0x12, 0x5e, 0x0a, 0x13,
-	0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x44, 0x65, 0x6c,
+	0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x44, 0x65, 0x6c,
 	0x65, 0x74, 0x65, 0x12, 0x21, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e,
-	0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x44, 0x65, 0x6c,
+	0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x44, 0x65, 0x6c,
 	0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65,
-	0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61,
+	0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61,
 	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x22, 0x00, 0x12, 0x5e, 0x0a, 0x13,
-	0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x55, 0x70, 0x64,
+	0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x55, 0x70, 0x64,
 	0x61, 0x74, 0x65, 0x12, 0x21, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e,
-	0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x55, 0x70, 0x64,
+	0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x55, 0x70, 0x64,
 	0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65,
-	0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61,
+	0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61,
 	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x22, 0x00, 0x12, 0x58, 0x0a, 0x11,
-	0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x4c, 0x69, 0x73,
+	0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x4c, 0x69, 0x73,
 	0x74, 0x12, 0x1f, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72,
-	0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x4c, 0x69, 0x73, 0x74, 0x52,
+	0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x4c, 0x69, 0x73, 0x74, 0x52,
 	0x65, 0x71, 0x1a, 0x20, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50,
-	0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x4c, 0x69, 0x73, 0x74,
-	0x52, 0x65, 0x73, 0x70, 0x22, 0x00, 0x32, 0xb2, 0x02, 0x0a, 0x23, 0x50, 0x72, 0x65, 0x66, 0x72,
-	0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
+	0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x4c, 0x69, 0x73, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x22, 0x00, 0x32, 0xb2, 0x02, 0x0a, 0x23, 0x50, 0x72, 0x65, 0x66, 0x65,
+	0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
 	0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x82,
-	0x01, 0x0a, 0x1f, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61,
+	0x01, 0x0a, 0x1f, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61,
 	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41,
 	0x64, 0x64, 0x12, 0x2d, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50,
-	0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64,
+	0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64,
 	0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x64, 0x52, 0x65,
 	0x71, 0x1a, 0x2e, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72,
-	0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75,
+	0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75,
 	0x63, 0x74, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73,
-	0x70, 0x22, 0x00, 0x12, 0x85, 0x01, 0x0a, 0x20, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63,
-	0x65, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61,
+	0x70, 0x22, 0x00, 0x12, 0x85, 0x01, 0x0a, 0x20, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65,
+	0x64, 0x41, 0x72, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x2e, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c,
-	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72,
+	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72,
 	0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f,
 	0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x2f, 0x2e, 0x63, 0x6d, 0x73, 0x63, 0x6c,
-	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x41, 0x72,
+	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65, 0x64, 0x41, 0x72,
 	0x65, 0x61, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f,
 	0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x22, 0x00, 0x42, 0x0d, 0x5a, 0x0b, 0x2e,
 	0x2f, 0x63, 0x6d, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
@@ -2210,23 +2210,23 @@ var file_rpc_cms_cms_proto_goTypes = []interface{}{
 	(*SubjectProductRelationAddResp)(nil),        // 11: cmsclient.SubjectProductRelationAddResp
 	(*SubjectProductRelationListReq)(nil),        // 12: cmsclient.SubjectProductRelationListReq
 	(*SubjectProductRelationListResp)(nil),       // 13: cmsclient.SubjectProductRelationListResp
-	(*PrefrenceAreaAddReq)(nil),                  // 14: cmsclient.PrefrenceAreaAddReq
-	(*PrefrenceAreaAddResp)(nil),                 // 15: cmsclient.PrefrenceAreaAddResp
-	(*PrefrenceAreaDeleteReq)(nil),               // 16: cmsclient.PrefrenceAreaDeleteReq
-	(*PrefrenceAreaDeleteResp)(nil),              // 17: cmsclient.PrefrenceAreaDeleteResp
-	(*PrefrenceAreaUpdateReq)(nil),               // 18: cmsclient.PrefrenceAreaUpdateReq
-	(*PrefrenceAreaUpdateResp)(nil),              // 19: cmsclient.PrefrenceAreaUpdateResp
-	(*PrefrenceAreaListReq)(nil),                 // 20: cmsclient.PrefrenceAreaListReq
-	(*PrefrenceAreaListData)(nil),                // 21: cmsclient.PrefrenceAreaListData
-	(*PrefrenceAreaListResp)(nil),                // 22: cmsclient.PrefrenceAreaListResp
-	(*PrefrenceAreaProductRelationAddReq)(nil),   // 23: cmsclient.PrefrenceAreaProductRelationAddReq
-	(*PrefrenceAreaProductRelationAddResp)(nil),  // 24: cmsclient.PrefrenceAreaProductRelationAddResp
-	(*PrefrenceAreaProductRelationListReq)(nil),  // 25: cmsclient.PrefrenceAreaProductRelationListReq
-	(*PrefrenceAreaProductRelationListResp)(nil), // 26: cmsclient.PrefrenceAreaProductRelationListResp
+	(*PreferredAreaAddReq)(nil),                  // 14: cmsclient.PreferredAreaAddReq
+	(*PreferredAreaAddResp)(nil),                 // 15: cmsclient.PreferredAreaAddResp
+	(*PreferredAreaDeleteReq)(nil),               // 16: cmsclient.PreferredAreaDeleteReq
+	(*PreferredAreaDeleteResp)(nil),              // 17: cmsclient.PreferredAreaDeleteResp
+	(*PreferredAreaUpdateReq)(nil),               // 18: cmsclient.PreferredAreaUpdateReq
+	(*PreferredAreaUpdateResp)(nil),              // 19: cmsclient.PreferredAreaUpdateResp
+	(*PreferredAreaListReq)(nil),                 // 20: cmsclient.PreferredAreaListReq
+	(*PreferredAreaListData)(nil),                // 21: cmsclient.PreferredAreaListData
+	(*PreferredAreaListResp)(nil),                // 22: cmsclient.PreferredAreaListResp
+	(*PreferredAreaProductRelationAddReq)(nil),   // 23: cmsclient.PreferredAreaProductRelationAddReq
+	(*PreferredAreaProductRelationAddResp)(nil),  // 24: cmsclient.PreferredAreaProductRelationAddResp
+	(*PreferredAreaProductRelationListReq)(nil),  // 25: cmsclient.PreferredAreaProductRelationListReq
+	(*PreferredAreaProductRelationListResp)(nil), // 26: cmsclient.PreferredAreaProductRelationListResp
 }
 var file_rpc_cms_cms_proto_depIdxs = []int32{
 	8,  // 0: cmsclient.SubjectListResp.list:type_name -> cmsclient.SubjectListData
-	21, // 1: cmsclient.PrefrenceAreaListResp.list:type_name -> cmsclient.PrefrenceAreaListData
+	21, // 1: cmsclient.PreferredAreaListResp.list:type_name -> cmsclient.PreferredAreaListData
 	0,  // 2: cmsclient.SubjectService.SubjectAdd:input_type -> cmsclient.SubjectAddReq
 	2,  // 3: cmsclient.SubjectService.SubjectDelete:input_type -> cmsclient.SubjectDeleteReq
 	4,  // 4: cmsclient.SubjectService.SubjectUpdate:input_type -> cmsclient.SubjectUpdateReq
@@ -2234,12 +2234,12 @@ var file_rpc_cms_cms_proto_depIdxs = []int32{
 	7,  // 6: cmsclient.SubjectService.SubjectListByIds:input_type -> cmsclient.SubjectListByIdsReq
 	10, // 7: cmsclient.SubjectProductRelationService.SubjectProductRelationAdd:input_type -> cmsclient.SubjectProductRelationAddReq
 	12, // 8: cmsclient.SubjectProductRelationService.SubjectProductRelationList:input_type -> cmsclient.SubjectProductRelationListReq
-	14, // 9: cmsclient.PrefrenceAreaService.PrefrenceAreaAdd:input_type -> cmsclient.PrefrenceAreaAddReq
-	16, // 10: cmsclient.PrefrenceAreaService.PrefrenceAreaDelete:input_type -> cmsclient.PrefrenceAreaDeleteReq
-	18, // 11: cmsclient.PrefrenceAreaService.PrefrenceAreaUpdate:input_type -> cmsclient.PrefrenceAreaUpdateReq
-	20, // 12: cmsclient.PrefrenceAreaService.PrefrenceAreaList:input_type -> cmsclient.PrefrenceAreaListReq
-	23, // 13: cmsclient.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationAdd:input_type -> cmsclient.PrefrenceAreaProductRelationAddReq
-	25, // 14: cmsclient.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationList:input_type -> cmsclient.PrefrenceAreaProductRelationListReq
+	14, // 9: cmsclient.PreferredAreaService.PreferredAreaAdd:input_type -> cmsclient.PreferredAreaAddReq
+	16, // 10: cmsclient.PreferredAreaService.PreferredAreaDelete:input_type -> cmsclient.PreferredAreaDeleteReq
+	18, // 11: cmsclient.PreferredAreaService.PreferredAreaUpdate:input_type -> cmsclient.PreferredAreaUpdateReq
+	20, // 12: cmsclient.PreferredAreaService.PreferredAreaList:input_type -> cmsclient.PreferredAreaListReq
+	23, // 13: cmsclient.PreferredAreaProductRelationService.PreferredAreaProductRelationAdd:input_type -> cmsclient.PreferredAreaProductRelationAddReq
+	25, // 14: cmsclient.PreferredAreaProductRelationService.PreferredAreaProductRelationList:input_type -> cmsclient.PreferredAreaProductRelationListReq
 	1,  // 15: cmsclient.SubjectService.SubjectAdd:output_type -> cmsclient.SubjectAddResp
 	3,  // 16: cmsclient.SubjectService.SubjectDelete:output_type -> cmsclient.SubjectDeleteResp
 	5,  // 17: cmsclient.SubjectService.SubjectUpdate:output_type -> cmsclient.SubjectUpdateResp
@@ -2247,12 +2247,12 @@ var file_rpc_cms_cms_proto_depIdxs = []int32{
 	9,  // 19: cmsclient.SubjectService.SubjectListByIds:output_type -> cmsclient.SubjectListResp
 	11, // 20: cmsclient.SubjectProductRelationService.SubjectProductRelationAdd:output_type -> cmsclient.SubjectProductRelationAddResp
 	13, // 21: cmsclient.SubjectProductRelationService.SubjectProductRelationList:output_type -> cmsclient.SubjectProductRelationListResp
-	15, // 22: cmsclient.PrefrenceAreaService.PrefrenceAreaAdd:output_type -> cmsclient.PrefrenceAreaAddResp
-	17, // 23: cmsclient.PrefrenceAreaService.PrefrenceAreaDelete:output_type -> cmsclient.PrefrenceAreaDeleteResp
-	19, // 24: cmsclient.PrefrenceAreaService.PrefrenceAreaUpdate:output_type -> cmsclient.PrefrenceAreaUpdateResp
-	22, // 25: cmsclient.PrefrenceAreaService.PrefrenceAreaList:output_type -> cmsclient.PrefrenceAreaListResp
-	24, // 26: cmsclient.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationAdd:output_type -> cmsclient.PrefrenceAreaProductRelationAddResp
-	26, // 27: cmsclient.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationList:output_type -> cmsclient.PrefrenceAreaProductRelationListResp
+	15, // 22: cmsclient.PreferredAreaService.PreferredAreaAdd:output_type -> cmsclient.PreferredAreaAddResp
+	17, // 23: cmsclient.PreferredAreaService.PreferredAreaDelete:output_type -> cmsclient.PreferredAreaDeleteResp
+	19, // 24: cmsclient.PreferredAreaService.PreferredAreaUpdate:output_type -> cmsclient.PreferredAreaUpdateResp
+	22, // 25: cmsclient.PreferredAreaService.PreferredAreaList:output_type -> cmsclient.PreferredAreaListResp
+	24, // 26: cmsclient.PreferredAreaProductRelationService.PreferredAreaProductRelationAdd:output_type -> cmsclient.PreferredAreaProductRelationAddResp
+	26, // 27: cmsclient.PreferredAreaProductRelationService.PreferredAreaProductRelationList:output_type -> cmsclient.PreferredAreaProductRelationListResp
 	15, // [15:28] is the sub-list for method output_type
 	2,  // [2:15] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name
@@ -2435,7 +2435,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaAddReq); i {
+			switch v := v.(*PreferredAreaAddReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2447,7 +2447,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaAddResp); i {
+			switch v := v.(*PreferredAreaAddResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2459,7 +2459,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaDeleteReq); i {
+			switch v := v.(*PreferredAreaDeleteReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2471,7 +2471,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaDeleteResp); i {
+			switch v := v.(*PreferredAreaDeleteResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2483,7 +2483,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaUpdateReq); i {
+			switch v := v.(*PreferredAreaUpdateReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2495,7 +2495,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaUpdateResp); i {
+			switch v := v.(*PreferredAreaUpdateResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2507,7 +2507,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaListReq); i {
+			switch v := v.(*PreferredAreaListReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2519,7 +2519,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaListData); i {
+			switch v := v.(*PreferredAreaListData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2531,7 +2531,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaListResp); i {
+			switch v := v.(*PreferredAreaListResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2543,7 +2543,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaProductRelationAddReq); i {
+			switch v := v.(*PreferredAreaProductRelationAddReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2555,7 +2555,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaProductRelationAddResp); i {
+			switch v := v.(*PreferredAreaProductRelationAddResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2567,7 +2567,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaProductRelationListReq); i {
+			switch v := v.(*PreferredAreaProductRelationListReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2579,7 +2579,7 @@ func file_rpc_cms_cms_proto_init() {
 			}
 		}
 		file_rpc_cms_cms_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PrefrenceAreaProductRelationListResp); i {
+			switch v := v.(*PreferredAreaProductRelationListResp); i {
 			case 0:
 				return &v.state
 			case 1:

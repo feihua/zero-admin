@@ -7,7 +7,7 @@ info(
 type (
 	addMemberStatisticsInfoReq {
 		MemberId            int64   `json:"memberId"`
-		ConsumeAmount float32 `json:"consumeAmount"`         // 累计消费金额
+        ConsumeAmount int64 `json:"consumeAmount"`           // 累计消费金额
 		OrderCount int32 `json:"orderCount"`                 // 订单数量
 		CouponCount int32 `json:"couponCount"`               // 优惠券数量
 		CommentCount int32 `json:"commentCount"`             // 评价数
@@ -33,7 +33,7 @@ type (
 	ListtMemberStatisticsInfoData {
 		Id                  int64   `json:"id"`
 		MemberId            int64   `json:"memberId"`
-		ConsumeAmount float32 `json:"consumeAmount"`         // 累计消费金额
+        ConsumeAmount int64 `json:"consumeAmount"`           // 累计消费金额
 		OrderCount int32 `json:"orderCount"`                 // 订单数量
 		CouponCount int32 `json:"couponCount"`               // 优惠券数量
 		CommentCount int32 `json:"commentCount"`             // 评价数
@@ -60,7 +60,7 @@ type (
 	UpdateMemberStatisticsInfoReq {
 		Id                  int64   `json:"id"`
 		MemberId            int64   `json:"memberId"`
-		ConsumeAmount float32 `json:"consumeAmount"`         // 累计消费金额
+        ConsumeAmount int64 `json:"consumeAmount"`           // 累计消费金额
 		OrderCount int32 `json:"orderCount"`                 // 订单数量
 		CouponCount int32 `json:"couponCount"`               // 优惠券数量
 		CommentCount int32 `json:"commentCount"`             // 评价数

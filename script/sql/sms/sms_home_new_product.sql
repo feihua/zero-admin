@@ -5,7 +5,7 @@ create table sms_home_new_product
     product_id       bigint      not null comment '商品id',
     product_name     varchar(64) not null comment '商品名称',
     recommend_status tinyint not null comment '推荐状态：0->不推荐;1->推荐',
-    sort             int(1)      not null comment '排序'
+    sort int not null comment '排序'
 )
     comment '新鲜好物表';
 

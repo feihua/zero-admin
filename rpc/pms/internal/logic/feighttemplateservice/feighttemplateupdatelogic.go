@@ -37,10 +37,10 @@ func (l *FeightTemplateUpdateLogic) FeightTemplateUpdate(in *pmsclient.FeightTem
 		ID:             in.Id,
 		Name:           in.Name,
 		ChargeType:     in.ChargeType,
-		FirstWeight:    float64(in.FirstWeight),
-		FirstFee:       float64(in.FirstFee),
-		ContinueWeight: float64(in.ContinueWeight),
-		ContinmeFee:    float64(in.ContinmeFee),
+		FirstWeight:    in.FirstWeight,
+		FirstFee:       in.FirstFee,
+		ContinueWeight: in.ContinueWeight,
+		ContinueFee:    in.ContinmeFee,
 		Dest:           in.Dest,
 	})
 

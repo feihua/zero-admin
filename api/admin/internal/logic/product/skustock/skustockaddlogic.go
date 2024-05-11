@@ -30,12 +30,12 @@ func (l *SkuStockAddLogic) SkuStockAdd(req types.AddSkuStockReq) (*types.AddSkuS
 	_, err := l.svcCtx.SkuStockService.SkuStockAdd(l.ctx, &pmsclient.SkuStockAddReq{
 		ProductId:      req.ProductId,
 		SkuCode:        req.SkuCode,
-		Price:          float32(req.Price),
+		Price:          req.Price,
 		Stock:          req.Stock,
 		LowStock:       req.LowStock,
 		Pic:            req.Pic,
 		Sale:           req.Sale,
-		PromotionPrice: float32(req.PromotionPrice),
+		PromotionPrice: req.PromotionPrice,
 		LockStock:      req.LockStock,
 		SpData:         req.SpData,
 	})

@@ -17,7 +17,6 @@ import (
 
 var (
 	Q                                = new(Query)
-	CmsSubjectProductRelation        *cmsSubjectProductRelation
 	UmsGrowthChangeHistory           *umsGrowthChangeHistory
 	UmsIntegrationChangeHistory      *umsIntegrationChangeHistory
 	UmsIntegrationConsumeSetting     *umsIntegrationConsumeSetting
@@ -38,7 +37,6 @@ var (
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
-	CmsSubjectProductRelation = &Q.CmsSubjectProductRelation
 	UmsGrowthChangeHistory = &Q.UmsGrowthChangeHistory
 	UmsIntegrationChangeHistory = &Q.UmsIntegrationChangeHistory
 	UmsIntegrationConsumeSetting = &Q.UmsIntegrationConsumeSetting
@@ -60,7 +58,6 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:                               db,
-		CmsSubjectProductRelation:        newCmsSubjectProductRelation(db, opts...),
 		UmsGrowthChangeHistory:           newUmsGrowthChangeHistory(db, opts...),
 		UmsIntegrationChangeHistory:      newUmsIntegrationChangeHistory(db, opts...),
 		UmsIntegrationConsumeSetting:     newUmsIntegrationConsumeSetting(db, opts...),
@@ -83,7 +80,6 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 type Query struct {
 	db *gorm.DB
 
-	CmsSubjectProductRelation        cmsSubjectProductRelation
 	UmsGrowthChangeHistory           umsGrowthChangeHistory
 	UmsIntegrationChangeHistory      umsIntegrationChangeHistory
 	UmsIntegrationConsumeSetting     umsIntegrationConsumeSetting
@@ -107,7 +103,6 @@ func (q *Query) Available() bool { return q.db != nil }
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:                               db,
-		CmsSubjectProductRelation:        q.CmsSubjectProductRelation.clone(db),
 		UmsGrowthChangeHistory:           q.UmsGrowthChangeHistory.clone(db),
 		UmsIntegrationChangeHistory:      q.UmsIntegrationChangeHistory.clone(db),
 		UmsIntegrationConsumeSetting:     q.UmsIntegrationConsumeSetting.clone(db),
@@ -138,7 +133,6 @@ func (q *Query) WriteDB() *Query {
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:                               db,
-		CmsSubjectProductRelation:        q.CmsSubjectProductRelation.replaceDB(db),
 		UmsGrowthChangeHistory:           q.UmsGrowthChangeHistory.replaceDB(db),
 		UmsIntegrationChangeHistory:      q.UmsIntegrationChangeHistory.replaceDB(db),
 		UmsIntegrationConsumeSetting:     q.UmsIntegrationConsumeSetting.replaceDB(db),
@@ -159,7 +153,6 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 }
 
 type queryCtx struct {
-	CmsSubjectProductRelation        ICmsSubjectProductRelationDo
 	UmsGrowthChangeHistory           IUmsGrowthChangeHistoryDo
 	UmsIntegrationChangeHistory      IUmsIntegrationChangeHistoryDo
 	UmsIntegrationConsumeSetting     IUmsIntegrationConsumeSettingDo
@@ -180,7 +173,6 @@ type queryCtx struct {
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		CmsSubjectProductRelation:        q.CmsSubjectProductRelation.WithContext(ctx),
 		UmsGrowthChangeHistory:           q.UmsGrowthChangeHistory.WithContext(ctx),
 		UmsIntegrationChangeHistory:      q.UmsIntegrationChangeHistory.WithContext(ctx),
 		UmsIntegrationConsumeSetting:     q.UmsIntegrationConsumeSetting.WithContext(ctx),

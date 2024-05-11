@@ -10,9 +10,9 @@ message CouponAddReq {
   string Name = 3; //名称
   int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
   int32 Count = 5; //数量
-  double Amount = 6; //金额
+  int64 Amount = 6; //金额
   int32 PerLimit = 7; //每人限领张数
-  double MinPoint = 8; //使用门槛；0表示无门槛
+  int64 MinPoint = 8; //使用门槛；0表示无门槛
   string StartTime = 9; //开始时间
   string EndTime = 10; //结束时间
   int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
@@ -44,9 +44,9 @@ message CouponUpdateReq {
   string Name = 3; //名称
   int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
   int32 Count = 5; //数量
-  double Amount = 6; //金额
+  int64 Amount = 6; //金额
   int32 PerLimit = 7; //每人限领张数
-  double MinPoint = 8; //使用门槛；0表示无门槛
+  int64 MinPoint = 8; //使用门槛；0表示无门槛
   string StartTime = 9; //开始时间
   string EndTime = 10; //结束时间
   int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
@@ -82,9 +82,9 @@ message CouponListData {
   string Name = 3; //名称
   int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
   int32 Count = 5; //数量
-  double Amount = 6; //金额
+  int64 Amount = 6; //金额
   int32 PerLimit = 7; //每人限领张数
-  double MinPoint = 8; //使用门槛；0表示无门槛
+  int64 MinPoint = 8; //使用门槛；0表示无门槛
   string StartTime = 9; //开始时间
   string EndTime = 10; //结束时间
   int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
@@ -113,9 +113,9 @@ message CouponFindByIdResp {
   string Name = 3; //名称
   int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
   int32 Count = 5; //数量
-  double Amount = 6; //金额
+  int64 Amount = 6; //金额
   int32 PerLimit = 7; //每人限领张数
-  double MinPoint = 8; //使用门槛；0表示无门槛
+  int64 MinPoint = 8; //使用门槛；0表示无门槛
   string StartTime = 9; //开始时间
   string EndTime = 10; //结束时间
   int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
@@ -551,7 +551,7 @@ message FlashPromotionProductRelationAddReq {
   int64 FlashPromotionId = 1; //限时购id
   int64 FlashPromotionSessionId = 2; //编号
   int64 ProductId = 3; //商品id
-  double FlashPromotionPrice = 4; //限时购价格
+  int64 FlashPromotionPrice = 4; //限时购价格
   int32 FlashPromotionCount = 5; //限时购数量
   int32 FlashPromotionLimit = 6; //每人限购数量
   int32 Sort = 7; //排序
@@ -575,7 +575,7 @@ message FlashPromotionProductRelationUpdateReq {
   int64 FlashPromotionId = 2; //限时购id
   int64 FlashPromotionSessionId = 3; //编号
   int64 ProductId = 4; //商品id
-  double FlashPromotionPrice = 5; //限时购价格
+  int64 FlashPromotionPrice = 5; //限时购价格
   int32 FlashPromotionCount = 6; //限时购数量
   int32 FlashPromotionLimit = 7; //每人限购数量
   int32 Sort = 8; //排序
@@ -598,7 +598,7 @@ message FlashPromotionProductRelationListData {
   int64 FlashPromotionId = 2; //限时购id
   int64 FlashPromotionSessionId = 3; //编号
   int64 ProductId = 4; //商品id
-  double FlashPromotionPrice = 5; //限时购价格
+  int64 FlashPromotionPrice = 5; //限时购价格
   int32 FlashPromotionCount = 6; //限时购数量
   int32 FlashPromotionLimit = 7; //每人限购数量
   int32 Sort = 8; //排序
@@ -618,7 +618,7 @@ message QueryFlashPromotionByProductResp {
   int64 FlashPromotionId = 2; //限时购id
   int64 FlashPromotionSessionId = 3; //编号
   int64 ProductId = 4; //商品id
-  float FlashPromotionPrice = 5; //限时购价格
+  int64 FlashPromotionPrice = 5; //限时购价格
   int32 FlashPromotionCount = 6; //限时购数量
   int32 FlashPromotionLimit = 7; //每人限购数量
   int32 Sort = 8; //排序

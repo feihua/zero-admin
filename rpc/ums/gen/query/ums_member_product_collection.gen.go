@@ -35,7 +35,7 @@ func newUmsMemberProductCollection(db *gorm.DB, opts ...gen.DOOption) umsMemberP
 	_umsMemberProductCollection.ProductName = field.NewString(tableName, "product_name")
 	_umsMemberProductCollection.ProductPic = field.NewString(tableName, "product_pic")
 	_umsMemberProductCollection.ProductSubTitle = field.NewString(tableName, "product_sub_title")
-	_umsMemberProductCollection.ProductPrice = field.NewFloat64(tableName, "product_price")
+	_umsMemberProductCollection.ProductPrice = field.NewInt64(tableName, "product_price")
 	_umsMemberProductCollection.CreateTime = field.NewTime(tableName, "create_time")
 
 	_umsMemberProductCollection.fillFieldMap()
@@ -49,15 +49,15 @@ type umsMemberProductCollection struct {
 
 	ALL             field.Asterisk
 	ID              field.Int64
-	MemberID        field.Int64   // 会员id
-	MemberNickName  field.String  // 会员姓名
-	MemberIcon      field.String  // 会员头像
-	ProductID       field.Int64   // 商品id
-	ProductName     field.String  // 商品名称
-	ProductPic      field.String  // 商品图片
-	ProductSubTitle field.String  // 商品标题
-	ProductPrice    field.Float64 // 商品价格
-	CreateTime      field.Time    // 收藏时间
+	MemberID        field.Int64  // 会员id
+	MemberNickName  field.String // 会员姓名
+	MemberIcon      field.String // 会员头像
+	ProductID       field.Int64  // 商品id
+	ProductName     field.String // 商品名称
+	ProductPic      field.String // 商品图片
+	ProductSubTitle field.String // 商品标题
+	ProductPrice    field.Int64  // 商品价格
+	CreateTime      field.Time   // 收藏时间
 
 	fieldMap map[string]field.Expr
 }
@@ -82,7 +82,7 @@ func (u *umsMemberProductCollection) updateTableName(table string) *umsMemberPro
 	u.ProductName = field.NewString(table, "product_name")
 	u.ProductPic = field.NewString(table, "product_pic")
 	u.ProductSubTitle = field.NewString(table, "product_sub_title")
-	u.ProductPrice = field.NewFloat64(table, "product_price")
+	u.ProductPrice = field.NewInt64(table, "product_price")
 	u.CreateTime = field.NewTime(table, "create_time")
 
 	u.fillFieldMap()

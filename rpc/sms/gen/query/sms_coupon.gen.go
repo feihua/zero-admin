@@ -32,9 +32,9 @@ func newSmsCoupon(db *gorm.DB, opts ...gen.DOOption) smsCoupon {
 	_smsCoupon.Name = field.NewString(tableName, "name")
 	_smsCoupon.Platform = field.NewInt32(tableName, "platform")
 	_smsCoupon.Count = field.NewInt32(tableName, "count")
-	_smsCoupon.Amount = field.NewFloat64(tableName, "amount")
+	_smsCoupon.Amount = field.NewInt64(tableName, "amount")
 	_smsCoupon.PerLimit = field.NewInt32(tableName, "per_limit")
-	_smsCoupon.MinPoint = field.NewFloat64(tableName, "min_point")
+	_smsCoupon.MinPoint = field.NewInt64(tableName, "min_point")
 	_smsCoupon.StartTime = field.NewTime(tableName, "start_time")
 	_smsCoupon.EndTime = field.NewTime(tableName, "end_time")
 	_smsCoupon.UseType = field.NewInt32(tableName, "use_type")
@@ -57,23 +57,23 @@ type smsCoupon struct {
 
 	ALL          field.Asterisk
 	ID           field.Int64
-	Type         field.Int32   // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         field.String  // 名称
-	Platform     field.Int32   // 使用平台：0->全部；1->移动；2->PC
-	Count        field.Int32   // 数量
-	Amount       field.Float64 // 金额
-	PerLimit     field.Int32   // 每人限领张数
-	MinPoint     field.Float64 // 使用门槛；0表示无门槛
-	StartTime    field.Time    // 开始时间
-	EndTime      field.Time    // 结束时间
-	UseType      field.Int32   // 使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         field.String  // 备注
-	PublishCount field.Int32   // 发行数量
-	UseCount     field.Int32   // 已使用数量
-	ReceiveCount field.Int32   // 领取数量
-	EnableTime   field.Time    // 可以领取的日期
-	Code         field.String  // 优惠码
-	MemberLevel  field.Int32   // 可领取的会员类型：0->无限时
+	Type         field.Int32  // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         field.String // 名称
+	Platform     field.Int32  // 使用平台：0->全部；1->移动；2->PC
+	Count        field.Int32  // 数量
+	Amount       field.Int64  // 金额
+	PerLimit     field.Int32  // 每人限领张数
+	MinPoint     field.Int64  // 使用门槛；0表示无门槛
+	StartTime    field.Time   // 开始时间
+	EndTime      field.Time   // 结束时间
+	UseType      field.Int32  // 使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         field.String // 备注
+	PublishCount field.Int32  // 发行数量
+	UseCount     field.Int32  // 已使用数量
+	ReceiveCount field.Int32  // 领取数量
+	EnableTime   field.Time   // 可以领取的日期
+	Code         field.String // 优惠码
+	MemberLevel  field.Int32  // 可领取的会员类型：0->无限时
 
 	fieldMap map[string]field.Expr
 }
@@ -95,9 +95,9 @@ func (s *smsCoupon) updateTableName(table string) *smsCoupon {
 	s.Name = field.NewString(table, "name")
 	s.Platform = field.NewInt32(table, "platform")
 	s.Count = field.NewInt32(table, "count")
-	s.Amount = field.NewFloat64(table, "amount")
+	s.Amount = field.NewInt64(table, "amount")
 	s.PerLimit = field.NewInt32(table, "per_limit")
-	s.MinPoint = field.NewFloat64(table, "min_point")
+	s.MinPoint = field.NewInt64(table, "min_point")
 	s.StartTime = field.NewTime(table, "start_time")
 	s.EndTime = field.NewTime(table, "end_time")
 	s.UseType = field.NewInt32(table, "use_type")

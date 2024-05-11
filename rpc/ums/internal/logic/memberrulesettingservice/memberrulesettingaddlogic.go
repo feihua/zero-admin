@@ -33,8 +33,8 @@ func (l *MemberRuleSettingAddLogic) MemberRuleSettingAdd(in *umsclient.MemberRul
 	err := query.UmsMemberRuleSetting.WithContext(l.ctx).Create(&model.UmsMemberRuleSetting{
 		ContinueSignDay:   in.ContinueSignDay,
 		ContinueSignPoint: in.ContinueSignPoint,
-		ConsumePerPoint:   float64(in.ConsumePerPoint),
-		LowOrderAmount:    float64(in.LowOrderAmount),
+		ConsumePerPoint:   in.ConsumePerPoint,
+		LowOrderAmount:    in.LowOrderAmount,
 		MaxPointPerOrder:  in.MaxPointPerOrder,
 		RuleType:          in.RuleType,
 		CreateBy:          in.CreateBy,

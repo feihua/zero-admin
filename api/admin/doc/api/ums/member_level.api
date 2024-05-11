@@ -9,7 +9,7 @@ type (
 		Name                  string  `json:"name"`
 		GrowthPoint int32 `json:"growthPoint"`
 		DefaultStatus int32 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
-		FreeFreightPoint float32 `json:"freeFreightPoint"`         // 免运费标准
+        FreeFreightPoint int64 `json:"freeFreightPoint"`           // 免运费标准
 		CommentGrowthPoint int32 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
 		IsFreeFreight int32 `json:"isFreeFreight"`                 // 是否有免邮特权
 		IsSignIn int32 `json:"isSignIn"`                           // 是否有签到特权
@@ -33,7 +33,7 @@ type (
 		Name                  string  `json:"name"`
 		GrowthPoint int32 `json:"growthPoint"`
 		DefaultStatus int32 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
-		FreeFreightPoint float32 `json:"freeFreightPoint"`         // 免运费标准
+        FreeFreightPoint int64 `json:"freeFreightPoint"`           // 免运费标准
 		CommentGrowthPoint int32 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
 		IsFreeFreight int32 `json:"isFreeFreight"`                 // 是否有免邮特权
 		IsSignIn int32 `json:"isSignIn"`                           // 是否有签到特权
@@ -57,7 +57,7 @@ type (
 		Name                  string  `json:"name"`
 		GrowthPoint int32 `json:"growthPoint"`
 		DefaultStatus int32 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
-		FreeFreightPoint float32 `json:"freeFreightPoint"`         // 免运费标准
+        FreeFreightPoint int64 `json:"freeFreightPoint"`           // 免运费标准
 		CommentGrowthPoint int32 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
 		IsFreeFreight int32 `json:"isFreeFreight"`                 // 是否有免邮特权
 		IsSignIn int32 `json:"isSignIn"`                           // 是否有签到特权

@@ -8,11 +8,11 @@ const TableNamePmsMemberPrice = "pms_member_price"
 
 // PmsMemberPrice 商品会员价格表
 type PmsMemberPrice struct {
-	ID              int64   `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ProductID       int64   `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`                 // 商品id
-	MemberLevelID   int64   `gorm:"column:member_level_id;not null;comment:会员等级id" json:"member_level_id"`     // 会员等级id
-	MemberPrice     float64 `gorm:"column:member_price;not null;comment:会员价格" json:"member_price"`             // 会员价格
-	MemberLevelName string  `gorm:"column:member_level_name;not null;comment:会员等级名称" json:"member_level_name"` // 会员等级名称
+	ID              int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	ProductID       int64  `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`                 // 商品id
+	MemberLevelID   int64  `gorm:"column:member_level_id;not null;comment:会员等级id" json:"member_level_id"`     // 会员等级id
+	MemberPrice     int64  `gorm:"column:member_price;not null;comment:会员价格" json:"member_price"`             // 会员价格
+	MemberLevelName string `gorm:"column:member_level_name;not null;comment:会员等级名称" json:"member_level_name"` // 会员等级名称
 }
 
 // TableName PmsMemberPrice's table name

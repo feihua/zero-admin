@@ -4,7 +4,7 @@ create table pms_product_category
         primary key,
     parent_id     bigint       not null comment '上机分类的编号：0表示一级分类',
     name          varchar(64)  not null,
-    level         int(1)       not null comment '分类级别：0->1级；1->2级',
+    level       tinyint not null comment '分类级别：0->1级；1->2级',
     product_count int          not null,
     product_unit  varchar(64)  not null,
     nav_status  tinyint not null comment '是否显示在导航栏：0->不显示；1->显示',
@@ -15,6 +15,7 @@ create table pms_product_category
     description   text         null comment '描述'
 )
     comment '产品分类';
+
 
 INSERT INTO pms_product_category (id, parent_id, name, level, product_count, product_unit, nav_status, show_status, sort, icon, keywords, description) VALUES (1, 0, '服装', 0, 100, '件', 1, 1, 1, 'http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180522/web.png', '服装', '服装分类');
 INSERT INTO pms_product_category (id, parent_id, name, level, product_count, product_unit, nav_status, show_status, sort, icon, keywords, description) VALUES (2, 0, '手机数码', 0, 100, '件', 1, 1, 1, 'http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180522/web.png', '手机数码', '手机数码');

@@ -45,7 +45,7 @@ func (l *MemberLevelListLogic) MemberLevelList(in *umsclient.MemberLevelListReq)
 			LevelName:          level.LevelName,
 			GrowthPoint:        level.GrowthPoint,
 			DefaultStatus:      level.DefaultStatus,
-			FreeFreightPoint:   float32(level.FreeFreightPoint),
+			FreeFreightPoint:   level.FreeFreightPoint,
 			CommentGrowthPoint: level.CommentGrowthPoint,
 			IsFreeFreight:      level.IsFreeFreight,
 			IsSignIn:           level.IsSignIn,

@@ -31,7 +31,7 @@ func newUmsMemberLevel(db *gorm.DB, opts ...gen.DOOption) umsMemberLevel {
 	_umsMemberLevel.LevelName = field.NewString(tableName, "level_name")
 	_umsMemberLevel.GrowthPoint = field.NewInt32(tableName, "growth_point")
 	_umsMemberLevel.DefaultStatus = field.NewInt32(tableName, "default_status")
-	_umsMemberLevel.FreeFreightPoint = field.NewFloat64(tableName, "free_freight_point")
+	_umsMemberLevel.FreeFreightPoint = field.NewInt64(tableName, "free_freight_point")
 	_umsMemberLevel.CommentGrowthPoint = field.NewInt32(tableName, "comment_growth_point")
 	_umsMemberLevel.IsFreeFreight = field.NewInt32(tableName, "is_free_freight")
 	_umsMemberLevel.IsSignIn = field.NewInt32(tableName, "is_sign_in")
@@ -52,18 +52,18 @@ type umsMemberLevel struct {
 
 	ALL                field.Asterisk
 	ID                 field.Int64
-	LevelName          field.String  // 等级名称
-	GrowthPoint        field.Int32   // 成长点
-	DefaultStatus      field.Int32   // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   field.Float64 // 免运费标准
-	CommentGrowthPoint field.Int32   // 每次评价获取的成长值
-	IsFreeFreight      field.Int32   // 是否有免邮特权
-	IsSignIn           field.Int32   // 是否有签到特权
-	IsComment          field.Int32   // 是否有评论获奖励特权
-	IsPromotion        field.Int32   // 是否有专享活动特权
-	IsMemberPrice      field.Int32   // 是否有会员价格特权
-	IsBirthday         field.Int32   // 是否有生日特权
-	Remark             field.String  // 备注
+	LevelName          field.String // 等级名称
+	GrowthPoint        field.Int32  // 成长点
+	DefaultStatus      field.Int32  // 是否为默认等级：0->不是；1->是
+	FreeFreightPoint   field.Int64  // 免运费标准
+	CommentGrowthPoint field.Int32  // 每次评价获取的成长值
+	IsFreeFreight      field.Int32  // 是否有免邮特权
+	IsSignIn           field.Int32  // 是否有签到特权
+	IsComment          field.Int32  // 是否有评论获奖励特权
+	IsPromotion        field.Int32  // 是否有专享活动特权
+	IsMemberPrice      field.Int32  // 是否有会员价格特权
+	IsBirthday         field.Int32  // 是否有生日特权
+	Remark             field.String // 备注
 
 	fieldMap map[string]field.Expr
 }
@@ -84,7 +84,7 @@ func (u *umsMemberLevel) updateTableName(table string) *umsMemberLevel {
 	u.LevelName = field.NewString(table, "level_name")
 	u.GrowthPoint = field.NewInt32(table, "growth_point")
 	u.DefaultStatus = field.NewInt32(table, "default_status")
-	u.FreeFreightPoint = field.NewFloat64(table, "free_freight_point")
+	u.FreeFreightPoint = field.NewInt64(table, "free_freight_point")
 	u.CommentGrowthPoint = field.NewInt32(table, "comment_growth_point")
 	u.IsFreeFreight = field.NewInt32(table, "is_free_freight")
 	u.IsSignIn = field.NewInt32(table, "is_sign_in")

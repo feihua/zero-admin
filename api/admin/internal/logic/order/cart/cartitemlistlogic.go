@@ -46,7 +46,7 @@ func (l *CartItemListLogic) CartItemList(req types.ListCartItemReq) (*types.List
 			ProductSkuId:      item.ProductSkuId,
 			MemberId:          item.MemberId,
 			Quantity:          item.Quantity,
-			Price:             float64(item.Price),
+			Price:             item.Price,
 			ProductPic:        item.ProductPic,
 			ProductName:       item.ProductName,
 			ProductSubTitle:   item.ProductSubTitle,

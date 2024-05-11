@@ -7,7 +7,7 @@ info(
 type (
 	MemberPriceList {
 		MemberLevelID   int64   `json:"memberLevelId"`
-		MemberPrice     float32 `json:"memberPrice"`
+        MemberPrice int64 `json:"memberPrice"`
 		MemberLevelName string  `json:"memberLevelName"`
 	}
 
@@ -17,24 +17,24 @@ type (
 	}
 
 	ProductFullReductionList {
-		FullPrice   float32 `json:"fullPrice"`
-		ReducePrice float32 `json:"reducePrice"`
+        FullPrice int64 `json:"fullPrice"`
+        ReducePrice int64 `json:"reducePrice"`
 	}
 
 	ProductLadderList {
         Count int32 `json:"count"`
-		Discount float32 `json:"discount"`
-		Price    float32 `json:"price"`
+        Discount int64 `json:"discount"`
+        Price int64 `json:"price"`
 	}
 
 	SkuStockList {
 		SkuCode        string  `json:"skuCode"`
-		Price          float32 `json:"price"`
+        Price int64 `json:"price"`
         Stock int32 `json:"stock"`
         LowStock int32 `json:"lowStock"`
 		Pic            string  `json:"pic"`
         Sale int32 `json:"sale"`
-		PromotionPrice float32 `json:"promotionPrice"`
+        PromotionPrice int64 `json:"promotionPrice"`
         LockStock int32 `json:"lockStock"`
 		SPData         string  `json:"spData"`
 	}
@@ -55,18 +55,18 @@ type (
         VerifyStatus int32 `json:"verifyStatus,default=0"`                 // 审核状态：0->未审核；1->审核通过
         Sort int32 `json:"sort"`                                           // 排序
         Sale int32 `json:"sale,default=0"`                                 // 销量
-		Price                      float64 `json:"price"`
-		PromotionPrice             float64 `json:"promotionPrice,optional"` // 促销价格
+        Price int64 `json:"price"`
+        PromotionPrice int64 `json:"promotionPrice,optional"`              // 促销价格
         GiftGrowth int32 `json:"giftGrowth"`              // 赠送的成长值
         GiftPoint int32 `json:"giftPoint"`               // 赠送的积分
         UsePointLimit int32 `json:"usePointLimit"`           // 限制使用的积分数
 		SubTitle                   string  `json:"subTitle"`                // 副标题
 		Description                string  `json:"description"`             // 商品描述
-		OriginalPrice              float64 `json:"originalPrice"`           // 市场价
+        OriginalPrice int64 `json:"originalPrice"`           // 市场价
         Stock int32 `json:"stock"`                   // 库存
         LowStock int32 `json:"lowStock,default=0"`      // 库存预警值
 		Unit                       string  `json:"unit"`                    // 单位
-		Weight                     float64 `json:"weight"`                  // 商品重量，默认为克
+        Weight int64 `json:"weight"`                  // 商品重量，默认为克
         PreviewStatus int32 `json:"previewStatus"`           // 是否为预告商品：0->不是；1->是
 		ServiceIds                 string  `json:"serviceIds"`              // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
 		Keywords                   string  `json:"keywords"`
@@ -122,18 +122,18 @@ type (
         VerifyStatus int32 `json:"verifyStatus"`                          // 审核状态：0->未审核；1->审核通过
         Sort int32 `json:"sort"`                                          // 排序
         Sale int32 `json:"sale"`                                          // 销量
-		Price                            float64 `json:"price"`
-		PromotionPrice                   float64 `json:"promotionPrice"` // 促销价格
+        Price int64 `json:"price"`
+        PromotionPrice int64 `json:"promotionPrice"`                      // 促销价格
         GiftGrowth int32 `json:"giftGrowth"`                              // 赠送的成长值
         GiftPoint int32 `json:"giftPoint"`                                // 赠送的积分
         UsePointLimit int32 `json:"usePointLimit"`                        // 限制使用的积分数
 		SubTitle                         string  `json:"subTitle"`       // 副标题
 		Description                      string  `json:"description"`    // 商品描述
-		OriginalPrice                    float64 `json:"originalPrice"`  // 市场价
+        OriginalPrice int64 `json:"originalPrice"`                        // 市场价
         Stock int32 `json:"stock"`                                        // 库存
         LowStock int32 `json:"lowStock"`                                  // 库存预警值
 		Unit                             string  `json:"unit"`           // 单位
-		Weight                           float64 `json:"weight"`         // 商品重量，默认为克
+        Weight int64 `json:"weight"`                                      // 商品重量，默认为克
         PreviewStatus int32 `json:"previewStatus"`                        // 是否为预告商品：0->不是；1->是
 		ServiceIds                       string  `json:"serviceIds"`     // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
 		Keywords                         string  `json:"keywords"`
@@ -178,18 +178,18 @@ type (
         VerifyStatus int32 `json:"verifyStatus,default=0"`                 // 审核状态：0->未审核；1->审核通过
         Sort int32 `json:"sort"`                                           // 排序
         Sale int32 `json:"sale,default=0"`                                 // 销量
-		Price                      float64 `json:"price"`
-		PromotionPrice             float64 `json:"promotionPrice,optional"` // 促销价格
+        Price int64 `json:"price"`
+        PromotionPrice int64 `json:"promotionPrice,optional"`              // 促销价格
         GiftGrowth int32 `json:"giftGrowth"`              // 赠送的成长值
         GiftPoint int32 `json:"giftPoint"`               // 赠送的积分
         UsePointLimit int32 `json:"usePointLimit"`           // 限制使用的积分数
 		SubTitle                   string  `json:"subTitle"`                // 副标题
 		Description                string  `json:"description"`             // 商品描述
-		OriginalPrice              float64 `json:"originalPrice"`           // 市场价
+        OriginalPrice int64 `json:"originalPrice"`           // 市场价
         Stock int32 `json:"stock"`                   // 库存
         LowStock int32 `json:"lowStock,default=0"`      // 库存预警值
 		Unit                       string  `json:"unit"`                    // 单位
-		Weight                     float64 `json:"weight"`                  // 商品重量，默认为克
+        Weight int64 `json:"weight"`                  // 商品重量，默认为克
         PreviewStatus int32 `json:"previewStatus"`           // 是否为预告商品：0->不是；1->是
 		ServiceIds                 string  `json:"serviceIds"`              // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
 		Keywords                   string  `json:"keywords"`

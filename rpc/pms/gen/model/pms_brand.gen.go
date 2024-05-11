@@ -4,21 +4,29 @@
 
 package model
 
+import (
+	"time"
+)
+
 const TableNamePmsBrand = "pms_brand"
 
 // PmsBrand 品牌表
 type PmsBrand struct {
-	ID                  int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Name                string `gorm:"column:name;not null;comment:品牌名称" json:"name"`                                     // 品牌名称
-	FirstLetter         string `gorm:"column:first_letter;not null;comment:首字母" json:"first_letter"`                      // 首字母
-	Sort                int32  `gorm:"column:sort;not null;comment:排序" json:"sort"`                                       // 排序
-	FactoryStatus       int32  `gorm:"column:factory_status;not null;comment:是否为品牌制造商：0->不是；1->是" json:"factory_status"`  // 是否为品牌制造商：0->不是；1->是
-	ShowStatus          int32  `gorm:"column:show_status;not null;comment:订单编号" json:"show_status"`                       // 订单编号
-	ProductCount        int32  `gorm:"column:product_count;not null;comment:产品数量" json:"product_count"`                   // 产品数量
-	ProductCommentCount int32  `gorm:"column:product_comment_count;not null;comment:产品评论数量" json:"product_comment_count"` // 产品评论数量
-	Logo                string `gorm:"column:logo;not null;comment:品牌logo" json:"logo"`                                   // 品牌logo
-	BigPic              string `gorm:"column:big_pic;not null;comment:专区大图" json:"big_pic"`                               // 专区大图
-	BrandStory          string `gorm:"column:brand_story;not null;comment:品牌故事" json:"brand_story"`                       // 品牌故事
+	ID                  int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	Name                string     `gorm:"column:name;not null;comment:品牌名称" json:"name"`                                         // 品牌名称
+	FirstLetter         string     `gorm:"column:first_letter;not null;comment:首字母" json:"first_letter"`                          // 首字母
+	Sort                int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
+	FactoryStatus       int32      `gorm:"column:factory_status;not null;comment:是否为品牌制造商：0->不是；1->是" json:"factory_status"`      // 是否为品牌制造商：0->不是；1->是
+	ShowStatus          int32      `gorm:"column:show_status;not null;comment:订单编号" json:"show_status"`                           // 订单编号
+	ProductCount        int32      `gorm:"column:product_count;not null;comment:产品数量" json:"product_count"`                       // 产品数量
+	ProductCommentCount int32      `gorm:"column:product_comment_count;not null;comment:产品评论数量" json:"product_comment_count"`     // 产品评论数量
+	Logo                string     `gorm:"column:logo;not null;comment:品牌logo" json:"logo"`                                       // 品牌logo
+	BigPic              string     `gorm:"column:big_pic;not null;comment:专区大图" json:"big_pic"`                                   // 专区大图
+	BrandStory          string     `gorm:"column:brand_story;not null;comment:品牌故事" json:"brand_story"`                           // 品牌故事
+	CreateBy            string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
+	CreateTime          time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateBy            *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                         // 更新者
+	UpdateTime          *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 
 // TableName PmsBrand's table name

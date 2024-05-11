@@ -31,13 +31,13 @@ type OrderAddReq struct {
 	OrderSn               string               `protobuf:"bytes,4,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
 	CreateTime            string               `protobuf:"bytes,5,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`
 	MemberUsername        string               `protobuf:"bytes,6,opt,name=MemberUsername,proto3" json:"MemberUsername,omitempty"`
-	TotalAmount           float32              `protobuf:"fixed32,7,opt,name=TotalAmount,proto3" json:"TotalAmount,omitempty"`
-	PayAmount             float32              `protobuf:"fixed32,8,opt,name=PayAmount,proto3" json:"PayAmount,omitempty"`
-	FreightAmount         float32              `protobuf:"fixed32,9,opt,name=FreightAmount,proto3" json:"FreightAmount,omitempty"`
-	PromotionAmount       float32              `protobuf:"fixed32,10,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
-	IntegrationAmount     float32              `protobuf:"fixed32,11,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
-	CouponAmount          float32              `protobuf:"fixed32,12,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
-	DiscountAmount        float32              `protobuf:"fixed32,13,opt,name=DiscountAmount,proto3" json:"DiscountAmount,omitempty"`
+	TotalAmount           int64                `protobuf:"varint,7,opt,name=TotalAmount,proto3" json:"TotalAmount,omitempty"`
+	PayAmount             int64                `protobuf:"varint,8,opt,name=PayAmount,proto3" json:"PayAmount,omitempty"`
+	FreightAmount         int64                `protobuf:"varint,9,opt,name=FreightAmount,proto3" json:"FreightAmount,omitempty"`
+	PromotionAmount       int64                `protobuf:"varint,10,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
+	IntegrationAmount     int64                `protobuf:"varint,11,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
+	CouponAmount          int64                `protobuf:"varint,12,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
+	DiscountAmount        int64                `protobuf:"varint,13,opt,name=DiscountAmount,proto3" json:"DiscountAmount,omitempty"`
 	PayType               int32                `protobuf:"varint,14,opt,name=PayType,proto3" json:"PayType,omitempty"`
 	SourceType            int32                `protobuf:"varint,15,opt,name=SourceType,proto3" json:"SourceType,omitempty"`
 	Status                int32                `protobuf:"varint,16,opt,name=Status,proto3" json:"Status,omitempty"`
@@ -147,49 +147,49 @@ func (x *OrderAddReq) GetMemberUsername() string {
 	return ""
 }
 
-func (x *OrderAddReq) GetTotalAmount() float32 {
+func (x *OrderAddReq) GetTotalAmount() int64 {
 	if x != nil {
 		return x.TotalAmount
 	}
 	return 0
 }
 
-func (x *OrderAddReq) GetPayAmount() float32 {
+func (x *OrderAddReq) GetPayAmount() int64 {
 	if x != nil {
 		return x.PayAmount
 	}
 	return 0
 }
 
-func (x *OrderAddReq) GetFreightAmount() float32 {
+func (x *OrderAddReq) GetFreightAmount() int64 {
 	if x != nil {
 		return x.FreightAmount
 	}
 	return 0
 }
 
-func (x *OrderAddReq) GetPromotionAmount() float32 {
+func (x *OrderAddReq) GetPromotionAmount() int64 {
 	if x != nil {
 		return x.PromotionAmount
 	}
 	return 0
 }
 
-func (x *OrderAddReq) GetIntegrationAmount() float32 {
+func (x *OrderAddReq) GetIntegrationAmount() int64 {
 	if x != nil {
 		return x.IntegrationAmount
 	}
 	return 0
 }
 
-func (x *OrderAddReq) GetCouponAmount() float32 {
+func (x *OrderAddReq) GetCouponAmount() int64 {
 	if x != nil {
 		return x.CouponAmount
 	}
 	return 0
 }
 
-func (x *OrderAddReq) GetDiscountAmount() float32 {
+func (x *OrderAddReq) GetDiscountAmount() int64 {
 	if x != nil {
 		return x.DiscountAmount
 	}
@@ -596,13 +596,13 @@ type OrderListData struct {
 	OrderSn               string                         `protobuf:"bytes,4,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
 	CreateTime            string                         `protobuf:"bytes,5,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`
 	MemberUsername        string                         `protobuf:"bytes,6,opt,name=MemberUsername,proto3" json:"MemberUsername,omitempty"`
-	TotalAmount           float64                        `protobuf:"fixed64,7,opt,name=TotalAmount,proto3" json:"TotalAmount,omitempty"`
-	PayAmount             float64                        `protobuf:"fixed64,8,opt,name=PayAmount,proto3" json:"PayAmount,omitempty"`
-	FreightAmount         float64                        `protobuf:"fixed64,9,opt,name=FreightAmount,proto3" json:"FreightAmount,omitempty"`
-	PromotionAmount       float64                        `protobuf:"fixed64,10,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
-	IntegrationAmount     float64                        `protobuf:"fixed64,11,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
-	CouponAmount          float64                        `protobuf:"fixed64,12,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
-	DiscountAmount        float64                        `protobuf:"fixed64,13,opt,name=DiscountAmount,proto3" json:"DiscountAmount,omitempty"`
+	TotalAmount           int64                          `protobuf:"varint,7,opt,name=TotalAmount,proto3" json:"TotalAmount,omitempty"`
+	PayAmount             int64                          `protobuf:"varint,8,opt,name=PayAmount,proto3" json:"PayAmount,omitempty"`
+	FreightAmount         int64                          `protobuf:"varint,9,opt,name=FreightAmount,proto3" json:"FreightAmount,omitempty"`
+	PromotionAmount       int64                          `protobuf:"varint,10,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
+	IntegrationAmount     int64                          `protobuf:"varint,11,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
+	CouponAmount          int64                          `protobuf:"varint,12,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
+	DiscountAmount        int64                          `protobuf:"varint,13,opt,name=DiscountAmount,proto3" json:"DiscountAmount,omitempty"`
 	PayType               int32                          `protobuf:"varint,14,opt,name=PayType,proto3" json:"PayType,omitempty"`
 	SourceType            int32                          `protobuf:"varint,15,opt,name=SourceType,proto3" json:"SourceType,omitempty"`
 	Status                int32                          `protobuf:"varint,16,opt,name=Status,proto3" json:"Status,omitempty"`
@@ -712,49 +712,49 @@ func (x *OrderListData) GetMemberUsername() string {
 	return ""
 }
 
-func (x *OrderListData) GetTotalAmount() float64 {
+func (x *OrderListData) GetTotalAmount() int64 {
 	if x != nil {
 		return x.TotalAmount
 	}
 	return 0
 }
 
-func (x *OrderListData) GetPayAmount() float64 {
+func (x *OrderListData) GetPayAmount() int64 {
 	if x != nil {
 		return x.PayAmount
 	}
 	return 0
 }
 
-func (x *OrderListData) GetFreightAmount() float64 {
+func (x *OrderListData) GetFreightAmount() int64 {
 	if x != nil {
 		return x.FreightAmount
 	}
 	return 0
 }
 
-func (x *OrderListData) GetPromotionAmount() float64 {
+func (x *OrderListData) GetPromotionAmount() int64 {
 	if x != nil {
 		return x.PromotionAmount
 	}
 	return 0
 }
 
-func (x *OrderListData) GetIntegrationAmount() float64 {
+func (x *OrderListData) GetIntegrationAmount() int64 {
 	if x != nil {
 		return x.IntegrationAmount
 	}
 	return 0
 }
 
-func (x *OrderListData) GetCouponAmount() float64 {
+func (x *OrderListData) GetCouponAmount() int64 {
 	if x != nil {
 		return x.CouponAmount
 	}
 	return 0
 }
 
-func (x *OrderListData) GetDiscountAmount() float64 {
+func (x *OrderListData) GetDiscountAmount() int64 {
 	if x != nil {
 		return x.DiscountAmount
 	}
@@ -1987,23 +1987,23 @@ type CartItemAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProductId         int64   `protobuf:"varint,2,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
-	ProductSkuId      int64   `protobuf:"varint,3,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
-	MemberId          int64   `protobuf:"varint,4,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
-	Quantity          int32   `protobuf:"varint,5,opt,name=Quantity,proto3" json:"Quantity,omitempty"`
-	Price             float32 `protobuf:"fixed32,6,opt,name=Price,proto3" json:"Price,omitempty"`
-	ProductPic        string  `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
-	ProductName       string  `protobuf:"bytes,8,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
-	ProductSubTitle   string  `protobuf:"bytes,9,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"`
-	ProductSkuCode    string  `protobuf:"bytes,10,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
-	MemberNickname    string  `protobuf:"bytes,11,opt,name=MemberNickname,proto3" json:"MemberNickname,omitempty"`
-	CreateDate        string  `protobuf:"bytes,12,opt,name=CreateDate,proto3" json:"CreateDate,omitempty"`
-	ModifyDate        string  `protobuf:"bytes,13,opt,name=ModifyDate,proto3" json:"ModifyDate,omitempty"`
-	DeleteStatus      int32   `protobuf:"varint,14,opt,name=DeleteStatus,proto3" json:"DeleteStatus,omitempty"`
-	ProductCategoryId int64   `protobuf:"varint,15,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
-	ProductBrand      string  `protobuf:"bytes,16,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
-	ProductSn         string  `protobuf:"bytes,17,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
-	ProductAttr       string  `protobuf:"bytes,18,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
+	ProductId         int64  `protobuf:"varint,2,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
+	ProductSkuId      int64  `protobuf:"varint,3,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
+	MemberId          int64  `protobuf:"varint,4,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
+	Quantity          int32  `protobuf:"varint,5,opt,name=Quantity,proto3" json:"Quantity,omitempty"`
+	Price             int64  `protobuf:"varint,6,opt,name=Price,proto3" json:"Price,omitempty"`
+	ProductPic        string `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
+	ProductName       string `protobuf:"bytes,8,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
+	ProductSubTitle   string `protobuf:"bytes,9,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"`
+	ProductSkuCode    string `protobuf:"bytes,10,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
+	MemberNickname    string `protobuf:"bytes,11,opt,name=MemberNickname,proto3" json:"MemberNickname,omitempty"`
+	CreateDate        string `protobuf:"bytes,12,opt,name=CreateDate,proto3" json:"CreateDate,omitempty"`
+	ModifyDate        string `protobuf:"bytes,13,opt,name=ModifyDate,proto3" json:"ModifyDate,omitempty"`
+	DeleteStatus      int32  `protobuf:"varint,14,opt,name=DeleteStatus,proto3" json:"DeleteStatus,omitempty"`
+	ProductCategoryId int64  `protobuf:"varint,15,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
+	ProductBrand      string `protobuf:"bytes,16,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
+	ProductSn         string `protobuf:"bytes,17,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
+	ProductAttr       string `protobuf:"bytes,18,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
 }
 
 func (x *CartItemAddReq) Reset() {
@@ -2066,7 +2066,7 @@ func (x *CartItemAddReq) GetQuantity() int32 {
 	return 0
 }
 
-func (x *CartItemAddReq) GetPrice() float32 {
+func (x *CartItemAddReq) GetPrice() int64 {
 	if x != nil {
 		return x.Price
 	}
@@ -2256,24 +2256,24 @@ type CartItemListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	ProductId         int64   `protobuf:"varint,2,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
-	ProductSkuId      int64   `protobuf:"varint,3,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
-	MemberId          int64   `protobuf:"varint,4,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
-	Quantity          int32   `protobuf:"varint,5,opt,name=Quantity,proto3" json:"Quantity,omitempty"`
-	Price             float32 `protobuf:"fixed32,6,opt,name=Price,proto3" json:"Price,omitempty"`
-	ProductPic        string  `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
-	ProductName       string  `protobuf:"bytes,8,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
-	ProductSubTitle   string  `protobuf:"bytes,9,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"`
-	ProductSkuCode    string  `protobuf:"bytes,10,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
-	MemberNickname    string  `protobuf:"bytes,11,opt,name=MemberNickname,proto3" json:"MemberNickname,omitempty"`
-	CreateDate        string  `protobuf:"bytes,12,opt,name=CreateDate,proto3" json:"CreateDate,omitempty"`
-	ModifyDate        string  `protobuf:"bytes,13,opt,name=ModifyDate,proto3" json:"ModifyDate,omitempty"`
-	DeleteStatus      int32   `protobuf:"varint,14,opt,name=DeleteStatus,proto3" json:"DeleteStatus,omitempty"`
-	ProductCategoryId int64   `protobuf:"varint,15,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
-	ProductBrand      string  `protobuf:"bytes,16,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
-	ProductSn         string  `protobuf:"bytes,17,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
-	ProductAttr       string  `protobuf:"bytes,18,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
+	Id                int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	ProductId         int64  `protobuf:"varint,2,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
+	ProductSkuId      int64  `protobuf:"varint,3,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
+	MemberId          int64  `protobuf:"varint,4,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
+	Quantity          int32  `protobuf:"varint,5,opt,name=Quantity,proto3" json:"Quantity,omitempty"`
+	Price             int64  `protobuf:"varint,6,opt,name=Price,proto3" json:"Price,omitempty"`
+	ProductPic        string `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
+	ProductName       string `protobuf:"bytes,8,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
+	ProductSubTitle   string `protobuf:"bytes,9,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"`
+	ProductSkuCode    string `protobuf:"bytes,10,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
+	MemberNickname    string `protobuf:"bytes,11,opt,name=MemberNickname,proto3" json:"MemberNickname,omitempty"`
+	CreateDate        string `protobuf:"bytes,12,opt,name=CreateDate,proto3" json:"CreateDate,omitempty"`
+	ModifyDate        string `protobuf:"bytes,13,opt,name=ModifyDate,proto3" json:"ModifyDate,omitempty"`
+	DeleteStatus      int32  `protobuf:"varint,14,opt,name=DeleteStatus,proto3" json:"DeleteStatus,omitempty"`
+	ProductCategoryId int64  `protobuf:"varint,15,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
+	ProductBrand      string `protobuf:"bytes,16,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
+	ProductSn         string `protobuf:"bytes,17,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
+	ProductAttr       string `protobuf:"bytes,18,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
 }
 
 func (x *CartItemListData) Reset() {
@@ -2343,7 +2343,7 @@ func (x *CartItemListData) GetQuantity() int32 {
 	return 0
 }
 
-func (x *CartItemListData) GetPrice() float32 {
+func (x *CartItemListData) GetPrice() int64 {
 	if x != nil {
 		return x.Price
 	}
@@ -2494,24 +2494,24 @@ type CartItemUpdateReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	ProductId         int64   `protobuf:"varint,2,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
-	ProductSkuId      int64   `protobuf:"varint,3,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
-	MemberId          int64   `protobuf:"varint,4,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
-	Quantity          int32   `protobuf:"varint,5,opt,name=Quantity,proto3" json:"Quantity,omitempty"`
-	Price             float32 `protobuf:"fixed32,6,opt,name=Price,proto3" json:"Price,omitempty"`
-	ProductPic        string  `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
-	ProductName       string  `protobuf:"bytes,8,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
-	ProductSubTitle   string  `protobuf:"bytes,9,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"`
-	ProductSkuCode    string  `protobuf:"bytes,10,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
-	MemberNickname    string  `protobuf:"bytes,11,opt,name=MemberNickname,proto3" json:"MemberNickname,omitempty"`
-	CreateDate        string  `protobuf:"bytes,12,opt,name=CreateDate,proto3" json:"CreateDate,omitempty"`
-	ModifyDate        string  `protobuf:"bytes,13,opt,name=ModifyDate,proto3" json:"ModifyDate,omitempty"`
-	DeleteStatus      int32   `protobuf:"varint,14,opt,name=DeleteStatus,proto3" json:"DeleteStatus,omitempty"`
-	ProductCategoryId int64   `protobuf:"varint,15,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
-	ProductBrand      string  `protobuf:"bytes,16,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
-	ProductSn         string  `protobuf:"bytes,17,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
-	ProductAttr       string  `protobuf:"bytes,18,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
+	Id                int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	ProductId         int64  `protobuf:"varint,2,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
+	ProductSkuId      int64  `protobuf:"varint,3,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
+	MemberId          int64  `protobuf:"varint,4,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
+	Quantity          int32  `protobuf:"varint,5,opt,name=Quantity,proto3" json:"Quantity,omitempty"`
+	Price             int64  `protobuf:"varint,6,opt,name=Price,proto3" json:"Price,omitempty"`
+	ProductPic        string `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
+	ProductName       string `protobuf:"bytes,8,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
+	ProductSubTitle   string `protobuf:"bytes,9,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"`
+	ProductSkuCode    string `protobuf:"bytes,10,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
+	MemberNickname    string `protobuf:"bytes,11,opt,name=MemberNickname,proto3" json:"MemberNickname,omitempty"`
+	CreateDate        string `protobuf:"bytes,12,opt,name=CreateDate,proto3" json:"CreateDate,omitempty"`
+	ModifyDate        string `protobuf:"bytes,13,opt,name=ModifyDate,proto3" json:"ModifyDate,omitempty"`
+	DeleteStatus      int32  `protobuf:"varint,14,opt,name=DeleteStatus,proto3" json:"DeleteStatus,omitempty"`
+	ProductCategoryId int64  `protobuf:"varint,15,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
+	ProductBrand      string `protobuf:"bytes,16,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
+	ProductSn         string `protobuf:"bytes,17,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
+	ProductAttr       string `protobuf:"bytes,18,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
 }
 
 func (x *CartItemUpdateReq) Reset() {
@@ -2581,7 +2581,7 @@ func (x *CartItemUpdateReq) GetQuantity() int32 {
 	return 0
 }
 
-func (x *CartItemUpdateReq) GetPrice() float32 {
+func (x *CartItemUpdateReq) GetPrice() int64 {
 	if x != nil {
 		return x.Price
 	}
@@ -3567,26 +3567,26 @@ type OrderItemAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderId           int64   `protobuf:"varint,2,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
-	OrderSn           string  `protobuf:"bytes,3,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
-	ProductId         int64   `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
-	ProductPic        string  `protobuf:"bytes,5,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
-	ProductName       string  `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
-	ProductBrand      string  `protobuf:"bytes,7,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
-	ProductSn         string  `protobuf:"bytes,8,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
-	ProductPrice      float32 `protobuf:"fixed32,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
-	ProductQuantity   int32   `protobuf:"varint,10,opt,name=ProductQuantity,proto3" json:"ProductQuantity,omitempty"`
-	ProductSkuId      int64   `protobuf:"varint,11,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
-	ProductSkuCode    string  `protobuf:"bytes,12,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
-	ProductCategoryId int64   `protobuf:"varint,13,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
-	PromotionName     string  `protobuf:"bytes,14,opt,name=PromotionName,proto3" json:"PromotionName,omitempty"`
-	PromotionAmount   float32 `protobuf:"fixed32,15,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
-	CouponAmount      float32 `protobuf:"fixed32,17,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
-	IntegrationAmount float32 `protobuf:"fixed32,18,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
-	RealAmount        float32 `protobuf:"fixed32,19,opt,name=RealAmount,proto3" json:"RealAmount,omitempty"`
-	GiftIntegration   int32   `protobuf:"varint,20,opt,name=GiftIntegration,proto3" json:"GiftIntegration,omitempty"`
-	GiftGrowth        int32   `protobuf:"varint,21,opt,name=GiftGrowth,proto3" json:"GiftGrowth,omitempty"`
-	ProductAttr       string  `protobuf:"bytes,22,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
+	OrderId           int64  `protobuf:"varint,2,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
+	OrderSn           string `protobuf:"bytes,3,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
+	ProductId         int64  `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
+	ProductPic        string `protobuf:"bytes,5,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
+	ProductName       string `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
+	ProductBrand      string `protobuf:"bytes,7,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
+	ProductSn         string `protobuf:"bytes,8,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
+	ProductPrice      int64  `protobuf:"varint,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
+	ProductQuantity   int32  `protobuf:"varint,10,opt,name=ProductQuantity,proto3" json:"ProductQuantity,omitempty"`
+	ProductSkuId      int64  `protobuf:"varint,11,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
+	ProductSkuCode    string `protobuf:"bytes,12,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
+	ProductCategoryId int64  `protobuf:"varint,13,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
+	PromotionName     string `protobuf:"bytes,14,opt,name=PromotionName,proto3" json:"PromotionName,omitempty"`
+	PromotionAmount   int64  `protobuf:"varint,15,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
+	CouponAmount      int64  `protobuf:"varint,17,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
+	IntegrationAmount int64  `protobuf:"varint,18,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
+	RealAmount        int64  `protobuf:"varint,19,opt,name=RealAmount,proto3" json:"RealAmount,omitempty"`
+	GiftIntegration   int32  `protobuf:"varint,20,opt,name=GiftIntegration,proto3" json:"GiftIntegration,omitempty"`
+	GiftGrowth        int32  `protobuf:"varint,21,opt,name=GiftGrowth,proto3" json:"GiftGrowth,omitempty"`
+	ProductAttr       string `protobuf:"bytes,22,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
 }
 
 func (x *OrderItemAddReq) Reset() {
@@ -3670,7 +3670,7 @@ func (x *OrderItemAddReq) GetProductSn() string {
 	return ""
 }
 
-func (x *OrderItemAddReq) GetProductPrice() float32 {
+func (x *OrderItemAddReq) GetProductPrice() int64 {
 	if x != nil {
 		return x.ProductPrice
 	}
@@ -3712,28 +3712,28 @@ func (x *OrderItemAddReq) GetPromotionName() string {
 	return ""
 }
 
-func (x *OrderItemAddReq) GetPromotionAmount() float32 {
+func (x *OrderItemAddReq) GetPromotionAmount() int64 {
 	if x != nil {
 		return x.PromotionAmount
 	}
 	return 0
 }
 
-func (x *OrderItemAddReq) GetCouponAmount() float32 {
+func (x *OrderItemAddReq) GetCouponAmount() int64 {
 	if x != nil {
 		return x.CouponAmount
 	}
 	return 0
 }
 
-func (x *OrderItemAddReq) GetIntegrationAmount() float32 {
+func (x *OrderItemAddReq) GetIntegrationAmount() int64 {
 	if x != nil {
 		return x.IntegrationAmount
 	}
 	return 0
 }
 
-func (x *OrderItemAddReq) GetRealAmount() float32 {
+func (x *OrderItemAddReq) GetRealAmount() int64 {
 	if x != nil {
 		return x.RealAmount
 	}
@@ -3868,27 +3868,27 @@ type OrderItemListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	OrderId           int64   `protobuf:"varint,2,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
-	OrderSn           string  `protobuf:"bytes,3,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
-	ProductId         int64   `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
-	ProductPic        string  `protobuf:"bytes,5,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
-	ProductName       string  `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
-	ProductBrand      string  `protobuf:"bytes,7,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
-	ProductSn         string  `protobuf:"bytes,8,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
-	ProductPrice      float32 `protobuf:"fixed32,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
-	ProductQuantity   int32   `protobuf:"varint,10,opt,name=ProductQuantity,proto3" json:"ProductQuantity,omitempty"`
-	ProductSkuId      int64   `protobuf:"varint,11,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
-	ProductSkuCode    string  `protobuf:"bytes,12,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
-	ProductCategoryId int64   `protobuf:"varint,13,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
-	PromotionName     string  `protobuf:"bytes,14,opt,name=PromotionName,proto3" json:"PromotionName,omitempty"`
-	PromotionAmount   float32 `protobuf:"fixed32,15,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
-	CouponAmount      float32 `protobuf:"fixed32,17,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
-	IntegrationAmount float32 `protobuf:"fixed32,18,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
-	RealAmount        float32 `protobuf:"fixed32,19,opt,name=RealAmount,proto3" json:"RealAmount,omitempty"`
-	GiftIntegration   int32   `protobuf:"varint,20,opt,name=GiftIntegration,proto3" json:"GiftIntegration,omitempty"`
-	GiftGrowth        int32   `protobuf:"varint,21,opt,name=GiftGrowth,proto3" json:"GiftGrowth,omitempty"`
-	ProductAttr       string  `protobuf:"bytes,22,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
+	Id                int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	OrderId           int64  `protobuf:"varint,2,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
+	OrderSn           string `protobuf:"bytes,3,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
+	ProductId         int64  `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
+	ProductPic        string `protobuf:"bytes,5,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
+	ProductName       string `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
+	ProductBrand      string `protobuf:"bytes,7,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
+	ProductSn         string `protobuf:"bytes,8,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
+	ProductPrice      int64  `protobuf:"varint,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
+	ProductQuantity   int32  `protobuf:"varint,10,opt,name=ProductQuantity,proto3" json:"ProductQuantity,omitempty"`
+	ProductSkuId      int64  `protobuf:"varint,11,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
+	ProductSkuCode    string `protobuf:"bytes,12,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
+	ProductCategoryId int64  `protobuf:"varint,13,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
+	PromotionName     string `protobuf:"bytes,14,opt,name=PromotionName,proto3" json:"PromotionName,omitempty"`
+	PromotionAmount   int64  `protobuf:"varint,15,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
+	CouponAmount      int64  `protobuf:"varint,17,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
+	IntegrationAmount int64  `protobuf:"varint,18,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
+	RealAmount        int64  `protobuf:"varint,19,opt,name=RealAmount,proto3" json:"RealAmount,omitempty"`
+	GiftIntegration   int32  `protobuf:"varint,20,opt,name=GiftIntegration,proto3" json:"GiftIntegration,omitempty"`
+	GiftGrowth        int32  `protobuf:"varint,21,opt,name=GiftGrowth,proto3" json:"GiftGrowth,omitempty"`
+	ProductAttr       string `protobuf:"bytes,22,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
 }
 
 func (x *OrderItemListData) Reset() {
@@ -3979,7 +3979,7 @@ func (x *OrderItemListData) GetProductSn() string {
 	return ""
 }
 
-func (x *OrderItemListData) GetProductPrice() float32 {
+func (x *OrderItemListData) GetProductPrice() int64 {
 	if x != nil {
 		return x.ProductPrice
 	}
@@ -4021,28 +4021,28 @@ func (x *OrderItemListData) GetPromotionName() string {
 	return ""
 }
 
-func (x *OrderItemListData) GetPromotionAmount() float32 {
+func (x *OrderItemListData) GetPromotionAmount() int64 {
 	if x != nil {
 		return x.PromotionAmount
 	}
 	return 0
 }
 
-func (x *OrderItemListData) GetCouponAmount() float32 {
+func (x *OrderItemListData) GetCouponAmount() int64 {
 	if x != nil {
 		return x.CouponAmount
 	}
 	return 0
 }
 
-func (x *OrderItemListData) GetIntegrationAmount() float32 {
+func (x *OrderItemListData) GetIntegrationAmount() int64 {
 	if x != nil {
 		return x.IntegrationAmount
 	}
 	return 0
 }
 
-func (x *OrderItemListData) GetRealAmount() float32 {
+func (x *OrderItemListData) GetRealAmount() int64 {
 	if x != nil {
 		return x.RealAmount
 	}
@@ -4130,27 +4130,27 @@ type OrderItemUpdateReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	OrderId           int64   `protobuf:"varint,2,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
-	OrderSn           string  `protobuf:"bytes,3,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
-	ProductId         int64   `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
-	ProductPic        string  `protobuf:"bytes,5,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
-	ProductName       string  `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
-	ProductBrand      string  `protobuf:"bytes,7,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
-	ProductSn         string  `protobuf:"bytes,8,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
-	ProductPrice      float32 `protobuf:"fixed32,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
-	ProductQuantity   int32   `protobuf:"varint,10,opt,name=ProductQuantity,proto3" json:"ProductQuantity,omitempty"`
-	ProductSkuId      int64   `protobuf:"varint,11,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
-	ProductSkuCode    string  `protobuf:"bytes,12,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
-	ProductCategoryId int64   `protobuf:"varint,13,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
-	PromotionName     string  `protobuf:"bytes,14,opt,name=PromotionName,proto3" json:"PromotionName,omitempty"`
-	PromotionAmount   float32 `protobuf:"fixed32,15,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
-	CouponAmount      float32 `protobuf:"fixed32,17,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
-	IntegrationAmount float32 `protobuf:"fixed32,18,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
-	RealAmount        float32 `protobuf:"fixed32,19,opt,name=RealAmount,proto3" json:"RealAmount,omitempty"`
-	GiftIntegration   int32   `protobuf:"varint,20,opt,name=GiftIntegration,proto3" json:"GiftIntegration,omitempty"`
-	GiftGrowth        int32   `protobuf:"varint,21,opt,name=GiftGrowth,proto3" json:"GiftGrowth,omitempty"`
-	ProductAttr       string  `protobuf:"bytes,22,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
+	Id                int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	OrderId           int64  `protobuf:"varint,2,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
+	OrderSn           string `protobuf:"bytes,3,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
+	ProductId         int64  `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
+	ProductPic        string `protobuf:"bytes,5,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
+	ProductName       string `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
+	ProductBrand      string `protobuf:"bytes,7,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
+	ProductSn         string `protobuf:"bytes,8,opt,name=ProductSn,proto3" json:"ProductSn,omitempty"`
+	ProductPrice      int64  `protobuf:"varint,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
+	ProductQuantity   int32  `protobuf:"varint,10,opt,name=ProductQuantity,proto3" json:"ProductQuantity,omitempty"`
+	ProductSkuId      int64  `protobuf:"varint,11,opt,name=ProductSkuId,proto3" json:"ProductSkuId,omitempty"`
+	ProductSkuCode    string `protobuf:"bytes,12,opt,name=ProductSkuCode,proto3" json:"ProductSkuCode,omitempty"`
+	ProductCategoryId int64  `protobuf:"varint,13,opt,name=ProductCategoryId,proto3" json:"ProductCategoryId,omitempty"`
+	PromotionName     string `protobuf:"bytes,14,opt,name=PromotionName,proto3" json:"PromotionName,omitempty"`
+	PromotionAmount   int64  `protobuf:"varint,15,opt,name=PromotionAmount,proto3" json:"PromotionAmount,omitempty"`
+	CouponAmount      int64  `protobuf:"varint,17,opt,name=CouponAmount,proto3" json:"CouponAmount,omitempty"`
+	IntegrationAmount int64  `protobuf:"varint,18,opt,name=IntegrationAmount,proto3" json:"IntegrationAmount,omitempty"`
+	RealAmount        int64  `protobuf:"varint,19,opt,name=RealAmount,proto3" json:"RealAmount,omitempty"`
+	GiftIntegration   int32  `protobuf:"varint,20,opt,name=GiftIntegration,proto3" json:"GiftIntegration,omitempty"`
+	GiftGrowth        int32  `protobuf:"varint,21,opt,name=GiftGrowth,proto3" json:"GiftGrowth,omitempty"`
+	ProductAttr       string `protobuf:"bytes,22,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
 }
 
 func (x *OrderItemUpdateReq) Reset() {
@@ -4241,7 +4241,7 @@ func (x *OrderItemUpdateReq) GetProductSn() string {
 	return ""
 }
 
-func (x *OrderItemUpdateReq) GetProductPrice() float32 {
+func (x *OrderItemUpdateReq) GetProductPrice() int64 {
 	if x != nil {
 		return x.ProductPrice
 	}
@@ -4283,28 +4283,28 @@ func (x *OrderItemUpdateReq) GetPromotionName() string {
 	return ""
 }
 
-func (x *OrderItemUpdateReq) GetPromotionAmount() float32 {
+func (x *OrderItemUpdateReq) GetPromotionAmount() int64 {
 	if x != nil {
 		return x.PromotionAmount
 	}
 	return 0
 }
 
-func (x *OrderItemUpdateReq) GetCouponAmount() float32 {
+func (x *OrderItemUpdateReq) GetCouponAmount() int64 {
 	if x != nil {
 		return x.CouponAmount
 	}
 	return 0
 }
 
-func (x *OrderItemUpdateReq) GetIntegrationAmount() float32 {
+func (x *OrderItemUpdateReq) GetIntegrationAmount() int64 {
 	if x != nil {
 		return x.IntegrationAmount
 	}
 	return 0
 }
 
-func (x *OrderItemUpdateReq) GetRealAmount() float32 {
+func (x *OrderItemUpdateReq) GetRealAmount() int64 {
 	if x != nil {
 		return x.RealAmount
 	}
@@ -5021,23 +5021,23 @@ type OrderReturnApplyAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderId          int64   `protobuf:"varint,1,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
-	ProductId        int64   `protobuf:"varint,2,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
-	OrderSn          string  `protobuf:"bytes,3,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
-	MemberUsername   string  `protobuf:"bytes,4,opt,name=MemberUsername,proto3" json:"MemberUsername,omitempty"`
-	ReturnName       string  `protobuf:"bytes,5,opt,name=ReturnName,proto3" json:"ReturnName,omitempty"`
-	ReturnPhone      string  `protobuf:"bytes,6,opt,name=ReturnPhone,proto3" json:"ReturnPhone,omitempty"`
-	Status           int32   `protobuf:"varint,7,opt,name=Status,proto3" json:"Status,omitempty"`
-	ProductPic       string  `protobuf:"bytes,8,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
-	ProductName      string  `protobuf:"bytes,9,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
-	ProductBrand     string  `protobuf:"bytes,10,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
-	ProductAttr      string  `protobuf:"bytes,11,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
-	ProductCount     int32   `protobuf:"varint,12,opt,name=ProductCount,proto3" json:"ProductCount,omitempty"`
-	ProductPrice     float32 `protobuf:"fixed32,13,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
-	ProductRealPrice float32 `protobuf:"fixed32,14,opt,name=ProductRealPrice,proto3" json:"ProductRealPrice,omitempty"`
-	Reason           string  `protobuf:"bytes,15,opt,name=Reason,proto3" json:"Reason,omitempty"`
-	Description      string  `protobuf:"bytes,16,opt,name=Description,proto3" json:"Description,omitempty"`
-	ProofPics        string  `protobuf:"bytes,17,opt,name=ProofPics,proto3" json:"ProofPics,omitempty"`
+	OrderId          int64  `protobuf:"varint,1,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
+	ProductId        int64  `protobuf:"varint,2,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
+	OrderSn          string `protobuf:"bytes,3,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
+	MemberUsername   string `protobuf:"bytes,4,opt,name=MemberUsername,proto3" json:"MemberUsername,omitempty"`
+	ReturnName       string `protobuf:"bytes,5,opt,name=ReturnName,proto3" json:"ReturnName,omitempty"`
+	ReturnPhone      string `protobuf:"bytes,6,opt,name=ReturnPhone,proto3" json:"ReturnPhone,omitempty"`
+	Status           int32  `protobuf:"varint,7,opt,name=Status,proto3" json:"Status,omitempty"`
+	ProductPic       string `protobuf:"bytes,8,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
+	ProductName      string `protobuf:"bytes,9,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
+	ProductBrand     string `protobuf:"bytes,10,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
+	ProductAttr      string `protobuf:"bytes,11,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
+	ProductCount     int32  `protobuf:"varint,12,opt,name=ProductCount,proto3" json:"ProductCount,omitempty"`
+	ProductPrice     int64  `protobuf:"varint,13,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
+	ProductRealPrice int64  `protobuf:"varint,14,opt,name=ProductRealPrice,proto3" json:"ProductRealPrice,omitempty"`
+	Reason           string `protobuf:"bytes,15,opt,name=Reason,proto3" json:"Reason,omitempty"`
+	Description      string `protobuf:"bytes,16,opt,name=Description,proto3" json:"Description,omitempty"`
+	ProofPics        string `protobuf:"bytes,17,opt,name=ProofPics,proto3" json:"ProofPics,omitempty"`
 }
 
 func (x *OrderReturnApplyAddReq) Reset() {
@@ -5156,14 +5156,14 @@ func (x *OrderReturnApplyAddReq) GetProductCount() int32 {
 	return 0
 }
 
-func (x *OrderReturnApplyAddReq) GetProductPrice() float32 {
+func (x *OrderReturnApplyAddReq) GetProductPrice() int64 {
 	if x != nil {
 		return x.ProductPrice
 	}
 	return 0
 }
 
-func (x *OrderReturnApplyAddReq) GetProductRealPrice() float32 {
+func (x *OrderReturnApplyAddReq) GetProductRealPrice() int64 {
 	if x != nil {
 		return x.ProductRealPrice
 	}
@@ -5338,33 +5338,33 @@ type OrderReturnApplyListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	OrderId          int64   `protobuf:"varint,2,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
-	CompanyAddressId int64   `protobuf:"varint,3,opt,name=CompanyAddressId,proto3" json:"CompanyAddressId,omitempty"`
-	ProductId        int64   `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
-	OrderSn          string  `protobuf:"bytes,5,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
-	CreateTime       string  `protobuf:"bytes,6,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`
-	MemberUsername   string  `protobuf:"bytes,7,opt,name=MemberUsername,proto3" json:"MemberUsername,omitempty"`
-	ReturnAmount     float32 `protobuf:"fixed32,8,opt,name=ReturnAmount,proto3" json:"ReturnAmount,omitempty"`
-	ReturnName       string  `protobuf:"bytes,9,opt,name=ReturnName,proto3" json:"ReturnName,omitempty"`
-	ReturnPhone      string  `protobuf:"bytes,10,opt,name=ReturnPhone,proto3" json:"ReturnPhone,omitempty"`
-	Status           int32   `protobuf:"varint,11,opt,name=Status,proto3" json:"Status,omitempty"`
-	HandleTime       string  `protobuf:"bytes,12,opt,name=HandleTime,proto3" json:"HandleTime,omitempty"`
-	ProductPic       string  `protobuf:"bytes,13,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
-	ProductName      string  `protobuf:"bytes,14,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
-	ProductBrand     string  `protobuf:"bytes,15,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
-	ProductAttr      string  `protobuf:"bytes,16,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
-	ProductCount     int32   `protobuf:"varint,17,opt,name=ProductCount,proto3" json:"ProductCount,omitempty"`
-	ProductPrice     float32 `protobuf:"fixed32,18,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
-	ProductRealPrice float32 `protobuf:"fixed32,19,opt,name=ProductRealPrice,proto3" json:"ProductRealPrice,omitempty"`
-	Reason           string  `protobuf:"bytes,20,opt,name=Reason,proto3" json:"Reason,omitempty"`
-	Description      string  `protobuf:"bytes,21,opt,name=Description,proto3" json:"Description,omitempty"`
-	ProofPics        string  `protobuf:"bytes,22,opt,name=ProofPics,proto3" json:"ProofPics,omitempty"`
-	HandleNote       string  `protobuf:"bytes,23,opt,name=HandleNote,proto3" json:"HandleNote,omitempty"`
-	HandleMan        string  `protobuf:"bytes,24,opt,name=HandleMan,proto3" json:"HandleMan,omitempty"`
-	ReceiveMan       string  `protobuf:"bytes,25,opt,name=ReceiveMan,proto3" json:"ReceiveMan,omitempty"`
-	ReceiveTime      string  `protobuf:"bytes,26,opt,name=ReceiveTime,proto3" json:"ReceiveTime,omitempty"`
-	ReceiveNote      string  `protobuf:"bytes,27,opt,name=ReceiveNote,proto3" json:"ReceiveNote,omitempty"`
+	Id               int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	OrderId          int64  `protobuf:"varint,2,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
+	CompanyAddressId int64  `protobuf:"varint,3,opt,name=CompanyAddressId,proto3" json:"CompanyAddressId,omitempty"`
+	ProductId        int64  `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`
+	OrderSn          string `protobuf:"bytes,5,opt,name=OrderSn,proto3" json:"OrderSn,omitempty"`
+	CreateTime       string `protobuf:"bytes,6,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`
+	MemberUsername   string `protobuf:"bytes,7,opt,name=MemberUsername,proto3" json:"MemberUsername,omitempty"`
+	ReturnAmount     int64  `protobuf:"varint,8,opt,name=ReturnAmount,proto3" json:"ReturnAmount,omitempty"`
+	ReturnName       string `protobuf:"bytes,9,opt,name=ReturnName,proto3" json:"ReturnName,omitempty"`
+	ReturnPhone      string `protobuf:"bytes,10,opt,name=ReturnPhone,proto3" json:"ReturnPhone,omitempty"`
+	Status           int32  `protobuf:"varint,11,opt,name=Status,proto3" json:"Status,omitempty"`
+	HandleTime       string `protobuf:"bytes,12,opt,name=HandleTime,proto3" json:"HandleTime,omitempty"`
+	ProductPic       string `protobuf:"bytes,13,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`
+	ProductName      string `protobuf:"bytes,14,opt,name=ProductName,proto3" json:"ProductName,omitempty"`
+	ProductBrand     string `protobuf:"bytes,15,opt,name=ProductBrand,proto3" json:"ProductBrand,omitempty"`
+	ProductAttr      string `protobuf:"bytes,16,opt,name=ProductAttr,proto3" json:"ProductAttr,omitempty"`
+	ProductCount     int32  `protobuf:"varint,17,opt,name=ProductCount,proto3" json:"ProductCount,omitempty"`
+	ProductPrice     int64  `protobuf:"varint,18,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`
+	ProductRealPrice int64  `protobuf:"varint,19,opt,name=ProductRealPrice,proto3" json:"ProductRealPrice,omitempty"`
+	Reason           string `protobuf:"bytes,20,opt,name=Reason,proto3" json:"Reason,omitempty"`
+	Description      string `protobuf:"bytes,21,opt,name=Description,proto3" json:"Description,omitempty"`
+	ProofPics        string `protobuf:"bytes,22,opt,name=ProofPics,proto3" json:"ProofPics,omitempty"`
+	HandleNote       string `protobuf:"bytes,23,opt,name=HandleNote,proto3" json:"HandleNote,omitempty"`
+	HandleMan        string `protobuf:"bytes,24,opt,name=HandleMan,proto3" json:"HandleMan,omitempty"`
+	ReceiveMan       string `protobuf:"bytes,25,opt,name=ReceiveMan,proto3" json:"ReceiveMan,omitempty"`
+	ReceiveTime      string `protobuf:"bytes,26,opt,name=ReceiveTime,proto3" json:"ReceiveTime,omitempty"`
+	ReceiveNote      string `protobuf:"bytes,27,opt,name=ReceiveNote,proto3" json:"ReceiveNote,omitempty"`
 }
 
 func (x *OrderReturnApplyListData) Reset() {
@@ -5448,7 +5448,7 @@ func (x *OrderReturnApplyListData) GetMemberUsername() string {
 	return ""
 }
 
-func (x *OrderReturnApplyListData) GetReturnAmount() float32 {
+func (x *OrderReturnApplyListData) GetReturnAmount() int64 {
 	if x != nil {
 		return x.ReturnAmount
 	}
@@ -5518,14 +5518,14 @@ func (x *OrderReturnApplyListData) GetProductCount() int32 {
 	return 0
 }
 
-func (x *OrderReturnApplyListData) GetProductPrice() float32 {
+func (x *OrderReturnApplyListData) GetProductPrice() int64 {
 	if x != nil {
 		return x.ProductPrice
 	}
 	return 0
 }
 
-func (x *OrderReturnApplyListData) GetProductRealPrice() float32 {
+func (x *OrderReturnApplyListData) GetProductRealPrice() int64 {
 	if x != nil {
 		return x.ProductRealPrice
 	}
@@ -6991,22 +6991,22 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x6d, 0x65, 0x12, 0x26, 0x0a, 0x0e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x55, 0x73, 0x65, 0x72,
 	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x4d, 0x65, 0x6d, 0x62,
 	0x65, 0x72, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x54, 0x6f,
-	0x74, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x02, 0x52,
+	0x74, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x0b, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09,
-	0x50, 0x61, 0x79, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x02, 0x52,
+	0x50, 0x61, 0x79, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x09, 0x50, 0x61, 0x79, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x24, 0x0a, 0x0d, 0x46, 0x72,
 	0x65, 0x69, 0x67, 0x68, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x0d, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
+	0x03, 0x52, 0x0d, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
 	0x12, 0x28, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f,
-	0x75, 0x6e, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f,
+	0x75, 0x6e, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f,
 	0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2c, 0x0a, 0x11, 0x49, 0x6e,
 	0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18,
-	0x0b, 0x20, 0x01, 0x28, 0x02, 0x52, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69,
+	0x0b, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69,
 	0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x43, 0x6f, 0x75, 0x70,
-	0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0c,
+	0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c,
 	0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x26, 0x0a, 0x0e,
 	0x44, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0d,
-	0x20, 0x01, 0x28, 0x02, 0x52, 0x0e, 0x44, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x6d,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x0e, 0x44, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x6d,
 	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x50, 0x61, 0x79, 0x54, 0x79, 0x70, 0x65, 0x18,
 	0x0e, 0x20, 0x01, 0x28, 0x05, 0x52, 0x07, 0x50, 0x61, 0x79, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1e,
 	0x0a, 0x0a, 0x53, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x18, 0x0f, 0x20, 0x01,
@@ -7114,21 +7114,21 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x65, 0x6d, 0x62, 0x65, 0x72, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x06, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x0e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x55, 0x73, 0x65, 0x72, 0x6e,
 	0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0b, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x41,
+	0x6e, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x41,
 	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x50, 0x61, 0x79, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x01, 0x52, 0x09, 0x50, 0x61, 0x79, 0x41, 0x6d, 0x6f,
+	0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x50, 0x61, 0x79, 0x41, 0x6d, 0x6f,
 	0x75, 0x6e, 0x74, 0x12, 0x24, 0x0a, 0x0d, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x41, 0x6d,
-	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0d, 0x46, 0x72, 0x65, 0x69,
+	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x46, 0x72, 0x65, 0x69,
 	0x67, 0x68, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x28, 0x0a, 0x0f, 0x50, 0x72, 0x6f,
 	0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0a, 0x20, 0x01,
-	0x28, 0x01, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f,
+	0x28, 0x03, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f,
 	0x75, 0x6e, 0x74, 0x12, 0x2c, 0x0a, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x01, 0x52, 0x11,
+	0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11,
 	0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
 	0x74, 0x12, 0x22, 0x0a, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
-	0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x41,
+	0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x41,
 	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x26, 0x0a, 0x0e, 0x44, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0e, 0x44,
+	0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0e, 0x44,
 	0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x18, 0x0a,
 	0x07, 0x50, 0x61, 0x79, 0x54, 0x79, 0x70, 0x65, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x05, 0x52, 0x07,
 	0x50, 0x61, 0x79, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x53, 0x6f, 0x75, 0x72, 0x63,
@@ -7306,7 +7306,7 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x51, 0x75, 0x61, 0x6e,
 	0x74, 0x69, 0x74, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x51, 0x75, 0x61, 0x6e,
 	0x74, 0x69, 0x74, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x06, 0x20,
-	0x01, 0x28, 0x02, 0x52, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x50, 0x72,
+	0x01, 0x28, 0x03, 0x52, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x50, 0x72,
 	0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x69, 0x63, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
 	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x69, 0x63, 0x12, 0x20, 0x0a, 0x0b, 0x50, 0x72,
 	0x6f, 0x64, 0x75, 0x63, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,
@@ -7349,7 +7349,7 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x62, 0x65, 0x72, 0x49, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x4d, 0x65, 0x6d,
 	0x62, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74,
 	0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74,
-	0x79, 0x12, 0x14, 0x0a, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x02,
+	0x79, 0x12, 0x14, 0x0a, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x50, 0x72, 0x6f, 0x64, 0x75,
 	0x63, 0x74, 0x50, 0x69, 0x63, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x50, 0x72, 0x6f,
 	0x64, 0x75, 0x63, 0x74, 0x50, 0x69, 0x63, 0x12, 0x20, 0x0a, 0x0b, 0x50, 0x72, 0x6f, 0x64, 0x75,
@@ -7394,7 +7394,7 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x51, 0x75, 0x61, 0x6e,
 	0x74, 0x69, 0x74, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x51, 0x75, 0x61, 0x6e,
 	0x74, 0x69, 0x74, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x06, 0x20,
-	0x01, 0x28, 0x02, 0x52, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x50, 0x72,
+	0x01, 0x28, 0x03, 0x52, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x50, 0x72,
 	0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x69, 0x63, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
 	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x69, 0x63, 0x12, 0x20, 0x0a, 0x0b, 0x50, 0x72,
 	0x6f, 0x64, 0x75, 0x63, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,
@@ -7530,7 +7530,7 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x75, 0x63, 0x74, 0x42, 0x72, 0x61, 0x6e, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x64,
 	0x75, 0x63, 0x74, 0x53, 0x6e, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x50, 0x72, 0x6f,
 	0x64, 0x75, 0x63, 0x74, 0x53, 0x6e, 0x12, 0x22, 0x0a, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63,
-	0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0c, 0x50, 0x72,
+	0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x50, 0x72,
 	0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x28, 0x0a, 0x0f, 0x50, 0x72,
 	0x6f, 0x64, 0x75, 0x63, 0x74, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x0a, 0x20,
 	0x01, 0x28, 0x05, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x51, 0x75, 0x61, 0x6e,
@@ -7545,15 +7545,15 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x18,
 	0x0e, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e,
 	0x4e, 0x61, 0x6d, 0x65, 0x12, 0x28, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f,
-	0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0f, 0x50,
+	0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0f, 0x50,
 	0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x22,
 	0x0a, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x11,
-	0x20, 0x01, 0x28, 0x02, 0x52, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75,
 	0x6e, 0x74, 0x12, 0x2c, 0x0a, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x12, 0x20, 0x01, 0x28, 0x02, 0x52, 0x11, 0x49,
+	0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x12, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x49,
 	0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
 	0x12, 0x1e, 0x0a, 0x0a, 0x52, 0x65, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x13,
-	0x20, 0x01, 0x28, 0x02, 0x52, 0x0a, 0x52, 0x65, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x52, 0x65, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
 	0x12, 0x28, 0x0a, 0x0f, 0x47, 0x69, 0x66, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74,
 	0x69, 0x6f, 0x6e, 0x18, 0x14, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0f, 0x47, 0x69, 0x66, 0x74, 0x49,
 	0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1e, 0x0a, 0x0a, 0x47, 0x69,
@@ -7584,7 +7584,7 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x42, 0x72, 0x61, 0x6e, 0x64, 0x12, 0x1c, 0x0a, 0x09,
 	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x6e, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x6e, 0x12, 0x22, 0x0a, 0x0c, 0x50, 0x72,
-	0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x02,
+	0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x28,
 	0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74,
 	0x79, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
@@ -7600,14 +7600,14 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x61, 0x6d, 0x65, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x50, 0x72, 0x6f, 0x6d, 0x6f,
 	0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x28, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x6d,
 	0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0f, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75,
+	0x03, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75,
 	0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x11, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e,
+	0x6e, 0x74, 0x18, 0x11, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e,
 	0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2c, 0x0a, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x12, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d,
+	0x03, 0x52, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d,
 	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x52, 0x65, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x13, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0a, 0x52, 0x65, 0x61, 0x6c, 0x41, 0x6d,
+	0x6e, 0x74, 0x18, 0x13, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x52, 0x65, 0x61, 0x6c, 0x41, 0x6d,
 	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x28, 0x0a, 0x0f, 0x47, 0x69, 0x66, 0x74, 0x49, 0x6e, 0x74, 0x65,
 	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x14, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0f, 0x47,
 	0x69, 0x66, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1e,
@@ -7637,7 +7637,7 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x42, 0x72, 0x61, 0x6e, 0x64, 0x12, 0x1c, 0x0a, 0x09,
 	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x6e, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x6e, 0x12, 0x22, 0x0a, 0x0c, 0x50, 0x72,
-	0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x02,
+	0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x28,
 	0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74,
 	0x79, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
@@ -7653,14 +7653,14 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x61, 0x6d, 0x65, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x50, 0x72, 0x6f, 0x6d, 0x6f,
 	0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x28, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x6d,
 	0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0f, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75,
+	0x03, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75,
 	0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x11, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e,
+	0x6e, 0x74, 0x18, 0x11, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e,
 	0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2c, 0x0a, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x12, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d,
+	0x03, 0x52, 0x11, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6d,
 	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x52, 0x65, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x13, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0a, 0x52, 0x65, 0x61, 0x6c, 0x41, 0x6d,
+	0x6e, 0x74, 0x18, 0x13, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x52, 0x65, 0x61, 0x6c, 0x41, 0x6d,
 	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x28, 0x0a, 0x0f, 0x47, 0x69, 0x66, 0x74, 0x49, 0x6e, 0x74, 0x65,
 	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x14, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0f, 0x47,
 	0x69, 0x66, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1e,
@@ -7761,9 +7761,9 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x63, 0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0c, 0x50,
 	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x50,
 	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x0d, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12,
+	0x03, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12,
 	0x2a, 0x0a, 0x10, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x61, 0x6c, 0x50, 0x72,
-	0x69, 0x63, 0x65, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x02, 0x52, 0x10, 0x50, 0x72, 0x6f, 0x64, 0x75,
+	0x69, 0x63, 0x65, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x50, 0x72, 0x6f, 0x64, 0x75,
 	0x63, 0x74, 0x52, 0x65, 0x61, 0x6c, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x52,
 	0x65, 0x61, 0x73, 0x6f, 0x6e, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x52, 0x65, 0x61,
 	0x73, 0x6f, 0x6e, 0x12, 0x20, 0x0a, 0x0b, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69,
@@ -7804,7 +7804,7 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x62, 0x65, 0x72, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x0e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d,
 	0x65, 0x12, 0x22, 0x0a, 0x0c, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
-	0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0c, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x41,
+	0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x41,
 	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x4e,
 	0x61, 0x6d, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x52, 0x65, 0x74, 0x75, 0x72,
 	0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x50,
@@ -7825,9 +7825,9 @@ var file_rpc_oms_oms_proto_rawDesc = []byte{
 	0x63, 0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x11, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0c, 0x50,
 	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x50,
 	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x12, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12,
+	0x03, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12,
 	0x2a, 0x0a, 0x10, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x61, 0x6c, 0x50, 0x72,
-	0x69, 0x63, 0x65, 0x18, 0x13, 0x20, 0x01, 0x28, 0x02, 0x52, 0x10, 0x50, 0x72, 0x6f, 0x64, 0x75,
+	0x69, 0x63, 0x65, 0x18, 0x13, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x50, 0x72, 0x6f, 0x64, 0x75,
 	0x63, 0x74, 0x52, 0x65, 0x61, 0x6c, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x52,
 	0x65, 0x61, 0x73, 0x6f, 0x6e, 0x18, 0x14, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x52, 0x65, 0x61,
 	0x73, 0x6f, 0x6e, 0x12, 0x20, 0x0a, 0x0b, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69,

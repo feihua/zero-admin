@@ -44,7 +44,7 @@ func (l *CarItemListLogic) CarItemList() (resp *types.CartItemListResp, err erro
 			ProductSkuId:      item.ProductSkuId,
 			MemberId:          item.ProductCategoryId,
 			Quantity:          item.Quantity,
-			Price:             float32(item.Price),
+			Price:             item.Price,
 			ProductPic:        item.ProductPic,
 			ProductName:       item.ProductName,
 			ProductSubTitle:   item.ProductSubTitle,

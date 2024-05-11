@@ -30,7 +30,7 @@ func newUmsMemberTag(db *gorm.DB, opts ...gen.DOOption) umsMemberTag {
 	_umsMemberTag.ID = field.NewInt64(tableName, "id")
 	_umsMemberTag.TagName = field.NewString(tableName, "tag_name")
 	_umsMemberTag.FinishOrderCount = field.NewInt32(tableName, "finish_order_count")
-	_umsMemberTag.FinishOrderAmount = field.NewFloat64(tableName, "finish_order_amount")
+	_umsMemberTag.FinishOrderAmount = field.NewInt64(tableName, "finish_order_amount")
 
 	_umsMemberTag.fillFieldMap()
 
@@ -43,9 +43,9 @@ type umsMemberTag struct {
 
 	ALL               field.Asterisk
 	ID                field.Int64
-	TagName           field.String  // 标签名称
-	FinishOrderCount  field.Int32   // 自动打标签完成订单数量
-	FinishOrderAmount field.Float64 // 自动打标签完成订单金额
+	TagName           field.String // 标签名称
+	FinishOrderCount  field.Int32  // 自动打标签完成订单数量
+	FinishOrderAmount field.Int64  // 自动打标签完成订单金额
 
 	fieldMap map[string]field.Expr
 }
@@ -65,7 +65,7 @@ func (u *umsMemberTag) updateTableName(table string) *umsMemberTag {
 	u.ID = field.NewInt64(table, "id")
 	u.TagName = field.NewString(table, "tag_name")
 	u.FinishOrderCount = field.NewInt32(table, "finish_order_count")
-	u.FinishOrderAmount = field.NewFloat64(table, "finish_order_amount")
+	u.FinishOrderAmount = field.NewInt64(table, "finish_order_amount")
 
 	u.fillFieldMap()
 

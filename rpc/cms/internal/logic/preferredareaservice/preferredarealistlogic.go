@@ -1,4 +1,4 @@
-package prefrenceareaservicelogic
+package preferredareaservicelogic
 
 import (
 	"context"
@@ -11,30 +11,23 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// PrefrenceAreaListLogic
-/*
-Author: LiuFeiHua
-Date: 2024/5/6 10:33
-*/
-type PrefrenceAreaListLogic struct {
+type PreferredAreaListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewPrefrenceAreaListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PrefrenceAreaListLogic {
-	return &PrefrenceAreaListLogic{
+func NewPreferredAreaListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PreferredAreaListLogic {
+	return &PreferredAreaListLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-// PrefrenceAreaList 查询商品优选列表
-func (l *PrefrenceAreaListLogic) PrefrenceAreaList(in *cmsclient.PrefrenceAreaListReq) (*cmsclient.PrefrenceAreaListResp, error) {
-
-	q := query.CmsPrefrenceArea.WithContext(l.ctx)
-	prefrenceAreas, err := q.Find()
+func (l *PreferredAreaListLogic) PreferredAreaList(in *cmsclient.PreferredAreaListReq) (*cmsclient.PreferredAreaListResp, error) {
+	q := query.CmsPreferredArea.WithContext(l.ctx)
+	preferredAreas, err := q.Find()
 	count, _ := q.Count()
 
 	if err != nil {
@@ -42,10 +35,10 @@ func (l *PrefrenceAreaListLogic) PrefrenceAreaList(in *cmsclient.PrefrenceAreaLi
 		return nil, err
 	}
 
-	var list []*cmsclient.PrefrenceAreaListData
-	for _, item := range prefrenceAreas {
+	var list []*cmsclient.PreferredAreaListData
+	for _, item := range preferredAreas {
 
-		list = append(list, &cmsclient.PrefrenceAreaListData{
+		list = append(list, &cmsclient.PreferredAreaListData{
 			Id:         item.ID,
 			Name:       item.Name,
 			SubTitle:   item.SubTitle,
@@ -57,9 +50,8 @@ func (l *PrefrenceAreaListLogic) PrefrenceAreaList(in *cmsclient.PrefrenceAreaLi
 
 	logc.Infof(l.ctx, "查询专题列表信息,参数：%+v,响应：%+v", in, list)
 
-	return &cmsclient.PrefrenceAreaListResp{
+	return &cmsclient.PreferredAreaListResp{
 		Total: count,
 		List:  list,
 	}, nil
-
 }

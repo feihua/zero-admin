@@ -20,7 +20,7 @@ type UmsMemberReadHistory struct {
 	ProductName     string    `gorm:"column:product_name;not null;comment:商品名称" json:"product_name"`                         // 商品名称
 	ProductPic      string    `gorm:"column:product_pic;not null;comment:商品图片" json:"product_pic"`                           // 商品图片
 	ProductSubTitle *string   `gorm:"column:product_sub_title;comment:商品标题" json:"product_sub_title"`                        // 商品标题
-	ProductPrice    float64   `gorm:"column:product_price;not null;comment:商品价格" json:"product_price"`                       // 商品价格
+	ProductPrice    int64     `gorm:"column:product_price;not null;comment:商品价格" json:"product_price"`                       // 商品价格
 	CreateTime      time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:浏览时间" json:"create_time"` // 浏览时间
 }
 

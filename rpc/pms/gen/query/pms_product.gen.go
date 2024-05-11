@@ -42,18 +42,18 @@ func newPmsProduct(db *gorm.DB, opts ...gen.DOOption) pmsProduct {
 	_pmsProduct.VerifyStatus = field.NewInt32(tableName, "verify_status")
 	_pmsProduct.Sort = field.NewInt32(tableName, "sort")
 	_pmsProduct.Sale = field.NewInt32(tableName, "sale")
-	_pmsProduct.Price = field.NewFloat64(tableName, "price")
-	_pmsProduct.PromotionPrice = field.NewFloat64(tableName, "promotion_price")
+	_pmsProduct.Price = field.NewInt64(tableName, "price")
+	_pmsProduct.PromotionPrice = field.NewInt64(tableName, "promotion_price")
 	_pmsProduct.GiftGrowth = field.NewInt32(tableName, "gift_growth")
 	_pmsProduct.GiftPoint = field.NewInt32(tableName, "gift_point")
 	_pmsProduct.UsePointLimit = field.NewInt32(tableName, "use_point_limit")
 	_pmsProduct.SubTitle = field.NewString(tableName, "sub_title")
 	_pmsProduct.Description = field.NewString(tableName, "description")
-	_pmsProduct.OriginalPrice = field.NewFloat64(tableName, "original_price")
+	_pmsProduct.OriginalPrice = field.NewInt64(tableName, "original_price")
 	_pmsProduct.Stock = field.NewInt32(tableName, "stock")
 	_pmsProduct.LowStock = field.NewInt32(tableName, "low_stock")
 	_pmsProduct.Unit = field.NewString(tableName, "unit")
-	_pmsProduct.Weight = field.NewFloat64(tableName, "weight")
+	_pmsProduct.Weight = field.NewInt64(tableName, "weight")
 	_pmsProduct.PreviewStatus = field.NewInt32(tableName, "preview_status")
 	_pmsProduct.ServiceIds = field.NewString(tableName, "service_ids")
 	_pmsProduct.Keywords = field.NewString(tableName, "keywords")
@@ -82,48 +82,48 @@ type pmsProduct struct {
 
 	ALL                        field.Asterisk
 	ID                         field.Int64
-	BrandID                    field.Int64   // 品牌id
-	ProductCategoryID          field.Int64   // 商品分类id
-	FeightTemplateID           field.Int64   // 商品运费模板id
-	ProductAttributeCategoryID field.Int64   // 商品属性分类id
-	Name                       field.String  // 商品名称
-	Pic                        field.String  // 商品图片
-	ProductSn                  field.String  // 货号
-	DeleteStatus               field.Int32   // 删除状态：0->未删除；1->已删除
-	PublishStatus              field.Int32   // 上架状态：0->下架；1->上架
-	NewStatus                  field.Int32   // 新品状态:0->不是新品；1->新品
-	RecommandStatus            field.Int32   // 推荐状态；0->不推荐；1->推荐
-	VerifyStatus               field.Int32   // 审核状态：0->未审核；1->审核通过
-	Sort                       field.Int32   // 排序
-	Sale                       field.Int32   // 销量
-	Price                      field.Float64 // 商品价格
-	PromotionPrice             field.Float64 // 促销价格
-	GiftGrowth                 field.Int32   // 赠送的成长值
-	GiftPoint                  field.Int32   // 赠送的积分
-	UsePointLimit              field.Int32   // 限制使用的积分数
-	SubTitle                   field.String  // 副标题
-	Description                field.String  // 商品描述
-	OriginalPrice              field.Float64 // 市场价
-	Stock                      field.Int32   // 库存
-	LowStock                   field.Int32   // 库存预警值
-	Unit                       field.String  // 单位
-	Weight                     field.Float64 // 商品重量，默认为克
-	PreviewStatus              field.Int32   // 是否为预告商品：0->不是；1->是
-	ServiceIds                 field.String  // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
-	Keywords                   field.String  // 搜索关键字
-	Note                       field.String  // 备注
-	AlbumPics                  field.String  // 画册图片，连产品图片限制为5张，以逗号分割
-	DetailTitle                field.String  // 详情标题
-	DetailDesc                 field.String  // 详情描述
-	DetailHTML                 field.String  // 产品详情网页内容
-	DetailMobileHTML           field.String  // 移动端网页详情
-	PromotionStartTime         field.Time    // 促销开始时间
-	PromotionEndTime           field.Time    // 促销结束时间
-	PromotionPerLimit          field.Int32   // 活动限购数量
-	PromotionType              field.Int32   // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-	BrandName                  field.String  // 品牌名称
-	ProductCategoryName        field.String  // 商品分类名称
-	ProductCategoryIDArray     field.String  // 商品分类id字符串
+	BrandID                    field.Int64  // 品牌id
+	ProductCategoryID          field.Int64  // 商品分类id
+	FeightTemplateID           field.Int64  // 商品运费模板id
+	ProductAttributeCategoryID field.Int64  // 商品属性分类id
+	Name                       field.String // 商品名称
+	Pic                        field.String // 商品图片
+	ProductSn                  field.String // 货号
+	DeleteStatus               field.Int32  // 删除状态：0->未删除；1->已删除
+	PublishStatus              field.Int32  // 上架状态：0->下架；1->上架
+	NewStatus                  field.Int32  // 新品状态:0->不是新品；1->新品
+	RecommandStatus            field.Int32  // 推荐状态；0->不推荐；1->推荐
+	VerifyStatus               field.Int32  // 审核状态：0->未审核；1->审核通过
+	Sort                       field.Int32  // 排序
+	Sale                       field.Int32  // 销量
+	Price                      field.Int64  // 商品价格
+	PromotionPrice             field.Int64  // 促销价格
+	GiftGrowth                 field.Int32  // 赠送的成长值
+	GiftPoint                  field.Int32  // 赠送的积分
+	UsePointLimit              field.Int32  // 限制使用的积分数
+	SubTitle                   field.String // 副标题
+	Description                field.String // 商品描述
+	OriginalPrice              field.Int64  // 市场价
+	Stock                      field.Int32  // 库存
+	LowStock                   field.Int32  // 库存预警值
+	Unit                       field.String // 单位
+	Weight                     field.Int64  // 商品重量，默认为克
+	PreviewStatus              field.Int32  // 是否为预告商品：0->不是；1->是
+	ServiceIds                 field.String // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+	Keywords                   field.String // 搜索关键字
+	Note                       field.String // 备注
+	AlbumPics                  field.String // 画册图片，连产品图片限制为5张，以逗号分割
+	DetailTitle                field.String // 详情标题
+	DetailDesc                 field.String // 详情描述
+	DetailHTML                 field.String // 产品详情网页内容
+	DetailMobileHTML           field.String // 移动端网页详情
+	PromotionStartTime         field.Time   // 促销开始时间
+	PromotionEndTime           field.Time   // 促销结束时间
+	PromotionPerLimit          field.Int32  // 活动限购数量
+	PromotionType              field.Int32  // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+	BrandName                  field.String // 品牌名称
+	ProductCategoryName        field.String // 商品分类名称
+	ProductCategoryIDArray     field.String // 商品分类id字符串
 
 	fieldMap map[string]field.Expr
 }
@@ -155,18 +155,18 @@ func (p *pmsProduct) updateTableName(table string) *pmsProduct {
 	p.VerifyStatus = field.NewInt32(table, "verify_status")
 	p.Sort = field.NewInt32(table, "sort")
 	p.Sale = field.NewInt32(table, "sale")
-	p.Price = field.NewFloat64(table, "price")
-	p.PromotionPrice = field.NewFloat64(table, "promotion_price")
+	p.Price = field.NewInt64(table, "price")
+	p.PromotionPrice = field.NewInt64(table, "promotion_price")
 	p.GiftGrowth = field.NewInt32(table, "gift_growth")
 	p.GiftPoint = field.NewInt32(table, "gift_point")
 	p.UsePointLimit = field.NewInt32(table, "use_point_limit")
 	p.SubTitle = field.NewString(table, "sub_title")
 	p.Description = field.NewString(table, "description")
-	p.OriginalPrice = field.NewFloat64(table, "original_price")
+	p.OriginalPrice = field.NewInt64(table, "original_price")
 	p.Stock = field.NewInt32(table, "stock")
 	p.LowStock = field.NewInt32(table, "low_stock")
 	p.Unit = field.NewString(table, "unit")
-	p.Weight = field.NewFloat64(table, "weight")
+	p.Weight = field.NewInt64(table, "weight")
 	p.PreviewStatus = field.NewInt32(table, "preview_status")
 	p.ServiceIds = field.NewString(table, "service_ids")
 	p.Keywords = field.NewString(table, "keywords")

@@ -101,7 +101,7 @@ func (l *ProductUpdateLogic) ProductUpdate(in *pmsclient.ProductUpdateReq) (*pms
 		_ = memberPrice.Create(&model.PmsMemberPrice{
 			ProductID:       productId,
 			MemberLevelID:   list.MemberLevelId,
-			MemberPrice:     float64(list.MemberPrice),
+			MemberPrice:     list.MemberPrice,
 			MemberLevelName: list.MemberLevelName,
 		})
 	}
@@ -113,8 +113,8 @@ func (l *ProductUpdateLogic) ProductUpdate(in *pmsclient.ProductUpdateReq) (*pms
 		_ = ladder.Create(&model.PmsProductLadder{
 			ProductID: productId,
 			Count:     list.Count,
-			Discount:  float64(list.Discount),
-			Price:     float64(list.Price),
+			Discount:  list.Discount,
+			Price:     list.Price,
 		})
 	}
 	//4.满减价格
@@ -123,8 +123,8 @@ func (l *ProductUpdateLogic) ProductUpdate(in *pmsclient.ProductUpdateReq) (*pms
 	for _, list := range in.ProductFullReductionList {
 		_ = full.Create(&model.PmsProductFullReduction{
 			ProductID:   productId,
-			FullPrice:   float64(list.FullPrice),
-			ReducePrice: float64(list.ReducePrice),
+			FullPrice:   list.FullPrice,
+			ReducePrice: list.ReducePrice,
 		})
 	}
 
@@ -138,12 +138,12 @@ func (l *ProductUpdateLogic) ProductUpdate(in *pmsclient.ProductUpdateReq) (*pms
 		_ = sku.Create(&model.PmsSkuStock{
 			ProductID:      productId,
 			SkuCode:        list.SkuCode,
-			Price:          float64(list.Price),
+			Price:          list.Price,
 			Stock:          list.Stock,
 			LowStock:       list.LowStock,
 			Pic:            list.Pic,
 			Sale:           list.Sale,
-			PromotionPrice: float64(list.PromotionPrice),
+			PromotionPrice: list.PromotionPrice,
 			LockStock:      list.LockStock,
 			SpData:         list.SpData,
 		})

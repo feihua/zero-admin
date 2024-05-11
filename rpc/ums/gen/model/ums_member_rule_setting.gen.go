@@ -15,8 +15,8 @@ type UmsMemberRuleSetting struct {
 	ID                int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	ContinueSignDay   int32      `gorm:"column:continue_sign_day;not null;comment:连续签到天数" json:"continue_sign_day"`             // 连续签到天数
 	ContinueSignPoint int32      `gorm:"column:continue_sign_point;not null;comment:连续签到赠送数量" json:"continue_sign_point"`       // 连续签到赠送数量
-	ConsumePerPoint   float64    `gorm:"column:consume_per_point;not null;comment:每消费多少元获取1个点" json:"consume_per_point"`        // 每消费多少元获取1个点
-	LowOrderAmount    float64    `gorm:"column:low_order_amount;not null;comment:最低获取点数的订单金额" json:"low_order_amount"`          // 最低获取点数的订单金额
+	ConsumePerPoint   int64      `gorm:"column:consume_per_point;not null;comment:每消费多少元获取1个点" json:"consume_per_point"`        // 每消费多少元获取1个点
+	LowOrderAmount    int64      `gorm:"column:low_order_amount;not null;comment:最低获取点数的订单金额" json:"low_order_amount"`          // 最低获取点数的订单金额
 	MaxPointPerOrder  int32      `gorm:"column:max_point_per_order;not null;comment:每笔订单最高获取点数" json:"max_point_per_order"`     // 每笔订单最高获取点数
 	RuleType          int32      `gorm:"column:rule_type;not null;comment:类型：0->积分规则；1->成长值规则" json:"rule_type"`                // 类型：0->积分规则；1->成长值规则
 	CreateBy          string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者

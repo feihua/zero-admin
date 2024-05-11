@@ -32,14 +32,14 @@ func newOmsCartItem(db *gorm.DB, opts ...gen.DOOption) omsCartItem {
 	_omsCartItem.ProductSkuID = field.NewInt64(tableName, "product_sku_id")
 	_omsCartItem.MemberID = field.NewInt64(tableName, "member_id")
 	_omsCartItem.Quantity = field.NewInt32(tableName, "quantity")
-	_omsCartItem.Price = field.NewFloat64(tableName, "price")
+	_omsCartItem.Price = field.NewInt64(tableName, "price")
 	_omsCartItem.ProductPic = field.NewString(tableName, "product_pic")
 	_omsCartItem.ProductName = field.NewString(tableName, "product_name")
 	_omsCartItem.ProductSubTitle = field.NewString(tableName, "product_sub_title")
 	_omsCartItem.ProductSkuCode = field.NewString(tableName, "product_sku_code")
 	_omsCartItem.MemberNickname = field.NewString(tableName, "member_nickname")
 	_omsCartItem.CreateDate = field.NewTime(tableName, "create_date")
-	_omsCartItem.ModifyDate = field.NewTime(tableName, "modify_date")
+	_omsCartItem.UpdateDate = field.NewTime(tableName, "update_date")
 	_omsCartItem.DeleteStatus = field.NewInt32(tableName, "delete_status")
 	_omsCartItem.ProductCategoryID = field.NewInt64(tableName, "product_category_id")
 	_omsCartItem.ProductBrand = field.NewString(tableName, "product_brand")
@@ -57,23 +57,23 @@ type omsCartItem struct {
 
 	ALL               field.Asterisk
 	ID                field.Int64
-	ProductID         field.Int64   // 商品id
-	ProductSkuID      field.Int64   // 商品库存id
-	MemberID          field.Int64   // 会员id
-	Quantity          field.Int32   // 购买数量
-	Price             field.Float64 // 添加到购物车的价格
-	ProductPic        field.String  // 商品主图
-	ProductName       field.String  // 商品名称
-	ProductSubTitle   field.String  // 商品副标题（卖点）
-	ProductSkuCode    field.String  // 商品sku条码
-	MemberNickname    field.String  // 会员昵称
-	CreateDate        field.Time    // 创建时间
-	ModifyDate        field.Time    // 修改时间
-	DeleteStatus      field.Int32   // 是否删除
-	ProductCategoryID field.Int64   // 商品分类
-	ProductBrand      field.String  // 商品品牌
-	ProductSn         field.String  // 货号
-	ProductAttr       field.String  // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	ProductID         field.Int64  // 商品id
+	ProductSkuID      field.Int64  // 商品库存id
+	MemberID          field.Int64  // 会员id
+	Quantity          field.Int32  // 购买数量
+	Price             field.Int64  // 添加到购物车的价格
+	ProductPic        field.String // 商品主图
+	ProductName       field.String // 商品名称
+	ProductSubTitle   field.String // 商品副标题（卖点）
+	ProductSkuCode    field.String // 商品sku条码
+	MemberNickname    field.String // 会员昵称
+	CreateDate        field.Time   // 创建时间
+	UpdateDate        field.Time   // 修改时间
+	DeleteStatus      field.Int32  // 是否删除
+	ProductCategoryID field.Int64  // 商品分类
+	ProductBrand      field.String // 商品品牌
+	ProductSn         field.String // 货号
+	ProductAttr       field.String // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 
 	fieldMap map[string]field.Expr
 }
@@ -95,14 +95,14 @@ func (o *omsCartItem) updateTableName(table string) *omsCartItem {
 	o.ProductSkuID = field.NewInt64(table, "product_sku_id")
 	o.MemberID = field.NewInt64(table, "member_id")
 	o.Quantity = field.NewInt32(table, "quantity")
-	o.Price = field.NewFloat64(table, "price")
+	o.Price = field.NewInt64(table, "price")
 	o.ProductPic = field.NewString(table, "product_pic")
 	o.ProductName = field.NewString(table, "product_name")
 	o.ProductSubTitle = field.NewString(table, "product_sub_title")
 	o.ProductSkuCode = field.NewString(table, "product_sku_code")
 	o.MemberNickname = field.NewString(table, "member_nickname")
 	o.CreateDate = field.NewTime(table, "create_date")
-	o.ModifyDate = field.NewTime(table, "modify_date")
+	o.UpdateDate = field.NewTime(table, "update_date")
 	o.DeleteStatus = field.NewInt32(table, "delete_status")
 	o.ProductCategoryID = field.NewInt64(table, "product_category_id")
 	o.ProductBrand = field.NewString(table, "product_brand")
@@ -147,7 +147,7 @@ func (o *omsCartItem) fillFieldMap() {
 	o.fieldMap["product_sku_code"] = o.ProductSkuCode
 	o.fieldMap["member_nickname"] = o.MemberNickname
 	o.fieldMap["create_date"] = o.CreateDate
-	o.fieldMap["modify_date"] = o.ModifyDate
+	o.fieldMap["update_date"] = o.UpdateDate
 	o.fieldMap["delete_status"] = o.DeleteStatus
 	o.fieldMap["product_category_id"] = o.ProductCategoryID
 	o.fieldMap["product_brand"] = o.ProductBrand

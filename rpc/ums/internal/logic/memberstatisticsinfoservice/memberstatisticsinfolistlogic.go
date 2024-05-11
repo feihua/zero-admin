@@ -41,7 +41,7 @@ func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(in *umsclient.M
 		list = append(list, &umsclient.MemberStatisticsInfoListData{
 			Id:                  item.ID,
 			MemberId:            item.MemberID,
-			ConsumeAmount:       float32(item.ConsumeAmount),
+			ConsumeAmount:       item.ConsumeAmount,
 			OrderCount:          item.OrderCount,
 			CouponCount:         item.CouponCount,
 			CommentCount:        item.CommentCount,

@@ -19,7 +19,7 @@ type OmsOrderReturnApply struct {
 	OrderSn          string    `gorm:"column:order_sn;not null;comment:订单编号" json:"order_sn"`                         // 订单编号
 	CreateTime       time.Time `gorm:"column:create_time;not null;comment:申请时间" json:"create_time"`                   // 申请时间
 	MemberUsername   string    `gorm:"column:member_username;not null;comment:会员用户名" json:"member_username"`          // 会员用户名
-	ReturnAmount     float64   `gorm:"column:return_amount;not null;comment:退款金额" json:"return_amount"`               // 退款金额
+	ReturnAmount     int64     `gorm:"column:return_amount;not null;comment:退款金额" json:"return_amount"`               // 退款金额
 	ReturnName       string    `gorm:"column:return_name;not null;comment:退货人姓名" json:"return_name"`                  // 退货人姓名
 	ReturnPhone      string    `gorm:"column:return_phone;not null;comment:退货人电话" json:"return_phone"`                // 退货人电话
 	Status           int32     `gorm:"column:status;not null;comment:申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝" json:"status"` // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
@@ -29,8 +29,8 @@ type OmsOrderReturnApply struct {
 	ProductBrand     string    `gorm:"column:product_brand;not null;comment:商品品牌" json:"product_brand"`               // 商品品牌
 	ProductAttr      string    `gorm:"column:product_attr;not null;comment:商品销售属性：颜色：红色；尺码：xl;" json:"product_attr"`  // 商品销售属性：颜色：红色；尺码：xl;
 	ProductCount     int32     `gorm:"column:product_count;not null;comment:退货数量" json:"product_count"`               // 退货数量
-	ProductPrice     float64   `gorm:"column:product_price;not null;comment:商品单价" json:"product_price"`               // 商品单价
-	ProductRealPrice float64   `gorm:"column:product_real_price;not null;comment:商品实际支付单价" json:"product_real_price"` // 商品实际支付单价
+	ProductPrice     int64     `gorm:"column:product_price;not null;comment:商品单价" json:"product_price"`               // 商品单价
+	ProductRealPrice int64     `gorm:"column:product_real_price;not null;comment:商品实际支付单价" json:"product_real_price"` // 商品实际支付单价
 	Reason           string    `gorm:"column:reason;not null;comment:原因" json:"reason"`                               // 原因
 	Description      string    `gorm:"column:description;not null;comment:描述" json:"description"`                     // 描述
 	ProofPics        string    `gorm:"column:proof_pics;not null;comment:凭证图片，以逗号隔开" json:"proof_pics"`               // 凭证图片，以逗号隔开

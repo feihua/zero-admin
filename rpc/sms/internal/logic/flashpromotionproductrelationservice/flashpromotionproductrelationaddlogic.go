@@ -30,7 +30,7 @@ func (l *FlashPromotionProductRelationAddLogic) FlashPromotionProductRelationAdd
 		FlashPromotionID:        in.FlashPromotionId,
 		FlashPromotionSessionID: in.FlashPromotionSessionId,
 		ProductID:               in.ProductId,
-		FlashPromotionPrice:     float64(in.FlashPromotionPrice),
+		FlashPromotionPrice:     in.FlashPromotionPrice,
 		FlashPromotionCount:     in.FlashPromotionCount,
 		FlashPromotionLimit:     in.FlashPromotionLimit,
 		Sort:                    in.Sort,

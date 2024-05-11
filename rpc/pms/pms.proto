@@ -6,7 +6,7 @@ option go_package = "./pmsclient";
 
 message MemberPriceList {
   int64    MemberLevelId = 1;
-  float  MemberPrice = 2;
+  int64  MemberPrice = 2;
   string    MemberLevelName = 3;
 }
 message ProductAttributeValueList {
@@ -14,22 +14,22 @@ message ProductAttributeValueList {
   string  AttributeValues = 2;
 }
 message ProductFullReductionList {
-  float  FullPrice = 1;
-  float  ReducePrice = 2;
+  int64  FullPrice = 1;
+  int64  ReducePrice = 2;
 }
 message ProductLadderList {
   int32    Count = 2;
-  float  Discount = 3;
-  float  Price = 4;
+  int64  Discount = 3;
+  int64  Price = 4;
 }
 message SkuStockList {
   string    SkuCode = 1;
-  float  Price = 2;
+  int64  Price = 2;
   int32    Stock = 3;
   int32    LowStock = 4;
   string    Pic = 5;
   int32    Sale = 6;
-  float  PromotionPrice = 7;
+  int64  PromotionPrice = 7;
   int32    LockStock = 8;
   string    SpData = 9;
 }
@@ -49,18 +49,18 @@ message ProductAddReq {
   int32       VerifyStatus = 13;
   int32       Sort = 14;
   int32       Sale = 15;
-  double     Price = 16;
-  double     PromotionPrice = 17;
+  int64     Price = 16;
+  int64     PromotionPrice = 17;
   int32       GiftGrowth = 18;
   int32       GiftPoint = 19;
   int32       UsePointLimit = 20;
   string      SubTitle = 21;
   string      Description = 22;
-  double     OriginalPrice = 23;
+  int64     OriginalPrice = 23;
   int32       Stock = 24;
   int32       LowStock = 25;
   string      Unit = 26;
-  double     Weight = 27;
+  int64     Weight = 27;
   int32       PreviewStatus = 28;
   string      ServiceIds = 29;
   string      Keywords = 30;
@@ -118,18 +118,18 @@ message ProductListData{
   int32       VerifyStatus = 13;
   int32       Sort = 14;
   int32       Sale = 15;
-  double     Price = 16;
-  double     PromotionPrice = 17;
+  int64     Price = 16;
+  int64     PromotionPrice = 17;
   int32       GiftGrowth = 18;
   int32       GiftPoint = 19;
   int32       UsePointLimit = 20;
   string      SubTitle = 21;
   string      Description = 22;
-  double     OriginalPrice = 23;
+  int64     OriginalPrice = 23;
   int32       Stock = 24;
   int32       LowStock = 25;
   string      Unit = 26;
-  double     Weight = 27;
+  int64     Weight = 27;
   int32       PreviewStatus = 28;
   string      ServiceIds = 29;
   string      Keywords = 30;
@@ -169,18 +169,18 @@ message ProductUpdateReq {
   int32       VerifyStatus = 13;
   int32       Sort = 14;
   int32       Sale = 15;
-  double     Price = 16;
-  double     PromotionPrice = 17;
+  int64     Price = 16;
+  int64     PromotionPrice = 17;
   int32       GiftGrowth = 18;
   int32       GiftPoint = 19;
   int32       UsePointLimit = 20;
   string      SubTitle = 21;
   string      Description = 22;
-  double     OriginalPrice = 23;
+  int64     OriginalPrice = 23;
   int32       Stock = 24;
   int32       LowStock = 25;
   string      Unit = 26;
-  double     Weight = 27;
+  int64     Weight = 27;
   int32       PreviewStatus = 28;
   string      ServiceIds = 29;
   string      Keywords = 30;
@@ -598,10 +598,10 @@ service CommentReplayService {
 message FeightTemplateAddReq {
   string    Name = 2;
   int32    ChargeType = 3;
-  float  FirstWeight = 4;
-  float  FirstFee = 5;
-  float  ContinueWeight = 61;
-  float  ContinmeFee = 7;
+  int64  FirstWeight = 4;
+  int64  FirstFee = 5;
+  int64  ContinueWeight = 61;
+  int64  ContinmeFee = 7;
   string    Dest = 8;
 }
 
@@ -618,10 +618,10 @@ message FeightTemplateListData{
   int64    Id = 1;
   string    Name = 2;
   int32    ChargeType = 3;
-  float  FirstWeight = 4;
-  float  FirstFee = 5;
-  float  ContinueWeight = 61;
-  float  ContinmeFee = 7;
+  int64  FirstWeight = 4;
+  int64  FirstFee = 5;
+  int64  ContinueWeight = 61;
+  int64  ContinmeFee = 7;
   string    Dest = 8;
 
 }
@@ -635,10 +635,10 @@ message FeightTemplateUpdateReq {
   int64    Id = 1;
   string    Name = 2;
   int32    ChargeType = 3;
-  float  FirstWeight = 4;
-  float  FirstFee = 5;
-  float  ContinueWeight = 61;
-  float  ContinmeFee = 7;
+  int64  FirstWeight = 4;
+  int64  FirstFee = 5;
+  int64  ContinueWeight = 61;
+  int64  ContinmeFee = 7;
   string    Dest = 8;
 }
 
@@ -667,7 +667,7 @@ service FeightTemplateService {
 message MemberPriceAddReq {
   int64    ProductId = 1;
   int64    MemberLevelId = 2;
-  float  MemberPrice = 3;
+  int64  MemberPrice = 3;
   string    MemberLevelName = 4;
 }
 
@@ -684,7 +684,7 @@ message MemberPriceListData{
   int64    Id = 1;
   int64    ProductId = 2;
   int64    MemberLevelId = 3;
-  float  MemberPrice = 4;
+  int64  MemberPrice = 4;
   string    MemberLevelName = 5;
 
 }
@@ -698,7 +698,7 @@ message MemberPriceUpdateReq {
   int64    Id = 1;
   int64    ProductId = 2;
   int64    MemberLevelId = 3;
-  float  MemberPrice = 4;
+  int64  MemberPrice = 4;
   string    MemberLevelName = 5;
 }
 
@@ -1069,8 +1069,8 @@ service ProductCategoryService {
 }
 message ProductFullReductionAddReq {
   int64    ProductId = 1;
-  float  FullPrice = 2;
-  float  ReducePrice = 3;
+  int64  FullPrice = 2;
+  int64  ReducePrice = 3;
 }
 
 message ProductFullReductionAddResp {
@@ -1086,8 +1086,8 @@ message ProductFullReductionListReq {
 message ProductFullReductionListData{
   int64    Id = 1;
   int64    ProductId = 2;
-  float  FullPrice = 3;
-  float  ReducePrice = 4;
+  int64  FullPrice = 3;
+  int64  ReducePrice = 4;
 
 }
 
@@ -1099,8 +1099,8 @@ message ProductFullReductionListResp {
 message ProductFullReductionUpdateReq {
   int64    Id = 1;
   int64    ProductId = 2;
-  float  FullPrice = 3;
-  float  ReducePrice = 4;
+  int64  FullPrice = 3;
+  int64  ReducePrice = 4;
 }
 
 message ProductFullReductionUpdateResp {
@@ -1125,8 +1125,8 @@ service ProductFullReductionService {
 message ProductLadderAddReq {
   int64    ProductId = 1;
   int32    Count = 2;
-  float  Discount = 3;
-  float  Price = 4;
+  int64  Discount = 3;
+  int64  Price = 4;
 }
 
 message ProductLadderAddResp {
@@ -1141,8 +1141,8 @@ message ProductLadderListData{
   int64    Id = 1;
   int64    ProductId = 2;
   int32    Count = 3;
-  float  Discount = 4;
-  float  Price = 5;
+  int64  Discount = 4;
+  int64  Price = 5;
 
 }
 
@@ -1155,8 +1155,8 @@ message ProductLadderUpdateReq {
   int64    Id = 1;
   int64    ProductId = 2;
   int32    Count = 3;
-  float  Discount = 4;
-  float  Price = 5;
+  int64  Discount = 4;
+  int64  Price = 5;
 }
 
 message ProductLadderUpdateResp {
@@ -1181,10 +1181,10 @@ service ProductLadderService {
 }
 message ProductOperateLogAddReq {
   int64      ProductId = 2;
-  float    PriceOld = 3;
-  float    PriceNew = 4;
-  float    SalePriceOld = 5;
-  float    SalePriceNew = 6;
+  int64    PriceOld = 3;
+  int64    PriceNew = 4;
+  int64    SalePriceOld = 5;
+  int64    SalePriceNew = 6;
   int32      GiftPointOld = 7;
   int32      GiftPointNew = 8;
   int32      UsePointLimitOld = 9;
@@ -1205,10 +1205,10 @@ message ProductOperateLogListReq {
 message ProductOperateLogListData{
   int64      Id = 1;
   int64      ProductId = 2;
-  float    PriceOld = 3;
-  float    PriceNew = 4;
-  float    SalePriceOld = 5;
-  float    SalePriceNew = 6;
+  int64    PriceOld = 3;
+  int64    PriceNew = 4;
+  int64    SalePriceOld = 5;
+  int64    SalePriceNew = 6;
   int32      GiftPointOld = 7;
   int32      GiftPointNew = 8;
   int32      UsePointLimitOld = 9;
@@ -1226,10 +1226,10 @@ message ProductOperateLogListResp {
 message ProductOperateLogUpdateReq {
   int64      Id = 1;
   int64      ProductId = 2;
-  float    PriceOld = 3;
-  float    PriceNew = 4;
-  float    SalePriceOld = 5;
-  float    SalePriceNew = 6;
+  int64    PriceOld = 3;
+  int64    PriceNew = 4;
+  int64    SalePriceOld = 5;
+  int64    SalePriceNew = 6;
   int32      GiftPointOld = 7;
   int32      GiftPointNew = 8;
   int32      UsePointLimitOld = 9;
@@ -1323,12 +1323,12 @@ service ProductVertifyRecordService {
 message SkuStockAddReq {
   int64    ProductId = 2;
   string    SkuCode = 3;
-  float  Price = 4;
+  int64  Price = 4;
   int32    Stock = 5;
   int32    LowStock = 6;
   string    Pic = 7;
   int32    Sale = 8;
-  float  PromotionPrice = 9;
+  int64  PromotionPrice = 9;
   int32    LockStock = 10;
   string    SpData = 11;
 }
@@ -1345,12 +1345,12 @@ message SkuStockListData{
   int64    Id = 1;
   int64    ProductId = 2;
   string    SkuCode = 3;
-  float  Price = 4;
+  int64  Price = 4;
   int32    Stock = 5;
   int32    LowStock = 6;
   string    Pic = 7;
   int32    Sale = 8;
-  float  PromotionPrice = 9;
+  int64  PromotionPrice = 9;
   int32    LockStock = 10;
   string    SpData = 11;
 
@@ -1365,12 +1365,12 @@ message SkuStockUpdateReq {
   int64    Id = 1;
   int64    ProductId = 2;
   string    SkuCode = 3;
-  float  Price = 4;
+  int64  Price = 4;
   int32    Stock = 5;
   int32    LowStock = 6;
   string    Pic = 7;
   int32    Sale = 8;
-  float  PromotionPrice = 9;
+  int64  PromotionPrice = 9;
   int32    LockStock = 10;
   string    SpData = 11;
 }

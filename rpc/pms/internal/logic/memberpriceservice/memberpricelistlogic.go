@@ -45,7 +45,7 @@ func (l *MemberPriceListLogic) MemberPriceList(in *pmsclient.MemberPriceListReq)
 			Id:              item.ID,
 			ProductId:       item.ProductID,
 			MemberLevelId:   item.MemberLevelID,
-			MemberPrice:     float32(item.MemberPrice),
+			MemberPrice:     item.MemberPrice,
 			MemberLevelName: item.MemberLevelName,
 		})
 	}

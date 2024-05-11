@@ -27,7 +27,7 @@ func NewPrefrenceAreaListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *PrefrenceAreaListLogic) PrefrenceAreaList(req *types.ListPrefrenceAreaReq) (resp *types.ListPrefrenceAreaResp, err error) {
-	prefrenceAreaList, err := l.svcCtx.PrefrenceAreaService.PrefrenceAreaList(l.ctx, &cmsclient.PrefrenceAreaListReq{
+	prefrenceAreaList, err := l.svcCtx.PreferredAreaService.PreferredAreaList(l.ctx, &cmsclient.PreferredAreaListReq{
 		Current:    req.Current,
 		PageSize:   req.PageSize,
 		Name:       req.Name,

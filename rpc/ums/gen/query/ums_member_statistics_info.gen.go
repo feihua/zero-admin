@@ -29,7 +29,7 @@ func newUmsMemberStatisticsInfo(db *gorm.DB, opts ...gen.DOOption) umsMemberStat
 	_umsMemberStatisticsInfo.ALL = field.NewAsterisk(tableName)
 	_umsMemberStatisticsInfo.ID = field.NewInt64(tableName, "id")
 	_umsMemberStatisticsInfo.MemberID = field.NewInt64(tableName, "member_id")
-	_umsMemberStatisticsInfo.ConsumeAmount = field.NewFloat64(tableName, "consume_amount")
+	_umsMemberStatisticsInfo.ConsumeAmount = field.NewInt64(tableName, "consume_amount")
 	_umsMemberStatisticsInfo.OrderCount = field.NewInt32(tableName, "order_count")
 	_umsMemberStatisticsInfo.CouponCount = field.NewInt32(tableName, "coupon_count")
 	_umsMemberStatisticsInfo.CommentCount = field.NewInt32(tableName, "comment_count")
@@ -56,14 +56,14 @@ type umsMemberStatisticsInfo struct {
 	ALL                 field.Asterisk
 	ID                  field.Int64
 	MemberID            field.Int64
-	ConsumeAmount       field.Float64 // 累计消费金额
-	OrderCount          field.Int32   // 订单数量
-	CouponCount         field.Int32   // 优惠券数量
-	CommentCount        field.Int32   // 评价数
-	ReturnOrderCount    field.Int32   // 退货数量
-	LoginCount          field.Int32   // 登录次数
-	AttendCount         field.Int32   // 关注数量
-	FansCount           field.Int32   // 粉丝数量
+	ConsumeAmount       field.Int64 // 累计消费金额
+	OrderCount          field.Int32 // 订单数量
+	CouponCount         field.Int32 // 优惠券数量
+	CommentCount        field.Int32 // 评价数
+	ReturnOrderCount    field.Int32 // 退货数量
+	LoginCount          field.Int32 // 登录次数
+	AttendCount         field.Int32 // 关注数量
+	FansCount           field.Int32 // 粉丝数量
 	CollectProductCount field.Int32
 	CollectSubjectCount field.Int32
 	CollectTopicCount   field.Int32
@@ -88,7 +88,7 @@ func (u *umsMemberStatisticsInfo) updateTableName(table string) *umsMemberStatis
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt64(table, "id")
 	u.MemberID = field.NewInt64(table, "member_id")
-	u.ConsumeAmount = field.NewFloat64(table, "consume_amount")
+	u.ConsumeAmount = field.NewInt64(table, "consume_amount")
 	u.OrderCount = field.NewInt32(table, "order_count")
 	u.CouponCount = field.NewInt32(table, "coupon_count")
 	u.CommentCount = field.NewInt32(table, "comment_count")

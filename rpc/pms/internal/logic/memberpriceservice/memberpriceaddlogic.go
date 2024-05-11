@@ -35,7 +35,7 @@ func (l *MemberPriceAddLogic) MemberPriceAdd(in *pmsclient.MemberPriceAddReq) (*
 	err := query.PmsMemberPrice.WithContext(l.ctx).Create(&model.PmsMemberPrice{
 		ProductID:       in.ProductId,
 		MemberLevelID:   in.MemberLevelId,
-		MemberPrice:     float64(in.MemberPrice),
+		MemberPrice:     in.MemberPrice,
 		MemberLevelName: in.MemberLevelName,
 	})
 

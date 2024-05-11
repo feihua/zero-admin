@@ -18,13 +18,13 @@ type OmsOrder struct {
 	OrderSn               string    `gorm:"column:order_sn;not null;comment:订单编号" json:"order_sn"`                                        // 订单编号
 	CreateTime            time.Time `gorm:"column:create_time;not null;comment:提交时间" json:"create_time"`                                  // 提交时间
 	MemberUsername        string    `gorm:"column:member_username;not null;comment:用户帐号" json:"member_username"`                          // 用户帐号
-	TotalAmount           float64   `gorm:"column:total_amount;not null;comment:订单总金额" json:"total_amount"`                               // 订单总金额
-	PayAmount             float64   `gorm:"column:pay_amount;not null;comment:应付金额（实际支付金额）" json:"pay_amount"`                            // 应付金额（实际支付金额）
-	FreightAmount         float64   `gorm:"column:freight_amount;not null;comment:运费金额" json:"freight_amount"`                            // 运费金额
-	PromotionAmount       float64   `gorm:"column:promotion_amount;not null;comment:促销优化金额（促销价、满减、阶梯价）" json:"promotion_amount"`          // 促销优化金额（促销价、满减、阶梯价）
-	IntegrationAmount     float64   `gorm:"column:integration_amount;not null;comment:积分抵扣金额" json:"integration_amount"`                  // 积分抵扣金额
-	CouponAmount          float64   `gorm:"column:coupon_amount;not null;comment:优惠券抵扣金额" json:"coupon_amount"`                           // 优惠券抵扣金额
-	DiscountAmount        float64   `gorm:"column:discount_amount;not null;comment:管理员后台调整订单使用的折扣金额" json:"discount_amount"`              // 管理员后台调整订单使用的折扣金额
+	TotalAmount           int64     `gorm:"column:total_amount;not null;comment:订单总金额" json:"total_amount"`                               // 订单总金额
+	PayAmount             int64     `gorm:"column:pay_amount;not null;comment:应付金额（实际支付金额）" json:"pay_amount"`                            // 应付金额（实际支付金额）
+	FreightAmount         int64     `gorm:"column:freight_amount;not null;comment:运费金额" json:"freight_amount"`                            // 运费金额
+	PromotionAmount       int64     `gorm:"column:promotion_amount;not null;comment:促销优化金额（促销价、满减、阶梯价）" json:"promotion_amount"`          // 促销优化金额（促销价、满减、阶梯价）
+	IntegrationAmount     int64     `gorm:"column:integration_amount;not null;comment:积分抵扣金额" json:"integration_amount"`                  // 积分抵扣金额
+	CouponAmount          int64     `gorm:"column:coupon_amount;not null;comment:优惠券抵扣金额" json:"coupon_amount"`                           // 优惠券抵扣金额
+	DiscountAmount        int64     `gorm:"column:discount_amount;not null;comment:管理员后台调整订单使用的折扣金额" json:"discount_amount"`              // 管理员后台调整订单使用的折扣金额
 	PayType               int32     `gorm:"column:pay_type;not null;comment:支付方式：0->未支付；1->支付宝；2->微信" json:"pay_type"`                    // 支付方式：0->未支付；1->支付宝；2->微信
 	SourceType            int32     `gorm:"column:source_type;not null;comment:订单来源：0->PC订单；1->app订单" json:"source_type"`                 // 订单来源：0->PC订单；1->app订单
 	Status                int32     `gorm:"column:status;not null;comment:订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单" json:"status"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单

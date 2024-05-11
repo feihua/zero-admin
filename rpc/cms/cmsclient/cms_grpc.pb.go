@@ -389,202 +389,202 @@ var SubjectProductRelationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	PrefrenceAreaService_PrefrenceAreaAdd_FullMethodName    = "/cmsclient.PrefrenceAreaService/PrefrenceAreaAdd"
-	PrefrenceAreaService_PrefrenceAreaDelete_FullMethodName = "/cmsclient.PrefrenceAreaService/PrefrenceAreaDelete"
-	PrefrenceAreaService_PrefrenceAreaUpdate_FullMethodName = "/cmsclient.PrefrenceAreaService/PrefrenceAreaUpdate"
-	PrefrenceAreaService_PrefrenceAreaList_FullMethodName   = "/cmsclient.PrefrenceAreaService/PrefrenceAreaList"
+	PreferredAreaService_PreferredAreaAdd_FullMethodName    = "/cmsclient.PreferredAreaService/PreferredAreaAdd"
+	PreferredAreaService_PreferredAreaDelete_FullMethodName = "/cmsclient.PreferredAreaService/PreferredAreaDelete"
+	PreferredAreaService_PreferredAreaUpdate_FullMethodName = "/cmsclient.PreferredAreaService/PreferredAreaUpdate"
+	PreferredAreaService_PreferredAreaList_FullMethodName   = "/cmsclient.PreferredAreaService/PreferredAreaList"
 )
 
-// PrefrenceAreaServiceClient is the client API for PrefrenceAreaService service.
+// PreferredAreaServiceClient is the client API for PreferredAreaService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PrefrenceAreaServiceClient interface {
+type PreferredAreaServiceClient interface {
 	// 商品优选
-	PrefrenceAreaAdd(ctx context.Context, in *PrefrenceAreaAddReq, opts ...grpc.CallOption) (*PrefrenceAreaAddResp, error)
-	PrefrenceAreaDelete(ctx context.Context, in *PrefrenceAreaDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaDeleteResp, error)
-	PrefrenceAreaUpdate(ctx context.Context, in *PrefrenceAreaUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaUpdateResp, error)
-	PrefrenceAreaList(ctx context.Context, in *PrefrenceAreaListReq, opts ...grpc.CallOption) (*PrefrenceAreaListResp, error)
+	PreferredAreaAdd(ctx context.Context, in *PreferredAreaAddReq, opts ...grpc.CallOption) (*PreferredAreaAddResp, error)
+	PreferredAreaDelete(ctx context.Context, in *PreferredAreaDeleteReq, opts ...grpc.CallOption) (*PreferredAreaDeleteResp, error)
+	PreferredAreaUpdate(ctx context.Context, in *PreferredAreaUpdateReq, opts ...grpc.CallOption) (*PreferredAreaUpdateResp, error)
+	PreferredAreaList(ctx context.Context, in *PreferredAreaListReq, opts ...grpc.CallOption) (*PreferredAreaListResp, error)
 }
 
-type prefrenceAreaServiceClient struct {
+type preferredAreaServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPrefrenceAreaServiceClient(cc grpc.ClientConnInterface) PrefrenceAreaServiceClient {
-	return &prefrenceAreaServiceClient{cc}
+func NewPreferredAreaServiceClient(cc grpc.ClientConnInterface) PreferredAreaServiceClient {
+	return &preferredAreaServiceClient{cc}
 }
 
-func (c *prefrenceAreaServiceClient) PrefrenceAreaAdd(ctx context.Context, in *PrefrenceAreaAddReq, opts ...grpc.CallOption) (*PrefrenceAreaAddResp, error) {
-	out := new(PrefrenceAreaAddResp)
-	err := c.cc.Invoke(ctx, PrefrenceAreaService_PrefrenceAreaAdd_FullMethodName, in, out, opts...)
+func (c *preferredAreaServiceClient) PreferredAreaAdd(ctx context.Context, in *PreferredAreaAddReq, opts ...grpc.CallOption) (*PreferredAreaAddResp, error) {
+	out := new(PreferredAreaAddResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_PreferredAreaAdd_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *prefrenceAreaServiceClient) PrefrenceAreaDelete(ctx context.Context, in *PrefrenceAreaDeleteReq, opts ...grpc.CallOption) (*PrefrenceAreaDeleteResp, error) {
-	out := new(PrefrenceAreaDeleteResp)
-	err := c.cc.Invoke(ctx, PrefrenceAreaService_PrefrenceAreaDelete_FullMethodName, in, out, opts...)
+func (c *preferredAreaServiceClient) PreferredAreaDelete(ctx context.Context, in *PreferredAreaDeleteReq, opts ...grpc.CallOption) (*PreferredAreaDeleteResp, error) {
+	out := new(PreferredAreaDeleteResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_PreferredAreaDelete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *prefrenceAreaServiceClient) PrefrenceAreaUpdate(ctx context.Context, in *PrefrenceAreaUpdateReq, opts ...grpc.CallOption) (*PrefrenceAreaUpdateResp, error) {
-	out := new(PrefrenceAreaUpdateResp)
-	err := c.cc.Invoke(ctx, PrefrenceAreaService_PrefrenceAreaUpdate_FullMethodName, in, out, opts...)
+func (c *preferredAreaServiceClient) PreferredAreaUpdate(ctx context.Context, in *PreferredAreaUpdateReq, opts ...grpc.CallOption) (*PreferredAreaUpdateResp, error) {
+	out := new(PreferredAreaUpdateResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_PreferredAreaUpdate_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *prefrenceAreaServiceClient) PrefrenceAreaList(ctx context.Context, in *PrefrenceAreaListReq, opts ...grpc.CallOption) (*PrefrenceAreaListResp, error) {
-	out := new(PrefrenceAreaListResp)
-	err := c.cc.Invoke(ctx, PrefrenceAreaService_PrefrenceAreaList_FullMethodName, in, out, opts...)
+func (c *preferredAreaServiceClient) PreferredAreaList(ctx context.Context, in *PreferredAreaListReq, opts ...grpc.CallOption) (*PreferredAreaListResp, error) {
+	out := new(PreferredAreaListResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_PreferredAreaList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PrefrenceAreaServiceServer is the server API for PrefrenceAreaService service.
-// All implementations must embed UnimplementedPrefrenceAreaServiceServer
+// PreferredAreaServiceServer is the server API for PreferredAreaService service.
+// All implementations must embed UnimplementedPreferredAreaServiceServer
 // for forward compatibility
-type PrefrenceAreaServiceServer interface {
+type PreferredAreaServiceServer interface {
 	// 商品优选
-	PrefrenceAreaAdd(context.Context, *PrefrenceAreaAddReq) (*PrefrenceAreaAddResp, error)
-	PrefrenceAreaDelete(context.Context, *PrefrenceAreaDeleteReq) (*PrefrenceAreaDeleteResp, error)
-	PrefrenceAreaUpdate(context.Context, *PrefrenceAreaUpdateReq) (*PrefrenceAreaUpdateResp, error)
-	PrefrenceAreaList(context.Context, *PrefrenceAreaListReq) (*PrefrenceAreaListResp, error)
-	mustEmbedUnimplementedPrefrenceAreaServiceServer()
+	PreferredAreaAdd(context.Context, *PreferredAreaAddReq) (*PreferredAreaAddResp, error)
+	PreferredAreaDelete(context.Context, *PreferredAreaDeleteReq) (*PreferredAreaDeleteResp, error)
+	PreferredAreaUpdate(context.Context, *PreferredAreaUpdateReq) (*PreferredAreaUpdateResp, error)
+	PreferredAreaList(context.Context, *PreferredAreaListReq) (*PreferredAreaListResp, error)
+	mustEmbedUnimplementedPreferredAreaServiceServer()
 }
 
-// UnimplementedPrefrenceAreaServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedPrefrenceAreaServiceServer struct {
+// UnimplementedPreferredAreaServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPreferredAreaServiceServer struct {
 }
 
-func (UnimplementedPrefrenceAreaServiceServer) PrefrenceAreaAdd(context.Context, *PrefrenceAreaAddReq) (*PrefrenceAreaAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaAdd not implemented")
+func (UnimplementedPreferredAreaServiceServer) PreferredAreaAdd(context.Context, *PreferredAreaAddReq) (*PreferredAreaAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaAdd not implemented")
 }
-func (UnimplementedPrefrenceAreaServiceServer) PrefrenceAreaDelete(context.Context, *PrefrenceAreaDeleteReq) (*PrefrenceAreaDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaDelete not implemented")
+func (UnimplementedPreferredAreaServiceServer) PreferredAreaDelete(context.Context, *PreferredAreaDeleteReq) (*PreferredAreaDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaDelete not implemented")
 }
-func (UnimplementedPrefrenceAreaServiceServer) PrefrenceAreaUpdate(context.Context, *PrefrenceAreaUpdateReq) (*PrefrenceAreaUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaUpdate not implemented")
+func (UnimplementedPreferredAreaServiceServer) PreferredAreaUpdate(context.Context, *PreferredAreaUpdateReq) (*PreferredAreaUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaUpdate not implemented")
 }
-func (UnimplementedPrefrenceAreaServiceServer) PrefrenceAreaList(context.Context, *PrefrenceAreaListReq) (*PrefrenceAreaListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaList not implemented")
+func (UnimplementedPreferredAreaServiceServer) PreferredAreaList(context.Context, *PreferredAreaListReq) (*PreferredAreaListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaList not implemented")
 }
-func (UnimplementedPrefrenceAreaServiceServer) mustEmbedUnimplementedPrefrenceAreaServiceServer() {}
+func (UnimplementedPreferredAreaServiceServer) mustEmbedUnimplementedPreferredAreaServiceServer() {}
 
-// UnsafePrefrenceAreaServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PrefrenceAreaServiceServer will
+// UnsafePreferredAreaServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PreferredAreaServiceServer will
 // result in compilation errors.
-type UnsafePrefrenceAreaServiceServer interface {
-	mustEmbedUnimplementedPrefrenceAreaServiceServer()
+type UnsafePreferredAreaServiceServer interface {
+	mustEmbedUnimplementedPreferredAreaServiceServer()
 }
 
-func RegisterPrefrenceAreaServiceServer(s grpc.ServiceRegistrar, srv PrefrenceAreaServiceServer) {
-	s.RegisterService(&PrefrenceAreaService_ServiceDesc, srv)
+func RegisterPreferredAreaServiceServer(s grpc.ServiceRegistrar, srv PreferredAreaServiceServer) {
+	s.RegisterService(&PreferredAreaService_ServiceDesc, srv)
 }
 
-func _PrefrenceAreaService_PrefrenceAreaAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaAddReq)
+func _PreferredAreaService_PreferredAreaAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreferredAreaAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaAdd(ctx, in)
+		return srv.(PreferredAreaServiceServer).PreferredAreaAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PrefrenceAreaService_PrefrenceAreaAdd_FullMethodName,
+		FullMethod: PreferredAreaService_PreferredAreaAdd_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaAdd(ctx, req.(*PrefrenceAreaAddReq))
+		return srv.(PreferredAreaServiceServer).PreferredAreaAdd(ctx, req.(*PreferredAreaAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PrefrenceAreaService_PrefrenceAreaDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaDeleteReq)
+func _PreferredAreaService_PreferredAreaDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreferredAreaDeleteReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaDelete(ctx, in)
+		return srv.(PreferredAreaServiceServer).PreferredAreaDelete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PrefrenceAreaService_PrefrenceAreaDelete_FullMethodName,
+		FullMethod: PreferredAreaService_PreferredAreaDelete_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaDelete(ctx, req.(*PrefrenceAreaDeleteReq))
+		return srv.(PreferredAreaServiceServer).PreferredAreaDelete(ctx, req.(*PreferredAreaDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PrefrenceAreaService_PrefrenceAreaUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaUpdateReq)
+func _PreferredAreaService_PreferredAreaUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreferredAreaUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaUpdate(ctx, in)
+		return srv.(PreferredAreaServiceServer).PreferredAreaUpdate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PrefrenceAreaService_PrefrenceAreaUpdate_FullMethodName,
+		FullMethod: PreferredAreaService_PreferredAreaUpdate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaUpdate(ctx, req.(*PrefrenceAreaUpdateReq))
+		return srv.(PreferredAreaServiceServer).PreferredAreaUpdate(ctx, req.(*PreferredAreaUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PrefrenceAreaService_PrefrenceAreaList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaListReq)
+func _PreferredAreaService_PreferredAreaList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreferredAreaListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaList(ctx, in)
+		return srv.(PreferredAreaServiceServer).PreferredAreaList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PrefrenceAreaService_PrefrenceAreaList_FullMethodName,
+		FullMethod: PreferredAreaService_PreferredAreaList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PrefrenceAreaServiceServer).PrefrenceAreaList(ctx, req.(*PrefrenceAreaListReq))
+		return srv.(PreferredAreaServiceServer).PreferredAreaList(ctx, req.(*PreferredAreaListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// PrefrenceAreaService_ServiceDesc is the grpc.ServiceDesc for PrefrenceAreaService service.
+// PreferredAreaService_ServiceDesc is the grpc.ServiceDesc for PreferredAreaService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PrefrenceAreaService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.PrefrenceAreaService",
-	HandlerType: (*PrefrenceAreaServiceServer)(nil),
+var PreferredAreaService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.PreferredAreaService",
+	HandlerType: (*PreferredAreaServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "PrefrenceAreaAdd",
-			Handler:    _PrefrenceAreaService_PrefrenceAreaAdd_Handler,
+			MethodName: "PreferredAreaAdd",
+			Handler:    _PreferredAreaService_PreferredAreaAdd_Handler,
 		},
 		{
-			MethodName: "PrefrenceAreaDelete",
-			Handler:    _PrefrenceAreaService_PrefrenceAreaDelete_Handler,
+			MethodName: "PreferredAreaDelete",
+			Handler:    _PreferredAreaService_PreferredAreaDelete_Handler,
 		},
 		{
-			MethodName: "PrefrenceAreaUpdate",
-			Handler:    _PrefrenceAreaService_PrefrenceAreaUpdate_Handler,
+			MethodName: "PreferredAreaUpdate",
+			Handler:    _PreferredAreaService_PreferredAreaUpdate_Handler,
 		},
 		{
-			MethodName: "PrefrenceAreaList",
-			Handler:    _PrefrenceAreaService_PrefrenceAreaList_Handler,
+			MethodName: "PreferredAreaList",
+			Handler:    _PreferredAreaService_PreferredAreaList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -592,129 +592,129 @@ var PrefrenceAreaService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationAdd_FullMethodName  = "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationAdd"
-	PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationList_FullMethodName = "/cmsclient.PrefrenceAreaProductRelationService/PrefrenceAreaProductRelationList"
+	PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_FullMethodName  = "/cmsclient.PreferredAreaProductRelationService/PreferredAreaProductRelationAdd"
+	PreferredAreaProductRelationService_PreferredAreaProductRelationList_FullMethodName = "/cmsclient.PreferredAreaProductRelationService/PreferredAreaProductRelationList"
 )
 
-// PrefrenceAreaProductRelationServiceClient is the client API for PrefrenceAreaProductRelationService service.
+// PreferredAreaProductRelationServiceClient is the client API for PreferredAreaProductRelationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PrefrenceAreaProductRelationServiceClient interface {
+type PreferredAreaProductRelationServiceClient interface {
 	// 优选商品关联
-	PrefrenceAreaProductRelationAdd(ctx context.Context, in *PrefrenceAreaProductRelationAddReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationAddResp, error)
-	PrefrenceAreaProductRelationList(ctx context.Context, in *PrefrenceAreaProductRelationListReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationListResp, error)
+	PreferredAreaProductRelationAdd(ctx context.Context, in *PreferredAreaProductRelationAddReq, opts ...grpc.CallOption) (*PreferredAreaProductRelationAddResp, error)
+	PreferredAreaProductRelationList(ctx context.Context, in *PreferredAreaProductRelationListReq, opts ...grpc.CallOption) (*PreferredAreaProductRelationListResp, error)
 }
 
-type prefrenceAreaProductRelationServiceClient struct {
+type preferredAreaProductRelationServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPrefrenceAreaProductRelationServiceClient(cc grpc.ClientConnInterface) PrefrenceAreaProductRelationServiceClient {
-	return &prefrenceAreaProductRelationServiceClient{cc}
+func NewPreferredAreaProductRelationServiceClient(cc grpc.ClientConnInterface) PreferredAreaProductRelationServiceClient {
+	return &preferredAreaProductRelationServiceClient{cc}
 }
 
-func (c *prefrenceAreaProductRelationServiceClient) PrefrenceAreaProductRelationAdd(ctx context.Context, in *PrefrenceAreaProductRelationAddReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationAddResp, error) {
-	out := new(PrefrenceAreaProductRelationAddResp)
-	err := c.cc.Invoke(ctx, PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationAdd_FullMethodName, in, out, opts...)
+func (c *preferredAreaProductRelationServiceClient) PreferredAreaProductRelationAdd(ctx context.Context, in *PreferredAreaProductRelationAddReq, opts ...grpc.CallOption) (*PreferredAreaProductRelationAddResp, error) {
+	out := new(PreferredAreaProductRelationAddResp)
+	err := c.cc.Invoke(ctx, PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *prefrenceAreaProductRelationServiceClient) PrefrenceAreaProductRelationList(ctx context.Context, in *PrefrenceAreaProductRelationListReq, opts ...grpc.CallOption) (*PrefrenceAreaProductRelationListResp, error) {
-	out := new(PrefrenceAreaProductRelationListResp)
-	err := c.cc.Invoke(ctx, PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationList_FullMethodName, in, out, opts...)
+func (c *preferredAreaProductRelationServiceClient) PreferredAreaProductRelationList(ctx context.Context, in *PreferredAreaProductRelationListReq, opts ...grpc.CallOption) (*PreferredAreaProductRelationListResp, error) {
+	out := new(PreferredAreaProductRelationListResp)
+	err := c.cc.Invoke(ctx, PreferredAreaProductRelationService_PreferredAreaProductRelationList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PrefrenceAreaProductRelationServiceServer is the server API for PrefrenceAreaProductRelationService service.
-// All implementations must embed UnimplementedPrefrenceAreaProductRelationServiceServer
+// PreferredAreaProductRelationServiceServer is the server API for PreferredAreaProductRelationService service.
+// All implementations must embed UnimplementedPreferredAreaProductRelationServiceServer
 // for forward compatibility
-type PrefrenceAreaProductRelationServiceServer interface {
+type PreferredAreaProductRelationServiceServer interface {
 	// 优选商品关联
-	PrefrenceAreaProductRelationAdd(context.Context, *PrefrenceAreaProductRelationAddReq) (*PrefrenceAreaProductRelationAddResp, error)
-	PrefrenceAreaProductRelationList(context.Context, *PrefrenceAreaProductRelationListReq) (*PrefrenceAreaProductRelationListResp, error)
-	mustEmbedUnimplementedPrefrenceAreaProductRelationServiceServer()
+	PreferredAreaProductRelationAdd(context.Context, *PreferredAreaProductRelationAddReq) (*PreferredAreaProductRelationAddResp, error)
+	PreferredAreaProductRelationList(context.Context, *PreferredAreaProductRelationListReq) (*PreferredAreaProductRelationListResp, error)
+	mustEmbedUnimplementedPreferredAreaProductRelationServiceServer()
 }
 
-// UnimplementedPrefrenceAreaProductRelationServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedPrefrenceAreaProductRelationServiceServer struct {
+// UnimplementedPreferredAreaProductRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPreferredAreaProductRelationServiceServer struct {
 }
 
-func (UnimplementedPrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelationAdd(context.Context, *PrefrenceAreaProductRelationAddReq) (*PrefrenceAreaProductRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaProductRelationAdd not implemented")
+func (UnimplementedPreferredAreaProductRelationServiceServer) PreferredAreaProductRelationAdd(context.Context, *PreferredAreaProductRelationAddReq) (*PreferredAreaProductRelationAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaProductRelationAdd not implemented")
 }
-func (UnimplementedPrefrenceAreaProductRelationServiceServer) PrefrenceAreaProductRelationList(context.Context, *PrefrenceAreaProductRelationListReq) (*PrefrenceAreaProductRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PrefrenceAreaProductRelationList not implemented")
+func (UnimplementedPreferredAreaProductRelationServiceServer) PreferredAreaProductRelationList(context.Context, *PreferredAreaProductRelationListReq) (*PreferredAreaProductRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaProductRelationList not implemented")
 }
-func (UnimplementedPrefrenceAreaProductRelationServiceServer) mustEmbedUnimplementedPrefrenceAreaProductRelationServiceServer() {
+func (UnimplementedPreferredAreaProductRelationServiceServer) mustEmbedUnimplementedPreferredAreaProductRelationServiceServer() {
 }
 
-// UnsafePrefrenceAreaProductRelationServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PrefrenceAreaProductRelationServiceServer will
+// UnsafePreferredAreaProductRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PreferredAreaProductRelationServiceServer will
 // result in compilation errors.
-type UnsafePrefrenceAreaProductRelationServiceServer interface {
-	mustEmbedUnimplementedPrefrenceAreaProductRelationServiceServer()
+type UnsafePreferredAreaProductRelationServiceServer interface {
+	mustEmbedUnimplementedPreferredAreaProductRelationServiceServer()
 }
 
-func RegisterPrefrenceAreaProductRelationServiceServer(s grpc.ServiceRegistrar, srv PrefrenceAreaProductRelationServiceServer) {
-	s.RegisterService(&PrefrenceAreaProductRelationService_ServiceDesc, srv)
+func RegisterPreferredAreaProductRelationServiceServer(s grpc.ServiceRegistrar, srv PreferredAreaProductRelationServiceServer) {
+	s.RegisterService(&PreferredAreaProductRelationService_ServiceDesc, srv)
 }
 
-func _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaProductRelationAddReq)
+func _PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreferredAreaProductRelationAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationAdd(ctx, in)
+		return srv.(PreferredAreaProductRelationServiceServer).PreferredAreaProductRelationAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationAdd_FullMethodName,
+		FullMethod: PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationAdd(ctx, req.(*PrefrenceAreaProductRelationAddReq))
+		return srv.(PreferredAreaProductRelationServiceServer).PreferredAreaProductRelationAdd(ctx, req.(*PreferredAreaProductRelationAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrefrenceAreaProductRelationListReq)
+func _PreferredAreaProductRelationService_PreferredAreaProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreferredAreaProductRelationListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationList(ctx, in)
+		return srv.(PreferredAreaProductRelationServiceServer).PreferredAreaProductRelationList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationList_FullMethodName,
+		FullMethod: PreferredAreaProductRelationService_PreferredAreaProductRelationList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PrefrenceAreaProductRelationServiceServer).PrefrenceAreaProductRelationList(ctx, req.(*PrefrenceAreaProductRelationListReq))
+		return srv.(PreferredAreaProductRelationServiceServer).PreferredAreaProductRelationList(ctx, req.(*PreferredAreaProductRelationListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// PrefrenceAreaProductRelationService_ServiceDesc is the grpc.ServiceDesc for PrefrenceAreaProductRelationService service.
+// PreferredAreaProductRelationService_ServiceDesc is the grpc.ServiceDesc for PreferredAreaProductRelationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PrefrenceAreaProductRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.PrefrenceAreaProductRelationService",
-	HandlerType: (*PrefrenceAreaProductRelationServiceServer)(nil),
+var PreferredAreaProductRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.PreferredAreaProductRelationService",
+	HandlerType: (*PreferredAreaProductRelationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "PrefrenceAreaProductRelationAdd",
-			Handler:    _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationAdd_Handler,
+			MethodName: "PreferredAreaProductRelationAdd",
+			Handler:    _PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_Handler,
 		},
 		{
-			MethodName: "PrefrenceAreaProductRelationList",
-			Handler:    _PrefrenceAreaProductRelationService_PrefrenceAreaProductRelationList_Handler,
+			MethodName: "PreferredAreaProductRelationList",
+			Handler:    _PreferredAreaProductRelationService_PreferredAreaProductRelationList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

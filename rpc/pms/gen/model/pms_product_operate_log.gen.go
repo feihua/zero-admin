@@ -14,10 +14,10 @@ const TableNamePmsProductOperateLog = "pms_product_operate_log"
 type PmsProductOperateLog struct {
 	ID               int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	ProductID        int64     `gorm:"column:product_id;not null" json:"product_id"`
-	PriceOld         float64   `gorm:"column:price_old;not null" json:"price_old"`
-	PriceNew         float64   `gorm:"column:price_new;not null" json:"price_new"`
-	SalePriceOld     float64   `gorm:"column:sale_price_old;not null" json:"sale_price_old"`
-	SalePriceNew     float64   `gorm:"column:sale_price_new;not null" json:"sale_price_new"`
+	PriceOld         int64     `gorm:"column:price_old;not null" json:"price_old"`
+	PriceNew         int64     `gorm:"column:price_new;not null" json:"price_new"`
+	SalePriceOld     int64     `gorm:"column:sale_price_old;not null" json:"sale_price_old"`
+	SalePriceNew     int64     `gorm:"column:sale_price_new;not null" json:"sale_price_new"`
 	GiftPointOld     int32     `gorm:"column:gift_point_old;not null;comment:赠送的积分" json:"gift_point_old"` // 赠送的积分
 	GiftPointNew     int32     `gorm:"column:gift_point_new;not null" json:"gift_point_new"`
 	UsePointLimitOld int32     `gorm:"column:use_point_limit_old;not null" json:"use_point_limit_old"`

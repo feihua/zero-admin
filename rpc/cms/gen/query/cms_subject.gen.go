@@ -33,7 +33,6 @@ func newCmsSubject(db *gorm.DB, opts ...gen.DOOption) cmsSubject {
 	_cmsSubject.Pic = field.NewString(tableName, "pic")
 	_cmsSubject.ProductCount = field.NewInt32(tableName, "product_count")
 	_cmsSubject.RecommendStatus = field.NewInt32(tableName, "recommend_status")
-	_cmsSubject.CreateTime = field.NewTime(tableName, "create_time")
 	_cmsSubject.CollectCount = field.NewInt32(tableName, "collect_count")
 	_cmsSubject.ReadCount = field.NewInt32(tableName, "read_count")
 	_cmsSubject.CommentCount = field.NewInt32(tableName, "comment_count")
@@ -43,6 +42,10 @@ func newCmsSubject(db *gorm.DB, opts ...gen.DOOption) cmsSubject {
 	_cmsSubject.Content = field.NewString(tableName, "content")
 	_cmsSubject.ForwardCount = field.NewInt32(tableName, "forward_count")
 	_cmsSubject.CategoryName = field.NewString(tableName, "category_name")
+	_cmsSubject.CreateBy = field.NewString(tableName, "create_by")
+	_cmsSubject.CreateTime = field.NewTime(tableName, "create_time")
+	_cmsSubject.UpdateBy = field.NewString(tableName, "update_by")
+	_cmsSubject.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_cmsSubject.fillFieldMap()
 
@@ -60,7 +63,6 @@ type cmsSubject struct {
 	Pic             field.String // 专题主图
 	ProductCount    field.Int32  // 关联产品数量
 	RecommendStatus field.Int32
-	CreateTime      field.Time
 	CollectCount    field.Int32
 	ReadCount       field.Int32
 	CommentCount    field.Int32
@@ -70,6 +72,10 @@ type cmsSubject struct {
 	Content         field.String
 	ForwardCount    field.Int32  // 转发数
 	CategoryName    field.String // 专题分类名称
+	CreateBy        field.String // 创建者
+	CreateTime      field.Time   // 创建时间
+	UpdateBy        field.String // 更新者
+	UpdateTime      field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -92,7 +98,6 @@ func (c *cmsSubject) updateTableName(table string) *cmsSubject {
 	c.Pic = field.NewString(table, "pic")
 	c.ProductCount = field.NewInt32(table, "product_count")
 	c.RecommendStatus = field.NewInt32(table, "recommend_status")
-	c.CreateTime = field.NewTime(table, "create_time")
 	c.CollectCount = field.NewInt32(table, "collect_count")
 	c.ReadCount = field.NewInt32(table, "read_count")
 	c.CommentCount = field.NewInt32(table, "comment_count")
@@ -102,6 +107,10 @@ func (c *cmsSubject) updateTableName(table string) *cmsSubject {
 	c.Content = field.NewString(table, "content")
 	c.ForwardCount = field.NewInt32(table, "forward_count")
 	c.CategoryName = field.NewString(table, "category_name")
+	c.CreateBy = field.NewString(table, "create_by")
+	c.CreateTime = field.NewTime(table, "create_time")
+	c.UpdateBy = field.NewString(table, "update_by")
+	c.UpdateTime = field.NewTime(table, "update_time")
 
 	c.fillFieldMap()
 
@@ -128,14 +137,13 @@ func (c *cmsSubject) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (c *cmsSubject) fillFieldMap() {
-	c.fieldMap = make(map[string]field.Expr, 16)
+	c.fieldMap = make(map[string]field.Expr, 19)
 	c.fieldMap["id"] = c.ID
 	c.fieldMap["category_id"] = c.CategoryID
 	c.fieldMap["title"] = c.Title
 	c.fieldMap["pic"] = c.Pic
 	c.fieldMap["product_count"] = c.ProductCount
 	c.fieldMap["recommend_status"] = c.RecommendStatus
-	c.fieldMap["create_time"] = c.CreateTime
 	c.fieldMap["collect_count"] = c.CollectCount
 	c.fieldMap["read_count"] = c.ReadCount
 	c.fieldMap["comment_count"] = c.CommentCount
@@ -145,6 +153,10 @@ func (c *cmsSubject) fillFieldMap() {
 	c.fieldMap["content"] = c.Content
 	c.fieldMap["forward_count"] = c.ForwardCount
 	c.fieldMap["category_name"] = c.CategoryName
+	c.fieldMap["create_by"] = c.CreateBy
+	c.fieldMap["create_time"] = c.CreateTime
+	c.fieldMap["update_by"] = c.UpdateBy
+	c.fieldMap["update_time"] = c.UpdateTime
 }
 
 func (c cmsSubject) clone(db *gorm.DB) cmsSubject {

@@ -32,7 +32,7 @@ func (l *CartItemUpdateLogic) CartItemUpdate(req types.UpdateCartItemReq) (*type
 		ProductSkuId:      req.ProductSkuId,
 		MemberId:          req.MemberId,
 		Quantity:          req.Quantity,
-		Price:             float32(req.Price),
+		Price:             req.Price,
 		ProductPic:        req.ProductPic,
 		ProductName:       req.ProductName,
 		ProductSubTitle:   req.ProductSubTitle,

@@ -37,6 +37,10 @@ func newOmsCompanyAddress(db *gorm.DB, opts ...gen.DOOption) omsCompanyAddress {
 	_omsCompanyAddress.City = field.NewString(tableName, "city")
 	_omsCompanyAddress.Region = field.NewString(tableName, "region")
 	_omsCompanyAddress.DetailAddress = field.NewString(tableName, "detail_address")
+	_omsCompanyAddress.CreateBy = field.NewString(tableName, "create_by")
+	_omsCompanyAddress.CreateTime = field.NewTime(tableName, "create_time")
+	_omsCompanyAddress.UpdateBy = field.NewString(tableName, "update_by")
+	_omsCompanyAddress.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_omsCompanyAddress.fillFieldMap()
 
@@ -58,6 +62,10 @@ type omsCompanyAddress struct {
 	City          field.String // 市
 	Region        field.String // 区
 	DetailAddress field.String // 详细地址
+	CreateBy      field.String // 创建者
+	CreateTime    field.Time   // 创建时间
+	UpdateBy      field.String // 更新者
+	UpdateTime    field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -84,6 +92,10 @@ func (o *omsCompanyAddress) updateTableName(table string) *omsCompanyAddress {
 	o.City = field.NewString(table, "city")
 	o.Region = field.NewString(table, "region")
 	o.DetailAddress = field.NewString(table, "detail_address")
+	o.CreateBy = field.NewString(table, "create_by")
+	o.CreateTime = field.NewTime(table, "create_time")
+	o.UpdateBy = field.NewString(table, "update_by")
+	o.UpdateTime = field.NewTime(table, "update_time")
 
 	o.fillFieldMap()
 
@@ -112,7 +124,7 @@ func (o *omsCompanyAddress) GetFieldByName(fieldName string) (field.OrderExpr, b
 }
 
 func (o *omsCompanyAddress) fillFieldMap() {
-	o.fieldMap = make(map[string]field.Expr, 10)
+	o.fieldMap = make(map[string]field.Expr, 14)
 	o.fieldMap["id"] = o.ID
 	o.fieldMap["address_name"] = o.AddressName
 	o.fieldMap["send_status"] = o.SendStatus
@@ -123,6 +135,10 @@ func (o *omsCompanyAddress) fillFieldMap() {
 	o.fieldMap["city"] = o.City
 	o.fieldMap["region"] = o.Region
 	o.fieldMap["detail_address"] = o.DetailAddress
+	o.fieldMap["create_by"] = o.CreateBy
+	o.fieldMap["create_time"] = o.CreateTime
+	o.fieldMap["update_by"] = o.UpdateBy
+	o.fieldMap["update_time"] = o.UpdateTime
 }
 
 func (o omsCompanyAddress) clone(db *gorm.DB) omsCompanyAddress {

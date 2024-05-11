@@ -7,7 +7,7 @@ create table cms_topic_comment
     member_icon      varchar(255)  not null,
     content          varchar(1000) not null,
     create_time      datetime      not null,
-    show_status      int(1)        not null
+    show_status tinyint not null
 )
     comment '专题评论表' charset = utf8;
 

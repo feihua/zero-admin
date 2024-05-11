@@ -37,7 +37,7 @@ func (l *MemberPriceUpdateLogic) MemberPriceUpdate(in *pmsclient.MemberPriceUpda
 		ID:              in.Id,
 		ProductID:       in.ProductId,
 		MemberLevelID:   in.MemberLevelId,
-		MemberPrice:     float64(in.MemberPrice),
+		MemberPrice:     in.MemberPrice,
 		MemberLevelName: in.MemberLevelName,
 	})
 

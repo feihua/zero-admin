@@ -12,14 +12,17 @@ const TableNameCmsHelp = "cms_help"
 
 // CmsHelp 帮助表
 type CmsHelp struct {
-	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	CategoryID int64     `gorm:"column:category_id;not null" json:"category_id"`
-	Icon       string    `gorm:"column:icon;not null" json:"icon"`
-	Title      string    `gorm:"column:title;not null" json:"title"`
-	ShowStatus int32     `gorm:"column:show_status;not null" json:"show_status"`
-	CreateTime time.Time `gorm:"column:create_time;not null" json:"create_time"`
-	ReadCount  int32     `gorm:"column:read_count;not null" json:"read_count"`
-	Content    string    `gorm:"column:content;not null" json:"content"`
+	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	CategoryID int64      `gorm:"column:category_id;not null" json:"category_id"`
+	Icon       string     `gorm:"column:icon;not null" json:"icon"`
+	Title      string     `gorm:"column:title;not null" json:"title"`
+	ShowStatus int32      `gorm:"column:show_status;not null" json:"show_status"`
+	ReadCount  int32      `gorm:"column:read_count;not null" json:"read_count"`
+	Content    string     `gorm:"column:content;not null" json:"content"`
+	CreateBy   string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
+	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateBy   *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                         // 更新者
+	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 
 // TableName CmsHelp's table name

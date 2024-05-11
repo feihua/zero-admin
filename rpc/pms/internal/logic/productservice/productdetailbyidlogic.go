@@ -182,12 +182,12 @@ func buildSkuStockListData(l *ProductDetailByIdLogic, pmsProduct *model.PmsProdu
 			Id:             item.ID,
 			ProductId:      item.ProductID,
 			SkuCode:        item.SkuCode,
-			Price:          float32(item.Price),
+			Price:          item.Price,
 			Stock:          item.Stock,
 			LowStock:       item.LowStock,
 			Pic:            item.Pic,
 			Sale:           item.Sale,
-			PromotionPrice: float32(item.PromotionPrice),
+			PromotionPrice: item.PromotionPrice,
 			LockStock:      item.LockStock,
 			SpData:         item.SpData,
 		})
@@ -208,8 +208,8 @@ func buildProductLadderListData(l *ProductDetailByIdLogic, pmsProduct *model.Pms
 				Id:        item.ID,
 				ProductId: item.ProductID,
 				Count:     item.Count,
-				Discount:  float32(item.Discount),
-				Price:     float32(item.Price),
+				Discount:  item.Discount,
+				Price:     item.Price,
 			})
 		}
 
@@ -231,8 +231,8 @@ func buildProductFullReductionListData(l *ProductDetailByIdLogic, pmsProduct *mo
 			list = append(list, &pmsclient.ProductFullReductionListData{
 				Id:          item.ID,
 				ProductId:   item.ProductID,
-				FullPrice:   float32(item.FullPrice),
-				ReducePrice: float32(item.ReducePrice),
+				FullPrice:   item.FullPrice,
+				ReducePrice: item.ReducePrice,
 			})
 		}
 		return list
@@ -254,7 +254,7 @@ func buildProductMemberListData(l *ProductDetailByIdLogic, pmsProduct *model.Pms
 				Id:              item.ID,
 				ProductId:       item.ProductID,
 				MemberLevelId:   item.MemberLevelID,
-				MemberPrice:     float32(item.MemberPrice),
+				MemberPrice:     item.MemberPrice,
 				MemberLevelName: item.MemberLevelName,
 			})
 		}

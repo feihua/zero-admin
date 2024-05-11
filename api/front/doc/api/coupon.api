@@ -22,9 +22,9 @@ type (
         Name string `json:"name"`
         Platform int32 `json:"platform"`         // 使用平台：0->全部；1->移动；2->PC
         Count int32 `json:"count"`               // 数量
-        Amount float64 `json:"amount"`           // 金额
+        Amount int64 `json:"amount"`             // 金额
         PerLimit int32 `json:"perLimit"`         // 每人限领张数
-        MinPoint float64 `json:"minPoint"`       // 使用门槛；0表示无门槛
+        MinPoint int64 `json:"minPoint"`         // 使用门槛；0表示无门槛
         StartTime string `json:"startTime"`
         EndTime string `json:"endTime"`
         UseType int32 `json:"useType"`           // 使用类型：0->全场通用；1->指定分类；2->指定商品
@@ -50,9 +50,9 @@ type (
         Name string `json:"name"`
         Platform int32 `json:"platform"`         // 使用平台：0->全部；1->移动；2->PC
         Count int32 `json:"count"`               // 数量
-        Amount float64 `json:"amount"`           // 金额
+        Amount int64 `json:"amount"`             // 金额
         PerLimit int32 `json:"perLimit"`         // 每人限领张数
-        MinPoint float64 `json:"minPoint"`       // 使用门槛；0表示无门槛
+        MinPoint int64 `json:"minPoint"`         // 使用门槛；0表示无门槛
         StartTime string `json:"startTime"`
         EndTime string `json:"endTime"`
         UseType int32 `json:"useType"`           // 使用类型：0->全场通用；1->指定分类；2->指定商品

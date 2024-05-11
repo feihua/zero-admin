@@ -31,7 +31,7 @@ func newSmsFlashPromotionProductRelation(db *gorm.DB, opts ...gen.DOOption) smsF
 	_smsFlashPromotionProductRelation.FlashPromotionID = field.NewInt64(tableName, "flash_promotion_id")
 	_smsFlashPromotionProductRelation.FlashPromotionSessionID = field.NewInt64(tableName, "flash_promotion_session_id")
 	_smsFlashPromotionProductRelation.ProductID = field.NewInt64(tableName, "product_id")
-	_smsFlashPromotionProductRelation.FlashPromotionPrice = field.NewFloat64(tableName, "flash_promotion_price")
+	_smsFlashPromotionProductRelation.FlashPromotionPrice = field.NewInt64(tableName, "flash_promotion_price")
 	_smsFlashPromotionProductRelation.FlashPromotionCount = field.NewInt32(tableName, "flash_promotion_count")
 	_smsFlashPromotionProductRelation.FlashPromotionLimit = field.NewInt32(tableName, "flash_promotion_limit")
 	_smsFlashPromotionProductRelation.Sort = field.NewInt32(tableName, "sort")
@@ -46,14 +46,14 @@ type smsFlashPromotionProductRelation struct {
 	smsFlashPromotionProductRelationDo smsFlashPromotionProductRelationDo
 
 	ALL                     field.Asterisk
-	ID                      field.Int64   // 编号
-	FlashPromotionID        field.Int64   // 限时购id
-	FlashPromotionSessionID field.Int64   // 编号
-	ProductID               field.Int64   // 商品id
-	FlashPromotionPrice     field.Float64 // 限时购价格
-	FlashPromotionCount     field.Int32   // 限时购数量
-	FlashPromotionLimit     field.Int32   // 每人限购数量
-	Sort                    field.Int32   // 排序
+	ID                      field.Int64 // 编号
+	FlashPromotionID        field.Int64 // 限时购id
+	FlashPromotionSessionID field.Int64 // 编号
+	ProductID               field.Int64 // 商品id
+	FlashPromotionPrice     field.Int64 // 限时购价格
+	FlashPromotionCount     field.Int32 // 限时购数量
+	FlashPromotionLimit     field.Int32 // 每人限购数量
+	Sort                    field.Int32 // 排序
 
 	fieldMap map[string]field.Expr
 }
@@ -74,7 +74,7 @@ func (s *smsFlashPromotionProductRelation) updateTableName(table string) *smsFla
 	s.FlashPromotionID = field.NewInt64(table, "flash_promotion_id")
 	s.FlashPromotionSessionID = field.NewInt64(table, "flash_promotion_session_id")
 	s.ProductID = field.NewInt64(table, "product_id")
-	s.FlashPromotionPrice = field.NewFloat64(table, "flash_promotion_price")
+	s.FlashPromotionPrice = field.NewInt64(table, "flash_promotion_price")
 	s.FlashPromotionCount = field.NewInt32(table, "flash_promotion_count")
 	s.FlashPromotionLimit = field.NewInt32(table, "flash_promotion_limit")
 	s.Sort = field.NewInt32(table, "sort")

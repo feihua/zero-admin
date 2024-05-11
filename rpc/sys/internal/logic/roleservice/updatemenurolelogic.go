@@ -46,9 +46,8 @@ func (l *UpdateMenuRoleLogic) UpdateMenuRole(in *sysclient.UpdateMenuRoleReq) (*
 
 	for _, menuId := range in.MenuIds {
 		_ = q.WithContext(l.ctx).Create(&model.SysRoleMenu{
-			RoleID:   in.RoleId,
-			MenuID:   menuId,
-			CreateBy: in.CreateBy,
+			RoleID: in.RoleId,
+			MenuID: menuId,
 		})
 
 	}

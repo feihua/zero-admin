@@ -12,22 +12,25 @@ const TableNameCmsSubject = "cms_subject"
 
 // CmsSubject 专题表
 type CmsSubject struct {
-	ID              int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	CategoryID      int64     `gorm:"column:category_id;not null" json:"category_id"`
-	Title           string    `gorm:"column:title;not null" json:"title"`
-	Pic             string    `gorm:"column:pic;not null;comment:专题主图" json:"pic"`                       // 专题主图
-	ProductCount    int32     `gorm:"column:product_count;not null;comment:关联产品数量" json:"product_count"` // 关联产品数量
-	RecommendStatus int32     `gorm:"column:recommend_status;not null" json:"recommend_status"`
-	CreateTime      time.Time `gorm:"column:create_time;not null" json:"create_time"`
-	CollectCount    int32     `gorm:"column:collect_count;not null" json:"collect_count"`
-	ReadCount       int32     `gorm:"column:read_count;not null" json:"read_count"`
-	CommentCount    int32     `gorm:"column:comment_count;not null" json:"comment_count"`
-	AlbumPics       string    `gorm:"column:album_pics;not null;comment:画册图片用逗号分割" json:"album_pics"` // 画册图片用逗号分割
-	Description     *string   `gorm:"column:description" json:"description"`
-	ShowStatus      int32     `gorm:"column:show_status;not null;comment:显示状态：0->不显示；1->显示" json:"show_status"` // 显示状态：0->不显示；1->显示
-	Content         string    `gorm:"column:content;not null" json:"content"`
-	ForwardCount    int32     `gorm:"column:forward_count;not null;comment:转发数" json:"forward_count"`    // 转发数
-	CategoryName    string    `gorm:"column:category_name;not null;comment:专题分类名称" json:"category_name"` // 专题分类名称
+	ID              int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	CategoryID      int64      `gorm:"column:category_id;not null" json:"category_id"`
+	Title           string     `gorm:"column:title;not null" json:"title"`
+	Pic             string     `gorm:"column:pic;not null;comment:专题主图" json:"pic"`                       // 专题主图
+	ProductCount    int32      `gorm:"column:product_count;not null;comment:关联产品数量" json:"product_count"` // 关联产品数量
+	RecommendStatus int32      `gorm:"column:recommend_status;not null" json:"recommend_status"`
+	CollectCount    int32      `gorm:"column:collect_count;not null" json:"collect_count"`
+	ReadCount       int32      `gorm:"column:read_count;not null" json:"read_count"`
+	CommentCount    int32      `gorm:"column:comment_count;not null" json:"comment_count"`
+	AlbumPics       string     `gorm:"column:album_pics;not null;comment:画册图片用逗号分割" json:"album_pics"` // 画册图片用逗号分割
+	Description     *string    `gorm:"column:description" json:"description"`
+	ShowStatus      int32      `gorm:"column:show_status;not null;comment:显示状态：0->不显示；1->显示" json:"show_status"` // 显示状态：0->不显示；1->显示
+	Content         string     `gorm:"column:content;not null" json:"content"`
+	ForwardCount    int32      `gorm:"column:forward_count;not null;comment:转发数" json:"forward_count"`                        // 转发数
+	CategoryName    string     `gorm:"column:category_name;not null;comment:专题分类名称" json:"category_name"`                     // 专题分类名称
+	CreateBy        string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
+	CreateTime      time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateBy        *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                         // 更新者
+	UpdateTime      *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 
 // TableName CmsSubject's table name

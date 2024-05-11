@@ -6,9 +6,8 @@ import (
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
-	"time"
-
 	"github.com/zeromicro/go-zero/core/logx"
+	"time"
 )
 
 // CartItemAddLogic
@@ -50,14 +49,14 @@ func (l *CartItemAddLogic) CartItemAdd(in *omsclient.CartItemAddReq) (*omsclient
 			ProductSkuID:      in.ProductSkuId,
 			MemberID:          in.MemberId,
 			Quantity:          in.Quantity,
-			Price:             float64(in.Price),
+			Price:             in.Price,
 			ProductPic:        in.ProductPic,
 			ProductName:       in.ProductName,
 			ProductSubTitle:   in.ProductSubTitle,
 			ProductSkuCode:    in.ProductSkuCode,
 			MemberNickname:    in.MemberNickname,
 			CreateDate:        time.Now(),
-			ModifyDate:        time.Now(),
+			UpdateDate:        time.Now(),
 			DeleteStatus:      in.DeleteStatus,
 			ProductCategoryID: in.ProductCategoryId,
 			ProductBrand:      in.ProductBrand,

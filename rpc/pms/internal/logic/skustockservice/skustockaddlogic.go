@@ -35,12 +35,12 @@ func (l *SkuStockAddLogic) SkuStockAdd(in *pmsclient.SkuStockAddReq) (*pmsclient
 	err := query.PmsSkuStock.WithContext(l.ctx).Create(&model.PmsSkuStock{
 		ProductID:      in.ProductId,
 		SkuCode:        in.SkuCode,
-		Price:          float64(in.Price),
+		Price:          in.Price,
 		Stock:          in.Stock,
 		LowStock:       in.LowStock,
 		Pic:            in.Pic,
 		Sale:           in.Sale,
-		PromotionPrice: float64(in.PromotionPrice),
+		PromotionPrice: in.PromotionPrice,
 		LockStock:      in.LockStock,
 		SpData:         in.SpData,
 	})

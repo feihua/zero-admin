@@ -39,7 +39,7 @@ func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemUpdateAttrReq) (
 		ProductSkuId:      req.ProductSkuId,
 		MemberId:          memberId,
 		Quantity:          req.Quantity,
-		Price:             float32(req.Price),
+		Price:             req.Price,
 		ProductPic:        req.ProductPic,
 		ProductName:       req.ProductName,
 		ProductSubTitle:   req.ProductSubTitle,

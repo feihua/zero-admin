@@ -1,4 +1,4 @@
-package prefrenceareaservicelogic
+package preferredareaservicelogic
 
 import (
 	"context"
@@ -9,14 +9,14 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type PrefrenceAreaAddLogic struct {
+type PreferredAreaAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewPrefrenceAreaAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PrefrenceAreaAddLogic {
-	return &PrefrenceAreaAddLogic{
+func NewPreferredAreaAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PreferredAreaAddLogic {
+	return &PreferredAreaAddLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
@@ -24,8 +24,8 @@ func NewPrefrenceAreaAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // 商品优选
-func (l *PrefrenceAreaAddLogic) PrefrenceAreaAdd(in *cmsclient.PrefrenceAreaAddReq) (*cmsclient.PrefrenceAreaAddResp, error) {
+func (l *PreferredAreaAddLogic) PreferredAreaAdd(in *cmsclient.PreferredAreaAddReq) (*cmsclient.PreferredAreaAddResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &cmsclient.PrefrenceAreaAddResp{}, nil
+	return &cmsclient.PreferredAreaAddResp{}, nil
 }

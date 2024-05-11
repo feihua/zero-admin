@@ -34,8 +34,8 @@ func NewProductFullReductionAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 func (l *ProductFullReductionAddLogic) ProductFullReductionAdd(in *pmsclient.ProductFullReductionAddReq) (*pmsclient.ProductFullReductionAddResp, error) {
 	err := query.PmsProductFullReduction.WithContext(l.ctx).Create(&model.PmsProductFullReduction{
 		ProductID:   in.ProductId,
-		FullPrice:   float64(in.FullPrice),
-		ReducePrice: float64(in.ReducePrice),
+		FullPrice:   in.FullPrice,
+		ReducePrice: in.ReducePrice,
 	})
 
 	if err != nil {

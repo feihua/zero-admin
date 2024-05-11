@@ -4,7 +4,7 @@ create table sms_home_recommend_subject
         primary key,
     subject_id       bigint      not null comment '专题id',
     subject_name     varchar(64) not null comment '专题名称',
-    recommend_status int(1)      not null comment '推荐状态：0->不推荐;1->推荐',
+    recommend_status tinyint not null comment '推荐状态：0->不推荐;1->推荐',
     sort             int         not null comment '排序'
 )
     comment '首页推荐专题表';

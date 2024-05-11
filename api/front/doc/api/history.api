@@ -9,7 +9,7 @@ type addReadHistoryReq {
 	ProductName     string  `json:"productName"`     // 商品名称
 	ProductPic      string  `json:"productPic"`      // 商品图片
 	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
-	ProductPrice    float64 `json:"productPrice"`    // 商品价格
+    ProductPrice int64 `json:"productPrice"`         // 商品价格
 }
 type addReadHistoryResp {
 	Code    int64  `json:"code"`
@@ -41,7 +41,7 @@ type ReadHistoryList {
 	ProductName     string  `json:"productName"`     // 商品名称
 	ProductPic      string  `json:"productPic"`      // 商品图片
 	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
-	ProductPrice    float64 `json:"productPrice"`    // 商品价格
+    ProductPrice int64 `json:"productPrice"`         // 商品价格
 	CreateTime      string  `json:"createTime"`      // 浏览时间
 }
 

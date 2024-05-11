@@ -30,12 +30,12 @@ func newPmsSkuStock(db *gorm.DB, opts ...gen.DOOption) pmsSkuStock {
 	_pmsSkuStock.ID = field.NewInt64(tableName, "id")
 	_pmsSkuStock.ProductID = field.NewInt64(tableName, "product_id")
 	_pmsSkuStock.SkuCode = field.NewString(tableName, "sku_code")
-	_pmsSkuStock.Price = field.NewFloat64(tableName, "price")
+	_pmsSkuStock.Price = field.NewInt64(tableName, "price")
 	_pmsSkuStock.Stock = field.NewInt32(tableName, "stock")
 	_pmsSkuStock.LowStock = field.NewInt32(tableName, "low_stock")
 	_pmsSkuStock.Pic = field.NewString(tableName, "pic")
 	_pmsSkuStock.Sale = field.NewInt32(tableName, "sale")
-	_pmsSkuStock.PromotionPrice = field.NewFloat64(tableName, "promotion_price")
+	_pmsSkuStock.PromotionPrice = field.NewInt64(tableName, "promotion_price")
 	_pmsSkuStock.LockStock = field.NewInt32(tableName, "lock_stock")
 	_pmsSkuStock.SpData = field.NewString(tableName, "sp_data")
 
@@ -52,14 +52,14 @@ type pmsSkuStock struct {
 	ID             field.Int64
 	ProductID      field.Int64
 	SkuCode        field.String // sku编码
-	Price          field.Float64
-	Stock          field.Int32   // 库存
-	LowStock       field.Int32   // 预警库存
-	Pic            field.String  // 展示图片
-	Sale           field.Int32   // 销量
-	PromotionPrice field.Float64 // 单品促销价格
-	LockStock      field.Int32   // 锁定库存
-	SpData         field.String  // 商品销售属性，json格式
+	Price          field.Int64
+	Stock          field.Int32  // 库存
+	LowStock       field.Int32  // 预警库存
+	Pic            field.String // 展示图片
+	Sale           field.Int32  // 销量
+	PromotionPrice field.Int64  // 单品促销价格
+	LockStock      field.Int32  // 锁定库存
+	SpData         field.String // 商品销售属性，json格式
 
 	fieldMap map[string]field.Expr
 }
@@ -79,12 +79,12 @@ func (p *pmsSkuStock) updateTableName(table string) *pmsSkuStock {
 	p.ID = field.NewInt64(table, "id")
 	p.ProductID = field.NewInt64(table, "product_id")
 	p.SkuCode = field.NewString(table, "sku_code")
-	p.Price = field.NewFloat64(table, "price")
+	p.Price = field.NewInt64(table, "price")
 	p.Stock = field.NewInt32(table, "stock")
 	p.LowStock = field.NewInt32(table, "low_stock")
 	p.Pic = field.NewString(table, "pic")
 	p.Sale = field.NewInt32(table, "sale")
-	p.PromotionPrice = field.NewFloat64(table, "promotion_price")
+	p.PromotionPrice = field.NewInt64(table, "promotion_price")
 	p.LockStock = field.NewInt32(table, "lock_stock")
 	p.SpData = field.NewString(table, "sp_data")
 

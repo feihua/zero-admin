@@ -4,8 +4,8 @@ create table sms_home_recommend_product
         primary key,
     product_id       bigint      not null comment '商品id',
     product_name     varchar(64) not null comment '商品名称',
-    recommend_status int(1)      not null comment '推荐状态：0->不推荐;1->推荐',
-    sort             int(1)      not null comment '排序'
+    recommend_status tinyint not null comment '推荐状态：0->不推荐;1->推荐',
+    sort             tinyint not null comment '排序'
 )
     comment '人气推荐商品表';
 

@@ -10,7 +10,7 @@ type (
 		ProductSkuId      int64   `json:"productSkuId"`
 		MemberId          int64   `json:"memberId"`
         Quantity int32 `json:"quantity"`                     // 购买数量
-		Price             float64 `json:"price"`             // 添加到购物车的价格
+        Price int64 `json:"price"`                           // 添加到购物车的价格
 		ProductPic        string  `json:"productPic"`        // 商品主图
 		ProductName       string  `json:"productName"`       // 商品名称
 		ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
@@ -36,7 +36,7 @@ type (
 		ProductSkuId      int64   `json:"productSkuId"`
 		MemberId          int64   `json:"memberId"`
         Quantity int32 `json:"quantity"`                     // 购买数量
-		Price             float64 `json:"price"`             // 添加到购物车的价格
+        Price int64 `json:"price"`                           // 添加到购物车的价格
 		ProductPic        string  `json:"productPic"`        // 商品主图
 		ProductName       string  `json:"productName"`       // 商品名称
 		ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
@@ -65,7 +65,7 @@ type (
 		ProductSkuId      int64   `json:"productSkuId"`
 		MemberId          int64   `json:"memberId"`
         Quantity int32 `json:"quantity"`                     // 购买数量
-		Price             float64 `json:"price"`             // 添加到购物车的价格
+        Price int64 `json:"price"`                           // 添加到购物车的价格
 		ProductPic        string  `json:"productPic"`        // 商品主图
 		ProductName       string  `json:"productName"`       // 商品名称
 		ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）

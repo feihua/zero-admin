@@ -37,8 +37,8 @@ func (l *ProductLadderUpdateLogic) ProductLadderUpdate(in *pmsclient.ProductLadd
 		ID:        in.Id,
 		ProductID: in.ProductId,
 		Count:     in.Count,
-		Discount:  float64(in.Discount),
-		Price:     float64(in.Price),
+		Discount:  in.Discount,
+		Price:     in.Price,
 	})
 
 	if err != nil {

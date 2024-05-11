@@ -33,13 +33,13 @@ func newOmsOrder(db *gorm.DB, opts ...gen.DOOption) omsOrder {
 	_omsOrder.OrderSn = field.NewString(tableName, "order_sn")
 	_omsOrder.CreateTime = field.NewTime(tableName, "create_time")
 	_omsOrder.MemberUsername = field.NewString(tableName, "member_username")
-	_omsOrder.TotalAmount = field.NewFloat64(tableName, "total_amount")
-	_omsOrder.PayAmount = field.NewFloat64(tableName, "pay_amount")
-	_omsOrder.FreightAmount = field.NewFloat64(tableName, "freight_amount")
-	_omsOrder.PromotionAmount = field.NewFloat64(tableName, "promotion_amount")
-	_omsOrder.IntegrationAmount = field.NewFloat64(tableName, "integration_amount")
-	_omsOrder.CouponAmount = field.NewFloat64(tableName, "coupon_amount")
-	_omsOrder.DiscountAmount = field.NewFloat64(tableName, "discount_amount")
+	_omsOrder.TotalAmount = field.NewInt64(tableName, "total_amount")
+	_omsOrder.PayAmount = field.NewInt64(tableName, "pay_amount")
+	_omsOrder.FreightAmount = field.NewInt64(tableName, "freight_amount")
+	_omsOrder.PromotionAmount = field.NewInt64(tableName, "promotion_amount")
+	_omsOrder.IntegrationAmount = field.NewInt64(tableName, "integration_amount")
+	_omsOrder.CouponAmount = field.NewInt64(tableName, "coupon_amount")
+	_omsOrder.DiscountAmount = field.NewInt64(tableName, "discount_amount")
 	_omsOrder.PayType = field.NewInt32(tableName, "pay_type")
 	_omsOrder.SourceType = field.NewInt32(tableName, "source_type")
 	_omsOrder.Status = field.NewInt32(tableName, "status")
@@ -82,50 +82,50 @@ type omsOrder struct {
 	omsOrderDo omsOrderDo
 
 	ALL                   field.Asterisk
-	ID                    field.Int64   // 订单id
-	MemberID              field.Int64   // 会员id
-	CouponID              field.Int64   // 优惠券id
-	OrderSn               field.String  // 订单编号
-	CreateTime            field.Time    // 提交时间
-	MemberUsername        field.String  // 用户帐号
-	TotalAmount           field.Float64 // 订单总金额
-	PayAmount             field.Float64 // 应付金额（实际支付金额）
-	FreightAmount         field.Float64 // 运费金额
-	PromotionAmount       field.Float64 // 促销优化金额（促销价、满减、阶梯价）
-	IntegrationAmount     field.Float64 // 积分抵扣金额
-	CouponAmount          field.Float64 // 优惠券抵扣金额
-	DiscountAmount        field.Float64 // 管理员后台调整订单使用的折扣金额
-	PayType               field.Int32   // 支付方式：0->未支付；1->支付宝；2->微信
-	SourceType            field.Int32   // 订单来源：0->PC订单；1->app订单
-	Status                field.Int32   // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-	OrderType             field.Int32   // 订单类型：0->正常订单；1->秒杀订单
-	DeliveryCompany       field.String  // 物流公司(配送方式)
-	DeliverySn            field.String  // 物流单号
-	AutoConfirmDay        field.Int32   // 自动确认时间（天）
-	Integration           field.Int32   // 可以获得的积分
-	Growth                field.Int32   // 可以活动的成长值
-	PromotionInfo         field.String  // 活动信息
-	BillType              field.Int32   // 发票类型：0->不开发票；1->电子发票；2->纸质发票
-	BillHeader            field.String  // 发票抬头
-	BillContent           field.String  // 发票内容
-	BillReceiverPhone     field.String  // 收票人电话
-	BillReceiverEmail     field.String  // 收票人邮箱
-	ReceiverName          field.String  // 收货人姓名
-	ReceiverPhone         field.String  // 收货人电话
-	ReceiverPostCode      field.String  // 收货人邮编
-	ReceiverProvince      field.String  // 省份/直辖市
-	ReceiverCity          field.String  // 城市
-	ReceiverRegion        field.String  // 区
-	ReceiverDetailAddress field.String  // 详细地址
-	Note                  field.String  // 订单备注
-	ConfirmStatus         field.Int32   // 确认收货状态：0->未确认；1->已确认
-	DeleteStatus          field.Int32   // 删除状态：0->未删除；1->已删除
-	UseIntegration        field.Int32   // 下单时使用的积分
-	PaymentTime           field.Time    // 支付时间
-	DeliveryTime          field.Time    // 发货时间
-	ReceiveTime           field.Time    // 确认收货时间
-	CommentTime           field.Time    // 评价时间
-	ModifyTime            field.Time    // 修改时间
+	ID                    field.Int64  // 订单id
+	MemberID              field.Int64  // 会员id
+	CouponID              field.Int64  // 优惠券id
+	OrderSn               field.String // 订单编号
+	CreateTime            field.Time   // 提交时间
+	MemberUsername        field.String // 用户帐号
+	TotalAmount           field.Int64  // 订单总金额
+	PayAmount             field.Int64  // 应付金额（实际支付金额）
+	FreightAmount         field.Int64  // 运费金额
+	PromotionAmount       field.Int64  // 促销优化金额（促销价、满减、阶梯价）
+	IntegrationAmount     field.Int64  // 积分抵扣金额
+	CouponAmount          field.Int64  // 优惠券抵扣金额
+	DiscountAmount        field.Int64  // 管理员后台调整订单使用的折扣金额
+	PayType               field.Int32  // 支付方式：0->未支付；1->支付宝；2->微信
+	SourceType            field.Int32  // 订单来源：0->PC订单；1->app订单
+	Status                field.Int32  // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	OrderType             field.Int32  // 订单类型：0->正常订单；1->秒杀订单
+	DeliveryCompany       field.String // 物流公司(配送方式)
+	DeliverySn            field.String // 物流单号
+	AutoConfirmDay        field.Int32  // 自动确认时间（天）
+	Integration           field.Int32  // 可以获得的积分
+	Growth                field.Int32  // 可以活动的成长值
+	PromotionInfo         field.String // 活动信息
+	BillType              field.Int32  // 发票类型：0->不开发票；1->电子发票；2->纸质发票
+	BillHeader            field.String // 发票抬头
+	BillContent           field.String // 发票内容
+	BillReceiverPhone     field.String // 收票人电话
+	BillReceiverEmail     field.String // 收票人邮箱
+	ReceiverName          field.String // 收货人姓名
+	ReceiverPhone         field.String // 收货人电话
+	ReceiverPostCode      field.String // 收货人邮编
+	ReceiverProvince      field.String // 省份/直辖市
+	ReceiverCity          field.String // 城市
+	ReceiverRegion        field.String // 区
+	ReceiverDetailAddress field.String // 详细地址
+	Note                  field.String // 订单备注
+	ConfirmStatus         field.Int32  // 确认收货状态：0->未确认；1->已确认
+	DeleteStatus          field.Int32  // 删除状态：0->未删除；1->已删除
+	UseIntegration        field.Int32  // 下单时使用的积分
+	PaymentTime           field.Time   // 支付时间
+	DeliveryTime          field.Time   // 发货时间
+	ReceiveTime           field.Time   // 确认收货时间
+	CommentTime           field.Time   // 评价时间
+	ModifyTime            field.Time   // 修改时间
 
 	fieldMap map[string]field.Expr
 }
@@ -148,13 +148,13 @@ func (o *omsOrder) updateTableName(table string) *omsOrder {
 	o.OrderSn = field.NewString(table, "order_sn")
 	o.CreateTime = field.NewTime(table, "create_time")
 	o.MemberUsername = field.NewString(table, "member_username")
-	o.TotalAmount = field.NewFloat64(table, "total_amount")
-	o.PayAmount = field.NewFloat64(table, "pay_amount")
-	o.FreightAmount = field.NewFloat64(table, "freight_amount")
-	o.PromotionAmount = field.NewFloat64(table, "promotion_amount")
-	o.IntegrationAmount = field.NewFloat64(table, "integration_amount")
-	o.CouponAmount = field.NewFloat64(table, "coupon_amount")
-	o.DiscountAmount = field.NewFloat64(table, "discount_amount")
+	o.TotalAmount = field.NewInt64(table, "total_amount")
+	o.PayAmount = field.NewInt64(table, "pay_amount")
+	o.FreightAmount = field.NewInt64(table, "freight_amount")
+	o.PromotionAmount = field.NewInt64(table, "promotion_amount")
+	o.IntegrationAmount = field.NewInt64(table, "integration_amount")
+	o.CouponAmount = field.NewInt64(table, "coupon_amount")
+	o.DiscountAmount = field.NewInt64(table, "discount_amount")
 	o.PayType = field.NewInt32(table, "pay_type")
 	o.SourceType = field.NewInt32(table, "source_type")
 	o.Status = field.NewInt32(table, "status")

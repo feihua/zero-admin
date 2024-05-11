@@ -17,14 +17,14 @@ type OmsCartItem struct {
 	ProductSkuID      int64     `gorm:"column:product_sku_id;not null;comment:商品库存id" json:"product_sku_id"`                                                   // 商品库存id
 	MemberID          int64     `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`                                                               // 会员id
 	Quantity          int32     `gorm:"column:quantity;not null;comment:购买数量" json:"quantity"`                                                                 // 购买数量
-	Price             float64   `gorm:"column:price;not null;comment:添加到购物车的价格" json:"price"`                                                                  // 添加到购物车的价格
+	Price             int64     `gorm:"column:price;not null;comment:添加到购物车的价格" json:"price"`                                                                  // 添加到购物车的价格
 	ProductPic        string    `gorm:"column:product_pic;not null;comment:商品主图" json:"product_pic"`                                                           // 商品主图
 	ProductName       string    `gorm:"column:product_name;not null;comment:商品名称" json:"product_name"`                                                         // 商品名称
 	ProductSubTitle   string    `gorm:"column:product_sub_title;not null;comment:商品副标题（卖点）" json:"product_sub_title"`                                          // 商品副标题（卖点）
 	ProductSkuCode    string    `gorm:"column:product_sku_code;not null;comment:商品sku条码" json:"product_sku_code"`                                              // 商品sku条码
 	MemberNickname    string    `gorm:"column:member_nickname;not null;comment:会员昵称" json:"member_nickname"`                                                   // 会员昵称
 	CreateDate        time.Time `gorm:"column:create_date;not null;comment:创建时间" json:"create_date"`                                                           // 创建时间
-	ModifyDate        time.Time `gorm:"column:modify_date;not null;comment:修改时间" json:"modify_date"`                                                           // 修改时间
+	UpdateDate        time.Time `gorm:"column:update_date;not null;comment:修改时间" json:"update_date"`                                                           // 修改时间
 	DeleteStatus      int32     `gorm:"column:delete_status;not null;comment:是否删除" json:"delete_status"`                                                       // 是否删除
 	ProductCategoryID int64     `gorm:"column:product_category_id;not null;comment:商品分类" json:"product_category_id"`                                           // 商品分类
 	ProductBrand      string    `gorm:"column:product_brand;not null;comment:商品品牌" json:"product_brand"`                                                       // 商品品牌

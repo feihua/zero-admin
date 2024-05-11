@@ -12,7 +12,7 @@ type UmsMemberLevel struct {
 	LevelName          string  `gorm:"column:level_name;not null;comment:等级名称" json:"level_name"`                           // 等级名称
 	GrowthPoint        int32   `gorm:"column:growth_point;not null;comment:成长点" json:"growth_point"`                        // 成长点
 	DefaultStatus      int32   `gorm:"column:default_status;not null;comment:是否为默认等级：0->不是；1->是" json:"default_status"`     // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   float64 `gorm:"column:free_freight_point;not null;comment:免运费标准" json:"free_freight_point"`          // 免运费标准
+	FreeFreightPoint   int64   `gorm:"column:free_freight_point;not null;comment:免运费标准" json:"free_freight_point"`          // 免运费标准
 	CommentGrowthPoint int32   `gorm:"column:comment_growth_point;not null;comment:每次评价获取的成长值" json:"comment_growth_point"` // 每次评价获取的成长值
 	IsFreeFreight      int32   `gorm:"column:is_free_freight;not null;comment:是否有免邮特权" json:"is_free_freight"`              // 是否有免邮特权
 	IsSignIn           int32   `gorm:"column:is_sign_in;not null;comment:是否有签到特权" json:"is_sign_in"`                        // 是否有签到特权

@@ -34,7 +34,7 @@ func newOmsOrderReturnApply(db *gorm.DB, opts ...gen.DOOption) omsOrderReturnApp
 	_omsOrderReturnApply.OrderSn = field.NewString(tableName, "order_sn")
 	_omsOrderReturnApply.CreateTime = field.NewTime(tableName, "create_time")
 	_omsOrderReturnApply.MemberUsername = field.NewString(tableName, "member_username")
-	_omsOrderReturnApply.ReturnAmount = field.NewFloat64(tableName, "return_amount")
+	_omsOrderReturnApply.ReturnAmount = field.NewInt64(tableName, "return_amount")
 	_omsOrderReturnApply.ReturnName = field.NewString(tableName, "return_name")
 	_omsOrderReturnApply.ReturnPhone = field.NewString(tableName, "return_phone")
 	_omsOrderReturnApply.Status = field.NewInt32(tableName, "status")
@@ -44,8 +44,8 @@ func newOmsOrderReturnApply(db *gorm.DB, opts ...gen.DOOption) omsOrderReturnApp
 	_omsOrderReturnApply.ProductBrand = field.NewString(tableName, "product_brand")
 	_omsOrderReturnApply.ProductAttr = field.NewString(tableName, "product_attr")
 	_omsOrderReturnApply.ProductCount = field.NewInt32(tableName, "product_count")
-	_omsOrderReturnApply.ProductPrice = field.NewFloat64(tableName, "product_price")
-	_omsOrderReturnApply.ProductRealPrice = field.NewFloat64(tableName, "product_real_price")
+	_omsOrderReturnApply.ProductPrice = field.NewInt64(tableName, "product_price")
+	_omsOrderReturnApply.ProductRealPrice = field.NewInt64(tableName, "product_real_price")
 	_omsOrderReturnApply.Reason = field.NewString(tableName, "reason")
 	_omsOrderReturnApply.Description = field.NewString(tableName, "description")
 	_omsOrderReturnApply.ProofPics = field.NewString(tableName, "proof_pics")
@@ -66,32 +66,32 @@ type omsOrderReturnApply struct {
 
 	ALL              field.Asterisk
 	ID               field.Int64
-	OrderID          field.Int64   // 订单id
-	CompanyAddressID field.Int64   // 收货地址表id
-	ProductID        field.Int64   // 退货商品id
-	OrderSn          field.String  // 订单编号
-	CreateTime       field.Time    // 申请时间
-	MemberUsername   field.String  // 会员用户名
-	ReturnAmount     field.Float64 // 退款金额
-	ReturnName       field.String  // 退货人姓名
-	ReturnPhone      field.String  // 退货人电话
-	Status           field.Int32   // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-	HandleTime       field.Time    // 处理时间
-	ProductPic       field.String  // 商品图片
-	ProductName      field.String  // 商品名称
-	ProductBrand     field.String  // 商品品牌
-	ProductAttr      field.String  // 商品销售属性：颜色：红色；尺码：xl;
-	ProductCount     field.Int32   // 退货数量
-	ProductPrice     field.Float64 // 商品单价
-	ProductRealPrice field.Float64 // 商品实际支付单价
-	Reason           field.String  // 原因
-	Description      field.String  // 描述
-	ProofPics        field.String  // 凭证图片，以逗号隔开
-	HandleNote       field.String  // 处理备注
-	HandleMan        field.String  // 处理人员
-	ReceiveMan       field.String  // 收货人
-	ReceiveTime      field.Time    // 收货时间
-	ReceiveNote      field.String  // 收货备注
+	OrderID          field.Int64  // 订单id
+	CompanyAddressID field.Int64  // 收货地址表id
+	ProductID        field.Int64  // 退货商品id
+	OrderSn          field.String // 订单编号
+	CreateTime       field.Time   // 申请时间
+	MemberUsername   field.String // 会员用户名
+	ReturnAmount     field.Int64  // 退款金额
+	ReturnName       field.String // 退货人姓名
+	ReturnPhone      field.String // 退货人电话
+	Status           field.Int32  // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleTime       field.Time   // 处理时间
+	ProductPic       field.String // 商品图片
+	ProductName      field.String // 商品名称
+	ProductBrand     field.String // 商品品牌
+	ProductAttr      field.String // 商品销售属性：颜色：红色；尺码：xl;
+	ProductCount     field.Int32  // 退货数量
+	ProductPrice     field.Int64  // 商品单价
+	ProductRealPrice field.Int64  // 商品实际支付单价
+	Reason           field.String // 原因
+	Description      field.String // 描述
+	ProofPics        field.String // 凭证图片，以逗号隔开
+	HandleNote       field.String // 处理备注
+	HandleMan        field.String // 处理人员
+	ReceiveMan       field.String // 收货人
+	ReceiveTime      field.Time   // 收货时间
+	ReceiveNote      field.String // 收货备注
 
 	fieldMap map[string]field.Expr
 }
@@ -115,7 +115,7 @@ func (o *omsOrderReturnApply) updateTableName(table string) *omsOrderReturnApply
 	o.OrderSn = field.NewString(table, "order_sn")
 	o.CreateTime = field.NewTime(table, "create_time")
 	o.MemberUsername = field.NewString(table, "member_username")
-	o.ReturnAmount = field.NewFloat64(table, "return_amount")
+	o.ReturnAmount = field.NewInt64(table, "return_amount")
 	o.ReturnName = field.NewString(table, "return_name")
 	o.ReturnPhone = field.NewString(table, "return_phone")
 	o.Status = field.NewInt32(table, "status")
@@ -125,8 +125,8 @@ func (o *omsOrderReturnApply) updateTableName(table string) *omsOrderReturnApply
 	o.ProductBrand = field.NewString(table, "product_brand")
 	o.ProductAttr = field.NewString(table, "product_attr")
 	o.ProductCount = field.NewInt32(table, "product_count")
-	o.ProductPrice = field.NewFloat64(table, "product_price")
-	o.ProductRealPrice = field.NewFloat64(table, "product_real_price")
+	o.ProductPrice = field.NewInt64(table, "product_price")
+	o.ProductRealPrice = field.NewInt64(table, "product_real_price")
 	o.Reason = field.NewString(table, "reason")
 	o.Description = field.NewString(table, "description")
 	o.ProofPics = field.NewString(table, "proof_pics")

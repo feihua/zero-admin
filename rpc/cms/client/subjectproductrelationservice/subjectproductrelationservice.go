@@ -13,19 +13,19 @@ import (
 )
 
 type (
-	PrefrenceAreaAddReq                  = cmsclient.PrefrenceAreaAddReq
-	PrefrenceAreaAddResp                 = cmsclient.PrefrenceAreaAddResp
-	PrefrenceAreaDeleteReq               = cmsclient.PrefrenceAreaDeleteReq
-	PrefrenceAreaDeleteResp              = cmsclient.PrefrenceAreaDeleteResp
-	PrefrenceAreaListData                = cmsclient.PrefrenceAreaListData
-	PrefrenceAreaListReq                 = cmsclient.PrefrenceAreaListReq
-	PrefrenceAreaListResp                = cmsclient.PrefrenceAreaListResp
-	PrefrenceAreaProductRelationAddReq   = cmsclient.PrefrenceAreaProductRelationAddReq
-	PrefrenceAreaProductRelationAddResp  = cmsclient.PrefrenceAreaProductRelationAddResp
-	PrefrenceAreaProductRelationListReq  = cmsclient.PrefrenceAreaProductRelationListReq
-	PrefrenceAreaProductRelationListResp = cmsclient.PrefrenceAreaProductRelationListResp
-	PrefrenceAreaUpdateReq               = cmsclient.PrefrenceAreaUpdateReq
-	PrefrenceAreaUpdateResp              = cmsclient.PrefrenceAreaUpdateResp
+	PreferredAreaAddReq                  = cmsclient.PreferredAreaAddReq
+	PreferredAreaAddResp                 = cmsclient.PreferredAreaAddResp
+	PreferredAreaDeleteReq               = cmsclient.PreferredAreaDeleteReq
+	PreferredAreaDeleteResp              = cmsclient.PreferredAreaDeleteResp
+	PreferredAreaListData                = cmsclient.PreferredAreaListData
+	PreferredAreaListReq                 = cmsclient.PreferredAreaListReq
+	PreferredAreaListResp                = cmsclient.PreferredAreaListResp
+	PreferredAreaProductRelationAddReq   = cmsclient.PreferredAreaProductRelationAddReq
+	PreferredAreaProductRelationAddResp  = cmsclient.PreferredAreaProductRelationAddResp
+	PreferredAreaProductRelationListReq  = cmsclient.PreferredAreaProductRelationListReq
+	PreferredAreaProductRelationListResp = cmsclient.PreferredAreaProductRelationListResp
+	PreferredAreaUpdateReq               = cmsclient.PreferredAreaUpdateReq
+	PreferredAreaUpdateResp              = cmsclient.PreferredAreaUpdateResp
 	SubjectAddReq                        = cmsclient.SubjectAddReq
 	SubjectAddResp                       = cmsclient.SubjectAddResp
 	SubjectDeleteReq                     = cmsclient.SubjectDeleteReq

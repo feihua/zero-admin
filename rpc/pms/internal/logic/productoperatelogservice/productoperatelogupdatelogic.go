@@ -4,10 +4,9 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"time"
-
-	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -37,10 +36,10 @@ func (l *ProductOperateLogUpdateLogic) ProductOperateLogUpdate(in *pmsclient.Pro
 	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductOperateLog{
 		ID:               in.Id,
 		ProductID:        in.ProductId,
-		PriceOld:         float64(in.PriceOld),
-		PriceNew:         float64(in.PriceNew),
-		SalePriceOld:     float64(in.SalePriceOld),
-		SalePriceNew:     float64(in.SalePriceNew),
+		PriceOld:         in.PriceOld,
+		PriceNew:         in.PriceNew,
+		SalePriceOld:     in.SalePriceOld,
+		SalePriceNew:     in.SalePriceNew,
 		GiftPointOld:     in.GiftPointOld,
 		GiftPointNew:     in.GiftPointNew,
 		UsePointLimitOld: in.UsePointLimitOld,

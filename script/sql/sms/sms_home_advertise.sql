@@ -3,11 +3,11 @@ create table sms_home_advertise
     id          bigint auto_increment
         primary key,
     name        varchar(100)  not null comment '名称',
-    type        int(1)        not null comment '轮播位置：0->PC首页轮播；1->app首页轮播',
+    type   tinyint not null comment '轮播位置：0->PC首页轮播；1->app首页轮播',
     pic         varchar(500)  not null comment '图片地址',
     start_time  datetime      not null comment '开始时间',
     end_time    datetime      not null comment '结束时间',
-    status      int(1)        not null comment '上下线状态：0->下线；1->上线',
+    status tinyint not null comment '上下线状态：0->下线；1->上线',
     click_count int           not null comment '点击数',
     order_count int           not null comment '下单数',
     url         varchar(500)  not null comment '链接地址',

@@ -2,12 +2,13 @@ create table pms_product_ladder
 (
     id         bigint auto_increment
         primary key,
-    product_id bigint         not null,
-    count      int            not null comment '满足的商品数量',
-    discount   decimal(10, 2) not null comment '折扣',
-    price      decimal(10, 2) not null comment '折后价格'
+    product_id bigint not null,
+    count      int    not null comment '满足的商品数量',
+    discount   bigint not null comment '折扣',
+    price      bigint not null comment '折后价格'
 )
     comment '产品阶梯价格表(只针对同商品)';
+
 
 INSERT INTO pms_product_ladder (id, product_id, count, discount, price) VALUES (1, 7, 3, 0.70, 0.00);
 INSERT INTO pms_product_ladder (id, product_id, count, discount, price) VALUES (2, 8, 3, 0.70, 0.00);

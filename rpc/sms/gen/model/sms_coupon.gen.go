@@ -17,9 +17,9 @@ type SmsCoupon struct {
 	Name         string    `gorm:"column:name;not null;comment:名称" json:"name"`                                    // 名称
 	Platform     int32     `gorm:"column:platform;not null;comment:使用平台：0->全部；1->移动；2->PC" json:"platform"`        // 使用平台：0->全部；1->移动；2->PC
 	Count        int32     `gorm:"column:count;not null;comment:数量" json:"count"`                                  // 数量
-	Amount       float64   `gorm:"column:amount;not null;comment:金额" json:"amount"`                                // 金额
+	Amount       int64     `gorm:"column:amount;not null;comment:金额" json:"amount"`                                // 金额
 	PerLimit     int32     `gorm:"column:per_limit;not null;comment:每人限领张数" json:"per_limit"`                      // 每人限领张数
-	MinPoint     float64   `gorm:"column:min_point;not null;comment:使用门槛；0表示无门槛" json:"min_point"`                 // 使用门槛；0表示无门槛
+	MinPoint     int64     `gorm:"column:min_point;not null;comment:使用门槛；0表示无门槛" json:"min_point"`                 // 使用门槛；0表示无门槛
 	StartTime    time.Time `gorm:"column:start_time;not null;comment:开始时间" json:"start_time"`                      // 开始时间
 	EndTime      time.Time `gorm:"column:end_time;not null;comment:结束时间" json:"end_time"`                          // 结束时间
 	UseType      int32     `gorm:"column:use_type;not null;comment:使用类型：0->全场通用；1->指定分类；2->指定商品" json:"use_type"`  // 使用类型：0->全场通用；1->指定分类；2->指定商品

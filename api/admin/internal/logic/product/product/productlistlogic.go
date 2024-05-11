@@ -61,7 +61,7 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 		})
 
 		//查询优选关联
-		areaRelationList, _ := l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationList(l.ctx, &cmsclient.PrefrenceAreaProductRelationListReq{
+		areaRelationList, _ := l.svcCtx.PreferredAreaProductRelationService.PreferredAreaProductRelationList(l.ctx, &cmsclient.PreferredAreaProductRelationListReq{
 			ProductId: item.Id,
 		})
 
@@ -110,7 +110,7 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 			BrandName:                        item.BrandName,
 			ProductCategoryName:              item.ProductCategoryName,
 			SubjectProductRelationList:       subjectRelationList.SubjectId,
-			PrefrenceAreaProductRelationList: areaRelationList.PrefrenceAreaId,
+			PrefrenceAreaProductRelationList: areaRelationList.PreferredAreaId,
 		})
 	}
 

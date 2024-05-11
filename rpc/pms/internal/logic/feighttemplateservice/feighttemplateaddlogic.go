@@ -35,10 +35,10 @@ func (l *FeightTemplateAddLogic) FeightTemplateAdd(in *pmsclient.FeightTemplateA
 	err := query.PmsFeightTemplate.WithContext(l.ctx).Create(&model.PmsFeightTemplate{
 		Name:           in.Name,
 		ChargeType:     in.ChargeType,
-		FirstWeight:    float64(in.FirstWeight),
-		FirstFee:       float64(in.FirstFee),
-		ContinueWeight: float64(in.ContinueWeight),
-		ContinmeFee:    float64(in.ContinmeFee),
+		FirstWeight:    in.FirstWeight,
+		FirstFee:       in.FirstFee,
+		ContinueWeight: in.ContinueWeight,
+		ContinueFee:    in.ContinmeFee,
 		Dest:           in.Dest,
 	})
 

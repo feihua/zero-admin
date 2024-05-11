@@ -32,9 +32,12 @@ func newCmsHelp(db *gorm.DB, opts ...gen.DOOption) cmsHelp {
 	_cmsHelp.Icon = field.NewString(tableName, "icon")
 	_cmsHelp.Title = field.NewString(tableName, "title")
 	_cmsHelp.ShowStatus = field.NewInt32(tableName, "show_status")
-	_cmsHelp.CreateTime = field.NewTime(tableName, "create_time")
 	_cmsHelp.ReadCount = field.NewInt32(tableName, "read_count")
 	_cmsHelp.Content = field.NewString(tableName, "content")
+	_cmsHelp.CreateBy = field.NewString(tableName, "create_by")
+	_cmsHelp.CreateTime = field.NewTime(tableName, "create_time")
+	_cmsHelp.UpdateBy = field.NewString(tableName, "update_by")
+	_cmsHelp.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_cmsHelp.fillFieldMap()
 
@@ -51,9 +54,12 @@ type cmsHelp struct {
 	Icon       field.String
 	Title      field.String
 	ShowStatus field.Int32
-	CreateTime field.Time
 	ReadCount  field.Int32
 	Content    field.String
+	CreateBy   field.String // 创建者
+	CreateTime field.Time   // 创建时间
+	UpdateBy   field.String // 更新者
+	UpdateTime field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -75,9 +81,12 @@ func (c *cmsHelp) updateTableName(table string) *cmsHelp {
 	c.Icon = field.NewString(table, "icon")
 	c.Title = field.NewString(table, "title")
 	c.ShowStatus = field.NewInt32(table, "show_status")
-	c.CreateTime = field.NewTime(table, "create_time")
 	c.ReadCount = field.NewInt32(table, "read_count")
 	c.Content = field.NewString(table, "content")
+	c.CreateBy = field.NewString(table, "create_by")
+	c.CreateTime = field.NewTime(table, "create_time")
+	c.UpdateBy = field.NewString(table, "update_by")
+	c.UpdateTime = field.NewTime(table, "update_time")
 
 	c.fillFieldMap()
 
@@ -102,15 +111,18 @@ func (c *cmsHelp) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (c *cmsHelp) fillFieldMap() {
-	c.fieldMap = make(map[string]field.Expr, 8)
+	c.fieldMap = make(map[string]field.Expr, 11)
 	c.fieldMap["id"] = c.ID
 	c.fieldMap["category_id"] = c.CategoryID
 	c.fieldMap["icon"] = c.Icon
 	c.fieldMap["title"] = c.Title
 	c.fieldMap["show_status"] = c.ShowStatus
-	c.fieldMap["create_time"] = c.CreateTime
 	c.fieldMap["read_count"] = c.ReadCount
 	c.fieldMap["content"] = c.Content
+	c.fieldMap["create_by"] = c.CreateBy
+	c.fieldMap["create_time"] = c.CreateTime
+	c.fieldMap["update_by"] = c.UpdateBy
+	c.fieldMap["update_time"] = c.UpdateTime
 }
 
 func (c cmsHelp) clone(db *gorm.DB) cmsHelp {

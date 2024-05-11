@@ -71,12 +71,12 @@ func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromot
 			//0->全场通用
 			//判断是否满足优惠起点
 			//计算购物车商品的总价
-			var totalAmount float32
+			var totalAmount int64
 			for _, item := range cartPromotionItemList {
 				realPrice := item.Price - item.ReduceAmount
-				totalAmount = totalAmount + realPrice*float32(item.Quantity)
+				totalAmount = totalAmount + realPrice*int64(item.Quantity)
 			}
-			if time.Now().Before(nowTime) && totalAmount-float32(minPoint) > 0 {
+			if time.Now().Before(nowTime) && totalAmount-minPoint > 0 {
 
 				enableList = append(enableList, couponHistoryDetail)
 			} else {
@@ -89,15 +89,15 @@ func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromot
 			for _, item := range categoryRelationList {
 				productCategoryIds[item.ProductCategoryId] = item.ProductCategoryId
 			}
-			var totalAmount float32
+			var totalAmount int64
 			for _, item := range cartPromotionItemList {
 				_, ok := productCategoryIds[item.ProductCategoryId]
 				if ok {
 					realPrice := item.Price - item.ReduceAmount
-					totalAmount = totalAmount + realPrice*float32(item.Quantity)
+					totalAmount = totalAmount + realPrice*int64(item.Quantity)
 				}
 			}
-			if time.Now().Before(nowTime) && totalAmount-float32(minPoint) > 0 {
+			if time.Now().Before(nowTime) && totalAmount-minPoint > 0 {
 
 				enableList = append(enableList, couponHistoryDetail)
 			} else {
@@ -110,15 +110,15 @@ func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromot
 			for _, item := range productRelationList {
 				productIds[item.ProductId] = item.ProductId
 			}
-			var totalAmount float32
+			var totalAmount int64
 			for _, item := range cartPromotionItemList {
 				_, ok := productIds[item.ProductId]
 				if ok {
 					realPrice := item.Price - item.ReduceAmount
-					totalAmount = totalAmount + realPrice*float32(item.Quantity)
+					totalAmount = totalAmount + realPrice*int64(item.Quantity)
 				}
 			}
-			if time.Now().Before(nowTime) && totalAmount-float32(minPoint) > 0 {
+			if time.Now().Before(nowTime) && totalAmount-minPoint > 0 {
 
 				enableList = append(enableList, couponHistoryDetail)
 			} else {

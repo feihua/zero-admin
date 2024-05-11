@@ -27,18 +27,18 @@ type PmsProduct struct {
 	VerifyStatus               int32     `gorm:"column:verify_status;not null;comment:审核状态：0->未审核；1->审核通过" json:"verify_status"`                                             // 审核状态：0->未审核；1->审核通过
 	Sort                       int32     `gorm:"column:sort;not null;comment:排序" json:"sort"`                                                                                // 排序
 	Sale                       int32     `gorm:"column:sale;not null;comment:销量" json:"sale"`                                                                                // 销量
-	Price                      float64   `gorm:"column:price;not null;comment:商品价格" json:"price"`                                                                            // 商品价格
-	PromotionPrice             float64   `gorm:"column:promotion_price;not null;comment:促销价格" json:"promotion_price"`                                                        // 促销价格
+	Price                      int64     `gorm:"column:price;not null;comment:商品价格" json:"price"`                                                                            // 商品价格
+	PromotionPrice             int64     `gorm:"column:promotion_price;not null;comment:促销价格" json:"promotion_price"`                                                        // 促销价格
 	GiftGrowth                 int32     `gorm:"column:gift_growth;not null;comment:赠送的成长值" json:"gift_growth"`                                                              // 赠送的成长值
 	GiftPoint                  int32     `gorm:"column:gift_point;not null;comment:赠送的积分" json:"gift_point"`                                                                 // 赠送的积分
 	UsePointLimit              int32     `gorm:"column:use_point_limit;not null;comment:限制使用的积分数" json:"use_point_limit"`                                                    // 限制使用的积分数
 	SubTitle                   string    `gorm:"column:sub_title;not null;comment:副标题" json:"sub_title"`                                                                     // 副标题
 	Description                string    `gorm:"column:description;not null;comment:商品描述" json:"description"`                                                                // 商品描述
-	OriginalPrice              float64   `gorm:"column:original_price;not null;comment:市场价" json:"original_price"`                                                           // 市场价
+	OriginalPrice              int64     `gorm:"column:original_price;not null;comment:市场价" json:"original_price"`                                                           // 市场价
 	Stock                      int32     `gorm:"column:stock;not null;comment:库存" json:"stock"`                                                                              // 库存
 	LowStock                   int32     `gorm:"column:low_stock;not null;comment:库存预警值" json:"low_stock"`                                                                   // 库存预警值
 	Unit                       string    `gorm:"column:unit;not null;comment:单位" json:"unit"`                                                                                // 单位
-	Weight                     float64   `gorm:"column:weight;not null;comment:商品重量，默认为克" json:"weight"`                                                                     // 商品重量，默认为克
+	Weight                     int64     `gorm:"column:weight;not null;comment:商品重量，默认为克" json:"weight"`                                                                     // 商品重量，默认为克
 	PreviewStatus              int32     `gorm:"column:preview_status;not null;comment:是否为预告商品：0->不是；1->是" json:"preview_status"`                                            // 是否为预告商品：0->不是；1->是
 	ServiceIds                 string    `gorm:"column:service_ids;not null;comment:以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮" json:"service_ids"`                                  // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
 	Keywords                   string    `gorm:"column:keywords;not null;comment:搜索关键字" json:"keywords"`                                                                     // 搜索关键字

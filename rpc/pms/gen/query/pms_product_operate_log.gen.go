@@ -29,10 +29,10 @@ func newPmsProductOperateLog(db *gorm.DB, opts ...gen.DOOption) pmsProductOperat
 	_pmsProductOperateLog.ALL = field.NewAsterisk(tableName)
 	_pmsProductOperateLog.ID = field.NewInt64(tableName, "id")
 	_pmsProductOperateLog.ProductID = field.NewInt64(tableName, "product_id")
-	_pmsProductOperateLog.PriceOld = field.NewFloat64(tableName, "price_old")
-	_pmsProductOperateLog.PriceNew = field.NewFloat64(tableName, "price_new")
-	_pmsProductOperateLog.SalePriceOld = field.NewFloat64(tableName, "sale_price_old")
-	_pmsProductOperateLog.SalePriceNew = field.NewFloat64(tableName, "sale_price_new")
+	_pmsProductOperateLog.PriceOld = field.NewInt64(tableName, "price_old")
+	_pmsProductOperateLog.PriceNew = field.NewInt64(tableName, "price_new")
+	_pmsProductOperateLog.SalePriceOld = field.NewInt64(tableName, "sale_price_old")
+	_pmsProductOperateLog.SalePriceNew = field.NewInt64(tableName, "sale_price_new")
 	_pmsProductOperateLog.GiftPointOld = field.NewInt32(tableName, "gift_point_old")
 	_pmsProductOperateLog.GiftPointNew = field.NewInt32(tableName, "gift_point_new")
 	_pmsProductOperateLog.UsePointLimitOld = field.NewInt32(tableName, "use_point_limit_old")
@@ -51,10 +51,10 @@ type pmsProductOperateLog struct {
 	ALL              field.Asterisk
 	ID               field.Int64
 	ProductID        field.Int64
-	PriceOld         field.Float64
-	PriceNew         field.Float64
-	SalePriceOld     field.Float64
-	SalePriceNew     field.Float64
+	PriceOld         field.Int64
+	PriceNew         field.Int64
+	SalePriceOld     field.Int64
+	SalePriceNew     field.Int64
 	GiftPointOld     field.Int32 // 赠送的积分
 	GiftPointNew     field.Int32
 	UsePointLimitOld field.Int32
@@ -79,10 +79,10 @@ func (p *pmsProductOperateLog) updateTableName(table string) *pmsProductOperateL
 	p.ALL = field.NewAsterisk(table)
 	p.ID = field.NewInt64(table, "id")
 	p.ProductID = field.NewInt64(table, "product_id")
-	p.PriceOld = field.NewFloat64(table, "price_old")
-	p.PriceNew = field.NewFloat64(table, "price_new")
-	p.SalePriceOld = field.NewFloat64(table, "sale_price_old")
-	p.SalePriceNew = field.NewFloat64(table, "sale_price_new")
+	p.PriceOld = field.NewInt64(table, "price_old")
+	p.PriceNew = field.NewInt64(table, "price_new")
+	p.SalePriceOld = field.NewInt64(table, "sale_price_old")
+	p.SalePriceNew = field.NewInt64(table, "sale_price_new")
 	p.GiftPointOld = field.NewInt32(table, "gift_point_old")
 	p.GiftPointNew = field.NewInt32(table, "gift_point_new")
 	p.UsePointLimitOld = field.NewInt32(table, "use_point_limit_old")

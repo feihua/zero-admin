@@ -35,8 +35,8 @@ func (l *ProductLadderAddLogic) ProductLadderAdd(in *pmsclient.ProductLadderAddR
 	err := query.PmsProductLadder.WithContext(l.ctx).Create(&model.PmsProductLadder{
 		ProductID: in.ProductId,
 		Count:     in.Count,
-		Discount:  float64(in.Discount),
-		Price:     float64(in.Price),
+		Discount:  in.Discount,
+		Price:     in.Price,
 	})
 
 	if err != nil {

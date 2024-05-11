@@ -30,7 +30,6 @@ func newCmsTopic(db *gorm.DB, opts ...gen.DOOption) cmsTopic {
 	_cmsTopic.ID = field.NewInt64(tableName, "id")
 	_cmsTopic.CategoryID = field.NewInt64(tableName, "category_id")
 	_cmsTopic.Name = field.NewString(tableName, "name")
-	_cmsTopic.CreateTime = field.NewTime(tableName, "create_time")
 	_cmsTopic.StartTime = field.NewTime(tableName, "start_time")
 	_cmsTopic.EndTime = field.NewTime(tableName, "end_time")
 	_cmsTopic.AttendCount = field.NewInt32(tableName, "attend_count")
@@ -39,6 +38,10 @@ func newCmsTopic(db *gorm.DB, opts ...gen.DOOption) cmsTopic {
 	_cmsTopic.AwardName = field.NewString(tableName, "award_name")
 	_cmsTopic.AttendType = field.NewString(tableName, "attend_type")
 	_cmsTopic.Content = field.NewString(tableName, "content")
+	_cmsTopic.CreateBy = field.NewString(tableName, "create_by")
+	_cmsTopic.CreateTime = field.NewTime(tableName, "create_time")
+	_cmsTopic.UpdateBy = field.NewString(tableName, "update_by")
+	_cmsTopic.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_cmsTopic.fillFieldMap()
 
@@ -53,7 +56,6 @@ type cmsTopic struct {
 	ID             field.Int64
 	CategoryID     field.Int64
 	Name           field.String
-	CreateTime     field.Time
 	StartTime      field.Time
 	EndTime        field.Time
 	AttendCount    field.Int32 // 参与人数
@@ -62,6 +64,10 @@ type cmsTopic struct {
 	AwardName      field.String // 奖品名称
 	AttendType     field.String // 参与方式
 	Content        field.String // 话题内容
+	CreateBy       field.String // 创建者
+	CreateTime     field.Time   // 创建时间
+	UpdateBy       field.String // 更新者
+	UpdateTime     field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -81,7 +87,6 @@ func (c *cmsTopic) updateTableName(table string) *cmsTopic {
 	c.ID = field.NewInt64(table, "id")
 	c.CategoryID = field.NewInt64(table, "category_id")
 	c.Name = field.NewString(table, "name")
-	c.CreateTime = field.NewTime(table, "create_time")
 	c.StartTime = field.NewTime(table, "start_time")
 	c.EndTime = field.NewTime(table, "end_time")
 	c.AttendCount = field.NewInt32(table, "attend_count")
@@ -90,6 +95,10 @@ func (c *cmsTopic) updateTableName(table string) *cmsTopic {
 	c.AwardName = field.NewString(table, "award_name")
 	c.AttendType = field.NewString(table, "attend_type")
 	c.Content = field.NewString(table, "content")
+	c.CreateBy = field.NewString(table, "create_by")
+	c.CreateTime = field.NewTime(table, "create_time")
+	c.UpdateBy = field.NewString(table, "update_by")
+	c.UpdateTime = field.NewTime(table, "update_time")
 
 	c.fillFieldMap()
 
@@ -114,11 +123,10 @@ func (c *cmsTopic) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (c *cmsTopic) fillFieldMap() {
-	c.fieldMap = make(map[string]field.Expr, 12)
+	c.fieldMap = make(map[string]field.Expr, 15)
 	c.fieldMap["id"] = c.ID
 	c.fieldMap["category_id"] = c.CategoryID
 	c.fieldMap["name"] = c.Name
-	c.fieldMap["create_time"] = c.CreateTime
 	c.fieldMap["start_time"] = c.StartTime
 	c.fieldMap["end_time"] = c.EndTime
 	c.fieldMap["attend_count"] = c.AttendCount
@@ -127,6 +135,10 @@ func (c *cmsTopic) fillFieldMap() {
 	c.fieldMap["award_name"] = c.AwardName
 	c.fieldMap["attend_type"] = c.AttendType
 	c.fieldMap["content"] = c.Content
+	c.fieldMap["create_by"] = c.CreateBy
+	c.fieldMap["create_time"] = c.CreateTime
+	c.fieldMap["update_by"] = c.UpdateBy
+	c.fieldMap["update_time"] = c.UpdateTime
 }
 
 func (c cmsTopic) clone(db *gorm.DB) cmsTopic {

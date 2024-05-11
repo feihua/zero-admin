@@ -2878,18 +2878,18 @@ type MemberLevelAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LevelName          string  `protobuf:"bytes,2,opt,name=LevelName,proto3" json:"LevelName,omitempty"`
-	GrowthPoint        int32   `protobuf:"varint,3,opt,name=GrowthPoint,proto3" json:"GrowthPoint,omitempty"`
-	DefaultStatus      int32   `protobuf:"varint,4,opt,name=DefaultStatus,proto3" json:"DefaultStatus,omitempty"`
-	FreeFreightPoint   float32 `protobuf:"fixed32,5,opt,name=FreeFreightPoint,proto3" json:"FreeFreightPoint,omitempty"`
-	CommentGrowthPoint int32   `protobuf:"varint,6,opt,name=CommentGrowthPoint,proto3" json:"CommentGrowthPoint,omitempty"`
-	IsFreeFreight      int32   `protobuf:"varint,7,opt,name=IsFreeFreight,proto3" json:"IsFreeFreight,omitempty"`
-	IsSignIn           int32   `protobuf:"varint,8,opt,name=IsSignIn,proto3" json:"IsSignIn,omitempty"`
-	IsComment          int32   `protobuf:"varint,9,opt,name=IsComment,proto3" json:"IsComment,omitempty"`
-	IsPromotion        int32   `protobuf:"varint,10,opt,name=IsPromotion,proto3" json:"IsPromotion,omitempty"`
-	IsMemberPrice      int32   `protobuf:"varint,11,opt,name=IsMemberPrice,proto3" json:"IsMemberPrice,omitempty"`
-	IsBirthday         int32   `protobuf:"varint,12,opt,name=IsBirthday,proto3" json:"IsBirthday,omitempty"`
-	Remark             string  `protobuf:"bytes,13,opt,name=Remark,proto3" json:"Remark,omitempty"`
+	LevelName          string `protobuf:"bytes,2,opt,name=LevelName,proto3" json:"LevelName,omitempty"`
+	GrowthPoint        int32  `protobuf:"varint,3,opt,name=GrowthPoint,proto3" json:"GrowthPoint,omitempty"`
+	DefaultStatus      int32  `protobuf:"varint,4,opt,name=DefaultStatus,proto3" json:"DefaultStatus,omitempty"`
+	FreeFreightPoint   int64  `protobuf:"varint,5,opt,name=FreeFreightPoint,proto3" json:"FreeFreightPoint,omitempty"`
+	CommentGrowthPoint int32  `protobuf:"varint,6,opt,name=CommentGrowthPoint,proto3" json:"CommentGrowthPoint,omitempty"`
+	IsFreeFreight      int32  `protobuf:"varint,7,opt,name=IsFreeFreight,proto3" json:"IsFreeFreight,omitempty"`
+	IsSignIn           int32  `protobuf:"varint,8,opt,name=IsSignIn,proto3" json:"IsSignIn,omitempty"`
+	IsComment          int32  `protobuf:"varint,9,opt,name=IsComment,proto3" json:"IsComment,omitempty"`
+	IsPromotion        int32  `protobuf:"varint,10,opt,name=IsPromotion,proto3" json:"IsPromotion,omitempty"`
+	IsMemberPrice      int32  `protobuf:"varint,11,opt,name=IsMemberPrice,proto3" json:"IsMemberPrice,omitempty"`
+	IsBirthday         int32  `protobuf:"varint,12,opt,name=IsBirthday,proto3" json:"IsBirthday,omitempty"`
+	Remark             string `protobuf:"bytes,13,opt,name=Remark,proto3" json:"Remark,omitempty"`
 }
 
 func (x *MemberLevelAddReq) Reset() {
@@ -2945,7 +2945,7 @@ func (x *MemberLevelAddReq) GetDefaultStatus() int32 {
 	return 0
 }
 
-func (x *MemberLevelAddReq) GetFreeFreightPoint() float32 {
+func (x *MemberLevelAddReq) GetFreeFreightPoint() int64 {
 	if x != nil {
 		return x.FreeFreightPoint
 	}
@@ -3123,19 +3123,19 @@ type MemberLevelListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                 int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	LevelName          string  `protobuf:"bytes,2,opt,name=LevelName,proto3" json:"LevelName,omitempty"`
-	GrowthPoint        int32   `protobuf:"varint,3,opt,name=GrowthPoint,proto3" json:"GrowthPoint,omitempty"`
-	DefaultStatus      int32   `protobuf:"varint,4,opt,name=DefaultStatus,proto3" json:"DefaultStatus,omitempty"`
-	FreeFreightPoint   float32 `protobuf:"fixed32,5,opt,name=FreeFreightPoint,proto3" json:"FreeFreightPoint,omitempty"`
-	CommentGrowthPoint int32   `protobuf:"varint,6,opt,name=CommentGrowthPoint,proto3" json:"CommentGrowthPoint,omitempty"`
-	IsFreeFreight      int32   `protobuf:"varint,7,opt,name=IsFreeFreight,proto3" json:"IsFreeFreight,omitempty"`
-	IsSignIn           int32   `protobuf:"varint,8,opt,name=IsSignIn,proto3" json:"IsSignIn,omitempty"`
-	IsComment          int32   `protobuf:"varint,9,opt,name=IsComment,proto3" json:"IsComment,omitempty"`
-	IsPromotion        int32   `protobuf:"varint,10,opt,name=IsPromotion,proto3" json:"IsPromotion,omitempty"`
-	IsMemberPrice      int32   `protobuf:"varint,11,opt,name=IsMemberPrice,proto3" json:"IsMemberPrice,omitempty"`
-	IsBirthday         int32   `protobuf:"varint,12,opt,name=IsBirthday,proto3" json:"IsBirthday,omitempty"`
-	Remark             string  `protobuf:"bytes,13,opt,name=Remark,proto3" json:"Remark,omitempty"`
+	Id                 int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	LevelName          string `protobuf:"bytes,2,opt,name=LevelName,proto3" json:"LevelName,omitempty"`
+	GrowthPoint        int32  `protobuf:"varint,3,opt,name=GrowthPoint,proto3" json:"GrowthPoint,omitempty"`
+	DefaultStatus      int32  `protobuf:"varint,4,opt,name=DefaultStatus,proto3" json:"DefaultStatus,omitempty"`
+	FreeFreightPoint   int64  `protobuf:"varint,5,opt,name=FreeFreightPoint,proto3" json:"FreeFreightPoint,omitempty"`
+	CommentGrowthPoint int32  `protobuf:"varint,6,opt,name=CommentGrowthPoint,proto3" json:"CommentGrowthPoint,omitempty"`
+	IsFreeFreight      int32  `protobuf:"varint,7,opt,name=IsFreeFreight,proto3" json:"IsFreeFreight,omitempty"`
+	IsSignIn           int32  `protobuf:"varint,8,opt,name=IsSignIn,proto3" json:"IsSignIn,omitempty"`
+	IsComment          int32  `protobuf:"varint,9,opt,name=IsComment,proto3" json:"IsComment,omitempty"`
+	IsPromotion        int32  `protobuf:"varint,10,opt,name=IsPromotion,proto3" json:"IsPromotion,omitempty"`
+	IsMemberPrice      int32  `protobuf:"varint,11,opt,name=IsMemberPrice,proto3" json:"IsMemberPrice,omitempty"`
+	IsBirthday         int32  `protobuf:"varint,12,opt,name=IsBirthday,proto3" json:"IsBirthday,omitempty"`
+	Remark             string `protobuf:"bytes,13,opt,name=Remark,proto3" json:"Remark,omitempty"`
 }
 
 func (x *MemberLevelListData) Reset() {
@@ -3198,7 +3198,7 @@ func (x *MemberLevelListData) GetDefaultStatus() int32 {
 	return 0
 }
 
-func (x *MemberLevelListData) GetFreeFreightPoint() float32 {
+func (x *MemberLevelListData) GetFreeFreightPoint() int64 {
 	if x != nil {
 		return x.FreeFreightPoint
 	}
@@ -3321,19 +3321,19 @@ type MemberLevelUpdateReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                 int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	LevelName          string  `protobuf:"bytes,2,opt,name=LevelName,proto3" json:"LevelName,omitempty"`
-	GrowthPoint        int32   `protobuf:"varint,3,opt,name=GrowthPoint,proto3" json:"GrowthPoint,omitempty"`
-	DefaultStatus      int32   `protobuf:"varint,4,opt,name=DefaultStatus,proto3" json:"DefaultStatus,omitempty"`
-	FreeFreightPoint   float32 `protobuf:"fixed32,5,opt,name=FreeFreightPoint,proto3" json:"FreeFreightPoint,omitempty"`
-	CommentGrowthPoint int32   `protobuf:"varint,6,opt,name=CommentGrowthPoint,proto3" json:"CommentGrowthPoint,omitempty"`
-	IsFreeFreight      int32   `protobuf:"varint,7,opt,name=IsFreeFreight,proto3" json:"IsFreeFreight,omitempty"`
-	IsSignIn           int32   `protobuf:"varint,8,opt,name=IsSignIn,proto3" json:"IsSignIn,omitempty"`
-	IsComment          int32   `protobuf:"varint,9,opt,name=IsComment,proto3" json:"IsComment,omitempty"`
-	IsPromotion        int32   `protobuf:"varint,10,opt,name=IsPromotion,proto3" json:"IsPromotion,omitempty"`
-	IsMemberPrice      int32   `protobuf:"varint,11,opt,name=IsMemberPrice,proto3" json:"IsMemberPrice,omitempty"`
-	IsBirthday         int32   `protobuf:"varint,12,opt,name=IsBirthday,proto3" json:"IsBirthday,omitempty"`
-	Remark             string  `protobuf:"bytes,13,opt,name=Remark,proto3" json:"Remark,omitempty"`
+	Id                 int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	LevelName          string `protobuf:"bytes,2,opt,name=LevelName,proto3" json:"LevelName,omitempty"`
+	GrowthPoint        int32  `protobuf:"varint,3,opt,name=GrowthPoint,proto3" json:"GrowthPoint,omitempty"`
+	DefaultStatus      int32  `protobuf:"varint,4,opt,name=DefaultStatus,proto3" json:"DefaultStatus,omitempty"`
+	FreeFreightPoint   int64  `protobuf:"varint,5,opt,name=FreeFreightPoint,proto3" json:"FreeFreightPoint,omitempty"`
+	CommentGrowthPoint int32  `protobuf:"varint,6,opt,name=CommentGrowthPoint,proto3" json:"CommentGrowthPoint,omitempty"`
+	IsFreeFreight      int32  `protobuf:"varint,7,opt,name=IsFreeFreight,proto3" json:"IsFreeFreight,omitempty"`
+	IsSignIn           int32  `protobuf:"varint,8,opt,name=IsSignIn,proto3" json:"IsSignIn,omitempty"`
+	IsComment          int32  `protobuf:"varint,9,opt,name=IsComment,proto3" json:"IsComment,omitempty"`
+	IsPromotion        int32  `protobuf:"varint,10,opt,name=IsPromotion,proto3" json:"IsPromotion,omitempty"`
+	IsMemberPrice      int32  `protobuf:"varint,11,opt,name=IsMemberPrice,proto3" json:"IsMemberPrice,omitempty"`
+	IsBirthday         int32  `protobuf:"varint,12,opt,name=IsBirthday,proto3" json:"IsBirthday,omitempty"`
+	Remark             string `protobuf:"bytes,13,opt,name=Remark,proto3" json:"Remark,omitempty"`
 }
 
 func (x *MemberLevelUpdateReq) Reset() {
@@ -3396,7 +3396,7 @@ func (x *MemberLevelUpdateReq) GetDefaultStatus() int32 {
 	return 0
 }
 
-func (x *MemberLevelUpdateReq) GetFreeFreightPoint() float32 {
+func (x *MemberLevelUpdateReq) GetFreeFreightPoint() int64 {
 	if x != nil {
 		return x.FreeFreightPoint
 	}
@@ -5873,13 +5873,13 @@ type MemberRuleSettingAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ContinueSignDay   int32   `protobuf:"varint,1,opt,name=ContinueSignDay,proto3" json:"ContinueSignDay,omitempty"`
-	ContinueSignPoint int32   `protobuf:"varint,2,opt,name=ContinueSignPoint,proto3" json:"ContinueSignPoint,omitempty"`
-	ConsumePerPoint   float32 `protobuf:"fixed32,3,opt,name=ConsumePerPoint,proto3" json:"ConsumePerPoint,omitempty"`
-	LowOrderAmount    float32 `protobuf:"fixed32,4,opt,name=LowOrderAmount,proto3" json:"LowOrderAmount,omitempty"`
-	MaxPointPerOrder  int32   `protobuf:"varint,5,opt,name=MaxPointPerOrder,proto3" json:"MaxPointPerOrder,omitempty"`
-	RuleType          int32   `protobuf:"varint,6,opt,name=RuleType,proto3" json:"RuleType,omitempty"`
-	CreateBy          string  `protobuf:"bytes,7,opt,name=CreateBy,proto3" json:"CreateBy,omitempty"`
+	ContinueSignDay   int32  `protobuf:"varint,1,opt,name=ContinueSignDay,proto3" json:"ContinueSignDay,omitempty"`
+	ContinueSignPoint int32  `protobuf:"varint,2,opt,name=ContinueSignPoint,proto3" json:"ContinueSignPoint,omitempty"`
+	ConsumePerPoint   int64  `protobuf:"varint,3,opt,name=ConsumePerPoint,proto3" json:"ConsumePerPoint,omitempty"`
+	LowOrderAmount    int64  `protobuf:"varint,4,opt,name=LowOrderAmount,proto3" json:"LowOrderAmount,omitempty"`
+	MaxPointPerOrder  int32  `protobuf:"varint,5,opt,name=MaxPointPerOrder,proto3" json:"MaxPointPerOrder,omitempty"`
+	RuleType          int32  `protobuf:"varint,6,opt,name=RuleType,proto3" json:"RuleType,omitempty"`
+	CreateBy          string `protobuf:"bytes,7,opt,name=CreateBy,proto3" json:"CreateBy,omitempty"`
 }
 
 func (x *MemberRuleSettingAddReq) Reset() {
@@ -5928,14 +5928,14 @@ func (x *MemberRuleSettingAddReq) GetContinueSignPoint() int32 {
 	return 0
 }
 
-func (x *MemberRuleSettingAddReq) GetConsumePerPoint() float32 {
+func (x *MemberRuleSettingAddReq) GetConsumePerPoint() int64 {
 	if x != nil {
 		return x.ConsumePerPoint
 	}
 	return 0
 }
 
-func (x *MemberRuleSettingAddReq) GetLowOrderAmount() float32 {
+func (x *MemberRuleSettingAddReq) GetLowOrderAmount() int64 {
 	if x != nil {
 		return x.LowOrderAmount
 	}
@@ -6070,17 +6070,17 @@ type MemberRuleSettingListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	ContinueSignDay   int32   `protobuf:"varint,2,opt,name=ContinueSignDay,proto3" json:"ContinueSignDay,omitempty"`
-	ContinueSignPoint int32   `protobuf:"varint,3,opt,name=ContinueSignPoint,proto3" json:"ContinueSignPoint,omitempty"`
-	ConsumePerPoint   float32 `protobuf:"fixed32,4,opt,name=ConsumePerPoint,proto3" json:"ConsumePerPoint,omitempty"`
-	LowOrderAmount    float32 `protobuf:"fixed32,5,opt,name=LowOrderAmount,proto3" json:"LowOrderAmount,omitempty"`
-	MaxPointPerOrder  int32   `protobuf:"varint,6,opt,name=MaxPointPerOrder,proto3" json:"MaxPointPerOrder,omitempty"`
-	RuleType          int32   `protobuf:"varint,7,opt,name=RuleType,proto3" json:"RuleType,omitempty"`
-	CreateBy          string  `protobuf:"bytes,8,opt,name=CreateBy,proto3" json:"CreateBy,omitempty"`
-	CreateTime        string  `protobuf:"bytes,9,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`
-	UpdateBy          string  `protobuf:"bytes,10,opt,name=UpdateBy,proto3" json:"UpdateBy,omitempty"`
-	UpdateTime        string  `protobuf:"bytes,11,opt,name=UpdateTime,proto3" json:"UpdateTime,omitempty"`
+	Id                int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	ContinueSignDay   int32  `protobuf:"varint,2,opt,name=ContinueSignDay,proto3" json:"ContinueSignDay,omitempty"`
+	ContinueSignPoint int32  `protobuf:"varint,3,opt,name=ContinueSignPoint,proto3" json:"ContinueSignPoint,omitempty"`
+	ConsumePerPoint   int64  `protobuf:"varint,4,opt,name=ConsumePerPoint,proto3" json:"ConsumePerPoint,omitempty"`
+	LowOrderAmount    int64  `protobuf:"varint,5,opt,name=LowOrderAmount,proto3" json:"LowOrderAmount,omitempty"`
+	MaxPointPerOrder  int32  `protobuf:"varint,6,opt,name=MaxPointPerOrder,proto3" json:"MaxPointPerOrder,omitempty"`
+	RuleType          int32  `protobuf:"varint,7,opt,name=RuleType,proto3" json:"RuleType,omitempty"`
+	CreateBy          string `protobuf:"bytes,8,opt,name=CreateBy,proto3" json:"CreateBy,omitempty"`
+	CreateTime        string `protobuf:"bytes,9,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`
+	UpdateBy          string `protobuf:"bytes,10,opt,name=UpdateBy,proto3" json:"UpdateBy,omitempty"`
+	UpdateTime        string `protobuf:"bytes,11,opt,name=UpdateTime,proto3" json:"UpdateTime,omitempty"`
 }
 
 func (x *MemberRuleSettingListData) Reset() {
@@ -6136,14 +6136,14 @@ func (x *MemberRuleSettingListData) GetContinueSignPoint() int32 {
 	return 0
 }
 
-func (x *MemberRuleSettingListData) GetConsumePerPoint() float32 {
+func (x *MemberRuleSettingListData) GetConsumePerPoint() int64 {
 	if x != nil {
 		return x.ConsumePerPoint
 	}
 	return 0
 }
 
-func (x *MemberRuleSettingListData) GetLowOrderAmount() float32 {
+func (x *MemberRuleSettingListData) GetLowOrderAmount() int64 {
 	if x != nil {
 		return x.LowOrderAmount
 	}
@@ -6252,14 +6252,14 @@ type MemberRuleSettingUpdateReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	ContinueSignDay   int32   `protobuf:"varint,2,opt,name=ContinueSignDay,proto3" json:"ContinueSignDay,omitempty"`
-	ContinueSignPoint int32   `protobuf:"varint,3,opt,name=ContinueSignPoint,proto3" json:"ContinueSignPoint,omitempty"`
-	ConsumePerPoint   float32 `protobuf:"fixed32,4,opt,name=ConsumePerPoint,proto3" json:"ConsumePerPoint,omitempty"`
-	LowOrderAmount    float32 `protobuf:"fixed32,5,opt,name=LowOrderAmount,proto3" json:"LowOrderAmount,omitempty"`
-	MaxPointPerOrder  int32   `protobuf:"varint,6,opt,name=MaxPointPerOrder,proto3" json:"MaxPointPerOrder,omitempty"`
-	RuleType          int32   `protobuf:"varint,7,opt,name=RuleType,proto3" json:"RuleType,omitempty"`
-	UpdateBy          string  `protobuf:"bytes,8,opt,name=UpdateBy,proto3" json:"UpdateBy,omitempty"`
+	Id                int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	ContinueSignDay   int32  `protobuf:"varint,2,opt,name=ContinueSignDay,proto3" json:"ContinueSignDay,omitempty"`
+	ContinueSignPoint int32  `protobuf:"varint,3,opt,name=ContinueSignPoint,proto3" json:"ContinueSignPoint,omitempty"`
+	ConsumePerPoint   int64  `protobuf:"varint,4,opt,name=ConsumePerPoint,proto3" json:"ConsumePerPoint,omitempty"`
+	LowOrderAmount    int64  `protobuf:"varint,5,opt,name=LowOrderAmount,proto3" json:"LowOrderAmount,omitempty"`
+	MaxPointPerOrder  int32  `protobuf:"varint,6,opt,name=MaxPointPerOrder,proto3" json:"MaxPointPerOrder,omitempty"`
+	RuleType          int32  `protobuf:"varint,7,opt,name=RuleType,proto3" json:"RuleType,omitempty"`
+	UpdateBy          string `protobuf:"bytes,8,opt,name=UpdateBy,proto3" json:"UpdateBy,omitempty"`
 }
 
 func (x *MemberRuleSettingUpdateReq) Reset() {
@@ -6315,14 +6315,14 @@ func (x *MemberRuleSettingUpdateReq) GetContinueSignPoint() int32 {
 	return 0
 }
 
-func (x *MemberRuleSettingUpdateReq) GetConsumePerPoint() float32 {
+func (x *MemberRuleSettingUpdateReq) GetConsumePerPoint() int64 {
 	if x != nil {
 		return x.ConsumePerPoint
 	}
 	return 0
 }
 
-func (x *MemberRuleSettingUpdateReq) GetLowOrderAmount() float32 {
+func (x *MemberRuleSettingUpdateReq) GetLowOrderAmount() int64 {
 	if x != nil {
 		return x.LowOrderAmount
 	}
@@ -6496,21 +6496,21 @@ type MemberStatisticsInfoAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MemberId            int64   `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
-	ConsumeAmount       float32 `protobuf:"fixed32,3,opt,name=ConsumeAmount,proto3" json:"ConsumeAmount,omitempty"`
-	OrderCount          int32   `protobuf:"varint,4,opt,name=OrderCount,proto3" json:"OrderCount,omitempty"`
-	CouponCount         int32   `protobuf:"varint,5,opt,name=CouponCount,proto3" json:"CouponCount,omitempty"`
-	CommentCount        int32   `protobuf:"varint,6,opt,name=CommentCount,proto3" json:"CommentCount,omitempty"`
-	ReturnOrderCount    int32   `protobuf:"varint,7,opt,name=ReturnOrderCount,proto3" json:"ReturnOrderCount,omitempty"`
-	LoginCount          int32   `protobuf:"varint,8,opt,name=LoginCount,proto3" json:"LoginCount,omitempty"`
-	AttendCount         int32   `protobuf:"varint,9,opt,name=AttendCount,proto3" json:"AttendCount,omitempty"`
-	FansCount           int32   `protobuf:"varint,10,opt,name=FansCount,proto3" json:"FansCount,omitempty"`
-	CollectProductCount int32   `protobuf:"varint,11,opt,name=CollectProductCount,proto3" json:"CollectProductCount,omitempty"`
-	CollectSubjectCount int32   `protobuf:"varint,12,opt,name=CollectSubjectCount,proto3" json:"CollectSubjectCount,omitempty"`
-	CollectTopicCount   int32   `protobuf:"varint,13,opt,name=CollectTopicCount,proto3" json:"CollectTopicCount,omitempty"`
-	CollectCommentCount int32   `protobuf:"varint,14,opt,name=CollectCommentCount,proto3" json:"CollectCommentCount,omitempty"`
-	InviteFriendCount   int32   `protobuf:"varint,15,opt,name=InviteFriendCount,proto3" json:"InviteFriendCount,omitempty"`
-	RecentOrderTime     string  `protobuf:"bytes,16,opt,name=RecentOrderTime,proto3" json:"RecentOrderTime,omitempty"`
+	MemberId            int64  `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
+	ConsumeAmount       int64  `protobuf:"varint,3,opt,name=ConsumeAmount,proto3" json:"ConsumeAmount,omitempty"`
+	OrderCount          int32  `protobuf:"varint,4,opt,name=OrderCount,proto3" json:"OrderCount,omitempty"`
+	CouponCount         int32  `protobuf:"varint,5,opt,name=CouponCount,proto3" json:"CouponCount,omitempty"`
+	CommentCount        int32  `protobuf:"varint,6,opt,name=CommentCount,proto3" json:"CommentCount,omitempty"`
+	ReturnOrderCount    int32  `protobuf:"varint,7,opt,name=ReturnOrderCount,proto3" json:"ReturnOrderCount,omitempty"`
+	LoginCount          int32  `protobuf:"varint,8,opt,name=LoginCount,proto3" json:"LoginCount,omitempty"`
+	AttendCount         int32  `protobuf:"varint,9,opt,name=AttendCount,proto3" json:"AttendCount,omitempty"`
+	FansCount           int32  `protobuf:"varint,10,opt,name=FansCount,proto3" json:"FansCount,omitempty"`
+	CollectProductCount int32  `protobuf:"varint,11,opt,name=CollectProductCount,proto3" json:"CollectProductCount,omitempty"`
+	CollectSubjectCount int32  `protobuf:"varint,12,opt,name=CollectSubjectCount,proto3" json:"CollectSubjectCount,omitempty"`
+	CollectTopicCount   int32  `protobuf:"varint,13,opt,name=CollectTopicCount,proto3" json:"CollectTopicCount,omitempty"`
+	CollectCommentCount int32  `protobuf:"varint,14,opt,name=CollectCommentCount,proto3" json:"CollectCommentCount,omitempty"`
+	InviteFriendCount   int32  `protobuf:"varint,15,opt,name=InviteFriendCount,proto3" json:"InviteFriendCount,omitempty"`
+	RecentOrderTime     string `protobuf:"bytes,16,opt,name=RecentOrderTime,proto3" json:"RecentOrderTime,omitempty"`
 }
 
 func (x *MemberStatisticsInfoAddReq) Reset() {
@@ -6552,7 +6552,7 @@ func (x *MemberStatisticsInfoAddReq) GetMemberId() int64 {
 	return 0
 }
 
-func (x *MemberStatisticsInfoAddReq) GetConsumeAmount() float32 {
+func (x *MemberStatisticsInfoAddReq) GetConsumeAmount() int64 {
 	if x != nil {
 		return x.ConsumeAmount
 	}
@@ -6757,22 +6757,22 @@ type MemberStatisticsInfoListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                  int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	MemberId            int64   `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
-	ConsumeAmount       float32 `protobuf:"fixed32,3,opt,name=ConsumeAmount,proto3" json:"ConsumeAmount,omitempty"`
-	OrderCount          int32   `protobuf:"varint,4,opt,name=OrderCount,proto3" json:"OrderCount,omitempty"`
-	CouponCount         int32   `protobuf:"varint,5,opt,name=CouponCount,proto3" json:"CouponCount,omitempty"`
-	CommentCount        int32   `protobuf:"varint,6,opt,name=CommentCount,proto3" json:"CommentCount,omitempty"`
-	ReturnOrderCount    int32   `protobuf:"varint,7,opt,name=ReturnOrderCount,proto3" json:"ReturnOrderCount,omitempty"`
-	LoginCount          int32   `protobuf:"varint,8,opt,name=LoginCount,proto3" json:"LoginCount,omitempty"`
-	AttendCount         int32   `protobuf:"varint,9,opt,name=AttendCount,proto3" json:"AttendCount,omitempty"`
-	FansCount           int32   `protobuf:"varint,10,opt,name=FansCount,proto3" json:"FansCount,omitempty"`
-	CollectProductCount int32   `protobuf:"varint,11,opt,name=CollectProductCount,proto3" json:"CollectProductCount,omitempty"`
-	CollectSubjectCount int32   `protobuf:"varint,12,opt,name=CollectSubjectCount,proto3" json:"CollectSubjectCount,omitempty"`
-	CollectTopicCount   int32   `protobuf:"varint,13,opt,name=CollectTopicCount,proto3" json:"CollectTopicCount,omitempty"`
-	CollectCommentCount int32   `protobuf:"varint,14,opt,name=CollectCommentCount,proto3" json:"CollectCommentCount,omitempty"`
-	InviteFriendCount   int32   `protobuf:"varint,15,opt,name=InviteFriendCount,proto3" json:"InviteFriendCount,omitempty"`
-	RecentOrderTime     string  `protobuf:"bytes,16,opt,name=RecentOrderTime,proto3" json:"RecentOrderTime,omitempty"`
+	Id                  int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	MemberId            int64  `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
+	ConsumeAmount       int64  `protobuf:"varint,3,opt,name=ConsumeAmount,proto3" json:"ConsumeAmount,omitempty"`
+	OrderCount          int32  `protobuf:"varint,4,opt,name=OrderCount,proto3" json:"OrderCount,omitempty"`
+	CouponCount         int32  `protobuf:"varint,5,opt,name=CouponCount,proto3" json:"CouponCount,omitempty"`
+	CommentCount        int32  `protobuf:"varint,6,opt,name=CommentCount,proto3" json:"CommentCount,omitempty"`
+	ReturnOrderCount    int32  `protobuf:"varint,7,opt,name=ReturnOrderCount,proto3" json:"ReturnOrderCount,omitempty"`
+	LoginCount          int32  `protobuf:"varint,8,opt,name=LoginCount,proto3" json:"LoginCount,omitempty"`
+	AttendCount         int32  `protobuf:"varint,9,opt,name=AttendCount,proto3" json:"AttendCount,omitempty"`
+	FansCount           int32  `protobuf:"varint,10,opt,name=FansCount,proto3" json:"FansCount,omitempty"`
+	CollectProductCount int32  `protobuf:"varint,11,opt,name=CollectProductCount,proto3" json:"CollectProductCount,omitempty"`
+	CollectSubjectCount int32  `protobuf:"varint,12,opt,name=CollectSubjectCount,proto3" json:"CollectSubjectCount,omitempty"`
+	CollectTopicCount   int32  `protobuf:"varint,13,opt,name=CollectTopicCount,proto3" json:"CollectTopicCount,omitempty"`
+	CollectCommentCount int32  `protobuf:"varint,14,opt,name=CollectCommentCount,proto3" json:"CollectCommentCount,omitempty"`
+	InviteFriendCount   int32  `protobuf:"varint,15,opt,name=InviteFriendCount,proto3" json:"InviteFriendCount,omitempty"`
+	RecentOrderTime     string `protobuf:"bytes,16,opt,name=RecentOrderTime,proto3" json:"RecentOrderTime,omitempty"`
 }
 
 func (x *MemberStatisticsInfoListData) Reset() {
@@ -6821,7 +6821,7 @@ func (x *MemberStatisticsInfoListData) GetMemberId() int64 {
 	return 0
 }
 
-func (x *MemberStatisticsInfoListData) GetConsumeAmount() float32 {
+func (x *MemberStatisticsInfoListData) GetConsumeAmount() int64 {
 	if x != nil {
 		return x.ConsumeAmount
 	}
@@ -6979,22 +6979,22 @@ type MemberStatisticsInfoUpdateReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                  int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	MemberId            int64   `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
-	ConsumeAmount       float32 `protobuf:"fixed32,3,opt,name=ConsumeAmount,proto3" json:"ConsumeAmount,omitempty"`
-	OrderCount          int32   `protobuf:"varint,4,opt,name=OrderCount,proto3" json:"OrderCount,omitempty"`
-	CouponCount         int32   `protobuf:"varint,5,opt,name=CouponCount,proto3" json:"CouponCount,omitempty"`
-	CommentCount        int32   `protobuf:"varint,6,opt,name=CommentCount,proto3" json:"CommentCount,omitempty"`
-	ReturnOrderCount    int32   `protobuf:"varint,7,opt,name=ReturnOrderCount,proto3" json:"ReturnOrderCount,omitempty"`
-	LoginCount          int32   `protobuf:"varint,8,opt,name=LoginCount,proto3" json:"LoginCount,omitempty"`
-	AttendCount         int32   `protobuf:"varint,9,opt,name=AttendCount,proto3" json:"AttendCount,omitempty"`
-	FansCount           int32   `protobuf:"varint,10,opt,name=FansCount,proto3" json:"FansCount,omitempty"`
-	CollectProductCount int32   `protobuf:"varint,11,opt,name=CollectProductCount,proto3" json:"CollectProductCount,omitempty"`
-	CollectSubjectCount int32   `protobuf:"varint,12,opt,name=CollectSubjectCount,proto3" json:"CollectSubjectCount,omitempty"`
-	CollectTopicCount   int32   `protobuf:"varint,13,opt,name=CollectTopicCount,proto3" json:"CollectTopicCount,omitempty"`
-	CollectCommentCount int32   `protobuf:"varint,14,opt,name=CollectCommentCount,proto3" json:"CollectCommentCount,omitempty"`
-	InviteFriendCount   int32   `protobuf:"varint,15,opt,name=InviteFriendCount,proto3" json:"InviteFriendCount,omitempty"`
-	RecentOrderTime     string  `protobuf:"bytes,16,opt,name=RecentOrderTime,proto3" json:"RecentOrderTime,omitempty"`
+	Id                  int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	MemberId            int64  `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`
+	ConsumeAmount       int64  `protobuf:"varint,3,opt,name=ConsumeAmount,proto3" json:"ConsumeAmount,omitempty"`
+	OrderCount          int32  `protobuf:"varint,4,opt,name=OrderCount,proto3" json:"OrderCount,omitempty"`
+	CouponCount         int32  `protobuf:"varint,5,opt,name=CouponCount,proto3" json:"CouponCount,omitempty"`
+	CommentCount        int32  `protobuf:"varint,6,opt,name=CommentCount,proto3" json:"CommentCount,omitempty"`
+	ReturnOrderCount    int32  `protobuf:"varint,7,opt,name=ReturnOrderCount,proto3" json:"ReturnOrderCount,omitempty"`
+	LoginCount          int32  `protobuf:"varint,8,opt,name=LoginCount,proto3" json:"LoginCount,omitempty"`
+	AttendCount         int32  `protobuf:"varint,9,opt,name=AttendCount,proto3" json:"AttendCount,omitempty"`
+	FansCount           int32  `protobuf:"varint,10,opt,name=FansCount,proto3" json:"FansCount,omitempty"`
+	CollectProductCount int32  `protobuf:"varint,11,opt,name=CollectProductCount,proto3" json:"CollectProductCount,omitempty"`
+	CollectSubjectCount int32  `protobuf:"varint,12,opt,name=CollectSubjectCount,proto3" json:"CollectSubjectCount,omitempty"`
+	CollectTopicCount   int32  `protobuf:"varint,13,opt,name=CollectTopicCount,proto3" json:"CollectTopicCount,omitempty"`
+	CollectCommentCount int32  `protobuf:"varint,14,opt,name=CollectCommentCount,proto3" json:"CollectCommentCount,omitempty"`
+	InviteFriendCount   int32  `protobuf:"varint,15,opt,name=InviteFriendCount,proto3" json:"InviteFriendCount,omitempty"`
+	RecentOrderTime     string `protobuf:"bytes,16,opt,name=RecentOrderTime,proto3" json:"RecentOrderTime,omitempty"`
 }
 
 func (x *MemberStatisticsInfoUpdateReq) Reset() {
@@ -7043,7 +7043,7 @@ func (x *MemberStatisticsInfoUpdateReq) GetMemberId() int64 {
 	return 0
 }
 
-func (x *MemberStatisticsInfoUpdateReq) GetConsumeAmount() float32 {
+func (x *MemberStatisticsInfoUpdateReq) GetConsumeAmount() int64 {
 	if x != nil {
 		return x.ConsumeAmount
 	}
@@ -7287,9 +7287,9 @@ type MemberTagAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name              string  `protobuf:"bytes,2,opt,name=Name,proto3" json:"Name,omitempty"`
-	FinishOrderCount  int32   `protobuf:"varint,3,opt,name=FinishOrderCount,proto3" json:"FinishOrderCount,omitempty"`
-	FinishOrderAmount float32 `protobuf:"fixed32,4,opt,name=FinishOrderAmount,proto3" json:"FinishOrderAmount,omitempty"`
+	Name              string `protobuf:"bytes,2,opt,name=Name,proto3" json:"Name,omitempty"`
+	FinishOrderCount  int32  `protobuf:"varint,3,opt,name=FinishOrderCount,proto3" json:"FinishOrderCount,omitempty"`
+	FinishOrderAmount int64  `protobuf:"varint,4,opt,name=FinishOrderAmount,proto3" json:"FinishOrderAmount,omitempty"`
 }
 
 func (x *MemberTagAddReq) Reset() {
@@ -7338,7 +7338,7 @@ func (x *MemberTagAddReq) GetFinishOrderCount() int32 {
 	return 0
 }
 
-func (x *MemberTagAddReq) GetFinishOrderAmount() float32 {
+func (x *MemberTagAddReq) GetFinishOrderAmount() int64 {
 	if x != nil {
 		return x.FinishOrderAmount
 	}
@@ -7452,10 +7452,10 @@ type MemberTagListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	Name              string  `protobuf:"bytes,2,opt,name=Name,proto3" json:"Name,omitempty"`
-	FinishOrderCount  int32   `protobuf:"varint,3,opt,name=FinishOrderCount,proto3" json:"FinishOrderCount,omitempty"`
-	FinishOrderAmount float32 `protobuf:"fixed32,4,opt,name=FinishOrderAmount,proto3" json:"FinishOrderAmount,omitempty"`
+	Id                int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	Name              string `protobuf:"bytes,2,opt,name=Name,proto3" json:"Name,omitempty"`
+	FinishOrderCount  int32  `protobuf:"varint,3,opt,name=FinishOrderCount,proto3" json:"FinishOrderCount,omitempty"`
+	FinishOrderAmount int64  `protobuf:"varint,4,opt,name=FinishOrderAmount,proto3" json:"FinishOrderAmount,omitempty"`
 }
 
 func (x *MemberTagListData) Reset() {
@@ -7511,7 +7511,7 @@ func (x *MemberTagListData) GetFinishOrderCount() int32 {
 	return 0
 }
 
-func (x *MemberTagListData) GetFinishOrderAmount() float32 {
+func (x *MemberTagListData) GetFinishOrderAmount() int64 {
 	if x != nil {
 		return x.FinishOrderAmount
 	}
@@ -7578,10 +7578,10 @@ type MemberTagUpdateReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	Name              string  `protobuf:"bytes,2,opt,name=Name,proto3" json:"Name,omitempty"`
-	FinishOrderCount  int32   `protobuf:"varint,3,opt,name=FinishOrderCount,proto3" json:"FinishOrderCount,omitempty"`
-	FinishOrderAmount float32 `protobuf:"fixed32,4,opt,name=FinishOrderAmount,proto3" json:"FinishOrderAmount,omitempty"`
+	Id                int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	Name              string `protobuf:"bytes,2,opt,name=Name,proto3" json:"Name,omitempty"`
+	FinishOrderCount  int32  `protobuf:"varint,3,opt,name=FinishOrderCount,proto3" json:"FinishOrderCount,omitempty"`
+	FinishOrderAmount int64  `protobuf:"varint,4,opt,name=FinishOrderAmount,proto3" json:"FinishOrderAmount,omitempty"`
 }
 
 func (x *MemberTagUpdateReq) Reset() {
@@ -7637,7 +7637,7 @@ func (x *MemberTagUpdateReq) GetFinishOrderCount() int32 {
 	return 0
 }
 
-func (x *MemberTagUpdateReq) GetFinishOrderAmount() float32 {
+func (x *MemberTagUpdateReq) GetFinishOrderAmount() int64 {
 	if x != nil {
 		return x.FinishOrderAmount
 	}
@@ -8366,16 +8366,16 @@ type MemberProductCollectionAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                          //编号
-	MemberId        int64   `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`              //会员id
-	MemberNickName  string  `protobuf:"bytes,3,opt,name=MemberNickName,proto3" json:"MemberNickName,omitempty"`   //会员姓名
-	MemberIcon      string  `protobuf:"bytes,4,opt,name=MemberIcon,proto3" json:"MemberIcon,omitempty"`           //会员头像
-	ProductId       int64   `protobuf:"varint,5,opt,name=ProductId,proto3" json:"ProductId,omitempty"`            //商品id
-	ProductName     string  `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`         //商品名称
-	ProductPic      string  `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`           //商品图片
-	ProductSubTitle string  `protobuf:"bytes,8,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"` //商品标题
-	ProductPrice    float64 `protobuf:"fixed64,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`     //商品价格
-	CreateTime      string  `protobuf:"bytes,10,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`          //收藏时间
+	Id              int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                          //编号
+	MemberId        int64  `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`              //会员id
+	MemberNickName  string `protobuf:"bytes,3,opt,name=MemberNickName,proto3" json:"MemberNickName,omitempty"`   //会员姓名
+	MemberIcon      string `protobuf:"bytes,4,opt,name=MemberIcon,proto3" json:"MemberIcon,omitempty"`           //会员头像
+	ProductId       int64  `protobuf:"varint,5,opt,name=ProductId,proto3" json:"ProductId,omitempty"`            //商品id
+	ProductName     string `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`         //商品名称
+	ProductPic      string `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`           //商品图片
+	ProductSubTitle string `protobuf:"bytes,8,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"` //商品标题
+	ProductPrice    int64  `protobuf:"varint,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`      //商品价格
+	CreateTime      string `protobuf:"bytes,10,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`          //收藏时间
 }
 
 func (x *MemberProductCollectionAddReq) Reset() {
@@ -8466,7 +8466,7 @@ func (x *MemberProductCollectionAddReq) GetProductSubTitle() string {
 	return ""
 }
 
-func (x *MemberProductCollectionAddReq) GetProductPrice() float64 {
+func (x *MemberProductCollectionAddReq) GetProductPrice() int64 {
 	if x != nil {
 		return x.ProductPrice
 	}
@@ -8705,16 +8705,16 @@ type MemberProductCollectionListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                          //编号
-	MemberId        int64   `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`              //会员id
-	MemberNickName  string  `protobuf:"bytes,3,opt,name=MemberNickName,proto3" json:"MemberNickName,omitempty"`   //会员姓名
-	MemberIcon      string  `protobuf:"bytes,4,opt,name=MemberIcon,proto3" json:"MemberIcon,omitempty"`           //会员头像
-	ProductId       int64   `protobuf:"varint,5,opt,name=ProductId,proto3" json:"ProductId,omitempty"`            //商品id
-	ProductName     string  `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`         //商品名称
-	ProductPic      string  `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`           //商品图片
-	ProductSubTitle string  `protobuf:"bytes,8,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"` //商品标题
-	ProductPrice    float64 `protobuf:"fixed64,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`     //商品价格
-	CreateTime      string  `protobuf:"bytes,10,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`          //收藏时间
+	Id              int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                          //编号
+	MemberId        int64  `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`              //会员id
+	MemberNickName  string `protobuf:"bytes,3,opt,name=MemberNickName,proto3" json:"MemberNickName,omitempty"`   //会员姓名
+	MemberIcon      string `protobuf:"bytes,4,opt,name=MemberIcon,proto3" json:"MemberIcon,omitempty"`           //会员头像
+	ProductId       int64  `protobuf:"varint,5,opt,name=ProductId,proto3" json:"ProductId,omitempty"`            //商品id
+	ProductName     string `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`         //商品名称
+	ProductPic      string `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`           //商品图片
+	ProductSubTitle string `protobuf:"bytes,8,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"` //商品标题
+	ProductPrice    int64  `protobuf:"varint,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`      //商品价格
+	CreateTime      string `protobuf:"bytes,10,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`          //收藏时间
 }
 
 func (x *MemberProductCollectionListData) Reset() {
@@ -8805,7 +8805,7 @@ func (x *MemberProductCollectionListData) GetProductSubTitle() string {
 	return ""
 }
 
-func (x *MemberProductCollectionListData) GetProductPrice() float64 {
+func (x *MemberProductCollectionListData) GetProductPrice() int64 {
 	if x != nil {
 		return x.ProductPrice
 	}
@@ -8880,16 +8880,16 @@ type MemberReadHistoryAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                          //编号
-	MemberId        int64   `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`              //会员id
-	MemberNickName  string  `protobuf:"bytes,3,opt,name=MemberNickName,proto3" json:"MemberNickName,omitempty"`   //会员姓名
-	MemberIcon      string  `protobuf:"bytes,4,opt,name=MemberIcon,proto3" json:"MemberIcon,omitempty"`           //会员头像
-	ProductId       int64   `protobuf:"varint,5,opt,name=ProductId,proto3" json:"ProductId,omitempty"`            //商品id
-	ProductName     string  `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`         //商品名称
-	ProductPic      string  `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`           //商品图片
-	ProductSubTitle string  `protobuf:"bytes,8,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"` //商品标题
-	ProductPrice    float64 `protobuf:"fixed64,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`     //商品价格
-	CreateTime      string  `protobuf:"bytes,10,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`          //浏览时间
+	Id              int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                          //编号
+	MemberId        int64  `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`              //会员id
+	MemberNickName  string `protobuf:"bytes,3,opt,name=MemberNickName,proto3" json:"MemberNickName,omitempty"`   //会员姓名
+	MemberIcon      string `protobuf:"bytes,4,opt,name=MemberIcon,proto3" json:"MemberIcon,omitempty"`           //会员头像
+	ProductId       int64  `protobuf:"varint,5,opt,name=ProductId,proto3" json:"ProductId,omitempty"`            //商品id
+	ProductName     string `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`         //商品名称
+	ProductPic      string `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`           //商品图片
+	ProductSubTitle string `protobuf:"bytes,8,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"` //商品标题
+	ProductPrice    int64  `protobuf:"varint,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`      //商品价格
+	CreateTime      string `protobuf:"bytes,10,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`          //浏览时间
 }
 
 func (x *MemberReadHistoryAddReq) Reset() {
@@ -8980,7 +8980,7 @@ func (x *MemberReadHistoryAddReq) GetProductSubTitle() string {
 	return ""
 }
 
-func (x *MemberReadHistoryAddReq) GetProductPrice() float64 {
+func (x *MemberReadHistoryAddReq) GetProductPrice() int64 {
 	if x != nil {
 		return x.ProductPrice
 	}
@@ -9211,16 +9211,16 @@ type MemberReadHistoryListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                          //编号
-	MemberId        int64   `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`              //会员id
-	MemberNickName  string  `protobuf:"bytes,3,opt,name=MemberNickName,proto3" json:"MemberNickName,omitempty"`   //会员姓名
-	MemberIcon      string  `protobuf:"bytes,4,opt,name=MemberIcon,proto3" json:"MemberIcon,omitempty"`           //会员头像
-	ProductId       int64   `protobuf:"varint,5,opt,name=ProductId,proto3" json:"ProductId,omitempty"`            //商品id
-	ProductName     string  `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`         //商品名称
-	ProductPic      string  `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`           //商品图片
-	ProductSubTitle string  `protobuf:"bytes,8,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"` //商品标题
-	ProductPrice    float64 `protobuf:"fixed64,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`     //商品价格
-	CreateTime      string  `protobuf:"bytes,10,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`          //浏览时间
+	Id              int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                          //编号
+	MemberId        int64  `protobuf:"varint,2,opt,name=MemberId,proto3" json:"MemberId,omitempty"`              //会员id
+	MemberNickName  string `protobuf:"bytes,3,opt,name=MemberNickName,proto3" json:"MemberNickName,omitempty"`   //会员姓名
+	MemberIcon      string `protobuf:"bytes,4,opt,name=MemberIcon,proto3" json:"MemberIcon,omitempty"`           //会员头像
+	ProductId       int64  `protobuf:"varint,5,opt,name=ProductId,proto3" json:"ProductId,omitempty"`            //商品id
+	ProductName     string `protobuf:"bytes,6,opt,name=ProductName,proto3" json:"ProductName,omitempty"`         //商品名称
+	ProductPic      string `protobuf:"bytes,7,opt,name=ProductPic,proto3" json:"ProductPic,omitempty"`           //商品图片
+	ProductSubTitle string `protobuf:"bytes,8,opt,name=ProductSubTitle,proto3" json:"ProductSubTitle,omitempty"` //商品标题
+	ProductPrice    int64  `protobuf:"varint,9,opt,name=ProductPrice,proto3" json:"ProductPrice,omitempty"`      //商品价格
+	CreateTime      string `protobuf:"bytes,10,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`          //浏览时间
 }
 
 func (x *MemberReadHistoryListData) Reset() {
@@ -9311,7 +9311,7 @@ func (x *MemberReadHistoryListData) GetProductSubTitle() string {
 	return ""
 }
 
-func (x *MemberReadHistoryListData) GetProductPrice() float64 {
+func (x *MemberReadHistoryListData) GetProductPrice() int64 {
 	if x != nil {
 		return x.ProductPrice
 	}
@@ -10278,7 +10278,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x75, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c,
 	0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2a, 0x0a, 0x10, 0x46, 0x72, 0x65, 0x65, 0x46,
 	0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x10, 0x46, 0x72, 0x65, 0x65, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x6f,
+	0x03, 0x52, 0x10, 0x46, 0x72, 0x65, 0x65, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x6f,
 	0x69, 0x6e, 0x74, 0x12, 0x2e, 0x0a, 0x12, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x47, 0x72,
 	0x6f, 0x77, 0x74, 0x68, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52,
 	0x12, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x47, 0x72, 0x6f, 0x77, 0x74, 0x68, 0x50, 0x6f,
@@ -10315,7 +10315,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x44, 0x65,
 	0x66, 0x61, 0x75, 0x6c, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2a, 0x0a, 0x10, 0x46,
 	0x72, 0x65, 0x65, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18,
-	0x05, 0x20, 0x01, 0x28, 0x02, 0x52, 0x10, 0x46, 0x72, 0x65, 0x65, 0x46, 0x72, 0x65, 0x69, 0x67,
+	0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x46, 0x72, 0x65, 0x65, 0x46, 0x72, 0x65, 0x69, 0x67,
 	0x68, 0x74, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x2e, 0x0a, 0x12, 0x43, 0x6f, 0x6d, 0x6d, 0x65,
 	0x6e, 0x74, 0x47, 0x72, 0x6f, 0x77, 0x74, 0x68, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x06, 0x20,
 	0x01, 0x28, 0x05, 0x52, 0x12, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x47, 0x72, 0x6f, 0x77,
@@ -10350,7 +10350,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x75, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c,
 	0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2a, 0x0a, 0x10, 0x46, 0x72, 0x65, 0x65, 0x46,
 	0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x10, 0x46, 0x72, 0x65, 0x65, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x6f,
+	0x03, 0x52, 0x10, 0x46, 0x72, 0x65, 0x65, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x6f,
 	0x69, 0x6e, 0x74, 0x12, 0x2e, 0x0a, 0x12, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x47, 0x72,
 	0x6f, 0x77, 0x74, 0x68, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52,
 	0x12, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x47, 0x72, 0x6f, 0x77, 0x74, 0x68, 0x50, 0x6f,
@@ -10651,10 +10651,10 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x69, 0x6e, 0x75, 0x65, 0x53, 0x69, 0x67, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x02, 0x20,
 	0x01, 0x28, 0x05, 0x52, 0x11, 0x43, 0x6f, 0x6e, 0x74, 0x69, 0x6e, 0x75, 0x65, 0x53, 0x69, 0x67,
 	0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x28, 0x0a, 0x0f, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d,
-	0x65, 0x50, 0x65, 0x72, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x02, 0x52,
+	0x65, 0x50, 0x65, 0x72, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x0f, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x50, 0x65, 0x72, 0x50, 0x6f, 0x69, 0x6e, 0x74,
 	0x12, 0x26, 0x0a, 0x0e, 0x4c, 0x6f, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0e, 0x4c, 0x6f, 0x77, 0x4f, 0x72, 0x64,
+	0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0e, 0x4c, 0x6f, 0x77, 0x4f, 0x72, 0x64,
 	0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2a, 0x0a, 0x10, 0x4d, 0x61, 0x78, 0x50,
 	0x6f, 0x69, 0x6e, 0x74, 0x50, 0x65, 0x72, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x18, 0x05, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x10, 0x4d, 0x61, 0x78, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x50, 0x65, 0x72, 0x4f,
@@ -10679,10 +10679,10 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x75, 0x65, 0x53, 0x69, 0x67, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
 	0x05, 0x52, 0x11, 0x43, 0x6f, 0x6e, 0x74, 0x69, 0x6e, 0x75, 0x65, 0x53, 0x69, 0x67, 0x6e, 0x50,
 	0x6f, 0x69, 0x6e, 0x74, 0x12, 0x28, 0x0a, 0x0f, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x50,
-	0x65, 0x72, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0f, 0x43,
+	0x65, 0x72, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0f, 0x43,
 	0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x50, 0x65, 0x72, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x26,
 	0x0a, 0x0e, 0x4c, 0x6f, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
-	0x18, 0x05, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0e, 0x4c, 0x6f, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0e, 0x4c, 0x6f, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72,
 	0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2a, 0x0a, 0x10, 0x4d, 0x61, 0x78, 0x50, 0x6f, 0x69,
 	0x6e, 0x74, 0x50, 0x65, 0x72, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05,
 	0x52, 0x10, 0x4d, 0x61, 0x78, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x50, 0x65, 0x72, 0x4f, 0x72, 0x64,
@@ -10712,9 +10712,9 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x11, 0x43, 0x6f, 0x6e, 0x74, 0x69, 0x6e, 0x75,
 	0x65, 0x53, 0x69, 0x67, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x28, 0x0a, 0x0f, 0x43, 0x6f,
 	0x6e, 0x73, 0x75, 0x6d, 0x65, 0x50, 0x65, 0x72, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x02, 0x52, 0x0f, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x50, 0x65, 0x72, 0x50,
+	0x01, 0x28, 0x03, 0x52, 0x0f, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x50, 0x65, 0x72, 0x50,
 	0x6f, 0x69, 0x6e, 0x74, 0x12, 0x26, 0x0a, 0x0e, 0x4c, 0x6f, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72,
-	0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0e, 0x4c, 0x6f,
+	0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0e, 0x4c, 0x6f,
 	0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2a, 0x0a, 0x10,
 	0x4d, 0x61, 0x78, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x50, 0x65, 0x72, 0x4f, 0x72, 0x64, 0x65, 0x72,
 	0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x10, 0x4d, 0x61, 0x78, 0x50, 0x6f, 0x69, 0x6e, 0x74,
@@ -10736,7 +10736,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x64, 0x64, 0x52, 0x65, 0x71, 0x12, 0x1a, 0x0a, 0x08, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49,
 	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49,
 	0x64, 0x12, 0x24, 0x0a, 0x0d, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0d, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d,
+	0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d,
 	0x65, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x4f, 0x72, 0x64, 0x65, 0x72,
 	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x4f, 0x72, 0x64,
 	0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x43, 0x6f, 0x75, 0x70, 0x6f,
@@ -10785,7 +10785,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x0a, 0x08, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x08, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x0d, 0x43, 0x6f,
 	0x6e, 0x73, 0x75, 0x6d, 0x65, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x0d, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
+	0x03, 0x52, 0x0d, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
 	0x12, 0x1e, 0x0a, 0x0a, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04,
 	0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74,
 	0x12, 0x20, 0x0a, 0x0b, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18,
@@ -10832,7 +10832,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x02, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12,
 	0x24, 0x0a, 0x0d, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0d, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x41,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x41,
 	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x43, 0x6f,
 	0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x4f, 0x72, 0x64, 0x65, 0x72,
 	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x43, 0x6f, 0x75, 0x70, 0x6f, 0x6e, 0x43,
@@ -10882,7 +10882,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x69, 0x73, 0x68, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20,
 	0x01, 0x28, 0x05, 0x52, 0x10, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x4f, 0x72, 0x64, 0x65, 0x72,
 	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2c, 0x0a, 0x11, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x4f,
-	0x72, 0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02,
+	0x72, 0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03,
 	0x52, 0x11, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f,
 	0x75, 0x6e, 0x74, 0x22, 0x26, 0x0a, 0x10, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x54, 0x61, 0x67,
 	0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18,
@@ -10899,7 +10899,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x10, 0x46, 0x69, 0x6e, 0x69, 0x73,
 	0x68, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2c, 0x0a, 0x11, 0x46,
 	0x69, 0x6e, 0x69, 0x73, 0x68, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
-	0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x11, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x4f, 0x72,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x4f, 0x72,
 	0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x5b, 0x0a, 0x11, 0x4d, 0x65, 0x6d,
 	0x62, 0x65, 0x72, 0x54, 0x61, 0x67, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x14,
 	0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74,
@@ -10914,7 +10914,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x10, 0x46, 0x69, 0x6e,
 	0x69, 0x73, 0x68, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2c, 0x0a,
 	0x11, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x11, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68,
+	0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68,
 	0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x29, 0x0a, 0x13, 0x4d,
 	0x65, 0x6d, 0x62, 0x65, 0x72, 0x54, 0x61, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65,
 	0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
@@ -11004,7 +11004,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x75, 0x62, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x08,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x75, 0x62,
 	0x54, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x22, 0x0a, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
-	0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0c, 0x50, 0x72, 0x6f,
+	0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x50, 0x72, 0x6f,
 	0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x43, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x43,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x34, 0x0a, 0x1e, 0x4d, 0x65, 0x6d,
@@ -11048,7 +11048,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x62, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x50, 0x72,
 	0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x75, 0x62, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x22, 0x0a,
 	0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20,
-	0x01, 0x28, 0x01, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63,
+	0x01, 0x28, 0x03, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63,
 	0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18,
 	0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d,
 	0x65, 0x22, 0x77, 0x0a, 0x1f, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x64, 0x75,
@@ -11077,7 +11077,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x75, 0x62, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x08, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x75, 0x62, 0x54,
 	0x69, 0x74, 0x6c, 0x65, 0x12, 0x22, 0x0a, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50,
-	0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64,
+	0x72, 0x69, 0x63, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64,
 	0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61,
 	0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x43, 0x72,
 	0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x2e, 0x0a, 0x18, 0x4d, 0x65, 0x6d, 0x62,
@@ -11117,7 +11117,7 @@ var file_rpc_ums_ums_proto_rawDesc = []byte{
 	0x53, 0x75, 0x62, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f,
 	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x75, 0x62, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x12,
 	0x22, 0x0a, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18,
-	0x09, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72,
+	0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x72,
 	0x69, 0x63, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d,
 	0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54,
 	0x69, 0x6d, 0x65, 0x22, 0x6b, 0x0a, 0x19, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x65, 0x61,

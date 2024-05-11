@@ -30,11 +30,11 @@ func newCmsMemberReport(db *gorm.DB, opts ...gen.DOOption) cmsMemberReport {
 	_cmsMemberReport.ID = field.NewInt64(tableName, "id")
 	_cmsMemberReport.ReportType = field.NewInt32(tableName, "report_type")
 	_cmsMemberReport.ReportMemberName = field.NewString(tableName, "report_member_name")
-	_cmsMemberReport.CreateTime = field.NewTime(tableName, "create_time")
 	_cmsMemberReport.ReportObject = field.NewString(tableName, "report_object")
 	_cmsMemberReport.ReportStatus = field.NewInt32(tableName, "report_status")
 	_cmsMemberReport.HandleStatus = field.NewInt32(tableName, "handle_status")
 	_cmsMemberReport.Note = field.NewString(tableName, "note")
+	_cmsMemberReport.CreateTime = field.NewTime(tableName, "create_time")
 
 	_cmsMemberReport.fillFieldMap()
 
@@ -49,11 +49,11 @@ type cmsMemberReport struct {
 	ID               field.Int64
 	ReportType       field.Int32  // 举报类型：0->商品评价；1->话题内容；2->用户评论
 	ReportMemberName field.String // 举报人
-	CreateTime       field.Time
 	ReportObject     field.String
 	ReportStatus     field.Int32 // 举报状态：0->未处理；1->已处理
 	HandleStatus     field.Int32 // 处理结果：0->无效；1->有效；2->恶意
 	Note             field.String
+	CreateTime       field.Time // 创建时间
 
 	fieldMap map[string]field.Expr
 }
@@ -73,11 +73,11 @@ func (c *cmsMemberReport) updateTableName(table string) *cmsMemberReport {
 	c.ID = field.NewInt64(table, "id")
 	c.ReportType = field.NewInt32(table, "report_type")
 	c.ReportMemberName = field.NewString(table, "report_member_name")
-	c.CreateTime = field.NewTime(table, "create_time")
 	c.ReportObject = field.NewString(table, "report_object")
 	c.ReportStatus = field.NewInt32(table, "report_status")
 	c.HandleStatus = field.NewInt32(table, "handle_status")
 	c.Note = field.NewString(table, "note")
+	c.CreateTime = field.NewTime(table, "create_time")
 
 	c.fillFieldMap()
 
@@ -110,11 +110,11 @@ func (c *cmsMemberReport) fillFieldMap() {
 	c.fieldMap["id"] = c.ID
 	c.fieldMap["report_type"] = c.ReportType
 	c.fieldMap["report_member_name"] = c.ReportMemberName
-	c.fieldMap["create_time"] = c.CreateTime
 	c.fieldMap["report_object"] = c.ReportObject
 	c.fieldMap["report_status"] = c.ReportStatus
 	c.fieldMap["handle_status"] = c.HandleStatus
 	c.fieldMap["note"] = c.Note
+	c.fieldMap["create_time"] = c.CreateTime
 }
 
 func (c cmsMemberReport) clone(db *gorm.DB) cmsMemberReport {

@@ -35,7 +35,7 @@ func NewMemberStatisticsInfoAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 func (l *MemberStatisticsInfoAddLogic) MemberStatisticsInfoAdd(in *umsclient.MemberStatisticsInfoAddReq) (*umsclient.MemberStatisticsInfoAddResp, error) {
 	err := query.UmsMemberStatisticsInfo.WithContext(l.ctx).Create(&model.UmsMemberStatisticsInfo{
 		MemberID:            in.MemberId,
-		ConsumeAmount:       float64(in.ConsumeAmount),
+		ConsumeAmount:       in.ConsumeAmount,
 		OrderCount:          in.OrderCount,
 		CouponCount:         in.CouponCount,
 		CommentCount:        in.CommentCount,

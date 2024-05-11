@@ -30,8 +30,8 @@ func newPmsProductLadder(db *gorm.DB, opts ...gen.DOOption) pmsProductLadder {
 	_pmsProductLadder.ID = field.NewInt64(tableName, "id")
 	_pmsProductLadder.ProductID = field.NewInt64(tableName, "product_id")
 	_pmsProductLadder.Count = field.NewInt32(tableName, "count")
-	_pmsProductLadder.Discount = field.NewFloat64(tableName, "discount")
-	_pmsProductLadder.Price = field.NewFloat64(tableName, "price")
+	_pmsProductLadder.Discount = field.NewInt64(tableName, "discount")
+	_pmsProductLadder.Price = field.NewInt64(tableName, "price")
 
 	_pmsProductLadder.fillFieldMap()
 
@@ -45,9 +45,9 @@ type pmsProductLadder struct {
 	ALL       field.Asterisk
 	ID        field.Int64
 	ProductID field.Int64
-	Count     field.Int32   // 满足的商品数量
-	Discount  field.Float64 // 折扣
-	Price     field.Float64 // 折后价格
+	Count     field.Int32 // 满足的商品数量
+	Discount  field.Int64 // 折扣
+	Price     field.Int64 // 折后价格
 
 	fieldMap map[string]field.Expr
 }
@@ -67,8 +67,8 @@ func (p *pmsProductLadder) updateTableName(table string) *pmsProductLadder {
 	p.ID = field.NewInt64(table, "id")
 	p.ProductID = field.NewInt64(table, "product_id")
 	p.Count = field.NewInt32(table, "count")
-	p.Discount = field.NewFloat64(table, "discount")
-	p.Price = field.NewFloat64(table, "price")
+	p.Discount = field.NewInt64(table, "discount")
+	p.Price = field.NewInt64(table, "price")
 
 	p.fillFieldMap()
 

@@ -16,7 +16,7 @@ func main() {
 	})
 
 	//var dsn = "root:123456@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai"
-	var dsn = "root:oMbPi5munxCsBSsiLoPV@tcp(110.41.179.89:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai"
+	var dsn = "root:oMbPi5munxCsBSsiLoPV@tcp(110.41.179.89:3306)/zero-cms?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai"
 	// Initialize a *gorm.DB instance
 	db, _ := gorm.Open(mysql.Open(dsn))
 
@@ -28,8 +28,8 @@ func main() {
 		g.GenerateModel("cms_help"),
 		g.GenerateModel("cms_help_category"),
 		g.GenerateModel("cms_member_report"),
-		g.GenerateModel("cms_prefrence_area"),
-		g.GenerateModel("cms_prefrence_area_product_relation"),
+		g.GenerateModel("cms_preferred_area"),
+		g.GenerateModel("cms_preferred_area_product_relation"),
 		g.GenerateModel("cms_subject"),
 		g.GenerateModel("cms_subject_category"),
 		g.GenerateModel("cms_subject_comment"),

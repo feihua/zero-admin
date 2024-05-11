@@ -29,8 +29,8 @@ func newPmsProductFullReduction(db *gorm.DB, opts ...gen.DOOption) pmsProductFul
 	_pmsProductFullReduction.ALL = field.NewAsterisk(tableName)
 	_pmsProductFullReduction.ID = field.NewInt64(tableName, "id")
 	_pmsProductFullReduction.ProductID = field.NewInt64(tableName, "product_id")
-	_pmsProductFullReduction.FullPrice = field.NewFloat64(tableName, "full_price")
-	_pmsProductFullReduction.ReducePrice = field.NewFloat64(tableName, "reduce_price")
+	_pmsProductFullReduction.FullPrice = field.NewInt64(tableName, "full_price")
+	_pmsProductFullReduction.ReducePrice = field.NewInt64(tableName, "reduce_price")
 
 	_pmsProductFullReduction.fillFieldMap()
 
@@ -44,8 +44,8 @@ type pmsProductFullReduction struct {
 	ALL         field.Asterisk
 	ID          field.Int64
 	ProductID   field.Int64
-	FullPrice   field.Float64
-	ReducePrice field.Float64
+	FullPrice   field.Int64
+	ReducePrice field.Int64
 
 	fieldMap map[string]field.Expr
 }
@@ -64,8 +64,8 @@ func (p *pmsProductFullReduction) updateTableName(table string) *pmsProductFullR
 	p.ALL = field.NewAsterisk(table)
 	p.ID = field.NewInt64(table, "id")
 	p.ProductID = field.NewInt64(table, "product_id")
-	p.FullPrice = field.NewFloat64(table, "full_price")
-	p.ReducePrice = field.NewFloat64(table, "reduce_price")
+	p.FullPrice = field.NewInt64(table, "full_price")
+	p.ReducePrice = field.NewInt64(table, "reduce_price")
 
 	p.fillFieldMap()
 

@@ -12,7 +12,7 @@ type (
 		OrderSn          string  `json:"orderSn"`          // 订单编号
 		CreateTime       string  `json:"createTime"`       // 申请时间
 		MemberUsername   string  `json:"memberUserName"`   // 会员用户名
-		ReturnAmount     float64 `json:"returnAmount"`     // 退款金额
+        ReturnAmount int64 `json:"returnAmount"`           // 退款金额
 		ReturnName       string  `json:"returnName"`       // 退货人姓名
 		ReturnPhone      string  `json:"returnPhone"`      // 退货人电话
         Status int32 `json:"status"`                       // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
@@ -22,8 +22,8 @@ type (
 		ProductBrand     string  `json:"productBrand"`     // 商品品牌
 		ProductAttr      string  `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
         ProductCount int32 `json:"productCount"`           // 退货数量
-		ProductPrice     float64 `json:"productPrice"`     // 商品单价
-		ProductRealPrice float64 `json:"productRealPrice"` // 商品实际支付单价
+        ProductPrice int64 `json:"productPrice"`           // 商品单价
+        ProductRealPrice int64 `json:"productRealPrice"`   // 商品实际支付单价
 		Reason           string  `json:"reason"`           // 原因
 		Description      string  `json:"description"`      // 描述
 		ProofPics        string  `json:"proofPics"`        // 凭证图片，以逗号隔开
@@ -54,7 +54,7 @@ type (
 		OrderSn          string  `json:"orderSn"`          // 订单编号
 		CreateTime       string  `json:"createTime"`       // 申请时间
 		MemberUsername   string  `json:"memberUserName"`   // 会员用户名
-		ReturnAmount     float64 `json:"returnAmount"`     // 退款金额
+        ReturnAmount int64 `json:"returnAmount"`           // 退款金额
 		ReturnName       string  `json:"returnName"`       // 退货人姓名
 		ReturnPhone      string  `json:"returnPhone"`      // 退货人电话
         Status int32 `json:"status"`                       // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
@@ -64,8 +64,8 @@ type (
 		ProductBrand     string  `json:"productBrand"`     // 商品品牌
 		ProductAttr      string  `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
         ProductCount int32 `json:"productCount"`           // 退货数量
-		ProductPrice     float64 `json:"productPrice"`     // 商品单价
-		ProductRealPrice float64 `json:"productRealPrice"` // 商品实际支付单价
+        ProductPrice int64 `json:"productPrice"`           // 商品单价
+        ProductRealPrice int64 `json:"productRealPrice"`   // 商品实际支付单价
 		Reason           string  `json:"reason"`           // 原因
 		Description      string  `json:"description"`      // 描述
 		ProofPics        string  `json:"proofPics"`        // 凭证图片，以逗号隔开

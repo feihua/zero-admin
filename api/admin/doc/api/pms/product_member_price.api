@@ -8,7 +8,7 @@ type (
 	addMemberPriceReq {
 		ProductId       int64   `json:"productId"`
 		MemberLevelId   int64   `json:"memberLevelId"`
-        MemberPrice float32 `json:"memberPrice"` // 会员价格
+        MemberPrice int64 `json:"memberPrice"` // 会员价格
 		MemberLevelName string  `json:"memberLevelName"`
 	}
 	addMemberPriceResp {
@@ -23,7 +23,7 @@ type (
 		Id              int64   `json:"id"`
 		ProductId       int64   `json:"productId"`
 		MemberLevelId   int64   `json:"memberLevelId"`
-        MemberPrice float32 `json:"memberPrice"` // 会员价格
+        MemberPrice int64 `json:"memberPrice"` // 会员价格
 		MemberLevelName string  `json:"memberLevelName"`
 	}
 	ListMemberPriceResp {
@@ -39,7 +39,7 @@ type (
 		Id              int64   `json:"id"`
 		ProductId       int64   `json:"productId"`
 		MemberLevelId   int64   `json:"memberLevelId"`
-        MemberPrice float32 `json:"memberPrice"` // 会员价格
+        MemberPrice int64 `json:"memberPrice"` // 会员价格
 		MemberLevelName string  `json:"memberLevelName"`
 	}
 	UpdateMemberPriceResp {

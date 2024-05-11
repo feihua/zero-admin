@@ -8,11 +8,11 @@ const TableNamePmsProductLadder = "pms_product_ladder"
 
 // PmsProductLadder 产品阶梯价格表(只针对同商品)
 type PmsProductLadder struct {
-	ID        int64   `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ProductID int64   `gorm:"column:product_id;not null" json:"product_id"`
-	Count     int32   `gorm:"column:count;not null;comment:满足的商品数量" json:"count"`  // 满足的商品数量
-	Discount  float64 `gorm:"column:discount;not null;comment:折扣" json:"discount"` // 折扣
-	Price     float64 `gorm:"column:price;not null;comment:折后价格" json:"price"`     // 折后价格
+	ID        int64 `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	ProductID int64 `gorm:"column:product_id;not null" json:"product_id"`
+	Count     int32 `gorm:"column:count;not null;comment:满足的商品数量" json:"count"`  // 满足的商品数量
+	Discount  int64 `gorm:"column:discount;not null;comment:折扣" json:"discount"` // 折扣
+	Price     int64 `gorm:"column:price;not null;comment:折后价格" json:"price"`     // 折后价格
 }
 
 // TableName PmsProductLadder's table name

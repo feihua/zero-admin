@@ -25,24 +25,24 @@ type CouponAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                      //
-	Type         int32   `protobuf:"varint,2,opt,name=Type,proto3" json:"Type,omitempty"`                  //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string  `protobuf:"bytes,3,opt,name=Name,proto3" json:"Name,omitempty"`                   //名称
-	Platform     int32   `protobuf:"varint,4,opt,name=Platform,proto3" json:"Platform,omitempty"`          //使用平台：0->全部；1->移动；2->PC
-	Count        int32   `protobuf:"varint,5,opt,name=Count,proto3" json:"Count,omitempty"`                //数量
-	Amount       float64 `protobuf:"fixed64,6,opt,name=Amount,proto3" json:"Amount,omitempty"`             //金额
-	PerLimit     int32   `protobuf:"varint,7,opt,name=PerLimit,proto3" json:"PerLimit,omitempty"`          //每人限领张数
-	MinPoint     float64 `protobuf:"fixed64,8,opt,name=MinPoint,proto3" json:"MinPoint,omitempty"`         //使用门槛；0表示无门槛
-	StartTime    string  `protobuf:"bytes,9,opt,name=StartTime,proto3" json:"StartTime,omitempty"`         //开始时间
-	EndTime      string  `protobuf:"bytes,10,opt,name=EndTime,proto3" json:"EndTime,omitempty"`            //结束时间
-	UseType      int32   `protobuf:"varint,11,opt,name=UseType,proto3" json:"UseType,omitempty"`           //使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string  `protobuf:"bytes,12,opt,name=Note,proto3" json:"Note,omitempty"`                  //备注
-	PublishCount int32   `protobuf:"varint,13,opt,name=PublishCount,proto3" json:"PublishCount,omitempty"` //发行数量
-	UseCount     int32   `protobuf:"varint,14,opt,name=UseCount,proto3" json:"UseCount,omitempty"`         //已使用数量
-	ReceiveCount int32   `protobuf:"varint,15,opt,name=ReceiveCount,proto3" json:"ReceiveCount,omitempty"` //领取数量
-	EnableTime   string  `protobuf:"bytes,16,opt,name=EnableTime,proto3" json:"EnableTime,omitempty"`      //可以领取的日期
-	Code         string  `protobuf:"bytes,17,opt,name=Code,proto3" json:"Code,omitempty"`                  //优惠码
-	MemberLevel  int32   `protobuf:"varint,18,opt,name=MemberLevel,proto3" json:"MemberLevel,omitempty"`   //可领取的会员类型：0->无限时
+	Id           int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                      //
+	Type         int32  `protobuf:"varint,2,opt,name=Type,proto3" json:"Type,omitempty"`                  //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         string `protobuf:"bytes,3,opt,name=Name,proto3" json:"Name,omitempty"`                   //名称
+	Platform     int32  `protobuf:"varint,4,opt,name=Platform,proto3" json:"Platform,omitempty"`          //使用平台：0->全部；1->移动；2->PC
+	Count        int32  `protobuf:"varint,5,opt,name=Count,proto3" json:"Count,omitempty"`                //数量
+	Amount       int64  `protobuf:"varint,6,opt,name=Amount,proto3" json:"Amount,omitempty"`              //金额
+	PerLimit     int32  `protobuf:"varint,7,opt,name=PerLimit,proto3" json:"PerLimit,omitempty"`          //每人限领张数
+	MinPoint     int64  `protobuf:"varint,8,opt,name=MinPoint,proto3" json:"MinPoint,omitempty"`          //使用门槛；0表示无门槛
+	StartTime    string `protobuf:"bytes,9,opt,name=StartTime,proto3" json:"StartTime,omitempty"`         //开始时间
+	EndTime      string `protobuf:"bytes,10,opt,name=EndTime,proto3" json:"EndTime,omitempty"`            //结束时间
+	UseType      int32  `protobuf:"varint,11,opt,name=UseType,proto3" json:"UseType,omitempty"`           //使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         string `protobuf:"bytes,12,opt,name=Note,proto3" json:"Note,omitempty"`                  //备注
+	PublishCount int32  `protobuf:"varint,13,opt,name=PublishCount,proto3" json:"PublishCount,omitempty"` //发行数量
+	UseCount     int32  `protobuf:"varint,14,opt,name=UseCount,proto3" json:"UseCount,omitempty"`         //已使用数量
+	ReceiveCount int32  `protobuf:"varint,15,opt,name=ReceiveCount,proto3" json:"ReceiveCount,omitempty"` //领取数量
+	EnableTime   string `protobuf:"bytes,16,opt,name=EnableTime,proto3" json:"EnableTime,omitempty"`      //可以领取的日期
+	Code         string `protobuf:"bytes,17,opt,name=Code,proto3" json:"Code,omitempty"`                  //优惠码
+	MemberLevel  int32  `protobuf:"varint,18,opt,name=MemberLevel,proto3" json:"MemberLevel,omitempty"`   //可领取的会员类型：0->无限时
 }
 
 func (x *CouponAddReq) Reset() {
@@ -112,7 +112,7 @@ func (x *CouponAddReq) GetCount() int32 {
 	return 0
 }
 
-func (x *CouponAddReq) GetAmount() float64 {
+func (x *CouponAddReq) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -126,7 +126,7 @@ func (x *CouponAddReq) GetPerLimit() int32 {
 	return 0
 }
 
-func (x *CouponAddReq) GetMinPoint() float64 {
+func (x *CouponAddReq) GetMinPoint() int64 {
 	if x != nil {
 		return x.MinPoint
 	}
@@ -349,24 +349,24 @@ type CouponUpdateReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                      //
-	Type         int32   `protobuf:"varint,2,opt,name=Type,proto3" json:"Type,omitempty"`                  //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string  `protobuf:"bytes,3,opt,name=Name,proto3" json:"Name,omitempty"`                   //名称
-	Platform     int32   `protobuf:"varint,4,opt,name=Platform,proto3" json:"Platform,omitempty"`          //使用平台：0->全部；1->移动；2->PC
-	Count        int32   `protobuf:"varint,5,opt,name=Count,proto3" json:"Count,omitempty"`                //数量
-	Amount       float64 `protobuf:"fixed64,6,opt,name=Amount,proto3" json:"Amount,omitempty"`             //金额
-	PerLimit     int32   `protobuf:"varint,7,opt,name=PerLimit,proto3" json:"PerLimit,omitempty"`          //每人限领张数
-	MinPoint     float64 `protobuf:"fixed64,8,opt,name=MinPoint,proto3" json:"MinPoint,omitempty"`         //使用门槛；0表示无门槛
-	StartTime    string  `protobuf:"bytes,9,opt,name=StartTime,proto3" json:"StartTime,omitempty"`         //开始时间
-	EndTime      string  `protobuf:"bytes,10,opt,name=EndTime,proto3" json:"EndTime,omitempty"`            //结束时间
-	UseType      int32   `protobuf:"varint,11,opt,name=UseType,proto3" json:"UseType,omitempty"`           //使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string  `protobuf:"bytes,12,opt,name=Note,proto3" json:"Note,omitempty"`                  //备注
-	PublishCount int32   `protobuf:"varint,13,opt,name=PublishCount,proto3" json:"PublishCount,omitempty"` //发行数量
-	UseCount     int32   `protobuf:"varint,14,opt,name=UseCount,proto3" json:"UseCount,omitempty"`         //已使用数量
-	ReceiveCount int32   `protobuf:"varint,15,opt,name=ReceiveCount,proto3" json:"ReceiveCount,omitempty"` //领取数量
-	EnableTime   string  `protobuf:"bytes,16,opt,name=EnableTime,proto3" json:"EnableTime,omitempty"`      //可以领取的日期
-	Code         string  `protobuf:"bytes,17,opt,name=Code,proto3" json:"Code,omitempty"`                  //优惠码
-	MemberLevel  int32   `protobuf:"varint,18,opt,name=MemberLevel,proto3" json:"MemberLevel,omitempty"`   //可领取的会员类型：0->无限时
+	Id           int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                      //
+	Type         int32  `protobuf:"varint,2,opt,name=Type,proto3" json:"Type,omitempty"`                  //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         string `protobuf:"bytes,3,opt,name=Name,proto3" json:"Name,omitempty"`                   //名称
+	Platform     int32  `protobuf:"varint,4,opt,name=Platform,proto3" json:"Platform,omitempty"`          //使用平台：0->全部；1->移动；2->PC
+	Count        int32  `protobuf:"varint,5,opt,name=Count,proto3" json:"Count,omitempty"`                //数量
+	Amount       int64  `protobuf:"varint,6,opt,name=Amount,proto3" json:"Amount,omitempty"`              //金额
+	PerLimit     int32  `protobuf:"varint,7,opt,name=PerLimit,proto3" json:"PerLimit,omitempty"`          //每人限领张数
+	MinPoint     int64  `protobuf:"varint,8,opt,name=MinPoint,proto3" json:"MinPoint,omitempty"`          //使用门槛；0表示无门槛
+	StartTime    string `protobuf:"bytes,9,opt,name=StartTime,proto3" json:"StartTime,omitempty"`         //开始时间
+	EndTime      string `protobuf:"bytes,10,opt,name=EndTime,proto3" json:"EndTime,omitempty"`            //结束时间
+	UseType      int32  `protobuf:"varint,11,opt,name=UseType,proto3" json:"UseType,omitempty"`           //使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         string `protobuf:"bytes,12,opt,name=Note,proto3" json:"Note,omitempty"`                  //备注
+	PublishCount int32  `protobuf:"varint,13,opt,name=PublishCount,proto3" json:"PublishCount,omitempty"` //发行数量
+	UseCount     int32  `protobuf:"varint,14,opt,name=UseCount,proto3" json:"UseCount,omitempty"`         //已使用数量
+	ReceiveCount int32  `protobuf:"varint,15,opt,name=ReceiveCount,proto3" json:"ReceiveCount,omitempty"` //领取数量
+	EnableTime   string `protobuf:"bytes,16,opt,name=EnableTime,proto3" json:"EnableTime,omitempty"`      //可以领取的日期
+	Code         string `protobuf:"bytes,17,opt,name=Code,proto3" json:"Code,omitempty"`                  //优惠码
+	MemberLevel  int32  `protobuf:"varint,18,opt,name=MemberLevel,proto3" json:"MemberLevel,omitempty"`   //可领取的会员类型：0->无限时
 }
 
 func (x *CouponUpdateReq) Reset() {
@@ -436,7 +436,7 @@ func (x *CouponUpdateReq) GetCount() int32 {
 	return 0
 }
 
-func (x *CouponUpdateReq) GetAmount() float64 {
+func (x *CouponUpdateReq) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -450,7 +450,7 @@ func (x *CouponUpdateReq) GetPerLimit() int32 {
 	return 0
 }
 
-func (x *CouponUpdateReq) GetMinPoint() float64 {
+func (x *CouponUpdateReq) GetMinPoint() int64 {
 	if x != nil {
 		return x.MinPoint
 	}
@@ -682,24 +682,24 @@ type CouponListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                      //
-	Type         int32   `protobuf:"varint,2,opt,name=Type,proto3" json:"Type,omitempty"`                  //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string  `protobuf:"bytes,3,opt,name=Name,proto3" json:"Name,omitempty"`                   //名称
-	Platform     int32   `protobuf:"varint,4,opt,name=Platform,proto3" json:"Platform,omitempty"`          //使用平台：0->全部；1->移动；2->PC
-	Count        int32   `protobuf:"varint,5,opt,name=Count,proto3" json:"Count,omitempty"`                //数量
-	Amount       float64 `protobuf:"fixed64,6,opt,name=Amount,proto3" json:"Amount,omitempty"`             //金额
-	PerLimit     int32   `protobuf:"varint,7,opt,name=PerLimit,proto3" json:"PerLimit,omitempty"`          //每人限领张数
-	MinPoint     float64 `protobuf:"fixed64,8,opt,name=MinPoint,proto3" json:"MinPoint,omitempty"`         //使用门槛；0表示无门槛
-	StartTime    string  `protobuf:"bytes,9,opt,name=StartTime,proto3" json:"StartTime,omitempty"`         //开始时间
-	EndTime      string  `protobuf:"bytes,10,opt,name=EndTime,proto3" json:"EndTime,omitempty"`            //结束时间
-	UseType      int32   `protobuf:"varint,11,opt,name=UseType,proto3" json:"UseType,omitempty"`           //使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string  `protobuf:"bytes,12,opt,name=Note,proto3" json:"Note,omitempty"`                  //备注
-	PublishCount int32   `protobuf:"varint,13,opt,name=PublishCount,proto3" json:"PublishCount,omitempty"` //发行数量
-	UseCount     int32   `protobuf:"varint,14,opt,name=UseCount,proto3" json:"UseCount,omitempty"`         //已使用数量
-	ReceiveCount int32   `protobuf:"varint,15,opt,name=ReceiveCount,proto3" json:"ReceiveCount,omitempty"` //领取数量
-	EnableTime   string  `protobuf:"bytes,16,opt,name=EnableTime,proto3" json:"EnableTime,omitempty"`      //可以领取的日期
-	Code         string  `protobuf:"bytes,17,opt,name=Code,proto3" json:"Code,omitempty"`                  //优惠码
-	MemberLevel  int32   `protobuf:"varint,18,opt,name=MemberLevel,proto3" json:"MemberLevel,omitempty"`   //可领取的会员类型：0->无限时
+	Id           int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                      //
+	Type         int32  `protobuf:"varint,2,opt,name=Type,proto3" json:"Type,omitempty"`                  //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         string `protobuf:"bytes,3,opt,name=Name,proto3" json:"Name,omitempty"`                   //名称
+	Platform     int32  `protobuf:"varint,4,opt,name=Platform,proto3" json:"Platform,omitempty"`          //使用平台：0->全部；1->移动；2->PC
+	Count        int32  `protobuf:"varint,5,opt,name=Count,proto3" json:"Count,omitempty"`                //数量
+	Amount       int64  `protobuf:"varint,6,opt,name=Amount,proto3" json:"Amount,omitempty"`              //金额
+	PerLimit     int32  `protobuf:"varint,7,opt,name=PerLimit,proto3" json:"PerLimit,omitempty"`          //每人限领张数
+	MinPoint     int64  `protobuf:"varint,8,opt,name=MinPoint,proto3" json:"MinPoint,omitempty"`          //使用门槛；0表示无门槛
+	StartTime    string `protobuf:"bytes,9,opt,name=StartTime,proto3" json:"StartTime,omitempty"`         //开始时间
+	EndTime      string `protobuf:"bytes,10,opt,name=EndTime,proto3" json:"EndTime,omitempty"`            //结束时间
+	UseType      int32  `protobuf:"varint,11,opt,name=UseType,proto3" json:"UseType,omitempty"`           //使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         string `protobuf:"bytes,12,opt,name=Note,proto3" json:"Note,omitempty"`                  //备注
+	PublishCount int32  `protobuf:"varint,13,opt,name=PublishCount,proto3" json:"PublishCount,omitempty"` //发行数量
+	UseCount     int32  `protobuf:"varint,14,opt,name=UseCount,proto3" json:"UseCount,omitempty"`         //已使用数量
+	ReceiveCount int32  `protobuf:"varint,15,opt,name=ReceiveCount,proto3" json:"ReceiveCount,omitempty"` //领取数量
+	EnableTime   string `protobuf:"bytes,16,opt,name=EnableTime,proto3" json:"EnableTime,omitempty"`      //可以领取的日期
+	Code         string `protobuf:"bytes,17,opt,name=Code,proto3" json:"Code,omitempty"`                  //优惠码
+	MemberLevel  int32  `protobuf:"varint,18,opt,name=MemberLevel,proto3" json:"MemberLevel,omitempty"`   //可领取的会员类型：0->无限时
 }
 
 func (x *CouponListData) Reset() {
@@ -769,7 +769,7 @@ func (x *CouponListData) GetCount() int32 {
 	return 0
 }
 
-func (x *CouponListData) GetAmount() float64 {
+func (x *CouponListData) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -783,7 +783,7 @@ func (x *CouponListData) GetPerLimit() int32 {
 	return 0
 }
 
-func (x *CouponListData) GetMinPoint() float64 {
+func (x *CouponListData) GetMinPoint() int64 {
 	if x != nil {
 		return x.MinPoint
 	}
@@ -967,24 +967,24 @@ type CouponFindByIdResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                      //
-	Type         int32   `protobuf:"varint,2,opt,name=Type,proto3" json:"Type,omitempty"`                  //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string  `protobuf:"bytes,3,opt,name=Name,proto3" json:"Name,omitempty"`                   //名称
-	Platform     int32   `protobuf:"varint,4,opt,name=Platform,proto3" json:"Platform,omitempty"`          //使用平台：0->全部；1->移动；2->PC
-	Count        int32   `protobuf:"varint,5,opt,name=Count,proto3" json:"Count,omitempty"`                //数量
-	Amount       float64 `protobuf:"fixed64,6,opt,name=Amount,proto3" json:"Amount,omitempty"`             //金额
-	PerLimit     int32   `protobuf:"varint,7,opt,name=PerLimit,proto3" json:"PerLimit,omitempty"`          //每人限领张数
-	MinPoint     float64 `protobuf:"fixed64,8,opt,name=MinPoint,proto3" json:"MinPoint,omitempty"`         //使用门槛；0表示无门槛
-	StartTime    string  `protobuf:"bytes,9,opt,name=StartTime,proto3" json:"StartTime,omitempty"`         //开始时间
-	EndTime      string  `protobuf:"bytes,10,opt,name=EndTime,proto3" json:"EndTime,omitempty"`            //结束时间
-	UseType      int32   `protobuf:"varint,11,opt,name=UseType,proto3" json:"UseType,omitempty"`           //使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string  `protobuf:"bytes,12,opt,name=Note,proto3" json:"Note,omitempty"`                  //备注
-	PublishCount int32   `protobuf:"varint,13,opt,name=PublishCount,proto3" json:"PublishCount,omitempty"` //发行数量
-	UseCount     int32   `protobuf:"varint,14,opt,name=UseCount,proto3" json:"UseCount,omitempty"`         //已使用数量
-	ReceiveCount int32   `protobuf:"varint,15,opt,name=ReceiveCount,proto3" json:"ReceiveCount,omitempty"` //领取数量
-	EnableTime   string  `protobuf:"bytes,16,opt,name=EnableTime,proto3" json:"EnableTime,omitempty"`      //可以领取的日期
-	Code         string  `protobuf:"bytes,17,opt,name=Code,proto3" json:"Code,omitempty"`                  //优惠码
-	MemberLevel  int32   `protobuf:"varint,18,opt,name=MemberLevel,proto3" json:"MemberLevel,omitempty"`   //可领取的会员类型：0->无限时
+	Id           int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                      //
+	Type         int32  `protobuf:"varint,2,opt,name=Type,proto3" json:"Type,omitempty"`                  //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         string `protobuf:"bytes,3,opt,name=Name,proto3" json:"Name,omitempty"`                   //名称
+	Platform     int32  `protobuf:"varint,4,opt,name=Platform,proto3" json:"Platform,omitempty"`          //使用平台：0->全部；1->移动；2->PC
+	Count        int32  `protobuf:"varint,5,opt,name=Count,proto3" json:"Count,omitempty"`                //数量
+	Amount       int64  `protobuf:"varint,6,opt,name=Amount,proto3" json:"Amount,omitempty"`              //金额
+	PerLimit     int32  `protobuf:"varint,7,opt,name=PerLimit,proto3" json:"PerLimit,omitempty"`          //每人限领张数
+	MinPoint     int64  `protobuf:"varint,8,opt,name=MinPoint,proto3" json:"MinPoint,omitempty"`          //使用门槛；0表示无门槛
+	StartTime    string `protobuf:"bytes,9,opt,name=StartTime,proto3" json:"StartTime,omitempty"`         //开始时间
+	EndTime      string `protobuf:"bytes,10,opt,name=EndTime,proto3" json:"EndTime,omitempty"`            //结束时间
+	UseType      int32  `protobuf:"varint,11,opt,name=UseType,proto3" json:"UseType,omitempty"`           //使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         string `protobuf:"bytes,12,opt,name=Note,proto3" json:"Note,omitempty"`                  //备注
+	PublishCount int32  `protobuf:"varint,13,opt,name=PublishCount,proto3" json:"PublishCount,omitempty"` //发行数量
+	UseCount     int32  `protobuf:"varint,14,opt,name=UseCount,proto3" json:"UseCount,omitempty"`         //已使用数量
+	ReceiveCount int32  `protobuf:"varint,15,opt,name=ReceiveCount,proto3" json:"ReceiveCount,omitempty"` //领取数量
+	EnableTime   string `protobuf:"bytes,16,opt,name=EnableTime,proto3" json:"EnableTime,omitempty"`      //可以领取的日期
+	Code         string `protobuf:"bytes,17,opt,name=Code,proto3" json:"Code,omitempty"`                  //优惠码
+	MemberLevel  int32  `protobuf:"varint,18,opt,name=MemberLevel,proto3" json:"MemberLevel,omitempty"`   //可领取的会员类型：0->无限时
 }
 
 func (x *CouponFindByIdResp) Reset() {
@@ -1054,7 +1054,7 @@ func (x *CouponFindByIdResp) GetCount() int32 {
 	return 0
 }
 
-func (x *CouponFindByIdResp) GetAmount() float64 {
+func (x *CouponFindByIdResp) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -1068,7 +1068,7 @@ func (x *CouponFindByIdResp) GetPerLimit() int32 {
 	return 0
 }
 
-func (x *CouponFindByIdResp) GetMinPoint() float64 {
+func (x *CouponFindByIdResp) GetMinPoint() int64 {
 	if x != nil {
 		return x.MinPoint
 	}
@@ -4810,13 +4810,13 @@ type FlashPromotionProductRelationAddReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FlashPromotionId        int64   `protobuf:"varint,1,opt,name=FlashPromotionId,proto3" json:"FlashPromotionId,omitempty"`               //限时购id
-	FlashPromotionSessionId int64   `protobuf:"varint,2,opt,name=FlashPromotionSessionId,proto3" json:"FlashPromotionSessionId,omitempty"` //编号
-	ProductId               int64   `protobuf:"varint,3,opt,name=ProductId,proto3" json:"ProductId,omitempty"`                             //商品id
-	FlashPromotionPrice     float64 `protobuf:"fixed64,4,opt,name=FlashPromotionPrice,proto3" json:"FlashPromotionPrice,omitempty"`        //限时购价格
-	FlashPromotionCount     int32   `protobuf:"varint,5,opt,name=FlashPromotionCount,proto3" json:"FlashPromotionCount,omitempty"`         //限时购数量
-	FlashPromotionLimit     int32   `protobuf:"varint,6,opt,name=FlashPromotionLimit,proto3" json:"FlashPromotionLimit,omitempty"`         //每人限购数量
-	Sort                    int32   `protobuf:"varint,7,opt,name=Sort,proto3" json:"Sort,omitempty"`                                       //排序
+	FlashPromotionId        int64 `protobuf:"varint,1,opt,name=FlashPromotionId,proto3" json:"FlashPromotionId,omitempty"`               //限时购id
+	FlashPromotionSessionId int64 `protobuf:"varint,2,opt,name=FlashPromotionSessionId,proto3" json:"FlashPromotionSessionId,omitempty"` //编号
+	ProductId               int64 `protobuf:"varint,3,opt,name=ProductId,proto3" json:"ProductId,omitempty"`                             //商品id
+	FlashPromotionPrice     int64 `protobuf:"varint,4,opt,name=FlashPromotionPrice,proto3" json:"FlashPromotionPrice,omitempty"`         //限时购价格
+	FlashPromotionCount     int32 `protobuf:"varint,5,opt,name=FlashPromotionCount,proto3" json:"FlashPromotionCount,omitempty"`         //限时购数量
+	FlashPromotionLimit     int32 `protobuf:"varint,6,opt,name=FlashPromotionLimit,proto3" json:"FlashPromotionLimit,omitempty"`         //每人限购数量
+	Sort                    int32 `protobuf:"varint,7,opt,name=Sort,proto3" json:"Sort,omitempty"`                                       //排序
 }
 
 func (x *FlashPromotionProductRelationAddReq) Reset() {
@@ -4872,7 +4872,7 @@ func (x *FlashPromotionProductRelationAddReq) GetProductId() int64 {
 	return 0
 }
 
-func (x *FlashPromotionProductRelationAddReq) GetFlashPromotionPrice() float64 {
+func (x *FlashPromotionProductRelationAddReq) GetFlashPromotionPrice() int64 {
 	if x != nil {
 		return x.FlashPromotionPrice
 	}
@@ -5046,14 +5046,14 @@ type FlashPromotionProductRelationUpdateReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                      int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                                           //编号
-	FlashPromotionId        int64   `protobuf:"varint,2,opt,name=FlashPromotionId,proto3" json:"FlashPromotionId,omitempty"`               //限时购id
-	FlashPromotionSessionId int64   `protobuf:"varint,3,opt,name=FlashPromotionSessionId,proto3" json:"FlashPromotionSessionId,omitempty"` //编号
-	ProductId               int64   `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`                             //商品id
-	FlashPromotionPrice     float64 `protobuf:"fixed64,5,opt,name=FlashPromotionPrice,proto3" json:"FlashPromotionPrice,omitempty"`        //限时购价格
-	FlashPromotionCount     int32   `protobuf:"varint,6,opt,name=FlashPromotionCount,proto3" json:"FlashPromotionCount,omitempty"`         //限时购数量
-	FlashPromotionLimit     int32   `protobuf:"varint,7,opt,name=FlashPromotionLimit,proto3" json:"FlashPromotionLimit,omitempty"`         //每人限购数量
-	Sort                    int32   `protobuf:"varint,8,opt,name=Sort,proto3" json:"Sort,omitempty"`                                       //排序
+	Id                      int64 `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                                           //编号
+	FlashPromotionId        int64 `protobuf:"varint,2,opt,name=FlashPromotionId,proto3" json:"FlashPromotionId,omitempty"`               //限时购id
+	FlashPromotionSessionId int64 `protobuf:"varint,3,opt,name=FlashPromotionSessionId,proto3" json:"FlashPromotionSessionId,omitempty"` //编号
+	ProductId               int64 `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`                             //商品id
+	FlashPromotionPrice     int64 `protobuf:"varint,5,opt,name=FlashPromotionPrice,proto3" json:"FlashPromotionPrice,omitempty"`         //限时购价格
+	FlashPromotionCount     int32 `protobuf:"varint,6,opt,name=FlashPromotionCount,proto3" json:"FlashPromotionCount,omitempty"`         //限时购数量
+	FlashPromotionLimit     int32 `protobuf:"varint,7,opt,name=FlashPromotionLimit,proto3" json:"FlashPromotionLimit,omitempty"`         //每人限购数量
+	Sort                    int32 `protobuf:"varint,8,opt,name=Sort,proto3" json:"Sort,omitempty"`                                       //排序
 }
 
 func (x *FlashPromotionProductRelationUpdateReq) Reset() {
@@ -5116,7 +5116,7 @@ func (x *FlashPromotionProductRelationUpdateReq) GetProductId() int64 {
 	return 0
 }
 
-func (x *FlashPromotionProductRelationUpdateReq) GetFlashPromotionPrice() float64 {
+func (x *FlashPromotionProductRelationUpdateReq) GetFlashPromotionPrice() int64 {
 	if x != nil {
 		return x.FlashPromotionPrice
 	}
@@ -5267,14 +5267,14 @@ type FlashPromotionProductRelationListData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                      int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                                           //编号
-	FlashPromotionId        int64   `protobuf:"varint,2,opt,name=FlashPromotionId,proto3" json:"FlashPromotionId,omitempty"`               //限时购id
-	FlashPromotionSessionId int64   `protobuf:"varint,3,opt,name=FlashPromotionSessionId,proto3" json:"FlashPromotionSessionId,omitempty"` //编号
-	ProductId               int64   `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`                             //商品id
-	FlashPromotionPrice     float64 `protobuf:"fixed64,5,opt,name=FlashPromotionPrice,proto3" json:"FlashPromotionPrice,omitempty"`        //限时购价格
-	FlashPromotionCount     int32   `protobuf:"varint,6,opt,name=FlashPromotionCount,proto3" json:"FlashPromotionCount,omitempty"`         //限时购数量
-	FlashPromotionLimit     int32   `protobuf:"varint,7,opt,name=FlashPromotionLimit,proto3" json:"FlashPromotionLimit,omitempty"`         //每人限购数量
-	Sort                    int32   `protobuf:"varint,8,opt,name=Sort,proto3" json:"Sort,omitempty"`                                       //排序
+	Id                      int64 `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                                           //编号
+	FlashPromotionId        int64 `protobuf:"varint,2,opt,name=FlashPromotionId,proto3" json:"FlashPromotionId,omitempty"`               //限时购id
+	FlashPromotionSessionId int64 `protobuf:"varint,3,opt,name=FlashPromotionSessionId,proto3" json:"FlashPromotionSessionId,omitempty"` //编号
+	ProductId               int64 `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`                             //商品id
+	FlashPromotionPrice     int64 `protobuf:"varint,5,opt,name=FlashPromotionPrice,proto3" json:"FlashPromotionPrice,omitempty"`         //限时购价格
+	FlashPromotionCount     int32 `protobuf:"varint,6,opt,name=FlashPromotionCount,proto3" json:"FlashPromotionCount,omitempty"`         //限时购数量
+	FlashPromotionLimit     int32 `protobuf:"varint,7,opt,name=FlashPromotionLimit,proto3" json:"FlashPromotionLimit,omitempty"`         //每人限购数量
+	Sort                    int32 `protobuf:"varint,8,opt,name=Sort,proto3" json:"Sort,omitempty"`                                       //排序
 }
 
 func (x *FlashPromotionProductRelationListData) Reset() {
@@ -5337,7 +5337,7 @@ func (x *FlashPromotionProductRelationListData) GetProductId() int64 {
 	return 0
 }
 
-func (x *FlashPromotionProductRelationListData) GetFlashPromotionPrice() float64 {
+func (x *FlashPromotionProductRelationListData) GetFlashPromotionPrice() int64 {
 	if x != nil {
 		return x.FlashPromotionPrice
 	}
@@ -5472,14 +5472,14 @@ type QueryFlashPromotionByProductResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                      int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                                           //编号
-	FlashPromotionId        int64   `protobuf:"varint,2,opt,name=FlashPromotionId,proto3" json:"FlashPromotionId,omitempty"`               //限时购id
-	FlashPromotionSessionId int64   `protobuf:"varint,3,opt,name=FlashPromotionSessionId,proto3" json:"FlashPromotionSessionId,omitempty"` //编号
-	ProductId               int64   `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`                             //商品id
-	FlashPromotionPrice     float32 `protobuf:"fixed32,5,opt,name=FlashPromotionPrice,proto3" json:"FlashPromotionPrice,omitempty"`        //限时购价格
-	FlashPromotionCount     int32   `protobuf:"varint,6,opt,name=FlashPromotionCount,proto3" json:"FlashPromotionCount,omitempty"`         //限时购数量
-	FlashPromotionLimit     int32   `protobuf:"varint,7,opt,name=FlashPromotionLimit,proto3" json:"FlashPromotionLimit,omitempty"`         //每人限购数量
-	Sort                    int32   `protobuf:"varint,8,opt,name=Sort,proto3" json:"Sort,omitempty"`                                       //排序
+	Id                      int64 `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                                           //编号
+	FlashPromotionId        int64 `protobuf:"varint,2,opt,name=FlashPromotionId,proto3" json:"FlashPromotionId,omitempty"`               //限时购id
+	FlashPromotionSessionId int64 `protobuf:"varint,3,opt,name=FlashPromotionSessionId,proto3" json:"FlashPromotionSessionId,omitempty"` //编号
+	ProductId               int64 `protobuf:"varint,4,opt,name=ProductId,proto3" json:"ProductId,omitempty"`                             //商品id
+	FlashPromotionPrice     int64 `protobuf:"varint,5,opt,name=FlashPromotionPrice,proto3" json:"FlashPromotionPrice,omitempty"`         //限时购价格
+	FlashPromotionCount     int32 `protobuf:"varint,6,opt,name=FlashPromotionCount,proto3" json:"FlashPromotionCount,omitempty"`         //限时购数量
+	FlashPromotionLimit     int32 `protobuf:"varint,7,opt,name=FlashPromotionLimit,proto3" json:"FlashPromotionLimit,omitempty"`         //每人限购数量
+	Sort                    int32 `protobuf:"varint,8,opt,name=Sort,proto3" json:"Sort,omitempty"`                                       //排序
 }
 
 func (x *QueryFlashPromotionByProductResp) Reset() {
@@ -5542,7 +5542,7 @@ func (x *QueryFlashPromotionByProductResp) GetProductId() int64 {
 	return 0
 }
 
-func (x *QueryFlashPromotionByProductResp) GetFlashPromotionPrice() float32 {
+func (x *QueryFlashPromotionByProductResp) GetFlashPromotionPrice() int64 {
 	if x != nil {
 		return x.FlashPromotionPrice
 	}
@@ -9339,10 +9339,10 @@ var file_rpc_sms_sms_proto_rawDesc = []byte{
 	0x6f, 0x72, 0x6d, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x50, 0x6c, 0x61, 0x74, 0x66,
 	0x6f, 0x72, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x41, 0x6d, 0x6f,
-	0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x01, 0x52, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
+	0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
 	0x74, 0x12, 0x1a, 0x0a, 0x08, 0x50, 0x65, 0x72, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x07, 0x20,
 	0x01, 0x28, 0x05, 0x52, 0x08, 0x50, 0x65, 0x72, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x1a, 0x0a,
-	0x08, 0x4d, 0x69, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x01, 0x52,
+	0x08, 0x4d, 0x69, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x08, 0x4d, 0x69, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x53, 0x74, 0x61,
 	0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x53, 0x74,
 	0x61, 0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x45, 0x6e, 0x64, 0x54, 0x69,
@@ -9377,10 +9377,10 @@ var file_rpc_sms_sms_proto_rawDesc = []byte{
 	0x6f, 0x72, 0x6d, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x50, 0x6c, 0x61, 0x74, 0x66,
 	0x6f, 0x72, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x41, 0x6d, 0x6f,
-	0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x01, 0x52, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
+	0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
 	0x74, 0x12, 0x1a, 0x0a, 0x08, 0x50, 0x65, 0x72, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x07, 0x20,
 	0x01, 0x28, 0x05, 0x52, 0x08, 0x50, 0x65, 0x72, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x1a, 0x0a,
-	0x08, 0x4d, 0x69, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x01, 0x52,
+	0x08, 0x4d, 0x69, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x08, 0x4d, 0x69, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x53, 0x74, 0x61,
 	0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x53, 0x74,
 	0x61, 0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x45, 0x6e, 0x64, 0x54, 0x69,
@@ -9424,11 +9424,11 @@ var file_rpc_sms_sms_proto_rawDesc = []byte{
 	0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x50, 0x6c,
 	0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18,
 	0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06,
-	0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x01, 0x52, 0x06, 0x41, 0x6d,
+	0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x41, 0x6d,
 	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x50, 0x65, 0x72, 0x4c, 0x69, 0x6d, 0x69, 0x74,
 	0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x50, 0x65, 0x72, 0x4c, 0x69, 0x6d, 0x69, 0x74,
 	0x12, 0x1a, 0x0a, 0x08, 0x4d, 0x69, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01,
-	0x28, 0x01, 0x52, 0x08, 0x4d, 0x69, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09,
+	0x28, 0x03, 0x52, 0x08, 0x4d, 0x69, 0x6e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09,
 	0x53, 0x74, 0x61, 0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x45, 0x6e,
 	0x64, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x45, 0x6e, 0x64,
@@ -9464,10 +9464,10 @@ var file_rpc_sms_sms_proto_rawDesc = []byte{
 	0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x50, 0x6c, 0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x12,
 	0x14, 0x0a, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05,
 	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18,
-	0x06, 0x20, 0x01, 0x28, 0x01, 0x52, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1a, 0x0a,
+	0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1a, 0x0a,
 	0x08, 0x50, 0x65, 0x72, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52,
 	0x08, 0x50, 0x65, 0x72, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x4d, 0x69, 0x6e,
-	0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x01, 0x52, 0x08, 0x4d, 0x69, 0x6e,
+	0x50, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x4d, 0x69, 0x6e,
 	0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x54, 0x69,
 	0x6d, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x54,
 	0x69, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x45, 0x6e, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x0a,
@@ -9934,7 +9934,7 @@ var file_rpc_sms_sms_proto_rawDesc = []byte{
 	0x6e, 0x49, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x64,
 	0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49,
 	0x64, 0x12, 0x30, 0x0a, 0x13, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74,
-	0x69, 0x6f, 0x6e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x01, 0x52, 0x13,
+	0x69, 0x6f, 0x6e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x13,
 	0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72,
 	0x69, 0x63, 0x65, 0x12, 0x30, 0x0a, 0x13, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d,
 	0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05,
@@ -9968,7 +9968,7 @@ var file_rpc_sms_sms_proto_rawDesc = []byte{
 	0x6e, 0x49, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x64,
 	0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49,
 	0x64, 0x12, 0x30, 0x0a, 0x13, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74,
-	0x69, 0x6f, 0x6e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x01, 0x52, 0x13,
+	0x69, 0x6f, 0x6e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x13,
 	0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72,
 	0x69, 0x63, 0x65, 0x12, 0x30, 0x0a, 0x13, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d,
 	0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05,
@@ -10007,7 +10007,7 @@ var file_rpc_sms_sms_proto_rawDesc = []byte{
 	0x1c, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x64, 0x18, 0x04, 0x20, 0x01,
 	0x28, 0x03, 0x52, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x64, 0x12, 0x30, 0x0a,
 	0x13, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x50,
-	0x72, 0x69, 0x63, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x01, 0x52, 0x13, 0x46, 0x6c, 0x61, 0x73,
+	0x72, 0x69, 0x63, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x13, 0x46, 0x6c, 0x61, 0x73,
 	0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12,
 	0x30, 0x0a, 0x13, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f,
 	0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x13, 0x46, 0x6c,
@@ -10042,7 +10042,7 @@ var file_rpc_sms_sms_proto_rawDesc = []byte{
 	0x64, 0x75, 0x63, 0x74, 0x49, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x50, 0x72,
 	0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x64, 0x12, 0x30, 0x0a, 0x13, 0x46, 0x6c, 0x61, 0x73, 0x68,
 	0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x05,
-	0x20, 0x01, 0x28, 0x02, 0x52, 0x13, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x13, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f,
 	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x30, 0x0a, 0x13, 0x46, 0x6c, 0x61,
 	0x73, 0x68, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74,
 	0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x13, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x50, 0x72, 0x6f,

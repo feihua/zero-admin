@@ -5,7 +5,7 @@ create table ums_member_level
     level_name           varchar(100)   not null comment '等级名称',
     growth_point         int            not null comment '成长点',
     default_status       tinyint        not null comment '是否为默认等级：0->不是；1->是',
-    free_freight_point   decimal(10, 2) not null comment '免运费标准',
+    free_freight_point bigint not null comment '免运费标准',
     comment_growth_point int            not null comment '每次评价获取的成长值',
     is_free_freight      tinyint        not null comment '是否有免邮特权',
     is_sign_in           tinyint        not null comment '是否有签到特权',

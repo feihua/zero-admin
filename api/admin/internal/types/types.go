@@ -530,18 +530,18 @@ type ListDeptResp struct {
 }
 
 type ListDictData struct {
-	Id          int64   `json:"id"`          // 编号
-	Value       string  `json:"value"`       // 数据值
-	Label       string  `json:"label"`       // 标签名
-	Type        string  `json:"type"`        // 类型
-	Description string  `json:"description"` // 描述
-	Sort        float64 `json:"sort"`        // 排序（升序）
-	CreateBy    string  `json:"createBy"`    // 创建人
-	CreateTime  string  `json:"createTime"`  // 创建时间
-	UpdateBy    string  `json:"updateBy"`    // 更新人
-	UpdateTime  string  `json:"updateTime"`  // 更新时间
-	Remarks     string  `json:"remarks"`     // 备注信息
-	DelFlag     int32   `json:"delFlag"`     // 是否删除  0：已删除  1：正常
+	Id          int64  `json:"id"`          // 编号
+	Value       string `json:"value"`       // 数据值
+	Label       string `json:"label"`       // 标签名
+	Type        string `json:"type"`        // 类型
+	Description string `json:"description"` // 描述
+	Sort        int64  `json:"sort"`        // 排序（升序）
+	CreateBy    string `json:"createBy"`    // 创建人
+	CreateTime  string `json:"createTime"`  // 创建时间
+	UpdateBy    string `json:"updateBy"`    // 更新人
+	UpdateTime  string `json:"updateTime"`  // 更新时间
+	Remarks     string `json:"remarks"`     // 备注信息
+	DelFlag     int32  `json:"delFlag"`     // 是否删除  0：已删除  1：正常
 }
 
 type ListDictReq struct {
@@ -1030,13 +1030,13 @@ type ListOrderData struct {
 	OrderSn               string                   `json:"orderSn"`                // 订单编号
 	CreateTime            string                   `json:"createTime"`             // 提交时间
 	MemberUsername        string                   `json:"memberUserName"`         // 用户帐号
-	TotalAmount           float64                  `json:"totalAmount"`            // 订单总金额
-	PayAmount             float64                  `json:"payAmount"`              // 应付金额（实际支付金额）
-	FreightAmount         float64                  `json:"freightAmount"`          // 运费金额
-	PromotionAmount       float64                  `json:"promotionAmount"`        // 促销优化金额（促销价、满减、阶梯价）
-	IntegrationAmount     float64                  `json:"integrationAmount"`      // 积分抵扣金额
-	CouponAmount          float64                  `json:"couponAmount"`           // 优惠券抵扣金额
-	DiscountAmount        float64                  `json:"discountAmount"`         // 管理员后台调整订单使用的折扣金额
+	TotalAmount           int64                    `json:"totalAmount"`            // 订单总金额
+	PayAmount             int64                    `json:"payAmount"`              // 应付金额（实际支付金额）
+	FreightAmount         int64                    `json:"freightAmount"`          // 运费金额
+	PromotionAmount       int64                    `json:"promotionAmount"`        // 促销优化金额（促销价、满减、阶梯价）
+	IntegrationAmount     int64                    `json:"integrationAmount"`      // 积分抵扣金额
+	CouponAmount          int64                    `json:"couponAmount"`           // 优惠券抵扣金额
+	DiscountAmount        int64                    `json:"discountAmount"`         // 管理员后台调整订单使用的折扣金额
 	PayType               int32                    `json:"payType"`                // 支付方式：0->未支付；1->支付宝；2->微信
 	SourceType            int32                    `json:"sourceType"`             // 订单来源：0->PC订单；1->app订单
 	Status                int32                    `json:"status"`                 // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
@@ -1073,27 +1073,27 @@ type ListOrderData struct {
 }
 
 type ListOrderItemData struct {
-	Id                int64   `json:"id"`
-	OrderId           int64   `json:"orderId"` // 订单id
-	OrderSn           string  `json:"orderSn"` // 订单编号
-	ProductId         int64   `json:"productId"`
-	ProductPic        string  `json:"productPic"`
-	ProductName       string  `json:"productName"`
-	ProductBrand      string  `json:"productBrand"`
-	ProductSn         string  `json:"productSn"`
-	ProductPrice      float32 `json:"productPrice"`      // 销售价格
-	ProductQuantity   int32   `json:"productQuantity"`   // 购买数量
-	ProductSkuId      int64   `json:"productSkuId"`      // 商品sku编号
-	ProductSkuCode    string  `json:"productSkuCode"`    // 商品sku条码
-	ProductCategoryId int64   `json:"productCategoryId"` // 商品分类id
-	PromotionName     string  `json:"promotionName"`     // 商品促销名称
-	PromotionAmount   float32 `json:"promotionAmount"`   // 商品促销分解金额
-	CouponAmount      float32 `json:"couponAmount"`      // 优惠券优惠分解金额
-	IntegrationAmount float32 `json:"integrationAmount"` // 积分优惠分解金额
-	RealAmount        float32 `json:"realAmount"`        // 该商品经过优惠后的分解金额
-	GiftIntegration   int32   `json:"giftIntegration"`
-	GiftGrowth        int32   `json:"gift_growth"`
-	ProductAttr       string  `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	Id                int64  `json:"id"`
+	OrderId           int64  `json:"orderId"` // 订单id
+	OrderSn           string `json:"orderSn"` // 订单编号
+	ProductId         int64  `json:"productId"`
+	ProductPic        string `json:"productPic"`
+	ProductName       string `json:"productName"`
+	ProductBrand      string `json:"productBrand"`
+	ProductSn         string `json:"productSn"`
+	ProductPrice      int64  `json:"productPrice"`      // 销售价格
+	ProductQuantity   int32  `json:"productQuantity"`   // 购买数量
+	ProductSkuId      int64  `json:"productSkuId"`      // 商品sku编号
+	ProductSkuCode    string `json:"productSkuCode"`    // 商品sku条码
+	ProductCategoryId int64  `json:"productCategoryId"` // 商品分类id
+	PromotionName     string `json:"promotionName"`     // 商品促销名称
+	PromotionAmount   int64  `json:"promotionAmount"`   // 商品促销分解金额
+	CouponAmount      int64  `json:"couponAmount"`      // 优惠券优惠分解金额
+	IntegrationAmount int64  `json:"integrationAmount"` // 积分优惠分解金额
+	RealAmount        int64  `json:"realAmount"`        // 该商品经过优惠后的分解金额
+	GiftIntegration   int32  `json:"giftIntegration"`
+	GiftGrowth        int32  `json:"gift_growth"`
+	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 }
 
 type ListOrderReq struct {
@@ -1430,24 +1430,24 @@ type ListUserResp struct {
 }
 
 type ListtCartItemData struct {
-	Id                int64   `json:"id"`
-	ProductId         int64   `json:"productId"`
-	ProductSkuId      int64   `json:"productSkuId"`
-	MemberId          int64   `json:"memberId"`
-	Quantity          int32   `json:"quantity"`          // 购买数量
-	Price             float64 `json:"price"`             // 添加到购物车的价格
-	ProductPic        string  `json:"productPic"`        // 商品主图
-	ProductName       string  `json:"productName"`       // 商品名称
-	ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
-	ProductSkuCode    string  `json:"productSkuCode"`    // 商品sku条码
-	MemberNickname    string  `json:"memberNickName"`    // 会员昵称
-	CreateDate        string  `json:"createDate"`        // 创建时间
-	ModifyDate        string  `json:"modifyDate"`        // 修改时间
-	DeleteStatus      int32   `json:"deleteStatus"`      // 是否删除
-	ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
-	ProductBrand      string  `json:"productBrand"`
-	ProductSn         string  `json:"productSn"`
-	ProductAttr       string  `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	Id                int64  `json:"id"`
+	ProductId         int64  `json:"productId"`
+	ProductSkuId      int64  `json:"productSkuId"`
+	MemberId          int64  `json:"memberId"`
+	Quantity          int32  `json:"quantity"`          // 购买数量
+	Price             int64  `json:"price"`             // 添加到购物车的价格
+	ProductPic        string `json:"productPic"`        // 商品主图
+	ProductName       string `json:"productName"`       // 商品名称
+	ProductSubTitle   string `json:"productSubTitle"`   // 商品副标题（卖点）
+	ProductSkuCode    string `json:"productSkuCode"`    // 商品sku条码
+	MemberNickname    string `json:"memberNickName"`    // 会员昵称
+	CreateDate        string `json:"createDate"`        // 创建时间
+	ModifyDate        string `json:"modifyDate"`        // 修改时间
+	DeleteStatus      int32  `json:"deleteStatus"`      // 是否删除
+	ProductCategoryId int64  `json:"productCategoryId"` // 商品分类
+	ProductBrand      string `json:"productBrand"`
+	ProductSn         string `json:"productSn"`
+	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 }
 
 type ListtCompayAddressData struct {
@@ -1464,24 +1464,24 @@ type ListtCompayAddressData struct {
 }
 
 type ListtCouponData struct {
-	Id           int64   `json:"id"`
-	Type         int32   `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string  `json:"name"`
-	Platform     int32   `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
-	Count        int32   `json:"count"`    // 数量
-	Amount       float64 `json:"amount"`   // 金额
-	PerLimit     int32   `json:"perLimit"` // 每人限领张数
-	MinPoint     float64 `json:"minPoint"` // 使用门槛；0表示无门槛
-	StartTime    string  `json:"startTime"`
-	EndTime      string  `json:"endTime"`
-	UseType      int32   `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string  `json:"note"`         // 备注
-	PublishCount int32   `json:"publishCount"` // 发行数量
-	UseCount     int32   `json:"useCount"`     // 已使用数量
-	ReceiveCount int32   `json:"receiveCount"` // 领取数量
-	EnableTime   string  `json:"enableTime"`   // 可以领取的日期
-	Code         string  `json:"code"`         // 优惠码
-	MemberLevel  int32   `json:"memberLevel"`  // 可领取的会员类型：0->无限时
+	Id           int64  `json:"id"`
+	Type         int32  `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         string `json:"name"`
+	Platform     int32  `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
+	Count        int32  `json:"count"`    // 数量
+	Amount       int64  `json:"amount"`   // 金额
+	PerLimit     int32  `json:"perLimit"` // 每人限领张数
+	MinPoint     int64  `json:"minPoint"` // 使用门槛；0表示无门槛
+	StartTime    string `json:"startTime"`
+	EndTime      string `json:"endTime"`
+	UseType      int32  `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         string `json:"note"`         // 备注
+	PublishCount int32  `json:"publishCount"` // 发行数量
+	UseCount     int32  `json:"useCount"`     // 已使用数量
+	ReceiveCount int32  `json:"receiveCount"` // 领取数量
+	EnableTime   string `json:"enableTime"`   // 可以领取的日期
+	Code         string `json:"code"`         // 优惠码
+	MemberLevel  int32  `json:"memberLevel"`  // 可领取的会员类型：0->无限时
 }
 
 type ListtCouponHistoryData struct {
@@ -1499,14 +1499,14 @@ type ListtCouponHistoryData struct {
 }
 
 type ListtFeightTemplateData struct {
-	Id             int64   `json:"id"`
-	Name           string  `json:"name"`
-	ChargeType     int32   `json:"chargeType"`   // 计费类型:0->按重量；1->按件数
-	FirstWeight    float32 `json:"first_weight"` // 首重kg
-	FirstFee       float32 `json:"firstFee"`     // 首费（元）
-	ContinueWeight float32 `json:"continue_weight"`
-	ContinmeFee    float32 `json:"continmeFee"`
-	Dest           string  `json:"dest"` // 目的地（省、市）
+	Id             int64  `json:"id"`
+	Name           string `json:"name"`
+	ChargeType     int32  `json:"chargeType"`   // 计费类型:0->按重量；1->按件数
+	FirstWeight    int64  `json:"first_weight"` // 首重kg
+	FirstFee       int64  `json:"firstFee"`     // 首费（元）
+	ContinueWeight int64  `json:"continue_weight"`
+	ContinmeFee    int64  `json:"continmeFee"`
+	Dest           string `json:"dest"` // 目的地（省、市）
 }
 
 type ListtFlashPromotionData struct {
@@ -1650,19 +1650,19 @@ type ListtMemberData struct {
 }
 
 type ListtMemberLevelData struct {
-	Id                 int64   `json:"id"`
-	Name               string  `json:"name"`
-	GrowthPoint        int32   `json:"growthPoint"`
-	DefaultStatus      int32   `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   float32 `json:"freeFreightPoint"`   // 免运费标准
-	CommentGrowthPoint int32   `json:"commentGrowthPoint"` // 每次评价获取的成长值
-	IsFreeFreight      int32   `json:"isFreeFreight"`      // 是否有免邮特权
-	IsSignIn           int32   `json:"isSignIn"`           // 是否有签到特权
-	IsComment          int32   `json:"isComment"`          // 是否有评论获奖励特权
-	IsPromotion        int32   `json:"isPromotion"`        // 是否有专享活动特权
-	IsMemberPrice      int32   `json:"isMemberPrice"`      // 是否有会员价格特权
-	IsBirthday         int32   `json:"isBirthday"`         // 是否有生日特权
-	Note               string  `json:"note"`
+	Id                 int64  `json:"id"`
+	Name               string `json:"name"`
+	GrowthPoint        int32  `json:"growthPoint"`
+	DefaultStatus      int32  `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
+	FreeFreightPoint   int64  `json:"freeFreightPoint"`   // 免运费标准
+	CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
+	IsFreeFreight      int32  `json:"isFreeFreight"`      // 是否有免邮特权
+	IsSignIn           int32  `json:"isSignIn"`           // 是否有签到特权
+	IsComment          int32  `json:"isComment"`          // 是否有评论获奖励特权
+	IsPromotion        int32  `json:"isPromotion"`        // 是否有专享活动特权
+	IsMemberPrice      int32  `json:"isMemberPrice"`      // 是否有会员价格特权
+	IsBirthday         int32  `json:"isBirthday"`         // 是否有生日特权
+	Note               string `json:"note"`
 }
 
 type ListtMemberLoginLogData struct {
@@ -1676,47 +1676,47 @@ type ListtMemberLoginLogData struct {
 }
 
 type ListtMemberPriceData struct {
-	Id              int64   `json:"id"`
-	ProductId       int64   `json:"productId"`
-	MemberLevelId   int64   `json:"memberLevelId"`
-	MemberPrice     float32 `json:"memberPrice"` // 会员价格
-	MemberLevelName string  `json:"memberLevelName"`
+	Id              int64  `json:"id"`
+	ProductId       int64  `json:"productId"`
+	MemberLevelId   int64  `json:"memberLevelId"`
+	MemberPrice     int64  `json:"memberPrice"` // 会员价格
+	MemberLevelName string `json:"memberLevelName"`
 }
 
 type ListtMemberRuleSettingData struct {
-	Id                int64   `json:"id"`
-	ContinueSignDay   int32   `json:"continueSignDay"`   // 连续签到天数
-	ContinueSignPoint int32   `json:"continueSignPoint"` // 连续签到赠送数量
-	ConsumePerPoint   float32 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-	LowOrderAmount    float32 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int32   `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
-	Type              int32   `json:"type"`              // 类型：0->积分规则；1->成长值规则
+	Id                int64 `json:"id"`
+	ContinueSignDay   int32 `json:"continueSignDay"`   // 连续签到天数
+	ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
+	ConsumePerPoint   int64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
+	LowOrderAmount    int64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
+	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
+	Type              int32 `json:"type"`              // 类型：0->积分规则；1->成长值规则
 }
 
 type ListtMemberStatisticsInfoData struct {
-	Id                  int64   `json:"id"`
-	MemberId            int64   `json:"memberId"`
-	ConsumeAmount       float32 `json:"consumeAmount"`    // 累计消费金额
-	OrderCount          int32   `json:"orderCount"`       // 订单数量
-	CouponCount         int32   `json:"couponCount"`      // 优惠券数量
-	CommentCount        int32   `json:"commentCount"`     // 评价数
-	ReturnOrderCount    int32   `json:"returnOrderCount"` // 退货数量
-	LoginCount          int32   `json:"loginCount"`       // 登录次数
-	AttendCount         int32   `json:"attendCount"`      // 关注数量
-	FansCount           int32   `json:"fansCount"`        // 粉丝数量
-	CollectProductCount int32   `json:"collectProductCount"`
-	CollectSubjectCount int32   `json:"collectSubjectCount"`
-	CollectTopicCount   int32   `json:"collectTopicCount"`
-	CollectCommentCount int32   `json:"collectCommentCount"`
-	InviteFriendCount   int32   `json:"inviteFriendCount"`
-	RecentOrderTime     string  `json:"recentOrderTime"` // 最后一次下订单时间
+	Id                  int64  `json:"id"`
+	MemberId            int64  `json:"memberId"`
+	ConsumeAmount       int64  `json:"consumeAmount"`    // 累计消费金额
+	OrderCount          int32  `json:"orderCount"`       // 订单数量
+	CouponCount         int32  `json:"couponCount"`      // 优惠券数量
+	CommentCount        int32  `json:"commentCount"`     // 评价数
+	ReturnOrderCount    int32  `json:"returnOrderCount"` // 退货数量
+	LoginCount          int32  `json:"loginCount"`       // 登录次数
+	AttendCount         int32  `json:"attendCount"`      // 关注数量
+	FansCount           int32  `json:"fansCount"`        // 粉丝数量
+	CollectProductCount int32  `json:"collectProductCount"`
+	CollectSubjectCount int32  `json:"collectSubjectCount"`
+	CollectTopicCount   int32  `json:"collectTopicCount"`
+	CollectCommentCount int32  `json:"collectCommentCount"`
+	InviteFriendCount   int32  `json:"inviteFriendCount"`
+	RecentOrderTime     string `json:"recentOrderTime"` // 最后一次下订单时间
 }
 
 type ListtMemberTagData struct {
-	Id                int64   `json:"id"`
-	Name              string  `json:"name"`
-	FinishOrderCount  int32   `json:"finishOrderCount"`  // 自动打标签完成订单数量
-	FinishOrderAmount float32 `json:"finishOrderAmount"` // 自动打标签完成订单金额
+	Id                int64  `json:"id"`
+	Name              string `json:"name"`
+	FinishOrderCount  int32  `json:"finishOrderCount"`  // 自动打标签完成订单数量
+	FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
 }
 
 type ListtMemberTaskData struct {
@@ -1863,18 +1863,18 @@ type ListtProductData struct {
 	VerifyStatus                     int32   `json:"verifyStatus"`    // 审核状态：0->未审核；1->审核通过
 	Sort                             int32   `json:"sort"`            // 排序
 	Sale                             int32   `json:"sale"`            // 销量
-	Price                            float64 `json:"price"`
-	PromotionPrice                   float64 `json:"promotionPrice"` // 促销价格
+	Price                            int64   `json:"price"`
+	PromotionPrice                   int64   `json:"promotionPrice"` // 促销价格
 	GiftGrowth                       int32   `json:"giftGrowth"`     // 赠送的成长值
 	GiftPoint                        int32   `json:"giftPoint"`      // 赠送的积分
 	UsePointLimit                    int32   `json:"usePointLimit"`  // 限制使用的积分数
 	SubTitle                         string  `json:"subTitle"`       // 副标题
 	Description                      string  `json:"description"`    // 商品描述
-	OriginalPrice                    float64 `json:"originalPrice"`  // 市场价
+	OriginalPrice                    int64   `json:"originalPrice"`  // 市场价
 	Stock                            int32   `json:"stock"`          // 库存
 	LowStock                         int32   `json:"lowStock"`       // 库存预警值
 	Unit                             string  `json:"unit"`           // 单位
-	Weight                           float64 `json:"weight"`         // 商品重量，默认为克
+	Weight                           int64   `json:"weight"`         // 商品重量，默认为克
 	PreviewStatus                    int32   `json:"previewStatus"`  // 是否为预告商品：0->不是；1->是
 	ServiceIds                       string  `json:"serviceIds"`     // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
 	Keywords                         string  `json:"keywords"`
@@ -1895,33 +1895,33 @@ type ListtProductData struct {
 }
 
 type ListtReturnApplyData struct {
-	Id               int64   `json:"id"`
-	OrderId          int64   `json:"orderId"`          // 订单id
-	CompanyAddressId int64   `json:"companyAddressId"` // 收货地址表id
-	ProductId        int64   `json:"productId"`        // 退货商品id
-	OrderSn          string  `json:"orderSn"`          // 订单编号
-	CreateTime       string  `json:"createTime"`       // 申请时间
-	MemberUsername   string  `json:"memberUserName"`   // 会员用户名
-	ReturnAmount     float64 `json:"returnAmount"`     // 退款金额
-	ReturnName       string  `json:"returnName"`       // 退货人姓名
-	ReturnPhone      string  `json:"returnPhone"`      // 退货人电话
-	Status           int32   `json:"status"`           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-	HandleTime       string  `json:"handleTime"`       // 处理时间
-	ProductPic       string  `json:"productPic"`       // 商品图片
-	ProductName      string  `json:"productName"`      // 商品名称
-	ProductBrand     string  `json:"productBrand"`     // 商品品牌
-	ProductAttr      string  `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
-	ProductCount     int32   `json:"productCount"`     // 退货数量
-	ProductPrice     float64 `json:"productPrice"`     // 商品单价
-	ProductRealPrice float64 `json:"productRealPrice"` // 商品实际支付单价
-	Reason           string  `json:"reason"`           // 原因
-	Description      string  `json:"description"`      // 描述
-	ProofPics        string  `json:"proofPics"`        // 凭证图片，以逗号隔开
-	HandleNote       string  `json:"handleNote"`       // 处理备注
-	HandleMan        string  `json:"handleMan"`        // 处理人员
-	ReceiveMan       string  `json:"receiveMan"`       // 收货人
-	ReceiveTime      string  `json:"receiveTime"`      // 收货时间
-	ReceiveNote      string  `json:"receiveNote"`      // 收货备注
+	Id               int64  `json:"id"`
+	OrderId          int64  `json:"orderId"`          // 订单id
+	CompanyAddressId int64  `json:"companyAddressId"` // 收货地址表id
+	ProductId        int64  `json:"productId"`        // 退货商品id
+	OrderSn          string `json:"orderSn"`          // 订单编号
+	CreateTime       string `json:"createTime"`       // 申请时间
+	MemberUsername   string `json:"memberUserName"`   // 会员用户名
+	ReturnAmount     int64  `json:"returnAmount"`     // 退款金额
+	ReturnName       string `json:"returnName"`       // 退货人姓名
+	ReturnPhone      string `json:"returnPhone"`      // 退货人电话
+	Status           int32  `json:"status"`           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleTime       string `json:"handleTime"`       // 处理时间
+	ProductPic       string `json:"productPic"`       // 商品图片
+	ProductName      string `json:"productName"`      // 商品名称
+	ProductBrand     string `json:"productBrand"`     // 商品品牌
+	ProductAttr      string `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
+	ProductCount     int32  `json:"productCount"`     // 退货数量
+	ProductPrice     int64  `json:"productPrice"`     // 商品单价
+	ProductRealPrice int64  `json:"productRealPrice"` // 商品实际支付单价
+	Reason           string `json:"reason"`           // 原因
+	Description      string `json:"description"`      // 描述
+	ProofPics        string `json:"proofPics"`        // 凭证图片，以逗号隔开
+	HandleNote       string `json:"handleNote"`       // 处理备注
+	HandleMan        string `json:"handleMan"`        // 处理人员
+	ReceiveMan       string `json:"receiveMan"`       // 收货人
+	ReceiveTime      string `json:"receiveTime"`      // 收货时间
+	ReceiveNote      string `json:"receiveNote"`      // 收货备注
 }
 
 type ListtReturnResonData struct {
@@ -1933,17 +1933,17 @@ type ListtReturnResonData struct {
 }
 
 type ListtSkuStockData struct {
-	Id             int64   `json:"id"`
-	ProductId      int64   `json:"productId"`
-	SkuCode        string  `json:"skuCode"` // sku编码
-	Price          float64 `json:"price"`
-	Stock          int32   `json:"stock"`          // 库存
-	LowStock       int32   `json:"lowStock"`       // 预警库存
-	Pic            string  `json:"pic"`            // 展示图片
-	Sale           int32   `json:"sale"`           // 销量
-	PromotionPrice float64 `json:"promotionPrice"` // 单品促销价格
-	LockStock      int32   `json:"lockStock"`      // 锁定库存
-	SpData         string  `json:"spData"`         // 商品销售属性，json格式
+	Id             int64  `json:"id"`
+	ProductId      int64  `json:"productId"`
+	SkuCode        string `json:"skuCode"` // sku编码
+	Price          int64  `json:"price"`
+	Stock          int32  `json:"stock"`          // 库存
+	LowStock       int32  `json:"lowStock"`       // 预警库存
+	Pic            string `json:"pic"`            // 展示图片
+	Sale           int32  `json:"sale"`           // 销量
+	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
+	LockStock      int32  `json:"lockStock"`      // 锁定库存
+	SpData         string `json:"spData"`         // 商品销售属性，json格式
 }
 
 type ListtSubjectData struct {
@@ -1966,9 +1966,9 @@ type ListtSubjectData struct {
 }
 
 type MemberPriceList struct {
-	MemberLevelID   int64   `json:"memberLevelId"`
-	MemberPrice     float32 `json:"memberPrice"`
-	MemberLevelName string  `json:"memberLevelName"`
+	MemberLevelID   int64  `json:"memberLevelId"`
+	MemberPrice     int64  `json:"memberPrice"`
+	MemberLevelName string `json:"memberLevelName"`
 }
 
 type MenuTreeMeta struct {
@@ -1982,14 +1982,14 @@ type ProductAttributeValueList struct {
 }
 
 type ProductFullReductionList struct {
-	FullPrice   float32 `json:"fullPrice"`
-	ReducePrice float32 `json:"reducePrice"`
+	FullPrice   int64 `json:"fullPrice"`
+	ReducePrice int64 `json:"reducePrice"`
 }
 
 type ProductLadderList struct {
-	Count    int32   `json:"count"`
-	Discount float32 `json:"discount"`
-	Price    float32 `json:"price"`
+	Count    int32 `json:"count"`
+	Discount int64 `json:"discount"`
+	Price    int64 `json:"price"`
 }
 
 type QueryAllRelationsData struct {
@@ -2036,15 +2036,15 @@ type RoleRelations struct {
 }
 
 type SkuStockList struct {
-	SkuCode        string  `json:"skuCode"`
-	Price          float32 `json:"price"`
-	Stock          int32   `json:"stock"`
-	LowStock       int32   `json:"lowStock"`
-	Pic            string  `json:"pic"`
-	Sale           int32   `json:"sale"`
-	PromotionPrice float32 `json:"promotionPrice"`
-	LockStock      int32   `json:"lockStock"`
-	SPData         string  `json:"spData"`
+	SkuCode        string `json:"skuCode"`
+	Price          int64  `json:"price"`
+	Stock          int32  `json:"stock"`
+	LowStock       int32  `json:"lowStock"`
+	Pic            string `json:"pic"`
+	Sale           int32  `json:"sale"`
+	PromotionPrice int64  `json:"promotionPrice"`
+	LockStock      int32  `json:"lockStock"`
+	SPData         string `json:"spData"`
 }
 
 type StatisticsLoginLogData struct {
@@ -2063,22 +2063,22 @@ type StatisticsLoginLogResp struct {
 }
 
 type UpdateCartItemReq struct {
-	Id                int64   `json:"id"`
-	ProductId         int64   `json:"productId"`
-	ProductSkuId      int64   `json:"productSkuId"`
-	MemberId          int64   `json:"memberId"`
-	Quantity          int32   `json:"quantity"`          // 购买数量
-	Price             float64 `json:"price"`             // 添加到购物车的价格
-	ProductPic        string  `json:"productPic"`        // 商品主图
-	ProductName       string  `json:"productName"`       // 商品名称
-	ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
-	ProductSkuCode    string  `json:"productSkuCode"`    // 商品sku条码
-	MemberNickname    string  `json:"memberNickName"`    // 会员昵称
-	DeleteStatus      int32   `json:"deleteStatus"`      // 是否删除
-	ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
-	ProductBrand      string  `json:"productBrand"`
-	ProductSn         string  `json:"productSn"`
-	ProductAttr       string  `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	Id                int64  `json:"id"`
+	ProductId         int64  `json:"productId"`
+	ProductSkuId      int64  `json:"productSkuId"`
+	MemberId          int64  `json:"memberId"`
+	Quantity          int32  `json:"quantity"`          // 购买数量
+	Price             int64  `json:"price"`             // 添加到购物车的价格
+	ProductPic        string `json:"productPic"`        // 商品主图
+	ProductName       string `json:"productName"`       // 商品名称
+	ProductSubTitle   string `json:"productSubTitle"`   // 商品副标题（卖点）
+	ProductSkuCode    string `json:"productSkuCode"`    // 商品sku条码
+	MemberNickname    string `json:"memberNickName"`    // 会员昵称
+	DeleteStatus      int32  `json:"deleteStatus"`      // 是否删除
+	ProductCategoryId int64  `json:"productCategoryId"` // 商品分类
+	ProductBrand      string `json:"productBrand"`
+	ProductSn         string `json:"productSn"`
+	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 }
 
 type UpdateCartItemResp struct {
@@ -2124,22 +2124,22 @@ type UpdateCouponHistoryResp struct {
 }
 
 type UpdateCouponReq struct {
-	Id           int64   `json:"id"`
-	Type         int32   `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string  `json:"name"`
-	Platform     int32   `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
-	Count        int32   `json:"count"`    // 数量
-	Amount       float64 `json:"amount"`   // 金额
-	PerLimit     int32   `json:"perLimit"` // 每人限领张数
-	MinPoint     float64 `json:"minPoint"` // 使用门槛；0表示无门槛
-	StartTime    string  `json:"startTime"`
-	EndTime      string  `json:"endTime"`
-	UseType      int32   `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string  `json:"note"`         // 备注
-	PublishCount int32   `json:"publishCount"` // 发行数量
-	EnableTime   string  `json:"enableTime"`   // 可以领取的日期
-	Code         string  `json:"code"`         // 优惠码
-	MemberLevel  int32   `json:"memberLevel"`  // 可领取的会员类型：0->无限时
+	Id           int64  `json:"id"`
+	Type         int32  `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         string `json:"name"`
+	Platform     int32  `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
+	Count        int32  `json:"count"`    // 数量
+	Amount       int64  `json:"amount"`   // 金额
+	PerLimit     int32  `json:"perLimit"` // 每人限领张数
+	MinPoint     int64  `json:"minPoint"` // 使用门槛；0表示无门槛
+	StartTime    string `json:"startTime"`
+	EndTime      string `json:"endTime"`
+	UseType      int32  `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         string `json:"note"`         // 备注
+	PublishCount int32  `json:"publishCount"` // 发行数量
+	EnableTime   string `json:"enableTime"`   // 可以领取的日期
+	Code         string `json:"code"`         // 优惠码
+	MemberLevel  int32  `json:"memberLevel"`  // 可领取的会员类型：0->无限时
 }
 
 type UpdateCouponResp struct {
@@ -2178,14 +2178,14 @@ type UpdateDictResp struct {
 }
 
 type UpdateFeightTemplateReq struct {
-	Id             int64   `json:"id"`
-	Name           string  `json:"name"`
-	ChargeType     int32   `json:"chargeType"`   // 计费类型:0->按重量；1->按件数
-	FirstWeight    float32 `json:"first_weight"` // 首重kg
-	FirstFee       float32 `json:"firstFee"`     // 首费（元）
-	ContinueWeight float32 `json:"continue_weight"`
-	ContinmeFee    float32 `json:"continmeFee"`
-	Dest           string  `json:"dest"` // 目的地（省、市）
+	Id             int64  `json:"id"`
+	Name           string `json:"name"`
+	ChargeType     int32  `json:"chargeType"`   // 计费类型:0->按重量；1->按件数
+	FirstWeight    int64  `json:"first_weight"` // 首重kg
+	FirstFee       int64  `json:"firstFee"`     // 首费（元）
+	ContinueWeight int64  `json:"continue_weight"`
+	ContinmeFee    int64  `json:"continmeFee"`
+	Dest           string `json:"dest"` // 目的地（省、市）
 }
 
 type UpdateFeightTemplateResp struct {
@@ -2381,19 +2381,19 @@ type UpdateMemberAddressResp struct {
 }
 
 type UpdateMemberLevelReq struct {
-	Id                 int64   `json:"id"`
-	Name               string  `json:"name"`
-	GrowthPoint        int32   `json:"growthPoint"`
-	DefaultStatus      int32   `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   float32 `json:"freeFreightPoint"`   // 免运费标准
-	CommentGrowthPoint int32   `json:"commentGrowthPoint"` // 每次评价获取的成长值
-	IsFreeFreight      int32   `json:"isFreeFreight"`      // 是否有免邮特权
-	IsSignIn           int32   `json:"isSignIn"`           // 是否有签到特权
-	IsComment          int32   `json:"isComment"`          // 是否有评论获奖励特权
-	IsPromotion        int32   `json:"isPromotion"`        // 是否有专享活动特权
-	IsMemberPrice      int32   `json:"isMemberPrice"`      // 是否有会员价格特权
-	IsBirthday         int32   `json:"isBirthday"`         // 是否有生日特权
-	Note               string  `json:"note"`
+	Id                 int64  `json:"id"`
+	Name               string `json:"name"`
+	GrowthPoint        int32  `json:"growthPoint"`
+	DefaultStatus      int32  `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
+	FreeFreightPoint   int64  `json:"freeFreightPoint"`   // 免运费标准
+	CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
+	IsFreeFreight      int32  `json:"isFreeFreight"`      // 是否有免邮特权
+	IsSignIn           int32  `json:"isSignIn"`           // 是否有签到特权
+	IsComment          int32  `json:"isComment"`          // 是否有评论获奖励特权
+	IsPromotion        int32  `json:"isPromotion"`        // 是否有专享活动特权
+	IsMemberPrice      int32  `json:"isMemberPrice"`      // 是否有会员价格特权
+	IsBirthday         int32  `json:"isBirthday"`         // 是否有生日特权
+	Note               string `json:"note"`
 }
 
 type UpdateMemberLevelResp struct {
@@ -2402,11 +2402,11 @@ type UpdateMemberLevelResp struct {
 }
 
 type UpdateMemberPriceReq struct {
-	Id              int64   `json:"id"`
-	ProductId       int64   `json:"productId"`
-	MemberLevelId   int64   `json:"memberLevelId"`
-	MemberPrice     float32 `json:"memberPrice"` // 会员价格
-	MemberLevelName string  `json:"memberLevelName"`
+	Id              int64  `json:"id"`
+	ProductId       int64  `json:"productId"`
+	MemberLevelId   int64  `json:"memberLevelId"`
+	MemberPrice     int64  `json:"memberPrice"` // 会员价格
+	MemberLevelName string `json:"memberLevelName"`
 }
 
 type UpdateMemberPriceResp struct {
@@ -2442,13 +2442,13 @@ type UpdateMemberResp struct {
 }
 
 type UpdateMemberRuleSettingReq struct {
-	Id                int64   `json:"id"`
-	ContinueSignDay   int32   `json:"continueSignDay"`   // 连续签到天数
-	ContinueSignPoint int32   `json:"continueSignPoint"` // 连续签到赠送数量
-	ConsumePerPoint   float32 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-	LowOrderAmount    float32 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int32   `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
-	Type              int32   `json:"type"`              // 类型：0->积分规则；1->成长值规则
+	Id                int64 `json:"id"`
+	ContinueSignDay   int32 `json:"continueSignDay"`   // 连续签到天数
+	ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
+	ConsumePerPoint   int64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
+	LowOrderAmount    int64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
+	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
+	Type              int32 `json:"type"`              // 类型：0->积分规则；1->成长值规则
 }
 
 type UpdateMemberRuleSettingResp struct {
@@ -2457,22 +2457,22 @@ type UpdateMemberRuleSettingResp struct {
 }
 
 type UpdateMemberStatisticsInfoReq struct {
-	Id                  int64   `json:"id"`
-	MemberId            int64   `json:"memberId"`
-	ConsumeAmount       float32 `json:"consumeAmount"`    // 累计消费金额
-	OrderCount          int32   `json:"orderCount"`       // 订单数量
-	CouponCount         int32   `json:"couponCount"`      // 优惠券数量
-	CommentCount        int32   `json:"commentCount"`     // 评价数
-	ReturnOrderCount    int32   `json:"returnOrderCount"` // 退货数量
-	LoginCount          int32   `json:"loginCount"`       // 登录次数
-	AttendCount         int32   `json:"attendCount"`      // 关注数量
-	FansCount           int32   `json:"fansCount"`        // 粉丝数量
-	CollectProductCount int32   `json:"collectProductCount"`
-	CollectSubjectCount int32   `json:"collectSubjectCount"`
-	CollectTopicCount   int32   `json:"collectTopicCount"`
-	CollectCommentCount int32   `json:"collectCommentCount"`
-	InviteFriendCount   int32   `json:"inviteFriendCount"`
-	RecentOrderTime     string  `json:"recentOrderTime"` // 最后一次下订单时间
+	Id                  int64  `json:"id"`
+	MemberId            int64  `json:"memberId"`
+	ConsumeAmount       int64  `json:"consumeAmount"`    // 累计消费金额
+	OrderCount          int32  `json:"orderCount"`       // 订单数量
+	CouponCount         int32  `json:"couponCount"`      // 优惠券数量
+	CommentCount        int32  `json:"commentCount"`     // 评价数
+	ReturnOrderCount    int32  `json:"returnOrderCount"` // 退货数量
+	LoginCount          int32  `json:"loginCount"`       // 登录次数
+	AttendCount         int32  `json:"attendCount"`      // 关注数量
+	FansCount           int32  `json:"fansCount"`        // 粉丝数量
+	CollectProductCount int32  `json:"collectProductCount"`
+	CollectSubjectCount int32  `json:"collectSubjectCount"`
+	CollectTopicCount   int32  `json:"collectTopicCount"`
+	CollectCommentCount int32  `json:"collectCommentCount"`
+	InviteFriendCount   int32  `json:"inviteFriendCount"`
+	RecentOrderTime     string `json:"recentOrderTime"` // 最后一次下订单时间
 }
 
 type UpdateMemberStatisticsInfoResp struct {
@@ -2481,10 +2481,10 @@ type UpdateMemberStatisticsInfoResp struct {
 }
 
 type UpdateMemberTagReq struct {
-	Id                int64   `json:"id"`
-	Name              string  `json:"name"`
-	FinishOrderCount  int32   `json:"finishOrderCount"`  // 自动打标签完成订单数量
-	FinishOrderAmount float32 `json:"finishOrderAmount"` // 自动打标签完成订单金额
+	Id                int64  `json:"id"`
+	Name              string `json:"name"`
+	FinishOrderCount  int32  `json:"finishOrderCount"`  // 自动打标签完成订单数量
+	FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
 }
 
 type UpdateMemberTagResp struct {
@@ -2693,18 +2693,18 @@ type UpdateProductReq struct {
 	VerifyStatus                     int32                       `json:"verifyStatus,default=0"` // 审核状态：0->未审核；1->审核通过
 	Sort                             int32                       `json:"sort"`                   // 排序
 	Sale                             int32                       `json:"sale,default=0"`         // 销量
-	Price                            float64                     `json:"price"`
-	PromotionPrice                   float64                     `json:"promotionPrice,optional"` // 促销价格
+	Price                            int64                       `json:"price"`
+	PromotionPrice                   int64                       `json:"promotionPrice,optional"` // 促销价格
 	GiftGrowth                       int32                       `json:"giftGrowth"`              // 赠送的成长值
 	GiftPoint                        int32                       `json:"giftPoint"`               // 赠送的积分
 	UsePointLimit                    int32                       `json:"usePointLimit"`           // 限制使用的积分数
 	SubTitle                         string                      `json:"subTitle"`                // 副标题
 	Description                      string                      `json:"description"`             // 商品描述
-	OriginalPrice                    float64                     `json:"originalPrice"`           // 市场价
+	OriginalPrice                    int64                       `json:"originalPrice"`           // 市场价
 	Stock                            int32                       `json:"stock"`                   // 库存
 	LowStock                         int32                       `json:"lowStock,default=0"`      // 库存预警值
 	Unit                             string                      `json:"unit"`                    // 单位
-	Weight                           float64                     `json:"weight"`                  // 商品重量，默认为克
+	Weight                           int64                       `json:"weight"`                  // 商品重量，默认为克
 	PreviewStatus                    int32                       `json:"previewStatus"`           // 是否为预告商品：0->不是；1->是
 	ServiceIds                       string                      `json:"serviceIds"`              // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
 	Keywords                         string                      `json:"keywords"`
@@ -2782,17 +2782,17 @@ type UpdateRoleResp struct {
 }
 
 type UpdateSkuStockReq struct {
-	Id             int64   `json:"id"`
-	ProductId      int64   `json:"productId"`
-	SkuCode        string  `json:"skuCode"` // sku编码
-	Price          float64 `json:"price"`
-	Stock          int32   `json:"stock"`          // 库存
-	LowStock       int32   `json:"lowStock"`       // 预警库存
-	Pic            string  `json:"pic"`            // 展示图片
-	Sale           int32   `json:"sale"`           // 销量
-	PromotionPrice float64 `json:"promotionPrice"` // 单品促销价格
-	LockStock      int32   `json:"lockStock"`      // 锁定库存
-	SpData         string  `json:"spData"`         // 商品销售属性，json格式
+	Id             int64  `json:"id"`
+	ProductId      int64  `json:"productId"`
+	SkuCode        string `json:"skuCode"` // sku编码
+	Price          int64  `json:"price"`
+	Stock          int32  `json:"stock"`          // 库存
+	LowStock       int32  `json:"lowStock"`       // 预警库存
+	Pic            string `json:"pic"`            // 展示图片
+	Sale           int32  `json:"sale"`           // 销量
+	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
+	LockStock      int32  `json:"lockStock"`      // 锁定库存
+	SpData         string `json:"spData"`         // 商品销售属性，json格式
 }
 
 type UpdateSkuStockResp struct {
@@ -2858,21 +2858,21 @@ type UserStatusResp struct {
 }
 
 type AddCartItemReq struct {
-	ProductId         int64   `json:"productId"`
-	ProductSkuId      int64   `json:"productSkuId"`
-	MemberId          int64   `json:"memberId"`
-	Quantity          int32   `json:"quantity"`          // 购买数量
-	Price             float64 `json:"price"`             // 添加到购物车的价格
-	ProductPic        string  `json:"productPic"`        // 商品主图
-	ProductName       string  `json:"productName"`       // 商品名称
-	ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
-	ProductSkuCode    string  `json:"productSkuCode"`    // 商品sku条码
-	MemberNickname    string  `json:"memberNickName"`    // 会员昵称
-	DeleteStatus      int32   `json:"deleteStatus"`      // 是否删除
-	ProductCategoryId int64   `json:"productCategoryId"` // 商品分类
-	ProductBrand      string  `json:"productBrand"`
-	ProductSn         string  `json:"productSn"`
-	ProductAttr       string  `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	ProductId         int64  `json:"productId"`
+	ProductSkuId      int64  `json:"productSkuId"`
+	MemberId          int64  `json:"memberId"`
+	Quantity          int32  `json:"quantity"`          // 购买数量
+	Price             int64  `json:"price"`             // 添加到购物车的价格
+	ProductPic        string `json:"productPic"`        // 商品主图
+	ProductName       string `json:"productName"`       // 商品名称
+	ProductSubTitle   string `json:"productSubTitle"`   // 商品副标题（卖点）
+	ProductSkuCode    string `json:"productSkuCode"`    // 商品sku条码
+	MemberNickname    string `json:"memberNickName"`    // 会员昵称
+	DeleteStatus      int32  `json:"deleteStatus"`      // 是否删除
+	ProductCategoryId int64  `json:"productCategoryId"` // 商品分类
+	ProductBrand      string `json:"productBrand"`
+	ProductSn         string `json:"productSn"`
+	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 }
 
 type AddCartItemResp struct {
@@ -2916,21 +2916,21 @@ type AddCouponHistoryResp struct {
 }
 
 type AddCouponReq struct {
-	Type         int32   `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string  `json:"name"`
-	Platform     int32   `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
-	Count        int32   `json:"count"`    // 数量
-	Amount       float64 `json:"amount"`   // 金额
-	PerLimit     int32   `json:"perLimit"` // 每人限领张数
-	MinPoint     float64 `json:"minPoint"` // 使用门槛；0表示无门槛
-	StartTime    string  `json:"startTime"`
-	EndTime      string  `json:"endTime"`
-	UseType      int32   `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string  `json:"note"`         // 备注
-	PublishCount int32   `json:"publishCount"` // 发行数量
-	EnableTime   string  `json:"enableTime"`   // 可以领取的日期
-	Code         string  `json:"code"`         // 优惠码
-	MemberLevel  int32   `json:"memberLevel"`  // 可领取的会员类型：0->无限时
+	Type         int32  `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         string `json:"name"`
+	Platform     int32  `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
+	Count        int32  `json:"count"`    // 数量
+	Amount       int64  `json:"amount"`   // 金额
+	PerLimit     int32  `json:"perLimit"` // 每人限领张数
+	MinPoint     int64  `json:"minPoint"` // 使用门槛；0表示无门槛
+	StartTime    string `json:"startTime"`
+	EndTime      string `json:"endTime"`
+	UseType      int32  `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         string `json:"note"`         // 备注
+	PublishCount int32  `json:"publishCount"` // 发行数量
+	EnableTime   string `json:"enableTime"`   // 可以领取的日期
+	Code         string `json:"code"`         // 优惠码
+	MemberLevel  int32  `json:"memberLevel"`  // 可领取的会员类型：0->无限时
 }
 
 type AddCouponResp struct {
@@ -2967,13 +2967,13 @@ type AddDictResp struct {
 }
 
 type AddFeightTemplateReq struct {
-	Name           string  `json:"name"`
-	ChargeType     int32   `json:"chargeType"`   // 计费类型:0->按重量；1->按件数
-	FirstWeight    float32 `json:"first_weight"` // 首重kg
-	FirstFee       float32 `json:"firstFee"`     // 首费（元）
-	ContinueWeight float32 `json:"continue_weight"`
-	ContinmeFee    float32 `json:"continmeFee"`
-	Dest           string  `json:"dest"` // 目的地（省、市）
+	Name           string `json:"name"`
+	ChargeType     int32  `json:"chargeType"`   // 计费类型:0->按重量；1->按件数
+	FirstWeight    int64  `json:"first_weight"` // 首重kg
+	FirstFee       int64  `json:"firstFee"`     // 首费（元）
+	ContinueWeight int64  `json:"continue_weight"`
+	ContinmeFee    int64  `json:"continmeFee"`
+	Dest           string `json:"dest"` // 目的地（省、市）
 }
 
 type AddFeightTemplateResp struct {
@@ -3143,18 +3143,18 @@ type AddMemberAddressResp struct {
 }
 
 type AddMemberLevelReq struct {
-	Name               string  `json:"name"`
-	GrowthPoint        int32   `json:"growthPoint"`
-	DefaultStatus      int32   `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   float32 `json:"freeFreightPoint"`   // 免运费标准
-	CommentGrowthPoint int32   `json:"commentGrowthPoint"` // 每次评价获取的成长值
-	IsFreeFreight      int32   `json:"isFreeFreight"`      // 是否有免邮特权
-	IsSignIn           int32   `json:"isSignIn"`           // 是否有签到特权
-	IsComment          int32   `json:"isComment"`          // 是否有评论获奖励特权
-	IsPromotion        int32   `json:"isPromotion"`        // 是否有专享活动特权
-	IsMemberPrice      int32   `json:"isMemberPrice"`      // 是否有会员价格特权
-	IsBirthday         int32   `json:"isBirthday"`         // 是否有生日特权
-	Note               string  `json:"note,optional"`
+	Name               string `json:"name"`
+	GrowthPoint        int32  `json:"growthPoint"`
+	DefaultStatus      int32  `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
+	FreeFreightPoint   int64  `json:"freeFreightPoint"`   // 免运费标准
+	CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
+	IsFreeFreight      int32  `json:"isFreeFreight"`      // 是否有免邮特权
+	IsSignIn           int32  `json:"isSignIn"`           // 是否有签到特权
+	IsComment          int32  `json:"isComment"`          // 是否有评论获奖励特权
+	IsPromotion        int32  `json:"isPromotion"`        // 是否有专享活动特权
+	IsMemberPrice      int32  `json:"isMemberPrice"`      // 是否有会员价格特权
+	IsBirthday         int32  `json:"isBirthday"`         // 是否有生日特权
+	Note               string `json:"note,optional"`
 }
 
 type AddMemberLevelResp struct {
@@ -3177,10 +3177,10 @@ type AddMemberLoginLogResp struct {
 }
 
 type AddMemberPriceReq struct {
-	ProductId       int64   `json:"productId"`
-	MemberLevelId   int64   `json:"memberLevelId"`
-	MemberPrice     float32 `json:"memberPrice"` // 会员价格
-	MemberLevelName string  `json:"memberLevelName"`
+	ProductId       int64  `json:"productId"`
+	MemberLevelId   int64  `json:"memberLevelId"`
+	MemberPrice     int64  `json:"memberPrice"` // 会员价格
+	MemberLevelName string `json:"memberLevelName"`
 }
 
 type AddMemberPriceResp struct {
@@ -3189,12 +3189,12 @@ type AddMemberPriceResp struct {
 }
 
 type AddMemberRuleSettingReq struct {
-	ContinueSignDay   int32   `json:"continueSignDay"`   // 连续签到天数
-	ContinueSignPoint int32   `json:"continueSignPoint"` // 连续签到赠送数量
-	ConsumePerPoint   float32 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-	LowOrderAmount    float32 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int32   `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
-	Type              int32   `json:"type"`              // 类型：0->积分规则；1->成长值规则
+	ContinueSignDay   int32 `json:"continueSignDay"`   // 连续签到天数
+	ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
+	ConsumePerPoint   int64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
+	LowOrderAmount    int64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
+	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
+	Type              int32 `json:"type"`              // 类型：0->积分规则；1->成长值规则
 }
 
 type AddMemberRuleSettingResp struct {
@@ -3203,21 +3203,21 @@ type AddMemberRuleSettingResp struct {
 }
 
 type AddMemberStatisticsInfoReq struct {
-	MemberId            int64   `json:"memberId"`
-	ConsumeAmount       float32 `json:"consumeAmount"`    // 累计消费金额
-	OrderCount          int32   `json:"orderCount"`       // 订单数量
-	CouponCount         int32   `json:"couponCount"`      // 优惠券数量
-	CommentCount        int32   `json:"commentCount"`     // 评价数
-	ReturnOrderCount    int32   `json:"returnOrderCount"` // 退货数量
-	LoginCount          int32   `json:"loginCount"`       // 登录次数
-	AttendCount         int32   `json:"attendCount"`      // 关注数量
-	FansCount           int32   `json:"fansCount"`        // 粉丝数量
-	CollectProductCount int32   `json:"collectProductCount"`
-	CollectSubjectCount int32   `json:"collectSubjectCount"`
-	CollectTopicCount   int32   `json:"collectTopicCount"`
-	CollectCommentCount int32   `json:"collectCommentCount"`
-	InviteFriendCount   int32   `json:"inviteFriendCount"`
-	RecentOrderTime     string  `json:"recentOrderTime"` // 最后一次下订单时间
+	MemberId            int64  `json:"memberId"`
+	ConsumeAmount       int64  `json:"consumeAmount"`    // 累计消费金额
+	OrderCount          int32  `json:"orderCount"`       // 订单数量
+	CouponCount         int32  `json:"couponCount"`      // 优惠券数量
+	CommentCount        int32  `json:"commentCount"`     // 评价数
+	ReturnOrderCount    int32  `json:"returnOrderCount"` // 退货数量
+	LoginCount          int32  `json:"loginCount"`       // 登录次数
+	AttendCount         int32  `json:"attendCount"`      // 关注数量
+	FansCount           int32  `json:"fansCount"`        // 粉丝数量
+	CollectProductCount int32  `json:"collectProductCount"`
+	CollectSubjectCount int32  `json:"collectSubjectCount"`
+	CollectTopicCount   int32  `json:"collectTopicCount"`
+	CollectCommentCount int32  `json:"collectCommentCount"`
+	InviteFriendCount   int32  `json:"inviteFriendCount"`
+	RecentOrderTime     string `json:"recentOrderTime"` // 最后一次下订单时间
 }
 
 type AddMemberStatisticsInfoResp struct {
@@ -3226,9 +3226,9 @@ type AddMemberStatisticsInfoResp struct {
 }
 
 type AddMemberTagReq struct {
-	Name              string  `json:"name"`
-	FinishOrderCount  int32   `json:"finishOrderCount"`  // 自动打标签完成订单数量
-	FinishOrderAmount float32 `json:"finishOrderAmount"` // 自动打标签完成订单金额
+	Name              string `json:"name"`
+	FinishOrderCount  int32  `json:"finishOrderCount"`  // 自动打标签完成订单数量
+	FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
 }
 
 type AddMemberTagResp struct {
@@ -3282,44 +3282,44 @@ type AddOperateHistoryResp struct {
 }
 
 type AddOrderReq struct {
-	MemberId              int64   `json:"memberId"`
-	CouponId              int64   `json:"couponId"`
-	OrderSn               string  `json:"orderSn"`               // 订单编号
-	CreateTime            string  `json:"createTime"`            // 提交时间
-	MemberUsername        string  `json:"memberUserName"`        // 用户帐号
-	TotalAmount           float32 `json:"totalAmount"`           // 订单总金额
-	PayAmount             float32 `json:"payAmount"`             // 应付金额（实际支付金额）
-	FreightAmount         float32 `json:"freightAmount"`         // 运费金额
-	PromotionAmount       float32 `json:"promotionAmount"`       // 促销优化金额（促销价、满减、阶梯价）
-	IntegrationAmount     float32 `json:"integrationAmount"`     // 积分抵扣金额
-	CouponAmount          float32 `json:"couponAmount"`          // 优惠券抵扣金额
-	DiscountAmount        float32 `json:"discountAmount"`        // 管理员后台调整订单使用的折扣金额
-	PayType               int32   `json:"payType"`               // 支付方式：0->未支付；1->支付宝；2->微信
-	SourceType            int32   `json:"sourceType"`            // 订单来源：0->PC订单；1->app订单
-	Status                int32   `json:"status"`                // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-	OrderType             int32   `json:"orderType"`             // 订单类型：0->正常订单；1->秒杀订单
-	DeliveryCompany       string  `json:"deliveryCompany"`       // 物流公司(配送方式)
-	DeliverySn            string  `json:"deliverySn"`            // 物流单号
-	AutoConfirmDay        int32   `json:"autoConfirmDay"`        // 自动确认时间（天）
-	Integration           int32   `json:"integration"`           // 可以获得的积分
-	Growth                int32   `json:"growth"`                // 可以活动的成长值
-	PromotionInfo         string  `json:"promotionInfo"`         // 活动信息
-	BillType              int32   `json:"billType"`              // 发票类型：0->不开发票；1->电子发票；2->纸质发票
-	BillHeader            string  `json:"billHeader"`            // 发票抬头
-	BillContent           string  `json:"billContent"`           // 发票内容
-	BillReceiverPhone     string  `json:"billReceiverPhone"`     // 收票人电话
-	BillReceiverEmail     string  `json:"billReceiverEmail"`     // 收票人邮箱
-	ReceiverName          string  `json:"receiverName"`          // 收货人姓名
-	ReceiverPhone         string  `json:"receiverPhone"`         // 收货人电话
-	ReceiverPostCode      string  `json:"receiverPostCode"`      // 收货人邮编
-	ReceiverProvince      string  `json:"receiverProvince"`      // 省份/直辖市
-	ReceiverCity          string  `json:"receiverCity"`          // 城市
-	ReceiverRegion        string  `json:"receiverRegion"`        // 区
-	ReceiverDetailAddress string  `json:"receiverDetailAddress"` // 详细地址
-	Note                  string  `json:"note"`                  // 订单备注
-	ConfirmStatus         int32   `json:"confirmStatus"`         // 确认收货状态：0->未确认；1->已确认
-	DeleteStatus          int32   `json:"deleteStatus"`          // 删除状态：0->未删除；1->已删除
-	UseIntegration        int32   `json:"useIntegration"`        // 下单时使用的积分
+	MemberId              int64  `json:"memberId"`
+	CouponId              int64  `json:"couponId"`
+	OrderSn               string `json:"orderSn"`               // 订单编号
+	CreateTime            string `json:"createTime"`            // 提交时间
+	MemberUsername        string `json:"memberUserName"`        // 用户帐号
+	TotalAmount           int64  `json:"totalAmount"`           // 订单总金额
+	PayAmount             int64  `json:"payAmount"`             // 应付金额（实际支付金额）
+	FreightAmount         int64  `json:"freightAmount"`         // 运费金额
+	PromotionAmount       int64  `json:"promotionAmount"`       // 促销优化金额（促销价、满减、阶梯价）
+	IntegrationAmount     int64  `json:"integrationAmount"`     // 积分抵扣金额
+	CouponAmount          int64  `json:"couponAmount"`          // 优惠券抵扣金额
+	DiscountAmount        int64  `json:"discountAmount"`        // 管理员后台调整订单使用的折扣金额
+	PayType               int32  `json:"payType"`               // 支付方式：0->未支付；1->支付宝；2->微信
+	SourceType            int32  `json:"sourceType"`            // 订单来源：0->PC订单；1->app订单
+	Status                int32  `json:"status"`                // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	OrderType             int32  `json:"orderType"`             // 订单类型：0->正常订单；1->秒杀订单
+	DeliveryCompany       string `json:"deliveryCompany"`       // 物流公司(配送方式)
+	DeliverySn            string `json:"deliverySn"`            // 物流单号
+	AutoConfirmDay        int32  `json:"autoConfirmDay"`        // 自动确认时间（天）
+	Integration           int32  `json:"integration"`           // 可以获得的积分
+	Growth                int32  `json:"growth"`                // 可以活动的成长值
+	PromotionInfo         string `json:"promotionInfo"`         // 活动信息
+	BillType              int32  `json:"billType"`              // 发票类型：0->不开发票；1->电子发票；2->纸质发票
+	BillHeader            string `json:"billHeader"`            // 发票抬头
+	BillContent           string `json:"billContent"`           // 发票内容
+	BillReceiverPhone     string `json:"billReceiverPhone"`     // 收票人电话
+	BillReceiverEmail     string `json:"billReceiverEmail"`     // 收票人邮箱
+	ReceiverName          string `json:"receiverName"`          // 收货人姓名
+	ReceiverPhone         string `json:"receiverPhone"`         // 收货人电话
+	ReceiverPostCode      string `json:"receiverPostCode"`      // 收货人邮编
+	ReceiverProvince      string `json:"receiverProvince"`      // 省份/直辖市
+	ReceiverCity          string `json:"receiverCity"`          // 城市
+	ReceiverRegion        string `json:"receiverRegion"`        // 区
+	ReceiverDetailAddress string `json:"receiverDetailAddress"` // 详细地址
+	Note                  string `json:"note"`                  // 订单备注
+	ConfirmStatus         int32  `json:"confirmStatus"`         // 确认收货状态：0->未确认；1->已确认
+	DeleteStatus          int32  `json:"deleteStatus"`          // 删除状态：0->未删除；1->已删除
+	UseIntegration        int32  `json:"useIntegration"`        // 下单时使用的积分
 }
 
 type AddOrderResp struct {
@@ -3453,18 +3453,18 @@ type AddProductReq struct {
 	VerifyStatus                     int32                       `json:"verifyStatus,default=0"` // 审核状态：0->未审核；1->审核通过
 	Sort                             int32                       `json:"sort"`                   // 排序
 	Sale                             int32                       `json:"sale,default=0"`         // 销量
-	Price                            float64                     `json:"price"`
-	PromotionPrice                   float64                     `json:"promotionPrice,optional"` // 促销价格
+	Price                            int64                       `json:"price"`
+	PromotionPrice                   int64                       `json:"promotionPrice,optional"` // 促销价格
 	GiftGrowth                       int32                       `json:"giftGrowth"`              // 赠送的成长值
 	GiftPoint                        int32                       `json:"giftPoint"`               // 赠送的积分
 	UsePointLimit                    int32                       `json:"usePointLimit"`           // 限制使用的积分数
 	SubTitle                         string                      `json:"subTitle"`                // 副标题
 	Description                      string                      `json:"description"`             // 商品描述
-	OriginalPrice                    float64                     `json:"originalPrice"`           // 市场价
+	OriginalPrice                    int64                       `json:"originalPrice"`           // 市场价
 	Stock                            int32                       `json:"stock"`                   // 库存
 	LowStock                         int32                       `json:"lowStock,default=0"`      // 库存预警值
 	Unit                             string                      `json:"unit"`                    // 单位
-	Weight                           float64                     `json:"weight"`                  // 商品重量，默认为克
+	Weight                           int64                       `json:"weight"`                  // 商品重量，默认为克
 	PreviewStatus                    int32                       `json:"previewStatus"`           // 是否为预告商品：0->不是；1->是
 	ServiceIds                       string                      `json:"serviceIds"`              // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
 	Keywords                         string                      `json:"keywords"`
@@ -3495,32 +3495,32 @@ type AddProductResp struct {
 }
 
 type AddReturnApplyReq struct {
-	OrderId          int64   `json:"orderId"`          // 订单id
-	CompanyAddressId int64   `json:"companyAddressId"` // 收货地址表id
-	ProductId        int64   `json:"productId"`        // 退货商品id
-	OrderSn          string  `json:"orderSn"`          // 订单编号
-	CreateTime       string  `json:"createTime"`       // 申请时间
-	MemberUsername   string  `json:"memberUserName"`   // 会员用户名
-	ReturnAmount     float64 `json:"returnAmount"`     // 退款金额
-	ReturnName       string  `json:"returnName"`       // 退货人姓名
-	ReturnPhone      string  `json:"returnPhone"`      // 退货人电话
-	Status           int32   `json:"status"`           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-	HandleTime       string  `json:"handleTime"`       // 处理时间
-	ProductPic       string  `json:"productPic"`       // 商品图片
-	ProductName      string  `json:"productName"`      // 商品名称
-	ProductBrand     string  `json:"productBrand"`     // 商品品牌
-	ProductAttr      string  `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
-	ProductCount     int32   `json:"productCount"`     // 退货数量
-	ProductPrice     float64 `json:"productPrice"`     // 商品单价
-	ProductRealPrice float64 `json:"productRealPrice"` // 商品实际支付单价
-	Reason           string  `json:"reason"`           // 原因
-	Description      string  `json:"description"`      // 描述
-	ProofPics        string  `json:"proofPics"`        // 凭证图片，以逗号隔开
-	HandleNote       string  `json:"handleNote"`       // 处理备注
-	HandleMan        string  `json:"handleMan"`        // 处理人员
-	ReceiveMan       string  `json:"receiveMan"`       // 收货人
-	ReceiveTime      string  `json:"receiveTime"`      // 收货时间
-	ReceiveNote      string  `json:"receiveNote"`      // 收货备注
+	OrderId          int64  `json:"orderId"`          // 订单id
+	CompanyAddressId int64  `json:"companyAddressId"` // 收货地址表id
+	ProductId        int64  `json:"productId"`        // 退货商品id
+	OrderSn          string `json:"orderSn"`          // 订单编号
+	CreateTime       string `json:"createTime"`       // 申请时间
+	MemberUsername   string `json:"memberUserName"`   // 会员用户名
+	ReturnAmount     int64  `json:"returnAmount"`     // 退款金额
+	ReturnName       string `json:"returnName"`       // 退货人姓名
+	ReturnPhone      string `json:"returnPhone"`      // 退货人电话
+	Status           int32  `json:"status"`           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleTime       string `json:"handleTime"`       // 处理时间
+	ProductPic       string `json:"productPic"`       // 商品图片
+	ProductName      string `json:"productName"`      // 商品名称
+	ProductBrand     string `json:"productBrand"`     // 商品品牌
+	ProductAttr      string `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
+	ProductCount     int32  `json:"productCount"`     // 退货数量
+	ProductPrice     int64  `json:"productPrice"`     // 商品单价
+	ProductRealPrice int64  `json:"productRealPrice"` // 商品实际支付单价
+	Reason           string `json:"reason"`           // 原因
+	Description      string `json:"description"`      // 描述
+	ProofPics        string `json:"proofPics"`        // 凭证图片，以逗号隔开
+	HandleNote       string `json:"handleNote"`       // 处理备注
+	HandleMan        string `json:"handleMan"`        // 处理人员
+	ReceiveMan       string `json:"receiveMan"`       // 收货人
+	ReceiveTime      string `json:"receiveTime"`      // 收货时间
+	ReceiveNote      string `json:"receiveNote"`      // 收货备注
 }
 
 type AddReturnApplyResp struct {
@@ -3551,16 +3551,16 @@ type AddRoleResp struct {
 }
 
 type AddSkuStockReq struct {
-	ProductId      int64   `json:"productId"`
-	SkuCode        string  `json:"skuCode"` // sku编码
-	Price          float64 `json:"price"`
-	Stock          int32   `json:"stock"`          // 库存
-	LowStock       int32   `json:"lowStock"`       // 预警库存
-	Pic            string  `json:"pic"`            // 展示图片
-	Sale           int32   `json:"sale"`           // 销量
-	PromotionPrice float64 `json:"promotionPrice"` // 单品促销价格
-	LockStock      int32   `json:"lockStock"`      // 锁定库存
-	SpData         string  `json:"spData"`         // 商品销售属性，json格式
+	ProductId      int64  `json:"productId"`
+	SkuCode        string `json:"skuCode"` // sku编码
+	Price          int64  `json:"price"`
+	Stock          int32  `json:"stock"`          // 库存
+	LowStock       int32  `json:"lowStock"`       // 预警库存
+	Pic            string `json:"pic"`            // 展示图片
+	Sale           int32  `json:"sale"`           // 销量
+	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
+	LockStock      int32  `json:"lockStock"`      // 锁定库存
+	SpData         string `json:"spData"`         // 商品销售属性，json格式
 }
 
 type AddSkuStockResp struct {

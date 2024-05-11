@@ -138,9 +138,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 				_ = copier.Copy(&cartPromotionItem, &item)
 				cartPromotionItem.Price = skuStock.Price //单品促销使用原价
 				cartPromotionItem.PromotionMessage = "单品促销"
-				a := fmt.Sprintf("%5.2f", skuStock.Price-skuStock.PromotionPrice)
-				float, _ := strconv.ParseFloat(a, 32)
-				cartPromotionItem.ReduceAmount = float32(float) //商品原价-促销价
+				cartPromotionItem.ReduceAmount = skuStock.Price - skuStock.PromotionPrice //商品原价-促销价
 				cartPromotionItem.RealStock = skuStock.Stock - skuStock.LockStock
 				cartPromotionItem.Integration = product.GiftPoint
 				cartPromotionItem.Growth = product.GiftGrowth
@@ -154,7 +152,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 				Id: memberId,
 			})
 			//获取会员价格
-			var memberPrice float32
+			var memberPrice int64
 			memberPriceList := promotionProduct.MemberPriceList
 			for _, item := range memberPriceList {
 				if item.MemberLevelId == member.MemberLevelId {
@@ -200,9 +198,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 					d := fmt.Sprintf("%1.0f", productLadder.Discount*10)
 					cartPromotionItem.PromotionMessage = "打折优惠：满" + c + "件,打" + d + "折"
 					//商品原价-折扣*商品原价
-					a := fmt.Sprintf("%5.2f", skuStock.Price-productLadder.Discount*skuStock.Price)
-					float, _ := strconv.ParseFloat(a, 32)
-					cartPromotionItem.ReduceAmount = float32(float)
+					cartPromotionItem.ReduceAmount = skuStock.Price - productLadder.Discount*skuStock.Price
 					cartPromotionItem.RealStock = skuStock.Stock - skuStock.LockStock
 					cartPromotionItem.Integration = product.GiftPoint
 					cartPromotionItem.Growth = product.GiftGrowth
@@ -216,10 +212,10 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 			//6.5.2 (商品原价/总价)*满减金额(平摊到每件商品上的优惠金额)
 		} else if promotionType == 4 {
 			//获取购物车中指定商品的总价
-			var amount float32 = 0
+			var amount int64 = 0
 			for _, item := range itemList {
 				skuStock := getSkuStock(skuStockList, item.ProductSkuId)
-				amount = amount + skuStock.Price*float32(item.Quantity)
+				amount = amount + skuStock.Price*int64(item.Quantity)
 
 			}
 			//获取满减
@@ -236,13 +232,11 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 					cartPromotionItem := types.CarItemtPromotionListData{}
 					_ = copier.Copy(&cartPromotionItem, &item)
 					cartPromotionItem.Price = skuStock.Price
-					f := fmt.Sprintf("%f", productFull.FullPrice)
-					r := fmt.Sprintf("%f", productFull.ReducePrice)
+					f := fmt.Sprintf("%d", productFull.FullPrice)
+					r := fmt.Sprintf("%d", productFull.ReducePrice)
 					cartPromotionItem.PromotionMessage = "满减优惠：满" + f + "元,减" + r + "元"
 					//(商品原价/总价)*满减金额
-					a := fmt.Sprintf("%5.2f", (skuStock.Price/amount)*productFull.ReducePrice)
-					float, _ := strconv.ParseFloat(a, 32)
-					cartPromotionItem.ReduceAmount = float32(float)
+					cartPromotionItem.ReduceAmount = (skuStock.Price / amount) * productFull.ReducePrice
 					cartPromotionItem.RealStock = skuStock.Stock - skuStock.LockStock
 					cartPromotionItem.Integration = product.GiftPoint
 					cartPromotionItem.Growth = product.GiftGrowth

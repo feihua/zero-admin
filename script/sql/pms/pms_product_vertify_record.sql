@@ -5,7 +5,7 @@ create table pms_product_vertify_record
     product_id  bigint       not null,
     create_time datetime     not null,
     vertify_man varchar(64)  not null comment '审核人',
-    status      int(1)       not null,
+    status tinyint not null,
     detail      varchar(255) not null comment '反馈详情'
 )
     comment '商品审核记录';

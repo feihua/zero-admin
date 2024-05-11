@@ -35,16 +35,16 @@ func newOmsOrderItem(db *gorm.DB, opts ...gen.DOOption) omsOrderItem {
 	_omsOrderItem.ProductName = field.NewString(tableName, "product_name")
 	_omsOrderItem.ProductBrand = field.NewString(tableName, "product_brand")
 	_omsOrderItem.ProductSn = field.NewString(tableName, "product_sn")
-	_omsOrderItem.ProductPrice = field.NewFloat64(tableName, "product_price")
+	_omsOrderItem.ProductPrice = field.NewInt64(tableName, "product_price")
 	_omsOrderItem.ProductQuantity = field.NewInt32(tableName, "product_quantity")
 	_omsOrderItem.ProductSkuID = field.NewInt64(tableName, "product_sku_id")
 	_omsOrderItem.ProductSkuCode = field.NewString(tableName, "product_sku_code")
 	_omsOrderItem.ProductCategoryID = field.NewInt64(tableName, "product_category_id")
 	_omsOrderItem.PromotionName = field.NewString(tableName, "promotion_name")
-	_omsOrderItem.PromotionAmount = field.NewFloat64(tableName, "promotion_amount")
-	_omsOrderItem.CouponAmount = field.NewFloat64(tableName, "coupon_amount")
-	_omsOrderItem.IntegrationAmount = field.NewFloat64(tableName, "integration_amount")
-	_omsOrderItem.RealAmount = field.NewFloat64(tableName, "real_amount")
+	_omsOrderItem.PromotionAmount = field.NewInt64(tableName, "promotion_amount")
+	_omsOrderItem.CouponAmount = field.NewInt64(tableName, "coupon_amount")
+	_omsOrderItem.IntegrationAmount = field.NewInt64(tableName, "integration_amount")
+	_omsOrderItem.RealAmount = field.NewInt64(tableName, "real_amount")
 	_omsOrderItem.GiftIntegration = field.NewInt32(tableName, "gift_integration")
 	_omsOrderItem.GiftGrowth = field.NewInt32(tableName, "gift_growth")
 	_omsOrderItem.ProductAttr = field.NewString(tableName, "product_attr")
@@ -60,23 +60,23 @@ type omsOrderItem struct {
 
 	ALL               field.Asterisk
 	ID                field.Int64
-	OrderID           field.Int64   // 订单id
-	OrderSn           field.String  // 订单编号
-	ProductID         field.Int64   // 商品id
-	ProductPic        field.String  // 商品图片
-	ProductName       field.String  // 商品名称
-	ProductBrand      field.String  // 商品品牌
-	ProductSn         field.String  // 货号
-	ProductPrice      field.Float64 // 销售价格
-	ProductQuantity   field.Int32   // 购买数量
-	ProductSkuID      field.Int64   // 商品sku编号
-	ProductSkuCode    field.String  // 商品sku条码
-	ProductCategoryID field.Int64   // 商品分类id
-	PromotionName     field.String  // 商品促销名称
-	PromotionAmount   field.Float64 // 商品促销分解金额
-	CouponAmount      field.Float64 // 优惠券优惠分解金额
-	IntegrationAmount field.Float64 // 积分优惠分解金额
-	RealAmount        field.Float64 // 该商品经过优惠后的分解金额
+	OrderID           field.Int64  // 订单id
+	OrderSn           field.String // 订单编号
+	ProductID         field.Int64  // 商品id
+	ProductPic        field.String // 商品图片
+	ProductName       field.String // 商品名称
+	ProductBrand      field.String // 商品品牌
+	ProductSn         field.String // 货号
+	ProductPrice      field.Int64  // 销售价格
+	ProductQuantity   field.Int32  // 购买数量
+	ProductSkuID      field.Int64  // 商品sku编号
+	ProductSkuCode    field.String // 商品sku条码
+	ProductCategoryID field.Int64  // 商品分类id
+	PromotionName     field.String // 商品促销名称
+	PromotionAmount   field.Int64  // 商品促销分解金额
+	CouponAmount      field.Int64  // 优惠券优惠分解金额
+	IntegrationAmount field.Int64  // 积分优惠分解金额
+	RealAmount        field.Int64  // 该商品经过优惠后的分解金额
 	GiftIntegration   field.Int32
 	GiftGrowth        field.Int32
 	ProductAttr       field.String // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
@@ -104,16 +104,16 @@ func (o *omsOrderItem) updateTableName(table string) *omsOrderItem {
 	o.ProductName = field.NewString(table, "product_name")
 	o.ProductBrand = field.NewString(table, "product_brand")
 	o.ProductSn = field.NewString(table, "product_sn")
-	o.ProductPrice = field.NewFloat64(table, "product_price")
+	o.ProductPrice = field.NewInt64(table, "product_price")
 	o.ProductQuantity = field.NewInt32(table, "product_quantity")
 	o.ProductSkuID = field.NewInt64(table, "product_sku_id")
 	o.ProductSkuCode = field.NewString(table, "product_sku_code")
 	o.ProductCategoryID = field.NewInt64(table, "product_category_id")
 	o.PromotionName = field.NewString(table, "promotion_name")
-	o.PromotionAmount = field.NewFloat64(table, "promotion_amount")
-	o.CouponAmount = field.NewFloat64(table, "coupon_amount")
-	o.IntegrationAmount = field.NewFloat64(table, "integration_amount")
-	o.RealAmount = field.NewFloat64(table, "real_amount")
+	o.PromotionAmount = field.NewInt64(table, "promotion_amount")
+	o.CouponAmount = field.NewInt64(table, "coupon_amount")
+	o.IntegrationAmount = field.NewInt64(table, "integration_amount")
+	o.RealAmount = field.NewInt64(table, "real_amount")
 	o.GiftIntegration = field.NewInt32(table, "gift_integration")
 	o.GiftGrowth = field.NewInt32(table, "gift_growth")
 	o.ProductAttr = field.NewString(table, "product_attr")

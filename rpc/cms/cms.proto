@@ -137,7 +137,7 @@ service SubjectProductRelationService {
 }
 
 //商品优选
-message PrefrenceAreaAddReq {
+message PreferredAreaAddReq {
   int64 Id = 1; //
   string Name = 2; //
   string SubTitle = 3; //
@@ -147,19 +147,19 @@ message PrefrenceAreaAddReq {
 
 }
 
-message PrefrenceAreaAddResp {
+message PreferredAreaAddResp {
   string pong = 1;
 }
 
-message PrefrenceAreaDeleteReq {
+message PreferredAreaDeleteReq {
   repeated int64 ids = 1;
 }
 
-message PrefrenceAreaDeleteResp {
+message PreferredAreaDeleteResp {
   string pong = 1;
 }
 
-message PrefrenceAreaUpdateReq {
+message PreferredAreaUpdateReq {
   int64 Id = 1; //
   string Name = 2; //
   string SubTitle = 3; //
@@ -169,11 +169,11 @@ message PrefrenceAreaUpdateReq {
 
 }
 
-message PrefrenceAreaUpdateResp {
+message PreferredAreaUpdateResp {
   string pong = 1;
 }
 
-message PrefrenceAreaListReq {
+message PreferredAreaListReq {
   int64 current = 1;
   int64 pageSize = 2;
   string Name = 3; //
@@ -181,7 +181,7 @@ message PrefrenceAreaListReq {
   int32 ShowStatus = 5; //显示状态：0->不显示；1->显示
 }
 
-message PrefrenceAreaListData {
+message PreferredAreaListData {
   int64 Id = 1; //
   string Name = 2; //
   string SubTitle = 3; //
@@ -191,42 +191,42 @@ message PrefrenceAreaListData {
 
 }
 
-message PrefrenceAreaListResp {
+message PreferredAreaListResp {
   int64 total = 1;
-  repeated  PrefrenceAreaListData list = 2;
+  repeated  PreferredAreaListData list = 2;
 }
-service PrefrenceAreaService {
+service PreferredAreaService {
 
   // 商品优选
-  rpc PrefrenceAreaAdd(PrefrenceAreaAddReq) returns (PrefrenceAreaAddResp){}
-  rpc PrefrenceAreaDelete(PrefrenceAreaDeleteReq) returns (PrefrenceAreaDeleteResp){}
-  rpc PrefrenceAreaUpdate(PrefrenceAreaUpdateReq) returns (PrefrenceAreaUpdateResp){}
-  rpc PrefrenceAreaList(PrefrenceAreaListReq) returns (PrefrenceAreaListResp){}
+  rpc PreferredAreaAdd(PreferredAreaAddReq) returns (PreferredAreaAddResp){}
+  rpc PreferredAreaDelete(PreferredAreaDeleteReq) returns (PreferredAreaDeleteResp){}
+  rpc PreferredAreaUpdate(PreferredAreaUpdateReq) returns (PreferredAreaUpdateResp){}
+  rpc PreferredAreaList(PreferredAreaListReq) returns (PreferredAreaListResp){}
 
 }
 //优选商品关联
-message PrefrenceAreaProductRelationAddReq {
-  repeated int64 PrefrenceAreaId = 1; //
+message PreferredAreaProductRelationAddReq {
+  repeated int64 PreferredAreaId = 1; //
   int64 ProductId = 2; //
 
 }
 
-message PrefrenceAreaProductRelationAddResp {
+message PreferredAreaProductRelationAddResp {
   string pong = 1;
 }
 
-message PrefrenceAreaProductRelationListReq {
+message PreferredAreaProductRelationListReq {
   int64 ProductId = 1; //商品id
 
 }
 
-message PrefrenceAreaProductRelationListResp {
-  repeated int64 PrefrenceAreaId = 1; //优选id
+message PreferredAreaProductRelationListResp {
+  repeated int64 PreferredAreaId = 1; //优选id
 
 }
 
-service PrefrenceAreaProductRelationService {
+service PreferredAreaProductRelationService {
   // 优选商品关联
-  rpc PrefrenceAreaProductRelationAdd(PrefrenceAreaProductRelationAddReq) returns (PrefrenceAreaProductRelationAddResp){}
-  rpc PrefrenceAreaProductRelationList(PrefrenceAreaProductRelationListReq) returns (PrefrenceAreaProductRelationListResp){}
+  rpc PreferredAreaProductRelationAdd(PreferredAreaProductRelationAddReq) returns (PreferredAreaProductRelationAddResp){}
+  rpc PreferredAreaProductRelationList(PreferredAreaProductRelationListReq) returns (PreferredAreaProductRelationListResp){}
 }

@@ -38,6 +38,10 @@ func newPmsBrand(db *gorm.DB, opts ...gen.DOOption) pmsBrand {
 	_pmsBrand.Logo = field.NewString(tableName, "logo")
 	_pmsBrand.BigPic = field.NewString(tableName, "big_pic")
 	_pmsBrand.BrandStory = field.NewString(tableName, "brand_story")
+	_pmsBrand.CreateBy = field.NewString(tableName, "create_by")
+	_pmsBrand.CreateTime = field.NewTime(tableName, "create_time")
+	_pmsBrand.UpdateBy = field.NewString(tableName, "update_by")
+	_pmsBrand.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_pmsBrand.fillFieldMap()
 
@@ -60,6 +64,10 @@ type pmsBrand struct {
 	Logo                field.String // 品牌logo
 	BigPic              field.String // 专区大图
 	BrandStory          field.String // 品牌故事
+	CreateBy            field.String // 创建者
+	CreateTime          field.Time   // 创建时间
+	UpdateBy            field.String // 更新者
+	UpdateTime          field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -87,6 +95,10 @@ func (p *pmsBrand) updateTableName(table string) *pmsBrand {
 	p.Logo = field.NewString(table, "logo")
 	p.BigPic = field.NewString(table, "big_pic")
 	p.BrandStory = field.NewString(table, "brand_story")
+	p.CreateBy = field.NewString(table, "create_by")
+	p.CreateTime = field.NewTime(table, "create_time")
+	p.UpdateBy = field.NewString(table, "update_by")
+	p.UpdateTime = field.NewTime(table, "update_time")
 
 	p.fillFieldMap()
 
@@ -111,7 +123,7 @@ func (p *pmsBrand) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (p *pmsBrand) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 11)
+	p.fieldMap = make(map[string]field.Expr, 15)
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["name"] = p.Name
 	p.fieldMap["first_letter"] = p.FirstLetter
@@ -123,6 +135,10 @@ func (p *pmsBrand) fillFieldMap() {
 	p.fieldMap["logo"] = p.Logo
 	p.fieldMap["big_pic"] = p.BigPic
 	p.fieldMap["brand_story"] = p.BrandStory
+	p.fieldMap["create_by"] = p.CreateBy
+	p.fieldMap["create_time"] = p.CreateTime
+	p.fieldMap["update_by"] = p.UpdateBy
+	p.fieldMap["update_time"] = p.UpdateTime
 }
 
 func (p pmsBrand) clone(db *gorm.DB) pmsBrand {

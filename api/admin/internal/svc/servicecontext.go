@@ -3,8 +3,8 @@ package svc
 import (
 	"github.com/feihua/zero-admin/api/admin/internal/config"
 	"github.com/feihua/zero-admin/api/admin/internal/middleware"
-	"github.com/feihua/zero-admin/rpc/cms/client/prefrenceareaproductrelationservice"
-	"github.com/feihua/zero-admin/rpc/cms/client/prefrenceareaservice"
+	"github.com/feihua/zero-admin/rpc/cms/client/preferredareaproductrelationservice"
+	"github.com/feihua/zero-admin/rpc/cms/client/preferredareaservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectproductrelationservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/cartitemservice"
@@ -148,8 +148,8 @@ type ServiceContext struct {
 	//内容相关
 	SubjectService                      subjectservice.SubjectService
 	SubjectProductRelationService       subjectproductrelationservice.SubjectProductRelationService
-	PrefrenceAreaService                prefrenceareaservice.PrefrenceAreaService
-	PrefrenceAreaProductRelationService prefrenceareaproductrelationservice.PrefrenceAreaProductRelationService
+	PreferredAreaService                preferredareaservice.PreferredAreaService
+	PreferredAreaProductRelationService preferredareaproductrelationservice.PreferredAreaProductRelationService
 	Redis                               *redis.Redis
 }
 
@@ -235,8 +235,8 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 		SubjectService:                      subjectservice.NewSubjectService(cmsClient),
 		SubjectProductRelationService:       subjectproductrelationservice.NewSubjectProductRelationService(cmsClient),
-		PrefrenceAreaService:                prefrenceareaservice.NewPrefrenceAreaService(cmsClient),
-		PrefrenceAreaProductRelationService: prefrenceareaproductrelationservice.NewPrefrenceAreaProductRelationService(cmsClient),
+		PreferredAreaService:                preferredareaservice.NewPreferredAreaService(cmsClient),
+		PreferredAreaProductRelationService: preferredareaproductrelationservice.NewPreferredAreaProductRelationService(cmsClient),
 		Redis:                               newRedis,
 	}
 }

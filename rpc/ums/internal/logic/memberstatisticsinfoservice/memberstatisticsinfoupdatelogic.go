@@ -36,7 +36,7 @@ func (l *MemberStatisticsInfoUpdateLogic) MemberStatisticsInfoUpdate(in *umsclie
 	_, err := query.UmsMemberStatisticsInfo.WithContext(l.ctx).Updates(&model.UmsMemberStatisticsInfo{
 		ID:                  in.Id,
 		MemberID:            in.MemberId,
-		ConsumeAmount:       float64(in.ConsumeAmount),
+		ConsumeAmount:       in.ConsumeAmount,
 		OrderCount:          in.OrderCount,
 		CouponCount:         in.CouponCount,
 		CommentCount:        in.CommentCount,

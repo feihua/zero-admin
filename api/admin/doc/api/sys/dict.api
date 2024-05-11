@@ -32,7 +32,7 @@ type (
 		Label          string  `json:"label"`          // 标签名
 		Type           string  `json:"type"`           // 类型
 		Description    string  `json:"description"`    // 描述
-		Sort           float64 `json:"sort"`           // 排序（升序）
+        Sort int64 `json:"sort"`                       // 排序（升序）
 		CreateBy       string  `json:"createBy"`       // 创建人
 		CreateTime     string  `json:"createTime"`     // 创建时间
         UpdateBy string `json:"updateBy"`              // 更新人

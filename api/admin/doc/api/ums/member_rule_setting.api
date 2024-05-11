@@ -8,8 +8,8 @@ type (
 	addMemberRuleSettingReq {
 		ContinueSignDay int32 `json:"continueSignDay"`     // 连续签到天数
 		ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-		ConsumePerPoint float32 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-		LowOrderAmount float32 `json:"lowOrderAmount"`     // 最低获取点数的订单金额
+        ConsumePerPoint int64 `json:"consumePerPoint"`     // 每消费多少元获取1个点
+        LowOrderAmount int64 `json:"lowOrderAmount"`       // 最低获取点数的订单金额
 		MaxPointPerOrder int32 `json:"maxPointPerOrder"`   // 每笔订单最高获取点数
 		Type int32 `json:"type"`                           // 类型：0->积分规则；1->成长值规则
 	}
@@ -25,8 +25,8 @@ type (
 		Id                int64   `json:"id"`
 		ContinueSignDay int32 `json:"continueSignDay"`     // 连续签到天数
 		ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-		ConsumePerPoint float32 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-		LowOrderAmount float32 `json:"lowOrderAmount"`     // 最低获取点数的订单金额
+        ConsumePerPoint int64 `json:"consumePerPoint"`     // 每消费多少元获取1个点
+        LowOrderAmount int64 `json:"lowOrderAmount"`       // 最低获取点数的订单金额
 		MaxPointPerOrder int32 `json:"maxPointPerOrder"`   // 每笔订单最高获取点数
 		Type int32 `json:"type"`                           // 类型：0->积分规则；1->成长值规则
 	}
@@ -43,8 +43,8 @@ type (
 		Id                int64   `json:"id"`
 		ContinueSignDay int32 `json:"continueSignDay"`     // 连续签到天数
 		ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-		ConsumePerPoint float32 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-		LowOrderAmount float32 `json:"lowOrderAmount"`     // 最低获取点数的订单金额
+        ConsumePerPoint int64 `json:"consumePerPoint"`     // 每消费多少元获取1个点
+        LowOrderAmount int64 `json:"lowOrderAmount"`       // 最低获取点数的订单金额
 		MaxPointPerOrder int32 `json:"maxPointPerOrder"`   // 每笔订单最高获取点数
 		Type int32 `json:"type"`                           // 类型：0->积分规则；1->成长值规则
 	}

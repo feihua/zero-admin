@@ -31,7 +31,7 @@ func (l *MemberLevelAddLogic) MemberLevelAdd(req types.AddMemberLevelReq) (*type
 		LevelName:          req.Name,
 		GrowthPoint:        req.GrowthPoint,
 		DefaultStatus:      req.DefaultStatus,
-		FreeFreightPoint:   float32(req.FreeFreightPoint),
+		FreeFreightPoint:   req.FreeFreightPoint,
 		CommentGrowthPoint: req.CommentGrowthPoint,
 		IsFreeFreight:      req.IsFreeFreight,
 		IsSignIn:           req.IsSignIn,

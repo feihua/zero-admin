@@ -8,7 +8,7 @@ type CartItemAddReq {
 	ProductId         int64   `json:"productId"`
 	ProductSkuId      int64   `json:"productSkuId"`
     Quantity int32 `json:"quantity"`                     // 购买数量
-	Price             float64 `json:"price"`             // 添加到购物车的价格
+    Price int64 `json:"price"`                           // 添加到购物车的价格
 	ProductPic        string  `json:"productPic"`        // 商品主图
 	ProductName       string  `json:"productName"`       // 商品名称
 	ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
@@ -41,7 +41,7 @@ type CartItemUpdateAttrReq {
 	ProductId         int64   `json:"productId"`
 	ProductSkuId      int64   `json:"productSkuId"`
     Quantity int32 `json:"quantity"`                     // 购买数量
-	Price             float64 `json:"price"`             // 添加到购物车的价格
+    Price int64 `json:"price"`                           // 添加到购物车的价格
 	ProductPic        string  `json:"productPic"`        // 商品主图
 	ProductName       string  `json:"productName"`       // 商品名称
 	ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
@@ -69,7 +69,7 @@ type CartListData {
 	ProductSkuId      int64   `json:"productSkuId"`
 	MemberId          int64   `json:"memberId"`
     Quantity int32 `json:"quantity"`                     // 购买数量
-	Price             float32 `json:"price"`             // 添加到购物车的价格
+    Price int64 `json:"price"`                           // 添加到购物车的价格
 	ProductPic        string  `json:"productPic"`        // 商品主图
 	ProductName       string  `json:"productName"`       // 商品名称
 	ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
@@ -99,7 +99,7 @@ type CarItemtPromotionListData {
 	ProductSkuId      int64   `json:"productSkuId"`
 	MemberId          int64   `json:"memberId"`
     Quantity int32 `json:"quantity"`                     // 购买数量
-	Price             float32 `json:"price"`             // 添加到购物车的价格
+    Price int64 `json:"price"`                           // 添加到购物车的价格
 	ProductPic        string  `json:"productPic"`        // 商品主图
 	ProductName       string  `json:"productName"`       // 商品名称
 	ProductSubTitle   string  `json:"productSubTitle"`   // 商品副标题（卖点）
@@ -114,7 +114,7 @@ type CarItemtPromotionListData {
 	ProductAttr       string  `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 
 	PromotionMessage string `json:"promotionMessage"` //促销活动信息
-	ReduceAmount     float32 `json:"reduceAmount"`//促销活动减去的金额，针对每个商品
+    ReduceAmount int64 `json:"reduceAmount"`             //促销活动减去的金额，针对每个商品
     RealStock int32 `json:"realStock"`                   //商品的真实库存（剩余库存-锁定库存）
     Integration int32 `json:"integration"`               //购买商品赠送积分
     Growth int32 `json:"growth"`                         //购买商品赠送成长值
@@ -153,12 +153,12 @@ type CartItemSkuStockList {
 	Id             int64   `json:"id"`
 	ProductId      int64   `json:"productId"`
 	SkuCode        string  `json:"skuCode"` // sku编码
-	Price          float32 `json:"price"`
+    Price int64 `json:"price"`
     Stock int32 `json:"stock"`              // 库存
     LowStock int32 `json:"lowStock"`        // 预警库存
 	Pic            string  `json:"pic"`            // 展示图片
     Sale int32 `json:"sale"`           // 销量
-	PromotionPrice float32 `json:"promotionPrice"` // 单品促销价格
+    PromotionPrice int64 `json:"promotionPrice"` // 单品促销价格
     LockStock int32 `json:"lockStock"`      // 锁定库存
 	SpData         string  `json:"spData"`         // 商品销售属性，json格式
 }

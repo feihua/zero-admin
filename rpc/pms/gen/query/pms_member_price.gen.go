@@ -30,7 +30,7 @@ func newPmsMemberPrice(db *gorm.DB, opts ...gen.DOOption) pmsMemberPrice {
 	_pmsMemberPrice.ID = field.NewInt64(tableName, "id")
 	_pmsMemberPrice.ProductID = field.NewInt64(tableName, "product_id")
 	_pmsMemberPrice.MemberLevelID = field.NewInt64(tableName, "member_level_id")
-	_pmsMemberPrice.MemberPrice = field.NewFloat64(tableName, "member_price")
+	_pmsMemberPrice.MemberPrice = field.NewInt64(tableName, "member_price")
 	_pmsMemberPrice.MemberLevelName = field.NewString(tableName, "member_level_name")
 
 	_pmsMemberPrice.fillFieldMap()
@@ -44,10 +44,10 @@ type pmsMemberPrice struct {
 
 	ALL             field.Asterisk
 	ID              field.Int64
-	ProductID       field.Int64   // 商品id
-	MemberLevelID   field.Int64   // 会员等级id
-	MemberPrice     field.Float64 // 会员价格
-	MemberLevelName field.String  // 会员等级名称
+	ProductID       field.Int64  // 商品id
+	MemberLevelID   field.Int64  // 会员等级id
+	MemberPrice     field.Int64  // 会员价格
+	MemberLevelName field.String // 会员等级名称
 
 	fieldMap map[string]field.Expr
 }
@@ -67,7 +67,7 @@ func (p *pmsMemberPrice) updateTableName(table string) *pmsMemberPrice {
 	p.ID = field.NewInt64(table, "id")
 	p.ProductID = field.NewInt64(table, "product_id")
 	p.MemberLevelID = field.NewInt64(table, "member_level_id")
-	p.MemberPrice = field.NewFloat64(table, "member_price")
+	p.MemberPrice = field.NewInt64(table, "member_price")
 	p.MemberLevelName = field.NewString(table, "member_level_name")
 
 	p.fillFieldMap()

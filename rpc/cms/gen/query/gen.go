@@ -20,8 +20,8 @@ var (
 	CmsHelp                         *cmsHelp
 	CmsHelpCategory                 *cmsHelpCategory
 	CmsMemberReport                 *cmsMemberReport
-	CmsPrefrenceArea                *cmsPrefrenceArea
-	CmsPrefrenceAreaProductRelation *cmsPrefrenceAreaProductRelation
+	CmsPreferredArea                *cmsPreferredArea
+	CmsPreferredAreaProductRelation *cmsPreferredAreaProductRelation
 	CmsSubject                      *cmsSubject
 	CmsSubjectCategory              *cmsSubjectCategory
 	CmsSubjectComment               *cmsSubjectComment
@@ -36,8 +36,8 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	CmsHelp = &Q.CmsHelp
 	CmsHelpCategory = &Q.CmsHelpCategory
 	CmsMemberReport = &Q.CmsMemberReport
-	CmsPrefrenceArea = &Q.CmsPrefrenceArea
-	CmsPrefrenceAreaProductRelation = &Q.CmsPrefrenceAreaProductRelation
+	CmsPreferredArea = &Q.CmsPreferredArea
+	CmsPreferredAreaProductRelation = &Q.CmsPreferredAreaProductRelation
 	CmsSubject = &Q.CmsSubject
 	CmsSubjectCategory = &Q.CmsSubjectCategory
 	CmsSubjectComment = &Q.CmsSubjectComment
@@ -53,8 +53,8 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		CmsHelp:                         newCmsHelp(db, opts...),
 		CmsHelpCategory:                 newCmsHelpCategory(db, opts...),
 		CmsMemberReport:                 newCmsMemberReport(db, opts...),
-		CmsPrefrenceArea:                newCmsPrefrenceArea(db, opts...),
-		CmsPrefrenceAreaProductRelation: newCmsPrefrenceAreaProductRelation(db, opts...),
+		CmsPreferredArea:                newCmsPreferredArea(db, opts...),
+		CmsPreferredAreaProductRelation: newCmsPreferredAreaProductRelation(db, opts...),
 		CmsSubject:                      newCmsSubject(db, opts...),
 		CmsSubjectCategory:              newCmsSubjectCategory(db, opts...),
 		CmsSubjectComment:               newCmsSubjectComment(db, opts...),
@@ -71,8 +71,8 @@ type Query struct {
 	CmsHelp                         cmsHelp
 	CmsHelpCategory                 cmsHelpCategory
 	CmsMemberReport                 cmsMemberReport
-	CmsPrefrenceArea                cmsPrefrenceArea
-	CmsPrefrenceAreaProductRelation cmsPrefrenceAreaProductRelation
+	CmsPreferredArea                cmsPreferredArea
+	CmsPreferredAreaProductRelation cmsPreferredAreaProductRelation
 	CmsSubject                      cmsSubject
 	CmsSubjectCategory              cmsSubjectCategory
 	CmsSubjectComment               cmsSubjectComment
@@ -90,8 +90,8 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		CmsHelp:                         q.CmsHelp.clone(db),
 		CmsHelpCategory:                 q.CmsHelpCategory.clone(db),
 		CmsMemberReport:                 q.CmsMemberReport.clone(db),
-		CmsPrefrenceArea:                q.CmsPrefrenceArea.clone(db),
-		CmsPrefrenceAreaProductRelation: q.CmsPrefrenceAreaProductRelation.clone(db),
+		CmsPreferredArea:                q.CmsPreferredArea.clone(db),
+		CmsPreferredAreaProductRelation: q.CmsPreferredAreaProductRelation.clone(db),
 		CmsSubject:                      q.CmsSubject.clone(db),
 		CmsSubjectCategory:              q.CmsSubjectCategory.clone(db),
 		CmsSubjectComment:               q.CmsSubjectComment.clone(db),
@@ -116,8 +116,8 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		CmsHelp:                         q.CmsHelp.replaceDB(db),
 		CmsHelpCategory:                 q.CmsHelpCategory.replaceDB(db),
 		CmsMemberReport:                 q.CmsMemberReport.replaceDB(db),
-		CmsPrefrenceArea:                q.CmsPrefrenceArea.replaceDB(db),
-		CmsPrefrenceAreaProductRelation: q.CmsPrefrenceAreaProductRelation.replaceDB(db),
+		CmsPreferredArea:                q.CmsPreferredArea.replaceDB(db),
+		CmsPreferredAreaProductRelation: q.CmsPreferredAreaProductRelation.replaceDB(db),
 		CmsSubject:                      q.CmsSubject.replaceDB(db),
 		CmsSubjectCategory:              q.CmsSubjectCategory.replaceDB(db),
 		CmsSubjectComment:               q.CmsSubjectComment.replaceDB(db),
@@ -132,8 +132,8 @@ type queryCtx struct {
 	CmsHelp                         ICmsHelpDo
 	CmsHelpCategory                 ICmsHelpCategoryDo
 	CmsMemberReport                 ICmsMemberReportDo
-	CmsPrefrenceArea                ICmsPrefrenceAreaDo
-	CmsPrefrenceAreaProductRelation ICmsPrefrenceAreaProductRelationDo
+	CmsPreferredArea                ICmsPreferredAreaDo
+	CmsPreferredAreaProductRelation ICmsPreferredAreaProductRelationDo
 	CmsSubject                      ICmsSubjectDo
 	CmsSubjectCategory              ICmsSubjectCategoryDo
 	CmsSubjectComment               ICmsSubjectCommentDo
@@ -148,8 +148,8 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		CmsHelp:                         q.CmsHelp.WithContext(ctx),
 		CmsHelpCategory:                 q.CmsHelpCategory.WithContext(ctx),
 		CmsMemberReport:                 q.CmsMemberReport.WithContext(ctx),
-		CmsPrefrenceArea:                q.CmsPrefrenceArea.WithContext(ctx),
-		CmsPrefrenceAreaProductRelation: q.CmsPrefrenceAreaProductRelation.WithContext(ctx),
+		CmsPreferredArea:                q.CmsPreferredArea.WithContext(ctx),
+		CmsPreferredAreaProductRelation: q.CmsPreferredAreaProductRelation.WithContext(ctx),
 		CmsSubject:                      q.CmsSubject.WithContext(ctx),
 		CmsSubjectCategory:              q.CmsSubjectCategory.WithContext(ctx),
 		CmsSubjectComment:               q.CmsSubjectComment.WithContext(ctx),

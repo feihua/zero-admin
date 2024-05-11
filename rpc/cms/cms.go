@@ -6,8 +6,8 @@ import (
 
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/internal/config"
-	prefrenceareaproductrelationserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/prefrenceareaproductrelationservice"
-	prefrenceareaserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/prefrenceareaservice"
+	prefrenceareaproductrelationserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/preferredareaproductrelationservice"
+	prefrenceareaserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/preferredareaservice"
 	subjectproductrelationserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/subjectproductrelationservice"
 	subjectserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/subjectservice"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -31,8 +31,8 @@ func main() {
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		cmsclient.RegisterSubjectServiceServer(grpcServer, subjectserviceServer.NewSubjectServiceServer(ctx))
 		cmsclient.RegisterSubjectProductRelationServiceServer(grpcServer, subjectproductrelationserviceServer.NewSubjectProductRelationServiceServer(ctx))
-		cmsclient.RegisterPrefrenceAreaServiceServer(grpcServer, prefrenceareaserviceServer.NewPrefrenceAreaServiceServer(ctx))
-		cmsclient.RegisterPrefrenceAreaProductRelationServiceServer(grpcServer, prefrenceareaproductrelationserviceServer.NewPrefrenceAreaProductRelationServiceServer(ctx))
+		cmsclient.RegisterPreferredAreaServiceServer(grpcServer, prefrenceareaserviceServer.NewPreferredAreaServiceServer(ctx))
+		cmsclient.RegisterPreferredAreaProductRelationServiceServer(grpcServer, prefrenceareaproductrelationserviceServer.NewPreferredAreaProductRelationServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

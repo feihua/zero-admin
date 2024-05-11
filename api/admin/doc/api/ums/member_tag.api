@@ -8,7 +8,7 @@ type (
 	addMemberTagReq {
 		Name              string  `json:"name"`
 		FinishOrderCount int32 `json:"finishOrderCount"`     // 自动打标签完成订单数量
-		FinishOrderAmount float32 `json:"finishOrderAmount"` // 自动打标签完成订单金额
+        FinishOrderAmount int64 `json:"finishOrderAmount"`   // 自动打标签完成订单金额
 	}
 	addMemberTagResp {
 		Code    string `json:"code"`
@@ -22,7 +22,7 @@ type (
 		Id                int64   `json:"id"`
 		Name              string  `json:"name"`
 		FinishOrderCount int32 `json:"finishOrderCount"`     // 自动打标签完成订单数量
-		FinishOrderAmount float32 `json:"finishOrderAmount"` // 自动打标签完成订单金额
+        FinishOrderAmount int64 `json:"finishOrderAmount"`   // 自动打标签完成订单金额
 	}
 	ListMemberTagResp {
 		Code     string                `json:"code"`
@@ -37,7 +37,7 @@ type (
 		Id                int64   `json:"id"`
 		Name              string  `json:"name"`
 		FinishOrderCount int32 `json:"finishOrderCount"`     // 自动打标签完成订单数量
-		FinishOrderAmount float32 `json:"finishOrderAmount"` // 自动打标签完成订单金额
+        FinishOrderAmount int64 `json:"finishOrderAmount"`   // 自动打标签完成订单金额
 	}
 	UpdateMemberTagResp {
 		Code    string `json:"code"`

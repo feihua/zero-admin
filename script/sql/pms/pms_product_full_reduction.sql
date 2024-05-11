@@ -2,11 +2,12 @@ create table pms_product_full_reduction
 (
     id           bigint(11) auto_increment
         primary key,
-    product_id   bigint         not null,
-    full_price   decimal(10, 2) not null,
-    reduce_price decimal(10, 2) not null
+    product_id   bigint not null,
+    full_price   bigint not null,
+    reduce_price bigint not null
 )
     comment '产品满减表(只针对同商品)';
+
 
 INSERT INTO pms_product_full_reduction (id, product_id, full_price, reduce_price) VALUES (1, 7, 100.00, 20.00);
 INSERT INTO pms_product_full_reduction (id, product_id, full_price, reduce_price) VALUES (2, 8, 100.00, 20.00);

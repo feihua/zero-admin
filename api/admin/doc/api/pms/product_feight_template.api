@@ -8,10 +8,10 @@ type (
 	addFeightTemplateReq {
 		Name           string  `json:"name"`
         ChargeType int32 `json:"chargeType"`      // 计费类型:0->按重量；1->按件数
-        FirstWeight float32 `json:"first_weight"` // 首重kg
-        FirstFee float32 `json:"firstFee"`        // 首费（元）
-        ContinueWeight float32 `json:"continue_weight"`
-        ContinmeFee float32 `json:"continmeFee"`
+        FirstWeight int64 `json:"first_weight"`   // 首重kg
+        FirstFee int64 `json:"firstFee"`          // 首费（元）
+        ContinueWeight int64 `json:"continue_weight"`
+        ContinmeFee int64 `json:"continmeFee"`
 		Dest           string  `json:"dest"` // 目的地（省、市）
 	}
 	addFeightTemplateResp {
@@ -26,10 +26,10 @@ type (
 		Id             int64   `json:"id"`
 		Name           string  `json:"name"`
         ChargeType int32 `json:"chargeType"`      // 计费类型:0->按重量；1->按件数
-        FirstWeight float32 `json:"first_weight"` // 首重kg
-        FirstFee float32 `json:"firstFee"`        // 首费（元）
-        ContinueWeight float32 `json:"continue_weight"`
-        ContinmeFee float32 `json:"continmeFee"`
+        FirstWeight int64 `json:"first_weight"`   // 首重kg
+        FirstFee int64 `json:"firstFee"`          // 首费（元）
+        ContinueWeight int64 `json:"continue_weight"`
+        ContinmeFee int64 `json:"continmeFee"`
 		Dest           string  `json:"dest"` // 目的地（省、市）
 	}
 	ListFeightTemplateResp {
@@ -45,10 +45,10 @@ type (
 		Id             int64   `json:"id"`
 		Name           string  `json:"name"`
         ChargeType int32 `json:"chargeType"`      // 计费类型:0->按重量；1->按件数
-        FirstWeight float32 `json:"first_weight"` // 首重kg
-        FirstFee float32 `json:"firstFee"`        // 首费（元）
-        ContinueWeight float32 `json:"continue_weight"`
-        ContinmeFee float32 `json:"continmeFee"`
+        FirstWeight int64 `json:"first_weight"`   // 首重kg
+        FirstFee int64 `json:"firstFee"`          // 首费（元）
+        ContinueWeight int64 `json:"continue_weight"`
+        ContinmeFee int64 `json:"continmeFee"`
 		Dest           string  `json:"dest"` // 目的地（省、市）
 	}
 	UpdateFeightTemplateResp {

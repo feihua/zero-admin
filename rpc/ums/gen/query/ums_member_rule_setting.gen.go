@@ -30,8 +30,8 @@ func newUmsMemberRuleSetting(db *gorm.DB, opts ...gen.DOOption) umsMemberRuleSet
 	_umsMemberRuleSetting.ID = field.NewInt64(tableName, "id")
 	_umsMemberRuleSetting.ContinueSignDay = field.NewInt32(tableName, "continue_sign_day")
 	_umsMemberRuleSetting.ContinueSignPoint = field.NewInt32(tableName, "continue_sign_point")
-	_umsMemberRuleSetting.ConsumePerPoint = field.NewFloat64(tableName, "consume_per_point")
-	_umsMemberRuleSetting.LowOrderAmount = field.NewFloat64(tableName, "low_order_amount")
+	_umsMemberRuleSetting.ConsumePerPoint = field.NewInt64(tableName, "consume_per_point")
+	_umsMemberRuleSetting.LowOrderAmount = field.NewInt64(tableName, "low_order_amount")
 	_umsMemberRuleSetting.MaxPointPerOrder = field.NewInt32(tableName, "max_point_per_order")
 	_umsMemberRuleSetting.RuleType = field.NewInt32(tableName, "rule_type")
 	_umsMemberRuleSetting.CreateBy = field.NewString(tableName, "create_by")
@@ -50,16 +50,16 @@ type umsMemberRuleSetting struct {
 
 	ALL               field.Asterisk
 	ID                field.Int64
-	ContinueSignDay   field.Int32   // 连续签到天数
-	ContinueSignPoint field.Int32   // 连续签到赠送数量
-	ConsumePerPoint   field.Float64 // 每消费多少元获取1个点
-	LowOrderAmount    field.Float64 // 最低获取点数的订单金额
-	MaxPointPerOrder  field.Int32   // 每笔订单最高获取点数
-	RuleType          field.Int32   // 类型：0->积分规则；1->成长值规则
-	CreateBy          field.String  // 创建者
-	CreateTime        field.Time    // 创建时间
-	UpdateBy          field.String  // 更新者
-	UpdateTime        field.Time    // 更新时间
+	ContinueSignDay   field.Int32  // 连续签到天数
+	ContinueSignPoint field.Int32  // 连续签到赠送数量
+	ConsumePerPoint   field.Int64  // 每消费多少元获取1个点
+	LowOrderAmount    field.Int64  // 最低获取点数的订单金额
+	MaxPointPerOrder  field.Int32  // 每笔订单最高获取点数
+	RuleType          field.Int32  // 类型：0->积分规则；1->成长值规则
+	CreateBy          field.String // 创建者
+	CreateTime        field.Time   // 创建时间
+	UpdateBy          field.String // 更新者
+	UpdateTime        field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -79,8 +79,8 @@ func (u *umsMemberRuleSetting) updateTableName(table string) *umsMemberRuleSetti
 	u.ID = field.NewInt64(table, "id")
 	u.ContinueSignDay = field.NewInt32(table, "continue_sign_day")
 	u.ContinueSignPoint = field.NewInt32(table, "continue_sign_point")
-	u.ConsumePerPoint = field.NewFloat64(table, "consume_per_point")
-	u.LowOrderAmount = field.NewFloat64(table, "low_order_amount")
+	u.ConsumePerPoint = field.NewInt64(table, "consume_per_point")
+	u.LowOrderAmount = field.NewInt64(table, "low_order_amount")
 	u.MaxPointPerOrder = field.NewInt32(table, "max_point_per_order")
 	u.RuleType = field.NewInt32(table, "rule_type")
 	u.CreateBy = field.NewString(table, "create_by")

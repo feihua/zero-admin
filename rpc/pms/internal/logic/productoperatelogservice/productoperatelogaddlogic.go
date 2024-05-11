@@ -35,10 +35,10 @@ func NewProductOperateLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 func (l *ProductOperateLogAddLogic) ProductOperateLogAdd(in *pmsclient.ProductOperateLogAddReq) (*pmsclient.ProductOperateLogAddResp, error) {
 	err := query.PmsProductOperateLog.WithContext(l.ctx).Create(&model.PmsProductOperateLog{
 		ProductID:        in.ProductId,
-		PriceOld:         float64(in.PriceOld),
-		PriceNew:         float64(in.PriceNew),
-		SalePriceOld:     float64(in.SalePriceOld),
-		SalePriceNew:     float64(in.SalePriceNew),
+		PriceOld:         in.PriceOld,
+		PriceNew:         in.PriceNew,
+		SalePriceOld:     in.SalePriceOld,
+		SalePriceNew:     in.SalePriceNew,
 		GiftPointOld:     in.GiftPointOld,
 		GiftPointNew:     in.GiftPointNew,
 		UsePointLimitOld: in.UsePointLimitOld,

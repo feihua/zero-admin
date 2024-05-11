@@ -38,8 +38,8 @@ func (l *ProductFullReductionListLogic) ProductFullReductionList(in *pmsclient.P
 		list = append(list, &pmsclient.ProductFullReductionListData{
 			Id:          item.ID,
 			ProductId:   item.ProductID,
-			FullPrice:   float32(item.FullPrice),
-			ReducePrice: float32(item.ReducePrice),
+			FullPrice:   item.FullPrice,
+			ReducePrice: item.ReducePrice,
 		})
 	}
 

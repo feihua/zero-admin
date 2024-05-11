@@ -43,10 +43,10 @@ func (l *FeightTemplateListLogic) FeightTemplateList(in *pmsclient.FeightTemplat
 			Id:             item.ID,
 			Name:           item.Name,
 			ChargeType:     item.ChargeType,
-			FirstWeight:    float32(item.FirstWeight),
-			FirstFee:       float32(item.FirstFee),
-			ContinueWeight: float32(item.ContinueWeight),
-			ContinmeFee:    float32(item.ContinmeFee),
+			FirstWeight:    item.FirstWeight,
+			FirstFee:       item.FirstFee,
+			ContinueWeight: item.ContinueWeight,
+			ContinmeFee:    item.ContinueFee,
 			Dest:           item.Dest,
 		})
 	}

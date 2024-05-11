@@ -36,8 +36,8 @@ func (l *ProductFullReductionUpdateLogic) ProductFullReductionUpdate(in *pmsclie
 	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductFullReduction{
 		ID:          in.Id,
 		ProductID:   in.ProductId,
-		FullPrice:   float64(in.FullPrice),
-		ReducePrice: float64(in.ReducePrice),
+		FullPrice:   in.FullPrice,
+		ReducePrice: in.ReducePrice,
 	})
 
 	if err != nil {

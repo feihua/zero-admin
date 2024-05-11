@@ -64,17 +64,17 @@ type BrandProductList {
     VerifyStatus int32 `json:"verifyStatus"`
     Sort int32 `json:"sort"`
     Sale int32 `json:"sale"`
-	Price                      float64 `json:"price"`
-	PromotionPrice             float64 `json:"promotionPrice"`
+    Price int64 `json:"price"`
+    PromotionPrice int64 `json:"promotionPrice"`
     GiftGrowth int32 `json:"giftGrowth"`
     GiftPoint int32 `json:"giftPoint"`
     UsePointLimit int32 `json:"usePointLimit"`
 	SubTitle                   string  `json:"subTitle"`
-	OriginalPrice              float64 `json:"originalPrice"`
+    OriginalPrice int64 `json:"originalPrice"`
     Stock int32 `json:"stock"`
     LowStock int32 `json:"lowStock"`
 	Unit                       string  `json:"unit"`
-	Weight                     float64 `json:"weight"`
+    Weight int64 `json:"weight"`
     PreviewStatus int32 `json:"previewStatus"`
 	ServiceIDS                 string  `json:"serviceIds"`
 	Keywords                   string  `json:"keywords"`

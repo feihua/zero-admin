@@ -33,6 +33,10 @@ func newCmsSubjectCategory(db *gorm.DB, opts ...gen.DOOption) cmsSubjectCategory
 	_cmsSubjectCategory.SubjectCount = field.NewInt32(tableName, "subject_count")
 	_cmsSubjectCategory.ShowStatus = field.NewInt32(tableName, "show_status")
 	_cmsSubjectCategory.Sort = field.NewInt32(tableName, "sort")
+	_cmsSubjectCategory.CreateBy = field.NewString(tableName, "create_by")
+	_cmsSubjectCategory.CreateTime = field.NewTime(tableName, "create_time")
+	_cmsSubjectCategory.UpdateBy = field.NewString(tableName, "update_by")
+	_cmsSubjectCategory.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_cmsSubjectCategory.fillFieldMap()
 
@@ -50,6 +54,10 @@ type cmsSubjectCategory struct {
 	SubjectCount field.Int32  // 专题数量
 	ShowStatus   field.Int32
 	Sort         field.Int32
+	CreateBy     field.String // 创建者
+	CreateTime   field.Time   // 创建时间
+	UpdateBy     field.String // 更新者
+	UpdateTime   field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -72,6 +80,10 @@ func (c *cmsSubjectCategory) updateTableName(table string) *cmsSubjectCategory {
 	c.SubjectCount = field.NewInt32(table, "subject_count")
 	c.ShowStatus = field.NewInt32(table, "show_status")
 	c.Sort = field.NewInt32(table, "sort")
+	c.CreateBy = field.NewString(table, "create_by")
+	c.CreateTime = field.NewTime(table, "create_time")
+	c.UpdateBy = field.NewString(table, "update_by")
+	c.UpdateTime = field.NewTime(table, "update_time")
 
 	c.fillFieldMap()
 
@@ -100,13 +112,17 @@ func (c *cmsSubjectCategory) GetFieldByName(fieldName string) (field.OrderExpr, 
 }
 
 func (c *cmsSubjectCategory) fillFieldMap() {
-	c.fieldMap = make(map[string]field.Expr, 6)
+	c.fieldMap = make(map[string]field.Expr, 10)
 	c.fieldMap["id"] = c.ID
 	c.fieldMap["name"] = c.Name
 	c.fieldMap["icon"] = c.Icon
 	c.fieldMap["subject_count"] = c.SubjectCount
 	c.fieldMap["show_status"] = c.ShowStatus
 	c.fieldMap["sort"] = c.Sort
+	c.fieldMap["create_by"] = c.CreateBy
+	c.fieldMap["create_time"] = c.CreateTime
+	c.fieldMap["update_by"] = c.UpdateBy
+	c.fieldMap["update_time"] = c.UpdateTime
 }
 
 func (c cmsSubjectCategory) clone(db *gorm.DB) cmsSubjectCategory {

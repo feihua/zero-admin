@@ -2,18 +2,19 @@ create table pms_sku_stock
 (
     id              bigint auto_increment
         primary key,
-    product_id      bigint         not null,
-    sku_code        varchar(64)    not null comment 'sku编码',
-    price           decimal(10, 2) not null,
-    stock           int default 0  not null comment '库存',
-    low_stock       int            not null comment '预警库存',
-    pic             varchar(255)   not null comment '展示图片',
-    sale            int            not null comment '销量',
-    promotion_price decimal(10, 2) not null comment '单品促销价格',
-    lock_stock      int default 0  not null comment '锁定库存',
-    sp_data         varchar(500)   not null comment '商品销售属性，json格式'
+    product_id      bigint        not null,
+    sku_code        varchar(64)   not null comment 'sku编码',
+    price           bigint        not null,
+    stock           int default 0 not null comment '库存',
+    low_stock       int           not null comment '预警库存',
+    pic             varchar(255)  not null comment '展示图片',
+    sale            int           not null comment '销量',
+    promotion_price bigint        not null comment '单品促销价格',
+    lock_stock      int default 0 not null comment '锁定库存',
+    sp_data         varchar(500)  not null comment '商品销售属性，json格式'
 )
     comment 'sku的库存';
+
 
 INSERT INTO pms_sku_stock (id, product_id, sku_code, price, stock, low_stock, pic, sale, promotion_price, lock_stock, sp_data) VALUES (163, 36, '202002210036001', 100.00, 100, 25, ' ', 0, 0.00, 9, '[{"key":"颜色","value":"红色"},{"key":"尺寸","value":"38"},{"key":"风格","value":"秋季"}]');
 INSERT INTO pms_sku_stock (id, product_id, sku_code, price, stock, low_stock, pic, sale, promotion_price, lock_stock, sp_data) VALUES (164, 36, '202002210036002', 120.00, 98, 20, ' ', 0, 0.00, 6, '[{"key":"颜色","value":"红色"},{"key":"尺寸","value":"38"},{"key":"风格","value":"夏季"}]');

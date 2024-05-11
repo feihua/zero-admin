@@ -30,10 +30,10 @@ func newPmsFeightTemplate(db *gorm.DB, opts ...gen.DOOption) pmsFeightTemplate {
 	_pmsFeightTemplate.ID = field.NewInt64(tableName, "id")
 	_pmsFeightTemplate.Name = field.NewString(tableName, "name")
 	_pmsFeightTemplate.ChargeType = field.NewInt32(tableName, "charge_type")
-	_pmsFeightTemplate.FirstWeight = field.NewFloat64(tableName, "first_weight")
-	_pmsFeightTemplate.FirstFee = field.NewFloat64(tableName, "first_fee")
-	_pmsFeightTemplate.ContinueWeight = field.NewFloat64(tableName, "continue_weight")
-	_pmsFeightTemplate.ContinmeFee = field.NewFloat64(tableName, "continme_fee")
+	_pmsFeightTemplate.FirstWeight = field.NewInt64(tableName, "first_weight")
+	_pmsFeightTemplate.FirstFee = field.NewInt64(tableName, "first_fee")
+	_pmsFeightTemplate.ContinueWeight = field.NewInt64(tableName, "continue_weight")
+	_pmsFeightTemplate.ContinueFee = field.NewInt64(tableName, "continue_fee")
 	_pmsFeightTemplate.Dest = field.NewString(tableName, "dest")
 
 	_pmsFeightTemplate.fillFieldMap()
@@ -47,12 +47,12 @@ type pmsFeightTemplate struct {
 
 	ALL            field.Asterisk
 	ID             field.Int64
-	Name           field.String  // 运费模版名称
-	ChargeType     field.Int32   // 计费类型:0->按重量；1->按件数
-	FirstWeight    field.Float64 // 首重kg
-	FirstFee       field.Float64 // 首费（元）
-	ContinueWeight field.Float64
-	ContinmeFee    field.Float64
+	Name           field.String // 运费模版名称
+	ChargeType     field.Int32  // 计费类型:0->按重量；1->按件数
+	FirstWeight    field.Int64  // 首重kg
+	FirstFee       field.Int64  // 首费（元）
+	ContinueWeight field.Int64
+	ContinueFee    field.Int64
 	Dest           field.String // 目的地（省、市）
 
 	fieldMap map[string]field.Expr
@@ -73,10 +73,10 @@ func (p *pmsFeightTemplate) updateTableName(table string) *pmsFeightTemplate {
 	p.ID = field.NewInt64(table, "id")
 	p.Name = field.NewString(table, "name")
 	p.ChargeType = field.NewInt32(table, "charge_type")
-	p.FirstWeight = field.NewFloat64(table, "first_weight")
-	p.FirstFee = field.NewFloat64(table, "first_fee")
-	p.ContinueWeight = field.NewFloat64(table, "continue_weight")
-	p.ContinmeFee = field.NewFloat64(table, "continme_fee")
+	p.FirstWeight = field.NewInt64(table, "first_weight")
+	p.FirstFee = field.NewInt64(table, "first_fee")
+	p.ContinueWeight = field.NewInt64(table, "continue_weight")
+	p.ContinueFee = field.NewInt64(table, "continue_fee")
 	p.Dest = field.NewString(table, "dest")
 
 	p.fillFieldMap()
@@ -113,7 +113,7 @@ func (p *pmsFeightTemplate) fillFieldMap() {
 	p.fieldMap["first_weight"] = p.FirstWeight
 	p.fieldMap["first_fee"] = p.FirstFee
 	p.fieldMap["continue_weight"] = p.ContinueWeight
-	p.fieldMap["continme_fee"] = p.ContinmeFee
+	p.fieldMap["continue_fee"] = p.ContinueFee
 	p.fieldMap["dest"] = p.Dest
 }
 
