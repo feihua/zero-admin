@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -38,8 +38,7 @@ func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*t
 	})
 
 	if err != nil {
-		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询退货申请列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %+v,查询退货申请列表异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("查询退货申请列表失败")
 	}
 

@@ -2,9 +2,9 @@ package attributecategory
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -34,8 +34,7 @@ func (l *ProductAttributecategoryListLogic) ProductAttributecategoryList(req *ty
 	})
 
 	if er != nil {
-		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询属性分类列表异常:%s", string(data), er.Error())
+		logc.Errorf(l.ctx, "参数: %+v,查询属性分类列表异常:%s", req, er.Error())
 		return nil, errorx.NewDefaultError("查询属性分类失败")
 	}
 

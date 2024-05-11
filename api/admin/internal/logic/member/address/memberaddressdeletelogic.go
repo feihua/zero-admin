@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -31,7 +32,7 @@ func (l *MemberAddressDeleteLogic) MemberAddressDelete(req types.DeleteMemberAdd
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除会员地址异常:%s", req.Id, err.Error())
+		logc.Errorf(l.ctx, "根据Id: %+v,删除会员地址异常:%s", req.Id, err.Error())
 		return nil, errorx.NewDefaultError("删除会员地址失败")
 	}
 	return &types.DeleteMemberAddressResp{

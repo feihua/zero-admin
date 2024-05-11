@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -37,7 +38,7 @@ func (l *DeptDeleteLogic) DeptDelete(req types.DeleteDeptReq) (*types.DeleteDept
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据deptId: %d,删除部门异常:%s", req.Ids, err.Error())
+		logc.Errorf(l.ctx, "根据deptId: %d,删除部门异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除机构失败")
 	}
 

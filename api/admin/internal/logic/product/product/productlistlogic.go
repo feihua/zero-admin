@@ -2,12 +2,12 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
 	"strings"
 
@@ -41,8 +41,7 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 	})
 
 	if err != nil {
-		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询商品信息列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %+v,查询商品信息列表异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("查询商品信息失败")
 	}
 

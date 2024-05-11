@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -39,7 +40,7 @@ func (l *BrandDetailLogic) BrandDetail(req *types.BrandDetailReq) (*types.BrandD
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("查询商品品牌详情异常:%s", err.Error())
+		logc.Errorf(l.ctx, "查询商品品牌详情异常:%s", err.Error())
 		return nil, errors.New("查询商品品牌详情失败")
 	}
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -37,7 +38,7 @@ func (l *JobDeleteLogic) JobDelete(req types.DeleteJobReq) (*types.DeleteJobResp
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据jobId: %d,删除岗位异常:%s", req.Ids, err.Error())
+		logc.Errorf(l.ctx, "根据jobId: %d,删除岗位异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除岗位失败")
 	}
 

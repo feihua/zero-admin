@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -37,7 +38,7 @@ func (l *DictDeleteLogic) DictDelete(req types.DeleteDictReq) (*types.DeleteDict
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据dictId: %d,删除字典异常:%s", req.Ids, err.Error())
+		logc.Errorf(l.ctx, "根据dictId: %d,删除字典异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除字典失败")
 	}
 

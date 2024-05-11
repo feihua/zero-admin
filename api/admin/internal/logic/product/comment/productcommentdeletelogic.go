@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -31,7 +32,7 @@ func (l *ProductCommentDeleteLogic) ProductCommentDelete(req types.DeleteProduct
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除商品评价异常:%s", req.Ids, err.Error())
+		logc.Errorf(l.ctx, "根据Id: %+v,删除商品评价异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除商品评价失败")
 	}
 

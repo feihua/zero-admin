@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,7 +31,7 @@ func (l *CompayAddressDeleteLogic) CompayAddressDelete(req types.DeleteCompayAdd
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除公司地址异常:%s", req.Ids, err.Error())
+		logc.Errorf(l.ctx, "根据Id: %+v,删除公司地址异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除公司地址失败")
 	}
 

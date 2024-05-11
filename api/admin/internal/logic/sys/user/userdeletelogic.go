@@ -38,7 +38,7 @@ func (l *UserDeleteLogic) UserDelete(req types.DeleteUserReq) (*types.DeleteUser
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据userId: %d,删除用户异常:%s", req.Ids, err.Error())
+		logc.Errorf(l.ctx, "根据userId: %d,删除用户异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除用户失败")
 	}
 

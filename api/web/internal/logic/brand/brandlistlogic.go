@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/web/internal/svc"
 	"github.com/feihua/zero-admin/api/web/internal/types"
@@ -42,7 +43,7 @@ func (l *BrandListLogic) BrandList() (*types.BrandListResp, error) {
 	resp, err := l.svcCtx.BrandService.BrandList(l.ctx, req)
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("参数: %+v,查询商品品牌列表异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "参数: %+v,查询商品品牌列表异常:%s", req, err.Error())
 		return nil, errors.New("查询商品品牌失败")
 	}
 

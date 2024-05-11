@@ -2,9 +2,9 @@ package home
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -38,8 +38,7 @@ func (l *RecommendProductListLogic) RecommendProductList(req *types.RecommendPro
 	})
 
 	if err != nil {
-		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询商品信息列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %s,查询商品信息列表异常:%s", req, err.Error())
 		return nil, errors.New("查询商品信息失败")
 	}
 

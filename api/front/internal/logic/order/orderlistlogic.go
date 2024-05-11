@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -42,8 +43,7 @@ func (l *OrderListLogic) OrderList(req *types.OrderListReq) (*types.OrderListRes
 	})
 
 	if err != nil {
-		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询订单信息列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %s,查询订单信息列表异常:%s", req, err.Error())
 		return nil, errors.New("查询订单信息失败")
 	}
 

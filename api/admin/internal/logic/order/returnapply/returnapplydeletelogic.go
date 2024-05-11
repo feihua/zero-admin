@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,7 +31,7 @@ func (l *ReturnApplyDeleteLogic) ReturnApplyDelete(req types.DeleteReturnApplyRe
 	})
 
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("根据Id: %d,删除退货申请异常:%s", req.Ids, err.Error())
+		logc.Errorf(l.ctx, "根据Id: %+v,删除退货申请异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除退货申请失败")
 	}
 

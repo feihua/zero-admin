@@ -2,7 +2,6 @@ package user
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -37,8 +36,7 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginResp, error) {
 
 	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
-		reqStr, _ := json.Marshal(req)
-		logc.Errorf(l.ctx, "用户名或密码不能为空,请求信息失败,参数:%s", reqStr)
+		logc.Errorf(l.ctx, "用户名或密码不能为空,请求信息失败,参数:%s", req)
 		return nil, errorx.NewDefaultError("用户名或密码不能为空")
 	}
 
