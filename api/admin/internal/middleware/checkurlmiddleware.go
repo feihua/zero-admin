@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
-	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
@@ -22,16 +22,17 @@ func NewCheckUrlMiddleware(Redis *redis.Redis) *CheckUrlMiddleware {
 func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
+		uri := strings.Split(r.RequestURI, "?")[0]
 		//判断请求header中是否携带了x-user-id
 		userId := r.Context().Value("userId").(json.Number).String()
 		userName := r.Context().Value("userName").(string)
 		if userId == "" || userName == "" {
-			logx.WithContext(r.Context()).Errorf("缺少必要参数x-user-id")
+			logc.Errorf(r.Context(), "缺少必要参数x-user-id")
 			httpx.Error(w, errorx.NewDefaultError("缺少必要参数x-user-id"))
 			return
 		}
 
-		if r.RequestURI == "/api/sys/user/info" || r.RequestURI == "/api/sys/user/queryAllRelations" || r.RequestURI == "/api/sys/role/queryMenuByRoleId" {
+		if uri == "/api/sys/user/info" || uri == "/api/sys/user/queryAllRelations" || uri == "/api/sys/role/queryMenuByRoleId" {
 			next(w, r)
 			return
 		}
@@ -39,13 +40,13 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		//获取用户能访问的url
 		urls, err := m.Redis.Get(userId)
 		if err != nil {
-			logx.WithContext(r.Context()).Errorf("用户：%s,获取redis连接异常", userName)
+			logc.Errorf(r.Context(), "用户：%s,获取redis连接异常", userName)
 			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName)))
 			return
 		}
 
 		if len(strings.TrimSpace(urls)) == 0 {
-			logx.WithContext(r.Context()).Errorf("用户: %s,还没有登录", userName)
+			logc.Errorf(r.Context(), "用户: %s,还没有登录", userName)
 			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,还没有登录,请先登录", userName)))
 			return
 		}
@@ -54,15 +55,15 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 
 		b := false
 		for _, url := range backUrls {
-			if url == r.RequestURI {
+			if url == uri {
 				b = true
 				break
 			}
 		}
 
 		if !b {
-			logx.WithContext(r.Context()).Errorf("用户: %s,没有访问: %s路径的权限", userName, r.RequestURI)
-			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,没有访问: %s,路径的的权限,请联系管理员", userName, r.RequestURI)))
+			logc.Errorf(r.Context(), "用户: %s,没有访问: %s路径的权限", userName, uri)
+			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,没有访问: %s,路径的的权限,请联系管理员", userName, uri)))
 			return
 		}
 
