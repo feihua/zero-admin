@@ -62,15 +62,20 @@ type (
 	prefix: /api/member/integrationconsumesetting
 )
 service admin-api {
+
+	//
 	@handler IntegrationConsumeSettingAdd
-	post /add (addIntegrationConsumeSettingReq) returns (addIntegrationConsumeSettingResp)
-	
+	post /addIntegrationConsumeSetting (addIntegrationConsumeSettingReq) returns (addIntegrationConsumeSettingResp)
+
+	//
 	@handler IntegrationConsumeSettingList
-	get /list (ListIntegrationConsumeSettingReq) returns (ListIntegrationConsumeSettingResp)
-	
+	get /queryIntegrationConsumeSettingList (ListIntegrationConsumeSettingReq) returns (ListIntegrationConsumeSettingResp)
+
+	//
 	@handler IntegrationConsumeSettingUpdate
-	post /update (UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp)
-	
+	post /updateIntegrationConsumeSetting (UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp)
+
+	//
 	@handler IntegrationConsumeSettingDelete
-	get /delete (DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp)
+	get /deleteIntegrationConsumeSetting (DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp)
 }

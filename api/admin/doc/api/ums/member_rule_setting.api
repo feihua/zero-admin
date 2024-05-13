@@ -68,15 +68,20 @@ type (
 	prefix: /api/member/rulesetting
 )
 service admin-api {
+
+	//
 	@handler MemberRuleSettingAdd
-	post /add (addMemberRuleSettingReq) returns (addMemberRuleSettingResp)
-	
+	post /addMemberRuleSetting (addMemberRuleSettingReq) returns (addMemberRuleSettingResp)
+
+	//
 	@handler MemberRuleSettingList
-	get /list (ListMemberRuleSettingReq) returns (ListMemberRuleSettingResp)
-	
+	get /queryMemberRuleSettingList (ListMemberRuleSettingReq) returns (ListMemberRuleSettingResp)
+
+	//
 	@handler MemberRuleSettingUpdate
-	post /update (UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp)
-	
+	post /updateMemberRuleSetting (UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp)
+
+	//
 	@handler MemberRuleSettingDelete
-	get /delete (DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp)
+	get /deleteMemberRuleSetting (DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp)
 }

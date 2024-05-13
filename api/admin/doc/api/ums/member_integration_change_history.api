@@ -71,15 +71,20 @@ type (
 	prefix: /api/member/integrationchangehistory
 )
 service admin-api {
+
+	//
 	@handler IntegrationChangeHistoryAdd
-	post /add (addIntegrationChangeHistoryReq) returns (addIntegrationChangeHistoryResp)
-	
+	post /addIntegrationChangeHistory (addIntegrationChangeHistoryReq) returns (addIntegrationChangeHistoryResp)
+
+	//
 	@handler IntegrationChangeHistoryList
-	get /list (ListIntegrationChangeHistoryReq) returns (ListIntegrationChangeHistoryResp)
-	
+	get /queryIntegrationChangeHistoryList (ListIntegrationChangeHistoryReq) returns (ListIntegrationChangeHistoryResp)
+
+	//
 	@handler IntegrationChangeHistoryUpdate
-	post /update (UpdateIntegrationChangeHistoryReq) returns (UpdateIntegrationChangeHistoryResp)
-	
+	post /updateIntegrationChangeHistory (UpdateIntegrationChangeHistoryReq) returns (UpdateIntegrationChangeHistoryResp)
+
+	//
 	@handler IntegrationChangeHistoryDelete
-	get /delete (DeleteIntegrationChangeHistoryReq) returns (DeleteIntegrationChangeHistoryResp)
+	get /deleteIntegrationChangeHistory (DeleteIntegrationChangeHistoryReq) returns (DeleteIntegrationChangeHistoryResp)
 }

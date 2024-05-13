@@ -99,16 +99,20 @@ type (
 	prefix: /api/cms/subject
 )
 service admin-api {
+
+	//
 	@handler SubjectAdd
-	post /add (addSubjectReq) returns (addSubjectResp)
+	post /addSubject (addSubjectReq) returns (addSubjectResp)
 
 	//获取商品专题
 	@handler SubjectList
 	get /querySubjectList (ListSubjectReq) returns (ListSubjectResp)
-	
+
+	//
 	@handler SubjectUpdate
-	post /update (UpdateSubjectReq) returns (UpdateSubjectResp)
-	
+	post /updateSubject (UpdateSubjectReq) returns (UpdateSubjectResp)
+
+	//
 	@handler SubjectDelete
-	get /delete (DeleteSubjectReq) returns (DeleteSubjectResp)
+	get /deleteSubject (DeleteSubjectReq) returns (DeleteSubjectResp)
 }

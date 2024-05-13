@@ -64,15 +64,20 @@ type (
 	prefix: /api/order/operatehistory
 )
 service admin-api {
+
+	//
 	@handler OperateHistoryAdd
-	post /add (addOperateHistoryReq) returns (addOperateHistoryResp)
-	
+	post /addOperateHistory (addOperateHistoryReq) returns (addOperateHistoryResp)
+
+	//
 	@handler OperateHistoryList
-	get /list (ListOperateHistoryReq) returns (ListOperateHistoryResp)
-	
+	get /queryOperateHistoryList (ListOperateHistoryReq) returns (ListOperateHistoryResp)
+
+	//
 	@handler OperateHistoryUpdate
-	post /update (UpdateOperateHistoryReq) returns (UpdateOperateHistoryResp)
-	
+	post /updateOperateHistory (UpdateOperateHistoryReq) returns (UpdateOperateHistoryResp)
+
+	//
 	@handler OperateHistoryDelete
-	get /delete (DeleteOperateHistoryReq) returns (DeleteOperateHistoryResp)
+	get /deleteOperateHistory (DeleteOperateHistoryReq) returns (DeleteOperateHistoryResp)
 }

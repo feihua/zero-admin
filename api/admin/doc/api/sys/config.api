@@ -73,15 +73,20 @@ type (
 	prefix: /api/sys/config
 )
 service admin-api {
+
+	//
 	@handler ConfigAdd
-	post /add (addConfigReq) returns (addConfigResp)
-	
+	post /addConfig (addConfigReq) returns (addConfigResp)
+
+	//
 	@handler ConfigList
-	get /list (ListConfigReq) returns (ListConfigResp)
-	
+	get /queryConfigList (ListConfigReq) returns (ListConfigResp)
+
+	//
 	@handler ConfigUpdate
-	post /update (UpdateConfigReq) returns (UpdateConfigResp)
-	
+	post /updateConfig (UpdateConfigReq) returns (UpdateConfigResp)
+
+	//
 	@handler ConfigDelete
-	get /delete (DeleteConfigReq) returns (DeleteConfigResp)
+	get /deleteConfig (DeleteConfigReq) returns (DeleteConfigResp)
 }

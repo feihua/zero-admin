@@ -69,15 +69,20 @@ type (
 	prefix: /api/sys/job
 )
 service admin-api {
+
+	//
 	@handler JobAdd
-	post /add (addJobReq) returns (addJobResp)
-	
+	post /addJob (addJobReq) returns (addJobResp)
+
+	//
 	@handler JobList
-	get /list (ListJobReq) returns (ListJobResp)
-	
+	get /queryJobList (ListJobReq) returns (ListJobResp)
+
+	//
 	@handler JobUpdate
-	post /update (UpdateJobReq) returns (UpdateJobResp)
-	
+	post /updateJob (UpdateJobReq) returns (UpdateJobResp)
+
+	//
 	@handler JobDelete
-	get /delete (DeleteJobReq) returns (DeleteJobResp)
+	get /deleteJob (DeleteJobReq) returns (DeleteJobResp)
 }

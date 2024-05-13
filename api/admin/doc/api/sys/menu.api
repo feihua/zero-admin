@@ -96,17 +96,17 @@ service admin-api {
 
 	//新增菜单信息
 	@handler MenuAdd
-	post /add (addMenuReq) returns (addMenuResp)
+	post /addMenu (addMenuReq) returns (addMenuResp)
 
 	//菜单列表信息
 	@handler MenuList
-	get /list (ListMenuReq) returns (ListMenuResp)
+	get /queryMenuList (ListMenuReq) returns (ListMenuResp)
 
 	//更新菜单信息
 	@handler MenuUpdate
-	post /update (UpdateMenuReq) returns (UpdateMenuResp)
+	post /updateMenu (UpdateMenuReq) returns (UpdateMenuResp)
 
 	//删除菜单信息
 	@handler MenuDelete
-	get /delete (DeleteMenuReq) returns (DeleteMenuResp)
+	get /deleteMenu (DeleteMenuReq) returns (DeleteMenuResp)
 }

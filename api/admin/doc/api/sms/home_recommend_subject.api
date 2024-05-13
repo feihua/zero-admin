@@ -61,15 +61,20 @@ type (
 	prefix: /api/sms/homerecommendsubject
 )
 service admin-api {
+
+	//
 	@handler HomeRecommendSubjectAdd
-	post /add (addHomeRecommendSubjectReq) returns (addHomeRecommendSubjectResp)
-	
+	post /addHomeRecommendSubject (addHomeRecommendSubjectReq) returns (addHomeRecommendSubjectResp)
+
+	//
 	@handler HomeRecommendSubjectList
-	get /list (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
-	
+	get /queryHomeRecommendSubjectList (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
+
+	//
 	@handler HomeRecommendSubjectUpdate
-	post /update (UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp)
-	
+	post /updateHomeRecommendSubject (UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp)
+
+	//
 	@handler HomeRecommendSubjectDelete
-	get /delete (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
+	get /deleteHomeRecommendSubject (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
 }

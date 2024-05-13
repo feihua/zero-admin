@@ -81,15 +81,20 @@ type (
 	prefix: /api/sms/couponhistory
 )
 service admin-api {
+
+	//
 	@handler CouponHistoryAdd
-	post /add (addCouponHistoryReq) returns (addCouponHistoryResp)
-	
+	post /addCouponHistory (addCouponHistoryReq) returns (addCouponHistoryResp)
+
+	//
 	@handler CouponHistoryList
-	get /list (ListCouponHistoryReq) returns (ListCouponHistoryResp)
-	
+	get /queryCouponHistoryList (ListCouponHistoryReq) returns (ListCouponHistoryResp)
+
+	//
 	@handler CouponHistoryUpdate
-	post /update (UpdateCouponHistoryReq) returns (UpdateCouponHistoryResp)
-	
+	post /updateCouponHistory (UpdateCouponHistoryReq) returns (UpdateCouponHistoryResp)
+
+	//
 	@handler CouponHistoryDelete
-	get /delete (DeleteCouponHistoryReq) returns (DeleteCouponHistoryResp)
+	get /deleteCouponHistory (DeleteCouponHistoryReq) returns (DeleteCouponHistoryResp)
 }

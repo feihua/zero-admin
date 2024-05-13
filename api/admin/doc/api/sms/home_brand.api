@@ -62,15 +62,20 @@ type (
 	prefix: /api/sms/homebrand
 )
 service admin-api {
+
+	//
 	@handler HomeBrandAdd
-	post /add (addHomeBrandReq) returns (addHomeBrandResp)
-	
+	post /addHomeBrand (addHomeBrandReq) returns (addHomeBrandResp)
+
+	//
 	@handler HomeBrandList
-	get /list (ListHomeBrandReq) returns (ListHomeBrandResp)
-	
+	get /queryHomeBrandList (ListHomeBrandReq) returns (ListHomeBrandResp)
+
+	//
 	@handler HomeBrandUpdate
-	post /update (UpdateHomeBrandReq) returns (UpdateHomeBrandResp)
-	
+	post /updateHomeBrand (UpdateHomeBrandReq) returns (UpdateHomeBrandResp)
+
+	//
 	@handler HomeBrandDelete
-	get /delete (DeleteHomeBrandReq) returns (DeleteHomeBrandResp)
+	get /deleteHomeBrand (DeleteHomeBrandReq) returns (DeleteHomeBrandResp)
 }

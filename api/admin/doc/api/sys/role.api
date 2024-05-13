@@ -97,19 +97,19 @@ type (
 service admin-api {
 	//新增角色信息
 	@handler RoleAdd
-	post /add (addRoleReq) returns (addRoleResp)
+	post /addRole (addRoleReq) returns (addRoleResp)
 
 	//角色列表信息
 	@handler RoleList
-	get /list (ListRoleReq) returns (ListRoleResp)
+	get /queryRoleList (ListRoleReq) returns (ListRoleResp)
 
 	//更新角色信息
 	@handler RoleUpdate
-	post /update (UpdateRoleReq) returns (UpdateRoleResp)
+	post /updateRole (UpdateRoleReq) returns (UpdateRoleResp)
 
 	//删除角色信息
 	@handler RoleDelete
-	get /delete (DeleteRoleReq) returns (DeleteRoleResp)
+	get /deleteRole (DeleteRoleReq) returns (DeleteRoleResp)
 
 	//查询角色与菜单的关联
 	@handler QueryMenuByRoleId

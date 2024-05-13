@@ -61,15 +61,20 @@ type (
 	prefix: /api/sms/homerecommendproduct
 )
 service admin-api {
+
+	//
 	@handler HomeRecommendProductAdd
-	post /add (addHomeRecommendProductReq) returns (addHomeRecommendProductResp)
-	
+	post /addHomeRecommendProduct (addHomeRecommendProductReq) returns (addHomeRecommendProductResp)
+
+	//
 	@handler HomeRecommendProductList
-	get /list (ListHomeRecommendProductReq) returns (ListHomeRecommendProductResp)
-	
+	get /queryHomeRecommendProductList (ListHomeRecommendProductReq) returns (ListHomeRecommendProductResp)
+
+	//
 	@handler HomeRecommendProductUpdate
-	post /update (UpdateHomeRecommendProductReq) returns (UpdateHomeRecommendProductResp)
-	
+	post /updateHomeRecommendProduct (UpdateHomeRecommendProductReq) returns (UpdateHomeRecommendProductResp)
+
+	//
 	@handler HomeRecommendProductDelete
-	get /delete (DeleteHomeRecommendProductReq) returns (DeleteHomeRecommendProductResp)
+	get /deleteHomeRecommendProduct (DeleteHomeRecommendProductReq) returns (DeleteHomeRecommendProductResp)
 }

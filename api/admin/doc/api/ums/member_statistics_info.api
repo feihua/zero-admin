@@ -95,15 +95,20 @@ type (
 	prefix: /api/member/statistics
 )
 service admin-api {
+
+	//
 	@handler MemberStatisticsInfoAdd
-	post /add (addMemberStatisticsInfoReq) returns (addMemberStatisticsInfoResp)
-	
+	post /addMemberStatisticsInfo (addMemberStatisticsInfoReq) returns (addMemberStatisticsInfoResp)
+
+	//
 	@handler MemberStatisticsInfoList
-	get /list (ListMemberStatisticsInfoReq) returns (ListMemberStatisticsInfoResp)
-	
+	get /queryMemberStatisticsInfoList (ListMemberStatisticsInfoReq) returns (ListMemberStatisticsInfoResp)
+
+	//
 	@handler MemberStatisticsInfoUpdate
-	post /update (UpdateMemberStatisticsInfoReq) returns (UpdateMemberStatisticsInfoResp)
-	
+	post /updateMemberStatisticsInfo (UpdateMemberStatisticsInfoReq) returns (UpdateMemberStatisticsInfoResp)
+
+	//
 	@handler MemberStatisticsInfoDelete
-	get /delete (DeleteMemberStatisticsInfoReq) returns (DeleteMemberStatisticsInfoResp)
+	get /deleteMemberStatisticsInfo (DeleteMemberStatisticsInfoReq) returns (DeleteMemberStatisticsInfoResp)
 }

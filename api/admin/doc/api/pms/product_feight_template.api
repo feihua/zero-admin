@@ -71,15 +71,20 @@ type (
 	prefix: /api/product/feighttemplate
 )
 service admin-api {
+
+	//
 	@handler FeightTemplateAdd
-	post /add (addFeightTemplateReq) returns (addFeightTemplateResp)
-	
+	post /addFeightTemplate (addFeightTemplateReq) returns (addFeightTemplateResp)
+
+	//
 	@handler FeightTemplateList
-	get /list (ListFeightTemplateReq) returns (ListFeightTemplateResp)
-	
+	get /queryFeightTemplateList (ListFeightTemplateReq) returns (ListFeightTemplateResp)
+
+	//
 	@handler FeightTemplateUpdate
-	post /update (UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp)
-	
+	post /updateFeightTemplate (UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp)
+
+	//
 	@handler FeightTemplateDelete
-	get /delete (DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp)
+	get /deleteFeightTemplate (DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp)
 }

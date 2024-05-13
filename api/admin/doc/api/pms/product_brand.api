@@ -81,15 +81,20 @@ type (
 	prefix: /api/product/brand
 )
 service admin-api {
+
+	//
 	@handler ProductBrandAdd
-	post /add (addProductBrandReq) returns (addProductBrandResp)
-	
+	post /addProductBrand (addProductBrandReq) returns (addProductBrandResp)
+
+	//
 	@handler ProductBrandList
-	get /list (ListProductBrandReq) returns (ListProductBrandResp)
-	
+	get /queryProductBrandList (ListProductBrandReq) returns (ListProductBrandResp)
+
+	//
 	@handler ProductBrandUpdate
-	post /update (UpdateProductBrandReq) returns (UpdateProductBrandResp)
-	
+	post /updateProductBrand (UpdateProductBrandReq) returns (UpdateProductBrandResp)
+
+	//
 	@handler ProductBrandDelete
-	get /delete (DeleteProductBrandReq) returns (DeleteProductBrandResp)
+	get /deleteProductBrand (DeleteProductBrandReq) returns (DeleteProductBrandResp)
 }

@@ -234,15 +234,20 @@ type (
 	prefix: /api/product/product
 )
 service admin-api {
+
+	//
 	@handler ProductAdd
-	post /add (addProductReq) returns (addProductResp)
-	
+	post /addProduct (addProductReq) returns (addProductResp)
+
+	//
 	@handler ProductList
-	get /list (ListProductReq) returns (ListProductResp)
-	
+	get /queryProductList (ListProductReq) returns (ListProductResp)
+
+	//
 	@handler ProductUpdate
-	post /update (UpdateProductReq) returns (UpdateProductResp)
-	
+	post /updateProduct (UpdateProductReq) returns (UpdateProductResp)
+
+	//
 	@handler ProductDelete
-	get /delete (DeleteProductReq) returns (DeleteProductResp)
+	get /deleteProduct (DeleteProductReq) returns (DeleteProductResp)
 }

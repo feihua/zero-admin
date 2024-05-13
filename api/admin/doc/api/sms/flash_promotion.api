@@ -67,15 +67,20 @@ type (
 	prefix: /api/sms/flashpromotion
 )
 service admin-api {
+
+	//
 	@handler FlashPromotionAdd
-	post /add (addFlashPromotionReq) returns (addFlashPromotionResp)
-	
+	post /addFlashPromotion (addFlashPromotionReq) returns (addFlashPromotionResp)
+
+	//
 	@handler FlashPromotionList
-	get /list (ListFlashPromotionReq) returns (ListFlashPromotionResp)
-	
+	get /queryFlashPromotionList (ListFlashPromotionReq) returns (ListFlashPromotionResp)
+
+	//
 	@handler FlashPromotionUpdate
-	post /update (UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp)
-	
+	post /updateFlashPromotion (UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp)
+
+	//
 	@handler FlashPromotionDelete
-	get /delete (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
+	get /deleteFlashPromotion (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
 }

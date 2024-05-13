@@ -111,15 +111,20 @@ type (
 	prefix: /api/order/returnapply
 )
 service admin-api {
+
+	//
 	@handler ReturnApplyAdd
-	post /add (addReturnApplyReq) returns (addReturnApplyResp)
-	
+	post /addReturnApply (addReturnApplyReq) returns (addReturnApplyResp)
+
+	//
 	@handler ReturnApplyList
-	get /list (ListReturnApplyReq) returns (ListReturnApplyResp)
-	
+	get /queryReturnApplyList (ListReturnApplyReq) returns (ListReturnApplyResp)
+
+	//
 	@handler ReturnApplyUpdate
-	post /update (UpdateReturnApplyReq) returns (UpdateReturnApplyResp)
-	
+	post /updateReturnApply (UpdateReturnApplyReq) returns (UpdateReturnApplyResp)
+
+	//
 	@handler ReturnApplyDelete
-	get /delete (DeleteReturnApplyReq) returns (DeleteReturnApplyResp)
+	get /deleteReturnApply (DeleteReturnApplyReq) returns (DeleteReturnApplyResp)
 }

@@ -59,15 +59,20 @@ type (
 	prefix: /api/member/tag
 )
 service admin-api {
+
+	//
 	@handler MemberTagAdd
-	post /add (addMemberTagReq) returns (addMemberTagResp)
-	
+	post /addMemberTag (addMemberTagReq) returns (addMemberTagResp)
+
+	//
 	@handler MemberTagList
-	get /list (ListMemberTagReq) returns (ListMemberTagResp)
-	
+	get /queryMemberTagList (ListMemberTagReq) returns (ListMemberTagResp)
+
+	//
 	@handler MemberTagUpdate
-	post /update (UpdateMemberTagReq) returns (UpdateMemberTagResp)
-	
+	post /updateMemberTag (UpdateMemberTagReq) returns (UpdateMemberTagResp)
+
+	//
 	@handler MemberTagDelete
-	get /delete (DeleteMemberTagReq) returns (DeleteMemberTagResp)
+	get /deleteMemberTag (DeleteMemberTagReq) returns (DeleteMemberTagResp)
 }

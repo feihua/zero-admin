@@ -62,15 +62,20 @@ type (
 	prefix: /api/member/task
 )
 service admin-api {
+
+	//
 	@handler MemberTaskAdd
-	post /add (addMemberTaskReq) returns (addMemberTaskResp)
-	
+	post /addMemberTask (addMemberTaskReq) returns (addMemberTaskResp)
+
+	//
 	@handler MemberTaskList
-	get /list (ListMemberTaskReq) returns (ListMemberTaskResp)
-	
+	get /queryMemberTaskList (ListMemberTaskReq) returns (ListMemberTaskResp)
+
+	//
 	@handler MemberTaskUpdate
-	post /update (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
-	
+	post /updateMemberTask (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
+
+	//
 	@handler MemberTaskDelete
-	get /delete (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
+	get /deleteMemberTask (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
 }

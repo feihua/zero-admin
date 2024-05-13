@@ -84,15 +84,20 @@ type (
 	prefix: /api/sms/homeadvertise
 )
 service admin-api {
+
+	//
 	@handler HomeAdvertiseAdd
-	post /add (addHomeAdvertiseReq) returns (addHomeAdvertiseResp)
-	
+	post /addHomeAdvertise (addHomeAdvertiseReq) returns (addHomeAdvertiseResp)
+
+	//
 	@handler HomeAdvertiseList
-	get /list (ListHomeAdvertiseReq) returns (ListHomeAdvertiseResp)
-	
+	get /queryHomeAdvertiseList (ListHomeAdvertiseReq) returns (ListHomeAdvertiseResp)
+
+	//
 	@handler HomeAdvertiseUpdate
-	post /update (UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp)
-	
+	post /updateHomeAdvertise (UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp)
+
+	//
 	@handler HomeAdvertiseDelete
-	get /delete (DeleteHomeAdvertiseReq) returns (DeleteHomeAdvertiseResp)
+	get /deleteHomeAdvertise (DeleteHomeAdvertiseReq) returns (DeleteHomeAdvertiseResp)
 }

@@ -60,11 +60,14 @@ type (
 	prefix: /api/sys/loginLog
 )
 service admin-api {
+
+	//
 	@handler LoginLogList
-	get /list (ListLoginLogReq) returns (ListLoginLogResp)
-	
+	get /queryLoginLogList (ListLoginLogReq) returns (ListLoginLogResp)
+
+	//
 	@handler LoginLogDelete
-	get /delete (DeleteLoginLogReq) returns (DeleteLoginLogResp)
+	get /deleteLoginLog (DeleteLoginLogReq) returns (DeleteLoginLogResp)
 
 	// 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
 	@handler StatisticsLoginLog

@@ -62,15 +62,20 @@ type (
 	prefix: /api/product/memberprice
 )
 service admin-api {
+
+	//
 	@handler MemberPriceAdd
-	post /add (addMemberPriceReq) returns (addMemberPriceResp)
-	
+	post /addMemberPrice (addMemberPriceReq) returns (addMemberPriceResp)
+
+	//
 	@handler MemberPriceList
-	get /list (ListMemberPriceReq) returns (ListMemberPriceResp)
-	
+	get /queryMemberPriceList (ListMemberPriceReq) returns (ListMemberPriceResp)
+
+	//
 	@handler MemberPriceUpdate
-	post /update (UpdateMemberPriceReq) returns (UpdateMemberPriceResp)
-	
+	post /updateMemberPrice (UpdateMemberPriceReq) returns (UpdateMemberPriceResp)
+
+	//
 	@handler MemberPriceDelete
-	get /delete (DeleteMemberPriceReq) returns (DeleteMemberPriceResp)
+	get /deleteMemberPrice (DeleteMemberPriceReq) returns (DeleteMemberPriceResp)
 }

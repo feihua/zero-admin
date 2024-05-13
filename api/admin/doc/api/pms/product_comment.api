@@ -92,15 +92,20 @@ type (
 	prefix: /api/product/comment
 )
 service admin-api {
+
+	//
 	@handler ProductCommentAdd
-	post /add (addProductCommentReq) returns (addProductCommentResp)
-	
+	post /addProductComment (addProductCommentReq) returns (addProductCommentResp)
+
+	//
 	@handler ProductCommentList
-	get /list (ListProductCommentReq) returns (ListProductCommentResp)
-	
+	get /queryProductCommentList (ListProductCommentReq) returns (ListProductCommentResp)
+
+	//
 	@handler ProductCommentUpdate
-	post /update (UpdateProductCommentReq) returns (UpdateProductCommentResp)
-	
+	post /updateProductComment (UpdateProductCommentReq) returns (UpdateProductCommentResp)
+
+	//
 	@handler ProductCommentDelete
-	get /delete (DeleteProductCommentReq) returns (DeleteProductCommentResp)
+	get /deleteProductComment (DeleteProductCommentReq) returns (DeleteProductCommentResp)
 }

@@ -79,15 +79,20 @@ type (
 	prefix: /api/sys/dict
 )
 service admin-api {
+
+	//
 	@handler DictAdd
 	post /add (addDictReq) returns (addDictResp)
-	
+
+	//
 	@handler DictList
-	get /list (ListDictReq) returns (ListDictResp)
-	
+	get /queryDictList (ListDictReq) returns (ListDictResp)
+
+	//
 	@handler DictUpdate
-	post /update (UpdateDictReq) returns (UpdateDictResp)
-	
+	post /updateDict (UpdateDictReq) returns (UpdateDictResp)
+
+	//
 	@handler DictDelete
-	get /delete (DeleteDictReq) returns (DeleteDictResp)
+	get /deleteDict (DeleteDictReq) returns (DeleteDictResp)
 }

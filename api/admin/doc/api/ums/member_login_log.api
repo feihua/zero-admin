@@ -57,12 +57,16 @@ type (
 	prefix: /api/member/loginlog
 )
 service admin-api {
-	@handler MemberLoginLogAdd
-	post /add (addMemberLoginLogReq) returns (addMemberLoginLogResp)
-	
-	@handler MemberLoginLogList
-	get /list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
 
-@handler MemberLoginLogDelete
-	get /delete (DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp)
+	//
+	@handler MemberLoginLogAdd
+	post /addMemberLoginLog (addMemberLoginLogReq) returns (addMemberLoginLogResp)
+
+	//
+	@handler MemberLoginLogList
+	get /queryMemberLoginLogList (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
+
+	//
+	@handler MemberLoginLogDelete
+	get /deleteMemberLoginLog (DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp)
 }

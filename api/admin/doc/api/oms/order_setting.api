@@ -65,15 +65,20 @@ type (
 	prefix: /api/order/setting
 )
 service admin-api {
+
+	//
 	@handler OrderSettingAdd
-	post /add (addOrderSettingReq) returns (addOrderSettingResp)
-	
+	post /addOrderSetting (addOrderSettingReq) returns (addOrderSettingResp)
+
+	//
 	@handler OrderSettingList
-	get /list (ListOrderSettingReq) returns (ListOrderSettingResp)
-	
+	get /queryOrderSettingList (ListOrderSettingReq) returns (ListOrderSettingResp)
+
+	//
 	@handler OrderSettingUpdate
-	post /update (UpdateOrderSettingReq) returns (UpdateOrderSettingResp)
-	
+	post /updateOrderSetting (UpdateOrderSettingReq) returns (UpdateOrderSettingResp)
+
+	//
 	@handler OrderSettingDelete
-	get /delete (DeleteOrderSettingReq) returns (DeleteOrderSettingResp)
+	get /deleteOrderSetting (DeleteOrderSettingReq) returns (DeleteOrderSettingResp)
 }

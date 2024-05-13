@@ -103,15 +103,20 @@ type (
 	prefix: /api/sms/coupon
 )
 service admin-api {
+
+	//
 	@handler CouponAdd
-	post /add (addCouponReq) returns (addCouponResp)
-	
+	post /addCoupon (addCouponReq) returns (addCouponResp)
+
+	//
 	@handler CouponList
-	get /list (ListCouponReq) returns (ListCouponResp)
-	
+	get /queryCouponList (ListCouponReq) returns (ListCouponResp)
+
+	//
 	@handler CouponUpdate
-	post /update (UpdateCouponReq) returns (UpdateCouponResp)
-	
+	post /updateCoupon (UpdateCouponReq) returns (UpdateCouponResp)
+
+	//
 	@handler CouponDelete
-	get /delete (DeleteCouponReq) returns (DeleteCouponResp)
+	get /deleteCoupon (DeleteCouponReq) returns (DeleteCouponResp)
 }

@@ -80,15 +80,20 @@ type (
 	prefix: /api/product/skustock
 )
 service admin-api {
+
+	//
 	@handler SkuStockAdd
-	post /add (addSkuStockReq) returns (addSkuStockResp)
-	
+	post /addSkuStock (addSkuStockReq) returns (addSkuStockResp)
+
+	//
 	@handler SkuStockList
-	get /list (ListSkuStockReq) returns (ListSkuStockResp)
-	
+	get /querySkuStockList (ListSkuStockReq) returns (ListSkuStockResp)
+
+	//
 	@handler SkuStockUpdate
-	post /update (UpdateSkuStockReq) returns (UpdateSkuStockResp)
-	
+	post /updateSkuStock (UpdateSkuStockReq) returns (UpdateSkuStockResp)
+
+	//
 	@handler SkuStockDelete
-	get /delete (DeleteSkuStockReq) returns (DeleteSkuStockResp)
+	get /deleteSkuStock (DeleteSkuStockReq) returns (DeleteSkuStockResp)
 }

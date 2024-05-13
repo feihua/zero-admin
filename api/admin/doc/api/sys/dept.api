@@ -67,15 +67,20 @@ type (
 	prefix: /api/sys/dept
 )
 service admin-api {
+
+	//
 	@handler DeptAdd
-	post /add (addDeptReq) returns (addDeptResp)
-	
+	post /addDept (addDeptReq) returns (addDeptResp)
+
+	//
 	@handler DeptList
-	get /list (ListDeptReq) returns (ListDeptResp)
-	
+	get /queryDeptList (ListDeptReq) returns (ListDeptResp)
+
+	//
 	@handler DeptUpdate
-	post /update (UpdateDeptReq) returns (UpdateDeptResp)
-	
+	post /updateDept (UpdateDeptReq) returns (UpdateDeptResp)
+
+	//
 	@handler DeptDelete
-	get /delete (DeleteDeptReq) returns (DeleteDeptResp)
+	get /deleteDept (DeleteDeptReq) returns (DeleteDeptResp)
 }

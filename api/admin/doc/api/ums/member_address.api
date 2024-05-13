@@ -78,15 +78,20 @@ type (
 	prefix: /api/member/address
 )
 service admin-api {
+
+	//
 	@handler MemberAddressAdd
-	post /add (addMemberAddressReq) returns (addMemberAddressResp)
-	
+	post /addMemberAddress (addMemberAddressReq) returns (addMemberAddressResp)
+
+	//
 	@handler MemberAddressList
-	get /list (ListMemberAddressReq) returns (ListMemberAddressResp)
-	
+	get /queryMemberAddressList (ListMemberAddressReq) returns (ListMemberAddressResp)
+
+	//
 	@handler MemberAddressUpdate
-	post /update (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
-	
+	post /updateMemberAddress (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
+
+	//
 	@handler MemberAddressDelete
-	get /delete (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
+	get /deleteMemberAddress (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
 }

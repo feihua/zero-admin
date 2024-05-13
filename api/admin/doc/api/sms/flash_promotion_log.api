@@ -67,15 +67,20 @@ type (
 	prefix: /api/sms/flashpromotionlog
 )
 service admin-api {
+
+	//
 	@handler FlashPromotionLogAdd
-	post /add (addFlashPromotionLogReq) returns (addFlashPromotionLogResp)
-	
+	post /addFlashPromotionLog (addFlashPromotionLogReq) returns (addFlashPromotionLogResp)
+
+	//
 	@handler FlashPromotionLogList
-	get /list (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
-	
+	get /queryFlashPromotionLogList (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
+
+	//
 	@handler FlashPromotionLogUpdate
-	post /update (UpdateFlashPromotionLogReq) returns (UpdateFlashPromotionLogResp)
-	
+	post /updateFlashPromotionLog (UpdateFlashPromotionLogReq) returns (UpdateFlashPromotionLogResp)
+
+	//
 	@handler FlashPromotionLogDelete
-	get /delete (DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp)
+	get /deleteFlashPromotionLog (DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp)
 }

@@ -85,15 +85,20 @@ type (
 	prefix: /api/product/category
 )
 service admin-api {
+
+	//
 	@handler ProductCategoryAdd
-	post /add (addProductCategoryReq) returns (addProductCategoryResp)
-	
+	post /addProductCategory (addProductCategoryReq) returns (addProductCategoryResp)
+
+	//
 	@handler ProductCategoryList
-	get /list (ListProductCategoryReq) returns (ListProductCategoryResp)
-	
+	get /queryProductCategoryList (ListProductCategoryReq) returns (ListProductCategoryResp)
+
+	//
 	@handler ProductCategoryUpdate
-	post /update (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
-	
+	post /updateProductCategory (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
+
+	//
 	@handler ProductCategoryDelete
-	get /delete (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
+	get /deleteProductCategory (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
 }

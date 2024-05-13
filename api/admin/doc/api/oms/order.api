@@ -176,15 +176,20 @@ type (
 	prefix: /api/order/order
 )
 service admin-api {
+
+	//
 	@handler OrderAdd
-	post /add (addOrderReq) returns (addOrderResp)
-	
+	post /addOrder (addOrderReq) returns (addOrderResp)
+
+	//
 	@handler OrderList
-	get /list (ListOrderReq) returns (ListOrderResp)
-	
+	get /queryOrderList (ListOrderReq) returns (ListOrderResp)
+
+	//
 	@handler OrderUpdate
-	post /update (UpdateOrderReq) returns (UpdateOrderResp)
-	
+	post /updateOrder (UpdateOrderReq) returns (UpdateOrderResp)
+
+	//
 	@handler OrderDelete
-	get /delete (DeleteOrderReq) returns (DeleteOrderResp)
+	get /deleteOrder (DeleteOrderReq) returns (DeleteOrderResp)
 }

@@ -62,15 +62,20 @@ type (
 	prefix: /api/order/returnreason
 )
 service admin-api {
+
+	//
 	@handler ReturnResonAdd
-	post /add (addReturnResonReq) returns (addReturnResonResp)
-	
+	post /addReturnReson (addReturnResonReq) returns (addReturnResonResp)
+
+	//
 	@handler ReturnResonList
-	get /list (ListReturnResonReq) returns (ListReturnResonResp)
-	
+	get /queryReturnResonList (ListReturnResonReq) returns (ListReturnResonResp)
+
+	//
 	@handler ReturnResonUpdate
-	post /update (UpdateReturnResonReq) returns (UpdateReturnResonResp)
-	
+	post /updateReturnReson (UpdateReturnResonReq) returns (UpdateReturnResonResp)
+
+	//
 	@handler ReturnResonDelete
-	get /delete (DeleteReturnResonReq) returns (DeleteReturnResonResp)
+	get /deleteReturnReson (DeleteReturnResonReq) returns (DeleteReturnResonResp)
 }

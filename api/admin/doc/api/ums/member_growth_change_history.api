@@ -71,15 +71,20 @@ type (
 	prefix: /api/member/growthchangehistory
 )
 service admin-api {
+
+	//
 	@handler GrowthChangeHistoryAdd
-	post /add (addGrowthChangeHistoryReq) returns (addGrowthChangeHistoryResp)
-	
+	post /addGrowthChangeHistory (addGrowthChangeHistoryReq) returns (addGrowthChangeHistoryResp)
+
+	//
 	@handler GrowthChangeHistoryList
-	get /list (ListGrowthChangeHistoryReq) returns (ListGrowthChangeHistoryResp)
-	
+	get /queryGrowthChangeHistoryList (ListGrowthChangeHistoryReq) returns (ListGrowthChangeHistoryResp)
+
+	//
 	@handler GrowthChangeHistoryUpdate
-	post /update (UpdateGrowthChangeHistoryReq) returns (UpdateGrowthChangeHistoryResp)
-	
+	post /updateGrowthChangeHistory (UpdateGrowthChangeHistoryReq) returns (UpdateGrowthChangeHistoryResp)
+
+	//
 	@handler GrowthChangeHistoryDelete
-	get /delete (DeleteGrowthChangeHistoryReq) returns (DeleteGrowthChangeHistoryResp)
+	get /deleteGrowthChangeHistory (DeleteGrowthChangeHistoryReq) returns (DeleteGrowthChangeHistoryResp)
 }

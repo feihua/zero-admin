@@ -97,15 +97,20 @@ type (
 	prefix: /api/order/cart
 )
 service admin-api {
+
+	//
 	@handler CartItemAdd
-	post /add (addCartItemReq) returns (addCartItemResp)
-	
+	post /addCartItem (addCartItemReq) returns (addCartItemResp)
+
+	//
 	@handler CartItemList
-	get /list (ListCartItemReq) returns (ListCartItemResp)
-	
+	get /queryCartItemList (ListCartItemReq) returns (ListCartItemResp)
+
+	//
 	@handler CartItemUpdate
-	post /update (UpdateCartItemReq) returns (UpdateCartItemResp)
-	
+	post /updateCartItem (UpdateCartItemReq) returns (UpdateCartItemResp)
+
+	//
 	@handler CartItemDelete
-	get /delete (DeleteCartItemReq) returns (DeleteCartItemResp)
+	get /deleteCartItem (DeleteCartItemReq) returns (DeleteCartItemResp)
 }

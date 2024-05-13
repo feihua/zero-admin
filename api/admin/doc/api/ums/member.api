@@ -83,13 +83,16 @@ type (
 	prefix: /api/member/member
 )
 service admin-api {
-	
+
+	//
 	@handler MemberList
-	get /list (ListMemberReq) returns (ListMemberResp)
-	
+	get /queryMemberList (ListMemberReq) returns (ListMemberResp)
+
+	//
 	@handler MemberUpdate
-	post /update (UpdateMemberReq) returns (UpdateMemberResp)
-	
+	post /updateMember (UpdateMemberReq) returns (UpdateMemberResp)
+
+	//
 	@handler MemberDelete
-	get /delete (DeleteMemberReq) returns (DeleteMemberResp)
+	get /deleteMember (DeleteMemberReq) returns (DeleteMemberResp)
 }

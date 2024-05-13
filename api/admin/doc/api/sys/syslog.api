@@ -47,9 +47,12 @@ type (
 	prefix: /api/sys/sysLog
 )
 service admin-api {
+
+	//
 	@handler SysLogList
-	get /list (ListSysLogReq) returns (ListSysLogResp)
-	
+	get /querySysLogList (ListSysLogReq) returns (ListSysLogResp)
+
+	//
 	@handler SysLogDelete
-	get /delete (DeleteSysLogReq) returns (DeleteSysLogResp)
+	get /deleteSysLog (DeleteSysLogReq) returns (DeleteSysLogResp)
 }

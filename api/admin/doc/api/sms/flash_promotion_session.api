@@ -63,15 +63,20 @@ type (
 	prefix: /api/sms/flashpromotionsession
 )
 service admin-api {
+
+	//
 	@handler FlashPromotionSessionAdd
-	post /add (addFlashPromotionSessionReq) returns (addFlashPromotionSessionResp)
-	
+	post /addFlashPromotionSession (addFlashPromotionSessionReq) returns (addFlashPromotionSessionResp)
+
+	//
 	@handler FlashPromotionSessionList
-	get /list (ListFlashPromotionSessionReq) returns (ListFlashPromotionSessionResp)
-	
+	get /queryFlashPromotionSessionList (ListFlashPromotionSessionReq) returns (ListFlashPromotionSessionResp)
+
+	//
 	@handler FlashPromotionSessionUpdate
-	post /update (UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp)
-	
+	post /updateFlashPromotionSession (UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp)
+
+	//
 	@handler FlashPromotionSessionDelete
-	get /delete (DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp)
+	get /deleteFlashPromotionSession (DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp)
 }

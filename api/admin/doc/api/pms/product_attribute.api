@@ -86,15 +86,20 @@ type (
 	prefix: /api/product/attribute
 )
 service admin-api {
+
+	//
 	@handler ProductAttributeAdd
-	post /add (addProductAttributeReq) returns (addProductAttributeResp)
-	
+	post /addProductAttribute (addProductAttributeReq) returns (addProductAttributeResp)
+
+	//
 	@handler ProductAttributeList
-	get /list (ListProductAttributeReq) returns (ListProductAttributeResp)
-	
+	get /queryProductAttributeList (ListProductAttributeReq) returns (ListProductAttributeResp)
+
+	//
 	@handler ProductAttributeUpdate
-	post /update (UpdateProductAttributeReq) returns (UpdateProductAttributeResp)
-	
+	post /updateProductAttribute (UpdateProductAttributeReq) returns (UpdateProductAttributeResp)
+
+	//
 	@handler ProductAttributeDelete
-	get /delete (DeleteProductAttributeReq) returns (DeleteProductAttributeResp)
+	get /deleteProductAttribute (DeleteProductAttributeReq) returns (DeleteProductAttributeResp)
 }

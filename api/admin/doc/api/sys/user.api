@@ -200,19 +200,19 @@ service admin-api {
 
 	//添加用户
 	@handler UserAdd
-	post /add (addUserReq) returns (addUserResp)
+	post /addUser (addUserReq) returns (addUserResp)
 
 	//查询用户列表
 	@handler UserList
-	get /list (ListUserReq) returns (ListUserResp)
+	get /queryUserList (ListUserReq) returns (ListUserResp)
 
 	//更新用户信息
 	@handler UserUpdate
-	post /update (UpdateUserReq) returns (UpdateUserResp)
+	post /updateUser (UpdateUserReq) returns (UpdateUserResp)
 
 	//删除用户
 	@handler UserDelete
-	get /delete (DeleteUserReq) returns (DeleteUserResp)
+	get /deleteUser (DeleteUserReq) returns (DeleteUserResp)
 
 	//重置用户密码
 	@handler ReSetPassword

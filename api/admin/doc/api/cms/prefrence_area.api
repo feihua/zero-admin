@@ -72,16 +72,20 @@ type (
 	prefix: /api/cms/prefrenceArea
 )
 service admin-api {
+
+	//
 	@handler PrefrenceAreaAdd
-	post /add (addPrefrenceAreaReq) returns (addPrefrenceAreaResp)
+	post /addPrefrenceArea (addPrefrenceAreaReq) returns (addPrefrenceAreaResp)
 
 	//查询商品优选
 	@handler PrefrenceAreaList
 	get /queryPrefrenceAreaList (ListPrefrenceAreaReq) returns (ListPrefrenceAreaResp)
-	
+
+	//
 	@handler PrefrenceAreaUpdate
-	post /update (UpdatePrefrenceAreaReq) returns (UpdatePrefrenceAreaResp)
-	
+	post /updatePrefrenceArea (UpdatePrefrenceAreaReq) returns (UpdatePrefrenceAreaResp)
+
+	//
 	@handler PrefrenceAreaDelete
-	get /delete (DeletePrefrenceAreaReq) returns (DeletePrefrenceAreaResp)
+	get /deletePrefrenceArea (DeletePrefrenceAreaReq) returns (DeletePrefrenceAreaResp)
 }

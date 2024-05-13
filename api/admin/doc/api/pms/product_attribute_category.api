@@ -59,15 +59,20 @@ type (
 	prefix: /api/product/attributecategory
 )
 service admin-api {
+
+	//
 	@handler ProductAttributecategoryAdd
-	post /add (addProductAttributecategoryReq) returns (addProductAttributecategoryResp)
-	
+	post /addProductAttributeCategory (addProductAttributecategoryReq) returns (addProductAttributecategoryResp)
+
+	//
 	@handler ProductAttributecategoryList
-	get /list (ListProductAttributecategoryReq) returns (ListProductAttributecategoryResp)
-	
+	get /queryProductAttributeCategoryList (ListProductAttributecategoryReq) returns (ListProductAttributecategoryResp)
+
+	//
 	@handler ProductAttributecategoryUpdate
-	post /update (UpdateProductAttributecategoryReq) returns (UpdateProductAttributecategoryResp)
-	
+	post /updateProductAttributeCategory (UpdateProductAttributecategoryReq) returns (UpdateProductAttributecategoryResp)
+
+	//
 	@handler ProductAttributecategoryDelete
-	get /delete (DeleteProductAttributecategoryReq) returns (DeleteProductAttributecategoryResp)
+	get /deleteProductAttributeCategory (DeleteProductAttributecategoryReq) returns (DeleteProductAttributecategoryResp)
 }
