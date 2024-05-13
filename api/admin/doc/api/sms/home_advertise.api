@@ -52,6 +52,14 @@ type (
 		Success  bool                     `json:"success"`
 		Total    int64                    `json:"total"`
 	}
+	UpdateHomeAdvertiseStatusReq {
+		Id        int64  `json:"id"`
+		Status    int32  `json:"status"` // 上下线状态：0->下线；1->上线
+	}
+	UpdateHomeAdvertiseResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 	UpdateHomeAdvertiseReq {
 		Id        int64  `json:"id"`
 		Name      string `json:"name"` // 名称
@@ -63,10 +71,6 @@ type (
 		Url       string `json:"url"` // 链接地址
 		Note      string `json:"note,optional"` // 备注
 		Sort      int32  `json:"sort"` // 排序
-	}
-	UpdateHomeAdvertiseResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	DeleteHomeAdvertiseReq {
 		Ids []int64 `form:"ids"`
@@ -84,19 +88,23 @@ type (
 	prefix:     /api/sms/homeadvertise
 )
 service admin-api {
-	//
+	//添加首页轮播广告
 	@handler HomeAdvertiseAdd
 	post /addHomeAdvertise (addHomeAdvertiseReq) returns (addHomeAdvertiseResp)
 
-	//
+	//查询首页轮播广告
 	@handler HomeAdvertiseList
 	get /queryHomeAdvertiseList (ListHomeAdvertiseReq) returns (ListHomeAdvertiseResp)
 
-	//
+	//更新首页轮播广告
 	@handler HomeAdvertiseUpdate
 	post /updateHomeAdvertise (UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp)
 
-	//
+	//更新首页轮播广告状态
+	@handler UpdateHomeAdvertiseStatus
+	post /updateHomeAdvertiseStatus (UpdateHomeAdvertiseStatusReq) returns (UpdateHomeAdvertiseResp)
+
+	//删除首页轮播广告
 	@handler HomeAdvertiseDelete
 	get /deleteHomeAdvertise (DeleteHomeAdvertiseReq) returns (DeleteHomeAdvertiseResp)
 }

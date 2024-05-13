@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeAdvertiseUpdateLogic 首页广告
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 17:37
+*/
 type HomeAdvertiseUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewHomeAdvertiseUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// HomeAdvertiseUpdate 更新首页广告
 func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(in *smsclient.HomeAdvertiseUpdateReq) (*smsclient.HomeAdvertiseUpdateResp, error) {
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)

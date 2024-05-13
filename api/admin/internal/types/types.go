@@ -2279,6 +2279,11 @@ type UpdateHomeAdvertiseResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateHomeAdvertiseStatusReq struct {
+	Id     int64 `json:"id"`
+	Status int32 `json:"status"` // 上下线状态：0->下线；1->上线
+}
+
 type UpdateHomeBrandSortReq struct {
 	Id   int64 `json:"id"`
 	Sort int32 `json:"sort"` // 排序

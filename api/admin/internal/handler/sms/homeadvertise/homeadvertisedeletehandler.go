@@ -1,4 +1,4 @@
-package handler
+package homeadvertise
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func HomeAdvertiseDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewHomeAdvertiseDeleteLogic(r.Context(), ctx)
+		l := homeadvertise.NewHomeAdvertiseDeleteLogic(r.Context(), ctx)
 		resp, err := l.HomeAdvertiseDelete(req)
 		if err != nil {
 			httpx.Error(w, err)

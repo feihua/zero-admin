@@ -153,15 +153,22 @@ type (
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
 	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
 	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
+	UpdateHomeAdvertiseStatusReq                  = smsclient.UpdateHomeAdvertiseStatusReq
 	UpdateHomeBrandSortReq                        = smsclient.UpdateHomeBrandSortReq
 	UpdateHomeBrandSortResp                       = smsclient.UpdateHomeBrandSortResp
 	UpdateHomeBrandStatusReq                      = smsclient.UpdateHomeBrandStatusReq
 	UpdateHomeBrandStatusResp                     = smsclient.UpdateHomeBrandStatusResp
 
 	HomeAdvertiseService interface {
+		// 添加首页轮播广告
 		HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error)
+		// 查询首页轮播广告
 		HomeAdvertiseList(ctx context.Context, in *HomeAdvertiseListReq, opts ...grpc.CallOption) (*HomeAdvertiseListResp, error)
+		// 更新首页轮播广告
 		HomeAdvertiseUpdate(ctx context.Context, in *HomeAdvertiseUpdateReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error)
+		// 修改上下线状态
+		UpdateHomeAdvertiseStatus(ctx context.Context, in *UpdateHomeAdvertiseStatusReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error)
+		// 删除首页轮播广告
 		HomeAdvertiseDelete(ctx context.Context, in *HomeAdvertiseDeleteReq, opts ...grpc.CallOption) (*HomeAdvertiseDeleteResp, error)
 	}
 
@@ -176,21 +183,31 @@ func NewHomeAdvertiseService(cli zrpc.Client) HomeAdvertiseService {
 	}
 }
 
+// 添加首页轮播广告
 func (m *defaultHomeAdvertiseService) HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error) {
 	client := smsclient.NewHomeAdvertiseServiceClient(m.cli.Conn())
 	return client.HomeAdvertiseAdd(ctx, in, opts...)
 }
 
+// 查询首页轮播广告
 func (m *defaultHomeAdvertiseService) HomeAdvertiseList(ctx context.Context, in *HomeAdvertiseListReq, opts ...grpc.CallOption) (*HomeAdvertiseListResp, error) {
 	client := smsclient.NewHomeAdvertiseServiceClient(m.cli.Conn())
 	return client.HomeAdvertiseList(ctx, in, opts...)
 }
 
+// 更新首页轮播广告
 func (m *defaultHomeAdvertiseService) HomeAdvertiseUpdate(ctx context.Context, in *HomeAdvertiseUpdateReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error) {
 	client := smsclient.NewHomeAdvertiseServiceClient(m.cli.Conn())
 	return client.HomeAdvertiseUpdate(ctx, in, opts...)
 }
 
+// 修改上下线状态
+func (m *defaultHomeAdvertiseService) UpdateHomeAdvertiseStatus(ctx context.Context, in *UpdateHomeAdvertiseStatusReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error) {
+	client := smsclient.NewHomeAdvertiseServiceClient(m.cli.Conn())
+	return client.UpdateHomeAdvertiseStatus(ctx, in, opts...)
+}
+
+// 删除首页轮播广告
 func (m *defaultHomeAdvertiseService) HomeAdvertiseDelete(ctx context.Context, in *HomeAdvertiseDeleteReq, opts ...grpc.CallOption) (*HomeAdvertiseDeleteResp, error) {
 	client := smsclient.NewHomeAdvertiseServiceClient(m.cli.Conn())
 	return client.HomeAdvertiseDelete(ctx, in, opts...)

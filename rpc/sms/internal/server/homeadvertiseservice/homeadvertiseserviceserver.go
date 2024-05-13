@@ -22,21 +22,31 @@ func NewHomeAdvertiseServiceServer(svcCtx *svc.ServiceContext) *HomeAdvertiseSer
 	}
 }
 
+// 添加首页轮播广告
 func (s *HomeAdvertiseServiceServer) HomeAdvertiseAdd(ctx context.Context, in *smsclient.HomeAdvertiseAddReq) (*smsclient.HomeAdvertiseAddResp, error) {
 	l := homeadvertiseservicelogic.NewHomeAdvertiseAddLogic(ctx, s.svcCtx)
 	return l.HomeAdvertiseAdd(in)
 }
 
+// 查询首页轮播广告
 func (s *HomeAdvertiseServiceServer) HomeAdvertiseList(ctx context.Context, in *smsclient.HomeAdvertiseListReq) (*smsclient.HomeAdvertiseListResp, error) {
 	l := homeadvertiseservicelogic.NewHomeAdvertiseListLogic(ctx, s.svcCtx)
 	return l.HomeAdvertiseList(in)
 }
 
+// 更新首页轮播广告
 func (s *HomeAdvertiseServiceServer) HomeAdvertiseUpdate(ctx context.Context, in *smsclient.HomeAdvertiseUpdateReq) (*smsclient.HomeAdvertiseUpdateResp, error) {
 	l := homeadvertiseservicelogic.NewHomeAdvertiseUpdateLogic(ctx, s.svcCtx)
 	return l.HomeAdvertiseUpdate(in)
 }
 
+// 修改上下线状态
+func (s *HomeAdvertiseServiceServer) UpdateHomeAdvertiseStatus(ctx context.Context, in *smsclient.UpdateHomeAdvertiseStatusReq) (*smsclient.HomeAdvertiseUpdateResp, error) {
+	l := homeadvertiseservicelogic.NewUpdateHomeAdvertiseStatusLogic(ctx, s.svcCtx)
+	return l.UpdateHomeAdvertiseStatus(in)
+}
+
+// 删除首页轮播广告
 func (s *HomeAdvertiseServiceServer) HomeAdvertiseDelete(ctx context.Context, in *smsclient.HomeAdvertiseDeleteReq) (*smsclient.HomeAdvertiseDeleteResp, error) {
 	l := homeadvertiseservicelogic.NewHomeAdvertiseDeleteLogic(ctx, s.svcCtx)
 	return l.HomeAdvertiseDelete(in)

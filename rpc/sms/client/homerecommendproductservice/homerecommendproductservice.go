@@ -153,6 +153,7 @@ type (
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
 	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
 	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
+	UpdateHomeAdvertiseStatusReq                  = smsclient.UpdateHomeAdvertiseStatusReq
 	UpdateHomeBrandSortReq                        = smsclient.UpdateHomeBrandSortReq
 	UpdateHomeBrandSortResp                       = smsclient.UpdateHomeBrandSortResp
 	UpdateHomeBrandStatusReq                      = smsclient.UpdateHomeBrandStatusReq

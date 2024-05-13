@@ -755,6 +755,12 @@ message HomeAdvertiseUpdateReq {
 
 }
 
+message UpdateHomeAdvertiseStatusReq {
+  int64 Id = 1; //
+  int32 Status = 2; //上下线状态：0->下线；1->上线
+
+}
+
 message HomeAdvertiseUpdateResp {
   string pong = 1;
 }
@@ -790,11 +796,17 @@ message HomeAdvertiseListResp {
   repeated  HomeAdvertiseListData list = 2;
 }
 
+//首页轮播广告管理
 service HomeAdvertiseService {
-
+  //添加首页轮播广告
   rpc HomeAdvertiseAdd(HomeAdvertiseAddReq) returns(HomeAdvertiseAddResp);
+  //查询首页轮播广告
   rpc HomeAdvertiseList(HomeAdvertiseListReq) returns(HomeAdvertiseListResp);
+  //更新首页轮播广告
   rpc HomeAdvertiseUpdate(HomeAdvertiseUpdateReq) returns(HomeAdvertiseUpdateResp);
+  //修改上下线状态
+  rpc updateHomeAdvertiseStatus(UpdateHomeAdvertiseStatusReq) returns(HomeAdvertiseUpdateResp);
+  //删除首页轮播广告
   rpc HomeAdvertiseDelete(HomeAdvertiseDeleteReq) returns(HomeAdvertiseDeleteResp);
 
 

@@ -2018,19 +2018,26 @@ var FlashPromotionSessionService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	HomeAdvertiseService_HomeAdvertiseAdd_FullMethodName    = "/smsclient.HomeAdvertiseService/HomeAdvertiseAdd"
-	HomeAdvertiseService_HomeAdvertiseList_FullMethodName   = "/smsclient.HomeAdvertiseService/HomeAdvertiseList"
-	HomeAdvertiseService_HomeAdvertiseUpdate_FullMethodName = "/smsclient.HomeAdvertiseService/HomeAdvertiseUpdate"
-	HomeAdvertiseService_HomeAdvertiseDelete_FullMethodName = "/smsclient.HomeAdvertiseService/HomeAdvertiseDelete"
+	HomeAdvertiseService_HomeAdvertiseAdd_FullMethodName          = "/smsclient.HomeAdvertiseService/HomeAdvertiseAdd"
+	HomeAdvertiseService_HomeAdvertiseList_FullMethodName         = "/smsclient.HomeAdvertiseService/HomeAdvertiseList"
+	HomeAdvertiseService_HomeAdvertiseUpdate_FullMethodName       = "/smsclient.HomeAdvertiseService/HomeAdvertiseUpdate"
+	HomeAdvertiseService_UpdateHomeAdvertiseStatus_FullMethodName = "/smsclient.HomeAdvertiseService/updateHomeAdvertiseStatus"
+	HomeAdvertiseService_HomeAdvertiseDelete_FullMethodName       = "/smsclient.HomeAdvertiseService/HomeAdvertiseDelete"
 )
 
 // HomeAdvertiseServiceClient is the client API for HomeAdvertiseService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HomeAdvertiseServiceClient interface {
+	// 添加首页轮播广告
 	HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error)
+	// 查询首页轮播广告
 	HomeAdvertiseList(ctx context.Context, in *HomeAdvertiseListReq, opts ...grpc.CallOption) (*HomeAdvertiseListResp, error)
+	// 更新首页轮播广告
 	HomeAdvertiseUpdate(ctx context.Context, in *HomeAdvertiseUpdateReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error)
+	// 修改上下线状态
+	UpdateHomeAdvertiseStatus(ctx context.Context, in *UpdateHomeAdvertiseStatusReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error)
+	// 删除首页轮播广告
 	HomeAdvertiseDelete(ctx context.Context, in *HomeAdvertiseDeleteReq, opts ...grpc.CallOption) (*HomeAdvertiseDeleteResp, error)
 }
 
@@ -2069,6 +2076,15 @@ func (c *homeAdvertiseServiceClient) HomeAdvertiseUpdate(ctx context.Context, in
 	return out, nil
 }
 
+func (c *homeAdvertiseServiceClient) UpdateHomeAdvertiseStatus(ctx context.Context, in *UpdateHomeAdvertiseStatusReq, opts ...grpc.CallOption) (*HomeAdvertiseUpdateResp, error) {
+	out := new(HomeAdvertiseUpdateResp)
+	err := c.cc.Invoke(ctx, HomeAdvertiseService_UpdateHomeAdvertiseStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *homeAdvertiseServiceClient) HomeAdvertiseDelete(ctx context.Context, in *HomeAdvertiseDeleteReq, opts ...grpc.CallOption) (*HomeAdvertiseDeleteResp, error) {
 	out := new(HomeAdvertiseDeleteResp)
 	err := c.cc.Invoke(ctx, HomeAdvertiseService_HomeAdvertiseDelete_FullMethodName, in, out, opts...)
@@ -2082,9 +2098,15 @@ func (c *homeAdvertiseServiceClient) HomeAdvertiseDelete(ctx context.Context, in
 // All implementations must embed UnimplementedHomeAdvertiseServiceServer
 // for forward compatibility
 type HomeAdvertiseServiceServer interface {
+	// 添加首页轮播广告
 	HomeAdvertiseAdd(context.Context, *HomeAdvertiseAddReq) (*HomeAdvertiseAddResp, error)
+	// 查询首页轮播广告
 	HomeAdvertiseList(context.Context, *HomeAdvertiseListReq) (*HomeAdvertiseListResp, error)
+	// 更新首页轮播广告
 	HomeAdvertiseUpdate(context.Context, *HomeAdvertiseUpdateReq) (*HomeAdvertiseUpdateResp, error)
+	// 修改上下线状态
+	UpdateHomeAdvertiseStatus(context.Context, *UpdateHomeAdvertiseStatusReq) (*HomeAdvertiseUpdateResp, error)
+	// 删除首页轮播广告
 	HomeAdvertiseDelete(context.Context, *HomeAdvertiseDeleteReq) (*HomeAdvertiseDeleteResp, error)
 	mustEmbedUnimplementedHomeAdvertiseServiceServer()
 }
@@ -2101,6 +2123,9 @@ func (UnimplementedHomeAdvertiseServiceServer) HomeAdvertiseList(context.Context
 }
 func (UnimplementedHomeAdvertiseServiceServer) HomeAdvertiseUpdate(context.Context, *HomeAdvertiseUpdateReq) (*HomeAdvertiseUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseUpdate not implemented")
+}
+func (UnimplementedHomeAdvertiseServiceServer) UpdateHomeAdvertiseStatus(context.Context, *UpdateHomeAdvertiseStatusReq) (*HomeAdvertiseUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHomeAdvertiseStatus not implemented")
 }
 func (UnimplementedHomeAdvertiseServiceServer) HomeAdvertiseDelete(context.Context, *HomeAdvertiseDeleteReq) (*HomeAdvertiseDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeAdvertiseDelete not implemented")
@@ -2172,6 +2197,24 @@ func _HomeAdvertiseService_HomeAdvertiseUpdate_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HomeAdvertiseService_UpdateHomeAdvertiseStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHomeAdvertiseStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeAdvertiseServiceServer).UpdateHomeAdvertiseStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HomeAdvertiseService_UpdateHomeAdvertiseStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeAdvertiseServiceServer).UpdateHomeAdvertiseStatus(ctx, req.(*UpdateHomeAdvertiseStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _HomeAdvertiseService_HomeAdvertiseDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HomeAdvertiseDeleteReq)
 	if err := dec(in); err != nil {
@@ -2208,6 +2251,10 @@ var HomeAdvertiseService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "HomeAdvertiseUpdate",
 			Handler:    _HomeAdvertiseService_HomeAdvertiseUpdate_Handler,
+		},
+		{
+			MethodName: "updateHomeAdvertiseStatus",
+			Handler:    _HomeAdvertiseService_UpdateHomeAdvertiseStatus_Handler,
 		},
 		{
 			MethodName: "HomeAdvertiseDelete",

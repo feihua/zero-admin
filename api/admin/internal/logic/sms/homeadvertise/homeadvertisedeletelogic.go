@@ -1,4 +1,4 @@
-package logic
+package homeadvertise
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeAdvertiseDeleteLogic 首页轮播广告
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 17:33
+*/
 type HomeAdvertiseDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewHomeAdvertiseDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// HomeAdvertiseDelete 删除首页轮播广告
 func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(req types.DeleteHomeAdvertiseReq) (*types.DeleteHomeAdvertiseResp, error) {
 	_, err := l.svcCtx.HomeAdvertiseService.HomeAdvertiseDelete(l.ctx, &smsclient.HomeAdvertiseDeleteReq{
 		Ids: req.Ids,

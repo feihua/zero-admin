@@ -1101,6 +1101,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/updateHomeAdvertise",
 					Handler: smshomeadvertise.HomeAdvertiseUpdateHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateHomeAdvertiseStatus",
+					Handler: smshomeadvertise.UpdateHomeAdvertiseStatusHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

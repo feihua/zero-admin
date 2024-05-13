@@ -6,24 +6,23 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/logic/sms/homeadvertise"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
-
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func HomeAdvertiseListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
+func UpdateHomeAdvertiseStatusHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.ListHomeAdvertiseReq
+		var req types.UpdateHomeAdvertiseStatusReq
 		if err := httpx.Parse(r, &req); err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := homeadvertise.NewHomeAdvertiseListLogic(r.Context(), ctx)
-		resp, err := l.HomeAdvertiseList(req)
+		l := homeadvertise.NewUpdateHomeAdvertiseStatusLogic(r.Context(), svcCtx)
+		resp, err := l.UpdateHomeAdvertiseStatus(&req)
 		if err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			httpx.OkJsonCtx(r.Context(), w, resp)
 		}
 	}
 }

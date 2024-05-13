@@ -6,10 +6,16 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeAdvertiseListLogic 首页广告
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 17:37
+*/
 type HomeAdvertiseListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +30,7 @@ func NewHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// HomeAdvertiseList 查询首页广告
 func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *smsclient.HomeAdvertiseListReq) (*smsclient.HomeAdvertiseListResp, error) {
 	q := query.SmsHomeAdvertise.WithContext(l.ctx)
 	if len(in.Name) > 0 {
@@ -37,12 +44,14 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *smsclient.HomeAdvertiseLi
 		q = q.Where(query.SmsHomeAdvertise.Status.Eq(in.Status))
 	}
 
-	//if len(in.StartTime) > 0 {
-	//		where = where + fmt.Sprintf(" AND start_time >= '%s'", in.StartTime)
-	//	}
-	//	if len(in.EndTime) > 0 {
-	//		where = where + fmt.Sprintf(" AND end_time <= '%s'", in.EndTime)
-	//	}
+	if len(in.StartTime) > 0 {
+		startTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
+		q = q.Where(query.SmsHomeAdvertise.StartTime.Gte(startTime))
+	}
+	if len(in.EndTime) > 0 {
+		endTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
+		q = q.Where(query.SmsHomeAdvertise.EndTime.Lte(endTime))
+	}
 	offset := (in.Current - 1) * in.PageSize
 	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
 	count, err := q.Count()

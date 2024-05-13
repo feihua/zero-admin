@@ -1,4 +1,4 @@
-package logic
+package homeadvertise
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeAdvertiseListLogic 首页轮播广告
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 17:33
+*/
 type HomeAdvertiseListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// HomeAdvertiseList 查询首页轮播广告
 func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseReq) (*types.ListHomeAdvertiseResp, error) {
 	resp, err := l.svcCtx.HomeAdvertiseService.HomeAdvertiseList(l.ctx, &smsclient.HomeAdvertiseListReq{
 		Name:      req.Name,

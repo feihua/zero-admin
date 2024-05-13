@@ -1,4 +1,4 @@
-package handler
+package homeadvertise
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func HomeAdvertiseAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewHomeAdvertiseAddLogic(r.Context(), ctx)
+		l := homeadvertise.NewHomeAdvertiseAddLogic(r.Context(), ctx)
 		resp, err := l.HomeAdvertiseAdd(req)
 		if err != nil {
 			httpx.Error(w, err)
