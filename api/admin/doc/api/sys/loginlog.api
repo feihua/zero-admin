@@ -6,10 +6,10 @@ info(
 
 type (
 	ListLoginLogReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		UserName string `json:"userName,optional"`
-		Ip       string `json:"ip,optional"` // IP地址
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		UserName string `form:"userName,optional"`
+		Ip       string `form:"ip,optional"` // IP地址
 	}
 	ListLoginLogData {
 		Id             int64  `json:"id"`             // 编号
@@ -24,14 +24,14 @@ type (
 	ListLoginLogResp {
 		Code     string              `json:"code"`
 		Message  string              `json:"message"`
-		Current  int64               `json:"current,default=1"`
+		Current  int64               `form:"current,default=1"`
 		Data     []*ListLoginLogData `json:"data"`
-		PageSize int64               `json:"pageSize,default=20"`
+		PageSize int64               `form:"pageSize,default=20"`
 		Success  bool                `json:"success"`
 		Total    int64               `json:"total"`
 	}
 	DeleteLoginLogReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteLoginLogResp {
 		Code    string `json:"code"`
@@ -61,10 +61,10 @@ type (
 )
 service admin-api {
 	@handler LoginLogList
-	post /list (ListLoginLogReq) returns (ListLoginLogResp)
+	get /list (ListLoginLogReq) returns (ListLoginLogResp)
 	
 	@handler LoginLogDelete
-	post /delete (DeleteLoginLogReq) returns (DeleteLoginLogResp)
+	get /delete (DeleteLoginLogReq) returns (DeleteLoginLogResp)
 
 	// 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
 	@handler StatisticsLoginLog

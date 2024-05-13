@@ -19,8 +19,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListIntegrationChangeHistoryReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtIntegrationChangeHistoryData {
 		Id          int64  `json:"id"`
@@ -35,9 +35,9 @@ type (
 	ListIntegrationChangeHistoryResp {
 		Code     string                               `json:"code"`
 		Message  string                               `json:"message"`
-		Current  int64                                `json:"current,default=1"`
+		Current  int64                                `form:"current,default=1"`
 		Data     []*ListtIntegrationChangeHistoryData `json:"data"`
-		PageSize int64                                `json:"pageSize,default=20"`
+		PageSize int64                                `form:"pageSize,default=20"`
 		Success  bool                                 `json:"success"`
 		Total    int64                                `json:"total"`
 	}
@@ -56,7 +56,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteIntegrationChangeHistoryReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteIntegrationChangeHistoryResp {
 		Code    string `json:"code"`
@@ -75,11 +75,11 @@ service admin-api {
 	post /add (addIntegrationChangeHistoryReq) returns (addIntegrationChangeHistoryResp)
 	
 	@handler IntegrationChangeHistoryList
-	post /list (ListIntegrationChangeHistoryReq) returns (ListIntegrationChangeHistoryResp)
+	get /list (ListIntegrationChangeHistoryReq) returns (ListIntegrationChangeHistoryResp)
 	
 	@handler IntegrationChangeHistoryUpdate
 	post /update (UpdateIntegrationChangeHistoryReq) returns (UpdateIntegrationChangeHistoryResp)
 	
 	@handler IntegrationChangeHistoryDelete
-	post /delete (DeleteIntegrationChangeHistoryReq) returns (DeleteIntegrationChangeHistoryResp)
+	get /delete (DeleteIntegrationChangeHistoryReq) returns (DeleteIntegrationChangeHistoryResp)
 }

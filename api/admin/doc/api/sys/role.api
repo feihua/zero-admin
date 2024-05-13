@@ -15,10 +15,10 @@ type (
 		Message string `json:"message"`
 	}
 	ListRoleReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		Name     string `json:"name,optional "`
-        Status int32 `json:"status,default=2"`
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		Name     string `form:"name,optional "`
+        Status int32 `form:"status,default=2"`
 	}
 	ListRoleData {
 		Id             int64  `json:"id"`             // 编号
@@ -36,9 +36,9 @@ type (
 	ListRoleResp {
 		Code     string          `json:"code"`
 		Message  string          `json:"message"`
-		Current  int64           `json:"current,default=1"`
+		Current  int64           `form:"current,default=1"`
 		Data     []*ListRoleData `json:"data"`
-		PageSize int64           `json:"pageSize,default=20"`
+		PageSize int64           `form:"pageSize,default=20"`
 		Success  bool            `json:"success"`
 		Total    int64           `json:"total"`
 	}
@@ -53,7 +53,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteRoleReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteRoleResp {
 		Code    string `json:"code"`
@@ -101,7 +101,7 @@ service admin-api {
 
 	//角色列表信息
 	@handler RoleList
-	post /list (ListRoleReq) returns (ListRoleResp)
+	get /list (ListRoleReq) returns (ListRoleResp)
 
 	//更新角色信息
 	@handler RoleUpdate
@@ -109,7 +109,7 @@ service admin-api {
 
 	//删除角色信息
 	@handler RoleDelete
-	post /delete (DeleteRoleReq) returns (DeleteRoleResp)
+	get /delete (DeleteRoleReq) returns (DeleteRoleResp)
 
 	//查询角色与菜单的关联
 	@handler QueryMenuByRoleId

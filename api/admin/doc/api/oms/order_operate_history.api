@@ -16,8 +16,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListOperateHistoryReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtOperateHistoryData {
 		Id          int64  `json:"id"`
@@ -30,9 +30,9 @@ type (
 	ListOperateHistoryResp {
 		Code     string                     `json:"code"`
 		Message  string                     `json:"message"`
-		Current  int64                      `json:"current,default=1"`
+		Current  int64                      `form:"current,default=1"`
 		Data     []*ListtOperateHistoryData `json:"data"`
-		PageSize int64                      `json:"pageSize,default=20"`
+		PageSize int64                      `form:"pageSize,default=20"`
 		Success  bool                       `json:"success"`
 		Total    int64                      `json:"total"`
 	}
@@ -49,7 +49,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteOperateHistoryReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteOperateHistoryResp {
 		Code    string `json:"code"`
@@ -68,11 +68,11 @@ service admin-api {
 	post /add (addOperateHistoryReq) returns (addOperateHistoryResp)
 	
 	@handler OperateHistoryList
-	post /list (ListOperateHistoryReq) returns (ListOperateHistoryResp)
+	get /list (ListOperateHistoryReq) returns (ListOperateHistoryResp)
 	
 	@handler OperateHistoryUpdate
 	post /update (UpdateOperateHistoryReq) returns (UpdateOperateHistoryResp)
 	
 	@handler OperateHistoryDelete
-	post /delete (DeleteOperateHistoryReq) returns (DeleteOperateHistoryResp)
+	get /delete (DeleteOperateHistoryReq) returns (DeleteOperateHistoryResp)
 }

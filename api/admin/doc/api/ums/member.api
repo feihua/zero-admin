@@ -6,11 +6,11 @@ info(
 
 type (
 	ListMemberReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		Username string `json:"username,optional"` // 用户名
-		Phone    string `json:"phone,optional"`    // 手机号码
-		Status int32 `json:"status,default=2"`     // 帐号启用状态:0->禁用；1->启用
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		Username string `form:"username,optional"` // 用户名
+		Phone    string `form:"phone,optional"`    // 手机号码
+		Status int32 `form:"status,default=2"`     // 帐号启用状态:0->禁用；1->启用
 	}
 	ListtMemberData {
 		Id                    int64  `json:"id"`
@@ -36,9 +36,9 @@ type (
 	ListMemberResp {
 		Code     string             `json:"code"`
 		Message  string             `json:"message"`
-		Current  int64              `json:"current,default=1"`
+		Current  int64              `form:"current,default=1"`
 		Data     []*ListtMemberData `json:"data"`
-		PageSize int64              `json:"pageSize,default=20"`
+		PageSize int64              `form:"pageSize,default=20"`
 		Success  bool               `json:"success"`
 		Total    int64              `json:"total"`
 	}
@@ -68,7 +68,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteMemberReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteMemberResp {
 		Code    string `json:"code"`
@@ -85,11 +85,11 @@ type (
 service admin-api {
 	
 	@handler MemberList
-	post /list (ListMemberReq) returns (ListMemberResp)
+	get /list (ListMemberReq) returns (ListMemberResp)
 	
 	@handler MemberUpdate
 	post /update (UpdateMemberReq) returns (UpdateMemberResp)
 	
 	@handler MemberDelete
-	post /delete (DeleteMemberReq) returns (DeleteMemberResp)
+	get /delete (DeleteMemberReq) returns (DeleteMemberResp)
 }

@@ -18,8 +18,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListMemberRuleSettingReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtMemberRuleSettingData {
 		Id                int64   `json:"id"`
@@ -33,9 +33,9 @@ type (
 	ListMemberRuleSettingResp {
 		Code     string                        `json:"code"`
 		Message  string                        `json:"message"`
-		Current  int64                         `json:"current,default=1"`
+		Current  int64                         `form:"current,default=1"`
 		Data     []*ListtMemberRuleSettingData `json:"data"`
-		PageSize int64                         `json:"pageSize,default=20"`
+		PageSize int64                         `form:"pageSize,default=20"`
 		Success  bool                          `json:"success"`
 		Total    int64                         `json:"total"`
 	}
@@ -53,7 +53,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteMemberRuleSettingReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteMemberRuleSettingResp {
 		Code    string `json:"code"`
@@ -72,11 +72,11 @@ service admin-api {
 	post /add (addMemberRuleSettingReq) returns (addMemberRuleSettingResp)
 	
 	@handler MemberRuleSettingList
-	post /list (ListMemberRuleSettingReq) returns (ListMemberRuleSettingResp)
+	get /list (ListMemberRuleSettingReq) returns (ListMemberRuleSettingResp)
 	
 	@handler MemberRuleSettingUpdate
 	post /update (UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp)
 	
 	@handler MemberRuleSettingDelete
-	post /delete (DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp)
+	get /delete (DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp)
 }

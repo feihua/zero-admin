@@ -72,15 +72,15 @@ type (
 	}
 
 	ListUserReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		Name     string `json:"name,optional"`
-		NickName string `json:"nickName,optional"`
-		Mobile   string `json:"mobile,optional"`
-		Email    string `json:"email,optional"`
-        Status int32 `json:"status,optional,default=2"`
-		DeptId   int64  `json:"deptId,optional"`
-		JobId    int64  `json:"deptId,optional"`
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		Name     string `form:"name,optional"`
+		NickName string `form:"nickName,optional"`
+		Mobile   string `form:"mobile,optional"`
+		Email    string `form:"email,optional"`
+        Status int32 `form:"status,optional,default=2"`
+		DeptId   int64  `form:"deptId,optional"`
+		JobId    int64  `form:"deptId,optional"`
 	}
 
 	ListUserData {
@@ -106,9 +106,9 @@ type (
 	ListUserResp {
 		Code     string          `json:"code"`
 		Message  string          `json:"message"`
-		Current  int64           `json:"current,default=1"`
+		Current  int64           `form:"current,default=1"`
 		Data     []*ListUserData `json:"data"`
-		PageSize int64           `json:"pageSize,default=20"`
+		PageSize int64           `form:"pageSize,default=20"`
 		Success  bool            `json:"success"`
 		Total    int64           `json:"total"`
 	}
@@ -129,7 +129,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteUserReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteUserResp {
 		Code    string `json:"code"`
@@ -170,8 +170,8 @@ type (
 	}
 
 	QueryAllRelationsReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 
 	QueryAllRelationsData {
@@ -204,7 +204,7 @@ service admin-api {
 
 	//查询用户列表
 	@handler UserList
-	post /list (ListUserReq) returns (ListUserResp)
+	get /list (ListUserReq) returns (ListUserResp)
 
 	//更新用户信息
 	@handler UserUpdate
@@ -212,7 +212,7 @@ service admin-api {
 
 	//删除用户
 	@handler UserDelete
-	post /delete (DeleteUserReq) returns (DeleteUserResp)
+	get /delete (DeleteUserReq) returns (DeleteUserResp)
 
 	//重置用户密码
 	@handler ReSetPassword

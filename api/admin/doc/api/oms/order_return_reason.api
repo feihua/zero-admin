@@ -15,10 +15,10 @@ type (
 		Message string `json:"message"`
 	}
 	ListReturnResonReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		Name     string `json:"name,optional"`    // 退货类型
-        Status int32 `json:"status,default=2"`    // 状态：0->不启用；1->启用
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		Name     string `form:"name,optional"`    // 退货类型
+        Status int32 `form:"status,default=2"`    // 状态：0->不启用；1->启用
 	}
 	ListtReturnResonData {
 		Id         int64  `json:"id"`
@@ -30,9 +30,9 @@ type (
 	ListReturnResonResp {
 		Code     string                  `json:"code"`
 		Message  string                  `json:"message"`
-		Current  int64                   `json:"current,default=1"`
+		Current  int64                   `form:"current,default=1"`
 		Data     []*ListtReturnResonData `json:"data"`
-		PageSize int64                   `json:"pageSize,default=20"`
+		PageSize int64                   `form:"pageSize,default=20"`
 		Success  bool                    `json:"success"`
 		Total    int64                   `json:"total"`
 	}
@@ -47,7 +47,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteReturnResonReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteReturnResonResp {
 		Code    string `json:"code"`
@@ -66,11 +66,11 @@ service admin-api {
 	post /add (addReturnResonReq) returns (addReturnResonResp)
 	
 	@handler ReturnResonList
-	post /list (ListReturnResonReq) returns (ListReturnResonResp)
+	get /list (ListReturnResonReq) returns (ListReturnResonResp)
 	
 	@handler ReturnResonUpdate
 	post /update (UpdateReturnResonReq) returns (UpdateReturnResonResp)
 	
 	@handler ReturnResonDelete
-	post /delete (DeleteReturnResonReq) returns (DeleteReturnResonResp)
+	get /delete (DeleteReturnResonReq) returns (DeleteReturnResonResp)
 }

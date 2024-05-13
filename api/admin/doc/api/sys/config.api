@@ -18,8 +18,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListConfigReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListConfigData {
 		Id             int64  `json:"id"`             // 编号
@@ -38,9 +38,9 @@ type (
 	ListConfigResp {
 		Code     string            `json:"code"`
 		Message  string            `json:"message"`
-		Current  int64             `json:"current,default=1"`
+		Current  int64             `form:"current,default=1"`
 		Data     []*ListConfigData `json:"data"`
-		PageSize int64             `json:"pageSize,default=20"`
+		PageSize int64             `form:"pageSize,default=20"`
 		Success  bool              `json:"success"`
 		Total    int64             `json:"total"`
 	}
@@ -58,7 +58,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteConfigReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteConfigResp {
 		Code    string `json:"code"`
@@ -77,11 +77,11 @@ service admin-api {
 	post /add (addConfigReq) returns (addConfigResp)
 	
 	@handler ConfigList
-	post /list (ListConfigReq) returns (ListConfigResp)
+	get /list (ListConfigReq) returns (ListConfigResp)
 	
 	@handler ConfigUpdate
 	post /update (UpdateConfigReq) returns (UpdateConfigResp)
 	
 	@handler ConfigDelete
-	post /delete (DeleteConfigReq) returns (DeleteConfigResp)
+	get /delete (DeleteConfigReq) returns (DeleteConfigResp)
 }

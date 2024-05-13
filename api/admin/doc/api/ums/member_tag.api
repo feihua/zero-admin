@@ -15,8 +15,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListMemberTagReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtMemberTagData {
 		Id                int64   `json:"id"`
@@ -27,9 +27,9 @@ type (
 	ListMemberTagResp {
 		Code     string                `json:"code"`
 		Message  string                `json:"message"`
-		Current  int64                 `json:"current,default=1"`
+		Current  int64                 `form:"current,default=1"`
 		Data     []*ListtMemberTagData `json:"data"`
-		PageSize int64                 `json:"pageSize,default=20"`
+		PageSize int64                 `form:"pageSize,default=20"`
 		Success  bool                  `json:"success"`
 		Total    int64                 `json:"total"`
 	}
@@ -44,7 +44,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteMemberTagReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteMemberTagResp {
 		Code    string `json:"code"`
@@ -63,11 +63,11 @@ service admin-api {
 	post /add (addMemberTagReq) returns (addMemberTagResp)
 	
 	@handler MemberTagList
-	post /list (ListMemberTagReq) returns (ListMemberTagResp)
+	get /list (ListMemberTagReq) returns (ListMemberTagResp)
 	
 	@handler MemberTagUpdate
 	post /update (UpdateMemberTagReq) returns (UpdateMemberTagResp)
 	
 	@handler MemberTagDelete
-	post /delete (DeleteMemberTagReq) returns (DeleteMemberTagResp)
+	get /delete (DeleteMemberTagReq) returns (DeleteMemberTagResp)
 }

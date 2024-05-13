@@ -20,11 +20,11 @@ type (
 		Message string `json:"message"`
 	}
 	ListProductBrandReq {
-		Current       int64  `json:"current,default=1"`
-		PageSize      int64  `json:"pageSize,default=20"`
-		Name          string `json:"name,optional"`
-        FactoryStatus int32 `json:"factoryStatus,default=2"` // 是否为品牌制造商：0->不是；1->是
-        ShowStatus int32 `json:"showStatus,default=2"`
+		Current       int64  `form:"current,default=1"`
+		PageSize      int64  `form:"pageSize,default=20"`
+		Name          string `form:"name,optional"`
+        FactoryStatus int32 `form:"factoryStatus,default=2"` // 是否为品牌制造商：0->不是；1->是
+        ShowStatus int32 `form:"showStatus,default=2"`
 	}
 	ListtProductBrandData {
 		Id                  int64  `json:"id"`
@@ -40,9 +40,9 @@ type (
 		BrandStory          string `json:"brandStory"`          // 品牌故事
 	}
 	ListProductBrandResp {
-		Current  int64                    `json:"current,default=1"`
+		Current  int64                    `form:"current,default=1"`
 		Data     []*ListtProductBrandData `json:"data"`
-		PageSize int64                    `json:"pageSize,default=20"`
+		PageSize int64                    `form:"pageSize,default=20"`
 		Success  bool                     `json:"success"`
 		Total    int64                    `json:"total"`
 		Code     string                   `json:"code"`
@@ -66,7 +66,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteProductBrandReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteProductBrandResp {
 		Code    string `json:"code"`
@@ -85,11 +85,11 @@ service admin-api {
 	post /add (addProductBrandReq) returns (addProductBrandResp)
 	
 	@handler ProductBrandList
-	post /list (ListProductBrandReq) returns (ListProductBrandResp)
+	get /list (ListProductBrandReq) returns (ListProductBrandResp)
 	
 	@handler ProductBrandUpdate
 	post /update (UpdateProductBrandReq) returns (UpdateProductBrandResp)
 	
 	@handler ProductBrandDelete
-	post /delete (DeleteProductBrandReq) returns (DeleteProductBrandResp)
+	get /delete (DeleteProductBrandReq) returns (DeleteProductBrandResp)
 }

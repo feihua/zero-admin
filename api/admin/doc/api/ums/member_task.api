@@ -16,8 +16,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListMemberTaskReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtMemberTaskData {
 		Id           int64  `json:"id"`
@@ -29,9 +29,9 @@ type (
 	ListMemberTaskResp {
 		Code     string                 `json:"code"`
 		Message  string                 `json:"message"`
-		Current  int64                  `json:"current,default=1"`
+		Current  int64                  `form:"current,default=1"`
 		Data     []*ListtMemberTaskData `json:"data"`
-		PageSize int64                  `json:"pageSize,default=20"`
+		PageSize int64                  `form:"pageSize,default=20"`
 		Success  bool                   `json:"success"`
 		Total    int64                  `json:"total"`
 	}
@@ -47,7 +47,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteMemberTaskReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteMemberTaskResp {
 		Code    string `json:"code"`
@@ -66,11 +66,11 @@ service admin-api {
 	post /add (addMemberTaskReq) returns (addMemberTaskResp)
 	
 	@handler MemberTaskList
-	post /list (ListMemberTaskReq) returns (ListMemberTaskResp)
+	get /list (ListMemberTaskReq) returns (ListMemberTaskResp)
 	
 	@handler MemberTaskUpdate
 	post /update (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
 	
 	@handler MemberTaskDelete
-	post /delete (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
+	get /delete (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
 }

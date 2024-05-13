@@ -17,8 +17,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListFlashPromotionLogReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtFlashPromotionLogData {
 		Id            int64  `json:"id"`
@@ -32,9 +32,9 @@ type (
 	ListFlashPromotionLogResp {
 		Code     string                        `json:"code"`
 		Message  string                        `json:"message"`
-		Current  int64                         `json:"current,default=1"`
+		Current  int64                         `form:"current,default=1"`
 		Data     []*ListtFlashPromotionLogData `json:"data"`
-		PageSize int64                         `json:"pageSize,default=20"`
+		PageSize int64                         `form:"pageSize,default=20"`
 		Success  bool                          `json:"success"`
 		Total    int64                         `json:"total"`
 	}
@@ -52,7 +52,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteFlashPromotionLogReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteFlashPromotionLogResp {
 		Code    string `json:"code"`
@@ -71,11 +71,11 @@ service admin-api {
 	post /add (addFlashPromotionLogReq) returns (addFlashPromotionLogResp)
 	
 	@handler FlashPromotionLogList
-	post /list (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
+	get /list (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
 	
 	@handler FlashPromotionLogUpdate
 	post /update (UpdateFlashPromotionLogReq) returns (UpdateFlashPromotionLogResp)
 	
 	@handler FlashPromotionLogDelete
-	post /delete (DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp)
+	get /delete (DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp)
 }

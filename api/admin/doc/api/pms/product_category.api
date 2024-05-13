@@ -22,11 +22,11 @@ type (
 		Message string `json:"message"`
 	}
 	ListProductCategoryReq {
-		Current    int64  `json:"current,default=1"`
-		PageSize   int64  `json:"pageSize,default=20"`
-		Name       string `json:"name,optional"`
-		ParentId   int64  `json:"parentId,default=2000"`   // 上级分类的编号：0表示一级分类(默认值是无意义的,只是在查询的时候当一个标志使用)
-        ShowStatus int32 `json:"showStatus,default=2"`     // 显示状态：0->不显示；1->显示
+		Current    int64  `form:"current,default=1"`
+		PageSize   int64  `form:"pageSize,default=20"`
+		Name       string `form:"name,optional"`
+		ParentId   int64  `form:"parentId,default=2000"`   // 上级分类的编号：0表示一级分类(默认值是无意义的,只是在查询的时候当一个标志使用)
+        ShowStatus int32 `form:"showStatus,default=2"`     // 显示状态：0->不显示；1->显示
 	}
 	ListtProductCategoryData {
 		Id           int64  `json:"id"`
@@ -45,9 +45,9 @@ type (
 	ListProductCategoryResp {
 		Code     string                      `json:"code"`
 		Message  string                      `json:"message"`
-		Current  int64                       `json:"current,default=1"`
+		Current  int64                       `form:"current,default=1"`
 		Data     []*ListtProductCategoryData `json:"data"`
-		PageSize int64                       `json:"pageSize,default=20"`
+		PageSize int64                       `form:"pageSize,default=20"`
 		Success  bool                        `json:"success"`
 		Total    int64                       `json:"total"`
 	}
@@ -70,7 +70,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteProductCategoryReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteProductCategoryResp {
 		Code    string `json:"code"`
@@ -89,11 +89,11 @@ service admin-api {
 	post /add (addProductCategoryReq) returns (addProductCategoryResp)
 	
 	@handler ProductCategoryList
-	post /list (ListProductCategoryReq) returns (ListProductCategoryResp)
+	get /list (ListProductCategoryReq) returns (ListProductCategoryResp)
 	
 	@handler ProductCategoryUpdate
 	post /update (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
 	
 	@handler ProductCategoryDelete
-	post /delete (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
+	get /delete (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
 }

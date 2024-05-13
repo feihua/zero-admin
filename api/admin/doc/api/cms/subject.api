@@ -56,9 +56,9 @@ type (
 	ListSubjectResp {
 		Code     string              `json:"code"`
 		Message  string              `json:"message"`
-		Current  int64               `json:"current,default=1"`
+		Current  int64               `form:"current,default=1"`
 		Data     []*ListSubjectData `json:"data"`
-		PageSize int64               `json:"pageSize,default=20"`
+		PageSize int64               `form:"pageSize,default=20"`
 		Success  bool                `json:"success"`
 		Total    int64               `json:"total"`
 	}
@@ -84,7 +84,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteSubjectReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteSubjectResp {
 		Code    string `json:"code"`
@@ -110,5 +110,5 @@ service admin-api {
 	post /update (UpdateSubjectReq) returns (UpdateSubjectResp)
 	
 	@handler SubjectDelete
-	post /delete (DeleteSubjectReq) returns (DeleteSubjectResp)
+	get /delete (DeleteSubjectReq) returns (DeleteSubjectResp)
 }

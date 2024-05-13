@@ -96,14 +96,14 @@ type (
 		Message string `json:"message"`
 	}
 	ListProductReq {
-		Current           int64  `json:"current,default=1"`
-		PageSize          int64  `json:"pageSize,default=20"`
-		Name              string `json:"name,optional"`
-        VerifyStatus int32 `json:"verifyStatus,default=2"`
-		BrandId           int64  `json:"brandId,default=0"`
-		ProductCategoryId int64  `json:"productCategoryId,default=0"`
-        DeleteStatus int32 `json:"deleteStatus,default=2"` // 删除状态：0->未删除；1->已删除
-        PublishStatus int32 `json:"publishStatus,default=2"`
+		Current           int64  `form:"current,default=1"`
+		PageSize          int64  `form:"pageSize,default=20"`
+		Name              string `form:"name,optional"`
+        VerifyStatus int32 `form:"verifyStatus,default=2"`
+		BrandId           int64  `form:"brandId,default=0"`
+		ProductCategoryId int64  `form:"productCategoryId,default=0"`
+        DeleteStatus int32 `form:"deleteStatus,default=2"` // 删除状态：0->未删除；1->已删除
+        PublishStatus int32 `form:"publishStatus,default=2"`
 	}
 	ListtProductData {
 		Id                               int64   `json:"id"`
@@ -155,9 +155,9 @@ type (
 	ListProductResp {
 		Code     string              `json:"code"`
 		Message  string              `json:"message"`
-		Current  int64               `json:"current,default=1"`
+		Current  int64               `form:"current,default=1"`
 		Data     []*ListtProductData `json:"data"`
-		PageSize int64               `json:"pageSize,default=20"`
+		PageSize int64               `form:"pageSize,default=20"`
 		Success  bool                `json:"success"`
 		Total    int64               `json:"total"`
 	}
@@ -219,7 +219,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteProductReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteProductResp {
 		Code    string `json:"code"`
@@ -238,11 +238,11 @@ service admin-api {
 	post /add (addProductReq) returns (addProductResp)
 	
 	@handler ProductList
-	post /list (ListProductReq) returns (ListProductResp)
+	get /list (ListProductReq) returns (ListProductResp)
 	
 	@handler ProductUpdate
 	post /update (UpdateProductReq) returns (UpdateProductResp)
 	
 	@handler ProductDelete
-	post /delete (DeleteProductReq) returns (DeleteProductResp)
+	get /delete (DeleteProductReq) returns (DeleteProductResp)
 }

@@ -25,8 +25,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListMenuReq {
-		Name string `json:"name,optional"`
-		Url  string `json:"url,optional "`
+		Name string `form:"name,optional"`
+		Url  string `form:"url,optional "`
 	}
 	ListtMenuData {
 		Id             int64  `json:"id"`             // 编号
@@ -78,7 +78,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteMenuReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteMenuResp {
 		Code    string `json:"code"`
@@ -100,7 +100,7 @@ service admin-api {
 
 	//菜单列表信息
 	@handler MenuList
-	post /list (ListMenuReq) returns (ListMenuResp)
+	get /list (ListMenuReq) returns (ListMenuResp)
 
 	//更新菜单信息
 	@handler MenuUpdate
@@ -108,5 +108,5 @@ service admin-api {
 
 	//删除菜单信息
 	@handler MenuDelete
-	post /delete (DeleteMenuReq) returns (DeleteMenuResp)
+	get /delete (DeleteMenuReq) returns (DeleteMenuResp)
 }

@@ -17,8 +17,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListOrderSettingReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtOrderSettingData {
 		Id                  int64 `json:"id"`
@@ -31,9 +31,9 @@ type (
 	ListOrderSettingResp {
 		Code     string                   `json:"code"`
 		Message  string                   `json:"message"`
-		Current  int64                    `json:"current,default=1"`
+		Current  int64                    `form:"current,default=1"`
 		Data     []*ListtOrderSettingData `json:"data"`
-		PageSize int64                    `json:"pageSize,default=20"`
+		PageSize int64                    `form:"pageSize,default=20"`
 		Success  bool                     `json:"success"`
 		Total    int64                    `json:"total"`
 	}
@@ -50,7 +50,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteOrderSettingReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteOrderSettingResp {
 		Code    string `json:"code"`
@@ -69,11 +69,11 @@ service admin-api {
 	post /add (addOrderSettingReq) returns (addOrderSettingResp)
 	
 	@handler OrderSettingList
-	post /list (ListOrderSettingReq) returns (ListOrderSettingResp)
+	get /list (ListOrderSettingReq) returns (ListOrderSettingResp)
 	
 	@handler OrderSettingUpdate
 	post /update (UpdateOrderSettingReq) returns (UpdateOrderSettingResp)
 	
 	@handler OrderSettingDelete
-	post /delete (DeleteOrderSettingReq) returns (DeleteOrderSettingResp)
+	get /delete (DeleteOrderSettingReq) returns (DeleteOrderSettingResp)
 }

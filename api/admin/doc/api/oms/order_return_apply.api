@@ -38,13 +38,13 @@ type (
 		Message string `json:"message"`
 	}
 	ListReturnApplyReq {
-		Current        int64  `json:"current,default=1"`
-		PageSize       int64  `json:"pageSize,default=20"`
-		OrderSn        string `json:"orderSn,optional"`        // 订单编号
-        Status int32 `json:"status,default=4"`                 // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-		HandleTime     string `json:"handleTime,optional"`     // 处理时间
-		CreateTime     string `json:"createTime,optional"`     // 申请时间
-		MemberUsername string `json:"memberUserName,optional"` // 会员用户名
+		Current        int64  `form:"current,default=1"`
+		PageSize       int64  `form:"pageSize,default=20"`
+		OrderSn        string `form:"orderSn,optional"`        // 订单编号
+        Status int32 `form:"status,default=4"`                 // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+		HandleTime     string `form:"handleTime,optional"`     // 处理时间
+		CreateTime     string `form:"createTime,optional"`     // 申请时间
+		MemberUsername string `form:"memberUserName,optional"` // 会员用户名
 	}
 	ListtReturnApplyData {
 		Id               int64   `json:"id"`
@@ -78,9 +78,9 @@ type (
 	ListReturnApplyResp {
 		Code     string                  `json:"code"`
 		Message  string                  `json:"message"`
-		Current  int64                   `json:"current,default=1"`
+		Current  int64                   `form:"current,default=1"`
 		Data     []*ListtReturnApplyData `json:"data"`
-		PageSize int64                   `json:"pageSize,default=20"`
+		PageSize int64                   `form:"pageSize,default=20"`
 		Success  bool                    `json:"success"`
 		Total    int64                   `json:"total"`
 	}
@@ -96,7 +96,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteReturnApplyReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteReturnApplyResp {
 		Code    string `json:"code"`
@@ -115,11 +115,11 @@ service admin-api {
 	post /add (addReturnApplyReq) returns (addReturnApplyResp)
 	
 	@handler ReturnApplyList
-	post /list (ListReturnApplyReq) returns (ListReturnApplyResp)
+	get /list (ListReturnApplyReq) returns (ListReturnApplyResp)
 	
 	@handler ReturnApplyUpdate
 	post /update (UpdateReturnApplyReq) returns (UpdateReturnApplyResp)
 	
 	@handler ReturnApplyDelete
-	post /delete (DeleteReturnApplyReq) returns (DeleteReturnApplyResp)
+	get /delete (DeleteReturnApplyReq) returns (DeleteReturnApplyResp)
 }

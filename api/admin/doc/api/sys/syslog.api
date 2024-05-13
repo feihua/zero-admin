@@ -6,10 +6,10 @@ info(
 
 type (
 	ListSysLogReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		UserName string `json:"userName,optional"` // 用户名
-		Method   string `json:"method,optional"`   // 请求方法
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		UserName string `form:"userName,optional"` // 用户名
+		Method   string `form:"method,optional"`   // 请求方法
 	}
 	ListSysLogData {
 		Id             int64  `json:"id"`             // 编号
@@ -25,14 +25,14 @@ type (
 	ListSysLogResp {
 		Code     string            `json:"code"`
 		Message  string            `json:"message"`
-		Current  int64             `json:"current,default=1"`
+		Current  int64             `form:"current,default=1"`
 		Data     []*ListSysLogData `json:"data"`
-		PageSize int64             `json:"pageSize,default=20"`
+		PageSize int64             `form:"pageSize,default=20"`
 		Success  bool              `json:"success"`
 		Total    int64             `json:"total"`
 	}
 	DeleteSysLogReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteSysLogResp {
 		Code    string `json:"code"`
@@ -48,8 +48,8 @@ type (
 )
 service admin-api {
 	@handler SysLogList
-	post /list (ListSysLogReq) returns (ListSysLogResp)
+	get /list (ListSysLogReq) returns (ListSysLogResp)
 	
 	@handler SysLogDelete
-	post /delete (DeleteSysLogReq) returns (DeleteSysLogResp)
+	get /delete (DeleteSysLogReq) returns (DeleteSysLogResp)
 }

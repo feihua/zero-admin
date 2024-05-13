@@ -16,8 +16,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListIntegrationConsumeSettingReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtIntegrationConsumeSettingData {
 		Id                 int64 `json:"id"`
@@ -29,9 +29,9 @@ type (
 	ListIntegrationConsumeSettingResp {
 		Code     string                                `json:"code"`
 		Message  string                                `json:"message"`
-		Current  int64                                 `json:"current,default=1"`
+		Current  int64                                 `form:"current,default=1"`
 		Data     []*ListtIntegrationConsumeSettingData `json:"data"`
-		PageSize int64                                 `json:"pageSize,default=20"`
+		PageSize int64                                 `form:"pageSize,default=20"`
 		Success  bool                                  `json:"success"`
 		Total    int64                                 `json:"total"`
 	}
@@ -47,7 +47,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteIntegrationConsumeSettingReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteIntegrationConsumeSettingResp {
 		Code    string `json:"code"`
@@ -66,11 +66,11 @@ service admin-api {
 	post /add (addIntegrationConsumeSettingReq) returns (addIntegrationConsumeSettingResp)
 	
 	@handler IntegrationConsumeSettingList
-	post /list (ListIntegrationConsumeSettingReq) returns (ListIntegrationConsumeSettingResp)
+	get /list (ListIntegrationConsumeSettingReq) returns (ListIntegrationConsumeSettingResp)
 	
 	@handler IntegrationConsumeSettingUpdate
 	post /update (UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp)
 	
 	@handler IntegrationConsumeSettingDelete
-	post /delete (DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp)
+	get /delete (DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp)
 }

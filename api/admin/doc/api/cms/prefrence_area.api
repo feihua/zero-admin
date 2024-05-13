@@ -38,9 +38,9 @@ type (
 	ListPrefrenceAreaResp {
 		Code     string                    `json:"code"`
 		Message  string                    `json:"message"`
-		Current  int64                     `json:"current,default=1"`
+		Current  int64                     `form:"current,default=1"`
 		Data []*ListPrefrenceAreaData `json:"data"`
-		PageSize int64                     `json:"pageSize,default=20"`
+		PageSize int64                     `form:"pageSize,default=20"`
 		Success  bool                      `json:"success"`
 		Total    int64                     `json:"total"`
 	}
@@ -57,7 +57,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeletePrefrenceAreaReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeletePrefrenceAreaResp {
 		Code    string `json:"code"`
@@ -77,11 +77,11 @@ service admin-api {
 
 	//查询商品优选
 	@handler PrefrenceAreaList
-		get /queryPrefrenceAreaList (ListPrefrenceAreaReq) returns (ListPrefrenceAreaResp)
+	get /queryPrefrenceAreaList (ListPrefrenceAreaReq) returns (ListPrefrenceAreaResp)
 	
 	@handler PrefrenceAreaUpdate
 	post /update (UpdatePrefrenceAreaReq) returns (UpdatePrefrenceAreaResp)
 	
 	@handler PrefrenceAreaDelete
-	post /delete (DeletePrefrenceAreaReq) returns (DeletePrefrenceAreaResp)
+	get /delete (DeletePrefrenceAreaReq) returns (DeletePrefrenceAreaResp)
 }

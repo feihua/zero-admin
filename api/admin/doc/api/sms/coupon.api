@@ -27,14 +27,14 @@ type (
 		Message string `json:"message"`
 	}
 	ListCouponReq {
-		Current   int64  `json:"current,default=1"`
-		PageSize  int64  `json:"pageSize,default=20"`
-        Type int32 `json:"type,default=4"`         // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-		Name      string `json:"name,optional"`
-        Platform int32 `json:"platform,default=3"` // 使用平台：0->全部；1->移动；2->PC
-		StartTime string `json:"startTime,optional"`
-		EndTime   string `json:"endTime,optional"`
-        UseType int32 `json:"useType,default=3"`   // 使用类型：0->全场通用；1->指定分类；2->指定商品
+		Current   int64  `form:"current,default=1"`
+		PageSize  int64  `form:"pageSize,default=20"`
+        Type int32 `form:"type,default=4"`         // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+		Name      string `form:"name,optional"`
+        Platform int32 `form:"platform,default=3"` // 使用平台：0->全部；1->移动；2->PC
+		StartTime string `form:"startTime,optional"`
+		EndTime   string `form:"endTime,optional"`
+        UseType int32 `form:"useType,default=3"`   // 使用类型：0->全场通用；1->指定分类；2->指定商品
 	}
 	ListtCouponData {
 		Id           int64   `json:"id"`
@@ -59,9 +59,9 @@ type (
 	ListCouponResp {
 		Code     string             `json:"code"`
 		Message  string             `json:"message"`
-		Current  int64              `json:"current,default=1"`
+		Current  int64              `form:"current,default=1"`
 		Data     []*ListtCouponData `json:"data"`
-		PageSize int64              `json:"pageSize,default=20"`
+		PageSize int64              `form:"pageSize,default=20"`
 		Success  bool               `json:"success"`
 		Total    int64              `json:"total"`
 	}
@@ -88,7 +88,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteCouponReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteCouponResp {
 		Code    string `json:"code"`
@@ -107,11 +107,11 @@ service admin-api {
 	post /add (addCouponReq) returns (addCouponResp)
 	
 	@handler CouponList
-	post /list (ListCouponReq) returns (ListCouponResp)
+	get /list (ListCouponReq) returns (ListCouponResp)
 	
 	@handler CouponUpdate
 	post /update (UpdateCouponReq) returns (UpdateCouponResp)
 	
 	@handler CouponDelete
-	post /delete (DeleteCouponReq) returns (DeleteCouponResp)
+	get /delete (DeleteCouponReq) returns (DeleteCouponResp)
 }

@@ -2,7 +2,7 @@
 package types
 
 type DeleteCartItemReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteCartItemResp struct {
@@ -20,7 +20,7 @@ type DeleteCompanyAddressResp struct {
 }
 
 type DeleteCouponHistoryReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteCouponHistoryResp struct {
@@ -29,7 +29,7 @@ type DeleteCouponHistoryResp struct {
 }
 
 type DeleteCouponReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteCouponResp struct {
@@ -38,7 +38,7 @@ type DeleteCouponResp struct {
 }
 
 type DeleteDeptReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteDeptResp struct {
@@ -47,7 +47,7 @@ type DeleteDeptResp struct {
 }
 
 type DeleteDictReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteDictResp struct {
@@ -56,7 +56,7 @@ type DeleteDictResp struct {
 }
 
 type DeleteFeightTemplateReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteFeightTemplateResp struct {
@@ -65,7 +65,7 @@ type DeleteFeightTemplateResp struct {
 }
 
 type DeleteFlashPromotionLogReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteFlashPromotionLogResp struct {
@@ -74,7 +74,7 @@ type DeleteFlashPromotionLogResp struct {
 }
 
 type DeleteFlashPromotionReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteFlashPromotionResp struct {
@@ -83,7 +83,7 @@ type DeleteFlashPromotionResp struct {
 }
 
 type DeleteFlashPromotionSessionReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteFlashPromotionSessionResp struct {
@@ -92,7 +92,7 @@ type DeleteFlashPromotionSessionResp struct {
 }
 
 type DeleteGrowthChangeHistoryReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteGrowthChangeHistoryResp struct {
@@ -101,7 +101,7 @@ type DeleteGrowthChangeHistoryResp struct {
 }
 
 type DeleteHomeAdvertiseReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteHomeAdvertiseResp struct {
@@ -110,7 +110,7 @@ type DeleteHomeAdvertiseResp struct {
 }
 
 type DeleteHomeBrandReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteHomeBrandResp struct {
@@ -119,7 +119,7 @@ type DeleteHomeBrandResp struct {
 }
 
 type DeleteHomeNewProductReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteHomeNewProductResp struct {
@@ -128,7 +128,7 @@ type DeleteHomeNewProductResp struct {
 }
 
 type DeleteHomeRecommendProductReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteHomeRecommendProductResp struct {
@@ -137,7 +137,7 @@ type DeleteHomeRecommendProductResp struct {
 }
 
 type DeleteHomeRecommendSubjectReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteHomeRecommendSubjectResp struct {
@@ -146,7 +146,7 @@ type DeleteHomeRecommendSubjectResp struct {
 }
 
 type DeleteIntegrationChangeHistoryReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteIntegrationChangeHistoryResp struct {
@@ -155,7 +155,7 @@ type DeleteIntegrationChangeHistoryResp struct {
 }
 
 type DeleteIntegrationConsumeSettingReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteIntegrationConsumeSettingResp struct {
@@ -164,7 +164,7 @@ type DeleteIntegrationConsumeSettingResp struct {
 }
 
 type DeleteJobReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteJobResp struct {
@@ -173,7 +173,7 @@ type DeleteJobResp struct {
 }
 
 type DeleteLoginLogReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteLoginLogResp struct {
@@ -200,7 +200,7 @@ type DeleteMemberLevelResp struct {
 }
 
 type DeleteMemberLoginLogReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberLoginLogResp struct {
@@ -209,7 +209,7 @@ type DeleteMemberLoginLogResp struct {
 }
 
 type DeleteMemberPriceReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberPriceResp struct {
@@ -218,7 +218,7 @@ type DeleteMemberPriceResp struct {
 }
 
 type DeleteMemberReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberResp struct {
@@ -227,7 +227,7 @@ type DeleteMemberResp struct {
 }
 
 type DeleteMemberRuleSettingReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberRuleSettingResp struct {
@@ -236,7 +236,7 @@ type DeleteMemberRuleSettingResp struct {
 }
 
 type DeleteMemberStatisticsInfoReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberStatisticsInfoResp struct {
@@ -245,7 +245,7 @@ type DeleteMemberStatisticsInfoResp struct {
 }
 
 type DeleteMemberTagReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberTagResp struct {
@@ -254,7 +254,7 @@ type DeleteMemberTagResp struct {
 }
 
 type DeleteMemberTaskReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberTaskResp struct {
@@ -263,7 +263,7 @@ type DeleteMemberTaskResp struct {
 }
 
 type DeleteMenuReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMenuResp struct {
@@ -272,7 +272,7 @@ type DeleteMenuResp struct {
 }
 
 type DeleteOperateHistoryReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteOperateHistoryResp struct {
@@ -281,7 +281,7 @@ type DeleteOperateHistoryResp struct {
 }
 
 type DeleteOrderReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteOrderResp struct {
@@ -290,7 +290,7 @@ type DeleteOrderResp struct {
 }
 
 type DeleteOrderSettingReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteOrderSettingResp struct {
@@ -299,7 +299,7 @@ type DeleteOrderSettingResp struct {
 }
 
 type DeletePrefrenceAreaReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeletePrefrenceAreaResp struct {
@@ -308,7 +308,7 @@ type DeletePrefrenceAreaResp struct {
 }
 
 type DeleteProductAttributeReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteProductAttributeResp struct {
@@ -317,7 +317,7 @@ type DeleteProductAttributeResp struct {
 }
 
 type DeleteProductAttributecategoryReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteProductAttributecategoryResp struct {
@@ -326,7 +326,7 @@ type DeleteProductAttributecategoryResp struct {
 }
 
 type DeleteProductBrandReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteProductBrandResp struct {
@@ -335,7 +335,7 @@ type DeleteProductBrandResp struct {
 }
 
 type DeleteProductCategoryReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteProductCategoryResp struct {
@@ -344,7 +344,7 @@ type DeleteProductCategoryResp struct {
 }
 
 type DeleteProductCommentReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteProductCommentResp struct {
@@ -353,7 +353,7 @@ type DeleteProductCommentResp struct {
 }
 
 type DeleteProductReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteProductResp struct {
@@ -362,7 +362,7 @@ type DeleteProductResp struct {
 }
 
 type DeleteReturnApplyReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteReturnApplyResp struct {
@@ -371,7 +371,7 @@ type DeleteReturnApplyResp struct {
 }
 
 type DeleteReturnResonReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteReturnResonResp struct {
@@ -380,7 +380,7 @@ type DeleteReturnResonResp struct {
 }
 
 type DeleteRoleReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteRoleResp struct {
@@ -389,7 +389,7 @@ type DeleteRoleResp struct {
 }
 
 type DeleteSkuStockReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteSkuStockResp struct {
@@ -398,7 +398,7 @@ type DeleteSkuStockResp struct {
 }
 
 type DeleteSubjectReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteSubjectResp struct {
@@ -407,7 +407,7 @@ type DeleteSubjectResp struct {
 }
 
 type DeleteSysLogReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteSysLogResp struct {
@@ -416,7 +416,7 @@ type DeleteSysLogResp struct {
 }
 
 type DeleteUserReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteUserResp struct {
@@ -437,16 +437,16 @@ type JobRelations struct {
 }
 
 type ListCartItemReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListCartItemResp struct {
 	Code     string               `json:"code"`
 	Message  string               `json:"message"`
-	Current  int64                `json:"current,default=1"`
+	Current  int64                `form:"current,default=1"`
 	Data     []*ListtCartItemData `json:"data"`
-	PageSize int64                `json:"pageSize,default=20"`
+	PageSize int64                `form:"pageSize,default=20"`
 	Success  bool                 `json:"success"`
 	Total    int64                `json:"total"`
 }
@@ -476,23 +476,23 @@ type ListCompanyAddressReq struct {
 type ListCompanyAddressResp struct {
 	Code     string                    `json:"code"`
 	Message  string                    `json:"message"`
-	Current  int64                     `json:"current,default=1"`
+	Current  int64                     `form:"current,default=1"`
 	Data     []*ListCompanyAddressData `json:"data"`
-	PageSize int64                     `json:"pageSize,default=20"`
+	PageSize int64                     `form:"pageSize,default=20"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
 }
 
 type ListCouponHistoryReq struct {
-	Current   int64 `json:"current,default=1"`
-	PageSize  int64 `json:"pageSize,default=20"`
-	UseStatus int32 `json:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
+	Current   int64 `form:"current,default=1"`
+	PageSize  int64 `form:"pageSize,default=20"`
+	UseStatus int32 `form:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
 }
 
 type ListCouponHistoryResp struct {
-	Current  int64                     `json:"current,default=1"`
+	Current  int64                     `form:"current,default=1"`
 	Data     []*ListtCouponHistoryData `json:"data"`
-	PageSize int64                     `json:"pageSize,default=20"`
+	PageSize int64                     `form:"pageSize,default=20"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
 	Code     string                    `json:"code"`
@@ -500,22 +500,22 @@ type ListCouponHistoryResp struct {
 }
 
 type ListCouponReq struct {
-	Current   int64  `json:"current,default=1"`
-	PageSize  int64  `json:"pageSize,default=20"`
-	Type      int32  `json:"type,default=4"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name      string `json:"name,optional"`
-	Platform  int32  `json:"platform,default=3"` // 使用平台：0->全部；1->移动；2->PC
-	StartTime string `json:"startTime,optional"`
-	EndTime   string `json:"endTime,optional"`
-	UseType   int32  `json:"useType,default=3"` // 使用类型：0->全场通用；1->指定分类；2->指定商品
+	Current   int64  `form:"current,default=1"`
+	PageSize  int64  `form:"pageSize,default=20"`
+	Type      int32  `form:"type,default=4"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name      string `form:"name,optional"`
+	Platform  int32  `form:"platform,default=3"` // 使用平台：0->全部；1->移动；2->PC
+	StartTime string `form:"startTime,optional"`
+	EndTime   string `form:"endTime,optional"`
+	UseType   int32  `form:"useType,default=3"` // 使用类型：0->全场通用；1->指定分类；2->指定商品
 }
 
 type ListCouponResp struct {
 	Code     string             `json:"code"`
 	Message  string             `json:"message"`
-	Current  int64              `json:"current,default=1"`
+	Current  int64              `form:"current,default=1"`
 	Data     []*ListtCouponData `json:"data"`
-	PageSize int64              `json:"pageSize,default=20"`
+	PageSize int64              `form:"pageSize,default=20"`
 	Success  bool               `json:"success"`
 	Total    int64              `json:"total"`
 }
@@ -534,8 +534,8 @@ type ListDeptData struct {
 }
 
 type ListDeptReq struct {
-	Name     string `json:"name,optional"`
-	CreateBy string `json:"createBy,optional"`
+	Name     string `json:"form,optional"`
+	CreateBy string `json:"form,optional"`
 }
 
 type ListDeptResp struct {
@@ -562,97 +562,97 @@ type ListDictData struct {
 }
 
 type ListDictReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	Value    string `json:"value,optional"`
-	Label    string `json:"label,optional"`
-	DelFlag  int32  `json:"delFlag,default=2"`
-	Type     string `json:"type,optional "`
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	Value    string `form:"value,optional"`
+	Label    string `form:"label,optional"`
+	DelFlag  int32  `form:"delFlag,default=2"`
+	Type     string `form:"type,optional "`
 }
 
 type ListDictResp struct {
 	Code     string          `json:"code"`
 	Message  string          `json:"message"`
-	Current  int64           `json:"current,default=1"`
+	Current  int64           `form:"current,default=1"`
 	Data     []*ListDictData `json:"data"`
-	PageSize int64           `json:"pageSize,default=20"`
+	PageSize int64           `form:"pageSize,default=20"`
 	Success  bool            `json:"success"`
 	Total    int64           `json:"total"`
 }
 
 type ListFeightTemplateReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListFeightTemplateResp struct {
 	Code     string                     `json:"code"`
 	Message  string                     `json:"message"`
-	Current  int64                      `json:"current,default=1"`
+	Current  int64                      `form:"current,default=1"`
 	Data     []*ListtFeightTemplateData `json:"data"`
-	PageSize int64                      `json:"pageSize,default=20"`
+	PageSize int64                      `form:"pageSize,default=20"`
 	Success  bool                       `json:"success"`
 	Total    int64                      `json:"total"`
 }
 
 type ListFlashPromotionLogReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListFlashPromotionLogResp struct {
 	Code     string                        `json:"code"`
 	Message  string                        `json:"message"`
-	Current  int64                         `json:"current,default=1"`
+	Current  int64                         `form:"current,default=1"`
 	Data     []*ListtFlashPromotionLogData `json:"data"`
-	PageSize int64                         `json:"pageSize,default=20"`
+	PageSize int64                         `form:"pageSize,default=20"`
 	Success  bool                          `json:"success"`
 	Total    int64                         `json:"total"`
 }
 
 type ListFlashPromotionReq struct {
-	Current   int64  `json:"current,default=1"`
-	PageSize  int64  `json:"pageSize,default=20"`
-	Title     string `json:"title,optional"`     //标题
-	Status    int32  `json:"status,,default=2"`  // 上下线状态
-	StartDate string `json:"startDate,optional"` // 开始日期
-	EndDate   string `json:"endDate,optional"`   // 结束日期
+	Current   int64  `form:"current,default=1"`
+	PageSize  int64  `form:"pageSize,default=20"`
+	Title     string `form:"title,optional"`     //标题
+	Status    int32  `form:"status,,default=2"`  // 上下线状态
+	StartDate string `form:"startDate,optional"` // 开始日期
+	EndDate   string `form:"endDate,optional"`   // 结束日期
 }
 
 type ListFlashPromotionResp struct {
 	Code     string                     `json:"code"`
 	Message  string                     `json:"message"`
-	Current  int64                      `json:"current,default=1"`
+	Current  int64                      `form:"current,default=1"`
 	Data     []*ListtFlashPromotionData `json:"data"`
-	PageSize int64                      `json:"pageSize,default=20"`
+	PageSize int64                      `form:"pageSize,default=20"`
 	Success  bool                       `json:"success"`
 	Total    int64                      `json:"total"`
 }
 
 type ListFlashPromotionSessionReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListFlashPromotionSessionResp struct {
 	Code     string                            `json:"code"`
 	Message  string                            `json:"message"`
-	Current  int64                             `json:"current,default=1"`
+	Current  int64                             `form:"current,default=1"`
 	Data     []*ListtFlashPromotionSessionData `json:"data"`
-	PageSize int64                             `json:"pageSize,default=20"`
+	PageSize int64                             `form:"pageSize,default=20"`
 	Success  bool                              `json:"success"`
 	Total    int64                             `json:"total"`
 }
 
 type ListGrowthChangeHistoryReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListGrowthChangeHistoryResp struct {
-	Current  int64                           `json:"current,default=1"`
+	Current  int64                           `form:"current,default=1"`
 	Data     []*ListtGrowthChangeHistoryData `json:"data"`
-	PageSize int64                           `json:"pageSize,default=20"`
+	PageSize int64                           `form:"pageSize,default=20"`
 	Success  bool                            `json:"success"`
 	Total    int64                           `json:"total"`
 	Code     string                          `json:"code"`
@@ -660,119 +660,119 @@ type ListGrowthChangeHistoryResp struct {
 }
 
 type ListHomeAdvertiseReq struct {
-	Current   int64  `json:"current,default=1"`
-	PageSize  int64  `json:"pageSize,default=20"`
-	Name      string `json:"name,optional"`      // 名称
-	Type      int32  `json:"type,default=2"`     // 轮播位置：0->PC首页轮播；1->app首页轮播
-	StartTime string `json:"startTime,optional"` // 开始时间
-	EndTime   string `json:"endTime,optional"`   // 结束时间
-	Status    int32  `json:"status,default=2"`   // 上下线状态：0->下线；1->上线
+	Current   int64  `form:"current,default=1"`
+	PageSize  int64  `form:"pageSize,default=20"`
+	Name      string `form:"name,optional"`      // 名称
+	Type      int32  `form:"type,default=2"`     // 轮播位置：0->PC首页轮播；1->app首页轮播
+	StartTime string `form:"startTime,optional"` // 开始时间
+	EndTime   string `form:"endTime,optional"`   // 结束时间
+	Status    int32  `form:"status,default=2"`   // 上下线状态：0->下线；1->上线
 }
 
 type ListHomeAdvertiseResp struct {
 	Code     string                    `json:"code"`
 	Message  string                    `json:"message"`
-	Current  int64                     `json:"current,default=1"`
+	Current  int64                     `form:"current,default=1"`
 	Data     []*ListtHomeAdvertiseData `json:"data"`
-	PageSize int64                     `json:"pageSize,default=20"`
+	PageSize int64                     `form:"pageSize,default=20"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
 }
 
 type ListHomeBrandReq struct {
-	Current         int64  `json:"current,default=1"`
-	PageSize        int64  `json:"pageSize,default=20"`
-	BrandName       string `json:"brandName,optional"`        // 商品品牌名称
-	RecommendStatus int32  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+	Current         int64  `form:"current,default=1"`
+	PageSize        int64  `form:"pageSize,default=20"`
+	BrandName       string `form:"brandName,optional"`        // 商品品牌名称
+	RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
 type ListHomeBrandResp struct {
 	Code     string                `json:"code"`
 	Message  string                `json:"message"`
-	Current  int64                 `json:"current,default=1"`
+	Current  int64                 `form:"current,default=1"`
 	Data     []*ListtHomeBrandData `json:"data"`
-	PageSize int64                 `json:"pageSize,default=20"`
+	PageSize int64                 `form:"pageSize,default=20"`
 	Success  bool                  `json:"success"`
 	Total    int64                 `json:"total"`
 }
 
 type ListHomeNewProductReq struct {
-	Current         int64  `json:"current,default=1"`
-	PageSize        int64  `json:"pageSize,default=20"`
-	ProductName     string `json:"productName,optional"`      // 商品名称
-	RecommendStatus int32  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+	Current         int64  `form:"current,default=1"`
+	PageSize        int64  `form:"pageSize,default=20"`
+	ProductName     string `form:"productName,optional"`      // 商品名称
+	RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
 type ListHomeNewProductResp struct {
 	Code     string                     `json:"code"`
 	Message  string                     `json:"message"`
-	Current  int64                      `json:"current,default=1"`
+	Current  int64                      `form:"current,default=1"`
 	Data     []*ListtHomeNewProductData `json:"data"`
-	PageSize int64                      `json:"pageSize,default=20"`
+	PageSize int64                      `form:"pageSize,default=20"`
 	Success  bool                       `json:"success"`
 	Total    int64                      `json:"total"`
 }
 
 type ListHomeRecommendProductReq struct {
-	Current         int64  `json:"current,default=1"`
-	PageSize        int64  `json:"pageSize,default=20"`
-	ProductName     string `json:"productName,optional"`      // 商品名称
-	RecommendStatus int32  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+	Current         int64  `form:"current,default=1"`
+	PageSize        int64  `form:"pageSize,default=20"`
+	ProductName     string `form:"productName,optional"`      // 商品名称
+	RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
 type ListHomeRecommendProductResp struct {
 	Code     string                           `json:"code"`
 	Message  string                           `json:"message"`
-	Current  int64                            `json:"current,default=1"`
+	Current  int64                            `form:"current,default=1"`
 	Data     []*ListtHomeRecommendProductData `json:"data"`
-	PageSize int64                            `json:"pageSize,default=20"`
+	PageSize int64                            `form:"pageSize,default=20"`
 	Success  bool                             `json:"success"`
 	Total    int64                            `json:"total"`
 }
 
 type ListHomeRecommendSubjectReq struct {
-	Current         int64  `json:"current,default=1"`
-	PageSize        int64  `json:"pageSize,default=20"`
-	SubjectName     string `json:"subjectName,optional"`      // 专题名称
-	RecommendStatus int32  `json:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+	Current         int64  `form:"current,default=1"`
+	PageSize        int64  `form:"pageSize,default=20"`
+	SubjectName     string `form:"subjectName,optional"`      // 专题名称
+	RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
 type ListHomeRecommendSubjectResp struct {
 	Code     string                           `json:"code"`
 	Message  string                           `json:"message"`
-	Current  int64                            `json:"current,default=1"`
+	Current  int64                            `form:"current,default=1"`
 	Data     []*ListtHomeRecommendSubjectData `json:"data"`
-	PageSize int64                            `json:"pageSize,default=20"`
+	PageSize int64                            `form:"pageSize,default=20"`
 	Success  bool                             `json:"success"`
 	Total    int64                            `json:"total"`
 }
 
 type ListIntegrationChangeHistoryReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListIntegrationChangeHistoryResp struct {
 	Code     string                               `json:"code"`
 	Message  string                               `json:"message"`
-	Current  int64                                `json:"current,default=1"`
+	Current  int64                                `form:"current,default=1"`
 	Data     []*ListtIntegrationChangeHistoryData `json:"data"`
-	PageSize int64                                `json:"pageSize,default=20"`
+	PageSize int64                                `form:"pageSize,default=20"`
 	Success  bool                                 `json:"success"`
 	Total    int64                                `json:"total"`
 }
 
 type ListIntegrationConsumeSettingReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListIntegrationConsumeSettingResp struct {
 	Code     string                                `json:"code"`
 	Message  string                                `json:"message"`
-	Current  int64                                 `json:"current,default=1"`
+	Current  int64                                 `form:"current,default=1"`
 	Data     []*ListtIntegrationConsumeSettingData `json:"data"`
-	PageSize int64                                 `json:"pageSize,default=20"`
+	PageSize int64                                 `form:"pageSize,default=20"`
 	Success  bool                                  `json:"success"`
 	Total    int64                                 `json:"total"`
 }
@@ -790,18 +790,18 @@ type ListJobData struct {
 }
 
 type ListJobReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	JobName  string `json:"jobName,optional"`
-	DelFlag  int32  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	JobName  string `form:"jobName,optional"`
+	DelFlag  int32  `form:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 }
 
 type ListJobResp struct {
 	Code     string         `json:"code"`
 	Message  string         `json:"message"`
-	Current  int64          `json:"current,default=1"`
+	Current  int64          `form:"current,default=1"`
 	Data     []*ListJobData `json:"data"`
-	PageSize int64          `json:"pageSize,default=20"`
+	PageSize int64          `form:"pageSize,default=20"`
 	Success  bool           `json:"success"`
 	Total    int64          `json:"total"`
 }
@@ -818,32 +818,32 @@ type ListLoginLogData struct {
 }
 
 type ListLoginLogReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	UserName string `json:"userName,optional"`
-	Ip       string `json:"ip,optional"` // IP地址
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	UserName string `form:"userName,optional"`
+	Ip       string `form:"ip,optional"` // IP地址
 }
 
 type ListLoginLogResp struct {
 	Code     string              `json:"code"`
 	Message  string              `json:"message"`
-	Current  int64               `json:"current,default=1"`
+	Current  int64               `form:"current,default=1"`
 	Data     []*ListLoginLogData `json:"data"`
-	PageSize int64               `json:"pageSize,default=20"`
+	PageSize int64               `form:"pageSize,default=20"`
 	Success  bool                `json:"success"`
 	Total    int64               `json:"total"`
 }
 
 type ListMemberAddressReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
-	MemberId int64 `json:"memberId,default=0"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
+	MemberId int64 `form:"memberId,default=0"`
 }
 
 type ListMemberAddressResp struct {
-	Current  int64                     `json:"current,default=1"`
+	Current  int64                     `form:"current,default=1"`
 	Data     []*ListtMemberAddressData `json:"data"`
-	PageSize int64                     `json:"pageSize,default=20"`
+	PageSize int64                     `form:"pageSize,default=20"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
 	Code     string                    `json:"code"`
@@ -859,38 +859,38 @@ type ListMemberLevelReq struct {
 type ListMemberLevelResp struct {
 	Code     string                  `json:"code"`
 	Message  string                  `json:"message"`
-	Current  int64                   `json:"current,default=1"`
+	Current  int64                   `form:"current,default=1"`
 	Data     []*ListtMemberLevelData `json:"data"`
-	PageSize int64                   `json:"pageSize,default=20"`
+	PageSize int64                   `form:"pageSize,default=20"`
 	Success  bool                    `json:"success"`
 	Total    int64                   `json:"total"`
 }
 
 type ListMemberLoginLogReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
-	MemberId int64 `json:"memberId,default=0"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
+	MemberId int64 `form:"memberId,default=0"`
 }
 
 type ListMemberLoginLogResp struct {
 	Code     string                     `json:"code"`
 	Message  string                     `json:"message"`
-	Current  int64                      `json:"current,default=1"`
+	Current  int64                      `form:"current,default=1"`
 	Data     []*ListtMemberLoginLogData `json:"data"`
-	PageSize int64                      `json:"pageSize,default=20"`
+	PageSize int64                      `form:"pageSize,default=20"`
 	Success  bool                       `json:"success"`
 	Total    int64                      `json:"total"`
 }
 
 type ListMemberPriceReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListMemberPriceResp struct {
-	Current  int64                   `json:"current,default=1"`
+	Current  int64                   `form:"current,default=1"`
 	Data     []*ListtMemberPriceData `json:"data"`
-	PageSize int64                   `json:"pageSize,default=20"`
+	PageSize int64                   `form:"pageSize,default=20"`
 	Success  bool                    `json:"success"`
 	Total    int64                   `json:"total"`
 	Code     string                  `json:"code"`
@@ -898,79 +898,79 @@ type ListMemberPriceResp struct {
 }
 
 type ListMemberReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	Username string `json:"username,optional"` // 用户名
-	Phone    string `json:"phone,optional"`    // 手机号码
-	Status   int32  `json:"status,default=2"`  // 帐号启用状态:0->禁用；1->启用
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	Username string `form:"username,optional"` // 用户名
+	Phone    string `form:"phone,optional"`    // 手机号码
+	Status   int32  `form:"status,default=2"`  // 帐号启用状态:0->禁用；1->启用
 }
 
 type ListMemberResp struct {
 	Code     string             `json:"code"`
 	Message  string             `json:"message"`
-	Current  int64              `json:"current,default=1"`
+	Current  int64              `form:"current,default=1"`
 	Data     []*ListtMemberData `json:"data"`
-	PageSize int64              `json:"pageSize,default=20"`
+	PageSize int64              `form:"pageSize,default=20"`
 	Success  bool               `json:"success"`
 	Total    int64              `json:"total"`
 }
 
 type ListMemberRuleSettingReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListMemberRuleSettingResp struct {
 	Code     string                        `json:"code"`
 	Message  string                        `json:"message"`
-	Current  int64                         `json:"current,default=1"`
+	Current  int64                         `form:"current,default=1"`
 	Data     []*ListtMemberRuleSettingData `json:"data"`
-	PageSize int64                         `json:"pageSize,default=20"`
+	PageSize int64                         `form:"pageSize,default=20"`
 	Success  bool                          `json:"success"`
 	Total    int64                         `json:"total"`
 }
 
 type ListMemberStatisticsInfoReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListMemberStatisticsInfoResp struct {
 	Code     string                           `json:"code"`
 	Message  string                           `json:"message"`
-	Current  int64                            `json:"current,default=1"`
+	Current  int64                            `form:"current,default=1"`
 	Data     []*ListtMemberStatisticsInfoData `json:"data"`
-	PageSize int64                            `json:"pageSize,default=20"`
+	PageSize int64                            `form:"pageSize,default=20"`
 	Success  bool                             `json:"success"`
 	Total    int64                            `json:"total"`
 }
 
 type ListMemberTagReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListMemberTagResp struct {
 	Code     string                `json:"code"`
 	Message  string                `json:"message"`
-	Current  int64                 `json:"current,default=1"`
+	Current  int64                 `form:"current,default=1"`
 	Data     []*ListtMemberTagData `json:"data"`
-	PageSize int64                 `json:"pageSize,default=20"`
+	PageSize int64                 `form:"pageSize,default=20"`
 	Success  bool                  `json:"success"`
 	Total    int64                 `json:"total"`
 }
 
 type ListMemberTaskReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListMemberTaskResp struct {
 	Code     string                 `json:"code"`
 	Message  string                 `json:"message"`
-	Current  int64                  `json:"current,default=1"`
+	Current  int64                  `form:"current,default=1"`
 	Data     []*ListtMemberTaskData `json:"data"`
-	PageSize int64                  `json:"pageSize,default=20"`
+	PageSize int64                  `form:"pageSize,default=20"`
 	Success  bool                   `json:"success"`
 	Total    int64                  `json:"total"`
 }
@@ -984,8 +984,8 @@ type ListMenuData struct {
 }
 
 type ListMenuReq struct {
-	Name string `json:"name,optional"`
-	Url  string `json:"url,optional "`
+	Name string `form:"name,optional"`
+	Url  string `form:"url,optional "`
 }
 
 type ListMenuResp struct {
@@ -1026,16 +1026,16 @@ type ListOperateHistoryData struct {
 }
 
 type ListOperateHistoryReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListOperateHistoryResp struct {
 	Code     string                     `json:"code"`
 	Message  string                     `json:"message"`
-	Current  int64                      `json:"current,default=1"`
+	Current  int64                      `form:"current,default=1"`
 	Data     []*ListtOperateHistoryData `json:"data"`
-	PageSize int64                      `json:"pageSize,default=20"`
+	PageSize int64                      `form:"pageSize,default=20"`
 	Success  bool                       `json:"success"`
 	Total    int64                      `json:"total"`
 }
@@ -1114,37 +1114,37 @@ type ListOrderItemData struct {
 }
 
 type ListOrderReq struct {
-	Current        int64  `json:"current,default=1"`
-	PageSize       int64  `json:"pageSize,default=20"`
-	OrderSn        string `json:"orderSn,optional"`        // 订单编号
-	MemberUsername string `json:"memberUserName,optional"` // 用户帐号
-	PayType        int32  `json:"payType,default=3"`       // 支付方式：0->未支付；1->支付宝；2->微信
-	SourceType     int32  `json:"sourceType,default=2"`    // 订单来源：0->PC订单；1->app订单
-	Status         int32  `json:"status,default=6"`        // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-	OrderType      int32  `json:"orderType,default=2"`     // 订单类型：0->正常订单；1->秒杀订单
+	Current        int64  `form:"current,default=1"`
+	PageSize       int64  `form:"pageSize,default=20"`
+	OrderSn        string `form:"orderSn,optional"`        // 订单编号
+	MemberUsername string `form:"memberUserName,optional"` // 用户帐号
+	PayType        int32  `form:"payType,default=3"`       // 支付方式：0->未支付；1->支付宝；2->微信
+	SourceType     int32  `form:"sourceType,default=2"`    // 订单来源：0->PC订单；1->app订单
+	Status         int32  `form:"status,default=6"`        // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	OrderType      int32  `form:"orderType,default=2"`     // 订单类型：0->正常订单；1->秒杀订单
 }
 
 type ListOrderResp struct {
 	Code     string           `json:"code"`
 	Message  string           `json:"message"`
-	Current  int64            `json:"current,default=1"`
+	Current  int64            `form:"current,default=1"`
 	Data     []*ListOrderData `json:"data"`
-	PageSize int64            `json:"pageSize,default=20"`
+	PageSize int64            `form:"pageSize,default=20"`
 	Success  bool             `json:"success"`
 	Total    int64            `json:"total"`
 }
 
 type ListOrderSettingReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListOrderSettingResp struct {
 	Code     string                   `json:"code"`
 	Message  string                   `json:"message"`
-	Current  int64                    `json:"current,default=1"`
+	Current  int64                    `form:"current,default=1"`
 	Data     []*ListtOrderSettingData `json:"data"`
-	PageSize int64                    `json:"pageSize,default=20"`
+	PageSize int64                    `form:"pageSize,default=20"`
 	Success  bool                     `json:"success"`
 	Total    int64                    `json:"total"`
 }
@@ -1173,59 +1173,59 @@ type ListPrefrenceAreaReq struct {
 type ListPrefrenceAreaResp struct {
 	Code     string                   `json:"code"`
 	Message  string                   `json:"message"`
-	Current  int64                    `json:"current,default=1"`
+	Current  int64                    `form:"current,default=1"`
 	Data     []*ListPrefrenceAreaData `json:"data"`
-	PageSize int64                    `json:"pageSize,default=20"`
+	PageSize int64                    `form:"pageSize,default=20"`
 	Success  bool                     `json:"success"`
 	Total    int64                    `json:"total"`
 }
 
 type ListProductAttributeReq struct {
-	Current                    int64  `json:"current,default=1"`
-	PageSize                   int64  `json:"pageSize,default=20"`
-	Name                       string `json:"name,optional"`
-	Type                       int32  `json:"type,default=2"` // 属性的类型；0->规格；1->参数
-	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId,default=0"`
+	Current                    int64  `form:"current,default=1"`
+	PageSize                   int64  `form:"pageSize,default=20"`
+	Name                       string `form:"name,optional"`
+	Type                       int32  `form:"type,default=2"` // 属性的类型；0->规格；1->参数
+	ProductAttributeCategoryId int64  `form:"productAttributeCategoryId,default=0"`
 }
 
 type ListProductAttributeResp struct {
 	Code     string                       `json:"code"`
 	Message  string                       `json:"message"`
-	Current  int64                        `json:"current,default=1"`
+	Current  int64                        `form:"current,default=1"`
 	Data     []*ListtProductAttributeData `json:"data"`
-	PageSize int64                        `json:"pageSize,default=20"`
+	PageSize int64                        `form:"pageSize,default=20"`
 	Success  bool                         `json:"success"`
 	Total    int64                        `json:"total"`
 }
 
 type ListProductAttributecategoryReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	Name     string `json:"name,optional"`
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	Name     string `form:"name,optional"`
 }
 
 type ListProductAttributecategoryResp struct {
 	Code     string                               `json:"code"`
 	Message  string                               `json:"message"`
-	Current  int64                                `json:"current,default=1"`
+	Current  int64                                `form:"current,default=1"`
 	Data     []*ListtProductAttributecategoryData `json:"data"`
-	PageSize int64                                `json:"pageSize,default=20"`
+	PageSize int64                                `form:"pageSize,default=20"`
 	Success  bool                                 `json:"success"`
 	Total    int64                                `json:"total"`
 }
 
 type ListProductBrandReq struct {
-	Current       int64  `json:"current,default=1"`
-	PageSize      int64  `json:"pageSize,default=20"`
-	Name          string `json:"name,optional"`
-	FactoryStatus int32  `json:"factoryStatus,default=2"` // 是否为品牌制造商：0->不是；1->是
-	ShowStatus    int32  `json:"showStatus,default=2"`
+	Current       int64  `form:"current,default=1"`
+	PageSize      int64  `form:"pageSize,default=20"`
+	Name          string `form:"name,optional"`
+	FactoryStatus int32  `form:"factoryStatus,default=2"` // 是否为品牌制造商：0->不是；1->是
+	ShowStatus    int32  `form:"showStatus,default=2"`
 }
 
 type ListProductBrandResp struct {
-	Current  int64                    `json:"current,default=1"`
+	Current  int64                    `form:"current,default=1"`
 	Data     []*ListtProductBrandData `json:"data"`
-	PageSize int64                    `json:"pageSize,default=20"`
+	PageSize int64                    `form:"pageSize,default=20"`
 	Success  bool                     `json:"success"`
 	Total    int64                    `json:"total"`
 	Code     string                   `json:"code"`
@@ -1233,92 +1233,92 @@ type ListProductBrandResp struct {
 }
 
 type ListProductCategoryReq struct {
-	Current    int64  `json:"current,default=1"`
-	PageSize   int64  `json:"pageSize,default=20"`
-	Name       string `json:"name,optional"`
-	ParentId   int64  `json:"parentId,default=2000"` // 上级分类的编号：0表示一级分类(默认值是无意义的,只是在查询的时候当一个标志使用)
-	ShowStatus int32  `json:"showStatus,default=2"`  // 显示状态：0->不显示；1->显示
+	Current    int64  `form:"current,default=1"`
+	PageSize   int64  `form:"pageSize,default=20"`
+	Name       string `form:"name,optional"`
+	ParentId   int64  `form:"parentId,default=2000"` // 上级分类的编号：0表示一级分类(默认值是无意义的,只是在查询的时候当一个标志使用)
+	ShowStatus int32  `form:"showStatus,default=2"`  // 显示状态：0->不显示；1->显示
 }
 
 type ListProductCategoryResp struct {
 	Code     string                      `json:"code"`
 	Message  string                      `json:"message"`
-	Current  int64                       `json:"current,default=1"`
+	Current  int64                       `form:"current,default=1"`
 	Data     []*ListtProductCategoryData `json:"data"`
-	PageSize int64                       `json:"pageSize,default=20"`
+	PageSize int64                       `form:"pageSize,default=20"`
 	Success  bool                        `json:"success"`
 	Total    int64                       `json:"total"`
 }
 
 type ListProductCommentReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListProductCommentResp struct {
 	Code     string                     `json:"code"`
 	Message  string                     `json:"message"`
-	Current  int64                      `json:"current,default=1"`
+	Current  int64                      `form:"current,default=1"`
 	Data     []*ListtProductCommentData `json:"data"`
-	PageSize int64                      `json:"pageSize,default=20"`
+	PageSize int64                      `form:"pageSize,default=20"`
 	Success  bool                       `json:"success"`
 	Total    int64                      `json:"total"`
 }
 
 type ListProductReq struct {
-	Current           int64  `json:"current,default=1"`
-	PageSize          int64  `json:"pageSize,default=20"`
-	Name              string `json:"name,optional"`
-	VerifyStatus      int32  `json:"verifyStatus,default=2"`
-	BrandId           int64  `json:"brandId,default=0"`
-	ProductCategoryId int64  `json:"productCategoryId,default=0"`
-	DeleteStatus      int32  `json:"deleteStatus,default=2"` // 删除状态：0->未删除；1->已删除
-	PublishStatus     int32  `json:"publishStatus,default=2"`
+	Current           int64  `form:"current,default=1"`
+	PageSize          int64  `form:"pageSize,default=20"`
+	Name              string `form:"name,optional"`
+	VerifyStatus      int32  `form:"verifyStatus,default=2"`
+	BrandId           int64  `form:"brandId,default=0"`
+	ProductCategoryId int64  `form:"productCategoryId,default=0"`
+	DeleteStatus      int32  `form:"deleteStatus,default=2"` // 删除状态：0->未删除；1->已删除
+	PublishStatus     int32  `form:"publishStatus,default=2"`
 }
 
 type ListProductResp struct {
 	Code     string              `json:"code"`
 	Message  string              `json:"message"`
-	Current  int64               `json:"current,default=1"`
+	Current  int64               `form:"current,default=1"`
 	Data     []*ListtProductData `json:"data"`
-	PageSize int64               `json:"pageSize,default=20"`
+	PageSize int64               `form:"pageSize,default=20"`
 	Success  bool                `json:"success"`
 	Total    int64               `json:"total"`
 }
 
 type ListReturnApplyReq struct {
-	Current        int64  `json:"current,default=1"`
-	PageSize       int64  `json:"pageSize,default=20"`
-	OrderSn        string `json:"orderSn,optional"`        // 订单编号
-	Status         int32  `json:"status,default=4"`        // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-	HandleTime     string `json:"handleTime,optional"`     // 处理时间
-	CreateTime     string `json:"createTime,optional"`     // 申请时间
-	MemberUsername string `json:"memberUserName,optional"` // 会员用户名
+	Current        int64  `form:"current,default=1"`
+	PageSize       int64  `form:"pageSize,default=20"`
+	OrderSn        string `form:"orderSn,optional"`        // 订单编号
+	Status         int32  `form:"status,default=4"`        // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleTime     string `form:"handleTime,optional"`     // 处理时间
+	CreateTime     string `form:"createTime,optional"`     // 申请时间
+	MemberUsername string `form:"memberUserName,optional"` // 会员用户名
 }
 
 type ListReturnApplyResp struct {
 	Code     string                  `json:"code"`
 	Message  string                  `json:"message"`
-	Current  int64                   `json:"current,default=1"`
+	Current  int64                   `form:"current,default=1"`
 	Data     []*ListtReturnApplyData `json:"data"`
-	PageSize int64                   `json:"pageSize,default=20"`
+	PageSize int64                   `form:"pageSize,default=20"`
 	Success  bool                    `json:"success"`
 	Total    int64                   `json:"total"`
 }
 
 type ListReturnResonReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	Name     string `json:"name,optional"`    // 退货类型
-	Status   int32  `json:"status,default=2"` // 状态：0->不启用；1->启用
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	Name     string `form:"name,optional"`    // 退货类型
+	Status   int32  `form:"status,default=2"` // 状态：0->不启用；1->启用
 }
 
 type ListReturnResonResp struct {
 	Code     string                  `json:"code"`
 	Message  string                  `json:"message"`
-	Current  int64                   `json:"current,default=1"`
+	Current  int64                   `form:"current,default=1"`
 	Data     []*ListtReturnResonData `json:"data"`
-	PageSize int64                   `json:"pageSize,default=20"`
+	PageSize int64                   `form:"pageSize,default=20"`
 	Success  bool                    `json:"success"`
 	Total    int64                   `json:"total"`
 }
@@ -1338,31 +1338,31 @@ type ListRoleData struct {
 }
 
 type ListRoleReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	Name     string `json:"name,optional "`
-	Status   int32  `json:"status,default=2"`
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	Name     string `form:"name,optional "`
+	Status   int32  `form:"status,default=2"`
 }
 
 type ListRoleResp struct {
 	Code     string          `json:"code"`
 	Message  string          `json:"message"`
-	Current  int64           `json:"current,default=1"`
+	Current  int64           `form:"current,default=1"`
 	Data     []*ListRoleData `json:"data"`
-	PageSize int64           `json:"pageSize,default=20"`
+	PageSize int64           `form:"pageSize,default=20"`
 	Success  bool            `json:"success"`
 	Total    int64           `json:"total"`
 }
 
 type ListSkuStockReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListSkuStockResp struct {
-	Current  int64                `json:"current,default=1"`
+	Current  int64                `form:"current,default=1"`
 	Data     []*ListtSkuStockData `json:"data"`
-	PageSize int64                `json:"pageSize,default=20"`
+	PageSize int64                `form:"pageSize,default=20"`
 	Success  bool                 `json:"success"`
 	Total    int64                `json:"total"`
 	Code     string               `json:"code"`
@@ -1402,9 +1402,9 @@ type ListSubjectReq struct {
 type ListSubjectResp struct {
 	Code     string             `json:"code"`
 	Message  string             `json:"message"`
-	Current  int64              `json:"current,default=1"`
+	Current  int64              `form:"current,default=1"`
 	Data     []*ListSubjectData `json:"data"`
-	PageSize int64              `json:"pageSize,default=20"`
+	PageSize int64              `form:"pageSize,default=20"`
 	Success  bool               `json:"success"`
 	Total    int64              `json:"total"`
 }
@@ -1422,18 +1422,18 @@ type ListSysLogData struct {
 }
 
 type ListSysLogReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	UserName string `json:"userName,optional"` // 用户名
-	Method   string `json:"method,optional"`   // 请求方法
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	UserName string `form:"userName,optional"` // 用户名
+	Method   string `form:"method,optional"`   // 请求方法
 }
 
 type ListSysLogResp struct {
 	Code     string            `json:"code"`
 	Message  string            `json:"message"`
-	Current  int64             `json:"current,default=1"`
+	Current  int64             `form:"current,default=1"`
 	Data     []*ListSysLogData `json:"data"`
-	PageSize int64             `json:"pageSize,default=20"`
+	PageSize int64             `form:"pageSize,default=20"`
 	Success  bool              `json:"success"`
 	Total    int64             `json:"total"`
 }
@@ -1460,23 +1460,23 @@ type ListUserData struct {
 }
 
 type ListUserReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	Name     string `json:"name,optional"`
-	NickName string `json:"nickName,optional"`
-	Mobile   string `json:"mobile,optional"`
-	Email    string `json:"email,optional"`
-	Status   int32  `json:"status,optional,default=2"`
-	DeptId   int64  `json:"deptId,optional"`
-	JobId    int64  `json:"deptId,optional"`
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	Name     string `form:"name,optional"`
+	NickName string `form:"nickName,optional"`
+	Mobile   string `form:"mobile,optional"`
+	Email    string `form:"email,optional"`
+	Status   int32  `form:"status,optional,default=2"`
+	DeptId   int64  `form:"deptId,optional"`
+	JobId    int64  `form:"deptId,optional"`
 }
 
 type ListUserResp struct {
 	Code     string          `json:"code"`
 	Message  string          `json:"message"`
-	Current  int64           `json:"current,default=1"`
+	Current  int64           `form:"current,default=1"`
 	Data     []*ListUserData `json:"data"`
-	PageSize int64           `json:"pageSize,default=20"`
+	PageSize int64           `form:"pageSize,default=20"`
 	Success  bool            `json:"success"`
 	Total    int64           `json:"total"`
 }
@@ -2010,8 +2010,8 @@ type QueryAllRelationsData struct {
 }
 
 type QueryAllRelationsReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type QueryAllRelationsResp struct {

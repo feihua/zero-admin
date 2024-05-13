@@ -23,11 +23,11 @@ type (
 		Message string `json:"message"`
 	}
 	ListProductAttributeReq {
-		Current                    int64  `json:"current,default=1"`
-		PageSize                   int64  `json:"pageSize,default=20"`
-		Name                       string `json:"name,optional"`
-        Type int32 `json:"type,default=2"` // 属性的类型；0->规格；1->参数
-		ProductAttributeCategoryId int64  `json:"productAttributeCategoryId,default=0"`
+		Current                    int64  `form:"current,default=1"`
+		PageSize                   int64  `form:"pageSize,default=20"`
+		Name                       string `form:"name,optional"`
+        Type int32 `form:"type,default=2"` // 属性的类型；0->规格；1->参数
+		ProductAttributeCategoryId int64  `form:"productAttributeCategoryId,default=0"`
 	}
 	ListtProductAttributeData {
 		Id                         int64  `json:"id"`
@@ -46,9 +46,9 @@ type (
 	ListProductAttributeResp {
 		Code     string                       `json:"code"`
 		Message  string                       `json:"message"`
-		Current  int64                        `json:"current,default=1"`
+		Current  int64                        `form:"current,default=1"`
 		Data     []*ListtProductAttributeData `json:"data"`
-		PageSize int64                        `json:"pageSize,default=20"`
+		PageSize int64                        `form:"pageSize,default=20"`
 		Success  bool                         `json:"success"`
 		Total    int64                        `json:"total"`
 	}
@@ -71,7 +71,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteProductAttributeReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteProductAttributeResp {
 		Code    string `json:"code"`
@@ -90,11 +90,11 @@ service admin-api {
 	post /add (addProductAttributeReq) returns (addProductAttributeResp)
 	
 	@handler ProductAttributeList
-	post /list (ListProductAttributeReq) returns (ListProductAttributeResp)
+	get /list (ListProductAttributeReq) returns (ListProductAttributeResp)
 	
 	@handler ProductAttributeUpdate
 	post /update (UpdateProductAttributeReq) returns (UpdateProductAttributeResp)
 	
 	@handler ProductAttributeDelete
-	post /delete (DeleteProductAttributeReq) returns (DeleteProductAttributeResp)
+	get /delete (DeleteProductAttributeReq) returns (DeleteProductAttributeResp)
 }

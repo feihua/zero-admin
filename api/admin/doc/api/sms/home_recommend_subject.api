@@ -13,10 +13,10 @@ type (
 		Message string `json:"message"`
 	}
 	ListHomeRecommendSubjectReq {
-		Current         int64  `json:"current,default=1"`
-		PageSize        int64  `json:"pageSize,default=20"`
-		SubjectName     string `json:"subjectName,optional"`      // 专题名称
-		RecommendStatus int32 `json:"recommendStatus,default=2"`  // 推荐状态：0->不推荐;1->推荐
+		Current         int64  `form:"current,default=1"`
+		PageSize        int64  `form:"pageSize,default=20"`
+		SubjectName     string `form:"subjectName,optional"`      // 专题名称
+		RecommendStatus int32 `form:"recommendStatus,default=2"`  // 推荐状态：0->不推荐;1->推荐
 	}
 	ListtHomeRecommendSubjectData {
 		Id              int64  `json:"id"`
@@ -28,9 +28,9 @@ type (
 	ListHomeRecommendSubjectResp {
 		Code     string                           `json:"code"`
 		Message  string                           `json:"message"`
-		Current  int64                            `json:"current,default=1"`
+		Current  int64                            `form:"current,default=1"`
 		Data     []*ListtHomeRecommendSubjectData `json:"data"`
-		PageSize int64                            `json:"pageSize,default=20"`
+		PageSize int64                            `form:"pageSize,default=20"`
 		Success  bool                             `json:"success"`
 		Total    int64                            `json:"total"`
 	}
@@ -46,7 +46,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteHomeRecommendSubjectReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteHomeRecommendSubjectResp {
 		Code    string `json:"code"`
@@ -65,11 +65,11 @@ service admin-api {
 	post /add (addHomeRecommendSubjectReq) returns (addHomeRecommendSubjectResp)
 	
 	@handler HomeRecommendSubjectList
-	post /list (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
+	get /list (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
 	
 	@handler HomeRecommendSubjectUpdate
 	post /update (UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp)
 	
 	@handler HomeRecommendSubjectDelete
-	post /delete (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
+	get /delete (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
 }

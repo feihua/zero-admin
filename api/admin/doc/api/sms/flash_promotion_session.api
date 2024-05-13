@@ -16,8 +16,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListFlashPromotionSessionReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtFlashPromotionSessionData {
 		Id         int64  `json:"id"`         // 编号
@@ -30,9 +30,9 @@ type (
 	ListFlashPromotionSessionResp {
 		Code     string                            `json:"code"`
 		Message  string                            `json:"message"`
-		Current  int64                             `json:"current,default=1"`
+		Current  int64                             `form:"current,default=1"`
 		Data     []*ListtFlashPromotionSessionData `json:"data"`
-		PageSize int64                             `json:"pageSize,default=20"`
+		PageSize int64                             `form:"pageSize,default=20"`
 		Success  bool                              `json:"success"`
 		Total    int64                             `json:"total"`
 	}
@@ -48,7 +48,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteFlashPromotionSessionReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteFlashPromotionSessionResp {
 		Code    string `json:"code"`
@@ -67,11 +67,11 @@ service admin-api {
 	post /add (addFlashPromotionSessionReq) returns (addFlashPromotionSessionResp)
 	
 	@handler FlashPromotionSessionList
-	post /list (ListFlashPromotionSessionReq) returns (ListFlashPromotionSessionResp)
+	get /list (ListFlashPromotionSessionReq) returns (ListFlashPromotionSessionResp)
 	
 	@handler FlashPromotionSessionUpdate
 	post /update (UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp)
 	
 	@handler FlashPromotionSessionDelete
-	post /delete (DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp)
+	get /delete (DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp)
 }

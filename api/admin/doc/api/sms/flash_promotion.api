@@ -16,12 +16,12 @@ type (
 		Message string `json:"message"`
 	}
 	ListFlashPromotionReq {
-		Current   int64  `json:"current,default=1"`
-		PageSize  int64  `json:"pageSize,default=20"`
-		Title     string `json:"title,optional"`     //标题
-        Status int32 `json:"status,,default=2"`      // 上下线状态
-		StartDate string `json:"startDate,optional"` // 开始日期
-		EndDate   string `json:"endDate,optional"`   // 结束日期
+		Current   int64  `form:"current,default=1"`
+		PageSize  int64  `form:"pageSize,default=20"`
+		Title     string `form:"title,optional"`     //标题
+        Status int32 `form:"status,,default=2"`      // 上下线状态
+		StartDate string `form:"startDate,optional"` // 开始日期
+		EndDate   string `form:"endDate,optional"`   // 结束日期
 	}
 	ListtFlashPromotionData {
 		Id         int64  `json:"id"`
@@ -34,9 +34,9 @@ type (
 	ListFlashPromotionResp {
 		Code     string                     `json:"code"`
 		Message  string                     `json:"message"`
-		Current  int64                      `json:"current,default=1"`
+		Current  int64                      `form:"current,default=1"`
 		Data     []*ListtFlashPromotionData `json:"data"`
-		PageSize int64                      `json:"pageSize,default=20"`
+		PageSize int64                      `form:"pageSize,default=20"`
 		Success  bool                       `json:"success"`
 		Total    int64                      `json:"total"`
 	}
@@ -52,7 +52,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteFlashPromotionReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteFlashPromotionResp {
 		Code    string `json:"code"`
@@ -71,11 +71,11 @@ service admin-api {
 	post /add (addFlashPromotionReq) returns (addFlashPromotionResp)
 	
 	@handler FlashPromotionList
-	post /list (ListFlashPromotionReq) returns (ListFlashPromotionResp)
+	get /list (ListFlashPromotionReq) returns (ListFlashPromotionResp)
 	
 	@handler FlashPromotionUpdate
 	post /update (UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp)
 	
 	@handler FlashPromotionDelete
-	post /delete (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
+	get /delete (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
 }

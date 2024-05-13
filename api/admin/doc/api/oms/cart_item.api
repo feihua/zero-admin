@@ -27,8 +27,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListCartItemReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtCartItemData {
 		Id                int64   `json:"id"`
@@ -53,9 +53,9 @@ type (
 	ListCartItemResp {
 		Code     string               `json:"code"`
 		Message  string               `json:"message"`
-		Current  int64                `json:"current,default=1"`
+		Current  int64                `form:"current,default=1"`
 		Data     []*ListtCartItemData `json:"data"`
-		PageSize int64                `json:"pageSize,default=20"`
+		PageSize int64                `form:"pageSize,default=20"`
 		Success  bool                 `json:"success"`
 		Total    int64                `json:"total"`
 	}
@@ -82,7 +82,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteCartItemReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteCartItemResp {
 		Code    string `json:"code"`
@@ -101,11 +101,11 @@ service admin-api {
 	post /add (addCartItemReq) returns (addCartItemResp)
 	
 	@handler CartItemList
-	post /list (ListCartItemReq) returns (ListCartItemResp)
+	get /list (ListCartItemReq) returns (ListCartItemResp)
 	
 	@handler CartItemUpdate
 	post /update (UpdateCartItemReq) returns (UpdateCartItemResp)
 	
 	@handler CartItemDelete
-	post /delete (DeleteCartItemReq) returns (DeleteCartItemResp)
+	get /delete (DeleteCartItemReq) returns (DeleteCartItemResp)
 }

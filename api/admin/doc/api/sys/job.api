@@ -16,10 +16,10 @@ type (
 		Message string `json:"message"`
 	}
 	ListJobReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		JobName  string `json:"jobName,optional"`
-        DelFlag int32 `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		JobName  string `form:"jobName,optional"`
+        DelFlag int32 `form:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 	}
 	ListJobData {
 		Id             int64  `json:"id"`             // 编号
@@ -36,9 +36,9 @@ type (
 	ListJobResp {
 		Code     string         `json:"code"`
 		Message  string         `json:"message"`
-		Current  int64          `json:"current,default=1"`
+		Current  int64          `form:"current,default=1"`
 		Data     []*ListJobData `json:"data"`
-		PageSize int64          `json:"pageSize,default=20"`
+		PageSize int64          `form:"pageSize,default=20"`
 		Success  bool           `json:"success"`
 		Total    int64          `json:"total"`
 	}
@@ -54,7 +54,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteJobReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteJobResp {
 		Code    string `json:"code"`
@@ -73,11 +73,11 @@ service admin-api {
 	post /add (addJobReq) returns (addJobResp)
 	
 	@handler JobList
-	post /list (ListJobReq) returns (ListJobResp)
+	get /list (ListJobReq) returns (ListJobResp)
 	
 	@handler JobUpdate
 	post /update (UpdateJobReq) returns (UpdateJobResp)
 	
 	@handler JobDelete
-	post /delete (DeleteJobReq) returns (DeleteJobResp)
+	get /delete (DeleteJobReq) returns (DeleteJobResp)
 }

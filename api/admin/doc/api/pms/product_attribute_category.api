@@ -14,9 +14,9 @@ type (
 	}
 
 	ListProductAttributecategoryReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		Name     string `json:"name,optional"`
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		Name     string `form:"name,optional"`
 	}
 	ListtProductAttributecategoryData {
 		Id                     int64  `json:"id"`
@@ -27,9 +27,9 @@ type (
 	ListProductAttributecategoryResp {
 		Code     string                               `json:"code"`
 		Message  string                               `json:"message"`
-		Current  int64                                `json:"current,default=1"`
+		Current  int64                                `form:"current,default=1"`
 		Data     []*ListtProductAttributecategoryData `json:"data"`
-		PageSize int64                                `json:"pageSize,default=20"`
+		PageSize int64                                `form:"pageSize,default=20"`
 		Success  bool                                 `json:"success"`
 		Total    int64                                `json:"total"`
 	}
@@ -44,7 +44,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteProductAttributecategoryReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteProductAttributecategoryResp {
 		Code    string `json:"code"`
@@ -63,11 +63,11 @@ service admin-api {
 	post /add (addProductAttributecategoryReq) returns (addProductAttributecategoryResp)
 	
 	@handler ProductAttributecategoryList
-	post /list (ListProductAttributecategoryReq) returns (ListProductAttributecategoryResp)
+	get /list (ListProductAttributecategoryReq) returns (ListProductAttributecategoryResp)
 	
 	@handler ProductAttributecategoryUpdate
 	post /update (UpdateProductAttributecategoryReq) returns (UpdateProductAttributecategoryResp)
 	
 	@handler ProductAttributecategoryDelete
-	post /delete (DeleteProductAttributecategoryReq) returns (DeleteProductAttributecategoryResp)
+	get /delete (DeleteProductAttributecategoryReq) returns (DeleteProductAttributecategoryResp)
 }

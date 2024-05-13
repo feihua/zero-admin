@@ -19,12 +19,12 @@ type (
 		Message string `json:"message"`
 	}
 	ListDictReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		Value    string `json:"value,optional"`
-		Label    string `json:"label,optional"`
-        DelFlag int32 `json:"delFlag,default=2"`
-		Type     string `json:"type,optional "`
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		Value    string `form:"value,optional"`
+		Label    string `form:"label,optional"`
+        DelFlag int32 `form:"delFlag,default=2"`
+		Type     string `form:"type,optional "`
 	}
 	ListDictData {
 		Id             int64   `json:"id"`             // 编号
@@ -43,9 +43,9 @@ type (
 	ListDictResp {
 		Code     string          `json:"code"`
 		Message  string          `json:"message"`
-		Current  int64           `json:"current,default=1"`
+		Current  int64           `form:"current,default=1"`
 		Data     []*ListDictData `json:"data"`
-		PageSize int64           `json:"pageSize,default=20"`
+		PageSize int64           `form:"pageSize,default=20"`
 		Success  bool            `json:"success"`
 		Total    int64           `json:"total"`
 	}
@@ -64,7 +64,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteDictReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteDictResp {
 		Code    string `json:"code"`
@@ -83,11 +83,11 @@ service admin-api {
 	post /add (addDictReq) returns (addDictResp)
 	
 	@handler DictList
-	post /list (ListDictReq) returns (ListDictResp)
+	get /list (ListDictReq) returns (ListDictResp)
 	
 	@handler DictUpdate
 	post /update (UpdateDictReq) returns (UpdateDictResp)
 	
 	@handler DictDelete
-	post /delete (DeleteDictReq) returns (DeleteDictResp)
+	get /delete (DeleteDictReq) returns (DeleteDictResp)
 }

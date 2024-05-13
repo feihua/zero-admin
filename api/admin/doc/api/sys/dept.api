@@ -17,8 +17,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListDeptReq {
-		Name     string `json:"name,optional"`
-		CreateBy string `json:"createBy,optional"`
+		Name     string `json:"form,optional"`
+		CreateBy string `json:"form,optional"`
 	}
 	ListDeptData {
 		Id             int64   `json:"id"`             // 编号
@@ -52,7 +52,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteDeptReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteDeptResp {
 		Code    string `json:"code"`
@@ -71,11 +71,11 @@ service admin-api {
 	post /add (addDeptReq) returns (addDeptResp)
 	
 	@handler DeptList
-	post /list (ListDeptReq) returns (ListDeptResp)
+	get /list (ListDeptReq) returns (ListDeptResp)
 	
 	@handler DeptUpdate
 	post /update (UpdateDeptReq) returns (UpdateDeptResp)
 	
 	@handler DeptDelete
-	post /delete (DeleteDeptReq) returns (DeleteDeptResp)
+	get /delete (DeleteDeptReq) returns (DeleteDeptResp)
 }

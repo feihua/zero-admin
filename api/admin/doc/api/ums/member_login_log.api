@@ -18,9 +18,9 @@ type (
 		Message string `json:"message"`
 	}
 	ListMemberLoginLogReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
-		MemberId int64 `json:"memberId,default=0"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
+		MemberId int64 `form:"memberId,default=0"`
 	}
 	ListtMemberLoginLogData {
 		Id         int64  `json:"id"`
@@ -34,15 +34,15 @@ type (
 	ListMemberLoginLogResp {
 		Code     string                     `json:"code"`
 		Message  string                     `json:"message"`
-		Current  int64                      `json:"current,default=1"`
+		Current  int64                      `form:"current,default=1"`
 		Data     []*ListtMemberLoginLogData `json:"data"`
-		PageSize int64                      `json:"pageSize,default=20"`
+		PageSize int64                      `form:"pageSize,default=20"`
 		Success  bool                       `json:"success"`
 		Total    int64                      `json:"total"`
 	}
 
 	DeleteMemberLoginLogReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteMemberLoginLogResp {
 		Code    string `json:"code"`
@@ -61,8 +61,8 @@ service admin-api {
 	post /add (addMemberLoginLogReq) returns (addMemberLoginLogResp)
 	
 	@handler MemberLoginLogList
-	post /list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
+	get /list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
 
 @handler MemberLoginLogDelete
-	post /delete (DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp)
+	get /delete (DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp)
 }

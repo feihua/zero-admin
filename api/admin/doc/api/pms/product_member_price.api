@@ -16,8 +16,8 @@ type (
 		Message string `json:"message"`
 	}
 	ListMemberPriceReq {
-		Current  int64 `json:"current,default=1"`
-		PageSize int64 `json:"pageSize,default=20"`
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListtMemberPriceData {
 		Id              int64   `json:"id"`
@@ -27,9 +27,9 @@ type (
 		MemberLevelName string  `json:"memberLevelName"`
 	}
 	ListMemberPriceResp {
-		Current  int64                   `json:"current,default=1"`
+		Current  int64                   `form:"current,default=1"`
 		Data     []*ListtMemberPriceData `json:"data"`
-		PageSize int64                   `json:"pageSize,default=20"`
+		PageSize int64                   `form:"pageSize,default=20"`
 		Success  bool                    `json:"success"`
 		Total    int64                   `json:"total"`
 		Code     string                  `json:"code"`
@@ -47,7 +47,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteMemberPriceReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteMemberPriceResp {
 		Code    string `json:"code"`
@@ -66,11 +66,11 @@ service admin-api {
 	post /add (addMemberPriceReq) returns (addMemberPriceResp)
 	
 	@handler MemberPriceList
-	post /list (ListMemberPriceReq) returns (ListMemberPriceResp)
+	get /list (ListMemberPriceReq) returns (ListMemberPriceResp)
 	
 	@handler MemberPriceUpdate
 	post /update (UpdateMemberPriceReq) returns (UpdateMemberPriceResp)
 	
 	@handler MemberPriceDelete
-	post /delete (DeleteMemberPriceReq) returns (DeleteMemberPriceResp)
+	get /delete (DeleteMemberPriceReq) returns (DeleteMemberPriceResp)
 }
