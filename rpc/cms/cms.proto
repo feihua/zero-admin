@@ -138,12 +138,12 @@ service SubjectProductRelationService {
 
 //商品优选
 message PreferredAreaAddReq {
-  int64 Id = 1; //
-  string Name = 2; //
-  string SubTitle = 3; //
-  string Pic = 4; //展示图片
-  int32 Sort = 5; //
-  int32 ShowStatus = 6; //
+  string Name = 1; //
+  string SubTitle = 2; //
+  string Pic = 3; //展示图片
+  int32 Sort = 4; //
+  int32 ShowStatus = 5; //
+  string CreateBy = 6; //
 
 }
 
@@ -166,7 +166,7 @@ message PreferredAreaUpdateReq {
   string Pic = 4; //展示图片
   int32 Sort = 5; //
   int32 ShowStatus = 6; //
-
+  string UpdateBy = 7 ;
 }
 
 message PreferredAreaUpdateResp {
@@ -188,7 +188,10 @@ message PreferredAreaListData {
   string Pic = 4; //展示图片
   int32 Sort = 5; //
   int32 ShowStatus = 6; //
-
+  string CreateBy = 7; //
+  string CreateTime = 8; //
+  string UpdateBy = 9; //
+  string UpdateTime = 10; //
 }
 
 message PreferredAreaListResp {

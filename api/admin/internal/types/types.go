@@ -1132,22 +1132,35 @@ type ListOrderSettingResp struct {
 	Total    int64                    `json:"total"`
 }
 
+type ListPrefrenceAreaData struct {
+	Id         int64  `json:"id"`
+	Name       string `json:"name"`
+	SubTitle   string `json:"subTitle"`
+	Pic        string `json:"pic"` // 展示图片
+	Sort       int32  `json:"sort"`
+	ShowStatus int32  `json:"showStatus"`
+	CreateBy   string `json:"createBy"`
+	CreateTime string `json:"createTime"`
+	UpdateBy   string `json:"updateBy"`
+	UpdateTime string `json:"updateTime"`
+}
+
 type ListPrefrenceAreaReq struct {
-	Current    int64  `json:"current,default=1"`
-	PageSize   int64  `json:"pageSize,default=20"`
-	Name       string `json:"name,optional"`
-	SubTitle   string `json:"subTitle,optional"`
-	ShowStatus int32  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+	Current    int64  `form:"current,default=1"`
+	PageSize   int64  `form:"pageSize,default=20"`
+	Name       string `form:"name,optional"`
+	SubTitle   string `form:"subTitle,optional"`
+	ShowStatus int32  `form:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
 }
 
 type ListPrefrenceAreaResp struct {
-	Code     string                    `json:"code"`
-	Message  string                    `json:"message"`
-	Current  int64                     `json:"current,default=1"`
-	Data     []*ListtPrefrenceAreaData `json:"data"`
-	PageSize int64                     `json:"pageSize,default=20"`
-	Success  bool                      `json:"success"`
-	Total    int64                     `json:"total"`
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
+	Current  int64                    `json:"current,default=1"`
+	Data     []*ListPrefrenceAreaData `json:"data"`
+	PageSize int64                    `json:"pageSize,default=20"`
+	Success  bool                     `json:"success"`
+	Total    int64                    `json:"total"`
 }
 
 type ListProductAttributeReq struct {
@@ -1766,15 +1779,6 @@ type ListtOrderSettingData struct {
 	ConfirmOvertime     int32 `json:"confirmOvertime"`     // 发货后自动确认收货时间（天）
 	FinishOvertime      int32 `json:"finishOvertime"`      // 自动完成交易时间，不能申请售后（天）
 	CommentOvertime     int32 `json:"commentOvertime"`     // 订单完成后自动好评时间（天）
-}
-
-type ListtPrefrenceAreaData struct {
-	Id         int64  `json:"id"`
-	Name       string `json:"name"`
-	SubTitle   string `json:"subTitle"`
-	Pic        string `json:"pic"` // 展示图片
-	Sort       int32  `json:"sort"`
-	ShowStatus int32  `json:"showStatus"`
 }
 
 type ListtProductAttributeData struct {

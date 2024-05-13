@@ -72,8 +72,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: cmsprefrenceArea.PrefrenceAreaDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
-					Path:    "/list",
+					Method:  http.MethodGet,
+					Path:    "/queryPrefrenceAreaList",
 					Handler: cmsprefrenceArea.PrefrenceAreaListHandler(serverCtx),
 				},
 				{

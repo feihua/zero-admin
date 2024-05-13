@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// PrefrenceAreaListLogic 商品优选
+/*
+Author: LiuFeiHua
+Date: 2024/5/11 17:18
+*/
 type PrefrenceAreaListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,8 +31,9 @@ func NewPrefrenceAreaListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-func (l *PrefrenceAreaListLogic) PrefrenceAreaList(req *types.ListPrefrenceAreaReq) (resp *types.ListPrefrenceAreaResp, err error) {
-	prefrenceAreaList, err := l.svcCtx.PreferredAreaService.PreferredAreaList(l.ctx, &cmsclient.PreferredAreaListReq{
+// PrefrenceAreaList 查询商品优选
+func (l *PrefrenceAreaListLogic) PrefrenceAreaList(req *types.ListPrefrenceAreaReq) (*types.ListPrefrenceAreaResp, error) {
+	resp, err := l.svcCtx.PreferredAreaService.PreferredAreaList(l.ctx, &cmsclient.PreferredAreaListReq{
 		Current:    req.Current,
 		PageSize:   req.PageSize,
 		Name:       req.Name,
@@ -40,16 +46,20 @@ func (l *PrefrenceAreaListLogic) PrefrenceAreaList(req *types.ListPrefrenceAreaR
 		return nil, errorx.NewDefaultError("查询商品优选失败")
 	}
 
-	var list []*types.ListtPrefrenceAreaData
+	var list []*types.ListPrefrenceAreaData
 
-	for _, item := range prefrenceAreaList.List {
-		list = append(list, &types.ListtPrefrenceAreaData{
+	for _, item := range resp.List {
+		list = append(list, &types.ListPrefrenceAreaData{
 			Id:         item.Id,
 			Name:       item.Name,
 			SubTitle:   item.SubTitle,
 			Pic:        item.Pic,
 			Sort:       item.Sort,
 			ShowStatus: item.ShowStatus,
+			CreateBy:   item.CreateBy,
+			CreateTime: item.CreateTime,
+			UpdateBy:   item.UpdateBy,
+			UpdateTime: item.UpdateTime,
 		})
 	}
 
@@ -58,7 +68,7 @@ func (l *PrefrenceAreaListLogic) PrefrenceAreaList(req *types.ListPrefrenceAreaR
 		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
-		Total:    prefrenceAreaList.Total,
+		Total:    resp.Total,
 		Code:     "000000",
 		Message:  "查询商品优选成功",
 	}, nil
