@@ -823,16 +823,23 @@ message HomeBrandDeleteResp {
   string pong = 1;
 }
 
-message HomeBrandUpdateReq {
+message UpdateHomeBrandSortReq {
   int64 Id = 1; //
-  int64 BrandId = 2; //商品品牌id
-  string BrandName = 3; //商品品牌名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 5; //排序
+  int32 Sort = 2; //排序
 
 }
 
-message HomeBrandUpdateResp {
+message UpdateHomeBrandSortResp {
+  string pong = 1;
+}
+
+message UpdateHomeBrandStatusReq {
+  repeated int64 Ids = 1; //
+  int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
+
+}
+
+message UpdateHomeBrandStatusResp {
   string pong = 1;
 }
 
@@ -862,7 +869,10 @@ service HomeBrandService {
 
   rpc HomeBrandAdd(HomeBrandAddReq) returns(HomeBrandAddResp);
   rpc HomeBrandList(HomeBrandListReq) returns(HomeBrandListResp);
-  rpc HomeBrandUpdate(HomeBrandUpdateReq) returns(HomeBrandUpdateResp);
+  //修改推荐品牌排序
+  rpc UpdateHomeBrandSort(UpdateHomeBrandSortReq) returns(UpdateHomeBrandSortResp);
+  //批量修改推荐品牌状态
+  rpc UpdateHomeBrandStatus(UpdateHomeBrandStatusReq) returns(UpdateHomeBrandStatusResp);
   rpc HomeBrandDelete(HomeBrandDeleteReq) returns(HomeBrandDeleteResp);
 
 

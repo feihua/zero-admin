@@ -38,10 +38,10 @@ func (l *ProductAttributecategoryListLogic) ProductAttributecategoryList(req *ty
 		return nil, errorx.NewDefaultError("查询属性分类失败")
 	}
 
-	var list []*types.ListtProductAttributecategoryData
+	var list []*types.ListProductAttributecategoryData
 
 	for _, item := range attributeList.List {
-		list = append(list, &types.ListtProductAttributecategoryData{
+		list = append(list, &types.ListProductAttributecategoryData{
 			Id:                     item.Id,
 			Name:                   item.Name,
 			AttributecategoryCount: item.AttributeCount,

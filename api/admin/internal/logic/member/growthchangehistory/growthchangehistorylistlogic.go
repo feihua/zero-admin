@@ -37,10 +37,10 @@ func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(req types.ListGro
 		return nil, errorx.NewDefaultError("查询成长值变化历史记录失败")
 	}
 
-	var list []*types.ListtGrowthChangeHistoryData
+	var list []*types.ListGrowthChangeHistoryData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtGrowthChangeHistoryData{
+		list = append(list, &types.ListGrowthChangeHistoryData{
 			Id:          item.Id,
 			MemberId:    item.MemberId,
 			CreateTime:  item.CreateTime,

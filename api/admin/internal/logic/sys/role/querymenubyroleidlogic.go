@@ -46,11 +46,11 @@ func (l *QueryMenuByRoleIdLogic) QueryMenuByRoleId(req types.RoleMenuReq) (*type
 		return nil, errorx.NewDefaultError("查询菜单信息失败")
 	}
 
-	var list []*types.ListMenuData
+	var list []*types.RoleMenuListData
 	var listIds []int64
 
 	for _, menu := range resp.List {
-		list = append(list, &types.ListMenuData{
+		list = append(list, &types.RoleMenuListData{
 			Key:      strconv.FormatInt(menu.Id, 10),
 			Title:    menu.Name,
 			ParentId: menu.ParentId,

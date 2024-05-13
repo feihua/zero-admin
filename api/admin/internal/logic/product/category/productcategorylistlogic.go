@@ -39,10 +39,10 @@ func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCate
 		return nil, errorx.NewDefaultError("查询商品分类失败")
 	}
 
-	var list []*types.ListtProductCategoryData
+	var list []*types.ListProductCategoryData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtProductCategoryData{
+		list = append(list, &types.ListProductCategoryData{
 			Id:           item.Id,
 			ParentId:     item.ParentId,
 			Name:         item.Name,

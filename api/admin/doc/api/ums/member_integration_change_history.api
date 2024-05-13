@@ -1,18 +1,18 @@
-info(
-	desc: "积分变化历史记录表"
+info (
+	desc:   "积分变化历史记录表"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addIntegrationChangeHistoryReq {
 		MemberId    int64  `json:"memberId"`
 		CreateTime  string `json:"createTime"`
-		ChangeType int32 `json:"changeType"`    // 改变类型：0->增加；1->减少
-		ChangeCount int32 `json:"changeCount"`  // 积分改变数量
-		OperateMan  string `json:"operateMan"`  // 操作人员
+		ChangeType  int32  `json:"changeType"` // 改变类型：0->增加；1->减少
+		ChangeCount int32  `json:"changeCount"` // 积分改变数量
+		OperateMan  string `json:"operateMan"` // 操作人员
 		OperateNote string `json:"operateNote"` // 操作备注
-		SourceType int32 `json:"sourceType"`    // 积分来源：0->购物；1->管理员修改
+		SourceType  int32  `json:"sourceType"` // 积分来源：0->购物；1->管理员修改
 	}
 	addIntegrationChangeHistoryResp {
 		Code    string `json:"code"`
@@ -22,34 +22,34 @@ type (
 		Current  int64 `form:"current,default=1"`
 		PageSize int64 `form:"pageSize,default=20"`
 	}
-	ListtIntegrationChangeHistoryData {
+	ListIntegrationChangeHistoryData {
 		Id          int64  `json:"id"`
 		MemberId    int64  `json:"memberId"`
 		CreateTime  string `json:"createTime"`
-		ChangeType int32 `json:"changeType"`    // 改变类型：0->增加；1->减少
-		ChangeCount int32 `json:"changeCount"`  // 积分改变数量
-		OperateMan  string `json:"operateMan"`  // 操作人员
+		ChangeType  int32  `json:"changeType"` // 改变类型：0->增加；1->减少
+		ChangeCount int32  `json:"changeCount"` // 积分改变数量
+		OperateMan  string `json:"operateMan"` // 操作人员
 		OperateNote string `json:"operateNote"` // 操作备注
-		SourceType int32 `json:"sourceType"`    // 积分来源：0->购物；1->管理员修改
+		SourceType  int32  `json:"sourceType"` // 积分来源：0->购物；1->管理员修改
 	}
 	ListIntegrationChangeHistoryResp {
-		Code     string                               `json:"code"`
-		Message  string                               `json:"message"`
-		Current  int64                                `form:"current,default=1"`
-		Data     []*ListtIntegrationChangeHistoryData `json:"data"`
-		PageSize int64                                `form:"pageSize,default=20"`
-		Success  bool                                 `json:"success"`
-		Total    int64                                `json:"total"`
+		Code     string                              `json:"code"`
+		Message  string                              `json:"message"`
+		Current  int64                               `form:"current,default=1"`
+		Data     []*ListIntegrationChangeHistoryData `json:"data"`
+		PageSize int64                               `form:"pageSize,default=20"`
+		Success  bool                                `json:"success"`
+		Total    int64                               `json:"total"`
 	}
 	UpdateIntegrationChangeHistoryReq {
 		Id          int64  `json:"id"`
 		MemberId    int64  `json:"memberId"`
 		CreateTime  string `json:"createTime"`
-		ChangeType int32 `json:"changeType"`    // 改变类型：0->增加；1->减少
-		ChangeCount int32 `json:"changeCount"`  // 积分改变数量
-		OperateMan  string `json:"operateMan"`  // 操作人员
+		ChangeType  int32  `json:"changeType"` // 改变类型：0->增加；1->减少
+		ChangeCount int32  `json:"changeCount"` // 积分改变数量
+		OperateMan  string `json:"operateMan"` // 操作人员
 		OperateNote string `json:"operateNote"` // 操作备注
-		SourceType int32 `json:"sourceType"`    // 积分来源：0->购物；1->管理员修改
+		SourceType  int32  `json:"sourceType"` // 积分来源：0->购物；1->管理员修改
 	}
 	UpdateIntegrationChangeHistoryResp {
 		Code    string `json:"code"`
@@ -64,14 +64,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: member/integrationchangehistory
-	prefix: /api/member/integrationchangehistory
+	group:      member/integrationchangehistory
+	prefix:     /api/member/integrationchangehistory
 )
 service admin-api {
-
 	//
 	@handler IntegrationChangeHistoryAdd
 	post /addIntegrationChangeHistory (addIntegrationChangeHistoryReq) returns (addIntegrationChangeHistoryResp)
@@ -88,3 +87,4 @@ service admin-api {
 	@handler IntegrationChangeHistoryDelete
 	get /deleteIntegrationChangeHistory (DeleteIntegrationChangeHistoryReq) returns (DeleteIntegrationChangeHistoryResp)
 }
+

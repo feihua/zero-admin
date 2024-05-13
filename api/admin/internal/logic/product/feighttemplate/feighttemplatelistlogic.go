@@ -37,10 +37,10 @@ func (l *FeightTemplateListLogic) FeightTemplateList(req types.ListFeightTemplat
 		return nil, errorx.NewDefaultError("查询运费模版失败")
 	}
 
-	var list []*types.ListtFeightTemplateData
+	var list []*types.ListFeightTemplateData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtFeightTemplateData{
+		list = append(list, &types.ListFeightTemplateData{
 			Id:             item.Id,
 			Name:           item.Name,
 			ChargeType:     item.ChargeType,

@@ -36,10 +36,10 @@ func (l *OperateHistoryListLogic) OperateHistoryList(req types.ListOperateHistor
 		return nil, errorx.NewDefaultError("查询订单操作历史失败")
 	}
 
-	var list []*types.ListtOperateHistoryData
+	var list []*types.ListOperateHistoryData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtOperateHistoryData{
+		list = append(list, &types.ListOperateHistoryData{
 			Id:          item.Id,
 			OrderId:     item.OrderId,
 			OperateMan:  item.OperateMan,

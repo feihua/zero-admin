@@ -44,10 +44,10 @@ func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*t
 		return nil, errorx.NewDefaultError("查询会员等级失败")
 	}
 
-	var list []*types.ListtMemberLevelData
+	var list []*types.ListMemberLevelData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberLevelData{
+		list = append(list, &types.ListMemberLevelData{
 			Id:                 item.Id,
 			Name:               item.LevelName,
 			GrowthPoint:        item.GrowthPoint,

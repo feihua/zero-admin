@@ -1,7 +1,7 @@
-info(
-	desc: "系统日志"
+info (
+	desc:   "系统日志"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
@@ -9,18 +9,18 @@ type (
 		Current  int64  `form:"current,default=1"`
 		PageSize int64  `form:"pageSize,default=20"`
 		UserName string `form:"userName,optional"` // 用户名
-		Method   string `form:"method,optional"`   // 请求方法
+		Method   string `form:"method,optional"` // 请求方法
 	}
 	ListSysLogData {
-		Id             int64  `json:"id"`             // 编号
-		UserName       string `json:"userName"`       // 用户名
-		Operation      string `json:"operation"`      // 用户操作
-		Method         string `json:"method"`         // 请求方法
-		RequestParams  string `json:"requestParams"`  // 请求参数
+		Id             int64  `json:"id"` // 编号
+		UserName       string `json:"userName"` // 用户名
+		Operation      string `json:"operation"` // 用户操作
+		Method         string `json:"method"` // 请求方法
+		RequestParams  string `json:"requestParams"` // 请求参数
 		ResponseParams string `json:"responseParams"` // 响应参数
-		Time           int64  `json:"time"`           // 执行时长(毫秒)
-		Ip             string `json:"ip"`             // IP地址
-		OperationTime  string `json:"operationTime"`  // 操作时间
+		Time           int64  `json:"time"` // 执行时长(毫秒)
+		Ip             string `json:"ip"` // IP地址
+		OperationTime  string `json:"operationTime"` // 操作时间
 	}
 	ListSysLogResp {
 		Code     string            `json:"code"`
@@ -40,14 +40,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sys/log
-	prefix: /api/sys/sysLog
+	group:      sys/log
+	prefix:     /api/sys/sysLog
 )
 service admin-api {
-
 	//
 	@handler SysLogList
 	get /querySysLogList (ListSysLogReq) returns (ListSysLogResp)
@@ -56,3 +55,4 @@ service admin-api {
 	@handler SysLogDelete
 	get /deleteSysLog (DeleteSysLogReq) returns (DeleteSysLogResp)
 }
+

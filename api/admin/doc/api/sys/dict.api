@@ -1,18 +1,18 @@
-info(
-	desc: "字典"
+info (
+	desc:   "字典"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addDictReq {
-		Value       string `json:"value"`                // 数据值
-		Label       string `json:"label"`                // 标签名
-		Type        string `json:"type"`                 // 类型
+		Value       string `json:"value"` // 数据值
+		Label       string `json:"label"` // 标签名
+		Type        string `json:"type"` // 类型
 		Description string `json:"description,optional"` // 描述
-        Sort int32 `json:"sort"`                         // 排序（升序）
-		Remarks     string `json:"remarks,optional"`     // 备注信息
-        DelFlag int32 `json:"delFlag"`                   // 是否删除  0：已删除  1：正常
+		Sort        int32  `json:"sort"` // 排序（升序）
+		Remarks     string `json:"remarks,optional"` // 备注信息
+		DelFlag     int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
 	}
 	addDictResp {
 		Code    string `json:"code"`
@@ -23,22 +23,22 @@ type (
 		PageSize int64  `form:"pageSize,default=20"`
 		Value    string `form:"value,optional"`
 		Label    string `form:"label,optional"`
-        DelFlag int32 `form:"delFlag,default=2"`
+		DelFlag  int32  `form:"delFlag,default=2"`
 		Type     string `form:"type,optional "`
 	}
 	ListDictData {
-		Id             int64   `json:"id"`             // 编号
-		Value          string  `json:"value"`          // 数据值
-		Label          string  `json:"label"`          // 标签名
-		Type           string  `json:"type"`           // 类型
-		Description    string  `json:"description"`    // 描述
-        Sort int64 `json:"sort"`                       // 排序（升序）
-		CreateBy       string  `json:"createBy"`       // 创建人
-		CreateTime     string  `json:"createTime"`     // 创建时间
-        UpdateBy string `json:"updateBy"`              // 更新人
-        UpdateTime string `json:"updateTime"`          // 更新时间
-		Remarks        string  `json:"remarks"`        // 备注信息
-        DelFlag int32 `json:"delFlag"`                 // 是否删除  0：已删除  1：正常
+		Id          int64  `json:"id"` // 编号
+		Value       string `json:"value"` // 数据值
+		Label       string `json:"label"` // 标签名
+		Type        string `json:"type"` // 类型
+		Description string `json:"description"` // 描述
+		Sort        int64  `json:"sort"` // 排序（升序）
+		CreateBy    string `json:"createBy"` // 创建人
+		CreateTime  string `json:"createTime"` // 创建时间
+		UpdateBy    string `json:"updateBy"` // 更新人
+		UpdateTime  string `json:"updateTime"` // 更新时间
+		Remarks     string `json:"remarks"` // 备注信息
+		DelFlag     int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
 	}
 	ListDictResp {
 		Code     string          `json:"code"`
@@ -50,14 +50,14 @@ type (
 		Total    int64           `json:"total"`
 	}
 	UpdateDictReq {
-		Id          int64  `json:"id"`          // 编号
-		Value       string `json:"value"`       // 数据值
-		Label       string `json:"label"`       // 标签名
-		Type        string `json:"type"`        // 类型
+		Id          int64  `json:"id"` // 编号
+		Value       string `json:"value"` // 数据值
+		Label       string `json:"label"` // 标签名
+		Type        string `json:"type"` // 类型
 		Description string `json:"description"` // 描述
-        Sort int32 `json:"sort"`                // 排序（升序）
-		Remarks     string `json:"remarks"`     // 备注信息
-        DelFlag int32 `json:"delFlag"`          // 是否删除  0：已删除  1：正常
+		Sort        int32  `json:"sort"` // 排序（升序）
+		Remarks     string `json:"remarks"` // 备注信息
+		DelFlag     int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
 	}
 	UpdateDictResp {
 		Code    string `json:"code"`
@@ -72,14 +72,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sys/dict
-	prefix: /api/sys/dict
+	group:      sys/dict
+	prefix:     /api/sys/dict
 )
 service admin-api {
-
 	//
 	@handler DictAdd
 	post /add (addDictReq) returns (addDictResp)
@@ -96,3 +95,4 @@ service admin-api {
 	@handler DictDelete
 	get /deleteDict (DeleteDictReq) returns (DeleteDictResp)
 }
+

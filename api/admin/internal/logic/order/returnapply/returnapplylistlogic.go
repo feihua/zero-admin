@@ -42,10 +42,10 @@ func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*t
 		return nil, errorx.NewDefaultError("查询退货申请列表失败")
 	}
 
-	var list []*types.ListtReturnApplyData
+	var list []*types.ListReturnApplyData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtReturnApplyData{
+		list = append(list, &types.ListReturnApplyData{
 			Id:               item.Id,
 			OrderId:          item.OrderId,
 			CompanyAddressId: item.CompanyAddressId,

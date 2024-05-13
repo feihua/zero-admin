@@ -1,4 +1,4 @@
-package logic
+package homebrand
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeBrandDeleteLogic 首页品牌信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 15:53
+*/
 type HomeBrandDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewHomeBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Ho
 	}
 }
 
+// HomeBrandDelete 删除首页品牌信息
 func (l *HomeBrandDeleteLogic) HomeBrandDelete(req types.DeleteHomeBrandReq) (*types.DeleteHomeBrandResp, error) {
 	_, err := l.svcCtx.HomeBrandService.HomeBrandDelete(l.ctx, &smsclient.HomeBrandDeleteReq{
 		Ids: req.Ids,
@@ -38,6 +44,6 @@ func (l *HomeBrandDeleteLogic) HomeBrandDelete(req types.DeleteHomeBrandReq) (*t
 
 	return &types.DeleteHomeBrandResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除首页品牌成功",
 	}, nil
 }

@@ -140,10 +140,10 @@ func queryOrderItems(item1 *omsclient.OrderListData) []types.ListOrderItemData {
 }
 
 // 获取操作记录
-func queryHistoryRecord(item *omsclient.OrderListData) []types.ListOperateHistoryData {
-	var historyListData []types.ListOperateHistoryData
+func queryHistoryRecord(item *omsclient.OrderListData) []types.OperateHistoryListData {
+	var historyListData []types.OperateHistoryListData
 	for _, operateHistory := range item.HistoryListData {
-		historyListData = append(historyListData, types.ListOperateHistoryData{
+		historyListData = append(historyListData, types.OperateHistoryListData{
 			Id:          operateHistory.Id,
 			OrderId:     operateHistory.OrderId,
 			OperateMan:  operateHistory.OperateMan,

@@ -37,10 +37,10 @@ func (l *MemberRuleSettingListLogic) MemberRuleSettingList(req types.ListMemberR
 		return nil, errorx.NewDefaultError("查询会员积分规则失败")
 	}
 
-	var list []*types.ListtMemberRuleSettingData
+	var list []*types.ListMemberRuleSettingData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberRuleSettingData{
+		list = append(list, &types.ListMemberRuleSettingData{
 			Id:                item.Id,
 			ContinueSignDay:   item.ContinueSignDay,
 			ContinueSignPoint: item.ContinueSignPoint,

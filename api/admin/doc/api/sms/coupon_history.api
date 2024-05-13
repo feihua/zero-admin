@@ -1,7 +1,7 @@
-info(
-	desc: "优惠券使用记录"
+info (
+	desc:   "优惠券使用记录"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
@@ -10,43 +10,43 @@ type (
 		MemberId       int64  `json:"memberId"`
 		CouponCode     string `json:"couponCode"`
 		MemberNickname string `json:"memberNickName"` // 领取人昵称
-		GetType int32 `json:"getType"`                // 获取类型：0->后台赠送；1->主动获取
+		GetType        int32  `json:"getType"` // 获取类型：0->后台赠送；1->主动获取
 		CreateTime     string `json:"createTime"`
-		UseStatus int32 `json:"useStatus"`            // 使用状态：0->未使用；1->已使用；2->已过期
-		UseTime        string `json:"useTime"`   // 使用时间
-		OrderId        int64  `json:"orderId"`   // 订单编号
-		OrderSn        string `json:"orderSn"`   // 订单号码
+		UseStatus      int32  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
+		UseTime        string `json:"useTime"` // 使用时间
+		OrderId        int64  `json:"orderId"` // 订单编号
+		OrderSn        string `json:"orderSn"` // 订单号码
 	}
 	addCouponHistoryResp {
-		Code string `json:"code"`
+		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
 	ListCouponHistoryReq {
-		Current int64 `form:"current,default=1"`
-		PageSize int64 `form:"pageSize,default=20"`
-        UseStatus int32 `form:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
+		Current   int64 `form:"current,default=1"`
+		PageSize  int64 `form:"pageSize,default=20"`
+		UseStatus int32 `form:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
 	}
-	ListtCouponHistoryData {
-		Id int64 `json:"id"`
-		CouponId int64 `json:"couponId"`
-		MemberId int64 `json:"memberId"`
-		CouponCode string `json:"couponCode"`
+	ListCouponHistoryData {
+		Id             int64  `json:"id"`
+		CouponId       int64  `json:"couponId"`
+		MemberId       int64  `json:"memberId"`
+		CouponCode     string `json:"couponCode"`
 		MemberNickname string `json:"memberNickName"` // 领取人昵称
-        GetType int32 `json:"getType"`                // 获取类型：0->后台赠送；1->主动获取
-		CreateTime string `json:"createTime"`
-        UseStatus int32 `json:"useStatus"`            // 使用状态：0->未使用；1->已使用；2->已过期
-		UseTime        string `json:"useTime"`   // 使用时间
-		OrderId        int64  `json:"orderId"`   // 订单编号
-		OrderSn        string `json:"orderSn"`   // 订单号码
+		GetType        int32  `json:"getType"` // 获取类型：0->后台赠送；1->主动获取
+		CreateTime     string `json:"createTime"`
+		UseStatus      int32  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
+		UseTime        string `json:"useTime"` // 使用时间
+		OrderId        int64  `json:"orderId"` // 订单编号
+		OrderSn        string `json:"orderSn"` // 订单号码
 	}
 	ListCouponHistoryResp {
-		Current  int64                     `form:"current,default=1"`
-		Data     []*ListtCouponHistoryData `json:"data"`
-		PageSize int64                     `form:"pageSize,default=20"`
-		Success  bool                      `json:"success"`
-		Total    int64                     `json:"total"`
-		Code     string                    `json:"code"`
-		Message  string                    `json:"message"`
+		Current  int64                    `form:"current,default=1"`
+		Data     []*ListCouponHistoryData `json:"data"`
+		PageSize int64                    `form:"pageSize,default=20"`
+		Success  bool                     `json:"success"`
+		Total    int64                    `json:"total"`
+		Code     string                   `json:"code"`
+		Message  string                   `json:"message"`
 	}
 	UpdateCouponHistoryReq {
 		Id             int64  `json:"id"`
@@ -54,12 +54,12 @@ type (
 		MemberId       int64  `json:"memberId"`
 		CouponCode     string `json:"couponCode"`
 		MemberNickname string `json:"memberNickName"` // 领取人昵称
-        GetType int32 `json:"getType"`                // 获取类型：0->后台赠送；1->主动获取
+		GetType        int32  `json:"getType"` // 获取类型：0->后台赠送；1->主动获取
 		CreateTime     string `json:"createTime"`
-        UseStatus int32 `json:"useStatus"`            // 使用状态：0->未使用；1->已使用；2->已过期
-		UseTime        string `json:"useTime"`   // 使用时间
-		OrderId        int64  `json:"orderId"`   // 订单编号
-		OrderSn        string `json:"orderSn"`   // 订单号码
+		UseStatus      int32  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
+		UseTime        string `json:"useTime"` // 使用时间
+		OrderId        int64  `json:"orderId"` // 订单编号
+		OrderSn        string `json:"orderSn"` // 订单号码
 	}
 	UpdateCouponHistoryResp {
 		Code    string `json:"code"`
@@ -74,14 +74,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sms/couponhistory
-	prefix: /api/sms/couponhistory
+	group:      sms/couponhistory
+	prefix:     /api/sms/couponhistory
 )
 service admin-api {
-
 	//
 	@handler CouponHistoryAdd
 	post /addCouponHistory (addCouponHistoryReq) returns (addCouponHistoryResp)
@@ -98,3 +97,4 @@ service admin-api {
 	@handler CouponHistoryDelete
 	get /deleteCouponHistory (DeleteCouponHistoryReq) returns (DeleteCouponHistoryResp)
 }
+

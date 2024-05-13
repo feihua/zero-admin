@@ -1,15 +1,15 @@
-info(
-	desc: "秒杀活动"
+info (
+	desc:   "秒杀活动"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addFlashPromotionReq {
 		Title     string `json:"title"`
 		StartDate string `json:"startDate"` // 开始日期
-		EndDate   string `json:"endDate"`   // 结束日期
-        Status int32 `json:"status"`        // 上下线状态
+		EndDate   string `json:"endDate"` // 结束日期
+		Status    int32  `json:"status"` // 上下线状态
 	}
 	addFlashPromotionResp {
 		Code    string `json:"code"`
@@ -18,34 +18,34 @@ type (
 	ListFlashPromotionReq {
 		Current   int64  `form:"current,default=1"`
 		PageSize  int64  `form:"pageSize,default=20"`
-		Title     string `form:"title,optional"`     //标题
-        Status int32 `form:"status,,default=2"`      // 上下线状态
+		Title     string `form:"title,optional"` //标题
+		Status    int32  `form:"status,,default=2"` // 上下线状态
 		StartDate string `form:"startDate,optional"` // 开始日期
-		EndDate   string `form:"endDate,optional"`   // 结束日期
+		EndDate   string `form:"endDate,optional"` // 结束日期
 	}
-	ListtFlashPromotionData {
+	ListFlashPromotionData {
 		Id         int64  `json:"id"`
-		Title      string `json:"title"`      //标题
-		StartDate  string `json:"startDate"`  // 开始日期
-		EndDate    string `json:"endDate"`    // 结束日期
-        Status int32 `json:"status"`          // 上下线状态
+		Title      string `json:"title"` //标题
+		StartDate  string `json:"startDate"` // 开始日期
+		EndDate    string `json:"endDate"` // 结束日期
+		Status     int32  `json:"status"` // 上下线状态
 		CreateTime string `json:"createTime"` // 秒杀时间段名称
 	}
 	ListFlashPromotionResp {
-		Code     string                     `json:"code"`
-		Message  string                     `json:"message"`
-		Current  int64                      `form:"current,default=1"`
-		Data     []*ListtFlashPromotionData `json:"data"`
-		PageSize int64                      `form:"pageSize,default=20"`
-		Success  bool                       `json:"success"`
-		Total    int64                      `json:"total"`
+		Code     string                    `json:"code"`
+		Message  string                    `json:"message"`
+		Current  int64                     `form:"current,default=1"`
+		Data     []*ListFlashPromotionData `json:"data"`
+		PageSize int64                     `form:"pageSize,default=20"`
+		Success  bool                      `json:"success"`
+		Total    int64                     `json:"total"`
 	}
 	UpdateFlashPromotionReq {
 		Id        int64  `json:"id"`
 		Title     string `json:"title"`
 		StartDate string `json:"startDate"` // 开始日期
-		EndDate   string `json:"endDate"`   // 结束日期
-        Status int32 `json:"status"`        // 上下线状态
+		EndDate   string `json:"endDate"` // 结束日期
+		Status    int32  `json:"status"` // 上下线状态
 	}
 	UpdateFlashPromotionResp {
 		Code    string `json:"code"`
@@ -60,14 +60,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sms/flashpromotion
-	prefix: /api/sms/flashpromotion
+	group:      sms/flashpromotion
+	prefix:     /api/sms/flashpromotion
 )
 service admin-api {
-
 	//
 	@handler FlashPromotionAdd
 	post /addFlashPromotion (addFlashPromotionReq) returns (addFlashPromotionResp)
@@ -84,3 +83,4 @@ service admin-api {
 	@handler FlashPromotionDelete
 	get /deleteFlashPromotion (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
 }
+

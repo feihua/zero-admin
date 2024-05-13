@@ -1,9 +1,9 @@
 syntax = "v1"
 
-info(
-	desc: "用户相关"
+info (
+	desc:   "用户相关"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
@@ -22,15 +22,13 @@ type (
 		AccessExpire     int64  `json:"accessExpire"`
 		RefreshAfter     int64  `json:"refreshAfter"`
 	}
-
 	ListMenuTree {
-		Id       int64  `json:"id"`       // 编号
-		Path     string `json:"path"`     // 菜单路径
-		Name     string `json:"name"`     // 菜单名称
+		Id       int64  `json:"id"` // 编号
+		Path     string `json:"path"` // 菜单路径
+		Name     string `json:"name"` // 菜单名称
 		ParentId int64  `json:"parentId"` // 父菜单ID，一级菜单为0
-		Icon     string `json:"icon"`     // 菜单图标
+		Icon     string `json:"icon"` // 菜单图标
 	}
-
 	ListMenuTreeVue {
 		Id           int64        `json:"id"`
 		ParentId     int64        `json:"parentId"`
@@ -42,12 +40,10 @@ type (
 		VueComponent string       `json:"component"`
 		Meta         MenuTreeMeta `json:"meta"`
 	}
-
 	MenuTreeMeta {
 		Title string `json:"title"`
 		Icon  string `json:"icon"`
 	}
-
 	userInfoResp {
 		Code        string             `json:"code"`
 		Message     string             `json:"message"`
@@ -64,13 +60,12 @@ type (
 		DeptId   int64  `json:"deptId"`
 		RoleId   int64  `json:"roleId"`
 		JobId    int64  `json:"jobId"`
-        Status int32 `json:"status"` // 状态  0：禁用   1：正常
+		Status   int32  `json:"status"` // 状态  0：禁用   1：正常
 	}
 	addUserResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
 	ListUserReq {
 		Current  int64  `form:"current,default=1"`
 		PageSize int64  `form:"pageSize,default=20"`
@@ -78,30 +73,29 @@ type (
 		NickName string `form:"nickName,optional"`
 		Mobile   string `form:"mobile,optional"`
 		Email    string `form:"email,optional"`
-        Status int32 `form:"status,optional,default=2"`
+		Status   int32  `form:"status,optional,default=2"`
 		DeptId   int64  `form:"deptId,optional"`
 		JobId    int64  `form:"deptId,optional"`
 	}
-
 	ListUserData {
-		Id             int64  `json:"id"`             // 编号
-		UserName string `json:"name"`                 // 用户名
-		NickName       string `json:"nickName"`       // 昵称
-		Avatar         string `json:"avatar"`         // 头像
-		Email          string `json:"email"`          // 邮箱
-		Mobile         string `json:"mobile"`         // 手机号
-		UserStatus int32 `json:"status"`                  // 状态  0：禁用   1：正常
-		DeptId         int64  `json:"deptId"`         // 机构ID
-		CreateBy       string `json:"createBy"`       // 创建人
-		CreateTime     string `json:"createTime"`     // 创建时间
-        UpdateBy string `json:"updateBy"`             // 更新人
-        UpdateTime string `json:"updateTime"`         // 更新时间
-        DelFlag int32 `json:"delFlag"`                // 是否删除  0：已删除  1：正常
-		JobId          int64  `json:"jobId"`
-		RoleId         int64  `json:"roleId"`
-		RoleName       string `json:"roleName"`
-		JobName        string `json:"jobName"`
-		DeptName       string `json:"deptName"`
+		Id         int64  `json:"id"` // 编号
+		UserName   string `json:"name"` // 用户名
+		NickName   string `json:"nickName"` // 昵称
+		Avatar     string `json:"avatar"` // 头像
+		Email      string `json:"email"` // 邮箱
+		Mobile     string `json:"mobile"` // 手机号
+		UserStatus int32  `json:"status"` // 状态  0：禁用   1：正常
+		DeptId     int64  `json:"deptId"` // 机构ID
+		CreateBy   string `json:"createBy"` // 创建人
+		CreateTime string `json:"createTime"` // 创建时间
+		UpdateBy   string `json:"updateBy"` // 更新人
+		UpdateTime string `json:"updateTime"` // 更新时间
+		DelFlag    int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
+		JobId      int64  `json:"jobId"`
+		RoleId     int64  `json:"roleId"`
+		RoleName   string `json:"roleName"`
+		JobName    string `json:"jobName"`
+		DeptName   string `json:"deptName"`
 	}
 	ListUserResp {
 		Code     string          `json:"code"`
@@ -120,7 +114,7 @@ type (
 		NickName string `json:"nickName"`
 		DeptId   int64  `json:"deptId"`
 		RoleId   int64  `json:"roleId"`
-        Status int32 `json:"status"`
+		Status   int32  `json:"status"`
 		JobId    int64  `json:"jobId"`
 		DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 	}
@@ -144,56 +138,50 @@ type (
 	}
 	UserStatusReq {
 		Id     int64 `json:"id"`
-        Status int32 `json:"status"` // 状态  0：禁用   1：正常
+		Status int32 `json:"status"` // 状态  0：禁用   1：正常
 	}
 	UserStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
 	RoleRelations {
 		Id     int64  `json:"id"`
 		Name   string `json:"name"`
 		Remark string `json:"remark"`
 	}
-
 	DeptRelations {
 		Id       int64  `json:"id"`
 		Value    string `json:"value"`
 		Title    string `json:"title"`
 		ParentId int64  `json:"parentId"`
 	}
-
 	JobRelations {
 		Id      int64  `json:"id"`
 		JobName string `json:"jobName"`
 	}
-
 	QueryAllRelationsReq {
 		Current  int64 `form:"current,default=1"`
 		PageSize int64 `form:"pageSize,default=20"`
 	}
-
 	QueryAllRelationsData {
 		RoleRelations []*RoleRelations `json:"roleRelations"`
 		DeptRelations []*DeptRelations `json:"deptRelations"`
 		JobRelations  []*JobRelations  `json:"jobRelations"`
 	}
 	QueryAllRelationsResp {
-		Code    string         `json:"code"`
-		Message string         `json:"message"`
-		Data QueryAllRelationsData `json:"data"`
+		Code    string                `json:"code"`
+		Message string                `json:"message"`
+		Data    QueryAllRelationsData `json:"data"`
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sys/user
-	prefix: /api/sys/user
+	group:      sys/user
+	prefix:     /api/sys/user
 )
 service admin-api {
-
 	//获取用户信息
 	@handler UserInfo
 	get /info returns (userInfoResp)
@@ -227,10 +215,11 @@ service admin-api {
 	post /queryAllRelations (QueryAllRelationsReq) returns (QueryAllRelationsResp)
 }
 
-@server(
+@server (
 	group: sys/user
 )
 service admin-api {
 	@handler UserLogin
 	post /api/sys/user/login (loginReq) returns (loginResp)
 }
+

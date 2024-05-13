@@ -41,10 +41,10 @@ func (l *FlashPromotionListLogic) FlashPromotionList(req types.ListFlashPromotio
 		return nil, errorx.NewDefaultError("查询限时购表失败")
 	}
 
-	var list []*types.ListtFlashPromotionData
+	var list []*types.ListFlashPromotionData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtFlashPromotionData{
+		list = append(list, &types.ListFlashPromotionData{
 			Id:         item.Id,
 			Title:      item.Title,
 			StartDate:  item.StartDate,

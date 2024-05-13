@@ -1,7 +1,7 @@
-info(
-	desc: "首页推荐主题"
+info (
+	desc:   "首页推荐主题"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
@@ -15,31 +15,31 @@ type (
 	ListHomeRecommendSubjectReq {
 		Current         int64  `form:"current,default=1"`
 		PageSize        int64  `form:"pageSize,default=20"`
-		SubjectName     string `form:"subjectName,optional"`      // 专题名称
-		RecommendStatus int32 `form:"recommendStatus,default=2"`  // 推荐状态：0->不推荐;1->推荐
+		SubjectName     string `form:"subjectName,optional"` // 专题名称
+		RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 	}
-	ListtHomeRecommendSubjectData {
+	ListHomeRecommendSubjectData {
 		Id              int64  `json:"id"`
-		SubjectId       int64  `json:"subjectId"`       // 专题id
-		SubjectName     string `json:"subjectName"`     // 专题名称
-		RecommendStatus int32 `json:"recommendStatus"`  // 推荐状态：0->不推荐;1->推荐
-		Sort int32 `json:"sort"`                        // 排序
+		SubjectId       int64  `json:"subjectId"` // 专题id
+		SubjectName     string `json:"subjectName"` // 专题名称
+		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int32  `json:"sort"` // 排序
 	}
 	ListHomeRecommendSubjectResp {
-		Code     string                           `json:"code"`
-		Message  string                           `json:"message"`
-		Current  int64                            `form:"current,default=1"`
-		Data     []*ListtHomeRecommendSubjectData `json:"data"`
-		PageSize int64                            `form:"pageSize,default=20"`
-		Success  bool                             `json:"success"`
-		Total    int64                            `json:"total"`
+		Code     string                          `json:"code"`
+		Message  string                          `json:"message"`
+		Current  int64                           `form:"current,default=1"`
+		Data     []*ListHomeRecommendSubjectData `json:"data"`
+		PageSize int64                           `form:"pageSize,default=20"`
+		Success  bool                            `json:"success"`
+		Total    int64                           `json:"total"`
 	}
 	UpdateHomeRecommendSubjectReq {
 		Id              int64  `json:"id"`
-		SubjectId       int64  `json:"subjectId"`       // 专题id
-		SubjectName     string `json:"subjectName"`     // 专题名称
-		RecommendStatus int32 `json:"recommendStatus"`  // 推荐状态：0->不推荐;1->推荐
-		Sort int32 `json:"sort"`                        // 排序
+		SubjectId       int64  `json:"subjectId"` // 专题id
+		SubjectName     string `json:"subjectName"` // 专题名称
+		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int32  `json:"sort"` // 排序
 	}
 	UpdateHomeRecommendSubjectResp {
 		Code    string `json:"code"`
@@ -54,14 +54,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sms/homerecommendsubject
-	prefix: /api/sms/homerecommendsubject
+	group:      sms/homerecommendsubject
+	prefix:     /api/sms/homerecommendsubject
 )
 service admin-api {
-
 	//
 	@handler HomeRecommendSubjectAdd
 	post /addHomeRecommendSubject (addHomeRecommendSubjectReq) returns (addHomeRecommendSubjectResp)
@@ -78,3 +77,4 @@ service admin-api {
 	@handler HomeRecommendSubjectDelete
 	get /deleteHomeRecommendSubject (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
 }
+

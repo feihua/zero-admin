@@ -1,23 +1,23 @@
-info(
-	desc: "会员等级"
+info (
+	desc:   "会员等级"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addMemberLevelReq {
-		Name                  string  `json:"name"`
-		GrowthPoint int32 `json:"growthPoint"`
-		DefaultStatus int32 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
-        FreeFreightPoint int64 `json:"freeFreightPoint"`           // 免运费标准
-		CommentGrowthPoint int32 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
-		IsFreeFreight int32 `json:"isFreeFreight"`                 // 是否有免邮特权
-		IsSignIn int32 `json:"isSignIn"`                           // 是否有签到特权
-		IsComment int32 `json:"isComment"`                         // 是否有评论获奖励特权
-		IsPromotion int32 `json:"isPromotion"`                     // 是否有专享活动特权
-		IsMemberPrice int32 `json:"isMemberPrice"`                 // 是否有会员价格特权
-		IsBirthday int32 `json:"isBirthday"`                       // 是否有生日特权
-		Note                  string  `json:"note,optional"`
+		Name               string `json:"name"`
+		GrowthPoint        int32  `json:"growthPoint"`
+		DefaultStatus      int32  `json:"defaultStatus"` // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint   int64  `json:"freeFreightPoint"` // 免运费标准
+		CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
+		IsFreeFreight      int32  `json:"isFreeFreight"` // 是否有免邮特权
+		IsSignIn           int32  `json:"isSignIn"` // 是否有签到特权
+		IsComment          int32  `json:"isComment"` // 是否有评论获奖励特权
+		IsPromotion        int32  `json:"isPromotion"` // 是否有专享活动特权
+		IsMemberPrice      int32  `json:"isMemberPrice"` // 是否有会员价格特权
+		IsBirthday         int32  `json:"isBirthday"` // 是否有生日特权
+		Note               string `json:"note,optional"`
 	}
 	addMemberLevelResp {
 		Code    string `json:"code"`
@@ -28,44 +28,44 @@ type (
 		PageSize int64  `form:"pageSize,default=20"`
 		Name     string `form:"name,optional"`
 	}
-	ListtMemberLevelData {
-		Id                    int64   `json:"id"`
-		Name                  string  `json:"name"`
-		GrowthPoint int32 `json:"growthPoint"`
-		DefaultStatus int32 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
-        FreeFreightPoint int64 `json:"freeFreightPoint"`           // 免运费标准
-		CommentGrowthPoint int32 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
-		IsFreeFreight int32 `json:"isFreeFreight"`                 // 是否有免邮特权
-		IsSignIn int32 `json:"isSignIn"`                           // 是否有签到特权
-		IsComment int32 `json:"isComment"`                         // 是否有评论获奖励特权
-		IsPromotion int32 `json:"isPromotion"`                     // 是否有专享活动特权
-		IsMemberPrice int32 `json:"isMemberPrice"`                 // 是否有会员价格特权
-		IsBirthday int32 `json:"isBirthday"`                       // 是否有生日特权
-		Note                  string  `json:"note"`
+	ListMemberLevelData {
+		Id                 int64  `json:"id"`
+		Name               string `json:"name"`
+		GrowthPoint        int32  `json:"growthPoint"`
+		DefaultStatus      int32  `json:"defaultStatus"` // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint   int64  `json:"freeFreightPoint"` // 免运费标准
+		CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
+		IsFreeFreight      int32  `json:"isFreeFreight"` // 是否有免邮特权
+		IsSignIn           int32  `json:"isSignIn"` // 是否有签到特权
+		IsComment          int32  `json:"isComment"` // 是否有评论获奖励特权
+		IsPromotion        int32  `json:"isPromotion"` // 是否有专享活动特权
+		IsMemberPrice      int32  `json:"isMemberPrice"` // 是否有会员价格特权
+		IsBirthday         int32  `json:"isBirthday"` // 是否有生日特权
+		Note               string `json:"note"`
 	}
 	ListMemberLevelResp {
-		Code     string                  `json:"code"`
-		Message  string                  `json:"message"`
-		Current  int64                   `form:"current,default=1"`
-		Data     []*ListtMemberLevelData `json:"data"`
-		PageSize int64                   `form:"pageSize,default=20"`
-		Success  bool                    `json:"success"`
-		Total    int64                   `json:"total"`
+		Code     string                 `json:"code"`
+		Message  string                 `json:"message"`
+		Current  int64                  `form:"current,default=1"`
+		Data     []*ListMemberLevelData `json:"data"`
+		PageSize int64                  `form:"pageSize,default=20"`
+		Success  bool                   `json:"success"`
+		Total    int64                  `json:"total"`
 	}
 	UpdateMemberLevelReq {
-		Id                    int64   `json:"id"`
-		Name                  string  `json:"name"`
-		GrowthPoint int32 `json:"growthPoint"`
-		DefaultStatus int32 `json:"defaultStatus"`                 // 是否为默认等级：0->不是；1->是
-        FreeFreightPoint int64 `json:"freeFreightPoint"`           // 免运费标准
-		CommentGrowthPoint int32 `json:"commentGrowthPoint"`       // 每次评价获取的成长值
-		IsFreeFreight int32 `json:"isFreeFreight"`                 // 是否有免邮特权
-		IsSignIn int32 `json:"isSignIn"`                           // 是否有签到特权
-		IsComment int32 `json:"isComment"`                         // 是否有评论获奖励特权
-		IsPromotion int32 `json:"isPromotion"`                     // 是否有专享活动特权
-		IsMemberPrice int32 `json:"isMemberPrice"`                 // 是否有会员价格特权
-		IsBirthday int32 `json:"isBirthday"`                       // 是否有生日特权
-		Note                  string  `json:"note"`
+		Id                 int64  `json:"id"`
+		Name               string `json:"name"`
+		GrowthPoint        int32  `json:"growthPoint"`
+		DefaultStatus      int32  `json:"defaultStatus"` // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint   int64  `json:"freeFreightPoint"` // 免运费标准
+		CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
+		IsFreeFreight      int32  `json:"isFreeFreight"` // 是否有免邮特权
+		IsSignIn           int32  `json:"isSignIn"` // 是否有签到特权
+		IsComment          int32  `json:"isComment"` // 是否有评论获奖励特权
+		IsPromotion        int32  `json:"isPromotion"` // 是否有专享活动特权
+		IsMemberPrice      int32  `json:"isMemberPrice"` // 是否有会员价格特权
+		IsBirthday         int32  `json:"isBirthday"` // 是否有生日特权
+		Note               string `json:"note"`
 	}
 	UpdateMemberLevelResp {
 		Code    string `json:"code"`
@@ -80,11 +80,11 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: member/level
-	prefix: /api/member/level
+	group:      member/level
+	prefix:     /api/member/level
 )
 service admin-api {
 	//添加会员等级
@@ -103,3 +103,4 @@ service admin-api {
 	@handler MemberLevelDelete
 	get /deleteMemberLevel (DeleteMemberLevelReq) returns (DeleteMemberLevelResp)
 }
+

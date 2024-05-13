@@ -1,7 +1,7 @@
-info(
-	desc: "商品优选列表"
+info (
+	desc:   "商品优选列表"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
@@ -9,48 +9,48 @@ type (
 		Name       string `json:"name"`
 		SubTitle   string `json:"subTitle"`
 		Pic        string `json:"pic"` // 展示图片
-        Sort int32 `json:"sort"`
-        ShowStatus int32 `json:"showStatus"`
+		Sort       int32  `json:"sort"`
+		ShowStatus int32  `json:"showStatus"`
 	}
 	addPrefrenceAreaResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
 	ListPrefrenceAreaReq {
-		Current int64 `form:"current,default=1"`
-		PageSize int64 `form:"pageSize,default=20"`
-		Name string `form:"name,optional"`
-		SubTitle string `form:"subTitle,optional"`
-		ShowStatus int32 `form:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+		Current    int64  `form:"current,default=1"`
+		PageSize   int64  `form:"pageSize,default=20"`
+		Name       string `form:"name,optional"`
+		SubTitle   string `form:"subTitle,optional"`
+		ShowStatus int32  `form:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
 	}
 	ListPrefrenceAreaData {
 		Id         int64  `json:"id"`
 		Name       string `json:"name"`
 		SubTitle   string `json:"subTitle"`
 		Pic        string `json:"pic"` // 展示图片
-        Sort int32 `json:"sort"`
-        ShowStatus int32 `json:"showStatus"`
-		CreateBy string `json:"createBy"`
+		Sort       int32  `json:"sort"`
+		ShowStatus int32  `json:"showStatus"`
+		CreateBy   string `json:"createBy"`
 		CreateTime string `json:"createTime"`
-		UpdateBy string `json:"updateBy"`
+		UpdateBy   string `json:"updateBy"`
 		UpdateTime string `json:"updateTime"`
 	}
 	ListPrefrenceAreaResp {
-		Code     string                    `json:"code"`
-		Message  string                    `json:"message"`
-		Current  int64                     `form:"current,default=1"`
-		Data []*ListPrefrenceAreaData `json:"data"`
-		PageSize int64                     `form:"pageSize,default=20"`
-		Success  bool                      `json:"success"`
-		Total    int64                     `json:"total"`
+		Code     string                   `json:"code"`
+		Message  string                   `json:"message"`
+		Current  int64                    `form:"current,default=1"`
+		Data     []*ListPrefrenceAreaData `json:"data"`
+		PageSize int64                    `form:"pageSize,default=20"`
+		Success  bool                     `json:"success"`
+		Total    int64                    `json:"total"`
 	}
 	UpdatePrefrenceAreaReq {
 		Id         int64  `json:"id"`
 		Name       string `json:"name"`
 		SubTitle   string `json:"subTitle"`
 		Pic        string `json:"pic"` // 展示图片
-        Sort int32 `json:"sort"`
-        ShowStatus int32 `json:"showStatus"`
+		Sort       int32  `json:"sort"`
+		ShowStatus int32  `json:"showStatus"`
 	}
 	UpdatePrefrenceAreaResp {
 		Code    string `json:"code"`
@@ -65,14 +65,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-    group: cms/prefrenceArea
-	prefix: /api/cms/prefrenceArea
+	group:      cms/prefrenceArea
+	prefix:     /api/cms/prefrenceArea
 )
 service admin-api {
-
 	//
 	@handler PrefrenceAreaAdd
 	post /addPrefrenceArea (addPrefrenceAreaReq) returns (addPrefrenceAreaResp)
@@ -89,3 +88,4 @@ service admin-api {
 	@handler PrefrenceAreaDelete
 	get /deletePrefrenceArea (DeletePrefrenceAreaReq) returns (DeletePrefrenceAreaResp)
 }
+

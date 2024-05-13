@@ -1,4 +1,4 @@
-package handler
+package homebrand
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func HomeBrandListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewHomeBrandListLogic(r.Context(), ctx)
+		l := homebrand.NewHomeBrandListLogic(r.Context(), ctx)
 		resp, err := l.HomeBrandList(req)
 		if err != nil {
 			httpx.Error(w, err)

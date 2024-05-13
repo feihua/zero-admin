@@ -35,10 +35,10 @@ func (l *SkuStockListLogic) SkuStockList(req types.ListSkuStockReq) (*types.List
 		return nil, errorx.NewDefaultError("查询商品库存失败")
 	}
 
-	var list []*types.ListtSkuStockData
+	var list []*types.ListSkuStockData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtSkuStockData{
+		list = append(list, &types.ListSkuStockData{
 			Id:             item.Id,
 			ProductId:      item.ProductId,
 			SkuCode:        item.SkuCode,

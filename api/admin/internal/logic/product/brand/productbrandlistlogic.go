@@ -40,10 +40,10 @@ func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) 
 		return nil, errorx.NewDefaultError("查询商品品牌失败")
 	}
 
-	var list []*types.ListtProductBrandData
+	var list []*types.ListProductBrandData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtProductBrandData{
+		list = append(list, &types.ListProductBrandData{
 			Id:                  item.Id,
 			Name:                item.Name,
 			FirstLetter:         item.FirstLetter,

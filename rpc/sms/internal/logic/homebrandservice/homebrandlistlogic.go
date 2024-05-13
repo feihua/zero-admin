@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeBrandListLogic 首页品牌信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 15:58
+*/
 type HomeBrandListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +30,7 @@ func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Hom
 	}
 }
 
+// HomeBrandList 查询首页品牌信息
 func (l *HomeBrandListLogic) HomeBrandList(in *smsclient.HomeBrandListReq) (*smsclient.HomeBrandListResp, error) {
 	q := query.SmsHomeBrand.WithContext(l.ctx)
 	if len(in.BrandName) > 0 {

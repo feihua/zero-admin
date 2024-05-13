@@ -40,10 +40,10 @@ func (l *MemberListLogic) MemberList(req types.ListMemberReq) (*types.ListMember
 		return nil, errorx.NewDefaultError("查询会员信息失败")
 	}
 
-	var list []*types.ListtMemberData
+	var list []*types.ListMemberData
 
 	for _, member := range resp.List {
-		list = append(list, &types.ListtMemberData{
+		list = append(list, &types.ListMemberData{
 			Id:                    member.Id,
 			MemberLevelId:         member.MemberLevelId,
 			Username:              member.Username,

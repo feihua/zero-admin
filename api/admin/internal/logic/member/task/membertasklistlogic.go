@@ -37,10 +37,10 @@ func (l *MemberTaskListLogic) MemberTaskList(req types.ListMemberTaskReq) (*type
 		return nil, errorx.NewDefaultError("查询会员任务失败")
 	}
 
-	var list []*types.ListtMemberTaskData
+	var list []*types.ListMemberTaskData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberTaskData{
+		list = append(list, &types.ListMemberTaskData{
 			Id:           item.Id,
 			Name:         item.TaskName,
 			Growth:       item.TaskGrowth,

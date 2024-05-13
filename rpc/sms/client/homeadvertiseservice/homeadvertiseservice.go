@@ -117,8 +117,6 @@ type (
 	HomeBrandListData                             = smsclient.HomeBrandListData
 	HomeBrandListReq                              = smsclient.HomeBrandListReq
 	HomeBrandListResp                             = smsclient.HomeBrandListResp
-	HomeBrandUpdateReq                            = smsclient.HomeBrandUpdateReq
-	HomeBrandUpdateResp                           = smsclient.HomeBrandUpdateResp
 	HomeNewProductAddData                         = smsclient.HomeNewProductAddData
 	HomeNewProductAddReq                          = smsclient.HomeNewProductAddReq
 	HomeNewProductAddResp                         = smsclient.HomeNewProductAddResp
@@ -155,6 +153,10 @@ type (
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
 	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
 	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
+	UpdateHomeBrandSortReq                        = smsclient.UpdateHomeBrandSortReq
+	UpdateHomeBrandSortResp                       = smsclient.UpdateHomeBrandSortResp
+	UpdateHomeBrandStatusReq                      = smsclient.UpdateHomeBrandStatusReq
+	UpdateHomeBrandStatusResp                     = smsclient.UpdateHomeBrandStatusResp
 
 	HomeAdvertiseService interface {
 		HomeAdvertiseAdd(ctx context.Context, in *HomeAdvertiseAddReq, opts ...grpc.CallOption) (*HomeAdvertiseAddResp, error)

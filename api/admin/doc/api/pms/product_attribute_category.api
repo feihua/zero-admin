@@ -1,7 +1,7 @@
-info(
-	desc: "属性分类"
+info (
+	desc:   "属性分类"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
@@ -12,32 +12,31 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
 	ListProductAttributecategoryReq {
 		Current  int64  `form:"current,default=1"`
 		PageSize int64  `form:"pageSize,default=20"`
 		Name     string `form:"name,optional"`
 	}
-	ListtProductAttributecategoryData {
+	ListProductAttributecategoryData {
 		Id                     int64  `json:"id"`
 		Name                   string `json:"name"`
-        AttributecategoryCount int32 `json:"attributeCount"` // 属性数量
-        ParamCount int32 `json:"paramCount"`                 // 参数数量
+		AttributecategoryCount int32  `json:"attributeCount"` // 属性数量
+		ParamCount             int32  `json:"paramCount"` // 参数数量
 	}
 	ListProductAttributecategoryResp {
-		Code     string                               `json:"code"`
-		Message  string                               `json:"message"`
-		Current  int64                                `form:"current,default=1"`
-		Data     []*ListtProductAttributecategoryData `json:"data"`
-		PageSize int64                                `form:"pageSize,default=20"`
-		Success  bool                                 `json:"success"`
-		Total    int64                                `json:"total"`
+		Code     string                              `json:"code"`
+		Message  string                              `json:"message"`
+		Current  int64                               `form:"current,default=1"`
+		Data     []*ListProductAttributecategoryData `json:"data"`
+		PageSize int64                               `form:"pageSize,default=20"`
+		Success  bool                                `json:"success"`
+		Total    int64                               `json:"total"`
 	}
 	UpdateProductAttributecategoryReq {
 		Id                     int64  `json:"id"`
 		Name                   string `json:"name"`
-        AttributecategoryCount int32 `json:"attributeCount"` // 属性数量
-        ParamCount int32 `json:"paramCount"`                 // 参数数量
+		AttributecategoryCount int32  `json:"attributeCount"` // 属性数量
+		ParamCount             int32  `json:"paramCount"` // 参数数量
 	}
 	UpdateProductAttributecategoryResp {
 		Code    string `json:"code"`
@@ -52,14 +51,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: product/attributecategory
-	prefix: /api/product/attributecategory
+	group:      product/attributecategory
+	prefix:     /api/product/attributecategory
 )
 service admin-api {
-
 	//
 	@handler ProductAttributecategoryAdd
 	post /addProductAttributeCategory (addProductAttributecategoryReq) returns (addProductAttributecategoryResp)
@@ -76,3 +74,4 @@ service admin-api {
 	@handler ProductAttributecategoryDelete
 	get /deleteProductAttributeCategory (DeleteProductAttributecategoryReq) returns (DeleteProductAttributecategoryResp)
 }
+

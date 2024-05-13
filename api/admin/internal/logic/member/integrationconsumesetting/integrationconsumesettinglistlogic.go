@@ -37,10 +37,10 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req t
 		return nil, errorx.NewDefaultError("查询积分消费设置失败")
 	}
 
-	var list []*types.ListtIntegrationConsumeSettingData
+	var list []*types.ListIntegrationConsumeSettingData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtIntegrationConsumeSettingData{
+		list = append(list, &types.ListIntegrationConsumeSettingData{
 			Id:                 item.Id,
 			DeductionPerAmount: item.DeductionPerAmount,
 			MaxPercentPerOrder: item.MaxPercentPerOrder,

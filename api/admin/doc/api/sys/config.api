@@ -1,17 +1,17 @@
-info(
-	desc: "配置参数"
+info (
+	desc:   "配置参数"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addConfigReq {
-		Value       string `json:"value"`       // 数据值
-		Label       string `json:"label"`       // 标签名
-		Type        string `json:"type"`        // 类型
+		Value       string `json:"value"` // 数据值
+		Label       string `json:"label"` // 标签名
+		Type        string `json:"type"` // 类型
 		Description string `json:"description"` // 描述
-		Sort        int64  `json:"sort"`        // 排序（升序）
-		Remarks     string `json:"remarks"`     // 备注信息
+		Sort        int64  `json:"sort"` // 排序（升序）
+		Remarks     string `json:"remarks"` // 备注信息
 	}
 	addConfigResp {
 		Code    string `json:"code"`
@@ -22,18 +22,18 @@ type (
 		PageSize int64 `form:"pageSize,default=20"`
 	}
 	ListConfigData {
-		Id             int64  `json:"id"`             // 编号
-		Value          string `json:"value"`          // 数据值
-		Label          string `json:"label"`          // 标签名
-		Type           string `json:"type"`           // 类型
-		Description    string `json:"description"`    // 描述
-		Sort           int64  `json:"sort"`           // 排序（升序）
-		CreateBy       string `json:"createBy"`       // 创建人
-		CreateTime     string `json:"createTime"`     // 创建时间
-        UpdateBy string `json:"updateBy"`             // 更新人
-        UpdateTime string `json:"updateTime"`         // 更新时间
-		Remarks        string `json:"remarks"`        // 备注信息
-		DelFlag        int64  `json:"delFlag"`        // 是否删除  0：已删除  1：正常
+		Id          int64  `json:"id"` // 编号
+		Value       string `json:"value"` // 数据值
+		Label       string `json:"label"` // 标签名
+		Type        string `json:"type"` // 类型
+		Description string `json:"description"` // 描述
+		Sort        int64  `json:"sort"` // 排序（升序）
+		CreateBy    string `json:"createBy"` // 创建人
+		CreateTime  string `json:"createTime"` // 创建时间
+		UpdateBy    string `json:"updateBy"` // 更新人
+		UpdateTime  string `json:"updateTime"` // 更新时间
+		Remarks     string `json:"remarks"` // 备注信息
+		DelFlag     int64  `json:"delFlag"` // 是否删除  0：已删除  1：正常
 	}
 	ListConfigResp {
 		Code     string            `json:"code"`
@@ -45,13 +45,13 @@ type (
 		Total    int64             `json:"total"`
 	}
 	UpdateConfigReq {
-		Id          int64  `json:"id"`          // 编号
-		Value       string `json:"value"`       // 数据值
-		Label       string `json:"label"`       // 标签名
-		Type        string `json:"type"`        // 类型
+		Id          int64  `json:"id"` // 编号
+		Value       string `json:"value"` // 数据值
+		Label       string `json:"label"` // 标签名
+		Type        string `json:"type"` // 类型
 		Description string `json:"description"` // 描述
-		Sort        int64  `json:"sort"`        // 排序（升序）
-		Remarks     string `json:"remarks"`     // 备注信息
+		Sort        int64  `json:"sort"` // 排序（升序）
+		Remarks     string `json:"remarks"` // 备注信息
 	}
 	UpdateConfigResp {
 		Code    string `json:"code"`
@@ -66,14 +66,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sys/config
-	prefix: /api/sys/config
+	group:      sys/config
+	prefix:     /api/sys/config
 )
 service admin-api {
-
 	//
 	@handler ConfigAdd
 	post /addConfig (addConfigReq) returns (addConfigResp)
@@ -90,3 +89,4 @@ service admin-api {
 	@handler ConfigDelete
 	get /deleteConfig (DeleteConfigReq) returns (DeleteConfigResp)
 }
+

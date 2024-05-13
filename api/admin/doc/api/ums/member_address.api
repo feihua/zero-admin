@@ -1,7 +1,7 @@
-info(
-	desc: "会员地址"
+info (
+	desc:   "会员地址"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
@@ -9,11 +9,11 @@ type (
 		MemberId      int64  `json:"memberId"`
 		Name          string `json:"name"` // 收货人名称
 		PhoneNumber   string `json:"phoneNumber"`
-		DefaultStatus int32 `json:"defaultStatus"` // 是否为默认
-		PostCode      string `json:"postCode"`      // 邮政编码
-		Province      string `json:"province"`      // 省份/直辖市
-		City          string `json:"city"`          // 城市
-		Region        string `json:"region"`        // 区
+		DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
+		PostCode      string `json:"postCode"` // 邮政编码
+		Province      string `json:"province"` // 省份/直辖市
+		City          string `json:"city"` // 城市
+		Region        string `json:"region"` // 区
 		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
 	}
 	addMemberAddressResp {
@@ -25,37 +25,37 @@ type (
 		PageSize int64 `form:"pageSize,default=20"`
 		MemberId int64 `form:"memberId,default=0"`
 	}
-	ListtMemberAddressData {
+	ListMemberAddressData {
 		Id            int64  `json:"id"`
 		MemberId      int64  `json:"memberId"`
 		Name          string `json:"name"` // 收货人名称
 		PhoneNumber   string `json:"phoneNumber"`
-		DefaultStatus int32 `json:"defaultStatus"` // 是否为默认
-		PostCode      string `json:"postCode"`      // 邮政编码
-		Province      string `json:"province"`      // 省份/直辖市
-		City          string `json:"city"`          // 城市
-		Region        string `json:"region"`        // 区
+		DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
+		PostCode      string `json:"postCode"` // 邮政编码
+		Province      string `json:"province"` // 省份/直辖市
+		City          string `json:"city"` // 城市
+		Region        string `json:"region"` // 区
 		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
 	}
 	ListMemberAddressResp {
-		Current  int64                     `form:"current,default=1"`
-		Data     []*ListtMemberAddressData `json:"data"`
-		PageSize int64                     `form:"pageSize,default=20"`
-		Success  bool                      `json:"success"`
-		Total    int64                     `json:"total"`
-		Code     string                    `json:"code"`
-		Message  string                    `json:"message"`
+		Current  int64                    `form:"current,default=1"`
+		Data     []*ListMemberAddressData `json:"data"`
+		PageSize int64                    `form:"pageSize,default=20"`
+		Success  bool                     `json:"success"`
+		Total    int64                    `json:"total"`
+		Code     string                   `json:"code"`
+		Message  string                   `json:"message"`
 	}
 	UpdateMemberAddressReq {
 		Id            int64  `json:"id"`
 		MemberId      int64  `json:"memberId"`
 		Name          string `json:"name"` // 收货人名称
 		PhoneNumber   string `json:"phoneNumber"`
-		DefaultStatus int32 `json:"defaultStatus"` // 是否为默认
-		PostCode      string `json:"postCode"`      // 邮政编码
-		Province      string `json:"province"`      // 省份/直辖市
-		City          string `json:"city"`          // 城市
-		Region        string `json:"region"`        // 区
+		DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
+		PostCode      string `json:"postCode"` // 邮政编码
+		Province      string `json:"province"` // 省份/直辖市
+		City          string `json:"city"` // 城市
+		Region        string `json:"region"` // 区
 		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
 	}
 	UpdateMemberAddressResp {
@@ -71,14 +71,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: member/address
-	prefix: /api/member/address
+	group:      member/address
+	prefix:     /api/member/address
 )
 service admin-api {
-
 	//
 	@handler MemberAddressAdd
 	post /addMemberAddress (addMemberAddressReq) returns (addMemberAddressResp)
@@ -95,3 +94,4 @@ service admin-api {
 	@handler MemberAddressDelete
 	get /deleteMemberAddress (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
 }
+

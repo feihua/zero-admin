@@ -43,10 +43,10 @@ func (l *MenuListLogic) MenuList(req types.ListMenuReq) (*types.ListMenuResp, er
 		return nil, errorx.NewDefaultError("查询菜单失败")
 	}
 
-	var list []*types.ListtMenuData
+	var list []*types.ListMenuData
 
 	for _, menu := range resp.List {
-		menuItem := &types.ListtMenuData{
+		menuItem := &types.ListMenuData{
 			Id:            menu.Id,
 			Key:           strconv.FormatInt(menu.Id, 10),
 			Name:          menu.Name,

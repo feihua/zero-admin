@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// BrandListByIdsLogic 商品品牌
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 16:31
+*/
 type BrandListByIdsLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +30,7 @@ func NewBrandListByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Br
 	}
 }
 
+// BrandListByIds 根据id列表查询品牌列表
 func (l *BrandListByIdsLogic) BrandListByIds(in *pmsclient.BrandListByIdsReq) (*pmsclient.BrandListResp, error) {
 	result, err := query.PmsBrand.WithContext(l.ctx).Where(query.PmsBrand.ID.In(in.Ids...)).Find()
 

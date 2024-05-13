@@ -1,4 +1,4 @@
-package logic
+package homebrand
 
 import (
 	"context"
@@ -13,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeBrandAddLogic 首页品牌信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 15:53
+*/
 type HomeBrandAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -27,6 +32,7 @@ func NewHomeBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeB
 	}
 }
 
+// HomeBrandAdd 添加首页品牌信息
 func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddHomeBrandResp, error) {
 	brandListResp, _ := l.svcCtx.BrandService.BrandListByIds(l.ctx, &pmsclient.BrandListByIdsReq{Ids: req.BrandIds})
 

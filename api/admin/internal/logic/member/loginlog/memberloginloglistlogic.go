@@ -38,10 +38,10 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLo
 		return nil, errorx.NewDefaultError("查询员登录记录列表失败")
 	}
 
-	var list []*types.ListtMemberLoginLogData
+	var list []*types.ListMemberLoginLogData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberLoginLogData{
+		list = append(list, &types.ListMemberLoginLogData{
 			Id:         item.Id,
 			MemberId:   item.MemberId,
 			CreateTime: item.CreateTime,

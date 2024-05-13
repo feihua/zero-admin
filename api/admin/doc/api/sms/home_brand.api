@@ -1,13 +1,12 @@
-info(
-	desc: "首页品牌"
+info (
+	desc:   "首页品牌"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addHomeBrandReq {
 		BrandIds []int64 `json:"brandIds"` // 商品品牌id
-
 	}
 	addHomeBrandResp {
 		Code    string `json:"code"`
@@ -16,33 +15,39 @@ type (
 	ListHomeBrandReq {
 		Current         int64  `form:"current,default=1"`
 		PageSize        int64  `form:"pageSize,default=20"`
-		BrandName       string `form:"brandName,optional"`        // 商品品牌名称
-        RecommendStatus int32 `form:"recommendStatus,default=2"`  // 推荐状态：0->不推荐;1->推荐
+		BrandName       string `form:"brandName,optional"` // 商品品牌名称
+		RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 	}
-	ListtHomeBrandData {
+	ListHomeBrandData {
 		Id              int64  `json:"id"`
-		BrandId         int64  `json:"brandId"`         // 商品品牌id
-		BrandName       string `json:"brandName"`       // 商品品牌名称
-        RecommendStatus int32 `json:"recommendStatus"`  // 推荐状态：0->不推荐;1->推荐
-        Sort int32 `json:"sort"`                        // 排序
+		BrandId         int64  `json:"brandId"` // 商品品牌id
+		BrandName       string `json:"brandName"` // 商品品牌名称
+		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int32  `json:"sort"` // 排序
 	}
 	ListHomeBrandResp {
-		Code     string                `json:"code"`
-		Message  string                `json:"message"`
-		Current  int64                 `form:"current,default=1"`
-		Data     []*ListtHomeBrandData `json:"data"`
-		PageSize int64                 `form:"pageSize,default=20"`
-		Success  bool                  `json:"success"`
-		Total    int64                 `json:"total"`
+		Code     string               `json:"code"`
+		Message  string               `json:"message"`
+		Current  int64                `form:"current,default=1"`
+		Data     []*ListHomeBrandData `json:"data"`
+		PageSize int64                `form:"pageSize,default=20"`
+		Success  bool                 `json:"success"`
+		Total    int64                `json:"total"`
 	}
-	UpdateHomeBrandReq {
+	UpdateHomeBrandSortReq {
 		Id              int64  `json:"id"`
-		BrandId         int64  `json:"brandId"`         // 商品品牌id
-		BrandName       string `json:"brandName"`       // 商品品牌名称
-        RecommendStatus int32 `json:"recommendStatus"`  // 推荐状态：0->不推荐;1->推荐
-        Sort int32 `json:"sort"`                        // 排序
+		Sort            int32  `json:"sort"` // 排序
 	}
-	UpdateHomeBrandResp {
+	UpdateHomeBrandSortResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+
+	UpdateHomeBrandStatusReq {
+		Ids              []int64  `json:"ids"`
+		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	}
+	UpdateHomeBrandStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -55,27 +60,31 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sms/homebrand
-	prefix: /api/sms/homebrand
+	group:      sms/homebrand
+	prefix:     /api/sms/homebrand
 )
 service admin-api {
-
-	//
+	//添加推荐品牌
 	@handler HomeBrandAdd
 	post /addHomeBrand (addHomeBrandReq) returns (addHomeBrandResp)
 
-	//
+	//分页查询推荐品牌
 	@handler HomeBrandList
 	get /queryHomeBrandList (ListHomeBrandReq) returns (ListHomeBrandResp)
 
-	//
-	@handler HomeBrandUpdate
-	post /updateHomeBrand (UpdateHomeBrandReq) returns (UpdateHomeBrandResp)
+	//修改推荐品牌排序
+	@handler UpdateHomeBrandSort
+	post /updateHomeBrandSort (UpdateHomeBrandSortReq) returns (UpdateHomeBrandSortResp)
 
-	//
+	//批量修改推荐品牌状态
+	@handler UpdateHomeBrandStatus
+	post /updateHomeBrandStatus (UpdateHomeBrandStatusReq) returns (UpdateHomeBrandStatusResp)
+
+	//删除推荐品牌
 	@handler HomeBrandDelete
 	get /deleteHomeBrand (DeleteHomeBrandReq) returns (DeleteHomeBrandResp)
 }
+

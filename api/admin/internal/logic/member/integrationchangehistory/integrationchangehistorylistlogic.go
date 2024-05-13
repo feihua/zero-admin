@@ -37,10 +37,10 @@ func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(req typ
 		return nil, errorx.NewDefaultError("查询积分变化历史记录失败")
 	}
 
-	var list []*types.ListtIntegrationChangeHistoryData
+	var list []*types.ListIntegrationChangeHistoryData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtIntegrationChangeHistoryData{
+		list = append(list, &types.ListIntegrationChangeHistoryData{
 			Id:          item.Id,
 			MemberId:    item.MemberId,
 			CreateTime:  item.CreateTime,

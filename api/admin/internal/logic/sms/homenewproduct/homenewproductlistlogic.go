@@ -39,10 +39,10 @@ func (l *HomeNewProductListLogic) HomeNewProductList(req types.ListHomeNewProduc
 		return nil, errorx.NewDefaultError("查询新鲜好物表失败")
 	}
 
-	var list []*types.ListtHomeNewProductData
+	var list []*types.ListHomeNewProductData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtHomeNewProductData{
+		list = append(list, &types.ListHomeNewProductData{
 			Id:              item.Id,
 			ProductId:       item.ProductId,
 			ProductName:     item.ProductName,

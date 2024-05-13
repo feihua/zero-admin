@@ -37,10 +37,10 @@ func (l *MemberPriceListLogic) MemberPriceList(req types.ListMemberPriceReq) (*t
 		return nil, errorx.NewDefaultError("查询会员价格失败")
 	}
 
-	var list []*types.ListtMemberPriceData
+	var list []*types.ListMemberPriceData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberPriceData{
+		list = append(list, &types.ListMemberPriceData{
 			Id:              item.Id,
 			ProductId:       item.ProductId,
 			MemberLevelId:   item.MemberLevelId,

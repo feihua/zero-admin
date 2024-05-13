@@ -37,10 +37,10 @@ func (l *MemberTagListLogic) MemberTagList(req types.ListMemberTagReq) (*types.L
 		return nil, errorx.NewDefaultError("查询会员标签失败")
 	}
 
-	var list []*types.ListtMemberTagData
+	var list []*types.ListMemberTagData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberTagData{
+		list = append(list, &types.ListMemberTagData{
 			Id:                item.Id,
 			Name:              item.Name,
 			FinishOrderCount:  item.FinishOrderCount,

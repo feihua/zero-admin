@@ -41,10 +41,10 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 		return nil, errorx.NewDefaultError("查询优惠券失败")
 	}
 
-	var list []*types.ListtCouponData
+	var list []*types.ListCouponData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtCouponData{
+		list = append(list, &types.ListCouponData{
 			Id:           item.Id,
 			Type:         item.Type,
 			Name:         item.Name,

@@ -37,10 +37,10 @@ func (l *OrderSettingListLogic) OrderSettingList(req types.ListOrderSettingReq) 
 		return nil, errorx.NewDefaultError("查询订单设置失败")
 	}
 
-	var list []*types.ListtOrderSettingData
+	var list []*types.ListOrderSettingData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtOrderSettingData{
+		list = append(list, &types.ListOrderSettingData{
 			Id:                  item.Id,
 			FlashOrderOvertime:  item.FlashOrderOvertime,
 			NormalOrderOvertime: item.NormalOrderOvertime,

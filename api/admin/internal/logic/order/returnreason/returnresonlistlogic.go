@@ -39,10 +39,10 @@ func (l *ReturnResonListLogic) ReturnResonList(req types.ListReturnResonReq) (*t
 		return nil, errorx.NewDefaultError("查询退货原因失败")
 	}
 
-	var list []*types.ListtReturnResonData
+	var list []*types.ListReturnResonData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtReturnResonData{
+		list = append(list, &types.ListReturnResonData{
 			Id:         item.Id,
 			Name:       item.Name,
 			Sort:       item.Sort,

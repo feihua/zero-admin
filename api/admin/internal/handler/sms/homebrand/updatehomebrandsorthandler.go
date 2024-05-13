@@ -1,4 +1,4 @@
-package handler
+package homebrand
 
 import (
 	"net/http"
@@ -6,24 +6,23 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/logic/sms/homebrand"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
-
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func HomeBrandUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {
+func UpdateHomeBrandSortHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UpdateHomeBrandReq
+		var req types.UpdateHomeBrandSortReq
 		if err := httpx.Parse(r, &req); err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := logic.NewHomeBrandUpdateLogic(r.Context(), ctx)
-		resp, err := l.HomeBrandUpdate(req)
+		l := homebrand.NewUpdateHomeBrandSortLogic(r.Context(), svcCtx)
+		resp, err := l.UpdateHomeBrandSort(&req)
 		if err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			httpx.OkJsonCtx(r.Context(), w, resp)
 		}
 	}
 }

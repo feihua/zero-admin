@@ -37,10 +37,10 @@ func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(req types.ListM
 		return nil, errorx.NewDefaultError("查询会员统计信息失败")
 	}
 
-	var list []*types.ListtMemberStatisticsInfoData
+	var list []*types.ListMemberStatisticsInfoData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberStatisticsInfoData{
+		list = append(list, &types.ListMemberStatisticsInfoData{
 			Id:                  item.Id,
 			MemberId:            item.MemberId,
 			ConsumeAmount:       item.ConsumeAmount,

@@ -1,15 +1,15 @@
-info(
-	desc: "会员价格"
+info (
+	desc:   "会员价格"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addMemberPriceReq {
-		ProductId       int64   `json:"productId"`
-		MemberLevelId   int64   `json:"memberLevelId"`
-        MemberPrice int64 `json:"memberPrice"` // 会员价格
-		MemberLevelName string  `json:"memberLevelName"`
+		ProductId       int64  `json:"productId"`
+		MemberLevelId   int64  `json:"memberLevelId"`
+		MemberPrice     int64  `json:"memberPrice"` // 会员价格
+		MemberLevelName string `json:"memberLevelName"`
 	}
 	addMemberPriceResp {
 		Code    string `json:"code"`
@@ -19,28 +19,28 @@ type (
 		Current  int64 `form:"current,default=1"`
 		PageSize int64 `form:"pageSize,default=20"`
 	}
-	ListtMemberPriceData {
-		Id              int64   `json:"id"`
-		ProductId       int64   `json:"productId"`
-		MemberLevelId   int64   `json:"memberLevelId"`
-        MemberPrice int64 `json:"memberPrice"` // 会员价格
-		MemberLevelName string  `json:"memberLevelName"`
+	ListMemberPriceData {
+		Id              int64  `json:"id"`
+		ProductId       int64  `json:"productId"`
+		MemberLevelId   int64  `json:"memberLevelId"`
+		MemberPrice     int64  `json:"memberPrice"` // 会员价格
+		MemberLevelName string `json:"memberLevelName"`
 	}
 	ListMemberPriceResp {
-		Current  int64                   `form:"current,default=1"`
-		Data     []*ListtMemberPriceData `json:"data"`
-		PageSize int64                   `form:"pageSize,default=20"`
-		Success  bool                    `json:"success"`
-		Total    int64                   `json:"total"`
-		Code     string                  `json:"code"`
-		Message  string                  `json:"message"`
+		Current  int64                  `form:"current,default=1"`
+		Data     []*ListMemberPriceData `json:"data"`
+		PageSize int64                  `form:"pageSize,default=20"`
+		Success  bool                   `json:"success"`
+		Total    int64                  `json:"total"`
+		Code     string                 `json:"code"`
+		Message  string                 `json:"message"`
 	}
 	UpdateMemberPriceReq {
-		Id              int64   `json:"id"`
-		ProductId       int64   `json:"productId"`
-		MemberLevelId   int64   `json:"memberLevelId"`
-        MemberPrice int64 `json:"memberPrice"` // 会员价格
-		MemberLevelName string  `json:"memberLevelName"`
+		Id              int64  `json:"id"`
+		ProductId       int64  `json:"productId"`
+		MemberLevelId   int64  `json:"memberLevelId"`
+		MemberPrice     int64  `json:"memberPrice"` // 会员价格
+		MemberLevelName string `json:"memberLevelName"`
 	}
 	UpdateMemberPriceResp {
 		Code    string `json:"code"`
@@ -55,14 +55,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: product/memberprice
-	prefix: /api/product/memberprice
+	group:      product/memberprice
+	prefix:     /api/product/memberprice
 )
 service admin-api {
-
 	//
 	@handler MemberPriceAdd
 	post /addMemberPrice (addMemberPriceReq) returns (addMemberPriceResp)
@@ -79,3 +78,4 @@ service admin-api {
 	@handler MemberPriceDelete
 	get /deleteMemberPrice (DeleteMemberPriceReq) returns (DeleteMemberPriceResp)
 }
+

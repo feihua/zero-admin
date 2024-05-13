@@ -117,8 +117,6 @@ type (
 	HomeBrandListData                             = smsclient.HomeBrandListData
 	HomeBrandListReq                              = smsclient.HomeBrandListReq
 	HomeBrandListResp                             = smsclient.HomeBrandListResp
-	HomeBrandUpdateReq                            = smsclient.HomeBrandUpdateReq
-	HomeBrandUpdateResp                           = smsclient.HomeBrandUpdateResp
 	HomeNewProductAddData                         = smsclient.HomeNewProductAddData
 	HomeNewProductAddReq                          = smsclient.HomeNewProductAddReq
 	HomeNewProductAddResp                         = smsclient.HomeNewProductAddResp
@@ -155,11 +153,18 @@ type (
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
 	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
 	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
+	UpdateHomeBrandSortReq                        = smsclient.UpdateHomeBrandSortReq
+	UpdateHomeBrandSortResp                       = smsclient.UpdateHomeBrandSortResp
+	UpdateHomeBrandStatusReq                      = smsclient.UpdateHomeBrandStatusReq
+	UpdateHomeBrandStatusResp                     = smsclient.UpdateHomeBrandStatusResp
 
 	HomeBrandService interface {
 		HomeBrandAdd(ctx context.Context, in *HomeBrandAddReq, opts ...grpc.CallOption) (*HomeBrandAddResp, error)
 		HomeBrandList(ctx context.Context, in *HomeBrandListReq, opts ...grpc.CallOption) (*HomeBrandListResp, error)
-		HomeBrandUpdate(ctx context.Context, in *HomeBrandUpdateReq, opts ...grpc.CallOption) (*HomeBrandUpdateResp, error)
+		// 修改推荐品牌排序
+		UpdateHomeBrandSort(ctx context.Context, in *UpdateHomeBrandSortReq, opts ...grpc.CallOption) (*UpdateHomeBrandSortResp, error)
+		// 批量修改推荐品牌状态
+		UpdateHomeBrandStatus(ctx context.Context, in *UpdateHomeBrandStatusReq, opts ...grpc.CallOption) (*UpdateHomeBrandStatusResp, error)
 		HomeBrandDelete(ctx context.Context, in *HomeBrandDeleteReq, opts ...grpc.CallOption) (*HomeBrandDeleteResp, error)
 	}
 
@@ -184,9 +189,16 @@ func (m *defaultHomeBrandService) HomeBrandList(ctx context.Context, in *HomeBra
 	return client.HomeBrandList(ctx, in, opts...)
 }
 
-func (m *defaultHomeBrandService) HomeBrandUpdate(ctx context.Context, in *HomeBrandUpdateReq, opts ...grpc.CallOption) (*HomeBrandUpdateResp, error) {
+// 修改推荐品牌排序
+func (m *defaultHomeBrandService) UpdateHomeBrandSort(ctx context.Context, in *UpdateHomeBrandSortReq, opts ...grpc.CallOption) (*UpdateHomeBrandSortResp, error) {
 	client := smsclient.NewHomeBrandServiceClient(m.cli.Conn())
-	return client.HomeBrandUpdate(ctx, in, opts...)
+	return client.UpdateHomeBrandSort(ctx, in, opts...)
+}
+
+// 批量修改推荐品牌状态
+func (m *defaultHomeBrandService) UpdateHomeBrandStatus(ctx context.Context, in *UpdateHomeBrandStatusReq, opts ...grpc.CallOption) (*UpdateHomeBrandStatusResp, error) {
+	client := smsclient.NewHomeBrandServiceClient(m.cli.Conn())
+	return client.UpdateHomeBrandStatus(ctx, in, opts...)
 }
 
 func (m *defaultHomeBrandService) HomeBrandDelete(ctx context.Context, in *HomeBrandDeleteReq, opts ...grpc.CallOption) (*HomeBrandDeleteResp, error) {

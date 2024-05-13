@@ -1,100 +1,100 @@
-info(
-    desc: "地址"
-    author: "koobe"
-    email: "1002219331@qq.com"
+info (
+	desc:   "地址"
+	author: "koobe"
+	email:  "1002219331@qq.com"
 )
 
 type (
-    addCompanyAddressReq {
-        AddressName string `json:"addressName"`     // 地址名称
-        SendStatus int32 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
-        ReceiveStatus int32 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
-        Name string `json:"name"`                   // 收发货人姓名
-        Phone string `json:"phone"`                 // 收货人电话
-        Province string `json:"province"`           // 省/直辖市
-        City string `json:"city"`                   // 市
-        Region string `json:"region"`               // 区
-        DetailAddress string `json:"detailAddress"` // 详细地址
-    }
-    addCompanyAddressResp {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    ListCompanyAddressReq {
-        Current int64 `form:"current,default=1"`
-        PageSize int64 `form:"pageSize,default=20"`
-    }
-    ListCompanyAddressData {
-        Id int64 `json:"id"`
-        AddressName string `json:"addressName"`     // 地址名称
-        SendStatus int32 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
-        ReceiveStatus int32 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
-        Name string `json:"name"`                   // 收发货人姓名
-        Phone string `json:"phone"`                 // 收货人电话
-        Province string `json:"province"`           // 省/直辖市
-        City string `json:"city"`                   // 市
-        Region string `json:"region"`               // 区
-        DetailAddress string `json:"detailAddress"` // 详细地址
-        CreateBy string `json:"createBy"`
-        CreateTime string `json:"createTime"`
-        UpdateBy string `json:"updateBy"`
-        UpdateTime string `json:"updateTime"`
-    }
-    ListCompanyAddressResp {
-        Code string `json:"code"`
-        Message string `json:"message"`
-        Current int64 `form:"current,default=1"`
-        Data []*ListCompanyAddressData `json:"data"`
-        PageSize int64 `form:"pageSize,default=20"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-    UpdateCompanyAddressReq {
-        Id int64 `json:"id"`
-        AddressName string `json:"addressName"`     // 地址名称
-        SendStatus int32 `json:"sendStatus"`        // 默认发货地址：0->否；1->是
-        ReceiveStatus int32 `json:"receiveStatus"`  // 是否默认收货地址：0->否；1->是
-        Name string `json:"name"`                   // 收发货人姓名
-        Phone string `json:"phone"`                 // 收货人电话
-        Province string `json:"province"`           // 省/直辖市
-        City string `json:"city"`                   // 市
-        Region string `json:"region"`               // 区
-        DetailAddress string `json:"detailAddress"` // 详细地址
-    }
-    UpdateCompanyAddressResp {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
-    DeleteCompanyAddressReq {
-        Ids []int64 `form:"ids"`
-    }
-    DeleteCompanyAddressResp {
-        Code string `json:"code"`
-        Message string `json:"message"`
-    }
+	addCompanyAddressReq {
+		AddressName   string `json:"addressName"` // 地址名称
+		SendStatus    int32  `json:"sendStatus"` // 默认发货地址：0->否；1->是
+		ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+		Name          string `json:"name"` // 收发货人姓名
+		Phone         string `json:"phone"` // 收货人电话
+		Province      string `json:"province"` // 省/直辖市
+		City          string `json:"city"` // 市
+		Region        string `json:"region"` // 区
+		DetailAddress string `json:"detailAddress"` // 详细地址
+	}
+	addCompanyAddressResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	ListCompanyAddressReq {
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
+	}
+	ListCompanyAddressData {
+		Id            int64  `json:"id"`
+		AddressName   string `json:"addressName"` // 地址名称
+		SendStatus    int32  `json:"sendStatus"` // 默认发货地址：0->否；1->是
+		ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+		Name          string `json:"name"` // 收发货人姓名
+		Phone         string `json:"phone"` // 收货人电话
+		Province      string `json:"province"` // 省/直辖市
+		City          string `json:"city"` // 市
+		Region        string `json:"region"` // 区
+		DetailAddress string `json:"detailAddress"` // 详细地址
+		CreateBy      string `json:"createBy"`
+		CreateTime    string `json:"createTime"`
+		UpdateBy      string `json:"updateBy"`
+		UpdateTime    string `json:"updateTime"`
+	}
+	ListCompanyAddressResp {
+		Code     string                    `json:"code"`
+		Message  string                    `json:"message"`
+		Current  int64                     `form:"current,default=1"`
+		Data     []*ListCompanyAddressData `json:"data"`
+		PageSize int64                     `form:"pageSize,default=20"`
+		Success  bool                      `json:"success"`
+		Total    int64                     `json:"total"`
+	}
+	UpdateCompanyAddressReq {
+		Id            int64  `json:"id"`
+		AddressName   string `json:"addressName"` // 地址名称
+		SendStatus    int32  `json:"sendStatus"` // 默认发货地址：0->否；1->是
+		ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+		Name          string `json:"name"` // 收发货人姓名
+		Phone         string `json:"phone"` // 收货人电话
+		Province      string `json:"province"` // 省/直辖市
+		City          string `json:"city"` // 市
+		Region        string `json:"region"` // 区
+		DetailAddress string `json:"detailAddress"` // 详细地址
+	}
+	UpdateCompanyAddressResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	DeleteCompanyAddressReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeleteCompanyAddressResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
-@server(
-    jwt: Auth
-    middleware: CheckUrl
-    group: order/companyaddress
-    prefix: /api/order/companyaddress
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      order/companyaddress
+	prefix:     /api/order/companyaddress
 )
 service admin-api {
+	//添加收货地址
+	@handler CompanyAddressAdd
+	post /addCompanyAddress (addCompanyAddressReq) returns (addCompanyAddressResp)
 
-    //添加收货地址
-    @handler CompanyAddressAdd
-    post /addCompanyAddress (addCompanyAddressReq) returns (addCompanyAddressResp)
+	//查询收货地址
+	@handler CompanyAddressList
+	get /queryCompanyAddressList (ListCompanyAddressReq) returns (ListCompanyAddressResp)
 
-    //查询收货地址
-    @handler CompanyAddressList
-    get /queryCompanyAddressList (ListCompanyAddressReq) returns (ListCompanyAddressResp)
+	//更新收货地址
+	@handler CompanyAddressUpdate
+	post /updateCompanyAddress (UpdateCompanyAddressReq) returns (UpdateCompanyAddressResp)
 
-    //更新收货地址
-    @handler CompanyAddressUpdate
-    post /updateCompanyAddress (UpdateCompanyAddressReq) returns (UpdateCompanyAddressResp)
-
-    //删除收货地址
-    @handler CompanyAddressDelete
-    get /deleteCompanyAddress (DeleteCompanyAddressReq) returns (DeleteCompanyAddressResp)
+	//删除收货地址
+	@handler CompanyAddressDelete
+	get /deleteCompanyAddress (DeleteCompanyAddressReq) returns (DeleteCompanyAddressResp)
 }
+

@@ -38,10 +38,10 @@ func (l *CouponHistoryListLogic) CouponHistoryList(req types.ListCouponHistoryRe
 		return nil, errorx.NewDefaultError("查询优惠券使用记录失败")
 	}
 
-	var list []*types.ListtCouponHistoryData
+	var list []*types.ListCouponHistoryData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtCouponHistoryData{
+		list = append(list, &types.ListCouponHistoryData{
 			Id:             item.Id,
 			CouponId:       item.CouponId,
 			MemberId:       item.MemberId,

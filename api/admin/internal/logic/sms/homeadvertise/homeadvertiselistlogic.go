@@ -42,10 +42,10 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseRe
 		return nil, errorx.NewDefaultError("查询首页广告失败")
 	}
 
-	var list []*types.ListtHomeAdvertiseData
+	var list []*types.ListHomeAdvertiseData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtHomeAdvertiseData{
+		list = append(list, &types.ListHomeAdvertiseData{
 			Id:         item.Id,
 			Name:       item.Name,
 			Type:       item.Type,

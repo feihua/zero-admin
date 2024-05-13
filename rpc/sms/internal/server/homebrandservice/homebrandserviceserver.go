@@ -32,9 +32,16 @@ func (s *HomeBrandServiceServer) HomeBrandList(ctx context.Context, in *smsclien
 	return l.HomeBrandList(in)
 }
 
-func (s *HomeBrandServiceServer) HomeBrandUpdate(ctx context.Context, in *smsclient.HomeBrandUpdateReq) (*smsclient.HomeBrandUpdateResp, error) {
-	l := homebrandservicelogic.NewHomeBrandUpdateLogic(ctx, s.svcCtx)
-	return l.HomeBrandUpdate(in)
+// 修改推荐品牌排序
+func (s *HomeBrandServiceServer) UpdateHomeBrandSort(ctx context.Context, in *smsclient.UpdateHomeBrandSortReq) (*smsclient.UpdateHomeBrandSortResp, error) {
+	l := homebrandservicelogic.NewUpdateHomeBrandSortLogic(ctx, s.svcCtx)
+	return l.UpdateHomeBrandSort(in)
+}
+
+// 批量修改推荐品牌状态
+func (s *HomeBrandServiceServer) UpdateHomeBrandStatus(ctx context.Context, in *smsclient.UpdateHomeBrandStatusReq) (*smsclient.UpdateHomeBrandStatusResp, error) {
+	l := homebrandservicelogic.NewUpdateHomeBrandStatusLogic(ctx, s.svcCtx)
+	return l.UpdateHomeBrandStatus(in)
 }
 
 func (s *HomeBrandServiceServer) HomeBrandDelete(ctx context.Context, in *smsclient.HomeBrandDeleteReq) (*smsclient.HomeBrandDeleteResp, error) {

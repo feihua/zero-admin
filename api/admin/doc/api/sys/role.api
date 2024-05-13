@@ -1,14 +1,14 @@
-info(
-	desc: "角色"
+info (
+	desc:   "角色"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addRoleReq {
-		Name   string `json:"name"`            // 角色名称
+		Name   string `json:"name"` // 角色名称
 		Remark string `json:"remark,optional"` // 备注
-        Status int32 `json:"status"`           // 状态
+		Status int32  `json:"status"` // 状态
 	}
 	addRoleResp {
 		Code    string `json:"code"`
@@ -18,20 +18,20 @@ type (
 		Current  int64  `form:"current,default=1"`
 		PageSize int64  `form:"pageSize,default=20"`
 		Name     string `form:"name,optional "`
-        Status int32 `form:"status,default=2"`
+		Status   int32  `form:"status,default=2"`
 	}
 	ListRoleData {
-		Id             int64  `json:"id"`             // 编号
-		Name           string `json:"name"`           // 角色名称
-		Remark         string `json:"remark"`         // 备注
-		CreateBy       string `json:"createBy"`       // 创建人
-		CreateTime     string `json:"createTime"`     // 创建时间
-        UpdateBy string `json:"updateBy"`             // 更新人
-        UpdateTime string `json:"updateTime"`         // 更新时间
-        DelFlag int32 `json:"delFlag"`                // 是否删除  0：已删除  1：正常
-		Label          string `json:"label"`          // 编号
-		Value          string `json:"value"`          // 角色名称
-        Status int32 `json:"status"`                  // 状态
+		Id         int64  `json:"id"` // 编号
+		Name       string `json:"name"` // 角色名称
+		Remark     string `json:"remark"` // 备注
+		CreateBy   string `json:"createBy"` // 创建人
+		CreateTime string `json:"createTime"` // 创建时间
+		UpdateBy   string `json:"updateBy"` // 更新人
+		UpdateTime string `json:"updateTime"` // 更新时间
+		DelFlag    int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
+		Label      string `json:"label"` // 编号
+		Value      string `json:"value"` // 角色名称
+		Status     int32  `json:"status"` // 状态
 	}
 	ListRoleResp {
 		Code     string          `json:"code"`
@@ -43,10 +43,10 @@ type (
 		Total    int64           `json:"total"`
 	}
 	UpdateRoleReq {
-		Id     int64  `json:"id"`     // 编号
-		Name   string `json:"name"`   // 角色名称
+		Id     int64  `json:"id"` // 编号
+		Name   string `json:"name"` // 角色名称
 		Remark string `json:"remark"` // 备注
-        Status int32 `json:"status"`  // 状态
+		Status int32  `json:"status"` // 状态
 	}
 	UpdateRoleResp {
 		Code    string `json:"code"`
@@ -59,7 +59,6 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
 	UpdateRoleMenuReq {
 		RoleId  int64   `json:"roleId"`
 		MenuIds []int64 `json:"menuIds"`
@@ -68,33 +67,32 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-	ListMenuData {
-		Key      string `json:"key"`      // 菜单名称
-		Title    string `json:"title"`    // 菜单名称
+	RoleMenuListData {
+		Key      string `json:"key"` // 菜单名称
+		Title    string `json:"title"` // 菜单名称
 		ParentId int64  `json:"parentId"` // 父菜单ID，一级菜单为0
-		Id       int64  `json:"id"`       // 父菜单ID，一级菜单为0
-		Label    string `json:"label"`    // 父菜单ID，一级菜单为0
+		Id       int64  `json:"id"` // 父菜单ID，一级菜单为0
+		Label    string `json:"label"` // 父菜单ID，一级菜单为0
 	}
-
 	RoleMenuReq {
 		Id int64 `json:"id,optional"`
 	}
 	RoleMenuResp {
-		AllData  []*ListMenuData `json:"allData"`
-		RoleData []int64         `json:"userData"`
-		Code     string          `json:"code"`
-		Message  string          `json:"message"`
+		AllData  []*RoleMenuListData `json:"allData"`
+		RoleData []int64             `json:"userData"`
+		Code     string              `json:"code"`
+		Message  string              `json:"message"`
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sys/role
-	prefix: /api/sys/role
+	group:      sys/role
+	prefix:     /api/sys/role
 )
 service admin-api {
+
 	//新增角色信息
 	@handler RoleAdd
 	post /addRole (addRoleReq) returns (addRoleResp)
@@ -119,3 +117,4 @@ service admin-api {
 	@handler UpdateRoleMenu
 	post /updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
 }
+

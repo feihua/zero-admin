@@ -436,19 +436,40 @@ type JobRelations struct {
 	JobName string `json:"jobName"`
 }
 
+type ListCartItemData struct {
+	Id                int64  `json:"id"`
+	ProductId         int64  `json:"productId"`
+	ProductSkuId      int64  `json:"productSkuId"`
+	MemberId          int64  `json:"memberId"`
+	Quantity          int32  `json:"quantity"`          // 购买数量
+	Price             int64  `json:"price"`             // 添加到购物车的价格
+	ProductPic        string `json:"productPic"`        // 商品主图
+	ProductName       string `json:"productName"`       // 商品名称
+	ProductSubTitle   string `json:"productSubTitle"`   // 商品副标题（卖点）
+	ProductSkuCode    string `json:"productSkuCode"`    // 商品sku条码
+	MemberNickname    string `json:"memberNickName"`    // 会员昵称
+	CreateDate        string `json:"createDate"`        // 创建时间
+	ModifyDate        string `json:"modifyDate"`        // 修改时间
+	DeleteStatus      int32  `json:"deleteStatus"`      // 是否删除
+	ProductCategoryId int64  `json:"productCategoryId"` // 商品分类
+	ProductBrand      string `json:"productBrand"`
+	ProductSn         string `json:"productSn"`
+	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+}
+
 type ListCartItemReq struct {
 	Current  int64 `form:"current,default=1"`
 	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListCartItemResp struct {
-	Code     string               `json:"code"`
-	Message  string               `json:"message"`
-	Current  int64                `form:"current,default=1"`
-	Data     []*ListtCartItemData `json:"data"`
-	PageSize int64                `form:"pageSize,default=20"`
-	Success  bool                 `json:"success"`
-	Total    int64                `json:"total"`
+	Code     string              `json:"code"`
+	Message  string              `json:"message"`
+	Current  int64               `form:"current,default=1"`
+	Data     []*ListCartItemData `json:"data"`
+	PageSize int64               `form:"pageSize,default=20"`
+	Success  bool                `json:"success"`
+	Total    int64               `json:"total"`
 }
 
 type ListCompanyAddressData struct {
@@ -483,6 +504,41 @@ type ListCompanyAddressResp struct {
 	Total    int64                     `json:"total"`
 }
 
+type ListCouponData struct {
+	Id           int64  `json:"id"`
+	Type         int32  `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+	Name         string `json:"name"`
+	Platform     int32  `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
+	Count        int32  `json:"count"`    // 数量
+	Amount       int64  `json:"amount"`   // 金额
+	PerLimit     int32  `json:"perLimit"` // 每人限领张数
+	MinPoint     int64  `json:"minPoint"` // 使用门槛；0表示无门槛
+	StartTime    string `json:"startTime"`
+	EndTime      string `json:"endTime"`
+	UseType      int32  `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+	Note         string `json:"note"`         // 备注
+	PublishCount int32  `json:"publishCount"` // 发行数量
+	UseCount     int32  `json:"useCount"`     // 已使用数量
+	ReceiveCount int32  `json:"receiveCount"` // 领取数量
+	EnableTime   string `json:"enableTime"`   // 可以领取的日期
+	Code         string `json:"code"`         // 优惠码
+	MemberLevel  int32  `json:"memberLevel"`  // 可领取的会员类型：0->无限时
+}
+
+type ListCouponHistoryData struct {
+	Id             int64  `json:"id"`
+	CouponId       int64  `json:"couponId"`
+	MemberId       int64  `json:"memberId"`
+	CouponCode     string `json:"couponCode"`
+	MemberNickname string `json:"memberNickName"` // 领取人昵称
+	GetType        int32  `json:"getType"`        // 获取类型：0->后台赠送；1->主动获取
+	CreateTime     string `json:"createTime"`
+	UseStatus      int32  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
+	UseTime        string `json:"useTime"`   // 使用时间
+	OrderId        int64  `json:"orderId"`   // 订单编号
+	OrderSn        string `json:"orderSn"`   // 订单号码
+}
+
 type ListCouponHistoryReq struct {
 	Current   int64 `form:"current,default=1"`
 	PageSize  int64 `form:"pageSize,default=20"`
@@ -490,13 +546,13 @@ type ListCouponHistoryReq struct {
 }
 
 type ListCouponHistoryResp struct {
-	Current  int64                     `form:"current,default=1"`
-	Data     []*ListtCouponHistoryData `json:"data"`
-	PageSize int64                     `form:"pageSize,default=20"`
-	Success  bool                      `json:"success"`
-	Total    int64                     `json:"total"`
-	Code     string                    `json:"code"`
-	Message  string                    `json:"message"`
+	Current  int64                    `form:"current,default=1"`
+	Data     []*ListCouponHistoryData `json:"data"`
+	PageSize int64                    `form:"pageSize,default=20"`
+	Success  bool                     `json:"success"`
+	Total    int64                    `json:"total"`
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
 }
 
 type ListCouponReq struct {
@@ -511,13 +567,13 @@ type ListCouponReq struct {
 }
 
 type ListCouponResp struct {
-	Code     string             `json:"code"`
-	Message  string             `json:"message"`
-	Current  int64              `form:"current,default=1"`
-	Data     []*ListtCouponData `json:"data"`
-	PageSize int64              `form:"pageSize,default=20"`
-	Success  bool               `json:"success"`
-	Total    int64              `json:"total"`
+	Code     string            `json:"code"`
+	Message  string            `json:"message"`
+	Current  int64             `form:"current,default=1"`
+	Data     []*ListCouponData `json:"data"`
+	PageSize int64             `form:"pageSize,default=20"`
+	Success  bool              `json:"success"`
+	Total    int64             `json:"total"`
 }
 
 type ListDeptData struct {
@@ -580,19 +636,49 @@ type ListDictResp struct {
 	Total    int64           `json:"total"`
 }
 
+type ListFeightTemplateData struct {
+	Id             int64  `json:"id"`
+	Name           string `json:"name"`
+	ChargeType     int32  `json:"chargeType"`   // 计费类型:0->按重量；1->按件数
+	FirstWeight    int64  `json:"first_weight"` // 首重kg
+	FirstFee       int64  `json:"firstFee"`     // 首费（元）
+	ContinueWeight int64  `json:"continue_weight"`
+	ContinmeFee    int64  `json:"continmeFee"`
+	Dest           string `json:"dest"` // 目的地（省、市）
+}
+
 type ListFeightTemplateReq struct {
 	Current  int64 `form:"current,default=1"`
 	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListFeightTemplateResp struct {
-	Code     string                     `json:"code"`
-	Message  string                     `json:"message"`
-	Current  int64                      `form:"current,default=1"`
-	Data     []*ListtFeightTemplateData `json:"data"`
-	PageSize int64                      `form:"pageSize,default=20"`
-	Success  bool                       `json:"success"`
-	Total    int64                      `json:"total"`
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
+	Current  int64                     `form:"current,default=1"`
+	Data     []*ListFeightTemplateData `json:"data"`
+	PageSize int64                     `form:"pageSize,default=20"`
+	Success  bool                      `json:"success"`
+	Total    int64                     `json:"total"`
+}
+
+type ListFlashPromotionData struct {
+	Id         int64  `json:"id"`
+	Title      string `json:"title"`      //标题
+	StartDate  string `json:"startDate"`  // 开始日期
+	EndDate    string `json:"endDate"`    // 结束日期
+	Status     int32  `json:"status"`     // 上下线状态
+	CreateTime string `json:"createTime"` // 秒杀时间段名称
+}
+
+type ListFlashPromotionLogData struct {
+	Id            int64  `json:"id"`
+	MemberId      int64  `json:"memberId"`
+	ProductId     int64  `json:"productId"`
+	MemberPhone   string `json:"memberPhone"`
+	ProductName   string `json:"productName"`
+	SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
+	SendTime      string `json:"sendTime"`
 }
 
 type ListFlashPromotionLogReq struct {
@@ -601,13 +687,13 @@ type ListFlashPromotionLogReq struct {
 }
 
 type ListFlashPromotionLogResp struct {
-	Code     string                        `json:"code"`
-	Message  string                        `json:"message"`
-	Current  int64                         `form:"current,default=1"`
-	Data     []*ListtFlashPromotionLogData `json:"data"`
-	PageSize int64                         `form:"pageSize,default=20"`
-	Success  bool                          `json:"success"`
-	Total    int64                         `json:"total"`
+	Code     string                       `json:"code"`
+	Message  string                       `json:"message"`
+	Current  int64                        `form:"current,default=1"`
+	Data     []*ListFlashPromotionLogData `json:"data"`
+	PageSize int64                        `form:"pageSize,default=20"`
+	Success  bool                         `json:"success"`
+	Total    int64                        `json:"total"`
 }
 
 type ListFlashPromotionReq struct {
@@ -620,13 +706,22 @@ type ListFlashPromotionReq struct {
 }
 
 type ListFlashPromotionResp struct {
-	Code     string                     `json:"code"`
-	Message  string                     `json:"message"`
-	Current  int64                      `form:"current,default=1"`
-	Data     []*ListtFlashPromotionData `json:"data"`
-	PageSize int64                      `form:"pageSize,default=20"`
-	Success  bool                       `json:"success"`
-	Total    int64                      `json:"total"`
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
+	Current  int64                     `form:"current,default=1"`
+	Data     []*ListFlashPromotionData `json:"data"`
+	PageSize int64                     `form:"pageSize,default=20"`
+	Success  bool                      `json:"success"`
+	Total    int64                     `json:"total"`
+}
+
+type ListFlashPromotionSessionData struct {
+	Id         int64  `json:"id"`         // 编号
+	Name       string `json:"name"`       // 场次名称
+	StartTime  string `json:"startTime"`  // 每日开始时间
+	EndTime    string `json:"endTime"`    // 每日结束时间
+	Status     int32  `json:"status"`     // 启用状态：0->不启用；1->启用
+	CreateTime string `json:"createTime"` // 创建时间
 }
 
 type ListFlashPromotionSessionReq struct {
@@ -635,13 +730,24 @@ type ListFlashPromotionSessionReq struct {
 }
 
 type ListFlashPromotionSessionResp struct {
-	Code     string                            `json:"code"`
-	Message  string                            `json:"message"`
-	Current  int64                             `form:"current,default=1"`
-	Data     []*ListtFlashPromotionSessionData `json:"data"`
-	PageSize int64                             `form:"pageSize,default=20"`
-	Success  bool                              `json:"success"`
-	Total    int64                             `json:"total"`
+	Code     string                           `json:"code"`
+	Message  string                           `json:"message"`
+	Current  int64                            `form:"current,default=1"`
+	Data     []*ListFlashPromotionSessionData `json:"data"`
+	PageSize int64                            `form:"pageSize,default=20"`
+	Success  bool                             `json:"success"`
+	Total    int64                            `json:"total"`
+}
+
+type ListGrowthChangeHistoryData struct {
+	Id          int64  `json:"id"`
+	MemberId    int64  `json:"memberId"`
+	CreateTime  string `json:"createTime"`
+	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
+	ChangeCount int32  `json:"changeCount"` // 积分改变数量
+	OperateMan  string `json:"operateMan"`  // 操作人员
+	OperateNote string `json:"operateNote"` // 操作备注
+	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
 }
 
 type ListGrowthChangeHistoryReq struct {
@@ -650,13 +756,28 @@ type ListGrowthChangeHistoryReq struct {
 }
 
 type ListGrowthChangeHistoryResp struct {
-	Current  int64                           `form:"current,default=1"`
-	Data     []*ListtGrowthChangeHistoryData `json:"data"`
-	PageSize int64                           `form:"pageSize,default=20"`
-	Success  bool                            `json:"success"`
-	Total    int64                           `json:"total"`
-	Code     string                          `json:"code"`
-	Message  string                          `json:"message"`
+	Current  int64                          `form:"current,default=1"`
+	Data     []*ListGrowthChangeHistoryData `json:"data"`
+	PageSize int64                          `form:"pageSize,default=20"`
+	Success  bool                           `json:"success"`
+	Total    int64                          `json:"total"`
+	Code     string                         `json:"code"`
+	Message  string                         `json:"message"`
+}
+
+type ListHomeAdvertiseData struct {
+	Id         int64  `json:"id"`
+	Name       string `json:"name"`       // 名称
+	Type       int32  `json:"type"`       // 轮播位置：0->PC首页轮播；1->app首页轮播
+	Pic        string `json:"pic"`        // 图片地址
+	StartTime  string `json:"startTime"`  // 开始时间
+	EndTime    string `json:"endTime"`    // 结束时间
+	Status     int32  `json:"status"`     // 上下线状态：0->下线；1->上线
+	ClickCount int32  `json:"clickCount"` // 点击数
+	OrderCount int32  `json:"orderCount"` // 下单数
+	Url        string `json:"url"`        // 链接地址
+	Note       string `json:"note"`       // 备注
+	Sort       int32  `json:"sort"`       // 排序
 }
 
 type ListHomeAdvertiseReq struct {
@@ -670,13 +791,21 @@ type ListHomeAdvertiseReq struct {
 }
 
 type ListHomeAdvertiseResp struct {
-	Code     string                    `json:"code"`
-	Message  string                    `json:"message"`
-	Current  int64                     `form:"current,default=1"`
-	Data     []*ListtHomeAdvertiseData `json:"data"`
-	PageSize int64                     `form:"pageSize,default=20"`
-	Success  bool                      `json:"success"`
-	Total    int64                     `json:"total"`
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
+	Current  int64                    `form:"current,default=1"`
+	Data     []*ListHomeAdvertiseData `json:"data"`
+	PageSize int64                    `form:"pageSize,default=20"`
+	Success  bool                     `json:"success"`
+	Total    int64                    `json:"total"`
+}
+
+type ListHomeBrandData struct {
+	Id              int64  `json:"id"`
+	BrandId         int64  `json:"brandId"`         // 商品品牌id
+	BrandName       string `json:"brandName"`       // 商品品牌名称
+	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            // 排序
 }
 
 type ListHomeBrandReq struct {
@@ -687,13 +816,21 @@ type ListHomeBrandReq struct {
 }
 
 type ListHomeBrandResp struct {
-	Code     string                `json:"code"`
-	Message  string                `json:"message"`
-	Current  int64                 `form:"current,default=1"`
-	Data     []*ListtHomeBrandData `json:"data"`
-	PageSize int64                 `form:"pageSize,default=20"`
-	Success  bool                  `json:"success"`
-	Total    int64                 `json:"total"`
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
+	Current  int64                `form:"current,default=1"`
+	Data     []*ListHomeBrandData `json:"data"`
+	PageSize int64                `form:"pageSize,default=20"`
+	Success  bool                 `json:"success"`
+	Total    int64                `json:"total"`
+}
+
+type ListHomeNewProductData struct {
+	Id              int64  `json:"id"`
+	ProductId       int64  `json:"productId"`       // 商品id
+	ProductName     string `json:"productName"`     // 商品名称
+	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            // 排序
 }
 
 type ListHomeNewProductReq struct {
@@ -704,13 +841,21 @@ type ListHomeNewProductReq struct {
 }
 
 type ListHomeNewProductResp struct {
-	Code     string                     `json:"code"`
-	Message  string                     `json:"message"`
-	Current  int64                      `form:"current,default=1"`
-	Data     []*ListtHomeNewProductData `json:"data"`
-	PageSize int64                      `form:"pageSize,default=20"`
-	Success  bool                       `json:"success"`
-	Total    int64                      `json:"total"`
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
+	Current  int64                     `form:"current,default=1"`
+	Data     []*ListHomeNewProductData `json:"data"`
+	PageSize int64                     `form:"pageSize,default=20"`
+	Success  bool                      `json:"success"`
+	Total    int64                     `json:"total"`
+}
+
+type ListHomeRecommendProductData struct {
+	Id              int64  `json:"id"`
+	ProductId       int64  `json:"productId"`       // 商品id
+	ProductName     string `json:"productName"`     // 商品名称
+	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            // 排序
 }
 
 type ListHomeRecommendProductReq struct {
@@ -721,13 +866,21 @@ type ListHomeRecommendProductReq struct {
 }
 
 type ListHomeRecommendProductResp struct {
-	Code     string                           `json:"code"`
-	Message  string                           `json:"message"`
-	Current  int64                            `form:"current,default=1"`
-	Data     []*ListtHomeRecommendProductData `json:"data"`
-	PageSize int64                            `form:"pageSize,default=20"`
-	Success  bool                             `json:"success"`
-	Total    int64                            `json:"total"`
+	Code     string                          `json:"code"`
+	Message  string                          `json:"message"`
+	Current  int64                           `form:"current,default=1"`
+	Data     []*ListHomeRecommendProductData `json:"data"`
+	PageSize int64                           `form:"pageSize,default=20"`
+	Success  bool                            `json:"success"`
+	Total    int64                           `json:"total"`
+}
+
+type ListHomeRecommendSubjectData struct {
+	Id              int64  `json:"id"`
+	SubjectId       int64  `json:"subjectId"`       // 专题id
+	SubjectName     string `json:"subjectName"`     // 专题名称
+	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            // 排序
 }
 
 type ListHomeRecommendSubjectReq struct {
@@ -738,13 +891,24 @@ type ListHomeRecommendSubjectReq struct {
 }
 
 type ListHomeRecommendSubjectResp struct {
-	Code     string                           `json:"code"`
-	Message  string                           `json:"message"`
-	Current  int64                            `form:"current,default=1"`
-	Data     []*ListtHomeRecommendSubjectData `json:"data"`
-	PageSize int64                            `form:"pageSize,default=20"`
-	Success  bool                             `json:"success"`
-	Total    int64                            `json:"total"`
+	Code     string                          `json:"code"`
+	Message  string                          `json:"message"`
+	Current  int64                           `form:"current,default=1"`
+	Data     []*ListHomeRecommendSubjectData `json:"data"`
+	PageSize int64                           `form:"pageSize,default=20"`
+	Success  bool                            `json:"success"`
+	Total    int64                           `json:"total"`
+}
+
+type ListIntegrationChangeHistoryData struct {
+	Id          int64  `json:"id"`
+	MemberId    int64  `json:"memberId"`
+	CreateTime  string `json:"createTime"`
+	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
+	ChangeCount int32  `json:"changeCount"` // 积分改变数量
+	OperateMan  string `json:"operateMan"`  // 操作人员
+	OperateNote string `json:"operateNote"` // 操作备注
+	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
 }
 
 type ListIntegrationChangeHistoryReq struct {
@@ -753,13 +917,21 @@ type ListIntegrationChangeHistoryReq struct {
 }
 
 type ListIntegrationChangeHistoryResp struct {
-	Code     string                               `json:"code"`
-	Message  string                               `json:"message"`
-	Current  int64                                `form:"current,default=1"`
-	Data     []*ListtIntegrationChangeHistoryData `json:"data"`
-	PageSize int64                                `form:"pageSize,default=20"`
-	Success  bool                                 `json:"success"`
-	Total    int64                                `json:"total"`
+	Code     string                              `json:"code"`
+	Message  string                              `json:"message"`
+	Current  int64                               `form:"current,default=1"`
+	Data     []*ListIntegrationChangeHistoryData `json:"data"`
+	PageSize int64                               `form:"pageSize,default=20"`
+	Success  bool                                `json:"success"`
+	Total    int64                               `json:"total"`
+}
+
+type ListIntegrationConsumeSettingData struct {
+	Id                 int64 `json:"id"`
+	DeductionPerAmount int32 `json:"deductionPerAmount"` // 每一元需要抵扣的积分数量
+	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
+	UseUnit            int32 `json:"useUnit"`            // 每次使用积分最小单位100
+	CouponStatus       int32 `json:"couponStatus"`       // 是否可以和优惠券同用；0->不可以；1->可以
 }
 
 type ListIntegrationConsumeSettingReq struct {
@@ -768,13 +940,13 @@ type ListIntegrationConsumeSettingReq struct {
 }
 
 type ListIntegrationConsumeSettingResp struct {
-	Code     string                                `json:"code"`
-	Message  string                                `json:"message"`
-	Current  int64                                 `form:"current,default=1"`
-	Data     []*ListtIntegrationConsumeSettingData `json:"data"`
-	PageSize int64                                 `form:"pageSize,default=20"`
-	Success  bool                                  `json:"success"`
-	Total    int64                                 `json:"total"`
+	Code     string                               `json:"code"`
+	Message  string                               `json:"message"`
+	Current  int64                                `form:"current,default=1"`
+	Data     []*ListIntegrationConsumeSettingData `json:"data"`
+	PageSize int64                                `form:"pageSize,default=20"`
+	Success  bool                                 `json:"success"`
+	Total    int64                                `json:"total"`
 }
 
 type ListJobData struct {
@@ -834,6 +1006,19 @@ type ListLoginLogResp struct {
 	Total    int64               `json:"total"`
 }
 
+type ListMemberAddressData struct {
+	Id            int64  `json:"id"`
+	MemberId      int64  `json:"memberId"`
+	Name          string `json:"name"` // 收货人名称
+	PhoneNumber   string `json:"phoneNumber"`
+	DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
+	PostCode      string `json:"postCode"`      // 邮政编码
+	Province      string `json:"province"`      // 省份/直辖市
+	City          string `json:"city"`          // 城市
+	Region        string `json:"region"`        // 区
+	DetailAddress string `json:"detailAddress"` // 详细地址(街道)
+}
+
 type ListMemberAddressReq struct {
 	Current  int64 `form:"current,default=1"`
 	PageSize int64 `form:"pageSize,default=20"`
@@ -841,13 +1026,51 @@ type ListMemberAddressReq struct {
 }
 
 type ListMemberAddressResp struct {
-	Current  int64                     `form:"current,default=1"`
-	Data     []*ListtMemberAddressData `json:"data"`
-	PageSize int64                     `form:"pageSize,default=20"`
-	Success  bool                      `json:"success"`
-	Total    int64                     `json:"total"`
-	Code     string                    `json:"code"`
-	Message  string                    `json:"message"`
+	Current  int64                    `form:"current,default=1"`
+	Data     []*ListMemberAddressData `json:"data"`
+	PageSize int64                    `form:"pageSize,default=20"`
+	Success  bool                     `json:"success"`
+	Total    int64                    `json:"total"`
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
+}
+
+type ListMemberData struct {
+	Id                    int64  `json:"id"`
+	MemberLevelId         int64  `json:"memberLevelId"`
+	Username              string `json:"username"`              // 用户名
+	Password              string `json:"password"`              // 密码
+	Nickname              string `json:"nickname"`              // 昵称
+	Phone                 string `json:"phone"`                 // 手机号码
+	Status                int32  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
+	CreateTime            string `json:"createTime"`            // 注册时间
+	Icon                  string `json:"icon"`                  // 头像
+	Gender                int32  `json:"gender"`                // 性别：0->未知；1->男；2->女
+	Birthday              string `json:"birthday"`              // 生日
+	City                  string `json:"city"`                  // 所做城市
+	Job                   string `json:"job"`                   // 职业
+	PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
+	SourceType            int32  `json:"sourceType"`            // 用户来源
+	Integration           int32  `json:"integration"`           // 积分
+	Growth                int32  `json:"growth"`                // 成长值
+	LuckeyCount           int32  `json:"luckeyCount"`           // 剩余抽奖次数
+	HistoryIntegration    int32  `json:"historyIntegration"`    // 历史积分数量
+}
+
+type ListMemberLevelData struct {
+	Id                 int64  `json:"id"`
+	Name               string `json:"name"`
+	GrowthPoint        int32  `json:"growthPoint"`
+	DefaultStatus      int32  `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
+	FreeFreightPoint   int64  `json:"freeFreightPoint"`   // 免运费标准
+	CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
+	IsFreeFreight      int32  `json:"isFreeFreight"`      // 是否有免邮特权
+	IsSignIn           int32  `json:"isSignIn"`           // 是否有签到特权
+	IsComment          int32  `json:"isComment"`          // 是否有评论获奖励特权
+	IsPromotion        int32  `json:"isPromotion"`        // 是否有专享活动特权
+	IsMemberPrice      int32  `json:"isMemberPrice"`      // 是否有会员价格特权
+	IsBirthday         int32  `json:"isBirthday"`         // 是否有生日特权
+	Note               string `json:"note"`
 }
 
 type ListMemberLevelReq struct {
@@ -857,13 +1080,23 @@ type ListMemberLevelReq struct {
 }
 
 type ListMemberLevelResp struct {
-	Code     string                  `json:"code"`
-	Message  string                  `json:"message"`
-	Current  int64                   `form:"current,default=1"`
-	Data     []*ListtMemberLevelData `json:"data"`
-	PageSize int64                   `form:"pageSize,default=20"`
-	Success  bool                    `json:"success"`
-	Total    int64                   `json:"total"`
+	Code     string                 `json:"code"`
+	Message  string                 `json:"message"`
+	Current  int64                  `form:"current,default=1"`
+	Data     []*ListMemberLevelData `json:"data"`
+	PageSize int64                  `form:"pageSize,default=20"`
+	Success  bool                   `json:"success"`
+	Total    int64                  `json:"total"`
+}
+
+type ListMemberLoginLogData struct {
+	Id         int64  `json:"id"`
+	MemberId   int64  `json:"memberId"`
+	CreateTime string `json:"createTime"`
+	Ip         string `json:"ip"`
+	City       string `json:"city"`
+	LoginType  int32  `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
+	Province   string `json:"province"`
 }
 
 type ListMemberLoginLogReq struct {
@@ -873,13 +1106,21 @@ type ListMemberLoginLogReq struct {
 }
 
 type ListMemberLoginLogResp struct {
-	Code     string                     `json:"code"`
-	Message  string                     `json:"message"`
-	Current  int64                      `form:"current,default=1"`
-	Data     []*ListtMemberLoginLogData `json:"data"`
-	PageSize int64                      `form:"pageSize,default=20"`
-	Success  bool                       `json:"success"`
-	Total    int64                      `json:"total"`
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
+	Current  int64                     `form:"current,default=1"`
+	Data     []*ListMemberLoginLogData `json:"data"`
+	PageSize int64                     `form:"pageSize,default=20"`
+	Success  bool                      `json:"success"`
+	Total    int64                     `json:"total"`
+}
+
+type ListMemberPriceData struct {
+	Id              int64  `json:"id"`
+	ProductId       int64  `json:"productId"`
+	MemberLevelId   int64  `json:"memberLevelId"`
+	MemberPrice     int64  `json:"memberPrice"` // 会员价格
+	MemberLevelName string `json:"memberLevelName"`
 }
 
 type ListMemberPriceReq struct {
@@ -888,13 +1129,13 @@ type ListMemberPriceReq struct {
 }
 
 type ListMemberPriceResp struct {
-	Current  int64                   `form:"current,default=1"`
-	Data     []*ListtMemberPriceData `json:"data"`
-	PageSize int64                   `form:"pageSize,default=20"`
-	Success  bool                    `json:"success"`
-	Total    int64                   `json:"total"`
-	Code     string                  `json:"code"`
-	Message  string                  `json:"message"`
+	Current  int64                  `form:"current,default=1"`
+	Data     []*ListMemberPriceData `json:"data"`
+	PageSize int64                  `form:"pageSize,default=20"`
+	Success  bool                   `json:"success"`
+	Total    int64                  `json:"total"`
+	Code     string                 `json:"code"`
+	Message  string                 `json:"message"`
 }
 
 type ListMemberReq struct {
@@ -906,13 +1147,23 @@ type ListMemberReq struct {
 }
 
 type ListMemberResp struct {
-	Code     string             `json:"code"`
-	Message  string             `json:"message"`
-	Current  int64              `form:"current,default=1"`
-	Data     []*ListtMemberData `json:"data"`
-	PageSize int64              `form:"pageSize,default=20"`
-	Success  bool               `json:"success"`
-	Total    int64              `json:"total"`
+	Code     string            `json:"code"`
+	Message  string            `json:"message"`
+	Current  int64             `form:"current,default=1"`
+	Data     []*ListMemberData `json:"data"`
+	PageSize int64             `form:"pageSize,default=20"`
+	Success  bool              `json:"success"`
+	Total    int64             `json:"total"`
+}
+
+type ListMemberRuleSettingData struct {
+	Id                int64 `json:"id"`
+	ContinueSignDay   int32 `json:"continueSignDay"`   // 连续签到天数
+	ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
+	ConsumePerPoint   int64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
+	LowOrderAmount    int64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
+	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
+	Type              int32 `json:"type"`              // 类型：0->积分规则；1->成长值规则
 }
 
 type ListMemberRuleSettingReq struct {
@@ -921,13 +1172,32 @@ type ListMemberRuleSettingReq struct {
 }
 
 type ListMemberRuleSettingResp struct {
-	Code     string                        `json:"code"`
-	Message  string                        `json:"message"`
-	Current  int64                         `form:"current,default=1"`
-	Data     []*ListtMemberRuleSettingData `json:"data"`
-	PageSize int64                         `form:"pageSize,default=20"`
-	Success  bool                          `json:"success"`
-	Total    int64                         `json:"total"`
+	Code     string                       `json:"code"`
+	Message  string                       `json:"message"`
+	Current  int64                        `form:"current,default=1"`
+	Data     []*ListMemberRuleSettingData `json:"data"`
+	PageSize int64                        `form:"pageSize,default=20"`
+	Success  bool                         `json:"success"`
+	Total    int64                        `json:"total"`
+}
+
+type ListMemberStatisticsInfoData struct {
+	Id                  int64  `json:"id"`
+	MemberId            int64  `json:"memberId"`
+	ConsumeAmount       int64  `json:"consumeAmount"`    // 累计消费金额
+	OrderCount          int32  `json:"orderCount"`       // 订单数量
+	CouponCount         int32  `json:"couponCount"`      // 优惠券数量
+	CommentCount        int32  `json:"commentCount"`     // 评价数
+	ReturnOrderCount    int32  `json:"returnOrderCount"` // 退货数量
+	LoginCount          int32  `json:"loginCount"`       // 登录次数
+	AttendCount         int32  `json:"attendCount"`      // 关注数量
+	FansCount           int32  `json:"fansCount"`        // 粉丝数量
+	CollectProductCount int32  `json:"collectProductCount"`
+	CollectSubjectCount int32  `json:"collectSubjectCount"`
+	CollectTopicCount   int32  `json:"collectTopicCount"`
+	CollectCommentCount int32  `json:"collectCommentCount"`
+	InviteFriendCount   int32  `json:"inviteFriendCount"`
+	RecentOrderTime     string `json:"recentOrderTime"` // 最后一次下订单时间
 }
 
 type ListMemberStatisticsInfoReq struct {
@@ -936,13 +1206,20 @@ type ListMemberStatisticsInfoReq struct {
 }
 
 type ListMemberStatisticsInfoResp struct {
-	Code     string                           `json:"code"`
-	Message  string                           `json:"message"`
-	Current  int64                            `form:"current,default=1"`
-	Data     []*ListtMemberStatisticsInfoData `json:"data"`
-	PageSize int64                            `form:"pageSize,default=20"`
-	Success  bool                             `json:"success"`
-	Total    int64                            `json:"total"`
+	Code     string                          `json:"code"`
+	Message  string                          `json:"message"`
+	Current  int64                           `form:"current,default=1"`
+	Data     []*ListMemberStatisticsInfoData `json:"data"`
+	PageSize int64                           `form:"pageSize,default=20"`
+	Success  bool                            `json:"success"`
+	Total    int64                           `json:"total"`
+}
+
+type ListMemberTagData struct {
+	Id                int64  `json:"id"`
+	Name              string `json:"name"`
+	FinishOrderCount  int32  `json:"finishOrderCount"`  // 自动打标签完成订单数量
+	FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
 }
 
 type ListMemberTagReq struct {
@@ -951,13 +1228,21 @@ type ListMemberTagReq struct {
 }
 
 type ListMemberTagResp struct {
-	Code     string                `json:"code"`
-	Message  string                `json:"message"`
-	Current  int64                 `form:"current,default=1"`
-	Data     []*ListtMemberTagData `json:"data"`
-	PageSize int64                 `form:"pageSize,default=20"`
-	Success  bool                  `json:"success"`
-	Total    int64                 `json:"total"`
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
+	Current  int64                `form:"current,default=1"`
+	Data     []*ListMemberTagData `json:"data"`
+	PageSize int64                `form:"pageSize,default=20"`
+	Success  bool                 `json:"success"`
+	Total    int64                `json:"total"`
+}
+
+type ListMemberTaskData struct {
+	Id           int64  `json:"id"`
+	Name         string `json:"name"`
+	Growth       int32  `json:"growth"`       // 赠送成长值
+	Intergration int32  `json:"intergration"` // 赠送积分
+	Type         int32  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
 }
 
 type ListMemberTaskReq struct {
@@ -966,21 +1251,36 @@ type ListMemberTaskReq struct {
 }
 
 type ListMemberTaskResp struct {
-	Code     string                 `json:"code"`
-	Message  string                 `json:"message"`
-	Current  int64                  `form:"current,default=1"`
-	Data     []*ListtMemberTaskData `json:"data"`
-	PageSize int64                  `form:"pageSize,default=20"`
-	Success  bool                   `json:"success"`
-	Total    int64                  `json:"total"`
+	Code     string                `json:"code"`
+	Message  string                `json:"message"`
+	Current  int64                 `form:"current,default=1"`
+	Data     []*ListMemberTaskData `json:"data"`
+	PageSize int64                 `form:"pageSize,default=20"`
+	Success  bool                  `json:"success"`
+	Total    int64                 `json:"total"`
 }
 
 type ListMenuData struct {
-	Key      string `json:"key"`      // 菜单名称
-	Title    string `json:"title"`    // 菜单名称
-	ParentId int64  `json:"parentId"` // 父菜单ID，一级菜单为0
-	Id       int64  `json:"id"`       // 父菜单ID，一级菜单为0
-	Label    string `json:"label"`    // 父菜单ID，一级菜单为0
+	Id            int64  `json:"id"`            // 编号
+	Key           string `json:"key"`           // 菜单名称
+	Name          string `json:"name"`          // 菜单名称
+	Title         string `json:"title"`         // 菜单名称
+	ParentId      int64  `json:"parentId"`      // 父菜单ID，一级菜单为0
+	Url           string `json:"url"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
+	Perms         string `json:"perms"`         // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
+	Type          int32  `json:"type"`          // 类型   0：目录   1：菜单   2：按钮
+	Icon          string `json:"icon"`          // 菜单图标
+	OrderNum      int32  `json:"orderNum"`      // 排序
+	CreateBy      string `json:"createBy"`      // 创建人
+	CreateTime    string `json:"createTime"`    // 创建时间
+	UpdateBy      string `json:"updateBy"`      // 更新人
+	UpdateTime    string `json:"updateTime"`    // 更新时间
+	DelFlag       int32  `json:"delFlag"`       // 是否删除  0：已删除  1：正常
+	VuePath       string `json:"vuePath"`       // vue系统的path
+	VueComponent  string `json:"vueComponent"`  // vue的页面
+	VueIcon       string `json:"vueIcon"`       // vue的图标
+	VueRedirect   string `json:"vueRedirect"`   // vue的路由重定向
+	BackgroundUrl string `json:"backgroundUrl"` // 后台地址
 }
 
 type ListMenuReq struct {
@@ -989,11 +1289,11 @@ type ListMenuReq struct {
 }
 
 type ListMenuResp struct {
-	Code    string           `json:"code"`
-	Message string           `json:"message"`
-	Data    []*ListtMenuData `json:"data"`
-	Success bool             `json:"success"`
-	Total   int64            `json:"total"`
+	Code    string          `json:"code"`
+	Message string          `json:"message"`
+	Data    []*ListMenuData `json:"data"`
+	Success bool            `json:"success"`
+	Total   int64           `json:"total"`
 }
 
 type ListMenuTree struct {
@@ -1031,13 +1331,13 @@ type ListOperateHistoryReq struct {
 }
 
 type ListOperateHistoryResp struct {
-	Code     string                     `json:"code"`
-	Message  string                     `json:"message"`
-	Current  int64                      `form:"current,default=1"`
-	Data     []*ListtOperateHistoryData `json:"data"`
-	PageSize int64                      `form:"pageSize,default=20"`
-	Success  bool                       `json:"success"`
-	Total    int64                      `json:"total"`
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
+	Current  int64                     `form:"current,default=1"`
+	Data     []*ListOperateHistoryData `json:"data"`
+	PageSize int64                     `form:"pageSize,default=20"`
+	Success  bool                      `json:"success"`
+	Total    int64                     `json:"total"`
 }
 
 type ListOrderData struct {
@@ -1085,7 +1385,7 @@ type ListOrderData struct {
 	ReceiveTime           string                   `json:"receiveTime"`            // 确认收货时间
 	CommentTime           string                   `json:"commentTime"`            // 评价时间
 	ModifyTime            string                   `json:"modifyTime"`             // 修改时间
-	ListOperateHistory    []ListOperateHistoryData `json:"listOperateHistoryData"` // 操作历史数据
+	ListOperateHistory    []OperateHistoryListData `json:"listOperateHistoryData"` // 操作历史数据
 	ListOrderItem         []ListOrderItemData      `json:"listOrderItemData"`      // 商品数据
 }
 
@@ -1134,19 +1434,28 @@ type ListOrderResp struct {
 	Total    int64            `json:"total"`
 }
 
+type ListOrderSettingData struct {
+	Id                  int64 `json:"id"`
+	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  // 秒杀订单超时关闭时间(分)
+	NormalOrderOvertime int32 `json:"normalOrderOvertime"` // 正常订单超时时间(分)
+	ConfirmOvertime     int32 `json:"confirmOvertime"`     // 发货后自动确认收货时间（天）
+	FinishOvertime      int32 `json:"finishOvertime"`      // 自动完成交易时间，不能申请售后（天）
+	CommentOvertime     int32 `json:"commentOvertime"`     // 订单完成后自动好评时间（天）
+}
+
 type ListOrderSettingReq struct {
 	Current  int64 `form:"current,default=1"`
 	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListOrderSettingResp struct {
-	Code     string                   `json:"code"`
-	Message  string                   `json:"message"`
-	Current  int64                    `form:"current,default=1"`
-	Data     []*ListtOrderSettingData `json:"data"`
-	PageSize int64                    `form:"pageSize,default=20"`
-	Success  bool                     `json:"success"`
-	Total    int64                    `json:"total"`
+	Code     string                  `json:"code"`
+	Message  string                  `json:"message"`
+	Current  int64                   `form:"current,default=1"`
+	Data     []*ListOrderSettingData `json:"data"`
+	PageSize int64                   `form:"pageSize,default=20"`
+	Success  bool                    `json:"success"`
+	Total    int64                   `json:"total"`
 }
 
 type ListPrefrenceAreaData struct {
@@ -1180,6 +1489,21 @@ type ListPrefrenceAreaResp struct {
 	Total    int64                    `json:"total"`
 }
 
+type ListProductAttributeData struct {
+	Id                         int64  `json:"id"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+	Name                       string `json:"name"`
+	SelectType                 int32  `json:"selectType"`    // 属性选择类型：0->唯一；1->单选；2->多选
+	InputType                  int32  `json:"inputType"`     // 属性录入方式：0->手工录入；1->从列表中选取
+	InputList                  string `json:"inputList"`     // 可选值列表，以逗号隔开
+	Sort                       int32  `json:"sort"`          // 排序字段：最高的可以单独上传图片
+	FilterType                 int32  `json:"filterType"`    // 分类筛选样式：1->普通；1->颜色
+	SearchType                 int32  `json:"searchType"`    // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
+	RelatedStatus              int32  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
+	HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
+	Type                       int32  `json:"type"`          // 属性的类型；0->规格；1->参数
+}
+
 type ListProductAttributeReq struct {
 	Current                    int64  `form:"current,default=1"`
 	PageSize                   int64  `form:"pageSize,default=20"`
@@ -1189,13 +1513,20 @@ type ListProductAttributeReq struct {
 }
 
 type ListProductAttributeResp struct {
-	Code     string                       `json:"code"`
-	Message  string                       `json:"message"`
-	Current  int64                        `form:"current,default=1"`
-	Data     []*ListtProductAttributeData `json:"data"`
-	PageSize int64                        `form:"pageSize,default=20"`
-	Success  bool                         `json:"success"`
-	Total    int64                        `json:"total"`
+	Code     string                      `json:"code"`
+	Message  string                      `json:"message"`
+	Current  int64                       `form:"current,default=1"`
+	Data     []*ListProductAttributeData `json:"data"`
+	PageSize int64                       `form:"pageSize,default=20"`
+	Success  bool                        `json:"success"`
+	Total    int64                       `json:"total"`
+}
+
+type ListProductAttributecategoryData struct {
+	Id                     int64  `json:"id"`
+	Name                   string `json:"name"`
+	AttributecategoryCount int32  `json:"attributeCount"` // 属性数量
+	ParamCount             int32  `json:"paramCount"`     // 参数数量
 }
 
 type ListProductAttributecategoryReq struct {
@@ -1205,13 +1536,27 @@ type ListProductAttributecategoryReq struct {
 }
 
 type ListProductAttributecategoryResp struct {
-	Code     string                               `json:"code"`
-	Message  string                               `json:"message"`
-	Current  int64                                `form:"current,default=1"`
-	Data     []*ListtProductAttributecategoryData `json:"data"`
-	PageSize int64                                `form:"pageSize,default=20"`
-	Success  bool                                 `json:"success"`
-	Total    int64                                `json:"total"`
+	Code     string                              `json:"code"`
+	Message  string                              `json:"message"`
+	Current  int64                               `form:"current,default=1"`
+	Data     []*ListProductAttributecategoryData `json:"data"`
+	PageSize int64                               `form:"pageSize,default=20"`
+	Success  bool                                `json:"success"`
+	Total    int64                               `json:"total"`
+}
+
+type ListProductBrandData struct {
+	Id                  int64  `json:"id"`
+	Name                string `json:"name"`
+	FirstLetter         string `json:"firstLetter"` // 首字母
+	Sort                int32  `json:"sort"`
+	FactoryStatus       int32  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
+	ShowStatus          int32  `json:"showStatus"`
+	ProductCount        int32  `json:"productCount"`        // 产品数量
+	ProductCommentCount int32  `json:"productCommentCount"` // 产品评论数量
+	Logo                string `json:"logo"`                // 品牌logo
+	BigPic              string `json:"bigPic"`              // 专区大图
+	BrandStory          string `json:"brandStory"`          // 品牌故事
 }
 
 type ListProductBrandReq struct {
@@ -1223,13 +1568,28 @@ type ListProductBrandReq struct {
 }
 
 type ListProductBrandResp struct {
-	Current  int64                    `form:"current,default=1"`
-	Data     []*ListtProductBrandData `json:"data"`
-	PageSize int64                    `form:"pageSize,default=20"`
-	Success  bool                     `json:"success"`
-	Total    int64                    `json:"total"`
-	Code     string                   `json:"code"`
-	Message  string                   `json:"message"`
+	Current  int64                   `form:"current,default=1"`
+	Data     []*ListProductBrandData `json:"data"`
+	PageSize int64                   `form:"pageSize,default=20"`
+	Success  bool                    `json:"success"`
+	Total    int64                   `json:"total"`
+	Code     string                  `json:"code"`
+	Message  string                  `json:"message"`
+}
+
+type ListProductCategoryData struct {
+	Id           int64  `json:"id"`
+	ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
+	Name         string `json:"name"`
+	Level        int32  `json:"level"` // 分类级别：0->1级；1->2级
+	ProductCount int32  `json:"productCount"`
+	ProductUnit  string `json:"productUnit"`
+	NavStatus    int32  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+	ShowStatus   int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Sort         int32  `json:"sort"`
+	Icon         string `json:"icon"` // 图标
+	Keywords     string `json:"keywords"`
+	Description  string `json:"description"` // 描述
 }
 
 type ListProductCategoryReq struct {
@@ -1241,13 +1601,31 @@ type ListProductCategoryReq struct {
 }
 
 type ListProductCategoryResp struct {
-	Code     string                      `json:"code"`
-	Message  string                      `json:"message"`
-	Current  int64                       `form:"current,default=1"`
-	Data     []*ListtProductCategoryData `json:"data"`
-	PageSize int64                       `form:"pageSize,default=20"`
-	Success  bool                        `json:"success"`
-	Total    int64                       `json:"total"`
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
+	Current  int64                      `form:"current,default=1"`
+	Data     []*ListProductCategoryData `json:"data"`
+	PageSize int64                      `form:"pageSize,default=20"`
+	Success  bool                       `json:"success"`
+	Total    int64                      `json:"total"`
+}
+
+type ListProductCommentData struct {
+	Id               int64  `json:"id"`
+	ProductId        int64  `json:"productId"`
+	MemberNickName   string `json:"memberNickName"`
+	ProductName      string `json:"productName"`
+	Star             int32  `json:"star"`     // 评价星数：0->5
+	MemberIp         string `json:"memberIp"` // 评价的ip
+	CreateTime       string `json:"createTime"`
+	ShowStatus       int32  `json:"showStatus"`
+	ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
+	CollectCount     int32  `json:"collectCount"`
+	ReadCount        int32  `json:"readCount"`
+	Content          string `json:"content"`
+	Pics             string `json:"pics"`       // 上传图片地址，以逗号隔开
+	MemberIcon       string `json:"memberIcon"` // 评论用户头像
+	ReplayCount      int32  `json:"replayCount"`
 }
 
 type ListProductCommentReq struct {
@@ -1256,13 +1634,61 @@ type ListProductCommentReq struct {
 }
 
 type ListProductCommentResp struct {
-	Code     string                     `json:"code"`
-	Message  string                     `json:"message"`
-	Current  int64                      `form:"current,default=1"`
-	Data     []*ListtProductCommentData `json:"data"`
-	PageSize int64                      `form:"pageSize,default=20"`
-	Success  bool                       `json:"success"`
-	Total    int64                      `json:"total"`
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
+	Current  int64                     `form:"current,default=1"`
+	Data     []*ListProductCommentData `json:"data"`
+	PageSize int64                     `form:"pageSize,default=20"`
+	Success  bool                      `json:"success"`
+	Total    int64                     `json:"total"`
+}
+
+type ListProductData struct {
+	Id                               int64   `json:"id"`
+	BrandId                          int64   `json:"brandId"`
+	ProductCategoryId                int64   `json:"productCategoryId"`
+	ProductCategoryIdArray           []int64 `json:"productCategoryIdArray"`
+	FeightTemplateId                 int64   `json:"feightTemplateId"`
+	ProductAttributeCategoryId       int64   `json:"productAttributeCategoryId"`
+	Name                             string  `json:"name"`
+	Pic                              string  `json:"pic"`
+	ProductSn                        string  `json:"productSn"`       // 货号
+	DeleteStatus                     int32   `json:"deleteStatus"`    // 删除状态：0->未删除；1->已删除
+	PublishStatus                    int32   `json:"publishStatus"`   // 上架状态：0->下架；1->上架
+	NewStatus                        int32   `json:"newStatus"`       // 新品状态:0->不是新品；1->新品
+	RecommandStatus                  int32   `json:"recommandStatus"` // 推荐状态；0->不推荐；1->推荐
+	VerifyStatus                     int32   `json:"verifyStatus"`    // 审核状态：0->未审核；1->审核通过
+	Sort                             int32   `json:"sort"`            // 排序
+	Sale                             int32   `json:"sale"`            // 销量
+	Price                            int64   `json:"price"`
+	PromotionPrice                   int64   `json:"promotionPrice"` // 促销价格
+	GiftGrowth                       int32   `json:"giftGrowth"`     // 赠送的成长值
+	GiftPoint                        int32   `json:"giftPoint"`      // 赠送的积分
+	UsePointLimit                    int32   `json:"usePointLimit"`  // 限制使用的积分数
+	SubTitle                         string  `json:"subTitle"`       // 副标题
+	Description                      string  `json:"description"`    // 商品描述
+	OriginalPrice                    int64   `json:"originalPrice"`  // 市场价
+	Stock                            int32   `json:"stock"`          // 库存
+	LowStock                         int32   `json:"lowStock"`       // 库存预警值
+	Unit                             string  `json:"unit"`           // 单位
+	Weight                           int64   `json:"weight"`         // 商品重量，默认为克
+	PreviewStatus                    int32   `json:"previewStatus"`  // 是否为预告商品：0->不是；1->是
+	ServiceIds                       string  `json:"serviceIds"`     // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+	Keywords                         string  `json:"keywords"`
+	Note                             string  `json:"note"`
+	AlbumPics                        string  `json:"albumPics"` // 画册图片，连产品图片限制为5张，以逗号分割
+	DetailTitle                      string  `json:"detailTitle"`
+	DetailDesc                       string  `json:"detailDesc"`
+	DetailHtml                       string  `json:"detailHtml"`                       // 产品详情网页内容
+	DetailMobileHtml                 string  `json:"detailMobileHtml"`                 // 移动端网页详情
+	PromotionStartTime               string  `json:"promotionStartTime"`               // 促销开始时间
+	PromotionEndTime                 string  `json:"promotionEndTime"`                 // 促销结束时间
+	PromotionPerLimit                int32   `json:"promotionPerLimit"`                // 活动限购数量
+	PromotionType                    int32   `json:"promotionType"`                    // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+	BrandName                        string  `json:"brandName"`                        // 品牌名称
+	ProductCategoryName              string  `json:"productCategoryName"`              // 商品分类名称
+	SubjectProductRelationList       []int64 `json:"subjectProductRelationList"`       // 专题和商品关系
+	PrefrenceAreaProductRelationList []int64 `json:"prefrenceAreaProductRelationList"` // 优选和商品关系
 }
 
 type ListProductReq struct {
@@ -1277,13 +1703,43 @@ type ListProductReq struct {
 }
 
 type ListProductResp struct {
-	Code     string              `json:"code"`
-	Message  string              `json:"message"`
-	Current  int64               `form:"current,default=1"`
-	Data     []*ListtProductData `json:"data"`
-	PageSize int64               `form:"pageSize,default=20"`
-	Success  bool                `json:"success"`
-	Total    int64               `json:"total"`
+	Code     string             `json:"code"`
+	Message  string             `json:"message"`
+	Current  int64              `form:"current,default=1"`
+	Data     []*ListProductData `json:"data"`
+	PageSize int64              `form:"pageSize,default=20"`
+	Success  bool               `json:"success"`
+	Total    int64              `json:"total"`
+}
+
+type ListReturnApplyData struct {
+	Id               int64  `json:"id"`
+	OrderId          int64  `json:"orderId"`          // 订单id
+	CompanyAddressId int64  `json:"companyAddressId"` // 收货地址表id
+	ProductId        int64  `json:"productId"`        // 退货商品id
+	OrderSn          string `json:"orderSn"`          // 订单编号
+	CreateTime       string `json:"createTime"`       // 申请时间
+	MemberUsername   string `json:"memberUserName"`   // 会员用户名
+	ReturnAmount     int64  `json:"returnAmount"`     // 退款金额
+	ReturnName       string `json:"returnName"`       // 退货人姓名
+	ReturnPhone      string `json:"returnPhone"`      // 退货人电话
+	Status           int32  `json:"status"`           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleTime       string `json:"handleTime"`       // 处理时间
+	ProductPic       string `json:"productPic"`       // 商品图片
+	ProductName      string `json:"productName"`      // 商品名称
+	ProductBrand     string `json:"productBrand"`     // 商品品牌
+	ProductAttr      string `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
+	ProductCount     int32  `json:"productCount"`     // 退货数量
+	ProductPrice     int64  `json:"productPrice"`     // 商品单价
+	ProductRealPrice int64  `json:"productRealPrice"` // 商品实际支付单价
+	Reason           string `json:"reason"`           // 原因
+	Description      string `json:"description"`      // 描述
+	ProofPics        string `json:"proofPics"`        // 凭证图片，以逗号隔开
+	HandleNote       string `json:"handleNote"`       // 处理备注
+	HandleMan        string `json:"handleMan"`        // 处理人员
+	ReceiveMan       string `json:"receiveMan"`       // 收货人
+	ReceiveTime      string `json:"receiveTime"`      // 收货时间
+	ReceiveNote      string `json:"receiveNote"`      // 收货备注
 }
 
 type ListReturnApplyReq struct {
@@ -1297,13 +1753,21 @@ type ListReturnApplyReq struct {
 }
 
 type ListReturnApplyResp struct {
-	Code     string                  `json:"code"`
-	Message  string                  `json:"message"`
-	Current  int64                   `form:"current,default=1"`
-	Data     []*ListtReturnApplyData `json:"data"`
-	PageSize int64                   `form:"pageSize,default=20"`
-	Success  bool                    `json:"success"`
-	Total    int64                   `json:"total"`
+	Code     string                 `json:"code"`
+	Message  string                 `json:"message"`
+	Current  int64                  `form:"current,default=1"`
+	Data     []*ListReturnApplyData `json:"data"`
+	PageSize int64                  `form:"pageSize,default=20"`
+	Success  bool                   `json:"success"`
+	Total    int64                  `json:"total"`
+}
+
+type ListReturnResonData struct {
+	Id         int64  `json:"id"`
+	Name       string `json:"name"` // 退货类型
+	Sort       int32  `json:"sort"`
+	Status     int32  `json:"status"`     // 状态：0->不启用；1->启用
+	CreateTime string `json:"createTime"` // 添加时间
 }
 
 type ListReturnResonReq struct {
@@ -1314,13 +1778,13 @@ type ListReturnResonReq struct {
 }
 
 type ListReturnResonResp struct {
-	Code     string                  `json:"code"`
-	Message  string                  `json:"message"`
-	Current  int64                   `form:"current,default=1"`
-	Data     []*ListtReturnResonData `json:"data"`
-	PageSize int64                   `form:"pageSize,default=20"`
-	Success  bool                    `json:"success"`
-	Total    int64                   `json:"total"`
+	Code     string                 `json:"code"`
+	Message  string                 `json:"message"`
+	Current  int64                  `form:"current,default=1"`
+	Data     []*ListReturnResonData `json:"data"`
+	PageSize int64                  `form:"pageSize,default=20"`
+	Success  bool                   `json:"success"`
+	Total    int64                  `json:"total"`
 }
 
 type ListRoleData struct {
@@ -1354,19 +1818,33 @@ type ListRoleResp struct {
 	Total    int64           `json:"total"`
 }
 
+type ListSkuStockData struct {
+	Id             int64  `json:"id"`
+	ProductId      int64  `json:"productId"`
+	SkuCode        string `json:"skuCode"` // sku编码
+	Price          int64  `json:"price"`
+	Stock          int32  `json:"stock"`          // 库存
+	LowStock       int32  `json:"lowStock"`       // 预警库存
+	Pic            string `json:"pic"`            // 展示图片
+	Sale           int32  `json:"sale"`           // 销量
+	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
+	LockStock      int32  `json:"lockStock"`      // 锁定库存
+	SpData         string `json:"spData"`         // 商品销售属性，json格式
+}
+
 type ListSkuStockReq struct {
 	Current  int64 `form:"current,default=1"`
 	PageSize int64 `form:"pageSize,default=20"`
 }
 
 type ListSkuStockResp struct {
-	Current  int64                `form:"current,default=1"`
-	Data     []*ListtSkuStockData `json:"data"`
-	PageSize int64                `form:"pageSize,default=20"`
-	Success  bool                 `json:"success"`
-	Total    int64                `json:"total"`
-	Code     string               `json:"code"`
-	Message  string               `json:"message"`
+	Current  int64               `form:"current,default=1"`
+	Data     []*ListSkuStockData `json:"data"`
+	PageSize int64               `form:"pageSize,default=20"`
+	Success  bool                `json:"success"`
+	Total    int64               `json:"total"`
+	Code     string              `json:"code"`
+	Message  string              `json:"message"`
 }
 
 type ListSubjectData struct {
@@ -1481,501 +1959,6 @@ type ListUserResp struct {
 	Total    int64           `json:"total"`
 }
 
-type ListtCartItemData struct {
-	Id                int64  `json:"id"`
-	ProductId         int64  `json:"productId"`
-	ProductSkuId      int64  `json:"productSkuId"`
-	MemberId          int64  `json:"memberId"`
-	Quantity          int32  `json:"quantity"`          // 购买数量
-	Price             int64  `json:"price"`             // 添加到购物车的价格
-	ProductPic        string `json:"productPic"`        // 商品主图
-	ProductName       string `json:"productName"`       // 商品名称
-	ProductSubTitle   string `json:"productSubTitle"`   // 商品副标题（卖点）
-	ProductSkuCode    string `json:"productSkuCode"`    // 商品sku条码
-	MemberNickname    string `json:"memberNickName"`    // 会员昵称
-	CreateDate        string `json:"createDate"`        // 创建时间
-	ModifyDate        string `json:"modifyDate"`        // 修改时间
-	DeleteStatus      int32  `json:"deleteStatus"`      // 是否删除
-	ProductCategoryId int64  `json:"productCategoryId"` // 商品分类
-	ProductBrand      string `json:"productBrand"`
-	ProductSn         string `json:"productSn"`
-	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-}
-
-type ListtCouponData struct {
-	Id           int64  `json:"id"`
-	Type         int32  `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string `json:"name"`
-	Platform     int32  `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
-	Count        int32  `json:"count"`    // 数量
-	Amount       int64  `json:"amount"`   // 金额
-	PerLimit     int32  `json:"perLimit"` // 每人限领张数
-	MinPoint     int64  `json:"minPoint"` // 使用门槛；0表示无门槛
-	StartTime    string `json:"startTime"`
-	EndTime      string `json:"endTime"`
-	UseType      int32  `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string `json:"note"`         // 备注
-	PublishCount int32  `json:"publishCount"` // 发行数量
-	UseCount     int32  `json:"useCount"`     // 已使用数量
-	ReceiveCount int32  `json:"receiveCount"` // 领取数量
-	EnableTime   string `json:"enableTime"`   // 可以领取的日期
-	Code         string `json:"code"`         // 优惠码
-	MemberLevel  int32  `json:"memberLevel"`  // 可领取的会员类型：0->无限时
-}
-
-type ListtCouponHistoryData struct {
-	Id             int64  `json:"id"`
-	CouponId       int64  `json:"couponId"`
-	MemberId       int64  `json:"memberId"`
-	CouponCode     string `json:"couponCode"`
-	MemberNickname string `json:"memberNickName"` // 领取人昵称
-	GetType        int32  `json:"getType"`        // 获取类型：0->后台赠送；1->主动获取
-	CreateTime     string `json:"createTime"`
-	UseStatus      int32  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
-	UseTime        string `json:"useTime"`   // 使用时间
-	OrderId        int64  `json:"orderId"`   // 订单编号
-	OrderSn        string `json:"orderSn"`   // 订单号码
-}
-
-type ListtFeightTemplateData struct {
-	Id             int64  `json:"id"`
-	Name           string `json:"name"`
-	ChargeType     int32  `json:"chargeType"`   // 计费类型:0->按重量；1->按件数
-	FirstWeight    int64  `json:"first_weight"` // 首重kg
-	FirstFee       int64  `json:"firstFee"`     // 首费（元）
-	ContinueWeight int64  `json:"continue_weight"`
-	ContinmeFee    int64  `json:"continmeFee"`
-	Dest           string `json:"dest"` // 目的地（省、市）
-}
-
-type ListtFlashPromotionData struct {
-	Id         int64  `json:"id"`
-	Title      string `json:"title"`      //标题
-	StartDate  string `json:"startDate"`  // 开始日期
-	EndDate    string `json:"endDate"`    // 结束日期
-	Status     int32  `json:"status"`     // 上下线状态
-	CreateTime string `json:"createTime"` // 秒杀时间段名称
-}
-
-type ListtFlashPromotionLogData struct {
-	Id            int64  `json:"id"`
-	MemberId      int64  `json:"memberId"`
-	ProductId     int64  `json:"productId"`
-	MemberPhone   string `json:"memberPhone"`
-	ProductName   string `json:"productName"`
-	SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-	SendTime      string `json:"sendTime"`
-}
-
-type ListtFlashPromotionSessionData struct {
-	Id         int64  `json:"id"`         // 编号
-	Name       string `json:"name"`       // 场次名称
-	StartTime  string `json:"startTime"`  // 每日开始时间
-	EndTime    string `json:"endTime"`    // 每日结束时间
-	Status     int32  `json:"status"`     // 启用状态：0->不启用；1->启用
-	CreateTime string `json:"createTime"` // 创建时间
-}
-
-type ListtGrowthChangeHistoryData struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"memberId"`
-	CreateTime  string `json:"createTime"`
-	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
-	ChangeCount int32  `json:"changeCount"` // 积分改变数量
-	OperateMan  string `json:"operateMan"`  // 操作人员
-	OperateNote string `json:"operateNote"` // 操作备注
-	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
-}
-
-type ListtHomeAdvertiseData struct {
-	Id         int64  `json:"id"`
-	Name       string `json:"name"`       // 名称
-	Type       int32  `json:"type"`       // 轮播位置：0->PC首页轮播；1->app首页轮播
-	Pic        string `json:"pic"`        // 图片地址
-	StartTime  string `json:"startTime"`  // 开始时间
-	EndTime    string `json:"endTime"`    // 结束时间
-	Status     int32  `json:"status"`     // 上下线状态：0->下线；1->上线
-	ClickCount int32  `json:"clickCount"` // 点击数
-	OrderCount int32  `json:"orderCount"` // 下单数
-	Url        string `json:"url"`        // 链接地址
-	Note       string `json:"note"`       // 备注
-	Sort       int32  `json:"sort"`       // 排序
-}
-
-type ListtHomeBrandData struct {
-	Id              int64  `json:"id"`
-	BrandId         int64  `json:"brandId"`         // 商品品牌id
-	BrandName       string `json:"brandName"`       // 商品品牌名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
-}
-
-type ListtHomeNewProductData struct {
-	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`       // 商品id
-	ProductName     string `json:"productName"`     // 商品名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
-}
-
-type ListtHomeRecommendProductData struct {
-	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`       // 商品id
-	ProductName     string `json:"productName"`     // 商品名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
-}
-
-type ListtHomeRecommendSubjectData struct {
-	Id              int64  `json:"id"`
-	SubjectId       int64  `json:"subjectId"`       // 专题id
-	SubjectName     string `json:"subjectName"`     // 专题名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
-}
-
-type ListtIntegrationChangeHistoryData struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"memberId"`
-	CreateTime  string `json:"createTime"`
-	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
-	ChangeCount int32  `json:"changeCount"` // 积分改变数量
-	OperateMan  string `json:"operateMan"`  // 操作人员
-	OperateNote string `json:"operateNote"` // 操作备注
-	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
-}
-
-type ListtIntegrationConsumeSettingData struct {
-	Id                 int64 `json:"id"`
-	DeductionPerAmount int32 `json:"deductionPerAmount"` // 每一元需要抵扣的积分数量
-	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-	UseUnit            int32 `json:"useUnit"`            // 每次使用积分最小单位100
-	CouponStatus       int32 `json:"couponStatus"`       // 是否可以和优惠券同用；0->不可以；1->可以
-}
-
-type ListtMemberAddressData struct {
-	Id            int64  `json:"id"`
-	MemberId      int64  `json:"memberId"`
-	Name          string `json:"name"` // 收货人名称
-	PhoneNumber   string `json:"phoneNumber"`
-	DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
-	PostCode      string `json:"postCode"`      // 邮政编码
-	Province      string `json:"province"`      // 省份/直辖市
-	City          string `json:"city"`          // 城市
-	Region        string `json:"region"`        // 区
-	DetailAddress string `json:"detailAddress"` // 详细地址(街道)
-}
-
-type ListtMemberData struct {
-	Id                    int64  `json:"id"`
-	MemberLevelId         int64  `json:"memberLevelId"`
-	Username              string `json:"username"`              // 用户名
-	Password              string `json:"password"`              // 密码
-	Nickname              string `json:"nickname"`              // 昵称
-	Phone                 string `json:"phone"`                 // 手机号码
-	Status                int32  `json:"status"`                // 帐号启用状态:0->禁用；1->启用
-	CreateTime            string `json:"createTime"`            // 注册时间
-	Icon                  string `json:"icon"`                  // 头像
-	Gender                int32  `json:"gender"`                // 性别：0->未知；1->男；2->女
-	Birthday              string `json:"birthday"`              // 生日
-	City                  string `json:"city"`                  // 所做城市
-	Job                   string `json:"job"`                   // 职业
-	PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
-	SourceType            int32  `json:"sourceType"`            // 用户来源
-	Integration           int32  `json:"integration"`           // 积分
-	Growth                int32  `json:"growth"`                // 成长值
-	LuckeyCount           int32  `json:"luckeyCount"`           // 剩余抽奖次数
-	HistoryIntegration    int32  `json:"historyIntegration"`    // 历史积分数量
-}
-
-type ListtMemberLevelData struct {
-	Id                 int64  `json:"id"`
-	Name               string `json:"name"`
-	GrowthPoint        int32  `json:"growthPoint"`
-	DefaultStatus      int32  `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   int64  `json:"freeFreightPoint"`   // 免运费标准
-	CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
-	IsFreeFreight      int32  `json:"isFreeFreight"`      // 是否有免邮特权
-	IsSignIn           int32  `json:"isSignIn"`           // 是否有签到特权
-	IsComment          int32  `json:"isComment"`          // 是否有评论获奖励特权
-	IsPromotion        int32  `json:"isPromotion"`        // 是否有专享活动特权
-	IsMemberPrice      int32  `json:"isMemberPrice"`      // 是否有会员价格特权
-	IsBirthday         int32  `json:"isBirthday"`         // 是否有生日特权
-	Note               string `json:"note"`
-}
-
-type ListtMemberLoginLogData struct {
-	Id         int64  `json:"id"`
-	MemberId   int64  `json:"memberId"`
-	CreateTime string `json:"createTime"`
-	Ip         string `json:"ip"`
-	City       string `json:"city"`
-	LoginType  int32  `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
-	Province   string `json:"province"`
-}
-
-type ListtMemberPriceData struct {
-	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`
-	MemberLevelId   int64  `json:"memberLevelId"`
-	MemberPrice     int64  `json:"memberPrice"` // 会员价格
-	MemberLevelName string `json:"memberLevelName"`
-}
-
-type ListtMemberRuleSettingData struct {
-	Id                int64 `json:"id"`
-	ContinueSignDay   int32 `json:"continueSignDay"`   // 连续签到天数
-	ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-	ConsumePerPoint   int64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-	LowOrderAmount    int64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
-	Type              int32 `json:"type"`              // 类型：0->积分规则；1->成长值规则
-}
-
-type ListtMemberStatisticsInfoData struct {
-	Id                  int64  `json:"id"`
-	MemberId            int64  `json:"memberId"`
-	ConsumeAmount       int64  `json:"consumeAmount"`    // 累计消费金额
-	OrderCount          int32  `json:"orderCount"`       // 订单数量
-	CouponCount         int32  `json:"couponCount"`      // 优惠券数量
-	CommentCount        int32  `json:"commentCount"`     // 评价数
-	ReturnOrderCount    int32  `json:"returnOrderCount"` // 退货数量
-	LoginCount          int32  `json:"loginCount"`       // 登录次数
-	AttendCount         int32  `json:"attendCount"`      // 关注数量
-	FansCount           int32  `json:"fansCount"`        // 粉丝数量
-	CollectProductCount int32  `json:"collectProductCount"`
-	CollectSubjectCount int32  `json:"collectSubjectCount"`
-	CollectTopicCount   int32  `json:"collectTopicCount"`
-	CollectCommentCount int32  `json:"collectCommentCount"`
-	InviteFriendCount   int32  `json:"inviteFriendCount"`
-	RecentOrderTime     string `json:"recentOrderTime"` // 最后一次下订单时间
-}
-
-type ListtMemberTagData struct {
-	Id                int64  `json:"id"`
-	Name              string `json:"name"`
-	FinishOrderCount  int32  `json:"finishOrderCount"`  // 自动打标签完成订单数量
-	FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
-}
-
-type ListtMemberTaskData struct {
-	Id           int64  `json:"id"`
-	Name         string `json:"name"`
-	Growth       int32  `json:"growth"`       // 赠送成长值
-	Intergration int32  `json:"intergration"` // 赠送积分
-	Type         int32  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
-}
-
-type ListtMenuData struct {
-	Id            int64  `json:"id"`            // 编号
-	Key           string `json:"key"`           // 菜单名称
-	Name          string `json:"name"`          // 菜单名称
-	Title         string `json:"title"`         // 菜单名称
-	ParentId      int64  `json:"parentId"`      // 父菜单ID，一级菜单为0
-	Url           string `json:"url"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-	Perms         string `json:"perms"`         // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
-	Type          int32  `json:"type"`          // 类型   0：目录   1：菜单   2：按钮
-	Icon          string `json:"icon"`          // 菜单图标
-	OrderNum      int32  `json:"orderNum"`      // 排序
-	CreateBy      string `json:"createBy"`      // 创建人
-	CreateTime    string `json:"createTime"`    // 创建时间
-	UpdateBy      string `json:"updateBy"`      // 更新人
-	UpdateTime    string `json:"updateTime"`    // 更新时间
-	DelFlag       int32  `json:"delFlag"`       // 是否删除  0：已删除  1：正常
-	VuePath       string `json:"vuePath"`       // vue系统的path
-	VueComponent  string `json:"vueComponent"`  // vue的页面
-	VueIcon       string `json:"vueIcon"`       // vue的图标
-	VueRedirect   string `json:"vueRedirect"`   // vue的路由重定向
-	BackgroundUrl string `json:"backgroundUrl"` // 后台地址
-}
-
-type ListtOperateHistoryData struct {
-	Id          int64  `json:"id"`
-	OrderId     int64  `json:"orderId"`     // 订单id
-	OperateMan  string `json:"operateMan"`  // 操作人：用户；系统；后台管理员
-	CreateTime  string `json:"createTime"`  // 操作时间
-	OrderStatus int32  `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-	Note        string `json:"note"`        // 备注
-}
-
-type ListtOrderSettingData struct {
-	Id                  int64 `json:"id"`
-	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  // 秒杀订单超时关闭时间(分)
-	NormalOrderOvertime int32 `json:"normalOrderOvertime"` // 正常订单超时时间(分)
-	ConfirmOvertime     int32 `json:"confirmOvertime"`     // 发货后自动确认收货时间（天）
-	FinishOvertime      int32 `json:"finishOvertime"`      // 自动完成交易时间，不能申请售后（天）
-	CommentOvertime     int32 `json:"commentOvertime"`     // 订单完成后自动好评时间（天）
-}
-
-type ListtProductAttributeData struct {
-	Id                         int64  `json:"id"`
-	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
-	Name                       string `json:"name"`
-	SelectType                 int32  `json:"selectType"`    // 属性选择类型：0->唯一；1->单选；2->多选
-	InputType                  int32  `json:"inputType"`     // 属性录入方式：0->手工录入；1->从列表中选取
-	InputList                  string `json:"inputList"`     // 可选值列表，以逗号隔开
-	Sort                       int32  `json:"sort"`          // 排序字段：最高的可以单独上传图片
-	FilterType                 int32  `json:"filterType"`    // 分类筛选样式：1->普通；1->颜色
-	SearchType                 int32  `json:"searchType"`    // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-	RelatedStatus              int32  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
-	HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
-	Type                       int32  `json:"type"`          // 属性的类型；0->规格；1->参数
-}
-
-type ListtProductAttributecategoryData struct {
-	Id                     int64  `json:"id"`
-	Name                   string `json:"name"`
-	AttributecategoryCount int32  `json:"attributeCount"` // 属性数量
-	ParamCount             int32  `json:"paramCount"`     // 参数数量
-}
-
-type ListtProductBrandData struct {
-	Id                  int64  `json:"id"`
-	Name                string `json:"name"`
-	FirstLetter         string `json:"firstLetter"` // 首字母
-	Sort                int32  `json:"sort"`
-	FactoryStatus       int32  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
-	ShowStatus          int32  `json:"showStatus"`
-	ProductCount        int32  `json:"productCount"`        // 产品数量
-	ProductCommentCount int32  `json:"productCommentCount"` // 产品评论数量
-	Logo                string `json:"logo"`                // 品牌logo
-	BigPic              string `json:"bigPic"`              // 专区大图
-	BrandStory          string `json:"brandStory"`          // 品牌故事
-}
-
-type ListtProductCategoryData struct {
-	Id           int64  `json:"id"`
-	ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
-	Name         string `json:"name"`
-	Level        int32  `json:"level"` // 分类级别：0->1级；1->2级
-	ProductCount int32  `json:"productCount"`
-	ProductUnit  string `json:"productUnit"`
-	NavStatus    int32  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus   int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	Sort         int32  `json:"sort"`
-	Icon         string `json:"icon"` // 图标
-	Keywords     string `json:"keywords"`
-	Description  string `json:"description"` // 描述
-}
-
-type ListtProductCommentData struct {
-	Id               int64  `json:"id"`
-	ProductId        int64  `json:"productId"`
-	MemberNickName   string `json:"memberNickName"`
-	ProductName      string `json:"productName"`
-	Star             int32  `json:"star"`     // 评价星数：0->5
-	MemberIp         string `json:"memberIp"` // 评价的ip
-	CreateTime       string `json:"createTime"`
-	ShowStatus       int32  `json:"showStatus"`
-	ProductAttribute string `json:"productAttribute"` // 购买时的商品属性
-	CollectCount     int32  `json:"collectCount"`
-	ReadCount        int32  `json:"readCount"`
-	Content          string `json:"content"`
-	Pics             string `json:"pics"`       // 上传图片地址，以逗号隔开
-	MemberIcon       string `json:"memberIcon"` // 评论用户头像
-	ReplayCount      int32  `json:"replayCount"`
-}
-
-type ListtProductData struct {
-	Id                               int64   `json:"id"`
-	BrandId                          int64   `json:"brandId"`
-	ProductCategoryId                int64   `json:"productCategoryId"`
-	ProductCategoryIdArray           []int64 `json:"productCategoryIdArray"`
-	FeightTemplateId                 int64   `json:"feightTemplateId"`
-	ProductAttributeCategoryId       int64   `json:"productAttributeCategoryId"`
-	Name                             string  `json:"name"`
-	Pic                              string  `json:"pic"`
-	ProductSn                        string  `json:"productSn"`       // 货号
-	DeleteStatus                     int32   `json:"deleteStatus"`    // 删除状态：0->未删除；1->已删除
-	PublishStatus                    int32   `json:"publishStatus"`   // 上架状态：0->下架；1->上架
-	NewStatus                        int32   `json:"newStatus"`       // 新品状态:0->不是新品；1->新品
-	RecommandStatus                  int32   `json:"recommandStatus"` // 推荐状态；0->不推荐；1->推荐
-	VerifyStatus                     int32   `json:"verifyStatus"`    // 审核状态：0->未审核；1->审核通过
-	Sort                             int32   `json:"sort"`            // 排序
-	Sale                             int32   `json:"sale"`            // 销量
-	Price                            int64   `json:"price"`
-	PromotionPrice                   int64   `json:"promotionPrice"` // 促销价格
-	GiftGrowth                       int32   `json:"giftGrowth"`     // 赠送的成长值
-	GiftPoint                        int32   `json:"giftPoint"`      // 赠送的积分
-	UsePointLimit                    int32   `json:"usePointLimit"`  // 限制使用的积分数
-	SubTitle                         string  `json:"subTitle"`       // 副标题
-	Description                      string  `json:"description"`    // 商品描述
-	OriginalPrice                    int64   `json:"originalPrice"`  // 市场价
-	Stock                            int32   `json:"stock"`          // 库存
-	LowStock                         int32   `json:"lowStock"`       // 库存预警值
-	Unit                             string  `json:"unit"`           // 单位
-	Weight                           int64   `json:"weight"`         // 商品重量，默认为克
-	PreviewStatus                    int32   `json:"previewStatus"`  // 是否为预告商品：0->不是；1->是
-	ServiceIds                       string  `json:"serviceIds"`     // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
-	Keywords                         string  `json:"keywords"`
-	Note                             string  `json:"note"`
-	AlbumPics                        string  `json:"albumPics"` // 画册图片，连产品图片限制为5张，以逗号分割
-	DetailTitle                      string  `json:"detailTitle"`
-	DetailDesc                       string  `json:"detailDesc"`
-	DetailHtml                       string  `json:"detailHtml"`                       // 产品详情网页内容
-	DetailMobileHtml                 string  `json:"detailMobileHtml"`                 // 移动端网页详情
-	PromotionStartTime               string  `json:"promotionStartTime"`               // 促销开始时间
-	PromotionEndTime                 string  `json:"promotionEndTime"`                 // 促销结束时间
-	PromotionPerLimit                int32   `json:"promotionPerLimit"`                // 活动限购数量
-	PromotionType                    int32   `json:"promotionType"`                    // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-	BrandName                        string  `json:"brandName"`                        // 品牌名称
-	ProductCategoryName              string  `json:"productCategoryName"`              // 商品分类名称
-	SubjectProductRelationList       []int64 `json:"subjectProductRelationList"`       // 专题和商品关系
-	PrefrenceAreaProductRelationList []int64 `json:"prefrenceAreaProductRelationList"` // 优选和商品关系
-}
-
-type ListtReturnApplyData struct {
-	Id               int64  `json:"id"`
-	OrderId          int64  `json:"orderId"`          // 订单id
-	CompanyAddressId int64  `json:"companyAddressId"` // 收货地址表id
-	ProductId        int64  `json:"productId"`        // 退货商品id
-	OrderSn          string `json:"orderSn"`          // 订单编号
-	CreateTime       string `json:"createTime"`       // 申请时间
-	MemberUsername   string `json:"memberUserName"`   // 会员用户名
-	ReturnAmount     int64  `json:"returnAmount"`     // 退款金额
-	ReturnName       string `json:"returnName"`       // 退货人姓名
-	ReturnPhone      string `json:"returnPhone"`      // 退货人电话
-	Status           int32  `json:"status"`           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-	HandleTime       string `json:"handleTime"`       // 处理时间
-	ProductPic       string `json:"productPic"`       // 商品图片
-	ProductName      string `json:"productName"`      // 商品名称
-	ProductBrand     string `json:"productBrand"`     // 商品品牌
-	ProductAttr      string `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
-	ProductCount     int32  `json:"productCount"`     // 退货数量
-	ProductPrice     int64  `json:"productPrice"`     // 商品单价
-	ProductRealPrice int64  `json:"productRealPrice"` // 商品实际支付单价
-	Reason           string `json:"reason"`           // 原因
-	Description      string `json:"description"`      // 描述
-	ProofPics        string `json:"proofPics"`        // 凭证图片，以逗号隔开
-	HandleNote       string `json:"handleNote"`       // 处理备注
-	HandleMan        string `json:"handleMan"`        // 处理人员
-	ReceiveMan       string `json:"receiveMan"`       // 收货人
-	ReceiveTime      string `json:"receiveTime"`      // 收货时间
-	ReceiveNote      string `json:"receiveNote"`      // 收货备注
-}
-
-type ListtReturnResonData struct {
-	Id         int64  `json:"id"`
-	Name       string `json:"name"` // 退货类型
-	Sort       int32  `json:"sort"`
-	Status     int32  `json:"status"`     // 状态：0->不启用；1->启用
-	CreateTime string `json:"createTime"` // 添加时间
-}
-
-type ListtSkuStockData struct {
-	Id             int64  `json:"id"`
-	ProductId      int64  `json:"productId"`
-	SkuCode        string `json:"skuCode"` // sku编码
-	Price          int64  `json:"price"`
-	Stock          int32  `json:"stock"`          // 库存
-	LowStock       int32  `json:"lowStock"`       // 预警库存
-	Pic            string `json:"pic"`            // 展示图片
-	Sale           int32  `json:"sale"`           // 销量
-	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
-	LockStock      int32  `json:"lockStock"`      // 锁定库存
-	SpData         string `json:"spData"`         // 商品销售属性，json格式
-}
-
 type MemberPriceList struct {
 	MemberLevelID   int64  `json:"memberLevelId"`
 	MemberPrice     int64  `json:"memberPrice"`
@@ -1985,6 +1968,15 @@ type MemberPriceList struct {
 type MenuTreeMeta struct {
 	Title string `json:"title"`
 	Icon  string `json:"icon"`
+}
+
+type OperateHistoryListData struct {
+	Id          int64  `json:"id"`
+	OrderId     int64  `json:"orderId"`     // 订单id
+	OperateMan  string `json:"operateMan"`  // 操作人：用户；系统；后台管理员
+	CreateTime  string `json:"createTime"`  // 操作时间
+	OrderStatus int32  `json:"orderStatus"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	Note        string `json:"note"`        // 备注
 }
 
 type ProductAttributeValueList struct {
@@ -2029,15 +2021,23 @@ type ReSetPasswordResp struct {
 	Message string `json:"message"`
 }
 
+type RoleMenuListData struct {
+	Key      string `json:"key"`      // 菜单名称
+	Title    string `json:"title"`    // 菜单名称
+	ParentId int64  `json:"parentId"` // 父菜单ID，一级菜单为0
+	Id       int64  `json:"id"`       // 父菜单ID，一级菜单为0
+	Label    string `json:"label"`    // 父菜单ID，一级菜单为0
+}
+
 type RoleMenuReq struct {
 	Id int64 `json:"id,optional"`
 }
 
 type RoleMenuResp struct {
-	AllData  []*ListMenuData `json:"allData"`
-	RoleData []int64         `json:"userData"`
-	Code     string          `json:"code"`
-	Message  string          `json:"message"`
+	AllData  []*RoleMenuListData `json:"allData"`
+	RoleData []int64             `json:"userData"`
+	Code     string              `json:"code"`
+	Message  string              `json:"message"`
 }
 
 type RoleRelations struct {
@@ -2279,15 +2279,22 @@ type UpdateHomeAdvertiseResp struct {
 	Message string `json:"message"`
 }
 
-type UpdateHomeBrandReq struct {
-	Id              int64  `json:"id"`
-	BrandId         int64  `json:"brandId"`         // 商品品牌id
-	BrandName       string `json:"brandName"`       // 商品品牌名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
+type UpdateHomeBrandSortReq struct {
+	Id   int64 `json:"id"`
+	Sort int32 `json:"sort"` // 排序
 }
 
-type UpdateHomeBrandResp struct {
+type UpdateHomeBrandSortResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateHomeBrandStatusReq struct {
+	Ids             []int64 `json:"ids"`
+	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+}
+
+type UpdateHomeBrandStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

@@ -37,10 +37,10 @@ func (l *ProductCommentListLogic) ProductCommentList(req types.ListProductCommen
 		return nil, errorx.NewDefaultError("查询商品评价失败")
 	}
 
-	var list []*types.ListtProductCommentData
+	var list []*types.ListProductCommentData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtProductCommentData{
+		list = append(list, &types.ListProductCommentData{
 			Id:               item.Id,
 			ProductId:        item.ProductId,
 			MemberNickName:   item.MemberNickName,

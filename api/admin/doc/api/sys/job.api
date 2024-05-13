@@ -1,15 +1,15 @@
-info(
-	desc: "职位"
+info (
+	desc:   "职位"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addJobReq {
-		JobName  string `json:"jobName"`  // 职位名称
-		Remarks  string `json:"remarks"`  // 备注
-        OrderNum int32 `json:"orderNum"`  // 排序
-        DelFlag int32 `json:"delFlag"`    // 是否删除  0：已删除  1：正常
+		JobName  string `json:"jobName"` // 职位名称
+		Remarks  string `json:"remarks"` // 备注
+		OrderNum int32  `json:"orderNum"` // 排序
+		DelFlag  int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
 	}
 	addJobResp {
 		Code    string `json:"code"`
@@ -19,20 +19,19 @@ type (
 		Current  int64  `form:"current,default=1"`
 		PageSize int64  `form:"pageSize,default=20"`
 		JobName  string `form:"jobName,optional"`
-        DelFlag int32 `form:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+		DelFlag  int32  `form:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 	}
 	ListJobData {
-		Id             int64  `json:"id"`             // 编号
-		JobName        string `json:"jobName"`        // 职位名称
-        OrderNum int32 `json:"orderNum"`              // 排序
-		CreateBy       string `json:"createBy"`       // 创建人
-		CreateTime     string `json:"createTime"`     // 创建时间
-        UpdateBy string `json:"updateBy"`             // 更新人
-        UpdateTime string `json:"updateTime"`         // 更新时间
-        DelFlag int32 `json:"delFlag"`                // 是否删除  0：已删除  1：正常
-		Remarks        string `json:"remarks"`        // 备注
+		Id         int64  `json:"id"` // 编号
+		JobName    string `json:"jobName"` // 职位名称
+		OrderNum   int32  `json:"orderNum"` // 排序
+		CreateBy   string `json:"createBy"` // 创建人
+		CreateTime string `json:"createTime"` // 创建时间
+		UpdateBy   string `json:"updateBy"` // 更新人
+		UpdateTime string `json:"updateTime"` // 更新时间
+		DelFlag    int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
+		Remarks    string `json:"remarks"` // 备注
 	}
-
 	ListJobResp {
 		Code     string         `json:"code"`
 		Message  string         `json:"message"`
@@ -43,11 +42,11 @@ type (
 		Total    int64          `json:"total"`
 	}
 	UpdateJobReq {
-		Id       int64  `json:"id"`       // 编号
-		JobName  string `json:"jobName"`  // 职位名称
-        OrderNum int32 `json:"orderNum"`  // 排序
-		Remarks  string `json:"remarks"`  // 备注
-        DelFlag int32 `json:"delFlag"`    // 是否删除  0：已删除  1：正常
+		Id       int64  `json:"id"` // 编号
+		JobName  string `json:"jobName"` // 职位名称
+		OrderNum int32  `json:"orderNum"` // 排序
+		Remarks  string `json:"remarks"` // 备注
+		DelFlag  int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
 	}
 	UpdateJobResp {
 		Code    string `json:"code"`
@@ -62,14 +61,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sys/job
-	prefix: /api/sys/job
+	group:      sys/job
+	prefix:     /api/sys/job
 )
 service admin-api {
-
 	//
 	@handler JobAdd
 	post /addJob (addJobReq) returns (addJobResp)
@@ -86,3 +84,4 @@ service admin-api {
 	@handler JobDelete
 	get /deleteJob (DeleteJobReq) returns (DeleteJobResp)
 }
+

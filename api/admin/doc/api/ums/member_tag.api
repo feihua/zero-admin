@@ -1,14 +1,14 @@
-info(
-	desc: "会员标签"
+info (
+	desc:   "会员标签"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addMemberTagReq {
-		Name              string  `json:"name"`
-		FinishOrderCount int32 `json:"finishOrderCount"`     // 自动打标签完成订单数量
-        FinishOrderAmount int64 `json:"finishOrderAmount"`   // 自动打标签完成订单金额
+		Name              string `json:"name"`
+		FinishOrderCount  int32  `json:"finishOrderCount"` // 自动打标签完成订单数量
+		FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
 	}
 	addMemberTagResp {
 		Code    string `json:"code"`
@@ -18,26 +18,26 @@ type (
 		Current  int64 `form:"current,default=1"`
 		PageSize int64 `form:"pageSize,default=20"`
 	}
-	ListtMemberTagData {
-		Id                int64   `json:"id"`
-		Name              string  `json:"name"`
-		FinishOrderCount int32 `json:"finishOrderCount"`     // 自动打标签完成订单数量
-        FinishOrderAmount int64 `json:"finishOrderAmount"`   // 自动打标签完成订单金额
+	ListMemberTagData {
+		Id                int64  `json:"id"`
+		Name              string `json:"name"`
+		FinishOrderCount  int32  `json:"finishOrderCount"` // 自动打标签完成订单数量
+		FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
 	}
 	ListMemberTagResp {
-		Code     string                `json:"code"`
-		Message  string                `json:"message"`
-		Current  int64                 `form:"current,default=1"`
-		Data     []*ListtMemberTagData `json:"data"`
-		PageSize int64                 `form:"pageSize,default=20"`
-		Success  bool                  `json:"success"`
-		Total    int64                 `json:"total"`
+		Code     string               `json:"code"`
+		Message  string               `json:"message"`
+		Current  int64                `form:"current,default=1"`
+		Data     []*ListMemberTagData `json:"data"`
+		PageSize int64                `form:"pageSize,default=20"`
+		Success  bool                 `json:"success"`
+		Total    int64                `json:"total"`
 	}
 	UpdateMemberTagReq {
-		Id                int64   `json:"id"`
-		Name              string  `json:"name"`
-		FinishOrderCount int32 `json:"finishOrderCount"`     // 自动打标签完成订单数量
-        FinishOrderAmount int64 `json:"finishOrderAmount"`   // 自动打标签完成订单金额
+		Id                int64  `json:"id"`
+		Name              string `json:"name"`
+		FinishOrderCount  int32  `json:"finishOrderCount"` // 自动打标签完成订单数量
+		FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
 	}
 	UpdateMemberTagResp {
 		Code    string `json:"code"`
@@ -52,14 +52,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: member/tag
-	prefix: /api/member/tag
+	group:      member/tag
+	prefix:     /api/member/tag
 )
 service admin-api {
-
 	//
 	@handler MemberTagAdd
 	post /addMemberTag (addMemberTagReq) returns (addMemberTagResp)
@@ -76,3 +75,4 @@ service admin-api {
 	@handler MemberTagDelete
 	get /deleteMemberTag (DeleteMemberTagReq) returns (DeleteMemberTagResp)
 }
+

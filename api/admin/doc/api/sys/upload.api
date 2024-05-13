@@ -1,8 +1,9 @@
-info(
-	desc: "文件上传"
+info (
+	desc:   "文件上传"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
+
 type (
 	UploadResp {
 		Code    string `json:"code"`
@@ -11,13 +12,14 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sys/upload
-	prefix: /api/sys
+	group:      sys/upload
+	prefix:     /api/sys
 )
 service admin-api {
 	@handler Upload
 	post /upload returns (UploadResp)
 }
+

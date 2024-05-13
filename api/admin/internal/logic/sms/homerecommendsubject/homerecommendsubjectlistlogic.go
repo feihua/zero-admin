@@ -39,10 +39,10 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req types.ListH
 		return nil, errorx.NewDefaultError("查询人气推荐专题失败")
 	}
 
-	var list []*types.ListtHomeRecommendSubjectData
+	var list []*types.ListHomeRecommendSubjectData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtHomeRecommendSubjectData{
+		list = append(list, &types.ListHomeRecommendSubjectData{
 			Id:              item.Id,
 			SubjectId:       item.SubjectId,
 			SubjectName:     item.SubjectName,

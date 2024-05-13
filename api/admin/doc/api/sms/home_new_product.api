@@ -1,7 +1,7 @@
-info(
-	desc: "首页新鲜好物"
+info (
+	desc:   "首页新鲜好物"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
@@ -15,31 +15,31 @@ type (
 	ListHomeNewProductReq {
 		Current         int64  `form:"current,default=1"`
 		PageSize        int64  `form:"pageSize,default=20"`
-		ProductName     string `form:"productName,optional"`      // 商品名称
-        RecommendStatus int32 `form:"recommendStatus,default=2"`  // 推荐状态：0->不推荐;1->推荐
+		ProductName     string `form:"productName,optional"` // 商品名称
+		RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 	}
-	ListtHomeNewProductData {
+	ListHomeNewProductData {
 		Id              int64  `json:"id"`
-		ProductId       int64  `json:"productId"`       // 商品id
-		ProductName     string `json:"productName"`     // 商品名称
-        RecommendStatus int32 `json:"recommendStatus"`  // 推荐状态：0->不推荐;1->推荐
-        Sort int32 `json:"sort"`                        // 排序
+		ProductId       int64  `json:"productId"` // 商品id
+		ProductName     string `json:"productName"` // 商品名称
+		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int32  `json:"sort"` // 排序
 	}
 	ListHomeNewProductResp {
-		Code     string                     `json:"code"`
-		Message  string                     `json:"message"`
-		Current  int64                      `form:"current,default=1"`
-		Data     []*ListtHomeNewProductData `json:"data"`
-		PageSize int64                      `form:"pageSize,default=20"`
-		Success  bool                       `json:"success"`
-		Total    int64                      `json:"total"`
+		Code     string                    `json:"code"`
+		Message  string                    `json:"message"`
+		Current  int64                     `form:"current,default=1"`
+		Data     []*ListHomeNewProductData `json:"data"`
+		PageSize int64                     `form:"pageSize,default=20"`
+		Success  bool                      `json:"success"`
+		Total    int64                     `json:"total"`
 	}
 	UpdateHomeNewProductReq {
 		Id              int64  `json:"id"`
-		ProductId       int64  `json:"productId"`       // 商品id
-		ProductName     string `json:"productName"`     // 商品名称
-        RecommendStatus int32 `json:"recommendStatus"`  // 推荐状态：0->不推荐;1->推荐
-        Sort int32 `json:"sort"`                        // 排序
+		ProductId       int64  `json:"productId"` // 商品id
+		ProductName     string `json:"productName"` // 商品名称
+		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Sort            int32  `json:"sort"` // 排序
 	}
 	UpdateHomeNewProductResp {
 		Code    string `json:"code"`
@@ -54,14 +54,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sms/homenewproduct
-	prefix: /api/sms/homenewproduct
+	group:      sms/homenewproduct
+	prefix:     /api/sms/homenewproduct
 )
 service admin-api {
-
 	//
 	@handler HomeNewProductAdd
 	post /addHomeNewProduct (addHomeNewProductReq) returns (addHomeNewProductResp)
@@ -78,3 +77,4 @@ service admin-api {
 	@handler HomeNewProductDelete
 	get /deleteHomeNewProduct (DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp)
 }
+

@@ -1,17 +1,17 @@
-info(
-	desc: "会员积分成长规则表"
+info (
+	desc:   "会员积分成长规则表"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addMemberRuleSettingReq {
-		ContinueSignDay int32 `json:"continueSignDay"`     // 连续签到天数
+		ContinueSignDay   int32 `json:"continueSignDay"` // 连续签到天数
 		ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-        ConsumePerPoint int64 `json:"consumePerPoint"`     // 每消费多少元获取1个点
-        LowOrderAmount int64 `json:"lowOrderAmount"`       // 最低获取点数的订单金额
-		MaxPointPerOrder int32 `json:"maxPointPerOrder"`   // 每笔订单最高获取点数
-		Type int32 `json:"type"`                           // 类型：0->积分规则；1->成长值规则
+		ConsumePerPoint   int64 `json:"consumePerPoint"` // 每消费多少元获取1个点
+		LowOrderAmount    int64 `json:"lowOrderAmount"` // 最低获取点数的订单金额
+		MaxPointPerOrder  int32 `json:"maxPointPerOrder"` // 每笔订单最高获取点数
+		Type              int32 `json:"type"` // 类型：0->积分规则；1->成长值规则
 	}
 	addMemberRuleSettingResp {
 		Code    string `json:"code"`
@@ -21,32 +21,32 @@ type (
 		Current  int64 `form:"current,default=1"`
 		PageSize int64 `form:"pageSize,default=20"`
 	}
-	ListtMemberRuleSettingData {
-		Id                int64   `json:"id"`
-		ContinueSignDay int32 `json:"continueSignDay"`     // 连续签到天数
+	ListMemberRuleSettingData {
+		Id                int64 `json:"id"`
+		ContinueSignDay   int32 `json:"continueSignDay"` // 连续签到天数
 		ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-        ConsumePerPoint int64 `json:"consumePerPoint"`     // 每消费多少元获取1个点
-        LowOrderAmount int64 `json:"lowOrderAmount"`       // 最低获取点数的订单金额
-		MaxPointPerOrder int32 `json:"maxPointPerOrder"`   // 每笔订单最高获取点数
-		Type int32 `json:"type"`                           // 类型：0->积分规则；1->成长值规则
+		ConsumePerPoint   int64 `json:"consumePerPoint"` // 每消费多少元获取1个点
+		LowOrderAmount    int64 `json:"lowOrderAmount"` // 最低获取点数的订单金额
+		MaxPointPerOrder  int32 `json:"maxPointPerOrder"` // 每笔订单最高获取点数
+		Type              int32 `json:"type"` // 类型：0->积分规则；1->成长值规则
 	}
 	ListMemberRuleSettingResp {
-		Code     string                        `json:"code"`
-		Message  string                        `json:"message"`
-		Current  int64                         `form:"current,default=1"`
-		Data     []*ListtMemberRuleSettingData `json:"data"`
-		PageSize int64                         `form:"pageSize,default=20"`
-		Success  bool                          `json:"success"`
-		Total    int64                         `json:"total"`
+		Code     string                       `json:"code"`
+		Message  string                       `json:"message"`
+		Current  int64                        `form:"current,default=1"`
+		Data     []*ListMemberRuleSettingData `json:"data"`
+		PageSize int64                        `form:"pageSize,default=20"`
+		Success  bool                         `json:"success"`
+		Total    int64                        `json:"total"`
 	}
 	UpdateMemberRuleSettingReq {
-		Id                int64   `json:"id"`
-		ContinueSignDay int32 `json:"continueSignDay"`     // 连续签到天数
+		Id                int64 `json:"id"`
+		ContinueSignDay   int32 `json:"continueSignDay"` // 连续签到天数
 		ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-        ConsumePerPoint int64 `json:"consumePerPoint"`     // 每消费多少元获取1个点
-        LowOrderAmount int64 `json:"lowOrderAmount"`       // 最低获取点数的订单金额
-		MaxPointPerOrder int32 `json:"maxPointPerOrder"`   // 每笔订单最高获取点数
-		Type int32 `json:"type"`                           // 类型：0->积分规则；1->成长值规则
+		ConsumePerPoint   int64 `json:"consumePerPoint"` // 每消费多少元获取1个点
+		LowOrderAmount    int64 `json:"lowOrderAmount"` // 最低获取点数的订单金额
+		MaxPointPerOrder  int32 `json:"maxPointPerOrder"` // 每笔订单最高获取点数
+		Type              int32 `json:"type"` // 类型：0->积分规则；1->成长值规则
 	}
 	UpdateMemberRuleSettingResp {
 		Code    string `json:"code"`
@@ -61,14 +61,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: member/rulesetting
-	prefix: /api/member/rulesetting
+	group:      member/rulesetting
+	prefix:     /api/member/rulesetting
 )
 service admin-api {
-
 	//
 	@handler MemberRuleSettingAdd
 	post /addMemberRuleSetting (addMemberRuleSettingReq) returns (addMemberRuleSettingResp)
@@ -85,3 +84,4 @@ service admin-api {
 	@handler MemberRuleSettingDelete
 	get /deleteMemberRuleSetting (DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp)
 }
+

@@ -45,7 +45,7 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 		return nil, errorx.NewDefaultError("查询商品信息失败")
 	}
 
-	var list []*types.ListtProductData
+	var list []*types.ListProductData
 
 	for _, item := range resp.List {
 		var productCategoryIdArray []int64
@@ -64,7 +64,7 @@ func (l *ProductListLogic) ProductList(req types.ListProductReq) (*types.ListPro
 			ProductId: item.Id,
 		})
 
-		list = append(list, &types.ListtProductData{
+		list = append(list, &types.ListProductData{
 			Id:                               item.Id,
 			BrandId:                          item.BrandId,
 			ProductCategoryId:                item.ProductCategoryId,

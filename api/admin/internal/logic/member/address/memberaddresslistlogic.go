@@ -38,10 +38,10 @@ func (l *MemberAddressListLogic) MemberAddressList(req types.ListMemberAddressRe
 		return nil, errorx.NewDefaultError("查询会员地址失败")
 	}
 
-	var list []*types.ListtMemberAddressData
+	var list []*types.ListMemberAddressData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberAddressData{
+		list = append(list, &types.ListMemberAddressData{
 			Id:            item.Id,
 			MemberId:      item.MemberId,
 			Name:          item.MemberName,

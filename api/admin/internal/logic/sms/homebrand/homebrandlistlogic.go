@@ -1,4 +1,4 @@
-package logic
+package homebrand
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeBrandListLogic 首页品牌信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 15:53
+*/
 type HomeBrandListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Home
 	}
 }
 
+// HomeBrandList 查询首页品牌信息
 func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.ListHomeBrandResp, error) {
 	resp, err := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
 		BrandName:       req.BrandName,
@@ -39,10 +45,10 @@ func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.L
 		return nil, errorx.NewDefaultError("查询首页品牌失败")
 	}
 
-	var list []*types.ListtHomeBrandData
+	var list []*types.ListHomeBrandData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtHomeBrandData{
+		list = append(list, &types.ListHomeBrandData{
 			Id:              item.Id,
 			BrandId:         item.BrandId,
 			BrandName:       item.BrandName,

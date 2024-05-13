@@ -36,10 +36,10 @@ func (l *CartItemListLogic) CartItemList(req types.ListCartItemReq) (*types.List
 		return nil, errorx.NewDefaultError("查询购物车失败")
 	}
 
-	var list []*types.ListtCartItemData
+	var list []*types.ListCartItemData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtCartItemData{
+		list = append(list, &types.ListCartItemData{
 			Id:                item.Id,
 			ProductId:         item.ProductId,
 			ProductSkuId:      item.ProductSkuId,

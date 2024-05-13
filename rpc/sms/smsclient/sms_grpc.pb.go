@@ -2219,10 +2219,11 @@ var HomeAdvertiseService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	HomeBrandService_HomeBrandAdd_FullMethodName    = "/smsclient.HomeBrandService/HomeBrandAdd"
-	HomeBrandService_HomeBrandList_FullMethodName   = "/smsclient.HomeBrandService/HomeBrandList"
-	HomeBrandService_HomeBrandUpdate_FullMethodName = "/smsclient.HomeBrandService/HomeBrandUpdate"
-	HomeBrandService_HomeBrandDelete_FullMethodName = "/smsclient.HomeBrandService/HomeBrandDelete"
+	HomeBrandService_HomeBrandAdd_FullMethodName          = "/smsclient.HomeBrandService/HomeBrandAdd"
+	HomeBrandService_HomeBrandList_FullMethodName         = "/smsclient.HomeBrandService/HomeBrandList"
+	HomeBrandService_UpdateHomeBrandSort_FullMethodName   = "/smsclient.HomeBrandService/UpdateHomeBrandSort"
+	HomeBrandService_UpdateHomeBrandStatus_FullMethodName = "/smsclient.HomeBrandService/UpdateHomeBrandStatus"
+	HomeBrandService_HomeBrandDelete_FullMethodName       = "/smsclient.HomeBrandService/HomeBrandDelete"
 )
 
 // HomeBrandServiceClient is the client API for HomeBrandService service.
@@ -2231,7 +2232,10 @@ const (
 type HomeBrandServiceClient interface {
 	HomeBrandAdd(ctx context.Context, in *HomeBrandAddReq, opts ...grpc.CallOption) (*HomeBrandAddResp, error)
 	HomeBrandList(ctx context.Context, in *HomeBrandListReq, opts ...grpc.CallOption) (*HomeBrandListResp, error)
-	HomeBrandUpdate(ctx context.Context, in *HomeBrandUpdateReq, opts ...grpc.CallOption) (*HomeBrandUpdateResp, error)
+	// 修改推荐品牌排序
+	UpdateHomeBrandSort(ctx context.Context, in *UpdateHomeBrandSortReq, opts ...grpc.CallOption) (*UpdateHomeBrandSortResp, error)
+	// 批量修改推荐品牌状态
+	UpdateHomeBrandStatus(ctx context.Context, in *UpdateHomeBrandStatusReq, opts ...grpc.CallOption) (*UpdateHomeBrandStatusResp, error)
 	HomeBrandDelete(ctx context.Context, in *HomeBrandDeleteReq, opts ...grpc.CallOption) (*HomeBrandDeleteResp, error)
 }
 
@@ -2261,9 +2265,18 @@ func (c *homeBrandServiceClient) HomeBrandList(ctx context.Context, in *HomeBran
 	return out, nil
 }
 
-func (c *homeBrandServiceClient) HomeBrandUpdate(ctx context.Context, in *HomeBrandUpdateReq, opts ...grpc.CallOption) (*HomeBrandUpdateResp, error) {
-	out := new(HomeBrandUpdateResp)
-	err := c.cc.Invoke(ctx, HomeBrandService_HomeBrandUpdate_FullMethodName, in, out, opts...)
+func (c *homeBrandServiceClient) UpdateHomeBrandSort(ctx context.Context, in *UpdateHomeBrandSortReq, opts ...grpc.CallOption) (*UpdateHomeBrandSortResp, error) {
+	out := new(UpdateHomeBrandSortResp)
+	err := c.cc.Invoke(ctx, HomeBrandService_UpdateHomeBrandSort_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeBrandServiceClient) UpdateHomeBrandStatus(ctx context.Context, in *UpdateHomeBrandStatusReq, opts ...grpc.CallOption) (*UpdateHomeBrandStatusResp, error) {
+	out := new(UpdateHomeBrandStatusResp)
+	err := c.cc.Invoke(ctx, HomeBrandService_UpdateHomeBrandStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2285,7 +2298,10 @@ func (c *homeBrandServiceClient) HomeBrandDelete(ctx context.Context, in *HomeBr
 type HomeBrandServiceServer interface {
 	HomeBrandAdd(context.Context, *HomeBrandAddReq) (*HomeBrandAddResp, error)
 	HomeBrandList(context.Context, *HomeBrandListReq) (*HomeBrandListResp, error)
-	HomeBrandUpdate(context.Context, *HomeBrandUpdateReq) (*HomeBrandUpdateResp, error)
+	// 修改推荐品牌排序
+	UpdateHomeBrandSort(context.Context, *UpdateHomeBrandSortReq) (*UpdateHomeBrandSortResp, error)
+	// 批量修改推荐品牌状态
+	UpdateHomeBrandStatus(context.Context, *UpdateHomeBrandStatusReq) (*UpdateHomeBrandStatusResp, error)
 	HomeBrandDelete(context.Context, *HomeBrandDeleteReq) (*HomeBrandDeleteResp, error)
 	mustEmbedUnimplementedHomeBrandServiceServer()
 }
@@ -2300,8 +2316,11 @@ func (UnimplementedHomeBrandServiceServer) HomeBrandAdd(context.Context, *HomeBr
 func (UnimplementedHomeBrandServiceServer) HomeBrandList(context.Context, *HomeBrandListReq) (*HomeBrandListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandList not implemented")
 }
-func (UnimplementedHomeBrandServiceServer) HomeBrandUpdate(context.Context, *HomeBrandUpdateReq) (*HomeBrandUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandUpdate not implemented")
+func (UnimplementedHomeBrandServiceServer) UpdateHomeBrandSort(context.Context, *UpdateHomeBrandSortReq) (*UpdateHomeBrandSortResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHomeBrandSort not implemented")
+}
+func (UnimplementedHomeBrandServiceServer) UpdateHomeBrandStatus(context.Context, *UpdateHomeBrandStatusReq) (*UpdateHomeBrandStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHomeBrandStatus not implemented")
 }
 func (UnimplementedHomeBrandServiceServer) HomeBrandDelete(context.Context, *HomeBrandDeleteReq) (*HomeBrandDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeBrandDelete not implemented")
@@ -2355,20 +2374,38 @@ func _HomeBrandService_HomeBrandList_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HomeBrandService_HomeBrandUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeBrandUpdateReq)
+func _HomeBrandService_UpdateHomeBrandSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHomeBrandSortReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HomeBrandServiceServer).HomeBrandUpdate(ctx, in)
+		return srv.(HomeBrandServiceServer).UpdateHomeBrandSort(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HomeBrandService_HomeBrandUpdate_FullMethodName,
+		FullMethod: HomeBrandService_UpdateHomeBrandSort_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HomeBrandServiceServer).HomeBrandUpdate(ctx, req.(*HomeBrandUpdateReq))
+		return srv.(HomeBrandServiceServer).UpdateHomeBrandSort(ctx, req.(*UpdateHomeBrandSortReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeBrandService_UpdateHomeBrandStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHomeBrandStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeBrandServiceServer).UpdateHomeBrandStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HomeBrandService_UpdateHomeBrandStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeBrandServiceServer).UpdateHomeBrandStatus(ctx, req.(*UpdateHomeBrandStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2407,8 +2444,12 @@ var HomeBrandService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HomeBrandService_HomeBrandList_Handler,
 		},
 		{
-			MethodName: "HomeBrandUpdate",
-			Handler:    _HomeBrandService_HomeBrandUpdate_Handler,
+			MethodName: "UpdateHomeBrandSort",
+			Handler:    _HomeBrandService_UpdateHomeBrandSort_Handler,
+		},
+		{
+			MethodName: "UpdateHomeBrandStatus",
+			Handler:    _HomeBrandService_UpdateHomeBrandStatus_Handler,
 		},
 		{
 			MethodName: "HomeBrandDelete",

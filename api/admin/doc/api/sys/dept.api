@@ -1,16 +1,16 @@
-info(
-	desc: "部门信息"
+info (
+	desc:   "部门信息"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	addDeptReq {
-		DeptName string `json:"deptName"`              // 机构名称
-		ParentId  int64   `json:"parentId"`          // 上级机构ID，一级机构为0
-		ParentIds []int64 `json:"parentIds"`         // 上级机构IDs
-        OrderNum int32 `json:"orderNum"`             // 排序
-        DelFlag int32 `json:"delFlag,default=2"`     // 是否删除  0：已删除  1：正常
+		DeptName  string  `json:"deptName"` // 机构名称
+		ParentId  int64   `json:"parentId"` // 上级机构ID，一级机构为0
+		ParentIds []int64 `json:"parentIds"` // 上级机构IDs
+		OrderNum  int32   `json:"orderNum"` // 排序
+		DelFlag   int32   `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 	}
 	addDeptResp {
 		Code    string `json:"code"`
@@ -21,16 +21,16 @@ type (
 		CreateBy string `json:"form,optional"`
 	}
 	ListDeptData {
-		Id             int64   `json:"id"`             // 编号
-		DeptName string `json:"deptName"`              // 机构名称
-		ParentId       int64   `json:"parentId"`       // 上级机构ID，一级机构为0
-		ParentIds      []int64 `json:"parentIds"`      // 上级机构ID
-        OrderNum int32 `json:"orderNum"`               // 排序
-		CreateBy       string  `json:"createBy"`       // 创建人
-		CreateTime     string  `json:"createTime"`     // 创建时间
-        UpdateBy string `json:"updateBy"`              // 更新人
-        UpdateTime string `json:"updateTime"`          // 更新时间
-        DelFlag int32 `json:"delFlag"`                 // 是否删除  0：已删除  1：正常
+		Id         int64   `json:"id"` // 编号
+		DeptName   string  `json:"deptName"` // 机构名称
+		ParentId   int64   `json:"parentId"` // 上级机构ID，一级机构为0
+		ParentIds  []int64 `json:"parentIds"` // 上级机构ID
+		OrderNum   int32   `json:"orderNum"` // 排序
+		CreateBy   string  `json:"createBy"` // 创建人
+		CreateTime string  `json:"createTime"` // 创建时间
+		UpdateBy   string  `json:"updateBy"` // 更新人
+		UpdateTime string  `json:"updateTime"` // 更新时间
+		DelFlag    int32   `json:"delFlag"` // 是否删除  0：已删除  1：正常
 	}
 	ListDeptResp {
 		Code    string          `json:"code"`
@@ -40,12 +40,12 @@ type (
 		Total   int64           `json:"total"`
 	}
 	UpdateDeptReq {
-		Id        int64   `json:"id"`                // 编号
-		DeptName string `json:"deptName"`              // 机构名称
-		ParentId  int64   `json:"parentId"`          // 上级机构ID，一级机构为0
-		ParentIds []int64 `json:"parentIds"`         // 上级机构ID
-        OrderNum int32 `json:"orderNum"`             // 排序
-        DelFlag int32 `json:"delFlag,default=2"`     // 是否删除  0：已删除  1：正常
+		Id        int64   `json:"id"` // 编号
+		DeptName  string  `json:"deptName"` // 机构名称
+		ParentId  int64   `json:"parentId"` // 上级机构ID，一级机构为0
+		ParentIds []int64 `json:"parentIds"` // 上级机构ID
+		OrderNum  int32   `json:"orderNum"` // 排序
+		DelFlag   int32   `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 	}
 	UpdateDeptResp {
 		Code    string `json:"code"`
@@ -60,14 +60,13 @@ type (
 	}
 )
 
-@server(
-	jwt: Auth
+@server (
+	jwt:        Auth
 	middleware: CheckUrl
-	group: sys/dept
-	prefix: /api/sys/dept
+	group:      sys/dept
+	prefix:     /api/sys/dept
 )
 service admin-api {
-
 	//
 	@handler DeptAdd
 	post /addDept (addDeptReq) returns (addDeptResp)
@@ -84,3 +83,4 @@ service admin-api {
 	@handler DeptDelete
 	get /deleteDept (DeleteDeptReq) returns (DeleteDeptResp)
 }
+
