@@ -194,6 +194,10 @@ type (
 	SkuStockListResp                           = pmsclient.SkuStockListResp
 	SkuStockUpdateReq                          = pmsclient.SkuStockUpdateReq
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
+	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
+	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
+	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
+	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 
 	CommentService interface {
 		CommentAdd(ctx context.Context, in *CommentAddReq, opts ...grpc.CallOption) (*CommentAddResp, error)

@@ -194,6 +194,10 @@ type (
 	SkuStockListResp                           = pmsclient.SkuStockListResp
 	SkuStockUpdateReq                          = pmsclient.SkuStockUpdateReq
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
+	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
+	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
+	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
+	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 
 	ProductFullReductionService interface {
 		ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq, opts ...grpc.CallOption) (*ProductFullReductionAddResp, error)

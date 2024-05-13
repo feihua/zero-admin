@@ -1,4 +1,4 @@
-package logic
+package brand
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductBrandUpdateLogic 商品品牌
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 16:55
+*/
 type ProductBrandUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewProductBrandUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// ProductBrandUpdate 更新商品品牌
 func (l *ProductBrandUpdateLogic) ProductBrandUpdate(req types.UpdateProductBrandReq) (*types.UpdateProductBrandResp, error) {
 	_, err := l.svcCtx.BrandService.BrandUpdate(l.ctx, &pmsclient.BrandUpdateReq{
 		Id:                  req.Id,

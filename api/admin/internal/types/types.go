@@ -2651,6 +2651,16 @@ type UpdateProductBrandResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateProductBrandStatusReq struct {
+	Ids    []int64 `json:"ids"`
+	Status int32   `json:"status"`
+}
+
+type UpdateProductBrandStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateProductCategoryReq struct {
 	Id           int64  `json:"id"`
 	ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类

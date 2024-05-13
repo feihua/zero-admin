@@ -194,6 +194,10 @@ type (
 	SkuStockListResp                           = pmsclient.SkuStockListResp
 	SkuStockUpdateReq                          = pmsclient.SkuStockUpdateReq
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
+	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
+	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
+	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
+	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 
 	ProductLadderService interface {
 		ProductLadderAdd(ctx context.Context, in *ProductLadderAddReq, opts ...grpc.CallOption) (*ProductLadderAddResp, error)

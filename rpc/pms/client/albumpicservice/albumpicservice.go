@@ -194,6 +194,10 @@ type (
 	SkuStockListResp                           = pmsclient.SkuStockListResp
 	SkuStockUpdateReq                          = pmsclient.SkuStockUpdateReq
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
+	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
+	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
+	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
+	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 
 	AlbumPicService interface {
 		AlbumPicAdd(ctx context.Context, in *AlbumPicAddReq, opts ...grpc.CallOption) (*AlbumPicAddResp, error)

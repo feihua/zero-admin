@@ -194,6 +194,10 @@ type (
 	SkuStockListResp                           = pmsclient.SkuStockListResp
 	SkuStockUpdateReq                          = pmsclient.SkuStockUpdateReq
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
+	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
+	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
+	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
+	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 
 	ProductVertifyRecordService interface {
 		ProductVertifyRecordAdd(ctx context.Context, in *ProductVertifyRecordAddReq, opts ...grpc.CallOption) (*ProductVertifyRecordAddResp, error)

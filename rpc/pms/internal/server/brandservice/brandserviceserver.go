@@ -42,6 +42,16 @@ func (s *BrandServiceServer) BrandUpdate(ctx context.Context, in *pmsclient.Bran
 	return l.BrandUpdate(in)
 }
 
+func (s *BrandServiceServer) UpdateBrandShowStatus(ctx context.Context, in *pmsclient.UpdateBrandShowStatusReq) (*pmsclient.UpdateBrandShowStatusResp, error) {
+	l := brandservicelogic.NewUpdateBrandShowStatusLogic(ctx, s.svcCtx)
+	return l.UpdateBrandShowStatus(in)
+}
+
+func (s *BrandServiceServer) UpdateBrandFactoryStatus(ctx context.Context, in *pmsclient.UpdateBrandFactoryStatusReq) (*pmsclient.UpdateBrandFactoryStatusResp, error) {
+	l := brandservicelogic.NewUpdateBrandFactoryStatusLogic(ctx, s.svcCtx)
+	return l.UpdateBrandFactoryStatus(in)
+}
+
 func (s *BrandServiceServer) BrandDelete(ctx context.Context, in *pmsclient.BrandDeleteReq) (*pmsclient.BrandDeleteResp, error) {
 	l := brandservicelogic.NewBrandDeleteLogic(ctx, s.svcCtx)
 	return l.BrandDelete(in)

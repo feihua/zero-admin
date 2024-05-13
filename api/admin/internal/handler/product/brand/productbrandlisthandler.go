@@ -1,4 +1,4 @@
-package handler
+package brand
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func ProductBrandListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewProductBrandListLogic(r.Context(), ctx)
+		l := brand.NewProductBrandListLogic(r.Context(), ctx)
 		resp, err := l.ProductBrandList(req)
 		if err != nil {
 			httpx.Error(w, err)

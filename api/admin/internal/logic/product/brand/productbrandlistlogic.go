@@ -1,4 +1,4 @@
-package logic
+package brand
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductBrandListLogic 商品品牌
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 16:54
+*/
 type ProductBrandListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewProductBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) P
 	}
 }
 
+// ProductBrandList 查询商品品牌
 func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) (*types.ListProductBrandResp, error) {
 	resp, err := l.svcCtx.BrandService.BrandList(l.ctx, &pmsclient.BrandListReq{
 		Current:       req.Current,

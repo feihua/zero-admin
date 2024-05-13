@@ -194,12 +194,18 @@ type (
 	SkuStockListResp                           = pmsclient.SkuStockListResp
 	SkuStockUpdateReq                          = pmsclient.SkuStockUpdateReq
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
+	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
+	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
+	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
+	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 
 	BrandService interface {
 		BrandAdd(ctx context.Context, in *BrandAddReq, opts ...grpc.CallOption) (*BrandAddResp, error)
 		BrandList(ctx context.Context, in *BrandListReq, opts ...grpc.CallOption) (*BrandListResp, error)
 		BrandListByIds(ctx context.Context, in *BrandListByIdsReq, opts ...grpc.CallOption) (*BrandListResp, error)
 		BrandUpdate(ctx context.Context, in *BrandUpdateReq, opts ...grpc.CallOption) (*BrandUpdateResp, error)
+		UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandShowStatusResp, error)
+		UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandFactoryStatusResp, error)
 		BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error)
 	}
 
@@ -232,6 +238,16 @@ func (m *defaultBrandService) BrandListByIds(ctx context.Context, in *BrandListB
 func (m *defaultBrandService) BrandUpdate(ctx context.Context, in *BrandUpdateReq, opts ...grpc.CallOption) (*BrandUpdateResp, error) {
 	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
 	return client.BrandUpdate(ctx, in, opts...)
+}
+
+func (m *defaultBrandService) UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandShowStatusResp, error) {
+	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
+	return client.UpdateBrandShowStatus(ctx, in, opts...)
+}
+
+func (m *defaultBrandService) UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandFactoryStatusResp, error) {
+	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
+	return client.UpdateBrandFactoryStatus(ctx, in, opts...)
 }
 
 func (m *defaultBrandService) BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error) {

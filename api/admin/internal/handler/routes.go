@@ -728,6 +728,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
+					Path:    "/updateBrandFactoryStatus",
+					Handler: productbrand.UpdateBrandFactoryStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateBrandShowStatus",
+					Handler: productbrand.UpdateBrandShowStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
 					Path:    "/updateProductBrand",
 					Handler: productbrand.ProductBrandUpdateHandler(serverCtx),
 				},

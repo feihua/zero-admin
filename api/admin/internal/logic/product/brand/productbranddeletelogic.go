@@ -1,4 +1,4 @@
-package logic
+package brand
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductBrandDeleteLogic 商品品牌
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 16:54
+*/
 type ProductBrandDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewProductBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// ProductBrandDelete 删除商品品牌
 func (l *ProductBrandDeleteLogic) ProductBrandDelete(req types.DeleteProductBrandReq) (*types.DeleteProductBrandResp, error) {
 	_, err := l.svcCtx.BrandService.BrandDelete(l.ctx, &pmsclient.BrandDeleteReq{
 		Ids: req.Ids,

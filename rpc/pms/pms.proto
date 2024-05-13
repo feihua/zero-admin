@@ -422,6 +422,24 @@ message BrandUpdateResp {
   string pong = 1;
 }
 
+message UpdateBrandShowStatusReq {
+  repeated int64    Ids = 1;
+  int32    ShowStatus = 2;
+}
+
+message UpdateBrandShowStatusResp {
+  string pong = 1;
+}
+
+message UpdateBrandFactoryStatusReq {
+  repeated int64    Ids = 1;
+  int32    FactoryStatus = 2;
+}
+
+message UpdateBrandFactoryStatusResp {
+  string pong = 1;
+}
+
 message BrandDeleteReq {
   repeated int64 ids = 1;
 }
@@ -436,6 +454,8 @@ service BrandService {
   rpc BrandList(BrandListReq) returns(BrandListResp);
   rpc BrandListByIds(BrandListByIdsReq) returns(BrandListResp);
   rpc BrandUpdate(BrandUpdateReq) returns(BrandUpdateResp);
+  rpc UpdateBrandShowStatus(UpdateBrandShowStatusReq) returns(UpdateBrandShowStatusResp);
+  rpc UpdateBrandFactoryStatus(UpdateBrandFactoryStatusReq) returns(UpdateBrandFactoryStatusResp);
   rpc BrandDelete(BrandDeleteReq) returns(BrandDeleteResp);
 
 

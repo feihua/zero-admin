@@ -696,11 +696,13 @@ var AlbumPicService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	BrandService_BrandAdd_FullMethodName       = "/pmsclient.BrandService/BrandAdd"
-	BrandService_BrandList_FullMethodName      = "/pmsclient.BrandService/BrandList"
-	BrandService_BrandListByIds_FullMethodName = "/pmsclient.BrandService/BrandListByIds"
-	BrandService_BrandUpdate_FullMethodName    = "/pmsclient.BrandService/BrandUpdate"
-	BrandService_BrandDelete_FullMethodName    = "/pmsclient.BrandService/BrandDelete"
+	BrandService_BrandAdd_FullMethodName                 = "/pmsclient.BrandService/BrandAdd"
+	BrandService_BrandList_FullMethodName                = "/pmsclient.BrandService/BrandList"
+	BrandService_BrandListByIds_FullMethodName           = "/pmsclient.BrandService/BrandListByIds"
+	BrandService_BrandUpdate_FullMethodName              = "/pmsclient.BrandService/BrandUpdate"
+	BrandService_UpdateBrandShowStatus_FullMethodName    = "/pmsclient.BrandService/UpdateBrandShowStatus"
+	BrandService_UpdateBrandFactoryStatus_FullMethodName = "/pmsclient.BrandService/UpdateBrandFactoryStatus"
+	BrandService_BrandDelete_FullMethodName              = "/pmsclient.BrandService/BrandDelete"
 )
 
 // BrandServiceClient is the client API for BrandService service.
@@ -711,6 +713,8 @@ type BrandServiceClient interface {
 	BrandList(ctx context.Context, in *BrandListReq, opts ...grpc.CallOption) (*BrandListResp, error)
 	BrandListByIds(ctx context.Context, in *BrandListByIdsReq, opts ...grpc.CallOption) (*BrandListResp, error)
 	BrandUpdate(ctx context.Context, in *BrandUpdateReq, opts ...grpc.CallOption) (*BrandUpdateResp, error)
+	UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandShowStatusResp, error)
+	UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandFactoryStatusResp, error)
 	BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error)
 }
 
@@ -758,6 +762,24 @@ func (c *brandServiceClient) BrandUpdate(ctx context.Context, in *BrandUpdateReq
 	return out, nil
 }
 
+func (c *brandServiceClient) UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandShowStatusResp, error) {
+	out := new(UpdateBrandShowStatusResp)
+	err := c.cc.Invoke(ctx, BrandService_UpdateBrandShowStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brandServiceClient) UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandFactoryStatusResp, error) {
+	out := new(UpdateBrandFactoryStatusResp)
+	err := c.cc.Invoke(ctx, BrandService_UpdateBrandFactoryStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *brandServiceClient) BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error) {
 	out := new(BrandDeleteResp)
 	err := c.cc.Invoke(ctx, BrandService_BrandDelete_FullMethodName, in, out, opts...)
@@ -775,6 +797,8 @@ type BrandServiceServer interface {
 	BrandList(context.Context, *BrandListReq) (*BrandListResp, error)
 	BrandListByIds(context.Context, *BrandListByIdsReq) (*BrandListResp, error)
 	BrandUpdate(context.Context, *BrandUpdateReq) (*BrandUpdateResp, error)
+	UpdateBrandShowStatus(context.Context, *UpdateBrandShowStatusReq) (*UpdateBrandShowStatusResp, error)
+	UpdateBrandFactoryStatus(context.Context, *UpdateBrandFactoryStatusReq) (*UpdateBrandFactoryStatusResp, error)
 	BrandDelete(context.Context, *BrandDeleteReq) (*BrandDeleteResp, error)
 	mustEmbedUnimplementedBrandServiceServer()
 }
@@ -794,6 +818,12 @@ func (UnimplementedBrandServiceServer) BrandListByIds(context.Context, *BrandLis
 }
 func (UnimplementedBrandServiceServer) BrandUpdate(context.Context, *BrandUpdateReq) (*BrandUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BrandUpdate not implemented")
+}
+func (UnimplementedBrandServiceServer) UpdateBrandShowStatus(context.Context, *UpdateBrandShowStatusReq) (*UpdateBrandShowStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrandShowStatus not implemented")
+}
+func (UnimplementedBrandServiceServer) UpdateBrandFactoryStatus(context.Context, *UpdateBrandFactoryStatusReq) (*UpdateBrandFactoryStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrandFactoryStatus not implemented")
 }
 func (UnimplementedBrandServiceServer) BrandDelete(context.Context, *BrandDeleteReq) (*BrandDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BrandDelete not implemented")
@@ -883,6 +913,42 @@ func _BrandService_BrandUpdate_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BrandService_UpdateBrandShowStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBrandShowStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrandServiceServer).UpdateBrandShowStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BrandService_UpdateBrandShowStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrandServiceServer).UpdateBrandShowStatus(ctx, req.(*UpdateBrandShowStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BrandService_UpdateBrandFactoryStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBrandFactoryStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrandServiceServer).UpdateBrandFactoryStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BrandService_UpdateBrandFactoryStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrandServiceServer).UpdateBrandFactoryStatus(ctx, req.(*UpdateBrandFactoryStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BrandService_BrandDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BrandDeleteReq)
 	if err := dec(in); err != nil {
@@ -923,6 +989,14 @@ var BrandService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BrandUpdate",
 			Handler:    _BrandService_BrandUpdate_Handler,
+		},
+		{
+			MethodName: "UpdateBrandShowStatus",
+			Handler:    _BrandService_UpdateBrandShowStatus_Handler,
+		},
+		{
+			MethodName: "UpdateBrandFactoryStatus",
+			Handler:    _BrandService_UpdateBrandFactoryStatus_Handler,
 		},
 		{
 			MethodName: "BrandDelete",

@@ -1,4 +1,4 @@
-package handler
+package brand
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func ProductBrandUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewProductBrandUpdateLogic(r.Context(), ctx)
+		l := brand.NewProductBrandUpdateLogic(r.Context(), ctx)
 		resp, err := l.ProductBrandUpdate(req)
 		if err != nil {
 			httpx.Error(w, err)

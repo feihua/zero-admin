@@ -1,4 +1,4 @@
-package handler
+package brand
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func ProductBrandDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewProductBrandDeleteLogic(r.Context(), ctx)
+		l := brand.NewProductBrandDeleteLogic(r.Context(), ctx)
 		resp, err := l.ProductBrandDelete(req)
 		if err != nil {
 			httpx.Error(w, err)

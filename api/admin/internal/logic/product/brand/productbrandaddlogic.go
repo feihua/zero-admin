@@ -1,4 +1,4 @@
-package logic
+package brand
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductBrandAddLogic 商品品牌
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 16:53
+*/
 type ProductBrandAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewProductBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Pr
 	}
 }
 
+// ProductBrandAdd 添加商品品牌
 func (l *ProductBrandAddLogic) ProductBrandAdd(req types.AddProductBrandReq) (*types.AddProductBrandResp, error) {
 	_, err := l.svcCtx.BrandService.BrandAdd(l.ctx, &pmsclient.BrandAddReq{
 		Name:                req.Name,

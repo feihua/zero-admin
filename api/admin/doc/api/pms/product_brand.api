@@ -65,6 +65,14 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
+	UpdateProductBrandStatusReq {
+		Ids                  []int64  `json:"ids"`
+		status                int32  `json:"status"`
+	}
+	UpdateProductBrandStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 	DeleteProductBrandReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -81,19 +89,27 @@ type (
 	prefix:     /api/product/brand
 )
 service admin-api {
-	//
+	//添加商品品牌
 	@handler ProductBrandAdd
 	post /addProductBrand (addProductBrandReq) returns (addProductBrandResp)
 
-	//
+	//查询商品品牌
 	@handler ProductBrandList
 	get /queryProductBrandList (ListProductBrandReq) returns (ListProductBrandResp)
 
-	//
+	//更新商品品牌
 	@handler ProductBrandUpdate
 	post /updateProductBrand (UpdateProductBrandReq) returns (UpdateProductBrandResp)
 
-	//
+	//批量更新显示状态
+	@handler UpdateBrandShowStatus
+	post /updateBrandShowStatus (UpdateProductBrandStatusReq) returns (UpdateProductBrandStatusResp)
+
+	//批量更新厂家制造商状态
+	@handler UpdateBrandFactoryStatus
+	post /updateBrandFactoryStatus (UpdateProductBrandStatusReq) returns (UpdateProductBrandStatusResp)
+
+	//删除商品品牌
 	@handler ProductBrandDelete
 	get /deleteProductBrand (DeleteProductBrandReq) returns (DeleteProductBrandResp)
 }
