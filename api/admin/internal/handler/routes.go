@@ -67,7 +67,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: cmsprefrenceArea.PrefrenceAreaAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: cmsprefrenceArea.PrefrenceAreaDeleteHandler(serverCtx),
 				},
@@ -97,7 +97,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: cmssubject.SubjectAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: cmssubject.SubjectDeleteHandler(serverCtx),
 				},
@@ -127,12 +127,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: memberaddress.MemberAddressAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: memberaddress.MemberAddressDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: memberaddress.MemberAddressListHandler(serverCtx),
 				},
@@ -157,12 +157,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: membergrowthchangehistory.GrowthChangeHistoryAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: membergrowthchangehistory.GrowthChangeHistoryDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: membergrowthchangehistory.GrowthChangeHistoryListHandler(serverCtx),
 				},
@@ -187,12 +187,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: memberintegrationchangehistory.IntegrationChangeHistoryAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: memberintegrationchangehistory.IntegrationChangeHistoryDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: memberintegrationchangehistory.IntegrationChangeHistoryListHandler(serverCtx),
 				},
@@ -217,12 +217,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingListHandler(serverCtx),
 				},
@@ -277,12 +277,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: memberloginlog.MemberLoginLogAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: memberloginlog.MemberLoginLogDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: memberloginlog.MemberLoginLogListHandler(serverCtx),
 				},
@@ -297,12 +297,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: membermember.MemberDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: membermember.MemberListHandler(serverCtx),
 				},
@@ -327,12 +327,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: memberrulesetting.MemberRuleSettingAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: memberrulesetting.MemberRuleSettingDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: memberrulesetting.MemberRuleSettingListHandler(serverCtx),
 				},
@@ -357,12 +357,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: memberstatistics.MemberStatisticsInfoAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: memberstatistics.MemberStatisticsInfoDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: memberstatistics.MemberStatisticsInfoListHandler(serverCtx),
 				},
@@ -387,12 +387,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: membertag.MemberTagAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: membertag.MemberTagDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: membertag.MemberTagListHandler(serverCtx),
 				},
@@ -417,12 +417,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: membertask.MemberTaskAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: membertask.MemberTaskDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: membertask.MemberTaskListHandler(serverCtx),
 				},
@@ -447,12 +447,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: ordercart.CartItemAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: ordercart.CartItemDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: ordercart.CartItemListHandler(serverCtx),
 				},
@@ -507,12 +507,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: orderoperatehistory.OperateHistoryAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: orderoperatehistory.OperateHistoryDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: orderoperatehistory.OperateHistoryListHandler(serverCtx),
 				},
@@ -537,12 +537,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: orderorder.OrderAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: orderorder.OrderDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: orderorder.OrderListHandler(serverCtx),
 				},
@@ -567,12 +567,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: orderreturnapply.ReturnApplyAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: orderreturnapply.ReturnApplyDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: orderreturnapply.ReturnApplyListHandler(serverCtx),
 				},
@@ -597,12 +597,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: orderreturnreason.ReturnResonAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: orderreturnreason.ReturnResonDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: orderreturnreason.ReturnResonListHandler(serverCtx),
 				},
@@ -627,12 +627,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: ordersetting.OrderSettingAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: ordersetting.OrderSettingDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: ordersetting.OrderSettingListHandler(serverCtx),
 				},
@@ -657,12 +657,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: productattribute.ProductAttributeAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: productattribute.ProductAttributeDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: productattribute.ProductAttributeListHandler(serverCtx),
 				},
@@ -687,12 +687,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: productattributecategory.ProductAttributecategoryAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: productattributecategory.ProductAttributecategoryDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: productattributecategory.ProductAttributecategoryListHandler(serverCtx),
 				},
@@ -717,12 +717,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: productbrand.ProductBrandAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: productbrand.ProductBrandDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: productbrand.ProductBrandListHandler(serverCtx),
 				},
@@ -747,12 +747,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: productcategory.ProductCategoryAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: productcategory.ProductCategoryDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: productcategory.ProductCategoryListHandler(serverCtx),
 				},
@@ -777,12 +777,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: productcomment.ProductCommentAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: productcomment.ProductCommentDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: productcomment.ProductCommentListHandler(serverCtx),
 				},
@@ -807,12 +807,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: productfeighttemplate.FeightTemplateAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: productfeighttemplate.FeightTemplateDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: productfeighttemplate.FeightTemplateListHandler(serverCtx),
 				},
@@ -837,12 +837,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: productmemberprice.MemberPriceAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: productmemberprice.MemberPriceDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: productmemberprice.MemberPriceListHandler(serverCtx),
 				},
@@ -867,12 +867,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: productproduct.ProductDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: productproduct.ProductListHandler(serverCtx),
 				},
@@ -897,12 +897,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: productskustock.SkuStockAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: productskustock.SkuStockDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: productskustock.SkuStockListHandler(serverCtx),
 				},
@@ -927,12 +927,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smscoupon.CouponAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smscoupon.CouponDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smscoupon.CouponListHandler(serverCtx),
 				},
@@ -957,12 +957,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smscouponhistory.CouponHistoryAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smscouponhistory.CouponHistoryDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smscouponhistory.CouponHistoryListHandler(serverCtx),
 				},
@@ -987,12 +987,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smsflashpromotion.FlashPromotionAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smsflashpromotion.FlashPromotionDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smsflashpromotion.FlashPromotionListHandler(serverCtx),
 				},
@@ -1017,12 +1017,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smsflashpromotionlog.FlashPromotionLogAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smsflashpromotionlog.FlashPromotionLogDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smsflashpromotionlog.FlashPromotionLogListHandler(serverCtx),
 				},
@@ -1047,12 +1047,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smsflashpromotionsession.FlashPromotionSessionAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smsflashpromotionsession.FlashPromotionSessionDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smsflashpromotionsession.FlashPromotionSessionListHandler(serverCtx),
 				},
@@ -1077,12 +1077,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smshomeadvertise.HomeAdvertiseAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smshomeadvertise.HomeAdvertiseDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smshomeadvertise.HomeAdvertiseListHandler(serverCtx),
 				},
@@ -1107,12 +1107,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smshomebrand.HomeBrandAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smshomebrand.HomeBrandDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smshomebrand.HomeBrandListHandler(serverCtx),
 				},
@@ -1137,12 +1137,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smshomenewproduct.HomeNewProductAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smshomenewproduct.HomeNewProductDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smshomenewproduct.HomeNewProductListHandler(serverCtx),
 				},
@@ -1167,12 +1167,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smshomerecommendproduct.HomeRecommendProductAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smshomerecommendproduct.HomeRecommendProductDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smshomerecommendproduct.HomeRecommendProductListHandler(serverCtx),
 				},
@@ -1197,12 +1197,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: smshomerecommendsubject.HomeRecommendSubjectAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: smshomerecommendsubject.HomeRecommendSubjectDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: smshomerecommendsubject.HomeRecommendSubjectListHandler(serverCtx),
 				},
@@ -1227,12 +1227,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: sysdept.DeptAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: sysdept.DeptDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: sysdept.DeptListHandler(serverCtx),
 				},
@@ -1257,12 +1257,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: sysdict.DictAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: sysdict.DictDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: sysdict.DictListHandler(serverCtx),
 				},
@@ -1287,12 +1287,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: sysjob.JobAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: sysjob.JobDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: sysjob.JobListHandler(serverCtx),
 				},
@@ -1312,12 +1312,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: syslog.SysLogDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: syslog.SysLogListHandler(serverCtx),
 				},
@@ -1332,12 +1332,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: syslog.LoginLogDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: syslog.LoginLogListHandler(serverCtx),
 				},
@@ -1362,12 +1362,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: sysmenu.MenuAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: sysmenu.MenuDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: sysmenu.MenuListHandler(serverCtx),
 				},
@@ -1392,12 +1392,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: sysrole.RoleAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: sysrole.RoleDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: sysrole.RoleListHandler(serverCtx),
 				},
@@ -1452,7 +1452,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: sysuser.UserAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/delete",
 					Handler: sysuser.UserDeleteHandler(serverCtx),
 				},
@@ -1462,7 +1462,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: sysuser.UserInfoHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: sysuser.UserListHandler(serverCtx),
 				},
