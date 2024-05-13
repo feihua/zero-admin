@@ -21,7 +21,7 @@ message SubjectAddReq {
   string Content = 14; //
   int32 ForwardCount = 15; //转发数
   string CategoryName = 16; //专题分类名称
-
+  string CreateBy = 17; //
 }
 
 message SubjectAddResp {
@@ -53,6 +53,7 @@ message SubjectUpdateReq {
   string Content = 14; //
   int32 ForwardCount = 15; //转发数
   string CategoryName = 16; //专题分类名称
+  string UpdateBy = 18; //
 
 }
 
@@ -91,6 +92,9 @@ message SubjectListData {
   string Content = 14; //
   int32 ForwardCount = 15; //转发数
   string CategoryName = 16; //专题分类名称
+  string CreateBy = 17; //
+  string UpdateBy = 18; //
+  string UpdateTime = 19;
 
 }
 

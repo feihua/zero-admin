@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SubjectListLogic 获取商品专题
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 9:48
+*/
 type SubjectListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Subje
 	}
 }
 
+// SubjectList 获取商品专题
 func (l *SubjectListLogic) SubjectList(req *types.ListSubjectReq) (resp *types.ListSubjectResp, err error) {
 	subjectList, err := l.svcCtx.SubjectService.SubjectList(l.ctx, &cmsclient.SubjectListReq{
 		Current:         req.Current,

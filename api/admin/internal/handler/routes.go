@@ -102,8 +102,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: cmssubject.SubjectDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
-					Path:    "/list",
+					Method:  http.MethodGet,
+					Path:    "/querySubjectList",
 					Handler: cmssubject.SubjectListHandler(serverCtx),
 				},
 				{

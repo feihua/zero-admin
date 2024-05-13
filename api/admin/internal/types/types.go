@@ -1353,11 +1353,11 @@ type ListSkuStockResp struct {
 }
 
 type ListSubjectReq struct {
-	Current         int64  `json:"current,default=1"`
-	PageSize        int64  `json:"pageSize,default=20"`
-	Title           string `json:"title,optional"`
-	RecommendStatus int32  `json:"recommendStatus,default=2"`
-	ShowStatus      int32  `json:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+	Current         int64  `form:"current,default=1"`
+	PageSize        int64  `form:"pageSize,default=20"`
+	Title           string `form:"title,optional"`
+	RecommendStatus int32  `form:"recommendStatus,default=2"`
+	ShowStatus      int32  `form:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
 }
 
 type ListSubjectResp struct {

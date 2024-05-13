@@ -10,6 +10,6 @@ Content-Type: application/json
     client.global.set("token", response.body.token);
 %}
 
-### 查询商品优选列表
-GET {{host}}/api/cms/prefrenceArea/queryPrefrenceAreaList
+### 查询商品专题列表
+GET {{host}}/api/cms/subject/querySubjectList?title=polo衬衫的也时尚
 Authorization: Bearer {{token}}
