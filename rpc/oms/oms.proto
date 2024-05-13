@@ -334,15 +334,16 @@ service CartItemService {
 }
 
 message CompanyAddressAddReq {
-  string  AddressName = 2;
-  int32    SendStatus = 3;
-  int32    ReceiveStatus = 4;
-  string  Name = 5;
-  string  Phone = 6;
-  string  Province = 7;
-  string  City = 8;
-  string  Region = 9;
-  string  DetailAddress = 10;
+  string  AddressName = 1;
+  int32    SendStatus = 2;
+  int32    ReceiveStatus = 3;
+  string  Name = 4;
+  string  Phone = 5;
+  string  Province = 6;
+  string  City = 7;
+  string  Region = 8;
+  string  DetailAddress = 9;
+  string CreateBy = 10; //
 }
 
 message CompanyAddressAddResp {
@@ -365,6 +366,10 @@ message CompanyAddressListData{
   string  City = 8;
   string  Region = 9;
   string  DetailAddress = 10;
+  string CreateBy = 11; //
+  string UpdateBy = 12; //
+  string UpdateTime = 13;
+  string CreateTime = 14; //
 }
 
 message CompanyAddressListResp {
@@ -383,6 +388,7 @@ message CompanyAddressUpdateReq {
   string  City = 8;
   string  Region = 9;
   string  DetailAddress = 10;
+  string UpdateBy = 11; //
 }
 
 message CompanyAddressUpdateResp {

@@ -45,17 +45,16 @@ func (l *SubjectListLogic) SubjectList(req *types.ListSubjectReq) (resp *types.L
 		return nil, errorx.NewDefaultError("查询专题失败")
 	}
 
-	var list []*types.ListtSubjectData
+	var list []*types.ListSubjectData
 
 	for _, item := range subjectList.List {
-		list = append(list, &types.ListtSubjectData{
+		list = append(list, &types.ListSubjectData{
 			Id:              item.Id,
 			CategoryId:      item.CategoryId,
 			Title:           item.Title,
 			Pic:             item.Pic,
 			ProductCount:    item.ProductCount,
 			RecommendStatus: item.RecommendStatus,
-			CreateTime:      item.CreateTime,
 			CollectCount:    item.CollectCount,
 			ReadCount:       item.ReadCount,
 			CommentCount:    item.CommentCount,
@@ -65,6 +64,10 @@ func (l *SubjectListLogic) SubjectList(req *types.ListSubjectReq) (resp *types.L
 			Content:         item.Content,
 			ForwardCount:    item.ForwardCount,
 			CategoryName:    item.CategoryName,
+			CreateBy:        item.CreateBy,
+			CreateTime:      item.CreateTime,
+			UpdateBy:        item.UpdateBy,
+			UpdateTime:      item.UpdateTime,
 		})
 	}
 

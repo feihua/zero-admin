@@ -18,7 +18,7 @@ import (
 	membertag "github.com/feihua/zero-admin/api/admin/internal/handler/member/tag"
 	membertask "github.com/feihua/zero-admin/api/admin/internal/handler/member/task"
 	ordercart "github.com/feihua/zero-admin/api/admin/internal/handler/order/cart"
-	ordercompayaddress "github.com/feihua/zero-admin/api/admin/internal/handler/order/compayaddress"
+	ordercompanyaddress "github.com/feihua/zero-admin/api/admin/internal/handler/order/companyaddress"
 	orderoperatehistory "github.com/feihua/zero-admin/api/admin/internal/handler/order/operatehistory"
 	orderorder "github.com/feihua/zero-admin/api/admin/internal/handler/order/order"
 	orderreturnapply "github.com/feihua/zero-admin/api/admin/internal/handler/order/returnapply"
@@ -473,28 +473,28 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/add",
-					Handler: ordercompayaddress.CompayAddressAddHandler(serverCtx),
+					Path:    "/addCompanyAddress",
+					Handler: ordercompanyaddress.CompanyAddressAddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteCompanyAddress",
+					Handler: ordercompanyaddress.CompanyAddressDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryCompanyAddressList",
+					Handler: ordercompanyaddress.CompanyAddressListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/delete",
-					Handler: ordercompayaddress.CompayAddressDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/list",
-					Handler: ordercompayaddress.CompayAddressListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/update",
-					Handler: ordercompayaddress.CompayAddressUpdateHandler(serverCtx),
+					Path:    "/updateCompanyAddress",
+					Handler: ordercompanyaddress.CompanyAddressUpdateHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/order/compayaddress"),
+		rest.WithPrefix("/api/order/companyaddress"),
 	)
 
 	server.AddRoutes(
@@ -1314,6 +1314,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/delete",
+					Handler: syslog.SysLogDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/list",
+					Handler: syslog.SysLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/sysLog"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
 					Handler: syslog.LoginLogDeleteHandler(serverCtx),
 				},
 				{
@@ -1330,26 +1350,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/loginLog"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/delete",
-					Handler: syslog.SysLogDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/list",
-					Handler: syslog.SysLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/sysLog"),
 	)
 
 	server.AddRoutes(

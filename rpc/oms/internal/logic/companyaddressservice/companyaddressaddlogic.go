@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CompanyAddressAddLogic 公司收货地址
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 10:39
+*/
 type CompanyAddressAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewCompanyAddressAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// CompanyAddressAdd 添加公司收货地址
 func (l *CompanyAddressAddLogic) CompanyAddressAdd(in *omsclient.CompanyAddressAddReq) (*omsclient.CompanyAddressAddResp, error) {
 	err := query.OmsCompanyAddress.WithContext(l.ctx).Create(&model.OmsCompanyAddress{
 		AddressName:   in.AddressName,
@@ -35,6 +41,7 @@ func (l *CompanyAddressAddLogic) CompanyAddressAdd(in *omsclient.CompanyAddressA
 		City:          in.City,
 		Region:        in.Region,
 		DetailAddress: in.DetailAddress,
+		CreateBy:      in.CreateBy,
 	})
 
 	if err != nil {

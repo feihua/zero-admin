@@ -1,4 +1,4 @@
-package logic
+package companyaddress
 
 import (
 	"context"
@@ -12,22 +12,28 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type CompayAddressUpdateLogic struct {
+// CompanyAddressUpdateLogic 公司收货地址
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 10:33
+*/
+type CompanyAddressUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewCompayAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) CompayAddressUpdateLogic {
-	return CompayAddressUpdateLogic{
+func NewCompanyAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CompanyAddressUpdateLogic {
+	return &CompanyAddressUpdateLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *CompayAddressUpdateLogic) CompayAddressUpdate(req types.UpdateCompayAddressReq) (*types.UpdateCompayAddressResp, error) {
-	_, err := l.svcCtx.CompanyAddressService.CompanyAddressUpdate(l.ctx, &omsclient.CompanyAddressUpdateReq{
+// CompanyAddressUpdate 更新公司收货地址
+func (l *CompanyAddressUpdateLogic) CompanyAddressUpdate(req *types.UpdateCompanyAddressReq) (resp *types.UpdateCompanyAddressResp, err error) {
+	_, err = l.svcCtx.CompanyAddressService.CompanyAddressUpdate(l.ctx, &omsclient.CompanyAddressUpdateReq{
 		Id:            req.Id,
 		AddressName:   req.AddressName,
 		SendStatus:    req.SendStatus,
@@ -38,6 +44,7 @@ func (l *CompayAddressUpdateLogic) CompayAddressUpdate(req types.UpdateCompayAdd
 		City:          req.City,
 		Region:        req.Region,
 		DetailAddress: req.DetailAddress,
+		UpdateBy:      l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {
@@ -45,7 +52,7 @@ func (l *CompayAddressUpdateLogic) CompayAddressUpdate(req types.UpdateCompayAdd
 		return nil, errorx.NewDefaultError("更新公司收发货地址失败")
 	}
 
-	return &types.UpdateCompayAddressResp{
+	return &types.UpdateCompanyAddressResp{
 		Code:    "000000",
 		Message: "更新公司收发货地址成功",
 	}, nil

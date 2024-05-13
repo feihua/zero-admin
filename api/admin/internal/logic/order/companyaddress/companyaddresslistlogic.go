@@ -1,4 +1,4 @@
-package logic
+package companyaddress
 
 import (
 	"context"
@@ -12,22 +12,28 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type CompayAddressListLogic struct {
+// CompanyAddressListLogic 公司收货地址
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 10:33
+*/
+type CompanyAddressListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewCompayAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) CompayAddressListLogic {
-	return CompayAddressListLogic{
+func NewCompanyAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CompanyAddressListLogic {
+	return &CompanyAddressListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *CompayAddressListLogic) CompayAddressList(req types.ListCompayAddressReq) (*types.ListCompayAddressResp, error) {
-	resp, err := l.svcCtx.CompanyAddressService.CompanyAddressList(l.ctx, &omsclient.CompanyAddressListReq{
+// CompanyAddressList 查询公司收货地址
+func (l *CompanyAddressListLogic) CompanyAddressList(req *types.ListCompanyAddressReq) (resp *types.ListCompanyAddressResp, err error) {
+	result, err := l.svcCtx.CompanyAddressService.CompanyAddressList(l.ctx, &omsclient.CompanyAddressListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 	})
@@ -37,10 +43,10 @@ func (l *CompayAddressListLogic) CompayAddressList(req types.ListCompayAddressRe
 		return nil, errorx.NewDefaultError("查询公司收发货地址失败")
 	}
 
-	var list []*types.ListtCompayAddressData
+	var list []*types.ListCompanyAddressData
 
-	for _, item := range resp.List {
-		list = append(list, &types.ListtCompayAddressData{
+	for _, item := range result.List {
+		list = append(list, &types.ListCompanyAddressData{
 			Id:            item.Id,
 			AddressName:   item.AddressName,
 			SendStatus:    item.SendStatus,
@@ -51,15 +57,19 @@ func (l *CompayAddressListLogic) CompayAddressList(req types.ListCompayAddressRe
 			City:          item.City,
 			Region:        item.Region,
 			DetailAddress: item.DetailAddress,
+			CreateBy:      item.CreateBy,
+			CreateTime:    item.CreateTime,
+			UpdateBy:      item.UpdateBy,
+			UpdateTime:    item.UpdateTime,
 		})
 	}
 
-	return &types.ListCompayAddressResp{
+	return &types.ListCompanyAddressResp{
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
-		Total:    resp.Total,
+		Total:    result.Total,
 		Code:     "000000",
 		Message:  "查询公司收发货地址成功",
 	}, nil

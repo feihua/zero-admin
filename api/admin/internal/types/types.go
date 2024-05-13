@@ -10,11 +10,11 @@ type DeleteCartItemResp struct {
 	Message string `json:"message"`
 }
 
-type DeleteCompayAddressReq struct {
+type DeleteCompanyAddressReq struct {
 	Ids []int64 `json:"ids"`
 }
 
-type DeleteCompayAddressResp struct {
+type DeleteCompanyAddressResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -451,16 +451,33 @@ type ListCartItemResp struct {
 	Total    int64                `json:"total"`
 }
 
-type ListCompayAddressReq struct {
-	Current  int64 `json:"current,default=1"`
-	PageSize int64 `json:"pageSize,default=20"`
+type ListCompanyAddressData struct {
+	Id            int64  `json:"id"`
+	AddressName   string `json:"addressName"`   // 地址名称
+	SendStatus    int32  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
+	ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
+	Name          string `json:"name"`          // 收发货人姓名
+	Phone         string `json:"phone"`         // 收货人电话
+	Province      string `json:"province"`      // 省/直辖市
+	City          string `json:"city"`          // 市
+	Region        string `json:"region"`        // 区
+	DetailAddress string `json:"detailAddress"` // 详细地址
+	CreateBy      string `json:"createBy"`
+	CreateTime    string `json:"createTime"`
+	UpdateBy      string `json:"updateBy"`
+	UpdateTime    string `json:"updateTime"`
 }
 
-type ListCompayAddressResp struct {
+type ListCompanyAddressReq struct {
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
+}
+
+type ListCompanyAddressResp struct {
 	Code     string                    `json:"code"`
 	Message  string                    `json:"message"`
 	Current  int64                     `json:"current,default=1"`
-	Data     []*ListtCompayAddressData `json:"data"`
+	Data     []*ListCompanyAddressData `json:"data"`
 	PageSize int64                     `json:"pageSize,default=20"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
@@ -1352,6 +1369,28 @@ type ListSkuStockResp struct {
 	Message  string               `json:"message"`
 }
 
+type ListSubjectData struct {
+	Id              int64  `json:"id"`
+	CategoryId      int64  `json:"categoryId"`
+	Title           string `json:"title"`
+	Pic             string `json:"pic"`          // 专题主图
+	ProductCount    int32  `json:"productCount"` // 关联产品数量
+	RecommendStatus int32  `json:"recommendStatus"`
+	CollectCount    int32  `json:"collectCount"`
+	ReadCount       int32  `json:"readCount"`
+	CommentCount    int32  `json:"commentCount"`
+	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
+	Description     string `json:"description"`
+	ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Content         string `json:"content"`
+	ForwardCount    int32  `json:"forwardCount"` // 转发数
+	CategoryName    string `json:"categoryName"` // 专题分类名称
+	CreateBy        string `json:"createBy"`
+	CreateTime      string `json:"createTime"`
+	UpdateBy        string `json:"updateBy"`
+	UpdateTime      string `json:"updateTime"`
+}
+
 type ListSubjectReq struct {
 	Current         int64  `form:"current,default=1"`
 	PageSize        int64  `form:"pageSize,default=20"`
@@ -1361,13 +1400,13 @@ type ListSubjectReq struct {
 }
 
 type ListSubjectResp struct {
-	Code     string              `json:"code"`
-	Message  string              `json:"message"`
-	Current  int64               `json:"current,default=1"`
-	Data     []*ListtSubjectData `json:"data"`
-	PageSize int64               `json:"pageSize,default=20"`
-	Success  bool                `json:"success"`
-	Total    int64               `json:"total"`
+	Code     string             `json:"code"`
+	Message  string             `json:"message"`
+	Current  int64              `json:"current,default=1"`
+	Data     []*ListSubjectData `json:"data"`
+	PageSize int64              `json:"pageSize,default=20"`
+	Success  bool               `json:"success"`
+	Total    int64              `json:"total"`
 }
 
 type ListSysLogData struct {
@@ -1461,19 +1500,6 @@ type ListtCartItemData struct {
 	ProductBrand      string `json:"productBrand"`
 	ProductSn         string `json:"productSn"`
 	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-}
-
-type ListtCompayAddressData struct {
-	Id            int64  `json:"id"`
-	AddressName   string `json:"addressName"`   // 地址名称
-	SendStatus    int32  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
-	ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
-	Name          string `json:"name"`          // 收发货人姓名
-	Phone         string `json:"phone"`         // 收货人电话
-	Province      string `json:"province"`      // 省/直辖市
-	City          string `json:"city"`          // 市
-	Region        string `json:"region"`        // 区
-	DetailAddress string `json:"detailAddress"` // 详细地址
 }
 
 type ListtCouponData struct {
@@ -1950,25 +1976,6 @@ type ListtSkuStockData struct {
 	SpData         string `json:"spData"`         // 商品销售属性，json格式
 }
 
-type ListtSubjectData struct {
-	Id              int64  `json:"id"`
-	CategoryId      int64  `json:"categoryId"`
-	Title           string `json:"title"`
-	Pic             string `json:"pic"`          // 专题主图
-	ProductCount    int32  `json:"productCount"` // 关联产品数量
-	RecommendStatus int32  `json:"recommendStatus"`
-	CreateTime      string `json:"createTime"`
-	CollectCount    int32  `json:"collectCount"`
-	ReadCount       int32  `json:"readCount"`
-	CommentCount    int32  `json:"commentCount"`
-	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-	Description     string `json:"description"`
-	ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	Content         string `json:"content"`
-	ForwardCount    int32  `json:"forwardCount"` // 转发数
-	CategoryName    string `json:"categoryName"` // 专题分类名称
-}
-
 type MemberPriceList struct {
 	MemberLevelID   int64  `json:"memberLevelId"`
 	MemberPrice     int64  `json:"memberPrice"`
@@ -2090,7 +2097,7 @@ type UpdateCartItemResp struct {
 	Message string `json:"message"`
 }
 
-type UpdateCompayAddressReq struct {
+type UpdateCompanyAddressReq struct {
 	Id            int64  `json:"id"`
 	AddressName   string `json:"addressName"`   // 地址名称
 	SendStatus    int32  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
@@ -2103,7 +2110,7 @@ type UpdateCompayAddressReq struct {
 	DetailAddress string `json:"detailAddress"` // 详细地址
 }
 
-type UpdateCompayAddressResp struct {
+type UpdateCompanyAddressResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -2884,7 +2891,7 @@ type AddCartItemResp struct {
 	Message string `json:"message"`
 }
 
-type AddCompayAddressReq struct {
+type AddCompanyAddressReq struct {
 	AddressName   string `json:"addressName"`   // 地址名称
 	SendStatus    int32  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
 	ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
@@ -2896,7 +2903,7 @@ type AddCompayAddressReq struct {
 	DetailAddress string `json:"detailAddress"` // 详细地址
 }
 
-type AddCompayAddressResp struct {
+type AddCompanyAddressResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

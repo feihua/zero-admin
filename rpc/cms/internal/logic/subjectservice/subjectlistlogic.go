@@ -75,10 +75,10 @@ func (l *SubjectListLogic) SubjectList(in *cmsclient.SubjectListReq) (*cmsclient
 		subject.CreateBy = item.CreateBy
 		subject.CreateTime = item.CreateTime.Format("2006-01-02 15:04:05")
 
-		if item.UpdateTime != nil {
+		if item.UpdateBy != nil {
 			subject.UpdateBy = *item.UpdateBy
 		}
-		if item.UpdateBy != nil {
+		if item.UpdateTime != nil {
 			subject.UpdateTime = item.UpdateTime.Format("2006-01-02 15:04:05")
 		}
 

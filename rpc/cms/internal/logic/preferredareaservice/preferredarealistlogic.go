@@ -65,10 +65,10 @@ func (l *PreferredAreaListLogic) PreferredAreaList(in *cmsclient.PreferredAreaLi
 		preferredArea.CreateBy = item.CreateBy
 		preferredArea.CreateTime = item.CreateTime.Format("2006-01-02 15:04:05")
 
-		if item.UpdateTime != nil {
+		if item.UpdateBy != nil {
 			preferredArea.UpdateBy = *item.UpdateBy
 		}
-		if item.UpdateBy != nil {
+		if item.UpdateTime != nil {
 			preferredArea.UpdateTime = item.UpdateTime.Format("2006-01-02 15:04:05")
 		}
 

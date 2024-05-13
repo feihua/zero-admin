@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// CompanyAddressDeleteLogic 公司地址
+// CompanyAddressDeleteLogic 删除公司收货地址
 /*
 Author: LiuFeiHua
 Date: 2024/5/8 9:30
@@ -29,7 +29,7 @@ func NewCompanyAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// CompanyAddressDelete 删除公司地址
+// CompanyAddressDelete 删除公司收货地址
 func (l *CompanyAddressDeleteLogic) CompanyAddressDelete(in *omsclient.CompanyAddressDeleteReq) (*omsclient.CompanyAddressDeleteResp, error) {
 	q := query.OmsCompanyAddress
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()

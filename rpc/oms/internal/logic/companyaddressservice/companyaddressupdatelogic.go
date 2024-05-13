@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CompanyAddressUpdateLogic 公司收货地址
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 10:41
+*/
 type CompanyAddressUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +30,7 @@ func NewCompanyAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// CompanyAddressUpdate 更新删除公司收货地址
 func (l *CompanyAddressUpdateLogic) CompanyAddressUpdate(in *omsclient.CompanyAddressUpdateReq) (*omsclient.CompanyAddressUpdateResp, error) {
 	q := query.OmsCompanyAddress
 	_, err := q.WithContext(l.ctx).Updates(&model.OmsCompanyAddress{
@@ -38,6 +44,7 @@ func (l *CompanyAddressUpdateLogic) CompanyAddressUpdate(in *omsclient.CompanyAd
 		City:          in.City,
 		Region:        in.Region,
 		DetailAddress: in.DetailAddress,
+		UpdateBy:      &in.UpdateBy,
 	})
 
 	if err != nil {
