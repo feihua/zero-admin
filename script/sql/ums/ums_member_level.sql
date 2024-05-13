@@ -20,16 +20,16 @@ create table ums_member_level
 INSERT INTO ums_member_level (id, level_name, growth_point, default_status, free_freight_point, comment_growth_point,
                               is_free_freight, is_sign_in, is_comment, is_promotion, is_member_price, is_birthday,
                               remark)
-VALUES (1, '黄金会员', 1000, 0, 199.00, 5, 1, 1, 1, 1, 1, 1, 'remarks');
+VALUES (1, '黄金会员', 1000, 0, 19900, 5, 1, 1, 1, 1, 1, 1, 'remarks');
 INSERT INTO ums_member_level (id, level_name, growth_point, default_status, free_freight_point, comment_growth_point,
                               is_free_freight, is_sign_in, is_comment, is_promotion, is_member_price, is_birthday,
                               remark)
-VALUES (2, '白金会员', 5000, 0, 99.00, 10, 1, 1, 1, 1, 1, 1, 'remarks');
+VALUES (2, '白金会员', 5000, 0, 9900, 10, 1, 1, 1, 1, 1, 1, 'remarks');
 INSERT INTO ums_member_level (id, level_name, growth_point, default_status, free_freight_point, comment_growth_point,
                               is_free_freight, is_sign_in, is_comment, is_promotion, is_member_price, is_birthday,
                               remark)
-VALUES (3, '钻石会员', 15000, 0, 69.00, 15, 1, 1, 1, 1, 1, 1, 'remarks');
+VALUES (3, '钻石会员', 15000, 0, 6900, 15, 1, 1, 1, 1, 1, 1, 'remarks');
 INSERT INTO ums_member_level (id, level_name, growth_point, default_status, free_freight_point, comment_growth_point,
                               is_free_freight, is_sign_in, is_comment, is_promotion, is_member_price, is_birthday,
                               remark)
-VALUES (4, '普通会员', 1, 1, 199.00, 20, 1, 1, 1, 1, 0, 0, 'remarks');
+VALUES (4, '普通会员', 1, 1, 19900, 20, 1, 1, 1, 1, 0, 0, 'remarks');

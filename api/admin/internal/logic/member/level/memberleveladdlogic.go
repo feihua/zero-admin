@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberLevelAddLogic 会员等级
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 13:37
+*/
 type MemberLevelAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewMemberLevelAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Mem
 	}
 }
 
+// MemberLevelAdd 添加会员等级
 func (l *MemberLevelAddLogic) MemberLevelAdd(req types.AddMemberLevelReq) (*types.AddMemberLevelResp, error) {
 	_, err := l.svcCtx.MemberLevelService.MemberLevelAdd(l.ctx, &umsclient.MemberLevelAddReq{
 		LevelName:          req.Name,

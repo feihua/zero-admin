@@ -11,7 +11,7 @@ type DeleteCartItemResp struct {
 }
 
 type DeleteCompanyAddressReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteCompanyAddressResp struct {
@@ -191,7 +191,7 @@ type DeleteMemberAddressResp struct {
 }
 
 type DeleteMemberLevelReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberLevelResp struct {
@@ -851,9 +851,9 @@ type ListMemberAddressResp struct {
 }
 
 type ListMemberLevelReq struct {
-	Current  int64  `json:"current,default=1"`
-	PageSize int64  `json:"pageSize,default=20"`
-	Name     string `json:"name,optional"`
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	Name     string `form:"name,optional"`
 }
 
 type ListMemberLevelResp struct {

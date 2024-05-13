@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberLevelListLogic 会员等级
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 13:39
+*/
 type MemberLevelListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Me
 	}
 }
 
+// MemberLevelList 查询会员等级列表
 func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*types.ListMemberLevelResp, error) {
 	resp, err := l.svcCtx.MemberLevelService.MemberLevelList(l.ctx, &umsclient.MemberLevelListReq{
 		Current:  req.Current,

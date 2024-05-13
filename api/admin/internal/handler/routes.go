@@ -243,22 +243,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/add",
+					Path:    "/addMemberLevel",
 					Handler: memberlevel.MemberLevelAddHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
-					Path:    "/delete",
+					Method:  http.MethodGet,
+					Path:    "/deleteMemberLevel",
 					Handler: memberlevel.MemberLevelDeleteHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
-					Path:    "/list",
+					Method:  http.MethodGet,
+					Path:    "/queryMemberLevelList",
 					Handler: memberlevel.MemberLevelListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/update",
+					Path:    "/updateMemberLevel",
 					Handler: memberlevel.MemberLevelUpdateHandler(serverCtx),
 				},
 			}...,

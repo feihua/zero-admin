@@ -1,0 +1,61 @@
+###用户登录
+POST {{host}}/api/sys/user/login
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.token);
+%}
+
+### 添加会员等级
+POST {{host}}/api/member/level/addMemberLevel
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "test",
+  "growthPoint": 1,
+  "defaultStatus": 1,
+  "freeFreightPoint": 19900,
+  "commentGrowthPoint": 20,
+  "isFreeFreight": 1,
+  "isSignIn": 1,
+  "isComment": 1,
+  "isPromotion": 1,
+  "isMemberPrice": 0,
+  "isBirthday": 0,
+  "note": "remarks"
+}
+
+### 删除会员等级
+GET {{host}}/api/member/level/deleteMemberLevel?ids=[5]
+Authorization: Bearer {{token}}
+
+
+### 修改会员等级
+POST {{host}}/api/member/level/updateMemberLevel
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 5,
+  "name": "test123",
+  "growthPoint": 1,
+  "defaultStatus": 1,
+  "freeFreightPoint": 19900,
+  "commentGrowthPoint": 20,
+  "isFreeFreight": 1,
+  "isSignIn": 1,
+  "isComment": 1,
+  "isPromotion": 1,
+  "isMemberPrice": 0,
+  "isBirthday": 0,
+  "note": "remarks"
+}
+
+### 查询会员等级列表
+GET {{host}}/api/member/level/queryMemberLevelList
+Authorization: Bearer {{token}}

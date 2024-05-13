@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberLevelDeleteLogic 会员等级
+/*
+Author: LiuFeiHua
+Date: 2024/5/13 13:38
+*/
 type MemberLevelDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewMemberLevelDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// MemberLevelDelete 删除会员等级
 func (l *MemberLevelDeleteLogic) MemberLevelDelete(req types.DeleteMemberLevelReq) (*types.DeleteMemberLevelResp, error) {
 	_, err := l.svcCtx.MemberLevelService.MemberLevelDelete(l.ctx, &umsclient.MemberLevelDeleteReq{
 		Ids: req.Ids,

@@ -24,9 +24,9 @@ type (
 		Message string `json:"message"`
 	}
 	ListMemberLevelReq {
-		Current  int64  `json:"current,default=1"`
-		PageSize int64  `json:"pageSize,default=20"`
-		Name     string `json:"name,optional"`
+		Current  int64  `form:"current,default=1"`
+		PageSize int64  `form:"pageSize,default=20"`
+		Name     string `form:"name,optional"`
 	}
 	ListtMemberLevelData {
 		Id                    int64   `json:"id"`
@@ -72,7 +72,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteMemberLevelReq {
-		Ids []int64 `json:"ids"`
+		Ids []int64 `form:"ids"`
 	}
 	DeleteMemberLevelResp {
 		Code    string `json:"code"`
@@ -87,15 +87,19 @@ type (
 	prefix: /api/member/level
 )
 service admin-api {
+	//添加会员等级
 	@handler MemberLevelAdd
-	post /add (addMemberLevelReq) returns (addMemberLevelResp)
-	
+	post /addMemberLevel (addMemberLevelReq) returns (addMemberLevelResp)
+
+	//查询会员等级
 	@handler MemberLevelList
-	post /list (ListMemberLevelReq) returns (ListMemberLevelResp)
-	
+	get /queryMemberLevelList (ListMemberLevelReq) returns (ListMemberLevelResp)
+
+	//更新会员等级
 	@handler MemberLevelUpdate
-	post /update (UpdateMemberLevelReq) returns (UpdateMemberLevelResp)
-	
+	post /updateMemberLevel (UpdateMemberLevelReq) returns (UpdateMemberLevelResp)
+
+	//删除会员等级
 	@handler MemberLevelDelete
-	post /delete (DeleteMemberLevelReq) returns (DeleteMemberLevelResp)
+	get /deleteMemberLevel (DeleteMemberLevelReq) returns (DeleteMemberLevelResp)
 }
