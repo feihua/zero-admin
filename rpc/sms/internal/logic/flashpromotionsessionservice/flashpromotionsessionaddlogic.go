@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionSessionAddLogic 限时购场次
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 13:46
+*/
 type FlashPromotionSessionAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewFlashPromotionSessionAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
+// FlashPromotionSessionAdd 添加限时购场次
 func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(in *smsclient.FlashPromotionSessionAddReq) (*smsclient.FlashPromotionSessionAddResp, error) {
 	StartTime, _ := time.Parse("15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("15:04:05", in.EndTime)

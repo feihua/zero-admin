@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionSessionDeleteLogic 限时购场次
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 13:43
+*/
 type FlashPromotionSessionDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewFlashPromotionSessionDeleteLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
+// FlashPromotionSessionDelete 删除限时购场次
 func (l *FlashPromotionSessionDeleteLogic) FlashPromotionSessionDelete(req types.DeleteFlashPromotionSessionReq) (*types.DeleteFlashPromotionSessionResp, error) {
 	_, err := l.svcCtx.FlashPromotionSessionService.FlashPromotionSessionDelete(l.ctx, &smsclient.FlashPromotionSessionDeleteReq{
 		Ids: req.Ids,

@@ -13,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionSessionByTimeLogic 限时购场次
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 13:47
+*/
 type FlashPromotionSessionByTimeLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -27,6 +32,7 @@ func NewFlashPromotionSessionByTimeLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
+// FlashPromotionSessionByTime 根据时间查询限时购场次
 func (l *FlashPromotionSessionByTimeLogic) FlashPromotionSessionByTime(in *smsclient.FlashPromotionSessionByTimeReq) (*smsclient.FlashPromotionSessionByTimeResp, error) {
 	times := strings.Split(in.CurrentTIme, " ")[1]
 	currentTIme, _ := time.Parse("15:04:05", times)

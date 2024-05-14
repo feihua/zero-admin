@@ -703,11 +703,15 @@ message FlashPromotionSessionListResp {
 
 service FlashPromotionSessionService {
 
-
+  //添加限时购场次
   rpc FlashPromotionSessionAdd(FlashPromotionSessionAddReq) returns(FlashPromotionSessionAddResp);
+  //查询限时购场次
   rpc FlashPromotionSessionList(FlashPromotionSessionListReq) returns(FlashPromotionSessionListResp);
+  //更新限时购场次
   rpc FlashPromotionSessionUpdate(FlashPromotionSessionUpdateReq) returns(FlashPromotionSessionUpdateResp);
+  //删除限时购场次
   rpc FlashPromotionSessionDelete(FlashPromotionSessionDeleteReq) returns(FlashPromotionSessionDeleteResp);
+  //根据时间查询限时购场次
   rpc FlashPromotionSessionByTime(FlashPromotionSessionByTimeReq) returns(FlashPromotionSessionByTimeResp);
 
 

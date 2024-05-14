@@ -63,19 +63,19 @@ type (
 	prefix:     /api/sms/flashpromotionsession
 )
 service admin-api {
-	//
+	//添加限时购场次
 	@handler FlashPromotionSessionAdd
 	post /addFlashPromotionSession (addFlashPromotionSessionReq) returns (addFlashPromotionSessionResp)
 
-	//
+	//查询限时购场次
 	@handler FlashPromotionSessionList
 	get /queryFlashPromotionSessionList (ListFlashPromotionSessionReq) returns (ListFlashPromotionSessionResp)
 
-	//
+	//更新限时购场次
 	@handler FlashPromotionSessionUpdate
 	post /updateFlashPromotionSession (UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp)
 
-	//
+	//删除限时购场次
 	@handler FlashPromotionSessionDelete
 	get /deleteFlashPromotionSession (DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp)
 }

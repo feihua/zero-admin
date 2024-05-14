@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionSessionListLogic 限时购场次
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 13:47
+*/
 type FlashPromotionSessionListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewFlashPromotionSessionListLogic(ctx context.Context, svcCtx *svc.ServiceC
 	}
 }
 
+// FlashPromotionSessionList 查询限时购场次
 func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(in *smsclient.FlashPromotionSessionListReq) (*smsclient.FlashPromotionSessionListResp, error) {
 	q := query.SmsFlashPromotionSession.WithContext(l.ctx)
 
@@ -42,8 +48,8 @@ func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(in *smsclient
 		list = append(list, &smsclient.FlashPromotionSessionListData{
 			Id:         item.ID,
 			Name:       item.Name,
-			StartTime:  item.StartTime.Format("2006-01-02 15:04:05"),
-			EndTime:    item.EndTime.Format("2006-01-02 15:04:05"),
+			StartTime:  item.StartTime.Format("15:04:05"),
+			EndTime:    item.EndTime.Format("15:04:05"),
 			Status:     item.Status,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
 		})
