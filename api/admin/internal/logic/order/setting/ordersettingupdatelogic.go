@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderSettingUpdateLogic 订单设置
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 11:19
+*/
 type OrderSettingUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewOrderSettingUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// OrderSettingUpdate 更新订单设置
 func (l *OrderSettingUpdateLogic) OrderSettingUpdate(req types.UpdateOrderSettingReq) (*types.UpdateOrderSettingResp, error) {
 	_, err := l.svcCtx.OrderSettingService.OrderSettingUpdate(l.ctx, &omsclient.OrderSettingUpdateReq{
 		Id:                  req.Id,

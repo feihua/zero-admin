@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderSettingAddLogic 订单设置
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 11:20
+*/
 type OrderSettingAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewOrderSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *O
 	}
 }
 
+// OrderSettingAdd 添加订单设置
 func (l *OrderSettingAddLogic) OrderSettingAdd(in *omsclient.OrderSettingAddReq) (*omsclient.OrderSettingAddResp, error) {
 	err := query.OmsOrderSetting.WithContext(l.ctx).Create(&model.OmsOrderSetting{
 		FlashOrderOvertime:  in.FinishOvertime,

@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderSettingListLogic 订单设置
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 11:20
+*/
 type OrderSettingListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewOrderSettingListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
+// OrderSettingList 查询订单设置
 func (l *OrderSettingListLogic) OrderSettingList(in *omsclient.OrderSettingListReq) (*omsclient.OrderSettingListResp, error) {
 	q := query.OmsOrderSetting.WithContext(l.ctx)
 

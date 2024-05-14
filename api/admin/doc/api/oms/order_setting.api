@@ -65,19 +65,19 @@ type (
 	prefix:     /api/order/setting
 )
 service admin-api {
-	//
+	//添加订单设置
 	@handler OrderSettingAdd
 	post /addOrderSetting (addOrderSettingReq) returns (addOrderSettingResp)
 
-	//
+	//查询添加订单设置
 	@handler OrderSettingList
 	get /queryOrderSettingList (ListOrderSettingReq) returns (ListOrderSettingResp)
 
-	//
+	//更新添加订单设置
 	@handler OrderSettingUpdate
 	post /updateOrderSetting (UpdateOrderSettingReq) returns (UpdateOrderSettingResp)
 
-	//
+	//删除添加订单设置
 	@handler OrderSettingDelete
 	get /deleteOrderSetting (DeleteOrderSettingReq) returns (DeleteOrderSettingResp)
 }

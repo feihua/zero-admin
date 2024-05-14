@@ -1776,9 +1776,13 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderSettingServiceClient interface {
+	// 添加订单设置
 	OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error)
+	// 查询订单设置
 	OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error)
+	// 更新订单设置
 	OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error)
+	// 删除订单设置
 	OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error)
 }
 
@@ -1830,9 +1834,13 @@ func (c *orderSettingServiceClient) OrderSettingDelete(ctx context.Context, in *
 // All implementations must embed UnimplementedOrderSettingServiceServer
 // for forward compatibility
 type OrderSettingServiceServer interface {
+	// 添加订单设置
 	OrderSettingAdd(context.Context, *OrderSettingAddReq) (*OrderSettingAddResp, error)
+	// 查询订单设置
 	OrderSettingList(context.Context, *OrderSettingListReq) (*OrderSettingListResp, error)
+	// 更新订单设置
 	OrderSettingUpdate(context.Context, *OrderSettingUpdateReq) (*OrderSettingUpdateResp, error)
+	// 删除订单设置
 	OrderSettingDelete(context.Context, *OrderSettingDeleteReq) (*OrderSettingDeleteResp, error)
 	mustEmbedUnimplementedOrderSettingServiceServer()
 }

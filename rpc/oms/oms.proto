@@ -799,8 +799,12 @@ message OrderSettingDeleteResp {
 
 service OrderSettingService {
 
+  //添加订单设置
   rpc OrderSettingAdd(OrderSettingAddReq) returns(OrderSettingAddResp);
+  //查询订单设置
   rpc OrderSettingList(OrderSettingListReq) returns(OrderSettingListResp);
+  //更新订单设置
   rpc OrderSettingUpdate(OrderSettingUpdateReq) returns(OrderSettingUpdateResp);
+  //删除订单设置
   rpc OrderSettingDelete(OrderSettingDeleteReq) returns(OrderSettingDeleteResp);
 }

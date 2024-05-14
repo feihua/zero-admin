@@ -22,21 +22,25 @@ func NewOrderSettingServiceServer(svcCtx *svc.ServiceContext) *OrderSettingServi
 	}
 }
 
+// 添加订单设置
 func (s *OrderSettingServiceServer) OrderSettingAdd(ctx context.Context, in *omsclient.OrderSettingAddReq) (*omsclient.OrderSettingAddResp, error) {
 	l := ordersettingservicelogic.NewOrderSettingAddLogic(ctx, s.svcCtx)
 	return l.OrderSettingAdd(in)
 }
 
+// 查询订单设置
 func (s *OrderSettingServiceServer) OrderSettingList(ctx context.Context, in *omsclient.OrderSettingListReq) (*omsclient.OrderSettingListResp, error) {
 	l := ordersettingservicelogic.NewOrderSettingListLogic(ctx, s.svcCtx)
 	return l.OrderSettingList(in)
 }
 
+// 更新订单设置
 func (s *OrderSettingServiceServer) OrderSettingUpdate(ctx context.Context, in *omsclient.OrderSettingUpdateReq) (*omsclient.OrderSettingUpdateResp, error) {
 	l := ordersettingservicelogic.NewOrderSettingUpdateLogic(ctx, s.svcCtx)
 	return l.OrderSettingUpdate(in)
 }
 
+// 删除订单设置
 func (s *OrderSettingServiceServer) OrderSettingDelete(ctx context.Context, in *omsclient.OrderSettingDeleteReq) (*omsclient.OrderSettingDeleteResp, error) {
 	l := ordersettingservicelogic.NewOrderSettingDeleteLogic(ctx, s.svcCtx)
 	return l.OrderSettingDelete(in)

@@ -102,9 +102,13 @@ type (
 	UpdateOrderStatusByOutTradeNoResp = omsclient.UpdateOrderStatusByOutTradeNoResp
 
 	OrderSettingService interface {
+		// 添加订单设置
 		OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error)
+		// 查询订单设置
 		OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error)
+		// 更新订单设置
 		OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error)
+		// 删除订单设置
 		OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error)
 	}
 
@@ -119,21 +123,25 @@ func NewOrderSettingService(cli zrpc.Client) OrderSettingService {
 	}
 }
 
+// 添加订单设置
 func (m *defaultOrderSettingService) OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error) {
 	client := omsclient.NewOrderSettingServiceClient(m.cli.Conn())
 	return client.OrderSettingAdd(ctx, in, opts...)
 }
 
+// 查询订单设置
 func (m *defaultOrderSettingService) OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error) {
 	client := omsclient.NewOrderSettingServiceClient(m.cli.Conn())
 	return client.OrderSettingList(ctx, in, opts...)
 }
 
+// 更新订单设置
 func (m *defaultOrderSettingService) OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error) {
 	client := omsclient.NewOrderSettingServiceClient(m.cli.Conn())
 	return client.OrderSettingUpdate(ctx, in, opts...)
 }
 
+// 删除订单设置
 func (m *defaultOrderSettingService) OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error) {
 	client := omsclient.NewOrderSettingServiceClient(m.cli.Conn())
 	return client.OrderSettingDelete(ctx, in, opts...)

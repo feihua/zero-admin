@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderSettingDeleteLogic 订单设置
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 11:18
+*/
 type OrderSettingDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewOrderSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// OrderSettingDelete 删除订单设置
 func (l *OrderSettingDeleteLogic) OrderSettingDelete(req types.DeleteOrderSettingReq) (*types.DeleteOrderSettingResp, error) {
 	_, err := l.svcCtx.OrderSettingService.OrderSettingDelete(l.ctx, &omsclient.OrderSettingDeleteReq{
 		Ids: req.Ids,

@@ -3005,7 +3005,7 @@ type AddFlashPromotionLogResp struct {
 }
 
 type AddFlashPromotionReq struct {
-	Title     string `json:"title"`
+	Title     string `json:"title"`     //活动标题
 	StartDate string `json:"startDate"` // 开始日期
 	EndDate   string `json:"endDate"`   // 结束日期
 	Status    int32  `json:"status"`    // 上下线状态
