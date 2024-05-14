@@ -1,4 +1,4 @@
-package logic
+package homerecommendproduct
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeRecommendProductDeleteLogic 人气推荐商品
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 9:39
+*/
 type HomeRecommendProductDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewHomeRecommendProductDeleteLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
+// HomeRecommendProductDelete 删除人气推荐商品
 func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(req types.DeleteHomeRecommendProductReq) (*types.DeleteHomeRecommendProductResp, error) {
 	_, err := l.svcCtx.HomeRecommendProductService.HomeRecommendProductDelete(l.ctx, &smsclient.HomeRecommendProductDeleteReq{
 		Ids: req.Ids,

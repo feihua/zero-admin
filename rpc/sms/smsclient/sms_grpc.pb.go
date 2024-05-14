@@ -2508,19 +2508,26 @@ var HomeBrandService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	HomeNewProductService_HomeNewProductAdd_FullMethodName    = "/smsclient.HomeNewProductService/HomeNewProductAdd"
-	HomeNewProductService_HomeNewProductList_FullMethodName   = "/smsclient.HomeNewProductService/HomeNewProductList"
-	HomeNewProductService_HomeNewProductUpdate_FullMethodName = "/smsclient.HomeNewProductService/HomeNewProductUpdate"
-	HomeNewProductService_HomeNewProductDelete_FullMethodName = "/smsclient.HomeNewProductService/HomeNewProductDelete"
+	HomeNewProductService_HomeNewProductAdd_FullMethodName      = "/smsclient.HomeNewProductService/HomeNewProductAdd"
+	HomeNewProductService_HomeNewProductList_FullMethodName     = "/smsclient.HomeNewProductService/HomeNewProductList"
+	HomeNewProductService_UpdateNewProductSort_FullMethodName   = "/smsclient.HomeNewProductService/UpdateNewProductSort"
+	HomeNewProductService_UpdateNewProductStatus_FullMethodName = "/smsclient.HomeNewProductService/UpdateNewProductStatus"
+	HomeNewProductService_HomeNewProductDelete_FullMethodName   = "/smsclient.HomeNewProductService/HomeNewProductDelete"
 )
 
 // HomeNewProductServiceClient is the client API for HomeNewProductService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HomeNewProductServiceClient interface {
+	// 添加首页新品
 	HomeNewProductAdd(ctx context.Context, in *HomeNewProductAddReq, opts ...grpc.CallOption) (*HomeNewProductAddResp, error)
+	// 查询首页新品
 	HomeNewProductList(ctx context.Context, in *HomeNewProductListReq, opts ...grpc.CallOption) (*HomeNewProductListResp, error)
-	HomeNewProductUpdate(ctx context.Context, in *HomeNewProductUpdateReq, opts ...grpc.CallOption) (*HomeNewProductUpdateResp, error)
+	// 修改首页新品排序
+	UpdateNewProductSort(ctx context.Context, in *UpdateNewProductSortReq, opts ...grpc.CallOption) (*UpdateNewProductSortResp, error)
+	// 批量修改首页新品状态
+	UpdateNewProductStatus(ctx context.Context, in *UpdateNewProductStatusReq, opts ...grpc.CallOption) (*UpdateNewProductStatusResp, error)
+	// 删除首页新品
 	HomeNewProductDelete(ctx context.Context, in *HomeNewProductDeleteReq, opts ...grpc.CallOption) (*HomeNewProductDeleteResp, error)
 }
 
@@ -2550,9 +2557,18 @@ func (c *homeNewProductServiceClient) HomeNewProductList(ctx context.Context, in
 	return out, nil
 }
 
-func (c *homeNewProductServiceClient) HomeNewProductUpdate(ctx context.Context, in *HomeNewProductUpdateReq, opts ...grpc.CallOption) (*HomeNewProductUpdateResp, error) {
-	out := new(HomeNewProductUpdateResp)
-	err := c.cc.Invoke(ctx, HomeNewProductService_HomeNewProductUpdate_FullMethodName, in, out, opts...)
+func (c *homeNewProductServiceClient) UpdateNewProductSort(ctx context.Context, in *UpdateNewProductSortReq, opts ...grpc.CallOption) (*UpdateNewProductSortResp, error) {
+	out := new(UpdateNewProductSortResp)
+	err := c.cc.Invoke(ctx, HomeNewProductService_UpdateNewProductSort_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeNewProductServiceClient) UpdateNewProductStatus(ctx context.Context, in *UpdateNewProductStatusReq, opts ...grpc.CallOption) (*UpdateNewProductStatusResp, error) {
+	out := new(UpdateNewProductStatusResp)
+	err := c.cc.Invoke(ctx, HomeNewProductService_UpdateNewProductStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2572,9 +2588,15 @@ func (c *homeNewProductServiceClient) HomeNewProductDelete(ctx context.Context, 
 // All implementations must embed UnimplementedHomeNewProductServiceServer
 // for forward compatibility
 type HomeNewProductServiceServer interface {
+	// 添加首页新品
 	HomeNewProductAdd(context.Context, *HomeNewProductAddReq) (*HomeNewProductAddResp, error)
+	// 查询首页新品
 	HomeNewProductList(context.Context, *HomeNewProductListReq) (*HomeNewProductListResp, error)
-	HomeNewProductUpdate(context.Context, *HomeNewProductUpdateReq) (*HomeNewProductUpdateResp, error)
+	// 修改首页新品排序
+	UpdateNewProductSort(context.Context, *UpdateNewProductSortReq) (*UpdateNewProductSortResp, error)
+	// 批量修改首页新品状态
+	UpdateNewProductStatus(context.Context, *UpdateNewProductStatusReq) (*UpdateNewProductStatusResp, error)
+	// 删除首页新品
 	HomeNewProductDelete(context.Context, *HomeNewProductDeleteReq) (*HomeNewProductDeleteResp, error)
 	mustEmbedUnimplementedHomeNewProductServiceServer()
 }
@@ -2589,8 +2611,11 @@ func (UnimplementedHomeNewProductServiceServer) HomeNewProductAdd(context.Contex
 func (UnimplementedHomeNewProductServiceServer) HomeNewProductList(context.Context, *HomeNewProductListReq) (*HomeNewProductListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductList not implemented")
 }
-func (UnimplementedHomeNewProductServiceServer) HomeNewProductUpdate(context.Context, *HomeNewProductUpdateReq) (*HomeNewProductUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductUpdate not implemented")
+func (UnimplementedHomeNewProductServiceServer) UpdateNewProductSort(context.Context, *UpdateNewProductSortReq) (*UpdateNewProductSortResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNewProductSort not implemented")
+}
+func (UnimplementedHomeNewProductServiceServer) UpdateNewProductStatus(context.Context, *UpdateNewProductStatusReq) (*UpdateNewProductStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNewProductStatus not implemented")
 }
 func (UnimplementedHomeNewProductServiceServer) HomeNewProductDelete(context.Context, *HomeNewProductDeleteReq) (*HomeNewProductDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeNewProductDelete not implemented")
@@ -2644,20 +2669,38 @@ func _HomeNewProductService_HomeNewProductList_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HomeNewProductService_HomeNewProductUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeNewProductUpdateReq)
+func _HomeNewProductService_UpdateNewProductSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNewProductSortReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HomeNewProductServiceServer).HomeNewProductUpdate(ctx, in)
+		return srv.(HomeNewProductServiceServer).UpdateNewProductSort(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HomeNewProductService_HomeNewProductUpdate_FullMethodName,
+		FullMethod: HomeNewProductService_UpdateNewProductSort_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HomeNewProductServiceServer).HomeNewProductUpdate(ctx, req.(*HomeNewProductUpdateReq))
+		return srv.(HomeNewProductServiceServer).UpdateNewProductSort(ctx, req.(*UpdateNewProductSortReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeNewProductService_UpdateNewProductStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNewProductStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeNewProductServiceServer).UpdateNewProductStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HomeNewProductService_UpdateNewProductStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeNewProductServiceServer).UpdateNewProductStatus(ctx, req.(*UpdateNewProductStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2696,8 +2739,12 @@ var HomeNewProductService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HomeNewProductService_HomeNewProductList_Handler,
 		},
 		{
-			MethodName: "HomeNewProductUpdate",
-			Handler:    _HomeNewProductService_HomeNewProductUpdate_Handler,
+			MethodName: "UpdateNewProductSort",
+			Handler:    _HomeNewProductService_UpdateNewProductSort_Handler,
+		},
+		{
+			MethodName: "UpdateNewProductStatus",
+			Handler:    _HomeNewProductService_UpdateNewProductStatus_Handler,
 		},
 		{
 			MethodName: "HomeNewProductDelete",
@@ -2709,19 +2756,26 @@ var HomeNewProductService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	HomeRecommendProductService_HomeRecommendProductAdd_FullMethodName    = "/smsclient.HomeRecommendProductService/HomeRecommendProductAdd"
-	HomeRecommendProductService_HomeRecommendProductList_FullMethodName   = "/smsclient.HomeRecommendProductService/HomeRecommendProductList"
-	HomeRecommendProductService_HomeRecommendProductUpdate_FullMethodName = "/smsclient.HomeRecommendProductService/HomeRecommendProductUpdate"
-	HomeRecommendProductService_HomeRecommendProductDelete_FullMethodName = "/smsclient.HomeRecommendProductService/HomeRecommendProductDelete"
+	HomeRecommendProductService_HomeRecommendProductAdd_FullMethodName      = "/smsclient.HomeRecommendProductService/HomeRecommendProductAdd"
+	HomeRecommendProductService_HomeRecommendProductList_FullMethodName     = "/smsclient.HomeRecommendProductService/HomeRecommendProductList"
+	HomeRecommendProductService_UpdateRecommendProductSort_FullMethodName   = "/smsclient.HomeRecommendProductService/UpdateRecommendProductSort"
+	HomeRecommendProductService_UpdateRecommendProductStatus_FullMethodName = "/smsclient.HomeRecommendProductService/UpdateRecommendProductStatus"
+	HomeRecommendProductService_HomeRecommendProductDelete_FullMethodName   = "/smsclient.HomeRecommendProductService/HomeRecommendProductDelete"
 )
 
 // HomeRecommendProductServiceClient is the client API for HomeRecommendProductService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HomeRecommendProductServiceClient interface {
+	// 添加人气推荐
 	HomeRecommendProductAdd(ctx context.Context, in *HomeRecommendProductAddReq, opts ...grpc.CallOption) (*HomeRecommendProductAddResp, error)
+	// 查询人气推荐
 	HomeRecommendProductList(ctx context.Context, in *HomeRecommendProductListReq, opts ...grpc.CallOption) (*HomeRecommendProductListResp, error)
-	HomeRecommendProductUpdate(ctx context.Context, in *HomeRecommendProductUpdateReq, opts ...grpc.CallOption) (*HomeRecommendProductUpdateResp, error)
+	// 修改推荐排序
+	UpdateRecommendProductSort(ctx context.Context, in *UpdateRecommendProductSortReq, opts ...grpc.CallOption) (*UpdateRecommendProductSortResp, error)
+	// 批量修改推荐状态
+	UpdateRecommendProductStatus(ctx context.Context, in *UpdateRecommendProductStatusReq, opts ...grpc.CallOption) (*UpdateRecommendProductStatusResp, error)
+	// 删除人气推荐
 	HomeRecommendProductDelete(ctx context.Context, in *HomeRecommendProductDeleteReq, opts ...grpc.CallOption) (*HomeRecommendProductDeleteResp, error)
 }
 
@@ -2751,9 +2805,18 @@ func (c *homeRecommendProductServiceClient) HomeRecommendProductList(ctx context
 	return out, nil
 }
 
-func (c *homeRecommendProductServiceClient) HomeRecommendProductUpdate(ctx context.Context, in *HomeRecommendProductUpdateReq, opts ...grpc.CallOption) (*HomeRecommendProductUpdateResp, error) {
-	out := new(HomeRecommendProductUpdateResp)
-	err := c.cc.Invoke(ctx, HomeRecommendProductService_HomeRecommendProductUpdate_FullMethodName, in, out, opts...)
+func (c *homeRecommendProductServiceClient) UpdateRecommendProductSort(ctx context.Context, in *UpdateRecommendProductSortReq, opts ...grpc.CallOption) (*UpdateRecommendProductSortResp, error) {
+	out := new(UpdateRecommendProductSortResp)
+	err := c.cc.Invoke(ctx, HomeRecommendProductService_UpdateRecommendProductSort_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeRecommendProductServiceClient) UpdateRecommendProductStatus(ctx context.Context, in *UpdateRecommendProductStatusReq, opts ...grpc.CallOption) (*UpdateRecommendProductStatusResp, error) {
+	out := new(UpdateRecommendProductStatusResp)
+	err := c.cc.Invoke(ctx, HomeRecommendProductService_UpdateRecommendProductStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2773,9 +2836,15 @@ func (c *homeRecommendProductServiceClient) HomeRecommendProductDelete(ctx conte
 // All implementations must embed UnimplementedHomeRecommendProductServiceServer
 // for forward compatibility
 type HomeRecommendProductServiceServer interface {
+	// 添加人气推荐
 	HomeRecommendProductAdd(context.Context, *HomeRecommendProductAddReq) (*HomeRecommendProductAddResp, error)
+	// 查询人气推荐
 	HomeRecommendProductList(context.Context, *HomeRecommendProductListReq) (*HomeRecommendProductListResp, error)
-	HomeRecommendProductUpdate(context.Context, *HomeRecommendProductUpdateReq) (*HomeRecommendProductUpdateResp, error)
+	// 修改推荐排序
+	UpdateRecommendProductSort(context.Context, *UpdateRecommendProductSortReq) (*UpdateRecommendProductSortResp, error)
+	// 批量修改推荐状态
+	UpdateRecommendProductStatus(context.Context, *UpdateRecommendProductStatusReq) (*UpdateRecommendProductStatusResp, error)
+	// 删除人气推荐
 	HomeRecommendProductDelete(context.Context, *HomeRecommendProductDeleteReq) (*HomeRecommendProductDeleteResp, error)
 	mustEmbedUnimplementedHomeRecommendProductServiceServer()
 }
@@ -2790,8 +2859,11 @@ func (UnimplementedHomeRecommendProductServiceServer) HomeRecommendProductAdd(co
 func (UnimplementedHomeRecommendProductServiceServer) HomeRecommendProductList(context.Context, *HomeRecommendProductListReq) (*HomeRecommendProductListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductList not implemented")
 }
-func (UnimplementedHomeRecommendProductServiceServer) HomeRecommendProductUpdate(context.Context, *HomeRecommendProductUpdateReq) (*HomeRecommendProductUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductUpdate not implemented")
+func (UnimplementedHomeRecommendProductServiceServer) UpdateRecommendProductSort(context.Context, *UpdateRecommendProductSortReq) (*UpdateRecommendProductSortResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRecommendProductSort not implemented")
+}
+func (UnimplementedHomeRecommendProductServiceServer) UpdateRecommendProductStatus(context.Context, *UpdateRecommendProductStatusReq) (*UpdateRecommendProductStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRecommendProductStatus not implemented")
 }
 func (UnimplementedHomeRecommendProductServiceServer) HomeRecommendProductDelete(context.Context, *HomeRecommendProductDeleteReq) (*HomeRecommendProductDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendProductDelete not implemented")
@@ -2846,20 +2918,38 @@ func _HomeRecommendProductService_HomeRecommendProductList_Handler(srv interface
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HomeRecommendProductService_HomeRecommendProductUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeRecommendProductUpdateReq)
+func _HomeRecommendProductService_UpdateRecommendProductSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRecommendProductSortReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductUpdate(ctx, in)
+		return srv.(HomeRecommendProductServiceServer).UpdateRecommendProductSort(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HomeRecommendProductService_HomeRecommendProductUpdate_FullMethodName,
+		FullMethod: HomeRecommendProductService_UpdateRecommendProductSort_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HomeRecommendProductServiceServer).HomeRecommendProductUpdate(ctx, req.(*HomeRecommendProductUpdateReq))
+		return srv.(HomeRecommendProductServiceServer).UpdateRecommendProductSort(ctx, req.(*UpdateRecommendProductSortReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeRecommendProductService_UpdateRecommendProductStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRecommendProductStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeRecommendProductServiceServer).UpdateRecommendProductStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HomeRecommendProductService_UpdateRecommendProductStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeRecommendProductServiceServer).UpdateRecommendProductStatus(ctx, req.(*UpdateRecommendProductStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2898,8 +2988,12 @@ var HomeRecommendProductService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HomeRecommendProductService_HomeRecommendProductList_Handler,
 		},
 		{
-			MethodName: "HomeRecommendProductUpdate",
-			Handler:    _HomeRecommendProductService_HomeRecommendProductUpdate_Handler,
+			MethodName: "UpdateRecommendProductSort",
+			Handler:    _HomeRecommendProductService_UpdateRecommendProductSort_Handler,
+		},
+		{
+			MethodName: "UpdateRecommendProductStatus",
+			Handler:    _HomeRecommendProductService_UpdateRecommendProductStatus_Handler,
 		},
 		{
 			MethodName: "HomeRecommendProductDelete",
@@ -2911,19 +3005,26 @@ var HomeRecommendProductService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	HomeRecommendSubjectService_HomeRecommendSubjectAdd_FullMethodName    = "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectAdd"
-	HomeRecommendSubjectService_HomeRecommendSubjectList_FullMethodName   = "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectList"
-	HomeRecommendSubjectService_HomeRecommendSubjectUpdate_FullMethodName = "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectUpdate"
-	HomeRecommendSubjectService_HomeRecommendSubjectDelete_FullMethodName = "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectDelete"
+	HomeRecommendSubjectService_HomeRecommendSubjectAdd_FullMethodName      = "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectAdd"
+	HomeRecommendSubjectService_HomeRecommendSubjectList_FullMethodName     = "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectList"
+	HomeRecommendSubjectService_UpdateRecommendSubjectSort_FullMethodName   = "/smsclient.HomeRecommendSubjectService/UpdateRecommendSubjectSort"
+	HomeRecommendSubjectService_UpdateRecommendSubjectStatus_FullMethodName = "/smsclient.HomeRecommendSubjectService/UpdateRecommendSubjectStatus"
+	HomeRecommendSubjectService_HomeRecommendSubjectDelete_FullMethodName   = "/smsclient.HomeRecommendSubjectService/HomeRecommendSubjectDelete"
 )
 
 // HomeRecommendSubjectServiceClient is the client API for HomeRecommendSubjectService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HomeRecommendSubjectServiceClient interface {
+	// 添加首页专题推荐
 	HomeRecommendSubjectAdd(ctx context.Context, in *HomeRecommendSubjectAddReq, opts ...grpc.CallOption) (*HomeRecommendSubjectAddResp, error)
+	// 查询首页专题推荐
 	HomeRecommendSubjectList(ctx context.Context, in *HomeRecommendSubjectListReq, opts ...grpc.CallOption) (*HomeRecommendSubjectListResp, error)
-	HomeRecommendSubjectUpdate(ctx context.Context, in *HomeRecommendSubjectUpdateReq, opts ...grpc.CallOption) (*HomeRecommendSubjectUpdateResp, error)
+	// 修改专题推荐排序
+	UpdateRecommendSubjectSort(ctx context.Context, in *UpdateRecommendSubjectSortReq, opts ...grpc.CallOption) (*UpdateRecommendSubjectSortResp, error)
+	// 批量修改专题推荐状态
+	UpdateRecommendSubjectStatus(ctx context.Context, in *UpdateRecommendSubjectStatusReq, opts ...grpc.CallOption) (*UpdateRecommendSubjectStatusResp, error)
+	// 删除首页专题推荐
 	HomeRecommendSubjectDelete(ctx context.Context, in *HomeRecommendSubjectDeleteReq, opts ...grpc.CallOption) (*HomeRecommendSubjectDeleteResp, error)
 }
 
@@ -2953,9 +3054,18 @@ func (c *homeRecommendSubjectServiceClient) HomeRecommendSubjectList(ctx context
 	return out, nil
 }
 
-func (c *homeRecommendSubjectServiceClient) HomeRecommendSubjectUpdate(ctx context.Context, in *HomeRecommendSubjectUpdateReq, opts ...grpc.CallOption) (*HomeRecommendSubjectUpdateResp, error) {
-	out := new(HomeRecommendSubjectUpdateResp)
-	err := c.cc.Invoke(ctx, HomeRecommendSubjectService_HomeRecommendSubjectUpdate_FullMethodName, in, out, opts...)
+func (c *homeRecommendSubjectServiceClient) UpdateRecommendSubjectSort(ctx context.Context, in *UpdateRecommendSubjectSortReq, opts ...grpc.CallOption) (*UpdateRecommendSubjectSortResp, error) {
+	out := new(UpdateRecommendSubjectSortResp)
+	err := c.cc.Invoke(ctx, HomeRecommendSubjectService_UpdateRecommendSubjectSort_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *homeRecommendSubjectServiceClient) UpdateRecommendSubjectStatus(ctx context.Context, in *UpdateRecommendSubjectStatusReq, opts ...grpc.CallOption) (*UpdateRecommendSubjectStatusResp, error) {
+	out := new(UpdateRecommendSubjectStatusResp)
+	err := c.cc.Invoke(ctx, HomeRecommendSubjectService_UpdateRecommendSubjectStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2975,9 +3085,15 @@ func (c *homeRecommendSubjectServiceClient) HomeRecommendSubjectDelete(ctx conte
 // All implementations must embed UnimplementedHomeRecommendSubjectServiceServer
 // for forward compatibility
 type HomeRecommendSubjectServiceServer interface {
+	// 添加首页专题推荐
 	HomeRecommendSubjectAdd(context.Context, *HomeRecommendSubjectAddReq) (*HomeRecommendSubjectAddResp, error)
+	// 查询首页专题推荐
 	HomeRecommendSubjectList(context.Context, *HomeRecommendSubjectListReq) (*HomeRecommendSubjectListResp, error)
-	HomeRecommendSubjectUpdate(context.Context, *HomeRecommendSubjectUpdateReq) (*HomeRecommendSubjectUpdateResp, error)
+	// 修改专题推荐排序
+	UpdateRecommendSubjectSort(context.Context, *UpdateRecommendSubjectSortReq) (*UpdateRecommendSubjectSortResp, error)
+	// 批量修改专题推荐状态
+	UpdateRecommendSubjectStatus(context.Context, *UpdateRecommendSubjectStatusReq) (*UpdateRecommendSubjectStatusResp, error)
+	// 删除首页专题推荐
 	HomeRecommendSubjectDelete(context.Context, *HomeRecommendSubjectDeleteReq) (*HomeRecommendSubjectDeleteResp, error)
 	mustEmbedUnimplementedHomeRecommendSubjectServiceServer()
 }
@@ -2992,8 +3108,11 @@ func (UnimplementedHomeRecommendSubjectServiceServer) HomeRecommendSubjectAdd(co
 func (UnimplementedHomeRecommendSubjectServiceServer) HomeRecommendSubjectList(context.Context, *HomeRecommendSubjectListReq) (*HomeRecommendSubjectListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendSubjectList not implemented")
 }
-func (UnimplementedHomeRecommendSubjectServiceServer) HomeRecommendSubjectUpdate(context.Context, *HomeRecommendSubjectUpdateReq) (*HomeRecommendSubjectUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendSubjectUpdate not implemented")
+func (UnimplementedHomeRecommendSubjectServiceServer) UpdateRecommendSubjectSort(context.Context, *UpdateRecommendSubjectSortReq) (*UpdateRecommendSubjectSortResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRecommendSubjectSort not implemented")
+}
+func (UnimplementedHomeRecommendSubjectServiceServer) UpdateRecommendSubjectStatus(context.Context, *UpdateRecommendSubjectStatusReq) (*UpdateRecommendSubjectStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRecommendSubjectStatus not implemented")
 }
 func (UnimplementedHomeRecommendSubjectServiceServer) HomeRecommendSubjectDelete(context.Context, *HomeRecommendSubjectDeleteReq) (*HomeRecommendSubjectDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HomeRecommendSubjectDelete not implemented")
@@ -3048,20 +3167,38 @@ func _HomeRecommendSubjectService_HomeRecommendSubjectList_Handler(srv interface
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HomeRecommendSubjectService_HomeRecommendSubjectUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HomeRecommendSubjectUpdateReq)
+func _HomeRecommendSubjectService_UpdateRecommendSubjectSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRecommendSubjectSortReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectUpdate(ctx, in)
+		return srv.(HomeRecommendSubjectServiceServer).UpdateRecommendSubjectSort(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HomeRecommendSubjectService_HomeRecommendSubjectUpdate_FullMethodName,
+		FullMethod: HomeRecommendSubjectService_UpdateRecommendSubjectSort_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HomeRecommendSubjectServiceServer).HomeRecommendSubjectUpdate(ctx, req.(*HomeRecommendSubjectUpdateReq))
+		return srv.(HomeRecommendSubjectServiceServer).UpdateRecommendSubjectSort(ctx, req.(*UpdateRecommendSubjectSortReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HomeRecommendSubjectService_UpdateRecommendSubjectStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRecommendSubjectStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeRecommendSubjectServiceServer).UpdateRecommendSubjectStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HomeRecommendSubjectService_UpdateRecommendSubjectStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeRecommendSubjectServiceServer).UpdateRecommendSubjectStatus(ctx, req.(*UpdateRecommendSubjectStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3100,8 +3237,12 @@ var HomeRecommendSubjectService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HomeRecommendSubjectService_HomeRecommendSubjectList_Handler,
 		},
 		{
-			MethodName: "HomeRecommendSubjectUpdate",
-			Handler:    _HomeRecommendSubjectService_HomeRecommendSubjectUpdate_Handler,
+			MethodName: "UpdateRecommendSubjectSort",
+			Handler:    _HomeRecommendSubjectService_UpdateRecommendSubjectSort_Handler,
+		},
+		{
+			MethodName: "UpdateRecommendSubjectStatus",
+			Handler:    _HomeRecommendSubjectService_UpdateRecommendSubjectStatus_Handler,
 		},
 		{
 			MethodName: "HomeRecommendSubjectDelete",

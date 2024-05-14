@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeNewProductListLogic 首页新品
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 9:28
+*/
 type HomeNewProductListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewHomeNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// HomeNewProductList 查询首页新品
 func (l *HomeNewProductListLogic) HomeNewProductList(in *smsclient.HomeNewProductListReq) (*smsclient.HomeNewProductListResp, error) {
 	q := query.SmsHomeNewProduct.WithContext(l.ctx)
 	if len(in.ProductName) > 0 {

@@ -22,21 +22,31 @@ func NewHomeNewProductServiceServer(svcCtx *svc.ServiceContext) *HomeNewProductS
 	}
 }
 
+// 添加首页新品
 func (s *HomeNewProductServiceServer) HomeNewProductAdd(ctx context.Context, in *smsclient.HomeNewProductAddReq) (*smsclient.HomeNewProductAddResp, error) {
 	l := homenewproductservicelogic.NewHomeNewProductAddLogic(ctx, s.svcCtx)
 	return l.HomeNewProductAdd(in)
 }
 
+// 查询首页新品
 func (s *HomeNewProductServiceServer) HomeNewProductList(ctx context.Context, in *smsclient.HomeNewProductListReq) (*smsclient.HomeNewProductListResp, error) {
 	l := homenewproductservicelogic.NewHomeNewProductListLogic(ctx, s.svcCtx)
 	return l.HomeNewProductList(in)
 }
 
-func (s *HomeNewProductServiceServer) HomeNewProductUpdate(ctx context.Context, in *smsclient.HomeNewProductUpdateReq) (*smsclient.HomeNewProductUpdateResp, error) {
-	l := homenewproductservicelogic.NewHomeNewProductUpdateLogic(ctx, s.svcCtx)
-	return l.HomeNewProductUpdate(in)
+// 修改首页新品排序
+func (s *HomeNewProductServiceServer) UpdateNewProductSort(ctx context.Context, in *smsclient.UpdateNewProductSortReq) (*smsclient.UpdateNewProductSortResp, error) {
+	l := homenewproductservicelogic.NewUpdateNewProductSortLogic(ctx, s.svcCtx)
+	return l.UpdateNewProductSort(in)
 }
 
+// 批量修改首页新品状态
+func (s *HomeNewProductServiceServer) UpdateNewProductStatus(ctx context.Context, in *smsclient.UpdateNewProductStatusReq) (*smsclient.UpdateNewProductStatusResp, error) {
+	l := homenewproductservicelogic.NewUpdateNewProductStatusLogic(ctx, s.svcCtx)
+	return l.UpdateNewProductStatus(in)
+}
+
+// 删除首页新品
 func (s *HomeNewProductServiceServer) HomeNewProductDelete(ctx context.Context, in *smsclient.HomeNewProductDeleteReq) (*smsclient.HomeNewProductDeleteResp, error) {
 	l := homenewproductservicelogic.NewHomeNewProductDeleteLogic(ctx, s.svcCtx)
 	return l.HomeNewProductDelete(in)

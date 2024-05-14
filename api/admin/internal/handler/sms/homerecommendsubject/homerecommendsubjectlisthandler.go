@@ -1,9 +1,9 @@
-package handler
+package homerecommendsubject
 
 import (
+	"github.com/feihua/zero-admin/api/admin/internal/logic/sms/homerecommendsubject"
 	"net/http"
 
-	"github.com/feihua/zero-admin/api/admin/internal/logic/sms/homerecommendsubject"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 
@@ -18,7 +18,7 @@ func HomeRecommendSubjectListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewHomeRecommendSubjectListLogic(r.Context(), ctx)
+		l := homerecommendsubject.NewHomeRecommendSubjectListLogic(r.Context(), ctx)
 		resp, err := l.HomeRecommendSubjectList(req)
 		if err != nil {
 			httpx.Error(w, err)

@@ -125,8 +125,6 @@ type (
 	HomeNewProductListData                        = smsclient.HomeNewProductListData
 	HomeNewProductListReq                         = smsclient.HomeNewProductListReq
 	HomeNewProductListResp                        = smsclient.HomeNewProductListResp
-	HomeNewProductUpdateReq                       = smsclient.HomeNewProductUpdateReq
-	HomeNewProductUpdateResp                      = smsclient.HomeNewProductUpdateResp
 	HomeRecommendProductAddData                   = smsclient.HomeRecommendProductAddData
 	HomeRecommendProductAddReq                    = smsclient.HomeRecommendProductAddReq
 	HomeRecommendProductAddResp                   = smsclient.HomeRecommendProductAddResp
@@ -135,8 +133,6 @@ type (
 	HomeRecommendProductListData                  = smsclient.HomeRecommendProductListData
 	HomeRecommendProductListReq                   = smsclient.HomeRecommendProductListReq
 	HomeRecommendProductListResp                  = smsclient.HomeRecommendProductListResp
-	HomeRecommendProductUpdateReq                 = smsclient.HomeRecommendProductUpdateReq
-	HomeRecommendProductUpdateResp                = smsclient.HomeRecommendProductUpdateResp
 	HomeRecommendSubjectAddData                   = smsclient.HomeRecommendSubjectAddData
 	HomeRecommendSubjectAddReq                    = smsclient.HomeRecommendSubjectAddReq
 	HomeRecommendSubjectAddResp                   = smsclient.HomeRecommendSubjectAddResp
@@ -145,8 +141,6 @@ type (
 	HomeRecommendSubjectListData                  = smsclient.HomeRecommendSubjectListData
 	HomeRecommendSubjectListReq                   = smsclient.HomeRecommendSubjectListReq
 	HomeRecommendSubjectListResp                  = smsclient.HomeRecommendSubjectListResp
-	HomeRecommendSubjectUpdateReq                 = smsclient.HomeRecommendSubjectUpdateReq
-	HomeRecommendSubjectUpdateResp                = smsclient.HomeRecommendSubjectUpdateResp
 	QueryFlashPromotionByProductReq               = smsclient.QueryFlashPromotionByProductReq
 	QueryFlashPromotionByProductResp              = smsclient.QueryFlashPromotionByProductResp
 	QueryMemberCouponListReq                      = smsclient.QueryMemberCouponListReq
@@ -158,11 +152,29 @@ type (
 	UpdateHomeBrandSortResp                       = smsclient.UpdateHomeBrandSortResp
 	UpdateHomeBrandStatusReq                      = smsclient.UpdateHomeBrandStatusReq
 	UpdateHomeBrandStatusResp                     = smsclient.UpdateHomeBrandStatusResp
+	UpdateNewProductSortReq                       = smsclient.UpdateNewProductSortReq
+	UpdateNewProductSortResp                      = smsclient.UpdateNewProductSortResp
+	UpdateNewProductStatusReq                     = smsclient.UpdateNewProductStatusReq
+	UpdateNewProductStatusResp                    = smsclient.UpdateNewProductStatusResp
+	UpdateRecommendProductSortReq                 = smsclient.UpdateRecommendProductSortReq
+	UpdateRecommendProductSortResp                = smsclient.UpdateRecommendProductSortResp
+	UpdateRecommendProductStatusReq               = smsclient.UpdateRecommendProductStatusReq
+	UpdateRecommendProductStatusResp              = smsclient.UpdateRecommendProductStatusResp
+	UpdateRecommendSubjectSortReq                 = smsclient.UpdateRecommendSubjectSortReq
+	UpdateRecommendSubjectSortResp                = smsclient.UpdateRecommendSubjectSortResp
+	UpdateRecommendSubjectStatusReq               = smsclient.UpdateRecommendSubjectStatusReq
+	UpdateRecommendSubjectStatusResp              = smsclient.UpdateRecommendSubjectStatusResp
 
 	HomeNewProductService interface {
+		// 添加首页新品
 		HomeNewProductAdd(ctx context.Context, in *HomeNewProductAddReq, opts ...grpc.CallOption) (*HomeNewProductAddResp, error)
+		// 查询首页新品
 		HomeNewProductList(ctx context.Context, in *HomeNewProductListReq, opts ...grpc.CallOption) (*HomeNewProductListResp, error)
-		HomeNewProductUpdate(ctx context.Context, in *HomeNewProductUpdateReq, opts ...grpc.CallOption) (*HomeNewProductUpdateResp, error)
+		// 修改首页新品排序
+		UpdateNewProductSort(ctx context.Context, in *UpdateNewProductSortReq, opts ...grpc.CallOption) (*UpdateNewProductSortResp, error)
+		// 批量修改首页新品状态
+		UpdateNewProductStatus(ctx context.Context, in *UpdateNewProductStatusReq, opts ...grpc.CallOption) (*UpdateNewProductStatusResp, error)
+		// 删除首页新品
 		HomeNewProductDelete(ctx context.Context, in *HomeNewProductDeleteReq, opts ...grpc.CallOption) (*HomeNewProductDeleteResp, error)
 	}
 
@@ -177,21 +189,31 @@ func NewHomeNewProductService(cli zrpc.Client) HomeNewProductService {
 	}
 }
 
+// 添加首页新品
 func (m *defaultHomeNewProductService) HomeNewProductAdd(ctx context.Context, in *HomeNewProductAddReq, opts ...grpc.CallOption) (*HomeNewProductAddResp, error) {
 	client := smsclient.NewHomeNewProductServiceClient(m.cli.Conn())
 	return client.HomeNewProductAdd(ctx, in, opts...)
 }
 
+// 查询首页新品
 func (m *defaultHomeNewProductService) HomeNewProductList(ctx context.Context, in *HomeNewProductListReq, opts ...grpc.CallOption) (*HomeNewProductListResp, error) {
 	client := smsclient.NewHomeNewProductServiceClient(m.cli.Conn())
 	return client.HomeNewProductList(ctx, in, opts...)
 }
 
-func (m *defaultHomeNewProductService) HomeNewProductUpdate(ctx context.Context, in *HomeNewProductUpdateReq, opts ...grpc.CallOption) (*HomeNewProductUpdateResp, error) {
+// 修改首页新品排序
+func (m *defaultHomeNewProductService) UpdateNewProductSort(ctx context.Context, in *UpdateNewProductSortReq, opts ...grpc.CallOption) (*UpdateNewProductSortResp, error) {
 	client := smsclient.NewHomeNewProductServiceClient(m.cli.Conn())
-	return client.HomeNewProductUpdate(ctx, in, opts...)
+	return client.UpdateNewProductSort(ctx, in, opts...)
 }
 
+// 批量修改首页新品状态
+func (m *defaultHomeNewProductService) UpdateNewProductStatus(ctx context.Context, in *UpdateNewProductStatusReq, opts ...grpc.CallOption) (*UpdateNewProductStatusResp, error) {
+	client := smsclient.NewHomeNewProductServiceClient(m.cli.Conn())
+	return client.UpdateNewProductStatus(ctx, in, opts...)
+}
+
+// 删除首页新品
 func (m *defaultHomeNewProductService) HomeNewProductDelete(ctx context.Context, in *HomeNewProductDeleteReq, opts ...grpc.CallOption) (*HomeNewProductDeleteResp, error) {
 	client := smsclient.NewHomeNewProductServiceClient(m.cli.Conn())
 	return client.HomeNewProductDelete(ctx, in, opts...)

@@ -1,4 +1,4 @@
-package logic
+package homenewproduct
 
 import (
 	"context"
@@ -13,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeNewProductAddLogic 首页新品
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 9:17
+*/
 type HomeNewProductAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -27,6 +32,7 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// HomeNewProductAdd 添加首页新品
 func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductReq) (*types.AddHomeNewProductResp, error) {
 	brandListResp, _ := l.svcCtx.ProductService.ProductListByIds(l.ctx, &pmsclient.ProductByIdsReq{Ids: req.ProductIds})
 

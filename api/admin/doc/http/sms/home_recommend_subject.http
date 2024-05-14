@@ -1,0 +1,55 @@
+###用户登录
+POST {{host}}/api/sys/user/login
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.token);
+%}
+
+### 添加专题推荐
+POST {{host}}/api/sms/homerecommendsubject/addHomeRecommendSubject
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "subjectIds": [
+    1,
+    2
+  ]
+}
+
+### 删除专题推荐
+GET {{host}}/api/sms/homerecommendsubject/deleteHomeRecommendSubject?ids=[39]
+Authorization: Bearer {{token}}
+
+
+### 修改专题推荐排序
+POST {{host}}/api/sms/homerecommendsubject/updateRecommendSubjectSort
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 21,
+  "sort": 200
+}
+
+### 批量修改专题推荐状态
+POST {{host}}/api/sms/homerecommendsubject/updateRecommendSubjectStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [
+    38,
+    39
+  ],
+  "recommendStatus": 0
+}
+
+### 查询专题推荐列表
+GET {{host}}/api/sms/homerecommendsubject/queryHomeRecommendSubjectList
+Authorization: Bearer {{token}}

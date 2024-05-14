@@ -34,14 +34,20 @@ type (
 		Success  bool                            `json:"success"`
 		Total    int64                           `json:"total"`
 	}
-	UpdateHomeRecommendProductReq {
+	UpdateRecommendProductSortReq {
 		Id              int64  `json:"id"`
-		ProductId       int64  `json:"productId"` // 商品id
-		ProductName     string `json:"productName"` // 商品名称
-		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 		Sort            int32  `json:"sort"` // 排序
 	}
-	UpdateHomeRecommendProductResp {
+	UpdateRecommendProductSortResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+
+	UpdateRecommendProductStatusReq {
+		Ids              []int64  `json:"ids"`
+		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	}
+	UpdateRecommendProductStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -61,19 +67,23 @@ type (
 	prefix:     /api/sms/homerecommendproduct
 )
 service admin-api {
-	//
+	//添加首页人气推荐
 	@handler HomeRecommendProductAdd
 	post /addHomeRecommendProduct (addHomeRecommendProductReq) returns (addHomeRecommendProductResp)
 
-	//
+	//查询首页人气推荐
 	@handler HomeRecommendProductList
 	get /queryHomeRecommendProductList (ListHomeRecommendProductReq) returns (ListHomeRecommendProductResp)
 
-	//
-	@handler HomeRecommendProductUpdate
-	post /updateHomeRecommendProduct (UpdateHomeRecommendProductReq) returns (UpdateHomeRecommendProductResp)
+	//修改推荐排序
+	@handler UpdateRecommendProductSort
+	post /updateRecommendProductSort (UpdateRecommendProductSortReq) returns (UpdateRecommendProductSortResp)
 
-	//
+	//批量修改推荐状态
+	@handler UpdateRecommendProductStatus
+	post /updateRecommendProductStatus (UpdateRecommendProductStatusReq) returns (UpdateRecommendProductStatusResp)
+
+	//删除首页人气推荐
 	@handler HomeRecommendProductDelete
 	get /deleteHomeRecommendProduct (DeleteHomeRecommendProductReq) returns (DeleteHomeRecommendProductResp)
 }

@@ -1,4 +1,4 @@
-package handler
+package homerecommendproduct
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func HomeRecommendProductListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewHomeRecommendProductListLogic(r.Context(), ctx)
+		l := homerecommendproduct.NewHomeRecommendProductListLogic(r.Context(), ctx)
 		resp, err := l.HomeRecommendProductList(req)
 		if err != nil {
 			httpx.Error(w, err)

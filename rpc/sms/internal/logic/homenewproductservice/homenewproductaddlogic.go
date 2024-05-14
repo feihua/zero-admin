@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeNewProductAddLogic 首页新品
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 9:28
+*/
 type HomeNewProductAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +30,7 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// HomeNewProductAdd 添加首页新品
 func (l *HomeNewProductAddLogic) HomeNewProductAdd(in *smsclient.HomeNewProductAddReq) (*smsclient.HomeNewProductAddResp, error) {
 	for _, data := range in.NewProductAddData {
 		q := query.SmsHomeNewProduct

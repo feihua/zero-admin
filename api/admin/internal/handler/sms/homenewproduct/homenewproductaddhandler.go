@@ -1,9 +1,9 @@
-package handler
+package homenewproduct
 
 import (
+	"github.com/feihua/zero-admin/api/admin/internal/logic/sms/homenewproduct"
 	"net/http"
 
-	"github.com/feihua/zero-admin/api/admin/internal/logic/sms/homenewproduct"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 
@@ -18,7 +18,7 @@ func HomeNewProductAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewHomeNewProductAddLogic(r.Context(), ctx)
+		l := homenewproduct.NewHomeNewProductAddLogic(r.Context(), ctx)
 		resp, err := l.HomeNewProductAdd(req)
 		if err != nil {
 			httpx.Error(w, err)

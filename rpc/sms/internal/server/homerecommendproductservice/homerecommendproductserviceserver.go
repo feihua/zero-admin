@@ -22,21 +22,31 @@ func NewHomeRecommendProductServiceServer(svcCtx *svc.ServiceContext) *HomeRecom
 	}
 }
 
+// 添加人气推荐
 func (s *HomeRecommendProductServiceServer) HomeRecommendProductAdd(ctx context.Context, in *smsclient.HomeRecommendProductAddReq) (*smsclient.HomeRecommendProductAddResp, error) {
 	l := homerecommendproductservicelogic.NewHomeRecommendProductAddLogic(ctx, s.svcCtx)
 	return l.HomeRecommendProductAdd(in)
 }
 
+// 查询人气推荐
 func (s *HomeRecommendProductServiceServer) HomeRecommendProductList(ctx context.Context, in *smsclient.HomeRecommendProductListReq) (*smsclient.HomeRecommendProductListResp, error) {
 	l := homerecommendproductservicelogic.NewHomeRecommendProductListLogic(ctx, s.svcCtx)
 	return l.HomeRecommendProductList(in)
 }
 
-func (s *HomeRecommendProductServiceServer) HomeRecommendProductUpdate(ctx context.Context, in *smsclient.HomeRecommendProductUpdateReq) (*smsclient.HomeRecommendProductUpdateResp, error) {
-	l := homerecommendproductservicelogic.NewHomeRecommendProductUpdateLogic(ctx, s.svcCtx)
-	return l.HomeRecommendProductUpdate(in)
+// 修改推荐排序
+func (s *HomeRecommendProductServiceServer) UpdateRecommendProductSort(ctx context.Context, in *smsclient.UpdateRecommendProductSortReq) (*smsclient.UpdateRecommendProductSortResp, error) {
+	l := homerecommendproductservicelogic.NewUpdateRecommendProductSortLogic(ctx, s.svcCtx)
+	return l.UpdateRecommendProductSort(in)
 }
 
+// 批量修改推荐状态
+func (s *HomeRecommendProductServiceServer) UpdateRecommendProductStatus(ctx context.Context, in *smsclient.UpdateRecommendProductStatusReq) (*smsclient.UpdateRecommendProductStatusResp, error) {
+	l := homerecommendproductservicelogic.NewUpdateRecommendProductStatusLogic(ctx, s.svcCtx)
+	return l.UpdateRecommendProductStatus(in)
+}
+
+// 删除人气推荐
 func (s *HomeRecommendProductServiceServer) HomeRecommendProductDelete(ctx context.Context, in *smsclient.HomeRecommendProductDeleteReq) (*smsclient.HomeRecommendProductDeleteResp, error) {
 	l := homerecommendproductservicelogic.NewHomeRecommendProductDeleteLogic(ctx, s.svcCtx)
 	return l.HomeRecommendProductDelete(in)

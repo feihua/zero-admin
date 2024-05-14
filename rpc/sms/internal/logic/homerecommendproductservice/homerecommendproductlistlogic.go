@@ -9,6 +9,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeRecommendProductListLogic 人气商品推荐
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 9:33
+*/
 type HomeRecommendProductListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +28,7 @@ func NewHomeRecommendProductListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
+// HomeRecommendProductList 查询人气商品推荐
 func (l *HomeRecommendProductListLogic) HomeRecommendProductList(in *smsclient.HomeRecommendProductListReq) (*smsclient.HomeRecommendProductListResp, error) {
 	q := query.SmsHomeRecommendProduct.WithContext(l.ctx)
 	if len(in.ProductName) > 0 {

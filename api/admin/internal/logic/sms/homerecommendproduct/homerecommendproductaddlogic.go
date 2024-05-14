@@ -1,4 +1,4 @@
-package logic
+package homerecommendproduct
 
 import (
 	"context"
@@ -13,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeRecommendProductAddLogic 人气推荐商品
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 9:40
+*/
 type HomeRecommendProductAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -27,6 +32,7 @@ func NewHomeRecommendProductAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// HomeRecommendProductAdd 添加人气推荐商品
 func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHomeRecommendProductReq) (*types.AddHomeRecommendProductResp, error) {
 	brandListResp, _ := l.svcCtx.ProductService.ProductListByIds(l.ctx, &pmsclient.ProductByIdsReq{Ids: req.ProductIds})
 

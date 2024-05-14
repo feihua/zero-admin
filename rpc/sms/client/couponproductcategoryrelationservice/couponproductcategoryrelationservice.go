@@ -125,8 +125,6 @@ type (
 	HomeNewProductListData                        = smsclient.HomeNewProductListData
 	HomeNewProductListReq                         = smsclient.HomeNewProductListReq
 	HomeNewProductListResp                        = smsclient.HomeNewProductListResp
-	HomeNewProductUpdateReq                       = smsclient.HomeNewProductUpdateReq
-	HomeNewProductUpdateResp                      = smsclient.HomeNewProductUpdateResp
 	HomeRecommendProductAddData                   = smsclient.HomeRecommendProductAddData
 	HomeRecommendProductAddReq                    = smsclient.HomeRecommendProductAddReq
 	HomeRecommendProductAddResp                   = smsclient.HomeRecommendProductAddResp
@@ -135,8 +133,6 @@ type (
 	HomeRecommendProductListData                  = smsclient.HomeRecommendProductListData
 	HomeRecommendProductListReq                   = smsclient.HomeRecommendProductListReq
 	HomeRecommendProductListResp                  = smsclient.HomeRecommendProductListResp
-	HomeRecommendProductUpdateReq                 = smsclient.HomeRecommendProductUpdateReq
-	HomeRecommendProductUpdateResp                = smsclient.HomeRecommendProductUpdateResp
 	HomeRecommendSubjectAddData                   = smsclient.HomeRecommendSubjectAddData
 	HomeRecommendSubjectAddReq                    = smsclient.HomeRecommendSubjectAddReq
 	HomeRecommendSubjectAddResp                   = smsclient.HomeRecommendSubjectAddResp
@@ -145,8 +141,6 @@ type (
 	HomeRecommendSubjectListData                  = smsclient.HomeRecommendSubjectListData
 	HomeRecommendSubjectListReq                   = smsclient.HomeRecommendSubjectListReq
 	HomeRecommendSubjectListResp                  = smsclient.HomeRecommendSubjectListResp
-	HomeRecommendSubjectUpdateReq                 = smsclient.HomeRecommendSubjectUpdateReq
-	HomeRecommendSubjectUpdateResp                = smsclient.HomeRecommendSubjectUpdateResp
 	QueryFlashPromotionByProductReq               = smsclient.QueryFlashPromotionByProductReq
 	QueryFlashPromotionByProductResp              = smsclient.QueryFlashPromotionByProductResp
 	QueryMemberCouponListReq                      = smsclient.QueryMemberCouponListReq
@@ -158,6 +152,18 @@ type (
 	UpdateHomeBrandSortResp                       = smsclient.UpdateHomeBrandSortResp
 	UpdateHomeBrandStatusReq                      = smsclient.UpdateHomeBrandStatusReq
 	UpdateHomeBrandStatusResp                     = smsclient.UpdateHomeBrandStatusResp
+	UpdateNewProductSortReq                       = smsclient.UpdateNewProductSortReq
+	UpdateNewProductSortResp                      = smsclient.UpdateNewProductSortResp
+	UpdateNewProductStatusReq                     = smsclient.UpdateNewProductStatusReq
+	UpdateNewProductStatusResp                    = smsclient.UpdateNewProductStatusResp
+	UpdateRecommendProductSortReq                 = smsclient.UpdateRecommendProductSortReq
+	UpdateRecommendProductSortResp                = smsclient.UpdateRecommendProductSortResp
+	UpdateRecommendProductStatusReq               = smsclient.UpdateRecommendProductStatusReq
+	UpdateRecommendProductStatusResp              = smsclient.UpdateRecommendProductStatusResp
+	UpdateRecommendSubjectSortReq                 = smsclient.UpdateRecommendSubjectSortReq
+	UpdateRecommendSubjectSortResp                = smsclient.UpdateRecommendSubjectSortResp
+	UpdateRecommendSubjectStatusReq               = smsclient.UpdateRecommendSubjectStatusReq
+	UpdateRecommendSubjectStatusResp              = smsclient.UpdateRecommendSubjectStatusResp
 
 	CouponProductCategoryRelationService interface {
 		CouponProductCategoryRelationAdd(ctx context.Context, in *CouponProductCategoryRelationAddReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationAddResp, error)

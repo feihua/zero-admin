@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// HomeRecommendSubjectListLogic
+// HomeRecommendSubjectListLogic 专题推荐
 /*
 Author: LiuFeiHua
 Date: 2024/5/6 17:29
@@ -29,7 +29,7 @@ func NewHomeRecommendSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
-// HomeRecommendSubjectList t推荐专题列表
+// HomeRecommendSubjectList 推荐专题列表
 func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(in *smsclient.HomeRecommendSubjectListReq) (*smsclient.HomeRecommendSubjectListResp, error) {
 	q := query.SmsHomeRecommendSubject.WithContext(l.ctx)
 	if len(in.SubjectName) > 0 {

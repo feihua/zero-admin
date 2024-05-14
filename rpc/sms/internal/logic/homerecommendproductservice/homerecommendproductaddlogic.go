@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeRecommendProductAddLogic 人气商品推荐
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 9:33
+*/
 type HomeRecommendProductAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +30,7 @@ func NewHomeRecommendProductAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// HomeRecommendProductAdd 添加人气商品推荐
 func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(in *smsclient.HomeRecommendProductAddReq) (*smsclient.HomeRecommendProductAddResp, error) {
 	q := query.SmsHomeRecommendProduct
 	for _, data := range in.RecommendProductAddData {

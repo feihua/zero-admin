@@ -34,14 +34,20 @@ type (
 		Success  bool                            `json:"success"`
 		Total    int64                           `json:"total"`
 	}
-	UpdateHomeRecommendSubjectReq {
+	UpdateRecommendSubjectSortReq {
 		Id              int64  `json:"id"`
-		SubjectId       int64  `json:"subjectId"` // 专题id
-		SubjectName     string `json:"subjectName"` // 专题名称
-		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 		Sort            int32  `json:"sort"` // 排序
 	}
-	UpdateHomeRecommendSubjectResp {
+	UpdateRecommendSubjectSortResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+
+	UpdateRecommendSubjectStatusReq {
+		Ids              []int64  `json:"ids"`
+		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	}
+	UpdateRecommendSubjectStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -61,19 +67,23 @@ type (
 	prefix:     /api/sms/homerecommendsubject
 )
 service admin-api {
-	//
+	//添加首页专题推荐
 	@handler HomeRecommendSubjectAdd
 	post /addHomeRecommendSubject (addHomeRecommendSubjectReq) returns (addHomeRecommendSubjectResp)
 
-	//
+	//查询首页专题推荐
 	@handler HomeRecommendSubjectList
 	get /queryHomeRecommendSubjectList (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
 
-	//
-	@handler HomeRecommendSubjectUpdate
-	post /updateHomeRecommendSubject (UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp)
+	//修改推荐排序
+	@handler UpdateRecommendSubjectSort
+	post /updateRecommendSubjectSort (UpdateRecommendSubjectSortReq) returns (UpdateRecommendSubjectSortResp)
 
-	//
+	//批量修改推荐状态
+	@handler UpdateRecommendSubjectStatus
+	post /updateRecommendSubjectStatus (UpdateRecommendSubjectStatusReq) returns (UpdateRecommendSubjectStatusResp)
+
+	//删除首页专题推荐
 	@handler HomeRecommendSubjectDelete
 	get /deleteHomeRecommendSubject (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
 }

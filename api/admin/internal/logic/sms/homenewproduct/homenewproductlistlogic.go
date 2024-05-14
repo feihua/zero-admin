@@ -1,4 +1,4 @@
-package logic
+package homenewproduct
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// HomeNewProductListLogic 首页新品
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 9:27
+*/
 type HomeNewProductListLogic struct {
 	logx.Logger
 	ctx    context.Context

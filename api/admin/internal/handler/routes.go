@@ -1168,8 +1168,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updateHomeNewProduct",
-					Handler: smshomenewproduct.HomeNewProductUpdateHandler(serverCtx),
+					Path:    "/updateNewProductSort",
+					Handler: smshomenewproduct.UpdateNewProductSortHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateNewProductStatus",
+					Handler: smshomenewproduct.UpdateNewProductStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1198,8 +1203,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updateHomeRecommendProduct",
-					Handler: smshomerecommendproduct.HomeRecommendProductUpdateHandler(serverCtx),
+					Path:    "/updateRecommendProductSort",
+					Handler: smshomerecommendproduct.UpdateRecommendProductSortHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateRecommendProductStatus",
+					Handler: smshomerecommendproduct.UpdateRecommendProductStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1228,8 +1238,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updateHomeRecommendSubject",
-					Handler: smshomerecommendsubject.HomeRecommendSubjectUpdateHandler(serverCtx),
+					Path:    "/updateRecommendSubjectSort",
+					Handler: smshomerecommendsubject.UpdateRecommendSubjectSortHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateRecommendSubjectStatus",
+					Handler: smshomerecommendsubject.UpdateRecommendSubjectStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1333,26 +1348,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteSysLog",
-					Handler: syslog.SysLogDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/querySysLogList",
-					Handler: syslog.SysLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/sysLog"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
 					Path:    "/deleteLoginLog",
 					Handler: syslog.LoginLogDeleteHandler(serverCtx),
 				},
@@ -1370,6 +1365,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/loginLog"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteSysLog",
+					Handler: syslog.SysLogDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/querySysLogList",
+					Handler: syslog.SysLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/sysLog"),
 	)
 
 	server.AddRoutes(

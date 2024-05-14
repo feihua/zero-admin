@@ -915,16 +915,23 @@ message HomeNewProductDeleteResp {
   string pong = 1;
 }
 
-message HomeNewProductUpdateReq {
+message UpdateNewProductSortReq {
   int64 Id = 1; //
-  int64 ProductId = 2; //商品id
-  string ProductName = 3; //商品名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 5; //排序
+  int32 Sort = 2; //排序
 
 }
 
-message HomeNewProductUpdateResp {
+message UpdateNewProductSortResp {
+  string pong = 1;
+}
+
+message UpdateNewProductStatusReq {
+  repeated int64 Ids = 1; //
+  int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
+
+}
+
+message UpdateNewProductStatusResp {
   string pong = 1;
 }
 
@@ -950,11 +957,18 @@ message HomeNewProductListResp {
   repeated  HomeNewProductListData list = 2;
 }
 
+//首页新品推荐
 service HomeNewProductService {
-
+  
+  //添加首页新品
   rpc HomeNewProductAdd(HomeNewProductAddReq) returns(HomeNewProductAddResp);
+  //查询首页新品
   rpc HomeNewProductList(HomeNewProductListReq) returns(HomeNewProductListResp);
-  rpc HomeNewProductUpdate(HomeNewProductUpdateReq) returns(HomeNewProductUpdateResp);
+  //修改首页新品排序
+  rpc UpdateNewProductSort(UpdateNewProductSortReq) returns(UpdateNewProductSortResp);
+  //批量修改首页新品状态
+  rpc UpdateNewProductStatus(UpdateNewProductStatusReq) returns(UpdateNewProductStatusResp);
+  //删除首页新品
   rpc HomeNewProductDelete(HomeNewProductDeleteReq) returns(HomeNewProductDeleteResp);
 
 
@@ -984,16 +998,23 @@ message HomeRecommendProductDeleteResp {
   string pong = 1;
 }
 
-message HomeRecommendProductUpdateReq {
+message UpdateRecommendProductSortReq {
   int64 Id = 1; //
-  int64 ProductId = 2; //商品id
-  string ProductName = 3; //商品名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 5; //排序
+  int32 Sort = 2; //排序
 
 }
 
-message HomeRecommendProductUpdateResp {
+message UpdateRecommendProductSortResp {
+  string pong = 1;
+}
+
+message UpdateRecommendProductStatusReq {
+  repeated int64 Ids = 1; //
+  int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
+
+}
+
+message UpdateRecommendProductStatusResp {
   string pong = 1;
 }
 
@@ -1019,12 +1040,17 @@ message HomeRecommendProductListResp {
   repeated  HomeRecommendProductListData list = 2;
 }
 
-
+//首页人气推荐管理
 service HomeRecommendProductService {
-
+  //添加人气推荐
   rpc HomeRecommendProductAdd(HomeRecommendProductAddReq) returns(HomeRecommendProductAddResp);
+  //查询人气推荐
   rpc HomeRecommendProductList(HomeRecommendProductListReq) returns(HomeRecommendProductListResp);
-  rpc HomeRecommendProductUpdate(HomeRecommendProductUpdateReq) returns(HomeRecommendProductUpdateResp);
+  //修改推荐排序
+  rpc UpdateRecommendProductSort(UpdateRecommendProductSortReq) returns(UpdateRecommendProductSortResp);
+  //批量修改推荐状态
+  rpc UpdateRecommendProductStatus(UpdateRecommendProductStatusReq) returns(UpdateRecommendProductStatusResp);
+  //删除人气推荐
   rpc HomeRecommendProductDelete(HomeRecommendProductDeleteReq) returns(HomeRecommendProductDeleteResp);
 
 
@@ -1054,16 +1080,23 @@ message HomeRecommendSubjectDeleteResp {
   string pong = 1;
 }
 
-message HomeRecommendSubjectUpdateReq {
+message UpdateRecommendSubjectSortReq {
   int64 Id = 1; //
-  int64 SubjectId = 2; //专题id
-  string SubjectName = 3; //专题名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 5; //排序
+  int32 Sort = 2; //排序
 
 }
 
-message HomeRecommendSubjectUpdateResp {
+message UpdateRecommendSubjectSortResp {
+  string pong = 1;
+}
+
+message UpdateRecommendSubjectStatusReq {
+  repeated int64 Ids = 1; //
+  int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
+
+}
+
+message UpdateRecommendSubjectStatusResp {
   string pong = 1;
 }
 
@@ -1090,11 +1123,18 @@ message HomeRecommendSubjectListResp {
 }
 
 
+//首页专题推荐管理
 service HomeRecommendSubjectService {
 
+  //添加首页专题推荐
   rpc HomeRecommendSubjectAdd(HomeRecommendSubjectAddReq) returns(HomeRecommendSubjectAddResp);
+  //查询首页专题推荐
   rpc HomeRecommendSubjectList(HomeRecommendSubjectListReq) returns(HomeRecommendSubjectListResp);
-  rpc HomeRecommendSubjectUpdate(HomeRecommendSubjectUpdateReq) returns(HomeRecommendSubjectUpdateResp);
+  //修改专题推荐排序
+  rpc UpdateRecommendSubjectSort(UpdateRecommendSubjectSortReq) returns(UpdateRecommendSubjectSortResp);
+  //批量修改专题推荐状态
+  rpc UpdateRecommendSubjectStatus(UpdateRecommendSubjectStatusReq) returns(UpdateRecommendSubjectStatusResp);
+  //删除首页专题推荐
   rpc HomeRecommendSubjectDelete(HomeRecommendSubjectDeleteReq) returns(HomeRecommendSubjectDeleteResp);
 
 }

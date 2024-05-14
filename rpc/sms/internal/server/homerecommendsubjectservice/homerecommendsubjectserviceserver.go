@@ -22,21 +22,31 @@ func NewHomeRecommendSubjectServiceServer(svcCtx *svc.ServiceContext) *HomeRecom
 	}
 }
 
+// 添加首页专题推荐
 func (s *HomeRecommendSubjectServiceServer) HomeRecommendSubjectAdd(ctx context.Context, in *smsclient.HomeRecommendSubjectAddReq) (*smsclient.HomeRecommendSubjectAddResp, error) {
 	l := homerecommendsubjectservicelogic.NewHomeRecommendSubjectAddLogic(ctx, s.svcCtx)
 	return l.HomeRecommendSubjectAdd(in)
 }
 
+// 查询首页专题推荐
 func (s *HomeRecommendSubjectServiceServer) HomeRecommendSubjectList(ctx context.Context, in *smsclient.HomeRecommendSubjectListReq) (*smsclient.HomeRecommendSubjectListResp, error) {
 	l := homerecommendsubjectservicelogic.NewHomeRecommendSubjectListLogic(ctx, s.svcCtx)
 	return l.HomeRecommendSubjectList(in)
 }
 
-func (s *HomeRecommendSubjectServiceServer) HomeRecommendSubjectUpdate(ctx context.Context, in *smsclient.HomeRecommendSubjectUpdateReq) (*smsclient.HomeRecommendSubjectUpdateResp, error) {
-	l := homerecommendsubjectservicelogic.NewHomeRecommendSubjectUpdateLogic(ctx, s.svcCtx)
-	return l.HomeRecommendSubjectUpdate(in)
+// 修改专题推荐排序
+func (s *HomeRecommendSubjectServiceServer) UpdateRecommendSubjectSort(ctx context.Context, in *smsclient.UpdateRecommendSubjectSortReq) (*smsclient.UpdateRecommendSubjectSortResp, error) {
+	l := homerecommendsubjectservicelogic.NewUpdateRecommendSubjectSortLogic(ctx, s.svcCtx)
+	return l.UpdateRecommendSubjectSort(in)
 }
 
+// 批量修改专题推荐状态
+func (s *HomeRecommendSubjectServiceServer) UpdateRecommendSubjectStatus(ctx context.Context, in *smsclient.UpdateRecommendSubjectStatusReq) (*smsclient.UpdateRecommendSubjectStatusResp, error) {
+	l := homerecommendsubjectservicelogic.NewUpdateRecommendSubjectStatusLogic(ctx, s.svcCtx)
+	return l.UpdateRecommendSubjectStatus(in)
+}
+
+// 删除首页专题推荐
 func (s *HomeRecommendSubjectServiceServer) HomeRecommendSubjectDelete(ctx context.Context, in *smsclient.HomeRecommendSubjectDeleteReq) (*smsclient.HomeRecommendSubjectDeleteResp, error) {
 	l := homerecommendsubjectservicelogic.NewHomeRecommendSubjectDeleteLogic(ctx, s.svcCtx)
 	return l.HomeRecommendSubjectDelete(in)

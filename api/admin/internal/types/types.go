@@ -2304,45 +2304,6 @@ type UpdateHomeBrandStatusResp struct {
 	Message string `json:"message"`
 }
 
-type UpdateHomeNewProductReq struct {
-	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`       // 商品id
-	ProductName     string `json:"productName"`     // 商品名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
-}
-
-type UpdateHomeNewProductResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type UpdateHomeRecommendProductReq struct {
-	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`       // 商品id
-	ProductName     string `json:"productName"`     // 商品名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
-}
-
-type UpdateHomeRecommendProductResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type UpdateHomeRecommendSubjectReq struct {
-	Id              int64  `json:"id"`
-	SubjectId       int64  `json:"subjectId"`       // 专题id
-	SubjectName     string `json:"subjectName"`     // 专题名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
-}
-
-type UpdateHomeRecommendSubjectResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateIntegrationChangeHistoryReq struct {
 	Id          int64  `json:"id"`
 	MemberId    int64  `json:"memberId"`
@@ -2546,6 +2507,26 @@ type UpdateMenuReq struct {
 }
 
 type UpdateMenuResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateNewProductSortReq struct {
+	Id   int64 `json:"id"`
+	Sort int32 `json:"sort"` // 排序
+}
+
+type UpdateNewProductSortResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateNewProductStatusReq struct {
+	Ids             []int64 `json:"ids"`
+	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+}
+
+type UpdateNewProductStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -2763,6 +2744,46 @@ type UpdateProductReq struct {
 }
 
 type UpdateProductResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateRecommendProductSortReq struct {
+	Id   int64 `json:"id"`
+	Sort int32 `json:"sort"` // 排序
+}
+
+type UpdateRecommendProductSortResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateRecommendProductStatusReq struct {
+	Ids             []int64 `json:"ids"`
+	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+}
+
+type UpdateRecommendProductStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateRecommendSubjectSortReq struct {
+	Id   int64 `json:"id"`
+	Sort int32 `json:"sort"` // 排序
+}
+
+type UpdateRecommendSubjectSortResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateRecommendSubjectStatusReq struct {
+	Ids             []int64 `json:"ids"`
+	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+}
+
+type UpdateRecommendSubjectStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

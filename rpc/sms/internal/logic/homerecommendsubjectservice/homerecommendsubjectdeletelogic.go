@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// HomeRecommendSubjectDeleteLogic
+// HomeRecommendSubjectDeleteLogic 专题推荐
 /*
 Author: LiuFeiHua
 Date: 2024/5/6 17:28
