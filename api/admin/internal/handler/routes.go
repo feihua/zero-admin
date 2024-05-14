@@ -37,6 +37,7 @@ import (
 	smscouponhistory "github.com/feihua/zero-admin/api/admin/internal/handler/sms/couponhistory"
 	smsflashpromotion "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flashpromotion"
 	smsflashpromotionlog "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flashpromotionlog"
+	smsflashpromotionproductrelation "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flashpromotionproductrelation"
 	smsflashpromotionsession "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flashpromotionsession"
 	smshomeadvertise "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homeadvertise"
 	smshomebrand "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homebrand"
@@ -1038,6 +1039,36 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
+					Path:    "/addFlashPromotionProductRelation",
+					Handler: smsflashpromotionproductrelation.FlashPromotionProductRelationAddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteFlashPromotionProductRelation",
+					Handler: smsflashpromotionproductrelation.FlashPromotionProductRelationDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryFlashPromotionProductRelationList",
+					Handler: smsflashpromotionproductrelation.FlashPromotionProductRelationListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateFlashPromotionProductRelation",
+					Handler: smsflashpromotionproductrelation.FlashPromotionProductRelationUpdateHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sms/flashpromotionproductrelation"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
 					Path:    "/addFlashPromotionSession",
 					Handler: smsflashpromotionsession.FlashPromotionSessionAddHandler(serverCtx),
 				},
@@ -1333,6 +1364,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
+					Path:    "/deleteSysLog",
+					Handler: syslog.SysLogDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/querySysLogList",
+					Handler: syslog.SysLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/sysLog"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
 					Path:    "/deleteLoginLog",
 					Handler: syslog.LoginLogDeleteHandler(serverCtx),
 				},
@@ -1350,26 +1401,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/loginLog"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteSysLog",
-					Handler: syslog.SysLogDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/querySysLogList",
-					Handler: syslog.SysLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/sysLog"),
 	)
 
 	server.AddRoutes(

@@ -64,6 +64,15 @@ type DeleteFlashPromotionLogResp struct {
 	Message string `json:"message"`
 }
 
+type DeleteFlashPromotionProductRelationReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteFlashPromotionProductRelationResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type DeleteFlashPromotionReq struct {
 	Ids []int64 `form:"ids"`
 }
@@ -687,6 +696,39 @@ type ListFlashPromotionLogResp struct {
 	PageSize int64                        `form:"pageSize,default=20"`
 	Success  bool                         `json:"success"`
 	Total    int64                        `json:"total"`
+}
+
+type ListFlashPromotionProductRelationData struct {
+	Id                                     int64  `json:"id"`                      // 编号
+	FlashPromotionProductRelationID        int64  ` json:"flashPromotionId"`       // 限时购id
+	FlashPromotionProductRelationSessionID int64  `json:"flashPromotionSessionId"` // 编号
+	ProductID                              int64  `json:"productId"`               // 商品id
+	FlashPromotionProductRelationPrice     int64  `json:"flashPromotionPrice"`     // 限时购价格
+	FlashPromotionProductRelationCount     int32  `json:"flashPromotionCount"`     // 限时购数量
+	FlashPromotionProductRelationLimit     int32  `json:"flashPromotionLimit"`     // 每人限购数量
+	Sort                                   int32  ` json:"sort"`
+	ProductId                              int64  `json:"productId"`
+	Name                                   string `json:"name"`
+	ProductSn                              string `json:"productSn"` // 货号
+	Price                                  int64  `json:"price"`
+	Stock                                  int32  `json:"stock"` // 库存
+}
+
+type ListFlashPromotionProductRelationReq struct {
+	Current                                int64 `form:"current,default=1"`
+	PageSize                               int64 `form:"pageSize,default=20"`
+	FlashPromotionProductRelationID        int64 ` form:"flashPromotionId"`       // 限时购id
+	FlashPromotionProductRelationSessionID int64 `form:"flashPromotionSessionId"` // 编号
+}
+
+type ListFlashPromotionProductRelationResp struct {
+	Code     string                                   `json:"code"`
+	Message  string                                   `json:"message"`
+	Current  int64                                    `form:"current,default=1"`
+	Data     []*ListFlashPromotionProductRelationData `json:"data"`
+	PageSize int64                                    `form:"pageSize,default=20"`
+	Success  bool                                     `json:"success"`
+	Total    int64                                    `json:"total"`
 }
 
 type ListFlashPromotionReq struct {
@@ -1326,9 +1368,9 @@ type ListOperateHistoryReq struct {
 type ListOperateHistoryResp struct {
 	Code     string                    `json:"code"`
 	Message  string                    `json:"message"`
-	Current  int64                     `form:"current,default=1"`
+	Current  int64                     `json:"current,default=1"`
 	Data     []*ListOperateHistoryData `json:"data"`
-	PageSize int64                     `form:"pageSize,default=20"`
+	PageSize int64                     `json:"pageSize,default=20"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
 }
@@ -2196,6 +2238,22 @@ type UpdateFlashPromotionLogResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateFlashPromotionProductRelationReq struct {
+	ID                                     int64 `json:"id"`                      // 编号
+	FlashPromotionProductRelationID        int64 ` json:"flashPromotionId"`       // 限时购id
+	FlashPromotionProductRelationSessionID int64 `json:"flashPromotionSessionId"` // 编号
+	ProductID                              int64 `json:"productId"`               // 商品id
+	FlashPromotionProductRelationPrice     int64 `json:"flashPromotionPrice"`     // 限时购价格
+	FlashPromotionProductRelationCount     int32 `json:"flashPromotionCount"`     // 限时购数量
+	FlashPromotionProductRelationLimit     int32 `json:"flashPromotionLimit"`     // 每人限购数量
+	Sort                                   int32 ` json:"sort"`
+}
+
+type UpdateFlashPromotionProductRelationResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateFlashPromotionReq struct {
 	Id        int64  `json:"id"`
 	Title     string `json:"title"`
@@ -3009,6 +3067,21 @@ type AddFlashPromotionLogReq struct {
 }
 
 type AddFlashPromotionLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type AddFlashPromotionProductRelationReq struct {
+	FlashPromotionProductRelationID        int64 ` json:"flashPromotionId"`       // 限时购id
+	FlashPromotionProductRelationSessionID int64 `json:"flashPromotionSessionId"` // 编号
+	ProductID                              int64 `json:"productId"`               // 商品id
+	FlashPromotionProductRelationPrice     int64 `json:"flashPromotionPrice"`     // 限时购价格
+	FlashPromotionProductRelationCount     int32 `json:"flashPromotionCount"`     // 限时购数量
+	FlashPromotionProductRelationLimit     int32 `json:"flashPromotionLimit"`     // 每人限购数量
+	Sort                                   int32 ` json:"sort"`
+}
+
+type AddFlashPromotionProductRelationResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

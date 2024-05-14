@@ -25,12 +25,13 @@ func NewFlashPromotionProductRelationListLogic(ctx context.Context, svcCtx *svc.
 }
 
 func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationList(in *smsclient.FlashPromotionProductRelationListReq) (*smsclient.FlashPromotionProductRelationListResp, error) {
-	q := query.SmsFlashPromotionProductRelation
-	q.WithContext(l.ctx).Where(q.FlashPromotionID.Eq(in.FlashPromotionId), q.FlashPromotionSessionID.Eq(in.FlashPromotionSessionId))
+	relation := query.SmsFlashPromotionProductRelation
+	q := relation.WithContext(l.ctx)
+	q = q.Where(relation.FlashPromotionID.Eq(in.FlashPromotionId), relation.FlashPromotionSessionID.Eq(in.FlashPromotionSessionId))
 
 	offset := (in.Current - 1) * in.PageSize
-	result, err := q.WithContext(l.ctx).Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.WithContext(l.ctx).Count()
+	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
+	count, err := q.Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询限时购与产品关糸列表信息失败,参数：%+v,异常:%s", in, err.Error())

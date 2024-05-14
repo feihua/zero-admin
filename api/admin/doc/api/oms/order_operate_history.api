@@ -30,9 +30,9 @@ type (
 	ListOperateHistoryResp {
 		Code     string                    `json:"code"`
 		Message  string                    `json:"message"`
-		Current  int64                     `form:"current,default=1"`
+		Current  int64                     `json:"current,default=1"`
 		Data     []*ListOperateHistoryData `json:"data"`
-		PageSize int64                     `form:"pageSize,default=20"`
+		PageSize int64                     `json:"pageSize,default=20"`
 		Success  bool                      `json:"success"`
 		Total    int64                     `json:"total"`
 	}
