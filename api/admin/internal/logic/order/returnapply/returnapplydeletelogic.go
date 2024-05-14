@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ReturnApplyDeleteLogic 订单退货申请
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 14:46
+*/
 type ReturnApplyDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewReturnApplyDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// ReturnApplyDelete 删除订单退货申请
 func (l *ReturnApplyDeleteLogic) ReturnApplyDelete(req types.DeleteReturnApplyReq) (*types.DeleteReturnApplyResp, error) {
 	_, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyDelete(l.ctx, &omsclient.OrderReturnApplyDeleteReq{
 		Ids: req.Ids,

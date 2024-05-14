@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ReturnApplyUpdateLogic 订单退货申请
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 14:54
+*/
 type ReturnApplyUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewReturnApplyUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// ReturnApplyUpdate 修改订单退货申请状态
 func (l *ReturnApplyUpdateLogic) ReturnApplyUpdate(req types.UpdateReturnApplyReq) (*types.UpdateReturnApplyResp, error) {
 	userName := l.ctx.Value("userName").(string)
 	_, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyUpdate(l.ctx, &omsclient.OrderReturnApplyUpdateReq{
@@ -36,6 +42,7 @@ func (l *ReturnApplyUpdateLogic) ReturnApplyUpdate(req types.UpdateReturnApplyRe
 		HandleMan:        userName,
 		ReceiveMan:       userName,
 		ReceiveNote:      req.ReceiveNote,
+		ReturnAmount:     req.ReturnAmount,
 	})
 
 	if err != nil {

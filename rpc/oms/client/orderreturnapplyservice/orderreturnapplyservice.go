@@ -104,8 +104,11 @@ type (
 
 	OrderReturnApplyService interface {
 		OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq, opts ...grpc.CallOption) (*OrderReturnApplyAddResp, error)
+		// 查询订单退货申请
 		OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq, opts ...grpc.CallOption) (*OrderReturnApplyListResp, error)
+		// 修改订单退货申请状态
 		OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq, opts ...grpc.CallOption) (*OrderReturnApplyUpdateResp, error)
+		// 删除订单退货申请
 		OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq, opts ...grpc.CallOption) (*OrderReturnApplyDeleteResp, error)
 	}
 
@@ -125,16 +128,19 @@ func (m *defaultOrderReturnApplyService) OrderReturnApplyAdd(ctx context.Context
 	return client.OrderReturnApplyAdd(ctx, in, opts...)
 }
 
+// 查询订单退货申请
 func (m *defaultOrderReturnApplyService) OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq, opts ...grpc.CallOption) (*OrderReturnApplyListResp, error) {
 	client := omsclient.NewOrderReturnApplyServiceClient(m.cli.Conn())
 	return client.OrderReturnApplyList(ctx, in, opts...)
 }
 
+// 修改订单退货申请状态
 func (m *defaultOrderReturnApplyService) OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq, opts ...grpc.CallOption) (*OrderReturnApplyUpdateResp, error) {
 	client := omsclient.NewOrderReturnApplyServiceClient(m.cli.Conn())
 	return client.OrderReturnApplyUpdate(ctx, in, opts...)
 }
 
+// 删除订单退货申请
 func (m *defaultOrderReturnApplyService) OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq, opts ...grpc.CallOption) (*OrderReturnApplyDeleteResp, error) {
 	client := omsclient.NewOrderReturnApplyServiceClient(m.cli.Conn())
 	return client.OrderReturnApplyDelete(ctx, in, opts...)

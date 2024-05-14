@@ -562,11 +562,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addReturnApply",
-					Handler: orderreturnapply.ReturnApplyAddHandler(serverCtx),
-				},
-				{
 					Method:  http.MethodGet,
 					Path:    "/deleteReturnApply",
 					Handler: orderreturnapply.ReturnApplyDeleteHandler(serverCtx),

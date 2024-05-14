@@ -1373,8 +1373,11 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderReturnApplyServiceClient interface {
 	OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq, opts ...grpc.CallOption) (*OrderReturnApplyAddResp, error)
+	// 查询订单退货申请
 	OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq, opts ...grpc.CallOption) (*OrderReturnApplyListResp, error)
+	// 修改订单退货申请状态
 	OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq, opts ...grpc.CallOption) (*OrderReturnApplyUpdateResp, error)
+	// 删除订单退货申请
 	OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq, opts ...grpc.CallOption) (*OrderReturnApplyDeleteResp, error)
 }
 
@@ -1427,8 +1430,11 @@ func (c *orderReturnApplyServiceClient) OrderReturnApplyDelete(ctx context.Conte
 // for forward compatibility
 type OrderReturnApplyServiceServer interface {
 	OrderReturnApplyAdd(context.Context, *OrderReturnApplyAddReq) (*OrderReturnApplyAddResp, error)
+	// 查询订单退货申请
 	OrderReturnApplyList(context.Context, *OrderReturnApplyListReq) (*OrderReturnApplyListResp, error)
+	// 修改订单退货申请状态
 	OrderReturnApplyUpdate(context.Context, *OrderReturnApplyUpdateReq) (*OrderReturnApplyUpdateResp, error)
+	// 删除订单退货申请
 	OrderReturnApplyDelete(context.Context, *OrderReturnApplyDeleteReq) (*OrderReturnApplyDeleteResp, error)
 	mustEmbedUnimplementedOrderReturnApplyServiceServer()
 }

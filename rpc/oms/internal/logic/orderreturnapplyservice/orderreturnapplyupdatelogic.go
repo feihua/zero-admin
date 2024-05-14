@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderReturnApplyUpdateLogic 订单退货申请
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 14:53
+*/
 type OrderReturnApplyUpdateLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +30,7 @@ func NewOrderReturnApplyUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
+// OrderReturnApplyUpdate 修改订单退货申请状态
 func (l *OrderReturnApplyUpdateLogic) OrderReturnApplyUpdate(in *omsclient.OrderReturnApplyUpdateReq) (*omsclient.OrderReturnApplyUpdateResp, error) {
 
 	q := query.OmsOrderReturnApply
@@ -33,18 +39,28 @@ func (l *OrderReturnApplyUpdateLogic) OrderReturnApplyUpdate(in *omsclient.Order
 		return nil, err
 	}
 
-	// 退货中处理退货中的就要设置公司地址
+	returnApply.Status = in.Status
+	//确认退货
 	if in.Status == 1 {
 		returnApply.CompanyAddressID = in.CompanyAddressId
+		returnApply.HandleTime = time.Now()
+		returnApply.HandleNote = in.HandleNote
+		returnApply.HandleMan = in.HandleMan
+		returnApply.ReturnAmount = in.ReturnAmount
 	}
-
-	returnApply.Status = in.Status
-	returnApply.HandleTime = time.Now()
-	returnApply.HandleNote = in.HandleNote
-	returnApply.HandleMan = in.HandleMan
-	returnApply.ReceiveMan = in.ReceiveMan
-	returnApply.ReceiveTime = time.Now()
-	returnApply.ReceiveNote = &in.ReceiveNote
+	//完成退货
+	if in.Status == 2 {
+		returnApply.CompanyAddressID = in.CompanyAddressId
+		returnApply.ReceiveMan = in.ReceiveMan
+		returnApply.ReceiveTime = time.Now()
+		returnApply.ReceiveNote = &in.ReceiveNote
+	}
+	//拒绝退货
+	if in.Status == 3 {
+		returnApply.HandleTime = time.Now()
+		returnApply.HandleNote = in.HandleNote
+		returnApply.HandleMan = in.HandleMan
+	}
 
 	_, err = q.WithContext(l.ctx).Updates(returnApply)
 

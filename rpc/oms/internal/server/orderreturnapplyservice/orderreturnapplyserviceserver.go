@@ -27,16 +27,19 @@ func (s *OrderReturnApplyServiceServer) OrderReturnApplyAdd(ctx context.Context,
 	return l.OrderReturnApplyAdd(in)
 }
 
+// 查询订单退货申请
 func (s *OrderReturnApplyServiceServer) OrderReturnApplyList(ctx context.Context, in *omsclient.OrderReturnApplyListReq) (*omsclient.OrderReturnApplyListResp, error) {
 	l := orderreturnapplyservicelogic.NewOrderReturnApplyListLogic(ctx, s.svcCtx)
 	return l.OrderReturnApplyList(in)
 }
 
+// 修改订单退货申请状态
 func (s *OrderReturnApplyServiceServer) OrderReturnApplyUpdate(ctx context.Context, in *omsclient.OrderReturnApplyUpdateReq) (*omsclient.OrderReturnApplyUpdateResp, error) {
 	l := orderreturnapplyservicelogic.NewOrderReturnApplyUpdateLogic(ctx, s.svcCtx)
 	return l.OrderReturnApplyUpdate(in)
 }
 
+// 删除订单退货申请
 func (s *OrderReturnApplyServiceServer) OrderReturnApplyDelete(ctx context.Context, in *omsclient.OrderReturnApplyDeleteReq) (*omsclient.OrderReturnApplyDeleteResp, error) {
 	l := orderreturnapplyservicelogic.NewOrderReturnApplyDeleteLogic(ctx, s.svcCtx)
 	return l.OrderReturnApplyDelete(in)

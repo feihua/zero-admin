@@ -37,18 +37,28 @@ func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *omsclient.OrderRetu
 		q = q.Where(query.OmsOrderReturnApply.OrderSn.Like("%" + in.OrderSn + "%"))
 	}
 	if len(in.MemberUsername) > 0 {
-		q = q.Where(query.OmsOrderReturnApply.OrderSn.Like("%" + in.MemberUsername + "%"))
+		q = q.Where(query.OmsOrderReturnApply.MemberUsername.Like("%" + in.MemberUsername + "%"))
 	}
 
 	if in.Status != 4 {
 		q = q.Where(query.OmsOrderReturnApply.Status.Eq(in.Status))
 	}
+	if len(in.HandleMan) > 0 {
+		q = q.Where(query.OmsOrderReturnApply.HandleMan.Like("%" + in.HandleMan + "%"))
+	}
+	if len(in.ReturnName) > 0 {
+		q = q.Where(query.OmsOrderReturnApply.ReturnName.Like("%" + in.ReturnName + "%"))
+	}
+	if len(in.ReturnPhone) > 0 {
+		q = q.Where(query.OmsOrderReturnApply.ReturnPhone.Like("%" + in.ReturnPhone + "%"))
+	}
+
 	//if len(in.CreateTime) > 0 {
-	//	q.Where(query.OmsOrderReturnApply.CreateTime.Eq(in.CreateTime))
-	//}
-	//if len(in.HandleTime) > 0 {
-	//	q.Where(query.OmsOrderReturnApply.HandleTime.(in.HandleTime))
-	//}
+	//		where = where + fmt.Sprintf(" AND date_format(create_time,'%%Y-%%m-%%d') = '%s'", strings.Split(in.CreateTime, " ")[0])
+	//	}
+	//	if len(in.HandleTime) > 0 {
+	//		where = where + fmt.Sprintf(" AND date_format(handle_time,'%%Y-%%m-%%d') = '%s'", strings.Split(in.HandleTime, " ")[0])
+	//	}
 
 	offset := (in.Current - 1) * in.PageSize
 	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()

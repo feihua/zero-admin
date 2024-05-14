@@ -614,6 +614,9 @@ message OrderReturnApplyListReq {
   string  HandleTime = 5;
   string  CreateTime = 6;
   int32   Status = 7;
+  string      HandleMan = 8;
+  string      ReturnName = 9;
+  string      ReturnPhone = 10;
 }
 
 message OrderReturnApplyListData{
@@ -659,6 +662,7 @@ message OrderReturnApplyUpdateReq {
   string      HandleMan = 5;
   string      ReceiveMan = 6;
   string      ReceiveNote = 7;
+  int64    ReturnAmount = 8;
 }
 
 message OrderReturnApplyUpdateResp {
@@ -678,8 +682,11 @@ service OrderReturnApplyService {
 
 
   rpc OrderReturnApplyAdd(OrderReturnApplyAddReq) returns(OrderReturnApplyAddResp);
+  //查询订单退货申请
   rpc OrderReturnApplyList(OrderReturnApplyListReq) returns(OrderReturnApplyListResp);
+  //修改订单退货申请状态
   rpc OrderReturnApplyUpdate(OrderReturnApplyUpdateReq) returns(OrderReturnApplyUpdateResp);
+  //删除订单退货申请
   rpc OrderReturnApplyDelete(OrderReturnApplyDeleteReq) returns(OrderReturnApplyDeleteResp);
 
 }

@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ReturnApplyListLogic 退货申请
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 14:45
+*/
 type ReturnApplyListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewReturnApplyListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Re
 	}
 }
 
+// ReturnApplyList 查询退货申请
 func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*types.ListReturnApplyResp, error) {
 	resp, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyList(l.ctx, &omsclient.OrderReturnApplyListReq{
 		Current:        req.Current,
@@ -35,6 +41,9 @@ func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*t
 		HandleTime:     req.HandleTime,
 		CreateTime:     req.CreateTime,
 		Status:         req.Status,
+		HandleMan:      req.HandleMan,
+		ReturnName:     req.ReturnName,
+		ReturnPhone:    req.ReturnPhone,
 	})
 
 	if err != nil {
