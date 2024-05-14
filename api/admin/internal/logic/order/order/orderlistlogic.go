@@ -1,4 +1,4 @@
-package logic
+package order
 
 import (
 	"context"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderListLogic 订单
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 16:37
+*/
 type OrderListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,16 +30,18 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderLis
 	}
 }
 
+// OrderList 查询订单
 func (l *OrderListLogic) OrderList(req types.ListOrderReq) (*types.ListOrderResp, error) {
 	resp, err := l.svcCtx.OrderService.OrderList(l.ctx, &omsclient.OrderListReq{
-		Current:        req.Current,
-		PageSize:       req.PageSize,
-		OrderSn:        req.OrderSn,
-		MemberUsername: req.MemberUsername,
-		PayType:        req.PayType,
-		SourceType:     req.SourceType,
-		Status:         req.Status,
-		OrderType:      req.OrderType,
+		Current:         req.Current,
+		PageSize:        req.PageSize,
+		OrderSn:         req.OrderSn,
+		MemberUsername:  req.MemberUsername,
+		PayType:         req.PayType,
+		SourceType:      req.SourceType,
+		Status:          req.Status,
+		OrderType:       req.OrderType,
+		ReceiverKeyword: req.ReceiverKeyword,
 	})
 
 	if err != nil {

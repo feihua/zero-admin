@@ -4,6 +4,69 @@ package omsclient;
 
 option go_package = "./omsclient";
 
+message DeliveryReq {
+  int64 OrderId = 1;
+  string DeliveryCompany = 2;
+  string DeliverySn = 3;
+  string OperateMan = 4;
+}
+
+message DeliveryResp {
+  string pong = 1;
+}
+message CloseOrderReq {
+  repeated int64 Ids = 1;
+  string Note = 2;
+  string OperateMan = 3;
+}
+
+message CloseOrderResp {
+  string pong = 1;
+}
+message OrderDetailReq {
+  int64 OrderId = 1;
+}
+
+message OrderDetailResp {
+  OrderListData data = 1;
+}
+message UpdateReceiverInfoReq {
+  int64 OrderId = 1;
+  int32 Status = 2;
+  string ReceiverName = 3;
+  string ReceiverPhone = 4;
+  string ReceiverPostCode = 5;
+  string ReceiverDetailAddress = 6;
+  string ReceiverProvince = 7;
+  string ReceiverCity = 8;
+  string ReceiverRegion = 9;
+  string OperateMan = 10;
+}
+
+message UpdateReceiverInfoResp {
+  string pong = 1;
+}
+message UpdateMoneyInfoReq {
+  int32 Status = 1;
+  int64 OrderId = 2;
+  int64 FreightAmount = 3;
+  int64 DiscountAmount = 4;
+  string OperateMan = 5;
+}
+
+message UpdateMoneyInfoResp {
+  string pong = 1;
+}
+message UpdateNoteReq {
+  int32 Status = 1;
+  int64 OrderId = 2;
+  string Note = 3;
+  string OperateMan = 4;
+}
+
+message UpdateNoteResp {
+  string pong = 1;
+}
 message OrderAddReq {
   repeated int64  CartItemIds = 1;
   int64       MemberId = 2;
@@ -67,6 +130,7 @@ message OrderListReq {
   int32       Status = 7;
   int32       OrderType = 8;
   int64       MemberId = 9;
+  string ReceiverKeyword=10;
 }
 
 message OrderListData{
@@ -209,10 +273,27 @@ message UpdateOrderStatusByOutTradeNoResp {
 }
 
 service OrderService {
-  rpc OrderAdd(OrderAddReq) returns(OrderAddResp);
+  //pc
+  //批量发货
+  rpc Delivery(DeliveryReq) returns(DeliveryResp);
+  //批量关闭订单
+  rpc CloseOrder(CloseOrderReq) returns(CloseOrderResp);
+  //获取订单详情：订单信息、商品信息、操作记录
+  rpc OrderDetail(OrderDetailReq) returns(OrderDetailResp);
+  //修改收货人信息
+  rpc UpdateReceiverInfo(UpdateReceiverInfoReq) returns(UpdateReceiverInfoResp);
+  //修改订单费用信息
+  rpc UpdateMoneyInfo(UpdateMoneyInfoReq) returns(UpdateMoneyInfoResp);
+  //备注订单
+  rpc UpdateNote(UpdateNoteReq) returns(UpdateNoteResp);
+  //查询订单
   rpc OrderList(OrderListReq) returns(OrderListResp);
-  rpc OrderUpdate(OrderUpdateReq) returns(OrderUpdateResp);
+  //批量删除订单
   rpc OrderDelete(OrderDeleteReq) returns(OrderDeleteResp);
+
+  //app
+  rpc OrderAdd(OrderAddReq) returns(OrderAddResp);
+  rpc OrderUpdate(OrderUpdateReq) returns(OrderUpdateResp);
   rpc OrderListByMemberId(OrderListByMemberIdReq) returns(OrderListByMemberIdResp);
   rpc OrderCancel(OrderCancelReq) returns(OrderCancelResp);
   rpc OrderConfirm(OrderConfirmReq) returns(OrderConfirmResp);

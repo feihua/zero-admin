@@ -22,24 +22,63 @@ func NewOrderServiceServer(svcCtx *svc.ServiceContext) *OrderServiceServer {
 	}
 }
 
-func (s *OrderServiceServer) OrderAdd(ctx context.Context, in *omsclient.OrderAddReq) (*omsclient.OrderAddResp, error) {
-	l := orderservicelogic.NewOrderAddLogic(ctx, s.svcCtx)
-	return l.OrderAdd(in)
+// pc
+func (s *OrderServiceServer) Delivery(ctx context.Context, in *omsclient.DeliveryReq) (*omsclient.DeliveryResp, error) {
+	l := orderservicelogic.NewDeliveryLogic(ctx, s.svcCtx)
+	return l.Delivery(in)
 }
 
+// 批量关闭订单
+func (s *OrderServiceServer) CloseOrder(ctx context.Context, in *omsclient.CloseOrderReq) (*omsclient.CloseOrderResp, error) {
+	l := orderservicelogic.NewCloseOrderLogic(ctx, s.svcCtx)
+	return l.CloseOrder(in)
+}
+
+// 获取订单详情：订单信息、商品信息、操作记录
+func (s *OrderServiceServer) OrderDetail(ctx context.Context, in *omsclient.OrderDetailReq) (*omsclient.OrderDetailResp, error) {
+	l := orderservicelogic.NewOrderDetailLogic(ctx, s.svcCtx)
+	return l.OrderDetail(in)
+}
+
+// 修改收货人信息
+func (s *OrderServiceServer) UpdateReceiverInfo(ctx context.Context, in *omsclient.UpdateReceiverInfoReq) (*omsclient.UpdateReceiverInfoResp, error) {
+	l := orderservicelogic.NewUpdateReceiverInfoLogic(ctx, s.svcCtx)
+	return l.UpdateReceiverInfo(in)
+}
+
+// 修改订单费用信息
+func (s *OrderServiceServer) UpdateMoneyInfo(ctx context.Context, in *omsclient.UpdateMoneyInfoReq) (*omsclient.UpdateMoneyInfoResp, error) {
+	l := orderservicelogic.NewUpdateMoneyInfoLogic(ctx, s.svcCtx)
+	return l.UpdateMoneyInfo(in)
+}
+
+// 备注订单
+func (s *OrderServiceServer) UpdateNote(ctx context.Context, in *omsclient.UpdateNoteReq) (*omsclient.UpdateNoteResp, error) {
+	l := orderservicelogic.NewUpdateNoteLogic(ctx, s.svcCtx)
+	return l.UpdateNote(in)
+}
+
+// 查询订单
 func (s *OrderServiceServer) OrderList(ctx context.Context, in *omsclient.OrderListReq) (*omsclient.OrderListResp, error) {
 	l := orderservicelogic.NewOrderListLogic(ctx, s.svcCtx)
 	return l.OrderList(in)
 }
 
-func (s *OrderServiceServer) OrderUpdate(ctx context.Context, in *omsclient.OrderUpdateReq) (*omsclient.OrderUpdateResp, error) {
-	l := orderservicelogic.NewOrderUpdateLogic(ctx, s.svcCtx)
-	return l.OrderUpdate(in)
-}
-
+// 批量删除订单
 func (s *OrderServiceServer) OrderDelete(ctx context.Context, in *omsclient.OrderDeleteReq) (*omsclient.OrderDeleteResp, error) {
 	l := orderservicelogic.NewOrderDeleteLogic(ctx, s.svcCtx)
 	return l.OrderDelete(in)
+}
+
+// app
+func (s *OrderServiceServer) OrderAdd(ctx context.Context, in *omsclient.OrderAddReq) (*omsclient.OrderAddResp, error) {
+	l := orderservicelogic.NewOrderAddLogic(ctx, s.svcCtx)
+	return l.OrderAdd(in)
+}
+
+func (s *OrderServiceServer) OrderUpdate(ctx context.Context, in *omsclient.OrderUpdateReq) (*omsclient.OrderUpdateResp, error) {
+	l := orderservicelogic.NewOrderUpdateLogic(ctx, s.svcCtx)
+	return l.OrderUpdate(in)
 }
 
 func (s *OrderServiceServer) OrderListByMemberId(ctx context.Context, in *omsclient.OrderListByMemberIdReq) (*omsclient.OrderListByMemberIdResp, error) {

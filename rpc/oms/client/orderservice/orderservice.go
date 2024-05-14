@@ -24,6 +24,8 @@ type (
 	CartItemListResp                  = omsclient.CartItemListResp
 	CartItemUpdateReq                 = omsclient.CartItemUpdateReq
 	CartItemUpdateResp                = omsclient.CartItemUpdateResp
+	CloseOrderReq                     = omsclient.CloseOrderReq
+	CloseOrderResp                    = omsclient.CloseOrderResp
 	CompanyAddressAddReq              = omsclient.CompanyAddressAddReq
 	CompanyAddressAddResp             = omsclient.CompanyAddressAddResp
 	CompanyAddressDeleteReq           = omsclient.CompanyAddressDeleteReq
@@ -33,6 +35,8 @@ type (
 	CompanyAddressListResp            = omsclient.CompanyAddressListResp
 	CompanyAddressUpdateReq           = omsclient.CompanyAddressUpdateReq
 	CompanyAddressUpdateResp          = omsclient.CompanyAddressUpdateResp
+	DeliveryReq                       = omsclient.DeliveryReq
+	DeliveryResp                      = omsclient.DeliveryResp
 	OrderAddReq                       = omsclient.OrderAddReq
 	OrderAddResp                      = omsclient.OrderAddResp
 	OrderCancelReq                    = omsclient.OrderCancelReq
@@ -42,6 +46,8 @@ type (
 	OrderDeleteByIdReq                = omsclient.OrderDeleteByIdReq
 	OrderDeleteReq                    = omsclient.OrderDeleteReq
 	OrderDeleteResp                   = omsclient.OrderDeleteResp
+	OrderDetailReq                    = omsclient.OrderDetailReq
+	OrderDetailResp                   = omsclient.OrderDetailResp
 	OrderItemAddReq                   = omsclient.OrderItemAddReq
 	OrderItemAddResp                  = omsclient.OrderItemAddResp
 	OrderItemDeleteReq                = omsclient.OrderItemDeleteReq
@@ -99,14 +105,35 @@ type (
 	OrderUpdateResp                   = omsclient.OrderUpdateResp
 	QueryOrderListReq                 = omsclient.QueryOrderListReq
 	ReleaseSkuStockLockData           = omsclient.ReleaseSkuStockLockData
+	UpdateMoneyInfoReq                = omsclient.UpdateMoneyInfoReq
+	UpdateMoneyInfoResp               = omsclient.UpdateMoneyInfoResp
+	UpdateNoteReq                     = omsclient.UpdateNoteReq
+	UpdateNoteResp                    = omsclient.UpdateNoteResp
 	UpdateOrderStatusByOutTradeNoReq  = omsclient.UpdateOrderStatusByOutTradeNoReq
 	UpdateOrderStatusByOutTradeNoResp = omsclient.UpdateOrderStatusByOutTradeNoResp
+	UpdateReceiverInfoReq             = omsclient.UpdateReceiverInfoReq
+	UpdateReceiverInfoResp            = omsclient.UpdateReceiverInfoResp
 
 	OrderService interface {
-		OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error)
+		// pc
+		Delivery(ctx context.Context, in *DeliveryReq, opts ...grpc.CallOption) (*DeliveryResp, error)
+		// 批量关闭订单
+		CloseOrder(ctx context.Context, in *CloseOrderReq, opts ...grpc.CallOption) (*CloseOrderResp, error)
+		// 获取订单详情：订单信息、商品信息、操作记录
+		OrderDetail(ctx context.Context, in *OrderDetailReq, opts ...grpc.CallOption) (*OrderDetailResp, error)
+		// 修改收货人信息
+		UpdateReceiverInfo(ctx context.Context, in *UpdateReceiverInfoReq, opts ...grpc.CallOption) (*UpdateReceiverInfoResp, error)
+		// 修改订单费用信息
+		UpdateMoneyInfo(ctx context.Context, in *UpdateMoneyInfoReq, opts ...grpc.CallOption) (*UpdateMoneyInfoResp, error)
+		// 备注订单
+		UpdateNote(ctx context.Context, in *UpdateNoteReq, opts ...grpc.CallOption) (*UpdateNoteResp, error)
+		// 查询订单
 		OrderList(ctx context.Context, in *OrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
-		OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*OrderUpdateResp, error)
+		// 批量删除订单
 		OrderDelete(ctx context.Context, in *OrderDeleteReq, opts ...grpc.CallOption) (*OrderDeleteResp, error)
+		// app
+		OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error)
+		OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*OrderUpdateResp, error)
 		OrderListByMemberId(ctx context.Context, in *OrderListByMemberIdReq, opts ...grpc.CallOption) (*OrderListByMemberIdResp, error)
 		OrderCancel(ctx context.Context, in *OrderCancelReq, opts ...grpc.CallOption) (*OrderCancelResp, error)
 		OrderConfirm(ctx context.Context, in *OrderConfirmReq, opts ...grpc.CallOption) (*OrderConfirmResp, error)
@@ -129,24 +156,63 @@ func NewOrderService(cli zrpc.Client) OrderService {
 	}
 }
 
-func (m *defaultOrderService) OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error) {
+// pc
+func (m *defaultOrderService) Delivery(ctx context.Context, in *DeliveryReq, opts ...grpc.CallOption) (*DeliveryResp, error) {
 	client := omsclient.NewOrderServiceClient(m.cli.Conn())
-	return client.OrderAdd(ctx, in, opts...)
+	return client.Delivery(ctx, in, opts...)
 }
 
+// 批量关闭订单
+func (m *defaultOrderService) CloseOrder(ctx context.Context, in *CloseOrderReq, opts ...grpc.CallOption) (*CloseOrderResp, error) {
+	client := omsclient.NewOrderServiceClient(m.cli.Conn())
+	return client.CloseOrder(ctx, in, opts...)
+}
+
+// 获取订单详情：订单信息、商品信息、操作记录
+func (m *defaultOrderService) OrderDetail(ctx context.Context, in *OrderDetailReq, opts ...grpc.CallOption) (*OrderDetailResp, error) {
+	client := omsclient.NewOrderServiceClient(m.cli.Conn())
+	return client.OrderDetail(ctx, in, opts...)
+}
+
+// 修改收货人信息
+func (m *defaultOrderService) UpdateReceiverInfo(ctx context.Context, in *UpdateReceiverInfoReq, opts ...grpc.CallOption) (*UpdateReceiverInfoResp, error) {
+	client := omsclient.NewOrderServiceClient(m.cli.Conn())
+	return client.UpdateReceiverInfo(ctx, in, opts...)
+}
+
+// 修改订单费用信息
+func (m *defaultOrderService) UpdateMoneyInfo(ctx context.Context, in *UpdateMoneyInfoReq, opts ...grpc.CallOption) (*UpdateMoneyInfoResp, error) {
+	client := omsclient.NewOrderServiceClient(m.cli.Conn())
+	return client.UpdateMoneyInfo(ctx, in, opts...)
+}
+
+// 备注订单
+func (m *defaultOrderService) UpdateNote(ctx context.Context, in *UpdateNoteReq, opts ...grpc.CallOption) (*UpdateNoteResp, error) {
+	client := omsclient.NewOrderServiceClient(m.cli.Conn())
+	return client.UpdateNote(ctx, in, opts...)
+}
+
+// 查询订单
 func (m *defaultOrderService) OrderList(ctx context.Context, in *OrderListReq, opts ...grpc.CallOption) (*OrderListResp, error) {
 	client := omsclient.NewOrderServiceClient(m.cli.Conn())
 	return client.OrderList(ctx, in, opts...)
 }
 
-func (m *defaultOrderService) OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*OrderUpdateResp, error) {
-	client := omsclient.NewOrderServiceClient(m.cli.Conn())
-	return client.OrderUpdate(ctx, in, opts...)
-}
-
+// 批量删除订单
 func (m *defaultOrderService) OrderDelete(ctx context.Context, in *OrderDeleteReq, opts ...grpc.CallOption) (*OrderDeleteResp, error) {
 	client := omsclient.NewOrderServiceClient(m.cli.Conn())
 	return client.OrderDelete(ctx, in, opts...)
+}
+
+// app
+func (m *defaultOrderService) OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error) {
+	client := omsclient.NewOrderServiceClient(m.cli.Conn())
+	return client.OrderAdd(ctx, in, opts...)
+}
+
+func (m *defaultOrderService) OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*OrderUpdateResp, error) {
+	client := omsclient.NewOrderServiceClient(m.cli.Conn())
+	return client.OrderUpdate(ctx, in, opts...)
 }
 
 func (m *defaultOrderService) OrderListByMemberId(ctx context.Context, in *OrderListByMemberIdReq, opts ...grpc.CallOption) (*OrderListByMemberIdResp, error) {

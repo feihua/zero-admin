@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderListLogic 订单
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 16:39
+*/
 type OrderListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderLi
 	}
 }
 
+// OrderList 查询订单列表
 func (l *OrderListLogic) OrderList(in *omsclient.OrderListReq) (*omsclient.OrderListResp, error) {
 	q := query.OmsOrder.WithContext(l.ctx)
 	if len(in.OrderSn) > 0 {
@@ -47,6 +53,10 @@ func (l *OrderListLogic) OrderList(in *omsclient.OrderListReq) (*omsclient.Order
 	}
 	if in.OrderType != 2 {
 		q = q.Where(query.OmsOrder.OrderType.Eq(in.OrderType))
+	}
+
+	if len(in.ReceiverKeyword) > 0 {
+		q = q.Where(query.OmsOrder.ReceiverName.Eq(in.ReceiverKeyword)).Or(query.OmsOrder.ReceiverPhone.Eq(in.ReceiverKeyword))
 	}
 
 	offset := (in.Current - 1) * in.PageSize

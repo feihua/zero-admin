@@ -24,6 +24,8 @@ type (
 	CartItemListResp                  = omsclient.CartItemListResp
 	CartItemUpdateReq                 = omsclient.CartItemUpdateReq
 	CartItemUpdateResp                = omsclient.CartItemUpdateResp
+	CloseOrderReq                     = omsclient.CloseOrderReq
+	CloseOrderResp                    = omsclient.CloseOrderResp
 	CompanyAddressAddReq              = omsclient.CompanyAddressAddReq
 	CompanyAddressAddResp             = omsclient.CompanyAddressAddResp
 	CompanyAddressDeleteReq           = omsclient.CompanyAddressDeleteReq
@@ -33,6 +35,8 @@ type (
 	CompanyAddressListResp            = omsclient.CompanyAddressListResp
 	CompanyAddressUpdateReq           = omsclient.CompanyAddressUpdateReq
 	CompanyAddressUpdateResp          = omsclient.CompanyAddressUpdateResp
+	DeliveryReq                       = omsclient.DeliveryReq
+	DeliveryResp                      = omsclient.DeliveryResp
 	OrderAddReq                       = omsclient.OrderAddReq
 	OrderAddResp                      = omsclient.OrderAddResp
 	OrderCancelReq                    = omsclient.OrderCancelReq
@@ -42,6 +46,8 @@ type (
 	OrderDeleteByIdReq                = omsclient.OrderDeleteByIdReq
 	OrderDeleteReq                    = omsclient.OrderDeleteReq
 	OrderDeleteResp                   = omsclient.OrderDeleteResp
+	OrderDetailReq                    = omsclient.OrderDetailReq
+	OrderDetailResp                   = omsclient.OrderDetailResp
 	OrderItemAddReq                   = omsclient.OrderItemAddReq
 	OrderItemAddResp                  = omsclient.OrderItemAddResp
 	OrderItemDeleteReq                = omsclient.OrderItemDeleteReq
@@ -99,8 +105,14 @@ type (
 	OrderUpdateResp                   = omsclient.OrderUpdateResp
 	QueryOrderListReq                 = omsclient.QueryOrderListReq
 	ReleaseSkuStockLockData           = omsclient.ReleaseSkuStockLockData
+	UpdateMoneyInfoReq                = omsclient.UpdateMoneyInfoReq
+	UpdateMoneyInfoResp               = omsclient.UpdateMoneyInfoResp
+	UpdateNoteReq                     = omsclient.UpdateNoteReq
+	UpdateNoteResp                    = omsclient.UpdateNoteResp
 	UpdateOrderStatusByOutTradeNoReq  = omsclient.UpdateOrderStatusByOutTradeNoReq
 	UpdateOrderStatusByOutTradeNoResp = omsclient.UpdateOrderStatusByOutTradeNoResp
+	UpdateReceiverInfoReq             = omsclient.UpdateReceiverInfoReq
+	UpdateReceiverInfoResp            = omsclient.UpdateReceiverInfoResp
 
 	OrderItemService interface {
 		OrderItemAdd(ctx context.Context, in *OrderItemAddReq, opts ...grpc.CallOption) (*OrderItemAddResp, error)

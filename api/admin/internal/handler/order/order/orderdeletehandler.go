@@ -1,4 +1,4 @@
-package handler
+package order
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func OrderDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewOrderDeleteLogic(r.Context(), ctx)
+		l := order.NewOrderDeleteLogic(r.Context(), ctx)
 		resp, err := l.OrderDelete(req)
 		if err != nil {
 			httpx.Error(w, err)
