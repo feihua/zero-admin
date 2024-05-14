@@ -86,7 +86,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	}
 
 	//把能访问的url存在在redis，在middleware中检验
-	key := strconv.FormatInt(userId, 10)
+	key := "zero:mall:token:" + strconv.FormatInt(userId, 10)
 	err = l.svcCtx.Redis.Set(key, strings.Join(resp.BackgroundUrls, ","))
 
 	if err != nil {
