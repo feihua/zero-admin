@@ -162,6 +162,6 @@ INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, cr
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (129, '批量人气推荐状态', 29, '', '', 2, '', 2, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sms/homerecommendproduct/updateRecommendProductStatus');
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (130, '批量修改推荐状态', 30, '', '', 2, '', 2, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sms/homerecommendsubject/updateRecommendSubjectStatus');
 
-
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (131, '优惠券领取', 25, '/sms/coupon/list', '', 1, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sms/couponhistory/queryCouponHistoryList');
 
 

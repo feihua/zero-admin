@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponHistoryListLogic 优惠券领取记录管理
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 10:30
+*/
 type CouponHistoryListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,11 +31,14 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// CouponHistoryList 根据优惠券id，使用状态，订单编号分页获取领取记录
 func (l *CouponHistoryListLogic) CouponHistoryList(req types.ListCouponHistoryReq) (*types.ListCouponHistoryResp, error) {
 	resp, err := l.svcCtx.CouponHistoryService.CouponHistoryList(l.ctx, &smsclient.CouponHistoryListReq{
 		Current:   req.Current,
 		PageSize:  req.PageSize,
 		UseStatus: req.UseStatus,
+		CouponId:  req.CouponId,
+		OrderSn:   req.OrderSn,
 	})
 
 	if err != nil {

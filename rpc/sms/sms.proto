@@ -185,6 +185,7 @@ message CouponHistoryListReq {
   int64      CouponId = 3;
   int64      MemberId = 4;
   int32      UseStatus = 5;
+  string      OrderSn = 6;
 }
 
 message CouponHistoryListData{

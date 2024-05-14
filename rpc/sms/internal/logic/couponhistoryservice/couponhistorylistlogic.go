@@ -29,7 +29,7 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-// CouponHistoryList 查询会员的优惠券
+// CouponHistoryList 根据优惠券id，使用状态，订单编号分页获取领取记录
 func (l *CouponHistoryListLogic) CouponHistoryList(in *smsclient.CouponHistoryListReq) (*smsclient.CouponHistoryListResp, error) {
 	q := query.SmsCouponHistory.WithContext(l.ctx)
 
@@ -38,6 +38,9 @@ func (l *CouponHistoryListLogic) CouponHistoryList(in *smsclient.CouponHistoryLi
 	}
 	if in.MemberId != 0 {
 		q = q.Where(query.SmsCouponHistory.MemberID.Eq(in.MemberId))
+	}
+	if len(in.OrderSn) > 0 {
+		q = q.Where(query.SmsCouponHistory.OrderSn.Eq(in.OrderSn))
 	}
 	if in.UseStatus != 3 {
 		q = q.Where(query.SmsCouponHistory.UseStatus.Eq(in.UseStatus))
@@ -48,7 +51,7 @@ func (l *CouponHistoryListLogic) CouponHistoryList(in *smsclient.CouponHistoryLi
 	count, err := q.Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询优惠券使用历史列表信息失败,参数：%+v,异常:%s", in, err.Error())
+		logc.Errorf(l.ctx, "根据优惠券id，使用状态，订单编号分页获取领取记录失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}
 
@@ -70,7 +73,7 @@ func (l *CouponHistoryListLogic) CouponHistoryList(in *smsclient.CouponHistoryLi
 		})
 	}
 
-	logc.Infof(l.ctx, "查询优惠券使用历史列表信息,参数：%+v,响应：%+v", in, list)
+	logc.Infof(l.ctx, "根据优惠券id，使用状态，订单编号分页获取领取记录,参数：%+v,响应：%+v", in, list)
 	return &smsclient.CouponHistoryListResp{
 		Total: count,
 		List:  list,
