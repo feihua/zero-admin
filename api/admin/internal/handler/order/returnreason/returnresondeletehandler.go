@@ -1,4 +1,4 @@
-package handler
+package returnreason
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func ReturnResonDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewReturnResonDeleteLogic(r.Context(), ctx)
+		l := returnreason.NewReturnResonDeleteLogic(r.Context(), ctx)
 		resp, err := l.ReturnResonDelete(req)
 		if err != nil {
 			httpx.Error(w, err)

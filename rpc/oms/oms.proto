@@ -723,6 +723,11 @@ message OrderReturnReasonUpdateReq {
   string  CreateTime = 5;
 }
 
+message OrderReturnReasonUpdateStatusReq {
+  repeated int64      Ids = 1;
+  int32      Status = 2;
+}
+
 message OrderReturnReasonUpdateResp {
   string pong = 1;
 }
@@ -737,9 +742,15 @@ message OrderReturnReasonDeleteResp {
 
 service OrderReturnReasonService {
 
+  //添加退货原因
   rpc OrderReturnReasonAdd(OrderReturnReasonAddReq) returns(OrderReturnReasonAddResp);
+  //查询退货原因
   rpc OrderReturnReasonList(OrderReturnReasonListReq) returns(OrderReturnReasonListResp);
+  //更新退货原因
   rpc OrderReturnReasonUpdate(OrderReturnReasonUpdateReq) returns(OrderReturnReasonUpdateResp);
+  //批量修改退货原因状态
+  rpc OrderReturnReasonUpdateStatus(OrderReturnReasonUpdateStatusReq) returns(OrderReturnReasonUpdateResp);
+  //删除退货原因
   rpc OrderReturnReasonDelete(OrderReturnReasonDeleteReq) returns(OrderReturnReasonDeleteResp);
 
 

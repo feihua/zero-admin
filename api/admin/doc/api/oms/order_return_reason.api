@@ -42,6 +42,10 @@ type (
 		Sort   int32  `json:"sort"`
 		Status int32  `json:"status"` // 状态：0->不启用；1->启用
 	}
+	UpdateReturnResonStatusReq {
+		Ids     []int64  `json:"ids"`
+		Status int32  `json:"status"` // 状态：0->不启用；1->启用
+	}
 	UpdateReturnResonResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
@@ -62,19 +66,23 @@ type (
 	prefix:     /api/order/returnreason
 )
 service admin-api {
-	//
+	//添加退货原因
 	@handler ReturnResonAdd
 	post /addReturnReson (addReturnResonReq) returns (addReturnResonResp)
 
-	//
+	//查询退货原因
 	@handler ReturnResonList
 	get /queryReturnResonList (ListReturnResonReq) returns (ListReturnResonResp)
 
-	//
+	//更新退货原因
 	@handler ReturnResonUpdate
 	post /updateReturnReson (UpdateReturnResonReq) returns (UpdateReturnResonResp)
 
-	//
+	//批量更新退货原因状态
+	@handler UpdateReturnResonStatus
+	post /updateReturnResonStatus (UpdateReturnResonStatusReq) returns (UpdateReturnResonResp)
+
+	//删除退货原因
 	@handler ReturnResonDelete
 	get /deleteReturnReson (DeleteReturnResonReq) returns (DeleteReturnResonResp)
 }

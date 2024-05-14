@@ -1,4 +1,4 @@
-package logic
+package returnreason
 
 import (
 	"context"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ReturnResonDeleteLogic 退货原因
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 11:33
+*/
 type ReturnResonDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewReturnResonDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// ReturnResonDelete 删除退货原因
 func (l *ReturnResonDeleteLogic) ReturnResonDelete(req types.DeleteReturnResonReq) (*types.DeleteReturnResonResp, error) {
 	_, err := l.svcCtx.OrderReturnReasonService.OrderReturnReasonDelete(l.ctx, &omsclient.OrderReturnReasonDeleteReq{
 		Ids: req.Ids,
@@ -36,6 +42,6 @@ func (l *ReturnResonDeleteLogic) ReturnResonDelete(req types.DeleteReturnResonRe
 	}
 	return &types.DeleteReturnResonResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除退货原因成功",
 	}, nil
 }

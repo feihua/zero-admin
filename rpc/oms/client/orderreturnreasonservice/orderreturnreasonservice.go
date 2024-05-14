@@ -85,6 +85,7 @@ type (
 	OrderReturnReasonListResp         = omsclient.OrderReturnReasonListResp
 	OrderReturnReasonUpdateReq        = omsclient.OrderReturnReasonUpdateReq
 	OrderReturnReasonUpdateResp       = omsclient.OrderReturnReasonUpdateResp
+	OrderReturnReasonUpdateStatusReq  = omsclient.OrderReturnReasonUpdateStatusReq
 	OrderSettingAddReq                = omsclient.OrderSettingAddReq
 	OrderSettingAddResp               = omsclient.OrderSettingAddResp
 	OrderSettingDeleteReq             = omsclient.OrderSettingDeleteReq
@@ -102,9 +103,15 @@ type (
 	UpdateOrderStatusByOutTradeNoResp = omsclient.UpdateOrderStatusByOutTradeNoResp
 
 	OrderReturnReasonService interface {
+		// 添加退货原因
 		OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq, opts ...grpc.CallOption) (*OrderReturnReasonAddResp, error)
+		// 查询退货原因
 		OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq, opts ...grpc.CallOption) (*OrderReturnReasonListResp, error)
+		// 更新退货原因
 		OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error)
+		// 批量修改退货原因状态
+		OrderReturnReasonUpdateStatus(ctx context.Context, in *OrderReturnReasonUpdateStatusReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error)
+		// 删除退货原因
 		OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error)
 	}
 
@@ -119,21 +126,31 @@ func NewOrderReturnReasonService(cli zrpc.Client) OrderReturnReasonService {
 	}
 }
 
+// 添加退货原因
 func (m *defaultOrderReturnReasonService) OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq, opts ...grpc.CallOption) (*OrderReturnReasonAddResp, error) {
 	client := omsclient.NewOrderReturnReasonServiceClient(m.cli.Conn())
 	return client.OrderReturnReasonAdd(ctx, in, opts...)
 }
 
+// 查询退货原因
 func (m *defaultOrderReturnReasonService) OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq, opts ...grpc.CallOption) (*OrderReturnReasonListResp, error) {
 	client := omsclient.NewOrderReturnReasonServiceClient(m.cli.Conn())
 	return client.OrderReturnReasonList(ctx, in, opts...)
 }
 
+// 更新退货原因
 func (m *defaultOrderReturnReasonService) OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error) {
 	client := omsclient.NewOrderReturnReasonServiceClient(m.cli.Conn())
 	return client.OrderReturnReasonUpdate(ctx, in, opts...)
 }
 
+// 批量修改退货原因状态
+func (m *defaultOrderReturnReasonService) OrderReturnReasonUpdateStatus(ctx context.Context, in *OrderReturnReasonUpdateStatusReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error) {
+	client := omsclient.NewOrderReturnReasonServiceClient(m.cli.Conn())
+	return client.OrderReturnReasonUpdateStatus(ctx, in, opts...)
+}
+
+// 删除退货原因
 func (m *defaultOrderReturnReasonService) OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error) {
 	client := omsclient.NewOrderReturnReasonServiceClient(m.cli.Conn())
 	return client.OrderReturnReasonDelete(ctx, in, opts...)

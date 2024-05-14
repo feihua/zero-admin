@@ -1,4 +1,4 @@
-package logic
+package returnreason
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ReturnResonUpdateLogic 退货原因
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 11:34
+*/
 type ReturnResonUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewReturnResonUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
+// ReturnResonUpdate 更新退货原因
 func (l *ReturnResonUpdateLogic) ReturnResonUpdate(req types.UpdateReturnResonReq) (*types.UpdateReturnResonResp, error) {
 	_, err := l.svcCtx.OrderReturnReasonService.OrderReturnReasonUpdate(l.ctx, &omsclient.OrderReturnReasonUpdateReq{
 		Id:     req.Id,

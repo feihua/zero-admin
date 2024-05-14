@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderReturnReasonAddLogic 退货原因
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 11:36
+*/
 type OrderReturnReasonAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,6 +30,7 @@ func NewOrderReturnReasonAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// OrderReturnReasonAdd 添加退货原因
 func (l *OrderReturnReasonAddLogic) OrderReturnReasonAdd(in *omsclient.OrderReturnReasonAddReq) (*omsclient.OrderReturnReasonAddResp, error) {
 	err := query.OmsOrderReturnReason.WithContext(l.ctx).Create(&model.OmsOrderReturnReason{
 		Name:       in.Name,

@@ -2787,6 +2787,11 @@ type UpdateReturnResonResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateReturnResonStatusReq struct {
+	Ids    []int64 `json:"ids"`
+	Status int32   `json:"status"` // 状态：0->不启用；1->启用
+}
+
 type UpdateRoleMenuReq struct {
 	RoleId  int64   `json:"roleId"`
 	MenuIds []int64 `json:"menuIds"`

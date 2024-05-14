@@ -85,6 +85,7 @@ type (
 	OrderReturnReasonListResp         = omsclient.OrderReturnReasonListResp
 	OrderReturnReasonUpdateReq        = omsclient.OrderReturnReasonUpdateReq
 	OrderReturnReasonUpdateResp       = omsclient.OrderReturnReasonUpdateResp
+	OrderReturnReasonUpdateStatusReq  = omsclient.OrderReturnReasonUpdateStatusReq
 	OrderSettingAddReq                = omsclient.OrderSettingAddReq
 	OrderSettingAddResp               = omsclient.OrderSettingAddResp
 	OrderSettingDeleteReq             = omsclient.OrderSettingDeleteReq

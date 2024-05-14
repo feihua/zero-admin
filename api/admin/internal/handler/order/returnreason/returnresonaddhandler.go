@@ -1,4 +1,4 @@
-package handler
+package returnreason
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func ReturnResonAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewReturnResonAddLogic(r.Context(), ctx)
+		l := returnreason.NewReturnResonAddLogic(r.Context(), ctx)
 		resp, err := l.ReturnResonAdd(req)
 		if err != nil {
 			httpx.Error(w, err)

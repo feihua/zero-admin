@@ -1564,19 +1564,26 @@ var OrderReturnApplyService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderReturnReasonService_OrderReturnReasonAdd_FullMethodName    = "/omsclient.OrderReturnReasonService/OrderReturnReasonAdd"
-	OrderReturnReasonService_OrderReturnReasonList_FullMethodName   = "/omsclient.OrderReturnReasonService/OrderReturnReasonList"
-	OrderReturnReasonService_OrderReturnReasonUpdate_FullMethodName = "/omsclient.OrderReturnReasonService/OrderReturnReasonUpdate"
-	OrderReturnReasonService_OrderReturnReasonDelete_FullMethodName = "/omsclient.OrderReturnReasonService/OrderReturnReasonDelete"
+	OrderReturnReasonService_OrderReturnReasonAdd_FullMethodName          = "/omsclient.OrderReturnReasonService/OrderReturnReasonAdd"
+	OrderReturnReasonService_OrderReturnReasonList_FullMethodName         = "/omsclient.OrderReturnReasonService/OrderReturnReasonList"
+	OrderReturnReasonService_OrderReturnReasonUpdate_FullMethodName       = "/omsclient.OrderReturnReasonService/OrderReturnReasonUpdate"
+	OrderReturnReasonService_OrderReturnReasonUpdateStatus_FullMethodName = "/omsclient.OrderReturnReasonService/OrderReturnReasonUpdateStatus"
+	OrderReturnReasonService_OrderReturnReasonDelete_FullMethodName       = "/omsclient.OrderReturnReasonService/OrderReturnReasonDelete"
 )
 
 // OrderReturnReasonServiceClient is the client API for OrderReturnReasonService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderReturnReasonServiceClient interface {
+	// 添加退货原因
 	OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq, opts ...grpc.CallOption) (*OrderReturnReasonAddResp, error)
+	// 查询退货原因
 	OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq, opts ...grpc.CallOption) (*OrderReturnReasonListResp, error)
+	// 更新退货原因
 	OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error)
+	// 批量修改退货原因状态
+	OrderReturnReasonUpdateStatus(ctx context.Context, in *OrderReturnReasonUpdateStatusReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error)
+	// 删除退货原因
 	OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error)
 }
 
@@ -1615,6 +1622,15 @@ func (c *orderReturnReasonServiceClient) OrderReturnReasonUpdate(ctx context.Con
 	return out, nil
 }
 
+func (c *orderReturnReasonServiceClient) OrderReturnReasonUpdateStatus(ctx context.Context, in *OrderReturnReasonUpdateStatusReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error) {
+	out := new(OrderReturnReasonUpdateResp)
+	err := c.cc.Invoke(ctx, OrderReturnReasonService_OrderReturnReasonUpdateStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderReturnReasonServiceClient) OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error) {
 	out := new(OrderReturnReasonDeleteResp)
 	err := c.cc.Invoke(ctx, OrderReturnReasonService_OrderReturnReasonDelete_FullMethodName, in, out, opts...)
@@ -1628,9 +1644,15 @@ func (c *orderReturnReasonServiceClient) OrderReturnReasonDelete(ctx context.Con
 // All implementations must embed UnimplementedOrderReturnReasonServiceServer
 // for forward compatibility
 type OrderReturnReasonServiceServer interface {
+	// 添加退货原因
 	OrderReturnReasonAdd(context.Context, *OrderReturnReasonAddReq) (*OrderReturnReasonAddResp, error)
+	// 查询退货原因
 	OrderReturnReasonList(context.Context, *OrderReturnReasonListReq) (*OrderReturnReasonListResp, error)
+	// 更新退货原因
 	OrderReturnReasonUpdate(context.Context, *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error)
+	// 批量修改退货原因状态
+	OrderReturnReasonUpdateStatus(context.Context, *OrderReturnReasonUpdateStatusReq) (*OrderReturnReasonUpdateResp, error)
+	// 删除退货原因
 	OrderReturnReasonDelete(context.Context, *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error)
 	mustEmbedUnimplementedOrderReturnReasonServiceServer()
 }
@@ -1647,6 +1669,9 @@ func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonList(context
 }
 func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonUpdate(context.Context, *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonUpdate not implemented")
+}
+func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonUpdateStatus(context.Context, *OrderReturnReasonUpdateStatusReq) (*OrderReturnReasonUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonUpdateStatus not implemented")
 }
 func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonDelete(context.Context, *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonDelete not implemented")
@@ -1719,6 +1744,24 @@ func _OrderReturnReasonService_OrderReturnReasonUpdate_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderReturnReasonService_OrderReturnReasonUpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderReturnReasonUpdateStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonUpdateStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderReturnReasonService_OrderReturnReasonUpdateStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonUpdateStatus(ctx, req.(*OrderReturnReasonUpdateStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OrderReturnReasonService_OrderReturnReasonDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OrderReturnReasonDeleteReq)
 	if err := dec(in); err != nil {
@@ -1755,6 +1798,10 @@ var OrderReturnReasonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OrderReturnReasonUpdate",
 			Handler:    _OrderReturnReasonService_OrderReturnReasonUpdate_Handler,
+		},
+		{
+			MethodName: "OrderReturnReasonUpdateStatus",
+			Handler:    _OrderReturnReasonService_OrderReturnReasonUpdateStatus_Handler,
 		},
 		{
 			MethodName: "OrderReturnReasonDelete",
