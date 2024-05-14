@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// FlashPromotionListByDateLogic
+// FlashPromotionListByDateLogic 秒杀活动
 /*
 Author: LiuFeiHua
 Date: 2023/12/5 13:53

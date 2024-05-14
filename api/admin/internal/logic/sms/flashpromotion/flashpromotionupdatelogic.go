@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionUpdateLogic 秒杀活动
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 10:51
+*/
 type FlashPromotionUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewFlashPromotionUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// FlashPromotionUpdate 更新秒杀活动
 func (l *FlashPromotionUpdateLogic) FlashPromotionUpdate(req types.UpdateFlashPromotionReq) (*types.UpdateFlashPromotionResp, error) {
 	_, err := l.svcCtx.FlashPromotionService.FlashPromotionUpdate(l.ctx, &smsclient.FlashPromotionUpdateReq{
 		Id:        req.Id,

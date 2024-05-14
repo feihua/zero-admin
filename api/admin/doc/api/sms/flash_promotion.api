@@ -6,7 +6,7 @@ info (
 
 type (
 	addFlashPromotionReq {
-		Title     string `json:"title"`
+		Title     string `json:"title"`     //活动标题
 		StartDate string `json:"startDate"` // 开始日期
 		EndDate   string `json:"endDate"` // 结束日期
 		Status    int32  `json:"status"` // 上下线状态
@@ -67,19 +67,19 @@ type (
 	prefix:     /api/sms/flashpromotion
 )
 service admin-api {
-	//
+	//添加秒杀活动
 	@handler FlashPromotionAdd
 	post /addFlashPromotion (addFlashPromotionReq) returns (addFlashPromotionResp)
 
-	//
+	//查询秒杀活动
 	@handler FlashPromotionList
 	get /queryFlashPromotionList (ListFlashPromotionReq) returns (ListFlashPromotionResp)
 
-	//
+	//更新秒杀活动
 	@handler FlashPromotionUpdate
 	post /updateFlashPromotion (UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp)
 
-	//
+	//删除秒杀活动
 	@handler FlashPromotionDelete
 	get /deleteFlashPromotion (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
 }

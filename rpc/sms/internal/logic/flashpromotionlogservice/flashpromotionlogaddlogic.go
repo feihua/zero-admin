@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionLogAddLogic 限时购通知记录
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 10:52
+*/
 type FlashPromotionLogAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewFlashPromotionLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// FlashPromotionLogAdd 添加限时购通知记录
 func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(in *smsclient.FlashPromotionLogAddReq) (*smsclient.FlashPromotionLogAddResp, error) {
 	SubscribeTime, _ := time.Parse("2006-01-02 15:04:05", in.SubscribeTime)
 	err := query.SmsFlashPromotionLog.WithContext(l.ctx).Create(&model.SmsFlashPromotionLog{

@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionDeleteLogic 秒杀活动
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 10:51
+*/
 type FlashPromotionDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewFlashPromotionDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// FlashPromotionDelete 删除秒杀活动
 func (l *FlashPromotionDeleteLogic) FlashPromotionDelete(req types.DeleteFlashPromotionReq) (*types.DeleteFlashPromotionResp, error) {
 	_, err := l.svcCtx.FlashPromotionService.FlashPromotionDelete(l.ctx, &smsclient.FlashPromotionDeleteReq{
 		Ids: req.Ids,
@@ -38,6 +44,6 @@ func (l *FlashPromotionDeleteLogic) FlashPromotionDelete(req types.DeleteFlashPr
 
 	return &types.DeleteFlashPromotionResp{
 		Code:    "000000",
-		Message: "",
+		Message: "删除限时购记录成功",
 	}, nil
 }

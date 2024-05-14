@@ -7,8 +7,14 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"time"
 )
 
+// FlashPromotionListLogic 秒杀活动
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 10:55
+*/
 type FlashPromotionListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,6 +29,7 @@ func NewFlashPromotionListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// FlashPromotionList 查询秒杀活动
 func (l *FlashPromotionListLogic) FlashPromotionList(in *smsclient.FlashPromotionListReq) (*smsclient.FlashPromotionListResp, error) {
 	q := query.SmsFlashPromotion.WithContext(l.ctx)
 	if len(in.Title) > 0 {
@@ -33,6 +40,14 @@ func (l *FlashPromotionListLogic) FlashPromotionList(in *smsclient.FlashPromotio
 		q = q.Where(query.SmsFlashPromotion.Status.Eq(in.Status))
 	}
 
+	if len(in.StartDate) > 0 {
+		startDate, _ := time.Parse("2006-01-02", in.StartDate)
+		q = q.Where(query.SmsFlashPromotion.StartDate.Gte(startDate))
+	}
+	if len(in.EndDate) > 0 {
+		endDate, _ := time.Parse("2006-01-02", in.EndDate)
+		q = q.Where(query.SmsFlashPromotion.EndDate.Lte(endDate))
+	}
 	//if len(in.StartDate) > 0 {
 	//		where = where + fmt.Sprintf(" AND start_date >= '%s'", in.StartDate)
 	//	}

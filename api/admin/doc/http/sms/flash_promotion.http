@@ -1,0 +1,47 @@
+###用户登录
+POST {{host}}/api/sys/user/login
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.token);
+%}
+
+### 添加秒杀活动
+POST {{host}}/api/sms/flashpromotion/addFlashPromotion
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "测试123",
+  "startDate": "2022-11-12",
+  "endDate": "2025-11-12",
+  "status": 1,
+  "createTime": "2023-12-05 13:50:49"
+}
+
+### 删除秒杀活动
+GET {{host}}/api/sms/flashpromotion/deleteFlashPromotion?ids=[14]
+Authorization: Bearer {{token}}
+
+
+### 更新秒杀活动
+POST {{host}}/api/sms/flashpromotion/updateFlashPromotion
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 14,
+  "title": "测试321",
+  "startDate": "2022-11-12",
+  "endDate": "2025-11-12",
+  "status": 1,
+  "createTime": "2023-12-05 13:50:49"
+}
+
+### 查询秒杀活动列表
+GET {{host}}/api/sms/flashpromotion/queryFlashPromotionList
+Authorization: Bearer {{token}}

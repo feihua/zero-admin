@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// FlashPromotionLogListLogic 限时购通知记录
+/*
+Author: LiuFeiHua
+Date: 2024/5/14 10:53
+*/
 type FlashPromotionLogListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewFlashPromotionLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
+// FlashPromotionLogList 查询限时购通知记录
 func (l *FlashPromotionLogListLogic) FlashPromotionLogList(in *smsclient.FlashPromotionLogListReq) (*smsclient.FlashPromotionLogListResp, error) {
 	q := query.SmsFlashPromotionLog.WithContext(l.ctx)
 
