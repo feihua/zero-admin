@@ -66,6 +66,18 @@ type (
 		HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
 		Type                       int32  `json:"type"` // 属性的类型；0->规格；1->参数
 	}
+	QueryByproductCategoryIdReq {
+		ProductCategoryId int64  `json:"productCategoryId"`
+	}
+	QueryByproductCategoryIdData {
+		AttributeId                         int64  `json:"attributeId"`
+		ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+	}
+	QueryByproductCategoryIdResp {
+		Code     string                      `json:"code"`
+		Message  string                      `json:"message"`
+		Data     []*QueryByproductCategoryIdData `json:"data"`
+	}
 	UpdateProductAttributeResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
@@ -86,19 +98,23 @@ type (
 	prefix:     /api/product/attribute
 )
 service admin-api {
-	//
+	//添加商品属性
 	@handler ProductAttributeAdd
 	post /addProductAttribute (addProductAttributeReq) returns (addProductAttributeResp)
 
-	//
+	//查询商品属性
 	@handler ProductAttributeList
 	get /queryProductAttributeList (ListProductAttributeReq) returns (ListProductAttributeResp)
 
-	//
-	@handler ProductAttributeUpdate
-	post /updateProductAttribute (UpdateProductAttributeReq) returns (UpdateProductAttributeResp)
+	//根据商品分类的id获取商品属性及属性分类
+	@handler QueryByproductCategoryId
+	get /queryByproductCategoryId (QueryByproductCategoryIdReq) returns (QueryByproductCategoryIdResp)
 
-	//
+	//更新商品属性
+	@handler ProductAttributeUpdate
+	post /updateProductAttribute (UpdateProductAttributeReq) returns (QueryByproductCategoryIdResp)
+
+	//删除商品属性
 	@handler ProductAttributeDelete
 	get /deleteProductAttribute (DeleteProductAttributeReq) returns (DeleteProductAttributeResp)
 }

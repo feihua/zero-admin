@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductAttributeAddLogic 商品属性
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 14:31
+*/
 type ProductAttributeAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewProductAttributeAddLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// ProductAttributeAdd 添加商品属性
 func (l *ProductAttributeAddLogic) ProductAttributeAdd(req *types.AddProductAttributeReq) (resp *types.AddProductAttributeResp, err error) {
 	_, err = l.svcCtx.ProductAttributeService.ProductAttributeAdd(l.ctx, &pmsclient.ProductAttributeAddReq{
 		ProductAttributeCategoryId: req.ProductAttributeCategoryId,

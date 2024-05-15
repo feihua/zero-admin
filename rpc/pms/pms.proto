@@ -850,6 +850,17 @@ message ProductAttributeListResp {
   repeated  ProductAttributeListData list = 2;
 }
 
+message QueryByproductCategoryIdReq {
+  int64 ProductCategoryId = 1;
+}
+message QueryByproductCategoryIdData{
+  int64    AttributeId = 1;
+  int64    AttributeCategoryId = 2;
+
+}
+message QueryByproductCategoryIdResp {
+  repeated  QueryByproductCategoryIdData list = 1;
+}
 message ProductAttributeUpdateReq {
   int64    Id = 1;
   int64    ProductAttributeCategoryId = 2;
@@ -879,10 +890,15 @@ message ProductAttributeDeleteResp {
 
 service ProductAttributeService {
 
-
+  //添加商品属性
   rpc ProductAttributeAdd(ProductAttributeAddReq) returns(ProductAttributeAddResp);
+  //查询商品属性
   rpc ProductAttributeList(ProductAttributeListReq) returns(ProductAttributeListResp);
+  //根据商品分类的id获取商品属性及属性分类
+  rpc QueryByproductCategoryId(QueryByproductCategoryIdReq) returns(QueryByproductCategoryIdResp);
+  //更新商品属性
   rpc ProductAttributeUpdate(ProductAttributeUpdateReq) returns(ProductAttributeUpdateResp);
+  //删除商品属性
   rpc ProductAttributeDelete(ProductAttributeDeleteReq) returns(ProductAttributeDeleteResp);
 
 

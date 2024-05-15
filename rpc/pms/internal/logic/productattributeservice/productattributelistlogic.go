@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductAttributeListLogic 商品属性
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 14:30
+*/
 type ProductAttributeListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewProductAttributeListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
+// ProductAttributeList 查询商品属性
 func (l *ProductAttributeListLogic) ProductAttributeList(in *pmsclient.ProductAttributeListReq) (*pmsclient.ProductAttributeListResp, error) {
 	q := query.PmsProductAttribute.WithContext(l.ctx)
 	if len(in.Name) > 0 {

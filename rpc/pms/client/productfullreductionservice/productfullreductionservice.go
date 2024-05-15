@@ -177,6 +177,9 @@ type (
 	ProductVertifyRecordListResp               = pmsclient.ProductVertifyRecordListResp
 	ProductVertifyRecordUpdateReq              = pmsclient.ProductVertifyRecordUpdateReq
 	ProductVertifyRecordUpdateResp             = pmsclient.ProductVertifyRecordUpdateResp
+	QueryByproductCategoryIdData               = pmsclient.QueryByproductCategoryIdData
+	QueryByproductCategoryIdReq                = pmsclient.QueryByproductCategoryIdReq
+	QueryByproductCategoryIdResp               = pmsclient.QueryByproductCategoryIdResp
 	QueryProductCategoryListData               = pmsclient.QueryProductCategoryListData
 	QueryProductCategoryListReq                = pmsclient.QueryProductCategoryListReq
 	QueryProductCategoryListResp               = pmsclient.QueryProductCategoryListResp

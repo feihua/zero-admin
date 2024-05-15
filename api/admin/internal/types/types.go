@@ -2074,6 +2074,21 @@ type QueryAllRelationsResp struct {
 	Data    QueryAllRelationsData `json:"data"`
 }
 
+type QueryByproductCategoryIdData struct {
+	AttributeId                int64 `json:"attributeId"`
+	ProductAttributeCategoryId int64 `json:"productAttributeCategoryId"`
+}
+
+type QueryByproductCategoryIdReq struct {
+	ProductCategoryId int64 `json:"productCategoryId"`
+}
+
+type QueryByproductCategoryIdResp struct {
+	Code    string                          `json:"code"`
+	Message string                          `json:"message"`
+	Data    []*QueryByproductCategoryIdData `json:"data"`
+}
+
 type ReSetPasswordReq struct {
 	Id int64 `json:"id"`
 }

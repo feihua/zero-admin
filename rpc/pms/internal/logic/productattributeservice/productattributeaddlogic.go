@@ -50,5 +50,20 @@ func (l *ProductAttributeAddLogic) ProductAttributeAdd(in *pmsclient.ProductAttr
 		return nil, err
 	}
 
+	//新增商品属性以后需要更新商品属性分类数量
+	q := query.PmsProductAttributeCategory
+	categoryDo := q.WithContext(l.ctx).Where(q.ID.Eq(in.ProductAttributeCategoryId))
+	category, err := categoryDo.First()
+	if err != nil {
+		return nil, err
+	}
+
+	if in.Type == 0 {
+		_, _ = categoryDo.Update(q.AttributeCount, category.AttributeCount+1)
+	}
+
+	if in.Type == 1 {
+		_, _ = categoryDo.Update(q.ParamCount, category.ParamCount+1)
+	}
 	return &pmsclient.ProductAttributeAddResp{}, nil
 }

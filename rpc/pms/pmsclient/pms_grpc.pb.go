@@ -2061,19 +2061,26 @@ var ProductAttributeCategoryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductAttributeService_ProductAttributeAdd_FullMethodName    = "/pmsclient.ProductAttributeService/ProductAttributeAdd"
-	ProductAttributeService_ProductAttributeList_FullMethodName   = "/pmsclient.ProductAttributeService/ProductAttributeList"
-	ProductAttributeService_ProductAttributeUpdate_FullMethodName = "/pmsclient.ProductAttributeService/ProductAttributeUpdate"
-	ProductAttributeService_ProductAttributeDelete_FullMethodName = "/pmsclient.ProductAttributeService/ProductAttributeDelete"
+	ProductAttributeService_ProductAttributeAdd_FullMethodName      = "/pmsclient.ProductAttributeService/ProductAttributeAdd"
+	ProductAttributeService_ProductAttributeList_FullMethodName     = "/pmsclient.ProductAttributeService/ProductAttributeList"
+	ProductAttributeService_QueryByproductCategoryId_FullMethodName = "/pmsclient.ProductAttributeService/QueryByproductCategoryId"
+	ProductAttributeService_ProductAttributeUpdate_FullMethodName   = "/pmsclient.ProductAttributeService/ProductAttributeUpdate"
+	ProductAttributeService_ProductAttributeDelete_FullMethodName   = "/pmsclient.ProductAttributeService/ProductAttributeDelete"
 )
 
 // ProductAttributeServiceClient is the client API for ProductAttributeService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductAttributeServiceClient interface {
+	// 添加商品属性
 	ProductAttributeAdd(ctx context.Context, in *ProductAttributeAddReq, opts ...grpc.CallOption) (*ProductAttributeAddResp, error)
+	// 查询商品属性
 	ProductAttributeList(ctx context.Context, in *ProductAttributeListReq, opts ...grpc.CallOption) (*ProductAttributeListResp, error)
+	// 根据商品分类的id获取商品属性及属性分类
+	QueryByproductCategoryId(ctx context.Context, in *QueryByproductCategoryIdReq, opts ...grpc.CallOption) (*QueryByproductCategoryIdResp, error)
+	// 更新商品属性
 	ProductAttributeUpdate(ctx context.Context, in *ProductAttributeUpdateReq, opts ...grpc.CallOption) (*ProductAttributeUpdateResp, error)
+	// 删除商品属性
 	ProductAttributeDelete(ctx context.Context, in *ProductAttributeDeleteReq, opts ...grpc.CallOption) (*ProductAttributeDeleteResp, error)
 }
 
@@ -2103,6 +2110,15 @@ func (c *productAttributeServiceClient) ProductAttributeList(ctx context.Context
 	return out, nil
 }
 
+func (c *productAttributeServiceClient) QueryByproductCategoryId(ctx context.Context, in *QueryByproductCategoryIdReq, opts ...grpc.CallOption) (*QueryByproductCategoryIdResp, error) {
+	out := new(QueryByproductCategoryIdResp)
+	err := c.cc.Invoke(ctx, ProductAttributeService_QueryByproductCategoryId_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *productAttributeServiceClient) ProductAttributeUpdate(ctx context.Context, in *ProductAttributeUpdateReq, opts ...grpc.CallOption) (*ProductAttributeUpdateResp, error) {
 	out := new(ProductAttributeUpdateResp)
 	err := c.cc.Invoke(ctx, ProductAttributeService_ProductAttributeUpdate_FullMethodName, in, out, opts...)
@@ -2125,9 +2141,15 @@ func (c *productAttributeServiceClient) ProductAttributeDelete(ctx context.Conte
 // All implementations must embed UnimplementedProductAttributeServiceServer
 // for forward compatibility
 type ProductAttributeServiceServer interface {
+	// 添加商品属性
 	ProductAttributeAdd(context.Context, *ProductAttributeAddReq) (*ProductAttributeAddResp, error)
+	// 查询商品属性
 	ProductAttributeList(context.Context, *ProductAttributeListReq) (*ProductAttributeListResp, error)
+	// 根据商品分类的id获取商品属性及属性分类
+	QueryByproductCategoryId(context.Context, *QueryByproductCategoryIdReq) (*QueryByproductCategoryIdResp, error)
+	// 更新商品属性
 	ProductAttributeUpdate(context.Context, *ProductAttributeUpdateReq) (*ProductAttributeUpdateResp, error)
+	// 删除商品属性
 	ProductAttributeDelete(context.Context, *ProductAttributeDeleteReq) (*ProductAttributeDeleteResp, error)
 	mustEmbedUnimplementedProductAttributeServiceServer()
 }
@@ -2141,6 +2163,9 @@ func (UnimplementedProductAttributeServiceServer) ProductAttributeAdd(context.Co
 }
 func (UnimplementedProductAttributeServiceServer) ProductAttributeList(context.Context, *ProductAttributeListReq) (*ProductAttributeListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeList not implemented")
+}
+func (UnimplementedProductAttributeServiceServer) QueryByproductCategoryId(context.Context, *QueryByproductCategoryIdReq) (*QueryByproductCategoryIdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryByproductCategoryId not implemented")
 }
 func (UnimplementedProductAttributeServiceServer) ProductAttributeUpdate(context.Context, *ProductAttributeUpdateReq) (*ProductAttributeUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductAttributeUpdate not implemented")
@@ -2198,6 +2223,24 @@ func _ProductAttributeService_ProductAttributeList_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductAttributeService_QueryByproductCategoryId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryByproductCategoryIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductAttributeServiceServer).QueryByproductCategoryId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductAttributeService_QueryByproductCategoryId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductAttributeServiceServer).QueryByproductCategoryId(ctx, req.(*QueryByproductCategoryIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProductAttributeService_ProductAttributeUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductAttributeUpdateReq)
 	if err := dec(in); err != nil {
@@ -2248,6 +2291,10 @@ var ProductAttributeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductAttributeList",
 			Handler:    _ProductAttributeService_ProductAttributeList_Handler,
+		},
+		{
+			MethodName: "QueryByproductCategoryId",
+			Handler:    _ProductAttributeService_QueryByproductCategoryId_Handler,
 		},
 		{
 			MethodName: "ProductAttributeUpdate",

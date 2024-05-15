@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductAttributeDeleteLogic 商品属性
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 14:37
+*/
 type ProductAttributeDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewProductAttributeDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
+// ProductAttributeDelete 删除商品属性
 func (l *ProductAttributeDeleteLogic) ProductAttributeDelete(req *types.DeleteProductAttributeReq) (resp *types.DeleteProductAttributeResp, err error) {
 	_, err = l.svcCtx.ProductAttributeService.ProductAttributeDelete(l.ctx, &pmsclient.ProductAttributeDeleteReq{
 		Ids: req.Ids,
