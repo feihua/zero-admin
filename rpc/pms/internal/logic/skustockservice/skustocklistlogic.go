@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SkuStockListLogic 根据商品ID及sku编码模糊搜索sku库存
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 15:37
+*/
 type SkuStockListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,8 +29,14 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SkuS
 	}
 }
 
+// SkuStockList 根据商品ID及sku编码模糊搜索sku库存
 func (l *SkuStockListLogic) SkuStockList(in *pmsclient.SkuStockListReq) (*pmsclient.SkuStockListResp, error) {
-	result, err := query.PmsSkuStock.WithContext(l.ctx).Where(query.PmsSkuStock.ProductID.Eq(in.ProductId)).Find()
+	stock := query.PmsSkuStock
+	q := stock.WithContext(l.ctx).Where(stock.ProductID.Eq(in.ProductId))
+	if len(in.SkuCode) > 0 {
+		q = q.Where(stock.SkuCode.Eq(in.SkuCode))
+	}
+	result, err := q.Find()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询库存列表信息失败,参数：%+v,异常:%s", in, err.Error())

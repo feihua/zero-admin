@@ -3851,7 +3851,6 @@ const (
 	SkuStockService_SkuStockAdd_FullMethodName                 = "/pmsclient.SkuStockService/SkuStockAdd"
 	SkuStockService_SkuStockList_FullMethodName                = "/pmsclient.SkuStockService/SkuStockList"
 	SkuStockService_SkuStockUpdate_FullMethodName              = "/pmsclient.SkuStockService/SkuStockUpdate"
-	SkuStockService_SkuStockDelete_FullMethodName              = "/pmsclient.SkuStockService/SkuStockDelete"
 	SkuStockService_ReleaseSkuStockLock_FullMethodName         = "/pmsclient.SkuStockService/ReleaseSkuStockLock"
 	SkuStockService_LockSkuStockLock_FullMethodName            = "/pmsclient.SkuStockService/LockSkuStockLock"
 	SkuStockService_QuerySkuStockByProductSkuId_FullMethodName = "/pmsclient.SkuStockService/QuerySkuStockByProductSkuId"
@@ -3862,9 +3861,10 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SkuStockServiceClient interface {
 	SkuStockAdd(ctx context.Context, in *SkuStockAddReq, opts ...grpc.CallOption) (*SkuStockAddResp, error)
+	// 根据商品ID及sku编码模糊搜索sku库存
 	SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error)
+	// 批量更新sku库存信息
 	SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error)
-	SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error)
 	// 取消订单的时候,释放库存
 	ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error)
 	// 下单的时候,锁定库存
@@ -3908,15 +3908,6 @@ func (c *skuStockServiceClient) SkuStockUpdate(ctx context.Context, in *SkuStock
 	return out, nil
 }
 
-func (c *skuStockServiceClient) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error) {
-	out := new(SkuStockDeleteResp)
-	err := c.cc.Invoke(ctx, SkuStockService_SkuStockDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *skuStockServiceClient) ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error) {
 	out := new(ReleaseSkuStockLockResp)
 	err := c.cc.Invoke(ctx, SkuStockService_ReleaseSkuStockLock_FullMethodName, in, out, opts...)
@@ -3949,9 +3940,10 @@ func (c *skuStockServiceClient) QuerySkuStockByProductSkuId(ctx context.Context,
 // for forward compatibility
 type SkuStockServiceServer interface {
 	SkuStockAdd(context.Context, *SkuStockAddReq) (*SkuStockAddResp, error)
+	// 根据商品ID及sku编码模糊搜索sku库存
 	SkuStockList(context.Context, *SkuStockListReq) (*SkuStockListResp, error)
+	// 批量更新sku库存信息
 	SkuStockUpdate(context.Context, *SkuStockUpdateReq) (*SkuStockUpdateResp, error)
-	SkuStockDelete(context.Context, *SkuStockDeleteReq) (*SkuStockDeleteResp, error)
 	// 取消订单的时候,释放库存
 	ReleaseSkuStockLock(context.Context, *ReleaseSkuStockLockReq) (*ReleaseSkuStockLockResp, error)
 	// 下单的时候,锁定库存
@@ -3973,9 +3965,6 @@ func (UnimplementedSkuStockServiceServer) SkuStockList(context.Context, *SkuStoc
 }
 func (UnimplementedSkuStockServiceServer) SkuStockUpdate(context.Context, *SkuStockUpdateReq) (*SkuStockUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SkuStockUpdate not implemented")
-}
-func (UnimplementedSkuStockServiceServer) SkuStockDelete(context.Context, *SkuStockDeleteReq) (*SkuStockDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SkuStockDelete not implemented")
 }
 func (UnimplementedSkuStockServiceServer) ReleaseSkuStockLock(context.Context, *ReleaseSkuStockLockReq) (*ReleaseSkuStockLockResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReleaseSkuStockLock not implemented")
@@ -4053,24 +4042,6 @@ func _SkuStockService_SkuStockUpdate_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SkuStockService_SkuStockDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SkuStockDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SkuStockServiceServer).SkuStockDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SkuStockService_SkuStockDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SkuStockServiceServer).SkuStockDelete(ctx, req.(*SkuStockDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _SkuStockService_ReleaseSkuStockLock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReleaseSkuStockLockReq)
 	if err := dec(in); err != nil {
@@ -4143,10 +4114,6 @@ var SkuStockService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SkuStockUpdate",
 			Handler:    _SkuStockService_SkuStockUpdate_Handler,
-		},
-		{
-			MethodName: "SkuStockDelete",
-			Handler:    _SkuStockService_SkuStockDelete_Handler,
 		},
 		{
 			MethodName: "ReleaseSkuStockLock",

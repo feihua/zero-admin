@@ -1395,6 +1395,7 @@ message SkuStockAddResp {
 
 message SkuStockListReq {
   int64    ProductId = 1;
+  string    SkuCode = 2;
 }
 
 message SkuStockListData{
@@ -1417,7 +1418,7 @@ message SkuStockListResp {
   repeated  SkuStockListData list = 2;
 }
 
-message SkuStockUpdateReq {
+message SkuStockUpdateData {
   int64    Id = 1;
   int64    ProductId = 2;
   string    SkuCode = 3;
@@ -1429,6 +1430,9 @@ message SkuStockUpdateReq {
   int64  PromotionPrice = 9;
   int32    LockStock = 10;
   string    SpData = 11;
+}
+message SkuStockUpdateReq {
+  repeated SkuStockUpdateData    SkuStockList = 1;
 }
 
 message SkuStockUpdateResp {
@@ -1475,9 +1479,10 @@ message QuerySkuStockByProductSkuIdReq {
 service SkuStockService {
 
   rpc SkuStockAdd(SkuStockAddReq) returns(SkuStockAddResp);
+  //根据商品ID及sku编码模糊搜索sku库存
   rpc SkuStockList(SkuStockListReq) returns(SkuStockListResp);
+  //批量更新sku库存信息
   rpc SkuStockUpdate(SkuStockUpdateReq) returns(SkuStockUpdateResp);
-  rpc SkuStockDelete(SkuStockDeleteReq) returns(SkuStockDeleteResp);
   //取消订单的时候,释放库存
   rpc ReleaseSkuStockLock(ReleaseSkuStockLockReq) returns(ReleaseSkuStockLockResp);
   //下单的时候,锁定库存

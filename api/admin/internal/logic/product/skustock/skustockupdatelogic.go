@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SkuStockUpdateLogic 批量更新sku库存信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 15:46
+*/
 type SkuStockUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,19 +31,26 @@ func NewSkuStockUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Sku
 	}
 }
 
+// SkuStockUpdate 批量更新sku库存信息
 func (l *SkuStockUpdateLogic) SkuStockUpdate(req types.UpdateSkuStockReq) (*types.UpdateSkuStockResp, error) {
+	var skuStockList []*pmsclient.SkuStockUpdateData
+	for _, item := range req.SkuStockList {
+		skuStockList = append(skuStockList, &pmsclient.SkuStockUpdateData{
+			Id:             item.Id,
+			ProductId:      item.ProductId,
+			SkuCode:        item.SkuCode,
+			Price:          item.Price,
+			Stock:          item.Stock,
+			LowStock:       item.LowStock,
+			Pic:            item.Pic,
+			Sale:           item.Sale,
+			PromotionPrice: item.PromotionPrice,
+			LockStock:      item.LockStock,
+			SpData:         item.SpData,
+		})
+	}
 	_, err := l.svcCtx.SkuStockService.SkuStockUpdate(l.ctx, &pmsclient.SkuStockUpdateReq{
-		Id:             req.Id,
-		ProductId:      req.ProductId,
-		SkuCode:        req.SkuCode,
-		Price:          req.Price,
-		Stock:          req.Stock,
-		LowStock:       req.LowStock,
-		Pic:            req.Pic,
-		Sale:           req.Sale,
-		PromotionPrice: req.PromotionPrice,
-		LockStock:      req.LockStock,
-		SpData:         req.SpData,
+		SkuStockList: skuStockList,
 	})
 
 	if err != nil {

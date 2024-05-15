@@ -27,19 +27,16 @@ func (s *SkuStockServiceServer) SkuStockAdd(ctx context.Context, in *pmsclient.S
 	return l.SkuStockAdd(in)
 }
 
+// 根据商品ID及sku编码模糊搜索sku库存
 func (s *SkuStockServiceServer) SkuStockList(ctx context.Context, in *pmsclient.SkuStockListReq) (*pmsclient.SkuStockListResp, error) {
 	l := skustockservicelogic.NewSkuStockListLogic(ctx, s.svcCtx)
 	return l.SkuStockList(in)
 }
 
+// 批量更新sku库存信息
 func (s *SkuStockServiceServer) SkuStockUpdate(ctx context.Context, in *pmsclient.SkuStockUpdateReq) (*pmsclient.SkuStockUpdateResp, error) {
 	l := skustockservicelogic.NewSkuStockUpdateLogic(ctx, s.svcCtx)
 	return l.SkuStockUpdate(in)
-}
-
-func (s *SkuStockServiceServer) SkuStockDelete(ctx context.Context, in *pmsclient.SkuStockDeleteReq) (*pmsclient.SkuStockDeleteResp, error) {
-	l := skustockservicelogic.NewSkuStockDeleteLogic(ctx, s.svcCtx)
-	return l.SkuStockDelete(in)
 }
 
 // 取消订单的时候,释放库存

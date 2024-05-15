@@ -416,15 +416,6 @@ type DeleteRoleResp struct {
 	Message string `json:"message"`
 }
 
-type DeleteSkuStockReq struct {
-	Ids []int64 `form:"ids"`
-}
-
-type DeleteSkuStockResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteSubjectReq struct {
 	Ids []int64 `form:"ids"`
 }
@@ -1869,18 +1860,14 @@ type ListSkuStockData struct {
 }
 
 type ListSkuStockReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
+	ProductId int64  `json:"productId"`        //商品ID
+	SkuCode   string `json:"skuCode,optional"` // sku编码
 }
 
 type ListSkuStockResp struct {
-	Current  int64               `form:"current,default=1"`
-	Data     []*ListSkuStockData `json:"data"`
-	PageSize int64               `form:"pageSize,default=20"`
-	Success  bool                `json:"success"`
-	Total    int64               `json:"total"`
-	Code     string              `json:"code"`
-	Message  string              `json:"message"`
+	Data    []*ListSkuStockData `json:"data"`
+	Code    string              `json:"code"`
+	Message string              `json:"message"`
 }
 
 type ListSubjectData struct {
@@ -2884,7 +2871,7 @@ type UpdateRoleResp struct {
 	Message string `json:"message"`
 }
 
-type UpdateSkuStockReq struct {
+type UpdateSkuStockData struct {
 	Id             int64  `json:"id"`
 	ProductId      int64  `json:"productId"`
 	SkuCode        string `json:"skuCode"` // sku编码
@@ -2896,6 +2883,10 @@ type UpdateSkuStockReq struct {
 	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
 	LockStock      int32  `json:"lockStock"`      // 锁定库存
 	SpData         string `json:"spData"`         // 商品销售属性，json格式
+}
+
+type UpdateSkuStockReq struct {
+	SkuStockList []UpdateSkuStockData `json:"skuStockList"`
 }
 
 type UpdateSkuStockResp struct {
@@ -3509,24 +3500,6 @@ type AddRoleReq struct {
 }
 
 type AddRoleResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type AddSkuStockReq struct {
-	ProductId      int64  `json:"productId"`
-	SkuCode        string `json:"skuCode"` // sku编码
-	Price          int64  `json:"price"`
-	Stock          int32  `json:"stock"`          // 库存
-	LowStock       int32  `json:"lowStock"`       // 预警库存
-	Pic            string `json:"pic"`            // 展示图片
-	Sale           int32  `json:"sale"`           // 销量
-	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
-	LockStock      int32  `json:"lockStock"`      // 锁定库存
-	SpData         string `json:"spData"`         // 商品销售属性，json格式
-}
-
-type AddSkuStockResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

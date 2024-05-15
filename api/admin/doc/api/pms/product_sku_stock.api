@@ -5,25 +5,10 @@ info (
 )
 
 type (
-	addSkuStockReq {
-		ProductId      int64  `json:"productId"`
-		SkuCode        string `json:"skuCode"` // sku编码
-		Price          int64  `json:"price"`
-		Stock          int32  `json:"stock"` // 库存
-		LowStock       int32  `json:"lowStock"` // 预警库存
-		Pic            string `json:"pic"` // 展示图片
-		Sale           int32  `json:"sale"` // 销量
-		PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
-		LockStock      int32  `json:"lockStock"` // 锁定库存
-		SpData         string `json:"spData"` // 商品销售属性，json格式
-	}
-	addSkuStockResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+
 	ListSkuStockReq {
-		Current  int64 `form:"current,default=1"`
-		PageSize int64 `form:"pageSize,default=20"`
+		ProductId      int64  `json:"productId"` //商品ID
+		SkuCode        string `json:"skuCode,optional"` // sku编码
 	}
 	ListSkuStockData {
 		Id             int64  `json:"id"`
@@ -39,15 +24,11 @@ type (
 		SpData         string `json:"spData"` // 商品销售属性，json格式
 	}
 	ListSkuStockResp {
-		Current  int64               `form:"current,default=1"`
 		Data     []*ListSkuStockData `json:"data"`
-		PageSize int64               `form:"pageSize,default=20"`
-		Success  bool                `json:"success"`
-		Total    int64               `json:"total"`
 		Code     string              `json:"code"`
 		Message  string              `json:"message"`
 	}
-	UpdateSkuStockReq {
+	UpdateSkuStockData {
 		Id             int64  `json:"id"`
 		ProductId      int64  `json:"productId"`
 		SkuCode        string `json:"skuCode"` // sku编码
@@ -60,17 +41,14 @@ type (
 		LockStock      int32  `json:"lockStock"` // 锁定库存
 		SpData         string `json:"spData"` // 商品销售属性，json格式
 	}
+	UpdateSkuStockReq {
+		SkuStockList             []UpdateSkuStockData  `json:"skuStockList"`
+	}
 	UpdateSkuStockResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	DeleteSkuStockReq {
-		Ids []int64 `form:"ids"`
-	}
-	DeleteSkuStockResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+
 )
 
 @server (
@@ -80,20 +58,14 @@ type (
 	prefix:     /api/product/skustock
 )
 service admin-api {
-	//
-	@handler SkuStockAdd
-	post /addSkuStock (addSkuStockReq) returns (addSkuStockResp)
-
-	//
+	//根据商品ID及sku编码模糊搜索sku库存
 	@handler SkuStockList
 	get /querySkuStockList (ListSkuStockReq) returns (ListSkuStockResp)
 
-	//
+	//批量更新sku库存信息
 	@handler SkuStockUpdate
 	post /updateSkuStock (UpdateSkuStockReq) returns (UpdateSkuStockResp)
 
-	//
-	@handler SkuStockDelete
-	get /deleteSkuStock (DeleteSkuStockReq) returns (DeleteSkuStockResp)
+
 }
 

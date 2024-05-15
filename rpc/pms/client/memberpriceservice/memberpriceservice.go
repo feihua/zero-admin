@@ -195,6 +195,7 @@ type (
 	SkuStockListData                           = pmsclient.SkuStockListData
 	SkuStockListReq                            = pmsclient.SkuStockListReq
 	SkuStockListResp                           = pmsclient.SkuStockListResp
+	SkuStockUpdateData                         = pmsclient.SkuStockUpdateData
 	SkuStockUpdateReq                          = pmsclient.SkuStockUpdateReq
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
 	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq

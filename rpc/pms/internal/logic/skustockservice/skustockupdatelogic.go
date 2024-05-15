@@ -30,22 +30,35 @@ func NewSkuStockUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sk
 	}
 }
 
-// SkuStockUpdate 更新库存
+// SkuStockUpdate 批量更新sku库存信息
 func (l *SkuStockUpdateLogic) SkuStockUpdate(in *pmsclient.SkuStockUpdateReq) (*pmsclient.SkuStockUpdateResp, error) {
+	var skuIds []int64
+	var skuStockList []*model.PmsSkuStock
+	for _, item := range in.SkuStockList {
+		skuIds = append(skuIds, item.Id)
+		skuStockList = append(skuStockList, &model.PmsSkuStock{
+			ID:             item.Id,
+			ProductID:      item.ProductId,
+			SkuCode:        item.SkuCode,
+			Price:          item.Price,
+			Stock:          item.Stock,
+			LowStock:       item.LowStock,
+			Pic:            item.Pic,
+			Sale:           item.Sale,
+			PromotionPrice: item.PromotionPrice,
+			LockStock:      item.LockStock,
+			SpData:         item.SpData,
+		})
+	}
 	q := query.PmsSkuStock
-	_, err := q.WithContext(l.ctx).Updates(&model.PmsSkuStock{
-		ID:             in.Id,
-		ProductID:      in.ProductId,
-		SkuCode:        in.SkuCode,
-		Price:          in.Price,
-		Stock:          in.Stock,
-		LowStock:       in.LowStock,
-		Pic:            in.Pic,
-		Sale:           in.Sale,
-		PromotionPrice: in.PromotionPrice,
-		LockStock:      in.LockStock,
-		SpData:         in.SpData,
-	})
+	//1.先删除
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(skuIds...)).Delete()
+	if err != nil {
+		return nil, err
+	}
+
+	//2.后添加
+	err = q.WithContext(l.ctx).CreateInBatches(skuStockList, len(skuStockList))
 
 	if err != nil {
 		return nil, err

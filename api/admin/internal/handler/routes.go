@@ -881,16 +881,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addSkuStock",
-					Handler: productskustock.SkuStockAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteSkuStock",
-					Handler: productskustock.SkuStockDeleteHandler(serverCtx),
-				},
-				{
 					Method:  http.MethodGet,
 					Path:    "/querySkuStockList",
 					Handler: productskustock.SkuStockListHandler(serverCtx),

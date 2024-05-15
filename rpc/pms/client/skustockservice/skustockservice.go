@@ -195,6 +195,7 @@ type (
 	SkuStockListData                           = pmsclient.SkuStockListData
 	SkuStockListReq                            = pmsclient.SkuStockListReq
 	SkuStockListResp                           = pmsclient.SkuStockListResp
+	SkuStockUpdateData                         = pmsclient.SkuStockUpdateData
 	SkuStockUpdateReq                          = pmsclient.SkuStockUpdateReq
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
 	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
@@ -205,9 +206,10 @@ type (
 
 	SkuStockService interface {
 		SkuStockAdd(ctx context.Context, in *SkuStockAddReq, opts ...grpc.CallOption) (*SkuStockAddResp, error)
+		// 根据商品ID及sku编码模糊搜索sku库存
 		SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error)
+		// 批量更新sku库存信息
 		SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error)
-		SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error)
 		// 取消订单的时候,释放库存
 		ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error)
 		// 下单的时候,锁定库存
@@ -232,19 +234,16 @@ func (m *defaultSkuStockService) SkuStockAdd(ctx context.Context, in *SkuStockAd
 	return client.SkuStockAdd(ctx, in, opts...)
 }
 
+// 根据商品ID及sku编码模糊搜索sku库存
 func (m *defaultSkuStockService) SkuStockList(ctx context.Context, in *SkuStockListReq, opts ...grpc.CallOption) (*SkuStockListResp, error) {
 	client := pmsclient.NewSkuStockServiceClient(m.cli.Conn())
 	return client.SkuStockList(ctx, in, opts...)
 }
 
+// 批量更新sku库存信息
 func (m *defaultSkuStockService) SkuStockUpdate(ctx context.Context, in *SkuStockUpdateReq, opts ...grpc.CallOption) (*SkuStockUpdateResp, error) {
 	client := pmsclient.NewSkuStockServiceClient(m.cli.Conn())
 	return client.SkuStockUpdate(ctx, in, opts...)
-}
-
-func (m *defaultSkuStockService) SkuStockDelete(ctx context.Context, in *SkuStockDeleteReq, opts ...grpc.CallOption) (*SkuStockDeleteResp, error) {
-	client := pmsclient.NewSkuStockServiceClient(m.cli.Conn())
-	return client.SkuStockDelete(ctx, in, opts...)
 }
 
 // 取消订单的时候,释放库存

@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// SkuStockListLogic 库存信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 15:33
+*/
 type SkuStockListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,9 +30,11 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) SkuSt
 	}
 }
 
+// SkuStockList 根据商品ID及sku编码模糊搜索sku库存
 func (l *SkuStockListLogic) SkuStockList(req types.ListSkuStockReq) (*types.ListSkuStockResp, error) {
 	resp, err := l.svcCtx.SkuStockService.SkuStockList(l.ctx, &pmsclient.SkuStockListReq{
-		ProductId: 1,
+		ProductId: req.ProductId,
+		SkuCode:   req.SkuCode,
 	})
 
 	if err != nil {
@@ -54,12 +61,8 @@ func (l *SkuStockListLogic) SkuStockList(req types.ListSkuStockReq) (*types.List
 	}
 
 	return &types.ListSkuStockResp{
-		Current:  req.Current,
-		Data:     list,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-		Code:     "000000",
-		Message:  "查询商品库存成功",
+		Data:    list,
+		Code:    "000000",
+		Message: "查询商品库存成功",
 	}, nil
 }
