@@ -1506,6 +1506,21 @@ type ListPrefrenceAreaResp struct {
 	Total    int64                    `json:"total"`
 }
 
+type ListProductAttribute struct {
+	Id                         int64  `json:"id"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+	Name                       string `json:"name"`
+	SelectType                 int32  `json:"selectType"`    // 属性选择类型：0->唯一；1->单选；2->多选
+	InputType                  int32  `json:"inputType"`     // 属性录入方式：0->手工录入；1->从列表中选取
+	InputList                  string `json:"inputList"`     // 可选值列表，以逗号隔开
+	Sort                       int32  `json:"sort"`          // 排序字段：最高的可以单独上传图片
+	FilterType                 int32  `json:"filterType"`    // 分类筛选样式：1->普通；1->颜色
+	SearchType                 int32  `json:"searchType"`    // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
+	RelatedStatus              int32  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
+	HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
+	Type                       int32  `json:"type"`          // 属性的类型；0->规格；1->参数
+}
+
 type ListProductAttributeData struct {
 	Id                         int64  `json:"id"`
 	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
@@ -1540,10 +1555,11 @@ type ListProductAttributeResp struct {
 }
 
 type ListProductAttributecategoryData struct {
-	Id                     int64  `json:"id"`
-	Name                   string `json:"name"`
-	AttributecategoryCount int32  `json:"attributeCount"` // 属性数量
-	ParamCount             int32  `json:"paramCount"`     // 参数数量
+	Id                     int64                  `json:"id"`
+	Name                   string                 `json:"name"`
+	AttributecategoryCount int32                  `json:"attributeCount"`       // 属性数量
+	ParamCount             int32                  `json:"paramCount"`           // 参数数量
+	ProductAttributeList   []ListProductAttribute `json:"productAttributeList"` // 商品属性列表
 }
 
 type ListProductAttributecategoryReq struct {
@@ -2598,10 +2614,8 @@ type UpdateProductAttributeResp struct {
 }
 
 type UpdateProductAttributecategoryReq struct {
-	Id                     int64  `json:"id"`
-	Name                   string `json:"name"`
-	AttributecategoryCount int32  `json:"attributeCount"` // 属性数量
-	ParamCount             int32  `json:"paramCount"`     // 参数数量
+	Id   int64  `json:"id"`
+	Name string `json:"name"`
 }
 
 type UpdateProductAttributecategoryResp struct {

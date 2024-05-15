@@ -34,10 +34,8 @@ func NewProductAttributeCategoryUpdateLogic(ctx context.Context, svcCtx *svc.Ser
 func (l *ProductAttributeCategoryUpdateLogic) ProductAttributeCategoryUpdate(in *pmsclient.ProductAttributeCategoryUpdateReq) (*pmsclient.ProductAttributeCategoryUpdateResp, error) {
 	q := query.PmsProductAttributeCategory
 	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductAttributeCategory{
-		ID:             in.Id,
-		Name:           in.Name,
-		AttributeCount: in.AttributeCount,
-		ParamCount:     in.ParamCount,
+		ID:   in.Id,
+		Name: in.Name,
 	})
 
 	if err != nil {

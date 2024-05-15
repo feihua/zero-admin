@@ -762,6 +762,7 @@ message ProductAttributeCategoryListData{
   string  Name = 2;
   int32    AttributeCount = 3;
   int32    ParamCount = 4;
+  repeated ProductAttributeListData ProductAttributeList=5;
 
 }
 
@@ -773,8 +774,6 @@ message ProductAttributeCategoryListResp {
 message ProductAttributeCategoryUpdateReq {
   int64    Id = 1;
   string  Name = 2;
-  int32    AttributeCount = 3;
-  int32    ParamCount = 4;
 }
 
 message ProductAttributeCategoryUpdateResp {
@@ -791,10 +790,15 @@ message ProductAttributeCategoryDeleteResp {
 
 service ProductAttributeCategoryService {
 
-
+  //添加商品属性分类
   rpc ProductAttributeCategoryAdd(ProductAttributeCategoryAddReq) returns(ProductAttributeCategoryAddResp);
+  //查询商品属性分类
   rpc ProductAttributeCategoryList(ProductAttributeCategoryListReq) returns(ProductAttributeCategoryListResp);
+  //获取所有商品属性分类及其下属性
+  rpc queryCategoryWithAttrList(ProductAttributeCategoryListReq) returns(ProductAttributeCategoryListResp);
+  //更新商品属性分类
   rpc ProductAttributeCategoryUpdate(ProductAttributeCategoryUpdateReq) returns(ProductAttributeCategoryUpdateResp);
+  //删除商品属性分类
   rpc ProductAttributeCategoryDelete(ProductAttributeCategoryDeleteReq) returns(ProductAttributeCategoryDeleteResp);
 
 

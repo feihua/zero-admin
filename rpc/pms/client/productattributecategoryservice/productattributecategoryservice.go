@@ -201,9 +201,15 @@ type (
 	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
 
 	ProductAttributeCategoryService interface {
+		// 添加商品属性分类
 		ProductAttributeCategoryAdd(ctx context.Context, in *ProductAttributeCategoryAddReq, opts ...grpc.CallOption) (*ProductAttributeCategoryAddResp, error)
+		// 查询商品属性分类
 		ProductAttributeCategoryList(ctx context.Context, in *ProductAttributeCategoryListReq, opts ...grpc.CallOption) (*ProductAttributeCategoryListResp, error)
+		// 获取所有商品属性分类及其下属性
+		QueryCategoryWithAttrList(ctx context.Context, in *ProductAttributeCategoryListReq, opts ...grpc.CallOption) (*ProductAttributeCategoryListResp, error)
+		// 更新商品属性分类
 		ProductAttributeCategoryUpdate(ctx context.Context, in *ProductAttributeCategoryUpdateReq, opts ...grpc.CallOption) (*ProductAttributeCategoryUpdateResp, error)
+		// 删除商品属性分类
 		ProductAttributeCategoryDelete(ctx context.Context, in *ProductAttributeCategoryDeleteReq, opts ...grpc.CallOption) (*ProductAttributeCategoryDeleteResp, error)
 	}
 
@@ -218,21 +224,31 @@ func NewProductAttributeCategoryService(cli zrpc.Client) ProductAttributeCategor
 	}
 }
 
+// 添加商品属性分类
 func (m *defaultProductAttributeCategoryService) ProductAttributeCategoryAdd(ctx context.Context, in *ProductAttributeCategoryAddReq, opts ...grpc.CallOption) (*ProductAttributeCategoryAddResp, error) {
 	client := pmsclient.NewProductAttributeCategoryServiceClient(m.cli.Conn())
 	return client.ProductAttributeCategoryAdd(ctx, in, opts...)
 }
 
+// 查询商品属性分类
 func (m *defaultProductAttributeCategoryService) ProductAttributeCategoryList(ctx context.Context, in *ProductAttributeCategoryListReq, opts ...grpc.CallOption) (*ProductAttributeCategoryListResp, error) {
 	client := pmsclient.NewProductAttributeCategoryServiceClient(m.cli.Conn())
 	return client.ProductAttributeCategoryList(ctx, in, opts...)
 }
 
+// 获取所有商品属性分类及其下属性
+func (m *defaultProductAttributeCategoryService) QueryCategoryWithAttrList(ctx context.Context, in *ProductAttributeCategoryListReq, opts ...grpc.CallOption) (*ProductAttributeCategoryListResp, error) {
+	client := pmsclient.NewProductAttributeCategoryServiceClient(m.cli.Conn())
+	return client.QueryCategoryWithAttrList(ctx, in, opts...)
+}
+
+// 更新商品属性分类
 func (m *defaultProductAttributeCategoryService) ProductAttributeCategoryUpdate(ctx context.Context, in *ProductAttributeCategoryUpdateReq, opts ...grpc.CallOption) (*ProductAttributeCategoryUpdateResp, error) {
 	client := pmsclient.NewProductAttributeCategoryServiceClient(m.cli.Conn())
 	return client.ProductAttributeCategoryUpdate(ctx, in, opts...)
 }
 
+// 删除商品属性分类
 func (m *defaultProductAttributeCategoryService) ProductAttributeCategoryDelete(ctx context.Context, in *ProductAttributeCategoryDeleteReq, opts ...grpc.CallOption) (*ProductAttributeCategoryDeleteResp, error) {
 	client := pmsclient.NewProductAttributeCategoryServiceClient(m.cli.Conn())
 	return client.ProductAttributeCategoryDelete(ctx, in, opts...)

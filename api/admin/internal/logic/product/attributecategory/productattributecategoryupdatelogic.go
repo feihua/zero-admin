@@ -12,6 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductAttributecategoryUpdateLogic 商品属性分类
 type ProductAttributecategoryUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,12 +27,11 @@ func NewProductAttributecategoryUpdateLogic(ctx context.Context, svcCtx *svc.Ser
 	}
 }
 
+// ProductAttributecategoryUpdate 更新商品属性分类
 func (l *ProductAttributecategoryUpdateLogic) ProductAttributecategoryUpdate(req *types.UpdateProductAttributecategoryReq) (resp *types.UpdateProductAttributecategoryResp, err error) {
 	_, err = l.svcCtx.ProductAttributeCategoryService.ProductAttributeCategoryUpdate(l.ctx, &pmsclient.ProductAttributeCategoryUpdateReq{
-		Id:             req.Id,
-		Name:           req.Name,
-		AttributeCount: req.AttributecategoryCount,
-		ParamCount:     req.ParamCount,
+		Id:   req.Id,
+		Name: req.Name,
 	})
 
 	if err != nil {
