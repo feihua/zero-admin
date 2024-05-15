@@ -32,9 +32,13 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CouponServiceClient interface {
-	CouponAdd(ctx context.Context, in *CouponAddReq, opts ...grpc.CallOption) (*CouponAddResp, error)
+	// 添加优惠券
+	CouponAdd(ctx context.Context, in *CouponAddOrUpdateReq, opts ...grpc.CallOption) (*CouponAddOrUpdateResp, error)
+	// 查询优惠券
 	CouponList(ctx context.Context, in *CouponListReq, opts ...grpc.CallOption) (*CouponListResp, error)
-	CouponUpdate(ctx context.Context, in *CouponUpdateReq, opts ...grpc.CallOption) (*CouponUpdateResp, error)
+	// 更新优惠券
+	CouponUpdate(ctx context.Context, in *CouponAddOrUpdateReq, opts ...grpc.CallOption) (*CouponAddOrUpdateResp, error)
+	// 删除优惠券
 	CouponDelete(ctx context.Context, in *CouponDeleteReq, opts ...grpc.CallOption) (*CouponDeleteResp, error)
 	// 根据优惠券id查询优惠券
 	CouponFindById(ctx context.Context, in *CouponFindByIdReq, opts ...grpc.CallOption) (*CouponFindByIdResp, error)
@@ -52,8 +56,8 @@ func NewCouponServiceClient(cc grpc.ClientConnInterface) CouponServiceClient {
 	return &couponServiceClient{cc}
 }
 
-func (c *couponServiceClient) CouponAdd(ctx context.Context, in *CouponAddReq, opts ...grpc.CallOption) (*CouponAddResp, error) {
-	out := new(CouponAddResp)
+func (c *couponServiceClient) CouponAdd(ctx context.Context, in *CouponAddOrUpdateReq, opts ...grpc.CallOption) (*CouponAddOrUpdateResp, error) {
+	out := new(CouponAddOrUpdateResp)
 	err := c.cc.Invoke(ctx, CouponService_CouponAdd_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -70,8 +74,8 @@ func (c *couponServiceClient) CouponList(ctx context.Context, in *CouponListReq,
 	return out, nil
 }
 
-func (c *couponServiceClient) CouponUpdate(ctx context.Context, in *CouponUpdateReq, opts ...grpc.CallOption) (*CouponUpdateResp, error) {
-	out := new(CouponUpdateResp)
+func (c *couponServiceClient) CouponUpdate(ctx context.Context, in *CouponAddOrUpdateReq, opts ...grpc.CallOption) (*CouponAddOrUpdateResp, error) {
+	out := new(CouponAddOrUpdateResp)
 	err := c.cc.Invoke(ctx, CouponService_CouponUpdate_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -119,9 +123,13 @@ func (c *couponServiceClient) CouponFindByProductIdAndProductCategoryId(ctx cont
 // All implementations must embed UnimplementedCouponServiceServer
 // for forward compatibility
 type CouponServiceServer interface {
-	CouponAdd(context.Context, *CouponAddReq) (*CouponAddResp, error)
+	// 添加优惠券
+	CouponAdd(context.Context, *CouponAddOrUpdateReq) (*CouponAddOrUpdateResp, error)
+	// 查询优惠券
 	CouponList(context.Context, *CouponListReq) (*CouponListResp, error)
-	CouponUpdate(context.Context, *CouponUpdateReq) (*CouponUpdateResp, error)
+	// 更新优惠券
+	CouponUpdate(context.Context, *CouponAddOrUpdateReq) (*CouponAddOrUpdateResp, error)
+	// 删除优惠券
 	CouponDelete(context.Context, *CouponDeleteReq) (*CouponDeleteResp, error)
 	// 根据优惠券id查询优惠券
 	CouponFindById(context.Context, *CouponFindByIdReq) (*CouponFindByIdResp, error)
@@ -136,13 +144,13 @@ type CouponServiceServer interface {
 type UnimplementedCouponServiceServer struct {
 }
 
-func (UnimplementedCouponServiceServer) CouponAdd(context.Context, *CouponAddReq) (*CouponAddResp, error) {
+func (UnimplementedCouponServiceServer) CouponAdd(context.Context, *CouponAddOrUpdateReq) (*CouponAddOrUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CouponAdd not implemented")
 }
 func (UnimplementedCouponServiceServer) CouponList(context.Context, *CouponListReq) (*CouponListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CouponList not implemented")
 }
-func (UnimplementedCouponServiceServer) CouponUpdate(context.Context, *CouponUpdateReq) (*CouponUpdateResp, error) {
+func (UnimplementedCouponServiceServer) CouponUpdate(context.Context, *CouponAddOrUpdateReq) (*CouponAddOrUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CouponUpdate not implemented")
 }
 func (UnimplementedCouponServiceServer) CouponDelete(context.Context, *CouponDeleteReq) (*CouponDeleteResp, error) {
@@ -171,7 +179,7 @@ func RegisterCouponServiceServer(s grpc.ServiceRegistrar, srv CouponServiceServe
 }
 
 func _CouponService_CouponAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponAddReq)
+	in := new(CouponAddOrUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -183,7 +191,7 @@ func _CouponService_CouponAdd_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: CouponService_CouponAdd_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponServiceServer).CouponAdd(ctx, req.(*CouponAddReq))
+		return srv.(CouponServiceServer).CouponAdd(ctx, req.(*CouponAddOrUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -207,7 +215,7 @@ func _CouponService_CouponList_Handler(srv interface{}, ctx context.Context, dec
 }
 
 func _CouponService_CouponUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponUpdateReq)
+	in := new(CouponAddOrUpdateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -219,7 +227,7 @@ func _CouponService_CouponUpdate_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: CouponService_CouponUpdate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponServiceServer).CouponUpdate(ctx, req.(*CouponUpdateReq))
+		return srv.(CouponServiceServer).CouponUpdate(ctx, req.(*CouponAddOrUpdateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -687,410 +695,6 @@ var CouponHistoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryCouponHistoryDetailList",
 			Handler:    _CouponHistoryService_QueryCouponHistoryDetailList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sms/sms.proto",
-}
-
-const (
-	CouponProductCategoryRelationService_CouponProductCategoryRelationAdd_FullMethodName    = "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationAdd"
-	CouponProductCategoryRelationService_CouponProductCategoryRelationList_FullMethodName   = "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationList"
-	CouponProductCategoryRelationService_CouponProductCategoryRelationUpdate_FullMethodName = "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationUpdate"
-	CouponProductCategoryRelationService_CouponProductCategoryRelationDelete_FullMethodName = "/smsclient.CouponProductCategoryRelationService/CouponProductCategoryRelationDelete"
-)
-
-// CouponProductCategoryRelationServiceClient is the client API for CouponProductCategoryRelationService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CouponProductCategoryRelationServiceClient interface {
-	CouponProductCategoryRelationAdd(ctx context.Context, in *CouponProductCategoryRelationAddReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationAddResp, error)
-	CouponProductCategoryRelationList(ctx context.Context, in *CouponProductCategoryRelationListReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationListResp, error)
-	CouponProductCategoryRelationUpdate(ctx context.Context, in *CouponProductCategoryRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationUpdateResp, error)
-	CouponProductCategoryRelationDelete(ctx context.Context, in *CouponProductCategoryRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationDeleteResp, error)
-}
-
-type couponProductCategoryRelationServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewCouponProductCategoryRelationServiceClient(cc grpc.ClientConnInterface) CouponProductCategoryRelationServiceClient {
-	return &couponProductCategoryRelationServiceClient{cc}
-}
-
-func (c *couponProductCategoryRelationServiceClient) CouponProductCategoryRelationAdd(ctx context.Context, in *CouponProductCategoryRelationAddReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationAddResp, error) {
-	out := new(CouponProductCategoryRelationAddResp)
-	err := c.cc.Invoke(ctx, CouponProductCategoryRelationService_CouponProductCategoryRelationAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *couponProductCategoryRelationServiceClient) CouponProductCategoryRelationList(ctx context.Context, in *CouponProductCategoryRelationListReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationListResp, error) {
-	out := new(CouponProductCategoryRelationListResp)
-	err := c.cc.Invoke(ctx, CouponProductCategoryRelationService_CouponProductCategoryRelationList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *couponProductCategoryRelationServiceClient) CouponProductCategoryRelationUpdate(ctx context.Context, in *CouponProductCategoryRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationUpdateResp, error) {
-	out := new(CouponProductCategoryRelationUpdateResp)
-	err := c.cc.Invoke(ctx, CouponProductCategoryRelationService_CouponProductCategoryRelationUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *couponProductCategoryRelationServiceClient) CouponProductCategoryRelationDelete(ctx context.Context, in *CouponProductCategoryRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductCategoryRelationDeleteResp, error) {
-	out := new(CouponProductCategoryRelationDeleteResp)
-	err := c.cc.Invoke(ctx, CouponProductCategoryRelationService_CouponProductCategoryRelationDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// CouponProductCategoryRelationServiceServer is the server API for CouponProductCategoryRelationService service.
-// All implementations must embed UnimplementedCouponProductCategoryRelationServiceServer
-// for forward compatibility
-type CouponProductCategoryRelationServiceServer interface {
-	CouponProductCategoryRelationAdd(context.Context, *CouponProductCategoryRelationAddReq) (*CouponProductCategoryRelationAddResp, error)
-	CouponProductCategoryRelationList(context.Context, *CouponProductCategoryRelationListReq) (*CouponProductCategoryRelationListResp, error)
-	CouponProductCategoryRelationUpdate(context.Context, *CouponProductCategoryRelationUpdateReq) (*CouponProductCategoryRelationUpdateResp, error)
-	CouponProductCategoryRelationDelete(context.Context, *CouponProductCategoryRelationDeleteReq) (*CouponProductCategoryRelationDeleteResp, error)
-	mustEmbedUnimplementedCouponProductCategoryRelationServiceServer()
-}
-
-// UnimplementedCouponProductCategoryRelationServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCouponProductCategoryRelationServiceServer struct {
-}
-
-func (UnimplementedCouponProductCategoryRelationServiceServer) CouponProductCategoryRelationAdd(context.Context, *CouponProductCategoryRelationAddReq) (*CouponProductCategoryRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationAdd not implemented")
-}
-func (UnimplementedCouponProductCategoryRelationServiceServer) CouponProductCategoryRelationList(context.Context, *CouponProductCategoryRelationListReq) (*CouponProductCategoryRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationList not implemented")
-}
-func (UnimplementedCouponProductCategoryRelationServiceServer) CouponProductCategoryRelationUpdate(context.Context, *CouponProductCategoryRelationUpdateReq) (*CouponProductCategoryRelationUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationUpdate not implemented")
-}
-func (UnimplementedCouponProductCategoryRelationServiceServer) CouponProductCategoryRelationDelete(context.Context, *CouponProductCategoryRelationDeleteReq) (*CouponProductCategoryRelationDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductCategoryRelationDelete not implemented")
-}
-func (UnimplementedCouponProductCategoryRelationServiceServer) mustEmbedUnimplementedCouponProductCategoryRelationServiceServer() {
-}
-
-// UnsafeCouponProductCategoryRelationServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CouponProductCategoryRelationServiceServer will
-// result in compilation errors.
-type UnsafeCouponProductCategoryRelationServiceServer interface {
-	mustEmbedUnimplementedCouponProductCategoryRelationServiceServer()
-}
-
-func RegisterCouponProductCategoryRelationServiceServer(s grpc.ServiceRegistrar, srv CouponProductCategoryRelationServiceServer) {
-	s.RegisterService(&CouponProductCategoryRelationService_ServiceDesc, srv)
-}
-
-func _CouponProductCategoryRelationService_CouponProductCategoryRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductCategoryRelationAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CouponProductCategoryRelationService_CouponProductCategoryRelationAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationAdd(ctx, req.(*CouponProductCategoryRelationAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CouponProductCategoryRelationService_CouponProductCategoryRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductCategoryRelationListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CouponProductCategoryRelationService_CouponProductCategoryRelationList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationList(ctx, req.(*CouponProductCategoryRelationListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CouponProductCategoryRelationService_CouponProductCategoryRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductCategoryRelationUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CouponProductCategoryRelationService_CouponProductCategoryRelationUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationUpdate(ctx, req.(*CouponProductCategoryRelationUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CouponProductCategoryRelationService_CouponProductCategoryRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductCategoryRelationDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CouponProductCategoryRelationService_CouponProductCategoryRelationDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponProductCategoryRelationServiceServer).CouponProductCategoryRelationDelete(ctx, req.(*CouponProductCategoryRelationDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// CouponProductCategoryRelationService_ServiceDesc is the grpc.ServiceDesc for CouponProductCategoryRelationService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var CouponProductCategoryRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.CouponProductCategoryRelationService",
-	HandlerType: (*CouponProductCategoryRelationServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CouponProductCategoryRelationAdd",
-			Handler:    _CouponProductCategoryRelationService_CouponProductCategoryRelationAdd_Handler,
-		},
-		{
-			MethodName: "CouponProductCategoryRelationList",
-			Handler:    _CouponProductCategoryRelationService_CouponProductCategoryRelationList_Handler,
-		},
-		{
-			MethodName: "CouponProductCategoryRelationUpdate",
-			Handler:    _CouponProductCategoryRelationService_CouponProductCategoryRelationUpdate_Handler,
-		},
-		{
-			MethodName: "CouponProductCategoryRelationDelete",
-			Handler:    _CouponProductCategoryRelationService_CouponProductCategoryRelationDelete_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sms/sms.proto",
-}
-
-const (
-	CouponProductRelationService_CouponProductRelationAdd_FullMethodName    = "/smsclient.CouponProductRelationService/CouponProductRelationAdd"
-	CouponProductRelationService_CouponProductRelationList_FullMethodName   = "/smsclient.CouponProductRelationService/CouponProductRelationList"
-	CouponProductRelationService_CouponProductRelationUpdate_FullMethodName = "/smsclient.CouponProductRelationService/CouponProductRelationUpdate"
-	CouponProductRelationService_CouponProductRelationDelete_FullMethodName = "/smsclient.CouponProductRelationService/CouponProductRelationDelete"
-)
-
-// CouponProductRelationServiceClient is the client API for CouponProductRelationService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CouponProductRelationServiceClient interface {
-	CouponProductRelationAdd(ctx context.Context, in *CouponProductRelationAddReq, opts ...grpc.CallOption) (*CouponProductRelationAddResp, error)
-	CouponProductRelationList(ctx context.Context, in *CouponProductRelationListReq, opts ...grpc.CallOption) (*CouponProductRelationListResp, error)
-	CouponProductRelationUpdate(ctx context.Context, in *CouponProductRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductRelationUpdateResp, error)
-	CouponProductRelationDelete(ctx context.Context, in *CouponProductRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductRelationDeleteResp, error)
-}
-
-type couponProductRelationServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewCouponProductRelationServiceClient(cc grpc.ClientConnInterface) CouponProductRelationServiceClient {
-	return &couponProductRelationServiceClient{cc}
-}
-
-func (c *couponProductRelationServiceClient) CouponProductRelationAdd(ctx context.Context, in *CouponProductRelationAddReq, opts ...grpc.CallOption) (*CouponProductRelationAddResp, error) {
-	out := new(CouponProductRelationAddResp)
-	err := c.cc.Invoke(ctx, CouponProductRelationService_CouponProductRelationAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *couponProductRelationServiceClient) CouponProductRelationList(ctx context.Context, in *CouponProductRelationListReq, opts ...grpc.CallOption) (*CouponProductRelationListResp, error) {
-	out := new(CouponProductRelationListResp)
-	err := c.cc.Invoke(ctx, CouponProductRelationService_CouponProductRelationList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *couponProductRelationServiceClient) CouponProductRelationUpdate(ctx context.Context, in *CouponProductRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductRelationUpdateResp, error) {
-	out := new(CouponProductRelationUpdateResp)
-	err := c.cc.Invoke(ctx, CouponProductRelationService_CouponProductRelationUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *couponProductRelationServiceClient) CouponProductRelationDelete(ctx context.Context, in *CouponProductRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductRelationDeleteResp, error) {
-	out := new(CouponProductRelationDeleteResp)
-	err := c.cc.Invoke(ctx, CouponProductRelationService_CouponProductRelationDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// CouponProductRelationServiceServer is the server API for CouponProductRelationService service.
-// All implementations must embed UnimplementedCouponProductRelationServiceServer
-// for forward compatibility
-type CouponProductRelationServiceServer interface {
-	CouponProductRelationAdd(context.Context, *CouponProductRelationAddReq) (*CouponProductRelationAddResp, error)
-	CouponProductRelationList(context.Context, *CouponProductRelationListReq) (*CouponProductRelationListResp, error)
-	CouponProductRelationUpdate(context.Context, *CouponProductRelationUpdateReq) (*CouponProductRelationUpdateResp, error)
-	CouponProductRelationDelete(context.Context, *CouponProductRelationDeleteReq) (*CouponProductRelationDeleteResp, error)
-	mustEmbedUnimplementedCouponProductRelationServiceServer()
-}
-
-// UnimplementedCouponProductRelationServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCouponProductRelationServiceServer struct {
-}
-
-func (UnimplementedCouponProductRelationServiceServer) CouponProductRelationAdd(context.Context, *CouponProductRelationAddReq) (*CouponProductRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationAdd not implemented")
-}
-func (UnimplementedCouponProductRelationServiceServer) CouponProductRelationList(context.Context, *CouponProductRelationListReq) (*CouponProductRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationList not implemented")
-}
-func (UnimplementedCouponProductRelationServiceServer) CouponProductRelationUpdate(context.Context, *CouponProductRelationUpdateReq) (*CouponProductRelationUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationUpdate not implemented")
-}
-func (UnimplementedCouponProductRelationServiceServer) CouponProductRelationDelete(context.Context, *CouponProductRelationDeleteReq) (*CouponProductRelationDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CouponProductRelationDelete not implemented")
-}
-func (UnimplementedCouponProductRelationServiceServer) mustEmbedUnimplementedCouponProductRelationServiceServer() {
-}
-
-// UnsafeCouponProductRelationServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CouponProductRelationServiceServer will
-// result in compilation errors.
-type UnsafeCouponProductRelationServiceServer interface {
-	mustEmbedUnimplementedCouponProductRelationServiceServer()
-}
-
-func RegisterCouponProductRelationServiceServer(s grpc.ServiceRegistrar, srv CouponProductRelationServiceServer) {
-	s.RegisterService(&CouponProductRelationService_ServiceDesc, srv)
-}
-
-func _CouponProductRelationService_CouponProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductRelationAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CouponProductRelationServiceServer).CouponProductRelationAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CouponProductRelationService_CouponProductRelationAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponProductRelationServiceServer).CouponProductRelationAdd(ctx, req.(*CouponProductRelationAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CouponProductRelationService_CouponProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductRelationListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CouponProductRelationServiceServer).CouponProductRelationList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CouponProductRelationService_CouponProductRelationList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponProductRelationServiceServer).CouponProductRelationList(ctx, req.(*CouponProductRelationListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CouponProductRelationService_CouponProductRelationUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductRelationUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CouponProductRelationServiceServer).CouponProductRelationUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CouponProductRelationService_CouponProductRelationUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponProductRelationServiceServer).CouponProductRelationUpdate(ctx, req.(*CouponProductRelationUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CouponProductRelationService_CouponProductRelationDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CouponProductRelationDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CouponProductRelationServiceServer).CouponProductRelationDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CouponProductRelationService_CouponProductRelationDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponProductRelationServiceServer).CouponProductRelationDelete(ctx, req.(*CouponProductRelationDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// CouponProductRelationService_ServiceDesc is the grpc.ServiceDesc for CouponProductRelationService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var CouponProductRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.CouponProductRelationService",
-	HandlerType: (*CouponProductRelationServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CouponProductRelationAdd",
-			Handler:    _CouponProductRelationService_CouponProductRelationAdd_Handler,
-		},
-		{
-			MethodName: "CouponProductRelationList",
-			Handler:    _CouponProductRelationService_CouponProductRelationList_Handler,
-		},
-		{
-			MethodName: "CouponProductRelationUpdate",
-			Handler:    _CouponProductRelationService_CouponProductRelationUpdate_Handler,
-		},
-		{
-			MethodName: "CouponProductRelationDelete",
-			Handler:    _CouponProductRelationService_CouponProductRelationDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1790,10 +1394,15 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FlashPromotionSessionServiceClient interface {
+	// 添加限时购场次
 	FlashPromotionSessionAdd(ctx context.Context, in *FlashPromotionSessionAddReq, opts ...grpc.CallOption) (*FlashPromotionSessionAddResp, error)
+	// 查询限时购场次
 	FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error)
+	// 更新限时购场次
 	FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error)
+	// 删除限时购场次
 	FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error)
+	// 根据时间查询限时购场次
 	FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error)
 }
 
@@ -1854,10 +1463,15 @@ func (c *flashPromotionSessionServiceClient) FlashPromotionSessionByTime(ctx con
 // All implementations must embed UnimplementedFlashPromotionSessionServiceServer
 // for forward compatibility
 type FlashPromotionSessionServiceServer interface {
+	// 添加限时购场次
 	FlashPromotionSessionAdd(context.Context, *FlashPromotionSessionAddReq) (*FlashPromotionSessionAddResp, error)
+	// 查询限时购场次
 	FlashPromotionSessionList(context.Context, *FlashPromotionSessionListReq) (*FlashPromotionSessionListResp, error)
+	// 更新限时购场次
 	FlashPromotionSessionUpdate(context.Context, *FlashPromotionSessionUpdateReq) (*FlashPromotionSessionUpdateResp, error)
+	// 删除限时购场次
 	FlashPromotionSessionDelete(context.Context, *FlashPromotionSessionDeleteReq) (*FlashPromotionSessionDeleteResp, error)
+	// 根据时间查询限时购场次
 	FlashPromotionSessionByTime(context.Context, *FlashPromotionSessionByTimeReq) (*FlashPromotionSessionByTimeResp, error)
 	mustEmbedUnimplementedFlashPromotionSessionServiceServer()
 }

@@ -6,8 +6,6 @@ import (
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/config"
 	couponhistoryserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/couponhistoryservice"
-	couponproductcategoryrelationserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/couponproductcategoryrelationservice"
-	couponproductrelationserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/couponproductrelationservice"
 	couponserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/couponservice"
 	flashpromotionlogserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/flashpromotionlogservice"
 	flashpromotionproductrelationserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/flashpromotionproductrelationservice"
@@ -40,8 +38,6 @@ func main() {
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		smsclient.RegisterCouponServiceServer(grpcServer, couponserviceServer.NewCouponServiceServer(ctx))
 		smsclient.RegisterCouponHistoryServiceServer(grpcServer, couponhistoryserviceServer.NewCouponHistoryServiceServer(ctx))
-		smsclient.RegisterCouponProductCategoryRelationServiceServer(grpcServer, couponproductcategoryrelationserviceServer.NewCouponProductCategoryRelationServiceServer(ctx))
-		smsclient.RegisterCouponProductRelationServiceServer(grpcServer, couponproductrelationserviceServer.NewCouponProductRelationServiceServer(ctx))
 		smsclient.RegisterFlashPromotionServiceServer(grpcServer, flashpromotionserviceServer.NewFlashPromotionServiceServer(ctx))
 		smsclient.RegisterFlashPromotionLogServiceServer(grpcServer, flashpromotionlogserviceServer.NewFlashPromotionLogServiceServer(ctx))
 		smsclient.RegisterFlashPromotionProductRelationServiceServer(grpcServer, flashpromotionproductrelationserviceServer.NewFlashPromotionProductRelationServiceServer(ctx))

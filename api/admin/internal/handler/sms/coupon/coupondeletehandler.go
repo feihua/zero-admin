@@ -1,4 +1,4 @@
-package handler
+package coupon
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func CouponDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewCouponDeleteLogic(r.Context(), ctx)
+		l := coupon.NewCouponDeleteLogic(r.Context(), ctx)
 		resp, err := l.CouponDelete(req)
 		if err != nil {
 			httpx.Error(w, err)

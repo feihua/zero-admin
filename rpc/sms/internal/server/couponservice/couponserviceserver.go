@@ -22,21 +22,25 @@ func NewCouponServiceServer(svcCtx *svc.ServiceContext) *CouponServiceServer {
 	}
 }
 
-func (s *CouponServiceServer) CouponAdd(ctx context.Context, in *smsclient.CouponAddReq) (*smsclient.CouponAddResp, error) {
+// 添加优惠券
+func (s *CouponServiceServer) CouponAdd(ctx context.Context, in *smsclient.CouponAddOrUpdateReq) (*smsclient.CouponAddOrUpdateResp, error) {
 	l := couponservicelogic.NewCouponAddLogic(ctx, s.svcCtx)
 	return l.CouponAdd(in)
 }
 
+// 查询优惠券
 func (s *CouponServiceServer) CouponList(ctx context.Context, in *smsclient.CouponListReq) (*smsclient.CouponListResp, error) {
 	l := couponservicelogic.NewCouponListLogic(ctx, s.svcCtx)
 	return l.CouponList(in)
 }
 
-func (s *CouponServiceServer) CouponUpdate(ctx context.Context, in *smsclient.CouponUpdateReq) (*smsclient.CouponUpdateResp, error) {
+// 更新优惠券
+func (s *CouponServiceServer) CouponUpdate(ctx context.Context, in *smsclient.CouponAddOrUpdateReq) (*smsclient.CouponAddOrUpdateResp, error) {
 	l := couponservicelogic.NewCouponUpdateLogic(ctx, s.svcCtx)
 	return l.CouponUpdate(in)
 }
 
+// 删除优惠券
 func (s *CouponServiceServer) CouponDelete(ctx context.Context, in *smsclient.CouponDeleteReq) (*smsclient.CouponDeleteResp, error) {
 	l := couponservicelogic.NewCouponDeleteLogic(ctx, s.svcCtx)
 	return l.CouponDelete(in)

@@ -4,7 +4,7 @@ package smsclient;
 
 option go_package = "./smsclient";
 
-message CouponAddReq {
+message CouponAddOrUpdateReq {
   int64 Id = 1; //
   int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
   string Name = 3; //名称
@@ -23,10 +23,12 @@ message CouponAddReq {
   string EnableTime = 16; //可以领取的日期
   string Code = 17; //优惠码
   int32 MemberLevel = 18; //可领取的会员类型：0->无限时
+  repeated CouponProductRelationListData CouponProductRelationList=19;//优惠券绑定的商品
+  repeated CouponProductCategoryRelationListData CouponProductCategoryRelationList=20;//优惠券绑定的商品分类
 
 }
 
-message CouponAddResp {
+message CouponAddOrUpdateResp {
   string pong = 1;
 }
 
@@ -35,32 +37,6 @@ message CouponDeleteReq {
 }
 
 message CouponDeleteResp {
-  string pong = 1;
-}
-
-message CouponUpdateReq {
-  int64 Id = 1; //
-  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  string Name = 3; //名称
-  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
-  int32 Count = 5; //数量
-  int64 Amount = 6; //金额
-  int32 PerLimit = 7; //每人限领张数
-  int64 MinPoint = 8; //使用门槛；0表示无门槛
-  string StartTime = 9; //开始时间
-  string EndTime = 10; //结束时间
-  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
-  string Note = 12; //备注
-  int32 PublishCount = 13; //发行数量
-  int32 UseCount = 14; //已使用数量
-  int32 ReceiveCount = 15; //领取数量
-  string EnableTime = 16; //可以领取的日期
-  string Code = 17; //优惠码
-  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
-
-}
-
-message CouponUpdateResp {
   string pong = 1;
 }
 
@@ -126,11 +102,14 @@ message CouponFindByIdResp {
   string EnableTime = 16; //可以领取的日期
   string Code = 17; //优惠码
   int32 MemberLevel = 18; //可领取的会员类型：0->无限时
+  repeated CouponProductRelationListData CouponProductRelationList=19;//优惠券绑定的商品
+  repeated CouponProductCategoryRelationListData CouponProductCategoryRelationList=20;//优惠券绑定的商品分类
 }
 
 message CouponFindByIdsReq {
   repeated int64 CouponIds = 1;
 }
+
 message CouponFindByIdsResp {
   int64 total = 1;
   repeated  CouponListData list = 2;
@@ -148,14 +127,19 @@ message CouponFindByProductIdAndProductCategoryIdResp {
 
 service CouponService {
 
-  rpc CouponAdd(CouponAddReq) returns(CouponAddResp);
+  //添加优惠券
+  rpc CouponAdd(CouponAddOrUpdateReq) returns(CouponAddOrUpdateResp);
+  //查询优惠券
   rpc CouponList(CouponListReq) returns(CouponListResp);
-  rpc CouponUpdate(CouponUpdateReq) returns(CouponUpdateResp);
+  //更新优惠券
+  rpc CouponUpdate(CouponAddOrUpdateReq) returns(CouponAddOrUpdateResp);
+  //删除优惠券
   rpc CouponDelete(CouponDeleteReq) returns(CouponDeleteResp);
   //根据优惠券id查询优惠券
   rpc CouponFindById(CouponFindByIdReq) returns(CouponFindByIdResp);
   //根据优惠券ids查询优惠券
   rpc CouponFindByIds(CouponFindByIdsReq) returns(CouponFindByIdsResp);
+
   //根据商品Id和分类id查询可用的优惠券(app)
   rpc CouponFindByProductIdAndProductCategoryId(CouponFindByProductIdAndProductCategoryIdReq) returns(CouponFindByProductIdAndProductCategoryIdResp);
 
@@ -289,21 +273,6 @@ service CouponHistoryService {
   rpc QueryCouponHistoryDetailList(CouponHistoryDetailListReq) returns(CouponHistoryDetailListResp);
 }
 
-message CouponProductCategoryRelationAddReq {
-  int64  CouponId = 2;
-  int64  ProductCategoryId = 3;
-  string  ProductCategoryName = 4;
-  string  ParentCategoryName = 5;
-}
-
-message CouponProductCategoryRelationAddResp {
-  string pong = 1;
-}
-
-message CouponProductCategoryRelationListReq {
-  int64  ProductCategoryId = 1;
-}
-
 message CouponProductCategoryRelationListData{
   int64  Id = 1;
   int64  CouponId = 2;
@@ -312,58 +281,6 @@ message CouponProductCategoryRelationListData{
   string  ParentCategoryName = 5;
 
 }
-
-message CouponProductCategoryRelationListResp {
-  int64 total = 1;
-  repeated  CouponProductCategoryRelationListData list = 2;
-}
-
-message CouponProductCategoryRelationUpdateReq {
-  int64  Id = 1;
-  int64  CouponId = 2;
-  int64  ProductCategoryId = 3;
-  string  ProductCategoryName = 4;
-  string  ParentCategoryName = 5;
-}
-
-message CouponProductCategoryRelationUpdateResp {
-  string pong = 1;
-}
-
-message CouponProductCategoryRelationDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message CouponProductCategoryRelationDeleteResp {
-  string pong = 1;
-}
-
-service CouponProductCategoryRelationService {
-
-  rpc CouponProductCategoryRelationAdd(CouponProductCategoryRelationAddReq) returns(CouponProductCategoryRelationAddResp);
-  rpc CouponProductCategoryRelationList(CouponProductCategoryRelationListReq) returns(CouponProductCategoryRelationListResp);
-  rpc CouponProductCategoryRelationUpdate(CouponProductCategoryRelationUpdateReq) returns(CouponProductCategoryRelationUpdateResp);
-  rpc CouponProductCategoryRelationDelete(CouponProductCategoryRelationDeleteReq) returns(CouponProductCategoryRelationDeleteResp);
-
-
-}
-message CouponProductRelationAddReq {
-  int64    CouponId = 2;
-  int64    ProductId = 3;
-  string  ProductName = 4;
-  string  ProductSn = 5;
-}
-
-message CouponProductRelationAddResp {
-  string pong = 1;
-}
-
-message CouponProductRelationListReq {
-  int64 ProductId = 1;
-  int64 Current = 2;
-  int64 PageSize = 3;
-}
-
 message CouponProductRelationListData{
   int64    Id = 1;
   int64    CouponId = 2;
@@ -373,39 +290,7 @@ message CouponProductRelationListData{
 
 }
 
-message CouponProductRelationListResp {
-  int64 total = 1;
-  repeated  CouponProductRelationListData list = 2;
-}
 
-message CouponProductRelationUpdateReq {
-  int64    Id = 1;
-  int64    CouponId = 2;
-  int64    ProductId = 3;
-  string  ProductName = 4;
-  string  ProductSn = 5;
-}
-
-message CouponProductRelationUpdateResp {
-  string pong = 1;
-}
-
-message CouponProductRelationDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message CouponProductRelationDeleteResp {
-  string pong = 1;
-}
-service CouponProductRelationService {
-
-  rpc CouponProductRelationAdd(CouponProductRelationAddReq) returns(CouponProductRelationAddResp);
-  rpc CouponProductRelationList(CouponProductRelationListReq) returns(CouponProductRelationListResp);
-  rpc CouponProductRelationUpdate(CouponProductRelationUpdateReq) returns(CouponProductRelationUpdateResp);
-  rpc CouponProductRelationDelete(CouponProductRelationDeleteReq) returns(CouponProductRelationDeleteResp);
-
-
-}
 message FlashPromotionAddReq {
   string Title = 1; //标题
   string StartDate = 2; //开始日期

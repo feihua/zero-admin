@@ -13,8 +13,8 @@ import (
 )
 
 type (
-	CouponAddReq                                  = smsclient.CouponAddReq
-	CouponAddResp                                 = smsclient.CouponAddResp
+	CouponAddOrUpdateReq                          = smsclient.CouponAddOrUpdateReq
+	CouponAddOrUpdateResp                         = smsclient.CouponAddOrUpdateResp
 	CouponCountReq                                = smsclient.CouponCountReq
 	CouponCountResp                               = smsclient.CouponCountResp
 	CouponDeleteReq                               = smsclient.CouponDeleteReq
@@ -40,26 +40,8 @@ type (
 	CouponListData                                = smsclient.CouponListData
 	CouponListReq                                 = smsclient.CouponListReq
 	CouponListResp                                = smsclient.CouponListResp
-	CouponProductCategoryRelationAddReq           = smsclient.CouponProductCategoryRelationAddReq
-	CouponProductCategoryRelationAddResp          = smsclient.CouponProductCategoryRelationAddResp
-	CouponProductCategoryRelationDeleteReq        = smsclient.CouponProductCategoryRelationDeleteReq
-	CouponProductCategoryRelationDeleteResp       = smsclient.CouponProductCategoryRelationDeleteResp
 	CouponProductCategoryRelationListData         = smsclient.CouponProductCategoryRelationListData
-	CouponProductCategoryRelationListReq          = smsclient.CouponProductCategoryRelationListReq
-	CouponProductCategoryRelationListResp         = smsclient.CouponProductCategoryRelationListResp
-	CouponProductCategoryRelationUpdateReq        = smsclient.CouponProductCategoryRelationUpdateReq
-	CouponProductCategoryRelationUpdateResp       = smsclient.CouponProductCategoryRelationUpdateResp
-	CouponProductRelationAddReq                   = smsclient.CouponProductRelationAddReq
-	CouponProductRelationAddResp                  = smsclient.CouponProductRelationAddResp
-	CouponProductRelationDeleteReq                = smsclient.CouponProductRelationDeleteReq
-	CouponProductRelationDeleteResp               = smsclient.CouponProductRelationDeleteResp
 	CouponProductRelationListData                 = smsclient.CouponProductRelationListData
-	CouponProductRelationListReq                  = smsclient.CouponProductRelationListReq
-	CouponProductRelationListResp                 = smsclient.CouponProductRelationListResp
-	CouponProductRelationUpdateReq                = smsclient.CouponProductRelationUpdateReq
-	CouponProductRelationUpdateResp               = smsclient.CouponProductRelationUpdateResp
-	CouponUpdateReq                               = smsclient.CouponUpdateReq
-	CouponUpdateResp                              = smsclient.CouponUpdateResp
 	FlashPromotionAddReq                          = smsclient.FlashPromotionAddReq
 	FlashPromotionAddResp                         = smsclient.FlashPromotionAddResp
 	FlashPromotionDeleteReq                       = smsclient.FlashPromotionDeleteReq
@@ -166,10 +148,15 @@ type (
 	UpdateRecommendSubjectStatusResp              = smsclient.UpdateRecommendSubjectStatusResp
 
 	FlashPromotionSessionService interface {
+		// 添加限时购场次
 		FlashPromotionSessionAdd(ctx context.Context, in *FlashPromotionSessionAddReq, opts ...grpc.CallOption) (*FlashPromotionSessionAddResp, error)
+		// 查询限时购场次
 		FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error)
+		// 更新限时购场次
 		FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error)
+		// 删除限时购场次
 		FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error)
+		// 根据时间查询限时购场次
 		FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error)
 	}
 
@@ -184,26 +171,31 @@ func NewFlashPromotionSessionService(cli zrpc.Client) FlashPromotionSessionServi
 	}
 }
 
+// 添加限时购场次
 func (m *defaultFlashPromotionSessionService) FlashPromotionSessionAdd(ctx context.Context, in *FlashPromotionSessionAddReq, opts ...grpc.CallOption) (*FlashPromotionSessionAddResp, error) {
 	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
 	return client.FlashPromotionSessionAdd(ctx, in, opts...)
 }
 
+// 查询限时购场次
 func (m *defaultFlashPromotionSessionService) FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error) {
 	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
 	return client.FlashPromotionSessionList(ctx, in, opts...)
 }
 
+// 更新限时购场次
 func (m *defaultFlashPromotionSessionService) FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error) {
 	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
 	return client.FlashPromotionSessionUpdate(ctx, in, opts...)
 }
 
+// 删除限时购场次
 func (m *defaultFlashPromotionSessionService) FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error) {
 	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
 	return client.FlashPromotionSessionDelete(ctx, in, opts...)
 }
 
+// 根据时间查询限时购场次
 func (m *defaultFlashPromotionSessionService) FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error) {
 	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
 	return client.FlashPromotionSessionByTime(ctx, in, opts...)

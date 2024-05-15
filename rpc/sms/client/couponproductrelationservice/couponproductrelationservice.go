@@ -13,8 +13,8 @@ import (
 )
 
 type (
-	CouponAddReq                                  = smsclient.CouponAddReq
-	CouponAddResp                                 = smsclient.CouponAddResp
+	CouponAddOrUpdateReq                          = smsclient.CouponAddOrUpdateReq
+	CouponAddOrUpdateResp                         = smsclient.CouponAddOrUpdateResp
 	CouponCountReq                                = smsclient.CouponCountReq
 	CouponCountResp                               = smsclient.CouponCountResp
 	CouponDeleteReq                               = smsclient.CouponDeleteReq
@@ -45,8 +45,6 @@ type (
 	CouponProductCategoryRelationDeleteReq        = smsclient.CouponProductCategoryRelationDeleteReq
 	CouponProductCategoryRelationDeleteResp       = smsclient.CouponProductCategoryRelationDeleteResp
 	CouponProductCategoryRelationListData         = smsclient.CouponProductCategoryRelationListData
-	CouponProductCategoryRelationListReq          = smsclient.CouponProductCategoryRelationListReq
-	CouponProductCategoryRelationListResp         = smsclient.CouponProductCategoryRelationListResp
 	CouponProductCategoryRelationUpdateReq        = smsclient.CouponProductCategoryRelationUpdateReq
 	CouponProductCategoryRelationUpdateResp       = smsclient.CouponProductCategoryRelationUpdateResp
 	CouponProductRelationAddReq                   = smsclient.CouponProductRelationAddReq
@@ -54,12 +52,8 @@ type (
 	CouponProductRelationDeleteReq                = smsclient.CouponProductRelationDeleteReq
 	CouponProductRelationDeleteResp               = smsclient.CouponProductRelationDeleteResp
 	CouponProductRelationListData                 = smsclient.CouponProductRelationListData
-	CouponProductRelationListReq                  = smsclient.CouponProductRelationListReq
-	CouponProductRelationListResp                 = smsclient.CouponProductRelationListResp
 	CouponProductRelationUpdateReq                = smsclient.CouponProductRelationUpdateReq
 	CouponProductRelationUpdateResp               = smsclient.CouponProductRelationUpdateResp
-	CouponUpdateReq                               = smsclient.CouponUpdateReq
-	CouponUpdateResp                              = smsclient.CouponUpdateResp
 	FlashPromotionAddReq                          = smsclient.FlashPromotionAddReq
 	FlashPromotionAddResp                         = smsclient.FlashPromotionAddResp
 	FlashPromotionDeleteReq                       = smsclient.FlashPromotionDeleteReq
@@ -167,7 +161,6 @@ type (
 
 	CouponProductRelationService interface {
 		CouponProductRelationAdd(ctx context.Context, in *CouponProductRelationAddReq, opts ...grpc.CallOption) (*CouponProductRelationAddResp, error)
-		CouponProductRelationList(ctx context.Context, in *CouponProductRelationListReq, opts ...grpc.CallOption) (*CouponProductRelationListResp, error)
 		CouponProductRelationUpdate(ctx context.Context, in *CouponProductRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductRelationUpdateResp, error)
 		CouponProductRelationDelete(ctx context.Context, in *CouponProductRelationDeleteReq, opts ...grpc.CallOption) (*CouponProductRelationDeleteResp, error)
 	}
@@ -186,11 +179,6 @@ func NewCouponProductRelationService(cli zrpc.Client) CouponProductRelationServi
 func (m *defaultCouponProductRelationService) CouponProductRelationAdd(ctx context.Context, in *CouponProductRelationAddReq, opts ...grpc.CallOption) (*CouponProductRelationAddResp, error) {
 	client := smsclient.NewCouponProductRelationServiceClient(m.cli.Conn())
 	return client.CouponProductRelationAdd(ctx, in, opts...)
-}
-
-func (m *defaultCouponProductRelationService) CouponProductRelationList(ctx context.Context, in *CouponProductRelationListReq, opts ...grpc.CallOption) (*CouponProductRelationListResp, error) {
-	client := smsclient.NewCouponProductRelationServiceClient(m.cli.Conn())
-	return client.CouponProductRelationList(ctx, in, opts...)
 }
 
 func (m *defaultCouponProductRelationService) CouponProductRelationUpdate(ctx context.Context, in *CouponProductRelationUpdateReq, opts ...grpc.CallOption) (*CouponProductRelationUpdateResp, error) {

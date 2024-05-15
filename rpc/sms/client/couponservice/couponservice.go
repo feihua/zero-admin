@@ -13,8 +13,8 @@ import (
 )
 
 type (
-	CouponAddReq                                  = smsclient.CouponAddReq
-	CouponAddResp                                 = smsclient.CouponAddResp
+	CouponAddOrUpdateReq                          = smsclient.CouponAddOrUpdateReq
+	CouponAddOrUpdateResp                         = smsclient.CouponAddOrUpdateResp
 	CouponCountReq                                = smsclient.CouponCountReq
 	CouponCountResp                               = smsclient.CouponCountResp
 	CouponDeleteReq                               = smsclient.CouponDeleteReq
@@ -40,26 +40,8 @@ type (
 	CouponListData                                = smsclient.CouponListData
 	CouponListReq                                 = smsclient.CouponListReq
 	CouponListResp                                = smsclient.CouponListResp
-	CouponProductCategoryRelationAddReq           = smsclient.CouponProductCategoryRelationAddReq
-	CouponProductCategoryRelationAddResp          = smsclient.CouponProductCategoryRelationAddResp
-	CouponProductCategoryRelationDeleteReq        = smsclient.CouponProductCategoryRelationDeleteReq
-	CouponProductCategoryRelationDeleteResp       = smsclient.CouponProductCategoryRelationDeleteResp
 	CouponProductCategoryRelationListData         = smsclient.CouponProductCategoryRelationListData
-	CouponProductCategoryRelationListReq          = smsclient.CouponProductCategoryRelationListReq
-	CouponProductCategoryRelationListResp         = smsclient.CouponProductCategoryRelationListResp
-	CouponProductCategoryRelationUpdateReq        = smsclient.CouponProductCategoryRelationUpdateReq
-	CouponProductCategoryRelationUpdateResp       = smsclient.CouponProductCategoryRelationUpdateResp
-	CouponProductRelationAddReq                   = smsclient.CouponProductRelationAddReq
-	CouponProductRelationAddResp                  = smsclient.CouponProductRelationAddResp
-	CouponProductRelationDeleteReq                = smsclient.CouponProductRelationDeleteReq
-	CouponProductRelationDeleteResp               = smsclient.CouponProductRelationDeleteResp
 	CouponProductRelationListData                 = smsclient.CouponProductRelationListData
-	CouponProductRelationListReq                  = smsclient.CouponProductRelationListReq
-	CouponProductRelationListResp                 = smsclient.CouponProductRelationListResp
-	CouponProductRelationUpdateReq                = smsclient.CouponProductRelationUpdateReq
-	CouponProductRelationUpdateResp               = smsclient.CouponProductRelationUpdateResp
-	CouponUpdateReq                               = smsclient.CouponUpdateReq
-	CouponUpdateResp                              = smsclient.CouponUpdateResp
 	FlashPromotionAddReq                          = smsclient.FlashPromotionAddReq
 	FlashPromotionAddResp                         = smsclient.FlashPromotionAddResp
 	FlashPromotionDeleteReq                       = smsclient.FlashPromotionDeleteReq
@@ -166,9 +148,13 @@ type (
 	UpdateRecommendSubjectStatusResp              = smsclient.UpdateRecommendSubjectStatusResp
 
 	CouponService interface {
-		CouponAdd(ctx context.Context, in *CouponAddReq, opts ...grpc.CallOption) (*CouponAddResp, error)
+		// 添加优惠券
+		CouponAdd(ctx context.Context, in *CouponAddOrUpdateReq, opts ...grpc.CallOption) (*CouponAddOrUpdateResp, error)
+		// 查询优惠券
 		CouponList(ctx context.Context, in *CouponListReq, opts ...grpc.CallOption) (*CouponListResp, error)
-		CouponUpdate(ctx context.Context, in *CouponUpdateReq, opts ...grpc.CallOption) (*CouponUpdateResp, error)
+		// 更新优惠券
+		CouponUpdate(ctx context.Context, in *CouponAddOrUpdateReq, opts ...grpc.CallOption) (*CouponAddOrUpdateResp, error)
+		// 删除优惠券
 		CouponDelete(ctx context.Context, in *CouponDeleteReq, opts ...grpc.CallOption) (*CouponDeleteResp, error)
 		// 根据优惠券id查询优惠券
 		CouponFindById(ctx context.Context, in *CouponFindByIdReq, opts ...grpc.CallOption) (*CouponFindByIdResp, error)
@@ -189,21 +175,25 @@ func NewCouponService(cli zrpc.Client) CouponService {
 	}
 }
 
-func (m *defaultCouponService) CouponAdd(ctx context.Context, in *CouponAddReq, opts ...grpc.CallOption) (*CouponAddResp, error) {
+// 添加优惠券
+func (m *defaultCouponService) CouponAdd(ctx context.Context, in *CouponAddOrUpdateReq, opts ...grpc.CallOption) (*CouponAddOrUpdateResp, error) {
 	client := smsclient.NewCouponServiceClient(m.cli.Conn())
 	return client.CouponAdd(ctx, in, opts...)
 }
 
+// 查询优惠券
 func (m *defaultCouponService) CouponList(ctx context.Context, in *CouponListReq, opts ...grpc.CallOption) (*CouponListResp, error) {
 	client := smsclient.NewCouponServiceClient(m.cli.Conn())
 	return client.CouponList(ctx, in, opts...)
 }
 
-func (m *defaultCouponService) CouponUpdate(ctx context.Context, in *CouponUpdateReq, opts ...grpc.CallOption) (*CouponUpdateResp, error) {
+// 更新优惠券
+func (m *defaultCouponService) CouponUpdate(ctx context.Context, in *CouponAddOrUpdateReq, opts ...grpc.CallOption) (*CouponAddOrUpdateResp, error) {
 	client := smsclient.NewCouponServiceClient(m.cli.Conn())
 	return client.CouponUpdate(ctx, in, opts...)
 }
 
+// 删除优惠券
 func (m *defaultCouponService) CouponDelete(ctx context.Context, in *CouponDeleteReq, opts ...grpc.CallOption) (*CouponDeleteResp, error) {
 	client := smsclient.NewCouponServiceClient(m.cli.Conn())
 	return client.CouponDelete(ctx, in, opts...)

@@ -1,4 +1,4 @@
-package logic
+package coupon
 
 import (
 	"context"
@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponListLogic 优惠券
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 9:21
+*/
 type CouponListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +29,7 @@ func NewCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) CouponL
 	}
 }
 
+// CouponList 查询优惠券列表
 func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCouponResp, error) {
 	resp, err := l.svcCtx.CouponService.CouponList(l.ctx, &smsclient.CouponListReq{
 		Current:   req.Current,

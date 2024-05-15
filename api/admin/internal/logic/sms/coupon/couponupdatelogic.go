@@ -1,4 +1,4 @@
-package logic
+package coupon
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponUpdateLogic 优惠券
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 10:30
+*/
 type CouponUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,24 +31,46 @@ func NewCouponUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 	}
 }
 
-func (l *CouponUpdateLogic) CouponUpdate(req types.UpdateCouponReq) (*types.UpdateCouponResp, error) {
-	_, err := l.svcCtx.CouponService.CouponUpdate(l.ctx, &smsclient.CouponUpdateReq{
-		Id:           req.Id,
-		Type:         req.Type,
-		Name:         req.Name,
-		Platform:     req.Platform,
-		Count:        req.Count,
-		Amount:       req.Amount,
-		PerLimit:     req.PerLimit,
-		MinPoint:     req.MinPoint,
-		StartTime:    req.StartTime,
-		EndTime:      req.EndTime,
-		UseType:      req.UseType,
-		Note:         req.Note,
-		PublishCount: req.PublishCount,
-		EnableTime:   req.EnableTime,
-		Code:         req.Code,
-		MemberLevel:  req.MemberLevel,
+// CouponUpdate 更新优惠券
+func (l *CouponUpdateLogic) CouponUpdate(req types.AddOrUpdateCouponReq) (*types.AddOrUpdateCouponResp, error) {
+	var productList []*smsclient.CouponProductRelationListData
+	for _, relation := range req.ProductRelationList {
+		productList = append(productList, &smsclient.CouponProductRelationListData{
+			CouponId:    relation.CouponId,
+			ProductId:   relation.ProductId,
+			ProductName: relation.ProductName,
+			ProductSn:   relation.ProductSn,
+		})
+	}
+
+	var categoryList []*smsclient.CouponProductCategoryRelationListData
+	for _, relation := range req.ProductCategoryRelationList {
+		categoryList = append(categoryList, &smsclient.CouponProductCategoryRelationListData{
+			CouponId:            relation.CouponId,
+			ProductCategoryId:   relation.ProductCategoryId,
+			ProductCategoryName: relation.ProductCategoryName,
+			ParentCategoryName:  relation.ParentCategoryName,
+		})
+	}
+
+	_, err := l.svcCtx.CouponService.CouponAdd(l.ctx, &smsclient.CouponAddOrUpdateReq{
+		Type:                              req.Type,
+		Name:                              req.Name,
+		Platform:                          req.Platform,
+		Count:                             req.Count,
+		Amount:                            req.Amount,
+		PerLimit:                          req.PerLimit,
+		MinPoint:                          req.MinPoint,
+		StartTime:                         req.StartTime,
+		EndTime:                           req.EndTime,
+		UseType:                           req.UseType,
+		Note:                              req.Note,
+		PublishCount:                      req.PublishCount,
+		EnableTime:                        req.EnableTime,
+		Code:                              req.Code,
+		MemberLevel:                       req.MemberLevel,
+		CouponProductRelationList:         productList,
+		CouponProductCategoryRelationList: categoryList,
 	})
 
 	if err != nil {
@@ -51,7 +78,7 @@ func (l *CouponUpdateLogic) CouponUpdate(req types.UpdateCouponReq) (*types.Upda
 		return nil, errorx.NewDefaultError("更新优惠券失败")
 	}
 
-	return &types.UpdateCouponResp{
+	return &types.AddOrUpdateCouponResp{
 		Code:    "000000",
 		Message: "更新优惠券成功",
 	}, nil

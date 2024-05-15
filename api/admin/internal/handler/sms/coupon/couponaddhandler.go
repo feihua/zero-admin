@@ -1,4 +1,4 @@
-package handler
+package coupon
 
 import (
 	"net/http"
@@ -6,24 +6,23 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/logic/sms/coupon"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
-
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func CouponAddHandler(ctx *svc.ServiceContext) http.HandlerFunc {
+func CouponAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.AddCouponReq
+		var req types.AddOrUpdateCouponReq
 		if err := httpx.Parse(r, &req); err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := logic.NewCouponAddLogic(r.Context(), ctx)
+		l := coupon.NewCouponAddLogic(r.Context(), svcCtx)
 		resp, err := l.CouponAdd(req)
 		if err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			httpx.OkJsonCtx(r.Context(), w, resp)
 		}
 	}
 }

@@ -10,6 +10,11 @@ import (
 	"time"
 )
 
+// CouponListLogic 优惠券
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 9:22
+*/
 type CouponListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Coupon
 	}
 }
 
+// CouponList 查询优惠券列表
 func (l *CouponListLogic) CouponList(in *smsclient.CouponListReq) (*smsclient.CouponListResp, error) {
 
 	q := query.SmsCoupon.WithContext(l.ctx)

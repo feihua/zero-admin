@@ -34,8 +34,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/client/productvertifyrecordservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/skustockservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponhistoryservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/couponproductcategoryrelationservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/couponproductrelationservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/flashpromotionlogservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/flashpromotionproductrelationservice"
@@ -133,8 +131,6 @@ type ServiceContext struct {
 	OrderSettingService        ordersettingservice.OrderSettingService
 	//营销相关
 	CouponHistoryService                 couponhistoryservice.CouponHistoryService
-	CouponProductCategoryRelationService couponproductcategoryrelationservice.CouponProductCategoryRelationService
-	CouponProductRelationService         couponproductrelationservice.CouponProductRelationService
 	CouponService                        couponservice.CouponService
 	FlashPromotionLogService             flashpromotionlogservice.FlashPromotionLogService
 	FlashPromotionProductRelationService flashpromotionproductrelationservice.FlashPromotionProductRelationService
@@ -220,8 +216,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		OrderSettingService:        ordersettingservice.NewOrderSettingService(omsClient),
 
 		CouponHistoryService:                 couponhistoryservice.NewCouponHistoryService(smsClient),
-		CouponProductCategoryRelationService: couponproductcategoryrelationservice.NewCouponProductCategoryRelationService(smsClient),
-		CouponProductRelationService:         couponproductrelationservice.NewCouponProductRelationService(smsClient),
 		CouponService:                        couponservice.NewCouponService(smsClient),
 		FlashPromotionLogService:             flashpromotionlogservice.NewFlashPromotionLogService(smsClient),
 		FlashPromotionProductRelationService: flashpromotionproductrelationservice.NewFlashPromotionProductRelationService(smsClient),

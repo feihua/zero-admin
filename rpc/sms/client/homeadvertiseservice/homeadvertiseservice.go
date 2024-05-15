@@ -13,8 +13,8 @@ import (
 )
 
 type (
-	CouponAddReq                                  = smsclient.CouponAddReq
-	CouponAddResp                                 = smsclient.CouponAddResp
+	CouponAddOrUpdateReq                          = smsclient.CouponAddOrUpdateReq
+	CouponAddOrUpdateResp                         = smsclient.CouponAddOrUpdateResp
 	CouponCountReq                                = smsclient.CouponCountReq
 	CouponCountResp                               = smsclient.CouponCountResp
 	CouponDeleteReq                               = smsclient.CouponDeleteReq
@@ -40,26 +40,8 @@ type (
 	CouponListData                                = smsclient.CouponListData
 	CouponListReq                                 = smsclient.CouponListReq
 	CouponListResp                                = smsclient.CouponListResp
-	CouponProductCategoryRelationAddReq           = smsclient.CouponProductCategoryRelationAddReq
-	CouponProductCategoryRelationAddResp          = smsclient.CouponProductCategoryRelationAddResp
-	CouponProductCategoryRelationDeleteReq        = smsclient.CouponProductCategoryRelationDeleteReq
-	CouponProductCategoryRelationDeleteResp       = smsclient.CouponProductCategoryRelationDeleteResp
 	CouponProductCategoryRelationListData         = smsclient.CouponProductCategoryRelationListData
-	CouponProductCategoryRelationListReq          = smsclient.CouponProductCategoryRelationListReq
-	CouponProductCategoryRelationListResp         = smsclient.CouponProductCategoryRelationListResp
-	CouponProductCategoryRelationUpdateReq        = smsclient.CouponProductCategoryRelationUpdateReq
-	CouponProductCategoryRelationUpdateResp       = smsclient.CouponProductCategoryRelationUpdateResp
-	CouponProductRelationAddReq                   = smsclient.CouponProductRelationAddReq
-	CouponProductRelationAddResp                  = smsclient.CouponProductRelationAddResp
-	CouponProductRelationDeleteReq                = smsclient.CouponProductRelationDeleteReq
-	CouponProductRelationDeleteResp               = smsclient.CouponProductRelationDeleteResp
 	CouponProductRelationListData                 = smsclient.CouponProductRelationListData
-	CouponProductRelationListReq                  = smsclient.CouponProductRelationListReq
-	CouponProductRelationListResp                 = smsclient.CouponProductRelationListResp
-	CouponProductRelationUpdateReq                = smsclient.CouponProductRelationUpdateReq
-	CouponProductRelationUpdateResp               = smsclient.CouponProductRelationUpdateResp
-	CouponUpdateReq                               = smsclient.CouponUpdateReq
-	CouponUpdateResp                              = smsclient.CouponUpdateResp
 	FlashPromotionAddReq                          = smsclient.FlashPromotionAddReq
 	FlashPromotionAddResp                         = smsclient.FlashPromotionAddResp
 	FlashPromotionDeleteReq                       = smsclient.FlashPromotionDeleteReq

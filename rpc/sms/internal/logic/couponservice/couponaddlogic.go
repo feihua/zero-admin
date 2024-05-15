@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponAddLogic
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 10:31
+*/
 type CouponAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -25,11 +30,16 @@ func NewCouponAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CouponA
 	}
 }
 
-func (l *CouponAddLogic) CouponAdd(in *smsclient.CouponAddReq) (*smsclient.CouponAddResp, error) {
+// CouponAdd 添加优惠券
+// 1.插入优惠券表
+// 2.插入优惠券和商品关系表
+// 3.插入优惠券和商品分类关系表
+func (l *CouponAddLogic) CouponAdd(in *smsclient.CouponAddOrUpdateReq) (*smsclient.CouponAddOrUpdateResp, error) {
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
 	EnableTime, _ := time.Parse("2006-01-02 15:04:05", in.EnableTime)
 
+	//1.插入优惠券表
 	err := query.SmsCoupon.WithContext(l.ctx).Create(&model.SmsCoupon{
 		Type:         in.Type,
 		Name:         in.Name,
@@ -54,5 +64,41 @@ func (l *CouponAddLogic) CouponAdd(in *smsclient.CouponAddReq) (*smsclient.Coupo
 		return nil, err
 	}
 
-	return &smsclient.CouponAddResp{}, nil
+	// 2.插入优惠券和商品关系表
+	if in.UseType == 2 {
+		var list []*model.SmsCouponProductRelation
+		for _, item := range in.CouponProductRelationList {
+			list = append(list, &model.SmsCouponProductRelation{
+				CouponID:    item.CouponId,
+				ProductID:   item.ProductId,
+				ProductName: item.ProductName,
+				ProductSn:   item.ProductSn,
+			})
+		}
+
+		err = query.SmsCouponProductRelation.WithContext(l.ctx).CreateInBatches(list, len(list))
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	// 3.插入优惠券和商品分类关系表
+	if in.UseType == 1 {
+		var list []*model.SmsCouponProductCategoryRelation
+		for _, item := range in.CouponProductCategoryRelationList {
+			list = append(list, &model.SmsCouponProductCategoryRelation{
+				CouponID:            item.CouponId,
+				ProductCategoryID:   item.ProductCategoryId,
+				ProductCategoryName: item.ProductCategoryName,
+				ParentCategoryName:  item.ParentCategoryName,
+			})
+		}
+
+		err = query.SmsCouponProductCategoryRelation.WithContext(l.ctx).CreateInBatches(list, len(list))
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return &smsclient.CouponAddOrUpdateResp{}, nil
 }

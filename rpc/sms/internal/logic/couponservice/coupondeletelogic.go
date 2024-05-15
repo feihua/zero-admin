@@ -29,7 +29,11 @@ func NewCouponDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Coup
 }
 
 // CouponDelete 删除优惠券
+// 1.删除优惠券
+// 2.删除商品关联
+// 3.删除商品分类关联
 func (l *CouponDeleteLogic) CouponDelete(in *smsclient.CouponDeleteReq) (*smsclient.CouponDeleteResp, error) {
+	// 1.删除优惠券
 	q := query.SmsCoupon
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
@@ -37,5 +41,18 @@ func (l *CouponDeleteLogic) CouponDelete(in *smsclient.CouponDeleteReq) (*smscli
 		return nil, err
 	}
 
+	// 2.删除商品关联
+	relation := query.SmsCouponProductRelation
+	_, err = relation.WithContext(l.ctx).Where(relation.CouponID.In(in.Ids...)).Delete()
+	if err != nil {
+		return nil, err
+	}
+
+	// 3.删除商品分类关联
+	categoryRelation := query.SmsCouponProductCategoryRelation
+	_, err = categoryRelation.WithContext(l.ctx).Where(categoryRelation.CouponID.In(in.Ids...)).Delete()
+	if err != nil {
+		return nil, err
+	}
 	return &smsclient.CouponDeleteResp{}, nil
 }

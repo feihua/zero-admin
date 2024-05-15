@@ -1,4 +1,4 @@
-package logic
+package coupon
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// CouponDeleteLogic 优惠券
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 10:09
+*/
 type CouponDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewCouponDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 	}
 }
 
+// CouponDelete 删除优惠券
 func (l *CouponDeleteLogic) CouponDelete(req types.DeleteCouponReq) (*types.DeleteCouponResp, error) {
 	_, err := l.svcCtx.CouponService.CouponDelete(l.ctx, &smsclient.CouponDeleteReq{
 		Ids: req.Ids,
@@ -37,6 +43,6 @@ func (l *CouponDeleteLogic) CouponDelete(req types.DeleteCouponReq) (*types.Dele
 	}
 	return &types.DeleteCouponResp{
 		Code:    "000000",
-		Message: "",
+		Message: "优惠券成功",
 	}, nil
 }

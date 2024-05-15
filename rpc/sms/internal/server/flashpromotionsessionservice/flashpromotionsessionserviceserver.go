@@ -22,26 +22,31 @@ func NewFlashPromotionSessionServiceServer(svcCtx *svc.ServiceContext) *FlashPro
 	}
 }
 
+// 添加限时购场次
 func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionAdd(ctx context.Context, in *smsclient.FlashPromotionSessionAddReq) (*smsclient.FlashPromotionSessionAddResp, error) {
 	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionAddLogic(ctx, s.svcCtx)
 	return l.FlashPromotionSessionAdd(in)
 }
 
+// 查询限时购场次
 func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionList(ctx context.Context, in *smsclient.FlashPromotionSessionListReq) (*smsclient.FlashPromotionSessionListResp, error) {
 	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionListLogic(ctx, s.svcCtx)
 	return l.FlashPromotionSessionList(in)
 }
 
+// 更新限时购场次
 func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionUpdate(ctx context.Context, in *smsclient.FlashPromotionSessionUpdateReq) (*smsclient.FlashPromotionSessionUpdateResp, error) {
 	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionUpdateLogic(ctx, s.svcCtx)
 	return l.FlashPromotionSessionUpdate(in)
 }
 
+// 删除限时购场次
 func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionDelete(ctx context.Context, in *smsclient.FlashPromotionSessionDeleteReq) (*smsclient.FlashPromotionSessionDeleteResp, error) {
 	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionDeleteLogic(ctx, s.svcCtx)
 	return l.FlashPromotionSessionDelete(in)
 }
 
+// 根据时间查询限时购场次
 func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionByTime(ctx context.Context, in *smsclient.FlashPromotionSessionByTimeReq) (*smsclient.FlashPromotionSessionByTimeResp, error) {
 	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionByTimeLogic(ctx, s.svcCtx)
 	return l.FlashPromotionSessionByTime(in)
