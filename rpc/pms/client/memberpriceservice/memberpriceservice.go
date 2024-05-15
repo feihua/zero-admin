@@ -198,6 +198,7 @@ type (
 	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
+	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
 
 	MemberPriceService interface {
 		MemberPriceAdd(ctx context.Context, in *MemberPriceAddReq, opts ...grpc.CallOption) (*MemberPriceAddResp, error)

@@ -198,6 +198,7 @@ type (
 	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
+	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
 
 	ProductFullReductionService interface {
 		ProductFullReductionAdd(ctx context.Context, in *ProductFullReductionAddReq, opts ...grpc.CallOption) (*ProductFullReductionAddResp, error)

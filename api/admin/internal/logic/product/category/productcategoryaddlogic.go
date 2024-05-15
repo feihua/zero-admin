@@ -1,4 +1,4 @@
-package logic
+package category
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCategoryAddLogic 商品分类
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 11:16
+*/
 type ProductCategoryAddLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,19 +31,21 @@ func NewProductCategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// ProductCategoryAdd 添加商品分类
 func (l *ProductCategoryAddLogic) ProductCategoryAdd(req types.AddProductCategoryReq) (*types.AddProductCategoryResp, error) {
 	_, err := l.svcCtx.ProductCategoryService.ProductCategoryAdd(l.ctx, &pmsclient.ProductCategoryAddReq{
-		ParentId:     req.ParentId,
-		Name:         req.Name,
-		Level:        req.Level,
-		ProductCount: 0,
-		ProductUnit:  req.ProductUnit,
-		NavStatus:    req.NavStatus,
-		ShowStatus:   req.ShowStatus,
-		Sort:         req.Sort,
-		Icon:         req.Icon,
-		Keywords:     req.Keywords,
-		Description:  req.Description,
+		ParentId:               req.ParentId,
+		Name:                   req.Name,
+		Level:                  req.Level,
+		ProductCount:           0,
+		ProductUnit:            req.ProductUnit,
+		NavStatus:              req.NavStatus,
+		ShowStatus:             req.ShowStatus,
+		Sort:                   req.Sort,
+		Icon:                   req.Icon,
+		Keywords:               req.Keywords,
+		Description:            req.Description,
+		ProductAttributeIdList: req.ProductAttributeIdList,
 	})
 
 	if err != nil {

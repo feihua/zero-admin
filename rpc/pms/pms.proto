@@ -991,17 +991,18 @@ service ProductCategoryAttributeRelationService {
 
 }
 message ProductCategoryAddReq {
-  int64    ParentId = 2;
-  string  Name = 3;
-  int32    Level = 4;
-  int32    ProductCount = 5;
-  string  ProductUnit = 6;
-  int32    NavStatus = 7;
-  int32    ShowStatus = 8;
-  int32    Sort = 9;
-  string  Icon = 10;
-  string  Keywords = 11;
-  string  Description = 12;
+  int64    ParentId = 1;
+  string  Name = 2;
+  int32    Level = 3;
+  int32    ProductCount = 4;
+  string  ProductUnit = 5;
+  int32    NavStatus = 6;
+  int32    ShowStatus = 7;
+  int32    Sort = 8;
+  string  Icon = 9;
+  string  Keywords = 10;
+  string  Description = 11;
+  repeated int64 ProductAttributeIdList = 12;
 }
 
 message ProductCategoryAddResp {
@@ -1050,6 +1051,12 @@ message ProductCategoryUpdateReq {
   string  Icon = 10;
   string  Keywords = 11;
   string  Description = 12;
+  repeated int64 ProductAttributeIdList = 13;
+}
+
+message UpdateProductCategoryStatusReq {
+  repeated int64    Ids = 1;
+  int32    Status = 2;
 }
 
 message ProductCategoryUpdateResp {
@@ -1077,13 +1084,22 @@ message QueryProductCategoryListData{
 message QueryProductCategoryListResp {
   repeated  QueryProductCategoryListData list = 1;
 }
+//商品分类
 service ProductCategoryService {
 
+  //添加商品分类
   rpc ProductCategoryAdd(ProductCategoryAddReq) returns(ProductCategoryAddResp);
+  //查询商品分类
   rpc ProductCategoryList(ProductCategoryListReq) returns(ProductCategoryListResp);
+  //更新商品分类
   rpc ProductCategoryUpdate(ProductCategoryUpdateReq) returns(ProductCategoryUpdateResp);
+  //更新商品分类导航显示状态
+  rpc UpdateCategoryNavStatus(UpdateProductCategoryStatusReq) returns(ProductCategoryUpdateResp);
+  //更新商品分类显示状态
+  rpc UpdateCategoryShowStatus(UpdateProductCategoryStatusReq) returns(ProductCategoryUpdateResp);
+  //查询商品分类
   rpc ProductCategoryDelete(ProductCategoryDeleteReq) returns(ProductCategoryDeleteResp);
-
+  //查询商品分类
   rpc QueryProductCategoryList(QueryProductCategoryListReq) returns(QueryProductCategoryListResp);
 
 }

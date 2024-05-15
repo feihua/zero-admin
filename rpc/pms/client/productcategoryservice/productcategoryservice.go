@@ -198,12 +198,22 @@ type (
 	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
+	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
 
 	ProductCategoryService interface {
+		// 添加商品分类
 		ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq, opts ...grpc.CallOption) (*ProductCategoryAddResp, error)
+		// 查询商品分类
 		ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
+		// 更新商品分类
 		ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
+		// 更新商品分类导航显示状态
+		UpdateCategoryNavStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
+		// 更新商品分类显示状态
+		UpdateCategoryShowStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
+		// 查询商品分类
 		ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error)
+		// 查询商品分类
 		QueryProductCategoryList(ctx context.Context, in *QueryProductCategoryListReq, opts ...grpc.CallOption) (*QueryProductCategoryListResp, error)
 	}
 
@@ -218,26 +228,43 @@ func NewProductCategoryService(cli zrpc.Client) ProductCategoryService {
 	}
 }
 
+// 添加商品分类
 func (m *defaultProductCategoryService) ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq, opts ...grpc.CallOption) (*ProductCategoryAddResp, error) {
 	client := pmsclient.NewProductCategoryServiceClient(m.cli.Conn())
 	return client.ProductCategoryAdd(ctx, in, opts...)
 }
 
+// 查询商品分类
 func (m *defaultProductCategoryService) ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error) {
 	client := pmsclient.NewProductCategoryServiceClient(m.cli.Conn())
 	return client.ProductCategoryList(ctx, in, opts...)
 }
 
+// 更新商品分类
 func (m *defaultProductCategoryService) ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error) {
 	client := pmsclient.NewProductCategoryServiceClient(m.cli.Conn())
 	return client.ProductCategoryUpdate(ctx, in, opts...)
 }
 
+// 更新商品分类导航显示状态
+func (m *defaultProductCategoryService) UpdateCategoryNavStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error) {
+	client := pmsclient.NewProductCategoryServiceClient(m.cli.Conn())
+	return client.UpdateCategoryNavStatus(ctx, in, opts...)
+}
+
+// 更新商品分类显示状态
+func (m *defaultProductCategoryService) UpdateCategoryShowStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error) {
+	client := pmsclient.NewProductCategoryServiceClient(m.cli.Conn())
+	return client.UpdateCategoryShowStatus(ctx, in, opts...)
+}
+
+// 查询商品分类
 func (m *defaultProductCategoryService) ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error) {
 	client := pmsclient.NewProductCategoryServiceClient(m.cli.Conn())
 	return client.ProductCategoryDelete(ctx, in, opts...)
 }
 
+// 查询商品分类
 func (m *defaultProductCategoryService) QueryProductCategoryList(ctx context.Context, in *QueryProductCategoryListReq, opts ...grpc.CallOption) (*QueryProductCategoryListResp, error) {
 	client := pmsclient.NewProductCategoryServiceClient(m.cli.Conn())
 	return client.QueryProductCategoryList(ctx, in, opts...)

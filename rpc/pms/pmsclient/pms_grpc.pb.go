@@ -2623,6 +2623,8 @@ const (
 	ProductCategoryService_ProductCategoryAdd_FullMethodName       = "/pmsclient.ProductCategoryService/ProductCategoryAdd"
 	ProductCategoryService_ProductCategoryList_FullMethodName      = "/pmsclient.ProductCategoryService/ProductCategoryList"
 	ProductCategoryService_ProductCategoryUpdate_FullMethodName    = "/pmsclient.ProductCategoryService/ProductCategoryUpdate"
+	ProductCategoryService_UpdateCategoryNavStatus_FullMethodName  = "/pmsclient.ProductCategoryService/UpdateCategoryNavStatus"
+	ProductCategoryService_UpdateCategoryShowStatus_FullMethodName = "/pmsclient.ProductCategoryService/UpdateCategoryShowStatus"
 	ProductCategoryService_ProductCategoryDelete_FullMethodName    = "/pmsclient.ProductCategoryService/ProductCategoryDelete"
 	ProductCategoryService_QueryProductCategoryList_FullMethodName = "/pmsclient.ProductCategoryService/QueryProductCategoryList"
 )
@@ -2631,10 +2633,19 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductCategoryServiceClient interface {
+	// 添加商品分类
 	ProductCategoryAdd(ctx context.Context, in *ProductCategoryAddReq, opts ...grpc.CallOption) (*ProductCategoryAddResp, error)
+	// 查询商品分类
 	ProductCategoryList(ctx context.Context, in *ProductCategoryListReq, opts ...grpc.CallOption) (*ProductCategoryListResp, error)
+	// 更新商品分类
 	ProductCategoryUpdate(ctx context.Context, in *ProductCategoryUpdateReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
+	// 更新商品分类导航显示状态
+	UpdateCategoryNavStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
+	// 更新商品分类显示状态
+	UpdateCategoryShowStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error)
+	// 查询商品分类
 	ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error)
+	// 查询商品分类
 	QueryProductCategoryList(ctx context.Context, in *QueryProductCategoryListReq, opts ...grpc.CallOption) (*QueryProductCategoryListResp, error)
 }
 
@@ -2673,6 +2684,24 @@ func (c *productCategoryServiceClient) ProductCategoryUpdate(ctx context.Context
 	return out, nil
 }
 
+func (c *productCategoryServiceClient) UpdateCategoryNavStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error) {
+	out := new(ProductCategoryUpdateResp)
+	err := c.cc.Invoke(ctx, ProductCategoryService_UpdateCategoryNavStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productCategoryServiceClient) UpdateCategoryShowStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*ProductCategoryUpdateResp, error) {
+	out := new(ProductCategoryUpdateResp)
+	err := c.cc.Invoke(ctx, ProductCategoryService_UpdateCategoryShowStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *productCategoryServiceClient) ProductCategoryDelete(ctx context.Context, in *ProductCategoryDeleteReq, opts ...grpc.CallOption) (*ProductCategoryDeleteResp, error) {
 	out := new(ProductCategoryDeleteResp)
 	err := c.cc.Invoke(ctx, ProductCategoryService_ProductCategoryDelete_FullMethodName, in, out, opts...)
@@ -2695,10 +2724,19 @@ func (c *productCategoryServiceClient) QueryProductCategoryList(ctx context.Cont
 // All implementations must embed UnimplementedProductCategoryServiceServer
 // for forward compatibility
 type ProductCategoryServiceServer interface {
+	// 添加商品分类
 	ProductCategoryAdd(context.Context, *ProductCategoryAddReq) (*ProductCategoryAddResp, error)
+	// 查询商品分类
 	ProductCategoryList(context.Context, *ProductCategoryListReq) (*ProductCategoryListResp, error)
+	// 更新商品分类
 	ProductCategoryUpdate(context.Context, *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error)
+	// 更新商品分类导航显示状态
+	UpdateCategoryNavStatus(context.Context, *UpdateProductCategoryStatusReq) (*ProductCategoryUpdateResp, error)
+	// 更新商品分类显示状态
+	UpdateCategoryShowStatus(context.Context, *UpdateProductCategoryStatusReq) (*ProductCategoryUpdateResp, error)
+	// 查询商品分类
 	ProductCategoryDelete(context.Context, *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error)
+	// 查询商品分类
 	QueryProductCategoryList(context.Context, *QueryProductCategoryListReq) (*QueryProductCategoryListResp, error)
 	mustEmbedUnimplementedProductCategoryServiceServer()
 }
@@ -2715,6 +2753,12 @@ func (UnimplementedProductCategoryServiceServer) ProductCategoryList(context.Con
 }
 func (UnimplementedProductCategoryServiceServer) ProductCategoryUpdate(context.Context, *ProductCategoryUpdateReq) (*ProductCategoryUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryUpdate not implemented")
+}
+func (UnimplementedProductCategoryServiceServer) UpdateCategoryNavStatus(context.Context, *UpdateProductCategoryStatusReq) (*ProductCategoryUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategoryNavStatus not implemented")
+}
+func (UnimplementedProductCategoryServiceServer) UpdateCategoryShowStatus(context.Context, *UpdateProductCategoryStatusReq) (*ProductCategoryUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategoryShowStatus not implemented")
 }
 func (UnimplementedProductCategoryServiceServer) ProductCategoryDelete(context.Context, *ProductCategoryDeleteReq) (*ProductCategoryDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductCategoryDelete not implemented")
@@ -2790,6 +2834,42 @@ func _ProductCategoryService_ProductCategoryUpdate_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductCategoryService_UpdateCategoryNavStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductCategoryStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductCategoryServiceServer).UpdateCategoryNavStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductCategoryService_UpdateCategoryNavStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductCategoryServiceServer).UpdateCategoryNavStatus(ctx, req.(*UpdateProductCategoryStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductCategoryService_UpdateCategoryShowStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductCategoryStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductCategoryServiceServer).UpdateCategoryShowStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductCategoryService_UpdateCategoryShowStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductCategoryServiceServer).UpdateCategoryShowStatus(ctx, req.(*UpdateProductCategoryStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProductCategoryService_ProductCategoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCategoryDeleteReq)
 	if err := dec(in); err != nil {
@@ -2844,6 +2924,14 @@ var ProductCategoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductCategoryUpdate",
 			Handler:    _ProductCategoryService_ProductCategoryUpdate_Handler,
+		},
+		{
+			MethodName: "UpdateCategoryNavStatus",
+			Handler:    _ProductCategoryService_UpdateCategoryNavStatus_Handler,
+		},
+		{
+			MethodName: "UpdateCategoryShowStatus",
+			Handler:    _ProductCategoryService_UpdateCategoryShowStatus_Handler,
 		},
 		{
 			MethodName: "ProductCategoryDelete",

@@ -32,6 +32,24 @@ func NewProductCategoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // ProductCategoryUpdate 更新商品类别
 func (l *ProductCategoryUpdateLogic) ProductCategoryUpdate(in *pmsclient.ProductCategoryUpdateReq) (*pmsclient.ProductCategoryUpdateResp, error) {
+	//更新商品分类时要更新商品中的名称
+	product := query.PmsProduct
+	_, _ = product.WithContext(l.ctx).Where(product.ProductCategoryID.Eq(in.Id)).Update(product.ProductCategoryName, in.Name)
+
+	//同时更新筛选属性的信息
+	relation := query.PmsProductCategoryAttributeRelation
+	_, _ = relation.WithContext(l.ctx).Where(relation.ProductCategoryID.Eq(in.Id)).Delete()
+	if len(in.ProductAttributeIdList) > 0 {
+		var list []*model.PmsProductCategoryAttributeRelation
+		for _, productAttributeId := range in.ProductAttributeIdList {
+			list = append(list, &model.PmsProductCategoryAttributeRelation{
+				ProductCategoryID:  in.Id,
+				ProductAttributeID: productAttributeId,
+			})
+		}
+		_ = relation.WithContext(l.ctx).CreateInBatches(list, len(list))
+	}
+
 	q := query.PmsProductCategory
 	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductCategory{
 		ID:           in.Id,

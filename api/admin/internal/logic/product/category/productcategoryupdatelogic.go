@@ -1,4 +1,4 @@
-package logic
+package category
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCategoryUpdateLogic 商品分类
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 11:17
+*/
 type ProductCategoryUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,20 +31,22 @@ func NewProductCategoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
+// ProductCategoryUpdate 更新商品分类
 func (l *ProductCategoryUpdateLogic) ProductCategoryUpdate(req types.UpdateProductCategoryReq) (*types.UpdateProductCategoryResp, error) {
 	_, err := l.svcCtx.ProductCategoryService.ProductCategoryUpdate(l.ctx, &pmsclient.ProductCategoryUpdateReq{
-		Id:           req.Id,
-		ParentId:     req.ParentId,
-		Name:         req.Name,
-		Level:        req.Level,
-		ProductCount: req.ProductCount,
-		ProductUnit:  req.ProductUnit,
-		NavStatus:    req.NavStatus,
-		ShowStatus:   req.ShowStatus,
-		Sort:         req.Sort,
-		Icon:         req.Icon,
-		Keywords:     req.Keywords,
-		Description:  req.Description,
+		Id:                     req.Id,
+		ParentId:               req.ParentId,
+		Name:                   req.Name,
+		Level:                  req.Level,
+		ProductCount:           req.ProductCount,
+		ProductUnit:            req.ProductUnit,
+		NavStatus:              req.NavStatus,
+		ShowStatus:             req.ShowStatus,
+		Sort:                   req.Sort,
+		Icon:                   req.Icon,
+		Keywords:               req.Keywords,
+		Description:            req.Description,
+		ProductAttributeIdList: req.ProductAttributeIdList,
 	})
 
 	if err != nil {

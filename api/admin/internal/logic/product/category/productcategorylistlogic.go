@@ -1,4 +1,4 @@
-package logic
+package category
 
 import (
 	"context"
@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCategoryListLogic 商品分类
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 11:17
+*/
 type ProductCategoryListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewProductCategoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// ProductCategoryList 查询商品分类
 func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCategoryReq) (*types.ListProductCategoryResp, error) {
 	resp, err := l.svcCtx.ProductCategoryService.ProductCategoryList(l.ctx, &pmsclient.ProductCategoryListReq{
 		Current:    req.Current,

@@ -1,4 +1,4 @@
-package handler
+package category
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func ProductCategoryDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewProductCategoryDeleteLogic(r.Context(), ctx)
+		l := category.NewProductCategoryDeleteLogic(r.Context(), ctx)
 		resp, err := l.ProductCategoryDelete(req)
 		if err != nil {
 			httpx.Error(w, err)

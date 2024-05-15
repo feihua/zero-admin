@@ -16,6 +16,7 @@ type (
 		Icon        string `json:"icon"` // 图标
 		Keywords    string `json:"keywords,optional"`
 		Description string `json:"description,optional"` // 描述
+		ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
 	}
 	addProductCategoryResp {
 		Code    string `json:"code"`
@@ -64,10 +65,15 @@ type (
 		Icon         string `json:"icon"` // 图标
 		Keywords     string `json:"keywords"`
 		Description  string `json:"description"` // 描述
+		ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
 	}
 	UpdateProductCategoryResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
+	}
+	UpdateProductCategoryStatusReq {
+		Ids           []int64  `json:"ids"`
+		Status    int32  `json:"status"` //0->不显示；1->显示
 	}
 	DeleteProductCategoryReq {
 		Ids []int64 `form:"ids"`
@@ -85,19 +91,27 @@ type (
 	prefix:     /api/product/category
 )
 service admin-api {
-	//
+	//添加商品分类
 	@handler ProductCategoryAdd
 	post /addProductCategory (addProductCategoryReq) returns (addProductCategoryResp)
 
-	//
+	//查询商品分类
 	@handler ProductCategoryList
 	get /queryProductCategoryList (ListProductCategoryReq) returns (ListProductCategoryResp)
 
-	//
+	//更新商品分类-是否显示在导航栏：0->不显示；1->显示
 	@handler ProductCategoryUpdate
 	post /updateProductCategory (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
 
-	//
+	//更新商品分类-是否显示在导航栏：0->不显示；1->显示
+	@handler UpdateCategoryNavStatus
+	post /updateCategoryNavStatus (UpdateProductCategoryStatusReq) returns (UpdateProductCategoryResp)
+
+	//更新商品分类-显示状态：0->不显示；1->显示
+	@handler UpdateCategoryShowStatus
+	post /updateCategoryShowStatus (UpdateProductCategoryStatusReq) returns (UpdateProductCategoryResp)
+
+	//删除商品分类
 	@handler ProductCategoryDelete
 	get /deleteProductCategory (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
 }

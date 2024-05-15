@@ -2639,23 +2639,29 @@ type UpdateProductBrandStatusResp struct {
 }
 
 type UpdateProductCategoryReq struct {
-	Id           int64  `json:"id"`
-	ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
-	Name         string `json:"name"`
-	Level        int32  `json:"level"` // 分类级别：0->1级；1->2级
-	ProductCount int32  `json:"productCount"`
-	ProductUnit  string `json:"productUnit"`
-	NavStatus    int32  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus   int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	Sort         int32  `json:"sort"`
-	Icon         string `json:"icon"` // 图标
-	Keywords     string `json:"keywords"`
-	Description  string `json:"description"` // 描述
+	Id                     int64   `json:"id"`
+	ParentId               int64   `json:"parentId"` // 上级分类的编号：0表示一级分类
+	Name                   string  `json:"name"`
+	Level                  int32   `json:"level"` // 分类级别：0->1级；1->2级
+	ProductCount           int32   `json:"productCount"`
+	ProductUnit            string  `json:"productUnit"`
+	NavStatus              int32   `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+	ShowStatus             int32   `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	Sort                   int32   `json:"sort"`
+	Icon                   string  `json:"icon"` // 图标
+	Keywords               string  `json:"keywords"`
+	Description            string  `json:"description"`                     // 描述
+	ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
 }
 
 type UpdateProductCategoryResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
+}
+
+type UpdateProductCategoryStatusReq struct {
+	Ids    []int64 `json:"ids"`
+	Status int32   `json:"status"` //0->不显示；1->显示
 }
 
 type UpdateProductCommentReq struct {
@@ -3359,16 +3365,17 @@ type AddProductBrandResp struct {
 }
 
 type AddProductCategoryReq struct {
-	ParentId    int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
-	Name        string `json:"name"`
-	Level       int32  `json:"level"`      // 分类级别：0->1级；1->2级
-	NavStatus   int32  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus  int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	ProductUnit string `json:"productUnit"`
-	Sort        int32  `json:"sort"`
-	Icon        string `json:"icon"` // 图标
-	Keywords    string `json:"keywords,optional"`
-	Description string `json:"description,optional"` // 描述
+	ParentId               int64   `json:"parentId"` // 上级分类的编号：0表示一级分类
+	Name                   string  `json:"name"`
+	Level                  int32   `json:"level"`      // 分类级别：0->1级；1->2级
+	NavStatus              int32   `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
+	ShowStatus             int32   `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	ProductUnit            string  `json:"productUnit"`
+	Sort                   int32   `json:"sort"`
+	Icon                   string  `json:"icon"` // 图标
+	Keywords               string  `json:"keywords,optional"`
+	Description            string  `json:"description,optional"`            // 描述
+	ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
 }
 
 type AddProductCategoryResp struct {

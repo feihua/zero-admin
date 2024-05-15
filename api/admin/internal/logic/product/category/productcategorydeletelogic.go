@@ -1,4 +1,4 @@
-package logic
+package category
 
 import (
 	"context"
@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ProductCategoryDeleteLogic 商品分类
+/*
+Author: LiuFeiHua
+Date: 2024/5/15 11:16
+*/
 type ProductCategoryDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewProductCategoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
+// ProductCategoryDelete 删除商品分类
 func (l *ProductCategoryDeleteLogic) ProductCategoryDelete(req types.DeleteProductCategoryReq) (*types.DeleteProductCategoryResp, error) {
 	_, err := l.svcCtx.ProductCategoryService.ProductCategoryDelete(l.ctx, &pmsclient.ProductCategoryDeleteReq{
 		Ids: req.Ids,

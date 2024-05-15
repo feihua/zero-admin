@@ -32,7 +32,7 @@ func NewProductCategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // ProductCategoryAdd 添加商品类别
 func (l *ProductCategoryAddLogic) ProductCategoryAdd(in *pmsclient.ProductCategoryAddReq) (*pmsclient.ProductCategoryAddResp, error) {
-	err := query.PmsProductCategory.WithContext(l.ctx).Create(&model.PmsProductCategory{
+	category := &model.PmsProductCategory{
 		ParentID:     in.ParentId,
 		Name:         in.Name,
 		Level:        in.Level,
@@ -44,10 +44,23 @@ func (l *ProductCategoryAddLogic) ProductCategoryAdd(in *pmsclient.ProductCatego
 		Icon:         in.Icon,
 		Keywords:     in.Keywords,
 		Description:  &in.Description,
-	})
+	}
+	err := query.PmsProductCategory.WithContext(l.ctx).Create(category)
 
 	if err != nil {
 		return nil, err
+	}
+
+	if len(in.ProductAttributeIdList) > 0 {
+		var list []*model.PmsProductCategoryAttributeRelation
+		for _, productAttributeId := range in.ProductAttributeIdList {
+			list = append(list, &model.PmsProductCategoryAttributeRelation{
+				ProductCategoryID:  category.ID,
+				ProductAttributeID: productAttributeId,
+			})
+		}
+
+		_ = query.PmsProductCategoryAttributeRelation.WithContext(l.ctx).CreateInBatches(list, len(list))
 	}
 
 	return &pmsclient.ProductCategoryAddResp{}, nil

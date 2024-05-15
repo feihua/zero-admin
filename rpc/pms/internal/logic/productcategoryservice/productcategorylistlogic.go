@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// ProductCategoryListLogic
+// ProductCategoryListLogic 商品类别
 /*
 Author: LiuFeiHua
 Date: 2023/11/29 16:45
