@@ -40,13 +40,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: cart.CarItemClearHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/deleteCartItem",
 				Handler: cart.CartItemDeleteHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/product/:productId",
+				Path:    "/product",
 				Handler: cart.CartProductHandler(serverCtx),
 			},
 			{
@@ -55,7 +55,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: cart.CarItemListHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/queryPromotionList",
 				Handler: cart.CarItemtListPromotionHandler(serverCtx),
 			},
@@ -128,7 +128,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/queryProduct/:id",
+				Path:    "/queryProduct",
 				Handler: product.QueryProductHandler(serverCtx),
 			},
 			{

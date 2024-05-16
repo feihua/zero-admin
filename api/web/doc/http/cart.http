@@ -31,16 +31,8 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除购物车中的某个商品
-POST {{host}}/api/cart/delete
-Content-Type: application/json
+GET {{host}}/api/cart/delete?ids=[3,4]
 Authorization: Bearer {{token}}
-
-{
-  "ids": [
-    3,
-    4
-  ]
-}
 
 ### 修改购物车中某个商品的数量
 POST {{host}}/api/cart/updateQuantity
@@ -81,13 +73,9 @@ GET {{host}}/api/cart/queryCarItemList
 Authorization: Bearer {{token}}
 
 ### 获取某个会员的购物车列表,包括促销信息
-POST {{host}}/api/cart/queryPromotionList
+GET {{host}}/api/cart/queryPromotionList?ids=[]
 Content-Type: application/json
-Authorization: Bearer {{token}}
 
-//{
-//  "ids": [27]
-//}
 
 ### 获取购物车中某个商品的规格,用于重选规格
 GET {{host}}/api/cart/product/32

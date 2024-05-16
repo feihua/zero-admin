@@ -54,7 +54,7 @@ type BrandListResp struct {
 }
 
 type CarItemListPromotionReq struct {
-	Ids []int64 `json:"ids,optional"`
+	Ids []int64 `form:"ids"`
 }
 
 type CarItemtListPromotionResp struct {
@@ -115,7 +115,7 @@ type CartItemClearResp struct {
 }
 
 type CartItemDeleteReq struct {
-	Ids []int64 `json:"ids"`
+	Ids []int64 `form:"ids"`
 }
 
 type CartItemDeleteResp struct {
@@ -212,7 +212,7 @@ type CartProductData struct {
 }
 
 type CartProductReq struct {
-	ProductId int64 `path:"productId"`
+	ProductId int64 `form:"productId"`
 }
 
 type CartProductResp struct {
@@ -509,7 +509,7 @@ type QueryProductListResp struct {
 }
 
 type QueryProductReq struct {
-	Id int64 `path:"id"`
+	ProductId int64 `form:"productId"`
 }
 
 type QueryProductResp struct {

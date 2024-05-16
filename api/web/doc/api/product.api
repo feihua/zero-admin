@@ -5,7 +5,7 @@ info(
 )
 
 type QueryProductReq {
-    Id int64 `path:"id"`
+    ProductId int64 `form:"productId"`
 }
 
 type QueryProductResp {
@@ -214,8 +214,8 @@ type QueryProductListData {
 )
 service web-api {
     @handler QueryProduct
-    get /queryProduct/:id (QueryProductReq) returns (QueryProductResp)
+    get /queryProduct (QueryProductReq) returns (QueryProductResp)
 
     @handler QueryProductList
-        get /queryProductList (QueryProductListReq) returns (QueryProductListResp)
+    get /queryProductList (QueryProductListReq) returns (QueryProductListResp)
 }

@@ -2,4 +2,4 @@
 GET {{host}}/api/product/queryProductList
 
 ### 获取商品详情
-GET {{host}}/api/product/queryProduct/27
+GET {{host}}/api/product/queryProduct?product=27

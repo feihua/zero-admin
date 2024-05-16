@@ -303,58 +303,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/cancelUserOrder/:orderId",
-				Handler: order.CancelUserOrderHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/confirmReceiveOrder/:orderId",
-				Handler: order.ConfirmReceiveOrderHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/deleteOrder/:orderId",
-				Handler: order.DeleteOrderHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/generateConfirmOrder",
-				Handler: order.GenerateConfirmOrderHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/generateOrder",
-				Handler: order.GenerateOrderHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/orderDetail/:orderId",
-				Handler: order.OrderDetailHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/orderList/:status/:current",
-				Handler: order.OrderListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/payCallback",
-				Handler: order.PayCallbackHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/returnApply",
-				Handler: order.ReturnApplyHandler(serverCtx),
-			},
-		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/order"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
 				Method:  http.MethodPost,
 				Path:    "/orderPay",
 				Handler: order.OrderPayHandler(serverCtx),
@@ -378,6 +326,58 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithPrefix("/api/pay"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/cancelUserOrder",
+				Handler: order.CancelUserOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/confirmReceiveOrder",
+				Handler: order.ConfirmReceiveOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/deleteOrder",
+				Handler: order.DeleteOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/generateConfirmOrder",
+				Handler: order.GenerateConfirmOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/generateOrder",
+				Handler: order.GenerateOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/orderDetail",
+				Handler: order.OrderDetailHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/orderList",
+				Handler: order.OrderListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/payCallback",
+				Handler: order.PayCallbackHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/returnApply",
+				Handler: order.ReturnApplyHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order"),
 	)
 
 	server.AddRoutes(

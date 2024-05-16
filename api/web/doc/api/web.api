@@ -5,10 +5,10 @@ import "brand.api"
 import "cart.api"
 import "product.api"
 
-info(
-    title: "zero-web"
-    desc: "pc-web接口"
+info (
+	title:  "zero-web"
+	desc:   "pc-web接口"
 	author: "koobe"
-    email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 

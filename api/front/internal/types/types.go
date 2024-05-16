@@ -179,7 +179,7 @@ type CalcAmount struct {
 }
 
 type CancelUserOrderReq struct {
-	OrderId int64 `path:"orderId"`
+	OrderId int64 `form:"orderId"`
 }
 
 type CancelUserOrderResp struct {
@@ -382,7 +382,7 @@ type CartPromotionItemList struct {
 }
 
 type ConfirmReceiveOrderReq struct {
-	OrderId int64 `path:"orderId"`
+	OrderId int64 `form:"orderId"`
 }
 
 type ConfirmReceiveOrderResp struct {
@@ -451,7 +451,7 @@ type DeleteMemberAddressResp struct {
 }
 
 type DeleteOrderReq struct {
-	OrderId int64 `path:"orderId"`
+	OrderId int64 `form:"orderId"`
 }
 
 type DeleteOrderResp struct {
@@ -760,7 +760,7 @@ type OrderDetailModel struct {
 }
 
 type OrderDetailReq struct {
-	OrderId int64 `path:"orderId"`
+	OrderId int64 `form:"orderId"`
 }
 
 type OrderDetailResp struct {
@@ -770,9 +770,9 @@ type OrderDetailResp struct {
 }
 
 type OrderListReq struct {
-	Current  int64 `path:"current,default=1"`
-	PageSize int64 `path:"pageSize,default=5"`
-	Status   int32 `path:"status"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=5"`
+	Status   int32 `form:"status"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 }
 
 type OrderListResp struct {

@@ -126,9 +126,9 @@ type PayCallbackResp {
 
 
 type OrderListReq {
-    Current int64 `path:"current,default=1"`
-    PageSize int64 `path:"pageSize,default=5"`
-    Status int32 `path:"status"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+    Current int64 `form:"current,default=1"`
+    PageSize int64 `form:"pageSize,default=5"`
+    Status int32 `form:"status"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 }
 
 type ListOrderData {
@@ -209,7 +209,7 @@ type OrderListResp {
 
 
 type OrderDetailReq {
-    OrderId int64 `path:"orderId"`
+    OrderId int64 `form:"orderId"`
 }
 
 type OrderDetailResp {
@@ -220,7 +220,7 @@ type OrderDetailResp {
 
 
 type CancelUserOrderReq {
-    OrderId int64 `path:"orderId"`
+    OrderId int64 `form:"orderId"`
 }
 
 type CancelUserOrderResp {
@@ -230,7 +230,7 @@ type CancelUserOrderResp {
 
 
 type ConfirmReceiveOrderReq {
-    OrderId int64 `path:"orderId"`
+    OrderId int64 `form:"orderId"`
 }
 
 type ConfirmReceiveOrderResp {
@@ -239,7 +239,7 @@ type ConfirmReceiveOrderResp {
 }
 
 type DeleteOrderReq {
-    OrderId int64 `path:"orderId"`
+    OrderId int64 `form:"orderId"`
 }
 
 type DeleteOrderResp {
@@ -292,23 +292,23 @@ service front-api {
 
     //按状态分页获取用户订单列表
     @handler OrderList
-    get /orderList/:status/:current (OrderListReq) returns (OrderListResp)
+    get /orderList (OrderListReq) returns (OrderListResp)
 
     //根据Id获取订单详情
     @handler OrderDetail
-    get /orderDetail/:orderId (OrderDetailReq) returns (OrderDetailResp)
+    get /orderDetail (OrderDetailReq) returns (OrderDetailResp)
 
     //用户取消订单
     @handler CancelUserOrder
-    get /cancelUserOrder/:orderId (CancelUserOrderReq) returns (CancelUserOrderResp)
+    get /cancelUserOrder (CancelUserOrderReq) returns (CancelUserOrderResp)
 
     //用户确认收货
     @handler ConfirmReceiveOrder
-    get /confirmReceiveOrder/:orderId (ConfirmReceiveOrderReq) returns (ConfirmReceiveOrderResp)
+    get /confirmReceiveOrder (ConfirmReceiveOrderReq) returns (ConfirmReceiveOrderResp)
 
     //用户删除订单
     @handler DeleteOrder
-    get /deleteOrder/:orderId (DeleteOrderReq) returns (DeleteOrderResp)
+    get /deleteOrder (DeleteOrderReq) returns (DeleteOrderResp)
 
     //申请退货
     @handler ReturnApply
