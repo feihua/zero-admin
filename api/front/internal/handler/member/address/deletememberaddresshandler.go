@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func MemberAddressAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeleteMemberAddressHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.AddMemberAddressReq
+		var req types.DeleteMemberAddressReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := address.NewMemberAddressAddLogic(r.Context(), svcCtx)
-		resp, err := l.MemberAddressAdd(&req)
+		l := address.NewDeleteMemberAddressLogic(r.Context(), svcCtx)
+		resp, err := l.DeleteMemberAddress(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

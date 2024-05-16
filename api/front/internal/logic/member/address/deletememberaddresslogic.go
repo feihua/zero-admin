@@ -11,27 +11,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MemberAddressDeleteLogic 收货地址相关
+// DeleteMemberAddressLogic 删除收货地址
 /*
 Author: LiuFeiHua
-Date: 2023/11/30 11:21
+Date: 2024/5/16 13:59
 */
-type MemberAddressDeleteLogic struct {
+type DeleteMemberAddressLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewMemberAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MemberAddressDeleteLogic {
-	return &MemberAddressDeleteLogic{
+func NewDeleteMemberAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteMemberAddressLogic {
+	return &DeleteMemberAddressLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// MemberAddressDelete 删除会员收货地址
-func (l *MemberAddressDeleteLogic) MemberAddressDelete(req *types.DeleteMemberAddressReq) (resp *types.DeleteMemberAddressResp, err error) {
+// DeleteMemberAddress 删除收货地址
+func (l *DeleteMemberAddressLogic) DeleteMemberAddress(req *types.DeleteMemberAddressReq) (resp *types.DeleteMemberAddressResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressDelete(l.ctx, &umsclient.MemberReceiveAddressDeleteReq{
 		Id:       req.Id,

@@ -13,6 +13,22 @@ type AddAttentionResp struct {
 	Message string `json:"message"`
 }
 
+type AddMemberAddressReq struct {
+	Name          string `json:"name"` // 收货人名称
+	PhoneNumber   string `json:"phoneNumber"`
+	DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
+	PostCode      string `json:"postCode"`      // 邮政编码
+	Province      string `json:"province"`      // 省份/直辖市
+	City          string `json:"city"`          // 城市
+	Region        string `json:"region"`        // 区
+	DetailAddress string `json:"detailAddress"` // 详细地址(街道)
+}
+
+type AddMemberAddressResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
 type AddProductCollectionReq struct {
 	ProductId       int64  `json:"productId"`       // 商品id
 	ProductName     string `json:"productName"`     // 商品名称
@@ -451,7 +467,7 @@ type DeleteAttentionResp struct {
 }
 
 type DeleteMemberAddressReq struct {
-	Id int64 `path:"id"`
+	Id int64 `form:"id"`
 }
 
 type DeleteMemberAddressResp struct {
@@ -1282,22 +1298,6 @@ type AddCouponReq struct {
 }
 
 type AddCouponResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type AddMemberAddressReq struct {
-	Name          string `json:"name"` // 收货人名称
-	PhoneNumber   string `json:"phoneNumber"`
-	DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
-	PostCode      string `json:"postCode"`      // 邮政编码
-	Province      string `json:"province"`      // 省份/直辖市
-	City          string `json:"city"`          // 城市
-	Region        string `json:"region"`        // 区
-	DetailAddress string `json:"detailAddress"` // 详细地址(街道)
-}
-
-type AddMemberAddressResp struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
 }

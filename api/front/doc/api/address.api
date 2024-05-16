@@ -5,7 +5,7 @@ info(
 )
 
 type (
-	addMemberAddressReq {
+	AddMemberAddressReq {
 		Name          string `json:"name"` // 收货人名称
 		PhoneNumber   string `json:"phoneNumber"`
 		DefaultStatus int32 `json:"defaultStatus"` // 是否为默认
@@ -15,7 +15,7 @@ type (
 		Region        string `json:"region"`        // 区
 		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
 	}
-	addMemberAddressResp {
+	AddMemberAddressResp {
 		Code    int64  `json:"code"`
 		Message string `json:"message"`
 	}
@@ -54,7 +54,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteMemberAddressReq {
-		Id int64 `path:"id"`
+		Id int64 `form:"id"`
 	}
 	DeleteMemberAddressResp {
 		Code    int64  `json:"code"`
@@ -68,15 +68,17 @@ type (
 	prefix: /api/member/address
 )
 service front-api {
-	@handler MemberAddressAdd
-	post /add (addMemberAddressReq) returns (addMemberAddressResp)
-	
-	@handler MemberAddressList
-	get /list returns (ListMemberAddressResp)
-	
-	@handler MemberAddressUpdate
-	post /update (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
-	
-	@handler MemberAddressDelete
-	get /delete/:id (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
+
+	//添加收货地址
+	@handler AddMemberAddress
+	post /addMemberAddress (AddMemberAddressReq) returns (AddMemberAddressResp)
+	//获取所有收货地址
+	@handler QueryMemberAddressList
+	get /queryMemberAddressList returns (ListMemberAddressResp)
+	//修改收货地址
+	@handler UpdateMemberAddress
+	post /updateMemberAddress (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
+	//删除收货地址
+	@handler DeleteMemberAddress
+	get /deleteMemberAddress (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
 }

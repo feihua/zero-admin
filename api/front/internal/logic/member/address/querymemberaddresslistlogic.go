@@ -11,27 +11,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MemberAddressListLogic 收货地址相关
+// QueryMemberAddressListLogic 获取所有收货地址
 /*
 Author: LiuFeiHua
-Date: 2023/11/29 16:13
+Date: 2024/5/16 13:58
 */
-type MemberAddressListLogic struct {
+type QueryMemberAddressListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewMemberAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MemberAddressListLogic {
-	return &MemberAddressListLogic{
+func NewQueryMemberAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryMemberAddressListLogic {
+	return &QueryMemberAddressListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// MemberAddressList 查询会员收货地址
-func (l *MemberAddressListLogic) MemberAddressList() (resp *types.ListMemberAddressResp, err error) {
+// QueryMemberAddressList 获取所有收货地址
+func (l *QueryMemberAddressListLogic) QueryMemberAddressList() (resp *types.ListMemberAddressResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	addressList, _ := l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
 		Current:  1,

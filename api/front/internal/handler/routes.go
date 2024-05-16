@@ -185,23 +185,23 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/add",
-				Handler: memberaddress.MemberAddressAddHandler(serverCtx),
+				Path:    "/addMemberAddress",
+				Handler: memberaddress.AddMemberAddressHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/delete/:id",
-				Handler: memberaddress.MemberAddressDeleteHandler(serverCtx),
+				Path:    "/deleteMemberAddress",
+				Handler: memberaddress.DeleteMemberAddressHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/list",
-				Handler: memberaddress.MemberAddressListHandler(serverCtx),
+				Path:    "/queryMemberAddressList",
+				Handler: memberaddress.QueryMemberAddressListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/update",
-				Handler: memberaddress.MemberAddressUpdateHandler(serverCtx),
+				Path:    "/updateMemberAddress",
+				Handler: memberaddress.UpdateMemberAddressHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
