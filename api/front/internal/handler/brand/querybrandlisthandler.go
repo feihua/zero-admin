@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func BrandDetailHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QueryBrandListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.BrandDetailReq
+		var req types.BrandListReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := brand.NewBrandDetailLogic(r.Context(), svcCtx)
-		resp, err := l.BrandDetail(&req)
+		l := brand.NewQueryBrandListLogic(r.Context(), svcCtx)
+		resp, err := l.QueryBrandList(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

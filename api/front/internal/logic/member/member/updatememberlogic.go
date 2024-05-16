@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UpdateMemberLogic 更新会员信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/16 14:07
+*/
 type UpdateMemberLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewUpdateMemberLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upda
 	}
 }
 
+// UpdateMember 更新会员信息
 func (l *UpdateMemberLogic) UpdateMember(req *types.UpdateMemberReq) (resp *types.UpdateMemberResp, err error) {
 	_, err = l.svcCtx.MemberService.MemberUpdate(l.ctx, &umsclient.MemberUpdateReq{
 		Id:                    req.Id,

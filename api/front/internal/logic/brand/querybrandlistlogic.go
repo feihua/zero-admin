@@ -11,30 +11,30 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// BrandListLogic 查询推荐品牌列表
+// QueryBrandListLogic 分页获取推荐品牌
 /*
 Author: LiuFeiHua
-Date: 2023/12/4 13:34
+Date: 2024/5/16 14:15
 */
-type BrandListLogic struct {
+type QueryBrandListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandListLogic {
-	return &BrandListLogic{
+func NewQueryBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryBrandListLogic {
+	return &QueryBrandListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// BrandList 查询推荐品牌列表
-func (l *BrandListLogic) BrandList() (*types.BrandListResp, error) {
+// QueryBrandList 分页获取推荐品牌
+func (l *QueryBrandListLogic) QueryBrandList(req *types.BrandListReq) (resp *types.BrandListResp, err error) {
 	homeBrandList, _ := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
-		Current:         1,
-		PageSize:        100,
+		Current:         req.Current,
+		PageSize:        req.PageSize,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})
 
@@ -80,7 +80,7 @@ func (l *BrandListLogic) BrandList() (*types.BrandListResp, error) {
 
 	return &types.BrandListResp{
 		Code:    0,
-		Message: "操作成功",
+		Message: "分页获取推荐品牌成功",
 		Data:    list,
 	}, nil
 }

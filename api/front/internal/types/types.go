@@ -83,31 +83,6 @@ type Brand struct {
 	BrandStory          string `json:"brandStory"`
 }
 
-type BrandDetailData struct {
-	Id                  int64              `json:"id"`
-	Name                string             `json:"name"`
-	FirstLetter         string             `json:"firstLetter"`
-	Sort                int32              `json:"sort"`
-	FactoryStatus       int32              `json:"factoryStatus"`
-	ShowStatus          int32              `json:"showStatus"`
-	ProductCount        int32              `json:"productCount"`
-	ProductCommentCount int32              `json:"productCommentCount"`
-	Logo                string             `json:"logo"`
-	BigPic              string             `json:"bigPic"`
-	BrandStory          string             `json:"brandStory"` // 品牌故事
-	ProductList         []BrandProductList `json:"productList"`
-}
-
-type BrandDetailReq struct {
-	BrandId int64 `path:"brandId"`
-}
-
-type BrandDetailResp struct {
-	Code    int64           `json:"code"`
-	Message string          `json:"message"`
-	Data    BrandDetailData `json:"data"`
-}
-
 type BrandList struct {
 	ID                  int64  `json:"id"`
 	Name                string `json:"name"`
@@ -132,6 +107,11 @@ type BrandListData struct {
 	ProductCommentCount int32  `json:"productCommentCount"`
 	Logo                string `json:"logo"`
 	BigPic              string `json:"bigPic"`
+}
+
+type BrandListReq struct {
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=6"`
 }
 
 type BrandListResp struct {
@@ -1021,6 +1001,18 @@ type ProductList struct {
 	BrandName                  string `json:"brandName"`
 	ProductCategoryName        string `json:"productCategoryName"`
 	Description                string `json:"description"`
+}
+
+type QueryBrandProductListReq struct {
+	BrandId  int64 `form:"brandId"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=6"`
+}
+
+type QueryBrandProductListResp struct {
+	Code    int64              `json:"code"`
+	Message string             `json:"message"`
+	Data    []BrandProductList `json:"data"`
 }
 
 type QueryPCProductCateListResp struct {

@@ -4,6 +4,10 @@ info(
 	email: "1002219331@qq.com"
 )
 
+type BrandListReq {
+	Current    int64  `form:"current,default=1"`
+	PageSize   int64  `form:"pageSize,default=6"`
+}
 type BrandListResp {
 	Code    int64          `json:"code"`
 	Message string         `json:"message"`
@@ -23,31 +27,17 @@ type BrandListData {
 	BigPic              string `json:"bigPic"`
 }
 
-type BrandDetailReq {
-	BrandId int64 `path:"brandId"`
+type QueryBrandProductListReq {
+	BrandId int64 `form:"brandId"`
+	Current    int64  `form:"current,default=1"`
+	PageSize   int64  `form:"pageSize,default=6"`
 }
 
-type BrandDetailResp {
+type QueryBrandProductListResp {
 	Code    int64          `json:"code"`
 	Message string         `json:"message"`
-	Data    BrandDetailData `json:"data"`
+	Data    []BrandProductList `json:"data"`
 }
-
-type BrandDetailData {
-	Id                  int64  `json:"id"`
-	Name                string `json:"name"`
-	FirstLetter         string `json:"firstLetter"`
-    Sort int32 `json:"sort"`
-    FactoryStatus int32 `json:"factoryStatus"`
-    ShowStatus int32 `json:"showStatus"`
-    ProductCount int32 `json:"productCount"`
-    ProductCommentCount int32 `json:"productCommentCount"`
-	Logo                string `json:"logo"`
-	BigPic              string `json:"bigPic"`
-	BrandStory          string `json:"brandStory"`           // 品牌故事
-	ProductList   []BrandProductList `json:"productList"`
-}
-
 type BrandProductList {
 	Id                         int64   `json:"id"`
 	BrandId                    int64   `json:"brandId"`
@@ -96,9 +86,12 @@ type BrandProductList {
 )
 
 service front-api {
-	@handler BrandList
-	get /list returns (BrandListResp)
 
-	@handler BrandDetail
-	get /detail/:brandId (BrandDetailReq) returns (BrandDetailResp)
+	//分页获取推荐品牌
+	@handler QueryBrandList
+	get /queryBrandList (BrandListReq) returns (BrandListResp)
+
+	//分页获取品牌相关商品
+	@handler QueryBrandProductList
+	get /queryBrandProductList (QueryBrandProductListReq) returns (QueryBrandProductListResp)
 }

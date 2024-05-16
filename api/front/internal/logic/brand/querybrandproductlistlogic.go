@@ -2,59 +2,42 @@ package brand
 
 import (
 	"context"
-	"errors"
-	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// BrandDetailLogic
+// QueryBrandProductListLogic 分页获取品牌相关商品
 /*
 Author: LiuFeiHua
-Date: 2023/12/4 13:37
+Date: 2024/5/16 14:18
 */
-type BrandDetailLogic struct {
+type QueryBrandProductListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewBrandDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandDetailLogic {
-	return &BrandDetailLogic{
+func NewQueryBrandProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryBrandProductListLogic {
+	return &QueryBrandProductListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// BrandDetail 查询品牌详情
-func (l *BrandDetailLogic) BrandDetail(req *types.BrandDetailReq) (*types.BrandDetailResp, error) {
-	var ids []int64
-	ids = append(ids, req.BrandId)
-	resp, err := l.svcCtx.BrandService.BrandListByIds(l.ctx, &pmsclient.BrandListByIdsReq{
-		Ids: ids,
-	})
+// QueryBrandProductList 分页获取品牌相关商品
+func (l *QueryBrandProductListLogic) QueryBrandProductList(req *types.QueryBrandProductListReq) (resp *types.QueryBrandProductListResp, err error) {
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询商品品牌详情异常:%s", err.Error())
-		return nil, errors.New("查询商品品牌详情失败")
-	}
-
-	item := resp.List[0]
-	brandId := item.Id
 	productListResp, _ := l.svcCtx.ProductService.ProductList(l.ctx, &pmsclient.ProductListReq{
-		Current:           1,
-		PageSize:          100,
-		Name:              "",
-		VerifyStatus:      2,
-		ProductCategoryId: 0,
-		PublishStatus:     2,
-		DeleteStatus:      2,
-		BrandId:           brandId,
+		Current:       req.Current,
+		PageSize:      req.PageSize,
+		VerifyStatus:  2,
+		PublishStatus: 2,
+		DeleteStatus:  2,
+		BrandId:       req.BrandId,
 	})
 	productLists := make([]types.BrandProductList, 0)
 
@@ -101,22 +84,9 @@ func (l *BrandDetailLogic) BrandDetail(req *types.BrandDetailReq) (*types.BrandD
 			Description:                item.Description,
 		})
 	}
-	return &types.BrandDetailResp{
+	return &types.QueryBrandProductListResp{
 		Code:    0,
-		Message: "操作成功",
-		Data: types.BrandDetailData{
-			Id:                  brandId,
-			Name:                item.Name,
-			FirstLetter:         item.FirstLetter,
-			Sort:                item.Sort,
-			FactoryStatus:       item.FactoryStatus,
-			ShowStatus:          item.ShowStatus,
-			ProductCount:        item.ProductCount,
-			ProductCommentCount: item.ProductCommentCount,
-			Logo:                item.Logo,
-			BigPic:              item.BigPic,
-			BrandStory:          item.BrandStory,
-			ProductList:         productLists,
-		},
+		Message: "分页获取品牌相关商品成功",
+		Data:    productLists,
 	}, nil
 }
