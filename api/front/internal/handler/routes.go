@@ -89,18 +89,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/productCateList/:parentId",
-				Handler: category.ProductCateListHandler(serverCtx),
+				Path:    "/queryProductCateListById",
+				Handler: category.QueryProductCateListByIdHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/queryPcProductCateList",
-				Handler: category.QueryPcProductCateListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryProductCateList",
-				Handler: category.QueryProductCateListHandler(serverCtx),
+				Path:    "/queryProductCateTreeList",
+				Handler: category.QueryProductCateTreeListHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api/category"),
@@ -155,7 +150,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodGet,
 				Path:    "/index",
-				Handler: home.HomeIndexHandler(serverCtx),
+				Handler: home.IndexHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/querySubjectList",
+				Handler: home.QuerySubjectListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
@@ -234,23 +234,28 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/add",
-				Handler: membercoupon.CouponAddHandler(serverCtx),
+				Path:    "/addCoupon",
+				Handler: membercoupon.AddCouponHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/list/:useStatus",
-				Handler: membercoupon.CouponHistoryListHandler(serverCtx),
+				Path:    "/queryCouponHistoryList",
+				Handler: membercoupon.QueryCouponHistoryListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/listByCart/:useStatus",
-				Handler: membercoupon.CouponListByCartHandler(serverCtx),
+				Path:    "/queryCouponList",
+				Handler: membercoupon.QueryCouponListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/listByProductId/:productId",
-				Handler: membercoupon.CouponListByProductIdHandler(serverCtx),
+				Path:    "/queryCouponListByCart",
+				Handler: membercoupon.QueryCouponListByCartHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryCouponListByProductId",
+				Handler: membercoupon.QueryCouponListByProductIdHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
@@ -293,34 +298,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/member"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/orderPay",
-				Handler: order.OrderPayHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/orderPayQuery/:orderId",
-				Handler: order.OrderPayQueryHandler(serverCtx),
-			},
-		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/pay"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/notify",
-				Handler: order.NotifyHandler(serverCtx),
-			},
-		},
-		rest.WithPrefix("/api/pay"),
 	)
 
 	server.AddRoutes(
@@ -378,13 +355,41 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
+				Method:  http.MethodPost,
+				Path:    "/orderPay",
+				Handler: order.OrderPayHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodGet,
-				Path:    "/queryProduct/:id",
+				Path:    "/orderPayQuery/:orderId",
+				Handler: order.OrderPayQueryHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/pay"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/notify",
+				Handler: order.NotifyHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/pay"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryProduct",
 				Handler: product.QueryProductHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/queryProductList/:productCategoryId",
+				Path:    "/queryProductList",
 				Handler: product.QueryProductListHandler(serverCtx),
 			},
 		},

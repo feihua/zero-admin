@@ -13,6 +13,15 @@ type AddAttentionResp struct {
 	Message string `json:"message"`
 }
 
+type AddCouponReq struct {
+	CouponId int64 `json:"couponId"`
+}
+
+type AddCouponResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
 type AddMemberAddressReq struct {
 	Name          string `json:"name"` // 收货人名称
 	PhoneNumber   string `json:"phoneNumber"`
@@ -372,25 +381,6 @@ type CartPromotionItemList struct {
 	Growth            int32  `json:"growth"`           //购买商品赠送成长值
 }
 
-type CategoryData struct {
-	Id       int64          `json:"id"`
-	Key      string         `json:"key"`
-	Name     string         `json:"name"`
-	Label    string         `json:"label"`
-	ImageUrl string         `json:"imageUrl"`
-	Children []CategoryData `json:"children"`
-}
-
-type CategoryReq struct {
-	ParentId int64 `path:"parentId"` // 上级分类的编号：0表示一级分类
-}
-
-type CategoryResp struct {
-	Code    int64          `json:"code"`
-	Message string         `json:"message"`
-	Data    []CategoryData `json:"data"`
-}
-
 type ConfirmReceiveOrderReq struct {
 	OrderId int64 `path:"orderId"`
 }
@@ -418,14 +408,19 @@ type CouponList struct {
 	EnableTime   string `json:"enableTime"`
 }
 
+type CouponListByCartData struct {
+	EnableList  interface{} `json:"enableList"`
+	DisableList interface{} `json:"disableList"`
+}
+
 type CouponListByCartReq struct {
-	UseStatus int64 `path:"useStatus"` // 使用状态-使用可用:0->不可用；1->可用
+	Type int32 `form:"type"` // 使用状态-使用可用:0->不可用；1->可用
 }
 
 type CouponListByCartResp struct {
-	Code    int64          `json:"code"`
-	Message string         `json:"message"`
-	Data    ListCouponData `json:"data"`
+	Code    int64                `json:"code"`
+	Message string               `json:"message"`
+	Data    CouponListByCartData `json:"data"`
 }
 
 type Data struct {
@@ -558,11 +553,6 @@ type ListAttentionResp struct {
 }
 
 type ListCouponData struct {
-	EnableList  interface{} `json:"enableList"`
-	DisableList interface{} `json:"disableList"`
-}
-
-type ListCouponHistoryData struct {
 	Id           int64  `json:"id"`
 	Type         int32  `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
 	Name         string `json:"name"`
@@ -583,6 +573,20 @@ type ListCouponHistoryData struct {
 	MemberLevel  int32  `json:"memberLevel"`  // 可领取的会员类型：0->无限时
 }
 
+type ListCouponHistoryData struct {
+	Id             int64  `json:"id"`
+	CouponId       int64  `json:"couponId"`
+	MemberId       int64  `json:"memberId"`
+	CouponCode     string `json:"couponCode"`
+	MemberNickname string `json:"memberNickName"` // 领取人昵称
+	GetType        int32  `json:"getType"`        // 获取类型：0->后台赠送；1->主动获取
+	CreateTime     string `json:"createTime"`
+	UseStatus      int32  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
+	UseTime        string `json:"useTime"`   // 使用时间
+	OrderId        int64  `json:"orderId"`   // 订单编号
+	OrderSn        string `json:"orderSn"`   // 订单号码
+}
+
 type ListCouponHistoryReq struct {
 	UseStatus int32 `path:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
 }
@@ -594,13 +598,13 @@ type ListCouponHistoryResp struct {
 }
 
 type ListCouponReq struct {
-	ProductId int64 `path:"productId"` // 商品id
+	UseStatus int32 `form:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
 }
 
 type ListCouponResp struct {
-	Code    int64              `json:"code"`
-	Message string             `json:"message"`
-	Data    []*ListtCouponData `json:"data"`
+	Code    int64             `json:"code"`
+	Message string            `json:"message"`
+	Data    []*ListCouponData `json:"data"`
 }
 
 type ListMemberAddressData struct {
@@ -693,27 +697,6 @@ type ListOrderItemData struct {
 	GiftIntegration   int32  `json:"giftIntegration"`
 	GiftGrowth        int32  `json:"giftGrowth"`
 	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-}
-
-type ListtCouponData struct {
-	Id           int64  `json:"id"`
-	Type         int32  `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string `json:"name"`
-	Platform     int32  `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
-	Count        int32  `json:"count"`    // 数量
-	Amount       int64  `json:"amount"`   // 金额
-	PerLimit     int32  `json:"perLimit"` // 每人限领张数
-	MinPoint     int64  `json:"minPoint"` // 使用门槛；0表示无门槛
-	StartTime    string `json:"startTime"`
-	EndTime      string `json:"endTime"`
-	UseType      int32  `json:"useType"`      // 使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string `json:"note"`         // 备注
-	PublishCount int32  `json:"publishCount"` // 发行数量
-	UseCount     int32  `json:"useCount"`     // 已使用数量
-	ReceiveCount int32  `json:"receiveCount"` // 领取数量
-	EnableTime   string `json:"enableTime"`   // 可以领取的日期
-	Code         string `json:"code"`         // 优惠码
-	MemberLevel  int32  `json:"memberLevel"`  // 可领取的会员类型：0->无限时
 }
 
 type LoginData struct {
@@ -819,12 +802,6 @@ type OrderPayResp struct {
 	Data    string `json:"data"`
 }
 
-type PCCategoryData struct {
-	Key      string           `json:"key"`
-	Label    string           `json:"label"`
-	Children []PCCategoryData `json:"children"`
-}
-
 type PayCallbackReq struct {
 	OrderId   int64 `json:"orderId"`
 	ProductId int64 `json:"productId"`
@@ -900,6 +877,15 @@ type ProductAttributeValueList struct {
 	ProductId          int64  `json:"productId"`
 	ProductAttributeId int64  `json:"productAttributeId"`
 	Value              string `json:"value"`
+}
+
+type ProductCateListData struct {
+	Id       int64                 `json:"id"`
+	Key      string                `json:"key"`
+	Name     string                `json:"name"`
+	Label    string                `json:"label"`
+	ImageUrl string                `json:"imageUrl"`
+	Children []ProductCateListData `json:"children"`
 }
 
 type ProductCollectionClearResp struct {
@@ -1015,16 +1001,19 @@ type QueryBrandProductListResp struct {
 	Data    []BrandProductList `json:"data"`
 }
 
-type QueryPCProductCateListResp struct {
-	Code    int64            `json:"code"`
-	Message string           `json:"message"`
-	Data    []PCCategoryData `json:"data"`
+type QueryCouponListByProductIdReq struct {
+	ProductId         int64 `form:"productId"`
+	ProductCategoryId int64 `form:"productCategoryId"`
+}
+
+type QueryProductCateListByIdReq struct {
+	ParentId int64 `form:"parentId"` // 上级分类的编号：0表示一级分类
 }
 
 type QueryProductCateListResp struct {
-	Code    int64          `json:"code"`
-	Message string         `json:"message"`
-	Data    []CategoryData `json:"data"`
+	Code    int64                 `json:"code"`
+	Message string                `json:"message"`
+	Data    []ProductCateListData `json:"data"`
 }
 
 type QueryProductListData struct {
@@ -1070,10 +1059,11 @@ type QueryProductListData struct {
 }
 
 type QueryProductListReq struct {
-	Current           int64 `path:"current,default=1"`
-	PageSize          int64 `path:"pageSize,default=10"`
-	BrandId           int64 `path:"brandId,default=0"`
-	ProductCategoryId int64 `path:"productCategoryId,default=0"`
+	Current           int64  `path:"current,default=1"`
+	PageSize          int64  `path:"pageSize,default=10"`
+	BrandId           int64  `path:"brandId,default=0"`
+	ProductCategoryId int64  `path:"productCategoryId,default=0"`
+	Keyword           string `path:"keyword"`
 }
 
 type QueryProductListResp struct {
@@ -1083,7 +1073,7 @@ type QueryProductListResp struct {
 }
 
 type QueryProductReq struct {
-	Id int64 `path:"id"`
+	ProductId int64 `form:"productId"`
 }
 
 type QueryProductResp struct {
@@ -1232,6 +1222,17 @@ type SubjectList struct {
 	CategoryName    string `json:"categoryName"` // 专题分类名称
 }
 
+type SubjectListReq struct {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
+}
+
+type SubjectListResp struct {
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
+	Data    []SubjectList `json:"data"`
+}
+
 type UpdateMemberAddressReq struct {
 	Id            int64  `json:"id"`
 	Name          string `json:"name"` // 收货人名称
@@ -1281,15 +1282,6 @@ type UpdatePasswordReq struct {
 }
 
 type UpdatePasswordResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type AddCouponReq struct {
-	CouponId int64 `json:"couponId"`
-}
-
-type AddCouponResp struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
 }

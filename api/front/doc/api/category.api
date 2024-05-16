@@ -1,62 +1,41 @@
 info(
-	desc: "分类相关"
-	author: "koobe"
-	email: "1002219331@qq.com"
+    desc: "分类相关"
+    author: "koobe"
+    email: "1002219331@qq.com"
 )
 
-type CategoryReq {
-	ParentId int64 `path:"parentId"` // 上级分类的编号：0表示一级分类
-}
-
-type CategoryResp {
-	Code    int64          `json:"code"`
-	Message string         `json:"message"`
-	Data    []CategoryData `json:"data"`
+type QueryProductCateListByIdReq {
+    ParentId int64 `form:"parentId"` // 上级分类的编号：0表示一级分类
 }
 
 type QueryProductCateListResp {
-	Code    int64          `json:"code"`
-	Message string         `json:"message"`
-	Data    []CategoryData `json:"data"`
+    Code int64 `json:"code"`
+    Message string `json:"message"`
+    Data []ProductCateListData `json:"data"`
 }
 
-type CategoryData {
-	Id           int64  `json:"id"`
-	Key           string  `json:"key"`
-	Name         string `json:"name"`
-	Label         string `json:"label"`
-	ImageUrl     string `json:"imageUrl"`
-	Children    []CategoryData `json:"children"`
+type ProductCateListData {
+    Id int64 `json:"id"`
+    Key string `json:"key"`
+    Name string `json:"name"`
+    Label string `json:"label"`
+    ImageUrl string `json:"imageUrl"`
+    Children []ProductCateListData `json:"children"`
 }
 
-type QueryPCProductCateListResp {
-	Code int64 `json:"code"`
-	Message string `json:"message"`
-	Data []PCCategoryData `json:"data"`
-}
-
-type PCCategoryData {
-	Key string `json:"key"`
-	Label string `json:"label"`
-	Children []PCCategoryData `json:"children"`
-}
 
 @server(
-	group: category
-	prefix: /api/category
+    group: category
+    prefix: /api/category
 )
 
 service front-api {
 
-	// 查询所有分类(根据parentId查询)
-	@handler ProductCateList
-	get /productCateList/:parentId (CategoryReq) returns (CategoryResp)
+    // 根据parentId查询分类
+    @handler QueryProductCateListById
+    get /queryProductCateListById (QueryProductCateListByIdReq) returns (QueryProductCateListResp)
 
-	// 查询所有分类(嵌套children)(app端)
-	@handler queryProductCateList
-	get /queryProductCateList returns (QueryProductCateListResp)
-
-	// 查询所有分类(嵌套children)(pc web端专用)
-	@handler queryPcProductCateList
-	get /queryPcProductCateList returns (QueryProductCateListResp)
+    // 以树形结构获取所有商品分类
+    @handler QueryProductCateTreeList
+    get /queryProductCateTreeList returns (QueryProductCateListResp)
 }

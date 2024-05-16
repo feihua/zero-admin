@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderReturnApplyAddLogic 申请退货
+/*
+Author: LiuFeiHua
+Date: 2024/5/16 14:33
+*/
 type OrderReturnApplyAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,6 +31,7 @@ func NewOrderReturnApplyAddLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// OrderReturnApplyAdd 申请退货
 func (l *OrderReturnApplyAddLogic) OrderReturnApplyAdd(in *omsclient.OrderReturnApplyAddReq) (*omsclient.OrderReturnApplyAddResp, error) {
 	err := query.OmsOrderReturnApply.WithContext(l.ctx).Create(&model.OmsOrderReturnApply{
 		OrderID:          in.OrderId,

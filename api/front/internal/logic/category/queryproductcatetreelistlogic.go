@@ -11,36 +11,36 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryProductCateListLogic
+// QueryProductCateTreeListLogic 以树形结构获取所有商品分类
 /*
 Author: LiuFeiHua
-Date: 2024/3/7 下午2:24
+Date: 2024/5/16 14:50
 */
-type QueryProductCateListLogic struct {
+type QueryProductCateTreeListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewQueryProductCateListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryProductCateListLogic {
-	return &QueryProductCateListLogic{
+func NewQueryProductCateTreeListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryProductCateTreeListLogic {
+	return &QueryProductCateTreeListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// QueryProductCateList 查询所有分类
-func (l *QueryProductCateListLogic) QueryProductCateList() (resp *types.QueryProductCateListResp, err error) {
+// QueryProductCateTreeList 以树形结构获取所有商品分类
+func (l *QueryProductCateTreeListLogic) QueryProductCateTreeList() (resp *types.QueryProductCateListResp, err error) {
 	categoryListResp, err := l.svcCtx.ProductCategoryService.QueryProductCategoryList(l.ctx, &pmsclient.QueryProductCategoryListReq{})
 
-	var list []types.CategoryData
+	var list []types.ProductCateListData
 
 	for _, item := range categoryListResp.List {
 
-		var children []types.CategoryData
+		var children []types.ProductCateListData
 		for _, child := range item.Children {
-			children = append(children, types.CategoryData{
+			children = append(children, types.ProductCateListData{
 				Id:       child.Id,
 				Key:      strconv.FormatInt(child.Id, 10),
 				Label:    child.Name,
@@ -49,7 +49,7 @@ func (l *QueryProductCateListLogic) QueryProductCateList() (resp *types.QueryPro
 			})
 		}
 
-		list = append(list, types.CategoryData{
+		list = append(list, types.ProductCateListData{
 			Id:       item.Id,
 			Name:     item.Name,
 			Key:      strconv.FormatInt(item.Id, 10),

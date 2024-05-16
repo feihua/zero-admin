@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func CouponAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QueryCouponListByProductIdHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.AddCouponReq
+		var req types.QueryCouponListByProductIdReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := coupon.NewCouponAddLogic(r.Context(), svcCtx)
-		resp, err := l.CouponAdd(&req)
+		l := coupon.NewQueryCouponListByProductIdLogic(r.Context(), svcCtx)
+		resp, err := l.QueryCouponListByProductId(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

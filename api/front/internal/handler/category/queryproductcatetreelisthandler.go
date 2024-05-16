@@ -8,10 +8,10 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func QueryProductCateListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QueryProductCateTreeListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := category.NewQueryProductCateListLogic(r.Context(), svcCtx)
-		resp, err := l.QueryProductCateList()
+		l := category.NewQueryProductCateTreeListLogic(r.Context(), svcCtx)
+		resp, err := l.QueryProductCateTreeList()
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// RecommendNewProductListLogic 分页获取新品推荐商品
+/*
+Author: LiuFeiHua
+Date: 2024/5/16 15:12
+*/
 type RecommendNewProductListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +29,7 @@ func NewRecommendNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// RecommendNewProductList 分页获取新品推荐商品
 func (l *RecommendNewProductListLogic) RecommendNewProductList(req *types.RecommendNewProductListReq) (resp *types.RecommendNewProductListResp, err error) {
 	homeNewProductList, _ := l.svcCtx.HomeNewProductService.HomeNewProductList(l.ctx, &smsclient.HomeNewProductListReq{
 		Current:         req.Current,
@@ -38,7 +44,7 @@ func (l *RecommendNewProductListLogic) RecommendNewProductList(req *types.Recomm
 
 	return &types.RecommendNewProductListResp{
 		Code:    0,
-		Message: "操作成功",
+		Message: "分页获取新品推荐商品成功",
 		Data:    queryProductList(l.svcCtx.ProductService, productIds, l.ctx),
 	}, nil
 }

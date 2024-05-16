@@ -39,6 +39,7 @@ func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq)
 		PublishStatus:     1, // 上架状态：0->下架；1->上架
 		DeleteStatus:      0, // 删除状态：0->未删除；1->已删除
 		BrandId:           req.BrandId,
+		Name:              req.Keyword,
 	})
 
 	var productLists []types.QueryProductListData

@@ -43,12 +43,12 @@ func NewQueryProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Quer
 func (l *QueryProductLogic) QueryProduct(req *types.QueryProductReq) (resp *types.QueryProductResp, err error) {
 
 	productResp, _ := l.svcCtx.ProductService.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
-		Id: req.Id,
+		Id: req.ProductId,
 	})
 
 	//8.商品可用优惠券(根据商品id和分类id查询)
 	couponList, _ := l.svcCtx.CouponService.CouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
-		ProductId:         req.Id,
+		ProductId:         req.ProductId,
 		ProductCategoryId: productResp.Product.ProductCategoryId,
 	})
 

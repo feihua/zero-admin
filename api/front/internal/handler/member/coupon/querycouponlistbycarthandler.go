@@ -1,24 +1,24 @@
-package category
+package coupon
 
 import (
 	"net/http"
 
-	"github.com/feihua/zero-admin/api/front/internal/logic/category"
+	"github.com/feihua/zero-admin/api/front/internal/logic/member/coupon"
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func ProductCateListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QueryCouponListByCartHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.CategoryReq
+		var req types.CouponListByCartReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := category.NewProductCateListLogic(r.Context(), svcCtx)
-		resp, err := l.ProductCateList(&req)
+		l := coupon.NewQueryCouponListByCartLogic(r.Context(), svcCtx)
+		resp, err := l.QueryCouponListByCart(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

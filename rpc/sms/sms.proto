@@ -152,11 +152,7 @@ message CouponHistoryAddReq {
   string      CouponCode = 3;
   string      MemberNickname = 4;
   int32      GetType = 5;
-  string  CreateTime = 6;
   int32      UseStatus = 7;
-  string  UseTime = 8;
-  int64      OrderId = 9;
-  string      OrderSn = 10;
 }
 
 message CouponHistoryAddResp {

@@ -135,6 +135,17 @@ type RecommendBrandListResp {
 	Data    []BrandList `json:"data"`
 }
 
+type SubjectListReq {
+	Current  int64 `json:"current,default=1"`
+	PageSize int64 `json:"pageSize,default=10"`
+}
+
+type SubjectListResp {
+	Code    int64       `json:"code"`
+	Message string      `json:"message"`
+	Data    []SubjectList `json:"data"`
+}
+
 type RecommendNewProductListReq {
 	Current  int64 `json:"current,default=1"`
 	PageSize int64 `json:"pageSize,default=10"`
@@ -161,21 +172,28 @@ type RecommendHotProductListResp {
 	prefix: /api/home
 )
 service front-api {
-	@handler HomeIndex
+
+	//首页内容信息展示
+	@handler Index
 	get /index returns (HomeResp)
 
-	//获取推荐商品
+	//分页获取推荐商品
 	@handler RecommendProductList
 	post /recommendProductList (RecommendProductListReq) returns (RecommendProductListResp)
 
-	//获取推荐品牌
+	//分页获取推荐品牌
 	@handler RecommendBrandList
 	post /recommendBrandList (RecommendBrandListReq) returns (RecommendBrandListResp)
 
-	//获取新品推荐商品
+	//分页获取专题
+	@handler QuerySubjectList
+	post /querySubjectList (SubjectListReq) returns (SubjectListResp)
+
+	//分页获取新品推荐商品
 	@handler RecommendNewProductList
 	post /recommendNewProductList (RecommendNewProductListReq) returns (RecommendNewProductListResp)
-	//获取人气推荐商品
+
+	//分页获取人气推荐商品
 	@handler RecommendHotProductList
 	post /recommendHotProductList (RecommendHotProductListReq) returns (RecommendHotProductListResp)
 }

@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// ReturnApplyLogic 申请退货
+/*
+Author: LiuFeiHua
+Date: 2024/5/16 14:32
+*/
 type ReturnApplyLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +29,7 @@ func NewReturnApplyLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Retur
 	}
 }
 
+// ReturnApply 申请退货
 func (l *ReturnApplyLogic) ReturnApply(req *types.ReturnApplyReq) (resp *types.ReturnApplyResp, err error) {
 	_, err = l.svcCtx.OrderReturnApplyService.OrderReturnApplyAdd(l.ctx, &omsclient.OrderReturnApplyAddReq{
 		OrderId:          req.OrderId,

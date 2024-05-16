@@ -14,35 +14,34 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// CouponListByCartLogic
+// QueryCouponListByCartLogic 获取登录会员购物车的相关优惠券
 /*
 Author: LiuFeiHua
-Date: 2023/12/12 11:35
+Date: 2024/5/16 16:31
 */
-type CouponListByCartLogic struct {
+type QueryCouponListByCartLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewCouponListByCartLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CouponListByCartLogic {
-	return &CouponListByCartLogic{
+func NewQueryCouponListByCartLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryCouponListByCartLogic {
+	return &QueryCouponListByCartLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// CouponListByCart 获取登录会员购物车的相关优惠券
-func (l *CouponListByCartLogic) CouponListByCart(req *types.CouponListByCartReq) (resp *types.CouponListByCartResp, err error) {
-
+// QueryCouponListByCart 获取登录会员购物车的相关优惠券
+func (l *QueryCouponListByCartLogic) QueryCouponListByCart(req *types.CouponListByCartReq) (resp *types.CouponListByCartResp, err error) {
 	//1.获取购物车信息
 	cartPromotionItemList := cart.QueryCartListPromotion(nil, l.ctx, l.svcCtx)
 
 	//获取该用户所有优惠券
 	enableList, disableList := QueryCouponList(l.svcCtx, l.ctx, cartPromotionItemList)
 	return &types.CouponListByCartResp{
-		Data: types.ListCouponData{
+		Data: types.CouponListByCartData{
 			EnableList:  enableList,
 			DisableList: disableList,
 		},

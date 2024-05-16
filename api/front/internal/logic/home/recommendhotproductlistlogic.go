@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// RecommendHotProductListLogic 分页获取人气推荐商品
+/*
+Author: LiuFeiHua
+Date: 2024/5/16 15:13
+*/
 type RecommendHotProductListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -24,6 +29,7 @@ func NewRecommendHotProductListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// RecommendHotProductList 分页获取人气推荐商品
 func (l *RecommendHotProductListLogic) RecommendHotProductList(req *types.RecommendHotProductListReq) (resp *types.RecommendHotProductListResp, err error) {
 	homeRecommendProductList, _ := l.svcCtx.HomeRecommendProductService.HomeRecommendProductList(l.ctx, &smsclient.HomeRecommendProductListReq{
 		Current:         req.Current,
@@ -38,7 +44,7 @@ func (l *RecommendHotProductListLogic) RecommendHotProductList(req *types.Recomm
 
 	return &types.RecommendHotProductListResp{
 		Code:    0,
-		Message: "操作成功",
+		Message: "分页获取人气推荐商品成功",
 		Data:    queryProductList(l.svcCtx.ProductService, productIds, l.ctx),
 	}, nil
 }

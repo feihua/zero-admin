@@ -11,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// RecommendBrandListLogic 分页获取推荐品牌
+/*
+Author: LiuFeiHua
+Date: 2024/5/16 15:12
+*/
 type RecommendBrandListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -25,6 +30,7 @@ func NewRecommendBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// RecommendBrandList 分页获取推荐品牌
 func (l *RecommendBrandListLogic) RecommendBrandList(req *types.RecommendBrandListReq) (resp *types.RecommendBrandListResp, err error) {
 	homeBrandList, _ := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
 		Current:         req.Current,
@@ -57,7 +63,7 @@ func (l *RecommendBrandListLogic) RecommendBrandList(req *types.RecommendBrandLi
 
 	return &types.RecommendBrandListResp{
 		Code:    0,
-		Message: "操作成功",
+		Message: "分页获取推荐品牌成功",
 		Data:    brandLists,
 	}, nil
 }

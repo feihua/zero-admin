@@ -8,14 +8,14 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func HomeIndexHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func IndexHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := home.NewHomeIndexLogic(r.Context(), svcCtx)
-		resp, err := l.HomeIndex()
+		l := home.NewIndexLogic(r.Context(), svcCtx)
+		resp, err := l.Index()
 		if err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			httpx.OkJsonCtx(r.Context(), w, resp)
 		}
 	}
 }

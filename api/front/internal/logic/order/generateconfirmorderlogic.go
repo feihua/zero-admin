@@ -121,7 +121,7 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 		Data: types.OrderDetailModel{
 			CartPromotionItemList:    cartPromotionList,
 			MemberReceiveAddressList: memberReceiveAddressList,
-			CouponHistoryDetailList: types.ListCouponData{
+			CouponHistoryDetailList: types.CouponListByCartData{
 				EnableList:  enableList,
 				DisableList: disableList,
 			},

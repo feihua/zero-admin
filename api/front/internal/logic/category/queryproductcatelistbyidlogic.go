@@ -2,7 +2,6 @@ package category
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -13,27 +12,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// ProductCateListLogic
+// QueryProductCateListByIdLogic 根据parentId查询分类
 /*
 Author: LiuFeiHua
-Date: 2023/11/29 16:44
+Date: 2024/5/16 14:47
 */
-type ProductCateListLogic struct {
+type QueryProductCateListByIdLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewProductCateListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductCateListLogic {
-	return &ProductCateListLogic{
+func NewQueryProductCateListByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryProductCateListByIdLogic {
+	return &QueryProductCateListByIdLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// ProductCateList 查询商品分类
-func (l *ProductCateListLogic) ProductCateList(req *types.CategoryReq) (resp *types.CategoryResp, err error) {
+// QueryProductCateListById 根据parentId查询分类
+func (l *QueryProductCateListByIdLogic) QueryProductCateListById(req *types.QueryProductCateListByIdReq) (resp *types.QueryProductCateListResp, err error) {
 	categoryListResp, err := l.svcCtx.ProductCategoryService.ProductCategoryList(l.ctx, &pmsclient.ProductCategoryListReq{
 		Current:    0,
 		PageSize:   100,
@@ -42,21 +41,20 @@ func (l *ProductCateListLogic) ProductCateList(req *types.CategoryReq) (resp *ty
 	})
 
 	if err != nil {
-		data, _ := json.Marshal(req)
-		logc.Errorf(l.ctx, "参数: %s,查询商品分类列表异常:%s", string(data), err.Error())
+		logc.Errorf(l.ctx, "参数: %+v,查询商品分类列表异常:%s", req, err.Error())
 		return nil, errors.New("查询商品分类失败")
 	}
 
-	list := make([]types.CategoryData, 0)
+	list := make([]types.ProductCateListData, 0)
 	for _, item := range categoryListResp.List {
-		list = append(list, types.CategoryData{
+		list = append(list, types.ProductCateListData{
 			Id:       item.Id,
 			Name:     item.Name,
 			ImageUrl: item.Icon,
 		})
 	}
 
-	return &types.CategoryResp{
+	return &types.QueryProductCateListResp{
 		Code:    0,
 		Message: "操作成功",
 		Data:    list,

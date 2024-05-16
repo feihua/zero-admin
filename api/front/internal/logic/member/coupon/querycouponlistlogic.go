@@ -11,39 +11,39 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// CouponHistoryListLogic
+// QueryCouponListLogic 查询会员优惠券成功
 /*
 Author: LiuFeiHua
-Date: 2023/11/29 11:24
+Date: 2024/5/16 16:30
 */
-type CouponHistoryListLogic struct {
+type QueryCouponListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CouponHistoryListLogic {
-	return &CouponHistoryListLogic{
+func NewQueryCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryCouponListLogic {
+	return &QueryCouponListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// CouponHistoryList 获取用户优惠券列表
-func (l *CouponHistoryListLogic) CouponHistoryList(req *types.ListCouponHistoryReq) (resp *types.ListCouponHistoryResp, err error) {
+// QueryCouponList 获取用户优惠券列表
+func (l *QueryCouponListLogic) QueryCouponList(req *types.ListCouponReq) (resp *types.ListCouponResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	historyList, err := l.svcCtx.CouponHistoryService.QueryMemberCouponList(l.ctx, &smsclient.QueryMemberCouponListReq{
+	couponList, err := l.svcCtx.CouponHistoryService.QueryMemberCouponList(l.ctx, &smsclient.QueryMemberCouponListReq{
 		MemberId:  memberId,
 		UseStatus: req.UseStatus,
 	})
 	if err != nil {
 		return nil, err
 	}
-	var list []*types.ListCouponHistoryData
+	var list []*types.ListCouponData
 
-	for _, item := range historyList.List {
-		list = append(list, &types.ListCouponHistoryData{
+	for _, item := range couponList.List {
+		list = append(list, &types.ListCouponData{
 			Id:           item.Id,
 			Type:         item.Type,
 			Name:         item.Name,
@@ -65,7 +65,7 @@ func (l *CouponHistoryListLogic) CouponHistoryList(req *types.ListCouponHistoryR
 		})
 	}
 
-	return &types.ListCouponHistoryResp{
+	return &types.ListCouponResp{
 		Data:    list,
 		Code:    0,
 		Message: "查询会员优惠券成功",

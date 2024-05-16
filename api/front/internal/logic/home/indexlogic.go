@@ -13,28 +13,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// HomeIndexLogic
+// IndexLogic 获取首页数据
 /*
 Author: LiuFeiHua
-Date: 2023/11/30 17:33
+Date: 2024/5/16 15:19
 */
-type HomeIndexLogic struct {
+type IndexLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeIndexLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeIndexLogic {
-	return HomeIndexLogic{
+func NewIndexLogic(ctx context.Context, svcCtx *svc.ServiceContext) *IndexLogic {
+	return &IndexLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// HomeIndex 获取首页数据
-func (l *HomeIndexLogic) HomeIndex() (resp *types.HomeResp, err error) {
-
+// Index 获取首页数据
+func (l *IndexLogic) Index() (resp *types.HomeResp, err error) {
 	return &types.HomeResp{
 		Code:    0,
 		Message: "操作成功",
@@ -50,7 +49,7 @@ func (l *HomeIndexLogic) HomeIndex() (resp *types.HomeResp, err error) {
 }
 
 // 推荐专题
-func querySubjectList(l *HomeIndexLogic) []types.SubjectList {
+func querySubjectList(l *IndexLogic) []types.SubjectList {
 	var subjectLists []types.SubjectList
 	homeRecommendSubjectList, err := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectList(l.ctx, &smsclient.HomeRecommendSubjectListReq{
 		Current:         1,
@@ -91,7 +90,7 @@ func querySubjectList(l *HomeIndexLogic) []types.SubjectList {
 }
 
 // 人气推荐
-func queryHotProductList(l *HomeIndexLogic) []types.ProductList {
+func queryHotProductList(l *IndexLogic) []types.ProductList {
 	homeRecommendProductList, _ := l.svcCtx.HomeRecommendProductService.HomeRecommendProductList(l.ctx, &smsclient.HomeRecommendProductListReq{
 		Current:         1,
 		PageSize:        4,
@@ -107,7 +106,7 @@ func queryHotProductList(l *HomeIndexLogic) []types.ProductList {
 }
 
 // 新品推荐
-func queryNewProductList(l *HomeIndexLogic) []types.ProductList {
+func queryNewProductList(l *IndexLogic) []types.ProductList {
 	homeNewProductList, _ := l.svcCtx.HomeNewProductService.HomeNewProductList(l.ctx, &smsclient.HomeNewProductListReq{
 		Current:         1,
 		PageSize:        4,
@@ -123,7 +122,7 @@ func queryNewProductList(l *HomeIndexLogic) []types.ProductList {
 }
 
 // 当前秒杀场次
-func queryHomeFlashPromotion(l *HomeIndexLogic) types.HomeFlashPromotion {
+func queryHomeFlashPromotion(l *IndexLogic) types.HomeFlashPromotion {
 	var resp types.HomeFlashPromotion
 	currentDate := time.Now().Format("2006-01-02")
 	flashPromotionList, _ := l.svcCtx.FlashPromotionService.FlashPromotionListByDate(l.ctx, &smsclient.FlashPromotionListByDateReq{
@@ -187,7 +186,7 @@ func queryHomeFlashPromotion(l *HomeIndexLogic) types.HomeFlashPromotion {
 }
 
 // 推荐品牌
-func queryBrandList(l *HomeIndexLogic) []types.BrandList {
+func queryBrandList(l *IndexLogic) []types.BrandList {
 	homeBrandList, _ := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
 		Current:         1,
 		PageSize:        6,
@@ -220,7 +219,7 @@ func queryBrandList(l *HomeIndexLogic) []types.BrandList {
 }
 
 // 获取轮播广告
-func queryAdvertiseList(l *HomeIndexLogic) []types.AdvertiseList {
+func queryAdvertiseList(l *IndexLogic) []types.AdvertiseList {
 	homeAdvertiseList, _ := l.svcCtx.HomeAdvertiseService.HomeAdvertiseList(l.ctx, &smsclient.HomeAdvertiseListReq{
 		Current:  1,
 		PageSize: 100,
