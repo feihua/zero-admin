@@ -22,21 +22,19 @@ func NewMemberAttentionServiceServer(svcCtx *svc.ServiceContext) *MemberAttentio
 	}
 }
 
+// 添加品牌关注
 func (s *MemberAttentionServiceServer) MemberBrandAttentionAdd(ctx context.Context, in *umsclient.MemberBrandAttentionAddReq) (*umsclient.MemberBrandAttentionAddResp, error) {
 	l := memberattentionservicelogic.NewMemberBrandAttentionAddLogic(ctx, s.svcCtx)
 	return l.MemberBrandAttentionAdd(in)
 }
 
+// 取消品牌关注/清空当前用户品牌关注列表
 func (s *MemberAttentionServiceServer) MemberBrandAttentionDelete(ctx context.Context, in *umsclient.MemberBrandAttentionDeleteReq) (*umsclient.MemberBrandAttentionDeleteResp, error) {
 	l := memberattentionservicelogic.NewMemberBrandAttentionDeleteLogic(ctx, s.svcCtx)
 	return l.MemberBrandAttentionDelete(in)
 }
 
-func (s *MemberAttentionServiceServer) MemberBrandAttentionClear(ctx context.Context, in *umsclient.MemberBrandAttentionClearReq) (*umsclient.MemberBrandAttentionClearResp, error) {
-	l := memberattentionservicelogic.NewMemberBrandAttentionClearLogic(ctx, s.svcCtx)
-	return l.MemberBrandAttentionClear(in)
-}
-
+// 分页查询当前用户品牌关注列表
 func (s *MemberAttentionServiceServer) MemberBrandAttentionList(ctx context.Context, in *umsclient.MemberBrandAttentionListReq) (*umsclient.MemberBrandAttentionListResp, error) {
 	l := memberattentionservicelogic.NewMemberBrandAttentionListLogic(ctx, s.svcCtx)
 	return l.MemberBrandAttentionList(in)

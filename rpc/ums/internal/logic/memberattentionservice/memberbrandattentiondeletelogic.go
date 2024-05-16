@@ -32,7 +32,11 @@ func NewMemberBrandAttentionDeleteLogic(ctx context.Context, svcCtx *svc.Service
 // MemberBrandAttentionDelete 取消关注
 func (l *MemberBrandAttentionDeleteLogic) MemberBrandAttentionDelete(in *umsclient.MemberBrandAttentionDeleteReq) (*umsclient.MemberBrandAttentionDeleteResp, error) {
 	q := query.UmsMemberBrandAttention
-	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).Delete()
+	attentionDo := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId))
+	if len(in.BrandIds) > 0 {
+		attentionDo = attentionDo.Where(q.ID.In(in.BrandIds...))
+	}
+	_, err := attentionDo.Delete()
 	if err != nil {
 		return nil, err
 	}

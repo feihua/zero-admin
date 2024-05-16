@@ -1065,7 +1065,7 @@ message MemberBrandAttentionAddResp {
 }
 
 message MemberBrandAttentionDeleteReq {
-  int64 id = 1;
+  repeated int64 BrandIds = 1;
   int64 MemberId = 2; //会员id
 }
 
@@ -1074,13 +1074,6 @@ message MemberBrandAttentionDeleteResp {
 
 }
 
-message MemberBrandAttentionClearReq {
-  int64 MemberId = 1; //会员id
-}
-
-message MemberBrandAttentionClearResp {
-  string pong = 1;
-}
 message MemberBrandAttentionListReq {
   int64 MemberId = 1; //会员id
 
@@ -1105,8 +1098,10 @@ message MemberBrandAttentionListResp {
 }
 
 service MemberAttentionService {
+  //添加品牌关注
   rpc MemberBrandAttentionAdd(MemberBrandAttentionAddReq) returns (MemberBrandAttentionAddResp){}
+  //取消品牌关注/清空当前用户品牌关注列表
   rpc MemberBrandAttentionDelete(MemberBrandAttentionDeleteReq) returns (MemberBrandAttentionDeleteResp){}
-  rpc MemberBrandAttentionClear(MemberBrandAttentionClearReq) returns (MemberBrandAttentionClearResp){}
+  //分页查询当前用户品牌关注列表
   rpc MemberBrandAttentionList(MemberBrandAttentionListReq) returns (MemberBrandAttentionListResp){}
 }

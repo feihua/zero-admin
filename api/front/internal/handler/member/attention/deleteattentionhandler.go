@@ -9,7 +9,7 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func AttentionDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeleteAttentionHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.DeleteAttentionReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +17,8 @@ func AttentionDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := attention.NewAttentionDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.AttentionDelete(&req)
+		l := attention.NewDeleteAttentionLogic(r.Context(), svcCtx)
+		resp, err := l.DeleteAttention(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

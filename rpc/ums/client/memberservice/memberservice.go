@@ -44,8 +44,6 @@ type (
 	MemberAddResp                           = umsclient.MemberAddResp
 	MemberBrandAttentionAddReq              = umsclient.MemberBrandAttentionAddReq
 	MemberBrandAttentionAddResp             = umsclient.MemberBrandAttentionAddResp
-	MemberBrandAttentionClearReq            = umsclient.MemberBrandAttentionClearReq
-	MemberBrandAttentionClearResp           = umsclient.MemberBrandAttentionClearResp
 	MemberBrandAttentionDeleteReq           = umsclient.MemberBrandAttentionDeleteReq
 	MemberBrandAttentionDeleteResp          = umsclient.MemberBrandAttentionDeleteResp
 	MemberBrandAttentionListData            = umsclient.MemberBrandAttentionListData

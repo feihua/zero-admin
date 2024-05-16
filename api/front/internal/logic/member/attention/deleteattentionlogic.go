@@ -11,30 +11,30 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AttentionDeleteLogic
+// DeleteAttentionLogic //取消品牌关注/清空当前用户品牌关注列表
 /*
 Author: LiuFeiHua
-Date: 2023/12/4 17:12
+Date: 2024/5/16 11:03
 */
-type AttentionDeleteLogic struct {
+type DeleteAttentionLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewAttentionDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AttentionDeleteLogic {
-	return &AttentionDeleteLogic{
+func NewDeleteAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteAttentionLogic {
+	return &DeleteAttentionLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// AttentionDelete 取消关注
-func (l *AttentionDeleteLogic) AttentionDelete(req *types.DeleteAttentionReq) (resp *types.DeleteAttentionResp, err error) {
+// DeleteAttention //取消品牌关注/清空当前用户品牌关注列表
+func (l *DeleteAttentionLogic) DeleteAttention(req *types.DeleteAttentionReq) (resp *types.DeleteAttentionResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.MemberAttentionService.MemberBrandAttentionDelete(l.ctx, &umsclient.MemberBrandAttentionDeleteReq{
-		Id:       req.Id,
+		BrandIds: req.BrandIds,
 		MemberId: memberId,
 	})
 

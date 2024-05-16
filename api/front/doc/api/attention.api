@@ -5,13 +5,13 @@ info(
 )
 
 type (
-	addAttentionReq {
+	AddAttentionReq {
 		BrandId        int64     `json:"brandId"`         // 品牌id
 		BrandName      string    `json:"brandName"`      // 品牌名称
 		BrandLogo      string    `json:"brandLogo"`      // 品牌Logo
 		BrandCity      string    `json:"brandCity"`       // 品牌所在城市
 	}
-	addAttentionResp {
+	AddAttentionResp {
 		Code    int64  `json:"code"`
 		Message string `json:"message"`
 	}
@@ -34,12 +34,8 @@ type (
 		Message  string                  `json:"message"`
 	}
 
-	ClearAttentionResp {
-		Code    int64  `json:"code"`
-		Message string `json:"message"`
-	}
 	DeleteAttentionReq {
-		Id int64 `path:"id"`
+		BrandIds []int64 `form:"brandId"`
 	}
 	DeleteAttentionResp {
 		Code    int64  `json:"code"`
@@ -53,16 +49,19 @@ type (
 	prefix: /api/member/attention
 )
 service front-api {
-	@handler AttentionAdd
-	post /add (addAttentionReq) returns (addAttentionResp)
-	
-	@handler AttentionList
-	get /list returns (ListAttentionResp)
-	
-	@handler AttentionDelete
-	get /delete/:id (DeleteAttentionReq) returns (DeleteAttentionResp)
 
-	@handler AttentionClear
-	get /clear returns (ClearAttentionResp)
+	//添加品牌关注
+	@handler AddAttention
+	post /addAttention (AddAttentionReq) returns (AddAttentionResp)
+
+	//分页查询当前用户品牌关注列表
+	@handler QueryAttentionList
+	get /queryAttentionList returns (ListAttentionResp)
+
+	//取消品牌关注/清空当前用户品牌关注列表
+	@handler DeleteAttention
+	get /deleteAttention (DeleteAttentionReq) returns (DeleteAttentionResp)
+
+
 
 }

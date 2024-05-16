@@ -217,23 +217,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/add",
-				Handler: memberattention.AttentionAddHandler(serverCtx),
+				Path:    "/addAttention",
+				Handler: memberattention.AddAttentionHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/clear",
-				Handler: memberattention.AttentionClearHandler(serverCtx),
+				Path:    "/deleteAttention",
+				Handler: memberattention.DeleteAttentionHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/delete/:id",
-				Handler: memberattention.AttentionDeleteHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/list",
-				Handler: memberattention.AttentionListHandler(serverCtx),
+				Path:    "/queryAttentionList",
+				Handler: memberattention.QueryAttentionListHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

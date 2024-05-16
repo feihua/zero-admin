@@ -3157,7 +3157,6 @@ var MemberReadHistoryService_ServiceDesc = grpc.ServiceDesc{
 const (
 	MemberAttentionService_MemberBrandAttentionAdd_FullMethodName    = "/umsclient.MemberAttentionService/MemberBrandAttentionAdd"
 	MemberAttentionService_MemberBrandAttentionDelete_FullMethodName = "/umsclient.MemberAttentionService/MemberBrandAttentionDelete"
-	MemberAttentionService_MemberBrandAttentionClear_FullMethodName  = "/umsclient.MemberAttentionService/MemberBrandAttentionClear"
 	MemberAttentionService_MemberBrandAttentionList_FullMethodName   = "/umsclient.MemberAttentionService/MemberBrandAttentionList"
 )
 
@@ -3165,9 +3164,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MemberAttentionServiceClient interface {
+	// 添加品牌关注
 	MemberBrandAttentionAdd(ctx context.Context, in *MemberBrandAttentionAddReq, opts ...grpc.CallOption) (*MemberBrandAttentionAddResp, error)
+	// 取消品牌关注/清空当前用户品牌关注列表
 	MemberBrandAttentionDelete(ctx context.Context, in *MemberBrandAttentionDeleteReq, opts ...grpc.CallOption) (*MemberBrandAttentionDeleteResp, error)
-	MemberBrandAttentionClear(ctx context.Context, in *MemberBrandAttentionClearReq, opts ...grpc.CallOption) (*MemberBrandAttentionClearResp, error)
+	// 分页查询当前用户品牌关注列表
 	MemberBrandAttentionList(ctx context.Context, in *MemberBrandAttentionListReq, opts ...grpc.CallOption) (*MemberBrandAttentionListResp, error)
 }
 
@@ -3197,15 +3198,6 @@ func (c *memberAttentionServiceClient) MemberBrandAttentionDelete(ctx context.Co
 	return out, nil
 }
 
-func (c *memberAttentionServiceClient) MemberBrandAttentionClear(ctx context.Context, in *MemberBrandAttentionClearReq, opts ...grpc.CallOption) (*MemberBrandAttentionClearResp, error) {
-	out := new(MemberBrandAttentionClearResp)
-	err := c.cc.Invoke(ctx, MemberAttentionService_MemberBrandAttentionClear_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *memberAttentionServiceClient) MemberBrandAttentionList(ctx context.Context, in *MemberBrandAttentionListReq, opts ...grpc.CallOption) (*MemberBrandAttentionListResp, error) {
 	out := new(MemberBrandAttentionListResp)
 	err := c.cc.Invoke(ctx, MemberAttentionService_MemberBrandAttentionList_FullMethodName, in, out, opts...)
@@ -3219,9 +3211,11 @@ func (c *memberAttentionServiceClient) MemberBrandAttentionList(ctx context.Cont
 // All implementations must embed UnimplementedMemberAttentionServiceServer
 // for forward compatibility
 type MemberAttentionServiceServer interface {
+	// 添加品牌关注
 	MemberBrandAttentionAdd(context.Context, *MemberBrandAttentionAddReq) (*MemberBrandAttentionAddResp, error)
+	// 取消品牌关注/清空当前用户品牌关注列表
 	MemberBrandAttentionDelete(context.Context, *MemberBrandAttentionDeleteReq) (*MemberBrandAttentionDeleteResp, error)
-	MemberBrandAttentionClear(context.Context, *MemberBrandAttentionClearReq) (*MemberBrandAttentionClearResp, error)
+	// 分页查询当前用户品牌关注列表
 	MemberBrandAttentionList(context.Context, *MemberBrandAttentionListReq) (*MemberBrandAttentionListResp, error)
 	mustEmbedUnimplementedMemberAttentionServiceServer()
 }
@@ -3235,9 +3229,6 @@ func (UnimplementedMemberAttentionServiceServer) MemberBrandAttentionAdd(context
 }
 func (UnimplementedMemberAttentionServiceServer) MemberBrandAttentionDelete(context.Context, *MemberBrandAttentionDeleteReq) (*MemberBrandAttentionDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberBrandAttentionDelete not implemented")
-}
-func (UnimplementedMemberAttentionServiceServer) MemberBrandAttentionClear(context.Context, *MemberBrandAttentionClearReq) (*MemberBrandAttentionClearResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MemberBrandAttentionClear not implemented")
 }
 func (UnimplementedMemberAttentionServiceServer) MemberBrandAttentionList(context.Context, *MemberBrandAttentionListReq) (*MemberBrandAttentionListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MemberBrandAttentionList not implemented")
@@ -3292,24 +3283,6 @@ func _MemberAttentionService_MemberBrandAttentionDelete_Handler(srv interface{},
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MemberAttentionService_MemberBrandAttentionClear_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MemberBrandAttentionClearReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberAttentionServiceServer).MemberBrandAttentionClear(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MemberAttentionService_MemberBrandAttentionClear_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberAttentionServiceServer).MemberBrandAttentionClear(ctx, req.(*MemberBrandAttentionClearReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _MemberAttentionService_MemberBrandAttentionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MemberBrandAttentionListReq)
 	if err := dec(in); err != nil {
@@ -3342,10 +3315,6 @@ var MemberAttentionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MemberBrandAttentionDelete",
 			Handler:    _MemberAttentionService_MemberBrandAttentionDelete_Handler,
-		},
-		{
-			MethodName: "MemberBrandAttentionClear",
-			Handler:    _MemberAttentionService_MemberBrandAttentionClear_Handler,
 		},
 		{
 			MethodName: "MemberBrandAttentionList",

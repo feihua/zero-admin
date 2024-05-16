@@ -11,27 +11,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AttentionListLogic
+// QueryAttentionListLogic 查询会员关注的列表
 /*
 Author: LiuFeiHua
-Date: 2023/12/4 17:15
+Date: 2024/5/16 11:04
 */
-type AttentionListLogic struct {
+type QueryAttentionListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewAttentionListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AttentionListLogic {
-	return &AttentionListLogic{
+func NewQueryAttentionListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryAttentionListLogic {
+	return &QueryAttentionListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// AttentionList 查询会员关注的列表
-func (l *AttentionListLogic) AttentionList() (resp *types.ListAttentionResp, err error) {
+// QueryAttentionList 查询会员关注的列表
+func (l *QueryAttentionListLogic) QueryAttentionList() (resp *types.ListAttentionResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	var attentionList, _ = l.svcCtx.MemberAttentionService.MemberBrandAttentionList(l.ctx, &umsclient.MemberBrandAttentionListReq{
 		MemberId: memberId,

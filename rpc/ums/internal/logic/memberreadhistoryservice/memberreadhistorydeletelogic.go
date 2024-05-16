@@ -34,7 +34,7 @@ func (l *MemberReadHistoryDeleteLogic) MemberReadHistoryDelete(in *umsclient.Mem
 	q := query.UmsMemberReadHistory
 	historyDo := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId))
 	if len(in.Ids) > 0 {
-		historyDo.Where(q.ID.In(in.Ids...))
+		historyDo = historyDo.Where(q.ID.In(in.Ids...))
 	}
 	_, err := historyDo.Delete()
 	if err != nil {

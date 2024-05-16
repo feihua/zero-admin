@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MemberBrandAttentionListLogic
+// MemberBrandAttentionListLogic 查询品牌关注列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/4 16:42
@@ -21,7 +21,6 @@ type MemberBrandAttentionListLogic struct {
 	logx.Logger
 }
 
-// NewMemberBrandAttentionListLogic 查询品牌关注列表
 func NewMemberBrandAttentionListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MemberBrandAttentionListLogic {
 	return &MemberBrandAttentionListLogic{
 		ctx:    ctx,
@@ -30,6 +29,7 @@ func NewMemberBrandAttentionListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
+// MemberBrandAttentionList 查询品牌关注列表
 func (l *MemberBrandAttentionListLogic) MemberBrandAttentionList(in *umsclient.MemberBrandAttentionListReq) (*umsclient.MemberBrandAttentionListResp, error) {
 	q := query.UmsMemberBrandAttention.WithContext(l.ctx)
 	if in.MemberId != 0 {

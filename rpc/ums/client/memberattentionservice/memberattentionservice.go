@@ -44,8 +44,6 @@ type (
 	MemberAddResp                           = umsclient.MemberAddResp
 	MemberBrandAttentionAddReq              = umsclient.MemberBrandAttentionAddReq
 	MemberBrandAttentionAddResp             = umsclient.MemberBrandAttentionAddResp
-	MemberBrandAttentionClearReq            = umsclient.MemberBrandAttentionClearReq
-	MemberBrandAttentionClearResp           = umsclient.MemberBrandAttentionClearResp
 	MemberBrandAttentionDeleteReq           = umsclient.MemberBrandAttentionDeleteReq
 	MemberBrandAttentionDeleteResp          = umsclient.MemberBrandAttentionDeleteResp
 	MemberBrandAttentionListData            = umsclient.MemberBrandAttentionListData
@@ -162,9 +160,11 @@ type (
 	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	MemberAttentionService interface {
+		// 添加品牌关注
 		MemberBrandAttentionAdd(ctx context.Context, in *MemberBrandAttentionAddReq, opts ...grpc.CallOption) (*MemberBrandAttentionAddResp, error)
+		// 取消品牌关注/清空当前用户品牌关注列表
 		MemberBrandAttentionDelete(ctx context.Context, in *MemberBrandAttentionDeleteReq, opts ...grpc.CallOption) (*MemberBrandAttentionDeleteResp, error)
-		MemberBrandAttentionClear(ctx context.Context, in *MemberBrandAttentionClearReq, opts ...grpc.CallOption) (*MemberBrandAttentionClearResp, error)
+		// 分页查询当前用户品牌关注列表
 		MemberBrandAttentionList(ctx context.Context, in *MemberBrandAttentionListReq, opts ...grpc.CallOption) (*MemberBrandAttentionListResp, error)
 	}
 
@@ -179,21 +179,19 @@ func NewMemberAttentionService(cli zrpc.Client) MemberAttentionService {
 	}
 }
 
+// 添加品牌关注
 func (m *defaultMemberAttentionService) MemberBrandAttentionAdd(ctx context.Context, in *MemberBrandAttentionAddReq, opts ...grpc.CallOption) (*MemberBrandAttentionAddResp, error) {
 	client := umsclient.NewMemberAttentionServiceClient(m.cli.Conn())
 	return client.MemberBrandAttentionAdd(ctx, in, opts...)
 }
 
+// 取消品牌关注/清空当前用户品牌关注列表
 func (m *defaultMemberAttentionService) MemberBrandAttentionDelete(ctx context.Context, in *MemberBrandAttentionDeleteReq, opts ...grpc.CallOption) (*MemberBrandAttentionDeleteResp, error) {
 	client := umsclient.NewMemberAttentionServiceClient(m.cli.Conn())
 	return client.MemberBrandAttentionDelete(ctx, in, opts...)
 }
 
-func (m *defaultMemberAttentionService) MemberBrandAttentionClear(ctx context.Context, in *MemberBrandAttentionClearReq, opts ...grpc.CallOption) (*MemberBrandAttentionClearResp, error) {
-	client := umsclient.NewMemberAttentionServiceClient(m.cli.Conn())
-	return client.MemberBrandAttentionClear(ctx, in, opts...)
-}
-
+// 分页查询当前用户品牌关注列表
 func (m *defaultMemberAttentionService) MemberBrandAttentionList(ctx context.Context, in *MemberBrandAttentionListReq, opts ...grpc.CallOption) (*MemberBrandAttentionListResp, error) {
 	client := umsclient.NewMemberAttentionServiceClient(m.cli.Conn())
 	return client.MemberBrandAttentionList(ctx, in, opts...)
