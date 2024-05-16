@@ -13,6 +13,19 @@ type AddAttentionResp struct {
 	Message string `json:"message"`
 }
 
+type AddProductCollectionReq struct {
+	ProductId       int64  `json:"productId"`       // 商品id
+	ProductName     string `json:"productName"`     // 商品名称
+	ProductPic      string `json:"productPic"`      // 商品图片
+	ProductSubTitle string `json:"productSubTitle"` // 商品标题
+	ProductPrice    int64  `json:"productPrice"`    // 商品价格
+}
+
+type AddProductCollectionResp struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
 type AddReadHistoryReq struct {
 	ProductId       int64  `json:"productId"`       // 商品id
 	ProductName     string `json:"productName"`     // 商品名称
@@ -899,7 +912,7 @@ type ProductCollectionClearResp struct {
 }
 
 type ProductCollectionDeleteReq struct {
-	Id int64 `path:"id"`
+	Ids []int64 `form:"ids"`
 }
 
 type ProductCollectionDeleteResp struct {
@@ -1285,19 +1298,6 @@ type AddMemberAddressReq struct {
 }
 
 type AddMemberAddressResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type AddProductCollectionReq struct {
-	ProductId       int64  `json:"productId"`       // 商品id
-	ProductName     string `json:"productName"`     // 商品名称
-	ProductPic      string `json:"productPic"`      // 商品图片
-	ProductSubTitle string `json:"productSubTitle"` // 商品标题
-	ProductPrice    int64  `json:"productPrice"`    // 商品价格
-}
-
-type AddProductCollectionResp struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
 }

@@ -8,10 +8,10 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func ProductCollectionClearHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QueryProductCollectionListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := collection.NewProductCollectionClearLogic(r.Context(), svcCtx)
-		resp, err := l.ProductCollectionClear()
+		l := collection.NewQueryProductCollectionListLogic(r.Context(), svcCtx)
+		resp, err := l.QueryProductCollectionList()
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

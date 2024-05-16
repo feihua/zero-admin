@@ -160,8 +160,11 @@ type (
 	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	MemberProductCollectionService interface {
+		// 添加商品收藏
 		MemberProductCollectionAdd(ctx context.Context, in *MemberProductCollectionAddReq, opts ...grpc.CallOption) (*MemberProductCollectionAddResp, error)
+		// 删除商品收藏/清空当前用户商品收藏列表
 		MemberProductCollectionDelete(ctx context.Context, in *MemberProductCollectionDeleteReq, opts ...grpc.CallOption) (*MemberProductCollectionDeleteResp, error)
+		// 分页查询商品收藏列表
 		MemberProductCollectionList(ctx context.Context, in *MemberProductCollectionListReq, opts ...grpc.CallOption) (*MemberProductCollectionListResp, error)
 	}
 
@@ -176,16 +179,19 @@ func NewMemberProductCollectionService(cli zrpc.Client) MemberProductCollectionS
 	}
 }
 
+// 添加商品收藏
 func (m *defaultMemberProductCollectionService) MemberProductCollectionAdd(ctx context.Context, in *MemberProductCollectionAddReq, opts ...grpc.CallOption) (*MemberProductCollectionAddResp, error) {
 	client := umsclient.NewMemberProductCollectionServiceClient(m.cli.Conn())
 	return client.MemberProductCollectionAdd(ctx, in, opts...)
 }
 
+// 删除商品收藏/清空当前用户商品收藏列表
 func (m *defaultMemberProductCollectionService) MemberProductCollectionDelete(ctx context.Context, in *MemberProductCollectionDeleteReq, opts ...grpc.CallOption) (*MemberProductCollectionDeleteResp, error) {
 	client := umsclient.NewMemberProductCollectionServiceClient(m.cli.Conn())
 	return client.MemberProductCollectionDelete(ctx, in, opts...)
 }
 
+// 分页查询商品收藏列表
 func (m *defaultMemberProductCollectionService) MemberProductCollectionList(ctx context.Context, in *MemberProductCollectionListReq, opts ...grpc.CallOption) (*MemberProductCollectionListResp, error) {
 	client := umsclient.NewMemberProductCollectionServiceClient(m.cli.Conn())
 	return client.MemberProductCollectionList(ctx, in, opts...)

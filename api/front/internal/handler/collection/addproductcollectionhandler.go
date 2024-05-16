@@ -9,7 +9,7 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func AddProductCollectionAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func AddProductCollectionHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.AddProductCollectionReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +17,8 @@ func AddProductCollectionAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc
 			return
 		}
 
-		l := collection.NewAddProductCollectionAddLogic(r.Context(), svcCtx)
-		resp, err := l.AddProductCollectionAdd(&req)
+		l := collection.NewAddProductCollectionLogic(r.Context(), svcCtx)
+		resp, err := l.AddProductCollection(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

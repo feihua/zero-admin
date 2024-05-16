@@ -11,27 +11,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// ProductCollectionListLogic
+// QueryProductCollectionListLogic 查询会员收藏的商品
 /*
 Author: LiuFeiHua
-Date: 2023/11/29 16:31
+Date: 2024/5/16 13:44
 */
-type ProductCollectionListLogic struct {
+type QueryProductCollectionListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewProductCollectionListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductCollectionListLogic {
-	return &ProductCollectionListLogic{
+func NewQueryProductCollectionListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryProductCollectionListLogic {
+	return &QueryProductCollectionListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// ProductCollectionList 查询会员收藏的商品
-func (l *ProductCollectionListLogic) ProductCollectionList() (resp *types.ProductCollectionListResp, err error) {
+// QueryProductCollectionList 查询会员收藏的商品
+func (l *QueryProductCollectionListLogic) QueryProductCollectionList() (resp *types.ProductCollectionListResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	collectionList, _ := l.svcCtx.MemberProductCollectionService.MemberProductCollectionList(l.ctx, &umsclient.MemberProductCollectionListReq{
 		Current:   1,

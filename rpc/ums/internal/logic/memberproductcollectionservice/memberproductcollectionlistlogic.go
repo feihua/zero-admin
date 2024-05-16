@@ -30,7 +30,7 @@ func NewMemberProductCollectionListLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
-// MemberProductCollectionList 收藏列表
+// MemberProductCollectionList 分页查询商品收藏列表
 func (l *MemberProductCollectionListLogic) MemberProductCollectionList(in *umsclient.MemberProductCollectionListReq) (*umsclient.MemberProductCollectionListResp, error) {
 	q := query.UmsMemberProductCollection.WithContext(l.ctx)
 	if in.MemberId != 0 {

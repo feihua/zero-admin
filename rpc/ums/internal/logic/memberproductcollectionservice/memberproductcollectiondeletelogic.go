@@ -29,10 +29,14 @@ func NewMemberProductCollectionDeleteLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
-// MemberProductCollectionDelete 删除会员收藏的商品
+// MemberProductCollectionDelete 删除商品收藏/清空当前用户商品收藏列表
 func (l *MemberProductCollectionDeleteLogic) MemberProductCollectionDelete(in *umsclient.MemberProductCollectionDeleteReq) (*umsclient.MemberProductCollectionDeleteResp, error) {
 	q := query.UmsMemberProductCollection
-	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).Delete()
+	collectionDo := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId))
+	if len(in.Ids) > 0 {
+		collectionDo = collectionDo.Where(q.ID.In(in.Ids...))
+	}
+	_, err := collectionDo.Delete()
 	if err != nil {
 		return nil, err
 	}

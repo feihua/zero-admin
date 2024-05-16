@@ -1,23 +1,23 @@
 info(
-	desc: "浏览记录"
+	desc: "会员商品收藏管理"
 	author: "koobe"
 	email: "1002219331@qq.com"
 )
 
-type addProductCollectionReq {
+type AddProductCollectionReq {
 	ProductId       int64   `json:"productId"`       // 商品id
 	ProductName     string  `json:"productName"`     // 商品名称
 	ProductPic      string  `json:"productPic"`      // 商品图片
 	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
     ProductPrice int64 `json:"productPrice"`         // 商品价格
 }
-type addProductCollectionResp {
+type AddProductCollectionResp {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
 }
 
 type ProductCollectionDeleteReq {
-	Id int64 `path:"id"`
+	Ids []int64 `form:"ids"`
 }
 
 type ProductCollectionDeleteResp {
@@ -56,15 +56,17 @@ type ProductCollectionClearResp {
 	prefix: /api/collection
 )
 service front-api {
-	@handler AddProductCollectionAdd
-	post /add (addProductCollectionReq) returns (addProductCollectionResp)
-	
-	@handler ProductCollectionDelete
-	get /delete/:id (ProductCollectionDeleteReq) returns (ProductCollectionDeleteResp)
-	
-	@handler ProductCollectionList
-	get /list returns (ProductCollectionListResp)
-	
-	@handler ProductCollectionClear
-	get /clear returns (ProductCollectionClearResp)
+
+	//添加商品收藏
+	@handler AddProductCollection
+	post /addProductCollection (AddProductCollectionReq) returns (AddProductCollectionResp)
+
+	//删除商品收藏/清空当前用户商品收藏列表
+	@handler DeleteProductCollection
+	get /deleteProductCollection (ProductCollectionDeleteReq) returns (ProductCollectionDeleteResp)
+
+	//分页查询商品收藏列表
+	@handler QueryProductCollectionList
+	get /queryProductCollectionList returns (ProductCollectionListResp)
+
 }

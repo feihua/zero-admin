@@ -110,23 +110,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/add",
-				Handler: collection.AddProductCollectionAddHandler(serverCtx),
+				Path:    "/addProductCollection",
+				Handler: collection.AddProductCollectionHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/clear",
-				Handler: collection.ProductCollectionClearHandler(serverCtx),
+				Path:    "/deleteProductCollection",
+				Handler: collection.DeleteProductCollectionHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/delete/:id",
-				Handler: collection.ProductCollectionDeleteHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/list",
-				Handler: collection.ProductCollectionListHandler(serverCtx),
+				Path:    "/queryProductCollectionList",
+				Handler: collection.QueryProductCollectionListHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

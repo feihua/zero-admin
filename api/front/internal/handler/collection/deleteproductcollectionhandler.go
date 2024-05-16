@@ -9,7 +9,7 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func ProductCollectionDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeleteProductCollectionHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ProductCollectionDeleteReq
 		if err := httpx.Parse(r, &req); err != nil {
@@ -17,8 +17,8 @@ func ProductCollectionDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc
 			return
 		}
 
-		l := collection.NewProductCollectionDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.ProductCollectionDelete(&req)
+		l := collection.NewDeleteProductCollectionLogic(r.Context(), svcCtx)
+		resp, err := l.DeleteProductCollection(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

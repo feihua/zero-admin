@@ -12,27 +12,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddProductCollectionAddLogic 收藏相关
+// AddProductCollectionLogic 添加商品收藏
 /*
 Author: LiuFeiHua
-Date: 2023/11/30 11:40
+Date: 2024/5/16 13:45
 */
-type AddProductCollectionAddLogic struct {
+type AddProductCollectionLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewAddProductCollectionAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddProductCollectionAddLogic {
-	return &AddProductCollectionAddLogic{
+func NewAddProductCollectionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddProductCollectionLogic {
+	return &AddProductCollectionLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// AddProductCollectionAdd 会员收藏商品
-func (l *AddProductCollectionAddLogic) AddProductCollectionAdd(req *types.AddProductCollectionReq) (resp *types.AddProductCollectionResp, err error) {
+// AddProductCollection 添加商品收藏
+func (l *AddProductCollectionLogic) AddProductCollection(req *types.AddProductCollectionReq) (resp *types.AddProductCollectionResp, err error) {
 	//从token中获取会员id
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})

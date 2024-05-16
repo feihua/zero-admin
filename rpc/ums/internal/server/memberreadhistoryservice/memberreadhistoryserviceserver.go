@@ -22,16 +22,19 @@ func NewMemberReadHistoryServiceServer(svcCtx *svc.ServiceContext) *MemberReadHi
 	}
 }
 
+// 创建浏览记录
 func (s *MemberReadHistoryServiceServer) MemberReadHistoryAdd(ctx context.Context, in *umsclient.MemberReadHistoryAddReq) (*umsclient.MemberReadHistoryAddResp, error) {
 	l := memberreadhistoryservicelogic.NewMemberReadHistoryAddLogic(ctx, s.svcCtx)
 	return l.MemberReadHistoryAdd(in)
 }
 
+// 清空浏览记录/删除浏览记录
 func (s *MemberReadHistoryServiceServer) MemberReadHistoryDelete(ctx context.Context, in *umsclient.MemberReadHistoryDeleteReq) (*umsclient.MemberReadHistoryDeleteResp, error) {
 	l := memberreadhistoryservicelogic.NewMemberReadHistoryDeleteLogic(ctx, s.svcCtx)
 	return l.MemberReadHistoryDelete(in)
 }
 
+// 获取浏览记录
 func (s *MemberReadHistoryServiceServer) MemberReadHistoryList(ctx context.Context, in *umsclient.MemberReadHistoryListReq) (*umsclient.MemberReadHistoryListResp, error) {
 	l := memberreadhistoryservicelogic.NewMemberReadHistoryListLogic(ctx, s.svcCtx)
 	return l.MemberReadHistoryList(in)

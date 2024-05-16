@@ -2834,8 +2834,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MemberProductCollectionServiceClient interface {
+	// 添加商品收藏
 	MemberProductCollectionAdd(ctx context.Context, in *MemberProductCollectionAddReq, opts ...grpc.CallOption) (*MemberProductCollectionAddResp, error)
+	// 删除商品收藏/清空当前用户商品收藏列表
 	MemberProductCollectionDelete(ctx context.Context, in *MemberProductCollectionDeleteReq, opts ...grpc.CallOption) (*MemberProductCollectionDeleteResp, error)
+	// 分页查询商品收藏列表
 	MemberProductCollectionList(ctx context.Context, in *MemberProductCollectionListReq, opts ...grpc.CallOption) (*MemberProductCollectionListResp, error)
 }
 
@@ -2878,8 +2881,11 @@ func (c *memberProductCollectionServiceClient) MemberProductCollectionList(ctx c
 // All implementations must embed UnimplementedMemberProductCollectionServiceServer
 // for forward compatibility
 type MemberProductCollectionServiceServer interface {
+	// 添加商品收藏
 	MemberProductCollectionAdd(context.Context, *MemberProductCollectionAddReq) (*MemberProductCollectionAddResp, error)
+	// 删除商品收藏/清空当前用户商品收藏列表
 	MemberProductCollectionDelete(context.Context, *MemberProductCollectionDeleteReq) (*MemberProductCollectionDeleteResp, error)
+	// 分页查询商品收藏列表
 	MemberProductCollectionList(context.Context, *MemberProductCollectionListReq) (*MemberProductCollectionListResp, error)
 	mustEmbedUnimplementedMemberProductCollectionServiceServer()
 }
@@ -2999,8 +3005,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MemberReadHistoryServiceClient interface {
+	// 创建浏览记录
 	MemberReadHistoryAdd(ctx context.Context, in *MemberReadHistoryAddReq, opts ...grpc.CallOption) (*MemberReadHistoryAddResp, error)
+	// 清空浏览记录/删除浏览记录
 	MemberReadHistoryDelete(ctx context.Context, in *MemberReadHistoryDeleteReq, opts ...grpc.CallOption) (*MemberReadHistoryDeleteResp, error)
+	// 获取浏览记录
 	MemberReadHistoryList(ctx context.Context, in *MemberReadHistoryListReq, opts ...grpc.CallOption) (*MemberReadHistoryListResp, error)
 }
 
@@ -3043,8 +3052,11 @@ func (c *memberReadHistoryServiceClient) MemberReadHistoryList(ctx context.Conte
 // All implementations must embed UnimplementedMemberReadHistoryServiceServer
 // for forward compatibility
 type MemberReadHistoryServiceServer interface {
+	// 创建浏览记录
 	MemberReadHistoryAdd(context.Context, *MemberReadHistoryAddReq) (*MemberReadHistoryAddResp, error)
+	// 清空浏览记录/删除浏览记录
 	MemberReadHistoryDelete(context.Context, *MemberReadHistoryDeleteReq) (*MemberReadHistoryDeleteResp, error)
+	// 获取浏览记录
 	MemberReadHistoryList(context.Context, *MemberReadHistoryListReq) (*MemberReadHistoryListResp, error)
 	mustEmbedUnimplementedMemberReadHistoryServiceServer()
 }

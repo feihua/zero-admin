@@ -22,16 +22,19 @@ func NewMemberProductCollectionServiceServer(svcCtx *svc.ServiceContext) *Member
 	}
 }
 
+// 添加商品收藏
 func (s *MemberProductCollectionServiceServer) MemberProductCollectionAdd(ctx context.Context, in *umsclient.MemberProductCollectionAddReq) (*umsclient.MemberProductCollectionAddResp, error) {
 	l := memberproductcollectionservicelogic.NewMemberProductCollectionAddLogic(ctx, s.svcCtx)
 	return l.MemberProductCollectionAdd(in)
 }
 
+// 删除商品收藏/清空当前用户商品收藏列表
 func (s *MemberProductCollectionServiceServer) MemberProductCollectionDelete(ctx context.Context, in *umsclient.MemberProductCollectionDeleteReq) (*umsclient.MemberProductCollectionDeleteResp, error) {
 	l := memberproductcollectionservicelogic.NewMemberProductCollectionDeleteLogic(ctx, s.svcCtx)
 	return l.MemberProductCollectionDelete(in)
 }
 
+// 分页查询商品收藏列表
 func (s *MemberProductCollectionServiceServer) MemberProductCollectionList(ctx context.Context, in *umsclient.MemberProductCollectionListReq) (*umsclient.MemberProductCollectionListResp, error) {
 	l := memberproductcollectionservicelogic.NewMemberProductCollectionListLogic(ctx, s.svcCtx)
 	return l.MemberProductCollectionList(in)

@@ -160,8 +160,11 @@ type (
 	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	MemberReadHistoryService interface {
+		// 创建浏览记录
 		MemberReadHistoryAdd(ctx context.Context, in *MemberReadHistoryAddReq, opts ...grpc.CallOption) (*MemberReadHistoryAddResp, error)
+		// 清空浏览记录/删除浏览记录
 		MemberReadHistoryDelete(ctx context.Context, in *MemberReadHistoryDeleteReq, opts ...grpc.CallOption) (*MemberReadHistoryDeleteResp, error)
+		// 获取浏览记录
 		MemberReadHistoryList(ctx context.Context, in *MemberReadHistoryListReq, opts ...grpc.CallOption) (*MemberReadHistoryListResp, error)
 	}
 
@@ -176,16 +179,19 @@ func NewMemberReadHistoryService(cli zrpc.Client) MemberReadHistoryService {
 	}
 }
 
+// 创建浏览记录
 func (m *defaultMemberReadHistoryService) MemberReadHistoryAdd(ctx context.Context, in *MemberReadHistoryAddReq, opts ...grpc.CallOption) (*MemberReadHistoryAddResp, error) {
 	client := umsclient.NewMemberReadHistoryServiceClient(m.cli.Conn())
 	return client.MemberReadHistoryAdd(ctx, in, opts...)
 }
 
+// 清空浏览记录/删除浏览记录
 func (m *defaultMemberReadHistoryService) MemberReadHistoryDelete(ctx context.Context, in *MemberReadHistoryDeleteReq, opts ...grpc.CallOption) (*MemberReadHistoryDeleteResp, error) {
 	client := umsclient.NewMemberReadHistoryServiceClient(m.cli.Conn())
 	return client.MemberReadHistoryDelete(ctx, in, opts...)
 }
 
+// 获取浏览记录
 func (m *defaultMemberReadHistoryService) MemberReadHistoryList(ctx context.Context, in *MemberReadHistoryListReq, opts ...grpc.CallOption) (*MemberReadHistoryListResp, error) {
 	client := umsclient.NewMemberReadHistoryServiceClient(m.cli.Conn())
 	return client.MemberReadHistoryList(ctx, in, opts...)

@@ -944,7 +944,7 @@ message MemberProductCollectionAddResp {
 }
 
 message MemberProductCollectionDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
   int64 MemberId = 2; //会员id
 }
 
@@ -980,9 +980,11 @@ message MemberProductCollectionListResp {
   repeated  MemberProductCollectionListData list = 2;
 }
 service MemberProductCollectionService {
-
+  //添加商品收藏
   rpc MemberProductCollectionAdd(MemberProductCollectionAddReq) returns (MemberProductCollectionAddResp){}
+  //删除商品收藏/清空当前用户商品收藏列表
   rpc MemberProductCollectionDelete(MemberProductCollectionDeleteReq) returns (MemberProductCollectionDeleteResp){}
+  //分页查询商品收藏列表
   rpc MemberProductCollectionList(MemberProductCollectionListReq) returns (MemberProductCollectionListResp){}
 
 }
@@ -1044,10 +1046,11 @@ message MemberReadHistoryListResp {
 }
 
 service MemberReadHistoryService {
-
+  //创建浏览记录
   rpc MemberReadHistoryAdd(MemberReadHistoryAddReq) returns (MemberReadHistoryAddResp){}
+  //清空浏览记录/删除浏览记录
   rpc MemberReadHistoryDelete(MemberReadHistoryDeleteReq) returns (MemberReadHistoryDeleteResp){}
-
+  //获取浏览记录
   rpc MemberReadHistoryList(MemberReadHistoryListReq) returns (MemberReadHistoryListResp){}
 }
 
