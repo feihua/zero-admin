@@ -8,10 +8,10 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func ReadHistoryClearHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QueryReadHistoryListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := history.NewReadHistoryClearLogic(r.Context(), svcCtx)
-		resp, err := l.ReadHistoryClear()
+		l := history.NewQueryReadHistoryListLogic(r.Context(), svcCtx)
+		resp, err := l.QueryReadHistoryList()
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

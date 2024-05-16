@@ -11,34 +11,35 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// ReadHistoryClearLogic
+// DeleteReadHistoryLogic
 /*
 Author: LiuFeiHua
-Date: 2023/11/30 16:29
+Date: 2024/5/16 10:47
 */
-type ReadHistoryClearLogic struct {
+type DeleteReadHistoryLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewReadHistoryClearLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ReadHistoryClearLogic {
-	return &ReadHistoryClearLogic{
+func NewDeleteReadHistoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteReadHistoryLogic {
+	return &DeleteReadHistoryLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// ReadHistoryClear 清空浏览记录
-func (l *ReadHistoryClearLogic) ReadHistoryClear() (resp *types.ReadHistoryClearResp, err error) {
+// DeleteReadHistory 删除浏览记录
+func (l *DeleteReadHistoryLogic) DeleteReadHistory(req *types.ReadHistoryDeleteReq) (resp *types.ReadHistoryDeleteResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
 	_, _ = l.svcCtx.MemberReadHistoryService.MemberReadHistoryDelete(l.ctx, &umsclient.MemberReadHistoryDeleteReq{
+		Ids:      req.Ids,
 		MemberId: memberId,
 	})
 
-	return &types.ReadHistoryClearResp{
+	return &types.ReadHistoryDeleteResp{
 		Code:    0,
-		Message: "操作成功",
+		Message: "删除浏览记录",
 	}, nil
 }

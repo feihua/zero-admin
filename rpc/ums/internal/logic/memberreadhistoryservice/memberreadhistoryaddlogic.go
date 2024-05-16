@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MemberReadHistoryAddLogic
+// MemberReadHistoryAddLogic 添加浏览商品记录
 /*
 Author: LiuFeiHua
 Date: 2023/11/30 16:43

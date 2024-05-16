@@ -32,7 +32,11 @@ func NewMemberReadHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // MemberReadHistoryDelete 删除会员浏览记录
 func (l *MemberReadHistoryDeleteLogic) MemberReadHistoryDelete(in *umsclient.MemberReadHistoryDeleteReq) (*umsclient.MemberReadHistoryDeleteResp, error) {
 	q := query.UmsMemberReadHistory
-	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).Delete()
+	historyDo := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId))
+	if len(in.Ids) > 0 {
+		historyDo.Where(q.ID.In(in.Ids...))
+	}
+	_, err := historyDo.Delete()
 	if err != nil {
 		return nil, err
 	}

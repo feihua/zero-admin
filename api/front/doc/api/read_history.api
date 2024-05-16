@@ -4,20 +4,20 @@ info(
 	email: "1002219331@qq.com"
 )
 
-type addReadHistoryReq {
+type AddReadHistoryReq {
 	ProductId       int64   `json:"productId"`       // 商品id
 	ProductName     string  `json:"productName"`     // 商品名称
 	ProductPic      string  `json:"productPic"`      // 商品图片
 	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
     ProductPrice int64 `json:"productPrice"`         // 商品价格
 }
-type addReadHistoryResp {
+type AddReadHistoryResp {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
 }
 
 type ReadHistoryDeleteReq {
-	Id int64 `path:"id"`
+	Ids []int64 `form:"ids"`
 }
 
 type ReadHistoryDeleteResp {
@@ -45,10 +45,6 @@ type ReadHistoryList {
 	CreateTime      string  `json:"createTime"`      // 浏览时间
 }
 
-type ReadHistoryClearResp {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
 
 @server(
 	jwt: Auth
@@ -56,15 +52,16 @@ type ReadHistoryClearResp {
 	prefix: /api/history
 )
 service front-api {
-	@handler AddReadHistoryAdd
-	post /add (addReadHistoryReq) returns (addReadHistoryResp)
-	
-	@handler ReadHistoryDelete
-	get /delete/:id (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
-	
-	@handler ReadHistoryList
-	get /list returns (ReadHistoryListResp)
-	
-	@handler ReadHistoryClear
-	get /clear returns (ReadHistoryClearResp)
+	//创建浏览记录
+	@handler AddReadHistory
+	post /addReadHistory (AddReadHistoryReq) returns (AddReadHistoryResp)
+
+	//清空浏览记录/删除浏览记录
+	@handler DeleteReadHistory
+	get /deleteReadHistory (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
+
+	//获取浏览记录
+	@handler QueryReadHistoryList
+	get /queryReadHistoryList returns (ReadHistoryListResp)
+
 }

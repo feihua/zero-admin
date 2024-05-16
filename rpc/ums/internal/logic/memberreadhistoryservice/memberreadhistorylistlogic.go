@@ -30,7 +30,7 @@ func NewMemberReadHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
-// MemberReadHistoryList 浏览记录
+// MemberReadHistoryList 根据会员id查询浏览记录
 func (l *MemberReadHistoryListLogic) MemberReadHistoryList(in *umsclient.MemberReadHistoryListReq) (*umsclient.MemberReadHistoryListResp, error) {
 	q := query.UmsMemberReadHistory.WithContext(l.ctx)
 	if in.MemberId != 0 {

@@ -137,23 +137,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/add",
-				Handler: history.AddReadHistoryAddHandler(serverCtx),
+				Path:    "/addReadHistory",
+				Handler: history.AddReadHistoryHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/clear",
-				Handler: history.ReadHistoryClearHandler(serverCtx),
+				Path:    "/deleteReadHistory",
+				Handler: history.DeleteReadHistoryHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/delete/:id",
-				Handler: history.ReadHistoryDeleteHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/list",
-				Handler: history.ReadHistoryListHandler(serverCtx),
+				Path:    "/queryReadHistoryList",
+				Handler: history.QueryReadHistoryListHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

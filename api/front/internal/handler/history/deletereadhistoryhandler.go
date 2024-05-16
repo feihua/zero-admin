@@ -5,13 +5,20 @@ import (
 
 	"github.com/feihua/zero-admin/api/front/internal/logic/history"
 	"github.com/feihua/zero-admin/api/front/internal/svc"
+	"github.com/feihua/zero-admin/api/front/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func ReadHistoryListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeleteReadHistoryHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := history.NewReadHistoryListLogic(r.Context(), svcCtx)
-		resp, err := l.ReadHistoryList()
+		var req types.ReadHistoryDeleteReq
+		if err := httpx.Parse(r, &req); err != nil {
+			httpx.ErrorCtx(r.Context(), w, err)
+			return
+		}
+
+		l := history.NewDeleteReadHistoryLogic(r.Context(), svcCtx)
+		resp, err := l.DeleteReadHistory(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

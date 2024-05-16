@@ -1007,7 +1007,7 @@ message MemberReadHistoryAddResp {
 }
 
 message MemberReadHistoryDeleteReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
   int64 MemberId = 2; //会员id
 }
 

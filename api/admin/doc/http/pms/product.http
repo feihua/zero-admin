@@ -74,3 +74,7 @@ Content-Type: application/json
 ### 根据商品id查询商品详情
 GET {{host}}/api/product/queryProductDetail?productId=26
 Authorization: Bearer {{token}}
+
+### 查询商品列表
+GET {{host}}/api/product/queryProductList
+Authorization: Bearer {{token}}
