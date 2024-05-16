@@ -203,14 +203,28 @@ type (
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
+	UpdateProductStatusReq                     = pmsclient.UpdateProductStatusReq
+	UpdateProductStatusResp                    = pmsclient.UpdateProductStatusResp
 
 	ProductService interface {
 		ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error)
+		// 查询商品列表
 		ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error)
 		ProductListByIds(ctx context.Context, in *ProductByIdsReq, opts ...grpc.CallOption) (*ProductListResp, error)
 		ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
 		ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
+		// 查询商品详情
 		ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
+		// 批量修改审核状态
+		UpdateVerifyStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
+		// 批量上下架商品
+		UpdatePublishStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
+		// 批量推荐商品
+		UpdateRecommendStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
+		// 批量设为新品
+		UpdateNewStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
+		// 批量修改删除状态
+		UpdateDeleteStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
 	}
 
 	defaultProductService struct {
@@ -229,6 +243,7 @@ func (m *defaultProductService) ProductAdd(ctx context.Context, in *ProductAddRe
 	return client.ProductAdd(ctx, in, opts...)
 }
 
+// 查询商品列表
 func (m *defaultProductService) ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error) {
 	client := pmsclient.NewProductServiceClient(m.cli.Conn())
 	return client.ProductList(ctx, in, opts...)
@@ -249,7 +264,38 @@ func (m *defaultProductService) ProductDelete(ctx context.Context, in *ProductDe
 	return client.ProductDelete(ctx, in, opts...)
 }
 
+// 查询商品详情
 func (m *defaultProductService) ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error) {
 	client := pmsclient.NewProductServiceClient(m.cli.Conn())
 	return client.ProductDetailById(ctx, in, opts...)
+}
+
+// 批量修改审核状态
+func (m *defaultProductService) UpdateVerifyStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	client := pmsclient.NewProductServiceClient(m.cli.Conn())
+	return client.UpdateVerifyStatus(ctx, in, opts...)
+}
+
+// 批量上下架商品
+func (m *defaultProductService) UpdatePublishStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	client := pmsclient.NewProductServiceClient(m.cli.Conn())
+	return client.UpdatePublishStatus(ctx, in, opts...)
+}
+
+// 批量推荐商品
+func (m *defaultProductService) UpdateRecommendStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	client := pmsclient.NewProductServiceClient(m.cli.Conn())
+	return client.UpdateRecommendStatus(ctx, in, opts...)
+}
+
+// 批量设为新品
+func (m *defaultProductService) UpdateNewStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	client := pmsclient.NewProductServiceClient(m.cli.Conn())
+	return client.UpdateNewStatus(ctx, in, opts...)
+}
+
+// 批量修改删除状态
+func (m *defaultProductService) UpdateDeleteStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	client := pmsclient.NewProductServiceClient(m.cli.Conn())
+	return client.UpdateDeleteStatus(ctx, in, opts...)
 }

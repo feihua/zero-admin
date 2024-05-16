@@ -130,7 +130,7 @@ message SubjectProductRelationListReq {
 }
 
 message SubjectProductRelationListResp {
-  repeated int64 SubjectId = 1; // 专题id
+  repeated int64 SubjectIds = 1; // 专题id
 }
 service SubjectProductRelationService {
 
@@ -228,7 +228,7 @@ message PreferredAreaProductRelationListReq {
 }
 
 message PreferredAreaProductRelationListResp {
-  repeated int64 PreferredAreaId = 1; //优选id
+  repeated int64 PreferredAreaIds = 1; //优选id
 
 }
 

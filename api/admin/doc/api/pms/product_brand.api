@@ -66,8 +66,8 @@ type (
 		Message string `json:"message"`
 	}
 	UpdateProductBrandStatusReq {
-		Ids                  []int64  `json:"ids"`
-		status                int32  `json:"status"`
+		Ids    []int64 `json:"ids"`
+		status int32   `json:"status"`
 	}
 	UpdateProductBrandStatusResp {
 		Code    string `json:"code"`

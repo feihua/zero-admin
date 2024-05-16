@@ -203,6 +203,8 @@ type (
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
+	UpdateProductStatusReq                     = pmsclient.UpdateProductStatusReq
+	UpdateProductStatusResp                    = pmsclient.UpdateProductStatusResp
 
 	AlbumPicService interface {
 		AlbumPicAdd(ctx context.Context, in *AlbumPicAddReq, opts ...grpc.CallOption) (*AlbumPicAddResp, error)

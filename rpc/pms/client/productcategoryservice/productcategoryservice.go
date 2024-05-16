@@ -203,6 +203,8 @@ type (
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
+	UpdateProductStatusReq                     = pmsclient.UpdateProductStatusReq
+	UpdateProductStatusResp                    = pmsclient.UpdateProductStatusResp
 
 	ProductCategoryService interface {
 		// 添加商品分类

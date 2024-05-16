@@ -1,0 +1,162 @@
+info (
+	desc:   "商品信息"
+	author: "koobe"
+	email:  "1002219331@qq.com"
+)
+
+type UpdateProductReq {
+	ProductData                      UpdateProductData                 `json:"productData"`
+	ProductLadderList                []UpdateProductLadderList         `json:"productLadderList"`
+	ProductFullReductionList         []UpdateProductFullReductionList  `json:"productFullReductionList"`
+	MemberPriceList                  []UpdateMemberPriceList           `json:"memberPriceList"`
+	SkuStockList                     []UpdateSkuStockList              `json:"skuStockList"`
+	ProductAttributeValueList        []UpdateProductAttributeValueList `json:"productAttributeValueList"`
+	SubjectProductRelationList       []int64                           `json:"subjectProductRelationList"`
+	PrefrenceAreaProductRelationList []int64                           `json:"prefrenceAreaProductRelationList"`
+}
+
+type UpdateProductResp {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateProductData {
+	Id                         int64  `json:"id"`
+	BrandId                    int64  `json:"brandId"`
+	ProductCategoryId          int64  `json:"productCategoryId"`
+	ProductCategoryIdArray     string `json:"productCategoryIdArray"`
+	FeightTemplateId           int64  `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+	Name                       string `json:"name"`
+	Pic                        string `json:"pic"`
+	ProductSn                  string `json:"productSn"`
+	DeleteStatus               int32  `json:"deleteStatus"`
+	PublishStatus              int32  `json:"publishStatus"`
+	NewStatus                  int32  `json:"newStatus"`
+	RecommandStatus            int32  `json:"recommandStatus"`
+	VerifyStatus               int32  `json:"verifyStatus"`
+	Sort                       int32  `json:"sort"`
+	Sale                       int32  `json:"sale"`
+	Price                      int64  `json:"price"`
+	PromotionPrice             int64  `json:"promotionPrice"`
+	GiftGrowth                 int32  `json:"giftGrowth"`
+	GiftPoint                  int32  `json:"giftPoint"`
+	UsePointLimit              int32  `json:"usePointLimit"`
+	SubTitle                   string `json:"subTitle"`
+	OriginalPrice              int64  `json:"originalPrice"`
+	Stock                      int32  `json:"stock"`
+	LowStock                   int32  `json:"lowStock"`
+	Unit                       string `json:"unit"`
+	Weight                     int64  `json:"weight"`
+	PreviewStatus              int32  `json:"previewStatus"`
+	ServiceIds                 string `json:"serviceIds"`
+	Keywords                   string `json:"keywords"`
+	Note                       string `json:"note"`
+	AlbumPics                  string `json:"albumPics"`
+	DetailTitle                string `json:"detailTitle"`
+	PromotionStartTime         string `json:"promotionStartTime"`
+	PromotionEndTime           string `json:"promotionEndTime"`
+	PromotionPerLimit          int32  `json:"promotionPerLimit"`
+	PromotionType              int32  `json:"promotionType"`
+	BrandName                  string `json:"brandName"`
+	ProductCategoryName        string `json:"productCategoryName"`
+	Description                string `json:"description"`
+	DetailDesc                 string `json:"detailDesc"`
+	DetailHTML                 string `json:"detailHtml"`
+	DetailMobileHTML           string `json:"detailMobileHtml"`
+}
+
+type UpdateMemberPriceList {
+	Id              int64  `json:"id"`
+	ProductId       int64  `json:"productId"`
+	MemberLevelId   int64  `json:"memberLevelId"`
+	MemberPrice     int64  `json:"memberPrice"`
+	MemberLevelName string `json:"memberLevelName"`
+}
+
+type UpdateProductRelationList {
+	Id              int64  `json:"id"`
+	PrefrenceAreaId *int64 `json:"prefrenceAreaId,omitempty"`
+	ProductId       int64  `json:"productId"`
+	SubjectId       *int64 `json:"subjectId,omitempty"`
+}
+
+type UpdateProductAttributeValueList {
+	Id                 int64  `json:"id"`
+	ProductId          int64  `json:"productId"`
+	ProductAttributeId int64  `json:"productAttributeId"`
+	Value              string `json:"value"`
+}
+
+type UpdateProductFullReductionList {
+	Id          int64 `json:"id"`
+	ProductId   int64 `json:"productId"`
+	FullPrice   int64 `json:"fullPrice"`
+	ReducePrice int64 `json:"reducePrice"`
+}
+
+type UpdateProductLadderList {
+	Id        int64 `json:"id"`
+	ProductId int64 `json:"productId"`
+	Count     int32 `json:"count"`
+	Discount  int64 `json:"discount"`
+	Price     int64 `json:"price"`
+}
+
+type UpdateSkuStockList {
+	Id             int64  `json:"id"`
+	ProductId      int64  `json:"productId"`
+	SkuCode        string `json:"skuCode"`
+	Price          int64  `json:"price"`
+	Stock          int32  `json:"stock"`
+	LowStock       int32  `json:"lowStock"`
+	Pic            string `json:"pic"`
+	Sale           int32  `json:"sale"`
+	PromotionPrice int64  `json:"promotionPrice"`
+	LockStock      int32  `json:"lockStock"`
+	SPData         string `json:"spData"`
+}
+
+type UpdateProductStatusReq {
+	Ids    []int64 `form:"ids"`
+	Status int32   `form:"status"`
+	Detail string  `form:"detail"`
+}
+
+type UpdateProductStatusResp {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      product/product
+	prefix:     /api/product
+)
+service admin-api {
+	//更新商品
+	@handler ProductUpdate
+	post /updateProduct (UpdateProductReq) returns (UpdateProductResp)
+
+	//批量修改审核状态
+	@handler UpdateVerifyStatus
+	post /updateVerifyStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+
+	//批量上下架商品
+	@handler UpdatePublishStatus
+	post /updatePublishStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+
+	//批量推荐商品
+	@handler UpdateRecommendStatus
+	post /updateRecommendStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+
+	//批量设为新品
+	@handler UpdateNewStatus
+	post /updateNewStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+
+	//批量修改删除状态
+	@handler UpdateDeleteStatus
+	get /updateDeleteStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+}
+

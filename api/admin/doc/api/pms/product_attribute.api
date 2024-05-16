@@ -67,16 +67,16 @@ type (
 		Type                       int32  `json:"type"` // 属性的类型；0->规格；1->参数
 	}
 	QueryByproductCategoryIdReq {
-		ProductCategoryId int64  `json:"productCategoryId"`
+		ProductCategoryId int64 `json:"productCategoryId"`
 	}
 	QueryByproductCategoryIdData {
-		AttributeId                         int64  `json:"attributeId"`
-		ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+		AttributeId                int64 `json:"attributeId"`
+		ProductAttributeCategoryId int64 `json:"productAttributeCategoryId"`
 	}
 	QueryByproductCategoryIdResp {
-		Code     string                      `json:"code"`
-		Message  string                      `json:"message"`
-		Data     []*QueryByproductCategoryIdData `json:"data"`
+		Code    string                          `json:"code"`
+		Message string                          `json:"message"`
+		Data    []*QueryByproductCategoryIdData `json:"data"`
 	}
 	UpdateProductAttributeResp {
 		Code    string `json:"code"`

@@ -36,6 +36,6 @@ func (l *PreferredAreaProductRelationListLogic) PreferredAreaProductRelationList
 	}
 
 	return &cmsclient.PreferredAreaProductRelationListResp{
-		PreferredAreaId: ids,
+		PreferredAreaIds: ids,
 	}, nil
 }

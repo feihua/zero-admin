@@ -162,6 +162,6 @@ func (l *ProductAddLogic) ProductAdd(in *pmsclient.ProductAddReq) (*pmsclient.Pr
 	}
 
 	return &pmsclient.ProductAddResp{
-		ProductId: int32(productId),
+		ProductId: productId,
 	}, nil
 }

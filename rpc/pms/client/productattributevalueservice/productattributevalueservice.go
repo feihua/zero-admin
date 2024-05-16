@@ -203,6 +203,8 @@ type (
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
+	UpdateProductStatusReq                     = pmsclient.UpdateProductStatusReq
+	UpdateProductStatusResp                    = pmsclient.UpdateProductStatusResp
 
 	ProductAttributeValueService interface {
 		ProductAttributeValueAdd(ctx context.Context, in *ProductAttributeValueAddReq, opts ...grpc.CallOption) (*ProductAttributeValueAddResp, error)

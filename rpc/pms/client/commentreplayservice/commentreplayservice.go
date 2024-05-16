@@ -203,6 +203,8 @@ type (
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
+	UpdateProductStatusReq                     = pmsclient.UpdateProductStatusReq
+	UpdateProductStatusResp                    = pmsclient.UpdateProductStatusResp
 
 	CommentReplayService interface {
 		CommentReplayAdd(ctx context.Context, in *CommentReplayAddReq, opts ...grpc.CallOption) (*CommentReplayAddResp, error)

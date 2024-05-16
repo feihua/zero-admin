@@ -5,7 +5,6 @@ info (
 )
 
 type (
-
 	ListReturnApplyReq {
 		Current        int64  `form:"current,default=1"`
 		PageSize       int64  `form:"pageSize,default=20"`
@@ -15,8 +14,8 @@ type (
 		HandleMan      string `form:"handleMan,optional"` // 处理人员
 		CreateTime     string `form:"createTime,optional"` // 申请时间
 		MemberUsername string `form:"memberUserName,optional"` // 会员用户名
-		ReturnName       string `form:"returnName,optional"` // 退货人姓名
-		ReturnPhone      string `form:"returnPhone,optional"` // 退货人电话
+		ReturnName     string `form:"returnName,optional"` // 退货人姓名
+		ReturnPhone    string `form:"returnPhone,optional"` // 退货人电话
 	}
 	ListReturnApplyData {
 		Id               int64  `json:"id"`
@@ -84,7 +83,6 @@ type (
 	prefix:     /api/order/returnapply
 )
 service admin-api {
-
 	//查询订单退货申请
 	@handler ReturnApplyList
 	get /queryReturnApplyList (ListReturnApplyReq) returns (ListReturnApplyResp)

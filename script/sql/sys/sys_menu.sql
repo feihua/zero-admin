@@ -175,5 +175,8 @@ INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, cr
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (139, '删除限时购和商品关系', 26, '', '', 2, '', 2, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sms/flashpromotionproductrelation/deleteFlashPromotionProductRelation');
 INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (140, '更新限时购和商品关系', 26, '', '', 2, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sms/flashpromotionproductrelation/updateFlashPromotionProductRelation');
 
+INSERT INTO sys_menu (id, name, parent_id, url, perms, type, icon, order_num, create_by, create_time, update_by, update_time, del_flag, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (141, '查询商品详情', 19, '', '', 2, '', 3, 'liufeihua', '2023-12-01 16:28:32', 'liufeihua', current_time, 1, '', '', '', '', '/api/product/queryProductDetail');
+
+
 
 

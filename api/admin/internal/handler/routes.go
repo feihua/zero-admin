@@ -26,9 +26,6 @@ import (
 	productattributecategory "github.com/feihua/zero-admin/api/admin/internal/handler/product/attributecategory"
 	productbrand "github.com/feihua/zero-admin/api/admin/internal/handler/product/brand"
 	productcategory "github.com/feihua/zero-admin/api/admin/internal/handler/product/category"
-	productcomment "github.com/feihua/zero-admin/api/admin/internal/handler/product/comment"
-	productfeighttemplate "github.com/feihua/zero-admin/api/admin/internal/handler/product/feighttemplate"
-	productmemberprice "github.com/feihua/zero-admin/api/admin/internal/handler/product/memberprice"
 	productproduct "github.com/feihua/zero-admin/api/admin/internal/handler/product/product"
 	productskustock "github.com/feihua/zero-admin/api/admin/internal/handler/product/skustock"
 	smscoupon "github.com/feihua/zero-admin/api/admin/internal/handler/sms/coupon"
@@ -761,29 +758,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addProductComment",
-					Handler: productcomment.ProductCommentAddHandler(serverCtx),
-				},
-				{
 					Method:  http.MethodGet,
-					Path:    "/deleteProductComment",
-					Handler: productcomment.ProductCommentDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductCommentList",
-					Handler: productcomment.ProductCommentListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateProductComment",
-					Handler: productcomment.ProductCommentUpdateHandler(serverCtx),
+					Path:    "/queryProductList",
+					Handler: productproduct.QueryProductListHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/comment"),
+		rest.WithPrefix("/api/product"),
 	)
 
 	server.AddRoutes(
@@ -791,29 +773,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addFeightTemplate",
-					Handler: productfeighttemplate.FeightTemplateAddHandler(serverCtx),
-				},
-				{
 					Method:  http.MethodGet,
-					Path:    "/deleteFeightTemplate",
-					Handler: productfeighttemplate.FeightTemplateDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryFeightTemplateList",
-					Handler: productfeighttemplate.FeightTemplateListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateFeightTemplate",
-					Handler: productfeighttemplate.FeightTemplateUpdateHandler(serverCtx),
+					Path:    "/queryProductDetail",
+					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/feighttemplate"),
+		rest.WithPrefix("/api/product"),
 	)
 
 	server.AddRoutes(
@@ -821,29 +788,39 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addMemberPrice",
-					Handler: productmemberprice.MemberPriceAddHandler(serverCtx),
-				},
-				{
 					Method:  http.MethodGet,
-					Path:    "/deleteMemberPrice",
-					Handler: productmemberprice.MemberPriceDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberPriceList",
-					Handler: productmemberprice.MemberPriceListHandler(serverCtx),
+					Path:    "/updateDeleteStatus",
+					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updateMemberPrice",
-					Handler: productmemberprice.MemberPriceUpdateHandler(serverCtx),
+					Path:    "/updateNewStatus",
+					Handler: productproduct.UpdateNewStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateProduct",
+					Handler: productproduct.ProductUpdateHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updatePublishStatus",
+					Handler: productproduct.UpdatePublishStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateRecommendStatus",
+					Handler: productproduct.UpdateRecommendStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateVerifyStatus",
+					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/memberprice"),
+		rest.WithPrefix("/api/product"),
 	)
 
 	server.AddRoutes(
@@ -855,25 +832,10 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/addProduct",
 					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteProduct",
-					Handler: productproduct.ProductDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: productproduct.ProductListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateProduct",
-					Handler: productproduct.ProductUpdateHandler(serverCtx),
-				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/product"),
+		rest.WithPrefix("/api/product"),
 	)
 
 	server.AddRoutes(
@@ -1337,6 +1299,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
+					Path:    "/deleteSysLog",
+					Handler: syslog.SysLogDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/querySysLogList",
+					Handler: syslog.SysLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/sysLog"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
 					Path:    "/deleteLoginLog",
 					Handler: syslog.LoginLogDeleteHandler(serverCtx),
 				},
@@ -1354,26 +1336,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/loginLog"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteSysLog",
-					Handler: syslog.SysLogDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/querySysLogList",
-					Handler: syslog.SysLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/sysLog"),
 	)
 
 	server.AddRoutes(

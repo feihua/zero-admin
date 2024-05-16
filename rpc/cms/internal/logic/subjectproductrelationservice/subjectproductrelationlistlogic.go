@@ -41,7 +41,7 @@ func (l *SubjectProductRelationListLogic) SubjectProductRelationList(in *cmsclie
 	}
 
 	return &cmsclient.SubjectProductRelationListResp{
-		SubjectId: ids,
+		SubjectIds: ids,
 	}, nil
 
 }

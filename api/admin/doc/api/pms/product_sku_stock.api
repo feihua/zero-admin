@@ -5,10 +5,9 @@ info (
 )
 
 type (
-
 	ListSkuStockReq {
-		ProductId      int64  `json:"productId"` //商品ID
-		SkuCode        string `json:"skuCode,optional"` // sku编码
+		ProductId int64  `json:"productId"` //商品ID
+		SkuCode   string `json:"skuCode,optional"` // sku编码
 	}
 	ListSkuStockData {
 		Id             int64  `json:"id"`
@@ -24,9 +23,9 @@ type (
 		SpData         string `json:"spData"` // 商品销售属性，json格式
 	}
 	ListSkuStockResp {
-		Data     []*ListSkuStockData `json:"data"`
-		Code     string              `json:"code"`
-		Message  string              `json:"message"`
+		Data    []*ListSkuStockData `json:"data"`
+		Code    string              `json:"code"`
+		Message string              `json:"message"`
 	}
 	UpdateSkuStockData {
 		Id             int64  `json:"id"`
@@ -42,13 +41,12 @@ type (
 		SpData         string `json:"spData"` // 商品销售属性，json格式
 	}
 	UpdateSkuStockReq {
-		SkuStockList             []UpdateSkuStockData  `json:"skuStockList"`
+		SkuStockList []UpdateSkuStockData `json:"skuStockList"`
 	}
 	UpdateSkuStockResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
 )
 
 @server (
@@ -65,7 +63,5 @@ service admin-api {
 	//批量更新sku库存信息
 	@handler SkuStockUpdate
 	post /updateSkuStock (UpdateSkuStockReq) returns (UpdateSkuStockResp)
-
-
 }
 

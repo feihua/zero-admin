@@ -53,8 +53,8 @@ type (
 		Total    int64                    `json:"total"`
 	}
 	UpdateHomeAdvertiseStatusReq {
-		Id        int64  `json:"id"`
-		Status    int32  `json:"status"` // 上下线状态：0->下线；1->上线
+		Id     int64 `json:"id"`
+		Status int32 `json:"status"` // 上下线状态：0->下线；1->上线
 	}
 	UpdateHomeAdvertiseResp {
 		Code    string `json:"code"`

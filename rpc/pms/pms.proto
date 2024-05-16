@@ -84,7 +84,7 @@ message ProductAddReq {
 }
 
 message ProductAddResp {
-  int32 productId = 1;
+  int64 productId = 1;
 }
 
 message ProductListReq {
@@ -96,6 +96,7 @@ message ProductListReq {
   int32       PublishStatus = 6;
   int32       DeleteStatus = 7;
   int64       BrandId = 8;
+  string ProductSn = 9;
 }
 
 message ProductByIdsReq {
@@ -146,6 +147,7 @@ message ProductListData{
   string      BrandName = 41;
   string      ProductCategoryName = 42;
   string       ProductCategoryIdArray = 43;
+
 }
 
 message ProductListResp {
@@ -230,14 +232,40 @@ message ProductDetailByIdResp{
   repeated ProductFullReductionListData      ProductFullReductionList = 7;
   repeated MemberPriceListData      MemberPriceList = 8;
 }
+
+message UpdateProductStatusReq {
+  repeated int64 ids = 1;
+  int32 Status = 2;
+  string Detail = 3;
+  string VertifyMan = 4;
+}
+
+message UpdateProductStatusResp {
+  string pong = 1;
+}
+
 service ProductService {
 
   rpc ProductAdd(ProductAddReq) returns(ProductAddResp);
+  //查询商品列表
   rpc ProductList(ProductListReq) returns(ProductListResp);
   rpc ProductListByIds(ProductByIdsReq) returns(ProductListResp);
   rpc ProductUpdate(ProductUpdateReq) returns(ProductUpdateResp);
   rpc ProductDelete(ProductDeleteReq) returns(ProductDeleteResp);
+
+  //查询商品详情
   rpc ProductDetailById(ProductDetailByIdReq) returns(ProductDetailByIdResp);
+
+  //批量修改审核状态
+  rpc UpdateVerifyStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
+  //批量上下架商品
+  rpc UpdatePublishStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
+  //批量推荐商品
+  rpc UpdateRecommendStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
+  //批量设为新品
+  rpc UpdateNewStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
+  //批量修改删除状态
+  rpc UpdateDeleteStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
 
 
 }

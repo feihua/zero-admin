@@ -35,6 +35,9 @@ func (l *ProductListLogic) ProductList(in *pmsclient.ProductListReq) (*pmsclient
 	if len(in.Name) > 0 {
 		q = q.Where(query.PmsProduct.Name.Like("%" + in.Name + "%"))
 	}
+	if len(in.ProductSn) > 0 {
+		q = q.Where(query.PmsProduct.ProductSn.Like("%" + in.ProductSn + "%"))
+	}
 	if in.VerifyStatus != 2 {
 		q = q.Where(query.PmsProduct.VerifyStatus.Eq(in.VerifyStatus))
 	}

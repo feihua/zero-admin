@@ -35,17 +35,16 @@ type (
 		Total    int64                `json:"total"`
 	}
 	UpdateHomeBrandSortReq {
-		Id              int64  `json:"id"`
-		Sort            int32  `json:"sort"` // 排序
+		Id   int64 `json:"id"`
+		Sort int32 `json:"sort"` // 排序
 	}
 	UpdateHomeBrandSortResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
 	UpdateHomeBrandStatusReq {
-		Ids              []int64  `json:"ids"`
-		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		Ids             []int64 `json:"ids"`
+		RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 	}
 	UpdateHomeBrandStatusResp {
 		Code    string `json:"code"`

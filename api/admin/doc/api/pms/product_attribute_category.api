@@ -18,11 +18,11 @@ type (
 		Name     string `form:"name,optional"`
 	}
 	ListProductAttributecategoryData {
-		Id                     int64  `json:"id"`
-		Name                   string `json:"name"`
-		AttributecategoryCount int32  `json:"attributeCount"` // 属性数量
-		ParamCount             int32  `json:"paramCount"` // 参数数量
-		ProductAttributeList             []ListProductAttribute  `json:"productAttributeList"` // 商品属性列表
+		Id                     int64                  `json:"id"`
+		Name                   string                 `json:"name"`
+		AttributecategoryCount int32                  `json:"attributeCount"` // 属性数量
+		ParamCount             int32                  `json:"paramCount"` // 参数数量
+		ProductAttributeList   []ListProductAttribute `json:"productAttributeList"` // 商品属性列表
 	}
 	ListProductAttribute {
 		Id                         int64  `json:"id"`
@@ -48,8 +48,8 @@ type (
 		Total    int64                               `json:"total"`
 	}
 	UpdateProductAttributecategoryReq {
-		Id                     int64  `json:"id"`
-		Name                   string `json:"name"`
+		Id   int64  `json:"id"`
+		Name string `json:"name"`
 	}
 	UpdateProductAttributecategoryResp {
 		Code    string `json:"code"`

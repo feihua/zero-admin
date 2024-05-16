@@ -19,12 +19,17 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ProductService_ProductAdd_FullMethodName        = "/pmsclient.ProductService/ProductAdd"
-	ProductService_ProductList_FullMethodName       = "/pmsclient.ProductService/ProductList"
-	ProductService_ProductListByIds_FullMethodName  = "/pmsclient.ProductService/ProductListByIds"
-	ProductService_ProductUpdate_FullMethodName     = "/pmsclient.ProductService/ProductUpdate"
-	ProductService_ProductDelete_FullMethodName     = "/pmsclient.ProductService/ProductDelete"
-	ProductService_ProductDetailById_FullMethodName = "/pmsclient.ProductService/ProductDetailById"
+	ProductService_ProductAdd_FullMethodName            = "/pmsclient.ProductService/ProductAdd"
+	ProductService_ProductList_FullMethodName           = "/pmsclient.ProductService/ProductList"
+	ProductService_ProductListByIds_FullMethodName      = "/pmsclient.ProductService/ProductListByIds"
+	ProductService_ProductUpdate_FullMethodName         = "/pmsclient.ProductService/ProductUpdate"
+	ProductService_ProductDelete_FullMethodName         = "/pmsclient.ProductService/ProductDelete"
+	ProductService_ProductDetailById_FullMethodName     = "/pmsclient.ProductService/ProductDetailById"
+	ProductService_UpdateVerifyStatus_FullMethodName    = "/pmsclient.ProductService/UpdateVerifyStatus"
+	ProductService_UpdatePublishStatus_FullMethodName   = "/pmsclient.ProductService/UpdatePublishStatus"
+	ProductService_UpdateRecommendStatus_FullMethodName = "/pmsclient.ProductService/UpdateRecommendStatus"
+	ProductService_UpdateNewStatus_FullMethodName       = "/pmsclient.ProductService/UpdateNewStatus"
+	ProductService_UpdateDeleteStatus_FullMethodName    = "/pmsclient.ProductService/UpdateDeleteStatus"
 )
 
 // ProductServiceClient is the client API for ProductService service.
@@ -32,11 +37,23 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductServiceClient interface {
 	ProductAdd(ctx context.Context, in *ProductAddReq, opts ...grpc.CallOption) (*ProductAddResp, error)
+	// 查询商品列表
 	ProductList(ctx context.Context, in *ProductListReq, opts ...grpc.CallOption) (*ProductListResp, error)
 	ProductListByIds(ctx context.Context, in *ProductByIdsReq, opts ...grpc.CallOption) (*ProductListResp, error)
 	ProductUpdate(ctx context.Context, in *ProductUpdateReq, opts ...grpc.CallOption) (*ProductUpdateResp, error)
 	ProductDelete(ctx context.Context, in *ProductDeleteReq, opts ...grpc.CallOption) (*ProductDeleteResp, error)
+	// 查询商品详情
 	ProductDetailById(ctx context.Context, in *ProductDetailByIdReq, opts ...grpc.CallOption) (*ProductDetailByIdResp, error)
+	// 批量修改审核状态
+	UpdateVerifyStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
+	// 批量上下架商品
+	UpdatePublishStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
+	// 批量推荐商品
+	UpdateRecommendStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
+	// 批量设为新品
+	UpdateNewStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
+	// 批量修改删除状态
+	UpdateDeleteStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
 }
 
 type productServiceClient struct {
@@ -101,16 +118,73 @@ func (c *productServiceClient) ProductDetailById(ctx context.Context, in *Produc
 	return out, nil
 }
 
+func (c *productServiceClient) UpdateVerifyStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	out := new(UpdateProductStatusResp)
+	err := c.cc.Invoke(ctx, ProductService_UpdateVerifyStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productServiceClient) UpdatePublishStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	out := new(UpdateProductStatusResp)
+	err := c.cc.Invoke(ctx, ProductService_UpdatePublishStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productServiceClient) UpdateRecommendStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	out := new(UpdateProductStatusResp)
+	err := c.cc.Invoke(ctx, ProductService_UpdateRecommendStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productServiceClient) UpdateNewStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	out := new(UpdateProductStatusResp)
+	err := c.cc.Invoke(ctx, ProductService_UpdateNewStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productServiceClient) UpdateDeleteStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
+	out := new(UpdateProductStatusResp)
+	err := c.cc.Invoke(ctx, ProductService_UpdateDeleteStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductServiceServer is the server API for ProductService service.
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility
 type ProductServiceServer interface {
 	ProductAdd(context.Context, *ProductAddReq) (*ProductAddResp, error)
+	// 查询商品列表
 	ProductList(context.Context, *ProductListReq) (*ProductListResp, error)
 	ProductListByIds(context.Context, *ProductByIdsReq) (*ProductListResp, error)
 	ProductUpdate(context.Context, *ProductUpdateReq) (*ProductUpdateResp, error)
 	ProductDelete(context.Context, *ProductDeleteReq) (*ProductDeleteResp, error)
+	// 查询商品详情
 	ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error)
+	// 批量修改审核状态
+	UpdateVerifyStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
+	// 批量上下架商品
+	UpdatePublishStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
+	// 批量推荐商品
+	UpdateRecommendStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
+	// 批量设为新品
+	UpdateNewStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
+	// 批量修改删除状态
+	UpdateDeleteStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -135,6 +209,21 @@ func (UnimplementedProductServiceServer) ProductDelete(context.Context, *Product
 }
 func (UnimplementedProductServiceServer) ProductDetailById(context.Context, *ProductDetailByIdReq) (*ProductDetailByIdResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductDetailById not implemented")
+}
+func (UnimplementedProductServiceServer) UpdateVerifyStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateVerifyStatus not implemented")
+}
+func (UnimplementedProductServiceServer) UpdatePublishStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePublishStatus not implemented")
+}
+func (UnimplementedProductServiceServer) UpdateRecommendStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRecommendStatus not implemented")
+}
+func (UnimplementedProductServiceServer) UpdateNewStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNewStatus not implemented")
+}
+func (UnimplementedProductServiceServer) UpdateDeleteStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDeleteStatus not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 
@@ -257,6 +346,96 @@ func _ProductService_ProductDetailById_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductService_UpdateVerifyStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).UpdateVerifyStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_UpdateVerifyStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).UpdateVerifyStatus(ctx, req.(*UpdateProductStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductService_UpdatePublishStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).UpdatePublishStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_UpdatePublishStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).UpdatePublishStatus(ctx, req.(*UpdateProductStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductService_UpdateRecommendStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).UpdateRecommendStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_UpdateRecommendStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).UpdateRecommendStatus(ctx, req.(*UpdateProductStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductService_UpdateNewStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).UpdateNewStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_UpdateNewStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).UpdateNewStatus(ctx, req.(*UpdateProductStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductService_UpdateDeleteStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).UpdateDeleteStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_UpdateDeleteStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).UpdateDeleteStatus(ctx, req.(*UpdateProductStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -287,6 +466,26 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductDetailById",
 			Handler:    _ProductService_ProductDetailById_Handler,
+		},
+		{
+			MethodName: "UpdateVerifyStatus",
+			Handler:    _ProductService_UpdateVerifyStatus_Handler,
+		},
+		{
+			MethodName: "UpdatePublishStatus",
+			Handler:    _ProductService_UpdatePublishStatus_Handler,
+		},
+		{
+			MethodName: "UpdateRecommendStatus",
+			Handler:    _ProductService_UpdateRecommendStatus_Handler,
+		},
+		{
+			MethodName: "UpdateNewStatus",
+			Handler:    _ProductService_UpdateNewStatus_Handler,
+		},
+		{
+			MethodName: "UpdateDeleteStatus",
+			Handler:    _ProductService_UpdateDeleteStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

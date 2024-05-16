@@ -1,14 +1,13 @@
-package logic
+package product
 
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/svc"
+	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-
-	"github.com/feihua/zero-admin/api/admin/internal/svc"
-	"github.com/feihua/zero-admin/api/admin/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -40,49 +39,50 @@ func NewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Product
 // 注意: 步骤1到6是在商品(rpc)中操作,步骤7到8是在cms模块中操作
 func (l *ProductAddLogic) ProductAdd(req types.AddProductReq) (*types.AddProductResp, error) {
 	//添加商品成功后返回商品id,然后关联专题和关联优选(因为这二个表在cms模块中,需要通过rpc去调用)
+	product := req.ProductData
 	result, err := l.svcCtx.ProductService.ProductAdd(l.ctx, &pmsclient.ProductAddReq{
-		BrandId:                    req.BrandId,
-		ProductCategoryId:          req.ProductCategoryId,
-		ProductCategoryIdArray:     req.ProductCategoryIdArray,
-		FeightTemplateId:           req.FeightTemplateId,
-		ProductAttributeCategoryId: req.ProductAttributeCategoryId,
-		Name:                       req.Name,
-		Pic:                        req.Pic,
-		ProductSn:                  req.ProductSn,
-		DeleteStatus:               req.DeleteStatus,
-		PublishStatus:              req.PublishStatus,
-		NewStatus:                  req.NewStatus,
-		RecommandStatus:            req.RecommandStatus,
-		VerifyStatus:               req.VerifyStatus,
-		Sort:                       req.Sort,
-		Sale:                       req.Sale,
-		Price:                      req.Price,
-		PromotionPrice:             req.PromotionPrice,
-		GiftGrowth:                 req.GiftGrowth,
-		GiftPoint:                  req.GiftPoint,
-		UsePointLimit:              req.UsePointLimit,
-		SubTitle:                   req.SubTitle,
-		Description:                req.Description,
-		OriginalPrice:              req.OriginalPrice,
-		Stock:                      req.Stock,
-		LowStock:                   req.LowStock,
-		Unit:                       req.Unit,
-		Weight:                     req.Weight,
-		PreviewStatus:              req.PreviewStatus,
-		ServiceIds:                 req.ServiceIds,
-		Keywords:                   req.Keywords,
-		Note:                       req.Note,
-		AlbumPics:                  req.AlbumPics,
-		DetailTitle:                req.DetailTitle,
-		DetailDesc:                 req.DetailDesc,
-		DetailHtml:                 req.DetailHtml,
-		DetailMobileHtml:           req.DetailMobileHtml,
-		PromotionStartTime:         req.PromotionStartTime,
-		PromotionEndTime:           req.PromotionEndTime,
-		PromotionPerLimit:          req.PromotionPerLimit,
-		PromotionType:              req.PromotionType,
-		BrandName:                  req.BrandName,
-		ProductCategoryName:        req.ProductCategoryName,
+		BrandId:                    product.BrandId,
+		ProductCategoryId:          product.ProductCategoryId,
+		ProductCategoryIdArray:     product.ProductCategoryIdArray,
+		FeightTemplateId:           product.FeightTemplateId,
+		ProductAttributeCategoryId: product.ProductAttributeCategoryId,
+		Name:                       product.Name,
+		Pic:                        product.Pic,
+		ProductSn:                  product.ProductSn,
+		DeleteStatus:               product.DeleteStatus,
+		PublishStatus:              product.PublishStatus,
+		NewStatus:                  product.NewStatus,
+		RecommandStatus:            product.RecommandStatus,
+		VerifyStatus:               product.VerifyStatus,
+		Sort:                       product.Sort,
+		Sale:                       product.Sale,
+		Price:                      product.Price,
+		PromotionPrice:             product.PromotionPrice,
+		GiftGrowth:                 product.GiftGrowth,
+		GiftPoint:                  product.GiftPoint,
+		UsePointLimit:              product.UsePointLimit,
+		SubTitle:                   product.SubTitle,
+		Description:                product.Description,
+		OriginalPrice:              product.OriginalPrice,
+		Stock:                      product.Stock,
+		LowStock:                   product.LowStock,
+		Unit:                       product.Unit,
+		Weight:                     product.Weight,
+		PreviewStatus:              product.PreviewStatus,
+		ServiceIds:                 product.ServiceIds,
+		Keywords:                   product.Keywords,
+		Note:                       product.Note,
+		AlbumPics:                  product.AlbumPics,
+		DetailTitle:                product.DetailTitle,
+		DetailDesc:                 product.DetailDesc,
+		DetailHtml:                 product.DetailHTML,
+		DetailMobileHtml:           product.DetailMobileHTML,
+		PromotionStartTime:         product.PromotionStartTime,
+		PromotionEndTime:           product.PromotionEndTime,
+		PromotionPerLimit:          product.PromotionPerLimit,
+		PromotionType:              product.PromotionType,
+		BrandName:                  product.BrandName,
+		ProductCategoryName:        product.ProductCategoryName,
 		MemberPriceList:            buildMemberPriceList(req),
 		ProductAttributeValueList:  buildProductAttributeValueList(req),
 		ProductFullReductionList:   buildProductFullReductionList(req),
@@ -101,7 +101,7 @@ func (l *ProductAddLogic) ProductAdd(req types.AddProductReq) (*types.AddProduct
 	addSubjectProductRelation(req, l, productId)
 
 	//8.关联优选
-	addPrefrenceAreaProductRelation(req, l, productId)
+	addPreferredAreaProductRelation(req, l, productId)
 
 	return &types.AddProductResp{
 		Code:    "000000",
@@ -114,7 +114,7 @@ func buildMemberPriceList(req types.AddProductReq) []*pmsclient.MemberPriceList 
 	var memberPriceLists []*pmsclient.MemberPriceList
 	for _, item := range req.MemberPriceList {
 		memberPriceLists = append(memberPriceLists, &pmsclient.MemberPriceList{
-			MemberLevelId:   item.MemberLevelID,
+			MemberLevelId:   item.MemberLevelId,
 			MemberPrice:     item.MemberPrice,
 			MemberLevelName: item.MemberLevelName,
 		})
@@ -127,7 +127,7 @@ func buildProductAttributeValueList(req types.AddProductReq) []*pmsclient.Produc
 	var attributeValueLists []*pmsclient.ProductAttributeValueList
 	for _, item := range req.ProductAttributeValueList {
 		attributeValueLists = append(attributeValueLists, &pmsclient.ProductAttributeValueList{
-			ProductAttributeId: item.ProductAttributeID,
+			ProductAttributeId: item.ProductAttributeId,
 			AttributeValues:    item.Value,
 		})
 	}
@@ -179,18 +179,18 @@ func buildSkuStockList(req types.AddProductReq) []*pmsclient.SkuStockList {
 }
 
 // 添加专题关联
-func addSubjectProductRelation(req types.AddProductReq, l *ProductAddLogic, productId int32) {
+func addSubjectProductRelation(req types.AddProductReq, l *ProductAddLogic, productId int64) {
 	_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationAdd(l.ctx, &cmsclient.SubjectProductRelationAddReq{
 		SubjectId: req.SubjectProductRelationList,
-		ProductId: int64(productId),
+		ProductId: productId,
 	})
 }
 
 // 添加优选商品关联
-func addPrefrenceAreaProductRelation(req types.AddProductReq, l *ProductAddLogic, productId int32) {
+func addPreferredAreaProductRelation(req types.AddProductReq, l *ProductAddLogic, productId int64) {
 	_, _ = l.svcCtx.PreferredAreaProductRelationService.PreferredAreaProductRelationAdd(l.ctx, &cmsclient.PreferredAreaProductRelationAddReq{
 		PreferredAreaId: req.PrefrenceAreaProductRelationList,
-		ProductId:       int64(productId),
+		ProductId:       productId,
 	})
 
 }

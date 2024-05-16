@@ -43,8 +43,8 @@ type (
 		Status int32  `json:"status"` // 状态：0->不启用；1->启用
 	}
 	UpdateReturnResonStatusReq {
-		Ids     []int64  `json:"ids"`
-		Status int32  `json:"status"` // 状态：0->不启用；1->启用
+		Ids    []int64 `json:"ids"`
+		Status int32   `json:"status"` // 状态：0->不启用；1->启用
 	}
 	UpdateReturnResonResp {
 		Code    string `json:"code"`

@@ -27,6 +27,7 @@ func (s *ProductServiceServer) ProductAdd(ctx context.Context, in *pmsclient.Pro
 	return l.ProductAdd(in)
 }
 
+// 查询商品列表
 func (s *ProductServiceServer) ProductList(ctx context.Context, in *pmsclient.ProductListReq) (*pmsclient.ProductListResp, error) {
 	l := productservicelogic.NewProductListLogic(ctx, s.svcCtx)
 	return l.ProductList(in)
@@ -47,7 +48,38 @@ func (s *ProductServiceServer) ProductDelete(ctx context.Context, in *pmsclient.
 	return l.ProductDelete(in)
 }
 
+// 查询商品详情
 func (s *ProductServiceServer) ProductDetailById(ctx context.Context, in *pmsclient.ProductDetailByIdReq) (*pmsclient.ProductDetailByIdResp, error) {
 	l := productservicelogic.NewProductDetailByIdLogic(ctx, s.svcCtx)
 	return l.ProductDetailById(in)
+}
+
+// 批量修改审核状态
+func (s *ProductServiceServer) UpdateVerifyStatus(ctx context.Context, in *pmsclient.UpdateProductStatusReq) (*pmsclient.UpdateProductStatusResp, error) {
+	l := productservicelogic.NewUpdateVerifyStatusLogic(ctx, s.svcCtx)
+	return l.UpdateVerifyStatus(in)
+}
+
+// 批量上下架商品
+func (s *ProductServiceServer) UpdatePublishStatus(ctx context.Context, in *pmsclient.UpdateProductStatusReq) (*pmsclient.UpdateProductStatusResp, error) {
+	l := productservicelogic.NewUpdatePublishStatusLogic(ctx, s.svcCtx)
+	return l.UpdatePublishStatus(in)
+}
+
+// 批量推荐商品
+func (s *ProductServiceServer) UpdateRecommendStatus(ctx context.Context, in *pmsclient.UpdateProductStatusReq) (*pmsclient.UpdateProductStatusResp, error) {
+	l := productservicelogic.NewUpdateRecommendStatusLogic(ctx, s.svcCtx)
+	return l.UpdateRecommendStatus(in)
+}
+
+// 批量设为新品
+func (s *ProductServiceServer) UpdateNewStatus(ctx context.Context, in *pmsclient.UpdateProductStatusReq) (*pmsclient.UpdateProductStatusResp, error) {
+	l := productservicelogic.NewUpdateNewStatusLogic(ctx, s.svcCtx)
+	return l.UpdateNewStatus(in)
+}
+
+// 批量修改删除状态
+func (s *ProductServiceServer) UpdateDeleteStatus(ctx context.Context, in *pmsclient.UpdateProductStatusReq) (*pmsclient.UpdateProductStatusResp, error) {
+	l := productservicelogic.NewUpdateDeleteStatusLogic(ctx, s.svcCtx)
+	return l.UpdateDeleteStatus(in)
 }

@@ -92,7 +92,6 @@ type (
 	prefix:     /api/sys/role
 )
 service admin-api {
-
 	//新增角色信息
 	@handler RoleAdd
 	post /addRole (addRoleReq) returns (addRoleResp)
