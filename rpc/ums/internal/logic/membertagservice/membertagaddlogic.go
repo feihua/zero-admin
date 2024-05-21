@@ -33,9 +33,9 @@ func NewMemberTagAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Memb
 // MemberTagAdd 添加会员标签
 func (l *MemberTagAddLogic) MemberTagAdd(in *umsclient.MemberTagAddReq) (*umsclient.MemberTagAddResp, error) {
 	err := query.UmsMemberTag.WithContext(l.ctx).Create(&model.UmsMemberTag{
-		Name:              in.Name,
+		TagName:           in.Name,
 		FinishOrderCount:  in.FinishOrderCount,
-		FinishOrderAmount: float64(in.FinishOrderAmount),
+		FinishOrderAmount: in.FinishOrderAmount,
 	})
 
 	if err != nil {

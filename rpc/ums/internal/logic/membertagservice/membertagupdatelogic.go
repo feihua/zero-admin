@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MemberTagUpdateLogic 添加会员标签
+// MemberTagUpdateLogic 更新会员标签
 /*
 Author: LiuFeiHua
 Date: 2024/5/7 9:53
@@ -30,13 +30,13 @@ func NewMemberTagUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 	}
 }
 
-// MemberTagUpdate 更新添加会员标签
+// MemberTagUpdate 更新会员标签
 func (l *MemberTagUpdateLogic) MemberTagUpdate(in *umsclient.MemberTagUpdateReq) (*umsclient.MemberTagUpdateResp, error) {
 	_, err := query.UmsMemberTag.WithContext(l.ctx).Updates(&model.UmsMemberTag{
-		ID:                in.ID,
-		Name:              in.Name,
+		ID:                in.Id,
+		TagName:           in.Name,
 		FinishOrderCount:  in.FinishOrderCount,
-		FinishOrderAmount: float64(in.FinishOrderAmount),
+		FinishOrderAmount: in.FinishOrderAmount,
 	})
 
 	if err != nil {

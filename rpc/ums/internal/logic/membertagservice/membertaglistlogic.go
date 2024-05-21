@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberTagListLogic 会员标签
+/*
+Author: LiuFeiHua
+Date: 2024/5/21 9:51
+*/
 type MemberTagListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewMemberTagListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mem
 	}
 }
 
+// MemberTagList 会员标签
 func (l *MemberTagListLogic) MemberTagList(in *umsclient.MemberTagListReq) (*umsclient.MemberTagListResp, error) {
 	q := query.UmsMemberTag.WithContext(l.ctx)
 	offset := (in.Current - 1) * in.PageSize
@@ -40,9 +46,9 @@ func (l *MemberTagListLogic) MemberTagList(in *umsclient.MemberTagListReq) (*ums
 
 		list = append(list, &umsclient.MemberTagListData{
 			Id:                item.ID,
-			Name:              item.Name,
+			Name:              item.TagName,
 			FinishOrderCount:  item.FinishOrderCount,
-			FinishOrderAmount: float32(item.FinishOrderAmount),
+			FinishOrderAmount: item.FinishOrderAmount,
 		})
 	}
 

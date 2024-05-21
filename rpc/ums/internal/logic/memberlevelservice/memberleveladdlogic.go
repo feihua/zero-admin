@@ -31,21 +31,33 @@ func NewMemberLevelAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 
 // MemberLevelAdd 添加会员等级
 func (l *MemberLevelAddLogic) MemberLevelAdd(in *umsclient.MemberLevelAddReq) (*umsclient.MemberLevelAddResp, error) {
-	err := query.UmsMemberLevel.WithContext(l.ctx).Create(&model.UmsMemberLevel{
-		LevelName:          in.LevelName,
-		GrowthPoint:        in.GrowthPoint,
-		DefaultStatus:      in.DefaultStatus,
-		FreeFreightPoint:   in.FreeFreightPoint,
-		CommentGrowthPoint: in.CommentGrowthPoint,
-		IsFreeFreight:      in.IsFreeFreight,
-		IsSignIn:           in.IsSignIn,
-		IsComment:          in.IsComment,
-		IsPromotion:        in.IsPromotion,
-		IsMemberPrice:      in.IsMemberPrice,
-		IsBirthday:         in.IsBirthday,
-		Remark:             &in.Remark,
-	})
+	db := l.svcCtx.DB
+	q := query.Use(db)
 
+	err := q.Transaction(func(tx *query.Query) error {
+		levelDo := query.UmsMemberLevel.WithContext(l.ctx)
+		if err := levelDo.Create(&model.UmsMemberLevel{
+			LevelName:          in.LevelName,
+			GrowthPoint:        in.GrowthPoint,
+			DefaultStatus:      in.DefaultStatus,
+			FreeFreightPoint:   in.FreeFreightPoint,
+			CommentGrowthPoint: in.CommentGrowthPoint,
+			IsFreeFreight:      in.IsFreeFreight,
+			IsSignIn:           in.IsSignIn,
+			IsComment:          in.IsComment,
+			IsPromotion:        in.IsPromotion,
+			IsMemberPrice:      in.IsMemberPrice,
+			IsBirthday:         in.IsBirthday,
+			Remark:             &in.Remark,
+		}); err != nil {
+			return err
+		}
+
+		//if _, err := levelDo.Where(query.UmsMemberLevel.ID.Eq(1)).Update(query.UmsMemberLevel.LevelName, "普通会员"); err != nil {
+		//	return err
+		//}
+		return nil
+	})
 	if err != nil {
 		return nil, err
 	}

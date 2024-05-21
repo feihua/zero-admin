@@ -62,19 +62,19 @@ type (
 	prefix:     /api/member/task
 )
 service admin-api {
-	//
+	//添加会员任务
 	@handler MemberTaskAdd
 	post /addMemberTask (addMemberTaskReq) returns (addMemberTaskResp)
 
-	//
+	//分页获取会员任务
 	@handler MemberTaskList
 	get /queryMemberTaskList (ListMemberTaskReq) returns (ListMemberTaskResp)
 
-	//
+	//更新会员任务
 	@handler MemberTaskUpdate
 	post /updateMemberTask (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
 
-	//
+	//删除会员任务
 	@handler MemberTaskDelete
 	get /deleteMemberTask (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
 }

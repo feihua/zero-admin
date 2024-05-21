@@ -59,19 +59,19 @@ type (
 	prefix:     /api/member/tag
 )
 service admin-api {
-	//
+	//添加会员标签
 	@handler MemberTagAdd
 	post /addMemberTag (addMemberTagReq) returns (addMemberTagResp)
 
-	//
+	//分页获取会员标签
 	@handler MemberTagList
 	get /queryMemberTagList (ListMemberTagReq) returns (ListMemberTagResp)
 
-	//
+	//更新会员标签
 	@handler MemberTagUpdate
 	post /updateMemberTag (UpdateMemberTagReq) returns (UpdateMemberTagResp)
 
-	//
+	//删除会员标签
 	@handler MemberTagDelete
 	get /deleteMemberTag (DeleteMemberTagReq) returns (DeleteMemberTagResp)
 }
