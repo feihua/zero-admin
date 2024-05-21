@@ -1,26 +1,26 @@
-info(
-    desc: "品牌相关"
-    author: "koobe"
-    email: "1002219331@qq.com"
+info (
+	desc:   "品牌相关"
+	author: "koobe"
+	email:  "1002219331@qq.com"
 )
 
 type BrandListResp {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data []BrandListData `json:"data"`
+	Code    int64           `json:"code"`
+	Message string          `json:"message"`
+	Data    []BrandListData `json:"data"`
 }
 
 type BrandListData {
-    Id int64 `json:"key"`
-    Name string `json:"label"`
+	Id   int64  `json:"key"`
+	Name string `json:"label"`
 }
 
-@server(
-    group: brand
-    prefix: /api/brand
+@server (
+	group:  brand
+	prefix: /api/brand
 )
 service web-api {
-    @handler BrandList
-        get /queryBrandList returns (BrandListResp)
+	@handler BrandList
+	get /queryBrandList returns (BrandListResp)
 }
 

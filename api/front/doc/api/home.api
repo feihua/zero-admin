@@ -1,7 +1,7 @@
-info(
-	desc: "首页数据"
+info (
+	desc:   "首页数据"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type HomeResp {
@@ -11,54 +11,54 @@ type HomeResp {
 }
 
 type Data {
-	AdvertiseList      []AdvertiseList    `json:"advertiseList"`//获取首页广告
+	AdvertiseList      []AdvertiseList    `json:"advertiseList"` //获取首页广告
 	BrandList          []BrandList        `json:"brandList"` //获取推荐品牌
-	HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"`//获取秒杀信息
-	NewProductList     []ProductList      `json:"newProductList"`//获取新品推荐
-	HotProductList     []ProductList      `json:"hotProductList"`//获取人气推荐
-	SubjectList        []SubjectList      `json:"subjectList"`//获取推荐专题
+	HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"` //获取秒杀信息
+	NewProductList     []ProductList      `json:"newProductList"` //获取新品推荐
+	HotProductList     []ProductList      `json:"hotProductList"` //获取人气推荐
+	SubjectList        []SubjectList      `json:"subjectList"` //获取推荐专题
 }
 
 type SubjectList {
 	CategoryId      int64  `json:"categoryId"`
 	Title           string `json:"title"`
-	Pic             string `json:"pic"`          // 专题主图
-	ProductCount int32 `json:"productCount"`     // 关联产品数量
-	RecommendStatus int32 `json:"recommendStatus"`
-	CollectCount int32 `json:"collectCount"`
-	ReadCount int32 `json:"readCount"`
-	CommentCount int32 `json:"commentCount"`
+	Pic             string `json:"pic"` // 专题主图
+	ProductCount    int32  `json:"productCount"` // 关联产品数量
+	RecommendStatus int32  `json:"recommendStatus"`
+	CollectCount    int32  `json:"collectCount"`
+	ReadCount       int32  `json:"readCount"`
+	CommentCount    int32  `json:"commentCount"`
 	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
 	Description     string `json:"description"`
-	ShowStatus int32 `json:"showStatus"`         // 显示状态：0->不显示；1->显示
+	ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
 	Content         string `json:"content"`
-	ForwardCount int32 `json:"forwardCount"`     // 转发数
+	ForwardCount    int32  `json:"forwardCount"` // 转发数
 	CategoryName    string `json:"categoryName"` // 专题分类名称
 }
 
 type AdvertiseList {
 	ID         int64  `json:"id"`
 	Name       string `json:"name"`
-    Type int32 `json:"type"`
+	Type       int32  `json:"type"`
 	Pic        string `json:"pic"`
 	StartTime  string `json:"startTime"`
 	EndTime    string `json:"endTime"`
-    Status int32 `json:"status"`
-    ClickCount int32 `json:"clickCount"`
-    OrderCount int32 `json:"orderCount"`
+	Status     int32  `json:"status"`
+	ClickCount int32  `json:"clickCount"`
+	OrderCount int32  `json:"orderCount"`
 	URL        string `json:"url"`
-    Sort int32 `json:"sort"`
+	Sort       int32  `json:"sort"`
 }
 
 type BrandList {
 	ID                  int64  `json:"id"`
 	Name                string `json:"name"`
 	FirstLetter         string `json:"firstLetter"`
-    Sort int32 `json:"sort"`
-    FactoryStatus int32 `json:"factoryStatus"`
-    ShowStatus int32 `json:"showStatus"`
-    ProductCount int32 `json:"productCount"`
-    ProductCommentCount int32 `json:"productCommentCount"`
+	Sort                int32  `json:"sort"`
+	FactoryStatus       int32  `json:"factoryStatus"`
+	ShowStatus          int32  `json:"showStatus"`
+	ProductCount        int32  `json:"productCount"`
+	ProductCommentCount int32  `json:"productCommentCount"`
 	Logo                string `json:"logo"`
 	BigPic              string `json:"bigPic"`
 }
@@ -72,45 +72,45 @@ type HomeFlashPromotion {
 }
 
 type ProductList {
-	Id                         int64   `json:"id"`
-	BrandId                    int64   `json:"brandId"`
-	ProductCategoryId          int64   `json:"productCategoryId"`
-	FeightTemplateId           int64   `json:"feightTemplateId"`
-	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
-	Name                       string  `json:"name"`
-	Pic                        string  `json:"pic"`
-	ProductSn                  string  `json:"productSn"`
-    DeleteStatus int32 `json:"deleteStatus"`
-    PublishStatus int32 `json:"publishStatus"`
-    NewStatus int32 `json:"newStatus"`
-    RecommandStatus int32 `json:"recommandStatus"`
-    VerifyStatus int32 `json:"verifyStatus"`
-    Sort int32 `json:"sort"`
-    Sale int32 `json:"sale"`
-    Price int64 `json:"price"`
-    PromotionPrice int64 `json:"promotionPrice,omitempty"`
-    GiftGrowth int32 `json:"giftGrowth"`
-    GiftPoint int32 `json:"giftPoint"`
-    UsePointLimit int32 `json:"usePointLimit"`
-	SubTitle                   string  `json:"subTitle"`
-    OriginalPrice int64 `json:"originalPrice"`
-    Stock int32 `json:"stock"`
-    LowStock int32 `json:"lowStock"`
-	Unit                       string  `json:"unit"`
-    Weight int64 `json:"weight"`
-    PreviewStatus int32 `json:"previewStatus"`
-	ServiceIDS                 string  `json:"serviceIds"`
-	Keywords                   string  `json:"keywords"`
-	Note                       string  `json:"note"`
-	AlbumPics                  string  `json:"albumPics"`
-	DetailTitle                string  `json:"detailTitle"`
-	PromotionStartTime         string  `json:"promotionStartTime,omitempty"`
-	PromotionEndTime           string  `json:"promotionEndTime,omitempty"`
-    PromotionPerLimit int32 `json:"promotionPerLimit"`
-    PromotionType int32 `json:"promotionType"`
-	BrandName                  string  `json:"brandName"`
-	ProductCategoryName        string  `json:"productCategoryName"`
-	Description                string  `json:"description"`
+	Id                         int64  `json:"id"`
+	BrandId                    int64  `json:"brandId"`
+	ProductCategoryId          int64  `json:"productCategoryId"`
+	FeightTemplateId           int64  `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+	Name                       string `json:"name"`
+	Pic                        string `json:"pic"`
+	ProductSn                  string `json:"productSn"`
+	DeleteStatus               int32  `json:"deleteStatus"`
+	PublishStatus              int32  `json:"publishStatus"`
+	NewStatus                  int32  `json:"newStatus"`
+	RecommandStatus            int32  `json:"recommandStatus"`
+	VerifyStatus               int32  `json:"verifyStatus"`
+	Sort                       int32  `json:"sort"`
+	Sale                       int32  `json:"sale"`
+	Price                      int64  `json:"price"`
+	PromotionPrice             int64  `json:"promotionPrice,omitempty"`
+	GiftGrowth                 int32  `json:"giftGrowth"`
+	GiftPoint                  int32  `json:"giftPoint"`
+	UsePointLimit              int32  `json:"usePointLimit"`
+	SubTitle                   string `json:"subTitle"`
+	OriginalPrice              int64  `json:"originalPrice"`
+	Stock                      int32  `json:"stock"`
+	LowStock                   int32  `json:"lowStock"`
+	Unit                       string `json:"unit"`
+	Weight                     int64  `json:"weight"`
+	PreviewStatus              int32  `json:"previewStatus"`
+	ServiceIDS                 string `json:"serviceIds"`
+	Keywords                   string `json:"keywords"`
+	Note                       string `json:"note"`
+	AlbumPics                  string `json:"albumPics"`
+	DetailTitle                string `json:"detailTitle"`
+	PromotionStartTime         string `json:"promotionStartTime,omitempty"`
+	PromotionEndTime           string `json:"promotionEndTime,omitempty"`
+	PromotionPerLimit          int32  `json:"promotionPerLimit"`
+	PromotionType              int32  `json:"promotionType"`
+	BrandName                  string `json:"brandName"`
+	ProductCategoryName        string `json:"productCategoryName"`
+	Description                string `json:"description"`
 }
 
 type RecommendProductListReq {
@@ -141,8 +141,8 @@ type SubjectListReq {
 }
 
 type SubjectListResp {
-	Code    int64       `json:"code"`
-	Message string      `json:"message"`
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
 	Data    []SubjectList `json:"data"`
 }
 
@@ -167,12 +167,12 @@ type RecommendHotProductListResp {
 	Message string        `json:"message"`
 	Data    []ProductList `json:"data"`
 }
-@server(
-	group: home
+
+@server (
+	group:  home
 	prefix: /api/home
 )
 service front-api {
-
 	//首页内容信息展示
 	@handler Index
 	get /index returns (HomeResp)
@@ -197,3 +197,4 @@ service front-api {
 	@handler RecommendHotProductList
 	post /recommendHotProductList (RecommendHotProductListReq) returns (RecommendHotProductListResp)
 }
+

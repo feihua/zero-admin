@@ -1,130 +1,132 @@
-info(
-    desc: "会员相关"
-    author: "koobe"
-    email: "1002219331@qq.com"
+info (
+	desc:   "会员相关"
+	author: "koobe"
+	email:  "1002219331@qq.com"
 )
 
 type LoginReq {
-    Account string `json:"account"` //会员名称或者手机号码
-    Password string `json:"password"`          //密码
+	Account  string `json:"account"` //会员名称或者手机号码
+	Password string `json:"password"` //密码
 }
 
 type LoginResp {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data LoginData `json:"data"`
+	Code    int64     `json:"code"`
+	Message string    `json:"message"`
+	Data    LoginData `json:"data"`
 }
 
 type LoginData {
-    Token string `json:"token"`
-    TokenHead string `json:"tokenHead"`
+	Token     string `json:"token"`
+	TokenHead string `json:"tokenHead"`
 }
 
 type RegisterReq {
-    Username string `json:"username"`         //会员名称
-    Password string `json:"password"`         //密码
-    ConfirmPassword string `json:"confirmPassword"` //确认密码
-    Mobile string `json:"mobile"`             //手机号码
+	Username        string `json:"username"` //会员名称
+	Password        string `json:"password"` //密码
+	ConfirmPassword string `json:"confirmPassword"` //确认密码
+	Mobile          string `json:"mobile"` //手机号码
 }
+
 type RegisterResp {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data LoginData `json:"data"`
+	Code    int64     `json:"code"`
+	Message string    `json:"message"`
+	Data    LoginData `json:"data"`
 }
 
 type InfoResp {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
-    Data MemberData `json:"data"`
+	Code    int64      `json:"code"`
+	Message string     `json:"message"`
+	Data    MemberData `json:"data"`
 }
 
 type MemberData {
-    Id int64 `json:"id"`
-    MemberLevelId int64 `json:"memberLevelId"`
-    Username string `json:"username"`                           // 用户名
-    Nickname string `json:"nickname"`                           // 昵称
-    Phone string `json:"phone"`                                 // 手机号码
-    Status int32 `json:"status"`                                // 帐号启用状态:0->禁用；1->启用
-    CreateTime string `json:"createTime"`                       // 注册时间
-    Icon string `json:"icon"`                                   // 头像
-    Gender int32 `json:"gender"`                                // 性别：0->未知；1->男；2->女
-    Birthday string `json:"birthday"`                           // 生日
-    City string `json:"city"`                                   // 所做城市
-    Job string `json:"job"`                                     // 职业
-    PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
-    SourceType int32 `json:"sourceType"`                        // 用户来源
-    Integration int32 `json:"integration"`                      // 积分
-    Growth int32 `json:"growth"`                                // 成长值
-    LuckeyCount int32 `json:"luckeyCount"`                      // 剩余抽奖次数
-    HistoryIntegration int32 `json:"historyIntegration"`        // 历史积分数量
-    CouponCount int32 `json:"couponCount"`                      // 优惠券数量
+	Id                    int64  `json:"id"`
+	MemberLevelId         int64  `json:"memberLevelId"`
+	Username              string `json:"username"` // 用户名
+	Nickname              string `json:"nickname"` // 昵称
+	Phone                 string `json:"phone"` // 手机号码
+	Status                int32  `json:"status"` // 帐号启用状态:0->禁用；1->启用
+	CreateTime            string `json:"createTime"` // 注册时间
+	Icon                  string `json:"icon"` // 头像
+	Gender                int32  `json:"gender"` // 性别：0->未知；1->男；2->女
+	Birthday              string `json:"birthday"` // 生日
+	City                  string `json:"city"` // 所做城市
+	Job                   string `json:"job"` // 职业
+	PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
+	SourceType            int32  `json:"sourceType"` // 用户来源
+	Integration           int32  `json:"integration"` // 积分
+	Growth                int32  `json:"growth"` // 成长值
+	LuckeyCount           int32  `json:"luckeyCount"` // 剩余抽奖次数
+	HistoryIntegration    int32  `json:"historyIntegration"` // 历史积分数量
+	CouponCount           int32  `json:"couponCount"` // 优惠券数量
 }
 
 type UpdatePasswordReq {
-    Password string `json:"password"`//密码
+	Password string `json:"password"` //密码
 }
 
 type UpdatePasswordResp {
-    Code int64 `json:"code"`
-    Message string `json:"message"`
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateMemberReq {
-    Id int64 `json:"id"`
-    MemberLevelId int64 `json:"memberLevelId"`
-    Username string `json:"username"`                           // 用户名
-    Password string `json:"password"`                           // 密码
-    Nickname string `json:"nickname"`                           // 昵称
-    Phone string `json:"phone"`                                 // 手机号码
-    Status int32 `json:"status"`                                // 帐号启用状态:0->禁用；1->启用
-    CreateTime string `json:"createTime"`                       // 注册时间
-    Icon string `json:"icon"`                                   // 头像
-    Gender int32 `json:"gender"`                                // 性别：0->未知；1->男；2->女
-    Birthday string `json:"birthday"`                           // 生日
-    City string `json:"city"`                                   // 所做城市
-    Job string `json:"job"`                                     // 职业
-    PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
-    SourceType int32 `json:"sourceType"`                        // 用户来源
-    Integration int32 `json:"integration"`                      // 积分
-    Growth int32 `json:"growth"`                                // 成长值
-    LuckeyCount int32 `json:"luckeyCount"`                      // 剩余抽奖次数
-    HistoryIntegration int32 `json:"historyIntegration"`        // 历史积分数量
+	Id                    int64  `json:"id"`
+	MemberLevelId         int64  `json:"memberLevelId"`
+	Username              string `json:"username"` // 用户名
+	Password              string `json:"password"` // 密码
+	Nickname              string `json:"nickname"` // 昵称
+	Phone                 string `json:"phone"` // 手机号码
+	Status                int32  `json:"status"` // 帐号启用状态:0->禁用；1->启用
+	CreateTime            string `json:"createTime"` // 注册时间
+	Icon                  string `json:"icon"` // 头像
+	Gender                int32  `json:"gender"` // 性别：0->未知；1->男；2->女
+	Birthday              string `json:"birthday"` // 生日
+	City                  string `json:"city"` // 所做城市
+	Job                   string `json:"job"` // 职业
+	PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
+	SourceType            int32  `json:"sourceType"` // 用户来源
+	Integration           int32  `json:"integration"` // 积分
+	Growth                int32  `json:"growth"` // 成长值
+	LuckeyCount           int32  `json:"luckeyCount"` // 剩余抽奖次数
+	HistoryIntegration    int32  `json:"historyIntegration"` // 历史积分数量
 }
+
 type UpdateMemberResp {
-    Code string `json:"code"`
-    Message string `json:"message"`
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
-@server(
-    group: member/member
-    prefix: /api/member
+
+@server (
+	group:  member/member
+	prefix: /api/member
 )
 service front-api {
+	// 会员注册
+	@handler Register
+	post /register (RegisterReq) returns (RegisterResp)
 
-    // 会员注册
-    @handler Register
-    post /register (RegisterReq) returns (RegisterResp)
-
-    // 会员登录
-    @handler Login
-    post /login (LoginReq) returns (LoginResp)
+	// 会员登录
+	@handler Login
+	post /login (LoginReq) returns (LoginResp)
 }
 
-@server(
-    jwt: Auth
-    group: member/member
-    prefix: /api/member
+@server (
+	jwt:    Auth
+	group:  member/member
+	prefix: /api/member
 )
 service front-api {
+	// 获取会员个人信息
+	@handler Info
+	get /info returns (InfoResp)
 
-    // 获取会员个人信息
-    @handler Info
-    get /info returns (InfoResp)
+	// 更新会员密码
+	@handler UpdatePassword
+	post /updatePassword (UpdatePasswordReq) returns (UpdatePasswordResp)
 
-    // 更新会员密码
-    @handler UpdatePassword
-    post /updatePassword (UpdatePasswordReq) returns (UpdatePasswordResp)
-
-    // 更新会员信息
-    @handler UpdateMember
-    post /updateMember (UpdateMemberReq) returns (UpdateMemberResp)
+	// 更新会员信息
+	@handler UpdateMember
+	post /updateMember (UpdateMemberReq) returns (UpdateMemberResp)
 }
+

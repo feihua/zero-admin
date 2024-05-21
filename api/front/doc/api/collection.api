@@ -1,16 +1,17 @@
-info(
-	desc: "会员商品收藏管理"
+info (
+	desc:   "会员商品收藏管理"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type AddProductCollectionReq {
-	ProductId       int64   `json:"productId"`       // 商品id
-	ProductName     string  `json:"productName"`     // 商品名称
-	ProductPic      string  `json:"productPic"`      // 商品图片
-	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
-    ProductPrice int64 `json:"productPrice"`         // 商品价格
+	ProductId       int64  `json:"productId"` // 商品id
+	ProductName     string `json:"productName"` // 商品名称
+	ProductPic      string `json:"productPic"` // 商品图片
+	ProductSubTitle string `json:"productSubTitle"` // 商品标题
+	ProductPrice    int64  `json:"productPrice"` // 商品价格
 }
+
 type AddProductCollectionResp {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
@@ -25,24 +26,23 @@ type ProductCollectionDeleteResp {
 	Message string `json:"message"`
 }
 
-
 type ProductCollectionListResp {
-	Code    int64                     `json:"code"`
-	Message string                    `json:"message"`
-	Data  []ProductCollectionList `json:"data"`  //收藏列表
+	Code    int64                   `json:"code"`
+	Message string                  `json:"message"`
+	Data    []ProductCollectionList `json:"data"` //收藏列表
 }
 
 type ProductCollectionList {
-	Id              int64   `json:"id"`              // 编号
-	MemberId        int64   `json:"memberId"`        // 会员id
-	MemberNickName  string  `json:"memberNickName"`  // 会员姓名
-	MemberIcon      string  `json:"memberIcon"`      // 会员头像
-	ProductId       int64   `json:"productId"`       // 商品id
-	ProductName     string  `json:"productName"`     // 商品名称
-	ProductPic      string  `json:"productPic"`      // 商品图片
-	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
-    ProductPrice int64 `json:"productPrice"`         // 商品价格
-	CreateTime      string  `json:"createTime"`      // 浏览时间
+	Id              int64  `json:"id"` // 编号
+	MemberId        int64  `json:"memberId"` // 会员id
+	MemberNickName  string `json:"memberNickName"` // 会员姓名
+	MemberIcon      string `json:"memberIcon"` // 会员头像
+	ProductId       int64  `json:"productId"` // 商品id
+	ProductName     string `json:"productName"` // 商品名称
+	ProductPic      string `json:"productPic"` // 商品图片
+	ProductSubTitle string `json:"productSubTitle"` // 商品标题
+	ProductPrice    int64  `json:"productPrice"` // 商品价格
+	CreateTime      string `json:"createTime"` // 浏览时间
 }
 
 type ProductCollectionClearResp {
@@ -50,13 +50,12 @@ type ProductCollectionClearResp {
 	Message string `json:"message"`
 }
 
-@server(
-	jwt: Auth
-	group: collection
+@server (
+	jwt:    Auth
+	group:  collection
 	prefix: /api/collection
 )
 service front-api {
-
 	//添加商品收藏
 	@handler AddProductCollection
 	post /addProductCollection (AddProductCollectionReq) returns (AddProductCollectionResp)
@@ -68,5 +67,5 @@ service front-api {
 	//分页查询商品收藏列表
 	@handler QueryProductCollectionList
 	get /queryProductCollectionList returns (ProductCollectionListResp)
-
 }
+

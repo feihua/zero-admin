@@ -9,6 +9,14 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOGET=$(GOCMD) mod tidy
 
+GOCTL=$(GOBIN)/goctl ## goctl
+
+# 安装goctl代码生成工具
+$(shell if [ ! -d $(GOCTL) ]; then \
+	$(GOCMD) install github.com/zeromicro/go-zero/tools/goctl@latest; \
+fi; \
+)
+
 MYSQL_INFO=root:r-wz9wop62956dh5k9ed@tcp(110.41.179.89:30395)/gozero
 
 
@@ -76,14 +84,10 @@ stop: ## 停止目标
     done
 
 
-
 restart: stop start ## 重启项目
 
 
 .DEFAULT_GOAL := all ## 默认构建目标是
-
-
-GOCTL=$(GOBIN)/goctl ## goctl
 
 
 format: ## 格式化代码
@@ -111,12 +115,13 @@ gen:	## 生成所有模块代码
 	$(GOCTL) rpc protoc rpc/cms/cms.proto --go_out=./rpc/cms/ --go-grpc_out=./rpc/cms/ --zrpc_out=./rpc/cms/ -m
 
 model: ## 生成model代码
-	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="sys*" -dir=./rpc/model/sysmodel
-	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="ums*" -dir=./rpc/model/umsmodel
-	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="sms*" -dir=./rpc/model/smsmodel
-	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="oms*" -dir=./rpc/model/omsmodel
-	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="pms*" -dir=./rpc/model/pmsmodel
-	$(GOCTL)  model mysql datasource -url="$(MYSQL_INFO)" -table="cms*" -dir=./rpc/model/cmsmodel
+	go run rpc/cms/gen/generator.go
+	go run rpc/oms/gen/generator.go
+	go run rpc/pms/gen/generator.go
+	go run rpc/sms/gen/generator.go
+	go run rpc/sys/gen/generator.go
+	go run rpc/ums/gen/generator.go
+
 
 image: ## 构建docker镜像
 	docker build -t sys-rpc:0.0.1 -f rpc/sys/Dockerfile .

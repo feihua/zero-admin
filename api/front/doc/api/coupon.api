@@ -1,111 +1,108 @@
-info(
-    desc: "优惠券"
-    author: "koobe"
-    email: "1002219331@qq.com"
+info (
+	desc:   "优惠券"
+	author: "koobe"
+	email:  "1002219331@qq.com"
 )
 
 type (
-    AddCouponReq {
-        CouponId int64 `json:"couponId"`
-    }
-    AddCouponResp {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
-    }
-
-    ListCouponHistoryReq {
-        UseStatus int32 `path:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
-    }
-    ListCouponHistoryData {
-        Id             int64  `json:"id"`
-        CouponId       int64  `json:"couponId"`
-        MemberId       int64  `json:"memberId"`
-        CouponCode     string `json:"couponCode"`
-        MemberNickname string `json:"memberNickName"` // 领取人昵称
-        GetType        int32  `json:"getType"` // 获取类型：0->后台赠送；1->主动获取
-        CreateTime     string `json:"createTime"`
-        UseStatus      int32  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
-        UseTime        string `json:"useTime"` // 使用时间
-        OrderId        int64  `json:"orderId"` // 订单编号
-        OrderSn        string `json:"orderSn"` // 订单号码
-    }
-    ListCouponHistoryResp {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
-        Data []*ListCouponHistoryData `json:"data"`
-    }
-    ListCouponReq {
-        UseStatus int32 `form:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
-    }
-    ListCouponData {
-        Id int64 `json:"id"`
-        Type int32 `json:"type"`                 // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-        Name string `json:"name"`
-        Platform int32 `json:"platform"`         // 使用平台：0->全部；1->移动；2->PC
-        Count int32 `json:"count"`               // 数量
-        Amount int64 `json:"amount"`             // 金额
-        PerLimit int32 `json:"perLimit"`         // 每人限领张数
-        MinPoint int64 `json:"minPoint"`         // 使用门槛；0表示无门槛
-        StartTime string `json:"startTime"`
-        EndTime string `json:"endTime"`
-        UseType int32 `json:"useType"`           // 使用类型：0->全场通用；1->指定分类；2->指定商品
-        Note string `json:"note"`                // 备注
-        PublishCount int32 `json:"publishCount"` // 发行数量
-        UseCount int32 `json:"useCount"`         // 已使用数量
-        ReceiveCount int32 `json:"receiveCount"` // 领取数量
-        EnableTime string `json:"enableTime"`    // 可以领取的日期
-        Code string `json:"code"`                // 优惠码
-        MemberLevel int32 `json:"memberLevel"`   // 可领取的会员类型：0->无限时
-    }
-    ListCouponResp {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
-        Data []*ListCouponData `json:"data"`
-    }
-
-    QueryCouponListByProductIdReq {
-        ProductId int64 `form:"productId"`
-        ProductCategoryId int64 `form:"productCategoryId"`
-    }
-    CouponListByCartReq {
-        Type int32 `form:"type"`    // 使用状态-使用可用:0->不可用；1->可用
-    }
-
-    CouponListByCartResp {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
-        Data CouponListByCartData `json:"data"`
-    }
-    CouponListByCartData {
-        EnableList interface{} `json:"enableList"`
-        DisableList interface{} `json:"disableList"`
-    }
+	AddCouponReq {
+		CouponId int64 `json:"couponId"`
+	}
+	AddCouponResp {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+	ListCouponHistoryReq {
+		UseStatus int32 `path:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
+	}
+	ListCouponHistoryData {
+		Id             int64  `json:"id"`
+		CouponId       int64  `json:"couponId"`
+		MemberId       int64  `json:"memberId"`
+		CouponCode     string `json:"couponCode"`
+		MemberNickname string `json:"memberNickName"` // 领取人昵称
+		GetType        int32  `json:"getType"` // 获取类型：0->后台赠送；1->主动获取
+		CreateTime     string `json:"createTime"`
+		UseStatus      int32  `json:"useStatus"` // 使用状态：0->未使用；1->已使用；2->已过期
+		UseTime        string `json:"useTime"` // 使用时间
+		OrderId        int64  `json:"orderId"` // 订单编号
+		OrderSn        string `json:"orderSn"` // 订单号码
+	}
+	ListCouponHistoryResp {
+		Code    int64                    `json:"code"`
+		Message string                   `json:"message"`
+		Data    []*ListCouponHistoryData `json:"data"`
+	}
+	ListCouponReq {
+		UseStatus int32 `form:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
+	}
+	ListCouponData {
+		Id           int64  `json:"id"`
+		Type         int32  `json:"type"` // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+		Name         string `json:"name"`
+		Platform     int32  `json:"platform"` // 使用平台：0->全部；1->移动；2->PC
+		Count        int32  `json:"count"` // 数量
+		Amount       int64  `json:"amount"` // 金额
+		PerLimit     int32  `json:"perLimit"` // 每人限领张数
+		MinPoint     int64  `json:"minPoint"` // 使用门槛；0表示无门槛
+		StartTime    string `json:"startTime"`
+		EndTime      string `json:"endTime"`
+		UseType      int32  `json:"useType"` // 使用类型：0->全场通用；1->指定分类；2->指定商品
+		Note         string `json:"note"` // 备注
+		PublishCount int32  `json:"publishCount"` // 发行数量
+		UseCount     int32  `json:"useCount"` // 已使用数量
+		ReceiveCount int32  `json:"receiveCount"` // 领取数量
+		EnableTime   string `json:"enableTime"` // 可以领取的日期
+		Code         string `json:"code"` // 优惠码
+		MemberLevel  int32  `json:"memberLevel"` // 可领取的会员类型：0->无限时
+	}
+	ListCouponResp {
+		Code    int64             `json:"code"`
+		Message string            `json:"message"`
+		Data    []*ListCouponData `json:"data"`
+	}
+	QueryCouponListByProductIdReq {
+		ProductId         int64 `form:"productId"`
+		ProductCategoryId int64 `form:"productCategoryId"`
+	}
+	CouponListByCartReq {
+		Type int32 `form:"type"` // 使用状态-使用可用:0->不可用；1->可用
+	}
+	CouponListByCartResp {
+		Code    int64                `json:"code"`
+		Message string               `json:"message"`
+		Data    CouponListByCartData `json:"data"`
+	}
+	CouponListByCartData {
+		EnableList  interface{} `json:"enableList"`
+		DisableList interface{} `json:"disableList"`
+	}
 )
 
-@server(
-    jwt: Auth
-    group: member/coupon
-    prefix: /api/member/coupon
+@server (
+	jwt:    Auth
+	group:  member/coupon
+	prefix: /api/member/coupon
 )
 service front-api {
+	//领取指定优惠券
+	@handler AddCoupon
+	post /addCoupon (AddCouponReq) returns (AddCouponResp)
 
-    //领取指定优惠券
-    @handler AddCoupon
-    post /addCoupon (AddCouponReq) returns (AddCouponResp)
+	//获取会员优惠券历史列表
+	@handler QueryCouponHistoryList
+	get /queryCouponHistoryList (ListCouponHistoryReq) returns (ListCouponHistoryResp)
 
-    //获取会员优惠券历史列表
-    @handler QueryCouponHistoryList
-    get /queryCouponHistoryList (ListCouponHistoryReq) returns (ListCouponHistoryResp)
+	//获取会员优惠券列表
+	@handler QueryCouponList
+	get /queryCouponList (ListCouponReq) returns (ListCouponResp)
 
-    //获取会员优惠券列表
-    @handler QueryCouponList
-    get /queryCouponList (ListCouponReq) returns (ListCouponResp)
+	//获取当前商品相关优惠券
+	@handler QueryCouponListByProductId
+	get /queryCouponListByProductId (QueryCouponListByProductIdReq) returns (ListCouponResp)
 
-    //获取当前商品相关优惠券
-    @handler QueryCouponListByProductId
-    get /queryCouponListByProductId (QueryCouponListByProductIdReq) returns (ListCouponResp)
-
-    //获取登录会员购物车的相关优惠券
-    @handler QueryCouponListByCart
-    get /queryCouponListByCart (CouponListByCartReq) returns (CouponListByCartResp)
+	//获取登录会员购物车的相关优惠券
+	@handler QueryCouponListByCart
+	get /queryCouponListByCart (CouponListByCartReq) returns (CouponListByCartResp)
 }
+

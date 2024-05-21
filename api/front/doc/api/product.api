@@ -1,7 +1,7 @@
-info(
-	desc: "商品信息"
+info (
+	desc:   "商品信息"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type QueryProductReq {
@@ -29,11 +29,11 @@ type Brand {
 	Id                  int64  `json:"id"`
 	Name                string `json:"name"`
 	FirstLetter         string `json:"firstLetter"`
-    Sort int32 `json:"sort"`
-    FactoryStatus int32 `json:"factoryStatus"`
-    ShowStatus int32 `json:"showStatus"`
-    ProductCount int32 `json:"productCount"`
-    ProductCommentCount int32 `json:"productCommentCount"`
+	Sort                int32  `json:"sort"`
+	FactoryStatus       int32  `json:"factoryStatus"`
+	ShowStatus          int32  `json:"showStatus"`
+	ProductCount        int32  `json:"productCount"`
+	ProductCommentCount int32  `json:"productCommentCount"`
 	Logo                string `json:"logo"`
 	BigPic              string `json:"bigPic"`
 	BrandStory          string `json:"brandStory"`
@@ -41,80 +41,80 @@ type Brand {
 
 type CouponList {
 	Id           int64  `json:"id"`
-    Type int32 `json:"type"`
+	Type         int32  `json:"type"`
 	Name         string `json:"name"`
-    Platform int32 `json:"platform"`
-    Count int32 `json:"count"`
-    Amount int64 `json:"amount"`
-    PerLimit int32 `json:"perLimit"`
-    MinPoint int64 `json:"minPoint"`
+	Platform     int32  `json:"platform"`
+	Count        int32  `json:"count"`
+	Amount       int64  `json:"amount"`
+	PerLimit     int32  `json:"perLimit"`
+	MinPoint     int64  `json:"minPoint"`
 	StartTime    string `json:"startTime"`
 	EndTime      string `json:"endTime"`
-    UseType int32 `json:"useType"`
-    PublishCount int32 `json:"publishCount"`
-    UseCount int32 `json:"useCount"`
-    ReceiveCount int32 `json:"receiveCount"`
+	UseType      int32  `json:"useType"`
+	PublishCount int32  `json:"publishCount"`
+	UseCount     int32  `json:"useCount"`
+	ReceiveCount int32  `json:"receiveCount"`
 	EnableTime   string `json:"enableTime"`
 }
 
 type Product {
-	Id                         int64   `json:"id"`
-	BrandId                    int64   `json:"brandId"`
-	ProductCategoryId          int64   `json:"productCategoryId"`
-	FeightTemplateId           int64   `json:"feightTemplateId"`
-	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
-	Name                       string  `json:"name"`
-	Pic                        string  `json:"pic"`
-	ProductSn                  string  `json:"productSn"`
-    DeleteStatus int32 `json:"deleteStatus"`
-    PublishStatus int32 `json:"publishStatus"`
-    NewStatus int32 `json:"newStatus"`
-    RecommandStatus int32 `json:"recommandStatus"`
-    VerifyStatus int32 `json:"verifyStatus"`
-    Sort int32 `json:"sort"`
-    Sale int32 `json:"sale"`
-    Price int64 `json:"price"`
-    PromotionPrice int64 `json:"promotionPrice"`
-    GiftGrowth int32 `json:"giftGrowth"`
-    GiftPoint int32 `json:"giftPoint"`
-    UsePointLimit int32 `json:"usePointLimit"`
-	SubTitle                   string  `json:"subTitle"`
-    OriginalPrice int64 `json:"originalPrice"`
-    Stock int32 `json:"stock"`
-    LowStock int32 `json:"lowStock"`
-	Unit                       string  `json:"unit"`
-    Weight int64 `json:"weight"`
-    PreviewStatus int32 `json:"previewStatus"`
-	ServiceIds                 string  `json:"serviceIds"`
-	Keywords                   string  `json:"keywords"`
-	Note                       string  `json:"note"`
-	AlbumPics                  string  `json:"albumPics"`
-	DetailTitle                string  `json:"detailTitle"`
-	PromotionStartTime         string  `json:"promotionStartTime"`
-	PromotionEndTime           string  `json:"promotionEndTime"`
-    PromotionPerLimit int32 `json:"promotionPerLimit"`
-    PromotionType int32 `json:"promotionType"`
-	BrandName                  string  `json:"brandName"`
-	ProductCategoryName        string  `json:"productCategoryName"`
-	Description                string  `json:"description"`
-	DetailDesc                 string  `json:"detailDesc"`
-	DetailHtml                 string  `json:"detailHtml"`
-	DetailMobileHtml           string  `json:"detailMobileHtml"`
+	Id                         int64  `json:"id"`
+	BrandId                    int64  `json:"brandId"`
+	ProductCategoryId          int64  `json:"productCategoryId"`
+	FeightTemplateId           int64  `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+	Name                       string `json:"name"`
+	Pic                        string `json:"pic"`
+	ProductSn                  string `json:"productSn"`
+	DeleteStatus               int32  `json:"deleteStatus"`
+	PublishStatus              int32  `json:"publishStatus"`
+	NewStatus                  int32  `json:"newStatus"`
+	RecommandStatus            int32  `json:"recommandStatus"`
+	VerifyStatus               int32  `json:"verifyStatus"`
+	Sort                       int32  `json:"sort"`
+	Sale                       int32  `json:"sale"`
+	Price                      int64  `json:"price"`
+	PromotionPrice             int64  `json:"promotionPrice"`
+	GiftGrowth                 int32  `json:"giftGrowth"`
+	GiftPoint                  int32  `json:"giftPoint"`
+	UsePointLimit              int32  `json:"usePointLimit"`
+	SubTitle                   string `json:"subTitle"`
+	OriginalPrice              int64  `json:"originalPrice"`
+	Stock                      int32  `json:"stock"`
+	LowStock                   int32  `json:"lowStock"`
+	Unit                       string `json:"unit"`
+	Weight                     int64  `json:"weight"`
+	PreviewStatus              int32  `json:"previewStatus"`
+	ServiceIds                 string `json:"serviceIds"`
+	Keywords                   string `json:"keywords"`
+	Note                       string `json:"note"`
+	AlbumPics                  string `json:"albumPics"`
+	DetailTitle                string `json:"detailTitle"`
+	PromotionStartTime         string `json:"promotionStartTime"`
+	PromotionEndTime           string `json:"promotionEndTime"`
+	PromotionPerLimit          int32  `json:"promotionPerLimit"`
+	PromotionType              int32  `json:"promotionType"`
+	BrandName                  string `json:"brandName"`
+	ProductCategoryName        string `json:"productCategoryName"`
+	Description                string `json:"description"`
+	DetailDesc                 string `json:"detailDesc"`
+	DetailHtml                 string `json:"detailHtml"`
+	DetailMobileHtml           string `json:"detailMobileHtml"`
 }
 
 type ProductAttributeList {
 	Id                         int64  `json:"id"`
 	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
 	Name                       string `json:"name"`
-    SelectType int32 `json:"selectType"`
-    InputType int32 `json:"inputType"`
+	SelectType                 int32  `json:"selectType"`
+	InputType                  int32  `json:"inputType"`
 	InputList                  string `json:"inputList"`
-    Sort int32 `json:"sort"`
-    FilterType int32 `json:"filterType"`
-    SearchType int32 `json:"searchType"`
-    RelatedStatus int32 `json:"relatedStatus"`
-    HandAddStatus int32 `json:"handAddStatus"`
-    Type int32 `json:"type"`
+	Sort                       int32  `json:"sort"`
+	FilterType                 int32  `json:"filterType"`
+	SearchType                 int32  `json:"searchType"`
+	RelatedStatus              int32  `json:"relatedStatus"`
+	HandAddStatus              int32  `json:"handAddStatus"`
+	Type                       int32  `json:"type"`
 }
 
 type ProductAttributeValueList {
@@ -125,40 +125,40 @@ type ProductAttributeValueList {
 }
 
 type ProductLadderList {
-	Id        int64   `json:"id"`
-	ProductId int64   `json:"productId"`
-    Count int32 `json:"count"`
-    Discount int64 `json:"discount"`
-    Price int64 `json:"price"`
+	Id        int64 `json:"id"`
+	ProductId int64 `json:"productId"`
+	Count     int32 `json:"count"`
+	Discount  int64 `json:"discount"`
+	Price     int64 `json:"price"`
 }
 
 type SkuStockList {
-	Id             int64   `json:"id"`
-	ProductId      int64   `json:"productId"`
-	SkuCode        string  `json:"skuCode"` // sku编码
-    Price int64 `json:"price"`
-    Stock int32 `json:"stock"`              // 库存
-    LowStock int32 `json:"lowStock"`        // 预警库存
-	Pic            string  `json:"pic"`            // 展示图片
-    Sale int32 `json:"sale"`           // 销量
-    PromotionPrice int64 `json:"promotionPrice"` // 单品促销价格
-    LockStock int32 `json:"lockStock"`      // 锁定库存
-	SpData         string  `json:"spData"`         // 商品销售属性，json格式
+	Id             int64  `json:"id"`
+	ProductId      int64  `json:"productId"`
+	SkuCode        string `json:"skuCode"` // sku编码
+	Price          int64  `json:"price"`
+	Stock          int32  `json:"stock"` // 库存
+	LowStock       int32  `json:"lowStock"` // 预警库存
+	Pic            string `json:"pic"` // 展示图片
+	Sale           int32  `json:"sale"` // 销量
+	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
+	LockStock      int32  `json:"lockStock"` // 锁定库存
+	SpData         string `json:"spData"` // 商品销售属性，json格式
 }
 
 type ProductFullReductionList {
-	Id          int64   `json:"id"`
-	ProductId   int64   `json:"productId"`
-    FullPrice int64 `json:"fullPrice"`
-    ReducePrice int64 `json:"reducePrice"`
+	Id          int64 `json:"id"`
+	ProductId   int64 `json:"productId"`
+	FullPrice   int64 `json:"fullPrice"`
+	ReducePrice int64 `json:"reducePrice"`
 }
 
 type QueryProductListReq {
-	Current           int64 `path:"current,default=1"`
-	PageSize          int64 `path:"pageSize,default=10"`
-	BrandId           int64 `path:"brandId,default=0"`
-	ProductCategoryId int64 `path:"productCategoryId,default=0"`
-	Keyword string `path:"keyword"`
+	Current           int64  `path:"current,default=1"`
+	PageSize          int64  `path:"pageSize,default=10"`
+	BrandId           int64  `path:"brandId,default=0"`
+	ProductCategoryId int64  `path:"productCategoryId,default=0"`
+	Keyword           string `path:"keyword"`
 }
 
 type QueryProductListResp {
@@ -168,55 +168,56 @@ type QueryProductListResp {
 }
 
 type QueryProductListData {
-	Id                         int64   `json:"id"`
-	BrandId                    int64   `json:"brandId"`
-	ProductCategoryId          int64   `json:"productCategoryId"`
-	FeightTemplateId           int64   `json:"feightTemplateId"`
-	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
-	Name                       string  `json:"name"`
-	Pic                        string  `json:"pic"`
-	ProductSn                  string  `json:"productSn"`
-    DeleteStatus int32 `json:"deleteStatus"`
-    PublishStatus int32 `json:"publishStatus"`
-    NewStatus int32 `json:"newStatus"`
-    RecommandStatus int32 `json:"recommandStatus"`
-    VerifyStatus int32 `json:"verifyStatus"`
-    Sort int32 `json:"sort"`
-    Sale int32 `json:"sale"`
-    Price int64 `json:"price"`
-    PromotionPrice int64 `json:"promotionPrice,omitempty"`
-    GiftGrowth int32 `json:"giftGrowth"`
-    GiftPoint int32 `json:"giftPoint"`
-    UsePointLimit int32 `json:"usePointLimit"`
-	SubTitle                   string  `json:"subTitle"`
-    OriginalPrice int64 `json:"originalPrice"`
-    Stock int32 `json:"stock"`
-    LowStock int32 `json:"lowStock"`
-	Unit                       string  `json:"unit"`
-    Weight int64 `json:"weight"`
-    PreviewStatus int32 `json:"previewStatus"`
-	ServiceIDS                 string  `json:"serviceIds"`
-	Keywords                   string  `json:"keywords"`
-	Note                       string  `json:"note"`
-	AlbumPics                  string  `json:"albumPics"`
-	DetailTitle                string  `json:"detailTitle"`
-	PromotionStartTime         string  `json:"promotionStartTime,omitempty"`
-	PromotionEndTime           string  `json:"promotionEndTime,omitempty"`
-    PromotionPerLimit int32 `json:"promotionPerLimit"`
-    PromotionType int32 `json:"promotionType"`
-	BrandName                  string  `json:"brandName"`
-	ProductCategoryName        string  `json:"productCategoryName"`
-	Description                string  `json:"description"`
+	Id                         int64  `json:"id"`
+	BrandId                    int64  `json:"brandId"`
+	ProductCategoryId          int64  `json:"productCategoryId"`
+	FeightTemplateId           int64  `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+	Name                       string `json:"name"`
+	Pic                        string `json:"pic"`
+	ProductSn                  string `json:"productSn"`
+	DeleteStatus               int32  `json:"deleteStatus"`
+	PublishStatus              int32  `json:"publishStatus"`
+	NewStatus                  int32  `json:"newStatus"`
+	RecommandStatus            int32  `json:"recommandStatus"`
+	VerifyStatus               int32  `json:"verifyStatus"`
+	Sort                       int32  `json:"sort"`
+	Sale                       int32  `json:"sale"`
+	Price                      int64  `json:"price"`
+	PromotionPrice             int64  `json:"promotionPrice,omitempty"`
+	GiftGrowth                 int32  `json:"giftGrowth"`
+	GiftPoint                  int32  `json:"giftPoint"`
+	UsePointLimit              int32  `json:"usePointLimit"`
+	SubTitle                   string `json:"subTitle"`
+	OriginalPrice              int64  `json:"originalPrice"`
+	Stock                      int32  `json:"stock"`
+	LowStock                   int32  `json:"lowStock"`
+	Unit                       string `json:"unit"`
+	Weight                     int64  `json:"weight"`
+	PreviewStatus              int32  `json:"previewStatus"`
+	ServiceIDS                 string `json:"serviceIds"`
+	Keywords                   string `json:"keywords"`
+	Note                       string `json:"note"`
+	AlbumPics                  string `json:"albumPics"`
+	DetailTitle                string `json:"detailTitle"`
+	PromotionStartTime         string `json:"promotionStartTime,omitempty"`
+	PromotionEndTime           string `json:"promotionEndTime,omitempty"`
+	PromotionPerLimit          int32  `json:"promotionPerLimit"`
+	PromotionType              int32  `json:"promotionType"`
+	BrandName                  string `json:"brandName"`
+	ProductCategoryName        string `json:"productCategoryName"`
+	Description                string `json:"description"`
 }
 
-@server(
-	group: product
+@server (
+	group:  product
 	prefix: /api/product
 )
 service front-api {
 	@handler QueryProduct
 	get /queryProduct (QueryProductReq) returns (QueryProductResp)
-	
+
 	@handler QueryProductList
 	get /queryProductList (QueryProductListReq) returns (QueryProductListResp)
 }
+

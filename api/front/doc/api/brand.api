@@ -1,16 +1,17 @@
-info(
-	desc: "品牌相关"
+info (
+	desc:   "品牌相关"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type BrandListReq {
-	Current    int64  `form:"current,default=1"`
-	PageSize   int64  `form:"pageSize,default=6"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=6"`
 }
+
 type BrandListResp {
-	Code    int64          `json:"code"`
-	Message string         `json:"message"`
+	Code    int64           `json:"code"`
+	Message string          `json:"message"`
 	Data    []BrandListData `json:"data"`
 }
 
@@ -18,75 +19,74 @@ type BrandListData {
 	Id                  int64  `json:"id"`
 	Name                string `json:"name"`
 	FirstLetter         string `json:"firstLetter"`
-    Sort int32 `json:"sort"`
-    FactoryStatus int32 `json:"factoryStatus"`
-    ShowStatus int32 `json:"showStatus"`
-    ProductCount int32 `json:"productCount"`
-    ProductCommentCount int32 `json:"productCommentCount"`
+	Sort                int32  `json:"sort"`
+	FactoryStatus       int32  `json:"factoryStatus"`
+	ShowStatus          int32  `json:"showStatus"`
+	ProductCount        int32  `json:"productCount"`
+	ProductCommentCount int32  `json:"productCommentCount"`
 	Logo                string `json:"logo"`
 	BigPic              string `json:"bigPic"`
 }
 
 type QueryBrandProductListReq {
-	BrandId int64 `form:"brandId"`
-	Current    int64  `form:"current,default=1"`
-	PageSize   int64  `form:"pageSize,default=6"`
+	BrandId  int64 `form:"brandId"`
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=6"`
 }
 
 type QueryBrandProductListResp {
-	Code    int64          `json:"code"`
-	Message string         `json:"message"`
+	Code    int64              `json:"code"`
+	Message string             `json:"message"`
 	Data    []BrandProductList `json:"data"`
 }
+
 type BrandProductList {
-	Id                         int64   `json:"id"`
-	BrandId                    int64   `json:"brandId"`
-	ProductCategoryId          int64   `json:"productCategoryId"`
-	FeightTemplateId           int64   `json:"feightTemplateId"`
-	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
-	Name                       string  `json:"name"`
-	Pic                        string  `json:"pic"`
-	ProductSn                  string  `json:"productSn"`
-    DeleteStatus int32 `json:"deleteStatus"`
-    PublishStatus int32 `json:"publishStatus"`
-    NewStatus int32 `json:"newStatus"`
-    RecommandStatus int32 `json:"recommandStatus"`
-    VerifyStatus int32 `json:"verifyStatus"`
-    Sort int32 `json:"sort"`
-    Sale int32 `json:"sale"`
-    Price int64 `json:"price"`
-    PromotionPrice int64 `json:"promotionPrice"`
-    GiftGrowth int32 `json:"giftGrowth"`
-    GiftPoint int32 `json:"giftPoint"`
-    UsePointLimit int32 `json:"usePointLimit"`
-	SubTitle                   string  `json:"subTitle"`
-    OriginalPrice int64 `json:"originalPrice"`
-    Stock int32 `json:"stock"`
-    LowStock int32 `json:"lowStock"`
-	Unit                       string  `json:"unit"`
-    Weight int64 `json:"weight"`
-    PreviewStatus int32 `json:"previewStatus"`
-	ServiceIDS                 string  `json:"serviceIds"`
-	Keywords                   string  `json:"keywords"`
-	Note                       string  `json:"note"`
-	AlbumPics                  string  `json:"albumPics"`
-	DetailTitle                string  `json:"detailTitle"`
-	PromotionStartTime         string  `json:"promotionStartTime"`
-	PromotionEndTime           string  `json:"promotionEndTime"`
-    PromotionPerLimit int32 `json:"promotionPerLimit"`
-    PromotionType int32 `json:"promotionType"`
-	BrandName                  string  `json:"brandName"`
-	ProductCategoryName        string  `json:"productCategoryName"`
-	Description                string  `json:"description"`
+	Id                         int64  `json:"id"`
+	BrandId                    int64  `json:"brandId"`
+	ProductCategoryId          int64  `json:"productCategoryId"`
+	FeightTemplateId           int64  `json:"feightTemplateId"`
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
+	Name                       string `json:"name"`
+	Pic                        string `json:"pic"`
+	ProductSn                  string `json:"productSn"`
+	DeleteStatus               int32  `json:"deleteStatus"`
+	PublishStatus              int32  `json:"publishStatus"`
+	NewStatus                  int32  `json:"newStatus"`
+	RecommandStatus            int32  `json:"recommandStatus"`
+	VerifyStatus               int32  `json:"verifyStatus"`
+	Sort                       int32  `json:"sort"`
+	Sale                       int32  `json:"sale"`
+	Price                      int64  `json:"price"`
+	PromotionPrice             int64  `json:"promotionPrice"`
+	GiftGrowth                 int32  `json:"giftGrowth"`
+	GiftPoint                  int32  `json:"giftPoint"`
+	UsePointLimit              int32  `json:"usePointLimit"`
+	SubTitle                   string `json:"subTitle"`
+	OriginalPrice              int64  `json:"originalPrice"`
+	Stock                      int32  `json:"stock"`
+	LowStock                   int32  `json:"lowStock"`
+	Unit                       string `json:"unit"`
+	Weight                     int64  `json:"weight"`
+	PreviewStatus              int32  `json:"previewStatus"`
+	ServiceIDS                 string `json:"serviceIds"`
+	Keywords                   string `json:"keywords"`
+	Note                       string `json:"note"`
+	AlbumPics                  string `json:"albumPics"`
+	DetailTitle                string `json:"detailTitle"`
+	PromotionStartTime         string `json:"promotionStartTime"`
+	PromotionEndTime           string `json:"promotionEndTime"`
+	PromotionPerLimit          int32  `json:"promotionPerLimit"`
+	PromotionType              int32  `json:"promotionType"`
+	BrandName                  string `json:"brandName"`
+	ProductCategoryName        string `json:"productCategoryName"`
+	Description                string `json:"description"`
 }
 
-@server(
-	group: brand
+@server (
+	group:  brand
 	prefix: /api/brand
 )
-
 service front-api {
-
 	//分页获取推荐品牌
 	@handler QueryBrandList
 	get /queryBrandList (BrandListReq) returns (BrandListResp)
@@ -95,3 +95,4 @@ service front-api {
 	@handler QueryBrandProductList
 	get /queryBrandProductList (QueryBrandProductListReq) returns (QueryBrandProductListResp)
 }
+

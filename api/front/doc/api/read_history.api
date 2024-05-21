@@ -1,16 +1,17 @@
-info(
-	desc: "浏览记录"
+info (
+	desc:   "浏览记录"
 	author: "koobe"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type AddReadHistoryReq {
-	ProductId       int64   `json:"productId"`       // 商品id
-	ProductName     string  `json:"productName"`     // 商品名称
-	ProductPic      string  `json:"productPic"`      // 商品图片
-	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
-    ProductPrice int64 `json:"productPrice"`         // 商品价格
+	ProductId       int64  `json:"productId"` // 商品id
+	ProductName     string `json:"productName"` // 商品名称
+	ProductPic      string `json:"productPic"` // 商品图片
+	ProductSubTitle string `json:"productSubTitle"` // 商品标题
+	ProductPrice    int64  `json:"productPrice"` // 商品价格
 }
+
 type AddReadHistoryResp {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
@@ -26,29 +27,27 @@ type ReadHistoryDeleteResp {
 }
 
 type ReadHistoryListResp {
-	Code    int64               `json:"code"`
-	Message string              `json:"message"`
-	Data  []ReadHistoryList `json:"data"`  //浏览列表
+	Code    int64             `json:"code"`
+	Message string            `json:"message"`
+	Data    []ReadHistoryList `json:"data"` //浏览列表
 }
-
 
 type ReadHistoryList {
-	Id              int64   `json:"id"`              // 编号
-	MemberId        int64   `json:"memberId"`        // 会员id
-	MemberNickName  string  `json:"memberNickName"`  // 会员姓名
-	MemberIcon      string  `json:"memberIcon"`      // 会员头像
-	ProductId       int64   `json:"productId"`       // 商品id
-	ProductName     string  `json:"productName"`     // 商品名称
-	ProductPic      string  `json:"productPic"`      // 商品图片
-	ProductSubTitle string  `json:"productSubTitle"` // 商品标题
-    ProductPrice int64 `json:"productPrice"`         // 商品价格
-	CreateTime      string  `json:"createTime"`      // 浏览时间
+	Id              int64  `json:"id"` // 编号
+	MemberId        int64  `json:"memberId"` // 会员id
+	MemberNickName  string `json:"memberNickName"` // 会员姓名
+	MemberIcon      string `json:"memberIcon"` // 会员头像
+	ProductId       int64  `json:"productId"` // 商品id
+	ProductName     string `json:"productName"` // 商品名称
+	ProductPic      string `json:"productPic"` // 商品图片
+	ProductSubTitle string `json:"productSubTitle"` // 商品标题
+	ProductPrice    int64  `json:"productPrice"` // 商品价格
+	CreateTime      string `json:"createTime"` // 浏览时间
 }
 
-
-@server(
-	jwt: Auth
-	group: history
+@server (
+	jwt:    Auth
+	group:  history
 	prefix: /api/history
 )
 service front-api {
@@ -63,5 +62,5 @@ service front-api {
 	//获取浏览记录
 	@handler QueryReadHistoryList
 	get /queryReadHistoryList returns (ReadHistoryListResp)
-
 }
+
