@@ -17,9 +17,6 @@ $(shell if [ ! -d $(GOCTL) ]; then \
 fi; \
 )
 
-MYSQL_INFO=root:r-wz9wop62956dh5k9ed@tcp(110.41.179.89:30395)/gozero
-
-
 all: deps build ## 默认的构建目标
 
 
@@ -33,15 +30,15 @@ deps: ## 安装依赖目标
 	$(GOGET) -v
  
 copy_config:
-	copy rpc/sys/etc/sys.yaml target/sys-rpc/sys-rpc.yaml
-	copy rpc/ums/etc/ums.yaml target/ums-rpc/ums-rpc.yaml
-	copy rpc/oms/etc/oms.yaml target/oms-rpc/oms-rpc.yaml
-	copy rpc/pms/etc/pms.yaml target/pms-rpc/pms-rpc.yaml
-	copy rpc/cms/etc/cms.yaml target/cms-rpc/cms-rpc.yaml
-	copy rpc/sms/etc/sms.yaml target/sms-rpc/sms-rpc.yaml
-	copy api/admin/etc/admin-api.yaml target/admin-api/admin-api.yaml
-	copy api/web/etc/web-api.yaml target/web-api/web-api.yaml
-	copy api/front/etc/front-api.yaml target/front-api/front-api.yaml
+	mkdir -p target/sys-rpc && cp rpc/sys/etc/sys.yaml target/sys-rpc/sys-rpc.yaml
+	mkdir -p target/ums-rpc && cp rpc/ums/etc/ums.yaml target/ums-rpc/ums-rpc.yaml
+	mkdir -p target/oms-rpc && cp rpc/oms/etc/oms.yaml target/oms-rpc/oms-rpc.yaml
+	mkdir -p target/pms-rpc && cp rpc/pms/etc/pms.yaml target/pms-rpc/pms-rpc.yaml
+	mkdir -p target/cms-rpc && cp rpc/cms/etc/cms.yaml target/cms-rpc/cms-rpc.yaml
+	mkdir -p target/sms-rpc && cp rpc/sms/etc/sms.yaml target/sms-rpc/sms-rpc.yaml
+	mkdir -p target/admin-api && cp api/admin/etc/admin-api.yaml target/admin-api/admin-api.yaml
+	mkdir -p target/web-api && cp api/web/etc/web-api.yaml target/web-api/web-api.yaml
+	mkdir -p target/front-api && cp api/front/etc/front-api.yaml target/front-api/front-api.yaml
 
 build: copy_config ## 构建目标
 	$(GOBUILD) -o target/sys-rpc/sys-rpc -v ./rpc/sys/sys.go
