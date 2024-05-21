@@ -37,19 +37,33 @@ func (l *UpdateMenuRoleLogic) UpdateMenuRole(in *sysclient.UpdateMenuRoleReq) (*
 		return &sysclient.UpdateMenuRoleResp{}, nil
 	}
 
-	q := query.SysRoleMenu
-	_, err := q.WithContext(l.ctx).Where(q.RoleID.Eq(in.RoleId)).Delete()
+	err := query.Q.Transaction(func(tx *query.Query) error {
+
+		q := tx.SysRoleMenu
+		if _, err := q.WithContext(l.ctx).Where(q.RoleID.Eq(in.RoleId)).Delete(); err != nil {
+			logc.Errorf(l.ctx, "删除角色与菜单的关联失败,参数:%+v,异常:%s", in, err.Error())
+			return err
+		}
+
+		var roleMenus []*model.SysRoleMenu
+		for _, menuId := range in.MenuIds {
+			roleMenus = append(roleMenus, &model.SysRoleMenu{
+				RoleID: in.RoleId,
+				MenuID: menuId,
+			})
+		}
+
+		if err := q.WithContext(l.ctx).CreateInBatches(roleMenus, len(roleMenus)); err != nil {
+			logc.Errorf(l.ctx, "添加角色与菜单的关联失败,参数:%+v,异常:%s", in, err.Error())
+			return err
+		}
+
+		return nil
+	})
+
 	if err != nil {
-		logc.Errorf(l.ctx, "删除角色与菜单的关联失败,参数:%+v,异常:%s", in, err.Error())
+		logc.Errorf(l.ctx, "更新角色与菜单的关联失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, err
-	}
-
-	for _, menuId := range in.MenuIds {
-		_ = q.WithContext(l.ctx).Create(&model.SysRoleMenu{
-			RoleID: in.RoleId,
-			MenuID: menuId,
-		})
-
 	}
 
 	return &sysclient.UpdateMenuRoleResp{}, nil
