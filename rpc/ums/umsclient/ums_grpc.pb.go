@@ -368,20 +368,18 @@ var MemberService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	GrowthChangeHistoryService_GrowthChangeHistoryAdd_FullMethodName    = "/umsclient.GrowthChangeHistoryService/GrowthChangeHistoryAdd"
-	GrowthChangeHistoryService_GrowthChangeHistoryList_FullMethodName   = "/umsclient.GrowthChangeHistoryService/GrowthChangeHistoryList"
-	GrowthChangeHistoryService_GrowthChangeHistoryUpdate_FullMethodName = "/umsclient.GrowthChangeHistoryService/GrowthChangeHistoryUpdate"
-	GrowthChangeHistoryService_GrowthChangeHistoryDelete_FullMethodName = "/umsclient.GrowthChangeHistoryService/GrowthChangeHistoryDelete"
+	GrowthChangeHistoryService_GrowthChangeHistoryAdd_FullMethodName  = "/umsclient.GrowthChangeHistoryService/GrowthChangeHistoryAdd"
+	GrowthChangeHistoryService_GrowthChangeHistoryList_FullMethodName = "/umsclient.GrowthChangeHistoryService/GrowthChangeHistoryList"
 )
 
 // GrowthChangeHistoryServiceClient is the client API for GrowthChangeHistoryService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GrowthChangeHistoryServiceClient interface {
+	// 添加成长值变化历史记录
 	GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error)
+	// 查询成长值变化历史记录列表
 	GrowthChangeHistoryList(ctx context.Context, in *GrowthChangeHistoryListReq, opts ...grpc.CallOption) (*GrowthChangeHistoryListResp, error)
-	GrowthChangeHistoryUpdate(ctx context.Context, in *GrowthChangeHistoryUpdateReq, opts ...grpc.CallOption) (*GrowthChangeHistoryUpdateResp, error)
-	GrowthChangeHistoryDelete(ctx context.Context, in *GrowthChangeHistoryDeleteReq, opts ...grpc.CallOption) (*GrowthChangeHistoryDeleteResp, error)
 }
 
 type growthChangeHistoryServiceClient struct {
@@ -410,32 +408,14 @@ func (c *growthChangeHistoryServiceClient) GrowthChangeHistoryList(ctx context.C
 	return out, nil
 }
 
-func (c *growthChangeHistoryServiceClient) GrowthChangeHistoryUpdate(ctx context.Context, in *GrowthChangeHistoryUpdateReq, opts ...grpc.CallOption) (*GrowthChangeHistoryUpdateResp, error) {
-	out := new(GrowthChangeHistoryUpdateResp)
-	err := c.cc.Invoke(ctx, GrowthChangeHistoryService_GrowthChangeHistoryUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *growthChangeHistoryServiceClient) GrowthChangeHistoryDelete(ctx context.Context, in *GrowthChangeHistoryDeleteReq, opts ...grpc.CallOption) (*GrowthChangeHistoryDeleteResp, error) {
-	out := new(GrowthChangeHistoryDeleteResp)
-	err := c.cc.Invoke(ctx, GrowthChangeHistoryService_GrowthChangeHistoryDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // GrowthChangeHistoryServiceServer is the server API for GrowthChangeHistoryService service.
 // All implementations must embed UnimplementedGrowthChangeHistoryServiceServer
 // for forward compatibility
 type GrowthChangeHistoryServiceServer interface {
+	// 添加成长值变化历史记录
 	GrowthChangeHistoryAdd(context.Context, *GrowthChangeHistoryAddReq) (*GrowthChangeHistoryAddResp, error)
+	// 查询成长值变化历史记录列表
 	GrowthChangeHistoryList(context.Context, *GrowthChangeHistoryListReq) (*GrowthChangeHistoryListResp, error)
-	GrowthChangeHistoryUpdate(context.Context, *GrowthChangeHistoryUpdateReq) (*GrowthChangeHistoryUpdateResp, error)
-	GrowthChangeHistoryDelete(context.Context, *GrowthChangeHistoryDeleteReq) (*GrowthChangeHistoryDeleteResp, error)
 	mustEmbedUnimplementedGrowthChangeHistoryServiceServer()
 }
 
@@ -448,12 +428,6 @@ func (UnimplementedGrowthChangeHistoryServiceServer) GrowthChangeHistoryAdd(cont
 }
 func (UnimplementedGrowthChangeHistoryServiceServer) GrowthChangeHistoryList(context.Context, *GrowthChangeHistoryListReq) (*GrowthChangeHistoryListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GrowthChangeHistoryList not implemented")
-}
-func (UnimplementedGrowthChangeHistoryServiceServer) GrowthChangeHistoryUpdate(context.Context, *GrowthChangeHistoryUpdateReq) (*GrowthChangeHistoryUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GrowthChangeHistoryUpdate not implemented")
-}
-func (UnimplementedGrowthChangeHistoryServiceServer) GrowthChangeHistoryDelete(context.Context, *GrowthChangeHistoryDeleteReq) (*GrowthChangeHistoryDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GrowthChangeHistoryDelete not implemented")
 }
 func (UnimplementedGrowthChangeHistoryServiceServer) mustEmbedUnimplementedGrowthChangeHistoryServiceServer() {
 }
@@ -505,42 +479,6 @@ func _GrowthChangeHistoryService_GrowthChangeHistoryList_Handler(srv interface{}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GrowthChangeHistoryService_GrowthChangeHistoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GrowthChangeHistoryUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GrowthChangeHistoryServiceServer).GrowthChangeHistoryUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GrowthChangeHistoryService_GrowthChangeHistoryUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GrowthChangeHistoryServiceServer).GrowthChangeHistoryUpdate(ctx, req.(*GrowthChangeHistoryUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GrowthChangeHistoryService_GrowthChangeHistoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GrowthChangeHistoryDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GrowthChangeHistoryServiceServer).GrowthChangeHistoryDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GrowthChangeHistoryService_GrowthChangeHistoryDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GrowthChangeHistoryServiceServer).GrowthChangeHistoryDelete(ctx, req.(*GrowthChangeHistoryDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // GrowthChangeHistoryService_ServiceDesc is the grpc.ServiceDesc for GrowthChangeHistoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -556,34 +494,24 @@ var GrowthChangeHistoryService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GrowthChangeHistoryList",
 			Handler:    _GrowthChangeHistoryService_GrowthChangeHistoryList_Handler,
 		},
-		{
-			MethodName: "GrowthChangeHistoryUpdate",
-			Handler:    _GrowthChangeHistoryService_GrowthChangeHistoryUpdate_Handler,
-		},
-		{
-			MethodName: "GrowthChangeHistoryDelete",
-			Handler:    _GrowthChangeHistoryService_GrowthChangeHistoryDelete_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "rpc/ums/ums.proto",
 }
 
 const (
-	IntegrationChangeHistoryService_IntegrationChangeHistoryAdd_FullMethodName    = "/umsclient.IntegrationChangeHistoryService/IntegrationChangeHistoryAdd"
-	IntegrationChangeHistoryService_IntegrationChangeHistoryList_FullMethodName   = "/umsclient.IntegrationChangeHistoryService/IntegrationChangeHistoryList"
-	IntegrationChangeHistoryService_IntegrationChangeHistoryUpdate_FullMethodName = "/umsclient.IntegrationChangeHistoryService/IntegrationChangeHistoryUpdate"
-	IntegrationChangeHistoryService_IntegrationChangeHistoryDelete_FullMethodName = "/umsclient.IntegrationChangeHistoryService/IntegrationChangeHistoryDelete"
+	IntegrationChangeHistoryService_IntegrationChangeHistoryAdd_FullMethodName  = "/umsclient.IntegrationChangeHistoryService/IntegrationChangeHistoryAdd"
+	IntegrationChangeHistoryService_IntegrationChangeHistoryList_FullMethodName = "/umsclient.IntegrationChangeHistoryService/IntegrationChangeHistoryList"
 )
 
 // IntegrationChangeHistoryServiceClient is the client API for IntegrationChangeHistoryService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IntegrationChangeHistoryServiceClient interface {
+	// 添加积分变化历史记录
 	IntegrationChangeHistoryAdd(ctx context.Context, in *IntegrationChangeHistoryAddReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryAddResp, error)
+	// 查询积分变化历史记录列表
 	IntegrationChangeHistoryList(ctx context.Context, in *IntegrationChangeHistoryListReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryListResp, error)
-	IntegrationChangeHistoryUpdate(ctx context.Context, in *IntegrationChangeHistoryUpdateReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryUpdateResp, error)
-	IntegrationChangeHistoryDelete(ctx context.Context, in *IntegrationChangeHistoryDeleteReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryDeleteResp, error)
 }
 
 type integrationChangeHistoryServiceClient struct {
@@ -612,32 +540,14 @@ func (c *integrationChangeHistoryServiceClient) IntegrationChangeHistoryList(ctx
 	return out, nil
 }
 
-func (c *integrationChangeHistoryServiceClient) IntegrationChangeHistoryUpdate(ctx context.Context, in *IntegrationChangeHistoryUpdateReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryUpdateResp, error) {
-	out := new(IntegrationChangeHistoryUpdateResp)
-	err := c.cc.Invoke(ctx, IntegrationChangeHistoryService_IntegrationChangeHistoryUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integrationChangeHistoryServiceClient) IntegrationChangeHistoryDelete(ctx context.Context, in *IntegrationChangeHistoryDeleteReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryDeleteResp, error) {
-	out := new(IntegrationChangeHistoryDeleteResp)
-	err := c.cc.Invoke(ctx, IntegrationChangeHistoryService_IntegrationChangeHistoryDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // IntegrationChangeHistoryServiceServer is the server API for IntegrationChangeHistoryService service.
 // All implementations must embed UnimplementedIntegrationChangeHistoryServiceServer
 // for forward compatibility
 type IntegrationChangeHistoryServiceServer interface {
+	// 添加积分变化历史记录
 	IntegrationChangeHistoryAdd(context.Context, *IntegrationChangeHistoryAddReq) (*IntegrationChangeHistoryAddResp, error)
+	// 查询积分变化历史记录列表
 	IntegrationChangeHistoryList(context.Context, *IntegrationChangeHistoryListReq) (*IntegrationChangeHistoryListResp, error)
-	IntegrationChangeHistoryUpdate(context.Context, *IntegrationChangeHistoryUpdateReq) (*IntegrationChangeHistoryUpdateResp, error)
-	IntegrationChangeHistoryDelete(context.Context, *IntegrationChangeHistoryDeleteReq) (*IntegrationChangeHistoryDeleteResp, error)
 	mustEmbedUnimplementedIntegrationChangeHistoryServiceServer()
 }
 
@@ -650,12 +560,6 @@ func (UnimplementedIntegrationChangeHistoryServiceServer) IntegrationChangeHisto
 }
 func (UnimplementedIntegrationChangeHistoryServiceServer) IntegrationChangeHistoryList(context.Context, *IntegrationChangeHistoryListReq) (*IntegrationChangeHistoryListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IntegrationChangeHistoryList not implemented")
-}
-func (UnimplementedIntegrationChangeHistoryServiceServer) IntegrationChangeHistoryUpdate(context.Context, *IntegrationChangeHistoryUpdateReq) (*IntegrationChangeHistoryUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IntegrationChangeHistoryUpdate not implemented")
-}
-func (UnimplementedIntegrationChangeHistoryServiceServer) IntegrationChangeHistoryDelete(context.Context, *IntegrationChangeHistoryDeleteReq) (*IntegrationChangeHistoryDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IntegrationChangeHistoryDelete not implemented")
 }
 func (UnimplementedIntegrationChangeHistoryServiceServer) mustEmbedUnimplementedIntegrationChangeHistoryServiceServer() {
 }
@@ -707,42 +611,6 @@ func _IntegrationChangeHistoryService_IntegrationChangeHistoryList_Handler(srv i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntegrationChangeHistoryService_IntegrationChangeHistoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IntegrationChangeHistoryUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationChangeHistoryServiceServer).IntegrationChangeHistoryUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationChangeHistoryService_IntegrationChangeHistoryUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationChangeHistoryServiceServer).IntegrationChangeHistoryUpdate(ctx, req.(*IntegrationChangeHistoryUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntegrationChangeHistoryService_IntegrationChangeHistoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IntegrationChangeHistoryDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationChangeHistoryServiceServer).IntegrationChangeHistoryDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationChangeHistoryService_IntegrationChangeHistoryDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationChangeHistoryServiceServer).IntegrationChangeHistoryDelete(ctx, req.(*IntegrationChangeHistoryDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // IntegrationChangeHistoryService_ServiceDesc is the grpc.ServiceDesc for IntegrationChangeHistoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -757,14 +625,6 @@ var IntegrationChangeHistoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "IntegrationChangeHistoryList",
 			Handler:    _IntegrationChangeHistoryService_IntegrationChangeHistoryList_Handler,
-		},
-		{
-			MethodName: "IntegrationChangeHistoryUpdate",
-			Handler:    _IntegrationChangeHistoryService_IntegrationChangeHistoryUpdate_Handler,
-		},
-		{
-			MethodName: "IntegrationChangeHistoryDelete",
-			Handler:    _IntegrationChangeHistoryService_IntegrationChangeHistoryDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -22,22 +22,14 @@ func NewIntegrationChangeHistoryServiceServer(svcCtx *svc.ServiceContext) *Integ
 	}
 }
 
+// 添加积分变化历史记录
 func (s *IntegrationChangeHistoryServiceServer) IntegrationChangeHistoryAdd(ctx context.Context, in *umsclient.IntegrationChangeHistoryAddReq) (*umsclient.IntegrationChangeHistoryAddResp, error) {
 	l := integrationchangehistoryservicelogic.NewIntegrationChangeHistoryAddLogic(ctx, s.svcCtx)
 	return l.IntegrationChangeHistoryAdd(in)
 }
 
+// 查询积分变化历史记录列表
 func (s *IntegrationChangeHistoryServiceServer) IntegrationChangeHistoryList(ctx context.Context, in *umsclient.IntegrationChangeHistoryListReq) (*umsclient.IntegrationChangeHistoryListResp, error) {
 	l := integrationchangehistoryservicelogic.NewIntegrationChangeHistoryListLogic(ctx, s.svcCtx)
 	return l.IntegrationChangeHistoryList(in)
-}
-
-func (s *IntegrationChangeHistoryServiceServer) IntegrationChangeHistoryUpdate(ctx context.Context, in *umsclient.IntegrationChangeHistoryUpdateReq) (*umsclient.IntegrationChangeHistoryUpdateResp, error) {
-	l := integrationchangehistoryservicelogic.NewIntegrationChangeHistoryUpdateLogic(ctx, s.svcCtx)
-	return l.IntegrationChangeHistoryUpdate(in)
-}
-
-func (s *IntegrationChangeHistoryServiceServer) IntegrationChangeHistoryDelete(ctx context.Context, in *umsclient.IntegrationChangeHistoryDeleteReq) (*umsclient.IntegrationChangeHistoryDeleteResp, error) {
-	l := integrationchangehistoryservicelogic.NewIntegrationChangeHistoryDeleteLogic(ctx, s.svcCtx)
-	return l.IntegrationChangeHistoryDelete(in)
 }

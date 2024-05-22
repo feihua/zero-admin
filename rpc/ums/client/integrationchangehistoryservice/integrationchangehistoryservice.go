@@ -15,22 +15,14 @@ import (
 type (
 	GrowthChangeHistoryAddReq               = umsclient.GrowthChangeHistoryAddReq
 	GrowthChangeHistoryAddResp              = umsclient.GrowthChangeHistoryAddResp
-	GrowthChangeHistoryDeleteReq            = umsclient.GrowthChangeHistoryDeleteReq
-	GrowthChangeHistoryDeleteResp           = umsclient.GrowthChangeHistoryDeleteResp
 	GrowthChangeHistoryListData             = umsclient.GrowthChangeHistoryListData
 	GrowthChangeHistoryListReq              = umsclient.GrowthChangeHistoryListReq
 	GrowthChangeHistoryListResp             = umsclient.GrowthChangeHistoryListResp
-	GrowthChangeHistoryUpdateReq            = umsclient.GrowthChangeHistoryUpdateReq
-	GrowthChangeHistoryUpdateResp           = umsclient.GrowthChangeHistoryUpdateResp
 	IntegrationChangeHistoryAddReq          = umsclient.IntegrationChangeHistoryAddReq
 	IntegrationChangeHistoryAddResp         = umsclient.IntegrationChangeHistoryAddResp
-	IntegrationChangeHistoryDeleteReq       = umsclient.IntegrationChangeHistoryDeleteReq
-	IntegrationChangeHistoryDeleteResp      = umsclient.IntegrationChangeHistoryDeleteResp
 	IntegrationChangeHistoryListData        = umsclient.IntegrationChangeHistoryListData
 	IntegrationChangeHistoryListReq         = umsclient.IntegrationChangeHistoryListReq
 	IntegrationChangeHistoryListResp        = umsclient.IntegrationChangeHistoryListResp
-	IntegrationChangeHistoryUpdateReq       = umsclient.IntegrationChangeHistoryUpdateReq
-	IntegrationChangeHistoryUpdateResp      = umsclient.IntegrationChangeHistoryUpdateResp
 	IntegrationConsumeSettingAddReq         = umsclient.IntegrationConsumeSettingAddReq
 	IntegrationConsumeSettingAddResp        = umsclient.IntegrationConsumeSettingAddResp
 	IntegrationConsumeSettingDeleteReq      = umsclient.IntegrationConsumeSettingDeleteReq
@@ -160,10 +152,10 @@ type (
 	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	IntegrationChangeHistoryService interface {
+		// 添加积分变化历史记录
 		IntegrationChangeHistoryAdd(ctx context.Context, in *IntegrationChangeHistoryAddReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryAddResp, error)
+		// 查询积分变化历史记录列表
 		IntegrationChangeHistoryList(ctx context.Context, in *IntegrationChangeHistoryListReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryListResp, error)
-		IntegrationChangeHistoryUpdate(ctx context.Context, in *IntegrationChangeHistoryUpdateReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryUpdateResp, error)
-		IntegrationChangeHistoryDelete(ctx context.Context, in *IntegrationChangeHistoryDeleteReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryDeleteResp, error)
 	}
 
 	defaultIntegrationChangeHistoryService struct {
@@ -177,22 +169,14 @@ func NewIntegrationChangeHistoryService(cli zrpc.Client) IntegrationChangeHistor
 	}
 }
 
+// 添加积分变化历史记录
 func (m *defaultIntegrationChangeHistoryService) IntegrationChangeHistoryAdd(ctx context.Context, in *IntegrationChangeHistoryAddReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryAddResp, error) {
 	client := umsclient.NewIntegrationChangeHistoryServiceClient(m.cli.Conn())
 	return client.IntegrationChangeHistoryAdd(ctx, in, opts...)
 }
 
+// 查询积分变化历史记录列表
 func (m *defaultIntegrationChangeHistoryService) IntegrationChangeHistoryList(ctx context.Context, in *IntegrationChangeHistoryListReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryListResp, error) {
 	client := umsclient.NewIntegrationChangeHistoryServiceClient(m.cli.Conn())
 	return client.IntegrationChangeHistoryList(ctx, in, opts...)
-}
-
-func (m *defaultIntegrationChangeHistoryService) IntegrationChangeHistoryUpdate(ctx context.Context, in *IntegrationChangeHistoryUpdateReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryUpdateResp, error) {
-	client := umsclient.NewIntegrationChangeHistoryServiceClient(m.cli.Conn())
-	return client.IntegrationChangeHistoryUpdate(ctx, in, opts...)
-}
-
-func (m *defaultIntegrationChangeHistoryService) IntegrationChangeHistoryDelete(ctx context.Context, in *IntegrationChangeHistoryDeleteReq, opts ...grpc.CallOption) (*IntegrationChangeHistoryDeleteResp, error) {
-	client := umsclient.NewIntegrationChangeHistoryServiceClient(m.cli.Conn())
-	return client.IntegrationChangeHistoryDelete(ctx, in, opts...)
 }

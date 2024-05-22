@@ -15,22 +15,14 @@ import (
 type (
 	GrowthChangeHistoryAddReq               = umsclient.GrowthChangeHistoryAddReq
 	GrowthChangeHistoryAddResp              = umsclient.GrowthChangeHistoryAddResp
-	GrowthChangeHistoryDeleteReq            = umsclient.GrowthChangeHistoryDeleteReq
-	GrowthChangeHistoryDeleteResp           = umsclient.GrowthChangeHistoryDeleteResp
 	GrowthChangeHistoryListData             = umsclient.GrowthChangeHistoryListData
 	GrowthChangeHistoryListReq              = umsclient.GrowthChangeHistoryListReq
 	GrowthChangeHistoryListResp             = umsclient.GrowthChangeHistoryListResp
-	GrowthChangeHistoryUpdateReq            = umsclient.GrowthChangeHistoryUpdateReq
-	GrowthChangeHistoryUpdateResp           = umsclient.GrowthChangeHistoryUpdateResp
 	IntegrationChangeHistoryAddReq          = umsclient.IntegrationChangeHistoryAddReq
 	IntegrationChangeHistoryAddResp         = umsclient.IntegrationChangeHistoryAddResp
-	IntegrationChangeHistoryDeleteReq       = umsclient.IntegrationChangeHistoryDeleteReq
-	IntegrationChangeHistoryDeleteResp      = umsclient.IntegrationChangeHistoryDeleteResp
 	IntegrationChangeHistoryListData        = umsclient.IntegrationChangeHistoryListData
 	IntegrationChangeHistoryListReq         = umsclient.IntegrationChangeHistoryListReq
 	IntegrationChangeHistoryListResp        = umsclient.IntegrationChangeHistoryListResp
-	IntegrationChangeHistoryUpdateReq       = umsclient.IntegrationChangeHistoryUpdateReq
-	IntegrationChangeHistoryUpdateResp      = umsclient.IntegrationChangeHistoryUpdateResp
 	IntegrationConsumeSettingAddReq         = umsclient.IntegrationConsumeSettingAddReq
 	IntegrationConsumeSettingAddResp        = umsclient.IntegrationConsumeSettingAddResp
 	IntegrationConsumeSettingDeleteReq      = umsclient.IntegrationConsumeSettingDeleteReq
@@ -160,10 +152,10 @@ type (
 	UpdateMemberIntegrationResp             = umsclient.UpdateMemberIntegrationResp
 
 	GrowthChangeHistoryService interface {
+		// 添加成长值变化历史记录
 		GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error)
+		// 查询成长值变化历史记录列表
 		GrowthChangeHistoryList(ctx context.Context, in *GrowthChangeHistoryListReq, opts ...grpc.CallOption) (*GrowthChangeHistoryListResp, error)
-		GrowthChangeHistoryUpdate(ctx context.Context, in *GrowthChangeHistoryUpdateReq, opts ...grpc.CallOption) (*GrowthChangeHistoryUpdateResp, error)
-		GrowthChangeHistoryDelete(ctx context.Context, in *GrowthChangeHistoryDeleteReq, opts ...grpc.CallOption) (*GrowthChangeHistoryDeleteResp, error)
 	}
 
 	defaultGrowthChangeHistoryService struct {
@@ -177,22 +169,14 @@ func NewGrowthChangeHistoryService(cli zrpc.Client) GrowthChangeHistoryService {
 	}
 }
 
+// 添加成长值变化历史记录
 func (m *defaultGrowthChangeHistoryService) GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq, opts ...grpc.CallOption) (*GrowthChangeHistoryAddResp, error) {
 	client := umsclient.NewGrowthChangeHistoryServiceClient(m.cli.Conn())
 	return client.GrowthChangeHistoryAdd(ctx, in, opts...)
 }
 
+// 查询成长值变化历史记录列表
 func (m *defaultGrowthChangeHistoryService) GrowthChangeHistoryList(ctx context.Context, in *GrowthChangeHistoryListReq, opts ...grpc.CallOption) (*GrowthChangeHistoryListResp, error) {
 	client := umsclient.NewGrowthChangeHistoryServiceClient(m.cli.Conn())
 	return client.GrowthChangeHistoryList(ctx, in, opts...)
-}
-
-func (m *defaultGrowthChangeHistoryService) GrowthChangeHistoryUpdate(ctx context.Context, in *GrowthChangeHistoryUpdateReq, opts ...grpc.CallOption) (*GrowthChangeHistoryUpdateResp, error) {
-	client := umsclient.NewGrowthChangeHistoryServiceClient(m.cli.Conn())
-	return client.GrowthChangeHistoryUpdate(ctx, in, opts...)
-}
-
-func (m *defaultGrowthChangeHistoryService) GrowthChangeHistoryDelete(ctx context.Context, in *GrowthChangeHistoryDeleteReq, opts ...grpc.CallOption) (*GrowthChangeHistoryDeleteResp, error) {
-	client := umsclient.NewGrowthChangeHistoryServiceClient(m.cli.Conn())
-	return client.GrowthChangeHistoryDelete(ctx, in, opts...)
 }

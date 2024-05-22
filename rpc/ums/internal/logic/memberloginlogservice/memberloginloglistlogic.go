@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberLoginLogListLogic 会员登录日志
+/*
+Author: LiuFeiHua
+Date: 2024/5/21 17:49
+*/
 type MemberLoginLogListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,11 +29,10 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
+// MemberLoginLogList 分页查询会员登录日志
 func (l *MemberLoginLogListLogic) MemberLoginLogList(in *umsclient.MemberLoginLogListReq) (*umsclient.MemberLoginLogListResp, error) {
-	q := query.UmsMemberLoginLog.WithContext(l.ctx)
-	if in.MemberId != 0 {
-		q = q.Where(query.UmsMemberLoginLog.MemberID.Eq(in.MemberId))
-	}
+	loginLog := query.UmsMemberLoginLog
+	q := loginLog.WithContext(l.ctx).Where(loginLog.MemberID.Eq(in.MemberId))
 	offset := (in.Current - 1) * in.PageSize
 	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
 	count, err := q.Count()

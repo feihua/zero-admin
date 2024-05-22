@@ -74,6 +74,54 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
+	ListMemberLoginLogReq {
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
+		MemberId int64 `form:"memberId"`
+	}
+	ListMemberLoginLogData {
+		Id         int64  `json:"id"`
+		MemberId   int64  `json:"memberId"`
+		CreateTime string `json:"createTime"`
+		Ip         string `json:"ip"`
+		City       string `json:"city"`
+		LoginType  int32  `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
+		Province   string `json:"province"`
+	}
+	ListMemberLoginLogResp {
+		Code     string                    `json:"code"`
+		Message  string                    `json:"message"`
+		Current  int64                     `form:"current,default=1"`
+		Data     []*ListMemberLoginLogData `json:"data"`
+		PageSize int64                     `form:"pageSize,default=20"`
+		Success  bool                      `json:"success"`
+		Total    int64                     `json:"total"`
+	}
+
+	ListChangeHistoryReq {
+		Current  int64 `form:"current,default=1"`
+		PageSize int64 `form:"pageSize,default=20"`
+		MemberId int64  `form:"memberId"`
+	}
+	ListChangeHistoryData {
+		Id          int64  `json:"id"`
+		MemberId    int64  `json:"memberId"`
+		CreateTime  string `json:"createTime"`
+		ChangeType  int32  `json:"changeType"` // 改变类型：0->增加；1->减少
+		ChangeCount int32  `json:"changeCount"` // 积分改变数量
+		OperateMan  string `json:"operateMan"` // 操作人员
+		OperateNote string `json:"operateNote"` // 操作备注
+		SourceType  int32  `json:"sourceType"` // 积分来源：0->购物；1->管理员修改
+	}
+	ListChangeHistoryResp {
+		Current  int64                          `form:"current,default=1"`
+		Data     []*ListChangeHistoryData `json:"data"`
+		PageSize int64                          `form:"pageSize,default=20"`
+		Success  bool                           `json:"success"`
+		Total    int64                          `json:"total"`
+		Code     string                         `json:"code"`
+		Message  string                         `json:"message"`
+	}
 )
 
 @server (
@@ -83,16 +131,28 @@ type (
 	prefix:     /api/member/member
 )
 service admin-api {
-	//
+	//分页查询会员信息
 	@handler MemberList
 	get /queryMemberList (ListMemberReq) returns (ListMemberResp)
 
-	//
+	//更新查询会员信息
 	@handler MemberUpdate
 	post /updateMember (UpdateMemberReq) returns (UpdateMemberResp)
 
-	//
+	//删除查询会员信息
 	@handler MemberDelete
 	get /deleteMember (DeleteMemberReq) returns (DeleteMemberResp)
+
+	//查询会员的登录日志
+	@handler QueryMemberLoginLogList
+	get /queryMemberLoginLogList (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
+
+	//查询会员成长值变化历史记录
+	@handler QueryGrowthChangeHistoryList
+	get /queryGrowthChangeHistoryList (ListChangeHistoryReq) returns (ListChangeHistoryResp)
+
+	//查询会员积分变化历史记录
+	@handler QueryIntegrationChangeHistoryList
+	get /queryIntegrationChangeHistoryList (ListChangeHistoryReq) returns (ListChangeHistoryResp)
 }
 

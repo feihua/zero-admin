@@ -1,4 +1,4 @@
-package logic
+package member
 
 import (
 	"context"
@@ -12,22 +12,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type MemberLoginLogListLogic struct {
+type QueryMemberLoginLogListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) MemberLoginLogListLogic {
-	return MemberLoginLogListLogic{
+func NewQueryMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryMemberLoginLogListLogic {
+	return &QueryMemberLoginLogListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLogReq) (*types.ListMemberLoginLogResp, error) {
-	resp, err := l.svcCtx.MemberLoginLogService.MemberLoginLogList(l.ctx, &umsclient.MemberLoginLogListReq{
+func (l *QueryMemberLoginLogListLogic) QueryMemberLoginLogList(req *types.ListMemberLoginLogReq) (resp *types.ListMemberLoginLogResp, err error) {
+	result, err := l.svcCtx.MemberLoginLogService.MemberLoginLogList(l.ctx, &umsclient.MemberLoginLogListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
 		MemberId: req.MemberId,
@@ -40,7 +40,7 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLo
 
 	var list []*types.ListMemberLoginLogData
 
-	for _, item := range resp.List {
+	for _, item := range result.List {
 		list = append(list, &types.ListMemberLoginLogData{
 			Id:         item.Id,
 			MemberId:   item.MemberId,
@@ -57,7 +57,7 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLo
 		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
-		Total:    resp.Total,
+		Total:    result.Total,
 		Code:     "000000",
 		Message:  "查询员登录记录列表成功",
 	}, nil

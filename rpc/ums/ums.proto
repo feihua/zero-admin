@@ -124,13 +124,12 @@ service MemberService {
 }
 
 message GrowthChangeHistoryAddReq {
-  int64      MemberId = 2;
-  string      CreateTime = 3;
-  int32      ChangeType = 4;
-  int32      ChangeCount = 5;
-  string      OperateMan = 6;
-  string      OperateNote = 7;
-  int32      SourceType = 8;
+  int64      MemberId = 1;
+  int32      ChangeType = 2;
+  int32      ChangeCount = 3;
+  string      OperateMan = 4;
+  string      OperateNote = 5;
+  int32      SourceType = 6;
 }
 
 message GrowthChangeHistoryAddResp {
@@ -158,45 +157,22 @@ message GrowthChangeHistoryListResp {
   repeated  GrowthChangeHistoryListData list = 2;
 }
 
-message GrowthChangeHistoryUpdateReq {
-  int64      Id = 1;
-  int64      MemberId = 2;
-  string      CreateTime = 3;
-  int32      ChangeType = 4;
-  int32      ChangeCount = 5;
-  string      OperateMan = 6;
-  string      OperateNote = 7;
-  int32      SourceType = 8;
-}
-
-message GrowthChangeHistoryUpdateResp {
-  string pong = 1;
-}
-
-message GrowthChangeHistoryDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message GrowthChangeHistoryDeleteResp {
-  string pong = 1;
-}
-
+//查询成长值变化历史记录列表
 service GrowthChangeHistoryService {
 
+  //添加成长值变化历史记录
   rpc GrowthChangeHistoryAdd(GrowthChangeHistoryAddReq) returns(GrowthChangeHistoryAddResp);
+  //查询成长值变化历史记录列表
   rpc GrowthChangeHistoryList(GrowthChangeHistoryListReq) returns(GrowthChangeHistoryListResp);
-  rpc GrowthChangeHistoryUpdate(GrowthChangeHistoryUpdateReq) returns(GrowthChangeHistoryUpdateResp);
-  rpc GrowthChangeHistoryDelete(GrowthChangeHistoryDeleteReq) returns(GrowthChangeHistoryDeleteResp);
 }
 
 message IntegrationChangeHistoryAddReq {
-  int64      MemberId = 2;
-  string  CreateTime = 3;
-  int32      ChangeType = 4;
-  int32      ChangeCount = 5;
-  string      OperateMan = 6;
-  string      OperateNote = 7;
-  int32      SourceType = 8;
+  int64      MemberId = 1;
+  int32      ChangeType = 2;
+  int32      ChangeCount = 3;
+  string      OperateMan = 4;
+  string      OperateNote = 5;
+  int32      SourceType = 6;
 }
 
 message IntegrationChangeHistoryAddResp {
@@ -224,42 +200,21 @@ message IntegrationChangeHistoryListResp {
   repeated  IntegrationChangeHistoryListData list = 2;
 }
 
-message IntegrationChangeHistoryUpdateReq {
-  int64      Id = 1;
-  int64      MemberId = 2;
-  string  CreateTime = 3;
-  int32      ChangeType = 4;
-  int32      ChangeCount = 5;
-  string      OperateMan = 6;
-  string      OperateNote = 7;
-  int32      SourceType = 8;
-}
-
-message IntegrationChangeHistoryUpdateResp {
-  string pong = 1;
-}
-
-message IntegrationChangeHistoryDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message IntegrationChangeHistoryDeleteResp {
-  string pong = 1;
-}
+//积分变化历史记录
 service IntegrationChangeHistoryService {
 
+  //添加积分变化历史记录
   rpc IntegrationChangeHistoryAdd(IntegrationChangeHistoryAddReq) returns(IntegrationChangeHistoryAddResp);
+  //查询积分变化历史记录列表
   rpc IntegrationChangeHistoryList(IntegrationChangeHistoryListReq) returns(IntegrationChangeHistoryListResp);
-  rpc IntegrationChangeHistoryUpdate(IntegrationChangeHistoryUpdateReq) returns(IntegrationChangeHistoryUpdateResp);
-  rpc IntegrationChangeHistoryDelete(IntegrationChangeHistoryDeleteReq) returns(IntegrationChangeHistoryDeleteResp);
 
 }
 
 message IntegrationConsumeSettingAddReq {
-  int32  DeductionPerAmount = 2;
-  int32  MaxPercentPerOrder = 3;
-  int32  UseUnit = 4;
-  int32  CouponStatus = 5;
+  int32  DeductionPerAmount = 1;
+  int32  MaxPercentPerOrder = 2;
+  int32  UseUnit = 3;
+  int32  CouponStatus = 4;
 }
 
 message IntegrationConsumeSettingAddResp {

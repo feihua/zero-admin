@@ -22,22 +22,14 @@ func NewGrowthChangeHistoryServiceServer(svcCtx *svc.ServiceContext) *GrowthChan
 	}
 }
 
+// 添加成长值变化历史记录
 func (s *GrowthChangeHistoryServiceServer) GrowthChangeHistoryAdd(ctx context.Context, in *umsclient.GrowthChangeHistoryAddReq) (*umsclient.GrowthChangeHistoryAddResp, error) {
 	l := growthchangehistoryservicelogic.NewGrowthChangeHistoryAddLogic(ctx, s.svcCtx)
 	return l.GrowthChangeHistoryAdd(in)
 }
 
+// 查询成长值变化历史记录列表
 func (s *GrowthChangeHistoryServiceServer) GrowthChangeHistoryList(ctx context.Context, in *umsclient.GrowthChangeHistoryListReq) (*umsclient.GrowthChangeHistoryListResp, error) {
 	l := growthchangehistoryservicelogic.NewGrowthChangeHistoryListLogic(ctx, s.svcCtx)
 	return l.GrowthChangeHistoryList(in)
-}
-
-func (s *GrowthChangeHistoryServiceServer) GrowthChangeHistoryUpdate(ctx context.Context, in *umsclient.GrowthChangeHistoryUpdateReq) (*umsclient.GrowthChangeHistoryUpdateResp, error) {
-	l := growthchangehistoryservicelogic.NewGrowthChangeHistoryUpdateLogic(ctx, s.svcCtx)
-	return l.GrowthChangeHistoryUpdate(in)
-}
-
-func (s *GrowthChangeHistoryServiceServer) GrowthChangeHistoryDelete(ctx context.Context, in *umsclient.GrowthChangeHistoryDeleteReq) (*umsclient.GrowthChangeHistoryDeleteResp, error) {
-	l := growthchangehistoryservicelogic.NewGrowthChangeHistoryDeleteLogic(ctx, s.svcCtx)
-	return l.GrowthChangeHistoryDelete(in)
 }

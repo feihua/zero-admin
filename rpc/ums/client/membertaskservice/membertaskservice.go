@@ -15,22 +15,14 @@ import (
 type (
 	GrowthChangeHistoryAddReq               = umsclient.GrowthChangeHistoryAddReq
 	GrowthChangeHistoryAddResp              = umsclient.GrowthChangeHistoryAddResp
-	GrowthChangeHistoryDeleteReq            = umsclient.GrowthChangeHistoryDeleteReq
-	GrowthChangeHistoryDeleteResp           = umsclient.GrowthChangeHistoryDeleteResp
 	GrowthChangeHistoryListData             = umsclient.GrowthChangeHistoryListData
 	GrowthChangeHistoryListReq              = umsclient.GrowthChangeHistoryListReq
 	GrowthChangeHistoryListResp             = umsclient.GrowthChangeHistoryListResp
-	GrowthChangeHistoryUpdateReq            = umsclient.GrowthChangeHistoryUpdateReq
-	GrowthChangeHistoryUpdateResp           = umsclient.GrowthChangeHistoryUpdateResp
 	IntegrationChangeHistoryAddReq          = umsclient.IntegrationChangeHistoryAddReq
 	IntegrationChangeHistoryAddResp         = umsclient.IntegrationChangeHistoryAddResp
-	IntegrationChangeHistoryDeleteReq       = umsclient.IntegrationChangeHistoryDeleteReq
-	IntegrationChangeHistoryDeleteResp      = umsclient.IntegrationChangeHistoryDeleteResp
 	IntegrationChangeHistoryListData        = umsclient.IntegrationChangeHistoryListData
 	IntegrationChangeHistoryListReq         = umsclient.IntegrationChangeHistoryListReq
 	IntegrationChangeHistoryListResp        = umsclient.IntegrationChangeHistoryListResp
-	IntegrationChangeHistoryUpdateReq       = umsclient.IntegrationChangeHistoryUpdateReq
-	IntegrationChangeHistoryUpdateResp      = umsclient.IntegrationChangeHistoryUpdateResp
 	IntegrationConsumeSettingAddReq         = umsclient.IntegrationConsumeSettingAddReq
 	IntegrationConsumeSettingAddResp        = umsclient.IntegrationConsumeSettingAddResp
 	IntegrationConsumeSettingDeleteReq      = umsclient.IntegrationConsumeSettingDeleteReq

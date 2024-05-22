@@ -254,15 +254,6 @@ type DeleteFlashPromotionSessionResp struct {
 	Message string `json:"message"`
 }
 
-type DeleteGrowthChangeHistoryReq struct {
-	Ids []int64 `form:"ids"`
-}
-
-type DeleteGrowthChangeHistoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteHomeAdvertiseReq struct {
 	Ids []int64 `form:"ids"`
 }
@@ -308,15 +299,6 @@ type DeleteHomeRecommendSubjectResp struct {
 	Message string `json:"message"`
 }
 
-type DeleteIntegrationChangeHistoryReq struct {
-	Ids []int64 `form:"ids"`
-}
-
-type DeleteIntegrationChangeHistoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteIntegrationConsumeSettingReq struct {
 	Ids []int64 `form:"ids"`
 }
@@ -358,15 +340,6 @@ type DeleteMemberLevelReq struct {
 }
 
 type DeleteMemberLevelResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type DeleteMemberLoginLogReq struct {
-	Ids []int64 `form:"ids"`
-}
-
-type DeleteMemberLoginLogResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -563,6 +536,33 @@ type DeptRelations struct {
 type JobRelations struct {
 	Id      int64  `json:"id"`
 	JobName string `json:"jobName"`
+}
+
+type ListChangeHistoryData struct {
+	Id          int64  `json:"id"`
+	MemberId    int64  `json:"memberId"`
+	CreateTime  string `json:"createTime"`
+	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
+	ChangeCount int32  `json:"changeCount"` // 积分改变数量
+	OperateMan  string `json:"operateMan"`  // 操作人员
+	OperateNote string `json:"operateNote"` // 操作备注
+	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
+}
+
+type ListChangeHistoryReq struct {
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
+	MemberId int64 `form:"memberId"`
+}
+
+type ListChangeHistoryResp struct {
+	Current  int64                    `form:"current,default=1"`
+	Data     []*ListChangeHistoryData `json:"data"`
+	PageSize int64                    `form:"pageSize,default=20"`
+	Success  bool                     `json:"success"`
+	Total    int64                    `json:"total"`
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
 }
 
 type ListCompanyAddressData struct {
@@ -843,32 +843,6 @@ type ListFlashPromotionSessionResp struct {
 	Total    int64                            `json:"total"`
 }
 
-type ListGrowthChangeHistoryData struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"memberId"`
-	CreateTime  string `json:"createTime"`
-	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
-	ChangeCount int32  `json:"changeCount"` // 积分改变数量
-	OperateMan  string `json:"operateMan"`  // 操作人员
-	OperateNote string `json:"operateNote"` // 操作备注
-	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
-}
-
-type ListGrowthChangeHistoryReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type ListGrowthChangeHistoryResp struct {
-	Current  int64                          `form:"current,default=1"`
-	Data     []*ListGrowthChangeHistoryData `json:"data"`
-	PageSize int64                          `form:"pageSize,default=20"`
-	Success  bool                           `json:"success"`
-	Total    int64                          `json:"total"`
-	Code     string                         `json:"code"`
-	Message  string                         `json:"message"`
-}
-
 type ListHomeAdvertiseData struct {
 	Id         int64  `json:"id"`
 	Name       string `json:"name"`       // 名称
@@ -1002,32 +976,6 @@ type ListHomeRecommendSubjectResp struct {
 	PageSize int64                           `form:"pageSize,default=20"`
 	Success  bool                            `json:"success"`
 	Total    int64                           `json:"total"`
-}
-
-type ListIntegrationChangeHistoryData struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"memberId"`
-	CreateTime  string `json:"createTime"`
-	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
-	ChangeCount int32  `json:"changeCount"` // 积分改变数量
-	OperateMan  string `json:"operateMan"`  // 操作人员
-	OperateNote string `json:"operateNote"` // 操作备注
-	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
-}
-
-type ListIntegrationChangeHistoryReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type ListIntegrationChangeHistoryResp struct {
-	Code     string                              `json:"code"`
-	Message  string                              `json:"message"`
-	Current  int64                               `form:"current,default=1"`
-	Data     []*ListIntegrationChangeHistoryData `json:"data"`
-	PageSize int64                               `form:"pageSize,default=20"`
-	Success  bool                                `json:"success"`
-	Total    int64                               `json:"total"`
 }
 
 type ListIntegrationConsumeSettingData struct {
@@ -1206,7 +1154,7 @@ type ListMemberLoginLogData struct {
 type ListMemberLoginLogReq struct {
 	Current  int64 `form:"current,default=1"`
 	PageSize int64 `form:"pageSize,default=20"`
-	MemberId int64 `form:"memberId,default=0"`
+	MemberId int64 `form:"memberId"`
 }
 
 type ListMemberLoginLogResp struct {
@@ -2344,22 +2292,6 @@ type UpdateFlashPromotionSessionResp struct {
 	Message string `json:"message"`
 }
 
-type UpdateGrowthChangeHistoryReq struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"memberId"`
-	CreateTime  string `json:"createTime"`
-	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
-	ChangeCount int32  `json:"changeCount"` // 积分改变数量
-	OperateMan  string `json:"operateMan"`  // 操作人员
-	OperateNote string `json:"operateNote"` // 操作备注
-	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
-}
-
-type UpdateGrowthChangeHistoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateHomeAdvertiseReq struct {
 	Id        int64  `json:"id"`
 	Name      string `json:"name"`          // 名称
@@ -2399,22 +2331,6 @@ type UpdateHomeBrandStatusReq struct {
 }
 
 type UpdateHomeBrandStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type UpdateIntegrationChangeHistoryReq struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"memberId"`
-	CreateTime  string `json:"createTime"`
-	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
-	ChangeCount int32  `json:"changeCount"` // 积分改变数量
-	OperateMan  string `json:"operateMan"`  // 操作人员
-	OperateNote string `json:"operateNote"` // 操作备注
-	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
-}
-
-type UpdateIntegrationChangeHistoryResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3164,21 +3080,6 @@ type AddFlashPromotionSessionResp struct {
 	Message string `json:"message"`
 }
 
-type AddGrowthChangeHistoryReq struct {
-	MemberId    int64  `json:"memberId"`
-	CreateTime  string `json:"createTime"`
-	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
-	ChangeCount int32  `json:"changeCount"` // 积分改变数量
-	OperateMan  string `json:"operateMan"`  // 操作人员
-	OperateNote string `json:"operateNote"` // 操作备注
-	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
-}
-
-type AddGrowthChangeHistoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddHomeAdvertiseReq struct {
 	Name      string `json:"name"`          // 名称
 	Type      int32  `json:"type"`          // 轮播位置：0->PC首页轮播；1->app首页轮播
@@ -3228,21 +3129,6 @@ type AddHomeRecommendSubjectReq struct {
 }
 
 type AddHomeRecommendSubjectResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type AddIntegrationChangeHistoryReq struct {
-	MemberId    int64  `json:"memberId"`
-	CreateTime  string `json:"createTime"`
-	ChangeType  int32  `json:"changeType"`  // 改变类型：0->增加；1->减少
-	ChangeCount int32  `json:"changeCount"` // 积分改变数量
-	OperateMan  string `json:"operateMan"`  // 操作人员
-	OperateNote string `json:"operateNote"` // 操作备注
-	SourceType  int32  `json:"sourceType"`  // 积分来源：0->购物；1->管理员修改
-}
-
-type AddIntegrationChangeHistoryResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3304,20 +3190,6 @@ type AddMemberLevelReq struct {
 }
 
 type AddMemberLevelResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type AddMemberLoginLogReq struct {
-	MemberId   int64  `json:"memberId"`
-	CreateTime string `json:"createTime"`
-	Ip         string `json:"ip"`
-	City       string `json:"city"`
-	LoginType  int32  `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
-	Province   string `json:"province"`
-}
-
-type AddMemberLoginLogResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

@@ -1,4 +1,4 @@
-package handler
+package member
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func MemberUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewMemberUpdateLogic(r.Context(), ctx)
+		l := member.NewMemberUpdateLogic(r.Context(), ctx)
 		resp, err := l.MemberUpdate(req)
 		if err != nil {
 			httpx.Error(w, err)
