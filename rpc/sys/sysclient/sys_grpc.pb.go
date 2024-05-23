@@ -27,6 +27,7 @@ const (
 	UserService_UserDelete_FullMethodName       = "/sysclient.UserService/UserDelete"
 	UserService_ReSetPassword_FullMethodName    = "/sysclient.UserService/ReSetPassword"
 	UserService_UpdateUserStatus_FullMethodName = "/sysclient.UserService/UpdateUserStatus"
+	UserService_UpdateUserRole_FullMethodName   = "/sysclient.UserService/UpdateUserRole"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -41,6 +42,7 @@ type UserServiceClient interface {
 	UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
 	ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error)
 	UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error)
+	UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*UpdateUserRoleResp, error)
 }
 
 type userServiceClient struct {
@@ -123,6 +125,15 @@ func (c *userServiceClient) UpdateUserStatus(ctx context.Context, in *UserStatus
 	return out, nil
 }
 
+func (c *userServiceClient) UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*UpdateUserRoleResp, error) {
+	out := new(UpdateUserRoleResp)
+	err := c.cc.Invoke(ctx, UserService_UpdateUserRole_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -135,6 +146,7 @@ type UserServiceServer interface {
 	UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error)
 	ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error)
 	UpdateUserStatus(context.Context, *UserStatusReq) (*UserStatusResp, error)
+	UpdateUserRole(context.Context, *UpdateUserRoleReq) (*UpdateUserRoleResp, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -165,6 +177,9 @@ func (UnimplementedUserServiceServer) ReSetPassword(context.Context, *ReSetPassw
 }
 func (UnimplementedUserServiceServer) UpdateUserStatus(context.Context, *UserStatusReq) (*UserStatusResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserStatus not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUserRole(context.Context, *UpdateUserRoleReq) (*UpdateUserRoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserRole not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -323,6 +338,24 @@ func _UserService_UpdateUserStatus_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UpdateUserRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRoleReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateUserRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateUserRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateUserRole(ctx, req.(*UpdateUserRoleReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -361,6 +394,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserStatus",
 			Handler:    _UserService_UpdateUserStatus_Handler,
+		},
+		{
+			MethodName: "UpdateUserRole",
+			Handler:    _UserService_UpdateUserRole_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

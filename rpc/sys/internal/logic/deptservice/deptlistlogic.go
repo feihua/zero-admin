@@ -3,6 +3,7 @@ package deptservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
@@ -62,8 +63,8 @@ func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptList
 			OrderNum:   dept.OrderNum,
 			CreateBy:   dept.CreateBy,
 			CreateTime: dept.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateBy:   *dept.UpdateBy,
-			UpdateTime: dept.UpdateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:   dept.UpdateBy,
+			UpdateTime: common.TimeToString(dept.UpdateTime),
 			DelFlag:    dept.DelFlag,
 			ParentIds:  parentIds,
 		})

@@ -5,13 +5,13 @@ info (
 )
 
 type (
-	addJobReq {
+	AddJobReq {
 		JobName  string `json:"jobName"` // 职位名称
 		Remarks  string `json:"remarks"` // 备注
 		OrderNum int32  `json:"orderNum"` // 排序
 		DelFlag  int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
 	}
-	addJobResp {
+	AddJobResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -68,20 +68,20 @@ type (
 	prefix:     /api/sys/job
 )
 service admin-api {
-	//
-	@handler JobAdd
-	post /addJob (addJobReq) returns (addJobResp)
+	//添加岗位信息
+	@handler AddJob
+	post /addJob (AddJobReq) returns (AddJobResp)
 
-	//
-	@handler JobList
+	//查询岗位信息
+	@handler QueryJobList
 	get /queryJobList (ListJobReq) returns (ListJobResp)
 
-	//
-	@handler JobUpdate
+	//更新岗位信息
+	@handler UpdateJob
 	post /updateJob (UpdateJobReq) returns (UpdateJobResp)
 
-	//
-	@handler JobDelete
+	//删除岗位信息
+	@handler DeleteJob
 	get /deleteJob (DeleteJobReq) returns (DeleteJobResp)
 }
 

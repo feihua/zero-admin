@@ -35,7 +35,7 @@ func (l *JobAddLogic) JobAdd(in *sysclient.JobAddReq) (*sysclient.JobAddResp, er
 		JobName:  in.JobName,
 		OrderNum: in.OrderNum,
 		CreateBy: in.CreateBy,
-		Remarks:  &in.Remarks,
+		Remarks:  in.Remarks,
 		DelFlag:  in.DelFlag,
 	})
 	if err != nil {

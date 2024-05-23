@@ -38,7 +38,7 @@ func (l *DictAddLogic) DictAdd(in *sysclient.DictAddReq) (*sysclient.DictAddResp
 		Description: in.Description,
 		Sort:        in.Sort,
 		CreateBy:    in.CreateBy,
-		Remarks:     &in.Remarks,
+		Remarks:     in.Remarks,
 		DelFlag:     in.DelFlag,
 	})
 	if err != nil {

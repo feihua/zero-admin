@@ -7,6 +7,7 @@ require (
 	github.com/jinzhu/copier v0.3.5
 	github.com/smartwalle/alipay/v3 v3.2.20
 	github.com/zeromicro/go-zero v1.6.3
+	github.com/zeromicro/x v0.0.0-20240408115609-8224c482b07e
 	google.golang.org/grpc v1.62.0
 	google.golang.org/protobuf v1.32.0
 	gorm.io/driver/mysql v1.5.6
@@ -38,7 +39,6 @@ require (
 	github.com/google/gnostic-models v0.6.8 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
-	github.com/google/pprof v0.0.0-20211214055906-6f57359322fd // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect

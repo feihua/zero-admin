@@ -31,7 +31,7 @@ func NewSysLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysL
 
 // SysLogDelete 删除操作日志
 func (l *SysLogDeleteLogic) SysLogDelete(in *sysclient.SysLogDeleteReq) (*sysclient.SysLogDeleteResp, error) {
-	q := query.SysLog
+	q := query.SysOperateLog
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
 		return nil, err

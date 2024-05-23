@@ -2,14 +2,14 @@ create table sys_job
 (
     id          bigint auto_increment comment '编号'
         primary key,
-    job_name    varchar(50)                         not null comment '职位名称',
-    order_num   int                                 not null comment '排序',
-    create_by   varchar(50)                         not null comment '创建人',
-    create_time timestamp default CURRENT_TIMESTAMP null comment '创建时间',
-    update_by   varchar(50)                         null comment '更新人',
-    update_time datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
-    del_flag    tinyint   default 0                 not null comment '是否删除  0：已删除  1：正常',
-    remarks     varchar(68)                         null comment '备注'
+    job_name    varchar(50)                           not null comment '职位名称',
+    order_num   int                                   not null comment '排序',
+    create_by   varchar(50)                           not null comment '创建人',
+    create_time timestamp   default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_by   varchar(50) default ''                not null comment '更新人',
+    update_time datetime                              null on update CURRENT_TIMESTAMP comment '更新时间',
+    del_flag    tinyint     default 0                 not null comment '是否删除  0：已删除  1：正常',
+    remarks     varchar(68) default ''                not null comment '备注'
 )
     comment '职位管理';
 

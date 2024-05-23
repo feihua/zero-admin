@@ -33,14 +33,14 @@ func NewSysLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLogA
 
 // SysLogAdd 添加操作日志
 func (l *SysLogAddLogic) SysLogAdd(in *sysclient.SysLogAddReq) (*sysclient.SysLogAddResp, error) {
-	err := query.SysLog.WithContext(l.ctx).Create(&model.SysLog{
+	err := query.SysOperateLog.WithContext(l.ctx).Create(&model.SysOperateLog{
 		UserName:       in.UserName,
 		Operation:      in.Operation,
-		Method:         in.Method,
+		RequestMethod:  in.Method,
 		RequestParams:  in.RequestParams,
-		ResponseParams: &in.ResponseParams,
-		Time:           in.Time,
-		IP:             &in.Ip,
+		ResponseParams: in.ResponseParams,
+		UseTime:        in.Time,
+		OperationIP:    in.Ip,
 		OperationTime:  time.Now(),
 	})
 	if err != nil {

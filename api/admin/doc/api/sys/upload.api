@@ -19,6 +19,7 @@ type (
 	prefix:     /api/sys
 )
 service admin-api {
+	//上传文件
 	@handler Upload
 	post /upload returns (UploadResp)
 }

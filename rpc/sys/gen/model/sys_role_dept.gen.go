@@ -4,19 +4,13 @@
 
 package model
 
-import (
-	"time"
-)
-
 const TableNameSysRoleDept = "sys_role_dept"
 
 // SysRoleDept 角色机构
 type SysRoleDept struct {
-	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
-	RoleID     int64     `gorm:"column:role_id;not null;comment:角色ID" json:"role_id"`                                   // 角色ID
-	DeptID     int64     `gorm:"column:dept_id;not null;comment:机构ID" json:"dept_id"`                                   // 机构ID
-	CreateBy   string    `gorm:"column:create_by;not null;comment:创建人" json:"create_by"`                                // 创建人
-	CreateTime time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	ID     int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"` // 编号
+	RoleID int64 `gorm:"column:role_id;not null;comment:角色ID" json:"role_id"`          // 角色ID
+	DeptID int64 `gorm:"column:dept_id;not null;comment:机构ID" json:"dept_id"`          // 机构ID
 }
 
 // TableName SysRoleDept's table name

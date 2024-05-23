@@ -5,12 +5,12 @@ info (
 )
 
 type (
-	addRoleReq {
+	AddRoleReq {
 		Name   string `json:"name"` // 角色名称
 		Remark string `json:"remark,optional"` // 备注
 		Status int32  `json:"status"` // 状态
 	}
-	addRoleResp {
+	AddRoleResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -59,29 +59,32 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	UpdateRoleMenuReq {
-		RoleId  int64   `json:"roleId"`
-		MenuIds []int64 `json:"menuIds"`
+	QueryRoleMenuListReq {
+		RoleId int64 `form:"roleId"`
 	}
-	UpdateRoleMenuResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
-	RoleMenuListData {
+	MenuTreeListData {
 		Key      string `json:"key"` // 菜单名称
 		Title    string `json:"title"` // 菜单名称
 		ParentId int64  `json:"parentId"` // 父菜单ID，一级菜单为0
 		Id       int64  `json:"id"` // 父菜单ID，一级菜单为0
 		Label    string `json:"label"` // 父菜单ID，一级菜单为0
 	}
-	RoleMenuReq {
-		Id int64 `json:"id,optional"`
+	RoleMenuListData {
+		MenuList []MenuTreeListData `json:"menuList"`
+		MenuIds  []int64            `json:"menuIds"`
 	}
-	RoleMenuResp {
-		AllData  []*RoleMenuListData `json:"allData"`
-		RoleData []int64             `json:"userData"`
-		Code     string              `json:"code"`
-		Message  string              `json:"message"`
+	QueryRoleMenuListResp {
+		Code    string           `json:"code"`
+		Message string           `json:"message"`
+		Data    RoleMenuListData `json:"data"`
+	}
+	UpdateRoleMenuListReq {
+		RoleId  int64   `json:"roleId"`
+		MenuIds []int64 `json:"menuIds"`
+	}
+	UpdateRoleMenuListResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
 	}
 )
 
@@ -93,27 +96,27 @@ type (
 )
 service admin-api {
 	//新增角色信息
-	@handler RoleAdd
-	post /addRole (addRoleReq) returns (addRoleResp)
+	@handler AddRole
+	post /addRole (AddRoleReq) returns (AddRoleResp)
 
 	//角色列表信息
-	@handler RoleList
+	@handler queryRoleList
 	get /queryRoleList (ListRoleReq) returns (ListRoleResp)
 
 	//更新角色信息
-	@handler RoleUpdate
+	@handler UpdateRole
 	post /updateRole (UpdateRoleReq) returns (UpdateRoleResp)
 
 	//删除角色信息
-	@handler RoleDelete
+	@handler DeleteRole
 	get /deleteRole (DeleteRoleReq) returns (DeleteRoleResp)
 
 	//查询角色与菜单的关联
-	@handler QueryMenuByRoleId
-	post /queryMenuByRoleId (RoleMenuReq) returns (RoleMenuResp)
+	@handler QueryRoleMenuList
+		get /queryRoleMenuList (QueryRoleMenuListReq) returns (QueryRoleMenuListResp)
 
 	//更新角色与菜单的关联
-	@handler UpdateRoleMenu
-	post /updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
+	@handler UpdateRoleMenuList
+	post /updateRoleMenuList (UpdateRoleMenuListReq) returns (UpdateRoleMenuListResp)
 }
 

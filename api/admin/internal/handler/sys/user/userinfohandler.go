@@ -8,15 +8,14 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func UserInfoHandler(ctx *svc.ServiceContext) http.HandlerFunc {
+func UserInfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
-		l := user.NewUserInfoLogic(r.Context(), ctx)
+		l := user.NewUserInfoLogic(r.Context(), svcCtx)
 		resp, err := l.UserInfo()
 		if err != nil {
-			httpx.Error(w, err)
+			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			httpx.OkJsonCtx(r.Context(), w, resp)
 		}
 	}
 }

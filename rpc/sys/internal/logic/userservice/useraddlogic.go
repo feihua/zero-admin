@@ -34,12 +34,12 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserAddLo
 func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp, error) {
 	user := &model.SysUser{
 		UserName:   in.UserName,
-		NickName:   &in.NickName,
-		Avatar:     &in.Avatar,
+		NickName:   in.NickName,
+		Avatar:     in.Avatar,
 		Password:   "123456",
 		Salt:       "123456",
-		Email:      &in.Email,
-		Mobile:     &in.Mobile,
+		Email:      in.Email,
+		Mobile:     in.Mobile,
 		UserStatus: in.UserStatus,
 		DeptID:     in.DeptId,
 		CreateBy:   in.CreateBy,
@@ -60,9 +60,8 @@ func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp
 	_, _ = query.SysUserRole.WithContext(l.ctx).Where(query.SysUserRole.UserID.Eq(id)).Delete()
 
 	err = query.SysUserRole.WithContext(l.ctx).Create(&model.SysUserRole{
-		UserID:   id,
-		RoleID:   in.RoleId,
-		CreateBy: in.CreateBy,
+		UserID: id,
+		RoleID: in.RoleId,
 	})
 
 	if err != nil {

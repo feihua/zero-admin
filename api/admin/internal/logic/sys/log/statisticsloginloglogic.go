@@ -1,4 +1,4 @@
-package logic
+package log
 
 import (
 	"context"
@@ -32,13 +32,13 @@ func NewStatisticsLoginLogLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // StatisticsLoginLog 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
-func (l *StatisticsLoginLogLogic) StatisticsLoginLog(req *types.StatisticsLoginLogReq) (*types.StatisticsLoginLogResp, error) {
+func (l *StatisticsLoginLogLogic) StatisticsLoginLog() (*types.StatisticsLoginLogResp, error) {
 	resp, err := l.svcCtx.LoginLogService.StatisticsLoginLog(l.ctx, &sysclient.StatisticsLoginLogReq{
 		Status: "1",
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,统计后台用户登录异常:%+v", req, err.Error())
+		logc.Errorf(l.ctx, "统计后台用户登录异常:%s", err.Error())
 		return nil, errorx.NewDefaultError("统计后台用户登录失败")
 	}
 

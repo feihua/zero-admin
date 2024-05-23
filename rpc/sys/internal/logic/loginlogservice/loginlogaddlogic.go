@@ -34,11 +34,10 @@ func NewLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 // LoginLogAdd 添加登录日志
 func (l *LoginLogAddLogic) LoginLogAdd(in *sysclient.LoginLogAddReq) (*sysclient.LoginLogAddResp, error) {
 	err := query.SysLoginLog.WithContext(l.ctx).Create(&model.SysLoginLog{
-		UserName:   in.UserName,
-		Status:     in.Status,
-		IP:         in.Ip,
-		CreateTime: time.Now(),
-		CreateBy:   in.CreateBy,
+		LoginName:   in.UserName,
+		LoginStatus: in.Status,
+		LoginIP:     in.Ip,
+		LoginTime:   time.Now(),
 	})
 	if err != nil {
 		return nil, err

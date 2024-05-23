@@ -33,7 +33,7 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 }
 
 // UserLogin 根据用户名和密码登录
-func (l *UserLoginLogic) UserLogin(req types.LoginReq, ip string) (*types.LoginResp, error) {
+func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip string) (*types.LoginResp, error) {
 
 	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
 		logc.Errorf(l.ctx, "用户名或密码不能为空,请求信息失败,参数:%s", req)

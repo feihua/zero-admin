@@ -3,6 +3,7 @@ package jobservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -58,10 +59,10 @@ func (l *JobListLogic) JobList(in *sysclient.JobListReq) (*sysclient.JobListResp
 			OrderNum:   job.OrderNum,
 			CreateBy:   job.CreateBy,
 			CreateTime: job.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateBy:   *job.UpdateBy,
-			UpdateTime: job.UpdateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:   job.UpdateBy,
+			UpdateTime: common.TimeToString(job.UpdateTime),
 			DelFlag:    job.DelFlag,
-			Remarks:    *job.Remarks,
+			Remarks:    job.Remarks,
 		})
 	}
 

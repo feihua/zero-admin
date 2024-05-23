@@ -50,9 +50,9 @@ func (l *DictUpdateLogic) DictUpdate(in *sysclient.DictUpdateReq) (*sysclient.Di
 		Sort:        in.Sort,
 		CreateBy:    dict.CreateBy,
 		CreateTime:  dict.CreateTime,
-		UpdateBy:    &in.UpdateBy,
+		UpdateBy:    in.UpdateBy,
 		UpdateTime:  &now,
-		Remarks:     &in.Remarks,
+		Remarks:     in.Remarks,
 		DelFlag:     in.DelFlag,
 	})
 	if err != nil {

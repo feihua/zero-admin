@@ -39,8 +39,8 @@ func (l *JobUpdateLogic) JobUpdate(in *sysclient.JobUpdateReq) (*sysclient.JobUp
 
 	job.JobName = in.JobName
 	job.OrderNum = in.OrderNum
-	job.UpdateBy = &in.UpdateBy
-	job.Remarks = &in.Remarks
+	job.UpdateBy = in.UpdateBy
+	job.Remarks = in.Remarks
 	job.DelFlag = in.DelFlag
 
 	_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Updates(job)

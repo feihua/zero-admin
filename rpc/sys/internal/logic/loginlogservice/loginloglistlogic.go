@@ -35,10 +35,10 @@ func NewLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Logi
 func (l *LoginLogListLogic) LoginLogList(in *sysclient.LoginLogListReq) (*sysclient.LoginLogListResp, error) {
 	q := query.SysLoginLog.WithContext(l.ctx)
 	if len(in.UserName) > 0 {
-		q = q.Where(query.SysLoginLog.UserName.Like("%" + in.UserName + "%"))
+		q = q.Where(query.SysLoginLog.LoginName.Like("%" + in.UserName + "%"))
 	}
 	if len(in.Ip) > 0 {
-		q = q.Where(query.SysLoginLog.UserName.Like("%" + in.Ip + "%"))
+		q = q.Where(query.SysLoginLog.LoginName.Like("%" + in.Ip + "%"))
 	}
 
 	offset := (in.Current - 1) * in.PageSize
@@ -55,11 +55,10 @@ func (l *LoginLogListLogic) LoginLogList(in *sysclient.LoginLogListReq) (*syscli
 	for _, log := range result {
 		list = append(list, &sysclient.LoginLogListData{
 			Id:         log.ID,
-			UserName:   log.UserName,
-			Status:     log.Status,
-			Ip:         log.IP,
-			CreateBy:   log.CreateBy,
-			CreateTime: log.CreateTime.Format("2006-01-02 15:04:05"),
+			UserName:   log.LoginName,
+			Status:     log.LoginStatus,
+			Ip:         log.LoginIP,
+			CreateTime: log.LoginTime.Format("2006-01-02 15:04:05"),
 		})
 	}
 

@@ -1,0 +1,51 @@
+###用户登录
+POST {{host}}/api/sys/user/login
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.token);
+%}
+
+### 添加字典
+POST {{host}}/api/sys/dict/addDict
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "value": "female1",
+  "label": "女1",
+  "type": "sex",
+  "description": "性别",
+  "sort": 0,
+  "remarks": "性别",
+  "delFlag": 0
+}
+
+### 删除字典
+GET {{host}}/api/sys/dict/deleteDict?ids=[5]
+Authorization: Bearer {{token}}
+
+
+### 修改字典
+POST {{host}}/api/sys/dict/updateDict
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 2,
+  "value": "female",
+  "label": "女",
+  "type": "sex",
+  "description": "性别",
+  "sort": 0,
+  "remarks": "性别1",
+  "delFlag": 0
+}
+
+### 查询字典列表
+GET {{host}}/api/sys/dict/queryDictList
+Authorization: Bearer {{token}}

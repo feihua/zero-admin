@@ -31,12 +31,12 @@ func NewSysLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLog
 
 // SysLogList 操作日志列表
 func (l *SysLogListLogic) SysLogList(in *sysclient.SysLogListReq) (*sysclient.SysLogListResp, error) {
-	q := query.SysLog.WithContext(l.ctx)
+	q := query.SysOperateLog.WithContext(l.ctx)
 	if len(in.UserName) > 0 {
-		q = q.Where(query.SysLog.UserName.Like("%" + in.UserName + "%"))
+		q = q.Where(query.SysOperateLog.UserName.Like("%" + in.UserName + "%"))
 	}
 	if len(in.Method) > 0 {
-		q = q.Where(query.SysLog.UserName.Like("%" + in.Method + "%"))
+		q = q.Where(query.SysOperateLog.UserName.Like("%" + in.Method + "%"))
 	}
 
 	offset := (in.Current - 1) * in.PageSize
@@ -52,11 +52,11 @@ func (l *SysLogListLogic) SysLogList(in *sysclient.SysLogListReq) (*sysclient.Sy
 			Id:             log.ID,
 			UserName:       log.UserName,
 			Operation:      log.Operation,
-			Method:         log.Method,
+			Method:         log.RequestMethod,
 			RequestParams:  log.RequestParams,
-			Time:           log.Time,
-			Ip:             *log.IP,
-			ResponseParams: *log.ResponseParams,
+			Time:           log.UseTime,
+			Ip:             log.OperationIP,
+			ResponseParams: log.ResponseParams,
 			OperationTime:  log.OperationTime.Format("2006-01-02 15:04:05"),
 		})
 	}

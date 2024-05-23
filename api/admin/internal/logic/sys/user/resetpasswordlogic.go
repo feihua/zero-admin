@@ -31,7 +31,7 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) ReSe
 }
 
 // ReSetPassword 重置用户密码
-func (l *ReSetPasswordLogic) ReSetPassword(req types.ReSetPasswordReq) (*types.ReSetPasswordResp, error) {
+func (l *ReSetPasswordLogic) ReSetPassword(req *types.ReSetPasswordReq) (*types.ReSetPasswordResp, error) {
 
 	_, err := l.svcCtx.UserService.ReSetPassword(l.ctx, &sysclient.ReSetPasswordReq{
 		Id:       req.Id,

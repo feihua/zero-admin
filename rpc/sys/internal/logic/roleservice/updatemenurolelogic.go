@@ -29,7 +29,7 @@ func NewUpdateMenuRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 	}
 }
 
-// UpdateMenuRole 更新角色与菜单的关联(id为1的是系统预留超级管理员角色,不用关联)
+// UpdateMenuRole 更新角色与菜单的关联(角色id为1的是系统预留超级管理员角色,不用关联)
 func (l *UpdateMenuRoleLogic) UpdateMenuRole(in *sysclient.UpdateMenuRoleReq) (*sysclient.UpdateMenuRoleResp, error) {
 
 	//id为1的是系统预留超级管理员角色,不用关联

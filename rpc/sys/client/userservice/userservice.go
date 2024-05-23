@@ -85,6 +85,8 @@ type (
 	SysLogListResp         = sysclient.SysLogListResp
 	UpdateMenuRoleReq      = sysclient.UpdateMenuRoleReq
 	UpdateMenuRoleResp     = sysclient.UpdateMenuRoleResp
+	UpdateUserRoleReq      = sysclient.UpdateUserRoleReq
+	UpdateUserRoleResp     = sysclient.UpdateUserRoleResp
 	UserAddReq             = sysclient.UserAddReq
 	UserAddResp            = sysclient.UserAddResp
 	UserDeleteReq          = sysclient.UserDeleteReq
@@ -106,6 +108,7 @@ type (
 		UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
 		ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error)
 		UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error)
+		UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*UpdateUserRoleResp, error)
 	}
 
 	defaultUserService struct {
@@ -157,4 +160,9 @@ func (m *defaultUserService) ReSetPassword(ctx context.Context, in *ReSetPasswor
 func (m *defaultUserService) UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error) {
 	client := sysclient.NewUserServiceClient(m.cli.Conn())
 	return client.UpdateUserStatus(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*UpdateUserRoleResp, error) {
+	client := sysclient.NewUserServiceClient(m.cli.Conn())
+	return client.UpdateUserRole(ctx, in, opts...)
 }

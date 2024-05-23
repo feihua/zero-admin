@@ -3,10 +3,10 @@ package roleservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -57,8 +57,8 @@ func (l *RoleListLogic) RoleList(in *sysclient.RoleListReq) (*sysclient.RoleList
 			Remark:     *role.Remark,
 			CreateBy:   role.CreateBy,
 			CreateTime: role.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateBy:   *role.UpdateBy,
-			UpdateTime: role.UpdateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:   role.UpdateBy,
+			UpdateTime: common.TimeToString(role.UpdateTime),
 			DelFlag:    role.DelFlag,
 			Status:     role.Status,
 		})

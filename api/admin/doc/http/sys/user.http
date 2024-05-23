@@ -12,12 +12,68 @@ Content-Type: application/json
 GET {{host}}/api/sys/user/info
 Authorization: Bearer {{token}}
 
-### 用户列表
-POST {{host}}/api/sys/user/list
+
+### 添加用户
+POST {{host}}/api/sys/user/addUser
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "current": 1,
-  "pageSize": 10
+  "name": "test21",
+  "nickName": "测试人员1",
+  "avatar": "",
+  "email": "1002219321@qq.com",
+  "mobile": "18613033350",
+  "status": 1,
+  "deptId": 4,
+  "delFlag": 1,
+  "jobId": 1,
+  "roleId": 0
+
+}
+
+### 删除用户
+GET {{host}}/api/sys/user/deleteUser?ids=[5]
+Authorization: Bearer {{token}}
+
+
+### 修改用户
+POST {{host}}/api/sys/user/updateUser
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 3,
+  "name": "test1",
+  "nickName": "测试人员",
+  "avatar": "",
+  "email": "1002219331@qq.com",
+  "mobile": "18613030350",
+  "status": 1,
+  "deptId": 4,
+  "delFlag": 1,
+  "jobId": 1,
+  "roleId": 0,
+  "roleName": "",
+  "jobName": "",
+  "deptName": ""
+}
+
+### 用户列表
+GET {{host}}/api/sys/user/queryUserList
+Authorization: Bearer {{token}}
+
+### 查询用户与角色的关联
+GET {{host}}/api/sys/user/queryUserRoleList?userId=1
+Authorization: Bearer {{token}}
+
+
+### 更新用户与角色的关联
+POST {{host}}/api/sys/user/updateUserRoleList
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "userId": 4,
+  "roleIds": [1,2,3]
 }

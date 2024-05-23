@@ -31,7 +31,7 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) U
 }
 
 // UpdateUserStatus 更新用户状态
-func (l *UpdateUserStatusLogic) UpdateUserStatus(req types.UserStatusReq) (*types.UserStatusResp, error) {
+func (l *UpdateUserStatusLogic) UpdateUserStatus(req *types.UserStatusReq) (*types.UserStatusResp, error) {
 
 	_, err := l.svcCtx.UserService.UpdateUserStatus(l.ctx, &sysclient.UserStatusReq{
 		Id:         req.Id,

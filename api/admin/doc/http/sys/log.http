@@ -1,0 +1,33 @@
+###用户登录
+POST {{host}}/api/sys/user/login
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.token);
+%}
+
+### 查询登录日志列表
+GET {{host}}/api/sys/log/queryLoginLogList
+Authorization: Bearer {{token}}
+
+### 删除登录日志列表
+GET {{host}}/api/sys/log/deleteLoginLog
+Authorization: Bearer {{token}}
+
+### 查询系统日志列表
+GET {{host}}/api/sys/log/queryOperateLogList
+Authorization: Bearer {{token}}
+
+### 删除系统日志列表
+GET {{host}}/api/sys/log/deleteOperateLog
+Authorization: Bearer {{token}}
+
+
+### 登陆日志统计
+GET {{host}}/api/sys/log/statisticsLoginLog
+Authorization: Bearer {{token}}
+

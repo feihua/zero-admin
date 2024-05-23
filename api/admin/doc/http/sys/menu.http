@@ -1,0 +1,64 @@
+###用户登录
+POST {{host}}/api/sys/user/login
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.token);
+%}
+
+### 添加菜单信息
+POST {{host}}/api/sys/menu/addMenu
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "test",
+  "title": "test",
+  "parentId": 12,
+  "url": "",
+  "perms": "",
+  "type": 2,
+  "icon": "",
+  "orderNum": 3,
+  "delFlag": 1,
+  "vuePath": "",
+  "vueComponent": "",
+  "vueIcon": "",
+  "vueRedirect": "",
+  "backgroundUrl": "/api/member/queryIntegrationChangeHistoryList"
+}
+### 删除菜单信息
+GET {{host}}/api/sys/menu/deleteMenu?ids=[162]
+Authorization: Bearer {{token}}
+
+
+### 修改菜单信息
+POST {{host}}/api/sys/menu/updateMenu
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 161,
+  "name": "查询会员积分变化",
+  "title": "查询会员积分变化",
+  "parentId": 12,
+  "url": "",
+  "perms": "",
+  "type": 2,
+  "icon": "",
+  "orderNum": 3,
+  "delFlag": 1,
+  "vuePath": "",
+  "vueComponent": "",
+  "vueIcon": "",
+  "vueRedirect": "",
+  "backgroundUrl": "/api/member/queryIntegrationChangeHistoryList"
+}
+
+### 查询菜单信息列表
+GET {{host}}/api/sys/menu/queryMenuList
+Authorization: Bearer {{token}}

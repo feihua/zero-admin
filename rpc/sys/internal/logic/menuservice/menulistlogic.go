@@ -3,6 +3,7 @@ package menuservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -47,20 +48,20 @@ func (l *MenuListLogic) MenuList(in *sysclient.MenuListReq) (*sysclient.MenuList
 			Id:            menu.ID,
 			Name:          menu.Name,
 			ParentId:      menu.ParentID,
-			Url:           *menu.URL,
-			Perms:         *menu.Perms,
+			Url:           menu.URL,
+			Perms:         menu.Perms,
 			Type:          menu.Type,
-			Icon:          *menu.Icon,
+			Icon:          menu.Icon,
 			OrderNum:      menu.OrderNum,
 			CreateBy:      menu.CreateBy,
 			CreateTime:    menu.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateBy:      *menu.UpdateBy,
-			UpdateTime:    menu.UpdateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:      menu.UpdateBy,
+			UpdateTime:    common.TimeToString(menu.UpdateTime),
 			DelFlag:       menu.DelFlag,
-			VuePath:       *menu.VuePath,
-			VueComponent:  *menu.VueComponent,
-			VueIcon:       *menu.VueIcon,
-			VueRedirect:   *menu.VueRedirect,
+			VuePath:       menu.VuePath,
+			VueComponent:  menu.VueComponent,
+			VueIcon:       menu.VueIcon,
+			VueRedirect:   menu.VueRedirect,
 			BackgroundUrl: menu.BackgroundURL,
 		})
 	}

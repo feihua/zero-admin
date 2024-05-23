@@ -4,10 +4,8 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -35,13 +33,12 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ReS
 func (l *ReSetPasswordLogic) ReSetPassword(in *sysclient.ReSetPasswordReq) (*sysclient.ReSetPasswordResp, error) {
 
 	q := query.SysUser
-	now := time.Now()
+
 	_, err := q.WithContext(l.ctx).Updates(&model.SysUser{
-		ID:         in.Id,
-		Password:   "123456",
-		Salt:       "123456",
-		UpdateBy:   &in.UpdateBy,
-		UpdateTime: &now,
+		ID:       in.Id,
+		Password: "123456",
+		Salt:     "123456",
+		UpdateBy: in.UpdateBy,
 	})
 
 	if err != nil {

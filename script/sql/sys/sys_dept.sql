@@ -2,15 +2,15 @@ create table sys_dept
 (
     id          bigint auto_increment comment '编号'
         primary key,
-    dept_name   varchar(50)                        not null comment '机构名称',
-    parent_id   bigint                             not null comment '上级机构ID，一级机构为0',
-    order_num   int                                not null comment '排序',
-    create_by   varchar(50)                        not null comment '创建者',
-    create_time datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    update_by   varchar(50)                        null comment '更新者',
-    update_time datetime                           null on update CURRENT_TIMESTAMP comment '更新时间',
-    del_flag    tinyint  default 1                 not null comment '是否删除  0：已删除  1：正常',
-    parent_ids  varchar(64)                        not null comment '上级机构IDs，一级机构为0'
+    dept_name   varchar(50)                           not null comment '机构名称',
+    parent_id   bigint                                not null comment '上级机构ID，一级机构为0',
+    order_num   int                                   not null comment '排序',
+    create_by   varchar(50)                           not null comment '创建者',
+    create_time datetime    default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_by   varchar(50) default ''                not null comment '更新者',
+    update_time datetime                              null on update CURRENT_TIMESTAMP comment '更新时间',
+    del_flag    tinyint     default 1                 not null comment '是否删除  0：已删除  1：正常',
+    parent_ids  varchar(64)                           not null comment '上级机构IDs，一级机构为0'
 )
     comment '部门管理';
 

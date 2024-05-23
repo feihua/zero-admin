@@ -79,13 +79,13 @@ func listTrees(menus []*model.SysMenu, list []*sysclient.MenuListTree, listUrls 
 			list = append(list, &sysclient.MenuListTree{
 				Id:           menu.ID,
 				Name:         menu.Name,
-				Icon:         *menu.Icon,
+				Icon:         menu.Icon,
 				ParentId:     menu.ParentID,
-				Path:         *menu.URL,
-				VuePath:      *menu.VuePath,
-				VueComponent: *menu.VueComponent,
-				VueIcon:      *menu.VueIcon,
-				VueRedirect:  *menu.VueRedirect,
+				Path:         menu.URL,
+				VuePath:      menu.VuePath,
+				VueComponent: menu.VueComponent,
+				VueIcon:      menu.VueIcon,
+				VueRedirect:  menu.VueRedirect,
 			})
 		}
 

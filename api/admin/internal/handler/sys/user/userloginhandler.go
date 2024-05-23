@@ -28,7 +28,7 @@ func UserLoginHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 		//		proxy_pass http://127.0.0.1:8888;
 		//}
 		l := user.NewUserLoginLogic(r.Context(), ctx)
-		resp, err := l.UserLogin(req, httpx.GetRemoteAddr(r))
+		resp, err := l.UserLogin(&req, httpx.GetRemoteAddr(r))
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

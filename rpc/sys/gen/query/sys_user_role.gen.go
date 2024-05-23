@@ -30,8 +30,6 @@ func newSysUserRole(db *gorm.DB, opts ...gen.DOOption) sysUserRole {
 	_sysUserRole.ID = field.NewInt64(tableName, "id")
 	_sysUserRole.UserID = field.NewInt64(tableName, "user_id")
 	_sysUserRole.RoleID = field.NewInt64(tableName, "role_id")
-	_sysUserRole.CreateBy = field.NewString(tableName, "create_by")
-	_sysUserRole.CreateTime = field.NewTime(tableName, "create_time")
 
 	_sysUserRole.fillFieldMap()
 
@@ -42,12 +40,10 @@ func newSysUserRole(db *gorm.DB, opts ...gen.DOOption) sysUserRole {
 type sysUserRole struct {
 	sysUserRoleDo sysUserRoleDo
 
-	ALL        field.Asterisk
-	ID         field.Int64  // 编号
-	UserID     field.Int64  // 用户ID
-	RoleID     field.Int64  // 角色ID
-	CreateBy   field.String // 创建人
-	CreateTime field.Time   // 创建时间
+	ALL    field.Asterisk
+	ID     field.Int64 // 编号
+	UserID field.Int64 // 用户ID
+	RoleID field.Int64 // 角色ID
 
 	fieldMap map[string]field.Expr
 }
@@ -67,8 +63,6 @@ func (s *sysUserRole) updateTableName(table string) *sysUserRole {
 	s.ID = field.NewInt64(table, "id")
 	s.UserID = field.NewInt64(table, "user_id")
 	s.RoleID = field.NewInt64(table, "role_id")
-	s.CreateBy = field.NewString(table, "create_by")
-	s.CreateTime = field.NewTime(table, "create_time")
 
 	s.fillFieldMap()
 
@@ -95,12 +89,10 @@ func (s *sysUserRole) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysUserRole) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 5)
+	s.fieldMap = make(map[string]field.Expr, 3)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["user_id"] = s.UserID
 	s.fieldMap["role_id"] = s.RoleID
-	s.fieldMap["create_by"] = s.CreateBy
-	s.fieldMap["create_time"] = s.CreateTime
 }
 
 func (s sysUserRole) clone(db *gorm.DB) sysUserRole {

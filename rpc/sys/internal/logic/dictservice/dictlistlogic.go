@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -63,11 +64,11 @@ func (l *DictListLogic) DictList(in *sysclient.DictListReq) (*sysclient.DictList
 			Type:        dict.Type,
 			Description: dict.Description,
 			Sort:        dict.Sort,
-			Remarks:     *dict.Remarks,
+			Remarks:     dict.Remarks,
 			CreateBy:    dict.CreateBy,
 			CreateTime:  dict.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateBy:    *dict.UpdateBy,
-			UpdateTime:  dict.UpdateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:    dict.UpdateBy,
+			UpdateTime:  common.TimeToString(dict.UpdateTime),
 			DelFlag:     dict.DelFlag,
 		})
 	}

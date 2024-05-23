@@ -95,11 +95,10 @@ type (
 		Success  bool                      `json:"success"`
 		Total    int64                     `json:"total"`
 	}
-
 	ListChangeHistoryReq {
 		Current  int64 `form:"current,default=1"`
 		PageSize int64 `form:"pageSize,default=20"`
-		MemberId int64  `form:"memberId"`
+		MemberId int64 `form:"memberId"`
 	}
 	ListChangeHistoryData {
 		Id          int64  `json:"id"`
@@ -112,15 +111,14 @@ type (
 		SourceType  int32  `json:"sourceType"` // 积分来源：0->购物；1->管理员修改
 	}
 	ListChangeHistoryResp {
-		Current  int64                          `form:"current,default=1"`
+		Current  int64                    `form:"current,default=1"`
 		Data     []*ListChangeHistoryData `json:"data"`
-		PageSize int64                          `form:"pageSize,default=20"`
-		Success  bool                           `json:"success"`
-		Total    int64                          `json:"total"`
-		Code     string                         `json:"code"`
-		Message  string                         `json:"message"`
+		PageSize int64                    `form:"pageSize,default=20"`
+		Success  bool                     `json:"success"`
+		Total    int64                    `json:"total"`
+		Code     string                   `json:"code"`
+		Message  string                   `json:"message"`
 	}
-
 )
 
 @server (
@@ -153,6 +151,5 @@ service admin-api {
 	//查询会员积分变化历史记录
 	@handler QueryIntegrationChangeHistoryList
 	get /queryIntegrationChangeHistoryList (ListChangeHistoryReq) returns (ListChangeHistoryResp)
-
 }
 

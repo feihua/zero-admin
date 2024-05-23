@@ -132,6 +132,14 @@ message UserStatusReq {
 message UserStatusResp {
   string pong = 1;
 }
+message UpdateUserRoleReq {
+  int64 userId = 1;
+  repeated int64 roleIds = 2;
+}
+
+message UpdateUserRoleResp {
+  string pong = 1;
+}
 //user start---------------------
 service UserService {
 
@@ -143,6 +151,8 @@ service UserService {
   rpc UserDelete(UserDeleteReq) returns(UserDeleteResp);
   rpc ReSetPassword(ReSetPasswordReq) returns(ReSetPasswordResp);
   rpc UpdateUserStatus(UserStatusReq) returns(UserStatusResp);
+  //更新用户与角色的关联
+  rpc UpdateUserRole(UpdateUserRoleReq) returns(UpdateUserRoleResp);
 
 }
 
@@ -323,7 +333,6 @@ message MenuDeleteResp {
 message UpdateMenuRoleReq {
   int64 roleId = 1;
   repeated int64 menuIds = 2;
-  string create_by = 3;
 }
 
 message UpdateMenuRoleResp {

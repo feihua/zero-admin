@@ -2,17 +2,17 @@ create table sys_dict
 (
     id          bigint auto_increment comment '编号'
         primary key,
-    value       varchar(100)                        not null comment '数据值',
-    label       varchar(100)                        not null comment '标签名',
-    type        varchar(100)                        not null comment '类型',
-    description varchar(100)                        not null comment '描述',
-    sort int not null comment '排序（升序）',
-    create_by   varchar(50)                         not null comment '创建人',
-    create_time timestamp default CURRENT_TIMESTAMP null comment '创建时间',
-    update_by   varchar(50)                         null comment '更新人',
-    update_time datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
-    remarks     varchar(255)                        null comment '备注信息',
-    del_flag    tinyint   default 0                 not null comment '是否删除  -1：已删除  0：正常'
+    value       varchar(100)                           not null comment '数据值',
+    label       varchar(100)                           not null comment '标签名',
+    type        varchar(100)                           not null comment '类型',
+    description varchar(100)                           not null comment '描述',
+    sort        int                                    not null comment '排序（升序）',
+    create_by   varchar(50)                            not null comment '创建人',
+    create_time timestamp    default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_by   varchar(50)  default ''                not null comment '更新人',
+    update_time datetime                               null on update CURRENT_TIMESTAMP comment '更新时间',
+    remarks     varchar(255) default ''                not null comment '备注信息',
+    del_flag    tinyint      default 0                 not null comment '是否删除  -1：已删除  0：正常'
 )
     comment '字典表';
 

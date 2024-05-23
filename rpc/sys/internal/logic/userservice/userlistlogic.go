@@ -3,6 +3,7 @@ package userservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -57,16 +58,16 @@ func (l *UserListLogic) UserList(in *sysclient.UserListReq) (*sysclient.UserList
 		list = append(list, &sysclient.UserListData{
 			Id:         user.ID,
 			UserName:   user.UserName,
-			NickName:   *user.NickName,
-			Avatar:     *user.Avatar,
-			Email:      *user.Email,
-			Mobile:     *user.Mobile,
+			NickName:   user.NickName,
+			Avatar:     user.Avatar,
+			Email:      user.Email,
+			Mobile:     user.Mobile,
 			DeptId:     user.DeptID,
 			UserStatus: user.UserStatus,
 			CreateBy:   user.CreateBy,
 			CreateTime: user.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateBy:   *user.UpdateBy,
-			UpdateTime: user.UpdateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:   user.UpdateBy,
+			UpdateTime: common.TimeToString(user.UpdateTime),
 			DelFlag:    user.DelFlag,
 			JobId:      user.JobID,
 			//RoleId:         user.RoleId,

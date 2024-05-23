@@ -5,14 +5,14 @@ info (
 )
 
 type (
-	addDeptReq {
+	AddDeptReq {
 		DeptName  string  `json:"deptName"` // 机构名称
 		ParentId  int64   `json:"parentId"` // 上级机构ID，一级机构为0
 		ParentIds []int64 `json:"parentIds"` // 上级机构IDs
 		OrderNum  int32   `json:"orderNum"` // 排序
 		DelFlag   int32   `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
 	}
-	addDeptResp {
+	AddDeptResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -67,20 +67,20 @@ type (
 	prefix:     /api/sys/dept
 )
 service admin-api {
-	//
-	@handler DeptAdd
-	post /addDept (addDeptReq) returns (addDeptResp)
+	//添加部门
+	@handler AddDept
+	post /addDept (AddDeptReq) returns (AddDeptResp)
 
-	//
-	@handler DeptList
+	//查询部门
+	@handler QueryDeptList
 	get /queryDeptList (ListDeptReq) returns (ListDeptResp)
 
-	//
-	@handler DeptUpdate
+	//更新部门
+	@handler UpdateDept
 	post /updateDept (UpdateDeptReq) returns (UpdateDeptResp)
 
-	//
-	@handler DeptDelete
+	//删除部门
+	@handler DeleteDept
 	get /deleteDept (DeleteDeptReq) returns (DeleteDeptResp)
 }
 

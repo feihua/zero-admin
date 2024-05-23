@@ -51,7 +51,7 @@ func (l *RoleUpdateLogic) RoleUpdate(in *sysclient.RoleUpdateReq) (*sysclient.Ro
 		Remark:     &in.Remark,
 		CreateBy:   role.CreateBy,
 		CreateTime: role.CreateTime,
-		UpdateBy:   &in.UpdateBy,
+		UpdateBy:   in.UpdateBy,
 		DelFlag:    role.DelFlag,
 		Status:     in.Status,
 	})

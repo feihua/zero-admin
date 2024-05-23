@@ -5,11 +5,11 @@ info (
 )
 
 type (
-	addMenuReq {
+	AddMenuReq {
 		Name          string `json:"name"` // 菜单名称
 		ParentId      int64  `json:"parentId,optional"` // 父菜单ID，一级菜单为0
 		Url           string `json:"url,optional"` // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-		Perms         string `json:"perms,optional"` // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
+		Perms         string `json:"perms,optional"` // 授权(多个用逗号分隔，如：sysmodel:user:Add,sysmodel:user:edit)
 		Type          int32  `json:"type,optional"` // 类型   0：目录   1：菜单   2：按钮
 		Icon          string `json:"icon,optional"` // 菜单图标
 		OrderNum      int32  `json:"orderNum,optional"` // 排序
@@ -20,7 +20,7 @@ type (
 		DelFlag       int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
 		BackgroundUrl string `json:"backgroundUrl,optional"` // 后台地址
 	}
-	addMenuResp {
+	AddMenuResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -35,7 +35,7 @@ type (
 		Title         string `json:"title"` // 菜单名称
 		ParentId      int64  `json:"parentId"` // 父菜单ID，一级菜单为0
 		Url           string `json:"url"` // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-		Perms         string `json:"perms"` // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
+		Perms         string `json:"perms"` // 授权(多个用逗号分隔，如：sysmodel:user:Add,sysmodel:user:edit)
 		Type          int32  `json:"type"` // 类型   0：目录   1：菜单   2：按钮
 		Icon          string `json:"icon"` // 菜单图标
 		OrderNum      int32  `json:"orderNum"` // 排序
@@ -62,7 +62,7 @@ type (
 		Name          string `json:"name"` // 菜单名称
 		ParentId      int64  `json:"parentId"` // 父菜单ID，一级菜单为0
 		Url           string `json:"url,optional"` // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-		Perms         string `json:"perms,optional"` // 授权(多个用逗号分隔，如：sysmodel:user:add,sysmodel:user:edit)
+		Perms         string `json:"perms,optional"` // 授权(多个用逗号分隔，如：sysmodel:user:Add,sysmodel:user:edit)
 		Type          int32  `json:"type,optional"` // 类型   0：目录   1：菜单   2：按钮
 		Icon          string `json:"icon,optional"` // 菜单图标
 		OrderNum      int32  `json:"orderNum,optional"` // 排序
@@ -94,19 +94,19 @@ type (
 )
 service admin-api {
 	//新增菜单信息
-	@handler MenuAdd
-	post /addMenu (addMenuReq) returns (addMenuResp)
+	@handler AddMenu
+	post /addMenu (AddMenuReq) returns (AddMenuResp)
 
 	//菜单列表信息
-	@handler MenuList
+	@handler QueryMenuList
 	get /queryMenuList (ListMenuReq) returns (ListMenuResp)
 
 	//更新菜单信息
-	@handler MenuUpdate
+	@handler UpdateMenu
 	post /updateMenu (UpdateMenuReq) returns (UpdateMenuResp)
 
 	//删除菜单信息
-	@handler MenuDelete
+	@handler DeleteMenu
 	get /deleteMenu (DeleteMenuReq) returns (DeleteMenuResp)
 }
 

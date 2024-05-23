@@ -52,17 +52,17 @@ func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.Us
 	sysUser := &model.SysUser{
 		ID:         in.Id,
 		UserName:   in.UserName,
-		NickName:   &in.NickName,
-		Avatar:     &in.Avatar,
+		NickName:   in.NickName,
+		Avatar:     in.Avatar,
 		Password:   user.Password,
 		Salt:       user.Salt,
-		Email:      &in.Email,
-		Mobile:     &in.Mobile,
+		Email:      in.Email,
+		Mobile:     in.Mobile,
 		UserStatus: in.UserStatus,
 		DeptID:     in.DeptId,
 		CreateBy:   user.CreateBy,
 		CreateTime: user.CreateTime,
-		UpdateBy:   &in.UpdateBy,
+		UpdateBy:   in.UpdateBy,
 		JobID:      in.JobId,
 	}
 
@@ -80,9 +80,8 @@ func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.Us
 	}
 
 	err = query.SysUserRole.WithContext(l.ctx).Create(&model.SysUserRole{
-		UserID:   in.Id,
-		RoleID:   in.RoleId,
-		CreateBy: in.UpdateBy,
+		UserID: in.Id,
+		RoleID: in.RoleId,
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "添加用户与角色关联异常,参数userId:%d, roleId: %d,异常:%s", in.Id, in.RoleId, err.Error())

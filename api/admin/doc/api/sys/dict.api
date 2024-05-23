@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	addDictReq {
+	AddDictReq {
 		Value       string `json:"value"` // 数据值
 		Label       string `json:"label"` // 标签名
 		Type        string `json:"type"` // 类型
@@ -14,7 +14,7 @@ type (
 		Remarks     string `json:"remarks,optional"` // 备注信息
 		DelFlag     int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
 	}
-	addDictResp {
+	AddDictResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -79,20 +79,20 @@ type (
 	prefix:     /api/sys/dict
 )
 service admin-api {
-	//
-	@handler DictAdd
-	post /add (addDictReq) returns (addDictResp)
+	//添加字典
+	@handler AddDict
+	post /addDict (AddDictReq) returns (AddDictResp)
 
-	//
-	@handler DictList
+	//查询字典
+	@handler QueryDictList
 	get /queryDictList (ListDictReq) returns (ListDictResp)
 
-	//
-	@handler DictUpdate
+	//更新字典
+	@handler UpdateDict
 	post /updateDict (UpdateDictReq) returns (UpdateDictResp)
 
-	//
-	@handler DictDelete
+	//删除字典
+	@handler DeleteDict
 	get /deleteDict (DeleteDictReq) returns (DeleteDictResp)
 }
 

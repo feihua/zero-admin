@@ -30,8 +30,6 @@ func newSysRoleDept(db *gorm.DB, opts ...gen.DOOption) sysRoleDept {
 	_sysRoleDept.ID = field.NewInt64(tableName, "id")
 	_sysRoleDept.RoleID = field.NewInt64(tableName, "role_id")
 	_sysRoleDept.DeptID = field.NewInt64(tableName, "dept_id")
-	_sysRoleDept.CreateBy = field.NewString(tableName, "create_by")
-	_sysRoleDept.CreateTime = field.NewTime(tableName, "create_time")
 
 	_sysRoleDept.fillFieldMap()
 
@@ -42,12 +40,10 @@ func newSysRoleDept(db *gorm.DB, opts ...gen.DOOption) sysRoleDept {
 type sysRoleDept struct {
 	sysRoleDeptDo sysRoleDeptDo
 
-	ALL        field.Asterisk
-	ID         field.Int64  // 编号
-	RoleID     field.Int64  // 角色ID
-	DeptID     field.Int64  // 机构ID
-	CreateBy   field.String // 创建人
-	CreateTime field.Time   // 创建时间
+	ALL    field.Asterisk
+	ID     field.Int64 // 编号
+	RoleID field.Int64 // 角色ID
+	DeptID field.Int64 // 机构ID
 
 	fieldMap map[string]field.Expr
 }
@@ -67,8 +63,6 @@ func (s *sysRoleDept) updateTableName(table string) *sysRoleDept {
 	s.ID = field.NewInt64(table, "id")
 	s.RoleID = field.NewInt64(table, "role_id")
 	s.DeptID = field.NewInt64(table, "dept_id")
-	s.CreateBy = field.NewString(table, "create_by")
-	s.CreateTime = field.NewTime(table, "create_time")
 
 	s.fillFieldMap()
 
@@ -95,12 +89,10 @@ func (s *sysRoleDept) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysRoleDept) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 5)
+	s.fieldMap = make(map[string]field.Expr, 3)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["role_id"] = s.RoleID
 	s.fieldMap["dept_id"] = s.DeptID
-	s.fieldMap["create_by"] = s.CreateBy
-	s.fieldMap["create_time"] = s.CreateTime
 }
 
 func (s sysRoleDept) clone(db *gorm.DB) sysRoleDept {

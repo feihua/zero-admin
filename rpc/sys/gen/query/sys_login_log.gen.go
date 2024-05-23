@@ -28,11 +28,10 @@ func newSysLoginLog(db *gorm.DB, opts ...gen.DOOption) sysLoginLog {
 	tableName := _sysLoginLog.sysLoginLogDo.TableName()
 	_sysLoginLog.ALL = field.NewAsterisk(tableName)
 	_sysLoginLog.ID = field.NewInt64(tableName, "id")
-	_sysLoginLog.UserName = field.NewString(tableName, "user_name")
-	_sysLoginLog.Status = field.NewString(tableName, "status")
-	_sysLoginLog.IP = field.NewString(tableName, "ip")
-	_sysLoginLog.CreateBy = field.NewString(tableName, "create_by")
-	_sysLoginLog.CreateTime = field.NewTime(tableName, "create_time")
+	_sysLoginLog.LoginName = field.NewString(tableName, "login_name")
+	_sysLoginLog.LoginStatus = field.NewString(tableName, "login_status")
+	_sysLoginLog.LoginIP = field.NewString(tableName, "login_ip")
+	_sysLoginLog.LoginTime = field.NewTime(tableName, "login_time")
 
 	_sysLoginLog.fillFieldMap()
 
@@ -43,13 +42,12 @@ func newSysLoginLog(db *gorm.DB, opts ...gen.DOOption) sysLoginLog {
 type sysLoginLog struct {
 	sysLoginLogDo sysLoginLogDo
 
-	ALL        field.Asterisk
-	ID         field.Int64  // 编号
-	UserName   field.String // 用户名
-	Status     field.String // 登录状态（online:在线，登录初始状态，方便统计在线人数；login:退出登录后将online置为login；logout:退出登录）
-	IP         field.String // IP地址
-	CreateBy   field.String // 创建人
-	CreateTime field.Time   // 创建时间
+	ALL         field.Asterisk
+	ID          field.Int64  // 编号
+	LoginName   field.String // 用户名
+	LoginStatus field.String // 登录状态
+	LoginIP     field.String // IP地址
+	LoginTime   field.Time   // 登录时间
 
 	fieldMap map[string]field.Expr
 }
@@ -67,11 +65,10 @@ func (s sysLoginLog) As(alias string) *sysLoginLog {
 func (s *sysLoginLog) updateTableName(table string) *sysLoginLog {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.UserName = field.NewString(table, "user_name")
-	s.Status = field.NewString(table, "status")
-	s.IP = field.NewString(table, "ip")
-	s.CreateBy = field.NewString(table, "create_by")
-	s.CreateTime = field.NewTime(table, "create_time")
+	s.LoginName = field.NewString(table, "login_name")
+	s.LoginStatus = field.NewString(table, "login_status")
+	s.LoginIP = field.NewString(table, "login_ip")
+	s.LoginTime = field.NewTime(table, "login_time")
 
 	s.fillFieldMap()
 
@@ -98,13 +95,12 @@ func (s *sysLoginLog) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysLoginLog) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 6)
+	s.fieldMap = make(map[string]field.Expr, 5)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["user_name"] = s.UserName
-	s.fieldMap["status"] = s.Status
-	s.fieldMap["ip"] = s.IP
-	s.fieldMap["create_by"] = s.CreateBy
-	s.fieldMap["create_time"] = s.CreateTime
+	s.fieldMap["login_name"] = s.LoginName
+	s.fieldMap["login_status"] = s.LoginStatus
+	s.fieldMap["login_ip"] = s.LoginIP
+	s.fieldMap["login_time"] = s.LoginTime
 }
 
 func (s sysLoginLog) clone(db *gorm.DB) sysLoginLog {

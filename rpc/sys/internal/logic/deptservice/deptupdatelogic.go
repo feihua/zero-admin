@@ -46,7 +46,7 @@ func (l *DeptUpdateLogic) DeptUpdate(in *sysclient.DeptUpdateReq) (*sysclient.De
 		OrderNum:   in.OrderNum,
 		CreateBy:   dept.CreateBy,
 		CreateTime: dept.CreateTime,
-		UpdateBy:   &in.UpdateBy,
+		UpdateBy:   in.UpdateBy,
 		DelFlag:    in.DelFlag,
 		ParentIds:  strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1),
 	})

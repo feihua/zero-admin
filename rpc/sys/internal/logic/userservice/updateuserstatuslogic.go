@@ -4,10 +4,8 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -34,12 +32,10 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // UpdateUserStatus 更新用户状态
 func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UserStatusReq) (*sysclient.UserStatusResp, error) {
 	q := query.SysUser
-	now := time.Now()
 	_, err := q.WithContext(l.ctx).Updates(&model.SysUser{
 		ID:         in.Id,
 		UserStatus: in.UserStatus,
-		UpdateBy:   &in.UpdateBy,
-		UpdateTime: &now,
+		UpdateBy:   in.UpdateBy,
 	})
 
 	if err != nil {

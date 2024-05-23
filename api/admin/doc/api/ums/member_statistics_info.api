@@ -5,7 +5,6 @@ info (
 )
 
 type (
-
 	ListMemberStatisticsInfoReq {
 		Current  int64 `form:"current,default=1"`
 		PageSize int64 `form:"pageSize,default=20"`
@@ -37,7 +36,6 @@ type (
 		Success  bool                            `json:"success"`
 		Total    int64                           `json:"total"`
 	}
-
 )
 
 @server (
@@ -47,10 +45,8 @@ type (
 	prefix:     /api/member/statistics
 )
 service admin-api {
-
 	//查询会员的统计信息
 	@handler QueryMemberStatisticsInfoList
 	get /queryMemberStatisticsInfoList (ListMemberStatisticsInfoReq) returns (ListMemberStatisticsInfoResp)
-
 }
 

@@ -85,6 +85,8 @@ type (
 	SysLogListResp         = sysclient.SysLogListResp
 	UpdateMenuRoleReq      = sysclient.UpdateMenuRoleReq
 	UpdateMenuRoleResp     = sysclient.UpdateMenuRoleResp
+	UpdateUserRoleReq      = sysclient.UpdateUserRoleReq
+	UpdateUserRoleResp     = sysclient.UpdateUserRoleResp
 	UserAddReq             = sysclient.UserAddReq
 	UserAddResp            = sysclient.UserAddResp
 	UserDeleteReq          = sysclient.UserDeleteReq

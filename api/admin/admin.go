@@ -8,6 +8,11 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
+	"github.com/zeromicro/go-zero/rest/httpx"
+	"github.com/zeromicro/x/errors"
+	xhttp "github.com/zeromicro/x/http"
+	"go/types"
+	"net/http"
 )
 
 var configFile = flag.String("f", "api/admin/etc/admin-api.yaml", "the config file")
@@ -35,6 +40,19 @@ func main() {
 	//		return http.StatusInternalServerError, nil
 	//	}
 	//})
+
+	// httpx.SetErrorHandler 仅在调用了 httpx.Error 处理响应时才有效
+	httpx.SetErrorHandler(func(err error) (int, any) {
+		switch e := err.(type) {
+		case *errors.CodeMsg:
+			return http.StatusOK, xhttp.BaseResponse[types.Nil]{
+				Code: e.Code,
+				Msg:  e.Msg,
+			}
+		default:
+			return http.StatusInternalServerError, nil
+		}
+	})
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()

@@ -61,3 +61,8 @@ func (s *UserServiceServer) UpdateUserStatus(ctx context.Context, in *sysclient.
 	l := userservicelogic.NewUpdateUserStatusLogic(ctx, s.svcCtx)
 	return l.UpdateUserStatus(in)
 }
+
+func (s *UserServiceServer) UpdateUserRole(ctx context.Context, in *sysclient.UpdateUserRoleReq) (*sysclient.UpdateUserRoleResp, error) {
+	l := userservicelogic.NewUpdateUserRoleLogic(ctx, s.svcCtx)
+	return l.UpdateUserRole(in)
+}
