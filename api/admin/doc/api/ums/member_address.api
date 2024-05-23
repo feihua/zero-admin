@@ -5,21 +5,7 @@ info (
 )
 
 type (
-	addMemberAddressReq {
-		MemberId      int64  `json:"memberId"`
-		Name          string `json:"name"` // 收货人名称
-		PhoneNumber   string `json:"phoneNumber"`
-		DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
-		PostCode      string `json:"postCode"` // 邮政编码
-		Province      string `json:"province"` // 省份/直辖市
-		City          string `json:"city"` // 城市
-		Region        string `json:"region"` // 区
-		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
-	}
-	addMemberAddressResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+
 	ListMemberAddressReq {
 		Current  int64 `form:"current,default=1"`
 		PageSize int64 `form:"pageSize,default=20"`
@@ -46,29 +32,7 @@ type (
 		Code     string                   `json:"code"`
 		Message  string                   `json:"message"`
 	}
-	UpdateMemberAddressReq {
-		Id            int64  `json:"id"`
-		MemberId      int64  `json:"memberId"`
-		Name          string `json:"name"` // 收货人名称
-		PhoneNumber   string `json:"phoneNumber"`
-		DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
-		PostCode      string `json:"postCode"` // 邮政编码
-		Province      string `json:"province"` // 省份/直辖市
-		City          string `json:"city"` // 城市
-		Region        string `json:"region"` // 区
-		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
-	}
-	UpdateMemberAddressResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
-	DeleteMemberAddressReq {
-		Id int64 `json:"id"`
-	}
-	DeleteMemberAddressResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+
 )
 
 @server (
@@ -78,20 +42,10 @@ type (
 	prefix:     /api/member/address
 )
 service admin-api {
-	//
-	@handler MemberAddressAdd
-	post /addMemberAddress (addMemberAddressReq) returns (addMemberAddressResp)
 
-	//
-	@handler MemberAddressList
+	//分页查询会员地址
+	@handler QueryMemberAddressList
 	get /queryMemberAddressList (ListMemberAddressReq) returns (ListMemberAddressResp)
 
-	//
-	@handler MemberAddressUpdate
-	post /updateMemberAddress (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
-
-	//
-	@handler MemberAddressDelete
-	get /deleteMemberAddress (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
 }
 

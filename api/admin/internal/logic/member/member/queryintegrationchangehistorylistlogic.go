@@ -36,6 +36,7 @@ func (l *QueryIntegrationChangeHistoryListLogic) QueryIntegrationChangeHistoryLi
 	result, err := l.svcCtx.IntegrationChangeHistoryService.IntegrationChangeHistoryList(l.ctx, &umsclient.IntegrationChangeHistoryListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		MemberId: req.MemberId,
 	})
 
 	if err != nil {

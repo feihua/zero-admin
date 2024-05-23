@@ -44,8 +44,8 @@ import "cms/subject.api"
 import "cms/prefrence_area.api"
 
 info (
-	desc:   "go zero admin"
-	author: "koobe"
+	desc:   "zero admin"
+	author: "liufeihua"
 	email:  "1002219331@qq.com"
 )
 

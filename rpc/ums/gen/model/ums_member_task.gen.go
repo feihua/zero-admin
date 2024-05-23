@@ -19,7 +19,7 @@ type UmsMemberTask struct {
 	TaskType     int32      `gorm:"column:task_type;not null;comment:任务类型：0->新手任务；1->日常任务" json:"task_type"`               // 任务类型：0->新手任务；1->日常任务
 	CreateBy     string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy     *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                         // 更新者
+	UpdateBy     string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
 	UpdateTime   *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 

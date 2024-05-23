@@ -3,6 +3,7 @@ package memberrulesettingservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/feihua/zero-admin/rpc/ums/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberRuleSettingListLogic 会员积分成长规则
+/*
+Author: LiuFeiHua
+Date: 2024/5/23 11:02
+*/
 type MemberRuleSettingListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +30,7 @@ func NewMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
+// MemberRuleSettingList 查询会员积分成长规则
 func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *umsclient.MemberRuleSettingListReq) (*umsclient.MemberRuleSettingListResp, error) {
 	q := query.UmsMemberRuleSetting.WithContext(l.ctx)
 	offset := (in.Current - 1) * in.PageSize
@@ -48,8 +55,8 @@ func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *umsclient.MemberR
 			RuleType:          item.RuleType,
 			CreateBy:          item.CreateBy,
 			CreateTime:        item.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateBy:          *item.UpdateBy,
-			UpdateTime:        item.UpdateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:          item.UpdateBy,
+			UpdateTime:        common.TimeToString(item.UpdateTime),
 		})
 	}
 

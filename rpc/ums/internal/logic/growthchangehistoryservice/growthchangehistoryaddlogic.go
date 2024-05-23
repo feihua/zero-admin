@@ -2,13 +2,21 @@ package growthchangehistoryservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"time"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
-	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// GrowthChangeHistoryAddLogic 成长值变化历史记录
+/*
+Author: LiuFeiHua
+Date: 2024/5/7 9:11
+*/
 type GrowthChangeHistoryAddLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +31,20 @@ func NewGrowthChangeHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
-// 添加成长值变化历史记录
+// GrowthChangeHistoryAdd 添加成长值变化历史记录
 func (l *GrowthChangeHistoryAddLogic) GrowthChangeHistoryAdd(in *umsclient.GrowthChangeHistoryAddReq) (*umsclient.GrowthChangeHistoryAddResp, error) {
-	// todo: add your logic here and delete this line
+	err := query.UmsGrowthChangeHistory.WithContext(l.ctx).Create(&model.UmsGrowthChangeHistory{
+		MemberID:    in.MemberId,
+		CreateTime:  time.Now(),
+		ChangeType:  in.ChangeType,
+		ChangeCount: in.ChangeCount,
+		OperateMan:  in.OperateMan,
+		OperateNote: &in.OperateNote,
+		SourceType:  in.SourceType,
+	})
 
+	if err != nil {
+		return nil, err
+	}
 	return &umsclient.GrowthChangeHistoryAddResp{}, nil
 }

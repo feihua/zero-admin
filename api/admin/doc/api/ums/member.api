@@ -16,7 +16,6 @@ type (
 		Id                    int64  `json:"id"`
 		MemberLevelId         int64  `json:"memberLevelId"`
 		Username              string `json:"username"` // 用户名
-		Password              string `json:"password"` // 密码
 		Nickname              string `json:"nickname"` // 昵称
 		Phone                 string `json:"phone"` // 手机号码
 		Status                int32  `json:"status"` // 帐号启用状态:0->禁用；1->启用
@@ -46,7 +45,6 @@ type (
 		Id                    int64  `json:"id"`
 		MemberLevelId         int64  `json:"memberLevelId"`
 		Username              string `json:"username"` // 用户名
-		Password              string `json:"password"` // 密码
 		Nickname              string `json:"nickname"` // 昵称
 		Phone                 string `json:"phone"` // 手机号码
 		Status                int32  `json:"status"` // 帐号启用状态:0->禁用；1->启用
@@ -122,25 +120,26 @@ type (
 		Code     string                         `json:"code"`
 		Message  string                         `json:"message"`
 	}
+
 )
 
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      member/member
-	prefix:     /api/member/member
+	prefix:     /api/member
 )
 service admin-api {
 	//分页查询会员信息
-	@handler MemberList
+	@handler QueryMemberList
 	get /queryMemberList (ListMemberReq) returns (ListMemberResp)
 
 	//更新查询会员信息
-	@handler MemberUpdate
+	@handler UpdateMember
 	post /updateMember (UpdateMemberReq) returns (UpdateMemberResp)
 
 	//删除查询会员信息
-	@handler MemberDelete
+	@handler DeleteMember
 	get /deleteMember (DeleteMemberReq) returns (DeleteMemberResp)
 
 	//查询会员的登录日志
@@ -154,5 +153,6 @@ service admin-api {
 	//查询会员积分变化历史记录
 	@handler QueryIntegrationChangeHistoryList
 	get /queryIntegrationChangeHistoryList (ListChangeHistoryReq) returns (ListChangeHistoryResp)
+
 }
 

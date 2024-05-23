@@ -12,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// QueryMemberLoginLogListLogic 查询会员登录记录列表
+/*
+Author: LiuFeiHua
+Date: 2024/5/23 9:27
+*/
 type QueryMemberLoginLogListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -26,6 +31,7 @@ func NewQueryMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// QueryMemberLoginLogList 查询会员登录记录列表
 func (l *QueryMemberLoginLogListLogic) QueryMemberLoginLogList(req *types.ListMemberLoginLogReq) (resp *types.ListMemberLoginLogResp, err error) {
 	result, err := l.svcCtx.MemberLoginLogService.MemberLoginLogList(l.ctx, &umsclient.MemberLoginLogListReq{
 		Current:  req.Current,

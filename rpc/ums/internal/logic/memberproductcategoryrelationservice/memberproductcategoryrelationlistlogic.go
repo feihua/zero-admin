@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberProductCategoryRelationListLogic 查询会员与产品关糸列表信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/23 13:45
+*/
 type MemberProductCategoryRelationListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewMemberProductCategoryRelationListLogic(ctx context.Context, svcCtx *svc.
 	}
 }
 
+// MemberProductCategoryRelationList 查询会员与产品关糸列表信息
 func (l *MemberProductCategoryRelationListLogic) MemberProductCategoryRelationList(in *umsclient.MemberProductCategoryRelationListReq) (*umsclient.MemberProductCategoryRelationListResp, error) {
 	q := query.UmsMemberProductCategoryRelation.WithContext(l.ctx)
 

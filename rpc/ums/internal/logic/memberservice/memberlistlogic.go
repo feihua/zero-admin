@@ -52,7 +52,6 @@ func (l *MemberListLogic) MemberList(in *umsclient.MemberListReq) (*umsclient.Me
 			Id:                    member.ID,
 			MemberLevelId:         member.MemberLevelID,
 			Username:              member.MemberName,
-			Password:              member.Password,
 			Nickname:              member.Nickname,
 			Phone:                 member.Phone,
 			Status:                member.MemberStatus,

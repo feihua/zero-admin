@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// IntegrationConsumeSettingListLogic 查询积分消费设置列表
+/*
+Author: LiuFeiHua
+Date: 2024/5/23 13:44
+*/
 type IntegrationConsumeSettingListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
+// IntegrationConsumeSettingList 查询积分消费设置列表
 func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *umsclient.IntegrationConsumeSettingListReq) (*umsclient.IntegrationConsumeSettingListResp, error) {
 	q := query.UmsIntegrationConsumeSetting.WithContext(l.ctx)
 	offset := (in.Current - 1) * in.PageSize

@@ -3,6 +3,7 @@ package memberreceiveaddressservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/feihua/zero-admin/rpc/ums/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -58,7 +59,7 @@ func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *umsclient.M
 			Region:        address.Region,
 			DetailAddress: address.DetailAddress,
 			CreateTime:    address.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateTime:    address.UpdateTime.Format("2006-01-02 15:04:05"),
+			UpdateTime:    common.TimeToString(address.UpdateTime),
 		})
 	}
 

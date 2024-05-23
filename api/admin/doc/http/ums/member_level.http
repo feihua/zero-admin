@@ -16,7 +16,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "test",
+  "name": "test123",
   "growthPoint": 1,
   "defaultStatus": 1,
   "freeFreightPoint": 19900,

@@ -115,24 +115,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addMemberAddress",
-					Handler: memberaddress.MemberAddressAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteMemberAddress",
-					Handler: memberaddress.MemberAddressDeleteHandler(serverCtx),
-				},
-				{
 					Method:  http.MethodGet,
 					Path:    "/queryMemberAddressList",
-					Handler: memberaddress.MemberAddressListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberAddress",
-					Handler: memberaddress.MemberAddressUpdateHandler(serverCtx),
+					Handler: memberaddress.QueryMemberAddressListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -147,27 +132,27 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addIntegrationConsumeSetting",
-					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingAddHandler(serverCtx),
+					Handler: memberintegrationconsumesetting.AddIntegrationConsumeSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteIntegrationConsumeSetting",
-					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingDeleteHandler(serverCtx),
+					Handler: memberintegrationconsumesetting.DeleteIntegrationConsumeSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryIntegrationConsumeSettingList",
-					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingListHandler(serverCtx),
+					Handler: memberintegrationconsumesetting.QueryIntegrationConsumeSettingListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateIntegrationConsumeSetting",
-					Handler: memberintegrationconsumesetting.IntegrationConsumeSettingUpdateHandler(serverCtx),
+					Handler: memberintegrationconsumesetting.UpdateIntegrationConsumeSettingHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/integrationconsumesetting"),
+		rest.WithPrefix("/api/member/integrationConsumeSetting"),
 	)
 
 	server.AddRoutes(
@@ -177,22 +162,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addMemberLevel",
-					Handler: memberlevel.MemberLevelAddHandler(serverCtx),
+					Handler: memberlevel.AddMemberLevelHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteMemberLevel",
-					Handler: memberlevel.MemberLevelDeleteHandler(serverCtx),
+					Handler: memberlevel.DeleteMemberLevelHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryMemberLevelList",
-					Handler: memberlevel.MemberLevelListHandler(serverCtx),
+					Handler: memberlevel.QueryMemberLevelListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateMemberLevel",
-					Handler: memberlevel.MemberLevelUpdateHandler(serverCtx),
+					Handler: memberlevel.UpdateMemberLevelHandler(serverCtx),
 				},
 			}...,
 		),
@@ -207,7 +192,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteMember",
-					Handler: membermember.MemberDeleteHandler(serverCtx),
+					Handler: membermember.DeleteMemberHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
@@ -222,7 +207,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryMemberList",
-					Handler: membermember.MemberListHandler(serverCtx),
+					Handler: membermember.QueryMemberListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
@@ -232,12 +217,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateMember",
-					Handler: membermember.MemberUpdateHandler(serverCtx),
+					Handler: membermember.UpdateMemberHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/member"),
+		rest.WithPrefix("/api/member"),
 	)
 
 	server.AddRoutes(
@@ -247,27 +232,27 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addMemberRuleSetting",
-					Handler: memberrulesetting.MemberRuleSettingAddHandler(serverCtx),
+					Handler: memberrulesetting.AddMemberRuleSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteMemberRuleSetting",
-					Handler: memberrulesetting.MemberRuleSettingDeleteHandler(serverCtx),
+					Handler: memberrulesetting.DeleteMemberRuleSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryMemberRuleSettingList",
-					Handler: memberrulesetting.MemberRuleSettingListHandler(serverCtx),
+					Handler: memberrulesetting.QueryMemberRuleSettingListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateMemberRuleSetting",
-					Handler: memberrulesetting.MemberRuleSettingUpdateHandler(serverCtx),
+					Handler: memberrulesetting.UpdateMemberRuleSettingHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/rulesetting"),
+		rest.WithPrefix("/api/member/ruleSetting"),
 	)
 
 	server.AddRoutes(
@@ -275,24 +260,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addMemberStatisticsInfo",
-					Handler: memberstatistics.MemberStatisticsInfoAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteMemberStatisticsInfo",
-					Handler: memberstatistics.MemberStatisticsInfoDeleteHandler(serverCtx),
-				},
-				{
 					Method:  http.MethodGet,
 					Path:    "/queryMemberStatisticsInfoList",
-					Handler: memberstatistics.MemberStatisticsInfoListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberStatisticsInfo",
-					Handler: memberstatistics.MemberStatisticsInfoUpdateHandler(serverCtx),
+					Handler: memberstatistics.QueryMemberStatisticsInfoListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -307,22 +277,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addMemberTag",
-					Handler: membertag.MemberTagAddHandler(serverCtx),
+					Handler: membertag.AddMemberTagHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteMemberTag",
-					Handler: membertag.MemberTagDeleteHandler(serverCtx),
+					Handler: membertag.DeleteMemberTagHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryMemberTagList",
-					Handler: membertag.MemberTagListHandler(serverCtx),
+					Handler: membertag.QueryMemberTagListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateMemberTag",
-					Handler: membertag.MemberTagUpdateHandler(serverCtx),
+					Handler: membertag.UpdateMemberTagHandler(serverCtx),
 				},
 			}...,
 		),
@@ -337,22 +307,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addMemberTask",
-					Handler: membertask.MemberTaskAddHandler(serverCtx),
+					Handler: membertask.AddMemberTaskHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteMemberTask",
-					Handler: membertask.MemberTaskDeleteHandler(serverCtx),
+					Handler: membertask.DeleteMemberTaskHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryMemberTaskList",
-					Handler: membertask.MemberTaskListHandler(serverCtx),
+					Handler: membertask.QueryMemberTaskListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateMemberTask",
-					Handler: membertask.MemberTaskUpdateHandler(serverCtx),
+					Handler: membertask.UpdateMemberTaskHandler(serverCtx),
 				},
 			}...,
 		),
@@ -685,21 +655,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addProduct",
-					Handler: productproduct.ProductAddHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
 					Method:  http.MethodGet,
 					Path:    "/updateDeleteStatus",
 					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
@@ -741,6 +696,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
+					Path:    "/queryProductList",
+					Handler: productproduct.QueryProductListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
 					Path:    "/queryProductDetail",
 					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
@@ -755,9 +725,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: productproduct.QueryProductListHandler(serverCtx),
+					Method:  http.MethodPost,
+					Path:    "/addProduct",
+					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1226,6 +1196,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
+					Path:    "/deleteSysLog",
+					Handler: syslog.SysLogDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/querySysLogList",
+					Handler: syslog.SysLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/sysLog"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
 					Path:    "/deleteLoginLog",
 					Handler: syslog.LoginLogDeleteHandler(serverCtx),
 				},
@@ -1243,26 +1233,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/loginLog"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteSysLog",
-					Handler: syslog.SysLogDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/querySysLogList",
-					Handler: syslog.SysLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/sysLog"),
 	)
 
 	server.AddRoutes(

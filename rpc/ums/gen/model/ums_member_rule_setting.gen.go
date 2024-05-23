@@ -21,7 +21,7 @@ type UmsMemberRuleSetting struct {
 	RuleType          int32      `gorm:"column:rule_type;not null;comment:类型：0->积分规则；1->成长值规则" json:"rule_type"`                // 类型：0->积分规则；1->成长值规则
 	CreateBy          string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime        time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy          *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                         // 更新者
+	UpdateBy          string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
 	UpdateTime        *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 

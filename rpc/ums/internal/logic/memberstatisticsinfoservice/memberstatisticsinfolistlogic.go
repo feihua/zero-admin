@@ -10,6 +10,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberStatisticsInfoListLogic 会员统计信息
+/*
+Author: LiuFeiHua
+Date: 2024/5/23 11:02
+*/
 type MemberStatisticsInfoListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +29,7 @@ func NewMemberStatisticsInfoListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
+// MemberStatisticsInfoList 查询会员统计信息
 func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(in *umsclient.MemberStatisticsInfoListReq) (*umsclient.MemberStatisticsInfoListResp, error) {
 	q := query.UmsMemberStatisticsInfo.WithContext(l.ctx)
 	offset := (in.Current - 1) * in.PageSize

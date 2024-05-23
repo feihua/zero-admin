@@ -36,6 +36,7 @@ func (l *QueryGrowthChangeHistoryListLogic) QueryGrowthChangeHistoryList(req *ty
 	result, err := l.svcCtx.GrowthChangeHistoryService.GrowthChangeHistoryList(l.ctx, &umsclient.GrowthChangeHistoryListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
+		MemberId: req.MemberId,
 	})
 
 	if err != nil {

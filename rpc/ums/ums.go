@@ -18,6 +18,7 @@ import (
 	memberrulesettingserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberrulesettingservice"
 	memberserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberservice"
 	memberstatisticsinfoserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberstatisticsinfoservice"
+	membertagserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/membertagservice"
 	membertaskserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/membertaskservice"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -51,6 +52,7 @@ func main() {
 		umsclient.RegisterMemberRuleSettingServiceServer(grpcServer, memberrulesettingserviceServer.NewMemberRuleSettingServiceServer(ctx))
 		umsclient.RegisterMemberStatisticsInfoServiceServer(grpcServer, memberstatisticsinfoserviceServer.NewMemberStatisticsInfoServiceServer(ctx))
 		umsclient.RegisterMemberTaskServiceServer(grpcServer, membertaskserviceServer.NewMemberTaskServiceServer(ctx))
+		umsclient.RegisterMemberTagServiceServer(grpcServer, membertagserviceServer.NewMemberTagServiceServer(ctx))
 		umsclient.RegisterMemberProductCollectionServiceServer(grpcServer, memberproductcollectionserviceServer.NewMemberProductCollectionServiceServer(ctx))
 		umsclient.RegisterMemberReadHistoryServiceServer(grpcServer, memberreadhistoryserviceServer.NewMemberReadHistoryServiceServer(ctx))
 		umsclient.RegisterMemberAttentionServiceServer(grpcServer, memberattentionservicer.NewMemberAttentionServiceServer(ctx))

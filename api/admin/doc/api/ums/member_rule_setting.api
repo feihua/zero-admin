@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	addMemberRuleSettingReq {
+	AddMemberRuleSettingReq {
 		ContinueSignDay   int32 `json:"continueSignDay"` // 连续签到天数
 		ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
 		ConsumePerPoint   int64 `json:"consumePerPoint"` // 每消费多少元获取1个点
@@ -13,7 +13,7 @@ type (
 		MaxPointPerOrder  int32 `json:"maxPointPerOrder"` // 每笔订单最高获取点数
 		Type              int32 `json:"type"` // 类型：0->积分规则；1->成长值规则
 	}
-	addMemberRuleSettingResp {
+	AddMemberRuleSettingResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -65,23 +65,23 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      member/rulesetting
-	prefix:     /api/member/rulesetting
+	prefix:     /api/member/ruleSetting
 )
 service admin-api {
-	//
-	@handler MemberRuleSettingAdd
-	post /addMemberRuleSetting (addMemberRuleSettingReq) returns (addMemberRuleSettingResp)
+	//添加会员成长规则
+	@handler AddMemberRuleSetting
+	post /addMemberRuleSetting (AddMemberRuleSettingReq) returns (AddMemberRuleSettingResp)
 
-	//
-	@handler MemberRuleSettingList
+	//分页查询会员成长规则
+	@handler QueryMemberRuleSettingList
 	get /queryMemberRuleSettingList (ListMemberRuleSettingReq) returns (ListMemberRuleSettingResp)
 
-	//
-	@handler MemberRuleSettingUpdate
+	//更新会员成长规则
+	@handler UpdateMemberRuleSetting
 	post /updateMemberRuleSetting (UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp)
 
-	//
-	@handler MemberRuleSettingDelete
+	//删除会员成长规则
+	@handler DeleteMemberRuleSetting
 	get /deleteMemberRuleSetting (DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp)
 }
 

@@ -5,12 +5,12 @@ info (
 )
 
 type (
-	addMemberTagReq {
+	AddMemberTagReq {
 		Name              string `json:"name"`
 		FinishOrderCount  int32  `json:"finishOrderCount"` // 自动打标签完成订单数量
 		FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
 	}
-	addMemberTagResp {
+	AddMemberTagResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -60,19 +60,19 @@ type (
 )
 service admin-api {
 	//添加会员标签
-	@handler MemberTagAdd
-	post /addMemberTag (addMemberTagReq) returns (addMemberTagResp)
+	@handler AddMemberTag
+	post /addMemberTag (AddMemberTagReq) returns (AddMemberTagResp)
 
 	//分页获取会员标签
-	@handler MemberTagList
+	@handler QueryMemberTagList
 	get /queryMemberTagList (ListMemberTagReq) returns (ListMemberTagResp)
 
 	//更新会员标签
-	@handler MemberTagUpdate
+	@handler UpdateMemberTag
 	post /updateMemberTag (UpdateMemberTagReq) returns (UpdateMemberTagResp)
 
 	//删除会员标签
-	@handler MemberTagDelete
+	@handler DeleteMemberTag
 	get /deleteMemberTag (DeleteMemberTagReq) returns (DeleteMemberTagResp)
 }
 

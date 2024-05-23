@@ -36,7 +36,7 @@ message MemberListData{
   int64       Id = 1;
   int64       MemberLevelId = 2;
   string      Username = 3;
-  string      Password = 4;
+  int32      HistoryIntegration = 4;
   string      Nickname = 5;
   string      Phone = 6;
   int32       Status = 7;
@@ -51,7 +51,6 @@ message MemberListData{
   int32       Integration = 16;
   int32       Growth = 17;
   int32       LuckeyCount = 18;
-  int32       HistoryIntegration = 19;
 }
 
 message MemberListResp {
@@ -63,7 +62,7 @@ message MemberUpdateReq {
   int64       Id = 1;
   int64       MemberLevelId = 2;
   string      Username = 3;
-  string      Password = 4;
+  int32      HistoryIntegration = 4;
   string      Nickname = 5;
   string      Phone = 6;
   int32       Status = 7;
@@ -78,7 +77,6 @@ message MemberUpdateReq {
   int32       Integration = 16;
   int32       Growth = 17;
   int32       LuckeyCount = 18;
-  int32       HistoryIntegration = 19;
 }
 
 message MemberUpdateResp {
@@ -139,6 +137,7 @@ message GrowthChangeHistoryAddResp {
 message GrowthChangeHistoryListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  int64      MemberId = 3;
 }
 
 message GrowthChangeHistoryListData{
@@ -182,6 +181,7 @@ message IntegrationChangeHistoryAddResp {
 message IntegrationChangeHistoryListReq {
   int64 current = 1;
   int64 pageSize = 2;
+  int64      MemberId = 3;
 }
 
 message IntegrationChangeHistoryListData{

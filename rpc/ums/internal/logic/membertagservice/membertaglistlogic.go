@@ -29,7 +29,7 @@ func NewMemberTagListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mem
 	}
 }
 
-// MemberTagList 会员标签
+// MemberTagList 查询会员标签列表
 func (l *MemberTagListLogic) MemberTagList(in *umsclient.MemberTagListReq) (*umsclient.MemberTagListResp, error) {
 	q := query.UmsMemberTag.WithContext(l.ctx)
 	offset := (in.Current - 1) * in.PageSize

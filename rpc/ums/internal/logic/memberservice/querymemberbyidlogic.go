@@ -44,7 +44,6 @@ func (l *QueryMemberByIdLogic) QueryMemberById(in *umsclient.MemberByIdReq) (*um
 		Id:                    member.ID,
 		MemberLevelId:         member.MemberLevelID,
 		Username:              member.MemberName,
-		Password:              member.Password,
 		Nickname:              member.Nickname,
 		Phone:                 member.Phone,
 		Status:                member.MemberStatus,

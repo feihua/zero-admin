@@ -30,32 +30,33 @@ func NewMemberReceiveAddressAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // MemberReceiveAddressAdd 添加会员收货地址
 func (l *MemberReceiveAddressAddLogic) MemberReceiveAddressAdd(in *umsclient.MemberReceiveAddressAddReq) (*umsclient.MemberReceiveAddressAddResp, error) {
-	q := query.UmsMemberReceiveAddress
+	err := query.Q.Transaction(func(tx *query.Query) error {
 
-	//如果新增的地址为默认地址,则需要把之前的默认地址去除默认标识
-	if in.DefaultStatus == 1 {
-		//查询会员所有有地址
-		memberList, _ := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId)).Find()
+		q := tx.UmsMemberReceiveAddress
 
-		for _, address := range memberList {
-			//判断是否为默认,如果是,则修改
-			if address.DefaultStatus == 1 {
-				address.DefaultStatus = 0
-				_, _ = q.WithContext(l.ctx).Where(q.ID.Eq(address.ID)).Updates(address)
+		//如果新增的地址为默认地址,则需要把之前的默认地址去除默认标识
+		addressDo := q.WithContext(l.ctx)
+		if in.DefaultStatus == 1 {
+			if _, err := addressDo.Where(q.MemberID.Eq(in.MemberId), q.DefaultStatus.Eq(1)).Update(q.DefaultStatus, 0); err != nil {
+				return err
 			}
 		}
-	}
 
-	err := q.WithContext(l.ctx).Create(&model.UmsMemberReceiveAddress{
-		MemberID:      in.MemberId,
-		MemberName:    in.MemberName,
-		PhoneNumber:   in.PhoneNumber,
-		DefaultStatus: in.DefaultStatus,
-		PostCode:      in.PostCode,
-		Province:      in.Province,
-		City:          in.City,
-		Region:        in.Region,
-		DetailAddress: in.DetailAddress,
+		if err := addressDo.Create(&model.UmsMemberReceiveAddress{
+			MemberID:      in.MemberId,
+			MemberName:    in.MemberName,
+			PhoneNumber:   in.PhoneNumber,
+			DefaultStatus: in.DefaultStatus,
+			PostCode:      in.PostCode,
+			Province:      in.Province,
+			City:          in.City,
+			Region:        in.Region,
+			DetailAddress: in.DetailAddress,
+		}); err != nil {
+			return err
+		}
+
+		return nil
 	})
 
 	if err != nil {

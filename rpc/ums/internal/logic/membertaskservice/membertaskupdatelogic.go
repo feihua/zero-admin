@@ -38,7 +38,7 @@ func (l *MemberTaskUpdateLogic) MemberTaskUpdate(in *umsclient.MemberTaskUpdateR
 		TaskGrowth:   in.TaskGrowth,
 		TaskIntegral: in.TaskIntegral,
 		TaskType:     in.TaskType,
-		UpdateBy:     &in.UpdateBy,
+		UpdateBy:     in.UpdateBy,
 	})
 	if err != nil {
 		return nil, err

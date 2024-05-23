@@ -35,7 +35,6 @@ func (l *MemberUpdateLogic) MemberUpdate(in *umsclient.MemberUpdateReq) (*umscli
 		ID:                    in.Id,
 		MemberLevelID:         in.MemberLevelId,
 		MemberName:            in.Username,
-		Password:              in.Password,
 		Nickname:              in.Nickname,
 		Phone:                 in.Phone,
 		MemberStatus:          in.Status,

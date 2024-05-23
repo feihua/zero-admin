@@ -5,13 +5,13 @@ info (
 )
 
 type (
-	addMemberTaskReq {
+	AddMemberTaskReq {
 		Name         string `json:"name"`
 		Growth       int32  `json:"growth"` // 赠送成长值
 		Intergration int32  `json:"intergration"` // 赠送积分
 		Type         int32  `json:"type"` // 任务类型：0->新手任务；1->日常任务
 	}
-	addMemberTaskResp {
+	AddMemberTaskResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -63,19 +63,19 @@ type (
 )
 service admin-api {
 	//添加会员任务
-	@handler MemberTaskAdd
-	post /addMemberTask (addMemberTaskReq) returns (addMemberTaskResp)
+	@handler AddMemberTask
+	post /addMemberTask (AddMemberTaskReq) returns (AddMemberTaskResp)
 
 	//分页获取会员任务
-	@handler MemberTaskList
+	@handler QueryMemberTaskList
 	get /queryMemberTaskList (ListMemberTaskReq) returns (ListMemberTaskResp)
 
 	//更新会员任务
-	@handler MemberTaskUpdate
+	@handler UpdateMemberTask
 	post /updateMemberTask (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
 
 	//删除会员任务
-	@handler MemberTaskDelete
+	@handler DeleteMemberTask
 	get /deleteMemberTask (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
 }
 

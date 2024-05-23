@@ -3,6 +3,7 @@ package membertaskservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/feihua/zero-admin/rpc/ums/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -10,6 +11,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// MemberTaskListLogic 查询会员任务列表
+/*
+Author: LiuFeiHua
+Date: 2024/5/23 9:52
+*/
 type MemberTaskListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -24,6 +30,7 @@ func NewMemberTaskListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 	}
 }
 
+// MemberTaskList 查询会员任务列表
 func (l *MemberTaskListLogic) MemberTaskList(in *umsclient.MemberTaskListReq) (*umsclient.MemberTaskListResp, error) {
 	q := query.UmsMemberTask.WithContext(l.ctx)
 
@@ -46,8 +53,8 @@ func (l *MemberTaskListLogic) MemberTaskList(in *umsclient.MemberTaskListReq) (*
 			TaskType:     item.TaskType,
 			CreateTime:   item.CreateTime.Format("2006-01-02 15:04:05"),
 			CreateBy:     item.CreateBy,
-			UpdateTime:   item.UpdateTime.Format("2006-01-02 15:04:05"),
-			UpdateBy:     *item.UpdateBy,
+			UpdateTime:   common.TimeToString(item.UpdateTime),
+			UpdateBy:     item.UpdateBy,
 		})
 	}
 
