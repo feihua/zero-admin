@@ -24,13 +24,13 @@ create table sys_user
 
 INSERT INTO sys_user (id, user_name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
                       create_time, update_by, update_time, del_flag, job_id)
-VALUES (1, 'admin', '超管管理员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030352', 1, 4, 'admin',
+VALUES (1, 'admin', '超管管理员', 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030352', 1, 4, 'admin',
         current_time, 'admin', current_time, 1, 1);
 INSERT INTO sys_user (id, user_name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
                       create_time, update_by, update_time, del_flag, job_id)
-VALUES (2, 'developer', '开发人员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030351', 1, 4, 'admin',
+VALUES (2, 'developer', '开发人员', 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030351', 1, 4, 'admin',
         current_time, 'admin', current_time, 1, 1);
 INSERT INTO sys_user (id, user_name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, create_by,
                       create_time, update_by, update_time, del_flag, job_id)
-VALUES (3, 'test', '测试人员', '', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030350', 1, 4, 'admin',
+VALUES (3, 'test', '测试人员', 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png', '123456', 'sfsdfsdfs', '1002219331@qq.com', '18613030350', 1, 4, 'admin',
         current_time, 'admin', current_time, 1, 1);
