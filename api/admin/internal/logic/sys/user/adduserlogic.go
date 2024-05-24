@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -39,7 +40,6 @@ func (l *AddUserLogic) AddUser(req *types.AddUserReq) (*types.AddUserResp, error
 		NickName:   req.NickName,
 		DeptId:     req.DeptId,
 		CreateBy:   l.ctx.Value("userName").(string),
-		RoleId:     req.RoleId,
 		JobId:      req.JobId,
 		UserStatus: req.Status,
 	}
@@ -47,7 +47,8 @@ func (l *AddUserLogic) AddUser(req *types.AddUserReq) (*types.AddUserResp, error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "添加用户信息失败,参数:%+v,异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("添加用户失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.AddUserResp{

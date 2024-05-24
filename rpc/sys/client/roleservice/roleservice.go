@@ -61,8 +61,10 @@ type (
 	MenuListTree           = sysclient.MenuListTree
 	MenuUpdateReq          = sysclient.MenuUpdateReq
 	MenuUpdateResp         = sysclient.MenuUpdateResp
-	QueryMenuByRoleIdReq   = sysclient.QueryMenuByRoleIdReq
-	QueryMenuByRoleIdResp  = sysclient.QueryMenuByRoleIdResp
+	QueryRoleMenuListReq   = sysclient.QueryRoleMenuListReq
+	QueryRoleMenuListResp  = sysclient.QueryRoleMenuListResp
+	QueryUserRoleListReq   = sysclient.QueryUserRoleListReq
+	QueryUserRoleListResp  = sysclient.QueryUserRoleListResp
 	ReSetPasswordReq       = sysclient.ReSetPasswordReq
 	ReSetPasswordResp      = sysclient.ReSetPasswordResp
 	RoleAddReq             = sysclient.RoleAddReq
@@ -85,8 +87,8 @@ type (
 	SysLogListResp         = sysclient.SysLogListResp
 	UpdateMenuRoleReq      = sysclient.UpdateMenuRoleReq
 	UpdateMenuRoleResp     = sysclient.UpdateMenuRoleResp
-	UpdateUserRoleReq      = sysclient.UpdateUserRoleReq
-	UpdateUserRoleResp     = sysclient.UpdateUserRoleResp
+	UpdateUserRoleListReq  = sysclient.UpdateUserRoleListReq
+	UpdateUserRoleListResp = sysclient.UpdateUserRoleListResp
 	UserAddReq             = sysclient.UserAddReq
 	UserAddResp            = sysclient.UserAddResp
 	UserDeleteReq          = sysclient.UserDeleteReq
@@ -100,12 +102,18 @@ type (
 	UserUpdateResp         = sysclient.UserUpdateResp
 
 	RoleService interface {
+		// 添加角色
 		RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error)
+		// 查询角色
 		RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
+		// 更新角色
 		RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error)
+		// 删除角色
 		RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error)
-		QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error)
-		UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
+		// 查询用户与角色的关联
+		QueryRoleMenuList(ctx context.Context, in *QueryRoleMenuListReq, opts ...grpc.CallOption) (*QueryRoleMenuListResp, error)
+		// 更新用户与角色的关联
+		UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
 	}
 
 	defaultRoleService struct {
@@ -119,32 +127,38 @@ func NewRoleService(cli zrpc.Client) RoleService {
 	}
 }
 
+// 添加角色
 func (m *defaultRoleService) RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error) {
 	client := sysclient.NewRoleServiceClient(m.cli.Conn())
 	return client.RoleAdd(ctx, in, opts...)
 }
 
+// 查询角色
 func (m *defaultRoleService) RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error) {
 	client := sysclient.NewRoleServiceClient(m.cli.Conn())
 	return client.RoleList(ctx, in, opts...)
 }
 
+// 更新角色
 func (m *defaultRoleService) RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error) {
 	client := sysclient.NewRoleServiceClient(m.cli.Conn())
 	return client.RoleUpdate(ctx, in, opts...)
 }
 
+// 删除角色
 func (m *defaultRoleService) RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error) {
 	client := sysclient.NewRoleServiceClient(m.cli.Conn())
 	return client.RoleDelete(ctx, in, opts...)
 }
 
-func (m *defaultRoleService) QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error) {
+// 查询用户与角色的关联
+func (m *defaultRoleService) QueryRoleMenuList(ctx context.Context, in *QueryRoleMenuListReq, opts ...grpc.CallOption) (*QueryRoleMenuListResp, error) {
 	client := sysclient.NewRoleServiceClient(m.cli.Conn())
-	return client.QueryMenuByRoleId(ctx, in, opts...)
+	return client.QueryRoleMenuList(ctx, in, opts...)
 }
 
-func (m *defaultRoleService) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
+// 更新用户与角色的关联
+func (m *defaultRoleService) UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
 	client := sysclient.NewRoleServiceClient(m.cli.Conn())
-	return client.UpdateMenuRole(ctx, in, opts...)
+	return client.UpdateMenuRoleList(ctx, in, opts...)
 }

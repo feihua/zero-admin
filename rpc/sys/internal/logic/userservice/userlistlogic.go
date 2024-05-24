@@ -70,10 +70,6 @@ func (l *UserListLogic) UserList(in *sysclient.UserListReq) (*sysclient.UserList
 			UpdateTime: common.TimeToString(user.UpdateTime),
 			DelFlag:    user.DelFlag,
 			JobId:      user.JobID,
-			//RoleId:         user.RoleId,
-			//RoleName:       user.RoleName,
-			//JobName:        user.JobName,
-			//DeptName:       user.DeptName,
 		})
 	}
 

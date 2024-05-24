@@ -61,8 +61,10 @@ type (
 	MenuListTree           = sysclient.MenuListTree
 	MenuUpdateReq          = sysclient.MenuUpdateReq
 	MenuUpdateResp         = sysclient.MenuUpdateResp
-	QueryMenuByRoleIdReq   = sysclient.QueryMenuByRoleIdReq
-	QueryMenuByRoleIdResp  = sysclient.QueryMenuByRoleIdResp
+	QueryRoleMenuListReq   = sysclient.QueryRoleMenuListReq
+	QueryRoleMenuListResp  = sysclient.QueryRoleMenuListResp
+	QueryUserRoleListReq   = sysclient.QueryUserRoleListReq
+	QueryUserRoleListResp  = sysclient.QueryUserRoleListResp
 	ReSetPasswordReq       = sysclient.ReSetPasswordReq
 	ReSetPasswordResp      = sysclient.ReSetPasswordResp
 	RoleAddReq             = sysclient.RoleAddReq
@@ -85,8 +87,8 @@ type (
 	SysLogListResp         = sysclient.SysLogListResp
 	UpdateMenuRoleReq      = sysclient.UpdateMenuRoleReq
 	UpdateMenuRoleResp     = sysclient.UpdateMenuRoleResp
-	UpdateUserRoleReq      = sysclient.UpdateUserRoleReq
-	UpdateUserRoleResp     = sysclient.UpdateUserRoleResp
+	UpdateUserRoleListReq  = sysclient.UpdateUserRoleListReq
+	UpdateUserRoleListResp = sysclient.UpdateUserRoleListResp
 	UserAddReq             = sysclient.UserAddReq
 	UserAddResp            = sysclient.UserAddResp
 	UserDeleteReq          = sysclient.UserDeleteReq

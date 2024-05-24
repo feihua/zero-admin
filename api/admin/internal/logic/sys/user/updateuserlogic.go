@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -40,14 +41,14 @@ func (l *UpdateUserLogic) UpdateUser(req *types.UpdateUserReq) (*types.UpdateUse
 		NickName:   req.NickName,
 		DeptId:     req.DeptId,
 		UpdateBy:   l.ctx.Value("userName").(string),
-		RoleId:     req.RoleId,
 		UserStatus: req.Status,
 		JobId:      req.JobId,
 	}
 
 	if _, err := l.svcCtx.UserService.UserUpdate(l.ctx, &userUpdateReq); err != nil {
 		logc.Errorf(l.ctx, "更新用户信息失败,参数:%+v,异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("更新用户失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UpdateUserResp{

@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -33,14 +34,15 @@ func NewUpdateRoleMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // UpdateRoleMenuList 更新角色与菜单的关联
 func (l *UpdateRoleMenuListLogic) UpdateRoleMenuList(req *types.UpdateRoleMenuListReq) (resp *types.UpdateRoleMenuListResp, err error) {
-	_, err = l.svcCtx.RoleService.UpdateMenuRole(l.ctx, &sysclient.UpdateMenuRoleReq{
+	_, err = l.svcCtx.RoleService.UpdateMenuRoleList(l.ctx, &sysclient.UpdateMenuRoleReq{
 		RoleId:  req.RoleId,
 		MenuIds: req.MenuIds,
 	})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新角色菜单失败,参数:%+v,异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("更新角色菜单失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UpdateRoleMenuListResp{

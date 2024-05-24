@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -43,25 +44,25 @@ func (l *QueryDictListLogic) QueryDictList(req *types.ListDictReq) (*types.ListD
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询字典列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询字典失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.ListDictData
 
 	for _, dict := range resp.List {
 		list = append(list, &types.ListDictData{
-			dict.Id,
-			dict.Value,
-			dict.Label,
-			dict.Type,
-			dict.Description,
-			0,
-			dict.CreateBy,
-			dict.CreateTime,
-			dict.UpdateBy,
-			dict.UpdateTime,
-			dict.Remarks,
-			dict.DelFlag,
+			Id:          dict.Id,
+			Value:       dict.Value,
+			Label:       dict.Label,
+			Type:        dict.Type,
+			Description: dict.Description,
+			CreateBy:    dict.CreateBy,
+			CreateTime:  dict.CreateTime,
+			UpdateBy:    dict.UpdateBy,
+			UpdateTime:  dict.UpdateTime,
+			Remarks:     dict.Remarks,
+			DelFlag:     dict.DelFlag,
 		})
 	}
 

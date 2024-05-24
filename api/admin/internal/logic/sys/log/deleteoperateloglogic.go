@@ -4,6 +4,8 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -37,7 +39,9 @@ func (l *DeleteOperateLogLogic) DeleteOperateLog(req *types.DeleteSysLogReq) (*t
 	})
 
 	if err != nil {
-		return nil, errorx.NewDefaultError("删除操作日志失败")
+		logc.Errorf(l.ctx, "根据OperateLog id: %+v,删除操作日志异常:%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.DeleteSysLogResp{

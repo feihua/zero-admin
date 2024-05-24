@@ -29,6 +29,9 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobUpda
 }
 
 // JobUpdate 更新岗位信息
+// 1.根据部门id查询部门是否已存在
+// 2.如果部门不已存在,则直接返回
+// 3.部门存在时,则直接更新部门
 func (l *JobUpdateLogic) JobUpdate(in *sysclient.JobUpdateReq) (*sysclient.JobUpdateResp, error) {
 	//更新之前查询记录是否存在
 	q := query.SysJob

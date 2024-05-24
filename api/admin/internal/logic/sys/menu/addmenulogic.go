@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -51,7 +52,8 @@ func (l *AddMenuLogic) AddMenu(req *types.AddMenuReq) (*types.AddMenuResp, error
 	}
 	if _, err := l.svcCtx.MenuService.MenuAdd(l.ctx, &menuAddReq); err != nil {
 		logc.Errorf(l.ctx, "添加菜单信息失败,参数:%+v,异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("添加菜单失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.AddMenuResp{

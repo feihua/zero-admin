@@ -3,10 +3,10 @@ POST {{host}}/api/sys/user/login
 Content-Type: application/json
 
 {
-  "userName": "admin",
+  "account": "developer",
   "password": "123456"
 }
-> {% client.global.set("token", response.body.token); %}
+> {% client.global.set("token", response.body.data.token); %}
 
 ### 获取个人信息
 GET {{host}}/api/sys/user/info

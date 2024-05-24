@@ -31,7 +31,11 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuAddLo
 }
 
 // MenuAdd 新增菜单
+// 1.根据菜单名称查询菜单是否已存在
+// 2.如果菜单已存在,则直接返回
+// 3.菜单不存在时,则直接添加菜单
 func (l *MenuAddLogic) MenuAdd(in *sysclient.MenuAddReq) (*sysclient.MenuAddResp, error) {
+
 	err := query.SysMenu.WithContext(l.ctx).Create(&model.SysMenu{
 		Name:          in.Name,
 		ParentID:      in.ParentId,

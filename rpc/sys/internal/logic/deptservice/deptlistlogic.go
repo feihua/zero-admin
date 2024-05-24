@@ -2,6 +2,7 @@ package deptservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -41,8 +42,8 @@ func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptList
 	count, err := q.Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询机构列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询部门列表信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询部门列表信息失败")
 	}
 
 	var list []*sysclient.DeptListData
@@ -70,7 +71,7 @@ func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptList
 		})
 	}
 
-	logc.Infof(l.ctx, "查询机构列表信息,参数：%+v,响应：%+v", in, list)
+	logc.Infof(l.ctx, "查询部门列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.DeptListResp{
 		Total: count,
 		List:  list,

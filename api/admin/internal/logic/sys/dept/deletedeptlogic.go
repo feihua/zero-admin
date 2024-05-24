@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -39,11 +40,12 @@ func (l *DeleteDeptLogic) DeleteDept(req *types.DeleteDeptReq) (*types.DeleteDep
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据deptId: %+v,删除部门异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除机构失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.DeleteDeptResp{
 		Code:    "000000",
-		Message: "删除机构成功",
+		Message: "删除部门成功",
 	}, nil
 }

@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"google.golang.org/grpc/status"
 	"strconv"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -41,7 +42,8 @@ func (l *QueryAllRelationsLogic) QueryAllRelations(req *types.QueryAllRelationsR
 	})
 
 	if err != nil {
-		return nil, errorx.NewDefaultError("查询角色异常")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var roleRelations []*types.RoleRelations

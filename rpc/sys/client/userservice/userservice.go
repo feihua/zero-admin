@@ -61,8 +61,10 @@ type (
 	MenuListTree           = sysclient.MenuListTree
 	MenuUpdateReq          = sysclient.MenuUpdateReq
 	MenuUpdateResp         = sysclient.MenuUpdateResp
-	QueryMenuByRoleIdReq   = sysclient.QueryMenuByRoleIdReq
-	QueryMenuByRoleIdResp  = sysclient.QueryMenuByRoleIdResp
+	QueryRoleMenuListReq   = sysclient.QueryRoleMenuListReq
+	QueryRoleMenuListResp  = sysclient.QueryRoleMenuListResp
+	QueryUserRoleListReq   = sysclient.QueryUserRoleListReq
+	QueryUserRoleListResp  = sysclient.QueryUserRoleListResp
 	ReSetPasswordReq       = sysclient.ReSetPasswordReq
 	ReSetPasswordResp      = sysclient.ReSetPasswordResp
 	RoleAddReq             = sysclient.RoleAddReq
@@ -85,8 +87,8 @@ type (
 	SysLogListResp         = sysclient.SysLogListResp
 	UpdateMenuRoleReq      = sysclient.UpdateMenuRoleReq
 	UpdateMenuRoleResp     = sysclient.UpdateMenuRoleResp
-	UpdateUserRoleReq      = sysclient.UpdateUserRoleReq
-	UpdateUserRoleResp     = sysclient.UpdateUserRoleResp
+	UpdateUserRoleListReq  = sysclient.UpdateUserRoleListReq
+	UpdateUserRoleListResp = sysclient.UpdateUserRoleListResp
 	UserAddReq             = sysclient.UserAddReq
 	UserAddResp            = sysclient.UserAddResp
 	UserDeleteReq          = sysclient.UserDeleteReq
@@ -108,7 +110,10 @@ type (
 		UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
 		ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error)
 		UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error)
-		UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*UpdateUserRoleResp, error)
+		// 查询用户与角色的关联
+		QueryUserRoleList(ctx context.Context, in *QueryUserRoleListReq, opts ...grpc.CallOption) (*QueryUserRoleListResp, error)
+		// 更新用户与角色的关联
+		UpdateUserRoleList(ctx context.Context, in *UpdateUserRoleListReq, opts ...grpc.CallOption) (*UpdateUserRoleListResp, error)
 	}
 
 	defaultUserService struct {
@@ -162,7 +167,14 @@ func (m *defaultUserService) UpdateUserStatus(ctx context.Context, in *UserStatu
 	return client.UpdateUserStatus(ctx, in, opts...)
 }
 
-func (m *defaultUserService) UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*UpdateUserRoleResp, error) {
+// 查询用户与角色的关联
+func (m *defaultUserService) QueryUserRoleList(ctx context.Context, in *QueryUserRoleListReq, opts ...grpc.CallOption) (*QueryUserRoleListResp, error) {
 	client := sysclient.NewUserServiceClient(m.cli.Conn())
-	return client.UpdateUserRole(ctx, in, opts...)
+	return client.QueryUserRoleList(ctx, in, opts...)
+}
+
+// 更新用户与角色的关联
+func (m *defaultUserService) UpdateUserRoleList(ctx context.Context, in *UpdateUserRoleListReq, opts ...grpc.CallOption) (*UpdateUserRoleListResp, error) {
+	client := sysclient.NewUserServiceClient(m.cli.Conn())
+	return client.UpdateUserRoleList(ctx, in, opts...)
 }

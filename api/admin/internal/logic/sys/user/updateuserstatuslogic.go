@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -40,7 +41,8 @@ func (l *UpdateUserStatusLogic) UpdateUserStatus(req *types.UserStatusReq) (*typ
 	})
 
 	if err != nil {
-		return nil, errorx.NewDefaultError("更新用户状态异常")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UserStatusResp{

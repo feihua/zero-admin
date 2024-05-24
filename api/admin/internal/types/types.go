@@ -274,7 +274,6 @@ type AddUserReq struct {
 	Name     string `json:"name"`
 	NickName string `json:"nickName"`
 	DeptId   int64  `json:"deptId"`
-	RoleId   int64  `json:"roleId"`
 	JobId    int64  `json:"jobId"`
 	Status   int32  `json:"status"` // 状态  0：禁用   1：正常
 }
@@ -1988,10 +1987,6 @@ type ListUserData struct {
 	UpdateTime string `json:"updateTime"` // 更新时间
 	DelFlag    int32  `json:"delFlag"`    // 是否删除  0：已删除  1：正常
 	JobId      int64  `json:"jobId"`
-	RoleId     int64  `json:"roleId"`
-	RoleName   string `json:"roleName"`
-	JobName    string `json:"jobName"`
-	DeptName   string `json:"deptName"`
 }
 
 type ListUserReq struct {
@@ -2014,6 +2009,21 @@ type ListUserResp struct {
 	PageSize int64           `form:"pageSize,default=20"`
 	Success  bool            `json:"success"`
 	Total    int64           `json:"total"`
+}
+
+type LoginData struct {
+	AccessToken string `json:"token"`
+}
+
+type LoginReq struct {
+	Account  string `json:"account"` //手机号或者用户名
+	Password string `json:"password"`
+}
+
+type LoginResp struct {
+	Code    string    `json:"code"`
+	Message string    `json:"message"`
+	Data    LoginData `json:"data"`
 }
 
 type MemberPriceList struct {
@@ -3080,7 +3090,6 @@ type UpdateUserReq struct {
 	Name     string `json:"name"`
 	NickName string `json:"nickName"`
 	DeptId   int64  `json:"deptId"`
-	RoleId   int64  `json:"roleId"`
 	Status   int32  `json:"status"`
 	JobId    int64  `json:"jobId"`
 	DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
@@ -3105,6 +3114,13 @@ type UploadResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 	Data    string `json:"data"`
+}
+
+type UserInfoData struct {
+	Avatar      string             `json:"avatar"`
+	Name        string             `json:"name"`
+	MenuTree    []*ListMenuTree    `json:"menuTree"`
+	MenuTreeVue []*ListMenuTreeVue `json:"menuTreeVue"`
 }
 
 type UserRoleListData struct {
@@ -3366,28 +3382,8 @@ type AddSubjectResp struct {
 	Message string `json:"message"`
 }
 
-type LoginReq struct {
-	UserName string `json:"userName"`
-	Password string `json:"password"`
-}
-
-type LoginResp struct {
-	Code             string `json:"code"`
-	Message          string `json:"message"`
-	Status           string `json:"status"`
-	CurrentAuthority string `json:"currentAuthority"`
-	Id               int64  `json:"id"`
-	UserName         string `json:"userName"`
-	AccessToken      string `json:"token"`
-	AccessExpire     int64  `json:"accessExpire"`
-	RefreshAfter     int64  `json:"refreshAfter"`
-}
-
 type UserInfoResp struct {
-	Code        string             `json:"code"`
-	Message     string             `json:"message"`
-	Avatar      string             `json:"avatar"`
-	Name        string             `json:"name"`
-	MenuTree    []*ListMenuTree    `json:"menuTree"`
-	MenuTreeVue []*ListMenuTreeVue `json:"menuTreeVue"`
+	Code    string       `json:"code"`
+	Message string       `json:"message"`
+	Data    UserInfoData `json:"data"`
 }

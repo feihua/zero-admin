@@ -22,32 +22,38 @@ func NewRoleServiceServer(svcCtx *svc.ServiceContext) *RoleServiceServer {
 	}
 }
 
+// 添加角色
 func (s *RoleServiceServer) RoleAdd(ctx context.Context, in *sysclient.RoleAddReq) (*sysclient.RoleAddResp, error) {
 	l := roleservicelogic.NewRoleAddLogic(ctx, s.svcCtx)
 	return l.RoleAdd(in)
 }
 
+// 查询角色
 func (s *RoleServiceServer) RoleList(ctx context.Context, in *sysclient.RoleListReq) (*sysclient.RoleListResp, error) {
 	l := roleservicelogic.NewRoleListLogic(ctx, s.svcCtx)
 	return l.RoleList(in)
 }
 
+// 更新角色
 func (s *RoleServiceServer) RoleUpdate(ctx context.Context, in *sysclient.RoleUpdateReq) (*sysclient.RoleUpdateResp, error) {
 	l := roleservicelogic.NewRoleUpdateLogic(ctx, s.svcCtx)
 	return l.RoleUpdate(in)
 }
 
+// 删除角色
 func (s *RoleServiceServer) RoleDelete(ctx context.Context, in *sysclient.RoleDeleteReq) (*sysclient.RoleDeleteResp, error) {
 	l := roleservicelogic.NewRoleDeleteLogic(ctx, s.svcCtx)
 	return l.RoleDelete(in)
 }
 
-func (s *RoleServiceServer) QueryMenuByRoleId(ctx context.Context, in *sysclient.QueryMenuByRoleIdReq) (*sysclient.QueryMenuByRoleIdResp, error) {
-	l := roleservicelogic.NewQueryMenuByRoleIdLogic(ctx, s.svcCtx)
-	return l.QueryMenuByRoleId(in)
+// 查询用户与角色的关联
+func (s *RoleServiceServer) QueryRoleMenuList(ctx context.Context, in *sysclient.QueryRoleMenuListReq) (*sysclient.QueryRoleMenuListResp, error) {
+	l := roleservicelogic.NewQueryRoleMenuListLogic(ctx, s.svcCtx)
+	return l.QueryRoleMenuList(in)
 }
 
-func (s *RoleServiceServer) UpdateMenuRole(ctx context.Context, in *sysclient.UpdateMenuRoleReq) (*sysclient.UpdateMenuRoleResp, error) {
-	l := roleservicelogic.NewUpdateMenuRoleLogic(ctx, s.svcCtx)
-	return l.UpdateMenuRole(in)
+// 更新用户与角色的关联
+func (s *RoleServiceServer) UpdateMenuRoleList(ctx context.Context, in *sysclient.UpdateMenuRoleReq) (*sysclient.UpdateMenuRoleResp, error) {
+	l := roleservicelogic.NewUpdateMenuRoleListLogic(ctx, s.svcCtx)
+	return l.UpdateMenuRoleList(in)
 }

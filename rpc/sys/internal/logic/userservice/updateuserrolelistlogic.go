@@ -12,27 +12,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateUserRoleLogic 更新用户与角色的关联
+// UpdateUserRoleListLogic 更新用户与角色的关联
 /*
 Author: LiuFeiHua
 Date: 2024/5/23 17:38
 */
-type UpdateUserRoleLogic struct {
+type UpdateUserRoleListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewUpdateUserRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateUserRoleLogic {
-	return &UpdateUserRoleLogic{
+func NewUpdateUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateUserRoleListLogic {
+	return &UpdateUserRoleListLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-// UpdateUserRole 更新用户与角色的关联(角色id为1的是系统预留超级管理员角色,不用关联)
-func (l *UpdateUserRoleLogic) UpdateUserRole(in *sysclient.UpdateUserRoleReq) (*sysclient.UpdateUserRoleResp, error) {
+// UpdateUserRoleList 更新用户与角色的关联(角色id为1的是系统预留超级管理员角色,不用关联)
+func (l *UpdateUserRoleListLogic) UpdateUserRoleList(in *sysclient.UpdateUserRoleListReq) (*sysclient.UpdateUserRoleListResp, error) {
 	//判断是否为超级管理员
 	//id为1的是系统预留超级管理员角色,不用关联
 	err := query.Q.Transaction(func(tx *query.Query) error {
@@ -46,6 +46,7 @@ func (l *UpdateUserRoleLogic) UpdateUserRole(in *sysclient.UpdateUserRoleReq) (*
 		}
 
 		if count != 0 {
+			//超级管理员
 			return nil
 		}
 
@@ -75,5 +76,5 @@ func (l *UpdateUserRoleLogic) UpdateUserRole(in *sysclient.UpdateUserRoleReq) (*
 		return nil, err
 	}
 
-	return &sysclient.UpdateUserRoleResp{}, nil
+	return &sysclient.UpdateUserRoleListResp{}, nil
 }

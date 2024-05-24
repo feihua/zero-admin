@@ -6,8 +6,8 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -47,14 +47,13 @@ func (l *QueryUserListLogic) QueryUserList(req *types.ListUserReq) (*types.ListU
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询用户列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.ListUserData
 
 	for _, item := range resp.List {
-		listUserData := types.ListUserData{}
-		_ = copier.Copy(&listUserData, &item)
 		list = append(list, &types.ListUserData{
 			Id:         item.Id,
 			UserName:   item.UserName,
@@ -70,10 +69,6 @@ func (l *QueryUserListLogic) QueryUserList(req *types.ListUserReq) (*types.ListU
 			UpdateTime: item.UpdateTime,
 			DelFlag:    item.DelFlag,
 			JobId:      item.JobId,
-			RoleId:     item.RoleId,
-			RoleName:   item.RoleName,
-			JobName:    item.JobName,
-			DeptName:   item.DeptName,
 		})
 	}
 

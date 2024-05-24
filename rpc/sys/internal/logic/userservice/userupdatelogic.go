@@ -33,6 +33,9 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserUp
 }
 
 // UserUpdate 更新用户(id为1是系统预留超级管理员用户,不能更新)
+// 1.根据用户id查询用户是否已存在
+// 2.如果用户不已存在,则直接返回
+// 3.用户存在时,则直接更新用户
 func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.UserUpdateResp, error) {
 
 	//id为1是系统预留超级管理员用户,不能更新
@@ -81,10 +84,10 @@ func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.Us
 
 	err = query.SysUserRole.WithContext(l.ctx).Create(&model.SysUserRole{
 		UserID: in.Id,
-		RoleID: in.RoleId,
+		//RoleID: in.RoleId,
 	})
 	if err != nil {
-		logc.Errorf(l.ctx, "添加用户与角色关联异常,参数userId:%d, roleId: %d,异常:%s", in.Id, in.RoleId, err.Error())
+		logc.Errorf(l.ctx, "添加用户与角色关联异常,参数userId:%d, roleId: %d,异常:%s", in.Id, 1, err.Error())
 		return nil, errors.New("更新用户异常")
 	}
 

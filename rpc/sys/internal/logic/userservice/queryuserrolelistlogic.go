@@ -1,46 +1,40 @@
-package user
+package userservicelogic
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/api/admin/internal/svc"
-	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
 // QueryUserRoleListLogic 查询用户与角色的关联
 /*
 Author: LiuFeiHua
-Date: 2024/5/23 17:33
+Date: 2024/5/24 18:05
 */
 type QueryUserRoleListLogic struct {
-	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
+	logx.Logger
 }
 
 func NewQueryUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryUserRoleListLogic {
 	return &QueryUserRoleListLogic{
-		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
+		Logger: logx.WithContext(ctx),
 	}
 }
 
 // QueryUserRoleList 查询用户与角色的关联
-func (l *QueryUserRoleListLogic) QueryUserRoleList(req *types.QueryUserRoleListReq) (resp *types.QueryUserRoleListResp, err error) {
-	//todo 待完善
-	//查询所有角色
-	//result, err := l.svcCtx.RoleService.RoleList(l.ctx, &sysclient.RoleListReq{
-	//	Current:  req.Current,
-	//	PageSize: req.PageSize,
-	//	Status:   1,
-	//	Name:     req.RoleName,
-	//})
+func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleListReq) (*sysclient.QueryUserRoleListResp, error) {
+	//1.查询所有角色
+	//roles, err := query.SysRole.WithContext(l.ctx).Find()
 	//
 	//if err != nil {
-	//	logc.Errorf(l.ctx, "查询角色信息失败,参数:%+v,异常:%s", req, err.Error())
-	//	s, _ := status.FromError(err)
-	//	return nil, errorx.NewDefaultError(s.Message())
+	//	logc.Errorf(l.ctx, "查询角色信息失败,参数:%+v,异常:%s", in, err.Error())
+	//	return nil, errors.New("查询角色信息失败")
 	//}
 	//
 	//var roleList []types.RoleListData
@@ -75,12 +69,5 @@ func (l *QueryUserRoleListLogic) QueryUserRoleList(req *types.QueryUserRoleListR
 	//	roleIds = QueryMenu.Ids
 	//}
 
-	return &types.QueryUserRoleListResp{
-		Data: types.UserRoleListData{
-			RoleList: nil,
-			RoleIds:  nil,
-		},
-		Code:    "000000",
-		Message: "根据角色id查询菜单成功",
-	}, nil
+	return &sysclient.QueryUserRoleListResp{}, nil
 }

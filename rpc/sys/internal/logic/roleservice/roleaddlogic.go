@@ -31,6 +31,9 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleAddLo
 }
 
 // RoleAdd 新增角色
+// 1.根据角色名称查询角色是否已存在
+// 2.如果角色已存在,则直接返回
+// 3.角色不存在时,则直接添加角色
 func (l *RoleAddLogic) RoleAdd(in *sysclient.RoleAddReq) (*sysclient.RoleAddResp, error) {
 	err := query.SysRole.WithContext(l.ctx).Create(&model.SysRole{
 		Name:     in.Name,

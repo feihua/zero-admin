@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -42,7 +43,8 @@ func (l *QueryJobListLogic) QueryJobList(req *types.ListJobReq) (*types.ListJobR
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询岗位列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询岗位失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.ListJobData

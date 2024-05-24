@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"google.golang.org/grpc/status"
 )
 
 // QueryDeptListLogic 部门列表
@@ -36,8 +37,9 @@ func (l *QueryDeptListLogic) QueryDeptList(req *types.ListDeptReq) (*types.ListD
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,查询机构列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询机构失败")
+		logc.Errorf(l.ctx, "参数: %+v,查询部门列表异常:%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.ListDeptData
@@ -59,7 +61,7 @@ func (l *QueryDeptListLogic) QueryDeptList(req *types.ListDeptReq) (*types.ListD
 
 	return &types.ListDeptResp{
 		Code:    "000000",
-		Message: "查询机构成功",
+		Message: "查询部门成功",
 		Data:    list,
 		Success: true,
 		Total:   resp.Total,

@@ -32,6 +32,9 @@ func NewRoleUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleUp
 }
 
 // RoleUpdate 更新角色(id为1的是系统预留超级管理员角色,不能更新)
+// 1.根据角色id查询角色是否已存在
+// 2.如果角色不已存在,则直接返回
+// 3.角色存在时,则直接更新角色
 func (l *RoleUpdateLogic) RoleUpdate(in *sysclient.RoleUpdateReq) (*sysclient.RoleUpdateResp, error) {
 	q := query.SysRole
 	//id为1的是系统预留超级管理员角色,不用关联

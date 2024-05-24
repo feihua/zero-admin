@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -40,7 +41,8 @@ func (l *QueryMenuListLogic) QueryMenuList(req *types.ListMenuReq) (*types.ListM
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询菜单列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询菜单失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.ListMenuData

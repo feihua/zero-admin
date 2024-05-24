@@ -19,15 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	UserService_Login_FullMethodName            = "/sysclient.UserService/Login"
-	UserService_UserInfo_FullMethodName         = "/sysclient.UserService/UserInfo"
-	UserService_UserAdd_FullMethodName          = "/sysclient.UserService/UserAdd"
-	UserService_UserList_FullMethodName         = "/sysclient.UserService/UserList"
-	UserService_UserUpdate_FullMethodName       = "/sysclient.UserService/UserUpdate"
-	UserService_UserDelete_FullMethodName       = "/sysclient.UserService/UserDelete"
-	UserService_ReSetPassword_FullMethodName    = "/sysclient.UserService/ReSetPassword"
-	UserService_UpdateUserStatus_FullMethodName = "/sysclient.UserService/UpdateUserStatus"
-	UserService_UpdateUserRole_FullMethodName   = "/sysclient.UserService/UpdateUserRole"
+	UserService_Login_FullMethodName              = "/sysclient.UserService/Login"
+	UserService_UserInfo_FullMethodName           = "/sysclient.UserService/UserInfo"
+	UserService_UserAdd_FullMethodName            = "/sysclient.UserService/UserAdd"
+	UserService_UserList_FullMethodName           = "/sysclient.UserService/UserList"
+	UserService_UserUpdate_FullMethodName         = "/sysclient.UserService/UserUpdate"
+	UserService_UserDelete_FullMethodName         = "/sysclient.UserService/UserDelete"
+	UserService_ReSetPassword_FullMethodName      = "/sysclient.UserService/ReSetPassword"
+	UserService_UpdateUserStatus_FullMethodName   = "/sysclient.UserService/UpdateUserStatus"
+	UserService_QueryUserRoleList_FullMethodName  = "/sysclient.UserService/QueryUserRoleList"
+	UserService_UpdateUserRoleList_FullMethodName = "/sysclient.UserService/UpdateUserRoleList"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -42,7 +43,10 @@ type UserServiceClient interface {
 	UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
 	ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error)
 	UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error)
-	UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*UpdateUserRoleResp, error)
+	// 查询用户与角色的关联
+	QueryUserRoleList(ctx context.Context, in *QueryUserRoleListReq, opts ...grpc.CallOption) (*QueryUserRoleListResp, error)
+	// 更新用户与角色的关联
+	UpdateUserRoleList(ctx context.Context, in *UpdateUserRoleListReq, opts ...grpc.CallOption) (*UpdateUserRoleListResp, error)
 }
 
 type userServiceClient struct {
@@ -125,9 +129,18 @@ func (c *userServiceClient) UpdateUserStatus(ctx context.Context, in *UserStatus
 	return out, nil
 }
 
-func (c *userServiceClient) UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*UpdateUserRoleResp, error) {
-	out := new(UpdateUserRoleResp)
-	err := c.cc.Invoke(ctx, UserService_UpdateUserRole_FullMethodName, in, out, opts...)
+func (c *userServiceClient) QueryUserRoleList(ctx context.Context, in *QueryUserRoleListReq, opts ...grpc.CallOption) (*QueryUserRoleListResp, error) {
+	out := new(QueryUserRoleListResp)
+	err := c.cc.Invoke(ctx, UserService_QueryUserRoleList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateUserRoleList(ctx context.Context, in *UpdateUserRoleListReq, opts ...grpc.CallOption) (*UpdateUserRoleListResp, error) {
+	out := new(UpdateUserRoleListResp)
+	err := c.cc.Invoke(ctx, UserService_UpdateUserRoleList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -146,7 +159,10 @@ type UserServiceServer interface {
 	UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error)
 	ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error)
 	UpdateUserStatus(context.Context, *UserStatusReq) (*UserStatusResp, error)
-	UpdateUserRole(context.Context, *UpdateUserRoleReq) (*UpdateUserRoleResp, error)
+	// 查询用户与角色的关联
+	QueryUserRoleList(context.Context, *QueryUserRoleListReq) (*QueryUserRoleListResp, error)
+	// 更新用户与角色的关联
+	UpdateUserRoleList(context.Context, *UpdateUserRoleListReq) (*UpdateUserRoleListResp, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -178,8 +194,11 @@ func (UnimplementedUserServiceServer) ReSetPassword(context.Context, *ReSetPassw
 func (UnimplementedUserServiceServer) UpdateUserStatus(context.Context, *UserStatusReq) (*UserStatusResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserStatus not implemented")
 }
-func (UnimplementedUserServiceServer) UpdateUserRole(context.Context, *UpdateUserRoleReq) (*UpdateUserRoleResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserRole not implemented")
+func (UnimplementedUserServiceServer) QueryUserRoleList(context.Context, *QueryUserRoleListReq) (*QueryUserRoleListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryUserRoleList not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUserRoleList(context.Context, *UpdateUserRoleListReq) (*UpdateUserRoleListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserRoleList not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -338,20 +357,38 @@ func _UserService_UpdateUserStatus_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_UpdateUserRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateUserRoleReq)
+func _UserService_QueryUserRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryUserRoleListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).UpdateUserRole(ctx, in)
+		return srv.(UserServiceServer).QueryUserRoleList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_UpdateUserRole_FullMethodName,
+		FullMethod: UserService_QueryUserRoleList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UpdateUserRole(ctx, req.(*UpdateUserRoleReq))
+		return srv.(UserServiceServer).QueryUserRoleList(ctx, req.(*QueryUserRoleListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateUserRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRoleListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateUserRoleList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateUserRoleList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateUserRoleList(ctx, req.(*UpdateUserRoleListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -396,8 +433,12 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserService_UpdateUserStatus_Handler,
 		},
 		{
-			MethodName: "UpdateUserRole",
-			Handler:    _UserService_UpdateUserRole_Handler,
+			MethodName: "QueryUserRoleList",
+			Handler:    _UserService_QueryUserRoleList_Handler,
+		},
+		{
+			MethodName: "UpdateUserRoleList",
+			Handler:    _UserService_UpdateUserRoleList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -405,24 +446,30 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	RoleService_RoleAdd_FullMethodName           = "/sysclient.RoleService/RoleAdd"
-	RoleService_RoleList_FullMethodName          = "/sysclient.RoleService/RoleList"
-	RoleService_RoleUpdate_FullMethodName        = "/sysclient.RoleService/RoleUpdate"
-	RoleService_RoleDelete_FullMethodName        = "/sysclient.RoleService/RoleDelete"
-	RoleService_QueryMenuByRoleId_FullMethodName = "/sysclient.RoleService/QueryMenuByRoleId"
-	RoleService_UpdateMenuRole_FullMethodName    = "/sysclient.RoleService/UpdateMenuRole"
+	RoleService_RoleAdd_FullMethodName            = "/sysclient.RoleService/RoleAdd"
+	RoleService_RoleList_FullMethodName           = "/sysclient.RoleService/RoleList"
+	RoleService_RoleUpdate_FullMethodName         = "/sysclient.RoleService/RoleUpdate"
+	RoleService_RoleDelete_FullMethodName         = "/sysclient.RoleService/RoleDelete"
+	RoleService_QueryRoleMenuList_FullMethodName  = "/sysclient.RoleService/QueryRoleMenuList"
+	RoleService_UpdateMenuRoleList_FullMethodName = "/sysclient.RoleService/UpdateMenuRoleList"
 )
 
 // RoleServiceClient is the client API for RoleService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RoleServiceClient interface {
+	// 添加角色
 	RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error)
+	// 查询角色
 	RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
+	// 更新角色
 	RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error)
+	// 删除角色
 	RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error)
-	QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error)
-	UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
+	// 查询用户与角色的关联
+	QueryRoleMenuList(ctx context.Context, in *QueryRoleMenuListReq, opts ...grpc.CallOption) (*QueryRoleMenuListResp, error)
+	// 更新用户与角色的关联
+	UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
 }
 
 type roleServiceClient struct {
@@ -469,18 +516,18 @@ func (c *roleServiceClient) RoleDelete(ctx context.Context, in *RoleDeleteReq, o
 	return out, nil
 }
 
-func (c *roleServiceClient) QueryMenuByRoleId(ctx context.Context, in *QueryMenuByRoleIdReq, opts ...grpc.CallOption) (*QueryMenuByRoleIdResp, error) {
-	out := new(QueryMenuByRoleIdResp)
-	err := c.cc.Invoke(ctx, RoleService_QueryMenuByRoleId_FullMethodName, in, out, opts...)
+func (c *roleServiceClient) QueryRoleMenuList(ctx context.Context, in *QueryRoleMenuListReq, opts ...grpc.CallOption) (*QueryRoleMenuListResp, error) {
+	out := new(QueryRoleMenuListResp)
+	err := c.cc.Invoke(ctx, RoleService_QueryRoleMenuList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *roleServiceClient) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
+func (c *roleServiceClient) UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
 	out := new(UpdateMenuRoleResp)
-	err := c.cc.Invoke(ctx, RoleService_UpdateMenuRole_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, RoleService_UpdateMenuRoleList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -491,12 +538,18 @@ func (c *roleServiceClient) UpdateMenuRole(ctx context.Context, in *UpdateMenuRo
 // All implementations must embed UnimplementedRoleServiceServer
 // for forward compatibility
 type RoleServiceServer interface {
+	// 添加角色
 	RoleAdd(context.Context, *RoleAddReq) (*RoleAddResp, error)
+	// 查询角色
 	RoleList(context.Context, *RoleListReq) (*RoleListResp, error)
+	// 更新角色
 	RoleUpdate(context.Context, *RoleUpdateReq) (*RoleUpdateResp, error)
+	// 删除角色
 	RoleDelete(context.Context, *RoleDeleteReq) (*RoleDeleteResp, error)
-	QueryMenuByRoleId(context.Context, *QueryMenuByRoleIdReq) (*QueryMenuByRoleIdResp, error)
-	UpdateMenuRole(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
+	// 查询用户与角色的关联
+	QueryRoleMenuList(context.Context, *QueryRoleMenuListReq) (*QueryRoleMenuListResp, error)
+	// 更新用户与角色的关联
+	UpdateMenuRoleList(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
 	mustEmbedUnimplementedRoleServiceServer()
 }
 
@@ -516,11 +569,11 @@ func (UnimplementedRoleServiceServer) RoleUpdate(context.Context, *RoleUpdateReq
 func (UnimplementedRoleServiceServer) RoleDelete(context.Context, *RoleDeleteReq) (*RoleDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RoleDelete not implemented")
 }
-func (UnimplementedRoleServiceServer) QueryMenuByRoleId(context.Context, *QueryMenuByRoleIdReq) (*QueryMenuByRoleIdResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryMenuByRoleId not implemented")
+func (UnimplementedRoleServiceServer) QueryRoleMenuList(context.Context, *QueryRoleMenuListReq) (*QueryRoleMenuListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryRoleMenuList not implemented")
 }
-func (UnimplementedRoleServiceServer) UpdateMenuRole(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenuRole not implemented")
+func (UnimplementedRoleServiceServer) UpdateMenuRoleList(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenuRoleList not implemented")
 }
 func (UnimplementedRoleServiceServer) mustEmbedUnimplementedRoleServiceServer() {}
 
@@ -607,38 +660,38 @@ func _RoleService_RoleDelete_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RoleService_QueryMenuByRoleId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryMenuByRoleIdReq)
+func _RoleService_QueryRoleMenuList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRoleMenuListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RoleServiceServer).QueryMenuByRoleId(ctx, in)
+		return srv.(RoleServiceServer).QueryRoleMenuList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RoleService_QueryMenuByRoleId_FullMethodName,
+		FullMethod: RoleService_QueryRoleMenuList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).QueryMenuByRoleId(ctx, req.(*QueryMenuByRoleIdReq))
+		return srv.(RoleServiceServer).QueryRoleMenuList(ctx, req.(*QueryRoleMenuListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RoleService_UpdateMenuRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoleService_UpdateMenuRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateMenuRoleReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RoleServiceServer).UpdateMenuRole(ctx, in)
+		return srv.(RoleServiceServer).UpdateMenuRoleList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RoleService_UpdateMenuRole_FullMethodName,
+		FullMethod: RoleService_UpdateMenuRoleList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).UpdateMenuRole(ctx, req.(*UpdateMenuRoleReq))
+		return srv.(RoleServiceServer).UpdateMenuRoleList(ctx, req.(*UpdateMenuRoleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -667,12 +720,12 @@ var RoleService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _RoleService_RoleDelete_Handler,
 		},
 		{
-			MethodName: "QueryMenuByRoleId",
-			Handler:    _RoleService_QueryMenuByRoleId_Handler,
+			MethodName: "QueryRoleMenuList",
+			Handler:    _RoleService_QueryRoleMenuList_Handler,
 		},
 		{
-			MethodName: "UpdateMenuRole",
-			Handler:    _RoleService_UpdateMenuRole_Handler,
+			MethodName: "UpdateMenuRoleList",
+			Handler:    _RoleService_UpdateMenuRoleList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

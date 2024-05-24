@@ -113,7 +113,7 @@ service admin-api {
 
 	//查询角色与菜单的关联
 	@handler QueryRoleMenuList
-		get /queryRoleMenuList (QueryRoleMenuListReq) returns (QueryRoleMenuListResp)
+	get /queryRoleMenuList (QueryRoleMenuListReq) returns (QueryRoleMenuListResp)
 
 	//更新角色与菜单的关联
 	@handler UpdateRoleMenuList

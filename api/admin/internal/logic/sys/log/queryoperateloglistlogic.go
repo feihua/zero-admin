@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -39,7 +40,8 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.ListSysLogReq)
 	})
 
 	if err != nil {
-		return nil, errorx.NewDefaultError("查询操作日志失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.ListSysLogData

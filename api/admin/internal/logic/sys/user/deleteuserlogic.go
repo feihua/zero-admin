@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -39,7 +40,8 @@ func (l *DeleteUserLogic) DeleteUser(req *types.DeleteUserReq) (*types.DeleteUse
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据userId: %+v,删除用户异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除用户失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.DeleteUserResp{

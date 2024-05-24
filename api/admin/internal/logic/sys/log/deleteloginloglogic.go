@@ -4,6 +4,8 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -37,7 +39,9 @@ func (l *DeleteLoginLogLogic) DeleteLoginLog(req *types.DeleteLoginLogReq) (*typ
 	})
 
 	if err != nil {
-		return nil, errorx.NewDefaultError("删除登录日志失败")
+		logc.Errorf(l.ctx, "根据LoginLog id: %+v,删除登录日志异常:%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.DeleteLoginLogResp{

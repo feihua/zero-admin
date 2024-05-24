@@ -62,7 +62,14 @@ func (s *UserServiceServer) UpdateUserStatus(ctx context.Context, in *sysclient.
 	return l.UpdateUserStatus(in)
 }
 
-func (s *UserServiceServer) UpdateUserRole(ctx context.Context, in *sysclient.UpdateUserRoleReq) (*sysclient.UpdateUserRoleResp, error) {
-	l := userservicelogic.NewUpdateUserRoleLogic(ctx, s.svcCtx)
-	return l.UpdateUserRole(in)
+// 查询用户与角色的关联
+func (s *UserServiceServer) QueryUserRoleList(ctx context.Context, in *sysclient.QueryUserRoleListReq) (*sysclient.QueryUserRoleListResp, error) {
+	l := userservicelogic.NewQueryUserRoleListLogic(ctx, s.svcCtx)
+	return l.QueryUserRoleList(in)
+}
+
+// 更新用户与角色的关联
+func (s *UserServiceServer) UpdateUserRoleList(ctx context.Context, in *sysclient.UpdateUserRoleListReq) (*sysclient.UpdateUserRoleListResp, error) {
+	l := userservicelogic.NewUpdateUserRoleListLogic(ctx, s.svcCtx)
+	return l.UpdateUserRoleList(in)
 }

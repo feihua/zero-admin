@@ -3,16 +3,16 @@ package dept
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
-	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddDeptLogic
+// AddDeptLogic 添加部门信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:16
@@ -42,12 +42,13 @@ func (l *AddDeptLogic) AddDept(req *types.AddDeptReq) (*types.AddDeptResp, error
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "添加机构信息失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("添加机构失败")
+		logc.Errorf(l.ctx, "添加部门信息失败,参数：%+v,响应：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.AddDeptResp{
 		Code:    "000000",
-		Message: "添加机构成功",
+		Message: "添加部门成功",
 	}, nil
 }

@@ -3,17 +3,18 @@ package user
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
-	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-	"github.com/zeromicro/go-zero/core/logc"
-	"strings"
-
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
+	"strconv"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UserLoginLogic
+// UserLoginLogic 根据用户名和密码登录
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:07
@@ -35,38 +36,29 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 // UserLogin 根据用户名和密码登录
 func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip string) (*types.LoginResp, error) {
 
-	if len(strings.TrimSpace(req.UserName)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
-		logc.Errorf(l.ctx, "用户名或密码不能为空,请求信息失败,参数:%s", req)
-		return nil, errorx.NewDefaultError("用户名或密码不能为空")
-	}
-
 	resp, err := l.svcCtx.UserService.Login(l.ctx, &sysclient.LoginReq{
-		UserName: req.UserName,
+		Account:  req.Account,
 		Password: req.Password,
+		LoginIp:  ip,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据用户名: %s和密码: %s查询用户异常:%s", req.UserName, req.Password, err.Error())
-		return nil, errorx.NewDefaultError("登录失败")
+		logc.Errorf(l.ctx, "用户登录：%+v,异常:%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	//保存登录日志
-	_, _ = l.svcCtx.LoginLogService.LoginLogAdd(l.ctx, &sysclient.LoginLogAddReq{
-		UserName: resp.UserName,
-		Status:   "login",
-		Ip:       ip,
-		CreateBy: resp.UserName,
-	})
-
+	//把能访问的url存在在redis，在middleware中检验
+	key := "zero:mall:token:" + strconv.FormatInt(resp.Id, 10)
+	err = l.svcCtx.Redis.Set(key, strings.Join(resp.ApiUrls, ","))
+	if err != nil {
+		logc.Errorf(l.ctx, "设置用户：%s,权限到redis异常: %+v", resp.UserName, err)
+	}
 	return &types.LoginResp{
-		Code:             "000000",
-		Message:          "登录成功",
-		Status:           resp.Status,
-		CurrentAuthority: resp.CurrentAuthority,
-		Id:               resp.Id,
-		UserName:         resp.UserName,
-		AccessToken:      resp.AccessToken,
-		AccessExpire:     resp.AccessExpire,
-		RefreshAfter:     resp.RefreshAfter,
+		Code:    "000000",
+		Message: "登录成功",
+		Data: types.LoginData{
+			AccessToken: resp.AccessToken,
+		},
 	}, nil
 }

@@ -2,8 +2,10 @@ package deptservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
@@ -32,9 +34,12 @@ func NewDeptDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptDe
 // DeptDelete 删除部门信息
 func (l *DeptDeleteLogic) DeptDelete(in *sysclient.DeptDeleteReq) (*sysclient.DeptDeleteResp, error) {
 	q := query.SysDept
+
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
+
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除部门信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除部门信息失败")
 	}
 
 	return &sysclient.DeptDeleteResp{}, nil

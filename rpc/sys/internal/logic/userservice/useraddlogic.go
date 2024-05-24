@@ -31,6 +31,9 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserAddLo
 }
 
 // UserAdd 新增用户
+// 1.根据用户名称查询用户是否已存在
+// 2.如果用户已存在,则直接返回
+// 3.用户不存在时,则直接添加用户
 func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp, error) {
 	user := &model.SysUser{
 		UserName:   in.UserName,
@@ -61,11 +64,11 @@ func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp
 
 	err = query.SysUserRole.WithContext(l.ctx).Create(&model.SysUserRole{
 		UserID: id,
-		RoleID: in.RoleId,
+		//RoleID: in.RoleId,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "新增用户异常,参数userId:%d,roleId: %d,异常:%s", id, in.RoleId, err.Error())
+		logc.Errorf(l.ctx, "新增用户异常,参数userId:%d,roleId: %d,异常:%s", id, 1, err.Error())
 		return nil, errors.New("添加用户与角色关联异常")
 	}
 	return &sysclient.UserAddResp{}, nil

@@ -30,6 +30,9 @@ func NewJobAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobAddLogi
 }
 
 // JobAdd 添加岗位
+// 1.根据部门名称查询部门是否已存在
+// 2.如果部门已存在,则直接返回
+// 3.部门不存在时,则直接添加部门
 func (l *JobAddLogic) JobAdd(in *sysclient.JobAddReq) (*sysclient.JobAddResp, error) {
 	err := query.SysJob.WithContext(l.ctx).Create(&model.SysJob{
 		JobName:  in.JobName,

@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -42,7 +43,8 @@ func (l *AddJobLogic) AddJob(req *types.AddJobReq) (*types.AddJobResp, error) {
 
 	if err != nil {
 		logc.Errorf(l.ctx, "添加岗位信息失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("添加岗位失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.AddJobResp{

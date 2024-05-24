@@ -16,7 +16,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "deptName": "蜀国test",
+  "deptName": "蜀国test2",
   "parentId": 3,
   "parentIds": [
     3
@@ -36,14 +36,14 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 13,
-  "deptName": "蜀国1",
+  "id": 19,
+  "deptName": "蜀国test2",
   "parentId": 3,
   "parentIds": [
     3
   ],
   "orderNum": 1,
-  "delFlag": 1
+  "delFlag": 0
 }
 
 ### 查询部门列表

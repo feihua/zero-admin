@@ -6,7 +6,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"strconv"
+	"google.golang.org/grpc/status"
 	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -15,7 +15,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UserInfoLogic
+// UserInfoLogic 获取用户信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:01
@@ -45,7 +45,8 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据userId: %d,查询用户信息异常:%s", userId, err.Error())
-		return nil, errorx.NewDefaultError("查询用户信息失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var MenuTree []*types.ListMenuTree
@@ -85,20 +86,14 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 
 	}
 
-	//把能访问的url存在在redis，在middleware中检验
-	key := "zero:mall:token:" + strconv.FormatInt(userId, 10)
-	err = l.svcCtx.Redis.Set(key, strings.Join(resp.BackgroundUrls, ","))
-
-	if err != nil {
-		logc.Errorf(l.ctx, "设置用户：%s,权限到redis异常: %+v", resp.Name, err)
-	}
-
 	return &types.UserInfoResp{
-		Code:        "000000",
-		Message:     "获取个人信息成功",
-		Avatar:      resp.Avatar,
-		Name:        resp.Name,
-		MenuTree:    MenuTree,
-		MenuTreeVue: MenuTreeVue,
+		Code:    "000000",
+		Message: "获取个人信息成功",
+		Data: types.UserInfoData{
+			Avatar:      resp.Avatar,
+			Name:        resp.Name,
+			MenuTree:    MenuTree,
+			MenuTreeVue: MenuTreeVue,
+		},
 	}, nil
 }
