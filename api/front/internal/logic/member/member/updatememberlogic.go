@@ -37,8 +37,6 @@ func (l *UpdateMemberLogic) UpdateMember(req *types.UpdateMemberReq) (resp *type
 		Id:                    req.Id,
 		MemberLevelId:         req.MemberLevelId,
 		Username:              req.Username,
-		Password:              req.Password,
-		Nickname:              req.Nickname,
 		Phone:                 req.Phone,
 		Status:                req.Status,
 		CreateTime:            req.CreateTime,

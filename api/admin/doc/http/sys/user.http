@@ -3,7 +3,7 @@ POST {{host}}/api/sys/user/login
 Content-Type: application/json
 
 {
-  "account": "developer",
+  "account": "admin",
   "password": "123456"
 }
 > {% client.global.set("token", response.body.data.token); %}
@@ -64,7 +64,7 @@ GET {{host}}/api/sys/user/queryUserList
 Authorization: Bearer {{token}}
 
 ### 查询用户与角色的关联
-GET {{host}}/api/sys/user/queryUserRoleList?userId=3
+GET {{host}}/api/sys/user/queryUserRoleList?userId=1
 Authorization: Bearer {{token}}
 
 
