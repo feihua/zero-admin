@@ -2,8 +2,10 @@ package syslogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
@@ -39,11 +41,11 @@ func (l *SysLogListLogic) SysLogList(in *sysclient.SysLogListReq) (*sysclient.Sy
 		q = q.Where(query.SysOperateLog.UserName.Like("%" + in.Method + "%"))
 	}
 
-	offset := (in.Current - 1) * in.PageSize
-	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "查询操作日志列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询操作日志列表失败")
 	}
 	var list []*sysclient.SysLogListData
 	for _, log := range result {

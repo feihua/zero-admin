@@ -2,6 +2,7 @@ package roleservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -37,7 +38,7 @@ func (l *QueryRoleMenuListLogic) QueryRoleMenuList(in *sysclient.QueryRoleMenuLi
 	menus, err := query.SysMenu.WithContext(l.ctx).Find()
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单列表失败,异常:%s", err.Error())
-		return nil, err
+		return nil, errors.New("查询菜单列表失败")
 	}
 
 	var menuList []*sysclient.MenuListData

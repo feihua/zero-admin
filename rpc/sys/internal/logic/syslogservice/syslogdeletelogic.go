@@ -2,8 +2,10 @@ package syslogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
@@ -34,7 +36,8 @@ func (l *SysLogDeleteLogic) SysLogDelete(in *sysclient.SysLogDeleteReq) (*syscli
 	q := query.SysOperateLog
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除操作日志失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除操作日志志失败")
 	}
 
 	return &sysclient.SysLogDeleteResp{}, nil

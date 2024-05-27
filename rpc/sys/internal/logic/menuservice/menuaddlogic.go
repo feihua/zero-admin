@@ -76,7 +76,7 @@ func (l *MenuAddLogic) MenuAdd(in *sysclient.MenuAddReq) (*sysclient.MenuAddResp
 
 	if err != nil {
 		logc.Errorf(l.ctx, "新增菜单信息失败,参数:%+v,异常:%s", menu, err.Error())
-		return nil, err
+		return nil, errors.New("新增菜单信息失败")
 	}
 
 	return &sysclient.MenuAddResp{}, nil

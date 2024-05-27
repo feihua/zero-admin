@@ -834,7 +834,6 @@ type ListDeptResp struct {
 	Message string          `json:"message"`
 	Data    []*ListDeptData `json:"data"`
 	Success bool            `json:"success"`
-	Total   int64           `json:"total"`
 }
 
 type ListDictData struct {

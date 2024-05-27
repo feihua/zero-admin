@@ -2,6 +2,7 @@ package roleservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -45,7 +46,7 @@ func (l *RoleListLogic) RoleList(in *sysclient.RoleListReq) (*sysclient.RoleList
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询角色列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		return nil, errors.New("查询角色列表信息失败")
 	}
 
 	var list []*sysclient.RoleListData

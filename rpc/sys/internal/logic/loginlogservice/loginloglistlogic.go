@@ -2,7 +2,7 @@ package loginlogservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -45,9 +45,8 @@ func (l *LoginLogListLogic) LoginLogList(in *sysclient.LoginLogListReq) (*syscli
 	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
 
 	if err != nil {
-		in, _ := json.Marshal(in)
 		logc.Errorf(l.ctx, "查询登录记录列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		return nil, errors.New("查询登录记录列表信息失败")
 	}
 
 	var list []*sysclient.LoginLogListData

@@ -2,6 +2,7 @@ package userservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -49,7 +50,7 @@ func (l *UserListLogic) UserList(in *sysclient.UserListReq) (*sysclient.UserList
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		return nil, errors.New("查询用户列表信息失败")
 	}
 
 	var list []*sysclient.UserListData

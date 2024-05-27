@@ -2,6 +2,7 @@ package roleservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -32,6 +33,8 @@ func NewUpdateMenuRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // UpdateMenuRoleList 更新用户与角色的关联
+// 1.删除角色与菜单的关联
+// 2.添加角色与菜单的关联
 func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateMenuRoleReq) (*sysclient.UpdateMenuRoleResp, error) {
 	//id为1的是系统预留超级管理员角色,不用关联
 	if in.RoleId == 1 {
@@ -41,6 +44,7 @@ func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateMenuRol
 	err := query.Q.Transaction(func(tx *query.Query) error {
 
 		q := tx.SysRoleMenu
+		// 1.删除角色与菜单的关联
 		if _, err := q.WithContext(l.ctx).Where(q.RoleID.Eq(in.RoleId)).Delete(); err != nil {
 			logc.Errorf(l.ctx, "删除角色与菜单的关联失败,参数:%+v,异常:%s", in, err.Error())
 			return err
@@ -54,6 +58,7 @@ func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateMenuRol
 			})
 		}
 
+		// 2.添加角色与菜单的关联
 		if err := q.WithContext(l.ctx).CreateInBatches(roleMenus, len(roleMenus)); err != nil {
 			logc.Errorf(l.ctx, "添加角色与菜单的关联失败,参数:%+v,异常:%s", in, err.Error())
 			return err
@@ -64,7 +69,7 @@ func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateMenuRol
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新角色与菜单的关联失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		return nil, errors.New("更新角色与菜单的关联失败")
 	}
 
 	return &sysclient.UpdateMenuRoleResp{}, nil

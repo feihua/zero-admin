@@ -471,8 +471,7 @@ message DeptListData {
 }
 
 message DeptListResp{
-  int64 total = 1;
-  repeated  DeptListData list = 2;
+  repeated  DeptListData list = 1;
 }
 message DeptUpdateReq {
   int64 id = 1;

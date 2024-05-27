@@ -66,7 +66,6 @@ func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleLi
 	count, _ := q.WithContext(l.ctx).Where(q.RoleID.Eq(1), q.UserID.Eq(in.UserId)).Count()
 	if count == 0 {
 		var ids []int64
-		q := query.SysUserRole
 		_ = q.WithContext(l.ctx).Select(q.RoleID).Where(q.UserID.Eq(in.UserId)).Scan(&ids)
 		roleIds = ids
 	}

@@ -7,11 +7,10 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UserDeleteLogic
+// UserDeleteLogic 删除用户
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:20
@@ -31,32 +30,39 @@ func NewUserDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserDe
 }
 
 // UserDelete 删除用户(id为1是系统预留超级管理员用户,不能删除)
+// 1.排除超级管理员
+// 2.删除用户
+// 3.删除用户与角色的关联
 func (l *UserDeleteLogic) UserDelete(in *sysclient.UserDeleteReq) (*sysclient.UserDeleteResp, error) {
-
-	//判断是否包含超级管理员
-	var flag = false
-	for id := range in.Ids {
-		if id == 1 {
-			flag = true
-			break
+	q := query.SysUserRole
+	// 1.排除超级管理员
+	var userIds []int64
+	for _, userId := range in.Ids {
+		count, _ := q.WithContext(l.ctx).Where(q.RoleID.Eq(1), q.UserID.Eq(userId)).Count()
+		if count == 0 {
+			userIds = append(userIds, userId)
 		}
 	}
 
-	//id为1是系统预留超级管理员用户,不能删除
-	if flag {
-		logc.Errorf(l.ctx, "删除用户异常,参数userId:%+v,异常:%s", in.Ids, "id为1是系统预留超级管理员用户,不能删除")
-		return nil, errors.New("删除用户异常")
-	}
+	err := query.Q.Transaction(func(tx *query.Query) error {
+		// 2.删除用户
+		user := tx.SysUser
+		if _, err := user.WithContext(l.ctx).Where(user.ID.In(userIds...)).Delete(); err != nil {
+			return err
+		}
 
-	q := query.SysUser
-	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
+		// 3.删除用户与角色的关联
+		role := tx.SysUserRole
+		if _, err := role.WithContext(l.ctx).Where(role.UserID.In(userIds...)).Delete(); err != nil {
+			return err
+		}
+
+		return nil
+	})
+
 	if err != nil {
-		return nil, err
-	}
-
-	//删除用户与角色的关联
-	for _, id := range in.Ids {
-		_, _ = query.SysUserRole.WithContext(l.ctx).Where(query.SysUserRole.UserID.Eq(id)).Delete()
+		logc.Errorf(l.ctx, "删除用户异常,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除用户异常")
 	}
 
 	return &sysclient.UserDeleteResp{}, nil

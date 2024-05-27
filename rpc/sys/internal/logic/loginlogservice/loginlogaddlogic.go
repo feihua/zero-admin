@@ -2,9 +2,11 @@ package loginlogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -33,14 +35,16 @@ func NewLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Login
 
 // LoginLogAdd 添加登录日志
 func (l *LoginLogAddLogic) LoginLogAdd(in *sysclient.LoginLogAddReq) (*sysclient.LoginLogAddResp, error) {
-	err := query.SysLoginLog.WithContext(l.ctx).Create(&model.SysLoginLog{
+	loginLog := &model.SysLoginLog{
 		LoginName:   in.UserName,
 		LoginStatus: in.Status,
 		LoginIP:     in.Ip,
 		LoginTime:   time.Now(),
-	})
+	}
+	err := query.SysLoginLog.WithContext(l.ctx).Create(loginLog)
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加登录日志失败,参数:%+v,异常:%s", loginLog, err.Error())
+		return nil, errors.New("添加登录日志失败")
 	}
 
 	return &sysclient.LoginLogAddResp{}, nil

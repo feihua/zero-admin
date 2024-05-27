@@ -2,6 +2,7 @@ package menuservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -37,7 +38,7 @@ func (l *MenuListLogic) MenuList(in *sysclient.MenuListReq) (*sysclient.MenuList
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		return nil, errors.New("查询菜单列表信息失败")
 	}
 	var list []*sysclient.MenuListData
 	for _, menu := range result {

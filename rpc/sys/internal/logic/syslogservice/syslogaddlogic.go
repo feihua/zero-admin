@@ -2,9 +2,11 @@ package syslogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -33,7 +35,7 @@ func NewSysLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLogA
 
 // SysLogAdd 添加操作日志
 func (l *SysLogAddLogic) SysLogAdd(in *sysclient.SysLogAddReq) (*sysclient.SysLogAddResp, error) {
-	err := query.SysOperateLog.WithContext(l.ctx).Create(&model.SysOperateLog{
+	sysLog := &model.SysOperateLog{
 		UserName:       in.UserName,
 		Operation:      in.Operation,
 		RequestMethod:  in.Method,
@@ -42,9 +44,12 @@ func (l *SysLogAddLogic) SysLogAdd(in *sysclient.SysLogAddReq) (*sysclient.SysLo
 		UseTime:        in.Time,
 		OperationIP:    in.Ip,
 		OperationTime:  time.Now(),
-	})
+	}
+
+	err := query.SysOperateLog.WithContext(l.ctx).Create(sysLog)
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加操作日志失败,参数:%+v,异常:%s", sysLog, err.Error())
+		return nil, errors.New("添加操作日志失败")
 	}
 
 	return &sysclient.SysLogAddResp{}, nil

@@ -2,8 +2,10 @@ package dictservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
@@ -34,7 +36,8 @@ func (l *DictDeleteLogic) DictDelete(in *sysclient.DictDeleteReq) (*sysclient.Di
 	q := query.SysDict
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除字典信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除字典信息失败")
 	}
 
 	return &sysclient.DictDeleteResp{}, nil

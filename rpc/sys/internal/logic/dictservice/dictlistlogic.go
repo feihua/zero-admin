@@ -2,6 +2,7 @@ package dictservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -49,7 +50,7 @@ func (l *DictListLogic) DictList(in *sysclient.DictListReq) (*sysclient.DictList
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询字典列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		return nil, errors.New("查询字典列表信息失败")
 	}
 	var list []*sysclient.DictListData
 	for _, dict := range result {

@@ -64,6 +64,5 @@ func (l *QueryDeptListLogic) QueryDeptList(req *types.ListDeptReq) (*types.ListD
 		Message: "查询部门成功",
 		Data:    list,
 		Success: true,
-		Total:   resp.Total,
 	}, nil
 }

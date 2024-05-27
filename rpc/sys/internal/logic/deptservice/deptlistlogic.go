@@ -48,14 +48,6 @@ func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptList
 	var list []*sysclient.DeptListData
 
 	for _, dept := range result {
-		var parentIds []int64
-		if len(dept.ParentIds) > 0 {
-			for _, i := range strings.Split(dept.ParentIds, ",") {
-				p, _ := strconv.ParseInt(i, 10, 64)
-				parentIds = append(parentIds, p)
-			}
-		}
-
 		list = append(list, &sysclient.DeptListData{
 			Id:         dept.ID,
 			DeptName:   dept.DeptName,
@@ -66,14 +58,25 @@ func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptList
 			UpdateBy:   dept.UpdateBy,
 			UpdateTime: common.TimeToString(dept.UpdateTime),
 			DelFlag:    dept.DelFlag,
-			ParentIds:  parentIds,
+			ParentIds:  getParentIds(dept.ParentIds),
 		})
 	}
 
 	logc.Infof(l.ctx, "查询部门列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.DeptListResp{
-		Total: 0,
-		List:  list,
+		List: list,
 	}, nil
 
+}
+
+// 获取父级ids
+func getParentIds(parentIdsStr string) []int64 {
+	var parentIds []int64
+	if len(parentIdsStr) > 0 {
+		for _, i := range strings.Split(parentIdsStr, ",") {
+			p, _ := strconv.ParseInt(i, 10, 64)
+			parentIds = append(parentIds, p)
+		}
+	}
+	return parentIds
 }
