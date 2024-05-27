@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddRoleLogic
+// AddRoleLogic 新增角色
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 15:34

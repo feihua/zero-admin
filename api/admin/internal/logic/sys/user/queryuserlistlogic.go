@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryUserListLogic
+// QueryUserListLogic 查询用户列表信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:04
@@ -46,7 +46,7 @@ func (l *QueryUserListLogic) QueryUserList(req *types.ListUserReq) (*types.ListU
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,查询用户列表异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询用户列表,参数: %+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

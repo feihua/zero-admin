@@ -29,9 +29,7 @@ func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationLi
 	q := relation.WithContext(l.ctx)
 	q = q.Where(relation.FlashPromotionID.Eq(in.FlashPromotionId), relation.FlashPromotionSessionID.Eq(in.FlashPromotionSessionId))
 
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询限时购与产品关糸列表信息失败,参数：%+v,异常:%s", in, err.Error())

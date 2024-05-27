@@ -52,9 +52,7 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(in *smsclient.HomeAdvertiseLi
 		endTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
 		q = q.Where(query.SmsHomeAdvertise.EndTime.Lte(endTime))
 	}
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询首页广告列表信息失败,参数：%+v,异常:%s", in, err.Error())

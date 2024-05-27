@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// StatisticsLoginLogLogic
+// StatisticsLoginLogLogic 统计后台用户登录
 /*
 Author: LiuFeiHua
 Date: 2024/01/15 11:51

@@ -33,10 +33,7 @@ func NewMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuList
 
 // MenuList 菜单列表
 func (l *MenuListLogic) MenuList(in *sysclient.MenuListReq) (*sysclient.MenuListResp, error) {
-	q := query.SysMenu.WithContext(l.ctx)
-
-	result, err := q.Find()
-	count, err := q.Count()
+	result, err := query.SysMenu.WithContext(l.ctx).Find()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单列表信息失败,参数:%+v,异常:%s", in, err.Error())
@@ -68,7 +65,7 @@ func (l *MenuListLogic) MenuList(in *sysclient.MenuListReq) (*sysclient.MenuList
 
 	logc.Infof(l.ctx, "查询菜单列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.MenuListResp{
-		Total: count,
+		Total: 0,
 		List:  list,
 	}, nil
 

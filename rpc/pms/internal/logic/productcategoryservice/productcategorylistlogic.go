@@ -40,9 +40,7 @@ func (l *ProductCategoryListLogic) ProductCategoryList(in *pmsclient.ProductCate
 		q = q.Where(query.PmsProductCategory.ShowStatus.Eq(in.ShowStatus))
 	}
 
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询商品类别列表信息失败,参数：%+v,异常:%s", in, err.Error())

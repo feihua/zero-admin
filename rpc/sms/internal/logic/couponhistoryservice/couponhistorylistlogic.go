@@ -46,9 +46,7 @@ func (l *CouponHistoryListLogic) CouponHistoryList(in *smsclient.CouponHistoryLi
 		q = q.Where(query.SmsCouponHistory.UseStatus.Eq(in.UseStatus))
 	}
 
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据优惠券id，使用状态，订单编号分页获取领取记录失败,参数：%+v,异常:%s", in, err.Error())

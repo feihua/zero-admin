@@ -54,9 +54,7 @@ func (l *FlashPromotionListLogic) FlashPromotionList(in *smsclient.FlashPromotio
 	//	if len(in.EndDate) > 0 {
 	//		where = where + fmt.Sprintf(" AND end_date <= '%s'", in.EndDate)
 	//	}
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询限时购列表信息失败,参数：%+v,异常:%s", in, err.Error())

@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteLoginLogLogic
+// DeleteLoginLogLogic 删除登录日志
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:19
@@ -39,7 +39,7 @@ func (l *DeleteLoginLogLogic) DeleteLoginLog(req *types.DeleteLoginLogReq) (*typ
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据LoginLog id: %+v,删除登录日志异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "根据LoginLog ids: %+v,删除登录日志异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

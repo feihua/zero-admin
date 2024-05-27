@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryDictListLogic
+// QueryDictListLogic 查询字典列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:17
@@ -31,7 +31,7 @@ func NewQueryDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 	}
 }
 
-// QueryDictList 字典列表
+// QueryDictList 查询字典列表
 func (l *QueryDictListLogic) QueryDictList(req *types.ListDictReq) (*types.ListDictResp, error) {
 	resp, err := l.svcCtx.DictService.DictList(l.ctx, &sysclient.DictListReq{
 		Current:  req.Current,
@@ -43,7 +43,7 @@ func (l *QueryDictListLogic) QueryDictList(req *types.ListDictReq) (*types.ListD
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,查询字典列表异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询字典列表,参数: %+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

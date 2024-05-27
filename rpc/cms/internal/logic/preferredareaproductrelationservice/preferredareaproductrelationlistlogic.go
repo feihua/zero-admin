@@ -27,8 +27,8 @@ func NewPreferredAreaProductRelationListLogic(ctx context.Context, svcCtx *svc.S
 
 func (l *PreferredAreaProductRelationListLogic) PreferredAreaProductRelationList(in *cmsclient.PreferredAreaProductRelationListReq) (*cmsclient.PreferredAreaProductRelationListResp, error) {
 	var ids []int64
-	productRelation := query.CmsPreferredAreaProductRelation
-	err := productRelation.WithContext(l.ctx).Select(productRelation.PreferredAreaID).Where(productRelation.ProductID.Eq(in.ProductId)).Scan(&ids)
+	q := query.CmsPreferredAreaProductRelation
+	err := q.WithContext(l.ctx).Select(q.PreferredAreaID).Where(q.ProductID.Eq(in.ProductId)).Scan(&ids)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询关联优选列表信息失败,参数:%+v,异常:%s", in, err.Error())

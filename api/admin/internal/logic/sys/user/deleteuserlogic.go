@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteUserLogic
+// DeleteUserLogic 删除用户
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 13:59

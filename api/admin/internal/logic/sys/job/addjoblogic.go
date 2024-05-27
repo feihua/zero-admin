@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddJobLogic
+// AddJobLogic 添加岗位信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:18

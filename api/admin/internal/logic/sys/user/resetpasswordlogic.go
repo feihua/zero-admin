@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// ReSetPasswordLogic
+// ReSetPasswordLogic 重置用户密码
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 13:54

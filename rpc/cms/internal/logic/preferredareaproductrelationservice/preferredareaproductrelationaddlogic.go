@@ -33,8 +33,8 @@ func NewPreferredAreaProductRelationAddLogic(ctx context.Context, svcCtx *svc.Se
 // PreferredAreaProductRelationAdd 添加优选商品关联
 func (l *PreferredAreaProductRelationAddLogic) PreferredAreaProductRelationAdd(in *cmsclient.PreferredAreaProductRelationAddReq) (*cmsclient.PreferredAreaProductRelationAddResp, error) {
 	//1.先删除优选商品的关联
-	productRelation := query.CmsPreferredAreaProductRelation
-	_, err := productRelation.WithContext(l.ctx).Where(productRelation.ProductID.Eq(in.ProductId)).Delete()
+	q := query.CmsPreferredAreaProductRelation
+	_, err := q.WithContext(l.ctx).Where(q.ProductID.Eq(in.ProductId)).Delete()
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (l *PreferredAreaProductRelationAddLogic) PreferredAreaProductRelationAdd(i
 		})
 	}
 
-	err = productRelation.WithContext(l.ctx).CreateInBatches(productRelations, len(productRelations))
+	err = q.WithContext(l.ctx).CreateInBatches(productRelations, len(productRelations))
 	if err != nil {
 		return nil, err
 	}

@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryJobListLogic
+// QueryJobListLogic 岗位信息列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:19
@@ -42,7 +42,7 @@ func (l *QueryJobListLogic) QueryJobList(req *types.ListJobReq) (*types.ListJobR
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,查询岗位列表异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询岗位列表,参数: %+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

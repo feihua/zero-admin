@@ -33,9 +33,7 @@ func NewGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(in *umsclient.GrowthChangeHistoryListReq) (*umsclient.GrowthChangeHistoryListResp, error) {
 	history := query.UmsGrowthChangeHistory
 	q := history.WithContext(l.ctx).Where(history.MemberID.Eq(in.MemberId))
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询成长值变化历史记录列表信息失败,参数:%+v,异常:%s", in, err.Error())

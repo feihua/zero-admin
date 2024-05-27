@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteOperateLogLogic
+// DeleteOperateLogLogic 删除操作日志
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:20
@@ -39,7 +39,7 @@ func (l *DeleteOperateLogLogic) DeleteOperateLog(req *types.DeleteSysLogReq) (*t
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据OperateLog id: %+v,删除操作日志异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "根据OperateLog ids: %+v,删除操作日志异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

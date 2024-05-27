@@ -55,9 +55,7 @@ func (l *CouponListLogic) CouponList(in *smsclient.CouponListReq) (*smsclient.Co
 		q = q.Where(query.SmsCoupon.EndTime.Lte(endTime))
 	}
 
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询优惠券列表信息失败,参数：%+v,异常:%s", in, err.Error())

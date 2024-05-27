@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddMenuLogic
+// AddMenuLogic 新增菜单
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 15:24

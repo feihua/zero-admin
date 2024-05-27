@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DictListLogic
+// DictListLogic 查询字典列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:03
@@ -32,7 +32,7 @@ func NewDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictList
 	}
 }
 
-// DictList 字典列表
+// DictList 查询字典列表
 func (l *DictListLogic) DictList(in *sysclient.DictListReq) (*sysclient.DictListResp, error) {
 	q := query.SysDict.WithContext(l.ctx)
 	if len(in.Type) > 0 {
@@ -47,8 +47,7 @@ func (l *DictListLogic) DictList(in *sysclient.DictListReq) (*sysclient.DictList
 	}
 
 	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
 
 	if err != nil {
 		in, _ := json.Marshal(in)

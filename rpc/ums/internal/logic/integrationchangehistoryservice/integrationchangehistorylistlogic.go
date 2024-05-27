@@ -33,9 +33,7 @@ func NewIntegrationChangeHistoryListLogic(ctx context.Context, svcCtx *svc.Servi
 func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(in *umsclient.IntegrationChangeHistoryListReq) (*umsclient.IntegrationChangeHistoryListResp, error) {
 	history := query.UmsIntegrationChangeHistory
 	q := history.WithContext(l.ctx).Where(history.MemberID.Eq(in.MemberId))
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询积分变化历史记录列表信息失败,参数:%+v,异常:%s", in, err.Error())

@@ -44,8 +44,7 @@ func (l *PreferredAreaListLogic) PreferredAreaList(in *cmsclient.PreferredAreaLi
 		q = q.Where(query.CmsPreferredArea.ShowStatus.Eq(in.ShowStatus))
 	}
 
-	result, err := q.Offset(int((in.Current - 1) * in.PageSize)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询商品优选列表信息失败,参数:%+v,异常:%s", in, err.Error())

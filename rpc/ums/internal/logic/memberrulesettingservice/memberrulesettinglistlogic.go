@@ -33,9 +33,7 @@ func NewMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 // MemberRuleSettingList 查询会员积分成长规则
 func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *umsclient.MemberRuleSettingListReq) (*umsclient.MemberRuleSettingListResp, error) {
 	q := query.UmsMemberRuleSetting.WithContext(l.ctx)
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询积分规则列表信息失败,参数：%+v,异常:%s", in, err.Error())

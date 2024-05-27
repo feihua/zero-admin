@@ -43,9 +43,7 @@ func (l *BrandListLogic) BrandList(in *pmsclient.BrandListReq) (*pmsclient.Brand
 		q = q.Where(query.PmsBrand.ShowStatus.Eq(in.ShowStatus))
 	}
 
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		in, _ := json.Marshal(in)

@@ -40,9 +40,7 @@ func (l *HomeNewProductListLogic) HomeNewProductList(in *smsclient.HomeNewProduc
 		q = q.Where(query.SmsHomeNewProduct.RecommendStatus.Eq(in.RecommendStatus))
 	}
 
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询首页新鲜好物列表信息失败,参数：%+v,异常:%s", in, err.Error())

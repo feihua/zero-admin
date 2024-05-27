@@ -6,12 +6,13 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryOperateLogListLogic
+// QueryOperateLogListLogic 查询操作日志列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:20
@@ -30,7 +31,7 @@ func NewQueryOperateLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// QueryOperateLogList 操作日志列表
+// QueryOperateLogList 查询操作日志列表
 func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.ListSysLogReq) (*types.ListSysLogResp, error) {
 	resp, err := l.svcCtx.SysLogService.SysLogList(l.ctx, &sysclient.SysLogListReq{
 		Current:  req.Current,
@@ -40,6 +41,7 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.ListSysLogReq)
 	})
 
 	if err != nil {
+		logc.Errorf(l.ctx, "查询操作日志列表,参数: %+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

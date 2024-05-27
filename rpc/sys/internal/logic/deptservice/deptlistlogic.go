@@ -15,7 +15,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeptListLogic
+// DeptListLogic 查询部门信息列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:00
@@ -34,12 +34,11 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptList
 	}
 }
 
-// DeptList 部门信息列表
+// DeptList 查询部门信息列表
 func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptListResp, error) {
 	q := query.SysDept.WithContext(l.ctx)
 
 	result, err := q.Find()
-	count, err := q.Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询部门列表信息失败,参数:%+v,异常:%s", in, err.Error())
@@ -73,7 +72,7 @@ func (l *DeptListLogic) DeptList(in *sysclient.DeptListReq) (*sysclient.DeptList
 
 	logc.Infof(l.ctx, "查询部门列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.DeptListResp{
-		Total: count,
+		Total: 0,
 		List:  list,
 	}, nil
 

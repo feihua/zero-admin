@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateUserLogic
+// UpdateUserLogic 更新用户信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:05

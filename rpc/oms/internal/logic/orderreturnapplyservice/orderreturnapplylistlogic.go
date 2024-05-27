@@ -60,9 +60,7 @@ func (l *OrderReturnApplyListLogic) OrderReturnApplyList(in *omsclient.OrderRetu
 	//		where = where + fmt.Sprintf(" AND date_format(handle_time,'%%Y-%%m-%%d') = '%s'", strings.Split(in.HandleTime, " ")[0])
 	//	}
 
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		in, _ := json.Marshal(in)

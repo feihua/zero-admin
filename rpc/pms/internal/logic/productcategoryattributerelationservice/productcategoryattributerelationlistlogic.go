@@ -27,9 +27,7 @@ func NewProductCategoryAttributeRelationListLogic(ctx context.Context, svcCtx *s
 func (l *ProductCategoryAttributeRelationListLogic) ProductCategoryAttributeRelationList(in *pmsclient.ProductCategoryAttributeRelationListReq) (*pmsclient.ProductCategoryAttributeRelationListResp, error) {
 	q := query.PmsProductCategoryAttributeRelation.WithContext(l.ctx)
 
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询产品分类和属性关糸列表信息失败,参数：%+v,异常:%s", in, err.Error())

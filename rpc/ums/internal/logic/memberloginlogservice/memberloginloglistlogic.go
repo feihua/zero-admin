@@ -33,9 +33,8 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 func (l *MemberLoginLogListLogic) MemberLoginLogList(in *umsclient.MemberLoginLogListReq) (*umsclient.MemberLoginLogListResp, error) {
 	loginLog := query.UmsMemberLoginLog
 	q := loginLog.WithContext(l.ctx).Where(loginLog.MemberID.Eq(in.MemberId))
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询会员登录记录列表信息失败,参数:%+v,异常:%s", in, err.Error())

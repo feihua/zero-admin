@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeptDeleteLogic
+// DeptDeleteLogic 删除部门信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:00

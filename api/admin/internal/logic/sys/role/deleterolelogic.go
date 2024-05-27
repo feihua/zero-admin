@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteRoleLogic
+// DeleteRoleLogic 删除角色
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 15:37
@@ -40,7 +40,7 @@ func (l *DeleteRoleLogic) DeleteRole(req *types.DeleteRoleReq) (*types.DeleteRol
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据roleId: %+v,删除角色异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "根据roleIds: %+v,删除角色异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryRoleListLogic
+// QueryRoleListLogic 查询角色列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 15:39
@@ -32,7 +32,7 @@ func NewQueryRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 	}
 }
 
-// QueryRoleList 角色列表
+// QueryRoleList 查询角色列表
 func (l *QueryRoleListLogic) QueryRoleList(req *types.ListRoleReq) (*types.ListRoleResp, error) {
 	resp, err := l.svcCtx.RoleService.RoleList(l.ctx, &sysclient.RoleListReq{
 		Current:  req.Current,
@@ -42,7 +42,7 @@ func (l *QueryRoleListLogic) QueryRoleList(req *types.ListRoleReq) (*types.ListR
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,查询角色列表异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询角色列表,参数: %+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

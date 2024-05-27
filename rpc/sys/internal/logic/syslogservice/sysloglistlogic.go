@@ -40,8 +40,7 @@ func (l *SysLogListLogic) SysLogList(in *sysclient.SysLogListReq) (*sysclient.Sy
 	}
 
 	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
 
 	if err != nil {
 		return nil, err

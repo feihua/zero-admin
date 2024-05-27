@@ -38,9 +38,8 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(in *smsclient.H
 	if in.RecommendStatus != 2 {
 		q = q.Where(query.SmsHomeRecommendSubject.RecommendStatus.Eq(in.RecommendStatus))
 	}
-	offset := (in.Current - 1) * in.PageSize
-	subjects, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询人气专题推荐列表信息失败,参数:%+v,异常:%s", in, err.Error())
@@ -48,7 +47,7 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(in *smsclient.H
 	}
 
 	var list []*smsclient.HomeRecommendSubjectListData
-	for _, item := range subjects {
+	for _, item := range result {
 		list = append(list, &smsclient.HomeRecommendSubjectListData{
 			Id:              item.ID,
 			SubjectId:       item.SubjectID,

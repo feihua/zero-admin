@@ -14,6 +14,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UploadLogic 文件上传
+/*
+Author: LiuFeiHua
+Date: 2024/5/27 9:23
+*/
 type UploadLogic struct {
 	logx.Logger
 	ctx    context.Context

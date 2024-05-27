@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryLoginLogListLogic
+// QueryLoginLogListLogic 查询登录日志列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:20
@@ -31,7 +31,7 @@ func NewQueryLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-// QueryLoginLogList 登录日志列表
+// QueryLoginLogList 查询登录日志列表
 func (l *QueryLoginLogListLogic) QueryLoginLogList(req *types.ListLoginLogReq) (*types.ListLoginLogResp, error) {
 	resp, err := l.svcCtx.LoginLogService.LoginLogList(l.ctx, &sysclient.LoginLogListReq{
 		Current:  req.Current,
@@ -41,7 +41,7 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(req *types.ListLoginLogReq) (
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,查询登录日志列表异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询登录日志列表,参数: %+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

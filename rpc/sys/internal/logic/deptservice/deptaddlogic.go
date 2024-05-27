@@ -15,7 +15,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeptAddLogic
+// DeptAddLogic 添加部门信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 16:59

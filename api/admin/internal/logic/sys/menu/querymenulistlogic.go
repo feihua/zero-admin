@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMenuListLogic
+// QueryMenuListLogic 查询菜单列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 15:27
@@ -32,7 +32,7 @@ func NewQueryMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 	}
 }
 
-// QueryMenuList 菜单列表
+// QueryMenuList 查询菜单列表
 func (l *QueryMenuListLogic) QueryMenuList(req *types.ListMenuReq) (*types.ListMenuResp, error) {
 	resp, err := l.svcCtx.MenuService.MenuList(l.ctx, &sysclient.MenuListReq{
 		Name: req.Name,
@@ -40,7 +40,7 @@ func (l *QueryMenuListLogic) QueryMenuList(req *types.ListMenuReq) (*types.ListM
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,查询菜单列表异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询菜单列表,参数: %+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

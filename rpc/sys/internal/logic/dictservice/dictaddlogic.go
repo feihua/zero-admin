@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DictAddLogic
+// DictAddLogic 添加字典信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:02

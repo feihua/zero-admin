@@ -27,9 +27,7 @@ func NewAlbumPicListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Albu
 func (l *AlbumPicListLogic) AlbumPicList(in *pmsclient.AlbumPicListReq) (*pmsclient.AlbumPicListResp, error) {
 	q := query.PmsAlbumPic.WithContext(l.ctx)
 
-	offset := (in.Current - 1) * in.PageSize
-	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
-	count, err := q.Count()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询相册图片列表信息失败,参数：%+v,异常:%s", in, err.Error())

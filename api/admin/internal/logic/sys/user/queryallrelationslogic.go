@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryAllRelationsLogic
+// QueryAllRelationsLogic 查询用户的角色,单位,岗位的关系
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 13:39
@@ -32,7 +32,7 @@ func NewQueryAllRelationsLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-// QueryAllRelations //查询用户的角色,单位,岗位的关系
+// QueryAllRelations 查询用户的角色,单位,岗位的关系
 func (l *QueryAllRelationsLogic) QueryAllRelations(req *types.QueryAllRelationsReq) (resp *types.QueryAllRelationsResp, err error) {
 	//1.查询角色列表
 	roleListResp, err := l.svcCtx.RoleService.RoleList(l.ctx, &sysclient.RoleListReq{

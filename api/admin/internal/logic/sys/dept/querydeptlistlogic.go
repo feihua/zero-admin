@@ -30,14 +30,14 @@ func NewQueryDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 	}
 }
 
-// QueryDeptList 部门列表
+// QueryDeptList 查询部门列表
 func (l *QueryDeptListLogic) QueryDeptList(req *types.ListDeptReq) (*types.ListDeptResp, error) {
 	resp, err := l.svcCtx.DeptService.DeptList(l.ctx, &sysclient.DeptListReq{
 		DeptName: req.Name,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,查询部门列表异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询部门列表,参数: %+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
