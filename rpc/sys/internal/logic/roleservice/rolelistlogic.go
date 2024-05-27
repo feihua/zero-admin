@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// RoleListLogic
+// RoleListLogic 查询角色列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 16:06
@@ -29,7 +29,7 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleList
 	}
 }
 
-// RoleList 角色列表
+// RoleList 查询角色列表
 func (l *RoleListLogic) RoleList(in *sysclient.RoleListReq) (*sysclient.RoleListResp, error) {
 	q := query.SysRole.WithContext(l.ctx)
 	if len(in.Name) > 0 {
@@ -53,7 +53,7 @@ func (l *RoleListLogic) RoleList(in *sysclient.RoleListReq) (*sysclient.RoleList
 		list = append(list, &sysclient.RoleListData{
 			Id:         role.ID,
 			Name:       role.Name,
-			Remark:     *role.Remark,
+			Remark:     role.Remark,
 			CreateBy:   role.CreateBy,
 			CreateTime: role.CreateTime.Format("2006-01-02 15:04:05"),
 			UpdateBy:   role.UpdateBy,

@@ -3,7 +3,7 @@ create table sys_role
     id          bigint auto_increment comment '编号'
         primary key,
     name        varchar(100)                          not null comment '角色名称',
-    remark      varchar(100)                          null comment '备注',
+    remark      varchar(100) default ''                not null comment '备注',
     create_by   varchar(50)                           not null comment '创建者',
     create_time timestamp   default CURRENT_TIMESTAMP not null comment '创建时间',
     update_by   varchar(50) default ''                not null comment '更新者',

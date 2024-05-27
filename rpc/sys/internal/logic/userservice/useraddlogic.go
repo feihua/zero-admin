@@ -3,6 +3,7 @@ package userservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UserAddLogic
+// UserAddLogic 新增用户
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:13
@@ -35,6 +36,23 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserAddLo
 // 2.如果用户已存在,则直接返回
 // 3.用户不存在时,则直接添加用户
 func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp, error) {
+	q := query.SysUser.WithContext(l.ctx)
+	// 1.根据用户名称查询用户是否已存在
+	name := in.UserName
+	count, err := q.Where(query.SysDept.DeptName.Eq(name)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据用户名称：%s,查询用户信息失败,异常:%s", name, err.Error())
+		return nil, errors.New(fmt.Sprintf("查询用户信息失败"))
+	}
+
+	//2.如果用户已存在,则直接返回
+	if count > 0 {
+		logc.Errorf(l.ctx, "用户信息已存在：%+v", in)
+		return nil, errors.New(fmt.Sprintf("用户：%s,已存在", name))
+	}
+
+	//3.用户不存在时,则直接添加用户
 	user := &model.SysUser{
 		UserName:   in.UserName,
 		NickName:   in.NickName,
@@ -49,27 +67,13 @@ func (l *UserAddLogic) UserAdd(in *sysclient.UserAddReq) (*sysclient.UserAddResp
 		DelFlag:    1,
 		JobID:      in.JobId,
 	}
-	err := query.SysUser.WithContext(l.ctx).Create(user)
+
+	err = q.Create(user)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "新增用户异常,参数:%+v,异常:%s", in, err.Error())
+		logc.Errorf(l.ctx, "新增用户异常,参数:%+v,异常:%s", user, err.Error())
 		return nil, errors.New("新增用户异常")
 	}
 
-	//获取新增用户的id
-	id := user.ID
-
-	//新增用户的时候,要删除它的关联信息(预防之前的数据导致查询权限的时候出问题)
-	_, _ = query.SysUserRole.WithContext(l.ctx).Where(query.SysUserRole.UserID.Eq(id)).Delete()
-
-	err = query.SysUserRole.WithContext(l.ctx).Create(&model.SysUserRole{
-		UserID: id,
-		//RoleID: in.RoleId,
-	})
-
-	if err != nil {
-		logc.Errorf(l.ctx, "新增用户异常,参数userId:%d,roleId: %d,异常:%s", id, 1, err.Error())
-		return nil, errors.New("添加用户与角色关联异常")
-	}
 	return &sysclient.UserAddResp{}, nil
 }

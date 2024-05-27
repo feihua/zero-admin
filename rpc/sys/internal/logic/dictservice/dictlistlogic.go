@@ -2,7 +2,6 @@ package dictservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -46,11 +45,9 @@ func (l *DictListLogic) DictList(in *sysclient.DictListReq) (*sysclient.DictList
 		q = q.Where(query.SysDict.DelFlag.Eq(in.DelFlag))
 	}
 
-	offset := (in.Current - 1) * in.PageSize
-	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		in, _ := json.Marshal(in)
 		logc.Errorf(l.ctx, "查询字典列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}

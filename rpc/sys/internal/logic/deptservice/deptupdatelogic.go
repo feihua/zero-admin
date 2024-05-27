@@ -35,7 +35,7 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptUp
 
 // DeptUpdate 更新部门信息
 // 1.根据部门id查询部门是否已存在
-// 2.如果部门不已存在,则直接返回
+// 2.如果部门不存在,则直接返回
 // 3.部门存在时,则直接更新部门
 func (l *DeptUpdateLogic) DeptUpdate(in *sysclient.DeptUpdateReq) (*sysclient.DeptUpdateResp, error) {
 	q := query.SysDept.WithContext(l.ctx)
@@ -48,7 +48,7 @@ func (l *DeptUpdateLogic) DeptUpdate(in *sysclient.DeptUpdateReq) (*sysclient.De
 		return nil, errors.New(fmt.Sprintf("查询部门信息失败"))
 	}
 
-	// 2.如果部门不已存在,则直接返回
+	// 2.如果部门不存在,则直接返回
 	if count == 0 {
 		logc.Errorf(l.ctx, "部门信息不存在: %+v", in)
 		return nil, errors.New(fmt.Sprintf("部门: %s,不存在", in.DeptName))

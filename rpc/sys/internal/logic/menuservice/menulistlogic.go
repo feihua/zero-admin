@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MenuListLogic
+// MenuListLogic 菜单列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 15:45

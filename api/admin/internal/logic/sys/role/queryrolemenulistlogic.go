@@ -63,7 +63,7 @@ func (l *QueryRoleMenuListLogic) QueryRoleMenuList(req *types.QueryRoleMenuListR
 			MenuIds:  result.MenuIds,
 		},
 		Code:    "000000",
-		Message: "根据角色id查询菜单成功",
+		Message: "查询角色菜单成功",
 	}, nil
 
 }

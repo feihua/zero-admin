@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// JobListLogic
+// JobListLogic 查询岗位列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:05
@@ -31,7 +31,7 @@ func NewJobListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobListLo
 	}
 }
 
-// JobList 岗位列表
+// JobList 查询岗位列表
 func (l *JobListLogic) JobList(in *sysclient.JobListReq) (*sysclient.JobListResp, error) {
 	q := query.SysJob.WithContext(l.ctx)
 	if len(in.JobName) > 0 {
@@ -42,8 +42,7 @@ func (l *JobListLogic) JobList(in *sysclient.JobListReq) (*sysclient.JobListResp
 		q = q.Where(query.SysJob.DelFlag.Eq(in.DelFlag))
 	}
 
-	offset := (in.Current - 1) * in.PageSize
-	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询岗位列表信息失败,参数：%+v,异常:%s", in, err.Error())

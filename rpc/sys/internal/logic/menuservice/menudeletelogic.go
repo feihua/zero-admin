@@ -9,7 +9,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// MenuDeleteLogic
+// MenuDeleteLogic 删除菜单
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 15:45

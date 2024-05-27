@@ -63,7 +63,7 @@ message UserListData{
   string nick_name = 3;
   string avatar = 4;
   int64 job_id = 5;
-  string salt = 6;
+  int32 del_flag = 6;
   string email = 7;
   string mobile = 8;
   int32 user_status = 9;
@@ -72,7 +72,6 @@ message UserListData{
   string create_time = 12;
   string update_by = 13;
   string update_time = 14;
-  int32 del_flag = 15;
 }
 
 message UserListResp {
@@ -134,11 +133,15 @@ message UpdateUserRoleListResp {
   string pong = 1;
 }
 message QueryUserRoleListReq {
-  int64 userId = 1;
+  int64 current = 1;
+  int64 pageSize = 2;
+  int64 userId = 3;
 }
 
 message QueryUserRoleListResp {
-  string pong = 1;
+  repeated RoleListData list = 1;
+  repeated int64 RoleIds = 2;
+  int64 total = 3;
 }
 //user start---------------------
 service UserService {

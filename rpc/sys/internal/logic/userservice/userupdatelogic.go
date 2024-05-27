@@ -3,6 +3,7 @@ package userservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -13,7 +14,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UserUpdateLogic
+// UserUpdateLogic 更新用户
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:37
@@ -34,61 +35,52 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserUp
 
 // UserUpdate 更新用户(id为1是系统预留超级管理员用户,不能更新)
 // 1.根据用户id查询用户是否已存在
-// 2.如果用户不已存在,则直接返回
+// 2.如果用户不存在,则直接返回
 // 3.用户存在时,则直接更新用户
 func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.UserUpdateResp, error) {
 
-	//id为1是系统预留超级管理员用户,不能更新
-	if in.Id == 1 {
+	role := query.SysUserRole
+	count, _ := role.WithContext(l.ctx).Where(role.RoleID.Eq(1), role.UserID.Eq(in.Id)).Count()
+
+	if count == 1 {
 		logc.Errorf(l.ctx, "更新用户异常,参数userId:%d,异常:%s", in.Id, "id为1是系统预留超级管理员用户,不能更新")
-		return nil, errors.New("更新用户异常")
+		return nil, errors.New("不能修改超级管理员用户")
 	}
 
-	//查询用户是否存在
-	q := query.SysUser
-	user, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
+	q := query.SysUser.WithContext(l.ctx)
+	// 1.根据用户id查询用户是否已存在
+	name := in.UserName
+	count, err := q.Where(query.SysDept.DeptName.Eq(name)).Count()
+
 	if err != nil {
-		logc.Errorf(l.ctx, "更新用户异常,参数userId:%d,异常:%s", in.Id, "用户不存在")
-		return nil, errors.New("查询用户异常")
+		logc.Errorf(l.ctx, "根据用户名称：%s,查询用户信息失败,异常:%s", name, err.Error())
+		return nil, errors.New(fmt.Sprintf("查询用户信息失败"))
 	}
 
-	sysUser := &model.SysUser{
-		ID:         in.Id,
+	// 2.如果用户不存在,则直接返回
+	if count > 0 {
+		logc.Errorf(l.ctx, "用户信息已存在：%+v", in)
+		return nil, errors.New(fmt.Sprintf("用户：%s,已存在", name))
+	}
+
+	// 3.用户存在时,则直接更新用户
+	user := &model.SysUser{
 		UserName:   in.UserName,
 		NickName:   in.NickName,
 		Avatar:     in.Avatar,
-		Password:   user.Password,
-		Salt:       user.Salt,
 		Email:      in.Email,
 		Mobile:     in.Mobile,
 		UserStatus: in.UserStatus,
 		DeptID:     in.DeptId,
-		CreateBy:   user.CreateBy,
-		CreateTime: user.CreateTime,
 		UpdateBy:   in.UpdateBy,
 		JobID:      in.JobId,
 	}
 
-	_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Updates(sysUser)
+	_, err = q.Updates(user)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "更新用户异常,参数userId:%d,异常:%s", in.Id, err.Error())
-		return nil, errors.New("更新用户异常")
-	}
-
-	_, err = query.SysUserRole.WithContext(l.ctx).Where(query.SysUserRole.UserID.Eq(in.Id)).Delete()
-	if err != nil {
-		logc.Errorf(l.ctx, "删除用户与角色关联异常,参数userId:%d,异常:%s", in.Id, err.Error())
-		return nil, errors.New("更新用户异常")
-	}
-
-	err = query.SysUserRole.WithContext(l.ctx).Create(&model.SysUserRole{
-		UserID: in.Id,
-		//RoleID: in.RoleId,
-	})
-	if err != nil {
-		logc.Errorf(l.ctx, "添加用户与角色关联异常,参数userId:%d, roleId: %d,异常:%s", in.Id, 1, err.Error())
-		return nil, errors.New("更新用户异常")
+		logc.Errorf(l.ctx, "更新用户异常,参数:%+v,异常:%s", user, err.Error())
+		return nil, errors.New("更新用户失败")
 	}
 
 	return &sysclient.UserUpdateResp{}, nil

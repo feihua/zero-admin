@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// JobDeleteLogic
+// JobDeleteLogic 删除岗位
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:04

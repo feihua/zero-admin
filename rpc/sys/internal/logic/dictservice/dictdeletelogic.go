@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DictDeleteLogic
+// DictDeleteLogic 删除字典信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:02

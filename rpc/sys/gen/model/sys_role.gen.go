@@ -14,7 +14,7 @@ const TableNameSysRole = "sys_role"
 type SysRole struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
 	Name       string     `gorm:"column:name;not null;comment:角色名称" json:"name"`                                         // 角色名称
-	Remark     *string    `gorm:"column:remark;comment:备注" json:"remark"`                                                // 备注
+	Remark     string     `gorm:"column:remark;not null;comment:备注" json:"remark"`                                       // 备注
 	CreateBy   string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateBy   string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者

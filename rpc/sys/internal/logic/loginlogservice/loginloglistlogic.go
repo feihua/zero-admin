@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// LoginLogListLogic
+// LoginLogListLogic 登录日志列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:07

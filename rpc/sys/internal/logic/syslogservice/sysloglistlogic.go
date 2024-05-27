@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// SysLogListLogic
+// SysLogListLogic 查询操作日志列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:09
@@ -29,7 +29,7 @@ func NewSysLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLog
 	}
 }
 
-// SysLogList 操作日志列表
+// SysLogList 查询操作日志列表
 func (l *SysLogListLogic) SysLogList(in *sysclient.SysLogListReq) (*sysclient.SysLogListResp, error) {
 	q := query.SysOperateLog.WithContext(l.ctx)
 	if len(in.UserName) > 0 {

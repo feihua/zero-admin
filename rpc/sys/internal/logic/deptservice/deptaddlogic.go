@@ -42,22 +42,23 @@ func (l *DeptAddLogic) DeptAdd(in *sysclient.DeptAddReq) (*sysclient.DeptAddResp
 	q := query.SysDept.WithContext(l.ctx)
 
 	//1.根据部门名称查询部门是否已存在
-	count, err := q.Where(query.SysDept.DeptName.Eq(in.DeptName)).Count()
+	deptName := in.DeptName
+	count, err := q.Where(query.SysDept.DeptName.Eq(deptName)).Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据部门名称：%s,查询部门信息失败,异常:%s", in.DeptName, err.Error())
+		logc.Errorf(l.ctx, "根据部门名称：%s,查询部门信息失败,异常:%s", deptName, err.Error())
 		return nil, errors.New(fmt.Sprintf("查询部门信息失败"))
 	}
 
 	//2.如果部门已存在,则直接返回
 	if count > 0 {
 		logc.Errorf(l.ctx, "部门信息已存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("部门：%s,已存在", in.DeptName))
+		return nil, errors.New(fmt.Sprintf("部门：%s,已存在", deptName))
 	}
 
 	//3.部门不存在时,则直接添加部门
 	dept := &model.SysDept{
-		DeptName:  in.DeptName,
+		DeptName:  deptName,
 		ParentID:  in.ParentId,
 		OrderNum:  in.OrderNum,
 		CreateBy:  in.CreateBy,

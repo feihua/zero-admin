@@ -2,14 +2,18 @@ package jobservicelogic
 
 import (
 	"context"
+	"errors"
+	"fmt"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// JobUpdateLogic
+// JobUpdateLogic 更新岗位信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:06
@@ -29,27 +33,41 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobUpda
 }
 
 // JobUpdate 更新岗位信息
-// 1.根据部门id查询部门是否已存在
-// 2.如果部门不已存在,则直接返回
-// 3.部门存在时,则直接更新部门
+// 1.根据岗位id查询岗位是否已存在
+// 2.如果岗位不存在,则直接返回
+// 3.岗位存在时,则直接更新岗位
 func (l *JobUpdateLogic) JobUpdate(in *sysclient.JobUpdateReq) (*sysclient.JobUpdateResp, error) {
-	//更新之前查询记录是否存在
-	q := query.SysJob
-	job, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
+	q := query.SysJob.WithContext(l.ctx)
+
+	//1.根据岗位名称查询岗位是否已存在
+	jobName := in.JobName
+	count, err := q.Where(query.SysJob.JobName.Eq(jobName)).Count()
+
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "根据岗位名称：%s,查询岗位信息失败,异常:%s", jobName, err.Error())
+		return nil, errors.New(fmt.Sprintf("查询岗位信息失败"))
 	}
 
-	job.JobName = in.JobName
-	job.OrderNum = in.OrderNum
-	job.UpdateBy = in.UpdateBy
-	job.Remarks = in.Remarks
-	job.DelFlag = in.DelFlag
+	//2.如果岗位不存在,则直接返回
+	if count == 0 {
+		logc.Errorf(l.ctx, "岗位信息不存在：%+v", in)
+		return nil, errors.New(fmt.Sprintf("岗位：%s,不存在", jobName))
+	}
 
-	_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Updates(job)
+	// 3.岗位存在时,则直接更新岗位
+	var job = &model.SysJob{
+		ID:       in.Id,
+		JobName:  in.JobName,
+		OrderNum: in.OrderNum,
+		UpdateBy: in.UpdateBy,
+		Remarks:  in.Remarks,
+		DelFlag:  in.DelFlag,
+	}
+	_, err = q.Updates(job)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新岗位信息失败,参数:%+v,异常:%s", job, err.Error())
+		return nil, errors.New("更新岗位信息失败")
 	}
 
 	return &sysclient.JobUpdateResp{}, nil

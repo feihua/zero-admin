@@ -64,7 +64,7 @@ GET {{host}}/api/sys/user/queryUserList
 Authorization: Bearer {{token}}
 
 ### 查询用户与角色的关联
-GET {{host}}/api/sys/user/queryUserRoleList?userId=1
+GET {{host}}/api/sys/user/queryUserRoleList?userId=3
 Authorization: Bearer {{token}}
 
 
@@ -74,6 +74,6 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "userId": 4,
+  "userId": 2,
   "roleIds": [1,2,3]
 }

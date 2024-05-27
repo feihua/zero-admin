@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// LoginLogDeleteLogic
+// LoginLogDeleteLogic 删除登录日志
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 17:07

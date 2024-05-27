@@ -2,8 +2,12 @@ package userservicelogic
 
 import (
 	"context"
+	"errors"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,44 +34,46 @@ func NewQueryUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // QueryUserRoleList 查询用户与角色的关联
 func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleListReq) (*sysclient.QueryUserRoleListResp, error) {
 	//1.查询所有角色
-	//roles, err := query.SysRole.WithContext(l.ctx).Find()
-	//
-	//if err != nil {
-	//	logc.Errorf(l.ctx, "查询角色信息失败,参数:%+v,异常:%s", in, err.Error())
-	//	return nil, errors.New("查询角色信息失败")
-	//}
-	//
-	//var roleList []types.RoleListData
-	//var roleIds []int64
-	//
-	//for _, menu := range result.List {
-	//	roleList = append(roleList, types.RoleListData{
-	//		Id:         menu.Id,
-	//		Name:       menu.Name,
-	//		Remark:     menu.Remark,
-	//		CreateBy:   menu.CreateBy,
-	//		CreateTime: menu.CreateTime,
-	//		UpdateBy:   menu.UpdateBy,
-	//		UpdateTime: menu.UpdateTime,
-	//		DelFlag:    menu.DelFlag,
-	//		Status:     menu.Status,
-	//	})
-	//	//admin账号全部角色
-	//	roleIds = append(roleIds, menu.Id)
-	//}
+	offset := (in.Current - 1) * in.PageSize
+	result, total, err := query.SysRole.WithContext(l.ctx).FindByPage(int(offset), int(in.PageSize))
 
-	//如果角色不是admin则根据roleId查询菜单
-	//todo 待完善
-	//if req.RoleId != 1 {
-	//	QueryMenu, err1 := l.svcCtx.RoleService.QueryMenuByRoleId(l.ctx, &sysclient.QueryMenuByRoleIdReq{
-	//		Id: req.RoleId,
-	//	})
-	//	if err1 != nil {
-	//		logc.Errorf(l.ctx, "根据roleId查询菜单失败,参数:%+v,异常:%s", req, err1.Error())
-	//		return nil, errorx.NewDefaultError("根据roleId查询菜单失败")
-	//	}
-	//	roleIds = QueryMenu.Ids
-	//}
+	if err != nil {
+		logc.Errorf(l.ctx, "查询角色信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询角色信息失败")
+	}
 
-	return &sysclient.QueryUserRoleListResp{}, nil
+	var roleList []*sysclient.RoleListData
+	var roleIds []int64
+
+	for _, role := range result {
+		roleList = append(roleList, &sysclient.RoleListData{
+			Id:         role.ID,
+			Name:       role.Name,
+			Remark:     role.Remark,
+			CreateBy:   role.CreateBy,
+			CreateTime: role.CreateTime.Format("2006-01-02 15:04:05"),
+			UpdateBy:   role.UpdateBy,
+			UpdateTime: common.TimeToString(role.UpdateTime),
+			DelFlag:    role.DelFlag,
+			Status:     role.Status,
+		})
+		//admin账号全部角色
+		roleIds = append(roleIds, role.ID)
+	}
+
+	//2.如果角色不是admin则根据userId查询角色
+	q := query.SysUserRole
+	count, _ := q.WithContext(l.ctx).Where(q.RoleID.Eq(1), q.UserID.Eq(in.UserId)).Count()
+	if count == 0 {
+		var ids []int64
+		q := query.SysUserRole
+		_ = q.WithContext(l.ctx).Select(q.RoleID).Where(q.UserID.Eq(in.UserId)).Scan(&ids)
+		roleIds = ids
+	}
+
+	return &sysclient.QueryUserRoleListResp{
+		List:    roleList,
+		RoleIds: roleIds,
+		Total:   total,
+	}, nil
 }
