@@ -1155,7 +1155,7 @@ type ListDictReq struct {
 	DictName   string `form:"dictName,optional"`    //字典名称
 	DictStatus int32  `form:"dictStatus,default=2"` //字典状态
 	DictType   string `form:"dictType,optional"`    //字典类型
-	IsSystem   int32  `form:"isSystem,optional"`    //是否系统预留  0：否  1：是
+	IsSystem   int32  `form:"isSystem,default=2"`   //是否系统预留  0：否  1：是
 }
 
 type ListDictResp struct {
