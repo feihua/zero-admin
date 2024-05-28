@@ -16,13 +16,11 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "value": "female1",
-  "label": "女1",
-  "type": "sex",
-  "description": "性别",
-  "sort": 0,
-  "remarks": "性别",
-  "delFlag": 0
+  "dictName": "2",
+  "dictStatus": 1,
+  "dictType": "3123",
+  "isSystem": 1,
+  "remark": "test"
 }
 
 ### 删除字典
@@ -36,14 +34,12 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 2,
-  "value": "female",
-  "label": "女",
-  "type": "sex",
-  "description": "性别",
-  "sort": 0,
-  "remarks": "性别1",
-  "delFlag": 0
+  "id": 1,
+  "dictName": "123122",
+  "dictStatus": 1,
+  "dictType": "3123",
+  "isSystem": 1,
+  "remark": "test"
 }
 
 ### 查询字典列表

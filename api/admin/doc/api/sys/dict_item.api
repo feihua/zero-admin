@@ -79,7 +79,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:  sys/dict_item
-	prefix: /api/demo/dictItem
+	prefix: /api/sys/dictItem
 )
 service admin-api {
 	// 添加字典项表
