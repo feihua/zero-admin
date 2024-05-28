@@ -45,6 +45,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendproductservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendsubjectservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/deptservice"
+	"github.com/feihua/zero-admin/rpc/sys/client/dictitemservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/dictservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/jobservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/loginlogservice"
@@ -95,6 +96,7 @@ type ServiceContext struct {
 	//系统相关
 	DeptService     deptservice.DeptService
 	DictService     dictservice.DictService
+	DictItemService dictitemservice.DictItemService
 	JobService      jobservice.JobService
 	LoginLogService loginlogservice.LoginLogService
 	SysLogService   syslogservice.SysLogService
@@ -178,6 +180,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 		DeptService:     deptservice.NewDeptService(sysClient),
 		DictService:     dictservice.NewDictService(sysClient),
+		DictItemService: dictitemservice.NewDictItemService(sysClient),
 		JobService:      jobservice.NewJobService(sysClient),
 		LoginLogService: loginlogservice.NewLoginLogService(sysClient),
 		SysLogService:   logService,

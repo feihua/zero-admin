@@ -38,6 +38,7 @@ import (
 	smshomerecommendsubject "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homerecommendsubject"
 	sysdept "github.com/feihua/zero-admin/api/admin/internal/handler/sys/dept"
 	sysdict "github.com/feihua/zero-admin/api/admin/internal/handler/sys/dict"
+	sysdict_item "github.com/feihua/zero-admin/api/admin/internal/handler/sys/dict_item"
 	sysjob "github.com/feihua/zero-admin/api/admin/internal/handler/sys/job"
 	syslog "github.com/feihua/zero-admin/api/admin/internal/handler/sys/log"
 	sysmenu "github.com/feihua/zero-admin/api/admin/internal/handler/sys/menu"
@@ -655,6 +656,51 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
+					Method:  http.MethodPost,
+					Path:    "/addProduct",
+					Handler: productproduct.ProductAddHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductDetail",
+					Handler: productproduct.QueryProductDetailHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductList",
+					Handler: productproduct.QueryProductListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
 					Method:  http.MethodGet,
 					Path:    "/updateDeleteStatus",
 					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
@@ -683,51 +729,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodPost,
 					Path:    "/updateVerifyStatus",
 					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: productproduct.QueryProductListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addProduct",
-					Handler: productproduct.ProductAddHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductDetail",
-					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1158,6 +1159,36 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/dict"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addDictItem",
+					Handler: sysdict_item.AddDictItemHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteDictItem",
+					Handler: sysdict_item.DeleteDictItemHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryDictItemList",
+					Handler: sysdict_item.QueryDictItemListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateDictItem",
+					Handler: sysdict_item.UpdateDictItemHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/demo/dictItem"),
 	)
 
 	server.AddRoutes(

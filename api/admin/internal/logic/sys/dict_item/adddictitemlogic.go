@@ -1,4 +1,4 @@
-package dict
+package dict_item
 
 import (
 	"context"
@@ -13,43 +13,46 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddDictLogic 添加字典信息
+// AddDictItemLogic 添加字典项
 /*
 Author: LiuFeiHua
-Date: 2023/12/18 17:17
+Date: 2024/5/28 16:01
 */
-type AddDictLogic struct {
+type AddDictItemLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewAddDictLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddDictLogic {
-	return AddDictLogic{
+func NewAddDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddDictItemLogic {
+	return &AddDictItemLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// AddDict 添加字典信息
-func (l *AddDictLogic) AddDict(req *types.AddDictReq) (*types.AddDictResp, error) {
-	_, err := l.svcCtx.DictService.AddDict(l.ctx, &sysclient.DictAddReq{
+// AddDictItem 添加字典项
+func (l *AddDictItemLogic) AddDictItem(req *types.AddDictItemReq) (resp *types.AddDictItemResp, err error) {
+	_, err = l.svcCtx.DictItemService.AddDictItem(l.ctx, &sysclient.DictItemAddReq{
 		CreateBy:   l.ctx.Value("userName").(string),
-		DictName:   req.DictName,
+		Remark:     req.Remark,
+		DictLabel:  req.DictLabel,
+		DictSort:   req.DictSort,
 		DictStatus: req.DictStatus,
 		DictType:   req.DictType,
-		Remark:     req.Remark,
+		DictValue:  req.DictValue,
+		IsDefault:  req.DictStatus,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "添加字典信息失败,参数：%+v,响应：%s", req, err.Error())
+		logc.Errorf(l.ctx, "添加字典项信息失败,参数：%+v,响应：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddDictResp{
+	return &types.AddDictItemResp{
 		Code:    "000000",
-		Message: "添加字典成功",
+		Message: "添加字典项成功",
 	}, nil
 }

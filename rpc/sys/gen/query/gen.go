@@ -19,6 +19,7 @@ var (
 	Q             = new(Query)
 	SysDept       *sysDept
 	SysDict       *sysDict
+	SysDictItem   *sysDictItem
 	SysJob        *sysJob
 	SysLoginLog   *sysLoginLog
 	SysMenu       *sysMenu
@@ -34,6 +35,7 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	SysDept = &Q.SysDept
 	SysDict = &Q.SysDict
+	SysDictItem = &Q.SysDictItem
 	SysJob = &Q.SysJob
 	SysLoginLog = &Q.SysLoginLog
 	SysMenu = &Q.SysMenu
@@ -50,6 +52,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		db:            db,
 		SysDept:       newSysDept(db, opts...),
 		SysDict:       newSysDict(db, opts...),
+		SysDictItem:   newSysDictItem(db, opts...),
 		SysJob:        newSysJob(db, opts...),
 		SysLoginLog:   newSysLoginLog(db, opts...),
 		SysMenu:       newSysMenu(db, opts...),
@@ -67,6 +70,7 @@ type Query struct {
 
 	SysDept       sysDept
 	SysDict       sysDict
+	SysDictItem   sysDictItem
 	SysJob        sysJob
 	SysLoginLog   sysLoginLog
 	SysMenu       sysMenu
@@ -85,6 +89,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		db:            db,
 		SysDept:       q.SysDept.clone(db),
 		SysDict:       q.SysDict.clone(db),
+		SysDictItem:   q.SysDictItem.clone(db),
 		SysJob:        q.SysJob.clone(db),
 		SysLoginLog:   q.SysLoginLog.clone(db),
 		SysMenu:       q.SysMenu.clone(db),
@@ -110,6 +115,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		db:            db,
 		SysDept:       q.SysDept.replaceDB(db),
 		SysDict:       q.SysDict.replaceDB(db),
+		SysDictItem:   q.SysDictItem.replaceDB(db),
 		SysJob:        q.SysJob.replaceDB(db),
 		SysLoginLog:   q.SysLoginLog.replaceDB(db),
 		SysMenu:       q.SysMenu.replaceDB(db),
@@ -125,6 +131,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 type queryCtx struct {
 	SysDept       ISysDeptDo
 	SysDict       ISysDictDo
+	SysDictItem   ISysDictItemDo
 	SysJob        ISysJobDo
 	SysLoginLog   ISysLoginLogDo
 	SysMenu       ISysMenuDo
@@ -140,6 +147,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
 		SysDept:       q.SysDept.WithContext(ctx),
 		SysDict:       q.SysDict.WithContext(ctx),
+		SysDictItem:   q.SysDictItem.WithContext(ctx),
 		SysJob:        q.SysJob.WithContext(ctx),
 		SysLoginLog:   q.SysLoginLog.WithContext(ctx),
 		SysMenu:       q.SysMenu.WithContext(ctx),

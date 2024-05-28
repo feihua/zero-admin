@@ -8,16 +8,18 @@ import (
 	"time"
 )
 
-const TableNameSysDict = "sys_dict"
+const TableNameSysDictItem = "sys_dict_item"
 
-// SysDict 字典表
-type SysDict struct {
+// SysDictItem 字典项表
+type SysDictItem struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
-	DictName   string     `gorm:"column:dict_name;not null;comment:字典名称" json:"dict_name"`                               // 字典名称
 	DictType   string     `gorm:"column:dict_type;not null;comment:字典类型" json:"dict_type"`                               // 字典类型
+	DictLabel  string     `gorm:"column:dict_label;not null;comment:字典标签" json:"dict_label"`                             // 字典标签
+	DictValue  string     `gorm:"column:dict_value;not null;comment:字典键值" json:"dict_value"`                             // 字典键值
 	DictStatus int32      `gorm:"column:dict_status;not null;comment:字典状态" json:"dict_status"`                           // 字典状态
+	DictSort   int32      `gorm:"column:dict_sort;not null;comment:排序" json:"dict_sort"`                                 // 排序
 	Remark     string     `gorm:"column:remark;not null;comment:备注信息" json:"remark"`                                     // 备注信息
-	IsSystem   int32      `gorm:"column:is_system;not null;comment:是否系统预留  0：否  1：是" json:"is_system"`                   // 是否系统预留  0：否  1：是
+	IsDefault  int32      `gorm:"column:is_default;not null;comment:是否默认  0：否  1：是" json:"is_default"`                   // 是否默认  0：否  1：是
 	DelFlag    int32      `gorm:"column:del_flag;not null;comment:是否删除  1：已删除  0：正常" json:"del_flag"`                    // 是否删除  1：已删除  0：正常
 	CreateBy   string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
@@ -25,7 +27,7 @@ type SysDict struct {
 	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 
-// TableName SysDict's table name
-func (*SysDict) TableName() string {
-	return TableNameSysDict
+// TableName SysDictItem's table name
+func (*SysDictItem) TableName() string {
+	return TableNameSysDictItem
 }

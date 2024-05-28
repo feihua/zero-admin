@@ -34,24 +34,16 @@ func NewJobUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JobUpda
 
 // JobUpdate 更新岗位信息
 // 1.根据岗位id查询岗位是否已存在
-// 2.如果岗位不存在,则直接返回
 // 3.岗位存在时,则直接更新岗位
 func (l *JobUpdateLogic) JobUpdate(in *sysclient.JobUpdateReq) (*sysclient.JobUpdateResp, error) {
 	q := query.SysJob.WithContext(l.ctx)
 
-	//1.根据岗位名称查询岗位是否已存在
-	jobName := in.JobName
-	count, err := q.Where(query.SysJob.JobName.Eq(jobName)).Count()
+	//1.根据岗位id查询岗位是否已存在
+	_, err := q.Where(query.SysJob.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据岗位名称：%s,查询岗位信息失败,异常:%s", jobName, err.Error())
+		logc.Errorf(l.ctx, "根据岗位id：%d,查询岗位信息失败,异常:%s", in.Id, err.Error())
 		return nil, errors.New(fmt.Sprintf("查询岗位信息失败"))
-	}
-
-	//2.如果岗位不存在,则直接返回
-	if count == 0 {
-		logc.Errorf(l.ctx, "岗位信息不存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("岗位：%s,不存在", jobName))
 	}
 
 	// 3.岗位存在时,则直接更新岗位

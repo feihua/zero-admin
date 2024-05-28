@@ -363,66 +363,21 @@ service MenuService {
 }
 
 //dict start---------------------
+// 添加字典表
 message DictAddReq {
-  string value = 1;
-  string label = 2;
-  string type = 3;
-  string description = 4;
-  int32 sort = 5;
-  string remarks = 6;
-  string create_by = 7;
-  int32 del_flag = 8;
+  string CreateBy = 1; //创建者
+  string DictName = 2; //字典名称
+  int32 DictStatus = 3; //字典状态
+  string DictType = 4; //字典类型
+  string Remark = 5; //备注信息
+
 }
 
 message DictAddResp {
   string pong = 1;
 }
 
-message DictListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string value = 3;
-  string label = 4;
-  string type = 5;
-  int32 del_flag = 6;
-}
-
-message DictListData {
-  int64 id = 1;
-  string value = 2;
-  string label = 3;
-  string type = 4;
-  string description = 5;
-  int32 sort = 6;
-  string remarks = 7;
-  string create_by = 10;
-  string create_time = 11;
-  string update_by = 12;
-  string update_time = 13;
-  int32 del_flag = 14;
-}
-
-message DictListResp{
-  int64 total = 1;
-  repeated  DictListData list = 2;
-}
-
-message DictUpdateReq {
-  int64 id = 1;
-  string value = 2;
-  string label = 3;
-  string type = 4;
-  string description = 5;
-  int32 sort = 6;
-  string remarks = 7;
-  string update_by = 8;
-  int32 del_flag = 9;
-}
-
-message DictUpdateResp {
-  string pong = 1;
-}
-
+// 删除字典表
 message DictDeleteReq {
   repeated int64 ids = 1;
 }
@@ -430,15 +385,206 @@ message DictDeleteReq {
 message DictDeleteResp {
   string pong = 1;
 }
-//dict end---------------------
-service DictService {
 
-  rpc DictAdd(DictAddReq) returns(DictAddResp);
-  rpc DictList(DictListReq) returns(DictListResp);
-  rpc DictUpdate(DictUpdateReq) returns(DictUpdateResp);
-  rpc DictDelete(DictDeleteReq) returns(DictDeleteResp);
+// 更新字典表
+message DictUpdateReq {
+  string dictName = 1; //字典名称
+  int32 dictStatus = 2; //字典状态
+  string dictType = 3; //字典类型
+  int64 id = 4; //编号
+  string remark = 5; //备注信息
+  string updateBy = 6; //更新者
 
 }
+
+message DictUpdateResp {
+  string pong = 1;
+}
+
+// 查询单条字典表记录
+message DictReq {
+  int64 id = 1; //编号
+
+}
+
+message DictResp {
+  string createBy = 1; //创建者
+  string createTime = 2; //创建时间
+  int32 delFlag = 3; //是否删除  1：已删除  0：正常
+  string dictName = 4; //字典名称
+  int32 dictStatus = 5; //字典状态
+  string dictType = 6; //字典类型
+  int64 id = 7; //编号
+  int32 isSystem = 8; //是否系统预留  0：否  1：是
+  string remark = 9; //备注信息
+  string updateBy = 10; //更新者
+  string updateTime = 11; //更新时间
+
+}
+
+// 分页查询字典表列表
+message DictListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+  int32 isSystem = 3; //是否系统预留  0：否  1：是
+  string dictName = 4; //字典名称
+  int32 dictStatus = 5; //字典状态
+  string dictType = 6; //字典类型
+
+}
+
+message DictListData {
+  string createBy = 1; //创建者
+  string createTime = 2; //创建时间
+  int32 delFlag = 3; //是否删除  1：已删除  0：正常
+  string dictName = 4; //字典名称
+  int32 dictStatus = 5; //字典状态
+  string dictType = 6; //字典类型
+  int64 id = 7; //编号
+  int32 isSystem = 8; //是否系统预留  0：否  1：是
+  string remark = 9; //备注信息
+  string updateBy = 10; //更新者
+  string updateTime = 11; //更新时间
+
+}
+
+message DictListResp {
+  int64 total = 1;
+  repeated  DictListData list = 2;
+}
+
+// 字典表
+service DictService {
+  // 添加字典表
+  rpc AddDict(DictAddReq) returns (DictAddResp){}
+  // 删除字典表
+  rpc DeleteDict(DictDeleteReq) returns (DictDeleteResp){}
+  // 更新字典表
+  rpc UpdateDict(DictUpdateReq) returns (DictUpdateResp ){}
+  // 根据条件查询单条字典表记录
+  rpc QueryDict(DictReq) returns (DictResp){}
+  // 查询字典表列表
+  rpc QueryDictList(DictListReq) returns (DictListResp){}
+
+}
+
+// 添加字典项表
+message DictItemAddReq {
+  string createBy = 1; //创建者
+  string Remark = 2; //备注信息
+  int32 IsDefault = 3; //是否默认  0：否  1：是
+  string DictLabel = 4; //字典标签
+  int32 DictSort = 5; //排序
+  int32 DictStatus = 6; //字典状态
+  string DictType = 7; //字典类型
+  string DictValue = 8; //字典键值
+
+
+}
+
+message DictItemAddResp {
+  string pong = 1;
+}
+
+// 删除字典项表
+message DictItemDeleteReq {
+  repeated int64 ids = 1;
+}
+
+message DictItemDeleteResp {
+  string pong = 1;
+}
+
+// 更新字典项表
+message DictItemUpdateReq {
+  string updateBy = 1; //创建者
+  string remark = 2; //备注信息
+  int32 delFlag = 3; //是否删除  1：已删除  0：正常
+  string dictLabel = 4; //字典标签
+  int32 dictSort = 5; //排序
+  int32 dictStatus = 6; //字典状态
+  string dictType = 7; //字典类型
+  string dictValue = 8; //字典键值
+  int64 id = 9; //编号
+  int32 isDefault = 10; //是否默认  0：否  1：是
+
+}
+
+message DictItemUpdateResp {
+  string pong = 1;
+}
+
+// 查询单条字典项表记录
+message DictItemReq {
+  int64 id = 1; //编号
+
+}
+
+message DictItemResp {
+  string createBy = 1; //创建者
+  string createTime = 2; //创建时间
+  int32 delFlag = 3; //是否删除  1：已删除  0：正常
+  string dictLabel = 4; //字典标签
+  int32 dictSort = 5; //排序
+  int32 dictStatus = 6; //字典状态
+  string dictType = 7; //字典类型
+  string dictValue = 8; //字典键值
+  int64 id = 9; //编号
+  int32 isDefault = 10; //是否默认  0：否  1：是
+  string remark = 11; //备注信息
+  string updateBy = 12; //更新者
+  string updateTime = 13; //更新时间
+
+}
+
+// 分页查询字典项表列表
+message DictItemListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+  string dictType = 3; //字典类型
+  string dictLabel = 4; //字典标签
+  int32 dictStatus = 6; //字典状态
+
+
+}
+
+message DictItemListData {
+  string createBy = 1; //创建者
+  string createTime = 2; //创建时间
+  int32 delFlag = 3; //是否删除  1：已删除  0：正常
+  string dictLabel = 4; //字典标签
+  int32 dictSort = 5; //排序
+  int32 dictStatus = 6; //字典状态
+  string dictType = 7; //字典类型
+  string dictValue = 8; //字典键值
+  int64 id = 9; //编号
+  int32 isDefault = 10; //是否默认  0：否  1：是
+  string remark = 11; //备注信息
+  string updateBy = 12; //更新者
+  string updateTime = 13; //更新时间
+
+}
+
+message DictItemListResp {
+  int64 total = 1;
+  repeated  DictItemListData list = 2;
+}
+
+// 字典项表
+service DictItemService {
+  // 添加字典项表
+  rpc AddDictItem(DictItemAddReq) returns (DictItemAddResp){}
+  // 删除字典项表
+  rpc DeleteDictItem(DictItemDeleteReq) returns (DictItemDeleteResp){}
+  // 更新字典项表
+  rpc UpdateDictItem(DictItemUpdateReq) returns (DictItemUpdateResp ){}
+  // 根据条件查询单条字典项表记录
+  rpc QueryDictItem(DictItemReq) returns (DictItemResp){}
+  // 查询字典项表列表
+  rpc QueryDictItemList(DictItemListReq) returns (DictItemListResp){}
+
+}
+
 
 //dept start---------------------
 message DeptAddReq {

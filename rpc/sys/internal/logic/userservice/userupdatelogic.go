@@ -35,8 +35,7 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserUp
 
 // UserUpdate 更新用户(id为1是系统预留超级管理员用户,不能更新)
 // 1.根据用户id查询用户是否已存在
-// 2.如果用户不存在,则直接返回
-// 3.用户存在时,则直接更新用户
+// 2.用户存在时,则直接更新用户
 func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.UserUpdateResp, error) {
 
 	role := query.SysUserRole
@@ -49,21 +48,14 @@ func (l *UserUpdateLogic) UserUpdate(in *sysclient.UserUpdateReq) (*sysclient.Us
 
 	q := query.SysUser.WithContext(l.ctx)
 	// 1.根据用户id查询用户是否已存在
-	name := in.UserName
-	count, err := q.Where(query.SysDept.DeptName.Eq(name)).Count()
+	_, err := q.Where(query.SysUser.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据用户名称：%s,查询用户信息失败,异常:%s", name, err.Error())
+		logc.Errorf(l.ctx, "根据用户id：%d,查询用户信息失败,异常:%s", in.Id, err.Error())
 		return nil, errors.New(fmt.Sprintf("查询用户信息失败"))
 	}
 
-	// 2.如果用户不存在,则直接返回
-	if count > 0 {
-		logc.Errorf(l.ctx, "用户信息已存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("用户：%s,已存在", name))
-	}
-
-	// 3.用户存在时,则直接更新用户
+	// 2.用户存在时,则直接更新用户
 	user := &model.SysUser{
 		UserName:   in.UserName,
 		NickName:   in.NickName,

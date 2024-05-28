@@ -1,4 +1,4 @@
-package dict
+package dict_item
 
 import (
 	"context"
@@ -13,39 +13,39 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteDictLogic 删除字典信息
+// DeleteDictItemLogic 字典项
 /*
 Author: LiuFeiHua
-Date: 2023/12/18 17:17
+Date: 2024/5/28 16:01
 */
-type DeleteDictLogic struct {
+type DeleteDictItemLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewDeleteDictLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteDictLogic {
-	return DeleteDictLogic{
+func NewDeleteDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteDictItemLogic {
+	return &DeleteDictItemLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// DeleteDict 删除字典信息
-func (l *DeleteDictLogic) DeleteDict(req *types.DeleteDictReq) (*types.DeleteDictResp, error) {
-	_, err := l.svcCtx.DictService.DeleteDict(l.ctx, &sysclient.DictDeleteReq{
+// DeleteDictItem 删除字典项
+func (l *DeleteDictItemLogic) DeleteDictItem(req *types.DeleteDictItemReq) (resp *types.DeleteDictItemResp, err error) {
+	_, err = l.svcCtx.DictItemService.DeleteDictItem(l.ctx, &sysclient.DictItemDeleteReq{
 		Ids: req.Ids,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据dictId: %+v,删除字典异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "根据dictItemId: %+v,删除字典项异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteDictResp{
+	return &types.DeleteDictItemResp{
 		Code:    "000000",
-		Message: "删除字典成功",
+		Message: "删除字典项成功",
 	}, nil
 }

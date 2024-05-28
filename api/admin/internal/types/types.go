@@ -31,14 +31,26 @@ type AddDeptResp struct {
 	Message string `json:"message"`
 }
 
+type AddDictItemReq struct {
+	DictLabel  string `json:"dictLabel"`  //字典标签
+	DictSort   int32  `json:"dictSort"`   //排序
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	DictValue  string `json:"dictValue"`  //字典键值
+	Remark     string `json:"remark"`     //备注信息
+}
+
+type AddDictItemResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type AddDictReq struct {
-	Value       string `json:"value"`                // 数据值
-	Label       string `json:"label"`                // 标签名
-	Type        string `json:"type"`                 // 类型
-	Description string `json:"description,optional"` // 描述
-	Sort        int32  `json:"sort"`                 // 排序（升序）
-	Remarks     string `json:"remarks,optional"`     // 备注信息
-	DelFlag     int32  `json:"delFlag"`              // 是否删除  0：已删除  1：正常
+	DictName   string `json:"dictName"`   //字典名称
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
+	Remark     string `json:"remark"`     //备注信息
 }
 
 type AddDictResp struct {
@@ -609,6 +621,15 @@ type DeleteDeptResp struct {
 	Message string `json:"message"`
 }
 
+type DeleteDictItemReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteDictItemResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type DeleteDictReq struct {
 	Ids []int64 `form:"ids"`
 }
@@ -1081,27 +1102,60 @@ type ListDeptResp struct {
 }
 
 type ListDictData struct {
-	Id          int64  `json:"id"`          // 编号
-	Value       string `json:"value"`       // 数据值
-	Label       string `json:"label"`       // 标签名
-	Type        string `json:"type"`        // 类型
-	Description string `json:"description"` // 描述
-	Sort        int64  `json:"sort"`        // 排序（升序）
-	CreateBy    string `json:"createBy"`    // 创建人
-	CreateTime  string `json:"createTime"`  // 创建时间
-	UpdateBy    string `json:"updateBy"`    // 更新人
-	UpdateTime  string `json:"updateTime"`  // 更新时间
-	Remarks     string `json:"remarks"`     // 备注信息
-	DelFlag     int32  `json:"delFlag"`     // 是否删除  0：已删除  1：正常
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DelFlag    int32  `json:"delFlag"`    //是否删除  1：已删除  0：正常
+	DictName   string `json:"dictName"`   //字典名称
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	Id         int64  `json:"id"`         //编号
+	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type ListDictItemData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DelFlag    int32  `json:"delFlag"`    //是否删除  1：已删除  0：正常
+	DictLabel  string `json:"dictLabel"`  //字典标签
+	DictSort   int32  `json:"dictSort"`   //排序
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	DictValue  string `json:"dictValue"`  //字典键值
+	Id         int64  `json:"id"`         //编号
+	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type ListDictItemReq struct {
+	Current    int64  `form:"current,default=1"`
+	PageSize   int64  `form:"pageSize,default=20"`
+	DictLabel  string `form:"dictLabel,optional"`   //字典标签
+	DictStatus int32  `form:"dictStatus,default=2"` //字典状态
+	DictType   string `form:"dictType,optional"`    //字典类型
+}
+
+type ListDictItemResp struct {
+	Code     string              `json:"code"`
+	Message  string              `json:"message"`
+	Current  int64               `json:"current,default=1"`
+	Data     []*ListDictItemData `json:"data"`
+	PageSize int64               `json:"pageSize,default=20"`
+	Success  bool                `json:"success"`
+	Total    int64               `json:"total"`
 }
 
 type ListDictReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	Value    string `form:"value,optional"`
-	Label    string `form:"label,optional"`
-	DelFlag  int32  `form:"delFlag,default=2"`
-	Type     string `form:"type,optional "`
+	Current    int64  `form:"current,default=1"`
+	PageSize   int64  `form:"pageSize,default=20"`
+	DictName   string `form:"dictName,optional"`    //字典名称
+	DictStatus int32  `form:"dictStatus,default=2"` //字典状态
+	DictType   string `form:"dictType,optional"`    //字典类型
+	IsSystem   int32  `form:"isSystem,optional"`    //是否系统预留  0：否  1：是
 }
 
 type ListDictResp struct {
@@ -2639,15 +2693,29 @@ type UpdateDeptResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateDictItemReq struct {
+	DictLabel  string `json:"dictLabel"`  //字典标签
+	DictSort   int32  `json:"dictSort"`   //排序
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	DictValue  string `json:"dictValue"`  //字典键值
+	Id         int64  `json:"id"`         //编号
+	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
+	Remark     string `json:"remark"`     //备注信息
+}
+
+type UpdateDictItemResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateDictReq struct {
-	Id          int64  `json:"id"`          // 编号
-	Value       string `json:"value"`       // 数据值
-	Label       string `json:"label"`       // 标签名
-	Type        string `json:"type"`        // 类型
-	Description string `json:"description"` // 描述
-	Sort        int32  `json:"sort"`        // 排序（升序）
-	Remarks     string `json:"remarks"`     // 备注信息
-	DelFlag     int32  `json:"delFlag"`     // 是否删除  0：已删除  1：正常
+	DictName   string `json:"dictName"`   //字典名称
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	Id         int64  `json:"id"`         //编号
+	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
+	Remark     string `json:"remark"`     //备注信息
 }
 
 type UpdateDictResp struct {

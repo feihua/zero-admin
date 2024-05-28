@@ -34,16 +34,13 @@ func NewUpdateDictLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateD
 
 // UpdateDict 更新字典信息
 func (l *UpdateDictLogic) UpdateDict(req *types.UpdateDictReq) (*types.UpdateDictResp, error) {
-	_, err := l.svcCtx.DictService.DictUpdate(l.ctx, &sysclient.DictUpdateReq{
-		Id:          req.Id,
-		Value:       req.Value,
-		Label:       req.Label,
-		Type:        req.Type,
-		Description: req.Description,
-		Sort:        req.Sort,
-		Remarks:     req.Remarks,
-		UpdateBy:    l.ctx.Value("userName").(string),
-		DelFlag:     req.DelFlag,
+	_, err := l.svcCtx.DictService.UpdateDict(l.ctx, &sysclient.DictUpdateReq{
+		DictName:   req.DictName,
+		DictStatus: req.DictStatus,
+		DictType:   req.DictType,
+		Id:         req.Id,
+		Remark:     req.Remark,
+		UpdateBy:   l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

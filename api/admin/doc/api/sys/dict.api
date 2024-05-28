@@ -1,44 +1,64 @@
 info (
-	desc:   "字典"
-	author: "koobe"
+	desc:   "字典表"
+	author: "liufeihua"
 	email:  "1002219331@qq.com"
 )
 
 type (
+	// 添加字典表
 	AddDictReq {
-		Value       string `json:"value"` // 数据值
-		Label       string `json:"label"` // 标签名
-		Type        string `json:"type"` // 类型
-		Description string `json:"description,optional"` // 描述
-		Sort        int32  `json:"sort"` // 排序（升序）
-		Remarks     string `json:"remarks,optional"` // 备注信息
-		DelFlag     int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
+		DictName   string `json:"dictName"` //字典名称
+		DictStatus int32 `json:"dictStatus"` //字典状态
+		DictType   string `json:"dictType"` //字典类型
+		IsSystem   int32   `json:"isSystem"` //是否系统预留  0：否  1：是
+		Remark     string `json:"remark"` //备注信息
 	}
 	AddDictResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
+	// 删除字典表
+	DeleteDictReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeleteDictResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新字典表
+	UpdateDictReq {
+		DictName   string `json:"dictName"` //字典名称
+		DictStatus int32 `json:"dictStatus"` //字典状态
+		DictType   string `json:"dictType"` //字典类型
+		Id         int64  `json:"id"` //编号
+		IsSystem   int32   `json:"isSystem"` //是否系统预留  0：否  1：是
+		Remark     string `json:"remark"` //备注信息
+	}
+	UpdateDictResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 分页查询字典表列表
 	ListDictReq {
-		Current  int64  `form:"current,default=1"`
-		PageSize int64  `form:"pageSize,default=20"`
-		Value    string `form:"value,optional"`
-		Label    string `form:"label,optional"`
-		DelFlag  int32  `form:"delFlag,default=2"`
-		Type     string `form:"type,optional "`
+		Current    int64  `form:"current,default=1"`
+		PageSize   int64  `form:"pageSize,default=20"`
+		DictName   string `form:"dictName,optional"` //字典名称
+		DictStatus int32 `form:"dictStatus,default=2"` //字典状态
+		DictType   string `form:"dictType,optional"` //字典类型
+		IsSystem   int32   `form:"isSystem,optional"` //是否系统预留  0：否  1：是
 	}
 	ListDictData {
-		Id          int64  `json:"id"` // 编号
-		Value       string `json:"value"` // 数据值
-		Label       string `json:"label"` // 标签名
-		Type        string `json:"type"` // 类型
-		Description string `json:"description"` // 描述
-		Sort        int64  `json:"sort"` // 排序（升序）
-		CreateBy    string `json:"createBy"` // 创建人
-		CreateTime  string `json:"createTime"` // 创建时间
-		UpdateBy    string `json:"updateBy"` // 更新人
-		UpdateTime  string `json:"updateTime"` // 更新时间
-		Remarks     string `json:"remarks"` // 备注信息
-		DelFlag     int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		DelFlag    int32   `json:"delFlag"` //是否删除  1：已删除  0：正常
+		DictName   string `json:"dictName"` //字典名称
+		DictStatus int32 `json:"dictStatus"` //字典状态
+		DictType   string `json:"dictType"` //字典类型
+		Id         int64  `json:"id"` //编号
+		IsSystem   int32   `json:"isSystem"` //是否系统预留  0：否  1：是
+		Remark     string `json:"remark"` //备注信息
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
 	}
 	ListDictResp {
 		Code     string          `json:"code"`
@@ -49,27 +69,6 @@ type (
 		Success  bool            `json:"success"`
 		Total    int64           `json:"total"`
 	}
-	UpdateDictReq {
-		Id          int64  `json:"id"` // 编号
-		Value       string `json:"value"` // 数据值
-		Label       string `json:"label"` // 标签名
-		Type        string `json:"type"` // 类型
-		Description string `json:"description"` // 描述
-		Sort        int32  `json:"sort"` // 排序（升序）
-		Remarks     string `json:"remarks"` // 备注信息
-		DelFlag     int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
-	}
-	UpdateDictResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
-	DeleteDictReq {
-		Ids []int64 `form:"ids"`
-	}
-	DeleteDictResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 )
 
 @server (
@@ -79,20 +78,20 @@ type (
 	prefix:     /api/sys/dict
 )
 service admin-api {
-	//添加字典
+	// 添加字典表
 	@handler AddDict
 	post /addDict (AddDictReq) returns (AddDictResp)
 
-	//查询字典
-	@handler QueryDictList
-	get /queryDictList (ListDictReq) returns (ListDictResp)
+	// 删除字典表
+	@handler DeleteDict
+	get /deleteDict (DeleteDictReq) returns (DeleteDictResp)
 
-	//更新字典
+	// 更新字典表
 	@handler UpdateDict
 	post /updateDict (UpdateDictReq) returns (UpdateDictResp)
 
-	//删除字典
-	@handler DeleteDict
-	get /deleteDict (DeleteDictReq) returns (DeleteDictResp)
+	// 分页查询字典表列表
+	@handler QueryDictList
+	get /queryDictList (ListDictReq) returns (ListDictResp)
 }
 

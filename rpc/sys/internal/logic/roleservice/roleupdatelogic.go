@@ -35,8 +35,7 @@ func NewRoleUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleUp
 
 // RoleUpdate 更新角色(id为1的是系统预留超级管理员角色,不能更新)
 // 1.根据角色id查询角色是否已存在
-// 2.如果角色不存在,则直接返回
-// 3.角色存在时,则直接更新角色
+// 2.角色存在时,则直接更新角色
 func (l *RoleUpdateLogic) RoleUpdate(in *sysclient.RoleUpdateReq) (*sysclient.RoleUpdateResp, error) {
 
 	if in.Id == 1 {
@@ -46,18 +45,11 @@ func (l *RoleUpdateLogic) RoleUpdate(in *sysclient.RoleUpdateReq) (*sysclient.Ro
 
 	q := query.SysRole.WithContext(l.ctx)
 	// 1.根据角色名称查询角色是否已存在
-	name := in.Name
-	count, err := q.Where(query.SysRole.Name.Eq(name)).Count()
+	_, err := q.Where(query.SysRole.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据角色名称：%s,查询角色信息失败,异常:%s", name, err.Error())
+		logc.Errorf(l.ctx, "根据角色id：%d,查询角色信息失败,异常:%s", in.Id, err.Error())
 		return nil, errors.New(fmt.Sprintf("查询角色信息失败"))
-	}
-
-	//2.如果角色不存在,则直接返回
-	if count == 0 {
-		logc.Errorf(l.ctx, "角色信息不存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("角色：%s,不存在", name))
 	}
 
 	//3.角色存在时,则直接更新角色

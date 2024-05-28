@@ -33,13 +33,13 @@ func NewQueryDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 
 // QueryDictList 查询字典列表
 func (l *QueryDictListLogic) QueryDictList(req *types.ListDictReq) (*types.ListDictResp, error) {
-	resp, err := l.svcCtx.DictService.DictList(l.ctx, &sysclient.DictListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		Value:    req.Value,
-		Label:    req.Label,
-		Type:     req.Type,
-		DelFlag:  req.DelFlag,
+	var resp, err = l.svcCtx.DictService.QueryDictList(l.ctx, &sysclient.DictListReq{
+		Current:    req.Current,
+		PageSize:   req.PageSize,
+		IsSystem:   req.IsSystem,
+		DictName:   req.DictName,
+		DictStatus: req.DictStatus,
+		DictType:   req.DictType,
 	})
 
 	if err != nil {
@@ -52,17 +52,17 @@ func (l *QueryDictListLogic) QueryDictList(req *types.ListDictReq) (*types.ListD
 
 	for _, dict := range resp.List {
 		list = append(list, &types.ListDictData{
-			Id:          dict.Id,
-			Value:       dict.Value,
-			Label:       dict.Label,
-			Type:        dict.Type,
-			Description: dict.Description,
-			CreateBy:    dict.CreateBy,
-			CreateTime:  dict.CreateTime,
-			UpdateBy:    dict.UpdateBy,
-			UpdateTime:  dict.UpdateTime,
-			Remarks:     dict.Remarks,
-			DelFlag:     dict.DelFlag,
+			CreateBy:   dict.CreateBy,
+			CreateTime: dict.CreateTime,
+			DelFlag:    dict.DelFlag,
+			DictName:   dict.DictName,
+			DictStatus: dict.DictStatus,
+			DictType:   dict.DictType,
+			Id:         dict.Id,
+			IsSystem:   dict.IsSystem,
+			Remark:     dict.Remark,
+			UpdateBy:   dict.UpdateBy,
+			UpdateTime: dict.UpdateTime,
 		})
 	}
 

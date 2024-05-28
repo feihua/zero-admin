@@ -26,9 +26,22 @@ type (
 	DictAddResp            = sysclient.DictAddResp
 	DictDeleteReq          = sysclient.DictDeleteReq
 	DictDeleteResp         = sysclient.DictDeleteResp
+	DictItemAddReq         = sysclient.DictItemAddReq
+	DictItemAddResp        = sysclient.DictItemAddResp
+	DictItemDeleteReq      = sysclient.DictItemDeleteReq
+	DictItemDeleteResp     = sysclient.DictItemDeleteResp
+	DictItemListData       = sysclient.DictItemListData
+	DictItemListReq        = sysclient.DictItemListReq
+	DictItemListResp       = sysclient.DictItemListResp
+	DictItemReq            = sysclient.DictItemReq
+	DictItemResp           = sysclient.DictItemResp
+	DictItemUpdateReq      = sysclient.DictItemUpdateReq
+	DictItemUpdateResp     = sysclient.DictItemUpdateResp
 	DictListData           = sysclient.DictListData
 	DictListReq            = sysclient.DictListReq
 	DictListResp           = sysclient.DictListResp
+	DictReq                = sysclient.DictReq
+	DictResp               = sysclient.DictResp
 	DictUpdateReq          = sysclient.DictUpdateReq
 	DictUpdateResp         = sysclient.DictUpdateResp
 	InfoReq                = sysclient.InfoReq
@@ -102,10 +115,16 @@ type (
 	UserUpdateResp         = sysclient.UserUpdateResp
 
 	DictService interface {
-		DictAdd(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error)
-		DictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error)
-		DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error)
-		DictDelete(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error)
+		// 添加字典表
+		AddDict(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error)
+		// 删除字典表
+		DeleteDict(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error)
+		// 更新字典表
+		UpdateDict(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error)
+		// 根据条件查询单条字典表记录
+		QueryDict(ctx context.Context, in *DictReq, opts ...grpc.CallOption) (*DictResp, error)
+		// 查询字典表列表
+		QueryDictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error)
 	}
 
 	defaultDictService struct {
@@ -119,22 +138,32 @@ func NewDictService(cli zrpc.Client) DictService {
 	}
 }
 
-func (m *defaultDictService) DictAdd(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error) {
+// 添加字典表
+func (m *defaultDictService) AddDict(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error) {
 	client := sysclient.NewDictServiceClient(m.cli.Conn())
-	return client.DictAdd(ctx, in, opts...)
+	return client.AddDict(ctx, in, opts...)
 }
 
-func (m *defaultDictService) DictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error) {
+// 删除字典表
+func (m *defaultDictService) DeleteDict(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error) {
 	client := sysclient.NewDictServiceClient(m.cli.Conn())
-	return client.DictList(ctx, in, opts...)
+	return client.DeleteDict(ctx, in, opts...)
 }
 
-func (m *defaultDictService) DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error) {
+// 更新字典表
+func (m *defaultDictService) UpdateDict(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error) {
 	client := sysclient.NewDictServiceClient(m.cli.Conn())
-	return client.DictUpdate(ctx, in, opts...)
+	return client.UpdateDict(ctx, in, opts...)
 }
 
-func (m *defaultDictService) DictDelete(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error) {
+// 根据条件查询单条字典表记录
+func (m *defaultDictService) QueryDict(ctx context.Context, in *DictReq, opts ...grpc.CallOption) (*DictResp, error) {
 	client := sysclient.NewDictServiceClient(m.cli.Conn())
-	return client.DictDelete(ctx, in, opts...)
+	return client.QueryDict(ctx, in, opts...)
+}
+
+// 查询字典表列表
+func (m *defaultDictService) QueryDictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error) {
+	client := sysclient.NewDictServiceClient(m.cli.Conn())
+	return client.QueryDictList(ctx, in, opts...)
 }

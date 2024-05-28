@@ -28,17 +28,16 @@ func newSysDict(db *gorm.DB, opts ...gen.DOOption) sysDict {
 	tableName := _sysDict.sysDictDo.TableName()
 	_sysDict.ALL = field.NewAsterisk(tableName)
 	_sysDict.ID = field.NewInt64(tableName, "id")
-	_sysDict.Value = field.NewString(tableName, "value")
-	_sysDict.Label = field.NewString(tableName, "label")
-	_sysDict.Type = field.NewString(tableName, "type")
-	_sysDict.Description = field.NewString(tableName, "description")
-	_sysDict.Sort = field.NewInt32(tableName, "sort")
+	_sysDict.DictName = field.NewString(tableName, "dict_name")
+	_sysDict.DictType = field.NewString(tableName, "dict_type")
+	_sysDict.DictStatus = field.NewInt32(tableName, "dict_status")
+	_sysDict.Remark = field.NewString(tableName, "remark")
+	_sysDict.IsSystem = field.NewInt32(tableName, "is_system")
+	_sysDict.DelFlag = field.NewInt32(tableName, "del_flag")
 	_sysDict.CreateBy = field.NewString(tableName, "create_by")
 	_sysDict.CreateTime = field.NewTime(tableName, "create_time")
 	_sysDict.UpdateBy = field.NewString(tableName, "update_by")
 	_sysDict.UpdateTime = field.NewTime(tableName, "update_time")
-	_sysDict.Remarks = field.NewString(tableName, "remarks")
-	_sysDict.DelFlag = field.NewInt32(tableName, "del_flag")
 
 	_sysDict.fillFieldMap()
 
@@ -49,19 +48,18 @@ func newSysDict(db *gorm.DB, opts ...gen.DOOption) sysDict {
 type sysDict struct {
 	sysDictDo sysDictDo
 
-	ALL         field.Asterisk
-	ID          field.Int64  // 编号
-	Value       field.String // 数据值
-	Label       field.String // 标签名
-	Type        field.String // 类型
-	Description field.String // 描述
-	Sort        field.Int32  // 排序（升序）
-	CreateBy    field.String // 创建人
-	CreateTime  field.Time   // 创建时间
-	UpdateBy    field.String // 更新人
-	UpdateTime  field.Time   // 更新时间
-	Remarks     field.String // 备注信息
-	DelFlag     field.Int32  // 是否删除  -1：已删除  0：正常
+	ALL        field.Asterisk
+	ID         field.Int64  // 编号
+	DictName   field.String // 字典名称
+	DictType   field.String // 字典类型
+	DictStatus field.Int32  // 字典状态
+	Remark     field.String // 备注信息
+	IsSystem   field.Int32  // 是否系统预留  0：否  1：是
+	DelFlag    field.Int32  // 是否删除  1：已删除  0：正常
+	CreateBy   field.String // 创建者
+	CreateTime field.Time   // 创建时间
+	UpdateBy   field.String // 更新者
+	UpdateTime field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -79,17 +77,16 @@ func (s sysDict) As(alias string) *sysDict {
 func (s *sysDict) updateTableName(table string) *sysDict {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.Value = field.NewString(table, "value")
-	s.Label = field.NewString(table, "label")
-	s.Type = field.NewString(table, "type")
-	s.Description = field.NewString(table, "description")
-	s.Sort = field.NewInt32(table, "sort")
+	s.DictName = field.NewString(table, "dict_name")
+	s.DictType = field.NewString(table, "dict_type")
+	s.DictStatus = field.NewInt32(table, "dict_status")
+	s.Remark = field.NewString(table, "remark")
+	s.IsSystem = field.NewInt32(table, "is_system")
+	s.DelFlag = field.NewInt32(table, "del_flag")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
-	s.Remarks = field.NewString(table, "remarks")
-	s.DelFlag = field.NewInt32(table, "del_flag")
 
 	s.fillFieldMap()
 
@@ -114,19 +111,18 @@ func (s *sysDict) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysDict) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 12)
+	s.fieldMap = make(map[string]field.Expr, 11)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["value"] = s.Value
-	s.fieldMap["label"] = s.Label
-	s.fieldMap["type"] = s.Type
-	s.fieldMap["description"] = s.Description
-	s.fieldMap["sort"] = s.Sort
+	s.fieldMap["dict_name"] = s.DictName
+	s.fieldMap["dict_type"] = s.DictType
+	s.fieldMap["dict_status"] = s.DictStatus
+	s.fieldMap["remark"] = s.Remark
+	s.fieldMap["is_system"] = s.IsSystem
+	s.fieldMap["del_flag"] = s.DelFlag
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy
 	s.fieldMap["update_time"] = s.UpdateTime
-	s.fieldMap["remarks"] = s.Remarks
-	s.fieldMap["del_flag"] = s.DelFlag
 }
 
 func (s sysDict) clone(db *gorm.DB) sysDict {

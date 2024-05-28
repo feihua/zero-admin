@@ -6,6 +6,7 @@ import (
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/config"
 	deptserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/deptservice"
+	dictitemserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/dictitemservice"
 	dictserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/dictservice"
 	jobserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/jobservice"
 	loginlogserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/loginlogservice"
@@ -37,6 +38,7 @@ func main() {
 		sysclient.RegisterRoleServiceServer(grpcServer, roleserviceServer.NewRoleServiceServer(ctx))
 		sysclient.RegisterMenuServiceServer(grpcServer, menuserviceServer.NewMenuServiceServer(ctx))
 		sysclient.RegisterDictServiceServer(grpcServer, dictserviceServer.NewDictServiceServer(ctx))
+		sysclient.RegisterDictItemServiceServer(grpcServer, dictitemserviceServer.NewDictItemServiceServer(ctx))
 		sysclient.RegisterDeptServiceServer(grpcServer, deptserviceServer.NewDeptServiceServer(ctx))
 		sysclient.RegisterLoginLogServiceServer(grpcServer, loginlogserviceServer.NewLoginLogServiceServer(ctx))
 		sysclient.RegisterSysLogServiceServer(grpcServer, syslogserviceServer.NewSysLogServiceServer(ctx))
