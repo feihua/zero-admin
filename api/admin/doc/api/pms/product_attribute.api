@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	addProductAttributeReq {
+	AddProductAttributeReq {
 		ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"` // 属性分类id
 		Name                       string `json:"name"`
 		SelectType                 int32  `json:"selectType"` // 属性选择类型：0->唯一；1->单选；2->多选
@@ -18,7 +18,7 @@ type (
 		HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
 		Type                       int32  `json:"type"` // 属性的类型；0->规格；1->参数
 	}
-	addProductAttributeResp {
+	AddProductAttributeResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -46,9 +46,9 @@ type (
 	ListProductAttributeResp {
 		Code     string                      `json:"code"`
 		Message  string                      `json:"message"`
-		Current  int64                       `form:"current,default=1"`
+		Current  int64                       `json:"current,default=1"`
 		Data     []*ListProductAttributeData `json:"data"`
-		PageSize int64                       `form:"pageSize,default=20"`
+		PageSize int64                       `json:"pageSize,default=20"`
 		Success  bool                        `json:"success"`
 		Total    int64                       `json:"total"`
 	}
@@ -100,7 +100,7 @@ type (
 service admin-api {
 	//添加商品属性
 	@handler ProductAttributeAdd
-	post /addProductAttribute (addProductAttributeReq) returns (addProductAttributeResp)
+	post /addProductAttribute (AddProductAttributeReq) returns (AddProductAttributeResp)
 
 	//查询商品属性
 	@handler ProductAttributeList

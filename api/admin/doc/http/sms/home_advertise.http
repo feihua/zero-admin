@@ -3,11 +3,11 @@ POST {{host}}/api/sys/user/login
 Content-Type: application/json
 
 {
-  "userName": "admin",
+  "account": "admin",
   "password": "123456"
 }
 > {%
-    client.global.set("token", response.body.token);
+    client.global.set("token", response.body.data.token);
 %}
 
 ### 添加首页广告

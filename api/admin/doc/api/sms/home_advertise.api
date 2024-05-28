@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	addHomeAdvertiseReq {
+	AddHomeAdvertiseReq {
 		Name      string `json:"name"` // 名称
 		Type      int32  `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
 		Pic       string `json:"pic,optional"` // 图片地址
@@ -16,7 +16,7 @@ type (
 		Note      string `json:"note,optional"` // 备注
 		Sort      int32  `json:"sort"` // 排序
 	}
-	addHomeAdvertiseResp {
+	AddHomeAdvertiseResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -46,9 +46,9 @@ type (
 	ListHomeAdvertiseResp {
 		Code     string                   `json:"code"`
 		Message  string                   `json:"message"`
-		Current  int64                    `form:"current,default=1"`
+		Current  int64                    `json:"current,default=1"`
 		Data     []*ListHomeAdvertiseData `json:"data"`
-		PageSize int64                    `form:"pageSize,default=20"`
+		PageSize int64                    `json:"pageSize,default=20"`
 		Success  bool                     `json:"success"`
 		Total    int64                    `json:"total"`
 	}
@@ -90,7 +90,7 @@ type (
 service admin-api {
 	//添加首页轮播广告
 	@handler HomeAdvertiseAdd
-	post /addHomeAdvertise (addHomeAdvertiseReq) returns (addHomeAdvertiseResp)
+	post /addHomeAdvertise (AddHomeAdvertiseReq) returns (AddHomeAdvertiseResp)
 
 	//查询首页轮播广告
 	@handler HomeAdvertiseList

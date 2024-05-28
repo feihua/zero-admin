@@ -5,12 +5,12 @@ info (
 )
 
 type (
-	addReturnResonReq {
+	AddReturnResonReq {
 		Name   string `json:"name"` // 退货类型
 		Sort   int32  `json:"sort"`
 		Status int32  `json:"status"` // 状态：0->不启用；1->启用
 	}
-	addReturnResonResp {
+	AddReturnResonResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -30,9 +30,9 @@ type (
 	ListReturnResonResp {
 		Code     string                 `json:"code"`
 		Message  string                 `json:"message"`
-		Current  int64                  `form:"current,default=1"`
+		Current  int64                  `json:"current,default=1"`
 		Data     []*ListReturnResonData `json:"data"`
-		PageSize int64                  `form:"pageSize,default=20"`
+		PageSize int64                  `json:"pageSize,default=20"`
 		Success  bool                   `json:"success"`
 		Total    int64                  `json:"total"`
 	}
@@ -68,7 +68,7 @@ type (
 service admin-api {
 	//添加退货原因
 	@handler ReturnResonAdd
-	post /addReturnReson (addReturnResonReq) returns (addReturnResonResp)
+	post /addReturnReson (AddReturnResonReq) returns (AddReturnResonResp)
 
 	//查询退货原因
 	@handler ReturnResonList

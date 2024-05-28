@@ -5,14 +5,14 @@ info (
 )
 
 type (
-	addPrefrenceAreaReq {
+	AddPrefrenceAreaReq {
 		Name       string `json:"name"`
 		SubTitle   string `json:"subTitle"`
 		Pic        string `json:"pic"` // 展示图片
 		Sort       int32  `json:"sort"`
 		ShowStatus int32  `json:"showStatus"`
 	}
-	addPrefrenceAreaResp {
+	AddPrefrenceAreaResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -38,9 +38,9 @@ type (
 	ListPrefrenceAreaResp {
 		Code     string                   `json:"code"`
 		Message  string                   `json:"message"`
-		Current  int64                    `form:"current,default=1"`
+		Current  int64                    `json:"current,default=1"`
 		Data     []*ListPrefrenceAreaData `json:"data"`
-		PageSize int64                    `form:"pageSize,default=20"`
+		PageSize int64                    `json:"pageSize,default=20"`
 		Success  bool                     `json:"success"`
 		Total    int64                    `json:"total"`
 	}
@@ -74,7 +74,7 @@ type (
 service admin-api {
 	//
 	@handler PrefrenceAreaAdd
-	post /addPrefrenceArea (addPrefrenceAreaReq) returns (addPrefrenceAreaResp)
+	post /addPrefrenceArea (AddPrefrenceAreaReq) returns (AddPrefrenceAreaResp)
 
 	//查询商品优选
 	@handler PrefrenceAreaList

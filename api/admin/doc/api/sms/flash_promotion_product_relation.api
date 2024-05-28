@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	addFlashPromotionProductRelationReq {
+	AddFlashPromotionProductRelationReq {
 		FlashPromotionProductRelationID        int64 ` json:"flashPromotionId"` // 限时购id
 		FlashPromotionProductRelationSessionID int64 `json:"flashPromotionSessionId"` // 编号
 		ProductID                              int64 `json:"productId"` // 商品id
@@ -14,7 +14,7 @@ type (
 		FlashPromotionProductRelationLimit     int32 `json:"flashPromotionLimit"` // 每人限购数量
 		Sort                                   int32 ` json:"sort"`
 	}
-	addFlashPromotionProductRelationResp {
+	AddFlashPromotionProductRelationResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -42,9 +42,9 @@ type (
 	ListFlashPromotionProductRelationResp {
 		Code     string                                   `json:"code"`
 		Message  string                                   `json:"message"`
-		Current  int64                                    `form:"current,default=1"`
+		Current  int64                                    `json:"current,default=1"`
 		Data     []*ListFlashPromotionProductRelationData `json:"data"`
-		PageSize int64                                    `form:"pageSize,default=20"`
+		PageSize int64                                    `json:"pageSize,default=20"`
 		Success  bool                                     `json:"success"`
 		Total    int64                                    `json:"total"`
 	}
@@ -80,7 +80,7 @@ type (
 service admin-api {
 	//添加限时购和商品关系
 	@handler FlashPromotionProductRelationAdd
-	post /addFlashPromotionProductRelation (addFlashPromotionProductRelationReq) returns (addFlashPromotionProductRelationResp)
+	post /addFlashPromotionProductRelation (AddFlashPromotionProductRelationReq) returns (AddFlashPromotionProductRelationResp)
 
 	//分页查询不同场次关联及商品信息
 	@handler FlashPromotionProductRelationList

@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	addProductCategoryReq {
+	AddProductCategoryReq {
 		ParentId               int64   `json:"parentId"` // 上级分类的编号：0表示一级分类
 		Name                   string  `json:"name"`
 		Level                  int32   `json:"level"` // 分类级别：0->1级；1->2级
@@ -18,7 +18,7 @@ type (
 		Description            string  `json:"description,optional"` // 描述
 		ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
 	}
-	addProductCategoryResp {
+	AddProductCategoryResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -46,9 +46,9 @@ type (
 	ListProductCategoryResp {
 		Code     string                     `json:"code"`
 		Message  string                     `json:"message"`
-		Current  int64                      `form:"current,default=1"`
+		Current  int64                      `json:"current,default=1"`
 		Data     []*ListProductCategoryData `json:"data"`
-		PageSize int64                      `form:"pageSize,default=20"`
+		PageSize int64                      `json:"pageSize,default=20"`
 		Success  bool                       `json:"success"`
 		Total    int64                      `json:"total"`
 	}
@@ -93,7 +93,7 @@ type (
 service admin-api {
 	//添加商品分类
 	@handler ProductCategoryAdd
-	post /addProductCategory (addProductCategoryReq) returns (addProductCategoryResp)
+	post /addProductCategory (AddProductCategoryReq) returns (AddProductCategoryResp)
 
 	//查询商品分类
 	@handler ProductCategoryList

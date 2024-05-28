@@ -5,10 +5,10 @@ info (
 )
 
 type (
-	addProductAttributecategoryReq {
+	AddProductAttributecategoryReq {
 		Name string `json:"name"`
 	}
-	addProductAttributecategoryResp {
+	AddProductAttributecategoryResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -41,9 +41,9 @@ type (
 	ListProductAttributecategoryResp {
 		Code     string                              `json:"code"`
 		Message  string                              `json:"message"`
-		Current  int64                               `form:"current,default=1"`
+		Current  int64                               `json:"current,default=1"`
 		Data     []*ListProductAttributecategoryData `json:"data"`
-		PageSize int64                               `form:"pageSize,default=20"`
+		PageSize int64                               `json:"pageSize,default=20"`
 		Success  bool                                `json:"success"`
 		Total    int64                               `json:"total"`
 	}
@@ -73,7 +73,7 @@ type (
 service admin-api {
 	//添加商品属性分类
 	@handler ProductAttributecategoryAdd
-	post /addProductAttributeCategory (addProductAttributecategoryReq) returns (addProductAttributecategoryResp)
+	post /addProductAttributeCategory (AddProductAttributecategoryReq) returns (AddProductAttributecategoryResp)
 
 	//查询商品属性分类
 	@handler ProductAttributecategoryList

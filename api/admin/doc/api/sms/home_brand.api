@@ -5,10 +5,10 @@ info (
 )
 
 type (
-	addHomeBrandReq {
+	AddHomeBrandReq {
 		BrandIds []int64 `json:"brandIds"` // 商品品牌id
 	}
-	addHomeBrandResp {
+	AddHomeBrandResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -28,9 +28,9 @@ type (
 	ListHomeBrandResp {
 		Code     string               `json:"code"`
 		Message  string               `json:"message"`
-		Current  int64                `form:"current,default=1"`
+		Current  int64                `json:"current,default=1"`
 		Data     []*ListHomeBrandData `json:"data"`
-		PageSize int64                `form:"pageSize,default=20"`
+		PageSize int64                `json:"pageSize,default=20"`
 		Success  bool                 `json:"success"`
 		Total    int64                `json:"total"`
 	}
@@ -68,7 +68,7 @@ type (
 service admin-api {
 	//添加推荐品牌
 	@handler HomeBrandAdd
-	post /addHomeBrand (addHomeBrandReq) returns (addHomeBrandResp)
+	post /addHomeBrand (AddHomeBrandReq) returns (AddHomeBrandResp)
 
 	//分页查询推荐品牌
 	@handler HomeBrandList

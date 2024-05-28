@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	addCompanyAddressReq {
+	AddCompanyAddressReq {
 		AddressName   string `json:"addressName"` // 地址名称
 		SendStatus    int32  `json:"sendStatus"` // 默认发货地址：0->否；1->是
 		ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
@@ -16,7 +16,7 @@ type (
 		Region        string `json:"region"` // 区
 		DetailAddress string `json:"detailAddress"` // 详细地址
 	}
-	addCompanyAddressResp {
+	AddCompanyAddressResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -43,9 +43,9 @@ type (
 	ListCompanyAddressResp {
 		Code     string                    `json:"code"`
 		Message  string                    `json:"message"`
-		Current  int64                     `form:"current,default=1"`
+		Current  int64                     `json:"current,default=1"`
 		Data     []*ListCompanyAddressData `json:"data"`
-		PageSize int64                     `form:"pageSize,default=20"`
+		PageSize int64                     `json:"pageSize,default=20"`
 		Success  bool                      `json:"success"`
 		Total    int64                     `json:"total"`
 	}
@@ -83,7 +83,7 @@ type (
 service admin-api {
 	//添加收货地址
 	@handler CompanyAddressAdd
-	post /addCompanyAddress (addCompanyAddressReq) returns (addCompanyAddressResp)
+	post /addCompanyAddress (AddCompanyAddressReq) returns (AddCompanyAddressResp)
 
 	//查询收货地址
 	@handler CompanyAddressList

@@ -23,9 +23,9 @@ type (
 		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
 	}
 	ListMemberAddressResp {
-		Current  int64                    `form:"current,default=1"`
+		Current  int64                    `json:"current,default=1"`
 		Data     []*ListMemberAddressData `json:"data"`
-		PageSize int64                    `form:"pageSize,default=20"`
+		PageSize int64                    `json:"pageSize,default=20"`
 		Success  bool                     `json:"success"`
 		Total    int64                    `json:"total"`
 		Code     string                   `json:"code"`

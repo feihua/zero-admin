@@ -11,6 +11,6 @@ Content-Type: application/json
 %}
 
 
-### 查询会员的统计信息
-GET {{host}}/api/member/statistics/queryMemberStatisticsInfoList
+### 获取优惠券
+GET {{host}}/api/sms/coupon/queryCouponList
 Authorization: Bearer {{token}}

@@ -656,8 +656,33 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryProductDetail",
-					Handler: productproduct.QueryProductDetailHandler(serverCtx),
+					Path:    "/updateDeleteStatus",
+					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateNewStatus",
+					Handler: productproduct.UpdateNewStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateProduct",
+					Handler: productproduct.ProductUpdateHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updatePublishStatus",
+					Handler: productproduct.UpdatePublishStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateRecommendStatus",
+					Handler: productproduct.UpdateRecommendStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateVerifyStatus",
+					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -701,33 +726,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/updateDeleteStatus",
-					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateNewStatus",
-					Handler: productproduct.UpdateNewStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateProduct",
-					Handler: productproduct.ProductUpdateHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updatePublishStatus",
-					Handler: productproduct.UpdatePublishStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateRecommendStatus",
-					Handler: productproduct.UpdateRecommendStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateVerifyStatus",
-					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
+					Path:    "/queryProductDetail",
+					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
 			}...,
 		),

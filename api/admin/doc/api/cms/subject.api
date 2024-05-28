@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	addSubjectReq {
+	AddSubjectReq {
 		CategoryId      int64  `json:"categoryId"`
 		Title           string `json:"title"`
 		Pic             string `json:"pic"` // 专题主图
@@ -21,7 +21,7 @@ type (
 		ForwardCount    int32  `json:"forwardCount"` // 转发数
 		CategoryName    string `json:"categoryName"` // 专题分类名称
 	}
-	addSubjectResp {
+	AddSubjectResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -56,9 +56,9 @@ type (
 	ListSubjectResp {
 		Code     string             `json:"code"`
 		Message  string             `json:"message"`
-		Current  int64              `form:"current,default=1"`
+		Current  int64              `json:"current,default=1"`
 		Data     []*ListSubjectData `json:"data"`
-		PageSize int64              `form:"pageSize,default=20"`
+		PageSize int64              `json:"pageSize,default=20"`
 		Success  bool               `json:"success"`
 		Total    int64              `json:"total"`
 	}
@@ -101,7 +101,7 @@ type (
 service admin-api {
 	//
 	@handler SubjectAdd
-	post /addSubject (addSubjectReq) returns (addSubjectResp)
+	post /addSubject (AddSubjectReq) returns (AddSubjectResp)
 
 	//获取商品专题
 	@handler SubjectList

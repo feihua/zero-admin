@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	addProductBrandReq {
+	AddProductBrandReq {
 		Name          string `json:"name"`
 		FirstLetter   string `json:"firstLetter"` // 首字母
 		Sort          int32  `json:"sort"`
@@ -15,7 +15,7 @@ type (
 		BigPic        string `json:"bigPic"` // 专区大图
 		BrandStory    string `json:"brandStory"` // 品牌故事
 	}
-	addProductBrandResp {
+	AddProductBrandResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -40,9 +40,9 @@ type (
 		BrandStory          string `json:"brandStory"` // 品牌故事
 	}
 	ListProductBrandResp {
-		Current  int64                   `form:"current,default=1"`
+		Current  int64                   `json:"current,default=1"`
 		Data     []*ListProductBrandData `json:"data"`
-		PageSize int64                   `form:"pageSize,default=20"`
+		PageSize int64                   `json:"pageSize,default=20"`
 		Success  bool                    `json:"success"`
 		Total    int64                   `json:"total"`
 		Code     string                  `json:"code"`
@@ -91,7 +91,7 @@ type (
 service admin-api {
 	//添加商品品牌
 	@handler ProductBrandAdd
-	post /addProductBrand (addProductBrandReq) returns (addProductBrandResp)
+	post /addProductBrand (AddProductBrandReq) returns (AddProductBrandResp)
 
 	//查询商品品牌
 	@handler ProductBrandList

@@ -5,13 +5,13 @@ info (
 )
 
 type (
-	addFlashPromotionSessionReq {
+	AddFlashPromotionSessionReq {
 		Name      string `json:"name"` // 场次名称
 		StartTime string `json:"startTime"` // 每日开始时间
 		EndTime   string `json:"endTime"` // 每日结束时间
 		Status    int32  `json:"status"` // 启用状态：0->不启用；1->启用
 	}
-	addFlashPromotionSessionResp {
+	AddFlashPromotionSessionResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -30,7 +30,7 @@ type (
 	ListFlashPromotionSessionResp {
 		Code     string                           `json:"code"`
 		Message  string                           `json:"message"`
-		Current  int64                            `form:"current,default=1"`
+		Current  int64                            `json:"current,default=1"`
 		Data     []*ListFlashPromotionSessionData `json:"data"`
 		PageSize int64                            `form:"pageSize,default=20"`
 		Success  bool                             `json:"success"`
@@ -65,7 +65,7 @@ type (
 service admin-api {
 	//添加限时购场次
 	@handler FlashPromotionSessionAdd
-	post /addFlashPromotionSession (addFlashPromotionSessionReq) returns (addFlashPromotionSessionResp)
+	post /addFlashPromotionSession (AddFlashPromotionSessionReq) returns (AddFlashPromotionSessionResp)
 
 	//查询限时购场次
 	@handler FlashPromotionSessionList

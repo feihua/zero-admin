@@ -5,10 +5,10 @@ info (
 )
 
 type (
-	addHomeNewProductReq {
+	AddHomeNewProductReq {
 		ProductIds []int64 `json:"productIds"` // 商品id
 	}
-	addHomeNewProductResp {
+	AddHomeNewProductResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -28,9 +28,9 @@ type (
 	ListHomeNewProductResp {
 		Code     string                    `json:"code"`
 		Message  string                    `json:"message"`
-		Current  int64                     `form:"current,default=1"`
+		Current  int64                     `json:"current,default=1"`
 		Data     []*ListHomeNewProductData `json:"data"`
-		PageSize int64                     `form:"pageSize,default=20"`
+		PageSize int64                     `json:"pageSize,default=20"`
 		Success  bool                      `json:"success"`
 		Total    int64                     `json:"total"`
 	}
@@ -68,7 +68,7 @@ type (
 service admin-api {
 	//添加首页新品
 	@handler HomeNewProductAdd
-	post /addHomeNewProduct (addHomeNewProductReq) returns (addHomeNewProductResp)
+	post /addHomeNewProduct (AddHomeNewProductReq) returns (AddHomeNewProductResp)
 
 	//查询首页新品
 	@handler HomeNewProductList
