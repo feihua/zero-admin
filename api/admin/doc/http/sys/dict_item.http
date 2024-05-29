@@ -11,39 +11,45 @@ Content-Type: application/json
 %}
 
 ### 添加字典项
-POST {{host}}/api/sys/dict/addDictItem
+POST {{host}}/api/sys/dictItem/addDictItem
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "value": "female1",
-  "label": "女1",
-  "type": "sex",
-  "description": "性别",
-  "sort": 0,
-  "remarks": "性别",
-  "delFlag": 0
+  "delFlag": 1,
+  "dictLabel": "test",
+  "dictSort": 1,
+  "dictStatus": 1,
+  "dictType": "1",
+  "dictValue": "1",
+  "isDefault": 1,
+  "remark": "test",
+  "updateBy": "",
+  "updateTime": ""
 }
 
 ### 删除字典项
-GET {{host}}/api/sys/dict/deleteDictItem?ids=[5]
+GET {{host}}/api/sys/dictItem/deleteDictItem?ids=[5]
 Authorization: Bearer {{token}}
 
 
 ### 修改字典项
-POST {{host}}/api/sys/dict/updateDictItem
+POST {{host}}/api/sys/dictItem/updateDictItem
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 2,
-  "value": "female",
-  "label": "女",
-  "type": "sex",
-  "description": "性别",
-  "sort": 0,
-  "remarks": "性别1",
-  "delFlag": 0
+  "delFlag": 1,
+  "dictLabel": "1",
+  "dictSort": 1,
+  "dictStatus": 1,
+  "dictType": "1",
+  "dictValue": "1",
+  "id": 1,
+  "isDefault": 1,
+  "remark": "test",
+  "updateBy": "",
+  "updateTime": ""
 }
 
 ### 查询字典项列表
