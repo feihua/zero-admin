@@ -370,7 +370,7 @@ message DictAddReq {
   int32 DictStatus = 3; //字典状态
   string DictType = 4; //字典类型
   string Remark = 5; //备注信息
-
+  int32 isSystem = 6; //是否系统预留  0：否  1：是
 }
 
 message DictAddResp {
@@ -394,6 +394,7 @@ message DictUpdateReq {
   int64 id = 4; //编号
   string remark = 5; //备注信息
   string updateBy = 6; //更新者
+  int32 isSystem = 7; //是否系统预留  0：否  1：是
 
 }
 

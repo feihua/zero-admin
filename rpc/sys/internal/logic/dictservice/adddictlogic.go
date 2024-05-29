@@ -60,7 +60,7 @@ func (l *AddDictLogic) AddDict(in *sysclient.DictAddReq) (*sysclient.DictAddResp
 		DictType:   in.DictType,
 		DictStatus: in.DictStatus,
 		Remark:     in.Remark,
-		IsSystem:   0,
+		IsSystem:   in.IsSystem,
 		DelFlag:    0,
 		CreateBy:   in.CreateBy,
 		CreateTime: time.Now(),

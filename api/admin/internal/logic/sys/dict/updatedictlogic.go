@@ -41,6 +41,7 @@ func (l *UpdateDictLogic) UpdateDict(req *types.UpdateDictReq) (*types.UpdateDic
 		Id:         req.Id,
 		Remark:     req.Remark,
 		UpdateBy:   l.ctx.Value("userName").(string),
+		IsSystem:   req.IsSystem,
 	})
 
 	if err != nil {

@@ -75,6 +75,6 @@ func (l *QueryDictItemListLogic) QueryDictItemList(req *types.ListDictItemReq) (
 		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
-		Total:    resp.Total,
+		Total:    result.Total,
 	}, nil
 }

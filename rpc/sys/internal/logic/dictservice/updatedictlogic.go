@@ -55,6 +55,7 @@ func (l *UpdateDictLogic) UpdateDict(in *sysclient.DictUpdateReq) (*sysclient.Di
 		ID:         in.Id,
 		Remark:     in.Remark,
 		UpdateBy:   in.UpdateBy,
+		IsSystem:   in.IsSystem,
 	}
 	_, err = q.Updates(dict)
 

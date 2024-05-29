@@ -40,6 +40,7 @@ func (l *AddDictLogic) AddDict(req *types.AddDictReq) (*types.AddDictResp, error
 		DictStatus: req.DictStatus,
 		DictType:   req.DictType,
 		Remark:     req.Remark,
+		IsSystem:   req.IsSystem,
 	})
 
 	if err != nil {

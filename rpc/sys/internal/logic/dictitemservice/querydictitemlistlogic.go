@@ -36,7 +36,7 @@ func NewQueryDictItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.DictItemListReq) (*sysclient.DictItemListResp, error) {
 	q := query.SysDictItem.WithContext(l.ctx)
 
-	result, err := q.Find()
+	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询字典项列表信息失败,参数:%+v,异常:%s", in, err.Error())
@@ -65,5 +65,8 @@ func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.DictItemListReq
 
 	logc.Infof(l.ctx, "查询字典项列表信息,参数：%+v,响应：%+v", in, list)
 
-	return &sysclient.DictItemListResp{}, nil
+	return &sysclient.DictItemListResp{
+		Total: count,
+		List:  list,
+	}, nil
 }
