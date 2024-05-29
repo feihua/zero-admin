@@ -37,12 +37,14 @@ func newSysUser(db *gorm.DB, opts ...gen.DOOption) sysUser {
 	_sysUser.Mobile = field.NewString(tableName, "mobile")
 	_sysUser.UserStatus = field.NewInt32(tableName, "user_status")
 	_sysUser.DeptID = field.NewInt64(tableName, "dept_id")
-	_sysUser.JobID = field.NewInt64(tableName, "job_id")
+	_sysUser.Remark = field.NewString(tableName, "remark")
+	_sysUser.IsDeleted = field.NewInt32(tableName, "is_deleted")
+	_sysUser.LoginTime = field.NewTime(tableName, "login_time")
+	_sysUser.LoginIP = field.NewString(tableName, "login_ip")
 	_sysUser.CreateBy = field.NewString(tableName, "create_by")
 	_sysUser.CreateTime = field.NewTime(tableName, "create_time")
 	_sysUser.UpdateBy = field.NewString(tableName, "update_by")
 	_sysUser.UpdateTime = field.NewTime(tableName, "update_time")
-	_sysUser.DelFlag = field.NewInt32(tableName, "del_flag")
 
 	_sysUser.fillFieldMap()
 
@@ -62,14 +64,16 @@ type sysUser struct {
 	Salt       field.String // 加密盐
 	Email      field.String // 邮箱
 	Mobile     field.String // 手机号
-	UserStatus field.Int32  // 状态  0：禁用   1：正常
+	UserStatus field.Int32  // 帐号状态（0正常 1停用）
 	DeptID     field.Int64  // 部门id
-	JobID      field.Int64  // 岗位id
+	Remark     field.String // 备注信息
+	IsDeleted  field.Int32  // 是否删除  0：否  1：是
+	LoginTime  field.Time   // 登录时间
+	LoginIP    field.String // 登录ip
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
 	UpdateTime field.Time   // 更新时间
-	DelFlag    field.Int32  // 是否删除  0：已删除  1：正常
 
 	fieldMap map[string]field.Expr
 }
@@ -96,12 +100,14 @@ func (s *sysUser) updateTableName(table string) *sysUser {
 	s.Mobile = field.NewString(table, "mobile")
 	s.UserStatus = field.NewInt32(table, "user_status")
 	s.DeptID = field.NewInt64(table, "dept_id")
-	s.JobID = field.NewInt64(table, "job_id")
+	s.Remark = field.NewString(table, "remark")
+	s.IsDeleted = field.NewInt32(table, "is_deleted")
+	s.LoginTime = field.NewTime(table, "login_time")
+	s.LoginIP = field.NewString(table, "login_ip")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
-	s.DelFlag = field.NewInt32(table, "del_flag")
 
 	s.fillFieldMap()
 
@@ -126,7 +132,7 @@ func (s *sysUser) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysUser) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 16)
+	s.fieldMap = make(map[string]field.Expr, 18)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["user_name"] = s.UserName
 	s.fieldMap["nick_name"] = s.NickName
@@ -137,12 +143,14 @@ func (s *sysUser) fillFieldMap() {
 	s.fieldMap["mobile"] = s.Mobile
 	s.fieldMap["user_status"] = s.UserStatus
 	s.fieldMap["dept_id"] = s.DeptID
-	s.fieldMap["job_id"] = s.JobID
+	s.fieldMap["remark"] = s.Remark
+	s.fieldMap["is_deleted"] = s.IsDeleted
+	s.fieldMap["login_time"] = s.LoginTime
+	s.fieldMap["login_ip"] = s.LoginIP
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy
 	s.fieldMap["update_time"] = s.UpdateTime
-	s.fieldMap["del_flag"] = s.DelFlag
 }
 
 func (s sysUser) clone(db *gorm.DB) sysUser {

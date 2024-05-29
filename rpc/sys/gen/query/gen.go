@@ -20,12 +20,11 @@ var (
 	SysDept       *sysDept
 	SysDict       *sysDict
 	SysDictItem   *sysDictItem
-	SysJob        *sysJob
 	SysLoginLog   *sysLoginLog
 	SysMenu       *sysMenu
 	SysOperateLog *sysOperateLog
+	SysPost       *sysPost
 	SysRole       *sysRole
-	SysRoleDept   *sysRoleDept
 	SysRoleMenu   *sysRoleMenu
 	SysUser       *sysUser
 	SysUserRole   *sysUserRole
@@ -36,12 +35,11 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	SysDept = &Q.SysDept
 	SysDict = &Q.SysDict
 	SysDictItem = &Q.SysDictItem
-	SysJob = &Q.SysJob
 	SysLoginLog = &Q.SysLoginLog
 	SysMenu = &Q.SysMenu
 	SysOperateLog = &Q.SysOperateLog
+	SysPost = &Q.SysPost
 	SysRole = &Q.SysRole
-	SysRoleDept = &Q.SysRoleDept
 	SysRoleMenu = &Q.SysRoleMenu
 	SysUser = &Q.SysUser
 	SysUserRole = &Q.SysUserRole
@@ -53,12 +51,11 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		SysDept:       newSysDept(db, opts...),
 		SysDict:       newSysDict(db, opts...),
 		SysDictItem:   newSysDictItem(db, opts...),
-		SysJob:        newSysJob(db, opts...),
 		SysLoginLog:   newSysLoginLog(db, opts...),
 		SysMenu:       newSysMenu(db, opts...),
 		SysOperateLog: newSysOperateLog(db, opts...),
+		SysPost:       newSysPost(db, opts...),
 		SysRole:       newSysRole(db, opts...),
-		SysRoleDept:   newSysRoleDept(db, opts...),
 		SysRoleMenu:   newSysRoleMenu(db, opts...),
 		SysUser:       newSysUser(db, opts...),
 		SysUserRole:   newSysUserRole(db, opts...),
@@ -71,12 +68,11 @@ type Query struct {
 	SysDept       sysDept
 	SysDict       sysDict
 	SysDictItem   sysDictItem
-	SysJob        sysJob
 	SysLoginLog   sysLoginLog
 	SysMenu       sysMenu
 	SysOperateLog sysOperateLog
+	SysPost       sysPost
 	SysRole       sysRole
-	SysRoleDept   sysRoleDept
 	SysRoleMenu   sysRoleMenu
 	SysUser       sysUser
 	SysUserRole   sysUserRole
@@ -90,12 +86,11 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		SysDept:       q.SysDept.clone(db),
 		SysDict:       q.SysDict.clone(db),
 		SysDictItem:   q.SysDictItem.clone(db),
-		SysJob:        q.SysJob.clone(db),
 		SysLoginLog:   q.SysLoginLog.clone(db),
 		SysMenu:       q.SysMenu.clone(db),
 		SysOperateLog: q.SysOperateLog.clone(db),
+		SysPost:       q.SysPost.clone(db),
 		SysRole:       q.SysRole.clone(db),
-		SysRoleDept:   q.SysRoleDept.clone(db),
 		SysRoleMenu:   q.SysRoleMenu.clone(db),
 		SysUser:       q.SysUser.clone(db),
 		SysUserRole:   q.SysUserRole.clone(db),
@@ -116,12 +111,11 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		SysDept:       q.SysDept.replaceDB(db),
 		SysDict:       q.SysDict.replaceDB(db),
 		SysDictItem:   q.SysDictItem.replaceDB(db),
-		SysJob:        q.SysJob.replaceDB(db),
 		SysLoginLog:   q.SysLoginLog.replaceDB(db),
 		SysMenu:       q.SysMenu.replaceDB(db),
 		SysOperateLog: q.SysOperateLog.replaceDB(db),
+		SysPost:       q.SysPost.replaceDB(db),
 		SysRole:       q.SysRole.replaceDB(db),
-		SysRoleDept:   q.SysRoleDept.replaceDB(db),
 		SysRoleMenu:   q.SysRoleMenu.replaceDB(db),
 		SysUser:       q.SysUser.replaceDB(db),
 		SysUserRole:   q.SysUserRole.replaceDB(db),
@@ -132,12 +126,11 @@ type queryCtx struct {
 	SysDept       ISysDeptDo
 	SysDict       ISysDictDo
 	SysDictItem   ISysDictItemDo
-	SysJob        ISysJobDo
 	SysLoginLog   ISysLoginLogDo
 	SysMenu       ISysMenuDo
 	SysOperateLog ISysOperateLogDo
+	SysPost       ISysPostDo
 	SysRole       ISysRoleDo
-	SysRoleDept   ISysRoleDeptDo
 	SysRoleMenu   ISysRoleMenuDo
 	SysUser       ISysUserDo
 	SysUserRole   ISysUserRoleDo
@@ -148,12 +141,11 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		SysDept:       q.SysDept.WithContext(ctx),
 		SysDict:       q.SysDict.WithContext(ctx),
 		SysDictItem:   q.SysDictItem.WithContext(ctx),
-		SysJob:        q.SysJob.WithContext(ctx),
 		SysLoginLog:   q.SysLoginLog.WithContext(ctx),
 		SysMenu:       q.SysMenu.WithContext(ctx),
 		SysOperateLog: q.SysOperateLog.WithContext(ctx),
+		SysPost:       q.SysPost.WithContext(ctx),
 		SysRole:       q.SysRole.WithContext(ctx),
-		SysRoleDept:   q.SysRoleDept.WithContext(ctx),
 		SysRoleMenu:   q.SysRoleMenu.WithContext(ctx),
 		SysUser:       q.SysUser.WithContext(ctx),
 		SysUserRole:   q.SysUserRole.WithContext(ctx),

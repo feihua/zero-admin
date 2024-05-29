@@ -36,14 +36,14 @@ func newSysUserRole(db *gorm.DB, opts ...gen.DOOption) sysUserRole {
 	return _sysUserRole
 }
 
-// sysUserRole 用户角色
+// sysUserRole 用户角色关联
 type sysUserRole struct {
 	sysUserRoleDo sysUserRoleDo
 
 	ALL    field.Asterisk
 	ID     field.Int64 // 编号
-	UserID field.Int64 // 用户ID
-	RoleID field.Int64 // 角色ID
+	UserID field.Int64 // 用户Id
+	RoleID field.Int64 // 角色Id
 
 	fieldMap map[string]field.Expr
 }

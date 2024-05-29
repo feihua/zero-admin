@@ -28,18 +28,20 @@ func newSysMenu(db *gorm.DB, opts ...gen.DOOption) sysMenu {
 	tableName := _sysMenu.sysMenuDo.TableName()
 	_sysMenu.ALL = field.NewAsterisk(tableName)
 	_sysMenu.ID = field.NewInt64(tableName, "id")
-	_sysMenu.Name = field.NewString(tableName, "name")
+	_sysMenu.MenuName = field.NewString(tableName, "menu_name")
 	_sysMenu.ParentID = field.NewInt64(tableName, "parent_id")
-	_sysMenu.URL = field.NewString(tableName, "url")
-	_sysMenu.Perms = field.NewString(tableName, "perms")
-	_sysMenu.Type = field.NewInt32(tableName, "type")
-	_sysMenu.Icon = field.NewString(tableName, "icon")
-	_sysMenu.OrderNum = field.NewInt32(tableName, "order_num")
+	_sysMenu.MenuPath = field.NewString(tableName, "menu_path")
+	_sysMenu.MenuPerms = field.NewString(tableName, "menu_perms")
+	_sysMenu.MenuType = field.NewInt32(tableName, "menu_type")
+	_sysMenu.MenuIcon = field.NewString(tableName, "menu_icon")
+	_sysMenu.MenuSort = field.NewInt32(tableName, "menu_sort")
 	_sysMenu.CreateBy = field.NewString(tableName, "create_by")
 	_sysMenu.CreateTime = field.NewTime(tableName, "create_time")
 	_sysMenu.UpdateBy = field.NewString(tableName, "update_by")
 	_sysMenu.UpdateTime = field.NewTime(tableName, "update_time")
-	_sysMenu.DelFlag = field.NewInt32(tableName, "del_flag")
+	_sysMenu.MenuStatus = field.NewInt32(tableName, "menu_status")
+	_sysMenu.IsDeleted = field.NewInt32(tableName, "is_deleted")
+	_sysMenu.Remark = field.NewString(tableName, "remark")
 	_sysMenu.VuePath = field.NewString(tableName, "vue_path")
 	_sysMenu.VueComponent = field.NewString(tableName, "vue_component")
 	_sysMenu.VueIcon = field.NewString(tableName, "vue_icon")
@@ -57,23 +59,25 @@ type sysMenu struct {
 
 	ALL           field.Asterisk
 	ID            field.Int64  // 编号
-	Name          field.String // 菜单名称
+	MenuName      field.String // 菜单名称
 	ParentID      field.Int64  // 父菜单ID，一级菜单为0
-	URL           field.String
-	Perms         field.String
-	Type          field.Int32  // 类型 0：目录,1：菜单,2：按钮,3：外链
-	Icon          field.String // 菜单图标
-	OrderNum      field.Int32  // 排序
+	MenuPath      field.String
+	MenuPerms     field.String
+	MenuType      field.Int32  // 类型 0：目录,1：菜单,2：按钮,3：外链
+	MenuIcon      field.String // 菜单图标
+	MenuSort      field.Int32  // 菜单排序
 	CreateBy      field.String // 创建者
 	CreateTime    field.Time   // 创建时间
 	UpdateBy      field.String // 更新者
 	UpdateTime    field.Time   // 更新时间
-	DelFlag       field.Int32  // 是否删除  0：已删除  1：正常
+	MenuStatus    field.Int32  // 菜单状态
+	IsDeleted     field.Int32  // 是否删除  0：否  1：是
+	Remark        field.String // 备注信息
 	VuePath       field.String // vue系统的path
 	VueComponent  field.String // vue的页面
 	VueIcon       field.String // vue的图标
 	VueRedirect   field.String // vue的路由重定向
-	BackgroundURL field.String // 后台地址
+	BackgroundURL field.String // 接口地址
 
 	fieldMap map[string]field.Expr
 }
@@ -91,18 +95,20 @@ func (s sysMenu) As(alias string) *sysMenu {
 func (s *sysMenu) updateTableName(table string) *sysMenu {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.Name = field.NewString(table, "name")
+	s.MenuName = field.NewString(table, "menu_name")
 	s.ParentID = field.NewInt64(table, "parent_id")
-	s.URL = field.NewString(table, "url")
-	s.Perms = field.NewString(table, "perms")
-	s.Type = field.NewInt32(table, "type")
-	s.Icon = field.NewString(table, "icon")
-	s.OrderNum = field.NewInt32(table, "order_num")
+	s.MenuPath = field.NewString(table, "menu_path")
+	s.MenuPerms = field.NewString(table, "menu_perms")
+	s.MenuType = field.NewInt32(table, "menu_type")
+	s.MenuIcon = field.NewString(table, "menu_icon")
+	s.MenuSort = field.NewInt32(table, "menu_sort")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
-	s.DelFlag = field.NewInt32(table, "del_flag")
+	s.MenuStatus = field.NewInt32(table, "menu_status")
+	s.IsDeleted = field.NewInt32(table, "is_deleted")
+	s.Remark = field.NewString(table, "remark")
 	s.VuePath = field.NewString(table, "vue_path")
 	s.VueComponent = field.NewString(table, "vue_component")
 	s.VueIcon = field.NewString(table, "vue_icon")
@@ -132,20 +138,22 @@ func (s *sysMenu) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysMenu) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 18)
+	s.fieldMap = make(map[string]field.Expr, 20)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["name"] = s.Name
+	s.fieldMap["menu_name"] = s.MenuName
 	s.fieldMap["parent_id"] = s.ParentID
-	s.fieldMap["url"] = s.URL
-	s.fieldMap["perms"] = s.Perms
-	s.fieldMap["type"] = s.Type
-	s.fieldMap["icon"] = s.Icon
-	s.fieldMap["order_num"] = s.OrderNum
+	s.fieldMap["menu_path"] = s.MenuPath
+	s.fieldMap["menu_perms"] = s.MenuPerms
+	s.fieldMap["menu_type"] = s.MenuType
+	s.fieldMap["menu_icon"] = s.MenuIcon
+	s.fieldMap["menu_sort"] = s.MenuSort
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy
 	s.fieldMap["update_time"] = s.UpdateTime
-	s.fieldMap["del_flag"] = s.DelFlag
+	s.fieldMap["menu_status"] = s.MenuStatus
+	s.fieldMap["is_deleted"] = s.IsDeleted
+	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["vue_path"] = s.VuePath
 	s.fieldMap["vue_component"] = s.VueComponent
 	s.fieldMap["vue_icon"] = s.VueIcon

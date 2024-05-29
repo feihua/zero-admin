@@ -35,7 +35,7 @@ func newSysDictItem(db *gorm.DB, opts ...gen.DOOption) sysDictItem {
 	_sysDictItem.DictSort = field.NewInt32(tableName, "dict_sort")
 	_sysDictItem.Remark = field.NewString(tableName, "remark")
 	_sysDictItem.IsDefault = field.NewInt32(tableName, "is_default")
-	_sysDictItem.DelFlag = field.NewInt32(tableName, "del_flag")
+	_sysDictItem.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_sysDictItem.CreateBy = field.NewString(tableName, "create_by")
 	_sysDictItem.CreateTime = field.NewTime(tableName, "create_time")
 	_sysDictItem.UpdateBy = field.NewString(tableName, "update_by")
@@ -59,7 +59,7 @@ type sysDictItem struct {
 	DictSort   field.Int32  // 排序
 	Remark     field.String // 备注信息
 	IsDefault  field.Int32  // 是否默认  0：否  1：是
-	DelFlag    field.Int32  // 是否删除  1：已删除  0：正常
+	IsDeleted  field.Int32  // 是否删除  0：否  1：是
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
@@ -88,7 +88,7 @@ func (s *sysDictItem) updateTableName(table string) *sysDictItem {
 	s.DictSort = field.NewInt32(table, "dict_sort")
 	s.Remark = field.NewString(table, "remark")
 	s.IsDefault = field.NewInt32(table, "is_default")
-	s.DelFlag = field.NewInt32(table, "del_flag")
+	s.IsDeleted = field.NewInt32(table, "is_deleted")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
@@ -128,7 +128,7 @@ func (s *sysDictItem) fillFieldMap() {
 	s.fieldMap["dict_sort"] = s.DictSort
 	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["is_default"] = s.IsDefault
-	s.fieldMap["del_flag"] = s.DelFlag
+	s.fieldMap["is_deleted"] = s.IsDeleted
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy

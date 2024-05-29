@@ -13,15 +13,20 @@ const TableNameSysDept = "sys_dept"
 // SysDept 部门管理
 type SysDept struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
-	DeptName   string     `gorm:"column:dept_name;not null;comment:机构名称" json:"dept_name"`                               // 机构名称
+	DeptName   string     `gorm:"column:dept_name;not null;comment:部门名称" json:"dept_name"`                               // 部门名称
+	DeptStatus int32      `gorm:"column:dept_status;not null;default:1;comment:部门状态" json:"dept_status"`                 // 部门状态
+	DeptSort   int32      `gorm:"column:dept_sort;not null;comment:部门排序" json:"dept_sort"`                               // 部门排序
 	ParentID   int64      `gorm:"column:parent_id;not null;comment:上级机构ID，一级机构为0" json:"parent_id"`                      // 上级机构ID，一级机构为0
-	OrderNum   int32      `gorm:"column:order_num;not null;comment:排序" json:"order_num"`                                 // 排序
+	Leader     string     `gorm:"column:leader;not null;comment:负责人" json:"leader"`                                      // 负责人
+	Phone      string     `gorm:"column:phone;not null;comment:电话号码" json:"phone"`                                       // 电话号码
+	Email      string     `gorm:"column:email;not null;comment:邮箱" json:"email"`                                         // 邮箱
+	Remark     string     `gorm:"column:remark;not null;comment:备注信息" json:"remark"`                                     // 备注信息
+	IsDeleted  int32      `gorm:"column:is_deleted;not null;comment:是否删除  0：否  1：是" json:"is_deleted"`                   // 是否删除  0：否  1：是
+	ParentIds  string     `gorm:"column:parent_ids;not null;comment:上级机构IDs，一级机构为0" json:"parent_ids"`                   // 上级机构IDs，一级机构为0
 	CreateBy   string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateBy   string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
 	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
-	DelFlag    int32      `gorm:"column:del_flag;not null;default:1;comment:是否删除  0：已删除  1：正常" json:"del_flag"`          // 是否删除  0：已删除  1：正常
-	ParentIds  string     `gorm:"column:parent_ids;not null;comment:上级机构IDs，一级机构为0" json:"parent_ids"`                   // 上级机构IDs，一级机构为0
 }
 
 // TableName SysDept's table name

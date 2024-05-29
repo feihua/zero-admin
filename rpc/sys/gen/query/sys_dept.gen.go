@@ -29,14 +29,19 @@ func newSysDept(db *gorm.DB, opts ...gen.DOOption) sysDept {
 	_sysDept.ALL = field.NewAsterisk(tableName)
 	_sysDept.ID = field.NewInt64(tableName, "id")
 	_sysDept.DeptName = field.NewString(tableName, "dept_name")
+	_sysDept.DeptStatus = field.NewInt32(tableName, "dept_status")
+	_sysDept.DeptSort = field.NewInt32(tableName, "dept_sort")
 	_sysDept.ParentID = field.NewInt64(tableName, "parent_id")
-	_sysDept.OrderNum = field.NewInt32(tableName, "order_num")
+	_sysDept.Leader = field.NewString(tableName, "leader")
+	_sysDept.Phone = field.NewString(tableName, "phone")
+	_sysDept.Email = field.NewString(tableName, "email")
+	_sysDept.Remark = field.NewString(tableName, "remark")
+	_sysDept.IsDeleted = field.NewInt32(tableName, "is_deleted")
+	_sysDept.ParentIds = field.NewString(tableName, "parent_ids")
 	_sysDept.CreateBy = field.NewString(tableName, "create_by")
 	_sysDept.CreateTime = field.NewTime(tableName, "create_time")
 	_sysDept.UpdateBy = field.NewString(tableName, "update_by")
 	_sysDept.UpdateTime = field.NewTime(tableName, "update_time")
-	_sysDept.DelFlag = field.NewInt32(tableName, "del_flag")
-	_sysDept.ParentIds = field.NewString(tableName, "parent_ids")
 
 	_sysDept.fillFieldMap()
 
@@ -49,15 +54,20 @@ type sysDept struct {
 
 	ALL        field.Asterisk
 	ID         field.Int64  // 编号
-	DeptName   field.String // 机构名称
+	DeptName   field.String // 部门名称
+	DeptStatus field.Int32  // 部门状态
+	DeptSort   field.Int32  // 部门排序
 	ParentID   field.Int64  // 上级机构ID，一级机构为0
-	OrderNum   field.Int32  // 排序
+	Leader     field.String // 负责人
+	Phone      field.String // 电话号码
+	Email      field.String // 邮箱
+	Remark     field.String // 备注信息
+	IsDeleted  field.Int32  // 是否删除  0：否  1：是
+	ParentIds  field.String // 上级机构IDs，一级机构为0
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
 	UpdateTime field.Time   // 更新时间
-	DelFlag    field.Int32  // 是否删除  0：已删除  1：正常
-	ParentIds  field.String // 上级机构IDs，一级机构为0
 
 	fieldMap map[string]field.Expr
 }
@@ -76,14 +86,19 @@ func (s *sysDept) updateTableName(table string) *sysDept {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
 	s.DeptName = field.NewString(table, "dept_name")
+	s.DeptStatus = field.NewInt32(table, "dept_status")
+	s.DeptSort = field.NewInt32(table, "dept_sort")
 	s.ParentID = field.NewInt64(table, "parent_id")
-	s.OrderNum = field.NewInt32(table, "order_num")
+	s.Leader = field.NewString(table, "leader")
+	s.Phone = field.NewString(table, "phone")
+	s.Email = field.NewString(table, "email")
+	s.Remark = field.NewString(table, "remark")
+	s.IsDeleted = field.NewInt32(table, "is_deleted")
+	s.ParentIds = field.NewString(table, "parent_ids")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
-	s.DelFlag = field.NewInt32(table, "del_flag")
-	s.ParentIds = field.NewString(table, "parent_ids")
 
 	s.fillFieldMap()
 
@@ -108,17 +123,22 @@ func (s *sysDept) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysDept) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 10)
+	s.fieldMap = make(map[string]field.Expr, 15)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["dept_name"] = s.DeptName
+	s.fieldMap["dept_status"] = s.DeptStatus
+	s.fieldMap["dept_sort"] = s.DeptSort
 	s.fieldMap["parent_id"] = s.ParentID
-	s.fieldMap["order_num"] = s.OrderNum
+	s.fieldMap["leader"] = s.Leader
+	s.fieldMap["phone"] = s.Phone
+	s.fieldMap["email"] = s.Email
+	s.fieldMap["remark"] = s.Remark
+	s.fieldMap["is_deleted"] = s.IsDeleted
+	s.fieldMap["parent_ids"] = s.ParentIds
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy
 	s.fieldMap["update_time"] = s.UpdateTime
-	s.fieldMap["del_flag"] = s.DelFlag
-	s.fieldMap["parent_ids"] = s.ParentIds
 }
 
 func (s sysDept) clone(db *gorm.DB) sysDept {

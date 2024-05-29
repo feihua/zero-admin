@@ -8,16 +8,16 @@ import (
 	"time"
 )
 
-const TableNameSysDict = "sys_dict"
+const TableNameSysPost = "sys_post"
 
-// SysDict 字典表
-type SysDict struct {
+// SysPost 职位管理
+type SysPost struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
-	DictName   string     `gorm:"column:dict_name;not null;comment:字典名称" json:"dict_name"`                               // 字典名称
-	DictType   string     `gorm:"column:dict_type;not null;comment:字典类型" json:"dict_type"`                               // 字典类型
-	DictStatus int32      `gorm:"column:dict_status;not null;default:1;comment:字典状态" json:"dict_status"`                 // 字典状态
+	PostName   string     `gorm:"column:post_name;not null;comment:岗位名称" json:"post_name"`                               // 岗位名称
+	PostCode   string     `gorm:"column:post_code;not null;comment:岗位编码" json:"post_code"`                               // 岗位编码
+	PostStatus int32      `gorm:"column:post_status;not null;default:1;comment:岗位状态" json:"post_status"`                 // 岗位状态
+	PostSort   int32      `gorm:"column:post_sort;not null;comment:岗位排序" json:"post_sort"`                               // 岗位排序
 	Remark     string     `gorm:"column:remark;not null;comment:备注信息" json:"remark"`                                     // 备注信息
-	IsSystem   int32      `gorm:"column:is_system;not null;comment:是否系统预留  0：否  1：是" json:"is_system"`                   // 是否系统预留  0：否  1：是
 	IsDeleted  int32      `gorm:"column:is_deleted;not null;comment:是否删除  0：否  1：是" json:"is_deleted"`                   // 是否删除  0：否  1：是
 	CreateBy   string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
@@ -25,7 +25,7 @@ type SysDict struct {
 	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 
-// TableName SysDict's table name
-func (*SysDict) TableName() string {
-	return TableNameSysDict
+// TableName SysPost's table name
+func (*SysPost) TableName() string {
+	return TableNameSysPost
 }

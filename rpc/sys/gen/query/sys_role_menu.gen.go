@@ -36,14 +36,14 @@ func newSysRoleMenu(db *gorm.DB, opts ...gen.DOOption) sysRoleMenu {
 	return _sysRoleMenu
 }
 
-// sysRoleMenu 角色菜单
+// sysRoleMenu 角色菜单关联
 type sysRoleMenu struct {
 	sysRoleMenuDo sysRoleMenuDo
 
 	ALL    field.Asterisk
 	ID     field.Int64 // 编号
-	RoleID field.Int64 // 角色ID
-	MenuID field.Int64 // 菜单ID
+	RoleID field.Int64 // 角色Id
+	MenuID field.Int64 // 菜单Id
 
 	fieldMap map[string]field.Expr
 }

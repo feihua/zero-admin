@@ -33,7 +33,7 @@ func newSysDict(db *gorm.DB, opts ...gen.DOOption) sysDict {
 	_sysDict.DictStatus = field.NewInt32(tableName, "dict_status")
 	_sysDict.Remark = field.NewString(tableName, "remark")
 	_sysDict.IsSystem = field.NewInt32(tableName, "is_system")
-	_sysDict.DelFlag = field.NewInt32(tableName, "del_flag")
+	_sysDict.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_sysDict.CreateBy = field.NewString(tableName, "create_by")
 	_sysDict.CreateTime = field.NewTime(tableName, "create_time")
 	_sysDict.UpdateBy = field.NewString(tableName, "update_by")
@@ -55,7 +55,7 @@ type sysDict struct {
 	DictStatus field.Int32  // 字典状态
 	Remark     field.String // 备注信息
 	IsSystem   field.Int32  // 是否系统预留  0：否  1：是
-	DelFlag    field.Int32  // 是否删除  1：已删除  0：正常
+	IsDeleted  field.Int32  // 是否删除  0：否  1：是
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
@@ -82,7 +82,7 @@ func (s *sysDict) updateTableName(table string) *sysDict {
 	s.DictStatus = field.NewInt32(table, "dict_status")
 	s.Remark = field.NewString(table, "remark")
 	s.IsSystem = field.NewInt32(table, "is_system")
-	s.DelFlag = field.NewInt32(table, "del_flag")
+	s.IsDeleted = field.NewInt32(table, "is_deleted")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
@@ -118,7 +118,7 @@ func (s *sysDict) fillFieldMap() {
 	s.fieldMap["dict_status"] = s.DictStatus
 	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["is_system"] = s.IsSystem
-	s.fieldMap["del_flag"] = s.DelFlag
+	s.fieldMap["is_deleted"] = s.IsDeleted
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy

@@ -28,9 +28,11 @@ func newSysLoginLog(db *gorm.DB, opts ...gen.DOOption) sysLoginLog {
 	tableName := _sysLoginLog.sysLoginLogDo.TableName()
 	_sysLoginLog.ALL = field.NewAsterisk(tableName)
 	_sysLoginLog.ID = field.NewInt64(tableName, "id")
-	_sysLoginLog.LoginName = field.NewString(tableName, "login_name")
+	_sysLoginLog.UserName = field.NewString(tableName, "user_name")
 	_sysLoginLog.LoginStatus = field.NewString(tableName, "login_status")
-	_sysLoginLog.LoginIP = field.NewString(tableName, "login_ip")
+	_sysLoginLog.IPAddress = field.NewString(tableName, "ip_address")
+	_sysLoginLog.Browser = field.NewString(tableName, "browser")
+	_sysLoginLog.Os = field.NewString(tableName, "os")
 	_sysLoginLog.LoginTime = field.NewTime(tableName, "login_time")
 
 	_sysLoginLog.fillFieldMap()
@@ -44,9 +46,11 @@ type sysLoginLog struct {
 
 	ALL         field.Asterisk
 	ID          field.Int64  // 编号
-	LoginName   field.String // 用户名
+	UserName    field.String // 用户名
 	LoginStatus field.String // 登录状态
-	LoginIP     field.String // IP地址
+	IPAddress   field.String // IP地址
+	Browser     field.String // 浏览器
+	Os          field.String // 操作信息
 	LoginTime   field.Time   // 登录时间
 
 	fieldMap map[string]field.Expr
@@ -65,9 +69,11 @@ func (s sysLoginLog) As(alias string) *sysLoginLog {
 func (s *sysLoginLog) updateTableName(table string) *sysLoginLog {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.LoginName = field.NewString(table, "login_name")
+	s.UserName = field.NewString(table, "user_name")
 	s.LoginStatus = field.NewString(table, "login_status")
-	s.LoginIP = field.NewString(table, "login_ip")
+	s.IPAddress = field.NewString(table, "ip_address")
+	s.Browser = field.NewString(table, "browser")
+	s.Os = field.NewString(table, "os")
 	s.LoginTime = field.NewTime(table, "login_time")
 
 	s.fillFieldMap()
@@ -95,11 +101,13 @@ func (s *sysLoginLog) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysLoginLog) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 5)
+	s.fieldMap = make(map[string]field.Expr, 7)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["login_name"] = s.LoginName
+	s.fieldMap["user_name"] = s.UserName
 	s.fieldMap["login_status"] = s.LoginStatus
-	s.fieldMap["login_ip"] = s.LoginIP
+	s.fieldMap["ip_address"] = s.IPAddress
+	s.fieldMap["browser"] = s.Browser
+	s.fieldMap["os"] = s.Os
 	s.fieldMap["login_time"] = s.LoginTime
 }
 

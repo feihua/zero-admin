@@ -28,14 +28,14 @@ func main() {
 		g.GenerateModel("sys_dept"),
 		g.GenerateModel("sys_dict"),
 		g.GenerateModel("sys_dict_item"),
-		g.GenerateModel("sys_job"),
+		g.GenerateModel("sys_post"),
 		g.GenerateModel("sys_operate_log"),
 		g.GenerateModel("sys_login_log"),
 		g.GenerateModel("sys_menu"),
 		g.GenerateModel("sys_role"),
-		g.GenerateModel("sys_role_dept"),
 		g.GenerateModel("sys_role_menu"),
 		g.GenerateModel("sys_user"),
+		g.GenerateModel("sys_post"),
 		g.GenerateModel("sys_user_role"),
 	)
 

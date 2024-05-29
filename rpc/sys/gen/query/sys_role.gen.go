@@ -28,14 +28,18 @@ func newSysRole(db *gorm.DB, opts ...gen.DOOption) sysRole {
 	tableName := _sysRole.sysRoleDo.TableName()
 	_sysRole.ALL = field.NewAsterisk(tableName)
 	_sysRole.ID = field.NewInt64(tableName, "id")
-	_sysRole.Name = field.NewString(tableName, "name")
+	_sysRole.RoleName = field.NewString(tableName, "role_name")
+	_sysRole.RoleKey = field.NewString(tableName, "role_key")
+	_sysRole.RoleStatus = field.NewInt32(tableName, "role_status")
+	_sysRole.RoleSort = field.NewInt32(tableName, "role_sort")
+	_sysRole.DataScope = field.NewInt32(tableName, "data_scope")
+	_sysRole.IsDeleted = field.NewInt32(tableName, "is_deleted")
+	_sysRole.IsAdmin = field.NewBool(tableName, "is_admin")
 	_sysRole.Remark = field.NewString(tableName, "remark")
 	_sysRole.CreateBy = field.NewString(tableName, "create_by")
 	_sysRole.CreateTime = field.NewTime(tableName, "create_time")
 	_sysRole.UpdateBy = field.NewString(tableName, "update_by")
 	_sysRole.UpdateTime = field.NewTime(tableName, "update_time")
-	_sysRole.DelFlag = field.NewInt32(tableName, "del_flag")
-	_sysRole.Status = field.NewInt32(tableName, "status")
 
 	_sysRole.fillFieldMap()
 
@@ -48,14 +52,18 @@ type sysRole struct {
 
 	ALL        field.Asterisk
 	ID         field.Int64  // 编号
-	Name       field.String // 角色名称
+	RoleName   field.String // 角色名称
+	RoleKey    field.String // 权限字符
+	RoleStatus field.Int32  // 角色状态
+	RoleSort   field.Int32  // 角色排序
+	DataScope  field.Int32  // 数据权限
+	IsDeleted  field.Int32  // 是否删除  0：否  1：是
+	IsAdmin    field.Bool   // 是否超级管理员
 	Remark     field.String // 备注
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
 	UpdateTime field.Time   // 更新时间
-	DelFlag    field.Int32  // 是否删除  0：已删除  1：正常
-	Status     field.Int32  // 状态  1:启用,0:禁用
 
 	fieldMap map[string]field.Expr
 }
@@ -73,14 +81,18 @@ func (s sysRole) As(alias string) *sysRole {
 func (s *sysRole) updateTableName(table string) *sysRole {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.Name = field.NewString(table, "name")
+	s.RoleName = field.NewString(table, "role_name")
+	s.RoleKey = field.NewString(table, "role_key")
+	s.RoleStatus = field.NewInt32(table, "role_status")
+	s.RoleSort = field.NewInt32(table, "role_sort")
+	s.DataScope = field.NewInt32(table, "data_scope")
+	s.IsDeleted = field.NewInt32(table, "is_deleted")
+	s.IsAdmin = field.NewBool(table, "is_admin")
 	s.Remark = field.NewString(table, "remark")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
-	s.DelFlag = field.NewInt32(table, "del_flag")
-	s.Status = field.NewInt32(table, "status")
 
 	s.fillFieldMap()
 
@@ -105,16 +117,20 @@ func (s *sysRole) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysRole) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 9)
+	s.fieldMap = make(map[string]field.Expr, 13)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["name"] = s.Name
+	s.fieldMap["role_name"] = s.RoleName
+	s.fieldMap["role_key"] = s.RoleKey
+	s.fieldMap["role_status"] = s.RoleStatus
+	s.fieldMap["role_sort"] = s.RoleSort
+	s.fieldMap["data_scope"] = s.DataScope
+	s.fieldMap["is_deleted"] = s.IsDeleted
+	s.fieldMap["is_admin"] = s.IsAdmin
 	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy
 	s.fieldMap["update_time"] = s.UpdateTime
-	s.fieldMap["del_flag"] = s.DelFlag
-	s.fieldMap["status"] = s.Status
 }
 
 func (s sysRole) clone(db *gorm.DB) sysRole {

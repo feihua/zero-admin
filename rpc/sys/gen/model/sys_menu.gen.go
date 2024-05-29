@@ -13,23 +13,25 @@ const TableNameSysMenu = "sys_menu"
 // SysMenu 菜单管理
 type SysMenu struct {
 	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`    // 编号
-	Name          string     `gorm:"column:name;not null;comment:菜单名称" json:"name"`                   // 菜单名称
+	MenuName      string     `gorm:"column:menu_name;not null;comment:菜单名称" json:"menu_name"`         // 菜单名称
 	ParentID      int64      `gorm:"column:parent_id;not null;comment:父菜单ID，一级菜单为0" json:"parent_id"` // 父菜单ID，一级菜单为0
-	URL           string     `gorm:"column:url;not null" json:"url"`
-	Perms         string     `gorm:"column:perms;not null" json:"perms"`
-	Type          int32      `gorm:"column:type;not null;comment:类型 0：目录,1：菜单,2：按钮,3：外链" json:"type"`                       // 类型 0：目录,1：菜单,2：按钮,3：外链
-	Icon          string     `gorm:"column:icon;not null;comment:菜单图标" json:"icon"`                                         // 菜单图标
-	OrderNum      int32      `gorm:"column:order_num;not null;comment:排序" json:"order_num"`                                 // 排序
+	MenuPath      string     `gorm:"column:menu_path;not null" json:"menu_path"`
+	MenuPerms     string     `gorm:"column:menu_perms;not null" json:"menu_perms"`
+	MenuType      int32      `gorm:"column:menu_type;not null;comment:类型 0：目录,1：菜单,2：按钮,3：外链" json:"menu_type"`             // 类型 0：目录,1：菜单,2：按钮,3：外链
+	MenuIcon      string     `gorm:"column:menu_icon;not null;comment:菜单图标" json:"menu_icon"`                               // 菜单图标
+	MenuSort      int32      `gorm:"column:menu_sort;not null;comment:菜单排序" json:"menu_sort"`                               // 菜单排序
 	CreateBy      string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime    time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateBy      string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
 	UpdateTime    *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
-	DelFlag       int32      `gorm:"column:del_flag;not null;default:1;comment:是否删除  0：已删除  1：正常" json:"del_flag"`          // 是否删除  0：已删除  1：正常
+	MenuStatus    int32      `gorm:"column:menu_status;not null;default:1;comment:菜单状态" json:"menu_status"`                 // 菜单状态
+	IsDeleted     int32      `gorm:"column:is_deleted;not null;default:1;comment:是否删除  0：否  1：是" json:"is_deleted"`         // 是否删除  0：否  1：是
+	Remark        string     `gorm:"column:remark;not null;comment:备注信息" json:"remark"`                                     // 备注信息
 	VuePath       string     `gorm:"column:vue_path;not null;comment:vue系统的path" json:"vue_path"`                           // vue系统的path
 	VueComponent  string     `gorm:"column:vue_component;not null;comment:vue的页面" json:"vue_component"`                     // vue的页面
 	VueIcon       string     `gorm:"column:vue_icon;not null;comment:vue的图标" json:"vue_icon"`                               // vue的图标
 	VueRedirect   string     `gorm:"column:vue_redirect;not null;comment:vue的路由重定向" json:"vue_redirect"`                    // vue的路由重定向
-	BackgroundURL string     `gorm:"column:background_url;not null;comment:后台地址" json:"background_url"`                     // 后台地址
+	BackgroundURL string     `gorm:"column:background_url;not null;comment:接口地址" json:"background_url"`                     // 接口地址
 }
 
 // TableName SysMenu's table name
