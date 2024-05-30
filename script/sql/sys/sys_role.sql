@@ -18,4 +18,5 @@ create table sys_role
 )
     comment '角色信息表';
 
+INSERT INTO sys_role (id, role_name, role_key, role_status, role_sort, data_scope, is_deleted, is_admin, remark, create_by, create_time, update_by, update_time) VALUES (1, '超级管理员', 'admin', 1, 1, 1, 0, 1, '测试', 'admin', '2024-05-30 16:23:59', '', null);
 

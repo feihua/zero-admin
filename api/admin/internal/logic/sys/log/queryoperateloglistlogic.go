@@ -43,6 +43,8 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.QueryOperateLo
 		OperationType:   req.OperationType,
 		OperationUrl:    req.OperationUrl,
 		Title:           req.Title,
+		Browser:         req.Browser,
+		Os:              req.Os,
 	})
 
 	if err != nil {
@@ -68,6 +70,8 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.QueryOperateLo
 			RequestMethod:     item.RequestMethod,
 			Title:             item.Title,
 			UseTime:           item.UseTime,
+			Browser:           item.Browser,
+			Os:                item.Os,
 		})
 	}
 

@@ -53,6 +53,8 @@ func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(in *sysclient.QueryOp
 		RequestMethod:     log.RequestMethod,
 		Title:             log.Title,
 		UseTime:           log.UseTime,
+		Browser:           log.Browser,
+		Os:                log.Os,
 	}
 
 	logc.Infof(l.ctx, "查询系统操作日志表详情,参数：%+v,响应：%+v", in, data)

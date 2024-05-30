@@ -38,6 +38,8 @@ func newSysOperateLog(db *gorm.DB, opts ...gen.DOOption) sysOperateLog {
 	_sysOperateLog.OperationStatus = field.NewInt32(tableName, "operation_status")
 	_sysOperateLog.DeptName = field.NewString(tableName, "dept_name")
 	_sysOperateLog.UseTime = field.NewInt64(tableName, "use_time")
+	_sysOperateLog.Browser = field.NewString(tableName, "browser")
+	_sysOperateLog.Os = field.NewString(tableName, "os")
 	_sysOperateLog.OperationIP = field.NewString(tableName, "operation_ip")
 	_sysOperateLog.OperationTime = field.NewTime(tableName, "operation_time")
 
@@ -62,6 +64,8 @@ type sysOperateLog struct {
 	OperationStatus   field.Int32  // 操作状态
 	DeptName          field.String // 部门名称
 	UseTime           field.Int64  // 执行时长(毫秒)
+	Browser           field.String // 浏览器
+	Os                field.String // 操作信息
 	OperationIP       field.String // 操作地址
 	OperationTime     field.Time   // 操作时间
 
@@ -91,6 +95,8 @@ func (s *sysOperateLog) updateTableName(table string) *sysOperateLog {
 	s.OperationStatus = field.NewInt32(table, "operation_status")
 	s.DeptName = field.NewString(table, "dept_name")
 	s.UseTime = field.NewInt64(table, "use_time")
+	s.Browser = field.NewString(table, "browser")
+	s.Os = field.NewString(table, "os")
 	s.OperationIP = field.NewString(table, "operation_ip")
 	s.OperationTime = field.NewTime(table, "operation_time")
 
@@ -121,7 +127,7 @@ func (s *sysOperateLog) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (s *sysOperateLog) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 13)
+	s.fieldMap = make(map[string]field.Expr, 15)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["title"] = s.Title
 	s.fieldMap["operation_type"] = s.OperationType
@@ -133,6 +139,8 @@ func (s *sysOperateLog) fillFieldMap() {
 	s.fieldMap["operation_status"] = s.OperationStatus
 	s.fieldMap["dept_name"] = s.DeptName
 	s.fieldMap["use_time"] = s.UseTime
+	s.fieldMap["browser"] = s.Browser
+	s.fieldMap["os"] = s.Os
 	s.fieldMap["operation_ip"] = s.OperationIP
 	s.fieldMap["operation_time"] = s.OperationTime
 }

@@ -23,6 +23,8 @@ type SysOperateLog struct {
 	OperationStatus   int32     `gorm:"column:operation_status;not null;comment:操作状态" json:"operation_status"`                       // 操作状态
 	DeptName          string    `gorm:"column:dept_name;not null;comment:部门名称" json:"dept_name"`                                     // 部门名称
 	UseTime           int64     `gorm:"column:use_time;not null;comment:执行时长(毫秒)" json:"use_time"`                                   // 执行时长(毫秒)
+	Browser           string    `gorm:"column:browser;not null;comment:浏览器" json:"browser"`                                          // 浏览器
+	Os                string    `gorm:"column:os;not null;comment:操作信息" json:"os"`                                                   // 操作信息
 	OperationIP       string    `gorm:"column:operation_ip;not null;comment:操作地址" json:"operation_ip"`                               // 操作地址
 	OperationTime     time.Time `gorm:"column:operation_time;not null;default:CURRENT_TIMESTAMP;comment:操作时间" json:"operation_time"` // 操作时间
 }

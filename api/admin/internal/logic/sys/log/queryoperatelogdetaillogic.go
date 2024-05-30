@@ -58,6 +58,8 @@ func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(req *types.QueryOpera
 		RequestMethod:     detail.RequestMethod,
 		Title:             detail.Title,
 		UseTime:           detail.UseTime,
+		Browser:           detail.Browser,
+		Os:                detail.Os,
 	}
 
 	return &types.QueryOperateLogDetailResp{

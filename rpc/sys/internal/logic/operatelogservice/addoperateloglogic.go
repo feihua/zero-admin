@@ -46,6 +46,8 @@ func (l *AddOperateLogLogic) AddOperateLog(in *sysclient.AddOperateLogReq) (*sys
 		OperationStatus:   in.OperationStatus,
 		DeptName:          in.DeptName,
 		UseTime:           in.UseTime,
+		Browser:           in.Browser,
+		Os:                in.Os,
 		OperationIP:       in.OperationIp,
 		OperationTime:     time.Now(),
 	}

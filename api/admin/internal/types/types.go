@@ -2530,6 +2530,8 @@ type QueryOperateLogDetailData struct {
 	RequestMethod     string `json:"requestMethod"`     //请求方式
 	Title             string `json:"title"`             //系统模块
 	UseTime           int64  `json:"useTime"`           //执行时长(毫秒)
+	Browser           string `json:"browser"`           //浏览器
+	Os                string `json:"os"`                //操作信息
 }
 
 type QueryOperateLogDetailReq struct {
@@ -2556,6 +2558,8 @@ type QueryOperateLogListData struct {
 	RequestMethod     string `json:"requestMethod"`     //请求方式
 	Title             string `json:"title"`             //系统模块
 	UseTime           int64  `json:"useTime"`           //执行时长(毫秒)
+	Browser           string `json:"browser"`           //浏览器
+	Os                string `json:"os"`                //操作信息
 }
 
 type QueryOperateLogListReq struct {
@@ -2568,6 +2572,8 @@ type QueryOperateLogListReq struct {
 	OperationType   string `form:"operationType,optional"`   //操作类型
 	OperationUrl    string `form:"operationUrl,optional"`    //操作方法
 	Title           string `form:"title,optional"`           //系统模块
+	Browser         string `json:"browser"`                  //浏览器
+	Os              string `json:"os"`                       //操作信息
 }
 
 type QueryOperateLogListResp struct {

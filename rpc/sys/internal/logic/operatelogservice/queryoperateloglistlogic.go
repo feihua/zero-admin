@@ -78,6 +78,8 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(in *sysclient.QueryOperat
 			RequestMethod:     log.RequestMethod,
 			Title:             log.Title,
 			UseTime:           log.UseTime,
+			Browser:           log.Browser,
+			Os:                log.Os,
 		})
 	}
 

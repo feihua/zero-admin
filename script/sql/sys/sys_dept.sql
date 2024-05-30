@@ -19,3 +19,4 @@ create table sys_dept
 )
     comment '部门信息表';
 
+INSERT INTO sys_dept (id, dept_name, dept_status, dept_sort, parent_id, leader, phone, email, remark, is_deleted, parent_ids, create_by, create_time, update_by, update_time) VALUES (1, '电商事业部', 1, 1, 0, 'liufeihua', '18613030352', '1002219331@qq.com', '测试', 0, '0', 'admin', '2024-05-30 17:16:46', '', null);

@@ -12,6 +12,8 @@ create table sys_operate_log
     operation_status   tinyint                               not null comment '操作状态',
     dept_name          varchar(50)                           not null comment '部门名称',
     use_time           bigint                                not null comment '执行时长(毫秒)',
+    browser            varchar(64)                           not null comment '浏览器',
+    os                 varchar(64)                           not null comment '操作信息',
     operation_ip       varchar(64) default ''                not null comment '操作地址',
     operation_time     timestamp   default CURRENT_TIMESTAMP not null comment '操作时间'
 )

@@ -610,6 +610,8 @@ message AddOperateLogReq {
   string operation_url = 10; //操作方法
   string request_method = 11; //请求方式
   string title = 12; //系统模块
+  string os = 13; //操作系统信息
+  string browser = 14; //浏览器
 
 }
 
@@ -645,6 +647,8 @@ message QueryOperateLogDetailResp {
   string request_method = 11; //请求方式
   string title = 12; //系统模块
   int64 use_time = 13; //执行时长(毫秒)
+  string os = 14; //操作系统信息
+  string browser = 15; //浏览器
 
 }
 
@@ -659,7 +663,8 @@ message QueryOperateLogListReq {
   string operation_type = 7; //操作类型
   string operation_url = 8; //操作方法
   string title = 10; //系统模块
-
+  string os = 11; //操作系统信息
+  string browser = 12; //浏览器
 }
 
 message OperateLogListData {
@@ -676,7 +681,8 @@ message OperateLogListData {
   string request_method = 11; //请求方式
   string title = 12; //系统模块
   int64 use_time = 13; //执行时长(毫秒)
-
+  string os = 14; //操作系统信息
+  string browser = 15; //浏览器
 }
 
 message QueryOperateLogListResp {
