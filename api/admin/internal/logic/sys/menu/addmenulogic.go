@@ -50,6 +50,7 @@ func (l *AddMenuLogic) AddMenu(req *types.AddMenuReq) (*types.AddMenuResp, error
 		ParentId:      req.ParentId,
 		Remark:        req.Remark,
 		VueComponent:  req.VueComponent,
+		IsVisible:     req.IsVisible,
 	}
 	if _, err := l.svcCtx.MenuService.AddMenu(l.ctx, &menuAddReq); err != nil {
 		logc.Errorf(l.ctx, "添加菜单信息失败,参数:%+v,异常:%s", req, err.Error())

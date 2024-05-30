@@ -41,6 +41,7 @@ func newSysMenu(db *gorm.DB, opts ...gen.DOOption) sysMenu {
 	_sysMenu.UpdateTime = field.NewTime(tableName, "update_time")
 	_sysMenu.MenuStatus = field.NewInt32(tableName, "menu_status")
 	_sysMenu.IsDeleted = field.NewInt32(tableName, "is_deleted")
+	_sysMenu.IsVisible = field.NewInt32(tableName, "is_visible")
 	_sysMenu.Remark = field.NewString(tableName, "remark")
 	_sysMenu.VuePath = field.NewString(tableName, "vue_path")
 	_sysMenu.VueComponent = field.NewString(tableName, "vue_component")
@@ -72,6 +73,7 @@ type sysMenu struct {
 	UpdateTime    field.Time   // 更新时间
 	MenuStatus    field.Int32  // 菜单状态
 	IsDeleted     field.Int32  // 是否删除  0：否  1：是
+	IsVisible     field.Int32  // 是否可见  0：否  1：是
 	Remark        field.String // 备注信息
 	VuePath       field.String // vue系统的path
 	VueComponent  field.String // vue的页面
@@ -108,6 +110,7 @@ func (s *sysMenu) updateTableName(table string) *sysMenu {
 	s.UpdateTime = field.NewTime(table, "update_time")
 	s.MenuStatus = field.NewInt32(table, "menu_status")
 	s.IsDeleted = field.NewInt32(table, "is_deleted")
+	s.IsVisible = field.NewInt32(table, "is_visible")
 	s.Remark = field.NewString(table, "remark")
 	s.VuePath = field.NewString(table, "vue_path")
 	s.VueComponent = field.NewString(table, "vue_component")
@@ -138,7 +141,7 @@ func (s *sysMenu) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysMenu) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 20)
+	s.fieldMap = make(map[string]field.Expr, 21)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["menu_name"] = s.MenuName
 	s.fieldMap["parent_id"] = s.ParentID
@@ -153,6 +156,7 @@ func (s *sysMenu) fillFieldMap() {
 	s.fieldMap["update_time"] = s.UpdateTime
 	s.fieldMap["menu_status"] = s.MenuStatus
 	s.fieldMap["is_deleted"] = s.IsDeleted
+	s.fieldMap["is_visible"] = s.IsVisible
 	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["vue_path"] = s.VuePath
 	s.fieldMap["vue_component"] = s.VueComponent

@@ -26,6 +26,7 @@ type SysMenu struct {
 	UpdateTime    *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 	MenuStatus    int32      `gorm:"column:menu_status;not null;default:1;comment:菜单状态" json:"menu_status"`                 // 菜单状态
 	IsDeleted     int32      `gorm:"column:is_deleted;not null;default:1;comment:是否删除  0：否  1：是" json:"is_deleted"`         // 是否删除  0：否  1：是
+	IsVisible     int32      `gorm:"column:is_visible;not null;default:1;comment:是否可见  0：否  1：是" json:"is_visible"`         // 是否可见  0：否  1：是
 	Remark        string     `gorm:"column:remark;not null;comment:备注信息" json:"remark"`                                     // 备注信息
 	VuePath       string     `gorm:"column:vue_path;not null;comment:vue系统的path" json:"vue_path"`                           // vue系统的path
 	VueComponent  string     `gorm:"column:vue_component;not null;comment:vue的页面" json:"vue_component"`                     // vue的页面

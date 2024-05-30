@@ -51,6 +51,7 @@ func (l *UpdateMenuLogic) UpdateMenu(req *types.UpdateMenuReq) (*types.UpdateMen
 		Remark:        req.Remark,
 		VueComponent:  req.VueComponent,
 		VueIcon:       req.VueIcon,
+		IsVisible:     req.IsVisible,
 	}
 	if _, err := l.svcCtx.MenuService.UpdateMenu(l.ctx, &menuReq); err != nil {
 		logc.Errorf(l.ctx, "更新菜单信息失败,参数:%+v,异常:%s", req, err.Error())

@@ -15,6 +15,7 @@ create table sys_menu
     update_time datetime   null on update CURRENT_TIMESTAMP comment '更新时间',
     menu_status tinyint default 1                              not null comment '菜单状态',
     is_deleted    tinyint      default 1                 not null comment '是否删除  0：否  1：是',
+    is_visible    tinyint      default 1                 not null comment '是否可见  0：否  1：是',
     remark      varchar(255) default ''                not null comment '备注信息',
     vue_path       varchar(64)                         default ''                not null comment 'vue系统的path',
     vue_component  varchar(64)                         default ''                not null comment 'vue的页面',

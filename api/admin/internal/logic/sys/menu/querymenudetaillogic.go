@@ -64,6 +64,7 @@ func (l *QueryMenuDetailLogic) QueryMenuDetail(req *types.QueryMenuDetailReq) (r
 		VueIcon:       menu.VueIcon,
 		VuePath:       menu.VuePath,
 		VueRedirect:   menu.VueRedirect,
+		IsVisible:     menu.IsVisible,
 	}
 
 	return &types.QueryMenuDetailResp{

@@ -63,6 +63,7 @@ func (l *QueryMenuListLogic) QueryMenuList(req *types.QueryMenuListReq) (*types.
 			VueIcon:       menu.VueIcon,
 			VuePath:       menu.VuePath,
 			VueRedirect:   menu.VueRedirect,
+			IsVisible:     menu.IsVisible,
 		}
 
 		list = append(list, menuItem)

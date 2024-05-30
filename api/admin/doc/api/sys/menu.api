@@ -19,8 +19,9 @@ type (
 		Remark        string `json:"remark,optional"` //备注信息
 		VueComponent  string `json:"vueComponent,optional"` //vue的页面
 		VueIcon       string `json:"vueIcon,optional"` //vue的图标
-		VuePath       string `json:"vuePat,optionalh"` //vue系统的path
+		VuePath       string `json:"vuePath,optional"` //vue系统的path
 		VueRedirect   string `json:"vueRedirect,optional"` //vue的路由重定向
+		IsVisible   int32 `json:"isVisible,default=1"` //是否可见  0：否  1：是
 	}
 	AddMenuResp {
 		Code    string `json:"code"`
@@ -49,8 +50,9 @@ type (
 		Remark        string `json:"remark,optional"` //备注信息
 		VueComponent  string `json:"vueComponent,optional"` //vue的页面
 		VueIcon       string `json:"vueIcon,optional"` //vue的图标
-		VuePath       string `json:"vuePat,optionalh"` //vue系统的path
+		VuePath       string `json:"vuePath,optional"` //vue系统的path
 		VueRedirect   string `json:"vueRedirect,optional"` //vue的路由重定向
+		IsVisible   int32 `json:"isVisible,default=1"` //是否可见  0：否  1：是
 	}
 	UpdateMenuResp {
 		Code    string `json:"code"`
@@ -89,6 +91,7 @@ type (
 		VueIcon       string `json:"vueIcon"` //vue的图标
 		VuePath       string `json:"vuePath"` //vue系统的path
 		VueRedirect   string `json:"vueRedirect"` //vue的路由重定向
+		IsVisible   int32 `json:"isVisible,default=1"` //是否可见  0：否  1：是
 	}
 	QueryMenuDetailResp {
 		Code    string              `json:"code"`
@@ -117,6 +120,7 @@ type (
 		VueIcon       string `json:"vueIcon"` //vue的图标
 		VuePath       string `json:"vuePath"` //vue系统的path
 		VueRedirect   string `json:"vueRedirect"` //vue的路由重定向
+		IsVisible   int32 `json:"isVisible,default=1"` //是否可见  0：否  1：是
 	}
 	QueryMenuListResp {
 		Code     string               `json:"code"`
