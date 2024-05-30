@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddDictItemLogic 添加字典项
+// AddDictItemLogic 添加字典数据
 /*
 Author: LiuFeiHua
 Date: 2024/5/28 16:01
@@ -32,17 +32,17 @@ func NewAddDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddDi
 	}
 }
 
-// AddDictItem 添加字典项
+// AddDictItem 添加字典数据
 func (l *AddDictItemLogic) AddDictItem(req *types.AddDictItemReq) (resp *types.AddDictItemResp, err error) {
-	_, err = l.svcCtx.DictItemService.AddDictItem(l.ctx, &sysclient.DictItemAddReq{
+	_, err = l.svcCtx.DictItemService.AddDictItem(l.ctx, &sysclient.AddDictItemReq{
 		CreateBy:   l.ctx.Value("userName").(string),
-		Remark:     req.Remark,
 		DictLabel:  req.DictLabel,
 		DictSort:   req.DictSort,
 		DictStatus: req.DictStatus,
 		DictType:   req.DictType,
 		DictValue:  req.DictValue,
-		IsDefault:  req.DictStatus,
+		IsDefault:  req.IsDefault,
+		Remark:     req.Remark,
 	})
 
 	if err != nil {

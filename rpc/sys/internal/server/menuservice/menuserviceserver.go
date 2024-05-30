@@ -22,22 +22,38 @@ func NewMenuServiceServer(svcCtx *svc.ServiceContext) *MenuServiceServer {
 	}
 }
 
-func (s *MenuServiceServer) MenuAdd(ctx context.Context, in *sysclient.MenuAddReq) (*sysclient.MenuAddResp, error) {
-	l := menuservicelogic.NewMenuAddLogic(ctx, s.svcCtx)
-	return l.MenuAdd(in)
+// 添加菜单信息表
+func (s *MenuServiceServer) AddMenu(ctx context.Context, in *sysclient.AddMenuReq) (*sysclient.AddMenuResp, error) {
+	l := menuservicelogic.NewAddMenuLogic(ctx, s.svcCtx)
+	return l.AddMenu(in)
 }
 
-func (s *MenuServiceServer) MenuList(ctx context.Context, in *sysclient.MenuListReq) (*sysclient.MenuListResp, error) {
-	l := menuservicelogic.NewMenuListLogic(ctx, s.svcCtx)
-	return l.MenuList(in)
+// 删除菜单信息表
+func (s *MenuServiceServer) DeleteMenu(ctx context.Context, in *sysclient.DeleteMenuReq) (*sysclient.DeleteMenuResp, error) {
+	l := menuservicelogic.NewDeleteMenuLogic(ctx, s.svcCtx)
+	return l.DeleteMenu(in)
 }
 
-func (s *MenuServiceServer) MenuUpdate(ctx context.Context, in *sysclient.MenuUpdateReq) (*sysclient.MenuUpdateResp, error) {
-	l := menuservicelogic.NewMenuUpdateLogic(ctx, s.svcCtx)
-	return l.MenuUpdate(in)
+// 更新菜单信息表
+func (s *MenuServiceServer) UpdateMenu(ctx context.Context, in *sysclient.UpdateMenuReq) (*sysclient.UpdateMenuResp, error) {
+	l := menuservicelogic.NewUpdateMenuLogic(ctx, s.svcCtx)
+	return l.UpdateMenu(in)
 }
 
-func (s *MenuServiceServer) MenuDelete(ctx context.Context, in *sysclient.MenuDeleteReq) (*sysclient.MenuDeleteResp, error) {
-	l := menuservicelogic.NewMenuDeleteLogic(ctx, s.svcCtx)
-	return l.MenuDelete(in)
+// 更新菜单信息表状态
+func (s *MenuServiceServer) UpdateMenuStatus(ctx context.Context, in *sysclient.UpdateMenuStatusReq) (*sysclient.UpdateMenuStatusResp, error) {
+	l := menuservicelogic.NewUpdateMenuStatusLogic(ctx, s.svcCtx)
+	return l.UpdateMenuStatus(in)
+}
+
+// 查询菜单信息表详情
+func (s *MenuServiceServer) QueryMenuDetail(ctx context.Context, in *sysclient.QueryMenuDetailReq) (*sysclient.QueryMenuDetailResp, error) {
+	l := menuservicelogic.NewQueryMenuDetailLogic(ctx, s.svcCtx)
+	return l.QueryMenuDetail(in)
+}
+
+// 查询菜单信息表列表
+func (s *MenuServiceServer) QueryMenuList(ctx context.Context, in *sysclient.QueryMenuListReq) (*sysclient.QueryMenuListResp, error) {
+	l := menuservicelogic.NewQueryMenuListLogic(ctx, s.svcCtx)
+	return l.QueryMenuList(in)
 }

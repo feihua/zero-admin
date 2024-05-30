@@ -34,14 +34,18 @@ func NewAddRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddRoleLog
 
 // AddRole 新增角色
 func (l *AddRoleLogic) AddRole(req *types.AddRoleReq) (*types.AddRoleResp, error) {
-	roleAddReq := sysclient.RoleAddReq{
-		Name:     req.Name,
-		Remark:   req.Remark,
-		CreateBy: l.ctx.Value("userName").(string),
-		Status:   req.Status,
+	roleAddReq := sysclient.AddRoleReq{
+		CreateBy:   l.ctx.Value("userName").(string),
+		DataScope:  req.DataScope,
+		IsAdmin:    req.IsAdmin,
+		Remark:     req.Remark,
+		RoleKey:    req.RoleKey,
+		RoleName:   req.RoleName,
+		RoleSort:   req.RoleSort,
+		RoleStatus: req.RoleStatus,
 	}
 
-	_, err := l.svcCtx.RoleService.RoleAdd(l.ctx, &roleAddReq)
+	_, err := l.svcCtx.RoleService.AddRole(l.ctx, &roleAddReq)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "添加角色信息失败,参数:%+v,异常:%s", req, err.Error())

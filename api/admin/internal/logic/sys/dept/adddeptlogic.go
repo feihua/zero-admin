@@ -33,12 +33,17 @@ func NewAddDeptLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddDeptLog
 
 // AddDept 添加部门信息
 func (l *AddDeptLogic) AddDept(req *types.AddDeptReq) (*types.AddDeptResp, error) {
-	_, err := l.svcCtx.DeptService.DeptAdd(l.ctx, &sysclient.DeptAddReq{
-		DeptName:  req.DeptName,
-		ParentId:  req.ParentId,
-		OrderNum:  req.OrderNum,
-		CreateBy:  l.ctx.Value("userName").(string),
-		ParentIds: req.ParentIds,
+	_, err := l.svcCtx.DeptService.AddDept(l.ctx, &sysclient.AddDeptReq{
+		CreateBy:   l.ctx.Value("userName").(string),
+		DeptName:   req.DeptName,
+		DeptSort:   req.DeptSort,
+		DeptStatus: req.DeptStatus,
+		Email:      req.Email,
+		Leader:     req.Leader,
+		ParentId:   req.ParentId,
+		ParentIds:  req.ParentIds,
+		Phone:      req.Phone,
+		Remark:     req.Remark,
 	})
 
 	if err != nil {

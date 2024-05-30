@@ -10,7 +10,7 @@ import (
 
 const TableNameSysRole = "sys_role"
 
-// SysRole 角色管理
+// SysRole 角色信息表
 type SysRole struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
 	RoleName   string     `gorm:"column:role_name;not null;comment:角色名称" json:"role_name"`                               // 角色名称
@@ -19,7 +19,7 @@ type SysRole struct {
 	RoleSort   int32      `gorm:"column:role_sort;not null;comment:角色排序" json:"role_sort"`                               // 角色排序
 	DataScope  int32      `gorm:"column:data_scope;not null;comment:数据权限" json:"data_scope"`                             // 数据权限
 	IsDeleted  int32      `gorm:"column:is_deleted;not null;comment:是否删除  0：否  1：是" json:"is_deleted"`                   // 是否删除  0：否  1：是
-	IsAdmin    bool       `gorm:"column:is_admin;not null;comment:是否超级管理员" json:"is_admin"`                              // 是否超级管理员
+	IsAdmin    int32      `gorm:"column:is_admin;not null;comment:是否超级管理员" json:"is_admin"`                              // 是否超级管理员
 	Remark     string     `gorm:"column:remark;not null;comment:备注" json:"remark"`                                       // 备注
 	CreateBy   string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间

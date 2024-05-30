@@ -35,14 +35,18 @@ func NewUpdateDeptLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateD
 // UpdateDept 更新部门信息
 func (l *UpdateDeptLogic) UpdateDept(req *types.UpdateDeptReq) (*types.UpdateDeptResp, error) {
 
-	_, err := l.svcCtx.DeptService.DeptUpdate(l.ctx, &sysclient.DeptUpdateReq{
-		Id:        req.Id,
-		DeptName:  req.DeptName,
-		ParentId:  req.ParentId,
-		OrderNum:  req.OrderNum,
-		UpdateBy:  l.ctx.Value("userName").(string),
-		ParentIds: req.ParentIds,
-		DelFlag:   req.DelFlag,
+	_, err := l.svcCtx.DeptService.UpdateDept(l.ctx, &sysclient.UpdateDeptReq{
+		DeptName:   req.DeptName,
+		DeptSort:   req.DeptSort,
+		DeptStatus: req.DeptStatus,
+		Email:      req.Email,
+		Id:         req.Id,
+		Leader:     req.Leader,
+		ParentId:   req.ParentId,
+		ParentIds:  req.ParentIds,
+		Phone:      req.Phone,
+		Remark:     req.Remark,
+		UpdateBy:   l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

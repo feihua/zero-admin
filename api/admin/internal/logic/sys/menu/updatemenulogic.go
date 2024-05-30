@@ -34,24 +34,25 @@ func NewUpdateMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateM
 
 // UpdateMenu 更新菜单
 func (l *UpdateMenuLogic) UpdateMenu(req *types.UpdateMenuReq) (*types.UpdateMenuResp, error) {
-	menuUpdateReq := sysclient.MenuUpdateReq{
+	menuReq := sysclient.UpdateMenuReq{
+		BackgroundUrl: req.BackgroundUrl,
+		CreateBy:      l.ctx.Value("userName").(string),
+		VueRedirect:   req.VueRedirect,
 		Id:            req.Id,
-		Name:          req.Name,
-		ParentId:      req.ParentId,
-		Url:           req.Url,
-		Perms:         req.Perms,
-		Type:          req.Type,
-		Icon:          req.Icon,
-		OrderNum:      req.OrderNum,
-		UpdateBy:      l.ctx.Value("userName").(string),
 		VuePath:       req.VuePath,
+		MenuIcon:      req.MenuIcon,
+		MenuName:      req.MenuName,
+		MenuPath:      req.MenuPath,
+		MenuPerms:     req.MenuPerms,
+		MenuSort:      req.MenuSort,
+		MenuStatus:    req.MenuStatus,
+		MenuType:      req.MenuType,
+		ParentId:      req.ParentId,
+		Remark:        req.Remark,
 		VueComponent:  req.VueComponent,
 		VueIcon:       req.VueIcon,
-		VueRedirect:   req.VueRedirect,
-		DelFlag:       req.DelFlag,
-		BackgroundUrl: req.BackgroundUrl,
 	}
-	if _, err := l.svcCtx.MenuService.MenuUpdate(l.ctx, &menuUpdateReq); err != nil {
+	if _, err := l.svcCtx.MenuService.UpdateMenu(l.ctx, &menuReq); err != nil {
 		logc.Errorf(l.ctx, "更新菜单信息失败,参数:%+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())

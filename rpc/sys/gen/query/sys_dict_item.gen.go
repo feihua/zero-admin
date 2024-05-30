@@ -46,7 +46,7 @@ func newSysDictItem(db *gorm.DB, opts ...gen.DOOption) sysDictItem {
 	return _sysDictItem
 }
 
-// sysDictItem 字典项表
+// sysDictItem 字典数据表
 type sysDictItem struct {
 	sysDictItemDo sysDictItemDo
 

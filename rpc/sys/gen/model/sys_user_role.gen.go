@@ -6,7 +6,7 @@ package model
 
 const TableNameSysUserRole = "sys_user_role"
 
-// SysUserRole 用户角色关联
+// SysUserRole 用户角色关联表
 type SysUserRole struct {
 	ID     int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"` // 编号
 	UserID int64 `gorm:"column:user_id;not null;comment:用户Id" json:"user_id"`          // 用户Id

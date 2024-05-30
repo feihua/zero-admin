@@ -18,8 +18,8 @@ import (
 var (
 	Q             = new(Query)
 	SysDept       *sysDept
-	SysDict       *sysDict
 	SysDictItem   *sysDictItem
+	SysDictType   *sysDictType
 	SysLoginLog   *sysLoginLog
 	SysMenu       *sysMenu
 	SysOperateLog *sysOperateLog
@@ -33,8 +33,8 @@ var (
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	SysDept = &Q.SysDept
-	SysDict = &Q.SysDict
 	SysDictItem = &Q.SysDictItem
+	SysDictType = &Q.SysDictType
 	SysLoginLog = &Q.SysLoginLog
 	SysMenu = &Q.SysMenu
 	SysOperateLog = &Q.SysOperateLog
@@ -49,8 +49,8 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:            db,
 		SysDept:       newSysDept(db, opts...),
-		SysDict:       newSysDict(db, opts...),
 		SysDictItem:   newSysDictItem(db, opts...),
+		SysDictType:   newSysDictType(db, opts...),
 		SysLoginLog:   newSysLoginLog(db, opts...),
 		SysMenu:       newSysMenu(db, opts...),
 		SysOperateLog: newSysOperateLog(db, opts...),
@@ -66,8 +66,8 @@ type Query struct {
 	db *gorm.DB
 
 	SysDept       sysDept
-	SysDict       sysDict
 	SysDictItem   sysDictItem
+	SysDictType   sysDictType
 	SysLoginLog   sysLoginLog
 	SysMenu       sysMenu
 	SysOperateLog sysOperateLog
@@ -84,8 +84,8 @@ func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:            db,
 		SysDept:       q.SysDept.clone(db),
-		SysDict:       q.SysDict.clone(db),
 		SysDictItem:   q.SysDictItem.clone(db),
+		SysDictType:   q.SysDictType.clone(db),
 		SysLoginLog:   q.SysLoginLog.clone(db),
 		SysMenu:       q.SysMenu.clone(db),
 		SysOperateLog: q.SysOperateLog.clone(db),
@@ -109,8 +109,8 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:            db,
 		SysDept:       q.SysDept.replaceDB(db),
-		SysDict:       q.SysDict.replaceDB(db),
 		SysDictItem:   q.SysDictItem.replaceDB(db),
+		SysDictType:   q.SysDictType.replaceDB(db),
 		SysLoginLog:   q.SysLoginLog.replaceDB(db),
 		SysMenu:       q.SysMenu.replaceDB(db),
 		SysOperateLog: q.SysOperateLog.replaceDB(db),
@@ -124,8 +124,8 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 
 type queryCtx struct {
 	SysDept       ISysDeptDo
-	SysDict       ISysDictDo
 	SysDictItem   ISysDictItemDo
+	SysDictType   ISysDictTypeDo
 	SysLoginLog   ISysLoginLogDo
 	SysMenu       ISysMenuDo
 	SysOperateLog ISysOperateLogDo
@@ -139,8 +139,8 @@ type queryCtx struct {
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
 		SysDept:       q.SysDept.WithContext(ctx),
-		SysDict:       q.SysDict.WithContext(ctx),
 		SysDictItem:   q.SysDictItem.WithContext(ctx),
+		SysDictType:   q.SysDictType.WithContext(ctx),
 		SysLoginLog:   q.SysLoginLog.WithContext(ctx),
 		SysMenu:       q.SysMenu.WithContext(ctx),
 		SysOperateLog: q.SysOperateLog.WithContext(ctx),

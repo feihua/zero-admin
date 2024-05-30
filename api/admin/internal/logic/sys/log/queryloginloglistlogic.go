@@ -32,12 +32,15 @@ func NewQueryLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 // QueryLoginLogList 查询登录日志列表
-func (l *QueryLoginLogListLogic) QueryLoginLogList(req *types.ListLoginLogReq) (*types.ListLoginLogResp, error) {
-	resp, err := l.svcCtx.LoginLogService.LoginLogList(l.ctx, &sysclient.LoginLogListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		UserName: req.UserName,
-		Ip:       req.Ip,
+func (l *QueryLoginLogListLogic) QueryLoginLogList(req *types.QueryLoginLogListReq) (*types.QueryLoginLogListResp, error) {
+	result, err := l.svcCtx.LoginLogService.QueryLoginLogList(l.ctx, &sysclient.QueryLoginLogListReq{
+		PageNum:     req.Current,
+		PageSize:    req.PageSize,
+		Browser:     req.Browser,
+		IpAddress:   req.IpAddress,
+		LoginStatus: req.LoginStatus,
+		Os:          req.Os,
+		UserName:    req.UserName,
 	})
 
 	if err != nil {
@@ -46,28 +49,27 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(req *types.ListLoginLogReq) (
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.ListLoginLogData
+	var list []*types.QueryLoginLogListData
 
-	for _, log := range resp.List {
-		list = append(list, &types.ListLoginLogData{
-			Id:         log.Id,
-			UserName:   log.UserName,
-			Status:     log.Status,
-			Ip:         log.Ip,
-			CreateBy:   log.CreateBy,
-			CreateTime: log.CreateTime,
-			UpdateBy:   log.UpdateBy,
-			UpdateTime: log.UpdateTime,
+	for _, item := range result.List {
+		list = append(list, &types.QueryLoginLogListData{
+			Browser:     item.Browser,
+			Id:          item.Id,
+			IpAddress:   item.IpAddress,
+			LoginStatus: item.LoginStatus,
+			LoginTime:   item.LoginTime,
+			Os:          item.Os,
+			UserName:    item.UserName,
 		})
 	}
 
-	return &types.ListLoginLogResp{
+	return &types.QueryLoginLogListResp{
 		Code:     "000000",
 		Message:  "查询登录日志成功",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
-		Total:    resp.Total,
+		Total:    result.Total,
 	}, nil
 }

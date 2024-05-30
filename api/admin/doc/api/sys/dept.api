@@ -1,61 +1,113 @@
 info (
 	desc:   "部门信息"
-	author: "koobe"
+	author: "liufeihua"
 	email:  "1002219331@qq.com"
 )
 
 type (
+	// 添加部门信息
 	AddDeptReq {
-		DeptName  string  `json:"deptName"` // 机构名称
-		ParentId  int64   `json:"parentId"` // 上级机构ID，一级机构为0
-		ParentIds []int64 `json:"parentIds"` // 上级机构IDs
-		OrderNum  int32   `json:"orderNum"` // 排序
-		DelFlag   int32   `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+		DeptName   string `json:"deptName"` //部门名称
+		DeptSort   int32  `json:"deptSort"` //部门排序
+		DeptStatus int32  `json:"deptStatus"` //部门状态
+		Email      string `json:"email"` //邮箱
+		Leader     string `json:"leader"` //负责人
+		ParentId   int64  `json:"parentId"` //上级机构ID，一级机构为0
+		ParentIds  string `json:"parentIds"` //上级机构IDs，一级机构为0
+		Phone      string `json:"phone"` //电话号码
+		Remark     string `json:"remark"` //备注信息
 	}
 	AddDeptResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	ListDeptReq {
-		Name     string `json:"form,optional"`
-		CreateBy string `json:"form,optional"`
-	}
-	ListDeptData {
-		Id         int64   `json:"id"` // 编号
-		DeptName   string  `json:"deptName"` // 机构名称
-		ParentId   int64   `json:"parentId"` // 上级机构ID，一级机构为0
-		ParentIds  []int64 `json:"parentIds"` // 上级机构ID
-		OrderNum   int32   `json:"orderNum"` // 排序
-		CreateBy   string  `json:"createBy"` // 创建人
-		CreateTime string  `json:"createTime"` // 创建时间
-		UpdateBy   string  `json:"updateBy"` // 更新人
-		UpdateTime string  `json:"updateTime"` // 更新时间
-		DelFlag    int32   `json:"delFlag"` // 是否删除  0：已删除  1：正常
-	}
-	ListDeptResp {
-		Code    string          `json:"code"`
-		Message string          `json:"message"`
-		Data    []*ListDeptData `json:"data"`
-		Success bool            `json:"success"`
-	}
-	UpdateDeptReq {
-		Id        int64   `json:"id"` // 编号
-		DeptName  string  `json:"deptName"` // 机构名称
-		ParentId  int64   `json:"parentId"` // 上级机构ID，一级机构为0
-		ParentIds []int64 `json:"parentIds"` // 上级机构ID
-		OrderNum  int32   `json:"orderNum"` // 排序
-		DelFlag   int32   `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
-	}
-	UpdateDeptResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+	// 删除部门信息
 	DeleteDeptReq {
 		Ids []int64 `form:"ids"`
 	}
 	DeleteDeptResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
+	}
+	// 更新部门信息
+	UpdateDeptReq {
+		DeptName   string `json:"deptName"` //部门名称
+		DeptSort   int32  `json:"deptSort"` //部门排序
+		DeptStatus int32  `json:"deptStatus"` //部门状态
+		Email      string `json:"email"` //邮箱
+		Id         int64  `json:"id"` //编号
+		Leader     string `json:"leader"` //负责人
+		ParentId   int64  `json:"parentId"` //上级机构ID，一级机构为0
+		ParentIds  string `json:"parentIds"` //上级机构IDs，一级机构为0
+		Phone      string `json:"phone"` //电话号码
+		Remark     string `json:"remark"` //备注信息
+	}
+	UpdateDeptResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 批量更新部门信息状态
+	UpdateDeptStatusReq {
+		DeptStatus int32   `json:"deptStatus"` //部门状态
+		DeptIds    []int64 `json:"deptIds"` //编号
+	}
+	UpdateDeptStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询部门信息详情
+	QueryDeptDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryDeptDetailData {
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		DeptName   string `json:"deptName"` //部门名称
+		DeptSort   int32  `json:"deptSort"` //部门排序
+		DeptStatus int32  `json:"deptStatus"` //部门状态
+		Email      string `json:"email"` //邮箱
+		Id         int64  `json:"id"` //编号
+		Leader     string `json:"leader"` //负责人
+		ParentId   int64  `json:"parentId"` //上级机构ID，一级机构为0
+		ParentIds   []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
+		Phone      string `json:"phone"` //电话号码
+		Remark     string `json:"remark"` //备注信息
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryDeptDetailResp {
+		Code    string              `json:"code"`
+		Message string              `json:"message"`
+		Data    QueryDeptDetailData `json:"data"`
+	}
+	// 分页查询部门信息列
+	QueryDeptListReq {
+
+	}
+	QueryDeptListData {
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		DeptName   string `json:"deptName"` //部门名称
+		DeptSort   int32  `json:"deptSort"` //部门排序
+		DeptStatus int32  `json:"deptStatus"` //部门状态
+		Email      string `json:"email"` //邮箱
+		Id         int64  `json:"id"` //编号
+		Leader     string `json:"leader"` //负责人
+		ParentId   int64  `json:"parentId"` //上级机构ID，一级机构为0
+		ParentIds  []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
+		Phone      string `json:"phone"` //电话号码
+		Remark     string `json:"remark"` //备注信息
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryDeptListResp {
+		Code     string               `json:"code"`
+		Message  string               `json:"message"`
+		Current  int64                `json:"current,default=1"`
+		Data     []*QueryDeptListData `json:"data"`
+		PageSize int64                `json:"pageSize,default=20"`
+		Success  bool                 `json:"success"`
+		Total    int64                `json:"total"`
 	}
 )
 
@@ -66,20 +118,28 @@ type (
 	prefix:     /api/sys/dept
 )
 service admin-api {
-	//添加部门
+	// 添加部门信息
 	@handler AddDept
 	post /addDept (AddDeptReq) returns (AddDeptResp)
 
-	//查询部门
-	@handler QueryDeptList
-	get /queryDeptList (ListDeptReq) returns (ListDeptResp)
+	// 删除部门信息
+	@handler DeleteDept
+	get /deleteDept (DeleteDeptReq) returns (DeleteDeptResp)
 
-	//更新部门
+	// 更新部门信息
 	@handler UpdateDept
 	post /updateDept (UpdateDeptReq) returns (UpdateDeptResp)
 
-	//删除部门
-	@handler DeleteDept
-	get /deleteDept (DeleteDeptReq) returns (DeleteDeptResp)
+	// 批量更新部门信息状态
+	@handler UpdateDeptStatus
+	post /updateDeptStatus (UpdateDeptStatusReq) returns (UpdateDeptStatusResp)
+
+	// 查询部门信息详情
+	@handler QueryDeptDetail
+	get /queryDeptDetail (QueryDeptDetailReq) returns (QueryDeptDetailResp)
+
+	// 分页查询部门信息列
+	@handler QueryDeptList
+	get /queryDeptList (QueryDeptListReq) returns (QueryDeptListResp)
 }
 

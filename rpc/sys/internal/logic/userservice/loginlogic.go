@@ -113,9 +113,11 @@ func (l *LoginLogic) queryApiUrls(user *model.SysUser) []string {
 // 保存登录日志
 func (l *LoginLogic) savaLoginLog(in *sysclient.LoginReq, loginStatus string) {
 	_ = query.SysLoginLog.WithContext(l.ctx).Create(&model.SysLoginLog{
-		LoginName:   in.Account,
+		UserName:    in.Account,
 		LoginStatus: loginStatus,
-		LoginIP:     in.LoginIp,
+		IPAddress:   in.IpAddress,
+		Browser:     in.Browser,
+		Os:          in.Os,
 		LoginTime:   time.Now(),
 	})
 }

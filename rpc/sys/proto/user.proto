@@ -1,0 +1,144 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加用户信息表
+message AddUserReq {
+  string avatar = 1; //头像
+  string create_by = 2; //创建者
+  int64 dept_id = 3; //部门id
+  string email = 4; //邮箱
+  string mobile = 5; //手机号
+  string nick_name = 6; //昵称
+  string password = 7; //密码
+  string remark = 8; //备注信息
+  string user_name = 9; //用户名
+  int32 user_status = 10; //帐号状态（0正常 1停用）
+
+}
+
+message AddUserResp {
+  string pong = 1;
+}
+
+// 删除用户信息表
+message DeleteUserReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteUserResp {
+  string pong = 1;
+}
+
+// 更新用户信息表
+message UpdateUserReq {
+  string avatar = 1; //头像
+  int64 dept_id = 2; //部门id
+  string email = 3; //邮箱
+  int64 id = 4; //编号
+  string mobile = 5; //手机号
+  string nick_name = 6; //昵称
+  int32 user_status = 7; //帐号状态（0正常 1停用）
+  string remark = 8; //备注信息
+  string update_by = 9; //更新者
+  string user_name = 10; //用户名
+
+}
+
+message UpdateUserResp {
+  string pong = 1;
+}
+
+// 更新用户信息表状态
+message UpdateUserStatusReq {
+  repeated int64 ids = 1; //编号
+  int32 user_status = 2; //帐号状态（0正常 1停用）
+  string update_by = 3; //更新者
+
+}
+
+message UpdateUserStatusResp {
+  string pong = 1;
+}
+
+// 查询用户信息表详情
+message QueryUserDetailReq {
+    int64 id = 1;
+}
+
+message QueryUserDetailResp {
+  string avatar = 1; //头像
+  string create_by = 2; //创建者
+  string create_time = 3; //创建时间
+  int64 dept_id = 4; //部门id
+  string email = 5; //邮箱
+  int64 id = 6; //编号
+  int32 user_status = 7; //帐号状态（0正常 1停用）
+  string login_ip = 8; //登录ip
+  string login_time = 9; //登录时间
+  string mobile = 10; //手机号
+  string nick_name = 11; //昵称
+  string remark = 12; //备注信息
+  string update_by = 13; //更新者
+  string update_time = 14; //更新时间
+  string user_name = 15; //用户名
+
+
+}
+
+// 分页查询用户信息表列表
+message QueryUserListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 dept_id = 3; //部门id
+  string email = 4; //邮箱
+  string mobile = 5; //手机号
+  string nick_name = 6; //昵称
+  int32 user_status = 7; //帐号状态（0正常 1停用）
+
+}
+
+message UserListData {
+  string avatar = 1; //头像
+  string create_by = 2; //创建者
+  string create_time = 3; //创建时间
+  int64 dept_id = 4; //部门id
+  string email = 5; //邮箱
+  int64 id = 6; //编号
+  int32 user_status = 7; //帐号状态（0正常 1停用）
+  string login_ip = 8; //登录ip
+  string login_time = 9; //登录时间
+  string mobile = 10; //手机号
+  string nick_name = 11; //昵称
+  string remark = 12; //备注信息
+  string update_by = 13; //更新者
+  string update_time = 14; //更新时间
+  string user_name = 15; //用户名
+
+
+}
+
+message QueryUserListResp {
+  int64 total = 1;
+  repeated  UserListData list = 2;
+}
+
+// 用户信息表
+service UserService {
+  // 添加用户信息表
+  rpc AddUser(AddUserReq) returns (AddUserResp){}
+  // 删除用户信息表
+  rpc DeleteUser(DeleteUserReq) returns (DeleteUserResp){}
+  // 更新用户信息表
+  rpc UpdateUser(UpdateUserReq) returns (UpdateUserResp ){}
+  // 更新用户信息表状态
+  rpc UpdateUserStatus(UpdateUserStatusReq) returns (UpdateUserStatusResp ){}
+  // 查询用户信息表详情
+   rpc QueryUserDetail(QueryUserDetailReq) returns (QueryUserDetailResp){}
+  // 查询用户信息表列表
+  rpc QueryUserList(QueryUserListReq) returns (QueryUserListResp){}
+
+
+}

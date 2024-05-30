@@ -22,22 +22,38 @@ func NewDeptServiceServer(svcCtx *svc.ServiceContext) *DeptServiceServer {
 	}
 }
 
-func (s *DeptServiceServer) DeptAdd(ctx context.Context, in *sysclient.DeptAddReq) (*sysclient.DeptAddResp, error) {
-	l := deptservicelogic.NewDeptAddLogic(ctx, s.svcCtx)
-	return l.DeptAdd(in)
+// 添加部门信息表
+func (s *DeptServiceServer) AddDept(ctx context.Context, in *sysclient.AddDeptReq) (*sysclient.AddDeptResp, error) {
+	l := deptservicelogic.NewAddDeptLogic(ctx, s.svcCtx)
+	return l.AddDept(in)
 }
 
-func (s *DeptServiceServer) DeptList(ctx context.Context, in *sysclient.DeptListReq) (*sysclient.DeptListResp, error) {
-	l := deptservicelogic.NewDeptListLogic(ctx, s.svcCtx)
-	return l.DeptList(in)
+// 删除部门信息表
+func (s *DeptServiceServer) DeleteDept(ctx context.Context, in *sysclient.DeleteDeptReq) (*sysclient.DeleteDeptResp, error) {
+	l := deptservicelogic.NewDeleteDeptLogic(ctx, s.svcCtx)
+	return l.DeleteDept(in)
 }
 
-func (s *DeptServiceServer) DeptUpdate(ctx context.Context, in *sysclient.DeptUpdateReq) (*sysclient.DeptUpdateResp, error) {
-	l := deptservicelogic.NewDeptUpdateLogic(ctx, s.svcCtx)
-	return l.DeptUpdate(in)
+// 更新部门信息表
+func (s *DeptServiceServer) UpdateDept(ctx context.Context, in *sysclient.UpdateDeptReq) (*sysclient.UpdateDeptResp, error) {
+	l := deptservicelogic.NewUpdateDeptLogic(ctx, s.svcCtx)
+	return l.UpdateDept(in)
 }
 
-func (s *DeptServiceServer) DeptDelete(ctx context.Context, in *sysclient.DeptDeleteReq) (*sysclient.DeptDeleteResp, error) {
-	l := deptservicelogic.NewDeptDeleteLogic(ctx, s.svcCtx)
-	return l.DeptDelete(in)
+// 更新部门信息表状态
+func (s *DeptServiceServer) UpdateDeptStatus(ctx context.Context, in *sysclient.UpdateDeptStatusReq) (*sysclient.UpdateDeptStatusResp, error) {
+	l := deptservicelogic.NewUpdateDeptStatusLogic(ctx, s.svcCtx)
+	return l.UpdateDeptStatus(in)
+}
+
+// 查询部门信息表详情
+func (s *DeptServiceServer) QueryDeptDetail(ctx context.Context, in *sysclient.QueryDeptDetailReq) (*sysclient.QueryDeptDetailResp, error) {
+	l := deptservicelogic.NewQueryDeptDetailLogic(ctx, s.svcCtx)
+	return l.QueryDeptDetail(in)
+}
+
+// 查询部门信息表列表
+func (s *DeptServiceServer) QueryDeptList(ctx context.Context, in *sysclient.QueryDeptListReq) (*sysclient.QueryDeptListResp, error) {
+	l := deptservicelogic.NewQueryDeptListLogic(ctx, s.svcCtx)
+	return l.QueryDeptList(in)
 }

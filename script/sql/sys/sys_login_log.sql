@@ -9,4 +9,4 @@ create table sys_login_log
     os     varchar(64)                         not null comment '操作信息',
     login_time   timestamp default CURRENT_TIMESTAMP not null comment '登录时间'
 )
-    comment '系统登录日志';
+    comment '系统登录日志表';

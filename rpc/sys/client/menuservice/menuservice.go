@@ -13,112 +13,144 @@ import (
 )
 
 type (
-	DeptAddReq             = sysclient.DeptAddReq
-	DeptAddResp            = sysclient.DeptAddResp
-	DeptDeleteReq          = sysclient.DeptDeleteReq
-	DeptDeleteResp         = sysclient.DeptDeleteResp
-	DeptListData           = sysclient.DeptListData
-	DeptListReq            = sysclient.DeptListReq
-	DeptListResp           = sysclient.DeptListResp
-	DeptUpdateReq          = sysclient.DeptUpdateReq
-	DeptUpdateResp         = sysclient.DeptUpdateResp
-	DictAddReq             = sysclient.DictAddReq
-	DictAddResp            = sysclient.DictAddResp
-	DictDeleteReq          = sysclient.DictDeleteReq
-	DictDeleteResp         = sysclient.DictDeleteResp
-	DictItemAddReq         = sysclient.DictItemAddReq
-	DictItemAddResp        = sysclient.DictItemAddResp
-	DictItemDeleteReq      = sysclient.DictItemDeleteReq
-	DictItemDeleteResp     = sysclient.DictItemDeleteResp
-	DictItemListData       = sysclient.DictItemListData
-	DictItemListReq        = sysclient.DictItemListReq
-	DictItemListResp       = sysclient.DictItemListResp
-	DictItemReq            = sysclient.DictItemReq
-	DictItemResp           = sysclient.DictItemResp
-	DictItemUpdateReq      = sysclient.DictItemUpdateReq
-	DictItemUpdateResp     = sysclient.DictItemUpdateResp
-	DictListData           = sysclient.DictListData
-	DictListReq            = sysclient.DictListReq
-	DictListResp           = sysclient.DictListResp
-	DictReq                = sysclient.DictReq
-	DictResp               = sysclient.DictResp
-	DictUpdateReq          = sysclient.DictUpdateReq
-	DictUpdateResp         = sysclient.DictUpdateResp
-	InfoReq                = sysclient.InfoReq
-	InfoResp               = sysclient.InfoResp
-	JobAddReq              = sysclient.JobAddReq
-	JobAddResp             = sysclient.JobAddResp
-	JobDeleteReq           = sysclient.JobDeleteReq
-	JobDeleteResp          = sysclient.JobDeleteResp
-	JobListData            = sysclient.JobListData
-	JobListReq             = sysclient.JobListReq
-	JobListResp            = sysclient.JobListResp
-	JobUpdateReq           = sysclient.JobUpdateReq
-	JobUpdateResp          = sysclient.JobUpdateResp
-	LoginLogAddReq         = sysclient.LoginLogAddReq
-	LoginLogAddResp        = sysclient.LoginLogAddResp
-	LoginLogDeleteReq      = sysclient.LoginLogDeleteReq
-	LoginLogDeleteResp     = sysclient.LoginLogDeleteResp
-	LoginLogListData       = sysclient.LoginLogListData
-	LoginLogListReq        = sysclient.LoginLogListReq
-	LoginLogListResp       = sysclient.LoginLogListResp
-	LoginReq               = sysclient.LoginReq
-	LoginResp              = sysclient.LoginResp
-	MenuAddReq             = sysclient.MenuAddReq
-	MenuAddResp            = sysclient.MenuAddResp
-	MenuDeleteReq          = sysclient.MenuDeleteReq
-	MenuDeleteResp         = sysclient.MenuDeleteResp
-	MenuListData           = sysclient.MenuListData
-	MenuListReq            = sysclient.MenuListReq
-	MenuListResp           = sysclient.MenuListResp
-	MenuListTree           = sysclient.MenuListTree
-	MenuUpdateReq          = sysclient.MenuUpdateReq
-	MenuUpdateResp         = sysclient.MenuUpdateResp
-	QueryRoleMenuListReq   = sysclient.QueryRoleMenuListReq
-	QueryRoleMenuListResp  = sysclient.QueryRoleMenuListResp
-	QueryUserRoleListReq   = sysclient.QueryUserRoleListReq
-	QueryUserRoleListResp  = sysclient.QueryUserRoleListResp
-	ReSetPasswordReq       = sysclient.ReSetPasswordReq
-	ReSetPasswordResp      = sysclient.ReSetPasswordResp
-	RoleAddReq             = sysclient.RoleAddReq
-	RoleAddResp            = sysclient.RoleAddResp
-	RoleDeleteReq          = sysclient.RoleDeleteReq
-	RoleDeleteResp         = sysclient.RoleDeleteResp
-	RoleListData           = sysclient.RoleListData
-	RoleListReq            = sysclient.RoleListReq
-	RoleListResp           = sysclient.RoleListResp
-	RoleUpdateReq          = sysclient.RoleUpdateReq
-	RoleUpdateResp         = sysclient.RoleUpdateResp
-	StatisticsLoginLogReq  = sysclient.StatisticsLoginLogReq
-	StatisticsLoginLogResp = sysclient.StatisticsLoginLogResp
-	SysLogAddReq           = sysclient.SysLogAddReq
-	SysLogAddResp          = sysclient.SysLogAddResp
-	SysLogDeleteReq        = sysclient.SysLogDeleteReq
-	SysLogDeleteResp       = sysclient.SysLogDeleteResp
-	SysLogListData         = sysclient.SysLogListData
-	SysLogListReq          = sysclient.SysLogListReq
-	SysLogListResp         = sysclient.SysLogListResp
-	UpdateMenuRoleReq      = sysclient.UpdateMenuRoleReq
-	UpdateMenuRoleResp     = sysclient.UpdateMenuRoleResp
-	UpdateUserRoleListReq  = sysclient.UpdateUserRoleListReq
-	UpdateUserRoleListResp = sysclient.UpdateUserRoleListResp
-	UserAddReq             = sysclient.UserAddReq
-	UserAddResp            = sysclient.UserAddResp
-	UserDeleteReq          = sysclient.UserDeleteReq
-	UserDeleteResp         = sysclient.UserDeleteResp
-	UserListData           = sysclient.UserListData
-	UserListReq            = sysclient.UserListReq
-	UserListResp           = sysclient.UserListResp
-	UserStatusReq          = sysclient.UserStatusReq
-	UserStatusResp         = sysclient.UserStatusResp
-	UserUpdateReq          = sysclient.UserUpdateReq
-	UserUpdateResp         = sysclient.UserUpdateResp
+	AddDeptReq                = sysclient.AddDeptReq
+	AddDeptResp               = sysclient.AddDeptResp
+	AddDictItemReq            = sysclient.AddDictItemReq
+	AddDictItemResp           = sysclient.AddDictItemResp
+	AddDictTypeReq            = sysclient.AddDictTypeReq
+	AddDictTypeResp           = sysclient.AddDictTypeResp
+	AddMenuReq                = sysclient.AddMenuReq
+	AddMenuResp               = sysclient.AddMenuResp
+	AddOperateLogReq          = sysclient.AddOperateLogReq
+	AddOperateLogResp         = sysclient.AddOperateLogResp
+	AddPostReq                = sysclient.AddPostReq
+	AddPostResp               = sysclient.AddPostResp
+	AddRoleReq                = sysclient.AddRoleReq
+	AddRoleResp               = sysclient.AddRoleResp
+	AddUserReq                = sysclient.AddUserReq
+	AddUserResp               = sysclient.AddUserResp
+	DeleteDeptReq             = sysclient.DeleteDeptReq
+	DeleteDeptResp            = sysclient.DeleteDeptResp
+	DeleteDictItemReq         = sysclient.DeleteDictItemReq
+	DeleteDictItemResp        = sysclient.DeleteDictItemResp
+	DeleteDictTypeReq         = sysclient.DeleteDictTypeReq
+	DeleteDictTypeResp        = sysclient.DeleteDictTypeResp
+	DeleteLoginLogReq         = sysclient.DeleteLoginLogReq
+	DeleteLoginLogResp        = sysclient.DeleteLoginLogResp
+	DeleteMenuReq             = sysclient.DeleteMenuReq
+	DeleteMenuResp            = sysclient.DeleteMenuResp
+	DeleteOperateLogReq       = sysclient.DeleteOperateLogReq
+	DeleteOperateLogResp      = sysclient.DeleteOperateLogResp
+	DeletePostReq             = sysclient.DeletePostReq
+	DeletePostResp            = sysclient.DeletePostResp
+	DeleteRoleReq             = sysclient.DeleteRoleReq
+	DeleteRoleResp            = sysclient.DeleteRoleResp
+	DeleteUserReq             = sysclient.DeleteUserReq
+	DeleteUserResp            = sysclient.DeleteUserResp
+	DeptListData              = sysclient.DeptListData
+	DictItemListData          = sysclient.DictItemListData
+	DictTypeListData          = sysclient.DictTypeListData
+	InfoReq                   = sysclient.InfoReq
+	InfoResp                  = sysclient.InfoResp
+	LoginLogListData          = sysclient.LoginLogListData
+	LoginReq                  = sysclient.LoginReq
+	LoginResp                 = sysclient.LoginResp
+	MenuListData              = sysclient.MenuListData
+	MenuListTree              = sysclient.MenuListTree
+	OperateLogListData        = sysclient.OperateLogListData
+	PostListData              = sysclient.PostListData
+	QueryDeptAndPostListReq   = sysclient.QueryDeptAndPostListReq
+	QueryDeptAndPostListResp  = sysclient.QueryDeptAndPostListResp
+	QueryDeptDetailReq        = sysclient.QueryDeptDetailReq
+	QueryDeptDetailResp       = sysclient.QueryDeptDetailResp
+	QueryDeptListReq          = sysclient.QueryDeptListReq
+	QueryDeptListResp         = sysclient.QueryDeptListResp
+	QueryDictItemDetailReq    = sysclient.QueryDictItemDetailReq
+	QueryDictItemDetailResp   = sysclient.QueryDictItemDetailResp
+	QueryDictItemListReq      = sysclient.QueryDictItemListReq
+	QueryDictItemListResp     = sysclient.QueryDictItemListResp
+	QueryDictTypeDetailReq    = sysclient.QueryDictTypeDetailReq
+	QueryDictTypeDetailResp   = sysclient.QueryDictTypeDetailResp
+	QueryDictTypeListReq      = sysclient.QueryDictTypeListReq
+	QueryDictTypeListResp     = sysclient.QueryDictTypeListResp
+	QueryLoginLogDetailReq    = sysclient.QueryLoginLogDetailReq
+	QueryLoginLogDetailResp   = sysclient.QueryLoginLogDetailResp
+	QueryLoginLogListReq      = sysclient.QueryLoginLogListReq
+	QueryLoginLogListResp     = sysclient.QueryLoginLogListResp
+	QueryMenuDetailReq        = sysclient.QueryMenuDetailReq
+	QueryMenuDetailResp       = sysclient.QueryMenuDetailResp
+	QueryMenuListReq          = sysclient.QueryMenuListReq
+	QueryMenuListResp         = sysclient.QueryMenuListResp
+	QueryOperateLogDetailReq  = sysclient.QueryOperateLogDetailReq
+	QueryOperateLogDetailResp = sysclient.QueryOperateLogDetailResp
+	QueryOperateLogListReq    = sysclient.QueryOperateLogListReq
+	QueryOperateLogListResp   = sysclient.QueryOperateLogListResp
+	QueryPostDetailReq        = sysclient.QueryPostDetailReq
+	QueryPostDetailResp       = sysclient.QueryPostDetailResp
+	QueryPostListReq          = sysclient.QueryPostListReq
+	QueryPostListResp         = sysclient.QueryPostListResp
+	QueryRoleDetailReq        = sysclient.QueryRoleDetailReq
+	QueryRoleDetailResp       = sysclient.QueryRoleDetailResp
+	QueryRoleListReq          = sysclient.QueryRoleListReq
+	QueryRoleListResp         = sysclient.QueryRoleListResp
+	QueryRoleMenuListReq      = sysclient.QueryRoleMenuListReq
+	QueryRoleMenuListResp     = sysclient.QueryRoleMenuListResp
+	QueryUserDetailReq        = sysclient.QueryUserDetailReq
+	QueryUserDetailResp       = sysclient.QueryUserDetailResp
+	QueryUserListReq          = sysclient.QueryUserListReq
+	QueryUserListResp         = sysclient.QueryUserListResp
+	QueryUserRoleListReq      = sysclient.QueryUserRoleListReq
+	QueryUserRoleListResp     = sysclient.QueryUserRoleListResp
+	ReSetPasswordReq          = sysclient.ReSetPasswordReq
+	ReSetPasswordResp         = sysclient.ReSetPasswordResp
+	RoleListData              = sysclient.RoleListData
+	UpdateDeptReq             = sysclient.UpdateDeptReq
+	UpdateDeptResp            = sysclient.UpdateDeptResp
+	UpdateDeptStatusReq       = sysclient.UpdateDeptStatusReq
+	UpdateDeptStatusResp      = sysclient.UpdateDeptStatusResp
+	UpdateDictItemReq         = sysclient.UpdateDictItemReq
+	UpdateDictItemResp        = sysclient.UpdateDictItemResp
+	UpdateDictItemStatusReq   = sysclient.UpdateDictItemStatusReq
+	UpdateDictItemStatusResp  = sysclient.UpdateDictItemStatusResp
+	UpdateDictTypeReq         = sysclient.UpdateDictTypeReq
+	UpdateDictTypeResp        = sysclient.UpdateDictTypeResp
+	UpdateDictTypeStatusReq   = sysclient.UpdateDictTypeStatusReq
+	UpdateDictTypeStatusResp  = sysclient.UpdateDictTypeStatusResp
+	UpdateMenuReq             = sysclient.UpdateMenuReq
+	UpdateMenuResp            = sysclient.UpdateMenuResp
+	UpdateMenuRoleReq         = sysclient.UpdateMenuRoleReq
+	UpdateMenuRoleResp        = sysclient.UpdateMenuRoleResp
+	UpdateMenuStatusReq       = sysclient.UpdateMenuStatusReq
+	UpdateMenuStatusResp      = sysclient.UpdateMenuStatusResp
+	UpdatePostReq             = sysclient.UpdatePostReq
+	UpdatePostResp            = sysclient.UpdatePostResp
+	UpdatePostStatusReq       = sysclient.UpdatePostStatusReq
+	UpdatePostStatusResp      = sysclient.UpdatePostStatusResp
+	UpdateRoleReq             = sysclient.UpdateRoleReq
+	UpdateRoleResp            = sysclient.UpdateRoleResp
+	UpdateRoleStatusReq       = sysclient.UpdateRoleStatusReq
+	UpdateRoleStatusResp      = sysclient.UpdateRoleStatusResp
+	UpdateUserReq             = sysclient.UpdateUserReq
+	UpdateUserResp            = sysclient.UpdateUserResp
+	UpdateUserRoleListReq     = sysclient.UpdateUserRoleListReq
+	UpdateUserRoleListResp    = sysclient.UpdateUserRoleListResp
+	UpdateUserStatusReq       = sysclient.UpdateUserStatusReq
+	UpdateUserStatusResp      = sysclient.UpdateUserStatusResp
+	UserListData              = sysclient.UserListData
 
 	MenuService interface {
-		MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
-		MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
-		MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
-		MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error)
+		// 添加菜单信息表
+		AddMenu(ctx context.Context, in *AddMenuReq, opts ...grpc.CallOption) (*AddMenuResp, error)
+		// 删除菜单信息表
+		DeleteMenu(ctx context.Context, in *DeleteMenuReq, opts ...grpc.CallOption) (*DeleteMenuResp, error)
+		// 更新菜单信息表
+		UpdateMenu(ctx context.Context, in *UpdateMenuReq, opts ...grpc.CallOption) (*UpdateMenuResp, error)
+		// 更新菜单信息表状态
+		UpdateMenuStatus(ctx context.Context, in *UpdateMenuStatusReq, opts ...grpc.CallOption) (*UpdateMenuStatusResp, error)
+		// 查询菜单信息表详情
+		QueryMenuDetail(ctx context.Context, in *QueryMenuDetailReq, opts ...grpc.CallOption) (*QueryMenuDetailResp, error)
+		// 查询菜单信息表列表
+		QueryMenuList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error)
 	}
 
 	defaultMenuService struct {
@@ -132,22 +164,38 @@ func NewMenuService(cli zrpc.Client) MenuService {
 	}
 }
 
-func (m *defaultMenuService) MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error) {
+// 添加菜单信息表
+func (m *defaultMenuService) AddMenu(ctx context.Context, in *AddMenuReq, opts ...grpc.CallOption) (*AddMenuResp, error) {
 	client := sysclient.NewMenuServiceClient(m.cli.Conn())
-	return client.MenuAdd(ctx, in, opts...)
+	return client.AddMenu(ctx, in, opts...)
 }
 
-func (m *defaultMenuService) MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error) {
+// 删除菜单信息表
+func (m *defaultMenuService) DeleteMenu(ctx context.Context, in *DeleteMenuReq, opts ...grpc.CallOption) (*DeleteMenuResp, error) {
 	client := sysclient.NewMenuServiceClient(m.cli.Conn())
-	return client.MenuList(ctx, in, opts...)
+	return client.DeleteMenu(ctx, in, opts...)
 }
 
-func (m *defaultMenuService) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error) {
+// 更新菜单信息表
+func (m *defaultMenuService) UpdateMenu(ctx context.Context, in *UpdateMenuReq, opts ...grpc.CallOption) (*UpdateMenuResp, error) {
 	client := sysclient.NewMenuServiceClient(m.cli.Conn())
-	return client.MenuUpdate(ctx, in, opts...)
+	return client.UpdateMenu(ctx, in, opts...)
 }
 
-func (m *defaultMenuService) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error) {
+// 更新菜单信息表状态
+func (m *defaultMenuService) UpdateMenuStatus(ctx context.Context, in *UpdateMenuStatusReq, opts ...grpc.CallOption) (*UpdateMenuStatusResp, error) {
 	client := sysclient.NewMenuServiceClient(m.cli.Conn())
-	return client.MenuDelete(ctx, in, opts...)
+	return client.UpdateMenuStatus(ctx, in, opts...)
+}
+
+// 查询菜单信息表详情
+func (m *defaultMenuService) QueryMenuDetail(ctx context.Context, in *QueryMenuDetailReq, opts ...grpc.CallOption) (*QueryMenuDetailResp, error) {
+	client := sysclient.NewMenuServiceClient(m.cli.Conn())
+	return client.QueryMenuDetail(ctx, in, opts...)
+}
+
+// 查询菜单信息表列表
+func (m *defaultMenuService) QueryMenuList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error) {
+	client := sysclient.NewMenuServiceClient(m.cli.Conn())
+	return client.QueryMenuList(ctx, in, opts...)
 }

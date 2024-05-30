@@ -1,63 +1,112 @@
 info (
-	desc:   "角色"
-	author: "koobe"
+	desc:   "角色信息"
+	author: "liufeihua"
 	email:  "1002219331@qq.com"
 )
 
 type (
+	// 添加角色信息
 	AddRoleReq {
-		Name   string `json:"name"` // 角色名称
-		Remark string `json:"remark,optional"` // 备注
-		Status int32  `json:"status"` // 状态
+		DataScope  int32  `json:"dataScope"` //数据权限
+		Id         int64  `json:"id"` //编号
+		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
+		Remark     string `json:"remark"` //备注
+		RoleKey    string `json:"roleKey"` //权限字符
+		RoleName   string `json:"roleName"` //角色名称
+		RoleSort   int32  `json:"roleSort"` //角色排序
+		RoleStatus int32  `json:"roleStatus"` //角色状态
 	}
 	AddRoleResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	ListRoleReq {
-		Current  int64  `form:"current,default=1"`
-		PageSize int64  `form:"pageSize,default=20"`
-		Name     string `form:"name,optional "`
-		Status   int32  `form:"status,default=2"`
-	}
-	ListRoleData {
-		Id         int64  `json:"id"` // 编号
-		Name       string `json:"name"` // 角色名称
-		Remark     string `json:"remark"` // 备注
-		CreateBy   string `json:"createBy"` // 创建人
-		CreateTime string `json:"createTime"` // 创建时间
-		UpdateBy   string `json:"updateBy"` // 更新人
-		UpdateTime string `json:"updateTime"` // 更新时间
-		DelFlag    int32  `json:"delFlag"` // 是否删除  0：已删除  1：正常
-		Label      string `json:"label"` // 编号
-		Value      string `json:"value"` // 角色名称
-		Status     int32  `json:"status"` // 状态
-	}
-	ListRoleResp {
-		Code     string          `json:"code"`
-		Message  string          `json:"message"`
-		Current  int64           `json:"current,default=1"`
-		Data     []*ListRoleData `json:"data"`
-		PageSize int64           `json:"pageSize,default=20"`
-		Success  bool            `json:"success"`
-		Total    int64           `json:"total"`
-	}
-	UpdateRoleReq {
-		Id     int64  `json:"id"` // 编号
-		Name   string `json:"name"` // 角色名称
-		Remark string `json:"remark"` // 备注
-		Status int32  `json:"status"` // 状态
-	}
-	UpdateRoleResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+	// 删除角色信息
 	DeleteRoleReq {
 		Ids []int64 `form:"ids"`
 	}
 	DeleteRoleResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
+	}
+	// 更新角色信息
+	UpdateRoleReq {
+		DataScope  int32  `json:"dataScope"` //数据权限
+		Id         int64  `json:"id"` //编号
+		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
+		Remark     string `json:"remark"` //备注
+		RoleKey    string `json:"roleKey"` //权限字符
+		RoleName   string `json:"roleName"` //角色名称
+		RoleSort   int32  `json:"roleSort"` //角色排序
+		RoleStatus int32  `json:"roleStatus"` //角色状态
+	}
+	UpdateRoleResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新角色信息状态
+	UpdateRoleStatusReq {
+		RoleIds    []int64 `json:"roleIds"` //编号
+		RoleStatus int32   `json:"roleStatus"` //角色状态
+	}
+	UpdateRoleStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询角色信息详情
+	QueryRoleDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryRoleDetailData {
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		DataScope  int32  `json:"dataScope"` //数据权限
+		Id         int64  `json:"id"` //编号
+		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
+		Remark     string `json:"remark"` //备注
+		RoleKey    string `json:"roleKey"` //权限字符
+		RoleName   string `json:"roleName"` //角色名称
+		RoleSort   int32  `json:"roleSort"` //角色排序
+		RoleStatus int32  `json:"roleStatus"` //角色状态
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryRoleDetailResp {
+		Code    string              `json:"code"`
+		Message string              `json:"message"`
+		Data    QueryRoleDetailData `json:"data"`
+	}
+	// 分页查询角色信息列
+	QueryRoleListReq {
+		Current    int64  `form:"current,default=1"` //第几页
+		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+		DataScope  int32  `form:"dataScope,optional"` //数据权限
+		IsAdmin    int32  `form:"isAdmin,optional"` //是否超级管理员
+		RoleKey    string `form:"roleKey,optional"` //权限字符
+		RoleName   string `form:"roleName,optional"` //角色名称
+		RoleStatus int32  `form:"roleStatus,optional"` //角色状态
+	}
+	QueryRoleListData {
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		DataScope  int32  `json:"dataScope"` //数据权限
+		Id         int64  `json:"id"` //编号
+		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
+		Remark     string `json:"remark"` //备注
+		RoleKey    string `json:"roleKey"` //权限字符
+		RoleName   string `json:"roleName"` //角色名称
+		RoleSort   int32  `json:"roleSort"` //角色排序
+		RoleStatus int32  `json:"roleStatus"` //角色状态
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryRoleListResp {
+		Code     string               `json:"code"`
+		Message  string               `json:"message"`
+		Current  int64                `json:"current,default=1"`
+		Data     []*QueryRoleListData `json:"data"`
+		PageSize int64                `json:"pageSize,default=20"`
+		Success  bool                 `json:"success"`
+		Total    int64                `json:"total"`
 	}
 	QueryRoleMenuListReq {
 		RoleId int64 `form:"roleId"`
@@ -95,21 +144,29 @@ type (
 	prefix:     /api/sys/role
 )
 service admin-api {
-	//新增角色信息
+	// 添加角色信息
 	@handler AddRole
 	post /addRole (AddRoleReq) returns (AddRoleResp)
 
-	//角色列表信息
-	@handler queryRoleList
-	get /queryRoleList (ListRoleReq) returns (ListRoleResp)
+	// 删除角色信息
+	@handler DeleteRole
+	get /deleteRole (DeleteRoleReq) returns (DeleteRoleResp)
 
-	//更新角色信息
+	// 更新角色信息
 	@handler UpdateRole
 	post /updateRole (UpdateRoleReq) returns (UpdateRoleResp)
 
-	//删除角色信息
-	@handler DeleteRole
-	get /deleteRole (DeleteRoleReq) returns (DeleteRoleResp)
+	// 更新角色信息状态
+	@handler UpdateRoleStatus
+	post /updateRoleStatus (UpdateRoleStatusReq) returns (UpdateRoleStatusResp)
+
+	// 查询角色信息详情
+	@handler QueryRoleDetail
+	get /queryRoleDetail (QueryRoleDetailReq) returns (QueryRoleDetailResp)
+
+	// 分页查询角色信息列
+	@handler QueryRoleList
+	get /queryRoleList (QueryRoleListReq) returns (QueryRoleListResp)
 
 	//查询角色与菜单的关联
 	@handler QueryRoleMenuList

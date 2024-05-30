@@ -36,7 +36,7 @@ func newSysRoleMenu(db *gorm.DB, opts ...gen.DOOption) sysRoleMenu {
 	return _sysRoleMenu
 }
 
-// sysRoleMenu 角色菜单关联
+// sysRoleMenu 角色菜单关联表
 type sysRoleMenu struct {
 	sysRoleMenuDo sysRoleMenuDo
 

@@ -34,7 +34,7 @@ func NewDeleteMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteM
 
 // DeleteMenu 删除菜单
 func (l *DeleteMenuLogic) DeleteMenu(req *types.DeleteMenuReq) (*types.DeleteMenuResp, error) {
-	if _, err := l.svcCtx.MenuService.MenuDelete(l.ctx, &sysclient.MenuDeleteReq{
+	if _, err := l.svcCtx.MenuService.DeleteMenu(l.ctx, &sysclient.DeleteMenuReq{
 		Ids: req.Ids,
 	}); err != nil {
 		logc.Errorf(l.ctx, "根据menuId: %+v,删除菜单异常:%s", req, err.Error())

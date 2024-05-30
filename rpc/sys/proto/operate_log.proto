@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加系统操作日志表
+message AddOperateLogReq {
+  string dept_name = 1; //部门名称
+  int64 id = 2; //编号
+  string operation_ip = 3; //操作地址
+  string operation_name = 4; //操作人员
+  string operation_params = 5; //请求参数
+  string operation_response = 6; //响应参数
+  int32 operation_status = 7; //操作状态
+  string operation_time = 8; //操作时间
+  string operation_type = 9; //操作类型
+  string operation_url = 10; //操作方法
+  string request_method = 11; //请求方式
+  string title = 12; //系统模块
+  int64 use_time = 13; //执行时长(毫秒)
+
+}
+
+message AddOperateLogResp {
+  string pong = 1;
+}
+
+// 删除系统操作日志表
+message DeleteOperateLogReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteOperateLogResp {
+  string pong = 1;
+}
+
+// 查询系统操作日志表详情
+message QueryOperateLogDetailReq {
+    int64 id = 1;
+}
+
+message QueryOperateLogDetailResp {
+  string dept_name = 1; //部门名称
+  int64 id = 2; //编号
+  string operation_ip = 3; //操作地址
+  string operation_name = 4; //操作人员
+  string operation_params = 5; //请求参数
+  string operation_response = 6; //响应参数
+  int32 operation_status = 7; //操作状态
+  string operation_time = 8; //操作时间
+  string operation_type = 9; //操作类型
+  string operation_url = 10; //操作方法
+  string request_method = 11; //请求方式
+  string title = 12; //系统模块
+  int64 use_time = 13; //执行时长(毫秒)
+
+}
+
+// 分页查询系统操作日志表列表
+message QueryOperateLogListReq {
+  string dept_name = 1; //部门名称
+  int64 id = 2; //编号
+  string operation_ip = 3; //操作地址
+  string operation_name = 4; //操作人员
+  string operation_params = 5; //请求参数
+  string operation_response = 6; //响应参数
+  int32 operation_status = 7; //操作状态
+  string operation_time = 8; //操作时间
+  string operation_type = 9; //操作类型
+  string operation_url = 10; //操作方法
+  string request_method = 11; //请求方式
+  string title = 12; //系统模块
+  int64 use_time = 13; //执行时长(毫秒)
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message OperateLogListData {
+  string dept_name = 1; //部门名称
+  int64 id = 2; //编号
+  string operation_ip = 3; //操作地址
+  string operation_name = 4; //操作人员
+  string operation_params = 5; //请求参数
+  string operation_response = 6; //响应参数
+  int32 operation_status = 7; //操作状态
+  string operation_time = 8; //操作时间
+  string operation_type = 9; //操作类型
+  string operation_url = 10; //操作方法
+  string request_method = 11; //请求方式
+  string title = 12; //系统模块
+  int64 use_time = 13; //执行时长(毫秒)
+
+}
+
+message QueryOperateLogListResp {
+  int64 total = 1;
+  repeated  OperateLogListData list = 2;
+}
+
+// 系统操作日志表
+service OperateLogService {
+  // 添加系统操作日志表
+  rpc AddOperateLog(AddOperateLogReq) returns (AddOperateLogResp){}
+  // 删除系统操作日志表
+  rpc DeleteOperateLog(DeleteOperateLogReq) returns (DeleteOperateLogResp){}
+  // 查询系统操作日志表详情
+   rpc QueryOperateLogDetail(QueryOperateLogDetailReq) returns (QueryOperateLogDetailResp){}
+  // 查询系统操作日志表列表
+  rpc QueryOperateLogList(QueryOperateLogListReq) returns (QueryOperateLogListResp){}
+
+
+}

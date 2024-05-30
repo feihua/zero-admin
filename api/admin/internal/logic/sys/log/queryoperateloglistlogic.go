@@ -32,12 +32,17 @@ func NewQueryOperateLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // QueryOperateLogList 查询操作日志列表
-func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.ListSysLogReq) (*types.ListSysLogResp, error) {
-	resp, err := l.svcCtx.SysLogService.SysLogList(l.ctx, &sysclient.SysLogListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		UserName: req.UserName,
-		Method:   req.Method,
+func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.QueryOperateLogListReq) (*types.QueryOperateLogListResp, error) {
+	result, err := l.svcCtx.Operatelogservice.QueryOperateLogList(l.ctx, &sysclient.QueryOperateLogListReq{
+		PageNum:         req.Current,
+		PageSize:        req.PageSize,
+		OperationIp:     req.OperationIp,
+		OperationName:   req.OperationName,
+		DeptName:        req.DeptName,
+		OperationStatus: req.OperationStatus,
+		OperationType:   req.OperationType,
+		OperationUrl:    req.OperationUrl,
+		Title:           req.Title,
 	})
 
 	if err != nil {
@@ -46,30 +51,34 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.ListSysLogReq)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.ListSysLogData
+	var list []*types.QueryOperateLogListData
 
-	for _, log := range resp.List {
-		list = append(list, &types.ListSysLogData{
-			Id:             log.Id,
-			UserName:       log.UserName,
-			Operation:      log.Operation,
-			Method:         log.Method,
-			RequestParams:  log.RequestParams,
-			Time:           log.Time,
-			Ip:             log.Ip,
-			ResponseParams: log.ResponseParams,
-			OperationTime:  log.OperationTime,
+	for _, item := range result.List {
+		list = append(list, &types.QueryOperateLogListData{
+			DeptName:          item.DeptName,
+			Id:                item.Id,
+			OperationIp:       item.OperationIp,
+			OperationName:     item.OperationName,
+			OperationParams:   item.OperationParams,
+			OperationResponse: item.OperationResponse,
+			OperationStatus:   item.OperationStatus,
+			OperationTime:     item.OperationTime,
+			OperationType:     item.OperationType,
+			OperationUrl:      item.OperationUrl,
+			RequestMethod:     item.RequestMethod,
+			Title:             item.Title,
+			UseTime:           item.UseTime,
 		})
 	}
 
-	return &types.ListSysLogResp{
+	return &types.QueryOperateLogListResp{
 		Code:     "000000",
 		Message:  "查询操作日志列表",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
-		Total:    resp.Total,
+		Total:    result.Total,
 	}, nil
 
 }

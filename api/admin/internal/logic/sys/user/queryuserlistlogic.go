@@ -32,17 +32,15 @@ func NewQueryUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 }
 
 // QueryUserList 查询用户列表信息
-func (l *QueryUserListLogic) QueryUserList(req *types.ListUserReq) (*types.ListUserResp, error) {
-
-	resp, err := l.svcCtx.UserService.UserList(l.ctx, &sysclient.UserListReq{
-		Current:    req.Current,
+func (l *QueryUserListLogic) QueryUserList(req *types.QueryUserListReq) (*types.QueryUserListResp, error) {
+	result, err := l.svcCtx.UserService.QueryUserList(l.ctx, &sysclient.QueryUserListReq{
+		PageNum:    req.Current,
 		PageSize:   req.PageSize,
-		UserName:   req.Name,
-		NickName:   req.NickName,
-		Mobile:     req.Mobile,
-		Email:      req.Email,
-		UserStatus: req.Status,
 		DeptId:     req.DeptId,
+		Email:      req.Email,
+		Mobile:     req.Mobile,
+		NickName:   req.NickName,
+		UserStatus: req.UserStatus,
 	})
 
 	if err != nil {
@@ -51,34 +49,35 @@ func (l *QueryUserListLogic) QueryUserList(req *types.ListUserReq) (*types.ListU
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.ListUserData
+	var list []*types.QueryUserListData
 
-	for _, item := range resp.List {
-		list = append(list, &types.ListUserData{
-			Id:         item.Id,
-			UserName:   item.UserName,
-			NickName:   item.NickName,
+	for _, item := range result.List {
+		list = append(list, &types.QueryUserListData{
 			Avatar:     item.Avatar,
-			Email:      item.Email,
-			Mobile:     item.Mobile,
-			UserStatus: item.UserStatus,
-			DeptId:     item.DeptId,
 			CreateBy:   item.CreateBy,
 			CreateTime: item.CreateTime,
+			DeptId:     item.DeptId,
+			Email:      item.Email,
+			Id:         item.Id,
+			LoginIp:    item.LoginIp,
+			LoginTime:  item.LoginTime,
+			Mobile:     item.Mobile,
+			NickName:   item.NickName,
+			Remark:     item.Remark,
 			UpdateBy:   item.UpdateBy,
 			UpdateTime: item.UpdateTime,
-			DelFlag:    item.DelFlag,
-			JobId:      item.JobId,
+			UserName:   item.UserName,
+			UserStatus: item.UserStatus,
 		})
 	}
 
-	return &types.ListUserResp{
+	return &types.QueryUserListResp{
 		Code:     "000000",
 		Message:  "查询用户列表成功",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
-		Total:    resp.Total,
+		Total:    result.Total,
 	}, nil
 }

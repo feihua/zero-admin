@@ -34,7 +34,7 @@ func newSysRole(db *gorm.DB, opts ...gen.DOOption) sysRole {
 	_sysRole.RoleSort = field.NewInt32(tableName, "role_sort")
 	_sysRole.DataScope = field.NewInt32(tableName, "data_scope")
 	_sysRole.IsDeleted = field.NewInt32(tableName, "is_deleted")
-	_sysRole.IsAdmin = field.NewBool(tableName, "is_admin")
+	_sysRole.IsAdmin = field.NewInt32(tableName, "is_admin")
 	_sysRole.Remark = field.NewString(tableName, "remark")
 	_sysRole.CreateBy = field.NewString(tableName, "create_by")
 	_sysRole.CreateTime = field.NewTime(tableName, "create_time")
@@ -46,7 +46,7 @@ func newSysRole(db *gorm.DB, opts ...gen.DOOption) sysRole {
 	return _sysRole
 }
 
-// sysRole 角色管理
+// sysRole 角色信息表
 type sysRole struct {
 	sysRoleDo sysRoleDo
 
@@ -58,7 +58,7 @@ type sysRole struct {
 	RoleSort   field.Int32  // 角色排序
 	DataScope  field.Int32  // 数据权限
 	IsDeleted  field.Int32  // 是否删除  0：否  1：是
-	IsAdmin    field.Bool   // 是否超级管理员
+	IsAdmin    field.Int32  // 是否超级管理员
 	Remark     field.String // 备注
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
@@ -87,7 +87,7 @@ func (s *sysRole) updateTableName(table string) *sysRole {
 	s.RoleSort = field.NewInt32(table, "role_sort")
 	s.DataScope = field.NewInt32(table, "data_scope")
 	s.IsDeleted = field.NewInt32(table, "is_deleted")
-	s.IsAdmin = field.NewBool(table, "is_admin")
+	s.IsAdmin = field.NewInt32(table, "is_admin")
 	s.Remark = field.NewString(table, "remark")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")

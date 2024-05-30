@@ -1,0 +1,97 @@
+info (
+	desc:   "系统操作日志"
+	author: "liufeihua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 删除系统操作日志
+	DeleteOperateLogReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeleteOperateLogResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询系统操作日志详情
+	QueryOperateLogDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryOperateLogDetailData {
+		DeptName          string `json:"deptName"` //部门名称
+		Id                int64  `json:"id"` //编号
+		OperationIp       string `json:"operationIp"` //操作地址
+		OperationName     string `json:"operationName"` //操作人员
+		OperationParams   string `json:"operationParams"` //请求参数
+		OperationResponse string `json:"operationResponse"` //响应参数
+		OperationStatus   int32  `json:"operationStatus"` //操作状态
+		OperationTime     string `json:"operationTime"` //操作时间
+		OperationType     string `json:"operationType"` //操作类型
+		OperationUrl      string `json:"operationUrl"` //操作方法
+		RequestMethod     string `json:"requestMethod"` //请求方式
+		Title             string `json:"title"` //系统模块
+		UseTime           int64  `json:"useTime"` //执行时长(毫秒)
+	}
+	QueryOperateLogDetailResp {
+		Code    string                    `json:"code"`
+		Message string                    `json:"message"`
+		Data    QueryOperateLogDetailData `json:"data"`
+	}
+	// 分页查询系统操作日志列
+	QueryOperateLogListReq {
+		Current         int64  `form:"current,default=1"` //第几页
+		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
+		DeptName        string `form:"deptName,optional"` //部门名称
+		OperationIp     string `form:"operationIp,optional"` //操作地址
+		OperationName   string `form:"operationName,optional"` //操作人员
+		OperationStatus int32  `form:"operationStatus,optional"` //操作状态
+		OperationType   string `form:"operationType,optional"` //操作类型
+		OperationUrl    string `form:"operationUrl,optional"` //操作方法
+		Title           string `form:"title,optional"` //系统模块
+	}
+	QueryOperateLogListData {
+		DeptName          string `json:"deptName"` //部门名称
+		Id                int64  `json:"id"` //编号
+		OperationIp       string `json:"operationIp"` //操作地址
+		OperationName     string `json:"operationName"` //操作人员
+		OperationParams   string `json:"operationParams"` //请求参数
+		OperationResponse string `json:"operationResponse"` //响应参数
+		OperationStatus   int32  `json:"operationStatus"` //操作状态
+		OperationTime     string `json:"operationTime"` //操作时间
+		OperationType     string `json:"operationType"` //操作类型
+		OperationUrl      string `json:"operationUrl"` //操作方法
+		RequestMethod     string `json:"requestMethod"` //请求方式
+		Title             string `json:"title"` //系统模块
+		UseTime           int64  `json:"useTime"` //执行时长(毫秒)
+	}
+	QueryOperateLogListResp {
+		Code     string                     `json:"code"`
+		Message  string                     `json:"message"`
+		Current  int64                      `json:"current,default=1"`
+		Data     []*QueryOperateLogListData `json:"data"`
+		PageSize int64                      `json:"pageSize,default=20"`
+		Success  bool                       `json:"success"`
+		Total    int64                      `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      sys/log
+	prefix:     /api/sys/log
+)
+service admin-api {
+	// 删除系统操作日志
+	@handler DeleteOperateLog
+	get /deleteOperateLog (DeleteOperateLogReq) returns (DeleteOperateLogResp)
+
+	// 查询系统操作日志详情
+	@handler QueryOperateLogDetail
+	get /queryOperateLogDetail (QueryOperateLogDetailReq) returns (QueryOperateLogDetailResp)
+
+	// 分页查询系统操作日志列
+	@handler QueryOperateLogList
+	get /queryOperateLogList (QueryOperateLogListReq) returns (QueryOperateLogListResp)
+}
+

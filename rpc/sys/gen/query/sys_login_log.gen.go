@@ -40,7 +40,7 @@ func newSysLoginLog(db *gorm.DB, opts ...gen.DOOption) sysLoginLog {
 	return _sysLoginLog
 }
 
-// sysLoginLog 系统登录日志
+// sysLoginLog 系统登录日志表
 type sysLoginLog struct {
 	sysLoginLogDo sysLoginLogDo
 

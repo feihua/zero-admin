@@ -7,10 +7,8 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"google.golang.org/grpc/status"
-	"strconv"
-
 	"github.com/zeromicro/go-zero/core/logx"
+	"google.golang.org/grpc/status"
 )
 
 // QueryRoleListLogic 查询角色列表
@@ -33,12 +31,14 @@ func NewQueryRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 }
 
 // QueryRoleList 查询角色列表
-func (l *QueryRoleListLogic) QueryRoleList(req *types.ListRoleReq) (*types.ListRoleResp, error) {
-	resp, err := l.svcCtx.RoleService.RoleList(l.ctx, &sysclient.RoleListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		Name:     req.Name,
-		Status:   req.Status,
+func (l *QueryRoleListLogic) QueryRoleList(req *types.QueryRoleListReq) (*types.QueryRoleListResp, error) {
+	result, err := l.svcCtx.RoleService.QueryRoleList(l.ctx, &sysclient.QueryRoleListReq{
+		PageNum:    req.Current,
+		PageSize:   req.PageSize,
+		IsAdmin:    req.IsAdmin,
+		RoleKey:    req.RoleKey,
+		RoleName:   req.RoleName,
+		RoleStatus: req.RoleStatus,
 	})
 
 	if err != nil {
@@ -47,31 +47,32 @@ func (l *QueryRoleListLogic) QueryRoleList(req *types.ListRoleReq) (*types.ListR
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.ListRoleData
+	var list []*types.QueryRoleListData
 
-	for _, role := range resp.List {
-		list = append(list, &types.ListRoleData{
-			Id:         role.Id,
-			Name:       role.Name,
-			Remark:     role.Remark,
+	for _, role := range result.List {
+		list = append(list, &types.QueryRoleListData{
 			CreateBy:   role.CreateBy,
 			CreateTime: role.CreateTime,
+			DataScope:  role.DataScope,
+			Id:         role.Id,
+			IsAdmin:    role.IsAdmin,
+			Remark:     role.Remark,
+			RoleKey:    role.RoleKey,
+			RoleName:   role.RoleName,
+			RoleSort:   role.RoleSort,
+			RoleStatus: role.RoleStatus,
 			UpdateBy:   role.UpdateBy,
 			UpdateTime: role.UpdateTime,
-			DelFlag:    role.DelFlag,
-			Label:      role.Name,
-			Value:      strconv.FormatInt(role.Id, 10),
-			Status:     role.Status,
 		})
 	}
 
-	return &types.ListRoleResp{
+	return &types.QueryRoleListResp{
 		Code:     "000000",
 		Message:  "查询角色成功",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,
 		Success:  true,
-		Total:    resp.Total,
+		Total:    result.Total,
 	}, nil
 }

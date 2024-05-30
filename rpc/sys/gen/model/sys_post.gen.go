@@ -10,7 +10,7 @@ import (
 
 const TableNameSysPost = "sys_post"
 
-// SysPost 职位管理
+// SysPost 岗位管理
 type SysPost struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
 	PostName   string     `gorm:"column:post_name;not null;comment:岗位名称" json:"post_name"`                               // 岗位名称

@@ -10,7 +10,7 @@ import (
 
 const TableNameSysDictItem = "sys_dict_item"
 
-// SysDictItem 字典项表
+// SysDictItem 字典数据表
 type SysDictItem struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
 	DictType   string     `gorm:"column:dict_type;not null;comment:字典类型" json:"dict_type"`                               // 字典类型

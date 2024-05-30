@@ -17,5 +17,5 @@ create table sys_dept
     update_by   varchar(50)  default ''                not null comment '更新者',
     update_time datetime                               null on update CURRENT_TIMESTAMP comment '更新时间'
 )
-    comment '部门管理';
+    comment '部门信息表';
 

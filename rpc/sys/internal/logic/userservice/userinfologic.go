@@ -90,13 +90,13 @@ func buildMenuTree(menus []*model.SysMenu) ([]*sysclient.MenuListTree, []string)
 	var menuListTrees []*sysclient.MenuListTree
 	var urls []string
 	for _, menu := range menus {
-		if menu.Type == 1 || menu.Type == 0 {
+		if menu.MenuType == 1 || menu.MenuType == 0 {
 			menuListTrees = append(menuListTrees, &sysclient.MenuListTree{
 				Id:           menu.ID,
-				Name:         menu.Name,
-				Icon:         menu.Icon,
+				Name:         menu.MenuName,
+				Icon:         menu.MenuIcon,
 				ParentId:     menu.ParentID,
-				Path:         menu.URL,
+				Path:         menu.MenuPath,
 				VuePath:      menu.VuePath,
 				VueComponent: menu.VueComponent,
 				VueIcon:      menu.VueIcon,

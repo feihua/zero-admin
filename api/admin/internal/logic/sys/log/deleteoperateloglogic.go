@@ -33,8 +33,8 @@ func NewDeleteOperateLogLogic(ctx context.Context, svcCtx *svc.ServiceContext) D
 }
 
 // DeleteOperateLog 删除操作日志
-func (l *DeleteOperateLogLogic) DeleteOperateLog(req *types.DeleteSysLogReq) (*types.DeleteSysLogResp, error) {
-	_, err := l.svcCtx.SysLogService.SysLogDelete(l.ctx, &sysclient.SysLogDeleteReq{
+func (l *DeleteOperateLogLogic) DeleteOperateLog(req *types.DeleteOperateLogReq) (*types.DeleteOperateLogResp, error) {
+	_, err := l.svcCtx.Operatelogservice.DeleteOperateLog(l.ctx, &sysclient.DeleteOperateLogReq{
 		Ids: req.Ids,
 	})
 
@@ -44,7 +44,7 @@ func (l *DeleteOperateLogLogic) DeleteOperateLog(req *types.DeleteSysLogReq) (*t
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteSysLogResp{
+	return &types.DeleteOperateLogResp{
 		Code:    "000000",
 		Message: "删除操作日志成功",
 	}, nil

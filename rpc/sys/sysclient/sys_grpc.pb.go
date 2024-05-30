@@ -19,34 +19,2227 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	UserService_Login_FullMethodName              = "/sysclient.UserService/Login"
-	UserService_UserInfo_FullMethodName           = "/sysclient.UserService/UserInfo"
-	UserService_UserAdd_FullMethodName            = "/sysclient.UserService/UserAdd"
-	UserService_UserList_FullMethodName           = "/sysclient.UserService/UserList"
-	UserService_UserUpdate_FullMethodName         = "/sysclient.UserService/UserUpdate"
-	UserService_UserDelete_FullMethodName         = "/sysclient.UserService/UserDelete"
-	UserService_ReSetPassword_FullMethodName      = "/sysclient.UserService/ReSetPassword"
-	UserService_UpdateUserStatus_FullMethodName   = "/sysclient.UserService/UpdateUserStatus"
-	UserService_QueryUserRoleList_FullMethodName  = "/sysclient.UserService/QueryUserRoleList"
-	UserService_UpdateUserRoleList_FullMethodName = "/sysclient.UserService/UpdateUserRoleList"
+	DeptService_AddDept_FullMethodName          = "/sysclient.DeptService/AddDept"
+	DeptService_DeleteDept_FullMethodName       = "/sysclient.DeptService/DeleteDept"
+	DeptService_UpdateDept_FullMethodName       = "/sysclient.DeptService/UpdateDept"
+	DeptService_UpdateDeptStatus_FullMethodName = "/sysclient.DeptService/UpdateDeptStatus"
+	DeptService_QueryDeptDetail_FullMethodName  = "/sysclient.DeptService/QueryDeptDetail"
+	DeptService_QueryDeptList_FullMethodName    = "/sysclient.DeptService/QueryDeptList"
+)
+
+// DeptServiceClient is the client API for DeptService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DeptServiceClient interface {
+	// 添加部门信息表
+	AddDept(ctx context.Context, in *AddDeptReq, opts ...grpc.CallOption) (*AddDeptResp, error)
+	// 删除部门信息表
+	DeleteDept(ctx context.Context, in *DeleteDeptReq, opts ...grpc.CallOption) (*DeleteDeptResp, error)
+	// 更新部门信息表
+	UpdateDept(ctx context.Context, in *UpdateDeptReq, opts ...grpc.CallOption) (*UpdateDeptResp, error)
+	// 更新部门信息表状态
+	UpdateDeptStatus(ctx context.Context, in *UpdateDeptStatusReq, opts ...grpc.CallOption) (*UpdateDeptStatusResp, error)
+	// 查询部门信息表详情
+	QueryDeptDetail(ctx context.Context, in *QueryDeptDetailReq, opts ...grpc.CallOption) (*QueryDeptDetailResp, error)
+	// 查询部门信息表列表
+	QueryDeptList(ctx context.Context, in *QueryDeptListReq, opts ...grpc.CallOption) (*QueryDeptListResp, error)
+}
+
+type deptServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDeptServiceClient(cc grpc.ClientConnInterface) DeptServiceClient {
+	return &deptServiceClient{cc}
+}
+
+func (c *deptServiceClient) AddDept(ctx context.Context, in *AddDeptReq, opts ...grpc.CallOption) (*AddDeptResp, error) {
+	out := new(AddDeptResp)
+	err := c.cc.Invoke(ctx, DeptService_AddDept_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deptServiceClient) DeleteDept(ctx context.Context, in *DeleteDeptReq, opts ...grpc.CallOption) (*DeleteDeptResp, error) {
+	out := new(DeleteDeptResp)
+	err := c.cc.Invoke(ctx, DeptService_DeleteDept_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deptServiceClient) UpdateDept(ctx context.Context, in *UpdateDeptReq, opts ...grpc.CallOption) (*UpdateDeptResp, error) {
+	out := new(UpdateDeptResp)
+	err := c.cc.Invoke(ctx, DeptService_UpdateDept_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deptServiceClient) UpdateDeptStatus(ctx context.Context, in *UpdateDeptStatusReq, opts ...grpc.CallOption) (*UpdateDeptStatusResp, error) {
+	out := new(UpdateDeptStatusResp)
+	err := c.cc.Invoke(ctx, DeptService_UpdateDeptStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deptServiceClient) QueryDeptDetail(ctx context.Context, in *QueryDeptDetailReq, opts ...grpc.CallOption) (*QueryDeptDetailResp, error) {
+	out := new(QueryDeptDetailResp)
+	err := c.cc.Invoke(ctx, DeptService_QueryDeptDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deptServiceClient) QueryDeptList(ctx context.Context, in *QueryDeptListReq, opts ...grpc.CallOption) (*QueryDeptListResp, error) {
+	out := new(QueryDeptListResp)
+	err := c.cc.Invoke(ctx, DeptService_QueryDeptList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DeptServiceServer is the server API for DeptService service.
+// All implementations must embed UnimplementedDeptServiceServer
+// for forward compatibility
+type DeptServiceServer interface {
+	// 添加部门信息表
+	AddDept(context.Context, *AddDeptReq) (*AddDeptResp, error)
+	// 删除部门信息表
+	DeleteDept(context.Context, *DeleteDeptReq) (*DeleteDeptResp, error)
+	// 更新部门信息表
+	UpdateDept(context.Context, *UpdateDeptReq) (*UpdateDeptResp, error)
+	// 更新部门信息表状态
+	UpdateDeptStatus(context.Context, *UpdateDeptStatusReq) (*UpdateDeptStatusResp, error)
+	// 查询部门信息表详情
+	QueryDeptDetail(context.Context, *QueryDeptDetailReq) (*QueryDeptDetailResp, error)
+	// 查询部门信息表列表
+	QueryDeptList(context.Context, *QueryDeptListReq) (*QueryDeptListResp, error)
+	mustEmbedUnimplementedDeptServiceServer()
+}
+
+// UnimplementedDeptServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedDeptServiceServer struct {
+}
+
+func (UnimplementedDeptServiceServer) AddDept(context.Context, *AddDeptReq) (*AddDeptResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDept not implemented")
+}
+func (UnimplementedDeptServiceServer) DeleteDept(context.Context, *DeleteDeptReq) (*DeleteDeptResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDept not implemented")
+}
+func (UnimplementedDeptServiceServer) UpdateDept(context.Context, *UpdateDeptReq) (*UpdateDeptResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDept not implemented")
+}
+func (UnimplementedDeptServiceServer) UpdateDeptStatus(context.Context, *UpdateDeptStatusReq) (*UpdateDeptStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDeptStatus not implemented")
+}
+func (UnimplementedDeptServiceServer) QueryDeptDetail(context.Context, *QueryDeptDetailReq) (*QueryDeptDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryDeptDetail not implemented")
+}
+func (UnimplementedDeptServiceServer) QueryDeptList(context.Context, *QueryDeptListReq) (*QueryDeptListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryDeptList not implemented")
+}
+func (UnimplementedDeptServiceServer) mustEmbedUnimplementedDeptServiceServer() {}
+
+// UnsafeDeptServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DeptServiceServer will
+// result in compilation errors.
+type UnsafeDeptServiceServer interface {
+	mustEmbedUnimplementedDeptServiceServer()
+}
+
+func RegisterDeptServiceServer(s grpc.ServiceRegistrar, srv DeptServiceServer) {
+	s.RegisterService(&DeptService_ServiceDesc, srv)
+}
+
+func _DeptService_AddDept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDeptReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeptServiceServer).AddDept(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeptService_AddDept_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeptServiceServer).AddDept(ctx, req.(*AddDeptReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeptService_DeleteDept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDeptReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeptServiceServer).DeleteDept(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeptService_DeleteDept_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeptServiceServer).DeleteDept(ctx, req.(*DeleteDeptReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeptService_UpdateDept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeptReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeptServiceServer).UpdateDept(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeptService_UpdateDept_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeptServiceServer).UpdateDept(ctx, req.(*UpdateDeptReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeptService_UpdateDeptStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeptStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeptServiceServer).UpdateDeptStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeptService_UpdateDeptStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeptServiceServer).UpdateDeptStatus(ctx, req.(*UpdateDeptStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeptService_QueryDeptDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDeptDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeptServiceServer).QueryDeptDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeptService_QueryDeptDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeptServiceServer).QueryDeptDetail(ctx, req.(*QueryDeptDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeptService_QueryDeptList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDeptListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeptServiceServer).QueryDeptList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeptService_QueryDeptList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeptServiceServer).QueryDeptList(ctx, req.(*QueryDeptListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DeptService_ServiceDesc is the grpc.ServiceDesc for DeptService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DeptService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.DeptService",
+	HandlerType: (*DeptServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddDept",
+			Handler:    _DeptService_AddDept_Handler,
+		},
+		{
+			MethodName: "DeleteDept",
+			Handler:    _DeptService_DeleteDept_Handler,
+		},
+		{
+			MethodName: "UpdateDept",
+			Handler:    _DeptService_UpdateDept_Handler,
+		},
+		{
+			MethodName: "UpdateDeptStatus",
+			Handler:    _DeptService_UpdateDeptStatus_Handler,
+		},
+		{
+			MethodName: "QueryDeptDetail",
+			Handler:    _DeptService_QueryDeptDetail_Handler,
+		},
+		{
+			MethodName: "QueryDeptList",
+			Handler:    _DeptService_QueryDeptList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/sys/sys.proto",
+}
+
+const (
+	DictItemService_AddDictItem_FullMethodName          = "/sysclient.DictItemService/AddDictItem"
+	DictItemService_DeleteDictItem_FullMethodName       = "/sysclient.DictItemService/DeleteDictItem"
+	DictItemService_UpdateDictItem_FullMethodName       = "/sysclient.DictItemService/UpdateDictItem"
+	DictItemService_UpdateDictItemStatus_FullMethodName = "/sysclient.DictItemService/UpdateDictItemStatus"
+	DictItemService_QueryDictItemDetail_FullMethodName  = "/sysclient.DictItemService/QueryDictItemDetail"
+	DictItemService_QueryDictItemList_FullMethodName    = "/sysclient.DictItemService/QueryDictItemList"
+)
+
+// DictItemServiceClient is the client API for DictItemService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DictItemServiceClient interface {
+	// 添加字典数据表
+	AddDictItem(ctx context.Context, in *AddDictItemReq, opts ...grpc.CallOption) (*AddDictItemResp, error)
+	// 删除字典数据表
+	DeleteDictItem(ctx context.Context, in *DeleteDictItemReq, opts ...grpc.CallOption) (*DeleteDictItemResp, error)
+	// 更新字典数据表
+	UpdateDictItem(ctx context.Context, in *UpdateDictItemReq, opts ...grpc.CallOption) (*UpdateDictItemResp, error)
+	// 更新字典数据表状态
+	UpdateDictItemStatus(ctx context.Context, in *UpdateDictItemStatusReq, opts ...grpc.CallOption) (*UpdateDictItemStatusResp, error)
+	// 查询字典数据表详情
+	QueryDictItemDetail(ctx context.Context, in *QueryDictItemDetailReq, opts ...grpc.CallOption) (*QueryDictItemDetailResp, error)
+	// 查询字典数据表列表
+	QueryDictItemList(ctx context.Context, in *QueryDictItemListReq, opts ...grpc.CallOption) (*QueryDictItemListResp, error)
+}
+
+type dictItemServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDictItemServiceClient(cc grpc.ClientConnInterface) DictItemServiceClient {
+	return &dictItemServiceClient{cc}
+}
+
+func (c *dictItemServiceClient) AddDictItem(ctx context.Context, in *AddDictItemReq, opts ...grpc.CallOption) (*AddDictItemResp, error) {
+	out := new(AddDictItemResp)
+	err := c.cc.Invoke(ctx, DictItemService_AddDictItem_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictItemServiceClient) DeleteDictItem(ctx context.Context, in *DeleteDictItemReq, opts ...grpc.CallOption) (*DeleteDictItemResp, error) {
+	out := new(DeleteDictItemResp)
+	err := c.cc.Invoke(ctx, DictItemService_DeleteDictItem_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictItemServiceClient) UpdateDictItem(ctx context.Context, in *UpdateDictItemReq, opts ...grpc.CallOption) (*UpdateDictItemResp, error) {
+	out := new(UpdateDictItemResp)
+	err := c.cc.Invoke(ctx, DictItemService_UpdateDictItem_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictItemServiceClient) UpdateDictItemStatus(ctx context.Context, in *UpdateDictItemStatusReq, opts ...grpc.CallOption) (*UpdateDictItemStatusResp, error) {
+	out := new(UpdateDictItemStatusResp)
+	err := c.cc.Invoke(ctx, DictItemService_UpdateDictItemStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictItemServiceClient) QueryDictItemDetail(ctx context.Context, in *QueryDictItemDetailReq, opts ...grpc.CallOption) (*QueryDictItemDetailResp, error) {
+	out := new(QueryDictItemDetailResp)
+	err := c.cc.Invoke(ctx, DictItemService_QueryDictItemDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictItemServiceClient) QueryDictItemList(ctx context.Context, in *QueryDictItemListReq, opts ...grpc.CallOption) (*QueryDictItemListResp, error) {
+	out := new(QueryDictItemListResp)
+	err := c.cc.Invoke(ctx, DictItemService_QueryDictItemList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DictItemServiceServer is the server API for DictItemService service.
+// All implementations must embed UnimplementedDictItemServiceServer
+// for forward compatibility
+type DictItemServiceServer interface {
+	// 添加字典数据表
+	AddDictItem(context.Context, *AddDictItemReq) (*AddDictItemResp, error)
+	// 删除字典数据表
+	DeleteDictItem(context.Context, *DeleteDictItemReq) (*DeleteDictItemResp, error)
+	// 更新字典数据表
+	UpdateDictItem(context.Context, *UpdateDictItemReq) (*UpdateDictItemResp, error)
+	// 更新字典数据表状态
+	UpdateDictItemStatus(context.Context, *UpdateDictItemStatusReq) (*UpdateDictItemStatusResp, error)
+	// 查询字典数据表详情
+	QueryDictItemDetail(context.Context, *QueryDictItemDetailReq) (*QueryDictItemDetailResp, error)
+	// 查询字典数据表列表
+	QueryDictItemList(context.Context, *QueryDictItemListReq) (*QueryDictItemListResp, error)
+	mustEmbedUnimplementedDictItemServiceServer()
+}
+
+// UnimplementedDictItemServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedDictItemServiceServer struct {
+}
+
+func (UnimplementedDictItemServiceServer) AddDictItem(context.Context, *AddDictItemReq) (*AddDictItemResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDictItem not implemented")
+}
+func (UnimplementedDictItemServiceServer) DeleteDictItem(context.Context, *DeleteDictItemReq) (*DeleteDictItemResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDictItem not implemented")
+}
+func (UnimplementedDictItemServiceServer) UpdateDictItem(context.Context, *UpdateDictItemReq) (*UpdateDictItemResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDictItem not implemented")
+}
+func (UnimplementedDictItemServiceServer) UpdateDictItemStatus(context.Context, *UpdateDictItemStatusReq) (*UpdateDictItemStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDictItemStatus not implemented")
+}
+func (UnimplementedDictItemServiceServer) QueryDictItemDetail(context.Context, *QueryDictItemDetailReq) (*QueryDictItemDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryDictItemDetail not implemented")
+}
+func (UnimplementedDictItemServiceServer) QueryDictItemList(context.Context, *QueryDictItemListReq) (*QueryDictItemListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryDictItemList not implemented")
+}
+func (UnimplementedDictItemServiceServer) mustEmbedUnimplementedDictItemServiceServer() {}
+
+// UnsafeDictItemServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DictItemServiceServer will
+// result in compilation errors.
+type UnsafeDictItemServiceServer interface {
+	mustEmbedUnimplementedDictItemServiceServer()
+}
+
+func RegisterDictItemServiceServer(s grpc.ServiceRegistrar, srv DictItemServiceServer) {
+	s.RegisterService(&DictItemService_ServiceDesc, srv)
+}
+
+func _DictItemService_AddDictItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDictItemReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictItemServiceServer).AddDictItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictItemService_AddDictItem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictItemServiceServer).AddDictItem(ctx, req.(*AddDictItemReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictItemService_DeleteDictItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDictItemReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictItemServiceServer).DeleteDictItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictItemService_DeleteDictItem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictItemServiceServer).DeleteDictItem(ctx, req.(*DeleteDictItemReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictItemService_UpdateDictItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDictItemReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictItemServiceServer).UpdateDictItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictItemService_UpdateDictItem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictItemServiceServer).UpdateDictItem(ctx, req.(*UpdateDictItemReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictItemService_UpdateDictItemStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDictItemStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictItemServiceServer).UpdateDictItemStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictItemService_UpdateDictItemStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictItemServiceServer).UpdateDictItemStatus(ctx, req.(*UpdateDictItemStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictItemService_QueryDictItemDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDictItemDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictItemServiceServer).QueryDictItemDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictItemService_QueryDictItemDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictItemServiceServer).QueryDictItemDetail(ctx, req.(*QueryDictItemDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictItemService_QueryDictItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDictItemListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictItemServiceServer).QueryDictItemList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictItemService_QueryDictItemList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictItemServiceServer).QueryDictItemList(ctx, req.(*QueryDictItemListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DictItemService_ServiceDesc is the grpc.ServiceDesc for DictItemService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DictItemService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.DictItemService",
+	HandlerType: (*DictItemServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddDictItem",
+			Handler:    _DictItemService_AddDictItem_Handler,
+		},
+		{
+			MethodName: "DeleteDictItem",
+			Handler:    _DictItemService_DeleteDictItem_Handler,
+		},
+		{
+			MethodName: "UpdateDictItem",
+			Handler:    _DictItemService_UpdateDictItem_Handler,
+		},
+		{
+			MethodName: "UpdateDictItemStatus",
+			Handler:    _DictItemService_UpdateDictItemStatus_Handler,
+		},
+		{
+			MethodName: "QueryDictItemDetail",
+			Handler:    _DictItemService_QueryDictItemDetail_Handler,
+		},
+		{
+			MethodName: "QueryDictItemList",
+			Handler:    _DictItemService_QueryDictItemList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/sys/sys.proto",
+}
+
+const (
+	DictTypeService_AddDictType_FullMethodName          = "/sysclient.DictTypeService/AddDictType"
+	DictTypeService_DeleteDictType_FullMethodName       = "/sysclient.DictTypeService/DeleteDictType"
+	DictTypeService_UpdateDictType_FullMethodName       = "/sysclient.DictTypeService/UpdateDictType"
+	DictTypeService_UpdateDictTypeStatus_FullMethodName = "/sysclient.DictTypeService/UpdateDictTypeStatus"
+	DictTypeService_QueryDictTypeDetail_FullMethodName  = "/sysclient.DictTypeService/QueryDictTypeDetail"
+	DictTypeService_QueryDictTypeList_FullMethodName    = "/sysclient.DictTypeService/QueryDictTypeList"
+)
+
+// DictTypeServiceClient is the client API for DictTypeService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DictTypeServiceClient interface {
+	// 添加字典类型表
+	AddDictType(ctx context.Context, in *AddDictTypeReq, opts ...grpc.CallOption) (*AddDictTypeResp, error)
+	// 删除字典类型表
+	DeleteDictType(ctx context.Context, in *DeleteDictTypeReq, opts ...grpc.CallOption) (*DeleteDictTypeResp, error)
+	// 更新字典类型表
+	UpdateDictType(ctx context.Context, in *UpdateDictTypeReq, opts ...grpc.CallOption) (*UpdateDictTypeResp, error)
+	// 更新字典类型表状态
+	UpdateDictTypeStatus(ctx context.Context, in *UpdateDictTypeStatusReq, opts ...grpc.CallOption) (*UpdateDictTypeStatusResp, error)
+	// 查询字典类型表详情
+	QueryDictTypeDetail(ctx context.Context, in *QueryDictTypeDetailReq, opts ...grpc.CallOption) (*QueryDictTypeDetailResp, error)
+	// 查询字典类型表列表
+	QueryDictTypeList(ctx context.Context, in *QueryDictTypeListReq, opts ...grpc.CallOption) (*QueryDictTypeListResp, error)
+}
+
+type dictTypeServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDictTypeServiceClient(cc grpc.ClientConnInterface) DictTypeServiceClient {
+	return &dictTypeServiceClient{cc}
+}
+
+func (c *dictTypeServiceClient) AddDictType(ctx context.Context, in *AddDictTypeReq, opts ...grpc.CallOption) (*AddDictTypeResp, error) {
+	out := new(AddDictTypeResp)
+	err := c.cc.Invoke(ctx, DictTypeService_AddDictType_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictTypeServiceClient) DeleteDictType(ctx context.Context, in *DeleteDictTypeReq, opts ...grpc.CallOption) (*DeleteDictTypeResp, error) {
+	out := new(DeleteDictTypeResp)
+	err := c.cc.Invoke(ctx, DictTypeService_DeleteDictType_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictTypeServiceClient) UpdateDictType(ctx context.Context, in *UpdateDictTypeReq, opts ...grpc.CallOption) (*UpdateDictTypeResp, error) {
+	out := new(UpdateDictTypeResp)
+	err := c.cc.Invoke(ctx, DictTypeService_UpdateDictType_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictTypeServiceClient) UpdateDictTypeStatus(ctx context.Context, in *UpdateDictTypeStatusReq, opts ...grpc.CallOption) (*UpdateDictTypeStatusResp, error) {
+	out := new(UpdateDictTypeStatusResp)
+	err := c.cc.Invoke(ctx, DictTypeService_UpdateDictTypeStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictTypeServiceClient) QueryDictTypeDetail(ctx context.Context, in *QueryDictTypeDetailReq, opts ...grpc.CallOption) (*QueryDictTypeDetailResp, error) {
+	out := new(QueryDictTypeDetailResp)
+	err := c.cc.Invoke(ctx, DictTypeService_QueryDictTypeDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictTypeServiceClient) QueryDictTypeList(ctx context.Context, in *QueryDictTypeListReq, opts ...grpc.CallOption) (*QueryDictTypeListResp, error) {
+	out := new(QueryDictTypeListResp)
+	err := c.cc.Invoke(ctx, DictTypeService_QueryDictTypeList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DictTypeServiceServer is the server API for DictTypeService service.
+// All implementations must embed UnimplementedDictTypeServiceServer
+// for forward compatibility
+type DictTypeServiceServer interface {
+	// 添加字典类型表
+	AddDictType(context.Context, *AddDictTypeReq) (*AddDictTypeResp, error)
+	// 删除字典类型表
+	DeleteDictType(context.Context, *DeleteDictTypeReq) (*DeleteDictTypeResp, error)
+	// 更新字典类型表
+	UpdateDictType(context.Context, *UpdateDictTypeReq) (*UpdateDictTypeResp, error)
+	// 更新字典类型表状态
+	UpdateDictTypeStatus(context.Context, *UpdateDictTypeStatusReq) (*UpdateDictTypeStatusResp, error)
+	// 查询字典类型表详情
+	QueryDictTypeDetail(context.Context, *QueryDictTypeDetailReq) (*QueryDictTypeDetailResp, error)
+	// 查询字典类型表列表
+	QueryDictTypeList(context.Context, *QueryDictTypeListReq) (*QueryDictTypeListResp, error)
+	mustEmbedUnimplementedDictTypeServiceServer()
+}
+
+// UnimplementedDictTypeServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedDictTypeServiceServer struct {
+}
+
+func (UnimplementedDictTypeServiceServer) AddDictType(context.Context, *AddDictTypeReq) (*AddDictTypeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDictType not implemented")
+}
+func (UnimplementedDictTypeServiceServer) DeleteDictType(context.Context, *DeleteDictTypeReq) (*DeleteDictTypeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDictType not implemented")
+}
+func (UnimplementedDictTypeServiceServer) UpdateDictType(context.Context, *UpdateDictTypeReq) (*UpdateDictTypeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDictType not implemented")
+}
+func (UnimplementedDictTypeServiceServer) UpdateDictTypeStatus(context.Context, *UpdateDictTypeStatusReq) (*UpdateDictTypeStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDictTypeStatus not implemented")
+}
+func (UnimplementedDictTypeServiceServer) QueryDictTypeDetail(context.Context, *QueryDictTypeDetailReq) (*QueryDictTypeDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryDictTypeDetail not implemented")
+}
+func (UnimplementedDictTypeServiceServer) QueryDictTypeList(context.Context, *QueryDictTypeListReq) (*QueryDictTypeListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryDictTypeList not implemented")
+}
+func (UnimplementedDictTypeServiceServer) mustEmbedUnimplementedDictTypeServiceServer() {}
+
+// UnsafeDictTypeServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DictTypeServiceServer will
+// result in compilation errors.
+type UnsafeDictTypeServiceServer interface {
+	mustEmbedUnimplementedDictTypeServiceServer()
+}
+
+func RegisterDictTypeServiceServer(s grpc.ServiceRegistrar, srv DictTypeServiceServer) {
+	s.RegisterService(&DictTypeService_ServiceDesc, srv)
+}
+
+func _DictTypeService_AddDictType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDictTypeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictTypeServiceServer).AddDictType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictTypeService_AddDictType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictTypeServiceServer).AddDictType(ctx, req.(*AddDictTypeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictTypeService_DeleteDictType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDictTypeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictTypeServiceServer).DeleteDictType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictTypeService_DeleteDictType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictTypeServiceServer).DeleteDictType(ctx, req.(*DeleteDictTypeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictTypeService_UpdateDictType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDictTypeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictTypeServiceServer).UpdateDictType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictTypeService_UpdateDictType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictTypeServiceServer).UpdateDictType(ctx, req.(*UpdateDictTypeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictTypeService_UpdateDictTypeStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDictTypeStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictTypeServiceServer).UpdateDictTypeStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictTypeService_UpdateDictTypeStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictTypeServiceServer).UpdateDictTypeStatus(ctx, req.(*UpdateDictTypeStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictTypeService_QueryDictTypeDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDictTypeDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictTypeServiceServer).QueryDictTypeDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictTypeService_QueryDictTypeDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictTypeServiceServer).QueryDictTypeDetail(ctx, req.(*QueryDictTypeDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictTypeService_QueryDictTypeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDictTypeListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictTypeServiceServer).QueryDictTypeList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictTypeService_QueryDictTypeList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictTypeServiceServer).QueryDictTypeList(ctx, req.(*QueryDictTypeListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DictTypeService_ServiceDesc is the grpc.ServiceDesc for DictTypeService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DictTypeService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.DictTypeService",
+	HandlerType: (*DictTypeServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddDictType",
+			Handler:    _DictTypeService_AddDictType_Handler,
+		},
+		{
+			MethodName: "DeleteDictType",
+			Handler:    _DictTypeService_DeleteDictType_Handler,
+		},
+		{
+			MethodName: "UpdateDictType",
+			Handler:    _DictTypeService_UpdateDictType_Handler,
+		},
+		{
+			MethodName: "UpdateDictTypeStatus",
+			Handler:    _DictTypeService_UpdateDictTypeStatus_Handler,
+		},
+		{
+			MethodName: "QueryDictTypeDetail",
+			Handler:    _DictTypeService_QueryDictTypeDetail_Handler,
+		},
+		{
+			MethodName: "QueryDictTypeList",
+			Handler:    _DictTypeService_QueryDictTypeList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/sys/sys.proto",
+}
+
+const (
+	LoginLogService_DeleteLoginLog_FullMethodName      = "/sysclient.LoginLogService/DeleteLoginLog"
+	LoginLogService_QueryLoginLogDetail_FullMethodName = "/sysclient.LoginLogService/QueryLoginLogDetail"
+	LoginLogService_QueryLoginLogList_FullMethodName   = "/sysclient.LoginLogService/QueryLoginLogList"
+)
+
+// LoginLogServiceClient is the client API for LoginLogService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type LoginLogServiceClient interface {
+	// 删除系统登录日志表
+	DeleteLoginLog(ctx context.Context, in *DeleteLoginLogReq, opts ...grpc.CallOption) (*DeleteLoginLogResp, error)
+	// 查询系统登录日志表详情
+	QueryLoginLogDetail(ctx context.Context, in *QueryLoginLogDetailReq, opts ...grpc.CallOption) (*QueryLoginLogDetailResp, error)
+	// 查询系统登录日志表列表
+	QueryLoginLogList(ctx context.Context, in *QueryLoginLogListReq, opts ...grpc.CallOption) (*QueryLoginLogListResp, error)
+}
+
+type loginLogServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewLoginLogServiceClient(cc grpc.ClientConnInterface) LoginLogServiceClient {
+	return &loginLogServiceClient{cc}
+}
+
+func (c *loginLogServiceClient) DeleteLoginLog(ctx context.Context, in *DeleteLoginLogReq, opts ...grpc.CallOption) (*DeleteLoginLogResp, error) {
+	out := new(DeleteLoginLogResp)
+	err := c.cc.Invoke(ctx, LoginLogService_DeleteLoginLog_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loginLogServiceClient) QueryLoginLogDetail(ctx context.Context, in *QueryLoginLogDetailReq, opts ...grpc.CallOption) (*QueryLoginLogDetailResp, error) {
+	out := new(QueryLoginLogDetailResp)
+	err := c.cc.Invoke(ctx, LoginLogService_QueryLoginLogDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loginLogServiceClient) QueryLoginLogList(ctx context.Context, in *QueryLoginLogListReq, opts ...grpc.CallOption) (*QueryLoginLogListResp, error) {
+	out := new(QueryLoginLogListResp)
+	err := c.cc.Invoke(ctx, LoginLogService_QueryLoginLogList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// LoginLogServiceServer is the server API for LoginLogService service.
+// All implementations must embed UnimplementedLoginLogServiceServer
+// for forward compatibility
+type LoginLogServiceServer interface {
+	// 删除系统登录日志表
+	DeleteLoginLog(context.Context, *DeleteLoginLogReq) (*DeleteLoginLogResp, error)
+	// 查询系统登录日志表详情
+	QueryLoginLogDetail(context.Context, *QueryLoginLogDetailReq) (*QueryLoginLogDetailResp, error)
+	// 查询系统登录日志表列表
+	QueryLoginLogList(context.Context, *QueryLoginLogListReq) (*QueryLoginLogListResp, error)
+	mustEmbedUnimplementedLoginLogServiceServer()
+}
+
+// UnimplementedLoginLogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedLoginLogServiceServer struct {
+}
+
+func (UnimplementedLoginLogServiceServer) DeleteLoginLog(context.Context, *DeleteLoginLogReq) (*DeleteLoginLogResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteLoginLog not implemented")
+}
+func (UnimplementedLoginLogServiceServer) QueryLoginLogDetail(context.Context, *QueryLoginLogDetailReq) (*QueryLoginLogDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryLoginLogDetail not implemented")
+}
+func (UnimplementedLoginLogServiceServer) QueryLoginLogList(context.Context, *QueryLoginLogListReq) (*QueryLoginLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryLoginLogList not implemented")
+}
+func (UnimplementedLoginLogServiceServer) mustEmbedUnimplementedLoginLogServiceServer() {}
+
+// UnsafeLoginLogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to LoginLogServiceServer will
+// result in compilation errors.
+type UnsafeLoginLogServiceServer interface {
+	mustEmbedUnimplementedLoginLogServiceServer()
+}
+
+func RegisterLoginLogServiceServer(s grpc.ServiceRegistrar, srv LoginLogServiceServer) {
+	s.RegisterService(&LoginLogService_ServiceDesc, srv)
+}
+
+func _LoginLogService_DeleteLoginLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteLoginLogReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoginLogServiceServer).DeleteLoginLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LoginLogService_DeleteLoginLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoginLogServiceServer).DeleteLoginLog(ctx, req.(*DeleteLoginLogReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LoginLogService_QueryLoginLogDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryLoginLogDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoginLogServiceServer).QueryLoginLogDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LoginLogService_QueryLoginLogDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoginLogServiceServer).QueryLoginLogDetail(ctx, req.(*QueryLoginLogDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LoginLogService_QueryLoginLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryLoginLogListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoginLogServiceServer).QueryLoginLogList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LoginLogService_QueryLoginLogList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoginLogServiceServer).QueryLoginLogList(ctx, req.(*QueryLoginLogListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// LoginLogService_ServiceDesc is the grpc.ServiceDesc for LoginLogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var LoginLogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.LoginLogService",
+	HandlerType: (*LoginLogServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DeleteLoginLog",
+			Handler:    _LoginLogService_DeleteLoginLog_Handler,
+		},
+		{
+			MethodName: "QueryLoginLogDetail",
+			Handler:    _LoginLogService_QueryLoginLogDetail_Handler,
+		},
+		{
+			MethodName: "QueryLoginLogList",
+			Handler:    _LoginLogService_QueryLoginLogList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/sys/sys.proto",
+}
+
+const (
+	MenuService_AddMenu_FullMethodName          = "/sysclient.MenuService/AddMenu"
+	MenuService_DeleteMenu_FullMethodName       = "/sysclient.MenuService/DeleteMenu"
+	MenuService_UpdateMenu_FullMethodName       = "/sysclient.MenuService/UpdateMenu"
+	MenuService_UpdateMenuStatus_FullMethodName = "/sysclient.MenuService/UpdateMenuStatus"
+	MenuService_QueryMenuDetail_FullMethodName  = "/sysclient.MenuService/QueryMenuDetail"
+	MenuService_QueryMenuList_FullMethodName    = "/sysclient.MenuService/QueryMenuList"
+)
+
+// MenuServiceClient is the client API for MenuService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MenuServiceClient interface {
+	// 添加菜单信息表
+	AddMenu(ctx context.Context, in *AddMenuReq, opts ...grpc.CallOption) (*AddMenuResp, error)
+	// 删除菜单信息表
+	DeleteMenu(ctx context.Context, in *DeleteMenuReq, opts ...grpc.CallOption) (*DeleteMenuResp, error)
+	// 更新菜单信息表
+	UpdateMenu(ctx context.Context, in *UpdateMenuReq, opts ...grpc.CallOption) (*UpdateMenuResp, error)
+	// 更新菜单信息表状态
+	UpdateMenuStatus(ctx context.Context, in *UpdateMenuStatusReq, opts ...grpc.CallOption) (*UpdateMenuStatusResp, error)
+	// 查询菜单信息表详情
+	QueryMenuDetail(ctx context.Context, in *QueryMenuDetailReq, opts ...grpc.CallOption) (*QueryMenuDetailResp, error)
+	// 查询菜单信息表列表
+	QueryMenuList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error)
+}
+
+type menuServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMenuServiceClient(cc grpc.ClientConnInterface) MenuServiceClient {
+	return &menuServiceClient{cc}
+}
+
+func (c *menuServiceClient) AddMenu(ctx context.Context, in *AddMenuReq, opts ...grpc.CallOption) (*AddMenuResp, error) {
+	out := new(AddMenuResp)
+	err := c.cc.Invoke(ctx, MenuService_AddMenu_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *menuServiceClient) DeleteMenu(ctx context.Context, in *DeleteMenuReq, opts ...grpc.CallOption) (*DeleteMenuResp, error) {
+	out := new(DeleteMenuResp)
+	err := c.cc.Invoke(ctx, MenuService_DeleteMenu_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *menuServiceClient) UpdateMenu(ctx context.Context, in *UpdateMenuReq, opts ...grpc.CallOption) (*UpdateMenuResp, error) {
+	out := new(UpdateMenuResp)
+	err := c.cc.Invoke(ctx, MenuService_UpdateMenu_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *menuServiceClient) UpdateMenuStatus(ctx context.Context, in *UpdateMenuStatusReq, opts ...grpc.CallOption) (*UpdateMenuStatusResp, error) {
+	out := new(UpdateMenuStatusResp)
+	err := c.cc.Invoke(ctx, MenuService_UpdateMenuStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *menuServiceClient) QueryMenuDetail(ctx context.Context, in *QueryMenuDetailReq, opts ...grpc.CallOption) (*QueryMenuDetailResp, error) {
+	out := new(QueryMenuDetailResp)
+	err := c.cc.Invoke(ctx, MenuService_QueryMenuDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *menuServiceClient) QueryMenuList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error) {
+	out := new(QueryMenuListResp)
+	err := c.cc.Invoke(ctx, MenuService_QueryMenuList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MenuServiceServer is the server API for MenuService service.
+// All implementations must embed UnimplementedMenuServiceServer
+// for forward compatibility
+type MenuServiceServer interface {
+	// 添加菜单信息表
+	AddMenu(context.Context, *AddMenuReq) (*AddMenuResp, error)
+	// 删除菜单信息表
+	DeleteMenu(context.Context, *DeleteMenuReq) (*DeleteMenuResp, error)
+	// 更新菜单信息表
+	UpdateMenu(context.Context, *UpdateMenuReq) (*UpdateMenuResp, error)
+	// 更新菜单信息表状态
+	UpdateMenuStatus(context.Context, *UpdateMenuStatusReq) (*UpdateMenuStatusResp, error)
+	// 查询菜单信息表详情
+	QueryMenuDetail(context.Context, *QueryMenuDetailReq) (*QueryMenuDetailResp, error)
+	// 查询菜单信息表列表
+	QueryMenuList(context.Context, *QueryMenuListReq) (*QueryMenuListResp, error)
+	mustEmbedUnimplementedMenuServiceServer()
+}
+
+// UnimplementedMenuServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMenuServiceServer struct {
+}
+
+func (UnimplementedMenuServiceServer) AddMenu(context.Context, *AddMenuReq) (*AddMenuResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMenu not implemented")
+}
+func (UnimplementedMenuServiceServer) DeleteMenu(context.Context, *DeleteMenuReq) (*DeleteMenuResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMenu not implemented")
+}
+func (UnimplementedMenuServiceServer) UpdateMenu(context.Context, *UpdateMenuReq) (*UpdateMenuResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenu not implemented")
+}
+func (UnimplementedMenuServiceServer) UpdateMenuStatus(context.Context, *UpdateMenuStatusReq) (*UpdateMenuStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenuStatus not implemented")
+}
+func (UnimplementedMenuServiceServer) QueryMenuDetail(context.Context, *QueryMenuDetailReq) (*QueryMenuDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMenuDetail not implemented")
+}
+func (UnimplementedMenuServiceServer) QueryMenuList(context.Context, *QueryMenuListReq) (*QueryMenuListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMenuList not implemented")
+}
+func (UnimplementedMenuServiceServer) mustEmbedUnimplementedMenuServiceServer() {}
+
+// UnsafeMenuServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MenuServiceServer will
+// result in compilation errors.
+type UnsafeMenuServiceServer interface {
+	mustEmbedUnimplementedMenuServiceServer()
+}
+
+func RegisterMenuServiceServer(s grpc.ServiceRegistrar, srv MenuServiceServer) {
+	s.RegisterService(&MenuService_ServiceDesc, srv)
+}
+
+func _MenuService_AddMenu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMenuReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MenuServiceServer).AddMenu(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MenuService_AddMenu_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MenuServiceServer).AddMenu(ctx, req.(*AddMenuReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MenuService_DeleteMenu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMenuReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MenuServiceServer).DeleteMenu(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MenuService_DeleteMenu_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MenuServiceServer).DeleteMenu(ctx, req.(*DeleteMenuReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MenuService_UpdateMenu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMenuReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MenuServiceServer).UpdateMenu(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MenuService_UpdateMenu_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MenuServiceServer).UpdateMenu(ctx, req.(*UpdateMenuReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MenuService_UpdateMenuStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMenuStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MenuServiceServer).UpdateMenuStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MenuService_UpdateMenuStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MenuServiceServer).UpdateMenuStatus(ctx, req.(*UpdateMenuStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MenuService_QueryMenuDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMenuDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MenuServiceServer).QueryMenuDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MenuService_QueryMenuDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MenuServiceServer).QueryMenuDetail(ctx, req.(*QueryMenuDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MenuService_QueryMenuList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMenuListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MenuServiceServer).QueryMenuList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MenuService_QueryMenuList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MenuServiceServer).QueryMenuList(ctx, req.(*QueryMenuListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MenuService_ServiceDesc is the grpc.ServiceDesc for MenuService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MenuService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.MenuService",
+	HandlerType: (*MenuServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddMenu",
+			Handler:    _MenuService_AddMenu_Handler,
+		},
+		{
+			MethodName: "DeleteMenu",
+			Handler:    _MenuService_DeleteMenu_Handler,
+		},
+		{
+			MethodName: "UpdateMenu",
+			Handler:    _MenuService_UpdateMenu_Handler,
+		},
+		{
+			MethodName: "UpdateMenuStatus",
+			Handler:    _MenuService_UpdateMenuStatus_Handler,
+		},
+		{
+			MethodName: "QueryMenuDetail",
+			Handler:    _MenuService_QueryMenuDetail_Handler,
+		},
+		{
+			MethodName: "QueryMenuList",
+			Handler:    _MenuService_QueryMenuList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/sys/sys.proto",
+}
+
+const (
+	OperateLogService_AddOperateLog_FullMethodName         = "/sysclient.OperateLogService/AddOperateLog"
+	OperateLogService_DeleteOperateLog_FullMethodName      = "/sysclient.OperateLogService/DeleteOperateLog"
+	OperateLogService_QueryOperateLogDetail_FullMethodName = "/sysclient.OperateLogService/QueryOperateLogDetail"
+	OperateLogService_QueryOperateLogList_FullMethodName   = "/sysclient.OperateLogService/QueryOperateLogList"
+)
+
+// OperateLogServiceClient is the client API for OperateLogService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type OperateLogServiceClient interface {
+	// 添加系统操作日志表
+	AddOperateLog(ctx context.Context, in *AddOperateLogReq, opts ...grpc.CallOption) (*AddOperateLogResp, error)
+	// 删除系统操作日志表
+	DeleteOperateLog(ctx context.Context, in *DeleteOperateLogReq, opts ...grpc.CallOption) (*DeleteOperateLogResp, error)
+	// 查询系统操作日志表详情
+	QueryOperateLogDetail(ctx context.Context, in *QueryOperateLogDetailReq, opts ...grpc.CallOption) (*QueryOperateLogDetailResp, error)
+	// 查询系统操作日志表列表
+	QueryOperateLogList(ctx context.Context, in *QueryOperateLogListReq, opts ...grpc.CallOption) (*QueryOperateLogListResp, error)
+}
+
+type operateLogServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOperateLogServiceClient(cc grpc.ClientConnInterface) OperateLogServiceClient {
+	return &operateLogServiceClient{cc}
+}
+
+func (c *operateLogServiceClient) AddOperateLog(ctx context.Context, in *AddOperateLogReq, opts ...grpc.CallOption) (*AddOperateLogResp, error) {
+	out := new(AddOperateLogResp)
+	err := c.cc.Invoke(ctx, OperateLogService_AddOperateLog_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operateLogServiceClient) DeleteOperateLog(ctx context.Context, in *DeleteOperateLogReq, opts ...grpc.CallOption) (*DeleteOperateLogResp, error) {
+	out := new(DeleteOperateLogResp)
+	err := c.cc.Invoke(ctx, OperateLogService_DeleteOperateLog_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operateLogServiceClient) QueryOperateLogDetail(ctx context.Context, in *QueryOperateLogDetailReq, opts ...grpc.CallOption) (*QueryOperateLogDetailResp, error) {
+	out := new(QueryOperateLogDetailResp)
+	err := c.cc.Invoke(ctx, OperateLogService_QueryOperateLogDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operateLogServiceClient) QueryOperateLogList(ctx context.Context, in *QueryOperateLogListReq, opts ...grpc.CallOption) (*QueryOperateLogListResp, error) {
+	out := new(QueryOperateLogListResp)
+	err := c.cc.Invoke(ctx, OperateLogService_QueryOperateLogList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OperateLogServiceServer is the server API for OperateLogService service.
+// All implementations must embed UnimplementedOperateLogServiceServer
+// for forward compatibility
+type OperateLogServiceServer interface {
+	// 添加系统操作日志表
+	AddOperateLog(context.Context, *AddOperateLogReq) (*AddOperateLogResp, error)
+	// 删除系统操作日志表
+	DeleteOperateLog(context.Context, *DeleteOperateLogReq) (*DeleteOperateLogResp, error)
+	// 查询系统操作日志表详情
+	QueryOperateLogDetail(context.Context, *QueryOperateLogDetailReq) (*QueryOperateLogDetailResp, error)
+	// 查询系统操作日志表列表
+	QueryOperateLogList(context.Context, *QueryOperateLogListReq) (*QueryOperateLogListResp, error)
+	mustEmbedUnimplementedOperateLogServiceServer()
+}
+
+// UnimplementedOperateLogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOperateLogServiceServer struct {
+}
+
+func (UnimplementedOperateLogServiceServer) AddOperateLog(context.Context, *AddOperateLogReq) (*AddOperateLogResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOperateLog not implemented")
+}
+func (UnimplementedOperateLogServiceServer) DeleteOperateLog(context.Context, *DeleteOperateLogReq) (*DeleteOperateLogResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperateLog not implemented")
+}
+func (UnimplementedOperateLogServiceServer) QueryOperateLogDetail(context.Context, *QueryOperateLogDetailReq) (*QueryOperateLogDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOperateLogDetail not implemented")
+}
+func (UnimplementedOperateLogServiceServer) QueryOperateLogList(context.Context, *QueryOperateLogListReq) (*QueryOperateLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOperateLogList not implemented")
+}
+func (UnimplementedOperateLogServiceServer) mustEmbedUnimplementedOperateLogServiceServer() {}
+
+// UnsafeOperateLogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OperateLogServiceServer will
+// result in compilation errors.
+type UnsafeOperateLogServiceServer interface {
+	mustEmbedUnimplementedOperateLogServiceServer()
+}
+
+func RegisterOperateLogServiceServer(s grpc.ServiceRegistrar, srv OperateLogServiceServer) {
+	s.RegisterService(&OperateLogService_ServiceDesc, srv)
+}
+
+func _OperateLogService_AddOperateLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOperateLogReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperateLogServiceServer).AddOperateLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OperateLogService_AddOperateLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperateLogServiceServer).AddOperateLog(ctx, req.(*AddOperateLogReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OperateLogService_DeleteOperateLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOperateLogReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperateLogServiceServer).DeleteOperateLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OperateLogService_DeleteOperateLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperateLogServiceServer).DeleteOperateLog(ctx, req.(*DeleteOperateLogReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OperateLogService_QueryOperateLogDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOperateLogDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperateLogServiceServer).QueryOperateLogDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OperateLogService_QueryOperateLogDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperateLogServiceServer).QueryOperateLogDetail(ctx, req.(*QueryOperateLogDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OperateLogService_QueryOperateLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOperateLogListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperateLogServiceServer).QueryOperateLogList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OperateLogService_QueryOperateLogList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperateLogServiceServer).QueryOperateLogList(ctx, req.(*QueryOperateLogListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// OperateLogService_ServiceDesc is the grpc.ServiceDesc for OperateLogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OperateLogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.OperateLogService",
+	HandlerType: (*OperateLogServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddOperateLog",
+			Handler:    _OperateLogService_AddOperateLog_Handler,
+		},
+		{
+			MethodName: "DeleteOperateLog",
+			Handler:    _OperateLogService_DeleteOperateLog_Handler,
+		},
+		{
+			MethodName: "QueryOperateLogDetail",
+			Handler:    _OperateLogService_QueryOperateLogDetail_Handler,
+		},
+		{
+			MethodName: "QueryOperateLogList",
+			Handler:    _OperateLogService_QueryOperateLogList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/sys/sys.proto",
+}
+
+const (
+	PostService_AddPost_FullMethodName          = "/sysclient.PostService/AddPost"
+	PostService_DeletePost_FullMethodName       = "/sysclient.PostService/DeletePost"
+	PostService_UpdatePost_FullMethodName       = "/sysclient.PostService/UpdatePost"
+	PostService_UpdatePostStatus_FullMethodName = "/sysclient.PostService/UpdatePostStatus"
+	PostService_QueryPostDetail_FullMethodName  = "/sysclient.PostService/QueryPostDetail"
+	PostService_QueryPostList_FullMethodName    = "/sysclient.PostService/QueryPostList"
+)
+
+// PostServiceClient is the client API for PostService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PostServiceClient interface {
+	// 添加岗位管理
+	AddPost(ctx context.Context, in *AddPostReq, opts ...grpc.CallOption) (*AddPostResp, error)
+	// 删除岗位管理
+	DeletePost(ctx context.Context, in *DeletePostReq, opts ...grpc.CallOption) (*DeletePostResp, error)
+	// 更新岗位管理
+	UpdatePost(ctx context.Context, in *UpdatePostReq, opts ...grpc.CallOption) (*UpdatePostResp, error)
+	// 更新岗位管理状态
+	UpdatePostStatus(ctx context.Context, in *UpdatePostStatusReq, opts ...grpc.CallOption) (*UpdatePostStatusResp, error)
+	// 查询岗位管理详情
+	QueryPostDetail(ctx context.Context, in *QueryPostDetailReq, opts ...grpc.CallOption) (*QueryPostDetailResp, error)
+	// 查询岗位管理列表
+	QueryPostList(ctx context.Context, in *QueryPostListReq, opts ...grpc.CallOption) (*QueryPostListResp, error)
+}
+
+type postServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPostServiceClient(cc grpc.ClientConnInterface) PostServiceClient {
+	return &postServiceClient{cc}
+}
+
+func (c *postServiceClient) AddPost(ctx context.Context, in *AddPostReq, opts ...grpc.CallOption) (*AddPostResp, error) {
+	out := new(AddPostResp)
+	err := c.cc.Invoke(ctx, PostService_AddPost_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *postServiceClient) DeletePost(ctx context.Context, in *DeletePostReq, opts ...grpc.CallOption) (*DeletePostResp, error) {
+	out := new(DeletePostResp)
+	err := c.cc.Invoke(ctx, PostService_DeletePost_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *postServiceClient) UpdatePost(ctx context.Context, in *UpdatePostReq, opts ...grpc.CallOption) (*UpdatePostResp, error) {
+	out := new(UpdatePostResp)
+	err := c.cc.Invoke(ctx, PostService_UpdatePost_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *postServiceClient) UpdatePostStatus(ctx context.Context, in *UpdatePostStatusReq, opts ...grpc.CallOption) (*UpdatePostStatusResp, error) {
+	out := new(UpdatePostStatusResp)
+	err := c.cc.Invoke(ctx, PostService_UpdatePostStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *postServiceClient) QueryPostDetail(ctx context.Context, in *QueryPostDetailReq, opts ...grpc.CallOption) (*QueryPostDetailResp, error) {
+	out := new(QueryPostDetailResp)
+	err := c.cc.Invoke(ctx, PostService_QueryPostDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *postServiceClient) QueryPostList(ctx context.Context, in *QueryPostListReq, opts ...grpc.CallOption) (*QueryPostListResp, error) {
+	out := new(QueryPostListResp)
+	err := c.cc.Invoke(ctx, PostService_QueryPostList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PostServiceServer is the server API for PostService service.
+// All implementations must embed UnimplementedPostServiceServer
+// for forward compatibility
+type PostServiceServer interface {
+	// 添加岗位管理
+	AddPost(context.Context, *AddPostReq) (*AddPostResp, error)
+	// 删除岗位管理
+	DeletePost(context.Context, *DeletePostReq) (*DeletePostResp, error)
+	// 更新岗位管理
+	UpdatePost(context.Context, *UpdatePostReq) (*UpdatePostResp, error)
+	// 更新岗位管理状态
+	UpdatePostStatus(context.Context, *UpdatePostStatusReq) (*UpdatePostStatusResp, error)
+	// 查询岗位管理详情
+	QueryPostDetail(context.Context, *QueryPostDetailReq) (*QueryPostDetailResp, error)
+	// 查询岗位管理列表
+	QueryPostList(context.Context, *QueryPostListReq) (*QueryPostListResp, error)
+	mustEmbedUnimplementedPostServiceServer()
+}
+
+// UnimplementedPostServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPostServiceServer struct {
+}
+
+func (UnimplementedPostServiceServer) AddPost(context.Context, *AddPostReq) (*AddPostResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPost not implemented")
+}
+func (UnimplementedPostServiceServer) DeletePost(context.Context, *DeletePostReq) (*DeletePostResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePost not implemented")
+}
+func (UnimplementedPostServiceServer) UpdatePost(context.Context, *UpdatePostReq) (*UpdatePostResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePost not implemented")
+}
+func (UnimplementedPostServiceServer) UpdatePostStatus(context.Context, *UpdatePostStatusReq) (*UpdatePostStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePostStatus not implemented")
+}
+func (UnimplementedPostServiceServer) QueryPostDetail(context.Context, *QueryPostDetailReq) (*QueryPostDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryPostDetail not implemented")
+}
+func (UnimplementedPostServiceServer) QueryPostList(context.Context, *QueryPostListReq) (*QueryPostListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryPostList not implemented")
+}
+func (UnimplementedPostServiceServer) mustEmbedUnimplementedPostServiceServer() {}
+
+// UnsafePostServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PostServiceServer will
+// result in compilation errors.
+type UnsafePostServiceServer interface {
+	mustEmbedUnimplementedPostServiceServer()
+}
+
+func RegisterPostServiceServer(s grpc.ServiceRegistrar, srv PostServiceServer) {
+	s.RegisterService(&PostService_ServiceDesc, srv)
+}
+
+func _PostService_AddPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPostReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).AddPost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PostService_AddPost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).AddPost(ctx, req.(*AddPostReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PostService_DeletePost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePostReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).DeletePost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PostService_DeletePost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).DeletePost(ctx, req.(*DeletePostReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PostService_UpdatePost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePostReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).UpdatePost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PostService_UpdatePost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).UpdatePost(ctx, req.(*UpdatePostReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PostService_UpdatePostStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePostStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).UpdatePostStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PostService_UpdatePostStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).UpdatePostStatus(ctx, req.(*UpdatePostStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PostService_QueryPostDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPostDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).QueryPostDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PostService_QueryPostDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).QueryPostDetail(ctx, req.(*QueryPostDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PostService_QueryPostList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPostListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).QueryPostList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PostService_QueryPostList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).QueryPostList(ctx, req.(*QueryPostListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PostService_ServiceDesc is the grpc.ServiceDesc for PostService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PostService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.PostService",
+	HandlerType: (*PostServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddPost",
+			Handler:    _PostService_AddPost_Handler,
+		},
+		{
+			MethodName: "DeletePost",
+			Handler:    _PostService_DeletePost_Handler,
+		},
+		{
+			MethodName: "UpdatePost",
+			Handler:    _PostService_UpdatePost_Handler,
+		},
+		{
+			MethodName: "UpdatePostStatus",
+			Handler:    _PostService_UpdatePostStatus_Handler,
+		},
+		{
+			MethodName: "QueryPostDetail",
+			Handler:    _PostService_QueryPostDetail_Handler,
+		},
+		{
+			MethodName: "QueryPostList",
+			Handler:    _PostService_QueryPostList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/sys/sys.proto",
+}
+
+const (
+	RoleService_AddRole_FullMethodName            = "/sysclient.RoleService/AddRole"
+	RoleService_DeleteRole_FullMethodName         = "/sysclient.RoleService/DeleteRole"
+	RoleService_UpdateRole_FullMethodName         = "/sysclient.RoleService/UpdateRole"
+	RoleService_UpdateRoleStatus_FullMethodName   = "/sysclient.RoleService/UpdateRoleStatus"
+	RoleService_QueryRoleDetail_FullMethodName    = "/sysclient.RoleService/QueryRoleDetail"
+	RoleService_QueryRoleList_FullMethodName      = "/sysclient.RoleService/QueryRoleList"
+	RoleService_QueryRoleMenuList_FullMethodName  = "/sysclient.RoleService/QueryRoleMenuList"
+	RoleService_UpdateMenuRoleList_FullMethodName = "/sysclient.RoleService/UpdateMenuRoleList"
+)
+
+// RoleServiceClient is the client API for RoleService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type RoleServiceClient interface {
+	// 添加角色信息表
+	AddRole(ctx context.Context, in *AddRoleReq, opts ...grpc.CallOption) (*AddRoleResp, error)
+	// 删除角色信息表
+	DeleteRole(ctx context.Context, in *DeleteRoleReq, opts ...grpc.CallOption) (*DeleteRoleResp, error)
+	// 更新角色信息表
+	UpdateRole(ctx context.Context, in *UpdateRoleReq, opts ...grpc.CallOption) (*UpdateRoleResp, error)
+	// 更新角色信息表状态
+	UpdateRoleStatus(ctx context.Context, in *UpdateRoleStatusReq, opts ...grpc.CallOption) (*UpdateRoleStatusResp, error)
+	// 查询角色信息表详情
+	QueryRoleDetail(ctx context.Context, in *QueryRoleDetailReq, opts ...grpc.CallOption) (*QueryRoleDetailResp, error)
+	// 查询角色信息表列表
+	QueryRoleList(ctx context.Context, in *QueryRoleListReq, opts ...grpc.CallOption) (*QueryRoleListResp, error)
+	// 查询用户与角色的关联
+	QueryRoleMenuList(ctx context.Context, in *QueryRoleMenuListReq, opts ...grpc.CallOption) (*QueryRoleMenuListResp, error)
+	// 更新用户与角色的关联
+	UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
+}
+
+type roleServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewRoleServiceClient(cc grpc.ClientConnInterface) RoleServiceClient {
+	return &roleServiceClient{cc}
+}
+
+func (c *roleServiceClient) AddRole(ctx context.Context, in *AddRoleReq, opts ...grpc.CallOption) (*AddRoleResp, error) {
+	out := new(AddRoleResp)
+	err := c.cc.Invoke(ctx, RoleService_AddRole_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) DeleteRole(ctx context.Context, in *DeleteRoleReq, opts ...grpc.CallOption) (*DeleteRoleResp, error) {
+	out := new(DeleteRoleResp)
+	err := c.cc.Invoke(ctx, RoleService_DeleteRole_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) UpdateRole(ctx context.Context, in *UpdateRoleReq, opts ...grpc.CallOption) (*UpdateRoleResp, error) {
+	out := new(UpdateRoleResp)
+	err := c.cc.Invoke(ctx, RoleService_UpdateRole_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) UpdateRoleStatus(ctx context.Context, in *UpdateRoleStatusReq, opts ...grpc.CallOption) (*UpdateRoleStatusResp, error) {
+	out := new(UpdateRoleStatusResp)
+	err := c.cc.Invoke(ctx, RoleService_UpdateRoleStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) QueryRoleDetail(ctx context.Context, in *QueryRoleDetailReq, opts ...grpc.CallOption) (*QueryRoleDetailResp, error) {
+	out := new(QueryRoleDetailResp)
+	err := c.cc.Invoke(ctx, RoleService_QueryRoleDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) QueryRoleList(ctx context.Context, in *QueryRoleListReq, opts ...grpc.CallOption) (*QueryRoleListResp, error) {
+	out := new(QueryRoleListResp)
+	err := c.cc.Invoke(ctx, RoleService_QueryRoleList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) QueryRoleMenuList(ctx context.Context, in *QueryRoleMenuListReq, opts ...grpc.CallOption) (*QueryRoleMenuListResp, error) {
+	out := new(QueryRoleMenuListResp)
+	err := c.cc.Invoke(ctx, RoleService_QueryRoleMenuList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *roleServiceClient) UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
+	out := new(UpdateMenuRoleResp)
+	err := c.cc.Invoke(ctx, RoleService_UpdateMenuRoleList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RoleServiceServer is the server API for RoleService service.
+// All implementations must embed UnimplementedRoleServiceServer
+// for forward compatibility
+type RoleServiceServer interface {
+	// 添加角色信息表
+	AddRole(context.Context, *AddRoleReq) (*AddRoleResp, error)
+	// 删除角色信息表
+	DeleteRole(context.Context, *DeleteRoleReq) (*DeleteRoleResp, error)
+	// 更新角色信息表
+	UpdateRole(context.Context, *UpdateRoleReq) (*UpdateRoleResp, error)
+	// 更新角色信息表状态
+	UpdateRoleStatus(context.Context, *UpdateRoleStatusReq) (*UpdateRoleStatusResp, error)
+	// 查询角色信息表详情
+	QueryRoleDetail(context.Context, *QueryRoleDetailReq) (*QueryRoleDetailResp, error)
+	// 查询角色信息表列表
+	QueryRoleList(context.Context, *QueryRoleListReq) (*QueryRoleListResp, error)
+	// 查询用户与角色的关联
+	QueryRoleMenuList(context.Context, *QueryRoleMenuListReq) (*QueryRoleMenuListResp, error)
+	// 更新用户与角色的关联
+	UpdateMenuRoleList(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
+	mustEmbedUnimplementedRoleServiceServer()
+}
+
+// UnimplementedRoleServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedRoleServiceServer struct {
+}
+
+func (UnimplementedRoleServiceServer) AddRole(context.Context, *AddRoleReq) (*AddRoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddRole not implemented")
+}
+func (UnimplementedRoleServiceServer) DeleteRole(context.Context, *DeleteRoleReq) (*DeleteRoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
+}
+func (UnimplementedRoleServiceServer) UpdateRole(context.Context, *UpdateRoleReq) (*UpdateRoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRole not implemented")
+}
+func (UnimplementedRoleServiceServer) UpdateRoleStatus(context.Context, *UpdateRoleStatusReq) (*UpdateRoleStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRoleStatus not implemented")
+}
+func (UnimplementedRoleServiceServer) QueryRoleDetail(context.Context, *QueryRoleDetailReq) (*QueryRoleDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryRoleDetail not implemented")
+}
+func (UnimplementedRoleServiceServer) QueryRoleList(context.Context, *QueryRoleListReq) (*QueryRoleListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryRoleList not implemented")
+}
+func (UnimplementedRoleServiceServer) QueryRoleMenuList(context.Context, *QueryRoleMenuListReq) (*QueryRoleMenuListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryRoleMenuList not implemented")
+}
+func (UnimplementedRoleServiceServer) UpdateMenuRoleList(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenuRoleList not implemented")
+}
+func (UnimplementedRoleServiceServer) mustEmbedUnimplementedRoleServiceServer() {}
+
+// UnsafeRoleServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RoleServiceServer will
+// result in compilation errors.
+type UnsafeRoleServiceServer interface {
+	mustEmbedUnimplementedRoleServiceServer()
+}
+
+func RegisterRoleServiceServer(s grpc.ServiceRegistrar, srv RoleServiceServer) {
+	s.RegisterService(&RoleService_ServiceDesc, srv)
+}
+
+func _RoleService_AddRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRoleReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoleServiceServer).AddRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoleService_AddRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoleServiceServer).AddRole(ctx, req.(*AddRoleReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoleService_DeleteRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRoleReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoleServiceServer).DeleteRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoleService_DeleteRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoleServiceServer).DeleteRole(ctx, req.(*DeleteRoleReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoleService_UpdateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRoleReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoleServiceServer).UpdateRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoleService_UpdateRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoleServiceServer).UpdateRole(ctx, req.(*UpdateRoleReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoleService_UpdateRoleStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRoleStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoleServiceServer).UpdateRoleStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoleService_UpdateRoleStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoleServiceServer).UpdateRoleStatus(ctx, req.(*UpdateRoleStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoleService_QueryRoleDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRoleDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoleServiceServer).QueryRoleDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoleService_QueryRoleDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoleServiceServer).QueryRoleDetail(ctx, req.(*QueryRoleDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoleService_QueryRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRoleListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoleServiceServer).QueryRoleList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoleService_QueryRoleList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoleServiceServer).QueryRoleList(ctx, req.(*QueryRoleListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoleService_QueryRoleMenuList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRoleMenuListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoleServiceServer).QueryRoleMenuList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoleService_QueryRoleMenuList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoleServiceServer).QueryRoleMenuList(ctx, req.(*QueryRoleMenuListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoleService_UpdateMenuRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMenuRoleReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoleServiceServer).UpdateMenuRoleList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoleService_UpdateMenuRoleList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoleServiceServer).UpdateMenuRoleList(ctx, req.(*UpdateMenuRoleReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// RoleService_ServiceDesc is the grpc.ServiceDesc for RoleService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var RoleService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.RoleService",
+	HandlerType: (*RoleServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddRole",
+			Handler:    _RoleService_AddRole_Handler,
+		},
+		{
+			MethodName: "DeleteRole",
+			Handler:    _RoleService_DeleteRole_Handler,
+		},
+		{
+			MethodName: "UpdateRole",
+			Handler:    _RoleService_UpdateRole_Handler,
+		},
+		{
+			MethodName: "UpdateRoleStatus",
+			Handler:    _RoleService_UpdateRoleStatus_Handler,
+		},
+		{
+			MethodName: "QueryRoleDetail",
+			Handler:    _RoleService_QueryRoleDetail_Handler,
+		},
+		{
+			MethodName: "QueryRoleList",
+			Handler:    _RoleService_QueryRoleList_Handler,
+		},
+		{
+			MethodName: "QueryRoleMenuList",
+			Handler:    _RoleService_QueryRoleMenuList_Handler,
+		},
+		{
+			MethodName: "UpdateMenuRoleList",
+			Handler:    _RoleService_UpdateMenuRoleList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/sys/sys.proto",
+}
+
+const (
+	UserService_Login_FullMethodName                = "/sysclient.UserService/Login"
+	UserService_UserInfo_FullMethodName             = "/sysclient.UserService/UserInfo"
+	UserService_ReSetPassword_FullMethodName        = "/sysclient.UserService/ReSetPassword"
+	UserService_AddUser_FullMethodName              = "/sysclient.UserService/AddUser"
+	UserService_DeleteUser_FullMethodName           = "/sysclient.UserService/DeleteUser"
+	UserService_UpdateUser_FullMethodName           = "/sysclient.UserService/UpdateUser"
+	UserService_UpdateUserStatus_FullMethodName     = "/sysclient.UserService/UpdateUserStatus"
+	UserService_QueryUserDetail_FullMethodName      = "/sysclient.UserService/QueryUserDetail"
+	UserService_QueryUserList_FullMethodName        = "/sysclient.UserService/QueryUserList"
+	UserService_QueryUserRoleList_FullMethodName    = "/sysclient.UserService/QueryUserRoleList"
+	UserService_UpdateUserRoleList_FullMethodName   = "/sysclient.UserService/UpdateUserRoleList"
+	UserService_QueryDeptAndPostList_FullMethodName = "/sysclient.UserService/QueryDeptAndPostList"
 )
 
 // UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
+	// 用户登录
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
+	// 获取用户个人信息
 	UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error)
-	UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
-	UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error)
-	UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*UserUpdateResp, error)
-	UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
+	// 重置用户密码
 	ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error)
-	UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error)
+	// 添加用户信息表
+	AddUser(ctx context.Context, in *AddUserReq, opts ...grpc.CallOption) (*AddUserResp, error)
+	// 删除用户信息表
+	DeleteUser(ctx context.Context, in *DeleteUserReq, opts ...grpc.CallOption) (*DeleteUserResp, error)
+	// 更新用户信息表
+	UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserResp, error)
+	// 更新用户信息表状态
+	UpdateUserStatus(ctx context.Context, in *UpdateUserStatusReq, opts ...grpc.CallOption) (*UpdateUserStatusResp, error)
+	// 查询用户信息表详情
+	QueryUserDetail(ctx context.Context, in *QueryUserDetailReq, opts ...grpc.CallOption) (*QueryUserDetailResp, error)
+	// 查询用户信息表列表
+	QueryUserList(ctx context.Context, in *QueryUserListReq, opts ...grpc.CallOption) (*QueryUserListResp, error)
 	// 查询用户与角色的关联
 	QueryUserRoleList(ctx context.Context, in *QueryUserRoleListReq, opts ...grpc.CallOption) (*QueryUserRoleListResp, error)
 	// 更新用户与角色的关联
 	UpdateUserRoleList(ctx context.Context, in *UpdateUserRoleListReq, opts ...grpc.CallOption) (*UpdateUserRoleListResp, error)
+	// 查询所有部门和岗位
+	QueryDeptAndPostList(ctx context.Context, in *QueryDeptAndPostListReq, opts ...grpc.CallOption) (*QueryDeptAndPostListResp, error)
 }
 
 type userServiceClient struct {
@@ -75,42 +2268,6 @@ func (c *userServiceClient) UserInfo(ctx context.Context, in *InfoReq, opts ...g
 	return out, nil
 }
 
-func (c *userServiceClient) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
-	out := new(UserAddResp)
-	err := c.cc.Invoke(ctx, UserService_UserAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error) {
-	out := new(UserListResp)
-	err := c.cc.Invoke(ctx, UserService_UserList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*UserUpdateResp, error) {
-	out := new(UserUpdateResp)
-	err := c.cc.Invoke(ctx, UserService_UserUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error) {
-	out := new(UserDeleteResp)
-	err := c.cc.Invoke(ctx, UserService_UserDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *userServiceClient) ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error) {
 	out := new(ReSetPasswordResp)
 	err := c.cc.Invoke(ctx, UserService_ReSetPassword_FullMethodName, in, out, opts...)
@@ -120,9 +2277,54 @@ func (c *userServiceClient) ReSetPassword(ctx context.Context, in *ReSetPassword
 	return out, nil
 }
 
-func (c *userServiceClient) UpdateUserStatus(ctx context.Context, in *UserStatusReq, opts ...grpc.CallOption) (*UserStatusResp, error) {
-	out := new(UserStatusResp)
+func (c *userServiceClient) AddUser(ctx context.Context, in *AddUserReq, opts ...grpc.CallOption) (*AddUserResp, error) {
+	out := new(AddUserResp)
+	err := c.cc.Invoke(ctx, UserService_AddUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) DeleteUser(ctx context.Context, in *DeleteUserReq, opts ...grpc.CallOption) (*DeleteUserResp, error) {
+	out := new(DeleteUserResp)
+	err := c.cc.Invoke(ctx, UserService_DeleteUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserResp, error) {
+	out := new(UpdateUserResp)
+	err := c.cc.Invoke(ctx, UserService_UpdateUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateUserStatus(ctx context.Context, in *UpdateUserStatusReq, opts ...grpc.CallOption) (*UpdateUserStatusResp, error) {
+	out := new(UpdateUserStatusResp)
 	err := c.cc.Invoke(ctx, UserService_UpdateUserStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) QueryUserDetail(ctx context.Context, in *QueryUserDetailReq, opts ...grpc.CallOption) (*QueryUserDetailResp, error) {
+	out := new(QueryUserDetailResp)
+	err := c.cc.Invoke(ctx, UserService_QueryUserDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) QueryUserList(ctx context.Context, in *QueryUserListReq, opts ...grpc.CallOption) (*QueryUserListResp, error) {
+	out := new(QueryUserListResp)
+	err := c.cc.Invoke(ctx, UserService_QueryUserList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -147,22 +2349,43 @@ func (c *userServiceClient) UpdateUserRoleList(ctx context.Context, in *UpdateUs
 	return out, nil
 }
 
+func (c *userServiceClient) QueryDeptAndPostList(ctx context.Context, in *QueryDeptAndPostListReq, opts ...grpc.CallOption) (*QueryDeptAndPostListResp, error) {
+	out := new(QueryDeptAndPostListResp)
+	err := c.cc.Invoke(ctx, UserService_QueryDeptAndPostList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
+	// 用户登录
 	Login(context.Context, *LoginReq) (*LoginResp, error)
+	// 获取用户个人信息
 	UserInfo(context.Context, *InfoReq) (*InfoResp, error)
-	UserAdd(context.Context, *UserAddReq) (*UserAddResp, error)
-	UserList(context.Context, *UserListReq) (*UserListResp, error)
-	UserUpdate(context.Context, *UserUpdateReq) (*UserUpdateResp, error)
-	UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error)
+	// 重置用户密码
 	ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error)
-	UpdateUserStatus(context.Context, *UserStatusReq) (*UserStatusResp, error)
+	// 添加用户信息表
+	AddUser(context.Context, *AddUserReq) (*AddUserResp, error)
+	// 删除用户信息表
+	DeleteUser(context.Context, *DeleteUserReq) (*DeleteUserResp, error)
+	// 更新用户信息表
+	UpdateUser(context.Context, *UpdateUserReq) (*UpdateUserResp, error)
+	// 更新用户信息表状态
+	UpdateUserStatus(context.Context, *UpdateUserStatusReq) (*UpdateUserStatusResp, error)
+	// 查询用户信息表详情
+	QueryUserDetail(context.Context, *QueryUserDetailReq) (*QueryUserDetailResp, error)
+	// 查询用户信息表列表
+	QueryUserList(context.Context, *QueryUserListReq) (*QueryUserListResp, error)
 	// 查询用户与角色的关联
 	QueryUserRoleList(context.Context, *QueryUserRoleListReq) (*QueryUserRoleListResp, error)
 	// 更新用户与角色的关联
 	UpdateUserRoleList(context.Context, *UpdateUserRoleListReq) (*UpdateUserRoleListResp, error)
+	// 查询所有部门和岗位
+	QueryDeptAndPostList(context.Context, *QueryDeptAndPostListReq) (*QueryDeptAndPostListResp, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -176,29 +2399,35 @@ func (UnimplementedUserServiceServer) Login(context.Context, *LoginReq) (*LoginR
 func (UnimplementedUserServiceServer) UserInfo(context.Context, *InfoReq) (*InfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
 }
-func (UnimplementedUserServiceServer) UserAdd(context.Context, *UserAddReq) (*UserAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserAdd not implemented")
-}
-func (UnimplementedUserServiceServer) UserList(context.Context, *UserListReq) (*UserListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserList not implemented")
-}
-func (UnimplementedUserServiceServer) UserUpdate(context.Context, *UserUpdateReq) (*UserUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserUpdate not implemented")
-}
-func (UnimplementedUserServiceServer) UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserDelete not implemented")
-}
 func (UnimplementedUserServiceServer) ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReSetPassword not implemented")
 }
-func (UnimplementedUserServiceServer) UpdateUserStatus(context.Context, *UserStatusReq) (*UserStatusResp, error) {
+func (UnimplementedUserServiceServer) AddUser(context.Context, *AddUserReq) (*AddUserResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
+}
+func (UnimplementedUserServiceServer) DeleteUser(context.Context, *DeleteUserReq) (*DeleteUserResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUser(context.Context, *UpdateUserReq) (*UpdateUserResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUserStatus(context.Context, *UpdateUserStatusReq) (*UpdateUserStatusResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserStatus not implemented")
+}
+func (UnimplementedUserServiceServer) QueryUserDetail(context.Context, *QueryUserDetailReq) (*QueryUserDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryUserDetail not implemented")
+}
+func (UnimplementedUserServiceServer) QueryUserList(context.Context, *QueryUserListReq) (*QueryUserListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryUserList not implemented")
 }
 func (UnimplementedUserServiceServer) QueryUserRoleList(context.Context, *QueryUserRoleListReq) (*QueryUserRoleListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryUserRoleList not implemented")
 }
 func (UnimplementedUserServiceServer) UpdateUserRoleList(context.Context, *UpdateUserRoleListReq) (*UpdateUserRoleListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserRoleList not implemented")
+}
+func (UnimplementedUserServiceServer) QueryDeptAndPostList(context.Context, *QueryDeptAndPostListReq) (*QueryDeptAndPostListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryDeptAndPostList not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -249,78 +2478,6 @@ func _UserService_UserInfo_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_UserAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).UserAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_UserAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UserAdd(ctx, req.(*UserAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_UserList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).UserList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_UserList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UserList(ctx, req.(*UserListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_UserUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).UserUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_UserUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UserUpdate(ctx, req.(*UserUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_UserDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).UserDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_UserDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UserDelete(ctx, req.(*UserDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _UserService_ReSetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReSetPasswordReq)
 	if err := dec(in); err != nil {
@@ -339,8 +2496,62 @@ func _UserService_ReSetPassword_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_AddUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddUserReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).AddUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_AddUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).AddUser(ctx, req.(*AddUserReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).DeleteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_DeleteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).DeleteUser(ctx, req.(*DeleteUserReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateUser(ctx, req.(*UpdateUserReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserService_UpdateUserStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserStatusReq)
+	in := new(UpdateUserStatusReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -352,7 +2563,43 @@ func _UserService_UpdateUserStatus_Handler(srv interface{}, ctx context.Context,
 		FullMethod: UserService_UpdateUserStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UpdateUserStatus(ctx, req.(*UserStatusReq))
+		return srv.(UserServiceServer).UpdateUserStatus(ctx, req.(*UpdateUserStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_QueryUserDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryUserDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).QueryUserDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_QueryUserDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).QueryUserDetail(ctx, req.(*QueryUserDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_QueryUserList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryUserListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).QueryUserList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_QueryUserList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).QueryUserList(ctx, req.(*QueryUserListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -393,6 +2640,24 @@ func _UserService_UpdateUserRoleList_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_QueryDeptAndPostList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDeptAndPostListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).QueryDeptAndPostList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_QueryDeptAndPostList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).QueryDeptAndPostList(ctx, req.(*QueryDeptAndPostListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -409,28 +2674,32 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserService_UserInfo_Handler,
 		},
 		{
-			MethodName: "UserAdd",
-			Handler:    _UserService_UserAdd_Handler,
-		},
-		{
-			MethodName: "UserList",
-			Handler:    _UserService_UserList_Handler,
-		},
-		{
-			MethodName: "UserUpdate",
-			Handler:    _UserService_UserUpdate_Handler,
-		},
-		{
-			MethodName: "UserDelete",
-			Handler:    _UserService_UserDelete_Handler,
-		},
-		{
 			MethodName: "ReSetPassword",
 			Handler:    _UserService_ReSetPassword_Handler,
 		},
 		{
+			MethodName: "AddUser",
+			Handler:    _UserService_AddUser_Handler,
+		},
+		{
+			MethodName: "DeleteUser",
+			Handler:    _UserService_DeleteUser_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _UserService_UpdateUser_Handler,
+		},
+		{
 			MethodName: "UpdateUserStatus",
 			Handler:    _UserService_UpdateUserStatus_Handler,
+		},
+		{
+			MethodName: "QueryUserDetail",
+			Handler:    _UserService_QueryUserDetail_Handler,
+		},
+		{
+			MethodName: "QueryUserList",
+			Handler:    _UserService_QueryUserList_Handler,
 		},
 		{
 			MethodName: "QueryUserRoleList",
@@ -440,1758 +2709,9 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "UpdateUserRoleList",
 			Handler:    _UserService_UpdateUserRoleList_Handler,
 		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sys/sys.proto",
-}
-
-const (
-	RoleService_RoleAdd_FullMethodName            = "/sysclient.RoleService/RoleAdd"
-	RoleService_RoleList_FullMethodName           = "/sysclient.RoleService/RoleList"
-	RoleService_RoleUpdate_FullMethodName         = "/sysclient.RoleService/RoleUpdate"
-	RoleService_RoleDelete_FullMethodName         = "/sysclient.RoleService/RoleDelete"
-	RoleService_QueryRoleMenuList_FullMethodName  = "/sysclient.RoleService/QueryRoleMenuList"
-	RoleService_UpdateMenuRoleList_FullMethodName = "/sysclient.RoleService/UpdateMenuRoleList"
-)
-
-// RoleServiceClient is the client API for RoleService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type RoleServiceClient interface {
-	// 添加角色
-	RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error)
-	// 查询角色
-	RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
-	// 更新角色
-	RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error)
-	// 删除角色
-	RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error)
-	// 查询用户与角色的关联
-	QueryRoleMenuList(ctx context.Context, in *QueryRoleMenuListReq, opts ...grpc.CallOption) (*QueryRoleMenuListResp, error)
-	// 更新用户与角色的关联
-	UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
-}
-
-type roleServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewRoleServiceClient(cc grpc.ClientConnInterface) RoleServiceClient {
-	return &roleServiceClient{cc}
-}
-
-func (c *roleServiceClient) RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error) {
-	out := new(RoleAddResp)
-	err := c.cc.Invoke(ctx, RoleService_RoleAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *roleServiceClient) RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error) {
-	out := new(RoleListResp)
-	err := c.cc.Invoke(ctx, RoleService_RoleList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *roleServiceClient) RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*RoleUpdateResp, error) {
-	out := new(RoleUpdateResp)
-	err := c.cc.Invoke(ctx, RoleService_RoleUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *roleServiceClient) RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error) {
-	out := new(RoleDeleteResp)
-	err := c.cc.Invoke(ctx, RoleService_RoleDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *roleServiceClient) QueryRoleMenuList(ctx context.Context, in *QueryRoleMenuListReq, opts ...grpc.CallOption) (*QueryRoleMenuListResp, error) {
-	out := new(QueryRoleMenuListResp)
-	err := c.cc.Invoke(ctx, RoleService_QueryRoleMenuList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *roleServiceClient) UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
-	out := new(UpdateMenuRoleResp)
-	err := c.cc.Invoke(ctx, RoleService_UpdateMenuRoleList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// RoleServiceServer is the server API for RoleService service.
-// All implementations must embed UnimplementedRoleServiceServer
-// for forward compatibility
-type RoleServiceServer interface {
-	// 添加角色
-	RoleAdd(context.Context, *RoleAddReq) (*RoleAddResp, error)
-	// 查询角色
-	RoleList(context.Context, *RoleListReq) (*RoleListResp, error)
-	// 更新角色
-	RoleUpdate(context.Context, *RoleUpdateReq) (*RoleUpdateResp, error)
-	// 删除角色
-	RoleDelete(context.Context, *RoleDeleteReq) (*RoleDeleteResp, error)
-	// 查询用户与角色的关联
-	QueryRoleMenuList(context.Context, *QueryRoleMenuListReq) (*QueryRoleMenuListResp, error)
-	// 更新用户与角色的关联
-	UpdateMenuRoleList(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
-	mustEmbedUnimplementedRoleServiceServer()
-}
-
-// UnimplementedRoleServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedRoleServiceServer struct {
-}
-
-func (UnimplementedRoleServiceServer) RoleAdd(context.Context, *RoleAddReq) (*RoleAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RoleAdd not implemented")
-}
-func (UnimplementedRoleServiceServer) RoleList(context.Context, *RoleListReq) (*RoleListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RoleList not implemented")
-}
-func (UnimplementedRoleServiceServer) RoleUpdate(context.Context, *RoleUpdateReq) (*RoleUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RoleUpdate not implemented")
-}
-func (UnimplementedRoleServiceServer) RoleDelete(context.Context, *RoleDeleteReq) (*RoleDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RoleDelete not implemented")
-}
-func (UnimplementedRoleServiceServer) QueryRoleMenuList(context.Context, *QueryRoleMenuListReq) (*QueryRoleMenuListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryRoleMenuList not implemented")
-}
-func (UnimplementedRoleServiceServer) UpdateMenuRoleList(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenuRoleList not implemented")
-}
-func (UnimplementedRoleServiceServer) mustEmbedUnimplementedRoleServiceServer() {}
-
-// UnsafeRoleServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to RoleServiceServer will
-// result in compilation errors.
-type UnsafeRoleServiceServer interface {
-	mustEmbedUnimplementedRoleServiceServer()
-}
-
-func RegisterRoleServiceServer(s grpc.ServiceRegistrar, srv RoleServiceServer) {
-	s.RegisterService(&RoleService_ServiceDesc, srv)
-}
-
-func _RoleService_RoleAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RoleAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoleServiceServer).RoleAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoleService_RoleAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).RoleAdd(ctx, req.(*RoleAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RoleService_RoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RoleListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoleServiceServer).RoleList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoleService_RoleList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).RoleList(ctx, req.(*RoleListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RoleService_RoleUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RoleUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoleServiceServer).RoleUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoleService_RoleUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).RoleUpdate(ctx, req.(*RoleUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RoleService_RoleDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RoleDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoleServiceServer).RoleDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoleService_RoleDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).RoleDelete(ctx, req.(*RoleDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RoleService_QueryRoleMenuList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryRoleMenuListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoleServiceServer).QueryRoleMenuList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoleService_QueryRoleMenuList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).QueryRoleMenuList(ctx, req.(*QueryRoleMenuListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RoleService_UpdateMenuRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMenuRoleReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoleServiceServer).UpdateMenuRoleList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoleService_UpdateMenuRoleList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).UpdateMenuRoleList(ctx, req.(*UpdateMenuRoleReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// RoleService_ServiceDesc is the grpc.ServiceDesc for RoleService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var RoleService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.RoleService",
-	HandlerType: (*RoleServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "RoleAdd",
-			Handler:    _RoleService_RoleAdd_Handler,
-		},
-		{
-			MethodName: "RoleList",
-			Handler:    _RoleService_RoleList_Handler,
-		},
-		{
-			MethodName: "RoleUpdate",
-			Handler:    _RoleService_RoleUpdate_Handler,
-		},
-		{
-			MethodName: "RoleDelete",
-			Handler:    _RoleService_RoleDelete_Handler,
-		},
-		{
-			MethodName: "QueryRoleMenuList",
-			Handler:    _RoleService_QueryRoleMenuList_Handler,
-		},
-		{
-			MethodName: "UpdateMenuRoleList",
-			Handler:    _RoleService_UpdateMenuRoleList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sys/sys.proto",
-}
-
-const (
-	MenuService_MenuAdd_FullMethodName    = "/sysclient.MenuService/MenuAdd"
-	MenuService_MenuList_FullMethodName   = "/sysclient.MenuService/MenuList"
-	MenuService_MenuUpdate_FullMethodName = "/sysclient.MenuService/MenuUpdate"
-	MenuService_MenuDelete_FullMethodName = "/sysclient.MenuService/MenuDelete"
-)
-
-// MenuServiceClient is the client API for MenuService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type MenuServiceClient interface {
-	MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
-	MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
-	MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
-	MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error)
-}
-
-type menuServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewMenuServiceClient(cc grpc.ClientConnInterface) MenuServiceClient {
-	return &menuServiceClient{cc}
-}
-
-func (c *menuServiceClient) MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error) {
-	out := new(MenuAddResp)
-	err := c.cc.Invoke(ctx, MenuService_MenuAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *menuServiceClient) MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error) {
-	out := new(MenuListResp)
-	err := c.cc.Invoke(ctx, MenuService_MenuList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *menuServiceClient) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error) {
-	out := new(MenuUpdateResp)
-	err := c.cc.Invoke(ctx, MenuService_MenuUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *menuServiceClient) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error) {
-	out := new(MenuDeleteResp)
-	err := c.cc.Invoke(ctx, MenuService_MenuDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// MenuServiceServer is the server API for MenuService service.
-// All implementations must embed UnimplementedMenuServiceServer
-// for forward compatibility
-type MenuServiceServer interface {
-	MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error)
-	MenuList(context.Context, *MenuListReq) (*MenuListResp, error)
-	MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error)
-	MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error)
-	mustEmbedUnimplementedMenuServiceServer()
-}
-
-// UnimplementedMenuServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedMenuServiceServer struct {
-}
-
-func (UnimplementedMenuServiceServer) MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MenuAdd not implemented")
-}
-func (UnimplementedMenuServiceServer) MenuList(context.Context, *MenuListReq) (*MenuListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MenuList not implemented")
-}
-func (UnimplementedMenuServiceServer) MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MenuUpdate not implemented")
-}
-func (UnimplementedMenuServiceServer) MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MenuDelete not implemented")
-}
-func (UnimplementedMenuServiceServer) mustEmbedUnimplementedMenuServiceServer() {}
-
-// UnsafeMenuServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to MenuServiceServer will
-// result in compilation errors.
-type UnsafeMenuServiceServer interface {
-	mustEmbedUnimplementedMenuServiceServer()
-}
-
-func RegisterMenuServiceServer(s grpc.ServiceRegistrar, srv MenuServiceServer) {
-	s.RegisterService(&MenuService_ServiceDesc, srv)
-}
-
-func _MenuService_MenuAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MenuAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).MenuAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_MenuAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).MenuAdd(ctx, req.(*MenuAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MenuService_MenuList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MenuListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).MenuList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_MenuList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).MenuList(ctx, req.(*MenuListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MenuService_MenuUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MenuUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).MenuUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_MenuUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).MenuUpdate(ctx, req.(*MenuUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MenuService_MenuDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MenuDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).MenuDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_MenuDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).MenuDelete(ctx, req.(*MenuDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// MenuService_ServiceDesc is the grpc.ServiceDesc for MenuService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var MenuService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.MenuService",
-	HandlerType: (*MenuServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "MenuAdd",
-			Handler:    _MenuService_MenuAdd_Handler,
-		},
-		{
-			MethodName: "MenuList",
-			Handler:    _MenuService_MenuList_Handler,
-		},
-		{
-			MethodName: "MenuUpdate",
-			Handler:    _MenuService_MenuUpdate_Handler,
-		},
-		{
-			MethodName: "MenuDelete",
-			Handler:    _MenuService_MenuDelete_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sys/sys.proto",
-}
-
-const (
-	DictService_AddDict_FullMethodName       = "/sysclient.DictService/AddDict"
-	DictService_DeleteDict_FullMethodName    = "/sysclient.DictService/DeleteDict"
-	DictService_UpdateDict_FullMethodName    = "/sysclient.DictService/UpdateDict"
-	DictService_QueryDict_FullMethodName     = "/sysclient.DictService/QueryDict"
-	DictService_QueryDictList_FullMethodName = "/sysclient.DictService/QueryDictList"
-)
-
-// DictServiceClient is the client API for DictService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DictServiceClient interface {
-	// 添加字典表
-	AddDict(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error)
-	// 删除字典表
-	DeleteDict(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error)
-	// 更新字典表
-	UpdateDict(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error)
-	// 根据条件查询单条字典表记录
-	QueryDict(ctx context.Context, in *DictReq, opts ...grpc.CallOption) (*DictResp, error)
-	// 查询字典表列表
-	QueryDictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error)
-}
-
-type dictServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewDictServiceClient(cc grpc.ClientConnInterface) DictServiceClient {
-	return &dictServiceClient{cc}
-}
-
-func (c *dictServiceClient) AddDict(ctx context.Context, in *DictAddReq, opts ...grpc.CallOption) (*DictAddResp, error) {
-	out := new(DictAddResp)
-	err := c.cc.Invoke(ctx, DictService_AddDict_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dictServiceClient) DeleteDict(ctx context.Context, in *DictDeleteReq, opts ...grpc.CallOption) (*DictDeleteResp, error) {
-	out := new(DictDeleteResp)
-	err := c.cc.Invoke(ctx, DictService_DeleteDict_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dictServiceClient) UpdateDict(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*DictUpdateResp, error) {
-	out := new(DictUpdateResp)
-	err := c.cc.Invoke(ctx, DictService_UpdateDict_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dictServiceClient) QueryDict(ctx context.Context, in *DictReq, opts ...grpc.CallOption) (*DictResp, error) {
-	out := new(DictResp)
-	err := c.cc.Invoke(ctx, DictService_QueryDict_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dictServiceClient) QueryDictList(ctx context.Context, in *DictListReq, opts ...grpc.CallOption) (*DictListResp, error) {
-	out := new(DictListResp)
-	err := c.cc.Invoke(ctx, DictService_QueryDictList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// DictServiceServer is the server API for DictService service.
-// All implementations must embed UnimplementedDictServiceServer
-// for forward compatibility
-type DictServiceServer interface {
-	// 添加字典表
-	AddDict(context.Context, *DictAddReq) (*DictAddResp, error)
-	// 删除字典表
-	DeleteDict(context.Context, *DictDeleteReq) (*DictDeleteResp, error)
-	// 更新字典表
-	UpdateDict(context.Context, *DictUpdateReq) (*DictUpdateResp, error)
-	// 根据条件查询单条字典表记录
-	QueryDict(context.Context, *DictReq) (*DictResp, error)
-	// 查询字典表列表
-	QueryDictList(context.Context, *DictListReq) (*DictListResp, error)
-	mustEmbedUnimplementedDictServiceServer()
-}
-
-// UnimplementedDictServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedDictServiceServer struct {
-}
-
-func (UnimplementedDictServiceServer) AddDict(context.Context, *DictAddReq) (*DictAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddDict not implemented")
-}
-func (UnimplementedDictServiceServer) DeleteDict(context.Context, *DictDeleteReq) (*DictDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteDict not implemented")
-}
-func (UnimplementedDictServiceServer) UpdateDict(context.Context, *DictUpdateReq) (*DictUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateDict not implemented")
-}
-func (UnimplementedDictServiceServer) QueryDict(context.Context, *DictReq) (*DictResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryDict not implemented")
-}
-func (UnimplementedDictServiceServer) QueryDictList(context.Context, *DictListReq) (*DictListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryDictList not implemented")
-}
-func (UnimplementedDictServiceServer) mustEmbedUnimplementedDictServiceServer() {}
-
-// UnsafeDictServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DictServiceServer will
-// result in compilation errors.
-type UnsafeDictServiceServer interface {
-	mustEmbedUnimplementedDictServiceServer()
-}
-
-func RegisterDictServiceServer(s grpc.ServiceRegistrar, srv DictServiceServer) {
-	s.RegisterService(&DictService_ServiceDesc, srv)
-}
-
-func _DictService_AddDict_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictServiceServer).AddDict(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictService_AddDict_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictServiceServer).AddDict(ctx, req.(*DictAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DictService_DeleteDict_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictServiceServer).DeleteDict(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictService_DeleteDict_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictServiceServer).DeleteDict(ctx, req.(*DictDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DictService_UpdateDict_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictServiceServer).UpdateDict(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictService_UpdateDict_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictServiceServer).UpdateDict(ctx, req.(*DictUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DictService_QueryDict_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictServiceServer).QueryDict(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictService_QueryDict_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictServiceServer).QueryDict(ctx, req.(*DictReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DictService_QueryDictList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictServiceServer).QueryDictList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictService_QueryDictList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictServiceServer).QueryDictList(ctx, req.(*DictListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// DictService_ServiceDesc is the grpc.ServiceDesc for DictService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var DictService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.DictService",
-	HandlerType: (*DictServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddDict",
-			Handler:    _DictService_AddDict_Handler,
-		},
-		{
-			MethodName: "DeleteDict",
-			Handler:    _DictService_DeleteDict_Handler,
-		},
-		{
-			MethodName: "UpdateDict",
-			Handler:    _DictService_UpdateDict_Handler,
-		},
-		{
-			MethodName: "QueryDict",
-			Handler:    _DictService_QueryDict_Handler,
-		},
-		{
-			MethodName: "QueryDictList",
-			Handler:    _DictService_QueryDictList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sys/sys.proto",
-}
-
-const (
-	DictItemService_AddDictItem_FullMethodName       = "/sysclient.DictItemService/AddDictItem"
-	DictItemService_DeleteDictItem_FullMethodName    = "/sysclient.DictItemService/DeleteDictItem"
-	DictItemService_UpdateDictItem_FullMethodName    = "/sysclient.DictItemService/UpdateDictItem"
-	DictItemService_QueryDictItem_FullMethodName     = "/sysclient.DictItemService/QueryDictItem"
-	DictItemService_QueryDictItemList_FullMethodName = "/sysclient.DictItemService/QueryDictItemList"
-)
-
-// DictItemServiceClient is the client API for DictItemService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DictItemServiceClient interface {
-	// 添加字典项表
-	AddDictItem(ctx context.Context, in *DictItemAddReq, opts ...grpc.CallOption) (*DictItemAddResp, error)
-	// 删除字典项表
-	DeleteDictItem(ctx context.Context, in *DictItemDeleteReq, opts ...grpc.CallOption) (*DictItemDeleteResp, error)
-	// 更新字典项表
-	UpdateDictItem(ctx context.Context, in *DictItemUpdateReq, opts ...grpc.CallOption) (*DictItemUpdateResp, error)
-	// 根据条件查询单条字典项表记录
-	QueryDictItem(ctx context.Context, in *DictItemReq, opts ...grpc.CallOption) (*DictItemResp, error)
-	// 查询字典项表列表
-	QueryDictItemList(ctx context.Context, in *DictItemListReq, opts ...grpc.CallOption) (*DictItemListResp, error)
-}
-
-type dictItemServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewDictItemServiceClient(cc grpc.ClientConnInterface) DictItemServiceClient {
-	return &dictItemServiceClient{cc}
-}
-
-func (c *dictItemServiceClient) AddDictItem(ctx context.Context, in *DictItemAddReq, opts ...grpc.CallOption) (*DictItemAddResp, error) {
-	out := new(DictItemAddResp)
-	err := c.cc.Invoke(ctx, DictItemService_AddDictItem_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dictItemServiceClient) DeleteDictItem(ctx context.Context, in *DictItemDeleteReq, opts ...grpc.CallOption) (*DictItemDeleteResp, error) {
-	out := new(DictItemDeleteResp)
-	err := c.cc.Invoke(ctx, DictItemService_DeleteDictItem_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dictItemServiceClient) UpdateDictItem(ctx context.Context, in *DictItemUpdateReq, opts ...grpc.CallOption) (*DictItemUpdateResp, error) {
-	out := new(DictItemUpdateResp)
-	err := c.cc.Invoke(ctx, DictItemService_UpdateDictItem_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dictItemServiceClient) QueryDictItem(ctx context.Context, in *DictItemReq, opts ...grpc.CallOption) (*DictItemResp, error) {
-	out := new(DictItemResp)
-	err := c.cc.Invoke(ctx, DictItemService_QueryDictItem_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dictItemServiceClient) QueryDictItemList(ctx context.Context, in *DictItemListReq, opts ...grpc.CallOption) (*DictItemListResp, error) {
-	out := new(DictItemListResp)
-	err := c.cc.Invoke(ctx, DictItemService_QueryDictItemList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// DictItemServiceServer is the server API for DictItemService service.
-// All implementations must embed UnimplementedDictItemServiceServer
-// for forward compatibility
-type DictItemServiceServer interface {
-	// 添加字典项表
-	AddDictItem(context.Context, *DictItemAddReq) (*DictItemAddResp, error)
-	// 删除字典项表
-	DeleteDictItem(context.Context, *DictItemDeleteReq) (*DictItemDeleteResp, error)
-	// 更新字典项表
-	UpdateDictItem(context.Context, *DictItemUpdateReq) (*DictItemUpdateResp, error)
-	// 根据条件查询单条字典项表记录
-	QueryDictItem(context.Context, *DictItemReq) (*DictItemResp, error)
-	// 查询字典项表列表
-	QueryDictItemList(context.Context, *DictItemListReq) (*DictItemListResp, error)
-	mustEmbedUnimplementedDictItemServiceServer()
-}
-
-// UnimplementedDictItemServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedDictItemServiceServer struct {
-}
-
-func (UnimplementedDictItemServiceServer) AddDictItem(context.Context, *DictItemAddReq) (*DictItemAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddDictItem not implemented")
-}
-func (UnimplementedDictItemServiceServer) DeleteDictItem(context.Context, *DictItemDeleteReq) (*DictItemDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteDictItem not implemented")
-}
-func (UnimplementedDictItemServiceServer) UpdateDictItem(context.Context, *DictItemUpdateReq) (*DictItemUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateDictItem not implemented")
-}
-func (UnimplementedDictItemServiceServer) QueryDictItem(context.Context, *DictItemReq) (*DictItemResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryDictItem not implemented")
-}
-func (UnimplementedDictItemServiceServer) QueryDictItemList(context.Context, *DictItemListReq) (*DictItemListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryDictItemList not implemented")
-}
-func (UnimplementedDictItemServiceServer) mustEmbedUnimplementedDictItemServiceServer() {}
-
-// UnsafeDictItemServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DictItemServiceServer will
-// result in compilation errors.
-type UnsafeDictItemServiceServer interface {
-	mustEmbedUnimplementedDictItemServiceServer()
-}
-
-func RegisterDictItemServiceServer(s grpc.ServiceRegistrar, srv DictItemServiceServer) {
-	s.RegisterService(&DictItemService_ServiceDesc, srv)
-}
-
-func _DictItemService_AddDictItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictItemAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictItemServiceServer).AddDictItem(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictItemService_AddDictItem_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictItemServiceServer).AddDictItem(ctx, req.(*DictItemAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DictItemService_DeleteDictItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictItemDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictItemServiceServer).DeleteDictItem(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictItemService_DeleteDictItem_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictItemServiceServer).DeleteDictItem(ctx, req.(*DictItemDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DictItemService_UpdateDictItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictItemUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictItemServiceServer).UpdateDictItem(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictItemService_UpdateDictItem_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictItemServiceServer).UpdateDictItem(ctx, req.(*DictItemUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DictItemService_QueryDictItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictItemReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictItemServiceServer).QueryDictItem(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictItemService_QueryDictItem_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictItemServiceServer).QueryDictItem(ctx, req.(*DictItemReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DictItemService_QueryDictItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DictItemListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DictItemServiceServer).QueryDictItemList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DictItemService_QueryDictItemList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DictItemServiceServer).QueryDictItemList(ctx, req.(*DictItemListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// DictItemService_ServiceDesc is the grpc.ServiceDesc for DictItemService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var DictItemService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.DictItemService",
-	HandlerType: (*DictItemServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddDictItem",
-			Handler:    _DictItemService_AddDictItem_Handler,
-		},
-		{
-			MethodName: "DeleteDictItem",
-			Handler:    _DictItemService_DeleteDictItem_Handler,
-		},
-		{
-			MethodName: "UpdateDictItem",
-			Handler:    _DictItemService_UpdateDictItem_Handler,
-		},
-		{
-			MethodName: "QueryDictItem",
-			Handler:    _DictItemService_QueryDictItem_Handler,
-		},
-		{
-			MethodName: "QueryDictItemList",
-			Handler:    _DictItemService_QueryDictItemList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sys/sys.proto",
-}
-
-const (
-	DeptService_DeptAdd_FullMethodName    = "/sysclient.DeptService/DeptAdd"
-	DeptService_DeptList_FullMethodName   = "/sysclient.DeptService/DeptList"
-	DeptService_DeptUpdate_FullMethodName = "/sysclient.DeptService/DeptUpdate"
-	DeptService_DeptDelete_FullMethodName = "/sysclient.DeptService/DeptDelete"
-)
-
-// DeptServiceClient is the client API for DeptService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DeptServiceClient interface {
-	DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error)
-	DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error)
-	DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error)
-	DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error)
-}
-
-type deptServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewDeptServiceClient(cc grpc.ClientConnInterface) DeptServiceClient {
-	return &deptServiceClient{cc}
-}
-
-func (c *deptServiceClient) DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error) {
-	out := new(DeptAddResp)
-	err := c.cc.Invoke(ctx, DeptService_DeptAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *deptServiceClient) DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error) {
-	out := new(DeptListResp)
-	err := c.cc.Invoke(ctx, DeptService_DeptList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *deptServiceClient) DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error) {
-	out := new(DeptUpdateResp)
-	err := c.cc.Invoke(ctx, DeptService_DeptUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *deptServiceClient) DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error) {
-	out := new(DeptDeleteResp)
-	err := c.cc.Invoke(ctx, DeptService_DeptDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// DeptServiceServer is the server API for DeptService service.
-// All implementations must embed UnimplementedDeptServiceServer
-// for forward compatibility
-type DeptServiceServer interface {
-	DeptAdd(context.Context, *DeptAddReq) (*DeptAddResp, error)
-	DeptList(context.Context, *DeptListReq) (*DeptListResp, error)
-	DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error)
-	DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error)
-	mustEmbedUnimplementedDeptServiceServer()
-}
-
-// UnimplementedDeptServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedDeptServiceServer struct {
-}
-
-func (UnimplementedDeptServiceServer) DeptAdd(context.Context, *DeptAddReq) (*DeptAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeptAdd not implemented")
-}
-func (UnimplementedDeptServiceServer) DeptList(context.Context, *DeptListReq) (*DeptListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeptList not implemented")
-}
-func (UnimplementedDeptServiceServer) DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeptUpdate not implemented")
-}
-func (UnimplementedDeptServiceServer) DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeptDelete not implemented")
-}
-func (UnimplementedDeptServiceServer) mustEmbedUnimplementedDeptServiceServer() {}
-
-// UnsafeDeptServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DeptServiceServer will
-// result in compilation errors.
-type UnsafeDeptServiceServer interface {
-	mustEmbedUnimplementedDeptServiceServer()
-}
-
-func RegisterDeptServiceServer(s grpc.ServiceRegistrar, srv DeptServiceServer) {
-	s.RegisterService(&DeptService_ServiceDesc, srv)
-}
-
-func _DeptService_DeptAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeptAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DeptServiceServer).DeptAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DeptService_DeptAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DeptServiceServer).DeptAdd(ctx, req.(*DeptAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DeptService_DeptList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeptListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DeptServiceServer).DeptList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DeptService_DeptList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DeptServiceServer).DeptList(ctx, req.(*DeptListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DeptService_DeptUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeptUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DeptServiceServer).DeptUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DeptService_DeptUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DeptServiceServer).DeptUpdate(ctx, req.(*DeptUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DeptService_DeptDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeptDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DeptServiceServer).DeptDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DeptService_DeptDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DeptServiceServer).DeptDelete(ctx, req.(*DeptDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// DeptService_ServiceDesc is the grpc.ServiceDesc for DeptService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var DeptService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.DeptService",
-	HandlerType: (*DeptServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "DeptAdd",
-			Handler:    _DeptService_DeptAdd_Handler,
-		},
-		{
-			MethodName: "DeptList",
-			Handler:    _DeptService_DeptList_Handler,
-		},
-		{
-			MethodName: "DeptUpdate",
-			Handler:    _DeptService_DeptUpdate_Handler,
-		},
-		{
-			MethodName: "DeptDelete",
-			Handler:    _DeptService_DeptDelete_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sys/sys.proto",
-}
-
-const (
-	LoginLogService_LoginLogAdd_FullMethodName        = "/sysclient.LoginLogService/LoginLogAdd"
-	LoginLogService_LoginLogList_FullMethodName       = "/sysclient.LoginLogService/LoginLogList"
-	LoginLogService_LoginLogDelete_FullMethodName     = "/sysclient.LoginLogService/LoginLogDelete"
-	LoginLogService_StatisticsLoginLog_FullMethodName = "/sysclient.LoginLogService/StatisticsLoginLog"
-)
-
-// LoginLogServiceClient is the client API for LoginLogService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type LoginLogServiceClient interface {
-	LoginLogAdd(ctx context.Context, in *LoginLogAddReq, opts ...grpc.CallOption) (*LoginLogAddResp, error)
-	LoginLogList(ctx context.Context, in *LoginLogListReq, opts ...grpc.CallOption) (*LoginLogListResp, error)
-	LoginLogDelete(ctx context.Context, in *LoginLogDeleteReq, opts ...grpc.CallOption) (*LoginLogDeleteResp, error)
-	// 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
-	StatisticsLoginLog(ctx context.Context, in *StatisticsLoginLogReq, opts ...grpc.CallOption) (*StatisticsLoginLogResp, error)
-}
-
-type loginLogServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewLoginLogServiceClient(cc grpc.ClientConnInterface) LoginLogServiceClient {
-	return &loginLogServiceClient{cc}
-}
-
-func (c *loginLogServiceClient) LoginLogAdd(ctx context.Context, in *LoginLogAddReq, opts ...grpc.CallOption) (*LoginLogAddResp, error) {
-	out := new(LoginLogAddResp)
-	err := c.cc.Invoke(ctx, LoginLogService_LoginLogAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *loginLogServiceClient) LoginLogList(ctx context.Context, in *LoginLogListReq, opts ...grpc.CallOption) (*LoginLogListResp, error) {
-	out := new(LoginLogListResp)
-	err := c.cc.Invoke(ctx, LoginLogService_LoginLogList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *loginLogServiceClient) LoginLogDelete(ctx context.Context, in *LoginLogDeleteReq, opts ...grpc.CallOption) (*LoginLogDeleteResp, error) {
-	out := new(LoginLogDeleteResp)
-	err := c.cc.Invoke(ctx, LoginLogService_LoginLogDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *loginLogServiceClient) StatisticsLoginLog(ctx context.Context, in *StatisticsLoginLogReq, opts ...grpc.CallOption) (*StatisticsLoginLogResp, error) {
-	out := new(StatisticsLoginLogResp)
-	err := c.cc.Invoke(ctx, LoginLogService_StatisticsLoginLog_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// LoginLogServiceServer is the server API for LoginLogService service.
-// All implementations must embed UnimplementedLoginLogServiceServer
-// for forward compatibility
-type LoginLogServiceServer interface {
-	LoginLogAdd(context.Context, *LoginLogAddReq) (*LoginLogAddResp, error)
-	LoginLogList(context.Context, *LoginLogListReq) (*LoginLogListResp, error)
-	LoginLogDelete(context.Context, *LoginLogDeleteReq) (*LoginLogDeleteResp, error)
-	// 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
-	StatisticsLoginLog(context.Context, *StatisticsLoginLogReq) (*StatisticsLoginLogResp, error)
-	mustEmbedUnimplementedLoginLogServiceServer()
-}
-
-// UnimplementedLoginLogServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedLoginLogServiceServer struct {
-}
-
-func (UnimplementedLoginLogServiceServer) LoginLogAdd(context.Context, *LoginLogAddReq) (*LoginLogAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LoginLogAdd not implemented")
-}
-func (UnimplementedLoginLogServiceServer) LoginLogList(context.Context, *LoginLogListReq) (*LoginLogListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LoginLogList not implemented")
-}
-func (UnimplementedLoginLogServiceServer) LoginLogDelete(context.Context, *LoginLogDeleteReq) (*LoginLogDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LoginLogDelete not implemented")
-}
-func (UnimplementedLoginLogServiceServer) StatisticsLoginLog(context.Context, *StatisticsLoginLogReq) (*StatisticsLoginLogResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StatisticsLoginLog not implemented")
-}
-func (UnimplementedLoginLogServiceServer) mustEmbedUnimplementedLoginLogServiceServer() {}
-
-// UnsafeLoginLogServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to LoginLogServiceServer will
-// result in compilation errors.
-type UnsafeLoginLogServiceServer interface {
-	mustEmbedUnimplementedLoginLogServiceServer()
-}
-
-func RegisterLoginLogServiceServer(s grpc.ServiceRegistrar, srv LoginLogServiceServer) {
-	s.RegisterService(&LoginLogService_ServiceDesc, srv)
-}
-
-func _LoginLogService_LoginLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginLogAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LoginLogServiceServer).LoginLogAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LoginLogService_LoginLogAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LoginLogServiceServer).LoginLogAdd(ctx, req.(*LoginLogAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LoginLogService_LoginLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginLogListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LoginLogServiceServer).LoginLogList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LoginLogService_LoginLogList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LoginLogServiceServer).LoginLogList(ctx, req.(*LoginLogListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LoginLogService_LoginLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginLogDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LoginLogServiceServer).LoginLogDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LoginLogService_LoginLogDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LoginLogServiceServer).LoginLogDelete(ctx, req.(*LoginLogDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LoginLogService_StatisticsLoginLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StatisticsLoginLogReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LoginLogServiceServer).StatisticsLoginLog(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LoginLogService_StatisticsLoginLog_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LoginLogServiceServer).StatisticsLoginLog(ctx, req.(*StatisticsLoginLogReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// LoginLogService_ServiceDesc is the grpc.ServiceDesc for LoginLogService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var LoginLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.LoginLogService",
-	HandlerType: (*LoginLogServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "LoginLogAdd",
-			Handler:    _LoginLogService_LoginLogAdd_Handler,
-		},
-		{
-			MethodName: "LoginLogList",
-			Handler:    _LoginLogService_LoginLogList_Handler,
-		},
-		{
-			MethodName: "LoginLogDelete",
-			Handler:    _LoginLogService_LoginLogDelete_Handler,
-		},
-		{
-			MethodName: "StatisticsLoginLog",
-			Handler:    _LoginLogService_StatisticsLoginLog_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sys/sys.proto",
-}
-
-const (
-	SysLogService_SysLogAdd_FullMethodName    = "/sysclient.SysLogService/SysLogAdd"
-	SysLogService_SysLogList_FullMethodName   = "/sysclient.SysLogService/SysLogList"
-	SysLogService_SysLogDelete_FullMethodName = "/sysclient.SysLogService/SysLogDelete"
-)
-
-// SysLogServiceClient is the client API for SysLogService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SysLogServiceClient interface {
-	SysLogAdd(ctx context.Context, in *SysLogAddReq, opts ...grpc.CallOption) (*SysLogAddResp, error)
-	SysLogList(ctx context.Context, in *SysLogListReq, opts ...grpc.CallOption) (*SysLogListResp, error)
-	SysLogDelete(ctx context.Context, in *SysLogDeleteReq, opts ...grpc.CallOption) (*SysLogDeleteResp, error)
-}
-
-type sysLogServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewSysLogServiceClient(cc grpc.ClientConnInterface) SysLogServiceClient {
-	return &sysLogServiceClient{cc}
-}
-
-func (c *sysLogServiceClient) SysLogAdd(ctx context.Context, in *SysLogAddReq, opts ...grpc.CallOption) (*SysLogAddResp, error) {
-	out := new(SysLogAddResp)
-	err := c.cc.Invoke(ctx, SysLogService_SysLogAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysLogServiceClient) SysLogList(ctx context.Context, in *SysLogListReq, opts ...grpc.CallOption) (*SysLogListResp, error) {
-	out := new(SysLogListResp)
-	err := c.cc.Invoke(ctx, SysLogService_SysLogList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysLogServiceClient) SysLogDelete(ctx context.Context, in *SysLogDeleteReq, opts ...grpc.CallOption) (*SysLogDeleteResp, error) {
-	out := new(SysLogDeleteResp)
-	err := c.cc.Invoke(ctx, SysLogService_SysLogDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// SysLogServiceServer is the server API for SysLogService service.
-// All implementations must embed UnimplementedSysLogServiceServer
-// for forward compatibility
-type SysLogServiceServer interface {
-	SysLogAdd(context.Context, *SysLogAddReq) (*SysLogAddResp, error)
-	SysLogList(context.Context, *SysLogListReq) (*SysLogListResp, error)
-	SysLogDelete(context.Context, *SysLogDeleteReq) (*SysLogDeleteResp, error)
-	mustEmbedUnimplementedSysLogServiceServer()
-}
-
-// UnimplementedSysLogServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedSysLogServiceServer struct {
-}
-
-func (UnimplementedSysLogServiceServer) SysLogAdd(context.Context, *SysLogAddReq) (*SysLogAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SysLogAdd not implemented")
-}
-func (UnimplementedSysLogServiceServer) SysLogList(context.Context, *SysLogListReq) (*SysLogListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SysLogList not implemented")
-}
-func (UnimplementedSysLogServiceServer) SysLogDelete(context.Context, *SysLogDeleteReq) (*SysLogDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SysLogDelete not implemented")
-}
-func (UnimplementedSysLogServiceServer) mustEmbedUnimplementedSysLogServiceServer() {}
-
-// UnsafeSysLogServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SysLogServiceServer will
-// result in compilation errors.
-type UnsafeSysLogServiceServer interface {
-	mustEmbedUnimplementedSysLogServiceServer()
-}
-
-func RegisterSysLogServiceServer(s grpc.ServiceRegistrar, srv SysLogServiceServer) {
-	s.RegisterService(&SysLogService_ServiceDesc, srv)
-}
-
-func _SysLogService_SysLogAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SysLogAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysLogServiceServer).SysLogAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SysLogService_SysLogAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysLogServiceServer).SysLogAdd(ctx, req.(*SysLogAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SysLogService_SysLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SysLogListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysLogServiceServer).SysLogList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SysLogService_SysLogList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysLogServiceServer).SysLogList(ctx, req.(*SysLogListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SysLogService_SysLogDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SysLogDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysLogServiceServer).SysLogDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SysLogService_SysLogDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysLogServiceServer).SysLogDelete(ctx, req.(*SysLogDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// SysLogService_ServiceDesc is the grpc.ServiceDesc for SysLogService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var SysLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.SysLogService",
-	HandlerType: (*SysLogServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SysLogAdd",
-			Handler:    _SysLogService_SysLogAdd_Handler,
-		},
-		{
-			MethodName: "SysLogList",
-			Handler:    _SysLogService_SysLogList_Handler,
-		},
-		{
-			MethodName: "SysLogDelete",
-			Handler:    _SysLogService_SysLogDelete_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/sys/sys.proto",
-}
-
-const (
-	JobService_JobAdd_FullMethodName    = "/sysclient.JobService/JobAdd"
-	JobService_JobList_FullMethodName   = "/sysclient.JobService/JobList"
-	JobService_JobUpdate_FullMethodName = "/sysclient.JobService/JobUpdate"
-	JobService_JobDelete_FullMethodName = "/sysclient.JobService/JobDelete"
-)
-
-// JobServiceClient is the client API for JobService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type JobServiceClient interface {
-	JobAdd(ctx context.Context, in *JobAddReq, opts ...grpc.CallOption) (*JobAddResp, error)
-	JobList(ctx context.Context, in *JobListReq, opts ...grpc.CallOption) (*JobListResp, error)
-	JobUpdate(ctx context.Context, in *JobUpdateReq, opts ...grpc.CallOption) (*JobUpdateResp, error)
-	JobDelete(ctx context.Context, in *JobDeleteReq, opts ...grpc.CallOption) (*JobDeleteResp, error)
-}
-
-type jobServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewJobServiceClient(cc grpc.ClientConnInterface) JobServiceClient {
-	return &jobServiceClient{cc}
-}
-
-func (c *jobServiceClient) JobAdd(ctx context.Context, in *JobAddReq, opts ...grpc.CallOption) (*JobAddResp, error) {
-	out := new(JobAddResp)
-	err := c.cc.Invoke(ctx, JobService_JobAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobServiceClient) JobList(ctx context.Context, in *JobListReq, opts ...grpc.CallOption) (*JobListResp, error) {
-	out := new(JobListResp)
-	err := c.cc.Invoke(ctx, JobService_JobList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobServiceClient) JobUpdate(ctx context.Context, in *JobUpdateReq, opts ...grpc.CallOption) (*JobUpdateResp, error) {
-	out := new(JobUpdateResp)
-	err := c.cc.Invoke(ctx, JobService_JobUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobServiceClient) JobDelete(ctx context.Context, in *JobDeleteReq, opts ...grpc.CallOption) (*JobDeleteResp, error) {
-	out := new(JobDeleteResp)
-	err := c.cc.Invoke(ctx, JobService_JobDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// JobServiceServer is the server API for JobService service.
-// All implementations must embed UnimplementedJobServiceServer
-// for forward compatibility
-type JobServiceServer interface {
-	JobAdd(context.Context, *JobAddReq) (*JobAddResp, error)
-	JobList(context.Context, *JobListReq) (*JobListResp, error)
-	JobUpdate(context.Context, *JobUpdateReq) (*JobUpdateResp, error)
-	JobDelete(context.Context, *JobDeleteReq) (*JobDeleteResp, error)
-	mustEmbedUnimplementedJobServiceServer()
-}
-
-// UnimplementedJobServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedJobServiceServer struct {
-}
-
-func (UnimplementedJobServiceServer) JobAdd(context.Context, *JobAddReq) (*JobAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JobAdd not implemented")
-}
-func (UnimplementedJobServiceServer) JobList(context.Context, *JobListReq) (*JobListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JobList not implemented")
-}
-func (UnimplementedJobServiceServer) JobUpdate(context.Context, *JobUpdateReq) (*JobUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JobUpdate not implemented")
-}
-func (UnimplementedJobServiceServer) JobDelete(context.Context, *JobDeleteReq) (*JobDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JobDelete not implemented")
-}
-func (UnimplementedJobServiceServer) mustEmbedUnimplementedJobServiceServer() {}
-
-// UnsafeJobServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to JobServiceServer will
-// result in compilation errors.
-type UnsafeJobServiceServer interface {
-	mustEmbedUnimplementedJobServiceServer()
-}
-
-func RegisterJobServiceServer(s grpc.ServiceRegistrar, srv JobServiceServer) {
-	s.RegisterService(&JobService_ServiceDesc, srv)
-}
-
-func _JobService_JobAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JobAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobServiceServer).JobAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobService_JobAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServiceServer).JobAdd(ctx, req.(*JobAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobService_JobList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JobListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobServiceServer).JobList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobService_JobList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServiceServer).JobList(ctx, req.(*JobListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobService_JobUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JobUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobServiceServer).JobUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobService_JobUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServiceServer).JobUpdate(ctx, req.(*JobUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobService_JobDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JobDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobServiceServer).JobDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobService_JobDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServiceServer).JobDelete(ctx, req.(*JobDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// JobService_ServiceDesc is the grpc.ServiceDesc for JobService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var JobService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.JobService",
-	HandlerType: (*JobServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "JobAdd",
-			Handler:    _JobService_JobAdd_Handler,
-		},
-		{
-			MethodName: "JobList",
-			Handler:    _JobService_JobList_Handler,
-		},
-		{
-			MethodName: "JobUpdate",
-			Handler:    _JobService_JobUpdate_Handler,
-		},
-		{
-			MethodName: "JobDelete",
-			Handler:    _JobService_JobDelete_Handler,
+			MethodName: "QueryDeptAndPostList",
+			Handler:    _UserService_QueryDeptAndPostList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

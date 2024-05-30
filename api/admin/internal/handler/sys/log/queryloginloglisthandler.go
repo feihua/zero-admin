@@ -11,7 +11,7 @@ import (
 
 func QueryLoginLogListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.ListLoginLogReq
+		var req types.QueryLoginLogListReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return

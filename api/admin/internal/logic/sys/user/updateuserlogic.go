@@ -33,19 +33,20 @@ func NewUpdateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateU
 
 // UpdateUser 更新用户信息
 func (l *UpdateUserLogic) UpdateUser(req *types.UpdateUserReq) (*types.UpdateUserResp, error) {
-	userUpdateReq := sysclient.UserUpdateReq{
-		Id:         req.Id,
-		Email:      req.Email,
-		Mobile:     req.Mobile,
-		UserName:   req.Name,
-		NickName:   req.NickName,
+	userUpdateReq := sysclient.UpdateUserReq{
+		Avatar:     req.Avatar,
 		DeptId:     req.DeptId,
+		Email:      req.Email,
+		Id:         req.Id,
+		Mobile:     req.Mobile,
+		NickName:   req.NickName,
+		Remark:     req.Remark,
 		UpdateBy:   l.ctx.Value("userName").(string),
-		UserStatus: req.Status,
-		JobId:      req.JobId,
+		UserName:   req.UserName,
+		UserStatus: req.UserStatus,
 	}
 
-	if _, err := l.svcCtx.UserService.UserUpdate(l.ctx, &userUpdateReq); err != nil {
+	if _, err := l.svcCtx.UserService.UpdateUser(l.ctx, &userUpdateReq); err != nil {
 		logc.Errorf(l.ctx, "更新用户信息失败,参数:%+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())

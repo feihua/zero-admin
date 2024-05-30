@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteDictItemLogic 字典项
+// DeleteDictItemLogic 字典数据
 /*
 Author: LiuFeiHua
 Date: 2024/5/28 16:01
@@ -32,9 +32,9 @@ func NewDeleteDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *De
 	}
 }
 
-// DeleteDictItem 删除字典项
+// DeleteDictItem 删除字典数据
 func (l *DeleteDictItemLogic) DeleteDictItem(req *types.DeleteDictItemReq) (resp *types.DeleteDictItemResp, err error) {
-	_, err = l.svcCtx.DictItemService.DeleteDictItem(l.ctx, &sysclient.DictItemDeleteReq{
+	_, err = l.svcCtx.DictItemService.DeleteDictItem(l.ctx, &sysclient.DeleteDictItemReq{
 		Ids: req.Ids,
 	})
 

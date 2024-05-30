@@ -22,28 +22,40 @@ func NewRoleServiceServer(svcCtx *svc.ServiceContext) *RoleServiceServer {
 	}
 }
 
-// 添加角色
-func (s *RoleServiceServer) RoleAdd(ctx context.Context, in *sysclient.RoleAddReq) (*sysclient.RoleAddResp, error) {
-	l := roleservicelogic.NewRoleAddLogic(ctx, s.svcCtx)
-	return l.RoleAdd(in)
+// 添加角色信息表
+func (s *RoleServiceServer) AddRole(ctx context.Context, in *sysclient.AddRoleReq) (*sysclient.AddRoleResp, error) {
+	l := roleservicelogic.NewAddRoleLogic(ctx, s.svcCtx)
+	return l.AddRole(in)
 }
 
-// 查询角色
-func (s *RoleServiceServer) RoleList(ctx context.Context, in *sysclient.RoleListReq) (*sysclient.RoleListResp, error) {
-	l := roleservicelogic.NewRoleListLogic(ctx, s.svcCtx)
-	return l.RoleList(in)
+// 删除角色信息表
+func (s *RoleServiceServer) DeleteRole(ctx context.Context, in *sysclient.DeleteRoleReq) (*sysclient.DeleteRoleResp, error) {
+	l := roleservicelogic.NewDeleteRoleLogic(ctx, s.svcCtx)
+	return l.DeleteRole(in)
 }
 
-// 更新角色
-func (s *RoleServiceServer) RoleUpdate(ctx context.Context, in *sysclient.RoleUpdateReq) (*sysclient.RoleUpdateResp, error) {
-	l := roleservicelogic.NewRoleUpdateLogic(ctx, s.svcCtx)
-	return l.RoleUpdate(in)
+// 更新角色信息表
+func (s *RoleServiceServer) UpdateRole(ctx context.Context, in *sysclient.UpdateRoleReq) (*sysclient.UpdateRoleResp, error) {
+	l := roleservicelogic.NewUpdateRoleLogic(ctx, s.svcCtx)
+	return l.UpdateRole(in)
 }
 
-// 删除角色
-func (s *RoleServiceServer) RoleDelete(ctx context.Context, in *sysclient.RoleDeleteReq) (*sysclient.RoleDeleteResp, error) {
-	l := roleservicelogic.NewRoleDeleteLogic(ctx, s.svcCtx)
-	return l.RoleDelete(in)
+// 更新角色信息表状态
+func (s *RoleServiceServer) UpdateRoleStatus(ctx context.Context, in *sysclient.UpdateRoleStatusReq) (*sysclient.UpdateRoleStatusResp, error) {
+	l := roleservicelogic.NewUpdateRoleStatusLogic(ctx, s.svcCtx)
+	return l.UpdateRoleStatus(in)
+}
+
+// 查询角色信息表详情
+func (s *RoleServiceServer) QueryRoleDetail(ctx context.Context, in *sysclient.QueryRoleDetailReq) (*sysclient.QueryRoleDetailResp, error) {
+	l := roleservicelogic.NewQueryRoleDetailLogic(ctx, s.svcCtx)
+	return l.QueryRoleDetail(in)
+}
+
+// 查询角色信息表列表
+func (s *RoleServiceServer) QueryRoleList(ctx context.Context, in *sysclient.QueryRoleListReq) (*sysclient.QueryRoleListResp, error) {
+	l := roleservicelogic.NewQueryRoleListLogic(ctx, s.svcCtx)
+	return l.QueryRoleList(in)
 }
 
 // 查询用户与角色的关联

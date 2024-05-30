@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加字典数据表
+message AddDictItemReq {
+  string create_by = 1; //创建者
+  string dict_label = 2; //字典标签
+  int32 dict_sort = 3; //排序
+  int32 dict_status = 4; //字典状态
+  string dict_type = 5; //字典类型
+  string dict_value = 6; //字典键值
+  int32 is_default = 7; //是否默认  0：否  1：是
+  string remark = 8; //备注信息
+
+}
+
+message AddDictItemResp {
+  string pong = 1;
+}
+
+// 删除字典数据表
+message DeleteDictItemReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteDictItemResp {
+  string pong = 1;
+}
+
+// 更新字典数据表
+message UpdateDictItemReq {
+  string dict_label = 1; //字典标签
+  int32 dict_sort = 2; //排序
+  int32 dict_status = 3; //字典状态
+  string dict_type = 4; //字典类型
+  string dict_value = 5; //字典键值
+  int64 id = 6; //编号
+  int32 is_default = 7; //是否默认  0：否  1：是
+  string remark = 8; //备注信息
+  string update_by = 9; //更新者
+
+}
+
+message UpdateDictItemResp {
+  string pong = 1;
+}
+
+// 更新字典数据表状态
+message UpdateDictItemStatusReq {
+  int32 dict_status = 1; //字典状态
+  repeated int64 ids = 2; //编号
+  string update_by = 3; //更新者
+
+}
+
+message UpdateDictItemStatusResp {
+  string pong = 1;
+}
+
+// 查询字典数据表详情
+message QueryDictItemDetailReq {
+    int64 id = 1;
+}
+
+message QueryDictItemDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string dict_label = 3; //字典标签
+  int32 dict_sort = 4; //排序
+  int32 dict_status = 5; //字典状态
+  string dict_type = 6; //字典类型
+  string dict_value = 7; //字典键值
+  int64 id = 8; //编号
+  int32 is_default = 9; //是否默认  0：否  1：是
+  string remark = 11; //备注信息
+  string update_by = 12; //更新者
+  string update_time = 13; //更新时间
+
+}
+
+// 分页查询字典数据表列表
+message QueryDictItemListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string dict_label = 3; //字典标签
+  int32 dict_status = 5; //字典状态
+  string dict_type = 6; //字典类型
+  int32 is_default = 9; //是否默认  0：否  1：是
+}
+
+message DictItemListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string dict_label = 3; //字典标签
+  int32 dict_sort = 4; //排序
+  int32 dict_status = 5; //字典状态
+  string dict_type = 6; //字典类型
+  string dict_value = 7; //字典键值
+  int64 id = 8; //编号
+  int32 is_default = 9; //是否默认  0：否  1：是
+  string remark = 11; //备注信息
+  string update_by = 12; //更新者
+  string update_time = 13; //更新时间
+
+}
+
+message QueryDictItemListResp {
+  int64 total = 1;
+  repeated  DictItemListData list = 2;
+}
+
+// 字典数据表
+service DictItemService {
+  // 添加字典数据表
+  rpc AddDictItem(AddDictItemReq) returns (AddDictItemResp){}
+  // 删除字典数据表
+  rpc DeleteDictItem(DeleteDictItemReq) returns (DeleteDictItemResp){}
+  // 更新字典数据表
+  rpc UpdateDictItem(UpdateDictItemReq) returns (UpdateDictItemResp ){}
+  // 更新字典数据表状态
+  rpc UpdateDictItemStatus(UpdateDictItemStatusReq) returns (UpdateDictItemStatusResp ){}
+  // 查询字典数据表详情
+   rpc QueryDictItemDetail(QueryDictItemDetailReq) returns (QueryDictItemDetailResp){}
+  // 查询字典数据表列表
+  rpc QueryDictItemList(QueryDictItemListReq) returns (QueryDictItemListResp){}
+
+
+}

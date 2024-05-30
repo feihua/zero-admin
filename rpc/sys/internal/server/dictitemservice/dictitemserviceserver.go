@@ -22,32 +22,38 @@ func NewDictItemServiceServer(svcCtx *svc.ServiceContext) *DictItemServiceServer
 	}
 }
 
-// 添加字典项表
-func (s *DictItemServiceServer) AddDictItem(ctx context.Context, in *sysclient.DictItemAddReq) (*sysclient.DictItemAddResp, error) {
+// 添加字典数据表
+func (s *DictItemServiceServer) AddDictItem(ctx context.Context, in *sysclient.AddDictItemReq) (*sysclient.AddDictItemResp, error) {
 	l := dictitemservicelogic.NewAddDictItemLogic(ctx, s.svcCtx)
 	return l.AddDictItem(in)
 }
 
-// 删除字典项表
-func (s *DictItemServiceServer) DeleteDictItem(ctx context.Context, in *sysclient.DictItemDeleteReq) (*sysclient.DictItemDeleteResp, error) {
+// 删除字典数据表
+func (s *DictItemServiceServer) DeleteDictItem(ctx context.Context, in *sysclient.DeleteDictItemReq) (*sysclient.DeleteDictItemResp, error) {
 	l := dictitemservicelogic.NewDeleteDictItemLogic(ctx, s.svcCtx)
 	return l.DeleteDictItem(in)
 }
 
-// 更新字典项表
-func (s *DictItemServiceServer) UpdateDictItem(ctx context.Context, in *sysclient.DictItemUpdateReq) (*sysclient.DictItemUpdateResp, error) {
+// 更新字典数据表
+func (s *DictItemServiceServer) UpdateDictItem(ctx context.Context, in *sysclient.UpdateDictItemReq) (*sysclient.UpdateDictItemResp, error) {
 	l := dictitemservicelogic.NewUpdateDictItemLogic(ctx, s.svcCtx)
 	return l.UpdateDictItem(in)
 }
 
-// 根据条件查询单条字典项表记录
-func (s *DictItemServiceServer) QueryDictItem(ctx context.Context, in *sysclient.DictItemReq) (*sysclient.DictItemResp, error) {
-	l := dictitemservicelogic.NewQueryDictItemLogic(ctx, s.svcCtx)
-	return l.QueryDictItem(in)
+// 更新字典数据表状态
+func (s *DictItemServiceServer) UpdateDictItemStatus(ctx context.Context, in *sysclient.UpdateDictItemStatusReq) (*sysclient.UpdateDictItemStatusResp, error) {
+	l := dictitemservicelogic.NewUpdateDictItemStatusLogic(ctx, s.svcCtx)
+	return l.UpdateDictItemStatus(in)
 }
 
-// 查询字典项表列表
-func (s *DictItemServiceServer) QueryDictItemList(ctx context.Context, in *sysclient.DictItemListReq) (*sysclient.DictItemListResp, error) {
+// 查询字典数据表详情
+func (s *DictItemServiceServer) QueryDictItemDetail(ctx context.Context, in *sysclient.QueryDictItemDetailReq) (*sysclient.QueryDictItemDetailResp, error) {
+	l := dictitemservicelogic.NewQueryDictItemDetailLogic(ctx, s.svcCtx)
+	return l.QueryDictItemDetail(in)
+}
+
+// 查询字典数据表列表
+func (s *DictItemServiceServer) QueryDictItemList(ctx context.Context, in *sysclient.QueryDictItemListReq) (*sysclient.QueryDictItemListResp, error) {
 	l := dictitemservicelogic.NewQueryDictItemListLogic(ctx, s.svcCtx)
 	return l.QueryDictItemList(in)
 }

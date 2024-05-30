@@ -1,0 +1,134 @@
+info (
+	desc:   "字典类型"
+	author: "liufeihua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加字典类型
+	AddDictTypeReq {
+		DictName   string `json:"dictName"` //字典名称
+		DictStatus int32  `json:"dictStatus"` //字典状态
+		DictType   string `json:"dictType"` //字典类型
+		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
+		Remark     string `json:"remark"` //备注信息
+	}
+	AddDictTypeResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 删除字典类型
+	DeleteDictTypeReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeleteDictTypeResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新字典类型
+	UpdateDictTypeReq {
+		DictName   string `json:"dictName"` //字典名称
+		DictStatus int32  `json:"dictStatus"` //字典状态
+		DictType   string `json:"dictType"` //字典类型
+		Id         int64  `json:"id"` //编号
+		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
+		Remark     string `json:"remark"` //备注信息
+	}
+	UpdateDictTypeResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 批量更新字典类型状态
+	UpdateDictTypeStatusReq {
+		DictStatus int32   `json:"dictStatus"` //字典状态
+		DictIds    []int64 `json:"dictIds"` //编号
+	}
+	UpdateDictTypeStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询字典类型详情
+	QueryDictTypeDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryDictTypeDetailData {
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		DictName   string `json:"dictName"` //字典名称
+		DictStatus int32  `json:"dictStatus"` //字典状态
+		DictType   string `json:"dictType"` //字典类型
+		Id         int64  `json:"id"` //编号
+		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
+		Remark     string `json:"remark"` //备注信息
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryDictTypeDetailResp {
+		Code    string                  `json:"code"`
+		Message string                  `json:"message"`
+		Data    QueryDictTypeDetailData `json:"data"`
+	}
+	// 分页查询字典类型列
+	QueryDictTypeListReq {
+		Current    int64  `form:"current,default=1"` //第几页
+		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+		DictName   string `form:"dictName,optional"` //字典名称
+		DictStatus int32  `form:"dictStatus,optional"` //字典状态
+		DictType   string `form:"dictType,optional"` //字典类型
+		IsSystem   int32  `form:"isSystem,optional"` //是否系统预留  0：否  1：是
+	}
+	QueryDictTypeListData {
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		DictName   string `json:"dictName"` //字典名称
+		DictStatus int32  `json:"dictStatus"` //字典状态
+		DictType   string `json:"dictType"` //字典类型
+		Id         int64  `json:"id"` //编号
+		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
+		Remark     string `json:"remark"` //备注信息
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryDictTypeListResp {
+		Code     string                   `json:"code"`
+		Message  string                   `json:"message"`
+		Current  int64                    `json:"current,default=1"`
+		Data     []*QueryDictTypeListData `json:"data"`
+		PageSize int64                    `json:"pageSize,default=20"`
+		Success  bool                     `json:"success"`
+		Total    int64                    `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      sys/dict_type
+	prefix:     /api/sys/dictType
+)
+service admin-api {
+	// 添加字典类型
+	@handler AddDictType
+	post /addDictType (AddDictTypeReq) returns (AddDictTypeResp)
+
+	// 删除字典类型
+	@handler DeleteDictType
+	get /deleteDictType (DeleteDictTypeReq) returns (DeleteDictTypeResp)
+
+	// 更新字典类型
+	@handler UpdateDictType
+	post /updateDictType (UpdateDictTypeReq) returns (UpdateDictTypeResp)
+
+	// 批量更新字典类型状态
+	@handler UpdateDictTypeStatus
+	post /updateDictTypeStatus (UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp)
+
+	// 查询字典类型详情
+	@handler QueryDictTypeDetail
+	get /queryDictTypeDetail (QueryDictTypeDetailReq) returns (QueryDictTypeDetailResp)
+
+	// 分页查询字典类型列
+	@handler QueryDictTypeList
+	get /queryDictTypeList (QueryDictTypeListReq) returns (QueryDictTypeListResp)
+}
+

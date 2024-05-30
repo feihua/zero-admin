@@ -46,12 +46,12 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendsubjectservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/deptservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/dictitemservice"
-	"github.com/feihua/zero-admin/rpc/sys/client/dictservice"
-	"github.com/feihua/zero-admin/rpc/sys/client/jobservice"
+	"github.com/feihua/zero-admin/rpc/sys/client/dicttypeservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/loginlogservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/menuservice"
+	"github.com/feihua/zero-admin/rpc/sys/client/operatelogservice"
+	"github.com/feihua/zero-admin/rpc/sys/client/postservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/roleservice"
-	"github.com/feihua/zero-admin/rpc/sys/client/syslogservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/userservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/growthchangehistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/integrationchangehistoryservice"
@@ -94,15 +94,15 @@ type ServiceContext struct {
 	MemberTagService                     membertagservice.MemberTagService
 	MemberTaskService                    membertaskservice.MemberTaskService
 	//系统相关
-	DeptService     deptservice.DeptService
-	DictService     dictservice.DictService
-	DictItemService dictitemservice.DictItemService
-	JobService      jobservice.JobService
-	LoginLogService loginlogservice.LoginLogService
-	SysLogService   syslogservice.SysLogService
-	MenuService     menuservice.MenuService
-	RoleService     roleservice.RoleService
-	UserService     userservice.UserService
+	DeptService       deptservice.DeptService
+	DictTypeService   dicttypeservice.DictTypeService
+	DictItemService   dictitemservice.DictItemService
+	PostService       postservice.PostService
+	LoginLogService   loginlogservice.LoginLogService
+	Operatelogservice operatelogservice.OperateLogService
+	MenuService       menuservice.MenuService
+	RoleService       roleservice.RoleService
+	UserService       userservice.UserService
 	//商品相关
 	AlbumPicService                         albumpicservice.AlbumPicService
 	AlbumService                            albumservice.AlbumService
@@ -159,7 +159,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	omsClient := zrpc.MustNewClient(c.OmsRpc)
 	smsClient := zrpc.MustNewClient(c.SmsRpc)
 	cmsClient := zrpc.MustNewClient(c.CmsRpc)
-	logService := syslogservice.NewSysLogService(sysClient)
+	operateLogService := operatelogservice.NewOperateLogService(sysClient)
 	return &ServiceContext{
 		Config:                               c,
 		GrowthChangeHistoryService:           growthchangehistoryservice.NewGrowthChangeHistoryService(umsClient),
@@ -178,17 +178,17 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		MemberTagService:                     membertagservice.NewMemberTagService(umsClient),
 		MemberTaskService:                    membertaskservice.NewMemberTaskService(umsClient),
 
-		DeptService:     deptservice.NewDeptService(sysClient),
-		DictService:     dictservice.NewDictService(sysClient),
-		DictItemService: dictitemservice.NewDictItemService(sysClient),
-		JobService:      jobservice.NewJobService(sysClient),
-		LoginLogService: loginlogservice.NewLoginLogService(sysClient),
-		SysLogService:   logService,
-		MenuService:     menuservice.NewMenuService(sysClient),
-		RoleService:     roleservice.NewRoleService(sysClient),
-		UserService:     userservice.NewUserService(sysClient),
-		CheckUrl:        middleware.NewCheckUrlMiddleware(newRedis).Handle,
-		AddLog:          middleware.NewAddLogMiddleware(logService).Handle,
+		DeptService:       deptservice.NewDeptService(sysClient),
+		DictTypeService:   dicttypeservice.NewDictTypeService(sysClient),
+		DictItemService:   dictitemservice.NewDictItemService(sysClient),
+		PostService:       postservice.NewPostService(sysClient),
+		LoginLogService:   loginlogservice.NewLoginLogService(sysClient),
+		Operatelogservice: operateLogService,
+		MenuService:       menuservice.NewMenuService(sysClient),
+		RoleService:       roleservice.NewRoleService(sysClient),
+		UserService:       userservice.NewUserService(sysClient),
+		CheckUrl:          middleware.NewCheckUrlMiddleware(newRedis).Handle,
+		AddLog:            middleware.NewAddLogMiddleware(operateLogService).Handle,
 
 		AlbumPicService:                         albumpicservice.NewAlbumPicService(pmsClient),
 		AlbumService:                            albumservice.NewAlbumService(pmsClient),

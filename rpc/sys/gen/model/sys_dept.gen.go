@@ -10,7 +10,7 @@ import (
 
 const TableNameSysDept = "sys_dept"
 
-// SysDept 部门管理
+// SysDept 部门信息表
 type SysDept struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
 	DeptName   string     `gorm:"column:dept_name;not null;comment:部门名称" json:"dept_name"`                               // 部门名称

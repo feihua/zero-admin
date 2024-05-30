@@ -1,0 +1,98 @@
+info (
+	desc:   "系统登录日志"
+	author: "liufeihua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 删除系统登录日志
+	DeleteLoginLogReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeleteLoginLogResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询系统登录日志详情
+	QueryLoginLogDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryLoginLogDetailData {
+		Browser     string `json:"browser"` //浏览器
+		Id          int64  `json:"id"` //编号
+		IpAddress   string `json:"ipAddress"` //IP地址
+		LoginStatus string `json:"loginStatus"` //登录状态
+		LoginTime   string `json:"loginTime"` //登录时间
+		Os          string `json:"os"` //操作信息
+		UserName    string `json:"userName"` //用户名
+	}
+	QueryLoginLogDetailResp {
+		Code    string                  `json:"code"`
+		Message string                  `json:"message"`
+		Data    QueryLoginLogDetailData `json:"data"`
+	}
+	// 分页查询系统登录日志列
+	QueryLoginLogListReq {
+		Current     int64  `form:"current,default=1"` //第几页
+		PageSize    int64  `form:"pageSize,default=20"` //每页的数量
+		Browser     string `form:"browser,optional"` //浏览器
+		IpAddress   string `form:"ipAddress,optional"` //IP地址
+		LoginStatus string `form:"loginStatus,optional"` //登录状态
+		Os          string `form:"os,optional"` //操作信息
+		UserName    string `form:"userName,optional"` //用户名
+	}
+	QueryLoginLogListData {
+		Browser     string `json:"browser"` //浏览器
+		Id          int64  `json:"id"` //编号
+		IpAddress   string `json:"ipAddress"` //IP地址
+		LoginStatus string `json:"loginStatus"` //登录状态
+		LoginTime   string `json:"loginTime"` //登录时间
+		Os          string `json:"os"` //操作信息
+		UserName    string `json:"userName"` //用户名
+	}
+	QueryLoginLogListResp {
+		Code     string                   `json:"code"`
+		Message  string                   `json:"message"`
+		Current  int64                    `json:"current,default=1"`
+		Data     []*QueryLoginLogListData `json:"data"`
+		PageSize int64                    `json:"pageSize,default=20"`
+		Success  bool                     `json:"success"`
+		Total    int64                    `json:"total"`
+	}
+
+	QueryStatisticsLoginLogResp {
+		Code    string                 `json:"code"`
+		Message string                 `json:"message"`
+		Data    QueryStatisticsLoginLogData `json:"data"`
+	}
+	QueryStatisticsLoginLogData {
+		DayLoginCount   int32 `json:"dayLoginCount"` //查询当天登录人数（根据IP）
+		WeekLoginCount  int32 `json:"weekLoginCount"` //统计当前周登录人数（根据IP）
+		MonthLoginCount int32 `json:"monthLoginCount"` //统计当前月登录人数（根据IP）
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      sys/log
+	prefix:     /api/sys/log
+)
+service admin-api {
+	// 删除系统登录日志
+	@handler DeleteLoginLog
+	get /deleteLoginLog (DeleteLoginLogReq) returns (DeleteLoginLogResp)
+
+	// 查询系统登录日志详情
+	@handler QueryLoginLogDetail
+	get /queryLoginLogDetail (QueryLoginLogDetailReq) returns (QueryLoginLogDetailResp)
+
+	// 分页查询系统登录日志列
+	@handler QueryLoginLogList
+	get /queryLoginLogList (QueryLoginLogListReq) returns (QueryLoginLogListResp)
+
+	// 统计后台用户登录信息
+	@handler QueryStatisticsLoginLog
+	get /queryStatisticsLoginLog returns (QueryStatisticsLoginLogResp)
+}
+

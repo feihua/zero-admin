@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateDictItemLogic 字典项
+// UpdateDictItemLogic 字典数据
 /*
 Author: LiuFeiHua
 Date: 2024/5/28 16:01
@@ -32,12 +32,9 @@ func NewUpdateDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 	}
 }
 
-// UpdateDictItem 更新字典项
+// UpdateDictItem 更新字典数据
 func (l *UpdateDictItemLogic) UpdateDictItem(req *types.UpdateDictItemReq) (resp *types.UpdateDictItemResp, err error) {
-	_, err = l.svcCtx.DictItemService.UpdateDictItem(l.ctx, &sysclient.DictItemUpdateReq{
-		UpdateBy:   l.ctx.Value("userName").(string),
-		Remark:     req.Remark,
-		DelFlag:    req.DictStatus,
+	_, err = l.svcCtx.DictItemService.UpdateDictItem(l.ctx, &sysclient.UpdateDictItemReq{
 		DictLabel:  req.DictLabel,
 		DictSort:   req.DictSort,
 		DictStatus: req.DictStatus,
@@ -45,6 +42,8 @@ func (l *UpdateDictItemLogic) UpdateDictItem(req *types.UpdateDictItemReq) (resp
 		DictValue:  req.DictValue,
 		Id:         req.Id,
 		IsDefault:  req.IsDefault,
+		Remark:     req.Remark,
+		UpdateBy:   l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

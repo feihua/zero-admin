@@ -1,0 +1,133 @@
+info (
+	desc:   "岗位管理"
+	author: "liufeihua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加岗位管理
+	AddPostReq {
+		PostCode   string `json:"postCode"` //岗位编码
+		PostName   string `json:"postName"` //岗位名称
+		PostSort   int32  `json:"postSort"` //岗位排序
+		PostStatus int32  `json:"postStatus"` //岗位状态
+		Remark     string `json:"remark"` //备注信息
+	}
+	AddPostResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 删除岗位管理
+	DeletePostReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeletePostResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新岗位管理
+	UpdatePostReq {
+		Id         int64  `json:"id"` //编号
+		PostCode   string `json:"postCode"` //岗位编码
+		PostName   string `json:"postName"` //岗位名称
+		PostSort   int32  `json:"postSort"` //岗位排序
+		PostStatus int32  `json:"postStatus"` //岗位状态
+		Remark     string `json:"remark"` //备注信息
+	}
+	UpdatePostResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 批量更新岗位管理状态
+	UpdatePostStatusReq {
+		PostIds    []int64 `json:"postIds"` //编号
+		PostStatus int32   `json:"postStatus"` //岗位状态
+	}
+	UpdatePostStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询岗位管理详情
+	QueryPostDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryPostDetailData {
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		Id         int64  `json:"id"` //编号
+		PostCode   string `json:"postCode"` //岗位编码
+		PostName   string `json:"postName"` //岗位名称
+		PostSort   int32  `json:"postSort"` //岗位排序
+		PostStatus int32  `json:"postStatus"` //岗位状态
+		Remark     string `json:"remark"` //备注信息
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryPostDetailResp {
+		Code    string              `json:"code"`
+		Message string              `json:"message"`
+		Data    QueryPostDetailData `json:"data"`
+	}
+	// 分页查询岗位管理列
+	QueryPostListReq {
+		Current    int64  `form:"current,default=1"` //第几页
+		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+		PostCode   string `form:"postCode,optional"` //岗位编码
+		PostName   string `form:"postName,optional"` //岗位名称
+		PostStatus int32  `form:"postStatus,optional"` //岗位状态
+	}
+	QueryPostListData {
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		Id         int64  `json:"id"` //编号
+		PostCode   string `json:"postCode"` //岗位编码
+		PostName   string `json:"postName"` //岗位名称
+		PostSort   int32  `json:"postSort"` //岗位排序
+		PostStatus int32  `json:"postStatus"` //岗位状态
+		Remark     string `json:"remark"` //备注信息
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryPostListResp {
+		Code     string               `json:"code"`
+		Message  string               `json:"message"`
+		Current  int64                `json:"current,default=1"`
+		Data     []*QueryPostListData `json:"data"`
+		PageSize int64                `json:"pageSize,default=20"`
+		Success  bool                 `json:"success"`
+		Total    int64                `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      sys/post
+	prefix:     /api/sys/post
+)
+service admin-api {
+	// 添加岗位管理
+	@handler AddPost
+	post /addPost (AddPostReq) returns (AddPostResp)
+
+	// 删除岗位管理
+	@handler DeletePost
+	get /deletePost (DeletePostReq) returns (DeletePostResp)
+
+	// 更新岗位管理
+	@handler UpdatePost
+	post /updatePost (UpdatePostReq) returns (UpdatePostResp)
+
+	// 批量更新岗位管理状态
+	@handler UpdatePostStatus
+	post /updatePostStatus (UpdatePostStatusReq) returns (UpdatePostStatusResp)
+
+	// 查询岗位管理详情
+	@handler QueryPostDetail
+	get /queryPostDetail (QueryPostDetailReq) returns (QueryPostDetailResp)
+
+	// 分页查询岗位管理列
+	@handler QueryPostList
+	get /queryPostList (QueryPostListReq) returns (QueryPostListResp)
+}
+

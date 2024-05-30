@@ -10,7 +10,7 @@ import (
 
 const TableNameSysUser = "sys_user"
 
-// SysUser 用户管理
+// SysUser 用户信息表
 type SysUser struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
 	UserName   string     `gorm:"column:user_name;not null;comment:用户名" json:"user_name"`                                // 用户名

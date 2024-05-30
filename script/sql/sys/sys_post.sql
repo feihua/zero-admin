@@ -13,5 +13,5 @@ create table sys_post
     update_by   varchar(50)  default ''                not null comment '更新者',
     update_time datetime                               null on update CURRENT_TIMESTAMP comment '更新时间'
 )
-    comment '职位管理';
+    comment '岗位管理';
 

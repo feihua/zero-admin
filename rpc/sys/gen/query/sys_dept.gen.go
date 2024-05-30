@@ -48,7 +48,7 @@ func newSysDept(db *gorm.DB, opts ...gen.DOOption) sysDept {
 	return _sysDept
 }
 
-// sysDept 部门管理
+// sysDept 部门信息表
 type sysDept struct {
 	sysDeptDo sysDeptDo
 

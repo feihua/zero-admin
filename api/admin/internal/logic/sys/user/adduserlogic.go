@@ -33,17 +33,19 @@ func NewAddUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddUserLog
 
 // AddUser 新增用户
 func (l *AddUserLogic) AddUser(req *types.AddUserReq) (*types.AddUserResp, error) {
-	userAddReq := sysclient.UserAddReq{
+	userAddReq := sysclient.AddUserReq{
+		Avatar:     req.Avatar,
+		CreateBy:   l.ctx.Value("userName").(string),
+		DeptId:     req.DeptId,
 		Email:      req.Email,
 		Mobile:     req.Mobile,
-		UserName:   req.Name,
 		NickName:   req.NickName,
-		DeptId:     req.DeptId,
-		CreateBy:   l.ctx.Value("userName").(string),
-		JobId:      req.JobId,
-		UserStatus: req.Status,
+		Password:   req.Password,
+		Remark:     req.Remark,
+		UserName:   req.UserName,
+		UserStatus: req.UserStatus,
 	}
-	_, err := l.svcCtx.UserService.UserAdd(l.ctx, &userAddReq)
+	_, err := l.svcCtx.UserService.AddUser(l.ctx, &userAddReq)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "添加用户信息失败,参数:%+v,异常:%s", req, err.Error())

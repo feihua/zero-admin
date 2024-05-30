@@ -1,4 +1,4 @@
-create table sys_dict
+create table sys_dict_type
 (
     id          bigint auto_increment comment '编号'
         primary key,
@@ -14,7 +14,7 @@ create table sys_dict
     update_time datetime                               null on update CURRENT_TIMESTAMP comment '更新时间'
 
 )
-    comment '字典表';
+    comment '字典类型表';
 
 create table sys_dict_item
 (
@@ -34,5 +34,5 @@ create table sys_dict_item
     update_time datetime                               null on update CURRENT_TIMESTAMP comment '更新时间'
 
 )
-    comment '字典项表';
+    comment '字典数据表';
 

@@ -1,0 +1,64 @@
+package userservicelogic
+
+import (
+	"context"
+	"errors"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
+	"github.com/zeromicro/go-zero/core/logc"
+
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+// QueryUserDetailLogic 查询用户信息表详情
+/*
+Author: LiuFeiHua
+Date: 2024/5/30 14:33
+*/
+type QueryUserDetailLogic struct {
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+	logx.Logger
+}
+
+func NewQueryUserDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryUserDetailLogic {
+	return &QueryUserDetailLogic{
+		ctx:    ctx,
+		svcCtx: svcCtx,
+		Logger: logx.WithContext(ctx),
+	}
+}
+
+// QueryUserDetail 查询用户信息表详情
+func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq) (*sysclient.QueryUserDetailResp, error) {
+	user, err := query.SysUser.WithContext(l.ctx).Where(query.SysUser.ID.Eq(in.Id)).First()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询用户信息表详情失败,参数：%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询用户信息表详情失败")
+	}
+
+	data := &sysclient.QueryUserDetailResp{
+		Avatar:     user.Avatar,
+		CreateBy:   user.CreateBy,
+		CreateTime: user.CreateTime.Format("2006-01-02 15:04:05"),
+		DeptId:     user.DeptID,
+		Email:      user.Email,
+		Id:         user.ID,
+		UserStatus: user.UserStatus,
+		LoginIp:    user.LoginIP,
+		LoginTime:  common.TimeToString(user.LoginTime),
+		Mobile:     user.Mobile,
+		NickName:   user.NickName,
+		Remark:     user.Remark,
+		UpdateBy:   user.UpdateBy,
+		UpdateTime: common.TimeToString(user.UpdateTime),
+		UserName:   user.UserName,
+	}
+
+	logc.Infof(l.ctx, "查询用户信息表详情,参数：%+v,响应：%+v", in, data)
+	return data, nil
+}

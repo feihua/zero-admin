@@ -31,10 +31,8 @@ func NewQueryDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 }
 
 // QueryDeptList 查询部门列表
-func (l *QueryDeptListLogic) QueryDeptList(req *types.ListDeptReq) (*types.ListDeptResp, error) {
-	resp, err := l.svcCtx.DeptService.DeptList(l.ctx, &sysclient.DeptListReq{
-		DeptName: req.Name,
-	})
+func (l *QueryDeptListLogic) QueryDeptList(req *types.QueryDeptListReq) (*types.QueryDeptListResp, error) {
+	resp, err := l.svcCtx.DeptService.QueryDeptList(l.ctx, &sysclient.QueryDeptListReq{})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询部门列表,参数: %+v,异常:%s", req, err.Error())
@@ -42,24 +40,28 @@ func (l *QueryDeptListLogic) QueryDeptList(req *types.ListDeptReq) (*types.ListD
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.ListDeptData
+	var list []*types.QueryDeptListData
 
 	for _, dept := range resp.List {
-		list = append(list, &types.ListDeptData{
-			Id:         dept.Id,
-			DeptName:   dept.DeptName,
-			ParentId:   dept.ParentId,
-			OrderNum:   dept.OrderNum,
+		list = append(list, &types.QueryDeptListData{
 			CreateBy:   dept.CreateBy,
 			CreateTime: dept.CreateTime,
+			DeptName:   dept.DeptName,
+			DeptSort:   dept.DeptSort,
+			DeptStatus: dept.DeptStatus,
+			Email:      dept.Email,
+			Id:         dept.Id,
+			Leader:     dept.Leader,
+			ParentId:   dept.ParentId,
+			ParentIds:  dept.ParentIds,
+			Phone:      dept.Phone,
+			Remark:     dept.Remark,
 			UpdateBy:   dept.UpdateBy,
 			UpdateTime: dept.UpdateTime,
-			DelFlag:    dept.DelFlag,
-			ParentIds:  dept.ParentIds,
 		})
 	}
 
-	return &types.ListDeptResp{
+	return &types.QueryDeptListResp{
 		Code:    "000000",
 		Message: "查询部门成功",
 		Data:    list,

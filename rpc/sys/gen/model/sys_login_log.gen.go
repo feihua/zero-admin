@@ -10,7 +10,7 @@ import (
 
 const TableNameSysLoginLog = "sys_login_log"
 
-// SysLoginLog 系统登录日志
+// SysLoginLog 系统登录日志表
 type SysLoginLog struct {
 	ID          int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                        // 编号
 	UserName    string    `gorm:"column:user_name;not null;comment:用户名" json:"user_name"`                              // 用户名

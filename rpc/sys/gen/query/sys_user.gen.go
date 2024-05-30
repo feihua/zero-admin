@@ -51,7 +51,7 @@ func newSysUser(db *gorm.DB, opts ...gen.DOOption) sysUser {
 	return _sysUser
 }
 
-// sysUser 用户管理
+// sysUser 用户信息表
 type sysUser struct {
 	sysUserDo sysUserDo
 

@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 删除系统登录日志表
+message DeleteLoginLogReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteLoginLogResp {
+  string pong = 1;
+}
+// 查询系统登录日志表详情
+message QueryLoginLogDetailReq {
+    int64 id = 1;
+}
+
+message QueryLoginLogDetailResp {
+  string browser = 1; //浏览器
+  int64 id = 2; //编号
+  string ip_address = 3; //IP地址
+  string login_status = 4; //登录状态
+  string login_time = 5; //登录时间
+  string os = 6; //操作信息
+  string user_name = 7; //用户名
+
+}
+
+// 分页查询系统登录日志表列表
+message QueryLoginLogListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string browser = 5; //浏览器
+  string ip_address = 3; //IP地址
+  string login_status = 4; //登录状态
+  string os = 6; //操作信息
+  string user_name = 7; //用户名
+
+}
+
+message LoginLogListData {
+  string browser = 1; //浏览器
+  int64 id = 2; //编号
+  string ip_address = 3; //IP地址
+  string login_status = 4; //登录状态
+  string login_time = 5; //登录时间
+  string os = 6; //操作信息
+  string user_name = 7; //用户名
+
+}
+
+message QueryLoginLogListResp {
+  int64 total = 1;
+  repeated  LoginLogListData list = 2;
+}
+
+// 系统登录日志表
+service LoginLogService {
+  // 删除系统登录日志表
+  rpc DeleteLoginLog(DeleteLoginLogReq) returns (DeleteLoginLogResp){}
+  // 查询系统登录日志表详情
+   rpc QueryLoginLogDetail(QueryLoginLogDetailReq) returns (QueryLoginLogDetailResp){}
+  // 查询系统登录日志表列表
+  rpc QueryLoginLogList(QueryLoginLogListReq) returns (QueryLoginLogListResp){}
+
+
+}

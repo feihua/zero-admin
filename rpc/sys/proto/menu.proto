@@ -1,0 +1,156 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加菜单信息表
+message AddMenuReq {
+  string background_url = 1; //接口地址
+  string create_by = 2; //创建者
+  string vue_redirect = 3; //vue的路由重定向
+  string vue_icon = 4; //vue的图标
+  string vue_path = 5; //vue系统的path
+  string menu_icon = 6; //菜单图标
+  string menu_name = 7; //菜单名称
+  string menu_path = 8; //前端路由
+  string menu_perms = 9; //权限标识
+  int32 menu_sort = 10; //菜单排序
+  int32 menu_status = 11; //菜单状态
+  int32 menu_type = 12; //类型 0：目录,1：菜单,2：按钮,3：外链
+  int64 parent_id = 13; //父菜单ID，一级菜单为0
+  string remark = 14; //备注信息
+  string vue_component = 15; //vue的页面
+
+
+}
+
+message AddMenuResp {
+  string pong = 1;
+}
+
+// 删除菜单信息表
+message DeleteMenuReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMenuResp {
+  string pong = 1;
+}
+
+// 更新菜单信息表
+message UpdateMenuReq {
+  string background_url = 1; //接口地址
+  string create_by = 2; //创建者
+  string vue_redirect = 3; //vue的路由重定向
+  int64 id = 4; //编号
+  string vue_path = 5; //vue系统的path
+  string menu_icon = 6; //菜单图标
+  string menu_name = 7; //菜单名称
+  string menu_path = 8; //前端路由
+  string menu_perms = 9; //权限标识
+  int32 menu_sort = 10; //菜单排序
+  int32 menu_status = 11; //菜单状态
+  int32 menu_type = 12; //类型 0：目录,1：菜单,2：按钮,3：外链
+  int64 parent_id = 13; //父菜单ID，一级菜单为0
+  string remark = 14; //备注信息
+  string vue_component = 15; //vue的页面
+  string vue_icon = 16; //vue的图标
+
+}
+
+message UpdateMenuResp {
+  string pong = 1;
+}
+
+// 更新菜单信息表状态
+message UpdateMenuStatusReq {
+  repeated int64 ids = 1; //编号
+  int32 menu_status = 2; //菜单状态
+  string update_by = 3; //更新者
+
+}
+
+message UpdateMenuStatusResp {
+  string pong = 1;
+}
+
+// 查询菜单信息表详情
+message QueryMenuDetailReq {
+    int64 id = 1;
+}
+
+message QueryMenuDetailResp {
+  string background_url = 1; //接口地址
+  string create_by = 2; //创建者
+  string create_time = 3; //创建时间
+  int64 id = 4; //编号
+  string vue_redirect = 5; //vue的路由重定向
+  string menu_icon = 6; //菜单图标
+  string menu_name = 7; //菜单名称
+  string menu_path = 8; //前端路由
+  string menu_perms = 9; //权限标识
+  int32 menu_sort = 10; //菜单排序
+  int32 menu_status = 11; //菜单状态
+  int32 menu_type = 12; //类型 0：目录,1：菜单,2：按钮,3：外链
+  int64 parent_id = 13; //父菜单ID，一级菜单为0
+  string remark = 14; //备注信息
+  string update_by = 15; //更新者
+  string update_time = 16; //更新时间
+  string vue_component = 17; //vue的页面
+  string vue_icon = 18; //vue的图标
+  string vue_path = 19; //vue系统的path
+
+}
+
+// 分页查询菜单信息表列表
+message QueryMenuListReq {
+
+}
+
+message MenuListData {
+  string background_url = 1; //接口地址
+  string create_by = 2; //创建者
+  string create_time = 3; //创建时间
+  int64 id = 4; //编号
+  string vue_redirect = 5; //vue的路由重定向
+  string menu_icon = 6; //菜单图标
+  string menu_name = 7; //菜单名称
+  string menu_path = 8; //前端路由
+  string menu_perms = 9; //权限标识
+  int32 menu_sort = 10; //菜单排序
+  int32 menu_status = 11; //菜单状态
+  int32 menu_type = 12; //类型 0：目录,1：菜单,2：按钮,3：外链
+  int64 parent_id = 13; //父菜单ID，一级菜单为0
+  string remark = 14; //备注信息
+  string update_by = 15; //更新者
+  string update_time = 16; //更新时间
+  string vue_component = 17; //vue的页面
+  string vue_icon = 18; //vue的图标
+  string vue_path = 19; //vue系统的path
+
+
+}
+
+message QueryMenuListResp {
+  int64 total = 1;
+  repeated  MenuListData list = 2;
+}
+
+// 菜单信息表
+service MenuService {
+  // 添加菜单信息表
+  rpc AddMenu(AddMenuReq) returns (AddMenuResp){}
+  // 删除菜单信息表
+  rpc DeleteMenu(DeleteMenuReq) returns (DeleteMenuResp){}
+  // 更新菜单信息表
+  rpc UpdateMenu(UpdateMenuReq) returns (UpdateMenuResp ){}
+  // 更新菜单信息表状态
+  rpc UpdateMenuStatus(UpdateMenuStatusReq) returns (UpdateMenuStatusResp ){}
+  // 查询菜单信息表详情
+   rpc QueryMenuDetail(QueryMenuDetailReq) returns (QueryMenuDetailResp){}
+  // 查询菜单信息表列表
+  rpc QueryMenuList(QueryMenuListReq) returns (QueryMenuListResp){}
+
+
+}

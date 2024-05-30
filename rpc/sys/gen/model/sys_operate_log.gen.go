@@ -10,7 +10,7 @@ import (
 
 const TableNameSysOperateLog = "sys_operate_log"
 
-// SysOperateLog 系统操作日志
+// SysOperateLog 系统操作日志表
 type SysOperateLog struct {
 	ID                int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                                // 编号
 	Title             string    `gorm:"column:title;not null;comment:系统模块" json:"title"`                                             // 系统模块

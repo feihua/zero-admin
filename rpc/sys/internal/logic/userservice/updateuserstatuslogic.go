@@ -3,7 +3,6 @@ package userservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -32,19 +31,23 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // UpdateUserStatus 更新用户状态
-func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UserStatusReq) (*sysclient.UserStatusResp, error) {
+func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UpdateUserStatusReq) (*sysclient.UpdateUserStatusResp, error) {
 	q := query.SysUser
-	user := &model.SysUser{
-		ID:         in.Id,
-		UserStatus: in.UserStatus,
-		UpdateBy:   in.UpdateBy,
-	}
-	_, err := q.WithContext(l.ctx).Updates(user)
+	// 1.排除超级管理员
+	var userIds []int64
+	//for _, userId := range in.Ids {
+	//	count, _ := q.WithContext(l.ctx).Where(q.RoleID.Eq(1), q.UserID.Eq(userId)).Count()
+	//	if count == 0 {
+	//		userIds = append(userIds, userId)
+	//	}
+	//}
+
+	_, err := q.WithContext(l.ctx).Where(query.SysUser.ID.In(userIds...)).Update(q.UserStatus, in.UserStatus)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "更新用户状态失败,参数:%+v,异常:%s", user, err.Error())
-		return nil, errors.New("更新用户状态失败")
+		logc.Errorf(l.ctx, "删除用户异常,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除用户异常")
 	}
 
-	return &sysclient.UserStatusResp{}, nil
+	return &sysclient.UpdateUserStatusResp{}, nil
 }

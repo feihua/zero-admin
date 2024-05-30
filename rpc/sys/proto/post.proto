@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加岗位管理
+message AddPostReq {
+  string create_by = 1; //创建者
+  string post_code = 2; //岗位编码
+  string post_name = 3; //岗位名称
+  int32 post_sort = 4; //岗位排序
+  int32 post_status = 5; //岗位状态
+  string remark = 6; //备注信息
+
+}
+
+message AddPostResp {
+  string pong = 1;
+}
+
+// 删除岗位管理
+message DeletePostReq {
+  repeated int64 ids = 1;
+}
+
+message DeletePostResp {
+  string pong = 1;
+}
+
+// 更新岗位管理
+message UpdatePostReq {
+  int64 id = 1; //编号
+  string post_code = 2; //岗位编码
+  string post_name = 3; //岗位名称
+  int32 post_sort = 4; //岗位排序
+  int32 post_status = 5; //岗位状态
+  string remark = 6; //备注信息
+  string update_by = 7; //更新者
+
+}
+
+message UpdatePostResp {
+  string pong = 1;
+}
+
+// 更新岗位管理状态
+message UpdatePostStatusReq {
+  repeated int64 ids = 1; //编号
+  int32 post_status = 2; //岗位状态
+  string update_by = 3; //更新者
+
+}
+
+message UpdatePostStatusResp {
+  string pong = 1;
+}
+
+// 查询岗位管理详情
+message QueryPostDetailReq {
+    int64 id = 1;
+}
+
+message QueryPostDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //编号
+  string post_code = 5; //岗位编码
+  string post_name = 6; //岗位名称
+  int32 post_sort = 7; //岗位排序
+  int32 post_status = 8; //岗位状态
+  string remark = 9; //备注信息
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
+
+}
+
+// 分页查询岗位管理列表
+message QueryPostListReq {
+  string post_code = 1; //岗位编码
+  string post_name = 2; //岗位名称
+  int32 post_status = 3; //岗位状态
+ int64 page_num = 4; //第几页
+  int64 page_size = 5; //每页的数量
+}
+
+message PostListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //编号
+  string post_code = 5; //岗位编码
+  string post_name = 6; //岗位名称
+  int32 post_sort = 7; //岗位排序
+  int32 post_status = 8; //岗位状态
+  string remark = 9; //备注信息
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
+
+}
+
+message QueryPostListResp {
+  int64 total = 1;
+  repeated  PostListData list = 2;
+}
+
+// 岗位管理
+service PostService {
+  // 添加岗位管理
+  rpc AddPost(AddPostReq) returns (AddPostResp){}
+  // 删除岗位管理
+  rpc DeletePost(DeletePostReq) returns (DeletePostResp){}
+  // 更新岗位管理
+  rpc UpdatePost(UpdatePostReq) returns (UpdatePostResp ){}
+  // 更新岗位管理状态
+  rpc UpdatePostStatus(UpdatePostStatusReq) returns (UpdatePostStatusResp ){}
+  // 查询岗位管理详情
+   rpc QueryPostDetail(QueryPostDetailReq) returns (QueryPostDetailResp){}
+  // 查询岗位管理列表
+  rpc QueryPostList(QueryPostListReq) returns (QueryPostListResp){}
+
+
+}

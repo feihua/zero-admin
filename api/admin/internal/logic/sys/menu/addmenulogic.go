@@ -34,23 +34,24 @@ func NewAddMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddMenuLog
 
 // AddMenu 新增菜单
 func (l *AddMenuLogic) AddMenu(req *types.AddMenuReq) (*types.AddMenuResp, error) {
-	menuAddReq := sysclient.MenuAddReq{
-		Name:          req.Name,
-		ParentId:      req.ParentId,
-		Url:           req.Url,
-		Perms:         req.Perms,
-		Type:          req.Type,
-		Icon:          req.Icon,
-		OrderNum:      req.OrderNum,
-		CreateBy:      l.ctx.Value("userName").(string),
-		VuePath:       req.VuePath,
-		VueComponent:  req.VueComponent,
-		VueIcon:       req.VueIcon,
-		VueRedirect:   req.VueRedirect,
-		DelFlag:       req.DelFlag,
+	menuAddReq := sysclient.AddMenuReq{
 		BackgroundUrl: req.BackgroundUrl,
+		CreateBy:      l.ctx.Value("userName").(string),
+		VueRedirect:   req.VueRedirect,
+		VueIcon:       req.VueIcon,
+		VuePath:       req.VuePath,
+		MenuIcon:      req.MenuIcon,
+		MenuName:      req.MenuName,
+		MenuPath:      req.MenuPath,
+		MenuPerms:     req.MenuPerms,
+		MenuSort:      req.MenuSort,
+		MenuStatus:    req.MenuStatus,
+		MenuType:      req.MenuType,
+		ParentId:      req.ParentId,
+		Remark:        req.Remark,
+		VueComponent:  req.VueComponent,
 	}
-	if _, err := l.svcCtx.MenuService.MenuAdd(l.ctx, &menuAddReq); err != nil {
+	if _, err := l.svcCtx.MenuService.AddMenu(l.ctx, &menuAddReq); err != nil {
 		logc.Errorf(l.ctx, "添加菜单信息失败,参数:%+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())

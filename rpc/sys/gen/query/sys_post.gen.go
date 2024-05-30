@@ -44,7 +44,7 @@ func newSysPost(db *gorm.DB, opts ...gen.DOOption) sysPost {
 	return _sysPost
 }
 
-// sysPost 职位管理
+// sysPost 岗位管理
 type sysPost struct {
 	sysPostDo sysPostDo
 

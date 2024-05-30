@@ -36,7 +36,7 @@ func newSysUserRole(db *gorm.DB, opts ...gen.DOOption) sysUserRole {
 	return _sysUserRole
 }
 
-// sysUserRole 用户角色关联
+// sysUserRole 用户角色关联表
 type sysUserRole struct {
 	sysUserRoleDo sysUserRoleDo
 

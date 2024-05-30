@@ -37,9 +37,12 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip string) (*types.LoginResp, error) {
 
 	resp, err := l.svcCtx.UserService.Login(l.ctx, &sysclient.LoginReq{
-		Account:  req.Account,
-		Password: req.Password,
-		LoginIp:  ip,
+		Account:     req.Account,
+		Password:    req.Password,
+		IpAddress:   ip,
+		LoginStatus: "",
+		Browser:     "",
+		Os:          "",
 	})
 
 	if err != nil {

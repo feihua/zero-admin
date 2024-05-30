@@ -1,24 +1,25 @@
 info (
-	desc:   "字典项表"
+	desc:   "字典数据"
 	author: "liufeihua"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加字典项表
+	// 添加字典数据
 	AddDictItemReq {
 		DictLabel  string `json:"dictLabel"` //字典标签
-		DictSort   int32   `json:"dictSort"` //排序
-		DictStatus int32 `json:"dictStatus"` //字典状态
+		DictSort   int32  `json:"dictSort"` //排序
+		DictStatus int32  `json:"dictStatus"` //字典状态
 		DictType   string `json:"dictType"` //字典类型
 		DictValue  string `json:"dictValue"` //字典键值
+		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
 		Remark     string `json:"remark"` //备注信息
 	}
 	AddDictItemResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除字典项表
+	// 删除字典数据
 	DeleteDictItemReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -26,76 +27,116 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新字典项表
+	// 更新字典数据
 	UpdateDictItemReq {
 		DictLabel  string `json:"dictLabel"` //字典标签
-		DictSort   int32   `json:"dictSort"` //排序
-		DictStatus int32 `json:"dictStatus"` //字典状态
+		DictSort   int32  `json:"dictSort"` //排序
+		DictStatus int32  `json:"dictStatus"` //字典状态
 		DictType   string `json:"dictType"` //字典类型
 		DictValue  string `json:"dictValue"` //字典键值
 		Id         int64  `json:"id"` //编号
-		IsDefault  int32   `json:"isDefault"` //是否默认  0：否  1：是
+		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
 		Remark     string `json:"remark"` //备注信息
 	}
 	UpdateDictItemResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 分页查询字典项表列表
-	ListDictItemReq {
-		Current    int64  `form:"current,default=1"`
-		PageSize   int64  `form:"pageSize,default=20"`
-		DictLabel  string `form:"dictLabel,optional"` //字典标签
-		DictStatus int32 `form:"dictStatus,default=2"` //字典状态
-		DictType   string `form:"dictType,optional"` //字典类型
+	// 批量更新字典数据状态
+	UpdateDictItemStatusReq {
+		DictStatus int32   `json:"dictStatus"` //字典状态
+		DictIds    []int64 `json:"dictIds"` //编号
 	}
-	ListDictItemData {
+	UpdateDictItemStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询字典数据详情
+	QueryDictItemDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryDictItemDetailData {
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
-		DelFlag    int32   `json:"delFlag"` //是否删除  1：已删除  0：正常
 		DictLabel  string `json:"dictLabel"` //字典标签
-		DictSort   int32   `json:"dictSort"` //排序
-		DictStatus int32 `json:"dictStatus"` //字典状态
+		DictSort   int32  `json:"dictSort"` //排序
+		DictStatus int32  `json:"dictStatus"` //字典状态
 		DictType   string `json:"dictType"` //字典类型
 		DictValue  string `json:"dictValue"` //字典键值
 		Id         int64  `json:"id"` //编号
-		IsDefault  int32   `json:"isDefault"` //是否默认  0：否  1：是
+		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
 		Remark     string `json:"remark"` //备注信息
 		UpdateBy   string `json:"updateBy"` //更新者
 		UpdateTime string `json:"updateTime"` //更新时间
 	}
-	ListDictItemResp {
-		Code     string              `json:"code"`
-		Message  string              `json:"message"`
-		Current  int64               `json:"current,default=1"`
-		Data     []*ListDictItemData `json:"data"`
-		PageSize int64               `json:"pageSize,default=20"`
-		Success  bool                `json:"success"`
-		Total    int64               `json:"total"`
+	QueryDictItemDetailResp {
+		Code    string                  `json:"code"`
+		Message string                  `json:"message"`
+		Data    QueryDictItemDetailData `json:"data"`
+	}
+	// 分页查询字典数据列
+	QueryDictItemListReq {
+		Current    int64  `form:"current,default=1"` //第几页
+		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+		DictLabel  string `form:"dictLabel,optional"` //字典标签
+		DictStatus int32  `form:"dictStatus,optional"` //字典状态
+		DictType   string `form:"dictType,optional"` //字典类型
+		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
+	}
+	QueryDictItemListData {
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		DictLabel  string `json:"dictLabel"` //字典标签
+		DictSort   int32  `json:"dictSort"` //排序
+		DictStatus int32  `json:"dictStatus"` //字典状态
+		DictType   string `json:"dictType"` //字典类型
+		DictValue  string `json:"dictValue"` //字典键值
+		Id         int64  `json:"id"` //编号
+		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
+		Remark     string `json:"remark"` //备注信息
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryDictItemListResp {
+		Code     string                   `json:"code"`
+		Message  string                   `json:"message"`
+		Current  int64                    `json:"current,default=1"`
+		Data     []*QueryDictItemListData `json:"data"`
+		PageSize int64                    `json:"pageSize,default=20"`
+		Success  bool                     `json:"success"`
+		Total    int64                    `json:"total"`
 	}
 )
 
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:  sys/dict_item
-	prefix: /api/sys/dictItem
+	group:      sys/dict_item
+	prefix:     /api/sys/dictItem
 )
 service admin-api {
-	// 添加字典项表
+	// 添加字典数据
 	@handler AddDictItem
 	post /addDictItem (AddDictItemReq) returns (AddDictItemResp)
 
-	// 删除字典项表
+	// 删除字典数据
 	@handler DeleteDictItem
 	get /deleteDictItem (DeleteDictItemReq) returns (DeleteDictItemResp)
 
-	// 更新字典项表
+	// 更新字典数据
 	@handler UpdateDictItem
 	post /updateDictItem (UpdateDictItemReq) returns (UpdateDictItemResp)
 
-	// 分页查询字典项表列表
+	// 批量更新字典数据状态
+	@handler UpdateDictItemStatus
+	post /updateDictItemStatus (UpdateDictItemStatusReq) returns (UpdateDictItemStatusResp)
+
+	// 查询字典数据详情
+	@handler QueryDictItemDetail
+	get /queryDictItemDetail (QueryDictItemDetailReq) returns (QueryDictItemDetailResp)
+
+	// 分页查询字典数据列
 	@handler QueryDictItemList
-	get /queryDictItemList (ListDictItemReq) returns (ListDictItemResp)
+	get /queryDictItemList (QueryDictItemListReq) returns (QueryDictItemListResp)
 }
 

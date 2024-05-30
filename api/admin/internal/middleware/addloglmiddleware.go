@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"bytes"
-	"github.com/feihua/zero-admin/rpc/sys/client/syslogservice"
+	"github.com/feihua/zero-admin/rpc/sys/client/operatelogservice"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -12,10 +12,10 @@ import (
 )
 
 type AddLogMiddleware struct {
-	Sys syslogservice.SysLogService
+	Sys operatelogservice.OperateLogService
 }
 
-func NewAddLogMiddleware(Sys syslogservice.SysLogService) *AddLogMiddleware {
+func NewAddLogMiddleware(Sys operatelogservice.OperateLogService) *AddLogMiddleware {
 	return &AddLogMiddleware{Sys: Sys}
 }
 
@@ -31,6 +31,7 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		}
 
 		userName := r.Context().Value("userName").(string)
+		deptName := r.Context().Value("deptName").(string)
 
 		startTime := time.Now()
 
@@ -63,15 +64,18 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 
 		// 打印请求和响应耗时
 		duration := time.Since(startTime)
-		// 添加操作日志
-		_, _ = m.Sys.SysLogAdd(r.Context(), &sysclient.SysLogAddReq{
-			UserName:       userName,
-			Operation:      r.Method,
-			Method:         uri,
-			RequestParams:  string(body),
-			Time:           duration.Milliseconds(),
-			Ip:             httpx.GetRemoteAddr(r),
-			ResponseParams: responseBoy,
+		_, _ = m.Sys.AddOperateLog(r.Context(), &sysclient.AddOperateLogReq{
+			DeptName:          deptName,
+			OperationIp:       httpx.GetRemoteAddr(r),
+			OperationName:     userName,
+			OperationParams:   string(body),
+			OperationResponse: responseBoy,
+			OperationStatus:   0,
+			OperationType:     "",
+			OperationUrl:      uri,
+			RequestMethod:     r.Method,
+			Title:             "",
+			UseTime:           duration.Milliseconds(),
 		})
 	}
 }

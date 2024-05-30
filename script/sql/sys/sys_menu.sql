@@ -4,8 +4,8 @@ create table sys_menu
         primary key,
     menu_name           varchar(50)                         not null comment '菜单名称',
     parent_id      bigint                              not null comment '父菜单ID，一级菜单为0',
-    menu_path            varchar(200)                        default ''                not null,
-    menu_perms          varchar(500)                        default ''                not null,
+    menu_path            varchar(200)                        default ''                not null comment '前端路由',
+    menu_perms          varchar(500)                        default ''                not null comment '权限标识',
     menu_type           int                                 not null comment '类型 0：目录,1：菜单,2：按钮,3：外链',
     menu_icon           varchar(50)                         default ''                not null comment '菜单图标',
     menu_sort   tinyint      default 0                 not null comment '菜单排序',
@@ -22,7 +22,7 @@ create table sys_menu
     vue_redirect   varchar(64)                         default ''                not null comment 'vue的路由重定向',
     background_url varchar(128)                        default ''                not null comment '接口地址'
 )
-    comment '菜单管理';
+    comment '菜单信息表';
 
 
 INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (1, '欢迎', 0, '/welcome', '', 0, 'SmileOutlined', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '');

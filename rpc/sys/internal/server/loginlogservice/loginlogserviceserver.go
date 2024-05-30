@@ -22,23 +22,20 @@ func NewLoginLogServiceServer(svcCtx *svc.ServiceContext) *LoginLogServiceServer
 	}
 }
 
-func (s *LoginLogServiceServer) LoginLogAdd(ctx context.Context, in *sysclient.LoginLogAddReq) (*sysclient.LoginLogAddResp, error) {
-	l := loginlogservicelogic.NewLoginLogAddLogic(ctx, s.svcCtx)
-	return l.LoginLogAdd(in)
+// 删除系统登录日志表
+func (s *LoginLogServiceServer) DeleteLoginLog(ctx context.Context, in *sysclient.DeleteLoginLogReq) (*sysclient.DeleteLoginLogResp, error) {
+	l := loginlogservicelogic.NewDeleteLoginLogLogic(ctx, s.svcCtx)
+	return l.DeleteLoginLog(in)
 }
 
-func (s *LoginLogServiceServer) LoginLogList(ctx context.Context, in *sysclient.LoginLogListReq) (*sysclient.LoginLogListResp, error) {
-	l := loginlogservicelogic.NewLoginLogListLogic(ctx, s.svcCtx)
-	return l.LoginLogList(in)
+// 查询系统登录日志表详情
+func (s *LoginLogServiceServer) QueryLoginLogDetail(ctx context.Context, in *sysclient.QueryLoginLogDetailReq) (*sysclient.QueryLoginLogDetailResp, error) {
+	l := loginlogservicelogic.NewQueryLoginLogDetailLogic(ctx, s.svcCtx)
+	return l.QueryLoginLogDetail(in)
 }
 
-func (s *LoginLogServiceServer) LoginLogDelete(ctx context.Context, in *sysclient.LoginLogDeleteReq) (*sysclient.LoginLogDeleteResp, error) {
-	l := loginlogservicelogic.NewLoginLogDeleteLogic(ctx, s.svcCtx)
-	return l.LoginLogDelete(in)
-}
-
-// 统计后台用户登录---(查询当天登录人数（根据IP,统计当前周登录人数（根据IP）,统计当前月登录人数（根据IP）)
-func (s *LoginLogServiceServer) StatisticsLoginLog(ctx context.Context, in *sysclient.StatisticsLoginLogReq) (*sysclient.StatisticsLoginLogResp, error) {
-	l := loginlogservicelogic.NewStatisticsLoginLogLogic(ctx, s.svcCtx)
-	return l.StatisticsLoginLog(in)
+// 查询系统登录日志表列表
+func (s *LoginLogServiceServer) QueryLoginLogList(ctx context.Context, in *sysclient.QueryLoginLogListReq) (*sysclient.QueryLoginLogListResp, error) {
+	l := loginlogservicelogic.NewQueryLoginLogListLogic(ctx, s.svcCtx)
+	return l.QueryLoginLogList(in)
 }

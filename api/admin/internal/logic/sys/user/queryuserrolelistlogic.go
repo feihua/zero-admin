@@ -45,17 +45,16 @@ func (l *QueryUserRoleListLogic) QueryUserRoleList(req *types.QueryUserRoleListR
 
 	var roleList []types.RoleListData
 
-	for _, menu := range result.List {
+	for _, item := range result.List {
 		roleList = append(roleList, types.RoleListData{
-			Id:         menu.Id,
-			Name:       menu.Name,
-			Remark:     menu.Remark,
-			CreateBy:   menu.CreateBy,
-			CreateTime: menu.CreateTime,
-			UpdateBy:   menu.UpdateBy,
-			UpdateTime: menu.UpdateTime,
-			DelFlag:    menu.DelFlag,
-			Status:     menu.Status,
+			Id:         item.Id,
+			RoleName:   item.RoleName,
+			Remark:     item.Remark,
+			CreateBy:   item.CreateBy,
+			CreateTime: item.CreateTime,
+			UpdateBy:   item.UpdateBy,
+			UpdateTime: item.UpdateTime,
+			RoleStatus: item.RoleStatus,
 		})
 	}
 

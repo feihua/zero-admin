@@ -19,11 +19,15 @@ type AddCompanyAddressResp struct {
 }
 
 type AddDeptReq struct {
-	DeptName  string  `json:"deptName"`          // 机构名称
-	ParentId  int64   `json:"parentId"`          // 上级机构ID，一级机构为0
-	ParentIds []int64 `json:"parentIds"`         // 上级机构IDs
-	OrderNum  int32   `json:"orderNum"`          // 排序
-	DelFlag   int32   `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+	DeptName   string `json:"deptName"`   //部门名称
+	DeptSort   int32  `json:"deptSort"`   //部门排序
+	DeptStatus int32  `json:"deptStatus"` //部门状态
+	Email      string `json:"email"`      //邮箱
+	Leader     string `json:"leader"`     //负责人
+	ParentId   int64  `json:"parentId"`   //上级机构ID，一级机构为0
+	ParentIds  string `json:"parentIds"`  //上级机构IDs，一级机构为0
+	Phone      string `json:"phone"`      //电话号码
+	Remark     string `json:"remark"`     //备注信息
 }
 
 type AddDeptResp struct {
@@ -37,6 +41,7 @@ type AddDictItemReq struct {
 	DictStatus int32  `json:"dictStatus"` //字典状态
 	DictType   string `json:"dictType"`   //字典类型
 	DictValue  string `json:"dictValue"`  //字典键值
+	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
 	Remark     string `json:"remark"`     //备注信息
 }
 
@@ -45,7 +50,7 @@ type AddDictItemResp struct {
 	Message string `json:"message"`
 }
 
-type AddDictReq struct {
+type AddDictTypeReq struct {
 	DictName   string `json:"dictName"`   //字典名称
 	DictStatus int32  `json:"dictStatus"` //字典状态
 	DictType   string `json:"dictType"`   //字典类型
@@ -53,7 +58,7 @@ type AddDictReq struct {
 	Remark     string `json:"remark"`     //备注信息
 }
 
-type AddDictResp struct {
+type AddDictTypeResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -175,18 +180,6 @@ type AddIntegrationConsumeSettingResp struct {
 	Message string `json:"message"`
 }
 
-type AddJobReq struct {
-	JobName  string `json:"jobName"`  // 职位名称
-	Remarks  string `json:"remarks"`  // 备注
-	OrderNum int32  `json:"orderNum"` // 排序
-	DelFlag  int32  `json:"delFlag"`  // 是否删除  0：已删除  1：正常
-}
-
-type AddJobResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddMemberLevelReq struct {
 	Name               string `json:"name"`
 	GrowthPoint        int32  `json:"growthPoint"`
@@ -251,19 +244,20 @@ type AddMemberTaskResp struct {
 }
 
 type AddMenuReq struct {
-	Name          string `json:"name"`                   // 菜单名称
-	ParentId      int64  `json:"parentId,optional"`      // 父菜单ID，一级菜单为0
-	Url           string `json:"url,optional"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-	Perms         string `json:"perms,optional"`         // 授权(多个用逗号分隔，如：sysmodel:user:Add,sysmodel:user:edit)
-	Type          int32  `json:"type,optional"`          // 类型   0：目录   1：菜单   2：按钮
-	Icon          string `json:"icon,optional"`          // 菜单图标
-	OrderNum      int32  `json:"orderNum,optional"`      // 排序
-	VuePath       string `json:"vuePath,optional"`       // vue系统的path
-	VueComponent  string `json:"vueComponent,optional"`  // vue的页面
-	VueIcon       string `json:"vueIcon,optional"`       // vue的图标
-	VueRedirect   string `json:"vueRedirect,optional"`   // vue的路由重定向
-	DelFlag       int32  `json:"delFlag"`                // 是否删除  0：已删除  1：正常
-	BackgroundUrl string `json:"backgroundUrl,optional"` // 后台地址
+	BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
+	MenuIcon      string `json:"menuIcon,optional"`      //菜单图标
+	MenuName      string `json:"menuName"`               //菜单名称
+	MenuPath      string `json:"menuPath,optional"`      //前端路由
+	MenuPerms     string `json:"menuPerms,optional"`     //权限标识
+	MenuSort      int32  `json:"menuSort,optional"`      //菜单排序
+	MenuStatus    int32  `json:"menuStatus,optional"`    //菜单状态
+	MenuType      int32  `json:"menuType,optional"`      //类型 0：目录,1：菜单,2：按钮,3：外链
+	ParentId      int64  `json:"parentId,optional"`      //父菜单ID，一级菜单为0
+	Remark        string `json:"remark,optional"`        //备注信息
+	VueComponent  string `json:"vueComponent,optional"`  //vue的页面
+	VueIcon       string `json:"vueIcon,optional"`       //vue的图标
+	VuePath       string `json:"vuePat,optionalh"`       //vue系统的path
+	VueRedirect   string `json:"vueRedirect,optional"`   //vue的路由重定向
 }
 
 type AddMenuResp struct {
@@ -306,6 +300,19 @@ type AddOrderSettingReq struct {
 }
 
 type AddOrderSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type AddPostReq struct {
+	PostCode   string `json:"postCode"`   //岗位编码
+	PostName   string `json:"postName"`   //岗位名称
+	PostSort   int32  `json:"postSort"`   //岗位排序
+	PostStatus int32  `json:"postStatus"` //岗位状态
+	Remark     string `json:"remark"`     //备注信息
+}
+
+type AddPostResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -480,9 +487,14 @@ type AddReturnResonResp struct {
 }
 
 type AddRoleReq struct {
-	Name   string `json:"name"`            // 角色名称
-	Remark string `json:"remark,optional"` // 备注
-	Status int32  `json:"status"`          // 状态
+	DataScope  int32  `json:"dataScope"`  //数据权限
+	Id         int64  `json:"id"`         //编号
+	IsAdmin    int32  `json:"isAdmin"`    //是否超级管理员
+	Remark     string `json:"remark"`     //备注
+	RoleKey    string `json:"roleKey"`    //权限字符
+	RoleName   string `json:"roleName"`   //角色名称
+	RoleSort   int32  `json:"roleSort"`   //角色排序
+	RoleStatus int32  `json:"roleStatus"` //角色状态
 }
 
 type AddRoleResp struct {
@@ -525,13 +537,15 @@ type AddSubjectResp struct {
 }
 
 type AddUserReq struct {
-	Email    string `json:"email"`
-	Mobile   string `json:"mobile"`
-	Name     string `json:"name"`
-	NickName string `json:"nickName"`
-	DeptId   int64  `json:"deptId"`
-	JobId    int64  `json:"jobId"`
-	Status   int32  `json:"status"` // 状态  0：禁用   1：正常
+	Avatar     string `json:"avatar,optional"` //头像
+	DeptId     int64  `json:"deptId,optional"` //部门id
+	Email      string `json:"email,optional"`  //邮箱
+	Mobile     string `json:"mobile"`          //手机号
+	NickName   string `json:"nickName"`        //昵称
+	Password   string `json:"password"`        //密码
+	Remark     string `json:"remark,optional"` //备注信息
+	UserName   string `json:"userName"`        //用户名
+	UserStatus int32  `json:"userStatus"`      //帐号状态（0正常 1停用）
 }
 
 type AddUserResp struct {
@@ -630,11 +644,11 @@ type DeleteDictItemResp struct {
 	Message string `json:"message"`
 }
 
-type DeleteDictReq struct {
+type DeleteDictTypeReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteDictResp struct {
+type DeleteDictTypeResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -729,15 +743,6 @@ type DeleteIntegrationConsumeSettingResp struct {
 	Message string `json:"message"`
 }
 
-type DeleteJobReq struct {
-	Ids []int64 `form:"ids"`
-}
-
-type DeleteJobResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteLoginLogReq struct {
 	Ids []int64 `form:"ids"`
 }
@@ -801,6 +806,15 @@ type DeleteMenuResp struct {
 	Message string `json:"message"`
 }
 
+type DeleteOperateLogReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteOperateLogResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type DeleteOrderReq struct {
 	Ids []int64 `form:"ids"`
 }
@@ -815,6 +829,15 @@ type DeleteOrderSettingReq struct {
 }
 
 type DeleteOrderSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type DeletePostReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeletePostResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -900,15 +923,6 @@ type DeleteSubjectResp struct {
 	Message string `json:"message"`
 }
 
-type DeleteSysLogReq struct {
-	Ids []int64 `form:"ids"`
-}
-
-type DeleteSysLogResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteUserReq struct {
 	Ids []int64 `form:"ids"`
 }
@@ -929,16 +943,11 @@ type DeliveryResp struct {
 	Message string `json:"message"`
 }
 
-type DeptRelations struct {
+type DeptList struct {
 	Id       int64  `json:"id"`
 	Value    string `json:"value"`
 	Title    string `json:"title"`
 	ParentId int64  `json:"parentId"`
-}
-
-type JobRelations struct {
-	Id      int64  `json:"id"`
-	JobName string `json:"jobName"`
 }
 
 type ListChangeHistoryData struct {
@@ -1074,98 +1083,6 @@ type ListCouponResp struct {
 	PageSize int64             `json:"pageSize,default=20"`
 	Success  bool              `json:"success"`
 	Total    int64             `json:"total"`
-}
-
-type ListDeptData struct {
-	Id         int64   `json:"id"`         // 编号
-	DeptName   string  `json:"deptName"`   // 机构名称
-	ParentId   int64   `json:"parentId"`   // 上级机构ID，一级机构为0
-	ParentIds  []int64 `json:"parentIds"`  // 上级机构ID
-	OrderNum   int32   `json:"orderNum"`   // 排序
-	CreateBy   string  `json:"createBy"`   // 创建人
-	CreateTime string  `json:"createTime"` // 创建时间
-	UpdateBy   string  `json:"updateBy"`   // 更新人
-	UpdateTime string  `json:"updateTime"` // 更新时间
-	DelFlag    int32   `json:"delFlag"`    // 是否删除  0：已删除  1：正常
-}
-
-type ListDeptReq struct {
-	Name     string `json:"form,optional"`
-	CreateBy string `json:"form,optional"`
-}
-
-type ListDeptResp struct {
-	Code    string          `json:"code"`
-	Message string          `json:"message"`
-	Data    []*ListDeptData `json:"data"`
-	Success bool            `json:"success"`
-}
-
-type ListDictData struct {
-	CreateBy   string `json:"createBy"`   //创建者
-	CreateTime string `json:"createTime"` //创建时间
-	DelFlag    int32  `json:"delFlag"`    //是否删除  1：已删除  0：正常
-	DictName   string `json:"dictName"`   //字典名称
-	DictStatus int32  `json:"dictStatus"` //字典状态
-	DictType   string `json:"dictType"`   //字典类型
-	Id         int64  `json:"id"`         //编号
-	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
-	Remark     string `json:"remark"`     //备注信息
-	UpdateBy   string `json:"updateBy"`   //更新者
-	UpdateTime string `json:"updateTime"` //更新时间
-}
-
-type ListDictItemData struct {
-	CreateBy   string `json:"createBy"`   //创建者
-	CreateTime string `json:"createTime"` //创建时间
-	DelFlag    int32  `json:"delFlag"`    //是否删除  1：已删除  0：正常
-	DictLabel  string `json:"dictLabel"`  //字典标签
-	DictSort   int32  `json:"dictSort"`   //排序
-	DictStatus int32  `json:"dictStatus"` //字典状态
-	DictType   string `json:"dictType"`   //字典类型
-	DictValue  string `json:"dictValue"`  //字典键值
-	Id         int64  `json:"id"`         //编号
-	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
-	Remark     string `json:"remark"`     //备注信息
-	UpdateBy   string `json:"updateBy"`   //更新者
-	UpdateTime string `json:"updateTime"` //更新时间
-}
-
-type ListDictItemReq struct {
-	Current    int64  `form:"current,default=1"`
-	PageSize   int64  `form:"pageSize,default=20"`
-	DictLabel  string `form:"dictLabel,optional"`   //字典标签
-	DictStatus int32  `form:"dictStatus,default=2"` //字典状态
-	DictType   string `form:"dictType,optional"`    //字典类型
-}
-
-type ListDictItemResp struct {
-	Code     string              `json:"code"`
-	Message  string              `json:"message"`
-	Current  int64               `json:"current,default=1"`
-	Data     []*ListDictItemData `json:"data"`
-	PageSize int64               `json:"pageSize,default=20"`
-	Success  bool                `json:"success"`
-	Total    int64               `json:"total"`
-}
-
-type ListDictReq struct {
-	Current    int64  `form:"current,default=1"`
-	PageSize   int64  `form:"pageSize,default=20"`
-	DictName   string `form:"dictName,optional"`    //字典名称
-	DictStatus int32  `form:"dictStatus,default=2"` //字典状态
-	DictType   string `form:"dictType,optional"`    //字典类型
-	IsSystem   int32  `form:"isSystem,default=2"`   //是否系统预留  0：否  1：是
-}
-
-type ListDictResp struct {
-	Code     string          `json:"code"`
-	Message  string          `json:"message"`
-	Current  int64           `json:"current,default=1"`
-	Data     []*ListDictData `json:"data"`
-	PageSize int64           `json:"pageSize,default=20"`
-	Success  bool            `json:"success"`
-	Total    int64           `json:"total"`
 }
 
 type ListFlashPromotionData struct {
@@ -1436,63 +1353,6 @@ type ListIntegrationConsumeSettingResp struct {
 	Total    int64                                `json:"total"`
 }
 
-type ListJobData struct {
-	Id         int64  `json:"id"`         // 编号
-	JobName    string `json:"jobName"`    // 职位名称
-	OrderNum   int32  `json:"orderNum"`   // 排序
-	CreateBy   string `json:"createBy"`   // 创建人
-	CreateTime string `json:"createTime"` // 创建时间
-	UpdateBy   string `json:"updateBy"`   // 更新人
-	UpdateTime string `json:"updateTime"` // 更新时间
-	DelFlag    int32  `json:"delFlag"`    // 是否删除  0：已删除  1：正常
-	Remarks    string `json:"remarks"`    // 备注
-}
-
-type ListJobReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	JobName  string `form:"jobName,optional"`
-	DelFlag  int32  `form:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
-}
-
-type ListJobResp struct {
-	Code     string         `json:"code"`
-	Message  string         `json:"message"`
-	Current  int64          `json:"current,default=1"`
-	Data     []*ListJobData `json:"data"`
-	PageSize int64          `json:"pageSize,default=20"`
-	Success  bool           `json:"success"`
-	Total    int64          `json:"total"`
-}
-
-type ListLoginLogData struct {
-	Id         int64  `json:"id"`         // 编号
-	UserName   string `json:"userName"`   // 用户名
-	Status     string `json:"status"`     // 登录状态（online:在线，登录初始状态，方便统计在线人数；login:退出登录后将online置为login；logout:退出登录）
-	Ip         string `json:"ip"`         // IP地址
-	CreateBy   string `json:"createBy"`   // 创建人
-	CreateTime string `json:"createTime"` // 创建时间
-	UpdateBy   string `json:"updateBy"`   // 更新人
-	UpdateTime string `json:"updateTime"` // 更新时间
-}
-
-type ListLoginLogReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	UserName string `form:"userName,optional"`
-	Ip       string `form:"ip,optional"` // IP地址
-}
-
-type ListLoginLogResp struct {
-	Code     string              `json:"code"`
-	Message  string              `json:"message"`
-	Current  int64               `json:"current,default=1"`
-	Data     []*ListLoginLogData `json:"data"`
-	PageSize int64               `json:"pageSize,default=20"`
-	Success  bool                `json:"success"`
-	Total    int64               `json:"total"`
-}
-
 type ListMemberAddressData struct {
 	Id            int64  `json:"id"`
 	MemberId      int64  `json:"memberId"`
@@ -1721,42 +1581,6 @@ type ListMemberTaskResp struct {
 	PageSize int64                 `json:"pageSize,default=20"`
 	Success  bool                  `json:"success"`
 	Total    int64                 `json:"total"`
-}
-
-type ListMenuData struct {
-	Id            int64  `json:"id"`            // 编号
-	Key           string `json:"key"`           // 菜单名称
-	Name          string `json:"name"`          // 菜单名称
-	Title         string `json:"title"`         // 菜单名称
-	ParentId      int64  `json:"parentId"`      // 父菜单ID，一级菜单为0
-	Url           string `json:"url"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-	Perms         string `json:"perms"`         // 授权(多个用逗号分隔，如：sysmodel:user:Add,sysmodel:user:edit)
-	Type          int32  `json:"type"`          // 类型   0：目录   1：菜单   2：按钮
-	Icon          string `json:"icon"`          // 菜单图标
-	OrderNum      int32  `json:"orderNum"`      // 排序
-	CreateBy      string `json:"createBy"`      // 创建人
-	CreateTime    string `json:"createTime"`    // 创建时间
-	UpdateBy      string `json:"updateBy"`      // 更新人
-	UpdateTime    string `json:"updateTime"`    // 更新时间
-	DelFlag       int32  `json:"delFlag"`       // 是否删除  0：已删除  1：正常
-	VuePath       string `json:"vuePath"`       // vue系统的path
-	VueComponent  string `json:"vueComponent"`  // vue的页面
-	VueIcon       string `json:"vueIcon"`       // vue的图标
-	VueRedirect   string `json:"vueRedirect"`   // vue的路由重定向
-	BackgroundUrl string `json:"backgroundUrl"` // 后台地址
-}
-
-type ListMenuReq struct {
-	Name string `form:"name,optional"`
-	Url  string `form:"url,optional "`
-}
-
-type ListMenuResp struct {
-	Code    string          `json:"code"`
-	Message string          `json:"message"`
-	Data    []*ListMenuData `json:"data"`
-	Success bool            `json:"success"`
-	Total   int64           `json:"total"`
 }
 
 type ListMenuTree struct {
@@ -2144,37 +1968,6 @@ type ListReturnResonResp struct {
 	Total    int64                  `json:"total"`
 }
 
-type ListRoleData struct {
-	Id         int64  `json:"id"`         // 编号
-	Name       string `json:"name"`       // 角色名称
-	Remark     string `json:"remark"`     // 备注
-	CreateBy   string `json:"createBy"`   // 创建人
-	CreateTime string `json:"createTime"` // 创建时间
-	UpdateBy   string `json:"updateBy"`   // 更新人
-	UpdateTime string `json:"updateTime"` // 更新时间
-	DelFlag    int32  `json:"delFlag"`    // 是否删除  0：已删除  1：正常
-	Label      string `json:"label"`      // 编号
-	Value      string `json:"value"`      // 角色名称
-	Status     int32  `json:"status"`     // 状态
-}
-
-type ListRoleReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	Name     string `form:"name,optional "`
-	Status   int32  `form:"status,default=2"`
-}
-
-type ListRoleResp struct {
-	Code     string          `json:"code"`
-	Message  string          `json:"message"`
-	Current  int64           `json:"current,default=1"`
-	Data     []*ListRoleData `json:"data"`
-	PageSize int64           `json:"pageSize,default=20"`
-	Success  bool            `json:"success"`
-	Total    int64           `json:"total"`
-}
-
 type ListSkuStockData struct {
 	Id             int64  `json:"id"`
 	ProductId      int64  `json:"productId"`
@@ -2240,74 +2033,6 @@ type ListSubjectResp struct {
 	Total    int64              `json:"total"`
 }
 
-type ListSysLogData struct {
-	Id             int64  `json:"id"`             // 编号
-	UserName       string `json:"userName"`       // 用户名
-	Operation      string `json:"operation"`      // 用户操作
-	Method         string `json:"method"`         // 请求方法
-	RequestParams  string `json:"requestParams"`  // 请求参数
-	ResponseParams string `json:"responseParams"` // 响应参数
-	Time           int64  `json:"time"`           // 执行时长(毫秒)
-	Ip             string `json:"ip"`             // IP地址
-	OperationTime  string `json:"operationTime"`  // 操作时间
-}
-
-type ListSysLogReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	UserName string `form:"userName,optional"` // 用户名
-	Method   string `form:"method,optional"`   // 请求方法
-}
-
-type ListSysLogResp struct {
-	Code     string            `json:"code"`
-	Message  string            `json:"message"`
-	Current  int64             `json:"current,default=1"`
-	Data     []*ListSysLogData `json:"data"`
-	PageSize int64             `json:"pageSize,default=20"`
-	Success  bool              `json:"success"`
-	Total    int64             `json:"total"`
-}
-
-type ListUserData struct {
-	Id         int64  `json:"id"`         // 编号
-	UserName   string `json:"name"`       // 用户名
-	NickName   string `json:"nickName"`   // 昵称
-	Avatar     string `json:"avatar"`     // 头像
-	Email      string `json:"email"`      // 邮箱
-	Mobile     string `json:"mobile"`     // 手机号
-	UserStatus int32  `json:"status"`     // 状态  0：禁用   1：正常
-	DeptId     int64  `json:"deptId"`     // 机构ID
-	CreateBy   string `json:"createBy"`   // 创建人
-	CreateTime string `json:"createTime"` // 创建时间
-	UpdateBy   string `json:"updateBy"`   // 更新人
-	UpdateTime string `json:"updateTime"` // 更新时间
-	DelFlag    int32  `json:"delFlag"`    // 是否删除  0：已删除  1：正常
-	JobId      int64  `json:"jobId"`
-}
-
-type ListUserReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	Name     string `form:"name,optional"`
-	NickName string `form:"nickName,optional"`
-	Mobile   string `form:"mobile,optional"`
-	Email    string `form:"email,optional"`
-	Status   int32  `form:"status,default=2"`
-	DeptId   int64  `form:"deptId,optional"`
-	JobId    int64  `form:"deptId,optional"`
-}
-
-type ListUserResp struct {
-	Code     string          `json:"code"`
-	Message  string          `json:"message"`
-	Current  int64           `json:"current,default=1"`
-	Data     []*ListUserData `json:"data"`
-	PageSize int64           `json:"pageSize,default=20"`
-	Success  bool            `json:"success"`
-	Total    int64           `json:"total"`
-}
-
 type LoginData struct {
 	AccessToken string `json:"token"`
 }
@@ -2361,6 +2086,11 @@ type OrderDetailResp struct {
 	Code    string        `json:"code"`
 	Message string        `json:"message"`
 	Data    ListOrderData `json:"data"`
+}
+
+type PostList struct {
+	Id       int64  `json:"id"`
+	PostName string `json:"postName"`
 }
 
 type ProductAttributeValueList struct {
@@ -2467,23 +2197,6 @@ type ProductRelationList struct {
 	SubjectId       *int64 `json:"subjectId,omitempty"`
 }
 
-type QueryAllRelationsData struct {
-	RoleRelations []*RoleRelations `json:"roleRelations"`
-	DeptRelations []*DeptRelations `json:"deptRelations"`
-	JobRelations  []*JobRelations  `json:"jobRelations"`
-}
-
-type QueryAllRelationsReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type QueryAllRelationsResp struct {
-	Code    string                `json:"code"`
-	Message string                `json:"message"`
-	Data    QueryAllRelationsData `json:"data"`
-}
-
 type QueryByproductCategoryIdData struct {
 	AttributeId                int64 `json:"attributeId"`
 	ProductAttributeCategoryId int64 `json:"productAttributeCategoryId"`
@@ -2497,6 +2210,428 @@ type QueryByproductCategoryIdResp struct {
 	Code    string                          `json:"code"`
 	Message string                          `json:"message"`
 	Data    []*QueryByproductCategoryIdData `json:"data"`
+}
+
+type QueryDeptAndPostListData struct {
+	DeptList []*DeptList `json:"deptList"`
+	PostList []*PostList `json:"postList"`
+}
+
+type QueryDeptAndPostListReq struct {
+	Current  int64 `form:"current,default=1"`
+	PageSize int64 `form:"pageSize,default=20"`
+}
+
+type QueryDeptAndPostListResp struct {
+	Code    string                   `json:"code"`
+	Message string                   `json:"message"`
+	Data    QueryDeptAndPostListData `json:"data"`
+}
+
+type QueryDeptDetailData struct {
+	CreateBy   string  `json:"createBy"`   //创建者
+	CreateTime string  `json:"createTime"` //创建时间
+	DeptName   string  `json:"deptName"`   //部门名称
+	DeptSort   int32   `json:"deptSort"`   //部门排序
+	DeptStatus int32   `json:"deptStatus"` //部门状态
+	Email      string  `json:"email"`      //邮箱
+	Id         int64   `json:"id"`         //编号
+	Leader     string  `json:"leader"`     //负责人
+	ParentId   int64   `json:"parentId"`   //上级机构ID，一级机构为0
+	ParentIds  []int64 `json:"parentIds"`  //上级机构IDs，一级机构为0
+	Phone      string  `json:"phone"`      //电话号码
+	Remark     string  `json:"remark"`     //备注信息
+	UpdateBy   string  `json:"updateBy"`   //更新者
+	UpdateTime string  `json:"updateTime"` //更新时间
+}
+
+type QueryDeptDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryDeptDetailResp struct {
+	Code    string              `json:"code"`
+	Message string              `json:"message"`
+	Data    QueryDeptDetailData `json:"data"`
+}
+
+type QueryDeptListData struct {
+	CreateBy   string  `json:"createBy"`   //创建者
+	CreateTime string  `json:"createTime"` //创建时间
+	DeptName   string  `json:"deptName"`   //部门名称
+	DeptSort   int32   `json:"deptSort"`   //部门排序
+	DeptStatus int32   `json:"deptStatus"` //部门状态
+	Email      string  `json:"email"`      //邮箱
+	Id         int64   `json:"id"`         //编号
+	Leader     string  `json:"leader"`     //负责人
+	ParentId   int64   `json:"parentId"`   //上级机构ID，一级机构为0
+	ParentIds  []int64 `json:"parentIds"`  //上级机构IDs，一级机构为0
+	Phone      string  `json:"phone"`      //电话号码
+	Remark     string  `json:"remark"`     //备注信息
+	UpdateBy   string  `json:"updateBy"`   //更新者
+	UpdateTime string  `json:"updateTime"` //更新时间
+}
+
+type QueryDeptListReq struct {
+}
+
+type QueryDeptListResp struct {
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
+	Current  int64                `json:"current,default=1"`
+	Data     []*QueryDeptListData `json:"data"`
+	PageSize int64                `json:"pageSize,default=20"`
+	Success  bool                 `json:"success"`
+	Total    int64                `json:"total"`
+}
+
+type QueryDictItemDetailData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DictLabel  string `json:"dictLabel"`  //字典标签
+	DictSort   int32  `json:"dictSort"`   //排序
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	DictValue  string `json:"dictValue"`  //字典键值
+	Id         int64  `json:"id"`         //编号
+	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryDictItemDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryDictItemDetailResp struct {
+	Code    string                  `json:"code"`
+	Message string                  `json:"message"`
+	Data    QueryDictItemDetailData `json:"data"`
+}
+
+type QueryDictItemListData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DictLabel  string `json:"dictLabel"`  //字典标签
+	DictSort   int32  `json:"dictSort"`   //排序
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	DictValue  string `json:"dictValue"`  //字典键值
+	Id         int64  `json:"id"`         //编号
+	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryDictItemListReq struct {
+	Current    int64  `form:"current,default=1"`   //第几页
+	PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+	DictLabel  string `form:"dictLabel,optional"`  //字典标签
+	DictStatus int32  `form:"dictStatus,optional"` //字典状态
+	DictType   string `form:"dictType,optional"`   //字典类型
+	IsDefault  int32  `json:"isDefault"`           //是否默认  0：否  1：是
+}
+
+type QueryDictItemListResp struct {
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
+	Current  int64                    `json:"current,default=1"`
+	Data     []*QueryDictItemListData `json:"data"`
+	PageSize int64                    `json:"pageSize,default=20"`
+	Success  bool                     `json:"success"`
+	Total    int64                    `json:"total"`
+}
+
+type QueryDictTypeDetailData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DictName   string `json:"dictName"`   //字典名称
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	Id         int64  `json:"id"`         //编号
+	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryDictTypeDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryDictTypeDetailResp struct {
+	Code    string                  `json:"code"`
+	Message string                  `json:"message"`
+	Data    QueryDictTypeDetailData `json:"data"`
+}
+
+type QueryDictTypeListData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DictName   string `json:"dictName"`   //字典名称
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictType   string `json:"dictType"`   //字典类型
+	Id         int64  `json:"id"`         //编号
+	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryDictTypeListReq struct {
+	Current    int64  `form:"current,default=1"`   //第几页
+	PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+	DictName   string `form:"dictName,optional"`   //字典名称
+	DictStatus int32  `form:"dictStatus,optional"` //字典状态
+	DictType   string `form:"dictType,optional"`   //字典类型
+	IsSystem   int32  `form:"isSystem,optional"`   //是否系统预留  0：否  1：是
+}
+
+type QueryDictTypeListResp struct {
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
+	Current  int64                    `json:"current,default=1"`
+	Data     []*QueryDictTypeListData `json:"data"`
+	PageSize int64                    `json:"pageSize,default=20"`
+	Success  bool                     `json:"success"`
+	Total    int64                    `json:"total"`
+}
+
+type QueryLoginLogDetailData struct {
+	Browser     string `json:"browser"`     //浏览器
+	Id          int64  `json:"id"`          //编号
+	IpAddress   string `json:"ipAddress"`   //IP地址
+	LoginStatus string `json:"loginStatus"` //登录状态
+	LoginTime   string `json:"loginTime"`   //登录时间
+	Os          string `json:"os"`          //操作信息
+	UserName    string `json:"userName"`    //用户名
+}
+
+type QueryLoginLogDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryLoginLogDetailResp struct {
+	Code    string                  `json:"code"`
+	Message string                  `json:"message"`
+	Data    QueryLoginLogDetailData `json:"data"`
+}
+
+type QueryLoginLogListData struct {
+	Browser     string `json:"browser"`     //浏览器
+	Id          int64  `json:"id"`          //编号
+	IpAddress   string `json:"ipAddress"`   //IP地址
+	LoginStatus string `json:"loginStatus"` //登录状态
+	LoginTime   string `json:"loginTime"`   //登录时间
+	Os          string `json:"os"`          //操作信息
+	UserName    string `json:"userName"`    //用户名
+}
+
+type QueryLoginLogListReq struct {
+	Current     int64  `form:"current,default=1"`    //第几页
+	PageSize    int64  `form:"pageSize,default=20"`  //每页的数量
+	Browser     string `form:"browser,optional"`     //浏览器
+	IpAddress   string `form:"ipAddress,optional"`   //IP地址
+	LoginStatus string `form:"loginStatus,optional"` //登录状态
+	Os          string `form:"os,optional"`          //操作信息
+	UserName    string `form:"userName,optional"`    //用户名
+}
+
+type QueryLoginLogListResp struct {
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
+	Current  int64                    `json:"current,default=1"`
+	Data     []*QueryLoginLogListData `json:"data"`
+	PageSize int64                    `json:"pageSize,default=20"`
+	Success  bool                     `json:"success"`
+	Total    int64                    `json:"total"`
+}
+
+type QueryMenuDetailData struct {
+	BackgroundUrl string `json:"backgroundUrl"` //接口地址
+	CreateBy      string `json:"createBy"`      //创建者
+	CreateTime    string `json:"createTime"`    //创建时间
+	Id            int64  `json:"id"`            //编号
+	MenuIcon      string `json:"menuIcon"`      //菜单图标
+	MenuName      string `json:"menuName"`      //菜单名称
+	MenuPath      string `json:"menuPath"`      //前端路由
+	MenuPerms     string `json:"menuPerms"`     //权限标识
+	MenuSort      int32  `json:"menuSort"`      //菜单排序
+	MenuStatus    int32  `json:"menuStatus"`    //菜单状态
+	MenuType      int32  `json:"menuType"`      //类型 0：目录,1：菜单,2：按钮,3：外链
+	ParentId      int64  `json:"parentId"`      //父菜单ID，一级菜单为0
+	Remark        string `json:"remark"`        //备注信息
+	UpdateBy      string `json:"updateBy"`      //更新者
+	UpdateTime    string `json:"updateTime"`    //更新时间
+	VueComponent  string `json:"vueComponent"`  //vue的页面
+	VueIcon       string `json:"vueIcon"`       //vue的图标
+	VuePath       string `json:"vuePath"`       //vue系统的path
+	VueRedirect   string `json:"vueRedirect"`   //vue的路由重定向
+}
+
+type QueryMenuDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMenuDetailResp struct {
+	Code    string              `json:"code"`
+	Message string              `json:"message"`
+	Data    QueryMenuDetailData `json:"data"`
+}
+
+type QueryMenuListData struct {
+	BackgroundUrl string `json:"backgroundUrl"` //接口地址
+	CreateBy      string `json:"createBy"`      //创建者
+	CreateTime    string `json:"createTime"`    //创建时间
+	Id            int64  `json:"id"`            //编号
+	MenuIcon      string `json:"menuIcon"`      //菜单图标
+	MenuName      string `json:"menuName"`      //菜单名称
+	MenuPath      string `json:"menuPath"`      //前端路由
+	MenuPerms     string `json:"menuPerms"`     //权限标识
+	MenuSort      int32  `json:"menuSort"`      //菜单排序
+	MenuStatus    int32  `json:"menuStatus"`    //菜单状态
+	MenuType      int32  `json:"menuType"`      //类型 0：目录,1：菜单,2：按钮,3：外链
+	ParentId      int64  `json:"parentId"`      //父菜单ID，一级菜单为0
+	Remark        string `json:"remark"`        //备注信息
+	UpdateBy      string `json:"updateBy"`      //更新者
+	UpdateTime    string `json:"updateTime"`    //更新时间
+	VueComponent  string `json:"vueComponent"`  //vue的页面
+	VueIcon       string `json:"vueIcon"`       //vue的图标
+	VuePath       string `json:"vuePath"`       //vue系统的path
+	VueRedirect   string `json:"vueRedirect"`   //vue的路由重定向
+}
+
+type QueryMenuListReq struct {
+}
+
+type QueryMenuListResp struct {
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
+	Current  int64                `json:"current,default=1"`
+	Data     []*QueryMenuListData `json:"data"`
+	PageSize int64                `json:"pageSize,default=20"`
+	Success  bool                 `json:"success"`
+	Total    int64                `json:"total"`
+}
+
+type QueryOperateLogDetailData struct {
+	DeptName          string `json:"deptName"`          //部门名称
+	Id                int64  `json:"id"`                //编号
+	OperationIp       string `json:"operationIp"`       //操作地址
+	OperationName     string `json:"operationName"`     //操作人员
+	OperationParams   string `json:"operationParams"`   //请求参数
+	OperationResponse string `json:"operationResponse"` //响应参数
+	OperationStatus   int32  `json:"operationStatus"`   //操作状态
+	OperationTime     string `json:"operationTime"`     //操作时间
+	OperationType     string `json:"operationType"`     //操作类型
+	OperationUrl      string `json:"operationUrl"`      //操作方法
+	RequestMethod     string `json:"requestMethod"`     //请求方式
+	Title             string `json:"title"`             //系统模块
+	UseTime           int64  `json:"useTime"`           //执行时长(毫秒)
+}
+
+type QueryOperateLogDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryOperateLogDetailResp struct {
+	Code    string                    `json:"code"`
+	Message string                    `json:"message"`
+	Data    QueryOperateLogDetailData `json:"data"`
+}
+
+type QueryOperateLogListData struct {
+	DeptName          string `json:"deptName"`          //部门名称
+	Id                int64  `json:"id"`                //编号
+	OperationIp       string `json:"operationIp"`       //操作地址
+	OperationName     string `json:"operationName"`     //操作人员
+	OperationParams   string `json:"operationParams"`   //请求参数
+	OperationResponse string `json:"operationResponse"` //响应参数
+	OperationStatus   int32  `json:"operationStatus"`   //操作状态
+	OperationTime     string `json:"operationTime"`     //操作时间
+	OperationType     string `json:"operationType"`     //操作类型
+	OperationUrl      string `json:"operationUrl"`      //操作方法
+	RequestMethod     string `json:"requestMethod"`     //请求方式
+	Title             string `json:"title"`             //系统模块
+	UseTime           int64  `json:"useTime"`           //执行时长(毫秒)
+}
+
+type QueryOperateLogListReq struct {
+	Current         int64  `form:"current,default=1"`        //第几页
+	PageSize        int64  `form:"pageSize,default=20"`      //每页的数量
+	DeptName        string `form:"deptName,optional"`        //部门名称
+	OperationIp     string `form:"operationIp,optional"`     //操作地址
+	OperationName   string `form:"operationName,optional"`   //操作人员
+	OperationStatus int32  `form:"operationStatus,optional"` //操作状态
+	OperationType   string `form:"operationType,optional"`   //操作类型
+	OperationUrl    string `form:"operationUrl,optional"`    //操作方法
+	Title           string `form:"title,optional"`           //系统模块
+}
+
+type QueryOperateLogListResp struct {
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
+	Current  int64                      `json:"current,default=1"`
+	Data     []*QueryOperateLogListData `json:"data"`
+	PageSize int64                      `json:"pageSize,default=20"`
+	Success  bool                       `json:"success"`
+	Total    int64                      `json:"total"`
+}
+
+type QueryPostDetailData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	Id         int64  `json:"id"`         //编号
+	PostCode   string `json:"postCode"`   //岗位编码
+	PostName   string `json:"postName"`   //岗位名称
+	PostSort   int32  `json:"postSort"`   //岗位排序
+	PostStatus int32  `json:"postStatus"` //岗位状态
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryPostDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryPostDetailResp struct {
+	Code    string              `json:"code"`
+	Message string              `json:"message"`
+	Data    QueryPostDetailData `json:"data"`
+}
+
+type QueryPostListData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	Id         int64  `json:"id"`         //编号
+	PostCode   string `json:"postCode"`   //岗位编码
+	PostName   string `json:"postName"`   //岗位名称
+	PostSort   int32  `json:"postSort"`   //岗位排序
+	PostStatus int32  `json:"postStatus"` //岗位状态
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryPostListReq struct {
+	Current    int64  `form:"current,default=1"`   //第几页
+	PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+	PostCode   string `form:"postCode,optional"`   //岗位编码
+	PostName   string `form:"postName,optional"`   //岗位名称
+	PostStatus int32  `form:"postStatus,optional"` //岗位状态
+}
+
+type QueryPostListResp struct {
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
+	Current  int64                `json:"current,default=1"`
+	Data     []*QueryPostListData `json:"data"`
+	PageSize int64                `json:"pageSize,default=20"`
+	Success  bool                 `json:"success"`
+	Total    int64                `json:"total"`
 }
 
 type QueryProductDetailReq struct {
@@ -2577,6 +2712,66 @@ type QueryProductListResp struct {
 	Total    int64                   `json:"total"`
 }
 
+type QueryRoleDetailData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DataScope  int32  `json:"dataScope"`  //数据权限
+	Id         int64  `json:"id"`         //编号
+	IsAdmin    int32  `json:"isAdmin"`    //是否超级管理员
+	Remark     string `json:"remark"`     //备注
+	RoleKey    string `json:"roleKey"`    //权限字符
+	RoleName   string `json:"roleName"`   //角色名称
+	RoleSort   int32  `json:"roleSort"`   //角色排序
+	RoleStatus int32  `json:"roleStatus"` //角色状态
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryRoleDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryRoleDetailResp struct {
+	Code    string              `json:"code"`
+	Message string              `json:"message"`
+	Data    QueryRoleDetailData `json:"data"`
+}
+
+type QueryRoleListData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DataScope  int32  `json:"dataScope"`  //数据权限
+	Id         int64  `json:"id"`         //编号
+	IsAdmin    int32  `json:"isAdmin"`    //是否超级管理员
+	Remark     string `json:"remark"`     //备注
+	RoleKey    string `json:"roleKey"`    //权限字符
+	RoleName   string `json:"roleName"`   //角色名称
+	RoleSort   int32  `json:"roleSort"`   //角色排序
+	RoleStatus int32  `json:"roleStatus"` //角色状态
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryRoleListReq struct {
+	Current    int64  `form:"current,default=1"`   //第几页
+	PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+	DataScope  int32  `form:"dataScope,optional"`  //数据权限
+	IsAdmin    int32  `form:"isAdmin,optional"`    //是否超级管理员
+	RoleKey    string `form:"roleKey,optional"`    //权限字符
+	RoleName   string `form:"roleName,optional"`   //角色名称
+	RoleStatus int32  `form:"roleStatus,optional"` //角色状态
+}
+
+type QueryRoleListResp struct {
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
+	Current  int64                `json:"current,default=1"`
+	Data     []*QueryRoleListData `json:"data"`
+	PageSize int64                `json:"pageSize,default=20"`
+	Success  bool                 `json:"success"`
+	Total    int64                `json:"total"`
+}
+
 type QueryRoleMenuListReq struct {
 	RoleId int64 `form:"roleId"`
 }
@@ -2585,6 +2780,85 @@ type QueryRoleMenuListResp struct {
 	Code    string           `json:"code"`
 	Message string           `json:"message"`
 	Data    RoleMenuListData `json:"data"`
+}
+
+type QueryStatisticsLoginLogData struct {
+	DayLoginCount   int32 `json:"dayLoginCount"`   //查询当天登录人数（根据IP）
+	WeekLoginCount  int32 `json:"weekLoginCount"`  //统计当前周登录人数（根据IP）
+	MonthLoginCount int32 `json:"monthLoginCount"` //统计当前月登录人数（根据IP）
+}
+
+type QueryStatisticsLoginLogResp struct {
+	Code    string                      `json:"code"`
+	Message string                      `json:"message"`
+	Data    QueryStatisticsLoginLogData `json:"data"`
+}
+
+type QueryUserDetailData struct {
+	Avatar     string `json:"avatar"`     //头像
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DeptId     int64  `json:"deptId"`     //部门id
+	Email      string `json:"email"`      //邮箱
+	Id         int64  `json:"id"`         //编号
+	LoginIp    string `json:"loginIp"`    //登录ip
+	LoginTime  string `json:"loginTime"`  //登录时间
+	Mobile     string `json:"mobile"`     //手机号
+	NickName   string `json:"nickName"`   //昵称
+	Remark     string `json:"remark"`     //备注信息
+	Salt       string `json:"salt"`       //加密盐
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+	UserName   string `json:"userName"`   //用户名
+	UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
+}
+
+type QueryUserDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryUserDetailResp struct {
+	Code    string              `json:"code"`
+	Message string              `json:"message"`
+	Data    QueryUserDetailData `json:"data"`
+}
+
+type QueryUserListData struct {
+	Avatar     string `json:"avatar"`     //头像
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DeptId     int64  `json:"deptId"`     //部门id
+	Email      string `json:"email"`      //邮箱
+	Id         int64  `json:"id"`         //编号
+	LoginIp    string `json:"loginIp"`    //登录ip
+	LoginTime  string `json:"loginTime"`  //登录时间
+	Mobile     string `json:"mobile"`     //手机号
+	NickName   string `json:"nickName"`   //昵称
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+	UserName   string `json:"userName"`   //用户名
+	UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
+}
+
+type QueryUserListReq struct {
+	Current    int64  `form:"current,default=1"`   //第几页
+	PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+	DeptId     int64  `form:"deptId,optional"`     //部门id
+	Email      string `form:"email,optional"`      //邮箱
+	Mobile     string `form:"mobile,optional"`     //手机号
+	NickName   string `form:"nickName,optional"`   //昵称
+	UserStatus int32  `form:"userStatus,optional"` //帐号状态（0正常 1停用）
+}
+
+type QueryUserListResp struct {
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
+	Current  int64                `json:"current,default=1"`
+	Data     []*QueryUserListData `json:"data"`
+	PageSize int64                `json:"pageSize,default=20"`
+	Success  bool                 `json:"success"`
+	Total    int64                `json:"total"`
 }
 
 type QueryUserRoleListReq struct {
@@ -2601,7 +2875,7 @@ type QueryUserRoleListResp struct {
 }
 
 type ReSetPasswordReq struct {
-	Id int64 `json:"id"`
+	UserId int64 `json:"userId"`
 }
 
 type ReSetPasswordResp struct {
@@ -2611,25 +2885,18 @@ type ReSetPasswordResp struct {
 
 type RoleListData struct {
 	Id         int64  `json:"id"`         // 编号
-	Name       string `json:"name"`       // 角色名称
+	RoleName   string `json:"roleName"`   // 角色名称
 	Remark     string `json:"remark"`     // 备注
 	CreateBy   string `json:"createBy"`   // 创建人
 	CreateTime string `json:"createTime"` // 创建时间
 	UpdateBy   string `json:"updateBy"`   // 更新人
 	UpdateTime string `json:"updateTime"` // 更新时间
-	DelFlag    int32  `json:"delFlag"`    // 是否删除  0：已删除  1：正常
-	Status     int32  `json:"status"`     // 状态
+	RoleStatus int32  `json:"roleStatus"` // 状态
 }
 
 type RoleMenuListData struct {
 	MenuList []MenuTreeListData `json:"menuList"`
 	MenuIds  []int64            `json:"menuIds"`
-}
-
-type RoleRelations struct {
-	Id     int64  `json:"id"`
-	Name   string `json:"name"`
-	Remark string `json:"remark"`
 }
 
 type SkuStockList struct {
@@ -2644,21 +2911,6 @@ type SkuStockList struct {
 	PromotionPrice int64  `json:"promotionPrice"`
 	LockStock      int32  `json:"lockStock"`
 	SpData         string `json:"spData"`
-}
-
-type StatisticsLoginLogData struct {
-	DayLoginCount   int32 `json:"dayLoginCount"`   //查询当天登录人数（根据IP）
-	WeekLoginCount  int32 `json:"weekLoginCount"`  //统计当前周登录人数（根据IP）
-	MonthLoginCount int32 `json:"monthLoginCount"` //统计当前月登录人数（根据IP）
-}
-
-type StatisticsLoginLogReq struct {
-}
-
-type StatisticsLoginLogResp struct {
-	Code    string                 `json:"code"`
-	Message string                 `json:"message"`
-	Data    StatisticsLoginLogData `json:"data"`
 }
 
 type UpdateCompanyAddressReq struct {
@@ -2680,15 +2932,29 @@ type UpdateCompanyAddressResp struct {
 }
 
 type UpdateDeptReq struct {
-	Id        int64   `json:"id"`                // 编号
-	DeptName  string  `json:"deptName"`          // 机构名称
-	ParentId  int64   `json:"parentId"`          // 上级机构ID，一级机构为0
-	ParentIds []int64 `json:"parentIds"`         // 上级机构ID
-	OrderNum  int32   `json:"orderNum"`          // 排序
-	DelFlag   int32   `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+	DeptName   string `json:"deptName"`   //部门名称
+	DeptSort   int32  `json:"deptSort"`   //部门排序
+	DeptStatus int32  `json:"deptStatus"` //部门状态
+	Email      string `json:"email"`      //邮箱
+	Id         int64  `json:"id"`         //编号
+	Leader     string `json:"leader"`     //负责人
+	ParentId   int64  `json:"parentId"`   //上级机构ID，一级机构为0
+	ParentIds  string `json:"parentIds"`  //上级机构IDs，一级机构为0
+	Phone      string `json:"phone"`      //电话号码
+	Remark     string `json:"remark"`     //备注信息
 }
 
 type UpdateDeptResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateDeptStatusReq struct {
+	DeptStatus int32   `json:"deptStatus"` //部门状态
+	DeptIds    []int64 `json:"deptIds"`    //编号
+}
+
+type UpdateDeptStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -2709,7 +2975,17 @@ type UpdateDictItemResp struct {
 	Message string `json:"message"`
 }
 
-type UpdateDictReq struct {
+type UpdateDictItemStatusReq struct {
+	DictStatus int32   `json:"dictStatus"` //字典状态
+	DictIds    []int64 `json:"dictIds"`    //编号
+}
+
+type UpdateDictItemStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateDictTypeReq struct {
 	DictName   string `json:"dictName"`   //字典名称
 	DictStatus int32  `json:"dictStatus"` //字典状态
 	DictType   string `json:"dictType"`   //字典类型
@@ -2718,7 +2994,17 @@ type UpdateDictReq struct {
 	Remark     string `json:"remark"`     //备注信息
 }
 
-type UpdateDictResp struct {
+type UpdateDictTypeResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateDictTypeStatusReq struct {
+	DictStatus int32   `json:"dictStatus"` //字典状态
+	DictIds    []int64 `json:"dictIds"`    //编号
+}
+
+type UpdateDictTypeStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -2836,19 +3122,6 @@ type UpdateIntegrationConsumeSettingResp struct {
 	Message string `json:"message"`
 }
 
-type UpdateJobReq struct {
-	Id       int64  `json:"id"`       // 编号
-	JobName  string `json:"jobName"`  // 职位名称
-	OrderNum int32  `json:"orderNum"` // 排序
-	Remarks  string `json:"remarks"`  // 备注
-	DelFlag  int32  `json:"delFlag"`  // 是否删除  0：已删除  1：正常
-}
-
-type UpdateJobResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateMemberLevelReq struct {
 	Id                 int64  `json:"id"`
 	Name               string `json:"name"`
@@ -2945,23 +3218,34 @@ type UpdateMemberTaskResp struct {
 }
 
 type UpdateMenuReq struct {
-	Id            int64  `json:"id"`                     // 编号
-	Name          string `json:"name"`                   // 菜单名称
-	ParentId      int64  `json:"parentId"`               // 父菜单ID，一级菜单为0
-	Url           string `json:"url,optional"`           // 菜单URL,类型：1.普通页面（如用户管理， /sysmodel/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-	Perms         string `json:"perms,optional"`         // 授权(多个用逗号分隔，如：sysmodel:user:Add,sysmodel:user:edit)
-	Type          int32  `json:"type,optional"`          // 类型   0：目录   1：菜单   2：按钮
-	Icon          string `json:"icon,optional"`          // 菜单图标
-	OrderNum      int32  `json:"orderNum,optional"`      // 排序
-	VuePath       string `json:"vuePath,optional"`       // vue系统的path
-	VueComponent  string `json:"vueComponent,optional"`  // vue的页面
-	VueIcon       string `json:"vueIcon,optional"`       // vue的图标
-	VueRedirect   string `json:"vueRedirect,optional"`   // vue的路由重定向
-	DelFlag       int32  `json:"delFlag"`                // 是否删除  0：已删除  1：正常
-	BackgroundUrl string `json:"backgroundUrl,optional"` // 后台地址
+	Id            int64  `json:"id"`                     //编号
+	BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
+	MenuIcon      string `json:"menuIcon,optional"`      //菜单图标
+	MenuName      string `json:"menuName"`               //菜单名称
+	MenuPath      string `json:"menuPath,optional"`      //前端路由
+	MenuPerms     string `json:"menuPerms,optional"`     //权限标识
+	MenuSort      int32  `json:"menuSort,optional"`      //菜单排序
+	MenuStatus    int32  `json:"menuStatus,optional"`    //菜单状态
+	MenuType      int32  `json:"menuType,optional"`      //类型 0：目录,1：菜单,2：按钮,3：外链
+	ParentId      int64  `json:"parentId,optional"`      //父菜单ID，一级菜单为0
+	Remark        string `json:"remark,optional"`        //备注信息
+	VueComponent  string `json:"vueComponent,optional"`  //vue的页面
+	VueIcon       string `json:"vueIcon,optional"`       //vue的图标
+	VuePath       string `json:"vuePat,optionalh"`       //vue系统的path
+	VueRedirect   string `json:"vueRedirect,optional"`   //vue的路由重定向
 }
 
 type UpdateMenuResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateMenuStatusReq struct {
+	MenuIds    []int64 `json:"menuIds"`    //编号
+	MenuStatus int32   `json:"menuStatus"` //菜单状态
+}
+
+type UpdateMenuStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3019,6 +3303,30 @@ type UpdateOrderSettingReq struct {
 }
 
 type UpdateOrderSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdatePostReq struct {
+	Id         int64  `json:"id"`         //编号
+	PostCode   string `json:"postCode"`   //岗位编码
+	PostName   string `json:"postName"`   //岗位名称
+	PostSort   int32  `json:"postSort"`   //岗位排序
+	PostStatus int32  `json:"postStatus"` //岗位状态
+	Remark     string `json:"remark"`     //备注信息
+}
+
+type UpdatePostResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdatePostStatusReq struct {
+	PostIds    []int64 `json:"postIds"`    //编号
+	PostStatus int32   `json:"postStatus"` //岗位状态
+}
+
+type UpdatePostStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3323,13 +3631,27 @@ type UpdateRoleMenuListResp struct {
 }
 
 type UpdateRoleReq struct {
-	Id     int64  `json:"id"`     // 编号
-	Name   string `json:"name"`   // 角色名称
-	Remark string `json:"remark"` // 备注
-	Status int32  `json:"status"` // 状态
+	DataScope  int32  `json:"dataScope"`  //数据权限
+	Id         int64  `json:"id"`         //编号
+	IsAdmin    int32  `json:"isAdmin"`    //是否超级管理员
+	Remark     string `json:"remark"`     //备注
+	RoleKey    string `json:"roleKey"`    //权限字符
+	RoleName   string `json:"roleName"`   //角色名称
+	RoleSort   int32  `json:"roleSort"`   //角色排序
+	RoleStatus int32  `json:"roleStatus"` //角色状态
 }
 
 type UpdateRoleResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateRoleStatusReq struct {
+	RoleIds    []int64 `json:"roleIds"`    //编号
+	RoleStatus int32   `json:"roleStatus"` //角色状态
+}
+
+type UpdateRoleStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3395,15 +3717,18 @@ type UpdateSubjectResp struct {
 }
 
 type UpdateUserReq struct {
-	Id       int64  `json:"id"`
-	Email    string `json:"email"`
-	Mobile   string `json:"mobile"`
-	Name     string `json:"name"`
-	NickName string `json:"nickName"`
-	DeptId   int64  `json:"deptId"`
-	Status   int32  `json:"status"`
-	JobId    int64  `json:"jobId"`
-	DelFlag  int64  `json:"delFlag,default=2"` // 是否删除  0：已删除  1：正常
+	Avatar     string `json:"avatar"`     //头像
+	DeptId     int64  `json:"deptId"`     //部门id
+	Email      string `json:"email"`      //邮箱
+	Id         int64  `json:"id"`         //编号
+	Mobile     string `json:"mobile"`     //手机号
+	NickName   string `json:"nickName"`   //昵称
+	Remark     string `json:"remark"`     //备注信息
+	Salt       string `json:"salt"`       //加密盐
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+	UserName   string `json:"userName"`   //用户名
+	UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
 }
 
 type UpdateUserResp struct {
@@ -3417,6 +3742,16 @@ type UpdateUserRoleReq struct {
 }
 
 type UpdateUserRoleResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateUserStatusReq struct {
+	UserIds    []int64 `json:"UserIds"`    //编号
+	UserStatus int32   `json:"userStatus"` //帐号状态（0正常 1停用）
+}
+
+type UpdateUserStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3437,16 +3772,6 @@ type UserInfoData struct {
 type UserRoleListData struct {
 	RoleList []RoleListData `json:"roleList"`
 	RoleIds  []int64        `json:"roleIds"`
-}
-
-type UserStatusReq struct {
-	Id     int64 `json:"id"`
-	Status int32 `json:"status"` // 状态  0：禁用   1：正常
-}
-
-type UserStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UserInfoResp struct {

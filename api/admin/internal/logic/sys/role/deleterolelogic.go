@@ -32,10 +32,10 @@ func NewDeleteRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteR
 	}
 }
 
-// DeleteRole 删除角色(id为1的是系统预留超级管理员角色,不能删除)
+// DeleteRole 删除角色
 func (l *DeleteRoleLogic) DeleteRole(req *types.DeleteRoleReq) (*types.DeleteRoleResp, error) {
 
-	_, err := l.svcCtx.RoleService.RoleDelete(l.ctx, &sysclient.RoleDeleteReq{
+	_, err := l.svcCtx.RoleService.DeleteRole(l.ctx, &sysclient.DeleteRoleReq{
 		Ids: req.Ids,
 	})
 

@@ -47,7 +47,7 @@ func (l *QueryRoleMenuListLogic) QueryRoleMenuList(in *sysclient.QueryRoleMenuLi
 	for _, menu := range menus {
 		menuList = append(menuList, &sysclient.MenuListData{
 			Id:       menu.ID,
-			Name:     menu.Name,
+			MenuName: menu.MenuName,
 			ParentId: menu.ParentID,
 		})
 		menuIds = append(menuIds, menu.ID)

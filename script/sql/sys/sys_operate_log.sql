@@ -15,6 +15,6 @@ create table sys_operate_log
     operation_ip       varchar(64) default ''                not null comment '操作地址',
     operation_time     timestamp   default CURRENT_TIMESTAMP not null comment '操作时间'
 )
-    comment '系统操作日志';
+    comment '系统操作日志表';
 
 

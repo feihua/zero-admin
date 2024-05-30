@@ -7,10 +7,8 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"google.golang.org/grpc/status"
-	"strconv"
-
 	"github.com/zeromicro/go-zero/core/logx"
+	"google.golang.org/grpc/status"
 )
 
 // QueryMenuListLogic 查询菜单列表
@@ -33,11 +31,8 @@ func NewQueryMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 }
 
 // QueryMenuList 查询菜单列表
-func (l *QueryMenuListLogic) QueryMenuList(req *types.ListMenuReq) (*types.ListMenuResp, error) {
-	resp, err := l.svcCtx.MenuService.MenuList(l.ctx, &sysclient.MenuListReq{
-		Name: req.Name,
-		Url:  req.Url,
-	})
+func (l *QueryMenuListLogic) QueryMenuList(req *types.QueryMenuListReq) (*types.QueryMenuListResp, error) {
+	result, err := l.svcCtx.MenuService.QueryMenuList(l.ctx, &sysclient.QueryMenuListReq{})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单列表,参数: %+v,异常:%s", req, err.Error())
@@ -45,40 +40,39 @@ func (l *QueryMenuListLogic) QueryMenuList(req *types.ListMenuReq) (*types.ListM
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.ListMenuData
+	var list []*types.QueryMenuListData
 
-	for _, menu := range resp.List {
-		menuItem := &types.ListMenuData{
-			Id:            menu.Id,
-			Key:           strconv.FormatInt(menu.Id, 10),
-			Name:          menu.Name,
-			Title:         menu.Name,
-			ParentId:      menu.ParentId,
-			Url:           menu.Url,
-			Perms:         menu.Perms,
-			Type:          menu.Type,
-			Icon:          menu.Icon,
-			OrderNum:      menu.OrderNum,
+	for _, menu := range result.List {
+		menuItem := &types.QueryMenuListData{
+			BackgroundUrl: menu.BackgroundUrl,
 			CreateBy:      menu.CreateBy,
 			CreateTime:    menu.CreateTime,
+			Id:            menu.Id,
+			MenuIcon:      menu.MenuIcon,
+			MenuName:      menu.MenuName,
+			MenuPath:      menu.MenuPath,
+			MenuPerms:     menu.MenuPerms,
+			MenuSort:      menu.MenuSort,
+			MenuStatus:    menu.MenuStatus,
+			MenuType:      menu.MenuType,
+			ParentId:      menu.ParentId,
+			Remark:        menu.Remark,
 			UpdateBy:      menu.UpdateBy,
 			UpdateTime:    menu.UpdateTime,
-			DelFlag:       menu.DelFlag,
-			VuePath:       menu.VuePath,
 			VueComponent:  menu.VueComponent,
 			VueIcon:       menu.VueIcon,
+			VuePath:       menu.VuePath,
 			VueRedirect:   menu.VueRedirect,
-			BackgroundUrl: menu.BackgroundUrl,
 		}
 
 		list = append(list, menuItem)
 	}
 
-	return &types.ListMenuResp{
+	return &types.QueryMenuListResp{
 		Code:    "000000",
 		Message: "查询菜单成功",
 		Data:    list,
 		Success: true,
-		Total:   resp.Total,
+		Total:   result.Total,
 	}, nil
 }

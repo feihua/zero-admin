@@ -32,16 +32,20 @@ func NewUpdateRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateR
 	}
 }
 
-// UpdateRole 更新角色(id为1的是系统预留超级管理员角色,不能更新)
+// UpdateRole 更新角色
 func (l *UpdateRoleLogic) UpdateRole(req *types.UpdateRoleReq) (*types.UpdateRoleResp, error) {
-	roleUpdateReq := sysclient.RoleUpdateReq{
-		Id:       req.Id,
-		Name:     req.Name,
-		Remark:   req.Remark,
-		UpdateBy: l.ctx.Value("userName").(string),
-		Status:   req.Status,
+	roleReq := sysclient.UpdateRoleReq{
+		DataScope:  req.DataScope,
+		Id:         req.Id,
+		IsAdmin:    req.IsAdmin,
+		Remark:     req.Remark,
+		RoleKey:    req.RoleKey,
+		RoleName:   req.RoleName,
+		RoleSort:   req.RoleSort,
+		RoleStatus: req.RoleStatus,
+		UpdateBy:   l.ctx.Value("userName").(string),
 	}
-	_, err := l.svcCtx.RoleService.RoleUpdate(l.ctx, &roleUpdateReq)
+	_, err := l.svcCtx.RoleService.UpdateRole(l.ctx, &roleReq)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新角色信息失败,参数:%+v,异常:%s", req, err.Error())

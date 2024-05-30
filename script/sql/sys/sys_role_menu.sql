@@ -5,5 +5,5 @@ create table sys_role_menu
     role_id bigint not null comment '角色Id',
     menu_id bigint not null comment '菜单Id'
 )
-    comment '角色菜单关联';
+    comment '角色菜单关联表';
 

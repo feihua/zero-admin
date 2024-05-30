@@ -47,15 +47,18 @@ func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleLi
 
 	for _, role := range result {
 		roleList = append(roleList, &sysclient.RoleListData{
-			Id:         role.ID,
-			Name:       role.Name,
-			Remark:     role.Remark,
 			CreateBy:   role.CreateBy,
 			CreateTime: role.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateBy:   role.UpdateBy,
+			DataScope:  role.DataScope,
+			Id:         role.ID,
+			IsAdmin:    role.IsAdmin,
 			UpdateTime: common.TimeToString(role.UpdateTime),
-			DelFlag:    role.DelFlag,
-			Status:     role.Status,
+			Remark:     role.Remark,
+			RoleKey:    role.RoleKey,
+			RoleName:   role.RoleName,
+			RoleSort:   role.RoleSort,
+			RoleStatus: role.RoleStatus,
+			UpdateBy:   role.UpdateBy,
 		})
 		//admin账号全部角色
 		roleIds = append(roleIds, role.ID)

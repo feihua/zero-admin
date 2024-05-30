@@ -10,13 +10,13 @@ import (
 
 const TableNameSysMenu = "sys_menu"
 
-// SysMenu 菜单管理
+// SysMenu 菜单信息表
 type SysMenu struct {
-	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`    // 编号
-	MenuName      string     `gorm:"column:menu_name;not null;comment:菜单名称" json:"menu_name"`         // 菜单名称
-	ParentID      int64      `gorm:"column:parent_id;not null;comment:父菜单ID，一级菜单为0" json:"parent_id"` // 父菜单ID，一级菜单为0
-	MenuPath      string     `gorm:"column:menu_path;not null" json:"menu_path"`
-	MenuPerms     string     `gorm:"column:menu_perms;not null" json:"menu_perms"`
+	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
+	MenuName      string     `gorm:"column:menu_name;not null;comment:菜单名称" json:"menu_name"`                               // 菜单名称
+	ParentID      int64      `gorm:"column:parent_id;not null;comment:父菜单ID，一级菜单为0" json:"parent_id"`                       // 父菜单ID，一级菜单为0
+	MenuPath      string     `gorm:"column:menu_path;not null;comment:前端路由" json:"menu_path"`                               // 前端路由
+	MenuPerms     string     `gorm:"column:menu_perms;not null;comment:权限标识" json:"menu_perms"`                             // 权限标识
 	MenuType      int32      `gorm:"column:menu_type;not null;comment:类型 0：目录,1：菜单,2：按钮,3：外链" json:"menu_type"`             // 类型 0：目录,1：菜单,2：按钮,3：外链
 	MenuIcon      string     `gorm:"column:menu_icon;not null;comment:菜单图标" json:"menu_icon"`                               // 菜单图标
 	MenuSort      int32      `gorm:"column:menu_sort;not null;comment:菜单排序" json:"menu_sort"`                               // 菜单排序

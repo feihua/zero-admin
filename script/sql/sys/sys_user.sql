@@ -23,4 +23,4 @@ create table sys_user
     constraint name
         unique (user_name)
 )
-    comment '用户管理';
+    comment '用户信息表';

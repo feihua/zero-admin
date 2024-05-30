@@ -1,0 +1,87 @@
+package userservicelogic
+
+import (
+	"context"
+	"errors"
+	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
+	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+// QueryUserListLogic
+/*
+Author: LiuFeiHua
+Date: 2023/12/18 14:35
+*/
+type QueryUserListLogic struct {
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+	logx.Logger
+}
+
+func NewQueryUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryUserListLogic {
+	return &QueryUserListLogic{
+		ctx:    ctx,
+		svcCtx: svcCtx,
+		Logger: logx.WithContext(ctx),
+	}
+}
+
+// QueryUserList 查询用户列表信息
+func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sysclient.QueryUserListResp, error) {
+
+	q := query.SysUser.WithContext(l.ctx)
+	if in.DeptId != 0 {
+		q = q.Where(query.SysUser.DeptID.Eq(in.DeptId))
+	}
+	if len(in.Email) > 0 {
+		q = q.Where(query.SysUser.Email.Like("%" + in.Email + "%"))
+	}
+	if len(in.Mobile) > 0 {
+		q = q.Where(query.SysUser.Mobile.Like("%" + in.Mobile + "%"))
+	}
+	if len(in.NickName) > 0 {
+		q = q.Where(query.SysUser.NickName.Like("%" + in.NickName + "%"))
+	}
+	if in.UserStatus != 2 {
+		q = q.Where(query.SysUser.UserStatus.Eq(in.UserStatus))
+	}
+
+	offset := (in.PageNum - 1) * in.PageSize
+	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询用户列表信息失败")
+	}
+
+	var list []*sysclient.UserListData
+	for _, user := range result {
+		list = append(list, &sysclient.UserListData{
+			Avatar:     user.Avatar,
+			CreateBy:   user.CreateBy,
+			CreateTime: user.CreateTime.Format("2006-01-02 15:04:05"),
+			DeptId:     user.DeptID,
+			Email:      user.Email,
+			Id:         user.ID,
+			UserStatus: user.UserStatus,
+			LoginIp:    user.LoginIP,
+			LoginTime:  common.TimeToString(user.LoginTime),
+			Mobile:     user.Mobile,
+			NickName:   user.NickName,
+			Remark:     user.Remark,
+			UpdateBy:   user.UpdateBy,
+			UpdateTime: common.TimeToString(user.UpdateTime),
+			UserName:   user.UserName,
+		})
+	}
+
+	logc.Infof(l.ctx, "查询用户列表信息,参数：%+v,响应：%+v", in, list)
+	return &sysclient.QueryUserListResp{
+		Total: count,
+		List:  list,
+	}, nil
+}

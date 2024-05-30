@@ -46,7 +46,7 @@ func newSysOperateLog(db *gorm.DB, opts ...gen.DOOption) sysOperateLog {
 	return _sysOperateLog
 }
 
-// sysOperateLog 系统操作日志
+// sysOperateLog 系统操作日志表
 type sysOperateLog struct {
 	sysOperateLogDo sysOperateLogDo
 

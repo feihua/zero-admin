@@ -26,7 +26,7 @@ func main() {
 
 	g.ApplyBasic(
 		g.GenerateModel("sys_dept"),
-		g.GenerateModel("sys_dict"),
+		g.GenerateModel("sys_dict_type"),
 		g.GenerateModel("sys_dict_item"),
 		g.GenerateModel("sys_post"),
 		g.GenerateModel("sys_operate_log"),

@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加字典类型表
+message AddDictTypeReq {
+  string create_by = 1; //创建者
+  string dict_name = 3; //字典名称
+  int32 dict_status = 4; //字典状态
+  string dict_type = 5; //字典类型
+  int32 is_system = 8; //是否系统预留  0：否  1：是
+  string remark = 9; //备注信息
+
+}
+
+message AddDictTypeResp {
+  string pong = 1;
+}
+
+// 删除字典类型表
+message DeleteDictTypeReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteDictTypeResp {
+  string pong = 1;
+}
+
+// 更新字典类型表
+message UpdateDictTypeReq {
+  string dict_name = 3; //字典名称
+  int32 dict_status = 4; //字典状态
+  string dict_type = 5; //字典类型
+  int64 id = 6; //编号
+  int32 is_system = 8; //是否系统预留  0：否  1：是
+  string remark = 9; //备注信息
+  string update_by = 10; //更新者
+
+}
+
+message UpdateDictTypeResp {
+  string pong = 1;
+}
+
+// 更新字典类型表状态
+message UpdateDictTypeStatusReq {
+  int32 dict_status = 4; //字典状态
+  repeated int64 ids = 6; //编号
+  string update_by = 10; //更新者
+
+}
+
+message UpdateDictTypeStatusResp {
+  string pong = 1;
+}
+
+// 查询字典类型表详情
+message QueryDictTypeDetailReq {
+    int64 id = 1;
+}
+
+message QueryDictTypeDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string dict_name = 3; //字典名称
+  int32 dict_status = 4; //字典状态
+  string dict_type = 5; //字典类型
+  int64 id = 6; //编号
+  int32 is_system = 8; //是否系统预留  0：否  1：是
+  string remark = 9; //备注信息
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
+
+}
+
+// 分页查询字典类型表列表
+message QueryDictTypeListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string dict_name = 3; //字典名称
+  int32 dict_status = 4; //字典状态
+  string dict_type = 5; //字典类型
+  int32 is_system = 8; //是否系统预留  0：否  1：是
+
+}
+
+message DictTypeListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string dict_name = 3; //字典名称
+  int32 dict_status = 4; //字典状态
+  string dict_type = 5; //字典类型
+  int64 id = 6; //编号
+  int32 is_system = 8; //是否系统预留  0：否  1：是
+  string remark = 9; //备注信息
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
+
+}
+
+message QueryDictTypeListResp {
+  int64 total = 1;
+  repeated  DictTypeListData list = 2;
+}
+
+// 字典类型表
+service DictTypeService {
+  // 添加字典类型表
+  rpc AddDictType(AddDictTypeReq) returns (AddDictTypeResp){}
+  // 删除字典类型表
+  rpc DeleteDictType(DeleteDictTypeReq) returns (DeleteDictTypeResp){}
+  // 更新字典类型表
+  rpc UpdateDictType(UpdateDictTypeReq) returns (UpdateDictTypeResp ){}
+  // 更新字典类型表状态
+  rpc UpdateDictTypeStatus(UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp ){}
+  // 查询字典类型表详情
+   rpc QueryDictTypeDetail(QueryDictTypeDetailReq) returns (QueryDictTypeDetailResp){}
+  // 查询字典类型表列表
+  rpc QueryDictTypeList(QueryDictTypeListReq) returns (QueryDictTypeListResp){}
+
+
+}

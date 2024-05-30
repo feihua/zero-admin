@@ -22,44 +22,58 @@ func NewUserServiceServer(svcCtx *svc.ServiceContext) *UserServiceServer {
 	}
 }
 
+// 用户登录
 func (s *UserServiceServer) Login(ctx context.Context, in *sysclient.LoginReq) (*sysclient.LoginResp, error) {
 	l := userservicelogic.NewLoginLogic(ctx, s.svcCtx)
 	return l.Login(in)
 }
 
+// 获取用户个人信息
 func (s *UserServiceServer) UserInfo(ctx context.Context, in *sysclient.InfoReq) (*sysclient.InfoResp, error) {
 	l := userservicelogic.NewUserInfoLogic(ctx, s.svcCtx)
 	return l.UserInfo(in)
 }
 
-func (s *UserServiceServer) UserAdd(ctx context.Context, in *sysclient.UserAddReq) (*sysclient.UserAddResp, error) {
-	l := userservicelogic.NewUserAddLogic(ctx, s.svcCtx)
-	return l.UserAdd(in)
-}
-
-func (s *UserServiceServer) UserList(ctx context.Context, in *sysclient.UserListReq) (*sysclient.UserListResp, error) {
-	l := userservicelogic.NewUserListLogic(ctx, s.svcCtx)
-	return l.UserList(in)
-}
-
-func (s *UserServiceServer) UserUpdate(ctx context.Context, in *sysclient.UserUpdateReq) (*sysclient.UserUpdateResp, error) {
-	l := userservicelogic.NewUserUpdateLogic(ctx, s.svcCtx)
-	return l.UserUpdate(in)
-}
-
-func (s *UserServiceServer) UserDelete(ctx context.Context, in *sysclient.UserDeleteReq) (*sysclient.UserDeleteResp, error) {
-	l := userservicelogic.NewUserDeleteLogic(ctx, s.svcCtx)
-	return l.UserDelete(in)
-}
-
+// 重置用户密码
 func (s *UserServiceServer) ReSetPassword(ctx context.Context, in *sysclient.ReSetPasswordReq) (*sysclient.ReSetPasswordResp, error) {
 	l := userservicelogic.NewReSetPasswordLogic(ctx, s.svcCtx)
 	return l.ReSetPassword(in)
 }
 
-func (s *UserServiceServer) UpdateUserStatus(ctx context.Context, in *sysclient.UserStatusReq) (*sysclient.UserStatusResp, error) {
+// 添加用户信息表
+func (s *UserServiceServer) AddUser(ctx context.Context, in *sysclient.AddUserReq) (*sysclient.AddUserResp, error) {
+	l := userservicelogic.NewAddUserLogic(ctx, s.svcCtx)
+	return l.AddUser(in)
+}
+
+// 删除用户信息表
+func (s *UserServiceServer) DeleteUser(ctx context.Context, in *sysclient.DeleteUserReq) (*sysclient.DeleteUserResp, error) {
+	l := userservicelogic.NewDeleteUserLogic(ctx, s.svcCtx)
+	return l.DeleteUser(in)
+}
+
+// 更新用户信息表
+func (s *UserServiceServer) UpdateUser(ctx context.Context, in *sysclient.UpdateUserReq) (*sysclient.UpdateUserResp, error) {
+	l := userservicelogic.NewUpdateUserLogic(ctx, s.svcCtx)
+	return l.UpdateUser(in)
+}
+
+// 更新用户信息表状态
+func (s *UserServiceServer) UpdateUserStatus(ctx context.Context, in *sysclient.UpdateUserStatusReq) (*sysclient.UpdateUserStatusResp, error) {
 	l := userservicelogic.NewUpdateUserStatusLogic(ctx, s.svcCtx)
 	return l.UpdateUserStatus(in)
+}
+
+// 查询用户信息表详情
+func (s *UserServiceServer) QueryUserDetail(ctx context.Context, in *sysclient.QueryUserDetailReq) (*sysclient.QueryUserDetailResp, error) {
+	l := userservicelogic.NewQueryUserDetailLogic(ctx, s.svcCtx)
+	return l.QueryUserDetail(in)
+}
+
+// 查询用户信息表列表
+func (s *UserServiceServer) QueryUserList(ctx context.Context, in *sysclient.QueryUserListReq) (*sysclient.QueryUserListResp, error) {
+	l := userservicelogic.NewQueryUserListLogic(ctx, s.svcCtx)
+	return l.QueryUserList(in)
 }
 
 // 查询用户与角色的关联
@@ -72,4 +86,10 @@ func (s *UserServiceServer) QueryUserRoleList(ctx context.Context, in *sysclient
 func (s *UserServiceServer) UpdateUserRoleList(ctx context.Context, in *sysclient.UpdateUserRoleListReq) (*sysclient.UpdateUserRoleListResp, error) {
 	l := userservicelogic.NewUpdateUserRoleListLogic(ctx, s.svcCtx)
 	return l.UpdateUserRoleList(in)
+}
+
+// 查询所有部门和岗位
+func (s *UserServiceServer) QueryDeptAndPostList(ctx context.Context, in *sysclient.QueryDeptAndPostListReq) (*sysclient.QueryDeptAndPostListResp, error) {
+	l := userservicelogic.NewQueryDeptAndPostListLogic(ctx, s.svcCtx)
+	return l.QueryDeptAndPostList(in)
 }

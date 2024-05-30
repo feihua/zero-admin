@@ -32,11 +32,11 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) U
 }
 
 // UpdateUserStatus 更新用户状态
-func (l *UpdateUserStatusLogic) UpdateUserStatus(req *types.UserStatusReq) (*types.UserStatusResp, error) {
+func (l *UpdateUserStatusLogic) UpdateUserStatus(req *types.UpdateUserStatusReq) (*types.UpdateUserStatusResp, error) {
 
-	_, err := l.svcCtx.UserService.UpdateUserStatus(l.ctx, &sysclient.UserStatusReq{
-		Id:         req.Id,
-		UserStatus: req.Status,
+	_, err := l.svcCtx.UserService.UpdateUserStatus(l.ctx, &sysclient.UpdateUserStatusReq{
+		Ids:        req.UserIds,
+		UserStatus: req.UserStatus,
 		UpdateBy:   l.ctx.Value("userName").(string),
 	})
 
@@ -45,7 +45,7 @@ func (l *UpdateUserStatusLogic) UpdateUserStatus(req *types.UserStatusReq) (*typ
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UserStatusResp{
+	return &types.UpdateUserStatusResp{
 		Code:    "000000",
 		Message: "更新用户状态成功",
 	}, nil

@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryDictItemListLogic 字典项
+// QueryDictItemListLogic 字典数据列表
 /*
 Author: LiuFeiHua
 Date: 2024/5/28 16:01
@@ -32,29 +32,29 @@ func NewQueryDictItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-// QueryDictItemList 查询字典项
-func (l *QueryDictItemListLogic) QueryDictItemList(req *types.ListDictItemReq) (resp *types.ListDictItemResp, err error) {
-	result, err := l.svcCtx.DictItemService.QueryDictItemList(l.ctx, &sysclient.DictItemListReq{
-		Current:    req.Current,
+// QueryDictItemList 查询字典数据列表
+func (l *QueryDictItemListLogic) QueryDictItemList(req *types.QueryDictItemListReq) (resp *types.QueryDictItemListResp, err error) {
+	result, err := l.svcCtx.DictItemService.QueryDictItemList(l.ctx, &sysclient.QueryDictItemListReq{
+		PageNum:    req.Current,
 		PageSize:   req.PageSize,
-		DictType:   req.DictType,
 		DictLabel:  req.DictLabel,
 		DictStatus: req.DictStatus,
+		DictType:   req.DictType,
+		IsDefault:  req.DictStatus,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询字典项列表,参数: %+v,异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询字典数据列表,参数: %+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.ListDictItemData
+	var list []*types.QueryDictItemListData
 
 	for _, dict := range result.List {
-		list = append(list, &types.ListDictItemData{
+		list = append(list, &types.QueryDictItemListData{
 			CreateBy:   dict.CreateBy,
 			CreateTime: dict.CreateTime,
-			DelFlag:    dict.DelFlag,
 			DictLabel:  dict.DictLabel,
 			DictSort:   dict.DictStatus,
 			DictStatus: dict.DictStatus,
@@ -68,9 +68,9 @@ func (l *QueryDictItemListLogic) QueryDictItemList(req *types.ListDictItemReq) (
 		})
 	}
 
-	return &types.ListDictItemResp{
+	return &types.QueryDictItemListResp{
 		Code:     "000000",
-		Message:  "查询字典项成功",
+		Message:  "查询字典数据列表成功",
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

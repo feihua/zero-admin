@@ -50,10 +50,10 @@ func (l *QueryRoleMenuListLogic) QueryRoleMenuList(req *types.QueryRoleMenuListR
 	for _, menu := range result.List {
 		menuList = append(menuList, types.MenuTreeListData{
 			Key:      strconv.FormatInt(menu.Id, 10),
-			Title:    menu.Name,
+			Title:    menu.MenuName,
 			ParentId: menu.ParentId,
 			Id:       menu.Id,
-			Label:    menu.Name,
+			Label:    menu.MenuName,
 		})
 	}
 

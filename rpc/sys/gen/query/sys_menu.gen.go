@@ -53,7 +53,7 @@ func newSysMenu(db *gorm.DB, opts ...gen.DOOption) sysMenu {
 	return _sysMenu
 }
 
-// sysMenu 菜单管理
+// sysMenu 菜单信息表
 type sysMenu struct {
 	sysMenuDo sysMenuDo
 
@@ -61,8 +61,8 @@ type sysMenu struct {
 	ID            field.Int64  // 编号
 	MenuName      field.String // 菜单名称
 	ParentID      field.Int64  // 父菜单ID，一级菜单为0
-	MenuPath      field.String
-	MenuPerms     field.String
+	MenuPath      field.String // 前端路由
+	MenuPerms     field.String // 权限标识
 	MenuType      field.Int32  // 类型 0：目录,1：菜单,2：按钮,3：外链
 	MenuIcon      field.String // 菜单图标
 	MenuSort      field.Int32  // 菜单排序

@@ -1,0 +1,134 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加角色信息表
+message AddRoleReq {
+  string create_by = 1; //创建者
+  int32 data_scope = 2; //数据权限
+  int32 is_admin = 3; //是否超级管理员
+  string remark = 4; //备注
+  string role_key = 5; //权限字符
+  string role_name = 6; //角色名称
+  int32 role_sort = 7; //角色排序
+  int32 role_status = 8; //角色状态
+
+}
+
+message AddRoleResp {
+  string pong = 1;
+}
+
+// 删除角色信息表
+message DeleteRoleReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteRoleResp {
+  string pong = 1;
+}
+
+// 更新角色信息表
+message UpdateRoleReq {
+  int32 data_scope = 1; //数据权限
+  int64 id = 2; //编号
+  int32 is_admin = 3; //是否超级管理员
+  string remark = 4; //备注
+  string role_key = 5; //权限字符
+  string role_name = 6; //角色名称
+  int32 role_sort = 7; //角色排序
+  int32 role_status = 8; //角色状态
+  string update_by = 9; //更新者
+
+}
+
+message UpdateRoleResp {
+  string pong = 1;
+}
+
+// 更新角色信息表状态
+message UpdateRoleStatusReq {
+  repeated int64 ids = 1; //编号
+  int32 role_status = 2; //角色状态
+  string update_by = 3; //更新者
+
+}
+
+message UpdateRoleStatusResp {
+  string pong = 1;
+}
+
+// 查询角色信息表详情
+message QueryRoleDetailReq {
+    int64 id = 1;
+}
+
+message QueryRoleDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int32 data_scope = 3; //数据权限
+  int64 id = 4; //编号
+  int32 is_admin = 5; //是否超级管理员
+  string update_time = 6; //更新时间
+  string remark = 7; //备注
+  string role_key = 8; //权限字符
+  string role_name = 9; //角色名称
+  int32 role_sort = 10; //角色排序
+  int32 role_status = 11; //角色状态
+  string update_by = 12; //更新者
+
+
+}
+
+// 分页查询角色信息表列表
+message QueryRoleListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 is_admin = 3; //是否超级管理员
+  string role_key = 4; //权限字符
+  string role_name = 5; //角色名称
+  int32 role_status = 6; //角色状态
+
+}
+
+message RoleListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int32 data_scope = 3; //数据权限
+  int64 id = 4; //编号
+  int32 is_admin = 5; //是否超级管理员
+  string update_time = 6; //更新时间
+  string remark = 7; //备注
+  string role_key = 8; //权限字符
+  string role_name = 9; //角色名称
+  int32 role_sort = 10; //角色排序
+  int32 role_status = 11; //角色状态
+  string update_by = 12; //更新者
+
+
+}
+
+message QueryRoleListResp {
+  int64 total = 1;
+  repeated  RoleListData list = 2;
+}
+
+// 角色信息表
+service RoleService {
+  // 添加角色信息表
+  rpc AddRole(AddRoleReq) returns (AddRoleResp){}
+  // 删除角色信息表
+  rpc DeleteRole(DeleteRoleReq) returns (DeleteRoleResp){}
+  // 更新角色信息表
+  rpc UpdateRole(UpdateRoleReq) returns (UpdateRoleResp ){}
+  // 更新角色信息表状态
+  rpc UpdateRoleStatus(UpdateRoleStatusReq) returns (UpdateRoleStatusResp ){}
+  // 查询角色信息表详情
+   rpc QueryRoleDetail(QueryRoleDetailReq) returns (QueryRoleDetailResp){}
+  // 查询角色信息表列表
+  rpc QueryRoleList(QueryRoleListReq) returns (QueryRoleListResp){}
+
+
+}
