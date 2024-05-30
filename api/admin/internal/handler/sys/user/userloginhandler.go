@@ -1,7 +1,6 @@
 package user
 
 import (
-	"fmt"
 	"github.com/ua-parser/uap-go/uaparser"
 	"net/http"
 
@@ -31,17 +30,13 @@ func UserLoginHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 		//}
 		userAgent := r.Header.Get("User-Agent")
 		parser := uaparser.NewFromSaved()
-
-		// 解析User-Agent
 		ua := parser.Parse(userAgent)
 
-		// 获取浏览器和操作系统信息
-		fmt.Println("Browser:", ua.UserAgent)
-		fmt.Println("Device:", ua.Device)
-		fmt.Println("OS:", ua.Os)
+		browser := ua.UserAgent.Family + " " + ua.UserAgent.Major
+		os := ua.Os.Family + " " + ua.Os.Major
 
 		l := user.NewUserLoginLogic(r.Context(), ctx)
-		resp, err := l.UserLogin(&req, httpx.GetRemoteAddr(r))
+		resp, err := l.UserLogin(&req, httpx.GetRemoteAddr(r), browser, os)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

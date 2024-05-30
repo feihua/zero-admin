@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -32,21 +33,21 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // UpdateUserStatus 更新用户状态
 func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UpdateUserStatusReq) (*sysclient.UpdateUserStatusResp, error) {
-	q := query.SysUser
 	// 1.排除超级管理员
 	var userIds []int64
-	//for _, userId := range in.Ids {
-	//	count, _ := q.WithContext(l.ctx).Where(q.RoleID.Eq(1), q.UserID.Eq(userId)).Count()
-	//	if count == 0 {
-	//		userIds = append(userIds, userId)
-	//	}
-	//}
+	for _, userId := range in.Ids {
+		if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
+			continue
+		}
+		userIds = append(userIds, userId)
+	}
 
-	_, err := q.WithContext(l.ctx).Where(query.SysUser.ID.In(userIds...)).Update(q.UserStatus, in.UserStatus)
+	q := query.SysUser
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(userIds...)).Update(q.UserStatus, in.UserStatus)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "删除用户异常,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("删除用户异常")
+		logc.Errorf(l.ctx, "更新用户状态异常,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新用户状态异常")
 	}
 
 	return &sysclient.UpdateUserStatusResp{}, nil

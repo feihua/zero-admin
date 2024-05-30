@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddDictItemLogic 添加字典数据表
+// AddDictItemLogic 添加字典数据
 /*
 Author: LiuFeiHua
 Date: 2024/5/28 17:03
@@ -31,7 +31,7 @@ func NewAddDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddDi
 	}
 }
 
-// AddDictItem 添加字典数据表
+// AddDictItem 添加字典数据
 // 1.根据字典类型查询字典是否已存在
 // 2.根据字典数据名称查询字典数据是否已存在
 // 3.如果字典数据已存在,则直接返回

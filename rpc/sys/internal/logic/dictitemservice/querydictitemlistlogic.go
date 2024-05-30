@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryDictItemListLogic 查询字典数据表列表
+// QueryDictItemListLogic 查询字典数据列表
 /*
 Author: LiuFeiHua
 Date: 2024/5/28 17:03
@@ -32,7 +32,7 @@ func NewQueryDictItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-// QueryDictItemList 查询字典数据表列表
+// QueryDictItemList 查询字典数据列表
 func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemListReq) (*sysclient.QueryDictItemListResp, error) {
 	q := query.SysDictItem.WithContext(l.ctx)
 

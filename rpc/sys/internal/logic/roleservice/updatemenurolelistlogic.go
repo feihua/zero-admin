@@ -32,12 +32,14 @@ func NewUpdateMenuRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-// UpdateMenuRoleList 更新用户与角色的关联
+// UpdateMenuRoleList 更新角色与菜单的关联
 // 1.删除角色与菜单的关联
 // 2.添加角色与菜单的关联
 func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateMenuRoleReq) (*sysclient.UpdateMenuRoleResp, error) {
-	//id为1的是系统预留超级管理员角色,不用关联
-	if in.RoleId == 1 {
+	//sys_role表is_admin为1表示系统预留超级管理员角色,不用关联
+	role := query.SysRole
+	count, _ := role.WithContext(l.ctx).Where(role.ID.Eq(in.RoleId), role.IsAdmin.Eq(1)).Count()
+	if count == 1 {
 		return &sysclient.UpdateMenuRoleResp{}, nil
 	}
 

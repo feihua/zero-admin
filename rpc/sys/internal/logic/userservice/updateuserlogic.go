@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -37,12 +38,10 @@ func NewUpdateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 // 2.用户存在时,则直接更新用户
 func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.UpdateUserResp, error) {
 
-	role := query.SysUserRole
-	count, _ := role.WithContext(l.ctx).Where(role.RoleID.Eq(1), role.UserID.Eq(in.Id)).Count()
-
-	if count == 1 {
-		logc.Errorf(l.ctx, "更新用户异常,参数userId:%d,异常:%s", in.Id, "id为1是系统预留超级管理员用户,不能更新")
-		return nil, errors.New("不能修改超级管理员用户")
+	//不能修改超级管理员用户
+	if common.IsAdmin(l.ctx, in.Id, l.svcCtx.DB) {
+		logc.Errorf(l.ctx, "不能重置重置管理员的密码,参数:%+v", in)
+		return nil, errors.New("不能重置重置管理员的密码")
 	}
 
 	q := query.SysUser.WithContext(l.ctx)

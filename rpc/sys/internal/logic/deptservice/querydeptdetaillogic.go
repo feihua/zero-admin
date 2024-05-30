@@ -50,7 +50,7 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq)
 		Id:         dept.ID,
 		Leader:     dept.Leader,
 		ParentId:   dept.ParentID,
-		ParentIds:  getParentIds(dept.ParentIds),
+		ParentIds:  GetParentIds(dept.ParentIds),
 		Phone:      dept.Phone,
 		Remark:     dept.Remark,
 		UpdateBy:   dept.UpdateBy,

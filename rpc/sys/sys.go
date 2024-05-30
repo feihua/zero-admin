@@ -10,6 +10,7 @@ import (
 	dicttypeserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/dicttypeservice"
 	loginlogserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/loginlogservice"
 	menuserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/menuservice"
+	operatelogServer "github.com/feihua/zero-admin/rpc/sys/internal/server/operatelogservice"
 	roleserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/roleservice"
 	userserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/userservice"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -39,6 +40,7 @@ func main() {
 		sysclient.RegisterDictItemServiceServer(grpcServer, dictitemserviceServer.NewDictItemServiceServer(ctx))
 		sysclient.RegisterDeptServiceServer(grpcServer, deptserviceServer.NewDeptServiceServer(ctx))
 		sysclient.RegisterLoginLogServiceServer(grpcServer, loginlogserviceServer.NewLoginLogServiceServer(ctx))
+		sysclient.RegisterOperateLogServiceServer(grpcServer, operatelogServer.NewOperateLogServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

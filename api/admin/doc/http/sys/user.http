@@ -77,3 +77,8 @@ Authorization: Bearer {{token}}
   "userId": 2,
   "roleIds": [1,2,3]
 }
+
+### 查询所有部门和岗位
+GET {{host}}/api/sys/user/queryDeptAndPostList
+Content-Type: application/json
+Authorization: Bearer {{token}}

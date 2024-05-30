@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// ReSetPasswordLogic
+// ReSetPasswordLogic 重置用户密码
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:12
@@ -34,9 +35,13 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ReS
 // ReSetPassword 重置用户密码
 func (l *ReSetPasswordLogic) ReSetPassword(in *sysclient.ReSetPasswordReq) (*sysclient.ReSetPasswordResp, error) {
 
-	q := query.SysUser
+	//不能重置重置管理员的密码
+	if common.IsAdmin(l.ctx, in.Id, l.svcCtx.DB) {
+		logc.Errorf(l.ctx, "不能重置重置管理员的密码,参数:%+v", in)
+		return nil, errors.New("不能重置重置管理员的密码")
+	}
 
-	_, err := q.WithContext(l.ctx).Updates(&model.SysUser{
+	_, err := query.SysUser.WithContext(l.ctx).Updates(&model.SysUser{
 		ID:       in.Id,
 		Password: "123456",
 		Salt:     "123456",

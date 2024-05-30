@@ -58,7 +58,7 @@ func (l *QueryDeptListLogic) QueryDeptList(in *sysclient.QueryDeptListReq) (*sys
 			Id:         dept.ID,
 			Leader:     dept.Leader,
 			ParentId:   dept.ParentID,
-			ParentIds:  getParentIds(dept.ParentIds),
+			ParentIds:  GetParentIds(dept.ParentIds),
 			Phone:      dept.Phone,
 			Remark:     dept.Remark,
 			UpdateBy:   dept.UpdateBy,
@@ -73,8 +73,8 @@ func (l *QueryDeptListLogic) QueryDeptList(in *sysclient.QueryDeptListReq) (*sys
 
 }
 
-// getParentIds 获取父级ids
-func getParentIds(parentIdsStr string) []int64 {
+// GetParentIds 获取父级ids
+func GetParentIds(parentIdsStr string) []int64 {
 	var parentIds []int64
 	if len(parentIdsStr) > 0 {
 		for _, i := range strings.Split(parentIdsStr, ",") {

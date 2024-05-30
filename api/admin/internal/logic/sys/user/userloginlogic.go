@@ -34,15 +34,14 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 }
 
 // UserLogin 根据用户名(手机号)和密码登录
-func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip string) (*types.LoginResp, error) {
+func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip, browser, os string) (*types.LoginResp, error) {
 
 	resp, err := l.svcCtx.UserService.Login(l.ctx, &sysclient.LoginReq{
-		Account:     req.Account,
-		Password:    req.Password,
-		IpAddress:   ip,
-		LoginStatus: "",
-		Browser:     "",
-		Os:          "",
+		Account:   req.Account,
+		Password:  req.Password,
+		IpAddress: ip,
+		Browser:   browser,
+		Os:        os,
 	})
 
 	if err != nil {
@@ -51,7 +50,7 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip string) (*types.Login
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	//把能访问的url存在在redis，在middleware中检验
+	//把能访问的url存在在redis，在middleware中校验
 	key := "zero:mall:token:" + strconv.FormatInt(resp.Id, 10)
 	err = l.svcCtx.Redis.Set(key, strings.Join(resp.ApiUrls, ","))
 	if err != nil {

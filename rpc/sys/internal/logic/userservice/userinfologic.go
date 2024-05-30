@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -62,12 +63,8 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 
 // 查询用户菜单和权限
 func (l *UserInfoLogic) queryUserMenuAndApiUrls(userId int64) ([]*sysclient.MenuListTree, []string) {
-	//id为1是系统预留超级管理员,它获取的是全部权限
-	role := query.SysUserRole
-	count, _ := role.WithContext(l.ctx).Where(role.RoleID.Eq(1), role.UserID.Eq(userId)).Count()
-
 	var result []*model.SysMenu
-	if count != 0 {
+	if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
 		result, _ = query.SysMenu.WithContext(l.ctx).Find()
 	} else {
 		sql := `
@@ -80,7 +77,7 @@ func (l *UserInfoLogic) queryUserMenuAndApiUrls(userId int64) ([]*sysclient.Menu
 				order by sm.id
 				`
 		db := l.svcCtx.DB
-		_ = db.WithContext(l.ctx).Raw(sql, userId).Scan(&result).Error
+		db.WithContext(l.ctx).Raw(sql, userId).Scan(&result)
 	}
 	return buildMenuTree(result)
 }

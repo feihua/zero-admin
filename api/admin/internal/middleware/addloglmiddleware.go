@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"github.com/feihua/zero-admin/rpc/sys/client/operatelogservice"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/ua-parser/uap-go/uaparser"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"io/ioutil"
@@ -62,6 +63,12 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		// 响应参数较多,可以不打印
 		//logx.WithContext(r.Context()).Infof("Response: %s %s %s", r.Method, r.RequestURI, responseBoy)
 
+		userAgent := r.Header.Get("User-Agent")
+		parser := uaparser.NewFromSaved()
+		ua := parser.Parse(userAgent)
+
+		browser := ua.UserAgent.Family + " " + ua.UserAgent.Major
+		os := ua.Os.Family + " " + ua.Os.Major
 		// 打印请求和响应耗时
 		duration := time.Since(startTime)
 		_, _ = m.Sys.AddOperateLog(r.Context(), &sysclient.AddOperateLogReq{
@@ -70,12 +77,13 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			OperationName:     userName,
 			OperationParams:   string(body),
 			OperationResponse: responseBoy,
-			OperationStatus:   0,
+			UseTime:           duration.Milliseconds(),
 			OperationType:     "",
 			OperationUrl:      uri,
 			RequestMethod:     r.Method,
 			Title:             "",
-			UseTime:           duration.Milliseconds(),
+			Os:                os,
+			Browser:           browser,
 		})
 	}
 }

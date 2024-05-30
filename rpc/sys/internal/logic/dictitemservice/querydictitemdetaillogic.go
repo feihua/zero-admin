@@ -32,13 +32,13 @@ func NewQueryDictItemDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// QueryDictItemDetail 查询字典数据表详情
+// QueryDictItemDetail 查询字典数据详情
 func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictItemDetailReq) (*sysclient.QueryDictItemDetailResp, error) {
 	dictItem, err := query.SysDictItem.WithContext(l.ctx).Where(query.SysDictItem.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询字典数据表详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询字典数据表详情失败")
+		logc.Errorf(l.ctx, "查询字典数据详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询字典数据详情失败")
 	}
 
 	data := &sysclient.QueryDictItemDetailResp{
@@ -56,7 +56,7 @@ func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictIt
 		UpdateTime: common.TimeToString(dictItem.UpdateTime),
 	}
 
-	logc.Infof(l.ctx, "查询字典数据表详情,参数：%+v,响应：%+v", in, data)
+	logc.Infof(l.ctx, "查询字典数据详情,参数：%+v,响应：%+v", in, data)
 
 	return data, nil
 

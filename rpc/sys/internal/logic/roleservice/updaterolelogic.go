@@ -36,23 +36,23 @@ func NewUpdateRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 // 1.根据角色id查询角色是否已存在
 // 2.角色存在时,则直接更新角色
 func (l *UpdateRoleLogic) UpdateRole(in *sysclient.UpdateRoleReq) (*sysclient.UpdateRoleResp, error) {
+	q := query.SysRole
 
-	if in.Id == 1 {
-		logc.Errorf(l.ctx, "不能修改超级管理员的信息")
-		return nil, errors.New(fmt.Sprintf("不能修改超级管理员角色"))
-	}
-
-	q := query.SysRole.WithContext(l.ctx)
-	// 1.根据角色名称查询角色是否已存在
-	_, err := q.Where(query.SysRole.ID.Eq(in.Id)).First()
+	// 1.根据角色id查询角色是否已存在
+	role, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据角色id：%d,查询角色信息失败,异常:%s", in.Id, err.Error())
 		return nil, errors.New(fmt.Sprintf("查询角色信息失败"))
 	}
 
+	if role.IsAdmin == 1 {
+		logc.Errorf(l.ctx, "不能修改超级管理员的信息")
+		return nil, errors.New(fmt.Sprintf("不能修改超级管理员角色"))
+	}
+
 	//3.角色存在时,则直接更新角色
-	role := &model.SysRole{
+	sysRole := &model.SysRole{
 		ID:         in.Id,
 		RoleName:   in.RoleName,
 		RoleKey:    in.RoleKey,
@@ -64,7 +64,7 @@ func (l *UpdateRoleLogic) UpdateRole(in *sysclient.UpdateRoleReq) (*sysclient.Up
 		UpdateBy:   in.UpdateBy,
 	}
 
-	_, err = q.Updates(role)
+	_, err = q.WithContext(l.ctx).Updates(sysRole)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新角色信息失败,参数:%+v,异常:%s", role, err.Error())

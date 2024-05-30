@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryRoleMenuListLogic 查询用户与角色的关联
+// QueryRoleMenuListLogic 查询角色与菜单的关联
 /*
 Author: LiuFeiHua
 Date: 2024/5/24 14:42
@@ -30,7 +30,7 @@ func NewQueryRoleMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-// QueryRoleMenuList 查询用户与角色的关联
+// QueryRoleMenuList 查询角色与菜单的关联
 // 1.查询所有菜单
 // 2.如果角色不是admin则根据roleId查询菜单
 func (l *QueryRoleMenuListLogic) QueryRoleMenuList(in *sysclient.QueryRoleMenuListReq) (*sysclient.QueryRoleMenuListResp, error) {
@@ -54,7 +54,9 @@ func (l *QueryRoleMenuListLogic) QueryRoleMenuList(in *sysclient.QueryRoleMenuLi
 	}
 
 	//2.如果角色不是admin则根据roleId查询菜单
-	if in.RoleId != 1 {
+	role := query.SysRole
+	count, _ := role.WithContext(l.ctx).Where(role.ID.Eq(in.RoleId), role.IsAdmin.Eq(1)).Count()
+	if count == 0 {
 		var ids []int64
 		q := query.SysRoleMenu
 		_ = q.WithContext(l.ctx).Select(q.MenuID).Where(q.RoleID.Eq(in.RoleId)).Scan(&ids)

@@ -281,7 +281,7 @@ service admin-api {
 
 	//查询所有部门和岗位
 	@handler QueryDeptAndPostList
-	post /queryDeptAndPostList (QueryDeptAndPostListReq) returns (QueryDeptAndPostListResp)
+	get /queryDeptAndPostList (QueryDeptAndPostListReq) returns (QueryDeptAndPostListResp)
 
 }
 

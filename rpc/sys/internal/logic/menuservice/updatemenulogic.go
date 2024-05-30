@@ -38,7 +38,7 @@ func NewUpdateMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 // 2.菜单存在时,则直接更新菜单
 func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.UpdateMenuResp, error) {
 	q := query.SysMenu.WithContext(l.ctx)
-	// 1.根据菜单名称查询菜单是否已存在
+	// 1.根据菜单id查询菜单是否已存在
 	_, err := q.Where(query.SysMenu.ID.Eq(in.Id)).First()
 
 	if err != nil {

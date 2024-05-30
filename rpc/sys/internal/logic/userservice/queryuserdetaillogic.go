@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryUserDetailLogic 查询用户信息表详情
+// QueryUserDetailLogic 查询用户详情信息
 /*
 Author: LiuFeiHua
 Date: 2024/5/30 14:33
@@ -32,13 +32,13 @@ func NewQueryUserDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 	}
 }
 
-// QueryUserDetail 查询用户信息表详情
+// QueryUserDetail 查询用户详情信息
 func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq) (*sysclient.QueryUserDetailResp, error) {
 	user, err := query.SysUser.WithContext(l.ctx).Where(query.SysUser.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询用户信息表详情失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询用户信息表详情失败")
+		logc.Errorf(l.ctx, "查询用户详情信息失败,参数：%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询用户详情信息失败")
 	}
 
 	data := &sysclient.QueryUserDetailResp{
@@ -59,6 +59,6 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		UserName:   user.UserName,
 	}
 
-	logc.Infof(l.ctx, "查询用户信息表详情,参数：%+v,响应：%+v", in, data)
+	logc.Infof(l.ctx, "查询用户详情信息,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryOperateLogDetailLogic 查询系统操作日志表详情
+// QueryOperateLogDetailLogic 查询系统操作日志详情
 /*
 Author: LiuFeiHua
 Date: 2024/5/30 11:11
@@ -31,13 +31,13 @@ func NewQueryOperateLogDetailLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
-// QueryOperateLogDetail 查询系统操作日志表详情
+// QueryOperateLogDetail 查询系统操作日志详情
 func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(in *sysclient.QueryOperateLogDetailReq) (*sysclient.QueryOperateLogDetailResp, error) {
 	log, err := query.SysOperateLog.WithContext(l.ctx).Where(query.SysOperateLog.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询系统操作日志表详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询系统操作日志表详情失败")
+		logc.Errorf(l.ctx, "查询系统操作日志详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询系统操作日志详情失败")
 	}
 	data := &sysclient.QueryOperateLogDetailResp{
 		DeptName:          log.DeptName,
@@ -57,6 +57,6 @@ func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(in *sysclient.QueryOp
 		Os:                log.Os,
 	}
 
-	logc.Infof(l.ctx, "查询系统操作日志表详情,参数：%+v,响应：%+v", in, data)
+	logc.Infof(l.ctx, "查询系统操作日志详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

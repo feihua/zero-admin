@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryDictTypeDetailLogic 查询字典类型表详情
+// QueryDictTypeDetailLogic 查询字典类型详情
 /*
 Author: LiuFeiHua
 Date: 2024/5/30 10:50
@@ -32,13 +32,13 @@ func NewQueryDictTypeDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// QueryDictTypeDetail 查询字典类型表详情
+// QueryDictTypeDetail 查询字典类型详情
 func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(in *sysclient.QueryDictTypeDetailReq) (*sysclient.QueryDictTypeDetailResp, error) {
 	dict, err := query.SysDictType.WithContext(l.ctx).Where(query.SysDictType.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询字典类型表详情失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询字典类型表详情失败")
+		logc.Errorf(l.ctx, "查询字典类型详情失败,参数：%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询字典类型详情失败")
 	}
 
 	data := &sysclient.QueryDictTypeDetailResp{
@@ -54,6 +54,6 @@ func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(in *sysclient.QueryDictTy
 		UpdateTime: common.TimeToString(dict.UpdateTime),
 	}
 
-	logc.Infof(l.ctx, "查询字典类型表详情,参数：%+v,响应：%+v", in, data)
+	logc.Infof(l.ctx, "查询字典类型详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

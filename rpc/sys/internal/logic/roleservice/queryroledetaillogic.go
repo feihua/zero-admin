@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryRoleDetailLogic 查询角色信息表详情
+// QueryRoleDetailLogic 查询角色信息详情
 /*
 Author: LiuFeiHua
 Date: 2024/5/30 14:18
@@ -32,13 +32,13 @@ func NewQueryRoleDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 	}
 }
 
-// QueryRoleDetail 查询角色信息表详情
+// QueryRoleDetail 查询角色信息详情
 func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq) (*sysclient.QueryRoleDetailResp, error) {
 	role, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询角色信息表详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询角色信息表详情失败")
+		logc.Errorf(l.ctx, "查询角色信息详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询角色信息详情失败")
 	}
 
 	data := &sysclient.QueryRoleDetailResp{
@@ -56,6 +56,6 @@ func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq)
 		UpdateBy:   role.UpdateBy,
 	}
 
-	logc.Infof(l.ctx, "查询角色信息表详情,参数：%+v,响应：%+v", in, data)
+	logc.Infof(l.ctx, "查询角色信息详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateRoleStatusLogic 更新角色信息表状态
+// UpdateRoleStatusLogic 更新角色信息状态
 /*
 Author: LiuFeiHua
 Date: 2024/5/30 14:20
@@ -31,18 +31,17 @@ func NewUpdateRoleStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
-// UpdateRoleStatus 更新角色信息表状态
+// UpdateRoleStatus 更新角色信息状态
+// 1.排除超级管理员
+// 2.更新角色信息状态
 func (l *UpdateRoleStatusLogic) UpdateRoleStatus(in *sysclient.UpdateRoleStatusReq) (*sysclient.UpdateRoleStatusResp, error) {
+	role := query.SysRole
+
+	// 1.排除超级管理员
 	var roleIds []int64
 	for _, roleId := range in.Ids {
-		// 1.排除超级管理员
-		if roleId == 1 {
-			continue
-		}
 
-		// 2.排除已使用的角色
-		q := query.SysUserRole
-		count, _ := q.WithContext(l.ctx).Select(q.RoleID).Where(q.RoleID.Eq(roleId)).Count()
+		count, _ := role.WithContext(l.ctx).Where(role.ID.Eq(roleId), role.IsAdmin.Eq(1)).Count()
 		if count > 0 {
 			continue
 		}
@@ -51,31 +50,16 @@ func (l *UpdateRoleStatusLogic) UpdateRoleStatus(in *sysclient.UpdateRoleStatusR
 	}
 
 	if len(roleIds) == 0 {
-		logc.Errorf(l.ctx, "删除角色信息失败,参数:%+v,异常:%s", in, "超级管理员和已使用的角色不能被删除")
-		return nil, errors.New("超级管理员和已使用的角色不能被删除")
+		logc.Errorf(l.ctx, "更新角色信息状态失败,参数:%+v,异常:%s", in, "超级管理员和已使用的角色不能被删除")
+		return nil, errors.New("超级管理员和已使用的角色不能被更新状态")
 	}
 
-	err := query.Q.Transaction(func(tx *query.Query) error {
-
-		// 3.删除角色
-		role := tx.SysRole
-		if _, err := role.WithContext(l.ctx).Where(role.ID.In(roleIds...)).Delete(); err != nil {
-			return err
-		}
-
-		// 4.删除用角色与菜单的关联
-		menu := tx.SysRoleMenu
-		if _, err := menu.WithContext(l.ctx).Where(menu.RoleID.In(roleIds...)).Delete(); err != nil {
-			return err
-		}
-
-		return nil
-	})
+	// 2.更新角色信息状态
+	_, err := role.WithContext(l.ctx).Where(role.ID.In(roleIds...)).Update(role.RoleStatus, in.RoleStatus)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "删除角色信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("删除角色信息失败")
+		logc.Errorf(l.ctx, "更新角色信息状态失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新角色信息状态失败")
 	}
-
 	return &sysclient.UpdateRoleStatusResp{}, nil
 }

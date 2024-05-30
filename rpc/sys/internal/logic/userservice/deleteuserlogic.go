@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
+	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -29,19 +30,18 @@ func NewDeleteUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delete
 	}
 }
 
-// DeleteUser 删除用户(id为1是系统预留超级管理员用户,不能删除)
+// DeleteUser 删除用户
 // 1.排除超级管理员
 // 2.删除用户
 // 3.删除用户与角色的关联
 func (l *DeleteUserLogic) DeleteUser(in *sysclient.DeleteUserReq) (*sysclient.DeleteUserResp, error) {
-	q := query.SysUserRole
 	// 1.排除超级管理员
 	var userIds []int64
 	for _, userId := range in.Ids {
-		count, _ := q.WithContext(l.ctx).Where(q.RoleID.Eq(1), q.UserID.Eq(userId)).Count()
-		if count == 0 {
-			userIds = append(userIds, userId)
+		if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
+			continue
 		}
+		userIds = append(userIds, userId)
 	}
 
 	err := query.Q.Transaction(func(tx *query.Query) error {

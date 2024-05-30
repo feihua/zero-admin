@@ -66,8 +66,7 @@ func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleLi
 
 	//2.如果角色不是admin则根据userId查询角色
 	q := query.SysUserRole
-	count, _ := q.WithContext(l.ctx).Where(q.RoleID.Eq(1), q.UserID.Eq(in.UserId)).Count()
-	if count == 0 {
+	if !common.IsAdmin(l.ctx, in.UserId, l.svcCtx.DB) {
 		var ids []int64
 		_ = q.WithContext(l.ctx).Select(q.RoleID).Where(q.UserID.Eq(in.UserId)).Scan(&ids)
 		roleIds = ids

@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryUserListLogic
+// QueryUserListLogic 查询用户列表信息
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:35
@@ -33,21 +33,22 @@ func NewQueryUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Que
 // QueryUserList 查询用户列表信息
 func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sysclient.QueryUserListResp, error) {
 
-	q := query.SysUser.WithContext(l.ctx)
+	user := query.SysUser
+	q := user.WithContext(l.ctx)
 	if in.DeptId != 0 {
-		q = q.Where(query.SysUser.DeptID.Eq(in.DeptId))
+		q = q.Where(user.DeptID.Eq(in.DeptId))
 	}
 	if len(in.Email) > 0 {
-		q = q.Where(query.SysUser.Email.Like("%" + in.Email + "%"))
+		q = q.Where(user.Email.Like("%" + in.Email + "%"))
 	}
 	if len(in.Mobile) > 0 {
-		q = q.Where(query.SysUser.Mobile.Like("%" + in.Mobile + "%"))
+		q = q.Where(user.Mobile.Like("%" + in.Mobile + "%"))
 	}
 	if len(in.NickName) > 0 {
-		q = q.Where(query.SysUser.NickName.Like("%" + in.NickName + "%"))
+		q = q.Where(user.NickName.Like("%" + in.NickName + "%"))
 	}
 	if in.UserStatus != 2 {
-		q = q.Where(query.SysUser.UserStatus.Eq(in.UserStatus))
+		q = q.Where(user.UserStatus.Eq(in.UserStatus))
 	}
 
 	offset := (in.PageNum - 1) * in.PageSize
@@ -59,23 +60,23 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 	}
 
 	var list []*sysclient.UserListData
-	for _, user := range result {
+	for _, item := range result {
 		list = append(list, &sysclient.UserListData{
-			Avatar:     user.Avatar,
-			CreateBy:   user.CreateBy,
-			CreateTime: user.CreateTime.Format("2006-01-02 15:04:05"),
-			DeptId:     user.DeptID,
-			Email:      user.Email,
-			Id:         user.ID,
-			UserStatus: user.UserStatus,
-			LoginIp:    user.LoginIP,
-			LoginTime:  common.TimeToString(user.LoginTime),
-			Mobile:     user.Mobile,
-			NickName:   user.NickName,
-			Remark:     user.Remark,
-			UpdateBy:   user.UpdateBy,
-			UpdateTime: common.TimeToString(user.UpdateTime),
-			UserName:   user.UserName,
+			Avatar:     item.Avatar,
+			CreateBy:   item.CreateBy,
+			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
+			DeptId:     item.DeptID,
+			Email:      item.Email,
+			Id:         item.ID,
+			UserStatus: item.UserStatus,
+			LoginIp:    item.LoginIP,
+			LoginTime:  common.TimeToString(item.LoginTime),
+			Mobile:     item.Mobile,
+			NickName:   item.NickName,
+			Remark:     item.Remark,
+			UpdateBy:   item.UpdateBy,
+			UpdateTime: common.TimeToString(item.UpdateTime),
+			UserName:   item.UserName,
 		})
 	}
 

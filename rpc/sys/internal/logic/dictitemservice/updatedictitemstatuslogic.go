@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateDictItemStatusLogic 更新字典数据表状态
+// UpdateDictItemStatusLogic 更新字典数据状态
 /*
 Author: LiuFeiHua
 Date: 2024/5/30 10:23
@@ -32,15 +32,15 @@ func NewUpdateDictItemStatusLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// UpdateDictItemStatus 更新字典数据表状态
+// UpdateDictItemStatus 更新字典数据状态
 func (l *UpdateDictItemStatusLogic) UpdateDictItemStatus(in *sysclient.UpdateDictItemStatusReq) (*sysclient.UpdateDictItemStatusResp, error) {
 	q := query.SysDictItem
 
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.DictStatus, in.DictStatus)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据字典数据ids：%+v,更新字典数据表状态失败,异常:%s", in, err.Error())
-		return nil, errors.New(fmt.Sprintf("更新字典数据表状态失败"))
+		logc.Errorf(l.ctx, "根据字典数据ids：%+v,更新字典数据状态失败,异常:%s", in, err.Error())
+		return nil, errors.New(fmt.Sprintf("更新字典数据状态失败"))
 	}
 
 	return &sysclient.UpdateDictItemStatusResp{}, nil

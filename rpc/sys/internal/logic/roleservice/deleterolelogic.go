@@ -39,13 +39,15 @@ func (l *DeleteRoleLogic) DeleteRole(in *sysclient.DeleteRoleReq) (*sysclient.De
 	var roleIds []int64
 	for _, roleId := range in.Ids {
 		// 1.排除超级管理员
-		if roleId == 1 {
+		role := query.SysRole
+		count, _ := role.WithContext(l.ctx).Where(role.ID.Eq(roleId), role.IsAdmin.Eq(1)).Count()
+		if count > 0 {
 			continue
 		}
 
 		// 2.排除已使用的角色
 		q := query.SysUserRole
-		count, _ := q.WithContext(l.ctx).Select(q.RoleID).Where(q.RoleID.Eq(roleId)).Count()
+		count, _ = q.WithContext(l.ctx).Select(q.RoleID).Where(q.RoleID.Eq(roleId)).Count()
 		if count > 0 {
 			continue
 		}

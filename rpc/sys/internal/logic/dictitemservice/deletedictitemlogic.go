@@ -12,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteDictItemLogic 删除字典数据表
+// DeleteDictItemLogic 删除字典数据
 /*
 Author: LiuFeiHua
 Date: 2024/5/28 17:03
@@ -31,7 +31,7 @@ func NewDeleteDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *De
 	}
 }
 
-// DeleteDictItem 删除字典数据表
+// DeleteDictItem 删除字典数据
 func (l *DeleteDictItemLogic) DeleteDictItem(in *sysclient.DeleteDictItemReq) (*sysclient.DeleteDictItemResp, error) {
 	q := query.SysDictItem
 

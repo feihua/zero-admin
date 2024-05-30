@@ -977,9 +977,9 @@ message LoginReq {
   string account = 1;
   string password = 2;
   string ip_address = 3; //IP地址
-  string login_status = 4; //登录状态
+  string os = 4; //操作信息
   string browser = 5; //浏览器
-  string os = 6; //操作信息
+
 }
 
 message loginResp {
