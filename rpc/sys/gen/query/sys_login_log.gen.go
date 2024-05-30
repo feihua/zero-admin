@@ -33,6 +33,7 @@ func newSysLoginLog(db *gorm.DB, opts ...gen.DOOption) sysLoginLog {
 	_sysLoginLog.IPAddress = field.NewString(tableName, "ip_address")
 	_sysLoginLog.Browser = field.NewString(tableName, "browser")
 	_sysLoginLog.Os = field.NewString(tableName, "os")
+	_sysLoginLog.ErrorMsg = field.NewString(tableName, "error_msg")
 	_sysLoginLog.LoginTime = field.NewTime(tableName, "login_time")
 
 	_sysLoginLog.fillFieldMap()
@@ -51,6 +52,7 @@ type sysLoginLog struct {
 	IPAddress   field.String // IP地址
 	Browser     field.String // 浏览器
 	Os          field.String // 操作信息
+	ErrorMsg    field.String // 登录失败信息
 	LoginTime   field.Time   // 登录时间
 
 	fieldMap map[string]field.Expr
@@ -74,6 +76,7 @@ func (s *sysLoginLog) updateTableName(table string) *sysLoginLog {
 	s.IPAddress = field.NewString(table, "ip_address")
 	s.Browser = field.NewString(table, "browser")
 	s.Os = field.NewString(table, "os")
+	s.ErrorMsg = field.NewString(table, "error_msg")
 	s.LoginTime = field.NewTime(table, "login_time")
 
 	s.fillFieldMap()
@@ -101,13 +104,14 @@ func (s *sysLoginLog) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysLoginLog) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 7)
+	s.fieldMap = make(map[string]field.Expr, 8)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["user_name"] = s.UserName
 	s.fieldMap["login_status"] = s.LoginStatus
 	s.fieldMap["ip_address"] = s.IPAddress
 	s.fieldMap["browser"] = s.Browser
 	s.fieldMap["os"] = s.Os
+	s.fieldMap["error_msg"] = s.ErrorMsg
 	s.fieldMap["login_time"] = s.LoginTime
 }
 
