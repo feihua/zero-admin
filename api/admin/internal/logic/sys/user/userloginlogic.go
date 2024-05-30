@@ -14,7 +14,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UserLoginLogic 根据用户名和密码登录
+// UserLoginLogic 根据用户名(手机号)和密码登录
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:07
@@ -33,7 +33,7 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 	}
 }
 
-// UserLogin 根据用户名和密码登录
+// UserLogin 根据用户名(手机号)和密码登录
 func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip string) (*types.LoginResp, error) {
 
 	resp, err := l.svcCtx.UserService.Login(l.ctx, &sysclient.LoginReq{

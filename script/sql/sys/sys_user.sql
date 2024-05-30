@@ -24,3 +24,5 @@ create table sys_user
         unique (user_name)
 )
     comment '用户信息表';
+
+INSERT INTO sys_user (id, user_name, nick_name, avatar, password, salt, email, mobile, user_status, dept_id, remark, is_deleted, login_time, login_ip, create_by, create_time, update_by, update_time) VALUES (1, 'admin', '超级管理员', 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png', '123456', 'sdfsdfsd', '1002219331@qq.com', '18613030352', 1, 1, '测试', 0, null, '', 'admin', '2024-05-30 15:04:41', '', null);

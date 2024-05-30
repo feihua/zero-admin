@@ -1,6 +1,8 @@
 package user
 
 import (
+	"fmt"
+	"github.com/ua-parser/uap-go/uaparser"
 	"net/http"
 
 	"github.com/feihua/zero-admin/api/admin/internal/logic/sys/user"
@@ -27,6 +29,17 @@ func UserLoginHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 		//		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 		//		proxy_pass http://127.0.0.1:8888;
 		//}
+		userAgent := r.Header.Get("User-Agent")
+		parser := uaparser.NewFromSaved()
+
+		// 解析User-Agent
+		ua := parser.Parse(userAgent)
+
+		// 获取浏览器和操作系统信息
+		fmt.Println("Browser:", ua.UserAgent)
+		fmt.Println("Device:", ua.Device)
+		fmt.Println("OS:", ua.Os)
+
 		l := user.NewUserLoginLogic(r.Context(), ctx)
 		resp, err := l.UserLogin(&req, httpx.GetRemoteAddr(r))
 		if err != nil {
