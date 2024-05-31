@@ -44,12 +44,9 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendproductservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendsubjectservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/deptservice"
-	"github.com/feihua/zero-admin/rpc/sys/client/dictservice"
-	"github.com/feihua/zero-admin/rpc/sys/client/jobservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/loginlogservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/menuservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/roleservice"
-	"github.com/feihua/zero-admin/rpc/sys/client/syslogservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/userservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/growthchangehistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/integrationchangehistoryservice"
@@ -94,10 +91,7 @@ type ServiceContext struct {
 
 	//系统相关
 	DeptService     deptservice.DeptService
-	DictService     dictservice.DictService
-	JobService      jobservice.JobService
 	LoginLogService loginlogservice.LoginLogService
-	SysLogService   syslogservice.SysLogService
 	MenuService     menuservice.MenuService
 	RoleService     roleservice.RoleService
 	UserService     userservice.UserService
@@ -182,10 +176,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		MemberAttentionService:               memberattentionservice.NewMemberAttentionService(umsClient),
 
 		DeptService:     deptservice.NewDeptService(sysClient),
-		DictService:     dictservice.NewDictService(sysClient),
-		JobService:      jobservice.NewJobService(sysClient),
 		LoginLogService: loginlogservice.NewLoginLogService(sysClient),
-		SysLogService:   syslogservice.NewSysLogService(sysClient),
 		MenuService:     menuservice.NewMenuService(sysClient),
 		RoleService:     roleservice.NewRoleService(sysClient),
 		UserService:     userservice.NewUserService(sysClient),
