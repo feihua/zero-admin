@@ -2408,6 +2408,7 @@ type QueryLoginLogDetailData struct {
 	LoginTime   string `json:"loginTime"`   //登录时间
 	Os          string `json:"os"`          //操作信息
 	UserName    string `json:"userName"`    //用户名
+	ErrorMsg    string `json:"errorMsg"`    //操作信息
 }
 
 type QueryLoginLogDetailReq struct {
@@ -2428,6 +2429,7 @@ type QueryLoginLogListData struct {
 	LoginTime   string `json:"loginTime"`   //登录时间
 	Os          string `json:"os"`          //操作信息
 	UserName    string `json:"userName"`    //用户名
+	ErrorMsg    string `json:"errorMsg"`    //操作信息
 }
 
 type QueryLoginLogListReq struct {

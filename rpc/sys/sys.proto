@@ -402,6 +402,7 @@ message QueryLoginLogDetailResp {
   string login_time = 5; //登录时间
   string os = 6; //操作信息
   string user_name = 7; //用户名
+  string error_msg = 8; //操作信息
 
 }
 
@@ -425,7 +426,7 @@ message LoginLogListData {
   string login_time = 5; //登录时间
   string os = 6; //操作信息
   string user_name = 7; //用户名
-
+  string error_msg = 8; //操作信息
 }
 
 message QueryLoginLogListResp {

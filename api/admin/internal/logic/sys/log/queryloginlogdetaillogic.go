@@ -52,6 +52,7 @@ func (l *QueryLoginLogDetailLogic) QueryLoginLogDetail(req *types.QueryLoginLogD
 		LoginTime:   detail.LoginTime,
 		Os:          detail.Os,
 		UserName:    detail.UserName,
+		ErrorMsg:    detail.ErrorMsg,
 	}
 
 	return &types.QueryLoginLogDetailResp{

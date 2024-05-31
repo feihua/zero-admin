@@ -69,6 +69,7 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(in *sysclient.QueryLoginLogLi
 			LoginTime:   log.LoginTime.Format("2006-01-02 15:04:05"),
 			Os:          log.Os,
 			UserName:    log.UserName,
+			ErrorMsg:    log.ErrorMsg,
 		})
 	}
 

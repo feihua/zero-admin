@@ -93,7 +93,7 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	}
 
 	// 6.保存登录日志
-	l.savaLoginLog(in, "success", "")
+	l.savaLoginLog(in, "success", "登录成功")
 	return &sysclient.LoginResp{
 		Id:          user.ID,
 		UserName:    user.UserName,

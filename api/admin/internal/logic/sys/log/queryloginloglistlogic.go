@@ -60,6 +60,7 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(req *types.QueryLoginLogListR
 			LoginTime:   item.LoginTime,
 			Os:          item.Os,
 			UserName:    item.UserName,
+			ErrorMsg:    item.ErrorMsg,
 		})
 	}
 
