@@ -15,3 +15,7 @@ create table sys_post
 )
     comment '岗位管理';
 
+INSERT INTO sys_post (id, post_name, post_code, post_status, post_sort, remark, is_deleted, create_by, create_time, update_by, update_time) VALUES (1, '董事长', 'ceo', 1, 1, 'ceo', 0, 'admin', '2024-06-01 12:10:09', '', null);
+INSERT INTO sys_post (id, post_name, post_code, post_status, post_sort, remark, is_deleted, create_by, create_time, update_by, update_time) VALUES (2, '项目经理', 'pd', 1, 2, '项目经理', 0, 'admin', '2024-06-01 12:10:38', '', null);
+INSERT INTO sys_post (id, post_name, post_code, post_status, post_sort, remark, is_deleted, create_by, create_time, update_by, update_time) VALUES (3, '人力资源', 'hr', 1, 3, '', 0, 'admin', '2024-06-01 12:13:04', '', null);
+INSERT INTO sys_post (id, post_name, post_code, post_status, post_sort, remark, is_deleted, create_by, create_time, update_by, update_time) VALUES (4, '普通员工', 'user', 1, 4, '', 0, 'admin', '2024-06-01 12:13:21', '', null);

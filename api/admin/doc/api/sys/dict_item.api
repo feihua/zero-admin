@@ -135,7 +135,7 @@ service admin-api {
 	@handler QueryDictItemDetail
 	get /queryDictItemDetail (QueryDictItemDetailReq) returns (QueryDictItemDetailResp)
 
-	// 分页查询字典数据列
+	// 分页查询字典数据列表
 	@handler QueryDictItemList
 	get /queryDictItemList (QueryDictItemListReq) returns (QueryDictItemListResp)
 }

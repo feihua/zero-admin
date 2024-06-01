@@ -138,7 +138,7 @@ service admin-api {
 	@handler QueryDeptDetail
 	get /queryDeptDetail (QueryDeptDetailReq) returns (QueryDeptDetailResp)
 
-	// 分页查询部门信息列
+	// 分页查询部门信息列表
 	@handler QueryDeptList
 	get /queryDeptList (QueryDeptListReq) returns (QueryDeptListResp)
 }

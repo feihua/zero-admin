@@ -11,6 +11,7 @@ import (
 	loginlogserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/loginlogservice"
 	menuserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/menuservice"
 	operatelogServer "github.com/feihua/zero-admin/rpc/sys/internal/server/operatelogservice"
+	postserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/postservice"
 	roleserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/roleservice"
 	userserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/userservice"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -35,6 +36,7 @@ func main() {
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		sysclient.RegisterUserServiceServer(grpcServer, userserviceServer.NewUserServiceServer(ctx))
 		sysclient.RegisterRoleServiceServer(grpcServer, roleserviceServer.NewRoleServiceServer(ctx))
+		sysclient.RegisterPostServiceServer(grpcServer, postserviceServer.NewPostServiceServer(ctx))
 		sysclient.RegisterMenuServiceServer(grpcServer, menuserviceServer.NewMenuServiceServer(ctx))
 		sysclient.RegisterDictTypeServiceServer(grpcServer, dicttypeserviceServer.NewDictTypeServiceServer(ctx))
 		sysclient.RegisterDictItemServiceServer(grpcServer, dictitemserviceServer.NewDictItemServiceServer(ctx))

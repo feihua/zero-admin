@@ -127,7 +127,7 @@ service admin-api {
 	@handler QueryDictTypeDetail
 	get /queryDictTypeDetail (QueryDictTypeDetailReq) returns (QueryDictTypeDetailResp)
 
-	// 分页查询字典类型列
+	// 分页查询字典类型列表
 	@handler QueryDictTypeList
 	get /queryDictTypeList (QueryDictTypeListReq) returns (QueryDictTypeListResp)
 }

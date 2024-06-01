@@ -11,7 +11,7 @@ type (
 		PostName   string `json:"postName"` //岗位名称
 		PostSort   int32  `json:"postSort"` //岗位排序
 		PostStatus int32  `json:"postStatus"` //岗位状态
-		Remark     string `json:"remark"` //备注信息
+		Remark     string `json:"remark,optional"` //备注信息
 	}
 	AddPostResp {
 		Code    string `json:"code"`
@@ -32,7 +32,7 @@ type (
 		PostName   string `json:"postName"` //岗位名称
 		PostSort   int32  `json:"postSort"` //岗位排序
 		PostStatus int32  `json:"postStatus"` //岗位状态
-		Remark     string `json:"remark"` //备注信息
+		Remark     string `json:"remark,optional"` //备注信息
 	}
 	UpdatePostResp {
 		Code    string `json:"code"`
@@ -74,7 +74,7 @@ type (
 		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
 		PostCode   string `form:"postCode,optional"` //岗位编码
 		PostName   string `form:"postName,optional"` //岗位名称
-		PostStatus int32  `form:"postStatus,optional"` //岗位状态
+		PostStatus int32  `form:"postStatus,default=2"` //岗位状态
 	}
 	QueryPostListData {
 		CreateBy   string `json:"createBy"` //创建者
@@ -126,7 +126,7 @@ service admin-api {
 	@handler QueryPostDetail
 	get /queryPostDetail (QueryPostDetailReq) returns (QueryPostDetailResp)
 
-	// 分页查询岗位管理列
+	// 分页查询岗位管理列表
 	@handler QueryPostList
 	get /queryPostList (QueryPostListReq) returns (QueryPostListResp)
 }

@@ -96,7 +96,7 @@ service admin-api {
 	@handler QueryOperateLogDetail
 	get /queryOperateLogDetail (QueryOperateLogDetailReq) returns (QueryOperateLogDetailResp)
 
-	// 分页查询系统操作日志列
+	// 分页查询系统操作日志列表
 	@handler QueryOperateLogList
 	get /queryOperateLogList (QueryOperateLogListReq) returns (QueryOperateLogListResp)
 }

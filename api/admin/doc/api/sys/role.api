@@ -164,7 +164,7 @@ service admin-api {
 	@handler QueryRoleDetail
 	get /queryRoleDetail (QueryRoleDetailReq) returns (QueryRoleDetailResp)
 
-	// 分页查询角色信息列
+	// 分页查询角色信息列表
 	@handler QueryRoleList
 	get /queryRoleList (QueryRoleListReq) returns (QueryRoleListResp)
 

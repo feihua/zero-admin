@@ -267,7 +267,7 @@ service admin-api {
 	@handler QueryUserDetail
 	get /queryUserDetail (QueryUserDetailReq) returns (QueryUserDetailResp)
 
-	// 分页查询用户信息列
+	// 分页查询用户信息列表
 	@handler QueryUserList
 	get /queryUserList (QueryUserListReq) returns (QueryUserListResp)
 

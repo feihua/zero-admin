@@ -89,7 +89,7 @@ service admin-api {
 	@handler QueryLoginLogDetail
 	get /queryLoginLogDetail (QueryLoginLogDetailReq) returns (QueryLoginLogDetailResp)
 
-	// 分页查询系统登录日志列
+	// 分页查询系统登录日志列表
 	@handler QueryLoginLogList
 	get /queryLoginLogList (QueryLoginLogListReq) returns (QueryLoginLogListResp)
 

@@ -160,7 +160,7 @@ service admin-api {
 	@handler QueryMenuDetail
 	get /queryMenuDetail (QueryMenuDetailReq) returns (QueryMenuDetailResp)
 
-	// 分页查询菜单信息列
+	// 分页查询菜单信息列表
 	@handler QueryMenuList
 	get /queryMenuList (QueryMenuListReq) returns (QueryMenuListResp)
 }
