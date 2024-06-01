@@ -26,16 +26,16 @@ type AddDeptReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CreateBy   string `protobuf:"bytes,1,opt,name=create_by,json=createBy,proto3" json:"create_by,omitempty"`        //创建者
-	DeptName   string `protobuf:"bytes,2,opt,name=dept_name,json=deptName,proto3" json:"dept_name,omitempty"`        //部门名称
-	DeptSort   int32  `protobuf:"varint,3,opt,name=dept_sort,json=deptSort,proto3" json:"dept_sort,omitempty"`       //部门排序
-	DeptStatus int32  `protobuf:"varint,4,opt,name=dept_status,json=deptStatus,proto3" json:"dept_status,omitempty"` //部门状态
-	Email      string `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`                              //邮箱
-	Leader     string `protobuf:"bytes,6,opt,name=leader,proto3" json:"leader,omitempty"`                            //负责人
-	ParentId   int64  `protobuf:"varint,7,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`       //上级机构ID，一级机构为0
-	ParentIds  string `protobuf:"bytes,8,opt,name=parent_ids,json=parentIds,proto3" json:"parent_ids,omitempty"`     //上级机构IDs，一级机构为0
-	Phone      string `protobuf:"bytes,9,opt,name=phone,proto3" json:"phone,omitempty"`                              //电话号码
-	Remark     string `protobuf:"bytes,10,opt,name=remark,proto3" json:"remark,omitempty"`                           //备注信息
+	CreateBy   string  `protobuf:"bytes,1,opt,name=create_by,json=createBy,proto3" json:"create_by,omitempty"`            //创建者
+	DeptName   string  `protobuf:"bytes,2,opt,name=dept_name,json=deptName,proto3" json:"dept_name,omitempty"`            //部门名称
+	DeptSort   int32   `protobuf:"varint,3,opt,name=dept_sort,json=deptSort,proto3" json:"dept_sort,omitempty"`           //部门排序
+	DeptStatus int32   `protobuf:"varint,4,opt,name=dept_status,json=deptStatus,proto3" json:"dept_status,omitempty"`     //部门状态
+	Email      string  `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`                                  //邮箱
+	Leader     string  `protobuf:"bytes,6,opt,name=leader,proto3" json:"leader,omitempty"`                                //负责人
+	ParentId   int64   `protobuf:"varint,7,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`           //上级机构ID，一级机构为0
+	ParentIds  []int64 `protobuf:"varint,8,rep,packed,name=parent_ids,json=parentIds,proto3" json:"parent_ids,omitempty"` //上级机构IDs，一级机构为0
+	Phone      string  `protobuf:"bytes,9,opt,name=phone,proto3" json:"phone,omitempty"`                                  //电话号码
+	Remark     string  `protobuf:"bytes,10,opt,name=remark,proto3" json:"remark,omitempty"`                               //备注信息
 }
 
 func (x *AddDeptReq) Reset() {
@@ -119,11 +119,11 @@ func (x *AddDeptReq) GetParentId() int64 {
 	return 0
 }
 
-func (x *AddDeptReq) GetParentIds() string {
+func (x *AddDeptReq) GetParentIds() []int64 {
 	if x != nil {
 		return x.ParentIds
 	}
-	return ""
+	return nil
 }
 
 func (x *AddDeptReq) GetPhone() string {
@@ -288,17 +288,17 @@ type UpdateDeptReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DeptName   string `protobuf:"bytes,1,opt,name=dept_name,json=deptName,proto3" json:"dept_name,omitempty"`        //部门名称
-	DeptSort   int32  `protobuf:"varint,2,opt,name=dept_sort,json=deptSort,proto3" json:"dept_sort,omitempty"`       //部门排序
-	DeptStatus int32  `protobuf:"varint,3,opt,name=dept_status,json=deptStatus,proto3" json:"dept_status,omitempty"` //部门状态
-	Email      string `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`                              //邮箱
-	Id         int64  `protobuf:"varint,5,opt,name=id,proto3" json:"id,omitempty"`                                   //编号
-	Leader     string `protobuf:"bytes,6,opt,name=leader,proto3" json:"leader,omitempty"`                            //负责人
-	ParentId   int64  `protobuf:"varint,7,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`       //上级机构ID，一级机构为0
-	ParentIds  string `protobuf:"bytes,8,opt,name=parent_ids,json=parentIds,proto3" json:"parent_ids,omitempty"`     //上级机构IDs，一级机构为0
-	Phone      string `protobuf:"bytes,9,opt,name=phone,proto3" json:"phone,omitempty"`                              //电话号码
-	Remark     string `protobuf:"bytes,10,opt,name=remark,proto3" json:"remark,omitempty"`                           //备注信息
-	UpdateBy   string `protobuf:"bytes,11,opt,name=update_by,json=updateBy,proto3" json:"update_by,omitempty"`       //更新者
+	DeptName   string  `protobuf:"bytes,1,opt,name=dept_name,json=deptName,proto3" json:"dept_name,omitempty"`            //部门名称
+	DeptSort   int32   `protobuf:"varint,2,opt,name=dept_sort,json=deptSort,proto3" json:"dept_sort,omitempty"`           //部门排序
+	DeptStatus int32   `protobuf:"varint,3,opt,name=dept_status,json=deptStatus,proto3" json:"dept_status,omitempty"`     //部门状态
+	Email      string  `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`                                  //邮箱
+	Id         int64   `protobuf:"varint,5,opt,name=id,proto3" json:"id,omitempty"`                                       //编号
+	Leader     string  `protobuf:"bytes,6,opt,name=leader,proto3" json:"leader,omitempty"`                                //负责人
+	ParentId   int64   `protobuf:"varint,7,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`           //上级机构ID，一级机构为0
+	ParentIds  []int64 `protobuf:"varint,8,rep,packed,name=parent_ids,json=parentIds,proto3" json:"parent_ids,omitempty"` //上级机构IDs，一级机构为0
+	Phone      string  `protobuf:"bytes,9,opt,name=phone,proto3" json:"phone,omitempty"`                                  //电话号码
+	Remark     string  `protobuf:"bytes,10,opt,name=remark,proto3" json:"remark,omitempty"`                               //备注信息
+	UpdateBy   string  `protobuf:"bytes,11,opt,name=update_by,json=updateBy,proto3" json:"update_by,omitempty"`           //更新者
 }
 
 func (x *UpdateDeptReq) Reset() {
@@ -382,11 +382,11 @@ func (x *UpdateDeptReq) GetParentId() int64 {
 	return 0
 }
 
-func (x *UpdateDeptReq) GetParentIds() string {
+func (x *UpdateDeptReq) GetParentIds() []int64 {
 	if x != nil {
 		return x.ParentIds
 	}
-	return ""
+	return nil
 }
 
 func (x *UpdateDeptReq) GetPhone() string {
@@ -9393,7 +9393,7 @@ var file_rpc_sys_sys_proto_rawDesc = []byte{
 	0x64, 0x65, 0x72, 0x12, 0x1b, 0x0a, 0x09, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64,
 	0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64,
 	0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x08,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x73, 0x12,
+	0x20, 0x03, 0x28, 0x03, 0x52, 0x09, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x73, 0x12,
 	0x14, 0x0a, 0x05, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
 	0x70, 0x68, 0x6f, 0x6e, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b, 0x18,
 	0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b, 0x22, 0x21, 0x0a,
@@ -9417,7 +9417,7 @@ var file_rpc_sys_sys_proto_rawDesc = []byte{
 	0x61, 0x64, 0x65, 0x72, 0x12, 0x1b, 0x0a, 0x09, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x5f, 0x69,
 	0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49,
 	0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x73, 0x18,
-	0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x73,
+	0x08, 0x20, 0x03, 0x28, 0x03, 0x52, 0x09, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x73,
 	0x12, 0x14, 0x0a, 0x05, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x05, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b,
 	0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b, 0x12, 0x1b,

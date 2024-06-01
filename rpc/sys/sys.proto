@@ -14,7 +14,7 @@ message AddDeptReq {
   string email = 5; //邮箱
   string leader = 6; //负责人
   int64 parent_id = 7; //上级机构ID，一级机构为0
-  string parent_ids = 8; //上级机构IDs，一级机构为0
+  repeated int64 parent_ids = 8; //上级机构IDs，一级机构为0
   string phone = 9; //电话号码
   string remark = 10; //备注信息
 
@@ -42,7 +42,7 @@ message UpdateDeptReq {
   int64 id = 5; //编号
   string leader = 6; //负责人
   int64 parent_id = 7; //上级机构ID，一级机构为0
-  string parent_ids = 8; //上级机构IDs，一级机构为0
+  repeated int64 parent_ids = 8; //上级机构IDs，一级机构为0
   string phone = 9; //电话号码
   string remark = 10; //备注信息
   string update_by = 11; //更新者

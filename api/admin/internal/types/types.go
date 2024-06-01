@@ -19,15 +19,15 @@ type AddCompanyAddressResp struct {
 }
 
 type AddDeptReq struct {
-	DeptName   string `json:"deptName"`        //部门名称
-	DeptSort   int32  `json:"deptSort"`        //部门排序
-	DeptStatus int32  `json:"deptStatus"`      //部门状态
-	Email      string `json:"email"`           //邮箱
-	Leader     string `json:"leader"`          //负责人
-	ParentId   int64  `json:"parentId"`        //上级机构ID，一级机构为0
-	ParentIds  string `json:"parentIds"`       //上级机构IDs，一级机构为0
-	Phone      string `json:"phone"`           //电话号码
-	Remark     string `json:"remark,optional"` //备注信息
+	DeptName   string  `json:"deptName"`        //部门名称
+	DeptSort   int32   `json:"deptSort"`        //部门排序
+	DeptStatus int32   `json:"deptStatus"`      //部门状态
+	Email      string  `json:"email"`           //邮箱
+	Leader     string  `json:"leader"`          //负责人
+	ParentId   int64   `json:"parentId"`        //上级机构ID，一级机构为0
+	ParentIds  []int64 `json:"parentIds"`       //上级机构IDs，一级机构为0
+	Phone      string  `json:"phone"`           //电话号码
+	Remark     string  `json:"remark,optional"` //备注信息
 }
 
 type AddDeptResp struct {
@@ -2942,16 +2942,16 @@ type UpdateCompanyAddressResp struct {
 }
 
 type UpdateDeptReq struct {
-	DeptName   string `json:"deptName"`        //部门名称
-	DeptSort   int32  `json:"deptSort"`        //部门排序
-	DeptStatus int32  `json:"deptStatus"`      //部门状态
-	Email      string `json:"email"`           //邮箱
-	Id         int64  `json:"id"`              //编号
-	Leader     string `json:"leader"`          //负责人
-	ParentId   int64  `json:"parentId"`        //上级机构ID，一级机构为0
-	ParentIds  string `json:"parentIds"`       //上级机构IDs，一级机构为0
-	Phone      string `json:"phone"`           //电话号码
-	Remark     string `json:"remark,optional"` //备注信息
+	DeptName   string  `json:"deptName"`        //部门名称
+	DeptSort   int32   `json:"deptSort"`        //部门排序
+	DeptStatus int32   `json:"deptStatus"`      //部门状态
+	Email      string  `json:"email"`           //邮箱
+	Id         int64   `json:"id"`              //编号
+	Leader     string  `json:"leader"`          //负责人
+	ParentId   int64   `json:"parentId"`        //上级机构ID，一级机构为0
+	ParentIds  []int64 `json:"parentIds"`       //上级机构IDs，一级机构为0
+	Phone      string  `json:"phone"`           //电话号码
+	Remark     string  `json:"remark,optional"` //备注信息
 }
 
 type UpdateDeptResp struct {
