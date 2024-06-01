@@ -7,9 +7,8 @@ info (
 type (
 	// 添加角色信息
 	AddRoleReq {
-		DataScope  int32  `json:"dataScope"` //数据权限
-		Id         int64  `json:"id"` //编号
-		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
+		DataScope  int32  `json:"dataScope,default=0"` //数据权限
+		IsAdmin    int32  `json:"isAdmin,default=0"` //是否超级管理员
 		Remark     string `json:"remark,optional"` //备注
 		RoleKey    string `json:"roleKey"` //权限字符
 		RoleName   string `json:"roleName"` //角色名称
@@ -30,9 +29,9 @@ type (
 	}
 	// 更新角色信息
 	UpdateRoleReq {
-		DataScope  int32  `json:"dataScope"` //数据权限
+		DataScope  int32  `json:"dataScope,default=0"` //数据权限
 		Id         int64  `json:"id"` //编号
-		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
+		IsAdmin    int32  `json:"isAdmin,default=0"` //是否超级管理员
 		Remark     string `json:"remark,optional"` //备注
 		RoleKey    string `json:"roleKey"` //权限字符
 		RoleName   string `json:"roleName"` //角色名称
@@ -79,11 +78,10 @@ type (
 	QueryRoleListReq {
 		Current    int64  `form:"current,default=1"` //第几页
 		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
-		DataScope  int32  `form:"dataScope,optional"` //数据权限
-		IsAdmin    int32  `form:"isAdmin,optional"` //是否超级管理员
+		IsAdmin    int32  `form:"isAdmin,default=2"` //是否超级管理员
 		RoleKey    string `form:"roleKey,optional"` //权限字符
 		RoleName   string `form:"roleName,optional"` //角色名称
-		RoleStatus int32  `form:"roleStatus,optional"` //角色状态
+		RoleStatus int32  `form:"roleStatus,default=2"` //角色状态
 	}
 	QueryRoleListData {
 		CreateBy   string `json:"createBy"` //创建者

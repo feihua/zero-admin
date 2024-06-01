@@ -29,6 +29,7 @@ func main() {
 		g.GenerateModel("sys_dict_type"),
 		g.GenerateModel("sys_dict_item"),
 		g.GenerateModel("sys_post"),
+		g.GenerateModel("sys_user_post"),
 		g.GenerateModel("sys_operate_log"),
 		g.GenerateModel("sys_login_log"),
 		g.GenerateModel("sys_menu"),

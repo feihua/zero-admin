@@ -69,9 +69,42 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 
 	_, err = q.Updates(user)
 
+	err = query.Q.Transaction(func(tx *query.Query) error {
+		_, err = tx.SysUser.WithContext(l.ctx).Updates(user)
+
+		if err != nil {
+			logc.Errorf(l.ctx, "更新用户异常,参数:%+v,异常:%s", user, err.Error())
+			return err
+		}
+
+		var userPosts []*model.SysUserPost
+		for _, postId := range in.PostIds {
+			userPosts = append(userPosts, &model.SysUserPost{
+				UserID: user.ID,
+				PostID: postId,
+			})
+		}
+
+		postDo := tx.SysUserPost.WithContext(l.ctx)
+		//清空脏数字
+		_, err = postDo.Where(tx.SysUserPost.UserID.Eq(user.ID)).Delete()
+		if err != nil {
+			logc.Errorf(l.ctx, "删除用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())
+			return err
+		}
+
+		err = postDo.CreateInBatches(userPosts, len(userPosts))
+		if err != nil {
+			logc.Errorf(l.ctx, "新增用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())
+			return err
+		}
+
+		return nil
+	})
+
 	if err != nil {
 		logc.Errorf(l.ctx, "更新用户异常,参数:%+v,异常:%s", user, err.Error())
-		return nil, errors.New("更新用户失败")
+		return nil, errors.New("更新用户异常")
 	}
 
 	return &sysclient.UpdateUserResp{}, nil

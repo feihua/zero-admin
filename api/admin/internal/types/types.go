@@ -488,14 +488,13 @@ type AddReturnResonResp struct {
 }
 
 type AddRoleReq struct {
-	DataScope  int32  `json:"dataScope"`       //数据权限
-	Id         int64  `json:"id"`              //编号
-	IsAdmin    int32  `json:"isAdmin"`         //是否超级管理员
-	Remark     string `json:"remark,optional"` //备注
-	RoleKey    string `json:"roleKey"`         //权限字符
-	RoleName   string `json:"roleName"`        //角色名称
-	RoleSort   int32  `json:"roleSort"`        //角色排序
-	RoleStatus int32  `json:"roleStatus"`      //角色状态
+	DataScope  int32  `json:"dataScope,default=0"` //数据权限
+	IsAdmin    int32  `json:"isAdmin,default=0"`   //是否超级管理员
+	Remark     string `json:"remark,optional"`     //备注
+	RoleKey    string `json:"roleKey"`             //权限字符
+	RoleName   string `json:"roleName"`            //角色名称
+	RoleSort   int32  `json:"roleSort"`            //角色排序
+	RoleStatus int32  `json:"roleStatus"`          //角色状态
 }
 
 type AddRoleResp struct {
@@ -538,15 +537,15 @@ type AddSubjectResp struct {
 }
 
 type AddUserReq struct {
-	Avatar     string `json:"avatar,optional"` //头像
-	DeptId     int64  `json:"deptId,optional"` //部门id
-	Email      string `json:"email,optional"`  //邮箱
-	Mobile     string `json:"mobile"`          //手机号
-	NickName   string `json:"nickName"`        //昵称
-	Password   string `json:"password"`        //密码
-	Remark     string `json:"remark,optional"` //备注信息
-	UserName   string `json:"userName"`        //用户名
-	UserStatus int32  `json:"userStatus"`      //帐号状态（0正常 1停用）
+	Avatar     string  `json:"avatar,optional"`  //头像
+	DeptId     int64   `json:"deptId,optional"`  //部门id
+	PostIds    []int64 `json:"postIds,optional"` //部门id
+	Email      string  `json:"email,optional"`   //邮箱
+	Mobile     string  `json:"mobile"`           //手机号
+	NickName   string  `json:"nickName"`         //昵称
+	Remark     string  `json:"remark,optional"`  //备注信息
+	UserName   string  `json:"userName"`         //用户名
+	UserStatus int32   `json:"userStatus"`       //帐号状态（0正常 1停用）
 }
 
 type AddUserResp struct {
@@ -2763,13 +2762,12 @@ type QueryRoleListData struct {
 }
 
 type QueryRoleListReq struct {
-	Current    int64  `form:"current,default=1"`   //第几页
-	PageSize   int64  `form:"pageSize,default=20"` //每页的数量
-	DataScope  int32  `form:"dataScope,optional"`  //数据权限
-	IsAdmin    int32  `form:"isAdmin,optional"`    //是否超级管理员
-	RoleKey    string `form:"roleKey,optional"`    //权限字符
-	RoleName   string `form:"roleName,optional"`   //角色名称
-	RoleStatus int32  `form:"roleStatus,optional"` //角色状态
+	Current    int64  `form:"current,default=1"`    //第几页
+	PageSize   int64  `form:"pageSize,default=20"`  //每页的数量
+	IsAdmin    int32  `form:"isAdmin,default=2"`    //是否超级管理员
+	RoleKey    string `form:"roleKey,optional"`     //权限字符
+	RoleName   string `form:"roleName,optional"`    //角色名称
+	RoleStatus int32  `form:"roleStatus,default=2"` //角色状态
 }
 
 type QueryRoleListResp struct {
@@ -2805,22 +2803,23 @@ type QueryStatisticsLoginLogResp struct {
 }
 
 type QueryUserDetailData struct {
-	Avatar     string `json:"avatar"`     //头像
-	CreateBy   string `json:"createBy"`   //创建者
-	CreateTime string `json:"createTime"` //创建时间
-	DeptId     int64  `json:"deptId"`     //部门id
-	Email      string `json:"email"`      //邮箱
-	Id         int64  `json:"id"`         //编号
-	LoginIp    string `json:"loginIp"`    //登录ip
-	LoginTime  string `json:"loginTime"`  //登录时间
-	Mobile     string `json:"mobile"`     //手机号
-	NickName   string `json:"nickName"`   //昵称
-	Remark     string `json:"remark"`     //备注信息
-	Salt       string `json:"salt"`       //加密盐
-	UpdateBy   string `json:"updateBy"`   //更新者
-	UpdateTime string `json:"updateTime"` //更新时间
-	UserName   string `json:"userName"`   //用户名
-	UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
+	Avatar     string  `json:"avatar"`     //头像
+	CreateBy   string  `json:"createBy"`   //创建者
+	CreateTime string  `json:"createTime"` //创建时间
+	DeptId     int64   `json:"deptId"`     //部门id
+	Email      string  `json:"email"`      //邮箱
+	Id         int64   `json:"id"`         //编号
+	LoginIp    string  `json:"loginIp"`    //登录ip
+	LoginTime  string  `json:"loginTime"`  //登录时间
+	Mobile     string  `json:"mobile"`     //手机号
+	NickName   string  `json:"nickName"`   //昵称
+	Remark     string  `json:"remark"`     //备注信息
+	Salt       string  `json:"salt"`       //加密盐
+	UpdateBy   string  `json:"updateBy"`   //更新者
+	UpdateTime string  `json:"updateTime"` //更新时间
+	UserName   string  `json:"userName"`   //用户名
+	UserStatus int32   `json:"userStatus"` //帐号状态（0正常 1停用）
+	PostIds    []int64 `json:"postIds"`    //部门id
 }
 
 type QueryUserDetailReq struct {
@@ -2852,13 +2851,13 @@ type QueryUserListData struct {
 }
 
 type QueryUserListReq struct {
-	Current    int64  `form:"current,default=1"`   //第几页
-	PageSize   int64  `form:"pageSize,default=20"` //每页的数量
-	DeptId     int64  `form:"deptId,optional"`     //部门id
-	Email      string `form:"email,optional"`      //邮箱
-	Mobile     string `form:"mobile,optional"`     //手机号
-	NickName   string `form:"nickName,optional"`   //昵称
-	UserStatus int32  `form:"userStatus,optional"` //帐号状态（0正常 1停用）
+	Current    int64  `form:"current,default=1"`    //第几页
+	PageSize   int64  `form:"pageSize,default=20"`  //每页的数量
+	DeptId     int64  `form:"deptId,default=0"`     //部门id
+	Email      string `form:"email,optional"`       //邮箱
+	Mobile     string `form:"mobile,optional"`      //手机号
+	NickName   string `form:"nickName,optional"`    //昵称
+	UserStatus int32  `form:"userStatus,default=2"` //帐号状态（0正常 1停用）
 }
 
 type QueryUserListResp struct {
@@ -3642,14 +3641,14 @@ type UpdateRoleMenuListResp struct {
 }
 
 type UpdateRoleReq struct {
-	DataScope  int32  `json:"dataScope"`       //数据权限
-	Id         int64  `json:"id"`              //编号
-	IsAdmin    int32  `json:"isAdmin"`         //是否超级管理员
-	Remark     string `json:"remark,optional"` //备注
-	RoleKey    string `json:"roleKey"`         //权限字符
-	RoleName   string `json:"roleName"`        //角色名称
-	RoleSort   int32  `json:"roleSort"`        //角色排序
-	RoleStatus int32  `json:"roleStatus"`      //角色状态
+	DataScope  int32  `json:"dataScope,default=0"` //数据权限
+	Id         int64  `json:"id"`                  //编号
+	IsAdmin    int32  `json:"isAdmin,default=0"`   //是否超级管理员
+	Remark     string `json:"remark,optional"`     //备注
+	RoleKey    string `json:"roleKey"`             //权限字符
+	RoleName   string `json:"roleName"`            //角色名称
+	RoleSort   int32  `json:"roleSort"`            //角色排序
+	RoleStatus int32  `json:"roleStatus"`          //角色状态
 }
 
 type UpdateRoleResp struct {
@@ -3728,15 +3727,16 @@ type UpdateSubjectResp struct {
 }
 
 type UpdateUserReq struct {
-	Avatar     string `json:"avatar"`          //头像
-	DeptId     int64  `json:"deptId"`          //部门id
-	Email      string `json:"email"`           //邮箱
-	Id         int64  `json:"id"`              //编号
-	Mobile     string `json:"mobile"`          //手机号
-	NickName   string `json:"nickName"`        //昵称
-	Remark     string `json:"remark,optional"` //备注信息
-	UserName   string `json:"userName"`        //用户名
-	UserStatus int32  `json:"userStatus"`      //帐号状态（0正常 1停用）
+	Avatar     string  `json:"avatar,optional"`  //头像
+	DeptId     int64   `json:"deptId,optional"`  //部门id
+	PostIds    []int64 `json:"postIds,optional"` //部门id
+	Email      string  `json:"email"`            //邮箱
+	Id         int64   `json:"id"`               //编号
+	Mobile     string  `json:"mobile"`           //手机号
+	NickName   string  `json:"nickName"`         //昵称
+	Remark     string  `json:"remark,optional"`  //备注信息
+	UserName   string  `json:"userName"`         //用户名
+	UserStatus int32   `json:"userStatus"`       //帐号状态（0正常 1停用）
 }
 
 type UpdateUserResp struct {

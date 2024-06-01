@@ -1030,11 +1030,10 @@ message AddUserReq {
   string email = 4; //邮箱
   string mobile = 5; //手机号
   string nick_name = 6; //昵称
-  string password = 7; //密码
   string remark = 8; //备注信息
   string user_name = 9; //用户名
   int32 user_status = 10; //帐号状态（0正常 1停用）
-
+  repeated int64 PostIds = 11; //岗位ids
 }
 
 message AddUserResp {
@@ -1063,6 +1062,7 @@ message UpdateUserReq {
   string update_by = 9; //更新者
   string user_name = 10; //用户名
   int32 user_status = 11; //帐号状态（0正常 1停用）
+  repeated int64 PostIds = 12; //岗位ids
 
 }
 
@@ -1103,7 +1103,7 @@ message QueryUserDetailResp {
   string update_by = 13; //更新者
   string update_time = 14; //更新时间
   string user_name = 15; //用户名
-
+  repeated int64 PostIds = 16; //岗位ids
 
 }
 
@@ -1135,7 +1135,6 @@ message UserListData {
   string update_by = 13; //更新者
   string update_time = 14; //更新时间
   string user_name = 15; //用户名
-
 
 }
 

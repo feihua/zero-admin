@@ -60,6 +60,7 @@ func (l *QueryUserDetailLogic) QueryUserDetail(req *types.QueryUserDetailReq) (r
 		UpdateTime: item.UpdateTime,
 		UserName:   item.UserName,
 		UserStatus: item.UserStatus,
+		PostIds:    item.PostIds,
 	}
 
 	return &types.QueryUserDetailResp{

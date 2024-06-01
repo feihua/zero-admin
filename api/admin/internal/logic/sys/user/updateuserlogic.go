@@ -44,6 +44,7 @@ func (l *UpdateUserLogic) UpdateUser(req *types.UpdateUserReq) (*types.UpdateUse
 		UpdateBy:   l.ctx.Value("userName").(string),
 		UserName:   req.UserName,
 		UserStatus: req.UserStatus,
+		PostIds:    req.PostIds,
 	}
 
 	if _, err := l.svcCtx.UserService.UpdateUser(l.ctx, &userUpdateReq); err != nil {

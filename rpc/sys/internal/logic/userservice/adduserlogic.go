@@ -57,7 +57,7 @@ func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp
 		UserName:   in.UserName,
 		NickName:   in.NickName,
 		Avatar:     in.Avatar,
-		Password:   in.Password,
+		Password:   "123456",
 		Salt:       "123456", //todo 待完善
 		Email:      in.Email,
 		Mobile:     in.Mobile,
@@ -67,12 +67,42 @@ func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp
 		CreateBy:   in.CreateBy,
 	}
 
-	err = q.WithContext(l.ctx).Create(user)
+	err = query.Q.Transaction(func(tx *query.Query) error {
+		err = tx.SysUser.WithContext(l.ctx).Create(user)
+
+		if err != nil {
+			logc.Errorf(l.ctx, "新增用户异常,参数:%+v,异常:%s", user, err.Error())
+			return err
+		}
+
+		var userPosts []*model.SysUserPost
+		for _, postId := range in.PostIds {
+			userPosts = append(userPosts, &model.SysUserPost{
+				UserID: user.ID,
+				PostID: postId,
+			})
+		}
+
+		postDo := tx.SysUserPost.WithContext(l.ctx)
+		//清空脏数字
+		_, err = postDo.Where(tx.SysUserPost.UserID.Eq(user.ID)).Delete()
+		if err != nil {
+			logc.Errorf(l.ctx, "删除用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())
+			return err
+		}
+
+		err = postDo.Create(userPosts...)
+		if err != nil {
+			logc.Errorf(l.ctx, "新增用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())
+			return err
+		}
+
+		return nil
+	})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "新增用户异常,参数:%+v,异常:%s", user, err.Error())
 		return nil, errors.New("新增用户异常")
 	}
-
 	return &sysclient.AddUserResp{}, nil
 }

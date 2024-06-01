@@ -41,6 +41,12 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		return nil, errors.New("查询用户详情信息失败")
 	}
 
+	var postIds []int64
+
+	sql := `select t1.post_id
+			from sys_user_post t1
+			where  t1.user_id = ?;`
+	l.svcCtx.DB.Raw(sql, in.Id).Select("post_id").Scan(&postIds)
 	data := &sysclient.QueryUserDetailResp{
 		Avatar:     user.Avatar,
 		CreateBy:   user.CreateBy,
@@ -57,6 +63,7 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		UpdateBy:   user.UpdateBy,
 		UpdateTime: common.TimeToString(user.UpdateTime),
 		UserName:   user.UserName,
+		PostIds:    postIds,
 	}
 
 	logc.Infof(l.ctx, "查询用户详情信息,参数：%+v,响应：%+v", in, data)
