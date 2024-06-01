@@ -40,7 +40,6 @@ func (l *QueryDictItemListLogic) QueryDictItemList(req *types.QueryDictItemListR
 		DictLabel:  req.DictLabel,
 		DictStatus: req.DictStatus,
 		DictType:   req.DictType,
-		IsDefault:  req.DictStatus,
 	})
 
 	if err != nil {
@@ -56,7 +55,7 @@ func (l *QueryDictItemListLogic) QueryDictItemList(req *types.QueryDictItemListR
 			CreateBy:   dict.CreateBy,
 			CreateTime: dict.CreateTime,
 			DictLabel:  dict.DictLabel,
-			DictSort:   dict.DictStatus,
+			DictSort:   dict.DictSort,
 			DictStatus: dict.DictStatus,
 			DictType:   dict.DictType,
 			DictValue:  dict.DictValue,

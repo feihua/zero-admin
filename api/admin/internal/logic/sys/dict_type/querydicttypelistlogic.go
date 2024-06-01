@@ -54,7 +54,7 @@ func (l *QueryDictTypeListLogic) QueryDictTypeList(req *types.QueryDictTypeListR
 		list = append(list, &types.QueryDictTypeListData{
 			CreateBy:   dict.CreateBy,
 			CreateTime: dict.CreateTime,
-			DictName:   dict.DictType,
+			DictName:   dict.DictName,
 			DictStatus: dict.DictStatus,
 			DictType:   dict.DictType,
 			Id:         dict.Id,

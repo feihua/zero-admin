@@ -15,7 +15,7 @@ type (
 		ParentId   int64  `json:"parentId"` //上级机构ID，一级机构为0
 		ParentIds  string `json:"parentIds"` //上级机构IDs，一级机构为0
 		Phone      string `json:"phone"` //电话号码
-		Remark     string `json:"remark"` //备注信息
+		Remark     string `json:"remark,optional"` //备注信息
 	}
 	AddDeptResp {
 		Code    string `json:"code"`
@@ -40,7 +40,7 @@ type (
 		ParentId   int64  `json:"parentId"` //上级机构ID，一级机构为0
 		ParentIds  string `json:"parentIds"` //上级机构IDs，一级机构为0
 		Phone      string `json:"phone"` //电话号码
-		Remark     string `json:"remark"` //备注信息
+		Remark     string `json:"remark,optional"` //备注信息
 	}
 	UpdateDeptResp {
 		Code    string `json:"code"`

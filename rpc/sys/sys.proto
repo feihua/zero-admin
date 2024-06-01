@@ -218,7 +218,6 @@ message QueryDictItemListReq {
   string dict_label = 3; //字典标签
   int32 dict_status = 5; //字典状态
   string dict_type = 6; //字典类型
-  int32 is_default = 9; //是否默认  0：否  1：是
 }
 
 message DictItemListData {

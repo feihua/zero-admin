@@ -84,10 +84,7 @@ type (
 		Id         int64  `json:"id"` //编号
 		Mobile     string `json:"mobile"` //手机号
 		NickName   string `json:"nickName"` //昵称
-		Remark     string `json:"remark"` //备注信息
-		Salt       string `json:"salt"` //加密盐
-		UpdateBy   string `json:"updateBy"` //更新者
-		UpdateTime string `json:"updateTime"` //更新时间
+		Remark     string `json:"remark,optional"` //备注信息
 		UserName   string `json:"userName"` //用户名
 		UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
 	}

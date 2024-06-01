@@ -11,7 +11,7 @@ type (
 		DictStatus int32  `json:"dictStatus"` //字典状态
 		DictType   string `json:"dictType"` //字典类型
 		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
-		Remark     string `json:"remark"` //备注信息
+		Remark     string `json:"remark,optional"` //备注信息
 	}
 	AddDictTypeResp {
 		Code    string `json:"code"`
@@ -32,7 +32,7 @@ type (
 		DictType   string `json:"dictType"` //字典类型
 		Id         int64  `json:"id"` //编号
 		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
-		Remark     string `json:"remark"` //备注信息
+		Remark     string `json:"remark,optional"` //备注信息
 	}
 	UpdateDictTypeResp {
 		Code    string `json:"code"`
@@ -73,9 +73,9 @@ type (
 		Current    int64  `form:"current,default=1"` //第几页
 		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
 		DictName   string `form:"dictName,optional"` //字典名称
-		DictStatus int32  `form:"dictStatus,optional"` //字典状态
+		DictStatus int32  `form:"dictStatus,default=2"` //字典状态
 		DictType   string `form:"dictType,optional"` //字典类型
-		IsSystem   int32  `form:"isSystem,optional"` //是否系统预留  0：否  1：是
+		IsSystem   int32  `form:"isSystem,default=2"` //是否系统预留  0：否  1：是
 	}
 	QueryDictTypeListData {
 		CreateBy   string `json:"createBy"` //创建者

@@ -65,7 +65,7 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 func (l *UserInfoLogic) queryUserMenuAndApiUrls(userId int64) ([]*sysclient.MenuListTree, []string) {
 	var result []*model.SysMenu
 	if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
-		result, _ = query.SysMenu.WithContext(l.ctx).Find()
+		result, _ = query.SysMenu.WithContext(l.ctx).Where(query.SysMenu.IsVisible.Eq(1)).Find()
 	} else {
 		sql := `
 				select sm.*
@@ -73,7 +73,7 @@ func (l *UserInfoLogic) queryUserMenuAndApiUrls(userId int64) ([]*sysclient.Menu
 						 left join sys_role sr on sur.role_id = sr.id
 						 left join sys_role_menu srm on sr.id = srm.role_id
 						 left join sys_menu sm on srm.menu_id = sm.id
-				where sur.user_id = ?
+				where sur.user_id = ? and sm.is_visible=1
 				order by sm.id
 				`
 		db := l.svcCtx.DB

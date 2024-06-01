@@ -36,6 +36,15 @@ func NewQueryDictItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemListReq) (*sysclient.QueryDictItemListResp, error) {
 	q := query.SysDictItem.WithContext(l.ctx)
 
+	q = q.Where(query.SysDictItem.DictType.Eq(in.DictType))
+	if len(in.DictLabel) > 0 {
+		q = q.Where(query.SysDictItem.DictLabel.Like("%" + in.DictLabel + "%"))
+	}
+
+	if in.DictStatus != 2 {
+		q = q.Where(query.SysDictItem.DictStatus.Eq(in.DictStatus))
+	}
+
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {

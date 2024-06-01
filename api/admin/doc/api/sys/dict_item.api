@@ -13,7 +13,7 @@ type (
 		DictType   string `json:"dictType"` //字典类型
 		DictValue  string `json:"dictValue"` //字典键值
 		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
-		Remark     string `json:"remark"` //备注信息
+		Remark     string `json:"remark,optional"` //备注信息
 	}
 	AddDictItemResp {
 		Code    string `json:"code"`
@@ -36,7 +36,7 @@ type (
 		DictValue  string `json:"dictValue"` //字典键值
 		Id         int64  `json:"id"` //编号
 		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
-		Remark     string `json:"remark"` //备注信息
+		Remark     string `json:"remark,optional"` //备注信息
 	}
 	UpdateDictItemResp {
 		Code    string `json:"code"`
@@ -79,9 +79,8 @@ type (
 		Current    int64  `form:"current,default=1"` //第几页
 		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
 		DictLabel  string `form:"dictLabel,optional"` //字典标签
-		DictStatus int32  `form:"dictStatus,optional"` //字典状态
+		DictStatus int32  `form:"dictStatus,,default=2"` //字典状态
 		DictType   string `form:"dictType,optional"` //字典类型
-		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
 	}
 	QueryDictItemListData {
 		CreateBy   string `json:"createBy"` //创建者

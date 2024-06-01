@@ -10,7 +10,7 @@ type (
 		DataScope  int32  `json:"dataScope"` //数据权限
 		Id         int64  `json:"id"` //编号
 		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
-		Remark     string `json:"remark"` //备注
+		Remark     string `json:"remark,optional"` //备注
 		RoleKey    string `json:"roleKey"` //权限字符
 		RoleName   string `json:"roleName"` //角色名称
 		RoleSort   int32  `json:"roleSort"` //角色排序
@@ -33,7 +33,7 @@ type (
 		DataScope  int32  `json:"dataScope"` //数据权限
 		Id         int64  `json:"id"` //编号
 		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
-		Remark     string `json:"remark"` //备注
+		Remark     string `json:"remark,optional"` //备注
 		RoleKey    string `json:"roleKey"` //权限字符
 		RoleName   string `json:"roleName"` //角色名称
 		RoleSort   int32  `json:"roleSort"` //角色排序

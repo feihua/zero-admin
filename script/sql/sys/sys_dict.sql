@@ -16,6 +16,10 @@ create table sys_dict_type
 )
     comment '字典类型表';
 
+INSERT INTO sys_dict_type (id, dict_name, dict_type, dict_status, remark, is_system, is_deleted, create_by, create_time, update_by, update_time) VALUES (1, '操作类型', 'sys_oper_type', 1, '操作类型列表', 1, 0, 'admin', '2024-06-01 13:18:56', '', null);
+INSERT INTO sys_dict_type (id, dict_name, dict_type, dict_status, remark, is_system, is_deleted, create_by, create_time, update_by, update_time) VALUES (2, 'test', 'test', 1, 'test', 1, 0, 'admin', '2024-06-01 14:44:53', '', null);
+
+
 create table sys_dict_item
 (
     id          bigint auto_increment comment '编号'
@@ -36,3 +40,10 @@ create table sys_dict_item
 )
     comment '字典数据表';
 
+INSERT INTO sys_dict_item (id, dict_type, dict_label, dict_value, dict_status, dict_sort, remark, is_default, is_deleted, create_by, create_time, update_by, update_time) VALUES (1, 'sys_oper_type', '新增', '1', 1, 1, '新增操作', 0, 1, 'admin', '2024-06-01 15:26:38', '', null);
+INSERT INTO sys_dict_item (id, dict_type, dict_label, dict_value, dict_status, dict_sort, remark, is_default, is_deleted, create_by, create_time, update_by, update_time) VALUES (2, 'sys_oper_type', '修改', '2', 1, 2, '修改操作', 0, 1, 'admin', '2024-06-01 15:30:58', '', null);
+INSERT INTO sys_dict_item (id, dict_type, dict_label, dict_value, dict_status, dict_sort, remark, is_default, is_deleted, create_by, create_time, update_by, update_time) VALUES (3, 'sys_oper_type', '删除', '3', 1, 3, '删除操作', 0, 1, 'admin', '2024-06-01 15:31:18', 'admin', '2024-06-01 15:33:59');
+INSERT INTO sys_dict_item (id, dict_type, dict_label, dict_value, dict_status, dict_sort, remark, is_default, is_deleted, create_by, create_time, update_by, update_time) VALUES (4, 'sys_oper_type', '导出', '4', 1, 4, '导出操作', 0, 1, 'admin', '2024-06-01 15:32:13', 'admin', '2024-06-01 15:34:18');
+INSERT INTO sys_dict_item (id, dict_type, dict_label, dict_value, dict_status, dict_sort, remark, is_default, is_deleted, create_by, create_time, update_by, update_time) VALUES (5, 'sys_oper_type', '导入', '5', 1, 5, '导入操作', 0, 1, 'admin', '2024-06-01 15:32:43', '', null);
+INSERT INTO sys_dict_item (id, dict_type, dict_label, dict_value, dict_status, dict_sort, remark, is_default, is_deleted, create_by, create_time, update_by, update_time) VALUES (6, 'sys_oper_type', '清空数据', '6', 1, 6, '清空操作', 0, 1, 'admin', '2024-06-01 15:33:08', '', null);
+INSERT INTO sys_dict_item (id, dict_type, dict_label, dict_value, dict_status, dict_sort, remark, is_default, is_deleted, create_by, create_time, update_by, update_time) VALUES (7, 'sys_oper_type', '其它', '7', 1, 7, '其它操作', 0, 1, 'admin', '2024-06-01 15:33:28', '', null);
