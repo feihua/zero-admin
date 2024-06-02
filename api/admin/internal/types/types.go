@@ -567,6 +567,16 @@ type BrandData struct {
 	BrandStory          string `json:"brandStory"`          // 品牌故事
 }
 
+type CancelAuthorizationReq struct {
+	RoleId int64 `json:"roleId"`
+	UserId int64 `json:"userId"`
+}
+
+type CancelAuthorizationResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type CloseOrderReq struct {
 	Ids  []int64 `json:"ids"` //订单id
 	Note string  `json:"note"`
@@ -2790,6 +2800,43 @@ type QueryRoleMenuListResp struct {
 	Data    RoleMenuListData `json:"data"`
 }
 
+type QueryRoleUserListData struct {
+	Avatar     string `json:"avatar"`     //头像
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	DeptId     int64  `json:"deptId"`     //部门id
+	Email      string `json:"email"`      //邮箱
+	Id         int64  `json:"id"`         //编号
+	LoginIp    string `json:"loginIp"`    //登录ip
+	LoginTime  string `json:"loginTime"`  //登录时间
+	Mobile     string `json:"mobile"`     //手机号
+	NickName   string `json:"nickName"`   //昵称
+	Remark     string `json:"remark"`     //备注信息
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+	UserName   string `json:"userName"`   //用户名
+	UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
+}
+
+type QueryRoleUserListReq struct {
+	Current  int64  `form:"current,default=1"`   //第几页
+	PageSize int64  `form:"pageSize,default=20"` //每页的数量
+	RoleId   int64  `form:"roleId"`              //角色id
+	IsExist  int64  `form:"isExist"`             //角色是否已经拥有用户
+	Mobile   string `form:"mobile,optional"`     //手机号
+	UserName string `form:"userName,optional"`   //昵称
+}
+
+type QueryRoleUserListResp struct {
+	Code     string                   `json:"code"`
+	Message  string                   `json:"message"`
+	Current  int64                    `json:"current,default=1"`
+	Data     []*QueryRoleUserListData `json:"data"`
+	PageSize int64                    `json:"pageSize,default=20"`
+	Success  bool                     `json:"success"`
+	Total    int64                    `json:"total"`
+}
+
 type QueryStatisticsLoginLogData struct {
 	DayLoginCount   int32 `json:"dayLoginCount"`   //查询当天登录人数（根据IP）
 	WeekLoginCount  int32 `json:"weekLoginCount"`  //统计当前周登录人数（根据IP）
@@ -3663,6 +3710,16 @@ type UpdateRoleStatusReq struct {
 }
 
 type UpdateRoleStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateRoleUserListReq struct {
+	RoleId  int64   `json:"roleId"`
+	UserIds []int64 `json:"userIds"`
+}
+
+type UpdateRoleUserListResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

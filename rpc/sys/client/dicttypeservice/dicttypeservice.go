@@ -29,6 +29,8 @@ type (
 	AddRoleResp               = sysclient.AddRoleResp
 	AddUserReq                = sysclient.AddUserReq
 	AddUserResp               = sysclient.AddUserResp
+	CancelAuthorizationReq    = sysclient.CancelAuthorizationReq
+	CancelAuthorizationResp   = sysclient.CancelAuthorizationResp
 	DeleteDeptReq             = sysclient.DeleteDeptReq
 	DeleteDeptResp            = sysclient.DeleteDeptResp
 	DeleteDictItemReq         = sysclient.DeleteDictItemReq
@@ -95,6 +97,8 @@ type (
 	QueryRoleListResp         = sysclient.QueryRoleListResp
 	QueryRoleMenuListReq      = sysclient.QueryRoleMenuListReq
 	QueryRoleMenuListResp     = sysclient.QueryRoleMenuListResp
+	QueryRoleUserListReq      = sysclient.QueryRoleUserListReq
+	QueryRoleUserListResp     = sysclient.QueryRoleUserListResp
 	QueryUserDetailReq        = sysclient.QueryUserDetailReq
 	QueryUserDetailResp       = sysclient.QueryUserDetailResp
 	QueryUserListReq          = sysclient.QueryUserListReq
@@ -130,6 +134,8 @@ type (
 	UpdateRoleResp            = sysclient.UpdateRoleResp
 	UpdateRoleStatusReq       = sysclient.UpdateRoleStatusReq
 	UpdateRoleStatusResp      = sysclient.UpdateRoleStatusResp
+	UpdateRoleUserListReq     = sysclient.UpdateRoleUserListReq
+	UpdateRoleUserListResp    = sysclient.UpdateRoleUserListResp
 	UpdateUserReq             = sysclient.UpdateUserReq
 	UpdateUserResp            = sysclient.UpdateUserResp
 	UpdateUserRoleListReq     = sysclient.UpdateUserRoleListReq

@@ -62,3 +62,43 @@ Authorization: Bearer {{token}}
   "roleId": 4,
   "menuIds": [1,2,3]
 }
+
+### 查询角色与菜单的关联
+GET {{host}}/api/sys/role/queryRoleMenuList?roleId=1
+Authorization: Bearer {{token}}
+
+
+### 更新角色与菜单的关联
+POST {{host}}/api/sys/role/updateRoleMenuList
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "roleId": 4,
+  "menuIds": [1,2,3]
+}
+
+### 根据roleId分页查询用户信息列表
+GET {{host}}/api/sys/role/queryRoleUserList?roleId=1&isExist=1&mobile=1
+Authorization: Bearer {{token}}
+
+
+### 更新角色与用户的关联
+POST {{host}}/api/sys/role/updateRoleUserList
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "roleId": 4,
+  "userIds": [1]
+}
+
+### 取消授权
+POST {{host}}/api/sys/role/cancelAuthorization
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "roleId": 4,
+  "userId": 1
+}

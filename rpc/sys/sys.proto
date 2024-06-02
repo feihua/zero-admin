@@ -951,6 +951,39 @@ message UpdateMenuRoleResp {
   string pong = 1;
 }
 
+message QueryRoleUserListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 role_id = 3;//角色id
+  int64 is_exist = 4; //角色是否已经拥有用户
+  string mobile = 5; //手机号
+  string user_name = 6; //昵称
+}
+
+message QueryRoleUserListResp {
+  repeated UserListData list = 1;
+  int64 total = 2;
+}
+
+message UpdateRoleUserListReq {
+  int64 roleId = 1;
+  repeated int64 userIds = 2;
+}
+
+message UpdateRoleUserListResp {
+  string pong = 1;
+}
+
+message CancelAuthorizationReq {
+  int64 roleId = 1;
+  int64 userId = 2;
+}
+
+message CancelAuthorizationResp {
+  string pong = 1;
+}
+
+
 // 角色信息表
 service RoleService {
   // 添加角色信息表
@@ -970,6 +1003,14 @@ service RoleService {
   rpc QueryRoleMenuList(QueryRoleMenuListReq) returns(QueryRoleMenuListResp);
   //更新用户与角色的关联
   rpc UpdateMenuRoleList(UpdateMenuRoleReq) returns(UpdateMenuRoleResp);
+
+  //查询角色的用户关联
+  rpc QueryRoleUserList(QueryRoleUserListReq) returns(QueryRoleUserListResp);
+  //更新角色的用户关联
+  rpc UpdateRoleUserList(UpdateRoleUserListReq) returns(UpdateRoleUserListResp);
+
+  //取消授权
+  rpc CancelAuthorization(CancelAuthorizationReq) returns(CancelAuthorizationResp);
 
 }
 
