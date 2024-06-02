@@ -134,8 +134,6 @@ type (
 	UpdateRoleResp            = sysclient.UpdateRoleResp
 	UpdateRoleStatusReq       = sysclient.UpdateRoleStatusReq
 	UpdateRoleStatusResp      = sysclient.UpdateRoleStatusResp
-	UpdateRoleUserListReq     = sysclient.UpdateRoleUserListReq
-	UpdateRoleUserListResp    = sysclient.UpdateRoleUserListResp
 	UpdateUserReq             = sysclient.UpdateUserReq
 	UpdateUserResp            = sysclient.UpdateUserResp
 	UpdateUserRoleListReq     = sysclient.UpdateUserRoleListReq

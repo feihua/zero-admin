@@ -656,36 +656,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addProduct",
-					Handler: productproduct.ProductAddHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: productproduct.QueryProductListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
 					Method:  http.MethodGet,
 					Path:    "/updateDeleteStatus",
 					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
@@ -726,9 +696,39 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
+					Method:  http.MethodPost,
+					Path:    "/addProduct",
+					Handler: productproduct.ProductAddHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
 					Method:  http.MethodGet,
 					Path:    "/queryProductDetail",
 					Handler: productproduct.QueryProductDetailHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductList",
+					Handler: productproduct.QueryProductListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1409,11 +1409,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodPost,
 					Path:    "/updateRoleStatus",
 					Handler: sysrole.UpdateRoleStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateRoleUserList",
-					Handler: sysrole.UpdateRoleUserListHandler(serverCtx),
 				},
 			}...,
 		),

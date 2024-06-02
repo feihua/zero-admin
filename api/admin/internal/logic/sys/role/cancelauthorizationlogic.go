@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// CancelAuthorizationLogic 取消授权
+// CancelAuthorizationLogic 取消授权/确认授权
 /*
 Author: LiuFeiHua
 Date: 2024/6/02 17:59
@@ -32,21 +32,22 @@ func NewCancelAuthorizationLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// CancelAuthorization 取消授权
+// CancelAuthorization 取消授权/确认授权
 func (l *CancelAuthorizationLogic) CancelAuthorization(req *types.CancelAuthorizationReq) (resp *types.CancelAuthorizationResp, err error) {
 	_, err = l.svcCtx.RoleService.CancelAuthorization(l.ctx, &sysclient.CancelAuthorizationReq{
-		RoleId: req.RoleId,
-		UserId: req.UserId,
+		RoleId:  req.RoleId,
+		UserIds: req.UserIds,
+		IsExist: req.IsExist,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "取消授权失败,参数:%+v,异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "取消授权/确认授权失败,参数:%+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.CancelAuthorizationResp{
 		Code:    "000000",
-		Message: "取消授权成功",
+		Message: "取消授权/确认授权成功",
 	}, nil
 }

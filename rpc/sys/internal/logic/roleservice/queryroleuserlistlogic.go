@@ -47,7 +47,7 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 
 	userRole := query.SysUserRole
 	sysUser := query.SysUser
-	q := userRole.WithContext(l.ctx).LeftJoin(sysUser, sysUser.ID.EqCol(userRole.UserID))
+	q := userRole.WithContext(l.ctx).LeftJoin(sysUser, sysUser.ID.EqCol(userRole.UserID)).Select(sysUser.ALL)
 	if len(in.Mobile) > 0 {
 		q = q.Where(sysUser.Mobile.Like("%" + in.Mobile + "%"))
 	}
@@ -62,7 +62,8 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 		//IsExist 0:表示没拥有的用户
 		q = q.Where(userRole.RoleID.Neq(in.RoleId))
 	}
-	err := q.Scan(&result)
+	offset := (in.PageNum - 1) * in.PageSize
+	count, err := q.ScanByPage(&result, int(offset), int(in.PageSize))
 	if err != nil {
 		logc.Errorf(l.ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询用户列表信息失败")
@@ -90,7 +91,7 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 	}
 
 	return &sysclient.QueryRoleUserListResp{
-		List:  nil,
-		Total: 0,
+		List:  list,
+		Total: count,
 	}, nil
 }

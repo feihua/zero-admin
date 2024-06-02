@@ -134,8 +134,6 @@ type (
 	UpdateRoleResp            = sysclient.UpdateRoleResp
 	UpdateRoleStatusReq       = sysclient.UpdateRoleStatusReq
 	UpdateRoleStatusResp      = sysclient.UpdateRoleStatusResp
-	UpdateRoleUserListReq     = sysclient.UpdateRoleUserListReq
-	UpdateRoleUserListResp    = sysclient.UpdateRoleUserListResp
 	UpdateUserReq             = sysclient.UpdateUserReq
 	UpdateUserResp            = sysclient.UpdateUserResp
 	UpdateUserRoleListReq     = sysclient.UpdateUserRoleListReq
@@ -163,9 +161,7 @@ type (
 		UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
 		// 查询角色的用户关联
 		QueryRoleUserList(ctx context.Context, in *QueryRoleUserListReq, opts ...grpc.CallOption) (*QueryRoleUserListResp, error)
-		// 更新角色的用户关联
-		UpdateRoleUserList(ctx context.Context, in *UpdateRoleUserListReq, opts ...grpc.CallOption) (*UpdateRoleUserListResp, error)
-		// 取消授权
+		// 取消授权/确认授权
 		CancelAuthorization(ctx context.Context, in *CancelAuthorizationReq, opts ...grpc.CallOption) (*CancelAuthorizationResp, error)
 	}
 
@@ -234,13 +230,7 @@ func (m *defaultRoleService) QueryRoleUserList(ctx context.Context, in *QueryRol
 	return client.QueryRoleUserList(ctx, in, opts...)
 }
 
-// 更新角色的用户关联
-func (m *defaultRoleService) UpdateRoleUserList(ctx context.Context, in *UpdateRoleUserListReq, opts ...grpc.CallOption) (*UpdateRoleUserListResp, error) {
-	client := sysclient.NewRoleServiceClient(m.cli.Conn())
-	return client.UpdateRoleUserList(ctx, in, opts...)
-}
-
-// 取消授权
+// 取消授权/确认授权
 func (m *defaultRoleService) CancelAuthorization(ctx context.Context, in *CancelAuthorizationReq, opts ...grpc.CallOption) (*CancelAuthorizationResp, error) {
 	client := sysclient.NewRoleServiceClient(m.cli.Conn())
 	return client.CancelAuthorization(ctx, in, opts...)

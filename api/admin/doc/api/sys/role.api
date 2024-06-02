@@ -169,17 +169,11 @@ type (
 		Success  bool                 `json:"success"`
 		Total    int64                `json:"total"`
 	}
-	UpdateRoleUserListReq {
-		RoleId  int64   `json:"roleId"`
-		UserIds []int64 `json:"userIds"`
-	}
-	UpdateRoleUserListResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+
 	CancelAuthorizationReq {
 		RoleId  int64   `json:"roleId"`
-		UserId int64 `json:"userId"`
+		UserIds []int64 `json:"userIds"`
+		IsExist    int64  `json:"isExist"` //0：取消授权，1：确认授权
 	}
 	CancelAuthorizationResp {
 		Code    string `json:"code"`
@@ -229,9 +223,6 @@ service admin-api {
 	//根据roleId分页查询用户信息列表
 	@handler QueryRoleUserList
 	get /queryRoleUserList (QueryRoleUserListReq) returns (QueryRoleUserListResp)
-	//更新角色与用户的关联
-	@handler UpdateRoleUserList
-	post /updateRoleUserList (UpdateRoleUserListReq) returns (UpdateRoleUserListResp)
 
 	//取消授权
 	@handler CancelAuthorization

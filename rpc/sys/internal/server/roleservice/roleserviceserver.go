@@ -76,13 +76,7 @@ func (s *RoleServiceServer) QueryRoleUserList(ctx context.Context, in *sysclient
 	return l.QueryRoleUserList(in)
 }
 
-// 更新角色的用户关联
-func (s *RoleServiceServer) UpdateRoleUserList(ctx context.Context, in *sysclient.UpdateRoleUserListReq) (*sysclient.UpdateRoleUserListResp, error) {
-	l := roleservicelogic.NewUpdateRoleUserListLogic(ctx, s.svcCtx)
-	return l.UpdateRoleUserList(in)
-}
-
-// 取消授权
+// 取消授权/确认授权
 func (s *RoleServiceServer) CancelAuthorization(ctx context.Context, in *sysclient.CancelAuthorizationReq) (*sysclient.CancelAuthorizationResp, error) {
 	l := roleservicelogic.NewCancelAuthorizationLogic(ctx, s.svcCtx)
 	return l.CancelAuthorization(in)

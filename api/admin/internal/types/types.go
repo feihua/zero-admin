@@ -568,8 +568,9 @@ type BrandData struct {
 }
 
 type CancelAuthorizationReq struct {
-	RoleId int64 `json:"roleId"`
-	UserId int64 `json:"userId"`
+	RoleId  int64   `json:"roleId"`
+	UserIds []int64 `json:"userIds"`
+	IsExist int64   `json:"isExist"` //0：取消授权，1：确认授权
 }
 
 type CancelAuthorizationResp struct {
@@ -3710,16 +3711,6 @@ type UpdateRoleStatusReq struct {
 }
 
 type UpdateRoleStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type UpdateRoleUserListReq struct {
-	RoleId  int64   `json:"roleId"`
-	UserIds []int64 `json:"userIds"`
-}
-
-type UpdateRoleUserListResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

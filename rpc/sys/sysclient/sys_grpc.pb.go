@@ -1842,7 +1842,6 @@ const (
 	RoleService_QueryRoleMenuList_FullMethodName   = "/sysclient.RoleService/QueryRoleMenuList"
 	RoleService_UpdateMenuRoleList_FullMethodName  = "/sysclient.RoleService/UpdateMenuRoleList"
 	RoleService_QueryRoleUserList_FullMethodName   = "/sysclient.RoleService/QueryRoleUserList"
-	RoleService_UpdateRoleUserList_FullMethodName  = "/sysclient.RoleService/UpdateRoleUserList"
 	RoleService_CancelAuthorization_FullMethodName = "/sysclient.RoleService/CancelAuthorization"
 )
 
@@ -1868,9 +1867,7 @@ type RoleServiceClient interface {
 	UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
 	// 查询角色的用户关联
 	QueryRoleUserList(ctx context.Context, in *QueryRoleUserListReq, opts ...grpc.CallOption) (*QueryRoleUserListResp, error)
-	// 更新角色的用户关联
-	UpdateRoleUserList(ctx context.Context, in *UpdateRoleUserListReq, opts ...grpc.CallOption) (*UpdateRoleUserListResp, error)
-	// 取消授权
+	// 取消授权/确认授权
 	CancelAuthorization(ctx context.Context, in *CancelAuthorizationReq, opts ...grpc.CallOption) (*CancelAuthorizationResp, error)
 }
 
@@ -1963,15 +1960,6 @@ func (c *roleServiceClient) QueryRoleUserList(ctx context.Context, in *QueryRole
 	return out, nil
 }
 
-func (c *roleServiceClient) UpdateRoleUserList(ctx context.Context, in *UpdateRoleUserListReq, opts ...grpc.CallOption) (*UpdateRoleUserListResp, error) {
-	out := new(UpdateRoleUserListResp)
-	err := c.cc.Invoke(ctx, RoleService_UpdateRoleUserList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *roleServiceClient) CancelAuthorization(ctx context.Context, in *CancelAuthorizationReq, opts ...grpc.CallOption) (*CancelAuthorizationResp, error) {
 	out := new(CancelAuthorizationResp)
 	err := c.cc.Invoke(ctx, RoleService_CancelAuthorization_FullMethodName, in, out, opts...)
@@ -2003,9 +1991,7 @@ type RoleServiceServer interface {
 	UpdateMenuRoleList(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
 	// 查询角色的用户关联
 	QueryRoleUserList(context.Context, *QueryRoleUserListReq) (*QueryRoleUserListResp, error)
-	// 更新角色的用户关联
-	UpdateRoleUserList(context.Context, *UpdateRoleUserListReq) (*UpdateRoleUserListResp, error)
-	// 取消授权
+	// 取消授权/确认授权
 	CancelAuthorization(context.Context, *CancelAuthorizationReq) (*CancelAuthorizationResp, error)
 	mustEmbedUnimplementedRoleServiceServer()
 }
@@ -2040,9 +2026,6 @@ func (UnimplementedRoleServiceServer) UpdateMenuRoleList(context.Context, *Updat
 }
 func (UnimplementedRoleServiceServer) QueryRoleUserList(context.Context, *QueryRoleUserListReq) (*QueryRoleUserListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryRoleUserList not implemented")
-}
-func (UnimplementedRoleServiceServer) UpdateRoleUserList(context.Context, *UpdateRoleUserListReq) (*UpdateRoleUserListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateRoleUserList not implemented")
 }
 func (UnimplementedRoleServiceServer) CancelAuthorization(context.Context, *CancelAuthorizationReq) (*CancelAuthorizationResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelAuthorization not implemented")
@@ -2222,24 +2205,6 @@ func _RoleService_QueryRoleUserList_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RoleService_UpdateRoleUserList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateRoleUserListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoleServiceServer).UpdateRoleUserList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoleService_UpdateRoleUserList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).UpdateRoleUserList(ctx, req.(*UpdateRoleUserListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _RoleService_CancelAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CancelAuthorizationReq)
 	if err := dec(in); err != nil {
@@ -2300,10 +2265,6 @@ var RoleService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryRoleUserList",
 			Handler:    _RoleService_QueryRoleUserList_Handler,
-		},
-		{
-			MethodName: "UpdateRoleUserList",
-			Handler:    _RoleService_UpdateRoleUserList_Handler,
 		},
 		{
 			MethodName: "CancelAuthorization",
