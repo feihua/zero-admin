@@ -2875,6 +2875,7 @@ type QueryUserRoleListReq struct {
 	Current  int64  `form:"current,default=1"`
 	PageSize int64  `form:"pageSize,default=20"`
 	RoleName string `json:"roleName,optional"` // 角色名称
+	RoleKey  string `json:"roleKey,optional"`  //权限字符
 }
 
 type QueryUserRoleListResp struct {
