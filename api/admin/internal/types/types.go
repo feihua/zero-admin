@@ -956,6 +956,7 @@ type DeliveryResp struct {
 
 type DeptList struct {
 	Id       int64  `json:"id"`
+	DeptKey  string `json:"key"`
 	Value    string `json:"value"`
 	Title    string `json:"title"`
 	ParentId int64  `json:"parentId"`
