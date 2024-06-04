@@ -9,6 +9,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"google.golang.org/grpc/status"
+	"strings"
 )
 
 // QueryRoleListLogic 查询角色列表
@@ -36,8 +37,8 @@ func (l *QueryRoleListLogic) QueryRoleList(req *types.QueryRoleListReq) (*types.
 		PageNum:    req.Current,
 		PageSize:   req.PageSize,
 		IsAdmin:    req.IsAdmin,
-		RoleKey:    req.RoleKey,
-		RoleName:   req.RoleName,
+		RoleKey:    strings.TrimSpace(req.RoleKey),
+		RoleName:   strings.TrimSpace(req.RoleName),
 		RoleStatus: req.RoleStatus,
 	})
 

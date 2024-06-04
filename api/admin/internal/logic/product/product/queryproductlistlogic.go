@@ -38,13 +38,13 @@ func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq)
 	var resp, err = l.svcCtx.ProductService.ProductList(l.ctx, &pmsclient.ProductListReq{
 		Current:           req.Current,
 		PageSize:          req.PageSize,
-		Name:              req.Name,
+		Name:              strings.TrimSpace(req.Name),
 		VerifyStatus:      req.VerifyStatus,
 		ProductCategoryId: req.ProductCategoryId,
 		PublishStatus:     req.PublishStatus,
 		DeleteStatus:      req.DeleteStatus,
 		BrandId:           req.BrandId,
-		ProductSn:         req.ProductSn,
+		ProductSn:         strings.TrimSpace(req.ProductSn),
 	})
 
 	if err != nil {

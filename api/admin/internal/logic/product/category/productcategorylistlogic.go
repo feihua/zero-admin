@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -35,7 +36,7 @@ func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCate
 	resp, err := l.svcCtx.ProductCategoryService.ProductCategoryList(l.ctx, &pmsclient.ProductCategoryListReq{
 		Current:    req.Current,
 		PageSize:   req.PageSize,
-		Name:       req.Name,
+		Name:       strings.TrimSpace(req.Name),
 		ParentId:   req.ParentId,
 		ShowStatus: req.ShowStatus, // 显示状态：0->不显示；1->显示
 	})

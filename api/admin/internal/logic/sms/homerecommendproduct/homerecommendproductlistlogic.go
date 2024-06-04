@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -36,7 +37,7 @@ func (l *HomeRecommendProductListLogic) HomeRecommendProductList(req types.ListH
 	resp, err := l.svcCtx.HomeRecommendProductService.HomeRecommendProductList(l.ctx, &smsclient.HomeRecommendProductListReq{
 		Current:         req.Current,
 		PageSize:        req.PageSize,
-		ProductName:     req.ProductName,
+		ProductName:     strings.TrimSpace(req.ProductName),
 		RecommendStatus: req.RecommendStatus,
 	})
 

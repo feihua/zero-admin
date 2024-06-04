@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -36,8 +37,8 @@ func (l *PrefrenceAreaListLogic) PrefrenceAreaList(req *types.ListPrefrenceAreaR
 	resp, err := l.svcCtx.PreferredAreaService.PreferredAreaList(l.ctx, &cmsclient.PreferredAreaListReq{
 		Current:    req.Current,
 		PageSize:   req.PageSize,
-		Name:       req.Name,
-		SubTitle:   req.SubTitle,
+		Name:       strings.TrimSpace(req.Name),
+		SubTitle:   strings.TrimSpace(req.SubTitle),
 		ShowStatus: req.ShowStatus,
 	})
 

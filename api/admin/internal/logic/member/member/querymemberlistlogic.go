@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -36,8 +37,8 @@ func (l *QueryMemberListLogic) QueryMemberList(req *types.ListMemberReq) (resp *
 	result, err := l.svcCtx.MemberService.MemberList(l.ctx, &umsclient.MemberListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
-		Username: req.Username,
-		Phone:    req.Phone,
+		Username: strings.TrimSpace(req.Username),
+		Phone:    strings.TrimSpace(req.Phone),
 		Status:   req.Status,
 	})
 

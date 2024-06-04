@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -36,7 +37,7 @@ func (l *ReturnResonListLogic) ReturnResonList(req types.ListReturnResonReq) (*t
 	resp, err := l.svcCtx.OrderReturnReasonService.OrderReturnReasonList(l.ctx, &omsclient.OrderReturnReasonListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
-		Name:     req.Name,
+		Name:     strings.TrimSpace(req.Name),
 		Status:   req.Status,
 	})
 

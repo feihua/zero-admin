@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -37,9 +38,9 @@ func (l *QueryUserListLogic) QueryUserList(req *types.QueryUserListReq) (*types.
 		PageNum:    req.Current,
 		PageSize:   req.PageSize,
 		DeptId:     req.DeptId,
-		Email:      req.Email,
-		Mobile:     req.Mobile,
-		NickName:   req.NickName,
+		Email:      strings.TrimSpace(req.Email),
+		Mobile:     strings.TrimSpace(req.Mobile),
+		NickName:   strings.TrimSpace(req.NickName),
 		UserStatus: req.UserStatus,
 	})
 

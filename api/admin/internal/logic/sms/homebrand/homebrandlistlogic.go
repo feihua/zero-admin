@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -34,7 +35,7 @@ func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Home
 // HomeBrandList 查询首页品牌信息
 func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.ListHomeBrandResp, error) {
 	resp, err := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
-		BrandName:       req.BrandName,
+		BrandName:       strings.TrimSpace(req.BrandName),
 		RecommendStatus: req.RecommendStatus,
 		Current:         req.Current,
 		PageSize:        req.PageSize,

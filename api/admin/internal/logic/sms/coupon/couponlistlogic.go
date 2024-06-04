@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"strings"
 )
 
 // CouponListLogic 优惠券
@@ -35,7 +36,7 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 		Current:   req.Current,
 		PageSize:  req.PageSize,
 		Type:      req.Type,
-		Name:      req.Name,
+		Name:      strings.TrimSpace(req.Name),
 		Platform:  req.Platform,
 		StartTime: req.StartTime,
 		EndTime:   req.EndTime,

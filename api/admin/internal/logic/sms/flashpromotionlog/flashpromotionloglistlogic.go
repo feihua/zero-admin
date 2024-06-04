@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -44,9 +45,9 @@ func (l *FlashPromotionLogListLogic) FlashPromotionLogList(req types.ListFlashPr
 			Id:            item.Id,
 			MemberId:      item.MemberId,
 			ProductId:     item.ProductId,
-			MemberPhone:   item.MemberPhone,
-			ProductName:   item.ProductName,
-			SubscribeTime: item.SubscribeTime,
+			MemberPhone:   strings.TrimSpace(item.MemberPhone),
+			ProductName:   strings.TrimSpace(item.ProductName),
+			SubscribeTime: strings.TrimSpace(item.SubscribeTime),
 			SendTime:      item.SendTime,
 		})
 	}

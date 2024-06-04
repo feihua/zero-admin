@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -36,14 +37,14 @@ func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*t
 	resp, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyList(l.ctx, &omsclient.OrderReturnApplyListReq{
 		Current:        req.Current,
 		PageSize:       req.PageSize,
-		OrderSn:        req.OrderSn,
-		MemberUsername: req.MemberUsername,
+		OrderSn:        strings.TrimSpace(req.OrderSn),
+		MemberUsername: strings.TrimSpace(req.MemberUsername),
 		HandleTime:     req.HandleTime,
 		CreateTime:     req.CreateTime,
 		Status:         req.Status,
-		HandleMan:      req.HandleMan,
-		ReturnName:     req.ReturnName,
-		ReturnPhone:    req.ReturnPhone,
+		HandleMan:      strings.TrimSpace(req.HandleMan),
+		ReturnName:     strings.TrimSpace(req.ReturnName),
+		ReturnPhone:    strings.TrimSpace(req.ReturnPhone),
 	})
 
 	if err != nil {

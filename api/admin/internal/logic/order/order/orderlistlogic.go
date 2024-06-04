@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -35,13 +36,13 @@ func (l *OrderListLogic) OrderList(req types.ListOrderReq) (*types.ListOrderResp
 	resp, err := l.svcCtx.OrderService.OrderList(l.ctx, &omsclient.OrderListReq{
 		Current:         req.Current,
 		PageSize:        req.PageSize,
-		OrderSn:         req.OrderSn,
-		MemberUsername:  req.MemberUsername,
+		OrderSn:         strings.TrimSpace(req.OrderSn),
+		MemberUsername:  strings.TrimSpace(req.MemberUsername),
 		PayType:         req.PayType,
 		SourceType:      req.SourceType,
 		Status:          req.Status,
 		OrderType:       req.OrderType,
-		ReceiverKeyword: req.ReceiverKeyword,
+		ReceiverKeyword: strings.TrimSpace(req.ReceiverKeyword),
 	})
 
 	if err != nil {

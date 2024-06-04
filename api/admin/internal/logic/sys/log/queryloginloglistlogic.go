@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -36,11 +37,11 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(req *types.QueryLoginLogListR
 	result, err := l.svcCtx.LoginLogService.QueryLoginLogList(l.ctx, &sysclient.QueryLoginLogListReq{
 		PageNum:     req.Current,
 		PageSize:    req.PageSize,
-		Browser:     req.Browser,
-		IpAddress:   req.IpAddress,
+		Browser:     strings.TrimSpace(req.Browser),
+		IpAddress:   strings.TrimSpace(req.IpAddress),
 		LoginStatus: req.LoginStatus,
-		Os:          req.Os,
-		UserName:    req.UserName,
+		Os:          strings.TrimSpace(req.Os),
+		UserName:    strings.TrimSpace(req.UserName),
 	})
 
 	if err != nil {

@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -36,7 +37,7 @@ func (l *QueryMemberLevelListLogic) QueryMemberLevelList(req *types.ListMemberLe
 	result, err := l.svcCtx.MemberLevelService.MemberLevelList(l.ctx, &umsclient.MemberLevelListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
-		Name:     req.Name,
+		Name:     strings.TrimSpace(req.Name),
 	})
 
 	if err != nil {

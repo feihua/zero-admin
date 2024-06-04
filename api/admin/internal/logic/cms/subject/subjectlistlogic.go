@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -35,7 +36,7 @@ func (l *SubjectListLogic) SubjectList(req *types.ListSubjectReq) (resp *types.L
 	subjectList, err := l.svcCtx.SubjectService.SubjectList(l.ctx, &cmsclient.SubjectListReq{
 		Current:         req.Current,
 		PageSize:        req.PageSize,
-		Title:           req.Title,
+		Title:           strings.TrimSpace(req.Title),
 		RecommendStatus: req.RecommendStatus,
 		ShowStatus:      req.ShowStatus,
 	})

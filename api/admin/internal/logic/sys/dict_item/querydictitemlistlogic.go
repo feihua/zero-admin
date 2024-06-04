@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -37,7 +38,7 @@ func (l *QueryDictItemListLogic) QueryDictItemList(req *types.QueryDictItemListR
 	result, err := l.svcCtx.DictItemService.QueryDictItemList(l.ctx, &sysclient.QueryDictItemListReq{
 		PageNum:    req.Current,
 		PageSize:   req.PageSize,
-		DictLabel:  req.DictLabel,
+		DictLabel:  strings.TrimSpace(req.DictLabel),
 		DictStatus: req.DictStatus,
 		DictType:   req.DictType,
 	})

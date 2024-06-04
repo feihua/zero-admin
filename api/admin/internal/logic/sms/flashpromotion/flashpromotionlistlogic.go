@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -36,7 +37,7 @@ func (l *FlashPromotionListLogic) FlashPromotionList(req types.ListFlashPromotio
 	resp, err := l.svcCtx.FlashPromotionService.FlashPromotionList(l.ctx, &smsclient.FlashPromotionListReq{
 		Current:   req.Current,
 		PageSize:  req.PageSize,
-		Title:     req.Title,
+		Title:     strings.TrimSpace(req.Title),
 		StartDate: req.StartDate,
 		EndDate:   req.EndDate,
 		Status:    req.Status,

@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -35,8 +36,8 @@ func NewQueryPostListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 // QueryPostList 岗位信息列表
 func (l *QueryPostListLogic) QueryPostList(req *types.QueryPostListReq) (*types.QueryPostListResp, error) {
 	result, err := l.svcCtx.PostService.QueryPostList(l.ctx, &sysclient.QueryPostListReq{
-		PostCode:   req.PostCode,
-		PostName:   req.PostName,
+		PostCode:   strings.TrimSpace(req.PostCode),
+		PostName:   strings.TrimSpace(req.PostName),
 		PostStatus: req.PostStatus,
 		PageNum:    req.Current,
 		PageSize:   req.PageSize,

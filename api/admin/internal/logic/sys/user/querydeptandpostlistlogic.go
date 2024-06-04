@@ -58,6 +58,7 @@ func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(req *types.QueryDeptAnd
 	for _, dept := range result.DeptListData {
 		deptLists = append(deptLists, &types.DeptList{
 			Id:       dept.Id,
+			DeptKey:  strconv.FormatInt(dept.Id, 10),
 			Value:    strconv.FormatInt(dept.Id, 10),
 			Title:    dept.DeptName,
 			ParentId: dept.ParentId,

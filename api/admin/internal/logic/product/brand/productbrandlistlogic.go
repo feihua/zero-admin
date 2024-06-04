@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -36,7 +37,7 @@ func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) 
 	resp, err := l.svcCtx.BrandService.BrandList(l.ctx, &pmsclient.BrandListReq{
 		Current:       req.Current,
 		PageSize:      req.PageSize,
-		Name:          req.Name,
+		Name:          strings.TrimSpace(req.Name),
 		FactoryStatus: req.FactoryStatus,
 		ShowStatus:    req.ShowStatus,
 	})

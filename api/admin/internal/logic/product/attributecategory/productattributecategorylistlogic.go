@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -30,7 +31,7 @@ func (l *ProductAttributecategoryListLogic) ProductAttributecategoryList(req *ty
 	attributeList, er := l.svcCtx.ProductAttributeCategoryService.ProductAttributeCategoryList(l.ctx, &pmsclient.ProductAttributeCategoryListReq{
 		Current:  req.Current,
 		PageSize: req.PageSize,
-		Name:     req.Name,
+		Name:     strings.TrimSpace(req.Name),
 	})
 
 	if er != nil {
