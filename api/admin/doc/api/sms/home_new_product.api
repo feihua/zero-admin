@@ -63,7 +63,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      sms/homenewproduct
-	prefix:     /api/sms/homenewproduct
+	prefix:     /api/sms/homeNewProduct
 )
 service admin-api {
 	//添加首页新品

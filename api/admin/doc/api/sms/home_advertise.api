@@ -85,7 +85,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      sms/homeadvertise
-	prefix:     /api/sms/homeadvertise
+	prefix:     /api/sms/homeAdvertise
 )
 service admin-api {
 	//添加首页轮播广告

@@ -64,7 +64,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      sms/flashpromotionlog
-	prefix:     /api/sms/flashpromotionlog
+	prefix:     /api/sms/flashPromotionLog
 )
 service admin-api {
 	//

@@ -358,7 +358,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/order/companyaddress"),
+		rest.WithPrefix("/api/order/companyAddress"),
 	)
 
 	server.AddRoutes(
@@ -433,7 +433,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/order/returnapply"),
+		rest.WithPrefix("/api/order/returnApply"),
 	)
 
 	server.AddRoutes(
@@ -468,7 +468,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/order/returnreason"),
+		rest.WithPrefix("/api/order/returnReason"),
 	)
 
 	server.AddRoutes(
@@ -568,7 +568,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/attributecategory"),
+		rest.WithPrefix("/api/product/attributeCategory"),
 	)
 
 	server.AddRoutes(
@@ -657,21 +657,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: productproduct.QueryProductListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
 					Path:    "/queryProductDetail",
 					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
@@ -742,6 +727,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
+					Path:    "/queryProductList",
+					Handler: productproduct.QueryProductListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
 					Path:    "/querySkuStockList",
 					Handler: productskustock.SkuStockListHandler(serverCtx),
 				},
@@ -753,7 +753,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/skustock"),
+		rest.WithPrefix("/api/product/skuStock"),
 	)
 
 	server.AddRoutes(
@@ -803,7 +803,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/couponhistory"),
+		rest.WithPrefix("/api/sms/couponHistory"),
 	)
 
 	server.AddRoutes(
@@ -833,7 +833,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/flashpromotion"),
+		rest.WithPrefix("/api/sms/flashPromotion"),
 	)
 
 	server.AddRoutes(
@@ -863,7 +863,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/flashpromotionlog"),
+		rest.WithPrefix("/api/sms/flashPromotionLog"),
 	)
 
 	server.AddRoutes(
@@ -893,7 +893,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/flashpromotionproductrelation"),
+		rest.WithPrefix("/api/sms/flashPromotionProductRelation"),
 	)
 
 	server.AddRoutes(
@@ -923,7 +923,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/flashpromotionsession"),
+		rest.WithPrefix("/api/sms/flashPromotionSession"),
 	)
 
 	server.AddRoutes(
@@ -958,7 +958,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/homeadvertise"),
+		rest.WithPrefix("/api/sms/homeAdvertise"),
 	)
 
 	server.AddRoutes(
@@ -993,7 +993,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/homebrand"),
+		rest.WithPrefix("/api/sms/homeBrand"),
 	)
 
 	server.AddRoutes(
@@ -1028,7 +1028,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/homenewproduct"),
+		rest.WithPrefix("/api/sms/homeNewProduct"),
 	)
 
 	server.AddRoutes(
@@ -1063,7 +1063,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/homerecommendproduct"),
+		rest.WithPrefix("/api/sms/homeRecommendProduct"),
 	)
 
 	server.AddRoutes(
@@ -1098,7 +1098,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sms/homerecommendsubject"),
+		rest.WithPrefix("/api/sms/homeRecommendSubject"),
 	)
 
 	server.AddRoutes(

@@ -64,7 +64,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      sms/flashpromotion
-	prefix:     /api/sms/flashpromotion
+	prefix:     /api/sms/flashPromotion
 )
 service admin-api {
 	//添加秒杀活动

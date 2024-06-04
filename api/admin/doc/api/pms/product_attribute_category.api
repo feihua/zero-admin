@@ -68,7 +68,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      product/attributecategory
-	prefix:     /api/product/attributecategory
+	prefix:     /api/product/attributeCategory
 )
 service admin-api {
 	//添加商品属性分类

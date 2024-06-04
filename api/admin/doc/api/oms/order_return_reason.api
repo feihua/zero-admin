@@ -63,7 +63,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      order/returnreason
-	prefix:     /api/order/returnreason
+	prefix:     /api/order/returnReason
 )
 service admin-api {
 	//添加退货原因

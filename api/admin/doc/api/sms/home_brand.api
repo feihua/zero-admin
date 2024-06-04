@@ -63,7 +63,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      sms/homebrand
-	prefix:     /api/sms/homebrand
+	prefix:     /api/sms/homeBrand
 )
 service admin-api {
 	//添加推荐品牌

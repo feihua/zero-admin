@@ -40,7 +40,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      sms/couponhistory
-	prefix:     /api/sms/couponhistory
+	prefix:     /api/sms/couponHistory
 )
 service admin-api {
 	//根据优惠券id，使用状态，订单编号分页获取领取记录

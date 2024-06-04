@@ -75,7 +75,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      sms/flashpromotionproductrelation
-	prefix:     /api/sms/flashpromotionproductrelation
+	prefix:     /api/sms/flashPromotionProductRelation
 )
 service admin-api {
 	//添加限时购和商品关系

@@ -60,7 +60,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      sms/flashpromotionsession
-	prefix:     /api/sms/flashpromotionsession
+	prefix:     /api/sms/flashPromotionSession
 )
 service admin-api {
 	//添加限时购场次

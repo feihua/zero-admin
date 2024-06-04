@@ -63,7 +63,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      sms/homerecommendsubject
-	prefix:     /api/sms/homerecommendsubject
+	prefix:     /api/sms/homeRecommendSubject
 )
 service admin-api {
 	//添加首页专题推荐

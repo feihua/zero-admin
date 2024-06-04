@@ -80,7 +80,7 @@ type (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      order/returnapply
-	prefix:     /api/order/returnapply
+	prefix:     /api/order/returnApply
 )
 service admin-api {
 	//查询订单退货申请
