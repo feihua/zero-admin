@@ -1691,13 +1691,13 @@ type ListOrderItemData struct {
 type ListOrderReq struct {
 	Current         int64  `form:"current,default=1"`
 	PageSize        int64  `form:"pageSize,default=20"`
-	OrderSn         string `form:"orderSn,optional"`        // 订单编号
-	MemberUsername  string `form:"memberUserName,optional"` // 用户帐号
-	PayType         int32  `form:"payType,default=3"`       // 支付方式：0->未支付；1->支付宝；2->微信
-	SourceType      int32  `form:"sourceType,default=2"`    // 订单来源：0->PC订单；1->app订单
-	Status          int32  `form:"status,default=6"`        // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-	OrderType       int32  `form:"orderType,default=2"`     // 订单类型：0->正常订单；1->秒杀订单
-	ReceiverKeyword string `form:"receiverKeyword"`         // 收货人姓名/电话
+	OrderSn         string `form:"orderSn,optional"`         // 订单编号
+	MemberUsername  string `form:"memberUserName,optional"`  // 用户帐号
+	PayType         int32  `form:"payType,default=3"`        // 支付方式：0->未支付；1->支付宝；2->微信
+	SourceType      int32  `form:"sourceType,default=2"`     // 订单来源：0->PC订单；1->app订单
+	Status          int32  `form:"status,default=6"`         // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	OrderType       int32  `form:"orderType,default=2"`      // 订单类型：0->正常订单；1->秒杀订单
+	ReceiverKeyword string `form:"receiverKeyword,optional"` // 收货人姓名/电话
 }
 
 type ListOrderResp struct {
