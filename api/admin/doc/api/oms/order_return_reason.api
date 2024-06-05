@@ -68,22 +68,22 @@ type (
 service admin-api {
 	//添加退货原因
 	@handler ReturnResonAdd
-	post /addReturnReson (AddReturnResonReq) returns (AddReturnResonResp)
+	post /addReturnReason (AddReturnResonReq) returns (AddReturnResonResp)
 
 	//查询退货原因
 	@handler ReturnResonList
-	get /queryReturnResonList (ListReturnResonReq) returns (ListReturnResonResp)
+	get /queryReturnReasonList (ListReturnResonReq) returns (ListReturnResonResp)
 
 	//更新退货原因
 	@handler ReturnResonUpdate
-	post /updateReturnReson (UpdateReturnResonReq) returns (UpdateReturnResonResp)
+	post /queryReturnReasonList (UpdateReturnResonReq) returns (UpdateReturnResonResp)
 
 	//批量更新退货原因状态
 	@handler UpdateReturnResonStatus
-	post /updateReturnResonStatus (UpdateReturnResonStatusReq) returns (UpdateReturnResonResp)
+	post /updateReturnReasonStatus (UpdateReturnResonStatusReq) returns (UpdateReturnResonResp)
 
 	//删除退货原因
 	@handler ReturnResonDelete
-	get /deleteReturnReson (DeleteReturnResonReq) returns (DeleteReturnResonResp)
+	get /deleteReturnReason (DeleteReturnResonReq) returns (DeleteReturnResonResp)
 }
 

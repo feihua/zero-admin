@@ -2587,8 +2587,8 @@ type QueryOperateLogListReq struct {
 	OperationType   string `form:"operationType,optional"`   //操作类型
 	OperationUrl    string `form:"operationUrl,optional"`    //操作方法
 	Title           string `form:"title,optional"`           //系统模块
-	Browser         string `json:"browser"`                  //浏览器
-	Os              string `json:"os"`                       //操作信息
+	Browser         string `json:"browser,optional"`         //浏览器
+	Os              string `json:"os,optional"`              //操作信息
 }
 
 type QueryOperateLogListResp struct {
