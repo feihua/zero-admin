@@ -737,7 +737,8 @@ type DeleteHomeRecommendProductResp struct {
 }
 
 type DeleteHomeRecommendSubjectReq struct {
-	Ids []int64 `form:"ids"`
+	Ids        []int64 `form:"ids"`
+	SubjectIds []int64 `form:"subjectIds"`
 }
 
 type DeleteHomeRecommendSubjectResp struct {
@@ -3641,6 +3642,7 @@ type UpdateRecommendSubjectSortResp struct {
 
 type UpdateRecommendSubjectStatusReq struct {
 	Ids             []int64 `json:"ids"`
+	SubjectIds      []int64 `json:"subjectIds"`
 	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 }
 

@@ -47,3 +47,9 @@ func (s *SubjectServiceServer) SubjectListByIds(ctx context.Context, in *cmsclie
 	l := subjectservicelogic.NewSubjectListByIdsLogic(ctx, s.svcCtx)
 	return l.SubjectListByIds(in)
 }
+
+// 批量更新状态
+func (s *SubjectServiceServer) UpdateSubjectRecommendStatus(ctx context.Context, in *cmsclient.UpdateSubjectRecommendStatusReq) (*cmsclient.UpdateSubjectRecommendStatusResp, error) {
+	l := subjectservicelogic.NewUpdateSubjectRecommendStatusLogic(ctx, s.svcCtx)
+	return l.UpdateSubjectRecommendStatus(in)
+}

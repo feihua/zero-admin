@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	SubjectService_SubjectAdd_FullMethodName       = "/cmsclient.SubjectService/SubjectAdd"
-	SubjectService_SubjectDelete_FullMethodName    = "/cmsclient.SubjectService/SubjectDelete"
-	SubjectService_SubjectUpdate_FullMethodName    = "/cmsclient.SubjectService/SubjectUpdate"
-	SubjectService_SubjectList_FullMethodName      = "/cmsclient.SubjectService/SubjectList"
-	SubjectService_SubjectListByIds_FullMethodName = "/cmsclient.SubjectService/SubjectListByIds"
+	SubjectService_SubjectAdd_FullMethodName                   = "/cmsclient.SubjectService/SubjectAdd"
+	SubjectService_SubjectDelete_FullMethodName                = "/cmsclient.SubjectService/SubjectDelete"
+	SubjectService_SubjectUpdate_FullMethodName                = "/cmsclient.SubjectService/SubjectUpdate"
+	SubjectService_SubjectList_FullMethodName                  = "/cmsclient.SubjectService/SubjectList"
+	SubjectService_SubjectListByIds_FullMethodName             = "/cmsclient.SubjectService/SubjectListByIds"
+	SubjectService_UpdateSubjectRecommendStatus_FullMethodName = "/cmsclient.SubjectService/UpdateSubjectRecommendStatus"
 )
 
 // SubjectServiceClient is the client API for SubjectService service.
@@ -36,6 +37,8 @@ type SubjectServiceClient interface {
 	SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error)
 	SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error)
 	SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error)
+	// 批量更新状态
+	UpdateSubjectRecommendStatus(ctx context.Context, in *UpdateSubjectRecommendStatusReq, opts ...grpc.CallOption) (*UpdateSubjectRecommendStatusResp, error)
 }
 
 type subjectServiceClient struct {
@@ -91,6 +94,15 @@ func (c *subjectServiceClient) SubjectListByIds(ctx context.Context, in *Subject
 	return out, nil
 }
 
+func (c *subjectServiceClient) UpdateSubjectRecommendStatus(ctx context.Context, in *UpdateSubjectRecommendStatusReq, opts ...grpc.CallOption) (*UpdateSubjectRecommendStatusResp, error) {
+	out := new(UpdateSubjectRecommendStatusResp)
+	err := c.cc.Invoke(ctx, SubjectService_UpdateSubjectRecommendStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SubjectServiceServer is the server API for SubjectService service.
 // All implementations must embed UnimplementedSubjectServiceServer
 // for forward compatibility
@@ -101,6 +113,8 @@ type SubjectServiceServer interface {
 	SubjectUpdate(context.Context, *SubjectUpdateReq) (*SubjectUpdateResp, error)
 	SubjectList(context.Context, *SubjectListReq) (*SubjectListResp, error)
 	SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error)
+	// 批量更新状态
+	UpdateSubjectRecommendStatus(context.Context, *UpdateSubjectRecommendStatusReq) (*UpdateSubjectRecommendStatusResp, error)
 	mustEmbedUnimplementedSubjectServiceServer()
 }
 
@@ -122,6 +136,9 @@ func (UnimplementedSubjectServiceServer) SubjectList(context.Context, *SubjectLi
 }
 func (UnimplementedSubjectServiceServer) SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubjectListByIds not implemented")
+}
+func (UnimplementedSubjectServiceServer) UpdateSubjectRecommendStatus(context.Context, *UpdateSubjectRecommendStatusReq) (*UpdateSubjectRecommendStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubjectRecommendStatus not implemented")
 }
 func (UnimplementedSubjectServiceServer) mustEmbedUnimplementedSubjectServiceServer() {}
 
@@ -226,6 +243,24 @@ func _SubjectService_SubjectListByIds_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubjectService_UpdateSubjectRecommendStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSubjectRecommendStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectServiceServer).UpdateSubjectRecommendStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectService_UpdateSubjectRecommendStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectServiceServer).UpdateSubjectRecommendStatus(ctx, req.(*UpdateSubjectRecommendStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SubjectService_ServiceDesc is the grpc.ServiceDesc for SubjectService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -252,6 +287,10 @@ var SubjectService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SubjectListByIds",
 			Handler:    _SubjectService_SubjectListByIds_Handler,
+		},
+		{
+			MethodName: "UpdateSubjectRecommendStatus",
+			Handler:    _SubjectService_UpdateSubjectRecommendStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

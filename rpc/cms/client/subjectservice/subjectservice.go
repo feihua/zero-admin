@@ -40,6 +40,8 @@ type (
 	SubjectProductRelationListResp       = cmsclient.SubjectProductRelationListResp
 	SubjectUpdateReq                     = cmsclient.SubjectUpdateReq
 	SubjectUpdateResp                    = cmsclient.SubjectUpdateResp
+	UpdateSubjectRecommendStatusReq      = cmsclient.UpdateSubjectRecommendStatusReq
+	UpdateSubjectRecommendStatusResp     = cmsclient.UpdateSubjectRecommendStatusResp
 
 	SubjectService interface {
 		// 专题
@@ -48,6 +50,8 @@ type (
 		SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error)
 		SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error)
 		SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error)
+		// 批量更新状态
+		UpdateSubjectRecommendStatus(ctx context.Context, in *UpdateSubjectRecommendStatusReq, opts ...grpc.CallOption) (*UpdateSubjectRecommendStatusResp, error)
 	}
 
 	defaultSubjectService struct {
@@ -85,4 +89,10 @@ func (m *defaultSubjectService) SubjectList(ctx context.Context, in *SubjectList
 func (m *defaultSubjectService) SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
 	return client.SubjectListByIds(ctx, in, opts...)
+}
+
+// 批量更新状态
+func (m *defaultSubjectService) UpdateSubjectRecommendStatus(ctx context.Context, in *UpdateSubjectRecommendStatusReq, opts ...grpc.CallOption) (*UpdateSubjectRecommendStatusResp, error) {
+	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
+	return client.UpdateSubjectRecommendStatus(ctx, in, opts...)
 }

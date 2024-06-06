@@ -102,6 +102,16 @@ message SubjectListResp {
   int64 total = 1;
   repeated  SubjectListData list = 2;
 }
+
+message UpdateSubjectRecommendStatusReq {
+  repeated int64 ids = 1;
+  int32 Status = 2;
+}
+
+message UpdateSubjectRecommendStatusResp {
+  string pong = 1;
+}
+
 service SubjectService {
   // 专题
   rpc SubjectAdd(SubjectAddReq) returns (SubjectAddResp){}
@@ -109,6 +119,9 @@ service SubjectService {
   rpc SubjectUpdate(SubjectUpdateReq) returns (SubjectUpdateResp){}
   rpc SubjectList(SubjectListReq) returns (SubjectListResp){}
   rpc SubjectListByIds(SubjectListByIdsReq) returns (SubjectListResp){}
+
+  //批量更新状态
+  rpc UpdateSubjectRecommendStatus(UpdateSubjectRecommendStatusReq) returns (UpdateSubjectRecommendStatusResp){}
 
 }
 

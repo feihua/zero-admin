@@ -40,6 +40,8 @@ type (
 	SubjectProductRelationListResp       = cmsclient.SubjectProductRelationListResp
 	SubjectUpdateReq                     = cmsclient.SubjectUpdateReq
 	SubjectUpdateResp                    = cmsclient.SubjectUpdateResp
+	UpdateSubjectRecommendStatusReq      = cmsclient.UpdateSubjectRecommendStatusReq
+	UpdateSubjectRecommendStatusResp     = cmsclient.UpdateSubjectRecommendStatusResp
 
 	PreferredAreaProductRelationService interface {
 		// 优选商品关联
