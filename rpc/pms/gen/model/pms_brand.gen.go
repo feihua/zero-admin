@@ -17,7 +17,8 @@ type PmsBrand struct {
 	FirstLetter         string     `gorm:"column:first_letter;not null;comment:首字母" json:"first_letter"`                          // 首字母
 	Sort                int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
 	FactoryStatus       int32      `gorm:"column:factory_status;not null;comment:是否为品牌制造商：0->不是；1->是" json:"factory_status"`      // 是否为品牌制造商：0->不是；1->是
-	ShowStatus          int32      `gorm:"column:show_status;not null;comment:订单编号" json:"show_status"`                           // 订单编号
+	ShowStatus          int32      `gorm:"column:show_status;not null;comment:品牌显示状态" json:"show_status"`                         // 品牌显示状态
+	RecommendStatus     int32      `gorm:"column:recommend_status;not null;comment:推荐状态" json:"recommend_status"`                 // 推荐状态
 	ProductCount        int32      `gorm:"column:product_count;not null;comment:产品数量" json:"product_count"`                       // 产品数量
 	ProductCommentCount int32      `gorm:"column:product_comment_count;not null;comment:产品评论数量" json:"product_comment_count"`     // 产品评论数量
 	Logo                string     `gorm:"column:logo;not null;comment:品牌logo" json:"logo"`                                       // 品牌logo

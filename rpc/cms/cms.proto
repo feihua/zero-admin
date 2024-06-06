@@ -10,7 +10,7 @@ message SubjectAddReq {
   string Title = 3; //
   string Pic = 4; //专题主图
   int32 ProductCount = 5; //关联产品数量
-  int32 RecommendStatus = 6; //
+  int32 RecommendStatus = 6; //推荐状态
   string CreateTime = 7; //
   int32 CollectCount = 8; //
   int32 ReadCount = 9; //

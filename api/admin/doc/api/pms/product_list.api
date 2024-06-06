@@ -14,7 +14,7 @@ type (
 		ProductCategoryId int64  `form:"productCategoryId,default=0"` //商品分类编号
 		DeleteStatus      int32  `form:"deleteStatus,default=2"` // 删除状态：0->未删除；1->已删除
 		PublishStatus     int32  `form:"publishStatus,default=2"` //上架状态
-		ProductSn         string `form:"productSn"` // 货号
+		ProductSn         string `form:"productSn,optional"` // 货号
 	}
 	QueryProductListData {
 		Id                         int64   `json:"id"`

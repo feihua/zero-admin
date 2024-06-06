@@ -32,10 +32,10 @@ func NewHomeRecommendSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// HomeRecommendSubjectAdd 添加人气推荐专题
+// HomeRecommendSubjectAdd 添加人气推荐
 // 1.根据subjectIds查询推商品专题(cms-rpc)
 // 2.添加首页推荐记录(sms-rpc)
-// 2.修改商品专题的推荐状态(cms-rpc)
+// 3.修改商品专题的推荐状态(cms-rpc)
 func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHomeRecommendSubjectReq) (*types.AddHomeRecommendSubjectResp, error) {
 	// 1.根据subjectIds查询推商品专题(cms-rpc)
 	listResp, _ := l.svcCtx.SubjectService.SubjectListByIds(l.ctx, &cmsclient.SubjectListByIdsReq{
@@ -48,7 +48,7 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHome
 		list = append(list, &smsclient.HomeRecommendSubjectAddData{
 			SubjectId:       item.Id,
 			SubjectName:     item.Title,
-			RecommendStatus: item.RecommendStatus,
+			RecommendStatus: 1,
 			Sort:            int32(item.Id),
 		})
 	}
@@ -63,7 +63,7 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHome
 		return nil, errorx.NewDefaultError("添加人气推荐专题失败")
 	}
 
-	// 2.修改cms_subject记录的状态为推荐(cms-rpc)
+	// 3.修改cms_subject记录的状态为推荐(cms-rpc)
 	_, err = l.svcCtx.SubjectService.UpdateSubjectRecommendStatus(l.ctx, &cmsclient.UpdateSubjectRecommendStatusReq{
 		Ids:    req.SubjectIds,
 		Status: 1,

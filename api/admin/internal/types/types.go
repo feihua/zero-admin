@@ -710,7 +710,8 @@ type DeleteHomeAdvertiseResp struct {
 }
 
 type DeleteHomeBrandReq struct {
-	Ids []int64 `form:"ids"`
+	Ids      []int64 `form:"ids"`
+	BrandIds []int64 `form:"brandIds"` // 商品品牌id
 }
 
 type DeleteHomeBrandResp struct {
@@ -719,7 +720,8 @@ type DeleteHomeBrandResp struct {
 }
 
 type DeleteHomeNewProductReq struct {
-	Ids []int64 `form:"ids"`
+	Ids        []int64 `form:"ids"`
+	ProductIds []int64 `form:"productIds"` // 商品id
 }
 
 type DeleteHomeNewProductResp struct {
@@ -728,7 +730,8 @@ type DeleteHomeNewProductResp struct {
 }
 
 type DeleteHomeRecommendProductReq struct {
-	Ids []int64 `form:"ids"`
+	Ids        []int64 `form:"ids"`
+	ProductIds []int64 `form:"productIds"` // 商品id
 }
 
 type DeleteHomeRecommendProductResp struct {
@@ -2721,7 +2724,7 @@ type QueryProductListReq struct {
 	ProductCategoryId int64  `form:"productCategoryId,default=0"` //商品分类编号
 	DeleteStatus      int32  `form:"deleteStatus,default=2"`      // 删除状态：0->未删除；1->已删除
 	PublishStatus     int32  `form:"publishStatus,default=2"`     //上架状态
-	ProductSn         string `form:"productSn"`                   // 货号
+	ProductSn         string `form:"productSn,optional"`          // 货号
 }
 
 type QueryProductListResp struct {
@@ -3161,6 +3164,7 @@ type UpdateHomeBrandSortResp struct {
 
 type UpdateHomeBrandStatusReq struct {
 	Ids             []int64 `json:"ids"`
+	BrandIds        []int64 `json:"brandIds"`        // 商品品牌id
 	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 }
 
@@ -3335,6 +3339,7 @@ type UpdateNewProductSortResp struct {
 
 type UpdateNewProductStatusReq struct {
 	Ids             []int64 `json:"ids"`
+	ProductIds      []int64 `json:"productIds"`      // 商品id
 	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 }
 
@@ -3622,6 +3627,7 @@ type UpdateRecommendProductSortResp struct {
 
 type UpdateRecommendProductStatusReq struct {
 	Ids             []int64 `json:"ids"`
+	ProductIds      []int64 `json:"productIds"`      // 商品id
 	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 }
 

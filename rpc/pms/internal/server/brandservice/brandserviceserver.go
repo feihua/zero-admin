@@ -56,3 +56,9 @@ func (s *BrandServiceServer) BrandDelete(ctx context.Context, in *pmsclient.Bran
 	l := brandservicelogic.NewBrandDeleteLogic(ctx, s.svcCtx)
 	return l.BrandDelete(in)
 }
+
+// 更新品牌的推荐状态
+func (s *BrandServiceServer) UpdateBrandRecommendStatus(ctx context.Context, in *pmsclient.UpdateBrandRecommendStatusReq) (*pmsclient.UpdateBrandRecommendStatusResp, error) {
+	l := brandservicelogic.NewUpdateBrandRecommendStatusLogic(ctx, s.svcCtx)
+	return l.UpdateBrandRecommendStatus(in)
+}

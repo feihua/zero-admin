@@ -200,6 +200,8 @@ type (
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
 	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
 	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
+	UpdateBrandRecommendStatusReq              = pmsclient.UpdateBrandRecommendStatusReq
+	UpdateBrandRecommendStatusResp             = pmsclient.UpdateBrandRecommendStatusResp
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq

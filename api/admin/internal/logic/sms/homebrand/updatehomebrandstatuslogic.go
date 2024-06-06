@@ -3,6 +3,7 @@ package homebrand
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,6 +33,8 @@ func NewUpdateHomeBrandStatusLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // UpdateHomeBrandStatus 批量修改推荐品牌状态
+// 1.修改sms_home_bran的记录推荐状态(sms-rpc)
+// 2.修改cms_brand记录的推荐状态(cms-rpc)
 func (l *UpdateHomeBrandStatusLogic) UpdateHomeBrandStatus(req *types.UpdateHomeBrandStatusReq) (resp *types.UpdateHomeBrandStatusResp, err error) {
 	_, err = l.svcCtx.HomeBrandService.UpdateHomeBrandStatus(l.ctx, &smsclient.UpdateHomeBrandStatusReq{
 		Ids:             req.Ids,
@@ -43,6 +46,15 @@ func (l *UpdateHomeBrandStatusLogic) UpdateHomeBrandStatus(req *types.UpdateHome
 		return nil, errorx.NewDefaultError("批量修改推荐品牌状态失败")
 	}
 
+	// 2.修改品牌的推荐状态(pms-rpc)
+	_, err = l.svcCtx.BrandService.UpdateBrandRecommendStatus(l.ctx, &pmsclient.UpdateBrandRecommendStatusReq{
+		Ids:             req.BrandIds,
+		RecommendStatus: req.RecommendStatus,
+	})
+	if err != nil {
+		logc.Errorf(l.ctx, "根据Ids: %+v,修改品牌的推荐状态异常:%s", req, err.Error())
+		return nil, errorx.NewDefaultError("修改首页品牌状态失败")
+	}
 	return &types.UpdateHomeBrandStatusResp{
 		Code:    "000000",
 		Message: "批量修改推荐品牌状态成功",

@@ -33,7 +33,11 @@ func NewHomeBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeB
 }
 
 // HomeBrandAdd 添加首页品牌信息
+// 1.根据brandIds查询品牌信息(pms-rpc)
+// 2.添加首页品牌记录(sms-rpc)
+// 3.修改品牌的推荐状态为推荐(pms-rpc)
 func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddHomeBrandResp, error) {
+	// 1.根据brandIds查询品牌信息(pms-rpc)
 	brandListResp, _ := l.svcCtx.BrandService.BrandListByIds(l.ctx, &pmsclient.BrandListByIdsReq{Ids: req.BrandIds})
 
 	var list []*smsclient.HomeBrandAddData
@@ -47,6 +51,7 @@ func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddH
 		})
 	}
 
+	// 2.添加首页品牌记录(sms-rpc)
 	_, err := l.svcCtx.HomeBrandService.HomeBrandAdd(l.ctx, &smsclient.HomeBrandAddReq{
 		BrandAddData: list,
 	})
@@ -54,6 +59,16 @@ func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddH
 	if err != nil {
 		logc.Errorf(l.ctx, "添加首页品牌信息失败,参数：%+v,响应：%s", req, err.Error())
 		return nil, errorx.NewDefaultError("添加首页品牌失败")
+	}
+
+	// 3.修改品牌的推荐状态为推荐(pms-rpc)
+	_, err = l.svcCtx.BrandService.UpdateBrandRecommendStatus(l.ctx, &pmsclient.UpdateBrandRecommendStatusReq{
+		Ids:             req.BrandIds,
+		RecommendStatus: 1,
+	})
+	if err != nil {
+		logc.Errorf(l.ctx, "根据Ids: %+v,修改品牌的推荐状态异常:%s", req, err.Error())
+		return nil, errorx.NewDefaultError("添加首页品牌信息失败")
 	}
 
 	return &types.AddHomeBrandResp{

@@ -33,6 +33,7 @@ func newPmsBrand(db *gorm.DB, opts ...gen.DOOption) pmsBrand {
 	_pmsBrand.Sort = field.NewInt32(tableName, "sort")
 	_pmsBrand.FactoryStatus = field.NewInt32(tableName, "factory_status")
 	_pmsBrand.ShowStatus = field.NewInt32(tableName, "show_status")
+	_pmsBrand.RecommendStatus = field.NewInt32(tableName, "recommend_status")
 	_pmsBrand.ProductCount = field.NewInt32(tableName, "product_count")
 	_pmsBrand.ProductCommentCount = field.NewInt32(tableName, "product_comment_count")
 	_pmsBrand.Logo = field.NewString(tableName, "logo")
@@ -58,7 +59,8 @@ type pmsBrand struct {
 	FirstLetter         field.String // 首字母
 	Sort                field.Int32  // 排序
 	FactoryStatus       field.Int32  // 是否为品牌制造商：0->不是；1->是
-	ShowStatus          field.Int32  // 订单编号
+	ShowStatus          field.Int32  // 品牌显示状态
+	RecommendStatus     field.Int32  // 推荐状态
 	ProductCount        field.Int32  // 产品数量
 	ProductCommentCount field.Int32  // 产品评论数量
 	Logo                field.String // 品牌logo
@@ -90,6 +92,7 @@ func (p *pmsBrand) updateTableName(table string) *pmsBrand {
 	p.Sort = field.NewInt32(table, "sort")
 	p.FactoryStatus = field.NewInt32(table, "factory_status")
 	p.ShowStatus = field.NewInt32(table, "show_status")
+	p.RecommendStatus = field.NewInt32(table, "recommend_status")
 	p.ProductCount = field.NewInt32(table, "product_count")
 	p.ProductCommentCount = field.NewInt32(table, "product_comment_count")
 	p.Logo = field.NewString(table, "logo")
@@ -123,13 +126,14 @@ func (p *pmsBrand) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (p *pmsBrand) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 15)
+	p.fieldMap = make(map[string]field.Expr, 16)
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["name"] = p.Name
 	p.fieldMap["first_letter"] = p.FirstLetter
 	p.fieldMap["sort"] = p.Sort
 	p.fieldMap["factory_status"] = p.FactoryStatus
 	p.fieldMap["show_status"] = p.ShowStatus
+	p.fieldMap["recommend_status"] = p.RecommendStatus
 	p.fieldMap["product_count"] = p.ProductCount
 	p.fieldMap["product_comment_count"] = p.ProductCommentCount
 	p.fieldMap["logo"] = p.Logo

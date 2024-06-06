@@ -384,6 +384,7 @@ service AlbumPicService {
 
 }
 message BrandAddReq {
+  int32 RecommendStatus = 1; //推荐状态
   string  Name = 2;
   string  FirstLetter = 3;
   int32    Sort = 4;
@@ -394,6 +395,7 @@ message BrandAddReq {
   string  Logo = 9;
   string  BigPic = 10;
   string  BrandStory = 11;
+
 }
 
 message BrandAddResp {
@@ -406,6 +408,7 @@ message BrandListReq {
   string  Name = 3;
   int32    FactoryStatus = 4;
   int32    ShowStatus = 5;
+  int32 RecommendStatus = 6; //推荐状态
 }
 
 message BrandListByIdsReq {
@@ -424,7 +427,7 @@ message BrandListData{
   string  Logo = 9;
   string  BigPic = 10;
   string  BrandStory = 11;
-
+  int32 RecommendStatus = 12; //推荐状态
 }
 
 message BrandListResp {
@@ -475,6 +478,15 @@ message BrandDeleteReq {
 message BrandDeleteResp {
   string pong = 1;
 }
+
+message UpdateBrandRecommendStatusReq {
+  repeated int64    Ids = 1;
+  int32    RecommendStatus = 2;
+}
+
+message UpdateBrandRecommendStatusResp {
+  string pong = 1;
+}
 service BrandService {
 
 
@@ -486,6 +498,8 @@ service BrandService {
   rpc UpdateBrandFactoryStatus(UpdateBrandFactoryStatusReq) returns(UpdateBrandFactoryStatusResp);
   rpc BrandDelete(BrandDeleteReq) returns(BrandDeleteResp);
 
+  //更新品牌的推荐状态
+  rpc UpdateBrandRecommendStatus(UpdateBrandRecommendStatusReq) returns(UpdateBrandRecommendStatusResp);
 
 }
 message CommentAddReq {

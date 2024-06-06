@@ -200,6 +200,8 @@ type (
 	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
 	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
 	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
+	UpdateBrandRecommendStatusReq              = pmsclient.UpdateBrandRecommendStatusReq
+	UpdateBrandRecommendStatusResp             = pmsclient.UpdateBrandRecommendStatusResp
 	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
 	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
 	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
@@ -214,6 +216,8 @@ type (
 		UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandShowStatusResp, error)
 		UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandFactoryStatusResp, error)
 		BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error)
+		// 更新品牌的推荐状态
+		UpdateBrandRecommendStatus(ctx context.Context, in *UpdateBrandRecommendStatusReq, opts ...grpc.CallOption) (*UpdateBrandRecommendStatusResp, error)
 	}
 
 	defaultBrandService struct {
@@ -260,4 +264,10 @@ func (m *defaultBrandService) UpdateBrandFactoryStatus(ctx context.Context, in *
 func (m *defaultBrandService) BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error) {
 	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
 	return client.BrandDelete(ctx, in, opts...)
+}
+
+// 更新品牌的推荐状态
+func (m *defaultBrandService) UpdateBrandRecommendStatus(ctx context.Context, in *UpdateBrandRecommendStatusReq, opts ...grpc.CallOption) (*UpdateBrandRecommendStatusResp, error) {
+	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
+	return client.UpdateBrandRecommendStatus(ctx, in, opts...)
 }

@@ -33,7 +33,11 @@ func NewHomeRecommendProductAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 // HomeRecommendProductAdd 添加人气推荐商品
+// 1.根据productIds查询商品(pms-rpc)
+// 2.添加首页人气推荐记录(sms-rpc)
+// 3.修改商品的推荐状态(pms-rpc)
 func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHomeRecommendProductReq) (*types.AddHomeRecommendProductResp, error) {
+	// 1.根据productIds查询商品(pms-rpc)
 	brandListResp, _ := l.svcCtx.ProductService.ProductListByIds(l.ctx, &pmsclient.ProductByIdsReq{Ids: req.ProductIds})
 
 	var list []*smsclient.HomeRecommendProductAddData
@@ -47,6 +51,7 @@ func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHome
 		})
 	}
 
+	// 2.添加首页人气推荐记录(sms-rpc)
 	_, err := l.svcCtx.HomeRecommendProductService.HomeRecommendProductAdd(l.ctx, &smsclient.HomeRecommendProductAddReq{
 		RecommendProductAddData: list,
 	})
@@ -56,6 +61,16 @@ func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHome
 		return nil, errorx.NewDefaultError("添加人气推荐商品失败")
 	}
 
+	// 3.修改商品的推荐状态(pms-rpc)
+	_, err = l.svcCtx.ProductService.UpdateRecommendStatus(l.ctx, &pmsclient.UpdateProductStatusReq{
+		Ids:    req.ProductIds,
+		Status: 1,
+	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据Ids: %+v,修改商品的推荐状态异常:%s", req, err.Error())
+		return nil, errorx.NewDefaultError("添加人气推荐商品失败")
+	}
 	return &types.AddHomeRecommendProductResp{
 		Code:    "000000",
 		Message: "添加人气推荐商品成功",
