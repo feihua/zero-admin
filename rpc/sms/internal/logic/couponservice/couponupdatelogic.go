@@ -72,7 +72,7 @@ func (l *CouponUpdateLogic) CouponUpdate(in *smsclient.CouponAddOrUpdateReq) (*s
 		var list []*model.SmsCouponProductRelation
 		for _, item := range in.CouponProductRelationList {
 			list = append(list, &model.SmsCouponProductRelation{
-				CouponID:    item.CouponId,
+				CouponID:    in.Id,
 				ProductID:   item.ProductId,
 				ProductName: item.ProductName,
 				ProductSn:   item.ProductSn,
@@ -93,7 +93,7 @@ func (l *CouponUpdateLogic) CouponUpdate(in *smsclient.CouponAddOrUpdateReq) (*s
 		var list []*model.SmsCouponProductCategoryRelation
 		for _, item := range in.CouponProductCategoryRelationList {
 			list = append(list, &model.SmsCouponProductCategoryRelation{
-				CouponID:            item.CouponId,
+				CouponID:            in.Id,
 				ProductCategoryID:   item.ProductCategoryId,
 				ProductCategoryName: item.ProductCategoryName,
 				ParentCategoryName:  item.ParentCategoryName,
