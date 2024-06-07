@@ -33,26 +33,27 @@ func NewQueryLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // QueryLoginLogList 登录日志列表
 func (l *QueryLoginLogListLogic) QueryLoginLogList(in *sysclient.QueryLoginLogListReq) (*sysclient.QueryLoginLogListResp, error) {
-	q := query.SysLoginLog.WithContext(l.ctx)
+	loginLog := query.SysLoginLog
+	q := loginLog.WithContext(l.ctx)
 	if len(in.UserName) > 0 {
-		q = q.Where(query.SysLoginLog.UserName.Like("%" + in.UserName + "%"))
+		q = q.Where(loginLog.UserName.Like("%" + in.UserName + "%"))
 	}
 	if len(in.IpAddress) > 0 {
-		q = q.Where(query.SysLoginLog.IPAddress.Like("%" + in.IpAddress + "%"))
+		q = q.Where(loginLog.IPAddress.Like("%" + in.IpAddress + "%"))
 	}
 
 	if len(in.Browser) > 0 {
-		q = q.Where(query.SysLoginLog.Browser.Like("%" + in.Browser + "%"))
+		q = q.Where(loginLog.Browser.Like("%" + in.Browser + "%"))
 	}
 	if len(in.LoginStatus) > 0 {
-		q = q.Where(query.SysLoginLog.LoginStatus.Like("%" + in.LoginStatus + "%"))
+		q = q.Where(loginLog.LoginStatus.Like("%" + in.LoginStatus + "%"))
 	}
 	if len(in.Os) > 0 {
-		q = q.Where(query.SysLoginLog.Os.Like("%" + in.Os + "%"))
+		q = q.Where(loginLog.Os.Like("%" + in.Os + "%"))
 	}
 
 	offset := (in.PageNum - 1) * in.PageSize
-	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
+	result, count, err := q.Order(loginLog.ID.Desc()).FindByPage(int(offset), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询登录记录列表信息失败,参数：%+v,异常:%s", in, err.Error())

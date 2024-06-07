@@ -11,7 +11,7 @@ Content-Type: application/json
 %}
 
 ### 添加字典
-POST {{host}}/api/sys/dict/addDict
+POST {{host}}/api/sys/dictType/addDictType
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -24,12 +24,12 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除字典
-GET {{host}}/api/sys/dict/deleteDict?ids=[5]
+GET {{host}}/api/sys/dictType/deleteDictType?ids=[5]
 Authorization: Bearer {{token}}
 
 
 ### 修改字典
-POST {{host}}/api/sys/dict/updateDict
+POST {{host}}/api/sys/dictType/updateDictType
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -43,5 +43,5 @@ Authorization: Bearer {{token}}
 }
 
 ### 查询字典列表
-GET {{host}}/api/sys/dict/queryDictList
+GET {{host}}/api/sys/dictType/queryDictTypeList
 Authorization: Bearer {{token}}
