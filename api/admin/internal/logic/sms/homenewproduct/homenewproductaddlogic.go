@@ -47,7 +47,7 @@ func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductRe
 			ProductId:       item.Id,
 			ProductName:     item.Name,
 			RecommendStatus: 1,
-			Sort:            item.Sort,
+			Sort:            int32(item.Id),
 		})
 	}
 

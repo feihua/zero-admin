@@ -40,11 +40,10 @@ func (l *CouponAddLogic) CouponAdd(in *smsclient.CouponAddOrUpdateReq) (*smsclie
 	EnableTime, _ := time.Parse("2006-01-02 15:04:05", in.EnableTime)
 
 	//1.插入优惠券表
-	err := query.SmsCoupon.WithContext(l.ctx).Create(&model.SmsCoupon{
+	smsCoupon := &model.SmsCoupon{
 		Type:         in.Type,
 		Name:         in.Name,
 		Platform:     in.Platform,
-		Count:        in.Count,
 		Amount:       in.Amount,
 		PerLimit:     in.PerLimit,
 		MinPoint:     in.MinPoint,
@@ -56,9 +55,10 @@ func (l *CouponAddLogic) CouponAdd(in *smsclient.CouponAddOrUpdateReq) (*smsclie
 		UseCount:     in.UseCount,
 		ReceiveCount: in.ReceiveCount,
 		EnableTime:   EnableTime,
-		Code:         in.Code,
+		Code:         "todo",
 		MemberLevel:  in.MemberLevel,
-	})
+	}
+	err := query.SmsCoupon.WithContext(l.ctx).Create(smsCoupon)
 
 	if err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ func (l *CouponAddLogic) CouponAdd(in *smsclient.CouponAddOrUpdateReq) (*smsclie
 		var list []*model.SmsCouponProductRelation
 		for _, item := range in.CouponProductRelationList {
 			list = append(list, &model.SmsCouponProductRelation{
-				CouponID:    item.CouponId,
+				CouponID:    smsCoupon.ID,
 				ProductID:   item.ProductId,
 				ProductName: item.ProductName,
 				ProductSn:   item.ProductSn,
@@ -87,7 +87,7 @@ func (l *CouponAddLogic) CouponAdd(in *smsclient.CouponAddOrUpdateReq) (*smsclie
 		var list []*model.SmsCouponProductCategoryRelation
 		for _, item := range in.CouponProductCategoryRelationList {
 			list = append(list, &model.SmsCouponProductCategoryRelation{
-				CouponID:            item.CouponId,
+				CouponID:            smsCoupon.ID,
 				ProductCategoryID:   item.ProductCategoryId,
 				ProductCategoryName: item.ProductCategoryName,
 				ParentCategoryName:  item.ParentCategoryName,

@@ -57,7 +57,6 @@ func (l *CouponUpdateLogic) CouponUpdate(req types.AddOrUpdateCouponReq) (*types
 		Type:                              req.Type,
 		Name:                              req.Name,
 		Platform:                          req.Platform,
-		Count:                             req.Count,
 		Amount:                            req.Amount,
 		PerLimit:                          req.PerLimit,
 		MinPoint:                          req.MinPoint,

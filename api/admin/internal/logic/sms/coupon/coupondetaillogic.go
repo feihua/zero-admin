@@ -86,7 +86,6 @@ func buildCategoryRelation(item *couponservice.CouponFindByIdResp) []*types.Prod
 	var relations []*types.ProductCategoryRelation
 	for _, category := range item.CouponProductCategoryRelationList {
 		relations = append(relations, &types.ProductCategoryRelation{
-			Id:                  category.Id,
 			CouponId:            category.CouponId,
 			ProductCategoryId:   category.ProductCategoryId,
 			ProductCategoryName: category.ProductCategoryName,
@@ -101,7 +100,6 @@ func buildProductRelation(item *couponservice.CouponFindByIdResp) []*types.Produ
 	var relationList []*types.ProductRelation
 	for _, product := range item.CouponProductRelationList {
 		relationList = append(relationList, &types.ProductRelation{
-			Id:          product.Id,
 			CouponId:    product.CouponId,
 			ProductId:   product.ProductId,
 			ProductName: product.ProductName,

@@ -45,7 +45,6 @@ func (l *CouponUpdateLogic) CouponUpdate(in *smsclient.CouponAddOrUpdateReq) (*s
 		Type:         in.Type,
 		Name:         in.Name,
 		Platform:     in.Platform,
-		Count:        in.Count,
 		Amount:       in.Amount,
 		PerLimit:     in.PerLimit,
 		MinPoint:     in.MinPoint,

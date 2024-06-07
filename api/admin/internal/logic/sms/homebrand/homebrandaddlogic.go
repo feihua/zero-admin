@@ -47,7 +47,7 @@ func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddH
 			BrandId:         item.Id,
 			BrandName:       item.Name,
 			RecommendStatus: item.ShowStatus,
-			Sort:            item.Sort,
+			Sort:            int32(item.Id),
 		})
 	}
 
