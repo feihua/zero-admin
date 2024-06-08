@@ -70,6 +70,6 @@ func (l *UploadLogic) Upload() (resp *types.UploadResp, err error) {
 	return &types.UploadResp{
 		Code:    "000000",
 		Message: "上传文件成功",
-		Data:    "https://img14.360buyimg.com/n1/s450x450_jfs/t1/158675/37/28388/40807/649eaad4Fc122761e/ee6fa54cf0c458db.jpg",
+		Data:    "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20181113/movie_ad.jpg",
 	}, nil
 }

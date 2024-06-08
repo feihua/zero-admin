@@ -34,7 +34,7 @@ func NewUpdateHomeAdvertiseStatusLogic(ctx context.Context, svcCtx *svc.ServiceC
 // UpdateHomeAdvertiseStatus 修改上下线状态
 func (l *UpdateHomeAdvertiseStatusLogic) UpdateHomeAdvertiseStatus(req *types.UpdateHomeAdvertiseStatusReq) (resp *types.UpdateHomeAdvertiseResp, err error) {
 	_, err = l.svcCtx.HomeAdvertiseService.UpdateHomeAdvertiseStatus(l.ctx, &smsclient.UpdateHomeAdvertiseStatusReq{
-		Id:     req.Id,
+		Ids:    req.Ids,
 		Status: req.Status,
 	})
 

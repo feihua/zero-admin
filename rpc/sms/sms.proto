@@ -641,7 +641,7 @@ message HomeAdvertiseUpdateReq {
 }
 
 message UpdateHomeAdvertiseStatusReq {
-  int64 Id = 1; //
+  repeated int64 Ids = 1; //
   int32 Status = 2; //上下线状态：0->下线；1->上线
 
 }

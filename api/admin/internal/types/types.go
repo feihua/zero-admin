@@ -3145,8 +3145,8 @@ type UpdateHomeAdvertiseResp struct {
 }
 
 type UpdateHomeAdvertiseStatusReq struct {
-	Id     int64 `json:"id"`
-	Status int32 `json:"status"` // 上下线状态：0->下线；1->上线
+	Ids    []int64 `json:"ids"`
+	Status int32   `json:"status"` // 上下线状态：0->下线；1->上线
 }
 
 type UpdateHomeBrandSortReq struct {
