@@ -54,6 +54,15 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
+
+	UpdateFlashPromotionSessionStatusReq {
+		Ids             []int64 `json:"ids"`
+		Status int32   `json:"status"`
+	}
+	UpdateFlashPromotionSessionStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 )
 
 @server (
@@ -74,6 +83,11 @@ service admin-api {
 	//更新限时购场次
 	@handler FlashPromotionSessionUpdate
 	post /updateFlashPromotionSession (UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp)
+
+	//更新秒杀活动状态
+	@handler UpdateFlashPromotionSessionStatus
+	post /updateSessionStatus (UpdateFlashPromotionSessionStatusReq) returns (UpdateFlashPromotionSessionStatusResp)
+
 
 	//删除限时购场次
 	@handler FlashPromotionSessionDelete

@@ -46,8 +46,8 @@ func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(in *smsclient
 		list = append(list, &smsclient.FlashPromotionSessionListData{
 			Id:         item.ID,
 			Name:       item.Name,
-			StartTime:  item.StartTime.Format("15:04:05"),
-			EndTime:    item.EndTime.Format("15:04:05"),
+			StartTime:  item.StartTime,
+			EndTime:    item.EndTime,
 			Status:     item.Status,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
 		})

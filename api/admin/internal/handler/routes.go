@@ -696,9 +696,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductDetail",
-					Handler: productproduct.QueryProductDetailHandler(serverCtx),
+					Method:  http.MethodPost,
+					Path:    "/addProduct",
+					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
 			}...,
 		),
@@ -711,9 +711,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addProduct",
-					Handler: productproduct.ProductAddHandler(serverCtx),
+					Method:  http.MethodGet,
+					Path:    "/queryProductDetail",
+					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
 			}...,
 		),
@@ -830,6 +830,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/updateFlashPromotion",
 					Handler: smsflashpromotion.FlashPromotionUpdateHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateFlashPromotionStatus",
+					Handler: smsflashpromotion.UpdateFlashPromotionStatusHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
@@ -919,6 +924,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodPost,
 					Path:    "/updateFlashPromotionSession",
 					Handler: smsflashpromotionsession.FlashPromotionSessionUpdateHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateSessionStatus",
+					Handler: smsflashpromotionsession.UpdateFlashPromotionSessionStatusHandler(serverCtx),
 				},
 			}...,
 		),

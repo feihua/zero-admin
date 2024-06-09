@@ -33,12 +33,10 @@ func NewFlashPromotionSessionAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // FlashPromotionSessionAdd 添加限时购场次
 func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(in *smsclient.FlashPromotionSessionAddReq) (*smsclient.FlashPromotionSessionAddResp, error) {
-	StartTime, _ := time.Parse("15:04:05", in.StartTime)
-	EndTime, _ := time.Parse("15:04:05", in.EndTime)
 	err := query.SmsFlashPromotionSession.WithContext(l.ctx).Create(&model.SmsFlashPromotionSession{
 		Name:       in.Name,
-		StartTime:  StartTime,
-		EndTime:    EndTime,
+		StartTime:  in.StartTime,
+		EndTime:    in.EndTime,
 		Status:     in.Status,
 		CreateTime: time.Now(),
 	})

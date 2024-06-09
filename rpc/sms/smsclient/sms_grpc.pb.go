@@ -702,11 +702,12 @@ var CouponHistoryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	FlashPromotionService_FlashPromotionAdd_FullMethodName        = "/smsclient.FlashPromotionService/FlashPromotionAdd"
-	FlashPromotionService_FlashPromotionList_FullMethodName       = "/smsclient.FlashPromotionService/FlashPromotionList"
-	FlashPromotionService_FlashPromotionUpdate_FullMethodName     = "/smsclient.FlashPromotionService/FlashPromotionUpdate"
-	FlashPromotionService_FlashPromotionDelete_FullMethodName     = "/smsclient.FlashPromotionService/FlashPromotionDelete"
-	FlashPromotionService_FlashPromotionListByDate_FullMethodName = "/smsclient.FlashPromotionService/FlashPromotionListByDate"
+	FlashPromotionService_FlashPromotionAdd_FullMethodName          = "/smsclient.FlashPromotionService/FlashPromotionAdd"
+	FlashPromotionService_FlashPromotionList_FullMethodName         = "/smsclient.FlashPromotionService/FlashPromotionList"
+	FlashPromotionService_FlashPromotionUpdate_FullMethodName       = "/smsclient.FlashPromotionService/FlashPromotionUpdate"
+	FlashPromotionService_FlashPromotionDelete_FullMethodName       = "/smsclient.FlashPromotionService/FlashPromotionDelete"
+	FlashPromotionService_FlashPromotionListByDate_FullMethodName   = "/smsclient.FlashPromotionService/FlashPromotionListByDate"
+	FlashPromotionService_UpdateFlashPromotionStatus_FullMethodName = "/smsclient.FlashPromotionService/UpdateFlashPromotionStatus"
 )
 
 // FlashPromotionServiceClient is the client API for FlashPromotionService service.
@@ -718,6 +719,8 @@ type FlashPromotionServiceClient interface {
 	FlashPromotionUpdate(ctx context.Context, in *FlashPromotionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionUpdateResp, error)
 	FlashPromotionDelete(ctx context.Context, in *FlashPromotionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionDeleteResp, error)
 	FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error)
+	// 更新上下线状态
+	UpdateFlashPromotionStatus(ctx context.Context, in *UpdateFlashPromotionStatusReq, opts ...grpc.CallOption) (*UpdateFlashPromotionStatusResp, error)
 }
 
 type flashPromotionServiceClient struct {
@@ -773,6 +776,15 @@ func (c *flashPromotionServiceClient) FlashPromotionListByDate(ctx context.Conte
 	return out, nil
 }
 
+func (c *flashPromotionServiceClient) UpdateFlashPromotionStatus(ctx context.Context, in *UpdateFlashPromotionStatusReq, opts ...grpc.CallOption) (*UpdateFlashPromotionStatusResp, error) {
+	out := new(UpdateFlashPromotionStatusResp)
+	err := c.cc.Invoke(ctx, FlashPromotionService_UpdateFlashPromotionStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlashPromotionServiceServer is the server API for FlashPromotionService service.
 // All implementations must embed UnimplementedFlashPromotionServiceServer
 // for forward compatibility
@@ -782,6 +794,8 @@ type FlashPromotionServiceServer interface {
 	FlashPromotionUpdate(context.Context, *FlashPromotionUpdateReq) (*FlashPromotionUpdateResp, error)
 	FlashPromotionDelete(context.Context, *FlashPromotionDeleteReq) (*FlashPromotionDeleteResp, error)
 	FlashPromotionListByDate(context.Context, *FlashPromotionListByDateReq) (*FlashPromotionListByDateResp, error)
+	// 更新上下线状态
+	UpdateFlashPromotionStatus(context.Context, *UpdateFlashPromotionStatusReq) (*UpdateFlashPromotionStatusResp, error)
 	mustEmbedUnimplementedFlashPromotionServiceServer()
 }
 
@@ -803,6 +817,9 @@ func (UnimplementedFlashPromotionServiceServer) FlashPromotionDelete(context.Con
 }
 func (UnimplementedFlashPromotionServiceServer) FlashPromotionListByDate(context.Context, *FlashPromotionListByDateReq) (*FlashPromotionListByDateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionListByDate not implemented")
+}
+func (UnimplementedFlashPromotionServiceServer) UpdateFlashPromotionStatus(context.Context, *UpdateFlashPromotionStatusReq) (*UpdateFlashPromotionStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFlashPromotionStatus not implemented")
 }
 func (UnimplementedFlashPromotionServiceServer) mustEmbedUnimplementedFlashPromotionServiceServer() {}
 
@@ -907,6 +924,24 @@ func _FlashPromotionService_FlashPromotionListByDate_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FlashPromotionService_UpdateFlashPromotionStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFlashPromotionStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionServiceServer).UpdateFlashPromotionStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FlashPromotionService_UpdateFlashPromotionStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionServiceServer).UpdateFlashPromotionStatus(ctx, req.(*UpdateFlashPromotionStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FlashPromotionService_ServiceDesc is the grpc.ServiceDesc for FlashPromotionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -933,6 +968,10 @@ var FlashPromotionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FlashPromotionListByDate",
 			Handler:    _FlashPromotionService_FlashPromotionListByDate_Handler,
+		},
+		{
+			MethodName: "UpdateFlashPromotionStatus",
+			Handler:    _FlashPromotionService_UpdateFlashPromotionStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1383,11 +1422,12 @@ var FlashPromotionProductRelationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	FlashPromotionSessionService_FlashPromotionSessionAdd_FullMethodName    = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionAdd"
-	FlashPromotionSessionService_FlashPromotionSessionList_FullMethodName   = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionList"
-	FlashPromotionSessionService_FlashPromotionSessionUpdate_FullMethodName = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionUpdate"
-	FlashPromotionSessionService_FlashPromotionSessionDelete_FullMethodName = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionDelete"
-	FlashPromotionSessionService_FlashPromotionSessionByTime_FullMethodName = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionByTime"
+	FlashPromotionSessionService_FlashPromotionSessionAdd_FullMethodName          = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionAdd"
+	FlashPromotionSessionService_FlashPromotionSessionList_FullMethodName         = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionList"
+	FlashPromotionSessionService_FlashPromotionSessionUpdate_FullMethodName       = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionUpdate"
+	FlashPromotionSessionService_FlashPromotionSessionDelete_FullMethodName       = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionDelete"
+	FlashPromotionSessionService_FlashPromotionSessionByTime_FullMethodName       = "/smsclient.FlashPromotionSessionService/FlashPromotionSessionByTime"
+	FlashPromotionSessionService_UpdateFlashPromotionSessionStatus_FullMethodName = "/smsclient.FlashPromotionSessionService/UpdateFlashPromotionSessionStatus"
 )
 
 // FlashPromotionSessionServiceClient is the client API for FlashPromotionSessionService service.
@@ -1404,6 +1444,8 @@ type FlashPromotionSessionServiceClient interface {
 	FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error)
 	// 根据时间查询限时购场次
 	FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error)
+	// 更新上下线状态
+	UpdateFlashPromotionSessionStatus(ctx context.Context, in *UpdateFlashPromotionSessionStatusReq, opts ...grpc.CallOption) (*UpdateFlashPromotionSessionStatusResp, error)
 }
 
 type flashPromotionSessionServiceClient struct {
@@ -1459,6 +1501,15 @@ func (c *flashPromotionSessionServiceClient) FlashPromotionSessionByTime(ctx con
 	return out, nil
 }
 
+func (c *flashPromotionSessionServiceClient) UpdateFlashPromotionSessionStatus(ctx context.Context, in *UpdateFlashPromotionSessionStatusReq, opts ...grpc.CallOption) (*UpdateFlashPromotionSessionStatusResp, error) {
+	out := new(UpdateFlashPromotionSessionStatusResp)
+	err := c.cc.Invoke(ctx, FlashPromotionSessionService_UpdateFlashPromotionSessionStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlashPromotionSessionServiceServer is the server API for FlashPromotionSessionService service.
 // All implementations must embed UnimplementedFlashPromotionSessionServiceServer
 // for forward compatibility
@@ -1473,6 +1524,8 @@ type FlashPromotionSessionServiceServer interface {
 	FlashPromotionSessionDelete(context.Context, *FlashPromotionSessionDeleteReq) (*FlashPromotionSessionDeleteResp, error)
 	// 根据时间查询限时购场次
 	FlashPromotionSessionByTime(context.Context, *FlashPromotionSessionByTimeReq) (*FlashPromotionSessionByTimeResp, error)
+	// 更新上下线状态
+	UpdateFlashPromotionSessionStatus(context.Context, *UpdateFlashPromotionSessionStatusReq) (*UpdateFlashPromotionSessionStatusResp, error)
 	mustEmbedUnimplementedFlashPromotionSessionServiceServer()
 }
 
@@ -1494,6 +1547,9 @@ func (UnimplementedFlashPromotionSessionServiceServer) FlashPromotionSessionDele
 }
 func (UnimplementedFlashPromotionSessionServiceServer) FlashPromotionSessionByTime(context.Context, *FlashPromotionSessionByTimeReq) (*FlashPromotionSessionByTimeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FlashPromotionSessionByTime not implemented")
+}
+func (UnimplementedFlashPromotionSessionServiceServer) UpdateFlashPromotionSessionStatus(context.Context, *UpdateFlashPromotionSessionStatusReq) (*UpdateFlashPromotionSessionStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFlashPromotionSessionStatus not implemented")
 }
 func (UnimplementedFlashPromotionSessionServiceServer) mustEmbedUnimplementedFlashPromotionSessionServiceServer() {
 }
@@ -1599,6 +1655,24 @@ func _FlashPromotionSessionService_FlashPromotionSessionByTime_Handler(srv inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FlashPromotionSessionService_UpdateFlashPromotionSessionStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFlashPromotionSessionStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlashPromotionSessionServiceServer).UpdateFlashPromotionSessionStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FlashPromotionSessionService_UpdateFlashPromotionSessionStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlashPromotionSessionServiceServer).UpdateFlashPromotionSessionStatus(ctx, req.(*UpdateFlashPromotionSessionStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FlashPromotionSessionService_ServiceDesc is the grpc.ServiceDesc for FlashPromotionSessionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1625,6 +1699,10 @@ var FlashPromotionSessionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FlashPromotionSessionByTime",
 			Handler:    _FlashPromotionSessionService_FlashPromotionSessionByTime_Handler,
+		},
+		{
+			MethodName: "UpdateFlashPromotionSessionStatus",
+			Handler:    _FlashPromotionSessionService_UpdateFlashPromotionSessionStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

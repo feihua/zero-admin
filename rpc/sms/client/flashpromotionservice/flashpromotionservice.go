@@ -129,6 +129,10 @@ type (
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
 	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
 	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
+	UpdateFlashPromotionSessionStatusReq          = smsclient.UpdateFlashPromotionSessionStatusReq
+	UpdateFlashPromotionSessionStatusResp         = smsclient.UpdateFlashPromotionSessionStatusResp
+	UpdateFlashPromotionStatusReq                 = smsclient.UpdateFlashPromotionStatusReq
+	UpdateFlashPromotionStatusResp                = smsclient.UpdateFlashPromotionStatusResp
 	UpdateHomeAdvertiseStatusReq                  = smsclient.UpdateHomeAdvertiseStatusReq
 	UpdateHomeBrandSortReq                        = smsclient.UpdateHomeBrandSortReq
 	UpdateHomeBrandSortResp                       = smsclient.UpdateHomeBrandSortResp
@@ -153,6 +157,8 @@ type (
 		FlashPromotionUpdate(ctx context.Context, in *FlashPromotionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionUpdateResp, error)
 		FlashPromotionDelete(ctx context.Context, in *FlashPromotionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionDeleteResp, error)
 		FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error)
+		// 更新上下线状态
+		UpdateFlashPromotionStatus(ctx context.Context, in *UpdateFlashPromotionStatusReq, opts ...grpc.CallOption) (*UpdateFlashPromotionStatusResp, error)
 	}
 
 	defaultFlashPromotionService struct {
@@ -189,4 +195,10 @@ func (m *defaultFlashPromotionService) FlashPromotionDelete(ctx context.Context,
 func (m *defaultFlashPromotionService) FlashPromotionListByDate(ctx context.Context, in *FlashPromotionListByDateReq, opts ...grpc.CallOption) (*FlashPromotionListByDateResp, error) {
 	client := smsclient.NewFlashPromotionServiceClient(m.cli.Conn())
 	return client.FlashPromotionListByDate(ctx, in, opts...)
+}
+
+// 更新上下线状态
+func (m *defaultFlashPromotionService) UpdateFlashPromotionStatus(ctx context.Context, in *UpdateFlashPromotionStatusReq, opts ...grpc.CallOption) (*UpdateFlashPromotionStatusResp, error) {
+	client := smsclient.NewFlashPromotionServiceClient(m.cli.Conn())
+	return client.UpdateFlashPromotionStatus(ctx, in, opts...)
 }

@@ -46,3 +46,9 @@ func (s *FlashPromotionServiceServer) FlashPromotionListByDate(ctx context.Conte
 	l := flashpromotionservicelogic.NewFlashPromotionListByDateLogic(ctx, s.svcCtx)
 	return l.FlashPromotionListByDate(in)
 }
+
+// 更新上下线状态
+func (s *FlashPromotionServiceServer) UpdateFlashPromotionStatus(ctx context.Context, in *smsclient.UpdateFlashPromotionStatusReq) (*smsclient.UpdateFlashPromotionStatusResp, error) {
+	l := flashpromotionservicelogic.NewUpdateFlashPromotionStatusLogic(ctx, s.svcCtx)
+	return l.UpdateFlashPromotionStatus(in)
+}

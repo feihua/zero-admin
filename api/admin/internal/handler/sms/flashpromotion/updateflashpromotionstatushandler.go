@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func FlashPromotionAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func UpdateFlashPromotionStatusHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.AddFlashPromotionReq
+		var req types.UpdateFlashPromotionStatusReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := flashpromotion.NewFlashPromotionAddLogic(r.Context(), svcCtx)
-		resp, err := l.FlashPromotionAdd(&req)
+		l := flashpromotion.NewUpdateFlashPromotionStatusLogic(r.Context(), svcCtx)
+		resp, err := l.UpdateFlashPromotionStatus(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

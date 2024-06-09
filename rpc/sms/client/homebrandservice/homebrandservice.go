@@ -129,6 +129,10 @@ type (
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
 	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
 	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
+	UpdateFlashPromotionSessionStatusReq          = smsclient.UpdateFlashPromotionSessionStatusReq
+	UpdateFlashPromotionSessionStatusResp         = smsclient.UpdateFlashPromotionSessionStatusResp
+	UpdateFlashPromotionStatusReq                 = smsclient.UpdateFlashPromotionStatusReq
+	UpdateFlashPromotionStatusResp                = smsclient.UpdateFlashPromotionStatusResp
 	UpdateHomeAdvertiseStatusReq                  = smsclient.UpdateHomeAdvertiseStatusReq
 	UpdateHomeBrandSortReq                        = smsclient.UpdateHomeBrandSortReq
 	UpdateHomeBrandSortResp                       = smsclient.UpdateHomeBrandSortResp

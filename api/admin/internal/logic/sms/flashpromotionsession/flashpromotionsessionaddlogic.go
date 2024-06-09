@@ -1,4 +1,4 @@
-package logic
+package flashpromotionsession
 
 import (
 	"context"
@@ -32,7 +32,7 @@ func NewFlashPromotionSessionAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 // FlashPromotionSessionAdd 添加限时购场次
-func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req types.AddFlashPromotionSessionReq) (*types.AddFlashPromotionSessionResp, error) {
+func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req *types.AddFlashPromotionSessionReq) (*types.AddFlashPromotionSessionResp, error) {
 	_, err := l.svcCtx.FlashPromotionSessionService.FlashPromotionSessionAdd(l.ctx, &smsclient.FlashPromotionSessionAddReq{
 		Name:      req.Name,
 		StartTime: req.StartTime,

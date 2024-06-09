@@ -1,4 +1,4 @@
-package logic
+package flashpromotion
 
 import (
 	"context"
@@ -32,7 +32,7 @@ func NewFlashPromotionUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 // FlashPromotionUpdate 更新秒杀活动
-func (l *FlashPromotionUpdateLogic) FlashPromotionUpdate(req types.UpdateFlashPromotionReq) (*types.UpdateFlashPromotionResp, error) {
+func (l *FlashPromotionUpdateLogic) FlashPromotionUpdate(req *types.UpdateFlashPromotionReq) (*types.UpdateFlashPromotionResp, error) {
 	_, err := l.svcCtx.FlashPromotionService.FlashPromotionUpdate(l.ctx, &smsclient.FlashPromotionUpdateReq{
 		Id:        req.Id,
 		Title:     req.Title,

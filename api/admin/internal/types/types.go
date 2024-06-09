@@ -3126,6 +3126,26 @@ type UpdateFlashPromotionSessionResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateFlashPromotionSessionStatusReq struct {
+	Ids    []int64 `json:"ids"`
+	Status int32   `json:"status"`
+}
+
+type UpdateFlashPromotionSessionStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateFlashPromotionStatusReq struct {
+	Ids    []int64 `json:"ids"`
+	Status int32   `json:"status"`
+}
+
+type UpdateFlashPromotionStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateHomeAdvertiseReq struct {
 	Id        int64  `json:"id"`
 	Name      string `json:"name"`          // 名称

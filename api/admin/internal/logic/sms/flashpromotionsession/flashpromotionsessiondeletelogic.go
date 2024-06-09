@@ -1,4 +1,4 @@
-package logic
+package flashpromotionsession
 
 import (
 	"context"
@@ -32,7 +32,7 @@ func NewFlashPromotionSessionDeleteLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 // FlashPromotionSessionDelete 删除限时购场次
-func (l *FlashPromotionSessionDeleteLogic) FlashPromotionSessionDelete(req types.DeleteFlashPromotionSessionReq) (*types.DeleteFlashPromotionSessionResp, error) {
+func (l *FlashPromotionSessionDeleteLogic) FlashPromotionSessionDelete(req *types.DeleteFlashPromotionSessionReq) (*types.DeleteFlashPromotionSessionResp, error) {
 	_, err := l.svcCtx.FlashPromotionSessionService.FlashPromotionSessionDelete(l.ctx, &smsclient.FlashPromotionSessionDeleteReq{
 		Ids: req.Ids,
 	})

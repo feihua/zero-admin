@@ -29,8 +29,8 @@ func newSmsFlashPromotionSession(db *gorm.DB, opts ...gen.DOOption) smsFlashProm
 	_smsFlashPromotionSession.ALL = field.NewAsterisk(tableName)
 	_smsFlashPromotionSession.ID = field.NewInt64(tableName, "id")
 	_smsFlashPromotionSession.Name = field.NewString(tableName, "name")
-	_smsFlashPromotionSession.StartTime = field.NewTime(tableName, "start_time")
-	_smsFlashPromotionSession.EndTime = field.NewTime(tableName, "end_time")
+	_smsFlashPromotionSession.StartTime = field.NewString(tableName, "start_time")
+	_smsFlashPromotionSession.EndTime = field.NewString(tableName, "end_time")
 	_smsFlashPromotionSession.Status = field.NewInt32(tableName, "status")
 	_smsFlashPromotionSession.CreateTime = field.NewTime(tableName, "create_time")
 
@@ -46,8 +46,8 @@ type smsFlashPromotionSession struct {
 	ALL        field.Asterisk
 	ID         field.Int64  // 编号
 	Name       field.String // 场次名称
-	StartTime  field.Time   // 每日开始时间
-	EndTime    field.Time   // 每日结束时间
+	StartTime  field.String // 每日开始时间
+	EndTime    field.String // 每日结束时间
 	Status     field.Int32  // 启用状态：0->不启用；1->启用
 	CreateTime field.Time   // 创建时间
 
@@ -68,8 +68,8 @@ func (s *smsFlashPromotionSession) updateTableName(table string) *smsFlashPromot
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
 	s.Name = field.NewString(table, "name")
-	s.StartTime = field.NewTime(table, "start_time")
-	s.EndTime = field.NewTime(table, "end_time")
+	s.StartTime = field.NewString(table, "start_time")
+	s.EndTime = field.NewString(table, "end_time")
 	s.Status = field.NewInt32(table, "status")
 	s.CreateTime = field.NewTime(table, "create_time")
 

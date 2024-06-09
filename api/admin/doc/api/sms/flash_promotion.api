@@ -51,6 +51,14 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
+	UpdateFlashPromotionStatusReq {
+		Ids             []int64 `json:"ids"`
+		Status int32   `json:"status"`
+	}
+	UpdateFlashPromotionStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
 	DeleteFlashPromotionReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -78,6 +86,11 @@ service admin-api {
 	//更新秒杀活动
 	@handler FlashPromotionUpdate
 	post /updateFlashPromotion (UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp)
+
+	//更新秒杀活动状态
+	@handler UpdateFlashPromotionStatus
+	post /updateFlashPromotionStatus (UpdateFlashPromotionStatusReq) returns (UpdateFlashPromotionStatusResp)
+
 
 	//删除秒杀活动
 	@handler FlashPromotionDelete

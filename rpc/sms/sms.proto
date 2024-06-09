@@ -351,6 +351,16 @@ message FlashPromotionListResp {
   int64 total = 1;
   repeated  FlashPromotionListData list = 2;
 }
+
+message UpdateFlashPromotionStatusReq {
+  repeated int64 Ids = 1; //编号
+  int32 Status = 2; //上下线状态
+
+}
+
+message UpdateFlashPromotionStatusResp {
+  string pong = 1;
+}
 service FlashPromotionService {
 
   rpc FlashPromotionAdd(FlashPromotionAddReq) returns(FlashPromotionAddResp);
@@ -358,6 +368,9 @@ service FlashPromotionService {
   rpc FlashPromotionUpdate(FlashPromotionUpdateReq) returns(FlashPromotionUpdateResp);
   rpc FlashPromotionDelete(FlashPromotionDeleteReq) returns(FlashPromotionDeleteResp);
   rpc FlashPromotionListByDate(FlashPromotionListByDateReq) returns(FlashPromotionListByDateResp);
+
+  //更新上下线状态
+  rpc UpdateFlashPromotionStatus(UpdateFlashPromotionStatusReq) returns(UpdateFlashPromotionStatusResp);
 
 }
 
@@ -581,6 +594,15 @@ message FlashPromotionSessionListResp {
   repeated  FlashPromotionSessionListData list = 2;
 }
 
+message UpdateFlashPromotionSessionStatusReq {
+  repeated int64 Ids = 1; //编号
+  int32 Status = 2; //上下线状态
+
+}
+
+message UpdateFlashPromotionSessionStatusResp {
+  string pong = 1;
+}
 service FlashPromotionSessionService {
 
   //添加限时购场次
@@ -594,7 +616,8 @@ service FlashPromotionSessionService {
   //根据时间查询限时购场次
   rpc FlashPromotionSessionByTime(FlashPromotionSessionByTimeReq) returns(FlashPromotionSessionByTimeResp);
 
-
+  //更新上下线状态
+  rpc UpdateFlashPromotionSessionStatus(UpdateFlashPromotionSessionStatusReq) returns(UpdateFlashPromotionSessionStatusResp);
 }
 message HomeAdvertiseAddReq {
   int64 Id = 1; //

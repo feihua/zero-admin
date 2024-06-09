@@ -51,3 +51,9 @@ func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionByTime(ctx con
 	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionByTimeLogic(ctx, s.svcCtx)
 	return l.FlashPromotionSessionByTime(in)
 }
+
+// 更新上下线状态
+func (s *FlashPromotionSessionServiceServer) UpdateFlashPromotionSessionStatus(ctx context.Context, in *smsclient.UpdateFlashPromotionSessionStatusReq) (*smsclient.UpdateFlashPromotionSessionStatusResp, error) {
+	l := flashpromotionsessionservicelogic.NewUpdateFlashPromotionSessionStatusLogic(ctx, s.svcCtx)
+	return l.UpdateFlashPromotionSessionStatus(in)
+}
