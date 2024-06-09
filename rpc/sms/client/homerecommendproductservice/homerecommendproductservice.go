@@ -60,6 +60,7 @@ type (
 	FlashPromotionLogListResp                     = smsclient.FlashPromotionLogListResp
 	FlashPromotionLogUpdateReq                    = smsclient.FlashPromotionLogUpdateReq
 	FlashPromotionLogUpdateResp                   = smsclient.FlashPromotionLogUpdateResp
+	FlashPromotionProductRelationAddData          = smsclient.FlashPromotionProductRelationAddData
 	FlashPromotionProductRelationAddReq           = smsclient.FlashPromotionProductRelationAddReq
 	FlashPromotionProductRelationAddResp          = smsclient.FlashPromotionProductRelationAddResp
 	FlashPromotionProductRelationDeleteReq        = smsclient.FlashPromotionProductRelationDeleteReq

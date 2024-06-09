@@ -26,15 +26,20 @@ func NewFlashPromotionProductRelationAddLogic(ctx context.Context, svcCtx *svc.S
 }
 
 func (l *FlashPromotionProductRelationAddLogic) FlashPromotionProductRelationAdd(in *smsclient.FlashPromotionProductRelationAddReq) (*smsclient.FlashPromotionProductRelationAddResp, error) {
-	err := query.SmsFlashPromotionProductRelation.WithContext(l.ctx).Create(&model.SmsFlashPromotionProductRelation{
-		FlashPromotionID:        in.FlashPromotionId,
-		FlashPromotionSessionID: in.FlashPromotionSessionId,
-		ProductID:               in.ProductId,
-		FlashPromotionPrice:     in.FlashPromotionPrice,
-		FlashPromotionCount:     in.FlashPromotionCount,
-		FlashPromotionLimit:     in.FlashPromotionLimit,
-		Sort:                    in.Sort,
-	})
+	var data []*model.SmsFlashPromotionProductRelation
+	for _, item := range in.Data {
+		data = append(data, &model.SmsFlashPromotionProductRelation{
+			FlashPromotionID:        item.FlashPromotionId,
+			FlashPromotionSessionID: item.FlashPromotionSessionId,
+			ProductID:               item.ProductId,
+			FlashPromotionPrice:     item.FlashPromotionPrice,
+			FlashPromotionCount:     item.FlashPromotionCount,
+			FlashPromotionLimit:     item.FlashPromotionLimit,
+			Sort:                    item.Sort,
+		})
+	}
+
+	err := query.SmsFlashPromotionProductRelation.WithContext(l.ctx).Create(data...)
 
 	if err != nil {
 		return nil, err

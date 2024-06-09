@@ -21,6 +21,7 @@ type (
 	}
 	ListFlashPromotionSessionData {
 		Id         int64  `json:"id"` // 编号
+		Key         string  `json:"key"` // 编号
 		Name       string `json:"name"` // 场次名称
 		StartTime  string `json:"startTime"` // 每日开始时间
 		EndTime    string `json:"endTime"` // 每日结束时间

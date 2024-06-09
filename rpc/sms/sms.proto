@@ -442,6 +442,11 @@ service FlashPromotionLogService {
 
 }
 message FlashPromotionProductRelationAddReq {
+  repeated FlashPromotionProductRelationAddData Data = 1;
+
+}
+
+message FlashPromotionProductRelationAddData {
   int64 FlashPromotionId = 1; //限时购id
   int64 FlashPromotionSessionId = 2; //编号
   int64 ProductId = 3; //商品id
@@ -451,13 +456,13 @@ message FlashPromotionProductRelationAddReq {
   int32 Sort = 7; //排序
 
 }
-
 message FlashPromotionProductRelationAddResp {
   string pong = 1;
 }
 
 message FlashPromotionProductRelationDeleteReq {
   repeated int64 ids = 1;
+  int64 FlashPromotionId = 2;
 }
 
 message FlashPromotionProductRelationDeleteResp {

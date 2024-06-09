@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strconv"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -53,6 +54,7 @@ func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(req *types.Li
 			EndTime:    item.EndTime,
 			Status:     item.Status,
 			CreateTime: item.CreateTime,
+			Key:        strconv.FormatInt(item.Id, 10),
 		})
 	}
 

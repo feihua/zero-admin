@@ -76,14 +76,18 @@ type AddFlashPromotionLogResp struct {
 	Message string `json:"message"`
 }
 
-type AddFlashPromotionProductRelationReq struct {
+type AddFlashPromotionProductRelationData struct {
 	FlashPromotionProductRelationID        int64 ` json:"flashPromotionId"`       // 限时购id
 	FlashPromotionProductRelationSessionID int64 `json:"flashPromotionSessionId"` // 编号
-	ProductID                              int64 `json:"productId"`               // 商品id
-	FlashPromotionProductRelationPrice     int64 `json:"flashPromotionPrice"`     // 限时购价格
-	FlashPromotionProductRelationCount     int32 `json:"flashPromotionCount"`     // 限时购数量
-	FlashPromotionProductRelationLimit     int32 `json:"flashPromotionLimit"`     // 每人限购数量
+	ProductID                              int64 `json:"id"`                      // 商品id
+	FlashPromotionProductRelationPrice     int64 `json:"price"`                   // 限时购价格
+	FlashPromotionProductRelationCount     int32 `json:"stock"`                   // 限时购数量
+	FlashPromotionProductRelationLimit     int32 `json:"promotionPerLimit"`       // 每人限购数量
 	Sort                                   int32 ` json:"sort"`
+}
+
+type AddFlashPromotionProductRelationReq struct {
+	Data []AddFlashPromotionProductRelationData ` json:"data"` // 限时购id
 }
 
 type AddFlashPromotionProductRelationResp struct {
@@ -673,7 +677,8 @@ type DeleteFlashPromotionLogResp struct {
 }
 
 type DeleteFlashPromotionProductRelationReq struct {
-	Ids []int64 `form:"ids"`
+	Ids              []int64 `form:"ids"`
+	FlashPromotionId int64   `form:"flashPromotionId"`
 }
 
 type DeleteFlashPromotionProductRelationResp struct {
@@ -1188,6 +1193,7 @@ type ListFlashPromotionResp struct {
 
 type ListFlashPromotionSessionData struct {
 	Id         int64  `json:"id"`         // 编号
+	Key        string `json:"key"`        // 编号
 	Name       string `json:"name"`       // 场次名称
 	StartTime  string `json:"startTime"`  // 每日开始时间
 	EndTime    string `json:"endTime"`    // 每日结束时间

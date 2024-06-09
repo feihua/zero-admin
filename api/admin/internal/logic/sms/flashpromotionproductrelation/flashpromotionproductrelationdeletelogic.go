@@ -34,7 +34,8 @@ func NewFlashPromotionProductRelationDeleteLogic(ctx context.Context, svcCtx *sv
 // FlashPromotionProductRelationDelete 删除限时购和商品关系
 func (l *FlashPromotionProductRelationDeleteLogic) FlashPromotionProductRelationDelete(req *types.DeleteFlashPromotionProductRelationReq) (resp *types.DeleteFlashPromotionProductRelationResp, err error) {
 	_, err = l.svcCtx.FlashPromotionProductRelationService.FlashPromotionProductRelationDelete(l.ctx, &smsclient.FlashPromotionProductRelationDeleteReq{
-		Ids: req.Ids,
+		Ids:              req.Ids,
+		FlashPromotionId: req.FlashPromotionId,
 	})
 
 	if err != nil {

@@ -33,14 +33,22 @@ func NewFlashPromotionProductRelationAddLogic(ctx context.Context, svcCtx *svc.S
 
 // FlashPromotionProductRelationAdd 添加限时购和商品关系
 func (l *FlashPromotionProductRelationAddLogic) FlashPromotionProductRelationAdd(req *types.AddFlashPromotionProductRelationReq) (resp *types.AddFlashPromotionProductRelationResp, err error) {
+
+	var list []*smsclient.FlashPromotionProductRelationAddData
+	for _, item := range req.Data {
+		list = append(list, &smsclient.FlashPromotionProductRelationAddData{
+			FlashPromotionId:        item.FlashPromotionProductRelationID,
+			FlashPromotionSessionId: item.FlashPromotionProductRelationSessionID,
+			ProductId:               item.ProductID,
+			FlashPromotionPrice:     item.FlashPromotionProductRelationPrice,
+			FlashPromotionCount:     item.FlashPromotionProductRelationCount,
+			FlashPromotionLimit:     item.FlashPromotionProductRelationLimit,
+			Sort:                    item.Sort,
+		})
+	}
+
 	_, err = l.svcCtx.FlashPromotionProductRelationService.FlashPromotionProductRelationAdd(l.ctx, &smsclient.FlashPromotionProductRelationAddReq{
-		FlashPromotionId:        req.FlashPromotionProductRelationID,
-		FlashPromotionSessionId: req.FlashPromotionProductRelationSessionID,
-		ProductId:               req.ProductID,
-		FlashPromotionPrice:     req.FlashPromotionProductRelationPrice,
-		FlashPromotionCount:     req.FlashPromotionProductRelationCount,
-		FlashPromotionLimit:     req.FlashPromotionProductRelationLimit,
-		Sort:                    req.Sort,
+		Data: list,
 	})
 
 	if err != nil {
