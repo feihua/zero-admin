@@ -4,6 +4,7 @@ package main;
 
 option go_package = "./proto";
 
+
 // 添加菜单信息表
 message AddMenuReq {
   string background_url = 1; //接口地址
@@ -77,7 +78,7 @@ message UpdateMenuStatusResp {
 
 // 查询菜单信息表详情
 message QueryMenuDetailReq {
-    int64 id = 1;
+  int64 id = 1;
 }
 
 message QueryMenuDetailResp {
@@ -101,7 +102,6 @@ message QueryMenuDetailResp {
   string vue_icon = 18; //vue的图标
   string vue_path = 19; //vue系统的path
   int32 is_visible = 20; //是否可见  0：否  1：是
-
 }
 
 // 分页查询菜单信息表列表
@@ -149,7 +149,7 @@ service MenuService {
   // 更新菜单信息表状态
   rpc UpdateMenuStatus(UpdateMenuStatusReq) returns (UpdateMenuStatusResp ){}
   // 查询菜单信息表详情
-   rpc QueryMenuDetail(QueryMenuDetailReq) returns (QueryMenuDetailResp){}
+  rpc QueryMenuDetail(QueryMenuDetailReq) returns (QueryMenuDetailResp){}
   // 查询菜单信息表列表
   rpc QueryMenuList(QueryMenuListReq) returns (QueryMenuListResp){}
 

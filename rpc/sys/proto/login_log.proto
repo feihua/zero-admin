@@ -14,7 +14,7 @@ message DeleteLoginLogResp {
 }
 // 查询系统登录日志表详情
 message QueryLoginLogDetailReq {
-    int64 id = 1;
+  int64 id = 1;
 }
 
 message QueryLoginLogDetailResp {
@@ -25,6 +25,7 @@ message QueryLoginLogDetailResp {
   string login_time = 5; //登录时间
   string os = 6; //操作信息
   string user_name = 7; //用户名
+  string error_msg = 8; //操作信息
 
 }
 
@@ -48,7 +49,7 @@ message LoginLogListData {
   string login_time = 5; //登录时间
   string os = 6; //操作信息
   string user_name = 7; //用户名
-
+  string error_msg = 8; //操作信息
 }
 
 message QueryLoginLogListResp {
@@ -61,7 +62,7 @@ service LoginLogService {
   // 删除系统登录日志表
   rpc DeleteLoginLog(DeleteLoginLogReq) returns (DeleteLoginLogResp){}
   // 查询系统登录日志表详情
-   rpc QueryLoginLogDetail(QueryLoginLogDetailReq) returns (QueryLoginLogDetailResp){}
+  rpc QueryLoginLogDetail(QueryLoginLogDetailReq) returns (QueryLoginLogDetailResp){}
   // 查询系统登录日志表列表
   rpc QueryLoginLogList(QueryLoginLogListReq) returns (QueryLoginLogListResp){}
 

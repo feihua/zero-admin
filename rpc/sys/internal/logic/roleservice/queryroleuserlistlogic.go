@@ -69,9 +69,9 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 		return nil, errors.New("查询用户列表信息失败")
 	}
 
-	var list []*sysclient.UserListData
+	var list []*sysclient.UserData
 	for _, item := range result {
-		list = append(list, &sysclient.UserListData{
+		list = append(list, &sysclient.UserData{
 			Avatar:     item.Avatar,
 			CreateBy:   item.CreateBy,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),

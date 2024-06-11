@@ -13,7 +13,7 @@ message AddDeptReq {
   string email = 5; //邮箱
   string leader = 6; //负责人
   int64 parent_id = 7; //上级机构ID，一级机构为0
-  string parent_ids = 8; //上级机构IDs，一级机构为0
+  repeated int64 parent_ids = 8; //上级机构IDs，一级机构为0
   string phone = 9; //电话号码
   string remark = 10; //备注信息
 
@@ -41,7 +41,7 @@ message UpdateDeptReq {
   int64 id = 5; //编号
   string leader = 6; //负责人
   int64 parent_id = 7; //上级机构ID，一级机构为0
-  string parent_ids = 8; //上级机构IDs，一级机构为0
+  repeated int64 parent_ids = 8; //上级机构IDs，一级机构为0
   string phone = 9; //电话号码
   string remark = 10; //备注信息
   string update_by = 11; //更新者
@@ -66,7 +66,7 @@ message UpdateDeptStatusResp {
 
 // 查询部门信息表详情
 message QueryDeptDetailReq {
-    int64 id = 1;
+  int64 id = 1;
 }
 
 message QueryDeptDetailResp {
@@ -79,7 +79,7 @@ message QueryDeptDetailResp {
   int64 id = 7; //编号
   string leader = 9; //负责人
   int64 parent_id = 10; //上级机构ID，一级机构为0
-  string parent_ids = 11; //上级机构IDs，一级机构为0
+  repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
   string phone = 12; //电话号码
   string remark = 13; //备注信息
   string update_by = 14; //更新者
@@ -102,7 +102,7 @@ message DeptListData {
   int64 id = 7; //编号
   string leader = 9; //负责人
   int64 parent_id = 10; //上级机构ID，一级机构为0
-  string parent_ids = 11; //上级机构IDs，一级机构为0
+  repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
   string phone = 12; //电话号码
   string remark = 13; //备注信息
   string update_by = 14; //更新者
@@ -126,7 +126,7 @@ service DeptService {
   // 更新部门信息表状态
   rpc UpdateDeptStatus(UpdateDeptStatusReq) returns (UpdateDeptStatusResp ){}
   // 查询部门信息表详情
-   rpc QueryDeptDetail(QueryDeptDetailReq) returns (QueryDeptDetailResp){}
+  rpc QueryDeptDetail(QueryDeptDetailReq) returns (QueryDeptDetailResp){}
   // 查询部门信息表列表
   rpc QueryDeptList(QueryDeptListReq) returns (QueryDeptListResp){}
 

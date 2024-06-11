@@ -58,7 +58,7 @@ message UpdateDictTypeStatusResp {
 
 // 查询字典类型表详情
 message QueryDictTypeDetailReq {
-    int64 id = 1;
+  int64 id = 1;
 }
 
 message QueryDictTypeDetailResp {
@@ -116,7 +116,7 @@ service DictTypeService {
   // 更新字典类型表状态
   rpc UpdateDictTypeStatus(UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp ){}
   // 查询字典类型表详情
-   rpc QueryDictTypeDetail(QueryDictTypeDetailReq) returns (QueryDictTypeDetailResp){}
+  rpc QueryDictTypeDetail(QueryDictTypeDetailReq) returns (QueryDictTypeDetailResp){}
   // 查询字典类型表列表
   rpc QueryDictTypeList(QueryDictTypeListReq) returns (QueryDictTypeListResp){}
 

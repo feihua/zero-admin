@@ -35,10 +35,10 @@ func NewQueryDeptAndPostListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(in *sysclient.QueryDeptAndPostListReq) (*sysclient.QueryDeptAndPostListResp, error) {
 
 	//1.查询所有部门
-	var deptListData []*sysclient.DeptListData
+	var deptListData []*sysclient.DeptData
 	deptList, _ := query.SysDept.WithContext(l.ctx).Find()
 	for _, item := range deptList {
-		deptListData = append(deptListData, &sysclient.DeptListData{
+		deptListData = append(deptListData, &sysclient.DeptData{
 			CreateBy:   item.CreateBy,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
 			DeptName:   item.DeptName,
@@ -57,10 +57,10 @@ func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(in *sysclient.QueryDept
 	}
 
 	//2.查询所有岗位
-	var postListData []*sysclient.PostListData
+	var postListData []*sysclient.PostData
 	postList, _ := query.SysPost.WithContext(l.ctx).Find()
 	for _, item := range postList {
-		postListData = append(postListData, &sysclient.PostListData{
+		postListData = append(postListData, &sysclient.PostData{
 			CreateBy:   item.CreateBy,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
 			Id:         item.ID,

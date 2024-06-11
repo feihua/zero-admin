@@ -62,7 +62,7 @@ message UpdateDictItemStatusResp {
 
 // 查询字典数据表详情
 message QueryDictItemDetailReq {
-    int64 id = 1;
+  int64 id = 1;
 }
 
 message QueryDictItemDetailResp {
@@ -88,7 +88,6 @@ message QueryDictItemListReq {
   string dict_label = 3; //字典标签
   int32 dict_status = 5; //字典状态
   string dict_type = 6; //字典类型
-  int32 is_default = 9; //是否默认  0：否  1：是
 }
 
 message DictItemListData {
@@ -123,7 +122,7 @@ service DictItemService {
   // 更新字典数据表状态
   rpc UpdateDictItemStatus(UpdateDictItemStatusReq) returns (UpdateDictItemStatusResp ){}
   // 查询字典数据表详情
-   rpc QueryDictItemDetail(QueryDictItemDetailReq) returns (QueryDictItemDetailResp){}
+  rpc QueryDictItemDetail(QueryDictItemDetailReq) returns (QueryDictItemDetailResp){}
   // 查询字典数据表列表
   rpc QueryDictItemList(QueryDictItemListReq) returns (QueryDictItemListResp){}
 

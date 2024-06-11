@@ -4,7 +4,6 @@ package sysclient;
 
 option go_package = "./sysclient";
 
-
 // 添加部门信息表
 message AddDeptReq {
   string create_by = 1; //创建者
@@ -133,6 +132,7 @@ service DeptService {
 
 
 }
+
 
 // 添加字典数据表
 message AddDictItemReq {
@@ -445,6 +445,8 @@ service LoginLogService {
 
 }
 
+
+
 // 添加菜单信息表
 message AddMenuReq {
   string background_url = 1; //接口地址
@@ -596,6 +598,7 @@ service MenuService {
 
 }
 
+
 // 添加系统操作日志表
 message AddOperateLogReq {
   string dept_name = 1; //部门名称
@@ -703,6 +706,9 @@ service OperateLogService {
 
 
 }
+
+
+
 
 // 添加岗位管理
 message AddPostReq {
@@ -937,8 +943,31 @@ message QueryRoleMenuListReq {
   int64 RoleId = 1;
 }
 
+message MenuData {
+  string background_url = 1; //接口地址
+  string create_by = 2; //创建者
+  string create_time = 3; //创建时间
+  int64 id = 4; //编号
+  string vue_redirect = 5; //vue的路由重定向
+  string menu_icon = 6; //菜单图标
+  string menu_name = 7; //菜单名称
+  string menu_path = 8; //前端路由
+  string menu_perms = 9; //权限标识
+  int32 menu_sort = 10; //菜单排序
+  int32 menu_status = 11; //菜单状态
+  int32 menu_type = 12; //类型 0：目录,1：菜单,2：按钮,3：外链
+  int64 parent_id = 13; //父菜单ID，一级菜单为0
+  string remark = 14; //备注信息
+  string update_by = 15; //更新者
+  string update_time = 16; //更新时间
+  string vue_component = 17; //vue的页面
+  string vue_icon = 18; //vue的图标
+  string vue_path = 19; //vue系统的path
+  int32 is_visible = 20; //是否可见  0：否  1：是
+
+}
 message QueryRoleMenuListResp {
-  repeated MenuListData list = 1;
+  repeated MenuData list = 1;
   repeated int64 MenuIds = 2;
 }
 
@@ -959,9 +988,26 @@ message QueryRoleUserListReq {
   string mobile = 5; //手机号
   string user_name = 6; //昵称
 }
+message UserData {
+  string avatar = 1; //头像
+  string create_by = 2; //创建者
+  string create_time = 3; //创建时间
+  int64 dept_id = 4; //部门id
+  string email = 5; //邮箱
+  int64 id = 6; //编号
+  int32 user_status = 7; //帐号状态（0正常 1停用）
+  string login_ip = 8; //登录ip
+  string login_time = 9; //登录时间
+  string mobile = 10; //手机号
+  string nick_name = 11; //昵称
+  string remark = 12; //备注信息
+  string update_by = 13; //更新者
+  string update_time = 14; //更新时间
+  string user_name = 15; //用户名
 
+}
 message QueryRoleUserListResp {
-  repeated UserListData list = 1;
+  repeated UserData list = 1;
   int64 total = 2;
 }
 
@@ -1004,6 +1050,8 @@ service RoleService {
   rpc CancelAuthorization(CancelAuthorizationReq) returns(CancelAuthorizationResp);
 
 }
+
+
 
 message LoginReq {
   string account = 1;
@@ -1189,8 +1237,24 @@ message QueryUserRoleListReq {
   int64 userId = 3;
 }
 
+message RoleData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int32 data_scope = 3; //数据权限
+  int64 id = 4; //编号
+  int32 is_admin = 5; //是否超级管理员
+  string update_time = 6; //更新时间
+  string remark = 7; //备注
+  string role_key = 8; //权限字符
+  string role_name = 9; //角色名称
+  int32 role_sort = 10; //角色排序
+  int32 role_status = 11; //角色状态
+  string update_by = 12; //更新者
+
+
+}
 message QueryUserRoleListResp {
-  repeated RoleListData list = 1;
+  repeated RoleData list = 1;
   repeated int64 RoleIds = 2;
   int64 total = 3;
 }
@@ -1200,8 +1264,40 @@ message QueryDeptAndPostListReq {
 }
 
 message QueryDeptAndPostListResp {
-  repeated DeptListData dept_list_data = 1;
-  repeated PostListData post_list_data = 2;
+  repeated DeptData dept_list_data = 1;
+  repeated PostData post_list_data = 2;
+}
+
+message DeptData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string dept_name = 3; //部门名称
+  int32 dept_sort = 4; //部门排序
+  int32 dept_status = 5; //部门状态
+  string email = 6; //邮箱
+  int64 id = 7; //编号
+  string leader = 9; //负责人
+  int64 parent_id = 10; //上级机构ID，一级机构为0
+  repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
+  string phone = 12; //电话号码
+  string remark = 13; //备注信息
+  string update_by = 14; //更新者
+  string update_time = 15; //更新时间
+
+}
+
+message PostData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //编号
+  string post_code = 5; //岗位编码
+  string post_name = 6; //岗位名称
+  int32 post_sort = 7; //岗位排序
+  int32 post_status = 8; //岗位状态
+  string remark = 9; //备注信息
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
+
 }
 
 // 用户信息表
@@ -1233,13 +1329,3 @@ service UserService {
   //查询所有部门和岗位
   rpc QueryDeptAndPostList(QueryDeptAndPostListReq) returns(QueryDeptAndPostListResp);
 }
-
-
-
-
-
-
-
-
-
-

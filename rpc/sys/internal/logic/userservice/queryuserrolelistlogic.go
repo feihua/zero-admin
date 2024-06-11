@@ -42,11 +42,11 @@ func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleLi
 		return nil, errors.New("查询角色信息失败")
 	}
 
-	var roleList []*sysclient.RoleListData
+	var roleList []*sysclient.RoleData
 	var roleIds []int64
 
 	for _, role := range result {
-		roleList = append(roleList, &sysclient.RoleListData{
+		roleList = append(roleList, &sysclient.RoleData{
 			CreateBy:   role.CreateBy,
 			CreateTime: role.CreateTime.Format("2006-01-02 15:04:05"),
 			DataScope:  role.DataScope,

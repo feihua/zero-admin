@@ -49,6 +49,7 @@ type (
 	DeleteRoleResp            = sysclient.DeleteRoleResp
 	DeleteUserReq             = sysclient.DeleteUserReq
 	DeleteUserResp            = sysclient.DeleteUserResp
+	DeptData                  = sysclient.DeptData
 	DeptListData              = sysclient.DeptListData
 	DictItemListData          = sysclient.DictItemListData
 	DictTypeListData          = sysclient.DictTypeListData
@@ -57,9 +58,11 @@ type (
 	LoginLogListData          = sysclient.LoginLogListData
 	LoginReq                  = sysclient.LoginReq
 	LoginResp                 = sysclient.LoginResp
+	MenuData                  = sysclient.MenuData
 	MenuListData              = sysclient.MenuListData
 	MenuListTree              = sysclient.MenuListTree
 	OperateLogListData        = sysclient.OperateLogListData
+	PostData                  = sysclient.PostData
 	PostListData              = sysclient.PostListData
 	QueryDeptAndPostListReq   = sysclient.QueryDeptAndPostListReq
 	QueryDeptAndPostListResp  = sysclient.QueryDeptAndPostListResp
@@ -107,6 +110,7 @@ type (
 	QueryUserRoleListResp     = sysclient.QueryUserRoleListResp
 	ReSetPasswordReq          = sysclient.ReSetPasswordReq
 	ReSetPasswordResp         = sysclient.ReSetPasswordResp
+	RoleData                  = sysclient.RoleData
 	RoleListData              = sysclient.RoleListData
 	UpdateDeptReq             = sysclient.UpdateDeptReq
 	UpdateDeptResp            = sysclient.UpdateDeptResp
@@ -140,6 +144,7 @@ type (
 	UpdateUserRoleListResp    = sysclient.UpdateUserRoleListResp
 	UpdateUserStatusReq       = sysclient.UpdateUserStatusReq
 	UpdateUserStatusResp      = sysclient.UpdateUserStatusResp
+	UserData                  = sysclient.UserData
 	UserListData              = sysclient.UserListData
 
 	OperateLogService interface {
