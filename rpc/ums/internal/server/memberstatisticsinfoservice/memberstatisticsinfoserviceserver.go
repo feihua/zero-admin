@@ -22,22 +22,14 @@ func NewMemberStatisticsInfoServiceServer(svcCtx *svc.ServiceContext) *MemberSta
 	}
 }
 
-func (s *MemberStatisticsInfoServiceServer) MemberStatisticsInfoAdd(ctx context.Context, in *umsclient.MemberStatisticsInfoAddReq) (*umsclient.MemberStatisticsInfoAddResp, error) {
-	l := memberstatisticsinfoservicelogic.NewMemberStatisticsInfoAddLogic(ctx, s.svcCtx)
-	return l.MemberStatisticsInfoAdd(in)
+// 添加会员统计信息
+func (s *MemberStatisticsInfoServiceServer) AddMemberStatisticsInfo(ctx context.Context, in *umsclient.AddMemberStatisticsInfoReq) (*umsclient.AddMemberStatisticsInfoResp, error) {
+	l := memberstatisticsinfoservicelogic.NewAddMemberStatisticsInfoLogic(ctx, s.svcCtx)
+	return l.AddMemberStatisticsInfo(in)
 }
 
-func (s *MemberStatisticsInfoServiceServer) MemberStatisticsInfoList(ctx context.Context, in *umsclient.MemberStatisticsInfoListReq) (*umsclient.MemberStatisticsInfoListResp, error) {
-	l := memberstatisticsinfoservicelogic.NewMemberStatisticsInfoListLogic(ctx, s.svcCtx)
-	return l.MemberStatisticsInfoList(in)
-}
-
-func (s *MemberStatisticsInfoServiceServer) MemberStatisticsInfoUpdate(ctx context.Context, in *umsclient.MemberStatisticsInfoUpdateReq) (*umsclient.MemberStatisticsInfoUpdateResp, error) {
-	l := memberstatisticsinfoservicelogic.NewMemberStatisticsInfoUpdateLogic(ctx, s.svcCtx)
-	return l.MemberStatisticsInfoUpdate(in)
-}
-
-func (s *MemberStatisticsInfoServiceServer) MemberStatisticsInfoDelete(ctx context.Context, in *umsclient.MemberStatisticsInfoDeleteReq) (*umsclient.MemberStatisticsInfoDeleteResp, error) {
-	l := memberstatisticsinfoservicelogic.NewMemberStatisticsInfoDeleteLogic(ctx, s.svcCtx)
-	return l.MemberStatisticsInfoDelete(in)
+// 查询会员统计信息详情
+func (s *MemberStatisticsInfoServiceServer) QueryMemberStatisticsInfoDetail(ctx context.Context, in *umsclient.QueryMemberStatisticsInfoDetailReq) (*umsclient.QueryMemberStatisticsInfoDetailResp, error) {
+	l := memberstatisticsinfoservicelogic.NewQueryMemberStatisticsInfoDetailLogic(ctx, s.svcCtx)
+	return l.QueryMemberStatisticsInfoDetail(in)
 }

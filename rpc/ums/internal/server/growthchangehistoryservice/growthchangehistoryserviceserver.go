@@ -22,14 +22,26 @@ func NewGrowthChangeHistoryServiceServer(svcCtx *svc.ServiceContext) *GrowthChan
 	}
 }
 
-// 添加成长值变化历史记录
-func (s *GrowthChangeHistoryServiceServer) GrowthChangeHistoryAdd(ctx context.Context, in *umsclient.GrowthChangeHistoryAddReq) (*umsclient.GrowthChangeHistoryAddResp, error) {
-	l := growthchangehistoryservicelogic.NewGrowthChangeHistoryAddLogic(ctx, s.svcCtx)
-	return l.GrowthChangeHistoryAdd(in)
+// 添加成长值变化历史记录表
+func (s *GrowthChangeHistoryServiceServer) AddGrowthChangeHistory(ctx context.Context, in *umsclient.AddGrowthChangeHistoryReq) (*umsclient.AddGrowthChangeHistoryResp, error) {
+	l := growthchangehistoryservicelogic.NewAddGrowthChangeHistoryLogic(ctx, s.svcCtx)
+	return l.AddGrowthChangeHistory(in)
 }
 
-// 查询成长值变化历史记录列表
-func (s *GrowthChangeHistoryServiceServer) GrowthChangeHistoryList(ctx context.Context, in *umsclient.GrowthChangeHistoryListReq) (*umsclient.GrowthChangeHistoryListResp, error) {
-	l := growthchangehistoryservicelogic.NewGrowthChangeHistoryListLogic(ctx, s.svcCtx)
-	return l.GrowthChangeHistoryList(in)
+// 删除成长值变化历史记录表
+func (s *GrowthChangeHistoryServiceServer) DeleteGrowthChangeHistory(ctx context.Context, in *umsclient.DeleteGrowthChangeHistoryReq) (*umsclient.DeleteGrowthChangeHistoryResp, error) {
+	l := growthchangehistoryservicelogic.NewDeleteGrowthChangeHistoryLogic(ctx, s.svcCtx)
+	return l.DeleteGrowthChangeHistory(in)
+}
+
+// 查询成长值变化历史记录表详情
+func (s *GrowthChangeHistoryServiceServer) QueryGrowthChangeHistoryDetail(ctx context.Context, in *umsclient.QueryGrowthChangeHistoryDetailReq) (*umsclient.QueryGrowthChangeHistoryDetailResp, error) {
+	l := growthchangehistoryservicelogic.NewQueryGrowthChangeHistoryDetailLogic(ctx, s.svcCtx)
+	return l.QueryGrowthChangeHistoryDetail(in)
+}
+
+// 查询成长值变化历史记录表列表
+func (s *GrowthChangeHistoryServiceServer) QueryGrowthChangeHistoryList(ctx context.Context, in *umsclient.QueryGrowthChangeHistoryListReq) (*umsclient.QueryGrowthChangeHistoryListResp, error) {
+	l := growthchangehistoryservicelogic.NewQueryGrowthChangeHistoryListLogic(ctx, s.svcCtx)
+	return l.QueryGrowthChangeHistoryList(in)
 }

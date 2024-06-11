@@ -22,27 +22,38 @@ func NewMemberReceiveAddressServiceServer(svcCtx *svc.ServiceContext) *MemberRec
 	}
 }
 
-func (s *MemberReceiveAddressServiceServer) MemberReceiveAddressAdd(ctx context.Context, in *umsclient.MemberReceiveAddressAddReq) (*umsclient.MemberReceiveAddressAddResp, error) {
-	l := memberreceiveaddressservicelogic.NewMemberReceiveAddressAddLogic(ctx, s.svcCtx)
-	return l.MemberReceiveAddressAdd(in)
+// 添加会员收货地址表
+func (s *MemberReceiveAddressServiceServer) AddMemberReceiveAddress(ctx context.Context, in *umsclient.AddMemberReceiveAddressReq) (*umsclient.AddMemberReceiveAddressResp, error) {
+	l := memberreceiveaddressservicelogic.NewAddMemberReceiveAddressLogic(ctx, s.svcCtx)
+	return l.AddMemberReceiveAddress(in)
 }
 
-func (s *MemberReceiveAddressServiceServer) MemberReceiveAddressList(ctx context.Context, in *umsclient.MemberReceiveAddressListReq) (*umsclient.MemberReceiveAddressListResp, error) {
-	l := memberreceiveaddressservicelogic.NewMemberReceiveAddressListLogic(ctx, s.svcCtx)
-	return l.MemberReceiveAddressList(in)
+// 删除会员收货地址表
+func (s *MemberReceiveAddressServiceServer) DeleteMemberReceiveAddress(ctx context.Context, in *umsclient.DeleteMemberReceiveAddressReq) (*umsclient.DeleteMemberReceiveAddressResp, error) {
+	l := memberreceiveaddressservicelogic.NewDeleteMemberReceiveAddressLogic(ctx, s.svcCtx)
+	return l.DeleteMemberReceiveAddress(in)
 }
 
-func (s *MemberReceiveAddressServiceServer) MemberReceiveAddressUpdate(ctx context.Context, in *umsclient.MemberReceiveAddressUpdateReq) (*umsclient.MemberReceiveAddressUpdateResp, error) {
-	l := memberreceiveaddressservicelogic.NewMemberReceiveAddressUpdateLogic(ctx, s.svcCtx)
-	return l.MemberReceiveAddressUpdate(in)
+// 更新会员收货地址表
+func (s *MemberReceiveAddressServiceServer) UpdateMemberReceiveAddress(ctx context.Context, in *umsclient.UpdateMemberReceiveAddressReq) (*umsclient.UpdateMemberReceiveAddressResp, error) {
+	l := memberreceiveaddressservicelogic.NewUpdateMemberReceiveAddressLogic(ctx, s.svcCtx)
+	return l.UpdateMemberReceiveAddress(in)
 }
 
-func (s *MemberReceiveAddressServiceServer) MemberReceiveAddressDelete(ctx context.Context, in *umsclient.MemberReceiveAddressDeleteReq) (*umsclient.MemberReceiveAddressDeleteResp, error) {
-	l := memberreceiveaddressservicelogic.NewMemberReceiveAddressDeleteLogic(ctx, s.svcCtx)
-	return l.MemberReceiveAddressDelete(in)
+// 更新会员收货地址表状态
+func (s *MemberReceiveAddressServiceServer) UpdateMemberReceiveAddressStatus(ctx context.Context, in *umsclient.UpdateMemberReceiveAddressStatusReq) (*umsclient.UpdateMemberReceiveAddressStatusResp, error) {
+	l := memberreceiveaddressservicelogic.NewUpdateMemberReceiveAddressStatusLogic(ctx, s.svcCtx)
+	return l.UpdateMemberReceiveAddressStatus(in)
 }
 
-func (s *MemberReceiveAddressServiceServer) MemberReceiveAddressQueryDetail(ctx context.Context, in *umsclient.MemberReceiveAddressQueryDetailReq) (*umsclient.MemberReceiveAddressQueryDetailResp, error) {
-	l := memberreceiveaddressservicelogic.NewMemberReceiveAddressQueryDetailLogic(ctx, s.svcCtx)
-	return l.MemberReceiveAddressQueryDetail(in)
+// 查询会员收货地址表详情
+func (s *MemberReceiveAddressServiceServer) QueryMemberReceiveAddressDetail(ctx context.Context, in *umsclient.QueryMemberReceiveAddressDetailReq) (*umsclient.QueryMemberReceiveAddressDetailResp, error) {
+	l := memberreceiveaddressservicelogic.NewQueryMemberReceiveAddressDetailLogic(ctx, s.svcCtx)
+	return l.QueryMemberReceiveAddressDetail(in)
+}
+
+// 查询会员收货地址表列表
+func (s *MemberReceiveAddressServiceServer) QueryMemberReceiveAddressList(ctx context.Context, in *umsclient.QueryMemberReceiveAddressListReq) (*umsclient.QueryMemberReceiveAddressListResp, error) {
+	l := memberreceiveaddressservicelogic.NewQueryMemberReceiveAddressListLogic(ctx, s.svcCtx)
+	return l.QueryMemberReceiveAddressList(in)
 }

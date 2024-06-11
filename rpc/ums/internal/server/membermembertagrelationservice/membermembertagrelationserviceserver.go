@@ -22,22 +22,20 @@ func NewMemberMemberTagRelationServiceServer(svcCtx *svc.ServiceContext) *Member
 	}
 }
 
-func (s *MemberMemberTagRelationServiceServer) MemberMemberTagRelationAdd(ctx context.Context, in *umsclient.MemberMemberTagRelationAddReq) (*umsclient.MemberMemberTagRelationAddResp, error) {
-	l := membermembertagrelationservicelogic.NewMemberMemberTagRelationAddLogic(ctx, s.svcCtx)
-	return l.MemberMemberTagRelationAdd(in)
+// 添加用户和标签关系表
+func (s *MemberMemberTagRelationServiceServer) AddMemberMemberTagRelation(ctx context.Context, in *umsclient.AddMemberMemberTagRelationReq) (*umsclient.AddMemberMemberTagRelationResp, error) {
+	l := membermembertagrelationservicelogic.NewAddMemberMemberTagRelationLogic(ctx, s.svcCtx)
+	return l.AddMemberMemberTagRelation(in)
 }
 
-func (s *MemberMemberTagRelationServiceServer) MemberMemberTagRelationList(ctx context.Context, in *umsclient.MemberMemberTagRelationListReq) (*umsclient.MemberMemberTagRelationListResp, error) {
-	l := membermembertagrelationservicelogic.NewMemberMemberTagRelationListLogic(ctx, s.svcCtx)
-	return l.MemberMemberTagRelationList(in)
+// 删除用户和标签关系表
+func (s *MemberMemberTagRelationServiceServer) DeleteMemberMemberTagRelation(ctx context.Context, in *umsclient.DeleteMemberMemberTagRelationReq) (*umsclient.DeleteMemberMemberTagRelationResp, error) {
+	l := membermembertagrelationservicelogic.NewDeleteMemberMemberTagRelationLogic(ctx, s.svcCtx)
+	return l.DeleteMemberMemberTagRelation(in)
 }
 
-func (s *MemberMemberTagRelationServiceServer) MemberMemberTagRelationUpdate(ctx context.Context, in *umsclient.MemberMemberTagRelationUpdateReq) (*umsclient.MemberMemberTagRelationUpdateResp, error) {
-	l := membermembertagrelationservicelogic.NewMemberMemberTagRelationUpdateLogic(ctx, s.svcCtx)
-	return l.MemberMemberTagRelationUpdate(in)
-}
-
-func (s *MemberMemberTagRelationServiceServer) MemberMemberTagRelationDelete(ctx context.Context, in *umsclient.MemberMemberTagRelationDeleteReq) (*umsclient.MemberMemberTagRelationDeleteResp, error) {
-	l := membermembertagrelationservicelogic.NewMemberMemberTagRelationDeleteLogic(ctx, s.svcCtx)
-	return l.MemberMemberTagRelationDelete(in)
+// 查询用户和标签关系表列表
+func (s *MemberMemberTagRelationServiceServer) QueryMemberMemberTagRelationList(ctx context.Context, in *umsclient.QueryMemberMemberTagRelationListReq) (*umsclient.QueryMemberMemberTagRelationListResp, error) {
+	l := membermembertagrelationservicelogic.NewQueryMemberMemberTagRelationListLogic(ctx, s.svcCtx)
+	return l.QueryMemberMemberTagRelationList(in)
 }

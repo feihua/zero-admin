@@ -22,41 +22,49 @@ func NewMemberServiceServer(svcCtx *svc.ServiceContext) *MemberServiceServer {
 	}
 }
 
-func (s *MemberServiceServer) MemberAdd(ctx context.Context, in *umsclient.MemberAddReq) (*umsclient.MemberAddResp, error) {
-	l := memberservicelogic.NewMemberAddLogic(ctx, s.svcCtx)
-	return l.MemberAdd(in)
+// 添加会员表
+func (s *MemberServiceServer) AddMember(ctx context.Context, in *umsclient.AddMemberReq) (*umsclient.AddMemberResp, error) {
+	l := memberservicelogic.NewAddMemberLogic(ctx, s.svcCtx)
+	return l.AddMember(in)
 }
 
+// 删除会员表
+func (s *MemberServiceServer) DeleteMember(ctx context.Context, in *umsclient.DeleteMemberReq) (*umsclient.DeleteMemberResp, error) {
+	l := memberservicelogic.NewDeleteMemberLogic(ctx, s.svcCtx)
+	return l.DeleteMember(in)
+}
+
+// 更新会员表
+func (s *MemberServiceServer) UpdateMember(ctx context.Context, in *umsclient.UpdateMemberReq) (*umsclient.UpdateMemberResp, error) {
+	l := memberservicelogic.NewUpdateMemberLogic(ctx, s.svcCtx)
+	return l.UpdateMember(in)
+}
+
+// 更新会员表状态
+func (s *MemberServiceServer) UpdateMemberStatus(ctx context.Context, in *umsclient.UpdateMemberStatusReq) (*umsclient.UpdateMemberStatusResp, error) {
+	l := memberservicelogic.NewUpdateMemberStatusLogic(ctx, s.svcCtx)
+	return l.UpdateMemberStatus(in)
+}
+
+// 查询会员表详情
+func (s *MemberServiceServer) QueryMemberDetail(ctx context.Context, in *umsclient.QueryMemberDetailReq) (*umsclient.QueryMemberDetailResp, error) {
+	l := memberservicelogic.NewQueryMemberDetailLogic(ctx, s.svcCtx)
+	return l.QueryMemberDetail(in)
+}
+
+// 查询会员表列表
+func (s *MemberServiceServer) QueryMemberList(ctx context.Context, in *umsclient.QueryMemberListReq) (*umsclient.QueryMemberListResp, error) {
+	l := memberservicelogic.NewQueryMemberListLogic(ctx, s.svcCtx)
+	return l.QueryMemberList(in)
+}
+
+// 会员登录
 func (s *MemberServiceServer) MemberLogin(ctx context.Context, in *umsclient.MemberLoginReq) (*umsclient.MemberLoginResp, error) {
 	l := memberservicelogic.NewMemberLoginLogic(ctx, s.svcCtx)
 	return l.MemberLogin(in)
 }
 
-func (s *MemberServiceServer) MemberList(ctx context.Context, in *umsclient.MemberListReq) (*umsclient.MemberListResp, error) {
-	l := memberservicelogic.NewMemberListLogic(ctx, s.svcCtx)
-	return l.MemberList(in)
-}
-
-func (s *MemberServiceServer) MemberUpdate(ctx context.Context, in *umsclient.MemberUpdateReq) (*umsclient.MemberUpdateResp, error) {
-	l := memberservicelogic.NewMemberUpdateLogic(ctx, s.svcCtx)
-	return l.MemberUpdate(in)
-}
-
-func (s *MemberServiceServer) MemberDelete(ctx context.Context, in *umsclient.MemberDeleteReq) (*umsclient.MemberDeleteResp, error) {
-	l := memberservicelogic.NewMemberDeleteLogic(ctx, s.svcCtx)
-	return l.MemberDelete(in)
-}
-
-func (s *MemberServiceServer) QueryMemberById(ctx context.Context, in *umsclient.MemberByIdReq) (*umsclient.MemberListData, error) {
-	l := memberservicelogic.NewQueryMemberByIdLogic(ctx, s.svcCtx)
-	return l.QueryMemberById(in)
-}
-
-func (s *MemberServiceServer) MemberUpdatePassword(ctx context.Context, in *umsclient.MemberUpdatePasswordReq) (*umsclient.MemberUpdateResp, error) {
-	l := memberservicelogic.NewMemberUpdatePasswordLogic(ctx, s.svcCtx)
-	return l.MemberUpdatePassword(in)
-}
-
+// 更新会员积分
 func (s *MemberServiceServer) UpdateMemberIntegration(ctx context.Context, in *umsclient.UpdateMemberIntegrationReq) (*umsclient.UpdateMemberIntegrationResp, error) {
 	l := memberservicelogic.NewUpdateMemberIntegrationLogic(ctx, s.svcCtx)
 	return l.UpdateMemberIntegration(in)

@@ -22,20 +22,26 @@ func NewMemberReadHistoryServiceServer(svcCtx *svc.ServiceContext) *MemberReadHi
 	}
 }
 
-// 创建浏览记录
-func (s *MemberReadHistoryServiceServer) MemberReadHistoryAdd(ctx context.Context, in *umsclient.MemberReadHistoryAddReq) (*umsclient.MemberReadHistoryAddResp, error) {
-	l := memberreadhistoryservicelogic.NewMemberReadHistoryAddLogic(ctx, s.svcCtx)
-	return l.MemberReadHistoryAdd(in)
+// 添加用户商品浏览历史记录
+func (s *MemberReadHistoryServiceServer) AddMemberReadHistory(ctx context.Context, in *umsclient.AddMemberReadHistoryReq) (*umsclient.AddMemberReadHistoryResp, error) {
+	l := memberreadhistoryservicelogic.NewAddMemberReadHistoryLogic(ctx, s.svcCtx)
+	return l.AddMemberReadHistory(in)
 }
 
 // 清空浏览记录/删除浏览记录
-func (s *MemberReadHistoryServiceServer) MemberReadHistoryDelete(ctx context.Context, in *umsclient.MemberReadHistoryDeleteReq) (*umsclient.MemberReadHistoryDeleteResp, error) {
-	l := memberreadhistoryservicelogic.NewMemberReadHistoryDeleteLogic(ctx, s.svcCtx)
-	return l.MemberReadHistoryDelete(in)
+func (s *MemberReadHistoryServiceServer) DeleteMemberReadHistory(ctx context.Context, in *umsclient.DeleteMemberReadHistoryReq) (*umsclient.DeleteMemberReadHistoryResp, error) {
+	l := memberreadhistoryservicelogic.NewDeleteMemberReadHistoryLogic(ctx, s.svcCtx)
+	return l.DeleteMemberReadHistory(in)
 }
 
-// 获取浏览记录
-func (s *MemberReadHistoryServiceServer) MemberReadHistoryList(ctx context.Context, in *umsclient.MemberReadHistoryListReq) (*umsclient.MemberReadHistoryListResp, error) {
-	l := memberreadhistoryservicelogic.NewMemberReadHistoryListLogic(ctx, s.svcCtx)
-	return l.MemberReadHistoryList(in)
+// 查询用户商品浏览历史记录详情
+func (s *MemberReadHistoryServiceServer) QueryMemberReadHistoryDetail(ctx context.Context, in *umsclient.QueryMemberReadHistoryDetailReq) (*umsclient.QueryMemberReadHistoryDetailResp, error) {
+	l := memberreadhistoryservicelogic.NewQueryMemberReadHistoryDetailLogic(ctx, s.svcCtx)
+	return l.QueryMemberReadHistoryDetail(in)
+}
+
+// 查询用户商品浏览历史记录列表
+func (s *MemberReadHistoryServiceServer) QueryMemberReadHistoryList(ctx context.Context, in *umsclient.QueryMemberReadHistoryListReq) (*umsclient.QueryMemberReadHistoryListResp, error) {
+	l := memberreadhistoryservicelogic.NewQueryMemberReadHistoryListLogic(ctx, s.svcCtx)
+	return l.QueryMemberReadHistoryList(in)
 }

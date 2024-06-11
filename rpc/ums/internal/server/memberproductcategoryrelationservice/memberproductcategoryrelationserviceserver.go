@@ -22,22 +22,14 @@ func NewMemberProductCategoryRelationServiceServer(svcCtx *svc.ServiceContext) *
 	}
 }
 
-func (s *MemberProductCategoryRelationServiceServer) MemberProductCategoryRelationAdd(ctx context.Context, in *umsclient.MemberProductCategoryRelationAddReq) (*umsclient.MemberProductCategoryRelationAddResp, error) {
-	l := memberproductcategoryrelationservicelogic.NewMemberProductCategoryRelationAddLogic(ctx, s.svcCtx)
-	return l.MemberProductCategoryRelationAdd(in)
+// 添加会员与产品分类关系表（用户喜欢的分类）
+func (s *MemberProductCategoryRelationServiceServer) AddMemberProductCategoryRelation(ctx context.Context, in *umsclient.AddMemberProductCategoryRelationReq) (*umsclient.AddMemberProductCategoryRelationResp, error) {
+	l := memberproductcategoryrelationservicelogic.NewAddMemberProductCategoryRelationLogic(ctx, s.svcCtx)
+	return l.AddMemberProductCategoryRelation(in)
 }
 
-func (s *MemberProductCategoryRelationServiceServer) MemberProductCategoryRelationList(ctx context.Context, in *umsclient.MemberProductCategoryRelationListReq) (*umsclient.MemberProductCategoryRelationListResp, error) {
-	l := memberproductcategoryrelationservicelogic.NewMemberProductCategoryRelationListLogic(ctx, s.svcCtx)
-	return l.MemberProductCategoryRelationList(in)
-}
-
-func (s *MemberProductCategoryRelationServiceServer) MemberProductCategoryRelationUpdate(ctx context.Context, in *umsclient.MemberProductCategoryRelationUpdateReq) (*umsclient.MemberProductCategoryRelationUpdateResp, error) {
-	l := memberproductcategoryrelationservicelogic.NewMemberProductCategoryRelationUpdateLogic(ctx, s.svcCtx)
-	return l.MemberProductCategoryRelationUpdate(in)
-}
-
-func (s *MemberProductCategoryRelationServiceServer) MemberProductCategoryRelationDelete(ctx context.Context, in *umsclient.MemberProductCategoryRelationDeleteReq) (*umsclient.MemberProductCategoryRelationDeleteResp, error) {
-	l := memberproductcategoryrelationservicelogic.NewMemberProductCategoryRelationDeleteLogic(ctx, s.svcCtx)
-	return l.MemberProductCategoryRelationDelete(in)
+// 查询会员与产品分类关系表（用户喜欢的分类）列表
+func (s *MemberProductCategoryRelationServiceServer) QueryMemberProductCategoryRelationList(ctx context.Context, in *umsclient.QueryMemberProductCategoryRelationListReq) (*umsclient.QueryMemberProductCategoryRelationListResp, error) {
+	l := memberproductcategoryrelationservicelogic.NewQueryMemberProductCategoryRelationListLogic(ctx, s.svcCtx)
+	return l.QueryMemberProductCategoryRelationList(in)
 }

@@ -1,0 +1,190 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员表
+message AddMemberReq {
+  string member_name = 1; //用户名
+  string password = 2; //密码
+  string phone = 3; //手机号码
+
+}
+
+message AddMemberResp {
+  string token = 1;
+}
+
+// 删除会员表
+message DeleteMemberReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberResp {
+  string pong = 1;
+}
+
+// 更新会员表
+message UpdateMemberReq {
+  string birthday = 1; //生日
+  string city = 2; //所做城市
+  int32 source_type = 3; //用户来源
+  int32 gender = 4; //性别：0->未知；1->男；2->女
+  int32 growth = 5; //成长值
+  int32 history_integration = 6; //历史积分数量
+  string icon = 7; //头像
+  int64 id = 8; //
+  int32 integration = 9; //积分
+  string job = 10; //职业
+  int32 lottery_count = 11; //剩余抽奖次数
+  int64 member_level_id = 12; //会员等级id
+  string member_name = 13; //用户名
+  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
+  string nickname = 15; //昵称
+  string phone = 16; //手机号码
+  string personalized_signature = 17; //个性签名
+
+}
+
+message UpdateMemberResp {
+  string pong = 1;
+}
+
+// 更新会员表状态
+message UpdateMemberStatusReq {
+  string birthday = 1; //生日
+  string city = 2; //所做城市
+  string create_time = 3; //创建时间
+  int32 gender = 4; //性别：0->未知；1->男；2->女
+  int32 growth = 5; //成长值
+  int32 history_integration = 6; //历史积分数量
+  string icon = 7; //头像
+  int64 id = 8; //
+  int32 integration = 9; //积分
+  string job = 10; //职业
+  int32 lottery_count = 11; //剩余抽奖次数
+  int64 member_level_id = 12; //会员等级id
+  string member_name = 13; //用户名
+  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
+  string nickname = 15; //昵称
+  string password = 16; //密码
+  string personalized_signature = 17; //个性签名
+  string phone = 18; //手机号码
+  int32 source_type = 19; //用户来源
+  string update_time = 20; //更新时间
+
+}
+
+message UpdateMemberStatusResp {
+  string pong = 1;
+}
+
+// 查询会员表详情
+message QueryMemberDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberDetailResp {
+  string birthday = 1; //生日
+  string city = 2; //所做城市
+  string create_time = 3; //创建时间
+  int32 gender = 4; //性别：0->未知；1->男；2->女
+  int32 growth = 5; //成长值
+  int32 history_integration = 6; //历史积分数量
+  string icon = 7; //头像
+  int64 id = 8; //
+  int32 integration = 9; //积分
+  string job = 10; //职业
+  int32 lottery_count = 11; //剩余抽奖次数
+  int64 member_level_id = 12; //会员等级id
+  string member_name = 13; //用户名
+  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
+  string nickname = 15; //昵称
+  string password = 16; //密码
+  string personalized_signature = 17; //个性签名
+  string phone = 18; //手机号码
+  int32 source_type = 19; //用户来源
+  string update_time = 20; //更新时间
+
+}
+
+// 分页查询会员表列表
+message QueryMemberListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string member_name = 3; //用户名
+  int32 member_status = 4; //帐号启用状态:0->禁用；1->启用
+  string phone = 5; //手机号码
+
+}
+
+message MemberListData {
+  string birthday = 1; //生日
+  string city = 2; //所做城市
+  string create_time = 3; //创建时间
+  int32 gender = 4; //性别：0->未知；1->男；2->女
+  int32 growth = 5; //成长值
+  int32 history_integration = 6; //历史积分数量
+  string icon = 7; //头像
+  int64 id = 8; //
+  int32 integration = 9; //积分
+  string job = 10; //职业
+  int32 lottery_count = 11; //剩余抽奖次数
+  int64 member_level_id = 12; //会员等级id
+  string member_name = 13; //用户名
+  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
+  string nickname = 15; //昵称
+  string password = 16; //密码
+  string personalized_signature = 17; //个性签名
+  string phone = 18; //手机号码
+  int32 source_type = 19; //用户来源
+  string update_time = 20; //更新时间
+
+}
+
+message QueryMemberListResp {
+  int64 total = 1;
+  repeated  MemberListData list = 2;
+}
+
+message MemberLoginReq {
+  string      Account = 1;
+  string      Password = 2;
+  string      Ip = 3;
+}
+
+message MemberLoginResp {
+  string Token = 1;
+}
+
+message UpdateMemberIntegrationReq {
+  int64 id = 1;
+  int64 Integration = 2;
+}
+
+message UpdateMemberIntegrationResp {
+  string pong = 1;
+}
+
+// 会员表
+service MemberService {
+  // 添加会员表
+  rpc AddMember(AddMemberReq) returns (AddMemberResp){}
+  // 删除会员表
+  rpc DeleteMember(DeleteMemberReq) returns (DeleteMemberResp){}
+  // 更新会员表
+  rpc UpdateMember(UpdateMemberReq) returns (UpdateMemberResp ){}
+  // 更新会员表状态
+  rpc UpdateMemberStatus(UpdateMemberStatusReq) returns (UpdateMemberStatusResp ){}
+  // 查询会员表详情
+   rpc QueryMemberDetail(QueryMemberDetailReq) returns (QueryMemberDetailResp){}
+  // 查询会员表列表
+  rpc QueryMemberList(QueryMemberListReq) returns (QueryMemberListResp){}
+
+
+  //会员登录
+  rpc MemberLogin(MemberLoginReq) returns(MemberLoginResp);
+  //更新会员积分
+  rpc UpdateMemberIntegration(UpdateMemberIntegrationReq) returns(UpdateMemberIntegrationResp);
+}

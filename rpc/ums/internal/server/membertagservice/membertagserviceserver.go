@@ -22,22 +22,38 @@ func NewMemberTagServiceServer(svcCtx *svc.ServiceContext) *MemberTagServiceServ
 	}
 }
 
-func (s *MemberTagServiceServer) MemberTagAdd(ctx context.Context, in *umsclient.MemberTagAddReq) (*umsclient.MemberTagAddResp, error) {
-	l := membertagservicelogic.NewMemberTagAddLogic(ctx, s.svcCtx)
-	return l.MemberTagAdd(in)
+// 添加用户标签表
+func (s *MemberTagServiceServer) AddMemberTag(ctx context.Context, in *umsclient.AddMemberTagReq) (*umsclient.AddMemberTagResp, error) {
+	l := membertagservicelogic.NewAddMemberTagLogic(ctx, s.svcCtx)
+	return l.AddMemberTag(in)
 }
 
-func (s *MemberTagServiceServer) MemberTagList(ctx context.Context, in *umsclient.MemberTagListReq) (*umsclient.MemberTagListResp, error) {
-	l := membertagservicelogic.NewMemberTagListLogic(ctx, s.svcCtx)
-	return l.MemberTagList(in)
+// 删除用户标签表
+func (s *MemberTagServiceServer) DeleteMemberTag(ctx context.Context, in *umsclient.DeleteMemberTagReq) (*umsclient.DeleteMemberTagResp, error) {
+	l := membertagservicelogic.NewDeleteMemberTagLogic(ctx, s.svcCtx)
+	return l.DeleteMemberTag(in)
 }
 
-func (s *MemberTagServiceServer) MemberTagUpdate(ctx context.Context, in *umsclient.MemberTagUpdateReq) (*umsclient.MemberTagUpdateResp, error) {
-	l := membertagservicelogic.NewMemberTagUpdateLogic(ctx, s.svcCtx)
-	return l.MemberTagUpdate(in)
+// 更新用户标签表
+func (s *MemberTagServiceServer) UpdateMemberTag(ctx context.Context, in *umsclient.UpdateMemberTagReq) (*umsclient.UpdateMemberTagResp, error) {
+	l := membertagservicelogic.NewUpdateMemberTagLogic(ctx, s.svcCtx)
+	return l.UpdateMemberTag(in)
 }
 
-func (s *MemberTagServiceServer) MemberTagDelete(ctx context.Context, in *umsclient.MemberTagDeleteReq) (*umsclient.MemberTagDeleteResp, error) {
-	l := membertagservicelogic.NewMemberTagDeleteLogic(ctx, s.svcCtx)
-	return l.MemberTagDelete(in)
+// 更新用户标签表状态
+func (s *MemberTagServiceServer) UpdateMemberTagStatus(ctx context.Context, in *umsclient.UpdateMemberTagStatusReq) (*umsclient.UpdateMemberTagStatusResp, error) {
+	l := membertagservicelogic.NewUpdateMemberTagStatusLogic(ctx, s.svcCtx)
+	return l.UpdateMemberTagStatus(in)
+}
+
+// 查询用户标签表详情
+func (s *MemberTagServiceServer) QueryMemberTagDetail(ctx context.Context, in *umsclient.QueryMemberTagDetailReq) (*umsclient.QueryMemberTagDetailResp, error) {
+	l := membertagservicelogic.NewQueryMemberTagDetailLogic(ctx, s.svcCtx)
+	return l.QueryMemberTagDetail(in)
+}
+
+// 查询用户标签表列表
+func (s *MemberTagServiceServer) QueryMemberTagList(ctx context.Context, in *umsclient.QueryMemberTagListReq) (*umsclient.QueryMemberTagListResp, error) {
+	l := membertagservicelogic.NewQueryMemberTagListLogic(ctx, s.svcCtx)
+	return l.QueryMemberTagList(in)
 }

@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加积分消费设置
+message AddIntegrationConsumeSettingReq {
+  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int32 use_unit = 3; //每次使用积分最小单位100
+  int32 is_default = 4; //是否默认：0->否；1->是
+  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
+
+
+}
+
+message AddIntegrationConsumeSettingResp {
+  string pong = 1;
+}
+
+// 删除积分消费设置
+message DeleteIntegrationConsumeSettingReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteIntegrationConsumeSettingResp {
+  string pong = 1;
+}
+
+// 更新积分消费设置
+message UpdateIntegrationConsumeSettingReq {
+  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int64 id = 3; //
+  int32 is_default = 4; //是否默认：0->否；1->是
+  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
+  int32 use_unit = 6; //每次使用积分最小单位100
+
+}
+
+message UpdateIntegrationConsumeSettingResp {
+  string pong = 1;
+}
+
+// 更新积分消费设置状态
+message UpdateIntegrationConsumeSettingStatusReq {
+  int64 id = 1; //
+  int32 is_default = 2; //是否默认：0->否；1->是
+
+}
+
+message UpdateIntegrationConsumeSettingStatusResp {
+  string pong = 1;
+}
+
+// 查询积分消费设置详情
+message QueryIntegrationConsumeSettingDetailReq {
+    int64 id = 1;
+}
+
+message QueryIntegrationConsumeSettingDetailResp {
+  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int64 id = 3; //
+  int32 is_default = 4; //是否默认：0->否；1->是
+  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
+  int32 use_unit = 6; //每次使用积分最小单位100
+
+}
+
+// 分页查询积分消费设置列表
+message QueryIntegrationConsumeSettingListReq {
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message IntegrationConsumeSettingListData {
+  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int64 id = 3; //
+  int32 is_default = 4; //是否默认：0->否；1->是
+  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
+  int32 use_unit = 6; //每次使用积分最小单位100
+
+}
+
+message QueryIntegrationConsumeSettingListResp {
+  int64 total = 1;
+  repeated  IntegrationConsumeSettingListData list = 2;
+}
+
+// 积分消费设置
+service IntegrationConsumeSettingService {
+  // 添加积分消费设置
+  rpc AddIntegrationConsumeSetting(AddIntegrationConsumeSettingReq) returns (AddIntegrationConsumeSettingResp){}
+  // 删除积分消费设置
+  rpc DeleteIntegrationConsumeSetting(DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp){}
+  // 更新积分消费设置
+  rpc UpdateIntegrationConsumeSetting(UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp ){}
+  // 更新积分消费设置状态
+  rpc UpdateIntegrationConsumeSettingStatus(UpdateIntegrationConsumeSettingStatusReq) returns (UpdateIntegrationConsumeSettingStatusResp ){}
+  // 查询积分消费设置详情
+   rpc QueryIntegrationConsumeSettingDetail(QueryIntegrationConsumeSettingDetailReq) returns (QueryIntegrationConsumeSettingDetailResp){}
+  // 查询积分消费设置列表
+  rpc QueryIntegrationConsumeSettingList(QueryIntegrationConsumeSettingListReq) returns (QueryIntegrationConsumeSettingListResp){}
+
+
+}

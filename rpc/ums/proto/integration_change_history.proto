@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加积分变化历史记录表
+message AddIntegrationChangeHistoryReq {
+  int32 change_count = 1; //积分改变数量
+  int32 change_type = 2; //改变类型：0->增加；1->减少
+  string operate_note = 3; //操作备注
+  int32 source_type = 4; //积分来源：0->购物；1->管理员修改
+  int64 member_id = 5; //会员id
+  string operate_man = 6; //操作人员
+
+
+
+}
+
+message AddIntegrationChangeHistoryResp {
+  string pong = 1;
+}
+
+// 删除积分变化历史记录表
+message DeleteIntegrationChangeHistoryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteIntegrationChangeHistoryResp {
+  string pong = 1;
+}
+
+// 查询积分变化历史记录表详情
+message QueryIntegrationChangeHistoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryIntegrationChangeHistoryDetailResp {
+  int32 change_count = 1; //积分改变数量
+  int32 change_type = 2; //改变类型：0->增加；1->减少
+  string create_time = 3; //创建时间
+  int64 id = 4; //
+  int64 member_id = 5; //会员id
+  string operate_man = 6; //操作人员
+  string operate_note = 7; //操作备注
+  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+
+}
+
+// 分页查询积分变化历史记录表列表
+message QueryIntegrationChangeHistoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 member_id = 3; //会员id
+
+}
+
+message IntegrationChangeHistoryListData {
+  int32 change_count = 1; //积分改变数量
+  int32 change_type = 2; //改变类型：0->增加；1->减少
+  string create_time = 3; //创建时间
+  int64 id = 4; //
+  int64 member_id = 5; //会员id
+  string operate_man = 6; //操作人员
+  string operate_note = 7; //操作备注
+  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+
+}
+
+message QueryIntegrationChangeHistoryListResp {
+  int64 total = 1;
+  repeated  IntegrationChangeHistoryListData list = 2;
+}
+
+// 积分变化历史记录表
+service IntegrationChangeHistoryService {
+  // 添加积分变化历史记录表
+  rpc AddIntegrationChangeHistory(AddIntegrationChangeHistoryReq) returns (AddIntegrationChangeHistoryResp){}
+  // 删除积分变化历史记录表
+  rpc DeleteIntegrationChangeHistory(DeleteIntegrationChangeHistoryReq) returns (DeleteIntegrationChangeHistoryResp){}
+  // 查询积分变化历史记录表详情
+   rpc QueryIntegrationChangeHistoryDetail(QueryIntegrationChangeHistoryDetailReq) returns (QueryIntegrationChangeHistoryDetailResp){}
+  // 查询积分变化历史记录表列表
+  rpc QueryIntegrationChangeHistoryList(QueryIntegrationChangeHistoryListReq) returns (QueryIntegrationChangeHistoryListResp){}
+
+
+}

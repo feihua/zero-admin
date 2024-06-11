@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加用户收藏的商品
+message AddMemberProductCollectionReq {
+  int64 product_price = 1; //商品价格
+  string product_sub_title = 2; //商品标题
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+
+
+}
+
+message AddMemberProductCollectionResp {
+  string pong = 1;
+}
+
+// 删除用户收藏的商品
+message DeleteMemberProductCollectionReq {
+  repeated int64 ids = 1;
+  int64 MemberId = 2; //会员id
+}
+
+message DeleteMemberProductCollectionResp {
+  string pong = 1;
+}
+
+// 查询用户收藏的商品详情
+message QueryMemberProductCollectionDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberProductCollectionDetailResp {
+  string create_time = 1; //收藏时间
+  int64 id = 2; //
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+  int64 product_price = 9; //商品价格
+  string product_sub_title = 10; //商品标题
+
+}
+
+// 分页查询用户收藏的商品列表
+message QueryMemberProductCollectionListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 member_id = 3; //会员id
+  int64 product_id = 4; //商品id
+
+}
+
+message MemberProductCollectionListData {
+  string create_time = 1; //收藏时间
+  int64 id = 2; //
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+  int64 product_price = 9; //商品价格
+  string product_sub_title = 10; //商品标题
+
+}
+
+message QueryMemberProductCollectionListResp {
+  int64 total = 1;
+  repeated  MemberProductCollectionListData list = 2;
+}
+
+// 用户收藏的商品
+service MemberProductCollectionService {
+  // 添加用户收藏的商品
+  rpc AddMemberProductCollection(AddMemberProductCollectionReq) returns (AddMemberProductCollectionResp){}
+  //删除商品收藏/清空当前用户商品收藏列表
+  rpc DeleteMemberProductCollection(DeleteMemberProductCollectionReq) returns (DeleteMemberProductCollectionResp){}
+  // 查询用户收藏的商品详情
+   rpc QueryMemberProductCollectionDetail(QueryMemberProductCollectionDetailReq) returns (QueryMemberProductCollectionDetailResp){}
+  // 查询用户收藏的商品列表
+  rpc QueryMemberProductCollectionList(QueryMemberProductCollectionListReq) returns (QueryMemberProductCollectionListResp){}
+
+
+}

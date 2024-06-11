@@ -22,22 +22,38 @@ func NewMemberLevelServiceServer(svcCtx *svc.ServiceContext) *MemberLevelService
 	}
 }
 
-func (s *MemberLevelServiceServer) MemberLevelAdd(ctx context.Context, in *umsclient.MemberLevelAddReq) (*umsclient.MemberLevelAddResp, error) {
-	l := memberlevelservicelogic.NewMemberLevelAddLogic(ctx, s.svcCtx)
-	return l.MemberLevelAdd(in)
+// 添加会员等级表
+func (s *MemberLevelServiceServer) AddMemberLevel(ctx context.Context, in *umsclient.AddMemberLevelReq) (*umsclient.AddMemberLevelResp, error) {
+	l := memberlevelservicelogic.NewAddMemberLevelLogic(ctx, s.svcCtx)
+	return l.AddMemberLevel(in)
 }
 
-func (s *MemberLevelServiceServer) MemberLevelList(ctx context.Context, in *umsclient.MemberLevelListReq) (*umsclient.MemberLevelListResp, error) {
-	l := memberlevelservicelogic.NewMemberLevelListLogic(ctx, s.svcCtx)
-	return l.MemberLevelList(in)
+// 删除会员等级表
+func (s *MemberLevelServiceServer) DeleteMemberLevel(ctx context.Context, in *umsclient.DeleteMemberLevelReq) (*umsclient.DeleteMemberLevelResp, error) {
+	l := memberlevelservicelogic.NewDeleteMemberLevelLogic(ctx, s.svcCtx)
+	return l.DeleteMemberLevel(in)
 }
 
-func (s *MemberLevelServiceServer) MemberLevelUpdate(ctx context.Context, in *umsclient.MemberLevelUpdateReq) (*umsclient.MemberLevelUpdateResp, error) {
-	l := memberlevelservicelogic.NewMemberLevelUpdateLogic(ctx, s.svcCtx)
-	return l.MemberLevelUpdate(in)
+// 更新会员等级表
+func (s *MemberLevelServiceServer) UpdateMemberLevel(ctx context.Context, in *umsclient.UpdateMemberLevelReq) (*umsclient.UpdateMemberLevelResp, error) {
+	l := memberlevelservicelogic.NewUpdateMemberLevelLogic(ctx, s.svcCtx)
+	return l.UpdateMemberLevel(in)
 }
 
-func (s *MemberLevelServiceServer) MemberLevelDelete(ctx context.Context, in *umsclient.MemberLevelDeleteReq) (*umsclient.MemberLevelDeleteResp, error) {
-	l := memberlevelservicelogic.NewMemberLevelDeleteLogic(ctx, s.svcCtx)
-	return l.MemberLevelDelete(in)
+// 更新会员等级表状态
+func (s *MemberLevelServiceServer) UpdateMemberLevelStatus(ctx context.Context, in *umsclient.UpdateMemberLevelStatusReq) (*umsclient.UpdateMemberLevelStatusResp, error) {
+	l := memberlevelservicelogic.NewUpdateMemberLevelStatusLogic(ctx, s.svcCtx)
+	return l.UpdateMemberLevelStatus(in)
+}
+
+// 查询会员等级表详情
+func (s *MemberLevelServiceServer) QueryMemberLevelDetail(ctx context.Context, in *umsclient.QueryMemberLevelDetailReq) (*umsclient.QueryMemberLevelDetailResp, error) {
+	l := memberlevelservicelogic.NewQueryMemberLevelDetailLogic(ctx, s.svcCtx)
+	return l.QueryMemberLevelDetail(in)
+}
+
+// 查询会员等级表列表
+func (s *MemberLevelServiceServer) QueryMemberLevelList(ctx context.Context, in *umsclient.QueryMemberLevelListReq) (*umsclient.QueryMemberLevelListResp, error) {
+	l := memberlevelservicelogic.NewQueryMemberLevelListLogic(ctx, s.svcCtx)
+	return l.QueryMemberLevelList(in)
 }

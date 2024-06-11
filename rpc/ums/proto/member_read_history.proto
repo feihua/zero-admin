@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加用户商品浏览历史记录
+message AddMemberReadHistoryReq {
+  int64 product_price = 1; //商品价格
+  string product_sub_title = 2; //商品标题
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+
+
+}
+
+message AddMemberReadHistoryResp {
+  string pong = 1;
+}
+
+// 删除用户商品浏览历史记录
+message DeleteMemberReadHistoryReq {
+  repeated int64 ids = 1;
+  int64 MemberId = 2; //会员id
+}
+
+message DeleteMemberReadHistoryResp {
+  string pong = 1;
+}
+
+// 查询用户商品浏览历史记录详情
+message QueryMemberReadHistoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberReadHistoryDetailResp {
+  string create_time = 1; //浏览时间
+  int64 id = 2; //
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+  int64 product_price = 9; //商品价格
+  string product_sub_title = 10; //商品标题
+
+}
+
+// 分页查询用户商品浏览历史记录列表
+message QueryMemberReadHistoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 member_id = 4; //会员id
+
+}
+
+message MemberReadHistoryListData {
+  string create_time = 1; //浏览时间
+  int64 id = 2; //
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+  int64 product_price = 9; //商品价格
+  string product_sub_title = 10; //商品标题
+
+}
+
+message QueryMemberReadHistoryListResp {
+  int64 total = 1;
+  repeated  MemberReadHistoryListData list = 2;
+}
+
+// 用户商品浏览历史记录
+service MemberReadHistoryService {
+  // 添加用户商品浏览历史记录
+  rpc AddMemberReadHistory(AddMemberReadHistoryReq) returns (AddMemberReadHistoryResp){}
+  //清空浏览记录/删除浏览记录
+  rpc DeleteMemberReadHistory(DeleteMemberReadHistoryReq) returns (DeleteMemberReadHistoryResp){}
+  // 查询用户商品浏览历史记录详情
+   rpc QueryMemberReadHistoryDetail(QueryMemberReadHistoryDetailReq) returns (QueryMemberReadHistoryDetailResp){}
+  // 查询用户商品浏览历史记录列表
+  rpc QueryMemberReadHistoryList(QueryMemberReadHistoryListReq) returns (QueryMemberReadHistoryListResp){}
+
+
+}

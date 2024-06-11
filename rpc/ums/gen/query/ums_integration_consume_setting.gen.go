@@ -31,6 +31,7 @@ func newUmsIntegrationConsumeSetting(db *gorm.DB, opts ...gen.DOOption) umsInteg
 	_umsIntegrationConsumeSetting.DeductionPerAmount = field.NewInt32(tableName, "deduction_per_amount")
 	_umsIntegrationConsumeSetting.MaxPercentPerOrder = field.NewInt32(tableName, "max_percent_per_order")
 	_umsIntegrationConsumeSetting.UseUnit = field.NewInt32(tableName, "use_unit")
+	_umsIntegrationConsumeSetting.IsDefault = field.NewInt32(tableName, "is_default")
 	_umsIntegrationConsumeSetting.CouponStatus = field.NewInt32(tableName, "coupon_status")
 
 	_umsIntegrationConsumeSetting.fillFieldMap()
@@ -47,6 +48,7 @@ type umsIntegrationConsumeSetting struct {
 	DeductionPerAmount field.Int32 // 每一元需要抵扣的积分数量
 	MaxPercentPerOrder field.Int32 // 每笔订单最高抵用百分比
 	UseUnit            field.Int32 // 每次使用积分最小单位100
+	IsDefault          field.Int32 // 是否默认：0->否；1->是
 	CouponStatus       field.Int32 // 是否可以和优惠券同用；0->不可以；1->可以
 
 	fieldMap map[string]field.Expr
@@ -68,6 +70,7 @@ func (u *umsIntegrationConsumeSetting) updateTableName(table string) *umsIntegra
 	u.DeductionPerAmount = field.NewInt32(table, "deduction_per_amount")
 	u.MaxPercentPerOrder = field.NewInt32(table, "max_percent_per_order")
 	u.UseUnit = field.NewInt32(table, "use_unit")
+	u.IsDefault = field.NewInt32(table, "is_default")
 	u.CouponStatus = field.NewInt32(table, "coupon_status")
 
 	u.fillFieldMap()
@@ -99,11 +102,12 @@ func (u *umsIntegrationConsumeSetting) GetFieldByName(fieldName string) (field.O
 }
 
 func (u *umsIntegrationConsumeSetting) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 5)
+	u.fieldMap = make(map[string]field.Expr, 6)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["deduction_per_amount"] = u.DeductionPerAmount
 	u.fieldMap["max_percent_per_order"] = u.MaxPercentPerOrder
 	u.fieldMap["use_unit"] = u.UseUnit
+	u.fieldMap["is_default"] = u.IsDefault
 	u.fieldMap["coupon_status"] = u.CouponStatus
 }
 

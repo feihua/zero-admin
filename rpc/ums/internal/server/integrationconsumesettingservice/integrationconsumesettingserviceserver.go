@@ -22,27 +22,38 @@ func NewIntegrationConsumeSettingServiceServer(svcCtx *svc.ServiceContext) *Inte
 	}
 }
 
-func (s *IntegrationConsumeSettingServiceServer) IntegrationConsumeSettingAdd(ctx context.Context, in *umsclient.IntegrationConsumeSettingAddReq) (*umsclient.IntegrationConsumeSettingAddResp, error) {
-	l := integrationconsumesettingservicelogic.NewIntegrationConsumeSettingAddLogic(ctx, s.svcCtx)
-	return l.IntegrationConsumeSettingAdd(in)
+// 添加积分消费设置
+func (s *IntegrationConsumeSettingServiceServer) AddIntegrationConsumeSetting(ctx context.Context, in *umsclient.AddIntegrationConsumeSettingReq) (*umsclient.AddIntegrationConsumeSettingResp, error) {
+	l := integrationconsumesettingservicelogic.NewAddIntegrationConsumeSettingLogic(ctx, s.svcCtx)
+	return l.AddIntegrationConsumeSetting(in)
 }
 
-func (s *IntegrationConsumeSettingServiceServer) IntegrationConsumeSettingList(ctx context.Context, in *umsclient.IntegrationConsumeSettingListReq) (*umsclient.IntegrationConsumeSettingListResp, error) {
-	l := integrationconsumesettingservicelogic.NewIntegrationConsumeSettingListLogic(ctx, s.svcCtx)
-	return l.IntegrationConsumeSettingList(in)
+// 删除积分消费设置
+func (s *IntegrationConsumeSettingServiceServer) DeleteIntegrationConsumeSetting(ctx context.Context, in *umsclient.DeleteIntegrationConsumeSettingReq) (*umsclient.DeleteIntegrationConsumeSettingResp, error) {
+	l := integrationconsumesettingservicelogic.NewDeleteIntegrationConsumeSettingLogic(ctx, s.svcCtx)
+	return l.DeleteIntegrationConsumeSetting(in)
 }
 
-func (s *IntegrationConsumeSettingServiceServer) IntegrationConsumeSettingUpdate(ctx context.Context, in *umsclient.IntegrationConsumeSettingUpdateReq) (*umsclient.IntegrationConsumeSettingUpdateResp, error) {
-	l := integrationconsumesettingservicelogic.NewIntegrationConsumeSettingUpdateLogic(ctx, s.svcCtx)
-	return l.IntegrationConsumeSettingUpdate(in)
+// 更新积分消费设置
+func (s *IntegrationConsumeSettingServiceServer) UpdateIntegrationConsumeSetting(ctx context.Context, in *umsclient.UpdateIntegrationConsumeSettingReq) (*umsclient.UpdateIntegrationConsumeSettingResp, error) {
+	l := integrationconsumesettingservicelogic.NewUpdateIntegrationConsumeSettingLogic(ctx, s.svcCtx)
+	return l.UpdateIntegrationConsumeSetting(in)
 }
 
-func (s *IntegrationConsumeSettingServiceServer) IntegrationConsumeSettingDelete(ctx context.Context, in *umsclient.IntegrationConsumeSettingDeleteReq) (*umsclient.IntegrationConsumeSettingDeleteResp, error) {
-	l := integrationconsumesettingservicelogic.NewIntegrationConsumeSettingDeleteLogic(ctx, s.svcCtx)
-	return l.IntegrationConsumeSettingDelete(in)
+// 更新积分消费设置状态
+func (s *IntegrationConsumeSettingServiceServer) UpdateIntegrationConsumeSettingStatus(ctx context.Context, in *umsclient.UpdateIntegrationConsumeSettingStatusReq) (*umsclient.UpdateIntegrationConsumeSettingStatusResp, error) {
+	l := integrationconsumesettingservicelogic.NewUpdateIntegrationConsumeSettingStatusLogic(ctx, s.svcCtx)
+	return l.UpdateIntegrationConsumeSettingStatus(in)
 }
 
-func (s *IntegrationConsumeSettingServiceServer) QueryIntegrationConsumeSettingById(ctx context.Context, in *umsclient.QueryIntegrationConsumeSettingByIdReq) (*umsclient.IntegrationConsumeSettingListData, error) {
-	l := integrationconsumesettingservicelogic.NewQueryIntegrationConsumeSettingByIdLogic(ctx, s.svcCtx)
-	return l.QueryIntegrationConsumeSettingById(in)
+// 查询积分消费设置详情
+func (s *IntegrationConsumeSettingServiceServer) QueryIntegrationConsumeSettingDetail(ctx context.Context, in *umsclient.QueryIntegrationConsumeSettingDetailReq) (*umsclient.QueryIntegrationConsumeSettingDetailResp, error) {
+	l := integrationconsumesettingservicelogic.NewQueryIntegrationConsumeSettingDetailLogic(ctx, s.svcCtx)
+	return l.QueryIntegrationConsumeSettingDetail(in)
+}
+
+// 查询积分消费设置列表
+func (s *IntegrationConsumeSettingServiceServer) QueryIntegrationConsumeSettingList(ctx context.Context, in *umsclient.QueryIntegrationConsumeSettingListReq) (*umsclient.QueryIntegrationConsumeSettingListResp, error) {
+	l := integrationconsumesettingservicelogic.NewQueryIntegrationConsumeSettingListLogic(ctx, s.svcCtx)
+	return l.QueryIntegrationConsumeSettingList(in)
 }

@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员统计信息
+message AddMemberStatisticsInfoReq {
+  int32 attend_count = 1; //关注数量
+  int32 collect_comment_count = 2; //
+  int32 collect_product_count = 3; //
+  int32 collect_subject_count = 4; //
+  int32 collect_topic_count = 5; //
+  int32 comment_count = 6; //评价数
+  int64 consume_amount = 7; //累计消费金额
+  int32 coupon_count = 8; //优惠券数量
+  int32 fans_count = 9; //粉丝数量
+  int64 id = 10; //
+  int32 invite_friend_count = 11; //
+  int32 login_count = 12; //登录次数
+  int64 member_id = 13; //
+  int32 order_count = 14; //订单数量
+  string recent_order_time = 15; //最后一次下订单时间
+  int32 return_order_count = 16; //退货数量
+
+}
+
+message AddMemberStatisticsInfoResp {
+  string pong = 1;
+}
+
+
+// 查询会员统计信息详情
+message QueryMemberStatisticsInfoDetailReq {
+  int64 member_id = 1; //
+}
+
+message QueryMemberStatisticsInfoDetailResp {
+  int32 attend_count = 1; //关注数量
+  int32 collect_comment_count = 2; //
+  int32 collect_product_count = 3; //
+  int32 collect_subject_count = 4; //
+  int32 collect_topic_count = 5; //
+  int32 comment_count = 6; //评价数
+  int64 consume_amount = 7; //累计消费金额
+  int32 coupon_count = 8; //优惠券数量
+  int32 fans_count = 9; //粉丝数量
+  int64 id = 10; //
+  int32 invite_friend_count = 11; //
+  int32 login_count = 12; //登录次数
+  int64 member_id = 13; //
+  int32 order_count = 14; //订单数量
+  string recent_order_time = 15; //最后一次下订单时间
+  int32 return_order_count = 16; //退货数量
+
+}
+
+
+// 会员统计信息
+service MemberStatisticsInfoService {
+  // 添加会员统计信息
+  rpc AddMemberStatisticsInfo(AddMemberStatisticsInfoReq) returns (AddMemberStatisticsInfoResp){}
+  // 查询会员统计信息详情
+   rpc QueryMemberStatisticsInfoDetail(QueryMemberStatisticsInfoDetailReq) returns (QueryMemberStatisticsInfoDetailResp){}
+
+
+}

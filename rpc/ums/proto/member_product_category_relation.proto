@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员与产品分类关系表（用户喜欢的分类）
+message AddMemberProductCategoryRelationReq {
+  int64 member_id = 1; //会员id
+  int64 product_category_id = 2; //商品分类id
+
+}
+
+message AddMemberProductCategoryRelationResp {
+  string pong = 1;
+}
+
+
+// 分页查询会员与产品分类关系表（用户喜欢的分类）列表
+message QueryMemberProductCategoryRelationListReq {
+  int64 member_id = 1; //会员id
+}
+
+message MemberProductCategoryRelationListData {
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int64 product_category_id = 3; //商品分类id
+
+}
+
+message QueryMemberProductCategoryRelationListResp {
+  int64 total = 1;
+  repeated  MemberProductCategoryRelationListData list = 2;
+}
+
+// 会员与产品分类关系表（用户喜欢的分类）
+service MemberProductCategoryRelationService {
+  // 添加会员与产品分类关系表（用户喜欢的分类）
+  rpc AddMemberProductCategoryRelation(AddMemberProductCategoryRelationReq) returns (AddMemberProductCategoryRelationResp){}
+  // 查询会员与产品分类关系表（用户喜欢的分类）列表
+  rpc QueryMemberProductCategoryRelationList(QueryMemberProductCategoryRelationListReq) returns (QueryMemberProductCategoryRelationListResp){}
+
+}

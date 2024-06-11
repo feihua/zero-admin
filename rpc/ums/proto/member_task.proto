@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员任务表
+message AddMemberTaskReq {
+  string create_by = 1; //创建者
+  string task_name = 2; //任务名称
+  int32 task_type = 3; //任务类型：0->新手任务；1->日常任务
+  int32 status = 4; //状态：0->禁用；1->启用
+  int32 task_growth = 5; //赠送成长值
+  int32 task_integral = 6; //赠送积分
+
+}
+
+message AddMemberTaskResp {
+  string pong = 1;
+}
+
+// 删除会员任务表
+message DeleteMemberTaskReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberTaskResp {
+  string pong = 1;
+}
+
+// 更新会员任务表
+message UpdateMemberTaskReq {
+  int32 task_type = 1; //任务类型：0->新手任务；1->日常任务
+  string update_by = 2; //更新者
+  int64 id = 3; //
+  int32 status = 4; //状态：0->禁用；1->启用
+  int32 task_growth = 5; //赠送成长值
+  int32 task_integral = 6; //赠送积分
+  string task_name = 7; //任务名称
+
+
+}
+
+message UpdateMemberTaskResp {
+  string pong = 1;
+}
+
+// 更新会员任务表状态
+message UpdateMemberTaskStatusReq {
+  repeated int64 ids = 1;
+  int32 status = 2; //状态：0->禁用；1->启用
+  string update_by = 3; //更新者
+}
+
+message UpdateMemberTaskStatusResp {
+  string pong = 1;
+}
+
+// 查询会员任务表详情
+message QueryMemberTaskDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberTaskDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //
+  int32 status = 4; //状态：0->禁用；1->启用
+  int32 task_growth = 5; //赠送成长值
+  int32 task_integral = 6; //赠送积分
+  string task_name = 7; //任务名称
+  int32 task_type = 8; //任务类型：0->新手任务；1->日常任务
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询会员任务表列表
+message QueryMemberTaskListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 status = 3; //状态：0->禁用；1->启用
+  string task_name = 4; //任务名称
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+
+}
+
+message MemberTaskListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //
+  int32 status = 4; //状态：0->禁用；1->启用
+  int32 task_growth = 5; //赠送成长值
+  int32 task_integral = 6; //赠送积分
+  string task_name = 7; //任务名称
+  int32 task_type = 8; //任务类型：0->新手任务；1->日常任务
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+message QueryMemberTaskListResp {
+  int64 total = 1;
+  repeated  MemberTaskListData list = 2;
+}
+
+// 会员任务表
+service MemberTaskService {
+  // 添加会员任务表
+  rpc AddMemberTask(AddMemberTaskReq) returns (AddMemberTaskResp){}
+  // 删除会员任务表
+  rpc DeleteMemberTask(DeleteMemberTaskReq) returns (DeleteMemberTaskResp){}
+  // 更新会员任务表
+  rpc UpdateMemberTask(UpdateMemberTaskReq) returns (UpdateMemberTaskResp ){}
+  // 更新会员任务表状态
+  rpc UpdateMemberTaskStatus(UpdateMemberTaskStatusReq) returns (UpdateMemberTaskStatusResp ){}
+  // 查询会员任务表详情
+   rpc QueryMemberTaskDetail(QueryMemberTaskDetailReq) returns (QueryMemberTaskDetailResp){}
+  // 查询会员任务表列表
+  rpc QueryMemberTaskList(QueryMemberTaskListReq) returns (QueryMemberTaskListResp){}
+
+
+}

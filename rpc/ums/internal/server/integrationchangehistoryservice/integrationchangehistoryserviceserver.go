@@ -22,14 +22,26 @@ func NewIntegrationChangeHistoryServiceServer(svcCtx *svc.ServiceContext) *Integ
 	}
 }
 
-// 添加积分变化历史记录
-func (s *IntegrationChangeHistoryServiceServer) IntegrationChangeHistoryAdd(ctx context.Context, in *umsclient.IntegrationChangeHistoryAddReq) (*umsclient.IntegrationChangeHistoryAddResp, error) {
-	l := integrationchangehistoryservicelogic.NewIntegrationChangeHistoryAddLogic(ctx, s.svcCtx)
-	return l.IntegrationChangeHistoryAdd(in)
+// 添加积分变化历史记录表
+func (s *IntegrationChangeHistoryServiceServer) AddIntegrationChangeHistory(ctx context.Context, in *umsclient.AddIntegrationChangeHistoryReq) (*umsclient.AddIntegrationChangeHistoryResp, error) {
+	l := integrationchangehistoryservicelogic.NewAddIntegrationChangeHistoryLogic(ctx, s.svcCtx)
+	return l.AddIntegrationChangeHistory(in)
 }
 
-// 查询积分变化历史记录列表
-func (s *IntegrationChangeHistoryServiceServer) IntegrationChangeHistoryList(ctx context.Context, in *umsclient.IntegrationChangeHistoryListReq) (*umsclient.IntegrationChangeHistoryListResp, error) {
-	l := integrationchangehistoryservicelogic.NewIntegrationChangeHistoryListLogic(ctx, s.svcCtx)
-	return l.IntegrationChangeHistoryList(in)
+// 删除积分变化历史记录表
+func (s *IntegrationChangeHistoryServiceServer) DeleteIntegrationChangeHistory(ctx context.Context, in *umsclient.DeleteIntegrationChangeHistoryReq) (*umsclient.DeleteIntegrationChangeHistoryResp, error) {
+	l := integrationchangehistoryservicelogic.NewDeleteIntegrationChangeHistoryLogic(ctx, s.svcCtx)
+	return l.DeleteIntegrationChangeHistory(in)
+}
+
+// 查询积分变化历史记录表详情
+func (s *IntegrationChangeHistoryServiceServer) QueryIntegrationChangeHistoryDetail(ctx context.Context, in *umsclient.QueryIntegrationChangeHistoryDetailReq) (*umsclient.QueryIntegrationChangeHistoryDetailResp, error) {
+	l := integrationchangehistoryservicelogic.NewQueryIntegrationChangeHistoryDetailLogic(ctx, s.svcCtx)
+	return l.QueryIntegrationChangeHistoryDetail(in)
+}
+
+// 查询积分变化历史记录表列表
+func (s *IntegrationChangeHistoryServiceServer) QueryIntegrationChangeHistoryList(ctx context.Context, in *umsclient.QueryIntegrationChangeHistoryListReq) (*umsclient.QueryIntegrationChangeHistoryListResp, error) {
+	l := integrationchangehistoryservicelogic.NewQueryIntegrationChangeHistoryListLogic(ctx, s.svcCtx)
+	return l.QueryIntegrationChangeHistoryList(in)
 }

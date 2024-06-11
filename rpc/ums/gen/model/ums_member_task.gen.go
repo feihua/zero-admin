@@ -17,6 +17,7 @@ type UmsMemberTask struct {
 	TaskGrowth   int32      `gorm:"column:task_growth;not null;comment:赠送成长值" json:"task_growth"`                          // 赠送成长值
 	TaskIntegral int32      `gorm:"column:task_integral;not null;comment:赠送积分" json:"task_integral"`                       // 赠送积分
 	TaskType     int32      `gorm:"column:task_type;not null;comment:任务类型：0->新手任务；1->日常任务" json:"task_type"`               // 任务类型：0->新手任务；1->日常任务
+	Status       int32      `gorm:"column:status;not null;default:1;comment:状态：0->禁用；1->启用" json:"status"`                 // 状态：0->禁用；1->启用
 	CreateBy     string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateBy     string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者

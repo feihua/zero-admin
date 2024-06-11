@@ -1,0 +1,132 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员积分成长规则表
+message AddMemberRuleSettingReq {
+  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int32 continue_sign_day = 2; //连续签到天数
+  int32 continue_sign_point = 3; //连续签到赠送数量
+  string create_by = 4; //创建者
+  int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
+  int32 status = 6; //状态：0->禁用；1->启用
+  int64 low_order_amount = 7; //最低获取点数的订单金额
+  int32 max_point_per_order = 8; //每笔订单最高获取点数
+
+
+}
+
+message AddMemberRuleSettingResp {
+  string pong = 1;
+}
+
+// 删除会员积分成长规则表
+message DeleteMemberRuleSettingReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberRuleSettingResp {
+  string pong = 1;
+}
+
+// 更新会员积分成长规则表
+message UpdateMemberRuleSettingReq {
+  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int32 continue_sign_day = 2; //连续签到天数
+  int32 continue_sign_point = 3; //连续签到赠送数量
+  int32 status = 4; //状态：0->禁用；1->启用
+  string update_by = 5; //更新者
+  int64 id = 6; //
+  int64 low_order_amount = 7; //最低获取点数的订单金额
+  int32 max_point_per_order = 8; //每笔订单最高获取点数
+  int32 rule_type = 9; //类型：0->积分规则；1->成长值规则
+
+
+}
+
+message UpdateMemberRuleSettingResp {
+  string pong = 1;
+}
+
+// 更新会员积分成长规则表状态
+message UpdateMemberRuleSettingStatusReq {
+  repeated int64 ids = 1;
+  int32 status = 2; //状态：0->禁用；1->启用
+  string update_by = 3; //更新者
+
+}
+
+message UpdateMemberRuleSettingStatusResp {
+  string pong = 1;
+}
+
+// 查询会员积分成长规则表详情
+message QueryMemberRuleSettingDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberRuleSettingDetailResp {
+  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int32 continue_sign_day = 2; //连续签到天数
+  int32 continue_sign_point = 3; //连续签到赠送数量
+  string create_by = 4; //创建者
+  string create_time = 5; //创建时间
+  int64 id = 6; //
+  int64 low_order_amount = 7; //最低获取点数的订单金额
+  int32 max_point_per_order = 8; //每笔订单最高获取点数
+  int32 rule_type = 9; //类型：0->积分规则；1->成长值规则
+  int32 status = 10; //状态：0->禁用；1->启用
+  string update_by = 11; //更新者
+  string update_time = 12; //更新时间
+
+}
+
+// 分页查询会员积分成长规则表列表
+message QueryMemberRuleSettingListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 rule_type = 3; //类型：0->积分规则；1->成长值规则
+  int32 status = 4; //状态：0->禁用；1->启用
+
+}
+
+message MemberRuleSettingListData {
+  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int32 continue_sign_day = 2; //连续签到天数
+  int32 continue_sign_point = 3; //连续签到赠送数量
+  string create_by = 4; //创建者
+  string create_time = 5; //创建时间
+  int64 id = 6; //
+  int64 low_order_amount = 7; //最低获取点数的订单金额
+  int32 max_point_per_order = 8; //每笔订单最高获取点数
+  int32 rule_type = 9; //类型：0->积分规则；1->成长值规则
+  int32 status = 10; //状态：0->禁用；1->启用
+  string update_by = 11; //更新者
+  string update_time = 12; //更新时间
+
+}
+
+message QueryMemberRuleSettingListResp {
+  int64 total = 1;
+  repeated  MemberRuleSettingListData list = 2;
+}
+
+// 会员积分成长规则表
+service MemberRuleSettingService {
+  // 添加会员积分成长规则表
+  rpc AddMemberRuleSetting(AddMemberRuleSettingReq) returns (AddMemberRuleSettingResp){}
+  // 删除会员积分成长规则表
+  rpc DeleteMemberRuleSetting(DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp){}
+  // 更新会员积分成长规则表
+  rpc UpdateMemberRuleSetting(UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp ){}
+  // 更新会员积分成长规则表状态
+  rpc UpdateMemberRuleSettingStatus(UpdateMemberRuleSettingStatusReq) returns (UpdateMemberRuleSettingStatusResp ){}
+  // 查询会员积分成长规则表详情
+   rpc QueryMemberRuleSettingDetail(QueryMemberRuleSettingDetailReq) returns (QueryMemberRuleSettingDetailResp){}
+  // 查询会员积分成长规则表列表
+  rpc QueryMemberRuleSettingList(QueryMemberRuleSettingListReq) returns (QueryMemberRuleSettingListResp){}
+
+
+}

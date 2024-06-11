@@ -7,7 +7,7 @@ import (
 	growthchangehistoryserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/growthchangehistoryservice"
 	integrationchangehistoryserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/integrationchangehistoryservice"
 	integrationconsumesettingserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/integrationconsumesettingservice"
-	memberattentionservicer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberattentionservice"
+	memberbrandattentionserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberbrandattentionservice"
 	memberlevelserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberlevelservice"
 	memberloginlogserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberloginlogservice"
 	membermembertagrelationserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/membermembertagrelationservice"
@@ -55,7 +55,7 @@ func main() {
 		umsclient.RegisterMemberTagServiceServer(grpcServer, membertagserviceServer.NewMemberTagServiceServer(ctx))
 		umsclient.RegisterMemberProductCollectionServiceServer(grpcServer, memberproductcollectionserviceServer.NewMemberProductCollectionServiceServer(ctx))
 		umsclient.RegisterMemberReadHistoryServiceServer(grpcServer, memberreadhistoryserviceServer.NewMemberReadHistoryServiceServer(ctx))
-		umsclient.RegisterMemberAttentionServiceServer(grpcServer, memberattentionservicer.NewMemberAttentionServiceServer(ctx))
+		umsclient.RegisterMemberBrandAttentionServiceServer(grpcServer, memberbrandattentionserviceServer.NewMemberBrandAttentionServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员关注品牌
+message AddMemberBrandAttentionReq {
+  string brand_city = 1; //品牌所在城市
+  int64 brand_id = 2; //品牌id
+  string brand_logo = 3; //品牌Logo
+  string brand_name = 4; //品牌名称
+  int64 member_id = 5; //会员id
+}
+
+message AddMemberBrandAttentionResp {
+  string pong = 1;
+}
+
+// 删除会员关注品牌
+message DeleteMemberBrandAttentionReq {
+  repeated int64 ids = 1;
+  int64 MemberId = 2; //会员id
+}
+
+message DeleteMemberBrandAttentionResp {
+  string pong = 1;
+}
+
+// 查询会员关注品牌详情
+message QueryMemberBrandAttentionDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberBrandAttentionDetailResp {
+  string brand_city = 1; //品牌所在城市
+  int64 brand_id = 2; //品牌id
+  string brand_logo = 3; //品牌Logo
+  string brand_name = 4; //品牌名称
+  string create_time = 5; //关注时间
+  int64 id = 6; //
+  string member_icon = 7; //会员头像
+  int64 member_id = 8; //会员id
+  string member_nick_name = 9; //会员姓名
+
+}
+
+// 分页查询会员关注品牌列表
+message QueryMemberBrandAttentionListReq {
+  int64 member_id = 1; //会员id
+  
+}
+
+message MemberBrandAttentionListData {
+  string brand_city = 1; //品牌所在城市
+  int64 brand_id = 2; //品牌id
+  string brand_logo = 3; //品牌Logo
+  string brand_name = 4; //品牌名称
+  string create_time = 5; //关注时间
+  int64 id = 6; //
+
+}
+
+message QueryMemberBrandAttentionListResp {
+  int64 total = 1;
+  repeated  MemberBrandAttentionListData list = 2;
+}
+
+// 会员关注品牌
+service MemberBrandAttentionService {
+  // 添加会员关注品牌
+  rpc AddMemberBrandAttention(AddMemberBrandAttentionReq) returns (AddMemberBrandAttentionResp){}
+  // 取消品牌关注/清空当前用户品牌关注列表
+  rpc DeleteMemberBrandAttention(DeleteMemberBrandAttentionReq) returns (DeleteMemberBrandAttentionResp){}
+  // 查询会员关注品牌详情
+   rpc QueryMemberBrandAttentionDetail(QueryMemberBrandAttentionDetailReq) returns (QueryMemberBrandAttentionDetailResp){}
+  // 查询会员关注品牌列表
+  rpc QueryMemberBrandAttentionList(QueryMemberBrandAttentionListReq) returns (QueryMemberBrandAttentionListResp){}
+
+
+}

@@ -34,6 +34,7 @@ func newUmsMemberRuleSetting(db *gorm.DB, opts ...gen.DOOption) umsMemberRuleSet
 	_umsMemberRuleSetting.LowOrderAmount = field.NewInt64(tableName, "low_order_amount")
 	_umsMemberRuleSetting.MaxPointPerOrder = field.NewInt32(tableName, "max_point_per_order")
 	_umsMemberRuleSetting.RuleType = field.NewInt32(tableName, "rule_type")
+	_umsMemberRuleSetting.Status = field.NewInt32(tableName, "status")
 	_umsMemberRuleSetting.CreateBy = field.NewString(tableName, "create_by")
 	_umsMemberRuleSetting.CreateTime = field.NewTime(tableName, "create_time")
 	_umsMemberRuleSetting.UpdateBy = field.NewString(tableName, "update_by")
@@ -56,6 +57,7 @@ type umsMemberRuleSetting struct {
 	LowOrderAmount    field.Int64  // 最低获取点数的订单金额
 	MaxPointPerOrder  field.Int32  // 每笔订单最高获取点数
 	RuleType          field.Int32  // 类型：0->积分规则；1->成长值规则
+	Status            field.Int32  // 状态：0->禁用；1->启用
 	CreateBy          field.String // 创建者
 	CreateTime        field.Time   // 创建时间
 	UpdateBy          field.String // 更新者
@@ -83,6 +85,7 @@ func (u *umsMemberRuleSetting) updateTableName(table string) *umsMemberRuleSetti
 	u.LowOrderAmount = field.NewInt64(table, "low_order_amount")
 	u.MaxPointPerOrder = field.NewInt32(table, "max_point_per_order")
 	u.RuleType = field.NewInt32(table, "rule_type")
+	u.Status = field.NewInt32(table, "status")
 	u.CreateBy = field.NewString(table, "create_by")
 	u.CreateTime = field.NewTime(table, "create_time")
 	u.UpdateBy = field.NewString(table, "update_by")
@@ -115,7 +118,7 @@ func (u *umsMemberRuleSetting) GetFieldByName(fieldName string) (field.OrderExpr
 }
 
 func (u *umsMemberRuleSetting) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 11)
+	u.fieldMap = make(map[string]field.Expr, 12)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["continue_sign_day"] = u.ContinueSignDay
 	u.fieldMap["continue_sign_point"] = u.ContinueSignPoint
@@ -123,6 +126,7 @@ func (u *umsMemberRuleSetting) fillFieldMap() {
 	u.fieldMap["low_order_amount"] = u.LowOrderAmount
 	u.fieldMap["max_point_per_order"] = u.MaxPointPerOrder
 	u.fieldMap["rule_type"] = u.RuleType
+	u.fieldMap["status"] = u.Status
 	u.fieldMap["create_by"] = u.CreateBy
 	u.fieldMap["create_time"] = u.CreateTime
 	u.fieldMap["update_by"] = u.UpdateBy

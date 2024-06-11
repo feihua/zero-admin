@@ -32,6 +32,7 @@ func newUmsMemberTask(db *gorm.DB, opts ...gen.DOOption) umsMemberTask {
 	_umsMemberTask.TaskGrowth = field.NewInt32(tableName, "task_growth")
 	_umsMemberTask.TaskIntegral = field.NewInt32(tableName, "task_integral")
 	_umsMemberTask.TaskType = field.NewInt32(tableName, "task_type")
+	_umsMemberTask.Status = field.NewInt32(tableName, "status")
 	_umsMemberTask.CreateBy = field.NewString(tableName, "create_by")
 	_umsMemberTask.CreateTime = field.NewTime(tableName, "create_time")
 	_umsMemberTask.UpdateBy = field.NewString(tableName, "update_by")
@@ -52,6 +53,7 @@ type umsMemberTask struct {
 	TaskGrowth   field.Int32  // 赠送成长值
 	TaskIntegral field.Int32  // 赠送积分
 	TaskType     field.Int32  // 任务类型：0->新手任务；1->日常任务
+	Status       field.Int32  // 状态：0->禁用；1->启用
 	CreateBy     field.String // 创建者
 	CreateTime   field.Time   // 创建时间
 	UpdateBy     field.String // 更新者
@@ -77,6 +79,7 @@ func (u *umsMemberTask) updateTableName(table string) *umsMemberTask {
 	u.TaskGrowth = field.NewInt32(table, "task_growth")
 	u.TaskIntegral = field.NewInt32(table, "task_integral")
 	u.TaskType = field.NewInt32(table, "task_type")
+	u.Status = field.NewInt32(table, "status")
 	u.CreateBy = field.NewString(table, "create_by")
 	u.CreateTime = field.NewTime(table, "create_time")
 	u.UpdateBy = field.NewString(table, "update_by")
@@ -109,12 +112,13 @@ func (u *umsMemberTask) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (u *umsMemberTask) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 9)
+	u.fieldMap = make(map[string]field.Expr, 10)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["task_name"] = u.TaskName
 	u.fieldMap["task_growth"] = u.TaskGrowth
 	u.fieldMap["task_integral"] = u.TaskIntegral
 	u.fieldMap["task_type"] = u.TaskType
+	u.fieldMap["status"] = u.Status
 	u.fieldMap["create_by"] = u.CreateBy
 	u.fieldMap["create_time"] = u.CreateTime
 	u.fieldMap["update_by"] = u.UpdateBy

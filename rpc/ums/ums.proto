@@ -4,14 +4,418 @@ package umsclient;
 
 option go_package = "./umsclient";
 
-message MemberAddReq {
-  string      Username = 1;
-  string      Password = 2;
-  string      Phone = 3;
+// 添加成长值变化历史记录表
+message AddGrowthChangeHistoryReq {
+  int32 change_count = 1; //积分改变数量
+  int32 change_type = 2; //改变类型：0->增加；1->减少
+  string operate_note = 3; //操作备注
+  int32 source_type = 4; //积分来源：0->购物；1->管理员修改
+  int64 member_id = 5; //会员id
+  string operate_man = 6; //操作人员
+
+
 }
 
-message MemberAddResp {
-  string Token = 1;
+message AddGrowthChangeHistoryResp {
+  string pong = 1;
+}
+
+// 删除成长值变化历史记录表
+message DeleteGrowthChangeHistoryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteGrowthChangeHistoryResp {
+  string pong = 1;
+}
+
+// 查询成长值变化历史记录表详情
+message QueryGrowthChangeHistoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryGrowthChangeHistoryDetailResp {
+  int32 change_count = 1; //积分改变数量
+  int32 change_type = 2; //改变类型：0->增加；1->减少
+  string create_time = 3; //创建时间
+  int64 id = 4; //
+  int64 member_id = 5; //会员id
+  string operate_man = 6; //操作人员
+  string operate_note = 7; //操作备注
+  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+
+}
+
+// 分页查询成长值变化历史记录表列表
+message QueryGrowthChangeHistoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 member_id = 3; //会员id
+
+}
+
+message GrowthChangeHistoryListData {
+  int32 change_count = 1; //积分改变数量
+  int32 change_type = 2; //改变类型：0->增加；1->减少
+  string create_time = 3; //创建时间
+  int64 id = 4; //
+  int64 member_id = 5; //会员id
+  string operate_man = 6; //操作人员
+  string operate_note = 7; //操作备注
+  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+
+}
+
+message QueryGrowthChangeHistoryListResp {
+  int64 total = 1;
+  repeated  GrowthChangeHistoryListData list = 2;
+}
+
+// 成长值变化历史记录表
+service GrowthChangeHistoryService {
+  // 添加成长值变化历史记录表
+  rpc AddGrowthChangeHistory(AddGrowthChangeHistoryReq) returns (AddGrowthChangeHistoryResp){}
+  // 删除成长值变化历史记录表
+  rpc DeleteGrowthChangeHistory(DeleteGrowthChangeHistoryReq) returns (DeleteGrowthChangeHistoryResp){}
+  // 查询成长值变化历史记录表详情
+   rpc QueryGrowthChangeHistoryDetail(QueryGrowthChangeHistoryDetailReq) returns (QueryGrowthChangeHistoryDetailResp){}
+  // 查询成长值变化历史记录表列表
+  rpc QueryGrowthChangeHistoryList(QueryGrowthChangeHistoryListReq) returns (QueryGrowthChangeHistoryListResp){}
+
+
+}
+
+
+// 添加积分变化历史记录表
+message AddIntegrationChangeHistoryReq {
+  int32 change_count = 1; //积分改变数量
+  int32 change_type = 2; //改变类型：0->增加；1->减少
+  string operate_note = 3; //操作备注
+  int32 source_type = 4; //积分来源：0->购物；1->管理员修改
+  int64 member_id = 5; //会员id
+  string operate_man = 6; //操作人员
+
+
+
+}
+
+message AddIntegrationChangeHistoryResp {
+  string pong = 1;
+}
+
+// 删除积分变化历史记录表
+message DeleteIntegrationChangeHistoryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteIntegrationChangeHistoryResp {
+  string pong = 1;
+}
+
+// 查询积分变化历史记录表详情
+message QueryIntegrationChangeHistoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryIntegrationChangeHistoryDetailResp {
+  int32 change_count = 1; //积分改变数量
+  int32 change_type = 2; //改变类型：0->增加；1->减少
+  string create_time = 3; //创建时间
+  int64 id = 4; //
+  int64 member_id = 5; //会员id
+  string operate_man = 6; //操作人员
+  string operate_note = 7; //操作备注
+  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+
+}
+
+// 分页查询积分变化历史记录表列表
+message QueryIntegrationChangeHistoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 member_id = 3; //会员id
+
+}
+
+message IntegrationChangeHistoryListData {
+  int32 change_count = 1; //积分改变数量
+  int32 change_type = 2; //改变类型：0->增加；1->减少
+  string create_time = 3; //创建时间
+  int64 id = 4; //
+  int64 member_id = 5; //会员id
+  string operate_man = 6; //操作人员
+  string operate_note = 7; //操作备注
+  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+
+}
+
+message QueryIntegrationChangeHistoryListResp {
+  int64 total = 1;
+  repeated  IntegrationChangeHistoryListData list = 2;
+}
+
+// 积分变化历史记录表
+service IntegrationChangeHistoryService {
+  // 添加积分变化历史记录表
+  rpc AddIntegrationChangeHistory(AddIntegrationChangeHistoryReq) returns (AddIntegrationChangeHistoryResp){}
+  // 删除积分变化历史记录表
+  rpc DeleteIntegrationChangeHistory(DeleteIntegrationChangeHistoryReq) returns (DeleteIntegrationChangeHistoryResp){}
+  // 查询积分变化历史记录表详情
+   rpc QueryIntegrationChangeHistoryDetail(QueryIntegrationChangeHistoryDetailReq) returns (QueryIntegrationChangeHistoryDetailResp){}
+  // 查询积分变化历史记录表列表
+  rpc QueryIntegrationChangeHistoryList(QueryIntegrationChangeHistoryListReq) returns (QueryIntegrationChangeHistoryListResp){}
+
+
+}
+
+
+// 添加积分消费设置
+message AddIntegrationConsumeSettingReq {
+  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int32 use_unit = 3; //每次使用积分最小单位100
+  int32 is_default = 4; //是否默认：0->否；1->是
+  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
+
+
+}
+
+message AddIntegrationConsumeSettingResp {
+  string pong = 1;
+}
+
+// 删除积分消费设置
+message DeleteIntegrationConsumeSettingReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteIntegrationConsumeSettingResp {
+  string pong = 1;
+}
+
+// 更新积分消费设置
+message UpdateIntegrationConsumeSettingReq {
+  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int64 id = 3; //
+  int32 is_default = 4; //是否默认：0->否；1->是
+  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
+  int32 use_unit = 6; //每次使用积分最小单位100
+
+}
+
+message UpdateIntegrationConsumeSettingResp {
+  string pong = 1;
+}
+
+// 更新积分消费设置状态
+message UpdateIntegrationConsumeSettingStatusReq {
+  int64 id = 1; //
+  int32 is_default = 2; //是否默认：0->否；1->是
+
+}
+
+message UpdateIntegrationConsumeSettingStatusResp {
+  string pong = 1;
+}
+
+// 查询积分消费设置详情
+message QueryIntegrationConsumeSettingDetailReq {
+    int64 id = 1;
+}
+
+message QueryIntegrationConsumeSettingDetailResp {
+  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int64 id = 3; //
+  int32 is_default = 4; //是否默认：0->否；1->是
+  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
+  int32 use_unit = 6; //每次使用积分最小单位100
+
+}
+
+// 分页查询积分消费设置列表
+message QueryIntegrationConsumeSettingListReq {
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message IntegrationConsumeSettingListData {
+  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int64 id = 3; //
+  int32 is_default = 4; //是否默认：0->否；1->是
+  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
+  int32 use_unit = 6; //每次使用积分最小单位100
+
+}
+
+message QueryIntegrationConsumeSettingListResp {
+  int64 total = 1;
+  repeated  IntegrationConsumeSettingListData list = 2;
+}
+
+// 积分消费设置
+service IntegrationConsumeSettingService {
+  // 添加积分消费设置
+  rpc AddIntegrationConsumeSetting(AddIntegrationConsumeSettingReq) returns (AddIntegrationConsumeSettingResp){}
+  // 删除积分消费设置
+  rpc DeleteIntegrationConsumeSetting(DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp){}
+  // 更新积分消费设置
+  rpc UpdateIntegrationConsumeSetting(UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp ){}
+  // 更新积分消费设置状态
+  rpc UpdateIntegrationConsumeSettingStatus(UpdateIntegrationConsumeSettingStatusReq) returns (UpdateIntegrationConsumeSettingStatusResp ){}
+  // 查询积分消费设置详情
+   rpc QueryIntegrationConsumeSettingDetail(QueryIntegrationConsumeSettingDetailReq) returns (QueryIntegrationConsumeSettingDetailResp){}
+  // 查询积分消费设置列表
+  rpc QueryIntegrationConsumeSettingList(QueryIntegrationConsumeSettingListReq) returns (QueryIntegrationConsumeSettingListResp){}
+
+
+}
+
+
+// 添加会员表
+message AddMemberReq {
+  string member_name = 1; //用户名
+  string password = 2; //密码
+  string phone = 3; //手机号码
+
+}
+
+message AddMemberResp {
+  string token = 1;
+}
+
+// 删除会员表
+message DeleteMemberReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberResp {
+  string pong = 1;
+}
+
+// 更新会员表
+message UpdateMemberReq {
+  string birthday = 1; //生日
+  string city = 2; //所做城市
+  int32 source_type = 3; //用户来源
+  int32 gender = 4; //性别：0->未知；1->男；2->女
+  int32 growth = 5; //成长值
+  int32 history_integration = 6; //历史积分数量
+  string icon = 7; //头像
+  int64 id = 8; //
+  int32 integration = 9; //积分
+  string job = 10; //职业
+  int32 lottery_count = 11; //剩余抽奖次数
+  int64 member_level_id = 12; //会员等级id
+  string member_name = 13; //用户名
+  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
+  string nickname = 15; //昵称
+  string phone = 16; //手机号码
+  string personalized_signature = 17; //个性签名
+
+}
+
+message UpdateMemberResp {
+  string pong = 1;
+}
+
+// 更新会员表状态
+message UpdateMemberStatusReq {
+  string birthday = 1; //生日
+  string city = 2; //所做城市
+  string create_time = 3; //创建时间
+  int32 gender = 4; //性别：0->未知；1->男；2->女
+  int32 growth = 5; //成长值
+  int32 history_integration = 6; //历史积分数量
+  string icon = 7; //头像
+  int64 id = 8; //
+  int32 integration = 9; //积分
+  string job = 10; //职业
+  int32 lottery_count = 11; //剩余抽奖次数
+  int64 member_level_id = 12; //会员等级id
+  string member_name = 13; //用户名
+  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
+  string nickname = 15; //昵称
+  string password = 16; //密码
+  string personalized_signature = 17; //个性签名
+  string phone = 18; //手机号码
+  int32 source_type = 19; //用户来源
+  string update_time = 20; //更新时间
+
+}
+
+message UpdateMemberStatusResp {
+  string pong = 1;
+}
+
+// 查询会员表详情
+message QueryMemberDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberDetailResp {
+  string birthday = 1; //生日
+  string city = 2; //所做城市
+  string create_time = 3; //创建时间
+  int32 gender = 4; //性别：0->未知；1->男；2->女
+  int32 growth = 5; //成长值
+  int32 history_integration = 6; //历史积分数量
+  string icon = 7; //头像
+  int64 id = 8; //
+  int32 integration = 9; //积分
+  string job = 10; //职业
+  int32 lottery_count = 11; //剩余抽奖次数
+  int64 member_level_id = 12; //会员等级id
+  string member_name = 13; //用户名
+  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
+  string nickname = 15; //昵称
+  string password = 16; //密码
+  string personalized_signature = 17; //个性签名
+  string phone = 18; //手机号码
+  int32 source_type = 19; //用户来源
+  string update_time = 20; //更新时间
+
+}
+
+// 分页查询会员表列表
+message QueryMemberListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string member_name = 3; //用户名
+  int32 member_status = 4; //帐号启用状态:0->禁用；1->启用
+  string phone = 5; //手机号码
+
+}
+
+message MemberListData {
+  string birthday = 1; //生日
+  string city = 2; //所做城市
+  string create_time = 3; //创建时间
+  int32 gender = 4; //性别：0->未知；1->男；2->女
+  int32 growth = 5; //成长值
+  int32 history_integration = 6; //历史积分数量
+  string icon = 7; //头像
+  int64 id = 8; //
+  int32 integration = 9; //积分
+  string job = 10; //职业
+  int32 lottery_count = 11; //剩余抽奖次数
+  int64 member_level_id = 12; //会员等级id
+  string member_name = 13; //用户名
+  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
+  string nickname = 15; //昵称
+  string password = 16; //密码
+  string personalized_signature = 17; //个性签名
+  string phone = 18; //手机号码
+  int32 source_type = 19; //用户来源
+  string update_time = 20; //更新时间
+
+}
+
+message QueryMemberListResp {
+  int64 total = 1;
+  repeated  MemberListData list = 2;
 }
 
 message MemberLoginReq {
@@ -24,82 +428,6 @@ message MemberLoginResp {
   string Token = 1;
 }
 
-message MemberListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string Username = 3;
-  string Phone = 4;
-  int32  Status = 5;
-}
-
-message MemberListData{
-  int64       Id = 1;
-  int64       MemberLevelId = 2;
-  string      Username = 3;
-  int32      HistoryIntegration = 4;
-  string      Nickname = 5;
-  string      Phone = 6;
-  int32       Status = 7;
-  string      CreateTime = 8;
-  string      Icon = 9;
-  int32       Gender = 10;
-  string      Birthday = 11;
-  string      City = 12;
-  string      Job = 13;
-  string      PersonalizedSignature = 14;
-  int32       SourceType = 15;
-  int32       Integration = 16;
-  int32       Growth = 17;
-  int32       LuckeyCount = 18;
-}
-
-message MemberListResp {
-  int64 total = 1;
-  repeated  MemberListData list = 2;
-}
-
-message MemberUpdateReq {
-  int64       Id = 1;
-  int64       MemberLevelId = 2;
-  string      Username = 3;
-  int32      HistoryIntegration = 4;
-  string      Nickname = 5;
-  string      Phone = 6;
-  int32       Status = 7;
-  string      CreateTime = 8;
-  string      Icon = 9;
-  int32       Gender = 10;
-  string      Birthday = 11;
-  string      City = 12;
-  string      Job = 13;
-  string      PersonalizedSignature = 14;
-  int32       SourceType = 15;
-  int32       Integration = 16;
-  int32       Growth = 17;
-  int32       LuckeyCount = 18;
-}
-
-message MemberUpdateResp {
-  string pong = 1;
-}
-
-message MemberDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message MemberDeleteResp {
-  string pong = 1;
-}
-
-message MemberByIdReq {
-  int64 id = 1;
-}
-
-message MemberUpdatePasswordReq {
-  int64       Id = 1;
-  string      Password = 2;
-}
-
 message UpdateMemberIntegrationReq {
   int64 id = 1;
   int64 Integration = 2;
@@ -108,958 +436,1097 @@ message UpdateMemberIntegrationReq {
 message UpdateMemberIntegrationResp {
   string pong = 1;
 }
+
+// 会员表
 service MemberService {
+  // 添加会员表
+  rpc AddMember(AddMemberReq) returns (AddMemberResp){}
+  // 删除会员表
+  rpc DeleteMember(DeleteMemberReq) returns (DeleteMemberResp){}
+  // 更新会员表
+  rpc UpdateMember(UpdateMemberReq) returns (UpdateMemberResp ){}
+  // 更新会员表状态
+  rpc UpdateMemberStatus(UpdateMemberStatusReq) returns (UpdateMemberStatusResp ){}
+  // 查询会员表详情
+   rpc QueryMemberDetail(QueryMemberDetailReq) returns (QueryMemberDetailResp){}
+  // 查询会员表列表
+  rpc QueryMemberList(QueryMemberListReq) returns (QueryMemberListResp){}
 
-  rpc MemberAdd(MemberAddReq) returns(MemberAddResp);
+
+  //会员登录
   rpc MemberLogin(MemberLoginReq) returns(MemberLoginResp);
-  rpc MemberList(MemberListReq) returns(MemberListResp);
-  rpc MemberUpdate(MemberUpdateReq) returns(MemberUpdateResp);
-  rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);
-  rpc QueryMemberById(MemberByIdReq) returns(MemberListData);
-  rpc MemberUpdatePassword(MemberUpdatePasswordReq) returns(MemberUpdateResp);
+  //更新会员积分
   rpc UpdateMemberIntegration(UpdateMemberIntegrationReq) returns(UpdateMemberIntegrationResp);
-
 }
 
-message GrowthChangeHistoryAddReq {
-  int64      MemberId = 1;
-  int32      ChangeType = 2;
-  int32      ChangeCount = 3;
-  string      OperateMan = 4;
-  string      OperateNote = 5;
-  int32      SourceType = 6;
+
+// 添加会员关注品牌
+message AddMemberBrandAttentionReq {
+  string brand_city = 1; //品牌所在城市
+  int64 brand_id = 2; //品牌id
+  string brand_logo = 3; //品牌Logo
+  string brand_name = 4; //品牌名称
+  int64 member_id = 5; //会员id
 }
 
-message GrowthChangeHistoryAddResp {
+message AddMemberBrandAttentionResp {
   string pong = 1;
 }
 
-message GrowthChangeHistoryListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  int64      MemberId = 3;
-}
-
-message GrowthChangeHistoryListData{
-  int64      Id = 1;
-  int64      MemberId = 2;
-  string      CreateTime = 3;
-  int32      ChangeType = 4;
-  int32      ChangeCount = 5;
-  string      OperateMan = 6;
-  string      OperateNote = 7;
-  int32      SourceType = 8;
-}
-
-message GrowthChangeHistoryListResp {
-  int64 total = 1;
-  repeated  GrowthChangeHistoryListData list = 2;
-}
-
-//查询成长值变化历史记录列表
-service GrowthChangeHistoryService {
-
-  //添加成长值变化历史记录
-  rpc GrowthChangeHistoryAdd(GrowthChangeHistoryAddReq) returns(GrowthChangeHistoryAddResp);
-  //查询成长值变化历史记录列表
-  rpc GrowthChangeHistoryList(GrowthChangeHistoryListReq) returns(GrowthChangeHistoryListResp);
-}
-
-message IntegrationChangeHistoryAddReq {
-  int64      MemberId = 1;
-  int32      ChangeType = 2;
-  int32      ChangeCount = 3;
-  string      OperateMan = 4;
-  string      OperateNote = 5;
-  int32      SourceType = 6;
-}
-
-message IntegrationChangeHistoryAddResp {
-  string pong = 1;
-}
-
-message IntegrationChangeHistoryListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  int64      MemberId = 3;
-}
-
-message IntegrationChangeHistoryListData{
-  int64      Id = 1;
-  int64      MemberId = 2;
-  string  CreateTime = 3;
-  int32      ChangeType = 4;
-  int32      ChangeCount = 5;
-  string      OperateMan = 6;
-  string      OperateNote = 7;
-  int32      SourceType = 8;
-}
-
-message IntegrationChangeHistoryListResp {
-  int64 total = 1;
-  repeated  IntegrationChangeHistoryListData list = 2;
-}
-
-//积分变化历史记录
-service IntegrationChangeHistoryService {
-
-  //添加积分变化历史记录
-  rpc IntegrationChangeHistoryAdd(IntegrationChangeHistoryAddReq) returns(IntegrationChangeHistoryAddResp);
-  //查询积分变化历史记录列表
-  rpc IntegrationChangeHistoryList(IntegrationChangeHistoryListReq) returns(IntegrationChangeHistoryListResp);
-
-}
-
-message IntegrationConsumeSettingAddReq {
-  int32  DeductionPerAmount = 1;
-  int32  MaxPercentPerOrder = 2;
-  int32  UseUnit = 3;
-  int32  CouponStatus = 4;
-}
-
-message IntegrationConsumeSettingAddResp {
-  string pong = 1;
-}
-
-message IntegrationConsumeSettingListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message IntegrationConsumeSettingListData{
-  int64  Id = 1;
-  int32  DeductionPerAmount = 2;
-  int32  MaxPercentPerOrder = 3;
-  int32  UseUnit = 4;
-  int32  CouponStatus = 5;
-}
-
-message IntegrationConsumeSettingListResp {
-  int64 total = 1;
-  repeated  IntegrationConsumeSettingListData list = 2;
-}
-
-message IntegrationConsumeSettingUpdateReq {
-  int64  Id = 1;
-  int32  DeductionPerAmount = 2;
-  int32  MaxPercentPerOrder = 3;
-  int32  UseUnit = 4;
-  int32  CouponStatus = 5;
-}
-
-message IntegrationConsumeSettingUpdateResp {
-  string pong = 1;
-}
-
-message IntegrationConsumeSettingDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message IntegrationConsumeSettingDeleteResp {
-  string pong = 1;
-}
-
-message QueryIntegrationConsumeSettingByIdReq {
-  int64 id = 1;
-}
-
-service IntegrationConsumeSettingService {
-
-  rpc IntegrationConsumeSettingAdd(IntegrationConsumeSettingAddReq) returns(IntegrationConsumeSettingAddResp);
-  rpc IntegrationConsumeSettingList(IntegrationConsumeSettingListReq) returns(IntegrationConsumeSettingListResp);
-  rpc IntegrationConsumeSettingUpdate(IntegrationConsumeSettingUpdateReq) returns(IntegrationConsumeSettingUpdateResp);
-  rpc IntegrationConsumeSettingDelete(IntegrationConsumeSettingDeleteReq) returns(IntegrationConsumeSettingDeleteResp);
-  rpc QueryIntegrationConsumeSettingById(QueryIntegrationConsumeSettingByIdReq) returns(IntegrationConsumeSettingListData);
-
-}
-
-message MemberLevelAddReq {
-  string    LevelName = 2;
-  int32    GrowthPoint = 3;
-  int32    DefaultStatus = 4;
-  int64  FreeFreightPoint = 5;
-  int32    CommentGrowthPoint = 6;
-  int32    IsFreeFreight = 7;
-  int32    IsSignIn = 8;
-  int32    IsComment = 9;
-  int32    IsPromotion = 10;
-  int32    IsMemberPrice = 11;
-  int32    IsBirthday = 12;
-  string    Remark = 13;
-}
-
-message MemberLevelAddResp {
-  string pong = 1;
-}
-
-message MemberLevelListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string Name = 3;
-}
-
-message MemberLevelListData{
-  int64    Id = 1;
-  string    LevelName = 2;
-  int32    GrowthPoint = 3;
-  int32    DefaultStatus = 4;
-  int64  FreeFreightPoint = 5;
-  int32    CommentGrowthPoint = 6;
-  int32    IsFreeFreight = 7;
-  int32    IsSignIn = 8;
-  int32    IsComment = 9;
-  int32    IsPromotion = 10;
-  int32    IsMemberPrice = 11;
-  int32    IsBirthday = 12;
-  string    Remark = 13;
-}
-
-message MemberLevelListResp {
-  int64 total = 1;
-  repeated  MemberLevelListData list = 2;
-}
-
-message MemberLevelUpdateReq {
-  int64    Id = 1;
-  string    LevelName = 2;
-  int32    GrowthPoint = 3;
-  int32    DefaultStatus = 4;
-  int64  FreeFreightPoint = 5;
-  int32    CommentGrowthPoint = 6;
-  int32    IsFreeFreight = 7;
-  int32    IsSignIn = 8;
-  int32    IsComment = 9;
-  int32    IsPromotion = 10;
-  int32    IsMemberPrice = 11;
-  int32    IsBirthday = 12;
-  string    Remark = 13;
-}
-
-message MemberLevelUpdateResp {
-  string pong = 1;
-}
-
-message MemberLevelDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message MemberLevelDeleteResp {
-  string pong = 1;
-}
-service MemberLevelService {
-
-  rpc MemberLevelAdd(MemberLevelAddReq) returns(MemberLevelAddResp);
-  rpc MemberLevelList(MemberLevelListReq) returns(MemberLevelListResp);
-  rpc MemberLevelUpdate(MemberLevelUpdateReq) returns(MemberLevelUpdateResp);
-  rpc MemberLevelDelete(MemberLevelDeleteReq) returns(MemberLevelDeleteResp);
-
-}
-message MemberLoginLogAddReq {
-  int64      MemberId = 2;
-  string  CreateTime = 3;
-  string      MemberIP = 4;
-  string      City = 5;
-  int32      LoginType = 6;
-  string      Province = 7;
-}
-
-message MemberLoginLogAddResp {
-  string pong = 1;
-}
-
-message MemberLoginLogListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  int64 MemberId = 3;
-}
-
-message MemberLoginLogListData{
-  int64      Id = 1;
-  int64      MemberId = 2;
-  string  CreateTime = 3;
-  string      MemberIP = 4;
-  string      City = 5;
-  int32      LoginType = 6;
-  string      Province = 7;
-}
-
-message MemberLoginLogListResp {
-  int64 total = 1;
-  repeated  MemberLoginLogListData list = 2;
-}
-
-
-message MemberLoginLogDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message MemberLoginLogDeleteResp {
-  string pong = 1;
-}
-service MemberLoginLogService {
-
-  rpc MemberLoginLogAdd(MemberLoginLogAddReq) returns(MemberLoginLogAddResp);
-  rpc MemberLoginLogList(MemberLoginLogListReq) returns(MemberLoginLogListResp);
-  rpc MemberLoginLogDelete(MemberLoginLogDeleteReq) returns(MemberLoginLogDeleteResp);
-
-}
-message MemberMemberTagRelationAddReq {
-  int64  MemberId = 2;
-  int64  TagId = 3;
-}
-
-message MemberMemberTagRelationAddResp {
-  string pong = 1;
-}
-
-message MemberMemberTagRelationListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message MemberMemberTagRelationListData{
-  int64  Id = 1;
-  int64  MemberId = 2;
-  int64  TagId = 3;
-}
-
-message MemberMemberTagRelationListResp {
-  int64 total = 1;
-  repeated  MemberMemberTagRelationListData list = 2;
-}
-
-message MemberMemberTagRelationUpdateReq {
-  int64  Id = 1;
-  int64  MemberId = 2;
-  int64  TagId = 3;
-}
-
-message MemberMemberTagRelationUpdateResp {
-  string pong = 1;
-}
-
-message MemberMemberTagRelationDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message MemberMemberTagRelationDeleteResp {
-  string pong = 1;
-}
-service MemberMemberTagRelationService {
-
-  rpc MemberMemberTagRelationAdd(MemberMemberTagRelationAddReq) returns(MemberMemberTagRelationAddResp);
-  rpc MemberMemberTagRelationList(MemberMemberTagRelationListReq) returns(MemberMemberTagRelationListResp);
-  rpc MemberMemberTagRelationUpdate(MemberMemberTagRelationUpdateReq) returns(MemberMemberTagRelationUpdateResp);
-  rpc MemberMemberTagRelationDelete(MemberMemberTagRelationDeleteReq) returns(MemberMemberTagRelationDeleteResp);
-
-}
-message MemberProductCategoryRelationAddReq {
-  int64  MemberId = 2;
-  int64  ProductCategoryId = 3;
-}
-
-message MemberProductCategoryRelationAddResp {
-  string pong = 1;
-}
-
-message MemberProductCategoryRelationListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message MemberProductCategoryRelationListData{
-  int64  Id = 1;
-  int64  MemberId = 2;
-  int64  ProductCategoryId = 3;
-}
-
-message MemberProductCategoryRelationListResp {
-  int64 total = 1;
-  repeated  MemberProductCategoryRelationListData list = 2;
-}
-
-message MemberProductCategoryRelationUpdateReq {
-  int64  Id = 1;
-  int64  MemberId = 2;
-  int64  ProductCategoryId = 3;
-}
-
-message MemberProductCategoryRelationUpdateResp {
-  string pong = 1;
-}
-
-message MemberProductCategoryRelationDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message MemberProductCategoryRelationDeleteResp {
-  string pong = 1;
-}
-
-service MemberProductCategoryRelationService {
-
-  rpc MemberProductCategoryRelationAdd(MemberProductCategoryRelationAddReq) returns(MemberProductCategoryRelationAddResp);
-  rpc MemberProductCategoryRelationList(MemberProductCategoryRelationListReq) returns(MemberProductCategoryRelationListResp);
-  rpc MemberProductCategoryRelationUpdate(MemberProductCategoryRelationUpdateReq) returns(MemberProductCategoryRelationUpdateResp);
-  rpc MemberProductCategoryRelationDelete(MemberProductCategoryRelationDeleteReq) returns(MemberProductCategoryRelationDeleteResp);
-
-
-}
-message MemberReceiveAddressAddReq {
-  int64    MemberId = 2;
-  string  MemberName = 3;
-  string  PhoneNumber = 4;
-  int32    DefaultStatus = 5;
-  string  PostCode = 6;
-  string  Province = 7;
-  string  City = 8;
-  string  Region = 9;
-  string  DetailAddress = 10;
-}
-
-message MemberReceiveAddressAddResp {
-  string pong = 1;
-}
-
-message MemberReceiveAddressListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  int64 MemberId = 3;
-}
-
-message MemberReceiveAddressListData{
-  int64    Id = 1;
-  int64    MemberId = 2;
-  string  MemberName = 3;
-  string  PhoneNumber = 4;
-  int32    DefaultStatus = 5;
-  string  PostCode = 6;
-  string  Province = 7;
-  string  City = 8;
-  string  Region = 9;
-  string  DetailAddress = 10;
-  string  CreateTime = 11;
-  string  UpdateTime = 12;
-}
-
-message MemberReceiveAddressListResp {
-  int64 total = 1;
-  repeated  MemberReceiveAddressListData list = 2;
-}
-
-message MemberReceiveAddressUpdateReq {
-  int64    Id = 1;
-  int64    MemberId = 2;
-  string  MemberName = 3;
-  string  PhoneNumber = 4;
-  int32    DefaultStatus = 5;
-  string  PostCode = 6;
-  string  Province = 7;
-  string  City = 8;
-  string  Region = 9;
-  string  DetailAddress = 10;
-}
-
-message MemberReceiveAddressUpdateResp {
-  string pong = 1;
-}
-
-message MemberReceiveAddressDeleteReq {
-  int64 id = 1;
-  int64    MemberId = 2;
-}
-
-message MemberReceiveAddressDeleteResp {
-  string pong = 1;
-}
-
-
-service MemberReceiveAddressService {
-
-  rpc MemberReceiveAddressAdd(MemberReceiveAddressAddReq) returns(MemberReceiveAddressAddResp);
-  rpc MemberReceiveAddressList(MemberReceiveAddressListReq) returns(MemberReceiveAddressListResp);
-  rpc MemberReceiveAddressUpdate(MemberReceiveAddressUpdateReq) returns(MemberReceiveAddressUpdateResp);
-  rpc MemberReceiveAddressDelete(MemberReceiveAddressDeleteReq) returns(MemberReceiveAddressDeleteResp);
-  rpc MemberReceiveAddressQueryDetail(MemberReceiveAddressQueryDetailReq) returns(MemberReceiveAddressQueryDetailResp);
-
-}
-message MemberReceiveAddressQueryDetailReq {
-  int64 UserId = 1;
-  int64 AddressID = 2;
-}
-
-message MemberReceiveAddressQueryDetailResp {
-  int64    Id = 1;
-  int64    MemberId = 2;
-  string  MemberName = 3;
-  string  PhoneNumber = 4;
-  int32    DefaultStatus = 5;
-  string  PostCode = 6;
-  string  Province = 7;
-  string  City = 8;
-  string  Region = 9;
-  string  DetailAddress = 10;
-  string  CreateTime = 11;
-  string  UpdateTime = 12;
-}
-
-message MemberRuleSettingAddReq {
-  int32    ContinueSignDay = 1;
-  int32    ContinueSignPoint = 2;
-  int64  ConsumePerPoint = 3;
-  int64  LowOrderAmount = 4;
-  int32    MaxPointPerOrder = 5;
-  int32    RuleType = 6;
-  string    CreateBy = 7;
-}
-
-message MemberRuleSettingAddResp {
-  string pong = 1;
-}
-
-message MemberRuleSettingListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message MemberRuleSettingListData{
-  int64    Id = 1;
-  int32    ContinueSignDay = 2;
-  int32    ContinueSignPoint = 3;
-  int64  ConsumePerPoint = 4;
-  int64  LowOrderAmount = 5;
-  int32    MaxPointPerOrder = 6;
-  int32    RuleType = 7;
-  string    CreateBy = 8;
-  string    CreateTime = 9;
-  string    UpdateBy = 10;
-  string    UpdateTime = 11;
-}
-
-message MemberRuleSettingListResp {
-  int64 total = 1;
-  repeated  MemberRuleSettingListData list = 2;
-}
-
-message MemberRuleSettingUpdateReq {
-  int64    Id = 1;
-  int32    ContinueSignDay = 2;
-  int32    ContinueSignPoint = 3;
-  int64  ConsumePerPoint = 4;
-  int64  LowOrderAmount = 5;
-  int32    MaxPointPerOrder = 6;
-  int32    RuleType = 7;
-  string    UpdateBy = 8;
-}
-
-message MemberRuleSettingUpdateResp {
-  string pong = 1;
-}
-
-message MemberRuleSettingDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message MemberRuleSettingDeleteResp {
-  string pong = 1;
-}
-service MemberRuleSettingService {
-
-  rpc MemberRuleSettingAdd(MemberRuleSettingAddReq) returns(MemberRuleSettingAddResp);
-  rpc MemberRuleSettingList(MemberRuleSettingListReq) returns(MemberRuleSettingListResp);
-  rpc MemberRuleSettingUpdate(MemberRuleSettingUpdateReq) returns(MemberRuleSettingUpdateResp);
-  rpc MemberRuleSettingDelete(MemberRuleSettingDeleteReq) returns(MemberRuleSettingDeleteResp);
-
-
-}
-message MemberStatisticsInfoAddReq {
-  int64      MemberId = 2;
-  int64    ConsumeAmount = 3;
-  int32      OrderCount = 4;
-  int32      CouponCount = 5;
-  int32      CommentCount = 6;
-  int32      ReturnOrderCount = 7;
-  int32      LoginCount = 8;
-  int32      AttendCount = 9;
-  int32      FansCount = 10;
-  int32      CollectProductCount = 11;
-  int32      CollectSubjectCount = 12;
-  int32      CollectTopicCount = 13;
-  int32      CollectCommentCount = 14;
-  int32      InviteFriendCount = 15;
-  string  RecentOrderTime = 16;
-}
-
-message MemberStatisticsInfoAddResp {
-  string pong = 1;
-}
-
-message MemberStatisticsInfoListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message MemberStatisticsInfoListData{
-  int64      Id = 1;
-  int64      MemberId = 2;
-  int64    ConsumeAmount = 3;
-  int32      OrderCount = 4;
-  int32      CouponCount = 5;
-  int32      CommentCount = 6;
-  int32      ReturnOrderCount = 7;
-  int32      LoginCount = 8;
-  int32      AttendCount = 9;
-  int32      FansCount = 10;
-  int32      CollectProductCount = 11;
-  int32      CollectSubjectCount = 12;
-  int32      CollectTopicCount = 13;
-  int32      CollectCommentCount = 14;
-  int32      InviteFriendCount = 15;
-  string  RecentOrderTime = 16;
-}
-
-message MemberStatisticsInfoListResp {
-  int64 total = 1;
-  repeated  MemberStatisticsInfoListData list = 2;
-}
-
-message MemberStatisticsInfoUpdateReq {
-  int64      Id = 1;
-  int64      MemberId = 2;
-  int64    ConsumeAmount = 3;
-  int32      OrderCount = 4;
-  int32      CouponCount = 5;
-  int32      CommentCount = 6;
-  int32      ReturnOrderCount = 7;
-  int32      LoginCount = 8;
-  int32      AttendCount = 9;
-  int32      FansCount = 10;
-  int32      CollectProductCount = 11;
-  int32      CollectSubjectCount = 12;
-  int32      CollectTopicCount = 13;
-  int32      CollectCommentCount = 14;
-  int32      InviteFriendCount = 15;
-  string  RecentOrderTime = 16;
-}
-
-message MemberStatisticsInfoUpdateResp {
-  string pong = 1;
-}
-
-message MemberStatisticsInfoDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message MemberStatisticsInfoDeleteResp {
-  string pong = 1;
-}
-
-service MemberStatisticsInfoService {
-
-  rpc MemberStatisticsInfoAdd(MemberStatisticsInfoAddReq) returns(MemberStatisticsInfoAddResp);
-  rpc MemberStatisticsInfoList(MemberStatisticsInfoListReq) returns(MemberStatisticsInfoListResp);
-  rpc MemberStatisticsInfoUpdate(MemberStatisticsInfoUpdateReq) returns(MemberStatisticsInfoUpdateResp);
-  rpc MemberStatisticsInfoDelete(MemberStatisticsInfoDeleteReq) returns(MemberStatisticsInfoDeleteResp);
-
-}
-message MemberTagAddReq {
-  string    Name = 2;
-  int32    FinishOrderCount = 3;
-  int64  FinishOrderAmount = 4;
-}
-
-message MemberTagAddResp {
-  string pong = 1;
-}
-
-message MemberTagListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message MemberTagListData{
-  int64    Id = 1;
-  string    Name = 2;
-  int32    FinishOrderCount = 3;
-  int64  FinishOrderAmount = 4;
-}
-
-message MemberTagListResp {
-  int64 total = 1;
-  repeated  MemberTagListData list = 2;
-}
-
-message MemberTagUpdateReq {
-  int64    Id = 1;
-  string    Name = 2;
-  int32    FinishOrderCount = 3;
-  int64  FinishOrderAmount = 4;
-}
-
-message MemberTagUpdateResp {
-  string pong = 1;
-}
-
-message MemberTagDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message MemberTagDeleteResp {
-  string pong = 1;
-}
-
-service MemberTagService {
-
-
-  rpc MemberTagAdd(MemberTagAddReq) returns(MemberTagAddResp);
-  rpc MemberTagList(MemberTagListReq) returns(MemberTagListResp);
-  rpc MemberTagUpdate(MemberTagUpdateReq) returns(MemberTagUpdateResp);
-  rpc MemberTagDelete(MemberTagDeleteReq) returns(MemberTagDeleteResp);
-
-}
-message MemberTaskAddReq {
-  string  TaskName = 1;
-  int32    TaskGrowth = 2;
-  int32    TaskIntegral = 3;
-  int32    TaskType = 4;
-  string    CreateBy = 5;
-}
-
-message MemberTaskAddResp {
-  string pong = 1;
-}
-
-message MemberTaskListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-}
-
-message MemberTaskListData{
-  int64    Id = 1;
-  string  TaskName = 2;
-  int32    TaskGrowth = 3;
-  int32    TaskIntegral = 4;
-  int32    TaskType = 5;
-  string    CreateTime = 6;
-  string    CreateBy = 7;
-  string    UpdateTime = 8;
-  string    UpdateBy = 9;
-}
-
-message MemberTaskListResp {
-  int64 total = 1;
-  repeated  MemberTaskListData list = 2;
-}
-
-message MemberTaskUpdateReq {
-  int64    Id = 1;
-  string  TaskName = 2;
-  int32   TaskGrowth = 3;
-  int32    TaskIntegral = 4;
-  int32    TaskType = 5;
-  string    UpdateBy = 6;
-}
-
-message MemberTaskUpdateResp {
-  string pong = 1;
-}
-
-message MemberTaskDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message MemberTaskDeleteResp {
-  string pong = 1;
-}
-service MemberTaskService {
-
-  rpc MemberTaskAdd(MemberTaskAddReq) returns(MemberTaskAddResp);
-  rpc MemberTaskList(MemberTaskListReq) returns(MemberTaskListResp);
-  rpc MemberTaskUpdate(MemberTaskUpdateReq) returns(MemberTaskUpdateResp);
-  rpc MemberTaskDelete(MemberTaskDeleteReq) returns(MemberTaskDeleteResp);
-
-}
-//用户收藏
-message MemberProductCollectionAddReq {
-  int64 Id = 1; //编号
-  int64 MemberId = 2; //会员id
-  string MemberNickName = 3; //会员姓名
-  string MemberIcon = 4; //会员头像
-  int64 ProductId = 5; //商品id
-  string ProductName = 6; //商品名称
-  string ProductPic = 7; //商品图片
-  string ProductSubTitle = 8; //商品标题
-  int64 ProductPrice = 9; //商品价格
-  string CreateTime = 10; //收藏时间
-
-}
-
-message MemberProductCollectionAddResp {
-  string pong = 1;
-}
-
-message MemberProductCollectionDeleteReq {
+// 删除会员关注品牌
+message DeleteMemberBrandAttentionReq {
   repeated int64 ids = 1;
   int64 MemberId = 2; //会员id
 }
 
-message MemberProductCollectionDeleteResp {
+message DeleteMemberBrandAttentionResp {
   string pong = 1;
 }
 
+// 查询会员关注品牌详情
+message QueryMemberBrandAttentionDetailReq {
+    int64 id = 1;
+}
 
-message MemberProductCollectionListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  int64 MemberId = 3; //会员id
-  int64 ProductId = 4; //商品id
+message QueryMemberBrandAttentionDetailResp {
+  string brand_city = 1; //品牌所在城市
+  int64 brand_id = 2; //品牌id
+  string brand_logo = 3; //品牌Logo
+  string brand_name = 4; //品牌名称
+  string create_time = 5; //关注时间
+  int64 id = 6; //
+  string member_icon = 7; //会员头像
+  int64 member_id = 8; //会员id
+  string member_nick_name = 9; //会员姓名
 
 }
 
-message MemberProductCollectionListData {
-  int64 Id = 1; //编号
-  int64 MemberId = 2; //会员id
-  string MemberNickName = 3; //会员姓名
-  string MemberIcon = 4; //会员头像
-  int64 ProductId = 5; //商品id
-  string ProductName = 6; //商品名称
-  string ProductPic = 7; //商品图片
-  string ProductSubTitle = 8; //商品标题
-  int64 ProductPrice = 9; //商品价格
-  string CreateTime = 10; //收藏时间
-
-}
-
-message MemberProductCollectionListResp {
-  int64 total = 1;
-  repeated  MemberProductCollectionListData list = 2;
-}
-service MemberProductCollectionService {
-  //添加商品收藏
-  rpc MemberProductCollectionAdd(MemberProductCollectionAddReq) returns (MemberProductCollectionAddResp){}
-  //删除商品收藏/清空当前用户商品收藏列表
-  rpc MemberProductCollectionDelete(MemberProductCollectionDeleteReq) returns (MemberProductCollectionDeleteResp){}
-  //分页查询商品收藏列表
-  rpc MemberProductCollectionList(MemberProductCollectionListReq) returns (MemberProductCollectionListResp){}
-
-}
-
-//用户浏览记录
-message MemberReadHistoryAddReq {
-  int64 Id = 1; //编号
-  int64 MemberId = 2; //会员id
-  string MemberNickName = 3; //会员姓名
-  string MemberIcon = 4; //会员头像
-  int64 ProductId = 5; //商品id
-  string ProductName = 6; //商品名称
-  string ProductPic = 7; //商品图片
-  string ProductSubTitle = 8; //商品标题
-  int64 ProductPrice = 9; //商品价格
-  string CreateTime = 10; //浏览时间
-
-}
-
-message MemberReadHistoryAddResp {
-  string pong = 1;
-}
-
-message MemberReadHistoryDeleteReq {
-  repeated int64 ids = 1;
-  int64 MemberId = 2; //会员id
-}
-
-message MemberReadHistoryDeleteResp {
-  string pong = 1;
-}
-
-
-
-message MemberReadHistoryListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  int64 MemberId = 3; //会员id
-
-}
-
-message MemberReadHistoryListData {
-  int64 Id = 1; //编号
-  int64 MemberId = 2; //会员id
-  string MemberNickName = 3; //会员姓名
-  string MemberIcon = 4; //会员头像
-  int64  ProductId = 5; //商品id
-  string ProductName = 6; //商品名称
-  string ProductPic = 7; //商品图片
-  string ProductSubTitle = 8; //商品标题
-  int64 ProductPrice = 9; //商品价格
-  string CreateTime = 10; //浏览时间
-
-}
-
-message MemberReadHistoryListResp {
-  int64 total = 1;
-  repeated  MemberReadHistoryListData list = 2;
-}
-
-service MemberReadHistoryService {
-  //创建浏览记录
-  rpc MemberReadHistoryAdd(MemberReadHistoryAddReq) returns (MemberReadHistoryAddResp){}
-  //清空浏览记录/删除浏览记录
-  rpc MemberReadHistoryDelete(MemberReadHistoryDeleteReq) returns (MemberReadHistoryDeleteResp){}
-  //获取浏览记录
-  rpc MemberReadHistoryList(MemberReadHistoryListReq) returns (MemberReadHistoryListResp){}
-}
-
-//会员关注的品牌
-message MemberBrandAttentionAddReq {
-  int64 BrandId = 1; //品牌id
-  string BrandName = 2; //品牌名称
-  string BrandLogo = 3; //品牌Logo
-  string BrandCity = 4; //品牌所在城市
-  int64 MemberId = 5; //会员id
-}
-
-message MemberBrandAttentionAddResp {
-  string pong = 1;
-}
-
-message MemberBrandAttentionDeleteReq {
-  repeated int64 BrandIds = 1;
-  int64 MemberId = 2; //会员id
-}
-
-message MemberBrandAttentionDeleteResp {
-  string pong = 1;
-
-}
-
-message MemberBrandAttentionListReq {
-  int64 MemberId = 1; //会员id
-
+// 分页查询会员关注品牌列表
+message QueryMemberBrandAttentionListReq {
+  int64 member_id = 1; //会员id
+  
 }
 
 message MemberBrandAttentionListData {
-  int64 Id = 1; //
-  int64 MemberId = 2; //会员id
-  string MemberNickName = 3; //会员姓名
-  string MemberIcon = 4; //会员头像
-  int64 BrandId = 5; //品牌id
-  string BrandName = 6; //品牌名称
-  string BrandLogo = 7; //品牌Logo
-  string BrandCity = 8; //品牌所在城市
-  string CreateTime = 9; //关注时间
+  string brand_city = 1; //品牌所在城市
+  int64 brand_id = 2; //品牌id
+  string brand_logo = 3; //品牌Logo
+  string brand_name = 4; //品牌名称
+  string create_time = 5; //关注时间
+  int64 id = 6; //
 
 }
 
-message MemberBrandAttentionListResp {
+message QueryMemberBrandAttentionListResp {
   int64 total = 1;
   repeated  MemberBrandAttentionListData list = 2;
 }
 
-service MemberAttentionService {
-  //添加品牌关注
-  rpc MemberBrandAttentionAdd(MemberBrandAttentionAddReq) returns (MemberBrandAttentionAddResp){}
-  //取消品牌关注/清空当前用户品牌关注列表
-  rpc MemberBrandAttentionDelete(MemberBrandAttentionDeleteReq) returns (MemberBrandAttentionDeleteResp){}
-  //分页查询当前用户品牌关注列表
-  rpc MemberBrandAttentionList(MemberBrandAttentionListReq) returns (MemberBrandAttentionListResp){}
+// 会员关注品牌
+service MemberBrandAttentionService {
+  // 添加会员关注品牌
+  rpc AddMemberBrandAttention(AddMemberBrandAttentionReq) returns (AddMemberBrandAttentionResp){}
+  // 取消品牌关注/清空当前用户品牌关注列表
+  rpc DeleteMemberBrandAttention(DeleteMemberBrandAttentionReq) returns (DeleteMemberBrandAttentionResp){}
+  // 查询会员关注品牌详情
+   rpc QueryMemberBrandAttentionDetail(QueryMemberBrandAttentionDetailReq) returns (QueryMemberBrandAttentionDetailResp){}
+  // 查询会员关注品牌列表
+  rpc QueryMemberBrandAttentionList(QueryMemberBrandAttentionListReq) returns (QueryMemberBrandAttentionListResp){}
+
+
+}
+
+
+// 添加会员等级表
+message AddMemberLevelReq {
+  int32 comment_growth_point = 1; //每次评价获取的成长值
+  int32 default_status = 2; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 3; //免运费标准
+  int32 growth_point = 4; //成长点
+  string remark = 5; //备注
+  int32 is_birthday = 6; //是否有生日特权
+  int32 is_comment = 7; //是否有评论获奖励特权
+  int32 is_free_freight = 8; //是否有免邮特权
+  int32 is_member_price = 9; //是否有会员价格特权
+  int32 is_promotion = 10; //是否有专享活动特权
+  int32 is_sign_in = 11; //是否有签到特权
+  string level_name = 12; //等级名称
+
+
+}
+
+message AddMemberLevelResp {
+  string pong = 1;
+}
+
+// 删除会员等级表
+message DeleteMemberLevelReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberLevelResp {
+  string pong = 1;
+}
+
+// 更新会员等级表
+message UpdateMemberLevelReq {
+  int32 comment_growth_point = 1; //每次评价获取的成长值
+  int32 default_status = 2; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 3; //免运费标准
+  int32 growth_point = 4; //成长点
+  int64 id = 5; //
+  int32 is_birthday = 6; //是否有生日特权
+  int32 is_comment = 7; //是否有评论获奖励特权
+  int32 is_free_freight = 8; //是否有免邮特权
+  int32 is_member_price = 9; //是否有会员价格特权
+  int32 is_promotion = 10; //是否有专享活动特权
+  int32 is_sign_in = 11; //是否有签到特权
+  string level_name = 12; //等级名称
+  string remark = 13; //备注
+
+}
+
+message UpdateMemberLevelResp {
+  string pong = 1;
+}
+
+// 更新会员等级表状态
+message UpdateMemberLevelStatusReq {
+  int32 default_status = 1; //是否为默认等级：0->不是；1->是
+  int64 id = 2; //
+
+}
+
+message UpdateMemberLevelStatusResp {
+  string pong = 1;
+}
+
+// 查询会员等级表详情
+message QueryMemberLevelDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberLevelDetailResp {
+  int32 comment_growth_point = 1; //每次评价获取的成长值
+  int32 default_status = 2; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 3; //免运费标准
+  int32 growth_point = 4; //成长点
+  int64 id = 5; //
+  int32 is_birthday = 6; //是否有生日特权
+  int32 is_comment = 7; //是否有评论获奖励特权
+  int32 is_free_freight = 8; //是否有免邮特权
+  int32 is_member_price = 9; //是否有会员价格特权
+  int32 is_promotion = 10; //是否有专享活动特权
+  int32 is_sign_in = 11; //是否有签到特权
+  string level_name = 12; //等级名称
+  string remark = 13; //备注
+
+}
+
+// 分页查询会员等级表列表
+message QueryMemberLevelListReq {
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string level_name = 3; //等级名称
+}
+
+message MemberLevelListData {
+  int32 comment_growth_point = 1; //每次评价获取的成长值
+  int32 default_status = 2; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 3; //免运费标准
+  int32 growth_point = 4; //成长点
+  int64 id = 5; //
+  int32 is_birthday = 6; //是否有生日特权
+  int32 is_comment = 7; //是否有评论获奖励特权
+  int32 is_free_freight = 8; //是否有免邮特权
+  int32 is_member_price = 9; //是否有会员价格特权
+  int32 is_promotion = 10; //是否有专享活动特权
+  int32 is_sign_in = 11; //是否有签到特权
+  string level_name = 12; //等级名称
+  string remark = 13; //备注
+
+}
+
+message QueryMemberLevelListResp {
+  int64 total = 1;
+  repeated  MemberLevelListData list = 2;
+}
+
+// 会员等级表
+service MemberLevelService {
+  // 添加会员等级表
+  rpc AddMemberLevel(AddMemberLevelReq) returns (AddMemberLevelResp){}
+  // 删除会员等级表
+  rpc DeleteMemberLevel(DeleteMemberLevelReq) returns (DeleteMemberLevelResp){}
+  // 更新会员等级表
+  rpc UpdateMemberLevel(UpdateMemberLevelReq) returns (UpdateMemberLevelResp ){}
+  // 更新会员等级表状态
+  rpc UpdateMemberLevelStatus(UpdateMemberLevelStatusReq) returns (UpdateMemberLevelStatusResp ){}
+  // 查询会员等级表详情
+   rpc QueryMemberLevelDetail(QueryMemberLevelDetailReq) returns (QueryMemberLevelDetailResp){}
+  // 查询会员等级表列表
+  rpc QueryMemberLevelList(QueryMemberLevelListReq) returns (QueryMemberLevelListResp){}
+
+
+}
+
+
+
+// 删除会员登录记录
+message DeleteMemberLoginLogReq {
+  repeated int64 ids = 1;
+  int64 member_id = 2; //会员id
+}
+
+message DeleteMemberLoginLogResp {
+  string pong = 1;
+}
+
+
+
+// 分页查询会员登录记录列表
+message QueryMemberLoginLogListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 login_type = 3; //登录类型：0->PC；1->android;2->ios;3->小程序
+  int64 member_id = 4; //会员id
+
+}
+
+message MemberLoginLogListData {
+  string city = 1; //登录城市
+  string create_time = 2; //登录时间
+  int64 id = 3; //
+  int32 login_type = 4; //登录类型：0->PC；1->android;2->ios;3->小程序
+  int64 member_id = 5; //会员id
+  string member_ip = 6; //登录ip
+  string province = 7; //登录省份
+
+}
+
+message QueryMemberLoginLogListResp {
+  int64 total = 1;
+  repeated  MemberLoginLogListData list = 2;
+}
+
+// 会员登录记录
+service MemberLoginLogService {
+  // 删除会员登录记录
+  rpc DeleteMemberLoginLog(DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp){}
+  // 查询会员登录记录列表
+  rpc QueryMemberLoginLogList(QueryMemberLoginLogListReq) returns (QueryMemberLoginLogListResp){}
+
+
+}
+
+
+// 添加用户和标签关系表
+message AddMemberMemberTagRelationReq {
+  int64 member_id = 1; //会员id
+  int64 tag_id = 2; //标签id
+
+}
+
+message AddMemberMemberTagRelationResp {
+  string pong = 1;
+}
+
+// 删除用户和标签关系表
+message DeleteMemberMemberTagRelationReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberMemberTagRelationResp {
+  string pong = 1;
+}
+
+
+// 分页查询用户和标签关系表列表
+message QueryMemberMemberTagRelationListReq {
+  int64 member_id = 2; //会员id
+}
+
+message MemberMemberTagRelationListData {
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int64 tag_id = 3; //标签id
+
+}
+
+message QueryMemberMemberTagRelationListResp {
+  int64 total = 1;
+  repeated  MemberMemberTagRelationListData list = 2;
+}
+
+// 用户和标签关系表
+service MemberMemberTagRelationService {
+  // 添加用户和标签关系表
+  rpc AddMemberMemberTagRelation(AddMemberMemberTagRelationReq) returns (AddMemberMemberTagRelationResp){}
+  // 删除用户和标签关系表
+  rpc DeleteMemberMemberTagRelation(DeleteMemberMemberTagRelationReq) returns (DeleteMemberMemberTagRelationResp){}
+  // 查询用户和标签关系表列表
+  rpc QueryMemberMemberTagRelationList(QueryMemberMemberTagRelationListReq) returns (QueryMemberMemberTagRelationListResp){}
+
+
+}
+
+
+// 添加会员与产品分类关系表（用户喜欢的分类）
+message AddMemberProductCategoryRelationReq {
+  int64 member_id = 1; //会员id
+  int64 product_category_id = 2; //商品分类id
+
+}
+
+message AddMemberProductCategoryRelationResp {
+  string pong = 1;
+}
+
+
+// 分页查询会员与产品分类关系表（用户喜欢的分类）列表
+message QueryMemberProductCategoryRelationListReq {
+  int64 member_id = 1; //会员id
+}
+
+message MemberProductCategoryRelationListData {
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int64 product_category_id = 3; //商品分类id
+
+}
+
+message QueryMemberProductCategoryRelationListResp {
+  int64 total = 1;
+  repeated  MemberProductCategoryRelationListData list = 2;
+}
+
+// 会员与产品分类关系表（用户喜欢的分类）
+service MemberProductCategoryRelationService {
+  // 添加会员与产品分类关系表（用户喜欢的分类）
+  rpc AddMemberProductCategoryRelation(AddMemberProductCategoryRelationReq) returns (AddMemberProductCategoryRelationResp){}
+  // 查询会员与产品分类关系表（用户喜欢的分类）列表
+  rpc QueryMemberProductCategoryRelationList(QueryMemberProductCategoryRelationListReq) returns (QueryMemberProductCategoryRelationListResp){}
+
+}
+
+
+// 添加用户收藏的商品
+message AddMemberProductCollectionReq {
+  int64 product_price = 1; //商品价格
+  string product_sub_title = 2; //商品标题
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+
+
+}
+
+message AddMemberProductCollectionResp {
+  string pong = 1;
+}
+
+// 删除用户收藏的商品
+message DeleteMemberProductCollectionReq {
+  repeated int64 ids = 1;
+  int64 MemberId = 2; //会员id
+}
+
+message DeleteMemberProductCollectionResp {
+  string pong = 1;
+}
+
+// 查询用户收藏的商品详情
+message QueryMemberProductCollectionDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberProductCollectionDetailResp {
+  string create_time = 1; //收藏时间
+  int64 id = 2; //
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+  int64 product_price = 9; //商品价格
+  string product_sub_title = 10; //商品标题
+
+}
+
+// 分页查询用户收藏的商品列表
+message QueryMemberProductCollectionListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 member_id = 3; //会员id
+  int64 product_id = 4; //商品id
+
+}
+
+message MemberProductCollectionListData {
+  string create_time = 1; //收藏时间
+  int64 id = 2; //
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+  int64 product_price = 9; //商品价格
+  string product_sub_title = 10; //商品标题
+
+}
+
+message QueryMemberProductCollectionListResp {
+  int64 total = 1;
+  repeated  MemberProductCollectionListData list = 2;
+}
+
+// 用户收藏的商品
+service MemberProductCollectionService {
+  // 添加用户收藏的商品
+  rpc AddMemberProductCollection(AddMemberProductCollectionReq) returns (AddMemberProductCollectionResp){}
+  //删除商品收藏/清空当前用户商品收藏列表
+  rpc DeleteMemberProductCollection(DeleteMemberProductCollectionReq) returns (DeleteMemberProductCollectionResp){}
+  // 查询用户收藏的商品详情
+   rpc QueryMemberProductCollectionDetail(QueryMemberProductCollectionDetailReq) returns (QueryMemberProductCollectionDetailResp){}
+  // 查询用户收藏的商品列表
+  rpc QueryMemberProductCollectionList(QueryMemberProductCollectionListReq) returns (QueryMemberProductCollectionListResp){}
+
+
+}
+
+
+// 添加用户商品浏览历史记录
+message AddMemberReadHistoryReq {
+  int64 product_price = 1; //商品价格
+  string product_sub_title = 2; //商品标题
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+
+
+}
+
+message AddMemberReadHistoryResp {
+  string pong = 1;
+}
+
+// 删除用户商品浏览历史记录
+message DeleteMemberReadHistoryReq {
+  repeated int64 ids = 1;
+  int64 MemberId = 2; //会员id
+}
+
+message DeleteMemberReadHistoryResp {
+  string pong = 1;
+}
+
+// 查询用户商品浏览历史记录详情
+message QueryMemberReadHistoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberReadHistoryDetailResp {
+  string create_time = 1; //浏览时间
+  int64 id = 2; //
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+  int64 product_price = 9; //商品价格
+  string product_sub_title = 10; //商品标题
+
+}
+
+// 分页查询用户商品浏览历史记录列表
+message QueryMemberReadHistoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 member_id = 4; //会员id
+
+}
+
+message MemberReadHistoryListData {
+  string create_time = 1; //浏览时间
+  int64 id = 2; //
+  string member_icon = 3; //会员头像
+  int64 member_id = 4; //会员id
+  string member_nick_name = 5; //会员姓名
+  int64 product_id = 6; //商品id
+  string product_name = 7; //商品名称
+  string product_pic = 8; //商品图片
+  int64 product_price = 9; //商品价格
+  string product_sub_title = 10; //商品标题
+
+}
+
+message QueryMemberReadHistoryListResp {
+  int64 total = 1;
+  repeated  MemberReadHistoryListData list = 2;
+}
+
+// 用户商品浏览历史记录
+service MemberReadHistoryService {
+  // 添加用户商品浏览历史记录
+  rpc AddMemberReadHistory(AddMemberReadHistoryReq) returns (AddMemberReadHistoryResp){}
+  //清空浏览记录/删除浏览记录
+  rpc DeleteMemberReadHistory(DeleteMemberReadHistoryReq) returns (DeleteMemberReadHistoryResp){}
+  // 查询用户商品浏览历史记录详情
+   rpc QueryMemberReadHistoryDetail(QueryMemberReadHistoryDetailReq) returns (QueryMemberReadHistoryDetailResp){}
+  // 查询用户商品浏览历史记录列表
+  rpc QueryMemberReadHistoryList(QueryMemberReadHistoryListReq) returns (QueryMemberReadHistoryListResp){}
+
+
+}
+
+
+// 添加会员收货地址表
+message AddMemberReceiveAddressReq {
+  string city = 1; //城市
+  string province = 2; //省份/直辖市
+  int32 default_status = 3; //是否为默认
+  string detail_address = 4; //详细地址(街道)
+  string region = 5; //区
+  int64 member_id = 6; //会员id
+  string member_name = 7; //收货人名称
+  string phone_number = 8; //收货人电话
+  string post_code = 9; //邮政编码
+
+
+}
+
+message AddMemberReceiveAddressResp {
+  string pong = 1;
+}
+
+// 删除会员收货地址表
+message DeleteMemberReceiveAddressReq {
+  repeated int64 ids = 1;
+  int64 member_id = 2; //会员id
+}
+
+message DeleteMemberReceiveAddressResp {
+  string pong = 1;
+}
+
+// 更新会员收货地址表
+message UpdateMemberReceiveAddressReq {
+  string city = 1; //城市
+  string region = 2; //区
+  int32 default_status = 3; //是否为默认
+  string detail_address = 4; //详细地址(街道)
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_name = 7; //收货人名称
+  string phone_number = 8; //收货人电话
+  string post_code = 9; //邮政编码
+  string province = 10; //省份/直辖市
+
+
+}
+
+message UpdateMemberReceiveAddressResp {
+  string pong = 1;
+}
+
+// 更新会员收货地址表状态
+message UpdateMemberReceiveAddressStatusReq {
+  int32 default_status = 1; //是否为默认
+  int64 id = 2; //
+  int64 member_id = 3; //会员id
+
+}
+
+message UpdateMemberReceiveAddressStatusResp {
+  string pong = 1;
+}
+
+// 查询会员收货地址表详情
+message QueryMemberReceiveAddressDetailReq {
+  int64 id = 1;
+  int64 member_id = 3; //会员id
+}
+
+message QueryMemberReceiveAddressDetailResp {
+  string city = 1; //城市
+  string create_time = 2; //创建时间
+  int32 default_status = 3; //是否为默认
+  string detail_address = 4; //详细地址(街道)
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_name = 7; //收货人名称
+  string phone_number = 8; //收货人电话
+  string post_code = 9; //邮政编码
+  string province = 10; //省份/直辖市
+  string region = 11; //区
+  string update_time = 12; //更新时间
+
+}
+
+// 分页查询会员收货地址表列表
+message QueryMemberReceiveAddressListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 member_id = 3; //会员id
+}
+
+message MemberReceiveAddressListData {
+  string city = 1; //城市
+  string create_time = 2; //创建时间
+  int32 default_status = 3; //是否为默认
+  string detail_address = 4; //详细地址(街道)
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_name = 7; //收货人名称
+  string phone_number = 8; //收货人电话
+  string post_code = 9; //邮政编码
+  string province = 10; //省份/直辖市
+  string region = 11; //区
+  string update_time = 12; //更新时间
+
+}
+
+message QueryMemberReceiveAddressListResp {
+  int64 total = 1;
+  repeated  MemberReceiveAddressListData list = 2;
+}
+
+// 会员收货地址表
+service MemberReceiveAddressService {
+  // 添加会员收货地址表
+  rpc AddMemberReceiveAddress(AddMemberReceiveAddressReq) returns (AddMemberReceiveAddressResp){}
+  // 删除会员收货地址表
+  rpc DeleteMemberReceiveAddress(DeleteMemberReceiveAddressReq) returns (DeleteMemberReceiveAddressResp){}
+  // 更新会员收货地址表
+  rpc UpdateMemberReceiveAddress(UpdateMemberReceiveAddressReq) returns (UpdateMemberReceiveAddressResp){}
+  // 更新会员收货地址表状态
+  rpc UpdateMemberReceiveAddressStatus(UpdateMemberReceiveAddressStatusReq) returns (UpdateMemberReceiveAddressStatusResp){}
+  // 查询会员收货地址表详情
+  rpc QueryMemberReceiveAddressDetail(QueryMemberReceiveAddressDetailReq) returns (QueryMemberReceiveAddressDetailResp){}
+  // 查询会员收货地址表列表
+  rpc QueryMemberReceiveAddressList(QueryMemberReceiveAddressListReq) returns (QueryMemberReceiveAddressListResp){}
+
+
+}
+
+
+// 添加会员积分成长规则表
+message AddMemberRuleSettingReq {
+  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int32 continue_sign_day = 2; //连续签到天数
+  int32 continue_sign_point = 3; //连续签到赠送数量
+  string create_by = 4; //创建者
+  int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
+  int32 status = 6; //状态：0->禁用；1->启用
+  int64 low_order_amount = 7; //最低获取点数的订单金额
+  int32 max_point_per_order = 8; //每笔订单最高获取点数
+
+
+}
+
+message AddMemberRuleSettingResp {
+  string pong = 1;
+}
+
+// 删除会员积分成长规则表
+message DeleteMemberRuleSettingReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberRuleSettingResp {
+  string pong = 1;
+}
+
+// 更新会员积分成长规则表
+message UpdateMemberRuleSettingReq {
+  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int32 continue_sign_day = 2; //连续签到天数
+  int32 continue_sign_point = 3; //连续签到赠送数量
+  int32 status = 4; //状态：0->禁用；1->启用
+  string update_by = 5; //更新者
+  int64 id = 6; //
+  int64 low_order_amount = 7; //最低获取点数的订单金额
+  int32 max_point_per_order = 8; //每笔订单最高获取点数
+  int32 rule_type = 9; //类型：0->积分规则；1->成长值规则
+
+
+}
+
+message UpdateMemberRuleSettingResp {
+  string pong = 1;
+}
+
+// 更新会员积分成长规则表状态
+message UpdateMemberRuleSettingStatusReq {
+  repeated int64 ids = 1;
+  int32 status = 2; //状态：0->禁用；1->启用
+  string update_by = 3; //更新者
+
+}
+
+message UpdateMemberRuleSettingStatusResp {
+  string pong = 1;
+}
+
+// 查询会员积分成长规则表详情
+message QueryMemberRuleSettingDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberRuleSettingDetailResp {
+  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int32 continue_sign_day = 2; //连续签到天数
+  int32 continue_sign_point = 3; //连续签到赠送数量
+  string create_by = 4; //创建者
+  string create_time = 5; //创建时间
+  int64 id = 6; //
+  int64 low_order_amount = 7; //最低获取点数的订单金额
+  int32 max_point_per_order = 8; //每笔订单最高获取点数
+  int32 rule_type = 9; //类型：0->积分规则；1->成长值规则
+  int32 status = 10; //状态：0->禁用；1->启用
+  string update_by = 11; //更新者
+  string update_time = 12; //更新时间
+
+}
+
+// 分页查询会员积分成长规则表列表
+message QueryMemberRuleSettingListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 rule_type = 3; //类型：0->积分规则；1->成长值规则
+  int32 status = 4; //状态：0->禁用；1->启用
+
+}
+
+message MemberRuleSettingListData {
+  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int32 continue_sign_day = 2; //连续签到天数
+  int32 continue_sign_point = 3; //连续签到赠送数量
+  string create_by = 4; //创建者
+  string create_time = 5; //创建时间
+  int64 id = 6; //
+  int64 low_order_amount = 7; //最低获取点数的订单金额
+  int32 max_point_per_order = 8; //每笔订单最高获取点数
+  int32 rule_type = 9; //类型：0->积分规则；1->成长值规则
+  int32 status = 10; //状态：0->禁用；1->启用
+  string update_by = 11; //更新者
+  string update_time = 12; //更新时间
+
+}
+
+message QueryMemberRuleSettingListResp {
+  int64 total = 1;
+  repeated  MemberRuleSettingListData list = 2;
+}
+
+// 会员积分成长规则表
+service MemberRuleSettingService {
+  // 添加会员积分成长规则表
+  rpc AddMemberRuleSetting(AddMemberRuleSettingReq) returns (AddMemberRuleSettingResp){}
+  // 删除会员积分成长规则表
+  rpc DeleteMemberRuleSetting(DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp){}
+  // 更新会员积分成长规则表
+  rpc UpdateMemberRuleSetting(UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp ){}
+  // 更新会员积分成长规则表状态
+  rpc UpdateMemberRuleSettingStatus(UpdateMemberRuleSettingStatusReq) returns (UpdateMemberRuleSettingStatusResp ){}
+  // 查询会员积分成长规则表详情
+   rpc QueryMemberRuleSettingDetail(QueryMemberRuleSettingDetailReq) returns (QueryMemberRuleSettingDetailResp){}
+  // 查询会员积分成长规则表列表
+  rpc QueryMemberRuleSettingList(QueryMemberRuleSettingListReq) returns (QueryMemberRuleSettingListResp){}
+
+
+}
+
+
+// 添加会员统计信息
+message AddMemberStatisticsInfoReq {
+  int32 attend_count = 1; //关注数量
+  int32 collect_comment_count = 2; //
+  int32 collect_product_count = 3; //
+  int32 collect_subject_count = 4; //
+  int32 collect_topic_count = 5; //
+  int32 comment_count = 6; //评价数
+  int64 consume_amount = 7; //累计消费金额
+  int32 coupon_count = 8; //优惠券数量
+  int32 fans_count = 9; //粉丝数量
+  int64 id = 10; //
+  int32 invite_friend_count = 11; //
+  int32 login_count = 12; //登录次数
+  int64 member_id = 13; //
+  int32 order_count = 14; //订单数量
+  string recent_order_time = 15; //最后一次下订单时间
+  int32 return_order_count = 16; //退货数量
+
+}
+
+message AddMemberStatisticsInfoResp {
+  string pong = 1;
+}
+
+
+// 查询会员统计信息详情
+message QueryMemberStatisticsInfoDetailReq {
+  int64 member_id = 1; //
+}
+
+message QueryMemberStatisticsInfoDetailResp {
+  int32 attend_count = 1; //关注数量
+  int32 collect_comment_count = 2; //
+  int32 collect_product_count = 3; //
+  int32 collect_subject_count = 4; //
+  int32 collect_topic_count = 5; //
+  int32 comment_count = 6; //评价数
+  int64 consume_amount = 7; //累计消费金额
+  int32 coupon_count = 8; //优惠券数量
+  int32 fans_count = 9; //粉丝数量
+  int64 id = 10; //
+  int32 invite_friend_count = 11; //
+  int32 login_count = 12; //登录次数
+  int64 member_id = 13; //
+  int32 order_count = 14; //订单数量
+  string recent_order_time = 15; //最后一次下订单时间
+  int32 return_order_count = 16; //退货数量
+
+}
+
+
+// 会员统计信息
+service MemberStatisticsInfoService {
+  // 添加会员统计信息
+  rpc AddMemberStatisticsInfo(AddMemberStatisticsInfoReq) returns (AddMemberStatisticsInfoResp){}
+  // 查询会员统计信息详情
+   rpc QueryMemberStatisticsInfoDetail(QueryMemberStatisticsInfoDetailReq) returns (QueryMemberStatisticsInfoDetailResp){}
+
+
+}
+
+
+// 添加用户标签表
+message AddMemberTagReq {
+  int64 finish_order_amount = 1; //自动打标签完成订单金额
+  int32 finish_order_count = 2; //自动打标签完成订单数量
+  int32 status = 3; //状态：0->禁用；1->启用
+  string tag_name = 4; //标签名称
+
+}
+
+message AddMemberTagResp {
+  string pong = 1;
+}
+
+// 删除用户标签表
+message DeleteMemberTagReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberTagResp {
+  string pong = 1;
+}
+
+// 更新用户标签表
+message UpdateMemberTagReq {
+  int64 finish_order_amount = 1; //自动打标签完成订单金额
+  int32 finish_order_count = 2; //自动打标签完成订单数量
+  int64 id = 3; //
+  int32 status = 4; //状态：0->禁用；1->启用
+  string tag_name = 5; //标签名称
+
+}
+
+message UpdateMemberTagResp {
+  string pong = 1;
+}
+
+// 更新用户标签表状态
+message UpdateMemberTagStatusReq {
+  repeated int64 ids = 1;
+  int32 status = 4; //状态：0->禁用；1->启用
+
+}
+
+message UpdateMemberTagStatusResp {
+  string pong = 1;
+}
+
+// 查询用户标签表详情
+message QueryMemberTagDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberTagDetailResp {
+  int64 finish_order_amount = 1; //自动打标签完成订单金额
+  int32 finish_order_count = 2; //自动打标签完成订单数量
+  int64 id = 3; //
+  int32 status = 4; //状态：0->禁用；1->启用
+  string tag_name = 5; //标签名称
+
+}
+
+// 分页查询用户标签表列表
+message QueryMemberTagListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 status = 4; //状态：0->禁用；1->启用
+  string tag_name = 5; //标签名称
+
+}
+
+message MemberTagListData {
+  int64 finish_order_amount = 1; //自动打标签完成订单金额
+  int32 finish_order_count = 2; //自动打标签完成订单数量
+  int64 id = 3; //
+  int32 status = 4; //状态：0->禁用；1->启用
+  string tag_name = 5; //标签名称
+
+}
+
+message QueryMemberTagListResp {
+  int64 total = 1;
+  repeated  MemberTagListData list = 2;
+}
+
+// 用户标签表
+service MemberTagService {
+  // 添加用户标签表
+  rpc AddMemberTag(AddMemberTagReq) returns (AddMemberTagResp){}
+  // 删除用户标签表
+  rpc DeleteMemberTag(DeleteMemberTagReq) returns (DeleteMemberTagResp){}
+  // 更新用户标签表
+  rpc UpdateMemberTag(UpdateMemberTagReq) returns (UpdateMemberTagResp ){}
+  // 更新用户标签表状态
+  rpc UpdateMemberTagStatus(UpdateMemberTagStatusReq) returns (UpdateMemberTagStatusResp ){}
+  // 查询用户标签表详情
+   rpc QueryMemberTagDetail(QueryMemberTagDetailReq) returns (QueryMemberTagDetailResp){}
+  // 查询用户标签表列表
+  rpc QueryMemberTagList(QueryMemberTagListReq) returns (QueryMemberTagListResp){}
+
+
+}
+
+
+// 添加会员任务表
+message AddMemberTaskReq {
+  string create_by = 1; //创建者
+  string task_name = 2; //任务名称
+  int32 task_type = 3; //任务类型：0->新手任务；1->日常任务
+  int32 status = 4; //状态：0->禁用；1->启用
+  int32 task_growth = 5; //赠送成长值
+  int32 task_integral = 6; //赠送积分
+
+}
+
+message AddMemberTaskResp {
+  string pong = 1;
+}
+
+// 删除会员任务表
+message DeleteMemberTaskReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberTaskResp {
+  string pong = 1;
+}
+
+// 更新会员任务表
+message UpdateMemberTaskReq {
+  int32 task_type = 1; //任务类型：0->新手任务；1->日常任务
+  string update_by = 2; //更新者
+  int64 id = 3; //
+  int32 status = 4; //状态：0->禁用；1->启用
+  int32 task_growth = 5; //赠送成长值
+  int32 task_integral = 6; //赠送积分
+  string task_name = 7; //任务名称
+
+
+}
+
+message UpdateMemberTaskResp {
+  string pong = 1;
+}
+
+// 更新会员任务表状态
+message UpdateMemberTaskStatusReq {
+  repeated int64 ids = 1;
+  int32 status = 2; //状态：0->禁用；1->启用
+  string update_by = 3; //更新者
+}
+
+message UpdateMemberTaskStatusResp {
+  string pong = 1;
+}
+
+// 查询会员任务表详情
+message QueryMemberTaskDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberTaskDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //
+  int32 status = 4; //状态：0->禁用；1->启用
+  int32 task_growth = 5; //赠送成长值
+  int32 task_integral = 6; //赠送积分
+  string task_name = 7; //任务名称
+  int32 task_type = 8; //任务类型：0->新手任务；1->日常任务
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询会员任务表列表
+message QueryMemberTaskListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 status = 3; //状态：0->禁用；1->启用
+  string task_name = 4; //任务名称
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+
+}
+
+message MemberTaskListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //
+  int32 status = 4; //状态：0->禁用；1->启用
+  int32 task_growth = 5; //赠送成长值
+  int32 task_integral = 6; //赠送积分
+  string task_name = 7; //任务名称
+  int32 task_type = 8; //任务类型：0->新手任务；1->日常任务
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+message QueryMemberTaskListResp {
+  int64 total = 1;
+  repeated  MemberTaskListData list = 2;
+}
+
+// 会员任务表
+service MemberTaskService {
+  // 添加会员任务表
+  rpc AddMemberTask(AddMemberTaskReq) returns (AddMemberTaskResp){}
+  // 删除会员任务表
+  rpc DeleteMemberTask(DeleteMemberTaskReq) returns (DeleteMemberTaskResp){}
+  // 更新会员任务表
+  rpc UpdateMemberTask(UpdateMemberTaskReq) returns (UpdateMemberTaskResp ){}
+  // 更新会员任务表状态
+  rpc UpdateMemberTaskStatus(UpdateMemberTaskStatusReq) returns (UpdateMemberTaskStatusResp ){}
+  // 查询会员任务表详情
+   rpc QueryMemberTaskDetail(QueryMemberTaskDetailReq) returns (QueryMemberTaskDetailResp){}
+  // 查询会员任务表列表
+  rpc QueryMemberTaskList(QueryMemberTaskListReq) returns (QueryMemberTaskListResp){}
+
+
 }

@@ -22,22 +22,38 @@ func NewMemberTaskServiceServer(svcCtx *svc.ServiceContext) *MemberTaskServiceSe
 	}
 }
 
-func (s *MemberTaskServiceServer) MemberTaskAdd(ctx context.Context, in *umsclient.MemberTaskAddReq) (*umsclient.MemberTaskAddResp, error) {
-	l := membertaskservicelogic.NewMemberTaskAddLogic(ctx, s.svcCtx)
-	return l.MemberTaskAdd(in)
+// 添加会员任务表
+func (s *MemberTaskServiceServer) AddMemberTask(ctx context.Context, in *umsclient.AddMemberTaskReq) (*umsclient.AddMemberTaskResp, error) {
+	l := membertaskservicelogic.NewAddMemberTaskLogic(ctx, s.svcCtx)
+	return l.AddMemberTask(in)
 }
 
-func (s *MemberTaskServiceServer) MemberTaskList(ctx context.Context, in *umsclient.MemberTaskListReq) (*umsclient.MemberTaskListResp, error) {
-	l := membertaskservicelogic.NewMemberTaskListLogic(ctx, s.svcCtx)
-	return l.MemberTaskList(in)
+// 删除会员任务表
+func (s *MemberTaskServiceServer) DeleteMemberTask(ctx context.Context, in *umsclient.DeleteMemberTaskReq) (*umsclient.DeleteMemberTaskResp, error) {
+	l := membertaskservicelogic.NewDeleteMemberTaskLogic(ctx, s.svcCtx)
+	return l.DeleteMemberTask(in)
 }
 
-func (s *MemberTaskServiceServer) MemberTaskUpdate(ctx context.Context, in *umsclient.MemberTaskUpdateReq) (*umsclient.MemberTaskUpdateResp, error) {
-	l := membertaskservicelogic.NewMemberTaskUpdateLogic(ctx, s.svcCtx)
-	return l.MemberTaskUpdate(in)
+// 更新会员任务表
+func (s *MemberTaskServiceServer) UpdateMemberTask(ctx context.Context, in *umsclient.UpdateMemberTaskReq) (*umsclient.UpdateMemberTaskResp, error) {
+	l := membertaskservicelogic.NewUpdateMemberTaskLogic(ctx, s.svcCtx)
+	return l.UpdateMemberTask(in)
 }
 
-func (s *MemberTaskServiceServer) MemberTaskDelete(ctx context.Context, in *umsclient.MemberTaskDeleteReq) (*umsclient.MemberTaskDeleteResp, error) {
-	l := membertaskservicelogic.NewMemberTaskDeleteLogic(ctx, s.svcCtx)
-	return l.MemberTaskDelete(in)
+// 更新会员任务表状态
+func (s *MemberTaskServiceServer) UpdateMemberTaskStatus(ctx context.Context, in *umsclient.UpdateMemberTaskStatusReq) (*umsclient.UpdateMemberTaskStatusResp, error) {
+	l := membertaskservicelogic.NewUpdateMemberTaskStatusLogic(ctx, s.svcCtx)
+	return l.UpdateMemberTaskStatus(in)
+}
+
+// 查询会员任务表详情
+func (s *MemberTaskServiceServer) QueryMemberTaskDetail(ctx context.Context, in *umsclient.QueryMemberTaskDetailReq) (*umsclient.QueryMemberTaskDetailResp, error) {
+	l := membertaskservicelogic.NewQueryMemberTaskDetailLogic(ctx, s.svcCtx)
+	return l.QueryMemberTaskDetail(in)
+}
+
+// 查询会员任务表列表
+func (s *MemberTaskServiceServer) QueryMemberTaskList(ctx context.Context, in *umsclient.QueryMemberTaskListReq) (*umsclient.QueryMemberTaskListResp, error) {
+	l := membertaskservicelogic.NewQueryMemberTaskListLogic(ctx, s.svcCtx)
+	return l.QueryMemberTaskList(in)
 }

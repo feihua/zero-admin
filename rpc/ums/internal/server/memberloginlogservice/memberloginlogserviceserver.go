@@ -22,17 +22,14 @@ func NewMemberLoginLogServiceServer(svcCtx *svc.ServiceContext) *MemberLoginLogS
 	}
 }
 
-func (s *MemberLoginLogServiceServer) MemberLoginLogAdd(ctx context.Context, in *umsclient.MemberLoginLogAddReq) (*umsclient.MemberLoginLogAddResp, error) {
-	l := memberloginlogservicelogic.NewMemberLoginLogAddLogic(ctx, s.svcCtx)
-	return l.MemberLoginLogAdd(in)
+// 删除会员登录记录
+func (s *MemberLoginLogServiceServer) DeleteMemberLoginLog(ctx context.Context, in *umsclient.DeleteMemberLoginLogReq) (*umsclient.DeleteMemberLoginLogResp, error) {
+	l := memberloginlogservicelogic.NewDeleteMemberLoginLogLogic(ctx, s.svcCtx)
+	return l.DeleteMemberLoginLog(in)
 }
 
-func (s *MemberLoginLogServiceServer) MemberLoginLogList(ctx context.Context, in *umsclient.MemberLoginLogListReq) (*umsclient.MemberLoginLogListResp, error) {
-	l := memberloginlogservicelogic.NewMemberLoginLogListLogic(ctx, s.svcCtx)
-	return l.MemberLoginLogList(in)
-}
-
-func (s *MemberLoginLogServiceServer) MemberLoginLogDelete(ctx context.Context, in *umsclient.MemberLoginLogDeleteReq) (*umsclient.MemberLoginLogDeleteResp, error) {
-	l := memberloginlogservicelogic.NewMemberLoginLogDeleteLogic(ctx, s.svcCtx)
-	return l.MemberLoginLogDelete(in)
+// 查询会员登录记录列表
+func (s *MemberLoginLogServiceServer) QueryMemberLoginLogList(ctx context.Context, in *umsclient.QueryMemberLoginLogListReq) (*umsclient.QueryMemberLoginLogListResp, error) {
+	l := memberloginlogservicelogic.NewQueryMemberLoginLogListLogic(ctx, s.svcCtx)
+	return l.QueryMemberLoginLogList(in)
 }

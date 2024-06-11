@@ -11,6 +11,7 @@ type UmsMemberTag struct {
 	ID                int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	TagName           string `gorm:"column:tag_name;not null;comment:标签名称" json:"tag_name"`                              // 标签名称
 	FinishOrderCount  int32  `gorm:"column:finish_order_count;not null;comment:自动打标签完成订单数量" json:"finish_order_count"`   // 自动打标签完成订单数量
+	Status            int32  `gorm:"column:status;not null;default:1;comment:状态：0->禁用；1->启用" json:"status"`              // 状态：0->禁用；1->启用
 	FinishOrderAmount int64  `gorm:"column:finish_order_amount;not null;comment:自动打标签完成订单金额" json:"finish_order_amount"` // 自动打标签完成订单金额
 }
 

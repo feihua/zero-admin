@@ -30,6 +30,7 @@ func newUmsMemberTag(db *gorm.DB, opts ...gen.DOOption) umsMemberTag {
 	_umsMemberTag.ID = field.NewInt64(tableName, "id")
 	_umsMemberTag.TagName = field.NewString(tableName, "tag_name")
 	_umsMemberTag.FinishOrderCount = field.NewInt32(tableName, "finish_order_count")
+	_umsMemberTag.Status = field.NewInt32(tableName, "status")
 	_umsMemberTag.FinishOrderAmount = field.NewInt64(tableName, "finish_order_amount")
 
 	_umsMemberTag.fillFieldMap()
@@ -45,6 +46,7 @@ type umsMemberTag struct {
 	ID                field.Int64
 	TagName           field.String // 标签名称
 	FinishOrderCount  field.Int32  // 自动打标签完成订单数量
+	Status            field.Int32  // 状态：0->禁用；1->启用
 	FinishOrderAmount field.Int64  // 自动打标签完成订单金额
 
 	fieldMap map[string]field.Expr
@@ -65,6 +67,7 @@ func (u *umsMemberTag) updateTableName(table string) *umsMemberTag {
 	u.ID = field.NewInt64(table, "id")
 	u.TagName = field.NewString(table, "tag_name")
 	u.FinishOrderCount = field.NewInt32(table, "finish_order_count")
+	u.Status = field.NewInt32(table, "status")
 	u.FinishOrderAmount = field.NewInt64(table, "finish_order_amount")
 
 	u.fillFieldMap()
@@ -94,10 +97,11 @@ func (u *umsMemberTag) GetFieldByName(fieldName string) (field.OrderExpr, bool) 
 }
 
 func (u *umsMemberTag) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 4)
+	u.fieldMap = make(map[string]field.Expr, 5)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["tag_name"] = u.TagName
 	u.fieldMap["finish_order_count"] = u.FinishOrderCount
+	u.fieldMap["status"] = u.Status
 	u.fieldMap["finish_order_amount"] = u.FinishOrderAmount
 }
 
