@@ -33,8 +33,8 @@ func NewQueryGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.Servi
 
 // QueryGrowthChangeHistoryList 查询成长值变化历史记录列表
 func (l *QueryGrowthChangeHistoryListLogic) QueryGrowthChangeHistoryList(req *types.ListChangeHistoryReq) (resp *types.ListChangeHistoryResp, err error) {
-	result, err := l.svcCtx.GrowthChangeHistoryService.GrowthChangeHistoryList(l.ctx, &umsclient.GrowthChangeHistoryListReq{
-		Current:  req.Current,
+	result, err := l.svcCtx.GrowthChangeHistoryService.QueryGrowthChangeHistoryList(l.ctx, &umsclient.QueryGrowthChangeHistoryListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 		MemberId: req.MemberId,
 	})

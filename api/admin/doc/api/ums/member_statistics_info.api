@@ -1,40 +1,38 @@
-info (
-	desc:   "统计信息"
-	author: "koobe"
-	email:  "1002219331@qq.com"
+info(
+	desc: "会员统计信息"
+	author: "liufeihua"
+	email: "1002219331@qq.com"
 )
 
 type (
-	ListMemberStatisticsInfoReq {
-		Current  int64 `form:"current,default=1"`
-		PageSize int64 `form:"pageSize,default=20"`
+
+	// 查询会员统计信息详情
+	QueryMemberStatisticsInfoDetailReq {
+		Id         int64  `form:"id"`
 	}
-	ListMemberStatisticsInfoData {
-		Id                  int64  `json:"id"`
-		MemberId            int64  `json:"memberId"`
-		ConsumeAmount       int64  `json:"consumeAmount"` // 累计消费金额
-		OrderCount          int32  `json:"orderCount"` // 订单数量
-		CouponCount         int32  `json:"couponCount"` // 优惠券数量
-		CommentCount        int32  `json:"commentCount"` // 评价数
-		ReturnOrderCount    int32  `json:"returnOrderCount"` // 退货数量
-		LoginCount          int32  `json:"loginCount"` // 登录次数
-		AttendCount         int32  `json:"attendCount"` // 关注数量
-		FansCount           int32  `json:"fansCount"` // 粉丝数量
-		CollectProductCount int32  `json:"collectProductCount"`
-		CollectSubjectCount int32  `json:"collectSubjectCount"`
-		CollectTopicCount   int32  `json:"collectTopicCount"`
-		CollectCommentCount int32  `json:"collectCommentCount"`
-		InviteFriendCount   int32  `json:"inviteFriendCount"`
-		RecentOrderTime     string `json:"recentOrderTime"` // 最后一次下订单时间
+	QueryMemberStatisticsInfoDetailData {
+		AttendCount int32 `json:"attendCount"` //关注数量
+		CollectCommentCount int32 `json:"collectCommentCount"` //
+		CollectProductCount int32 `json:"collectProductCount"` //
+		CollectSubjectCount int32 `json:"collectSubjectCount"` //
+		CollectTopicCount int32 `json:"collectTopicCount"` //
+		CommentCount int32 `json:"commentCount"` //评价数
+		ConsumeAmount int64 `json:"consumeAmount"` //累计消费金额
+		CouponCount int32 `json:"couponCount"` //优惠券数量
+		FansCount int32 `json:"fansCount"` //粉丝数量
+		Id int64 `json:"id"` //
+		InviteFriendCount int32 `json:"inviteFriendCount"` //
+		LoginCount int32 `json:"loginCount"` //登录次数
+		MemberId int64 `json:"memberId"` //
+		OrderCount int32 `json:"orderCount"` //订单数量
+		RecentOrderTime string `json:"recentOrderTime"` //最后一次下订单时间
+		ReturnOrderCount int32 `json:"returnOrderCount"` //退货数量
+
 	}
-	ListMemberStatisticsInfoResp {
-		Code     string                          `json:"code"`
-		Message  string                          `json:"message"`
-		Current  int64                           `json:"current,default=1"`
-		Data     []*ListMemberStatisticsInfoData `json:"data"`
-		PageSize int64                           `json:"pageSize,default=20"`
-		Success  bool                            `json:"success"`
-		Total    int64                           `json:"total"`
+	QueryMemberStatisticsInfoDetailResp {
+		Code     string              `json:"code"`
+		Message  string              `json:"message"`
+		Data     QueryMemberStatisticsInfoDetailData `json:"data"`
 	}
 )
 
@@ -45,8 +43,10 @@ type (
 	prefix:     /api/member/statistics
 )
 service admin-api {
-	//查询会员的统计信息
-	@handler QueryMemberStatisticsInfoList
-	get /queryMemberStatisticsInfoList (ListMemberStatisticsInfoReq) returns (ListMemberStatisticsInfoResp)
-}
 
+	// 查询会员统计信息详情
+	@handler QueryMemberStatisticsInfoDetail
+	get /queryMemberStatisticsInfoDetail (QueryMemberStatisticsInfoDetailReq) returns (QueryMemberStatisticsInfoDetailResp)
+
+
+}

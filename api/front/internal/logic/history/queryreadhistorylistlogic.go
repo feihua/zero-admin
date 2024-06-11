@@ -33,8 +33,8 @@ func NewQueryReadHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // QueryReadHistoryList 查询会员浏览商品的记录
 func (l *QueryReadHistoryListLogic) QueryReadHistoryList() (resp *types.ReadHistoryListResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	historyList, _ := l.svcCtx.MemberReadHistoryService.MemberReadHistoryList(l.ctx, &umsclient.MemberReadHistoryListReq{
-		Current:  1,
+	historyList, _ := l.svcCtx.MemberReadHistoryService.QueryMemberReadHistoryList(l.ctx, &umsclient.QueryMemberReadHistoryListReq{
+		PageNum:  1,
 		PageSize: 100,
 		MemberId: memberId,
 	})

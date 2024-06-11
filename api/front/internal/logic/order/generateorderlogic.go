@@ -50,7 +50,7 @@ func NewGenerateOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Gen
 // 12.发送延迟消息取消订单
 func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.GenerateOrderResp, error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	memberInfo, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
+	memberInfo, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
 	//1.获取购物车及优惠信息
 	cartPromotionItemList := cart.QueryCartListPromotion(req.CartIds, l.ctx, l.svcCtx)
 	if len(cartPromotionItemList) == 0 {
@@ -166,7 +166,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		}
 		//1.2根据积分使用规则判断是否可用
 		//是否可与优惠券共用
-		consumeSetting, _ := l.svcCtx.IntegrationConsumeSettingService.QueryIntegrationConsumeSettingById(l.ctx, &umsclient.QueryIntegrationConsumeSettingByIdReq{Id: 1})
+		consumeSetting, _ := l.svcCtx.IntegrationConsumeSettingService.QueryIntegrationConsumeSettingDetail(l.ctx, &umsclient.QueryIntegrationConsumeSettingDetailReq{Id: 1})
 		if req.CouponId > 0 && consumeSetting.CouponStatus == 0 {
 			return result(1, "不可与优惠券共用"), nil
 		}
@@ -228,9 +228,9 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	}
 	//计算订单应付金额
 	payAmount := totalAmount - promotionAmount - couponAmount - integrationAmount
-	address, err := l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressQueryDetail(l.ctx, &umsclient.MemberReceiveAddressQueryDetailReq{
-		UserId:    memberId,
-		AddressID: req.MemberReceiveAddressId,
+	address, err := l.svcCtx.MemberReceiveAddressService.QueryMemberReceiveAddressDetail(l.ctx, &umsclient.QueryMemberReceiveAddressDetailReq{
+		MemberId: memberId,
+		Id:       req.MemberReceiveAddressId,
 	})
 	if err != nil {
 		return result(1, "查询会员地址异常"), nil
@@ -248,7 +248,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		MemberId:              memberId,                                 //会员id
 		CouponId:              req.CouponId,                             //优惠券id
 		OrderSn:               "",                                       //生成订单号
-		MemberUsername:        memberInfo.Username,                      //会员名称
+		MemberUsername:        memberInfo.MemberName,                    //会员名称
 		TotalAmount:           totalAmount,                              //订单总金额
 		PayAmount:             payAmount,                                //订单应付金额
 		FreightAmount:         0,                                        //运费金额
@@ -316,7 +316,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		Data: types.GenerateOrderData{
 			Id:                orderAddResp.Id,
 			MemberId:          memberId,
-			MemberUsername:    memberInfo.Username,
+			MemberUsername:    memberInfo.MemberName,
 			TotalAmount:       orderInfo.TotalAmount,
 			PayAmount:         orderInfo.PayAmount,
 			FreightAmount:     orderInfo.FreightAmount,

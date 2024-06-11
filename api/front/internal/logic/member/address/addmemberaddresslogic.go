@@ -33,7 +33,7 @@ func NewAddMemberAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // AddMemberAddress 添加收货地址
 func (l *AddMemberAddressLogic) AddMemberAddress(req *types.AddMemberAddressReq) (resp *types.AddMemberAddressResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, err = l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressAdd(l.ctx, &umsclient.MemberReceiveAddressAddReq{
+	_, err = l.svcCtx.MemberReceiveAddressService.AddMemberReceiveAddress(l.ctx, &umsclient.AddMemberReceiveAddressReq{
 		MemberId:      memberId,
 		MemberName:    req.Name,
 		PhoneNumber:   req.PhoneNumber,

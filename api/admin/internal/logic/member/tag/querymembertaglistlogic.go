@@ -32,9 +32,9 @@ func NewQueryMemberTagListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // QueryMemberTagList 查询会员标签列表
-func (l *QueryMemberTagListLogic) QueryMemberTagList(req *types.ListMemberTagReq) (resp *types.ListMemberTagResp, err error) {
-	result, err := l.svcCtx.MemberTagService.MemberTagList(l.ctx, &umsclient.MemberTagListReq{
-		Current:  req.Current,
+func (l *QueryMemberTagListLogic) QueryMemberTagList(req *types.QueryMemberTagListReq) (resp *types.QueryMemberTagListResp, err error) {
+	result, err := l.svcCtx.MemberTagService.QueryMemberTagList(l.ctx, &umsclient.QueryMemberTagListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 	})
 
@@ -43,18 +43,18 @@ func (l *QueryMemberTagListLogic) QueryMemberTagList(req *types.ListMemberTagReq
 		return nil, errorx.NewDefaultError("查询会员标签失败")
 	}
 
-	var list []*types.ListMemberTagData
+	var list []*types.QueryMemberTagListData
 
 	for _, item := range result.List {
-		list = append(list, &types.ListMemberTagData{
+		list = append(list, &types.QueryMemberTagListData{
 			Id:                item.Id,
-			Name:              item.Name,
+			TagName:           item.TagName,
 			FinishOrderCount:  item.FinishOrderCount,
 			FinishOrderAmount: item.FinishOrderAmount,
 		})
 	}
 
-	return &types.ListMemberTagResp{
+	return &types.QueryMemberTagListResp{
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

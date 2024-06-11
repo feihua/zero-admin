@@ -33,11 +33,11 @@ func NewAddMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 
 // AddMemberTask 添加会员任务
 func (l *AddMemberTaskLogic) AddMemberTask(req *types.AddMemberTaskReq) (resp *types.AddMemberTaskResp, err error) {
-	_, err = l.svcCtx.MemberTaskService.MemberTaskAdd(l.ctx, &umsclient.MemberTaskAddReq{
-		TaskName:     req.Name,
-		TaskGrowth:   req.Growth,
-		TaskIntegral: req.Intergration,
-		TaskType:     req.Type,
+	_, err = l.svcCtx.MemberTaskService.AddMemberTask(l.ctx, &umsclient.AddMemberTaskReq{
+		TaskName:     req.TaskName,
+		TaskGrowth:   req.TaskGrowth,
+		TaskIntegral: req.TaskIntegral,
+		TaskType:     req.TaskType,
 	})
 
 	if err != nil {

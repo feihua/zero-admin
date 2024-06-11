@@ -33,14 +33,13 @@ func NewUpdateMemberLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upda
 
 // UpdateMember 更新会员信息
 func (l *UpdateMemberLogic) UpdateMember(req *types.UpdateMemberReq) (resp *types.UpdateMemberResp, err error) {
-	_, err = l.svcCtx.MemberService.MemberUpdate(l.ctx, &umsclient.MemberUpdateReq{
+	_, err = l.svcCtx.MemberService.UpdateMember(l.ctx, &umsclient.UpdateMemberReq{
 		Id:                    req.Id,
 		MemberLevelId:         req.MemberLevelId,
-		Username:              req.Username,
+		MemberName:            req.Username,
 		Nickname:              req.Nickname,
 		Phone:                 req.Phone,
-		Status:                req.Status,
-		CreateTime:            req.CreateTime,
+		MemberStatus:          req.Status,
 		Icon:                  req.Icon,
 		Gender:                req.Gender,
 		Birthday:              req.Birthday,
@@ -50,7 +49,7 @@ func (l *UpdateMemberLogic) UpdateMember(req *types.UpdateMemberReq) (resp *type
 		SourceType:            req.SourceType,
 		Integration:           req.Integration,
 		Growth:                req.Growth,
-		LuckeyCount:           req.LuckeyCount,
+		LotteryCount:          req.LuckeyCount,
 		HistoryIntegration:    req.HistoryIntegration,
 	})
 

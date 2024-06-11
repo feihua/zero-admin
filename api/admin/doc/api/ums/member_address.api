@@ -11,16 +11,16 @@ type (
 		MemberId int64 `form:"memberId,default=0"`
 	}
 	ListMemberAddressData {
-		Id            int64  `json:"id"`
-		MemberId      int64  `json:"memberId"`
-		Name          string `json:"name"` // 收货人名称
-		PhoneNumber   string `json:"phoneNumber"`
-		DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
-		PostCode      string `json:"postCode"` // 邮政编码
-		Province      string `json:"province"` // 省份/直辖市
-		City          string `json:"city"` // 城市
-		Region        string `json:"region"` // 区
-		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
+		City string `json:"city"` //城市
+		DefaultStatus int32 `json:"defaultStatus"` //是否为默认
+		DetailAddress string `json:"detailAddress"` //详细地址(街道)
+		Id int64 `json:"id"` //
+		MemberId int64 `json:"memberId"` //会员id
+		MemberName string `json:"memberName"` //收货人名称
+		PhoneNumber string `json:"phoneNumber"` //收货人电话
+		PostCode string `json:"postCode"` //邮政编码
+		Province string `json:"province"` //省份/直辖市
+		Region string `json:"region"` //区
 	}
 	ListMemberAddressResp {
 		Current  int64                    `json:"current,default=1"`

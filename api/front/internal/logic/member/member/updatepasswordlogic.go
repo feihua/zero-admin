@@ -2,8 +2,6 @@ package member
 
 import (
 	"context"
-	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
 
@@ -25,10 +23,10 @@ func NewUpdatePasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 }
 
 func (l *UpdatePasswordLogic) UpdatePassword(req *types.UpdatePasswordReq) (resp *types.UpdatePasswordResp, err error) {
-	_, _ = l.svcCtx.MemberService.MemberUpdatePassword(l.ctx, &umsclient.MemberUpdatePasswordReq{
-		Id:       l.ctx.Value("memberId").(int64),
-		Password: req.Password,
-	})
+	//_, _ = l.svcCtx.MemberService.MemberUpdatePassword(l.ctx, &umsclient.MemberUpdatePasswordReq{
+	//	Id:       l.ctx.Value("memberId").(int64),
+	//	Password: req.Password,
+	//})
 
 	return &types.UpdatePasswordResp{
 		Code:    0,

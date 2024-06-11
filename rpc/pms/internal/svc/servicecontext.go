@@ -79,7 +79,7 @@ type Writer struct {
 }
 
 func (w Writer) Printf(format string, args ...interface{}) {
-	logx.Infof(format, args)
+	logx.Infof(format, args...)
 }
 
 // init log config

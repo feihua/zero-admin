@@ -33,8 +33,8 @@ func NewDeleteMemberAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext
 // DeleteMemberAddress 删除收货地址
 func (l *DeleteMemberAddressLogic) DeleteMemberAddress(req *types.DeleteMemberAddressReq) (resp *types.DeleteMemberAddressResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressDelete(l.ctx, &umsclient.MemberReceiveAddressDeleteReq{
-		Id:       req.Id,
+	_, _ = l.svcCtx.MemberReceiveAddressService.DeleteMemberReceiveAddress(l.ctx, &umsclient.DeleteMemberReceiveAddressReq{
+		Ids:      req.Ids,
 		MemberId: memberId,
 	})
 

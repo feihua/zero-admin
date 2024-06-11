@@ -33,11 +33,11 @@ func NewQueryMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 // QueryMemberLevelList 查询会员等级列表
-func (l *QueryMemberLevelListLogic) QueryMemberLevelList(req *types.ListMemberLevelReq) (resp *types.ListMemberLevelResp, err error) {
-	result, err := l.svcCtx.MemberLevelService.MemberLevelList(l.ctx, &umsclient.MemberLevelListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		Name:     strings.TrimSpace(req.Name),
+func (l *QueryMemberLevelListLogic) QueryMemberLevelList(req *types.QueryMemberLevelListReq) (resp *types.QueryMemberLevelListResp, err error) {
+	result, err := l.svcCtx.MemberLevelService.QueryMemberLevelList(l.ctx, &umsclient.QueryMemberLevelListReq{
+		PageNum:   req.Current,
+		PageSize:  req.PageSize,
+		LevelName: strings.TrimSpace(req.LevelName),
 	})
 
 	if err != nil {
@@ -45,12 +45,12 @@ func (l *QueryMemberLevelListLogic) QueryMemberLevelList(req *types.ListMemberLe
 		return nil, errorx.NewDefaultError("查询会员等级失败")
 	}
 
-	var list []*types.ListMemberLevelData
+	var list []*types.QueryMemberLevelListData
 
 	for _, item := range result.List {
-		list = append(list, &types.ListMemberLevelData{
+		list = append(list, &types.QueryMemberLevelListData{
 			Id:                 item.Id,
-			Name:               item.LevelName,
+			LevelName:          item.LevelName,
 			GrowthPoint:        item.GrowthPoint,
 			DefaultStatus:      item.DefaultStatus,
 			FreeFreightPoint:   item.FreeFreightPoint,
@@ -61,11 +61,11 @@ func (l *QueryMemberLevelListLogic) QueryMemberLevelList(req *types.ListMemberLe
 			IsPromotion:        item.IsPromotion,
 			IsMemberPrice:      item.IsMemberPrice,
 			IsBirthday:         item.IsBirthday,
-			Note:               item.Remark,
+			Remark:             item.Remark,
 		})
 	}
 
-	return &types.ListMemberLevelResp{
+	return &types.QueryMemberLevelListResp{
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

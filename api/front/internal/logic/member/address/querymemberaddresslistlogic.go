@@ -33,8 +33,8 @@ func NewQueryMemberAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCont
 // QueryMemberAddressList 获取所有收货地址
 func (l *QueryMemberAddressListLogic) QueryMemberAddressList() (resp *types.ListMemberAddressResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	addressList, _ := l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
-		Current:  1,
+	addressList, _ := l.svcCtx.MemberReceiveAddressService.QueryMemberReceiveAddressList(l.ctx, &umsclient.QueryMemberReceiveAddressListReq{
+		PageNum:  1,
 		PageSize: 100,
 		MemberId: memberId,
 	})

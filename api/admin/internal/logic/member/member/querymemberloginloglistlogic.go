@@ -33,8 +33,8 @@ func NewQueryMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // QueryMemberLoginLogList 查询会员登录记录列表
 func (l *QueryMemberLoginLogListLogic) QueryMemberLoginLogList(req *types.ListMemberLoginLogReq) (resp *types.ListMemberLoginLogResp, err error) {
-	result, err := l.svcCtx.MemberLoginLogService.MemberLoginLogList(l.ctx, &umsclient.MemberLoginLogListReq{
-		Current:  req.Current,
+	result, err := l.svcCtx.MemberLoginLogService.QueryMemberLoginLogList(l.ctx, &umsclient.QueryMemberLoginLogListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 		MemberId: req.MemberId,
 	})
@@ -51,7 +51,7 @@ func (l *QueryMemberLoginLogListLogic) QueryMemberLoginLogList(req *types.ListMe
 			Id:         item.Id,
 			MemberId:   item.MemberId,
 			CreateTime: item.CreateTime,
-			Ip:         item.MemberIP,
+			Ip:         item.MemberIp,
 			City:       item.City,
 			LoginType:  item.LoginType,
 			Province:   item.Province,

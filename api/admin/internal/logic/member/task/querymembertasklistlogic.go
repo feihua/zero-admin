@@ -32,9 +32,9 @@ func NewQueryMemberTaskListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // QueryMemberTaskList 查询会员任务列表
-func (l *QueryMemberTaskListLogic) QueryMemberTaskList(req *types.ListMemberTaskReq) (resp *types.ListMemberTaskResp, err error) {
-	result, err := l.svcCtx.MemberTaskService.MemberTaskList(l.ctx, &umsclient.MemberTaskListReq{
-		Current:  req.Current,
+func (l *QueryMemberTaskListLogic) QueryMemberTaskList(req *types.QueryMemberTaskListReq) (resp *types.QueryMemberTaskListResp, err error) {
+	result, err := l.svcCtx.MemberTaskService.QueryMemberTaskList(l.ctx, &umsclient.QueryMemberTaskListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 	})
 
@@ -43,19 +43,19 @@ func (l *QueryMemberTaskListLogic) QueryMemberTaskList(req *types.ListMemberTask
 		return nil, errorx.NewDefaultError("查询会员任务失败")
 	}
 
-	var list []*types.ListMemberTaskData
+	var list []*types.QueryMemberTaskListData
 
 	for _, item := range result.List {
-		list = append(list, &types.ListMemberTaskData{
+		list = append(list, &types.QueryMemberTaskListData{
 			Id:           item.Id,
-			Name:         item.TaskName,
-			Growth:       item.TaskGrowth,
-			Intergration: item.TaskIntegral,
-			Type:         item.TaskType,
+			TaskName:     item.TaskName,
+			TaskGrowth:   item.TaskGrowth,
+			TaskIntegral: item.TaskIntegral,
+			TaskType:     item.TaskType,
 		})
 	}
 
-	return &types.ListMemberTaskResp{
+	return &types.QueryMemberTaskListResp{
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

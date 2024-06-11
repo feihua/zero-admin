@@ -33,9 +33,9 @@ func NewUpdateMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // UpdateMemberLevel 更新会员等级
 func (l *UpdateMemberLevelLogic) UpdateMemberLevel(req *types.UpdateMemberLevelReq) (resp *types.UpdateMemberLevelResp, err error) {
-	_, err = l.svcCtx.MemberLevelService.MemberLevelUpdate(l.ctx, &umsclient.MemberLevelUpdateReq{
+	_, err = l.svcCtx.MemberLevelService.UpdateMemberLevel(l.ctx, &umsclient.UpdateMemberLevelReq{
 		Id:                 req.Id,
-		LevelName:          req.Name,
+		LevelName:          req.LevelName,
 		GrowthPoint:        req.GrowthPoint,
 		DefaultStatus:      req.DefaultStatus,
 		FreeFreightPoint:   req.FreeFreightPoint,
@@ -46,7 +46,7 @@ func (l *UpdateMemberLevelLogic) UpdateMemberLevel(req *types.UpdateMemberLevelR
 		IsPromotion:        req.IsPromotion,
 		IsMemberPrice:      req.IsMemberPrice,
 		IsBirthday:         req.IsBirthday,
-		Remark:             req.Note,
+		Remark:             req.Remark,
 	})
 
 	if err != nil {

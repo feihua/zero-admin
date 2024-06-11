@@ -33,7 +33,7 @@ func NewQueryAttentionListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // QueryAttentionList 查询会员关注的列表
 func (l *QueryAttentionListLogic) QueryAttentionList() (resp *types.ListAttentionResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	var attentionList, _ = l.svcCtx.MemberAttentionService.MemberBrandAttentionList(l.ctx, &umsclient.MemberBrandAttentionListReq{
+	var attentionList, _ = l.svcCtx.MemberBrandAttentionService.QueryMemberBrandAttentionList(l.ctx, &umsclient.QueryMemberBrandAttentionListReq{
 		MemberId: memberId,
 	})
 
@@ -41,15 +41,12 @@ func (l *QueryAttentionListLogic) QueryAttentionList() (resp *types.ListAttentio
 
 	for _, item := range attentionList.List {
 		list = append(list, types.ListAttentionData{
-			Id:             item.Id,
-			MemberId:       item.MemberId,
-			MemberNickName: item.MemberNickName,
-			MemberIcon:     item.MemberIcon,
-			BrandId:        item.BrandId,
-			BrandName:      item.BrandName,
-			BrandLogo:      item.BrandLogo,
-			BrandCity:      item.BrandCity,
-			CreateTime:     item.CreateTime,
+			Id:         item.Id,
+			BrandId:    item.BrandId,
+			BrandName:  item.BrandName,
+			BrandLogo:  item.BrandLogo,
+			BrandCity:  item.BrandCity,
+			CreateTime: item.CreateTime,
 		})
 	}
 

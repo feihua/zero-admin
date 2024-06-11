@@ -33,8 +33,8 @@ func NewAddMemberTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddM
 
 // AddMemberTag 添加会员标签
 func (l *AddMemberTagLogic) AddMemberTag(req *types.AddMemberTagReq) (resp *types.AddMemberTagResp, err error) {
-	_, err = l.svcCtx.MemberTagService.MemberTagAdd(l.ctx, &umsclient.MemberTagAddReq{
-		Name:              req.Name,
+	_, err = l.svcCtx.MemberTagService.AddMemberTag(l.ctx, &umsclient.AddMemberTagReq{
+		TagName:           req.TagName,
 		FinishOrderCount:  req.FinishOrderCount,
 		FinishOrderAmount: req.FinishOrderAmount,
 	})

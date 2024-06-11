@@ -33,7 +33,7 @@ func NewAddAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddA
 // AddAttention 添加会员关注信息
 func (l *AddAttentionLogic) AddAttention(req *types.AddAttentionReq) (resp *types.AddAttentionResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, err = l.svcCtx.MemberAttentionService.MemberBrandAttentionAdd(l.ctx, &umsclient.MemberBrandAttentionAddReq{
+	_, err = l.svcCtx.MemberBrandAttentionService.AddMemberBrandAttention(l.ctx, &umsclient.AddMemberBrandAttentionReq{
 		BrandId:   req.BrandId,
 		BrandName: req.BrandName,
 		BrandLogo: req.BrandLogo,

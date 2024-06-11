@@ -11,7 +11,7 @@ import (
 
 func QueryIntegrationConsumeSettingListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.ListIntegrationConsumeSettingReq
+		var req types.QueryIntegrationConsumeSettingListReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return

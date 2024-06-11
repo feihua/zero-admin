@@ -3,11 +3,9 @@ package history
 import (
 	"context"
 	"encoding/json"
-	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-	"time"
-
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -34,9 +32,9 @@ func NewAddReadHistoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 // AddReadHistory 添加浏览商品记录
 func (l *AddReadHistoryLogic) AddReadHistory(req *types.AddReadHistoryReq) (resp *types.AddReadHistoryResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
+	member, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
 
-	_, err = l.svcCtx.MemberReadHistoryService.MemberReadHistoryAdd(l.ctx, &umsclient.MemberReadHistoryAddReq{
+	_, err = l.svcCtx.MemberReadHistoryService.AddMemberReadHistory(l.ctx, &umsclient.AddMemberReadHistoryReq{
 		MemberId:        member.Id,
 		MemberNickName:  member.Nickname,
 		MemberIcon:      member.Icon,
@@ -45,7 +43,6 @@ func (l *AddReadHistoryLogic) AddReadHistory(req *types.AddReadHistoryReq) (resp
 		ProductPic:      req.ProductPic,
 		ProductSubTitle: req.ProductSubTitle,
 		ProductPrice:    req.ProductPrice,
-		CreateTime:      time.Now().Format("2006-01-02 15:04:05"),
 	})
 
 	if err != nil {

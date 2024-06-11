@@ -33,9 +33,9 @@ func NewUpdateMemberTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 
 // UpdateMemberTag 更新会员标签
 func (l *UpdateMemberTagLogic) UpdateMemberTag(req *types.UpdateMemberTagReq) (resp *types.UpdateMemberTagResp, err error) {
-	_, err = l.svcCtx.MemberTagService.MemberTagUpdate(l.ctx, &umsclient.MemberTagUpdateReq{
+	_, err = l.svcCtx.MemberTagService.UpdateMemberTag(l.ctx, &umsclient.UpdateMemberTagReq{
 		Id:                req.Id,
-		Name:              req.Name,
+		TagName:           req.TagName,
 		FinishOrderCount:  req.FinishOrderCount,
 		FinishOrderAmount: req.FinishOrderAmount,
 	})

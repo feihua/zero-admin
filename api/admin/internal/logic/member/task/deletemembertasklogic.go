@@ -33,7 +33,7 @@ func NewDeleteMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // DeleteMemberTask 删除会员任务
 func (l *DeleteMemberTaskLogic) DeleteMemberTask(req *types.DeleteMemberTaskReq) (resp *types.DeleteMemberTaskResp, err error) {
-	_, err = l.svcCtx.MemberTaskService.MemberTaskDelete(l.ctx, &umsclient.MemberTaskDeleteReq{
+	_, err = l.svcCtx.MemberTaskService.DeleteMemberTask(l.ctx, &umsclient.DeleteMemberTaskReq{
 		Ids: req.Ids,
 	})
 

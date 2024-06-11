@@ -33,14 +33,14 @@ func NewUpdateMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // UpdateMemberRuleSetting 更新会员积分规则
 func (l *UpdateMemberRuleSettingLogic) UpdateMemberRuleSetting(req *types.UpdateMemberRuleSettingReq) (resp *types.UpdateMemberRuleSettingResp, err error) {
-	_, err = l.svcCtx.MemberRuleSettingService.MemberRuleSettingUpdate(l.ctx, &umsclient.MemberRuleSettingUpdateReq{
+	_, err = l.svcCtx.MemberRuleSettingService.UpdateMemberRuleSetting(l.ctx, &umsclient.UpdateMemberRuleSettingReq{
 		Id:                req.Id,
 		ContinueSignDay:   req.ContinueSignDay,
 		ContinueSignPoint: req.ContinueSignPoint,
 		ConsumePerPoint:   req.ConsumePerPoint,
 		LowOrderAmount:    req.LowOrderAmount,
 		MaxPointPerOrder:  req.MaxPointPerOrder,
-		RuleType:          req.Type,
+		RuleType:          req.RuleType,
 	})
 
 	if err != nil {

@@ -11,7 +11,7 @@ import (
 
 func QueryMemberTagListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.ListMemberTagReq
+		var req types.QueryMemberTagListReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return

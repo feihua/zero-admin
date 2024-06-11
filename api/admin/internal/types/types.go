@@ -173,10 +173,11 @@ type AddHomeRecommendSubjectResp struct {
 }
 
 type AddIntegrationConsumeSettingReq struct {
-	DeductionPerAmount int32 `json:"deductionPerAmount"` // 每一元需要抵扣的积分数量
-	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-	UseUnit            int32 `json:"useUnit"`            // 每次使用积分最小单位100
-	CouponStatus       int32 `json:"couponStatus"`       // 是否可以和优惠券同用；0->不可以；1->可以
+	CouponStatus       int32 `json:"couponStatus"`       //是否可以和优惠券同用；0->不可以；1->可以
+	DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
+	IsDefault          int32 `json:"isDefault"`          //是否默认：0->否；1->是
+	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
+	UseUnit            int32 `json:"useUnit"`            //每次使用积分最小单位100
 }
 
 type AddIntegrationConsumeSettingResp struct {
@@ -185,18 +186,18 @@ type AddIntegrationConsumeSettingResp struct {
 }
 
 type AddMemberLevelReq struct {
-	Name               string `json:"name"`
-	GrowthPoint        int32  `json:"growthPoint"`
-	DefaultStatus      int32  `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   int64  `json:"freeFreightPoint"`   // 免运费标准
-	CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
-	IsFreeFreight      int32  `json:"isFreeFreight"`      // 是否有免邮特权
-	IsSignIn           int32  `json:"isSignIn"`           // 是否有签到特权
-	IsComment          int32  `json:"isComment"`          // 是否有评论获奖励特权
-	IsPromotion        int32  `json:"isPromotion"`        // 是否有专享活动特权
-	IsMemberPrice      int32  `json:"isMemberPrice"`      // 是否有会员价格特权
-	IsBirthday         int32  `json:"isBirthday"`         // 是否有生日特权
-	Note               string `json:"note,optional"`
+	CommentGrowthPoint int32  `json:"commentGrowthPoint"` //每次评价获取的成长值
+	DefaultStatus      int32  `json:"defaultStatus"`      //是否为默认等级：0->不是；1->是
+	FreeFreightPoint   int64  `json:"freeFreightPoint"`   //免运费标准
+	GrowthPoint        int32  `json:"growthPoint"`        //成长点
+	IsBirthday         int32  `json:"isBirthday"`         //是否有生日特权
+	IsComment          int32  `json:"isComment"`          //是否有评论获奖励特权
+	IsFreeFreight      int32  `json:"isFreeFreight"`      //是否有免邮特权
+	IsMemberPrice      int32  `json:"isMemberPrice"`      //是否有会员价格特权
+	IsPromotion        int32  `json:"isPromotion"`        //是否有专享活动特权
+	IsSignIn           int32  `json:"isSignIn"`           //是否有签到特权
+	LevelName          string `json:"levelName"`          //等级名称
+	Remark             string `json:"remark,optional"`    //备注
 }
 
 type AddMemberLevelResp struct {
@@ -211,12 +212,13 @@ type AddMemberPriceList struct {
 }
 
 type AddMemberRuleSettingReq struct {
-	ContinueSignDay   int32 `json:"continueSignDay"`   // 连续签到天数
-	ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-	ConsumePerPoint   int64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-	LowOrderAmount    int64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
-	Type              int32 `json:"type"`              // 类型：0->积分规则；1->成长值规则
+	ConsumePerPoint   int64 `json:"consumePerPoint"`   //每消费多少元获取1个点
+	ContinueSignDay   int32 `json:"continueSignDay"`   //连续签到天数
+	ContinueSignPoint int32 `json:"continueSignPoint"` //连续签到赠送数量
+	LowOrderAmount    int64 `json:"lowOrderAmount"`    //最低获取点数的订单金额
+	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  //每笔订单最高获取点数
+	RuleType          int32 `json:"ruleType"`          //类型：0->积分规则；1->成长值规则
+	Status            int32 `json:"status"`            //状态：0->禁用；1->启用
 }
 
 type AddMemberRuleSettingResp struct {
@@ -225,9 +227,10 @@ type AddMemberRuleSettingResp struct {
 }
 
 type AddMemberTagReq struct {
-	Name              string `json:"name"`
-	FinishOrderCount  int32  `json:"finishOrderCount"`  // 自动打标签完成订单数量
-	FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
+	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+	FinishOrderCount  int32  `json:"finishOrderCount"`  //自动打标签完成订单数量
+	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
+	TagName           string `json:"tagName"`           //标签名称
 }
 
 type AddMemberTagResp struct {
@@ -236,10 +239,11 @@ type AddMemberTagResp struct {
 }
 
 type AddMemberTaskReq struct {
-	Name         string `json:"name"`
-	Growth       int32  `json:"growth"`       // 赠送成长值
-	Intergration int32  `json:"intergration"` // 赠送积分
-	Type         int32  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
+	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
+	TaskGrowth   int32  `json:"taskGrowth"`   //赠送成长值
+	TaskIntegral int32  `json:"taskIntegral"` //赠送积分
+	TaskName     string `json:"taskName"`     //任务名称
+	TaskType     int32  `json:"taskType"`     //任务类型：0->新手任务；1->日常任务
 }
 
 type AddMemberTaskResp struct {
@@ -1351,40 +1355,17 @@ type ListHomeRecommendSubjectResp struct {
 	Total    int64                           `json:"total"`
 }
 
-type ListIntegrationConsumeSettingData struct {
-	Id                 int64 `json:"id"`
-	DeductionPerAmount int32 `json:"deductionPerAmount"` // 每一元需要抵扣的积分数量
-	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-	UseUnit            int32 `json:"useUnit"`            // 每次使用积分最小单位100
-	CouponStatus       int32 `json:"couponStatus"`       // 是否可以和优惠券同用；0->不可以；1->可以
-}
-
-type ListIntegrationConsumeSettingReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type ListIntegrationConsumeSettingResp struct {
-	Code     string                               `json:"code"`
-	Message  string                               `json:"message"`
-	Current  int64                                `json:"current,default=1"`
-	Data     []*ListIntegrationConsumeSettingData `json:"data"`
-	PageSize int64                                `json:"pageSize,default=20"`
-	Success  bool                                 `json:"success"`
-	Total    int64                                `json:"total"`
-}
-
 type ListMemberAddressData struct {
-	Id            int64  `json:"id"`
-	MemberId      int64  `json:"memberId"`
-	Name          string `json:"name"` // 收货人名称
-	PhoneNumber   string `json:"phoneNumber"`
-	DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
-	PostCode      string `json:"postCode"`      // 邮政编码
-	Province      string `json:"province"`      // 省份/直辖市
-	City          string `json:"city"`          // 城市
-	Region        string `json:"region"`        // 区
-	DetailAddress string `json:"detailAddress"` // 详细地址(街道)
+	City          string `json:"city"`          //城市
+	DefaultStatus int32  `json:"defaultStatus"` //是否为默认
+	DetailAddress string `json:"detailAddress"` //详细地址(街道)
+	Id            int64  `json:"id"`            //
+	MemberId      int64  `json:"memberId"`      //会员id
+	MemberName    string `json:"memberName"`    //收货人名称
+	PhoneNumber   string `json:"phoneNumber"`   //收货人电话
+	PostCode      string `json:"postCode"`      //邮政编码
+	Province      string `json:"province"`      //省份/直辖市
+	Region        string `json:"region"`        //区
 }
 
 type ListMemberAddressReq struct {
@@ -1422,38 +1403,6 @@ type ListMemberData struct {
 	Growth                int32  `json:"growth"`                // 成长值
 	LuckeyCount           int32  `json:"luckeyCount"`           // 剩余抽奖次数
 	HistoryIntegration    int32  `json:"historyIntegration"`    // 历史积分数量
-}
-
-type ListMemberLevelData struct {
-	Id                 int64  `json:"id"`
-	Name               string `json:"name"`
-	GrowthPoint        int32  `json:"growthPoint"`
-	DefaultStatus      int32  `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   int64  `json:"freeFreightPoint"`   // 免运费标准
-	CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
-	IsFreeFreight      int32  `json:"isFreeFreight"`      // 是否有免邮特权
-	IsSignIn           int32  `json:"isSignIn"`           // 是否有签到特权
-	IsComment          int32  `json:"isComment"`          // 是否有评论获奖励特权
-	IsPromotion        int32  `json:"isPromotion"`        // 是否有专享活动特权
-	IsMemberPrice      int32  `json:"isMemberPrice"`      // 是否有会员价格特权
-	IsBirthday         int32  `json:"isBirthday"`         // 是否有生日特权
-	Note               string `json:"note"`
-}
-
-type ListMemberLevelReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	Name     string `form:"name,optional"`
-}
-
-type ListMemberLevelResp struct {
-	Code     string                 `json:"code"`
-	Message  string                 `json:"message"`
-	Current  int64                  `json:"current,default=1"`
-	Data     []*ListMemberLevelData `json:"data"`
-	PageSize int64                  `json:"pageSize,default=20"`
-	Success  bool                   `json:"success"`
-	Total    int64                  `json:"total"`
 }
 
 type ListMemberLoginLogData struct {
@@ -1498,110 +1447,6 @@ type ListMemberResp struct {
 	PageSize int64             `json:"pageSize,default=20"`
 	Success  bool              `json:"success"`
 	Total    int64             `json:"total"`
-}
-
-type ListMemberRuleSettingData struct {
-	Id                int64 `json:"id"`
-	ContinueSignDay   int32 `json:"continueSignDay"`   // 连续签到天数
-	ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-	ConsumePerPoint   int64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-	LowOrderAmount    int64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
-	Type              int32 `json:"type"`              // 类型：0->积分规则；1->成长值规则
-}
-
-type ListMemberRuleSettingReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type ListMemberRuleSettingResp struct {
-	Code     string                       `json:"code"`
-	Message  string                       `json:"message"`
-	Current  int64                        `json:"current,default=1"`
-	Data     []*ListMemberRuleSettingData `json:"data"`
-	PageSize int64                        `json:"pageSize,default=20"`
-	Success  bool                         `json:"success"`
-	Total    int64                        `json:"total"`
-}
-
-type ListMemberStatisticsInfoData struct {
-	Id                  int64  `json:"id"`
-	MemberId            int64  `json:"memberId"`
-	ConsumeAmount       int64  `json:"consumeAmount"`    // 累计消费金额
-	OrderCount          int32  `json:"orderCount"`       // 订单数量
-	CouponCount         int32  `json:"couponCount"`      // 优惠券数量
-	CommentCount        int32  `json:"commentCount"`     // 评价数
-	ReturnOrderCount    int32  `json:"returnOrderCount"` // 退货数量
-	LoginCount          int32  `json:"loginCount"`       // 登录次数
-	AttendCount         int32  `json:"attendCount"`      // 关注数量
-	FansCount           int32  `json:"fansCount"`        // 粉丝数量
-	CollectProductCount int32  `json:"collectProductCount"`
-	CollectSubjectCount int32  `json:"collectSubjectCount"`
-	CollectTopicCount   int32  `json:"collectTopicCount"`
-	CollectCommentCount int32  `json:"collectCommentCount"`
-	InviteFriendCount   int32  `json:"inviteFriendCount"`
-	RecentOrderTime     string `json:"recentOrderTime"` // 最后一次下订单时间
-}
-
-type ListMemberStatisticsInfoReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type ListMemberStatisticsInfoResp struct {
-	Code     string                          `json:"code"`
-	Message  string                          `json:"message"`
-	Current  int64                           `json:"current,default=1"`
-	Data     []*ListMemberStatisticsInfoData `json:"data"`
-	PageSize int64                           `json:"pageSize,default=20"`
-	Success  bool                            `json:"success"`
-	Total    int64                           `json:"total"`
-}
-
-type ListMemberTagData struct {
-	Id                int64  `json:"id"`
-	Name              string `json:"name"`
-	FinishOrderCount  int32  `json:"finishOrderCount"`  // 自动打标签完成订单数量
-	FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
-}
-
-type ListMemberTagReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type ListMemberTagResp struct {
-	Code     string               `json:"code"`
-	Message  string               `json:"message"`
-	Current  int64                `json:"current,default=1"`
-	Data     []*ListMemberTagData `json:"data"`
-	PageSize int64                `json:"pageSize,default=20"`
-	Success  bool                 `json:"success"`
-	Total    int64                `json:"total"`
-}
-
-type ListMemberTaskData struct {
-	Id           int64  `json:"id"`
-	Name         string `json:"name"`
-	Growth       int32  `json:"growth"`       // 赠送成长值
-	Intergration int32  `json:"intergration"` // 赠送积分
-	Type         int32  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
-}
-
-type ListMemberTaskReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type ListMemberTaskResp struct {
-	Code     string                `json:"code"`
-	Message  string                `json:"message"`
-	Current  int64                 `json:"current,default=1"`
-	Data     []*ListMemberTaskData `json:"data"`
-	PageSize int64                 `json:"pageSize,default=20"`
-	Success  bool                  `json:"success"`
-	Total    int64                 `json:"total"`
 }
 
 type ListMenuTree struct {
@@ -2417,6 +2262,55 @@ type QueryDictTypeListResp struct {
 	Total    int64                    `json:"total"`
 }
 
+type QueryIntegrationConsumeSettingDetailData struct {
+	CouponStatus       int32 `json:"couponStatus"`       //是否可以和优惠券同用；0->不可以；1->可以
+	DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
+	Id                 int64 `json:"id"`                 //
+	IsDefault          int32 `json:"isDefault"`          //是否默认：0->否；1->是
+	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
+	UseUnit            int32 `json:"useUnit"`            //每次使用积分最小单位100
+}
+
+type QueryIntegrationConsumeSettingDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryIntegrationConsumeSettingDetailResp struct {
+	Code    string                                   `json:"code"`
+	Message string                                   `json:"message"`
+	Data    QueryIntegrationConsumeSettingDetailData `json:"data"`
+}
+
+type QueryIntegrationConsumeSettingListData struct {
+	CouponStatus       int32 `json:"couponStatus"`       //是否可以和优惠券同用；0->不可以；1->可以
+	DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
+	Id                 int64 `json:"id"`                 //
+	IsDefault          int32 `json:"isDefault"`          //是否默认：0->否；1->是
+	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
+	UseUnit            int32 `json:"useUnit"`            //每次使用积分最小单位100
+}
+
+type QueryIntegrationConsumeSettingListReq struct {
+	Current            int64 `form:"current,default=1"`           //第几页
+	PageSize           int64 `form:"pageSize,default=20"`         //每页的数量
+	CouponStatus       int32 `form:"couponStatus,optional"`       //是否可以和优惠券同用；0->不可以；1->可以
+	DeductionPerAmount int32 `form:"deductionPerAmount,optional"` //每一元需要抵扣的积分数量
+	Id                 int64 `form:"id,optional"`                 //
+	IsDefault          int32 `form:"isDefault,optional"`          //是否默认：0->否；1->是
+	MaxPercentPerOrder int32 `form:"maxPercentPerOrder,optional"` //每笔订单最高抵用百分比
+	UseUnit            int32 `form:"useUnit,optional"`            //每次使用积分最小单位100
+}
+
+type QueryIntegrationConsumeSettingListResp struct {
+	Code     string                                    `json:"code"`
+	Message  string                                    `json:"message"`
+	Current  int64                                     `json:"current,default=1"`
+	Data     []*QueryIntegrationConsumeSettingListData `json:"data"`
+	PageSize int64                                     `json:"pageSize,default=20"`
+	Success  bool                                      `json:"success"`
+	Total    int64                                     `json:"total"`
+}
+
 type QueryLoginLogDetailData struct {
 	Browser     string `json:"browser"`     //浏览器
 	Id          int64  `json:"id"`          //编号
@@ -2467,6 +2361,247 @@ type QueryLoginLogListResp struct {
 	PageSize int64                    `json:"pageSize,default=20"`
 	Success  bool                     `json:"success"`
 	Total    int64                    `json:"total"`
+}
+
+type QueryMemberLevelDetailData struct {
+	CommentGrowthPoint int32  `json:"commentGrowthPoint"` //每次评价获取的成长值
+	DefaultStatus      int32  `json:"defaultStatus"`      //是否为默认等级：0->不是；1->是
+	FreeFreightPoint   int64  `json:"freeFreightPoint"`   //免运费标准
+	GrowthPoint        int32  `json:"growthPoint"`        //成长点
+	Id                 int64  `json:"id"`                 //
+	IsBirthday         int32  `json:"isBirthday"`         //是否有生日特权
+	IsComment          int32  `json:"isComment"`          //是否有评论获奖励特权
+	IsFreeFreight      int32  `json:"isFreeFreight"`      //是否有免邮特权
+	IsMemberPrice      int32  `json:"isMemberPrice"`      //是否有会员价格特权
+	IsPromotion        int32  `json:"isPromotion"`        //是否有专享活动特权
+	IsSignIn           int32  `json:"isSignIn"`           //是否有签到特权
+	LevelName          string `json:"levelName"`          //等级名称
+	Remark             string `json:"remark"`             //备注
+}
+
+type QueryMemberLevelDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMemberLevelDetailResp struct {
+	Code    string                     `json:"code"`
+	Message string                     `json:"message"`
+	Data    QueryMemberLevelDetailData `json:"data"`
+}
+
+type QueryMemberLevelListData struct {
+	CommentGrowthPoint int32  `json:"commentGrowthPoint"` //每次评价获取的成长值
+	DefaultStatus      int32  `json:"defaultStatus"`      //是否为默认等级：0->不是；1->是
+	FreeFreightPoint   int64  `json:"freeFreightPoint"`   //免运费标准
+	GrowthPoint        int32  `json:"growthPoint"`        //成长点
+	Id                 int64  `json:"id"`                 //
+	IsBirthday         int32  `json:"isBirthday"`         //是否有生日特权
+	IsComment          int32  `json:"isComment"`          //是否有评论获奖励特权
+	IsFreeFreight      int32  `json:"isFreeFreight"`      //是否有免邮特权
+	IsMemberPrice      int32  `json:"isMemberPrice"`      //是否有会员价格特权
+	IsPromotion        int32  `json:"isPromotion"`        //是否有专享活动特权
+	IsSignIn           int32  `json:"isSignIn"`           //是否有签到特权
+	LevelName          string `json:"levelName"`          //等级名称
+	Remark             string `json:"remark"`             //备注
+}
+
+type QueryMemberLevelListReq struct {
+	Current   int64  `form:"current,default=1"`   //第几页
+	PageSize  int64  `form:"pageSize,default=20"` //每页的数量
+	LevelName string `json:"levelName,optional"`  //等级名称
+}
+
+type QueryMemberLevelListResp struct {
+	Code     string                      `json:"code"`
+	Message  string                      `json:"message"`
+	Current  int64                       `json:"current,default=1"`
+	Data     []*QueryMemberLevelListData `json:"data"`
+	PageSize int64                       `json:"pageSize,default=20"`
+	Success  bool                        `json:"success"`
+	Total    int64                       `json:"total"`
+}
+
+type QueryMemberRuleSettingDetailData struct {
+	ConsumePerPoint   int64  `json:"consumePerPoint"`   //每消费多少元获取1个点
+	ContinueSignDay   int32  `json:"continueSignDay"`   //连续签到天数
+	ContinueSignPoint int32  `json:"continueSignPoint"` //连续签到赠送数量
+	CreateBy          string `json:"createBy"`          //创建者
+	CreateTime        string `json:"createTime"`        //创建时间
+	Id                int64  `json:"id"`                //
+	LowOrderAmount    int64  `json:"lowOrderAmount"`    //最低获取点数的订单金额
+	MaxPointPerOrder  int32  `json:"maxPointPerOrder"`  //每笔订单最高获取点数
+	RuleType          int32  `json:"ruleType"`          //类型：0->积分规则；1->成长值规则
+	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
+	UpdateBy          string `json:"updateBy"`          //更新者
+	UpdateTime        string `json:"updateTime"`        //更新时间
+}
+
+type QueryMemberRuleSettingDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMemberRuleSettingDetailResp struct {
+	Code    string                           `json:"code"`
+	Message string                           `json:"message"`
+	Data    QueryMemberRuleSettingDetailData `json:"data"`
+}
+
+type QueryMemberRuleSettingListData struct {
+	ConsumePerPoint   int64  `json:"consumePerPoint"`   //每消费多少元获取1个点
+	ContinueSignDay   int32  `json:"continueSignDay"`   //连续签到天数
+	ContinueSignPoint int32  `json:"continueSignPoint"` //连续签到赠送数量
+	CreateBy          string `json:"createBy"`          //创建者
+	CreateTime        string `json:"createTime"`        //创建时间
+	Id                int64  `json:"id"`                //
+	LowOrderAmount    int64  `json:"lowOrderAmount"`    //最低获取点数的订单金额
+	MaxPointPerOrder  int32  `json:"maxPointPerOrder"`  //每笔订单最高获取点数
+	RuleType          int32  `json:"ruleType"`          //类型：0->积分规则；1->成长值规则
+	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
+	UpdateBy          string `json:"updateBy"`          //更新者
+	UpdateTime        string `json:"updateTime"`        //更新时间
+}
+
+type QueryMemberRuleSettingListReq struct {
+	Current  int64 `form:"current,default=1"`   //第几页
+	PageSize int64 `form:"pageSize,default=20"` //每页的数量
+	RuleType int32 `form:"ruleType,default=2"`  //类型：0->积分规则；1->成长值规则
+	Status   int32 `form:"status,default=2"`    //状态：0->禁用；1->启用
+}
+
+type QueryMemberRuleSettingListResp struct {
+	Code     string                            `json:"code"`
+	Message  string                            `json:"message"`
+	Current  int64                             `json:"current,default=1"`
+	Data     []*QueryMemberRuleSettingListData `json:"data"`
+	PageSize int64                             `json:"pageSize,default=20"`
+	Success  bool                              `json:"success"`
+	Total    int64                             `json:"total"`
+}
+
+type QueryMemberStatisticsInfoDetailData struct {
+	AttendCount         int32  `json:"attendCount"`         //关注数量
+	CollectCommentCount int32  `json:"collectCommentCount"` //
+	CollectProductCount int32  `json:"collectProductCount"` //
+	CollectSubjectCount int32  `json:"collectSubjectCount"` //
+	CollectTopicCount   int32  `json:"collectTopicCount"`   //
+	CommentCount        int32  `json:"commentCount"`        //评价数
+	ConsumeAmount       int64  `json:"consumeAmount"`       //累计消费金额
+	CouponCount         int32  `json:"couponCount"`         //优惠券数量
+	FansCount           int32  `json:"fansCount"`           //粉丝数量
+	Id                  int64  `json:"id"`                  //
+	InviteFriendCount   int32  `json:"inviteFriendCount"`   //
+	LoginCount          int32  `json:"loginCount"`          //登录次数
+	MemberId            int64  `json:"memberId"`            //
+	OrderCount          int32  `json:"orderCount"`          //订单数量
+	RecentOrderTime     string `json:"recentOrderTime"`     //最后一次下订单时间
+	ReturnOrderCount    int32  `json:"returnOrderCount"`    //退货数量
+}
+
+type QueryMemberStatisticsInfoDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMemberStatisticsInfoDetailResp struct {
+	Code    string                              `json:"code"`
+	Message string                              `json:"message"`
+	Data    QueryMemberStatisticsInfoDetailData `json:"data"`
+}
+
+type QueryMemberTagDetailData struct {
+	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+	FinishOrderCount  int32  `json:"finishOrderCount"`  //自动打标签完成订单数量
+	Id                int64  `json:"id"`                //
+	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
+	TagName           string `json:"tagName"`           //标签名称
+}
+
+type QueryMemberTagDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMemberTagDetailResp struct {
+	Code    string                   `json:"code"`
+	Message string                   `json:"message"`
+	Data    QueryMemberTagDetailData `json:"data"`
+}
+
+type QueryMemberTagListData struct {
+	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+	FinishOrderCount  int32  `json:"finishOrderCount"`  //自动打标签完成订单数量
+	Id                int64  `json:"id"`                //
+	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
+	TagName           string `json:"tagName"`           //标签名称
+}
+
+type QueryMemberTagListReq struct {
+	Current  int64  `form:"current,default=1"`   //第几页
+	PageSize int64  `form:"pageSize,default=20"` //每页的数量
+	Status   int32  `form:"status,default=2"`    //状态：0->禁用；1->启用
+	TagName  string `form:"tagName,optional"`    //标签名称
+}
+
+type QueryMemberTagListResp struct {
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
+	Current  int64                     `json:"current,default=1"`
+	Data     []*QueryMemberTagListData `json:"data"`
+	PageSize int64                     `json:"pageSize,default=20"`
+	Success  bool                      `json:"success"`
+	Total    int64                     `json:"total"`
+}
+
+type QueryMemberTaskDetailData struct {
+	CreateBy     string `json:"createBy"`     //创建者
+	CreateTime   string `json:"createTime"`   //创建时间
+	Id           int64  `json:"id"`           //
+	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
+	TaskGrowth   int32  `json:"taskGrowth"`   //赠送成长值
+	TaskIntegral int32  `json:"taskIntegral"` //赠送积分
+	TaskName     string `json:"taskName"`     //任务名称
+	TaskType     int32  `json:"taskType"`     //任务类型：0->新手任务；1->日常任务
+	UpdateBy     string `json:"updateBy"`     //更新者
+	UpdateTime   string `json:"updateTime"`   //更新时间
+}
+
+type QueryMemberTaskDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMemberTaskDetailResp struct {
+	Code    string                    `json:"code"`
+	Message string                    `json:"message"`
+	Data    QueryMemberTaskDetailData `json:"data"`
+}
+
+type QueryMemberTaskListData struct {
+	CreateBy     string `json:"createBy"`     //创建者
+	CreateTime   string `json:"createTime"`   //创建时间
+	Id           int64  `json:"id"`           //
+	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
+	TaskGrowth   int32  `json:"taskGrowth"`   //赠送成长值
+	TaskIntegral int32  `json:"taskIntegral"` //赠送积分
+	TaskName     string `json:"taskName"`     //任务名称
+	TaskType     int32  `json:"taskType"`     //任务类型：0->新手任务；1->日常任务
+	UpdateBy     string `json:"updateBy"`     //更新者
+	UpdateTime   string `json:"updateTime"`   //更新时间
+}
+
+type QueryMemberTaskListReq struct {
+	Current  int64  `form:"current,default=1"`   //第几页
+	PageSize int64  `form:"pageSize,default=20"` //每页的数量
+	Status   int32  `form:"status,default=2"`    //状态：0->禁用；1->启用
+	TaskName string `form:"taskName,optional"`   //任务名称
+	TaskType int32  `form:"taskType,default=2"`  //任务类型：0->新手任务；1->日常任务
+}
+
+type QueryMemberTaskListResp struct {
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
+	Current  int64                      `json:"current,default=1"`
+	Data     []*QueryMemberTaskListData `json:"data"`
+	PageSize int64                      `json:"pageSize,default=20"`
+	Success  bool                       `json:"success"`
+	Total    int64                      `json:"total"`
 }
 
 type QueryMenuDetailData struct {
@@ -3197,11 +3332,12 @@ type UpdateHomeBrandStatusResp struct {
 }
 
 type UpdateIntegrationConsumeSettingReq struct {
-	Id                 int64 `json:"id"`
-	DeductionPerAmount int32 `json:"deductionPerAmount"` // 每一元需要抵扣的积分数量
-	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
-	UseUnit            int32 `json:"useUnit"`            // 每次使用积分最小单位100
-	CouponStatus       int32 `json:"couponStatus"`       // 是否可以和优惠券同用；0->不可以；1->可以
+	CouponStatus       int32 `json:"couponStatus"`       //是否可以和优惠券同用；0->不可以；1->可以
+	DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
+	Id                 int64 `json:"id"`                 //
+	IsDefault          int32 `json:"isDefault"`          //是否默认：0->否；1->是
+	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
+	UseUnit            int32 `json:"useUnit"`            //每次使用积分最小单位100
 }
 
 type UpdateIntegrationConsumeSettingResp struct {
@@ -3209,23 +3345,43 @@ type UpdateIntegrationConsumeSettingResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateIntegrationConsumeSettingStatusReq struct {
+	Id        int64 `json:"id"`        //
+	IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
+}
+
+type UpdateIntegrationConsumeSettingStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateMemberLevelReq struct {
-	Id                 int64  `json:"id"`
-	Name               string `json:"name"`
-	GrowthPoint        int32  `json:"growthPoint"`
-	DefaultStatus      int32  `json:"defaultStatus"`      // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   int64  `json:"freeFreightPoint"`   // 免运费标准
-	CommentGrowthPoint int32  `json:"commentGrowthPoint"` // 每次评价获取的成长值
-	IsFreeFreight      int32  `json:"isFreeFreight"`      // 是否有免邮特权
-	IsSignIn           int32  `json:"isSignIn"`           // 是否有签到特权
-	IsComment          int32  `json:"isComment"`          // 是否有评论获奖励特权
-	IsPromotion        int32  `json:"isPromotion"`        // 是否有专享活动特权
-	IsMemberPrice      int32  `json:"isMemberPrice"`      // 是否有会员价格特权
-	IsBirthday         int32  `json:"isBirthday"`         // 是否有生日特权
-	Note               string `json:"note"`
+	CommentGrowthPoint int32  `json:"commentGrowthPoint"` //每次评价获取的成长值
+	DefaultStatus      int32  `json:"defaultStatus"`      //是否为默认等级：0->不是；1->是
+	FreeFreightPoint   int64  `json:"freeFreightPoint"`   //免运费标准
+	GrowthPoint        int32  `json:"growthPoint"`        //成长点
+	Id                 int64  `json:"id"`                 //
+	IsBirthday         int32  `json:"isBirthday"`         //是否有生日特权
+	IsComment          int32  `json:"isComment"`          //是否有评论获奖励特权
+	IsFreeFreight      int32  `json:"isFreeFreight"`      //是否有免邮特权
+	IsMemberPrice      int32  `json:"isMemberPrice"`      //是否有会员价格特权
+	IsPromotion        int32  `json:"isPromotion"`        //是否有专享活动特权
+	IsSignIn           int32  `json:"isSignIn"`           //是否有签到特权
+	LevelName          string `json:"levelName"`          //等级名称
+	Remark             string `json:"remark,optional"`    //备注
 }
 
 type UpdateMemberLevelResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateMemberLevelStatusReq struct {
+	DefaultStatus int32 `json:"defaultStatus"` //是否为默认等级：0->不是；1->是
+	Id            int64 `json:"id"`            //
+}
+
+type UpdateMemberLevelStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3265,13 +3421,14 @@ type UpdateMemberResp struct {
 }
 
 type UpdateMemberRuleSettingReq struct {
-	Id                int64 `json:"id"`
-	ContinueSignDay   int32 `json:"continueSignDay"`   // 连续签到天数
-	ContinueSignPoint int32 `json:"continueSignPoint"` // 连续签到赠送数量
-	ConsumePerPoint   int64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
-	LowOrderAmount    int64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
-	Type              int32 `json:"type"`              // 类型：0->积分规则；1->成长值规则
+	ConsumePerPoint   int64 `json:"consumePerPoint"`   //每消费多少元获取1个点
+	ContinueSignDay   int32 `json:"continueSignDay"`   //连续签到天数
+	ContinueSignPoint int32 `json:"continueSignPoint"` //连续签到赠送数量
+	Id                int64 `json:"id"`                //
+	LowOrderAmount    int64 `json:"lowOrderAmount"`    //最低获取点数的订单金额
+	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  //每笔订单最高获取点数
+	RuleType          int32 `json:"ruleType"`          //类型：0->积分规则；1->成长值规则
+	Status            int32 `json:"status"`            //状态：0->禁用；1->启用
 }
 
 type UpdateMemberRuleSettingResp struct {
@@ -3279,11 +3436,22 @@ type UpdateMemberRuleSettingResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateMemberRuleSettingStatusReq struct {
+	Ids    []int64 `form:"ids"`
+	Status int32   `json:"status"` //状态：0->禁用；1->启用
+}
+
+type UpdateMemberRuleSettingStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateMemberTagReq struct {
-	Id                int64  `json:"id"`
-	Name              string `json:"name"`
-	FinishOrderCount  int32  `json:"finishOrderCount"`  // 自动打标签完成订单数量
-	FinishOrderAmount int64  `json:"finishOrderAmount"` // 自动打标签完成订单金额
+	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+	FinishOrderCount  int32  `json:"finishOrderCount"`  //自动打标签完成订单数量
+	Id                int64  `json:"id"`                //
+	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
+	TagName           string `json:"tagName"`           //标签名称
 }
 
 type UpdateMemberTagResp struct {
@@ -3291,15 +3459,36 @@ type UpdateMemberTagResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateMemberTagStatusReq struct {
+	Ids    []int64 `form:"ids"`
+	Status int32   `json:"status"` //状态：0->禁用；1->启用
+}
+
+type UpdateMemberTagStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateMemberTaskReq struct {
-	Id           int64  `json:"id"`
-	Name         string `json:"name"`
-	Growth       int32  `json:"growth"`       // 赠送成长值
-	Intergration int32  `json:"intergration"` // 赠送积分
-	Type         int32  `json:"type"`         // 任务类型：0->新手任务；1->日常任务
+	Id           int64  `json:"id"`           //
+	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
+	TaskGrowth   int32  `json:"taskGrowth"`   //赠送成长值
+	TaskIntegral int32  `json:"taskIntegral"` //赠送积分
+	TaskName     string `json:"taskName"`     //任务名称
+	TaskType     int32  `json:"taskType"`     //任务类型：0->新手任务；1->日常任务
 }
 
 type UpdateMemberTaskResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateMemberTaskStatusReq struct {
+	Ids    []int64 `json:"ids"`    //
+	Status int32   `json:"status"` //状态：0->禁用；1->启用
+}
+
+type UpdateMemberTaskStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

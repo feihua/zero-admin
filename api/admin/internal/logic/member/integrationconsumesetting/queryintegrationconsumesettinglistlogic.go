@@ -32,9 +32,9 @@ func NewQueryIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc
 }
 
 // QueryIntegrationConsumeSettingList 查询积分消费设置列表
-func (l *QueryIntegrationConsumeSettingListLogic) QueryIntegrationConsumeSettingList(req *types.ListIntegrationConsumeSettingReq) (resp *types.ListIntegrationConsumeSettingResp, err error) {
-	result, err := l.svcCtx.IntegrationConsumeSettingService.IntegrationConsumeSettingList(l.ctx, &umsclient.IntegrationConsumeSettingListReq{
-		Current:  req.Current,
+func (l *QueryIntegrationConsumeSettingListLogic) QueryIntegrationConsumeSettingList(req *types.QueryIntegrationConsumeSettingListReq) (resp *types.QueryIntegrationConsumeSettingListResp, err error) {
+	result, err := l.svcCtx.IntegrationConsumeSettingService.QueryIntegrationConsumeSettingList(l.ctx, &umsclient.QueryIntegrationConsumeSettingListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 	})
 
@@ -43,10 +43,10 @@ func (l *QueryIntegrationConsumeSettingListLogic) QueryIntegrationConsumeSetting
 		return nil, errorx.NewDefaultError("查询积分消费设置失败")
 	}
 
-	var list []*types.ListIntegrationConsumeSettingData
+	var list []*types.QueryIntegrationConsumeSettingListData
 
 	for _, item := range result.List {
-		list = append(list, &types.ListIntegrationConsumeSettingData{
+		list = append(list, &types.QueryIntegrationConsumeSettingListData{
 			Id:                 item.Id,
 			DeductionPerAmount: item.DeductionPerAmount,
 			MaxPercentPerOrder: item.MaxPercentPerOrder,
@@ -55,7 +55,7 @@ func (l *QueryIntegrationConsumeSettingListLogic) QueryIntegrationConsumeSetting
 		})
 	}
 
-	return &types.ListIntegrationConsumeSettingResp{
+	return &types.QueryIntegrationConsumeSettingListResp{
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

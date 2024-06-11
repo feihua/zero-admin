@@ -38,10 +38,10 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterRe
 			Message: "两次密码不一致",
 		}, nil
 	}
-	rpcResult, err := l.svcCtx.MemberService.MemberAdd(l.ctx, &umsclient.MemberAddReq{
-		Username: req.Username,
-		Password: req.Password,
-		Phone:    req.Mobile,
+	rpcResult, err := l.svcCtx.MemberService.AddMember(l.ctx, &umsclient.AddMemberReq{
+		MemberName: req.Username,
+		Password:   req.Password,
+		Phone:      req.Mobile,
 	})
 
 	if err != nil {

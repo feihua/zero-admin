@@ -33,7 +33,7 @@ func NewDeleteProductCollectionLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // DeleteProductCollection 删除商品收藏/清空当前用户商品收藏列表
 func (l *DeleteProductCollectionLogic) DeleteProductCollection(req *types.ProductCollectionDeleteReq) (resp *types.ProductCollectionDeleteResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.MemberProductCollectionService.MemberProductCollectionDelete(l.ctx, &umsclient.MemberProductCollectionDeleteReq{
+	_, _ = l.svcCtx.MemberProductCollectionService.DeleteMemberProductCollection(l.ctx, &umsclient.DeleteMemberProductCollectionReq{
 		Ids:      req.Ids,
 		MemberId: memberId,
 	})

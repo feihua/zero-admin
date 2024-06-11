@@ -33,8 +33,8 @@ func NewAddMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 
 // AddMemberLevel 添加会员等级
 func (l *AddMemberLevelLogic) AddMemberLevel(req *types.AddMemberLevelReq) (resp *types.AddMemberLevelResp, err error) {
-	_, err = l.svcCtx.MemberLevelService.MemberLevelAdd(l.ctx, &umsclient.MemberLevelAddReq{
-		LevelName:          req.Name,
+	_, err = l.svcCtx.MemberLevelService.AddMemberLevel(l.ctx, &umsclient.AddMemberLevelReq{
+		LevelName:          req.LevelName,
 		GrowthPoint:        req.GrowthPoint,
 		DefaultStatus:      req.DefaultStatus,
 		FreeFreightPoint:   req.FreeFreightPoint,
@@ -45,7 +45,7 @@ func (l *AddMemberLevelLogic) AddMemberLevel(req *types.AddMemberLevelReq) (resp
 		IsPromotion:        req.IsPromotion,
 		IsMemberPrice:      req.IsMemberPrice,
 		IsBirthday:         req.IsBirthday,
-		Remark:             req.Note,
+		Remark:             req.Remark,
 	})
 
 	if err != nil {

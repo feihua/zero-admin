@@ -33,8 +33,8 @@ func NewQueryIntegrationChangeHistoryListLogic(ctx context.Context, svcCtx *svc.
 
 // QueryIntegrationChangeHistoryList 查询积分变化历史记录列表
 func (l *QueryIntegrationChangeHistoryListLogic) QueryIntegrationChangeHistoryList(req *types.ListChangeHistoryReq) (resp *types.ListChangeHistoryResp, err error) {
-	result, err := l.svcCtx.IntegrationChangeHistoryService.IntegrationChangeHistoryList(l.ctx, &umsclient.IntegrationChangeHistoryListReq{
-		Current:  req.Current,
+	result, err := l.svcCtx.IntegrationChangeHistoryService.QueryIntegrationChangeHistoryList(l.ctx, &umsclient.QueryIntegrationChangeHistoryListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 		MemberId: req.MemberId,
 	})

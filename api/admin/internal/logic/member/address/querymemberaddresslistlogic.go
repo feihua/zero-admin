@@ -33,8 +33,8 @@ func NewQueryMemberAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCont
 
 // QueryMemberAddressList 查询会员地址
 func (l *QueryMemberAddressListLogic) QueryMemberAddressList(req *types.ListMemberAddressReq) (resp *types.ListMemberAddressResp, err error) {
-	result, err := l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
-		Current:  req.Current,
+	result, err := l.svcCtx.MemberReceiveAddressService.QueryMemberReceiveAddressList(l.ctx, &umsclient.QueryMemberReceiveAddressListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 		MemberId: req.MemberId,
 	})
@@ -50,7 +50,7 @@ func (l *QueryMemberAddressListLogic) QueryMemberAddressList(req *types.ListMemb
 		list = append(list, &types.ListMemberAddressData{
 			Id:            item.Id,
 			MemberId:      item.MemberId,
-			Name:          item.MemberName,
+			MemberName:    item.MemberName,
 			PhoneNumber:   item.PhoneNumber,
 			DefaultStatus: item.DefaultStatus,
 			PostCode:      item.PostCode,

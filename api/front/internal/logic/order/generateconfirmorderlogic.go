@@ -74,8 +74,8 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 	}
 
 	//2.获取用户收货地址列表
-	addressListResp, _ := l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
-		Current:  1,
+	addressListResp, _ := l.svcCtx.MemberReceiveAddressService.QueryMemberReceiveAddressList(l.ctx, &umsclient.QueryMemberReceiveAddressListReq{
+		PageNum:  1,
 		PageSize: 100,
 		MemberId: memberId,
 	})
@@ -98,11 +98,11 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 	//3.获取该用户所有未使用优惠券
 	enableList, disableList := coupon.QueryCouponList(l.svcCtx, l.ctx, cartPromotionItemList)
 	//4.获取用户积分
-	memberInfo, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{
+	memberInfo, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{
 		Id: memberId,
 	})
 	//5.获取积分使用规则
-	settingInfo, _ := l.svcCtx.IntegrationConsumeSettingService.QueryIntegrationConsumeSettingById(l.ctx, &umsclient.QueryIntegrationConsumeSettingByIdReq{
+	settingInfo, _ := l.svcCtx.IntegrationConsumeSettingService.QueryIntegrationConsumeSettingDetail(l.ctx, &umsclient.QueryIntegrationConsumeSettingDetailReq{
 		Id: 1,
 	})
 	//6.计算总金额、活动优惠、应付金额

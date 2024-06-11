@@ -46,7 +46,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/client/growthchangehistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/integrationchangehistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/integrationconsumesettingservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/memberattentionservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/memberbrandattentionservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberlevelservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberloginlogservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membermembertagrelationservice"
@@ -82,7 +82,7 @@ type ServiceContext struct {
 	MemberStatisticsInfoService          memberstatisticsinfoservice.MemberStatisticsInfoService
 	MemberTagService                     membertagservice.MemberTagService
 	MemberTaskService                    membertaskservice.MemberTaskService
-	MemberAttentionService               memberattentionservice.MemberAttentionService
+	MemberBrandAttentionService          memberbrandattentionservice.MemberBrandAttentionService
 
 	//商品相关
 	AlbumPicService                         albumpicservice.AlbumPicService
@@ -161,7 +161,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		MemberStatisticsInfoService:          memberstatisticsinfoservice.NewMemberStatisticsInfoService(umsClient),
 		MemberTagService:                     membertagservice.NewMemberTagService(umsClient),
 		MemberTaskService:                    membertaskservice.NewMemberTaskService(umsClient),
-		MemberAttentionService:               memberattentionservice.NewMemberAttentionService(umsClient),
+		MemberBrandAttentionService:          memberbrandattentionservice.NewMemberBrandAttentionService(umsClient),
 
 		AlbumPicService:                         albumpicservice.NewAlbumPicService(pmsClient),
 		AlbumService:                            albumservice.NewAlbumService(pmsClient),

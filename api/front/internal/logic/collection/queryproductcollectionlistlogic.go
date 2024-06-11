@@ -33,8 +33,8 @@ func NewQueryProductCollectionListLogic(ctx context.Context, svcCtx *svc.Service
 // QueryProductCollectionList 查询会员收藏的商品
 func (l *QueryProductCollectionListLogic) QueryProductCollectionList() (resp *types.ProductCollectionListResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	collectionList, _ := l.svcCtx.MemberProductCollectionService.MemberProductCollectionList(l.ctx, &umsclient.MemberProductCollectionListReq{
-		Current:   1,
+	collectionList, _ := l.svcCtx.MemberProductCollectionService.QueryMemberProductCollectionList(l.ctx, &umsclient.QueryMemberProductCollectionListReq{
+		PageNum:   1,
 		PageSize:  100,
 		MemberId:  memberId,
 		ProductId: 0,

@@ -32,9 +32,9 @@ func NewQueryMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 // QueryMemberRuleSettingList 查询会员积分规则列表
-func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(req *types.ListMemberRuleSettingReq) (resp *types.ListMemberRuleSettingResp, err error) {
-	result, err := l.svcCtx.MemberRuleSettingService.MemberRuleSettingList(l.ctx, &umsclient.MemberRuleSettingListReq{
-		Current:  req.Current,
+func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(req *types.QueryMemberRuleSettingListReq) (resp *types.QueryMemberRuleSettingListResp, err error) {
+	result, err := l.svcCtx.MemberRuleSettingService.QueryMemberRuleSettingList(l.ctx, &umsclient.QueryMemberRuleSettingListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 	})
 
@@ -43,21 +43,21 @@ func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(req *types.
 		return nil, errorx.NewDefaultError("查询会员积分规则失败")
 	}
 
-	var list []*types.ListMemberRuleSettingData
+	var list []*types.QueryMemberRuleSettingListData
 
 	for _, item := range result.List {
-		list = append(list, &types.ListMemberRuleSettingData{
+		list = append(list, &types.QueryMemberRuleSettingListData{
 			Id:                item.Id,
 			ContinueSignDay:   item.ContinueSignDay,
 			ContinueSignPoint: item.ContinueSignPoint,
 			ConsumePerPoint:   item.ConsumePerPoint,
 			LowOrderAmount:    item.LowOrderAmount,
 			MaxPointPerOrder:  item.MaxPointPerOrder,
-			Type:              item.RuleType,
+			RuleType:          item.RuleType,
 		})
 	}
 
-	return &types.ListMemberRuleSettingResp{
+	return &types.QueryMemberRuleSettingListResp{
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

@@ -6,6 +6,7 @@ create table ums_member_task
     task_growth   int                                   not null comment '赠送成长值',
     task_integral int                                   not null comment '赠送积分',
     task_type     tinyint                               not null comment '任务类型：0->新手任务；1->日常任务',
+    status        tinyint     default 1                 not null comment '状态：0->禁用；1->启用',
     create_by     varchar(50)                           not null comment '创建者',
     create_time   datetime    default CURRENT_TIMESTAMP not null comment '创建时间',
     update_by     varchar(50) default ''                not null comment '更新者',

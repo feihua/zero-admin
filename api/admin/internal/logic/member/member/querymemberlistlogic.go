@@ -34,12 +34,12 @@ func NewQueryMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 
 // QueryMemberList 查询会员信息列表
 func (l *QueryMemberListLogic) QueryMemberList(req *types.ListMemberReq) (resp *types.ListMemberResp, err error) {
-	result, err := l.svcCtx.MemberService.MemberList(l.ctx, &umsclient.MemberListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		Username: strings.TrimSpace(req.Username),
-		Phone:    strings.TrimSpace(req.Phone),
-		Status:   req.Status,
+	result, err := l.svcCtx.MemberService.QueryMemberList(l.ctx, &umsclient.QueryMemberListReq{
+		PageNum:      req.Current,
+		PageSize:     req.PageSize,
+		MemberName:   strings.TrimSpace(req.Username),
+		Phone:        strings.TrimSpace(req.Phone),
+		MemberStatus: req.Status,
 	})
 
 	if err != nil {
@@ -53,10 +53,10 @@ func (l *QueryMemberListLogic) QueryMemberList(req *types.ListMemberReq) (resp *
 		list = append(list, &types.ListMemberData{
 			Id:                    member.Id,
 			MemberLevelId:         member.MemberLevelId,
-			Username:              member.Username,
+			Username:              member.MemberName,
 			Nickname:              member.Nickname,
 			Phone:                 member.Phone,
-			Status:                member.Status,
+			Status:                member.MemberStatus,
 			CreateTime:            member.CreateTime,
 			Icon:                  member.Icon,
 			Gender:                member.Gender,
@@ -67,7 +67,7 @@ func (l *QueryMemberListLogic) QueryMemberList(req *types.ListMemberReq) (resp *
 			SourceType:            member.SourceType,
 			Integration:           member.Integration,
 			Growth:                member.Growth,
-			LuckeyCount:           member.LuckeyCount,
+			LuckeyCount:           member.LotteryCount,
 			HistoryIntegration:    member.HistoryIntegration,
 		})
 	}

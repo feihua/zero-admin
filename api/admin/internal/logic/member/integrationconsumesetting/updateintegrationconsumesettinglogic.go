@@ -33,7 +33,7 @@ func NewUpdateIntegrationConsumeSettingLogic(ctx context.Context, svcCtx *svc.Se
 
 // UpdateIntegrationConsumeSetting 更新积分消费设置
 func (l *UpdateIntegrationConsumeSettingLogic) UpdateIntegrationConsumeSetting(req *types.UpdateIntegrationConsumeSettingReq) (resp *types.UpdateIntegrationConsumeSettingResp, err error) {
-	_, err = l.svcCtx.IntegrationConsumeSettingService.IntegrationConsumeSettingUpdate(l.ctx, &umsclient.IntegrationConsumeSettingUpdateReq{
+	_, err = l.svcCtx.IntegrationConsumeSettingService.UpdateIntegrationConsumeSetting(l.ctx, &umsclient.UpdateIntegrationConsumeSettingReq{
 		Id:                 req.Id,
 		DeductionPerAmount: req.DeductionPerAmount,
 		MaxPercentPerOrder: req.MaxPercentPerOrder,

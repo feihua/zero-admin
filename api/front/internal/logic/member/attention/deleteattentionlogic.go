@@ -33,8 +33,8 @@ func NewDeleteAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *D
 // DeleteAttention //取消品牌关注/清空当前用户品牌关注列表
 func (l *DeleteAttentionLogic) DeleteAttention(req *types.DeleteAttentionReq) (resp *types.DeleteAttentionResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.MemberAttentionService.MemberBrandAttentionDelete(l.ctx, &umsclient.MemberBrandAttentionDeleteReq{
-		BrandIds: req.BrandIds,
+	_, _ = l.svcCtx.MemberBrandAttentionService.DeleteMemberBrandAttention(l.ctx, &umsclient.DeleteMemberBrandAttentionReq{
+		Ids:      req.BrandIds,
 		MemberId: memberId,
 	})
 

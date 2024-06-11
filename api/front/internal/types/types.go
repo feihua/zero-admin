@@ -442,7 +442,7 @@ type DeleteAttentionResp struct {
 }
 
 type DeleteMemberAddressReq struct {
-	Id int64 `form:"id"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberAddressResp struct {

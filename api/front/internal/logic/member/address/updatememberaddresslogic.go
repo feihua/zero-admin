@@ -33,7 +33,7 @@ func NewUpdateMemberAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext
 // UpdateMemberAddress 修改收货地址
 func (l *UpdateMemberAddressLogic) UpdateMemberAddress(req *types.UpdateMemberAddressReq) (resp *types.UpdateMemberAddressResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, err = l.svcCtx.MemberReceiveAddressService.MemberReceiveAddressUpdate(l.ctx, &umsclient.MemberReceiveAddressUpdateReq{
+	_, err = l.svcCtx.MemberReceiveAddressService.UpdateMemberReceiveAddress(l.ctx, &umsclient.UpdateMemberReceiveAddressReq{
 		Id:            req.Id,
 		MemberId:      memberId,
 		MemberName:    req.Name,

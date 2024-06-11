@@ -35,7 +35,7 @@ func NewInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *InfoLogic {
 func (l *InfoLogic) Info() (resp *types.InfoResp, err error) {
 	//从jwt中提取会员id
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
+	member, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
 
 	// 获取用户优惠券
 	result, err := l.svcCtx.CouponHistoryService.CouponCount(l.ctx, &smsclient.CouponCountReq{
@@ -53,10 +53,10 @@ func (l *InfoLogic) Info() (resp *types.InfoResp, err error) {
 		Data: types.MemberData{
 			Id:                    member.Id,
 			MemberLevelId:         member.MemberLevelId,
-			Username:              member.Username,
+			Username:              member.MemberName,
 			Nickname:              member.Nickname,
 			Phone:                 member.Phone,
-			Status:                member.Status,
+			Status:                member.MemberStatus,
 			CreateTime:            member.CreateTime,
 			Icon:                  member.Icon,
 			Gender:                member.Gender,
@@ -67,7 +67,7 @@ func (l *InfoLogic) Info() (resp *types.InfoResp, err error) {
 			SourceType:            member.SourceType,
 			Integration:           member.Integration,
 			Growth:                member.Growth,
-			LuckeyCount:           member.LuckeyCount,
+			LuckeyCount:           member.LotteryCount,
 			HistoryIntegration:    member.HistoryIntegration,
 			CouponCount:           count,
 		},

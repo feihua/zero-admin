@@ -33,7 +33,7 @@ func NewDeleteReadHistoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // DeleteReadHistory 删除浏览记录
 func (l *DeleteReadHistoryLogic) DeleteReadHistory(req *types.ReadHistoryDeleteReq) (resp *types.ReadHistoryDeleteResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.MemberReadHistoryService.MemberReadHistoryDelete(l.ctx, &umsclient.MemberReadHistoryDeleteReq{
+	_, _ = l.svcCtx.MemberReadHistoryService.DeleteMemberReadHistory(l.ctx, &umsclient.DeleteMemberReadHistoryReq{
 		Ids:      req.Ids,
 		MemberId: memberId,
 	})

@@ -33,7 +33,7 @@ func NewDeleteIntegrationConsumeSettingLogic(ctx context.Context, svcCtx *svc.Se
 
 // DeleteIntegrationConsumeSetting 删除积分消费设置
 func (l *DeleteIntegrationConsumeSettingLogic) DeleteIntegrationConsumeSetting(req *types.DeleteIntegrationConsumeSettingReq) (resp *types.DeleteIntegrationConsumeSettingResp, err error) {
-	_, err = l.svcCtx.IntegrationConsumeSettingService.IntegrationConsumeSettingDelete(l.ctx, &umsclient.IntegrationConsumeSettingDeleteReq{
+	_, err = l.svcCtx.IntegrationConsumeSettingService.DeleteIntegrationConsumeSetting(l.ctx, &umsclient.DeleteIntegrationConsumeSettingReq{
 		Ids: req.Ids,
 	})
 

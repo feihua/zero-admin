@@ -33,7 +33,7 @@ func NewDeleteMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // DeleteMemberLevel 删除会员等级
 func (l *DeleteMemberLevelLogic) DeleteMemberLevel(req *types.DeleteMemberLevelReq) (resp *types.DeleteMemberLevelResp, err error) {
-	_, err = l.svcCtx.MemberLevelService.MemberLevelDelete(l.ctx, &umsclient.MemberLevelDeleteReq{
+	_, err = l.svcCtx.MemberLevelService.DeleteMemberLevel(l.ctx, &umsclient.DeleteMemberLevelReq{
 		Ids: req.Ids,
 	})
 

@@ -3,11 +3,9 @@ package collection
 import (
 	"context"
 	"encoding/json"
-	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-	"time"
-
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -35,11 +33,11 @@ func NewAddProductCollectionLogic(ctx context.Context, svcCtx *svc.ServiceContex
 func (l *AddProductCollectionLogic) AddProductCollection(req *types.AddProductCollectionReq) (resp *types.AddProductCollectionResp, err error) {
 	//从token中获取会员id
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	member, _ := l.svcCtx.MemberService.QueryMemberById(l.ctx, &umsclient.MemberByIdReq{Id: memberId})
+	member, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
 
 	//查询是否已经收藏
-	collectionList, _ := l.svcCtx.MemberProductCollectionService.MemberProductCollectionList(l.ctx, &umsclient.MemberProductCollectionListReq{
-		Current:   1,
+	collectionList, _ := l.svcCtx.MemberProductCollectionService.QueryMemberProductCollectionList(l.ctx, &umsclient.QueryMemberProductCollectionListReq{
+		PageNum:   1,
 		PageSize:  10,
 		MemberId:  memberId,
 		ProductId: req.ProductId,
@@ -47,7 +45,7 @@ func (l *AddProductCollectionLogic) AddProductCollection(req *types.AddProductCo
 
 	//如果查询不到收藏记录,则添加
 	if len(collectionList.List) == 0 {
-		_, err = l.svcCtx.MemberProductCollectionService.MemberProductCollectionAdd(l.ctx, &umsclient.MemberProductCollectionAddReq{
+		_, err = l.svcCtx.MemberProductCollectionService.AddMemberProductCollection(l.ctx, &umsclient.AddMemberProductCollectionReq{
 			MemberId:        member.Id,
 			MemberNickName:  member.Nickname,
 			MemberIcon:      member.Icon,
@@ -56,7 +54,6 @@ func (l *AddProductCollectionLogic) AddProductCollection(req *types.AddProductCo
 			ProductPic:      req.ProductPic,
 			ProductSubTitle: req.ProductSubTitle,
 			ProductPrice:    req.ProductPrice,
-			CreateTime:      time.Now().Format("2006-01-02 15:04:05"),
 		})
 
 		if err != nil {
