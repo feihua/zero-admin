@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加专题商品关系表
+message AddSubjectProductRelationReq {
+  int64 product_id = 1; //
+  repeated int64 subject_id = 2; //
+
+}
+
+message AddSubjectProductRelationResp {
+  string pong = 1;
+}
+
+
+// 分页查询专题商品关系表列表
+message QuerySubjectProductRelationListReq {
+  int64 product_id = 1; //
+}
+
+message QuerySubjectProductRelationListResp {
+  repeated int64 subject_ids = 1; //
+
+}
+
+
+// 专题商品关系表
+service SubjectProductRelationService {
+  // 添加专题商品关系表
+  rpc AddSubjectProductRelation(AddSubjectProductRelationReq) returns (AddSubjectProductRelationResp){}
+  // 查询专题商品关系表列表
+  rpc QuerySubjectProductRelationList(QuerySubjectProductRelationListReq) returns (QuerySubjectProductRelationListResp){}
+
+
+}

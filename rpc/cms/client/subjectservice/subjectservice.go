@@ -13,43 +13,160 @@ import (
 )
 
 type (
-	PreferredAreaAddReq                  = cmsclient.PreferredAreaAddReq
-	PreferredAreaAddResp                 = cmsclient.PreferredAreaAddResp
-	PreferredAreaDeleteReq               = cmsclient.PreferredAreaDeleteReq
-	PreferredAreaDeleteResp              = cmsclient.PreferredAreaDeleteResp
-	PreferredAreaListData                = cmsclient.PreferredAreaListData
-	PreferredAreaListReq                 = cmsclient.PreferredAreaListReq
-	PreferredAreaListResp                = cmsclient.PreferredAreaListResp
-	PreferredAreaProductRelationAddReq   = cmsclient.PreferredAreaProductRelationAddReq
-	PreferredAreaProductRelationAddResp  = cmsclient.PreferredAreaProductRelationAddResp
-	PreferredAreaProductRelationListReq  = cmsclient.PreferredAreaProductRelationListReq
-	PreferredAreaProductRelationListResp = cmsclient.PreferredAreaProductRelationListResp
-	PreferredAreaUpdateReq               = cmsclient.PreferredAreaUpdateReq
-	PreferredAreaUpdateResp              = cmsclient.PreferredAreaUpdateResp
-	SubjectAddReq                        = cmsclient.SubjectAddReq
-	SubjectAddResp                       = cmsclient.SubjectAddResp
-	SubjectDeleteReq                     = cmsclient.SubjectDeleteReq
-	SubjectDeleteResp                    = cmsclient.SubjectDeleteResp
-	SubjectListByIdsReq                  = cmsclient.SubjectListByIdsReq
-	SubjectListData                      = cmsclient.SubjectListData
-	SubjectListReq                       = cmsclient.SubjectListReq
-	SubjectListResp                      = cmsclient.SubjectListResp
-	SubjectProductRelationAddReq         = cmsclient.SubjectProductRelationAddReq
-	SubjectProductRelationAddResp        = cmsclient.SubjectProductRelationAddResp
-	SubjectProductRelationListReq        = cmsclient.SubjectProductRelationListReq
-	SubjectProductRelationListResp       = cmsclient.SubjectProductRelationListResp
-	SubjectUpdateReq                     = cmsclient.SubjectUpdateReq
-	SubjectUpdateResp                    = cmsclient.SubjectUpdateResp
-	UpdateSubjectRecommendStatusReq      = cmsclient.UpdateSubjectRecommendStatusReq
-	UpdateSubjectRecommendStatusResp     = cmsclient.UpdateSubjectRecommendStatusResp
+	AddHelpCategoryReq                        = cmsclient.AddHelpCategoryReq
+	AddHelpCategoryResp                       = cmsclient.AddHelpCategoryResp
+	AddHelpReq                                = cmsclient.AddHelpReq
+	AddHelpResp                               = cmsclient.AddHelpResp
+	AddMemberReportReq                        = cmsclient.AddMemberReportReq
+	AddMemberReportResp                       = cmsclient.AddMemberReportResp
+	AddPreferredAreaProductRelationReq        = cmsclient.AddPreferredAreaProductRelationReq
+	AddPreferredAreaProductRelationResp       = cmsclient.AddPreferredAreaProductRelationResp
+	AddPreferredAreaReq                       = cmsclient.AddPreferredAreaReq
+	AddPreferredAreaResp                      = cmsclient.AddPreferredAreaResp
+	AddSubjectCategoryReq                     = cmsclient.AddSubjectCategoryReq
+	AddSubjectCategoryResp                    = cmsclient.AddSubjectCategoryResp
+	AddSubjectCommentReq                      = cmsclient.AddSubjectCommentReq
+	AddSubjectCommentResp                     = cmsclient.AddSubjectCommentResp
+	AddSubjectProductRelationReq              = cmsclient.AddSubjectProductRelationReq
+	AddSubjectProductRelationResp             = cmsclient.AddSubjectProductRelationResp
+	AddSubjectReq                             = cmsclient.AddSubjectReq
+	AddSubjectResp                            = cmsclient.AddSubjectResp
+	AddTopicCategoryReq                       = cmsclient.AddTopicCategoryReq
+	AddTopicCategoryResp                      = cmsclient.AddTopicCategoryResp
+	AddTopicCommentReq                        = cmsclient.AddTopicCommentReq
+	AddTopicCommentResp                       = cmsclient.AddTopicCommentResp
+	AddTopicReq                               = cmsclient.AddTopicReq
+	AddTopicResp                              = cmsclient.AddTopicResp
+	DeleteHelpCategoryReq                     = cmsclient.DeleteHelpCategoryReq
+	DeleteHelpCategoryResp                    = cmsclient.DeleteHelpCategoryResp
+	DeleteHelpReq                             = cmsclient.DeleteHelpReq
+	DeleteHelpResp                            = cmsclient.DeleteHelpResp
+	DeleteMemberReportReq                     = cmsclient.DeleteMemberReportReq
+	DeleteMemberReportResp                    = cmsclient.DeleteMemberReportResp
+	DeletePreferredAreaReq                    = cmsclient.DeletePreferredAreaReq
+	DeletePreferredAreaResp                   = cmsclient.DeletePreferredAreaResp
+	DeleteSubjectCategoryReq                  = cmsclient.DeleteSubjectCategoryReq
+	DeleteSubjectCategoryResp                 = cmsclient.DeleteSubjectCategoryResp
+	DeleteSubjectCommentReq                   = cmsclient.DeleteSubjectCommentReq
+	DeleteSubjectCommentResp                  = cmsclient.DeleteSubjectCommentResp
+	DeleteSubjectReq                          = cmsclient.DeleteSubjectReq
+	DeleteSubjectResp                         = cmsclient.DeleteSubjectResp
+	DeleteTopicCategoryReq                    = cmsclient.DeleteTopicCategoryReq
+	DeleteTopicCategoryResp                   = cmsclient.DeleteTopicCategoryResp
+	DeleteTopicCommentReq                     = cmsclient.DeleteTopicCommentReq
+	DeleteTopicCommentResp                    = cmsclient.DeleteTopicCommentResp
+	DeleteTopicReq                            = cmsclient.DeleteTopicReq
+	DeleteTopicResp                           = cmsclient.DeleteTopicResp
+	HelpCategoryListData                      = cmsclient.HelpCategoryListData
+	HelpListData                              = cmsclient.HelpListData
+	MemberReportListData                      = cmsclient.MemberReportListData
+	PreferredAreaListData                     = cmsclient.PreferredAreaListData
+	QueryHelpCategoryDetailReq                = cmsclient.QueryHelpCategoryDetailReq
+	QueryHelpCategoryDetailResp               = cmsclient.QueryHelpCategoryDetailResp
+	QueryHelpCategoryListReq                  = cmsclient.QueryHelpCategoryListReq
+	QueryHelpCategoryListResp                 = cmsclient.QueryHelpCategoryListResp
+	QueryHelpDetailReq                        = cmsclient.QueryHelpDetailReq
+	QueryHelpDetailResp                       = cmsclient.QueryHelpDetailResp
+	QueryHelpListReq                          = cmsclient.QueryHelpListReq
+	QueryHelpListResp                         = cmsclient.QueryHelpListResp
+	QueryMemberReportDetailReq                = cmsclient.QueryMemberReportDetailReq
+	QueryMemberReportDetailResp               = cmsclient.QueryMemberReportDetailResp
+	QueryMemberReportListReq                  = cmsclient.QueryMemberReportListReq
+	QueryMemberReportListResp                 = cmsclient.QueryMemberReportListResp
+	QueryPreferredAreaDetailReq               = cmsclient.QueryPreferredAreaDetailReq
+	QueryPreferredAreaDetailResp              = cmsclient.QueryPreferredAreaDetailResp
+	QueryPreferredAreaListReq                 = cmsclient.QueryPreferredAreaListReq
+	QueryPreferredAreaListResp                = cmsclient.QueryPreferredAreaListResp
+	QueryPreferredAreaProductRelationListReq  = cmsclient.QueryPreferredAreaProductRelationListReq
+	QueryPreferredAreaProductRelationListResp = cmsclient.QueryPreferredAreaProductRelationListResp
+	QuerySubjectCategoryDetailReq             = cmsclient.QuerySubjectCategoryDetailReq
+	QuerySubjectCategoryDetailResp            = cmsclient.QuerySubjectCategoryDetailResp
+	QuerySubjectCategoryListReq               = cmsclient.QuerySubjectCategoryListReq
+	QuerySubjectCategoryListResp              = cmsclient.QuerySubjectCategoryListResp
+	QuerySubjectCommentDetailReq              = cmsclient.QuerySubjectCommentDetailReq
+	QuerySubjectCommentDetailResp             = cmsclient.QuerySubjectCommentDetailResp
+	QuerySubjectCommentListReq                = cmsclient.QuerySubjectCommentListReq
+	QuerySubjectCommentListResp               = cmsclient.QuerySubjectCommentListResp
+	QuerySubjectDetailReq                     = cmsclient.QuerySubjectDetailReq
+	QuerySubjectDetailResp                    = cmsclient.QuerySubjectDetailResp
+	QuerySubjectListReq                       = cmsclient.QuerySubjectListReq
+	QuerySubjectListResp                      = cmsclient.QuerySubjectListResp
+	QuerySubjectProductRelationListReq        = cmsclient.QuerySubjectProductRelationListReq
+	QuerySubjectProductRelationListResp       = cmsclient.QuerySubjectProductRelationListResp
+	QueryTopicCategoryDetailReq               = cmsclient.QueryTopicCategoryDetailReq
+	QueryTopicCategoryDetailResp              = cmsclient.QueryTopicCategoryDetailResp
+	QueryTopicCategoryListReq                 = cmsclient.QueryTopicCategoryListReq
+	QueryTopicCategoryListResp                = cmsclient.QueryTopicCategoryListResp
+	QueryTopicCommentDetailReq                = cmsclient.QueryTopicCommentDetailReq
+	QueryTopicCommentDetailResp               = cmsclient.QueryTopicCommentDetailResp
+	QueryTopicCommentListReq                  = cmsclient.QueryTopicCommentListReq
+	QueryTopicCommentListResp                 = cmsclient.QueryTopicCommentListResp
+	QueryTopicDetailReq                       = cmsclient.QueryTopicDetailReq
+	QueryTopicDetailResp                      = cmsclient.QueryTopicDetailResp
+	QueryTopicListReq                         = cmsclient.QueryTopicListReq
+	QueryTopicListResp                        = cmsclient.QueryTopicListResp
+	SubjectCategoryListData                   = cmsclient.SubjectCategoryListData
+	SubjectCommentListData                    = cmsclient.SubjectCommentListData
+	SubjectListByIdsReq                       = cmsclient.SubjectListByIdsReq
+	SubjectListData                           = cmsclient.SubjectListData
+	TopicCategoryListData                     = cmsclient.TopicCategoryListData
+	TopicCommentListData                      = cmsclient.TopicCommentListData
+	TopicListData                             = cmsclient.TopicListData
+	UpdateHelpCategoryReq                     = cmsclient.UpdateHelpCategoryReq
+	UpdateHelpCategoryResp                    = cmsclient.UpdateHelpCategoryResp
+	UpdateHelpCategoryStatusReq               = cmsclient.UpdateHelpCategoryStatusReq
+	UpdateHelpCategoryStatusResp              = cmsclient.UpdateHelpCategoryStatusResp
+	UpdateHelpReq                             = cmsclient.UpdateHelpReq
+	UpdateHelpResp                            = cmsclient.UpdateHelpResp
+	UpdateHelpStatusReq                       = cmsclient.UpdateHelpStatusReq
+	UpdateHelpStatusResp                      = cmsclient.UpdateHelpStatusResp
+	UpdateMemberReportReq                     = cmsclient.UpdateMemberReportReq
+	UpdateMemberReportResp                    = cmsclient.UpdateMemberReportResp
+	UpdateMemberReportStatusReq               = cmsclient.UpdateMemberReportStatusReq
+	UpdateMemberReportStatusResp              = cmsclient.UpdateMemberReportStatusResp
+	UpdatePreferredAreaReq                    = cmsclient.UpdatePreferredAreaReq
+	UpdatePreferredAreaResp                   = cmsclient.UpdatePreferredAreaResp
+	UpdatePreferredAreaStatusReq              = cmsclient.UpdatePreferredAreaStatusReq
+	UpdatePreferredAreaStatusResp             = cmsclient.UpdatePreferredAreaStatusResp
+	UpdateSubjectCategoryReq                  = cmsclient.UpdateSubjectCategoryReq
+	UpdateSubjectCategoryResp                 = cmsclient.UpdateSubjectCategoryResp
+	UpdateSubjectCategoryStatusReq            = cmsclient.UpdateSubjectCategoryStatusReq
+	UpdateSubjectCategoryStatusResp           = cmsclient.UpdateSubjectCategoryStatusResp
+	UpdateSubjectCommentReq                   = cmsclient.UpdateSubjectCommentReq
+	UpdateSubjectCommentResp                  = cmsclient.UpdateSubjectCommentResp
+	UpdateSubjectCommentStatusReq             = cmsclient.UpdateSubjectCommentStatusReq
+	UpdateSubjectCommentStatusResp            = cmsclient.UpdateSubjectCommentStatusResp
+	UpdateSubjectRecommendStatusReq           = cmsclient.UpdateSubjectRecommendStatusReq
+	UpdateSubjectRecommendStatusResp          = cmsclient.UpdateSubjectRecommendStatusResp
+	UpdateSubjectReq                          = cmsclient.UpdateSubjectReq
+	UpdateSubjectResp                         = cmsclient.UpdateSubjectResp
+	UpdateSubjectStatusReq                    = cmsclient.UpdateSubjectStatusReq
+	UpdateSubjectStatusResp                   = cmsclient.UpdateSubjectStatusResp
+	UpdateTopicCategoryReq                    = cmsclient.UpdateTopicCategoryReq
+	UpdateTopicCategoryResp                   = cmsclient.UpdateTopicCategoryResp
+	UpdateTopicCategoryStatusReq              = cmsclient.UpdateTopicCategoryStatusReq
+	UpdateTopicCategoryStatusResp             = cmsclient.UpdateTopicCategoryStatusResp
+	UpdateTopicCommentReq                     = cmsclient.UpdateTopicCommentReq
+	UpdateTopicCommentResp                    = cmsclient.UpdateTopicCommentResp
+	UpdateTopicCommentStatusReq               = cmsclient.UpdateTopicCommentStatusReq
+	UpdateTopicCommentStatusResp              = cmsclient.UpdateTopicCommentStatusResp
+	UpdateTopicReq                            = cmsclient.UpdateTopicReq
+	UpdateTopicResp                           = cmsclient.UpdateTopicResp
 
 	SubjectService interface {
-		// 专题
-		SubjectAdd(ctx context.Context, in *SubjectAddReq, opts ...grpc.CallOption) (*SubjectAddResp, error)
-		SubjectDelete(ctx context.Context, in *SubjectDeleteReq, opts ...grpc.CallOption) (*SubjectDeleteResp, error)
-		SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error)
-		SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error)
-		SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error)
+		// 添加专题表
+		AddSubject(ctx context.Context, in *AddSubjectReq, opts ...grpc.CallOption) (*AddSubjectResp, error)
+		// 删除专题表
+		DeleteSubject(ctx context.Context, in *DeleteSubjectReq, opts ...grpc.CallOption) (*DeleteSubjectResp, error)
+		// 更新专题表
+		UpdateSubject(ctx context.Context, in *UpdateSubjectReq, opts ...grpc.CallOption) (*UpdateSubjectResp, error)
+		// 更新专题表状态
+		UpdateSubjectStatus(ctx context.Context, in *UpdateSubjectStatusReq, opts ...grpc.CallOption) (*UpdateSubjectStatusResp, error)
+		// 查询专题表详情
+		QuerySubjectDetail(ctx context.Context, in *QuerySubjectDetailReq, opts ...grpc.CallOption) (*QuerySubjectDetailResp, error)
+		// 查询专题表列表
+		QuerySubjectList(ctx context.Context, in *QuerySubjectListReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error)
+		SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error)
 		// 批量更新状态
 		UpdateSubjectRecommendStatus(ctx context.Context, in *UpdateSubjectRecommendStatusReq, opts ...grpc.CallOption) (*UpdateSubjectRecommendStatusResp, error)
 	}
@@ -65,28 +182,43 @@ func NewSubjectService(cli zrpc.Client) SubjectService {
 	}
 }
 
-// 专题
-func (m *defaultSubjectService) SubjectAdd(ctx context.Context, in *SubjectAddReq, opts ...grpc.CallOption) (*SubjectAddResp, error) {
+// 添加专题表
+func (m *defaultSubjectService) AddSubject(ctx context.Context, in *AddSubjectReq, opts ...grpc.CallOption) (*AddSubjectResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
-	return client.SubjectAdd(ctx, in, opts...)
+	return client.AddSubject(ctx, in, opts...)
 }
 
-func (m *defaultSubjectService) SubjectDelete(ctx context.Context, in *SubjectDeleteReq, opts ...grpc.CallOption) (*SubjectDeleteResp, error) {
+// 删除专题表
+func (m *defaultSubjectService) DeleteSubject(ctx context.Context, in *DeleteSubjectReq, opts ...grpc.CallOption) (*DeleteSubjectResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
-	return client.SubjectDelete(ctx, in, opts...)
+	return client.DeleteSubject(ctx, in, opts...)
 }
 
-func (m *defaultSubjectService) SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error) {
+// 更新专题表
+func (m *defaultSubjectService) UpdateSubject(ctx context.Context, in *UpdateSubjectReq, opts ...grpc.CallOption) (*UpdateSubjectResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
-	return client.SubjectUpdate(ctx, in, opts...)
+	return client.UpdateSubject(ctx, in, opts...)
 }
 
-func (m *defaultSubjectService) SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
+// 更新专题表状态
+func (m *defaultSubjectService) UpdateSubjectStatus(ctx context.Context, in *UpdateSubjectStatusReq, opts ...grpc.CallOption) (*UpdateSubjectStatusResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
-	return client.SubjectList(ctx, in, opts...)
+	return client.UpdateSubjectStatus(ctx, in, opts...)
 }
 
-func (m *defaultSubjectService) SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
+// 查询专题表详情
+func (m *defaultSubjectService) QuerySubjectDetail(ctx context.Context, in *QuerySubjectDetailReq, opts ...grpc.CallOption) (*QuerySubjectDetailResp, error) {
+	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
+	return client.QuerySubjectDetail(ctx, in, opts...)
+}
+
+// 查询专题表列表
+func (m *defaultSubjectService) QuerySubjectList(ctx context.Context, in *QuerySubjectListReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error) {
+	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
+	return client.QuerySubjectList(ctx, in, opts...)
+}
+
+func (m *defaultSubjectService) SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
 	return client.SubjectListByIds(ctx, in, opts...)
 }

@@ -22,13 +22,14 @@ func NewPreferredAreaProductRelationServiceServer(svcCtx *svc.ServiceContext) *P
 	}
 }
 
-// 优选商品关联
-func (s *PreferredAreaProductRelationServiceServer) PreferredAreaProductRelationAdd(ctx context.Context, in *cmsclient.PreferredAreaProductRelationAddReq) (*cmsclient.PreferredAreaProductRelationAddResp, error) {
-	l := preferredareaproductrelationservicelogic.NewPreferredAreaProductRelationAddLogic(ctx, s.svcCtx)
-	return l.PreferredAreaProductRelationAdd(in)
+// 添加优选专区和产品关系表
+func (s *PreferredAreaProductRelationServiceServer) AddPreferredAreaProductRelation(ctx context.Context, in *cmsclient.AddPreferredAreaProductRelationReq) (*cmsclient.AddPreferredAreaProductRelationResp, error) {
+	l := preferredareaproductrelationservicelogic.NewAddPreferredAreaProductRelationLogic(ctx, s.svcCtx)
+	return l.AddPreferredAreaProductRelation(in)
 }
 
-func (s *PreferredAreaProductRelationServiceServer) PreferredAreaProductRelationList(ctx context.Context, in *cmsclient.PreferredAreaProductRelationListReq) (*cmsclient.PreferredAreaProductRelationListResp, error) {
-	l := preferredareaproductrelationservicelogic.NewPreferredAreaProductRelationListLogic(ctx, s.svcCtx)
-	return l.PreferredAreaProductRelationList(in)
+// 查询优选专区和产品关系表列表
+func (s *PreferredAreaProductRelationServiceServer) QueryPreferredAreaProductRelationList(ctx context.Context, in *cmsclient.QueryPreferredAreaProductRelationListReq) (*cmsclient.QueryPreferredAreaProductRelationListResp, error) {
+	l := preferredareaproductrelationservicelogic.NewQueryPreferredAreaProductRelationListLogic(ctx, s.svcCtx)
+	return l.QueryPreferredAreaProductRelationList(in)
 }

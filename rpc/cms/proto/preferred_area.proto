@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加优选专区
+message AddPreferredAreaReq {
+  string CreateBy = 1; //
+  int32 sort = 2; //
+  string sub_title = 3; //
+  string name = 4; //
+  string pic = 5; //展示图片
+  int32 show_status = 6; //
+
+
+}
+
+message AddPreferredAreaResp {
+  string pong = 1;
+}
+
+// 删除优选专区
+message DeletePreferredAreaReq {
+  repeated int64 ids = 1;
+}
+
+message DeletePreferredAreaResp {
+  string pong = 1;
+}
+
+// 更新优选专区
+message UpdatePreferredAreaReq {
+  string sub_title = 1; //
+  string update_by = 2; //更新者
+  int64 id = 3; //
+  string name = 4; //
+  string pic = 5; //展示图片
+  int32 show_status = 6; //
+  int32 sort = 7; //
+
+
+}
+
+message UpdatePreferredAreaResp {
+  string pong = 1;
+}
+
+// 更新优选专区状态
+message UpdatePreferredAreaStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 6; //
+
+
+}
+
+message UpdatePreferredAreaStatusResp {
+  string pong = 1;
+}
+
+// 查询优选专区详情
+message QueryPreferredAreaDetailReq {
+    int64 id = 1;
+}
+
+message QueryPreferredAreaDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //
+  string name = 4; //
+  string pic = 5; //展示图片
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  string sub_title = 8; //
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询优选专区列表
+message QueryPreferredAreaListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string name = 3; //
+  int32 show_status = 4; //
+  string sub_title = 5; //
+
+}
+
+message PreferredAreaListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //
+  string name = 4; //
+  string pic = 5; //展示图片
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  string sub_title = 8; //
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+message QueryPreferredAreaListResp {
+  int64 total = 1;
+  repeated  PreferredAreaListData list = 2;
+}
+
+// 优选专区
+service PreferredAreaService {
+  // 添加优选专区
+  rpc AddPreferredArea(AddPreferredAreaReq) returns (AddPreferredAreaResp){}
+  // 删除优选专区
+  rpc DeletePreferredArea(DeletePreferredAreaReq) returns (DeletePreferredAreaResp){}
+  // 更新优选专区
+  rpc UpdatePreferredArea(UpdatePreferredAreaReq) returns (UpdatePreferredAreaResp ){}
+  // 更新优选专区状态
+  rpc UpdatePreferredAreaStatus(UpdatePreferredAreaStatusReq) returns (UpdatePreferredAreaStatusResp ){}
+  // 查询优选专区详情
+   rpc QueryPreferredAreaDetail(QueryPreferredAreaDetailReq) returns (QueryPreferredAreaDetailResp){}
+  // 查询优选专区列表
+  rpc QueryPreferredAreaList(QueryPreferredAreaListReq) returns (QueryPreferredAreaListResp){}
+
+
+}

@@ -59,7 +59,7 @@ type (
 		// 更新会员等级表状态
 	UpdateMemberLevelStatusReq {
 		DefaultStatus int32 `json:"defaultStatus"` //是否为默认等级：0->不是；1->是
-		Id int64 `json:"id"` //
+		Ids []int64 `json:"ids"` //
 	}
 	UpdateMemberLevelStatusResp {
 		Code    string `json:"code"`

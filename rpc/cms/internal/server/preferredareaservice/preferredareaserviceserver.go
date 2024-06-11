@@ -22,23 +22,38 @@ func NewPreferredAreaServiceServer(svcCtx *svc.ServiceContext) *PreferredAreaSer
 	}
 }
 
-// 商品优选
-func (s *PreferredAreaServiceServer) PreferredAreaAdd(ctx context.Context, in *cmsclient.PreferredAreaAddReq) (*cmsclient.PreferredAreaAddResp, error) {
-	l := preferredareaservicelogic.NewPreferredAreaAddLogic(ctx, s.svcCtx)
-	return l.PreferredAreaAdd(in)
+// 添加优选专区
+func (s *PreferredAreaServiceServer) AddPreferredArea(ctx context.Context, in *cmsclient.AddPreferredAreaReq) (*cmsclient.AddPreferredAreaResp, error) {
+	l := preferredareaservicelogic.NewAddPreferredAreaLogic(ctx, s.svcCtx)
+	return l.AddPreferredArea(in)
 }
 
-func (s *PreferredAreaServiceServer) PreferredAreaDelete(ctx context.Context, in *cmsclient.PreferredAreaDeleteReq) (*cmsclient.PreferredAreaDeleteResp, error) {
-	l := preferredareaservicelogic.NewPreferredAreaDeleteLogic(ctx, s.svcCtx)
-	return l.PreferredAreaDelete(in)
+// 删除优选专区
+func (s *PreferredAreaServiceServer) DeletePreferredArea(ctx context.Context, in *cmsclient.DeletePreferredAreaReq) (*cmsclient.DeletePreferredAreaResp, error) {
+	l := preferredareaservicelogic.NewDeletePreferredAreaLogic(ctx, s.svcCtx)
+	return l.DeletePreferredArea(in)
 }
 
-func (s *PreferredAreaServiceServer) PreferredAreaUpdate(ctx context.Context, in *cmsclient.PreferredAreaUpdateReq) (*cmsclient.PreferredAreaUpdateResp, error) {
-	l := preferredareaservicelogic.NewPreferredAreaUpdateLogic(ctx, s.svcCtx)
-	return l.PreferredAreaUpdate(in)
+// 更新优选专区
+func (s *PreferredAreaServiceServer) UpdatePreferredArea(ctx context.Context, in *cmsclient.UpdatePreferredAreaReq) (*cmsclient.UpdatePreferredAreaResp, error) {
+	l := preferredareaservicelogic.NewUpdatePreferredAreaLogic(ctx, s.svcCtx)
+	return l.UpdatePreferredArea(in)
 }
 
-func (s *PreferredAreaServiceServer) PreferredAreaList(ctx context.Context, in *cmsclient.PreferredAreaListReq) (*cmsclient.PreferredAreaListResp, error) {
-	l := preferredareaservicelogic.NewPreferredAreaListLogic(ctx, s.svcCtx)
-	return l.PreferredAreaList(in)
+// 更新优选专区状态
+func (s *PreferredAreaServiceServer) UpdatePreferredAreaStatus(ctx context.Context, in *cmsclient.UpdatePreferredAreaStatusReq) (*cmsclient.UpdatePreferredAreaStatusResp, error) {
+	l := preferredareaservicelogic.NewUpdatePreferredAreaStatusLogic(ctx, s.svcCtx)
+	return l.UpdatePreferredAreaStatus(in)
+}
+
+// 查询优选专区详情
+func (s *PreferredAreaServiceServer) QueryPreferredAreaDetail(ctx context.Context, in *cmsclient.QueryPreferredAreaDetailReq) (*cmsclient.QueryPreferredAreaDetailResp, error) {
+	l := preferredareaservicelogic.NewQueryPreferredAreaDetailLogic(ctx, s.svcCtx)
+	return l.QueryPreferredAreaDetail(in)
+}
+
+// 查询优选专区列表
+func (s *PreferredAreaServiceServer) QueryPreferredAreaList(ctx context.Context, in *cmsclient.QueryPreferredAreaListReq) (*cmsclient.QueryPreferredAreaListResp, error) {
+	l := preferredareaservicelogic.NewQueryPreferredAreaListLogic(ctx, s.svcCtx)
+	return l.QueryPreferredAreaList(in)
 }

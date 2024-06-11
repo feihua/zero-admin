@@ -184,7 +184,7 @@ func updateSubjectProductRelation(req types.UpdateProductReq, l *ProductUpdateLo
 	//_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationDelete(l.ctx, &cmsclient.SubjectProductRelationDeleteReq{Id: productId})
 
 	//2.重新添加专题的关联
-	_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationAdd(l.ctx, &cmsclient.SubjectProductRelationAddReq{
+	_, _ = l.svcCtx.SubjectProductRelationService.AddSubjectProductRelation(l.ctx, &cmsclient.AddSubjectProductRelationReq{
 		SubjectId: req.SubjectProductRelationList,
 		ProductId: productId,
 	})
@@ -196,7 +196,7 @@ func updatePreferredAreaProductRelation(req types.UpdateProductReq, l *ProductUp
 	//_, _ = l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationDelete(l.ctx, &cmsclient.PrefrenceAreaProductRelationDeleteReq{Id: productId})
 
 	//2.重新添加优选商品的关联
-	_, _ = l.svcCtx.PreferredAreaProductRelationService.PreferredAreaProductRelationAdd(l.ctx, &cmsclient.PreferredAreaProductRelationAddReq{
+	_, _ = l.svcCtx.PreferredAreaProductRelationService.AddPreferredAreaProductRelation(l.ctx, &cmsclient.AddPreferredAreaProductRelationReq{
 		PreferredAreaId: req.PrefrenceAreaProductRelationList,
 		ProductId:       int64(productId),
 	})

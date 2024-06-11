@@ -51,12 +51,12 @@ func (l *QueryProductDetailLogic) QueryProductDetail(req *types.QueryProductDeta
 	})
 
 	//8.查询专题关联
-	subjectRelationList, _ := l.svcCtx.SubjectProductRelationService.SubjectProductRelationList(l.ctx, &cmsclient.SubjectProductRelationListReq{
+	subjectRelationList, _ := l.svcCtx.SubjectProductRelationService.QuerySubjectProductRelationList(l.ctx, &cmsclient.QuerySubjectProductRelationListReq{
 		ProductId: req.ProductId,
 	})
 
 	//9.查询优选关联
-	areaRelationList, _ := l.svcCtx.PreferredAreaProductRelationService.PreferredAreaProductRelationList(l.ctx, &cmsclient.PreferredAreaProductRelationListReq{
+	areaRelationList, _ := l.svcCtx.PreferredAreaProductRelationService.QueryPreferredAreaProductRelationList(l.ctx, &cmsclient.QueryPreferredAreaProductRelationListReq{
 		ProductId: req.ProductId,
 	})
 

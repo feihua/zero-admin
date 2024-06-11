@@ -57,23 +57,33 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/addPrefrenceArea",
-					Handler: cmsprefrenceArea.PrefrenceAreaAddHandler(serverCtx),
+					Path:    "/addPreferredArea",
+					Handler: cmsprefrenceArea.AddPreferredAreaHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/deletePrefrenceArea",
-					Handler: cmsprefrenceArea.PrefrenceAreaDeleteHandler(serverCtx),
+					Path:    "/deletePreferredArea",
+					Handler: cmsprefrenceArea.DeletePreferredAreaHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryPrefrenceAreaList",
-					Handler: cmsprefrenceArea.PrefrenceAreaListHandler(serverCtx),
+					Path:    "/queryPreferredAreaDetail",
+					Handler: cmsprefrenceArea.QueryPreferredAreaDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryPreferredAreaList",
+					Handler: cmsprefrenceArea.QueryPreferredAreaListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updatePrefrenceArea",
-					Handler: cmsprefrenceArea.PrefrenceAreaUpdateHandler(serverCtx),
+					Path:    "/updatePreferredArea",
+					Handler: cmsprefrenceArea.UpdatePreferredAreaHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updatePreferredAreaStatus",
+					Handler: cmsprefrenceArea.UpdatePreferredAreaStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -88,22 +98,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addSubject",
-					Handler: cmssubject.SubjectAddHandler(serverCtx),
+					Handler: cmssubject.AddSubjectHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteSubject",
-					Handler: cmssubject.SubjectDeleteHandler(serverCtx),
+					Handler: cmssubject.DeleteSubjectHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/querySubjectDetail",
+					Handler: cmssubject.QuerySubjectDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/querySubjectList",
-					Handler: cmssubject.SubjectListHandler(serverCtx),
+					Handler: cmssubject.QuerySubjectListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateSubject",
-					Handler: cmssubject.SubjectUpdateHandler(serverCtx),
+					Handler: cmssubject.UpdateSubjectHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateSubjectStatus",
+					Handler: cmssubject.UpdateSubjectStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -707,6 +727,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
+					Path:    "/queryProductDetail",
+					Handler: productproduct.QueryProductDetailHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
 					Path:    "/updateDeleteStatus",
 					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
 				},
@@ -734,21 +769,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodPost,
 					Path:    "/updateVerifyStatus",
 					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductDetail",
-					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
 			}...,
 		),

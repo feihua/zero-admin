@@ -26,7 +26,7 @@ func NewSubjectListByIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
-func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsReq) (*cmsclient.SubjectListResp, error) {
+func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsReq) (*cmsclient.QuerySubjectListResp, error) {
 	q := query.CmsSubject
 	subjects, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Find()
 
@@ -61,7 +61,7 @@ func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsR
 
 	logc.Infof(l.ctx, "查询专题列表信息,参数：%+v,响应：%+v", in, list)
 
-	return &cmsclient.SubjectListResp{
+	return &cmsclient.QuerySubjectListResp{
 		Total: 0,
 		List:  list,
 	}, nil

@@ -26,7 +26,7 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除部门
-GET {{host}}/api/sys/dept/deleteDept?ids=[15]
+GET {{host}}/api/sys/dept/deleteDept?ids=[100]
 Authorization: Bearer {{token}}
 
 

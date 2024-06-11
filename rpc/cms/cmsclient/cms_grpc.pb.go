@@ -19,10 +19,1292 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	SubjectService_SubjectAdd_FullMethodName                   = "/cmsclient.SubjectService/SubjectAdd"
-	SubjectService_SubjectDelete_FullMethodName                = "/cmsclient.SubjectService/SubjectDelete"
-	SubjectService_SubjectUpdate_FullMethodName                = "/cmsclient.SubjectService/SubjectUpdate"
-	SubjectService_SubjectList_FullMethodName                  = "/cmsclient.SubjectService/SubjectList"
+	HelpService_AddHelp_FullMethodName          = "/cmsclient.HelpService/AddHelp"
+	HelpService_DeleteHelp_FullMethodName       = "/cmsclient.HelpService/DeleteHelp"
+	HelpService_UpdateHelp_FullMethodName       = "/cmsclient.HelpService/UpdateHelp"
+	HelpService_UpdateHelpStatus_FullMethodName = "/cmsclient.HelpService/UpdateHelpStatus"
+	HelpService_QueryHelpDetail_FullMethodName  = "/cmsclient.HelpService/QueryHelpDetail"
+	HelpService_QueryHelpList_FullMethodName    = "/cmsclient.HelpService/QueryHelpList"
+)
+
+// HelpServiceClient is the client API for HelpService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type HelpServiceClient interface {
+	// 添加帮助表
+	AddHelp(ctx context.Context, in *AddHelpReq, opts ...grpc.CallOption) (*AddHelpResp, error)
+	// 删除帮助表
+	DeleteHelp(ctx context.Context, in *DeleteHelpReq, opts ...grpc.CallOption) (*DeleteHelpResp, error)
+	// 更新帮助表
+	UpdateHelp(ctx context.Context, in *UpdateHelpReq, opts ...grpc.CallOption) (*UpdateHelpResp, error)
+	// 更新帮助表状态
+	UpdateHelpStatus(ctx context.Context, in *UpdateHelpStatusReq, opts ...grpc.CallOption) (*UpdateHelpStatusResp, error)
+	// 查询帮助表详情
+	QueryHelpDetail(ctx context.Context, in *QueryHelpDetailReq, opts ...grpc.CallOption) (*QueryHelpDetailResp, error)
+	// 查询帮助表列表
+	QueryHelpList(ctx context.Context, in *QueryHelpListReq, opts ...grpc.CallOption) (*QueryHelpListResp, error)
+}
+
+type helpServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewHelpServiceClient(cc grpc.ClientConnInterface) HelpServiceClient {
+	return &helpServiceClient{cc}
+}
+
+func (c *helpServiceClient) AddHelp(ctx context.Context, in *AddHelpReq, opts ...grpc.CallOption) (*AddHelpResp, error) {
+	out := new(AddHelpResp)
+	err := c.cc.Invoke(ctx, HelpService_AddHelp_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpServiceClient) DeleteHelp(ctx context.Context, in *DeleteHelpReq, opts ...grpc.CallOption) (*DeleteHelpResp, error) {
+	out := new(DeleteHelpResp)
+	err := c.cc.Invoke(ctx, HelpService_DeleteHelp_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpServiceClient) UpdateHelp(ctx context.Context, in *UpdateHelpReq, opts ...grpc.CallOption) (*UpdateHelpResp, error) {
+	out := new(UpdateHelpResp)
+	err := c.cc.Invoke(ctx, HelpService_UpdateHelp_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpServiceClient) UpdateHelpStatus(ctx context.Context, in *UpdateHelpStatusReq, opts ...grpc.CallOption) (*UpdateHelpStatusResp, error) {
+	out := new(UpdateHelpStatusResp)
+	err := c.cc.Invoke(ctx, HelpService_UpdateHelpStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpServiceClient) QueryHelpDetail(ctx context.Context, in *QueryHelpDetailReq, opts ...grpc.CallOption) (*QueryHelpDetailResp, error) {
+	out := new(QueryHelpDetailResp)
+	err := c.cc.Invoke(ctx, HelpService_QueryHelpDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpServiceClient) QueryHelpList(ctx context.Context, in *QueryHelpListReq, opts ...grpc.CallOption) (*QueryHelpListResp, error) {
+	out := new(QueryHelpListResp)
+	err := c.cc.Invoke(ctx, HelpService_QueryHelpList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// HelpServiceServer is the server API for HelpService service.
+// All implementations must embed UnimplementedHelpServiceServer
+// for forward compatibility
+type HelpServiceServer interface {
+	// 添加帮助表
+	AddHelp(context.Context, *AddHelpReq) (*AddHelpResp, error)
+	// 删除帮助表
+	DeleteHelp(context.Context, *DeleteHelpReq) (*DeleteHelpResp, error)
+	// 更新帮助表
+	UpdateHelp(context.Context, *UpdateHelpReq) (*UpdateHelpResp, error)
+	// 更新帮助表状态
+	UpdateHelpStatus(context.Context, *UpdateHelpStatusReq) (*UpdateHelpStatusResp, error)
+	// 查询帮助表详情
+	QueryHelpDetail(context.Context, *QueryHelpDetailReq) (*QueryHelpDetailResp, error)
+	// 查询帮助表列表
+	QueryHelpList(context.Context, *QueryHelpListReq) (*QueryHelpListResp, error)
+	mustEmbedUnimplementedHelpServiceServer()
+}
+
+// UnimplementedHelpServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedHelpServiceServer struct {
+}
+
+func (UnimplementedHelpServiceServer) AddHelp(context.Context, *AddHelpReq) (*AddHelpResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddHelp not implemented")
+}
+func (UnimplementedHelpServiceServer) DeleteHelp(context.Context, *DeleteHelpReq) (*DeleteHelpResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteHelp not implemented")
+}
+func (UnimplementedHelpServiceServer) UpdateHelp(context.Context, *UpdateHelpReq) (*UpdateHelpResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHelp not implemented")
+}
+func (UnimplementedHelpServiceServer) UpdateHelpStatus(context.Context, *UpdateHelpStatusReq) (*UpdateHelpStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHelpStatus not implemented")
+}
+func (UnimplementedHelpServiceServer) QueryHelpDetail(context.Context, *QueryHelpDetailReq) (*QueryHelpDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryHelpDetail not implemented")
+}
+func (UnimplementedHelpServiceServer) QueryHelpList(context.Context, *QueryHelpListReq) (*QueryHelpListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryHelpList not implemented")
+}
+func (UnimplementedHelpServiceServer) mustEmbedUnimplementedHelpServiceServer() {}
+
+// UnsafeHelpServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to HelpServiceServer will
+// result in compilation errors.
+type UnsafeHelpServiceServer interface {
+	mustEmbedUnimplementedHelpServiceServer()
+}
+
+func RegisterHelpServiceServer(s grpc.ServiceRegistrar, srv HelpServiceServer) {
+	s.RegisterService(&HelpService_ServiceDesc, srv)
+}
+
+func _HelpService_AddHelp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddHelpReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpServiceServer).AddHelp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpService_AddHelp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpServiceServer).AddHelp(ctx, req.(*AddHelpReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpService_DeleteHelp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteHelpReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpServiceServer).DeleteHelp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpService_DeleteHelp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpServiceServer).DeleteHelp(ctx, req.(*DeleteHelpReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpService_UpdateHelp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHelpReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpServiceServer).UpdateHelp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpService_UpdateHelp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpServiceServer).UpdateHelp(ctx, req.(*UpdateHelpReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpService_UpdateHelpStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHelpStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpServiceServer).UpdateHelpStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpService_UpdateHelpStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpServiceServer).UpdateHelpStatus(ctx, req.(*UpdateHelpStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpService_QueryHelpDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryHelpDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpServiceServer).QueryHelpDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpService_QueryHelpDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpServiceServer).QueryHelpDetail(ctx, req.(*QueryHelpDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpService_QueryHelpList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryHelpListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpServiceServer).QueryHelpList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpService_QueryHelpList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpServiceServer).QueryHelpList(ctx, req.(*QueryHelpListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// HelpService_ServiceDesc is the grpc.ServiceDesc for HelpService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var HelpService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.HelpService",
+	HandlerType: (*HelpServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddHelp",
+			Handler:    _HelpService_AddHelp_Handler,
+		},
+		{
+			MethodName: "DeleteHelp",
+			Handler:    _HelpService_DeleteHelp_Handler,
+		},
+		{
+			MethodName: "UpdateHelp",
+			Handler:    _HelpService_UpdateHelp_Handler,
+		},
+		{
+			MethodName: "UpdateHelpStatus",
+			Handler:    _HelpService_UpdateHelpStatus_Handler,
+		},
+		{
+			MethodName: "QueryHelpDetail",
+			Handler:    _HelpService_QueryHelpDetail_Handler,
+		},
+		{
+			MethodName: "QueryHelpList",
+			Handler:    _HelpService_QueryHelpList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/cms/cms.proto",
+}
+
+const (
+	HelpCategoryService_AddHelpCategory_FullMethodName          = "/cmsclient.HelpCategoryService/AddHelpCategory"
+	HelpCategoryService_DeleteHelpCategory_FullMethodName       = "/cmsclient.HelpCategoryService/DeleteHelpCategory"
+	HelpCategoryService_UpdateHelpCategory_FullMethodName       = "/cmsclient.HelpCategoryService/UpdateHelpCategory"
+	HelpCategoryService_UpdateHelpCategoryStatus_FullMethodName = "/cmsclient.HelpCategoryService/UpdateHelpCategoryStatus"
+	HelpCategoryService_QueryHelpCategoryDetail_FullMethodName  = "/cmsclient.HelpCategoryService/QueryHelpCategoryDetail"
+	HelpCategoryService_QueryHelpCategoryList_FullMethodName    = "/cmsclient.HelpCategoryService/QueryHelpCategoryList"
+)
+
+// HelpCategoryServiceClient is the client API for HelpCategoryService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type HelpCategoryServiceClient interface {
+	// 添加帮助分类表
+	AddHelpCategory(ctx context.Context, in *AddHelpCategoryReq, opts ...grpc.CallOption) (*AddHelpCategoryResp, error)
+	// 删除帮助分类表
+	DeleteHelpCategory(ctx context.Context, in *DeleteHelpCategoryReq, opts ...grpc.CallOption) (*DeleteHelpCategoryResp, error)
+	// 更新帮助分类表
+	UpdateHelpCategory(ctx context.Context, in *UpdateHelpCategoryReq, opts ...grpc.CallOption) (*UpdateHelpCategoryResp, error)
+	// 更新帮助分类表状态
+	UpdateHelpCategoryStatus(ctx context.Context, in *UpdateHelpCategoryStatusReq, opts ...grpc.CallOption) (*UpdateHelpCategoryStatusResp, error)
+	// 查询帮助分类表详情
+	QueryHelpCategoryDetail(ctx context.Context, in *QueryHelpCategoryDetailReq, opts ...grpc.CallOption) (*QueryHelpCategoryDetailResp, error)
+	// 查询帮助分类表列表
+	QueryHelpCategoryList(ctx context.Context, in *QueryHelpCategoryListReq, opts ...grpc.CallOption) (*QueryHelpCategoryListResp, error)
+}
+
+type helpCategoryServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewHelpCategoryServiceClient(cc grpc.ClientConnInterface) HelpCategoryServiceClient {
+	return &helpCategoryServiceClient{cc}
+}
+
+func (c *helpCategoryServiceClient) AddHelpCategory(ctx context.Context, in *AddHelpCategoryReq, opts ...grpc.CallOption) (*AddHelpCategoryResp, error) {
+	out := new(AddHelpCategoryResp)
+	err := c.cc.Invoke(ctx, HelpCategoryService_AddHelpCategory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpCategoryServiceClient) DeleteHelpCategory(ctx context.Context, in *DeleteHelpCategoryReq, opts ...grpc.CallOption) (*DeleteHelpCategoryResp, error) {
+	out := new(DeleteHelpCategoryResp)
+	err := c.cc.Invoke(ctx, HelpCategoryService_DeleteHelpCategory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpCategoryServiceClient) UpdateHelpCategory(ctx context.Context, in *UpdateHelpCategoryReq, opts ...grpc.CallOption) (*UpdateHelpCategoryResp, error) {
+	out := new(UpdateHelpCategoryResp)
+	err := c.cc.Invoke(ctx, HelpCategoryService_UpdateHelpCategory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpCategoryServiceClient) UpdateHelpCategoryStatus(ctx context.Context, in *UpdateHelpCategoryStatusReq, opts ...grpc.CallOption) (*UpdateHelpCategoryStatusResp, error) {
+	out := new(UpdateHelpCategoryStatusResp)
+	err := c.cc.Invoke(ctx, HelpCategoryService_UpdateHelpCategoryStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpCategoryServiceClient) QueryHelpCategoryDetail(ctx context.Context, in *QueryHelpCategoryDetailReq, opts ...grpc.CallOption) (*QueryHelpCategoryDetailResp, error) {
+	out := new(QueryHelpCategoryDetailResp)
+	err := c.cc.Invoke(ctx, HelpCategoryService_QueryHelpCategoryDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *helpCategoryServiceClient) QueryHelpCategoryList(ctx context.Context, in *QueryHelpCategoryListReq, opts ...grpc.CallOption) (*QueryHelpCategoryListResp, error) {
+	out := new(QueryHelpCategoryListResp)
+	err := c.cc.Invoke(ctx, HelpCategoryService_QueryHelpCategoryList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// HelpCategoryServiceServer is the server API for HelpCategoryService service.
+// All implementations must embed UnimplementedHelpCategoryServiceServer
+// for forward compatibility
+type HelpCategoryServiceServer interface {
+	// 添加帮助分类表
+	AddHelpCategory(context.Context, *AddHelpCategoryReq) (*AddHelpCategoryResp, error)
+	// 删除帮助分类表
+	DeleteHelpCategory(context.Context, *DeleteHelpCategoryReq) (*DeleteHelpCategoryResp, error)
+	// 更新帮助分类表
+	UpdateHelpCategory(context.Context, *UpdateHelpCategoryReq) (*UpdateHelpCategoryResp, error)
+	// 更新帮助分类表状态
+	UpdateHelpCategoryStatus(context.Context, *UpdateHelpCategoryStatusReq) (*UpdateHelpCategoryStatusResp, error)
+	// 查询帮助分类表详情
+	QueryHelpCategoryDetail(context.Context, *QueryHelpCategoryDetailReq) (*QueryHelpCategoryDetailResp, error)
+	// 查询帮助分类表列表
+	QueryHelpCategoryList(context.Context, *QueryHelpCategoryListReq) (*QueryHelpCategoryListResp, error)
+	mustEmbedUnimplementedHelpCategoryServiceServer()
+}
+
+// UnimplementedHelpCategoryServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedHelpCategoryServiceServer struct {
+}
+
+func (UnimplementedHelpCategoryServiceServer) AddHelpCategory(context.Context, *AddHelpCategoryReq) (*AddHelpCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddHelpCategory not implemented")
+}
+func (UnimplementedHelpCategoryServiceServer) DeleteHelpCategory(context.Context, *DeleteHelpCategoryReq) (*DeleteHelpCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteHelpCategory not implemented")
+}
+func (UnimplementedHelpCategoryServiceServer) UpdateHelpCategory(context.Context, *UpdateHelpCategoryReq) (*UpdateHelpCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHelpCategory not implemented")
+}
+func (UnimplementedHelpCategoryServiceServer) UpdateHelpCategoryStatus(context.Context, *UpdateHelpCategoryStatusReq) (*UpdateHelpCategoryStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHelpCategoryStatus not implemented")
+}
+func (UnimplementedHelpCategoryServiceServer) QueryHelpCategoryDetail(context.Context, *QueryHelpCategoryDetailReq) (*QueryHelpCategoryDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryHelpCategoryDetail not implemented")
+}
+func (UnimplementedHelpCategoryServiceServer) QueryHelpCategoryList(context.Context, *QueryHelpCategoryListReq) (*QueryHelpCategoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryHelpCategoryList not implemented")
+}
+func (UnimplementedHelpCategoryServiceServer) mustEmbedUnimplementedHelpCategoryServiceServer() {}
+
+// UnsafeHelpCategoryServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to HelpCategoryServiceServer will
+// result in compilation errors.
+type UnsafeHelpCategoryServiceServer interface {
+	mustEmbedUnimplementedHelpCategoryServiceServer()
+}
+
+func RegisterHelpCategoryServiceServer(s grpc.ServiceRegistrar, srv HelpCategoryServiceServer) {
+	s.RegisterService(&HelpCategoryService_ServiceDesc, srv)
+}
+
+func _HelpCategoryService_AddHelpCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddHelpCategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpCategoryServiceServer).AddHelpCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpCategoryService_AddHelpCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpCategoryServiceServer).AddHelpCategory(ctx, req.(*AddHelpCategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpCategoryService_DeleteHelpCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteHelpCategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpCategoryServiceServer).DeleteHelpCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpCategoryService_DeleteHelpCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpCategoryServiceServer).DeleteHelpCategory(ctx, req.(*DeleteHelpCategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpCategoryService_UpdateHelpCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHelpCategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpCategoryServiceServer).UpdateHelpCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpCategoryService_UpdateHelpCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpCategoryServiceServer).UpdateHelpCategory(ctx, req.(*UpdateHelpCategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpCategoryService_UpdateHelpCategoryStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHelpCategoryStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpCategoryServiceServer).UpdateHelpCategoryStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpCategoryService_UpdateHelpCategoryStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpCategoryServiceServer).UpdateHelpCategoryStatus(ctx, req.(*UpdateHelpCategoryStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpCategoryService_QueryHelpCategoryDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryHelpCategoryDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpCategoryServiceServer).QueryHelpCategoryDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpCategoryService_QueryHelpCategoryDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpCategoryServiceServer).QueryHelpCategoryDetail(ctx, req.(*QueryHelpCategoryDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HelpCategoryService_QueryHelpCategoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryHelpCategoryListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HelpCategoryServiceServer).QueryHelpCategoryList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HelpCategoryService_QueryHelpCategoryList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HelpCategoryServiceServer).QueryHelpCategoryList(ctx, req.(*QueryHelpCategoryListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// HelpCategoryService_ServiceDesc is the grpc.ServiceDesc for HelpCategoryService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var HelpCategoryService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.HelpCategoryService",
+	HandlerType: (*HelpCategoryServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddHelpCategory",
+			Handler:    _HelpCategoryService_AddHelpCategory_Handler,
+		},
+		{
+			MethodName: "DeleteHelpCategory",
+			Handler:    _HelpCategoryService_DeleteHelpCategory_Handler,
+		},
+		{
+			MethodName: "UpdateHelpCategory",
+			Handler:    _HelpCategoryService_UpdateHelpCategory_Handler,
+		},
+		{
+			MethodName: "UpdateHelpCategoryStatus",
+			Handler:    _HelpCategoryService_UpdateHelpCategoryStatus_Handler,
+		},
+		{
+			MethodName: "QueryHelpCategoryDetail",
+			Handler:    _HelpCategoryService_QueryHelpCategoryDetail_Handler,
+		},
+		{
+			MethodName: "QueryHelpCategoryList",
+			Handler:    _HelpCategoryService_QueryHelpCategoryList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/cms/cms.proto",
+}
+
+const (
+	MemberReportService_AddMemberReport_FullMethodName          = "/cmsclient.MemberReportService/AddMemberReport"
+	MemberReportService_DeleteMemberReport_FullMethodName       = "/cmsclient.MemberReportService/DeleteMemberReport"
+	MemberReportService_UpdateMemberReport_FullMethodName       = "/cmsclient.MemberReportService/UpdateMemberReport"
+	MemberReportService_UpdateMemberReportStatus_FullMethodName = "/cmsclient.MemberReportService/UpdateMemberReportStatus"
+	MemberReportService_QueryMemberReportDetail_FullMethodName  = "/cmsclient.MemberReportService/QueryMemberReportDetail"
+	MemberReportService_QueryMemberReportList_FullMethodName    = "/cmsclient.MemberReportService/QueryMemberReportList"
+)
+
+// MemberReportServiceClient is the client API for MemberReportService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MemberReportServiceClient interface {
+	// 添加用户举报表
+	AddMemberReport(ctx context.Context, in *AddMemberReportReq, opts ...grpc.CallOption) (*AddMemberReportResp, error)
+	// 删除用户举报表
+	DeleteMemberReport(ctx context.Context, in *DeleteMemberReportReq, opts ...grpc.CallOption) (*DeleteMemberReportResp, error)
+	// 更新用户举报表
+	UpdateMemberReport(ctx context.Context, in *UpdateMemberReportReq, opts ...grpc.CallOption) (*UpdateMemberReportResp, error)
+	// 更新用户举报表状态
+	UpdateMemberReportStatus(ctx context.Context, in *UpdateMemberReportStatusReq, opts ...grpc.CallOption) (*UpdateMemberReportStatusResp, error)
+	// 查询用户举报表详情
+	QueryMemberReportDetail(ctx context.Context, in *QueryMemberReportDetailReq, opts ...grpc.CallOption) (*QueryMemberReportDetailResp, error)
+	// 查询用户举报表列表
+	QueryMemberReportList(ctx context.Context, in *QueryMemberReportListReq, opts ...grpc.CallOption) (*QueryMemberReportListResp, error)
+}
+
+type memberReportServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMemberReportServiceClient(cc grpc.ClientConnInterface) MemberReportServiceClient {
+	return &memberReportServiceClient{cc}
+}
+
+func (c *memberReportServiceClient) AddMemberReport(ctx context.Context, in *AddMemberReportReq, opts ...grpc.CallOption) (*AddMemberReportResp, error) {
+	out := new(AddMemberReportResp)
+	err := c.cc.Invoke(ctx, MemberReportService_AddMemberReport_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberReportServiceClient) DeleteMemberReport(ctx context.Context, in *DeleteMemberReportReq, opts ...grpc.CallOption) (*DeleteMemberReportResp, error) {
+	out := new(DeleteMemberReportResp)
+	err := c.cc.Invoke(ctx, MemberReportService_DeleteMemberReport_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberReportServiceClient) UpdateMemberReport(ctx context.Context, in *UpdateMemberReportReq, opts ...grpc.CallOption) (*UpdateMemberReportResp, error) {
+	out := new(UpdateMemberReportResp)
+	err := c.cc.Invoke(ctx, MemberReportService_UpdateMemberReport_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberReportServiceClient) UpdateMemberReportStatus(ctx context.Context, in *UpdateMemberReportStatusReq, opts ...grpc.CallOption) (*UpdateMemberReportStatusResp, error) {
+	out := new(UpdateMemberReportStatusResp)
+	err := c.cc.Invoke(ctx, MemberReportService_UpdateMemberReportStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberReportServiceClient) QueryMemberReportDetail(ctx context.Context, in *QueryMemberReportDetailReq, opts ...grpc.CallOption) (*QueryMemberReportDetailResp, error) {
+	out := new(QueryMemberReportDetailResp)
+	err := c.cc.Invoke(ctx, MemberReportService_QueryMemberReportDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberReportServiceClient) QueryMemberReportList(ctx context.Context, in *QueryMemberReportListReq, opts ...grpc.CallOption) (*QueryMemberReportListResp, error) {
+	out := new(QueryMemberReportListResp)
+	err := c.cc.Invoke(ctx, MemberReportService_QueryMemberReportList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MemberReportServiceServer is the server API for MemberReportService service.
+// All implementations must embed UnimplementedMemberReportServiceServer
+// for forward compatibility
+type MemberReportServiceServer interface {
+	// 添加用户举报表
+	AddMemberReport(context.Context, *AddMemberReportReq) (*AddMemberReportResp, error)
+	// 删除用户举报表
+	DeleteMemberReport(context.Context, *DeleteMemberReportReq) (*DeleteMemberReportResp, error)
+	// 更新用户举报表
+	UpdateMemberReport(context.Context, *UpdateMemberReportReq) (*UpdateMemberReportResp, error)
+	// 更新用户举报表状态
+	UpdateMemberReportStatus(context.Context, *UpdateMemberReportStatusReq) (*UpdateMemberReportStatusResp, error)
+	// 查询用户举报表详情
+	QueryMemberReportDetail(context.Context, *QueryMemberReportDetailReq) (*QueryMemberReportDetailResp, error)
+	// 查询用户举报表列表
+	QueryMemberReportList(context.Context, *QueryMemberReportListReq) (*QueryMemberReportListResp, error)
+	mustEmbedUnimplementedMemberReportServiceServer()
+}
+
+// UnimplementedMemberReportServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberReportServiceServer struct {
+}
+
+func (UnimplementedMemberReportServiceServer) AddMemberReport(context.Context, *AddMemberReportReq) (*AddMemberReportResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMemberReport not implemented")
+}
+func (UnimplementedMemberReportServiceServer) DeleteMemberReport(context.Context, *DeleteMemberReportReq) (*DeleteMemberReportResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMemberReport not implemented")
+}
+func (UnimplementedMemberReportServiceServer) UpdateMemberReport(context.Context, *UpdateMemberReportReq) (*UpdateMemberReportResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberReport not implemented")
+}
+func (UnimplementedMemberReportServiceServer) UpdateMemberReportStatus(context.Context, *UpdateMemberReportStatusReq) (*UpdateMemberReportStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberReportStatus not implemented")
+}
+func (UnimplementedMemberReportServiceServer) QueryMemberReportDetail(context.Context, *QueryMemberReportDetailReq) (*QueryMemberReportDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberReportDetail not implemented")
+}
+func (UnimplementedMemberReportServiceServer) QueryMemberReportList(context.Context, *QueryMemberReportListReq) (*QueryMemberReportListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberReportList not implemented")
+}
+func (UnimplementedMemberReportServiceServer) mustEmbedUnimplementedMemberReportServiceServer() {}
+
+// UnsafeMemberReportServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberReportServiceServer will
+// result in compilation errors.
+type UnsafeMemberReportServiceServer interface {
+	mustEmbedUnimplementedMemberReportServiceServer()
+}
+
+func RegisterMemberReportServiceServer(s grpc.ServiceRegistrar, srv MemberReportServiceServer) {
+	s.RegisterService(&MemberReportService_ServiceDesc, srv)
+}
+
+func _MemberReportService_AddMemberReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMemberReportReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberReportServiceServer).AddMemberReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberReportService_AddMemberReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberReportServiceServer).AddMemberReport(ctx, req.(*AddMemberReportReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberReportService_DeleteMemberReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMemberReportReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberReportServiceServer).DeleteMemberReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberReportService_DeleteMemberReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberReportServiceServer).DeleteMemberReport(ctx, req.(*DeleteMemberReportReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberReportService_UpdateMemberReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberReportReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberReportServiceServer).UpdateMemberReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberReportService_UpdateMemberReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberReportServiceServer).UpdateMemberReport(ctx, req.(*UpdateMemberReportReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberReportService_UpdateMemberReportStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberReportStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberReportServiceServer).UpdateMemberReportStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberReportService_UpdateMemberReportStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberReportServiceServer).UpdateMemberReportStatus(ctx, req.(*UpdateMemberReportStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberReportService_QueryMemberReportDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberReportDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberReportServiceServer).QueryMemberReportDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberReportService_QueryMemberReportDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberReportServiceServer).QueryMemberReportDetail(ctx, req.(*QueryMemberReportDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberReportService_QueryMemberReportList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberReportListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberReportServiceServer).QueryMemberReportList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberReportService_QueryMemberReportList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberReportServiceServer).QueryMemberReportList(ctx, req.(*QueryMemberReportListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MemberReportService_ServiceDesc is the grpc.ServiceDesc for MemberReportService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MemberReportService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.MemberReportService",
+	HandlerType: (*MemberReportServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddMemberReport",
+			Handler:    _MemberReportService_AddMemberReport_Handler,
+		},
+		{
+			MethodName: "DeleteMemberReport",
+			Handler:    _MemberReportService_DeleteMemberReport_Handler,
+		},
+		{
+			MethodName: "UpdateMemberReport",
+			Handler:    _MemberReportService_UpdateMemberReport_Handler,
+		},
+		{
+			MethodName: "UpdateMemberReportStatus",
+			Handler:    _MemberReportService_UpdateMemberReportStatus_Handler,
+		},
+		{
+			MethodName: "QueryMemberReportDetail",
+			Handler:    _MemberReportService_QueryMemberReportDetail_Handler,
+		},
+		{
+			MethodName: "QueryMemberReportList",
+			Handler:    _MemberReportService_QueryMemberReportList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/cms/cms.proto",
+}
+
+const (
+	PreferredAreaService_AddPreferredArea_FullMethodName          = "/cmsclient.PreferredAreaService/AddPreferredArea"
+	PreferredAreaService_DeletePreferredArea_FullMethodName       = "/cmsclient.PreferredAreaService/DeletePreferredArea"
+	PreferredAreaService_UpdatePreferredArea_FullMethodName       = "/cmsclient.PreferredAreaService/UpdatePreferredArea"
+	PreferredAreaService_UpdatePreferredAreaStatus_FullMethodName = "/cmsclient.PreferredAreaService/UpdatePreferredAreaStatus"
+	PreferredAreaService_QueryPreferredAreaDetail_FullMethodName  = "/cmsclient.PreferredAreaService/QueryPreferredAreaDetail"
+	PreferredAreaService_QueryPreferredAreaList_FullMethodName    = "/cmsclient.PreferredAreaService/QueryPreferredAreaList"
+)
+
+// PreferredAreaServiceClient is the client API for PreferredAreaService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PreferredAreaServiceClient interface {
+	// 添加优选专区
+	AddPreferredArea(ctx context.Context, in *AddPreferredAreaReq, opts ...grpc.CallOption) (*AddPreferredAreaResp, error)
+	// 删除优选专区
+	DeletePreferredArea(ctx context.Context, in *DeletePreferredAreaReq, opts ...grpc.CallOption) (*DeletePreferredAreaResp, error)
+	// 更新优选专区
+	UpdatePreferredArea(ctx context.Context, in *UpdatePreferredAreaReq, opts ...grpc.CallOption) (*UpdatePreferredAreaResp, error)
+	// 更新优选专区状态
+	UpdatePreferredAreaStatus(ctx context.Context, in *UpdatePreferredAreaStatusReq, opts ...grpc.CallOption) (*UpdatePreferredAreaStatusResp, error)
+	// 查询优选专区详情
+	QueryPreferredAreaDetail(ctx context.Context, in *QueryPreferredAreaDetailReq, opts ...grpc.CallOption) (*QueryPreferredAreaDetailResp, error)
+	// 查询优选专区列表
+	QueryPreferredAreaList(ctx context.Context, in *QueryPreferredAreaListReq, opts ...grpc.CallOption) (*QueryPreferredAreaListResp, error)
+}
+
+type preferredAreaServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPreferredAreaServiceClient(cc grpc.ClientConnInterface) PreferredAreaServiceClient {
+	return &preferredAreaServiceClient{cc}
+}
+
+func (c *preferredAreaServiceClient) AddPreferredArea(ctx context.Context, in *AddPreferredAreaReq, opts ...grpc.CallOption) (*AddPreferredAreaResp, error) {
+	out := new(AddPreferredAreaResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_AddPreferredArea_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *preferredAreaServiceClient) DeletePreferredArea(ctx context.Context, in *DeletePreferredAreaReq, opts ...grpc.CallOption) (*DeletePreferredAreaResp, error) {
+	out := new(DeletePreferredAreaResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_DeletePreferredArea_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *preferredAreaServiceClient) UpdatePreferredArea(ctx context.Context, in *UpdatePreferredAreaReq, opts ...grpc.CallOption) (*UpdatePreferredAreaResp, error) {
+	out := new(UpdatePreferredAreaResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_UpdatePreferredArea_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *preferredAreaServiceClient) UpdatePreferredAreaStatus(ctx context.Context, in *UpdatePreferredAreaStatusReq, opts ...grpc.CallOption) (*UpdatePreferredAreaStatusResp, error) {
+	out := new(UpdatePreferredAreaStatusResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_UpdatePreferredAreaStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *preferredAreaServiceClient) QueryPreferredAreaDetail(ctx context.Context, in *QueryPreferredAreaDetailReq, opts ...grpc.CallOption) (*QueryPreferredAreaDetailResp, error) {
+	out := new(QueryPreferredAreaDetailResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_QueryPreferredAreaDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *preferredAreaServiceClient) QueryPreferredAreaList(ctx context.Context, in *QueryPreferredAreaListReq, opts ...grpc.CallOption) (*QueryPreferredAreaListResp, error) {
+	out := new(QueryPreferredAreaListResp)
+	err := c.cc.Invoke(ctx, PreferredAreaService_QueryPreferredAreaList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PreferredAreaServiceServer is the server API for PreferredAreaService service.
+// All implementations must embed UnimplementedPreferredAreaServiceServer
+// for forward compatibility
+type PreferredAreaServiceServer interface {
+	// 添加优选专区
+	AddPreferredArea(context.Context, *AddPreferredAreaReq) (*AddPreferredAreaResp, error)
+	// 删除优选专区
+	DeletePreferredArea(context.Context, *DeletePreferredAreaReq) (*DeletePreferredAreaResp, error)
+	// 更新优选专区
+	UpdatePreferredArea(context.Context, *UpdatePreferredAreaReq) (*UpdatePreferredAreaResp, error)
+	// 更新优选专区状态
+	UpdatePreferredAreaStatus(context.Context, *UpdatePreferredAreaStatusReq) (*UpdatePreferredAreaStatusResp, error)
+	// 查询优选专区详情
+	QueryPreferredAreaDetail(context.Context, *QueryPreferredAreaDetailReq) (*QueryPreferredAreaDetailResp, error)
+	// 查询优选专区列表
+	QueryPreferredAreaList(context.Context, *QueryPreferredAreaListReq) (*QueryPreferredAreaListResp, error)
+	mustEmbedUnimplementedPreferredAreaServiceServer()
+}
+
+// UnimplementedPreferredAreaServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPreferredAreaServiceServer struct {
+}
+
+func (UnimplementedPreferredAreaServiceServer) AddPreferredArea(context.Context, *AddPreferredAreaReq) (*AddPreferredAreaResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPreferredArea not implemented")
+}
+func (UnimplementedPreferredAreaServiceServer) DeletePreferredArea(context.Context, *DeletePreferredAreaReq) (*DeletePreferredAreaResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePreferredArea not implemented")
+}
+func (UnimplementedPreferredAreaServiceServer) UpdatePreferredArea(context.Context, *UpdatePreferredAreaReq) (*UpdatePreferredAreaResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePreferredArea not implemented")
+}
+func (UnimplementedPreferredAreaServiceServer) UpdatePreferredAreaStatus(context.Context, *UpdatePreferredAreaStatusReq) (*UpdatePreferredAreaStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePreferredAreaStatus not implemented")
+}
+func (UnimplementedPreferredAreaServiceServer) QueryPreferredAreaDetail(context.Context, *QueryPreferredAreaDetailReq) (*QueryPreferredAreaDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryPreferredAreaDetail not implemented")
+}
+func (UnimplementedPreferredAreaServiceServer) QueryPreferredAreaList(context.Context, *QueryPreferredAreaListReq) (*QueryPreferredAreaListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryPreferredAreaList not implemented")
+}
+func (UnimplementedPreferredAreaServiceServer) mustEmbedUnimplementedPreferredAreaServiceServer() {}
+
+// UnsafePreferredAreaServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PreferredAreaServiceServer will
+// result in compilation errors.
+type UnsafePreferredAreaServiceServer interface {
+	mustEmbedUnimplementedPreferredAreaServiceServer()
+}
+
+func RegisterPreferredAreaServiceServer(s grpc.ServiceRegistrar, srv PreferredAreaServiceServer) {
+	s.RegisterService(&PreferredAreaService_ServiceDesc, srv)
+}
+
+func _PreferredAreaService_AddPreferredArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPreferredAreaReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PreferredAreaServiceServer).AddPreferredArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PreferredAreaService_AddPreferredArea_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PreferredAreaServiceServer).AddPreferredArea(ctx, req.(*AddPreferredAreaReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PreferredAreaService_DeletePreferredArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePreferredAreaReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PreferredAreaServiceServer).DeletePreferredArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PreferredAreaService_DeletePreferredArea_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PreferredAreaServiceServer).DeletePreferredArea(ctx, req.(*DeletePreferredAreaReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PreferredAreaService_UpdatePreferredArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePreferredAreaReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PreferredAreaServiceServer).UpdatePreferredArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PreferredAreaService_UpdatePreferredArea_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PreferredAreaServiceServer).UpdatePreferredArea(ctx, req.(*UpdatePreferredAreaReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PreferredAreaService_UpdatePreferredAreaStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePreferredAreaStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PreferredAreaServiceServer).UpdatePreferredAreaStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PreferredAreaService_UpdatePreferredAreaStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PreferredAreaServiceServer).UpdatePreferredAreaStatus(ctx, req.(*UpdatePreferredAreaStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PreferredAreaService_QueryPreferredAreaDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPreferredAreaDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PreferredAreaServiceServer).QueryPreferredAreaDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PreferredAreaService_QueryPreferredAreaDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PreferredAreaServiceServer).QueryPreferredAreaDetail(ctx, req.(*QueryPreferredAreaDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PreferredAreaService_QueryPreferredAreaList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPreferredAreaListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PreferredAreaServiceServer).QueryPreferredAreaList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PreferredAreaService_QueryPreferredAreaList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PreferredAreaServiceServer).QueryPreferredAreaList(ctx, req.(*QueryPreferredAreaListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PreferredAreaService_ServiceDesc is the grpc.ServiceDesc for PreferredAreaService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PreferredAreaService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.PreferredAreaService",
+	HandlerType: (*PreferredAreaServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddPreferredArea",
+			Handler:    _PreferredAreaService_AddPreferredArea_Handler,
+		},
+		{
+			MethodName: "DeletePreferredArea",
+			Handler:    _PreferredAreaService_DeletePreferredArea_Handler,
+		},
+		{
+			MethodName: "UpdatePreferredArea",
+			Handler:    _PreferredAreaService_UpdatePreferredArea_Handler,
+		},
+		{
+			MethodName: "UpdatePreferredAreaStatus",
+			Handler:    _PreferredAreaService_UpdatePreferredAreaStatus_Handler,
+		},
+		{
+			MethodName: "QueryPreferredAreaDetail",
+			Handler:    _PreferredAreaService_QueryPreferredAreaDetail_Handler,
+		},
+		{
+			MethodName: "QueryPreferredAreaList",
+			Handler:    _PreferredAreaService_QueryPreferredAreaList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/cms/cms.proto",
+}
+
+const (
+	PreferredAreaProductRelationService_AddPreferredAreaProductRelation_FullMethodName       = "/cmsclient.PreferredAreaProductRelationService/AddPreferredAreaProductRelation"
+	PreferredAreaProductRelationService_QueryPreferredAreaProductRelationList_FullMethodName = "/cmsclient.PreferredAreaProductRelationService/QueryPreferredAreaProductRelationList"
+)
+
+// PreferredAreaProductRelationServiceClient is the client API for PreferredAreaProductRelationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PreferredAreaProductRelationServiceClient interface {
+	// 添加优选专区和产品关系表
+	AddPreferredAreaProductRelation(ctx context.Context, in *AddPreferredAreaProductRelationReq, opts ...grpc.CallOption) (*AddPreferredAreaProductRelationResp, error)
+	// 查询优选专区和产品关系表列表
+	QueryPreferredAreaProductRelationList(ctx context.Context, in *QueryPreferredAreaProductRelationListReq, opts ...grpc.CallOption) (*QueryPreferredAreaProductRelationListResp, error)
+}
+
+type preferredAreaProductRelationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPreferredAreaProductRelationServiceClient(cc grpc.ClientConnInterface) PreferredAreaProductRelationServiceClient {
+	return &preferredAreaProductRelationServiceClient{cc}
+}
+
+func (c *preferredAreaProductRelationServiceClient) AddPreferredAreaProductRelation(ctx context.Context, in *AddPreferredAreaProductRelationReq, opts ...grpc.CallOption) (*AddPreferredAreaProductRelationResp, error) {
+	out := new(AddPreferredAreaProductRelationResp)
+	err := c.cc.Invoke(ctx, PreferredAreaProductRelationService_AddPreferredAreaProductRelation_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *preferredAreaProductRelationServiceClient) QueryPreferredAreaProductRelationList(ctx context.Context, in *QueryPreferredAreaProductRelationListReq, opts ...grpc.CallOption) (*QueryPreferredAreaProductRelationListResp, error) {
+	out := new(QueryPreferredAreaProductRelationListResp)
+	err := c.cc.Invoke(ctx, PreferredAreaProductRelationService_QueryPreferredAreaProductRelationList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PreferredAreaProductRelationServiceServer is the server API for PreferredAreaProductRelationService service.
+// All implementations must embed UnimplementedPreferredAreaProductRelationServiceServer
+// for forward compatibility
+type PreferredAreaProductRelationServiceServer interface {
+	// 添加优选专区和产品关系表
+	AddPreferredAreaProductRelation(context.Context, *AddPreferredAreaProductRelationReq) (*AddPreferredAreaProductRelationResp, error)
+	// 查询优选专区和产品关系表列表
+	QueryPreferredAreaProductRelationList(context.Context, *QueryPreferredAreaProductRelationListReq) (*QueryPreferredAreaProductRelationListResp, error)
+	mustEmbedUnimplementedPreferredAreaProductRelationServiceServer()
+}
+
+// UnimplementedPreferredAreaProductRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPreferredAreaProductRelationServiceServer struct {
+}
+
+func (UnimplementedPreferredAreaProductRelationServiceServer) AddPreferredAreaProductRelation(context.Context, *AddPreferredAreaProductRelationReq) (*AddPreferredAreaProductRelationResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPreferredAreaProductRelation not implemented")
+}
+func (UnimplementedPreferredAreaProductRelationServiceServer) QueryPreferredAreaProductRelationList(context.Context, *QueryPreferredAreaProductRelationListReq) (*QueryPreferredAreaProductRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryPreferredAreaProductRelationList not implemented")
+}
+func (UnimplementedPreferredAreaProductRelationServiceServer) mustEmbedUnimplementedPreferredAreaProductRelationServiceServer() {
+}
+
+// UnsafePreferredAreaProductRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PreferredAreaProductRelationServiceServer will
+// result in compilation errors.
+type UnsafePreferredAreaProductRelationServiceServer interface {
+	mustEmbedUnimplementedPreferredAreaProductRelationServiceServer()
+}
+
+func RegisterPreferredAreaProductRelationServiceServer(s grpc.ServiceRegistrar, srv PreferredAreaProductRelationServiceServer) {
+	s.RegisterService(&PreferredAreaProductRelationService_ServiceDesc, srv)
+}
+
+func _PreferredAreaProductRelationService_AddPreferredAreaProductRelation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPreferredAreaProductRelationReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PreferredAreaProductRelationServiceServer).AddPreferredAreaProductRelation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PreferredAreaProductRelationService_AddPreferredAreaProductRelation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PreferredAreaProductRelationServiceServer).AddPreferredAreaProductRelation(ctx, req.(*AddPreferredAreaProductRelationReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PreferredAreaProductRelationService_QueryPreferredAreaProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPreferredAreaProductRelationListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PreferredAreaProductRelationServiceServer).QueryPreferredAreaProductRelationList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PreferredAreaProductRelationService_QueryPreferredAreaProductRelationList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PreferredAreaProductRelationServiceServer).QueryPreferredAreaProductRelationList(ctx, req.(*QueryPreferredAreaProductRelationListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PreferredAreaProductRelationService_ServiceDesc is the grpc.ServiceDesc for PreferredAreaProductRelationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PreferredAreaProductRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.PreferredAreaProductRelationService",
+	HandlerType: (*PreferredAreaProductRelationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddPreferredAreaProductRelation",
+			Handler:    _PreferredAreaProductRelationService_AddPreferredAreaProductRelation_Handler,
+		},
+		{
+			MethodName: "QueryPreferredAreaProductRelationList",
+			Handler:    _PreferredAreaProductRelationService_QueryPreferredAreaProductRelationList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/cms/cms.proto",
+}
+
+const (
+	SubjectService_AddSubject_FullMethodName                   = "/cmsclient.SubjectService/AddSubject"
+	SubjectService_DeleteSubject_FullMethodName                = "/cmsclient.SubjectService/DeleteSubject"
+	SubjectService_UpdateSubject_FullMethodName                = "/cmsclient.SubjectService/UpdateSubject"
+	SubjectService_UpdateSubjectStatus_FullMethodName          = "/cmsclient.SubjectService/UpdateSubjectStatus"
+	SubjectService_QuerySubjectDetail_FullMethodName           = "/cmsclient.SubjectService/QuerySubjectDetail"
+	SubjectService_QuerySubjectList_FullMethodName             = "/cmsclient.SubjectService/QuerySubjectList"
 	SubjectService_SubjectListByIds_FullMethodName             = "/cmsclient.SubjectService/SubjectListByIds"
 	SubjectService_UpdateSubjectRecommendStatus_FullMethodName = "/cmsclient.SubjectService/UpdateSubjectRecommendStatus"
 )
@@ -31,12 +1313,19 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SubjectServiceClient interface {
-	// 专题
-	SubjectAdd(ctx context.Context, in *SubjectAddReq, opts ...grpc.CallOption) (*SubjectAddResp, error)
-	SubjectDelete(ctx context.Context, in *SubjectDeleteReq, opts ...grpc.CallOption) (*SubjectDeleteResp, error)
-	SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error)
-	SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error)
-	SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error)
+	// 添加专题表
+	AddSubject(ctx context.Context, in *AddSubjectReq, opts ...grpc.CallOption) (*AddSubjectResp, error)
+	// 删除专题表
+	DeleteSubject(ctx context.Context, in *DeleteSubjectReq, opts ...grpc.CallOption) (*DeleteSubjectResp, error)
+	// 更新专题表
+	UpdateSubject(ctx context.Context, in *UpdateSubjectReq, opts ...grpc.CallOption) (*UpdateSubjectResp, error)
+	// 更新专题表状态
+	UpdateSubjectStatus(ctx context.Context, in *UpdateSubjectStatusReq, opts ...grpc.CallOption) (*UpdateSubjectStatusResp, error)
+	// 查询专题表详情
+	QuerySubjectDetail(ctx context.Context, in *QuerySubjectDetailReq, opts ...grpc.CallOption) (*QuerySubjectDetailResp, error)
+	// 查询专题表列表
+	QuerySubjectList(ctx context.Context, in *QuerySubjectListReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error)
+	SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error)
 	// 批量更新状态
 	UpdateSubjectRecommendStatus(ctx context.Context, in *UpdateSubjectRecommendStatusReq, opts ...grpc.CallOption) (*UpdateSubjectRecommendStatusResp, error)
 }
@@ -49,44 +1338,62 @@ func NewSubjectServiceClient(cc grpc.ClientConnInterface) SubjectServiceClient {
 	return &subjectServiceClient{cc}
 }
 
-func (c *subjectServiceClient) SubjectAdd(ctx context.Context, in *SubjectAddReq, opts ...grpc.CallOption) (*SubjectAddResp, error) {
-	out := new(SubjectAddResp)
-	err := c.cc.Invoke(ctx, SubjectService_SubjectAdd_FullMethodName, in, out, opts...)
+func (c *subjectServiceClient) AddSubject(ctx context.Context, in *AddSubjectReq, opts ...grpc.CallOption) (*AddSubjectResp, error) {
+	out := new(AddSubjectResp)
+	err := c.cc.Invoke(ctx, SubjectService_AddSubject_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *subjectServiceClient) SubjectDelete(ctx context.Context, in *SubjectDeleteReq, opts ...grpc.CallOption) (*SubjectDeleteResp, error) {
-	out := new(SubjectDeleteResp)
-	err := c.cc.Invoke(ctx, SubjectService_SubjectDelete_FullMethodName, in, out, opts...)
+func (c *subjectServiceClient) DeleteSubject(ctx context.Context, in *DeleteSubjectReq, opts ...grpc.CallOption) (*DeleteSubjectResp, error) {
+	out := new(DeleteSubjectResp)
+	err := c.cc.Invoke(ctx, SubjectService_DeleteSubject_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *subjectServiceClient) SubjectUpdate(ctx context.Context, in *SubjectUpdateReq, opts ...grpc.CallOption) (*SubjectUpdateResp, error) {
-	out := new(SubjectUpdateResp)
-	err := c.cc.Invoke(ctx, SubjectService_SubjectUpdate_FullMethodName, in, out, opts...)
+func (c *subjectServiceClient) UpdateSubject(ctx context.Context, in *UpdateSubjectReq, opts ...grpc.CallOption) (*UpdateSubjectResp, error) {
+	out := new(UpdateSubjectResp)
+	err := c.cc.Invoke(ctx, SubjectService_UpdateSubject_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *subjectServiceClient) SubjectList(ctx context.Context, in *SubjectListReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
-	out := new(SubjectListResp)
-	err := c.cc.Invoke(ctx, SubjectService_SubjectList_FullMethodName, in, out, opts...)
+func (c *subjectServiceClient) UpdateSubjectStatus(ctx context.Context, in *UpdateSubjectStatusReq, opts ...grpc.CallOption) (*UpdateSubjectStatusResp, error) {
+	out := new(UpdateSubjectStatusResp)
+	err := c.cc.Invoke(ctx, SubjectService_UpdateSubjectStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *subjectServiceClient) SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*SubjectListResp, error) {
-	out := new(SubjectListResp)
+func (c *subjectServiceClient) QuerySubjectDetail(ctx context.Context, in *QuerySubjectDetailReq, opts ...grpc.CallOption) (*QuerySubjectDetailResp, error) {
+	out := new(QuerySubjectDetailResp)
+	err := c.cc.Invoke(ctx, SubjectService_QuerySubjectDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectServiceClient) QuerySubjectList(ctx context.Context, in *QuerySubjectListReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error) {
+	out := new(QuerySubjectListResp)
+	err := c.cc.Invoke(ctx, SubjectService_QuerySubjectList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectServiceClient) SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error) {
+	out := new(QuerySubjectListResp)
 	err := c.cc.Invoke(ctx, SubjectService_SubjectListByIds_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -107,12 +1414,19 @@ func (c *subjectServiceClient) UpdateSubjectRecommendStatus(ctx context.Context,
 // All implementations must embed UnimplementedSubjectServiceServer
 // for forward compatibility
 type SubjectServiceServer interface {
-	// 专题
-	SubjectAdd(context.Context, *SubjectAddReq) (*SubjectAddResp, error)
-	SubjectDelete(context.Context, *SubjectDeleteReq) (*SubjectDeleteResp, error)
-	SubjectUpdate(context.Context, *SubjectUpdateReq) (*SubjectUpdateResp, error)
-	SubjectList(context.Context, *SubjectListReq) (*SubjectListResp, error)
-	SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error)
+	// 添加专题表
+	AddSubject(context.Context, *AddSubjectReq) (*AddSubjectResp, error)
+	// 删除专题表
+	DeleteSubject(context.Context, *DeleteSubjectReq) (*DeleteSubjectResp, error)
+	// 更新专题表
+	UpdateSubject(context.Context, *UpdateSubjectReq) (*UpdateSubjectResp, error)
+	// 更新专题表状态
+	UpdateSubjectStatus(context.Context, *UpdateSubjectStatusReq) (*UpdateSubjectStatusResp, error)
+	// 查询专题表详情
+	QuerySubjectDetail(context.Context, *QuerySubjectDetailReq) (*QuerySubjectDetailResp, error)
+	// 查询专题表列表
+	QuerySubjectList(context.Context, *QuerySubjectListReq) (*QuerySubjectListResp, error)
+	SubjectListByIds(context.Context, *SubjectListByIdsReq) (*QuerySubjectListResp, error)
 	// 批量更新状态
 	UpdateSubjectRecommendStatus(context.Context, *UpdateSubjectRecommendStatusReq) (*UpdateSubjectRecommendStatusResp, error)
 	mustEmbedUnimplementedSubjectServiceServer()
@@ -122,19 +1436,25 @@ type SubjectServiceServer interface {
 type UnimplementedSubjectServiceServer struct {
 }
 
-func (UnimplementedSubjectServiceServer) SubjectAdd(context.Context, *SubjectAddReq) (*SubjectAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectAdd not implemented")
+func (UnimplementedSubjectServiceServer) AddSubject(context.Context, *AddSubjectReq) (*AddSubjectResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddSubject not implemented")
 }
-func (UnimplementedSubjectServiceServer) SubjectDelete(context.Context, *SubjectDeleteReq) (*SubjectDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectDelete not implemented")
+func (UnimplementedSubjectServiceServer) DeleteSubject(context.Context, *DeleteSubjectReq) (*DeleteSubjectResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSubject not implemented")
 }
-func (UnimplementedSubjectServiceServer) SubjectUpdate(context.Context, *SubjectUpdateReq) (*SubjectUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectUpdate not implemented")
+func (UnimplementedSubjectServiceServer) UpdateSubject(context.Context, *UpdateSubjectReq) (*UpdateSubjectResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubject not implemented")
 }
-func (UnimplementedSubjectServiceServer) SubjectList(context.Context, *SubjectListReq) (*SubjectListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectList not implemented")
+func (UnimplementedSubjectServiceServer) UpdateSubjectStatus(context.Context, *UpdateSubjectStatusReq) (*UpdateSubjectStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubjectStatus not implemented")
 }
-func (UnimplementedSubjectServiceServer) SubjectListByIds(context.Context, *SubjectListByIdsReq) (*SubjectListResp, error) {
+func (UnimplementedSubjectServiceServer) QuerySubjectDetail(context.Context, *QuerySubjectDetailReq) (*QuerySubjectDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySubjectDetail not implemented")
+}
+func (UnimplementedSubjectServiceServer) QuerySubjectList(context.Context, *QuerySubjectListReq) (*QuerySubjectListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySubjectList not implemented")
+}
+func (UnimplementedSubjectServiceServer) SubjectListByIds(context.Context, *SubjectListByIdsReq) (*QuerySubjectListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubjectListByIds not implemented")
 }
 func (UnimplementedSubjectServiceServer) UpdateSubjectRecommendStatus(context.Context, *UpdateSubjectRecommendStatusReq) (*UpdateSubjectRecommendStatusResp, error) {
@@ -153,74 +1473,110 @@ func RegisterSubjectServiceServer(s grpc.ServiceRegistrar, srv SubjectServiceSer
 	s.RegisterService(&SubjectService_ServiceDesc, srv)
 }
 
-func _SubjectService_SubjectAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectAddReq)
+func _SubjectService_AddSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddSubjectReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SubjectServiceServer).SubjectAdd(ctx, in)
+		return srv.(SubjectServiceServer).AddSubject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SubjectService_SubjectAdd_FullMethodName,
+		FullMethod: SubjectService_AddSubject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubjectServiceServer).SubjectAdd(ctx, req.(*SubjectAddReq))
+		return srv.(SubjectServiceServer).AddSubject(ctx, req.(*AddSubjectReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SubjectService_SubjectDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectDeleteReq)
+func _SubjectService_DeleteSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSubjectReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SubjectServiceServer).SubjectDelete(ctx, in)
+		return srv.(SubjectServiceServer).DeleteSubject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SubjectService_SubjectDelete_FullMethodName,
+		FullMethod: SubjectService_DeleteSubject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubjectServiceServer).SubjectDelete(ctx, req.(*SubjectDeleteReq))
+		return srv.(SubjectServiceServer).DeleteSubject(ctx, req.(*DeleteSubjectReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SubjectService_SubjectUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectUpdateReq)
+func _SubjectService_UpdateSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSubjectReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SubjectServiceServer).SubjectUpdate(ctx, in)
+		return srv.(SubjectServiceServer).UpdateSubject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SubjectService_SubjectUpdate_FullMethodName,
+		FullMethod: SubjectService_UpdateSubject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubjectServiceServer).SubjectUpdate(ctx, req.(*SubjectUpdateReq))
+		return srv.(SubjectServiceServer).UpdateSubject(ctx, req.(*UpdateSubjectReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SubjectService_SubjectList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectListReq)
+func _SubjectService_UpdateSubjectStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSubjectStatusReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SubjectServiceServer).SubjectList(ctx, in)
+		return srv.(SubjectServiceServer).UpdateSubjectStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SubjectService_SubjectList_FullMethodName,
+		FullMethod: SubjectService_UpdateSubjectStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubjectServiceServer).SubjectList(ctx, req.(*SubjectListReq))
+		return srv.(SubjectServiceServer).UpdateSubjectStatus(ctx, req.(*UpdateSubjectStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectService_QuerySubjectDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySubjectDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectServiceServer).QuerySubjectDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectService_QuerySubjectDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectServiceServer).QuerySubjectDetail(ctx, req.(*QuerySubjectDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectService_QuerySubjectList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySubjectListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectServiceServer).QuerySubjectList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectService_QuerySubjectList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectServiceServer).QuerySubjectList(ctx, req.(*QuerySubjectListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -269,20 +1625,28 @@ var SubjectService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*SubjectServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SubjectAdd",
-			Handler:    _SubjectService_SubjectAdd_Handler,
+			MethodName: "AddSubject",
+			Handler:    _SubjectService_AddSubject_Handler,
 		},
 		{
-			MethodName: "SubjectDelete",
-			Handler:    _SubjectService_SubjectDelete_Handler,
+			MethodName: "DeleteSubject",
+			Handler:    _SubjectService_DeleteSubject_Handler,
 		},
 		{
-			MethodName: "SubjectUpdate",
-			Handler:    _SubjectService_SubjectUpdate_Handler,
+			MethodName: "UpdateSubject",
+			Handler:    _SubjectService_UpdateSubject_Handler,
 		},
 		{
-			MethodName: "SubjectList",
-			Handler:    _SubjectService_SubjectList_Handler,
+			MethodName: "UpdateSubjectStatus",
+			Handler:    _SubjectService_UpdateSubjectStatus_Handler,
+		},
+		{
+			MethodName: "QuerySubjectDetail",
+			Handler:    _SubjectService_QuerySubjectDetail_Handler,
+		},
+		{
+			MethodName: "QuerySubjectList",
+			Handler:    _SubjectService_QuerySubjectList_Handler,
 		},
 		{
 			MethodName: "SubjectListByIds",
@@ -298,17 +1662,593 @@ var SubjectService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SubjectProductRelationService_SubjectProductRelationAdd_FullMethodName  = "/cmsclient.SubjectProductRelationService/SubjectProductRelationAdd"
-	SubjectProductRelationService_SubjectProductRelationList_FullMethodName = "/cmsclient.SubjectProductRelationService/SubjectProductRelationList"
+	SubjectCategoryService_AddSubjectCategory_FullMethodName          = "/cmsclient.SubjectCategoryService/AddSubjectCategory"
+	SubjectCategoryService_DeleteSubjectCategory_FullMethodName       = "/cmsclient.SubjectCategoryService/DeleteSubjectCategory"
+	SubjectCategoryService_UpdateSubjectCategory_FullMethodName       = "/cmsclient.SubjectCategoryService/UpdateSubjectCategory"
+	SubjectCategoryService_UpdateSubjectCategoryStatus_FullMethodName = "/cmsclient.SubjectCategoryService/UpdateSubjectCategoryStatus"
+	SubjectCategoryService_QuerySubjectCategoryDetail_FullMethodName  = "/cmsclient.SubjectCategoryService/QuerySubjectCategoryDetail"
+	SubjectCategoryService_QuerySubjectCategoryList_FullMethodName    = "/cmsclient.SubjectCategoryService/QuerySubjectCategoryList"
+)
+
+// SubjectCategoryServiceClient is the client API for SubjectCategoryService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type SubjectCategoryServiceClient interface {
+	// 添加专题分类表
+	AddSubjectCategory(ctx context.Context, in *AddSubjectCategoryReq, opts ...grpc.CallOption) (*AddSubjectCategoryResp, error)
+	// 删除专题分类表
+	DeleteSubjectCategory(ctx context.Context, in *DeleteSubjectCategoryReq, opts ...grpc.CallOption) (*DeleteSubjectCategoryResp, error)
+	// 更新专题分类表
+	UpdateSubjectCategory(ctx context.Context, in *UpdateSubjectCategoryReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryResp, error)
+	// 更新专题分类表状态
+	UpdateSubjectCategoryStatus(ctx context.Context, in *UpdateSubjectCategoryStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryStatusResp, error)
+	// 查询专题分类表详情
+	QuerySubjectCategoryDetail(ctx context.Context, in *QuerySubjectCategoryDetailReq, opts ...grpc.CallOption) (*QuerySubjectCategoryDetailResp, error)
+	// 查询专题分类表列表
+	QuerySubjectCategoryList(ctx context.Context, in *QuerySubjectCategoryListReq, opts ...grpc.CallOption) (*QuerySubjectCategoryListResp, error)
+}
+
+type subjectCategoryServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSubjectCategoryServiceClient(cc grpc.ClientConnInterface) SubjectCategoryServiceClient {
+	return &subjectCategoryServiceClient{cc}
+}
+
+func (c *subjectCategoryServiceClient) AddSubjectCategory(ctx context.Context, in *AddSubjectCategoryReq, opts ...grpc.CallOption) (*AddSubjectCategoryResp, error) {
+	out := new(AddSubjectCategoryResp)
+	err := c.cc.Invoke(ctx, SubjectCategoryService_AddSubjectCategory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCategoryServiceClient) DeleteSubjectCategory(ctx context.Context, in *DeleteSubjectCategoryReq, opts ...grpc.CallOption) (*DeleteSubjectCategoryResp, error) {
+	out := new(DeleteSubjectCategoryResp)
+	err := c.cc.Invoke(ctx, SubjectCategoryService_DeleteSubjectCategory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCategoryServiceClient) UpdateSubjectCategory(ctx context.Context, in *UpdateSubjectCategoryReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryResp, error) {
+	out := new(UpdateSubjectCategoryResp)
+	err := c.cc.Invoke(ctx, SubjectCategoryService_UpdateSubjectCategory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCategoryServiceClient) UpdateSubjectCategoryStatus(ctx context.Context, in *UpdateSubjectCategoryStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryStatusResp, error) {
+	out := new(UpdateSubjectCategoryStatusResp)
+	err := c.cc.Invoke(ctx, SubjectCategoryService_UpdateSubjectCategoryStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCategoryServiceClient) QuerySubjectCategoryDetail(ctx context.Context, in *QuerySubjectCategoryDetailReq, opts ...grpc.CallOption) (*QuerySubjectCategoryDetailResp, error) {
+	out := new(QuerySubjectCategoryDetailResp)
+	err := c.cc.Invoke(ctx, SubjectCategoryService_QuerySubjectCategoryDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCategoryServiceClient) QuerySubjectCategoryList(ctx context.Context, in *QuerySubjectCategoryListReq, opts ...grpc.CallOption) (*QuerySubjectCategoryListResp, error) {
+	out := new(QuerySubjectCategoryListResp)
+	err := c.cc.Invoke(ctx, SubjectCategoryService_QuerySubjectCategoryList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SubjectCategoryServiceServer is the server API for SubjectCategoryService service.
+// All implementations must embed UnimplementedSubjectCategoryServiceServer
+// for forward compatibility
+type SubjectCategoryServiceServer interface {
+	// 添加专题分类表
+	AddSubjectCategory(context.Context, *AddSubjectCategoryReq) (*AddSubjectCategoryResp, error)
+	// 删除专题分类表
+	DeleteSubjectCategory(context.Context, *DeleteSubjectCategoryReq) (*DeleteSubjectCategoryResp, error)
+	// 更新专题分类表
+	UpdateSubjectCategory(context.Context, *UpdateSubjectCategoryReq) (*UpdateSubjectCategoryResp, error)
+	// 更新专题分类表状态
+	UpdateSubjectCategoryStatus(context.Context, *UpdateSubjectCategoryStatusReq) (*UpdateSubjectCategoryStatusResp, error)
+	// 查询专题分类表详情
+	QuerySubjectCategoryDetail(context.Context, *QuerySubjectCategoryDetailReq) (*QuerySubjectCategoryDetailResp, error)
+	// 查询专题分类表列表
+	QuerySubjectCategoryList(context.Context, *QuerySubjectCategoryListReq) (*QuerySubjectCategoryListResp, error)
+	mustEmbedUnimplementedSubjectCategoryServiceServer()
+}
+
+// UnimplementedSubjectCategoryServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedSubjectCategoryServiceServer struct {
+}
+
+func (UnimplementedSubjectCategoryServiceServer) AddSubjectCategory(context.Context, *AddSubjectCategoryReq) (*AddSubjectCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddSubjectCategory not implemented")
+}
+func (UnimplementedSubjectCategoryServiceServer) DeleteSubjectCategory(context.Context, *DeleteSubjectCategoryReq) (*DeleteSubjectCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSubjectCategory not implemented")
+}
+func (UnimplementedSubjectCategoryServiceServer) UpdateSubjectCategory(context.Context, *UpdateSubjectCategoryReq) (*UpdateSubjectCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubjectCategory not implemented")
+}
+func (UnimplementedSubjectCategoryServiceServer) UpdateSubjectCategoryStatus(context.Context, *UpdateSubjectCategoryStatusReq) (*UpdateSubjectCategoryStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubjectCategoryStatus not implemented")
+}
+func (UnimplementedSubjectCategoryServiceServer) QuerySubjectCategoryDetail(context.Context, *QuerySubjectCategoryDetailReq) (*QuerySubjectCategoryDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySubjectCategoryDetail not implemented")
+}
+func (UnimplementedSubjectCategoryServiceServer) QuerySubjectCategoryList(context.Context, *QuerySubjectCategoryListReq) (*QuerySubjectCategoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySubjectCategoryList not implemented")
+}
+func (UnimplementedSubjectCategoryServiceServer) mustEmbedUnimplementedSubjectCategoryServiceServer() {
+}
+
+// UnsafeSubjectCategoryServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SubjectCategoryServiceServer will
+// result in compilation errors.
+type UnsafeSubjectCategoryServiceServer interface {
+	mustEmbedUnimplementedSubjectCategoryServiceServer()
+}
+
+func RegisterSubjectCategoryServiceServer(s grpc.ServiceRegistrar, srv SubjectCategoryServiceServer) {
+	s.RegisterService(&SubjectCategoryService_ServiceDesc, srv)
+}
+
+func _SubjectCategoryService_AddSubjectCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddSubjectCategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCategoryServiceServer).AddSubjectCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCategoryService_AddSubjectCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCategoryServiceServer).AddSubjectCategory(ctx, req.(*AddSubjectCategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCategoryService_DeleteSubjectCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSubjectCategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCategoryServiceServer).DeleteSubjectCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCategoryService_DeleteSubjectCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCategoryServiceServer).DeleteSubjectCategory(ctx, req.(*DeleteSubjectCategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCategoryService_UpdateSubjectCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSubjectCategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCategoryServiceServer).UpdateSubjectCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCategoryService_UpdateSubjectCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCategoryServiceServer).UpdateSubjectCategory(ctx, req.(*UpdateSubjectCategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCategoryService_UpdateSubjectCategoryStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSubjectCategoryStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCategoryServiceServer).UpdateSubjectCategoryStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCategoryService_UpdateSubjectCategoryStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCategoryServiceServer).UpdateSubjectCategoryStatus(ctx, req.(*UpdateSubjectCategoryStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCategoryService_QuerySubjectCategoryDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySubjectCategoryDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCategoryServiceServer).QuerySubjectCategoryDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCategoryService_QuerySubjectCategoryDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCategoryServiceServer).QuerySubjectCategoryDetail(ctx, req.(*QuerySubjectCategoryDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCategoryService_QuerySubjectCategoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySubjectCategoryListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCategoryServiceServer).QuerySubjectCategoryList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCategoryService_QuerySubjectCategoryList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCategoryServiceServer).QuerySubjectCategoryList(ctx, req.(*QuerySubjectCategoryListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// SubjectCategoryService_ServiceDesc is the grpc.ServiceDesc for SubjectCategoryService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var SubjectCategoryService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.SubjectCategoryService",
+	HandlerType: (*SubjectCategoryServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddSubjectCategory",
+			Handler:    _SubjectCategoryService_AddSubjectCategory_Handler,
+		},
+		{
+			MethodName: "DeleteSubjectCategory",
+			Handler:    _SubjectCategoryService_DeleteSubjectCategory_Handler,
+		},
+		{
+			MethodName: "UpdateSubjectCategory",
+			Handler:    _SubjectCategoryService_UpdateSubjectCategory_Handler,
+		},
+		{
+			MethodName: "UpdateSubjectCategoryStatus",
+			Handler:    _SubjectCategoryService_UpdateSubjectCategoryStatus_Handler,
+		},
+		{
+			MethodName: "QuerySubjectCategoryDetail",
+			Handler:    _SubjectCategoryService_QuerySubjectCategoryDetail_Handler,
+		},
+		{
+			MethodName: "QuerySubjectCategoryList",
+			Handler:    _SubjectCategoryService_QuerySubjectCategoryList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/cms/cms.proto",
+}
+
+const (
+	SubjectCommentService_AddSubjectComment_FullMethodName          = "/cmsclient.SubjectCommentService/AddSubjectComment"
+	SubjectCommentService_DeleteSubjectComment_FullMethodName       = "/cmsclient.SubjectCommentService/DeleteSubjectComment"
+	SubjectCommentService_UpdateSubjectComment_FullMethodName       = "/cmsclient.SubjectCommentService/UpdateSubjectComment"
+	SubjectCommentService_UpdateSubjectCommentStatus_FullMethodName = "/cmsclient.SubjectCommentService/UpdateSubjectCommentStatus"
+	SubjectCommentService_QuerySubjectCommentDetail_FullMethodName  = "/cmsclient.SubjectCommentService/QuerySubjectCommentDetail"
+	SubjectCommentService_QuerySubjectCommentList_FullMethodName    = "/cmsclient.SubjectCommentService/QuerySubjectCommentList"
+)
+
+// SubjectCommentServiceClient is the client API for SubjectCommentService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type SubjectCommentServiceClient interface {
+	// 添加专题评论表
+	AddSubjectComment(ctx context.Context, in *AddSubjectCommentReq, opts ...grpc.CallOption) (*AddSubjectCommentResp, error)
+	// 删除专题评论表
+	DeleteSubjectComment(ctx context.Context, in *DeleteSubjectCommentReq, opts ...grpc.CallOption) (*DeleteSubjectCommentResp, error)
+	// 更新专题评论表
+	UpdateSubjectComment(ctx context.Context, in *UpdateSubjectCommentReq, opts ...grpc.CallOption) (*UpdateSubjectCommentResp, error)
+	// 更新专题评论表状态
+	UpdateSubjectCommentStatus(ctx context.Context, in *UpdateSubjectCommentStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCommentStatusResp, error)
+	// 查询专题评论表详情
+	QuerySubjectCommentDetail(ctx context.Context, in *QuerySubjectCommentDetailReq, opts ...grpc.CallOption) (*QuerySubjectCommentDetailResp, error)
+	// 查询专题评论表列表
+	QuerySubjectCommentList(ctx context.Context, in *QuerySubjectCommentListReq, opts ...grpc.CallOption) (*QuerySubjectCommentListResp, error)
+}
+
+type subjectCommentServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSubjectCommentServiceClient(cc grpc.ClientConnInterface) SubjectCommentServiceClient {
+	return &subjectCommentServiceClient{cc}
+}
+
+func (c *subjectCommentServiceClient) AddSubjectComment(ctx context.Context, in *AddSubjectCommentReq, opts ...grpc.CallOption) (*AddSubjectCommentResp, error) {
+	out := new(AddSubjectCommentResp)
+	err := c.cc.Invoke(ctx, SubjectCommentService_AddSubjectComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCommentServiceClient) DeleteSubjectComment(ctx context.Context, in *DeleteSubjectCommentReq, opts ...grpc.CallOption) (*DeleteSubjectCommentResp, error) {
+	out := new(DeleteSubjectCommentResp)
+	err := c.cc.Invoke(ctx, SubjectCommentService_DeleteSubjectComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCommentServiceClient) UpdateSubjectComment(ctx context.Context, in *UpdateSubjectCommentReq, opts ...grpc.CallOption) (*UpdateSubjectCommentResp, error) {
+	out := new(UpdateSubjectCommentResp)
+	err := c.cc.Invoke(ctx, SubjectCommentService_UpdateSubjectComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCommentServiceClient) UpdateSubjectCommentStatus(ctx context.Context, in *UpdateSubjectCommentStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCommentStatusResp, error) {
+	out := new(UpdateSubjectCommentStatusResp)
+	err := c.cc.Invoke(ctx, SubjectCommentService_UpdateSubjectCommentStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCommentServiceClient) QuerySubjectCommentDetail(ctx context.Context, in *QuerySubjectCommentDetailReq, opts ...grpc.CallOption) (*QuerySubjectCommentDetailResp, error) {
+	out := new(QuerySubjectCommentDetailResp)
+	err := c.cc.Invoke(ctx, SubjectCommentService_QuerySubjectCommentDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subjectCommentServiceClient) QuerySubjectCommentList(ctx context.Context, in *QuerySubjectCommentListReq, opts ...grpc.CallOption) (*QuerySubjectCommentListResp, error) {
+	out := new(QuerySubjectCommentListResp)
+	err := c.cc.Invoke(ctx, SubjectCommentService_QuerySubjectCommentList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SubjectCommentServiceServer is the server API for SubjectCommentService service.
+// All implementations must embed UnimplementedSubjectCommentServiceServer
+// for forward compatibility
+type SubjectCommentServiceServer interface {
+	// 添加专题评论表
+	AddSubjectComment(context.Context, *AddSubjectCommentReq) (*AddSubjectCommentResp, error)
+	// 删除专题评论表
+	DeleteSubjectComment(context.Context, *DeleteSubjectCommentReq) (*DeleteSubjectCommentResp, error)
+	// 更新专题评论表
+	UpdateSubjectComment(context.Context, *UpdateSubjectCommentReq) (*UpdateSubjectCommentResp, error)
+	// 更新专题评论表状态
+	UpdateSubjectCommentStatus(context.Context, *UpdateSubjectCommentStatusReq) (*UpdateSubjectCommentStatusResp, error)
+	// 查询专题评论表详情
+	QuerySubjectCommentDetail(context.Context, *QuerySubjectCommentDetailReq) (*QuerySubjectCommentDetailResp, error)
+	// 查询专题评论表列表
+	QuerySubjectCommentList(context.Context, *QuerySubjectCommentListReq) (*QuerySubjectCommentListResp, error)
+	mustEmbedUnimplementedSubjectCommentServiceServer()
+}
+
+// UnimplementedSubjectCommentServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedSubjectCommentServiceServer struct {
+}
+
+func (UnimplementedSubjectCommentServiceServer) AddSubjectComment(context.Context, *AddSubjectCommentReq) (*AddSubjectCommentResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddSubjectComment not implemented")
+}
+func (UnimplementedSubjectCommentServiceServer) DeleteSubjectComment(context.Context, *DeleteSubjectCommentReq) (*DeleteSubjectCommentResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSubjectComment not implemented")
+}
+func (UnimplementedSubjectCommentServiceServer) UpdateSubjectComment(context.Context, *UpdateSubjectCommentReq) (*UpdateSubjectCommentResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubjectComment not implemented")
+}
+func (UnimplementedSubjectCommentServiceServer) UpdateSubjectCommentStatus(context.Context, *UpdateSubjectCommentStatusReq) (*UpdateSubjectCommentStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubjectCommentStatus not implemented")
+}
+func (UnimplementedSubjectCommentServiceServer) QuerySubjectCommentDetail(context.Context, *QuerySubjectCommentDetailReq) (*QuerySubjectCommentDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySubjectCommentDetail not implemented")
+}
+func (UnimplementedSubjectCommentServiceServer) QuerySubjectCommentList(context.Context, *QuerySubjectCommentListReq) (*QuerySubjectCommentListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySubjectCommentList not implemented")
+}
+func (UnimplementedSubjectCommentServiceServer) mustEmbedUnimplementedSubjectCommentServiceServer() {}
+
+// UnsafeSubjectCommentServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SubjectCommentServiceServer will
+// result in compilation errors.
+type UnsafeSubjectCommentServiceServer interface {
+	mustEmbedUnimplementedSubjectCommentServiceServer()
+}
+
+func RegisterSubjectCommentServiceServer(s grpc.ServiceRegistrar, srv SubjectCommentServiceServer) {
+	s.RegisterService(&SubjectCommentService_ServiceDesc, srv)
+}
+
+func _SubjectCommentService_AddSubjectComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddSubjectCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCommentServiceServer).AddSubjectComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCommentService_AddSubjectComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCommentServiceServer).AddSubjectComment(ctx, req.(*AddSubjectCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCommentService_DeleteSubjectComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSubjectCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCommentServiceServer).DeleteSubjectComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCommentService_DeleteSubjectComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCommentServiceServer).DeleteSubjectComment(ctx, req.(*DeleteSubjectCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCommentService_UpdateSubjectComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSubjectCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCommentServiceServer).UpdateSubjectComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCommentService_UpdateSubjectComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCommentServiceServer).UpdateSubjectComment(ctx, req.(*UpdateSubjectCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCommentService_UpdateSubjectCommentStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSubjectCommentStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCommentServiceServer).UpdateSubjectCommentStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCommentService_UpdateSubjectCommentStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCommentServiceServer).UpdateSubjectCommentStatus(ctx, req.(*UpdateSubjectCommentStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCommentService_QuerySubjectCommentDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySubjectCommentDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCommentServiceServer).QuerySubjectCommentDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCommentService_QuerySubjectCommentDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCommentServiceServer).QuerySubjectCommentDetail(ctx, req.(*QuerySubjectCommentDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubjectCommentService_QuerySubjectCommentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySubjectCommentListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectCommentServiceServer).QuerySubjectCommentList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectCommentService_QuerySubjectCommentList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectCommentServiceServer).QuerySubjectCommentList(ctx, req.(*QuerySubjectCommentListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// SubjectCommentService_ServiceDesc is the grpc.ServiceDesc for SubjectCommentService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var SubjectCommentService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.SubjectCommentService",
+	HandlerType: (*SubjectCommentServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddSubjectComment",
+			Handler:    _SubjectCommentService_AddSubjectComment_Handler,
+		},
+		{
+			MethodName: "DeleteSubjectComment",
+			Handler:    _SubjectCommentService_DeleteSubjectComment_Handler,
+		},
+		{
+			MethodName: "UpdateSubjectComment",
+			Handler:    _SubjectCommentService_UpdateSubjectComment_Handler,
+		},
+		{
+			MethodName: "UpdateSubjectCommentStatus",
+			Handler:    _SubjectCommentService_UpdateSubjectCommentStatus_Handler,
+		},
+		{
+			MethodName: "QuerySubjectCommentDetail",
+			Handler:    _SubjectCommentService_QuerySubjectCommentDetail_Handler,
+		},
+		{
+			MethodName: "QuerySubjectCommentList",
+			Handler:    _SubjectCommentService_QuerySubjectCommentList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/cms/cms.proto",
+}
+
+const (
+	SubjectProductRelationService_AddSubjectProductRelation_FullMethodName       = "/cmsclient.SubjectProductRelationService/AddSubjectProductRelation"
+	SubjectProductRelationService_QuerySubjectProductRelationList_FullMethodName = "/cmsclient.SubjectProductRelationService/QuerySubjectProductRelationList"
 )
 
 // SubjectProductRelationServiceClient is the client API for SubjectProductRelationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SubjectProductRelationServiceClient interface {
-	// 专题关联
-	SubjectProductRelationAdd(ctx context.Context, in *SubjectProductRelationAddReq, opts ...grpc.CallOption) (*SubjectProductRelationAddResp, error)
-	SubjectProductRelationList(ctx context.Context, in *SubjectProductRelationListReq, opts ...grpc.CallOption) (*SubjectProductRelationListResp, error)
+	// 添加专题商品关系表
+	AddSubjectProductRelation(ctx context.Context, in *AddSubjectProductRelationReq, opts ...grpc.CallOption) (*AddSubjectProductRelationResp, error)
+	// 查询专题商品关系表列表
+	QuerySubjectProductRelationList(ctx context.Context, in *QuerySubjectProductRelationListReq, opts ...grpc.CallOption) (*QuerySubjectProductRelationListResp, error)
 }
 
 type subjectProductRelationServiceClient struct {
@@ -319,18 +2259,18 @@ func NewSubjectProductRelationServiceClient(cc grpc.ClientConnInterface) Subject
 	return &subjectProductRelationServiceClient{cc}
 }
 
-func (c *subjectProductRelationServiceClient) SubjectProductRelationAdd(ctx context.Context, in *SubjectProductRelationAddReq, opts ...grpc.CallOption) (*SubjectProductRelationAddResp, error) {
-	out := new(SubjectProductRelationAddResp)
-	err := c.cc.Invoke(ctx, SubjectProductRelationService_SubjectProductRelationAdd_FullMethodName, in, out, opts...)
+func (c *subjectProductRelationServiceClient) AddSubjectProductRelation(ctx context.Context, in *AddSubjectProductRelationReq, opts ...grpc.CallOption) (*AddSubjectProductRelationResp, error) {
+	out := new(AddSubjectProductRelationResp)
+	err := c.cc.Invoke(ctx, SubjectProductRelationService_AddSubjectProductRelation_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *subjectProductRelationServiceClient) SubjectProductRelationList(ctx context.Context, in *SubjectProductRelationListReq, opts ...grpc.CallOption) (*SubjectProductRelationListResp, error) {
-	out := new(SubjectProductRelationListResp)
-	err := c.cc.Invoke(ctx, SubjectProductRelationService_SubjectProductRelationList_FullMethodName, in, out, opts...)
+func (c *subjectProductRelationServiceClient) QuerySubjectProductRelationList(ctx context.Context, in *QuerySubjectProductRelationListReq, opts ...grpc.CallOption) (*QuerySubjectProductRelationListResp, error) {
+	out := new(QuerySubjectProductRelationListResp)
+	err := c.cc.Invoke(ctx, SubjectProductRelationService_QuerySubjectProductRelationList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -341,9 +2281,10 @@ func (c *subjectProductRelationServiceClient) SubjectProductRelationList(ctx con
 // All implementations must embed UnimplementedSubjectProductRelationServiceServer
 // for forward compatibility
 type SubjectProductRelationServiceServer interface {
-	// 专题关联
-	SubjectProductRelationAdd(context.Context, *SubjectProductRelationAddReq) (*SubjectProductRelationAddResp, error)
-	SubjectProductRelationList(context.Context, *SubjectProductRelationListReq) (*SubjectProductRelationListResp, error)
+	// 添加专题商品关系表
+	AddSubjectProductRelation(context.Context, *AddSubjectProductRelationReq) (*AddSubjectProductRelationResp, error)
+	// 查询专题商品关系表列表
+	QuerySubjectProductRelationList(context.Context, *QuerySubjectProductRelationListReq) (*QuerySubjectProductRelationListResp, error)
 	mustEmbedUnimplementedSubjectProductRelationServiceServer()
 }
 
@@ -351,11 +2292,11 @@ type SubjectProductRelationServiceServer interface {
 type UnimplementedSubjectProductRelationServiceServer struct {
 }
 
-func (UnimplementedSubjectProductRelationServiceServer) SubjectProductRelationAdd(context.Context, *SubjectProductRelationAddReq) (*SubjectProductRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationAdd not implemented")
+func (UnimplementedSubjectProductRelationServiceServer) AddSubjectProductRelation(context.Context, *AddSubjectProductRelationReq) (*AddSubjectProductRelationResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddSubjectProductRelation not implemented")
 }
-func (UnimplementedSubjectProductRelationServiceServer) SubjectProductRelationList(context.Context, *SubjectProductRelationListReq) (*SubjectProductRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubjectProductRelationList not implemented")
+func (UnimplementedSubjectProductRelationServiceServer) QuerySubjectProductRelationList(context.Context, *QuerySubjectProductRelationListReq) (*QuerySubjectProductRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySubjectProductRelationList not implemented")
 }
 func (UnimplementedSubjectProductRelationServiceServer) mustEmbedUnimplementedSubjectProductRelationServiceServer() {
 }
@@ -371,38 +2312,38 @@ func RegisterSubjectProductRelationServiceServer(s grpc.ServiceRegistrar, srv Su
 	s.RegisterService(&SubjectProductRelationService_ServiceDesc, srv)
 }
 
-func _SubjectProductRelationService_SubjectProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectProductRelationAddReq)
+func _SubjectProductRelationService_AddSubjectProductRelation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddSubjectProductRelationReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationAdd(ctx, in)
+		return srv.(SubjectProductRelationServiceServer).AddSubjectProductRelation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SubjectProductRelationService_SubjectProductRelationAdd_FullMethodName,
+		FullMethod: SubjectProductRelationService_AddSubjectProductRelation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationAdd(ctx, req.(*SubjectProductRelationAddReq))
+		return srv.(SubjectProductRelationServiceServer).AddSubjectProductRelation(ctx, req.(*AddSubjectProductRelationReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SubjectProductRelationService_SubjectProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubjectProductRelationListReq)
+func _SubjectProductRelationService_QuerySubjectProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySubjectProductRelationListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationList(ctx, in)
+		return srv.(SubjectProductRelationServiceServer).QuerySubjectProductRelationList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SubjectProductRelationService_SubjectProductRelationList_FullMethodName,
+		FullMethod: SubjectProductRelationService_QuerySubjectProductRelationList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubjectProductRelationServiceServer).SubjectProductRelationList(ctx, req.(*SubjectProductRelationListReq))
+		return srv.(SubjectProductRelationServiceServer).QuerySubjectProductRelationList(ctx, req.(*QuerySubjectProductRelationListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -415,215 +2356,12 @@ var SubjectProductRelationService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*SubjectProductRelationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SubjectProductRelationAdd",
-			Handler:    _SubjectProductRelationService_SubjectProductRelationAdd_Handler,
+			MethodName: "AddSubjectProductRelation",
+			Handler:    _SubjectProductRelationService_AddSubjectProductRelation_Handler,
 		},
 		{
-			MethodName: "SubjectProductRelationList",
-			Handler:    _SubjectProductRelationService_SubjectProductRelationList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/cms/cms.proto",
-}
-
-const (
-	PreferredAreaService_PreferredAreaAdd_FullMethodName    = "/cmsclient.PreferredAreaService/PreferredAreaAdd"
-	PreferredAreaService_PreferredAreaDelete_FullMethodName = "/cmsclient.PreferredAreaService/PreferredAreaDelete"
-	PreferredAreaService_PreferredAreaUpdate_FullMethodName = "/cmsclient.PreferredAreaService/PreferredAreaUpdate"
-	PreferredAreaService_PreferredAreaList_FullMethodName   = "/cmsclient.PreferredAreaService/PreferredAreaList"
-)
-
-// PreferredAreaServiceClient is the client API for PreferredAreaService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PreferredAreaServiceClient interface {
-	// 商品优选
-	PreferredAreaAdd(ctx context.Context, in *PreferredAreaAddReq, opts ...grpc.CallOption) (*PreferredAreaAddResp, error)
-	PreferredAreaDelete(ctx context.Context, in *PreferredAreaDeleteReq, opts ...grpc.CallOption) (*PreferredAreaDeleteResp, error)
-	PreferredAreaUpdate(ctx context.Context, in *PreferredAreaUpdateReq, opts ...grpc.CallOption) (*PreferredAreaUpdateResp, error)
-	PreferredAreaList(ctx context.Context, in *PreferredAreaListReq, opts ...grpc.CallOption) (*PreferredAreaListResp, error)
-}
-
-type preferredAreaServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewPreferredAreaServiceClient(cc grpc.ClientConnInterface) PreferredAreaServiceClient {
-	return &preferredAreaServiceClient{cc}
-}
-
-func (c *preferredAreaServiceClient) PreferredAreaAdd(ctx context.Context, in *PreferredAreaAddReq, opts ...grpc.CallOption) (*PreferredAreaAddResp, error) {
-	out := new(PreferredAreaAddResp)
-	err := c.cc.Invoke(ctx, PreferredAreaService_PreferredAreaAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *preferredAreaServiceClient) PreferredAreaDelete(ctx context.Context, in *PreferredAreaDeleteReq, opts ...grpc.CallOption) (*PreferredAreaDeleteResp, error) {
-	out := new(PreferredAreaDeleteResp)
-	err := c.cc.Invoke(ctx, PreferredAreaService_PreferredAreaDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *preferredAreaServiceClient) PreferredAreaUpdate(ctx context.Context, in *PreferredAreaUpdateReq, opts ...grpc.CallOption) (*PreferredAreaUpdateResp, error) {
-	out := new(PreferredAreaUpdateResp)
-	err := c.cc.Invoke(ctx, PreferredAreaService_PreferredAreaUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *preferredAreaServiceClient) PreferredAreaList(ctx context.Context, in *PreferredAreaListReq, opts ...grpc.CallOption) (*PreferredAreaListResp, error) {
-	out := new(PreferredAreaListResp)
-	err := c.cc.Invoke(ctx, PreferredAreaService_PreferredAreaList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// PreferredAreaServiceServer is the server API for PreferredAreaService service.
-// All implementations must embed UnimplementedPreferredAreaServiceServer
-// for forward compatibility
-type PreferredAreaServiceServer interface {
-	// 商品优选
-	PreferredAreaAdd(context.Context, *PreferredAreaAddReq) (*PreferredAreaAddResp, error)
-	PreferredAreaDelete(context.Context, *PreferredAreaDeleteReq) (*PreferredAreaDeleteResp, error)
-	PreferredAreaUpdate(context.Context, *PreferredAreaUpdateReq) (*PreferredAreaUpdateResp, error)
-	PreferredAreaList(context.Context, *PreferredAreaListReq) (*PreferredAreaListResp, error)
-	mustEmbedUnimplementedPreferredAreaServiceServer()
-}
-
-// UnimplementedPreferredAreaServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedPreferredAreaServiceServer struct {
-}
-
-func (UnimplementedPreferredAreaServiceServer) PreferredAreaAdd(context.Context, *PreferredAreaAddReq) (*PreferredAreaAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaAdd not implemented")
-}
-func (UnimplementedPreferredAreaServiceServer) PreferredAreaDelete(context.Context, *PreferredAreaDeleteReq) (*PreferredAreaDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaDelete not implemented")
-}
-func (UnimplementedPreferredAreaServiceServer) PreferredAreaUpdate(context.Context, *PreferredAreaUpdateReq) (*PreferredAreaUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaUpdate not implemented")
-}
-func (UnimplementedPreferredAreaServiceServer) PreferredAreaList(context.Context, *PreferredAreaListReq) (*PreferredAreaListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaList not implemented")
-}
-func (UnimplementedPreferredAreaServiceServer) mustEmbedUnimplementedPreferredAreaServiceServer() {}
-
-// UnsafePreferredAreaServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PreferredAreaServiceServer will
-// result in compilation errors.
-type UnsafePreferredAreaServiceServer interface {
-	mustEmbedUnimplementedPreferredAreaServiceServer()
-}
-
-func RegisterPreferredAreaServiceServer(s grpc.ServiceRegistrar, srv PreferredAreaServiceServer) {
-	s.RegisterService(&PreferredAreaService_ServiceDesc, srv)
-}
-
-func _PreferredAreaService_PreferredAreaAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PreferredAreaAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PreferredAreaServiceServer).PreferredAreaAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PreferredAreaService_PreferredAreaAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PreferredAreaServiceServer).PreferredAreaAdd(ctx, req.(*PreferredAreaAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PreferredAreaService_PreferredAreaDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PreferredAreaDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PreferredAreaServiceServer).PreferredAreaDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PreferredAreaService_PreferredAreaDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PreferredAreaServiceServer).PreferredAreaDelete(ctx, req.(*PreferredAreaDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PreferredAreaService_PreferredAreaUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PreferredAreaUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PreferredAreaServiceServer).PreferredAreaUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PreferredAreaService_PreferredAreaUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PreferredAreaServiceServer).PreferredAreaUpdate(ctx, req.(*PreferredAreaUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PreferredAreaService_PreferredAreaList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PreferredAreaListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PreferredAreaServiceServer).PreferredAreaList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PreferredAreaService_PreferredAreaList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PreferredAreaServiceServer).PreferredAreaList(ctx, req.(*PreferredAreaListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// PreferredAreaService_ServiceDesc is the grpc.ServiceDesc for PreferredAreaService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var PreferredAreaService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.PreferredAreaService",
-	HandlerType: (*PreferredAreaServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "PreferredAreaAdd",
-			Handler:    _PreferredAreaService_PreferredAreaAdd_Handler,
-		},
-		{
-			MethodName: "PreferredAreaDelete",
-			Handler:    _PreferredAreaService_PreferredAreaDelete_Handler,
-		},
-		{
-			MethodName: "PreferredAreaUpdate",
-			Handler:    _PreferredAreaService_PreferredAreaUpdate_Handler,
-		},
-		{
-			MethodName: "PreferredAreaList",
-			Handler:    _PreferredAreaService_PreferredAreaList_Handler,
+			MethodName: "QuerySubjectProductRelationList",
+			Handler:    _SubjectProductRelationService_QuerySubjectProductRelationList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -631,129 +2369,821 @@ var PreferredAreaService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_FullMethodName  = "/cmsclient.PreferredAreaProductRelationService/PreferredAreaProductRelationAdd"
-	PreferredAreaProductRelationService_PreferredAreaProductRelationList_FullMethodName = "/cmsclient.PreferredAreaProductRelationService/PreferredAreaProductRelationList"
+	TopicService_AddTopic_FullMethodName         = "/cmsclient.TopicService/AddTopic"
+	TopicService_DeleteTopic_FullMethodName      = "/cmsclient.TopicService/DeleteTopic"
+	TopicService_UpdateTopic_FullMethodName      = "/cmsclient.TopicService/UpdateTopic"
+	TopicService_QueryTopicDetail_FullMethodName = "/cmsclient.TopicService/QueryTopicDetail"
+	TopicService_QueryTopicList_FullMethodName   = "/cmsclient.TopicService/QueryTopicList"
 )
 
-// PreferredAreaProductRelationServiceClient is the client API for PreferredAreaProductRelationService service.
+// TopicServiceClient is the client API for TopicService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PreferredAreaProductRelationServiceClient interface {
-	// 优选商品关联
-	PreferredAreaProductRelationAdd(ctx context.Context, in *PreferredAreaProductRelationAddReq, opts ...grpc.CallOption) (*PreferredAreaProductRelationAddResp, error)
-	PreferredAreaProductRelationList(ctx context.Context, in *PreferredAreaProductRelationListReq, opts ...grpc.CallOption) (*PreferredAreaProductRelationListResp, error)
+type TopicServiceClient interface {
+	// 添加话题表
+	AddTopic(ctx context.Context, in *AddTopicReq, opts ...grpc.CallOption) (*AddTopicResp, error)
+	// 删除话题表
+	DeleteTopic(ctx context.Context, in *DeleteTopicReq, opts ...grpc.CallOption) (*DeleteTopicResp, error)
+	// 更新话题表
+	UpdateTopic(ctx context.Context, in *UpdateTopicReq, opts ...grpc.CallOption) (*UpdateTopicResp, error)
+	// 查询话题表详情
+	QueryTopicDetail(ctx context.Context, in *QueryTopicDetailReq, opts ...grpc.CallOption) (*QueryTopicDetailResp, error)
+	// 查询话题表列表
+	QueryTopicList(ctx context.Context, in *QueryTopicListReq, opts ...grpc.CallOption) (*QueryTopicListResp, error)
 }
 
-type preferredAreaProductRelationServiceClient struct {
+type topicServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPreferredAreaProductRelationServiceClient(cc grpc.ClientConnInterface) PreferredAreaProductRelationServiceClient {
-	return &preferredAreaProductRelationServiceClient{cc}
+func NewTopicServiceClient(cc grpc.ClientConnInterface) TopicServiceClient {
+	return &topicServiceClient{cc}
 }
 
-func (c *preferredAreaProductRelationServiceClient) PreferredAreaProductRelationAdd(ctx context.Context, in *PreferredAreaProductRelationAddReq, opts ...grpc.CallOption) (*PreferredAreaProductRelationAddResp, error) {
-	out := new(PreferredAreaProductRelationAddResp)
-	err := c.cc.Invoke(ctx, PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_FullMethodName, in, out, opts...)
+func (c *topicServiceClient) AddTopic(ctx context.Context, in *AddTopicReq, opts ...grpc.CallOption) (*AddTopicResp, error) {
+	out := new(AddTopicResp)
+	err := c.cc.Invoke(ctx, TopicService_AddTopic_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *preferredAreaProductRelationServiceClient) PreferredAreaProductRelationList(ctx context.Context, in *PreferredAreaProductRelationListReq, opts ...grpc.CallOption) (*PreferredAreaProductRelationListResp, error) {
-	out := new(PreferredAreaProductRelationListResp)
-	err := c.cc.Invoke(ctx, PreferredAreaProductRelationService_PreferredAreaProductRelationList_FullMethodName, in, out, opts...)
+func (c *topicServiceClient) DeleteTopic(ctx context.Context, in *DeleteTopicReq, opts ...grpc.CallOption) (*DeleteTopicResp, error) {
+	out := new(DeleteTopicResp)
+	err := c.cc.Invoke(ctx, TopicService_DeleteTopic_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PreferredAreaProductRelationServiceServer is the server API for PreferredAreaProductRelationService service.
-// All implementations must embed UnimplementedPreferredAreaProductRelationServiceServer
+func (c *topicServiceClient) UpdateTopic(ctx context.Context, in *UpdateTopicReq, opts ...grpc.CallOption) (*UpdateTopicResp, error) {
+	out := new(UpdateTopicResp)
+	err := c.cc.Invoke(ctx, TopicService_UpdateTopic_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicServiceClient) QueryTopicDetail(ctx context.Context, in *QueryTopicDetailReq, opts ...grpc.CallOption) (*QueryTopicDetailResp, error) {
+	out := new(QueryTopicDetailResp)
+	err := c.cc.Invoke(ctx, TopicService_QueryTopicDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicServiceClient) QueryTopicList(ctx context.Context, in *QueryTopicListReq, opts ...grpc.CallOption) (*QueryTopicListResp, error) {
+	out := new(QueryTopicListResp)
+	err := c.cc.Invoke(ctx, TopicService_QueryTopicList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TopicServiceServer is the server API for TopicService service.
+// All implementations must embed UnimplementedTopicServiceServer
 // for forward compatibility
-type PreferredAreaProductRelationServiceServer interface {
-	// 优选商品关联
-	PreferredAreaProductRelationAdd(context.Context, *PreferredAreaProductRelationAddReq) (*PreferredAreaProductRelationAddResp, error)
-	PreferredAreaProductRelationList(context.Context, *PreferredAreaProductRelationListReq) (*PreferredAreaProductRelationListResp, error)
-	mustEmbedUnimplementedPreferredAreaProductRelationServiceServer()
+type TopicServiceServer interface {
+	// 添加话题表
+	AddTopic(context.Context, *AddTopicReq) (*AddTopicResp, error)
+	// 删除话题表
+	DeleteTopic(context.Context, *DeleteTopicReq) (*DeleteTopicResp, error)
+	// 更新话题表
+	UpdateTopic(context.Context, *UpdateTopicReq) (*UpdateTopicResp, error)
+	// 查询话题表详情
+	QueryTopicDetail(context.Context, *QueryTopicDetailReq) (*QueryTopicDetailResp, error)
+	// 查询话题表列表
+	QueryTopicList(context.Context, *QueryTopicListReq) (*QueryTopicListResp, error)
+	mustEmbedUnimplementedTopicServiceServer()
 }
 
-// UnimplementedPreferredAreaProductRelationServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedPreferredAreaProductRelationServiceServer struct {
+// UnimplementedTopicServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedTopicServiceServer struct {
 }
 
-func (UnimplementedPreferredAreaProductRelationServiceServer) PreferredAreaProductRelationAdd(context.Context, *PreferredAreaProductRelationAddReq) (*PreferredAreaProductRelationAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaProductRelationAdd not implemented")
+func (UnimplementedTopicServiceServer) AddTopic(context.Context, *AddTopicReq) (*AddTopicResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTopic not implemented")
 }
-func (UnimplementedPreferredAreaProductRelationServiceServer) PreferredAreaProductRelationList(context.Context, *PreferredAreaProductRelationListReq) (*PreferredAreaProductRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PreferredAreaProductRelationList not implemented")
+func (UnimplementedTopicServiceServer) DeleteTopic(context.Context, *DeleteTopicReq) (*DeleteTopicResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTopic not implemented")
 }
-func (UnimplementedPreferredAreaProductRelationServiceServer) mustEmbedUnimplementedPreferredAreaProductRelationServiceServer() {
+func (UnimplementedTopicServiceServer) UpdateTopic(context.Context, *UpdateTopicReq) (*UpdateTopicResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTopic not implemented")
 }
+func (UnimplementedTopicServiceServer) QueryTopicDetail(context.Context, *QueryTopicDetailReq) (*QueryTopicDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryTopicDetail not implemented")
+}
+func (UnimplementedTopicServiceServer) QueryTopicList(context.Context, *QueryTopicListReq) (*QueryTopicListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryTopicList not implemented")
+}
+func (UnimplementedTopicServiceServer) mustEmbedUnimplementedTopicServiceServer() {}
 
-// UnsafePreferredAreaProductRelationServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PreferredAreaProductRelationServiceServer will
+// UnsafeTopicServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TopicServiceServer will
 // result in compilation errors.
-type UnsafePreferredAreaProductRelationServiceServer interface {
-	mustEmbedUnimplementedPreferredAreaProductRelationServiceServer()
+type UnsafeTopicServiceServer interface {
+	mustEmbedUnimplementedTopicServiceServer()
 }
 
-func RegisterPreferredAreaProductRelationServiceServer(s grpc.ServiceRegistrar, srv PreferredAreaProductRelationServiceServer) {
-	s.RegisterService(&PreferredAreaProductRelationService_ServiceDesc, srv)
+func RegisterTopicServiceServer(s grpc.ServiceRegistrar, srv TopicServiceServer) {
+	s.RegisterService(&TopicService_ServiceDesc, srv)
 }
 
-func _PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PreferredAreaProductRelationAddReq)
+func _TopicService_AddTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTopicReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PreferredAreaProductRelationServiceServer).PreferredAreaProductRelationAdd(ctx, in)
+		return srv.(TopicServiceServer).AddTopic(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_FullMethodName,
+		FullMethod: TopicService_AddTopic_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PreferredAreaProductRelationServiceServer).PreferredAreaProductRelationAdd(ctx, req.(*PreferredAreaProductRelationAddReq))
+		return srv.(TopicServiceServer).AddTopic(ctx, req.(*AddTopicReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PreferredAreaProductRelationService_PreferredAreaProductRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PreferredAreaProductRelationListReq)
+func _TopicService_DeleteTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTopicReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PreferredAreaProductRelationServiceServer).PreferredAreaProductRelationList(ctx, in)
+		return srv.(TopicServiceServer).DeleteTopic(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PreferredAreaProductRelationService_PreferredAreaProductRelationList_FullMethodName,
+		FullMethod: TopicService_DeleteTopic_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PreferredAreaProductRelationServiceServer).PreferredAreaProductRelationList(ctx, req.(*PreferredAreaProductRelationListReq))
+		return srv.(TopicServiceServer).DeleteTopic(ctx, req.(*DeleteTopicReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// PreferredAreaProductRelationService_ServiceDesc is the grpc.ServiceDesc for PreferredAreaProductRelationService service.
+func _TopicService_UpdateTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTopicReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicServiceServer).UpdateTopic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicService_UpdateTopic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicServiceServer).UpdateTopic(ctx, req.(*UpdateTopicReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicService_QueryTopicDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryTopicDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicServiceServer).QueryTopicDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicService_QueryTopicDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicServiceServer).QueryTopicDetail(ctx, req.(*QueryTopicDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicService_QueryTopicList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryTopicListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicServiceServer).QueryTopicList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicService_QueryTopicList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicServiceServer).QueryTopicList(ctx, req.(*QueryTopicListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TopicService_ServiceDesc is the grpc.ServiceDesc for TopicService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PreferredAreaProductRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.PreferredAreaProductRelationService",
-	HandlerType: (*PreferredAreaProductRelationServiceServer)(nil),
+var TopicService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.TopicService",
+	HandlerType: (*TopicServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "PreferredAreaProductRelationAdd",
-			Handler:    _PreferredAreaProductRelationService_PreferredAreaProductRelationAdd_Handler,
+			MethodName: "AddTopic",
+			Handler:    _TopicService_AddTopic_Handler,
 		},
 		{
-			MethodName: "PreferredAreaProductRelationList",
-			Handler:    _PreferredAreaProductRelationService_PreferredAreaProductRelationList_Handler,
+			MethodName: "DeleteTopic",
+			Handler:    _TopicService_DeleteTopic_Handler,
+		},
+		{
+			MethodName: "UpdateTopic",
+			Handler:    _TopicService_UpdateTopic_Handler,
+		},
+		{
+			MethodName: "QueryTopicDetail",
+			Handler:    _TopicService_QueryTopicDetail_Handler,
+		},
+		{
+			MethodName: "QueryTopicList",
+			Handler:    _TopicService_QueryTopicList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/cms/cms.proto",
+}
+
+const (
+	TopicCategoryService_AddTopicCategory_FullMethodName          = "/cmsclient.TopicCategoryService/AddTopicCategory"
+	TopicCategoryService_DeleteTopicCategory_FullMethodName       = "/cmsclient.TopicCategoryService/DeleteTopicCategory"
+	TopicCategoryService_UpdateTopicCategory_FullMethodName       = "/cmsclient.TopicCategoryService/UpdateTopicCategory"
+	TopicCategoryService_UpdateTopicCategoryStatus_FullMethodName = "/cmsclient.TopicCategoryService/UpdateTopicCategoryStatus"
+	TopicCategoryService_QueryTopicCategoryDetail_FullMethodName  = "/cmsclient.TopicCategoryService/QueryTopicCategoryDetail"
+	TopicCategoryService_QueryTopicCategoryList_FullMethodName    = "/cmsclient.TopicCategoryService/QueryTopicCategoryList"
+)
+
+// TopicCategoryServiceClient is the client API for TopicCategoryService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type TopicCategoryServiceClient interface {
+	// 添加话题分类表
+	AddTopicCategory(ctx context.Context, in *AddTopicCategoryReq, opts ...grpc.CallOption) (*AddTopicCategoryResp, error)
+	// 删除话题分类表
+	DeleteTopicCategory(ctx context.Context, in *DeleteTopicCategoryReq, opts ...grpc.CallOption) (*DeleteTopicCategoryResp, error)
+	// 更新话题分类表
+	UpdateTopicCategory(ctx context.Context, in *UpdateTopicCategoryReq, opts ...grpc.CallOption) (*UpdateTopicCategoryResp, error)
+	// 更新话题分类表状态
+	UpdateTopicCategoryStatus(ctx context.Context, in *UpdateTopicCategoryStatusReq, opts ...grpc.CallOption) (*UpdateTopicCategoryStatusResp, error)
+	// 查询话题分类表详情
+	QueryTopicCategoryDetail(ctx context.Context, in *QueryTopicCategoryDetailReq, opts ...grpc.CallOption) (*QueryTopicCategoryDetailResp, error)
+	// 查询话题分类表列表
+	QueryTopicCategoryList(ctx context.Context, in *QueryTopicCategoryListReq, opts ...grpc.CallOption) (*QueryTopicCategoryListResp, error)
+}
+
+type topicCategoryServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTopicCategoryServiceClient(cc grpc.ClientConnInterface) TopicCategoryServiceClient {
+	return &topicCategoryServiceClient{cc}
+}
+
+func (c *topicCategoryServiceClient) AddTopicCategory(ctx context.Context, in *AddTopicCategoryReq, opts ...grpc.CallOption) (*AddTopicCategoryResp, error) {
+	out := new(AddTopicCategoryResp)
+	err := c.cc.Invoke(ctx, TopicCategoryService_AddTopicCategory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCategoryServiceClient) DeleteTopicCategory(ctx context.Context, in *DeleteTopicCategoryReq, opts ...grpc.CallOption) (*DeleteTopicCategoryResp, error) {
+	out := new(DeleteTopicCategoryResp)
+	err := c.cc.Invoke(ctx, TopicCategoryService_DeleteTopicCategory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCategoryServiceClient) UpdateTopicCategory(ctx context.Context, in *UpdateTopicCategoryReq, opts ...grpc.CallOption) (*UpdateTopicCategoryResp, error) {
+	out := new(UpdateTopicCategoryResp)
+	err := c.cc.Invoke(ctx, TopicCategoryService_UpdateTopicCategory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCategoryServiceClient) UpdateTopicCategoryStatus(ctx context.Context, in *UpdateTopicCategoryStatusReq, opts ...grpc.CallOption) (*UpdateTopicCategoryStatusResp, error) {
+	out := new(UpdateTopicCategoryStatusResp)
+	err := c.cc.Invoke(ctx, TopicCategoryService_UpdateTopicCategoryStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCategoryServiceClient) QueryTopicCategoryDetail(ctx context.Context, in *QueryTopicCategoryDetailReq, opts ...grpc.CallOption) (*QueryTopicCategoryDetailResp, error) {
+	out := new(QueryTopicCategoryDetailResp)
+	err := c.cc.Invoke(ctx, TopicCategoryService_QueryTopicCategoryDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCategoryServiceClient) QueryTopicCategoryList(ctx context.Context, in *QueryTopicCategoryListReq, opts ...grpc.CallOption) (*QueryTopicCategoryListResp, error) {
+	out := new(QueryTopicCategoryListResp)
+	err := c.cc.Invoke(ctx, TopicCategoryService_QueryTopicCategoryList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TopicCategoryServiceServer is the server API for TopicCategoryService service.
+// All implementations must embed UnimplementedTopicCategoryServiceServer
+// for forward compatibility
+type TopicCategoryServiceServer interface {
+	// 添加话题分类表
+	AddTopicCategory(context.Context, *AddTopicCategoryReq) (*AddTopicCategoryResp, error)
+	// 删除话题分类表
+	DeleteTopicCategory(context.Context, *DeleteTopicCategoryReq) (*DeleteTopicCategoryResp, error)
+	// 更新话题分类表
+	UpdateTopicCategory(context.Context, *UpdateTopicCategoryReq) (*UpdateTopicCategoryResp, error)
+	// 更新话题分类表状态
+	UpdateTopicCategoryStatus(context.Context, *UpdateTopicCategoryStatusReq) (*UpdateTopicCategoryStatusResp, error)
+	// 查询话题分类表详情
+	QueryTopicCategoryDetail(context.Context, *QueryTopicCategoryDetailReq) (*QueryTopicCategoryDetailResp, error)
+	// 查询话题分类表列表
+	QueryTopicCategoryList(context.Context, *QueryTopicCategoryListReq) (*QueryTopicCategoryListResp, error)
+	mustEmbedUnimplementedTopicCategoryServiceServer()
+}
+
+// UnimplementedTopicCategoryServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedTopicCategoryServiceServer struct {
+}
+
+func (UnimplementedTopicCategoryServiceServer) AddTopicCategory(context.Context, *AddTopicCategoryReq) (*AddTopicCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTopicCategory not implemented")
+}
+func (UnimplementedTopicCategoryServiceServer) DeleteTopicCategory(context.Context, *DeleteTopicCategoryReq) (*DeleteTopicCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTopicCategory not implemented")
+}
+func (UnimplementedTopicCategoryServiceServer) UpdateTopicCategory(context.Context, *UpdateTopicCategoryReq) (*UpdateTopicCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTopicCategory not implemented")
+}
+func (UnimplementedTopicCategoryServiceServer) UpdateTopicCategoryStatus(context.Context, *UpdateTopicCategoryStatusReq) (*UpdateTopicCategoryStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTopicCategoryStatus not implemented")
+}
+func (UnimplementedTopicCategoryServiceServer) QueryTopicCategoryDetail(context.Context, *QueryTopicCategoryDetailReq) (*QueryTopicCategoryDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryTopicCategoryDetail not implemented")
+}
+func (UnimplementedTopicCategoryServiceServer) QueryTopicCategoryList(context.Context, *QueryTopicCategoryListReq) (*QueryTopicCategoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryTopicCategoryList not implemented")
+}
+func (UnimplementedTopicCategoryServiceServer) mustEmbedUnimplementedTopicCategoryServiceServer() {}
+
+// UnsafeTopicCategoryServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TopicCategoryServiceServer will
+// result in compilation errors.
+type UnsafeTopicCategoryServiceServer interface {
+	mustEmbedUnimplementedTopicCategoryServiceServer()
+}
+
+func RegisterTopicCategoryServiceServer(s grpc.ServiceRegistrar, srv TopicCategoryServiceServer) {
+	s.RegisterService(&TopicCategoryService_ServiceDesc, srv)
+}
+
+func _TopicCategoryService_AddTopicCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTopicCategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCategoryServiceServer).AddTopicCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCategoryService_AddTopicCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCategoryServiceServer).AddTopicCategory(ctx, req.(*AddTopicCategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCategoryService_DeleteTopicCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTopicCategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCategoryServiceServer).DeleteTopicCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCategoryService_DeleteTopicCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCategoryServiceServer).DeleteTopicCategory(ctx, req.(*DeleteTopicCategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCategoryService_UpdateTopicCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTopicCategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCategoryServiceServer).UpdateTopicCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCategoryService_UpdateTopicCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCategoryServiceServer).UpdateTopicCategory(ctx, req.(*UpdateTopicCategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCategoryService_UpdateTopicCategoryStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTopicCategoryStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCategoryServiceServer).UpdateTopicCategoryStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCategoryService_UpdateTopicCategoryStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCategoryServiceServer).UpdateTopicCategoryStatus(ctx, req.(*UpdateTopicCategoryStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCategoryService_QueryTopicCategoryDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryTopicCategoryDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCategoryServiceServer).QueryTopicCategoryDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCategoryService_QueryTopicCategoryDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCategoryServiceServer).QueryTopicCategoryDetail(ctx, req.(*QueryTopicCategoryDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCategoryService_QueryTopicCategoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryTopicCategoryListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCategoryServiceServer).QueryTopicCategoryList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCategoryService_QueryTopicCategoryList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCategoryServiceServer).QueryTopicCategoryList(ctx, req.(*QueryTopicCategoryListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TopicCategoryService_ServiceDesc is the grpc.ServiceDesc for TopicCategoryService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var TopicCategoryService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.TopicCategoryService",
+	HandlerType: (*TopicCategoryServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddTopicCategory",
+			Handler:    _TopicCategoryService_AddTopicCategory_Handler,
+		},
+		{
+			MethodName: "DeleteTopicCategory",
+			Handler:    _TopicCategoryService_DeleteTopicCategory_Handler,
+		},
+		{
+			MethodName: "UpdateTopicCategory",
+			Handler:    _TopicCategoryService_UpdateTopicCategory_Handler,
+		},
+		{
+			MethodName: "UpdateTopicCategoryStatus",
+			Handler:    _TopicCategoryService_UpdateTopicCategoryStatus_Handler,
+		},
+		{
+			MethodName: "QueryTopicCategoryDetail",
+			Handler:    _TopicCategoryService_QueryTopicCategoryDetail_Handler,
+		},
+		{
+			MethodName: "QueryTopicCategoryList",
+			Handler:    _TopicCategoryService_QueryTopicCategoryList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/cms/cms.proto",
+}
+
+const (
+	TopicCommentService_AddTopicComment_FullMethodName          = "/cmsclient.TopicCommentService/AddTopicComment"
+	TopicCommentService_DeleteTopicComment_FullMethodName       = "/cmsclient.TopicCommentService/DeleteTopicComment"
+	TopicCommentService_UpdateTopicComment_FullMethodName       = "/cmsclient.TopicCommentService/UpdateTopicComment"
+	TopicCommentService_UpdateTopicCommentStatus_FullMethodName = "/cmsclient.TopicCommentService/UpdateTopicCommentStatus"
+	TopicCommentService_QueryTopicCommentDetail_FullMethodName  = "/cmsclient.TopicCommentService/QueryTopicCommentDetail"
+	TopicCommentService_QueryTopicCommentList_FullMethodName    = "/cmsclient.TopicCommentService/QueryTopicCommentList"
+)
+
+// TopicCommentServiceClient is the client API for TopicCommentService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type TopicCommentServiceClient interface {
+	// 添加专题评论表
+	AddTopicComment(ctx context.Context, in *AddTopicCommentReq, opts ...grpc.CallOption) (*AddTopicCommentResp, error)
+	// 删除专题评论表
+	DeleteTopicComment(ctx context.Context, in *DeleteTopicCommentReq, opts ...grpc.CallOption) (*DeleteTopicCommentResp, error)
+	// 更新专题评论表
+	UpdateTopicComment(ctx context.Context, in *UpdateTopicCommentReq, opts ...grpc.CallOption) (*UpdateTopicCommentResp, error)
+	// 更新专题评论表状态
+	UpdateTopicCommentStatus(ctx context.Context, in *UpdateTopicCommentStatusReq, opts ...grpc.CallOption) (*UpdateTopicCommentStatusResp, error)
+	// 查询专题评论表详情
+	QueryTopicCommentDetail(ctx context.Context, in *QueryTopicCommentDetailReq, opts ...grpc.CallOption) (*QueryTopicCommentDetailResp, error)
+	// 查询专题评论表列表
+	QueryTopicCommentList(ctx context.Context, in *QueryTopicCommentListReq, opts ...grpc.CallOption) (*QueryTopicCommentListResp, error)
+}
+
+type topicCommentServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTopicCommentServiceClient(cc grpc.ClientConnInterface) TopicCommentServiceClient {
+	return &topicCommentServiceClient{cc}
+}
+
+func (c *topicCommentServiceClient) AddTopicComment(ctx context.Context, in *AddTopicCommentReq, opts ...grpc.CallOption) (*AddTopicCommentResp, error) {
+	out := new(AddTopicCommentResp)
+	err := c.cc.Invoke(ctx, TopicCommentService_AddTopicComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCommentServiceClient) DeleteTopicComment(ctx context.Context, in *DeleteTopicCommentReq, opts ...grpc.CallOption) (*DeleteTopicCommentResp, error) {
+	out := new(DeleteTopicCommentResp)
+	err := c.cc.Invoke(ctx, TopicCommentService_DeleteTopicComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCommentServiceClient) UpdateTopicComment(ctx context.Context, in *UpdateTopicCommentReq, opts ...grpc.CallOption) (*UpdateTopicCommentResp, error) {
+	out := new(UpdateTopicCommentResp)
+	err := c.cc.Invoke(ctx, TopicCommentService_UpdateTopicComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCommentServiceClient) UpdateTopicCommentStatus(ctx context.Context, in *UpdateTopicCommentStatusReq, opts ...grpc.CallOption) (*UpdateTopicCommentStatusResp, error) {
+	out := new(UpdateTopicCommentStatusResp)
+	err := c.cc.Invoke(ctx, TopicCommentService_UpdateTopicCommentStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCommentServiceClient) QueryTopicCommentDetail(ctx context.Context, in *QueryTopicCommentDetailReq, opts ...grpc.CallOption) (*QueryTopicCommentDetailResp, error) {
+	out := new(QueryTopicCommentDetailResp)
+	err := c.cc.Invoke(ctx, TopicCommentService_QueryTopicCommentDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *topicCommentServiceClient) QueryTopicCommentList(ctx context.Context, in *QueryTopicCommentListReq, opts ...grpc.CallOption) (*QueryTopicCommentListResp, error) {
+	out := new(QueryTopicCommentListResp)
+	err := c.cc.Invoke(ctx, TopicCommentService_QueryTopicCommentList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TopicCommentServiceServer is the server API for TopicCommentService service.
+// All implementations must embed UnimplementedTopicCommentServiceServer
+// for forward compatibility
+type TopicCommentServiceServer interface {
+	// 添加专题评论表
+	AddTopicComment(context.Context, *AddTopicCommentReq) (*AddTopicCommentResp, error)
+	// 删除专题评论表
+	DeleteTopicComment(context.Context, *DeleteTopicCommentReq) (*DeleteTopicCommentResp, error)
+	// 更新专题评论表
+	UpdateTopicComment(context.Context, *UpdateTopicCommentReq) (*UpdateTopicCommentResp, error)
+	// 更新专题评论表状态
+	UpdateTopicCommentStatus(context.Context, *UpdateTopicCommentStatusReq) (*UpdateTopicCommentStatusResp, error)
+	// 查询专题评论表详情
+	QueryTopicCommentDetail(context.Context, *QueryTopicCommentDetailReq) (*QueryTopicCommentDetailResp, error)
+	// 查询专题评论表列表
+	QueryTopicCommentList(context.Context, *QueryTopicCommentListReq) (*QueryTopicCommentListResp, error)
+	mustEmbedUnimplementedTopicCommentServiceServer()
+}
+
+// UnimplementedTopicCommentServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedTopicCommentServiceServer struct {
+}
+
+func (UnimplementedTopicCommentServiceServer) AddTopicComment(context.Context, *AddTopicCommentReq) (*AddTopicCommentResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTopicComment not implemented")
+}
+func (UnimplementedTopicCommentServiceServer) DeleteTopicComment(context.Context, *DeleteTopicCommentReq) (*DeleteTopicCommentResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTopicComment not implemented")
+}
+func (UnimplementedTopicCommentServiceServer) UpdateTopicComment(context.Context, *UpdateTopicCommentReq) (*UpdateTopicCommentResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTopicComment not implemented")
+}
+func (UnimplementedTopicCommentServiceServer) UpdateTopicCommentStatus(context.Context, *UpdateTopicCommentStatusReq) (*UpdateTopicCommentStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTopicCommentStatus not implemented")
+}
+func (UnimplementedTopicCommentServiceServer) QueryTopicCommentDetail(context.Context, *QueryTopicCommentDetailReq) (*QueryTopicCommentDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryTopicCommentDetail not implemented")
+}
+func (UnimplementedTopicCommentServiceServer) QueryTopicCommentList(context.Context, *QueryTopicCommentListReq) (*QueryTopicCommentListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryTopicCommentList not implemented")
+}
+func (UnimplementedTopicCommentServiceServer) mustEmbedUnimplementedTopicCommentServiceServer() {}
+
+// UnsafeTopicCommentServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TopicCommentServiceServer will
+// result in compilation errors.
+type UnsafeTopicCommentServiceServer interface {
+	mustEmbedUnimplementedTopicCommentServiceServer()
+}
+
+func RegisterTopicCommentServiceServer(s grpc.ServiceRegistrar, srv TopicCommentServiceServer) {
+	s.RegisterService(&TopicCommentService_ServiceDesc, srv)
+}
+
+func _TopicCommentService_AddTopicComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTopicCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCommentServiceServer).AddTopicComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCommentService_AddTopicComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCommentServiceServer).AddTopicComment(ctx, req.(*AddTopicCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCommentService_DeleteTopicComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTopicCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCommentServiceServer).DeleteTopicComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCommentService_DeleteTopicComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCommentServiceServer).DeleteTopicComment(ctx, req.(*DeleteTopicCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCommentService_UpdateTopicComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTopicCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCommentServiceServer).UpdateTopicComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCommentService_UpdateTopicComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCommentServiceServer).UpdateTopicComment(ctx, req.(*UpdateTopicCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCommentService_UpdateTopicCommentStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTopicCommentStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCommentServiceServer).UpdateTopicCommentStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCommentService_UpdateTopicCommentStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCommentServiceServer).UpdateTopicCommentStatus(ctx, req.(*UpdateTopicCommentStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCommentService_QueryTopicCommentDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryTopicCommentDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCommentServiceServer).QueryTopicCommentDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCommentService_QueryTopicCommentDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCommentServiceServer).QueryTopicCommentDetail(ctx, req.(*QueryTopicCommentDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TopicCommentService_QueryTopicCommentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryTopicCommentListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicCommentServiceServer).QueryTopicCommentList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicCommentService_QueryTopicCommentList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicCommentServiceServer).QueryTopicCommentList(ctx, req.(*QueryTopicCommentListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TopicCommentService_ServiceDesc is the grpc.ServiceDesc for TopicCommentService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var TopicCommentService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "cmsclient.TopicCommentService",
+	HandlerType: (*TopicCommentServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddTopicComment",
+			Handler:    _TopicCommentService_AddTopicComment_Handler,
+		},
+		{
+			MethodName: "DeleteTopicComment",
+			Handler:    _TopicCommentService_DeleteTopicComment_Handler,
+		},
+		{
+			MethodName: "UpdateTopicComment",
+			Handler:    _TopicCommentService_UpdateTopicComment_Handler,
+		},
+		{
+			MethodName: "UpdateTopicCommentStatus",
+			Handler:    _TopicCommentService_UpdateTopicCommentStatus_Handler,
+		},
+		{
+			MethodName: "QueryTopicCommentDetail",
+			Handler:    _TopicCommentService_QueryTopicCommentDetail_Handler,
+		},
+		{
+			MethodName: "QueryTopicCommentList",
+			Handler:    _TopicCommentService_QueryTopicCommentList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

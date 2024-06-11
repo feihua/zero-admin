@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加话题分类表
+message AddTopicCategoryReq {
+  string create_by = 1; //创建者
+  int32 subject_count = 2; //专题数量
+  string icon = 3; //分类图标
+  int32 sort = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+
+}
+
+message AddTopicCategoryResp {
+  string pong = 1;
+}
+
+// 删除话题分类表
+message DeleteTopicCategoryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteTopicCategoryResp {
+  string pong = 1;
+}
+
+// 更新话题分类表
+message UpdateTopicCategoryReq {
+  int32 subject_count = 1; //专题数量
+  string update_by = 2; //更新者
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+
+
+}
+
+message UpdateTopicCategoryResp {
+  string pong = 1;
+}
+
+// 更新话题分类表状态
+message UpdateTopicCategoryStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 2; //
+
+
+}
+
+message UpdateTopicCategoryStatusResp {
+  string pong = 1;
+}
+
+// 查询话题分类表详情
+message QueryTopicCategoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryTopicCategoryDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  int32 subject_count = 8; //专题数量
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询话题分类表列表
+message QueryTopicCategoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string name = 3; //
+  int32 show_status = 4; //
+
+}
+
+message TopicCategoryListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  int32 subject_count = 8; //专题数量
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+message QueryTopicCategoryListResp {
+  int64 total = 1;
+  repeated  TopicCategoryListData list = 2;
+}
+
+// 话题分类表
+service TopicCategoryService {
+  // 添加话题分类表
+  rpc AddTopicCategory(AddTopicCategoryReq) returns (AddTopicCategoryResp){}
+  // 删除话题分类表
+  rpc DeleteTopicCategory(DeleteTopicCategoryReq) returns (DeleteTopicCategoryResp){}
+  // 更新话题分类表
+  rpc UpdateTopicCategory(UpdateTopicCategoryReq) returns (UpdateTopicCategoryResp ){}
+  // 更新话题分类表状态
+  rpc UpdateTopicCategoryStatus(UpdateTopicCategoryStatusReq) returns (UpdateTopicCategoryStatusResp ){}
+  // 查询话题分类表详情
+   rpc QueryTopicCategoryDetail(QueryTopicCategoryDetailReq) returns (QueryTopicCategoryDetailResp){}
+  // 查询话题分类表列表
+  rpc QueryTopicCategoryList(QueryTopicCategoryListReq) returns (QueryTopicCategoryListResp){}
+
+
+}

@@ -48,7 +48,7 @@ type (
 
 		// 更新会员积分成长规则表状态
 	UpdateMemberRuleSettingStatusReq {
-		Ids []int64 `form:"ids"`
+		Ids []int64 `json:"ids"`
 		Status int32 `json:"status"` //状态：0->禁用；1->启用
 
 	}

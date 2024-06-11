@@ -42,7 +42,7 @@ type (
 
 		// 更新用户标签表状态
 	UpdateMemberTagStatusReq {
-		Ids []int64 `form:"ids"`
+		Ids []int64 `json:"ids"`
 		Status int32 `json:"status"` //状态：0->禁用；1->启用
 	}
 	UpdateMemberTagStatusResp {

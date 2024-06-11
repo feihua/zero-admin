@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加优选专区和产品关系表
+message AddPreferredAreaProductRelationReq {
+  repeated int64 preferred_area_id = 1; //
+  int64 product_id = 2;
+
+}
+message AddPreferredAreaProductRelationResp {
+  string pong = 1;
+}
+
+// 分页查询优选专区和产品关系表列表
+message QueryPreferredAreaProductRelationListReq {
+  int64 product_id = 1; //
+
+}
+
+message QueryPreferredAreaProductRelationListResp {
+  repeated int64 preferred_area_ids = 2; //
+
+}
+
+// 优选专区和产品关系表
+service PreferredAreaProductRelationService {
+  // 添加优选专区和产品关系表
+  rpc AddPreferredAreaProductRelation(AddPreferredAreaProductRelationReq) returns (AddPreferredAreaProductRelationResp){}
+  // 查询优选专区和产品关系表列表
+  rpc QueryPreferredAreaProductRelationList(QueryPreferredAreaProductRelationListReq) returns (QueryPreferredAreaProductRelationListResp){}
+
+
+}

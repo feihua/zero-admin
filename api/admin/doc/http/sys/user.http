@@ -33,7 +33,7 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除用户
-GET {{host}}/api/sys/user/deleteUser?ids=[5]
+GET {{host}}/api/sys/user/deleteUser?ids=[6]
 Authorization: Bearer {{token}}
 
 

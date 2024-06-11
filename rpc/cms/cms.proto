@@ -4,101 +4,653 @@ package cmsclient;
 
 option go_package = "./cmsclient";
 
-message SubjectAddReq {
-  int64 Id = 1; //
-  int64 CategoryId = 2; //
-  string Title = 3; //
-  string Pic = 4; //专题主图
-  int32 ProductCount = 5; //关联产品数量
-  int32 RecommendStatus = 6; //推荐状态
-  string CreateTime = 7; //
-  int32 CollectCount = 8; //
-  int32 ReadCount = 9; //
-  int32 CommentCount = 10; //
-  string AlbumPics = 11; //画册图片用逗号分割
-  string Description = 12; //
-  int32 ShowStatus = 13; //显示状态：0->不显示；1->显示
-  string Content = 14; //
-  int32 ForwardCount = 15; //转发数
-  string CategoryName = 16; //专题分类名称
-  string CreateBy = 17; //
+// 添加帮助表
+message AddHelpReq {
+  int64 category_id = 1; //
+  string content = 2; //
+  string create_by = 3; //创建者
+  string title = 4; //
+  string icon = 5; //
+  int32 read_count = 6; //
+  int32 show_status = 7; //
+
+
 }
 
-message SubjectAddResp {
+message AddHelpResp {
   string pong = 1;
 }
 
-message SubjectDeleteReq {
+// 删除帮助表
+message DeleteHelpReq {
   repeated int64 ids = 1;
 }
 
-message SubjectDeleteResp {
+message DeleteHelpResp {
   string pong = 1;
 }
 
-message SubjectUpdateReq {
-  int64 Id = 1; //
-  int64 CategoryId = 2; //
-  string Title = 3; //
-  string Pic = 4; //专题主图
-  int32 ProductCount = 5; //关联产品数量
-  int32 RecommendStatus = 6; //
-  string CreateTime = 7; //
-  int32 CollectCount = 8; //
-  int32 ReadCount = 9; //
-  int32 CommentCount = 10; //
-  string AlbumPics = 11; //画册图片用逗号分割
-  string Description = 12; //
-  int32 ShowStatus = 13; //显示状态：0->不显示；1->显示
-  string Content = 14; //
-  int32 ForwardCount = 15; //转发数
-  string CategoryName = 16; //专题分类名称
-  string UpdateBy = 18; //
+// 更新帮助表
+message UpdateHelpReq {
+  int64 category_id = 1; //
+  string content = 2; //
+  string title = 3; //
+  string update_by = 4; //更新者
+  string icon = 5; //
+  int64 id = 6; //
+  int32 read_count = 7; //
+  int32 show_status = 8; //
+
 
 }
 
-message SubjectUpdateResp {
+message UpdateHelpResp {
   string pong = 1;
 }
 
-message SubjectListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string Title = 3; //
-  int32 RecommendStatus = 6; //
-  int32 ShowStatus = 13; //显示状态：0->不显示；1->显示
-
-}
-
-message SubjectListByIdsReq {
+// 更新帮助表状态
+message UpdateHelpStatusReq {
   repeated int64 ids = 1;
+  int32 show_status = 8; //
+
+}
+
+message UpdateHelpStatusResp {
+  string pong = 1;
+}
+
+// 查询帮助表详情
+message QueryHelpDetailReq {
+    int64 id = 1;
+}
+
+message QueryHelpDetailResp {
+  int64 category_id = 1; //
+  string content = 2; //
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  string icon = 5; //
+  int64 id = 6; //
+  int32 read_count = 7; //
+  int32 show_status = 8; //
+  string title = 9; //
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
+
+}
+
+// 分页查询帮助表列表
+message QueryHelpListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 show_status = 3; //
+  string title = 4; //
+
+}
+
+message HelpListData {
+  int64 category_id = 1; //
+  string content = 2; //
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  string icon = 5; //
+  int64 id = 6; //
+  int32 read_count = 7; //
+  int32 show_status = 8; //
+  string title = 9; //
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
+
+}
+
+message QueryHelpListResp {
+  int64 total = 1;
+  repeated  HelpListData list = 2;
+}
+
+// 帮助表
+service HelpService {
+  // 添加帮助表
+  rpc AddHelp(AddHelpReq) returns (AddHelpResp){}
+  // 删除帮助表
+  rpc DeleteHelp(DeleteHelpReq) returns (DeleteHelpResp){}
+  // 更新帮助表
+  rpc UpdateHelp(UpdateHelpReq) returns (UpdateHelpResp ){}
+  // 更新帮助表状态
+  rpc UpdateHelpStatus(UpdateHelpStatusReq) returns (UpdateHelpStatusResp ){}
+  // 查询帮助表详情
+   rpc QueryHelpDetail(QueryHelpDetailReq) returns (QueryHelpDetailResp){}
+  // 查询帮助表列表
+  rpc QueryHelpList(QueryHelpListReq) returns (QueryHelpListResp){}
+
+
+}
+
+
+// 添加帮助分类表
+message AddHelpCategoryReq {
+  string create_by = 1; //创建者
+  int32 help_count = 2; //专题数量
+  string icon = 3; //分类图标
+  string name = 4; //
+  int32 show_status = 5; //
+  int32 sort = 6; //
+
+}
+
+message AddHelpCategoryResp {
+  string pong = 1;
+}
+
+// 删除帮助分类表
+message DeleteHelpCategoryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteHelpCategoryResp {
+  string pong = 1;
+}
+
+// 更新帮助分类表
+message UpdateHelpCategoryReq {
+  int32 sort = 1; //
+  string update_by = 2; //更新者
+  int32 help_count = 3; //专题数量
+  string icon = 4; //分类图标
+  int64 id = 5; //
+  string name = 6; //
+  int32 show_status = 7; //
+
+
+}
+
+message UpdateHelpCategoryResp {
+  string pong = 1;
+}
+
+// 更新帮助分类表状态
+message UpdateHelpCategoryStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 2; //
+
+
+}
+
+message UpdateHelpCategoryStatusResp {
+  string pong = 1;
+}
+
+// 查询帮助分类表详情
+message QueryHelpCategoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryHelpCategoryDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int32 help_count = 3; //专题数量
+  string icon = 4; //分类图标
+  int64 id = 5; //
+  string name = 6; //
+  int32 show_status = 7; //
+  int32 sort = 8; //
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询帮助分类表列表
+message QueryHelpCategoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string name = 3; //
+  int32 show_status = 4; //
+
+}
+
+message HelpCategoryListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int32 help_count = 3; //专题数量
+  string icon = 4; //分类图标
+  int64 id = 5; //
+  string name = 6; //
+  int32 show_status = 7; //
+  int32 sort = 8; //
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+message QueryHelpCategoryListResp {
+  int64 total = 1;
+  repeated  HelpCategoryListData list = 2;
+}
+
+// 帮助分类表
+service HelpCategoryService {
+  // 添加帮助分类表
+  rpc AddHelpCategory(AddHelpCategoryReq) returns (AddHelpCategoryResp){}
+  // 删除帮助分类表
+  rpc DeleteHelpCategory(DeleteHelpCategoryReq) returns (DeleteHelpCategoryResp){}
+  // 更新帮助分类表
+  rpc UpdateHelpCategory(UpdateHelpCategoryReq) returns (UpdateHelpCategoryResp ){}
+  // 更新帮助分类表状态
+  rpc UpdateHelpCategoryStatus(UpdateHelpCategoryStatusReq) returns (UpdateHelpCategoryStatusResp ){}
+  // 查询帮助分类表详情
+   rpc QueryHelpCategoryDetail(QueryHelpCategoryDetailReq) returns (QueryHelpCategoryDetailResp){}
+  // 查询帮助分类表列表
+  rpc QueryHelpCategoryList(QueryHelpCategoryListReq) returns (QueryHelpCategoryListResp){}
+
+
+}
+
+
+// 添加用户举报表
+message AddMemberReportReq {
+  int32 handle_status = 1; //处理结果：0->无效；1->有效；2->恶意
+  string note = 2; //
+  string report_member_name = 3; //举报人
+  string report_object = 4; //
+  int32 report_status = 5; //举报状态：0->未处理；1->已处理
+  int32 report_type = 6; //举报类型：0->商品评价；1->话题内容；2->用户评论
+
+}
+
+message AddMemberReportResp {
+  string pong = 1;
+}
+
+// 删除用户举报表
+message DeleteMemberReportReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberReportResp {
+  string pong = 1;
+}
+
+// 更新用户举报表
+message UpdateMemberReportReq {
+  int32 report_type = 1; //举报类型：0->商品评价；1->话题内容；2->用户评论
+  int32 handle_status = 2; //处理结果：0->无效；1->有效；2->恶意
+  int64 id = 3; //
+  string note = 4; //
+  string report_member_name = 5; //举报人
+  string report_object = 6; //
+  int32 report_status = 7; //举报状态：0->未处理；1->已处理
+
+
+}
+
+message UpdateMemberReportResp {
+  string pong = 1;
+}
+
+// 更新用户举报表状态
+message UpdateMemberReportStatusReq {
+  repeated int64 ids = 1;
+  int32 handle_status = 2; //处理结果：0->无效；1->有效；2->恶意
+  int32 report_status = 3; //举报状态：0->未处理；1->已处理
+  int32 flag =4;
+
+}
+
+message UpdateMemberReportStatusResp {
+  string pong = 1;
+}
+
+// 查询用户举报表详情
+message QueryMemberReportDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberReportDetailResp {
+  string create_time = 1; //创建时间
+  int32 handle_status = 2; //处理结果：0->无效；1->有效；2->恶意
+  int64 id = 3; //
+  string note = 4; //
+  string report_member_name = 5; //举报人
+  string report_object = 6; //
+  int32 report_status = 7; //举报状态：0->未处理；1->已处理
+  int32 report_type = 8; //举报类型：0->商品评价；1->话题内容；2->用户评论
+
+}
+
+// 分页查询用户举报表列表
+message QueryMemberReportListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 handle_status = 3; //处理结果：0->无效；1->有效；2->恶意
+  string report_member_name = 4; //举报人
+  int32 report_status = 5; //举报状态：0->未处理；1->已处理
+  int32 report_type = 6; //举报类型：0->商品评价；1->话题内容；2->用户评论
+
+}
+
+message MemberReportListData {
+  string create_time = 1; //创建时间
+  int32 handle_status = 2; //处理结果：0->无效；1->有效；2->恶意
+  int64 id = 3; //
+  string note = 4; //
+  string report_member_name = 5; //举报人
+  string report_object = 6; //
+  int32 report_status = 7; //举报状态：0->未处理；1->已处理
+  int32 report_type = 8; //举报类型：0->商品评价；1->话题内容；2->用户评论
+
+}
+
+message QueryMemberReportListResp {
+  int64 total = 1;
+  repeated  MemberReportListData list = 2;
+}
+
+// 用户举报表
+service MemberReportService {
+  // 添加用户举报表
+  rpc AddMemberReport(AddMemberReportReq) returns (AddMemberReportResp){}
+  // 删除用户举报表
+  rpc DeleteMemberReport(DeleteMemberReportReq) returns (DeleteMemberReportResp){}
+  // 更新用户举报表
+  rpc UpdateMemberReport(UpdateMemberReportReq) returns (UpdateMemberReportResp ){}
+  // 更新用户举报表状态
+  rpc UpdateMemberReportStatus(UpdateMemberReportStatusReq) returns (UpdateMemberReportStatusResp ){}
+  // 查询用户举报表详情
+   rpc QueryMemberReportDetail(QueryMemberReportDetailReq) returns (QueryMemberReportDetailResp){}
+  // 查询用户举报表列表
+  rpc QueryMemberReportList(QueryMemberReportListReq) returns (QueryMemberReportListResp){}
+
+
+}
+
+
+// 添加优选专区
+message AddPreferredAreaReq {
+  string CreateBy = 1; //
+  int32 sort = 2; //
+  string sub_title = 3; //
+  string name = 4; //
+  string pic = 5; //展示图片
+  int32 show_status = 6; //
+
+
+}
+
+message AddPreferredAreaResp {
+  string pong = 1;
+}
+
+// 删除优选专区
+message DeletePreferredAreaReq {
+  repeated int64 ids = 1;
+}
+
+message DeletePreferredAreaResp {
+  string pong = 1;
+}
+
+// 更新优选专区
+message UpdatePreferredAreaReq {
+  string sub_title = 1; //
+  string update_by = 2; //更新者
+  int64 id = 3; //
+  string name = 4; //
+  string pic = 5; //展示图片
+  int32 show_status = 6; //
+  int32 sort = 7; //
+
+
+}
+
+message UpdatePreferredAreaResp {
+  string pong = 1;
+}
+
+// 更新优选专区状态
+message UpdatePreferredAreaStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 6; //
+
+
+}
+
+message UpdatePreferredAreaStatusResp {
+  string pong = 1;
+}
+
+// 查询优选专区详情
+message QueryPreferredAreaDetailReq {
+    int64 id = 1;
+}
+
+message QueryPreferredAreaDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //
+  string name = 4; //
+  string pic = 5; //展示图片
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  string sub_title = 8; //
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询优选专区列表
+message QueryPreferredAreaListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string name = 3; //
+  int32 show_status = 4; //
+  string sub_title = 5; //
+
+}
+
+message PreferredAreaListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  int64 id = 3; //
+  string name = 4; //
+  string pic = 5; //展示图片
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  string sub_title = 8; //
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+message QueryPreferredAreaListResp {
+  int64 total = 1;
+  repeated  PreferredAreaListData list = 2;
+}
+
+// 优选专区
+service PreferredAreaService {
+  // 添加优选专区
+  rpc AddPreferredArea(AddPreferredAreaReq) returns (AddPreferredAreaResp){}
+  // 删除优选专区
+  rpc DeletePreferredArea(DeletePreferredAreaReq) returns (DeletePreferredAreaResp){}
+  // 更新优选专区
+  rpc UpdatePreferredArea(UpdatePreferredAreaReq) returns (UpdatePreferredAreaResp ){}
+  // 更新优选专区状态
+  rpc UpdatePreferredAreaStatus(UpdatePreferredAreaStatusReq) returns (UpdatePreferredAreaStatusResp ){}
+  // 查询优选专区详情
+   rpc QueryPreferredAreaDetail(QueryPreferredAreaDetailReq) returns (QueryPreferredAreaDetailResp){}
+  // 查询优选专区列表
+  rpc QueryPreferredAreaList(QueryPreferredAreaListReq) returns (QueryPreferredAreaListResp){}
+
+
+}
+
+
+// 添加优选专区和产品关系表
+message AddPreferredAreaProductRelationReq {
+  repeated int64 preferred_area_id = 1; //
+  int64 product_id = 2;
+
+}
+message AddPreferredAreaProductRelationResp {
+  string pong = 1;
+}
+
+// 分页查询优选专区和产品关系表列表
+message QueryPreferredAreaProductRelationListReq {
+  int64 product_id = 1; //
+
+}
+
+message QueryPreferredAreaProductRelationListResp {
+  repeated int64 preferred_area_ids = 2; //
+
+}
+
+// 优选专区和产品关系表
+service PreferredAreaProductRelationService {
+  // 添加优选专区和产品关系表
+  rpc AddPreferredAreaProductRelation(AddPreferredAreaProductRelationReq) returns (AddPreferredAreaProductRelationResp){}
+  // 查询优选专区和产品关系表列表
+  rpc QueryPreferredAreaProductRelationList(QueryPreferredAreaProductRelationListReq) returns (QueryPreferredAreaProductRelationListResp){}
+
+
+}
+
+
+// 添加专题表
+message AddSubjectReq {
+  string album_pics = 1; //画册图片用逗号分割
+  int64 category_id = 2; //
+  string category_name = 3; //专题分类名称
+  int32 collect_count = 4; //
+  int32 comment_count = 5; //
+  string content = 6; //
+  string create_by = 7; //创建者
+  string title = 8; //
+  string description = 9; //
+  int32 forward_count = 10; //转发数
+  int32 show_status = 11; //显示状态：0->不显示；1->显示
+  string pic = 12; //专题主图
+  int32 product_count = 13; //关联产品数量
+  int32 read_count = 14; //
+  int32 recommend_status = 15; //
+
+
+
+}
+
+message AddSubjectResp {
+  string pong = 1;
+}
+
+// 删除专题表
+message DeleteSubjectReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteSubjectResp {
+  string pong = 1;
+}
+
+// 更新专题表
+message UpdateSubjectReq {
+  string album_pics = 1; //画册图片用逗号分割
+  int64 category_id = 2; //
+  string category_name = 3; //专题分类名称
+  int32 collect_count = 4; //
+  int32 comment_count = 5; //
+  string content = 6; //
+  string title = 7; //
+  string update_by = 8; //更新者
+  string description = 9; //
+  int32 forward_count = 10; //转发数
+  int64 id = 11; //
+  string pic = 12; //专题主图
+  int32 product_count = 13; //关联产品数量
+  int32 read_count = 14; //
+  int32 recommend_status = 15; //
+  int32 show_status = 16; //显示状态：0->不显示；1->显示
+
+
+}
+
+message UpdateSubjectResp {
+  string pong = 1;
+}
+
+// 更新专题表状态
+message UpdateSubjectStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 2; //显示状态：0->不显示；1->显示
+
+}
+
+message UpdateSubjectStatusResp {
+  string pong = 1;
+}
+
+// 查询专题表详情
+message QuerySubjectDetailReq {
+    int64 id = 1;
+}
+
+message QuerySubjectDetailResp {
+  string album_pics = 1; //画册图片用逗号分割
+  int64 category_id = 2; //
+  string category_name = 3; //专题分类名称
+  int32 collect_count = 4; //
+  int32 comment_count = 5; //
+  string content = 6; //
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string description = 9; //
+  int32 forward_count = 10; //转发数
+  int64 id = 11; //
+  string pic = 12; //专题主图
+  int32 product_count = 13; //关联产品数量
+  int32 read_count = 14; //
+  int32 recommend_status = 15; //
+  int32 show_status = 16; //显示状态：0->不显示；1->显示
+  string title = 17; //
+  string update_by = 18; //更新者
+  string update_time = 19; //更新时间
+
+}
+
+// 分页查询专题表列表
+message QuerySubjectListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 recommend_status = 3; //
+  int32 show_status = 4; //显示状态：0->不显示；1->显示
+  string title = 5; //
 
 }
 
 message SubjectListData {
-  int64 Id = 1; //
-  int64 CategoryId = 2; //
-  string Title = 3; //
-  string Pic = 4; //专题主图
-  int32 ProductCount = 5; //关联产品数量
-  int32 RecommendStatus = 6; //
-  string CreateTime = 7; //
-  int32 CollectCount = 8; //
-  int32 ReadCount = 9; //
-  int32 CommentCount = 10; //
-  string AlbumPics = 11; //画册图片用逗号分割
-  string Description = 12; //
-  int32 ShowStatus = 13; //显示状态：0->不显示；1->显示
-  string Content = 14; //
-  int32 ForwardCount = 15; //转发数
-  string CategoryName = 16; //专题分类名称
-  string CreateBy = 17; //
-  string UpdateBy = 18; //
-  string UpdateTime = 19;
+  string album_pics = 1; //画册图片用逗号分割
+  int64 category_id = 2; //
+  string category_name = 3; //专题分类名称
+  int32 collect_count = 4; //
+  int32 comment_count = 5; //
+  string content = 6; //
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string description = 9; //
+  int32 forward_count = 10; //转发数
+  int64 id = 11; //
+  string pic = 12; //专题主图
+  int32 product_count = 13; //关联产品数量
+  int32 read_count = 14; //
+  int32 recommend_status = 15; //
+  int32 show_status = 16; //显示状态：0->不显示；1->显示
+  string title = 17; //
+  string update_by = 18; //更新者
+  string update_time = 19; //更新时间
 
 }
 
-message SubjectListResp {
+message QuerySubjectListResp {
   int64 total = 1;
   repeated  SubjectListData list = 2;
 }
@@ -112,141 +664,649 @@ message UpdateSubjectRecommendStatusResp {
   string pong = 1;
 }
 
+message SubjectListByIdsReq {
+  repeated int64 ids = 1;
+
+}
+
+// 专题表
 service SubjectService {
-  // 专题
-  rpc SubjectAdd(SubjectAddReq) returns (SubjectAddResp){}
-  rpc SubjectDelete(SubjectDeleteReq) returns (SubjectDeleteResp){}
-  rpc SubjectUpdate(SubjectUpdateReq) returns (SubjectUpdateResp){}
-  rpc SubjectList(SubjectListReq) returns (SubjectListResp){}
-  rpc SubjectListByIds(SubjectListByIdsReq) returns (SubjectListResp){}
+  // 添加专题表
+  rpc AddSubject(AddSubjectReq) returns (AddSubjectResp){}
+  // 删除专题表
+  rpc DeleteSubject(DeleteSubjectReq) returns (DeleteSubjectResp){}
+  // 更新专题表
+  rpc UpdateSubject(UpdateSubjectReq) returns (UpdateSubjectResp ){}
+  // 更新专题表状态
+  rpc UpdateSubjectStatus(UpdateSubjectStatusReq) returns (UpdateSubjectStatusResp ){}
+  // 查询专题表详情
+   rpc QuerySubjectDetail(QuerySubjectDetailReq) returns (QuerySubjectDetailResp){}
+  // 查询专题表列表
+  rpc QuerySubjectList(QuerySubjectListReq) returns (QuerySubjectListResp){}
+
+  rpc SubjectListByIds(SubjectListByIdsReq) returns (QuerySubjectListResp){}
 
   //批量更新状态
   rpc UpdateSubjectRecommendStatus(UpdateSubjectRecommendStatusReq) returns (UpdateSubjectRecommendStatusResp){}
 
 }
 
-//关联专题
-message SubjectProductRelationAddReq {
-  repeated int64 SubjectId = 1; //
-  int64 ProductId = 2; //
+
+// 添加专题分类表
+message AddSubjectCategoryReq {
+  string create_by = 1; //创建者
+  int32 subject_count = 2; //专题数量
+  string icon = 3; //分类图标
+  int32 sort = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+
+
 
 }
 
-message SubjectProductRelationAddResp {
+message AddSubjectCategoryResp {
   string pong = 1;
 }
 
-
-message SubjectProductRelationListReq {
-  int64 ProductId = 1; // 商品Id
-
-}
-
-message SubjectProductRelationListResp {
-  repeated int64 SubjectIds = 1; // 专题id
-}
-service SubjectProductRelationService {
-
-  // 专题关联
-  rpc SubjectProductRelationAdd(SubjectProductRelationAddReq) returns (SubjectProductRelationAddResp){}
-  rpc SubjectProductRelationList(SubjectProductRelationListReq) returns (SubjectProductRelationListResp){}
-
-}
-
-//商品优选
-message PreferredAreaAddReq {
-  string Name = 1; //
-  string SubTitle = 2; //
-  string Pic = 3; //展示图片
-  int32 Sort = 4; //
-  int32 ShowStatus = 5; //
-  string CreateBy = 6; //
-
-}
-
-message PreferredAreaAddResp {
-  string pong = 1;
-}
-
-message PreferredAreaDeleteReq {
+// 删除专题分类表
+message DeleteSubjectCategoryReq {
   repeated int64 ids = 1;
 }
 
-message PreferredAreaDeleteResp {
+message DeleteSubjectCategoryResp {
   string pong = 1;
 }
 
-message PreferredAreaUpdateReq {
-  int64 Id = 1; //
-  string Name = 2; //
-  string SubTitle = 3; //
-  string Pic = 4; //展示图片
-  int32 Sort = 5; //
-  int32 ShowStatus = 6; //
-  string UpdateBy = 7 ;
+// 更新专题分类表
+message UpdateSubjectCategoryReq {
+  int32 subject_count = 1; //专题数量
+  string update_by = 2; //更新者
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+
+
 }
 
-message PreferredAreaUpdateResp {
+message UpdateSubjectCategoryResp {
   string pong = 1;
 }
 
-message PreferredAreaListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string Name = 3; //
-  string SubTitle = 4; //
-  int32 ShowStatus = 5; //显示状态：0->不显示；1->显示
+// 更新专题分类表状态
+message UpdateSubjectCategoryStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 6; //
+
 }
 
-message PreferredAreaListData {
-  int64 Id = 1; //
-  string Name = 2; //
-  string SubTitle = 3; //
-  string Pic = 4; //展示图片
-  int32 Sort = 5; //
-  int32 ShowStatus = 6; //
-  string CreateBy = 7; //
-  string CreateTime = 8; //
-  string UpdateBy = 9; //
-  string UpdateTime = 10; //
+message UpdateSubjectCategoryStatusResp {
+  string pong = 1;
 }
 
-message PreferredAreaListResp {
+// 查询专题分类表详情
+message QuerySubjectCategoryDetailReq {
+    int64 id = 1;
+}
+
+message QuerySubjectCategoryDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  int32 subject_count = 8; //专题数量
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询专题分类表列表
+message QuerySubjectCategoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string name = 3; //
+  int32 show_status = 4; //
+
+}
+
+message SubjectCategoryListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  int32 subject_count = 8; //专题数量
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+message QuerySubjectCategoryListResp {
   int64 total = 1;
-  repeated  PreferredAreaListData list = 2;
-}
-service PreferredAreaService {
-
-  // 商品优选
-  rpc PreferredAreaAdd(PreferredAreaAddReq) returns (PreferredAreaAddResp){}
-  rpc PreferredAreaDelete(PreferredAreaDeleteReq) returns (PreferredAreaDeleteResp){}
-  rpc PreferredAreaUpdate(PreferredAreaUpdateReq) returns (PreferredAreaUpdateResp){}
-  rpc PreferredAreaList(PreferredAreaListReq) returns (PreferredAreaListResp){}
-
-}
-//优选商品关联
-message PreferredAreaProductRelationAddReq {
-  repeated int64 PreferredAreaId = 1; //
-  int64 ProductId = 2; //
-
+  repeated  SubjectCategoryListData list = 2;
 }
 
-message PreferredAreaProductRelationAddResp {
+// 专题分类表
+service SubjectCategoryService {
+  // 添加专题分类表
+  rpc AddSubjectCategory(AddSubjectCategoryReq) returns (AddSubjectCategoryResp){}
+  // 删除专题分类表
+  rpc DeleteSubjectCategory(DeleteSubjectCategoryReq) returns (DeleteSubjectCategoryResp){}
+  // 更新专题分类表
+  rpc UpdateSubjectCategory(UpdateSubjectCategoryReq) returns (UpdateSubjectCategoryResp ){}
+  // 更新专题分类表状态
+  rpc UpdateSubjectCategoryStatus(UpdateSubjectCategoryStatusReq) returns (UpdateSubjectCategoryStatusResp ){}
+  // 查询专题分类表详情
+   rpc QuerySubjectCategoryDetail(QuerySubjectCategoryDetailReq) returns (QuerySubjectCategoryDetailResp){}
+  // 查询专题分类表列表
+  rpc QuerySubjectCategoryList(QuerySubjectCategoryListReq) returns (QuerySubjectCategoryListResp){}
+
+
+}
+
+
+// 添加专题评论表
+message AddSubjectCommentReq {
+  string content = 1; //
+  int32 show_status = 2; //
+  int64 subject_id = 3; //
+  string member_icon = 4; //
+  string member_nick_name = 5; //
+
+
+}
+
+message AddSubjectCommentResp {
   string pong = 1;
 }
 
-message PreferredAreaProductRelationListReq {
-  int64 ProductId = 1; //商品id
+// 删除专题评论表
+message DeleteSubjectCommentReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteSubjectCommentResp {
+  string pong = 1;
+}
+
+// 更新专题评论表
+message UpdateSubjectCommentReq {
+  string content = 1; //
+  int64 subject_id = 2; //
+  int64 id = 3; //
+  string member_icon = 4; //
+  string member_nick_name = 5; //
+  int32 show_status = 6; //
+
 
 }
 
-message PreferredAreaProductRelationListResp {
-  repeated int64 PreferredAreaIds = 1; //优选id
+message UpdateSubjectCommentResp {
+  string pong = 1;
+}
+
+// 更新专题评论表状态
+message UpdateSubjectCommentStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 2; //
 
 }
 
-service PreferredAreaProductRelationService {
-  // 优选商品关联
-  rpc PreferredAreaProductRelationAdd(PreferredAreaProductRelationAddReq) returns (PreferredAreaProductRelationAddResp){}
-  rpc PreferredAreaProductRelationList(PreferredAreaProductRelationListReq) returns (PreferredAreaProductRelationListResp){}
+message UpdateSubjectCommentStatusResp {
+  string pong = 1;
+}
+
+// 查询专题评论表详情
+message QuerySubjectCommentDetailReq {
+    int64 id = 1;
+}
+
+message QuerySubjectCommentDetailResp {
+  string content = 1; //
+  string create_time = 2; //
+  int64 id = 3; //
+  string member_icon = 4; //
+  string member_nick_name = 5; //
+  int32 show_status = 6; //
+  int64 subject_id = 7; //
+
+}
+
+// 分页查询专题评论表列表
+message QuerySubjectCommentListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string member_nick_name = 5; //
+  int32 show_status = 6; //
+
+}
+
+message SubjectCommentListData {
+  string content = 1; //
+  string create_time = 2; //
+  int64 id = 3; //
+  string member_icon = 4; //
+  string member_nick_name = 5; //
+  int32 show_status = 6; //
+  int64 subject_id = 7; //
+
+}
+
+message QuerySubjectCommentListResp {
+  int64 total = 1;
+  repeated  SubjectCommentListData list = 2;
+}
+
+// 专题评论表
+service SubjectCommentService {
+  // 添加专题评论表
+  rpc AddSubjectComment(AddSubjectCommentReq) returns (AddSubjectCommentResp){}
+  // 删除专题评论表
+  rpc DeleteSubjectComment(DeleteSubjectCommentReq) returns (DeleteSubjectCommentResp){}
+  // 更新专题评论表
+  rpc UpdateSubjectComment(UpdateSubjectCommentReq) returns (UpdateSubjectCommentResp ){}
+  // 更新专题评论表状态
+  rpc UpdateSubjectCommentStatus(UpdateSubjectCommentStatusReq) returns (UpdateSubjectCommentStatusResp ){}
+  // 查询专题评论表详情
+   rpc QuerySubjectCommentDetail(QuerySubjectCommentDetailReq) returns (QuerySubjectCommentDetailResp){}
+  // 查询专题评论表列表
+  rpc QuerySubjectCommentList(QuerySubjectCommentListReq) returns (QuerySubjectCommentListResp){}
+
+
+}
+
+
+// 添加专题商品关系表
+message AddSubjectProductRelationReq {
+  int64 product_id = 1; //
+  repeated int64 subject_id = 2; //
+
+}
+
+message AddSubjectProductRelationResp {
+  string pong = 1;
+}
+
+
+// 分页查询专题商品关系表列表
+message QuerySubjectProductRelationListReq {
+  int64 product_id = 1; //
+}
+
+message QuerySubjectProductRelationListResp {
+  repeated int64 subject_ids = 1; //
+
+}
+
+
+// 专题商品关系表
+service SubjectProductRelationService {
+  // 添加专题商品关系表
+  rpc AddSubjectProductRelation(AddSubjectProductRelationReq) returns (AddSubjectProductRelationResp){}
+  // 查询专题商品关系表列表
+  rpc QuerySubjectProductRelationList(QuerySubjectProductRelationListReq) returns (QuerySubjectProductRelationListResp){}
+
+
+}
+
+
+// 添加话题表
+message AddTopicReq {
+  int32 attend_count = 1; //参与人数
+  string attend_type = 2; //参与方式
+  int32 attention_count = 3; //关注人数
+  string award_name = 4; //奖品名称
+  int64 category_id = 5; //
+  string content = 6; //话题内容
+  string create_by = 7; //创建者
+  string start_time = 8; //
+  string end_time = 9; //
+  int64 id = 10; //
+  string name = 11; //
+  int32 read_count = 12; //
+
+
+}
+
+message AddTopicResp {
+  string pong = 1;
+}
+
+// 删除话题表
+message DeleteTopicReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteTopicResp {
+  string pong = 1;
+}
+
+// 更新话题表
+message UpdateTopicReq {
+  int32 attend_count = 1; //参与人数
+  string attend_type = 2; //参与方式
+  int32 attention_count = 3; //关注人数
+  string award_name = 4; //奖品名称
+  int64 category_id = 5; //
+  string content = 6; //话题内容
+  string start_time = 7; //
+  string update_by = 8; //更新者
+  string end_time = 9; //
+  int64 id = 10; //
+  string name = 11; //
+  int32 read_count = 12; //
+
+
+}
+
+message UpdateTopicResp {
+  string pong = 1;
+}
+
+// 查询话题表详情
+message QueryTopicDetailReq {
+    int64 id = 1;
+}
+
+message QueryTopicDetailResp {
+  int32 attend_count = 1; //参与人数
+  string attend_type = 2; //参与方式
+  int32 attention_count = 3; //关注人数
+  string award_name = 4; //奖品名称
+  int64 category_id = 5; //
+  string content = 6; //话题内容
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string end_time = 9; //
+  int64 id = 10; //
+  string name = 11; //
+  int32 read_count = 12; //
+  string start_time = 13; //
+  string update_by = 14; //更新者
+  string update_time = 15; //更新时间
+
+}
+
+// 分页查询话题表列表
+message QueryTopicListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string name = 3; //
+
+}
+
+message TopicListData {
+  int32 attend_count = 1; //参与人数
+  string attend_type = 2; //参与方式
+  int32 attention_count = 3; //关注人数
+  string award_name = 4; //奖品名称
+  int64 category_id = 5; //
+  string content = 6; //话题内容
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string end_time = 9; //
+  int64 id = 10; //
+  string name = 11; //
+  int32 read_count = 12; //
+  string start_time = 13; //
+  string update_by = 14; //更新者
+  string update_time = 15; //更新时间
+
+}
+
+message QueryTopicListResp {
+  int64 total = 1;
+  repeated  TopicListData list = 2;
+}
+
+// 话题表
+service TopicService {
+  // 添加话题表
+  rpc AddTopic(AddTopicReq) returns (AddTopicResp){}
+  // 删除话题表
+  rpc DeleteTopic(DeleteTopicReq) returns (DeleteTopicResp){}
+  // 更新话题表
+  rpc UpdateTopic(UpdateTopicReq) returns (UpdateTopicResp ){}
+  // 查询话题表详情
+   rpc QueryTopicDetail(QueryTopicDetailReq) returns (QueryTopicDetailResp){}
+  // 查询话题表列表
+  rpc QueryTopicList(QueryTopicListReq) returns (QueryTopicListResp){}
+
+
+}
+
+
+// 添加话题分类表
+message AddTopicCategoryReq {
+  string create_by = 1; //创建者
+  int32 subject_count = 2; //专题数量
+  string icon = 3; //分类图标
+  int32 sort = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+
+}
+
+message AddTopicCategoryResp {
+  string pong = 1;
+}
+
+// 删除话题分类表
+message DeleteTopicCategoryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteTopicCategoryResp {
+  string pong = 1;
+}
+
+// 更新话题分类表
+message UpdateTopicCategoryReq {
+  int32 subject_count = 1; //专题数量
+  string update_by = 2; //更新者
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+
+
+}
+
+message UpdateTopicCategoryResp {
+  string pong = 1;
+}
+
+// 更新话题分类表状态
+message UpdateTopicCategoryStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 2; //
+
+
+}
+
+message UpdateTopicCategoryStatusResp {
+  string pong = 1;
+}
+
+// 查询话题分类表详情
+message QueryTopicCategoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryTopicCategoryDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  int32 subject_count = 8; //专题数量
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询话题分类表列表
+message QueryTopicCategoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string name = 3; //
+  int32 show_status = 4; //
+
+}
+
+message TopicCategoryListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  int32 subject_count = 8; //专题数量
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+message QueryTopicCategoryListResp {
+  int64 total = 1;
+  repeated  TopicCategoryListData list = 2;
+}
+
+// 话题分类表
+service TopicCategoryService {
+  // 添加话题分类表
+  rpc AddTopicCategory(AddTopicCategoryReq) returns (AddTopicCategoryResp){}
+  // 删除话题分类表
+  rpc DeleteTopicCategory(DeleteTopicCategoryReq) returns (DeleteTopicCategoryResp){}
+  // 更新话题分类表
+  rpc UpdateTopicCategory(UpdateTopicCategoryReq) returns (UpdateTopicCategoryResp ){}
+  // 更新话题分类表状态
+  rpc UpdateTopicCategoryStatus(UpdateTopicCategoryStatusReq) returns (UpdateTopicCategoryStatusResp ){}
+  // 查询话题分类表详情
+   rpc QueryTopicCategoryDetail(QueryTopicCategoryDetailReq) returns (QueryTopicCategoryDetailResp){}
+  // 查询话题分类表列表
+  rpc QueryTopicCategoryList(QueryTopicCategoryListReq) returns (QueryTopicCategoryListResp){}
+
+
+}
+
+
+// 添加专题评论表
+message AddTopicCommentReq {
+  string content = 1; //
+  int32 show_status = 2; //
+  int64 topic_id = 3; //
+  string member_icon = 4; //
+  string member_nick_name = 5; //
+
+
+}
+
+message AddTopicCommentResp {
+  string pong = 1;
+}
+
+// 删除专题评论表
+message DeleteTopicCommentReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteTopicCommentResp {
+  string pong = 1;
+}
+
+// 更新专题评论表
+message UpdateTopicCommentReq {
+  string content = 1; //
+  int64 topic_id = 2; //
+  int64 id = 3; //
+  string member_icon = 4; //
+  string member_nick_name = 5; //
+  int32 show_status = 6; //
+
+
+}
+
+message UpdateTopicCommentResp {
+  string pong = 1;
+}
+
+// 更新专题评论表状态
+message UpdateTopicCommentStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 2; //
+
+}
+
+message UpdateTopicCommentStatusResp {
+  string pong = 1;
+}
+
+// 查询专题评论表详情
+message QueryTopicCommentDetailReq {
+    int64 id = 1;
+}
+
+message QueryTopicCommentDetailResp {
+  string content = 1; //
+  string create_time = 2; //
+  int64 id = 3; //
+  string member_icon = 4; //
+  string member_nick_name = 5; //
+  int32 show_status = 6; //
+  int64 topic_id = 7; //
+
+}
+
+// 分页查询专题评论表列表
+message QueryTopicCommentListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 show_status = 3; //
+
+}
+
+message TopicCommentListData {
+  string content = 1; //
+  string create_time = 2; //
+  int64 id = 3; //
+  string member_icon = 4; //
+  string member_nick_name = 5; //
+  int32 show_status = 6; //
+  int64 topic_id = 7; //
+
+}
+
+message QueryTopicCommentListResp {
+  int64 total = 1;
+  repeated  TopicCommentListData list = 2;
+}
+
+// 专题评论表
+service TopicCommentService {
+  // 添加专题评论表
+  rpc AddTopicComment(AddTopicCommentReq) returns (AddTopicCommentResp){}
+  // 删除专题评论表
+  rpc DeleteTopicComment(DeleteTopicCommentReq) returns (DeleteTopicCommentResp){}
+  // 更新专题评论表
+  rpc UpdateTopicComment(UpdateTopicCommentReq) returns (UpdateTopicCommentResp ){}
+  // 更新专题评论表状态
+  rpc UpdateTopicCommentStatus(UpdateTopicCommentStatusReq) returns (UpdateTopicCommentStatusResp ){}
+  // 查询专题评论表详情
+   rpc QueryTopicCommentDetail(QueryTopicCommentDetailReq) returns (QueryTopicCommentDetailResp){}
+  // 查询专题评论表列表
+  rpc QueryTopicCommentList(QueryTopicCommentListReq) returns (QueryTopicCommentListResp){}
+
+
 }

@@ -44,7 +44,7 @@ type (
 
 		// 更新积分消费设置状态
 	UpdateIntegrationConsumeSettingStatusReq {
-		Id int64 `json:"id"` //
+		Ids []int64 `json:"ids"` //
 		IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
 
 	}

@@ -1,0 +1,179 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加专题表
+message AddSubjectReq {
+  string album_pics = 1; //画册图片用逗号分割
+  int64 category_id = 2; //
+  string category_name = 3; //专题分类名称
+  int32 collect_count = 4; //
+  int32 comment_count = 5; //
+  string content = 6; //
+  string create_by = 7; //创建者
+  string title = 8; //
+  string description = 9; //
+  int32 forward_count = 10; //转发数
+  int32 show_status = 11; //显示状态：0->不显示；1->显示
+  string pic = 12; //专题主图
+  int32 product_count = 13; //关联产品数量
+  int32 read_count = 14; //
+  int32 recommend_status = 15; //
+
+
+
+}
+
+message AddSubjectResp {
+  string pong = 1;
+}
+
+// 删除专题表
+message DeleteSubjectReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteSubjectResp {
+  string pong = 1;
+}
+
+// 更新专题表
+message UpdateSubjectReq {
+  string album_pics = 1; //画册图片用逗号分割
+  int64 category_id = 2; //
+  string category_name = 3; //专题分类名称
+  int32 collect_count = 4; //
+  int32 comment_count = 5; //
+  string content = 6; //
+  string title = 7; //
+  string update_by = 8; //更新者
+  string description = 9; //
+  int32 forward_count = 10; //转发数
+  int64 id = 11; //
+  string pic = 12; //专题主图
+  int32 product_count = 13; //关联产品数量
+  int32 read_count = 14; //
+  int32 recommend_status = 15; //
+  int32 show_status = 16; //显示状态：0->不显示；1->显示
+
+
+}
+
+message UpdateSubjectResp {
+  string pong = 1;
+}
+
+// 更新专题表状态
+message UpdateSubjectStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 2; //显示状态：0->不显示；1->显示
+
+}
+
+message UpdateSubjectStatusResp {
+  string pong = 1;
+}
+
+// 查询专题表详情
+message QuerySubjectDetailReq {
+    int64 id = 1;
+}
+
+message QuerySubjectDetailResp {
+  string album_pics = 1; //画册图片用逗号分割
+  int64 category_id = 2; //
+  string category_name = 3; //专题分类名称
+  int32 collect_count = 4; //
+  int32 comment_count = 5; //
+  string content = 6; //
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string description = 9; //
+  int32 forward_count = 10; //转发数
+  int64 id = 11; //
+  string pic = 12; //专题主图
+  int32 product_count = 13; //关联产品数量
+  int32 read_count = 14; //
+  int32 recommend_status = 15; //
+  int32 show_status = 16; //显示状态：0->不显示；1->显示
+  string title = 17; //
+  string update_by = 18; //更新者
+  string update_time = 19; //更新时间
+
+}
+
+// 分页查询专题表列表
+message QuerySubjectListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 recommend_status = 3; //
+  int32 show_status = 4; //显示状态：0->不显示；1->显示
+  string title = 5; //
+
+}
+
+message SubjectListData {
+  string album_pics = 1; //画册图片用逗号分割
+  int64 category_id = 2; //
+  string category_name = 3; //专题分类名称
+  int32 collect_count = 4; //
+  int32 comment_count = 5; //
+  string content = 6; //
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string description = 9; //
+  int32 forward_count = 10; //转发数
+  int64 id = 11; //
+  string pic = 12; //专题主图
+  int32 product_count = 13; //关联产品数量
+  int32 read_count = 14; //
+  int32 recommend_status = 15; //
+  int32 show_status = 16; //显示状态：0->不显示；1->显示
+  string title = 17; //
+  string update_by = 18; //更新者
+  string update_time = 19; //更新时间
+
+}
+
+message QuerySubjectListResp {
+  int64 total = 1;
+  repeated  SubjectListData list = 2;
+}
+
+message UpdateSubjectRecommendStatusReq {
+  repeated int64 ids = 1;
+  int32 Status = 2;
+}
+
+message UpdateSubjectRecommendStatusResp {
+  string pong = 1;
+}
+
+message SubjectListByIdsReq {
+  repeated int64 ids = 1;
+
+}
+
+// 专题表
+service SubjectService {
+  // 添加专题表
+  rpc AddSubject(AddSubjectReq) returns (AddSubjectResp){}
+  // 删除专题表
+  rpc DeleteSubject(DeleteSubjectReq) returns (DeleteSubjectResp){}
+  // 更新专题表
+  rpc UpdateSubject(UpdateSubjectReq) returns (UpdateSubjectResp ){}
+  // 更新专题表状态
+  rpc UpdateSubjectStatus(UpdateSubjectStatusReq) returns (UpdateSubjectStatusResp ){}
+  // 查询专题表详情
+   rpc QuerySubjectDetail(QuerySubjectDetailReq) returns (QuerySubjectDetailResp){}
+  // 查询专题表列表
+  rpc QuerySubjectList(QuerySubjectListReq) returns (QuerySubjectListResp){}
+
+  rpc SubjectListByIds(SubjectListByIdsReq) returns (QuerySubjectListResp){}
+
+  //批量更新状态
+  rpc UpdateSubjectRecommendStatus(UpdateSubjectRecommendStatusReq) returns (UpdateSubjectRecommendStatusResp){}
+
+}

@@ -325,15 +325,15 @@ type AddPostResp struct {
 	Message string `json:"message"`
 }
 
-type AddPrefrenceAreaReq struct {
-	Name       string `json:"name"`
-	SubTitle   string `json:"subTitle"`
-	Pic        string `json:"pic"` // 展示图片
-	Sort       int32  `json:"sort"`
-	ShowStatus int32  `json:"showStatus"`
+type AddPreferredAreaReq struct {
+	Name       string `json:"name"`       //
+	Pic        string `json:"pic"`        //展示图片
+	ShowStatus int32  `json:"showStatus"` //
+	Sort       int32  `json:"sort"`       //
+	SubTitle   string `json:"subTitle"`   //
 }
 
-type AddPrefrenceAreaResp struct {
+type AddPreferredAreaResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -522,20 +522,20 @@ type AddSkuStockList struct {
 }
 
 type AddSubjectReq struct {
-	CategoryId      int64  `json:"categoryId"`
-	Title           string `json:"title"`
-	Pic             string `json:"pic"`          // 专题主图
-	ProductCount    int32  `json:"productCount"` // 关联产品数量
-	RecommendStatus int32  `json:"recommendStatus"`
-	CollectCount    int32  `json:"collectCount"`
-	ReadCount       int32  `json:"readCount"`
-	CommentCount    int32  `json:"commentCount"`
-	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-	Description     string `json:"description"`
-	ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	Content         string `json:"content"`
-	ForwardCount    int32  `json:"forwardCount"` // 转发数
-	CategoryName    string `json:"categoryName"` // 专题分类名称
+	AlbumPics       string `json:"albumPics"`       //画册图片用逗号分割
+	CategoryId      int64  `json:"categoryId"`      //
+	CategoryName    string `json:"categoryName"`    //专题分类名称
+	CollectCount    int32  `json:"collectCount"`    //
+	CommentCount    int32  `json:"commentCount"`    //
+	Content         string `json:"content"`         //
+	Description     string `json:"description"`     //
+	ForwardCount    int32  `json:"forwardCount"`    //转发数
+	Pic             string `json:"pic"`             //专题主图
+	ProductCount    int32  `json:"productCount"`    //关联产品数量
+	ReadCount       int32  `json:"readCount"`       //
+	RecommendStatus int32  `json:"recommendStatus"` //
+	ShowStatus      int32  `json:"showStatus"`      //显示状态：0->不显示；1->显示
+	Title           string `json:"title"`           //
 }
 
 type AddSubjectResp struct {
@@ -865,11 +865,11 @@ type DeletePostResp struct {
 	Message string `json:"message"`
 }
 
-type DeletePrefrenceAreaReq struct {
+type DeletePreferredAreaReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeletePrefrenceAreaResp struct {
+type DeletePreferredAreaResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -1588,37 +1588,6 @@ type ListOrderSettingResp struct {
 	Total    int64                   `json:"total"`
 }
 
-type ListPrefrenceAreaData struct {
-	Id         int64  `json:"id"`
-	Name       string `json:"name"`
-	SubTitle   string `json:"subTitle"`
-	Pic        string `json:"pic"` // 展示图片
-	Sort       int32  `json:"sort"`
-	ShowStatus int32  `json:"showStatus"`
-	CreateBy   string `json:"createBy"`
-	CreateTime string `json:"createTime"`
-	UpdateBy   string `json:"updateBy"`
-	UpdateTime string `json:"updateTime"`
-}
-
-type ListPrefrenceAreaReq struct {
-	Current    int64  `form:"current,default=1"`
-	PageSize   int64  `form:"pageSize,default=20"`
-	Name       string `form:"name,optional"`
-	SubTitle   string `form:"subTitle,optional"`
-	ShowStatus int32  `form:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
-}
-
-type ListPrefrenceAreaResp struct {
-	Code     string                   `json:"code"`
-	Message  string                   `json:"message"`
-	Current  int64                    `json:"current,default=1"`
-	Data     []*ListPrefrenceAreaData `json:"data"`
-	PageSize int64                    `json:"pageSize,default=20"`
-	Success  bool                     `json:"success"`
-	Total    int64                    `json:"total"`
-}
-
 type ListProductAttribute struct {
 	Id                         int64  `json:"id"`
 	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
@@ -1857,46 +1826,6 @@ type ListSkuStockResp struct {
 	Data    []*ListSkuStockData `json:"data"`
 	Code    string              `json:"code"`
 	Message string              `json:"message"`
-}
-
-type ListSubjectData struct {
-	Id              int64  `json:"id"`
-	CategoryId      int64  `json:"categoryId"`
-	Title           string `json:"title"`
-	Pic             string `json:"pic"`          // 专题主图
-	ProductCount    int32  `json:"productCount"` // 关联产品数量
-	RecommendStatus int32  `json:"recommendStatus"`
-	CollectCount    int32  `json:"collectCount"`
-	ReadCount       int32  `json:"readCount"`
-	CommentCount    int32  `json:"commentCount"`
-	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-	Description     string `json:"description"`
-	ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	Content         string `json:"content"`
-	ForwardCount    int32  `json:"forwardCount"` // 转发数
-	CategoryName    string `json:"categoryName"` // 专题分类名称
-	CreateBy        string `json:"createBy"`
-	CreateTime      string `json:"createTime"`
-	UpdateBy        string `json:"updateBy"`
-	UpdateTime      string `json:"updateTime"`
-}
-
-type ListSubjectReq struct {
-	Current         int64  `form:"current,default=1"`
-	PageSize        int64  `form:"pageSize,default=20"`
-	Title           string `form:"title,optional"`
-	RecommendStatus int32  `form:"recommendStatus,default=2"`
-	ShowStatus      int32  `form:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
-}
-
-type ListSubjectResp struct {
-	Code     string             `json:"code"`
-	Message  string             `json:"message"`
-	Current  int64              `json:"current,default=1"`
-	Data     []*ListSubjectData `json:"data"`
-	PageSize int64              `json:"pageSize,default=20"`
-	Success  bool               `json:"success"`
-	Total    int64              `json:"total"`
 }
 
 type LoginData struct {
@@ -2797,6 +2726,60 @@ type QueryPostListResp struct {
 	Total    int64                `json:"total"`
 }
 
+type QueryPreferredAreaDetailData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	Id         int64  `json:"id"`         //
+	Name       string `json:"name"`       //
+	Pic        string `json:"pic"`        //展示图片
+	ShowStatus int32  `json:"showStatus"` //
+	Sort       int32  `json:"sort"`       //
+	SubTitle   string `json:"subTitle"`   //
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryPreferredAreaDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryPreferredAreaDetailResp struct {
+	Code    string                       `json:"code"`
+	Message string                       `json:"message"`
+	Data    QueryPreferredAreaDetailData `json:"data"`
+}
+
+type QueryPreferredAreaListData struct {
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	Id         int64  `json:"id"`         //
+	Name       string `json:"name"`       //
+	Pic        string `json:"pic"`        //展示图片
+	ShowStatus int32  `json:"showStatus"` //
+	Sort       int32  `json:"sort"`       //
+	SubTitle   string `json:"subTitle"`   //
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryPreferredAreaListReq struct {
+	Current    int64  `form:"current,default=1"`   //第几页
+	PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+	Name       string `form:"name,optional"`       //
+	ShowStatus int32  `form:"showStatus,optional"` //
+	SubTitle   string `form:"subTitle,optional"`   //
+}
+
+type QueryPreferredAreaListResp struct {
+	Code     string                        `json:"code"`
+	Message  string                        `json:"message"`
+	Current  int64                         `json:"current,default=1"`
+	Data     []*QueryPreferredAreaListData `json:"data"`
+	PageSize int64                         `json:"pageSize,default=20"`
+	Success  bool                          `json:"success"`
+	Total    int64                         `json:"total"`
+}
+
 type QueryProductDetailReq struct {
 	ProductId int64 `form:"productId"`
 }
@@ -2991,6 +2974,78 @@ type QueryStatisticsLoginLogResp struct {
 	Code    string                      `json:"code"`
 	Message string                      `json:"message"`
 	Data    QueryStatisticsLoginLogData `json:"data"`
+}
+
+type QuerySubjectDetailData struct {
+	AlbumPics       string `json:"albumPics"`       //画册图片用逗号分割
+	CategoryId      int64  `json:"categoryId"`      //
+	CategoryName    string `json:"categoryName"`    //专题分类名称
+	CollectCount    int32  `json:"collectCount"`    //
+	CommentCount    int32  `json:"commentCount"`    //
+	Content         string `json:"content"`         //
+	CreateBy        string `json:"createBy"`        //创建者
+	CreateTime      string `json:"createTime"`      //创建时间
+	Description     string `json:"description"`     //
+	ForwardCount    int32  `json:"forwardCount"`    //转发数
+	Id              int64  `json:"id"`              //
+	Pic             string `json:"pic"`             //专题主图
+	ProductCount    int32  `json:"productCount"`    //关联产品数量
+	ReadCount       int32  `json:"readCount"`       //
+	RecommendStatus int32  `json:"recommendStatus"` //
+	ShowStatus      int32  `json:"showStatus"`      //显示状态：0->不显示；1->显示
+	Title           string `json:"title"`           //
+	UpdateBy        string `json:"updateBy"`        //更新者
+	UpdateTime      string `json:"updateTime"`      //更新时间
+}
+
+type QuerySubjectDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QuerySubjectDetailResp struct {
+	Code    string                 `json:"code"`
+	Message string                 `json:"message"`
+	Data    QuerySubjectDetailData `json:"data"`
+}
+
+type QuerySubjectListData struct {
+	AlbumPics       string `json:"albumPics"`       //画册图片用逗号分割
+	CategoryId      int64  `json:"categoryId"`      //
+	CategoryName    string `json:"categoryName"`    //专题分类名称
+	CollectCount    int32  `json:"collectCount"`    //
+	CommentCount    int32  `json:"commentCount"`    //
+	Content         string `json:"content"`         //
+	CreateBy        string `json:"createBy"`        //创建者
+	CreateTime      string `json:"createTime"`      //创建时间
+	Description     string `json:"description"`     //
+	ForwardCount    int32  `json:"forwardCount"`    //转发数
+	Id              int64  `json:"id"`              //
+	Pic             string `json:"pic"`             //专题主图
+	ProductCount    int32  `json:"productCount"`    //关联产品数量
+	ReadCount       int32  `json:"readCount"`       //
+	RecommendStatus int32  `json:"recommendStatus"` //
+	ShowStatus      int32  `json:"showStatus"`      //显示状态：0->不显示；1->显示
+	Title           string `json:"title"`           //
+	UpdateBy        string `json:"updateBy"`        //更新者
+	UpdateTime      string `json:"updateTime"`      //更新时间
+}
+
+type QuerySubjectListReq struct {
+	Current         int64  `form:"current,default=1"`   //第几页
+	PageSize        int64  `form:"pageSize,default=20"` //每页的数量
+	ShowStatus      int32  `form:"showStatus,optional"` //显示状态：0->不显示；1->显示
+	Title           string `form:"title,optional"`      //
+	RecommendStatus int32  `json:"recommendStatus"`     //
+}
+
+type QuerySubjectListResp struct {
+	Code     string                  `json:"code"`
+	Message  string                  `json:"message"`
+	Current  int64                   `json:"current,default=1"`
+	Data     []*QuerySubjectListData `json:"data"`
+	PageSize int64                   `json:"pageSize,default=20"`
+	Success  bool                    `json:"success"`
+	Total    int64                   `json:"total"`
 }
 
 type QueryUserDetailData struct {
@@ -3346,8 +3401,8 @@ type UpdateIntegrationConsumeSettingResp struct {
 }
 
 type UpdateIntegrationConsumeSettingStatusReq struct {
-	Id        int64 `json:"id"`        //
-	IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
+	Ids       []int64 `json:"ids"`       //
+	IsDefault int32   `json:"isDefault"` //是否默认：0->否；1->是
 }
 
 type UpdateIntegrationConsumeSettingStatusResp struct {
@@ -3377,8 +3432,8 @@ type UpdateMemberLevelResp struct {
 }
 
 type UpdateMemberLevelStatusReq struct {
-	DefaultStatus int32 `json:"defaultStatus"` //是否为默认等级：0->不是；1->是
-	Id            int64 `json:"id"`            //
+	DefaultStatus int32   `json:"defaultStatus"` //是否为默认等级：0->不是；1->是
+	Ids           []int64 `json:"ids"`           //
 }
 
 type UpdateMemberLevelStatusResp struct {
@@ -3437,7 +3492,7 @@ type UpdateMemberRuleSettingResp struct {
 }
 
 type UpdateMemberRuleSettingStatusReq struct {
-	Ids    []int64 `form:"ids"`
+	Ids    []int64 `json:"ids"`
 	Status int32   `json:"status"` //状态：0->禁用；1->启用
 }
 
@@ -3460,7 +3515,7 @@ type UpdateMemberTagResp struct {
 }
 
 type UpdateMemberTagStatusReq struct {
-	Ids    []int64 `form:"ids"`
+	Ids    []int64 `json:"ids"`
 	Status int32   `json:"status"` //状态：0->禁用；1->启用
 }
 
@@ -3609,16 +3664,26 @@ type UpdatePostStatusResp struct {
 	Message string `json:"message"`
 }
 
-type UpdatePrefrenceAreaReq struct {
-	Id         int64  `json:"id"`
-	Name       string `json:"name"`
-	SubTitle   string `json:"subTitle"`
-	Pic        string `json:"pic"` // 展示图片
-	Sort       int32  `json:"sort"`
-	ShowStatus int32  `json:"showStatus"`
+type UpdatePreferredAreaReq struct {
+	Id         int64  `json:"id"`         //
+	Name       string `json:"name"`       //
+	Pic        string `json:"pic"`        //展示图片
+	ShowStatus int32  `json:"showStatus"` //
+	Sort       int32  `json:"sort"`       //
+	SubTitle   string `json:"subTitle"`   //
 }
 
-type UpdatePrefrenceAreaResp struct {
+type UpdatePreferredAreaResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdatePreferredAreaStatusReq struct {
+	Ids        []int64 `json:"ids"`
+	ShowStatus int32   `json:"showStatus"` //
+}
+
+type UpdatePreferredAreaStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3974,24 +4039,34 @@ type UpdateSkuStockResp struct {
 }
 
 type UpdateSubjectReq struct {
-	Id              int64  `json:"id"`
-	CategoryId      int64  `json:"categoryId"`
-	Title           string `json:"title"`
-	Pic             string `json:"pic"`          // 专题主图
-	ProductCount    int32  `json:"productCount"` // 关联产品数量
-	RecommendStatus int32  `json:"recommendStatus"`
-	CollectCount    int32  `json:"collectCount"`
-	ReadCount       int32  `json:"readCount"`
-	CommentCount    int32  `json:"commentCount"`
-	AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-	Description     string `json:"description"`
-	ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	Content         string `json:"content"`
-	ForwardCount    int32  `json:"forwardCount"` // 转发数
-	CategoryName    string `json:"categoryName"` // 专题分类名称
+	AlbumPics       string `json:"albumPics"`       //画册图片用逗号分割
+	CategoryId      int64  `json:"categoryId"`      //
+	CategoryName    string `json:"categoryName"`    //专题分类名称
+	CollectCount    int32  `json:"collectCount"`    //
+	CommentCount    int32  `json:"commentCount"`    //
+	Content         string `json:"content"`         //
+	Description     string `json:"description"`     //
+	ForwardCount    int32  `json:"forwardCount"`    //转发数
+	Id              int64  `json:"id"`              //
+	Pic             string `json:"pic"`             //专题主图
+	ProductCount    int32  `json:"productCount"`    //关联产品数量
+	ReadCount       int32  `json:"readCount"`       //
+	RecommendStatus int32  `json:"recommendStatus"` //
+	ShowStatus      int32  `json:"showStatus"`      //显示状态：0->不显示；1->显示
+	Title           string `json:"title"`           //
 }
 
 type UpdateSubjectResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateSubjectStatusReq struct {
+	Ids        []int64 `json:"ids"`
+	ShowStatus int32   `json:"showStatus"` //显示状态：0->不显示；1->显示
+}
+
+type UpdateSubjectStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

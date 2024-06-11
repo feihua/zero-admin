@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加帮助表
+message AddHelpReq {
+  int64 category_id = 1; //
+  string content = 2; //
+  string create_by = 3; //创建者
+  string title = 4; //
+  string icon = 5; //
+  int32 read_count = 6; //
+  int32 show_status = 7; //
+
+
+}
+
+message AddHelpResp {
+  string pong = 1;
+}
+
+// 删除帮助表
+message DeleteHelpReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteHelpResp {
+  string pong = 1;
+}
+
+// 更新帮助表
+message UpdateHelpReq {
+  int64 category_id = 1; //
+  string content = 2; //
+  string title = 3; //
+  string update_by = 4; //更新者
+  string icon = 5; //
+  int64 id = 6; //
+  int32 read_count = 7; //
+  int32 show_status = 8; //
+
+
+}
+
+message UpdateHelpResp {
+  string pong = 1;
+}
+
+// 更新帮助表状态
+message UpdateHelpStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 8; //
+
+}
+
+message UpdateHelpStatusResp {
+  string pong = 1;
+}
+
+// 查询帮助表详情
+message QueryHelpDetailReq {
+    int64 id = 1;
+}
+
+message QueryHelpDetailResp {
+  int64 category_id = 1; //
+  string content = 2; //
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  string icon = 5; //
+  int64 id = 6; //
+  int32 read_count = 7; //
+  int32 show_status = 8; //
+  string title = 9; //
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
+
+}
+
+// 分页查询帮助表列表
+message QueryHelpListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 show_status = 3; //
+  string title = 4; //
+
+}
+
+message HelpListData {
+  int64 category_id = 1; //
+  string content = 2; //
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  string icon = 5; //
+  int64 id = 6; //
+  int32 read_count = 7; //
+  int32 show_status = 8; //
+  string title = 9; //
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
+
+}
+
+message QueryHelpListResp {
+  int64 total = 1;
+  repeated  HelpListData list = 2;
+}
+
+// 帮助表
+service HelpService {
+  // 添加帮助表
+  rpc AddHelp(AddHelpReq) returns (AddHelpResp){}
+  // 删除帮助表
+  rpc DeleteHelp(DeleteHelpReq) returns (DeleteHelpResp){}
+  // 更新帮助表
+  rpc UpdateHelp(UpdateHelpReq) returns (UpdateHelpResp ){}
+  // 更新帮助表状态
+  rpc UpdateHelpStatus(UpdateHelpStatusReq) returns (UpdateHelpStatusResp ){}
+  // 查询帮助表详情
+   rpc QueryHelpDetail(QueryHelpDetailReq) returns (QueryHelpDetailResp){}
+  // 查询帮助表列表
+  rpc QueryHelpList(QueryHelpListReq) returns (QueryHelpListResp){}
+
+
+}

@@ -22,13 +22,14 @@ func NewSubjectProductRelationServiceServer(svcCtx *svc.ServiceContext) *Subject
 	}
 }
 
-// 专题关联
-func (s *SubjectProductRelationServiceServer) SubjectProductRelationAdd(ctx context.Context, in *cmsclient.SubjectProductRelationAddReq) (*cmsclient.SubjectProductRelationAddResp, error) {
-	l := subjectproductrelationservicelogic.NewSubjectProductRelationAddLogic(ctx, s.svcCtx)
-	return l.SubjectProductRelationAdd(in)
+// 添加专题商品关系表
+func (s *SubjectProductRelationServiceServer) AddSubjectProductRelation(ctx context.Context, in *cmsclient.AddSubjectProductRelationReq) (*cmsclient.AddSubjectProductRelationResp, error) {
+	l := subjectproductrelationservicelogic.NewAddSubjectProductRelationLogic(ctx, s.svcCtx)
+	return l.AddSubjectProductRelation(in)
 }
 
-func (s *SubjectProductRelationServiceServer) SubjectProductRelationList(ctx context.Context, in *cmsclient.SubjectProductRelationListReq) (*cmsclient.SubjectProductRelationListResp, error) {
-	l := subjectproductrelationservicelogic.NewSubjectProductRelationListLogic(ctx, s.svcCtx)
-	return l.SubjectProductRelationList(in)
+// 查询专题商品关系表列表
+func (s *SubjectProductRelationServiceServer) QuerySubjectProductRelationList(ctx context.Context, in *cmsclient.QuerySubjectProductRelationListReq) (*cmsclient.QuerySubjectProductRelationListResp, error) {
+	l := subjectproductrelationservicelogic.NewQuerySubjectProductRelationListLogic(ctx, s.svcCtx)
+	return l.QuerySubjectProductRelationList(in)
 }

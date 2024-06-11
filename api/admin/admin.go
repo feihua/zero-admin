@@ -25,7 +25,7 @@ func main() {
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
 
-	server.Use(ctx.AddLog)
+	//server.Use(ctx.AddLog)
 
 	handler.RegisterHandlers(server, ctx)
 

@@ -1,88 +1,33 @@
-info (
-	desc:   "专题列表"
-	author: "koobe"
-	email:  "1002219331@qq.com"
+info(
+	desc: "专题表"
+	author: "liufeihua"
+	email: "1002219331@qq.com"
 )
 
 type (
+	// 添加专题表
 	AddSubjectReq {
-		CategoryId      int64  `json:"categoryId"`
-		Title           string `json:"title"`
-		Pic             string `json:"pic"` // 专题主图
-		ProductCount    int32  `json:"productCount"` // 关联产品数量
-		RecommendStatus int32  `json:"recommendStatus"`
-		CollectCount    int32  `json:"collectCount"`
-		ReadCount       int32  `json:"readCount"`
-		CommentCount    int32  `json:"commentCount"`
-		AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-		Description     string `json:"description"`
-		ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-		Content         string `json:"content"`
-		ForwardCount    int32  `json:"forwardCount"` // 转发数
-		CategoryName    string `json:"categoryName"` // 专题分类名称
+		AlbumPics string `json:"albumPics"` //画册图片用逗号分割
+		CategoryId int64 `json:"categoryId"` //
+		CategoryName string `json:"categoryName"` //专题分类名称
+		CollectCount int32 `json:"collectCount"` //
+		CommentCount int32 `json:"commentCount"` //
+		Content string `json:"content"` //
+		Description string `json:"description"` //
+		ForwardCount int32 `json:"forwardCount"` //转发数
+		Pic string `json:"pic"` //专题主图
+		ProductCount int32 `json:"productCount"` //关联产品数量
+		ReadCount int32 `json:"readCount"` //
+		RecommendStatus int32 `json:"recommendStatus"` //
+		ShowStatus int32 `json:"showStatus"` //显示状态：0->不显示；1->显示
+		Title string `json:"title"` //
 	}
 	AddSubjectResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	ListSubjectReq {
-		Current         int64  `form:"current,default=1"`
-		PageSize        int64  `form:"pageSize,default=20"`
-		Title           string `form:"title,optional"`
-		RecommendStatus int32  `form:"recommendStatus,default=2"`
-		ShowStatus      int32  `form:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
-	}
-	ListSubjectData {
-		Id              int64  `json:"id"`
-		CategoryId      int64  `json:"categoryId"`
-		Title           string `json:"title"`
-		Pic             string `json:"pic"` // 专题主图
-		ProductCount    int32  `json:"productCount"` // 关联产品数量
-		RecommendStatus int32  `json:"recommendStatus"`
-		CollectCount    int32  `json:"collectCount"`
-		ReadCount       int32  `json:"readCount"`
-		CommentCount    int32  `json:"commentCount"`
-		AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-		Description     string `json:"description"`
-		ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-		Content         string `json:"content"`
-		ForwardCount    int32  `json:"forwardCount"` // 转发数
-		CategoryName    string `json:"categoryName"` // 专题分类名称
-		CreateBy        string `json:"createBy"`
-		CreateTime      string `json:"createTime"`
-		UpdateBy        string `json:"updateBy"`
-		UpdateTime      string `json:"updateTime"`
-	}
-	ListSubjectResp {
-		Code     string             `json:"code"`
-		Message  string             `json:"message"`
-		Current  int64              `json:"current,default=1"`
-		Data     []*ListSubjectData `json:"data"`
-		PageSize int64              `json:"pageSize,default=20"`
-		Success  bool               `json:"success"`
-		Total    int64              `json:"total"`
-	}
-	UpdateSubjectReq {
-		Id              int64  `json:"id"`
-		CategoryId      int64  `json:"categoryId"`
-		Title           string `json:"title"`
-		Pic             string `json:"pic"` // 专题主图
-		ProductCount    int32  `json:"productCount"` // 关联产品数量
-		RecommendStatus int32  `json:"recommendStatus"`
-		CollectCount    int32  `json:"collectCount"`
-		ReadCount       int32  `json:"readCount"`
-		CommentCount    int32  `json:"commentCount"`
-		AlbumPics       string `json:"albumPics"` // 画册图片用逗号分割
-		Description     string `json:"description"`
-		ShowStatus      int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-		Content         string `json:"content"`
-		ForwardCount    int32  `json:"forwardCount"` // 转发数
-		CategoryName    string `json:"categoryName"` // 专题分类名称
-	}
-	UpdateSubjectResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+
+		// 删除专题表
 	DeleteSubjectReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -90,29 +35,144 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
+
+		// 更新专题表
+	UpdateSubjectReq {
+		AlbumPics string `json:"albumPics"` //画册图片用逗号分割
+		CategoryId int64 `json:"categoryId"` //
+		CategoryName string `json:"categoryName"` //专题分类名称
+		CollectCount int32 `json:"collectCount"` //
+		CommentCount int32 `json:"commentCount"` //
+		Content string `json:"content"` //
+		Description string `json:"description"` //
+		ForwardCount int32 `json:"forwardCount"` //转发数
+		Id int64 `json:"id"` //
+		Pic string `json:"pic"` //专题主图
+		ProductCount int32 `json:"productCount"` //关联产品数量
+		ReadCount int32 `json:"readCount"` //
+		RecommendStatus int32 `json:"recommendStatus"` //
+		ShowStatus int32 `json:"showStatus"` //显示状态：0->不显示；1->显示
+		Title string `json:"title"` //
+
+	}
+	UpdateSubjectResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+
+		// 更新专题表状态
+	UpdateSubjectStatusReq {
+		Ids []int64 `json:"ids"`
+		ShowStatus int32 `json:"showStatus"` //显示状态：0->不显示；1->显示
+
+	}
+	UpdateSubjectStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+
+		// 查询专题表详情
+	QuerySubjectDetailReq {
+		Id         int64  `form:"id"`
+	}
+	QuerySubjectDetailData {
+		AlbumPics string `json:"albumPics"` //画册图片用逗号分割
+		CategoryId int64 `json:"categoryId"` //
+		CategoryName string `json:"categoryName"` //专题分类名称
+		CollectCount int32 `json:"collectCount"` //
+		CommentCount int32 `json:"commentCount"` //
+		Content string `json:"content"` //
+		CreateBy string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		Description string `json:"description"` //
+		ForwardCount int32 `json:"forwardCount"` //转发数
+		Id int64 `json:"id"` //
+		Pic string `json:"pic"` //专题主图
+		ProductCount int32 `json:"productCount"` //关联产品数量
+		ReadCount int32 `json:"readCount"` //
+		RecommendStatus int32 `json:"recommendStatus"` //
+		ShowStatus int32 `json:"showStatus"` //显示状态：0->不显示；1->显示
+		Title string `json:"title"` //
+		UpdateBy string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+
+	}
+	QuerySubjectDetailResp {
+		Code     string              `json:"code"`
+		Message  string              `json:"message"`
+		Data     QuerySubjectDetailData `json:"data"`
+	}
+		// 分页查询专题表列表
+	QuerySubjectListReq {
+		Current         int64  `form:"current,default=1"` //第几页
+		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
+		ShowStatus int32 `form:"showStatus,optional"` //显示状态：0->不显示；1->显示
+		Title string `form:"title,optional"` //
+		RecommendStatus int32 `json:"recommendStatus"` //
+
+	}
+	QuerySubjectListData {
+		AlbumPics string `json:"albumPics"` //画册图片用逗号分割
+		CategoryId int64 `json:"categoryId"` //
+		CategoryName string `json:"categoryName"` //专题分类名称
+		CollectCount int32 `json:"collectCount"` //
+		CommentCount int32 `json:"commentCount"` //
+		Content string `json:"content"` //
+		CreateBy string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		Description string `json:"description"` //
+		ForwardCount int32 `json:"forwardCount"` //转发数
+		Id int64 `json:"id"` //
+		Pic string `json:"pic"` //专题主图
+		ProductCount int32 `json:"productCount"` //关联产品数量
+		ReadCount int32 `json:"readCount"` //
+		RecommendStatus int32 `json:"recommendStatus"` //
+		ShowStatus int32 `json:"showStatus"` //显示状态：0->不显示；1->显示
+		Title string `json:"title"` //
+		UpdateBy string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+
+	}
+	QuerySubjectListResp {
+		Code     string              `json:"code"`
+		Message  string              `json:"message"`
+		Current  int64               `json:"current,default=1"`
+		Data     []*QuerySubjectListData `json:"data"`
+		PageSize int64               `json:"pageSize,default=20"`
+		Success  bool                `json:"success"`
+		Total    int64               `json:"total"`
+	}
 )
 
-@server (
+@server(
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      cms/subject
 	prefix:     /api/cms/subject
 )
 service admin-api {
-	//
-	@handler SubjectAdd
+	// 添加专题表
+	@handler AddSubject
 	post /addSubject (AddSubjectReq) returns (AddSubjectResp)
 
-	//获取商品专题
-	@handler SubjectList
-	get /querySubjectList (ListSubjectReq) returns (ListSubjectResp)
+	// 删除专题表
+	@handler DeleteSubject
+	get /deleteSubject (DeleteSubjectReq) returns (DeleteSubjectResp)
 
-	//
-	@handler SubjectUpdate
+	// 更新专题表
+	@handler UpdateSubject
 	post /updateSubject (UpdateSubjectReq) returns (UpdateSubjectResp)
 
-	//
-	@handler SubjectDelete
-	get /deleteSubject (DeleteSubjectReq) returns (DeleteSubjectResp)
-}
+	// 更新专题表状态
+	@handler UpdateSubjectStatus
+	post /updateSubjectStatus (UpdateSubjectStatusReq) returns (UpdateSubjectStatusResp)
 
+	// 查询专题表详情
+	@handler QuerySubjectDetail
+	get /querySubjectDetail (QuerySubjectDetailReq) returns (QuerySubjectDetailResp)
+
+	// 分页查询专题表列表
+	@handler QuerySubjectList
+	get /querySubjectList (QuerySubjectListReq) returns (QuerySubjectListResp)
+
+}

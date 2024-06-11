@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加专题分类表
+message AddSubjectCategoryReq {
+  string create_by = 1; //创建者
+  int32 subject_count = 2; //专题数量
+  string icon = 3; //分类图标
+  int32 sort = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+
+
+
+}
+
+message AddSubjectCategoryResp {
+  string pong = 1;
+}
+
+// 删除专题分类表
+message DeleteSubjectCategoryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteSubjectCategoryResp {
+  string pong = 1;
+}
+
+// 更新专题分类表
+message UpdateSubjectCategoryReq {
+  int32 subject_count = 1; //专题数量
+  string update_by = 2; //更新者
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+
+
+}
+
+message UpdateSubjectCategoryResp {
+  string pong = 1;
+}
+
+// 更新专题分类表状态
+message UpdateSubjectCategoryStatusReq {
+  repeated int64 ids = 1;
+  int32 show_status = 6; //
+
+}
+
+message UpdateSubjectCategoryStatusResp {
+  string pong = 1;
+}
+
+// 查询专题分类表详情
+message QuerySubjectCategoryDetailReq {
+    int64 id = 1;
+}
+
+message QuerySubjectCategoryDetailResp {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  int32 subject_count = 8; //专题数量
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询专题分类表列表
+message QuerySubjectCategoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string name = 3; //
+  int32 show_status = 4; //
+
+}
+
+message SubjectCategoryListData {
+  string create_by = 1; //创建者
+  string create_time = 2; //创建时间
+  string icon = 3; //分类图标
+  int64 id = 4; //
+  string name = 5; //
+  int32 show_status = 6; //
+  int32 sort = 7; //
+  int32 subject_count = 8; //专题数量
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
+}
+
+message QuerySubjectCategoryListResp {
+  int64 total = 1;
+  repeated  SubjectCategoryListData list = 2;
+}
+
+// 专题分类表
+service SubjectCategoryService {
+  // 添加专题分类表
+  rpc AddSubjectCategory(AddSubjectCategoryReq) returns (AddSubjectCategoryResp){}
+  // 删除专题分类表
+  rpc DeleteSubjectCategory(DeleteSubjectCategoryReq) returns (DeleteSubjectCategoryResp){}
+  // 更新专题分类表
+  rpc UpdateSubjectCategory(UpdateSubjectCategoryReq) returns (UpdateSubjectCategoryResp ){}
+  // 更新专题分类表状态
+  rpc UpdateSubjectCategoryStatus(UpdateSubjectCategoryStatusReq) returns (UpdateSubjectCategoryStatusResp ){}
+  // 查询专题分类表详情
+   rpc QuerySubjectCategoryDetail(QuerySubjectCategoryDetailReq) returns (QuerySubjectCategoryDetailResp){}
+  // 查询专题分类表列表
+  rpc QuerySubjectCategoryList(QuerySubjectCategoryListReq) returns (QuerySubjectCategoryListResp){}
+
+
+}
