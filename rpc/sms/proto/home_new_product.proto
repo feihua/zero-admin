@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加新鲜好物表
+message AddHomeNewProductReq {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+message AddHomeNewProductResp {
+  string pong = 1;
+}
+
+// 删除新鲜好物表
+message DeleteHomeNewProductReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteHomeNewProductResp {
+  string pong = 1;
+}
+
+// 更新新鲜好物表
+message UpdateHomeNewProductReq {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+message UpdateHomeNewProductResp {
+  string pong = 1;
+}
+
+// 更新新鲜好物表状态
+message UpdateHomeNewProductStatusReq {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+message UpdateHomeNewProductStatusResp {
+  string pong = 1;
+}
+
+// 查询新鲜好物表详情
+message QueryHomeNewProductDetailReq {
+    int64 id = 1;
+}
+
+message QueryHomeNewProductDetailResp {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+// 分页查询新鲜好物表列表
+message QueryHomeNewProductListReq {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message HomeNewProductListData {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+message QueryHomeNewProductListResp {
+  int64 total = 1;
+  repeated  HomeNewProductListData list = 2;
+}
+
+// 新鲜好物表
+service HomeNewProductService {
+  // 添加新鲜好物表
+  rpc AddHomeNewProduct(AddHomeNewProductReq) returns (AddHomeNewProductResp){}
+  // 删除新鲜好物表
+  rpc DeleteHomeNewProduct(DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp){}
+  // 更新新鲜好物表
+  rpc UpdateHomeNewProduct(UpdateHomeNewProductReq) returns (UpdateHomeNewProductResp ){}
+  // 更新新鲜好物表状态
+  rpc UpdateHomeNewProductStatus(UpdateHomeNewProductStatusReq) returns (UpdateHomeNewProductStatusResp ){}
+  // 查询新鲜好物表详情
+   rpc QueryHomeNewProductDetail(QueryHomeNewProductDetailReq) returns (QueryHomeNewProductDetailResp){}
+  // 查询新鲜好物表列表
+  rpc QueryHomeNewProductList(QueryHomeNewProductListReq) returns (QueryHomeNewProductListResp){}
+
+
+}

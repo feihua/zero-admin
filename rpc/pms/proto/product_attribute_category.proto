@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加产品属性分类表
+message AddProductAttributeCategoryReq {
+  int32 attribute_count = 1; //属性数量
+  int64 id = 2; //
+  string name = 3; //
+  int32 param_count = 4; //参数数量
+
+}
+
+message AddProductAttributeCategoryResp {
+  string pong = 1;
+}
+
+// 删除产品属性分类表
+message DeleteProductAttributeCategoryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductAttributeCategoryResp {
+  string pong = 1;
+}
+
+// 更新产品属性分类表
+message UpdateProductAttributeCategoryReq {
+  int32 attribute_count = 1; //属性数量
+  int64 id = 2; //
+  string name = 3; //
+  int32 param_count = 4; //参数数量
+
+}
+
+message UpdateProductAttributeCategoryResp {
+  string pong = 1;
+}
+
+// 更新产品属性分类表状态
+message UpdateProductAttributeCategoryStatusReq {
+  int32 attribute_count = 1; //属性数量
+  int64 id = 2; //
+  string name = 3; //
+  int32 param_count = 4; //参数数量
+
+}
+
+message UpdateProductAttributeCategoryStatusResp {
+  string pong = 1;
+}
+
+// 查询产品属性分类表详情
+message QueryProductAttributeCategoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductAttributeCategoryDetailResp {
+  int32 attribute_count = 1; //属性数量
+  int64 id = 2; //
+  string name = 3; //
+  int32 param_count = 4; //参数数量
+
+}
+
+// 分页查询产品属性分类表列表
+message QueryProductAttributeCategoryListReq {
+  int32 attribute_count = 1; //属性数量
+  int64 id = 2; //
+  string name = 3; //
+  int32 param_count = 4; //参数数量
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message ProductAttributeCategoryListData {
+  int32 attribute_count = 1; //属性数量
+  int64 id = 2; //
+  string name = 3; //
+  int32 param_count = 4; //参数数量
+
+}
+
+message QueryProductAttributeCategoryListResp {
+  int64 total = 1;
+  repeated  ProductAttributeCategoryListData list = 2;
+}
+
+// 产品属性分类表
+service ProductAttributeCategoryService {
+  // 添加产品属性分类表
+  rpc AddProductAttributeCategory(AddProductAttributeCategoryReq) returns (AddProductAttributeCategoryResp){}
+  // 删除产品属性分类表
+  rpc DeleteProductAttributeCategory(DeleteProductAttributeCategoryReq) returns (DeleteProductAttributeCategoryResp){}
+  // 更新产品属性分类表
+  rpc UpdateProductAttributeCategory(UpdateProductAttributeCategoryReq) returns (UpdateProductAttributeCategoryResp ){}
+  // 更新产品属性分类表状态
+  rpc UpdateProductAttributeCategoryStatus(UpdateProductAttributeCategoryStatusReq) returns (UpdateProductAttributeCategoryStatusResp ){}
+  // 查询产品属性分类表详情
+   rpc QueryProductAttributeCategoryDetail(QueryProductAttributeCategoryDetailReq) returns (QueryProductAttributeCategoryDetailResp){}
+  // 查询产品属性分类表列表
+  rpc QueryProductAttributeCategoryList(QueryProductAttributeCategoryListReq) returns (QueryProductAttributeCategoryListResp){}
+
+
+}

@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加订单中所包含的商品
+message AddOrderItemReq {
+  int64 coupon_amount = 1; //优惠券优惠分解金额
+  int32 gift_growth = 2; //
+  int32 gift_integration = 3; //
+  int64 real_amount = 4; //该商品经过优惠后的分解金额
+  int64 integration_amount = 5; //积分优惠分解金额
+  int64 order_id = 6; //订单id
+  string order_sn = 7; //订单编号
+  string product_attr = 8; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_brand = 9; //商品品牌
+  int64 product_category_id = 10; //商品分类id
+  int64 product_id = 11; //商品id
+  string product_name = 12; //商品名称
+  string product_pic = 13; //商品图片
+  int64 product_price = 14; //销售价格
+  int32 product_quantity = 15; //购买数量
+  string product_sku_code = 16; //商品sku条码
+  int64 product_sku_id = 17; //商品sku编号
+  string product_sn = 18; //货号
+  int64 promotion_amount = 19; //商品促销分解金额
+  string promotion_name = 20; //商品促销名称
+
+}
+
+message AddOrderItemResp {
+  string pong = 1;
+}
+
+// 查询订单中所包含的商品详情
+message QueryOrderItemDetailReq {
+    int64 id = 1;
+}
+
+message QueryOrderItemDetailResp {
+  int64 coupon_amount = 1; //优惠券优惠分解金额
+  int32 gift_growth = 2; //
+  int32 gift_integration = 3; //
+  int64 id = 4; //
+  int64 integration_amount = 5; //积分优惠分解金额
+  int64 order_id = 6; //订单id
+  string order_sn = 7; //订单编号
+  string product_attr = 8; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_brand = 9; //商品品牌
+  int64 product_category_id = 10; //商品分类id
+  int64 product_id = 11; //商品id
+  string product_name = 12; //商品名称
+  string product_pic = 13; //商品图片
+  int64 product_price = 14; //销售价格
+  int32 product_quantity = 15; //购买数量
+  string product_sku_code = 16; //商品sku条码
+  int64 product_sku_id = 17; //商品sku编号
+  string product_sn = 18; //货号
+  int64 promotion_amount = 19; //商品促销分解金额
+  string promotion_name = 20; //商品促销名称
+  int64 real_amount = 21; //该商品经过优惠后的分解金额
+
+}
+
+// 分页查询订单中所包含的商品列表
+message QueryOrderItemListReq {
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message OrderItemListData {
+  int64 coupon_amount = 1; //优惠券优惠分解金额
+  int32 gift_growth = 2; //
+  int32 gift_integration = 3; //
+  int64 id = 4; //
+  int64 integration_amount = 5; //积分优惠分解金额
+  int64 order_id = 6; //订单id
+  string order_sn = 7; //订单编号
+  string product_attr = 8; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_brand = 9; //商品品牌
+  int64 product_category_id = 10; //商品分类id
+  int64 product_id = 11; //商品id
+  string product_name = 12; //商品名称
+  string product_pic = 13; //商品图片
+  int64 product_price = 14; //销售价格
+  int32 product_quantity = 15; //购买数量
+  string product_sku_code = 16; //商品sku条码
+  int64 product_sku_id = 17; //商品sku编号
+  string product_sn = 18; //货号
+  int64 promotion_amount = 19; //商品促销分解金额
+  string promotion_name = 20; //商品促销名称
+  int64 real_amount = 21; //该商品经过优惠后的分解金额
+
+}
+
+message QueryOrderItemListResp {
+  int64 total = 1;
+  repeated  OrderItemListData list = 2;
+}
+
+// 订单中所包含的商品
+service OrderItemService {
+  // 添加订单中所包含的商品
+  rpc AddOrderItem(AddOrderItemReq) returns (AddOrderItemResp){}
+  // 查询订单中所包含的商品详情
+   rpc QueryOrderItemDetail(QueryOrderItemDetailReq) returns (QueryOrderItemDetailResp){}
+  // 查询订单中所包含的商品列表
+  rpc QueryOrderItemList(QueryOrderItemListReq) returns (QueryOrderItemListResp){}
+
+
+}

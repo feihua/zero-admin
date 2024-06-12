@@ -69,7 +69,7 @@ func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAdd
 }
 
 // 2.构建下单商品信息
-func buildOrderItem(l *OrderAddLogic, orderItem *omsclient.OrderItemListData) {
+func buildOrderItem(l *OrderAddLogic, orderItem *omsclient.OrderItemData) {
 	err := query.OmsOrderItem.WithContext(l.ctx).Create(&model.OmsOrderItem{
 		OrderID:           0,
 		OrderSn:           "",
@@ -139,10 +139,5 @@ func buildOrderInfo(in *omsclient.OrderAddReq) *model.OmsOrder {
 		ConfirmStatus:         in.ConfirmStatus,
 		DeleteStatus:          in.DeleteStatus,
 		UseIntegration:        in.UseIntegration,
-		PaymentTime:           time.Now(),
-		DeliveryTime:          time.Now(),
-		ReceiveTime:           time.Now(),
-		CommentTime:           time.Now(),
-		ModifyTime:            time.Now(),
 	}
 }

@@ -15,7 +15,7 @@ type OmsOrderOperateHistory struct {
 	ID          int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	OrderID     int64     `gorm:"column:order_id;not null;comment:订单id" json:"order_id"`                                                    // 订单id
 	OperateMan  string    `gorm:"column:operate_man;not null;comment:操作人：用户；系统；后台管理员" json:"operate_man"`                                   // 操作人：用户；系统；后台管理员
-	CreateTime  time.Time `gorm:"column:create_time;not null;comment:操作时间" json:"create_time"`                                              // 操作时间
+	CreateTime  time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`                    // 创建时间
 	OrderStatus int32     `gorm:"column:order_status;not null;comment:订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单" json:"order_status"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 	Note        *string   `gorm:"column:note;comment:备注" json:"note"`                                                                       // 备注
 }

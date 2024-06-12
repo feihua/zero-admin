@@ -5,7 +5,7 @@ create table oms_order_return_reason
     name        varchar(100) not null comment '退货类型',
     sort        int          not null comment '排序',
     status tinyint not null comment '状态：0->不启用；1->启用',
-    create_time datetime     not null comment '添加时间'
+    create_time datetime     default CURRENT_TIMESTAMP not null comment '创建时间'
 )
     comment '退货原因表';
 

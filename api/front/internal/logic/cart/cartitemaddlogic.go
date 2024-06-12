@@ -33,7 +33,7 @@ func NewCartItemAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartI
 // CartItemAdd 添加商品进购物车
 func (l *CartItemAddLogic) CartItemAdd(req *types.CartItemAddReq) (resp *types.CartItemAddResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.CartItemService.CartItemAdd(l.ctx, &omsclient.CartItemAddReq{
+	_, _ = l.svcCtx.CartItemService.AddCartItem(l.ctx, &omsclient.AddCartItemReq{
 		ProductId:         req.ProductId,
 		ProductSkuId:      req.ProductSkuId,
 		MemberId:          memberId,

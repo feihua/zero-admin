@@ -47,7 +47,7 @@ type omsOrderReturnReason struct {
 	Name       field.String // 退货类型
 	Sort       field.Int32  // 排序
 	Status     field.Int32  // 状态：0->不启用；1->启用
-	CreateTime field.Time   // 添加时间
+	CreateTime field.Time   // 创建时间
 
 	fieldMap map[string]field.Expr
 }

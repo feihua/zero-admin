@@ -109,11 +109,11 @@ func (l *QueryOrderListLogic) QueryOrderList(in *omsclient.QueryOrderListReq) (*
 
 }
 
-func queryItems(l *QueryOrderListLogic, OrderId int64) []*omsclient.OrderItemListData {
+func queryItems(l *QueryOrderListLogic, OrderId int64) []*omsclient.OrderItemData {
 	result, _ := query.OmsOrderItem.WithContext(l.ctx).Where(query.OmsOrderItem.OrderID.Eq(OrderId)).Find()
-	var itemListData []*omsclient.OrderItemListData
+	var itemListData []*omsclient.OrderItemData
 	for _, item := range result {
-		itemListData = append(itemListData, &omsclient.OrderItemListData{
+		itemListData = append(itemListData, &omsclient.OrderItemData{
 			Id:                item.ID,
 			OrderId:           item.OrderID,
 			OrderSn:           item.OrderSn,

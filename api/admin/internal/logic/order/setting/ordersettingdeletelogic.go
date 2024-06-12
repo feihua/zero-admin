@@ -33,7 +33,7 @@ func NewOrderSettingDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // OrderSettingDelete 删除订单设置
 func (l *OrderSettingDeleteLogic) OrderSettingDelete(req types.DeleteOrderSettingReq) (*types.DeleteOrderSettingResp, error) {
-	_, err := l.svcCtx.OrderSettingService.OrderSettingDelete(l.ctx, &omsclient.OrderSettingDeleteReq{
+	_, err := l.svcCtx.OrderSettingService.DeleteOrderSetting(l.ctx, &omsclient.DeleteOrderSettingReq{
 		Ids: req.Ids,
 	})
 

@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加首页推荐品牌表
+message AddHomeBrandReq {
+  int64 brand_id = 1; //商品品牌id
+  string brand_name = 2; //商品品牌名称
+  int64 id = 3; //
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+message AddHomeBrandResp {
+  string pong = 1;
+}
+
+// 删除首页推荐品牌表
+message DeleteHomeBrandReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteHomeBrandResp {
+  string pong = 1;
+}
+
+// 更新首页推荐品牌表
+message UpdateHomeBrandReq {
+  int64 brand_id = 1; //商品品牌id
+  string brand_name = 2; //商品品牌名称
+  int64 id = 3; //
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+message UpdateHomeBrandResp {
+  string pong = 1;
+}
+
+// 更新首页推荐品牌表状态
+message UpdateHomeBrandStatusReq {
+  int64 brand_id = 1; //商品品牌id
+  string brand_name = 2; //商品品牌名称
+  int64 id = 3; //
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+message UpdateHomeBrandStatusResp {
+  string pong = 1;
+}
+
+// 查询首页推荐品牌表详情
+message QueryHomeBrandDetailReq {
+    int64 id = 1;
+}
+
+message QueryHomeBrandDetailResp {
+  int64 brand_id = 1; //商品品牌id
+  string brand_name = 2; //商品品牌名称
+  int64 id = 3; //
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+// 分页查询首页推荐品牌表列表
+message QueryHomeBrandListReq {
+  int64 brand_id = 1; //商品品牌id
+  string brand_name = 2; //商品品牌名称
+  int64 id = 3; //
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message HomeBrandListData {
+  int64 brand_id = 1; //商品品牌id
+  string brand_name = 2; //商品品牌名称
+  int64 id = 3; //
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+message QueryHomeBrandListResp {
+  int64 total = 1;
+  repeated  HomeBrandListData list = 2;
+}
+
+// 首页推荐品牌表
+service HomeBrandService {
+  // 添加首页推荐品牌表
+  rpc AddHomeBrand(AddHomeBrandReq) returns (AddHomeBrandResp){}
+  // 删除首页推荐品牌表
+  rpc DeleteHomeBrand(DeleteHomeBrandReq) returns (DeleteHomeBrandResp){}
+  // 更新首页推荐品牌表
+  rpc UpdateHomeBrand(UpdateHomeBrandReq) returns (UpdateHomeBrandResp ){}
+  // 更新首页推荐品牌表状态
+  rpc UpdateHomeBrandStatus(UpdateHomeBrandStatusReq) returns (UpdateHomeBrandStatusResp ){}
+  // 查询首页推荐品牌表详情
+   rpc QueryHomeBrandDetail(QueryHomeBrandDetailReq) returns (QueryHomeBrandDetailResp){}
+  // 查询首页推荐品牌表列表
+  rpc QueryHomeBrandList(QueryHomeBrandListReq) returns (QueryHomeBrandListResp){}
+
+
+}

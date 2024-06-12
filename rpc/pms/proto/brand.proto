@@ -1,0 +1,179 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加品牌表
+message AddBrandReq {
+  string big_pic = 1; //专区大图
+  string brand_story = 2; //品牌故事
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
+  string first_letter = 6; //首字母
+  int64 id = 7; //
+  string logo = 8; //品牌logo
+  string name = 9; //品牌名称
+  int32 product_comment_count = 10; //产品评论数量
+  int32 product_count = 11; //产品数量
+  int32 recommend_status = 12; //推荐状态
+  int32 show_status = 13; //品牌显示状态
+  int32 sort = 14; //排序
+  string update_by = 15; //更新者
+  string update_time = 16; //更新时间
+
+}
+
+message AddBrandResp {
+  string pong = 1;
+}
+
+// 删除品牌表
+message DeleteBrandReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteBrandResp {
+  string pong = 1;
+}
+
+// 更新品牌表
+message UpdateBrandReq {
+  string big_pic = 1; //专区大图
+  string brand_story = 2; //品牌故事
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
+  string first_letter = 6; //首字母
+  int64 id = 7; //
+  string logo = 8; //品牌logo
+  string name = 9; //品牌名称
+  int32 product_comment_count = 10; //产品评论数量
+  int32 product_count = 11; //产品数量
+  int32 recommend_status = 12; //推荐状态
+  int32 show_status = 13; //品牌显示状态
+  int32 sort = 14; //排序
+  string update_by = 15; //更新者
+  string update_time = 16; //更新时间
+
+}
+
+message UpdateBrandResp {
+  string pong = 1;
+}
+
+// 更新品牌表状态
+message UpdateBrandStatusReq {
+  string big_pic = 1; //专区大图
+  string brand_story = 2; //品牌故事
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
+  string first_letter = 6; //首字母
+  int64 id = 7; //
+  string logo = 8; //品牌logo
+  string name = 9; //品牌名称
+  int32 product_comment_count = 10; //产品评论数量
+  int32 product_count = 11; //产品数量
+  int32 recommend_status = 12; //推荐状态
+  int32 show_status = 13; //品牌显示状态
+  int32 sort = 14; //排序
+  string update_by = 15; //更新者
+  string update_time = 16; //更新时间
+
+}
+
+message UpdateBrandStatusResp {
+  string pong = 1;
+}
+
+// 查询品牌表详情
+message QueryBrandDetailReq {
+    int64 id = 1;
+}
+
+message QueryBrandDetailResp {
+  string big_pic = 1; //专区大图
+  string brand_story = 2; //品牌故事
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
+  string first_letter = 6; //首字母
+  int64 id = 7; //
+  string logo = 8; //品牌logo
+  string name = 9; //品牌名称
+  int32 product_comment_count = 10; //产品评论数量
+  int32 product_count = 11; //产品数量
+  int32 recommend_status = 12; //推荐状态
+  int32 show_status = 13; //品牌显示状态
+  int32 sort = 14; //排序
+  string update_by = 15; //更新者
+  string update_time = 16; //更新时间
+
+}
+
+// 分页查询品牌表列表
+message QueryBrandListReq {
+  string big_pic = 1; //专区大图
+  string brand_story = 2; //品牌故事
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
+  string first_letter = 6; //首字母
+  int64 id = 7; //
+  string logo = 8; //品牌logo
+  string name = 9; //品牌名称
+  int32 product_comment_count = 10; //产品评论数量
+  int32 product_count = 11; //产品数量
+  int32 recommend_status = 12; //推荐状态
+  int32 show_status = 13; //品牌显示状态
+  int32 sort = 14; //排序
+  string update_by = 15; //更新者
+  string update_time = 16; //更新时间
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message BrandListData {
+  string big_pic = 1; //专区大图
+  string brand_story = 2; //品牌故事
+  string create_by = 3; //创建者
+  string create_time = 4; //创建时间
+  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
+  string first_letter = 6; //首字母
+  int64 id = 7; //
+  string logo = 8; //品牌logo
+  string name = 9; //品牌名称
+  int32 product_comment_count = 10; //产品评论数量
+  int32 product_count = 11; //产品数量
+  int32 recommend_status = 12; //推荐状态
+  int32 show_status = 13; //品牌显示状态
+  int32 sort = 14; //排序
+  string update_by = 15; //更新者
+  string update_time = 16; //更新时间
+
+}
+
+message QueryBrandListResp {
+  int64 total = 1;
+  repeated  BrandListData list = 2;
+}
+
+// 品牌表
+service BrandService {
+  // 添加品牌表
+  rpc AddBrand(AddBrandReq) returns (AddBrandResp){}
+  // 删除品牌表
+  rpc DeleteBrand(DeleteBrandReq) returns (DeleteBrandResp){}
+  // 更新品牌表
+  rpc UpdateBrand(UpdateBrandReq) returns (UpdateBrandResp ){}
+  // 更新品牌表状态
+  rpc UpdateBrandStatus(UpdateBrandStatusReq) returns (UpdateBrandStatusResp ){}
+  // 查询品牌表详情
+   rpc QueryBrandDetail(QueryBrandDetailReq) returns (QueryBrandDetailResp){}
+  // 查询品牌表列表
+  rpc QueryBrandList(QueryBrandListReq) returns (QueryBrandListResp){}
+
+
+}

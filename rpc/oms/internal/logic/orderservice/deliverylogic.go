@@ -43,7 +43,8 @@ func (l *DeliveryLogic) Delivery(in *omsclient.DeliveryReq) (*omsclient.Delivery
 	order.Status = 2
 	order.DeliveryCompany = in.DeliveryCompany
 	order.DeliverySn = in.DeliverySn
-	order.DeliveryTime = time.Now()
+	now := time.Now()
+	order.DeliveryTime = &now
 
 	_, err = q.WithContext(l.ctx).Updates(order)
 
@@ -56,7 +57,7 @@ func (l *DeliveryLogic) Delivery(in *omsclient.DeliveryReq) (*omsclient.Delivery
 	err = query.OmsOrderOperateHistory.WithContext(l.ctx).Create(&model.OmsOrderOperateHistory{
 		OrderID:     in.OrderId,
 		OperateMan:  in.OperateMan,
-		CreateTime:  time.Now(),
+		CreateTime:  now,
 		OrderStatus: 2,
 		Note:        &note,
 	})

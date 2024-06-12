@@ -32,7 +32,7 @@ func NewReturnResonDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // ReturnResonDelete 删除退货原因
 func (l *ReturnResonDeleteLogic) ReturnResonDelete(req types.DeleteReturnResonReq) (*types.DeleteReturnResonResp, error) {
-	_, err := l.svcCtx.OrderReturnReasonService.OrderReturnReasonDelete(l.ctx, &omsclient.OrderReturnReasonDeleteReq{
+	_, err := l.svcCtx.OrderReturnReasonService.DeleteOrderReturnReason(l.ctx, &omsclient.DeleteOrderReturnReasonReq{
 		Ids: req.Ids,
 	})
 

@@ -36,7 +36,8 @@ func (l *OrderUpdateLogic) OrderUpdate(in *omsclient.OrderUpdateReq) (*omsclient
 	order.Status = in.Status
 	order.DeliveryCompany = in.DeliveryCompany
 	order.DeliverySn = in.DeliverySn
-	order.DeliveryTime = time.Now()
+	now := time.Now()
+	order.DeliveryTime = &now
 	order.Note = in.Note
 
 	_, err = q.WithContext(l.ctx).Updates(order)

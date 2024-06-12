@@ -70,7 +70,7 @@ func (l *CarItemtListPromotionLogic) CarItemtListPromotion(req *types.CarItemLis
 func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.ServiceContext) []types.CarItemtPromotionListData {
 	//1.获取会员购物车里面所有商品信息(根据会员id查询购物车所有商品,(表：oms_cart))
 	memberId, _ := ctx.Value("memberId").(json.Number).Int64()
-	cartItemListResp, _ := svcCtx.CartItemService.CartItemList(ctx, &omsclient.CartItemListReq{MemberId: memberId})
+	cartItemListResp, _ := svcCtx.CartItemService.QueryCartItemList(ctx, &omsclient.QueryCartItemListReq{MemberId: memberId})
 
 	//2.判断是否会员选中购物车中的商品,如果没有就是会员购物车中所有有商品进行计算
 	cartItemListData := cartItemListResp.List

@@ -4,7 +4,7 @@ create table oms_order_operate_history
         primary key,
     order_id     bigint       not null comment '订单id',
     operate_man  varchar(100) not null comment '操作人：用户；系统；后台管理员',
-    create_time  datetime     not null comment '操作时间',
+    create_time datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
     order_status tinyint not null comment '订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单',
     note         varchar(500) null comment '备注'
 )

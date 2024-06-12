@@ -33,8 +33,8 @@ func NewOrderSettingListLogic(ctx context.Context, svcCtx *svc.ServiceContext) O
 
 // OrderSettingList 查询订单设置
 func (l *OrderSettingListLogic) OrderSettingList(req types.ListOrderSettingReq) (*types.ListOrderSettingResp, error) {
-	resp, err := l.svcCtx.OrderSettingService.OrderSettingList(l.ctx, &omsclient.OrderSettingListReq{
-		Current:  req.Current,
+	resp, err := l.svcCtx.OrderSettingService.QueryOrderSettingList(l.ctx, &omsclient.QueryOrderSettingListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 	})
 

@@ -32,7 +32,7 @@ func NewReturnApplyDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // ReturnApplyDelete 删除订单退货申请
 func (l *ReturnApplyDeleteLogic) ReturnApplyDelete(req types.DeleteReturnApplyReq) (*types.DeleteReturnApplyResp, error) {
-	_, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyDelete(l.ctx, &omsclient.OrderReturnApplyDeleteReq{
+	_, err := l.svcCtx.OrderReturnApplyService.DeleteOrderReturnApply(l.ctx, &omsclient.DeleteOrderReturnApplyReq{
 		Ids: req.Ids,
 	})
 

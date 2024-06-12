@@ -13,28 +13,36 @@ import (
 )
 
 type (
-	CartItemAddReq                    = omsclient.CartItemAddReq
-	CartItemAddResp                   = omsclient.CartItemAddResp
-	CartItemClearReq                  = omsclient.CartItemClearReq
-	CartItemClearResp                 = omsclient.CartItemClearResp
-	CartItemDeleteReq                 = omsclient.CartItemDeleteReq
-	CartItemDeleteResp                = omsclient.CartItemDeleteResp
+	AddCartItemReq                    = omsclient.AddCartItemReq
+	AddCartItemResp                   = omsclient.AddCartItemResp
+	AddCompanyAddressReq              = omsclient.AddCompanyAddressReq
+	AddCompanyAddressResp             = omsclient.AddCompanyAddressResp
+	AddOrderItemReq                   = omsclient.AddOrderItemReq
+	AddOrderItemResp                  = omsclient.AddOrderItemResp
+	AddOrderOperateHistoryReq         = omsclient.AddOrderOperateHistoryReq
+	AddOrderOperateHistoryResp        = omsclient.AddOrderOperateHistoryResp
+	AddOrderReturnApplyReq            = omsclient.AddOrderReturnApplyReq
+	AddOrderReturnApplyResp           = omsclient.AddOrderReturnApplyResp
+	AddOrderReturnReasonReq           = omsclient.AddOrderReturnReasonReq
+	AddOrderReturnReasonResp          = omsclient.AddOrderReturnReasonResp
+	AddOrderSettingReq                = omsclient.AddOrderSettingReq
+	AddOrderSettingResp               = omsclient.AddOrderSettingResp
 	CartItemListData                  = omsclient.CartItemListData
-	CartItemListReq                   = omsclient.CartItemListReq
-	CartItemListResp                  = omsclient.CartItemListResp
-	CartItemUpdateReq                 = omsclient.CartItemUpdateReq
-	CartItemUpdateResp                = omsclient.CartItemUpdateResp
 	CloseOrderReq                     = omsclient.CloseOrderReq
 	CloseOrderResp                    = omsclient.CloseOrderResp
-	CompanyAddressAddReq              = omsclient.CompanyAddressAddReq
-	CompanyAddressAddResp             = omsclient.CompanyAddressAddResp
-	CompanyAddressDeleteReq           = omsclient.CompanyAddressDeleteReq
-	CompanyAddressDeleteResp          = omsclient.CompanyAddressDeleteResp
 	CompanyAddressListData            = omsclient.CompanyAddressListData
-	CompanyAddressListReq             = omsclient.CompanyAddressListReq
-	CompanyAddressListResp            = omsclient.CompanyAddressListResp
-	CompanyAddressUpdateReq           = omsclient.CompanyAddressUpdateReq
-	CompanyAddressUpdateResp          = omsclient.CompanyAddressUpdateResp
+	DeleteCartItemReq                 = omsclient.DeleteCartItemReq
+	DeleteCartItemResp                = omsclient.DeleteCartItemResp
+	DeleteCompanyAddressReq           = omsclient.DeleteCompanyAddressReq
+	DeleteCompanyAddressResp          = omsclient.DeleteCompanyAddressResp
+	DeleteOrderOperateHistoryReq      = omsclient.DeleteOrderOperateHistoryReq
+	DeleteOrderOperateHistoryResp     = omsclient.DeleteOrderOperateHistoryResp
+	DeleteOrderReturnApplyReq         = omsclient.DeleteOrderReturnApplyReq
+	DeleteOrderReturnApplyResp        = omsclient.DeleteOrderReturnApplyResp
+	DeleteOrderReturnReasonReq        = omsclient.DeleteOrderReturnReasonReq
+	DeleteOrderReturnReasonResp       = omsclient.DeleteOrderReturnReasonResp
+	DeleteOrderSettingReq             = omsclient.DeleteOrderSettingReq
+	DeleteOrderSettingResp            = omsclient.DeleteOrderSettingResp
 	DeliveryReq                       = omsclient.DeliveryReq
 	DeliveryResp                      = omsclient.DeliveryResp
 	OrderAddReq                       = omsclient.OrderAddReq
@@ -48,81 +56,86 @@ type (
 	OrderDeleteResp                   = omsclient.OrderDeleteResp
 	OrderDetailReq                    = omsclient.OrderDetailReq
 	OrderDetailResp                   = omsclient.OrderDetailResp
-	OrderItemAddReq                   = omsclient.OrderItemAddReq
-	OrderItemAddResp                  = omsclient.OrderItemAddResp
-	OrderItemDeleteReq                = omsclient.OrderItemDeleteReq
-	OrderItemDeleteResp               = omsclient.OrderItemDeleteResp
+	OrderItemData                     = omsclient.OrderItemData
 	OrderItemListData                 = omsclient.OrderItemListData
-	OrderItemListReq                  = omsclient.OrderItemListReq
-	OrderItemListResp                 = omsclient.OrderItemListResp
-	OrderItemUpdateReq                = omsclient.OrderItemUpdateReq
-	OrderItemUpdateResp               = omsclient.OrderItemUpdateResp
 	OrderListByMemberIdReq            = omsclient.OrderListByMemberIdReq
 	OrderListByMemberIdResp           = omsclient.OrderListByMemberIdResp
 	OrderListData                     = omsclient.OrderListData
 	OrderListReq                      = omsclient.OrderListReq
 	OrderListResp                     = omsclient.OrderListResp
-	OrderOperateHistoryAddReq         = omsclient.OrderOperateHistoryAddReq
-	OrderOperateHistoryAddResp        = omsclient.OrderOperateHistoryAddResp
-	OrderOperateHistoryDeleteReq      = omsclient.OrderOperateHistoryDeleteReq
-	OrderOperateHistoryDeleteResp     = omsclient.OrderOperateHistoryDeleteResp
+	OrderOperateHistoryData           = omsclient.OrderOperateHistoryData
 	OrderOperateHistoryListData       = omsclient.OrderOperateHistoryListData
-	OrderOperateHistoryListReq        = omsclient.OrderOperateHistoryListReq
-	OrderOperateHistoryListResp       = omsclient.OrderOperateHistoryListResp
-	OrderOperateHistoryUpdateReq      = omsclient.OrderOperateHistoryUpdateReq
-	OrderOperateHistoryUpdateResp     = omsclient.OrderOperateHistoryUpdateResp
 	OrderRefundReq                    = omsclient.OrderRefundReq
 	OrderRefundResp                   = omsclient.OrderRefundResp
-	OrderReturnApplyAddReq            = omsclient.OrderReturnApplyAddReq
-	OrderReturnApplyAddResp           = omsclient.OrderReturnApplyAddResp
-	OrderReturnApplyDeleteReq         = omsclient.OrderReturnApplyDeleteReq
-	OrderReturnApplyDeleteResp        = omsclient.OrderReturnApplyDeleteResp
 	OrderReturnApplyListData          = omsclient.OrderReturnApplyListData
-	OrderReturnApplyListReq           = omsclient.OrderReturnApplyListReq
-	OrderReturnApplyListResp          = omsclient.OrderReturnApplyListResp
-	OrderReturnApplyUpdateReq         = omsclient.OrderReturnApplyUpdateReq
-	OrderReturnApplyUpdateResp        = omsclient.OrderReturnApplyUpdateResp
-	OrderReturnReasonAddReq           = omsclient.OrderReturnReasonAddReq
-	OrderReturnReasonAddResp          = omsclient.OrderReturnReasonAddResp
-	OrderReturnReasonDeleteReq        = omsclient.OrderReturnReasonDeleteReq
-	OrderReturnReasonDeleteResp       = omsclient.OrderReturnReasonDeleteResp
 	OrderReturnReasonListData         = omsclient.OrderReturnReasonListData
-	OrderReturnReasonListReq          = omsclient.OrderReturnReasonListReq
-	OrderReturnReasonListResp         = omsclient.OrderReturnReasonListResp
-	OrderReturnReasonUpdateReq        = omsclient.OrderReturnReasonUpdateReq
-	OrderReturnReasonUpdateResp       = omsclient.OrderReturnReasonUpdateResp
-	OrderReturnReasonUpdateStatusReq  = omsclient.OrderReturnReasonUpdateStatusReq
-	OrderSettingAddReq                = omsclient.OrderSettingAddReq
-	OrderSettingAddResp               = omsclient.OrderSettingAddResp
-	OrderSettingDeleteReq             = omsclient.OrderSettingDeleteReq
-	OrderSettingDeleteResp            = omsclient.OrderSettingDeleteResp
 	OrderSettingListData              = omsclient.OrderSettingListData
-	OrderSettingListReq               = omsclient.OrderSettingListReq
-	OrderSettingListResp              = omsclient.OrderSettingListResp
-	OrderSettingUpdateReq             = omsclient.OrderSettingUpdateReq
-	OrderSettingUpdateResp            = omsclient.OrderSettingUpdateResp
 	OrderUpdateReq                    = omsclient.OrderUpdateReq
 	OrderUpdateResp                   = omsclient.OrderUpdateResp
+	QueryCartItemDetailReq            = omsclient.QueryCartItemDetailReq
+	QueryCartItemDetailResp           = omsclient.QueryCartItemDetailResp
+	QueryCartItemListReq              = omsclient.QueryCartItemListReq
+	QueryCartItemListResp             = omsclient.QueryCartItemListResp
+	QueryCompanyAddressDetailReq      = omsclient.QueryCompanyAddressDetailReq
+	QueryCompanyAddressDetailResp     = omsclient.QueryCompanyAddressDetailResp
+	QueryCompanyAddressListReq        = omsclient.QueryCompanyAddressListReq
+	QueryCompanyAddressListResp       = omsclient.QueryCompanyAddressListResp
+	QueryOrderItemDetailReq           = omsclient.QueryOrderItemDetailReq
+	QueryOrderItemDetailResp          = omsclient.QueryOrderItemDetailResp
+	QueryOrderItemListReq             = omsclient.QueryOrderItemListReq
+	QueryOrderItemListResp            = omsclient.QueryOrderItemListResp
 	QueryOrderListReq                 = omsclient.QueryOrderListReq
+	QueryOrderOperateHistoryListReq   = omsclient.QueryOrderOperateHistoryListReq
+	QueryOrderOperateHistoryListResp  = omsclient.QueryOrderOperateHistoryListResp
+	QueryOrderReturnApplyDetailReq    = omsclient.QueryOrderReturnApplyDetailReq
+	QueryOrderReturnApplyDetailResp   = omsclient.QueryOrderReturnApplyDetailResp
+	QueryOrderReturnApplyListReq      = omsclient.QueryOrderReturnApplyListReq
+	QueryOrderReturnApplyListResp     = omsclient.QueryOrderReturnApplyListResp
+	QueryOrderReturnReasonDetailReq   = omsclient.QueryOrderReturnReasonDetailReq
+	QueryOrderReturnReasonDetailResp  = omsclient.QueryOrderReturnReasonDetailResp
+	QueryOrderReturnReasonListReq     = omsclient.QueryOrderReturnReasonListReq
+	QueryOrderReturnReasonListResp    = omsclient.QueryOrderReturnReasonListResp
+	QueryOrderSettingDetailReq        = omsclient.QueryOrderSettingDetailReq
+	QueryOrderSettingDetailResp       = omsclient.QueryOrderSettingDetailResp
+	QueryOrderSettingListReq          = omsclient.QueryOrderSettingListReq
+	QueryOrderSettingListResp         = omsclient.QueryOrderSettingListResp
 	ReleaseSkuStockLockData           = omsclient.ReleaseSkuStockLockData
+	UpdateCartItemQuantityReq         = omsclient.UpdateCartItemQuantityReq
+	UpdateCartItemQuantityResp        = omsclient.UpdateCartItemQuantityResp
+	UpdateCartItemReq                 = omsclient.UpdateCartItemReq
+	UpdateCartItemResp                = omsclient.UpdateCartItemResp
+	UpdateCompanyAddressReq           = omsclient.UpdateCompanyAddressReq
+	UpdateCompanyAddressResp          = omsclient.UpdateCompanyAddressResp
+	UpdateCompanyAddressStatusReq     = omsclient.UpdateCompanyAddressStatusReq
+	UpdateCompanyAddressStatusResp    = omsclient.UpdateCompanyAddressStatusResp
 	UpdateMoneyInfoReq                = omsclient.UpdateMoneyInfoReq
 	UpdateMoneyInfoResp               = omsclient.UpdateMoneyInfoResp
 	UpdateNoteReq                     = omsclient.UpdateNoteReq
 	UpdateNoteResp                    = omsclient.UpdateNoteResp
+	UpdateOrderReturnApplyReq         = omsclient.UpdateOrderReturnApplyReq
+	UpdateOrderReturnApplyResp        = omsclient.UpdateOrderReturnApplyResp
+	UpdateOrderReturnReasonReq        = omsclient.UpdateOrderReturnReasonReq
+	UpdateOrderReturnReasonResp       = omsclient.UpdateOrderReturnReasonResp
+	UpdateOrderReturnReasonStatusReq  = omsclient.UpdateOrderReturnReasonStatusReq
+	UpdateOrderReturnReasonStatusResp = omsclient.UpdateOrderReturnReasonStatusResp
+	UpdateOrderSettingReq             = omsclient.UpdateOrderSettingReq
+	UpdateOrderSettingResp            = omsclient.UpdateOrderSettingResp
 	UpdateOrderStatusByOutTradeNoReq  = omsclient.UpdateOrderStatusByOutTradeNoReq
 	UpdateOrderStatusByOutTradeNoResp = omsclient.UpdateOrderStatusByOutTradeNoResp
 	UpdateReceiverInfoReq             = omsclient.UpdateReceiverInfoReq
 	UpdateReceiverInfoResp            = omsclient.UpdateReceiverInfoResp
 
 	OrderSettingService interface {
-		// 添加订单设置
-		OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error)
-		// 查询订单设置
-		OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error)
-		// 更新订单设置
-		OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error)
-		// 删除订单设置
-		OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error)
+		// 添加订单设置表
+		AddOrderSetting(ctx context.Context, in *AddOrderSettingReq, opts ...grpc.CallOption) (*AddOrderSettingResp, error)
+		// 删除订单设置表
+		DeleteOrderSetting(ctx context.Context, in *DeleteOrderSettingReq, opts ...grpc.CallOption) (*DeleteOrderSettingResp, error)
+		// 更新订单设置表
+		UpdateOrderSetting(ctx context.Context, in *UpdateOrderSettingReq, opts ...grpc.CallOption) (*UpdateOrderSettingResp, error)
+		// 查询订单设置表详情
+		QueryOrderSettingDetail(ctx context.Context, in *QueryOrderSettingDetailReq, opts ...grpc.CallOption) (*QueryOrderSettingDetailResp, error)
+		// 查询订单设置表列表
+		QueryOrderSettingList(ctx context.Context, in *QueryOrderSettingListReq, opts ...grpc.CallOption) (*QueryOrderSettingListResp, error)
 	}
 
 	defaultOrderSettingService struct {
@@ -136,26 +149,32 @@ func NewOrderSettingService(cli zrpc.Client) OrderSettingService {
 	}
 }
 
-// 添加订单设置
-func (m *defaultOrderSettingService) OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error) {
+// 添加订单设置表
+func (m *defaultOrderSettingService) AddOrderSetting(ctx context.Context, in *AddOrderSettingReq, opts ...grpc.CallOption) (*AddOrderSettingResp, error) {
 	client := omsclient.NewOrderSettingServiceClient(m.cli.Conn())
-	return client.OrderSettingAdd(ctx, in, opts...)
+	return client.AddOrderSetting(ctx, in, opts...)
 }
 
-// 查询订单设置
-func (m *defaultOrderSettingService) OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error) {
+// 删除订单设置表
+func (m *defaultOrderSettingService) DeleteOrderSetting(ctx context.Context, in *DeleteOrderSettingReq, opts ...grpc.CallOption) (*DeleteOrderSettingResp, error) {
 	client := omsclient.NewOrderSettingServiceClient(m.cli.Conn())
-	return client.OrderSettingList(ctx, in, opts...)
+	return client.DeleteOrderSetting(ctx, in, opts...)
 }
 
-// 更新订单设置
-func (m *defaultOrderSettingService) OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error) {
+// 更新订单设置表
+func (m *defaultOrderSettingService) UpdateOrderSetting(ctx context.Context, in *UpdateOrderSettingReq, opts ...grpc.CallOption) (*UpdateOrderSettingResp, error) {
 	client := omsclient.NewOrderSettingServiceClient(m.cli.Conn())
-	return client.OrderSettingUpdate(ctx, in, opts...)
+	return client.UpdateOrderSetting(ctx, in, opts...)
 }
 
-// 删除订单设置
-func (m *defaultOrderSettingService) OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error) {
+// 查询订单设置表详情
+func (m *defaultOrderSettingService) QueryOrderSettingDetail(ctx context.Context, in *QueryOrderSettingDetailReq, opts ...grpc.CallOption) (*QueryOrderSettingDetailResp, error) {
 	client := omsclient.NewOrderSettingServiceClient(m.cli.Conn())
-	return client.OrderSettingDelete(ctx, in, opts...)
+	return client.QueryOrderSettingDetail(ctx, in, opts...)
+}
+
+// 查询订单设置表列表
+func (m *defaultOrderSettingService) QueryOrderSettingList(ctx context.Context, in *QueryOrderSettingListReq, opts ...grpc.CallOption) (*QueryOrderSettingListResp, error) {
+	client := omsclient.NewOrderSettingServiceClient(m.cli.Conn())
+	return client.QueryOrderSettingList(ctx, in, opts...)
 }

@@ -19,6 +19,580 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	CartItemService_AddCartItem_FullMethodName            = "/omsclient.CartItemService/AddCartItem"
+	CartItemService_DeleteCartItem_FullMethodName         = "/omsclient.CartItemService/DeleteCartItem"
+	CartItemService_UpdateCartItem_FullMethodName         = "/omsclient.CartItemService/UpdateCartItem"
+	CartItemService_UpdateCartItemQuantity_FullMethodName = "/omsclient.CartItemService/UpdateCartItemQuantity"
+	CartItemService_QueryCartItemDetail_FullMethodName    = "/omsclient.CartItemService/QueryCartItemDetail"
+	CartItemService_QueryCartItemList_FullMethodName      = "/omsclient.CartItemService/QueryCartItemList"
+)
+
+// CartItemServiceClient is the client API for CartItemService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CartItemServiceClient interface {
+	// 添加购物车表
+	AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*AddCartItemResp, error)
+	// 删除购物车表
+	DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*DeleteCartItemResp, error)
+	// 更新购物车表
+	UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*UpdateCartItemResp, error)
+	// 修改购物车中某个商品的数量
+	UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*UpdateCartItemQuantityResp, error)
+	// 查询购物车表详情
+	QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*QueryCartItemDetailResp, error)
+	// 查询购物车表列表
+	QueryCartItemList(ctx context.Context, in *QueryCartItemListReq, opts ...grpc.CallOption) (*QueryCartItemListResp, error)
+}
+
+type cartItemServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCartItemServiceClient(cc grpc.ClientConnInterface) CartItemServiceClient {
+	return &cartItemServiceClient{cc}
+}
+
+func (c *cartItemServiceClient) AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*AddCartItemResp, error) {
+	out := new(AddCartItemResp)
+	err := c.cc.Invoke(ctx, CartItemService_AddCartItem_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cartItemServiceClient) DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*DeleteCartItemResp, error) {
+	out := new(DeleteCartItemResp)
+	err := c.cc.Invoke(ctx, CartItemService_DeleteCartItem_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cartItemServiceClient) UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*UpdateCartItemResp, error) {
+	out := new(UpdateCartItemResp)
+	err := c.cc.Invoke(ctx, CartItemService_UpdateCartItem_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cartItemServiceClient) UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*UpdateCartItemQuantityResp, error) {
+	out := new(UpdateCartItemQuantityResp)
+	err := c.cc.Invoke(ctx, CartItemService_UpdateCartItemQuantity_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cartItemServiceClient) QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*QueryCartItemDetailResp, error) {
+	out := new(QueryCartItemDetailResp)
+	err := c.cc.Invoke(ctx, CartItemService_QueryCartItemDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cartItemServiceClient) QueryCartItemList(ctx context.Context, in *QueryCartItemListReq, opts ...grpc.CallOption) (*QueryCartItemListResp, error) {
+	out := new(QueryCartItemListResp)
+	err := c.cc.Invoke(ctx, CartItemService_QueryCartItemList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CartItemServiceServer is the server API for CartItemService service.
+// All implementations must embed UnimplementedCartItemServiceServer
+// for forward compatibility
+type CartItemServiceServer interface {
+	// 添加购物车表
+	AddCartItem(context.Context, *AddCartItemReq) (*AddCartItemResp, error)
+	// 删除购物车表
+	DeleteCartItem(context.Context, *DeleteCartItemReq) (*DeleteCartItemResp, error)
+	// 更新购物车表
+	UpdateCartItem(context.Context, *UpdateCartItemReq) (*UpdateCartItemResp, error)
+	// 修改购物车中某个商品的数量
+	UpdateCartItemQuantity(context.Context, *UpdateCartItemQuantityReq) (*UpdateCartItemQuantityResp, error)
+	// 查询购物车表详情
+	QueryCartItemDetail(context.Context, *QueryCartItemDetailReq) (*QueryCartItemDetailResp, error)
+	// 查询购物车表列表
+	QueryCartItemList(context.Context, *QueryCartItemListReq) (*QueryCartItemListResp, error)
+	mustEmbedUnimplementedCartItemServiceServer()
+}
+
+// UnimplementedCartItemServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCartItemServiceServer struct {
+}
+
+func (UnimplementedCartItemServiceServer) AddCartItem(context.Context, *AddCartItemReq) (*AddCartItemResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddCartItem not implemented")
+}
+func (UnimplementedCartItemServiceServer) DeleteCartItem(context.Context, *DeleteCartItemReq) (*DeleteCartItemResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCartItem not implemented")
+}
+func (UnimplementedCartItemServiceServer) UpdateCartItem(context.Context, *UpdateCartItemReq) (*UpdateCartItemResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCartItem not implemented")
+}
+func (UnimplementedCartItemServiceServer) UpdateCartItemQuantity(context.Context, *UpdateCartItemQuantityReq) (*UpdateCartItemQuantityResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCartItemQuantity not implemented")
+}
+func (UnimplementedCartItemServiceServer) QueryCartItemDetail(context.Context, *QueryCartItemDetailReq) (*QueryCartItemDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCartItemDetail not implemented")
+}
+func (UnimplementedCartItemServiceServer) QueryCartItemList(context.Context, *QueryCartItemListReq) (*QueryCartItemListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCartItemList not implemented")
+}
+func (UnimplementedCartItemServiceServer) mustEmbedUnimplementedCartItemServiceServer() {}
+
+// UnsafeCartItemServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CartItemServiceServer will
+// result in compilation errors.
+type UnsafeCartItemServiceServer interface {
+	mustEmbedUnimplementedCartItemServiceServer()
+}
+
+func RegisterCartItemServiceServer(s grpc.ServiceRegistrar, srv CartItemServiceServer) {
+	s.RegisterService(&CartItemService_ServiceDesc, srv)
+}
+
+func _CartItemService_AddCartItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCartItemReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CartItemServiceServer).AddCartItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CartItemService_AddCartItem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CartItemServiceServer).AddCartItem(ctx, req.(*AddCartItemReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CartItemService_DeleteCartItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCartItemReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CartItemServiceServer).DeleteCartItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CartItemService_DeleteCartItem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CartItemServiceServer).DeleteCartItem(ctx, req.(*DeleteCartItemReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CartItemService_UpdateCartItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCartItemReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CartItemServiceServer).UpdateCartItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CartItemService_UpdateCartItem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CartItemServiceServer).UpdateCartItem(ctx, req.(*UpdateCartItemReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CartItemService_UpdateCartItemQuantity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCartItemQuantityReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CartItemServiceServer).UpdateCartItemQuantity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CartItemService_UpdateCartItemQuantity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CartItemServiceServer).UpdateCartItemQuantity(ctx, req.(*UpdateCartItemQuantityReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CartItemService_QueryCartItemDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCartItemDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CartItemServiceServer).QueryCartItemDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CartItemService_QueryCartItemDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CartItemServiceServer).QueryCartItemDetail(ctx, req.(*QueryCartItemDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CartItemService_QueryCartItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCartItemListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CartItemServiceServer).QueryCartItemList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CartItemService_QueryCartItemList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CartItemServiceServer).QueryCartItemList(ctx, req.(*QueryCartItemListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CartItemService_ServiceDesc is the grpc.ServiceDesc for CartItemService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CartItemService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.CartItemService",
+	HandlerType: (*CartItemServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddCartItem",
+			Handler:    _CartItemService_AddCartItem_Handler,
+		},
+		{
+			MethodName: "DeleteCartItem",
+			Handler:    _CartItemService_DeleteCartItem_Handler,
+		},
+		{
+			MethodName: "UpdateCartItem",
+			Handler:    _CartItemService_UpdateCartItem_Handler,
+		},
+		{
+			MethodName: "UpdateCartItemQuantity",
+			Handler:    _CartItemService_UpdateCartItemQuantity_Handler,
+		},
+		{
+			MethodName: "QueryCartItemDetail",
+			Handler:    _CartItemService_QueryCartItemDetail_Handler,
+		},
+		{
+			MethodName: "QueryCartItemList",
+			Handler:    _CartItemService_QueryCartItemList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/oms/oms.proto",
+}
+
+const (
+	CompanyAddressService_AddCompanyAddress_FullMethodName          = "/omsclient.CompanyAddressService/AddCompanyAddress"
+	CompanyAddressService_DeleteCompanyAddress_FullMethodName       = "/omsclient.CompanyAddressService/DeleteCompanyAddress"
+	CompanyAddressService_UpdateCompanyAddress_FullMethodName       = "/omsclient.CompanyAddressService/UpdateCompanyAddress"
+	CompanyAddressService_UpdateCompanyAddressStatus_FullMethodName = "/omsclient.CompanyAddressService/UpdateCompanyAddressStatus"
+	CompanyAddressService_QueryCompanyAddressDetail_FullMethodName  = "/omsclient.CompanyAddressService/QueryCompanyAddressDetail"
+	CompanyAddressService_QueryCompanyAddressList_FullMethodName    = "/omsclient.CompanyAddressService/QueryCompanyAddressList"
+)
+
+// CompanyAddressServiceClient is the client API for CompanyAddressService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CompanyAddressServiceClient interface {
+	// 添加公司收发货地址表
+	AddCompanyAddress(ctx context.Context, in *AddCompanyAddressReq, opts ...grpc.CallOption) (*AddCompanyAddressResp, error)
+	// 删除公司收发货地址表
+	DeleteCompanyAddress(ctx context.Context, in *DeleteCompanyAddressReq, opts ...grpc.CallOption) (*DeleteCompanyAddressResp, error)
+	// 更新公司收发货地址表
+	UpdateCompanyAddress(ctx context.Context, in *UpdateCompanyAddressReq, opts ...grpc.CallOption) (*UpdateCompanyAddressResp, error)
+	// 更新公司收发货地址表状态
+	UpdateCompanyAddressStatus(ctx context.Context, in *UpdateCompanyAddressStatusReq, opts ...grpc.CallOption) (*UpdateCompanyAddressStatusResp, error)
+	// 查询公司收发货地址表详情
+	QueryCompanyAddressDetail(ctx context.Context, in *QueryCompanyAddressDetailReq, opts ...grpc.CallOption) (*QueryCompanyAddressDetailResp, error)
+	// 查询公司收发货地址表列表
+	QueryCompanyAddressList(ctx context.Context, in *QueryCompanyAddressListReq, opts ...grpc.CallOption) (*QueryCompanyAddressListResp, error)
+}
+
+type companyAddressServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCompanyAddressServiceClient(cc grpc.ClientConnInterface) CompanyAddressServiceClient {
+	return &companyAddressServiceClient{cc}
+}
+
+func (c *companyAddressServiceClient) AddCompanyAddress(ctx context.Context, in *AddCompanyAddressReq, opts ...grpc.CallOption) (*AddCompanyAddressResp, error) {
+	out := new(AddCompanyAddressResp)
+	err := c.cc.Invoke(ctx, CompanyAddressService_AddCompanyAddress_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *companyAddressServiceClient) DeleteCompanyAddress(ctx context.Context, in *DeleteCompanyAddressReq, opts ...grpc.CallOption) (*DeleteCompanyAddressResp, error) {
+	out := new(DeleteCompanyAddressResp)
+	err := c.cc.Invoke(ctx, CompanyAddressService_DeleteCompanyAddress_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *companyAddressServiceClient) UpdateCompanyAddress(ctx context.Context, in *UpdateCompanyAddressReq, opts ...grpc.CallOption) (*UpdateCompanyAddressResp, error) {
+	out := new(UpdateCompanyAddressResp)
+	err := c.cc.Invoke(ctx, CompanyAddressService_UpdateCompanyAddress_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *companyAddressServiceClient) UpdateCompanyAddressStatus(ctx context.Context, in *UpdateCompanyAddressStatusReq, opts ...grpc.CallOption) (*UpdateCompanyAddressStatusResp, error) {
+	out := new(UpdateCompanyAddressStatusResp)
+	err := c.cc.Invoke(ctx, CompanyAddressService_UpdateCompanyAddressStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *companyAddressServiceClient) QueryCompanyAddressDetail(ctx context.Context, in *QueryCompanyAddressDetailReq, opts ...grpc.CallOption) (*QueryCompanyAddressDetailResp, error) {
+	out := new(QueryCompanyAddressDetailResp)
+	err := c.cc.Invoke(ctx, CompanyAddressService_QueryCompanyAddressDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *companyAddressServiceClient) QueryCompanyAddressList(ctx context.Context, in *QueryCompanyAddressListReq, opts ...grpc.CallOption) (*QueryCompanyAddressListResp, error) {
+	out := new(QueryCompanyAddressListResp)
+	err := c.cc.Invoke(ctx, CompanyAddressService_QueryCompanyAddressList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CompanyAddressServiceServer is the server API for CompanyAddressService service.
+// All implementations must embed UnimplementedCompanyAddressServiceServer
+// for forward compatibility
+type CompanyAddressServiceServer interface {
+	// 添加公司收发货地址表
+	AddCompanyAddress(context.Context, *AddCompanyAddressReq) (*AddCompanyAddressResp, error)
+	// 删除公司收发货地址表
+	DeleteCompanyAddress(context.Context, *DeleteCompanyAddressReq) (*DeleteCompanyAddressResp, error)
+	// 更新公司收发货地址表
+	UpdateCompanyAddress(context.Context, *UpdateCompanyAddressReq) (*UpdateCompanyAddressResp, error)
+	// 更新公司收发货地址表状态
+	UpdateCompanyAddressStatus(context.Context, *UpdateCompanyAddressStatusReq) (*UpdateCompanyAddressStatusResp, error)
+	// 查询公司收发货地址表详情
+	QueryCompanyAddressDetail(context.Context, *QueryCompanyAddressDetailReq) (*QueryCompanyAddressDetailResp, error)
+	// 查询公司收发货地址表列表
+	QueryCompanyAddressList(context.Context, *QueryCompanyAddressListReq) (*QueryCompanyAddressListResp, error)
+	mustEmbedUnimplementedCompanyAddressServiceServer()
+}
+
+// UnimplementedCompanyAddressServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCompanyAddressServiceServer struct {
+}
+
+func (UnimplementedCompanyAddressServiceServer) AddCompanyAddress(context.Context, *AddCompanyAddressReq) (*AddCompanyAddressResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddCompanyAddress not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) DeleteCompanyAddress(context.Context, *DeleteCompanyAddressReq) (*DeleteCompanyAddressResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCompanyAddress not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) UpdateCompanyAddress(context.Context, *UpdateCompanyAddressReq) (*UpdateCompanyAddressResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCompanyAddress not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) UpdateCompanyAddressStatus(context.Context, *UpdateCompanyAddressStatusReq) (*UpdateCompanyAddressStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCompanyAddressStatus not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) QueryCompanyAddressDetail(context.Context, *QueryCompanyAddressDetailReq) (*QueryCompanyAddressDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCompanyAddressDetail not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) QueryCompanyAddressList(context.Context, *QueryCompanyAddressListReq) (*QueryCompanyAddressListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCompanyAddressList not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) mustEmbedUnimplementedCompanyAddressServiceServer() {}
+
+// UnsafeCompanyAddressServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CompanyAddressServiceServer will
+// result in compilation errors.
+type UnsafeCompanyAddressServiceServer interface {
+	mustEmbedUnimplementedCompanyAddressServiceServer()
+}
+
+func RegisterCompanyAddressServiceServer(s grpc.ServiceRegistrar, srv CompanyAddressServiceServer) {
+	s.RegisterService(&CompanyAddressService_ServiceDesc, srv)
+}
+
+func _CompanyAddressService_AddCompanyAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCompanyAddressReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CompanyAddressServiceServer).AddCompanyAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CompanyAddressService_AddCompanyAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CompanyAddressServiceServer).AddCompanyAddress(ctx, req.(*AddCompanyAddressReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CompanyAddressService_DeleteCompanyAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCompanyAddressReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CompanyAddressServiceServer).DeleteCompanyAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CompanyAddressService_DeleteCompanyAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CompanyAddressServiceServer).DeleteCompanyAddress(ctx, req.(*DeleteCompanyAddressReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CompanyAddressService_UpdateCompanyAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCompanyAddressReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CompanyAddressServiceServer).UpdateCompanyAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CompanyAddressService_UpdateCompanyAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CompanyAddressServiceServer).UpdateCompanyAddress(ctx, req.(*UpdateCompanyAddressReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CompanyAddressService_UpdateCompanyAddressStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCompanyAddressStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CompanyAddressServiceServer).UpdateCompanyAddressStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CompanyAddressService_UpdateCompanyAddressStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CompanyAddressServiceServer).UpdateCompanyAddressStatus(ctx, req.(*UpdateCompanyAddressStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CompanyAddressService_QueryCompanyAddressDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCompanyAddressDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CompanyAddressServiceServer).QueryCompanyAddressDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CompanyAddressService_QueryCompanyAddressDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CompanyAddressServiceServer).QueryCompanyAddressDetail(ctx, req.(*QueryCompanyAddressDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CompanyAddressService_QueryCompanyAddressList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCompanyAddressListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CompanyAddressServiceServer).QueryCompanyAddressList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CompanyAddressService_QueryCompanyAddressList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CompanyAddressServiceServer).QueryCompanyAddressList(ctx, req.(*QueryCompanyAddressListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CompanyAddressService_ServiceDesc is the grpc.ServiceDesc for CompanyAddressService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CompanyAddressService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.CompanyAddressService",
+	HandlerType: (*CompanyAddressServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddCompanyAddress",
+			Handler:    _CompanyAddressService_AddCompanyAddress_Handler,
+		},
+		{
+			MethodName: "DeleteCompanyAddress",
+			Handler:    _CompanyAddressService_DeleteCompanyAddress_Handler,
+		},
+		{
+			MethodName: "UpdateCompanyAddress",
+			Handler:    _CompanyAddressService_UpdateCompanyAddress_Handler,
+		},
+		{
+			MethodName: "UpdateCompanyAddressStatus",
+			Handler:    _CompanyAddressService_UpdateCompanyAddressStatus_Handler,
+		},
+		{
+			MethodName: "QueryCompanyAddressDetail",
+			Handler:    _CompanyAddressService_QueryCompanyAddressDetail_Handler,
+		},
+		{
+			MethodName: "QueryCompanyAddressList",
+			Handler:    _CompanyAddressService_QueryCompanyAddressList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/oms/oms.proto",
+}
+
+const (
 	OrderService_Delivery_FullMethodName                      = "/omsclient.OrderService/Delivery"
 	OrderService_CloseOrder_FullMethodName                    = "/omsclient.OrderService/CloseOrder"
 	OrderService_OrderDetail_FullMethodName                   = "/omsclient.OrderService/OrderDetail"
@@ -725,496 +1299,21 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CartItemService_CartItemAdd_FullMethodName            = "/omsclient.CartItemService/CartItemAdd"
-	CartItemService_CartItemList_FullMethodName           = "/omsclient.CartItemService/CartItemList"
-	CartItemService_CartItemUpdate_FullMethodName         = "/omsclient.CartItemService/CartItemUpdate"
-	CartItemService_CartItemUpdateQuantity_FullMethodName = "/omsclient.CartItemService/CartItemUpdateQuantity"
-	CartItemService_CartItemDelete_FullMethodName         = "/omsclient.CartItemService/CartItemDelete"
-	CartItemService_CartItemClear_FullMethodName          = "/omsclient.CartItemService/CartItemClear"
-)
-
-// CartItemServiceClient is the client API for CartItemService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CartItemServiceClient interface {
-	CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error)
-	CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error)
-	CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
-	CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error)
-	CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error)
-	CartItemClear(ctx context.Context, in *CartItemClearReq, opts ...grpc.CallOption) (*CartItemClearResp, error)
-}
-
-type cartItemServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewCartItemServiceClient(cc grpc.ClientConnInterface) CartItemServiceClient {
-	return &cartItemServiceClient{cc}
-}
-
-func (c *cartItemServiceClient) CartItemAdd(ctx context.Context, in *CartItemAddReq, opts ...grpc.CallOption) (*CartItemAddResp, error) {
-	out := new(CartItemAddResp)
-	err := c.cc.Invoke(ctx, CartItemService_CartItemAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cartItemServiceClient) CartItemList(ctx context.Context, in *CartItemListReq, opts ...grpc.CallOption) (*CartItemListResp, error) {
-	out := new(CartItemListResp)
-	err := c.cc.Invoke(ctx, CartItemService_CartItemList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cartItemServiceClient) CartItemUpdate(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error) {
-	out := new(CartItemUpdateResp)
-	err := c.cc.Invoke(ctx, CartItemService_CartItemUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cartItemServiceClient) CartItemUpdateQuantity(ctx context.Context, in *CartItemUpdateReq, opts ...grpc.CallOption) (*CartItemUpdateResp, error) {
-	out := new(CartItemUpdateResp)
-	err := c.cc.Invoke(ctx, CartItemService_CartItemUpdateQuantity_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cartItemServiceClient) CartItemDelete(ctx context.Context, in *CartItemDeleteReq, opts ...grpc.CallOption) (*CartItemDeleteResp, error) {
-	out := new(CartItemDeleteResp)
-	err := c.cc.Invoke(ctx, CartItemService_CartItemDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cartItemServiceClient) CartItemClear(ctx context.Context, in *CartItemClearReq, opts ...grpc.CallOption) (*CartItemClearResp, error) {
-	out := new(CartItemClearResp)
-	err := c.cc.Invoke(ctx, CartItemService_CartItemClear_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// CartItemServiceServer is the server API for CartItemService service.
-// All implementations must embed UnimplementedCartItemServiceServer
-// for forward compatibility
-type CartItemServiceServer interface {
-	CartItemAdd(context.Context, *CartItemAddReq) (*CartItemAddResp, error)
-	CartItemList(context.Context, *CartItemListReq) (*CartItemListResp, error)
-	CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
-	CartItemUpdateQuantity(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error)
-	CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error)
-	CartItemClear(context.Context, *CartItemClearReq) (*CartItemClearResp, error)
-	mustEmbedUnimplementedCartItemServiceServer()
-}
-
-// UnimplementedCartItemServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCartItemServiceServer struct {
-}
-
-func (UnimplementedCartItemServiceServer) CartItemAdd(context.Context, *CartItemAddReq) (*CartItemAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemAdd not implemented")
-}
-func (UnimplementedCartItemServiceServer) CartItemList(context.Context, *CartItemListReq) (*CartItemListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemList not implemented")
-}
-func (UnimplementedCartItemServiceServer) CartItemUpdate(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemUpdate not implemented")
-}
-func (UnimplementedCartItemServiceServer) CartItemUpdateQuantity(context.Context, *CartItemUpdateReq) (*CartItemUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemUpdateQuantity not implemented")
-}
-func (UnimplementedCartItemServiceServer) CartItemDelete(context.Context, *CartItemDeleteReq) (*CartItemDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemDelete not implemented")
-}
-func (UnimplementedCartItemServiceServer) CartItemClear(context.Context, *CartItemClearReq) (*CartItemClearResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CartItemClear not implemented")
-}
-func (UnimplementedCartItemServiceServer) mustEmbedUnimplementedCartItemServiceServer() {}
-
-// UnsafeCartItemServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CartItemServiceServer will
-// result in compilation errors.
-type UnsafeCartItemServiceServer interface {
-	mustEmbedUnimplementedCartItemServiceServer()
-}
-
-func RegisterCartItemServiceServer(s grpc.ServiceRegistrar, srv CartItemServiceServer) {
-	s.RegisterService(&CartItemService_ServiceDesc, srv)
-}
-
-func _CartItemService_CartItemAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CartItemAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CartItemServiceServer).CartItemAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CartItemService_CartItemAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CartItemServiceServer).CartItemAdd(ctx, req.(*CartItemAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CartItemService_CartItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CartItemListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CartItemServiceServer).CartItemList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CartItemService_CartItemList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CartItemServiceServer).CartItemList(ctx, req.(*CartItemListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CartItemService_CartItemUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CartItemUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CartItemServiceServer).CartItemUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CartItemService_CartItemUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CartItemServiceServer).CartItemUpdate(ctx, req.(*CartItemUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CartItemService_CartItemUpdateQuantity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CartItemUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CartItemServiceServer).CartItemUpdateQuantity(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CartItemService_CartItemUpdateQuantity_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CartItemServiceServer).CartItemUpdateQuantity(ctx, req.(*CartItemUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CartItemService_CartItemDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CartItemDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CartItemServiceServer).CartItemDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CartItemService_CartItemDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CartItemServiceServer).CartItemDelete(ctx, req.(*CartItemDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CartItemService_CartItemClear_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CartItemClearReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CartItemServiceServer).CartItemClear(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CartItemService_CartItemClear_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CartItemServiceServer).CartItemClear(ctx, req.(*CartItemClearReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// CartItemService_ServiceDesc is the grpc.ServiceDesc for CartItemService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var CartItemService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.CartItemService",
-	HandlerType: (*CartItemServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CartItemAdd",
-			Handler:    _CartItemService_CartItemAdd_Handler,
-		},
-		{
-			MethodName: "CartItemList",
-			Handler:    _CartItemService_CartItemList_Handler,
-		},
-		{
-			MethodName: "CartItemUpdate",
-			Handler:    _CartItemService_CartItemUpdate_Handler,
-		},
-		{
-			MethodName: "CartItemUpdateQuantity",
-			Handler:    _CartItemService_CartItemUpdateQuantity_Handler,
-		},
-		{
-			MethodName: "CartItemDelete",
-			Handler:    _CartItemService_CartItemDelete_Handler,
-		},
-		{
-			MethodName: "CartItemClear",
-			Handler:    _CartItemService_CartItemClear_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/oms/oms.proto",
-}
-
-const (
-	CompanyAddressService_CompanyAddressAdd_FullMethodName    = "/omsclient.CompanyAddressService/CompanyAddressAdd"
-	CompanyAddressService_CompanyAddressList_FullMethodName   = "/omsclient.CompanyAddressService/CompanyAddressList"
-	CompanyAddressService_CompanyAddressUpdate_FullMethodName = "/omsclient.CompanyAddressService/CompanyAddressUpdate"
-	CompanyAddressService_CompanyAddressDelete_FullMethodName = "/omsclient.CompanyAddressService/CompanyAddressDelete"
-)
-
-// CompanyAddressServiceClient is the client API for CompanyAddressService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CompanyAddressServiceClient interface {
-	CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error)
-	CompanyAddressList(ctx context.Context, in *CompanyAddressListReq, opts ...grpc.CallOption) (*CompanyAddressListResp, error)
-	CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq, opts ...grpc.CallOption) (*CompanyAddressUpdateResp, error)
-	CompanyAddressDelete(ctx context.Context, in *CompanyAddressDeleteReq, opts ...grpc.CallOption) (*CompanyAddressDeleteResp, error)
-}
-
-type companyAddressServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewCompanyAddressServiceClient(cc grpc.ClientConnInterface) CompanyAddressServiceClient {
-	return &companyAddressServiceClient{cc}
-}
-
-func (c *companyAddressServiceClient) CompanyAddressAdd(ctx context.Context, in *CompanyAddressAddReq, opts ...grpc.CallOption) (*CompanyAddressAddResp, error) {
-	out := new(CompanyAddressAddResp)
-	err := c.cc.Invoke(ctx, CompanyAddressService_CompanyAddressAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *companyAddressServiceClient) CompanyAddressList(ctx context.Context, in *CompanyAddressListReq, opts ...grpc.CallOption) (*CompanyAddressListResp, error) {
-	out := new(CompanyAddressListResp)
-	err := c.cc.Invoke(ctx, CompanyAddressService_CompanyAddressList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *companyAddressServiceClient) CompanyAddressUpdate(ctx context.Context, in *CompanyAddressUpdateReq, opts ...grpc.CallOption) (*CompanyAddressUpdateResp, error) {
-	out := new(CompanyAddressUpdateResp)
-	err := c.cc.Invoke(ctx, CompanyAddressService_CompanyAddressUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *companyAddressServiceClient) CompanyAddressDelete(ctx context.Context, in *CompanyAddressDeleteReq, opts ...grpc.CallOption) (*CompanyAddressDeleteResp, error) {
-	out := new(CompanyAddressDeleteResp)
-	err := c.cc.Invoke(ctx, CompanyAddressService_CompanyAddressDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// CompanyAddressServiceServer is the server API for CompanyAddressService service.
-// All implementations must embed UnimplementedCompanyAddressServiceServer
-// for forward compatibility
-type CompanyAddressServiceServer interface {
-	CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error)
-	CompanyAddressList(context.Context, *CompanyAddressListReq) (*CompanyAddressListResp, error)
-	CompanyAddressUpdate(context.Context, *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error)
-	CompanyAddressDelete(context.Context, *CompanyAddressDeleteReq) (*CompanyAddressDeleteResp, error)
-	mustEmbedUnimplementedCompanyAddressServiceServer()
-}
-
-// UnimplementedCompanyAddressServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCompanyAddressServiceServer struct {
-}
-
-func (UnimplementedCompanyAddressServiceServer) CompanyAddressAdd(context.Context, *CompanyAddressAddReq) (*CompanyAddressAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressAdd not implemented")
-}
-func (UnimplementedCompanyAddressServiceServer) CompanyAddressList(context.Context, *CompanyAddressListReq) (*CompanyAddressListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressList not implemented")
-}
-func (UnimplementedCompanyAddressServiceServer) CompanyAddressUpdate(context.Context, *CompanyAddressUpdateReq) (*CompanyAddressUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressUpdate not implemented")
-}
-func (UnimplementedCompanyAddressServiceServer) CompanyAddressDelete(context.Context, *CompanyAddressDeleteReq) (*CompanyAddressDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompanyAddressDelete not implemented")
-}
-func (UnimplementedCompanyAddressServiceServer) mustEmbedUnimplementedCompanyAddressServiceServer() {}
-
-// UnsafeCompanyAddressServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CompanyAddressServiceServer will
-// result in compilation errors.
-type UnsafeCompanyAddressServiceServer interface {
-	mustEmbedUnimplementedCompanyAddressServiceServer()
-}
-
-func RegisterCompanyAddressServiceServer(s grpc.ServiceRegistrar, srv CompanyAddressServiceServer) {
-	s.RegisterService(&CompanyAddressService_ServiceDesc, srv)
-}
-
-func _CompanyAddressService_CompanyAddressAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CompanyAddressAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CompanyAddressServiceServer).CompanyAddressAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CompanyAddressService_CompanyAddressAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CompanyAddressServiceServer).CompanyAddressAdd(ctx, req.(*CompanyAddressAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CompanyAddressService_CompanyAddressList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CompanyAddressListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CompanyAddressServiceServer).CompanyAddressList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CompanyAddressService_CompanyAddressList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CompanyAddressServiceServer).CompanyAddressList(ctx, req.(*CompanyAddressListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CompanyAddressService_CompanyAddressUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CompanyAddressUpdateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CompanyAddressServiceServer).CompanyAddressUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CompanyAddressService_CompanyAddressUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CompanyAddressServiceServer).CompanyAddressUpdate(ctx, req.(*CompanyAddressUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CompanyAddressService_CompanyAddressDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CompanyAddressDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CompanyAddressServiceServer).CompanyAddressDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CompanyAddressService_CompanyAddressDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CompanyAddressServiceServer).CompanyAddressDelete(ctx, req.(*CompanyAddressDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// CompanyAddressService_ServiceDesc is the grpc.ServiceDesc for CompanyAddressService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var CompanyAddressService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.CompanyAddressService",
-	HandlerType: (*CompanyAddressServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CompanyAddressAdd",
-			Handler:    _CompanyAddressService_CompanyAddressAdd_Handler,
-		},
-		{
-			MethodName: "CompanyAddressList",
-			Handler:    _CompanyAddressService_CompanyAddressList_Handler,
-		},
-		{
-			MethodName: "CompanyAddressUpdate",
-			Handler:    _CompanyAddressService_CompanyAddressUpdate_Handler,
-		},
-		{
-			MethodName: "CompanyAddressDelete",
-			Handler:    _CompanyAddressService_CompanyAddressDelete_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/oms/oms.proto",
-}
-
-const (
-	OrderItemService_OrderItemAdd_FullMethodName    = "/omsclient.OrderItemService/OrderItemAdd"
-	OrderItemService_OrderItemList_FullMethodName   = "/omsclient.OrderItemService/OrderItemList"
-	OrderItemService_OrderItemUpdate_FullMethodName = "/omsclient.OrderItemService/OrderItemUpdate"
-	OrderItemService_OrderItemDelete_FullMethodName = "/omsclient.OrderItemService/OrderItemDelete"
+	OrderItemService_AddOrderItem_FullMethodName         = "/omsclient.OrderItemService/AddOrderItem"
+	OrderItemService_QueryOrderItemDetail_FullMethodName = "/omsclient.OrderItemService/QueryOrderItemDetail"
+	OrderItemService_QueryOrderItemList_FullMethodName   = "/omsclient.OrderItemService/QueryOrderItemList"
 )
 
 // OrderItemServiceClient is the client API for OrderItemService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderItemServiceClient interface {
-	OrderItemAdd(ctx context.Context, in *OrderItemAddReq, opts ...grpc.CallOption) (*OrderItemAddResp, error)
-	OrderItemList(ctx context.Context, in *OrderItemListReq, opts ...grpc.CallOption) (*OrderItemListResp, error)
-	OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq, opts ...grpc.CallOption) (*OrderItemUpdateResp, error)
-	OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq, opts ...grpc.CallOption) (*OrderItemDeleteResp, error)
+	// 添加订单中所包含的商品
+	AddOrderItem(ctx context.Context, in *AddOrderItemReq, opts ...grpc.CallOption) (*AddOrderItemResp, error)
+	// 查询订单中所包含的商品详情
+	QueryOrderItemDetail(ctx context.Context, in *QueryOrderItemDetailReq, opts ...grpc.CallOption) (*QueryOrderItemDetailResp, error)
+	// 查询订单中所包含的商品列表
+	QueryOrderItemList(ctx context.Context, in *QueryOrderItemListReq, opts ...grpc.CallOption) (*QueryOrderItemListResp, error)
 }
 
 type orderItemServiceClient struct {
@@ -1225,36 +1324,27 @@ func NewOrderItemServiceClient(cc grpc.ClientConnInterface) OrderItemServiceClie
 	return &orderItemServiceClient{cc}
 }
 
-func (c *orderItemServiceClient) OrderItemAdd(ctx context.Context, in *OrderItemAddReq, opts ...grpc.CallOption) (*OrderItemAddResp, error) {
-	out := new(OrderItemAddResp)
-	err := c.cc.Invoke(ctx, OrderItemService_OrderItemAdd_FullMethodName, in, out, opts...)
+func (c *orderItemServiceClient) AddOrderItem(ctx context.Context, in *AddOrderItemReq, opts ...grpc.CallOption) (*AddOrderItemResp, error) {
+	out := new(AddOrderItemResp)
+	err := c.cc.Invoke(ctx, OrderItemService_AddOrderItem_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderItemServiceClient) OrderItemList(ctx context.Context, in *OrderItemListReq, opts ...grpc.CallOption) (*OrderItemListResp, error) {
-	out := new(OrderItemListResp)
-	err := c.cc.Invoke(ctx, OrderItemService_OrderItemList_FullMethodName, in, out, opts...)
+func (c *orderItemServiceClient) QueryOrderItemDetail(ctx context.Context, in *QueryOrderItemDetailReq, opts ...grpc.CallOption) (*QueryOrderItemDetailResp, error) {
+	out := new(QueryOrderItemDetailResp)
+	err := c.cc.Invoke(ctx, OrderItemService_QueryOrderItemDetail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderItemServiceClient) OrderItemUpdate(ctx context.Context, in *OrderItemUpdateReq, opts ...grpc.CallOption) (*OrderItemUpdateResp, error) {
-	out := new(OrderItemUpdateResp)
-	err := c.cc.Invoke(ctx, OrderItemService_OrderItemUpdate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderItemServiceClient) OrderItemDelete(ctx context.Context, in *OrderItemDeleteReq, opts ...grpc.CallOption) (*OrderItemDeleteResp, error) {
-	out := new(OrderItemDeleteResp)
-	err := c.cc.Invoke(ctx, OrderItemService_OrderItemDelete_FullMethodName, in, out, opts...)
+func (c *orderItemServiceClient) QueryOrderItemList(ctx context.Context, in *QueryOrderItemListReq, opts ...grpc.CallOption) (*QueryOrderItemListResp, error) {
+	out := new(QueryOrderItemListResp)
+	err := c.cc.Invoke(ctx, OrderItemService_QueryOrderItemList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1265,10 +1355,12 @@ func (c *orderItemServiceClient) OrderItemDelete(ctx context.Context, in *OrderI
 // All implementations must embed UnimplementedOrderItemServiceServer
 // for forward compatibility
 type OrderItemServiceServer interface {
-	OrderItemAdd(context.Context, *OrderItemAddReq) (*OrderItemAddResp, error)
-	OrderItemList(context.Context, *OrderItemListReq) (*OrderItemListResp, error)
-	OrderItemUpdate(context.Context, *OrderItemUpdateReq) (*OrderItemUpdateResp, error)
-	OrderItemDelete(context.Context, *OrderItemDeleteReq) (*OrderItemDeleteResp, error)
+	// 添加订单中所包含的商品
+	AddOrderItem(context.Context, *AddOrderItemReq) (*AddOrderItemResp, error)
+	// 查询订单中所包含的商品详情
+	QueryOrderItemDetail(context.Context, *QueryOrderItemDetailReq) (*QueryOrderItemDetailResp, error)
+	// 查询订单中所包含的商品列表
+	QueryOrderItemList(context.Context, *QueryOrderItemListReq) (*QueryOrderItemListResp, error)
 	mustEmbedUnimplementedOrderItemServiceServer()
 }
 
@@ -1276,17 +1368,14 @@ type OrderItemServiceServer interface {
 type UnimplementedOrderItemServiceServer struct {
 }
 
-func (UnimplementedOrderItemServiceServer) OrderItemAdd(context.Context, *OrderItemAddReq) (*OrderItemAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemAdd not implemented")
+func (UnimplementedOrderItemServiceServer) AddOrderItem(context.Context, *AddOrderItemReq) (*AddOrderItemResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOrderItem not implemented")
 }
-func (UnimplementedOrderItemServiceServer) OrderItemList(context.Context, *OrderItemListReq) (*OrderItemListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemList not implemented")
+func (UnimplementedOrderItemServiceServer) QueryOrderItemDetail(context.Context, *QueryOrderItemDetailReq) (*QueryOrderItemDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderItemDetail not implemented")
 }
-func (UnimplementedOrderItemServiceServer) OrderItemUpdate(context.Context, *OrderItemUpdateReq) (*OrderItemUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemUpdate not implemented")
-}
-func (UnimplementedOrderItemServiceServer) OrderItemDelete(context.Context, *OrderItemDeleteReq) (*OrderItemDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderItemDelete not implemented")
+func (UnimplementedOrderItemServiceServer) QueryOrderItemList(context.Context, *QueryOrderItemListReq) (*QueryOrderItemListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderItemList not implemented")
 }
 func (UnimplementedOrderItemServiceServer) mustEmbedUnimplementedOrderItemServiceServer() {}
 
@@ -1301,74 +1390,56 @@ func RegisterOrderItemServiceServer(s grpc.ServiceRegistrar, srv OrderItemServic
 	s.RegisterService(&OrderItemService_ServiceDesc, srv)
 }
 
-func _OrderItemService_OrderItemAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderItemAddReq)
+func _OrderItemService_AddOrderItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOrderItemReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderItemServiceServer).OrderItemAdd(ctx, in)
+		return srv.(OrderItemServiceServer).AddOrderItem(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderItemService_OrderItemAdd_FullMethodName,
+		FullMethod: OrderItemService_AddOrderItem_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderItemServiceServer).OrderItemAdd(ctx, req.(*OrderItemAddReq))
+		return srv.(OrderItemServiceServer).AddOrderItem(ctx, req.(*AddOrderItemReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderItemService_OrderItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderItemListReq)
+func _OrderItemService_QueryOrderItemDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderItemDetailReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderItemServiceServer).OrderItemList(ctx, in)
+		return srv.(OrderItemServiceServer).QueryOrderItemDetail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderItemService_OrderItemList_FullMethodName,
+		FullMethod: OrderItemService_QueryOrderItemDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderItemServiceServer).OrderItemList(ctx, req.(*OrderItemListReq))
+		return srv.(OrderItemServiceServer).QueryOrderItemDetail(ctx, req.(*QueryOrderItemDetailReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderItemService_OrderItemUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderItemUpdateReq)
+func _OrderItemService_QueryOrderItemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderItemListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderItemServiceServer).OrderItemUpdate(ctx, in)
+		return srv.(OrderItemServiceServer).QueryOrderItemList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderItemService_OrderItemUpdate_FullMethodName,
+		FullMethod: OrderItemService_QueryOrderItemList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderItemServiceServer).OrderItemUpdate(ctx, req.(*OrderItemUpdateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _OrderItemService_OrderItemDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderItemDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OrderItemServiceServer).OrderItemDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OrderItemService_OrderItemDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderItemServiceServer).OrderItemDelete(ctx, req.(*OrderItemDeleteReq))
+		return srv.(OrderItemServiceServer).QueryOrderItemList(ctx, req.(*QueryOrderItemListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1381,20 +1452,16 @@ var OrderItemService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*OrderItemServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "OrderItemAdd",
-			Handler:    _OrderItemService_OrderItemAdd_Handler,
+			MethodName: "AddOrderItem",
+			Handler:    _OrderItemService_AddOrderItem_Handler,
 		},
 		{
-			MethodName: "OrderItemList",
-			Handler:    _OrderItemService_OrderItemList_Handler,
+			MethodName: "QueryOrderItemDetail",
+			Handler:    _OrderItemService_QueryOrderItemDetail_Handler,
 		},
 		{
-			MethodName: "OrderItemUpdate",
-			Handler:    _OrderItemService_OrderItemUpdate_Handler,
-		},
-		{
-			MethodName: "OrderItemDelete",
-			Handler:    _OrderItemService_OrderItemDelete_Handler,
+			MethodName: "QueryOrderItemList",
+			Handler:    _OrderItemService_QueryOrderItemList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1402,201 +1469,170 @@ var OrderItemService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderOperateHistorService_OrderOperateHistoryAdd_FullMethodName    = "/omsclient.OrderOperateHistorService/OrderOperateHistoryAdd"
-	OrderOperateHistorService_OrderOperateHistoryList_FullMethodName   = "/omsclient.OrderOperateHistorService/OrderOperateHistoryList"
-	OrderOperateHistorService_OrderOperateHistoryUpdate_FullMethodName = "/omsclient.OrderOperateHistorService/OrderOperateHistoryUpdate"
-	OrderOperateHistorService_OrderOperateHistoryDelete_FullMethodName = "/omsclient.OrderOperateHistorService/OrderOperateHistoryDelete"
+	OrderOperateHistoryService_AddOrderOperateHistory_FullMethodName       = "/omsclient.OrderOperateHistoryService/AddOrderOperateHistory"
+	OrderOperateHistoryService_DeleteOrderOperateHistory_FullMethodName    = "/omsclient.OrderOperateHistoryService/DeleteOrderOperateHistory"
+	OrderOperateHistoryService_QueryOrderOperateHistoryList_FullMethodName = "/omsclient.OrderOperateHistoryService/QueryOrderOperateHistoryList"
 )
 
-// OrderOperateHistorServiceClient is the client API for OrderOperateHistorService service.
+// OrderOperateHistoryServiceClient is the client API for OrderOperateHistoryService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type OrderOperateHistorServiceClient interface {
-	OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq, opts ...grpc.CallOption) (*OrderOperateHistoryAddResp, error)
-	OrderOperateHistoryList(ctx context.Context, in *OrderOperateHistoryListReq, opts ...grpc.CallOption) (*OrderOperateHistoryListResp, error)
-	OrderOperateHistoryUpdate(ctx context.Context, in *OrderOperateHistoryUpdateReq, opts ...grpc.CallOption) (*OrderOperateHistoryUpdateResp, error)
-	OrderOperateHistoryDelete(ctx context.Context, in *OrderOperateHistoryDeleteReq, opts ...grpc.CallOption) (*OrderOperateHistoryDeleteResp, error)
+type OrderOperateHistoryServiceClient interface {
+	// 添加订单操作历史记录
+	AddOrderOperateHistory(ctx context.Context, in *AddOrderOperateHistoryReq, opts ...grpc.CallOption) (*AddOrderOperateHistoryResp, error)
+	// 删除订单操作历史记录
+	DeleteOrderOperateHistory(ctx context.Context, in *DeleteOrderOperateHistoryReq, opts ...grpc.CallOption) (*DeleteOrderOperateHistoryResp, error)
+	// 查询订单操作历史记录列表
+	QueryOrderOperateHistoryList(ctx context.Context, in *QueryOrderOperateHistoryListReq, opts ...grpc.CallOption) (*QueryOrderOperateHistoryListResp, error)
 }
 
-type orderOperateHistorServiceClient struct {
+type orderOperateHistoryServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewOrderOperateHistorServiceClient(cc grpc.ClientConnInterface) OrderOperateHistorServiceClient {
-	return &orderOperateHistorServiceClient{cc}
+func NewOrderOperateHistoryServiceClient(cc grpc.ClientConnInterface) OrderOperateHistoryServiceClient {
+	return &orderOperateHistoryServiceClient{cc}
 }
 
-func (c *orderOperateHistorServiceClient) OrderOperateHistoryAdd(ctx context.Context, in *OrderOperateHistoryAddReq, opts ...grpc.CallOption) (*OrderOperateHistoryAddResp, error) {
-	out := new(OrderOperateHistoryAddResp)
-	err := c.cc.Invoke(ctx, OrderOperateHistorService_OrderOperateHistoryAdd_FullMethodName, in, out, opts...)
+func (c *orderOperateHistoryServiceClient) AddOrderOperateHistory(ctx context.Context, in *AddOrderOperateHistoryReq, opts ...grpc.CallOption) (*AddOrderOperateHistoryResp, error) {
+	out := new(AddOrderOperateHistoryResp)
+	err := c.cc.Invoke(ctx, OrderOperateHistoryService_AddOrderOperateHistory_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderOperateHistorServiceClient) OrderOperateHistoryList(ctx context.Context, in *OrderOperateHistoryListReq, opts ...grpc.CallOption) (*OrderOperateHistoryListResp, error) {
-	out := new(OrderOperateHistoryListResp)
-	err := c.cc.Invoke(ctx, OrderOperateHistorService_OrderOperateHistoryList_FullMethodName, in, out, opts...)
+func (c *orderOperateHistoryServiceClient) DeleteOrderOperateHistory(ctx context.Context, in *DeleteOrderOperateHistoryReq, opts ...grpc.CallOption) (*DeleteOrderOperateHistoryResp, error) {
+	out := new(DeleteOrderOperateHistoryResp)
+	err := c.cc.Invoke(ctx, OrderOperateHistoryService_DeleteOrderOperateHistory_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderOperateHistorServiceClient) OrderOperateHistoryUpdate(ctx context.Context, in *OrderOperateHistoryUpdateReq, opts ...grpc.CallOption) (*OrderOperateHistoryUpdateResp, error) {
-	out := new(OrderOperateHistoryUpdateResp)
-	err := c.cc.Invoke(ctx, OrderOperateHistorService_OrderOperateHistoryUpdate_FullMethodName, in, out, opts...)
+func (c *orderOperateHistoryServiceClient) QueryOrderOperateHistoryList(ctx context.Context, in *QueryOrderOperateHistoryListReq, opts ...grpc.CallOption) (*QueryOrderOperateHistoryListResp, error) {
+	out := new(QueryOrderOperateHistoryListResp)
+	err := c.cc.Invoke(ctx, OrderOperateHistoryService_QueryOrderOperateHistoryList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderOperateHistorServiceClient) OrderOperateHistoryDelete(ctx context.Context, in *OrderOperateHistoryDeleteReq, opts ...grpc.CallOption) (*OrderOperateHistoryDeleteResp, error) {
-	out := new(OrderOperateHistoryDeleteResp)
-	err := c.cc.Invoke(ctx, OrderOperateHistorService_OrderOperateHistoryDelete_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// OrderOperateHistorServiceServer is the server API for OrderOperateHistorService service.
-// All implementations must embed UnimplementedOrderOperateHistorServiceServer
+// OrderOperateHistoryServiceServer is the server API for OrderOperateHistoryService service.
+// All implementations must embed UnimplementedOrderOperateHistoryServiceServer
 // for forward compatibility
-type OrderOperateHistorServiceServer interface {
-	OrderOperateHistoryAdd(context.Context, *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error)
-	OrderOperateHistoryList(context.Context, *OrderOperateHistoryListReq) (*OrderOperateHistoryListResp, error)
-	OrderOperateHistoryUpdate(context.Context, *OrderOperateHistoryUpdateReq) (*OrderOperateHistoryUpdateResp, error)
-	OrderOperateHistoryDelete(context.Context, *OrderOperateHistoryDeleteReq) (*OrderOperateHistoryDeleteResp, error)
-	mustEmbedUnimplementedOrderOperateHistorServiceServer()
+type OrderOperateHistoryServiceServer interface {
+	// 添加订单操作历史记录
+	AddOrderOperateHistory(context.Context, *AddOrderOperateHistoryReq) (*AddOrderOperateHistoryResp, error)
+	// 删除订单操作历史记录
+	DeleteOrderOperateHistory(context.Context, *DeleteOrderOperateHistoryReq) (*DeleteOrderOperateHistoryResp, error)
+	// 查询订单操作历史记录列表
+	QueryOrderOperateHistoryList(context.Context, *QueryOrderOperateHistoryListReq) (*QueryOrderOperateHistoryListResp, error)
+	mustEmbedUnimplementedOrderOperateHistoryServiceServer()
 }
 
-// UnimplementedOrderOperateHistorServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedOrderOperateHistorServiceServer struct {
+// UnimplementedOrderOperateHistoryServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderOperateHistoryServiceServer struct {
 }
 
-func (UnimplementedOrderOperateHistorServiceServer) OrderOperateHistoryAdd(context.Context, *OrderOperateHistoryAddReq) (*OrderOperateHistoryAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryAdd not implemented")
+func (UnimplementedOrderOperateHistoryServiceServer) AddOrderOperateHistory(context.Context, *AddOrderOperateHistoryReq) (*AddOrderOperateHistoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOrderOperateHistory not implemented")
 }
-func (UnimplementedOrderOperateHistorServiceServer) OrderOperateHistoryList(context.Context, *OrderOperateHistoryListReq) (*OrderOperateHistoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryList not implemented")
+func (UnimplementedOrderOperateHistoryServiceServer) DeleteOrderOperateHistory(context.Context, *DeleteOrderOperateHistoryReq) (*DeleteOrderOperateHistoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrderOperateHistory not implemented")
 }
-func (UnimplementedOrderOperateHistorServiceServer) OrderOperateHistoryUpdate(context.Context, *OrderOperateHistoryUpdateReq) (*OrderOperateHistoryUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryUpdate not implemented")
+func (UnimplementedOrderOperateHistoryServiceServer) QueryOrderOperateHistoryList(context.Context, *QueryOrderOperateHistoryListReq) (*QueryOrderOperateHistoryListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderOperateHistoryList not implemented")
 }
-func (UnimplementedOrderOperateHistorServiceServer) OrderOperateHistoryDelete(context.Context, *OrderOperateHistoryDeleteReq) (*OrderOperateHistoryDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderOperateHistoryDelete not implemented")
-}
-func (UnimplementedOrderOperateHistorServiceServer) mustEmbedUnimplementedOrderOperateHistorServiceServer() {
+func (UnimplementedOrderOperateHistoryServiceServer) mustEmbedUnimplementedOrderOperateHistoryServiceServer() {
 }
 
-// UnsafeOrderOperateHistorServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to OrderOperateHistorServiceServer will
+// UnsafeOrderOperateHistoryServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderOperateHistoryServiceServer will
 // result in compilation errors.
-type UnsafeOrderOperateHistorServiceServer interface {
-	mustEmbedUnimplementedOrderOperateHistorServiceServer()
+type UnsafeOrderOperateHistoryServiceServer interface {
+	mustEmbedUnimplementedOrderOperateHistoryServiceServer()
 }
 
-func RegisterOrderOperateHistorServiceServer(s grpc.ServiceRegistrar, srv OrderOperateHistorServiceServer) {
-	s.RegisterService(&OrderOperateHistorService_ServiceDesc, srv)
+func RegisterOrderOperateHistoryServiceServer(s grpc.ServiceRegistrar, srv OrderOperateHistoryServiceServer) {
+	s.RegisterService(&OrderOperateHistoryService_ServiceDesc, srv)
 }
 
-func _OrderOperateHistorService_OrderOperateHistoryAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderOperateHistoryAddReq)
+func _OrderOperateHistoryService_AddOrderOperateHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOrderOperateHistoryReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryAdd(ctx, in)
+		return srv.(OrderOperateHistoryServiceServer).AddOrderOperateHistory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderOperateHistorService_OrderOperateHistoryAdd_FullMethodName,
+		FullMethod: OrderOperateHistoryService_AddOrderOperateHistory_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryAdd(ctx, req.(*OrderOperateHistoryAddReq))
+		return srv.(OrderOperateHistoryServiceServer).AddOrderOperateHistory(ctx, req.(*AddOrderOperateHistoryReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderOperateHistorService_OrderOperateHistoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderOperateHistoryListReq)
+func _OrderOperateHistoryService_DeleteOrderOperateHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOrderOperateHistoryReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryList(ctx, in)
+		return srv.(OrderOperateHistoryServiceServer).DeleteOrderOperateHistory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderOperateHistorService_OrderOperateHistoryList_FullMethodName,
+		FullMethod: OrderOperateHistoryService_DeleteOrderOperateHistory_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryList(ctx, req.(*OrderOperateHistoryListReq))
+		return srv.(OrderOperateHistoryServiceServer).DeleteOrderOperateHistory(ctx, req.(*DeleteOrderOperateHistoryReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderOperateHistorService_OrderOperateHistoryUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderOperateHistoryUpdateReq)
+func _OrderOperateHistoryService_QueryOrderOperateHistoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderOperateHistoryListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryUpdate(ctx, in)
+		return srv.(OrderOperateHistoryServiceServer).QueryOrderOperateHistoryList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderOperateHistorService_OrderOperateHistoryUpdate_FullMethodName,
+		FullMethod: OrderOperateHistoryService_QueryOrderOperateHistoryList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryUpdate(ctx, req.(*OrderOperateHistoryUpdateReq))
+		return srv.(OrderOperateHistoryServiceServer).QueryOrderOperateHistoryList(ctx, req.(*QueryOrderOperateHistoryListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderOperateHistorService_OrderOperateHistoryDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderOperateHistoryDeleteReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryDelete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OrderOperateHistorService_OrderOperateHistoryDelete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderOperateHistorServiceServer).OrderOperateHistoryDelete(ctx, req.(*OrderOperateHistoryDeleteReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// OrderOperateHistorService_ServiceDesc is the grpc.ServiceDesc for OrderOperateHistorService service.
+// OrderOperateHistoryService_ServiceDesc is the grpc.ServiceDesc for OrderOperateHistoryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var OrderOperateHistorService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.OrderOperateHistorService",
-	HandlerType: (*OrderOperateHistorServiceServer)(nil),
+var OrderOperateHistoryService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.OrderOperateHistoryService",
+	HandlerType: (*OrderOperateHistoryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "OrderOperateHistoryAdd",
-			Handler:    _OrderOperateHistorService_OrderOperateHistoryAdd_Handler,
+			MethodName: "AddOrderOperateHistory",
+			Handler:    _OrderOperateHistoryService_AddOrderOperateHistory_Handler,
 		},
 		{
-			MethodName: "OrderOperateHistoryList",
-			Handler:    _OrderOperateHistorService_OrderOperateHistoryList_Handler,
+			MethodName: "DeleteOrderOperateHistory",
+			Handler:    _OrderOperateHistoryService_DeleteOrderOperateHistory_Handler,
 		},
 		{
-			MethodName: "OrderOperateHistoryUpdate",
-			Handler:    _OrderOperateHistorService_OrderOperateHistoryUpdate_Handler,
-		},
-		{
-			MethodName: "OrderOperateHistoryDelete",
-			Handler:    _OrderOperateHistorService_OrderOperateHistoryDelete_Handler,
+			MethodName: "QueryOrderOperateHistoryList",
+			Handler:    _OrderOperateHistoryService_QueryOrderOperateHistoryList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1604,23 +1640,27 @@ var OrderOperateHistorService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderReturnApplyService_OrderReturnApplyAdd_FullMethodName    = "/omsclient.OrderReturnApplyService/OrderReturnApplyAdd"
-	OrderReturnApplyService_OrderReturnApplyList_FullMethodName   = "/omsclient.OrderReturnApplyService/OrderReturnApplyList"
-	OrderReturnApplyService_OrderReturnApplyUpdate_FullMethodName = "/omsclient.OrderReturnApplyService/OrderReturnApplyUpdate"
-	OrderReturnApplyService_OrderReturnApplyDelete_FullMethodName = "/omsclient.OrderReturnApplyService/OrderReturnApplyDelete"
+	OrderReturnApplyService_AddOrderReturnApply_FullMethodName         = "/omsclient.OrderReturnApplyService/AddOrderReturnApply"
+	OrderReturnApplyService_DeleteOrderReturnApply_FullMethodName      = "/omsclient.OrderReturnApplyService/DeleteOrderReturnApply"
+	OrderReturnApplyService_UpdateOrderReturnApply_FullMethodName      = "/omsclient.OrderReturnApplyService/UpdateOrderReturnApply"
+	OrderReturnApplyService_QueryOrderReturnApplyDetail_FullMethodName = "/omsclient.OrderReturnApplyService/QueryOrderReturnApplyDetail"
+	OrderReturnApplyService_QueryOrderReturnApplyList_FullMethodName   = "/omsclient.OrderReturnApplyService/QueryOrderReturnApplyList"
 )
 
 // OrderReturnApplyServiceClient is the client API for OrderReturnApplyService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderReturnApplyServiceClient interface {
-	OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq, opts ...grpc.CallOption) (*OrderReturnApplyAddResp, error)
-	// 查询订单退货申请
-	OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq, opts ...grpc.CallOption) (*OrderReturnApplyListResp, error)
-	// 修改订单退货申请状态
-	OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq, opts ...grpc.CallOption) (*OrderReturnApplyUpdateResp, error)
+	// 添加订单退货申请
+	AddOrderReturnApply(ctx context.Context, in *AddOrderReturnApplyReq, opts ...grpc.CallOption) (*AddOrderReturnApplyResp, error)
 	// 删除订单退货申请
-	OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq, opts ...grpc.CallOption) (*OrderReturnApplyDeleteResp, error)
+	DeleteOrderReturnApply(ctx context.Context, in *DeleteOrderReturnApplyReq, opts ...grpc.CallOption) (*DeleteOrderReturnApplyResp, error)
+	// 更新订单退货申请
+	UpdateOrderReturnApply(ctx context.Context, in *UpdateOrderReturnApplyReq, opts ...grpc.CallOption) (*UpdateOrderReturnApplyResp, error)
+	// 查询订单退货申请详情
+	QueryOrderReturnApplyDetail(ctx context.Context, in *QueryOrderReturnApplyDetailReq, opts ...grpc.CallOption) (*QueryOrderReturnApplyDetailResp, error)
+	// 查询订单退货申请列表
+	QueryOrderReturnApplyList(ctx context.Context, in *QueryOrderReturnApplyListReq, opts ...grpc.CallOption) (*QueryOrderReturnApplyListResp, error)
 }
 
 type orderReturnApplyServiceClient struct {
@@ -1631,36 +1671,45 @@ func NewOrderReturnApplyServiceClient(cc grpc.ClientConnInterface) OrderReturnAp
 	return &orderReturnApplyServiceClient{cc}
 }
 
-func (c *orderReturnApplyServiceClient) OrderReturnApplyAdd(ctx context.Context, in *OrderReturnApplyAddReq, opts ...grpc.CallOption) (*OrderReturnApplyAddResp, error) {
-	out := new(OrderReturnApplyAddResp)
-	err := c.cc.Invoke(ctx, OrderReturnApplyService_OrderReturnApplyAdd_FullMethodName, in, out, opts...)
+func (c *orderReturnApplyServiceClient) AddOrderReturnApply(ctx context.Context, in *AddOrderReturnApplyReq, opts ...grpc.CallOption) (*AddOrderReturnApplyResp, error) {
+	out := new(AddOrderReturnApplyResp)
+	err := c.cc.Invoke(ctx, OrderReturnApplyService_AddOrderReturnApply_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderReturnApplyServiceClient) OrderReturnApplyList(ctx context.Context, in *OrderReturnApplyListReq, opts ...grpc.CallOption) (*OrderReturnApplyListResp, error) {
-	out := new(OrderReturnApplyListResp)
-	err := c.cc.Invoke(ctx, OrderReturnApplyService_OrderReturnApplyList_FullMethodName, in, out, opts...)
+func (c *orderReturnApplyServiceClient) DeleteOrderReturnApply(ctx context.Context, in *DeleteOrderReturnApplyReq, opts ...grpc.CallOption) (*DeleteOrderReturnApplyResp, error) {
+	out := new(DeleteOrderReturnApplyResp)
+	err := c.cc.Invoke(ctx, OrderReturnApplyService_DeleteOrderReturnApply_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderReturnApplyServiceClient) OrderReturnApplyUpdate(ctx context.Context, in *OrderReturnApplyUpdateReq, opts ...grpc.CallOption) (*OrderReturnApplyUpdateResp, error) {
-	out := new(OrderReturnApplyUpdateResp)
-	err := c.cc.Invoke(ctx, OrderReturnApplyService_OrderReturnApplyUpdate_FullMethodName, in, out, opts...)
+func (c *orderReturnApplyServiceClient) UpdateOrderReturnApply(ctx context.Context, in *UpdateOrderReturnApplyReq, opts ...grpc.CallOption) (*UpdateOrderReturnApplyResp, error) {
+	out := new(UpdateOrderReturnApplyResp)
+	err := c.cc.Invoke(ctx, OrderReturnApplyService_UpdateOrderReturnApply_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderReturnApplyServiceClient) OrderReturnApplyDelete(ctx context.Context, in *OrderReturnApplyDeleteReq, opts ...grpc.CallOption) (*OrderReturnApplyDeleteResp, error) {
-	out := new(OrderReturnApplyDeleteResp)
-	err := c.cc.Invoke(ctx, OrderReturnApplyService_OrderReturnApplyDelete_FullMethodName, in, out, opts...)
+func (c *orderReturnApplyServiceClient) QueryOrderReturnApplyDetail(ctx context.Context, in *QueryOrderReturnApplyDetailReq, opts ...grpc.CallOption) (*QueryOrderReturnApplyDetailResp, error) {
+	out := new(QueryOrderReturnApplyDetailResp)
+	err := c.cc.Invoke(ctx, OrderReturnApplyService_QueryOrderReturnApplyDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderReturnApplyServiceClient) QueryOrderReturnApplyList(ctx context.Context, in *QueryOrderReturnApplyListReq, opts ...grpc.CallOption) (*QueryOrderReturnApplyListResp, error) {
+	out := new(QueryOrderReturnApplyListResp)
+	err := c.cc.Invoke(ctx, OrderReturnApplyService_QueryOrderReturnApplyList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1671,13 +1720,16 @@ func (c *orderReturnApplyServiceClient) OrderReturnApplyDelete(ctx context.Conte
 // All implementations must embed UnimplementedOrderReturnApplyServiceServer
 // for forward compatibility
 type OrderReturnApplyServiceServer interface {
-	OrderReturnApplyAdd(context.Context, *OrderReturnApplyAddReq) (*OrderReturnApplyAddResp, error)
-	// 查询订单退货申请
-	OrderReturnApplyList(context.Context, *OrderReturnApplyListReq) (*OrderReturnApplyListResp, error)
-	// 修改订单退货申请状态
-	OrderReturnApplyUpdate(context.Context, *OrderReturnApplyUpdateReq) (*OrderReturnApplyUpdateResp, error)
+	// 添加订单退货申请
+	AddOrderReturnApply(context.Context, *AddOrderReturnApplyReq) (*AddOrderReturnApplyResp, error)
 	// 删除订单退货申请
-	OrderReturnApplyDelete(context.Context, *OrderReturnApplyDeleteReq) (*OrderReturnApplyDeleteResp, error)
+	DeleteOrderReturnApply(context.Context, *DeleteOrderReturnApplyReq) (*DeleteOrderReturnApplyResp, error)
+	// 更新订单退货申请
+	UpdateOrderReturnApply(context.Context, *UpdateOrderReturnApplyReq) (*UpdateOrderReturnApplyResp, error)
+	// 查询订单退货申请详情
+	QueryOrderReturnApplyDetail(context.Context, *QueryOrderReturnApplyDetailReq) (*QueryOrderReturnApplyDetailResp, error)
+	// 查询订单退货申请列表
+	QueryOrderReturnApplyList(context.Context, *QueryOrderReturnApplyListReq) (*QueryOrderReturnApplyListResp, error)
 	mustEmbedUnimplementedOrderReturnApplyServiceServer()
 }
 
@@ -1685,17 +1737,20 @@ type OrderReturnApplyServiceServer interface {
 type UnimplementedOrderReturnApplyServiceServer struct {
 }
 
-func (UnimplementedOrderReturnApplyServiceServer) OrderReturnApplyAdd(context.Context, *OrderReturnApplyAddReq) (*OrderReturnApplyAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyAdd not implemented")
+func (UnimplementedOrderReturnApplyServiceServer) AddOrderReturnApply(context.Context, *AddOrderReturnApplyReq) (*AddOrderReturnApplyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOrderReturnApply not implemented")
 }
-func (UnimplementedOrderReturnApplyServiceServer) OrderReturnApplyList(context.Context, *OrderReturnApplyListReq) (*OrderReturnApplyListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyList not implemented")
+func (UnimplementedOrderReturnApplyServiceServer) DeleteOrderReturnApply(context.Context, *DeleteOrderReturnApplyReq) (*DeleteOrderReturnApplyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrderReturnApply not implemented")
 }
-func (UnimplementedOrderReturnApplyServiceServer) OrderReturnApplyUpdate(context.Context, *OrderReturnApplyUpdateReq) (*OrderReturnApplyUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyUpdate not implemented")
+func (UnimplementedOrderReturnApplyServiceServer) UpdateOrderReturnApply(context.Context, *UpdateOrderReturnApplyReq) (*UpdateOrderReturnApplyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderReturnApply not implemented")
 }
-func (UnimplementedOrderReturnApplyServiceServer) OrderReturnApplyDelete(context.Context, *OrderReturnApplyDeleteReq) (*OrderReturnApplyDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnApplyDelete not implemented")
+func (UnimplementedOrderReturnApplyServiceServer) QueryOrderReturnApplyDetail(context.Context, *QueryOrderReturnApplyDetailReq) (*QueryOrderReturnApplyDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderReturnApplyDetail not implemented")
+}
+func (UnimplementedOrderReturnApplyServiceServer) QueryOrderReturnApplyList(context.Context, *QueryOrderReturnApplyListReq) (*QueryOrderReturnApplyListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderReturnApplyList not implemented")
 }
 func (UnimplementedOrderReturnApplyServiceServer) mustEmbedUnimplementedOrderReturnApplyServiceServer() {
 }
@@ -1711,74 +1766,92 @@ func RegisterOrderReturnApplyServiceServer(s grpc.ServiceRegistrar, srv OrderRet
 	s.RegisterService(&OrderReturnApplyService_ServiceDesc, srv)
 }
 
-func _OrderReturnApplyService_OrderReturnApplyAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReturnApplyAddReq)
+func _OrderReturnApplyService_AddOrderReturnApply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOrderReturnApplyReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyAdd(ctx, in)
+		return srv.(OrderReturnApplyServiceServer).AddOrderReturnApply(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderReturnApplyService_OrderReturnApplyAdd_FullMethodName,
+		FullMethod: OrderReturnApplyService_AddOrderReturnApply_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyAdd(ctx, req.(*OrderReturnApplyAddReq))
+		return srv.(OrderReturnApplyServiceServer).AddOrderReturnApply(ctx, req.(*AddOrderReturnApplyReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderReturnApplyService_OrderReturnApplyList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReturnApplyListReq)
+func _OrderReturnApplyService_DeleteOrderReturnApply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOrderReturnApplyReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyList(ctx, in)
+		return srv.(OrderReturnApplyServiceServer).DeleteOrderReturnApply(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderReturnApplyService_OrderReturnApplyList_FullMethodName,
+		FullMethod: OrderReturnApplyService_DeleteOrderReturnApply_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyList(ctx, req.(*OrderReturnApplyListReq))
+		return srv.(OrderReturnApplyServiceServer).DeleteOrderReturnApply(ctx, req.(*DeleteOrderReturnApplyReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderReturnApplyService_OrderReturnApplyUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReturnApplyUpdateReq)
+func _OrderReturnApplyService_UpdateOrderReturnApply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrderReturnApplyReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyUpdate(ctx, in)
+		return srv.(OrderReturnApplyServiceServer).UpdateOrderReturnApply(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderReturnApplyService_OrderReturnApplyUpdate_FullMethodName,
+		FullMethod: OrderReturnApplyService_UpdateOrderReturnApply_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyUpdate(ctx, req.(*OrderReturnApplyUpdateReq))
+		return srv.(OrderReturnApplyServiceServer).UpdateOrderReturnApply(ctx, req.(*UpdateOrderReturnApplyReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderReturnApplyService_OrderReturnApplyDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReturnApplyDeleteReq)
+func _OrderReturnApplyService_QueryOrderReturnApplyDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderReturnApplyDetailReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyDelete(ctx, in)
+		return srv.(OrderReturnApplyServiceServer).QueryOrderReturnApplyDetail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderReturnApplyService_OrderReturnApplyDelete_FullMethodName,
+		FullMethod: OrderReturnApplyService_QueryOrderReturnApplyDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderReturnApplyServiceServer).OrderReturnApplyDelete(ctx, req.(*OrderReturnApplyDeleteReq))
+		return srv.(OrderReturnApplyServiceServer).QueryOrderReturnApplyDetail(ctx, req.(*QueryOrderReturnApplyDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderReturnApplyService_QueryOrderReturnApplyList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderReturnApplyListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderReturnApplyServiceServer).QueryOrderReturnApplyList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderReturnApplyService_QueryOrderReturnApplyList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderReturnApplyServiceServer).QueryOrderReturnApplyList(ctx, req.(*QueryOrderReturnApplyListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1791,20 +1864,24 @@ var OrderReturnApplyService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*OrderReturnApplyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "OrderReturnApplyAdd",
-			Handler:    _OrderReturnApplyService_OrderReturnApplyAdd_Handler,
+			MethodName: "AddOrderReturnApply",
+			Handler:    _OrderReturnApplyService_AddOrderReturnApply_Handler,
 		},
 		{
-			MethodName: "OrderReturnApplyList",
-			Handler:    _OrderReturnApplyService_OrderReturnApplyList_Handler,
+			MethodName: "DeleteOrderReturnApply",
+			Handler:    _OrderReturnApplyService_DeleteOrderReturnApply_Handler,
 		},
 		{
-			MethodName: "OrderReturnApplyUpdate",
-			Handler:    _OrderReturnApplyService_OrderReturnApplyUpdate_Handler,
+			MethodName: "UpdateOrderReturnApply",
+			Handler:    _OrderReturnApplyService_UpdateOrderReturnApply_Handler,
 		},
 		{
-			MethodName: "OrderReturnApplyDelete",
-			Handler:    _OrderReturnApplyService_OrderReturnApplyDelete_Handler,
+			MethodName: "QueryOrderReturnApplyDetail",
+			Handler:    _OrderReturnApplyService_QueryOrderReturnApplyDetail_Handler,
+		},
+		{
+			MethodName: "QueryOrderReturnApplyList",
+			Handler:    _OrderReturnApplyService_QueryOrderReturnApplyList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1812,27 +1889,30 @@ var OrderReturnApplyService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderReturnReasonService_OrderReturnReasonAdd_FullMethodName          = "/omsclient.OrderReturnReasonService/OrderReturnReasonAdd"
-	OrderReturnReasonService_OrderReturnReasonList_FullMethodName         = "/omsclient.OrderReturnReasonService/OrderReturnReasonList"
-	OrderReturnReasonService_OrderReturnReasonUpdate_FullMethodName       = "/omsclient.OrderReturnReasonService/OrderReturnReasonUpdate"
-	OrderReturnReasonService_OrderReturnReasonUpdateStatus_FullMethodName = "/omsclient.OrderReturnReasonService/OrderReturnReasonUpdateStatus"
-	OrderReturnReasonService_OrderReturnReasonDelete_FullMethodName       = "/omsclient.OrderReturnReasonService/OrderReturnReasonDelete"
+	OrderReturnReasonService_AddOrderReturnReason_FullMethodName          = "/omsclient.OrderReturnReasonService/AddOrderReturnReason"
+	OrderReturnReasonService_DeleteOrderReturnReason_FullMethodName       = "/omsclient.OrderReturnReasonService/DeleteOrderReturnReason"
+	OrderReturnReasonService_UpdateOrderReturnReason_FullMethodName       = "/omsclient.OrderReturnReasonService/UpdateOrderReturnReason"
+	OrderReturnReasonService_UpdateOrderReturnReasonStatus_FullMethodName = "/omsclient.OrderReturnReasonService/UpdateOrderReturnReasonStatus"
+	OrderReturnReasonService_QueryOrderReturnReasonDetail_FullMethodName  = "/omsclient.OrderReturnReasonService/QueryOrderReturnReasonDetail"
+	OrderReturnReasonService_QueryOrderReturnReasonList_FullMethodName    = "/omsclient.OrderReturnReasonService/QueryOrderReturnReasonList"
 )
 
 // OrderReturnReasonServiceClient is the client API for OrderReturnReasonService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderReturnReasonServiceClient interface {
-	// 添加退货原因
-	OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq, opts ...grpc.CallOption) (*OrderReturnReasonAddResp, error)
-	// 查询退货原因
-	OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq, opts ...grpc.CallOption) (*OrderReturnReasonListResp, error)
-	// 更新退货原因
-	OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error)
-	// 批量修改退货原因状态
-	OrderReturnReasonUpdateStatus(ctx context.Context, in *OrderReturnReasonUpdateStatusReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error)
-	// 删除退货原因
-	OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error)
+	// 添加退货原因表
+	AddOrderReturnReason(ctx context.Context, in *AddOrderReturnReasonReq, opts ...grpc.CallOption) (*AddOrderReturnReasonResp, error)
+	// 删除退货原因表
+	DeleteOrderReturnReason(ctx context.Context, in *DeleteOrderReturnReasonReq, opts ...grpc.CallOption) (*DeleteOrderReturnReasonResp, error)
+	// 更新退货原因表
+	UpdateOrderReturnReason(ctx context.Context, in *UpdateOrderReturnReasonReq, opts ...grpc.CallOption) (*UpdateOrderReturnReasonResp, error)
+	// 更新退货原因表状态
+	UpdateOrderReturnReasonStatus(ctx context.Context, in *UpdateOrderReturnReasonStatusReq, opts ...grpc.CallOption) (*UpdateOrderReturnReasonStatusResp, error)
+	// 查询退货原因表详情
+	QueryOrderReturnReasonDetail(ctx context.Context, in *QueryOrderReturnReasonDetailReq, opts ...grpc.CallOption) (*QueryOrderReturnReasonDetailResp, error)
+	// 查询退货原因表列表
+	QueryOrderReturnReasonList(ctx context.Context, in *QueryOrderReturnReasonListReq, opts ...grpc.CallOption) (*QueryOrderReturnReasonListResp, error)
 }
 
 type orderReturnReasonServiceClient struct {
@@ -1843,45 +1923,54 @@ func NewOrderReturnReasonServiceClient(cc grpc.ClientConnInterface) OrderReturnR
 	return &orderReturnReasonServiceClient{cc}
 }
 
-func (c *orderReturnReasonServiceClient) OrderReturnReasonAdd(ctx context.Context, in *OrderReturnReasonAddReq, opts ...grpc.CallOption) (*OrderReturnReasonAddResp, error) {
-	out := new(OrderReturnReasonAddResp)
-	err := c.cc.Invoke(ctx, OrderReturnReasonService_OrderReturnReasonAdd_FullMethodName, in, out, opts...)
+func (c *orderReturnReasonServiceClient) AddOrderReturnReason(ctx context.Context, in *AddOrderReturnReasonReq, opts ...grpc.CallOption) (*AddOrderReturnReasonResp, error) {
+	out := new(AddOrderReturnReasonResp)
+	err := c.cc.Invoke(ctx, OrderReturnReasonService_AddOrderReturnReason_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderReturnReasonServiceClient) OrderReturnReasonList(ctx context.Context, in *OrderReturnReasonListReq, opts ...grpc.CallOption) (*OrderReturnReasonListResp, error) {
-	out := new(OrderReturnReasonListResp)
-	err := c.cc.Invoke(ctx, OrderReturnReasonService_OrderReturnReasonList_FullMethodName, in, out, opts...)
+func (c *orderReturnReasonServiceClient) DeleteOrderReturnReason(ctx context.Context, in *DeleteOrderReturnReasonReq, opts ...grpc.CallOption) (*DeleteOrderReturnReasonResp, error) {
+	out := new(DeleteOrderReturnReasonResp)
+	err := c.cc.Invoke(ctx, OrderReturnReasonService_DeleteOrderReturnReason_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderReturnReasonServiceClient) OrderReturnReasonUpdate(ctx context.Context, in *OrderReturnReasonUpdateReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error) {
-	out := new(OrderReturnReasonUpdateResp)
-	err := c.cc.Invoke(ctx, OrderReturnReasonService_OrderReturnReasonUpdate_FullMethodName, in, out, opts...)
+func (c *orderReturnReasonServiceClient) UpdateOrderReturnReason(ctx context.Context, in *UpdateOrderReturnReasonReq, opts ...grpc.CallOption) (*UpdateOrderReturnReasonResp, error) {
+	out := new(UpdateOrderReturnReasonResp)
+	err := c.cc.Invoke(ctx, OrderReturnReasonService_UpdateOrderReturnReason_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderReturnReasonServiceClient) OrderReturnReasonUpdateStatus(ctx context.Context, in *OrderReturnReasonUpdateStatusReq, opts ...grpc.CallOption) (*OrderReturnReasonUpdateResp, error) {
-	out := new(OrderReturnReasonUpdateResp)
-	err := c.cc.Invoke(ctx, OrderReturnReasonService_OrderReturnReasonUpdateStatus_FullMethodName, in, out, opts...)
+func (c *orderReturnReasonServiceClient) UpdateOrderReturnReasonStatus(ctx context.Context, in *UpdateOrderReturnReasonStatusReq, opts ...grpc.CallOption) (*UpdateOrderReturnReasonStatusResp, error) {
+	out := new(UpdateOrderReturnReasonStatusResp)
+	err := c.cc.Invoke(ctx, OrderReturnReasonService_UpdateOrderReturnReasonStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderReturnReasonServiceClient) OrderReturnReasonDelete(ctx context.Context, in *OrderReturnReasonDeleteReq, opts ...grpc.CallOption) (*OrderReturnReasonDeleteResp, error) {
-	out := new(OrderReturnReasonDeleteResp)
-	err := c.cc.Invoke(ctx, OrderReturnReasonService_OrderReturnReasonDelete_FullMethodName, in, out, opts...)
+func (c *orderReturnReasonServiceClient) QueryOrderReturnReasonDetail(ctx context.Context, in *QueryOrderReturnReasonDetailReq, opts ...grpc.CallOption) (*QueryOrderReturnReasonDetailResp, error) {
+	out := new(QueryOrderReturnReasonDetailResp)
+	err := c.cc.Invoke(ctx, OrderReturnReasonService_QueryOrderReturnReasonDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderReturnReasonServiceClient) QueryOrderReturnReasonList(ctx context.Context, in *QueryOrderReturnReasonListReq, opts ...grpc.CallOption) (*QueryOrderReturnReasonListResp, error) {
+	out := new(QueryOrderReturnReasonListResp)
+	err := c.cc.Invoke(ctx, OrderReturnReasonService_QueryOrderReturnReasonList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1892,16 +1981,18 @@ func (c *orderReturnReasonServiceClient) OrderReturnReasonDelete(ctx context.Con
 // All implementations must embed UnimplementedOrderReturnReasonServiceServer
 // for forward compatibility
 type OrderReturnReasonServiceServer interface {
-	// 添加退货原因
-	OrderReturnReasonAdd(context.Context, *OrderReturnReasonAddReq) (*OrderReturnReasonAddResp, error)
-	// 查询退货原因
-	OrderReturnReasonList(context.Context, *OrderReturnReasonListReq) (*OrderReturnReasonListResp, error)
-	// 更新退货原因
-	OrderReturnReasonUpdate(context.Context, *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error)
-	// 批量修改退货原因状态
-	OrderReturnReasonUpdateStatus(context.Context, *OrderReturnReasonUpdateStatusReq) (*OrderReturnReasonUpdateResp, error)
-	// 删除退货原因
-	OrderReturnReasonDelete(context.Context, *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error)
+	// 添加退货原因表
+	AddOrderReturnReason(context.Context, *AddOrderReturnReasonReq) (*AddOrderReturnReasonResp, error)
+	// 删除退货原因表
+	DeleteOrderReturnReason(context.Context, *DeleteOrderReturnReasonReq) (*DeleteOrderReturnReasonResp, error)
+	// 更新退货原因表
+	UpdateOrderReturnReason(context.Context, *UpdateOrderReturnReasonReq) (*UpdateOrderReturnReasonResp, error)
+	// 更新退货原因表状态
+	UpdateOrderReturnReasonStatus(context.Context, *UpdateOrderReturnReasonStatusReq) (*UpdateOrderReturnReasonStatusResp, error)
+	// 查询退货原因表详情
+	QueryOrderReturnReasonDetail(context.Context, *QueryOrderReturnReasonDetailReq) (*QueryOrderReturnReasonDetailResp, error)
+	// 查询退货原因表列表
+	QueryOrderReturnReasonList(context.Context, *QueryOrderReturnReasonListReq) (*QueryOrderReturnReasonListResp, error)
 	mustEmbedUnimplementedOrderReturnReasonServiceServer()
 }
 
@@ -1909,20 +2000,23 @@ type OrderReturnReasonServiceServer interface {
 type UnimplementedOrderReturnReasonServiceServer struct {
 }
 
-func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonAdd(context.Context, *OrderReturnReasonAddReq) (*OrderReturnReasonAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonAdd not implemented")
+func (UnimplementedOrderReturnReasonServiceServer) AddOrderReturnReason(context.Context, *AddOrderReturnReasonReq) (*AddOrderReturnReasonResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOrderReturnReason not implemented")
 }
-func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonList(context.Context, *OrderReturnReasonListReq) (*OrderReturnReasonListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonList not implemented")
+func (UnimplementedOrderReturnReasonServiceServer) DeleteOrderReturnReason(context.Context, *DeleteOrderReturnReasonReq) (*DeleteOrderReturnReasonResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrderReturnReason not implemented")
 }
-func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonUpdate(context.Context, *OrderReturnReasonUpdateReq) (*OrderReturnReasonUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonUpdate not implemented")
+func (UnimplementedOrderReturnReasonServiceServer) UpdateOrderReturnReason(context.Context, *UpdateOrderReturnReasonReq) (*UpdateOrderReturnReasonResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderReturnReason not implemented")
 }
-func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonUpdateStatus(context.Context, *OrderReturnReasonUpdateStatusReq) (*OrderReturnReasonUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonUpdateStatus not implemented")
+func (UnimplementedOrderReturnReasonServiceServer) UpdateOrderReturnReasonStatus(context.Context, *UpdateOrderReturnReasonStatusReq) (*UpdateOrderReturnReasonStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderReturnReasonStatus not implemented")
 }
-func (UnimplementedOrderReturnReasonServiceServer) OrderReturnReasonDelete(context.Context, *OrderReturnReasonDeleteReq) (*OrderReturnReasonDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderReturnReasonDelete not implemented")
+func (UnimplementedOrderReturnReasonServiceServer) QueryOrderReturnReasonDetail(context.Context, *QueryOrderReturnReasonDetailReq) (*QueryOrderReturnReasonDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderReturnReasonDetail not implemented")
+}
+func (UnimplementedOrderReturnReasonServiceServer) QueryOrderReturnReasonList(context.Context, *QueryOrderReturnReasonListReq) (*QueryOrderReturnReasonListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderReturnReasonList not implemented")
 }
 func (UnimplementedOrderReturnReasonServiceServer) mustEmbedUnimplementedOrderReturnReasonServiceServer() {
 }
@@ -1938,92 +2032,110 @@ func RegisterOrderReturnReasonServiceServer(s grpc.ServiceRegistrar, srv OrderRe
 	s.RegisterService(&OrderReturnReasonService_ServiceDesc, srv)
 }
 
-func _OrderReturnReasonService_OrderReturnReasonAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReturnReasonAddReq)
+func _OrderReturnReasonService_AddOrderReturnReason_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOrderReturnReasonReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonAdd(ctx, in)
+		return srv.(OrderReturnReasonServiceServer).AddOrderReturnReason(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderReturnReasonService_OrderReturnReasonAdd_FullMethodName,
+		FullMethod: OrderReturnReasonService_AddOrderReturnReason_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonAdd(ctx, req.(*OrderReturnReasonAddReq))
+		return srv.(OrderReturnReasonServiceServer).AddOrderReturnReason(ctx, req.(*AddOrderReturnReasonReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderReturnReasonService_OrderReturnReasonList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReturnReasonListReq)
+func _OrderReturnReasonService_DeleteOrderReturnReason_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOrderReturnReasonReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonList(ctx, in)
+		return srv.(OrderReturnReasonServiceServer).DeleteOrderReturnReason(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderReturnReasonService_OrderReturnReasonList_FullMethodName,
+		FullMethod: OrderReturnReasonService_DeleteOrderReturnReason_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonList(ctx, req.(*OrderReturnReasonListReq))
+		return srv.(OrderReturnReasonServiceServer).DeleteOrderReturnReason(ctx, req.(*DeleteOrderReturnReasonReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderReturnReasonService_OrderReturnReasonUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReturnReasonUpdateReq)
+func _OrderReturnReasonService_UpdateOrderReturnReason_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrderReturnReasonReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonUpdate(ctx, in)
+		return srv.(OrderReturnReasonServiceServer).UpdateOrderReturnReason(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderReturnReasonService_OrderReturnReasonUpdate_FullMethodName,
+		FullMethod: OrderReturnReasonService_UpdateOrderReturnReason_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonUpdate(ctx, req.(*OrderReturnReasonUpdateReq))
+		return srv.(OrderReturnReasonServiceServer).UpdateOrderReturnReason(ctx, req.(*UpdateOrderReturnReasonReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderReturnReasonService_OrderReturnReasonUpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReturnReasonUpdateStatusReq)
+func _OrderReturnReasonService_UpdateOrderReturnReasonStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrderReturnReasonStatusReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonUpdateStatus(ctx, in)
+		return srv.(OrderReturnReasonServiceServer).UpdateOrderReturnReasonStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderReturnReasonService_OrderReturnReasonUpdateStatus_FullMethodName,
+		FullMethod: OrderReturnReasonService_UpdateOrderReturnReasonStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonUpdateStatus(ctx, req.(*OrderReturnReasonUpdateStatusReq))
+		return srv.(OrderReturnReasonServiceServer).UpdateOrderReturnReasonStatus(ctx, req.(*UpdateOrderReturnReasonStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderReturnReasonService_OrderReturnReasonDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReturnReasonDeleteReq)
+func _OrderReturnReasonService_QueryOrderReturnReasonDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderReturnReasonDetailReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonDelete(ctx, in)
+		return srv.(OrderReturnReasonServiceServer).QueryOrderReturnReasonDetail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderReturnReasonService_OrderReturnReasonDelete_FullMethodName,
+		FullMethod: OrderReturnReasonService_QueryOrderReturnReasonDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderReturnReasonServiceServer).OrderReturnReasonDelete(ctx, req.(*OrderReturnReasonDeleteReq))
+		return srv.(OrderReturnReasonServiceServer).QueryOrderReturnReasonDetail(ctx, req.(*QueryOrderReturnReasonDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderReturnReasonService_QueryOrderReturnReasonList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderReturnReasonListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderReturnReasonServiceServer).QueryOrderReturnReasonList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderReturnReasonService_QueryOrderReturnReasonList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderReturnReasonServiceServer).QueryOrderReturnReasonList(ctx, req.(*QueryOrderReturnReasonListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2036,24 +2148,28 @@ var OrderReturnReasonService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*OrderReturnReasonServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "OrderReturnReasonAdd",
-			Handler:    _OrderReturnReasonService_OrderReturnReasonAdd_Handler,
+			MethodName: "AddOrderReturnReason",
+			Handler:    _OrderReturnReasonService_AddOrderReturnReason_Handler,
 		},
 		{
-			MethodName: "OrderReturnReasonList",
-			Handler:    _OrderReturnReasonService_OrderReturnReasonList_Handler,
+			MethodName: "DeleteOrderReturnReason",
+			Handler:    _OrderReturnReasonService_DeleteOrderReturnReason_Handler,
 		},
 		{
-			MethodName: "OrderReturnReasonUpdate",
-			Handler:    _OrderReturnReasonService_OrderReturnReasonUpdate_Handler,
+			MethodName: "UpdateOrderReturnReason",
+			Handler:    _OrderReturnReasonService_UpdateOrderReturnReason_Handler,
 		},
 		{
-			MethodName: "OrderReturnReasonUpdateStatus",
-			Handler:    _OrderReturnReasonService_OrderReturnReasonUpdateStatus_Handler,
+			MethodName: "UpdateOrderReturnReasonStatus",
+			Handler:    _OrderReturnReasonService_UpdateOrderReturnReasonStatus_Handler,
 		},
 		{
-			MethodName: "OrderReturnReasonDelete",
-			Handler:    _OrderReturnReasonService_OrderReturnReasonDelete_Handler,
+			MethodName: "QueryOrderReturnReasonDetail",
+			Handler:    _OrderReturnReasonService_QueryOrderReturnReasonDetail_Handler,
+		},
+		{
+			MethodName: "QueryOrderReturnReasonList",
+			Handler:    _OrderReturnReasonService_QueryOrderReturnReasonList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -2061,24 +2177,27 @@ var OrderReturnReasonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderSettingService_OrderSettingAdd_FullMethodName    = "/omsclient.OrderSettingService/OrderSettingAdd"
-	OrderSettingService_OrderSettingList_FullMethodName   = "/omsclient.OrderSettingService/OrderSettingList"
-	OrderSettingService_OrderSettingUpdate_FullMethodName = "/omsclient.OrderSettingService/OrderSettingUpdate"
-	OrderSettingService_OrderSettingDelete_FullMethodName = "/omsclient.OrderSettingService/OrderSettingDelete"
+	OrderSettingService_AddOrderSetting_FullMethodName         = "/omsclient.OrderSettingService/AddOrderSetting"
+	OrderSettingService_DeleteOrderSetting_FullMethodName      = "/omsclient.OrderSettingService/DeleteOrderSetting"
+	OrderSettingService_UpdateOrderSetting_FullMethodName      = "/omsclient.OrderSettingService/UpdateOrderSetting"
+	OrderSettingService_QueryOrderSettingDetail_FullMethodName = "/omsclient.OrderSettingService/QueryOrderSettingDetail"
+	OrderSettingService_QueryOrderSettingList_FullMethodName   = "/omsclient.OrderSettingService/QueryOrderSettingList"
 )
 
 // OrderSettingServiceClient is the client API for OrderSettingService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderSettingServiceClient interface {
-	// 添加订单设置
-	OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error)
-	// 查询订单设置
-	OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error)
-	// 更新订单设置
-	OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error)
-	// 删除订单设置
-	OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error)
+	// 添加订单设置表
+	AddOrderSetting(ctx context.Context, in *AddOrderSettingReq, opts ...grpc.CallOption) (*AddOrderSettingResp, error)
+	// 删除订单设置表
+	DeleteOrderSetting(ctx context.Context, in *DeleteOrderSettingReq, opts ...grpc.CallOption) (*DeleteOrderSettingResp, error)
+	// 更新订单设置表
+	UpdateOrderSetting(ctx context.Context, in *UpdateOrderSettingReq, opts ...grpc.CallOption) (*UpdateOrderSettingResp, error)
+	// 查询订单设置表详情
+	QueryOrderSettingDetail(ctx context.Context, in *QueryOrderSettingDetailReq, opts ...grpc.CallOption) (*QueryOrderSettingDetailResp, error)
+	// 查询订单设置表列表
+	QueryOrderSettingList(ctx context.Context, in *QueryOrderSettingListReq, opts ...grpc.CallOption) (*QueryOrderSettingListResp, error)
 }
 
 type orderSettingServiceClient struct {
@@ -2089,36 +2208,45 @@ func NewOrderSettingServiceClient(cc grpc.ClientConnInterface) OrderSettingServi
 	return &orderSettingServiceClient{cc}
 }
 
-func (c *orderSettingServiceClient) OrderSettingAdd(ctx context.Context, in *OrderSettingAddReq, opts ...grpc.CallOption) (*OrderSettingAddResp, error) {
-	out := new(OrderSettingAddResp)
-	err := c.cc.Invoke(ctx, OrderSettingService_OrderSettingAdd_FullMethodName, in, out, opts...)
+func (c *orderSettingServiceClient) AddOrderSetting(ctx context.Context, in *AddOrderSettingReq, opts ...grpc.CallOption) (*AddOrderSettingResp, error) {
+	out := new(AddOrderSettingResp)
+	err := c.cc.Invoke(ctx, OrderSettingService_AddOrderSetting_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderSettingServiceClient) OrderSettingList(ctx context.Context, in *OrderSettingListReq, opts ...grpc.CallOption) (*OrderSettingListResp, error) {
-	out := new(OrderSettingListResp)
-	err := c.cc.Invoke(ctx, OrderSettingService_OrderSettingList_FullMethodName, in, out, opts...)
+func (c *orderSettingServiceClient) DeleteOrderSetting(ctx context.Context, in *DeleteOrderSettingReq, opts ...grpc.CallOption) (*DeleteOrderSettingResp, error) {
+	out := new(DeleteOrderSettingResp)
+	err := c.cc.Invoke(ctx, OrderSettingService_DeleteOrderSetting_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderSettingServiceClient) OrderSettingUpdate(ctx context.Context, in *OrderSettingUpdateReq, opts ...grpc.CallOption) (*OrderSettingUpdateResp, error) {
-	out := new(OrderSettingUpdateResp)
-	err := c.cc.Invoke(ctx, OrderSettingService_OrderSettingUpdate_FullMethodName, in, out, opts...)
+func (c *orderSettingServiceClient) UpdateOrderSetting(ctx context.Context, in *UpdateOrderSettingReq, opts ...grpc.CallOption) (*UpdateOrderSettingResp, error) {
+	out := new(UpdateOrderSettingResp)
+	err := c.cc.Invoke(ctx, OrderSettingService_UpdateOrderSetting_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *orderSettingServiceClient) OrderSettingDelete(ctx context.Context, in *OrderSettingDeleteReq, opts ...grpc.CallOption) (*OrderSettingDeleteResp, error) {
-	out := new(OrderSettingDeleteResp)
-	err := c.cc.Invoke(ctx, OrderSettingService_OrderSettingDelete_FullMethodName, in, out, opts...)
+func (c *orderSettingServiceClient) QueryOrderSettingDetail(ctx context.Context, in *QueryOrderSettingDetailReq, opts ...grpc.CallOption) (*QueryOrderSettingDetailResp, error) {
+	out := new(QueryOrderSettingDetailResp)
+	err := c.cc.Invoke(ctx, OrderSettingService_QueryOrderSettingDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderSettingServiceClient) QueryOrderSettingList(ctx context.Context, in *QueryOrderSettingListReq, opts ...grpc.CallOption) (*QueryOrderSettingListResp, error) {
+	out := new(QueryOrderSettingListResp)
+	err := c.cc.Invoke(ctx, OrderSettingService_QueryOrderSettingList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2129,14 +2257,16 @@ func (c *orderSettingServiceClient) OrderSettingDelete(ctx context.Context, in *
 // All implementations must embed UnimplementedOrderSettingServiceServer
 // for forward compatibility
 type OrderSettingServiceServer interface {
-	// 添加订单设置
-	OrderSettingAdd(context.Context, *OrderSettingAddReq) (*OrderSettingAddResp, error)
-	// 查询订单设置
-	OrderSettingList(context.Context, *OrderSettingListReq) (*OrderSettingListResp, error)
-	// 更新订单设置
-	OrderSettingUpdate(context.Context, *OrderSettingUpdateReq) (*OrderSettingUpdateResp, error)
-	// 删除订单设置
-	OrderSettingDelete(context.Context, *OrderSettingDeleteReq) (*OrderSettingDeleteResp, error)
+	// 添加订单设置表
+	AddOrderSetting(context.Context, *AddOrderSettingReq) (*AddOrderSettingResp, error)
+	// 删除订单设置表
+	DeleteOrderSetting(context.Context, *DeleteOrderSettingReq) (*DeleteOrderSettingResp, error)
+	// 更新订单设置表
+	UpdateOrderSetting(context.Context, *UpdateOrderSettingReq) (*UpdateOrderSettingResp, error)
+	// 查询订单设置表详情
+	QueryOrderSettingDetail(context.Context, *QueryOrderSettingDetailReq) (*QueryOrderSettingDetailResp, error)
+	// 查询订单设置表列表
+	QueryOrderSettingList(context.Context, *QueryOrderSettingListReq) (*QueryOrderSettingListResp, error)
 	mustEmbedUnimplementedOrderSettingServiceServer()
 }
 
@@ -2144,17 +2274,20 @@ type OrderSettingServiceServer interface {
 type UnimplementedOrderSettingServiceServer struct {
 }
 
-func (UnimplementedOrderSettingServiceServer) OrderSettingAdd(context.Context, *OrderSettingAddReq) (*OrderSettingAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingAdd not implemented")
+func (UnimplementedOrderSettingServiceServer) AddOrderSetting(context.Context, *AddOrderSettingReq) (*AddOrderSettingResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOrderSetting not implemented")
 }
-func (UnimplementedOrderSettingServiceServer) OrderSettingList(context.Context, *OrderSettingListReq) (*OrderSettingListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingList not implemented")
+func (UnimplementedOrderSettingServiceServer) DeleteOrderSetting(context.Context, *DeleteOrderSettingReq) (*DeleteOrderSettingResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrderSetting not implemented")
 }
-func (UnimplementedOrderSettingServiceServer) OrderSettingUpdate(context.Context, *OrderSettingUpdateReq) (*OrderSettingUpdateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingUpdate not implemented")
+func (UnimplementedOrderSettingServiceServer) UpdateOrderSetting(context.Context, *UpdateOrderSettingReq) (*UpdateOrderSettingResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderSetting not implemented")
 }
-func (UnimplementedOrderSettingServiceServer) OrderSettingDelete(context.Context, *OrderSettingDeleteReq) (*OrderSettingDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OrderSettingDelete not implemented")
+func (UnimplementedOrderSettingServiceServer) QueryOrderSettingDetail(context.Context, *QueryOrderSettingDetailReq) (*QueryOrderSettingDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderSettingDetail not implemented")
+}
+func (UnimplementedOrderSettingServiceServer) QueryOrderSettingList(context.Context, *QueryOrderSettingListReq) (*QueryOrderSettingListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderSettingList not implemented")
 }
 func (UnimplementedOrderSettingServiceServer) mustEmbedUnimplementedOrderSettingServiceServer() {}
 
@@ -2169,74 +2302,92 @@ func RegisterOrderSettingServiceServer(s grpc.ServiceRegistrar, srv OrderSetting
 	s.RegisterService(&OrderSettingService_ServiceDesc, srv)
 }
 
-func _OrderSettingService_OrderSettingAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderSettingAddReq)
+func _OrderSettingService_AddOrderSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOrderSettingReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderSettingServiceServer).OrderSettingAdd(ctx, in)
+		return srv.(OrderSettingServiceServer).AddOrderSetting(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderSettingService_OrderSettingAdd_FullMethodName,
+		FullMethod: OrderSettingService_AddOrderSetting_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderSettingServiceServer).OrderSettingAdd(ctx, req.(*OrderSettingAddReq))
+		return srv.(OrderSettingServiceServer).AddOrderSetting(ctx, req.(*AddOrderSettingReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderSettingService_OrderSettingList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderSettingListReq)
+func _OrderSettingService_DeleteOrderSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOrderSettingReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderSettingServiceServer).OrderSettingList(ctx, in)
+		return srv.(OrderSettingServiceServer).DeleteOrderSetting(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderSettingService_OrderSettingList_FullMethodName,
+		FullMethod: OrderSettingService_DeleteOrderSetting_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderSettingServiceServer).OrderSettingList(ctx, req.(*OrderSettingListReq))
+		return srv.(OrderSettingServiceServer).DeleteOrderSetting(ctx, req.(*DeleteOrderSettingReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderSettingService_OrderSettingUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderSettingUpdateReq)
+func _OrderSettingService_UpdateOrderSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrderSettingReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderSettingServiceServer).OrderSettingUpdate(ctx, in)
+		return srv.(OrderSettingServiceServer).UpdateOrderSetting(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderSettingService_OrderSettingUpdate_FullMethodName,
+		FullMethod: OrderSettingService_UpdateOrderSetting_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderSettingServiceServer).OrderSettingUpdate(ctx, req.(*OrderSettingUpdateReq))
+		return srv.(OrderSettingServiceServer).UpdateOrderSetting(ctx, req.(*UpdateOrderSettingReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderSettingService_OrderSettingDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderSettingDeleteReq)
+func _OrderSettingService_QueryOrderSettingDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderSettingDetailReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrderSettingServiceServer).OrderSettingDelete(ctx, in)
+		return srv.(OrderSettingServiceServer).QueryOrderSettingDetail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OrderSettingService_OrderSettingDelete_FullMethodName,
+		FullMethod: OrderSettingService_QueryOrderSettingDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderSettingServiceServer).OrderSettingDelete(ctx, req.(*OrderSettingDeleteReq))
+		return srv.(OrderSettingServiceServer).QueryOrderSettingDetail(ctx, req.(*QueryOrderSettingDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderSettingService_QueryOrderSettingList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderSettingListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderSettingServiceServer).QueryOrderSettingList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderSettingService_QueryOrderSettingList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderSettingServiceServer).QueryOrderSettingList(ctx, req.(*QueryOrderSettingListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2249,20 +2400,24 @@ var OrderSettingService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*OrderSettingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "OrderSettingAdd",
-			Handler:    _OrderSettingService_OrderSettingAdd_Handler,
+			MethodName: "AddOrderSetting",
+			Handler:    _OrderSettingService_AddOrderSetting_Handler,
 		},
 		{
-			MethodName: "OrderSettingList",
-			Handler:    _OrderSettingService_OrderSettingList_Handler,
+			MethodName: "DeleteOrderSetting",
+			Handler:    _OrderSettingService_DeleteOrderSetting_Handler,
 		},
 		{
-			MethodName: "OrderSettingUpdate",
-			Handler:    _OrderSettingService_OrderSettingUpdate_Handler,
+			MethodName: "UpdateOrderSetting",
+			Handler:    _OrderSettingService_UpdateOrderSetting_Handler,
 		},
 		{
-			MethodName: "OrderSettingDelete",
-			Handler:    _OrderSettingService_OrderSettingDelete_Handler,
+			MethodName: "QueryOrderSettingDetail",
+			Handler:    _OrderSettingService_QueryOrderSettingDetail_Handler,
+		},
+		{
+			MethodName: "QueryOrderSettingList",
+			Handler:    _OrderSettingService_QueryOrderSettingList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

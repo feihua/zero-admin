@@ -22,26 +22,32 @@ func NewOrderSettingServiceServer(svcCtx *svc.ServiceContext) *OrderSettingServi
 	}
 }
 
-// 添加订单设置
-func (s *OrderSettingServiceServer) OrderSettingAdd(ctx context.Context, in *omsclient.OrderSettingAddReq) (*omsclient.OrderSettingAddResp, error) {
-	l := ordersettingservicelogic.NewOrderSettingAddLogic(ctx, s.svcCtx)
-	return l.OrderSettingAdd(in)
+// 添加订单设置表
+func (s *OrderSettingServiceServer) AddOrderSetting(ctx context.Context, in *omsclient.AddOrderSettingReq) (*omsclient.AddOrderSettingResp, error) {
+	l := ordersettingservicelogic.NewAddOrderSettingLogic(ctx, s.svcCtx)
+	return l.AddOrderSetting(in)
 }
 
-// 查询订单设置
-func (s *OrderSettingServiceServer) OrderSettingList(ctx context.Context, in *omsclient.OrderSettingListReq) (*omsclient.OrderSettingListResp, error) {
-	l := ordersettingservicelogic.NewOrderSettingListLogic(ctx, s.svcCtx)
-	return l.OrderSettingList(in)
+// 删除订单设置表
+func (s *OrderSettingServiceServer) DeleteOrderSetting(ctx context.Context, in *omsclient.DeleteOrderSettingReq) (*omsclient.DeleteOrderSettingResp, error) {
+	l := ordersettingservicelogic.NewDeleteOrderSettingLogic(ctx, s.svcCtx)
+	return l.DeleteOrderSetting(in)
 }
 
-// 更新订单设置
-func (s *OrderSettingServiceServer) OrderSettingUpdate(ctx context.Context, in *omsclient.OrderSettingUpdateReq) (*omsclient.OrderSettingUpdateResp, error) {
-	l := ordersettingservicelogic.NewOrderSettingUpdateLogic(ctx, s.svcCtx)
-	return l.OrderSettingUpdate(in)
+// 更新订单设置表
+func (s *OrderSettingServiceServer) UpdateOrderSetting(ctx context.Context, in *omsclient.UpdateOrderSettingReq) (*omsclient.UpdateOrderSettingResp, error) {
+	l := ordersettingservicelogic.NewUpdateOrderSettingLogic(ctx, s.svcCtx)
+	return l.UpdateOrderSetting(in)
 }
 
-// 删除订单设置
-func (s *OrderSettingServiceServer) OrderSettingDelete(ctx context.Context, in *omsclient.OrderSettingDeleteReq) (*omsclient.OrderSettingDeleteResp, error) {
-	l := ordersettingservicelogic.NewOrderSettingDeleteLogic(ctx, s.svcCtx)
-	return l.OrderSettingDelete(in)
+// 查询订单设置表详情
+func (s *OrderSettingServiceServer) QueryOrderSettingDetail(ctx context.Context, in *omsclient.QueryOrderSettingDetailReq) (*omsclient.QueryOrderSettingDetailResp, error) {
+	l := ordersettingservicelogic.NewQueryOrderSettingDetailLogic(ctx, s.svcCtx)
+	return l.QueryOrderSettingDetail(in)
+}
+
+// 查询订单设置表列表
+func (s *OrderSettingServiceServer) QueryOrderSettingList(ctx context.Context, in *omsclient.QueryOrderSettingListReq) (*omsclient.QueryOrderSettingListResp, error) {
+	l := ordersettingservicelogic.NewQueryOrderSettingListLogic(ctx, s.svcCtx)
+	return l.QueryOrderSettingList(in)
 }

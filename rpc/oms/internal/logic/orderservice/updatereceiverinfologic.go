@@ -47,7 +47,8 @@ func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(in *omsclient.UpdateReceive
 	order.ReceiverProvince = in.ReceiverProvince
 	order.ReceiverCity = in.ReceiverCity
 	order.ReceiverRegion = in.ReceiverRegion
-	order.ModifyTime = time.Now()
+	now := time.Now()
+	order.ModifyTime = &now
 
 	_, err = q.WithContext(l.ctx).Updates(order)
 
@@ -60,7 +61,7 @@ func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(in *omsclient.UpdateReceive
 	err = query.OmsOrderOperateHistory.WithContext(l.ctx).Create(&model.OmsOrderOperateHistory{
 		OrderID:     in.OrderId,
 		OperateMan:  in.OperateMan,
-		CreateTime:  time.Now(),
+		CreateTime:  now,
 		OrderStatus: in.Status,
 		Note:        &note,
 	})

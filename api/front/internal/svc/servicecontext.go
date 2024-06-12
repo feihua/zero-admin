@@ -9,7 +9,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/oms/client/cartitemservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/companyaddressservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderitemservice"
-	"github.com/feihua/zero-admin/rpc/oms/client/orderoperatehistorservice"
+	"github.com/feihua/zero-admin/rpc/oms/client/orderoperatehistoryservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderreturnapplyservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderreturnreasonservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderservice"
@@ -118,7 +118,7 @@ type ServiceContext struct {
 	CartItemService            cartitemservice.CartItemService
 	CompanyAddressService      companyaddressservice.CompanyAddressService
 	OrderItemService           orderitemservice.OrderItemService
-	OrderOperateHistoryService orderoperatehistorservice.OrderOperateHistorService
+	OrderOperateHistoryService orderoperatehistoryservice.OrderOperateHistoryService
 	OrderReturnApplyService    orderreturnapplyservice.OrderReturnApplyService
 	OrderReturnReasonService   orderreturnreasonservice.OrderReturnReasonService
 	OrderService               orderservice.OrderService
@@ -203,7 +203,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		CartItemService:            cartitemservice.NewCartItemService(omsClient),
 		CompanyAddressService:      companyaddressservice.NewCompanyAddressService(omsClient),
 		OrderItemService:           orderitemservice.NewOrderItemService(omsClient),
-		OrderOperateHistoryService: orderoperatehistorservice.NewOrderOperateHistorService(omsClient),
+		OrderOperateHistoryService: orderoperatehistoryservice.NewOrderOperateHistoryService(omsClient),
 		OrderReturnApplyService:    orderreturnapplyservice.NewOrderReturnApplyService(omsClient),
 		OrderReturnReasonService:   orderreturnreasonservice.NewOrderReturnReasonService(omsClient),
 		OrderService:               orderservice.NewOrderService(omsClient),

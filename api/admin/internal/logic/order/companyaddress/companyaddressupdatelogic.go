@@ -33,7 +33,7 @@ func NewCompanyAddressUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // CompanyAddressUpdate 更新公司收货地址
 func (l *CompanyAddressUpdateLogic) CompanyAddressUpdate(req *types.UpdateCompanyAddressReq) (resp *types.UpdateCompanyAddressResp, err error) {
-	_, err = l.svcCtx.CompanyAddressService.CompanyAddressUpdate(l.ctx, &omsclient.CompanyAddressUpdateReq{
+	_, err = l.svcCtx.CompanyAddressService.UpdateCompanyAddress(l.ctx, &omsclient.UpdateCompanyAddressReq{
 		Id:            req.Id,
 		AddressName:   req.AddressName,
 		SendStatus:    req.SendStatus,

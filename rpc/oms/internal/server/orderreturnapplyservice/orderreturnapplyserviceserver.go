@@ -22,25 +22,32 @@ func NewOrderReturnApplyServiceServer(svcCtx *svc.ServiceContext) *OrderReturnAp
 	}
 }
 
-func (s *OrderReturnApplyServiceServer) OrderReturnApplyAdd(ctx context.Context, in *omsclient.OrderReturnApplyAddReq) (*omsclient.OrderReturnApplyAddResp, error) {
-	l := orderreturnapplyservicelogic.NewOrderReturnApplyAddLogic(ctx, s.svcCtx)
-	return l.OrderReturnApplyAdd(in)
-}
-
-// 查询订单退货申请
-func (s *OrderReturnApplyServiceServer) OrderReturnApplyList(ctx context.Context, in *omsclient.OrderReturnApplyListReq) (*omsclient.OrderReturnApplyListResp, error) {
-	l := orderreturnapplyservicelogic.NewOrderReturnApplyListLogic(ctx, s.svcCtx)
-	return l.OrderReturnApplyList(in)
-}
-
-// 修改订单退货申请状态
-func (s *OrderReturnApplyServiceServer) OrderReturnApplyUpdate(ctx context.Context, in *omsclient.OrderReturnApplyUpdateReq) (*omsclient.OrderReturnApplyUpdateResp, error) {
-	l := orderreturnapplyservicelogic.NewOrderReturnApplyUpdateLogic(ctx, s.svcCtx)
-	return l.OrderReturnApplyUpdate(in)
+// 添加订单退货申请
+func (s *OrderReturnApplyServiceServer) AddOrderReturnApply(ctx context.Context, in *omsclient.AddOrderReturnApplyReq) (*omsclient.AddOrderReturnApplyResp, error) {
+	l := orderreturnapplyservicelogic.NewAddOrderReturnApplyLogic(ctx, s.svcCtx)
+	return l.AddOrderReturnApply(in)
 }
 
 // 删除订单退货申请
-func (s *OrderReturnApplyServiceServer) OrderReturnApplyDelete(ctx context.Context, in *omsclient.OrderReturnApplyDeleteReq) (*omsclient.OrderReturnApplyDeleteResp, error) {
-	l := orderreturnapplyservicelogic.NewOrderReturnApplyDeleteLogic(ctx, s.svcCtx)
-	return l.OrderReturnApplyDelete(in)
+func (s *OrderReturnApplyServiceServer) DeleteOrderReturnApply(ctx context.Context, in *omsclient.DeleteOrderReturnApplyReq) (*omsclient.DeleteOrderReturnApplyResp, error) {
+	l := orderreturnapplyservicelogic.NewDeleteOrderReturnApplyLogic(ctx, s.svcCtx)
+	return l.DeleteOrderReturnApply(in)
+}
+
+// 更新订单退货申请
+func (s *OrderReturnApplyServiceServer) UpdateOrderReturnApply(ctx context.Context, in *omsclient.UpdateOrderReturnApplyReq) (*omsclient.UpdateOrderReturnApplyResp, error) {
+	l := orderreturnapplyservicelogic.NewUpdateOrderReturnApplyLogic(ctx, s.svcCtx)
+	return l.UpdateOrderReturnApply(in)
+}
+
+// 查询订单退货申请详情
+func (s *OrderReturnApplyServiceServer) QueryOrderReturnApplyDetail(ctx context.Context, in *omsclient.QueryOrderReturnApplyDetailReq) (*omsclient.QueryOrderReturnApplyDetailResp, error) {
+	l := orderreturnapplyservicelogic.NewQueryOrderReturnApplyDetailLogic(ctx, s.svcCtx)
+	return l.QueryOrderReturnApplyDetail(in)
+}
+
+// 查询订单退货申请列表
+func (s *OrderReturnApplyServiceServer) QueryOrderReturnApplyList(ctx context.Context, in *omsclient.QueryOrderReturnApplyListReq) (*omsclient.QueryOrderReturnApplyListResp, error) {
+	l := orderreturnapplyservicelogic.NewQueryOrderReturnApplyListLogic(ctx, s.svcCtx)
+	return l.QueryOrderReturnApplyList(in)
 }

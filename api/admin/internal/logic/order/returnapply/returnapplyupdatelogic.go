@@ -34,7 +34,7 @@ func NewReturnApplyUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // ReturnApplyUpdate 修改订单退货申请状态
 func (l *ReturnApplyUpdateLogic) ReturnApplyUpdate(req types.UpdateReturnApplyReq) (*types.UpdateReturnApplyResp, error) {
 	userName := l.ctx.Value("userName").(string)
-	_, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyUpdate(l.ctx, &omsclient.OrderReturnApplyUpdateReq{
+	_, err := l.svcCtx.OrderReturnApplyService.UpdateOrderReturnApply(l.ctx, &omsclient.UpdateOrderReturnApplyReq{
 		Id:               req.Id,
 		CompanyAddressId: req.CompanyAddressId,
 		Status:           req.Status,

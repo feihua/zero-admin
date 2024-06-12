@@ -33,7 +33,7 @@ func NewCompanyAddressDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // CompanyAddressDelete 删除公司收货地址
 func (l *CompanyAddressDeleteLogic) CompanyAddressDelete(req *types.DeleteCompanyAddressReq) (resp *types.DeleteCompanyAddressResp, err error) {
-	_, err = l.svcCtx.CompanyAddressService.CompanyAddressDelete(l.ctx, &omsclient.CompanyAddressDeleteReq{
+	_, err = l.svcCtx.CompanyAddressService.DeleteCompanyAddress(l.ctx, &omsclient.DeleteCompanyAddressReq{
 		Ids: req.Ids,
 	})
 

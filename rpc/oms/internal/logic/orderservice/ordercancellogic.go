@@ -49,7 +49,8 @@ func (l *OrderCancelLogic) OrderCancel(in *omsclient.OrderCancelReq) (*omsclient
 		item.ID = in.OrderId
 		item.ConfirmStatus = 0
 		item.Status = 4
-		item.ReceiveTime = time.Now()
+		now := time.Now()
+		item.ReceiveTime = &now
 		_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId)).Updates(item)
 		if err != nil {
 			return nil, err

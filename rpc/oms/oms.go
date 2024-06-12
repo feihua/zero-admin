@@ -8,7 +8,7 @@ import (
 	cartitemserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/cartitemservice"
 	companyaddressserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/companyaddressservice"
 	orderitemserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderitemservice"
-	orderoperatehistorserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderoperatehistorservice"
+	orderoperatehistoryserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderoperatehistoryservice"
 	orderreturnapplyserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderreturnapplyservice"
 	orderreturnreasonserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderreturnreasonservice"
 	orderserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderservice"
@@ -37,7 +37,7 @@ func main() {
 		omsclient.RegisterCartItemServiceServer(grpcServer, cartitemserviceServer.NewCartItemServiceServer(ctx))
 		omsclient.RegisterCompanyAddressServiceServer(grpcServer, companyaddressserviceServer.NewCompanyAddressServiceServer(ctx))
 		omsclient.RegisterOrderItemServiceServer(grpcServer, orderitemserviceServer.NewOrderItemServiceServer(ctx))
-		omsclient.RegisterOrderOperateHistorServiceServer(grpcServer, orderoperatehistorserviceServer.NewOrderOperateHistorServiceServer(ctx))
+		omsclient.RegisterOrderOperateHistoryServiceServer(grpcServer, orderoperatehistoryserviceServer.NewOrderOperateHistoryServiceServer(ctx))
 		omsclient.RegisterOrderReturnApplyServiceServer(grpcServer, orderreturnapplyserviceServer.NewOrderReturnApplyServiceServer(ctx))
 		omsclient.RegisterOrderReturnReasonServiceServer(grpcServer, orderreturnreasonserviceServer.NewOrderReturnReasonServiceServer(ctx))
 		omsclient.RegisterOrderSettingServiceServer(grpcServer, ordersettingserviceServer.NewOrderSettingServiceServer(ctx))

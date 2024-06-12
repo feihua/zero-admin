@@ -33,7 +33,7 @@ func NewCompanyAddressAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // CompanyAddressAdd 添加公司收货地址
 func (l *CompanyAddressAddLogic) CompanyAddressAdd(req *types.AddCompanyAddressReq) (resp *types.AddCompanyAddressResp, err error) {
-	_, err = l.svcCtx.CompanyAddressService.CompanyAddressAdd(l.ctx, &omsclient.CompanyAddressAddReq{
+	_, err = l.svcCtx.CompanyAddressService.AddCompanyAddress(l.ctx, &omsclient.AddCompanyAddressReq{
 		AddressName:   req.AddressName,
 		SendStatus:    req.SendStatus,
 		ReceiveStatus: req.ReceiveStatus,

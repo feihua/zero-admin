@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加产品阶梯价格表(只针对同商品)
+message AddProductLadderReq {
+  int32 count = 1; //满足的商品数量
+  int64 discount = 2; //折扣
+  int64 id = 3; //
+  int64 price = 4; //折后价格
+  int64 product_id = 5; //
+
+}
+
+message AddProductLadderResp {
+  string pong = 1;
+}
+
+// 删除产品阶梯价格表(只针对同商品)
+message DeleteProductLadderReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductLadderResp {
+  string pong = 1;
+}
+
+// 更新产品阶梯价格表(只针对同商品)
+message UpdateProductLadderReq {
+  int32 count = 1; //满足的商品数量
+  int64 discount = 2; //折扣
+  int64 id = 3; //
+  int64 price = 4; //折后价格
+  int64 product_id = 5; //
+
+}
+
+message UpdateProductLadderResp {
+  string pong = 1;
+}
+
+// 更新产品阶梯价格表(只针对同商品)状态
+message UpdateProductLadderStatusReq {
+  int32 count = 1; //满足的商品数量
+  int64 discount = 2; //折扣
+  int64 id = 3; //
+  int64 price = 4; //折后价格
+  int64 product_id = 5; //
+
+}
+
+message UpdateProductLadderStatusResp {
+  string pong = 1;
+}
+
+// 查询产品阶梯价格表(只针对同商品)详情
+message QueryProductLadderDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductLadderDetailResp {
+  int32 count = 1; //满足的商品数量
+  int64 discount = 2; //折扣
+  int64 id = 3; //
+  int64 price = 4; //折后价格
+  int64 product_id = 5; //
+
+}
+
+// 分页查询产品阶梯价格表(只针对同商品)列表
+message QueryProductLadderListReq {
+  int32 count = 1; //满足的商品数量
+  int64 discount = 2; //折扣
+  int64 id = 3; //
+  int64 price = 4; //折后价格
+  int64 product_id = 5; //
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message ProductLadderListData {
+  int32 count = 1; //满足的商品数量
+  int64 discount = 2; //折扣
+  int64 id = 3; //
+  int64 price = 4; //折后价格
+  int64 product_id = 5; //
+
+}
+
+message QueryProductLadderListResp {
+  int64 total = 1;
+  repeated  ProductLadderListData list = 2;
+}
+
+// 产品阶梯价格表(只针对同商品)
+service ProductLadderService {
+  // 添加产品阶梯价格表(只针对同商品)
+  rpc AddProductLadder(AddProductLadderReq) returns (AddProductLadderResp){}
+  // 删除产品阶梯价格表(只针对同商品)
+  rpc DeleteProductLadder(DeleteProductLadderReq) returns (DeleteProductLadderResp){}
+  // 更新产品阶梯价格表(只针对同商品)
+  rpc UpdateProductLadder(UpdateProductLadderReq) returns (UpdateProductLadderResp ){}
+  // 更新产品阶梯价格表(只针对同商品)状态
+  rpc UpdateProductLadderStatus(UpdateProductLadderStatusReq) returns (UpdateProductLadderStatusResp ){}
+  // 查询产品阶梯价格表(只针对同商品)详情
+   rpc QueryProductLadderDetail(QueryProductLadderDetailReq) returns (QueryProductLadderDetailResp){}
+  // 查询产品阶梯价格表(只针对同商品)列表
+  rpc QueryProductLadderList(QueryProductLadderListReq) returns (QueryProductLadderListResp){}
+
+
+}

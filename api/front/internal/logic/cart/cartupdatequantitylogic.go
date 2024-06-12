@@ -33,7 +33,7 @@ func NewCartUpdateQuantityLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // CartUpdateQuantity 修改购物车中某个商品的数量
 func (l *CartUpdateQuantityLogic) CartUpdateQuantity(req *types.CartItemUpdateQuantityReq) (resp *types.CartItemUpdateResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.CartItemService.CartItemUpdateQuantity(l.ctx, &omsclient.CartItemUpdateReq{Id: req.Id, Quantity: req.Quantity, MemberId: memberId})
+	_, _ = l.svcCtx.CartItemService.UpdateCartItemQuantity(l.ctx, &omsclient.UpdateCartItemQuantityReq{Id: req.Id, Quantity: req.Quantity, MemberId: memberId})
 
 	return &types.CartItemUpdateResp{
 		Code:    0,

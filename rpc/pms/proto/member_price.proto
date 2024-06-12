@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加商品会员价格表
+message AddMemberPriceReq {
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_level_name = 3; //会员等级名称
+  int64 member_price = 4; //会员价格
+  int64 product_id = 5; //商品id
+
+}
+
+message AddMemberPriceResp {
+  string pong = 1;
+}
+
+// 删除商品会员价格表
+message DeleteMemberPriceReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberPriceResp {
+  string pong = 1;
+}
+
+// 更新商品会员价格表
+message UpdateMemberPriceReq {
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_level_name = 3; //会员等级名称
+  int64 member_price = 4; //会员价格
+  int64 product_id = 5; //商品id
+
+}
+
+message UpdateMemberPriceResp {
+  string pong = 1;
+}
+
+// 更新商品会员价格表状态
+message UpdateMemberPriceStatusReq {
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_level_name = 3; //会员等级名称
+  int64 member_price = 4; //会员价格
+  int64 product_id = 5; //商品id
+
+}
+
+message UpdateMemberPriceStatusResp {
+  string pong = 1;
+}
+
+// 查询商品会员价格表详情
+message QueryMemberPriceDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberPriceDetailResp {
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_level_name = 3; //会员等级名称
+  int64 member_price = 4; //会员价格
+  int64 product_id = 5; //商品id
+
+}
+
+// 分页查询商品会员价格表列表
+message QueryMemberPriceListReq {
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_level_name = 3; //会员等级名称
+  int64 member_price = 4; //会员价格
+  int64 product_id = 5; //商品id
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message MemberPriceListData {
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_level_name = 3; //会员等级名称
+  int64 member_price = 4; //会员价格
+  int64 product_id = 5; //商品id
+
+}
+
+message QueryMemberPriceListResp {
+  int64 total = 1;
+  repeated  MemberPriceListData list = 2;
+}
+
+// 商品会员价格表
+service MemberPriceService {
+  // 添加商品会员价格表
+  rpc AddMemberPrice(AddMemberPriceReq) returns (AddMemberPriceResp){}
+  // 删除商品会员价格表
+  rpc DeleteMemberPrice(DeleteMemberPriceReq) returns (DeleteMemberPriceResp){}
+  // 更新商品会员价格表
+  rpc UpdateMemberPrice(UpdateMemberPriceReq) returns (UpdateMemberPriceResp ){}
+  // 更新商品会员价格表状态
+  rpc UpdateMemberPriceStatus(UpdateMemberPriceStatusReq) returns (UpdateMemberPriceStatusResp ){}
+  // 查询商品会员价格表详情
+   rpc QueryMemberPriceDetail(QueryMemberPriceDetailReq) returns (QueryMemberPriceDetailResp){}
+  // 查询商品会员价格表列表
+  rpc QueryMemberPriceList(QueryMemberPriceListReq) returns (QueryMemberPriceListResp){}
+
+
+}

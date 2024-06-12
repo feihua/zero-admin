@@ -59,10 +59,10 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	//2.生成下单商品信息
 	var flag = false //用于判断库存
 	var totalAmount int64 = 0
-	orderItemList := make([]*omsclient.OrderItemListData, 0)
+	orderItemList := make([]*omsclient.OrderItemData, 0)
 	cartItemIds := make([]int64, 0) //方便提交订单成功,后删除购物车中的商品
 	for _, item := range cartPromotionItemList {
-		orderItemList = append(orderItemList, &omsclient.OrderItemListData{
+		orderItemList = append(orderItemList, &omsclient.OrderItemData{
 			OrderId:           0,
 			OrderSn:           "",
 			ProductId:         item.ProductId,
@@ -124,7 +124,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 			for _, item := range couponHistoryDetailListData.CategoryRelationList {
 				categoryIdList[item.ProductCategoryId] = item.ProductCategoryId
 			}
-			orderItemListByCategoryId := make([]*omsclient.OrderItemListData, 0)
+			orderItemListByCategoryId := make([]*omsclient.OrderItemData, 0)
 			var totalAmountByCategoryId int64
 			for _, item := range orderItemList {
 				_, ok := categoryIdList[item.ProductCategoryId]
@@ -138,11 +138,11 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 			}
 		} else if useType == 2 {
 			//指定商品
-			productIdList := make(map[int64]int64, 0)
+			productIdList := make(map[int64]int64)
 			for _, item := range couponHistoryDetailListData.ProductRelationList {
 				productIdList[item.ProductId] = item.ProductId
 			}
-			orderItemListByProductId := make([]*omsclient.OrderItemListData, 0)
+			orderItemListByProductId := make([]*omsclient.OrderItemData, 0)
 			var totalAmountByProductId int64
 			for _, item := range orderItemList {
 				_, ok := productIdList[item.ProductCategoryId]
@@ -236,8 +236,8 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		return result(1, "查询会员地址异常"), nil
 	}
 	//设置自动收货天数
-	orderSettingList, err := l.svcCtx.OrderSettingService.OrderSettingList(l.ctx, &omsclient.OrderSettingListReq{
-		Current:  1,
+	orderSettingList, err := l.svcCtx.OrderSettingService.QueryOrderSettingList(l.ctx, &omsclient.QueryOrderSettingListReq{
+		PageNum:  1,
 		PageSize: 10,
 	})
 	if err != nil {

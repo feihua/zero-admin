@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
+message AddProductCategoryAttributeRelationReq {
+  int64 id = 1; //
+  int64 product_attribute_id = 2; //
+  int64 product_category_id = 3; //
+
+}
+
+message AddProductCategoryAttributeRelationResp {
+  string pong = 1;
+}
+
+// 删除产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
+message DeleteProductCategoryAttributeRelationReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductCategoryAttributeRelationResp {
+  string pong = 1;
+}
+
+// 更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
+message UpdateProductCategoryAttributeRelationReq {
+  int64 id = 1; //
+  int64 product_attribute_id = 2; //
+  int64 product_category_id = 3; //
+
+}
+
+message UpdateProductCategoryAttributeRelationResp {
+  string pong = 1;
+}
+
+// 更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）状态
+message UpdateProductCategoryAttributeRelationStatusReq {
+  int64 id = 1; //
+  int64 product_attribute_id = 2; //
+  int64 product_category_id = 3; //
+
+}
+
+message UpdateProductCategoryAttributeRelationStatusResp {
+  string pong = 1;
+}
+
+// 查询产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）详情
+message QueryProductCategoryAttributeRelationDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductCategoryAttributeRelationDetailResp {
+  int64 id = 1; //
+  int64 product_attribute_id = 2; //
+  int64 product_category_id = 3; //
+
+}
+
+// 分页查询产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）列表
+message QueryProductCategoryAttributeRelationListReq {
+  int64 id = 1; //
+  int64 product_attribute_id = 2; //
+  int64 product_category_id = 3; //
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message ProductCategoryAttributeRelationListData {
+  int64 id = 1; //
+  int64 product_attribute_id = 2; //
+  int64 product_category_id = 3; //
+
+}
+
+message QueryProductCategoryAttributeRelationListResp {
+  int64 total = 1;
+  repeated  ProductCategoryAttributeRelationListData list = 2;
+}
+
+// 产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
+service ProductCategoryAttributeRelationService {
+  // 添加产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
+  rpc AddProductCategoryAttributeRelation(AddProductCategoryAttributeRelationReq) returns (AddProductCategoryAttributeRelationResp){}
+  // 删除产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
+  rpc DeleteProductCategoryAttributeRelation(DeleteProductCategoryAttributeRelationReq) returns (DeleteProductCategoryAttributeRelationResp){}
+  // 更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
+  rpc UpdateProductCategoryAttributeRelation(UpdateProductCategoryAttributeRelationReq) returns (UpdateProductCategoryAttributeRelationResp ){}
+  // 更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）状态
+  rpc UpdateProductCategoryAttributeRelationStatus(UpdateProductCategoryAttributeRelationStatusReq) returns (UpdateProductCategoryAttributeRelationStatusResp ){}
+  // 查询产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）详情
+   rpc QueryProductCategoryAttributeRelationDetail(QueryProductCategoryAttributeRelationDetailReq) returns (QueryProductCategoryAttributeRelationDetailResp){}
+  // 查询产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）列表
+  rpc QueryProductCategoryAttributeRelationList(QueryProductCategoryAttributeRelationListReq) returns (QueryProductCategoryAttributeRelationListResp){}
+
+
+}

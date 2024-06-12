@@ -1,0 +1,173 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加商品评价表
+message AddCommentReq {
+  int32 collect_count = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //评论用户头像
+  string member_ip = 6; //评价的ip
+  string member_nick_name = 7; //
+  string pics = 8; //上传图片地址，以逗号隔开
+  string product_attribute = 9; //购买时的商品属性
+  int64 product_id = 10; //
+  string product_name = 11; //
+  int32 read_count = 12; //
+  int32 replay_count = 13; //
+  int32 show_status = 14; //
+  int32 star = 15; //评价星数：0->5
+
+}
+
+message AddCommentResp {
+  string pong = 1;
+}
+
+// 删除商品评价表
+message DeleteCommentReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteCommentResp {
+  string pong = 1;
+}
+
+// 更新商品评价表
+message UpdateCommentReq {
+  int32 collect_count = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //评论用户头像
+  string member_ip = 6; //评价的ip
+  string member_nick_name = 7; //
+  string pics = 8; //上传图片地址，以逗号隔开
+  string product_attribute = 9; //购买时的商品属性
+  int64 product_id = 10; //
+  string product_name = 11; //
+  int32 read_count = 12; //
+  int32 replay_count = 13; //
+  int32 show_status = 14; //
+  int32 star = 15; //评价星数：0->5
+
+}
+
+message UpdateCommentResp {
+  string pong = 1;
+}
+
+// 更新商品评价表状态
+message UpdateCommentStatusReq {
+  int32 collect_count = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //评论用户头像
+  string member_ip = 6; //评价的ip
+  string member_nick_name = 7; //
+  string pics = 8; //上传图片地址，以逗号隔开
+  string product_attribute = 9; //购买时的商品属性
+  int64 product_id = 10; //
+  string product_name = 11; //
+  int32 read_count = 12; //
+  int32 replay_count = 13; //
+  int32 show_status = 14; //
+  int32 star = 15; //评价星数：0->5
+
+}
+
+message UpdateCommentStatusResp {
+  string pong = 1;
+}
+
+// 查询商品评价表详情
+message QueryCommentDetailReq {
+    int64 id = 1;
+}
+
+message QueryCommentDetailResp {
+  int32 collect_count = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //评论用户头像
+  string member_ip = 6; //评价的ip
+  string member_nick_name = 7; //
+  string pics = 8; //上传图片地址，以逗号隔开
+  string product_attribute = 9; //购买时的商品属性
+  int64 product_id = 10; //
+  string product_name = 11; //
+  int32 read_count = 12; //
+  int32 replay_count = 13; //
+  int32 show_status = 14; //
+  int32 star = 15; //评价星数：0->5
+
+}
+
+// 分页查询商品评价表列表
+message QueryCommentListReq {
+  int32 collect_count = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //评论用户头像
+  string member_ip = 6; //评价的ip
+  string member_nick_name = 7; //
+  string pics = 8; //上传图片地址，以逗号隔开
+  string product_attribute = 9; //购买时的商品属性
+  int64 product_id = 10; //
+  string product_name = 11; //
+  int32 read_count = 12; //
+  int32 replay_count = 13; //
+  int32 show_status = 14; //
+  int32 star = 15; //评价星数：0->5
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message CommentListData {
+  int32 collect_count = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //评论用户头像
+  string member_ip = 6; //评价的ip
+  string member_nick_name = 7; //
+  string pics = 8; //上传图片地址，以逗号隔开
+  string product_attribute = 9; //购买时的商品属性
+  int64 product_id = 10; //
+  string product_name = 11; //
+  int32 read_count = 12; //
+  int32 replay_count = 13; //
+  int32 show_status = 14; //
+  int32 star = 15; //评价星数：0->5
+
+}
+
+message QueryCommentListResp {
+  int64 total = 1;
+  repeated  CommentListData list = 2;
+}
+
+// 商品评价表
+service CommentService {
+  // 添加商品评价表
+  rpc AddComment(AddCommentReq) returns (AddCommentResp){}
+  // 删除商品评价表
+  rpc DeleteComment(DeleteCommentReq) returns (DeleteCommentResp){}
+  // 更新商品评价表
+  rpc UpdateComment(UpdateCommentReq) returns (UpdateCommentResp ){}
+  // 更新商品评价表状态
+  rpc UpdateCommentStatus(UpdateCommentStatusReq) returns (UpdateCommentStatusResp ){}
+  // 查询商品评价表详情
+   rpc QueryCommentDetail(QueryCommentDetailReq) returns (QueryCommentDetailResp){}
+  // 查询商品评价表列表
+  rpc QueryCommentList(QueryCommentListReq) returns (QueryCommentListResp){}
+
+
+}

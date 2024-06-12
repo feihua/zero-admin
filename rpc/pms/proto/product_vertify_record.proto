@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加商品审核记录
+message AddProductVertifyRecordReq {
+  string create_time = 1; //
+  string detail = 2; //反馈详情
+  int64 id = 3; //
+  int64 product_id = 4; //
+  int32 status = 5; //
+  string vertify_man = 6; //审核人
+
+}
+
+message AddProductVertifyRecordResp {
+  string pong = 1;
+}
+
+// 删除商品审核记录
+message DeleteProductVertifyRecordReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductVertifyRecordResp {
+  string pong = 1;
+}
+
+// 更新商品审核记录
+message UpdateProductVertifyRecordReq {
+  string create_time = 1; //
+  string detail = 2; //反馈详情
+  int64 id = 3; //
+  int64 product_id = 4; //
+  int32 status = 5; //
+  string vertify_man = 6; //审核人
+
+}
+
+message UpdateProductVertifyRecordResp {
+  string pong = 1;
+}
+
+// 更新商品审核记录状态
+message UpdateProductVertifyRecordStatusReq {
+  string create_time = 1; //
+  string detail = 2; //反馈详情
+  int64 id = 3; //
+  int64 product_id = 4; //
+  int32 status = 5; //
+  string vertify_man = 6; //审核人
+
+}
+
+message UpdateProductVertifyRecordStatusResp {
+  string pong = 1;
+}
+
+// 查询商品审核记录详情
+message QueryProductVertifyRecordDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductVertifyRecordDetailResp {
+  string create_time = 1; //
+  string detail = 2; //反馈详情
+  int64 id = 3; //
+  int64 product_id = 4; //
+  int32 status = 5; //
+  string vertify_man = 6; //审核人
+
+}
+
+// 分页查询商品审核记录列表
+message QueryProductVertifyRecordListReq {
+  string create_time = 1; //
+  string detail = 2; //反馈详情
+  int64 id = 3; //
+  int64 product_id = 4; //
+  int32 status = 5; //
+  string vertify_man = 6; //审核人
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message ProductVertifyRecordListData {
+  string create_time = 1; //
+  string detail = 2; //反馈详情
+  int64 id = 3; //
+  int64 product_id = 4; //
+  int32 status = 5; //
+  string vertify_man = 6; //审核人
+
+}
+
+message QueryProductVertifyRecordListResp {
+  int64 total = 1;
+  repeated  ProductVertifyRecordListData list = 2;
+}
+
+// 商品审核记录
+service ProductVertifyRecordService {
+  // 添加商品审核记录
+  rpc AddProductVertifyRecord(AddProductVertifyRecordReq) returns (AddProductVertifyRecordResp){}
+  // 删除商品审核记录
+  rpc DeleteProductVertifyRecord(DeleteProductVertifyRecordReq) returns (DeleteProductVertifyRecordResp){}
+  // 更新商品审核记录
+  rpc UpdateProductVertifyRecord(UpdateProductVertifyRecordReq) returns (UpdateProductVertifyRecordResp ){}
+  // 更新商品审核记录状态
+  rpc UpdateProductVertifyRecordStatus(UpdateProductVertifyRecordStatusReq) returns (UpdateProductVertifyRecordStatusResp ){}
+  // 查询商品审核记录详情
+   rpc QueryProductVertifyRecordDetail(QueryProductVertifyRecordDetailReq) returns (QueryProductVertifyRecordDetailResp){}
+  // 查询商品审核记录列表
+  rpc QueryProductVertifyRecordList(QueryProductVertifyRecordListReq) returns (QueryProductVertifyRecordListResp){}
+
+
+}

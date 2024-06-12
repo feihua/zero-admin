@@ -22,22 +22,38 @@ func NewCompanyAddressServiceServer(svcCtx *svc.ServiceContext) *CompanyAddressS
 	}
 }
 
-func (s *CompanyAddressServiceServer) CompanyAddressAdd(ctx context.Context, in *omsclient.CompanyAddressAddReq) (*omsclient.CompanyAddressAddResp, error) {
-	l := companyaddressservicelogic.NewCompanyAddressAddLogic(ctx, s.svcCtx)
-	return l.CompanyAddressAdd(in)
+// 添加公司收发货地址表
+func (s *CompanyAddressServiceServer) AddCompanyAddress(ctx context.Context, in *omsclient.AddCompanyAddressReq) (*omsclient.AddCompanyAddressResp, error) {
+	l := companyaddressservicelogic.NewAddCompanyAddressLogic(ctx, s.svcCtx)
+	return l.AddCompanyAddress(in)
 }
 
-func (s *CompanyAddressServiceServer) CompanyAddressList(ctx context.Context, in *omsclient.CompanyAddressListReq) (*omsclient.CompanyAddressListResp, error) {
-	l := companyaddressservicelogic.NewCompanyAddressListLogic(ctx, s.svcCtx)
-	return l.CompanyAddressList(in)
+// 删除公司收发货地址表
+func (s *CompanyAddressServiceServer) DeleteCompanyAddress(ctx context.Context, in *omsclient.DeleteCompanyAddressReq) (*omsclient.DeleteCompanyAddressResp, error) {
+	l := companyaddressservicelogic.NewDeleteCompanyAddressLogic(ctx, s.svcCtx)
+	return l.DeleteCompanyAddress(in)
 }
 
-func (s *CompanyAddressServiceServer) CompanyAddressUpdate(ctx context.Context, in *omsclient.CompanyAddressUpdateReq) (*omsclient.CompanyAddressUpdateResp, error) {
-	l := companyaddressservicelogic.NewCompanyAddressUpdateLogic(ctx, s.svcCtx)
-	return l.CompanyAddressUpdate(in)
+// 更新公司收发货地址表
+func (s *CompanyAddressServiceServer) UpdateCompanyAddress(ctx context.Context, in *omsclient.UpdateCompanyAddressReq) (*omsclient.UpdateCompanyAddressResp, error) {
+	l := companyaddressservicelogic.NewUpdateCompanyAddressLogic(ctx, s.svcCtx)
+	return l.UpdateCompanyAddress(in)
 }
 
-func (s *CompanyAddressServiceServer) CompanyAddressDelete(ctx context.Context, in *omsclient.CompanyAddressDeleteReq) (*omsclient.CompanyAddressDeleteResp, error) {
-	l := companyaddressservicelogic.NewCompanyAddressDeleteLogic(ctx, s.svcCtx)
-	return l.CompanyAddressDelete(in)
+// 更新公司收发货地址表状态
+func (s *CompanyAddressServiceServer) UpdateCompanyAddressStatus(ctx context.Context, in *omsclient.UpdateCompanyAddressStatusReq) (*omsclient.UpdateCompanyAddressStatusResp, error) {
+	l := companyaddressservicelogic.NewUpdateCompanyAddressStatusLogic(ctx, s.svcCtx)
+	return l.UpdateCompanyAddressStatus(in)
+}
+
+// 查询公司收发货地址表详情
+func (s *CompanyAddressServiceServer) QueryCompanyAddressDetail(ctx context.Context, in *omsclient.QueryCompanyAddressDetailReq) (*omsclient.QueryCompanyAddressDetailResp, error) {
+	l := companyaddressservicelogic.NewQueryCompanyAddressDetailLogic(ctx, s.svcCtx)
+	return l.QueryCompanyAddressDetail(in)
+}
+
+// 查询公司收发货地址表列表
+func (s *CompanyAddressServiceServer) QueryCompanyAddressList(ctx context.Context, in *omsclient.QueryCompanyAddressListReq) (*omsclient.QueryCompanyAddressListResp, error) {
+	l := companyaddressservicelogic.NewQueryCompanyAddressListLogic(ctx, s.svcCtx)
+	return l.QueryCompanyAddressList(in)
 }

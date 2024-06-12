@@ -12,7 +12,7 @@ create table oms_order_return_apply
     return_name        varchar(100)  not null comment '退货人姓名',
     return_phone       varchar(100)  not null comment '退货人电话',
     status             tinyint       not null comment '申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝',
-    handle_time        datetime      not null comment '处理时间',
+    handle_time       datetime      null comment '处理时间',
     product_pic        varchar(500)  not null comment '商品图片',
     product_name       varchar(200)  not null comment '商品名称',
     product_brand      varchar(200)  not null comment '商品品牌',
@@ -26,7 +26,7 @@ create table oms_order_return_apply
     handle_note        varchar(500)  not null comment '处理备注',
     handle_man         varchar(100)  not null comment '处理人员',
     receive_man        varchar(100)  not null comment '收货人',
-    receive_time       datetime      not null comment '收货时间',
+    receive_time       datetime      null comment '收货时间',
     receive_note       varchar(500)  null comment '收货备注'
 )
     comment '订单退货申请';

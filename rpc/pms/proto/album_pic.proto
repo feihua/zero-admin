@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加画册图片表
+message AddAlbumPicReq {
+  int64 album_id = 1; //
+  int64 id = 2; //
+  string pic = 3; //
+
+}
+
+message AddAlbumPicResp {
+  string pong = 1;
+}
+
+// 删除画册图片表
+message DeleteAlbumPicReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteAlbumPicResp {
+  string pong = 1;
+}
+
+// 更新画册图片表
+message UpdateAlbumPicReq {
+  int64 album_id = 1; //
+  int64 id = 2; //
+  string pic = 3; //
+
+}
+
+message UpdateAlbumPicResp {
+  string pong = 1;
+}
+
+// 更新画册图片表状态
+message UpdateAlbumPicStatusReq {
+  int64 album_id = 1; //
+  int64 id = 2; //
+  string pic = 3; //
+
+}
+
+message UpdateAlbumPicStatusResp {
+  string pong = 1;
+}
+
+// 查询画册图片表详情
+message QueryAlbumPicDetailReq {
+    int64 id = 1;
+}
+
+message QueryAlbumPicDetailResp {
+  int64 album_id = 1; //
+  int64 id = 2; //
+  string pic = 3; //
+
+}
+
+// 分页查询画册图片表列表
+message QueryAlbumPicListReq {
+  int64 album_id = 1; //
+  int64 id = 2; //
+  string pic = 3; //
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message AlbumPicListData {
+  int64 album_id = 1; //
+  int64 id = 2; //
+  string pic = 3; //
+
+}
+
+message QueryAlbumPicListResp {
+  int64 total = 1;
+  repeated  AlbumPicListData list = 2;
+}
+
+// 画册图片表
+service AlbumPicService {
+  // 添加画册图片表
+  rpc AddAlbumPic(AddAlbumPicReq) returns (AddAlbumPicResp){}
+  // 删除画册图片表
+  rpc DeleteAlbumPic(DeleteAlbumPicReq) returns (DeleteAlbumPicResp){}
+  // 更新画册图片表
+  rpc UpdateAlbumPic(UpdateAlbumPicReq) returns (UpdateAlbumPicResp ){}
+  // 更新画册图片表状态
+  rpc UpdateAlbumPicStatus(UpdateAlbumPicStatusReq) returns (UpdateAlbumPicStatusResp ){}
+  // 查询画册图片表详情
+   rpc QueryAlbumPicDetail(QueryAlbumPicDetailReq) returns (QueryAlbumPicDetailResp){}
+  // 查询画册图片表列表
+  rpc QueryAlbumPicList(QueryAlbumPicListReq) returns (QueryAlbumPicListResp){}
+
+
+}

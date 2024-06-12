@@ -31,7 +31,7 @@ func NewReturnApplyLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Retur
 
 // ReturnApply 申请退货
 func (l *ReturnApplyLogic) ReturnApply(req *types.ReturnApplyReq) (resp *types.ReturnApplyResp, err error) {
-	_, err = l.svcCtx.OrderReturnApplyService.OrderReturnApplyAdd(l.ctx, &omsclient.OrderReturnApplyAddReq{
+	_, err = l.svcCtx.OrderReturnApplyService.AddOrderReturnApply(l.ctx, &omsclient.AddOrderReturnApplyReq{
 		OrderId:          req.OrderId,
 		ProductId:        req.ProductId,
 		OrderSn:          req.OrderSn,

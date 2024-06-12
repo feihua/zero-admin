@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加购物车表
+message AddCartItemReq {
+  string product_sub_title = 1; //商品副标题（卖点）
+  int32 delete_status = 2; //是否删除
+  int32 quantity = 3; //购买数量
+  int64 member_id = 4; //会员id
+  string member_nickname = 5; //会员昵称
+  int64 price = 6; //添加到购物车的价格
+  string product_attr = 7; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_brand = 8; //商品品牌
+  int64 product_category_id = 9; //商品分类
+  int64 product_id = 10; //商品id
+  string product_name = 11; //商品名称
+  string product_pic = 12; //商品主图
+  string product_sku_code = 13; //商品sku条码
+  int64 product_sku_id = 14; //商品库存id
+  string product_sn = 15; //货号
+
+
+
+}
+
+message AddCartItemResp {
+  string pong = 1;
+}
+
+// 删除购物车表
+message DeleteCartItemReq {
+  repeated int64 ids = 1;
+  int64      member_id = 2;
+}
+
+message DeleteCartItemResp {
+  string pong = 1;
+}
+
+// 更新购物车表
+message UpdateCartItemReq {
+  int32 quantity = 1; //购买数量
+  int32 delete_status = 2; //是否删除
+  int64 id = 3; //
+  int64 member_id = 4; //会员id
+  string member_nickname = 5; //会员昵称
+  int64 price = 6; //添加到购物车的价格
+  string product_attr = 7; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_brand = 8; //商品品牌
+  int64 product_category_id = 9; //商品分类
+  int64 product_id = 10; //商品id
+  string product_name = 11; //商品名称
+  string product_pic = 12; //商品主图
+  string product_sku_code = 13; //商品sku条码
+  int64 product_sku_id = 14; //商品库存id
+  string product_sn = 15; //货号
+  string product_sub_title = 16; //商品副标题（卖点）
+
+
+}
+
+message UpdateCartItemResp {
+  string pong = 1;
+}
+
+// 修改购物车中某个商品的数量
+message UpdateCartItemQuantityReq {
+  int32 quantity = 1; //购买数量
+  int64 id = 2; //
+  int64 member_id = 3; //会员id
+
+}
+
+message UpdateCartItemQuantityResp {
+  string pong = 1;
+}
+// 查询购物车表详情
+message QueryCartItemDetailReq {
+    int64 id = 1;
+}
+
+message QueryCartItemDetailResp {
+  string create_date = 1; //创建时间
+  int32 delete_status = 2; //是否删除
+  int64 id = 3; //
+  int64 member_id = 4; //会员id
+  string member_nickname = 5; //会员昵称
+  int64 price = 6; //添加到购物车的价格
+  string product_attr = 7; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_brand = 8; //商品品牌
+  int64 product_category_id = 9; //商品分类
+  int64 product_id = 10; //商品id
+  string product_name = 11; //商品名称
+  string product_pic = 12; //商品主图
+  string product_sku_code = 13; //商品sku条码
+  int64 product_sku_id = 14; //商品库存id
+  string product_sn = 15; //货号
+  string product_sub_title = 16; //商品副标题（卖点）
+  int32 quantity = 17; //购买数量
+  string update_date = 18; //修改时间
+
+}
+
+// 分页查询购物车表列表
+message QueryCartItemListReq {
+  int64 member_id = 1; //会员id
+}
+
+message CartItemListData {
+  string create_date = 1; //创建时间
+  int32 delete_status = 2; //是否删除
+  int64 id = 3; //
+  int64 member_id = 4; //会员id
+  string member_nickname = 5; //会员昵称
+  int64 price = 6; //添加到购物车的价格
+  string product_attr = 7; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_brand = 8; //商品品牌
+  int64 product_category_id = 9; //商品分类
+  int64 product_id = 10; //商品id
+  string product_name = 11; //商品名称
+  string product_pic = 12; //商品主图
+  string product_sku_code = 13; //商品sku条码
+  int64 product_sku_id = 14; //商品库存id
+  string product_sn = 15; //货号
+  string product_sub_title = 16; //商品副标题（卖点）
+  int32 quantity = 17; //购买数量
+  string update_date = 18; //修改时间
+
+}
+
+message QueryCartItemListResp {
+  int64 total = 1;
+  repeated  CartItemListData list = 2;
+}
+
+// 购物车表
+service CartItemService {
+  // 添加购物车表
+  rpc AddCartItem(AddCartItemReq) returns (AddCartItemResp){}
+  // 删除购物车表
+  rpc DeleteCartItem(DeleteCartItemReq) returns (DeleteCartItemResp){}
+  // 更新购物车表
+  rpc UpdateCartItem(UpdateCartItemReq) returns (UpdateCartItemResp ){}
+  //修改购物车中某个商品的数量
+  rpc UpdateCartItemQuantity(UpdateCartItemQuantityReq) returns (UpdateCartItemQuantityResp ){}
+  // 查询购物车表详情
+   rpc QueryCartItemDetail(QueryCartItemDetailReq) returns (QueryCartItemDetailResp){}
+  // 查询购物车表列表
+  rpc QueryCartItemList(QueryCartItemListReq) returns (QueryCartItemListResp){}
+
+
+}

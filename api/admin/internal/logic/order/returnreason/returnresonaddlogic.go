@@ -33,7 +33,7 @@ func NewReturnResonAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Ret
 
 // ReturnResonAdd 添加退货原因
 func (l *ReturnResonAddLogic) ReturnResonAdd(req types.AddReturnResonReq) (*types.AddReturnResonResp, error) {
-	_, err := l.svcCtx.OrderReturnReasonService.OrderReturnReasonAdd(l.ctx, &omsclient.OrderReturnReasonAddReq{
+	_, err := l.svcCtx.OrderReturnReasonService.AddOrderReturnReason(l.ctx, &omsclient.AddOrderReturnReasonReq{
 		Name:   req.Name,
 		Sort:   req.Sort,
 		Status: req.Status,

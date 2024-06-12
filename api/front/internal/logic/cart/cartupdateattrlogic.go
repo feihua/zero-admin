@@ -33,7 +33,7 @@ func NewCartUpdateAttrLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 // CartUpdateAttr 修改购物车中商品的规格
 func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemUpdateAttrReq) (resp *types.CartItemUpdateResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.CartItemService.CartItemUpdate(l.ctx, &omsclient.CartItemUpdateReq{
+	_, _ = l.svcCtx.CartItemService.UpdateCartItem(l.ctx, &omsclient.UpdateCartItemReq{
 		Id:                req.Id,
 		ProductId:         req.ProductId,
 		ProductSkuId:      req.ProductSkuId,

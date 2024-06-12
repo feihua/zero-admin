@@ -22,22 +22,20 @@ func NewOrderItemServiceServer(svcCtx *svc.ServiceContext) *OrderItemServiceServ
 	}
 }
 
-func (s *OrderItemServiceServer) OrderItemAdd(ctx context.Context, in *omsclient.OrderItemAddReq) (*omsclient.OrderItemAddResp, error) {
-	l := orderitemservicelogic.NewOrderItemAddLogic(ctx, s.svcCtx)
-	return l.OrderItemAdd(in)
+// 添加订单中所包含的商品
+func (s *OrderItemServiceServer) AddOrderItem(ctx context.Context, in *omsclient.AddOrderItemReq) (*omsclient.AddOrderItemResp, error) {
+	l := orderitemservicelogic.NewAddOrderItemLogic(ctx, s.svcCtx)
+	return l.AddOrderItem(in)
 }
 
-func (s *OrderItemServiceServer) OrderItemList(ctx context.Context, in *omsclient.OrderItemListReq) (*omsclient.OrderItemListResp, error) {
-	l := orderitemservicelogic.NewOrderItemListLogic(ctx, s.svcCtx)
-	return l.OrderItemList(in)
+// 查询订单中所包含的商品详情
+func (s *OrderItemServiceServer) QueryOrderItemDetail(ctx context.Context, in *omsclient.QueryOrderItemDetailReq) (*omsclient.QueryOrderItemDetailResp, error) {
+	l := orderitemservicelogic.NewQueryOrderItemDetailLogic(ctx, s.svcCtx)
+	return l.QueryOrderItemDetail(in)
 }
 
-func (s *OrderItemServiceServer) OrderItemUpdate(ctx context.Context, in *omsclient.OrderItemUpdateReq) (*omsclient.OrderItemUpdateResp, error) {
-	l := orderitemservicelogic.NewOrderItemUpdateLogic(ctx, s.svcCtx)
-	return l.OrderItemUpdate(in)
-}
-
-func (s *OrderItemServiceServer) OrderItemDelete(ctx context.Context, in *omsclient.OrderItemDeleteReq) (*omsclient.OrderItemDeleteResp, error) {
-	l := orderitemservicelogic.NewOrderItemDeleteLogic(ctx, s.svcCtx)
-	return l.OrderItemDelete(in)
+// 查询订单中所包含的商品列表
+func (s *OrderItemServiceServer) QueryOrderItemList(ctx context.Context, in *omsclient.QueryOrderItemListReq) (*omsclient.QueryOrderItemListResp, error) {
+	l := orderitemservicelogic.NewQueryOrderItemListLogic(ctx, s.svcCtx)
+	return l.QueryOrderItemList(in)
 }

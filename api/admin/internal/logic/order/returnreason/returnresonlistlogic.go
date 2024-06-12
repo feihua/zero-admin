@@ -34,8 +34,8 @@ func NewReturnResonListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Re
 
 // ReturnResonList 查询退货原因
 func (l *ReturnResonListLogic) ReturnResonList(req types.ListReturnResonReq) (*types.ListReturnResonResp, error) {
-	resp, err := l.svcCtx.OrderReturnReasonService.OrderReturnReasonList(l.ctx, &omsclient.OrderReturnReasonListReq{
-		Current:  req.Current,
+	resp, err := l.svcCtx.OrderReturnReasonService.QueryOrderReturnReasonList(l.ctx, &omsclient.QueryOrderReturnReasonListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 		Name:     strings.TrimSpace(req.Name),
 		Status:   req.Status,

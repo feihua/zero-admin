@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加首页推荐专题表
+message AddHomeRecommendSubjectReq {
+  int64 id = 1; //
+  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 3; //排序
+  int64 subject_id = 4; //专题id
+  string subject_name = 5; //专题名称
+
+}
+
+message AddHomeRecommendSubjectResp {
+  string pong = 1;
+}
+
+// 删除首页推荐专题表
+message DeleteHomeRecommendSubjectReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteHomeRecommendSubjectResp {
+  string pong = 1;
+}
+
+// 更新首页推荐专题表
+message UpdateHomeRecommendSubjectReq {
+  int64 id = 1; //
+  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 3; //排序
+  int64 subject_id = 4; //专题id
+  string subject_name = 5; //专题名称
+
+}
+
+message UpdateHomeRecommendSubjectResp {
+  string pong = 1;
+}
+
+// 更新首页推荐专题表状态
+message UpdateHomeRecommendSubjectStatusReq {
+  int64 id = 1; //
+  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 3; //排序
+  int64 subject_id = 4; //专题id
+  string subject_name = 5; //专题名称
+
+}
+
+message UpdateHomeRecommendSubjectStatusResp {
+  string pong = 1;
+}
+
+// 查询首页推荐专题表详情
+message QueryHomeRecommendSubjectDetailReq {
+    int64 id = 1;
+}
+
+message QueryHomeRecommendSubjectDetailResp {
+  int64 id = 1; //
+  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 3; //排序
+  int64 subject_id = 4; //专题id
+  string subject_name = 5; //专题名称
+
+}
+
+// 分页查询首页推荐专题表列表
+message QueryHomeRecommendSubjectListReq {
+  int64 id = 1; //
+  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 3; //排序
+  int64 subject_id = 4; //专题id
+  string subject_name = 5; //专题名称
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message HomeRecommendSubjectListData {
+  int64 id = 1; //
+  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 3; //排序
+  int64 subject_id = 4; //专题id
+  string subject_name = 5; //专题名称
+
+}
+
+message QueryHomeRecommendSubjectListResp {
+  int64 total = 1;
+  repeated  HomeRecommendSubjectListData list = 2;
+}
+
+// 首页推荐专题表
+service HomeRecommendSubjectService {
+  // 添加首页推荐专题表
+  rpc AddHomeRecommendSubject(AddHomeRecommendSubjectReq) returns (AddHomeRecommendSubjectResp){}
+  // 删除首页推荐专题表
+  rpc DeleteHomeRecommendSubject(DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp){}
+  // 更新首页推荐专题表
+  rpc UpdateHomeRecommendSubject(UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp ){}
+  // 更新首页推荐专题表状态
+  rpc UpdateHomeRecommendSubjectStatus(UpdateHomeRecommendSubjectStatusReq) returns (UpdateHomeRecommendSubjectStatusResp ){}
+  // 查询首页推荐专题表详情
+   rpc QueryHomeRecommendSubjectDetail(QueryHomeRecommendSubjectDetailReq) returns (QueryHomeRecommendSubjectDetailResp){}
+  // 查询首页推荐专题表列表
+  rpc QueryHomeRecommendSubjectList(QueryHomeRecommendSubjectListReq) returns (QueryHomeRecommendSubjectListResp){}
+
+
+}

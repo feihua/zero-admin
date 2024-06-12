@@ -1,0 +1,149 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加优惠券使用、领取历史表
+message AddCouponHistoryReq {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  string create_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_nickname = 7; //领取人昵称
+  int64 order_id = 8; //订单编号
+  string order_sn = 9; //订单号码
+  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 11; //使用时间
+
+}
+
+message AddCouponHistoryResp {
+  string pong = 1;
+}
+
+// 删除优惠券使用、领取历史表
+message DeleteCouponHistoryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteCouponHistoryResp {
+  string pong = 1;
+}
+
+// 更新优惠券使用、领取历史表
+message UpdateCouponHistoryReq {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  string create_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_nickname = 7; //领取人昵称
+  int64 order_id = 8; //订单编号
+  string order_sn = 9; //订单号码
+  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 11; //使用时间
+
+}
+
+message UpdateCouponHistoryResp {
+  string pong = 1;
+}
+
+// 更新优惠券使用、领取历史表状态
+message UpdateCouponHistoryStatusReq {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  string create_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_nickname = 7; //领取人昵称
+  int64 order_id = 8; //订单编号
+  string order_sn = 9; //订单号码
+  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 11; //使用时间
+
+}
+
+message UpdateCouponHistoryStatusResp {
+  string pong = 1;
+}
+
+// 查询优惠券使用、领取历史表详情
+message QueryCouponHistoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryCouponHistoryDetailResp {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  string create_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_nickname = 7; //领取人昵称
+  int64 order_id = 8; //订单编号
+  string order_sn = 9; //订单号码
+  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 11; //使用时间
+
+}
+
+// 分页查询优惠券使用、领取历史表列表
+message QueryCouponHistoryListReq {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  string create_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_nickname = 7; //领取人昵称
+  int64 order_id = 8; //订单编号
+  string order_sn = 9; //订单号码
+  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 11; //使用时间
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message CouponHistoryListData {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  string create_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_nickname = 7; //领取人昵称
+  int64 order_id = 8; //订单编号
+  string order_sn = 9; //订单号码
+  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 11; //使用时间
+
+}
+
+message QueryCouponHistoryListResp {
+  int64 total = 1;
+  repeated  CouponHistoryListData list = 2;
+}
+
+// 优惠券使用、领取历史表
+service CouponHistoryService {
+  // 添加优惠券使用、领取历史表
+  rpc AddCouponHistory(AddCouponHistoryReq) returns (AddCouponHistoryResp){}
+  // 删除优惠券使用、领取历史表
+  rpc DeleteCouponHistory(DeleteCouponHistoryReq) returns (DeleteCouponHistoryResp){}
+  // 更新优惠券使用、领取历史表
+  rpc UpdateCouponHistory(UpdateCouponHistoryReq) returns (UpdateCouponHistoryResp ){}
+  // 更新优惠券使用、领取历史表状态
+  rpc UpdateCouponHistoryStatus(UpdateCouponHistoryStatusReq) returns (UpdateCouponHistoryStatusResp ){}
+  // 查询优惠券使用、领取历史表详情
+   rpc QueryCouponHistoryDetail(QueryCouponHistoryDetailReq) returns (QueryCouponHistoryDetailResp){}
+  // 查询优惠券使用、领取历史表列表
+  rpc QueryCouponHistoryList(QueryCouponHistoryListReq) returns (QueryCouponHistoryListResp){}
+
+
+}

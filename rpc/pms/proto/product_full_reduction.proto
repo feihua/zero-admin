@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加产品满减表(只针对同商品)
+message AddProductFullReductionReq {
+  int64 full_price = 1; //
+  int64 id = 2; //
+  int64 product_id = 3; //
+  int64 reduce_price = 4; //
+
+}
+
+message AddProductFullReductionResp {
+  string pong = 1;
+}
+
+// 删除产品满减表(只针对同商品)
+message DeleteProductFullReductionReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductFullReductionResp {
+  string pong = 1;
+}
+
+// 更新产品满减表(只针对同商品)
+message UpdateProductFullReductionReq {
+  int64 full_price = 1; //
+  int64 id = 2; //
+  int64 product_id = 3; //
+  int64 reduce_price = 4; //
+
+}
+
+message UpdateProductFullReductionResp {
+  string pong = 1;
+}
+
+// 更新产品满减表(只针对同商品)状态
+message UpdateProductFullReductionStatusReq {
+  int64 full_price = 1; //
+  int64 id = 2; //
+  int64 product_id = 3; //
+  int64 reduce_price = 4; //
+
+}
+
+message UpdateProductFullReductionStatusResp {
+  string pong = 1;
+}
+
+// 查询产品满减表(只针对同商品)详情
+message QueryProductFullReductionDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductFullReductionDetailResp {
+  int64 full_price = 1; //
+  int64 id = 2; //
+  int64 product_id = 3; //
+  int64 reduce_price = 4; //
+
+}
+
+// 分页查询产品满减表(只针对同商品)列表
+message QueryProductFullReductionListReq {
+  int64 full_price = 1; //
+  int64 id = 2; //
+  int64 product_id = 3; //
+  int64 reduce_price = 4; //
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message ProductFullReductionListData {
+  int64 full_price = 1; //
+  int64 id = 2; //
+  int64 product_id = 3; //
+  int64 reduce_price = 4; //
+
+}
+
+message QueryProductFullReductionListResp {
+  int64 total = 1;
+  repeated  ProductFullReductionListData list = 2;
+}
+
+// 产品满减表(只针对同商品)
+service ProductFullReductionService {
+  // 添加产品满减表(只针对同商品)
+  rpc AddProductFullReduction(AddProductFullReductionReq) returns (AddProductFullReductionResp){}
+  // 删除产品满减表(只针对同商品)
+  rpc DeleteProductFullReduction(DeleteProductFullReductionReq) returns (DeleteProductFullReductionResp){}
+  // 更新产品满减表(只针对同商品)
+  rpc UpdateProductFullReduction(UpdateProductFullReductionReq) returns (UpdateProductFullReductionResp ){}
+  // 更新产品满减表(只针对同商品)状态
+  rpc UpdateProductFullReductionStatus(UpdateProductFullReductionStatusReq) returns (UpdateProductFullReductionStatusResp ){}
+  // 查询产品满减表(只针对同商品)详情
+   rpc QueryProductFullReductionDetail(QueryProductFullReductionDetailReq) returns (QueryProductFullReductionDetailResp){}
+  // 查询产品满减表(只针对同商品)列表
+  rpc QueryProductFullReductionList(QueryProductFullReductionListReq) returns (QueryProductFullReductionListResp){}
+
+
+}

@@ -22,32 +22,38 @@ func NewOrderReturnReasonServiceServer(svcCtx *svc.ServiceContext) *OrderReturnR
 	}
 }
 
-// 添加退货原因
-func (s *OrderReturnReasonServiceServer) OrderReturnReasonAdd(ctx context.Context, in *omsclient.OrderReturnReasonAddReq) (*omsclient.OrderReturnReasonAddResp, error) {
-	l := orderreturnreasonservicelogic.NewOrderReturnReasonAddLogic(ctx, s.svcCtx)
-	return l.OrderReturnReasonAdd(in)
+// 添加退货原因表
+func (s *OrderReturnReasonServiceServer) AddOrderReturnReason(ctx context.Context, in *omsclient.AddOrderReturnReasonReq) (*omsclient.AddOrderReturnReasonResp, error) {
+	l := orderreturnreasonservicelogic.NewAddOrderReturnReasonLogic(ctx, s.svcCtx)
+	return l.AddOrderReturnReason(in)
 }
 
-// 查询退货原因
-func (s *OrderReturnReasonServiceServer) OrderReturnReasonList(ctx context.Context, in *omsclient.OrderReturnReasonListReq) (*omsclient.OrderReturnReasonListResp, error) {
-	l := orderreturnreasonservicelogic.NewOrderReturnReasonListLogic(ctx, s.svcCtx)
-	return l.OrderReturnReasonList(in)
+// 删除退货原因表
+func (s *OrderReturnReasonServiceServer) DeleteOrderReturnReason(ctx context.Context, in *omsclient.DeleteOrderReturnReasonReq) (*omsclient.DeleteOrderReturnReasonResp, error) {
+	l := orderreturnreasonservicelogic.NewDeleteOrderReturnReasonLogic(ctx, s.svcCtx)
+	return l.DeleteOrderReturnReason(in)
 }
 
-// 更新退货原因
-func (s *OrderReturnReasonServiceServer) OrderReturnReasonUpdate(ctx context.Context, in *omsclient.OrderReturnReasonUpdateReq) (*omsclient.OrderReturnReasonUpdateResp, error) {
-	l := orderreturnreasonservicelogic.NewOrderReturnReasonUpdateLogic(ctx, s.svcCtx)
-	return l.OrderReturnReasonUpdate(in)
+// 更新退货原因表
+func (s *OrderReturnReasonServiceServer) UpdateOrderReturnReason(ctx context.Context, in *omsclient.UpdateOrderReturnReasonReq) (*omsclient.UpdateOrderReturnReasonResp, error) {
+	l := orderreturnreasonservicelogic.NewUpdateOrderReturnReasonLogic(ctx, s.svcCtx)
+	return l.UpdateOrderReturnReason(in)
 }
 
-// 批量修改退货原因状态
-func (s *OrderReturnReasonServiceServer) OrderReturnReasonUpdateStatus(ctx context.Context, in *omsclient.OrderReturnReasonUpdateStatusReq) (*omsclient.OrderReturnReasonUpdateResp, error) {
-	l := orderreturnreasonservicelogic.NewOrderReturnReasonUpdateStatusLogic(ctx, s.svcCtx)
-	return l.OrderReturnReasonUpdateStatus(in)
+// 更新退货原因表状态
+func (s *OrderReturnReasonServiceServer) UpdateOrderReturnReasonStatus(ctx context.Context, in *omsclient.UpdateOrderReturnReasonStatusReq) (*omsclient.UpdateOrderReturnReasonStatusResp, error) {
+	l := orderreturnreasonservicelogic.NewUpdateOrderReturnReasonStatusLogic(ctx, s.svcCtx)
+	return l.UpdateOrderReturnReasonStatus(in)
 }
 
-// 删除退货原因
-func (s *OrderReturnReasonServiceServer) OrderReturnReasonDelete(ctx context.Context, in *omsclient.OrderReturnReasonDeleteReq) (*omsclient.OrderReturnReasonDeleteResp, error) {
-	l := orderreturnreasonservicelogic.NewOrderReturnReasonDeleteLogic(ctx, s.svcCtx)
-	return l.OrderReturnReasonDelete(in)
+// 查询退货原因表详情
+func (s *OrderReturnReasonServiceServer) QueryOrderReturnReasonDetail(ctx context.Context, in *omsclient.QueryOrderReturnReasonDetailReq) (*omsclient.QueryOrderReturnReasonDetailResp, error) {
+	l := orderreturnreasonservicelogic.NewQueryOrderReturnReasonDetailLogic(ctx, s.svcCtx)
+	return l.QueryOrderReturnReasonDetail(in)
+}
+
+// 查询退货原因表列表
+func (s *OrderReturnReasonServiceServer) QueryOrderReturnReasonList(ctx context.Context, in *omsclient.QueryOrderReturnReasonListReq) (*omsclient.QueryOrderReturnReasonListResp, error) {
+	l := orderreturnreasonservicelogic.NewQueryOrderReturnReasonListLogic(ctx, s.svcCtx)
+	return l.QueryOrderReturnReasonList(in)
 }

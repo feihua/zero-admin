@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加产品评价回复表
+message AddCommentReplayReq {
+  int64 comment_id = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //
+  string member_nick_name = 6; //
+  int32 type = 7; //评论人员类型；0->会员；1->管理员
+
+}
+
+message AddCommentReplayResp {
+  string pong = 1;
+}
+
+// 删除产品评价回复表
+message DeleteCommentReplayReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteCommentReplayResp {
+  string pong = 1;
+}
+
+// 更新产品评价回复表
+message UpdateCommentReplayReq {
+  int64 comment_id = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //
+  string member_nick_name = 6; //
+  int32 type = 7; //评论人员类型；0->会员；1->管理员
+
+}
+
+message UpdateCommentReplayResp {
+  string pong = 1;
+}
+
+// 更新产品评价回复表状态
+message UpdateCommentReplayStatusReq {
+  int64 comment_id = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //
+  string member_nick_name = 6; //
+  int32 type = 7; //评论人员类型；0->会员；1->管理员
+
+}
+
+message UpdateCommentReplayStatusResp {
+  string pong = 1;
+}
+
+// 查询产品评价回复表详情
+message QueryCommentReplayDetailReq {
+    int64 id = 1;
+}
+
+message QueryCommentReplayDetailResp {
+  int64 comment_id = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //
+  string member_nick_name = 6; //
+  int32 type = 7; //评论人员类型；0->会员；1->管理员
+
+}
+
+// 分页查询产品评价回复表列表
+message QueryCommentReplayListReq {
+  int64 comment_id = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //
+  string member_nick_name = 6; //
+  int32 type = 7; //评论人员类型；0->会员；1->管理员
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message CommentReplayListData {
+  int64 comment_id = 1; //
+  string content = 2; //
+  string create_time = 3; //
+  int64 id = 4; //
+  string member_icon = 5; //
+  string member_nick_name = 6; //
+  int32 type = 7; //评论人员类型；0->会员；1->管理员
+
+}
+
+message QueryCommentReplayListResp {
+  int64 total = 1;
+  repeated  CommentReplayListData list = 2;
+}
+
+// 产品评价回复表
+service CommentReplayService {
+  // 添加产品评价回复表
+  rpc AddCommentReplay(AddCommentReplayReq) returns (AddCommentReplayResp){}
+  // 删除产品评价回复表
+  rpc DeleteCommentReplay(DeleteCommentReplayReq) returns (DeleteCommentReplayResp){}
+  // 更新产品评价回复表
+  rpc UpdateCommentReplay(UpdateCommentReplayReq) returns (UpdateCommentReplayResp ){}
+  // 更新产品评价回复表状态
+  rpc UpdateCommentReplayStatus(UpdateCommentReplayStatusReq) returns (UpdateCommentReplayStatusResp ){}
+  // 查询产品评价回复表详情
+   rpc QueryCommentReplayDetail(QueryCommentReplayDetailReq) returns (QueryCommentReplayDetailResp){}
+  // 查询产品评价回复表列表
+  rpc QueryCommentReplayList(QueryCommentReplayListReq) returns (QueryCommentReplayListResp){}
+
+
+}

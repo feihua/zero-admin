@@ -100,11 +100,11 @@ func (l *OrderDetailLogic) OrderDetail(in *omsclient.OrderDetailReq) (*omsclient
 
 }
 
-func buildOperateHistory(histories []*model.OmsOrderOperateHistory) []*omsclient.OrderOperateHistoryListData {
-	var historyListData []*omsclient.OrderOperateHistoryListData
+func buildOperateHistory(histories []*model.OmsOrderOperateHistory) []*omsclient.OrderOperateHistoryData {
+	var historyListData []*omsclient.OrderOperateHistoryData
 
 	for _, operateHistory := range histories {
-		historyListData = append(historyListData, &omsclient.OrderOperateHistoryListData{
+		historyListData = append(historyListData, &omsclient.OrderOperateHistoryData{
 			Id:          operateHistory.ID,
 			OrderId:     operateHistory.OrderID,
 			OperateMan:  operateHistory.OperateMan,
@@ -116,10 +116,10 @@ func buildOperateHistory(histories []*model.OmsOrderOperateHistory) []*omsclient
 	return historyListData
 }
 
-func buildOrderItemData(result []*model.OmsOrderItem) []*omsclient.OrderItemListData {
-	var itemListData []*omsclient.OrderItemListData
+func buildOrderItemData(result []*model.OmsOrderItem) []*omsclient.OrderItemData {
+	var itemListData []*omsclient.OrderItemData
 	for _, item := range result {
-		itemListData = append(itemListData, &omsclient.OrderItemListData{
+		itemListData = append(itemListData, &omsclient.OrderItemData{
 			Id:                item.ID,
 			OrderId:           item.OrderID,
 			OrderSn:           item.OrderSn,

@@ -33,8 +33,8 @@ func NewCompanyAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // CompanyAddressList 查询公司收货地址
 func (l *CompanyAddressListLogic) CompanyAddressList(req *types.ListCompanyAddressReq) (resp *types.ListCompanyAddressResp, err error) {
-	result, err := l.svcCtx.CompanyAddressService.CompanyAddressList(l.ctx, &omsclient.CompanyAddressListReq{
-		Current:  req.Current,
+	result, err := l.svcCtx.CompanyAddressService.QueryCompanyAddressList(l.ctx, &omsclient.QueryCompanyAddressListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 	})
 

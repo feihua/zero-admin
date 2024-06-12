@@ -33,7 +33,7 @@ func NewUpdateReturnResonStatusLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // UpdateReturnResonStatus 批量更新退货原因状态
 func (l *UpdateReturnResonStatusLogic) UpdateReturnResonStatus(req *types.UpdateReturnResonStatusReq) (resp *types.UpdateReturnResonResp, err error) {
-	_, err = l.svcCtx.OrderReturnReasonService.OrderReturnReasonUpdateStatus(l.ctx, &omsclient.OrderReturnReasonUpdateStatusReq{
+	_, err = l.svcCtx.OrderReturnReasonService.UpdateOrderReturnReasonStatus(l.ctx, &omsclient.UpdateOrderReturnReasonStatusReq{
 		Ids:    req.Ids,
 		Status: req.Status,
 	})

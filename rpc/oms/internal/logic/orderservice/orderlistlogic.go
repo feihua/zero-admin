@@ -126,11 +126,11 @@ func (l *OrderListLogic) OrderList(in *omsclient.OrderListReq) (*omsclient.Order
 	}, nil
 }
 
-func queryOrderItems(l *OrderListLogic, OrderId int64) []*omsclient.OrderItemListData {
+func queryOrderItems(l *OrderListLogic, OrderId int64) []*omsclient.OrderItemData {
 	result, _ := query.OmsOrderItem.WithContext(l.ctx).Where(query.OmsOrderItem.OrderID.Eq(OrderId)).Find()
-	var itemListData []*omsclient.OrderItemListData
+	var itemListData []*omsclient.OrderItemData
 	for _, item := range result {
-		itemListData = append(itemListData, &omsclient.OrderItemListData{
+		itemListData = append(itemListData, &omsclient.OrderItemData{
 			Id:                item.ID,
 			OrderId:           item.OrderID,
 			OrderSn:           item.OrderSn,
@@ -158,12 +158,12 @@ func queryOrderItems(l *OrderListLogic, OrderId int64) []*omsclient.OrderItemLis
 }
 
 // 获取操作记录
-func queryHistoryRecord(l *OrderListLogic, OrderId int64) []*omsclient.OrderOperateHistoryListData {
+func queryHistoryRecord(l *OrderListLogic, OrderId int64) []*omsclient.OrderOperateHistoryData {
 	result, _ := query.OmsOrderOperateHistory.WithContext(l.ctx).Where(query.OmsOrderOperateHistory.OrderID.Eq(OrderId)).Find()
-	var historyListData []*omsclient.OrderOperateHistoryListData
+	var historyListData []*omsclient.OrderOperateHistoryData
 
 	for _, operateHistory := range result {
-		historyListData = append(historyListData, &omsclient.OrderOperateHistoryListData{
+		historyListData = append(historyListData, &omsclient.OrderOperateHistoryData{
 			Id:          operateHistory.ID,
 			OrderId:     operateHistory.OrderID,
 			OperateMan:  operateHistory.OperateMan,

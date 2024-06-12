@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加收藏表
+message AddProductCollectReq {
+  string add_time = 1; //创建时间
+  int32 collect_type = 2; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 deleted = 3; //逻辑删除
+  int32 id = 4; //
+  string update_time = 5; //更新时间
+  int32 user_id = 6; //用户表的用户ID
+  int32 value_id = 7; //如果type=0，则是商品ID；如果type=1，则是专题ID
+
+}
+
+message AddProductCollectResp {
+  string pong = 1;
+}
+
+// 删除收藏表
+message DeleteProductCollectReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductCollectResp {
+  string pong = 1;
+}
+
+// 更新收藏表
+message UpdateProductCollectReq {
+  string add_time = 1; //创建时间
+  int32 collect_type = 2; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 deleted = 3; //逻辑删除
+  int32 id = 4; //
+  string update_time = 5; //更新时间
+  int32 user_id = 6; //用户表的用户ID
+  int32 value_id = 7; //如果type=0，则是商品ID；如果type=1，则是专题ID
+
+}
+
+message UpdateProductCollectResp {
+  string pong = 1;
+}
+
+// 更新收藏表状态
+message UpdateProductCollectStatusReq {
+  string add_time = 1; //创建时间
+  int32 collect_type = 2; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 deleted = 3; //逻辑删除
+  int32 id = 4; //
+  string update_time = 5; //更新时间
+  int32 user_id = 6; //用户表的用户ID
+  int32 value_id = 7; //如果type=0，则是商品ID；如果type=1，则是专题ID
+
+}
+
+message UpdateProductCollectStatusResp {
+  string pong = 1;
+}
+
+// 查询收藏表详情
+message QueryProductCollectDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductCollectDetailResp {
+  string add_time = 1; //创建时间
+  int32 collect_type = 2; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 deleted = 3; //逻辑删除
+  int32 id = 4; //
+  string update_time = 5; //更新时间
+  int32 user_id = 6; //用户表的用户ID
+  int32 value_id = 7; //如果type=0，则是商品ID；如果type=1，则是专题ID
+
+}
+
+// 分页查询收藏表列表
+message QueryProductCollectListReq {
+  string add_time = 1; //创建时间
+  int32 collect_type = 2; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 deleted = 3; //逻辑删除
+  int32 id = 4; //
+  string update_time = 5; //更新时间
+  int32 user_id = 6; //用户表的用户ID
+  int32 value_id = 7; //如果type=0，则是商品ID；如果type=1，则是专题ID
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message ProductCollectListData {
+  string add_time = 1; //创建时间
+  int32 collect_type = 2; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 deleted = 3; //逻辑删除
+  int32 id = 4; //
+  string update_time = 5; //更新时间
+  int32 user_id = 6; //用户表的用户ID
+  int32 value_id = 7; //如果type=0，则是商品ID；如果type=1，则是专题ID
+
+}
+
+message QueryProductCollectListResp {
+  int64 total = 1;
+  repeated  ProductCollectListData list = 2;
+}
+
+// 收藏表
+service ProductCollectService {
+  // 添加收藏表
+  rpc AddProductCollect(AddProductCollectReq) returns (AddProductCollectResp){}
+  // 删除收藏表
+  rpc DeleteProductCollect(DeleteProductCollectReq) returns (DeleteProductCollectResp){}
+  // 更新收藏表
+  rpc UpdateProductCollect(UpdateProductCollectReq) returns (UpdateProductCollectResp ){}
+  // 更新收藏表状态
+  rpc UpdateProductCollectStatus(UpdateProductCollectStatusReq) returns (UpdateProductCollectStatusResp ){}
+  // 查询收藏表详情
+   rpc QueryProductCollectDetail(QueryProductCollectDetailReq) returns (QueryProductCollectDetailResp){}
+  // 查询收藏表列表
+  rpc QueryProductCollectList(QueryProductCollectListReq) returns (QueryProductCollectListResp){}
+
+
+}

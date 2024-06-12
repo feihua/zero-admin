@@ -56,7 +56,8 @@ func (l *OrderConfirmLogic) OrderConfirm(in *omsclient.OrderConfirmReq) (*omscli
 	item.ID = in.OrderId
 	item.ConfirmStatus = 1
 	item.Status = 3
-	item.ReceiveTime = time.Now()
+	now := time.Now()
+	item.ReceiveTime = &now
 	_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId)).Updates(item)
 	if err != nil {
 		return nil, err

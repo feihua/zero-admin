@@ -34,8 +34,8 @@ func NewReturnApplyListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Re
 
 // ReturnApplyList 查询退货申请
 func (l *ReturnApplyListLogic) ReturnApplyList(req types.ListReturnApplyReq) (*types.ListReturnApplyResp, error) {
-	resp, err := l.svcCtx.OrderReturnApplyService.OrderReturnApplyList(l.ctx, &omsclient.OrderReturnApplyListReq{
-		Current:        req.Current,
+	resp, err := l.svcCtx.OrderReturnApplyService.QueryOrderReturnApplyList(l.ctx, &omsclient.QueryOrderReturnApplyListReq{
+		PageNum:        req.Current,
 		PageSize:       req.PageSize,
 		OrderSn:        strings.TrimSpace(req.OrderSn),
 		MemberUsername: strings.TrimSpace(req.MemberUsername),

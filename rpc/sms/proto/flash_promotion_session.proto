@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加限时购场次表
+message AddFlashPromotionSessionReq {
+  string create_time = 1; //创建时间
+  string end_time = 2; //每日结束时间
+  int64 id = 3; //编号
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
+  int32 status = 6; //启用状态：0->不启用；1->启用
+
+}
+
+message AddFlashPromotionSessionResp {
+  string pong = 1;
+}
+
+// 删除限时购场次表
+message DeleteFlashPromotionSessionReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteFlashPromotionSessionResp {
+  string pong = 1;
+}
+
+// 更新限时购场次表
+message UpdateFlashPromotionSessionReq {
+  string create_time = 1; //创建时间
+  string end_time = 2; //每日结束时间
+  int64 id = 3; //编号
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
+  int32 status = 6; //启用状态：0->不启用；1->启用
+
+}
+
+message UpdateFlashPromotionSessionResp {
+  string pong = 1;
+}
+
+// 更新限时购场次表状态
+message UpdateFlashPromotionSessionStatusReq {
+  string create_time = 1; //创建时间
+  string end_time = 2; //每日结束时间
+  int64 id = 3; //编号
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
+  int32 status = 6; //启用状态：0->不启用；1->启用
+
+}
+
+message UpdateFlashPromotionSessionStatusResp {
+  string pong = 1;
+}
+
+// 查询限时购场次表详情
+message QueryFlashPromotionSessionDetailReq {
+    int64 id = 1;
+}
+
+message QueryFlashPromotionSessionDetailResp {
+  string create_time = 1; //创建时间
+  string end_time = 2; //每日结束时间
+  int64 id = 3; //编号
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
+  int32 status = 6; //启用状态：0->不启用；1->启用
+
+}
+
+// 分页查询限时购场次表列表
+message QueryFlashPromotionSessionListReq {
+  string create_time = 1; //创建时间
+  string end_time = 2; //每日结束时间
+  int64 id = 3; //编号
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
+  int32 status = 6; //启用状态：0->不启用；1->启用
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message FlashPromotionSessionListData {
+  string create_time = 1; //创建时间
+  string end_time = 2; //每日结束时间
+  int64 id = 3; //编号
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
+  int32 status = 6; //启用状态：0->不启用；1->启用
+
+}
+
+message QueryFlashPromotionSessionListResp {
+  int64 total = 1;
+  repeated  FlashPromotionSessionListData list = 2;
+}
+
+// 限时购场次表
+service FlashPromotionSessionService {
+  // 添加限时购场次表
+  rpc AddFlashPromotionSession(AddFlashPromotionSessionReq) returns (AddFlashPromotionSessionResp){}
+  // 删除限时购场次表
+  rpc DeleteFlashPromotionSession(DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp){}
+  // 更新限时购场次表
+  rpc UpdateFlashPromotionSession(UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp ){}
+  // 更新限时购场次表状态
+  rpc UpdateFlashPromotionSessionStatus(UpdateFlashPromotionSessionStatusReq) returns (UpdateFlashPromotionSessionStatusResp ){}
+  // 查询限时购场次表详情
+   rpc QueryFlashPromotionSessionDetail(QueryFlashPromotionSessionDetailReq) returns (QueryFlashPromotionSessionDetailResp){}
+  // 查询限时购场次表列表
+  rpc QueryFlashPromotionSessionList(QueryFlashPromotionSessionListReq) returns (QueryFlashPromotionSessionListResp){}
+
+
+}

@@ -47,7 +47,7 @@ type omsOrderOperateHistory struct {
 	ID          field.Int64
 	OrderID     field.Int64  // 订单id
 	OperateMan  field.String // 操作人：用户；系统；后台管理员
-	CreateTime  field.Time   // 操作时间
+	CreateTime  field.Time   // 创建时间
 	OrderStatus field.Int32  // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 	Note        field.String // 备注
 

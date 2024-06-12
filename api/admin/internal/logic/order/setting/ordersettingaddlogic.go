@@ -33,7 +33,7 @@ func NewOrderSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Or
 
 // OrderSettingAdd 添加订单设置
 func (l *OrderSettingAddLogic) OrderSettingAdd(req types.AddOrderSettingReq) (*types.AddOrderSettingResp, error) {
-	_, err := l.svcCtx.OrderSettingService.OrderSettingAdd(l.ctx, &omsclient.OrderSettingAddReq{
+	_, err := l.svcCtx.OrderSettingService.AddOrderSetting(l.ctx, &omsclient.AddOrderSettingReq{
 		FlashOrderOvertime:  req.FlashOrderOvertime,
 		NormalOrderOvertime: req.NormalOrderOvertime,
 		ConfirmOvertime:     req.ConfirmOvertime,
