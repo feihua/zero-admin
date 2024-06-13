@@ -44,23 +44,6 @@ message UpdateCommentReplayReq {
 message UpdateCommentReplayResp {
   string pong = 1;
 }
-
-// 更新产品评价回复表状态
-message UpdateCommentReplayStatusReq {
-  int64 comment_id = 1; //
-  string content = 2; //
-  string create_time = 3; //
-  int64 id = 4; //
-  string member_icon = 5; //
-  string member_nick_name = 6; //
-  int32 type = 7; //评论人员类型；0->会员；1->管理员
-
-}
-
-message UpdateCommentReplayStatusResp {
-  string pong = 1;
-}
-
 // 查询产品评价回复表详情
 message QueryCommentReplayDetailReq {
     int64 id = 1;
@@ -79,15 +62,10 @@ message QueryCommentReplayDetailResp {
 
 // 分页查询产品评价回复表列表
 message QueryCommentReplayListReq {
-  int64 comment_id = 1; //
-  string content = 2; //
-  string create_time = 3; //
-  int64 id = 4; //
-  string member_icon = 5; //
-  string member_nick_name = 6; //
-  int32 type = 7; //评论人员类型；0->会员；1->管理员
- int64 page_num = 1; //第几页
+  int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
+  int64 comment_id = 3; //
+
 }
 
 message CommentReplayListData {
@@ -114,8 +92,6 @@ service CommentReplayService {
   rpc DeleteCommentReplay(DeleteCommentReplayReq) returns (DeleteCommentReplayResp){}
   // 更新产品评价回复表
   rpc UpdateCommentReplay(UpdateCommentReplayReq) returns (UpdateCommentReplayResp ){}
-  // 更新产品评价回复表状态
-  rpc UpdateCommentReplayStatus(UpdateCommentReplayStatusReq) returns (UpdateCommentReplayStatusResp ){}
   // 查询产品评价回复表详情
    rpc QueryCommentReplayDetail(QueryCommentReplayDetailReq) returns (QueryCommentReplayDetailResp){}
   // 查询产品评价回复表列表

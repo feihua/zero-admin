@@ -22,28 +22,32 @@ func NewFlashPromotionProductRelationServiceServer(svcCtx *svc.ServiceContext) *
 	}
 }
 
-func (s *FlashPromotionProductRelationServiceServer) FlashPromotionProductRelationAdd(ctx context.Context, in *smsclient.FlashPromotionProductRelationAddReq) (*smsclient.FlashPromotionProductRelationAddResp, error) {
-	l := flashpromotionproductrelationservicelogic.NewFlashPromotionProductRelationAddLogic(ctx, s.svcCtx)
-	return l.FlashPromotionProductRelationAdd(in)
+// 添加商品限时购与商品关系表
+func (s *FlashPromotionProductRelationServiceServer) AddFlashPromotionProductRelation(ctx context.Context, in *smsclient.AddFlashPromotionProductRelationReq) (*smsclient.AddFlashPromotionProductRelationResp, error) {
+	l := flashpromotionproductrelationservicelogic.NewAddFlashPromotionProductRelationLogic(ctx, s.svcCtx)
+	return l.AddFlashPromotionProductRelation(in)
 }
 
-func (s *FlashPromotionProductRelationServiceServer) FlashPromotionProductRelationList(ctx context.Context, in *smsclient.FlashPromotionProductRelationListReq) (*smsclient.FlashPromotionProductRelationListResp, error) {
-	l := flashpromotionproductrelationservicelogic.NewFlashPromotionProductRelationListLogic(ctx, s.svcCtx)
-	return l.FlashPromotionProductRelationList(in)
+// 删除商品限时购与商品关系表
+func (s *FlashPromotionProductRelationServiceServer) DeleteFlashPromotionProductRelation(ctx context.Context, in *smsclient.DeleteFlashPromotionProductRelationReq) (*smsclient.DeleteFlashPromotionProductRelationResp, error) {
+	l := flashpromotionproductrelationservicelogic.NewDeleteFlashPromotionProductRelationLogic(ctx, s.svcCtx)
+	return l.DeleteFlashPromotionProductRelation(in)
 }
 
-func (s *FlashPromotionProductRelationServiceServer) FlashPromotionProductRelationUpdate(ctx context.Context, in *smsclient.FlashPromotionProductRelationUpdateReq) (*smsclient.FlashPromotionProductRelationUpdateResp, error) {
-	l := flashpromotionproductrelationservicelogic.NewFlashPromotionProductRelationUpdateLogic(ctx, s.svcCtx)
-	return l.FlashPromotionProductRelationUpdate(in)
+// 更新商品限时购与商品关系表
+func (s *FlashPromotionProductRelationServiceServer) UpdateFlashPromotionProductRelation(ctx context.Context, in *smsclient.UpdateFlashPromotionProductRelationReq) (*smsclient.UpdateFlashPromotionProductRelationResp, error) {
+	l := flashpromotionproductrelationservicelogic.NewUpdateFlashPromotionProductRelationLogic(ctx, s.svcCtx)
+	return l.UpdateFlashPromotionProductRelation(in)
 }
 
-func (s *FlashPromotionProductRelationServiceServer) FlashPromotionProductRelationDelete(ctx context.Context, in *smsclient.FlashPromotionProductRelationDeleteReq) (*smsclient.FlashPromotionProductRelationDeleteResp, error) {
-	l := flashpromotionproductrelationservicelogic.NewFlashPromotionProductRelationDeleteLogic(ctx, s.svcCtx)
-	return l.FlashPromotionProductRelationDelete(in)
+// 查询商品限时购与商品关系表详情
+func (s *FlashPromotionProductRelationServiceServer) QueryFlashPromotionProductRelationDetail(ctx context.Context, in *smsclient.QueryFlashPromotionProductRelationDetailReq) (*smsclient.QueryFlashPromotionProductRelationDetailResp, error) {
+	l := flashpromotionproductrelationservicelogic.NewQueryFlashPromotionProductRelationDetailLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionProductRelationDetail(in)
 }
 
-// 根据商品id查询
-func (s *FlashPromotionProductRelationServiceServer) QueryFlashPromotionByProduct(ctx context.Context, in *smsclient.QueryFlashPromotionByProductReq) (*smsclient.QueryFlashPromotionByProductResp, error) {
-	l := flashpromotionproductrelationservicelogic.NewQueryFlashPromotionByProductLogic(ctx, s.svcCtx)
-	return l.QueryFlashPromotionByProduct(in)
+// 查询商品限时购与商品关系表列表
+func (s *FlashPromotionProductRelationServiceServer) QueryFlashPromotionProductRelationList(ctx context.Context, in *smsclient.QueryFlashPromotionProductRelationListReq) (*smsclient.QueryFlashPromotionProductRelationListResp, error) {
+	l := flashpromotionproductrelationservicelogic.NewQueryFlashPromotionProductRelationListLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionProductRelationList(in)
 }

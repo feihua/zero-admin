@@ -33,8 +33,8 @@ func NewProductCategoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // ProductCategoryList 查询商品分类
 func (l *ProductCategoryListLogic) ProductCategoryList(req types.ListProductCategoryReq) (*types.ListProductCategoryResp, error) {
-	resp, err := l.svcCtx.ProductCategoryService.ProductCategoryList(l.ctx, &pmsclient.ProductCategoryListReq{
-		Current:    req.Current,
+	resp, err := l.svcCtx.ProductCategoryService.QueryProductCategoryList(l.ctx, &pmsclient.QueryProductCategoryListReq{
+		PageNum:    req.Current,
 		PageSize:   req.PageSize,
 		Name:       strings.TrimSpace(req.Name),
 		ParentId:   req.ParentId,

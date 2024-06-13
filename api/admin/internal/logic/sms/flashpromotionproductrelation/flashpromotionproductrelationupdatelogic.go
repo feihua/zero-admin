@@ -33,7 +33,7 @@ func NewFlashPromotionProductRelationUpdateLogic(ctx context.Context, svcCtx *sv
 
 // FlashPromotionProductRelationUpdate 更新限时购和商品关系
 func (l *FlashPromotionProductRelationUpdateLogic) FlashPromotionProductRelationUpdate(req *types.UpdateFlashPromotionProductRelationReq) (resp *types.UpdateFlashPromotionProductRelationResp, err error) {
-	_, err = l.svcCtx.FlashPromotionProductRelationService.FlashPromotionProductRelationUpdate(l.ctx, &smsclient.FlashPromotionProductRelationUpdateReq{
+	_, err = l.svcCtx.FlashPromotionProductRelationService.UpdateFlashPromotionProductRelation(l.ctx, &smsclient.UpdateFlashPromotionProductRelationReq{
 		Id:                      req.ID,
 		FlashPromotionId:        req.FlashPromotionProductRelationID,
 		FlashPromotionSessionId: req.FlashPromotionProductRelationSessionID,

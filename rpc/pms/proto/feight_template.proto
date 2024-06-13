@@ -47,22 +47,6 @@ message UpdateFeightTemplateResp {
   string pong = 1;
 }
 
-// 更新运费模版状态
-message UpdateFeightTemplateStatusReq {
-  int32 charge_type = 1; //计费类型:0->按重量；1->按件数
-  int64 continue_fee = 2; //
-  int64 continue_weight = 3; //
-  string dest = 4; //目的地（省、市）
-  int64 first_fee = 5; //首费（元）
-  int64 first_weight = 6; //首重kg
-  int64 id = 7; //
-  string name = 8; //运费模版名称
-
-}
-
-message UpdateFeightTemplateStatusResp {
-  string pong = 1;
-}
 
 // 查询运费模版详情
 message QueryFeightTemplateDetailReq {
@@ -83,14 +67,6 @@ message QueryFeightTemplateDetailResp {
 
 // 分页查询运费模版列表
 message QueryFeightTemplateListReq {
-  int32 charge_type = 1; //计费类型:0->按重量；1->按件数
-  int64 continue_fee = 2; //
-  int64 continue_weight = 3; //
-  string dest = 4; //目的地（省、市）
-  int64 first_fee = 5; //首费（元）
-  int64 first_weight = 6; //首重kg
-  int64 id = 7; //
-  string name = 8; //运费模版名称
  int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
 }
@@ -120,8 +96,6 @@ service FeightTemplateService {
   rpc DeleteFeightTemplate(DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp){}
   // 更新运费模版
   rpc UpdateFeightTemplate(UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp ){}
-  // 更新运费模版状态
-  rpc UpdateFeightTemplateStatus(UpdateFeightTemplateStatusReq) returns (UpdateFeightTemplateStatusResp ){}
   // 查询运费模版详情
    rpc QueryFeightTemplateDetail(QueryFeightTemplateDetailReq) returns (QueryFeightTemplateDetailResp){}
   // 查询运费模版列表

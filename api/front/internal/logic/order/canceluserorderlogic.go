@@ -68,7 +68,7 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (*
 	//4.1修改sms_coupon_history表的use_status字段
 	//4.2记得修改sms_coupon的use_count字段,下单的时候要加1,取消订单的时候,要减1
 	if couponId > 0 {
-		_, err = l.svcCtx.CouponHistoryService.UpdateCouponStatus(l.ctx, &smsclient.UpdateCouponStatusReq{
+		_, err = l.svcCtx.CouponHistoryService.UpdateCouponHistoryStatus(l.ctx, &smsclient.UpdateCouponHistoryStatusReq{
 			MemberId:  memberId,
 			UseStatus: 0,
 			CouponId:  couponId,

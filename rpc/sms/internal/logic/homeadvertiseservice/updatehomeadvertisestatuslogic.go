@@ -30,12 +30,12 @@ func NewUpdateHomeAdvertiseStatusLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 // UpdateHomeAdvertiseStatus 修改上下线状态
-func (l *UpdateHomeAdvertiseStatusLogic) UpdateHomeAdvertiseStatus(in *smsclient.UpdateHomeAdvertiseStatusReq) (*smsclient.HomeAdvertiseUpdateResp, error) {
+func (l *UpdateHomeAdvertiseStatusLogic) UpdateHomeAdvertiseStatus(in *smsclient.UpdateHomeAdvertiseStatusReq) (*smsclient.UpdateHomeAdvertiseStatusResp, error) {
 	q := query.SmsHomeAdvertise
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.Status, in.Status)
 	if err != nil {
 		return nil, err
 	}
 
-	return &smsclient.HomeAdvertiseUpdateResp{}, nil
+	return &smsclient.UpdateHomeAdvertiseStatusResp{}, nil
 }

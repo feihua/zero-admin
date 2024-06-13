@@ -38,7 +38,7 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // 3.修改商品的推荐状态(pms-rpc)
 func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductReq) (*types.AddHomeNewProductResp, error) {
 	// 1.根据productIds查询商品(pms-rpc)
-	brandListResp, _ := l.svcCtx.ProductService.ProductListByIds(l.ctx, &pmsclient.ProductByIdsReq{Ids: req.ProductIds})
+	brandListResp, _ := l.svcCtx.ProductService.QueryProductListByIds(l.ctx, &pmsclient.QueryProductByIdsReq{Ids: req.ProductIds})
 
 	var list []*smsclient.HomeNewProductAddData
 
@@ -52,7 +52,7 @@ func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductRe
 	}
 
 	// 2.添加首页新品推荐记录(sms-rpc)
-	_, err := l.svcCtx.HomeNewProductService.HomeNewProductAdd(l.ctx, &smsclient.HomeNewProductAddReq{
+	_, err := l.svcCtx.HomeNewProductService.AddHomeNewProduct(l.ctx, &smsclient.AddHomeNewProductReq{
 		NewProductAddData: list,
 	})
 

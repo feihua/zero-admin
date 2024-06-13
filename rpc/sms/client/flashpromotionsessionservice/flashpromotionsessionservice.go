@@ -13,158 +13,180 @@ import (
 )
 
 type (
-	CouponAddOrUpdateReq                          = smsclient.CouponAddOrUpdateReq
-	CouponAddOrUpdateResp                         = smsclient.CouponAddOrUpdateResp
-	CouponCountReq                                = smsclient.CouponCountReq
-	CouponCountResp                               = smsclient.CouponCountResp
-	CouponDeleteReq                               = smsclient.CouponDeleteReq
-	CouponDeleteResp                              = smsclient.CouponDeleteResp
-	CouponFindByIdReq                             = smsclient.CouponFindByIdReq
-	CouponFindByIdResp                            = smsclient.CouponFindByIdResp
-	CouponFindByIdsReq                            = smsclient.CouponFindByIdsReq
-	CouponFindByIdsResp                           = smsclient.CouponFindByIdsResp
+	AddCouponHistoryReq                           = smsclient.AddCouponHistoryReq
+	AddCouponHistoryResp                          = smsclient.AddCouponHistoryResp
+	AddFlashPromotionLogReq                       = smsclient.AddFlashPromotionLogReq
+	AddFlashPromotionLogResp                      = smsclient.AddFlashPromotionLogResp
+	AddFlashPromotionProductRelationReq           = smsclient.AddFlashPromotionProductRelationReq
+	AddFlashPromotionProductRelationResp          = smsclient.AddFlashPromotionProductRelationResp
+	AddFlashPromotionReq                          = smsclient.AddFlashPromotionReq
+	AddFlashPromotionResp                         = smsclient.AddFlashPromotionResp
+	AddFlashPromotionSessionReq                   = smsclient.AddFlashPromotionSessionReq
+	AddFlashPromotionSessionResp                  = smsclient.AddFlashPromotionSessionResp
+	AddHomeAdvertiseReq                           = smsclient.AddHomeAdvertiseReq
+	AddHomeAdvertiseResp                          = smsclient.AddHomeAdvertiseResp
+	AddHomeBrandReq                               = smsclient.AddHomeBrandReq
+	AddHomeBrandResp                              = smsclient.AddHomeBrandResp
+	AddHomeNewProductReq                          = smsclient.AddHomeNewProductReq
+	AddHomeNewProductResp                         = smsclient.AddHomeNewProductResp
+	AddHomeRecommendProductReq                    = smsclient.AddHomeRecommendProductReq
+	AddHomeRecommendProductResp                   = smsclient.AddHomeRecommendProductResp
+	AddHomeRecommendSubjectReq                    = smsclient.AddHomeRecommendSubjectReq
+	AddHomeRecommendSubjectResp                   = smsclient.AddHomeRecommendSubjectResp
+	AddOrUpdateCouponReq                          = smsclient.AddOrUpdateCouponReq
+	AddOrUpdateCouponResp                         = smsclient.AddOrUpdateCouponResp
 	CouponFindByProductIdAndProductCategoryIdReq  = smsclient.CouponFindByProductIdAndProductCategoryIdReq
 	CouponFindByProductIdAndProductCategoryIdResp = smsclient.CouponFindByProductIdAndProductCategoryIdResp
-	CouponHistoryAddReq                           = smsclient.CouponHistoryAddReq
-	CouponHistoryAddResp                          = smsclient.CouponHistoryAddResp
-	CouponHistoryDeleteReq                        = smsclient.CouponHistoryDeleteReq
-	CouponHistoryDeleteResp                       = smsclient.CouponHistoryDeleteResp
 	CouponHistoryDetailListData                   = smsclient.CouponHistoryDetailListData
-	CouponHistoryDetailListReq                    = smsclient.CouponHistoryDetailListReq
 	CouponHistoryDetailListResp                   = smsclient.CouponHistoryDetailListResp
 	CouponHistoryListData                         = smsclient.CouponHistoryListData
-	CouponHistoryListReq                          = smsclient.CouponHistoryListReq
-	CouponHistoryListResp                         = smsclient.CouponHistoryListResp
-	CouponHistoryUpdateReq                        = smsclient.CouponHistoryUpdateReq
-	CouponHistoryUpdateResp                       = smsclient.CouponHistoryUpdateResp
-	CouponListData                                = smsclient.CouponListData
-	CouponListReq                                 = smsclient.CouponListReq
-	CouponListResp                                = smsclient.CouponListResp
-	CouponProductCategoryRelationListData         = smsclient.CouponProductCategoryRelationListData
-	CouponProductRelationListData                 = smsclient.CouponProductRelationListData
-	FlashPromotionAddReq                          = smsclient.FlashPromotionAddReq
-	FlashPromotionAddResp                         = smsclient.FlashPromotionAddResp
-	FlashPromotionDeleteReq                       = smsclient.FlashPromotionDeleteReq
-	FlashPromotionDeleteResp                      = smsclient.FlashPromotionDeleteResp
-	FlashPromotionListByDateReq                   = smsclient.FlashPromotionListByDateReq
-	FlashPromotionListByDateResp                  = smsclient.FlashPromotionListByDateResp
+	CouponProductCategoryRelationData             = smsclient.CouponProductCategoryRelationData
+	CouponProductRelationData                     = smsclient.CouponProductRelationData
+	DeleteCouponHistoryReq                        = smsclient.DeleteCouponHistoryReq
+	DeleteCouponHistoryResp                       = smsclient.DeleteCouponHistoryResp
+	DeleteCouponReq                               = smsclient.DeleteCouponReq
+	DeleteCouponResp                              = smsclient.DeleteCouponResp
+	DeleteFlashPromotionLogReq                    = smsclient.DeleteFlashPromotionLogReq
+	DeleteFlashPromotionLogResp                   = smsclient.DeleteFlashPromotionLogResp
+	DeleteFlashPromotionProductRelationReq        = smsclient.DeleteFlashPromotionProductRelationReq
+	DeleteFlashPromotionProductRelationResp       = smsclient.DeleteFlashPromotionProductRelationResp
+	DeleteFlashPromotionReq                       = smsclient.DeleteFlashPromotionReq
+	DeleteFlashPromotionResp                      = smsclient.DeleteFlashPromotionResp
+	DeleteFlashPromotionSessionReq                = smsclient.DeleteFlashPromotionSessionReq
+	DeleteFlashPromotionSessionResp               = smsclient.DeleteFlashPromotionSessionResp
+	DeleteHomeAdvertiseReq                        = smsclient.DeleteHomeAdvertiseReq
+	DeleteHomeAdvertiseResp                       = smsclient.DeleteHomeAdvertiseResp
+	DeleteHomeBrandReq                            = smsclient.DeleteHomeBrandReq
+	DeleteHomeBrandResp                           = smsclient.DeleteHomeBrandResp
+	DeleteHomeNewProductReq                       = smsclient.DeleteHomeNewProductReq
+	DeleteHomeNewProductResp                      = smsclient.DeleteHomeNewProductResp
+	DeleteHomeRecommendProductReq                 = smsclient.DeleteHomeRecommendProductReq
+	DeleteHomeRecommendProductResp                = smsclient.DeleteHomeRecommendProductResp
+	DeleteHomeRecommendSubjectReq                 = smsclient.DeleteHomeRecommendSubjectReq
+	DeleteHomeRecommendSubjectResp                = smsclient.DeleteHomeRecommendSubjectResp
 	FlashPromotionListData                        = smsclient.FlashPromotionListData
-	FlashPromotionListReq                         = smsclient.FlashPromotionListReq
-	FlashPromotionListResp                        = smsclient.FlashPromotionListResp
-	FlashPromotionLogAddReq                       = smsclient.FlashPromotionLogAddReq
-	FlashPromotionLogAddResp                      = smsclient.FlashPromotionLogAddResp
-	FlashPromotionLogDeleteReq                    = smsclient.FlashPromotionLogDeleteReq
-	FlashPromotionLogDeleteResp                   = smsclient.FlashPromotionLogDeleteResp
 	FlashPromotionLogListData                     = smsclient.FlashPromotionLogListData
-	FlashPromotionLogListReq                      = smsclient.FlashPromotionLogListReq
-	FlashPromotionLogListResp                     = smsclient.FlashPromotionLogListResp
-	FlashPromotionLogUpdateReq                    = smsclient.FlashPromotionLogUpdateReq
-	FlashPromotionLogUpdateResp                   = smsclient.FlashPromotionLogUpdateResp
 	FlashPromotionProductRelationAddData          = smsclient.FlashPromotionProductRelationAddData
-	FlashPromotionProductRelationAddReq           = smsclient.FlashPromotionProductRelationAddReq
-	FlashPromotionProductRelationAddResp          = smsclient.FlashPromotionProductRelationAddResp
-	FlashPromotionProductRelationDeleteReq        = smsclient.FlashPromotionProductRelationDeleteReq
-	FlashPromotionProductRelationDeleteResp       = smsclient.FlashPromotionProductRelationDeleteResp
 	FlashPromotionProductRelationListData         = smsclient.FlashPromotionProductRelationListData
-	FlashPromotionProductRelationListReq          = smsclient.FlashPromotionProductRelationListReq
-	FlashPromotionProductRelationListResp         = smsclient.FlashPromotionProductRelationListResp
-	FlashPromotionProductRelationUpdateReq        = smsclient.FlashPromotionProductRelationUpdateReq
-	FlashPromotionProductRelationUpdateResp       = smsclient.FlashPromotionProductRelationUpdateResp
-	FlashPromotionSessionAddReq                   = smsclient.FlashPromotionSessionAddReq
-	FlashPromotionSessionAddResp                  = smsclient.FlashPromotionSessionAddResp
-	FlashPromotionSessionByTimeReq                = smsclient.FlashPromotionSessionByTimeReq
-	FlashPromotionSessionByTimeResp               = smsclient.FlashPromotionSessionByTimeResp
-	FlashPromotionSessionDeleteReq                = smsclient.FlashPromotionSessionDeleteReq
-	FlashPromotionSessionDeleteResp               = smsclient.FlashPromotionSessionDeleteResp
 	FlashPromotionSessionListData                 = smsclient.FlashPromotionSessionListData
-	FlashPromotionSessionListReq                  = smsclient.FlashPromotionSessionListReq
-	FlashPromotionSessionListResp                 = smsclient.FlashPromotionSessionListResp
-	FlashPromotionSessionUpdateReq                = smsclient.FlashPromotionSessionUpdateReq
-	FlashPromotionSessionUpdateResp               = smsclient.FlashPromotionSessionUpdateResp
-	FlashPromotionUpdateReq                       = smsclient.FlashPromotionUpdateReq
-	FlashPromotionUpdateResp                      = smsclient.FlashPromotionUpdateResp
-	HomeAdvertiseAddReq                           = smsclient.HomeAdvertiseAddReq
-	HomeAdvertiseAddResp                          = smsclient.HomeAdvertiseAddResp
-	HomeAdvertiseDeleteReq                        = smsclient.HomeAdvertiseDeleteReq
-	HomeAdvertiseDeleteResp                       = smsclient.HomeAdvertiseDeleteResp
 	HomeAdvertiseListData                         = smsclient.HomeAdvertiseListData
-	HomeAdvertiseListReq                          = smsclient.HomeAdvertiseListReq
-	HomeAdvertiseListResp                         = smsclient.HomeAdvertiseListResp
-	HomeAdvertiseUpdateReq                        = smsclient.HomeAdvertiseUpdateReq
-	HomeAdvertiseUpdateResp                       = smsclient.HomeAdvertiseUpdateResp
 	HomeBrandAddData                              = smsclient.HomeBrandAddData
-	HomeBrandAddReq                               = smsclient.HomeBrandAddReq
-	HomeBrandAddResp                              = smsclient.HomeBrandAddResp
-	HomeBrandDeleteReq                            = smsclient.HomeBrandDeleteReq
-	HomeBrandDeleteResp                           = smsclient.HomeBrandDeleteResp
 	HomeBrandListData                             = smsclient.HomeBrandListData
-	HomeBrandListReq                              = smsclient.HomeBrandListReq
-	HomeBrandListResp                             = smsclient.HomeBrandListResp
 	HomeNewProductAddData                         = smsclient.HomeNewProductAddData
-	HomeNewProductAddReq                          = smsclient.HomeNewProductAddReq
-	HomeNewProductAddResp                         = smsclient.HomeNewProductAddResp
-	HomeNewProductDeleteReq                       = smsclient.HomeNewProductDeleteReq
-	HomeNewProductDeleteResp                      = smsclient.HomeNewProductDeleteResp
 	HomeNewProductListData                        = smsclient.HomeNewProductListData
-	HomeNewProductListReq                         = smsclient.HomeNewProductListReq
-	HomeNewProductListResp                        = smsclient.HomeNewProductListResp
 	HomeRecommendProductAddData                   = smsclient.HomeRecommendProductAddData
-	HomeRecommendProductAddReq                    = smsclient.HomeRecommendProductAddReq
-	HomeRecommendProductAddResp                   = smsclient.HomeRecommendProductAddResp
-	HomeRecommendProductDeleteReq                 = smsclient.HomeRecommendProductDeleteReq
-	HomeRecommendProductDeleteResp                = smsclient.HomeRecommendProductDeleteResp
 	HomeRecommendProductListData                  = smsclient.HomeRecommendProductListData
-	HomeRecommendProductListReq                   = smsclient.HomeRecommendProductListReq
-	HomeRecommendProductListResp                  = smsclient.HomeRecommendProductListResp
 	HomeRecommendSubjectAddData                   = smsclient.HomeRecommendSubjectAddData
-	HomeRecommendSubjectAddReq                    = smsclient.HomeRecommendSubjectAddReq
-	HomeRecommendSubjectAddResp                   = smsclient.HomeRecommendSubjectAddResp
-	HomeRecommendSubjectDeleteReq                 = smsclient.HomeRecommendSubjectDeleteReq
-	HomeRecommendSubjectDeleteResp                = smsclient.HomeRecommendSubjectDeleteResp
 	HomeRecommendSubjectListData                  = smsclient.HomeRecommendSubjectListData
-	HomeRecommendSubjectListReq                   = smsclient.HomeRecommendSubjectListReq
-	HomeRecommendSubjectListResp                  = smsclient.HomeRecommendSubjectListResp
-	QueryFlashPromotionByProductReq               = smsclient.QueryFlashPromotionByProductReq
-	QueryFlashPromotionByProductResp              = smsclient.QueryFlashPromotionByProductResp
+	QueryCouponCountReq                           = smsclient.QueryCouponCountReq
+	QueryCouponCountResp                          = smsclient.QueryCouponCountResp
+	QueryCouponData                               = smsclient.QueryCouponData
+	QueryCouponFindByIdReq                        = smsclient.QueryCouponFindByIdReq
+	QueryCouponFindByIdResp                       = smsclient.QueryCouponFindByIdResp
+	QueryCouponFindByIdsReq                       = smsclient.QueryCouponFindByIdsReq
+	QueryCouponFindByIdsResp                      = smsclient.QueryCouponFindByIdsResp
+	QueryCouponHistoryDetailListReq               = smsclient.QueryCouponHistoryDetailListReq
+	QueryCouponHistoryDetailReq                   = smsclient.QueryCouponHistoryDetailReq
+	QueryCouponHistoryDetailResp                  = smsclient.QueryCouponHistoryDetailResp
+	QueryCouponHistoryListReq                     = smsclient.QueryCouponHistoryListReq
+	QueryCouponHistoryListResp                    = smsclient.QueryCouponHistoryListResp
+	QueryCouponListData                           = smsclient.QueryCouponListData
+	QueryCouponListReq                            = smsclient.QueryCouponListReq
+	QueryCouponListResp                           = smsclient.QueryCouponListResp
+	QueryCouponProductCategoryRelationListData    = smsclient.QueryCouponProductCategoryRelationListData
+	QueryCouponProductRelationListData            = smsclient.QueryCouponProductRelationListData
+	QueryFlashPromotionDetailReq                  = smsclient.QueryFlashPromotionDetailReq
+	QueryFlashPromotionDetailResp                 = smsclient.QueryFlashPromotionDetailResp
+	QueryFlashPromotionListByDateReq              = smsclient.QueryFlashPromotionListByDateReq
+	QueryFlashPromotionListByDateResp             = smsclient.QueryFlashPromotionListByDateResp
+	QueryFlashPromotionListReq                    = smsclient.QueryFlashPromotionListReq
+	QueryFlashPromotionListResp                   = smsclient.QueryFlashPromotionListResp
+	QueryFlashPromotionLogDetailReq               = smsclient.QueryFlashPromotionLogDetailReq
+	QueryFlashPromotionLogDetailResp              = smsclient.QueryFlashPromotionLogDetailResp
+	QueryFlashPromotionLogListReq                 = smsclient.QueryFlashPromotionLogListReq
+	QueryFlashPromotionLogListResp                = smsclient.QueryFlashPromotionLogListResp
+	QueryFlashPromotionProductRelationDetailReq   = smsclient.QueryFlashPromotionProductRelationDetailReq
+	QueryFlashPromotionProductRelationDetailResp  = smsclient.QueryFlashPromotionProductRelationDetailResp
+	QueryFlashPromotionProductRelationListReq     = smsclient.QueryFlashPromotionProductRelationListReq
+	QueryFlashPromotionProductRelationListResp    = smsclient.QueryFlashPromotionProductRelationListResp
+	QueryFlashPromotionSessionDetailReq           = smsclient.QueryFlashPromotionSessionDetailReq
+	QueryFlashPromotionSessionDetailResp          = smsclient.QueryFlashPromotionSessionDetailResp
+	QueryFlashPromotionSessionListByTimeReq       = smsclient.QueryFlashPromotionSessionListByTimeReq
+	QueryFlashPromotionSessionListByTimeResp      = smsclient.QueryFlashPromotionSessionListByTimeResp
+	QueryFlashPromotionSessionListReq             = smsclient.QueryFlashPromotionSessionListReq
+	QueryFlashPromotionSessionListResp            = smsclient.QueryFlashPromotionSessionListResp
+	QueryHomeAdvertiseDetailReq                   = smsclient.QueryHomeAdvertiseDetailReq
+	QueryHomeAdvertiseDetailResp                  = smsclient.QueryHomeAdvertiseDetailResp
+	QueryHomeAdvertiseListReq                     = smsclient.QueryHomeAdvertiseListReq
+	QueryHomeAdvertiseListResp                    = smsclient.QueryHomeAdvertiseListResp
+	QueryHomeBrandDetailReq                       = smsclient.QueryHomeBrandDetailReq
+	QueryHomeBrandDetailResp                      = smsclient.QueryHomeBrandDetailResp
+	QueryHomeBrandListReq                         = smsclient.QueryHomeBrandListReq
+	QueryHomeBrandListResp                        = smsclient.QueryHomeBrandListResp
+	QueryHomeNewProductDetailReq                  = smsclient.QueryHomeNewProductDetailReq
+	QueryHomeNewProductDetailResp                 = smsclient.QueryHomeNewProductDetailResp
+	QueryHomeNewProductListReq                    = smsclient.QueryHomeNewProductListReq
+	QueryHomeNewProductListResp                   = smsclient.QueryHomeNewProductListResp
+	QueryHomeRecommendProductDetailReq            = smsclient.QueryHomeRecommendProductDetailReq
+	QueryHomeRecommendProductDetailResp           = smsclient.QueryHomeRecommendProductDetailResp
+	QueryHomeRecommendProductListReq              = smsclient.QueryHomeRecommendProductListReq
+	QueryHomeRecommendProductListResp             = smsclient.QueryHomeRecommendProductListResp
+	QueryHomeRecommendSubjectDetailReq            = smsclient.QueryHomeRecommendSubjectDetailReq
+	QueryHomeRecommendSubjectDetailResp           = smsclient.QueryHomeRecommendSubjectDetailResp
+	QueryHomeRecommendSubjectListReq              = smsclient.QueryHomeRecommendSubjectListReq
+	QueryHomeRecommendSubjectListResp             = smsclient.QueryHomeRecommendSubjectListResp
 	QueryMemberCouponListReq                      = smsclient.QueryMemberCouponListReq
 	QueryMemberCouponListResp                     = smsclient.QueryMemberCouponListResp
-	UpdateCouponStatusReq                         = smsclient.UpdateCouponStatusReq
-	UpdateCouponStatusResp                        = smsclient.UpdateCouponStatusResp
+	UpdateCouponHistoryReq                        = smsclient.UpdateCouponHistoryReq
+	UpdateCouponHistoryResp                       = smsclient.UpdateCouponHistoryResp
+	UpdateCouponHistoryStatusReq                  = smsclient.UpdateCouponHistoryStatusReq
+	UpdateCouponHistoryStatusResp                 = smsclient.UpdateCouponHistoryStatusResp
+	UpdateFlashPromotionProductRelationReq        = smsclient.UpdateFlashPromotionProductRelationReq
+	UpdateFlashPromotionProductRelationResp       = smsclient.UpdateFlashPromotionProductRelationResp
+	UpdateFlashPromotionReq                       = smsclient.UpdateFlashPromotionReq
+	UpdateFlashPromotionResp                      = smsclient.UpdateFlashPromotionResp
+	UpdateFlashPromotionSessionReq                = smsclient.UpdateFlashPromotionSessionReq
+	UpdateFlashPromotionSessionResp               = smsclient.UpdateFlashPromotionSessionResp
 	UpdateFlashPromotionSessionStatusReq          = smsclient.UpdateFlashPromotionSessionStatusReq
 	UpdateFlashPromotionSessionStatusResp         = smsclient.UpdateFlashPromotionSessionStatusResp
 	UpdateFlashPromotionStatusReq                 = smsclient.UpdateFlashPromotionStatusReq
 	UpdateFlashPromotionStatusResp                = smsclient.UpdateFlashPromotionStatusResp
+	UpdateHomeAdvertiseReq                        = smsclient.UpdateHomeAdvertiseReq
+	UpdateHomeAdvertiseResp                       = smsclient.UpdateHomeAdvertiseResp
 	UpdateHomeAdvertiseStatusReq                  = smsclient.UpdateHomeAdvertiseStatusReq
+	UpdateHomeAdvertiseStatusResp                 = smsclient.UpdateHomeAdvertiseStatusResp
 	UpdateHomeBrandSortReq                        = smsclient.UpdateHomeBrandSortReq
 	UpdateHomeBrandSortResp                       = smsclient.UpdateHomeBrandSortResp
 	UpdateHomeBrandStatusReq                      = smsclient.UpdateHomeBrandStatusReq
 	UpdateHomeBrandStatusResp                     = smsclient.UpdateHomeBrandStatusResp
+	UpdateHomeNewProductStatusReq                 = smsclient.UpdateHomeNewProductStatusReq
+	UpdateHomeNewProductStatusResp                = smsclient.UpdateHomeNewProductStatusResp
+	UpdateHomeRecommendProductStatusReq           = smsclient.UpdateHomeRecommendProductStatusReq
+	UpdateHomeRecommendProductStatusResp          = smsclient.UpdateHomeRecommendProductStatusResp
+	UpdateHomeRecommendSubjectStatusReq           = smsclient.UpdateHomeRecommendSubjectStatusReq
+	UpdateHomeRecommendSubjectStatusResp          = smsclient.UpdateHomeRecommendSubjectStatusResp
 	UpdateNewProductSortReq                       = smsclient.UpdateNewProductSortReq
 	UpdateNewProductSortResp                      = smsclient.UpdateNewProductSortResp
-	UpdateNewProductStatusReq                     = smsclient.UpdateNewProductStatusReq
-	UpdateNewProductStatusResp                    = smsclient.UpdateNewProductStatusResp
 	UpdateRecommendProductSortReq                 = smsclient.UpdateRecommendProductSortReq
 	UpdateRecommendProductSortResp                = smsclient.UpdateRecommendProductSortResp
-	UpdateRecommendProductStatusReq               = smsclient.UpdateRecommendProductStatusReq
-	UpdateRecommendProductStatusResp              = smsclient.UpdateRecommendProductStatusResp
 	UpdateRecommendSubjectSortReq                 = smsclient.UpdateRecommendSubjectSortReq
 	UpdateRecommendSubjectSortResp                = smsclient.UpdateRecommendSubjectSortResp
-	UpdateRecommendSubjectStatusReq               = smsclient.UpdateRecommendSubjectStatusReq
-	UpdateRecommendSubjectStatusResp              = smsclient.UpdateRecommendSubjectStatusResp
 
 	FlashPromotionSessionService interface {
-		// 添加限时购场次
-		FlashPromotionSessionAdd(ctx context.Context, in *FlashPromotionSessionAddReq, opts ...grpc.CallOption) (*FlashPromotionSessionAddResp, error)
-		// 查询限时购场次
-		FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error)
-		// 更新限时购场次
-		FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error)
-		// 删除限时购场次
-		FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error)
-		// 根据时间查询限时购场次
-		FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error)
-		// 更新上下线状态
+		// 添加限时购场次表
+		AddFlashPromotionSession(ctx context.Context, in *AddFlashPromotionSessionReq, opts ...grpc.CallOption) (*AddFlashPromotionSessionResp, error)
+		// 删除限时购场次表
+		DeleteFlashPromotionSession(ctx context.Context, in *DeleteFlashPromotionSessionReq, opts ...grpc.CallOption) (*DeleteFlashPromotionSessionResp, error)
+		// 更新限时购场次表
+		UpdateFlashPromotionSession(ctx context.Context, in *UpdateFlashPromotionSessionReq, opts ...grpc.CallOption) (*UpdateFlashPromotionSessionResp, error)
+		// 更新限时购场次表状态
 		UpdateFlashPromotionSessionStatus(ctx context.Context, in *UpdateFlashPromotionSessionStatusReq, opts ...grpc.CallOption) (*UpdateFlashPromotionSessionStatusResp, error)
+		// 查询限时购场次表详情
+		QueryFlashPromotionSessionDetail(ctx context.Context, in *QueryFlashPromotionSessionDetailReq, opts ...grpc.CallOption) (*QueryFlashPromotionSessionDetailResp, error)
+		// 查询限时购场次表列表
+		QueryFlashPromotionSessionList(ctx context.Context, in *QueryFlashPromotionSessionListReq, opts ...grpc.CallOption) (*QueryFlashPromotionSessionListResp, error)
+		// 根据时间查询限时购场次
+		QueryFlashPromotionSessionListByTime(ctx context.Context, in *QueryFlashPromotionSessionListByTimeReq, opts ...grpc.CallOption) (*QueryFlashPromotionSessionListByTimeResp, error)
 	}
 
 	defaultFlashPromotionSessionService struct {
@@ -178,38 +200,44 @@ func NewFlashPromotionSessionService(cli zrpc.Client) FlashPromotionSessionServi
 	}
 }
 
-// 添加限时购场次
-func (m *defaultFlashPromotionSessionService) FlashPromotionSessionAdd(ctx context.Context, in *FlashPromotionSessionAddReq, opts ...grpc.CallOption) (*FlashPromotionSessionAddResp, error) {
+// 添加限时购场次表
+func (m *defaultFlashPromotionSessionService) AddFlashPromotionSession(ctx context.Context, in *AddFlashPromotionSessionReq, opts ...grpc.CallOption) (*AddFlashPromotionSessionResp, error) {
 	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
-	return client.FlashPromotionSessionAdd(ctx, in, opts...)
+	return client.AddFlashPromotionSession(ctx, in, opts...)
 }
 
-// 查询限时购场次
-func (m *defaultFlashPromotionSessionService) FlashPromotionSessionList(ctx context.Context, in *FlashPromotionSessionListReq, opts ...grpc.CallOption) (*FlashPromotionSessionListResp, error) {
+// 删除限时购场次表
+func (m *defaultFlashPromotionSessionService) DeleteFlashPromotionSession(ctx context.Context, in *DeleteFlashPromotionSessionReq, opts ...grpc.CallOption) (*DeleteFlashPromotionSessionResp, error) {
 	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
-	return client.FlashPromotionSessionList(ctx, in, opts...)
+	return client.DeleteFlashPromotionSession(ctx, in, opts...)
 }
 
-// 更新限时购场次
-func (m *defaultFlashPromotionSessionService) FlashPromotionSessionUpdate(ctx context.Context, in *FlashPromotionSessionUpdateReq, opts ...grpc.CallOption) (*FlashPromotionSessionUpdateResp, error) {
+// 更新限时购场次表
+func (m *defaultFlashPromotionSessionService) UpdateFlashPromotionSession(ctx context.Context, in *UpdateFlashPromotionSessionReq, opts ...grpc.CallOption) (*UpdateFlashPromotionSessionResp, error) {
 	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
-	return client.FlashPromotionSessionUpdate(ctx, in, opts...)
+	return client.UpdateFlashPromotionSession(ctx, in, opts...)
 }
 
-// 删除限时购场次
-func (m *defaultFlashPromotionSessionService) FlashPromotionSessionDelete(ctx context.Context, in *FlashPromotionSessionDeleteReq, opts ...grpc.CallOption) (*FlashPromotionSessionDeleteResp, error) {
-	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
-	return client.FlashPromotionSessionDelete(ctx, in, opts...)
-}
-
-// 根据时间查询限时购场次
-func (m *defaultFlashPromotionSessionService) FlashPromotionSessionByTime(ctx context.Context, in *FlashPromotionSessionByTimeReq, opts ...grpc.CallOption) (*FlashPromotionSessionByTimeResp, error) {
-	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
-	return client.FlashPromotionSessionByTime(ctx, in, opts...)
-}
-
-// 更新上下线状态
+// 更新限时购场次表状态
 func (m *defaultFlashPromotionSessionService) UpdateFlashPromotionSessionStatus(ctx context.Context, in *UpdateFlashPromotionSessionStatusReq, opts ...grpc.CallOption) (*UpdateFlashPromotionSessionStatusResp, error) {
 	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
 	return client.UpdateFlashPromotionSessionStatus(ctx, in, opts...)
+}
+
+// 查询限时购场次表详情
+func (m *defaultFlashPromotionSessionService) QueryFlashPromotionSessionDetail(ctx context.Context, in *QueryFlashPromotionSessionDetailReq, opts ...grpc.CallOption) (*QueryFlashPromotionSessionDetailResp, error) {
+	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
+	return client.QueryFlashPromotionSessionDetail(ctx, in, opts...)
+}
+
+// 查询限时购场次表列表
+func (m *defaultFlashPromotionSessionService) QueryFlashPromotionSessionList(ctx context.Context, in *QueryFlashPromotionSessionListReq, opts ...grpc.CallOption) (*QueryFlashPromotionSessionListResp, error) {
+	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
+	return client.QueryFlashPromotionSessionList(ctx, in, opts...)
+}
+
+// 根据时间查询限时购场次
+func (m *defaultFlashPromotionSessionService) QueryFlashPromotionSessionListByTime(ctx context.Context, in *QueryFlashPromotionSessionListByTimeReq, opts ...grpc.CallOption) (*QueryFlashPromotionSessionListByTimeResp, error) {
+	client := smsclient.NewFlashPromotionSessionServiceClient(m.cli.Conn())
+	return client.QueryFlashPromotionSessionListByTime(ctx, in, opts...)
 }

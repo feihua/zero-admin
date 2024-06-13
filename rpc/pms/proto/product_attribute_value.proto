@@ -6,10 +6,9 @@ option go_package = "./proto";
 
 // 添加存储产品参数信息的表
 message AddProductAttributeValueReq {
-  int64 id = 1; //
-  int64 product_attribute_id = 2; //
-  int64 product_id = 3; //
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
+  int64 product_attribute_id = 1; //
+  int64 product_id = 2; //
+  string value = 3; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
 
 }
 
@@ -39,40 +38,11 @@ message UpdateProductAttributeValueResp {
   string pong = 1;
 }
 
-// 更新存储产品参数信息的表状态
-message UpdateProductAttributeValueStatusReq {
-  int64 id = 1; //
-  int64 product_attribute_id = 2; //
-  int64 product_id = 3; //
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
-
-}
-
-message UpdateProductAttributeValueStatusResp {
-  string pong = 1;
-}
-
-// 查询存储产品参数信息的表详情
-message QueryProductAttributeValueDetailReq {
-    int64 id = 1;
-}
-
-message QueryProductAttributeValueDetailResp {
-  int64 id = 1; //
-  int64 product_attribute_id = 2; //
-  int64 product_id = 3; //
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
-
-}
 
 // 分页查询存储产品参数信息的表列表
 message QueryProductAttributeValueListReq {
-  int64 id = 1; //
-  int64 product_attribute_id = 2; //
-  int64 product_id = 3; //
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
+  int64 product_id = 1; //
+
 }
 
 message ProductAttributeValueListData {
@@ -96,10 +66,6 @@ service ProductAttributeValueService {
   rpc DeleteProductAttributeValue(DeleteProductAttributeValueReq) returns (DeleteProductAttributeValueResp){}
   // 更新存储产品参数信息的表
   rpc UpdateProductAttributeValue(UpdateProductAttributeValueReq) returns (UpdateProductAttributeValueResp ){}
-  // 更新存储产品参数信息的表状态
-  rpc UpdateProductAttributeValueStatus(UpdateProductAttributeValueStatusReq) returns (UpdateProductAttributeValueStatusResp ){}
-  // 查询存储产品参数信息的表详情
-   rpc QueryProductAttributeValueDetail(QueryProductAttributeValueDetailReq) returns (QueryProductAttributeValueDetailResp){}
   // 查询存储产品参数信息的表列表
   rpc QueryProductAttributeValueList(QueryProductAttributeValueListReq) returns (QueryProductAttributeValueListResp){}
 

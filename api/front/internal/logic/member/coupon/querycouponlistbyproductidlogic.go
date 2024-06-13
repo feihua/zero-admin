@@ -33,7 +33,7 @@ func NewQueryCouponListByProductIdLogic(ctx context.Context, svcCtx *svc.Service
 // 2.获取指定分类优惠券
 // 3.所有优惠券
 func (l *QueryCouponListByProductIdLogic) QueryCouponListByProductId(req *types.QueryCouponListByProductIdReq) (resp *types.ListCouponResp, err error) {
-	couponList, _ := l.svcCtx.CouponService.CouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
+	couponList, _ := l.svcCtx.CouponService.QueryCouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
 		ProductId:         req.ProductId,
 		ProductCategoryId: req.ProductCategoryId,
 	})

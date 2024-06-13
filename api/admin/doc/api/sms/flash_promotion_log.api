@@ -38,19 +38,7 @@ type (
 		Success  bool                         `json:"success"`
 		Total    int64                        `json:"total"`
 	}
-	UpdateFlashPromotionLogReq {
-		Id            int64  `json:"id"`
-		MemberId      int64  `json:"memberId"`
-		ProductId     int64  `json:"productId"`
-		MemberPhone   string `json:"memberPhone"`
-		ProductName   string `json:"productName"`
-		SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-		SendTime      string `json:"sendTime"`
-	}
-	UpdateFlashPromotionLogResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+
 	DeleteFlashPromotionLogReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -75,11 +63,6 @@ service admin-api {
 	@handler FlashPromotionLogList
 	get /queryFlashPromotionLogList (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
 
-	//
-	@handler FlashPromotionLogUpdate
-	post /updateFlashPromotionLog (UpdateFlashPromotionLogReq) returns (UpdateFlashPromotionLogResp)
-
-	//
 	@handler FlashPromotionLogDelete
 	get /deleteFlashPromotionLog (DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp)
 }

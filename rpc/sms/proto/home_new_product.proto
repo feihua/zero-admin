@@ -6,14 +6,16 @@ option go_package = "./proto";
 
 // 添加新鲜好物表
 message AddHomeNewProductReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  string product_name = 3; //商品名称
-  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 5; //排序
+  repeated HomeNewProductAddData NewProductAddData = 1;
 
 }
+message HomeNewProductAddData {
+  int64 ProductId = 1; //商品id
+  string ProductName = 2; //商品名称
+  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 4; //排序
 
+}
 message AddHomeNewProductResp {
   string pong = 1;
 }
@@ -28,26 +30,20 @@ message DeleteHomeNewProductResp {
 }
 
 // 更新新鲜好物表
-message UpdateHomeNewProductReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  string product_name = 3; //商品名称
-  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 5; //排序
+message UpdateNewProductSortReq {
+  int64 Id = 1; //
+  int32 Sort = 2; //排序
 
 }
 
-message UpdateHomeNewProductResp {
+message UpdateNewProductSortResp {
   string pong = 1;
 }
 
 // 更新新鲜好物表状态
 message UpdateHomeNewProductStatusReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  string product_name = 3; //商品名称
-  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 5; //排序
+  repeated int64 Ids = 1; //
+  int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
 
 }
 
@@ -71,13 +67,11 @@ message QueryHomeNewProductDetailResp {
 
 // 分页查询新鲜好物表列表
 message QueryHomeNewProductListReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
   string product_name = 3; //商品名称
   int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 5; //排序
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
+
 }
 
 message HomeNewProductListData {
@@ -100,8 +94,8 @@ service HomeNewProductService {
   rpc AddHomeNewProduct(AddHomeNewProductReq) returns (AddHomeNewProductResp){}
   // 删除新鲜好物表
   rpc DeleteHomeNewProduct(DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp){}
-  // 更新新鲜好物表
-  rpc UpdateHomeNewProduct(UpdateHomeNewProductReq) returns (UpdateHomeNewProductResp ){}
+  //修改首页新品排序
+  rpc UpdateNewProductSort(UpdateNewProductSortReq) returns(UpdateNewProductSortResp);
   // 更新新鲜好物表状态
   rpc UpdateHomeNewProductStatus(UpdateHomeNewProductStatusReq) returns (UpdateHomeNewProductStatusResp ){}
   // 查询新鲜好物表详情

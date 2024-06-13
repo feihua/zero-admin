@@ -31,7 +31,7 @@ func NewQueryCouponHistoryDetailListLogic(ctx context.Context, svcCtx *svc.Servi
 }
 
 // QueryCouponHistoryDetailList 获取该用户所有优惠券(包括商品和优惠券,商品分类和优惠券的关联关糸)
-func (l *QueryCouponHistoryDetailListLogic) QueryCouponHistoryDetailList(in *smsclient.CouponHistoryDetailListReq) (*smsclient.CouponHistoryDetailListResp, error) {
+func (l *QueryCouponHistoryDetailListLogic) QueryCouponHistoryDetailList(in *smsclient.QueryCouponHistoryDetailListReq) (*smsclient.CouponHistoryDetailListResp, error) {
 	//1.查询会员领取的所有优惠券记录
 	q := query.SmsCouponHistory.WithContext(l.ctx)
 	q = q.Where(query.SmsCouponHistory.UseStatus.Eq(0))
@@ -56,9 +56,9 @@ func (l *QueryCouponHistoryDetailListLogic) QueryCouponHistoryDetailList(in *sms
 		//3.查询商品和优惠券关糸
 		relation := query.SmsCouponProductRelation
 		couponProductRelationList, _ := relation.WithContext(l.ctx).Where(relation.CouponID.Eq(item.CouponID)).Find()
-		var productRelationList = make([]*smsclient.CouponProductRelationListData, 0)
+		var productRelationList = make([]*smsclient.QueryCouponProductRelationListData, 0)
 		for _, productRelation := range couponProductRelationList {
-			productRelationList = append(productRelationList, &smsclient.CouponProductRelationListData{
+			productRelationList = append(productRelationList, &smsclient.QueryCouponProductRelationListData{
 				Id:          productRelation.ID,
 				CouponId:    productRelation.CouponID,
 				ProductId:   productRelation.ProductID,
@@ -70,9 +70,9 @@ func (l *QueryCouponHistoryDetailListLogic) QueryCouponHistoryDetailList(in *sms
 		//4.查询商品分类和优惠券关糸
 		categoryRelation := query.SmsCouponProductCategoryRelation
 		couponProductCategoryRelationList, _ := categoryRelation.WithContext(l.ctx).Where(categoryRelation.CouponID.Eq(item.CouponID)).Find()
-		var productCategoryRelationList = make([]*smsclient.CouponProductCategoryRelationListData, 0)
+		var productCategoryRelationList = make([]*smsclient.QueryCouponProductCategoryRelationListData, 0)
 		for _, productCategoryRelation := range couponProductCategoryRelationList {
-			productCategoryRelationList = append(productCategoryRelationList, &smsclient.CouponProductCategoryRelationListData{
+			productCategoryRelationList = append(productCategoryRelationList, &smsclient.QueryCouponProductCategoryRelationListData{
 				Id:                  productCategoryRelation.ID,
 				CouponId:            productCategoryRelation.CouponID,
 				ProductCategoryId:   productCategoryRelation.ProductCategoryID,
@@ -94,7 +94,7 @@ func (l *QueryCouponHistoryDetailListLogic) QueryCouponHistoryDetailList(in *sms
 				OrderId:        item.OrderID,
 				OrderSn:        item.OrderSn,
 			},
-			CouponListData: &smsclient.CouponListData{
+			CouponListData: &smsclient.QueryCouponData{
 				Id:           coupon.ID,
 				Type:         coupon.Type,
 				Name:         coupon.Name,

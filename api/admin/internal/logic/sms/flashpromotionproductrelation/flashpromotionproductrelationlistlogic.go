@@ -34,8 +34,8 @@ func NewFlashPromotionProductRelationListLogic(ctx context.Context, svcCtx *svc.
 
 // FlashPromotionProductRelationList 分页查询不同场次关联及商品信息
 func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationList(req *types.ListFlashPromotionProductRelationReq) (resp *types.ListFlashPromotionProductRelationResp, err error) {
-	result, err := l.svcCtx.FlashPromotionProductRelationService.FlashPromotionProductRelationList(l.ctx, &smsclient.FlashPromotionProductRelationListReq{
-		Current:                 req.Current,
+	result, err := l.svcCtx.FlashPromotionProductRelationService.QueryFlashPromotionProductRelationList(l.ctx, &smsclient.QueryFlashPromotionProductRelationListReq{
+		PageNum:                 req.Current,
 		PageSize:                req.PageSize,
 		FlashPromotionId:        req.FlashPromotionProductRelationID,
 		FlashPromotionSessionId: req.FlashPromotionProductRelationSessionID,
@@ -52,7 +52,7 @@ func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationLi
 	}
 	var list []*types.ListFlashPromotionProductRelationData
 
-	products, err := l.svcCtx.ProductService.ProductListByIds(l.ctx, &pmsclient.ProductByIdsReq{Ids: ids})
+	products, err := l.svcCtx.ProductService.QueryProductListByIds(l.ctx, &pmsclient.QueryProductByIdsReq{Ids: ids})
 	for _, item := range products.List {
 		var r *smsclient.FlashPromotionProductRelationListData
 		for _, data := range result.List {

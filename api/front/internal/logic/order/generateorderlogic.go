@@ -293,7 +293,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	//10.1修改sms_coupon_history表的use_status字段
 	//10.2记得修改sms_coupon的use_count字段,下单的时候要加1,取消订单的时候,要减1
 	if couponAmount > 0 {
-		_, err = l.svcCtx.CouponHistoryService.UpdateCouponStatus(l.ctx, &smsclient.UpdateCouponStatusReq{
+		_, err = l.svcCtx.CouponHistoryService.UpdateCouponHistoryStatus(l.ctx, &smsclient.UpdateCouponHistoryStatusReq{
 			MemberId:  memberId,
 			UseStatus: 1,
 			CouponId:  req.CouponId,

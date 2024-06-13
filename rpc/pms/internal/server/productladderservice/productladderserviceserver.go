@@ -22,22 +22,32 @@ func NewProductLadderServiceServer(svcCtx *svc.ServiceContext) *ProductLadderSer
 	}
 }
 
-func (s *ProductLadderServiceServer) ProductLadderAdd(ctx context.Context, in *pmsclient.ProductLadderAddReq) (*pmsclient.ProductLadderAddResp, error) {
-	l := productladderservicelogic.NewProductLadderAddLogic(ctx, s.svcCtx)
-	return l.ProductLadderAdd(in)
+// 添加产品阶梯价格表(只针对同商品)
+func (s *ProductLadderServiceServer) AddProductLadder(ctx context.Context, in *pmsclient.AddProductLadderReq) (*pmsclient.AddProductLadderResp, error) {
+	l := productladderservicelogic.NewAddProductLadderLogic(ctx, s.svcCtx)
+	return l.AddProductLadder(in)
 }
 
-func (s *ProductLadderServiceServer) ProductLadderList(ctx context.Context, in *pmsclient.ProductLadderListReq) (*pmsclient.ProductLadderListResp, error) {
-	l := productladderservicelogic.NewProductLadderListLogic(ctx, s.svcCtx)
-	return l.ProductLadderList(in)
+// 删除产品阶梯价格表(只针对同商品)
+func (s *ProductLadderServiceServer) DeleteProductLadder(ctx context.Context, in *pmsclient.DeleteProductLadderReq) (*pmsclient.DeleteProductLadderResp, error) {
+	l := productladderservicelogic.NewDeleteProductLadderLogic(ctx, s.svcCtx)
+	return l.DeleteProductLadder(in)
 }
 
-func (s *ProductLadderServiceServer) ProductLadderUpdate(ctx context.Context, in *pmsclient.ProductLadderUpdateReq) (*pmsclient.ProductLadderUpdateResp, error) {
-	l := productladderservicelogic.NewProductLadderUpdateLogic(ctx, s.svcCtx)
-	return l.ProductLadderUpdate(in)
+// 更新产品阶梯价格表(只针对同商品)
+func (s *ProductLadderServiceServer) UpdateProductLadder(ctx context.Context, in *pmsclient.UpdateProductLadderReq) (*pmsclient.UpdateProductLadderResp, error) {
+	l := productladderservicelogic.NewUpdateProductLadderLogic(ctx, s.svcCtx)
+	return l.UpdateProductLadder(in)
 }
 
-func (s *ProductLadderServiceServer) ProductLadderDelete(ctx context.Context, in *pmsclient.ProductLadderDeleteReq) (*pmsclient.ProductLadderDeleteResp, error) {
-	l := productladderservicelogic.NewProductLadderDeleteLogic(ctx, s.svcCtx)
-	return l.ProductLadderDelete(in)
+// 查询产品阶梯价格表(只针对同商品)详情
+func (s *ProductLadderServiceServer) QueryProductLadderDetail(ctx context.Context, in *pmsclient.QueryProductLadderDetailReq) (*pmsclient.QueryProductLadderDetailResp, error) {
+	l := productladderservicelogic.NewQueryProductLadderDetailLogic(ctx, s.svcCtx)
+	return l.QueryProductLadderDetail(in)
+}
+
+// 查询产品阶梯价格表(只针对同商品)列表
+func (s *ProductLadderServiceServer) QueryProductLadderList(ctx context.Context, in *pmsclient.QueryProductLadderListReq) (*pmsclient.QueryProductLadderListResp, error) {
+	l := productladderservicelogic.NewQueryProductLadderListLogic(ctx, s.svcCtx)
+	return l.QueryProductLadderList(in)
 }

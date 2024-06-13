@@ -33,7 +33,7 @@ func NewProductCategoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // ProductCategoryUpdate 更新商品分类
 func (l *ProductCategoryUpdateLogic) ProductCategoryUpdate(req types.UpdateProductCategoryReq) (*types.UpdateProductCategoryResp, error) {
-	_, err := l.svcCtx.ProductCategoryService.ProductCategoryUpdate(l.ctx, &pmsclient.ProductCategoryUpdateReq{
+	_, err := l.svcCtx.ProductCategoryService.UpdateProductCategory(l.ctx, &pmsclient.UpdateProductCategoryReq{
 		Id:                     req.Id,
 		ParentId:               req.ParentId,
 		Name:                   req.Name,

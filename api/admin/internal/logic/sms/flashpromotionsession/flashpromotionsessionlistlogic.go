@@ -34,8 +34,8 @@ func NewFlashPromotionSessionListLogic(ctx context.Context, svcCtx *svc.ServiceC
 
 // FlashPromotionSessionList 查询限时购场次
 func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(req *types.ListFlashPromotionSessionReq) (*types.ListFlashPromotionSessionResp, error) {
-	resp, err := l.svcCtx.FlashPromotionSessionService.FlashPromotionSessionList(l.ctx, &smsclient.FlashPromotionSessionListReq{
-		Current:  req.Current,
+	resp, err := l.svcCtx.FlashPromotionSessionService.QueryFlashPromotionSessionList(l.ctx, &smsclient.QueryFlashPromotionSessionListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 	})
 

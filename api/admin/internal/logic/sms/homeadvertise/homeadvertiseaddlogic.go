@@ -33,7 +33,7 @@ func NewHomeAdvertiseAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) H
 
 // HomeAdvertiseAdd 添加首页轮播广告
 func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(req types.AddHomeAdvertiseReq) (*types.AddHomeAdvertiseResp, error) {
-	_, err := l.svcCtx.HomeAdvertiseService.HomeAdvertiseAdd(l.ctx, &smsclient.HomeAdvertiseAddReq{
+	_, err := l.svcCtx.HomeAdvertiseService.AddHomeAdvertise(l.ctx, &smsclient.AddHomeAdvertiseReq{
 		Name:      req.Name,
 		Type:      req.Type,
 		Pic:       "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20181113/movie_ad.jpg", //暂时没有上传,用这个当默认

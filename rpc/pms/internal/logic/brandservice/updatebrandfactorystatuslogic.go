@@ -30,7 +30,7 @@ func NewUpdateBrandFactoryStatusLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 // UpdateBrandFactoryStatus 批量更新厂家制造商状态
-func (l *UpdateBrandFactoryStatusLogic) UpdateBrandFactoryStatus(in *pmsclient.UpdateBrandFactoryStatusReq) (*pmsclient.UpdateBrandFactoryStatusResp, error) {
+func (l *UpdateBrandFactoryStatusLogic) UpdateBrandFactoryStatus(in *pmsclient.UpdateBrandFactoryStatusReq) (*pmsclient.UpdateBrandStatusResp, error) {
 	q := query.PmsBrand
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.FactoryStatus, in.FactoryStatus)
 
@@ -38,5 +38,5 @@ func (l *UpdateBrandFactoryStatusLogic) UpdateBrandFactoryStatus(in *pmsclient.U
 		return nil, err
 	}
 
-	return &pmsclient.UpdateBrandFactoryStatusResp{}, nil
+	return &pmsclient.UpdateBrandStatusResp{}, nil
 }

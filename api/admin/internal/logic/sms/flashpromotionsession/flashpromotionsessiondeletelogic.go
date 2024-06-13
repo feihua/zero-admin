@@ -33,7 +33,7 @@ func NewFlashPromotionSessionDeleteLogic(ctx context.Context, svcCtx *svc.Servic
 
 // FlashPromotionSessionDelete 删除限时购场次
 func (l *FlashPromotionSessionDeleteLogic) FlashPromotionSessionDelete(req *types.DeleteFlashPromotionSessionReq) (*types.DeleteFlashPromotionSessionResp, error) {
-	_, err := l.svcCtx.FlashPromotionSessionService.FlashPromotionSessionDelete(l.ctx, &smsclient.FlashPromotionSessionDeleteReq{
+	_, err := l.svcCtx.FlashPromotionSessionService.DeleteFlashPromotionSession(l.ctx, &smsclient.DeleteFlashPromotionSessionReq{
 		Ids: req.Ids,
 	})
 

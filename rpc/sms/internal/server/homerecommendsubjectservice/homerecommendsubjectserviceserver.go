@@ -22,16 +22,16 @@ func NewHomeRecommendSubjectServiceServer(svcCtx *svc.ServiceContext) *HomeRecom
 	}
 }
 
-// 添加首页专题推荐
-func (s *HomeRecommendSubjectServiceServer) HomeRecommendSubjectAdd(ctx context.Context, in *smsclient.HomeRecommendSubjectAddReq) (*smsclient.HomeRecommendSubjectAddResp, error) {
-	l := homerecommendsubjectservicelogic.NewHomeRecommendSubjectAddLogic(ctx, s.svcCtx)
-	return l.HomeRecommendSubjectAdd(in)
+// 添加首页推荐专题表
+func (s *HomeRecommendSubjectServiceServer) AddHomeRecommendSubject(ctx context.Context, in *smsclient.AddHomeRecommendSubjectReq) (*smsclient.AddHomeRecommendSubjectResp, error) {
+	l := homerecommendsubjectservicelogic.NewAddHomeRecommendSubjectLogic(ctx, s.svcCtx)
+	return l.AddHomeRecommendSubject(in)
 }
 
-// 查询首页专题推荐
-func (s *HomeRecommendSubjectServiceServer) HomeRecommendSubjectList(ctx context.Context, in *smsclient.HomeRecommendSubjectListReq) (*smsclient.HomeRecommendSubjectListResp, error) {
-	l := homerecommendsubjectservicelogic.NewHomeRecommendSubjectListLogic(ctx, s.svcCtx)
-	return l.HomeRecommendSubjectList(in)
+// 删除首页推荐专题表
+func (s *HomeRecommendSubjectServiceServer) DeleteHomeRecommendSubject(ctx context.Context, in *smsclient.DeleteHomeRecommendSubjectReq) (*smsclient.DeleteHomeRecommendSubjectResp, error) {
+	l := homerecommendsubjectservicelogic.NewDeleteHomeRecommendSubjectLogic(ctx, s.svcCtx)
+	return l.DeleteHomeRecommendSubject(in)
 }
 
 // 修改专题推荐排序
@@ -40,14 +40,20 @@ func (s *HomeRecommendSubjectServiceServer) UpdateRecommendSubjectSort(ctx conte
 	return l.UpdateRecommendSubjectSort(in)
 }
 
-// 批量修改专题推荐状态
-func (s *HomeRecommendSubjectServiceServer) UpdateRecommendSubjectStatus(ctx context.Context, in *smsclient.UpdateRecommendSubjectStatusReq) (*smsclient.UpdateRecommendSubjectStatusResp, error) {
-	l := homerecommendsubjectservicelogic.NewUpdateRecommendSubjectStatusLogic(ctx, s.svcCtx)
-	return l.UpdateRecommendSubjectStatus(in)
+// 更新首页推荐专题表状态
+func (s *HomeRecommendSubjectServiceServer) UpdateHomeRecommendSubjectStatus(ctx context.Context, in *smsclient.UpdateHomeRecommendSubjectStatusReq) (*smsclient.UpdateHomeRecommendSubjectStatusResp, error) {
+	l := homerecommendsubjectservicelogic.NewUpdateHomeRecommendSubjectStatusLogic(ctx, s.svcCtx)
+	return l.UpdateHomeRecommendSubjectStatus(in)
 }
 
-// 删除首页专题推荐
-func (s *HomeRecommendSubjectServiceServer) HomeRecommendSubjectDelete(ctx context.Context, in *smsclient.HomeRecommendSubjectDeleteReq) (*smsclient.HomeRecommendSubjectDeleteResp, error) {
-	l := homerecommendsubjectservicelogic.NewHomeRecommendSubjectDeleteLogic(ctx, s.svcCtx)
-	return l.HomeRecommendSubjectDelete(in)
+// 查询首页推荐专题表详情
+func (s *HomeRecommendSubjectServiceServer) QueryHomeRecommendSubjectDetail(ctx context.Context, in *smsclient.QueryHomeRecommendSubjectDetailReq) (*smsclient.QueryHomeRecommendSubjectDetailResp, error) {
+	l := homerecommendsubjectservicelogic.NewQueryHomeRecommendSubjectDetailLogic(ctx, s.svcCtx)
+	return l.QueryHomeRecommendSubjectDetail(in)
+}
+
+// 查询首页推荐专题表列表
+func (s *HomeRecommendSubjectServiceServer) QueryHomeRecommendSubjectList(ctx context.Context, in *smsclient.QueryHomeRecommendSubjectListReq) (*smsclient.QueryHomeRecommendSubjectListResp, error) {
+	l := homerecommendsubjectservicelogic.NewQueryHomeRecommendSubjectListLogic(ctx, s.svcCtx)
+	return l.QueryHomeRecommendSubjectList(in)
 }

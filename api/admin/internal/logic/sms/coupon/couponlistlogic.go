@@ -32,7 +32,7 @@ func NewCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) CouponL
 
 // CouponList 查询优惠券列表
 func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCouponResp, error) {
-	resp, err := l.svcCtx.CouponService.CouponList(l.ctx, &smsclient.CouponListReq{
+	resp, err := l.svcCtx.CouponService.QueryCouponList(l.ctx, &smsclient.QueryCouponListReq{
 		Current:   req.Current,
 		PageSize:  req.PageSize,
 		Type:      req.Type,

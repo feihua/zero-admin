@@ -30,12 +30,12 @@ func NewUpdateBrandShowStatusLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // UpdateBrandShowStatus 批量更新显示状态
-func (l *UpdateBrandShowStatusLogic) UpdateBrandShowStatus(in *pmsclient.UpdateBrandShowStatusReq) (*pmsclient.UpdateBrandShowStatusResp, error) {
+func (l *UpdateBrandShowStatusLogic) UpdateBrandShowStatus(in *pmsclient.UpdateBrandShowStatusReq) (*pmsclient.UpdateBrandStatusResp, error) {
 	q := query.PmsBrand
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.ShowStatus, in.ShowStatus)
 
 	if err != nil {
 		return nil, err
 	}
-	return &pmsclient.UpdateBrandShowStatusResp{}, nil
+	return &pmsclient.UpdateBrandStatusResp{}, nil
 }

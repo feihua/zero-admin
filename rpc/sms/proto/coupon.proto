@@ -4,34 +4,50 @@ package main;
 
 option go_package = "./proto";
 
-// 添加优惠券表
-message AddCouponReq {
-  int64 amount = 1; //金额
-  string code = 2; //优惠码
-  int32 count = 3; //数量
-  string enable_time = 4; //可以领取的日期
-  string end_time = 5; //结束时间
-  int64 id = 6; //
-  int32 member_level = 7; //可领取的会员类型：0->无限时
-  int64 min_point = 8; //使用门槛；0表示无门槛
-  string name = 9; //名称
-  string note = 10; //备注
-  int32 per_limit = 11; //每人限领张数
-  int32 platform = 12; //使用平台：0->全部；1->移动；2->PC
-  int32 publish_count = 13; //发行数量
-  int32 receive_count = 14; //领取数量
-  string start_time = 15; //开始时间
-  int32 type = 16; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  int32 use_count = 17; //已使用数量
-  int32 use_type = 18; //使用类型：0->全场通用；1->指定分类；2->指定商品
+
+message CouponProductCategoryRelationData{
+  int64  Id = 1;
+  int64  CouponId = 2;
+  int64  ProductCategoryId = 3;
+  string  ProductCategoryName = 4;
+  string  ParentCategoryName = 5;
+
+}
+message CouponProductRelationData{
+  int64    Id = 1;
+  int64    CouponId = 2;
+  int64    ProductId = 3;
+  string  ProductName = 4;
+  string  ProductSn = 5;
+
+}
+message AddOrUpdateCouponReq {
+  int64 Id = 1; //
+  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string Name = 3; //名称
+  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 MemberLevel = 5; //可领取的会员类型：0->无限时
+  int64 Amount = 6; //金额
+  int32 PerLimit = 7; //每人限领张数
+  int64 MinPoint = 8; //使用门槛；0表示无门槛
+  string StartTime = 9; //开始时间
+  string EndTime = 10; //结束时间
+  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  string Note = 12; //备注
+  int32 PublishCount = 13; //发行数量
+  int32 UseCount = 14; //已使用数量
+  int32 ReceiveCount = 15; //领取数量
+  string EnableTime = 16; //可以领取的日期
+  string Code = 17; //优惠码
+  repeated CouponProductRelationData CouponProductRelationList = 18;//优惠券绑定的商品
+  repeated CouponProductCategoryRelationData CouponProductCategoryRelationList = 19;//优惠券绑定的商品分类
 
 }
 
-message AddCouponResp {
+message AddOrUpdateCouponResp {
   string pong = 1;
 }
 
-// 删除优惠券表
 message DeleteCouponReq {
   repeated int64 ids = 1;
 }
@@ -40,152 +56,108 @@ message DeleteCouponResp {
   string pong = 1;
 }
 
-// 更新优惠券表
-message UpdateCouponReq {
-  int64 amount = 1; //金额
-  string code = 2; //优惠码
-  int32 count = 3; //数量
-  string enable_time = 4; //可以领取的日期
-  string end_time = 5; //结束时间
-  int64 id = 6; //
-  int32 member_level = 7; //可领取的会员类型：0->无限时
-  int64 min_point = 8; //使用门槛；0表示无门槛
-  string name = 9; //名称
-  string note = 10; //备注
-  int32 per_limit = 11; //每人限领张数
-  int32 platform = 12; //使用平台：0->全部；1->移动；2->PC
-  int32 publish_count = 13; //发行数量
-  int32 receive_count = 14; //领取数量
-  string start_time = 15; //开始时间
-  int32 type = 16; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  int32 use_count = 17; //已使用数量
-  int32 use_type = 18; //使用类型：0->全场通用；1->指定分类；2->指定商品
-
-}
-
-message UpdateCouponResp {
-  string pong = 1;
-}
-
-// 更新优惠券表状态
-message UpdateCouponStatusReq {
-  int64 amount = 1; //金额
-  string code = 2; //优惠码
-  int32 count = 3; //数量
-  string enable_time = 4; //可以领取的日期
-  string end_time = 5; //结束时间
-  int64 id = 6; //
-  int32 member_level = 7; //可领取的会员类型：0->无限时
-  int64 min_point = 8; //使用门槛；0表示无门槛
-  string name = 9; //名称
-  string note = 10; //备注
-  int32 per_limit = 11; //每人限领张数
-  int32 platform = 12; //使用平台：0->全部；1->移动；2->PC
-  int32 publish_count = 13; //发行数量
-  int32 receive_count = 14; //领取数量
-  string start_time = 15; //开始时间
-  int32 type = 16; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  int32 use_count = 17; //已使用数量
-  int32 use_type = 18; //使用类型：0->全场通用；1->指定分类；2->指定商品
-
-}
-
-message UpdateCouponStatusResp {
-  string pong = 1;
-}
-
-// 查询优惠券表详情
-message QueryCouponDetailReq {
-    int64 id = 1;
-}
-
-message QueryCouponDetailResp {
-  int64 amount = 1; //金额
-  string code = 2; //优惠码
-  int32 count = 3; //数量
-  string enable_time = 4; //可以领取的日期
-  string end_time = 5; //结束时间
-  int64 id = 6; //
-  int32 member_level = 7; //可领取的会员类型：0->无限时
-  int64 min_point = 8; //使用门槛；0表示无门槛
-  string name = 9; //名称
-  string note = 10; //备注
-  int32 per_limit = 11; //每人限领张数
-  int32 platform = 12; //使用平台：0->全部；1->移动；2->PC
-  int32 publish_count = 13; //发行数量
-  int32 receive_count = 14; //领取数量
-  string start_time = 15; //开始时间
-  int32 type = 16; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  int32 use_count = 17; //已使用数量
-  int32 use_type = 18; //使用类型：0->全场通用；1->指定分类；2->指定商品
-
-}
-
-// 分页查询优惠券表列表
 message QueryCouponListReq {
-  int64 amount = 1; //金额
-  string code = 2; //优惠码
-  int32 count = 3; //数量
-  string enable_time = 4; //可以领取的日期
-  string end_time = 5; //结束时间
-  int64 id = 6; //
-  int32 member_level = 7; //可领取的会员类型：0->无限时
-  int64 min_point = 8; //使用门槛；0表示无门槛
-  string name = 9; //名称
-  string note = 10; //备注
-  int32 per_limit = 11; //每人限领张数
-  int32 platform = 12; //使用平台：0->全部；1->移动；2->PC
-  int32 publish_count = 13; //发行数量
-  int32 receive_count = 14; //领取数量
-  string start_time = 15; //开始时间
-  int32 type = 16; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  int32 use_count = 17; //已使用数量
-  int32 use_type = 18; //使用类型：0->全场通用；1->指定分类；2->指定商品
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
+  int64 current = 1;
+  int64 pageSize = 2;
+  int32 Type = 3; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string Name = 4; //名称
+  int32 Platform = 5; //使用平台：0->全部；1->移动；2->PC
+  string StartTime = 6; //开始时间
+  string EndTime = 7; //结束时间
+  int32 UseType = 8; //使用类型：0->全场通用；1->指定分类；2->指定商品
+
 }
 
-message CouponListData {
-  int64 amount = 1; //金额
-  string code = 2; //优惠码
-  int32 count = 3; //数量
-  string enable_time = 4; //可以领取的日期
-  string end_time = 5; //结束时间
-  int64 id = 6; //
-  int32 member_level = 7; //可领取的会员类型：0->无限时
-  int64 min_point = 8; //使用门槛；0表示无门槛
-  string name = 9; //名称
-  string note = 10; //备注
-  int32 per_limit = 11; //每人限领张数
-  int32 platform = 12; //使用平台：0->全部；1->移动；2->PC
-  int32 publish_count = 13; //发行数量
-  int32 receive_count = 14; //领取数量
-  string start_time = 15; //开始时间
-  int32 type = 16; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  int32 use_count = 17; //已使用数量
-  int32 use_type = 18; //使用类型：0->全场通用；1->指定分类；2->指定商品
+message QueryCouponListData {
+  int64 Id = 1; //
+  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string Name = 3; //名称
+  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 Count = 5; //数量
+  int64 Amount = 6; //金额
+  int32 PerLimit = 7; //每人限领张数
+  int64 MinPoint = 8; //使用门槛；0表示无门槛
+  string StartTime = 9; //开始时间
+  string EndTime = 10; //结束时间
+  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  string Note = 12; //备注
+  int32 PublishCount = 13; //发行数量
+  int32 UseCount = 14; //已使用数量
+  int32 ReceiveCount = 15; //领取数量
+  string EnableTime = 16; //可以领取的日期
+  string Code = 17; //优惠码
+  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
 
 }
 
 message QueryCouponListResp {
   int64 total = 1;
-  repeated  CouponListData list = 2;
+  repeated  QueryCouponListData list = 2;
 }
 
-// 优惠券表
+message QueryCouponFindByIdReq {
+  int64 CouponId = 1;
+}
+
+message QueryCouponFindByIdResp {
+  int64 Id = 1; //
+  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string Name = 3; //名称
+  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 Count = 5; //数量
+  int64 Amount = 6; //金额
+  int32 PerLimit = 7; //每人限领张数
+  int64 MinPoint = 8; //使用门槛；0表示无门槛
+  string StartTime = 9; //开始时间
+  string EndTime = 10; //结束时间
+  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  string Note = 12; //备注
+  int32 PublishCount = 13; //发行数量
+  int32 UseCount = 14; //已使用数量
+  int32 ReceiveCount = 15; //领取数量
+  string EnableTime = 16; //可以领取的日期
+  string Code = 17; //优惠码
+  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
+  repeated CouponProductRelationData CouponProductRelationList = 19;//优惠券绑定的商品
+  repeated CouponProductCategoryRelationData CouponProductCategoryRelationList = 20;//优惠券绑定的商品分类
+}
+
+message QueryCouponFindByIdsReq {
+  repeated int64 CouponIds = 1;
+}
+
+message QueryCouponFindByIdsResp {
+  int64 total = 1;
+  repeated  QueryCouponListData list = 2;
+}
+
+message CouponFindByProductIdAndProductCategoryIdReq {
+  int64 productId = 1;
+  int64 ProductCategoryId = 2;
+}
+message CouponFindByProductIdAndProductCategoryIdResp {
+  int64 total = 1;
+  repeated  QueryCouponListData list = 2;
+}
+
+
 service CouponService {
-  // 添加优惠券表
-  rpc AddCoupon(AddCouponReq) returns (AddCouponResp){}
-  // 删除优惠券表
-  rpc DeleteCoupon(DeleteCouponReq) returns (DeleteCouponResp){}
-  // 更新优惠券表
-  rpc UpdateCoupon(UpdateCouponReq) returns (UpdateCouponResp ){}
-  // 更新优惠券表状态
-  rpc UpdateCouponStatus(UpdateCouponStatusReq) returns (UpdateCouponStatusResp ){}
-  // 查询优惠券表详情
-   rpc QueryCouponDetail(QueryCouponDetailReq) returns (QueryCouponDetailResp){}
-  // 查询优惠券表列表
-  rpc QueryCouponList(QueryCouponListReq) returns (QueryCouponListResp){}
+
+  //添加优惠券
+  rpc AddCoupon(AddOrUpdateCouponReq) returns(AddOrUpdateCouponResp);
+  //查询优惠券
+  rpc QueryCouponList(QueryCouponListReq) returns(QueryCouponListResp);
+  //更新优惠券
+  rpc UpdateCoupon(AddOrUpdateCouponReq) returns(AddOrUpdateCouponResp);
+  //删除优惠券
+  rpc DeleteCoupon(DeleteCouponReq) returns(DeleteCouponResp);
+  //根据优惠券id查询优惠券
+  rpc QueryCouponFindById(QueryCouponFindByIdReq) returns(QueryCouponFindByIdResp);
+  //根据优惠券ids查询优惠券
+  rpc QueryCouponFindByIds(QueryCouponFindByIdsReq) returns(QueryCouponFindByIdsResp);
+
+  //根据商品Id和分类id查询可用的优惠券(app)
+  rpc QueryCouponFindByProductIdAndProductCategoryId(CouponFindByProductIdAndProductCategoryIdReq) returns(CouponFindByProductIdAndProductCategoryIdResp);
 
 
 }

@@ -51,8 +51,8 @@ func (l *IndexLogic) Index() (resp *types.HomeResp, err error) {
 // 推荐专题
 func querySubjectList(l *IndexLogic) []types.SubjectList {
 	var subjectLists []types.SubjectList
-	homeRecommendSubjectList, err := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectList(l.ctx, &smsclient.HomeRecommendSubjectListReq{
-		Current:         1,
+	homeRecommendSubjectList, err := l.svcCtx.HomeRecommendSubjectService.QueryHomeRecommendSubjectList(l.ctx, &smsclient.QueryHomeRecommendSubjectListReq{
+		PageNum:         1,
 		PageSize:        4,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})
@@ -91,8 +91,8 @@ func querySubjectList(l *IndexLogic) []types.SubjectList {
 
 // 人气推荐
 func queryHotProductList(l *IndexLogic) []types.ProductList {
-	homeRecommendProductList, _ := l.svcCtx.HomeRecommendProductService.HomeRecommendProductList(l.ctx, &smsclient.HomeRecommendProductListReq{
-		Current:         1,
+	homeRecommendProductList, _ := l.svcCtx.HomeRecommendProductService.QueryHomeRecommendProductList(l.ctx, &smsclient.QueryHomeRecommendProductListReq{
+		PageNum:         1,
 		PageSize:        4,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})
@@ -107,8 +107,8 @@ func queryHotProductList(l *IndexLogic) []types.ProductList {
 
 // 新品推荐
 func queryNewProductList(l *IndexLogic) []types.ProductList {
-	homeNewProductList, _ := l.svcCtx.HomeNewProductService.HomeNewProductList(l.ctx, &smsclient.HomeNewProductListReq{
-		Current:         1,
+	homeNewProductList, _ := l.svcCtx.HomeNewProductService.QueryHomeNewProductList(l.ctx, &smsclient.QueryHomeNewProductListReq{
+		PageNum:         1,
 		PageSize:        4,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})
@@ -125,14 +125,14 @@ func queryNewProductList(l *IndexLogic) []types.ProductList {
 func queryHomeFlashPromotion(l *IndexLogic) types.HomeFlashPromotion {
 	var resp types.HomeFlashPromotion
 	currentDate := time.Now().Format("2006-01-02")
-	flashPromotionList, _ := l.svcCtx.FlashPromotionService.FlashPromotionListByDate(l.ctx, &smsclient.FlashPromotionListByDateReq{
+	flashPromotionList, _ := l.svcCtx.FlashPromotionService.QueryFlashPromotionListByDate(l.ctx, &smsclient.QueryFlashPromotionListByDateReq{
 		CurrentDate: currentDate,
 	})
 
 	//获取今天是否有活动
 	if len(flashPromotionList.List) > 0 {
 		currentTime := time.Now().Format("2006-01-02 15:04:05")
-		sessionByTimeResp, _ := l.svcCtx.FlashPromotionSessionService.FlashPromotionSessionByTime(l.ctx, &smsclient.FlashPromotionSessionByTimeReq{CurrentTIme: currentTime})
+		sessionByTimeResp, _ := l.svcCtx.FlashPromotionSessionService.QueryFlashPromotionSessionListByTime(l.ctx, &smsclient.QueryFlashPromotionSessionListByTimeReq{CurrentTIme: currentTime})
 
 		//如果今天有活动,则查询今天是否有场次
 		sessionListData := sessionByTimeResp.List
@@ -142,7 +142,7 @@ func queryHomeFlashPromotion(l *IndexLogic) types.HomeFlashPromotion {
 			resp.EndTime = date.EndTime
 
 			//查询当前次的下一场时间
-			nextSessionByTimeResp, _ := l.svcCtx.FlashPromotionSessionService.FlashPromotionSessionByTime(l.ctx, &smsclient.FlashPromotionSessionByTimeReq{CurrentTIme: date.StartTime})
+			nextSessionByTimeResp, _ := l.svcCtx.FlashPromotionSessionService.QueryFlashPromotionSessionListByTime(l.ctx, &smsclient.QueryFlashPromotionSessionListByTimeReq{CurrentTIme: date.StartTime})
 			if len(nextSessionByTimeResp.List) > 0 {
 				nextDate := nextSessionByTimeResp.List[0]
 				resp.NextStartTime = nextDate.StartTime
@@ -150,8 +150,8 @@ func queryHomeFlashPromotion(l *IndexLogic) types.HomeFlashPromotion {
 			}
 
 			//查询关联
-			_, _ = l.svcCtx.FlashPromotionProductRelationService.FlashPromotionProductRelationList(l.ctx, &smsclient.FlashPromotionProductRelationListReq{
-				Current:                 1,
+			_, _ = l.svcCtx.FlashPromotionProductRelationService.QueryFlashPromotionProductRelationList(l.ctx, &smsclient.QueryFlashPromotionProductRelationListReq{
+				PageNum:                 1,
 				PageSize:                100,
 				FlashPromotionId:        flashPromotionList.List[0].Id,
 				FlashPromotionSessionId: sessionListData[0].Id,
@@ -187,8 +187,8 @@ func queryHomeFlashPromotion(l *IndexLogic) types.HomeFlashPromotion {
 
 // 推荐品牌
 func queryBrandList(l *IndexLogic) []types.BrandList {
-	homeBrandList, _ := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
-		Current:         1,
+	homeBrandList, _ := l.svcCtx.HomeBrandService.QueryHomeBrandList(l.ctx, &smsclient.QueryHomeBrandListReq{
+		PageNum:         1,
 		PageSize:        6,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})
@@ -198,7 +198,7 @@ func queryBrandList(l *IndexLogic) []types.BrandList {
 		brandIdLists = append(brandIdLists, item.BrandId)
 	}
 
-	brandListResp, _ := l.svcCtx.BrandService.BrandListByIds(l.ctx, &pmsclient.BrandListByIdsReq{Ids: brandIdLists})
+	brandListResp, _ := l.svcCtx.BrandService.QueryBrandListByIds(l.ctx, &pmsclient.QueryBrandListByIdsReq{Ids: brandIdLists})
 	brandLists := make([]types.BrandList, 0)
 	for _, item := range brandListResp.List {
 
@@ -220,8 +220,8 @@ func queryBrandList(l *IndexLogic) []types.BrandList {
 
 // 获取轮播广告
 func queryAdvertiseList(l *IndexLogic) []types.AdvertiseList {
-	homeAdvertiseList, _ := l.svcCtx.HomeAdvertiseService.HomeAdvertiseList(l.ctx, &smsclient.HomeAdvertiseListReq{
-		Current:  1,
+	homeAdvertiseList, _ := l.svcCtx.HomeAdvertiseService.QueryHomeAdvertiseList(l.ctx, &smsclient.QueryHomeAdvertiseListReq{
+		PageNum:  1,
 		PageSize: 100,
 		Type:     1, //轮播位置：0->PC首页轮播；1->app首页轮播
 		Status:   1, //上下线状态：0->下线；1->上线

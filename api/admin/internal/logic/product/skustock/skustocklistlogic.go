@@ -32,7 +32,7 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) SkuSt
 
 // SkuStockList 根据商品ID及sku编码模糊搜索sku库存
 func (l *SkuStockListLogic) SkuStockList(req types.ListSkuStockReq) (*types.ListSkuStockResp, error) {
-	resp, err := l.svcCtx.SkuStockService.SkuStockList(l.ctx, &pmsclient.SkuStockListReq{
+	resp, err := l.svcCtx.SkuStockService.QuerySkuStockList(l.ctx, &pmsclient.QuerySkuStockListReq{
 		ProductId: req.ProductId,
 		SkuCode:   req.SkuCode,
 	})

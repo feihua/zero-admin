@@ -47,7 +47,7 @@ func (l *FlashPromotionProductRelationAddLogic) FlashPromotionProductRelationAdd
 		})
 	}
 
-	_, err = l.svcCtx.FlashPromotionProductRelationService.FlashPromotionProductRelationAdd(l.ctx, &smsclient.FlashPromotionProductRelationAddReq{
+	_, err = l.svcCtx.FlashPromotionProductRelationService.AddFlashPromotionProductRelation(l.ctx, &smsclient.AddFlashPromotionProductRelationReq{
 		Data: list,
 	})
 

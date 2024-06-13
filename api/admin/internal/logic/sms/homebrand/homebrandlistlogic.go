@@ -34,10 +34,10 @@ func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Home
 
 // HomeBrandList 查询首页品牌信息
 func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.ListHomeBrandResp, error) {
-	resp, err := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
+	resp, err := l.svcCtx.HomeBrandService.QueryHomeBrandList(l.ctx, &smsclient.QueryHomeBrandListReq{
 		BrandName:       strings.TrimSpace(req.BrandName),
 		RecommendStatus: req.RecommendStatus,
-		Current:         req.Current,
+		PageNum:         req.Current,
 		PageSize:        req.PageSize,
 	})
 

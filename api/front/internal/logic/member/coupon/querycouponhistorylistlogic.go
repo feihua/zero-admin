@@ -33,8 +33,8 @@ func NewQueryCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCont
 // QueryCouponHistoryList 获取会员优惠券历史列表
 func (l *QueryCouponHistoryListLogic) QueryCouponHistoryList(req *types.ListCouponHistoryReq) (resp *types.ListCouponHistoryResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	historyList, err := l.svcCtx.CouponHistoryService.CouponHistoryList(l.ctx, &smsclient.CouponHistoryListReq{
-		Current:   1,
+	historyList, err := l.svcCtx.CouponHistoryService.QueryCouponHistoryList(l.ctx, &smsclient.QueryCouponHistoryListReq{
+		PageNum:   1,
 		PageSize:  100,
 		MemberId:  memberId,
 		UseStatus: req.UseStatus,

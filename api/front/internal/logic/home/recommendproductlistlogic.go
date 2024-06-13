@@ -33,7 +33,7 @@ func NewRecommendProductListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // RecommendProductList 分页获取推荐商品
 func (l *RecommendProductListLogic) RecommendProductList(req *types.RecommendProductListReq) (resp *types.RecommendProductListResp, err error) {
-	productListResp, err := l.svcCtx.ProductService.ProductList(l.ctx, &pmsclient.ProductListReq{
+	productListResp, err := l.svcCtx.ProductService.QueryProductList(l.ctx, &pmsclient.QueryProductListReq{
 		Current:           req.Current,
 		PageSize:          req.PageSize,
 		VerifyStatus:      1, // 审核状态：0->未审核；1->审核通过

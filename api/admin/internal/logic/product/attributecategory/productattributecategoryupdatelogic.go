@@ -29,7 +29,7 @@ func NewProductAttributecategoryUpdateLogic(ctx context.Context, svcCtx *svc.Ser
 
 // ProductAttributecategoryUpdate 更新商品属性分类
 func (l *ProductAttributecategoryUpdateLogic) ProductAttributecategoryUpdate(req *types.UpdateProductAttributecategoryReq) (resp *types.UpdateProductAttributecategoryResp, err error) {
-	_, err = l.svcCtx.ProductAttributeCategoryService.ProductAttributeCategoryUpdate(l.ctx, &pmsclient.ProductAttributeCategoryUpdateReq{
+	_, err = l.svcCtx.ProductAttributeCategoryService.UpdateProductAttributeCategory(l.ctx, &pmsclient.UpdateProductAttributeCategoryReq{
 		Id:   req.Id,
 		Name: req.Name,
 	})

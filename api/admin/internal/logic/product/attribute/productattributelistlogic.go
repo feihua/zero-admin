@@ -34,8 +34,8 @@ func NewProductAttributeListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // ProductAttributeList 查询商品属性
 func (l *ProductAttributeListLogic) ProductAttributeList(req *types.ListProductAttributeReq) (resp *types.ListProductAttributeResp, err error) {
-	attributeList, er := l.svcCtx.ProductAttributeService.ProductAttributeList(l.ctx, &pmsclient.ProductAttributeListReq{
-		Current:                    req.Current,
+	attributeList, er := l.svcCtx.ProductAttributeService.QueryProductAttributeList(l.ctx, &pmsclient.QueryProductAttributeListReq{
+		PageNum:                    req.Current,
 		PageSize:                   req.PageSize,
 		Name:                       strings.TrimSpace(req.Name),
 		Type:                       req.Type,

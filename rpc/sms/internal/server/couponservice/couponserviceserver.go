@@ -23,43 +23,43 @@ func NewCouponServiceServer(svcCtx *svc.ServiceContext) *CouponServiceServer {
 }
 
 // 添加优惠券
-func (s *CouponServiceServer) CouponAdd(ctx context.Context, in *smsclient.CouponAddOrUpdateReq) (*smsclient.CouponAddOrUpdateResp, error) {
-	l := couponservicelogic.NewCouponAddLogic(ctx, s.svcCtx)
-	return l.CouponAdd(in)
+func (s *CouponServiceServer) AddCoupon(ctx context.Context, in *smsclient.AddOrUpdateCouponReq) (*smsclient.AddOrUpdateCouponResp, error) {
+	l := couponservicelogic.NewAddCouponLogic(ctx, s.svcCtx)
+	return l.AddCoupon(in)
 }
 
 // 查询优惠券
-func (s *CouponServiceServer) CouponList(ctx context.Context, in *smsclient.CouponListReq) (*smsclient.CouponListResp, error) {
-	l := couponservicelogic.NewCouponListLogic(ctx, s.svcCtx)
-	return l.CouponList(in)
+func (s *CouponServiceServer) QueryCouponList(ctx context.Context, in *smsclient.QueryCouponListReq) (*smsclient.QueryCouponListResp, error) {
+	l := couponservicelogic.NewQueryCouponListLogic(ctx, s.svcCtx)
+	return l.QueryCouponList(in)
 }
 
 // 更新优惠券
-func (s *CouponServiceServer) CouponUpdate(ctx context.Context, in *smsclient.CouponAddOrUpdateReq) (*smsclient.CouponAddOrUpdateResp, error) {
-	l := couponservicelogic.NewCouponUpdateLogic(ctx, s.svcCtx)
-	return l.CouponUpdate(in)
+func (s *CouponServiceServer) UpdateCoupon(ctx context.Context, in *smsclient.AddOrUpdateCouponReq) (*smsclient.AddOrUpdateCouponResp, error) {
+	l := couponservicelogic.NewUpdateCouponLogic(ctx, s.svcCtx)
+	return l.UpdateCoupon(in)
 }
 
 // 删除优惠券
-func (s *CouponServiceServer) CouponDelete(ctx context.Context, in *smsclient.CouponDeleteReq) (*smsclient.CouponDeleteResp, error) {
-	l := couponservicelogic.NewCouponDeleteLogic(ctx, s.svcCtx)
-	return l.CouponDelete(in)
+func (s *CouponServiceServer) DeleteCoupon(ctx context.Context, in *smsclient.DeleteCouponReq) (*smsclient.DeleteCouponResp, error) {
+	l := couponservicelogic.NewDeleteCouponLogic(ctx, s.svcCtx)
+	return l.DeleteCoupon(in)
 }
 
 // 根据优惠券id查询优惠券
-func (s *CouponServiceServer) CouponFindById(ctx context.Context, in *smsclient.CouponFindByIdReq) (*smsclient.CouponFindByIdResp, error) {
-	l := couponservicelogic.NewCouponFindByIdLogic(ctx, s.svcCtx)
-	return l.CouponFindById(in)
+func (s *CouponServiceServer) QueryCouponFindById(ctx context.Context, in *smsclient.QueryCouponFindByIdReq) (*smsclient.QueryCouponFindByIdResp, error) {
+	l := couponservicelogic.NewQueryCouponFindByIdLogic(ctx, s.svcCtx)
+	return l.QueryCouponFindById(in)
 }
 
 // 根据优惠券ids查询优惠券
-func (s *CouponServiceServer) CouponFindByIds(ctx context.Context, in *smsclient.CouponFindByIdsReq) (*smsclient.CouponFindByIdsResp, error) {
-	l := couponservicelogic.NewCouponFindByIdsLogic(ctx, s.svcCtx)
-	return l.CouponFindByIds(in)
+func (s *CouponServiceServer) QueryCouponFindByIds(ctx context.Context, in *smsclient.QueryCouponFindByIdsReq) (*smsclient.QueryCouponFindByIdsResp, error) {
+	l := couponservicelogic.NewQueryCouponFindByIdsLogic(ctx, s.svcCtx)
+	return l.QueryCouponFindByIds(in)
 }
 
 // 根据商品Id和分类id查询可用的优惠券(app)
-func (s *CouponServiceServer) CouponFindByProductIdAndProductCategoryId(ctx context.Context, in *smsclient.CouponFindByProductIdAndProductCategoryIdReq) (*smsclient.CouponFindByProductIdAndProductCategoryIdResp, error) {
-	l := couponservicelogic.NewCouponFindByProductIdAndProductCategoryIdLogic(ctx, s.svcCtx)
-	return l.CouponFindByProductIdAndProductCategoryId(in)
+func (s *CouponServiceServer) QueryCouponFindByProductIdAndProductCategoryId(ctx context.Context, in *smsclient.CouponFindByProductIdAndProductCategoryIdReq) (*smsclient.CouponFindByProductIdAndProductCategoryIdResp, error) {
+	l := couponservicelogic.NewQueryCouponFindByProductIdAndProductCategoryIdLogic(ctx, s.svcCtx)
+	return l.QueryCouponFindByProductIdAndProductCategoryId(in)
 }

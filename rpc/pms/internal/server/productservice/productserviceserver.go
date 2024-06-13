@@ -22,36 +22,36 @@ func NewProductServiceServer(svcCtx *svc.ServiceContext) *ProductServiceServer {
 	}
 }
 
-func (s *ProductServiceServer) ProductAdd(ctx context.Context, in *pmsclient.ProductAddReq) (*pmsclient.ProductAddResp, error) {
-	l := productservicelogic.NewProductAddLogic(ctx, s.svcCtx)
-	return l.ProductAdd(in)
+func (s *ProductServiceServer) AddProduct(ctx context.Context, in *pmsclient.AddProductReq) (*pmsclient.AddProductResp, error) {
+	l := productservicelogic.NewAddProductLogic(ctx, s.svcCtx)
+	return l.AddProduct(in)
 }
 
 // 查询商品列表
-func (s *ProductServiceServer) ProductList(ctx context.Context, in *pmsclient.ProductListReq) (*pmsclient.ProductListResp, error) {
-	l := productservicelogic.NewProductListLogic(ctx, s.svcCtx)
-	return l.ProductList(in)
+func (s *ProductServiceServer) QueryProductList(ctx context.Context, in *pmsclient.QueryProductListReq) (*pmsclient.QueryProductListResp, error) {
+	l := productservicelogic.NewQueryProductListLogic(ctx, s.svcCtx)
+	return l.QueryProductList(in)
 }
 
-func (s *ProductServiceServer) ProductListByIds(ctx context.Context, in *pmsclient.ProductByIdsReq) (*pmsclient.ProductListResp, error) {
-	l := productservicelogic.NewProductListByIdsLogic(ctx, s.svcCtx)
-	return l.ProductListByIds(in)
+func (s *ProductServiceServer) QueryProductListByIds(ctx context.Context, in *pmsclient.QueryProductByIdsReq) (*pmsclient.QueryProductListResp, error) {
+	l := productservicelogic.NewQueryProductListByIdsLogic(ctx, s.svcCtx)
+	return l.QueryProductListByIds(in)
 }
 
-func (s *ProductServiceServer) ProductUpdate(ctx context.Context, in *pmsclient.ProductUpdateReq) (*pmsclient.ProductUpdateResp, error) {
-	l := productservicelogic.NewProductUpdateLogic(ctx, s.svcCtx)
-	return l.ProductUpdate(in)
+func (s *ProductServiceServer) UpdateProduct(ctx context.Context, in *pmsclient.UpdateProductReq) (*pmsclient.UpdateProductResp, error) {
+	l := productservicelogic.NewUpdateProductLogic(ctx, s.svcCtx)
+	return l.UpdateProduct(in)
 }
 
-func (s *ProductServiceServer) ProductDelete(ctx context.Context, in *pmsclient.ProductDeleteReq) (*pmsclient.ProductDeleteResp, error) {
-	l := productservicelogic.NewProductDeleteLogic(ctx, s.svcCtx)
-	return l.ProductDelete(in)
+func (s *ProductServiceServer) DeleteProduct(ctx context.Context, in *pmsclient.DeleteProductReq) (*pmsclient.DeleteProductResp, error) {
+	l := productservicelogic.NewDeleteProductLogic(ctx, s.svcCtx)
+	return l.DeleteProduct(in)
 }
 
 // 查询商品详情
-func (s *ProductServiceServer) ProductDetailById(ctx context.Context, in *pmsclient.ProductDetailByIdReq) (*pmsclient.ProductDetailByIdResp, error) {
-	l := productservicelogic.NewProductDetailByIdLogic(ctx, s.svcCtx)
-	return l.ProductDetailById(in)
+func (s *ProductServiceServer) QueryProductDetailById(ctx context.Context, in *pmsclient.QueryProductDetailByIdReq) (*pmsclient.QueryProductDetailByIdResp, error) {
+	l := productservicelogic.NewQueryProductDetailByIdLogic(ctx, s.svcCtx)
+	return l.QueryProductDetailById(in)
 }
 
 // 批量修改审核状态

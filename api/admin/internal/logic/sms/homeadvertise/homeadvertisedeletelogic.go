@@ -33,7 +33,7 @@ func NewHomeAdvertiseDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // HomeAdvertiseDelete 删除首页轮播广告
 func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(req types.DeleteHomeAdvertiseReq) (*types.DeleteHomeAdvertiseResp, error) {
-	_, err := l.svcCtx.HomeAdvertiseService.HomeAdvertiseDelete(l.ctx, &smsclient.HomeAdvertiseDeleteReq{
+	_, err := l.svcCtx.HomeAdvertiseService.DeleteHomeAdvertise(l.ctx, &smsclient.DeleteHomeAdvertiseReq{
 		Ids: req.Ids,
 	})
 

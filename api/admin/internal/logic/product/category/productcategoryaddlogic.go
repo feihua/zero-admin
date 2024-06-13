@@ -33,7 +33,7 @@ func NewProductCategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // ProductCategoryAdd 添加商品分类
 func (l *ProductCategoryAddLogic) ProductCategoryAdd(req types.AddProductCategoryReq) (*types.AddProductCategoryResp, error) {
-	_, err := l.svcCtx.ProductCategoryService.ProductCategoryAdd(l.ctx, &pmsclient.ProductCategoryAddReq{
+	_, err := l.svcCtx.ProductCategoryService.AddProductCategory(l.ctx, &pmsclient.AddProductCategoryReq{
 		ParentId:               req.ParentId,
 		Name:                   req.Name,
 		Level:                  req.Level,

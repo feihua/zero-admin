@@ -34,13 +34,13 @@ func NewHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // HomeAdvertiseList 查询首页轮播广告
 func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseReq) (*types.ListHomeAdvertiseResp, error) {
-	resp, err := l.svcCtx.HomeAdvertiseService.HomeAdvertiseList(l.ctx, &smsclient.HomeAdvertiseListReq{
+	resp, err := l.svcCtx.HomeAdvertiseService.QueryHomeAdvertiseList(l.ctx, &smsclient.QueryHomeAdvertiseListReq{
 		Name:      strings.TrimSpace(req.Name),
 		Type:      req.Type,
 		StartTime: req.StartTime,
 		EndTime:   req.EndTime,
 		Status:    req.Status,
-		Current:   req.Current,
+		PageNum:   req.Current,
 		PageSize:  req.PageSize,
 	})
 

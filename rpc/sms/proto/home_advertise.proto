@@ -8,7 +8,7 @@ option go_package = "./proto";
 message AddHomeAdvertiseReq {
   int32 click_count = 1; //点击数
   string end_time = 2; //结束时间
-  int64 id = 3; //
+  string url = 3; //链接地址
   string name = 4; //名称
   string note = 5; //备注
   int32 order_count = 6; //下单数
@@ -17,7 +17,7 @@ message AddHomeAdvertiseReq {
   string start_time = 9; //开始时间
   int32 status = 10; //上下线状态：0->下线；1->上线
   int32 type = 11; //轮播位置：0->PC首页轮播；1->app首页轮播
-  string url = 12; //链接地址
+
 
 }
 
@@ -57,18 +57,8 @@ message UpdateHomeAdvertiseResp {
 
 // 更新首页轮播广告表状态
 message UpdateHomeAdvertiseStatusReq {
-  int32 click_count = 1; //点击数
-  string end_time = 2; //结束时间
-  int64 id = 3; //
-  string name = 4; //名称
-  string note = 5; //备注
-  int32 order_count = 6; //下单数
-  string pic = 7; //图片地址
-  int32 sort = 8; //排序
-  string start_time = 9; //开始时间
-  int32 status = 10; //上下线状态：0->下线；1->上线
-  int32 type = 11; //轮播位置：0->PC首页轮播；1->app首页轮播
-  string url = 12; //链接地址
+  repeated int64 Ids = 1; //
+  int32 Status = 2; //上下线状态：0->下线；1->上线
 
 }
 
@@ -99,20 +89,14 @@ message QueryHomeAdvertiseDetailResp {
 
 // 分页查询首页轮播广告表列表
 message QueryHomeAdvertiseListReq {
-  int32 click_count = 1; //点击数
-  string end_time = 2; //结束时间
-  int64 id = 3; //
-  string name = 4; //名称
-  string note = 5; //备注
-  int32 order_count = 6; //下单数
-  string pic = 7; //图片地址
-  int32 sort = 8; //排序
-  string start_time = 9; //开始时间
-  int32 status = 10; //上下线状态：0->下线；1->上线
-  int32 type = 11; //轮播位置：0->PC首页轮播；1->app首页轮播
-  string url = 12; //链接地址
- int64 page_num = 1; //第几页
+  int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
+  string end_time = 3; //结束时间
+  string name = 4; //名称
+  string start_time =5; //开始时间
+  int32 status = 6; //上下线状态：0->下线；1->上线
+  int32 type = 7; //轮播位置：0->PC首页轮播；1->app首页轮播
+
 }
 
 message HomeAdvertiseListData {

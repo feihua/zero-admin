@@ -6,11 +6,14 @@ option go_package = "./proto";
 
 // 添加首页推荐品牌表
 message AddHomeBrandReq {
-  int64 brand_id = 1; //商品品牌id
-  string brand_name = 2; //商品品牌名称
-  int64 id = 3; //
-  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 5; //排序
+  repeated HomeBrandAddData BrandAddData = 1; //
+
+}
+message HomeBrandAddData {
+  int64 BrandId = 1; //商品品牌id
+  string BrandName = 2; //商品品牌名称
+  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 4; //排序
 
 }
 
@@ -28,26 +31,20 @@ message DeleteHomeBrandResp {
 }
 
 // 更新首页推荐品牌表
-message UpdateHomeBrandReq {
-  int64 brand_id = 1; //商品品牌id
-  string brand_name = 2; //商品品牌名称
-  int64 id = 3; //
-  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 5; //排序
+message UpdateHomeBrandSortReq {
+  int64 Id = 1; //
+  int32 Sort = 2; //排序
 
 }
 
-message UpdateHomeBrandResp {
+message UpdateHomeBrandSortResp {
   string pong = 1;
 }
 
 // 更新首页推荐品牌表状态
 message UpdateHomeBrandStatusReq {
-  int64 brand_id = 1; //商品品牌id
-  string brand_name = 2; //商品品牌名称
-  int64 id = 3; //
-  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 5; //排序
+  repeated int64 Ids = 1; //
+  int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
 
 }
 
@@ -71,13 +68,11 @@ message QueryHomeBrandDetailResp {
 
 // 分页查询首页推荐品牌表列表
 message QueryHomeBrandListReq {
-  int64 brand_id = 1; //商品品牌id
-  string brand_name = 2; //商品品牌名称
-  int64 id = 3; //
-  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 5; //排序
- int64 page_num = 1; //第几页
+  int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
+  string brand_name = 3; //商品品牌名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+
 }
 
 message HomeBrandListData {
@@ -100,8 +95,8 @@ service HomeBrandService {
   rpc AddHomeBrand(AddHomeBrandReq) returns (AddHomeBrandResp){}
   // 删除首页推荐品牌表
   rpc DeleteHomeBrand(DeleteHomeBrandReq) returns (DeleteHomeBrandResp){}
-  // 更新首页推荐品牌表
-  rpc UpdateHomeBrand(UpdateHomeBrandReq) returns (UpdateHomeBrandResp ){}
+  //修改推荐品牌排序
+  rpc UpdateHomeBrandSort(UpdateHomeBrandSortReq) returns(UpdateHomeBrandSortResp);
   // 更新首页推荐品牌表状态
   rpc UpdateHomeBrandStatus(UpdateHomeBrandStatusReq) returns (UpdateHomeBrandStatusResp ){}
   // 查询首页推荐品牌表详情

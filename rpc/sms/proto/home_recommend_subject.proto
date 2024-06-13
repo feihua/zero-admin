@@ -6,14 +6,16 @@ option go_package = "./proto";
 
 // 添加首页推荐专题表
 message AddHomeRecommendSubjectReq {
-  int64 id = 1; //
-  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 3; //排序
-  int64 subject_id = 4; //专题id
-  string subject_name = 5; //专题名称
+  repeated HomeRecommendSubjectAddData RecommendSubjectAddData = 1; //
 
 }
+message HomeRecommendSubjectAddData {
+  int64 SubjectId = 1; //专题id
+  string SubjectName = 2; //专题名称
+  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
+  int32 Sort = 4; //排序
 
+}
 message AddHomeRecommendSubjectResp {
   string pong = 1;
 }
@@ -27,27 +29,20 @@ message DeleteHomeRecommendSubjectResp {
   string pong = 1;
 }
 
-// 更新首页推荐专题表
-message UpdateHomeRecommendSubjectReq {
-  int64 id = 1; //
-  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 3; //排序
-  int64 subject_id = 4; //专题id
-  string subject_name = 5; //专题名称
+message UpdateRecommendSubjectSortReq {
+  int64 Id = 1; //
+  int32 Sort = 2; //排序
 
 }
 
-message UpdateHomeRecommendSubjectResp {
+message UpdateRecommendSubjectSortResp {
   string pong = 1;
 }
 
 // 更新首页推荐专题表状态
 message UpdateHomeRecommendSubjectStatusReq {
-  int64 id = 1; //
-  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 3; //排序
-  int64 subject_id = 4; //专题id
-  string subject_name = 5; //专题名称
+  repeated int64 Ids = 1; //
+  int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
 
 }
 
@@ -71,13 +66,11 @@ message QueryHomeRecommendSubjectDetailResp {
 
 // 分页查询首页推荐专题表列表
 message QueryHomeRecommendSubjectListReq {
-  int64 id = 1; //
-  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 3; //排序
-  int64 subject_id = 4; //专题id
-  string subject_name = 5; //专题名称
- int64 page_num = 1; //第几页
+  int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
+  int32 recommend_status = 3; //推荐状态：0->不推荐;1->推荐
+  string subject_name = 4; //专题名称
+
 }
 
 message HomeRecommendSubjectListData {
@@ -100,8 +93,8 @@ service HomeRecommendSubjectService {
   rpc AddHomeRecommendSubject(AddHomeRecommendSubjectReq) returns (AddHomeRecommendSubjectResp){}
   // 删除首页推荐专题表
   rpc DeleteHomeRecommendSubject(DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp){}
-  // 更新首页推荐专题表
-  rpc UpdateHomeRecommendSubject(UpdateHomeRecommendSubjectReq) returns (UpdateHomeRecommendSubjectResp ){}
+  // 修改专题推荐排序
+  rpc UpdateRecommendSubjectSort(UpdateRecommendSubjectSortReq) returns (UpdateRecommendSubjectSortResp ){}
   // 更新首页推荐专题表状态
   rpc UpdateHomeRecommendSubjectStatus(UpdateHomeRecommendSubjectStatusReq) returns (UpdateHomeRecommendSubjectStatusResp ){}
   // 查询首页推荐专题表详情

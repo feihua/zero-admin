@@ -31,7 +31,7 @@ func NewQueryCategoryWithAttrListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 // QueryCategoryWithAttrList 获取所有商品属性分类及其下属性
-func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList(in *pmsclient.ProductAttributeCategoryListReq) (*pmsclient.ProductAttributeCategoryListResp, error) {
+func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList(in *pmsclient.QueryProductAttributeCategoryListReq) (*pmsclient.QueryProductAttributeCategoryListResp, error) {
 	result, err := query.PmsProductAttributeCategory.WithContext(l.ctx).Find()
 
 	if err != nil {
@@ -44,9 +44,9 @@ func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList(in *pmsclient
 		attribute := query.PmsProductAttribute
 		attributes, _ := attribute.WithContext(l.ctx).Where(attribute.ProductAttributeCategoryID.Eq(item.ID)).Find()
 
-		var attrList []*pmsclient.ProductAttributeListData
+		var attrList []*pmsclient.ProductAttributeData
 		for _, r := range attributes {
-			attrList = append(attrList, &pmsclient.ProductAttributeListData{
+			attrList = append(attrList, &pmsclient.ProductAttributeData{
 				Id:                         r.ID,
 				ProductAttributeCategoryId: r.ProductAttributeCategoryID,
 				Name:                       r.Name,
@@ -71,7 +71,7 @@ func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList(in *pmsclient
 	}
 
 	logc.Infof(l.ctx, "查询商品属性类别列表信息,参数：%+v,响应：%+v", in, list)
-	return &pmsclient.ProductAttributeCategoryListResp{
+	return &pmsclient.QueryProductAttributeCategoryListResp{
 		Total: 0,
 		List:  list,
 	}, nil

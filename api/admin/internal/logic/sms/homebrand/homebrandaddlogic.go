@@ -38,7 +38,7 @@ func NewHomeBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeB
 // 3.修改品牌的推荐状态为推荐(pms-rpc)
 func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddHomeBrandResp, error) {
 	// 1.根据brandIds查询品牌信息(pms-rpc)
-	brandListResp, _ := l.svcCtx.BrandService.BrandListByIds(l.ctx, &pmsclient.BrandListByIdsReq{Ids: req.BrandIds})
+	brandListResp, _ := l.svcCtx.BrandService.QueryBrandListByIds(l.ctx, &pmsclient.QueryBrandListByIdsReq{Ids: req.BrandIds})
 
 	var list []*smsclient.HomeBrandAddData
 
@@ -52,7 +52,7 @@ func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddH
 	}
 
 	// 2.添加首页品牌记录(sms-rpc)
-	_, err := l.svcCtx.HomeBrandService.HomeBrandAdd(l.ctx, &smsclient.HomeBrandAddReq{
+	_, err := l.svcCtx.HomeBrandService.AddHomeBrand(l.ctx, &smsclient.AddHomeBrandReq{
 		BrandAddData: list,
 	})
 

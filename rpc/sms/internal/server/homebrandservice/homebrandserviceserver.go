@@ -22,14 +22,16 @@ func NewHomeBrandServiceServer(svcCtx *svc.ServiceContext) *HomeBrandServiceServ
 	}
 }
 
-func (s *HomeBrandServiceServer) HomeBrandAdd(ctx context.Context, in *smsclient.HomeBrandAddReq) (*smsclient.HomeBrandAddResp, error) {
-	l := homebrandservicelogic.NewHomeBrandAddLogic(ctx, s.svcCtx)
-	return l.HomeBrandAdd(in)
+// 添加首页推荐品牌表
+func (s *HomeBrandServiceServer) AddHomeBrand(ctx context.Context, in *smsclient.AddHomeBrandReq) (*smsclient.AddHomeBrandResp, error) {
+	l := homebrandservicelogic.NewAddHomeBrandLogic(ctx, s.svcCtx)
+	return l.AddHomeBrand(in)
 }
 
-func (s *HomeBrandServiceServer) HomeBrandList(ctx context.Context, in *smsclient.HomeBrandListReq) (*smsclient.HomeBrandListResp, error) {
-	l := homebrandservicelogic.NewHomeBrandListLogic(ctx, s.svcCtx)
-	return l.HomeBrandList(in)
+// 删除首页推荐品牌表
+func (s *HomeBrandServiceServer) DeleteHomeBrand(ctx context.Context, in *smsclient.DeleteHomeBrandReq) (*smsclient.DeleteHomeBrandResp, error) {
+	l := homebrandservicelogic.NewDeleteHomeBrandLogic(ctx, s.svcCtx)
+	return l.DeleteHomeBrand(in)
 }
 
 // 修改推荐品牌排序
@@ -38,13 +40,20 @@ func (s *HomeBrandServiceServer) UpdateHomeBrandSort(ctx context.Context, in *sm
 	return l.UpdateHomeBrandSort(in)
 }
 
-// 批量修改推荐品牌状态
+// 更新首页推荐品牌表状态
 func (s *HomeBrandServiceServer) UpdateHomeBrandStatus(ctx context.Context, in *smsclient.UpdateHomeBrandStatusReq) (*smsclient.UpdateHomeBrandStatusResp, error) {
 	l := homebrandservicelogic.NewUpdateHomeBrandStatusLogic(ctx, s.svcCtx)
 	return l.UpdateHomeBrandStatus(in)
 }
 
-func (s *HomeBrandServiceServer) HomeBrandDelete(ctx context.Context, in *smsclient.HomeBrandDeleteReq) (*smsclient.HomeBrandDeleteResp, error) {
-	l := homebrandservicelogic.NewHomeBrandDeleteLogic(ctx, s.svcCtx)
-	return l.HomeBrandDelete(in)
+// 查询首页推荐品牌表详情
+func (s *HomeBrandServiceServer) QueryHomeBrandDetail(ctx context.Context, in *smsclient.QueryHomeBrandDetailReq) (*smsclient.QueryHomeBrandDetailResp, error) {
+	l := homebrandservicelogic.NewQueryHomeBrandDetailLogic(ctx, s.svcCtx)
+	return l.QueryHomeBrandDetail(in)
+}
+
+// 查询首页推荐品牌表列表
+func (s *HomeBrandServiceServer) QueryHomeBrandList(ctx context.Context, in *smsclient.QueryHomeBrandListReq) (*smsclient.QueryHomeBrandListResp, error) {
+	l := homebrandservicelogic.NewQueryHomeBrandListLogic(ctx, s.svcCtx)
+	return l.QueryHomeBrandList(in)
 }

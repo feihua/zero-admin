@@ -42,12 +42,12 @@ func NewQueryProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Quer
 // 注意: 步骤1到7是在商品模块(rpc),8是在营销模块(rpc)
 func (l *QueryProductLogic) QueryProduct(req *types.QueryProductReq) (resp *types.QueryProductResp, err error) {
 
-	productResp, _ := l.svcCtx.ProductService.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
+	productResp, _ := l.svcCtx.ProductService.QueryProductDetailById(l.ctx, &pmsclient.QueryProductDetailByIdReq{
 		Id: req.ProductId,
 	})
 
 	//8.商品可用优惠券(根据商品id和分类id查询)
-	couponList, _ := l.svcCtx.CouponService.CouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
+	couponList, _ := l.svcCtx.CouponService.QueryCouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
 		ProductId:         req.ProductId,
 		ProductCategoryId: productResp.Product.ProductCategoryId,
 	})
@@ -69,7 +69,7 @@ func (l *QueryProductLogic) QueryProduct(req *types.QueryProductReq) (resp *type
 }
 
 // 1.获取商品信息
-func buildProductListData(resp *pmsclient.ProductDetailByIdResp) types.Product {
+func buildProductListData(resp *pmsclient.QueryProductDetailByIdResp) types.Product {
 	pmsProduct := resp.Product
 
 	return types.Product{
@@ -119,7 +119,7 @@ func buildProductListData(resp *pmsclient.ProductDetailByIdResp) types.Product {
 }
 
 // 2.获取品牌信息
-func buildBrandListData(resp *pmsclient.ProductDetailByIdResp) types.Brand {
+func buildBrandListData(resp *pmsclient.QueryProductDetailByIdResp) types.Brand {
 	item := resp.Brand
 	return types.Brand{
 		Id:                  item.Id,
@@ -137,7 +137,7 @@ func buildBrandListData(resp *pmsclient.ProductDetailByIdResp) types.Brand {
 }
 
 // 3.获取商品属性信息
-func buildProductAttributeListData(resp *pmsclient.ProductDetailByIdResp) []types.ProductAttributeList {
+func buildProductAttributeListData(resp *pmsclient.QueryProductDetailByIdResp) []types.ProductAttributeList {
 	list := make([]types.ProductAttributeList, 0)
 	for _, item := range resp.ProductAttributeList {
 		list = append(list, types.ProductAttributeList{
@@ -160,7 +160,7 @@ func buildProductAttributeListData(resp *pmsclient.ProductDetailByIdResp) []type
 }
 
 // 4.获取商品属性值信息
-func buildProductAttributeValueListData(resp *pmsclient.ProductDetailByIdResp) []types.ProductAttributeValueList {
+func buildProductAttributeValueListData(resp *pmsclient.QueryProductDetailByIdResp) []types.ProductAttributeValueList {
 	list := make([]types.ProductAttributeValueList, 0)
 	for _, item := range resp.ProductAttributeValueList {
 		list = append(list, types.ProductAttributeValueList{
@@ -175,7 +175,7 @@ func buildProductAttributeValueListData(resp *pmsclient.ProductDetailByIdResp) [
 }
 
 // 5.获取商品SKU库存信息
-func buildSkuStockListData(resp *pmsclient.ProductDetailByIdResp) []types.SkuStockList {
+func buildSkuStockListData(resp *pmsclient.QueryProductDetailByIdResp) []types.SkuStockList {
 	list := make([]types.SkuStockList, 0)
 	for _, item := range resp.SkuStockList {
 
@@ -198,7 +198,7 @@ func buildSkuStockListData(resp *pmsclient.ProductDetailByIdResp) []types.SkuSto
 }
 
 // 6.商品阶梯价格设置
-func buildProductLadderListData(resp *pmsclient.ProductDetailByIdResp) []types.ProductLadderList {
+func buildProductLadderListData(resp *pmsclient.QueryProductDetailByIdResp) []types.ProductLadderList {
 	list := make([]types.ProductLadderList, 0)
 	for _, item := range resp.ProductLadderList {
 
@@ -216,7 +216,7 @@ func buildProductLadderListData(resp *pmsclient.ProductDetailByIdResp) []types.P
 }
 
 // 7.商品满减价格设置
-func buildProductFullReductionListData(resp *pmsclient.ProductDetailByIdResp) []types.ProductFullReductionList {
+func buildProductFullReductionListData(resp *pmsclient.QueryProductDetailByIdResp) []types.ProductFullReductionList {
 	list := make([]types.ProductFullReductionList, 0)
 	for _, item := range resp.ProductFullReductionList {
 

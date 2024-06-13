@@ -15,13 +15,10 @@ import (
 	"github.com/feihua/zero-admin/rpc/oms/client/orderreturnreasonservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/ordersettingservice"
-	"github.com/feihua/zero-admin/rpc/pms/client/albumpicservice"
-	"github.com/feihua/zero-admin/rpc/pms/client/albumservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/brandservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/commentreplayservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/commentservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/feighttemplateservice"
-	"github.com/feihua/zero-admin/rpc/pms/client/memberpriceservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productattributecategoryservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productattributeservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productattributevalueservice"
@@ -104,13 +101,10 @@ type ServiceContext struct {
 	RoleService       roleservice.RoleService
 	UserService       userservice.UserService
 	//商品相关
-	AlbumPicService                         albumpicservice.AlbumPicService
-	AlbumService                            albumservice.AlbumService
 	BrandService                            brandservice.BrandService
 	CommentReplayService                    commentreplayservice.CommentReplayService
 	CommentService                          commentservice.CommentService
 	FeightTemplateService                   feighttemplateservice.FeightTemplateService
-	MemberPriceService                      memberpriceservice.MemberPriceService
 	ProductAttributeCategoryService         productattributecategoryservice.ProductAttributeCategoryService
 	ProductAttributeService                 productattributeservice.ProductAttributeService
 	ProductAttributeValueService            productattributevalueservice.ProductAttributeValueService
@@ -190,13 +184,10 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		CheckUrl:          middleware.NewCheckUrlMiddleware(newRedis).Handle,
 		AddLog:            middleware.NewAddLogMiddleware(operateLogService).Handle,
 
-		AlbumPicService:                         albumpicservice.NewAlbumPicService(pmsClient),
-		AlbumService:                            albumservice.NewAlbumService(pmsClient),
 		BrandService:                            brandservice.NewBrandService(pmsClient),
 		CommentReplayService:                    commentreplayservice.NewCommentReplayService(pmsClient),
 		CommentService:                          commentservice.NewCommentService(pmsClient),
 		FeightTemplateService:                   feighttemplateservice.NewFeightTemplateService(pmsClient),
-		MemberPriceService:                      memberpriceservice.NewMemberPriceService(pmsClient),
 		ProductAttributeCategoryService:         productattributecategoryservice.NewProductAttributeCategoryService(pmsClient),
 		ProductAttributeService:                 productattributeservice.NewProductAttributeService(pmsClient),
 		ProductAttributeValueService:            productattributevalueservice.NewProductAttributeValueService(pmsClient),

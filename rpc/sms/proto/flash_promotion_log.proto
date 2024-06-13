@@ -6,13 +6,13 @@ option go_package = "./proto";
 
 // 添加限时购通知记录
 message AddFlashPromotionLogReq {
-  int64 id = 1; //编号
+  string subscribe_time = 1; //会员订阅时间
   int64 member_id = 2; //会员id
   string member_phone = 3; //会员电话
   int64 product_id = 4; //商品id
   string product_name = 5; //商品名称
   string send_time = 6; //发送时间
-  string subscribe_time = 7; //会员订阅时间
+
 
 }
 
@@ -29,37 +29,6 @@ message DeleteFlashPromotionLogResp {
   string pong = 1;
 }
 
-// 更新限时购通知记录
-message UpdateFlashPromotionLogReq {
-  int64 id = 1; //编号
-  int64 member_id = 2; //会员id
-  string member_phone = 3; //会员电话
-  int64 product_id = 4; //商品id
-  string product_name = 5; //商品名称
-  string send_time = 6; //发送时间
-  string subscribe_time = 7; //会员订阅时间
-
-}
-
-message UpdateFlashPromotionLogResp {
-  string pong = 1;
-}
-
-// 更新限时购通知记录状态
-message UpdateFlashPromotionLogStatusReq {
-  int64 id = 1; //编号
-  int64 member_id = 2; //会员id
-  string member_phone = 3; //会员电话
-  int64 product_id = 4; //商品id
-  string product_name = 5; //商品名称
-  string send_time = 6; //发送时间
-  string subscribe_time = 7; //会员订阅时间
-
-}
-
-message UpdateFlashPromotionLogStatusResp {
-  string pong = 1;
-}
 
 // 查询限时购通知记录详情
 message QueryFlashPromotionLogDetailReq {
@@ -79,15 +48,11 @@ message QueryFlashPromotionLogDetailResp {
 
 // 分页查询限时购通知记录列表
 message QueryFlashPromotionLogListReq {
-  int64 id = 1; //编号
-  int64 member_id = 2; //会员id
-  string member_phone = 3; //会员电话
-  int64 product_id = 4; //商品id
-  string product_name = 5; //商品名称
-  string send_time = 6; //发送时间
-  string subscribe_time = 7; //会员订阅时间
- int64 page_num = 1; //第几页
+  int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
+  string member_phone = 3; //会员电话
+  string product_name = 4; //商品名称
+
 }
 
 message FlashPromotionLogListData {
@@ -112,10 +77,6 @@ service FlashPromotionLogService {
   rpc AddFlashPromotionLog(AddFlashPromotionLogReq) returns (AddFlashPromotionLogResp){}
   // 删除限时购通知记录
   rpc DeleteFlashPromotionLog(DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp){}
-  // 更新限时购通知记录
-  rpc UpdateFlashPromotionLog(UpdateFlashPromotionLogReq) returns (UpdateFlashPromotionLogResp ){}
-  // 更新限时购通知记录状态
-  rpc UpdateFlashPromotionLogStatus(UpdateFlashPromotionLogStatusReq) returns (UpdateFlashPromotionLogStatusResp ){}
   // 查询限时购通知记录详情
    rpc QueryFlashPromotionLogDetail(QueryFlashPromotionLogDetailReq) returns (QueryFlashPromotionLogDetailResp){}
   // 查询限时购通知记录列表

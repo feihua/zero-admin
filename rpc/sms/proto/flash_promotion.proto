@@ -6,12 +6,10 @@ option go_package = "./proto";
 
 // 添加限时购表
 message AddFlashPromotionReq {
-  string create_time = 1; //创建时间
-  string end_date = 2; //结束日期
-  int64 id = 3; //编号
-  string start_date = 4; //开始日期
-  int32 status = 5; //上下线状态
-  string title = 6; //标题
+  string end_date = 1; //结束日期
+  string start_date = 2; //开始日期
+  int32 status = 3; //上下线状态
+  string title = 4; //标题
 
 }
 
@@ -30,12 +28,12 @@ message DeleteFlashPromotionResp {
 
 // 更新限时购表
 message UpdateFlashPromotionReq {
-  string create_time = 1; //创建时间
+  string title = 1; //标题
   string end_date = 2; //结束日期
   int64 id = 3; //编号
   string start_date = 4; //开始日期
   int32 status = 5; //上下线状态
-  string title = 6; //标题
+
 
 }
 
@@ -45,13 +43,8 @@ message UpdateFlashPromotionResp {
 
 // 更新限时购表状态
 message UpdateFlashPromotionStatusReq {
-  string create_time = 1; //创建时间
-  string end_date = 2; //结束日期
-  int64 id = 3; //编号
-  string start_date = 4; //开始日期
-  int32 status = 5; //上下线状态
-  string title = 6; //标题
-
+  repeated int64 Ids = 1; //编号
+  int32 Status = 2; //上下线状态
 }
 
 message UpdateFlashPromotionStatusResp {
@@ -75,14 +68,13 @@ message QueryFlashPromotionDetailResp {
 
 // 分页查询限时购表列表
 message QueryFlashPromotionListReq {
-  string create_time = 1; //创建时间
-  string end_date = 2; //结束日期
-  int64 id = 3; //编号
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string end_date = 3; //结束日期
   string start_date = 4; //开始日期
   int32 status = 5; //上下线状态
   string title = 6; //标题
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
+
 }
 
 message FlashPromotionListData {
@@ -100,6 +92,13 @@ message QueryFlashPromotionListResp {
   repeated  FlashPromotionListData list = 2;
 }
 
+message QueryFlashPromotionListByDateReq {
+  string currentDate = 1;
+}
+
+message QueryFlashPromotionListByDateResp {
+  repeated  FlashPromotionListData list = 1;
+}
 // 限时购表
 service FlashPromotionService {
   // 添加限时购表
@@ -114,6 +113,9 @@ service FlashPromotionService {
    rpc QueryFlashPromotionDetail(QueryFlashPromotionDetailReq) returns (QueryFlashPromotionDetailResp){}
   // 查询限时购表列表
   rpc QueryFlashPromotionList(QueryFlashPromotionListReq) returns (QueryFlashPromotionListResp){}
+
+  //查询当前时间是否有秒杀活动
+  rpc QueryFlashPromotionListByDate(QueryFlashPromotionListByDateReq) returns(QueryFlashPromotionListByDateResp);
 
 
 }

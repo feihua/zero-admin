@@ -34,7 +34,7 @@ func NewCouponDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Coup
 
 // CouponDetail 获取单个优惠券的详细信息
 func (l *CouponDetailLogic) CouponDetail(req *types.CouponDetailReq) (resp *types.CouponDetailResp, err error) {
-	item, err := l.svcCtx.CouponService.CouponFindById(l.ctx, &smsclient.CouponFindByIdReq{
+	item, err := l.svcCtx.CouponService.QueryCouponFindById(l.ctx, &smsclient.QueryCouponFindByIdReq{
 		CouponId: req.Id,
 	})
 
@@ -57,7 +57,7 @@ func (l *CouponDetailLogic) CouponDetail(req *types.CouponDetailReq) (resp *type
 }
 
 // 优惠券基本信息
-func buildCoupon(item *couponservice.CouponFindByIdResp) types.ListCouponData {
+func buildCoupon(item *couponservice.QueryCouponFindByIdResp) types.ListCouponData {
 	coupon := types.ListCouponData{
 		Id:           item.Id,
 		Type:         item.Type,
@@ -82,7 +82,7 @@ func buildCoupon(item *couponservice.CouponFindByIdResp) types.ListCouponData {
 }
 
 // 优惠券绑定的商品分类
-func buildCategoryRelation(item *couponservice.CouponFindByIdResp) []*types.ProductCategoryRelation {
+func buildCategoryRelation(item *couponservice.QueryCouponFindByIdResp) []*types.ProductCategoryRelation {
 	var relations []*types.ProductCategoryRelation
 	for _, category := range item.CouponProductCategoryRelationList {
 		relations = append(relations, &types.ProductCategoryRelation{
@@ -96,7 +96,7 @@ func buildCategoryRelation(item *couponservice.CouponFindByIdResp) []*types.Prod
 }
 
 // 优惠券绑定的商品
-func buildProductRelation(item *couponservice.CouponFindByIdResp) []*types.ProductRelation {
+func buildProductRelation(item *couponservice.QueryCouponFindByIdResp) []*types.ProductRelation {
 	var relationList []*types.ProductRelation
 	for _, product := range item.CouponProductRelationList {
 		relationList = append(relationList, &types.ProductRelation{

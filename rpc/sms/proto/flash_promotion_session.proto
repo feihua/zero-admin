@@ -6,12 +6,12 @@ option go_package = "./proto";
 
 // 添加限时购场次表
 message AddFlashPromotionSessionReq {
-  string create_time = 1; //创建时间
+  string start_time = 1; //每日开始时间
   string end_time = 2; //每日结束时间
-  int64 id = 3; //编号
+  int32 status = 3; //启用状态：0->不启用；1->启用
   string name = 4; //场次名称
-  string start_time = 5; //每日开始时间
-  int32 status = 6; //启用状态：0->不启用；1->启用
+
+
 
 }
 
@@ -30,12 +30,12 @@ message DeleteFlashPromotionSessionResp {
 
 // 更新限时购场次表
 message UpdateFlashPromotionSessionReq {
-  string create_time = 1; //创建时间
+  int32 status = 1; //启用状态：0->不启用；1->启用
   string end_time = 2; //每日结束时间
   int64 id = 3; //编号
   string name = 4; //场次名称
   string start_time = 5; //每日开始时间
-  int32 status = 6; //启用状态：0->不启用；1->启用
+
 
 }
 
@@ -45,12 +45,8 @@ message UpdateFlashPromotionSessionResp {
 
 // 更新限时购场次表状态
 message UpdateFlashPromotionSessionStatusReq {
-  string create_time = 1; //创建时间
-  string end_time = 2; //每日结束时间
-  int64 id = 3; //编号
-  string name = 4; //场次名称
-  string start_time = 5; //每日开始时间
-  int32 status = 6; //启用状态：0->不启用；1->启用
+  repeated int64 Ids = 1; //编号
+  int32 Status = 2; //上下线状态
 
 }
 
@@ -75,14 +71,13 @@ message QueryFlashPromotionSessionDetailResp {
 
 // 分页查询限时购场次表列表
 message QueryFlashPromotionSessionListReq {
-  string create_time = 1; //创建时间
-  string end_time = 2; //每日结束时间
-  int64 id = 3; //编号
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string end_time = 3; //每日结束时间
   string name = 4; //场次名称
   string start_time = 5; //每日开始时间
   int32 status = 6; //启用状态：0->不启用；1->启用
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
+
 }
 
 message FlashPromotionSessionListData {
@@ -100,6 +95,14 @@ message QueryFlashPromotionSessionListResp {
   repeated  FlashPromotionSessionListData list = 2;
 }
 
+message QueryFlashPromotionSessionListByTimeReq {
+  string currentTIme = 1;
+}
+
+message QueryFlashPromotionSessionListByTimeResp {
+  repeated  FlashPromotionSessionListData list = 1;
+}
+
 // 限时购场次表
 service FlashPromotionSessionService {
   // 添加限时购场次表
@@ -114,6 +117,8 @@ service FlashPromotionSessionService {
    rpc QueryFlashPromotionSessionDetail(QueryFlashPromotionSessionDetailReq) returns (QueryFlashPromotionSessionDetailResp){}
   // 查询限时购场次表列表
   rpc QueryFlashPromotionSessionList(QueryFlashPromotionSessionListReq) returns (QueryFlashPromotionSessionListResp){}
+  //根据时间查询限时购场次
+  rpc QueryFlashPromotionSessionListByTime(QueryFlashPromotionSessionListByTimeReq) returns(QueryFlashPromotionSessionListByTimeResp);
 
 
 }

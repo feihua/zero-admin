@@ -22,43 +22,55 @@ func NewBrandServiceServer(svcCtx *svc.ServiceContext) *BrandServiceServer {
 	}
 }
 
-func (s *BrandServiceServer) BrandAdd(ctx context.Context, in *pmsclient.BrandAddReq) (*pmsclient.BrandAddResp, error) {
-	l := brandservicelogic.NewBrandAddLogic(ctx, s.svcCtx)
-	return l.BrandAdd(in)
+// 添加品牌表
+func (s *BrandServiceServer) AddBrand(ctx context.Context, in *pmsclient.AddBrandReq) (*pmsclient.AddBrandResp, error) {
+	l := brandservicelogic.NewAddBrandLogic(ctx, s.svcCtx)
+	return l.AddBrand(in)
 }
 
-func (s *BrandServiceServer) BrandList(ctx context.Context, in *pmsclient.BrandListReq) (*pmsclient.BrandListResp, error) {
-	l := brandservicelogic.NewBrandListLogic(ctx, s.svcCtx)
-	return l.BrandList(in)
+// 删除品牌表
+func (s *BrandServiceServer) DeleteBrand(ctx context.Context, in *pmsclient.DeleteBrandReq) (*pmsclient.DeleteBrandResp, error) {
+	l := brandservicelogic.NewDeleteBrandLogic(ctx, s.svcCtx)
+	return l.DeleteBrand(in)
 }
 
-func (s *BrandServiceServer) BrandListByIds(ctx context.Context, in *pmsclient.BrandListByIdsReq) (*pmsclient.BrandListResp, error) {
-	l := brandservicelogic.NewBrandListByIdsLogic(ctx, s.svcCtx)
-	return l.BrandListByIds(in)
+// 更新品牌表
+func (s *BrandServiceServer) UpdateBrand(ctx context.Context, in *pmsclient.UpdateBrandReq) (*pmsclient.UpdateBrandResp, error) {
+	l := brandservicelogic.NewUpdateBrandLogic(ctx, s.svcCtx)
+	return l.UpdateBrand(in)
 }
 
-func (s *BrandServiceServer) BrandUpdate(ctx context.Context, in *pmsclient.BrandUpdateReq) (*pmsclient.BrandUpdateResp, error) {
-	l := brandservicelogic.NewBrandUpdateLogic(ctx, s.svcCtx)
-	return l.BrandUpdate(in)
+// 查询品牌表详情
+func (s *BrandServiceServer) QueryBrandDetail(ctx context.Context, in *pmsclient.QueryBrandDetailReq) (*pmsclient.QueryBrandDetailResp, error) {
+	l := brandservicelogic.NewQueryBrandDetailLogic(ctx, s.svcCtx)
+	return l.QueryBrandDetail(in)
 }
 
-func (s *BrandServiceServer) UpdateBrandShowStatus(ctx context.Context, in *pmsclient.UpdateBrandShowStatusReq) (*pmsclient.UpdateBrandShowStatusResp, error) {
+// 查询品牌表列表
+func (s *BrandServiceServer) QueryBrandList(ctx context.Context, in *pmsclient.QueryBrandListReq) (*pmsclient.QueryBrandListResp, error) {
+	l := brandservicelogic.NewQueryBrandListLogic(ctx, s.svcCtx)
+	return l.QueryBrandList(in)
+}
+
+func (s *BrandServiceServer) QueryBrandListByIds(ctx context.Context, in *pmsclient.QueryBrandListByIdsReq) (*pmsclient.QueryBrandListResp, error) {
+	l := brandservicelogic.NewQueryBrandListByIdsLogic(ctx, s.svcCtx)
+	return l.QueryBrandListByIds(in)
+}
+
+// 更新品牌的显示状态
+func (s *BrandServiceServer) UpdateBrandShowStatus(ctx context.Context, in *pmsclient.UpdateBrandShowStatusReq) (*pmsclient.UpdateBrandStatusResp, error) {
 	l := brandservicelogic.NewUpdateBrandShowStatusLogic(ctx, s.svcCtx)
 	return l.UpdateBrandShowStatus(in)
 }
 
-func (s *BrandServiceServer) UpdateBrandFactoryStatus(ctx context.Context, in *pmsclient.UpdateBrandFactoryStatusReq) (*pmsclient.UpdateBrandFactoryStatusResp, error) {
+// 更新品牌是否为品牌制造商
+func (s *BrandServiceServer) UpdateBrandFactoryStatus(ctx context.Context, in *pmsclient.UpdateBrandFactoryStatusReq) (*pmsclient.UpdateBrandStatusResp, error) {
 	l := brandservicelogic.NewUpdateBrandFactoryStatusLogic(ctx, s.svcCtx)
 	return l.UpdateBrandFactoryStatus(in)
 }
 
-func (s *BrandServiceServer) BrandDelete(ctx context.Context, in *pmsclient.BrandDeleteReq) (*pmsclient.BrandDeleteResp, error) {
-	l := brandservicelogic.NewBrandDeleteLogic(ctx, s.svcCtx)
-	return l.BrandDelete(in)
-}
-
 // 更新品牌的推荐状态
-func (s *BrandServiceServer) UpdateBrandRecommendStatus(ctx context.Context, in *pmsclient.UpdateBrandRecommendStatusReq) (*pmsclient.UpdateBrandRecommendStatusResp, error) {
+func (s *BrandServiceServer) UpdateBrandRecommendStatus(ctx context.Context, in *pmsclient.UpdateBrandRecommendStatusReq) (*pmsclient.UpdateBrandStatusResp, error) {
 	l := brandservicelogic.NewUpdateBrandRecommendStatusLogic(ctx, s.svcCtx)
 	return l.UpdateBrandRecommendStatus(in)
 }

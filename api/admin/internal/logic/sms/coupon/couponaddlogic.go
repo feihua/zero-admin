@@ -33,9 +33,9 @@ func NewCouponAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) CouponAd
 
 // CouponAdd 添加优惠券
 func (l *CouponAddLogic) CouponAdd(req types.AddOrUpdateCouponReq) (*types.AddOrUpdateCouponResp, error) {
-	var productList []*smsclient.CouponProductRelationListData
+	var productList []*smsclient.CouponProductRelationData
 	for _, relation := range req.ProductRelationList {
-		productList = append(productList, &smsclient.CouponProductRelationListData{
+		productList = append(productList, &smsclient.CouponProductRelationData{
 			CouponId:    relation.CouponId,
 			ProductId:   relation.ProductId,
 			ProductName: relation.ProductName,
@@ -43,9 +43,9 @@ func (l *CouponAddLogic) CouponAdd(req types.AddOrUpdateCouponReq) (*types.AddOr
 		})
 	}
 
-	var categoryList []*smsclient.CouponProductCategoryRelationListData
+	var categoryList []*smsclient.CouponProductCategoryRelationData
 	for _, relation := range req.ProductCategoryRelationList {
-		categoryList = append(categoryList, &smsclient.CouponProductCategoryRelationListData{
+		categoryList = append(categoryList, &smsclient.CouponProductCategoryRelationData{
 			CouponId:            relation.CouponId,
 			ProductCategoryId:   relation.ProductCategoryId,
 			ProductCategoryName: relation.ProductCategoryName,
@@ -53,7 +53,7 @@ func (l *CouponAddLogic) CouponAdd(req types.AddOrUpdateCouponReq) (*types.AddOr
 		})
 	}
 
-	_, err := l.svcCtx.CouponService.CouponAdd(l.ctx, &smsclient.CouponAddOrUpdateReq{
+	_, err := l.svcCtx.CouponService.AddCoupon(l.ctx, &smsclient.AddOrUpdateCouponReq{
 		Type:                              req.Type,
 		Name:                              req.Name,
 		Platform:                          req.Platform,

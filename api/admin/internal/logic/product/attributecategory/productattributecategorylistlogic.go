@@ -28,8 +28,8 @@ func NewProductAttributecategoryListLogic(ctx context.Context, svcCtx *svc.Servi
 }
 
 func (l *ProductAttributecategoryListLogic) ProductAttributecategoryList(req *types.ListProductAttributecategoryReq) (resp *types.ListProductAttributecategoryResp, err error) {
-	attributeList, er := l.svcCtx.ProductAttributeCategoryService.ProductAttributeCategoryList(l.ctx, &pmsclient.ProductAttributeCategoryListReq{
-		Current:  req.Current,
+	attributeList, er := l.svcCtx.ProductAttributeCategoryService.QueryProductAttributeCategoryList(l.ctx, &pmsclient.QueryProductAttributeCategoryListReq{
+		PageNum:  req.Current,
 		PageSize: req.PageSize,
 		Name:     strings.TrimSpace(req.Name),
 	})

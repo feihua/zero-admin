@@ -22,22 +22,32 @@ func NewCommentServiceServer(svcCtx *svc.ServiceContext) *CommentServiceServer {
 	}
 }
 
-func (s *CommentServiceServer) CommentAdd(ctx context.Context, in *pmsclient.CommentAddReq) (*pmsclient.CommentAddResp, error) {
-	l := commentservicelogic.NewCommentAddLogic(ctx, s.svcCtx)
-	return l.CommentAdd(in)
+// 添加商品评价表
+func (s *CommentServiceServer) AddComment(ctx context.Context, in *pmsclient.AddCommentReq) (*pmsclient.AddCommentResp, error) {
+	l := commentservicelogic.NewAddCommentLogic(ctx, s.svcCtx)
+	return l.AddComment(in)
 }
 
-func (s *CommentServiceServer) CommentList(ctx context.Context, in *pmsclient.CommentListReq) (*pmsclient.CommentListResp, error) {
-	l := commentservicelogic.NewCommentListLogic(ctx, s.svcCtx)
-	return l.CommentList(in)
+// 删除商品评价表
+func (s *CommentServiceServer) DeleteComment(ctx context.Context, in *pmsclient.DeleteCommentReq) (*pmsclient.DeleteCommentResp, error) {
+	l := commentservicelogic.NewDeleteCommentLogic(ctx, s.svcCtx)
+	return l.DeleteComment(in)
 }
 
-func (s *CommentServiceServer) CommentUpdate(ctx context.Context, in *pmsclient.CommentUpdateReq) (*pmsclient.CommentUpdateResp, error) {
-	l := commentservicelogic.NewCommentUpdateLogic(ctx, s.svcCtx)
-	return l.CommentUpdate(in)
+// 更新商品评价表
+func (s *CommentServiceServer) UpdateComment(ctx context.Context, in *pmsclient.UpdateCommentReq) (*pmsclient.UpdateCommentResp, error) {
+	l := commentservicelogic.NewUpdateCommentLogic(ctx, s.svcCtx)
+	return l.UpdateComment(in)
 }
 
-func (s *CommentServiceServer) CommentDelete(ctx context.Context, in *pmsclient.CommentDeleteReq) (*pmsclient.CommentDeleteResp, error) {
-	l := commentservicelogic.NewCommentDeleteLogic(ctx, s.svcCtx)
-	return l.CommentDelete(in)
+// 查询商品评价表详情
+func (s *CommentServiceServer) QueryCommentDetail(ctx context.Context, in *pmsclient.QueryCommentDetailReq) (*pmsclient.QueryCommentDetailResp, error) {
+	l := commentservicelogic.NewQueryCommentDetailLogic(ctx, s.svcCtx)
+	return l.QueryCommentDetail(in)
+}
+
+// 查询商品评价表列表
+func (s *CommentServiceServer) QueryCommentList(ctx context.Context, in *pmsclient.QueryCommentListReq) (*pmsclient.QueryCommentListResp, error) {
+	l := commentservicelogic.NewQueryCommentListLogic(ctx, s.svcCtx)
+	return l.QueryCommentList(in)
 }

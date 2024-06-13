@@ -22,22 +22,26 @@ func NewProductAttributeValueServiceServer(svcCtx *svc.ServiceContext) *ProductA
 	}
 }
 
-func (s *ProductAttributeValueServiceServer) ProductAttributeValueAdd(ctx context.Context, in *pmsclient.ProductAttributeValueAddReq) (*pmsclient.ProductAttributeValueAddResp, error) {
-	l := productattributevalueservicelogic.NewProductAttributeValueAddLogic(ctx, s.svcCtx)
-	return l.ProductAttributeValueAdd(in)
+// 添加存储产品参数信息的表
+func (s *ProductAttributeValueServiceServer) AddProductAttributeValue(ctx context.Context, in *pmsclient.AddProductAttributeValueReq) (*pmsclient.AddProductAttributeValueResp, error) {
+	l := productattributevalueservicelogic.NewAddProductAttributeValueLogic(ctx, s.svcCtx)
+	return l.AddProductAttributeValue(in)
 }
 
-func (s *ProductAttributeValueServiceServer) ProductAttributeValueList(ctx context.Context, in *pmsclient.ProductAttributeValueListReq) (*pmsclient.ProductAttributeValueListResp, error) {
-	l := productattributevalueservicelogic.NewProductAttributeValueListLogic(ctx, s.svcCtx)
-	return l.ProductAttributeValueList(in)
+// 删除存储产品参数信息的表
+func (s *ProductAttributeValueServiceServer) DeleteProductAttributeValue(ctx context.Context, in *pmsclient.DeleteProductAttributeValueReq) (*pmsclient.DeleteProductAttributeValueResp, error) {
+	l := productattributevalueservicelogic.NewDeleteProductAttributeValueLogic(ctx, s.svcCtx)
+	return l.DeleteProductAttributeValue(in)
 }
 
-func (s *ProductAttributeValueServiceServer) ProductAttributeValueUpdate(ctx context.Context, in *pmsclient.ProductAttributeValueUpdateReq) (*pmsclient.ProductAttributeValueUpdateResp, error) {
-	l := productattributevalueservicelogic.NewProductAttributeValueUpdateLogic(ctx, s.svcCtx)
-	return l.ProductAttributeValueUpdate(in)
+// 更新存储产品参数信息的表
+func (s *ProductAttributeValueServiceServer) UpdateProductAttributeValue(ctx context.Context, in *pmsclient.UpdateProductAttributeValueReq) (*pmsclient.UpdateProductAttributeValueResp, error) {
+	l := productattributevalueservicelogic.NewUpdateProductAttributeValueLogic(ctx, s.svcCtx)
+	return l.UpdateProductAttributeValue(in)
 }
 
-func (s *ProductAttributeValueServiceServer) ProductAttributeValueDelete(ctx context.Context, in *pmsclient.ProductAttributeValueDeleteReq) (*pmsclient.ProductAttributeValueDeleteResp, error) {
-	l := productattributevalueservicelogic.NewProductAttributeValueDeleteLogic(ctx, s.svcCtx)
-	return l.ProductAttributeValueDelete(in)
+// 查询存储产品参数信息的表列表
+func (s *ProductAttributeValueServiceServer) QueryProductAttributeValueList(ctx context.Context, in *pmsclient.QueryProductAttributeValueListReq) (*pmsclient.QueryProductAttributeValueListResp, error) {
+	l := productattributevalueservicelogic.NewQueryProductAttributeValueListLogic(ctx, s.svcCtx)
+	return l.QueryProductAttributeValueList(in)
 }

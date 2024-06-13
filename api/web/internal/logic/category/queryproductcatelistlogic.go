@@ -30,7 +30,7 @@ func NewQueryProductCateListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // QueryProductCateList 查询商品分类
 func (l *QueryProductCateListLogic) QueryProductCateList() (*types.QueryProductCateListResp, error) {
-	categoryListResp, _ := l.svcCtx.ProductCategoryService.QueryProductCategoryList(l.ctx, &pmsclient.QueryProductCategoryListReq{})
+	categoryListResp, _ := l.svcCtx.ProductCategoryService.QueryProductCategoryTreeList(l.ctx, &pmsclient.QueryProductCategoryTreeListReq{})
 
 	var list []types.CategoryData
 

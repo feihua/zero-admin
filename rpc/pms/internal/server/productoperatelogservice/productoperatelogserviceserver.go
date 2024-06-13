@@ -22,22 +22,26 @@ func NewProductOperateLogServiceServer(svcCtx *svc.ServiceContext) *ProductOpera
 	}
 }
 
-func (s *ProductOperateLogServiceServer) ProductOperateLogAdd(ctx context.Context, in *pmsclient.ProductOperateLogAddReq) (*pmsclient.ProductOperateLogAddResp, error) {
-	l := productoperatelogservicelogic.NewProductOperateLogAddLogic(ctx, s.svcCtx)
-	return l.ProductOperateLogAdd(in)
+// 添加
+func (s *ProductOperateLogServiceServer) AddProductOperateLog(ctx context.Context, in *pmsclient.AddProductOperateLogReq) (*pmsclient.AddProductOperateLogResp, error) {
+	l := productoperatelogservicelogic.NewAddProductOperateLogLogic(ctx, s.svcCtx)
+	return l.AddProductOperateLog(in)
 }
 
-func (s *ProductOperateLogServiceServer) ProductOperateLogList(ctx context.Context, in *pmsclient.ProductOperateLogListReq) (*pmsclient.ProductOperateLogListResp, error) {
-	l := productoperatelogservicelogic.NewProductOperateLogListLogic(ctx, s.svcCtx)
-	return l.ProductOperateLogList(in)
+// 删除
+func (s *ProductOperateLogServiceServer) DeleteProductOperateLog(ctx context.Context, in *pmsclient.DeleteProductOperateLogReq) (*pmsclient.DeleteProductOperateLogResp, error) {
+	l := productoperatelogservicelogic.NewDeleteProductOperateLogLogic(ctx, s.svcCtx)
+	return l.DeleteProductOperateLog(in)
 }
 
-func (s *ProductOperateLogServiceServer) ProductOperateLogUpdate(ctx context.Context, in *pmsclient.ProductOperateLogUpdateReq) (*pmsclient.ProductOperateLogUpdateResp, error) {
-	l := productoperatelogservicelogic.NewProductOperateLogUpdateLogic(ctx, s.svcCtx)
-	return l.ProductOperateLogUpdate(in)
+// 查询详情
+func (s *ProductOperateLogServiceServer) QueryProductOperateLogDetail(ctx context.Context, in *pmsclient.QueryProductOperateLogDetailReq) (*pmsclient.QueryProductOperateLogDetailResp, error) {
+	l := productoperatelogservicelogic.NewQueryProductOperateLogDetailLogic(ctx, s.svcCtx)
+	return l.QueryProductOperateLogDetail(in)
 }
 
-func (s *ProductOperateLogServiceServer) ProductOperateLogDelete(ctx context.Context, in *pmsclient.ProductOperateLogDeleteReq) (*pmsclient.ProductOperateLogDeleteResp, error) {
-	l := productoperatelogservicelogic.NewProductOperateLogDeleteLogic(ctx, s.svcCtx)
-	return l.ProductOperateLogDelete(in)
+// 查询列表
+func (s *ProductOperateLogServiceServer) QueryProductOperateLogList(ctx context.Context, in *pmsclient.QueryProductOperateLogListReq) (*pmsclient.QueryProductOperateLogListResp, error) {
+	l := productoperatelogservicelogic.NewQueryProductOperateLogListLogic(ctx, s.svcCtx)
+	return l.QueryProductOperateLogList(in)
 }

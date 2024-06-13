@@ -38,7 +38,7 @@ func (l *InfoLogic) Info() (*types.InfoResp, error) {
 	member, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
 
 	// 获取用户优惠券
-	result, _ := l.svcCtx.CouponHistoryService.CouponCount(l.ctx, &smsclient.CouponCountReq{
+	result, _ := l.svcCtx.CouponHistoryService.QueryCouponCount(l.ctx, &smsclient.QueryCouponCountReq{
 		MemberId: memberId,
 	})
 

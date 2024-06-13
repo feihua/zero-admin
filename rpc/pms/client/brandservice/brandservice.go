@@ -13,211 +13,218 @@ import (
 )
 
 type (
-	AlbumAddReq                                = pmsclient.AlbumAddReq
-	AlbumAddResp                               = pmsclient.AlbumAddResp
-	AlbumDeleteReq                             = pmsclient.AlbumDeleteReq
-	AlbumDeleteResp                            = pmsclient.AlbumDeleteResp
-	AlbumListData                              = pmsclient.AlbumListData
-	AlbumListReq                               = pmsclient.AlbumListReq
-	AlbumListResp                              = pmsclient.AlbumListResp
-	AlbumPicAddReq                             = pmsclient.AlbumPicAddReq
-	AlbumPicAddResp                            = pmsclient.AlbumPicAddResp
-	AlbumPicDeleteReq                          = pmsclient.AlbumPicDeleteReq
-	AlbumPicDeleteResp                         = pmsclient.AlbumPicDeleteResp
-	AlbumPicListData                           = pmsclient.AlbumPicListData
-	AlbumPicListReq                            = pmsclient.AlbumPicListReq
-	AlbumPicListResp                           = pmsclient.AlbumPicListResp
-	AlbumPicUpdateReq                          = pmsclient.AlbumPicUpdateReq
-	AlbumPicUpdateResp                         = pmsclient.AlbumPicUpdateResp
-	AlbumUpdateReq                             = pmsclient.AlbumUpdateReq
-	AlbumUpdateResp                            = pmsclient.AlbumUpdateResp
-	BrandAddReq                                = pmsclient.BrandAddReq
-	BrandAddResp                               = pmsclient.BrandAddResp
-	BrandDeleteReq                             = pmsclient.BrandDeleteReq
-	BrandDeleteResp                            = pmsclient.BrandDeleteResp
-	BrandListByIdsReq                          = pmsclient.BrandListByIdsReq
-	BrandListData                              = pmsclient.BrandListData
-	BrandListReq                               = pmsclient.BrandListReq
-	BrandListResp                              = pmsclient.BrandListResp
-	BrandUpdateReq                             = pmsclient.BrandUpdateReq
-	BrandUpdateResp                            = pmsclient.BrandUpdateResp
-	CommentAddReq                              = pmsclient.CommentAddReq
-	CommentAddResp                             = pmsclient.CommentAddResp
-	CommentDeleteReq                           = pmsclient.CommentDeleteReq
-	CommentDeleteResp                          = pmsclient.CommentDeleteResp
-	CommentListData                            = pmsclient.CommentListData
-	CommentListReq                             = pmsclient.CommentListReq
-	CommentListResp                            = pmsclient.CommentListResp
-	CommentReplayAddReq                        = pmsclient.CommentReplayAddReq
-	CommentReplayAddResp                       = pmsclient.CommentReplayAddResp
-	CommentReplayDeleteReq                     = pmsclient.CommentReplayDeleteReq
-	CommentReplayDeleteResp                    = pmsclient.CommentReplayDeleteResp
-	CommentReplayListData                      = pmsclient.CommentReplayListData
-	CommentReplayListReq                       = pmsclient.CommentReplayListReq
-	CommentReplayListResp                      = pmsclient.CommentReplayListResp
-	CommentReplayUpdateReq                     = pmsclient.CommentReplayUpdateReq
-	CommentReplayUpdateResp                    = pmsclient.CommentReplayUpdateResp
-	CommentUpdateReq                           = pmsclient.CommentUpdateReq
-	CommentUpdateResp                          = pmsclient.CommentUpdateResp
-	FeightTemplateAddReq                       = pmsclient.FeightTemplateAddReq
-	FeightTemplateAddResp                      = pmsclient.FeightTemplateAddResp
-	FeightTemplateDeleteReq                    = pmsclient.FeightTemplateDeleteReq
-	FeightTemplateDeleteResp                   = pmsclient.FeightTemplateDeleteResp
-	FeightTemplateListData                     = pmsclient.FeightTemplateListData
-	FeightTemplateListReq                      = pmsclient.FeightTemplateListReq
-	FeightTemplateListResp                     = pmsclient.FeightTemplateListResp
-	FeightTemplateUpdateReq                    = pmsclient.FeightTemplateUpdateReq
-	FeightTemplateUpdateResp                   = pmsclient.FeightTemplateUpdateResp
-	LockSkuStockLockData                       = pmsclient.LockSkuStockLockData
-	LockSkuStockLockReq                        = pmsclient.LockSkuStockLockReq
-	LockSkuStockLockResp                       = pmsclient.LockSkuStockLockResp
-	MemberPriceAddReq                          = pmsclient.MemberPriceAddReq
-	MemberPriceAddResp                         = pmsclient.MemberPriceAddResp
-	MemberPriceDeleteReq                       = pmsclient.MemberPriceDeleteReq
-	MemberPriceDeleteResp                      = pmsclient.MemberPriceDeleteResp
-	MemberPriceList                            = pmsclient.MemberPriceList
-	MemberPriceListData                        = pmsclient.MemberPriceListData
-	MemberPriceListReq                         = pmsclient.MemberPriceListReq
-	MemberPriceListResp                        = pmsclient.MemberPriceListResp
-	MemberPriceUpdateReq                       = pmsclient.MemberPriceUpdateReq
-	MemberPriceUpdateResp                      = pmsclient.MemberPriceUpdateResp
-	ProductAddReq                              = pmsclient.ProductAddReq
-	ProductAddResp                             = pmsclient.ProductAddResp
-	ProductAttributeAddReq                     = pmsclient.ProductAttributeAddReq
-	ProductAttributeAddResp                    = pmsclient.ProductAttributeAddResp
-	ProductAttributeCategoryAddReq             = pmsclient.ProductAttributeCategoryAddReq
-	ProductAttributeCategoryAddResp            = pmsclient.ProductAttributeCategoryAddResp
-	ProductAttributeCategoryDeleteReq          = pmsclient.ProductAttributeCategoryDeleteReq
-	ProductAttributeCategoryDeleteResp         = pmsclient.ProductAttributeCategoryDeleteResp
-	ProductAttributeCategoryListData           = pmsclient.ProductAttributeCategoryListData
-	ProductAttributeCategoryListReq            = pmsclient.ProductAttributeCategoryListReq
-	ProductAttributeCategoryListResp           = pmsclient.ProductAttributeCategoryListResp
-	ProductAttributeCategoryUpdateReq          = pmsclient.ProductAttributeCategoryUpdateReq
-	ProductAttributeCategoryUpdateResp         = pmsclient.ProductAttributeCategoryUpdateResp
-	ProductAttributeDeleteReq                  = pmsclient.ProductAttributeDeleteReq
-	ProductAttributeDeleteResp                 = pmsclient.ProductAttributeDeleteResp
-	ProductAttributeListData                   = pmsclient.ProductAttributeListData
-	ProductAttributeListReq                    = pmsclient.ProductAttributeListReq
-	ProductAttributeListResp                   = pmsclient.ProductAttributeListResp
-	ProductAttributeUpdateReq                  = pmsclient.ProductAttributeUpdateReq
-	ProductAttributeUpdateResp                 = pmsclient.ProductAttributeUpdateResp
-	ProductAttributeValueAddReq                = pmsclient.ProductAttributeValueAddReq
-	ProductAttributeValueAddResp               = pmsclient.ProductAttributeValueAddResp
-	ProductAttributeValueDeleteReq             = pmsclient.ProductAttributeValueDeleteReq
-	ProductAttributeValueDeleteResp            = pmsclient.ProductAttributeValueDeleteResp
-	ProductAttributeValueList                  = pmsclient.ProductAttributeValueList
-	ProductAttributeValueListData              = pmsclient.ProductAttributeValueListData
-	ProductAttributeValueListReq               = pmsclient.ProductAttributeValueListReq
-	ProductAttributeValueListResp              = pmsclient.ProductAttributeValueListResp
-	ProductAttributeValueUpdateReq             = pmsclient.ProductAttributeValueUpdateReq
-	ProductAttributeValueUpdateResp            = pmsclient.ProductAttributeValueUpdateResp
-	ProductByIdsReq                            = pmsclient.ProductByIdsReq
-	ProductCategoryAddReq                      = pmsclient.ProductCategoryAddReq
-	ProductCategoryAddResp                     = pmsclient.ProductCategoryAddResp
-	ProductCategoryAttributeRelationAddReq     = pmsclient.ProductCategoryAttributeRelationAddReq
-	ProductCategoryAttributeRelationAddResp    = pmsclient.ProductCategoryAttributeRelationAddResp
-	ProductCategoryAttributeRelationDeleteReq  = pmsclient.ProductCategoryAttributeRelationDeleteReq
-	ProductCategoryAttributeRelationDeleteResp = pmsclient.ProductCategoryAttributeRelationDeleteResp
-	ProductCategoryAttributeRelationListData   = pmsclient.ProductCategoryAttributeRelationListData
-	ProductCategoryAttributeRelationListReq    = pmsclient.ProductCategoryAttributeRelationListReq
-	ProductCategoryAttributeRelationListResp   = pmsclient.ProductCategoryAttributeRelationListResp
-	ProductCategoryAttributeRelationUpdateReq  = pmsclient.ProductCategoryAttributeRelationUpdateReq
-	ProductCategoryAttributeRelationUpdateResp = pmsclient.ProductCategoryAttributeRelationUpdateResp
-	ProductCategoryDeleteReq                   = pmsclient.ProductCategoryDeleteReq
-	ProductCategoryDeleteResp                  = pmsclient.ProductCategoryDeleteResp
-	ProductCategoryListData                    = pmsclient.ProductCategoryListData
-	ProductCategoryListReq                     = pmsclient.ProductCategoryListReq
-	ProductCategoryListResp                    = pmsclient.ProductCategoryListResp
-	ProductCategoryUpdateReq                   = pmsclient.ProductCategoryUpdateReq
-	ProductCategoryUpdateResp                  = pmsclient.ProductCategoryUpdateResp
-	ProductDeleteReq                           = pmsclient.ProductDeleteReq
-	ProductDeleteResp                          = pmsclient.ProductDeleteResp
-	ProductDetailByIdReq                       = pmsclient.ProductDetailByIdReq
-	ProductDetailByIdResp                      = pmsclient.ProductDetailByIdResp
-	ProductFullReductionAddReq                 = pmsclient.ProductFullReductionAddReq
-	ProductFullReductionAddResp                = pmsclient.ProductFullReductionAddResp
-	ProductFullReductionDeleteReq              = pmsclient.ProductFullReductionDeleteReq
-	ProductFullReductionDeleteResp             = pmsclient.ProductFullReductionDeleteResp
-	ProductFullReductionList                   = pmsclient.ProductFullReductionList
-	ProductFullReductionListData               = pmsclient.ProductFullReductionListData
-	ProductFullReductionListReq                = pmsclient.ProductFullReductionListReq
-	ProductFullReductionListResp               = pmsclient.ProductFullReductionListResp
-	ProductFullReductionUpdateReq              = pmsclient.ProductFullReductionUpdateReq
-	ProductFullReductionUpdateResp             = pmsclient.ProductFullReductionUpdateResp
-	ProductLadderAddReq                        = pmsclient.ProductLadderAddReq
-	ProductLadderAddResp                       = pmsclient.ProductLadderAddResp
-	ProductLadderDeleteReq                     = pmsclient.ProductLadderDeleteReq
-	ProductLadderDeleteResp                    = pmsclient.ProductLadderDeleteResp
-	ProductLadderList                          = pmsclient.ProductLadderList
-	ProductLadderListData                      = pmsclient.ProductLadderListData
-	ProductLadderListReq                       = pmsclient.ProductLadderListReq
-	ProductLadderListResp                      = pmsclient.ProductLadderListResp
-	ProductLadderUpdateReq                     = pmsclient.ProductLadderUpdateReq
-	ProductLadderUpdateResp                    = pmsclient.ProductLadderUpdateResp
-	ProductListData                            = pmsclient.ProductListData
-	ProductListReq                             = pmsclient.ProductListReq
-	ProductListResp                            = pmsclient.ProductListResp
-	ProductOperateLogAddReq                    = pmsclient.ProductOperateLogAddReq
-	ProductOperateLogAddResp                   = pmsclient.ProductOperateLogAddResp
-	ProductOperateLogDeleteReq                 = pmsclient.ProductOperateLogDeleteReq
-	ProductOperateLogDeleteResp                = pmsclient.ProductOperateLogDeleteResp
-	ProductOperateLogListData                  = pmsclient.ProductOperateLogListData
-	ProductOperateLogListReq                   = pmsclient.ProductOperateLogListReq
-	ProductOperateLogListResp                  = pmsclient.ProductOperateLogListResp
-	ProductOperateLogUpdateReq                 = pmsclient.ProductOperateLogUpdateReq
-	ProductOperateLogUpdateResp                = pmsclient.ProductOperateLogUpdateResp
-	ProductUpdateReq                           = pmsclient.ProductUpdateReq
-	ProductUpdateResp                          = pmsclient.ProductUpdateResp
-	ProductVertifyRecordAddReq                 = pmsclient.ProductVertifyRecordAddReq
-	ProductVertifyRecordAddResp                = pmsclient.ProductVertifyRecordAddResp
-	ProductVertifyRecordDeleteReq              = pmsclient.ProductVertifyRecordDeleteReq
-	ProductVertifyRecordDeleteResp             = pmsclient.ProductVertifyRecordDeleteResp
-	ProductVertifyRecordListData               = pmsclient.ProductVertifyRecordListData
-	ProductVertifyRecordListReq                = pmsclient.ProductVertifyRecordListReq
-	ProductVertifyRecordListResp               = pmsclient.ProductVertifyRecordListResp
-	ProductVertifyRecordUpdateReq              = pmsclient.ProductVertifyRecordUpdateReq
-	ProductVertifyRecordUpdateResp             = pmsclient.ProductVertifyRecordUpdateResp
-	QueryByproductCategoryIdData               = pmsclient.QueryByproductCategoryIdData
-	QueryByproductCategoryIdReq                = pmsclient.QueryByproductCategoryIdReq
-	QueryByproductCategoryIdResp               = pmsclient.QueryByproductCategoryIdResp
-	QueryProductCategoryListData               = pmsclient.QueryProductCategoryListData
-	QueryProductCategoryListReq                = pmsclient.QueryProductCategoryListReq
-	QueryProductCategoryListResp               = pmsclient.QueryProductCategoryListResp
-	QuerySkuStockByProductSkuIdReq             = pmsclient.QuerySkuStockByProductSkuIdReq
-	ReleaseSkuStockLockData                    = pmsclient.ReleaseSkuStockLockData
-	ReleaseSkuStockLockReq                     = pmsclient.ReleaseSkuStockLockReq
-	ReleaseSkuStockLockResp                    = pmsclient.ReleaseSkuStockLockResp
-	SkuStockAddReq                             = pmsclient.SkuStockAddReq
-	SkuStockAddResp                            = pmsclient.SkuStockAddResp
-	SkuStockDeleteReq                          = pmsclient.SkuStockDeleteReq
-	SkuStockDeleteResp                         = pmsclient.SkuStockDeleteResp
-	SkuStockList                               = pmsclient.SkuStockList
-	SkuStockListData                           = pmsclient.SkuStockListData
-	SkuStockListReq                            = pmsclient.SkuStockListReq
-	SkuStockListResp                           = pmsclient.SkuStockListResp
-	SkuStockUpdateData                         = pmsclient.SkuStockUpdateData
-	SkuStockUpdateReq                          = pmsclient.SkuStockUpdateReq
-	SkuStockUpdateResp                         = pmsclient.SkuStockUpdateResp
-	UpdateBrandFactoryStatusReq                = pmsclient.UpdateBrandFactoryStatusReq
-	UpdateBrandFactoryStatusResp               = pmsclient.UpdateBrandFactoryStatusResp
-	UpdateBrandRecommendStatusReq              = pmsclient.UpdateBrandRecommendStatusReq
-	UpdateBrandRecommendStatusResp             = pmsclient.UpdateBrandRecommendStatusResp
-	UpdateBrandShowStatusReq                   = pmsclient.UpdateBrandShowStatusReq
-	UpdateBrandShowStatusResp                  = pmsclient.UpdateBrandShowStatusResp
-	UpdateProductCategoryStatusReq             = pmsclient.UpdateProductCategoryStatusReq
-	UpdateProductStatusReq                     = pmsclient.UpdateProductStatusReq
-	UpdateProductStatusResp                    = pmsclient.UpdateProductStatusResp
+	AddBrandReq                                   = pmsclient.AddBrandReq
+	AddBrandResp                                  = pmsclient.AddBrandResp
+	AddCommentReplayReq                           = pmsclient.AddCommentReplayReq
+	AddCommentReplayResp                          = pmsclient.AddCommentReplayResp
+	AddCommentReq                                 = pmsclient.AddCommentReq
+	AddCommentResp                                = pmsclient.AddCommentResp
+	AddFeightTemplateReq                          = pmsclient.AddFeightTemplateReq
+	AddFeightTemplateResp                         = pmsclient.AddFeightTemplateResp
+	AddProductAttributeCategoryReq                = pmsclient.AddProductAttributeCategoryReq
+	AddProductAttributeCategoryResp               = pmsclient.AddProductAttributeCategoryResp
+	AddProductAttributeReq                        = pmsclient.AddProductAttributeReq
+	AddProductAttributeResp                       = pmsclient.AddProductAttributeResp
+	AddProductAttributeValueReq                   = pmsclient.AddProductAttributeValueReq
+	AddProductAttributeValueResp                  = pmsclient.AddProductAttributeValueResp
+	AddProductCategoryAttributeRelationReq        = pmsclient.AddProductCategoryAttributeRelationReq
+	AddProductCategoryAttributeRelationResp       = pmsclient.AddProductCategoryAttributeRelationResp
+	AddProductCategoryReq                         = pmsclient.AddProductCategoryReq
+	AddProductCategoryResp                        = pmsclient.AddProductCategoryResp
+	AddProductCollectReq                          = pmsclient.AddProductCollectReq
+	AddProductCollectResp                         = pmsclient.AddProductCollectResp
+	AddProductFullReductionReq                    = pmsclient.AddProductFullReductionReq
+	AddProductFullReductionResp                   = pmsclient.AddProductFullReductionResp
+	AddProductLadderReq                           = pmsclient.AddProductLadderReq
+	AddProductLadderResp                          = pmsclient.AddProductLadderResp
+	AddProductOperateLogReq                       = pmsclient.AddProductOperateLogReq
+	AddProductOperateLogResp                      = pmsclient.AddProductOperateLogResp
+	AddProductReq                                 = pmsclient.AddProductReq
+	AddProductResp                                = pmsclient.AddProductResp
+	AddProductVertifyRecordReq                    = pmsclient.AddProductVertifyRecordReq
+	AddProductVertifyRecordResp                   = pmsclient.AddProductVertifyRecordResp
+	AddSkuStockReq                                = pmsclient.AddSkuStockReq
+	AddSkuStockResp                               = pmsclient.AddSkuStockResp
+	BrandData                                     = pmsclient.BrandData
+	BrandListData                                 = pmsclient.BrandListData
+	CommentListData                               = pmsclient.CommentListData
+	CommentReplayListData                         = pmsclient.CommentReplayListData
+	DeleteBrandReq                                = pmsclient.DeleteBrandReq
+	DeleteBrandResp                               = pmsclient.DeleteBrandResp
+	DeleteCommentReplayReq                        = pmsclient.DeleteCommentReplayReq
+	DeleteCommentReplayResp                       = pmsclient.DeleteCommentReplayResp
+	DeleteCommentReq                              = pmsclient.DeleteCommentReq
+	DeleteCommentResp                             = pmsclient.DeleteCommentResp
+	DeleteFeightTemplateReq                       = pmsclient.DeleteFeightTemplateReq
+	DeleteFeightTemplateResp                      = pmsclient.DeleteFeightTemplateResp
+	DeleteProductAttributeCategoryReq             = pmsclient.DeleteProductAttributeCategoryReq
+	DeleteProductAttributeCategoryResp            = pmsclient.DeleteProductAttributeCategoryResp
+	DeleteProductAttributeReq                     = pmsclient.DeleteProductAttributeReq
+	DeleteProductAttributeResp                    = pmsclient.DeleteProductAttributeResp
+	DeleteProductAttributeValueReq                = pmsclient.DeleteProductAttributeValueReq
+	DeleteProductAttributeValueResp               = pmsclient.DeleteProductAttributeValueResp
+	DeleteProductCategoryReq                      = pmsclient.DeleteProductCategoryReq
+	DeleteProductCategoryResp                     = pmsclient.DeleteProductCategoryResp
+	DeleteProductCollectReq                       = pmsclient.DeleteProductCollectReq
+	DeleteProductCollectResp                      = pmsclient.DeleteProductCollectResp
+	DeleteProductFullReductionReq                 = pmsclient.DeleteProductFullReductionReq
+	DeleteProductFullReductionResp                = pmsclient.DeleteProductFullReductionResp
+	DeleteProductLadderReq                        = pmsclient.DeleteProductLadderReq
+	DeleteProductLadderResp                       = pmsclient.DeleteProductLadderResp
+	DeleteProductOperateLogReq                    = pmsclient.DeleteProductOperateLogReq
+	DeleteProductOperateLogResp                   = pmsclient.DeleteProductOperateLogResp
+	DeleteProductReq                              = pmsclient.DeleteProductReq
+	DeleteProductResp                             = pmsclient.DeleteProductResp
+	DeleteProductVertifyRecordReq                 = pmsclient.DeleteProductVertifyRecordReq
+	DeleteProductVertifyRecordResp                = pmsclient.DeleteProductVertifyRecordResp
+	DeleteSkuStockReq                             = pmsclient.DeleteSkuStockReq
+	DeleteSkuStockResp                            = pmsclient.DeleteSkuStockResp
+	FeightTemplateListData                        = pmsclient.FeightTemplateListData
+	LockSkuStockLockData                          = pmsclient.LockSkuStockLockData
+	LockSkuStockLockReq                           = pmsclient.LockSkuStockLockReq
+	LockSkuStockLockResp                          = pmsclient.LockSkuStockLockResp
+	MemberPriceList                               = pmsclient.MemberPriceList
+	MemberPriceListData                           = pmsclient.MemberPriceListData
+	ProductAttributeCategoryListData              = pmsclient.ProductAttributeCategoryListData
+	ProductAttributeData                          = pmsclient.ProductAttributeData
+	ProductAttributeDataList                      = pmsclient.ProductAttributeDataList
+	ProductAttributeListData                      = pmsclient.ProductAttributeListData
+	ProductAttributeValueData                     = pmsclient.ProductAttributeValueData
+	ProductAttributeValueList                     = pmsclient.ProductAttributeValueList
+	ProductAttributeValueListData                 = pmsclient.ProductAttributeValueListData
+	ProductCategoryAttributeRelationListData      = pmsclient.ProductCategoryAttributeRelationListData
+	ProductCategoryListData                       = pmsclient.ProductCategoryListData
+	ProductCollectListData                        = pmsclient.ProductCollectListData
+	ProductFullReductionData                      = pmsclient.ProductFullReductionData
+	ProductFullReductionList                      = pmsclient.ProductFullReductionList
+	ProductFullReductionListData                  = pmsclient.ProductFullReductionListData
+	ProductLadderData                             = pmsclient.ProductLadderData
+	ProductLadderList                             = pmsclient.ProductLadderList
+	ProductLadderListData                         = pmsclient.ProductLadderListData
+	ProductListData                               = pmsclient.ProductListData
+	ProductOperateLogListData                     = pmsclient.ProductOperateLogListData
+	ProductVertifyRecordListData                  = pmsclient.ProductVertifyRecordListData
+	QueryBrandDetailReq                           = pmsclient.QueryBrandDetailReq
+	QueryBrandDetailResp                          = pmsclient.QueryBrandDetailResp
+	QueryBrandListByIdsReq                        = pmsclient.QueryBrandListByIdsReq
+	QueryBrandListReq                             = pmsclient.QueryBrandListReq
+	QueryBrandListResp                            = pmsclient.QueryBrandListResp
+	QueryByproductCategoryIdData                  = pmsclient.QueryByproductCategoryIdData
+	QueryByproductCategoryIdReq                   = pmsclient.QueryByproductCategoryIdReq
+	QueryByproductCategoryIdResp                  = pmsclient.QueryByproductCategoryIdResp
+	QueryCommentDetailReq                         = pmsclient.QueryCommentDetailReq
+	QueryCommentDetailResp                        = pmsclient.QueryCommentDetailResp
+	QueryCommentListReq                           = pmsclient.QueryCommentListReq
+	QueryCommentListResp                          = pmsclient.QueryCommentListResp
+	QueryCommentReplayDetailReq                   = pmsclient.QueryCommentReplayDetailReq
+	QueryCommentReplayDetailResp                  = pmsclient.QueryCommentReplayDetailResp
+	QueryCommentReplayListReq                     = pmsclient.QueryCommentReplayListReq
+	QueryCommentReplayListResp                    = pmsclient.QueryCommentReplayListResp
+	QueryFeightTemplateDetailReq                  = pmsclient.QueryFeightTemplateDetailReq
+	QueryFeightTemplateDetailResp                 = pmsclient.QueryFeightTemplateDetailResp
+	QueryFeightTemplateListReq                    = pmsclient.QueryFeightTemplateListReq
+	QueryFeightTemplateListResp                   = pmsclient.QueryFeightTemplateListResp
+	QueryProductAttributeCategoryListReq          = pmsclient.QueryProductAttributeCategoryListReq
+	QueryProductAttributeCategoryListResp         = pmsclient.QueryProductAttributeCategoryListResp
+	QueryProductAttributeListReq                  = pmsclient.QueryProductAttributeListReq
+	QueryProductAttributeListResp                 = pmsclient.QueryProductAttributeListResp
+	QueryProductAttributeValueListReq             = pmsclient.QueryProductAttributeValueListReq
+	QueryProductAttributeValueListResp            = pmsclient.QueryProductAttributeValueListResp
+	QueryProductByIdsReq                          = pmsclient.QueryProductByIdsReq
+	QueryProductCategoryAttributeRelationListReq  = pmsclient.QueryProductCategoryAttributeRelationListReq
+	QueryProductCategoryAttributeRelationListResp = pmsclient.QueryProductCategoryAttributeRelationListResp
+	QueryProductCategoryDetailReq                 = pmsclient.QueryProductCategoryDetailReq
+	QueryProductCategoryDetailResp                = pmsclient.QueryProductCategoryDetailResp
+	QueryProductCategoryListReq                   = pmsclient.QueryProductCategoryListReq
+	QueryProductCategoryListResp                  = pmsclient.QueryProductCategoryListResp
+	QueryProductCategoryListTreeData              = pmsclient.QueryProductCategoryListTreeData
+	QueryProductCategoryListTreeResp              = pmsclient.QueryProductCategoryListTreeResp
+	QueryProductCategoryTreeListReq               = pmsclient.QueryProductCategoryTreeListReq
+	QueryProductCollectDetailReq                  = pmsclient.QueryProductCollectDetailReq
+	QueryProductCollectDetailResp                 = pmsclient.QueryProductCollectDetailResp
+	QueryProductCollectListReq                    = pmsclient.QueryProductCollectListReq
+	QueryProductCollectListResp                   = pmsclient.QueryProductCollectListResp
+	QueryProductDetailByIdReq                     = pmsclient.QueryProductDetailByIdReq
+	QueryProductDetailByIdResp                    = pmsclient.QueryProductDetailByIdResp
+	QueryProductFullReductionListReq              = pmsclient.QueryProductFullReductionListReq
+	QueryProductFullReductionListResp             = pmsclient.QueryProductFullReductionListResp
+	QueryProductLadderDetailReq                   = pmsclient.QueryProductLadderDetailReq
+	QueryProductLadderDetailResp                  = pmsclient.QueryProductLadderDetailResp
+	QueryProductLadderListReq                     = pmsclient.QueryProductLadderListReq
+	QueryProductLadderListResp                    = pmsclient.QueryProductLadderListResp
+	QueryProductListReq                           = pmsclient.QueryProductListReq
+	QueryProductListResp                          = pmsclient.QueryProductListResp
+	QueryProductOperateLogDetailReq               = pmsclient.QueryProductOperateLogDetailReq
+	QueryProductOperateLogDetailResp              = pmsclient.QueryProductOperateLogDetailResp
+	QueryProductOperateLogListReq                 = pmsclient.QueryProductOperateLogListReq
+	QueryProductOperateLogListResp                = pmsclient.QueryProductOperateLogListResp
+	QueryProductVertifyRecordDetailReq            = pmsclient.QueryProductVertifyRecordDetailReq
+	QueryProductVertifyRecordDetailResp           = pmsclient.QueryProductVertifyRecordDetailResp
+	QueryProductVertifyRecordListReq              = pmsclient.QueryProductVertifyRecordListReq
+	QueryProductVertifyRecordListResp             = pmsclient.QueryProductVertifyRecordListResp
+	QuerySkuStockByProductSkuIdReq                = pmsclient.QuerySkuStockByProductSkuIdReq
+	QuerySkuStockDetailReq                        = pmsclient.QuerySkuStockDetailReq
+	QuerySkuStockDetailResp                       = pmsclient.QuerySkuStockDetailResp
+	QuerySkuStockListReq                          = pmsclient.QuerySkuStockListReq
+	QuerySkuStockListResp                         = pmsclient.QuerySkuStockListResp
+	ReleaseSkuStockLockData                       = pmsclient.ReleaseSkuStockLockData
+	ReleaseSkuStockLockReq                        = pmsclient.ReleaseSkuStockLockReq
+	ReleaseSkuStockLockResp                       = pmsclient.ReleaseSkuStockLockResp
+	SkuStockData                                  = pmsclient.SkuStockData
+	SkuStockList                                  = pmsclient.SkuStockList
+	SkuStockListData                              = pmsclient.SkuStockListData
+	UpdateBrandFactoryStatusReq                   = pmsclient.UpdateBrandFactoryStatusReq
+	UpdateBrandRecommendStatusReq                 = pmsclient.UpdateBrandRecommendStatusReq
+	UpdateBrandReq                                = pmsclient.UpdateBrandReq
+	UpdateBrandResp                               = pmsclient.UpdateBrandResp
+	UpdateBrandShowStatusReq                      = pmsclient.UpdateBrandShowStatusReq
+	UpdateBrandStatusResp                         = pmsclient.UpdateBrandStatusResp
+	UpdateCommentReplayReq                        = pmsclient.UpdateCommentReplayReq
+	UpdateCommentReplayResp                       = pmsclient.UpdateCommentReplayResp
+	UpdateCommentReq                              = pmsclient.UpdateCommentReq
+	UpdateCommentResp                             = pmsclient.UpdateCommentResp
+	UpdateFeightTemplateReq                       = pmsclient.UpdateFeightTemplateReq
+	UpdateFeightTemplateResp                      = pmsclient.UpdateFeightTemplateResp
+	UpdateProductAttributeCategoryReq             = pmsclient.UpdateProductAttributeCategoryReq
+	UpdateProductAttributeCategoryResp            = pmsclient.UpdateProductAttributeCategoryResp
+	UpdateProductAttributeValueReq                = pmsclient.UpdateProductAttributeValueReq
+	UpdateProductAttributeValueResp               = pmsclient.UpdateProductAttributeValueResp
+	UpdateProductCategoryReq                      = pmsclient.UpdateProductCategoryReq
+	UpdateProductCategoryResp                     = pmsclient.UpdateProductCategoryResp
+	UpdateProductCategoryStatusReq                = pmsclient.UpdateProductCategoryStatusReq
+	UpdateProductCategoryStatusResp               = pmsclient.UpdateProductCategoryStatusResp
+	UpdateProductLadderReq                        = pmsclient.UpdateProductLadderReq
+	UpdateProductLadderResp                       = pmsclient.UpdateProductLadderResp
+	UpdateProductReq                              = pmsclient.UpdateProductReq
+	UpdateProductResp                             = pmsclient.UpdateProductResp
+	UpdateProductStatusReq                        = pmsclient.UpdateProductStatusReq
+	UpdateProductStatusResp                       = pmsclient.UpdateProductStatusResp
+	UpdateProductVertifyRecordReq                 = pmsclient.UpdateProductVertifyRecordReq
+	UpdateProductVertifyRecordResp                = pmsclient.UpdateProductVertifyRecordResp
+	UpdateProductVertifyRecordStatusReq           = pmsclient.UpdateProductVertifyRecordStatusReq
+	UpdateProductVertifyRecordStatusResp          = pmsclient.UpdateProductVertifyRecordStatusResp
+	UpdateSkuStockData                            = pmsclient.UpdateSkuStockData
+	UpdateSkuStockReq                             = pmsclient.UpdateSkuStockReq
+	UpdateSkuStockResp                            = pmsclient.UpdateSkuStockResp
 
 	BrandService interface {
-		BrandAdd(ctx context.Context, in *BrandAddReq, opts ...grpc.CallOption) (*BrandAddResp, error)
-		BrandList(ctx context.Context, in *BrandListReq, opts ...grpc.CallOption) (*BrandListResp, error)
-		BrandListByIds(ctx context.Context, in *BrandListByIdsReq, opts ...grpc.CallOption) (*BrandListResp, error)
-		BrandUpdate(ctx context.Context, in *BrandUpdateReq, opts ...grpc.CallOption) (*BrandUpdateResp, error)
-		UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandShowStatusResp, error)
-		UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandFactoryStatusResp, error)
-		BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error)
+		// 添加品牌表
+		AddBrand(ctx context.Context, in *AddBrandReq, opts ...grpc.CallOption) (*AddBrandResp, error)
+		// 删除品牌表
+		DeleteBrand(ctx context.Context, in *DeleteBrandReq, opts ...grpc.CallOption) (*DeleteBrandResp, error)
+		// 更新品牌表
+		UpdateBrand(ctx context.Context, in *UpdateBrandReq, opts ...grpc.CallOption) (*UpdateBrandResp, error)
+		// 查询品牌表详情
+		QueryBrandDetail(ctx context.Context, in *QueryBrandDetailReq, opts ...grpc.CallOption) (*QueryBrandDetailResp, error)
+		// 查询品牌表列表
+		QueryBrandList(ctx context.Context, in *QueryBrandListReq, opts ...grpc.CallOption) (*QueryBrandListResp, error)
+		QueryBrandListByIds(ctx context.Context, in *QueryBrandListByIdsReq, opts ...grpc.CallOption) (*QueryBrandListResp, error)
+		// 更新品牌的显示状态
+		UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error)
+		// 更新品牌是否为品牌制造商
+		UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error)
 		// 更新品牌的推荐状态
-		UpdateBrandRecommendStatus(ctx context.Context, in *UpdateBrandRecommendStatusReq, opts ...grpc.CallOption) (*UpdateBrandRecommendStatusResp, error)
+		UpdateBrandRecommendStatus(ctx context.Context, in *UpdateBrandRecommendStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error)
 	}
 
 	defaultBrandService struct {
@@ -231,43 +238,55 @@ func NewBrandService(cli zrpc.Client) BrandService {
 	}
 }
 
-func (m *defaultBrandService) BrandAdd(ctx context.Context, in *BrandAddReq, opts ...grpc.CallOption) (*BrandAddResp, error) {
+// 添加品牌表
+func (m *defaultBrandService) AddBrand(ctx context.Context, in *AddBrandReq, opts ...grpc.CallOption) (*AddBrandResp, error) {
 	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
-	return client.BrandAdd(ctx, in, opts...)
+	return client.AddBrand(ctx, in, opts...)
 }
 
-func (m *defaultBrandService) BrandList(ctx context.Context, in *BrandListReq, opts ...grpc.CallOption) (*BrandListResp, error) {
+// 删除品牌表
+func (m *defaultBrandService) DeleteBrand(ctx context.Context, in *DeleteBrandReq, opts ...grpc.CallOption) (*DeleteBrandResp, error) {
 	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
-	return client.BrandList(ctx, in, opts...)
+	return client.DeleteBrand(ctx, in, opts...)
 }
 
-func (m *defaultBrandService) BrandListByIds(ctx context.Context, in *BrandListByIdsReq, opts ...grpc.CallOption) (*BrandListResp, error) {
+// 更新品牌表
+func (m *defaultBrandService) UpdateBrand(ctx context.Context, in *UpdateBrandReq, opts ...grpc.CallOption) (*UpdateBrandResp, error) {
 	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
-	return client.BrandListByIds(ctx, in, opts...)
+	return client.UpdateBrand(ctx, in, opts...)
 }
 
-func (m *defaultBrandService) BrandUpdate(ctx context.Context, in *BrandUpdateReq, opts ...grpc.CallOption) (*BrandUpdateResp, error) {
+// 查询品牌表详情
+func (m *defaultBrandService) QueryBrandDetail(ctx context.Context, in *QueryBrandDetailReq, opts ...grpc.CallOption) (*QueryBrandDetailResp, error) {
 	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
-	return client.BrandUpdate(ctx, in, opts...)
+	return client.QueryBrandDetail(ctx, in, opts...)
 }
 
-func (m *defaultBrandService) UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandShowStatusResp, error) {
+// 查询品牌表列表
+func (m *defaultBrandService) QueryBrandList(ctx context.Context, in *QueryBrandListReq, opts ...grpc.CallOption) (*QueryBrandListResp, error) {
+	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
+	return client.QueryBrandList(ctx, in, opts...)
+}
+
+func (m *defaultBrandService) QueryBrandListByIds(ctx context.Context, in *QueryBrandListByIdsReq, opts ...grpc.CallOption) (*QueryBrandListResp, error) {
+	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
+	return client.QueryBrandListByIds(ctx, in, opts...)
+}
+
+// 更新品牌的显示状态
+func (m *defaultBrandService) UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error) {
 	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
 	return client.UpdateBrandShowStatus(ctx, in, opts...)
 }
 
-func (m *defaultBrandService) UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandFactoryStatusResp, error) {
+// 更新品牌是否为品牌制造商
+func (m *defaultBrandService) UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error) {
 	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
 	return client.UpdateBrandFactoryStatus(ctx, in, opts...)
 }
 
-func (m *defaultBrandService) BrandDelete(ctx context.Context, in *BrandDeleteReq, opts ...grpc.CallOption) (*BrandDeleteResp, error) {
-	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
-	return client.BrandDelete(ctx, in, opts...)
-}
-
 // 更新品牌的推荐状态
-func (m *defaultBrandService) UpdateBrandRecommendStatus(ctx context.Context, in *UpdateBrandRecommendStatusReq, opts ...grpc.CallOption) (*UpdateBrandRecommendStatusResp, error) {
+func (m *defaultBrandService) UpdateBrandRecommendStatus(ctx context.Context, in *UpdateBrandRecommendStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error) {
 	client := pmsclient.NewBrandServiceClient(m.cli.Conn())
 	return client.UpdateBrandRecommendStatus(ctx, in, opts...)
 }

@@ -4,7 +4,24 @@ package smsclient;
 
 option go_package = "./smsclient";
 
-message CouponAddOrUpdateReq {
+
+message CouponProductCategoryRelationData{
+  int64  Id = 1;
+  int64  CouponId = 2;
+  int64  ProductCategoryId = 3;
+  string  ProductCategoryName = 4;
+  string  ParentCategoryName = 5;
+
+}
+message CouponProductRelationData{
+  int64    Id = 1;
+  int64    CouponId = 2;
+  int64    ProductId = 3;
+  string  ProductName = 4;
+  string  ProductSn = 5;
+
+}
+message AddOrUpdateCouponReq {
   int64 Id = 1; //
   int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
   string Name = 3; //名称
@@ -22,24 +39,24 @@ message CouponAddOrUpdateReq {
   int32 ReceiveCount = 15; //领取数量
   string EnableTime = 16; //可以领取的日期
   string Code = 17; //优惠码
-  repeated CouponProductRelationListData CouponProductRelationList=18;//优惠券绑定的商品
-  repeated CouponProductCategoryRelationListData CouponProductCategoryRelationList=19;//优惠券绑定的商品分类
+  repeated CouponProductRelationData CouponProductRelationList = 18;//优惠券绑定的商品
+  repeated CouponProductCategoryRelationData CouponProductCategoryRelationList = 19;//优惠券绑定的商品分类
 
 }
 
-message CouponAddOrUpdateResp {
+message AddOrUpdateCouponResp {
   string pong = 1;
 }
 
-message CouponDeleteReq {
+message DeleteCouponReq {
   repeated int64 ids = 1;
 }
 
-message CouponDeleteResp {
+message DeleteCouponResp {
   string pong = 1;
 }
 
-message CouponListReq {
+message QueryCouponListReq {
   int64 current = 1;
   int64 pageSize = 2;
   int32 Type = 3; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
@@ -51,7 +68,7 @@ message CouponListReq {
 
 }
 
-message CouponListData {
+message QueryCouponListData {
   int64 Id = 1; //
   int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
   string Name = 3; //名称
@@ -73,16 +90,16 @@ message CouponListData {
 
 }
 
-message CouponListResp {
+message QueryCouponListResp {
   int64 total = 1;
-  repeated  CouponListData list = 2;
+  repeated  QueryCouponListData list = 2;
 }
 
-message CouponFindByIdReq {
+message QueryCouponFindByIdReq {
   int64 CouponId = 1;
 }
 
-message CouponFindByIdResp {
+message QueryCouponFindByIdResp {
   int64 Id = 1; //
   int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
   string Name = 3; //名称
@@ -101,17 +118,17 @@ message CouponFindByIdResp {
   string EnableTime = 16; //可以领取的日期
   string Code = 17; //优惠码
   int32 MemberLevel = 18; //可领取的会员类型：0->无限时
-  repeated CouponProductRelationListData CouponProductRelationList=19;//优惠券绑定的商品
-  repeated CouponProductCategoryRelationListData CouponProductCategoryRelationList=20;//优惠券绑定的商品分类
+  repeated CouponProductRelationData CouponProductRelationList = 19;//优惠券绑定的商品
+  repeated CouponProductCategoryRelationData CouponProductCategoryRelationList = 20;//优惠券绑定的商品分类
 }
 
-message CouponFindByIdsReq {
+message QueryCouponFindByIdsReq {
   repeated int64 CouponIds = 1;
 }
 
-message CouponFindByIdsResp {
+message QueryCouponFindByIdsResp {
   int64 total = 1;
-  repeated  CouponListData list = 2;
+  repeated  QueryCouponListData list = 2;
 }
 
 message CouponFindByProductIdAndProductCategoryIdReq {
@@ -120,102 +137,142 @@ message CouponFindByProductIdAndProductCategoryIdReq {
 }
 message CouponFindByProductIdAndProductCategoryIdResp {
   int64 total = 1;
-  repeated  CouponListData list = 2;
+  repeated  QueryCouponListData list = 2;
 }
 
 
 service CouponService {
 
   //添加优惠券
-  rpc CouponAdd(CouponAddOrUpdateReq) returns(CouponAddOrUpdateResp);
+  rpc AddCoupon(AddOrUpdateCouponReq) returns(AddOrUpdateCouponResp);
   //查询优惠券
-  rpc CouponList(CouponListReq) returns(CouponListResp);
+  rpc QueryCouponList(QueryCouponListReq) returns(QueryCouponListResp);
   //更新优惠券
-  rpc CouponUpdate(CouponAddOrUpdateReq) returns(CouponAddOrUpdateResp);
+  rpc UpdateCoupon(AddOrUpdateCouponReq) returns(AddOrUpdateCouponResp);
   //删除优惠券
-  rpc CouponDelete(CouponDeleteReq) returns(CouponDeleteResp);
+  rpc DeleteCoupon(DeleteCouponReq) returns(DeleteCouponResp);
   //根据优惠券id查询优惠券
-  rpc CouponFindById(CouponFindByIdReq) returns(CouponFindByIdResp);
+  rpc QueryCouponFindById(QueryCouponFindByIdReq) returns(QueryCouponFindByIdResp);
   //根据优惠券ids查询优惠券
-  rpc CouponFindByIds(CouponFindByIdsReq) returns(CouponFindByIdsResp);
+  rpc QueryCouponFindByIds(QueryCouponFindByIdsReq) returns(QueryCouponFindByIdsResp);
 
   //根据商品Id和分类id查询可用的优惠券(app)
-  rpc CouponFindByProductIdAndProductCategoryId(CouponFindByProductIdAndProductCategoryIdReq) returns(CouponFindByProductIdAndProductCategoryIdResp);
+  rpc QueryCouponFindByProductIdAndProductCategoryId(CouponFindByProductIdAndProductCategoryIdReq) returns(CouponFindByProductIdAndProductCategoryIdResp);
 
 
 }
 
-message CouponHistoryAddReq {
-  int64      CouponId = 1;
-  int64      MemberId = 2;
-  string      CouponCode = 3;
-  string      MemberNickname = 4;
-  int32      GetType = 5;
-  int32      UseStatus = 7;
+// 添加优惠券使用、领取历史表
+message AddCouponHistoryReq {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  int32 get_type = 3; //获取类型：0->后台赠送；1->主动获取
+  int64 member_id = 4; //会员id
+  string member_nickname = 5; //领取人昵称
+  int32 use_status = 6; //使用状态：0->未使用；1->已使用；2->已过期
+
 }
 
-message CouponHistoryAddResp {
+message AddCouponHistoryResp {
   string pong = 1;
 }
 
-message CouponHistoryListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  int64      CouponId = 3;
-  int64      MemberId = 4;
-  int32      UseStatus = 5;
-  string      OrderSn = 6;
+// 删除优惠券使用、领取历史表
+message DeleteCouponHistoryReq {
+  repeated int64 ids = 1;
 }
 
-message CouponHistoryListData{
-  int64      Id = 1;
-  int64      CouponId = 2;
-  int64      MemberId = 3;
-  string      CouponCode = 4;
-  string      MemberNickname = 5;
-  int32      GetType = 6;
-  string  CreateTime = 7;
-  int32      UseStatus = 8;
-  string  UseTime = 9;
-  int64      OrderId = 10;
-  string      OrderSn = 11;
+message DeleteCouponHistoryResp {
+  string pong = 1;
 }
 
-message CouponHistoryListResp {
+// 更新优惠券使用、领取历史表
+message UpdateCouponHistoryReq {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  string create_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_nickname = 7; //领取人昵称
+  int64 order_id = 8; //订单编号
+  string order_sn = 9; //订单号码
+  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 11; //使用时间
+}
+
+message UpdateCouponHistoryResp {
+  string pong = 1;
+}
+
+// 更新优惠券使用、领取历史表状态
+message UpdateCouponHistoryStatusReq {
+  int64 coupon_id = 1; //优惠券id
+  int64 member_id = 2; //会员id
+  int32 use_status = 3; //使用状态：0->未使用；1->已使用；2->已过期
+
+
+}
+
+message UpdateCouponHistoryStatusResp {
+  string pong = 1;
+}
+
+// 查询优惠券使用、领取历史表详情
+message QueryCouponHistoryDetailReq {
+    int64 id = 1;
+}
+
+message QueryCouponHistoryDetailResp {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  string create_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_nickname = 7; //领取人昵称
+  int64 order_id = 8; //订单编号
+  string order_sn = 9; //订单号码
+  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 11; //使用时间
+
+}
+
+// 分页查询优惠券使用、领取历史表列表
+message QueryCouponHistoryListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 coupon_id = 3; //优惠券id
+  int64 member_id = 4; //会员id
+  string order_sn = 5; //订单号码
+  int32 use_status = 6; //使用状态：0->未使用；1->已使用；2->已过期
+
+}
+
+message CouponHistoryListData {
+  string coupon_code = 1; //优惠码
+  int64 coupon_id = 2; //优惠券id
+  string create_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+  int64 id = 5; //
+  int64 member_id = 6; //会员id
+  string member_nickname = 7; //领取人昵称
+  int64 order_id = 8; //订单编号
+  string order_sn = 9; //订单号码
+  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 11; //使用时间
+
+}
+
+message QueryCouponHistoryListResp {
   int64 total = 1;
   repeated  CouponHistoryListData list = 2;
 }
 
-message CouponHistoryUpdateReq {
-  int64      Id = 1;
-  int64      CouponId = 2;
-  int64      MemberId = 3;
-  string      CouponCode = 4;
-  string      MemberNickname = 5;
-  int32      GetType = 6;
-  string  CreateTime = 7;
-  int32      UseStatus = 8;
-  string  UseTime = 9;
-  int64      OrderId = 10;
-  string      OrderSn = 11;
-}
-
-message CouponHistoryUpdateResp {
-  string pong = 1;
-}
-
-message CouponHistoryDeleteReq {
-  repeated int64 ids = 1;
-}
-
-message CouponHistoryDeleteResp {
-  string pong = 1;
-}
-
-message CouponCountReq {
+message QueryCouponCountReq {
   int64 memberId = 1;
 }
-message CouponCountResp {
+message QueryCouponCountResp {
   int64 total = 1;
 }
 
@@ -223,52 +280,35 @@ message QueryMemberCouponListReq {
   int64 memberId = 1;
   int32  UseStatus = 2;
 }
+message QueryCouponData {
+  int64 Id = 1; //
+  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string Name = 3; //名称
+  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 Count = 5; //数量
+  int64 Amount = 6; //金额
+  int32 PerLimit = 7; //每人限领张数
+  int64 MinPoint = 8; //使用门槛；0表示无门槛
+  string StartTime = 9; //开始时间
+  string EndTime = 10; //结束时间
+  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  string Note = 12; //备注
+  int32 PublishCount = 13; //发行数量
+  int32 UseCount = 14; //已使用数量
+  int32 ReceiveCount = 15; //领取数量
+  string EnableTime = 16; //可以领取的日期
+  string Code = 17; //优惠码
+  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
+
+}
 message QueryMemberCouponListResp {
-  repeated  CouponListData list = 1;
+  repeated  QueryCouponData list = 1;
 }
 
-message UpdateCouponStatusReq {
-  int64 memberId = 1;
-  int32  UseStatus = 2;
-  int64  CouponId = 3;
-}
-message UpdateCouponStatusResp {
-  string pong = 1;
-}
-
-message CouponHistoryDetailListReq {
+message QueryCouponHistoryDetailListReq {
   int64      MemberId = 1;
 }
-
-message CouponHistoryDetailListData{
-  CouponHistoryListData couponHistoryListData = 1;//用户领取的优惠券
-  CouponListData couponListData = 2;//优惠券
-  repeated  CouponProductRelationListData productRelationList = 3;//商品和优惠券的关联关糸
-  repeated  CouponProductCategoryRelationListData categoryRelationList = 4;//商品分类和优惠券的关联关糸
-}
-
-message CouponHistoryDetailListResp {
-  repeated  CouponHistoryDetailListData list = 2;
-}
-
-service CouponHistoryService {
-
-  rpc CouponHistoryAdd(CouponHistoryAddReq) returns(CouponHistoryAddResp);
-  rpc CouponHistoryList(CouponHistoryListReq) returns(CouponHistoryListResp);
-  rpc CouponHistoryUpdate(CouponHistoryUpdateReq) returns(CouponHistoryUpdateResp);
-  rpc CouponHistoryDelete(CouponHistoryDeleteReq) returns(CouponHistoryDeleteResp);
-
-  //登录时获取用户还没有使用的获取优惠券数量
-  rpc CouponCount(CouponCountReq) returns(CouponCountResp);
-  //获取会员优惠券
-  rpc QueryMemberCouponList(QueryMemberCouponListReq) returns(QueryMemberCouponListResp);
-  //更新优惠券状态
-  rpc UpdateCouponStatus(UpdateCouponStatusReq) returns(UpdateCouponStatusResp);
-  //获取该用户所有优惠券(包括商品和优惠券,商品分类和优惠券的关联关糸)
-  rpc QueryCouponHistoryDetailList(CouponHistoryDetailListReq) returns(CouponHistoryDetailListResp);
-}
-
-message CouponProductCategoryRelationListData{
+message QueryCouponProductCategoryRelationListData{
   int64  Id = 1;
   int64  CouponId = 2;
   int64  ProductCategoryId = 3;
@@ -276,7 +316,7 @@ message CouponProductCategoryRelationListData{
   string  ParentCategoryName = 5;
 
 }
-message CouponProductRelationListData{
+message QueryCouponProductRelationListData{
   int64    Id = 1;
   int64    CouponId = 2;
   int64    ProductId = 3;
@@ -284,164 +324,242 @@ message CouponProductRelationListData{
   string  ProductSn = 5;
 
 }
+message CouponHistoryDetailListData{
+  CouponHistoryListData couponHistoryListData = 1;//用户领取的优惠券
+  QueryCouponData couponListData = 2;//优惠券
+  repeated  QueryCouponProductRelationListData productRelationList = 3;//商品和优惠券的关联关糸
+  repeated  QueryCouponProductCategoryRelationListData categoryRelationList = 4;//商品分类和优惠券的关联关糸
+}
+
+message CouponHistoryDetailListResp {
+  repeated  CouponHistoryDetailListData list = 2;
+}
+
+// 优惠券使用、领取历史表
+service CouponHistoryService {
+  // 添加优惠券使用、领取历史表
+  rpc AddCouponHistory(AddCouponHistoryReq) returns (AddCouponHistoryResp){}
+  // 删除优惠券使用、领取历史表
+  rpc DeleteCouponHistory(DeleteCouponHistoryReq) returns (DeleteCouponHistoryResp){}
+  // 更新优惠券使用、领取历史表
+  rpc UpdateCouponHistory(UpdateCouponHistoryReq) returns (UpdateCouponHistoryResp ){}
+  // 更新优惠券使用、领取历史表状态
+  rpc UpdateCouponHistoryStatus(UpdateCouponHistoryStatusReq) returns (UpdateCouponHistoryStatusResp ){}
+  // 查询优惠券使用、领取历史表详情
+   rpc QueryCouponHistoryDetail(QueryCouponHistoryDetailReq) returns (QueryCouponHistoryDetailResp){}
+  // 查询优惠券使用、领取历史表列表
+  rpc QueryCouponHistoryList(QueryCouponHistoryListReq) returns (QueryCouponHistoryListResp){}
+
+  //登录时获取用户还没有使用的获取优惠券数量
+  rpc QueryCouponCount(QueryCouponCountReq) returns(QueryCouponCountResp);
+  //获取会员优惠券
+  rpc QueryMemberCouponList(QueryMemberCouponListReq) returns(QueryMemberCouponListResp);
+  //获取该用户所有优惠券(包括商品和优惠券,商品分类和优惠券的关联关糸)
+  rpc QueryCouponHistoryDetailList(QueryCouponHistoryDetailListReq) returns(CouponHistoryDetailListResp);
+}
 
 
-message FlashPromotionAddReq {
-  string Title = 1; //标题
-  string StartDate = 2; //开始日期
-  string EndDate = 3; //结束日期
-  int32 Status = 4; //上下线状态
+// 添加限时购表
+message AddFlashPromotionReq {
+  string end_date = 1; //结束日期
+  string start_date = 2; //开始日期
+  int32 status = 3; //上下线状态
+  string title = 4; //标题
 
 }
 
-message FlashPromotionAddResp {
+message AddFlashPromotionResp {
   string pong = 1;
 }
 
-message FlashPromotionDeleteReq {
+// 删除限时购表
+message DeleteFlashPromotionReq {
   repeated int64 ids = 1;
 }
 
-message FlashPromotionDeleteResp {
+message DeleteFlashPromotionResp {
   string pong = 1;
 }
 
-message FlashPromotionListByDateReq {
-  string currentDate = 1;
-}
+// 更新限时购表
+message UpdateFlashPromotionReq {
+  string title = 1; //标题
+  string end_date = 2; //结束日期
+  int64 id = 3; //编号
+  string start_date = 4; //开始日期
+  int32 status = 5; //上下线状态
 
-message FlashPromotionListByDateResp {
-  repeated  FlashPromotionListData list = 1;
-}
-
-message FlashPromotionUpdateReq {
-  int64 Id = 1; //编号
-  string Title = 2; //标题
-  string StartDate = 3; //开始日期
-  string EndDate = 4; //结束日期
-  int32 Status = 5; //上下线状态
 
 }
 
-message FlashPromotionUpdateResp {
+message UpdateFlashPromotionResp {
   string pong = 1;
 }
 
-message FlashPromotionListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string Title = 3; //标题
-  string StartDate = 4; //开始日期
-  string EndDate = 5; //结束日期
-  int32 Status = 6; //上下线状态
-
-}
-
-message FlashPromotionListData {
-  int64 Id = 1; //编号
-  string Title = 2; //标题
-  string StartDate = 3; //开始日期
-  string EndDate = 4; //结束日期
-  int32 Status = 5; //上下线状态
-  string CreateTime = 6; //创建时间
-
-}
-
-message FlashPromotionListResp {
-  int64 total = 1;
-  repeated  FlashPromotionListData list = 2;
-}
-
+// 更新限时购表状态
 message UpdateFlashPromotionStatusReq {
   repeated int64 Ids = 1; //编号
   int32 Status = 2; //上下线状态
-
 }
 
 message UpdateFlashPromotionStatusResp {
   string pong = 1;
 }
+
+// 查询限时购表详情
+message QueryFlashPromotionDetailReq {
+    int64 id = 1;
+}
+
+message QueryFlashPromotionDetailResp {
+  string create_time = 1; //创建时间
+  string end_date = 2; //结束日期
+  int64 id = 3; //编号
+  string start_date = 4; //开始日期
+  int32 status = 5; //上下线状态
+  string title = 6; //标题
+
+}
+
+// 分页查询限时购表列表
+message QueryFlashPromotionListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string end_date = 3; //结束日期
+  string start_date = 4; //开始日期
+  int32 status = 5; //上下线状态
+  string title = 6; //标题
+
+}
+
+message FlashPromotionListData {
+  string create_time = 1; //创建时间
+  string end_date = 2; //结束日期
+  int64 id = 3; //编号
+  string start_date = 4; //开始日期
+  int32 status = 5; //上下线状态
+  string title = 6; //标题
+
+}
+
+message QueryFlashPromotionListResp {
+  int64 total = 1;
+  repeated  FlashPromotionListData list = 2;
+}
+
+message QueryFlashPromotionListByDateReq {
+  string currentDate = 1;
+}
+
+message QueryFlashPromotionListByDateResp {
+  repeated  FlashPromotionListData list = 1;
+}
+// 限时购表
 service FlashPromotionService {
+  // 添加限时购表
+  rpc AddFlashPromotion(AddFlashPromotionReq) returns (AddFlashPromotionResp){}
+  // 删除限时购表
+  rpc DeleteFlashPromotion(DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp){}
+  // 更新限时购表
+  rpc UpdateFlashPromotion(UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp ){}
+  // 更新限时购表状态
+  rpc UpdateFlashPromotionStatus(UpdateFlashPromotionStatusReq) returns (UpdateFlashPromotionStatusResp ){}
+  // 查询限时购表详情
+   rpc QueryFlashPromotionDetail(QueryFlashPromotionDetailReq) returns (QueryFlashPromotionDetailResp){}
+  // 查询限时购表列表
+  rpc QueryFlashPromotionList(QueryFlashPromotionListReq) returns (QueryFlashPromotionListResp){}
 
-  rpc FlashPromotionAdd(FlashPromotionAddReq) returns(FlashPromotionAddResp);
-  rpc FlashPromotionList(FlashPromotionListReq) returns(FlashPromotionListResp);
-  rpc FlashPromotionUpdate(FlashPromotionUpdateReq) returns(FlashPromotionUpdateResp);
-  rpc FlashPromotionDelete(FlashPromotionDeleteReq) returns(FlashPromotionDeleteResp);
-  rpc FlashPromotionListByDate(FlashPromotionListByDateReq) returns(FlashPromotionListByDateResp);
+  //查询当前时间是否有秒杀活动
+  rpc QueryFlashPromotionListByDate(QueryFlashPromotionListByDateReq) returns(QueryFlashPromotionListByDateResp);
 
-  //更新上下线状态
-  rpc UpdateFlashPromotionStatus(UpdateFlashPromotionStatusReq) returns(UpdateFlashPromotionStatusResp);
-
-}
-
-message FlashPromotionLogAddReq {
-  int64 MemberId = 1; //会员id
-  int64 ProductId = 2; //商品id
-  string MemberPhone = 3; //会员电话
-  string ProductName = 4; //商品名称
-  string SubscribeTime = 5; //会员订阅时间
 
 }
 
-message FlashPromotionLogAddResp {
+
+// 添加限时购通知记录
+message AddFlashPromotionLogReq {
+  string subscribe_time = 1; //会员订阅时间
+  int64 member_id = 2; //会员id
+  string member_phone = 3; //会员电话
+  int64 product_id = 4; //商品id
+  string product_name = 5; //商品名称
+  string send_time = 6; //发送时间
+
+
+}
+
+message AddFlashPromotionLogResp {
   string pong = 1;
 }
 
-message FlashPromotionLogDeleteReq {
+// 删除限时购通知记录
+message DeleteFlashPromotionLogReq {
   repeated int64 ids = 1;
 }
 
-message FlashPromotionLogDeleteResp {
+message DeleteFlashPromotionLogResp {
   string pong = 1;
 }
 
-message FlashPromotionLogUpdateReq {
-  int64 Id = 1; //编号
-  int64 MemberId = 2; //会员id
-  int64 ProductId = 3; //商品id
-  string MemberPhone = 4; //会员电话
-  string ProductName = 5; //商品名称
-  string SubscribeTime = 6; //会员订阅时间
-  string SendTime = 7; //发送时间
+
+// 查询限时购通知记录详情
+message QueryFlashPromotionLogDetailReq {
+    int64 id = 1;
+}
+
+message QueryFlashPromotionLogDetailResp {
+  int64 id = 1; //编号
+  int64 member_id = 2; //会员id
+  string member_phone = 3; //会员电话
+  int64 product_id = 4; //商品id
+  string product_name = 5; //商品名称
+  string send_time = 6; //发送时间
+  string subscribe_time = 7; //会员订阅时间
 
 }
 
-message FlashPromotionLogUpdateResp {
-  string pong = 1;
-}
-
-message FlashPromotionLogListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
+// 分页查询限时购通知记录列表
+message QueryFlashPromotionLogListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string member_phone = 3; //会员电话
+  string product_name = 4; //商品名称
 
 }
 
 message FlashPromotionLogListData {
-  int64 Id = 1; //编号
-  int64 MemberId = 2; //会员id
-  int64 ProductId = 3; //商品id
-  string MemberPhone = 4; //会员电话
-  string ProductName = 5; //商品名称
-  string SubscribeTime = 6; //会员订阅时间
-  string SendTime = 7; //发送时间
+  int64 id = 1; //编号
+  int64 member_id = 2; //会员id
+  string member_phone = 3; //会员电话
+  int64 product_id = 4; //商品id
+  string product_name = 5; //商品名称
+  string send_time = 6; //发送时间
+  string subscribe_time = 7; //会员订阅时间
 
 }
 
-message FlashPromotionLogListResp {
+message QueryFlashPromotionLogListResp {
   int64 total = 1;
   repeated  FlashPromotionLogListData list = 2;
 }
 
+// 限时购通知记录
 service FlashPromotionLogService {
-
-  rpc FlashPromotionLogAdd(FlashPromotionLogAddReq) returns(FlashPromotionLogAddResp);
-  rpc FlashPromotionLogList(FlashPromotionLogListReq) returns(FlashPromotionLogListResp);
-  rpc FlashPromotionLogUpdate(FlashPromotionLogUpdateReq) returns(FlashPromotionLogUpdateResp);
-  rpc FlashPromotionLogDelete(FlashPromotionLogDeleteReq) returns(FlashPromotionLogDeleteResp);
+  // 添加限时购通知记录
+  rpc AddFlashPromotionLog(AddFlashPromotionLogReq) returns (AddFlashPromotionLogResp){}
+  // 删除限时购通知记录
+  rpc DeleteFlashPromotionLog(DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp){}
+  // 查询限时购通知记录详情
+   rpc QueryFlashPromotionLogDetail(QueryFlashPromotionLogDetailReq) returns (QueryFlashPromotionLogDetailResp){}
+  // 查询限时购通知记录列表
+  rpc QueryFlashPromotionLogList(QueryFlashPromotionLogListReq) returns (QueryFlashPromotionLogListResp){}
 
 
 }
-message FlashPromotionProductRelationAddReq {
+
+
+// 添加商品限时购与商品关系表
+message AddFlashPromotionProductRelationReq {
   repeated FlashPromotionProductRelationAddData Data = 1;
 
 }
@@ -456,149 +574,139 @@ message FlashPromotionProductRelationAddData {
   int32 Sort = 7; //排序
 
 }
-message FlashPromotionProductRelationAddResp {
+
+message AddFlashPromotionProductRelationResp {
   string pong = 1;
 }
 
-message FlashPromotionProductRelationDeleteReq {
+// 删除商品限时购与商品关系表
+message DeleteFlashPromotionProductRelationReq {
   repeated int64 ids = 1;
   int64 FlashPromotionId = 2;
 }
 
-message FlashPromotionProductRelationDeleteResp {
+message DeleteFlashPromotionProductRelationResp {
   string pong = 1;
 }
 
-message FlashPromotionProductRelationUpdateReq {
-  int64 Id = 1; //编号
-  int64 FlashPromotionId = 2; //限时购id
-  int64 FlashPromotionSessionId = 3; //编号
-  int64 ProductId = 4; //商品id
-  int64 FlashPromotionPrice = 5; //限时购价格
-  int32 FlashPromotionCount = 6; //限时购数量
-  int32 FlashPromotionLimit = 7; //每人限购数量
-  int32 Sort = 8; //排序
+// 更新商品限时购与商品关系表
+message UpdateFlashPromotionProductRelationReq {
+  int32 flash_promotion_count = 1; //限时购数量
+  int64 flash_promotion_id = 2; //限时购id
+  int32 flash_promotion_limit = 3; //每人限购数量
+  int64 flash_promotion_price = 4; //限时购价格
+  int64 flash_promotion_session_id = 5; //编号
+  int64 id = 6; //编号
+  int64 product_id = 7; //商品id
+  int32 sort = 8; //排序
 
 }
 
-message FlashPromotionProductRelationUpdateResp {
+message UpdateFlashPromotionProductRelationResp {
   string pong = 1;
 }
 
-message FlashPromotionProductRelationListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  int64 FlashPromotionId = 3; //限时购id
-  int64 FlashPromotionSessionId = 4; //编号
+
+// 查询商品限时购与商品关系表详情
+message QueryFlashPromotionProductRelationDetailReq {
+  int64 product_id = 1; //商品id
+}
+
+message QueryFlashPromotionProductRelationDetailResp {
+  int32 flash_promotion_count = 1; //限时购数量
+  int64 flash_promotion_id = 2; //限时购id
+  int32 flash_promotion_limit = 3; //每人限购数量
+  int64 flash_promotion_price = 4; //限时购价格
+  int64 flash_promotion_session_id = 5; //编号
+  int64 id = 6; //编号
+  int64 product_id = 7; //商品id
+  int32 sort = 8; //排序
+
+}
+
+// 分页查询商品限时购与商品关系表列表
+message QueryFlashPromotionProductRelationListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 flash_promotion_id = 3; //限时购id
+  int64 flash_promotion_session_id = 4; //编号
+
 }
 
 message FlashPromotionProductRelationListData {
-  int64 Id = 1; //编号
-  int64 FlashPromotionId = 2; //限时购id
-  int64 FlashPromotionSessionId = 3; //编号
-  int64 ProductId = 4; //商品id
-  int64 FlashPromotionPrice = 5; //限时购价格
-  int32 FlashPromotionCount = 6; //限时购数量
-  int32 FlashPromotionLimit = 7; //每人限购数量
-  int32 Sort = 8; //排序
+  int32 flash_promotion_count = 1; //限时购数量
+  int64 flash_promotion_id = 2; //限时购id
+  int32 flash_promotion_limit = 3; //每人限购数量
+  int64 flash_promotion_price = 4; //限时购价格
+  int64 flash_promotion_session_id = 5; //编号
+  int64 id = 6; //编号
+  int64 product_id = 7; //商品id
+  int32 sort = 8; //排序
 
 }
 
-message FlashPromotionProductRelationListResp {
+message QueryFlashPromotionProductRelationListResp {
   int64 total = 1;
   repeated  FlashPromotionProductRelationListData list = 2;
 }
 
-message QueryFlashPromotionByProductReq {
-  int64 ProductId = 4; //商品id
-}
-message QueryFlashPromotionByProductResp {
-  int64 Id = 1; //编号
-  int64 FlashPromotionId = 2; //限时购id
-  int64 FlashPromotionSessionId = 3; //编号
-  int64 ProductId = 4; //商品id
-  int64 FlashPromotionPrice = 5; //限时购价格
-  int32 FlashPromotionCount = 6; //限时购数量
-  int32 FlashPromotionLimit = 7; //每人限购数量
-  int32 Sort = 8; //排序
-}
-
+// 商品限时购与商品关系表
 service FlashPromotionProductRelationService {
+  // 添加商品限时购与商品关系表
+  rpc AddFlashPromotionProductRelation(AddFlashPromotionProductRelationReq) returns (AddFlashPromotionProductRelationResp){}
+  // 删除商品限时购与商品关系表
+  rpc DeleteFlashPromotionProductRelation(DeleteFlashPromotionProductRelationReq) returns (DeleteFlashPromotionProductRelationResp){}
+  // 更新商品限时购与商品关系表
+  rpc UpdateFlashPromotionProductRelation(UpdateFlashPromotionProductRelationReq) returns (UpdateFlashPromotionProductRelationResp ){}
+  // 查询商品限时购与商品关系表详情
+   rpc QueryFlashPromotionProductRelationDetail(QueryFlashPromotionProductRelationDetailReq) returns (QueryFlashPromotionProductRelationDetailResp){}
+  // 查询商品限时购与商品关系表列表
+  rpc QueryFlashPromotionProductRelationList(QueryFlashPromotionProductRelationListReq) returns (QueryFlashPromotionProductRelationListResp){}
 
-  rpc FlashPromotionProductRelationAdd(FlashPromotionProductRelationAddReq) returns(FlashPromotionProductRelationAddResp);
-  rpc FlashPromotionProductRelationList(FlashPromotionProductRelationListReq) returns(FlashPromotionProductRelationListResp);
-  rpc FlashPromotionProductRelationUpdate(FlashPromotionProductRelationUpdateReq) returns(FlashPromotionProductRelationUpdateResp);
-  rpc FlashPromotionProductRelationDelete(FlashPromotionProductRelationDeleteReq) returns(FlashPromotionProductRelationDeleteResp);
-  //根据商品id查询
-  rpc QueryFlashPromotionByProduct(QueryFlashPromotionByProductReq) returns(QueryFlashPromotionByProductResp);
-
-
-}
-message FlashPromotionSessionAddReq {
-  string Name = 1; //场次名称
-  string StartTime = 2; //每日开始时间
-  string EndTime = 3; //每日结束时间
-  int32 Status = 4; //启用状态：0->不启用；1->启用
 
 }
 
-message FlashPromotionSessionAddResp {
+
+// 添加限时购场次表
+message AddFlashPromotionSessionReq {
+  string start_time = 1; //每日开始时间
+  string end_time = 2; //每日结束时间
+  int32 status = 3; //启用状态：0->不启用；1->启用
+  string name = 4; //场次名称
+
+
+
+}
+
+message AddFlashPromotionSessionResp {
   string pong = 1;
 }
 
-message FlashPromotionSessionDeleteReq {
+// 删除限时购场次表
+message DeleteFlashPromotionSessionReq {
   repeated int64 ids = 1;
 }
 
-message FlashPromotionSessionDeleteResp {
+message DeleteFlashPromotionSessionResp {
   string pong = 1;
 }
 
-message FlashPromotionSessionByTimeReq {
-  string currentTIme = 1;
-}
+// 更新限时购场次表
+message UpdateFlashPromotionSessionReq {
+  int32 status = 1; //启用状态：0->不启用；1->启用
+  string end_time = 2; //每日结束时间
+  int64 id = 3; //编号
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
 
-message FlashPromotionSessionByTimeResp {
-  repeated  FlashPromotionSessionListData list = 1;
-}
-
-message FlashPromotionSessionUpdateReq {
-  int64 Id = 1; //编号
-  string Name = 2; //场次名称
-  string StartTime = 3; //每日开始时间
-  string EndTime = 4; //每日结束时间
-  int32 Status = 5; //启用状态：0->不启用；1->启用
 
 }
 
-message FlashPromotionSessionUpdateResp {
+message UpdateFlashPromotionSessionResp {
   string pong = 1;
 }
 
-message FlashPromotionSessionListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string StartTime = 3; //每日开始时间
-  string EndTime = 4; //每日结束时间
-  int32 Status = 5; //启用状态：0->不启用；1->启用
-
-}
-
-message FlashPromotionSessionListData {
-  int64 Id = 1; //编号
-  string Name = 2; //场次名称
-  string StartTime = 3; //每日开始时间
-  string EndTime = 4; //每日结束时间
-  int32 Status = 5; //启用状态：0->不启用；1->启用
-  string CreateTime = 6; //创建时间
-
-}
-
-message FlashPromotionSessionListResp {
-  int64 total = 1;
-  repeated  FlashPromotionSessionListData list = 2;
-}
-
+// 更新限时购场次表状态
 message UpdateFlashPromotionSessionStatusReq {
   repeated int64 Ids = 1; //编号
   int32 Status = 2; //上下线状态
@@ -608,123 +716,214 @@ message UpdateFlashPromotionSessionStatusReq {
 message UpdateFlashPromotionSessionStatusResp {
   string pong = 1;
 }
+
+// 查询限时购场次表详情
+message QueryFlashPromotionSessionDetailReq {
+    int64 id = 1;
+}
+
+message QueryFlashPromotionSessionDetailResp {
+  string create_time = 1; //创建时间
+  string end_time = 2; //每日结束时间
+  int64 id = 3; //编号
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
+  int32 status = 6; //启用状态：0->不启用；1->启用
+
+}
+
+// 分页查询限时购场次表列表
+message QueryFlashPromotionSessionListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string end_time = 3; //每日结束时间
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
+  int32 status = 6; //启用状态：0->不启用；1->启用
+
+}
+
+message FlashPromotionSessionListData {
+  string create_time = 1; //创建时间
+  string end_time = 2; //每日结束时间
+  int64 id = 3; //编号
+  string name = 4; //场次名称
+  string start_time = 5; //每日开始时间
+  int32 status = 6; //启用状态：0->不启用；1->启用
+
+}
+
+message QueryFlashPromotionSessionListResp {
+  int64 total = 1;
+  repeated  FlashPromotionSessionListData list = 2;
+}
+
+message QueryFlashPromotionSessionListByTimeReq {
+  string currentTIme = 1;
+}
+
+message QueryFlashPromotionSessionListByTimeResp {
+  repeated  FlashPromotionSessionListData list = 1;
+}
+
+// 限时购场次表
 service FlashPromotionSessionService {
-
-  //添加限时购场次
-  rpc FlashPromotionSessionAdd(FlashPromotionSessionAddReq) returns(FlashPromotionSessionAddResp);
-  //查询限时购场次
-  rpc FlashPromotionSessionList(FlashPromotionSessionListReq) returns(FlashPromotionSessionListResp);
-  //更新限时购场次
-  rpc FlashPromotionSessionUpdate(FlashPromotionSessionUpdateReq) returns(FlashPromotionSessionUpdateResp);
-  //删除限时购场次
-  rpc FlashPromotionSessionDelete(FlashPromotionSessionDeleteReq) returns(FlashPromotionSessionDeleteResp);
+  // 添加限时购场次表
+  rpc AddFlashPromotionSession(AddFlashPromotionSessionReq) returns (AddFlashPromotionSessionResp){}
+  // 删除限时购场次表
+  rpc DeleteFlashPromotionSession(DeleteFlashPromotionSessionReq) returns (DeleteFlashPromotionSessionResp){}
+  // 更新限时购场次表
+  rpc UpdateFlashPromotionSession(UpdateFlashPromotionSessionReq) returns (UpdateFlashPromotionSessionResp ){}
+  // 更新限时购场次表状态
+  rpc UpdateFlashPromotionSessionStatus(UpdateFlashPromotionSessionStatusReq) returns (UpdateFlashPromotionSessionStatusResp ){}
+  // 查询限时购场次表详情
+   rpc QueryFlashPromotionSessionDetail(QueryFlashPromotionSessionDetailReq) returns (QueryFlashPromotionSessionDetailResp){}
+  // 查询限时购场次表列表
+  rpc QueryFlashPromotionSessionList(QueryFlashPromotionSessionListReq) returns (QueryFlashPromotionSessionListResp){}
   //根据时间查询限时购场次
-  rpc FlashPromotionSessionByTime(FlashPromotionSessionByTimeReq) returns(FlashPromotionSessionByTimeResp);
+  rpc QueryFlashPromotionSessionListByTime(QueryFlashPromotionSessionListByTimeReq) returns(QueryFlashPromotionSessionListByTimeResp);
 
-  //更新上下线状态
-  rpc UpdateFlashPromotionSessionStatus(UpdateFlashPromotionSessionStatusReq) returns(UpdateFlashPromotionSessionStatusResp);
-}
-message HomeAdvertiseAddReq {
-  int64 Id = 1; //
-  string Name = 2; //名称
-  int32 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
-  string Pic = 4; //图片地址
-  string StartTime = 5; //开始时间
-  string EndTime = 6; //结束时间
-  int32 Status = 7; //上下线状态：0->下线；1->上线
-  int32 ClickCount = 8; //点击数
-  int32 OrderCount = 9; //下单数
-  string Url = 10; //链接地址
-  string Note = 11; //备注
-  int32 Sort = 12; //排序
 
 }
 
-message HomeAdvertiseAddResp {
+
+// 添加首页轮播广告表
+message AddHomeAdvertiseReq {
+  int32 click_count = 1; //点击数
+  string end_time = 2; //结束时间
+  string url = 3; //链接地址
+  string name = 4; //名称
+  string note = 5; //备注
+  int32 order_count = 6; //下单数
+  string pic = 7; //图片地址
+  int32 sort = 8; //排序
+  string start_time = 9; //开始时间
+  int32 status = 10; //上下线状态：0->下线；1->上线
+  int32 type = 11; //轮播位置：0->PC首页轮播；1->app首页轮播
+
+
+}
+
+message AddHomeAdvertiseResp {
   string pong = 1;
 }
 
-message HomeAdvertiseDeleteReq {
+// 删除首页轮播广告表
+message DeleteHomeAdvertiseReq {
   repeated int64 ids = 1;
 }
 
-message HomeAdvertiseDeleteResp {
+message DeleteHomeAdvertiseResp {
   string pong = 1;
 }
 
-message HomeAdvertiseUpdateReq {
-  int64 Id = 1; //
-  string Name = 2; //名称
-  int32 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
-  string Pic = 4; //图片地址
-  string StartTime = 5; //开始时间
-  string EndTime = 6; //结束时间
-  int32 Status = 7; //上下线状态：0->下线；1->上线
-  int32 ClickCount = 8; //点击数
-  int32 OrderCount = 9; //下单数
-  string Url = 10; //链接地址
-  string Note = 11; //备注
-  int32 Sort = 12; //排序
+// 更新首页轮播广告表
+message UpdateHomeAdvertiseReq {
+  int32 click_count = 1; //点击数
+  string end_time = 2; //结束时间
+  int64 id = 3; //
+  string name = 4; //名称
+  string note = 5; //备注
+  int32 order_count = 6; //下单数
+  string pic = 7; //图片地址
+  int32 sort = 8; //排序
+  string start_time = 9; //开始时间
+  int32 status = 10; //上下线状态：0->下线；1->上线
+  int32 type = 11; //轮播位置：0->PC首页轮播；1->app首页轮播
+  string url = 12; //链接地址
 
 }
 
+message UpdateHomeAdvertiseResp {
+  string pong = 1;
+}
+
+// 更新首页轮播广告表状态
 message UpdateHomeAdvertiseStatusReq {
   repeated int64 Ids = 1; //
   int32 Status = 2; //上下线状态：0->下线；1->上线
 
 }
 
-message HomeAdvertiseUpdateResp {
+message UpdateHomeAdvertiseStatusResp {
   string pong = 1;
 }
 
-message HomeAdvertiseListReq {
-  string Name = 1; //名称
-  int32 Type = 2; //轮播位置：0->PC首页轮播；1->app首页轮播
-  string StartTime = 3; //开始时间
-  string EndTime = 4; //结束时间
-  int32 Status = 5; //上下线状态：0->下线；1->上线
-  int64 current = 6;
-  int64 pageSize = 7;
+// 查询首页轮播广告表详情
+message QueryHomeAdvertiseDetailReq {
+    int64 id = 1;
+}
+
+message QueryHomeAdvertiseDetailResp {
+  int32 click_count = 1; //点击数
+  string end_time = 2; //结束时间
+  int64 id = 3; //
+  string name = 4; //名称
+  string note = 5; //备注
+  int32 order_count = 6; //下单数
+  string pic = 7; //图片地址
+  int32 sort = 8; //排序
+  string start_time = 9; //开始时间
+  int32 status = 10; //上下线状态：0->下线；1->上线
+  int32 type = 11; //轮播位置：0->PC首页轮播；1->app首页轮播
+  string url = 12; //链接地址
+
+}
+
+// 分页查询首页轮播广告表列表
+message QueryHomeAdvertiseListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string end_time = 3; //结束时间
+  string name = 4; //名称
+  string start_time =5; //开始时间
+  int32 status = 6; //上下线状态：0->下线；1->上线
+  int32 type = 7; //轮播位置：0->PC首页轮播；1->app首页轮播
+
 }
 
 message HomeAdvertiseListData {
-  int64 Id = 1; //
-  string Name = 2; //名称
-  int32 Type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
-  string Pic = 4; //图片地址
-  string StartTime = 5; //开始时间
-  string EndTime = 6; //结束时间
-  int32 Status = 7; //上下线状态：0->下线；1->上线
-  int32 ClickCount = 8; //点击数
-  int32 OrderCount = 9; //下单数
-  string Url = 10; //链接地址
-  string Note = 11; //备注
-  int32 Sort = 12; //排序
+  int32 click_count = 1; //点击数
+  string end_time = 2; //结束时间
+  int64 id = 3; //
+  string name = 4; //名称
+  string note = 5; //备注
+  int32 order_count = 6; //下单数
+  string pic = 7; //图片地址
+  int32 sort = 8; //排序
+  string start_time = 9; //开始时间
+  int32 status = 10; //上下线状态：0->下线；1->上线
+  int32 type = 11; //轮播位置：0->PC首页轮播；1->app首页轮播
+  string url = 12; //链接地址
 
 }
 
-message HomeAdvertiseListResp {
+message QueryHomeAdvertiseListResp {
   int64 total = 1;
   repeated  HomeAdvertiseListData list = 2;
 }
 
-//首页轮播广告管理
+// 首页轮播广告表
 service HomeAdvertiseService {
-  //添加首页轮播广告
-  rpc HomeAdvertiseAdd(HomeAdvertiseAddReq) returns(HomeAdvertiseAddResp);
-  //查询首页轮播广告
-  rpc HomeAdvertiseList(HomeAdvertiseListReq) returns(HomeAdvertiseListResp);
-  //更新首页轮播广告
-  rpc HomeAdvertiseUpdate(HomeAdvertiseUpdateReq) returns(HomeAdvertiseUpdateResp);
-  //修改上下线状态
-  rpc updateHomeAdvertiseStatus(UpdateHomeAdvertiseStatusReq) returns(HomeAdvertiseUpdateResp);
-  //删除首页轮播广告
-  rpc HomeAdvertiseDelete(HomeAdvertiseDeleteReq) returns(HomeAdvertiseDeleteResp);
+  // 添加首页轮播广告表
+  rpc AddHomeAdvertise(AddHomeAdvertiseReq) returns (AddHomeAdvertiseResp){}
+  // 删除首页轮播广告表
+  rpc DeleteHomeAdvertise(DeleteHomeAdvertiseReq) returns (DeleteHomeAdvertiseResp){}
+  // 更新首页轮播广告表
+  rpc UpdateHomeAdvertise(UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp ){}
+  // 更新首页轮播广告表状态
+  rpc UpdateHomeAdvertiseStatus(UpdateHomeAdvertiseStatusReq) returns (UpdateHomeAdvertiseStatusResp ){}
+  // 查询首页轮播广告表详情
+   rpc QueryHomeAdvertiseDetail(QueryHomeAdvertiseDetailReq) returns (QueryHomeAdvertiseDetailResp){}
+  // 查询首页轮播广告表列表
+  rpc QueryHomeAdvertiseList(QueryHomeAdvertiseListReq) returns (QueryHomeAdvertiseListResp){}
 
 
 }
-message HomeBrandAddReq {
+
+
+// 添加首页推荐品牌表
+message AddHomeBrandReq {
   repeated HomeBrandAddData BrandAddData = 1; //
 
 }
@@ -736,18 +935,20 @@ message HomeBrandAddData {
 
 }
 
-message HomeBrandAddResp {
+message AddHomeBrandResp {
   string pong = 1;
 }
 
-message HomeBrandDeleteReq {
+// 删除首页推荐品牌表
+message DeleteHomeBrandReq {
   repeated int64 ids = 1;
 }
 
-message HomeBrandDeleteResp {
+message DeleteHomeBrandResp {
   string pong = 1;
 }
 
+// 更新首页推荐品牌表
 message UpdateHomeBrandSortReq {
   int64 Id = 1; //
   int32 Sort = 2; //排序
@@ -758,6 +959,7 @@ message UpdateHomeBrandSortResp {
   string pong = 1;
 }
 
+// 更新首页推荐品牌表状态
 message UpdateHomeBrandStatusReq {
   repeated int64 Ids = 1; //
   int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
@@ -768,46 +970,67 @@ message UpdateHomeBrandStatusResp {
   string pong = 1;
 }
 
-message HomeBrandListReq {
-  string BrandName = 1; //商品品牌名称
-  int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
-  int64 current = 3;
-  int64 pageSize = 4;
+// 查询首页推荐品牌表详情
+message QueryHomeBrandDetailReq {
+    int64 id = 1;
+}
+
+message QueryHomeBrandDetailResp {
+  int64 brand_id = 1; //商品品牌id
+  string brand_name = 2; //商品品牌名称
+  int64 id = 3; //
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+// 分页查询首页推荐品牌表列表
+message QueryHomeBrandListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string brand_name = 3; //商品品牌名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
 
 }
 
 message HomeBrandListData {
-  int64 Id = 1; //
-  int64 BrandId = 2; //商品品牌id
-  string BrandName = 3; //商品品牌名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 5; //排序
+  int64 brand_id = 1; //商品品牌id
+  string brand_name = 2; //商品品牌名称
+  int64 id = 3; //
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
 
 }
 
-message HomeBrandListResp {
+message QueryHomeBrandListResp {
   int64 total = 1;
   repeated  HomeBrandListData list = 2;
 }
 
+// 首页推荐品牌表
 service HomeBrandService {
-
-  rpc HomeBrandAdd(HomeBrandAddReq) returns(HomeBrandAddResp);
-  rpc HomeBrandList(HomeBrandListReq) returns(HomeBrandListResp);
+  // 添加首页推荐品牌表
+  rpc AddHomeBrand(AddHomeBrandReq) returns (AddHomeBrandResp){}
+  // 删除首页推荐品牌表
+  rpc DeleteHomeBrand(DeleteHomeBrandReq) returns (DeleteHomeBrandResp){}
   //修改推荐品牌排序
   rpc UpdateHomeBrandSort(UpdateHomeBrandSortReq) returns(UpdateHomeBrandSortResp);
-  //批量修改推荐品牌状态
-  rpc UpdateHomeBrandStatus(UpdateHomeBrandStatusReq) returns(UpdateHomeBrandStatusResp);
-  rpc HomeBrandDelete(HomeBrandDeleteReq) returns(HomeBrandDeleteResp);
+  // 更新首页推荐品牌表状态
+  rpc UpdateHomeBrandStatus(UpdateHomeBrandStatusReq) returns (UpdateHomeBrandStatusResp ){}
+  // 查询首页推荐品牌表详情
+   rpc QueryHomeBrandDetail(QueryHomeBrandDetailReq) returns (QueryHomeBrandDetailResp){}
+  // 查询首页推荐品牌表列表
+  rpc QueryHomeBrandList(QueryHomeBrandListReq) returns (QueryHomeBrandListResp){}
 
 
 }
-message HomeNewProductAddReq {
+
+
+// 添加新鲜好物表
+message AddHomeNewProductReq {
   repeated HomeNewProductAddData NewProductAddData = 1;
 
-
 }
-
 message HomeNewProductAddData {
   int64 ProductId = 1; //商品id
   string ProductName = 2; //商品名称
@@ -815,19 +1038,20 @@ message HomeNewProductAddData {
   int32 Sort = 4; //排序
 
 }
-
-message HomeNewProductAddResp {
+message AddHomeNewProductResp {
   string pong = 1;
 }
 
-message HomeNewProductDeleteReq {
+// 删除新鲜好物表
+message DeleteHomeNewProductReq {
   repeated int64 ids = 1;
 }
 
-message HomeNewProductDeleteResp {
+message DeleteHomeNewProductResp {
   string pong = 1;
 }
 
+// 更新新鲜好物表
 message UpdateNewProductSortReq {
   int64 Id = 1; //
   int32 Sort = 2; //排序
@@ -838,59 +1062,78 @@ message UpdateNewProductSortResp {
   string pong = 1;
 }
 
-message UpdateNewProductStatusReq {
+// 更新新鲜好物表状态
+message UpdateHomeNewProductStatusReq {
   repeated int64 Ids = 1; //
   int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
 
 }
 
-message UpdateNewProductStatusResp {
+message UpdateHomeNewProductStatusResp {
   string pong = 1;
 }
 
-message HomeNewProductListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string ProductName = 3; //商品名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+// 查询新鲜好物表详情
+message QueryHomeNewProductDetailReq {
+    int64 id = 1;
+}
+
+message QueryHomeNewProductDetailResp {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+// 分页查询新鲜好物表列表
+message QueryHomeNewProductListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
 
 }
 
 message HomeNewProductListData {
-  int64 Id = 1; //
-  int64 ProductId = 2; //商品id
-  string ProductName = 3; //商品名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 5; //排序
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
 
 }
 
-message HomeNewProductListResp {
+message QueryHomeNewProductListResp {
   int64 total = 1;
   repeated  HomeNewProductListData list = 2;
 }
 
-//首页新品推荐
+// 新鲜好物表
 service HomeNewProductService {
-  
-  //添加首页新品
-  rpc HomeNewProductAdd(HomeNewProductAddReq) returns(HomeNewProductAddResp);
-  //查询首页新品
-  rpc HomeNewProductList(HomeNewProductListReq) returns(HomeNewProductListResp);
+  // 添加新鲜好物表
+  rpc AddHomeNewProduct(AddHomeNewProductReq) returns (AddHomeNewProductResp){}
+  // 删除新鲜好物表
+  rpc DeleteHomeNewProduct(DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp){}
   //修改首页新品排序
   rpc UpdateNewProductSort(UpdateNewProductSortReq) returns(UpdateNewProductSortResp);
-  //批量修改首页新品状态
-  rpc UpdateNewProductStatus(UpdateNewProductStatusReq) returns(UpdateNewProductStatusResp);
-  //删除首页新品
-  rpc HomeNewProductDelete(HomeNewProductDeleteReq) returns(HomeNewProductDeleteResp);
+  // 更新新鲜好物表状态
+  rpc UpdateHomeNewProductStatus(UpdateHomeNewProductStatusReq) returns (UpdateHomeNewProductStatusResp ){}
+  // 查询新鲜好物表详情
+   rpc QueryHomeNewProductDetail(QueryHomeNewProductDetailReq) returns (QueryHomeNewProductDetailResp){}
+  // 查询新鲜好物表列表
+  rpc QueryHomeNewProductList(QueryHomeNewProductListReq) returns (QueryHomeNewProductListResp){}
 
 
 }
-message HomeRecommendProductAddReq {
+
+
+// 添加人气推荐商品表
+message AddHomeRecommendProductReq {
   repeated HomeRecommendProductAddData RecommendProductAddData = 1; //
 
 }
-
 message HomeRecommendProductAddData {
   int64 ProductId = 1; //商品id
   string ProductName = 2; //商品名称
@@ -898,19 +1141,20 @@ message HomeRecommendProductAddData {
   int32 Sort = 4; //排序
 
 }
-
-message HomeRecommendProductAddResp {
+message AddHomeRecommendProductResp {
   string pong = 1;
 }
 
-message HomeRecommendProductDeleteReq {
+// 删除人气推荐商品表
+message DeleteHomeRecommendProductReq {
   repeated int64 ids = 1;
 }
 
-message HomeRecommendProductDeleteResp {
+message DeleteHomeRecommendProductResp {
   string pong = 1;
 }
 
+// 更新人气推荐商品表
 message UpdateRecommendProductSortReq {
   int64 Id = 1; //
   int32 Sort = 2; //排序
@@ -921,58 +1165,78 @@ message UpdateRecommendProductSortResp {
   string pong = 1;
 }
 
-message UpdateRecommendProductStatusReq {
+// 更新人气推荐商品表状态
+message UpdateHomeRecommendProductStatusReq {
   repeated int64 Ids = 1; //
   int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
 
 }
 
-message UpdateRecommendProductStatusResp {
+message UpdateHomeRecommendProductStatusResp {
   string pong = 1;
 }
 
-message HomeRecommendProductListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string ProductName = 3; //商品名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+// 查询人气推荐商品表详情
+message QueryHomeRecommendProductDetailReq {
+    int64 id = 1;
+}
+
+message QueryHomeRecommendProductDetailResp {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
+
+}
+
+// 分页查询人气推荐商品表列表
+message QueryHomeRecommendProductListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
 
 }
 
 message HomeRecommendProductListData {
-  int64 Id = 1; //
-  int64 ProductId = 2; //商品id
-  string ProductName = 3; //商品名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 5; //排序
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
 
 }
 
-message HomeRecommendProductListResp {
+message QueryHomeRecommendProductListResp {
   int64 total = 1;
   repeated  HomeRecommendProductListData list = 2;
 }
 
-//首页人气推荐管理
+// 人气推荐商品表
 service HomeRecommendProductService {
-  //添加人气推荐
-  rpc HomeRecommendProductAdd(HomeRecommendProductAddReq) returns(HomeRecommendProductAddResp);
-  //查询人气推荐
-  rpc HomeRecommendProductList(HomeRecommendProductListReq) returns(HomeRecommendProductListResp);
+  // 添加人气推荐商品表
+  rpc AddHomeRecommendProduct(AddHomeRecommendProductReq) returns (AddHomeRecommendProductResp){}
+  // 删除人气推荐商品表
+  rpc DeleteHomeRecommendProduct(DeleteHomeRecommendProductReq) returns (DeleteHomeRecommendProductResp){}
   //修改推荐排序
   rpc UpdateRecommendProductSort(UpdateRecommendProductSortReq) returns(UpdateRecommendProductSortResp);
-  //批量修改推荐状态
-  rpc UpdateRecommendProductStatus(UpdateRecommendProductStatusReq) returns(UpdateRecommendProductStatusResp);
-  //删除人气推荐
-  rpc HomeRecommendProductDelete(HomeRecommendProductDeleteReq) returns(HomeRecommendProductDeleteResp);
+  // 更新人气推荐商品表状态
+  rpc UpdateHomeRecommendProductStatus(UpdateHomeRecommendProductStatusReq) returns (UpdateHomeRecommendProductStatusResp ){}
+  // 查询人气推荐商品表详情
+   rpc QueryHomeRecommendProductDetail(QueryHomeRecommendProductDetailReq) returns (QueryHomeRecommendProductDetailResp){}
+  // 查询人气推荐商品表列表
+  rpc QueryHomeRecommendProductList(QueryHomeRecommendProductListReq) returns (QueryHomeRecommendProductListResp){}
 
 
 }
-message HomeRecommendSubjectAddReq {
+
+
+// 添加首页推荐专题表
+message AddHomeRecommendSubjectReq {
   repeated HomeRecommendSubjectAddData RecommendSubjectAddData = 1; //
 
 }
-
 message HomeRecommendSubjectAddData {
   int64 SubjectId = 1; //专题id
   string SubjectName = 2; //专题名称
@@ -980,16 +1244,16 @@ message HomeRecommendSubjectAddData {
   int32 Sort = 4; //排序
 
 }
-
-message HomeRecommendSubjectAddResp {
+message AddHomeRecommendSubjectResp {
   string pong = 1;
 }
 
-message HomeRecommendSubjectDeleteReq {
+// 删除首页推荐专题表
+message DeleteHomeRecommendSubjectReq {
   repeated int64 ids = 1;
 }
 
-message HomeRecommendSubjectDeleteResp {
+message DeleteHomeRecommendSubjectResp {
   string pong = 1;
 }
 
@@ -1003,51 +1267,68 @@ message UpdateRecommendSubjectSortResp {
   string pong = 1;
 }
 
-message UpdateRecommendSubjectStatusReq {
+// 更新首页推荐专题表状态
+message UpdateHomeRecommendSubjectStatusReq {
   repeated int64 Ids = 1; //
   int32 RecommendStatus = 2; //推荐状态：0->不推荐;1->推荐
 
 }
 
-message UpdateRecommendSubjectStatusResp {
+message UpdateHomeRecommendSubjectStatusResp {
   string pong = 1;
 }
 
-message HomeRecommendSubjectListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string SubjectName = 3; //专题名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
+// 查询首页推荐专题表详情
+message QueryHomeRecommendSubjectDetailReq {
+    int64 id = 1;
+}
+
+message QueryHomeRecommendSubjectDetailResp {
+  int64 id = 1; //
+  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 3; //排序
+  int64 subject_id = 4; //专题id
+  string subject_name = 5; //专题名称
+
+}
+
+// 分页查询首页推荐专题表列表
+message QueryHomeRecommendSubjectListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int32 recommend_status = 3; //推荐状态：0->不推荐;1->推荐
+  string subject_name = 4; //专题名称
 
 }
 
 message HomeRecommendSubjectListData {
-  int64 Id = 1; //
-  int64 SubjectId = 2; //专题id
-  string SubjectName = 3; //专题名称
-  int32 RecommendStatus = 4; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 5; //排序
+  int64 id = 1; //
+  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 3; //排序
+  int64 subject_id = 4; //专题id
+  string subject_name = 5; //专题名称
 
 }
 
-message HomeRecommendSubjectListResp {
+message QueryHomeRecommendSubjectListResp {
   int64 total = 1;
   repeated  HomeRecommendSubjectListData list = 2;
 }
 
-
-//首页专题推荐管理
+// 首页推荐专题表
 service HomeRecommendSubjectService {
+  // 添加首页推荐专题表
+  rpc AddHomeRecommendSubject(AddHomeRecommendSubjectReq) returns (AddHomeRecommendSubjectResp){}
+  // 删除首页推荐专题表
+  rpc DeleteHomeRecommendSubject(DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp){}
+  // 修改专题推荐排序
+  rpc UpdateRecommendSubjectSort(UpdateRecommendSubjectSortReq) returns (UpdateRecommendSubjectSortResp ){}
+  // 更新首页推荐专题表状态
+  rpc UpdateHomeRecommendSubjectStatus(UpdateHomeRecommendSubjectStatusReq) returns (UpdateHomeRecommendSubjectStatusResp ){}
+  // 查询首页推荐专题表详情
+   rpc QueryHomeRecommendSubjectDetail(QueryHomeRecommendSubjectDetailReq) returns (QueryHomeRecommendSubjectDetailResp){}
+  // 查询首页推荐专题表列表
+  rpc QueryHomeRecommendSubjectList(QueryHomeRecommendSubjectListReq) returns (QueryHomeRecommendSubjectListResp){}
 
-  //添加首页专题推荐
-  rpc HomeRecommendSubjectAdd(HomeRecommendSubjectAddReq) returns(HomeRecommendSubjectAddResp);
-  //查询首页专题推荐
-  rpc HomeRecommendSubjectList(HomeRecommendSubjectListReq) returns(HomeRecommendSubjectListResp);
-  //修改专题推荐排序
-  rpc UpdateRecommendSubjectSort(UpdateRecommendSubjectSortReq) returns(UpdateRecommendSubjectSortResp);
-  //批量修改专题推荐状态
-  rpc UpdateRecommendSubjectStatus(UpdateRecommendSubjectStatusReq) returns(UpdateRecommendSubjectStatusResp);
-  //删除首页专题推荐
-  rpc HomeRecommendSubjectDelete(HomeRecommendSubjectDeleteReq) returns(HomeRecommendSubjectDeleteResp);
 
 }

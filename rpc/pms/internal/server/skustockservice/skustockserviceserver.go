@@ -22,21 +22,34 @@ func NewSkuStockServiceServer(svcCtx *svc.ServiceContext) *SkuStockServiceServer
 	}
 }
 
-func (s *SkuStockServiceServer) SkuStockAdd(ctx context.Context, in *pmsclient.SkuStockAddReq) (*pmsclient.SkuStockAddResp, error) {
-	l := skustockservicelogic.NewSkuStockAddLogic(ctx, s.svcCtx)
-	return l.SkuStockAdd(in)
+// 添加sku的库存
+func (s *SkuStockServiceServer) AddSkuStock(ctx context.Context, in *pmsclient.AddSkuStockReq) (*pmsclient.AddSkuStockResp, error) {
+	l := skustockservicelogic.NewAddSkuStockLogic(ctx, s.svcCtx)
+	return l.AddSkuStock(in)
 }
 
-// 根据商品ID及sku编码模糊搜索sku库存
-func (s *SkuStockServiceServer) SkuStockList(ctx context.Context, in *pmsclient.SkuStockListReq) (*pmsclient.SkuStockListResp, error) {
-	l := skustockservicelogic.NewSkuStockListLogic(ctx, s.svcCtx)
-	return l.SkuStockList(in)
+// 删除sku的库存
+func (s *SkuStockServiceServer) DeleteSkuStock(ctx context.Context, in *pmsclient.DeleteSkuStockReq) (*pmsclient.DeleteSkuStockResp, error) {
+	l := skustockservicelogic.NewDeleteSkuStockLogic(ctx, s.svcCtx)
+	return l.DeleteSkuStock(in)
 }
 
-// 批量更新sku库存信息
-func (s *SkuStockServiceServer) SkuStockUpdate(ctx context.Context, in *pmsclient.SkuStockUpdateReq) (*pmsclient.SkuStockUpdateResp, error) {
-	l := skustockservicelogic.NewSkuStockUpdateLogic(ctx, s.svcCtx)
-	return l.SkuStockUpdate(in)
+// 更新sku的库存
+func (s *SkuStockServiceServer) UpdateSkuStock(ctx context.Context, in *pmsclient.UpdateSkuStockReq) (*pmsclient.UpdateSkuStockResp, error) {
+	l := skustockservicelogic.NewUpdateSkuStockLogic(ctx, s.svcCtx)
+	return l.UpdateSkuStock(in)
+}
+
+// 查询sku的库存详情
+func (s *SkuStockServiceServer) QuerySkuStockDetail(ctx context.Context, in *pmsclient.QuerySkuStockDetailReq) (*pmsclient.QuerySkuStockDetailResp, error) {
+	l := skustockservicelogic.NewQuerySkuStockDetailLogic(ctx, s.svcCtx)
+	return l.QuerySkuStockDetail(in)
+}
+
+// 查询sku的库存列表
+func (s *SkuStockServiceServer) QuerySkuStockList(ctx context.Context, in *pmsclient.QuerySkuStockListReq) (*pmsclient.QuerySkuStockListResp, error) {
+	l := skustockservicelogic.NewQuerySkuStockListLogic(ctx, s.svcCtx)
+	return l.QuerySkuStockList(in)
 }
 
 // 取消订单的时候,释放库存

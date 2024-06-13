@@ -33,7 +33,7 @@ func NewAddCouponLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddCoup
 // AddCoupon 领取指定优惠券
 func (l *AddCouponLogic) AddCoupon(req *types.AddCouponReq) (resp *types.AddCouponResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, err = l.svcCtx.CouponHistoryService.CouponHistoryAdd(l.ctx, &smsclient.CouponHistoryAddReq{
+	_, err = l.svcCtx.CouponHistoryService.AddCouponHistory(l.ctx, &smsclient.AddCouponHistoryReq{
 		CouponId:       req.CouponId,
 		MemberId:       memberId,
 		CouponCode:     "哈哈还没有弄!",

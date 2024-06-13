@@ -110,10 +110,6 @@ service admin-api {
 	@handler QueryByproductCategoryId
 	get /queryByproductCategoryId (QueryByproductCategoryIdReq) returns (QueryByproductCategoryIdResp)
 
-	//更新商品属性
-	@handler ProductAttributeUpdate
-	post /updateProductAttribute (UpdateProductAttributeReq) returns (QueryByproductCategoryIdResp)
-
 	//删除商品属性
 	@handler ProductAttributeDelete
 	get /deleteProductAttribute (DeleteProductAttributeReq) returns (DeleteProductAttributeResp)

@@ -30,7 +30,7 @@ func NewUpdateCategoryNavStatusLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 // UpdateCategoryNavStatus 更新商品分类导航显示状态
-func (l *UpdateCategoryNavStatusLogic) UpdateCategoryNavStatus(in *pmsclient.UpdateProductCategoryStatusReq) (*pmsclient.ProductCategoryUpdateResp, error) {
+func (l *UpdateCategoryNavStatusLogic) UpdateCategoryNavStatus(in *pmsclient.UpdateProductCategoryStatusReq) (*pmsclient.UpdateProductCategoryStatusResp, error) {
 	q := query.PmsProductCategory
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.NavStatus, in.Status)
 
@@ -38,5 +38,5 @@ func (l *UpdateCategoryNavStatusLogic) UpdateCategoryNavStatus(in *pmsclient.Upd
 		return nil, err
 	}
 
-	return &pmsclient.ProductCategoryUpdateResp{}, nil
+	return &pmsclient.UpdateProductCategoryStatusResp{}, nil
 }

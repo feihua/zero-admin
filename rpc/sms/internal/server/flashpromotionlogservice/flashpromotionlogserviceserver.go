@@ -22,22 +22,26 @@ func NewFlashPromotionLogServiceServer(svcCtx *svc.ServiceContext) *FlashPromoti
 	}
 }
 
-func (s *FlashPromotionLogServiceServer) FlashPromotionLogAdd(ctx context.Context, in *smsclient.FlashPromotionLogAddReq) (*smsclient.FlashPromotionLogAddResp, error) {
-	l := flashpromotionlogservicelogic.NewFlashPromotionLogAddLogic(ctx, s.svcCtx)
-	return l.FlashPromotionLogAdd(in)
+// 添加限时购通知记录
+func (s *FlashPromotionLogServiceServer) AddFlashPromotionLog(ctx context.Context, in *smsclient.AddFlashPromotionLogReq) (*smsclient.AddFlashPromotionLogResp, error) {
+	l := flashpromotionlogservicelogic.NewAddFlashPromotionLogLogic(ctx, s.svcCtx)
+	return l.AddFlashPromotionLog(in)
 }
 
-func (s *FlashPromotionLogServiceServer) FlashPromotionLogList(ctx context.Context, in *smsclient.FlashPromotionLogListReq) (*smsclient.FlashPromotionLogListResp, error) {
-	l := flashpromotionlogservicelogic.NewFlashPromotionLogListLogic(ctx, s.svcCtx)
-	return l.FlashPromotionLogList(in)
+// 删除限时购通知记录
+func (s *FlashPromotionLogServiceServer) DeleteFlashPromotionLog(ctx context.Context, in *smsclient.DeleteFlashPromotionLogReq) (*smsclient.DeleteFlashPromotionLogResp, error) {
+	l := flashpromotionlogservicelogic.NewDeleteFlashPromotionLogLogic(ctx, s.svcCtx)
+	return l.DeleteFlashPromotionLog(in)
 }
 
-func (s *FlashPromotionLogServiceServer) FlashPromotionLogUpdate(ctx context.Context, in *smsclient.FlashPromotionLogUpdateReq) (*smsclient.FlashPromotionLogUpdateResp, error) {
-	l := flashpromotionlogservicelogic.NewFlashPromotionLogUpdateLogic(ctx, s.svcCtx)
-	return l.FlashPromotionLogUpdate(in)
+// 查询限时购通知记录详情
+func (s *FlashPromotionLogServiceServer) QueryFlashPromotionLogDetail(ctx context.Context, in *smsclient.QueryFlashPromotionLogDetailReq) (*smsclient.QueryFlashPromotionLogDetailResp, error) {
+	l := flashpromotionlogservicelogic.NewQueryFlashPromotionLogDetailLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionLogDetail(in)
 }
 
-func (s *FlashPromotionLogServiceServer) FlashPromotionLogDelete(ctx context.Context, in *smsclient.FlashPromotionLogDeleteReq) (*smsclient.FlashPromotionLogDeleteResp, error) {
-	l := flashpromotionlogservicelogic.NewFlashPromotionLogDeleteLogic(ctx, s.svcCtx)
-	return l.FlashPromotionLogDelete(in)
+// 查询限时购通知记录列表
+func (s *FlashPromotionLogServiceServer) QueryFlashPromotionLogList(ctx context.Context, in *smsclient.QueryFlashPromotionLogListReq) (*smsclient.QueryFlashPromotionLogListResp, error) {
+	l := flashpromotionlogservicelogic.NewQueryFlashPromotionLogListLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionLogList(in)
 }

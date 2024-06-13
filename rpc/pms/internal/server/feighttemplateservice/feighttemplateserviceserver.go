@@ -22,22 +22,32 @@ func NewFeightTemplateServiceServer(svcCtx *svc.ServiceContext) *FeightTemplateS
 	}
 }
 
-func (s *FeightTemplateServiceServer) FeightTemplateAdd(ctx context.Context, in *pmsclient.FeightTemplateAddReq) (*pmsclient.FeightTemplateAddResp, error) {
-	l := feighttemplateservicelogic.NewFeightTemplateAddLogic(ctx, s.svcCtx)
-	return l.FeightTemplateAdd(in)
+// 添加运费模版
+func (s *FeightTemplateServiceServer) AddFeightTemplate(ctx context.Context, in *pmsclient.AddFeightTemplateReq) (*pmsclient.AddFeightTemplateResp, error) {
+	l := feighttemplateservicelogic.NewAddFeightTemplateLogic(ctx, s.svcCtx)
+	return l.AddFeightTemplate(in)
 }
 
-func (s *FeightTemplateServiceServer) FeightTemplateList(ctx context.Context, in *pmsclient.FeightTemplateListReq) (*pmsclient.FeightTemplateListResp, error) {
-	l := feighttemplateservicelogic.NewFeightTemplateListLogic(ctx, s.svcCtx)
-	return l.FeightTemplateList(in)
+// 删除运费模版
+func (s *FeightTemplateServiceServer) DeleteFeightTemplate(ctx context.Context, in *pmsclient.DeleteFeightTemplateReq) (*pmsclient.DeleteFeightTemplateResp, error) {
+	l := feighttemplateservicelogic.NewDeleteFeightTemplateLogic(ctx, s.svcCtx)
+	return l.DeleteFeightTemplate(in)
 }
 
-func (s *FeightTemplateServiceServer) FeightTemplateUpdate(ctx context.Context, in *pmsclient.FeightTemplateUpdateReq) (*pmsclient.FeightTemplateUpdateResp, error) {
-	l := feighttemplateservicelogic.NewFeightTemplateUpdateLogic(ctx, s.svcCtx)
-	return l.FeightTemplateUpdate(in)
+// 更新运费模版
+func (s *FeightTemplateServiceServer) UpdateFeightTemplate(ctx context.Context, in *pmsclient.UpdateFeightTemplateReq) (*pmsclient.UpdateFeightTemplateResp, error) {
+	l := feighttemplateservicelogic.NewUpdateFeightTemplateLogic(ctx, s.svcCtx)
+	return l.UpdateFeightTemplate(in)
 }
 
-func (s *FeightTemplateServiceServer) FeightTemplateDelete(ctx context.Context, in *pmsclient.FeightTemplateDeleteReq) (*pmsclient.FeightTemplateDeleteResp, error) {
-	l := feighttemplateservicelogic.NewFeightTemplateDeleteLogic(ctx, s.svcCtx)
-	return l.FeightTemplateDelete(in)
+// 查询运费模版详情
+func (s *FeightTemplateServiceServer) QueryFeightTemplateDetail(ctx context.Context, in *pmsclient.QueryFeightTemplateDetailReq) (*pmsclient.QueryFeightTemplateDetailResp, error) {
+	l := feighttemplateservicelogic.NewQueryFeightTemplateDetailLogic(ctx, s.svcCtx)
+	return l.QueryFeightTemplateDetail(in)
+}
+
+// 查询运费模版列表
+func (s *FeightTemplateServiceServer) QueryFeightTemplateList(ctx context.Context, in *pmsclient.QueryFeightTemplateListReq) (*pmsclient.QueryFeightTemplateListResp, error) {
+	l := feighttemplateservicelogic.NewQueryFeightTemplateListLogic(ctx, s.svcCtx)
+	return l.QueryFeightTemplateList(in)
 }

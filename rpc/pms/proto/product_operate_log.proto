@@ -9,7 +9,7 @@ message AddProductOperateLogReq {
   string create_time = 1; //
   int32 gift_point_new = 2; //
   int32 gift_point_old = 3; //赠送的积分
-  int64 id = 4; //
+  int32 use_point_limit_old = 4; //
   string operate_man = 5; //操作人
   int64 price_new = 6; //
   int64 price_old = 7; //
@@ -17,7 +17,7 @@ message AddProductOperateLogReq {
   int64 sale_price_new = 9; //
   int64 sale_price_old = 10; //
   int32 use_point_limit_new = 11; //
-  int32 use_point_limit_old = 12; //
+
 
 }
 
@@ -31,48 +31,6 @@ message DeleteProductOperateLogReq {
 }
 
 message DeleteProductOperateLogResp {
-  string pong = 1;
-}
-
-// 更新
-message UpdateProductOperateLogReq {
-  string create_time = 1; //
-  int32 gift_point_new = 2; //
-  int32 gift_point_old = 3; //赠送的积分
-  int64 id = 4; //
-  string operate_man = 5; //操作人
-  int64 price_new = 6; //
-  int64 price_old = 7; //
-  int64 product_id = 8; //
-  int64 sale_price_new = 9; //
-  int64 sale_price_old = 10; //
-  int32 use_point_limit_new = 11; //
-  int32 use_point_limit_old = 12; //
-
-}
-
-message UpdateProductOperateLogResp {
-  string pong = 1;
-}
-
-// 更新状态
-message UpdateProductOperateLogStatusReq {
-  string create_time = 1; //
-  int32 gift_point_new = 2; //
-  int32 gift_point_old = 3; //赠送的积分
-  int64 id = 4; //
-  string operate_man = 5; //操作人
-  int64 price_new = 6; //
-  int64 price_old = 7; //
-  int64 product_id = 8; //
-  int64 sale_price_new = 9; //
-  int64 sale_price_old = 10; //
-  int32 use_point_limit_new = 11; //
-  int32 use_point_limit_old = 12; //
-
-}
-
-message UpdateProductOperateLogStatusResp {
   string pong = 1;
 }
 
@@ -99,18 +57,6 @@ message QueryProductOperateLogDetailResp {
 
 // 分页查询列表
 message QueryProductOperateLogListReq {
-  string create_time = 1; //
-  int32 gift_point_new = 2; //
-  int32 gift_point_old = 3; //赠送的积分
-  int64 id = 4; //
-  string operate_man = 5; //操作人
-  int64 price_new = 6; //
-  int64 price_old = 7; //
-  int64 product_id = 8; //
-  int64 sale_price_new = 9; //
-  int64 sale_price_old = 10; //
-  int32 use_point_limit_new = 11; //
-  int32 use_point_limit_old = 12; //
  int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
 }
@@ -142,10 +88,6 @@ service ProductOperateLogService {
   rpc AddProductOperateLog(AddProductOperateLogReq) returns (AddProductOperateLogResp){}
   // 删除
   rpc DeleteProductOperateLog(DeleteProductOperateLogReq) returns (DeleteProductOperateLogResp){}
-  // 更新
-  rpc UpdateProductOperateLog(UpdateProductOperateLogReq) returns (UpdateProductOperateLogResp ){}
-  // 更新状态
-  rpc UpdateProductOperateLogStatus(UpdateProductOperateLogStatusReq) returns (UpdateProductOperateLogStatusResp ){}
   // 查询详情
    rpc QueryProductOperateLogDetail(QueryProductOperateLogDetailReq) returns (QueryProductOperateLogDetailResp){}
   // 查询列表

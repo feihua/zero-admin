@@ -9,7 +9,7 @@ import (
 
 // 根据商品Ids查询商品
 func queryProductList(pmsClient productservice.ProductService, productIdLists []int64, ctx context.Context) []types.ProductList {
-	productListResp, _ := pmsClient.ProductListByIds(ctx, &pmsclient.ProductByIdsReq{Ids: productIdLists})
+	productListResp, _ := pmsClient.QueryProductListByIds(ctx, &pmsclient.QueryProductByIdsReq{Ids: productIdLists})
 	productLists := make([]types.ProductList, 0)
 	for _, item := range productListResp.List {
 		productLists = append(productLists, types.ProductList{

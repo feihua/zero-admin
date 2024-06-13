@@ -32,7 +32,7 @@ func NewUpdateBrandRecommendStatusLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 // UpdateBrandRecommendStatus 更新品牌的推荐状态
-func (l *UpdateBrandRecommendStatusLogic) UpdateBrandRecommendStatus(in *pmsclient.UpdateBrandRecommendStatusReq) (*pmsclient.UpdateBrandRecommendStatusResp, error) {
+func (l *UpdateBrandRecommendStatusLogic) UpdateBrandRecommendStatus(in *pmsclient.UpdateBrandRecommendStatusReq) (*pmsclient.UpdateBrandStatusResp, error) {
 	brand := query.PmsBrand
 
 	_, err := brand.WithContext(l.ctx).Where(brand.ID.In(in.Ids...)).Update(brand.RecommendStatus, in.RecommendStatus)
@@ -41,5 +41,5 @@ func (l *UpdateBrandRecommendStatusLogic) UpdateBrandRecommendStatus(in *pmsclie
 		return nil, errors.New("更新品牌的推荐状态失败")
 	}
 
-	return &pmsclient.UpdateBrandRecommendStatusResp{}, nil
+	return &pmsclient.UpdateBrandStatusResp{}, nil
 }

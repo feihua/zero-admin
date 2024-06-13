@@ -33,7 +33,7 @@ func NewProductAttributeAddLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // ProductAttributeAdd 添加商品属性
 func (l *ProductAttributeAddLogic) ProductAttributeAdd(req *types.AddProductAttributeReq) (resp *types.AddProductAttributeResp, err error) {
-	_, err = l.svcCtx.ProductAttributeService.ProductAttributeAdd(l.ctx, &pmsclient.ProductAttributeAddReq{
+	_, err = l.svcCtx.ProductAttributeService.AddProductAttribute(l.ctx, &pmsclient.AddProductAttributeReq{
 		ProductAttributeCategoryId: req.ProductAttributeCategoryId,
 		Name:                       req.Name,
 		SelectType:                 req.SelectType,

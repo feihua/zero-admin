@@ -37,7 +37,7 @@ func NewUpdateRecommendSubjectStatusLogic(ctx context.Context, svcCtx *svc.Servi
 // 2.修改cms_subject记录的推荐状态(cms-rpc)
 func (l *UpdateRecommendSubjectStatusLogic) UpdateRecommendSubjectStatus(req *types.UpdateRecommendSubjectStatusReq) (resp *types.UpdateRecommendSubjectStatusResp, err error) {
 	// 1.修改sms_home_recommend_subject的记录推荐状态(sms-rpc)
-	_, err = l.svcCtx.HomeRecommendSubjectService.UpdateRecommendSubjectStatus(l.ctx, &smsclient.UpdateRecommendSubjectStatusReq{
+	_, err = l.svcCtx.HomeRecommendSubjectService.UpdateHomeRecommendSubjectStatus(l.ctx, &smsclient.UpdateHomeRecommendSubjectStatusReq{
 		Ids:             req.Ids,
 		RecommendStatus: req.RecommendStatus,
 	})

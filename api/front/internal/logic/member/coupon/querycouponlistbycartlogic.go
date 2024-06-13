@@ -52,7 +52,7 @@ func (l *QueryCouponListByCartLogic) QueryCouponListByCart(req *types.CouponList
 
 func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromotionItemList []types.CarItemtPromotionListData) ([]*smsclient.CouponHistoryDetailListData, []*smsclient.CouponHistoryDetailListData) {
 	memberId, _ := ctx.Value("memberId").(json.Number).Int64()
-	historyDetailList, _ := svcCtx.CouponHistoryService.QueryCouponHistoryDetailList(ctx, &smsclient.CouponHistoryDetailListReq{
+	historyDetailList, _ := svcCtx.CouponHistoryService.QueryCouponHistoryDetailList(ctx, &smsclient.QueryCouponHistoryDetailListReq{
 		MemberId: memberId,
 	})
 

@@ -31,8 +31,8 @@ func NewRecommendNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // RecommendNewProductList 分页获取新品推荐商品
 func (l *RecommendNewProductListLogic) RecommendNewProductList(req *types.RecommendNewProductListReq) (resp *types.RecommendNewProductListResp, err error) {
-	homeNewProductList, _ := l.svcCtx.HomeNewProductService.HomeNewProductList(l.ctx, &smsclient.HomeNewProductListReq{
-		Current:         req.Current,
+	homeNewProductList, _ := l.svcCtx.HomeNewProductService.QueryHomeNewProductList(l.ctx, &smsclient.QueryHomeNewProductListReq{
+		PageNum:         req.Current,
 		PageSize:        req.PageSize,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})

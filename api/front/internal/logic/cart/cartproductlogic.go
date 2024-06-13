@@ -31,7 +31,7 @@ func NewCartProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartP
 
 // CartProduct 获取购物车中某个商品的规格,用于重选规格
 func (l *CartProductLogic) CartProduct(req *types.CartProductReq) (resp *types.CartProductResp, err error) {
-	productResp, _ := l.svcCtx.ProductService.ProductDetailById(l.ctx, &pmsclient.ProductDetailByIdReq{
+	productResp, _ := l.svcCtx.ProductService.QueryProductDetailById(l.ctx, &pmsclient.QueryProductDetailByIdReq{
 		Id: req.ProductId,
 	})
 	return &types.CartProductResp{
@@ -45,7 +45,7 @@ func (l *CartProductLogic) CartProduct(req *types.CartProductReq) (resp *types.C
 }
 
 // 3.获取商品属性信息
-func buildProductAttributeListData(resp *pmsclient.ProductDetailByIdResp) []types.CartItemProductAttributeList {
+func buildProductAttributeListData(resp *pmsclient.QueryProductDetailByIdResp) []types.CartItemProductAttributeList {
 	var list []types.CartItemProductAttributeList
 	for _, item := range resp.ProductAttributeList {
 		list = append(list, types.CartItemProductAttributeList{
@@ -68,7 +68,7 @@ func buildProductAttributeListData(resp *pmsclient.ProductDetailByIdResp) []type
 }
 
 // 5.获取商品SKU库存信息
-func buildSkuStockListData(resp *pmsclient.ProductDetailByIdResp) []types.CartItemSkuStockList {
+func buildSkuStockListData(resp *pmsclient.QueryProductDetailByIdResp) []types.CartItemSkuStockList {
 	var list []types.CartItemSkuStockList
 	for _, item := range resp.SkuStockList {
 

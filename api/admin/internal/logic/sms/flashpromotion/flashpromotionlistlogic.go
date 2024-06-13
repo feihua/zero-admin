@@ -34,8 +34,8 @@ func NewFlashPromotionListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // FlashPromotionList 查询秒杀活动
 func (l *FlashPromotionListLogic) FlashPromotionList(req *types.ListFlashPromotionReq) (*types.ListFlashPromotionResp, error) {
-	resp, err := l.svcCtx.FlashPromotionService.FlashPromotionList(l.ctx, &smsclient.FlashPromotionListReq{
-		Current:   req.Current,
+	resp, err := l.svcCtx.FlashPromotionService.QueryFlashPromotionList(l.ctx, &smsclient.QueryFlashPromotionListReq{
+		PageNum:   req.Current,
 		PageSize:  req.PageSize,
 		Title:     strings.TrimSpace(req.Title),
 		StartDate: req.StartDate,

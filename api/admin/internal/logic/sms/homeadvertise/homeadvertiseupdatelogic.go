@@ -27,7 +27,7 @@ func NewHomeAdvertiseUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(req types.UpdateHomeAdvertiseReq) (*types.UpdateHomeAdvertiseResp, error) {
-	_, err := l.svcCtx.HomeAdvertiseService.HomeAdvertiseUpdate(l.ctx, &smsclient.HomeAdvertiseUpdateReq{
+	_, err := l.svcCtx.HomeAdvertiseService.UpdateHomeAdvertise(l.ctx, &smsclient.UpdateHomeAdvertiseReq{
 		Id:        req.Id,
 		Name:      req.Name,
 		Type:      req.Type,

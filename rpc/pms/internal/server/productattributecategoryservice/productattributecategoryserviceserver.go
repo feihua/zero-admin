@@ -22,32 +22,32 @@ func NewProductAttributeCategoryServiceServer(svcCtx *svc.ServiceContext) *Produ
 	}
 }
 
-// 添加商品属性分类
-func (s *ProductAttributeCategoryServiceServer) ProductAttributeCategoryAdd(ctx context.Context, in *pmsclient.ProductAttributeCategoryAddReq) (*pmsclient.ProductAttributeCategoryAddResp, error) {
-	l := productattributecategoryservicelogic.NewProductAttributeCategoryAddLogic(ctx, s.svcCtx)
-	return l.ProductAttributeCategoryAdd(in)
+// 添加产品属性分类表
+func (s *ProductAttributeCategoryServiceServer) AddProductAttributeCategory(ctx context.Context, in *pmsclient.AddProductAttributeCategoryReq) (*pmsclient.AddProductAttributeCategoryResp, error) {
+	l := productattributecategoryservicelogic.NewAddProductAttributeCategoryLogic(ctx, s.svcCtx)
+	return l.AddProductAttributeCategory(in)
 }
 
-// 查询商品属性分类
-func (s *ProductAttributeCategoryServiceServer) ProductAttributeCategoryList(ctx context.Context, in *pmsclient.ProductAttributeCategoryListReq) (*pmsclient.ProductAttributeCategoryListResp, error) {
-	l := productattributecategoryservicelogic.NewProductAttributeCategoryListLogic(ctx, s.svcCtx)
-	return l.ProductAttributeCategoryList(in)
+// 删除产品属性分类表
+func (s *ProductAttributeCategoryServiceServer) DeleteProductAttributeCategory(ctx context.Context, in *pmsclient.DeleteProductAttributeCategoryReq) (*pmsclient.DeleteProductAttributeCategoryResp, error) {
+	l := productattributecategoryservicelogic.NewDeleteProductAttributeCategoryLogic(ctx, s.svcCtx)
+	return l.DeleteProductAttributeCategory(in)
+}
+
+// 更新产品属性分类表
+func (s *ProductAttributeCategoryServiceServer) UpdateProductAttributeCategory(ctx context.Context, in *pmsclient.UpdateProductAttributeCategoryReq) (*pmsclient.UpdateProductAttributeCategoryResp, error) {
+	l := productattributecategoryservicelogic.NewUpdateProductAttributeCategoryLogic(ctx, s.svcCtx)
+	return l.UpdateProductAttributeCategory(in)
+}
+
+// 查询产品属性分类表列表
+func (s *ProductAttributeCategoryServiceServer) QueryProductAttributeCategoryList(ctx context.Context, in *pmsclient.QueryProductAttributeCategoryListReq) (*pmsclient.QueryProductAttributeCategoryListResp, error) {
+	l := productattributecategoryservicelogic.NewQueryProductAttributeCategoryListLogic(ctx, s.svcCtx)
+	return l.QueryProductAttributeCategoryList(in)
 }
 
 // 获取所有商品属性分类及其下属性
-func (s *ProductAttributeCategoryServiceServer) QueryCategoryWithAttrList(ctx context.Context, in *pmsclient.ProductAttributeCategoryListReq) (*pmsclient.ProductAttributeCategoryListResp, error) {
+func (s *ProductAttributeCategoryServiceServer) QueryCategoryWithAttrList(ctx context.Context, in *pmsclient.QueryProductAttributeCategoryListReq) (*pmsclient.QueryProductAttributeCategoryListResp, error) {
 	l := productattributecategoryservicelogic.NewQueryCategoryWithAttrListLogic(ctx, s.svcCtx)
 	return l.QueryCategoryWithAttrList(in)
-}
-
-// 更新商品属性分类
-func (s *ProductAttributeCategoryServiceServer) ProductAttributeCategoryUpdate(ctx context.Context, in *pmsclient.ProductAttributeCategoryUpdateReq) (*pmsclient.ProductAttributeCategoryUpdateResp, error) {
-	l := productattributecategoryservicelogic.NewProductAttributeCategoryUpdateLogic(ctx, s.svcCtx)
-	return l.ProductAttributeCategoryUpdate(in)
-}
-
-// 删除商品属性分类
-func (s *ProductAttributeCategoryServiceServer) ProductAttributeCategoryDelete(ctx context.Context, in *pmsclient.ProductAttributeCategoryDeleteReq) (*pmsclient.ProductAttributeCategoryDeleteResp, error) {
-	l := productattributecategoryservicelogic.NewProductAttributeCategoryDeleteLogic(ctx, s.svcCtx)
-	return l.ProductAttributeCategoryDelete(in)
 }

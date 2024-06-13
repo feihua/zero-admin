@@ -3265,21 +3265,6 @@ type UpdateDictTypeStatusResp struct {
 	Message string `json:"message"`
 }
 
-type UpdateFlashPromotionLogReq struct {
-	Id            int64  `json:"id"`
-	MemberId      int64  `json:"memberId"`
-	ProductId     int64  `json:"productId"`
-	MemberPhone   string `json:"memberPhone"`
-	ProductName   string `json:"productName"`
-	SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-	SendTime      string `json:"sendTime"`
-}
-
-type UpdateFlashPromotionLogResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateFlashPromotionProductRelationReq struct {
 	ID                                     int64 `json:"id"`                      // 编号
 	FlashPromotionProductRelationID        int64 ` json:"flashPromotionId"`       // 限时购id

@@ -22,22 +22,20 @@ func NewProductFullReductionServiceServer(svcCtx *svc.ServiceContext) *ProductFu
 	}
 }
 
-func (s *ProductFullReductionServiceServer) ProductFullReductionAdd(ctx context.Context, in *pmsclient.ProductFullReductionAddReq) (*pmsclient.ProductFullReductionAddResp, error) {
-	l := productfullreductionservicelogic.NewProductFullReductionAddLogic(ctx, s.svcCtx)
-	return l.ProductFullReductionAdd(in)
+// 添加产品满减表(只针对同商品)
+func (s *ProductFullReductionServiceServer) AddProductFullReduction(ctx context.Context, in *pmsclient.AddProductFullReductionReq) (*pmsclient.AddProductFullReductionResp, error) {
+	l := productfullreductionservicelogic.NewAddProductFullReductionLogic(ctx, s.svcCtx)
+	return l.AddProductFullReduction(in)
 }
 
-func (s *ProductFullReductionServiceServer) ProductFullReductionList(ctx context.Context, in *pmsclient.ProductFullReductionListReq) (*pmsclient.ProductFullReductionListResp, error) {
-	l := productfullreductionservicelogic.NewProductFullReductionListLogic(ctx, s.svcCtx)
-	return l.ProductFullReductionList(in)
+// 删除产品满减表(只针对同商品)
+func (s *ProductFullReductionServiceServer) DeleteProductFullReduction(ctx context.Context, in *pmsclient.DeleteProductFullReductionReq) (*pmsclient.DeleteProductFullReductionResp, error) {
+	l := productfullreductionservicelogic.NewDeleteProductFullReductionLogic(ctx, s.svcCtx)
+	return l.DeleteProductFullReduction(in)
 }
 
-func (s *ProductFullReductionServiceServer) ProductFullReductionUpdate(ctx context.Context, in *pmsclient.ProductFullReductionUpdateReq) (*pmsclient.ProductFullReductionUpdateResp, error) {
-	l := productfullreductionservicelogic.NewProductFullReductionUpdateLogic(ctx, s.svcCtx)
-	return l.ProductFullReductionUpdate(in)
-}
-
-func (s *ProductFullReductionServiceServer) ProductFullReductionDelete(ctx context.Context, in *pmsclient.ProductFullReductionDeleteReq) (*pmsclient.ProductFullReductionDeleteResp, error) {
-	l := productfullreductionservicelogic.NewProductFullReductionDeleteLogic(ctx, s.svcCtx)
-	return l.ProductFullReductionDelete(in)
+// 查询产品满减表(只针对同商品)列表
+func (s *ProductFullReductionServiceServer) QueryProductFullReductionList(ctx context.Context, in *pmsclient.QueryProductFullReductionListReq) (*pmsclient.QueryProductFullReductionListResp, error) {
+	l := productfullreductionservicelogic.NewQueryProductFullReductionListLogic(ctx, s.svcCtx)
+	return l.QueryProductFullReductionList(in)
 }

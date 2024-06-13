@@ -33,7 +33,7 @@ func NewProductAttributeDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCont
 
 // ProductAttributeDelete 删除商品属性
 func (l *ProductAttributeDeleteLogic) ProductAttributeDelete(req *types.DeleteProductAttributeReq) (resp *types.DeleteProductAttributeResp, err error) {
-	_, err = l.svcCtx.ProductAttributeService.ProductAttributeDelete(l.ctx, &pmsclient.ProductAttributeDeleteReq{
+	_, err = l.svcCtx.ProductAttributeService.DeleteProductAttribute(l.ctx, &pmsclient.DeleteProductAttributeReq{
 		Ids: req.Ids,
 	})
 

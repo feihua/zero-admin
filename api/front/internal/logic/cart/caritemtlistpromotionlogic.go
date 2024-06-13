@@ -105,10 +105,10 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 
 	//4.查询所有商品的优惠相关信息(商品的促销信息，包括sku、打折优惠、满减优惠)
 	//过滤出所有商品的id,查询表pms_product,pms_sku_stock,pms_product_ladder,pms_product_full_reduction
-	productList := make([]*pmsclient.ProductDetailByIdResp, 0)            //方便后面统计金额
-	productListMap := make(map[int64]*pmsclient.ProductDetailByIdResp, 0) //方便取数判断
+	productList := make([]*pmsclient.QueryProductDetailByIdResp, 0)            //方便后面统计金额
+	productListMap := make(map[int64]*pmsclient.QueryProductDetailByIdResp, 0) //方便取数判断
 	for _, item := range cartItemListData {
-		productResp, _ := svcCtx.ProductService.ProductDetailById(ctx, &pmsclient.ProductDetailByIdReq{
+		productResp, _ := svcCtx.ProductService.QueryProductDetailById(ctx, &pmsclient.QueryProductDetailByIdReq{
 			Id: item.ProductId,
 		})
 		productList = append(productList, productResp)
@@ -182,7 +182,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 
 			//根据购买商品数量获取满足条件的打折优惠策略
 			productLadderList := promotionProduct.ProductLadderList
-			var productLadder *pmsclient.ProductLadderListData
+			var productLadder *pmsclient.ProductLadderData
 			for _, item := range productLadderList {
 				if count > item.Count {
 					productLadder = item
@@ -220,7 +220,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 			}
 			//获取满减
 			productFullReductionList := promotionProduct.ProductFullReductionList
-			var productFull *pmsclient.ProductFullReductionListData
+			var productFull *pmsclient.ProductFullReductionData
 			for _, item := range productFullReductionList {
 				if amount-item.FullPrice > 0 {
 					productFull = item
@@ -249,7 +249,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 			//从sms_flash_promotion_product_relation表获取价格
 		} else if promotionType == 5 {
 			for _, item := range itemList {
-				promotionByProduct, _ := svcCtx.FlashPromotionProductRelationService.QueryFlashPromotionByProduct(ctx, &smsclient.QueryFlashPromotionByProductReq{
+				promotionByProduct, _ := svcCtx.FlashPromotionProductRelationService.QueryFlashPromotionProductRelationDetail(ctx, &smsclient.QueryFlashPromotionProductRelationDetailReq{
 					ProductId: item.ProductId,
 				})
 				skuStock := getSkuStock(skuStockList, item.ProductSkuId)
@@ -270,7 +270,7 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 }
 
 // 对没满足优惠条件的商品进行处理
-func handleNoReduce(itemList []*omsclient.CartItemListData, skuStockList []*pmsclient.SkuStockListData, product *pmsclient.ProductListData, cartPromotionItemList []types.CarItemtPromotionListData) []types.CarItemtPromotionListData {
+func handleNoReduce(itemList []*omsclient.CartItemListData, skuStockList []*pmsclient.SkuStockData, product *pmsclient.ProductListData, cartPromotionItemList []types.CarItemtPromotionListData) []types.CarItemtPromotionListData {
 	for _, item := range itemList {
 		skuStock := getSkuStock(skuStockList, item.ProductSkuId)
 		cartPromotionItem := types.CarItemtPromotionListData{}
@@ -287,8 +287,8 @@ func handleNoReduce(itemList []*omsclient.CartItemListData, skuStockList []*pmsc
 }
 
 // 获取sku
-func getSkuStock(skuStockList []*pmsclient.SkuStockListData, productSkuId int64) *pmsclient.SkuStockListData {
-	var skuStock *pmsclient.SkuStockListData
+func getSkuStock(skuStockList []*pmsclient.SkuStockData, productSkuId int64) *pmsclient.SkuStockData {
+	var skuStock *pmsclient.SkuStockData
 	for _, sku := range skuStockList {
 		if sku.Id == productSkuId {
 			skuStock = sku

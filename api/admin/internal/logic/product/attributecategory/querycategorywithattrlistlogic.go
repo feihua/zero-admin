@@ -33,7 +33,7 @@ func NewQueryCategoryWithAttrListLogic(ctx context.Context, svcCtx *svc.ServiceC
 
 // QueryCategoryWithAttrList 获取所有商品属性分类及其下属性
 func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList() (resp *types.ListProductAttributecategoryResp, err error) {
-	attributeList, er := l.svcCtx.ProductAttributeCategoryService.QueryCategoryWithAttrList(l.ctx, &pmsclient.ProductAttributeCategoryListReq{})
+	attributeList, er := l.svcCtx.ProductAttributeCategoryService.QueryCategoryWithAttrList(l.ctx, &pmsclient.QueryProductAttributeCategoryListReq{})
 
 	if er != nil {
 		logc.Errorf(l.ctx, "获取所有商品属性分类及其下属性列表异常:%s", er.Error())

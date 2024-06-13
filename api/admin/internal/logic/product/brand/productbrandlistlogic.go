@@ -34,8 +34,8 @@ func NewProductBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) P
 
 // ProductBrandList 查询商品品牌
 func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) (*types.ListProductBrandResp, error) {
-	resp, err := l.svcCtx.BrandService.BrandList(l.ctx, &pmsclient.BrandListReq{
-		Current:       req.Current,
+	resp, err := l.svcCtx.BrandService.QueryBrandList(l.ctx, &pmsclient.QueryBrandListReq{
+		PageNum:       req.Current,
 		PageSize:      req.PageSize,
 		Name:          strings.TrimSpace(req.Name),
 		FactoryStatus: req.FactoryStatus,

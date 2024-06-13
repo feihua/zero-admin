@@ -41,7 +41,7 @@ func NewProductUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Prod
 func (l *ProductUpdateLogic) ProductUpdate(req types.UpdateProductReq) (*types.UpdateProductResp, error) {
 	product := req.ProductData
 	productId := product.Id
-	_, err := l.svcCtx.ProductService.ProductUpdate(l.ctx, &pmsclient.ProductUpdateReq{
+	_, err := l.svcCtx.ProductService.UpdateProduct(l.ctx, &pmsclient.UpdateProductReq{
 		Id:                         productId,
 		BrandId:                    product.BrandId,
 		ProductCategoryId:          product.ProductCategoryId,

@@ -38,7 +38,7 @@ func NewHomeRecommendSubjectDeleteLogic(ctx context.Context, svcCtx *svc.Service
 func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req types.DeleteHomeRecommendSubjectReq) (*types.DeleteHomeRecommendSubjectResp, error) {
 
 	// 1.删除sms_home_recommend_subject的记录(sms-rpc)
-	_, err := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectDelete(l.ctx, &smsclient.HomeRecommendSubjectDeleteReq{
+	_, err := l.svcCtx.HomeRecommendSubjectService.DeleteHomeRecommendSubject(l.ctx, &smsclient.DeleteHomeRecommendSubjectReq{
 		Ids: req.Ids,
 	})
 

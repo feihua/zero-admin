@@ -22,16 +22,16 @@ func NewHomeRecommendProductServiceServer(svcCtx *svc.ServiceContext) *HomeRecom
 	}
 }
 
-// 添加人气推荐
-func (s *HomeRecommendProductServiceServer) HomeRecommendProductAdd(ctx context.Context, in *smsclient.HomeRecommendProductAddReq) (*smsclient.HomeRecommendProductAddResp, error) {
-	l := homerecommendproductservicelogic.NewHomeRecommendProductAddLogic(ctx, s.svcCtx)
-	return l.HomeRecommendProductAdd(in)
+// 添加人气推荐商品表
+func (s *HomeRecommendProductServiceServer) AddHomeRecommendProduct(ctx context.Context, in *smsclient.AddHomeRecommendProductReq) (*smsclient.AddHomeRecommendProductResp, error) {
+	l := homerecommendproductservicelogic.NewAddHomeRecommendProductLogic(ctx, s.svcCtx)
+	return l.AddHomeRecommendProduct(in)
 }
 
-// 查询人气推荐
-func (s *HomeRecommendProductServiceServer) HomeRecommendProductList(ctx context.Context, in *smsclient.HomeRecommendProductListReq) (*smsclient.HomeRecommendProductListResp, error) {
-	l := homerecommendproductservicelogic.NewHomeRecommendProductListLogic(ctx, s.svcCtx)
-	return l.HomeRecommendProductList(in)
+// 删除人气推荐商品表
+func (s *HomeRecommendProductServiceServer) DeleteHomeRecommendProduct(ctx context.Context, in *smsclient.DeleteHomeRecommendProductReq) (*smsclient.DeleteHomeRecommendProductResp, error) {
+	l := homerecommendproductservicelogic.NewDeleteHomeRecommendProductLogic(ctx, s.svcCtx)
+	return l.DeleteHomeRecommendProduct(in)
 }
 
 // 修改推荐排序
@@ -40,14 +40,20 @@ func (s *HomeRecommendProductServiceServer) UpdateRecommendProductSort(ctx conte
 	return l.UpdateRecommendProductSort(in)
 }
 
-// 批量修改推荐状态
-func (s *HomeRecommendProductServiceServer) UpdateRecommendProductStatus(ctx context.Context, in *smsclient.UpdateRecommendProductStatusReq) (*smsclient.UpdateRecommendProductStatusResp, error) {
-	l := homerecommendproductservicelogic.NewUpdateRecommendProductStatusLogic(ctx, s.svcCtx)
-	return l.UpdateRecommendProductStatus(in)
+// 更新人气推荐商品表状态
+func (s *HomeRecommendProductServiceServer) UpdateHomeRecommendProductStatus(ctx context.Context, in *smsclient.UpdateHomeRecommendProductStatusReq) (*smsclient.UpdateHomeRecommendProductStatusResp, error) {
+	l := homerecommendproductservicelogic.NewUpdateHomeRecommendProductStatusLogic(ctx, s.svcCtx)
+	return l.UpdateHomeRecommendProductStatus(in)
 }
 
-// 删除人气推荐
-func (s *HomeRecommendProductServiceServer) HomeRecommendProductDelete(ctx context.Context, in *smsclient.HomeRecommendProductDeleteReq) (*smsclient.HomeRecommendProductDeleteResp, error) {
-	l := homerecommendproductservicelogic.NewHomeRecommendProductDeleteLogic(ctx, s.svcCtx)
-	return l.HomeRecommendProductDelete(in)
+// 查询人气推荐商品表详情
+func (s *HomeRecommendProductServiceServer) QueryHomeRecommendProductDetail(ctx context.Context, in *smsclient.QueryHomeRecommendProductDetailReq) (*smsclient.QueryHomeRecommendProductDetailResp, error) {
+	l := homerecommendproductservicelogic.NewQueryHomeRecommendProductDetailLogic(ctx, s.svcCtx)
+	return l.QueryHomeRecommendProductDetail(in)
+}
+
+// 查询人气推荐商品表列表
+func (s *HomeRecommendProductServiceServer) QueryHomeRecommendProductList(ctx context.Context, in *smsclient.QueryHomeRecommendProductListReq) (*smsclient.QueryHomeRecommendProductListResp, error) {
+	l := homerecommendproductservicelogic.NewQueryHomeRecommendProductListLogic(ctx, s.svcCtx)
+	return l.QueryHomeRecommendProductList(in)
 }

@@ -31,8 +31,8 @@ func NewRecommendHotProductListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // RecommendHotProductList 分页获取人气推荐商品
 func (l *RecommendHotProductListLogic) RecommendHotProductList(req *types.RecommendHotProductListReq) (resp *types.RecommendHotProductListResp, err error) {
-	homeRecommendProductList, _ := l.svcCtx.HomeRecommendProductService.HomeRecommendProductList(l.ctx, &smsclient.HomeRecommendProductListReq{
-		Current:         req.Current,
+	homeRecommendProductList, _ := l.svcCtx.HomeRecommendProductService.QueryHomeRecommendProductList(l.ctx, &smsclient.QueryHomeRecommendProductListReq{
+		PageNum:         req.Current,
 		PageSize:        req.PageSize,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})

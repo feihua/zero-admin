@@ -37,7 +37,7 @@ func NewHomeBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Ho
 // 2.修改pms_brand记录的状态为不推荐(pms-rpc)
 func (l *HomeBrandDeleteLogic) HomeBrandDelete(req types.DeleteHomeBrandReq) (*types.DeleteHomeBrandResp, error) {
 	// 1.删除sms_home_brand的记录(sms-rpc)
-	_, err := l.svcCtx.HomeBrandService.HomeBrandDelete(l.ctx, &smsclient.HomeBrandDeleteReq{
+	_, err := l.svcCtx.HomeBrandService.DeleteHomeBrand(l.ctx, &smsclient.DeleteHomeBrandReq{
 		Ids: req.Ids,
 	})
 

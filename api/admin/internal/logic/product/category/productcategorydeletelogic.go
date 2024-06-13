@@ -33,7 +33,7 @@ func NewProductCategoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // ProductCategoryDelete 删除商品分类
 func (l *ProductCategoryDeleteLogic) ProductCategoryDelete(req types.DeleteProductCategoryReq) (*types.DeleteProductCategoryResp, error) {
-	_, err := l.svcCtx.ProductCategoryService.ProductCategoryDelete(l.ctx, &pmsclient.ProductCategoryDeleteReq{
+	_, err := l.svcCtx.ProductCategoryService.DeleteProductCategory(l.ctx, &pmsclient.DeleteProductCategoryReq{
 		Ids: req.Ids,
 	})
 

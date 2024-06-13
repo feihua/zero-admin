@@ -22,44 +22,50 @@ func NewProductCategoryServiceServer(svcCtx *svc.ServiceContext) *ProductCategor
 	}
 }
 
-// 添加商品分类
-func (s *ProductCategoryServiceServer) ProductCategoryAdd(ctx context.Context, in *pmsclient.ProductCategoryAddReq) (*pmsclient.ProductCategoryAddResp, error) {
-	l := productcategoryservicelogic.NewProductCategoryAddLogic(ctx, s.svcCtx)
-	return l.ProductCategoryAdd(in)
+// 添加产品分类
+func (s *ProductCategoryServiceServer) AddProductCategory(ctx context.Context, in *pmsclient.AddProductCategoryReq) (*pmsclient.AddProductCategoryResp, error) {
+	l := productcategoryservicelogic.NewAddProductCategoryLogic(ctx, s.svcCtx)
+	return l.AddProductCategory(in)
 }
 
-// 查询商品分类
-func (s *ProductCategoryServiceServer) ProductCategoryList(ctx context.Context, in *pmsclient.ProductCategoryListReq) (*pmsclient.ProductCategoryListResp, error) {
-	l := productcategoryservicelogic.NewProductCategoryListLogic(ctx, s.svcCtx)
-	return l.ProductCategoryList(in)
+// 删除产品分类
+func (s *ProductCategoryServiceServer) DeleteProductCategory(ctx context.Context, in *pmsclient.DeleteProductCategoryReq) (*pmsclient.DeleteProductCategoryResp, error) {
+	l := productcategoryservicelogic.NewDeleteProductCategoryLogic(ctx, s.svcCtx)
+	return l.DeleteProductCategory(in)
 }
 
-// 更新商品分类
-func (s *ProductCategoryServiceServer) ProductCategoryUpdate(ctx context.Context, in *pmsclient.ProductCategoryUpdateReq) (*pmsclient.ProductCategoryUpdateResp, error) {
-	l := productcategoryservicelogic.NewProductCategoryUpdateLogic(ctx, s.svcCtx)
-	return l.ProductCategoryUpdate(in)
+// 更新产品分类
+func (s *ProductCategoryServiceServer) UpdateProductCategory(ctx context.Context, in *pmsclient.UpdateProductCategoryReq) (*pmsclient.UpdateProductCategoryResp, error) {
+	l := productcategoryservicelogic.NewUpdateProductCategoryLogic(ctx, s.svcCtx)
+	return l.UpdateProductCategory(in)
 }
 
 // 更新商品分类导航显示状态
-func (s *ProductCategoryServiceServer) UpdateCategoryNavStatus(ctx context.Context, in *pmsclient.UpdateProductCategoryStatusReq) (*pmsclient.ProductCategoryUpdateResp, error) {
+func (s *ProductCategoryServiceServer) UpdateCategoryNavStatus(ctx context.Context, in *pmsclient.UpdateProductCategoryStatusReq) (*pmsclient.UpdateProductCategoryStatusResp, error) {
 	l := productcategoryservicelogic.NewUpdateCategoryNavStatusLogic(ctx, s.svcCtx)
 	return l.UpdateCategoryNavStatus(in)
 }
 
 // 更新商品分类显示状态
-func (s *ProductCategoryServiceServer) UpdateCategoryShowStatus(ctx context.Context, in *pmsclient.UpdateProductCategoryStatusReq) (*pmsclient.ProductCategoryUpdateResp, error) {
+func (s *ProductCategoryServiceServer) UpdateCategoryShowStatus(ctx context.Context, in *pmsclient.UpdateProductCategoryStatusReq) (*pmsclient.UpdateProductCategoryStatusResp, error) {
 	l := productcategoryservicelogic.NewUpdateCategoryShowStatusLogic(ctx, s.svcCtx)
 	return l.UpdateCategoryShowStatus(in)
 }
 
-// 查询商品分类
-func (s *ProductCategoryServiceServer) ProductCategoryDelete(ctx context.Context, in *pmsclient.ProductCategoryDeleteReq) (*pmsclient.ProductCategoryDeleteResp, error) {
-	l := productcategoryservicelogic.NewProductCategoryDeleteLogic(ctx, s.svcCtx)
-	return l.ProductCategoryDelete(in)
+// 查询产品分类详情
+func (s *ProductCategoryServiceServer) QueryProductCategoryDetail(ctx context.Context, in *pmsclient.QueryProductCategoryDetailReq) (*pmsclient.QueryProductCategoryDetailResp, error) {
+	l := productcategoryservicelogic.NewQueryProductCategoryDetailLogic(ctx, s.svcCtx)
+	return l.QueryProductCategoryDetail(in)
 }
 
-// 查询商品分类
+// 查询产品分类列表
 func (s *ProductCategoryServiceServer) QueryProductCategoryList(ctx context.Context, in *pmsclient.QueryProductCategoryListReq) (*pmsclient.QueryProductCategoryListResp, error) {
 	l := productcategoryservicelogic.NewQueryProductCategoryListLogic(ctx, s.svcCtx)
 	return l.QueryProductCategoryList(in)
+}
+
+// 查询商品分类（tree）
+func (s *ProductCategoryServiceServer) QueryProductCategoryTreeList(ctx context.Context, in *pmsclient.QueryProductCategoryTreeListReq) (*pmsclient.QueryProductCategoryListTreeResp, error) {
+	l := productcategoryservicelogic.NewQueryProductCategoryTreeListLogic(ctx, s.svcCtx)
+	return l.QueryProductCategoryTreeList(in)
 }

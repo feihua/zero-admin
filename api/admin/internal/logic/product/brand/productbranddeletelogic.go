@@ -33,7 +33,7 @@ func NewProductBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // ProductBrandDelete 删除商品品牌
 func (l *ProductBrandDeleteLogic) ProductBrandDelete(req types.DeleteProductBrandReq) (*types.DeleteProductBrandResp, error) {
-	_, err := l.svcCtx.BrandService.BrandDelete(l.ctx, &pmsclient.BrandDeleteReq{
+	_, err := l.svcCtx.BrandService.DeleteBrand(l.ctx, &pmsclient.DeleteBrandReq{
 		Ids: req.Ids,
 	})
 

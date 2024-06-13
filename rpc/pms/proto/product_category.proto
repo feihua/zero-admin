@@ -18,7 +18,7 @@ message AddProductCategoryReq {
   string product_unit = 10; //
   int32 show_status = 11; //显示状态：0->不显示；1->显示
   int32 sort = 12; //
-
+  repeated int64 ProductAttributeIdList = 13;
 }
 
 message AddProductCategoryResp {
@@ -48,7 +48,7 @@ message UpdateProductCategoryReq {
   string product_unit = 10; //
   int32 show_status = 11; //显示状态：0->不显示；1->显示
   int32 sort = 12; //
-
+  repeated int64 ProductAttributeIdList = 13;
 }
 
 message UpdateProductCategoryResp {
@@ -57,18 +57,9 @@ message UpdateProductCategoryResp {
 
 // 更新产品分类状态
 message UpdateProductCategoryStatusReq {
-  string description = 1; //描述
-  string icon = 2; //图标
-  int64 id = 3; //
-  string keywords = 4; //
-  int32 level = 5; //分类级别：0->1级；1->2级
-  string name = 6; //
-  int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int64 parent_id = 8; //上机分类的编号：0表示一级分类
-  int32 product_count = 9; //
-  string product_unit = 10; //
-  int32 show_status = 11; //显示状态：0->不显示；1->显示
-  int32 sort = 12; //
+  repeated int64 ids = 1; //
+  int32 status = 2;
+
 
 }
 
@@ -99,20 +90,12 @@ message QueryProductCategoryDetailResp {
 
 // 分页查询产品分类列表
 message QueryProductCategoryListReq {
-  string description = 1; //描述
-  string icon = 2; //图标
-  int64 id = 3; //
-  string keywords = 4; //
-  int32 level = 5; //分类级别：0->1级；1->2级
-  string name = 6; //
-  int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int64 parent_id = 8; //上机分类的编号：0表示一级分类
-  int32 product_count = 9; //
-  string product_unit = 10; //
-  int32 show_status = 11; //显示状态：0->不显示；1->显示
-  int32 sort = 12; //
- int64 page_num = 1; //第几页
+  int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
+  string name = 3; //
+  int32 nav_status = 4; //是否显示在导航栏：0->不显示；1->显示
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  int64 parent_id = 6; //上机分类的编号：0表示一级分类
 }
 
 message ProductCategoryListData {
@@ -136,6 +119,19 @@ message QueryProductCategoryListResp {
   repeated  ProductCategoryListData list = 2;
 }
 
+message QueryProductCategoryTreeListReq {
+
+}
+message QueryProductCategoryListTreeData{
+  int64    Id = 1;
+  string  Name = 2;
+  string  ImageUrl = 3;
+  repeated QueryProductCategoryListTreeData  Children = 4;
+}
+message QueryProductCategoryListTreeResp {
+  repeated  QueryProductCategoryListTreeData list = 1;
+}
+
 // 产品分类
 service ProductCategoryService {
   // 添加产品分类
@@ -144,12 +140,16 @@ service ProductCategoryService {
   rpc DeleteProductCategory(DeleteProductCategoryReq) returns (DeleteProductCategoryResp){}
   // 更新产品分类
   rpc UpdateProductCategory(UpdateProductCategoryReq) returns (UpdateProductCategoryResp ){}
-  // 更新产品分类状态
-  rpc UpdateProductCategoryStatus(UpdateProductCategoryStatusReq) returns (UpdateProductCategoryStatusResp ){}
+  //更新商品分类导航显示状态
+  rpc UpdateCategoryNavStatus(UpdateProductCategoryStatusReq) returns(UpdateProductCategoryStatusResp);
+  //更新商品分类显示状态
+  rpc UpdateCategoryShowStatus(UpdateProductCategoryStatusReq) returns(UpdateProductCategoryStatusResp);
   // 查询产品分类详情
    rpc QueryProductCategoryDetail(QueryProductCategoryDetailReq) returns (QueryProductCategoryDetailResp){}
   // 查询产品分类列表
   rpc QueryProductCategoryList(QueryProductCategoryListReq) returns (QueryProductCategoryListResp){}
 
+  //查询商品分类（tree）
+  rpc QueryProductCategoryTreeList(QueryProductCategoryTreeListReq) returns(QueryProductCategoryListTreeResp);
 
 }

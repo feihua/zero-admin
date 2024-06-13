@@ -35,7 +35,7 @@ func NewQueryProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // QueryProductList 查询商品列表
 func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq) (*types.QueryProductListResp, error) {
-	var resp, err = l.svcCtx.ProductService.ProductList(l.ctx, &pmsclient.ProductListReq{
+	var resp, err = l.svcCtx.ProductService.QueryProductList(l.ctx, &pmsclient.QueryProductListReq{
 		Current:           req.Current,
 		PageSize:          req.PageSize,
 		Name:              strings.TrimSpace(req.Name),

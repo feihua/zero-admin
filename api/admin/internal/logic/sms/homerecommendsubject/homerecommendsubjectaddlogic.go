@@ -54,7 +54,7 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHome
 	}
 
 	// 2.添加首页推荐记录(sms-rpc)
-	_, err := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectAdd(l.ctx, &smsclient.HomeRecommendSubjectAddReq{
+	_, err := l.svcCtx.HomeRecommendSubjectService.AddHomeRecommendSubject(l.ctx, &smsclient.AddHomeRecommendSubjectReq{
 		RecommendSubjectAddData: list,
 	})
 

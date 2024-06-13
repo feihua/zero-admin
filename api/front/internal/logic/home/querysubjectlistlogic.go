@@ -33,8 +33,8 @@ func NewQuerySubjectListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // QuerySubjectList 分页获取专题
 func (l *QuerySubjectListLogic) QuerySubjectList(req *types.SubjectListReq) (resp *types.SubjectListResp, err error) {
 	var subjectLists []types.SubjectList
-	listResp, err := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectList(l.ctx, &smsclient.HomeRecommendSubjectListReq{
-		Current:         req.Current,
+	listResp, err := l.svcCtx.HomeRecommendSubjectService.QueryHomeRecommendSubjectList(l.ctx, &smsclient.QueryHomeRecommendSubjectListReq{
+		PageNum:         req.Current,
 		PageSize:        req.PageSize,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})

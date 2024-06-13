@@ -33,9 +33,9 @@ func NewSkuStockUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Sku
 
 // SkuStockUpdate 批量更新sku库存信息
 func (l *SkuStockUpdateLogic) SkuStockUpdate(req types.UpdateSkuStockReq) (*types.UpdateSkuStockResp, error) {
-	var skuStockList []*pmsclient.SkuStockUpdateData
+	var skuStockList []*pmsclient.UpdateSkuStockData
 	for _, item := range req.SkuStockList {
-		skuStockList = append(skuStockList, &pmsclient.SkuStockUpdateData{
+		skuStockList = append(skuStockList, &pmsclient.UpdateSkuStockData{
 			Id:             item.Id,
 			ProductId:      item.ProductId,
 			SkuCode:        item.SkuCode,
@@ -49,7 +49,7 @@ func (l *SkuStockUpdateLogic) SkuStockUpdate(req types.UpdateSkuStockReq) (*type
 			SpData:         item.SpData,
 		})
 	}
-	_, err := l.svcCtx.SkuStockService.SkuStockUpdate(l.ctx, &pmsclient.SkuStockUpdateReq{
+	_, err := l.svcCtx.SkuStockService.UpdateSkuStock(l.ctx, &pmsclient.UpdateSkuStockReq{
 		SkuStockList: skuStockList,
 	})
 

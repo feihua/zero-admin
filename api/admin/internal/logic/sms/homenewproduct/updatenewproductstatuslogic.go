@@ -37,7 +37,7 @@ func NewUpdateNewProductStatusLogic(ctx context.Context, svcCtx *svc.ServiceCont
 // 2.修改pms_product记录的状态(pms-rpc)
 func (l *UpdateNewProductStatusLogic) UpdateNewProductStatus(req *types.UpdateNewProductStatusReq) (resp *types.UpdateNewProductStatusResp, err error) {
 	// 1.修改sms_home_new_product的记录(sms-rpc)
-	_, err = l.svcCtx.HomeNewProductService.UpdateNewProductStatus(l.ctx, &smsclient.UpdateNewProductStatusReq{
+	_, err = l.svcCtx.HomeNewProductService.UpdateHomeNewProductStatus(l.ctx, &smsclient.UpdateHomeNewProductStatusReq{
 		Ids:             req.Ids,
 		RecommendStatus: req.RecommendStatus,
 	})

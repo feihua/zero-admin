@@ -22,33 +22,44 @@ func NewFlashPromotionServiceServer(svcCtx *svc.ServiceContext) *FlashPromotionS
 	}
 }
 
-func (s *FlashPromotionServiceServer) FlashPromotionAdd(ctx context.Context, in *smsclient.FlashPromotionAddReq) (*smsclient.FlashPromotionAddResp, error) {
-	l := flashpromotionservicelogic.NewFlashPromotionAddLogic(ctx, s.svcCtx)
-	return l.FlashPromotionAdd(in)
+// 添加限时购表
+func (s *FlashPromotionServiceServer) AddFlashPromotion(ctx context.Context, in *smsclient.AddFlashPromotionReq) (*smsclient.AddFlashPromotionResp, error) {
+	l := flashpromotionservicelogic.NewAddFlashPromotionLogic(ctx, s.svcCtx)
+	return l.AddFlashPromotion(in)
 }
 
-func (s *FlashPromotionServiceServer) FlashPromotionList(ctx context.Context, in *smsclient.FlashPromotionListReq) (*smsclient.FlashPromotionListResp, error) {
-	l := flashpromotionservicelogic.NewFlashPromotionListLogic(ctx, s.svcCtx)
-	return l.FlashPromotionList(in)
+// 删除限时购表
+func (s *FlashPromotionServiceServer) DeleteFlashPromotion(ctx context.Context, in *smsclient.DeleteFlashPromotionReq) (*smsclient.DeleteFlashPromotionResp, error) {
+	l := flashpromotionservicelogic.NewDeleteFlashPromotionLogic(ctx, s.svcCtx)
+	return l.DeleteFlashPromotion(in)
 }
 
-func (s *FlashPromotionServiceServer) FlashPromotionUpdate(ctx context.Context, in *smsclient.FlashPromotionUpdateReq) (*smsclient.FlashPromotionUpdateResp, error) {
-	l := flashpromotionservicelogic.NewFlashPromotionUpdateLogic(ctx, s.svcCtx)
-	return l.FlashPromotionUpdate(in)
+// 更新限时购表
+func (s *FlashPromotionServiceServer) UpdateFlashPromotion(ctx context.Context, in *smsclient.UpdateFlashPromotionReq) (*smsclient.UpdateFlashPromotionResp, error) {
+	l := flashpromotionservicelogic.NewUpdateFlashPromotionLogic(ctx, s.svcCtx)
+	return l.UpdateFlashPromotion(in)
 }
 
-func (s *FlashPromotionServiceServer) FlashPromotionDelete(ctx context.Context, in *smsclient.FlashPromotionDeleteReq) (*smsclient.FlashPromotionDeleteResp, error) {
-	l := flashpromotionservicelogic.NewFlashPromotionDeleteLogic(ctx, s.svcCtx)
-	return l.FlashPromotionDelete(in)
-}
-
-func (s *FlashPromotionServiceServer) FlashPromotionListByDate(ctx context.Context, in *smsclient.FlashPromotionListByDateReq) (*smsclient.FlashPromotionListByDateResp, error) {
-	l := flashpromotionservicelogic.NewFlashPromotionListByDateLogic(ctx, s.svcCtx)
-	return l.FlashPromotionListByDate(in)
-}
-
-// 更新上下线状态
+// 更新限时购表状态
 func (s *FlashPromotionServiceServer) UpdateFlashPromotionStatus(ctx context.Context, in *smsclient.UpdateFlashPromotionStatusReq) (*smsclient.UpdateFlashPromotionStatusResp, error) {
 	l := flashpromotionservicelogic.NewUpdateFlashPromotionStatusLogic(ctx, s.svcCtx)
 	return l.UpdateFlashPromotionStatus(in)
+}
+
+// 查询限时购表详情
+func (s *FlashPromotionServiceServer) QueryFlashPromotionDetail(ctx context.Context, in *smsclient.QueryFlashPromotionDetailReq) (*smsclient.QueryFlashPromotionDetailResp, error) {
+	l := flashpromotionservicelogic.NewQueryFlashPromotionDetailLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionDetail(in)
+}
+
+// 查询限时购表列表
+func (s *FlashPromotionServiceServer) QueryFlashPromotionList(ctx context.Context, in *smsclient.QueryFlashPromotionListReq) (*smsclient.QueryFlashPromotionListResp, error) {
+	l := flashpromotionservicelogic.NewQueryFlashPromotionListLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionList(in)
+}
+
+// 查询当前时间是否有秒杀活动
+func (s *FlashPromotionServiceServer) QueryFlashPromotionListByDate(ctx context.Context, in *smsclient.QueryFlashPromotionListByDateReq) (*smsclient.QueryFlashPromotionListByDateResp, error) {
+	l := flashpromotionservicelogic.NewQueryFlashPromotionListByDateLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionListByDate(in)
 }

@@ -22,22 +22,38 @@ func NewProductVertifyRecordServiceServer(svcCtx *svc.ServiceContext) *ProductVe
 	}
 }
 
-func (s *ProductVertifyRecordServiceServer) ProductVertifyRecordAdd(ctx context.Context, in *pmsclient.ProductVertifyRecordAddReq) (*pmsclient.ProductVertifyRecordAddResp, error) {
-	l := productvertifyrecordservicelogic.NewProductVertifyRecordAddLogic(ctx, s.svcCtx)
-	return l.ProductVertifyRecordAdd(in)
+// 添加商品审核记录
+func (s *ProductVertifyRecordServiceServer) AddProductVertifyRecord(ctx context.Context, in *pmsclient.AddProductVertifyRecordReq) (*pmsclient.AddProductVertifyRecordResp, error) {
+	l := productvertifyrecordservicelogic.NewAddProductVertifyRecordLogic(ctx, s.svcCtx)
+	return l.AddProductVertifyRecord(in)
 }
 
-func (s *ProductVertifyRecordServiceServer) ProductVertifyRecordList(ctx context.Context, in *pmsclient.ProductVertifyRecordListReq) (*pmsclient.ProductVertifyRecordListResp, error) {
-	l := productvertifyrecordservicelogic.NewProductVertifyRecordListLogic(ctx, s.svcCtx)
-	return l.ProductVertifyRecordList(in)
+// 删除商品审核记录
+func (s *ProductVertifyRecordServiceServer) DeleteProductVertifyRecord(ctx context.Context, in *pmsclient.DeleteProductVertifyRecordReq) (*pmsclient.DeleteProductVertifyRecordResp, error) {
+	l := productvertifyrecordservicelogic.NewDeleteProductVertifyRecordLogic(ctx, s.svcCtx)
+	return l.DeleteProductVertifyRecord(in)
 }
 
-func (s *ProductVertifyRecordServiceServer) ProductVertifyRecordUpdate(ctx context.Context, in *pmsclient.ProductVertifyRecordUpdateReq) (*pmsclient.ProductVertifyRecordUpdateResp, error) {
-	l := productvertifyrecordservicelogic.NewProductVertifyRecordUpdateLogic(ctx, s.svcCtx)
-	return l.ProductVertifyRecordUpdate(in)
+// 更新商品审核记录
+func (s *ProductVertifyRecordServiceServer) UpdateProductVertifyRecord(ctx context.Context, in *pmsclient.UpdateProductVertifyRecordReq) (*pmsclient.UpdateProductVertifyRecordResp, error) {
+	l := productvertifyrecordservicelogic.NewUpdateProductVertifyRecordLogic(ctx, s.svcCtx)
+	return l.UpdateProductVertifyRecord(in)
 }
 
-func (s *ProductVertifyRecordServiceServer) ProductVertifyRecordDelete(ctx context.Context, in *pmsclient.ProductVertifyRecordDeleteReq) (*pmsclient.ProductVertifyRecordDeleteResp, error) {
-	l := productvertifyrecordservicelogic.NewProductVertifyRecordDeleteLogic(ctx, s.svcCtx)
-	return l.ProductVertifyRecordDelete(in)
+// 更新商品审核记录状态
+func (s *ProductVertifyRecordServiceServer) UpdateProductVertifyRecordStatus(ctx context.Context, in *pmsclient.UpdateProductVertifyRecordStatusReq) (*pmsclient.UpdateProductVertifyRecordStatusResp, error) {
+	l := productvertifyrecordservicelogic.NewUpdateProductVertifyRecordStatusLogic(ctx, s.svcCtx)
+	return l.UpdateProductVertifyRecordStatus(in)
+}
+
+// 查询商品审核记录详情
+func (s *ProductVertifyRecordServiceServer) QueryProductVertifyRecordDetail(ctx context.Context, in *pmsclient.QueryProductVertifyRecordDetailReq) (*pmsclient.QueryProductVertifyRecordDetailResp, error) {
+	l := productvertifyrecordservicelogic.NewQueryProductVertifyRecordDetailLogic(ctx, s.svcCtx)
+	return l.QueryProductVertifyRecordDetail(in)
+}
+
+// 查询商品审核记录列表
+func (s *ProductVertifyRecordServiceServer) QueryProductVertifyRecordList(ctx context.Context, in *pmsclient.QueryProductVertifyRecordListReq) (*pmsclient.QueryProductVertifyRecordListResp, error) {
+	l := productvertifyrecordservicelogic.NewQueryProductVertifyRecordListLogic(ctx, s.svcCtx)
+	return l.QueryProductVertifyRecordList(in)
 }

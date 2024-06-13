@@ -32,8 +32,8 @@ func NewRecommendBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // RecommendBrandList 分页获取推荐品牌
 func (l *RecommendBrandListLogic) RecommendBrandList(req *types.RecommendBrandListReq) (resp *types.RecommendBrandListResp, err error) {
-	homeBrandList, _ := l.svcCtx.HomeBrandService.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
-		Current:         req.Current,
+	homeBrandList, _ := l.svcCtx.HomeBrandService.QueryHomeBrandList(l.ctx, &smsclient.QueryHomeBrandListReq{
+		PageNum:         req.Current,
 		PageSize:        req.PageSize,
 		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
 	})
@@ -43,7 +43,7 @@ func (l *RecommendBrandListLogic) RecommendBrandList(req *types.RecommendBrandLi
 		brandIdLists = append(brandIdLists, item.BrandId)
 	}
 
-	brandListResp, _ := l.svcCtx.BrandService.BrandListByIds(l.ctx, &pmsclient.BrandListByIdsReq{Ids: brandIdLists})
+	brandListResp, _ := l.svcCtx.BrandService.QueryBrandListByIds(l.ctx, &pmsclient.QueryBrandListByIdsReq{Ids: brandIdLists})
 	var brandLists []types.BrandList
 	for _, item := range brandListResp.List {
 

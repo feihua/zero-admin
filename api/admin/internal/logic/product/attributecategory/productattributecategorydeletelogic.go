@@ -27,7 +27,7 @@ func NewProductAttributecategoryDeleteLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 func (l *ProductAttributecategoryDeleteLogic) ProductAttributecategoryDelete(req *types.DeleteProductAttributecategoryReq) (resp *types.DeleteProductAttributecategoryResp, err error) {
-	_, err = l.svcCtx.ProductAttributeCategoryService.ProductAttributeCategoryDelete(l.ctx, &pmsclient.ProductAttributeCategoryDeleteReq{
+	_, err = l.svcCtx.ProductAttributeCategoryService.DeleteProductAttributeCategory(l.ctx, &pmsclient.DeleteProductAttributeCategoryReq{
 		Ids: req.Ids,
 	})
 

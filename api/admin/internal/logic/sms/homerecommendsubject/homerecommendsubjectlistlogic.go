@@ -34,8 +34,8 @@ func NewHomeRecommendSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // HomeRecommendSubjectList 查询人气推荐专题
 func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req types.ListHomeRecommendSubjectReq) (*types.ListHomeRecommendSubjectResp, error) {
-	resp, err := l.svcCtx.HomeRecommendSubjectService.HomeRecommendSubjectList(l.ctx, &smsclient.HomeRecommendSubjectListReq{
-		Current:         req.Current,
+	resp, err := l.svcCtx.HomeRecommendSubjectService.QueryHomeRecommendSubjectList(l.ctx, &smsclient.QueryHomeRecommendSubjectListReq{
+		PageNum:         req.Current,
 		PageSize:        req.PageSize,
 		SubjectName:     strings.TrimSpace(req.SubjectName),
 		RecommendStatus: req.RecommendStatus,

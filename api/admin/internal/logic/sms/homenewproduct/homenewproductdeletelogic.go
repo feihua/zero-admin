@@ -37,7 +37,7 @@ func NewHomeNewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // 2.修改pms_product记录的状态为不推荐(pms-rpc)
 func (l *HomeNewProductDeleteLogic) HomeNewProductDelete(req types.DeleteHomeNewProductReq) (*types.DeleteHomeNewProductResp, error) {
 	// 1.删除sms_home_new_product的记录(sms-rpc)
-	_, err := l.svcCtx.HomeNewProductService.HomeNewProductDelete(l.ctx, &smsclient.HomeNewProductDeleteReq{
+	_, err := l.svcCtx.HomeNewProductService.DeleteHomeNewProduct(l.ctx, &smsclient.DeleteHomeNewProductReq{
 		Ids: req.Ids,
 	})
 

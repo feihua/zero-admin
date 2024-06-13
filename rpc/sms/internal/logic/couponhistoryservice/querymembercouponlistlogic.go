@@ -46,10 +46,10 @@ where t1.member_id = ?
 		return nil, err
 	}
 
-	var list []*smsclient.CouponListData
+	var list []*smsclient.QueryCouponData
 	for _, coupon := range result {
 
-		list = append(list, &smsclient.CouponListData{
+		list = append(list, &smsclient.QueryCouponData{
 			Id:           coupon.ID,
 			Type:         coupon.Type,
 			Name:         coupon.Name,

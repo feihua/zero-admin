@@ -22,22 +22,14 @@ func NewProductCategoryAttributeRelationServiceServer(svcCtx *svc.ServiceContext
 	}
 }
 
-func (s *ProductCategoryAttributeRelationServiceServer) ProductCategoryAttributeRelationAdd(ctx context.Context, in *pmsclient.ProductCategoryAttributeRelationAddReq) (*pmsclient.ProductCategoryAttributeRelationAddResp, error) {
-	l := productcategoryattributerelationservicelogic.NewProductCategoryAttributeRelationAddLogic(ctx, s.svcCtx)
-	return l.ProductCategoryAttributeRelationAdd(in)
+// 添加产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
+func (s *ProductCategoryAttributeRelationServiceServer) AddProductCategoryAttributeRelation(ctx context.Context, in *pmsclient.AddProductCategoryAttributeRelationReq) (*pmsclient.AddProductCategoryAttributeRelationResp, error) {
+	l := productcategoryattributerelationservicelogic.NewAddProductCategoryAttributeRelationLogic(ctx, s.svcCtx)
+	return l.AddProductCategoryAttributeRelation(in)
 }
 
-func (s *ProductCategoryAttributeRelationServiceServer) ProductCategoryAttributeRelationList(ctx context.Context, in *pmsclient.ProductCategoryAttributeRelationListReq) (*pmsclient.ProductCategoryAttributeRelationListResp, error) {
-	l := productcategoryattributerelationservicelogic.NewProductCategoryAttributeRelationListLogic(ctx, s.svcCtx)
-	return l.ProductCategoryAttributeRelationList(in)
-}
-
-func (s *ProductCategoryAttributeRelationServiceServer) ProductCategoryAttributeRelationUpdate(ctx context.Context, in *pmsclient.ProductCategoryAttributeRelationUpdateReq) (*pmsclient.ProductCategoryAttributeRelationUpdateResp, error) {
-	l := productcategoryattributerelationservicelogic.NewProductCategoryAttributeRelationUpdateLogic(ctx, s.svcCtx)
-	return l.ProductCategoryAttributeRelationUpdate(in)
-}
-
-func (s *ProductCategoryAttributeRelationServiceServer) ProductCategoryAttributeRelationDelete(ctx context.Context, in *pmsclient.ProductCategoryAttributeRelationDeleteReq) (*pmsclient.ProductCategoryAttributeRelationDeleteResp, error) {
-	l := productcategoryattributerelationservicelogic.NewProductCategoryAttributeRelationDeleteLogic(ctx, s.svcCtx)
-	return l.ProductCategoryAttributeRelationDelete(in)
+// 查询产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）列表
+func (s *ProductCategoryAttributeRelationServiceServer) QueryProductCategoryAttributeRelationList(ctx context.Context, in *pmsclient.QueryProductCategoryAttributeRelationListReq) (*pmsclient.QueryProductCategoryAttributeRelationListResp, error) {
+	l := productcategoryattributerelationservicelogic.NewQueryProductCategoryAttributeRelationListLogic(ctx, s.svcCtx)
+	return l.QueryProductCategoryAttributeRelationList(in)
 }

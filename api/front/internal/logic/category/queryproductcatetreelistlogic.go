@@ -32,7 +32,7 @@ func NewQueryProductCateTreeListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // QueryProductCateTreeList 以树形结构获取所有商品分类
 func (l *QueryProductCateTreeListLogic) QueryProductCateTreeList() (resp *types.QueryProductCateListResp, err error) {
-	categoryListResp, err := l.svcCtx.ProductCategoryService.QueryProductCategoryList(l.ctx, &pmsclient.QueryProductCategoryListReq{})
+	categoryListResp, err := l.svcCtx.ProductCategoryService.QueryProductCategoryTreeList(l.ctx, &pmsclient.QueryProductCategoryTreeListReq{})
 
 	var list []types.ProductCateListData
 

@@ -22,38 +22,44 @@ func NewFlashPromotionSessionServiceServer(svcCtx *svc.ServiceContext) *FlashPro
 	}
 }
 
-// 添加限时购场次
-func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionAdd(ctx context.Context, in *smsclient.FlashPromotionSessionAddReq) (*smsclient.FlashPromotionSessionAddResp, error) {
-	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionAddLogic(ctx, s.svcCtx)
-	return l.FlashPromotionSessionAdd(in)
+// 添加限时购场次表
+func (s *FlashPromotionSessionServiceServer) AddFlashPromotionSession(ctx context.Context, in *smsclient.AddFlashPromotionSessionReq) (*smsclient.AddFlashPromotionSessionResp, error) {
+	l := flashpromotionsessionservicelogic.NewAddFlashPromotionSessionLogic(ctx, s.svcCtx)
+	return l.AddFlashPromotionSession(in)
 }
 
-// 查询限时购场次
-func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionList(ctx context.Context, in *smsclient.FlashPromotionSessionListReq) (*smsclient.FlashPromotionSessionListResp, error) {
-	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionListLogic(ctx, s.svcCtx)
-	return l.FlashPromotionSessionList(in)
+// 删除限时购场次表
+func (s *FlashPromotionSessionServiceServer) DeleteFlashPromotionSession(ctx context.Context, in *smsclient.DeleteFlashPromotionSessionReq) (*smsclient.DeleteFlashPromotionSessionResp, error) {
+	l := flashpromotionsessionservicelogic.NewDeleteFlashPromotionSessionLogic(ctx, s.svcCtx)
+	return l.DeleteFlashPromotionSession(in)
 }
 
-// 更新限时购场次
-func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionUpdate(ctx context.Context, in *smsclient.FlashPromotionSessionUpdateReq) (*smsclient.FlashPromotionSessionUpdateResp, error) {
-	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionUpdateLogic(ctx, s.svcCtx)
-	return l.FlashPromotionSessionUpdate(in)
+// 更新限时购场次表
+func (s *FlashPromotionSessionServiceServer) UpdateFlashPromotionSession(ctx context.Context, in *smsclient.UpdateFlashPromotionSessionReq) (*smsclient.UpdateFlashPromotionSessionResp, error) {
+	l := flashpromotionsessionservicelogic.NewUpdateFlashPromotionSessionLogic(ctx, s.svcCtx)
+	return l.UpdateFlashPromotionSession(in)
 }
 
-// 删除限时购场次
-func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionDelete(ctx context.Context, in *smsclient.FlashPromotionSessionDeleteReq) (*smsclient.FlashPromotionSessionDeleteResp, error) {
-	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionDeleteLogic(ctx, s.svcCtx)
-	return l.FlashPromotionSessionDelete(in)
-}
-
-// 根据时间查询限时购场次
-func (s *FlashPromotionSessionServiceServer) FlashPromotionSessionByTime(ctx context.Context, in *smsclient.FlashPromotionSessionByTimeReq) (*smsclient.FlashPromotionSessionByTimeResp, error) {
-	l := flashpromotionsessionservicelogic.NewFlashPromotionSessionByTimeLogic(ctx, s.svcCtx)
-	return l.FlashPromotionSessionByTime(in)
-}
-
-// 更新上下线状态
+// 更新限时购场次表状态
 func (s *FlashPromotionSessionServiceServer) UpdateFlashPromotionSessionStatus(ctx context.Context, in *smsclient.UpdateFlashPromotionSessionStatusReq) (*smsclient.UpdateFlashPromotionSessionStatusResp, error) {
 	l := flashpromotionsessionservicelogic.NewUpdateFlashPromotionSessionStatusLogic(ctx, s.svcCtx)
 	return l.UpdateFlashPromotionSessionStatus(in)
+}
+
+// 查询限时购场次表详情
+func (s *FlashPromotionSessionServiceServer) QueryFlashPromotionSessionDetail(ctx context.Context, in *smsclient.QueryFlashPromotionSessionDetailReq) (*smsclient.QueryFlashPromotionSessionDetailResp, error) {
+	l := flashpromotionsessionservicelogic.NewQueryFlashPromotionSessionDetailLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionSessionDetail(in)
+}
+
+// 查询限时购场次表列表
+func (s *FlashPromotionSessionServiceServer) QueryFlashPromotionSessionList(ctx context.Context, in *smsclient.QueryFlashPromotionSessionListReq) (*smsclient.QueryFlashPromotionSessionListResp, error) {
+	l := flashpromotionsessionservicelogic.NewQueryFlashPromotionSessionListLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionSessionList(in)
+}
+
+// 根据时间查询限时购场次
+func (s *FlashPromotionSessionServiceServer) QueryFlashPromotionSessionListByTime(ctx context.Context, in *smsclient.QueryFlashPromotionSessionListByTimeReq) (*smsclient.QueryFlashPromotionSessionListByTimeResp, error) {
+	l := flashpromotionsessionservicelogic.NewQueryFlashPromotionSessionListByTimeLogic(ctx, s.svcCtx)
+	return l.QueryFlashPromotionSessionListByTime(in)
 }
