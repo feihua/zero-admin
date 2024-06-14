@@ -35,6 +35,17 @@ func NewQueryMemberTaskListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *QueryMemberTaskListLogic) QueryMemberTaskList(in *umsclient.QueryMemberTaskListReq) (*umsclient.QueryMemberTaskListResp, error) {
 	q := query.UmsMemberTask.WithContext(l.ctx)
 
+	if in.Status != 2 {
+		q = q.Where(query.UmsMemberTask.Status.Eq(in.Status))
+	}
+	if in.TaskType != 2 {
+		q = q.Where(query.UmsMemberTask.TaskType.Eq(in.TaskType))
+	}
+
+	if len(in.TaskName) > 0 {
+		q = q.Where(query.UmsMemberTask.TaskName.Eq(in.TaskName))
+	}
+
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
@@ -54,6 +65,7 @@ func (l *QueryMemberTaskListLogic) QueryMemberTaskList(in *umsclient.QueryMember
 			CreateBy:     item.CreateBy,
 			UpdateTime:   common.TimeToString(item.UpdateTime),
 			UpdateBy:     item.UpdateBy,
+			Status:       item.Status,
 		})
 	}
 

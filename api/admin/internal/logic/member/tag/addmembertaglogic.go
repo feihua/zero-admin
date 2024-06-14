@@ -37,6 +37,7 @@ func (l *AddMemberTagLogic) AddMemberTag(req *types.AddMemberTagReq) (resp *type
 		TagName:           req.TagName,
 		FinishOrderCount:  req.FinishOrderCount,
 		FinishOrderAmount: req.FinishOrderAmount,
+		Status:            req.Status,
 	})
 
 	if err != nil {

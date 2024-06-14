@@ -3,7 +3,6 @@ syntax = "proto3";
 package umsclient;
 
 option go_package = "./umsclient";
-
 // 添加成长值变化历史记录表
 message AddGrowthChangeHistoryReq {
   int32 change_count = 1; //积分改变数量
@@ -168,7 +167,6 @@ service IntegrationChangeHistoryService {
 
 }
 
-
 // 添加积分消费设置
 message AddIntegrationConsumeSettingReq {
   int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
@@ -272,7 +270,6 @@ service IntegrationConsumeSettingService {
 
 
 }
-
 
 // 添加会员表
 message AddMemberReq {
@@ -459,7 +456,6 @@ service MemberService {
   rpc UpdateMemberIntegration(UpdateMemberIntegrationReq) returns(UpdateMemberIntegrationResp);
 }
 
-
 // 添加会员关注品牌
 message AddMemberBrandAttentionReq {
   string brand_city = 1; //品牌所在城市
@@ -535,7 +531,6 @@ service MemberBrandAttentionService {
 
 
 }
-
 
 // 添加会员等级表
 message AddMemberLevelReq {
@@ -671,7 +666,6 @@ service MemberLevelService {
 }
 
 
-
 // 删除会员登录记录
 message DeleteMemberLoginLogReq {
   repeated int64 ids = 1;
@@ -718,7 +712,6 @@ service MemberLoginLogService {
 
 
 }
-
 
 // 添加用户和标签关系表
 message AddMemberMemberTagRelationReq {
@@ -770,7 +763,6 @@ service MemberMemberTagRelationService {
 
 }
 
-
 // 添加会员与产品分类关系表（用户喜欢的分类）
 message AddMemberProductCategoryRelationReq {
   int64 member_id = 1; //会员id
@@ -808,7 +800,6 @@ service MemberProductCategoryRelationService {
   rpc QueryMemberProductCategoryRelationList(QueryMemberProductCategoryRelationListReq) returns (QueryMemberProductCategoryRelationListResp){}
 
 }
-
 
 // 添加用户收藏的商品
 message AddMemberProductCollectionReq {
@@ -899,7 +890,6 @@ service MemberProductCollectionService {
 
 }
 
-
 // 添加用户商品浏览历史记录
 message AddMemberReadHistoryReq {
   int64 product_price = 1; //商品价格
@@ -987,7 +977,6 @@ service MemberReadHistoryService {
 
 
 }
-
 
 // 添加会员收货地址表
 message AddMemberReceiveAddressReq {
@@ -1118,7 +1107,6 @@ service MemberReceiveAddressService {
 
 }
 
-
 // 添加会员积分成长规则表
 message AddMemberRuleSettingReq {
   int64 consume_per_point = 1; //每消费多少元获取1个点
@@ -1246,7 +1234,6 @@ service MemberRuleSettingService {
 
 }
 
-
 // 添加会员统计信息
 message AddMemberStatisticsInfoReq {
   int32 attend_count = 1; //关注数量
@@ -1298,17 +1285,47 @@ message QueryMemberStatisticsInfoDetailResp {
 
 }
 
+// 查询会员统计信息列表
+message QueryMemberStatisticsInfoListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
 
+}
+
+message QueryMemberStatisticsInfoListData {
+  int32 attend_count = 1; //关注数量
+  int32 collect_comment_count = 2; //
+  int32 collect_product_count = 3; //
+  int32 collect_subject_count = 4; //
+  int32 collect_topic_count = 5; //
+  int32 comment_count = 6; //评价数
+  int64 consume_amount = 7; //累计消费金额
+  int32 coupon_count = 8; //优惠券数量
+  int32 fans_count = 9; //粉丝数量
+  int64 id = 10; //
+  int32 invite_friend_count = 11; //
+  int32 login_count = 12; //登录次数
+  int64 member_id = 13; //
+  int32 order_count = 14; //订单数量
+  string recent_order_time = 15; //最后一次下订单时间
+  int32 return_order_count = 16; //退货数量
+
+}
+
+message QueryMemberStatisticsInfoListResp {
+  int64 total = 1;
+  repeated  QueryMemberStatisticsInfoListData list = 2;
+}
 // 会员统计信息
 service MemberStatisticsInfoService {
   // 添加会员统计信息
   rpc AddMemberStatisticsInfo(AddMemberStatisticsInfoReq) returns (AddMemberStatisticsInfoResp){}
   // 查询会员统计信息详情
    rpc QueryMemberStatisticsInfoDetail(QueryMemberStatisticsInfoDetailReq) returns (QueryMemberStatisticsInfoDetailResp){}
-
+  // 查询会员统计信息列表
+  rpc QueryMemberStatisticsInfoList(QueryMemberStatisticsInfoListReq) returns (QueryMemberStatisticsInfoListResp){}
 
 }
-
 
 // 添加用户标签表
 message AddMemberTagReq {
@@ -1411,7 +1428,6 @@ service MemberTagService {
 
 
 }
-
 
 // 添加会员任务表
 message AddMemberTaskReq {

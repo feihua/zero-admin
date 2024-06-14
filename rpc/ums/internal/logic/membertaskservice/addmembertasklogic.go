@@ -36,7 +36,7 @@ func (l *AddMemberTaskLogic) AddMemberTask(in *umsclient.AddMemberTaskReq) (*ums
 		TaskGrowth:   in.TaskGrowth,
 		TaskIntegral: in.TaskIntegral,
 		TaskType:     in.TaskType,
-		Status:       1,
+		Status:       in.Status,
 		CreateBy:     in.CreateBy,
 	})
 

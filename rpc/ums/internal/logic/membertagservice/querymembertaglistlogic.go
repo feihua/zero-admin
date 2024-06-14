@@ -33,6 +33,12 @@ func NewQueryMemberTagListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // QueryMemberTagList 查询用户标签表列表
 func (l *QueryMemberTagListLogic) QueryMemberTagList(in *umsclient.QueryMemberTagListReq) (*umsclient.QueryMemberTagListResp, error) {
 	q := query.UmsMemberTag.WithContext(l.ctx)
+	if in.Status != 2 {
+		q = q.Where(query.UmsMemberTag.Status.Eq(in.Status))
+	}
+	if len(in.TagName) > 0 {
+		q = q.Where(query.UmsMemberTag.TagName.Eq(in.TagName))
+	}
 	offset := (in.PageNum - 1) * in.PageSize
 	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
 	count, err := q.Count()
@@ -49,7 +55,7 @@ func (l *QueryMemberTagListLogic) QueryMemberTagList(in *umsclient.QueryMemberTa
 			FinishOrderAmount: item.FinishOrderAmount,
 			FinishOrderCount:  item.FinishOrderCount,
 			Id:                item.ID,
-			Status:            in.Status,
+			Status:            item.Status,
 			TagName:           item.TagName,
 		})
 	}

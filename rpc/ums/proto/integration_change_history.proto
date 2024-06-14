@@ -4,6 +4,7 @@ package main;
 
 option go_package = "./proto";
 
+
 // 添加积分变化历史记录表
 message AddIntegrationChangeHistoryReq {
   int32 change_count = 1; //积分改变数量

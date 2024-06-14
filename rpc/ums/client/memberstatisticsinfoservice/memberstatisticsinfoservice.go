@@ -136,6 +136,9 @@ type (
 	QueryMemberRuleSettingListResp             = umsclient.QueryMemberRuleSettingListResp
 	QueryMemberStatisticsInfoDetailReq         = umsclient.QueryMemberStatisticsInfoDetailReq
 	QueryMemberStatisticsInfoDetailResp        = umsclient.QueryMemberStatisticsInfoDetailResp
+	QueryMemberStatisticsInfoListData          = umsclient.QueryMemberStatisticsInfoListData
+	QueryMemberStatisticsInfoListReq           = umsclient.QueryMemberStatisticsInfoListReq
+	QueryMemberStatisticsInfoListResp          = umsclient.QueryMemberStatisticsInfoListResp
 	QueryMemberTagDetailReq                    = umsclient.QueryMemberTagDetailReq
 	QueryMemberTagDetailResp                   = umsclient.QueryMemberTagDetailResp
 	QueryMemberTagListReq                      = umsclient.QueryMemberTagListReq
@@ -180,6 +183,8 @@ type (
 		AddMemberStatisticsInfo(ctx context.Context, in *AddMemberStatisticsInfoReq, opts ...grpc.CallOption) (*AddMemberStatisticsInfoResp, error)
 		// 查询会员统计信息详情
 		QueryMemberStatisticsInfoDetail(ctx context.Context, in *QueryMemberStatisticsInfoDetailReq, opts ...grpc.CallOption) (*QueryMemberStatisticsInfoDetailResp, error)
+		// 查询会员统计信息列表
+		QueryMemberStatisticsInfoList(ctx context.Context, in *QueryMemberStatisticsInfoListReq, opts ...grpc.CallOption) (*QueryMemberStatisticsInfoListResp, error)
 	}
 
 	defaultMemberStatisticsInfoService struct {
@@ -203,4 +208,10 @@ func (m *defaultMemberStatisticsInfoService) AddMemberStatisticsInfo(ctx context
 func (m *defaultMemberStatisticsInfoService) QueryMemberStatisticsInfoDetail(ctx context.Context, in *QueryMemberStatisticsInfoDetailReq, opts ...grpc.CallOption) (*QueryMemberStatisticsInfoDetailResp, error) {
 	client := umsclient.NewMemberStatisticsInfoServiceClient(m.cli.Conn())
 	return client.QueryMemberStatisticsInfoDetail(ctx, in, opts...)
+}
+
+// 查询会员统计信息列表
+func (m *defaultMemberStatisticsInfoService) QueryMemberStatisticsInfoList(ctx context.Context, in *QueryMemberStatisticsInfoListReq, opts ...grpc.CallOption) (*QueryMemberStatisticsInfoListResp, error) {
+	client := umsclient.NewMemberStatisticsInfoServiceClient(m.cli.Conn())
+	return client.QueryMemberStatisticsInfoList(ctx, in, opts...)
 }

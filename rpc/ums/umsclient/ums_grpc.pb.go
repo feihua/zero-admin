@@ -3021,6 +3021,7 @@ var MemberRuleSettingService_ServiceDesc = grpc.ServiceDesc{
 const (
 	MemberStatisticsInfoService_AddMemberStatisticsInfo_FullMethodName         = "/umsclient.MemberStatisticsInfoService/AddMemberStatisticsInfo"
 	MemberStatisticsInfoService_QueryMemberStatisticsInfoDetail_FullMethodName = "/umsclient.MemberStatisticsInfoService/QueryMemberStatisticsInfoDetail"
+	MemberStatisticsInfoService_QueryMemberStatisticsInfoList_FullMethodName   = "/umsclient.MemberStatisticsInfoService/QueryMemberStatisticsInfoList"
 )
 
 // MemberStatisticsInfoServiceClient is the client API for MemberStatisticsInfoService service.
@@ -3031,6 +3032,8 @@ type MemberStatisticsInfoServiceClient interface {
 	AddMemberStatisticsInfo(ctx context.Context, in *AddMemberStatisticsInfoReq, opts ...grpc.CallOption) (*AddMemberStatisticsInfoResp, error)
 	// 查询会员统计信息详情
 	QueryMemberStatisticsInfoDetail(ctx context.Context, in *QueryMemberStatisticsInfoDetailReq, opts ...grpc.CallOption) (*QueryMemberStatisticsInfoDetailResp, error)
+	// 查询会员统计信息列表
+	QueryMemberStatisticsInfoList(ctx context.Context, in *QueryMemberStatisticsInfoListReq, opts ...grpc.CallOption) (*QueryMemberStatisticsInfoListResp, error)
 }
 
 type memberStatisticsInfoServiceClient struct {
@@ -3059,6 +3062,15 @@ func (c *memberStatisticsInfoServiceClient) QueryMemberStatisticsInfoDetail(ctx 
 	return out, nil
 }
 
+func (c *memberStatisticsInfoServiceClient) QueryMemberStatisticsInfoList(ctx context.Context, in *QueryMemberStatisticsInfoListReq, opts ...grpc.CallOption) (*QueryMemberStatisticsInfoListResp, error) {
+	out := new(QueryMemberStatisticsInfoListResp)
+	err := c.cc.Invoke(ctx, MemberStatisticsInfoService_QueryMemberStatisticsInfoList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MemberStatisticsInfoServiceServer is the server API for MemberStatisticsInfoService service.
 // All implementations must embed UnimplementedMemberStatisticsInfoServiceServer
 // for forward compatibility
@@ -3067,6 +3079,8 @@ type MemberStatisticsInfoServiceServer interface {
 	AddMemberStatisticsInfo(context.Context, *AddMemberStatisticsInfoReq) (*AddMemberStatisticsInfoResp, error)
 	// 查询会员统计信息详情
 	QueryMemberStatisticsInfoDetail(context.Context, *QueryMemberStatisticsInfoDetailReq) (*QueryMemberStatisticsInfoDetailResp, error)
+	// 查询会员统计信息列表
+	QueryMemberStatisticsInfoList(context.Context, *QueryMemberStatisticsInfoListReq) (*QueryMemberStatisticsInfoListResp, error)
 	mustEmbedUnimplementedMemberStatisticsInfoServiceServer()
 }
 
@@ -3079,6 +3093,9 @@ func (UnimplementedMemberStatisticsInfoServiceServer) AddMemberStatisticsInfo(co
 }
 func (UnimplementedMemberStatisticsInfoServiceServer) QueryMemberStatisticsInfoDetail(context.Context, *QueryMemberStatisticsInfoDetailReq) (*QueryMemberStatisticsInfoDetailResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberStatisticsInfoDetail not implemented")
+}
+func (UnimplementedMemberStatisticsInfoServiceServer) QueryMemberStatisticsInfoList(context.Context, *QueryMemberStatisticsInfoListReq) (*QueryMemberStatisticsInfoListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberStatisticsInfoList not implemented")
 }
 func (UnimplementedMemberStatisticsInfoServiceServer) mustEmbedUnimplementedMemberStatisticsInfoServiceServer() {
 }
@@ -3130,6 +3147,24 @@ func _MemberStatisticsInfoService_QueryMemberStatisticsInfoDetail_Handler(srv in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberStatisticsInfoService_QueryMemberStatisticsInfoList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberStatisticsInfoListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberStatisticsInfoServiceServer).QueryMemberStatisticsInfoList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberStatisticsInfoService_QueryMemberStatisticsInfoList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberStatisticsInfoServiceServer).QueryMemberStatisticsInfoList(ctx, req.(*QueryMemberStatisticsInfoListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MemberStatisticsInfoService_ServiceDesc is the grpc.ServiceDesc for MemberStatisticsInfoService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3144,6 +3179,10 @@ var MemberStatisticsInfoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMemberStatisticsInfoDetail",
 			Handler:    _MemberStatisticsInfoService_QueryMemberStatisticsInfoDetail_Handler,
+		},
+		{
+			MethodName: "QueryMemberStatisticsInfoList",
+			Handler:    _MemberStatisticsInfoService_QueryMemberStatisticsInfoList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

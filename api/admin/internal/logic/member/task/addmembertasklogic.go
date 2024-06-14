@@ -34,10 +34,12 @@ func NewAddMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 // AddMemberTask 添加会员任务
 func (l *AddMemberTaskLogic) AddMemberTask(req *types.AddMemberTaskReq) (resp *types.AddMemberTaskResp, err error) {
 	_, err = l.svcCtx.MemberTaskService.AddMemberTask(l.ctx, &umsclient.AddMemberTaskReq{
+		CreateBy:     l.ctx.Value("userName").(string),
 		TaskName:     req.TaskName,
+		TaskType:     req.TaskType,
+		Status:       req.Status,
 		TaskGrowth:   req.TaskGrowth,
 		TaskIntegral: req.TaskIntegral,
-		TaskType:     req.TaskType,
 	})
 
 	if err != nil {

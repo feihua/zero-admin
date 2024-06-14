@@ -34,11 +34,13 @@ func NewUpdateMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // UpdateMemberTask 更新会员任务
 func (l *UpdateMemberTaskLogic) UpdateMemberTask(req *types.UpdateMemberTaskReq) (resp *types.UpdateMemberTaskResp, err error) {
 	_, err = l.svcCtx.MemberTaskService.UpdateMemberTask(l.ctx, &umsclient.UpdateMemberTaskReq{
+		TaskType:     req.TaskType,
+		UpdateBy:     l.ctx.Value("userName").(string),
 		Id:           req.Id,
-		TaskName:     req.TaskName,
+		Status:       req.Status,
 		TaskGrowth:   req.TaskGrowth,
 		TaskIntegral: req.TaskIntegral,
-		TaskType:     req.TaskType,
+		TaskName:     req.TaskName,
 	})
 
 	if err != nil {

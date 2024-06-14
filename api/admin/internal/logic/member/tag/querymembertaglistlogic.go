@@ -36,6 +36,8 @@ func (l *QueryMemberTagListLogic) QueryMemberTagList(req *types.QueryMemberTagLi
 	result, err := l.svcCtx.MemberTagService.QueryMemberTagList(l.ctx, &umsclient.QueryMemberTagListReq{
 		PageNum:  req.Current,
 		PageSize: req.PageSize,
+		Status:   req.Status,
+		TagName:  req.TagName,
 	})
 
 	if err != nil {
@@ -51,6 +53,7 @@ func (l *QueryMemberTagListLogic) QueryMemberTagList(req *types.QueryMemberTagLi
 			TagName:           item.TagName,
 			FinishOrderCount:  item.FinishOrderCount,
 			FinishOrderAmount: item.FinishOrderAmount,
+			Status:            item.Status,
 		})
 	}
 

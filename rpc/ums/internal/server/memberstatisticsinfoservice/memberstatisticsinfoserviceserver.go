@@ -33,3 +33,9 @@ func (s *MemberStatisticsInfoServiceServer) QueryMemberStatisticsInfoDetail(ctx 
 	l := memberstatisticsinfoservicelogic.NewQueryMemberStatisticsInfoDetailLogic(ctx, s.svcCtx)
 	return l.QueryMemberStatisticsInfoDetail(in)
 }
+
+// 查询会员统计信息列表
+func (s *MemberStatisticsInfoServiceServer) QueryMemberStatisticsInfoList(ctx context.Context, in *umsclient.QueryMemberStatisticsInfoListReq) (*umsclient.QueryMemberStatisticsInfoListResp, error) {
+	l := memberstatisticsinfoservicelogic.NewQueryMemberStatisticsInfoListLogic(ctx, s.svcCtx)
+	return l.QueryMemberStatisticsInfoList(in)
+}

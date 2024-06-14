@@ -136,6 +136,9 @@ type (
 	QueryMemberRuleSettingListResp             = umsclient.QueryMemberRuleSettingListResp
 	QueryMemberStatisticsInfoDetailReq         = umsclient.QueryMemberStatisticsInfoDetailReq
 	QueryMemberStatisticsInfoDetailResp        = umsclient.QueryMemberStatisticsInfoDetailResp
+	QueryMemberStatisticsInfoListData          = umsclient.QueryMemberStatisticsInfoListData
+	QueryMemberStatisticsInfoListReq           = umsclient.QueryMemberStatisticsInfoListReq
+	QueryMemberStatisticsInfoListResp          = umsclient.QueryMemberStatisticsInfoListResp
 	QueryMemberTagDetailReq                    = umsclient.QueryMemberTagDetailReq
 	QueryMemberTagDetailResp                   = umsclient.QueryMemberTagDetailResp
 	QueryMemberTagListReq                      = umsclient.QueryMemberTagListReq

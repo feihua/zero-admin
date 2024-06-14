@@ -36,6 +36,9 @@ func (l *QueryMemberTaskListLogic) QueryMemberTaskList(req *types.QueryMemberTas
 	result, err := l.svcCtx.MemberTaskService.QueryMemberTaskList(l.ctx, &umsclient.QueryMemberTaskListReq{
 		PageNum:  req.Current,
 		PageSize: req.PageSize,
+		Status:   req.Status,
+		TaskName: req.TaskName,
+		TaskType: req.TaskType,
 	})
 
 	if err != nil {
@@ -47,11 +50,16 @@ func (l *QueryMemberTaskListLogic) QueryMemberTaskList(req *types.QueryMemberTas
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryMemberTaskListData{
+			CreateBy:     item.CreateBy,
+			CreateTime:   item.CreateTime,
 			Id:           item.Id,
-			TaskName:     item.TaskName,
+			Status:       item.Status,
 			TaskGrowth:   item.TaskGrowth,
 			TaskIntegral: item.TaskIntegral,
+			TaskName:     item.TaskName,
 			TaskType:     item.TaskType,
+			UpdateBy:     item.UpdateBy,
+			UpdateTime:   item.UpdateTime,
 		})
 	}
 
