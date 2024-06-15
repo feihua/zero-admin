@@ -36,15 +36,13 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 	_, err := q.WithContext(l.ctx).Updates(&model.OmsCompanyAddress{
 		ID:            in.Id,
 		AddressName:   in.AddressName,
-		SendStatus:    in.SendStatus,
-		ReceiveStatus: in.ReceiveStatus,
 		Name:          in.Name,
 		Phone:         in.Phone,
 		Province:      in.Province,
 		City:          in.City,
 		Region:        in.Region,
 		DetailAddress: in.DetailAddress,
-		UpdateBy:      &in.UpdateBy,
+		UpdateBy:      in.UpdateBy,
 	})
 
 	if err != nil {

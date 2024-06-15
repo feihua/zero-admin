@@ -306,12 +306,13 @@ var CartItemService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CompanyAddressService_AddCompanyAddress_FullMethodName          = "/omsclient.CompanyAddressService/AddCompanyAddress"
-	CompanyAddressService_DeleteCompanyAddress_FullMethodName       = "/omsclient.CompanyAddressService/DeleteCompanyAddress"
-	CompanyAddressService_UpdateCompanyAddress_FullMethodName       = "/omsclient.CompanyAddressService/UpdateCompanyAddress"
-	CompanyAddressService_UpdateCompanyAddressStatus_FullMethodName = "/omsclient.CompanyAddressService/UpdateCompanyAddressStatus"
-	CompanyAddressService_QueryCompanyAddressDetail_FullMethodName  = "/omsclient.CompanyAddressService/QueryCompanyAddressDetail"
-	CompanyAddressService_QueryCompanyAddressList_FullMethodName    = "/omsclient.CompanyAddressService/QueryCompanyAddressList"
+	CompanyAddressService_AddCompanyAddress_FullMethodName                 = "/omsclient.CompanyAddressService/AddCompanyAddress"
+	CompanyAddressService_DeleteCompanyAddress_FullMethodName              = "/omsclient.CompanyAddressService/DeleteCompanyAddress"
+	CompanyAddressService_UpdateCompanyAddress_FullMethodName              = "/omsclient.CompanyAddressService/UpdateCompanyAddress"
+	CompanyAddressService_UpdateCompanyAddressReceiveStatus_FullMethodName = "/omsclient.CompanyAddressService/UpdateCompanyAddressReceiveStatus"
+	CompanyAddressService_UpdateCompanyAddressSendStatus_FullMethodName    = "/omsclient.CompanyAddressService/UpdateCompanyAddressSendStatus"
+	CompanyAddressService_QueryCompanyAddressDetail_FullMethodName         = "/omsclient.CompanyAddressService/QueryCompanyAddressDetail"
+	CompanyAddressService_QueryCompanyAddressList_FullMethodName           = "/omsclient.CompanyAddressService/QueryCompanyAddressList"
 )
 
 // CompanyAddressServiceClient is the client API for CompanyAddressService service.
@@ -325,7 +326,9 @@ type CompanyAddressServiceClient interface {
 	// 更新公司收发货地址表
 	UpdateCompanyAddress(ctx context.Context, in *UpdateCompanyAddressReq, opts ...grpc.CallOption) (*UpdateCompanyAddressResp, error)
 	// 更新公司收发货地址表状态
-	UpdateCompanyAddressStatus(ctx context.Context, in *UpdateCompanyAddressStatusReq, opts ...grpc.CallOption) (*UpdateCompanyAddressStatusResp, error)
+	UpdateCompanyAddressReceiveStatus(ctx context.Context, in *UpdateCompanyAddressReceiveStatusReq, opts ...grpc.CallOption) (*UpdateCompanyAddressStatusResp, error)
+	// 更新公司收发货地址表状态
+	UpdateCompanyAddressSendStatus(ctx context.Context, in *UpdateCompanyAddressSendStatusReq, opts ...grpc.CallOption) (*UpdateCompanyAddressStatusResp, error)
 	// 查询公司收发货地址表详情
 	QueryCompanyAddressDetail(ctx context.Context, in *QueryCompanyAddressDetailReq, opts ...grpc.CallOption) (*QueryCompanyAddressDetailResp, error)
 	// 查询公司收发货地址表列表
@@ -367,9 +370,18 @@ func (c *companyAddressServiceClient) UpdateCompanyAddress(ctx context.Context, 
 	return out, nil
 }
 
-func (c *companyAddressServiceClient) UpdateCompanyAddressStatus(ctx context.Context, in *UpdateCompanyAddressStatusReq, opts ...grpc.CallOption) (*UpdateCompanyAddressStatusResp, error) {
+func (c *companyAddressServiceClient) UpdateCompanyAddressReceiveStatus(ctx context.Context, in *UpdateCompanyAddressReceiveStatusReq, opts ...grpc.CallOption) (*UpdateCompanyAddressStatusResp, error) {
 	out := new(UpdateCompanyAddressStatusResp)
-	err := c.cc.Invoke(ctx, CompanyAddressService_UpdateCompanyAddressStatus_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, CompanyAddressService_UpdateCompanyAddressReceiveStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *companyAddressServiceClient) UpdateCompanyAddressSendStatus(ctx context.Context, in *UpdateCompanyAddressSendStatusReq, opts ...grpc.CallOption) (*UpdateCompanyAddressStatusResp, error) {
+	out := new(UpdateCompanyAddressStatusResp)
+	err := c.cc.Invoke(ctx, CompanyAddressService_UpdateCompanyAddressSendStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -405,7 +417,9 @@ type CompanyAddressServiceServer interface {
 	// 更新公司收发货地址表
 	UpdateCompanyAddress(context.Context, *UpdateCompanyAddressReq) (*UpdateCompanyAddressResp, error)
 	// 更新公司收发货地址表状态
-	UpdateCompanyAddressStatus(context.Context, *UpdateCompanyAddressStatusReq) (*UpdateCompanyAddressStatusResp, error)
+	UpdateCompanyAddressReceiveStatus(context.Context, *UpdateCompanyAddressReceiveStatusReq) (*UpdateCompanyAddressStatusResp, error)
+	// 更新公司收发货地址表状态
+	UpdateCompanyAddressSendStatus(context.Context, *UpdateCompanyAddressSendStatusReq) (*UpdateCompanyAddressStatusResp, error)
 	// 查询公司收发货地址表详情
 	QueryCompanyAddressDetail(context.Context, *QueryCompanyAddressDetailReq) (*QueryCompanyAddressDetailResp, error)
 	// 查询公司收发货地址表列表
@@ -426,8 +440,11 @@ func (UnimplementedCompanyAddressServiceServer) DeleteCompanyAddress(context.Con
 func (UnimplementedCompanyAddressServiceServer) UpdateCompanyAddress(context.Context, *UpdateCompanyAddressReq) (*UpdateCompanyAddressResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCompanyAddress not implemented")
 }
-func (UnimplementedCompanyAddressServiceServer) UpdateCompanyAddressStatus(context.Context, *UpdateCompanyAddressStatusReq) (*UpdateCompanyAddressStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCompanyAddressStatus not implemented")
+func (UnimplementedCompanyAddressServiceServer) UpdateCompanyAddressReceiveStatus(context.Context, *UpdateCompanyAddressReceiveStatusReq) (*UpdateCompanyAddressStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCompanyAddressReceiveStatus not implemented")
+}
+func (UnimplementedCompanyAddressServiceServer) UpdateCompanyAddressSendStatus(context.Context, *UpdateCompanyAddressSendStatusReq) (*UpdateCompanyAddressStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCompanyAddressSendStatus not implemented")
 }
 func (UnimplementedCompanyAddressServiceServer) QueryCompanyAddressDetail(context.Context, *QueryCompanyAddressDetailReq) (*QueryCompanyAddressDetailResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryCompanyAddressDetail not implemented")
@@ -502,20 +519,38 @@ func _CompanyAddressService_UpdateCompanyAddress_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CompanyAddressService_UpdateCompanyAddressStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateCompanyAddressStatusReq)
+func _CompanyAddressService_UpdateCompanyAddressReceiveStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCompanyAddressReceiveStatusReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CompanyAddressServiceServer).UpdateCompanyAddressStatus(ctx, in)
+		return srv.(CompanyAddressServiceServer).UpdateCompanyAddressReceiveStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CompanyAddressService_UpdateCompanyAddressStatus_FullMethodName,
+		FullMethod: CompanyAddressService_UpdateCompanyAddressReceiveStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CompanyAddressServiceServer).UpdateCompanyAddressStatus(ctx, req.(*UpdateCompanyAddressStatusReq))
+		return srv.(CompanyAddressServiceServer).UpdateCompanyAddressReceiveStatus(ctx, req.(*UpdateCompanyAddressReceiveStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CompanyAddressService_UpdateCompanyAddressSendStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCompanyAddressSendStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CompanyAddressServiceServer).UpdateCompanyAddressSendStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CompanyAddressService_UpdateCompanyAddressSendStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CompanyAddressServiceServer).UpdateCompanyAddressSendStatus(ctx, req.(*UpdateCompanyAddressSendStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -576,8 +611,12 @@ var CompanyAddressService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _CompanyAddressService_UpdateCompanyAddress_Handler,
 		},
 		{
-			MethodName: "UpdateCompanyAddressStatus",
-			Handler:    _CompanyAddressService_UpdateCompanyAddressStatus_Handler,
+			MethodName: "UpdateCompanyAddressReceiveStatus",
+			Handler:    _CompanyAddressService_UpdateCompanyAddressReceiveStatus_Handler,
+		},
+		{
+			MethodName: "UpdateCompanyAddressSendStatus",
+			Handler:    _CompanyAddressService_UpdateCompanyAddressSendStatus_Handler,
 		},
 		{
 			MethodName: "QueryCompanyAddressDetail",
@@ -2177,11 +2216,13 @@ var OrderReturnReasonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderSettingService_AddOrderSetting_FullMethodName         = "/omsclient.OrderSettingService/AddOrderSetting"
-	OrderSettingService_DeleteOrderSetting_FullMethodName      = "/omsclient.OrderSettingService/DeleteOrderSetting"
-	OrderSettingService_UpdateOrderSetting_FullMethodName      = "/omsclient.OrderSettingService/UpdateOrderSetting"
-	OrderSettingService_QueryOrderSettingDetail_FullMethodName = "/omsclient.OrderSettingService/QueryOrderSettingDetail"
-	OrderSettingService_QueryOrderSettingList_FullMethodName   = "/omsclient.OrderSettingService/QueryOrderSettingList"
+	OrderSettingService_AddOrderSetting_FullMethodName             = "/omsclient.OrderSettingService/AddOrderSetting"
+	OrderSettingService_DeleteOrderSetting_FullMethodName          = "/omsclient.OrderSettingService/DeleteOrderSetting"
+	OrderSettingService_UpdateOrderSetting_FullMethodName          = "/omsclient.OrderSettingService/UpdateOrderSetting"
+	OrderSettingService_UpdateOrderSettingIsDefault_FullMethodName = "/omsclient.OrderSettingService/UpdateOrderSettingIsDefault"
+	OrderSettingService_UpdateOrderSettingStatus_FullMethodName    = "/omsclient.OrderSettingService/UpdateOrderSettingStatus"
+	OrderSettingService_QueryOrderSettingDetail_FullMethodName     = "/omsclient.OrderSettingService/QueryOrderSettingDetail"
+	OrderSettingService_QueryOrderSettingList_FullMethodName       = "/omsclient.OrderSettingService/QueryOrderSettingList"
 )
 
 // OrderSettingServiceClient is the client API for OrderSettingService service.
@@ -2194,6 +2235,10 @@ type OrderSettingServiceClient interface {
 	DeleteOrderSetting(ctx context.Context, in *DeleteOrderSettingReq, opts ...grpc.CallOption) (*DeleteOrderSettingResp, error)
 	// 更新订单设置表
 	UpdateOrderSetting(ctx context.Context, in *UpdateOrderSettingReq, opts ...grpc.CallOption) (*UpdateOrderSettingResp, error)
+	// 更新订单设置表是否为默认
+	UpdateOrderSettingIsDefault(ctx context.Context, in *UpdateOrderSettingIsDefaultReq, opts ...grpc.CallOption) (*UpdateOrderSettingStatusResp, error)
+	// 更新订单设置表状态
+	UpdateOrderSettingStatus(ctx context.Context, in *UpdateOrderSettingStatusReq, opts ...grpc.CallOption) (*UpdateOrderSettingStatusResp, error)
 	// 查询订单设置表详情
 	QueryOrderSettingDetail(ctx context.Context, in *QueryOrderSettingDetailReq, opts ...grpc.CallOption) (*QueryOrderSettingDetailResp, error)
 	// 查询订单设置表列表
@@ -2235,6 +2280,24 @@ func (c *orderSettingServiceClient) UpdateOrderSetting(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *orderSettingServiceClient) UpdateOrderSettingIsDefault(ctx context.Context, in *UpdateOrderSettingIsDefaultReq, opts ...grpc.CallOption) (*UpdateOrderSettingStatusResp, error) {
+	out := new(UpdateOrderSettingStatusResp)
+	err := c.cc.Invoke(ctx, OrderSettingService_UpdateOrderSettingIsDefault_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderSettingServiceClient) UpdateOrderSettingStatus(ctx context.Context, in *UpdateOrderSettingStatusReq, opts ...grpc.CallOption) (*UpdateOrderSettingStatusResp, error) {
+	out := new(UpdateOrderSettingStatusResp)
+	err := c.cc.Invoke(ctx, OrderSettingService_UpdateOrderSettingStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderSettingServiceClient) QueryOrderSettingDetail(ctx context.Context, in *QueryOrderSettingDetailReq, opts ...grpc.CallOption) (*QueryOrderSettingDetailResp, error) {
 	out := new(QueryOrderSettingDetailResp)
 	err := c.cc.Invoke(ctx, OrderSettingService_QueryOrderSettingDetail_FullMethodName, in, out, opts...)
@@ -2263,6 +2326,10 @@ type OrderSettingServiceServer interface {
 	DeleteOrderSetting(context.Context, *DeleteOrderSettingReq) (*DeleteOrderSettingResp, error)
 	// 更新订单设置表
 	UpdateOrderSetting(context.Context, *UpdateOrderSettingReq) (*UpdateOrderSettingResp, error)
+	// 更新订单设置表是否为默认
+	UpdateOrderSettingIsDefault(context.Context, *UpdateOrderSettingIsDefaultReq) (*UpdateOrderSettingStatusResp, error)
+	// 更新订单设置表状态
+	UpdateOrderSettingStatus(context.Context, *UpdateOrderSettingStatusReq) (*UpdateOrderSettingStatusResp, error)
 	// 查询订单设置表详情
 	QueryOrderSettingDetail(context.Context, *QueryOrderSettingDetailReq) (*QueryOrderSettingDetailResp, error)
 	// 查询订单设置表列表
@@ -2282,6 +2349,12 @@ func (UnimplementedOrderSettingServiceServer) DeleteOrderSetting(context.Context
 }
 func (UnimplementedOrderSettingServiceServer) UpdateOrderSetting(context.Context, *UpdateOrderSettingReq) (*UpdateOrderSettingResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderSetting not implemented")
+}
+func (UnimplementedOrderSettingServiceServer) UpdateOrderSettingIsDefault(context.Context, *UpdateOrderSettingIsDefaultReq) (*UpdateOrderSettingStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderSettingIsDefault not implemented")
+}
+func (UnimplementedOrderSettingServiceServer) UpdateOrderSettingStatus(context.Context, *UpdateOrderSettingStatusReq) (*UpdateOrderSettingStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderSettingStatus not implemented")
 }
 func (UnimplementedOrderSettingServiceServer) QueryOrderSettingDetail(context.Context, *QueryOrderSettingDetailReq) (*QueryOrderSettingDetailResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderSettingDetail not implemented")
@@ -2356,6 +2429,42 @@ func _OrderSettingService_UpdateOrderSetting_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderSettingService_UpdateOrderSettingIsDefault_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrderSettingIsDefaultReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderSettingServiceServer).UpdateOrderSettingIsDefault(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderSettingService_UpdateOrderSettingIsDefault_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderSettingServiceServer).UpdateOrderSettingIsDefault(ctx, req.(*UpdateOrderSettingIsDefaultReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderSettingService_UpdateOrderSettingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrderSettingStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderSettingServiceServer).UpdateOrderSettingStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderSettingService_UpdateOrderSettingStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderSettingServiceServer).UpdateOrderSettingStatus(ctx, req.(*UpdateOrderSettingStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OrderSettingService_QueryOrderSettingDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryOrderSettingDetailReq)
 	if err := dec(in); err != nil {
@@ -2410,6 +2519,14 @@ var OrderSettingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOrderSetting",
 			Handler:    _OrderSettingService_UpdateOrderSetting_Handler,
+		},
+		{
+			MethodName: "UpdateOrderSettingIsDefault",
+			Handler:    _OrderSettingService_UpdateOrderSettingIsDefault_Handler,
+		},
+		{
+			MethodName: "UpdateOrderSettingStatus",
+			Handler:    _OrderSettingService_UpdateOrderSettingStatus_Handler,
 		},
 		{
 			MethodName: "QueryOrderSettingDetail",

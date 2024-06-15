@@ -32,6 +32,8 @@ func newOmsOrderSetting(db *gorm.DB, opts ...gen.DOOption) omsOrderSetting {
 	_omsOrderSetting.NormalOrderOvertime = field.NewInt32(tableName, "normal_order_overtime")
 	_omsOrderSetting.ConfirmOvertime = field.NewInt32(tableName, "confirm_overtime")
 	_omsOrderSetting.FinishOvertime = field.NewInt32(tableName, "finish_overtime")
+	_omsOrderSetting.Status = field.NewInt32(tableName, "status")
+	_omsOrderSetting.IsDefault = field.NewInt32(tableName, "is_default")
 	_omsOrderSetting.CommentOvertime = field.NewInt32(tableName, "comment_overtime")
 
 	_omsOrderSetting.fillFieldMap()
@@ -49,6 +51,8 @@ type omsOrderSetting struct {
 	NormalOrderOvertime field.Int32 // 正常订单超时时间(分)
 	ConfirmOvertime     field.Int32 // 发货后自动确认收货时间（天）
 	FinishOvertime      field.Int32 // 自动完成交易时间，不能申请售后（天）
+	Status              field.Int32 // 状态：0->禁用；1->启用
+	IsDefault           field.Int32 // 是否默认：0->否；1->是
 	CommentOvertime     field.Int32 // 订单完成后自动好评时间（天）
 
 	fieldMap map[string]field.Expr
@@ -71,6 +75,8 @@ func (o *omsOrderSetting) updateTableName(table string) *omsOrderSetting {
 	o.NormalOrderOvertime = field.NewInt32(table, "normal_order_overtime")
 	o.ConfirmOvertime = field.NewInt32(table, "confirm_overtime")
 	o.FinishOvertime = field.NewInt32(table, "finish_overtime")
+	o.Status = field.NewInt32(table, "status")
+	o.IsDefault = field.NewInt32(table, "is_default")
 	o.CommentOvertime = field.NewInt32(table, "comment_overtime")
 
 	o.fillFieldMap()
@@ -100,12 +106,14 @@ func (o *omsOrderSetting) GetFieldByName(fieldName string) (field.OrderExpr, boo
 }
 
 func (o *omsOrderSetting) fillFieldMap() {
-	o.fieldMap = make(map[string]field.Expr, 6)
+	o.fieldMap = make(map[string]field.Expr, 8)
 	o.fieldMap["id"] = o.ID
 	o.fieldMap["flash_order_overtime"] = o.FlashOrderOvertime
 	o.fieldMap["normal_order_overtime"] = o.NormalOrderOvertime
 	o.fieldMap["confirm_overtime"] = o.ConfirmOvertime
 	o.fieldMap["finish_overtime"] = o.FinishOvertime
+	o.fieldMap["status"] = o.Status
+	o.fieldMap["is_default"] = o.IsDefault
 	o.fieldMap["comment_overtime"] = o.CommentOvertime
 }
 

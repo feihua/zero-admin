@@ -41,9 +41,15 @@ func (s *CompanyAddressServiceServer) UpdateCompanyAddress(ctx context.Context, 
 }
 
 // 更新公司收发货地址表状态
-func (s *CompanyAddressServiceServer) UpdateCompanyAddressStatus(ctx context.Context, in *omsclient.UpdateCompanyAddressStatusReq) (*omsclient.UpdateCompanyAddressStatusResp, error) {
-	l := companyaddressservicelogic.NewUpdateCompanyAddressStatusLogic(ctx, s.svcCtx)
-	return l.UpdateCompanyAddressStatus(in)
+func (s *CompanyAddressServiceServer) UpdateCompanyAddressReceiveStatus(ctx context.Context, in *omsclient.UpdateCompanyAddressReceiveStatusReq) (*omsclient.UpdateCompanyAddressStatusResp, error) {
+	l := companyaddressservicelogic.NewUpdateCompanyAddressReceiveStatusLogic(ctx, s.svcCtx)
+	return l.UpdateCompanyAddressReceiveStatus(in)
+}
+
+// 更新公司收发货地址表状态
+func (s *CompanyAddressServiceServer) UpdateCompanyAddressSendStatus(ctx context.Context, in *omsclient.UpdateCompanyAddressSendStatusReq) (*omsclient.UpdateCompanyAddressStatusResp, error) {
+	l := companyaddressservicelogic.NewUpdateCompanyAddressSendStatusLogic(ctx, s.svcCtx)
+	return l.UpdateCompanyAddressSendStatus(in)
 }
 
 // 查询公司收发货地址表详情

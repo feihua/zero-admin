@@ -189,15 +189,14 @@ message DeleteCompanyAddressResp {
 message UpdateCompanyAddressReq {
   string address_name = 1; //地址名称
   string city = 2; //市
-  int32 send_status = 3; //默认发货地址：0->否；1->是
+  string region = 3; //区
   string update_by = 4; //更新者
   string detail_address = 5; //详细地址
   int64 id = 6; //
   string name = 7; //收发货人姓名
   string phone = 8; //收货人电话
   string province = 9; //省/直辖市
-  int32 receive_status = 10; //是否默认收货地址：0->否；1->是
-  string region = 11; //区
+
 
 
 }
@@ -207,14 +206,17 @@ message UpdateCompanyAddressResp {
 }
 
 // 更新公司收发货地址表状态
-message UpdateCompanyAddressStatusReq {
-  repeated int64 ids = 1;
+message UpdateCompanyAddressReceiveStatusReq {
+  int64 id = 1;
   int32 receive_status = 2; //是否默认收货地址：0->否；1->是
-  int32 send_status = 3; //默认发货地址：0->否；1->是
-  int32 flag = 4;
 
 }
+// 更新公司收发货地址表状态
+message UpdateCompanyAddressSendStatusReq {
+  int64 id = 1;
+  int32 send_status = 2; //默认发货地址：0->否；1->是
 
+}
 message UpdateCompanyAddressStatusResp {
   string pong = 1;
 }
@@ -282,7 +284,9 @@ service CompanyAddressService {
   // 更新公司收发货地址表
   rpc UpdateCompanyAddress(UpdateCompanyAddressReq) returns (UpdateCompanyAddressResp ){}
   // 更新公司收发货地址表状态
-  rpc UpdateCompanyAddressStatus(UpdateCompanyAddressStatusReq) returns (UpdateCompanyAddressStatusResp ){}
+  rpc UpdateCompanyAddressReceiveStatus(UpdateCompanyAddressReceiveStatusReq) returns (UpdateCompanyAddressStatusResp ){}
+  // 更新公司收发货地址表状态
+  rpc UpdateCompanyAddressSendStatus(UpdateCompanyAddressSendStatusReq) returns (UpdateCompanyAddressStatusResp ){}
   // 查询公司收发货地址表详情
    rpc QueryCompanyAddressDetail(QueryCompanyAddressDetailReq) returns (QueryCompanyAddressDetailResp){}
   // 查询公司收发货地址表列表
@@ -1065,7 +1069,10 @@ message AddOrderSettingReq {
   int32 confirm_overtime = 2; //发货后自动确认收货时间（天）
   int32 finish_overtime = 3; //自动完成交易时间，不能申请售后（天）
   int32 flash_order_overtime = 4; //秒杀订单超时关闭时间(分)
-  int32 normal_order_overtime = 5; //正常订单超时时间(分)
+  int32 status = 5; //状态：0->禁用；1->启用
+  int32 is_default = 6; //是否默认：0->否；1->是
+  int32 normal_order_overtime = 7; //正常订单超时时间(分)
+
 
 }
 
@@ -1097,10 +1104,26 @@ message UpdateOrderSettingResp {
   string pong = 1;
 }
 
+// 更新订单设置表状态
+message UpdateOrderSettingIsDefaultReq {
+  int64 id = 1; //
+  int32 is_default = 2; //是否默认：0->否；1->是
+
+}
+message UpdateOrderSettingStatusReq {
+
+  repeated int64 ids = 5; //
+  int32 status = 8; //状态：0->禁用；1->启用
+
+}
+
+message UpdateOrderSettingStatusResp {
+  string pong = 1;
+}
 
 // 查询订单设置表详情
 message QueryOrderSettingDetailReq {
-    int64 id = 1;
+  int64 id = 1;
 }
 
 message QueryOrderSettingDetailResp {
@@ -1109,14 +1132,19 @@ message QueryOrderSettingDetailResp {
   int32 finish_overtime = 3; //自动完成交易时间，不能申请售后（天）
   int32 flash_order_overtime = 4; //秒杀订单超时关闭时间(分)
   int64 id = 5; //
-  int32 normal_order_overtime = 6; //正常订单超时时间(分)
+  int32 is_default = 6; //是否默认：0->否；1->是
+  int32 normal_order_overtime = 7; //正常订单超时时间(分)
+  int32 status = 8; //状态：0->禁用；1->启用
 
 }
 
 // 分页查询订单设置表列表
 message QueryOrderSettingListReq {
- int64 page_num = 1; //第几页
+  int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
+  int32 is_default = 3; //是否默认：0->否；1->是
+  int32 status = 4; //状态：0->禁用；1->启用
+
 }
 
 message OrderSettingListData {
@@ -1125,7 +1153,9 @@ message OrderSettingListData {
   int32 finish_overtime = 3; //自动完成交易时间，不能申请售后（天）
   int32 flash_order_overtime = 4; //秒杀订单超时关闭时间(分)
   int64 id = 5; //
-  int32 normal_order_overtime = 6; //正常订单超时时间(分)
+  int32 is_default = 6; //是否默认：0->否；1->是
+  int32 normal_order_overtime = 7; //正常订单超时时间(分)
+  int32 status = 8; //状态：0->禁用；1->启用
 
 }
 
@@ -1142,8 +1172,12 @@ service OrderSettingService {
   rpc DeleteOrderSetting(DeleteOrderSettingReq) returns (DeleteOrderSettingResp){}
   // 更新订单设置表
   rpc UpdateOrderSetting(UpdateOrderSettingReq) returns (UpdateOrderSettingResp ){}
+  // 更新订单设置表是否为默认
+  rpc UpdateOrderSettingIsDefault(UpdateOrderSettingIsDefaultReq) returns (UpdateOrderSettingStatusResp ){}
+  // 更新订单设置表状态
+  rpc UpdateOrderSettingStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp ){}
   // 查询订单设置表详情
-   rpc QueryOrderSettingDetail(QueryOrderSettingDetailReq) returns (QueryOrderSettingDetailResp){}
+  rpc QueryOrderSettingDetail(QueryOrderSettingDetailReq) returns (QueryOrderSettingDetailResp){}
   // 查询订单设置表列表
   rpc QueryOrderSettingList(QueryOrderSettingListReq) returns (QueryOrderSettingListResp){}
 

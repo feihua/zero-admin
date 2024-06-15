@@ -40,6 +40,18 @@ func (s *OrderSettingServiceServer) UpdateOrderSetting(ctx context.Context, in *
 	return l.UpdateOrderSetting(in)
 }
 
+// 更新订单设置表是否为默认
+func (s *OrderSettingServiceServer) UpdateOrderSettingIsDefault(ctx context.Context, in *omsclient.UpdateOrderSettingIsDefaultReq) (*omsclient.UpdateOrderSettingStatusResp, error) {
+	l := ordersettingservicelogic.NewUpdateOrderSettingIsDefaultLogic(ctx, s.svcCtx)
+	return l.UpdateOrderSettingIsDefault(in)
+}
+
+// 更新订单设置表状态
+func (s *OrderSettingServiceServer) UpdateOrderSettingStatus(ctx context.Context, in *omsclient.UpdateOrderSettingStatusReq) (*omsclient.UpdateOrderSettingStatusResp, error) {
+	l := ordersettingservicelogic.NewUpdateOrderSettingStatusLogic(ctx, s.svcCtx)
+	return l.UpdateOrderSettingStatus(in)
+}
+
 // 查询订单设置表详情
 func (s *OrderSettingServiceServer) QueryOrderSettingDetail(ctx context.Context, in *omsclient.QueryOrderSettingDetailReq) (*omsclient.QueryOrderSettingDetailResp, error) {
 	l := ordersettingservicelogic.NewQueryOrderSettingDetailLogic(ctx, s.svcCtx)

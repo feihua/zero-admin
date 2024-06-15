@@ -3,6 +3,7 @@ package companyaddressservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/feihua/zero-admin/rpc/oms/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -58,12 +59,9 @@ func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(in *omsclient.Que
 		address.CreateBy = item.CreateBy
 		address.CreateTime = item.CreateTime.Format("2006-01-02 15:04:05")
 
-		if item.UpdateBy != nil {
-			address.UpdateBy = *item.UpdateBy
-		}
-		if item.UpdateTime != nil {
-			address.UpdateTime = item.UpdateTime.Format("2006-01-02 15:04:05")
-		}
+		address.UpdateBy = item.UpdateBy
+
+		address.UpdateTime = common.TimeToString(item.UpdateTime)
 
 		list = append(list, address)
 	}

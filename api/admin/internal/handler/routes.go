@@ -413,22 +413,37 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addCompanyAddress",
-					Handler: ordercompanyaddress.CompanyAddressAddHandler(serverCtx),
+					Handler: ordercompanyaddress.AddCompanyAddressHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteCompanyAddress",
-					Handler: ordercompanyaddress.CompanyAddressDeleteHandler(serverCtx),
+					Handler: ordercompanyaddress.DeleteCompanyAddressHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryCompanyAddressDetail",
+					Handler: ordercompanyaddress.QueryCompanyAddressDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryCompanyAddressList",
-					Handler: ordercompanyaddress.CompanyAddressListHandler(serverCtx),
+					Handler: ordercompanyaddress.QueryCompanyAddressListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateCompanyAddress",
-					Handler: ordercompanyaddress.CompanyAddressUpdateHandler(serverCtx),
+					Handler: ordercompanyaddress.UpdateCompanyAddressHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateCompanyAddressReceiveStatus",
+					Handler: ordercompanyaddress.UpdateCompanyAddressReceiveStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateCompanyAddressSendStatus",
+					Handler: ordercompanyaddress.UpdateCompanyAddressSendStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -492,18 +507,23 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteReturnApply",
-					Handler: orderreturnapply.ReturnApplyDeleteHandler(serverCtx),
+					Path:    "/deleteOrderReturnApply",
+					Handler: orderreturnapply.DeleteOrderReturnApplyHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryReturnApplyList",
-					Handler: orderreturnapply.ReturnApplyListHandler(serverCtx),
+					Path:    "/queryOrderReturnApplyDetail",
+					Handler: orderreturnapply.QueryOrderReturnApplyDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOrderReturnApplyList",
+					Handler: orderreturnapply.QueryOrderReturnApplyListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updateReturnApply",
-					Handler: orderreturnapply.ReturnApplyUpdateHandler(serverCtx),
+					Path:    "/updateOrderReturnApplyStatus",
+					Handler: orderreturnapply.UpdateOrderReturnApplyStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -517,28 +537,33 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/addReturnReason",
-					Handler: orderreturnreason.ReturnResonAddHandler(serverCtx),
+					Path:    "/addOrderReturnReason",
+					Handler: orderreturnreason.AddOrderReturnReasonHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteReturnReason",
-					Handler: orderreturnreason.ReturnResonDeleteHandler(serverCtx),
+					Path:    "/deleteOrderReturnReason",
+					Handler: orderreturnreason.DeleteOrderReturnReasonHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryReturnReasonList",
-					Handler: orderreturnreason.ReturnResonListHandler(serverCtx),
+					Path:    "/queryOrderReturnReasonDetail",
+					Handler: orderreturnreason.QueryOrderReturnReasonDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOrderReturnReasonList",
+					Handler: orderreturnreason.QueryOrderReturnReasonListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/queryReturnReasonList",
-					Handler: orderreturnreason.ReturnResonUpdateHandler(serverCtx),
+					Path:    "/updateOrderReturnReason",
+					Handler: orderreturnreason.UpdateOrderReturnReasonHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updateReturnReasonStatus",
-					Handler: orderreturnreason.UpdateReturnResonStatusHandler(serverCtx),
+					Path:    "/updateOrderReturnReasonStatus",
+					Handler: orderreturnreason.UpdateOrderReturnReasonStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -553,22 +578,37 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addOrderSetting",
-					Handler: ordersetting.OrderSettingAddHandler(serverCtx),
+					Handler: ordersetting.AddOrderSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteOrderSetting",
-					Handler: ordersetting.OrderSettingDeleteHandler(serverCtx),
+					Handler: ordersetting.DeleteOrderSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOrderSettingDetail",
+					Handler: ordersetting.QueryOrderSettingDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryOrderSettingList",
-					Handler: ordersetting.OrderSettingListHandler(serverCtx),
+					Handler: ordersetting.QueryOrderSettingListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateOrderSetting",
-					Handler: ordersetting.OrderSettingUpdateHandler(serverCtx),
+					Handler: ordersetting.UpdateOrderSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateOrderSettingIsDefault",
+					Handler: ordersetting.UpdateOrderSettingIsDefaultHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateOrderSettingStatus",
+					Handler: ordersetting.UpdateOrderSettingStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -727,33 +767,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/updateDeleteStatus",
-					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateNewStatus",
-					Handler: productproduct.UpdateNewStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateProduct",
-					Handler: productproduct.ProductUpdateHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updatePublishStatus",
-					Handler: productproduct.UpdatePublishStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateRecommendStatus",
-					Handler: productproduct.UpdateRecommendStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateVerifyStatus",
-					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
+					Path:    "/queryProductList",
+					Handler: productproduct.QueryProductListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -766,9 +781,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: productproduct.QueryProductListHandler(serverCtx),
+					Method:  http.MethodPost,
+					Path:    "/addProduct",
+					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
 			}...,
 		),
@@ -796,9 +811,34 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
+					Method:  http.MethodGet,
+					Path:    "/updateDeleteStatus",
+					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
+				},
+				{
 					Method:  http.MethodPost,
-					Path:    "/addProduct",
-					Handler: productproduct.ProductAddHandler(serverCtx),
+					Path:    "/updateNewStatus",
+					Handler: productproduct.UpdateNewStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateProduct",
+					Handler: productproduct.ProductUpdateHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updatePublishStatus",
+					Handler: productproduct.UpdatePublishStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateRecommendStatus",
+					Handler: productproduct.UpdateRecommendStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateVerifyStatus",
+					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1302,31 +1342,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteOperateLog",
-					Handler: syslog.DeleteOperateLogHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOperateLogDetail",
-					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOperateLogList",
-					Handler: syslog.QueryOperateLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/log"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
 					Path:    "/deleteLoginLog",
 					Handler: syslog.DeleteLoginLogHandler(serverCtx),
 				},
@@ -1344,6 +1359,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodGet,
 					Path:    "/queryStatisticsLoginLog",
 					Handler: syslog.QueryStatisticsLoginLogHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/log"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteOperateLog",
+					Handler: syslog.DeleteOperateLogHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOperateLogDetail",
+					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOperateLogList",
+					Handler: syslog.QueryOperateLogListHandler(serverCtx),
 				},
 			}...,
 		),

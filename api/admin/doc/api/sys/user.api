@@ -95,7 +95,7 @@ type (
 	}
 	// 更新用户信息状态
 	UpdateUserStatusReq {
-		UserIds    []int64 `json:"UserIds"` //编号
+		UserIds    []int64 `json:"userIds"` //编号
 		UserStatus int32   `json:"userStatus"` //帐号状态（0正常 1停用）
 	}
 	UpdateUserStatusResp {

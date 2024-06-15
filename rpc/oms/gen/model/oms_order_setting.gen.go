@@ -13,6 +13,8 @@ type OmsOrderSetting struct {
 	NormalOrderOvertime int32 `gorm:"column:normal_order_overtime;not null;comment:正常订单超时时间(分)" json:"normal_order_overtime"` // 正常订单超时时间(分)
 	ConfirmOvertime     int32 `gorm:"column:confirm_overtime;not null;comment:发货后自动确认收货时间（天）" json:"confirm_overtime"`        // 发货后自动确认收货时间（天）
 	FinishOvertime      int32 `gorm:"column:finish_overtime;not null;comment:自动完成交易时间，不能申请售后（天）" json:"finish_overtime"`      // 自动完成交易时间，不能申请售后（天）
+	Status              int32 `gorm:"column:status;not null;default:1;comment:状态：0->禁用；1->启用" json:"status"`                  // 状态：0->禁用；1->启用
+	IsDefault           int32 `gorm:"column:is_default;not null;comment:是否默认：0->否；1->是" json:"is_default"`                    // 是否默认：0->否；1->是
 	CommentOvertime     int32 `gorm:"column:comment_overtime;not null;comment:订单完成后自动好评时间（天）" json:"comment_overtime"`        // 订单完成后自动好评时间（天）
 }
 

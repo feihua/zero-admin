@@ -2,15 +2,15 @@
 package types
 
 type AddCompanyAddressReq struct {
-	AddressName   string `json:"addressName"`   // 地址名称
-	SendStatus    int32  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
-	ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
-	Name          string `json:"name"`          // 收发货人姓名
-	Phone         string `json:"phone"`         // 收货人电话
-	Province      string `json:"province"`      // 省/直辖市
-	City          string `json:"city"`          // 市
-	Region        string `json:"region"`        // 区
-	DetailAddress string `json:"detailAddress"` // 详细地址
+	AddressName   string `json:"addressName"`   //地址名称
+	City          string `json:"city"`          //市
+	DetailAddress string `json:"detailAddress"` //详细地址
+	Name          string `json:"name"`          //收发货人姓名
+	Phone         string `json:"phone"`         //收货人电话
+	Province      string `json:"province"`      //省/直辖市
+	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+	Region        string `json:"region"`        //区
+	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
 }
 
 type AddCompanyAddressResp struct {
@@ -299,12 +299,25 @@ type AddOrUpdateCouponResp struct {
 	Message string `json:"message"`
 }
 
+type AddOrderReturnReasonReq struct {
+	Name   string `json:"name"`   //退货类型
+	Sort   int32  `json:"sort"`   //排序
+	Status int32  `json:"status"` //状态：0->不启用；1->启用
+}
+
+type AddOrderReturnReasonResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type AddOrderSettingReq struct {
-	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  // 秒杀订单超时关闭时间(分)
-	NormalOrderOvertime int32 `json:"normalOrderOvertime"` // 正常订单超时时间(分)
-	ConfirmOvertime     int32 `json:"confirmOvertime"`     // 发货后自动确认收货时间（天）
-	FinishOvertime      int32 `json:"finishOvertime"`      // 自动完成交易时间，不能申请售后（天）
-	CommentOvertime     int32 `json:"commentOvertime"`     // 订单完成后自动好评时间（天）
+	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
+	ConfirmOvertime     int32 `json:"confirmOvertime"`     //发货后自动确认收货时间（天）
+	FinishOvertime      int32 `json:"finishOvertime"`      //自动完成交易时间，不能申请售后（天）
+	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
+	IsDefault           int32 `json:"isDefault"`           //是否默认：0->否；1->是
+	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
+	Status              int32 `json:"status"`              //状态：0->禁用；1->启用
 }
 
 type AddOrderSettingResp struct {
@@ -479,17 +492,6 @@ type AddProductReq struct {
 }
 
 type AddProductResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type AddReturnResonReq struct {
-	Name   string `json:"name"` // 退货类型
-	Sort   int32  `json:"sort"`
-	Status int32  `json:"status"` // 状态：0->不启用；1->启用
-}
-
-type AddReturnResonResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -847,6 +849,24 @@ type DeleteOrderResp struct {
 	Message string `json:"message"`
 }
 
+type DeleteOrderReturnApplyReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteOrderReturnApplyResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type DeleteOrderReturnReasonReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteOrderReturnReasonResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type DeleteOrderSettingReq struct {
 	Ids []int64 `form:"ids"`
 }
@@ -906,24 +926,6 @@ type DeleteProductCategoryReq struct {
 }
 
 type DeleteProductCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type DeleteReturnApplyReq struct {
-	Ids []int64 `form:"ids"`
-}
-
-type DeleteReturnApplyResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type DeleteReturnResonReq struct {
-	Ids []int64 `form:"ids"`
-}
-
-type DeleteReturnResonResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -999,38 +1001,6 @@ type ListChangeHistoryResp struct {
 	Total    int64                    `json:"total"`
 	Code     string                   `json:"code"`
 	Message  string                   `json:"message"`
-}
-
-type ListCompanyAddressData struct {
-	Id            int64  `json:"id"`
-	AddressName   string `json:"addressName"`   // 地址名称
-	SendStatus    int32  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
-	ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
-	Name          string `json:"name"`          // 收发货人姓名
-	Phone         string `json:"phone"`         // 收货人电话
-	Province      string `json:"province"`      // 省/直辖市
-	City          string `json:"city"`          // 市
-	Region        string `json:"region"`        // 区
-	DetailAddress string `json:"detailAddress"` // 详细地址
-	CreateBy      string `json:"createBy"`
-	CreateTime    string `json:"createTime"`
-	UpdateBy      string `json:"updateBy"`
-	UpdateTime    string `json:"updateTime"`
-}
-
-type ListCompanyAddressReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type ListCompanyAddressResp struct {
-	Code     string                    `json:"code"`
-	Message  string                    `json:"message"`
-	Current  int64                     `json:"current,default=1"`
-	Data     []*ListCompanyAddressData `json:"data"`
-	PageSize int64                     `json:"pageSize,default=20"`
-	Success  bool                      `json:"success"`
-	Total    int64                     `json:"total"`
 }
 
 type ListCouponData struct {
@@ -1579,30 +1549,6 @@ type ListOrderResp struct {
 	Total    int64            `json:"total"`
 }
 
-type ListOrderSettingData struct {
-	Id                  int64 `json:"id"`
-	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  // 秒杀订单超时关闭时间(分)
-	NormalOrderOvertime int32 `json:"normalOrderOvertime"` // 正常订单超时时间(分)
-	ConfirmOvertime     int32 `json:"confirmOvertime"`     // 发货后自动确认收货时间（天）
-	FinishOvertime      int32 `json:"finishOvertime"`      // 自动完成交易时间，不能申请售后（天）
-	CommentOvertime     int32 `json:"commentOvertime"`     // 订单完成后自动好评时间（天）
-}
-
-type ListOrderSettingReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-}
-
-type ListOrderSettingResp struct {
-	Code     string                  `json:"code"`
-	Message  string                  `json:"message"`
-	Current  int64                   `json:"current,default=1"`
-	Data     []*ListOrderSettingData `json:"data"`
-	PageSize int64                   `json:"pageSize,default=20"`
-	Success  bool                    `json:"success"`
-	Total    int64                   `json:"total"`
-}
-
 type ListProductAttribute struct {
 	Id                         int64  `json:"id"`
 	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
@@ -1738,84 +1684,6 @@ type ListProductCategoryResp struct {
 	PageSize int64                      `json:"pageSize,default=20"`
 	Success  bool                       `json:"success"`
 	Total    int64                      `json:"total"`
-}
-
-type ListReturnApplyData struct {
-	Id               int64  `json:"id"`
-	OrderId          int64  `json:"orderId"`          // 订单id
-	CompanyAddressId int64  `json:"companyAddressId"` // 收货地址表id
-	ProductId        int64  `json:"productId"`        // 退货商品id
-	OrderSn          string `json:"orderSn"`          // 订单编号
-	CreateTime       string `json:"createTime"`       // 申请时间
-	MemberUsername   string `json:"memberUserName"`   // 会员用户名
-	ReturnAmount     int64  `json:"returnAmount"`     // 退款金额
-	ReturnName       string `json:"returnName"`       // 退货人姓名
-	ReturnPhone      string `json:"returnPhone"`      // 退货人电话
-	Status           int32  `json:"status"`           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-	HandleTime       string `json:"handleTime"`       // 处理时间
-	ProductPic       string `json:"productPic"`       // 商品图片
-	ProductName      string `json:"productName"`      // 商品名称
-	ProductBrand     string `json:"productBrand"`     // 商品品牌
-	ProductAttr      string `json:"productAttr"`      // 商品销售属性：颜色：红色；尺码：xl;
-	ProductCount     int32  `json:"productCount"`     // 退货数量
-	ProductPrice     int64  `json:"productPrice"`     // 商品单价
-	ProductRealPrice int64  `json:"productRealPrice"` // 商品实际支付单价
-	Reason           string `json:"reason"`           // 原因
-	Description      string `json:"description"`      // 描述
-	ProofPics        string `json:"proofPics"`        // 凭证图片，以逗号隔开
-	HandleNote       string `json:"handleNote"`       // 处理备注
-	HandleMan        string `json:"handleMan"`        // 处理人员
-	ReceiveMan       string `json:"receiveMan"`       // 收货人
-	ReceiveTime      string `json:"receiveTime"`      // 收货时间
-	ReceiveNote      string `json:"receiveNote"`      // 收货备注
-}
-
-type ListReturnApplyReq struct {
-	Current        int64  `form:"current,default=1"`
-	PageSize       int64  `form:"pageSize,default=20"`
-	OrderSn        string `form:"orderSn,optional"`        // 订单编号
-	Status         int32  `form:"status,default=4"`        // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-	HandleTime     string `form:"handleTime,optional"`     // 处理时间
-	HandleMan      string `form:"handleMan,optional"`      // 处理人员
-	CreateTime     string `form:"createTime,optional"`     // 申请时间
-	MemberUsername string `form:"memberUserName,optional"` // 会员用户名
-	ReturnName     string `form:"returnName,optional"`     // 退货人姓名
-	ReturnPhone    string `form:"returnPhone,optional"`    // 退货人电话
-}
-
-type ListReturnApplyResp struct {
-	Code     string                 `json:"code"`
-	Message  string                 `json:"message"`
-	Current  int64                  `json:"current,default=1"`
-	Data     []*ListReturnApplyData `json:"data"`
-	PageSize int64                  `json:"pageSize,default=20"`
-	Success  bool                   `json:"success"`
-	Total    int64                  `json:"total"`
-}
-
-type ListReturnResonData struct {
-	Id         int64  `json:"id"`
-	Name       string `json:"name"` // 退货类型
-	Sort       int32  `json:"sort"`
-	Status     int32  `json:"status"`     // 状态：0->不启用；1->启用
-	CreateTime string `json:"createTime"` // 添加时间
-}
-
-type ListReturnResonReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	Name     string `form:"name,optional"`    // 退货类型
-	Status   int32  `form:"status,default=2"` // 状态：0->不启用；1->启用
-}
-
-type ListReturnResonResp struct {
-	Code     string                 `json:"code"`
-	Message  string                 `json:"message"`
-	Current  int64                  `json:"current,default=1"`
-	Data     []*ListReturnResonData `json:"data"`
-	PageSize int64                  `json:"pageSize,default=20"`
-	Success  bool                   `json:"success"`
-	Total    int64                  `json:"total"`
 }
 
 type ListSkuStockData struct {
@@ -2018,6 +1886,79 @@ type QueryByproductCategoryIdResp struct {
 	Code    string                          `json:"code"`
 	Message string                          `json:"message"`
 	Data    []*QueryByproductCategoryIdData `json:"data"`
+}
+
+type QueryCompanyAddressDetailData struct {
+	AddressName   string `json:"addressName"`   //地址名称
+	City          string `json:"city"`          //市
+	CreateBy      string `json:"createBy"`      //创建者
+	CreateTime    string `json:"createTime"`    //创建时间
+	DetailAddress string `json:"detailAddress"` //详细地址
+	Id            int64  `json:"id"`            //
+	Name          string `json:"name"`          //收发货人姓名
+	Phone         string `json:"phone"`         //收货人电话
+	Province      string `json:"province"`      //省/直辖市
+	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+	Region        string `json:"region"`        //区
+	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
+	UpdateBy      string `json:"updateBy"`      //更新者
+	UpdateTime    string `json:"updateTime"`    //更新时间
+}
+
+type QueryCompanyAddressDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryCompanyAddressDetailResp struct {
+	Code    string                        `json:"code"`
+	Message string                        `json:"message"`
+	Data    QueryCompanyAddressDetailData `json:"data"`
+}
+
+type QueryCompanyAddressListData struct {
+	AddressName   string `json:"addressName"`   //地址名称
+	City          string `json:"city"`          //市
+	CreateBy      string `json:"createBy"`      //创建者
+	CreateTime    string `json:"createTime"`    //创建时间
+	DetailAddress string `json:"detailAddress"` //详细地址
+	Id            int64  `json:"id"`            //
+	Name          string `json:"name"`          //收发货人姓名
+	Phone         string `json:"phone"`         //收货人电话
+	Province      string `json:"province"`      //省/直辖市
+	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+	Region        string `json:"region"`        //区
+	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
+	UpdateBy      string `json:"updateBy"`      //更新者
+	UpdateTime    string `json:"updateTime"`    //更新时间
+}
+
+type QueryCompanyAddressListReq struct {
+	Current       int64  `form:"current,default=1"`      //第几页
+	PageSize      int64  `form:"pageSize,default=20"`    //每页的数量
+	AddressName   string `form:"addressName,optional"`   //地址名称
+	City          string `form:"city,optional"`          //市
+	CreateBy      string `form:"createBy,optional"`      //创建者
+	CreateTime    string `form:"createTime,optional"`    //创建时间
+	DetailAddress string `form:"detailAddress,optional"` //详细地址
+	Id            int64  `form:"id,optional"`            //
+	Name          string `form:"name,optional"`          //收发货人姓名
+	Phone         string `form:"phone,optional"`         //收货人电话
+	Province      string `form:"province,optional"`      //省/直辖市
+	ReceiveStatus int32  `form:"receiveStatus,optional"` //是否默认收货地址：0->否；1->是
+	Region        string `form:"region,optional"`        //区
+	SendStatus    int32  `form:"sendStatus,optional"`    //默认发货地址：0->否；1->是
+	UpdateBy      string `form:"updateBy,optional"`      //更新者
+	UpdateTime    string `form:"updateTime,optional"`    //更新时间
+}
+
+type QueryCompanyAddressListResp struct {
+	Code     string                         `json:"code"`
+	Message  string                         `json:"message"`
+	Current  int64                          `json:"current,default=1"`
+	Data     []*QueryCompanyAddressListData `json:"data"`
+	PageSize int64                          `json:"pageSize,default=20"`
+	Success  bool                           `json:"success"`
+	Total    int64                          `json:"total"`
 }
 
 type QueryDeptAndPostListData struct {
@@ -2706,6 +2647,197 @@ type QueryOperateLogListResp struct {
 	Total    int64                      `json:"total"`
 }
 
+type QueryOrderReturnApplyDetailData struct {
+	CompanyAddressId int64  `json:"companyAddressId"` //收货地址表id
+	CreateTime       string `json:"createTime"`       //申请时间
+	Description      string `json:"description"`      //描述
+	HandleMan        string `json:"handleMan"`        //处理人员
+	HandleNote       string `json:"handleNote"`       //处理备注
+	HandleTime       string `json:"handleTime"`       //处理时间
+	Id               int64  `json:"id"`               //
+	MemberUsername   string `json:"memberUsername"`   //会员用户名
+	OrderId          int64  `json:"orderId"`          //订单id
+	OrderSn          string `json:"orderSn"`          //订单编号
+	ProductAttr      string `json:"productAttr"`      //商品销售属性：颜色：红色；尺码：xl;
+	ProductBrand     string `json:"productBrand"`     //商品品牌
+	ProductCount     int32  `json:"productCount"`     //退货数量
+	ProductId        int64  `json:"productId"`        //退货商品id
+	ProductName      string `json:"productName"`      //商品名称
+	ProductPic       string `json:"productPic"`       //商品图片
+	ProductPrice     int64  `json:"productPrice"`     //商品单价
+	ProductRealPrice int64  `json:"productRealPrice"` //商品实际支付单价
+	ProofPics        string `json:"proofPics"`        //凭证图片，以逗号隔开
+	Reason           string `json:"reason"`           //原因
+	ReceiveMan       string `json:"receiveMan"`       //收货人
+	ReceiveNote      string `json:"receiveNote"`      //收货备注
+	ReceiveTime      string `json:"receiveTime"`      //收货时间
+	ReturnAmount     int64  `json:"returnAmount"`     //退款金额
+	ReturnName       string `json:"returnName"`       //退货人姓名
+	ReturnPhone      string `json:"returnPhone"`      //退货人电话
+	Status           int32  `json:"status"`           //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+}
+
+type QueryOrderReturnApplyDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryOrderReturnApplyDetailResp struct {
+	Code    string                          `json:"code"`
+	Message string                          `json:"message"`
+	Data    QueryOrderReturnApplyDetailData `json:"data"`
+}
+
+type QueryOrderReturnApplyListData struct {
+	CompanyAddressId int64  `json:"companyAddressId"` //收货地址表id
+	CreateTime       string `json:"createTime"`       //申请时间
+	Description      string `json:"description"`      //描述
+	HandleMan        string `json:"handleMan"`        //处理人员
+	HandleNote       string `json:"handleNote"`       //处理备注
+	HandleTime       string `json:"handleTime"`       //处理时间
+	Id               int64  `json:"id"`               //
+	MemberUsername   string `json:"memberUsername"`   //会员用户名
+	OrderId          int64  `json:"orderId"`          //订单id
+	OrderSn          string `json:"orderSn"`          //订单编号
+	ProductAttr      string `json:"productAttr"`      //商品销售属性：颜色：红色；尺码：xl;
+	ProductBrand     string `json:"productBrand"`     //商品品牌
+	ProductCount     int32  `json:"productCount"`     //退货数量
+	ProductId        int64  `json:"productId"`        //退货商品id
+	ProductName      string `json:"productName"`      //商品名称
+	ProductPic       string `json:"productPic"`       //商品图片
+	ProductPrice     int64  `json:"productPrice"`     //商品单价
+	ProductRealPrice int64  `json:"productRealPrice"` //商品实际支付单价
+	ProofPics        string `json:"proofPics"`        //凭证图片，以逗号隔开
+	Reason           string `json:"reason"`           //原因
+	ReceiveMan       string `json:"receiveMan"`       //收货人
+	ReceiveNote      string `json:"receiveNote"`      //收货备注
+	ReceiveTime      string `json:"receiveTime"`      //收货时间
+	ReturnAmount     int64  `json:"returnAmount"`     //退款金额
+	ReturnName       string `json:"returnName"`       //退货人姓名
+	ReturnPhone      string `json:"returnPhone"`      //退货人电话
+	Status           int32  `json:"status"`           //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+}
+
+type QueryOrderReturnApplyListReq struct {
+	Current        int64  `form:"current,default=1"`
+	PageSize       int64  `form:"pageSize,default=20"`
+	OrderSn        string `form:"orderSn,optional"`        // 订单编号
+	Status         int32  `form:"status,default=4"`        // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleTime     string `form:"handleTime,optional"`     // 处理时间
+	HandleMan      string `form:"handleMan,optional"`      // 处理人员
+	CreateTime     string `form:"createTime,optional"`     // 申请时间
+	MemberUsername string `form:"memberUserName,optional"` // 会员用户名
+	ReturnName     string `form:"returnName,optional"`     // 退货人姓名
+	ReturnPhone    string `form:"returnPhone,optional"`    // 退货人电话
+}
+
+type QueryOrderReturnApplyListResp struct {
+	Code     string                           `json:"code"`
+	Message  string                           `json:"message"`
+	Current  int64                            `json:"current,default=1"`
+	Data     []*QueryOrderReturnApplyListData `json:"data"`
+	PageSize int64                            `json:"pageSize,default=20"`
+	Success  bool                             `json:"success"`
+	Total    int64                            `json:"total"`
+}
+
+type QueryOrderReturnReasonDetailData struct {
+	CreateTime string `json:"createTime"` //创建时间
+	Id         int64  `json:"id"`         //
+	Name       string `json:"name"`       //退货类型
+	Sort       int32  `json:"sort"`       //排序
+	Status     int32  `json:"status"`     //状态：0->不启用；1->启用
+}
+
+type QueryOrderReturnReasonDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryOrderReturnReasonDetailResp struct {
+	Code    string                           `json:"code"`
+	Message string                           `json:"message"`
+	Data    QueryOrderReturnReasonDetailData `json:"data"`
+}
+
+type QueryOrderReturnReasonListData struct {
+	CreateTime string `json:"createTime"` //创建时间
+	Id         int64  `json:"id"`         //
+	Name       string `json:"name"`       //退货类型
+	Sort       int32  `json:"sort"`       //排序
+	Status     int32  `json:"status"`     //状态：0->不启用；1->启用
+}
+
+type QueryOrderReturnReasonListReq struct {
+	Current  int64  `form:"current,default=1"`   //第几页
+	PageSize int64  `form:"pageSize,default=20"` //每页的数量
+	Name     string `form:"name,optional"`       //退货类型
+	Status   int32  `form:"status,optional"`     //状态：0->不启用；1->启用
+}
+
+type QueryOrderReturnReasonListResp struct {
+	Code     string                            `json:"code"`
+	Message  string                            `json:"message"`
+	Current  int64                             `json:"current,default=1"`
+	Data     []*QueryOrderReturnReasonListData `json:"data"`
+	PageSize int64                             `json:"pageSize,default=20"`
+	Success  bool                              `json:"success"`
+	Total    int64                             `json:"total"`
+}
+
+type QueryOrderSettingDetailData struct {
+	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
+	ConfirmOvertime     int32 `json:"confirmOvertime"`     //发货后自动确认收货时间（天）
+	FinishOvertime      int32 `json:"finishOvertime"`      //自动完成交易时间，不能申请售后（天）
+	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
+	Id                  int64 `json:"id"`                  //
+	IsDefault           int32 `json:"isDefault"`           //是否默认：0->否；1->是
+	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
+	Status              int32 `json:"status"`              //状态：0->禁用；1->启用
+}
+
+type QueryOrderSettingDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryOrderSettingDetailResp struct {
+	Code    string                      `json:"code"`
+	Message string                      `json:"message"`
+	Data    QueryOrderSettingDetailData `json:"data"`
+}
+
+type QueryOrderSettingListData struct {
+	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
+	ConfirmOvertime     int32 `json:"confirmOvertime"`     //发货后自动确认收货时间（天）
+	FinishOvertime      int32 `json:"finishOvertime"`      //自动完成交易时间，不能申请售后（天）
+	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
+	Id                  int64 `json:"id"`                  //
+	IsDefault           int32 `json:"isDefault"`           //是否默认：0->否；1->是
+	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
+	Status              int32 `json:"status"`              //状态：0->禁用；1->启用
+}
+
+type QueryOrderSettingListReq struct {
+	Current             int64 `form:"current,default=1"`            //第几页
+	PageSize            int64 `form:"pageSize,default=20"`          //每页的数量
+	CommentOvertime     int32 `form:"commentOvertime,optional"`     //订单完成后自动好评时间（天）
+	ConfirmOvertime     int32 `form:"confirmOvertime,optional"`     //发货后自动确认收货时间（天）
+	FinishOvertime      int32 `form:"finishOvertime,optional"`      //自动完成交易时间，不能申请售后（天）
+	FlashOrderOvertime  int32 `form:"flashOrderOvertime,optional"`  //秒杀订单超时关闭时间(分)
+	Id                  int64 `form:"id,optional"`                  //
+	IsDefault           int32 `form:"isDefault,optional"`           //是否默认：0->否；1->是
+	NormalOrderOvertime int32 `form:"normalOrderOvertime,optional"` //正常订单超时时间(分)
+	Status              int32 `form:"status,optional"`              //状态：0->禁用；1->启用
+}
+
+type QueryOrderSettingListResp struct {
+	Code     string                       `json:"code"`
+	Message  string                       `json:"message"`
+	Current  int64                        `json:"current,default=1"`
+	Data     []*QueryOrderSettingListData `json:"data"`
+	PageSize int64                        `json:"pageSize,default=20"`
+	Success  bool                         `json:"success"`
+	Total    int64                        `json:"total"`
+}
+
 type QueryPostDetailData struct {
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
@@ -3203,20 +3335,33 @@ type SkuStockList struct {
 	SpData         string `json:"spData"`
 }
 
+type UpdateCompanyAddressReceiveStatusReq struct {
+	Id            int64 `json:"id"`            //
+	ReceiveStatus int32 `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+}
+
 type UpdateCompanyAddressReq struct {
-	Id            int64  `json:"id"`
-	AddressName   string `json:"addressName"`   // 地址名称
-	SendStatus    int32  `json:"sendStatus"`    // 默认发货地址：0->否；1->是
-	ReceiveStatus int32  `json:"receiveStatus"` // 是否默认收货地址：0->否；1->是
-	Name          string `json:"name"`          // 收发货人姓名
-	Phone         string `json:"phone"`         // 收货人电话
-	Province      string `json:"province"`      // 省/直辖市
-	City          string `json:"city"`          // 市
-	Region        string `json:"region"`        // 区
-	DetailAddress string `json:"detailAddress"` // 详细地址
+	AddressName   string `json:"addressName"`   //地址名称
+	City          string `json:"city"`          //市
+	DetailAddress string `json:"detailAddress"` //详细地址
+	Id            int64  `json:"id"`            //
+	Name          string `json:"name"`          //收发货人姓名
+	Phone         string `json:"phone"`         //收货人电话
+	Province      string `json:"province"`      //省/直辖市
+	Region        string `json:"region"`        //区
 }
 
 type UpdateCompanyAddressResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateCompanyAddressSendStatusReq struct {
+	Id         int64 `json:"id"`         //
+	SendStatus int32 `json:"sendStatus"` //默认发货地址：0->否；1->是
+}
+
+type UpdateCompanyAddressStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3643,16 +3788,66 @@ type UpdateNoteResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateOrderReturnApplyStatusReq struct {
+	Id               int64  `json:"id"`
+	CompanyAddressId int64  `json:"companyAddressId,optional"` // 收货地址表id
+	Status           int32  `json:"status"`                    // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleNote       string `json:"handleNote,optional"`       // 处理备注
+	ReceiveNote      string `json:"receiveNote,optional"`      // 收货备注
+	ReturnAmount     int64  `json:"returnAmount,optional"`     // 退款金额
+}
+
+type UpdateOrderReturnApplyStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateOrderReturnReasonReq struct {
+	Id   int64  `json:"id"`   //
+	Name string `json:"name"` //退货类型
+	Sort int32  `json:"sort"` //排序
+}
+
+type UpdateOrderReturnReasonResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateOrderReturnReasonStatusReq struct {
+	Ids    []int64 `json:"ids"`    //
+	Status int32   `json:"status"` //状态：0->不启用；1->启用
+}
+
+type UpdateOrderReturnReasonStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateOrderSettingIsDefaultReq struct {
+	Id        int64 `json:"id"`        //
+	IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
+}
+
 type UpdateOrderSettingReq struct {
-	Id                  int64 `json:"id"`
-	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  // 秒杀订单超时关闭时间(分)
-	NormalOrderOvertime int32 `json:"normalOrderOvertime"` // 正常订单超时时间(分)
-	ConfirmOvertime     int32 `json:"confirmOvertime"`     // 发货后自动确认收货时间（天）
-	FinishOvertime      int32 `json:"finishOvertime"`      // 自动完成交易时间，不能申请售后（天）
-	CommentOvertime     int32 `json:"commentOvertime"`     // 订单完成后自动好评时间（天）
+	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
+	ConfirmOvertime     int32 `json:"confirmOvertime"`     //发货后自动确认收货时间（天）
+	FinishOvertime      int32 `json:"finishOvertime"`      //自动完成交易时间，不能申请售后（天）
+	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
+	Id                  int64 `json:"id"`                  //
+	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
 }
 
 type UpdateOrderSettingResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateOrderSettingStatusReq struct {
+	Ids    []int64 `json:"ids"`    //
+	Status int32   `json:"status"` //状态：0->禁用；1->启用
+}
+
+type UpdateOrderSettingStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -3951,37 +4146,6 @@ type UpdateRecommendSubjectStatusResp struct {
 	Message string `json:"message"`
 }
 
-type UpdateReturnApplyReq struct {
-	Id               int64  `json:"id"`
-	CompanyAddressId int64  `json:"companyAddressId,optional"` // 收货地址表id
-	Status           int32  `json:"status"`                    // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-	HandleNote       string `json:"handleNote,optional"`       // 处理备注
-	ReceiveNote      string `json:"receiveNote,optional"`      // 收货备注
-	ReturnAmount     int64  `json:"returnAmount,optional"`     // 退款金额
-}
-
-type UpdateReturnApplyResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type UpdateReturnResonReq struct {
-	Id     int64  `json:"id"`
-	Name   string `json:"name"` // 退货类型
-	Sort   int32  `json:"sort"`
-	Status int32  `json:"status"` // 状态：0->不启用；1->启用
-}
-
-type UpdateReturnResonResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type UpdateReturnResonStatusReq struct {
-	Ids    []int64 `json:"ids"`
-	Status int32   `json:"status"` // 状态：0->不启用；1->启用
-}
-
 type UpdateRoleMenuListReq struct {
 	RoleId  int64   `json:"roleId"`
 	MenuIds []int64 `json:"menuIds"`
@@ -4117,7 +4281,7 @@ type UpdateUserRoleResp struct {
 }
 
 type UpdateUserStatusReq struct {
-	UserIds    []int64 `json:"UserIds"`    //编号
+	UserIds    []int64 `json:"userIds"`    //编号
 	UserStatus int32   `json:"userStatus"` //帐号状态（0正常 1停用）
 }
 
