@@ -11,7 +11,7 @@ import (
 
 func UpdateOrderSettingIsDefaultHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UpdateOrderSettingStatusReq
+		var req types.UpdateOrderSettingIsDefaultReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return

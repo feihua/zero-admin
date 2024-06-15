@@ -32,6 +32,11 @@ func NewUpdateOrderSettingIsDefaultLogic(ctx context.Context, svcCtx *svc.Servic
 // UpdateOrderSettingIsDefault 更新订单设置表是否为默认
 func (l *UpdateOrderSettingIsDefaultLogic) UpdateOrderSettingIsDefault(in *omsclient.UpdateOrderSettingIsDefaultReq) (*omsclient.UpdateOrderSettingStatusResp, error) {
 	q := query.OmsOrderSetting
+	if in.IsDefault == 1 {
+		if _, err := q.WithContext(l.ctx).Where(q.IsDefault.Eq(1)).Update(q.IsDefault, 0); err != nil {
+			return nil, err
+		}
+	}
 	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Update(q.IsDefault, in.IsDefault)
 
 	if err != nil {

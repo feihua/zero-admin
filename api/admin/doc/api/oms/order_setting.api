@@ -85,14 +85,7 @@ type (
 	QueryOrderSettingListReq {
 		Current         int64  `form:"current,default=1"` //第几页
 		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
-		CommentOvertime int32 `form:"commentOvertime,optional"` //订单完成后自动好评时间（天）
-		ConfirmOvertime int32 `form:"confirmOvertime,optional"` //发货后自动确认收货时间（天）
-		FinishOvertime int32 `form:"finishOvertime,optional"` //自动完成交易时间，不能申请售后（天）
-		FlashOrderOvertime int32 `form:"flashOrderOvertime,optional"` //秒杀订单超时关闭时间(分)
-		Id int64 `form:"id,optional"` //
-		IsDefault int32 `form:"isDefault,optional"` //是否默认：0->否；1->是
-		NormalOrderOvertime int32 `form:"normalOrderOvertime,optional"` //正常订单超时时间(分)
-		Status int32 `form:"status,optional"` //状态：0->禁用；1->启用
+		Status int32 `form:"status,default=2"` //状态：0->禁用；1->启用
 
 	}
 	QueryOrderSettingListData {

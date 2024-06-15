@@ -35,6 +35,15 @@ func NewQueryCompanyAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(in *omsclient.QueryCompanyAddressListReq) (*omsclient.QueryCompanyAddressListResp, error) {
 	q := query.OmsCompanyAddress.WithContext(l.ctx)
 
+	if len(in.AddressName) > 0 {
+		q = q.Where(query.OmsCompanyAddress.AddressName.Like("%" + in.AddressName + "%"))
+	}
+	if len(in.Name) > 0 {
+		q = q.Where(query.OmsCompanyAddress.Name.Like("%" + in.Name + "%"))
+	}
+	if len(in.Phone) > 0 {
+		q = q.Where(query.OmsCompanyAddress.Phone.Like("%" + in.Phone + "%"))
+	}
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {

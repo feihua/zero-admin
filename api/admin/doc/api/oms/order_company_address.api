@@ -95,19 +95,8 @@ type (
 		Current         int64  `form:"current,default=1"` //第几页
 		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
 		AddressName string `form:"addressName,optional"` //地址名称
-		City string `form:"city,optional"` //市
-		CreateBy string `form:"createBy,optional"` //创建者
-		CreateTime string `form:"createTime,optional"` //创建时间
-		DetailAddress string `form:"detailAddress,optional"` //详细地址
-		Id int64 `form:"id,optional"` //
 		Name string `form:"name,optional"` //收发货人姓名
 		Phone string `form:"phone,optional"` //收货人电话
-		Province string `form:"province,optional"` //省/直辖市
-		ReceiveStatus int32 `form:"receiveStatus,optional"` //是否默认收货地址：0->否；1->是
-		Region string `form:"region,optional"` //区
-		SendStatus int32 `form:"sendStatus,optional"` //默认发货地址：0->否；1->是
-		UpdateBy string `form:"updateBy,optional"` //更新者
-		UpdateTime string `form:"updateTime,optional"` //更新时间
 
 	}
 	QueryCompanyAddressListData {

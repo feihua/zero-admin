@@ -32,7 +32,20 @@ func NewAddCompanyAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // AddCompanyAddress 添加公司收发货地址表
 func (l *AddCompanyAddressLogic) AddCompanyAddress(in *omsclient.AddCompanyAddressReq) (*omsclient.AddCompanyAddressResp, error) {
-	err := query.OmsCompanyAddress.WithContext(l.ctx).Create(&model.OmsCompanyAddress{
+	q := query.OmsCompanyAddress
+	if in.ReceiveStatus == 1 {
+		_, err := q.WithContext(l.ctx).Where(q.ReceiveStatus.Eq(1)).Update(q.ReceiveStatus, 0)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if in.SendStatus == 1 {
+		_, err := q.WithContext(l.ctx).Where(q.SendStatus.Eq(1)).Update(q.SendStatus, 0)
+		if err != nil {
+			return nil, err
+		}
+	}
+	err := q.WithContext(l.ctx).Create(&model.OmsCompanyAddress{
 		AddressName:   in.AddressName,
 		SendStatus:    in.SendStatus,
 		ReceiveStatus: in.ReceiveStatus,

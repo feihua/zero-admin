@@ -30,6 +30,7 @@ func (l *QueryOrderSettingListLogic) QueryOrderSettingList(req *types.QueryOrder
 	result, err := l.svcCtx.OrderSettingService.QueryOrderSettingList(l.ctx, &omsclient.QueryOrderSettingListReq{
 		PageNum:  req.Current,
 		PageSize: req.PageSize,
+		Status:   req.Status,
 	})
 
 	if err != nil {

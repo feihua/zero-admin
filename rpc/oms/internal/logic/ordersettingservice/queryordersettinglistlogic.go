@@ -33,7 +33,9 @@ func NewQueryOrderSettingListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 // QueryOrderSettingList 查询订单设置表列表
 func (l *QueryOrderSettingListLogic) QueryOrderSettingList(in *omsclient.QueryOrderSettingListReq) (*omsclient.QueryOrderSettingListResp, error) {
 	q := query.OmsOrderSetting.WithContext(l.ctx)
-
+	if in.Status != 2 {
+		q = q.Where(query.OmsOrderSetting.Status.Eq(in.Status))
+	}
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
@@ -45,12 +47,14 @@ func (l *QueryOrderSettingListLogic) QueryOrderSettingList(in *omsclient.QueryOr
 	for _, item := range result {
 
 		list = append(list, &omsclient.OrderSettingListData{
-			Id:                  item.ID,
-			FlashOrderOvertime:  item.FinishOvertime,
-			NormalOrderOvertime: item.NormalOrderOvertime,
+			CommentOvertime:     item.CommentOvertime,
 			ConfirmOvertime:     item.ConfirmOvertime,
 			FinishOvertime:      item.FinishOvertime,
-			CommentOvertime:     item.CommentOvertime,
+			FlashOrderOvertime:  item.FinishOvertime,
+			Id:                  item.ID,
+			IsDefault:           item.IsDefault,
+			NormalOrderOvertime: item.NormalOrderOvertime,
+			Status:              item.Status,
 		})
 	}
 

@@ -32,6 +32,12 @@ func NewUpdateCompanyAddressReceiveStatusLogic(ctx context.Context, svcCtx *svc.
 // UpdateCompanyAddressReceiveStatus 更新公司收发货地址表状态
 func (l *UpdateCompanyAddressReceiveStatusLogic) UpdateCompanyAddressReceiveStatus(in *omsclient.UpdateCompanyAddressReceiveStatusReq) (*omsclient.UpdateCompanyAddressStatusResp, error) {
 	q := query.OmsCompanyAddress
+	if in.ReceiveStatus == 1 {
+		_, err := q.WithContext(l.ctx).Where(q.ReceiveStatus.Eq(1)).Update(q.ReceiveStatus, 0)
+		if err != nil {
+			return nil, err
+		}
+	}
 	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Update(q.ReceiveStatus, in.ReceiveStatus)
 
 	if err != nil {

@@ -41,7 +41,7 @@ type (
 		HandleNote string `json:"handleNote"` //处理备注
 		HandleTime string `json:"handleTime"` //处理时间
 		Id int64 `json:"id"` //
-		MemberUsername string `json:"memberUsername"` //会员用户名
+		MemberUsername string `json:"memberUserName"` //会员用户名
 		OrderId int64 `json:"orderId"` //订单id
 		OrderSn string `json:"orderSn"` //订单编号
 		ProductAttr string `json:"productAttr"` //商品销售属性：颜色：红色；尺码：xl;
@@ -90,7 +90,7 @@ type (
 		HandleNote string `json:"handleNote"` //处理备注
 		HandleTime string `json:"handleTime"` //处理时间
 		Id int64 `json:"id"` //
-		MemberUsername string `json:"memberUsername"` //会员用户名
+		MemberUsername string `json:"memberUserName"` //会员用户名
 		OrderId int64 `json:"orderId"` //订单id
 		OrderSn string `json:"orderSn"` //订单编号
 		ProductAttr string `json:"productAttr"` //商品销售属性：颜色：红色；尺码：xl;

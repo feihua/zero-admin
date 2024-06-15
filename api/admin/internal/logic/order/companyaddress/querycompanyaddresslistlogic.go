@@ -28,8 +28,11 @@ func NewQueryCompanyAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(req *types.QueryCompanyAddressListReq) (resp *types.QueryCompanyAddressListResp, err error) {
 	result, err := l.svcCtx.CompanyAddressService.QueryCompanyAddressList(l.ctx, &omsclient.QueryCompanyAddressListReq{
-		PageNum:  req.Current,
-		PageSize: req.PageSize,
+		PageNum:     req.Current,
+		PageSize:    req.PageSize,
+		AddressName: req.AddressName,
+		Name:        req.Name,
+		Phone:       req.Phone,
 	})
 
 	if err != nil {

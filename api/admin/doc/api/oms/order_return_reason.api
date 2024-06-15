@@ -70,7 +70,7 @@ type (
 		Current         int64  `form:"current,default=1"` //第几页
 		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
 		Name string `form:"name,optional"` //退货类型
-		Status int32 `form:"status,optional"` //状态：0->不启用；1->启用
+		Status int32 `form:"status,default=2"` //状态：0->不启用；1->启用
 
 	}
 	QueryOrderReturnReasonListData {

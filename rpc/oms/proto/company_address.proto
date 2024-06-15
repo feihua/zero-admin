@@ -98,7 +98,8 @@ message QueryCompanyAddressListReq {
   int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
   string address_name = 3; //地址名称
-
+  string name = 4; //收发货人姓名
+  string phone = 5; //收货人电话
 }
 
 message CompanyAddressListData {

@@ -32,7 +32,14 @@ func NewAddOrderSettingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *A
 
 // AddOrderSetting 添加订单设置表
 func (l *AddOrderSettingLogic) AddOrderSetting(in *omsclient.AddOrderSettingReq) (*omsclient.AddOrderSettingResp, error) {
-	err := query.OmsOrderSetting.WithContext(l.ctx).Create(&model.OmsOrderSetting{
+	q := query.OmsOrderSetting
+	if in.IsDefault == 1 {
+		if _, err := q.WithContext(l.ctx).Where(q.IsDefault.Eq(1)).Update(q.IsDefault, 0); err != nil {
+			return nil, err
+		}
+	}
+
+	err := q.WithContext(l.ctx).Create(&model.OmsOrderSetting{
 		FlashOrderOvertime:  in.FinishOvertime,
 		NormalOrderOvertime: in.NormalOrderOvertime,
 		ConfirmOvertime:     in.ConfirmOvertime,

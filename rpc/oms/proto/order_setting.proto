@@ -83,7 +83,6 @@ message QueryOrderSettingDetailResp {
 message QueryOrderSettingListReq {
   int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
-  int32 is_default = 3; //是否默认：0->否；1->是
   int32 status = 4; //状态：0->禁用；1->启用
 
 }
