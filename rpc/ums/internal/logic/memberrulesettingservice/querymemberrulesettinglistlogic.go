@@ -34,6 +34,12 @@ func NewQueryMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.Service
 // QueryMemberRuleSettingList 查询会员积分成长规则表列表
 func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(in *umsclient.QueryMemberRuleSettingListReq) (*umsclient.QueryMemberRuleSettingListResp, error) {
 	q := query.UmsMemberRuleSetting.WithContext(l.ctx)
+	if in.Status != 2 {
+		q = q.Where(query.UmsMemberRuleSetting.Status.Eq(in.Status))
+	}
+	if in.RuleType != 2 {
+		q = q.Where(query.UmsMemberRuleSetting.RuleType.Eq(in.RuleType))
+	}
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
@@ -45,15 +51,16 @@ func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(in *umsclie
 	for _, item := range result {
 
 		list = append(list, &umsclient.MemberRuleSettingListData{
-			Id:                item.ID,
+			ConsumePerPoint:   item.ConsumePerPoint,
 			ContinueSignDay:   item.ContinueSignDay,
 			ContinueSignPoint: item.ContinueSignPoint,
-			ConsumePerPoint:   item.ConsumePerPoint,
+			CreateBy:          item.CreateBy,
+			CreateTime:        item.CreateTime.Format("2006-01-02 15:04:05"),
+			Id:                item.ID,
 			LowOrderAmount:    item.LowOrderAmount,
 			MaxPointPerOrder:  item.MaxPointPerOrder,
 			RuleType:          item.RuleType,
-			CreateBy:          item.CreateBy,
-			CreateTime:        item.CreateTime.Format("2006-01-02 15:04:05"),
+			Status:            item.Status,
 			UpdateBy:          item.UpdateBy,
 			UpdateTime:        common.TimeToString(item.UpdateTime),
 		})

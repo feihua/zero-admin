@@ -32,10 +32,18 @@ func NewAddIntegrationConsumeSettingLogic(ctx context.Context, svcCtx *svc.Servi
 
 // AddIntegrationConsumeSetting 添加积分消费设置
 func (l *AddIntegrationConsumeSettingLogic) AddIntegrationConsumeSetting(in *umsclient.AddIntegrationConsumeSettingReq) (*umsclient.AddIntegrationConsumeSettingResp, error) {
-	err := query.UmsIntegrationConsumeSetting.WithContext(l.ctx).Create(&model.UmsIntegrationConsumeSetting{
+	q := query.UmsIntegrationConsumeSetting
+	if in.IsDefault == 1 {
+		_, err := q.WithContext(l.ctx).Where(q.IsDefault.Eq(1)).Update(q.IsDefault, 0)
+		if err != nil {
+			return nil, err
+		}
+	}
+	err := q.WithContext(l.ctx).Create(&model.UmsIntegrationConsumeSetting{
 		DeductionPerAmount: in.DeductionPerAmount,
 		MaxPercentPerOrder: in.MaxPercentPerOrder,
 		UseUnit:            in.UseUnit,
+		IsDefault:          in.IsDefault,
 		CouponStatus:       in.CouponStatus,
 	})
 

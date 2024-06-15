@@ -34,12 +34,14 @@ func NewAddMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // AddMemberRuleSetting 添加会员积分规则
 func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(req *types.AddMemberRuleSettingReq) (resp *types.AddMemberRuleSettingResp, err error) {
 	_, err = l.svcCtx.MemberRuleSettingService.AddMemberRuleSetting(l.ctx, &umsclient.AddMemberRuleSettingReq{
+		ConsumePerPoint:   req.ConsumePerPoint,
 		ContinueSignDay:   req.ContinueSignDay,
 		ContinueSignPoint: req.ContinueSignPoint,
-		ConsumePerPoint:   req.ConsumePerPoint,
+		CreateBy:          l.ctx.Value("userName").(string),
+		RuleType:          req.RuleType,
+		Status:            req.Status,
 		LowOrderAmount:    req.LowOrderAmount,
 		MaxPointPerOrder:  req.MaxPointPerOrder,
-		RuleType:          req.RuleType,
 	})
 
 	if err != nil {

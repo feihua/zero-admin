@@ -47,11 +47,12 @@ func (l *QueryIntegrationConsumeSettingListLogic) QueryIntegrationConsumeSetting
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryIntegrationConsumeSettingListData{
-			Id:                 item.Id,
+			CouponStatus:       item.CouponStatus,
 			DeductionPerAmount: item.DeductionPerAmount,
+			Id:                 item.Id,
+			IsDefault:          item.IsDefault,
 			MaxPercentPerOrder: item.MaxPercentPerOrder,
 			UseUnit:            item.UseUnit,
-			CouponStatus:       item.CouponStatus,
 		})
 	}
 

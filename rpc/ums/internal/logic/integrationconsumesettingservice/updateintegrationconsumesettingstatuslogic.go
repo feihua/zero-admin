@@ -2,6 +2,7 @@ package integrationconsumesettingservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -9,6 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UpdateIntegrationConsumeSettingStatusLogic 更新积分消费设置状态
 type UpdateIntegrationConsumeSettingStatusLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +25,20 @@ func NewUpdateIntegrationConsumeSettingStatusLogic(ctx context.Context, svcCtx *
 	}
 }
 
-// 更新积分消费设置状态
+// UpdateIntegrationConsumeSettingStatus 更新积分消费设置状态
 func (l *UpdateIntegrationConsumeSettingStatusLogic) UpdateIntegrationConsumeSettingStatus(in *umsclient.UpdateIntegrationConsumeSettingStatusReq) (*umsclient.UpdateIntegrationConsumeSettingStatusResp, error) {
-	// todo: add your logic here and delete this line
+	q := query.UmsIntegrationConsumeSetting
+	if in.IsDefault == 1 {
+		_, err := q.WithContext(l.ctx).Where(q.IsDefault.Eq(1)).Update(q.IsDefault, 0)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Update(q.IsDefault, in.IsDefault)
+	if err != nil {
+		return nil, err
+	}
 
 	return &umsclient.UpdateIntegrationConsumeSettingStatusResp{}, nil
 }

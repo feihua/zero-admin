@@ -49,6 +49,7 @@ func (l *QueryIntegrationConsumeSettingListLogic) QueryIntegrationConsumeSetting
 			MaxPercentPerOrder: item.MaxPercentPerOrder,
 			UseUnit:            item.UseUnit,
 			CouponStatus:       item.CouponStatus,
+			IsDefault:          item.IsDefault,
 		})
 	}
 

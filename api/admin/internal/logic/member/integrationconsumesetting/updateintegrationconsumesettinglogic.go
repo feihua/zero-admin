@@ -34,11 +34,11 @@ func NewUpdateIntegrationConsumeSettingLogic(ctx context.Context, svcCtx *svc.Se
 // UpdateIntegrationConsumeSetting 更新积分消费设置
 func (l *UpdateIntegrationConsumeSettingLogic) UpdateIntegrationConsumeSetting(req *types.UpdateIntegrationConsumeSettingReq) (resp *types.UpdateIntegrationConsumeSettingResp, err error) {
 	_, err = l.svcCtx.IntegrationConsumeSettingService.UpdateIntegrationConsumeSetting(l.ctx, &umsclient.UpdateIntegrationConsumeSettingReq{
-		Id:                 req.Id,
+		CouponStatus:       req.CouponStatus,
 		DeductionPerAmount: req.DeductionPerAmount,
+		Id:                 req.Id,
 		MaxPercentPerOrder: req.MaxPercentPerOrder,
 		UseUnit:            req.UseUnit,
-		CouponStatus:       req.CouponStatus,
 	})
 
 	if err != nil {

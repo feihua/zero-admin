@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
@@ -39,6 +38,7 @@ func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(in *umsclient.AddMember
 		LowOrderAmount:    in.LowOrderAmount,
 		MaxPointPerOrder:  in.MaxPointPerOrder,
 		RuleType:          in.RuleType,
+		Status:            in.Status,
 		CreateBy:          in.CreateBy,
 	})
 

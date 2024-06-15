@@ -3409,7 +3409,6 @@ type UpdateIntegrationConsumeSettingReq struct {
 	CouponStatus       int32 `json:"couponStatus"`       //是否可以和优惠券同用；0->不可以；1->可以
 	DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
 	Id                 int64 `json:"id"`                 //
-	IsDefault          int32 `json:"isDefault"`          //是否默认：0->否；1->是
 	MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
 	UseUnit            int32 `json:"useUnit"`            //每次使用积分最小单位100
 }
@@ -3420,8 +3419,8 @@ type UpdateIntegrationConsumeSettingResp struct {
 }
 
 type UpdateIntegrationConsumeSettingStatusReq struct {
-	Ids       []int64 `json:"ids"`       //
-	IsDefault int32   `json:"isDefault"` //是否默认：0->否；1->是
+	Id        int64 `json:"id"`        //
+	IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
 }
 
 type UpdateIntegrationConsumeSettingStatusResp struct {
@@ -3502,7 +3501,6 @@ type UpdateMemberRuleSettingReq struct {
 	LowOrderAmount    int64 `json:"lowOrderAmount"`    //最低获取点数的订单金额
 	MaxPointPerOrder  int32 `json:"maxPointPerOrder"`  //每笔订单最高获取点数
 	RuleType          int32 `json:"ruleType"`          //类型：0->积分规则；1->成长值规则
-	Status            int32 `json:"status"`            //状态：0->禁用；1->启用
 }
 
 type UpdateMemberRuleSettingResp struct {

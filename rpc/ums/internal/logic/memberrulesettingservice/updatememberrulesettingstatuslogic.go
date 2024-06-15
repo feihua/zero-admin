@@ -2,6 +2,7 @@ package memberrulesettingservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -9,6 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UpdateMemberRuleSettingStatusLogic 更新会员积分成长规则表状态
 type UpdateMemberRuleSettingStatusLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +25,13 @@ func NewUpdateMemberRuleSettingStatusLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
-// 更新会员积分成长规则表状态
+// UpdateMemberRuleSettingStatus 更新会员积分成长规则表状态
 func (l *UpdateMemberRuleSettingStatusLogic) UpdateMemberRuleSettingStatus(in *umsclient.UpdateMemberRuleSettingStatusReq) (*umsclient.UpdateMemberRuleSettingStatusResp, error) {
-	// todo: add your logic here and delete this line
+	q := query.UmsMemberRuleSetting
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.Status, in.Status)
+	if err != nil {
+		return nil, err
+	}
 
 	return &umsclient.UpdateMemberRuleSettingStatusResp{}, nil
 }

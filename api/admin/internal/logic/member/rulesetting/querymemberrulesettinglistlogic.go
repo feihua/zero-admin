@@ -36,6 +36,8 @@ func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(req *types.
 	result, err := l.svcCtx.MemberRuleSettingService.QueryMemberRuleSettingList(l.ctx, &umsclient.QueryMemberRuleSettingListReq{
 		PageNum:  req.Current,
 		PageSize: req.PageSize,
+		RuleType: req.RuleType,
+		Status:   req.Status,
 	})
 
 	if err != nil {
@@ -47,13 +49,18 @@ func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(req *types.
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryMemberRuleSettingListData{
-			Id:                item.Id,
+			ConsumePerPoint:   item.ConsumePerPoint,
 			ContinueSignDay:   item.ContinueSignDay,
 			ContinueSignPoint: item.ContinueSignPoint,
-			ConsumePerPoint:   item.ConsumePerPoint,
+			CreateBy:          item.CreateBy,
+			CreateTime:        item.CreateTime,
+			Id:                item.Id,
 			LowOrderAmount:    item.LowOrderAmount,
 			MaxPointPerOrder:  item.MaxPointPerOrder,
 			RuleType:          item.RuleType,
+			Status:            item.Status,
+			UpdateBy:          item.UpdateBy,
+			UpdateTime:        item.UpdateTime,
 		})
 	}
 

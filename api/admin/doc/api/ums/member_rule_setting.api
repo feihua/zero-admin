@@ -38,7 +38,6 @@ type (
 		LowOrderAmount int64 `json:"lowOrderAmount"` //最低获取点数的订单金额
 		MaxPointPerOrder int32 `json:"maxPointPerOrder"` //每笔订单最高获取点数
 		RuleType int32 `json:"ruleType"` //类型：0->积分规则；1->成长值规则
-		Status int32 `json:"status"` //状态：0->禁用；1->启用
 
 	}
 	UpdateMemberRuleSettingResp {
