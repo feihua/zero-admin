@@ -2,6 +2,7 @@ package operatelogservicelogic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
@@ -35,6 +36,16 @@ func NewAddOperateLogLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 
 // AddOperateLog 添加操作日志
 func (l *AddOperateLogLogic) AddOperateLog(in *sysclient.AddOperateLogReq) (*sysclient.AddOperateLogResp, error) {
+	var result map[string]interface{}
+	_ = json.Unmarshal([]byte(in.OperationResponse), &result)
+
+	var operationStatus int32 = 0
+	//响应中code为000000表示成功
+	code := result["code"]
+	if code == "000000" {
+		operationStatus = 1
+	}
+
 	sysLog := &model.SysOperateLog{
 		Title:             in.Title,
 		OperationType:     in.OperationType,
@@ -43,7 +54,7 @@ func (l *AddOperateLogLogic) AddOperateLog(in *sysclient.AddOperateLogReq) (*sys
 		OperationURL:      in.OperationUrl,
 		OperationParams:   in.OperationParams,
 		OperationResponse: in.OperationResponse,
-		OperationStatus:   in.OperationStatus,
+		OperationStatus:   operationStatus,
 		DeptName:          in.DeptName,
 		UseTime:           in.UseTime,
 		Browser:           in.Browser,
