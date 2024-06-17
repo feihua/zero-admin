@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strings"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -46,8 +47,13 @@ func (l *AddOperateLogLogic) AddOperateLog(in *sysclient.AddOperateLogReq) (*sys
 		operationStatus = 1
 	}
 
+	uri := strings.Split(in.OperationUrl, "?")[0]
+	//todo 待优化 量大的时候 ，把它们的关联缓存起来(redis)
+	q := query.SysMenu
+	menu, _ := q.WithContext(l.ctx).Select(q.MenuName).Where(q.BackgroundURL.Like("%" + uri + "%")).First()
+
 	sysLog := &model.SysOperateLog{
-		Title:             in.Title,
+		Title:             menu.MenuName,
 		OperationType:     in.OperationType,
 		OperationName:     in.OperationName,
 		RequestMethod:     in.RequestMethod,
