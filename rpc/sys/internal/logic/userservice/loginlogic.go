@@ -3,6 +3,7 @@ package userservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
@@ -48,20 +49,20 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 
 	// 1.判断用户是否存在
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		l.savaLoginLog(in, "error", "用户不存在")
+		l.savaLoginLog(in, "error", fmt.Sprintf("用户不存在: %+v", in))
 		logc.Errorf(l.ctx, "用户不存在,参数：%+v,异常:%s", in, err.Error())
 		return nil, errors.New("用户不存在")
 	}
 
 	if err != nil {
-		l.savaLoginLog(in, "error", "查询用户信息异常")
+		l.savaLoginLog(in, "error", fmt.Sprintf("查询用户信息异常: %+v", in))
 		logc.Errorf(l.ctx, "查询用户信息,参数：%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询用户信息异常")
 	}
 
 	// 2.判断密码是否正确
 	if user.Password != in.Password {
-		l.savaLoginLog(in, "error", "用户密码不正确")
+		l.savaLoginLog(in, "error", fmt.Sprintf("用户密码不正确: %+v", in))
 		logc.Errorf(l.ctx, "用户密码不正确,参数:%s", in.Password)
 		return nil, errors.New("用户密码不正确")
 	}
@@ -70,7 +71,7 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	apiUrls := l.queryApiUrls(user)
 
 	if len(apiUrls) == 0 {
-		l.savaLoginLog(in, "error", "用户还没有分配角色或者还没有分配角色权限")
+		l.savaLoginLog(in, "error", fmt.Sprintf("用户还没有分配角色或者还没有分配角色权限: %+v", in))
 		logc.Errorf(l.ctx, "用户还没有分配角色或者还没有分配角色权限,参数:%+v", in)
 		return nil, errors.New("用户还没有分配角色或者还没有分配角色权限")
 	}
@@ -79,7 +80,7 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	sysDept := query.SysDept
 	dept, err := sysDept.WithContext(l.ctx).Select(sysDept.DeptName).Where(sysDept.ID.Eq(user.DeptID)).First()
 	if err != nil {
-		l.savaLoginLog(in, "error", "查询用户部门信息异常")
+		l.savaLoginLog(in, "error", fmt.Sprintf("查询用户部门信息异常: %+v", in))
 		logc.Errorf(l.ctx, "查询用户部门信息异常,参数deptId:%d", user.DeptID)
 		return nil, errors.New("查询用户部门信息异常")
 	}
@@ -87,7 +88,7 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	jwtToken, err := l.getJwtToken(user.ID, user.DeptID, user.UserName, dept.DeptName)
 
 	if err != nil {
-		l.savaLoginLog(in, "error", "生成token失败")
+		l.savaLoginLog(in, "error", fmt.Sprintf("生成token失败: %+v", in))
 		logc.Errorf(l.ctx, "生成token失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("生成token失败")
 	}
