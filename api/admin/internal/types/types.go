@@ -351,6 +351,15 @@ type AddPreferredAreaResp struct {
 	Message string `json:"message"`
 }
 
+type AddProductAttributeCategoryReq struct {
+	Name string `json:"name"`
+}
+
+type AddProductAttributeCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type AddProductAttributeReq struct {
 	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"` // 属性分类id
 	Name                       string `json:"name"`
@@ -373,15 +382,6 @@ type AddProductAttributeResp struct {
 type AddProductAttributeValueList struct {
 	ProductAttributeId int64  `json:"productAttributeId"`
 	Value              string `json:"value"`
-}
-
-type AddProductAttributecategoryReq struct {
-	Name string `json:"name"`
-}
-
-type AddProductAttributecategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddProductBrandReq struct {
@@ -894,20 +894,20 @@ type DeletePreferredAreaResp struct {
 	Message string `json:"message"`
 }
 
+type DeleteProductAttributeCategoryReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteProductAttributeCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type DeleteProductAttributeReq struct {
 	Ids []int64 `form:"ids"`
 }
 
 type DeleteProductAttributeResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type DeleteProductAttributecategoryReq struct {
-	Ids []int64 `form:"ids"`
-}
-
-type DeleteProductAttributecategoryResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
@@ -1564,6 +1564,30 @@ type ListProductAttribute struct {
 	Type                       int32  `json:"type"`          // 属性的类型；0->规格；1->参数
 }
 
+type ListProductAttributeCategoryData struct {
+	Id                     int64                  `json:"id"`
+	Name                   string                 `json:"name"`
+	AttributecategoryCount int32                  `json:"attributeCount"`       // 属性数量
+	ParamCount             int32                  `json:"paramCount"`           // 参数数量
+	ProductAttributeList   []ListProductAttribute `json:"productAttributeList"` // 商品属性列表
+}
+
+type ListProductAttributeCategoryReq struct {
+	Current  int64  `form:"current,default=1"`
+	PageSize int64  `form:"pageSize,default=20"`
+	Name     string `form:"name,optional"`
+}
+
+type ListProductAttributeCategoryResp struct {
+	Code     string                              `json:"code"`
+	Message  string                              `json:"message"`
+	Current  int64                               `json:"current,default=1"`
+	Data     []*ListProductAttributeCategoryData `json:"data"`
+	PageSize int64                               `json:"pageSize,default=20"`
+	Success  bool                                `json:"success"`
+	Total    int64                               `json:"total"`
+}
+
 type ListProductAttributeData struct {
 	Id                         int64  `json:"id"`
 	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
@@ -1595,30 +1619,6 @@ type ListProductAttributeResp struct {
 	PageSize int64                       `json:"pageSize,default=20"`
 	Success  bool                        `json:"success"`
 	Total    int64                       `json:"total"`
-}
-
-type ListProductAttributecategoryData struct {
-	Id                     int64                  `json:"id"`
-	Name                   string                 `json:"name"`
-	AttributecategoryCount int32                  `json:"attributeCount"`       // 属性数量
-	ParamCount             int32                  `json:"paramCount"`           // 参数数量
-	ProductAttributeList   []ListProductAttribute `json:"productAttributeList"` // 商品属性列表
-}
-
-type ListProductAttributecategoryReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	Name     string `form:"name,optional"`
-}
-
-type ListProductAttributecategoryResp struct {
-	Code     string                              `json:"code"`
-	Message  string                              `json:"message"`
-	Current  int64                               `json:"current,default=1"`
-	Data     []*ListProductAttributecategoryData `json:"data"`
-	PageSize int64                               `json:"pageSize,default=20"`
-	Success  bool                                `json:"success"`
-	Total    int64                               `json:"total"`
 }
 
 type ListProductBrandData struct {
@@ -3882,6 +3882,16 @@ type UpdatePreferredAreaStatusResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateProductAttributeCategoryReq struct {
+	Id   int64  `json:"id"`
+	Name string `json:"name"`
+}
+
+type UpdateProductAttributeCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateProductAttributeReq struct {
 	Id                         int64  `json:"id"`
 	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
@@ -3907,16 +3917,6 @@ type UpdateProductAttributeValueList struct {
 	ProductId          int64  `json:"productId"`
 	ProductAttributeId int64  `json:"productAttributeId"`
 	Value              string `json:"value"`
-}
-
-type UpdateProductAttributecategoryReq struct {
-	Id   int64  `json:"id"`
-	Name string `json:"name"`
-}
-
-type UpdateProductAttributecategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateProductBrandReq struct {

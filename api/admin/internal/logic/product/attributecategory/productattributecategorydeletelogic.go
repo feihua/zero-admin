@@ -12,21 +12,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type ProductAttributecategoryDeleteLogic struct {
+type ProductAttributeCategoryDeleteLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewProductAttributecategoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductAttributecategoryDeleteLogic {
-	return &ProductAttributecategoryDeleteLogic{
+func NewProductAttributeCategoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductAttributeCategoryDeleteLogic {
+	return &ProductAttributeCategoryDeleteLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *ProductAttributecategoryDeleteLogic) ProductAttributecategoryDelete(req *types.DeleteProductAttributecategoryReq) (resp *types.DeleteProductAttributecategoryResp, err error) {
+func (l *ProductAttributeCategoryDeleteLogic) ProductAttributeCategoryDelete(req *types.DeleteProductAttributeCategoryReq) (resp *types.DeleteProductAttributeCategoryResp, err error) {
 	_, err = l.svcCtx.ProductAttributeCategoryService.DeleteProductAttributeCategory(l.ctx, &pmsclient.DeleteProductAttributeCategoryReq{
 		Ids: req.Ids,
 	})
@@ -36,7 +36,7 @@ func (l *ProductAttributecategoryDeleteLogic) ProductAttributecategoryDelete(req
 		return nil, errorx.NewDefaultError("删除属性分类失败")
 	}
 
-	return &types.DeleteProductAttributecategoryResp{
+	return &types.DeleteProductAttributeCategoryResp{
 		Code:    "000000",
 		Message: "",
 	}, nil

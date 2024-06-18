@@ -32,7 +32,7 @@ func NewQueryCategoryWithAttrListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 // QueryCategoryWithAttrList 获取所有商品属性分类及其下属性
-func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList() (resp *types.ListProductAttributecategoryResp, err error) {
+func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList() (resp *types.ListProductAttributeCategoryResp, err error) {
 	attributeList, er := l.svcCtx.ProductAttributeCategoryService.QueryCategoryWithAttrList(l.ctx, &pmsclient.QueryProductAttributeCategoryListReq{})
 
 	if er != nil {
@@ -40,7 +40,7 @@ func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList() (resp *type
 		return nil, errorx.NewDefaultError("获取所有商品属性分类及其下属性失败")
 	}
 
-	var list []*types.ListProductAttributecategoryData
+	var list []*types.ListProductAttributeCategoryData
 
 	for _, item := range attributeList.List {
 		var attr []types.ListProductAttribute
@@ -60,7 +60,7 @@ func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList() (resp *type
 				Type:                       i.Type,
 			})
 		}
-		list = append(list, &types.ListProductAttributecategoryData{
+		list = append(list, &types.ListProductAttributeCategoryData{
 			Id:                     item.Id,
 			Name:                   item.Name,
 			AttributecategoryCount: item.AttributeCount,
@@ -69,7 +69,7 @@ func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList() (resp *type
 		})
 	}
 
-	return &types.ListProductAttributecategoryResp{
+	return &types.ListProductAttributeCategoryResp{
 		Current:  0,
 		Data:     list,
 		PageSize: 0,

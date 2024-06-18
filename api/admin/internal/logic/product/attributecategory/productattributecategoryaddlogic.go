@@ -12,27 +12,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// ProductAttributecategoryAddLogic 商品属性分类
+// ProductAttributeCategoryAddLogic 商品属性分类
 /*
 Author: LiuFeiHua
 Date: 2024/5/15 13:53
 */
-type ProductAttributecategoryAddLogic struct {
+type ProductAttributeCategoryAddLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewProductAttributecategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductAttributecategoryAddLogic {
-	return &ProductAttributecategoryAddLogic{
+func NewProductAttributeCategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductAttributeCategoryAddLogic {
+	return &ProductAttributeCategoryAddLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// ProductAttributecategoryAdd 添加商品属性分类
-func (l *ProductAttributecategoryAddLogic) ProductAttributecategoryAdd(req *types.AddProductAttributecategoryReq) (resp *types.AddProductAttributecategoryResp, err error) {
+// ProductAttributeCategoryAdd 添加商品属性分类
+func (l *ProductAttributeCategoryAddLogic) ProductAttributeCategoryAdd(req *types.AddProductAttributeCategoryReq) (resp *types.AddProductAttributeCategoryResp, err error) {
 	_, err = l.svcCtx.ProductAttributeCategoryService.AddProductAttributeCategory(l.ctx, &pmsclient.AddProductAttributeCategoryReq{
 		Name: req.Name,
 	})
@@ -42,7 +42,7 @@ func (l *ProductAttributecategoryAddLogic) ProductAttributecategoryAdd(req *type
 		return nil, errorx.NewDefaultError("添加属性分类失败")
 	}
 
-	return &types.AddProductAttributecategoryResp{
+	return &types.AddProductAttributeCategoryResp{
 		Code:    "000000",
 		Message: "添加属性分类成功",
 	}, nil

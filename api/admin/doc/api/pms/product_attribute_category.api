@@ -5,19 +5,19 @@ info (
 )
 
 type (
-	AddProductAttributecategoryReq {
+	AddProductAttributeCategoryReq {
 		Name string `json:"name"`
 	}
-	AddProductAttributecategoryResp {
+	AddProductAttributeCategoryResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	ListProductAttributecategoryReq {
+	ListProductAttributeCategoryReq {
 		Current  int64  `form:"current,default=1"`
 		PageSize int64  `form:"pageSize,default=20"`
 		Name     string `form:"name,optional"`
 	}
-	ListProductAttributecategoryData {
+	ListProductAttributeCategoryData {
 		Id                     int64                  `json:"id"`
 		Name                   string                 `json:"name"`
 		AttributecategoryCount int32                  `json:"attributeCount"` // 属性数量
@@ -38,27 +38,27 @@ type (
 		HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
 		Type                       int32  `json:"type"` // 属性的类型；0->规格；1->参数
 	}
-	ListProductAttributecategoryResp {
+	ListProductAttributeCategoryResp {
 		Code     string                              `json:"code"`
 		Message  string                              `json:"message"`
 		Current  int64                               `json:"current,default=1"`
-		Data     []*ListProductAttributecategoryData `json:"data"`
+		Data     []*ListProductAttributeCategoryData `json:"data"`
 		PageSize int64                               `json:"pageSize,default=20"`
 		Success  bool                                `json:"success"`
 		Total    int64                               `json:"total"`
 	}
-	UpdateProductAttributecategoryReq {
+	UpdateProductAttributeCategoryReq {
 		Id   int64  `json:"id"`
 		Name string `json:"name"`
 	}
-	UpdateProductAttributecategoryResp {
+	UpdateProductAttributeCategoryResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	DeleteProductAttributecategoryReq {
+	DeleteProductAttributeCategoryReq {
 		Ids []int64 `form:"ids"`
 	}
-	DeleteProductAttributecategoryResp {
+	DeleteProductAttributeCategoryResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
@@ -72,23 +72,23 @@ type (
 )
 service admin-api {
 	//添加商品属性分类
-	@handler ProductAttributecategoryAdd
-	post /addProductAttributeCategory (AddProductAttributecategoryReq) returns (AddProductAttributecategoryResp)
+	@handler ProductAttributeCategoryAdd
+	post /addProductAttributeCategory (AddProductAttributeCategoryReq) returns (AddProductAttributeCategoryResp)
 
 	//查询商品属性分类
-	@handler ProductAttributecategoryList
-	get /queryProductAttributeCategoryList (ListProductAttributecategoryReq) returns (ListProductAttributecategoryResp)
+	@handler ProductAttributeCategoryList
+	get /queryProductAttributeCategoryList (ListProductAttributeCategoryReq) returns (ListProductAttributeCategoryResp)
 
 	//获取所有商品属性分类及其下属性
 	@handler QueryCategoryWithAttrList
-	get /queryCategoryWithAttrList returns (ListProductAttributecategoryResp)
+	get /queryCategoryWithAttrList returns (ListProductAttributeCategoryResp)
 
 	//更新商品属性分类
-	@handler ProductAttributecategoryUpdate
-	post /updateProductAttributeCategory (UpdateProductAttributecategoryReq) returns (UpdateProductAttributecategoryResp)
+	@handler ProductAttributeCategoryUpdate
+	post /updateProductAttributeCategory (UpdateProductAttributeCategoryReq) returns (UpdateProductAttributeCategoryResp)
 
 	//删除商品属性分类
-	@handler ProductAttributecategoryDelete
-	get /deleteProductAttributeCategory (DeleteProductAttributecategoryReq) returns (DeleteProductAttributecategoryResp)
+	@handler ProductAttributeCategoryDelete
+	get /deleteProductAttributeCategory (DeleteProductAttributeCategoryReq) returns (DeleteProductAttributeCategoryResp)
 }
 

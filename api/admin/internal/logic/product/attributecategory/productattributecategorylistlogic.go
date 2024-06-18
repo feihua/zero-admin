@@ -13,21 +13,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type ProductAttributecategoryListLogic struct {
+type ProductAttributeCategoryListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewProductAttributecategoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductAttributecategoryListLogic {
-	return &ProductAttributecategoryListLogic{
+func NewProductAttributeCategoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductAttributeCategoryListLogic {
+	return &ProductAttributeCategoryListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *ProductAttributecategoryListLogic) ProductAttributecategoryList(req *types.ListProductAttributecategoryReq) (resp *types.ListProductAttributecategoryResp, err error) {
+func (l *ProductAttributeCategoryListLogic) ProductAttributeCategoryList(req *types.ListProductAttributeCategoryReq) (resp *types.ListProductAttributeCategoryResp, err error) {
 	attributeList, er := l.svcCtx.ProductAttributeCategoryService.QueryProductAttributeCategoryList(l.ctx, &pmsclient.QueryProductAttributeCategoryListReq{
 		PageNum:  req.Current,
 		PageSize: req.PageSize,
@@ -39,10 +39,10 @@ func (l *ProductAttributecategoryListLogic) ProductAttributecategoryList(req *ty
 		return nil, errorx.NewDefaultError("查询属性分类失败")
 	}
 
-	var list []*types.ListProductAttributecategoryData
+	var list []*types.ListProductAttributeCategoryData
 
 	for _, item := range attributeList.List {
-		list = append(list, &types.ListProductAttributecategoryData{
+		list = append(list, &types.ListProductAttributeCategoryData{
 			Id:                     item.Id,
 			Name:                   item.Name,
 			AttributecategoryCount: item.AttributeCount,
@@ -50,7 +50,7 @@ func (l *ProductAttributecategoryListLogic) ProductAttributecategoryList(req *ty
 		})
 	}
 
-	return &types.ListProductAttributecategoryResp{
+	return &types.ListProductAttributeCategoryResp{
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

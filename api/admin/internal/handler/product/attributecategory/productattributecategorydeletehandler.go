@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func ProductAttributecategoryDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ProductAttributeCategoryDeleteHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.DeleteProductAttributecategoryReq
+		var req types.DeleteProductAttributeCategoryReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := attributecategory.NewProductAttributecategoryDeleteLogic(r.Context(), svcCtx)
-		resp, err := l.ProductAttributecategoryDelete(&req)
+		l := attributecategory.NewProductAttributeCategoryDeleteLogic(r.Context(), svcCtx)
+		resp, err := l.ProductAttributeCategoryDelete(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

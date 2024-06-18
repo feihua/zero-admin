@@ -12,23 +12,23 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// ProductAttributecategoryUpdateLogic 商品属性分类
-type ProductAttributecategoryUpdateLogic struct {
+// ProductAttributeCategoryUpdateLogic 商品属性分类
+type ProductAttributeCategoryUpdateLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewProductAttributecategoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductAttributecategoryUpdateLogic {
-	return &ProductAttributecategoryUpdateLogic{
+func NewProductAttributeCategoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProductAttributeCategoryUpdateLogic {
+	return &ProductAttributeCategoryUpdateLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// ProductAttributecategoryUpdate 更新商品属性分类
-func (l *ProductAttributecategoryUpdateLogic) ProductAttributecategoryUpdate(req *types.UpdateProductAttributecategoryReq) (resp *types.UpdateProductAttributecategoryResp, err error) {
+// ProductAttributeCategoryUpdate 更新商品属性分类
+func (l *ProductAttributeCategoryUpdateLogic) ProductAttributeCategoryUpdate(req *types.UpdateProductAttributeCategoryReq) (resp *types.UpdateProductAttributeCategoryResp, err error) {
 	_, err = l.svcCtx.ProductAttributeCategoryService.UpdateProductAttributeCategory(l.ctx, &pmsclient.UpdateProductAttributeCategoryReq{
 		Id:   req.Id,
 		Name: req.Name,
@@ -39,7 +39,7 @@ func (l *ProductAttributecategoryUpdateLogic) ProductAttributecategoryUpdate(req
 		return nil, errorx.NewDefaultError("更新属性分类失败")
 	}
 
-	return &types.UpdateProductAttributecategoryResp{
+	return &types.UpdateProductAttributeCategoryResp{
 		Code:    "000000",
 		Message: "更新属性分类成功",
 	}, nil

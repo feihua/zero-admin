@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func ProductAttributecategoryListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ProductAttributeCategoryListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.ListProductAttributecategoryReq
+		var req types.ListProductAttributeCategoryReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := attributecategory.NewProductAttributecategoryListLogic(r.Context(), svcCtx)
-		resp, err := l.ProductAttributecategoryList(&req)
+		l := attributecategory.NewProductAttributeCategoryListLogic(r.Context(), svcCtx)
+		resp, err := l.ProductAttributeCategoryList(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
