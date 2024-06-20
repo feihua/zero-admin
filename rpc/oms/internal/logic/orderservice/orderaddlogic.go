@@ -2,13 +2,13 @@ package orderservicelogic
 
 import (
 	"context"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"time"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -37,7 +37,7 @@ func NewOrderAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderAdd
 // 2.删除cart_item表(删除购物车中的下单商品)
 func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAddResp, error) {
 
-	//1.插入order表
+	// 1.插入order表
 	orderInfo := buildOrderInfo(in)
 	logc.Infof(l.ctx, "插入order表,参数：%+v", orderInfo)
 	err := query.OmsOrder.WithContext(l.ctx).Create(orderInfo)
@@ -46,14 +46,14 @@ func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAdd
 		return nil, err
 	}
 
-	//获取订单id
+	// 获取订单id
 	orderId := orderInfo.ID
-	//2.插入order_item表
+	// 2.插入order_item表
 	for _, orderItem := range in.OrderItemList {
-		buildOrderItem(l, orderItem)
+		buildOrderItem(l, orderInfo, orderItem)
 	}
 
-	//3.删除cart_item表(删除购物车中的下单商品)
+	// 3.删除cart_item表(删除购物车中的下单商品)
 	logc.Infof(l.ctx, "删除购物车中的下单商品,参数ids：%+v", in.CartItemIds)
 	item := query.OmsCartItem
 	_, err = item.WithContext(l.ctx).Where(item.MemberID.Eq(in.MemberId), item.ID.In(in.CartItemIds...)).Delete()
@@ -69,10 +69,10 @@ func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAdd
 }
 
 // 2.构建下单商品信息
-func buildOrderItem(l *OrderAddLogic, orderItem *omsclient.OrderItemData) {
+func buildOrderItem(l *OrderAddLogic, orderInfo *model.OmsOrder, orderItem *omsclient.OrderItemData) {
 	err := query.OmsOrderItem.WithContext(l.ctx).Create(&model.OmsOrderItem{
-		OrderID:           0,
-		OrderSn:           "",
+		OrderID:           orderInfo.ID,
+		OrderSn:           orderInfo.OrderSn,
 		ProductID:         orderItem.ProductId,
 		ProductPic:        orderItem.ProductPic,
 		ProductName:       orderItem.ProductName,
