@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/pointerprocess"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -55,7 +56,7 @@ func (l *MemberLoginLogic) MemberLogin(in *umsclient.MemberLoginReq) (*umsclient
 		MemberID:   member.ID,
 		CreateTime: time.Now(),
 		MemberIP:   in.Ip,
-		City:       *member.City,
+		City:       pointerprocess.DefaltData(member.City).(string),
 		LoginType:  0,
 		Province:   "",
 	}
