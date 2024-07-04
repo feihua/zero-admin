@@ -43,6 +43,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 // 4.获取部门信息
 // 5.生成token
 // 6.保存登录日志
+// 7.更新登录时间
 func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error) {
 	q := query.SysUser
 	user, err := q.WithContext(l.ctx).Where(q.UserName.Eq(in.Account)).Or(q.Mobile.Eq(in.Account)).First()
@@ -95,6 +96,16 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 
 	// 6.保存登录日志
 	l.savaLoginLog(in, "success", "登录成功")
+
+	// 7.更新登录时间
+	now := time.Now()
+	_, _ = q.WithContext(l.ctx).Where(q.ID.Eq(user.ID)).Updates(&model.SysUser{
+		LoginTime:    &now,
+		LoginIP:      in.IpAddress,
+		LoginOs:      in.Os,
+		LoginBrowser: in.Browser,
+	})
+
 	return &sysclient.LoginResp{
 		Id:          user.ID,
 		UserName:    user.UserName,
