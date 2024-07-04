@@ -10,6 +10,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -54,6 +55,7 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 	}
 
 	// 2.用户存在时,则直接更新用户
+	now := time.Now()
 	user := &model.SysUser{
 		ID:         in.Id,
 		UserName:   in.UserName,
@@ -65,6 +67,7 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 		DeptID:     in.DeptId,
 		Remark:     in.Remark,
 		UpdateBy:   in.UpdateBy,
+		UpdateTime: &now,
 	}
 
 	_, err = q.Updates(user)
