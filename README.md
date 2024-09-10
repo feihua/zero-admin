@@ -9,6 +9,8 @@ go run main.go golang zero --dsn "root:123456@tcp(127.0.0.1:3306)/zero-sys" --ta
 ```
 Zero-Admin 是一套基于 go-zero 框架实现的电商系统，采用 Docker 容器化部署，包含前台商城系统和后台管理系统。
 
+## 微信群
+![img.png](img.png)
 ## 前台商城系统
 
 ### 模块介绍
