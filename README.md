@@ -3,14 +3,17 @@
 > 注：ORM持久层已经整体切换成gorm
 > 后端接口改动较大,前端正在重新适配中
 
-> 基础代码生成  https://github.com/feihua/generate-code
+> 基础代码生成工具
+
+## 安装
 ```shell
-go run main.go golang zero --dsn "root:123456@tcp(127.0.0.1:3306)/zero-sys" --tableNames sys_ --prefix sys_  --rpcClient sysclient --author liufeihua
+go install github.com/feihua/generate-code@latest
+
+generate-code golang zero --dsn "root:123456@tcp(127.0.0.1:3306)/demo" --tableNames sys_ --prefix sys_  --rpcClient sysclient --author liufeihua
 ```
 Zero-Admin 是一套基于 go-zero 框架实现的电商系统，采用 Docker 容器化部署，包含前台商城系统和后台管理系统。
 
-## 微信群
-![img.png](img.png)
+
 ## 前台商城系统
 
 ### 模块介绍
