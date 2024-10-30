@@ -5,6 +5,22 @@
 
 > 基础代码生成工具
 
+**`微信群`**
+
+微信加群：添加`ABCzzzxx` 的微信号备注zero-admin加群。
+<br/>
+
+加群之前有劳点一下 star，一个小小的 star 是对zero-admin作者们努力建设社区的动力。
+
+感谢感谢！！！
+
+<img width="120" alt="wx" src="https://raw.githubusercontent.com/feihua/zero-admin/master/wechat.png">
+
+## goctl-helper is out! 🎉🎉🎉
+**goland可视化插件，基于database生成api和protobuf文件(用于goctl官方插件使用)**
+
+[goctl-helper](https://plugins.jetbrains.com/plugin/25693-goctl-helper)
+
 ## 安装
 ```shell
 go install github.com/feihua/generate-code@latest
@@ -64,7 +80,7 @@ Zero-Admin 是一套基于 go-zero 框架实现的电商系统，采用 Docker �
 
 - go-zero 框架提供后台接口支持。
 - 使用现代化的前端框架进行界面开发。
-- 数据库采用 xxx。
+- 数据库采用 mysql。
 - Docker 容器化部署，方便管理和维护。
 
 # 文档地址
@@ -100,42 +116,6 @@ android版本体验地址 [flutter-mall-app](https://www.pgyer.com/OoW2Zy)
 * (react版本预览地址[http://110.41.179.89/pay/home))<span  style="color: red;"> 账号：admin 密码: 123456</span>
 * (vue预览地址[http://110.41.179.89/vue/home))<span  style="color: red;"> 账号：admin 密码: 123456</span>
 
-
-## 1.1用户
-
-![image-20210427204637691](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204637691.png)
-
-### 1.1.1新增用户
-
-![image-20210427204434301](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204434301.png)
-
-## 1.2角色
-
-![图片](https://uploader.shimo.im/f/5k8DqDJY7ZlCpg9t.png!thumbnail)
-
-### 1.2.1分配权限
-
-![image-20210427204555834](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204555834.png)
-
-## 1.3菜单
-
-![图片](https://uploader.shimo.im/f/rdfMRADldvEb0Ny0.png!thumbnail)
-
-## 1.4机构
-
-![图片](https://uploader.shimo.im/f/jM5mUyjETIQ2tL42.png!thumbnail)
-
-## 1.5字典
-
-![image-20210427204811263](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204811263.png)
-
-## 1.6日志
-
-![image-20210427204848192](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204848192.png)
-
-## 1.7职位列表
-
-![image-20210427204732978](https://gitee.com/liufeihua/images/raw/master/images/image-20210427204732978.png)
 
 # 2.感谢
 [go-zero](https://github.com/zeromicro/go-zero)
