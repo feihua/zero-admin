@@ -5,17 +5,6 @@
 
 > 基础代码生成工具
 
-**`微信群`**
-
-微信加群：添加`ABCzzzxx` 的微信号备注zero-admin加群。
-<br/>
-
-加群之前有劳点一下 star，一个小小的 star 是对zero-admin作者们努力建设社区的动力。
-
-感谢感谢！！！
-
-<img width="120" alt="wx" src="https://raw.githubusercontent.com/feihua/zero-admin/master/wechat.png">
-
 ## goctl-helper is out! 🎉🎉🎉
 **goland可视化插件，基于database生成api和protobuf文件(用于goctl官方插件使用)**
 
@@ -122,3 +111,9 @@ android版本体验地址 [flutter-mall-app](https://www.pgyer.com/OoW2Zy)
 <p></p>
 
 [mall](https://github.com/macrozheng/mall)
+
+## 许可证
+
+本项目采用 Apache License 2.0 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+
+如果您觉得这个项目对您有帮助，请给我们一个 ⭐️，这将鼓励我们持续改进！
