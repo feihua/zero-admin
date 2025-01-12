@@ -139,7 +139,7 @@ run: ## 启动docker容器
     docker run -itd --net=host --name=sms sms-rpc:0.0.1; \
     docker run -itd --net=host --name=cms cms-rpc:0.0.1; \
     docker run -itd --net=host --name=admin-api admin-api:0.0.1; \
-    docker run -itd --net=host --name=front-api front-api:0.0.1 \
+    docker run -itd --net=host --name=front-api front-api:0.0.1; \
     docker run -itd --net=host --name=web-api web-api:0.0.1 \
 
 kubectl: ## 部署k8s容器
