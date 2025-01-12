@@ -2,8 +2,8 @@ package memberrulesettingservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-	"github.com/feihua/zero-admin/rpc/ums/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -62,7 +62,7 @@ func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(in *umsclie
 			RuleType:          item.RuleType,
 			Status:            item.Status,
 			UpdateBy:          item.UpdateBy,
-			UpdateTime:        common.TimeToString(item.UpdateTime),
+			UpdateTime:        time_util.TimeToString(item.UpdateTime),
 		})
 	}
 

@@ -3,8 +3,8 @@ package menuservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -57,7 +57,7 @@ func (l *QueryMenuDetailLogic) QueryMenuDetail(in *sysclient.QueryMenuDetailReq)
 		ParentId:      menu.ParentID,
 		Remark:        menu.Remark,
 		UpdateBy:      menu.UpdateBy,
-		UpdateTime:    common.TimeToString(menu.UpdateTime),
+		UpdateTime:    time_util.TimeToString(menu.UpdateTime),
 		VueComponent:  menu.VueComponent,
 		VueIcon:       menu.VueIcon,
 		VuePath:       menu.VuePath,

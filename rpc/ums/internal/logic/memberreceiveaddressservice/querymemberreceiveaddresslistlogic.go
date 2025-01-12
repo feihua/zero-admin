@@ -2,8 +2,8 @@ package memberreceiveaddressservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-	"github.com/feihua/zero-admin/rpc/ums/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -58,7 +58,7 @@ func (l *QueryMemberReceiveAddressListLogic) QueryMemberReceiveAddressList(in *u
 			Region:        address.Region,
 			DetailAddress: address.DetailAddress,
 			CreateTime:    address.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateTime:    common.TimeToString(address.UpdateTime),
+			UpdateTime:    time_util.TimeToString(address.UpdateTime),
 		})
 	}
 

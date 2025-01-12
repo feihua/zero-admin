@@ -3,8 +3,8 @@ package dictitemservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -67,7 +67,7 @@ func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemLi
 			IsDefault:  dept.IsDefault,
 			Remark:     dept.Remark,
 			UpdateBy:   dept.UpdateBy,
-			UpdateTime: common.TimeToString(dept.UpdateTime),
+			UpdateTime: time_util.TimeToString(dept.UpdateTime),
 		})
 	}
 

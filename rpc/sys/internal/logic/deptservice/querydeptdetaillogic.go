@@ -3,8 +3,8 @@ package deptservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -54,7 +54,7 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq)
 		Phone:      dept.Phone,
 		Remark:     dept.Remark,
 		UpdateBy:   dept.UpdateBy,
-		UpdateTime: common.TimeToString(dept.UpdateTime),
+		UpdateTime: time_util.TimeToString(dept.UpdateTime),
 	}
 
 	logc.Infof(l.ctx, "查询部门信息表详情,参数：%+v,响应：%+v", in, data)

@@ -3,8 +3,8 @@ package postservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -50,7 +50,7 @@ func (l *QueryPostDetailLogic) QueryPostDetail(in *sysclient.QueryPostDetailReq)
 		PostStatus: job.PostStatus,
 		Remark:     job.Remark,
 		UpdateBy:   job.UpdateBy,
-		UpdateTime: common.TimeToString(job.UpdateTime),
+		UpdateTime: time_util.TimeToString(job.UpdateTime),
 	}
 
 	logc.Infof(l.ctx, "查询岗位管理详情,参数：%+v,响应：%+v", in, data)

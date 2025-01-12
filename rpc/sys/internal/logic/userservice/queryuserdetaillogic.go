@@ -3,8 +3,8 @@ package userservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -56,12 +56,12 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		Id:         user.ID,
 		UserStatus: user.UserStatus,
 		LoginIp:    user.LoginIP,
-		LoginTime:  common.TimeToString(user.LoginTime),
+		LoginTime:  time_util.TimeToString(user.LoginTime),
 		Mobile:     user.Mobile,
 		NickName:   user.NickName,
 		Remark:     user.Remark,
 		UpdateBy:   user.UpdateBy,
-		UpdateTime: common.TimeToString(user.UpdateTime),
+		UpdateTime: time_util.TimeToString(user.UpdateTime),
 		UserName:   user.UserName,
 		PostIds:    postIds,
 	}

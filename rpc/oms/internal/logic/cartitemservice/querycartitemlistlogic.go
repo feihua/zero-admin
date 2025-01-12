@@ -2,8 +2,8 @@ package cartitemservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
-	"github.com/feihua/zero-admin/rpc/oms/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -55,7 +55,7 @@ func (l *QueryCartItemListLogic) QueryCartItemList(in *omsclient.QueryCartItemLi
 			ProductSkuCode:    item.ProductSkuCode,
 			MemberNickname:    item.MemberNickname,
 			CreateDate:        item.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateDate:        common.TimeToString(item.UpdateTime),
+			UpdateDate:        time_util.TimeToString(item.UpdateTime),
 			DeleteStatus:      item.DeleteStatus,
 			ProductCategoryId: item.ProductCategoryID,
 			ProductBrand:      item.ProductBrand,

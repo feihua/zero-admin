@@ -33,7 +33,7 @@ func NewQueryFlashPromotionSessionListByTimeLogic(ctx context.Context, svcCtx *s
 // QueryFlashPromotionSessionListByTime 根据时间查询限时购场次
 func (l *QueryFlashPromotionSessionListByTimeLogic) QueryFlashPromotionSessionListByTime(in *smsclient.QueryFlashPromotionSessionListByTimeReq) (*smsclient.QueryFlashPromotionSessionListByTimeResp, error) {
 	//times := strings.Split(in.CurrentTIme, " ")[1]
-	//currentTIme, _ := time.Parse("15:04:05", times)
+	//currentTIme, _ := time_util.Parse("15:04:05", times)
 	q := query.SmsFlashPromotionSession
 	//result, err := q.WithContext(l.ctx).Where(q.Status.Eq(1), q.StartTime.Lte(currentTIme), q.EndTime.Gte(currentTIme)).Find()
 	result, err := q.WithContext(l.ctx).Where(q.Status.Eq(1)).Find()

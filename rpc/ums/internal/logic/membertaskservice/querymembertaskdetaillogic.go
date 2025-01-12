@@ -2,8 +2,8 @@ package membertaskservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-	"github.com/feihua/zero-admin/rpc/ums/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -48,7 +48,7 @@ func (l *QueryMemberTaskDetailLogic) QueryMemberTaskDetail(in *umsclient.QueryMe
 		TaskType:     item.TaskType,
 		CreateTime:   item.CreateTime.Format("2006-01-02 15:04:05"),
 		CreateBy:     item.CreateBy,
-		UpdateTime:   common.TimeToString(item.UpdateTime),
+		UpdateTime:   time_util.TimeToString(item.UpdateTime),
 		UpdateBy:     item.UpdateBy,
 	}
 

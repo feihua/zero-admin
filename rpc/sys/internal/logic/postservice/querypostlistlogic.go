@@ -3,8 +3,8 @@ package postservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -65,7 +65,7 @@ func (l *QueryPostListLogic) QueryPostList(in *sysclient.QueryPostListReq) (*sys
 			PostStatus: job.PostStatus,
 			Remark:     job.Remark,
 			UpdateBy:   job.UpdateBy,
-			UpdateTime: common.TimeToString(job.UpdateTime),
+			UpdateTime: time_util.TimeToString(job.UpdateTime),
 		})
 	}
 

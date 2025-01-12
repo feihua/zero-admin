@@ -2,8 +2,8 @@ package companyaddressservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
-	"github.com/feihua/zero-admin/rpc/oms/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -70,7 +70,7 @@ func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(in *omsclient.Que
 
 		address.UpdateBy = item.UpdateBy
 
-		address.UpdateTime = common.TimeToString(item.UpdateTime)
+		address.UpdateTime = time_util.TimeToString(item.UpdateTime)
 
 		list = append(list, address)
 	}

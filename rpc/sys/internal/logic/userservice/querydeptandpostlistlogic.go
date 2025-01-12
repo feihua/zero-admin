@@ -2,8 +2,8 @@ package userservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	deptservicelogic "github.com/feihua/zero-admin/rpc/sys/internal/logic/deptservice"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -52,7 +52,7 @@ func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(in *sysclient.QueryDept
 			Phone:      item.Phone,
 			Remark:     item.Remark,
 			UpdateBy:   item.UpdateBy,
-			UpdateTime: common.TimeToString(item.UpdateTime),
+			UpdateTime: time_util.TimeToString(item.UpdateTime),
 		})
 	}
 
@@ -70,7 +70,7 @@ func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(in *sysclient.QueryDept
 			PostStatus: item.PostStatus,
 			Remark:     item.Remark,
 			UpdateBy:   item.UpdateBy,
-			UpdateTime: common.TimeToString(item.UpdateTime),
+			UpdateTime: time_util.TimeToString(item.UpdateTime),
 		})
 	}
 

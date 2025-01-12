@@ -3,8 +3,8 @@ package dictitemservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -53,7 +53,7 @@ func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictIt
 		IsDefault:  dictItem.IsDefault,
 		Remark:     dictItem.Remark,
 		UpdateBy:   dictItem.UpdateBy,
-		UpdateTime: common.TimeToString(dictItem.UpdateTime),
+		UpdateTime: time_util.TimeToString(dictItem.UpdateTime),
 	}
 
 	logc.Infof(l.ctx, "查询字典数据详情,参数：%+v,响应：%+v", in, data)

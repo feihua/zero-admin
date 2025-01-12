@@ -3,8 +3,8 @@ package dicttypeservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -67,7 +67,7 @@ func (l *QueryDictTypeListLogic) QueryDictTypeList(in *sysclient.QueryDictTypeLi
 			IsSystem:   dict.IsSystem,
 			Remark:     dict.Remark,
 			UpdateBy:   dict.UpdateBy,
-			UpdateTime: common.TimeToString(dict.UpdateTime),
+			UpdateTime: time_util.TimeToString(dict.UpdateTime),
 		})
 	}
 

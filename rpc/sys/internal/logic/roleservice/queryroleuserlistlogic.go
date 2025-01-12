@@ -3,9 +3,9 @@ package roleservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -80,12 +80,12 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 			Id:         item.ID,
 			UserStatus: item.UserStatus,
 			LoginIp:    item.LoginIP,
-			LoginTime:  common.TimeToString(item.LoginTime),
+			LoginTime:  time_util.TimeToString(item.LoginTime),
 			Mobile:     item.Mobile,
 			NickName:   item.NickName,
 			Remark:     item.Remark,
 			UpdateBy:   item.UpdateBy,
-			UpdateTime: common.TimeToString(item.UpdateTime),
+			UpdateTime: time_util.TimeToString(item.UpdateTime),
 			UserName:   item.UserName,
 		})
 	}

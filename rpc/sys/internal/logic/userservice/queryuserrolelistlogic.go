@@ -3,6 +3,7 @@ package userservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -52,7 +53,7 @@ func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleLi
 			DataScope:  role.DataScope,
 			Id:         role.ID,
 			IsAdmin:    role.IsAdmin,
-			UpdateTime: common.TimeToString(role.UpdateTime),
+			UpdateTime: time_util.TimeToString(role.UpdateTime),
 			Remark:     role.Remark,
 			RoleKey:    role.RoleKey,
 			RoleName:   role.RoleName,

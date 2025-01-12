@@ -1,4 +1,4 @@
-package common
+package time_util
 
 import "time"
 

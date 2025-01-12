@@ -3,8 +3,8 @@ package deptservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
@@ -62,7 +62,7 @@ func (l *QueryDeptListLogic) QueryDeptList(in *sysclient.QueryDeptListReq) (*sys
 			Phone:      dept.Phone,
 			Remark:     dept.Remark,
 			UpdateBy:   dept.UpdateBy,
-			UpdateTime: common.TimeToString(dept.UpdateTime),
+			UpdateTime: time_util.TimeToString(dept.UpdateTime),
 		})
 	}
 
