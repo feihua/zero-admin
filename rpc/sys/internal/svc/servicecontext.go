@@ -13,49 +13,25 @@ import (
 type ServiceContext struct {
 	Config config.Config
 	DB     *gorm.DB
-
-	//UserModel     sysmodel.SysUserModel
-	//UserRoleModel sysmodel.SysUserRoleModel
-	//RoleModel     sysmodel.SysRoleModel
-	//RoleMenuModel sysmodel.SysRoleMenuModel
-	//MenuModel     sysmodel.SysMenuModel
-	//DictModel     sysmodel.SysDictModel
-	//DeptModel     sysmodel.SysDeptModel
-	//LoginLogModel sysmodel.SysLoginLogModel
-	//SysLogModel   sysmodel.SysLogModel
-	//ConfigModel   sysmodel.SysConfigModel
-	//JobModel      sysmodel.SysJobModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	DB, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
+	db, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
 		Logger:                 settingLogConfig(),
 	})
 	if err != nil {
+		logx.Errorf("mysql连接失败：%s", err.Error())
 		panic(err)
 	}
 
 	logx.Debug("mysql已连接")
-	query.SetDefault(DB)
-
-	//sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
+	query.SetDefault(db)
 
 	return &ServiceContext{
 		Config: c,
-		DB:     DB,
-		//UserModel:     sysmodel.NewSysUserModel(sqlConn),
-		//UserRoleModel: sysmodel.NewSysUserRoleModel(sqlConn),
-		//RoleModel:     sysmodel.NewSysRoleModel(sqlConn),
-		//RoleMenuModel: sysmodel.NewSysRoleMenuModel(sqlConn),
-		//MenuModel:     sysmodel.NewSysMenuModel(sqlConn),
-		//DictModel:     sysmodel.NewSysDictModel(sqlConn),
-		//DeptModel:     sysmodel.NewSysDeptModel(sqlConn),
-		//LoginLogModel: sysmodel.NewSysLoginLogModel(sqlConn),
-		//SysLogModel:   sysmodel.NewSysLogModel(sqlConn),
-		//ConfigModel:   sysmodel.NewSysConfigModel(sqlConn),
-		//JobModel:      sysmodel.NewSysJobModel(sqlConn),
+		DB:     db,
 	}
 }
 
