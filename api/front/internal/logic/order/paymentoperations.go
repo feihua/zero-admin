@@ -76,7 +76,7 @@ func (l *PaymentOperationsUtils) AliPayNotify(writer http.ResponseWriter, reques
 func (l *PaymentOperationsUtils) TradeQuery(outTradeNo string) (string, int64, error) {
 	var p = alipay.TradeQuery{}
 	p.OutTradeNo = outTradeNo
-	tradeQuery, err := l.svcCtx.AlipayClient.TradeQuery(p)
+	tradeQuery, err := l.svcCtx.AlipayClient.TradeQuery(l.ctx, p)
 	if err != nil {
 		return outTradeNo, 0, err
 	}
