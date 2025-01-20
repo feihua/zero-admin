@@ -18,21 +18,21 @@ type (
 		Id int64 `form:"id"`
 	}
 	QueryOperateLogDetailData {
-		DeptName          string `json:"deptName"` //部门名称
-		Id                int64  `json:"id"` //编号
-		OperationIp       string `json:"operationIp"` //操作地址
-		OperationName     string `json:"operationName"` //操作人员
-		OperationParams   string `json:"operationParams"` //请求参数
+		Id int64 `json:"id"` //编号
+		Title string `json:"title"` //系统模块
+		OperationType string `json:"operationType"` //操作类型
+		OperationName string `json:"operationName"` //操作人员
+		RequestMethod string `json:"requestMethod"` //请求方式
+		OperationUrl string `json:"operationUrl"` //操作方法
+		OperationParams string `json:"operationParams"` //请求参数
 		OperationResponse string `json:"operationResponse"` //响应参数
-		OperationStatus   int32  `json:"operationStatus"` //操作状态
-		OperationTime     string `json:"operationTime"` //操作时间
-		OperationType     string `json:"operationType"` //操作类型
-		OperationUrl      string `json:"operationUrl"` //操作方法
-		RequestMethod     string `json:"requestMethod"` //请求方式
-		Title             string `json:"title"` //系统模块
-		UseTime           int64  `json:"useTime"` //执行时长(毫秒)
-		Browser           string `json:"browser"` //浏览器
-		Os                string `json:"os"` //操作信息
+		OperationStatus int32 `json:"operationStatus"` //操作状态
+		DeptName string `json:"deptName"` //部门名称
+		UseTime int64 `json:"useTime"` //执行时长(毫秒)
+		Browser string `json:"browser"` //浏览器
+		Os string `json:"os"` //操作信息
+		OperationIp string `json:"operationIp"` //操作地址
+		OperationTime string `json:"operationTime"` //操作时间
 	}
 	QueryOperateLogDetailResp {
 		Code    string                    `json:"code"`
@@ -51,24 +51,24 @@ type (
 		OperationUrl    string `form:"operationUrl,optional"` //操作方法
 		Title           string `form:"title,optional"` //系统模块
 		Browser         string `json:"browser,optional"` //浏览器
-		Os              string `json:"os,optional"` //操作信息
+		Os              string `json:"os,optional"` //操作系统
 	}
 	QueryOperateLogListData {
-		DeptName          string `json:"deptName"` //部门名称
-		Id                int64  `json:"id"` //编号
-		OperationIp       string `json:"operationIp"` //操作地址
-		OperationName     string `json:"operationName"` //操作人员
-		OperationParams   string `json:"operationParams"` //请求参数
+		Id int64 `json:"id"` //编号
+		Title string `json:"title"` //系统模块
+		OperationType string `json:"operationType"` //操作类型
+		OperationName string `json:"operationName"` //操作人员
+		RequestMethod string `json:"requestMethod"` //请求方式
+		OperationUrl string `json:"operationUrl"` //操作方法
+		OperationParams string `json:"operationParams"` //请求参数
 		OperationResponse string `json:"operationResponse"` //响应参数
-		OperationStatus   int32  `json:"operationStatus"` //操作状态
-		OperationTime     string `json:"operationTime"` //操作时间
-		OperationType     string `json:"operationType"` //操作类型
-		OperationUrl      string `json:"operationUrl"` //操作方法
-		RequestMethod     string `json:"requestMethod"` //请求方式
-		Title             string `json:"title"` //系统模块
-		UseTime           int64  `json:"useTime"` //执行时长(毫秒)
-		Browser           string `json:"browser"` //浏览器
-		Os                string `json:"os"` //操作信息
+		OperationStatus int32 `json:"operationStatus"` //操作状态
+		DeptName string `json:"deptName"` //部门名称
+		UseTime int64 `json:"useTime"` //执行时长(毫秒)
+		Browser string `json:"browser"` //浏览器
+		Os string `json:"os"` //操作信息
+		OperationIp string `json:"operationIp"` //操作地址
+		OperationTime string `json:"operationTime"` //操作时间
 	}
 	QueryOperateLogListResp {
 		Code     string                     `json:"code"`

@@ -35,7 +35,7 @@ func NewDeleteOperateLogLogic(ctx context.Context, svcCtx *svc.ServiceContext) D
 // DeleteOperateLog 删除操作日志
 func (l *DeleteOperateLogLogic) DeleteOperateLog(req *types.DeleteOperateLogReq) (*types.DeleteOperateLogResp, error) {
 	_, err := l.svcCtx.Operatelogservice.DeleteOperateLog(l.ctx, &sysclient.DeleteOperateLogReq{
-		Ids: req.Ids,
+		Ids: req.Ids, // 编号
 	})
 
 	if err != nil {

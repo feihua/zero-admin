@@ -64,27 +64,26 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(in *sysclient.QueryOperat
 		return nil, errors.New("查询操作日志列表失败")
 	}
 	var list []*sysclient.OperateLogListData
-	for _, log := range result {
+	for _, item := range result {
 		list = append(list, &sysclient.OperateLogListData{
-			DeptName:          log.DeptName,
-			Id:                log.ID,
-			OperationIp:       log.OperationIP,
-			OperationName:     log.OperationName,
-			OperationParams:   log.OperationParams,
-			OperationResponse: log.OperationResponse,
-			OperationStatus:   log.OperationStatus,
-			OperationTime:     log.OperationTime.Format("2006-01-02 15:04:05"),
-			OperationType:     log.OperationType,
-			OperationUrl:      log.OperationURL,
-			RequestMethod:     log.RequestMethod,
-			Title:             log.Title,
-			UseTime:           log.UseTime,
-			Browser:           log.Browser,
-			Os:                log.Os,
+			Id:                item.ID,                                          // 编号
+			Title:             item.Title,                                       // 系统模块
+			OperationType:     item.OperationType,                               // 操作类型
+			OperationName:     item.OperationName,                               // 操作人员
+			RequestMethod:     item.RequestMethod,                               // 请求方式
+			OperationUrl:      item.OperationURL,                                // 操作方法
+			OperationParams:   item.OperationParams,                             // 请求参数
+			OperationResponse: item.OperationResponse,                           // 响应参数
+			OperationStatus:   item.OperationStatus,                             // 操作状态
+			DeptName:          item.DeptName,                                    // 部门名称
+			UseTime:           item.UseTime,                                     // 执行时长(毫秒)
+			Browser:           item.Browser,                                     // 浏览器
+			Os:                item.Os,                                          // 操作信息
+			OperationIp:       item.OperationIP,                                 // 操作地址
+			OperationTime:     item.OperationTime.Format("2006-01-02 15:04:05"), // 操作时间
 		})
 	}
 
-	logc.Infof(l.ctx, "查询操作日志列表,参数：%+v,响应：%+v", in, list)
 	return &sysclient.QueryOperateLogListResp{
 		Total: count,
 		List:  list,

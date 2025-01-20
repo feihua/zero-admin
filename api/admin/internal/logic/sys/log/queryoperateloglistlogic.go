@@ -36,15 +36,15 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.QueryOperateLo
 	result, err := l.svcCtx.Operatelogservice.QueryOperateLogList(l.ctx, &sysclient.QueryOperateLogListReq{
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,
-		OperationIp:     req.OperationIp,
-		OperationName:   req.OperationName,
-		DeptName:        req.DeptName,
-		OperationStatus: req.OperationStatus,
-		OperationType:   req.OperationType,
-		OperationUrl:    req.OperationUrl,
-		Title:           req.Title,
-		Browser:         req.Browser,
-		Os:              req.Os,
+		OperationIp:     req.OperationIp,     // 操作地址
+		OperationName:   req.OperationName,   // 操作人员
+		DeptName:        req.DeptName,        // 部门名称
+		OperationStatus: req.OperationStatus, // 操作状态
+		OperationType:   req.OperationType,   // 操作类型
+		OperationUrl:    req.OperationUrl,    // 操作方法
+		Title:           req.Title,           // 系统模块
+		Browser:         req.Browser,         // 浏览器
+		Os:              req.Os,              // 操作系统
 	})
 
 	if err != nil {
@@ -55,23 +55,23 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.QueryOperateLo
 
 	var list []*types.QueryOperateLogListData
 
-	for _, item := range result.List {
+	for _, detail := range result.List {
 		list = append(list, &types.QueryOperateLogListData{
-			DeptName:          item.DeptName,
-			Id:                item.Id,
-			OperationIp:       item.OperationIp,
-			OperationName:     item.OperationName,
-			OperationParams:   item.OperationParams,
-			OperationResponse: item.OperationResponse,
-			OperationStatus:   item.OperationStatus,
-			OperationTime:     item.OperationTime,
-			OperationType:     item.OperationType,
-			OperationUrl:      item.OperationUrl,
-			RequestMethod:     item.RequestMethod,
-			Title:             item.Title,
-			UseTime:           item.UseTime,
-			Browser:           item.Browser,
-			Os:                item.Os,
+			Id:                detail.Id,                // 编号
+			Title:             detail.Title,             // 系统模块
+			OperationType:     detail.OperationType,     // 操作类型
+			OperationName:     detail.OperationName,     // 操作人员
+			RequestMethod:     detail.RequestMethod,     // 请求方式
+			OperationUrl:      detail.OperationUrl,      // 操作方法
+			OperationParams:   detail.OperationParams,   // 请求参数
+			OperationResponse: detail.OperationResponse, // 响应参数
+			OperationStatus:   detail.OperationStatus,   // 操作状态
+			DeptName:          detail.DeptName,          // 部门名称
+			UseTime:           detail.UseTime,           // 执行时长(毫秒)
+			Browser:           detail.Browser,           // 浏览器
+			Os:                detail.Os,                // 操作系统
+			OperationIp:       detail.OperationIp,       // 操作地址
+			OperationTime:     detail.OperationTime,     // 操作时间
 		})
 	}
 

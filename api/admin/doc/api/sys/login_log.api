@@ -18,14 +18,14 @@ type (
 		Id int64 `form:"id"`
 	}
 	QueryLoginLogDetailData {
-		Browser     string `json:"browser"` //浏览器
-		Id          int64  `json:"id"` //编号
-		IpAddress   string `json:"ipAddress"` //IP地址
+		Id int64 `json:"id"` //编号
+		UserName string `json:"userName"` //用户名
 		LoginStatus string `json:"loginStatus"` //登录状态
-		LoginTime   string `json:"loginTime"` //登录时间
-		Os          string `json:"os"` //操作信息
-		UserName    string `json:"userName"` //用户名
-		ErrorMsg    string `json:"errorMsg"` //操作信息
+		IpAddress string `json:"ipAddress"` //IP地址
+		Browser string `json:"browser"` //浏览器
+		Os string `json:"os"` //操作系统
+		ErrorMsg string `json:"errorMsg"` //登录失败信息
+		LoginTime string `json:"loginTime"` //登录时间
 	}
 	QueryLoginLogDetailResp {
 		Code    string                  `json:"code"`
@@ -39,18 +39,18 @@ type (
 		Browser     string `form:"browser,optional"` //浏览器
 		IpAddress   string `form:"ipAddress,optional"` //IP地址
 		LoginStatus string `form:"loginStatus,optional"` //登录状态
-		Os          string `form:"os,optional"` //操作信息
+		Os          string `form:"os,optional"` //操作系统
 		UserName    string `form:"userName,optional"` //用户名
 	}
 	QueryLoginLogListData {
-		Browser     string `json:"browser"` //浏览器
-		Id          int64  `json:"id"` //编号
-		IpAddress   string `json:"ipAddress"` //IP地址
+		Id int64 `json:"id"` //编号
+		UserName string `json:"userName"` //用户名
 		LoginStatus string `json:"loginStatus"` //登录状态
-		LoginTime   string `json:"loginTime"` //登录时间
-		Os          string `json:"os"` //操作信息
-		UserName    string `json:"userName"` //用户名
-		ErrorMsg    string `json:"errorMsg"` //操作信息
+		IpAddress string `json:"ipAddress"` //IP地址
+		Browser string `json:"browser"` //浏览器
+		Os string `json:"os"` //操作系统
+		ErrorMsg string `json:"errorMsg"` //登录失败信息
+		LoginTime string `json:"loginTime"` //登录时间
 	}
 	QueryLoginLogListResp {
 		Code     string                   `json:"code"`

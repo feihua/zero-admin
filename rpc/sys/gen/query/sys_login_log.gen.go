@@ -51,7 +51,7 @@ type sysLoginLog struct {
 	LoginStatus field.String // 登录状态
 	IPAddress   field.String // IP地址
 	Browser     field.String // 浏览器
-	Os          field.String // 操作信息
+	Os          field.String // 操作系统
 	ErrorMsg    field.String // 登录失败信息
 	LoginTime   field.Time   // 登录时间
 

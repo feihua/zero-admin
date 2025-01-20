@@ -35,7 +35,7 @@ func NewQueryOperateLogDetailLogic(ctx context.Context, svcCtx *svc.ServiceConte
 // QueryOperateLogDetail 查询操作日志详情
 func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(req *types.QueryOperateLogDetailReq) (resp *types.QueryOperateLogDetailResp, err error) {
 	detail, err := l.svcCtx.Operatelogservice.QueryOperateLogDetail(l.ctx, &sysclient.QueryOperateLogDetailReq{
-		Id: req.Id,
+		Id: req.Id, // 编号
 	})
 
 	if err != nil {
@@ -45,21 +45,21 @@ func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(req *types.QueryOpera
 	}
 
 	item := types.QueryOperateLogDetailData{
-		DeptName:          detail.DeptName,
-		Id:                detail.Id,
-		OperationIp:       detail.OperationIp,
-		OperationName:     detail.OperationName,
-		OperationParams:   detail.OperationParams,
-		OperationResponse: detail.OperationResponse,
-		OperationStatus:   detail.OperationStatus,
-		OperationTime:     detail.OperationTime,
-		OperationType:     detail.OperationType,
-		OperationUrl:      detail.OperationUrl,
-		RequestMethod:     detail.RequestMethod,
-		Title:             detail.Title,
-		UseTime:           detail.UseTime,
-		Browser:           detail.Browser,
-		Os:                detail.Os,
+		Id:                detail.Id,                // 编号
+		Title:             detail.Title,             // 系统模块
+		OperationType:     detail.OperationType,     // 操作类型
+		OperationName:     detail.OperationName,     // 操作人员
+		RequestMethod:     detail.RequestMethod,     // 请求方式
+		OperationUrl:      detail.OperationUrl,      // 操作方法
+		OperationParams:   detail.OperationParams,   // 请求参数
+		OperationResponse: detail.OperationResponse, // 响应参数
+		OperationStatus:   detail.OperationStatus,   // 操作状态
+		DeptName:          detail.DeptName,          // 部门名称
+		UseTime:           detail.UseTime,           // 执行时长(毫秒)
+		Browser:           detail.Browser,           // 浏览器
+		Os:                detail.Os,                // 操作系统
+		OperationIp:       detail.OperationIp,       // 操作地址
+		OperationTime:     detail.OperationTime,     // 操作时间
 	}
 
 	return &types.QueryOperateLogDetailResp{

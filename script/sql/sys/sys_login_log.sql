@@ -6,7 +6,7 @@ create table sys_login_log
     login_status varchar(50)                         not null comment '登录状态',
     ip_address   varchar(64)                         not null comment 'IP地址',
     browser      varchar(64)                         not null comment '浏览器',
-    os           varchar(64)                         not null comment '操作信息',
+    os           varchar(64)                         not null comment '操作系统',
     error_msg    varchar(64)                         not null comment '登录失败信息',
     login_time   timestamp default CURRENT_TIMESTAMP not null comment '登录时间'
 )

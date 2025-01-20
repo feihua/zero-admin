@@ -6,20 +6,21 @@ option go_package = "./proto";
 
 // 添加系统操作日志表
 message AddOperateLogReq {
-  string dept_name = 1; //部门名称
-  int64 id = 2; //编号
-  string operation_ip = 3; //操作地址
+  int64 id = 1; //编号
+  string title = 2; //系统模块
+  string operation_type = 3; //操作类型
   string operation_name = 4; //操作人员
-  string operation_params = 5; //请求参数
-  string operation_response = 6; //响应参数
-  int32 operation_status = 7; //操作状态
-  int64 use_time = 8; //执行时长(毫秒)
-  string operation_type = 9; //操作类型
-  string operation_url = 10; //操作方法
-  string request_method = 11; //请求方式
-  string title = 12; //系统模块
-  string os = 13; //操作系统信息
-  string browser = 14; //浏览器
+  string request_method = 5; //请求方式
+  string operation_url = 6; //操作方法
+  string operation_params = 7; //请求参数
+  string operation_response = 8; //响应参数
+  int32 operation_status = 9; //操作状态
+  string dept_name = 10; //部门名称
+  int64 use_time = 11; //执行时长(毫秒)
+  string browser = 12; //浏览器
+  string os = 13; //操作信息
+  string operation_ip = 14; //操作地址
+  string operation_time = 15; //操作时间
 
 }
 
@@ -42,21 +43,21 @@ message QueryOperateLogDetailReq {
 }
 
 message QueryOperateLogDetailResp {
-  string dept_name = 1; //部门名称
-  int64 id = 2; //编号
-  string operation_ip = 3; //操作地址
+  int64 id = 1; //编号
+  string title = 2; //系统模块
+  string operation_type = 3; //操作类型
   string operation_name = 4; //操作人员
-  string operation_params = 5; //请求参数
-  string operation_response = 6; //响应参数
-  int32 operation_status = 7; //操作状态
-  string operation_time = 8; //操作时间
-  string operation_type = 9; //操作类型
-  string operation_url = 10; //操作方法
-  string request_method = 11; //请求方式
-  string title = 12; //系统模块
-  int64 use_time = 13; //执行时长(毫秒)
-  string os = 14; //操作系统信息
-  string browser = 15; //浏览器
+  string request_method = 5; //请求方式
+  string operation_url = 6; //操作方法
+  string operation_params = 7; //请求参数
+  string operation_response = 8; //响应参数
+  int32 operation_status = 9; //操作状态
+  string dept_name = 10; //部门名称
+  int64 use_time = 11; //执行时长(毫秒)
+  string browser = 12; //浏览器
+  string os = 13; //操作信息
+  string operation_ip = 14; //操作地址
+  string operation_time = 15; //操作时间
 
 }
 
@@ -76,21 +77,21 @@ message QueryOperateLogListReq {
 }
 
 message OperateLogListData {
-  string dept_name = 1; //部门名称
-  int64 id = 2; //编号
-  string operation_ip = 3; //操作地址
+  int64 id = 1; //编号
+  string title = 2; //系统模块
+  string operation_type = 3; //操作类型
   string operation_name = 4; //操作人员
-  string operation_params = 5; //请求参数
-  string operation_response = 6; //响应参数
-  int32 operation_status = 7; //操作状态
-  string operation_time = 8; //操作时间
-  string operation_type = 9; //操作类型
-  string operation_url = 10; //操作方法
-  string request_method = 11; //请求方式
-  string title = 12; //系统模块
-  int64 use_time = 13; //执行时长(毫秒)
-  string os = 14; //操作系统信息
-  string browser = 15; //浏览器
+  string request_method = 5; //请求方式
+  string operation_url = 6; //操作方法
+  string operation_params = 7; //请求参数
+  string operation_response = 8; //响应参数
+  int32 operation_status = 9; //操作状态
+  string dept_name = 10; //部门名称
+  int64 use_time = 11; //执行时长(毫秒)
+  string browser = 12; //浏览器
+  string os = 13; //操作信息
+  string operation_ip = 14; //操作地址
+  string operation_time = 15; //操作时间
 }
 
 message QueryOperateLogListResp {

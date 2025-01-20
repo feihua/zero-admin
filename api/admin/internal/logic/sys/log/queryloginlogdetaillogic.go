@@ -35,7 +35,7 @@ func NewQueryLoginLogDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext
 // QueryLoginLogDetail 查询登录日志详情
 func (l *QueryLoginLogDetailLogic) QueryLoginLogDetail(req *types.QueryLoginLogDetailReq) (resp *types.QueryLoginLogDetailResp, err error) {
 	detail, err := l.svcCtx.LoginLogService.QueryLoginLogDetail(l.ctx, &sysclient.QueryLoginLogDetailReq{
-		Id: req.Id,
+		Id: req.Id, // 编号
 	})
 
 	if err != nil {
@@ -45,14 +45,14 @@ func (l *QueryLoginLogDetailLogic) QueryLoginLogDetail(req *types.QueryLoginLogD
 	}
 
 	log := types.QueryLoginLogDetailData{
-		Browser:     detail.Browser,
-		Id:          detail.Id,
-		IpAddress:   detail.IpAddress,
-		LoginStatus: detail.LoginStatus,
-		LoginTime:   detail.LoginTime,
-		Os:          detail.Os,
-		UserName:    detail.UserName,
-		ErrorMsg:    detail.ErrorMsg,
+		Id:          detail.Id,          // 编号
+		UserName:    detail.UserName,    // 用户名
+		LoginStatus: detail.LoginStatus, // 登录状态
+		IpAddress:   detail.IpAddress,   // IP地址
+		Browser:     detail.Browser,     // 浏览器
+		Os:          detail.Os,          // 操作系统
+		ErrorMsg:    detail.ErrorMsg,    // 登录失败信息
+		LoginTime:   detail.LoginTime,   // 登录时间
 	}
 
 	return &types.QueryLoginLogDetailResp{

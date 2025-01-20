@@ -2186,14 +2186,14 @@ type QueryIntegrationConsumeSettingListResp struct {
 }
 
 type QueryLoginLogDetailData struct {
-	Browser     string `json:"browser"`     //浏览器
 	Id          int64  `json:"id"`          //编号
-	IpAddress   string `json:"ipAddress"`   //IP地址
-	LoginStatus string `json:"loginStatus"` //登录状态
-	LoginTime   string `json:"loginTime"`   //登录时间
-	Os          string `json:"os"`          //操作信息
 	UserName    string `json:"userName"`    //用户名
-	ErrorMsg    string `json:"errorMsg"`    //操作信息
+	LoginStatus string `json:"loginStatus"` //登录状态
+	IpAddress   string `json:"ipAddress"`   //IP地址
+	Browser     string `json:"browser"`     //浏览器
+	Os          string `json:"os"`          //操作系统
+	ErrorMsg    string `json:"errorMsg"`    //登录失败信息
+	LoginTime   string `json:"loginTime"`   //登录时间
 }
 
 type QueryLoginLogDetailReq struct {
@@ -2207,14 +2207,14 @@ type QueryLoginLogDetailResp struct {
 }
 
 type QueryLoginLogListData struct {
-	Browser     string `json:"browser"`     //浏览器
 	Id          int64  `json:"id"`          //编号
-	IpAddress   string `json:"ipAddress"`   //IP地址
-	LoginStatus string `json:"loginStatus"` //登录状态
-	LoginTime   string `json:"loginTime"`   //登录时间
-	Os          string `json:"os"`          //操作信息
 	UserName    string `json:"userName"`    //用户名
-	ErrorMsg    string `json:"errorMsg"`    //操作信息
+	LoginStatus string `json:"loginStatus"` //登录状态
+	IpAddress   string `json:"ipAddress"`   //IP地址
+	Browser     string `json:"browser"`     //浏览器
+	Os          string `json:"os"`          //操作系统
+	ErrorMsg    string `json:"errorMsg"`    //登录失败信息
+	LoginTime   string `json:"loginTime"`   //登录时间
 }
 
 type QueryLoginLogListReq struct {
@@ -2223,7 +2223,7 @@ type QueryLoginLogListReq struct {
 	Browser     string `form:"browser,optional"`     //浏览器
 	IpAddress   string `form:"ipAddress,optional"`   //IP地址
 	LoginStatus string `form:"loginStatus,optional"` //登录状态
-	Os          string `form:"os,optional"`          //操作信息
+	Os          string `form:"os,optional"`          //操作系统
 	UserName    string `form:"userName,optional"`    //用户名
 }
 
@@ -2567,21 +2567,21 @@ type QueryMenuListResp struct {
 }
 
 type QueryOperateLogDetailData struct {
-	DeptName          string `json:"deptName"`          //部门名称
 	Id                int64  `json:"id"`                //编号
-	OperationIp       string `json:"operationIp"`       //操作地址
+	Title             string `json:"title"`             //系统模块
+	OperationType     string `json:"operationType"`     //操作类型
 	OperationName     string `json:"operationName"`     //操作人员
+	RequestMethod     string `json:"requestMethod"`     //请求方式
+	OperationUrl      string `json:"operationUrl"`      //操作方法
 	OperationParams   string `json:"operationParams"`   //请求参数
 	OperationResponse string `json:"operationResponse"` //响应参数
 	OperationStatus   int32  `json:"operationStatus"`   //操作状态
-	OperationTime     string `json:"operationTime"`     //操作时间
-	OperationType     string `json:"operationType"`     //操作类型
-	OperationUrl      string `json:"operationUrl"`      //操作方法
-	RequestMethod     string `json:"requestMethod"`     //请求方式
-	Title             string `json:"title"`             //系统模块
+	DeptName          string `json:"deptName"`          //部门名称
 	UseTime           int64  `json:"useTime"`           //执行时长(毫秒)
 	Browser           string `json:"browser"`           //浏览器
 	Os                string `json:"os"`                //操作信息
+	OperationIp       string `json:"operationIp"`       //操作地址
+	OperationTime     string `json:"operationTime"`     //操作时间
 }
 
 type QueryOperateLogDetailReq struct {
@@ -2595,21 +2595,21 @@ type QueryOperateLogDetailResp struct {
 }
 
 type QueryOperateLogListData struct {
-	DeptName          string `json:"deptName"`          //部门名称
 	Id                int64  `json:"id"`                //编号
-	OperationIp       string `json:"operationIp"`       //操作地址
+	Title             string `json:"title"`             //系统模块
+	OperationType     string `json:"operationType"`     //操作类型
 	OperationName     string `json:"operationName"`     //操作人员
+	RequestMethod     string `json:"requestMethod"`     //请求方式
+	OperationUrl      string `json:"operationUrl"`      //操作方法
 	OperationParams   string `json:"operationParams"`   //请求参数
 	OperationResponse string `json:"operationResponse"` //响应参数
 	OperationStatus   int32  `json:"operationStatus"`   //操作状态
-	OperationTime     string `json:"operationTime"`     //操作时间
-	OperationType     string `json:"operationType"`     //操作类型
-	OperationUrl      string `json:"operationUrl"`      //操作方法
-	RequestMethod     string `json:"requestMethod"`     //请求方式
-	Title             string `json:"title"`             //系统模块
+	DeptName          string `json:"deptName"`          //部门名称
 	UseTime           int64  `json:"useTime"`           //执行时长(毫秒)
 	Browser           string `json:"browser"`           //浏览器
 	Os                string `json:"os"`                //操作信息
+	OperationIp       string `json:"operationIp"`       //操作地址
+	OperationTime     string `json:"operationTime"`     //操作时间
 }
 
 type QueryOperateLogListReq struct {
@@ -2623,7 +2623,7 @@ type QueryOperateLogListReq struct {
 	OperationUrl    string `form:"operationUrl,optional"`    //操作方法
 	Title           string `form:"title,optional"`           //系统模块
 	Browser         string `json:"browser,optional"`         //浏览器
-	Os              string `json:"os,optional"`              //操作信息
+	Os              string `json:"os,optional"`              //操作系统
 }
 
 type QueryOperateLogListResp struct {

@@ -61,20 +61,19 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(in *sysclient.QueryLoginLogLi
 	}
 
 	var list []*sysclient.LoginLogListData
-	for _, log := range result {
+	for _, item := range result {
 		list = append(list, &sysclient.LoginLogListData{
-			Browser:     log.Browser,
-			Id:          log.ID,
-			IpAddress:   log.IPAddress,
-			LoginStatus: log.LoginStatus,
-			LoginTime:   log.LoginTime.Format("2006-01-02 15:04:05"),
-			Os:          log.Os,
-			UserName:    log.UserName,
-			ErrorMsg:    log.ErrorMsg,
+			Id:          item.ID,                                      // 编号
+			UserName:    item.UserName,                                // 用户名
+			LoginStatus: item.LoginStatus,                             // 登录状态
+			IpAddress:   item.IPAddress,                               // IP地址
+			Browser:     item.Browser,                                 // 浏览器
+			Os:          item.Os,                                      // 操作系统
+			ErrorMsg:    item.ErrorMsg,                                // 登录失败信息
+			LoginTime:   item.LoginTime.Format("2006-01-02 15:04:05"), // 登录时间
 		})
 	}
 
-	logc.Infof(l.ctx, "查询登录记录列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.QueryLoginLogListResp{
 		Total: count,
 		List:  list,

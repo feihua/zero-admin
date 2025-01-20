@@ -35,7 +35,7 @@ func NewDeleteLoginLogLogic(ctx context.Context, svcCtx *svc.ServiceContext) Del
 // DeleteLoginLog 删除登录日志
 func (l *DeleteLoginLogLogic) DeleteLoginLog(req *types.DeleteLoginLogReq) (*types.DeleteLoginLogResp, error) {
 	_, err := l.svcCtx.LoginLogService.DeleteLoginLog(l.ctx, &sysclient.DeleteLoginLogReq{
-		Ids: req.Ids,
+		Ids: req.Ids, // 编号
 	})
 
 	if err != nil {

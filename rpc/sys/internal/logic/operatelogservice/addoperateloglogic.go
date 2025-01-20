@@ -38,24 +38,25 @@ func NewAddOperateLogLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 func (l *AddOperateLogLogic) AddOperateLog(in *sysclient.AddOperateLogReq) (*sysclient.AddOperateLogResp, error) {
 
 	uri := strings.Split(in.OperationUrl, "?")[0]
-	//todo 待优化 量大的时候 ，把它们的关联缓存起来(redis)
+	// todo 待优化 量大的时候 ，把它们的关联缓存起来(redis)
 	q := query.SysMenu
 	menu, _ := q.WithContext(l.ctx).Select(q.MenuName).Where(q.BackgroundURL.Like("%" + uri + "%")).First()
 
 	sysLog := &model.SysOperateLog{
-		Title:             menu.MenuName,
-		OperationType:     in.OperationType,
-		OperationName:     in.OperationName,
-		RequestMethod:     in.RequestMethod,
-		OperationURL:      in.OperationUrl,
-		OperationParams:   in.OperationParams,
-		OperationResponse: in.OperationResponse,
-		DeptName:          in.DeptName,
-		UseTime:           in.UseTime,
-		Browser:           in.Browser,
-		Os:                in.Os,
-		OperationIP:       in.OperationIp,
-		OperationTime:     time.Now(),
+		Title:             menu.MenuName,        // 系统模块
+		OperationType:     in.OperationType,     // 操作类型
+		OperationName:     in.OperationName,     // 操作人员
+		RequestMethod:     in.RequestMethod,     // 请求方式
+		OperationURL:      in.OperationUrl,      // 操作方法
+		OperationParams:   in.OperationParams,   // 请求参数
+		OperationResponse: in.OperationResponse, // 响应参数
+		OperationStatus:   in.OperationStatus,   // 操作状态
+		DeptName:          in.DeptName,          // 部门名称
+		UseTime:           in.UseTime,           // 执行时长(毫秒)
+		Browser:           in.Browser,           // 浏览器
+		Os:                in.Os,                // 操作信息
+		OperationIP:       in.OperationIp,       // 操作地址
+		OperationTime:     time.Now(),           // 操作时间
 	}
 
 	if strings.Contains(in.OperationResponse, "000000") {

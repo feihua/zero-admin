@@ -65,7 +65,7 @@ type sysOperateLog struct {
 	DeptName          field.String // 部门名称
 	UseTime           field.Int64  // 执行时长(毫秒)
 	Browser           field.String // 浏览器
-	Os                field.String // 操作信息
+	Os                field.String // 操作系统
 	OperationIP       field.String // 操作地址
 	OperationTime     field.Time   // 操作时间
 

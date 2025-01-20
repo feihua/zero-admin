@@ -37,11 +37,11 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(req *types.QueryLoginLogListR
 	result, err := l.svcCtx.LoginLogService.QueryLoginLogList(l.ctx, &sysclient.QueryLoginLogListReq{
 		PageNum:     req.Current,
 		PageSize:    req.PageSize,
-		Browser:     strings.TrimSpace(req.Browser),
-		IpAddress:   strings.TrimSpace(req.IpAddress),
-		LoginStatus: req.LoginStatus,
-		Os:          strings.TrimSpace(req.Os),
-		UserName:    strings.TrimSpace(req.UserName),
+		Browser:     strings.TrimSpace(req.Browser),   // 浏览器
+		IpAddress:   strings.TrimSpace(req.IpAddress), // IP地址
+		LoginStatus: req.LoginStatus,                  // 登录状态
+		Os:          strings.TrimSpace(req.Os),        // 操作系统
+		UserName:    strings.TrimSpace(req.UserName),  // 用户名
 	})
 
 	if err != nil {
@@ -54,14 +54,14 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(req *types.QueryLoginLogListR
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryLoginLogListData{
-			Browser:     item.Browser,
-			Id:          item.Id,
-			IpAddress:   item.IpAddress,
-			LoginStatus: item.LoginStatus,
-			LoginTime:   item.LoginTime,
-			Os:          item.Os,
-			UserName:    item.UserName,
-			ErrorMsg:    item.ErrorMsg,
+			Id:          item.Id,          // 编号
+			UserName:    item.UserName,    // 用户名
+			LoginStatus: item.LoginStatus, // 登录状态
+			IpAddress:   item.IpAddress,   // IP地址
+			Browser:     item.Browser,     // 浏览器
+			Os:          item.Os,          // 操作系统
+			ErrorMsg:    item.ErrorMsg,    // 登录失败信息
+			LoginTime:   item.LoginTime,   // 登录时间
 		})
 	}
 

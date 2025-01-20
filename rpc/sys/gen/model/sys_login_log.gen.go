@@ -17,7 +17,7 @@ type SysLoginLog struct {
 	LoginStatus string    `gorm:"column:login_status;not null;comment:登录状态" json:"login_status"`                       // 登录状态
 	IPAddress   string    `gorm:"column:ip_address;not null;comment:IP地址" json:"ip_address"`                           // IP地址
 	Browser     string    `gorm:"column:browser;not null;comment:浏览器" json:"browser"`                                  // 浏览器
-	Os          string    `gorm:"column:os;not null;comment:操作信息" json:"os"`                                           // 操作信息
+	Os          string    `gorm:"column:os;not null;comment:操作系统" json:"os"`                                           // 操作系统
 	ErrorMsg    string    `gorm:"column:error_msg;not null;comment:登录失败信息" json:"error_msg"`                           // 登录失败信息
 	LoginTime   time.Time `gorm:"column:login_time;not null;default:CURRENT_TIMESTAMP;comment:登录时间" json:"login_time"` // 登录时间
 }

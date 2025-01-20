@@ -394,14 +394,14 @@ message QueryLoginLogDetailReq {
 }
 
 message QueryLoginLogDetailResp {
-  string browser = 1; //浏览器
-  int64 id = 2; //编号
-  string ip_address = 3; //IP地址
-  string login_status = 4; //登录状态
-  string login_time = 5; //登录时间
-  string os = 6; //操作信息
-  string user_name = 7; //用户名
-  string error_msg = 8; //操作信息
+  int64 id = 1; //编号
+  string user_name = 2; //用户名
+  string login_status = 3; //登录状态
+  string ip_address = 4; //IP地址
+  string browser = 5; //浏览器
+  string os = 6; //操作系统
+  string error_msg = 7; //登录失败信息
+  string login_time = 8; //登录时间
 
 }
 
@@ -412,20 +412,20 @@ message QueryLoginLogListReq {
   string browser = 5; //浏览器
   string ip_address = 3; //IP地址
   string login_status = 4; //登录状态
-  string os = 6; //操作信息
+  string os = 6; //操作系统
   string user_name = 7; //用户名
 
 }
 
 message LoginLogListData {
-  string browser = 1; //浏览器
-  int64 id = 2; //编号
-  string ip_address = 3; //IP地址
-  string login_status = 4; //登录状态
-  string login_time = 5; //登录时间
-  string os = 6; //操作信息
-  string user_name = 7; //用户名
-  string error_msg = 8; //操作信息
+  int64 id = 1; //编号
+  string user_name = 2; //用户名
+  string login_status = 3; //登录状态
+  string ip_address = 4; //IP地址
+  string browser = 5; //浏览器
+  string os = 6; //操作系统
+  string error_msg = 7; //登录失败信息
+  string login_time = 8; //登录时间
 }
 
 message QueryLoginLogListResp {
@@ -1060,7 +1060,7 @@ message LoginReq {
   string account = 1;
   string password = 2;
   string ip_address = 3; //IP地址
-  string os = 4; //操作信息
+  string os = 4; //操作系统
   string browser = 5; //浏览器
 
 }
