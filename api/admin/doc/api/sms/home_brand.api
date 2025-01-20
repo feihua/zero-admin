@@ -44,7 +44,7 @@ type (
 	}
 	UpdateHomeBrandStatusReq {
 		Ids             []int64 `json:"ids"`
-		BrandIds []int64 `json:"brandIds"` // 商品品牌id
+		BrandIds        []int64 `json:"brandIds"` // 商品品牌id
 		RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 	}
 	UpdateHomeBrandStatusResp {
@@ -52,7 +52,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteHomeBrandReq {
-		Ids []int64 `form:"ids"`
+		Ids      []int64 `form:"ids"`
 		BrandIds []int64 `form:"brandIds"` // 商品品牌id
 	}
 	DeleteHomeBrandResp {

@@ -61,10 +61,9 @@ type (
 		Success  bool                     `json:"success"`
 		Total    int64                    `json:"total"`
 	}
-
 	QueryStatisticsLoginLogResp {
-		Code    string                 `json:"code"`
-		Message string                 `json:"message"`
+		Code    string                      `json:"code"`
+		Message string                      `json:"message"`
 		Data    QueryStatisticsLoginLogData `json:"data"`
 	}
 	QueryStatisticsLoginLogData {

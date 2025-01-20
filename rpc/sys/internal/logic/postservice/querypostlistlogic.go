@@ -56,20 +56,20 @@ func (l *QueryPostListLogic) QueryPostList(in *sysclient.QueryPostListReq) (*sys
 	var list []*sysclient.PostListData
 	for _, job := range result {
 		list = append(list, &sysclient.PostListData{
-			CreateBy:   job.CreateBy,
-			CreateTime: job.CreateTime.Format("2006-01-02 15:04:05"),
-			Id:         job.ID,
-			PostCode:   job.PostCode,
-			PostName:   job.PostName,
-			PostSort:   job.PostSort,
-			PostStatus: job.PostStatus,
-			Remark:     job.Remark,
-			UpdateBy:   job.UpdateBy,
-			UpdateTime: time_util.TimeToString(job.UpdateTime),
+			Id:         job.ID,                                       // 岗位id
+			PostName:   job.PostName,                                 // 岗位名称
+			PostCode:   job.PostCode,                                 // 岗位编码
+			PostStatus: job.PostStatus,                               // 岗位状态
+			PostSort:   job.PostSort,                                 // 岗位排序
+			Remark:     job.Remark,                                   // 备注信息
+			IsDeleted:  job.IsDeleted,                                // 是否删除  0：否  1：是
+			CreateBy:   job.CreateBy,                                 // 创建者
+			CreateTime: job.CreateTime.Format("2006-01-02 15:04:05"), // 创建时间
+			UpdateBy:   job.UpdateBy,                                 // 更新者
+			UpdateTime: time_util.TimeToString(job.UpdateTime),       // 更新时间
 		})
 	}
 
-	logc.Infof(l.ctx, "查询岗位列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.QueryPostListResp{
 		Total: count,
 		List:  list,

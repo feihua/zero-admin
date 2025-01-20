@@ -52,7 +52,7 @@ type (
 		Message string `json:"message"`
 	}
 	UpdateFlashPromotionStatusReq {
-		Ids             []int64 `json:"ids"`
+		Ids    []int64 `json:"ids"`
 		Status int32   `json:"status"`
 	}
 	UpdateFlashPromotionStatusResp {
@@ -90,7 +90,6 @@ service admin-api {
 	//更新秒杀活动状态
 	@handler UpdateFlashPromotionStatus
 	post /updateFlashPromotionStatus (UpdateFlashPromotionStatusReq) returns (UpdateFlashPromotionStatusResp)
-
 
 	//删除秒杀活动
 	@handler FlashPromotionDelete

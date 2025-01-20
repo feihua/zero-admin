@@ -44,7 +44,7 @@ type (
 	}
 	UpdateRecommendSubjectStatusReq {
 		Ids             []int64 `json:"ids"`
-		SubjectIds []int64 `json:"subjectIds"`
+		SubjectIds      []int64 `json:"subjectIds"`
 		RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 	}
 	UpdateRecommendSubjectStatusResp {
@@ -52,7 +52,7 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteHomeRecommendSubjectReq {
-		Ids []int64 `form:"ids"`
+		Ids        []int64 `form:"ids"`
 		SubjectIds []int64 `form:"subjectIds"`
 	}
 	DeleteHomeRecommendSubjectResp {

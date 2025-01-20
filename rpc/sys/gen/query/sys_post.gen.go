@@ -49,7 +49,7 @@ type sysPost struct {
 	sysPostDo sysPostDo
 
 	ALL        field.Asterisk
-	ID         field.Int64  // 编号
+	ID         field.Int64  // 岗位id
 	PostName   field.String // 岗位名称
 	PostCode   field.String // 岗位编码
 	PostStatus field.Int32  // 岗位状态

@@ -1,22 +1,21 @@
-info(
-	desc: "退货原因表"
+info (
+	desc:   "退货原因表"
 	author: "liufeihua"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	// 添加退货原因表
 	AddOrderReturnReasonReq {
-		Name string `json:"name"` //退货类型
-		Sort int32 `json:"sort"` //排序
-		Status int32 `json:"status"` //状态：0->不启用；1->启用
+		Name   string `json:"name"` //退货类型
+		Sort   int32  `json:"sort"` //排序
+		Status int32  `json:"status"` //状态：0->不启用；1->启用
 	}
 	AddOrderReturnReasonResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-		// 删除退货原因表
+	// 删除退货原因表
 	DeleteOrderReturnReasonReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -24,71 +23,63 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-		// 更新退货原因表
+	// 更新退货原因表
 	UpdateOrderReturnReasonReq {
-		Id int64 `json:"id"` //
+		Id   int64  `json:"id"` //
 		Name string `json:"name"` //退货类型
-		Sort int32 `json:"sort"` //排序
-
+		Sort int32  `json:"sort"` //排序
 	}
 	UpdateOrderReturnReasonResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-		// 更新退货原因表状态
+	// 更新退货原因表状态
 	UpdateOrderReturnReasonStatusReq {
-		Ids []int64 `json:"ids"` //
-		Status int32 `json:"status"` //状态：0->不启用；1->启用
-
+		Ids    []int64 `json:"ids"` //
+		Status int32   `json:"status"` //状态：0->不启用；1->启用
 	}
 	UpdateOrderReturnReasonStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-		// 查询退货原因表详情
+	// 查询退货原因表详情
 	QueryOrderReturnReasonDetailReq {
-		Id         int64  `form:"id"`
+		Id int64 `form:"id"`
 	}
 	QueryOrderReturnReasonDetailData {
 		CreateTime string `json:"createTime"` //创建时间
-		Id int64 `json:"id"` //
-		Name string `json:"name"` //退货类型
-		Sort int32 `json:"sort"` //排序
-		Status int32 `json:"status"` //状态：0->不启用；1->启用
-
+		Id         int64  `json:"id"` //
+		Name       string `json:"name"` //退货类型
+		Sort       int32  `json:"sort"` //排序
+		Status     int32  `json:"status"` //状态：0->不启用；1->启用
 	}
 	QueryOrderReturnReasonDetailResp {
-		Code     string              `json:"code"`
-		Message  string              `json:"message"`
-		Data     QueryOrderReturnReasonDetailData `json:"data"`
+		Code    string                           `json:"code"`
+		Message string                           `json:"message"`
+		Data    QueryOrderReturnReasonDetailData `json:"data"`
 	}
-		// 分页查询退货原因表列表
+	// 分页查询退货原因表列表
 	QueryOrderReturnReasonListReq {
-		Current         int64  `form:"current,default=1"` //第几页
-		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
-		Name string `form:"name,optional"` //退货类型
-		Status int32 `form:"status,default=2"` //状态：0->不启用；1->启用
-
+		Current  int64  `form:"current,default=1"` //第几页
+		PageSize int64  `form:"pageSize,default=20"` //每页的数量
+		Name     string `form:"name,optional"` //退货类型
+		Status   int32  `form:"status,default=2"` //状态：0->不启用；1->启用
 	}
 	QueryOrderReturnReasonListData {
 		CreateTime string `json:"createTime"` //创建时间
-		Id int64 `json:"id"` //
-		Name string `json:"name"` //退货类型
-		Sort int32 `json:"sort"` //排序
-		Status int32 `json:"status"` //状态：0->不启用；1->启用
-
+		Id         int64  `json:"id"` //
+		Name       string `json:"name"` //退货类型
+		Sort       int32  `json:"sort"` //排序
+		Status     int32  `json:"status"` //状态：0->不启用；1->启用
 	}
 	QueryOrderReturnReasonListResp {
-		Code     string              `json:"code"`
-		Message  string              `json:"message"`
-		Current  int64               `json:"current,default=1"`
+		Code     string                            `json:"code"`
+		Message  string                            `json:"message"`
+		Current  int64                             `json:"current,default=1"`
 		Data     []*QueryOrderReturnReasonListData `json:"data"`
-		PageSize int64               `json:"pageSize,default=20"`
-		Success  bool                `json:"success"`
-		Total    int64               `json:"total"`
+		PageSize int64                             `json:"pageSize,default=20"`
+		Success  bool                              `json:"success"`
+		Total    int64                             `json:"total"`
 	}
 )
 
@@ -122,5 +113,5 @@ service admin-api {
 	// 分页查询退货原因表列表
 	@handler QueryOrderReturnReasonList
 	get /queryOrderReturnReasonList (QueryOrderReturnReasonListReq) returns (QueryOrderReturnReasonListResp)
-
 }
+

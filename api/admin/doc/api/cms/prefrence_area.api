@@ -1,24 +1,23 @@
-info(
-	desc: "优选专区"
+info (
+	desc:   "优选专区"
 	author: "liufeihua"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
 	// 添加优选专区
 	AddPreferredAreaReq {
-		Name string `json:"name"` //
-		Pic string `json:"pic"` //展示图片
-		ShowStatus int32 `json:"showStatus"` //
-		Sort int32 `json:"sort"` //
-		SubTitle string `json:"subTitle"` //
+		Name       string `json:"name"` //
+		Pic        string `json:"pic"` //展示图片
+		ShowStatus int32  `json:"showStatus"` //
+		Sort       int32  `json:"sort"` //
+		SubTitle   string `json:"subTitle"` //
 	}
 	AddPreferredAreaResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-		// 删除优选专区
+	// 删除优选专区
 	DeletePreferredAreaReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -26,89 +25,81 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-		// 更新优选专区
+	// 更新优选专区
 	UpdatePreferredAreaReq {
-		Id int64 `json:"id"` //
-		Name string `json:"name"` //
-		Pic string `json:"pic"` //展示图片
-		ShowStatus int32 `json:"showStatus"` //
-		Sort int32 `json:"sort"` //
-		SubTitle string `json:"subTitle"` //
-
+		Id         int64  `json:"id"` //
+		Name       string `json:"name"` //
+		Pic        string `json:"pic"` //展示图片
+		ShowStatus int32  `json:"showStatus"` //
+		Sort       int32  `json:"sort"` //
+		SubTitle   string `json:"subTitle"` //
 	}
 	UpdatePreferredAreaResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-		// 更新优选专区状态
+	// 更新优选专区状态
 	UpdatePreferredAreaStatusReq {
-		Ids []int64 `json:"ids"`
-		ShowStatus int32 `json:"showStatus"` //
-
+		Ids        []int64 `json:"ids"`
+		ShowStatus int32   `json:"showStatus"` //
 	}
 	UpdatePreferredAreaStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-		// 查询优选专区详情
+	// 查询优选专区详情
 	QueryPreferredAreaDetailReq {
-		Id         int64  `form:"id"`
+		Id int64 `form:"id"`
 	}
 	QueryPreferredAreaDetailData {
-		CreateBy string `json:"createBy"` //创建者
+		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
-		Id int64 `json:"id"` //
-		Name string `json:"name"` //
-		Pic string `json:"pic"` //展示图片
-		ShowStatus int32 `json:"showStatus"` //
-		Sort int32 `json:"sort"` //
-		SubTitle string `json:"subTitle"` //
-		UpdateBy string `json:"updateBy"` //更新者
+		Id         int64  `json:"id"` //
+		Name       string `json:"name"` //
+		Pic        string `json:"pic"` //展示图片
+		ShowStatus int32  `json:"showStatus"` //
+		Sort       int32  `json:"sort"` //
+		SubTitle   string `json:"subTitle"` //
+		UpdateBy   string `json:"updateBy"` //更新者
 		UpdateTime string `json:"updateTime"` //更新时间
-
 	}
 	QueryPreferredAreaDetailResp {
-		Code     string              `json:"code"`
-		Message  string              `json:"message"`
-		Data     QueryPreferredAreaDetailData `json:"data"`
+		Code    string                       `json:"code"`
+		Message string                       `json:"message"`
+		Data    QueryPreferredAreaDetailData `json:"data"`
 	}
-		// 分页查询优选专区列表
+	// 分页查询优选专区列表
 	QueryPreferredAreaListReq {
-		Current         int64  `form:"current,default=1"` //第几页
-		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
-		Name string `form:"name,optional"` //
-		ShowStatus int32 `form:"showStatus,optional"` //
-		SubTitle string `form:"subTitle,optional"` //
-
+		Current    int64  `form:"current,default=1"` //第几页
+		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+		Name       string `form:"name,optional"` //
+		ShowStatus int32  `form:"showStatus,optional"` //
+		SubTitle   string `form:"subTitle,optional"` //
 	}
 	QueryPreferredAreaListData {
-		CreateBy string `json:"createBy"` //创建者
+		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
-		Id int64 `json:"id"` //
-		Name string `json:"name"` //
-		Pic string `json:"pic"` //展示图片
-		ShowStatus int32 `json:"showStatus"` //
-		Sort int32 `json:"sort"` //
-		SubTitle string `json:"subTitle"` //
-		UpdateBy string `json:"updateBy"` //更新者
+		Id         int64  `json:"id"` //
+		Name       string `json:"name"` //
+		Pic        string `json:"pic"` //展示图片
+		ShowStatus int32  `json:"showStatus"` //
+		Sort       int32  `json:"sort"` //
+		SubTitle   string `json:"subTitle"` //
+		UpdateBy   string `json:"updateBy"` //更新者
 		UpdateTime string `json:"updateTime"` //更新时间
-
 	}
 	QueryPreferredAreaListResp {
-		Code     string              `json:"code"`
-		Message  string              `json:"message"`
-		Current  int64               `json:"current,default=1"`
+		Code     string                        `json:"code"`
+		Message  string                        `json:"message"`
+		Current  int64                         `json:"current,default=1"`
 		Data     []*QueryPreferredAreaListData `json:"data"`
-		PageSize int64               `json:"pageSize,default=20"`
-		Success  bool                `json:"success"`
-		Total    int64               `json:"total"`
+		PageSize int64                         `json:"pageSize,default=20"`
+		Success  bool                          `json:"success"`
+		Total    int64                         `json:"total"`
 	}
 )
 
-@server(
+@server (
 	jwt:        Auth
 	middleware: CheckUrl
 	group:      cms/prefrenceArea
@@ -138,5 +129,5 @@ service admin-api {
 	// 分页查询优选专区列表
 	@handler QueryPreferredAreaList
 	get /queryPreferredAreaList (QueryPreferredAreaListReq) returns (QueryPreferredAreaListResp)
-
 }
+

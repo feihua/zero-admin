@@ -38,7 +38,6 @@ type (
 		Success  bool                         `json:"success"`
 		Total    int64                        `json:"total"`
 	}
-
 	DeleteFlashPromotionLogReq {
 		Ids []int64 `form:"ids"`
 	}

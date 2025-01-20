@@ -326,10 +326,10 @@ type AddOrderSettingResp struct {
 }
 
 type AddPostReq struct {
-	PostCode   string `json:"postCode"`        //岗位编码
 	PostName   string `json:"postName"`        //岗位名称
-	PostSort   int32  `json:"postSort"`        //岗位排序
+	PostCode   string `json:"postCode"`        //岗位编码
 	PostStatus int32  `json:"postStatus"`      //岗位状态
+	PostSort   int32  `json:"postSort"`        //岗位排序
 	Remark     string `json:"remark,optional"` //备注信息
 }
 
@@ -2821,14 +2821,15 @@ type QueryOrderSettingListResp struct {
 }
 
 type QueryPostDetailData struct {
+	Id         int64  `json:"id"`         //岗位id
+	PostName   string `json:"postName"`   //岗位名称
+	PostCode   string `json:"postCode"`   //岗位编码
+	PostStatus int32  `json:"postStatus"` //岗位状态
+	PostSort   int32  `json:"postSort"`   //岗位排序
+	Remark     string `json:"remark"`     //备注信息
+	IsDeleted  int32  `json:"isDeleted"`  //是否删除  0：否  1：是
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
-	Id         int64  `json:"id"`         //编号
-	PostCode   string `json:"postCode"`   //岗位编码
-	PostName   string `json:"postName"`   //岗位名称
-	PostSort   int32  `json:"postSort"`   //岗位排序
-	PostStatus int32  `json:"postStatus"` //岗位状态
-	Remark     string `json:"remark"`     //备注信息
 	UpdateBy   string `json:"updateBy"`   //更新者
 	UpdateTime string `json:"updateTime"` //更新时间
 }
@@ -2844,14 +2845,15 @@ type QueryPostDetailResp struct {
 }
 
 type QueryPostListData struct {
+	Id         int64  `json:"id"`         //岗位id
+	PostName   string `json:"postName"`   //岗位名称
+	PostCode   string `json:"postCode"`   //岗位编码
+	PostStatus int32  `json:"postStatus"` //岗位状态
+	PostSort   int32  `json:"postSort"`   //岗位排序
+	Remark     string `json:"remark"`     //备注信息
+	IsDeleted  int32  `json:"isDeleted"`  //是否删除  0：否  1：是
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
-	Id         int64  `json:"id"`         //编号
-	PostCode   string `json:"postCode"`   //岗位编码
-	PostName   string `json:"postName"`   //岗位名称
-	PostSort   int32  `json:"postSort"`   //岗位排序
-	PostStatus int32  `json:"postStatus"` //岗位状态
-	Remark     string `json:"remark"`     //备注信息
 	UpdateBy   string `json:"updateBy"`   //更新者
 	UpdateTime string `json:"updateTime"` //更新时间
 }
@@ -2867,9 +2869,9 @@ type QueryPostListReq struct {
 type QueryPostListResp struct {
 	Code     string               `json:"code"`
 	Message  string               `json:"message"`
-	Current  int64                `json:"current,default=1"`
+	Current  int64                `json:"current"`
 	Data     []*QueryPostListData `json:"data"`
-	PageSize int64                `json:"pageSize,default=20"`
+	PageSize int64                `json:"pageSize"`
 	Success  bool                 `json:"success"`
 	Total    int64                `json:"total"`
 }
@@ -3835,11 +3837,11 @@ type UpdateOrderSettingStatusResp struct {
 }
 
 type UpdatePostReq struct {
-	Id         int64  `json:"id"`              //编号
-	PostCode   string `json:"postCode"`        //岗位编码
+	Id         int64  `json:"id"`              //岗位id
 	PostName   string `json:"postName"`        //岗位名称
-	PostSort   int32  `json:"postSort"`        //岗位排序
+	PostCode   string `json:"postCode"`        //岗位编码
 	PostStatus int32  `json:"postStatus"`      //岗位状态
+	PostSort   int32  `json:"postSort"`        //岗位排序
 	Remark     string `json:"remark,optional"` //备注信息
 }
 
@@ -3849,8 +3851,8 @@ type UpdatePostResp struct {
 }
 
 type UpdatePostStatusReq struct {
-	PostIds    []int64 `json:"postIds"`    //编号
-	PostStatus int32   `json:"postStatus"` //岗位状态
+	Ids    []int64 `json:"ids"`    //编号
+	Status int32   `json:"status"` //岗位状态
 }
 
 type UpdatePostStatusResp struct {

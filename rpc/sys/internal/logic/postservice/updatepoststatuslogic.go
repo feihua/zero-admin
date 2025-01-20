@@ -35,7 +35,7 @@ func NewUpdatePostStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 func (l *UpdatePostStatusLogic) UpdatePostStatus(in *sysclient.UpdatePostStatusReq) (*sysclient.UpdatePostStatusResp, error) {
 	q := query.SysPost
 
-	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.PostStatus, in.PostStatus)
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.PostStatus, in.Status)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新岗位管理状态失败,参数:%+v,异常:%s", in, err.Error())

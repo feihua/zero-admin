@@ -35,7 +35,7 @@ func NewDeletePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteP
 // DeletePost 删除岗位信息
 func (l *DeletePostLogic) DeletePost(req *types.DeletePostReq) (*types.DeletePostResp, error) {
 	_, err := l.svcCtx.PostService.DeletePost(l.ctx, &sysclient.DeletePostReq{
-		Ids: req.Ids,
+		Ids: req.Ids, // 岗位ids
 	})
 
 	if err != nil {

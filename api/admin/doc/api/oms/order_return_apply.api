@@ -1,11 +1,11 @@
-info(
-	desc: "订单退货申请"
+info (
+	desc:   "订单退货申请"
 	author: "liufeihua"
-	email: "1002219331@qq.com"
+	email:  "1002219331@qq.com"
 )
 
 type (
-		// 删除订单退货申请
+	// 删除订单退货申请
 	DeleteOrderReturnApplyReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -13,7 +13,7 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-		// 更新订单退货申请状态
+	// 更新订单退货申请状态
 	UpdateOrderReturnApplyStatusReq {
 		Id               int64  `json:"id"`
 		CompanyAddressId int64  `json:"companyAddressId,optional"` // 收货地址表id
@@ -21,54 +21,50 @@ type (
 		HandleNote       string `json:"handleNote,optional"` // 处理备注
 		ReceiveNote      string `json:"receiveNote,optional"` // 收货备注
 		ReturnAmount     int64  `json:"returnAmount,optional"` // 退款金额
-
-
 	}
 	UpdateOrderReturnApplyStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
-		// 查询订单退货申请详情
+	// 查询订单退货申请详情
 	QueryOrderReturnApplyDetailReq {
-		Id         int64  `form:"id"`
+		Id int64 `form:"id"`
 	}
 	QueryOrderReturnApplyDetailData {
-		CompanyAddressId int64 `json:"companyAddressId"` //收货地址表id
-		CreateTime string `json:"createTime"` //申请时间
-		Description string `json:"description"` //描述
-		HandleMan string `json:"handleMan"` //处理人员
-		HandleNote string `json:"handleNote"` //处理备注
-		HandleTime string `json:"handleTime"` //处理时间
-		Id int64 `json:"id"` //
-		MemberUsername string `json:"memberUserName"` //会员用户名
-		OrderId int64 `json:"orderId"` //订单id
-		OrderSn string `json:"orderSn"` //订单编号
-		ProductAttr string `json:"productAttr"` //商品销售属性：颜色：红色；尺码：xl;
-		ProductBrand string `json:"productBrand"` //商品品牌
-		ProductCount int32 `json:"productCount"` //退货数量
-		ProductId int64 `json:"productId"` //退货商品id
-		ProductName string `json:"productName"` //商品名称
-		ProductPic string `json:"productPic"` //商品图片
-		ProductPrice int64 `json:"productPrice"` //商品单价
-		ProductRealPrice int64 `json:"productRealPrice"` //商品实际支付单价
-		ProofPics string `json:"proofPics"` //凭证图片，以逗号隔开
-		Reason string `json:"reason"` //原因
-		ReceiveMan string `json:"receiveMan"` //收货人
-		ReceiveNote string `json:"receiveNote"` //收货备注
-		ReceiveTime string `json:"receiveTime"` //收货时间
-		ReturnAmount int64 `json:"returnAmount"` //退款金额
-		ReturnName string `json:"returnName"` //退货人姓名
-		ReturnPhone string `json:"returnPhone"` //退货人电话
-		Status int32 `json:"status"` //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-
+		CompanyAddressId int64  `json:"companyAddressId"` //收货地址表id
+		CreateTime       string `json:"createTime"` //申请时间
+		Description      string `json:"description"` //描述
+		HandleMan        string `json:"handleMan"` //处理人员
+		HandleNote       string `json:"handleNote"` //处理备注
+		HandleTime       string `json:"handleTime"` //处理时间
+		Id               int64  `json:"id"` //
+		MemberUsername   string `json:"memberUserName"` //会员用户名
+		OrderId          int64  `json:"orderId"` //订单id
+		OrderSn          string `json:"orderSn"` //订单编号
+		ProductAttr      string `json:"productAttr"` //商品销售属性：颜色：红色；尺码：xl;
+		ProductBrand     string `json:"productBrand"` //商品品牌
+		ProductCount     int32  `json:"productCount"` //退货数量
+		ProductId        int64  `json:"productId"` //退货商品id
+		ProductName      string `json:"productName"` //商品名称
+		ProductPic       string `json:"productPic"` //商品图片
+		ProductPrice     int64  `json:"productPrice"` //商品单价
+		ProductRealPrice int64  `json:"productRealPrice"` //商品实际支付单价
+		ProofPics        string `json:"proofPics"` //凭证图片，以逗号隔开
+		Reason           string `json:"reason"` //原因
+		ReceiveMan       string `json:"receiveMan"` //收货人
+		ReceiveNote      string `json:"receiveNote"` //收货备注
+		ReceiveTime      string `json:"receiveTime"` //收货时间
+		ReturnAmount     int64  `json:"returnAmount"` //退款金额
+		ReturnName       string `json:"returnName"` //退货人姓名
+		ReturnPhone      string `json:"returnPhone"` //退货人电话
+		Status           int32  `json:"status"` //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
 	}
 	QueryOrderReturnApplyDetailResp {
-		Code     string              `json:"code"`
-		Message  string              `json:"message"`
-		Data     QueryOrderReturnApplyDetailData `json:"data"`
+		Code    string                          `json:"code"`
+		Message string                          `json:"message"`
+		Data    QueryOrderReturnApplyDetailData `json:"data"`
 	}
-		// 分页查询订单退货申请列表
+	// 分页查询订单退货申请列表
 	QueryOrderReturnApplyListReq {
 		Current        int64  `form:"current,default=1"`
 		PageSize       int64  `form:"pageSize,default=20"`
@@ -80,46 +76,44 @@ type (
 		MemberUsername string `form:"memberUserName,optional"` // 会员用户名
 		ReturnName     string `form:"returnName,optional"` // 退货人姓名
 		ReturnPhone    string `form:"returnPhone,optional"` // 退货人电话
-
 	}
 	QueryOrderReturnApplyListData {
-		CompanyAddressId int64 `json:"companyAddressId"` //收货地址表id
-		CreateTime string `json:"createTime"` //申请时间
-		Description string `json:"description"` //描述
-		HandleMan string `json:"handleMan"` //处理人员
-		HandleNote string `json:"handleNote"` //处理备注
-		HandleTime string `json:"handleTime"` //处理时间
-		Id int64 `json:"id"` //
-		MemberUsername string `json:"memberUserName"` //会员用户名
-		OrderId int64 `json:"orderId"` //订单id
-		OrderSn string `json:"orderSn"` //订单编号
-		ProductAttr string `json:"productAttr"` //商品销售属性：颜色：红色；尺码：xl;
-		ProductBrand string `json:"productBrand"` //商品品牌
-		ProductCount int32 `json:"productCount"` //退货数量
-		ProductId int64 `json:"productId"` //退货商品id
-		ProductName string `json:"productName"` //商品名称
-		ProductPic string `json:"productPic"` //商品图片
-		ProductPrice int64 `json:"productPrice"` //商品单价
-		ProductRealPrice int64 `json:"productRealPrice"` //商品实际支付单价
-		ProofPics string `json:"proofPics"` //凭证图片，以逗号隔开
-		Reason string `json:"reason"` //原因
-		ReceiveMan string `json:"receiveMan"` //收货人
-		ReceiveNote string `json:"receiveNote"` //收货备注
-		ReceiveTime string `json:"receiveTime"` //收货时间
-		ReturnAmount int64 `json:"returnAmount"` //退款金额
-		ReturnName string `json:"returnName"` //退货人姓名
-		ReturnPhone string `json:"returnPhone"` //退货人电话
-		Status int32 `json:"status"` //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-
+		CompanyAddressId int64  `json:"companyAddressId"` //收货地址表id
+		CreateTime       string `json:"createTime"` //申请时间
+		Description      string `json:"description"` //描述
+		HandleMan        string `json:"handleMan"` //处理人员
+		HandleNote       string `json:"handleNote"` //处理备注
+		HandleTime       string `json:"handleTime"` //处理时间
+		Id               int64  `json:"id"` //
+		MemberUsername   string `json:"memberUserName"` //会员用户名
+		OrderId          int64  `json:"orderId"` //订单id
+		OrderSn          string `json:"orderSn"` //订单编号
+		ProductAttr      string `json:"productAttr"` //商品销售属性：颜色：红色；尺码：xl;
+		ProductBrand     string `json:"productBrand"` //商品品牌
+		ProductCount     int32  `json:"productCount"` //退货数量
+		ProductId        int64  `json:"productId"` //退货商品id
+		ProductName      string `json:"productName"` //商品名称
+		ProductPic       string `json:"productPic"` //商品图片
+		ProductPrice     int64  `json:"productPrice"` //商品单价
+		ProductRealPrice int64  `json:"productRealPrice"` //商品实际支付单价
+		ProofPics        string `json:"proofPics"` //凭证图片，以逗号隔开
+		Reason           string `json:"reason"` //原因
+		ReceiveMan       string `json:"receiveMan"` //收货人
+		ReceiveNote      string `json:"receiveNote"` //收货备注
+		ReceiveTime      string `json:"receiveTime"` //收货时间
+		ReturnAmount     int64  `json:"returnAmount"` //退款金额
+		ReturnName       string `json:"returnName"` //退货人姓名
+		ReturnPhone      string `json:"returnPhone"` //退货人电话
+		Status           int32  `json:"status"` //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
 	}
 	QueryOrderReturnApplyListResp {
-		Code     string              `json:"code"`
-		Message  string              `json:"message"`
-		Current  int64               `json:"current,default=1"`
+		Code     string                           `json:"code"`
+		Message  string                           `json:"message"`
+		Current  int64                            `json:"current,default=1"`
 		Data     []*QueryOrderReturnApplyListData `json:"data"`
-		PageSize int64               `json:"pageSize,default=20"`
-		Success  bool                `json:"success"`
-		Total    int64               `json:"total"`
+		PageSize int64                            `json:"pageSize,default=20"`
+		Success  bool                             `json:"success"`
+		Total    int64                            `json:"total"`
 	}
 )
 
@@ -130,7 +124,6 @@ type (
 	prefix:     /api/order/returnApply
 )
 service admin-api {
-
 	// 删除订单退货申请
 	@handler DeleteOrderReturnApply
 	get /deleteOrderReturnApply (DeleteOrderReturnApplyReq) returns (DeleteOrderReturnApplyResp)
@@ -146,5 +139,5 @@ service admin-api {
 	// 分页查询订单退货申请列表
 	@handler QueryOrderReturnApplyList
 	get /queryOrderReturnApplyList (QueryOrderReturnApplyListReq) returns (QueryOrderReturnApplyListResp)
-
 }
+

@@ -58,7 +58,7 @@ type sysRole struct {
 	RoleSort   field.Int32  // 角色排序
 	DataScope  field.Int32  // 数据权限
 	IsDeleted  field.Int32  // 是否删除  0：否  1：是
-	IsAdmin    field.Int32  // 是否超级管理员
+	IsAdmin    field.Int32  // 是否超级管理员:  0：否  1：是
 	Remark     field.String // 备注
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间

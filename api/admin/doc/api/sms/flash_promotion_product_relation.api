@@ -6,9 +6,8 @@ info (
 
 type (
 	AddFlashPromotionProductRelationReq {
-		Data        []AddFlashPromotionProductRelationData ` json:"data"` // 限时购id
+		Data []AddFlashPromotionProductRelationData ` json:"data"` // 限时购id
 	}
-
 	AddFlashPromotionProductRelationData {
 		FlashPromotionProductRelationID        int64 ` json:"flashPromotionId"` // 限时购id
 		FlashPromotionProductRelationSessionID int64 `json:"flashPromotionSessionId"` // 编号
@@ -18,8 +17,6 @@ type (
 		FlashPromotionProductRelationLimit     int32 `json:"promotionPerLimit"` // 每人限购数量
 		Sort                                   int32 ` json:"sort"`
 	}
-
-
 	AddFlashPromotionProductRelationResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
@@ -69,8 +66,8 @@ type (
 		Message string `json:"message"`
 	}
 	DeleteFlashPromotionProductRelationReq {
-		Ids []int64 `form:"ids"`
-		FlashPromotionId int64 `form:"flashPromotionId"`
+		Ids              []int64 `form:"ids"`
+		FlashPromotionId int64   `form:"flashPromotionId"`
 	}
 	DeleteFlashPromotionProductRelationResp {
 		Code    string `json:"code"`

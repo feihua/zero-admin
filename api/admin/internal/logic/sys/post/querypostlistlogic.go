@@ -53,16 +53,17 @@ func (l *QueryPostListLogic) QueryPostList(req *types.QueryPostListReq) (*types.
 
 	for _, post := range result.List {
 		list = append(list, &types.QueryPostListData{
-			CreateBy:   post.CreateBy,
-			CreateTime: post.CreateTime,
-			Id:         post.Id,
-			PostCode:   post.PostCode,
-			PostName:   post.PostName,
-			PostSort:   post.PostSort,
-			PostStatus: post.PostStatus,
-			Remark:     post.Remark,
-			UpdateBy:   post.UpdateBy,
-			UpdateTime: post.UpdateTime,
+			Id:         post.Id,         // 岗位id
+			PostName:   post.PostName,   // 岗位名称
+			PostCode:   post.PostCode,   // 岗位编码
+			PostStatus: post.PostStatus, // 岗位状态
+			PostSort:   post.PostSort,   // 岗位排序
+			Remark:     post.Remark,     // 备注信息
+			IsDeleted:  post.IsDeleted,  // 是否删除  0：否  1：是
+			CreateBy:   post.CreateBy,   // 创建者
+			CreateTime: post.CreateTime, // 创建时间
+			UpdateBy:   post.UpdateBy,   // 更新者
+			UpdateTime: post.UpdateTime, // 更新时间
 		})
 	}
 

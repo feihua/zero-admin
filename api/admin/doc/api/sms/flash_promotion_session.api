@@ -21,7 +21,7 @@ type (
 	}
 	ListFlashPromotionSessionData {
 		Id         int64  `json:"id"` // 编号
-		Key         string  `json:"key"` // 编号
+		Key        string `json:"key"` // 编号
 		Name       string `json:"name"` // 场次名称
 		StartTime  string `json:"startTime"` // 每日开始时间
 		EndTime    string `json:"endTime"` // 每日结束时间
@@ -55,9 +55,8 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-
 	UpdateFlashPromotionSessionStatusReq {
-		Ids             []int64 `json:"ids"`
+		Ids    []int64 `json:"ids"`
 		Status int32   `json:"status"`
 	}
 	UpdateFlashPromotionSessionStatusResp {
@@ -88,7 +87,6 @@ service admin-api {
 	//更新秒杀活动状态
 	@handler UpdateFlashPromotionSessionStatus
 	post /updateSessionStatus (UpdateFlashPromotionSessionStatusReq) returns (UpdateFlashPromotionSessionStatusResp)
-
 
 	//删除限时购场次
 	@handler FlashPromotionSessionDelete

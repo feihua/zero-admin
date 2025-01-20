@@ -9,6 +9,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,30 +34,63 @@ func NewUpdatePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 }
 
 // UpdatePost 更新岗位信息
-// 1.根据岗位id查询岗位是否已存在
-// 3.岗位存在时,则直接更新岗位
+// 1.根据岗位id查询岗位是否已存在,如果岗位不存在,则直接返回
+// 2.查询postName是否被占用,如果被占用,则直接返回
+// 3.查询根据postCode是否被占用,如果被占用,则直接返回
+// 4.岗位存在时,则直接更新岗位
 func (l *UpdatePostLogic) UpdatePost(in *sysclient.UpdatePostReq) (*sysclient.UpdatePostResp, error) {
 	q := query.SysPost.WithContext(l.ctx)
 
-	//1.根据岗位id查询岗位是否已存在
-	_, err := q.Where(query.SysPost.ID.Eq(in.Id)).First()
+	// 1.根据岗位id查询岗位是否已存在
+	post, err := q.Where(query.SysPost.ID.Eq(in.Id)).First()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据岗位id：%d,查询岗位信息失败,异常:%s", in.Id, err.Error())
 		return nil, errors.New(fmt.Sprintf("查询岗位信息失败"))
 	}
 
-	// 3.岗位存在时,则直接更新岗位
-	var job = &model.SysPost{
-		ID:         in.Id,
-		PostName:   in.PostName,
-		PostCode:   in.PostCode,
-		PostStatus: in.PostStatus,
-		PostSort:   in.PostSort,
-		Remark:     in.Remark,
-		UpdateBy:   in.UpdateBy,
+	// 2.查询postName是否被占用,如果被占用,则直接返回
+	postName := in.PostName
+	count, err := q.Where(query.SysPost.PostName.Eq(postName), query.SysPost.ID.Neq(in.Id)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据岗位名称：%s,查询岗位信息,异常:%s", postName, err.Error())
+		return nil, errors.New(fmt.Sprintf("添加岗位信息失败"))
 	}
-	_, err = q.Updates(job)
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("添加岗位信息失败,岗位名称：%s,已存在", postName))
+	}
+
+	// 3.查询根据postCode是否被占用,如果被占用,则直接返回
+	postCode := in.PostCode
+	count, err = q.Where(query.SysPost.PostCode.Eq(postCode), query.SysPost.ID.Neq(in.Id)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据岗位编码：%s,查询岗位信息,异常:%s", postName, err.Error())
+		return nil, errors.New(fmt.Sprintf("添加岗位信息失败"))
+	}
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("添加岗位信息失败，岗位编码：%s,已存在", postCode))
+	}
+
+	// 4.岗位存在时,则直接更新岗位
+	now := time.Now()
+	var job = &model.SysPost{
+		ID:         in.Id,           // 岗位id
+		PostName:   in.PostName,     // 岗位名称
+		PostCode:   in.PostCode,     // 岗位编码
+		PostStatus: in.PostStatus,   // 岗位状态
+		PostSort:   in.PostSort,     // 岗位排序
+		Remark:     in.Remark,       // 备注信息
+		CreateBy:   post.CreateBy,   // 创建者
+		CreateTime: post.CreateTime, // 创建时间
+		UpdateBy:   in.UpdateBy,     // 更新者
+		UpdateTime: &now,            // 更新时间
+	}
+
+	err = l.svcCtx.DB.Model(&model.SysPost{}).WithContext(l.ctx).Where(query.SysPost.ID.Eq(in.Id)).Save(job).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新岗位信息失败,参数:%+v,异常:%s", job, err.Error())

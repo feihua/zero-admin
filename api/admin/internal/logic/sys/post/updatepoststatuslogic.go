@@ -35,9 +35,9 @@ func NewUpdatePostStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // UpdatePostStatus 更新岗位状态
 func (l *UpdatePostStatusLogic) UpdatePostStatus(req *types.UpdatePostStatusReq) (resp *types.UpdatePostStatusResp, err error) {
 	_, err = l.svcCtx.PostService.UpdatePostStatus(l.ctx, &sysclient.UpdatePostStatusReq{
-		Ids:        req.PostIds,
-		PostStatus: req.PostStatus,
-		UpdateBy:   l.ctx.Value("userName").(string),
+		Ids:      req.Ids,    // 岗位id
+		Status:   req.Status, // 岗位状态
+		UpdateBy: l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

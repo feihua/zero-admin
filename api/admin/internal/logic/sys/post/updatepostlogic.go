@@ -35,12 +35,12 @@ func NewUpdatePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateP
 // UpdatePost 更新岗位信息
 func (l *UpdatePostLogic) UpdatePost(req *types.UpdatePostReq) (*types.UpdatePostResp, error) {
 	_, err := l.svcCtx.PostService.UpdatePost(l.ctx, &sysclient.UpdatePostReq{
-		Id:         req.Id,
-		PostCode:   req.PostCode,
-		PostName:   req.PostName,
-		PostSort:   req.PostSort,
-		PostStatus: req.PostStatus,
-		Remark:     req.Remark,
+		Id:         req.Id,         // 岗位id
+		PostName:   req.PostName,   // 岗位名称
+		PostCode:   req.PostCode,   // 岗位编码
+		PostStatus: req.PostStatus, // 岗位状态
+		PostSort:   req.PostSort,   // 岗位排序
+		Remark:     req.Remark,     // 备注信息
 		UpdateBy:   l.ctx.Value("userName").(string),
 	})
 
