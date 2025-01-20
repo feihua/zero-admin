@@ -6,7 +6,7 @@ Etcd:
   Key: sms.rpc
 
 Mysql:
-  Datasource: root:123456@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  Datasource: 12341qweqfsd2356@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
 Log:
   ServiceName: sms-service
