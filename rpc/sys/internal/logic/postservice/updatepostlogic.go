@@ -55,24 +55,24 @@ func (l *UpdatePostLogic) UpdatePost(in *sysclient.UpdatePostReq) (*sysclient.Up
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据岗位名称：%s,查询岗位信息,异常:%s", postName, err.Error())
-		return nil, errors.New(fmt.Sprintf("添加岗位信息失败"))
+		return nil, errors.New(fmt.Sprintf("更新岗位信息失败"))
 	}
 
 	if count > 0 {
-		return nil, errors.New(fmt.Sprintf("添加岗位信息失败,岗位名称：%s,已存在", postName))
+		return nil, errors.New(fmt.Sprintf("更新岗位信息失败,岗位名称：%s,已存在", postName))
 	}
 
-	// 3.查询根据postCode是否被占用,如果被占用,则直接返回
+	// 3.查询postCode是否被占用,如果被占用,则直接返回
 	postCode := in.PostCode
 	count, err = q.Where(query.SysPost.PostCode.Eq(postCode), query.SysPost.ID.Neq(in.Id)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据岗位编码：%s,查询岗位信息,异常:%s", postName, err.Error())
-		return nil, errors.New(fmt.Sprintf("添加岗位信息失败"))
+		return nil, errors.New(fmt.Sprintf("更新岗位信息失败"))
 	}
 
 	if count > 0 {
-		return nil, errors.New(fmt.Sprintf("添加岗位信息失败，岗位编码：%s,已存在", postCode))
+		return nil, errors.New(fmt.Sprintf("更新岗位信息失败，岗位编码：%s,已存在", postCode))
 	}
 
 	// 4.岗位存在时,则直接更新岗位
