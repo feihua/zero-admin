@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
+	"os"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/config"
 	couponhistoryserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/couponhistoryservice"
@@ -33,6 +35,8 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+	logx.MustSetup(c.Log)                     // 设置日志配置
+	logx.AddWriter(logx.NewWriter(os.Stdout)) // 添加控制台输出
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {

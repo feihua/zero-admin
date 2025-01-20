@@ -61,8 +61,8 @@ CmsRpc:
 Log:
   ServiceName: front-api
   Stat: false # go-zero 版本 >= 1.5.0 才支持
-#  Mode: file
-#  Path: logs/front
+  Mode: file
+  Path: logs/front
 Prometheus:
   Host: 127.0.0.1
   Port: 9199

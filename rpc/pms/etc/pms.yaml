@@ -11,8 +11,8 @@ Mysql:
 Log:
   ServiceName: pms-service
   Stat: false # go-zero 版本 >= 1.5.0 才支持
-#  Mode: file
-#  Path: logs/pms
+  Mode: file
+  Path: logs/pms
 Prometheus:
   Host: 127.0.0.1
   Port: 8182

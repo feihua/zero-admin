@@ -11,8 +11,8 @@ Mysql:
 Log:
   ServiceName: sms-service
   Stat: false # go-zero 版本 >= 1.5.0 才支持
-#  Mode: file
-#  Path: logs/sms
+  Mode: file
+  Path: logs/sms
 Prometheus:
   Host: 127.0.0.1
   Port: 8184

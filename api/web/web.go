@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
+	"os"
 
 	"github.com/feihua/zero-admin/api/web/internal/config"
 	"github.com/feihua/zero-admin/api/web/internal/handler"
@@ -19,6 +21,8 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+	logx.MustSetup(c.Log)                     // 设置日志配置
+	logx.AddWriter(logx.NewWriter(os.Stdout)) // 添加控制台输出
 
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()

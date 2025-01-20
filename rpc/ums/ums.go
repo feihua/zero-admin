@@ -22,6 +22,8 @@ import (
 	membertaskserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/membertaskservice"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logx"
+	"os"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -37,6 +39,8 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+	logx.MustSetup(c.Log)                     // 设置日志配置
+	logx.AddWriter(logx.NewWriter(os.Stdout)) // 添加控制台输出
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
