@@ -35,6 +35,29 @@ func NewUpdateDeptStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 func (l *UpdateDeptStatusLogic) UpdateDeptStatus(in *sysclient.UpdateDeptStatusReq) (*sysclient.UpdateDeptStatusResp, error) {
 	q := query.SysDept
 
+	if in.DeptStatus == 1 {
+		for _, id := range in.Ids {
+			dept, err := query.SysDept.WithContext(l.ctx).Where(q.ID.Eq(id)).First()
+
+			if err != nil {
+				logc.Errorf(l.ctx, "更新部门信息表状态失败,参数:%+v,异常:%s", in, err.Error())
+				return nil, errors.New("更新部门信息表状态失败")
+			}
+
+			if dept == nil {
+				return nil, errors.New("更新部门信息表状态失败,部门不存在")
+			}
+
+			parentIds := GetParentIds(dept.ParentIds)
+			_, err = query.SysDept.WithContext(l.ctx).Where(q.ID.In(parentIds...)).Update(q.DeptStatus, in.DeptStatus)
+			if err != nil {
+				logc.Errorf(l.ctx, "修改上级部门状态失败,异常:%s", err.Error())
+				return nil, errors.New(fmt.Sprintf("更新部门信息表状态失败"))
+			}
+		}
+
+	}
+
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.DeptStatus, in.DeptStatus)
 
 	if err != nil {
