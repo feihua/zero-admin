@@ -37,11 +37,11 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip, browser, os string) (*types.LoginResp, error) {
 
 	resp, err := l.svcCtx.UserService.Login(l.ctx, &sysclient.LoginReq{
-		Account:   strings.TrimSpace(req.Account),
-		Password:  strings.TrimSpace(req.Password),
-		IpAddress: ip,
-		Browser:   browser,
-		Os:        os,
+		Account:   strings.TrimSpace(req.Account),  // 用户名
+		Password:  strings.TrimSpace(req.Password), // 密码
+		IpAddress: ip,                              // ip地址
+		Browser:   browser,                         // 浏览器
+		Os:        os,                              // 操作系统
 	})
 
 	if err != nil {
@@ -50,7 +50,7 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip, browser, os string) 
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	//把能访问的url存在在redis，在middleware中校验
+	// 把能访问的url存在在redis，在middleware中校验
 	key := "zero:mall:token:" + strconv.FormatInt(resp.Id, 10)
 	err = l.svcCtx.Redis.Set(key, strings.Join(resp.ApiUrls, ","))
 	if err != nil {

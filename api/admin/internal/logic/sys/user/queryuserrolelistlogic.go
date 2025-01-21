@@ -45,16 +45,21 @@ func (l *QueryUserRoleListLogic) QueryUserRoleList(req *types.QueryUserRoleListR
 
 	var roleList []types.RoleListData
 
-	for _, item := range result.List {
+	for _, detail := range result.List {
 		roleList = append(roleList, types.RoleListData{
-			Id:         item.Id,
-			RoleName:   item.RoleName,
-			Remark:     item.Remark,
-			CreateBy:   item.CreateBy,
-			CreateTime: item.CreateTime,
-			UpdateBy:   item.UpdateBy,
-			UpdateTime: item.UpdateTime,
-			RoleStatus: item.RoleStatus,
+			Id:         detail.Id,         // 编号
+			RoleName:   detail.RoleName,   // 角色名称
+			RoleKey:    detail.RoleKey,    // 权限字符
+			RoleStatus: detail.RoleStatus, // 角色状态
+			RoleSort:   detail.RoleSort,   // 角色排序
+			DataScope:  detail.DataScope,  // 数据权限
+			IsDeleted:  detail.IsDeleted,  // 是否删除  0：否  1：是
+			IsAdmin:    detail.IsAdmin,    // 是否超级管理员:  0：否  1：是
+			Remark:     detail.Remark,     // 备注
+			CreateBy:   detail.CreateBy,   // 创建者
+			CreateTime: detail.CreateTime, // 创建时间
+			UpdateBy:   detail.UpdateBy,   // 更新者
+			UpdateTime: detail.UpdateTime, // 更新时间
 		})
 	}
 

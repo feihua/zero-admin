@@ -498,13 +498,13 @@ type AddProductResp struct {
 }
 
 type AddRoleReq struct {
-	DataScope  int32  `json:"dataScope,default=0"` //数据权限
-	IsAdmin    int32  `json:"isAdmin,default=0"`   //是否超级管理员
-	Remark     string `json:"remark,optional"`     //备注
-	RoleKey    string `json:"roleKey"`             //权限字符
-	RoleName   string `json:"roleName"`            //角色名称
-	RoleSort   int32  `json:"roleSort"`            //角色排序
-	RoleStatus int32  `json:"roleStatus"`          //角色状态
+	RoleName   string `json:"roleName"`        //角色名称
+	RoleKey    string `json:"roleKey"`         //权限字符
+	RoleStatus int32  `json:"roleStatus"`      //角色状态
+	RoleSort   int32  `json:"roleSort"`        //角色排序
+	DataScope  int32  `json:"dataScope"`       //数据权限
+	IsAdmin    int32  `json:"isAdmin"`         //是否超级管理员:  0：否  1：是
+	Remark     string `json:"remark,optional"` //备注
 }
 
 type AddRoleResp struct {
@@ -547,15 +547,16 @@ type AddSubjectResp struct {
 }
 
 type AddUserReq struct {
-	Avatar     string  `json:"avatar,optional"`  //头像
-	DeptId     int64   `json:"deptId,optional"`  //部门id
-	PostIds    []int64 `json:"postIds,optional"` //部门id
-	Email      string  `json:"email,optional"`   //邮箱
-	Mobile     string  `json:"mobile"`           //手机号
-	NickName   string  `json:"nickName"`         //昵称
-	Remark     string  `json:"remark,optional"`  //备注信息
-	UserName   string  `json:"userName"`         //用户名
-	UserStatus int32   `json:"userStatus"`       //帐号状态（0正常 1停用）
+	UserName   string  `json:"userName"`        //用户名
+	NickName   string  `json:"nickName"`        //昵称
+	Avatar     string  `json:"avatar,optional"` //头像
+	Password   string  `json:"password"`        //密码
+	Email      string  `json:"email"`           //邮箱
+	Mobile     string  `json:"mobile"`          //手机号
+	UserStatus int32   `json:"userStatu"`       //帐号状态（0正常 1停用）
+	DeptId     int64   `json:"deptId"`          //部门id
+	Remark     string  `json:"remark,optional"` //备注信息
+	PostIds    []int64 `json:"postIds"`         //部门id
 }
 
 type AddUserResp struct {
@@ -1717,8 +1718,8 @@ type LoginData struct {
 }
 
 type LoginReq struct {
-	Account  string `json:"account"` //手机号或者用户名
-	Password string `json:"password"`
+	Account  string `json:"account"`  //手机号或者用户名
+	Password string `json:"password"` //密码
 }
 
 type LoginResp struct {
@@ -1736,11 +1737,11 @@ type MemberPriceList struct {
 }
 
 type MenuTreeListData struct {
-	Key      string `json:"key"`      // 菜单名称
+	Key      string `json:"key"`      // 编号
 	Title    string `json:"title"`    // 菜单名称
 	ParentId int64  `json:"parentId"` // 父菜单ID，一级菜单为0
-	Id       int64  `json:"id"`       // 父菜单ID，一级菜单为0
-	Label    string `json:"label"`    // 父菜单ID，一级菜单为0
+	Id       int64  `json:"id"`       // 编号
+	Label    string `json:"label"`    // 菜单名称
 }
 
 type MenuTreeMeta struct {
@@ -3018,16 +3019,17 @@ type QueryProductListResp struct {
 }
 
 type QueryRoleDetailData struct {
+	Id         int64  `json:"id"`         //编号
+	RoleName   string `json:"roleName"`   //角色名称
+	RoleKey    string `json:"roleKey"`    //权限字符
+	RoleStatus int32  `json:"roleStatus"` //角色状态
+	RoleSort   int32  `json:"roleSort"`   //角色排序
+	DataScope  int32  `json:"dataScope"`  //数据权限
+	IsDeleted  int32  `json:"isDeleted"`  //是否删除  0：否  1：是
+	IsAdmin    int32  `json:"isAdmin"`    //是否超级管理员:  0：否  1：是
+	Remark     string `json:"remark"`     //备注
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
-	DataScope  int32  `json:"dataScope"`  //数据权限
-	Id         int64  `json:"id"`         //编号
-	IsAdmin    int32  `json:"isAdmin"`    //是否超级管理员
-	Remark     string `json:"remark"`     //备注
-	RoleKey    string `json:"roleKey"`    //权限字符
-	RoleName   string `json:"roleName"`   //角色名称
-	RoleSort   int32  `json:"roleSort"`   //角色排序
-	RoleStatus int32  `json:"roleStatus"` //角色状态
 	UpdateBy   string `json:"updateBy"`   //更新者
 	UpdateTime string `json:"updateTime"` //更新时间
 }
@@ -3043,16 +3045,17 @@ type QueryRoleDetailResp struct {
 }
 
 type QueryRoleListData struct {
+	Id         int64  `json:"id"`         //编号
+	RoleName   string `json:"roleName"`   //角色名称
+	RoleKey    string `json:"roleKey"`    //权限字符
+	RoleStatus int32  `json:"roleStatus"` //角色状态
+	RoleSort   int32  `json:"roleSort"`   //角色排序
+	DataScope  int32  `json:"dataScope"`  //数据权限
+	IsDeleted  int32  `json:"isDeleted"`  //是否删除  0：否  1：是
+	IsAdmin    int32  `json:"isAdmin"`    //是否超级管理员:  0：否  1：是
+	Remark     string `json:"remark"`     //备注
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
-	DataScope  int32  `json:"dataScope"`  //数据权限
-	Id         int64  `json:"id"`         //编号
-	IsAdmin    int32  `json:"isAdmin"`    //是否超级管理员
-	Remark     string `json:"remark"`     //备注
-	RoleKey    string `json:"roleKey"`    //权限字符
-	RoleName   string `json:"roleName"`   //角色名称
-	RoleSort   int32  `json:"roleSort"`   //角色排序
-	RoleStatus int32  `json:"roleStatus"` //角色状态
 	UpdateBy   string `json:"updateBy"`   //更新者
 	UpdateTime string `json:"updateTime"` //更新时间
 }
@@ -3087,21 +3090,19 @@ type QueryRoleMenuListResp struct {
 }
 
 type QueryRoleUserListData struct {
+	Id         int64  `json:"id"`         //编号
+	UserName   string `json:"userName"`   //用户名
+	NickName   string `json:"nickName"`   //昵称
 	Avatar     string `json:"avatar"`     //头像
+	Email      string `json:"email"`      //邮箱
+	Mobile     string `json:"mobile"`     //手机号
+	UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
+	DeptId     int64  `json:"deptId"`     //部门id
+	Remark     string `json:"remark"`     //备注信息
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
-	DeptId     int64  `json:"deptId"`     //部门id
-	Email      string `json:"email"`      //邮箱
-	Id         int64  `json:"id"`         //编号
-	LoginIp    string `json:"loginIp"`    //登录ip
-	LoginTime  string `json:"loginTime"`  //登录时间
-	Mobile     string `json:"mobile"`     //手机号
-	NickName   string `json:"nickName"`   //昵称
-	Remark     string `json:"remark"`     //备注信息
 	UpdateBy   string `json:"updateBy"`   //更新者
 	UpdateTime string `json:"updateTime"` //更新时间
-	UserName   string `json:"userName"`   //用户名
-	UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
 }
 
 type QueryRoleUserListReq struct {
@@ -3208,23 +3209,25 @@ type QuerySubjectListResp struct {
 }
 
 type QueryUserDetailData struct {
-	Avatar     string  `json:"avatar"`     //头像
-	CreateBy   string  `json:"createBy"`   //创建者
-	CreateTime string  `json:"createTime"` //创建时间
-	DeptId     int64   `json:"deptId"`     //部门id
-	Email      string  `json:"email"`      //邮箱
-	Id         int64   `json:"id"`         //编号
-	LoginIp    string  `json:"loginIp"`    //登录ip
-	LoginTime  string  `json:"loginTime"`  //登录时间
-	Mobile     string  `json:"mobile"`     //手机号
-	NickName   string  `json:"nickName"`   //昵称
-	Remark     string  `json:"remark"`     //备注信息
-	Salt       string  `json:"salt"`       //加密盐
-	UpdateBy   string  `json:"updateBy"`   //更新者
-	UpdateTime string  `json:"updateTime"` //更新时间
-	UserName   string  `json:"userName"`   //用户名
-	UserStatus int32   `json:"userStatus"` //帐号状态（0正常 1停用）
-	PostIds    []int64 `json:"postIds"`    //部门id
+	Id           int64   `json:"id"`           //编号
+	UserName     string  `json:"userName"`     //用户名
+	NickName     string  `json:"nickName"`     //昵称
+	Avatar       string  `json:"avatar"`       //头像
+	Email        string  `json:"email"`        //邮箱
+	Mobile       string  `json:"mobile"`       //手机号
+	UserStatus   int32   `json:"userStatus"`   //帐号状态（0正常 1停用）
+	DeptId       int64   `json:"deptId"`       //部门id
+	Remark       string  `json:"remark"`       //备注信息
+	IsDeleted    int32   `json:"isDeleted"`    //是否删除  0：否  1：是
+	LoginTime    string  `json:"loginTime"`    //登录时间
+	LoginIp      string  `json:"loginIp"`      //登录ip
+	LoginOs      string  `json:"loginOs"`      //登录os
+	LoginBrowser string  `json:"loginBrowser"` //登录浏览器
+	CreateBy     string  `json:"createBy"`     //创建者
+	CreateTime   string  `json:"createTime"`   //创建时间
+	UpdateBy     string  `json:"updateBy"`     //更新者
+	UpdateTime   string  `json:"updateTime"`   //更新时间
+	PostIds      []int64 `json:"postIds"`      //部门ids
 }
 
 type QueryUserDetailReq struct {
@@ -3238,21 +3241,24 @@ type QueryUserDetailResp struct {
 }
 
 type QueryUserListData struct {
-	Avatar     string `json:"avatar"`     //头像
-	CreateBy   string `json:"createBy"`   //创建者
-	CreateTime string `json:"createTime"` //创建时间
-	DeptId     int64  `json:"deptId"`     //部门id
-	Email      string `json:"email"`      //邮箱
-	Id         int64  `json:"id"`         //编号
-	LoginIp    string `json:"loginIp"`    //登录ip
-	LoginTime  string `json:"loginTime"`  //登录时间
-	Mobile     string `json:"mobile"`     //手机号
-	NickName   string `json:"nickName"`   //昵称
-	Remark     string `json:"remark"`     //备注信息
-	UpdateBy   string `json:"updateBy"`   //更新者
-	UpdateTime string `json:"updateTime"` //更新时间
-	UserName   string `json:"userName"`   //用户名
-	UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
+	Id           int64  `json:"id"`           //编号
+	UserName     string `json:"userName"`     //用户名
+	NickName     string `json:"nickName"`     //昵称
+	Avatar       string `json:"avatar"`       //头像
+	Email        string `json:"email"`        //邮箱
+	Mobile       string `json:"mobile"`       //手机号
+	UserStatus   int32  `json:"userStatus"`   //帐号状态（0正常 1停用）
+	DeptId       int64  `json:"deptId"`       //部门id
+	Remark       string `json:"remark"`       //备注信息
+	IsDeleted    int32  `json:"isDeleted"`    //是否删除  0：否  1：是
+	LoginTime    string `json:"loginTime"`    //登录时间
+	LoginIp      string `json:"loginIp"`      //登录ip
+	LoginOs      string `json:"loginOs"`      //登录os
+	LoginBrowser string `json:"loginBrowser"` //登录浏览器
+	CreateBy     string `json:"createBy"`     //创建者
+	CreateTime   string `json:"createTime"`   //创建时间
+	UpdateBy     string `json:"updateBy"`     //更新者
+	UpdateTime   string `json:"updateTime"`   //更新时间
 }
 
 type QueryUserListReq struct {
@@ -3299,14 +3305,19 @@ type ReSetPasswordResp struct {
 }
 
 type RoleListData struct {
-	Id         int64  `json:"id"`         // 编号
-	RoleName   string `json:"roleName"`   // 角色名称
-	Remark     string `json:"remark"`     // 备注
-	CreateBy   string `json:"createBy"`   // 创建人
-	CreateTime string `json:"createTime"` // 创建时间
-	UpdateBy   string `json:"updateBy"`   // 更新人
-	UpdateTime string `json:"updateTime"` // 更新时间
-	RoleStatus int32  `json:"roleStatus"` // 状态
+	Id         int64  `json:"id"`         //编号
+	RoleName   string `json:"roleName"`   //角色名称
+	RoleKey    string `json:"roleKey"`    //权限字符
+	RoleStatus int32  `json:"roleStatus"` //角色状态
+	RoleSort   int32  `json:"roleSort"`   //角色排序
+	DataScope  int32  `json:"dataScope"`  //数据权限
+	IsDeleted  int32  `json:"isDeleted"`  //是否删除  0：否  1：是
+	IsAdmin    int32  `json:"isAdmin"`    //是否超级管理员:  0：否  1：是
+	Remark     string `json:"remark"`     //备注
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
 }
 
 type RoleMenuListData struct {
@@ -4151,14 +4162,14 @@ type UpdateRoleMenuListResp struct {
 }
 
 type UpdateRoleReq struct {
-	DataScope  int32  `json:"dataScope,default=0"` //数据权限
-	Id         int64  `json:"id"`                  //编号
-	IsAdmin    int32  `json:"isAdmin,default=0"`   //是否超级管理员
-	Remark     string `json:"remark,optional"`     //备注
-	RoleKey    string `json:"roleKey"`             //权限字符
-	RoleName   string `json:"roleName"`            //角色名称
-	RoleSort   int32  `json:"roleSort"`            //角色排序
-	RoleStatus int32  `json:"roleStatus"`          //角色状态
+	Id         int64  `json:"id"`              //编号
+	RoleName   string `json:"roleName"`        //角色名称
+	RoleKey    string `json:"roleKey"`         //权限字符
+	RoleStatus int32  `json:"roleStatus"`      //角色状态
+	RoleSort   int32  `json:"roleSort"`        //角色排序
+	DataScope  int32  `json:"dataScope"`       //数据权限
+	IsAdmin    int32  `json:"isAdmin"`         //是否超级管理员:  0：否  1：是
+	Remark     string `json:"remark,optional"` //备注
 }
 
 type UpdateRoleResp struct {
@@ -4247,16 +4258,17 @@ type UpdateSubjectStatusResp struct {
 }
 
 type UpdateUserReq struct {
-	Avatar     string  `json:"avatar,optional"`  //头像
-	DeptId     int64   `json:"deptId,optional"`  //部门id
-	PostIds    []int64 `json:"postIds,optional"` //部门id
-	Email      string  `json:"email"`            //邮箱
-	Id         int64   `json:"id"`               //编号
-	Mobile     string  `json:"mobile"`           //手机号
-	NickName   string  `json:"nickName"`         //昵称
-	Remark     string  `json:"remark,optional"`  //备注信息
-	UserName   string  `json:"userName"`         //用户名
-	UserStatus int32   `json:"userStatus"`       //帐号状态（0正常 1停用）
+	Id         int64   `json:"id"`              //编号
+	UserName   string  `json:"userName"`        //用户名
+	NickName   string  `json:"nickName"`        //昵称
+	Avatar     string  `json:"avatar,optional"` //头像
+	Password   string  `json:"password"`        //密码
+	Email      string  `json:"email"`           //邮箱
+	Mobile     string  `json:"mobile"`          //手机号
+	UserStatus int32   `json:"userStatus"`      //帐号状态（0正常 1停用）
+	DeptId     int64   `json:"deptId"`          //部门id
+	Remark     string  `json:"remark,optional"` //备注信息
+	PostIds    []int64 `json:"postIds"`         //部门id
 }
 
 type UpdateUserResp struct {
@@ -4291,10 +4303,10 @@ type UploadResp struct {
 }
 
 type UserInfoData struct {
-	Avatar      string             `json:"avatar"`
-	Name        string             `json:"name"`
-	MenuTree    []*ListMenuTree    `json:"menuTree"`
-	MenuTreeVue []*ListMenuTreeVue `json:"menuTreeVue"`
+	Avatar      string             `json:"avatar"`      //用户头像
+	Name        string             `json:"name"`        //名称
+	MenuTree    []*ListMenuTree    `json:"menuTree"`    //菜单
+	MenuTreeVue []*ListMenuTreeVue `json:"menuTreeVue"` //菜单
 }
 
 type UserRoleListData struct {

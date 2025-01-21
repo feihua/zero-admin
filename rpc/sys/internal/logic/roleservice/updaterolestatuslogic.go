@@ -32,30 +32,17 @@ func NewUpdateRoleStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // UpdateRoleStatus 更新角色信息状态
-// 1.排除超级管理员
-// 2.更新角色信息状态
 func (l *UpdateRoleStatusLogic) UpdateRoleStatus(in *sysclient.UpdateRoleStatusReq) (*sysclient.UpdateRoleStatusResp, error) {
 	role := query.SysRole
 
-	// 1.排除超级管理员
-	var roleIds []int64
 	for _, roleId := range in.Ids {
 
-		count, _ := role.WithContext(l.ctx).Where(role.ID.Eq(roleId), role.IsAdmin.Eq(1)).Count()
-		if count > 0 {
-			continue
+		if roleId == 1 {
+			return nil, errors.New("删除角色失败,不允许操作超级管理员角色")
 		}
-
-		roleIds = append(roleIds, roleId)
 	}
 
-	if len(roleIds) == 0 {
-		logc.Errorf(l.ctx, "更新角色信息状态失败,参数:%+v,异常:%s", in, "超级管理员和已使用的角色不能被删除")
-		return nil, errors.New("超级管理员和已使用的角色不能被更新状态")
-	}
-
-	// 2.更新角色信息状态
-	_, err := role.WithContext(l.ctx).Where(role.ID.In(roleIds...)).Update(role.RoleStatus, in.RoleStatus)
+	_, err := role.WithContext(l.ctx).Where(role.ID.In(in.Ids...)).Update(role.RoleStatus, in.RoleStatus)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新角色信息状态失败,参数:%+v,异常:%s", in, err.Error())

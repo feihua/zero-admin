@@ -35,7 +35,7 @@ func NewQueryDeptAndPostListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // QueryDeptAndPostList 查询所有部门和岗位
 func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(req *types.QueryDeptAndPostListReq) (resp *types.QueryDeptAndPostListResp, err error) {
-	//1.查询岗位列表信息
+	// 1.查询岗位列表信息
 	result, err := l.svcCtx.UserService.QueryDeptAndPostList(l.ctx, &sysclient.QueryDeptAndPostListReq{})
 
 	if err != nil {
@@ -44,7 +44,7 @@ func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(req *types.QueryDeptAnd
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	//2.岗位信息
+	// 2.岗位信息
 	var postLists []*types.PostList
 	for _, post := range result.PostListData {
 		postLists = append(postLists, &types.PostList{
@@ -53,7 +53,7 @@ func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(req *types.QueryDeptAnd
 		})
 	}
 
-	//3.部门信息
+	// 3.部门信息
 	var deptLists []*types.DeptList
 	for _, dept := range result.DeptListData {
 		deptLists = append(deptLists, &types.DeptList{

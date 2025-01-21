@@ -50,20 +50,21 @@ func (l *QueryRoleListLogic) QueryRoleList(req *types.QueryRoleListReq) (*types.
 
 	var list []*types.QueryRoleListData
 
-	for _, role := range result.List {
+	for _, detail := range result.List {
 		list = append(list, &types.QueryRoleListData{
-			CreateBy:   role.CreateBy,
-			CreateTime: role.CreateTime,
-			DataScope:  role.DataScope,
-			Id:         role.Id,
-			IsAdmin:    role.IsAdmin,
-			Remark:     role.Remark,
-			RoleKey:    role.RoleKey,
-			RoleName:   role.RoleName,
-			RoleSort:   role.RoleSort,
-			RoleStatus: role.RoleStatus,
-			UpdateBy:   role.UpdateBy,
-			UpdateTime: role.UpdateTime,
+			Id:         detail.Id,         // 编号
+			RoleName:   detail.RoleName,   // 角色名称
+			RoleKey:    detail.RoleKey,    // 权限字符
+			RoleStatus: detail.RoleStatus, // 角色状态
+			RoleSort:   detail.RoleSort,   // 角色排序
+			DataScope:  detail.DataScope,  // 数据权限
+			IsDeleted:  detail.IsDeleted,  // 是否删除  0：否  1：是
+			IsAdmin:    detail.IsAdmin,    // 是否超级管理员:  0：否  1：是
+			Remark:     detail.Remark,     // 备注
+			CreateBy:   detail.CreateBy,   // 创建者
+			CreateTime: detail.CreateTime, // 创建时间
+			UpdateBy:   detail.UpdateBy,   // 更新者
+			UpdateTime: detail.UpdateTime, // 更新时间
 		})
 	}
 

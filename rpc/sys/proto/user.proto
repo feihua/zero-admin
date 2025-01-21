@@ -6,8 +6,8 @@ option go_package = "./proto";
 
 
 message LoginReq {
-  string account = 1;
-  string password = 2;
+  string account = 1;//账号
+  string password = 2;//密码
   string ip_address = 3; //IP地址
   string os = 4; //操作系统
   string browser = 5; //浏览器
@@ -56,16 +56,19 @@ message ReSetPasswordResp {
 
 // 添加用户信息表
 message AddUserReq {
-  string avatar = 1; //头像
-  string create_by = 2; //创建者
-  int64 dept_id = 3; //部门id
-  string email = 4; //邮箱
-  string mobile = 5; //手机号
-  string nick_name = 6; //昵称
-  string remark = 8; //备注信息
-  string user_name = 9; //用户名
-  int32 user_status = 10; //帐号状态（0正常 1停用）
-  repeated int64 PostIds = 11; //岗位ids
+  int64 id = 1; //编号
+  string user_name = 2; //用户名
+  string nick_name = 3; //昵称
+  string avatar = 4; //头像
+  string password = 5; //密码
+  string salt = 6; //加密盐
+  string email = 7; //邮箱
+  string mobile = 8; //手机号
+  int32 user_status = 9; //帐号状态（0正常 1停用）
+  int64 dept_id = 10; //部门id
+  string remark = 11; //备注信息
+  repeated int64 PostIds = 12; //岗位ids
+  string create_by = 13; //创建者
 }
 
 message AddUserResp {
@@ -83,19 +86,19 @@ message DeleteUserResp {
 
 // 更新用户信息表
 message UpdateUserReq {
-  string avatar = 1; //头像
-  int64 dept_id = 2; //部门id
-  string email = 3; //邮箱
-  int64 id = 4; //编号
-  string mobile = 5; //手机号
-  string nick_name = 6; //昵称
-  string password = 7; //密码
-  string remark = 8; //备注信息
-  string update_by = 9; //更新者
-  string user_name = 10; //用户名
-  int32 user_status = 11; //帐号状态（0正常 1停用）
+  int64 id = 1; //编号
+  string user_name = 2; //用户名
+  string nick_name = 3; //昵称
+  string avatar = 4; //头像
+  string password = 5; //密码
+  string salt = 6; //加密盐
+  string email = 7; //邮箱
+  string mobile = 8; //手机号
+  int32 user_status = 9; //帐号状态（0正常 1停用）
+  int64 dept_id = 10; //部门id
+  string remark = 11; //备注信息
   repeated int64 PostIds = 12; //岗位ids
-
+  string update_by = 13; //更新者
 }
 
 message UpdateUserResp {
@@ -120,22 +123,25 @@ message QueryUserDetailReq {
 }
 
 message QueryUserDetailResp {
-  string avatar = 1; //头像
-  string create_by = 2; //创建者
-  string create_time = 3; //创建时间
-  int64 dept_id = 4; //部门id
-  string email = 5; //邮箱
-  int64 id = 6; //编号
-  int32 user_status = 7; //帐号状态（0正常 1停用）
-  string login_ip = 8; //登录ip
-  string login_time = 9; //登录时间
-  string mobile = 10; //手机号
-  string nick_name = 11; //昵称
-  string remark = 12; //备注信息
-  string update_by = 13; //更新者
-  string update_time = 14; //更新时间
-  string user_name = 15; //用户名
-  repeated int64 PostIds = 16; //岗位ids
+  int64 id = 1; //编号
+  string user_name = 2; //用户名
+  string nick_name = 3; //昵称
+  string avatar = 4; //头像
+  string email = 7; //邮箱
+  string mobile = 8; //手机号
+  int32 user_status = 9; //帐号状态（0正常 1停用）
+  int64 dept_id = 10; //部门id
+  string remark = 11; //备注信息
+  int32 is_deleted = 12; //是否删除  0：否  1：是
+  string login_time = 13; //登录时间
+  string login_ip = 14; //登录ip
+  string login_os = 15; //登录os
+  string login_browser = 16; //登录浏览器
+  string create_by = 17; //创建者
+  string create_time = 18; //创建时间
+  string update_by = 19; //更新者
+  string update_time = 20; //更新时间
+  repeated int64 PostIds = 21; //岗位ids
 
 }
 
@@ -152,21 +158,25 @@ message QueryUserListReq {
 }
 
 message UserListData {
-  string avatar = 1; //头像
-  string create_by = 2; //创建者
-  string create_time = 3; //创建时间
-  int64 dept_id = 4; //部门id
-  string email = 5; //邮箱
-  int64 id = 6; //编号
-  int32 user_status = 7; //帐号状态（0正常 1停用）
-  string login_ip = 8; //登录ip
-  string login_time = 9; //登录时间
-  string mobile = 10; //手机号
-  string nick_name = 11; //昵称
-  string remark = 12; //备注信息
-  string update_by = 13; //更新者
-  string update_time = 14; //更新时间
-  string user_name = 15; //用户名
+  int64 id = 1; //编号
+  string user_name = 2; //用户名
+  string nick_name = 3; //昵称
+  string avatar = 4; //头像
+  string email = 7; //邮箱
+  string mobile = 8; //手机号
+  int32 user_status = 9; //帐号状态（0正常 1停用）
+  int64 dept_id = 10; //部门id
+  string remark = 11; //备注信息
+  int32 is_deleted = 12; //是否删除  0：否  1：是
+  string login_time = 13; //登录时间
+  string login_ip = 14; //登录ip
+  string login_os = 15; //登录os
+  string login_browser = 16; //登录浏览器
+  string create_by = 17; //创建者
+  string create_time = 18; //创建时间
+  string update_by = 19; //更新者
+  string update_time = 20; //更新时间
+
 
 }
 
@@ -190,18 +200,19 @@ message QueryUserRoleListReq {
 }
 
 message RoleData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int32 data_scope = 3; //数据权限
-  int64 id = 4; //编号
-  int32 is_admin = 5; //是否超级管理员
-  string update_time = 6; //更新时间
-  string remark = 7; //备注
-  string role_key = 8; //权限字符
-  string role_name = 9; //角色名称
-  int32 role_sort = 10; //角色排序
-  int32 role_status = 11; //角色状态
+  int64 id = 1; //编号
+  string role_name = 2; //角色名称
+  string role_key = 3; //权限字符
+  int32 role_status = 4; //角色状态
+  int32 role_sort = 5; //角色排序
+  int32 data_scope = 6; //数据权限
+  int32 is_deleted = 7; //是否删除  0：否  1：是
+  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
+  string remark = 9; //备注
+  string create_by = 10; //创建者
+  string create_time = 11; //创建时间
   string update_by = 12; //更新者
+  string update_time = 13; //更新时间
 
 
 }
@@ -221,32 +232,34 @@ message QueryDeptAndPostListResp {
 }
 
 message DeptData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  string dept_name = 3; //部门名称
+  int64 id = 1; //编号
+  string dept_name = 2; //部门名称
+  int32 dept_status = 3; //部门状态
   int32 dept_sort = 4; //部门排序
-  int32 dept_status = 5; //部门状态
-  string email = 6; //邮箱
-  int64 id = 7; //编号
-  string leader = 9; //负责人
-  int64 parent_id = 10; //上级机构ID，一级机构为0
+  int64 parent_id = 5; //上级机构ID，一级机构为0
+  string leader = 6; //负责人
+  string phone = 7; //电话号码
+  string email = 8; //邮箱
+  string remark = 9; //备注信息
+  int32 is_deleted = 10; //是否删除  0：否  1：是
   repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
-  string phone = 12; //电话号码
-  string remark = 13; //备注信息
+  string create_by = 12; //创建者
+  string create_time = 13; //创建时间
   string update_by = 14; //更新者
   string update_time = 15; //更新时间
 
 }
 
 message PostData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int64 id = 3; //编号
-  string post_code = 5; //岗位编码
-  string post_name = 6; //岗位名称
-  int32 post_sort = 7; //岗位排序
-  int32 post_status = 8; //岗位状态
-  string remark = 9; //备注信息
+  int64 id = 1; //岗位id
+  string post_name = 2; //岗位名称
+  string post_code = 3; //岗位编码
+  int32 post_status = 4; //岗位状态
+  int32 post_sort = 5; //岗位排序
+  string remark = 6; //备注信息
+  int32 is_deleted = 7; //是否删除  0：否  1：是
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
   string update_by = 10; //更新者
   string update_time = 11; //更新时间
 
@@ -265,9 +278,9 @@ service UserService {
   // 删除用户信息表
   rpc DeleteUser(DeleteUserReq) returns (DeleteUserResp){}
   // 更新用户信息表
-  rpc UpdateUser(UpdateUserReq) returns (UpdateUserResp ){}
+  rpc UpdateUser(UpdateUserReq) returns (UpdateUserResp){}
   // 更新用户信息表状态
-  rpc UpdateUserStatus(UpdateUserStatusReq) returns (UpdateUserStatusResp ){}
+  rpc UpdateUserStatus(UpdateUserStatusReq) returns (UpdateUserStatusResp){}
   // 查询用户信息表详情
   rpc QueryUserDetail(QueryUserDetailReq) returns (QueryUserDetailResp){}
   // 查询用户信息表列表

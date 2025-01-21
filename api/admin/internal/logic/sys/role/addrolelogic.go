@@ -35,14 +35,14 @@ func NewAddRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddRoleLog
 // AddRole 新增角色
 func (l *AddRoleLogic) AddRole(req *types.AddRoleReq) (*types.AddRoleResp, error) {
 	roleAddReq := sysclient.AddRoleReq{
+		RoleName:   req.RoleName,   // 角色名称
+		RoleKey:    req.RoleKey,    // 权限字符
+		RoleStatus: req.RoleStatus, // 角色状态
+		RoleSort:   req.RoleSort,   // 角色排序
+		DataScope:  req.DataScope,  // 数据权限
+		IsAdmin:    req.IsAdmin,    // 是否超级管理员:  0：否  1：是
+		Remark:     req.Remark,     // 备注
 		CreateBy:   l.ctx.Value("userName").(string),
-		DataScope:  req.DataScope,
-		IsAdmin:    req.IsAdmin,
-		Remark:     req.Remark,
-		RoleKey:    req.RoleKey,
-		RoleName:   req.RoleName,
-		RoleSort:   req.RoleSort,
-		RoleStatus: req.RoleStatus,
 	}
 
 	_, err := l.svcCtx.RoleService.AddRole(l.ctx, &roleAddReq)

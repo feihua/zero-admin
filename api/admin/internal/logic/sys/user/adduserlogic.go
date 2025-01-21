@@ -34,16 +34,17 @@ func NewAddUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddUserLog
 // AddUser 新增用户
 func (l *AddUserLogic) AddUser(req *types.AddUserReq) (*types.AddUserResp, error) {
 	userAddReq := sysclient.AddUserReq{
-		Avatar:     req.Avatar,
+		UserName:   req.UserName,   // 用户名
+		NickName:   req.NickName,   // 昵称
+		Avatar:     req.Avatar,     // 头像
+		Password:   req.Password,   // 密码
+		Email:      req.Email,      // 邮箱
+		Mobile:     req.Mobile,     // 手机号
+		UserStatus: req.UserStatus, // 帐号状态（0正常 1停用）
+		DeptId:     req.DeptId,     // 部门id
+		Remark:     req.Remark,     // 备注信息
+		PostIds:    req.PostIds,    // 部门id
 		CreateBy:   l.ctx.Value("userName").(string),
-		DeptId:     req.DeptId,
-		Email:      req.Email,
-		Mobile:     req.Mobile,
-		NickName:   req.NickName,
-		Remark:     req.Remark,
-		UserName:   req.UserName,
-		UserStatus: req.UserStatus,
-		PostIds:    req.PostIds,
 	}
 	_, err := l.svcCtx.UserService.AddUser(l.ctx, &userAddReq)
 

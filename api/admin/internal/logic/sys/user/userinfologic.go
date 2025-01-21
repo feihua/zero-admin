@@ -36,7 +36,6 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserInfoL
 
 // UserInfo 获取用户信息
 func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
-	// 这里的key和生成jwt token时传入的key一致
 	userId, _ := l.ctx.Value("userId").(json.Number).Int64()
 
 	resp, err := l.svcCtx.UserService.UserInfo(l.ctx, &sysclient.InfoReq{
@@ -51,7 +50,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 
 	var MenuTree []*types.ListMenuTree
 
-	//组装antd ui中的菜单
+	// 组装antd ui中的菜单
 	for _, item := range resp.MenuListTree {
 		MenuTree = append(MenuTree, &types.ListMenuTree{
 			Id:       item.Id,
@@ -62,7 +61,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 		})
 	}
 
-	//组装element ui中的菜单
+	// 组装element ui中的菜单
 	var MenuTreeVue []*types.ListMenuTreeVue
 
 	for _, item := range resp.MenuListTree {

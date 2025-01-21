@@ -36,10 +36,10 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(req *types.QueryRoleUserListR
 	result, err := l.svcCtx.RoleService.QueryRoleUserList(l.ctx, &sysclient.QueryRoleUserListReq{
 		PageNum:  req.Current,
 		PageSize: req.PageSize,
-		RoleId:   req.RoleId,
-		IsExist:  req.IsExist,
-		Mobile:   req.Mobile,
-		UserName: req.UserName,
+		RoleId:   req.RoleId,   // 角色id
+		IsExist:  req.IsExist,  // 授权标志
+		Mobile:   req.Mobile,   // 手机号
+		UserName: req.UserName, // 用户名
 	})
 
 	if err != nil {
@@ -50,23 +50,21 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(req *types.QueryRoleUserListR
 
 	var list []*types.QueryRoleUserListData
 
-	for _, item := range result.List {
+	for _, detail := range result.List {
 		list = append(list, &types.QueryRoleUserListData{
-			Avatar:     item.Avatar,
-			CreateBy:   item.CreateBy,
-			CreateTime: item.CreateTime,
-			DeptId:     item.DeptId,
-			Email:      item.Email,
-			Id:         item.Id,
-			LoginIp:    item.LoginIp,
-			LoginTime:  item.LoginTime,
-			Mobile:     item.Mobile,
-			NickName:   item.NickName,
-			Remark:     item.Remark,
-			UpdateBy:   item.UpdateBy,
-			UpdateTime: item.UpdateTime,
-			UserName:   item.UserName,
-			UserStatus: item.UserStatus,
+			Id:         detail.Id,         // 编号
+			UserName:   detail.UserName,   // 用户名
+			NickName:   detail.NickName,   // 昵称
+			Avatar:     detail.Avatar,     // 头像
+			Email:      detail.Email,      // 邮箱
+			Mobile:     detail.Mobile,     // 手机号
+			UserStatus: detail.UserStatus, // 帐号状态（0正常 1停用）
+			DeptId:     detail.DeptId,     // 部门id
+			Remark:     detail.Remark,     // 备注信息
+			CreateBy:   detail.CreateBy,   // 创建者
+			CreateTime: detail.CreateTime, // 创建时间
+			UpdateBy:   detail.UpdateBy,   // 更新者
+			UpdateTime: detail.UpdateTime, // 更新时间
 		})
 	}
 

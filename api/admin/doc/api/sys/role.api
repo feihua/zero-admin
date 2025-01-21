@@ -7,13 +7,13 @@ info (
 type (
 	// 添加角色信息
 	AddRoleReq {
-		DataScope  int32  `json:"dataScope,default=0"` //数据权限
-		IsAdmin    int32  `json:"isAdmin,default=0"` //是否超级管理员
-		Remark     string `json:"remark,optional"` //备注
-		RoleKey    string `json:"roleKey"` //权限字符
 		RoleName   string `json:"roleName"` //角色名称
-		RoleSort   int32  `json:"roleSort"` //角色排序
+		RoleKey    string `json:"roleKey"` //权限字符
 		RoleStatus int32  `json:"roleStatus"` //角色状态
+		RoleSort   int32  `json:"roleSort"` //角色排序
+		DataScope  int32  `json:"dataScope"` //数据权限
+		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员:  0：否  1：是
+		Remark     string `json:"remark,optional"` //备注
 	}
 	AddRoleResp {
 		Code    string `json:"code"`
@@ -29,14 +29,14 @@ type (
 	}
 	// 更新角色信息
 	UpdateRoleReq {
-		DataScope  int32  `json:"dataScope,default=0"` //数据权限
 		Id         int64  `json:"id"` //编号
-		IsAdmin    int32  `json:"isAdmin,default=0"` //是否超级管理员
-		Remark     string `json:"remark,optional"` //备注
-		RoleKey    string `json:"roleKey"` //权限字符
 		RoleName   string `json:"roleName"` //角色名称
-		RoleSort   int32  `json:"roleSort"` //角色排序
+		RoleKey    string `json:"roleKey"` //权限字符
 		RoleStatus int32  `json:"roleStatus"` //角色状态
+		RoleSort   int32  `json:"roleSort"` //角色排序
+		DataScope  int32  `json:"dataScope"` //数据权限
+		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员:  0：否  1：是
+		Remark     string `json:"remark,optional"` //备注
 	}
 	UpdateRoleResp {
 		Code    string `json:"code"`
@@ -56,16 +56,17 @@ type (
 		Id int64 `form:"id"`
 	}
 	QueryRoleDetailData {
+		Id         int64  `json:"id"` //编号
+		RoleName   string `json:"roleName"` //角色名称
+		RoleKey    string `json:"roleKey"` //权限字符
+		RoleStatus int32  `json:"roleStatus"` //角色状态
+		RoleSort   int32  `json:"roleSort"` //角色排序
+		DataScope  int32  `json:"dataScope"` //数据权限
+		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
+		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员:  0：否  1：是
+		Remark     string `json:"remark"` //备注
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
-		DataScope  int32  `json:"dataScope"` //数据权限
-		Id         int64  `json:"id"` //编号
-		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
-		Remark     string `json:"remark"` //备注
-		RoleKey    string `json:"roleKey"` //权限字符
-		RoleName   string `json:"roleName"` //角色名称
-		RoleSort   int32  `json:"roleSort"` //角色排序
-		RoleStatus int32  `json:"roleStatus"` //角色状态
 		UpdateBy   string `json:"updateBy"` //更新者
 		UpdateTime string `json:"updateTime"` //更新时间
 	}
@@ -84,16 +85,17 @@ type (
 		RoleStatus int32  `form:"roleStatus,default=2"` //角色状态
 	}
 	QueryRoleListData {
+		Id         int64  `json:"id"` //编号
+		RoleName   string `json:"roleName"` //角色名称
+		RoleKey    string `json:"roleKey"` //权限字符
+		RoleStatus int32  `json:"roleStatus"` //角色状态
+		RoleSort   int32  `json:"roleSort"` //角色排序
+		DataScope  int32  `json:"dataScope"` //数据权限
+		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
+		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员:  0：否  1：是
+		Remark     string `json:"remark"` //备注
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
-		DataScope  int32  `json:"dataScope"` //数据权限
-		Id         int64  `json:"id"` //编号
-		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员
-		Remark     string `json:"remark"` //备注
-		RoleKey    string `json:"roleKey"` //权限字符
-		RoleName   string `json:"roleName"` //角色名称
-		RoleSort   int32  `json:"roleSort"` //角色排序
-		RoleStatus int32  `json:"roleStatus"` //角色状态
 		UpdateBy   string `json:"updateBy"` //更新者
 		UpdateTime string `json:"updateTime"` //更新时间
 	}
@@ -110,11 +112,11 @@ type (
 		RoleId int64 `form:"roleId"`
 	}
 	MenuTreeListData {
-		Key      string `json:"key"` // 菜单名称
+		Key      string `json:"key"` // 编号
 		Title    string `json:"title"` // 菜单名称
 		ParentId int64  `json:"parentId"` // 父菜单ID，一级菜单为0
-		Id       int64  `json:"id"` // 父菜单ID，一级菜单为0
-		Label    string `json:"label"` // 父菜单ID，一级菜单为0
+		Id       int64  `json:"id"` // 编号
+		Label    string `json:"label"` // 菜单名称
 	}
 	RoleMenuListData {
 		MenuList []MenuTreeListData `json:"menuList"`
@@ -143,21 +145,19 @@ type (
 		UserName string `form:"userName,optional"` //昵称
 	}
 	QueryRoleUserListData {
+		Id         int64  `json:"id"` //编号
+		UserName   string `json:"userName"` //用户名
+		NickName   string `json:"nickName"` //昵称
 		Avatar     string `json:"avatar"` //头像
+		Email      string `json:"email"` //邮箱
+		Mobile     string `json:"mobile"` //手机号
+		UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
+		DeptId     int64  `json:"deptId"` //部门id
+		Remark     string `json:"remark"` //备注信息
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
-		DeptId     int64  `json:"deptId"` //部门id
-		Email      string `json:"email"` //邮箱
-		Id         int64  `json:"id"` //编号
-		LoginIp    string `json:"loginIp"` //登录ip
-		LoginTime  string `json:"loginTime"` //登录时间
-		Mobile     string `json:"mobile"` //手机号
-		NickName   string `json:"nickName"` //昵称
-		Remark     string `json:"remark"` //备注信息
 		UpdateBy   string `json:"updateBy"` //更新者
 		UpdateTime string `json:"updateTime"` //更新时间
-		UserName   string `json:"userName"` //用户名
-		UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
 	}
 	QueryRoleUserListResp {
 		Code     string                   `json:"code"`

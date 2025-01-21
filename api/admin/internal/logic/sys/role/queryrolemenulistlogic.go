@@ -36,7 +36,7 @@ func NewQueryRoleMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // QueryRoleMenuList 根据roleId查询角色的权限
 func (l *QueryRoleMenuListLogic) QueryRoleMenuList(req *types.QueryRoleMenuListReq) (resp *types.QueryRoleMenuListResp, err error) {
 	result, err := l.svcCtx.RoleService.QueryRoleMenuList(l.ctx, &sysclient.QueryRoleMenuListReq{
-		RoleId: req.RoleId,
+		RoleId: req.RoleId, // 角色id
 	})
 
 	if err != nil {
@@ -50,10 +50,10 @@ func (l *QueryRoleMenuListLogic) QueryRoleMenuList(req *types.QueryRoleMenuListR
 	for _, menu := range result.List {
 		menuList = append(menuList, types.MenuTreeListData{
 			Key:      strconv.FormatInt(menu.Id, 10),
-			Title:    menu.MenuName,
-			ParentId: menu.ParentId,
-			Id:       menu.Id,
-			Label:    menu.MenuName,
+			Title:    menu.MenuName, // 菜单名称
+			ParentId: menu.ParentId, // 父菜单ID，一级菜单为0
+			Id:       menu.Id,       // 菜单ID
+			Label:    menu.MenuName, // 菜单名称
 		})
 	}
 

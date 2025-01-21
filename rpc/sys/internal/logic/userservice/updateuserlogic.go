@@ -10,8 +10,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"time"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -39,7 +37,7 @@ func NewUpdateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 // 2.用户存在时,则直接更新用户
 func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.UpdateUserResp, error) {
 
-	//不能修改超级管理员用户
+	// 不能修改超级管理员用户
 	if common.IsAdmin(l.ctx, in.Id, l.svcCtx.DB) {
 		logc.Errorf(l.ctx, "不能重置重置管理员的密码,参数:%+v", in)
 		return nil, errors.New("不能重置重置管理员的密码")
@@ -55,19 +53,19 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 	}
 
 	// 2.用户存在时,则直接更新用户
-	now := time.Now()
 	user := &model.SysUser{
-		ID:         in.Id,
-		UserName:   in.UserName,
-		NickName:   in.NickName,
-		Avatar:     in.Avatar,
-		Email:      in.Email,
-		Mobile:     in.Mobile,
-		UserStatus: in.UserStatus,
-		DeptID:     in.DeptId,
-		Remark:     in.Remark,
-		UpdateBy:   in.UpdateBy,
-		UpdateTime: &now,
+		ID:         in.Id,         // 编号
+		UserName:   in.UserName,   // 用户名
+		NickName:   in.NickName,   // 昵称
+		Avatar:     in.Avatar,     // 头像
+		Password:   in.Password,   // 密码
+		Salt:       in.Salt,       // 加密盐
+		Email:      in.Email,      // 邮箱
+		Mobile:     in.Mobile,     // 手机号
+		UserStatus: in.UserStatus, // 帐号状态（0正常 1停用）
+		DeptID:     in.DeptId,     // 部门id
+		Remark:     in.Remark,     // 备注信息
+		UpdateBy:   in.UpdateBy,   // 更新者
 	}
 
 	_, err = q.Updates(user)
@@ -89,7 +87,7 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 		}
 
 		postDo := tx.SysUserPost.WithContext(l.ctx)
-		//清空脏数字
+		// 清空脏数字
 		_, err = postDo.Where(tx.SysUserPost.UserID.Eq(user.ID)).Delete()
 		if err != nil {
 			logc.Errorf(l.ctx, "删除用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())

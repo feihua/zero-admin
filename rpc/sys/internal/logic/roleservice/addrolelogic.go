@@ -32,37 +32,48 @@ func NewAddRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddRoleLo
 }
 
 // AddRole 新增角色
-// 1.根据角色名称查询角色是否已存在
-// 2.如果角色已存在,则直接返回
+// 1.查询角色名称是否存在
+// 2.查询权限字符是否存在
 // 3.角色不存在时,则直接添加角色
 func (l *AddRoleLogic) AddRole(in *sysclient.AddRoleReq) (*sysclient.AddRoleResp, error) {
 	q := query.SysRole.WithContext(l.ctx)
-	// 1.根据角色名称查询角色是否已存在
+
+	// 1.查询角色名称是否存在
 	name := in.RoleName
 	count, err := q.Where(query.SysRole.RoleName.Eq(name)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据角色名称：%s,查询角色信息失败,异常:%s", name, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询角色信息失败"))
+		return nil, errors.New(fmt.Sprintf("新增角色失败"))
 	}
 
-	//2.如果角色已存在,则直接返回
 	if count > 0 {
-		logc.Errorf(l.ctx, "角色信息已存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("角色：%s,已存在", name))
+		return nil, errors.New(fmt.Sprintf("角色名称：%s,已存在", name))
 	}
 
-	//3.角色不存在时,则直接添加角色
+	// 2.查询权限字符是否存在
+	roleKey := in.RoleKey
+	count, err = q.Where(query.SysRole.RoleKey.Eq(roleKey)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据角色权限：%s,查询角色信息失败,异常:%s", roleKey, err.Error())
+		return nil, errors.New(fmt.Sprintf("新增角色失败"))
+	}
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("权限字符：%s,已存在", roleKey))
+	}
+
+	// 3.角色不存在时,则直接添加角色
 	role := &model.SysRole{
-		RoleName:   in.RoleName,
-		RoleKey:    in.RoleKey,
-		RoleStatus: in.RoleStatus,
-		RoleSort:   in.RoleSort,
-		DataScope:  in.DataScope,
-		IsDeleted:  0,
-		IsAdmin:    in.IsAdmin,
-		Remark:     in.Remark,
-		CreateBy:   in.CreateBy,
+		RoleName:   in.RoleName,   // 角色名称
+		RoleKey:    in.RoleKey,    // 权限字符
+		RoleStatus: in.RoleStatus, // 角色状态
+		RoleSort:   in.RoleSort,   // 角色排序
+		DataScope:  in.DataScope,  // 数据权限
+		IsAdmin:    in.IsAdmin,    // 是否超级管理员:  0：否  1：是
+		Remark:     in.Remark,     // 备注
+		CreateBy:   in.CreateBy,   // 创建者
 	}
 
 	err = q.Create(role)

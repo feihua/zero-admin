@@ -35,14 +35,14 @@ func NewUpdateRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateR
 // UpdateRole 更新角色
 func (l *UpdateRoleLogic) UpdateRole(req *types.UpdateRoleReq) (*types.UpdateRoleResp, error) {
 	roleReq := sysclient.UpdateRoleReq{
-		DataScope:  req.DataScope,
-		Id:         req.Id,
-		IsAdmin:    req.IsAdmin,
-		Remark:     req.Remark,
-		RoleKey:    req.RoleKey,
-		RoleName:   req.RoleName,
-		RoleSort:   req.RoleSort,
-		RoleStatus: req.RoleStatus,
+		Id:         req.Id,         // 编号
+		RoleName:   req.RoleName,   // 角色名称
+		RoleKey:    req.RoleKey,    // 权限字符
+		RoleStatus: req.RoleStatus, // 角色状态
+		RoleSort:   req.RoleSort,   // 角色排序
+		DataScope:  req.DataScope,  // 数据权限
+		IsAdmin:    req.IsAdmin,    // 是否超级管理员:  0：否  1：是
+		Remark:     req.Remark,     // 备注
 		UpdateBy:   l.ctx.Value("userName").(string),
 	}
 	_, err := l.svcCtx.RoleService.UpdateRole(l.ctx, &roleReq)

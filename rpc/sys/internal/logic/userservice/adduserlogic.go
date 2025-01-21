@@ -46,25 +46,26 @@ func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp
 		return nil, errors.New(fmt.Sprintf("查询用户信息失败"))
 	}
 
-	//2.如果用户已存在,则直接返回
+	// 2.如果用户已存在,则直接返回
 	if count > 0 {
 		logc.Errorf(l.ctx, "用户信息已存在：%+v", in)
 		return nil, errors.New(fmt.Sprintf("用户：%s,已存在", userName))
 	}
 
-	//3.用户不存在时,则直接添加用户
+	// 3.用户不存在时,则直接添加用户
 	user := &model.SysUser{
-		UserName:   in.UserName,
-		NickName:   in.NickName,
-		Avatar:     in.Avatar,
-		Password:   "123456",
-		Salt:       "123456", //todo 待完善
-		Email:      in.Email,
-		Mobile:     in.Mobile,
-		UserStatus: in.UserStatus,
-		DeptID:     in.DeptId,
-		Remark:     in.Remark,
-		CreateBy:   in.CreateBy,
+		UserName:   in.UserName,   // 用户名
+		NickName:   in.NickName,   // 昵称
+		Avatar:     in.Avatar,     // 头像
+		Password:   in.Password,   // 密码
+		Salt:       in.Salt,       // 加密盐
+		Email:      in.Email,      // 邮箱
+		Mobile:     in.Mobile,     // 手机号
+		UserStatus: in.UserStatus, // 帐号状态（0正常 1停用）
+		DeptID:     in.DeptId,     // 部门id
+		Remark:     in.Remark,     // 备注信息
+		IsDeleted:  0,             // 是否删除  0：否  1：是
+		CreateBy:   in.CreateBy,   // 创建者
 	}
 
 	err = query.Q.Transaction(func(tx *query.Query) error {
@@ -84,7 +85,7 @@ func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp
 		}
 
 		postDo := tx.SysUserPost.WithContext(l.ctx)
-		//清空脏数字
+		// 清空脏数字
 		_, err = postDo.Where(tx.SysUserPost.UserID.Eq(user.ID)).Delete()
 		if err != nil {
 			logc.Errorf(l.ctx, "删除用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())

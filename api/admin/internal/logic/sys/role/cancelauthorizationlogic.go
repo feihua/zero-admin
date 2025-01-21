@@ -35,9 +35,9 @@ func NewCancelAuthorizationLogic(ctx context.Context, svcCtx *svc.ServiceContext
 // CancelAuthorization 取消授权/确认授权
 func (l *CancelAuthorizationLogic) CancelAuthorization(req *types.CancelAuthorizationReq) (resp *types.CancelAuthorizationResp, err error) {
 	_, err = l.svcCtx.RoleService.CancelAuthorization(l.ctx, &sysclient.CancelAuthorizationReq{
-		RoleId:  req.RoleId,
-		UserIds: req.UserIds,
-		IsExist: req.IsExist,
+		RoleId:  req.RoleId,  // 角色id
+		UserIds: req.UserIds, // 用户ids
+		IsExist: req.IsExist, // 授权标志
 	})
 
 	if err != nil {

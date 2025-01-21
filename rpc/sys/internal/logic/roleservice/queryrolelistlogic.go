@@ -55,20 +55,22 @@ func (l *QueryRoleListLogic) QueryRoleList(in *sysclient.QueryRoleListReq) (*sys
 	}
 
 	var list []*sysclient.RoleListData
-	for _, role := range result {
+	for _, item := range result {
+		createTime := item.CreateTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.RoleListData{
-			CreateBy:   role.CreateBy,
-			CreateTime: role.CreateTime.Format("2006-01-02 15:04:05"),
-			DataScope:  role.DataScope,
-			Id:         role.ID,
-			IsAdmin:    role.IsAdmin,
-			UpdateTime: time_util.TimeToString(role.UpdateTime),
-			Remark:     role.Remark,
-			RoleKey:    role.RoleKey,
-			RoleName:   role.RoleName,
-			RoleSort:   role.RoleSort,
-			RoleStatus: role.RoleStatus,
-			UpdateBy:   role.UpdateBy,
+			Id:         item.ID,                                 // 编号
+			RoleName:   item.RoleName,                           // 角色名称
+			RoleKey:    item.RoleKey,                            // 权限字符
+			RoleStatus: item.RoleStatus,                         // 角色状态
+			RoleSort:   item.RoleSort,                           // 角色排序
+			DataScope:  item.DataScope,                          // 数据权限
+			IsDeleted:  item.IsDeleted,                          // 是否删除  0：否  1：是
+			IsAdmin:    item.IsAdmin,                            // 是否超级管理员:  0：否  1：是
+			Remark:     item.Remark,                             // 备注
+			CreateBy:   item.CreateBy,                           // 创建者
+			CreateTime: createTime,                              // 创建时间
+			UpdateBy:   item.UpdateBy,                           // 更新者
+			UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 		})
 	}
 

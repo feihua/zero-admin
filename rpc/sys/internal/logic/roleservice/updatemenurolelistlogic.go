@@ -3,6 +3,7 @@ package roleservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -36,11 +37,8 @@ func NewUpdateMenuRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // 1.删除角色与菜单的关联
 // 2.添加角色与菜单的关联
 func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateMenuRoleReq) (*sysclient.UpdateMenuRoleResp, error) {
-	//sys_role表is_admin为1表示系统预留超级管理员角色,不用关联
-	role := query.SysRole
-	count, _ := role.WithContext(l.ctx).Where(role.ID.Eq(in.RoleId), role.IsAdmin.Eq(1)).Count()
-	if count == 1 {
-		return &sysclient.UpdateMenuRoleResp{}, nil
+	if in.RoleId == 1 {
+		return nil, errors.New(fmt.Sprintf("更新角色信息失败,不允许操作超级管理员角色"))
 	}
 
 	err := query.Q.Transaction(func(tx *query.Query) error {

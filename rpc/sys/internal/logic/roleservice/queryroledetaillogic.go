@@ -34,26 +34,28 @@ func NewQueryRoleDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 
 // QueryRoleDetail 查询角色信息详情
 func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq) (*sysclient.QueryRoleDetailResp, error) {
-	role, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.Id)).First()
+	item, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.Id)).First()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询角色信息详情失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询角色信息详情失败")
 	}
 
+	createTime := item.CreateTime.Format("2006-01-02 15:04:05")
 	data := &sysclient.QueryRoleDetailResp{
-		CreateBy:   role.CreateBy,
-		CreateTime: role.CreateTime.Format("2006-01-02 15:04:05"),
-		DataScope:  role.DataScope,
-		Id:         role.ID,
-		IsAdmin:    role.IsAdmin,
-		UpdateTime: time_util.TimeToString(role.UpdateTime),
-		Remark:     role.Remark,
-		RoleKey:    role.RoleKey,
-		RoleName:   role.RoleName,
-		RoleSort:   role.RoleSort,
-		RoleStatus: role.RoleStatus,
-		UpdateBy:   role.UpdateBy,
+		Id:         item.ID,                                 // 编号
+		RoleName:   item.RoleName,                           // 角色名称
+		RoleKey:    item.RoleKey,                            // 权限字符
+		RoleStatus: item.RoleStatus,                         // 角色状态
+		RoleSort:   item.RoleSort,                           // 角色排序
+		DataScope:  item.DataScope,                          // 数据权限
+		IsDeleted:  item.IsDeleted,                          // 是否删除  0：否  1：是
+		IsAdmin:    item.IsAdmin,                            // 是否超级管理员:  0：否  1：是
+		Remark:     item.Remark,                             // 备注
+		CreateBy:   item.CreateBy,                           // 创建者
+		CreateTime: createTime,                              // 创建时间
+		UpdateBy:   item.UpdateBy,                           // 更新者
+		UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
 	logc.Infof(l.ctx, "查询角色信息详情,参数：%+v,响应：%+v", in, data)

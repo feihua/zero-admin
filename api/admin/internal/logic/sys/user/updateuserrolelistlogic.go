@@ -35,8 +35,8 @@ func NewUpdateUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // UpdateUserRoleList 更新用户与角色的关联
 func (l *UpdateUserRoleListLogic) UpdateUserRoleList(req *types.UpdateUserRoleReq) (resp *types.UpdateUserRoleResp, err error) {
 	_, err = l.svcCtx.UserService.UpdateUserRoleList(l.ctx, &sysclient.UpdateUserRoleListReq{
-		UserId:  req.UserId,
-		RoleIds: req.RoleIds,
+		UserId:  req.UserId,  // 用户id
+		RoleIds: req.RoleIds, // 角色id
 	})
 
 	if err != nil {

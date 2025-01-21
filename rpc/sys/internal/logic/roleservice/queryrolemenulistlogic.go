@@ -34,7 +34,7 @@ func NewQueryRoleMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // 1.查询所有菜单
 // 2.如果角色不是admin则根据roleId查询菜单
 func (l *QueryRoleMenuListLogic) QueryRoleMenuList(in *sysclient.QueryRoleMenuListReq) (*sysclient.QueryRoleMenuListResp, error) {
-	//1.查询所有菜单
+	// 1.查询所有菜单
 	menus, err := query.SysMenu.WithContext(l.ctx).Find()
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单列表失败,异常:%s", err.Error())
@@ -46,17 +46,15 @@ func (l *QueryRoleMenuListLogic) QueryRoleMenuList(in *sysclient.QueryRoleMenuLi
 
 	for _, menu := range menus {
 		menuList = append(menuList, &sysclient.MenuData{
-			Id:       menu.ID,
-			MenuName: menu.MenuName,
-			ParentId: menu.ParentID,
+			Id:       menu.ID,       // 编号
+			MenuName: menu.MenuName, // 菜单名称
+			ParentId: menu.ParentID, // 父菜单ID，一级菜单为0
 		})
 		menuIds = append(menuIds, menu.ID)
 	}
 
-	//2.如果角色不是admin则根据roleId查询菜单
-	role := query.SysRole
-	count, _ := role.WithContext(l.ctx).Where(role.ID.Eq(in.RoleId), role.IsAdmin.Eq(1)).Count()
-	if count == 0 {
+	// 2.如果角色不是admin则根据roleId查询菜单
+	if in.RoleId != 1 {
 		var ids []int64
 		q := query.SysRoleMenu
 		_ = q.WithContext(l.ctx).Select(q.MenuID).Where(q.RoleID.Eq(in.RoleId)).Scan(&ids)

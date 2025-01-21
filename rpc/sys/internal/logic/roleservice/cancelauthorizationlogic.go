@@ -35,24 +35,26 @@ func NewCancelAuthorizationLogic(ctx context.Context, svcCtx *svc.ServiceContext
 // CancelAuthorization 取消授权/确认授权
 func (l *CancelAuthorizationLogic) CancelAuthorization(in *sysclient.CancelAuthorizationReq) (*sysclient.CancelAuthorizationResp, error) {
 
-	//sys_role表is_admin为1表示系统预留超级管理员角色,不用关联
-	role := query.SysRole
-	count, _ := role.WithContext(l.ctx).Where(role.ID.Eq(in.RoleId), role.IsAdmin.Eq(1)).Count()
-	if count == 1 {
-		return &sysclient.CancelAuthorizationResp{}, nil
+	if in.RoleId == 1 {
+		return nil, errors.New("删除角色失败,不允许操作超级管理员角色")
 	}
 
+	userRole := query.SysUserRole
+	q := userRole.WithContext(l.ctx)
+
+	// 确认授权
 	if in.IsExist == 1 {
 		var userRoles []*model.SysUserRole
 		for _, userId := range in.UserIds {
-			userRoles = append(userRoles, &model.SysUserRole{
+			sysUserRole := model.SysUserRole{
 				RoleID: in.RoleId,
 				UserID: userId,
-			})
+			}
+			userRoles = append(userRoles, &sysUserRole)
 		}
 
 		// 2.添加角色与用户的关联
-		err := query.SysUserRole.WithContext(l.ctx).CreateInBatches(userRoles, len(userRoles))
+		err := q.CreateInBatches(userRoles, len(userRoles))
 
 		if err != nil {
 			logc.Errorf(l.ctx, "更新角色与用户的关联失败,参数:%+v,异常:%s", in, err.Error())
@@ -61,8 +63,8 @@ func (l *CancelAuthorizationLogic) CancelAuthorization(in *sysclient.CancelAutho
 		return &sysclient.CancelAuthorizationResp{}, nil
 	}
 
-	userRole := query.SysUserRole
-	_, err := userRole.WithContext(l.ctx).Where(userRole.RoleID.Eq(in.RoleId), userRole.UserID.In(in.UserIds...)).Delete()
+	// 取消授权
+	_, err := q.Where(userRole.RoleID.Eq(in.RoleId), userRole.UserID.In(in.UserIds...)).Delete()
 	if err != nil {
 		logc.Errorf(l.ctx, "取消授权失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("取消授权失败")

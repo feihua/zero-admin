@@ -52,23 +52,26 @@ func (l *QueryUserListLogic) QueryUserList(req *types.QueryUserListReq) (*types.
 
 	var list []*types.QueryUserListData
 
-	for _, item := range result.List {
+	for _, detail := range result.List {
 		list = append(list, &types.QueryUserListData{
-			Avatar:     item.Avatar,
-			CreateBy:   item.CreateBy,
-			CreateTime: item.CreateTime,
-			DeptId:     item.DeptId,
-			Email:      item.Email,
-			Id:         item.Id,
-			LoginIp:    item.LoginIp,
-			LoginTime:  item.LoginTime,
-			Mobile:     item.Mobile,
-			NickName:   item.NickName,
-			Remark:     item.Remark,
-			UpdateBy:   item.UpdateBy,
-			UpdateTime: item.UpdateTime,
-			UserName:   item.UserName,
-			UserStatus: item.UserStatus,
+			Id:           detail.Id,           // 编号
+			UserName:     detail.UserName,     // 用户名
+			NickName:     detail.NickName,     // 昵称
+			Avatar:       detail.Avatar,       // 头像
+			Email:        detail.Email,        // 邮箱
+			Mobile:       detail.Mobile,       // 手机号
+			UserStatus:   detail.UserStatus,   // 帐号状态（0正常 1停用）
+			DeptId:       detail.DeptId,       // 部门id
+			Remark:       detail.Remark,       // 备注信息
+			IsDeleted:    detail.IsDeleted,    // 是否删除  0：否  1：是
+			LoginTime:    detail.LoginTime,    // 登录时间
+			LoginIp:      detail.LoginIp,      // 登录ip
+			LoginOs:      detail.LoginOs,      // 登录os
+			LoginBrowser: detail.LoginBrowser, // 登录浏览器
+			CreateBy:     detail.CreateBy,     // 创建者
+			CreateTime:   detail.CreateTime,   // 创建时间
+			UpdateBy:     detail.UpdateBy,     // 更新者
+			UpdateTime:   detail.UpdateTime,   // 更新时间
 		})
 	}
 

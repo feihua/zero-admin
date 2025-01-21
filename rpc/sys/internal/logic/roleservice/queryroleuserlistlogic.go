@@ -35,14 +35,6 @@ func NewQueryRoleUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // 1.超级管理员不需要分配用户
 // 2.如果角色不是admin则根据roleId查询用户
 func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserListReq) (*sysclient.QueryRoleUserListResp, error) {
-	//role := query.SysRole
-	//total, _ := role.WithContext(l.ctx).Where(role.ID.Eq(in.RoleId), role.IsAdmin.Eq(1)).Count()
-	//
-	//// 1.超级管理员不需要分配用户
-	//if total != 0 {
-	//	return nil, errors.New("超级管理员不需要分配用户")
-	//}
-
 	var result []model.SysUser
 
 	userRole := query.SysUserRole
@@ -55,11 +47,11 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 		q = q.Where(sysUser.UserName.Like("%" + in.UserName + "%"))
 	}
 
-	//IsExist 1:表示拥有的用户
+	// IsExist 1:表示拥有的用户
 	if in.IsExist == 1 {
 		q = q.Where(userRole.RoleID.Eq(in.RoleId))
 	} else {
-		//IsExist 0:表示没拥有的用户
+		// IsExist 0:表示没拥有的用户
 		q = q.Where(userRole.RoleID.Neq(in.RoleId))
 	}
 	offset := (in.PageNum - 1) * in.PageSize
@@ -71,22 +63,27 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 
 	var list []*sysclient.UserData
 	for _, item := range result {
+		loginTime := item.LoginTime.Format("2006-01-02 15:04:05")
+		createTime := item.CreateTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.UserData{
-			Avatar:     item.Avatar,
-			CreateBy:   item.CreateBy,
-			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
-			DeptId:     item.DeptID,
-			Email:      item.Email,
-			Id:         item.ID,
-			UserStatus: item.UserStatus,
-			LoginIp:    item.LoginIP,
-			LoginTime:  time_util.TimeToString(item.LoginTime),
-			Mobile:     item.Mobile,
-			NickName:   item.NickName,
-			Remark:     item.Remark,
-			UpdateBy:   item.UpdateBy,
-			UpdateTime: time_util.TimeToString(item.UpdateTime),
-			UserName:   item.UserName,
+			Id:           item.ID,                                 // 编号
+			UserName:     item.UserName,                           // 用户名
+			NickName:     item.NickName,                           // 昵称
+			Avatar:       item.Avatar,                             // 头像
+			Email:        item.Email,                              // 邮箱
+			Mobile:       item.Mobile,                             // 手机号
+			UserStatus:   item.UserStatus,                         // 帐号状态（0正常 1停用）
+			DeptId:       item.DeptID,                             // 部门id
+			Remark:       item.Remark,                             // 备注信息
+			IsDeleted:    item.IsDeleted,                          // 是否删除  0：否  1：是
+			LoginTime:    loginTime,                               // 登录时间
+			LoginIp:      item.LoginIP,                            // 登录ip
+			LoginOs:      item.LoginOs,                            // 登录os
+			LoginBrowser: item.LoginBrowser,                       // 登录浏览器
+			CreateBy:     item.CreateBy,                           // 创建者
+			CreateTime:   createTime,                              // 创建时间
+			UpdateBy:     item.UpdateBy,                           // 更新者
+			UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
 		})
 	}
 
