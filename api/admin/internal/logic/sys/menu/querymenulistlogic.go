@@ -44,26 +44,27 @@ func (l *QueryMenuListLogic) QueryMenuList(req *types.QueryMenuListReq) (*types.
 
 	for _, menu := range result.List {
 		menuItem := &types.QueryMenuListData{
-			BackgroundUrl: menu.BackgroundUrl,
-			CreateBy:      menu.CreateBy,
-			CreateTime:    menu.CreateTime,
-			Id:            menu.Id,
-			MenuIcon:      menu.MenuIcon,
-			MenuName:      menu.MenuName,
-			MenuPath:      menu.MenuPath,
-			MenuPerms:     menu.MenuPerms,
-			MenuSort:      menu.MenuSort,
-			MenuStatus:    menu.MenuStatus,
-			MenuType:      menu.MenuType,
-			ParentId:      menu.ParentId,
-			Remark:        menu.Remark,
-			UpdateBy:      menu.UpdateBy,
-			UpdateTime:    menu.UpdateTime,
-			VueComponent:  menu.VueComponent,
-			VueIcon:       menu.VueIcon,
-			VuePath:       menu.VuePath,
-			VueRedirect:   menu.VueRedirect,
-			IsVisible:     menu.IsVisible,
+			Id:            menu.Id,            // 编号
+			MenuName:      menu.MenuName,      // 菜单名称
+			ParentId:      menu.ParentId,      // 父菜单ID，一级菜单为0
+			MenuPath:      menu.MenuPath,      // 前端路由
+			MenuPerms:     menu.MenuPerms,     // 权限标识
+			MenuType:      menu.MenuType,      // 类型 0：目录,1：菜单,2：按钮,3：外链
+			MenuIcon:      menu.MenuIcon,      // 菜单图标
+			MenuSort:      menu.MenuSort,      // 菜单排序
+			CreateBy:      menu.CreateBy,      // 创建者
+			CreateTime:    menu.CreateTime,    // 创建时间
+			UpdateBy:      menu.UpdateBy,      // 更新者
+			UpdateTime:    menu.UpdateTime,    // 更新时间
+			MenuStatus:    menu.MenuStatus,    // 菜单状态
+			IsDeleted:     menu.IsDeleted,     // 是否删除  0：否  1：是
+			IsVisible:     menu.IsVisible,     // 是否可见  0：否  1：是
+			Remark:        menu.Remark,        // 备注信息
+			VuePath:       menu.VuePath,       // vue系统的path
+			VueComponent:  menu.VueComponent,  // vue的页面
+			VueIcon:       menu.VueIcon,       // vue的图标
+			VueRedirect:   menu.VueRedirect,   // vue的路由重定向
+			BackgroundUrl: menu.BackgroundUrl, // 接口地址
 		}
 
 		list = append(list, menuItem)

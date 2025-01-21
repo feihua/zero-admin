@@ -46,20 +46,21 @@ func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictIt
 		return nil, errors.New("查询字典数据详情失败,字典数据不存在")
 	}
 
+	createTime := dictItem.CreateTime.Format("2006-01-02 15:04:05")
 	data := &sysclient.QueryDictItemDetailResp{
-		Id:         dictItem.ID,                                       // 编号
-		DictType:   dictItem.DictType,                                 // 字典类型
-		DictLabel:  dictItem.DictLabel,                                // 字典标签
-		DictValue:  dictItem.DictValue,                                // 字典键值
-		DictStatus: dictItem.DictStatus,                               // 字典状态
-		DictSort:   dictItem.DictSort,                                 // 排序
-		Remark:     dictItem.Remark,                                   // 备注信息
-		IsDefault:  dictItem.IsDefault,                                // 是否默认  0：否  1：是
-		IsDeleted:  dictItem.IsDeleted,                                // 是否删除  0：否  1：是
-		CreateBy:   dictItem.CreateBy,                                 // 创建者
-		CreateTime: dictItem.CreateTime.Format("2006-01-02 15:04:05"), // 创建时间
-		UpdateBy:   dictItem.UpdateBy,                                 // 更新者
-		UpdateTime: time_util.TimeToString(dictItem.UpdateTime),       // 更新时间
+		Id:         dictItem.ID,                                 // 编号
+		DictType:   dictItem.DictType,                           // 字典类型
+		DictLabel:  dictItem.DictLabel,                          // 字典标签
+		DictValue:  dictItem.DictValue,                          // 字典键值
+		DictStatus: dictItem.DictStatus,                         // 字典状态
+		DictSort:   dictItem.DictSort,                           // 排序
+		Remark:     dictItem.Remark,                             // 备注信息
+		IsDefault:  dictItem.IsDefault,                          // 是否默认  0：否  1：是
+		IsDeleted:  dictItem.IsDeleted,                          // 是否删除  0：否  1：是
+		CreateBy:   dictItem.CreateBy,                           // 创建者
+		CreateTime: createTime,                                  // 创建时间
+		UpdateBy:   dictItem.UpdateBy,                           // 更新者
+		UpdateTime: time_util.TimeToString(dictItem.UpdateTime), // 更新时间
 	}
 
 	logc.Infof(l.ctx, "查询字典数据详情,参数：%+v,响应：%+v", in, data)

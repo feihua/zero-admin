@@ -132,7 +132,7 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 		Email:      in.Email,      // 邮箱
 		Remark:     in.Remark,     // 备注信息
 		UpdateBy:   in.UpdateBy,   // 更新者
-		ParentIds:  strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1),
+		ParentIds:  parentIds,     // 上级机构IDs，一级机构为0
 	}
 
 	// 6.部门存在时,则直接更新部门

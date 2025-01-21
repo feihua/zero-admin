@@ -35,9 +35,9 @@ func NewUpdateMenuStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // UpdateMenuStatus 更新菜单状态
 func (l *UpdateMenuStatusLogic) UpdateMenuStatus(req *types.UpdateMenuStatusReq) (resp *types.UpdateMenuStatusResp, err error) {
 	menuReq := sysclient.UpdateMenuStatusReq{
-		Ids:        req.MenuIds,
-		MenuStatus: req.MenuStatus,
+		Id:         req.MenuId, // 编号
 		UpdateBy:   l.ctx.Value("userName").(string),
+		MenuStatus: req.MenuStatus, // 菜单状态
 	}
 	if _, err = l.svcCtx.MenuService.UpdateMenuStatus(l.ctx, &menuReq); err != nil {
 		logc.Errorf(l.ctx, "更新菜单状态失败,参数:%+v,异常:%s", req, err.Error())

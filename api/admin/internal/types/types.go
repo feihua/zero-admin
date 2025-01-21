@@ -253,21 +253,21 @@ type AddMemberTaskResp struct {
 }
 
 type AddMenuReq struct {
-	BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
-	MenuIcon      string `json:"menuIcon,optional"`      //菜单图标
 	MenuName      string `json:"menuName"`               //菜单名称
+	ParentId      int64  `json:"parentId"`               //父菜单ID，一级菜单为0
 	MenuPath      string `json:"menuPath,optional"`      //前端路由
 	MenuPerms     string `json:"menuPerms,optional"`     //权限标识
-	MenuSort      int32  `json:"menuSort,optional"`      //菜单排序
+	MenuType      int32  `json:"menuType"`               //类型 0：目录,1：菜单,2：按钮,3：外链
+	MenuIcon      string `json:"menuIcon,optional"`      //菜单图标
+	MenuSort      int32  `json:"menuSort"`               //菜单排序
 	MenuStatus    int32  `json:"menuStatus,optional"`    //菜单状态
-	MenuType      int32  `json:"menuType,optional"`      //类型 0：目录,1：菜单,2：按钮,3：外链
-	ParentId      int64  `json:"parentId,optional"`      //父菜单ID，一级菜单为0
+	IsVisible     int32  `json:"isVisible"`              //是否可见  0：否  1：是
 	Remark        string `json:"remark,optional"`        //备注信息
+	VuePath       string `json:"vuePath,optional"`       //vue系统的path
 	VueComponent  string `json:"vueComponent,optional"`  //vue的页面
 	VueIcon       string `json:"vueIcon,optional"`       //vue的图标
-	VuePath       string `json:"vuePath,optional"`       //vue系统的path
 	VueRedirect   string `json:"vueRedirect,optional"`   //vue的路由重定向
-	IsVisible     int32  `json:"isVisible,default=1"`    //是否可见  0：否  1：是
+	BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
 }
 
 type AddMenuResp struct {
@@ -824,7 +824,7 @@ type DeleteMemberTaskResp struct {
 }
 
 type DeleteMenuReq struct {
-	Ids []int64 `form:"ids"`
+	Id int64 `form:"id"`
 }
 
 type DeleteMenuResp struct {
@@ -2505,26 +2505,27 @@ type QueryMemberTaskListResp struct {
 }
 
 type QueryMenuDetailData struct {
-	BackgroundUrl string `json:"backgroundUrl"`       //接口地址
-	CreateBy      string `json:"createBy"`            //创建者
-	CreateTime    string `json:"createTime"`          //创建时间
-	Id            int64  `json:"id"`                  //编号
-	MenuIcon      string `json:"menuIcon"`            //菜单图标
-	MenuName      string `json:"menuName"`            //菜单名称
-	MenuPath      string `json:"menuPath"`            //前端路由
-	MenuPerms     string `json:"menuPerms"`           //权限标识
-	MenuSort      int32  `json:"menuSort"`            //菜单排序
-	MenuStatus    int32  `json:"menuStatus"`          //菜单状态
-	MenuType      int32  `json:"menuType"`            //类型 0：目录,1：菜单,2：按钮,3：外链
-	ParentId      int64  `json:"parentId"`            //父菜单ID，一级菜单为0
-	Remark        string `json:"remark"`              //备注信息
-	UpdateBy      string `json:"updateBy"`            //更新者
-	UpdateTime    string `json:"updateTime"`          //更新时间
-	VueComponent  string `json:"vueComponent"`        //vue的页面
-	VueIcon       string `json:"vueIcon"`             //vue的图标
-	VuePath       string `json:"vuePath"`             //vue系统的path
-	VueRedirect   string `json:"vueRedirect"`         //vue的路由重定向
-	IsVisible     int32  `json:"isVisible,default=1"` //是否可见  0：否  1：是
+	Id            int64  `json:"id"`            //编号
+	MenuName      string `json:"menuName"`      //菜单名称
+	ParentId      int64  `json:"parentId"`      //父菜单ID，一级菜单为0
+	MenuPath      string `json:"menuPath"`      //前端路由
+	MenuPerms     string `json:"menuPerms"`     //权限标识
+	MenuType      int32  `json:"menuType"`      //类型 0：目录,1：菜单,2：按钮,3：外链
+	MenuIcon      string `json:"menuIcon"`      //菜单图标
+	MenuSort      int32  `json:"menuSort"`      //菜单排序
+	CreateBy      string `json:"createBy"`      //创建者
+	CreateTime    string `json:"createTime"`    //创建时间
+	UpdateBy      string `json:"updateBy"`      //更新者
+	UpdateTime    string `json:"updateTime"`    //更新时间
+	MenuStatus    int32  `json:"menuStatus"`    //菜单状态
+	IsDeleted     int32  `json:"isDeleted"`     //是否删除  0：否  1：是
+	IsVisible     int32  `json:"isVisible"`     //是否可见  0：否  1：是
+	Remark        string `json:"remark"`        //备注信息
+	VuePath       string `json:"vuePath"`       //vue系统的path
+	VueComponent  string `json:"vueComponent"`  //vue的页面
+	VueIcon       string `json:"vueIcon"`       //vue的图标
+	VueRedirect   string `json:"vueRedirect"`   //vue的路由重定向
+	BackgroundUrl string `json:"backgroundUrl"` //接口地址
 }
 
 type QueryMenuDetailReq struct {
@@ -2538,26 +2539,27 @@ type QueryMenuDetailResp struct {
 }
 
 type QueryMenuListData struct {
-	BackgroundUrl string `json:"backgroundUrl"`       //接口地址
-	CreateBy      string `json:"createBy"`            //创建者
-	CreateTime    string `json:"createTime"`          //创建时间
-	Id            int64  `json:"id"`                  //编号
-	MenuIcon      string `json:"menuIcon"`            //菜单图标
-	MenuName      string `json:"menuName"`            //菜单名称
-	MenuPath      string `json:"menuPath"`            //前端路由
-	MenuPerms     string `json:"menuPerms"`           //权限标识
-	MenuSort      int32  `json:"menuSort"`            //菜单排序
-	MenuStatus    int32  `json:"menuStatus"`          //菜单状态
-	MenuType      int32  `json:"menuType"`            //类型 0：目录,1：菜单,2：按钮,3：外链
-	ParentId      int64  `json:"parentId"`            //父菜单ID，一级菜单为0
-	Remark        string `json:"remark"`              //备注信息
-	UpdateBy      string `json:"updateBy"`            //更新者
-	UpdateTime    string `json:"updateTime"`          //更新时间
-	VueComponent  string `json:"vueComponent"`        //vue的页面
-	VueIcon       string `json:"vueIcon"`             //vue的图标
-	VuePath       string `json:"vuePath"`             //vue系统的path
-	VueRedirect   string `json:"vueRedirect"`         //vue的路由重定向
-	IsVisible     int32  `json:"isVisible,default=1"` //是否可见  0：否  1：是
+	Id            int64  `json:"id"`            //编号
+	MenuName      string `json:"menuName"`      //菜单名称
+	ParentId      int64  `json:"parentId"`      //父菜单ID，一级菜单为0
+	MenuPath      string `json:"menuPath"`      //前端路由
+	MenuPerms     string `json:"menuPerms"`     //权限标识
+	MenuType      int32  `json:"menuType"`      //类型 0：目录,1：菜单,2：按钮,3：外链
+	MenuIcon      string `json:"menuIcon"`      //菜单图标
+	MenuSort      int32  `json:"menuSort"`      //菜单排序
+	CreateBy      string `json:"createBy"`      //创建者
+	CreateTime    string `json:"createTime"`    //创建时间
+	UpdateBy      string `json:"updateBy"`      //更新者
+	UpdateTime    string `json:"updateTime"`    //更新时间
+	MenuStatus    int32  `json:"menuStatus"`    //菜单状态
+	IsDeleted     int32  `json:"isDeleted"`     //是否删除  0：否  1：是
+	IsVisible     int32  `json:"isVisible"`     //是否可见  0：否  1：是
+	Remark        string `json:"remark"`        //备注信息
+	VuePath       string `json:"vuePath"`       //vue系统的path
+	VueComponent  string `json:"vueComponent"`  //vue的页面
+	VueIcon       string `json:"vueIcon"`       //vue的图标
+	VueRedirect   string `json:"vueRedirect"`   //vue的路由重定向
+	BackgroundUrl string `json:"backgroundUrl"` //接口地址
 }
 
 type QueryMenuListReq struct {
@@ -3704,21 +3706,21 @@ type UpdateMemberTaskStatusResp struct {
 
 type UpdateMenuReq struct {
 	Id            int64  `json:"id"`                     //编号
-	BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
-	MenuIcon      string `json:"menuIcon,optional"`      //菜单图标
 	MenuName      string `json:"menuName"`               //菜单名称
+	ParentId      int64  `json:"parentId"`               //父菜单ID，一级菜单为0
 	MenuPath      string `json:"menuPath,optional"`      //前端路由
 	MenuPerms     string `json:"menuPerms,optional"`     //权限标识
-	MenuSort      int32  `json:"menuSort,optional"`      //菜单排序
+	MenuType      int32  `json:"menuType"`               //类型 0：目录,1：菜单,2：按钮,3：外链
+	MenuIcon      string `json:"menuIcon,optional"`      //菜单图标
+	MenuSort      int32  `json:"menuSort"`               //菜单排序
 	MenuStatus    int32  `json:"menuStatus,optional"`    //菜单状态
-	MenuType      int32  `json:"menuType,optional"`      //类型 0：目录,1：菜单,2：按钮,3：外链
-	ParentId      int64  `json:"parentId,optional"`      //父菜单ID，一级菜单为0
+	IsVisible     int32  `json:"isVisible"`              //是否可见  0：否  1：是
 	Remark        string `json:"remark,optional"`        //备注信息
+	VuePath       string `json:"vuePath,optional"`       //vue系统的path
 	VueComponent  string `json:"vueComponent,optional"`  //vue的页面
 	VueIcon       string `json:"vueIcon,optional"`       //vue的图标
-	VuePath       string `json:"vuePath,optional"`       //vue系统的path
 	VueRedirect   string `json:"vueRedirect,optional"`   //vue的路由重定向
-	IsVisible     int32  `json:"isVisible,default=1"`    //是否可见  0：否  1：是
+	BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
 }
 
 type UpdateMenuResp struct {
@@ -3727,8 +3729,8 @@ type UpdateMenuResp struct {
 }
 
 type UpdateMenuStatusReq struct {
-	MenuIds    []int64 `json:"menuIds"`    //编号
-	MenuStatus int32   `json:"menuStatus"` //菜单状态
+	MenuId     int64 `json:"menuId"`     //编号
+	MenuStatus int32 `json:"menuStatus"` //菜单状态
 }
 
 type UpdateMenuStatusResp struct {
