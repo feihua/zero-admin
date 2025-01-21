@@ -102,7 +102,7 @@ func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.Up
 	}
 
 	// 4.菜单存在时,则直接更新菜单
-	_, err = q.Updates(menu)
+	err = l.svcCtx.DB.Model(&model.SysMenu{}).WithContext(l.ctx).Where(query.SysMenu.ID.Eq(in.Id)).Save(menu).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新菜单信息失败,参数:%+v,异常:%s", menu, err.Error())

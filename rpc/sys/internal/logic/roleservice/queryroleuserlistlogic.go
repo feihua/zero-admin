@@ -39,6 +39,7 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 
 	userRole := query.SysUserRole
 	sysUser := query.SysUser
+
 	q := userRole.WithContext(l.ctx).LeftJoin(sysUser, sysUser.ID.EqCol(userRole.UserID)).Select(sysUser.ALL)
 	if len(in.Mobile) > 0 {
 		q = q.Where(sysUser.Mobile.Like("%" + in.Mobile + "%"))

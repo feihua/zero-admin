@@ -43,7 +43,7 @@ func (l *AddRoleLogic) AddRole(in *sysclient.AddRoleReq) (*sysclient.AddRoleResp
 	count, err := q.Where(query.SysRole.RoleName.Eq(name)).Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据角色名称：%s,查询角色信息失败,异常:%s", name, err.Error())
+		logc.Errorf(l.ctx, "根据角色名称：%s,查询角色失败,异常:%s", name, err.Error())
 		return nil, errors.New(fmt.Sprintf("新增角色失败"))
 	}
 
@@ -56,7 +56,7 @@ func (l *AddRoleLogic) AddRole(in *sysclient.AddRoleReq) (*sysclient.AddRoleResp
 	count, err = q.Where(query.SysRole.RoleKey.Eq(roleKey)).Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据角色权限：%s,查询角色信息失败,异常:%s", roleKey, err.Error())
+		logc.Errorf(l.ctx, "根据角色权限：%s,查询角色失败,异常:%s", roleKey, err.Error())
 		return nil, errors.New(fmt.Sprintf("新增角色失败"))
 	}
 
@@ -79,8 +79,8 @@ func (l *AddRoleLogic) AddRole(in *sysclient.AddRoleReq) (*sysclient.AddRoleResp
 	err = q.Create(role)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "新增角色信息失败,参数:%+v,异常:%s", role, err.Error())
-		return nil, errors.New("新增角色信息失败")
+		logc.Errorf(l.ctx, "新增角色失败,参数:%+v,异常:%s", role, err.Error())
+		return nil, errors.New("新增角色失败")
 	}
 	return &sysclient.AddRoleResp{}, nil
 }

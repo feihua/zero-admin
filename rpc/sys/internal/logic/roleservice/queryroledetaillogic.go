@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryRoleDetailLogic 查询角色信息详情
+// QueryRoleDetailLogic 查询角色详情
 /*
 Author: LiuFeiHua
 Date: 2024/5/30 14:18
@@ -32,13 +32,13 @@ func NewQueryRoleDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 	}
 }
 
-// QueryRoleDetail 查询角色信息详情
+// QueryRoleDetail 查询角色详情
 func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq) (*sysclient.QueryRoleDetailResp, error) {
 	item, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询角色信息详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询角色信息详情失败")
+		logc.Errorf(l.ctx, "查询角色详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询角色详情失败")
 	}
 
 	createTime := item.CreateTime.Format("2006-01-02 15:04:05")
@@ -58,6 +58,6 @@ func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq)
 		UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
-	logc.Infof(l.ctx, "查询角色信息详情,参数：%+v,响应：%+v", in, data)
+	logc.Infof(l.ctx, "查询角色详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

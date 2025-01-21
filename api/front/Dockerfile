@@ -10,7 +10,7 @@ WORKDIR /build/zero
 COPY . .
 RUN sh -c "[ -f go.mod ]" || exit
 COPY api/front/etc /app/etc
-RUN go build -ldflags="-s -w" -o /app/front api/front/front.go
+RUN go build -ldflags="-s -w" -tags no_k8s  -o /app/front api/front/front.go
 
 
 FROM alpine

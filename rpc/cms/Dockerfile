@@ -10,7 +10,7 @@ WORKDIR /build/zero
 COPY . .
 RUN sh -c "[ -f go.mod ]" || exit
 COPY rpc/cms/etc /app/etc
-RUN go build -ldflags="-s -w" -o /app/cms rpc/cms/cms.go
+RUN go build -ldflags="-s -w" -tags no_k8s  -o /app/cms rpc/cms/cms.go
 
 
 FROM alpine

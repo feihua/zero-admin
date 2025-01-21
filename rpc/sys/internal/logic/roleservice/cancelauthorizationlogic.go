@@ -36,7 +36,7 @@ func NewCancelAuthorizationLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *CancelAuthorizationLogic) CancelAuthorization(in *sysclient.CancelAuthorizationReq) (*sysclient.CancelAuthorizationResp, error) {
 
 	if in.RoleId == 1 {
-		return nil, errors.New("删除角色失败,不允许操作超级管理员角色")
+		return nil, errors.New("不允许操作超级管理员角色")
 	}
 
 	userRole := query.SysUserRole
@@ -57,8 +57,8 @@ func (l *CancelAuthorizationLogic) CancelAuthorization(in *sysclient.CancelAutho
 		err := q.CreateInBatches(userRoles, len(userRoles))
 
 		if err != nil {
-			logc.Errorf(l.ctx, "更新角色与用户的关联失败,参数:%+v,异常:%s", in, err.Error())
-			return nil, errors.New("更新角色与用户的关联失败")
+			logc.Errorf(l.ctx, "授权失败,参数:%+v,异常:%s", in, err.Error())
+			return nil, errors.New("授权失败")
 		}
 		return &sysclient.CancelAuthorizationResp{}, nil
 	}

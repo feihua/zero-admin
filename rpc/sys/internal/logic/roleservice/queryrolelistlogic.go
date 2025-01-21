@@ -50,8 +50,8 @@ func (l *QueryRoleListLogic) QueryRoleList(in *sysclient.QueryRoleListReq) (*sys
 	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询角色列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询角色列表信息失败")
+		logc.Errorf(l.ctx, "查询角色列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询角色列表失败")
 	}
 
 	var list []*sysclient.RoleListData
@@ -74,7 +74,7 @@ func (l *QueryRoleListLogic) QueryRoleList(in *sysclient.QueryRoleListReq) (*sys
 		})
 	}
 
-	logc.Infof(l.ctx, "查询角色列表信息,参数：%+v,响应：%+v", in, list)
+	logc.Infof(l.ctx, "查询角色列表,参数：%+v,响应：%+v", in, list)
 	return &sysclient.QueryRoleListResp{
 		Total: count,
 		List:  list,

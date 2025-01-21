@@ -38,7 +38,7 @@ func NewUpdateMenuRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // 2.添加角色与菜单的关联
 func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateMenuRoleReq) (*sysclient.UpdateMenuRoleResp, error) {
 	if in.RoleId == 1 {
-		return nil, errors.New(fmt.Sprintf("更新角色信息失败,不允许操作超级管理员角色"))
+		return nil, errors.New(fmt.Sprintf("不允许操作超级管理员角色"))
 	}
 
 	err := query.Q.Transaction(func(tx *query.Query) error {

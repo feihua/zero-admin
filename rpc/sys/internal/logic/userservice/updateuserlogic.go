@@ -68,7 +68,7 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 		UpdateBy:   in.UpdateBy,   // 更新者
 	}
 
-	_, err = q.Updates(user)
+	err = l.svcCtx.DB.Model(&model.SysUser{}).WithContext(l.ctx).Where(query.SysUser.ID.Eq(in.Id)).Save(user).Error
 
 	err = query.Q.Transaction(func(tx *query.Query) error {
 		_, err = tx.SysUser.WithContext(l.ctx).Updates(user)

@@ -10,7 +10,8 @@ WORKDIR /build/zero
 COPY . .
 RUN sh -c "[ -f go.mod ]" || exit
 COPY api/admin/etc /app/etc
-RUN go build -ldflags="-s -w" -o /app/admin api/admin/admin.go
+#RUN go build -ldflags="-s -w" -tags no_k8s  -o /app/admin api/admin/admin.go
+RUN go build -ldflags="-s -w" -tags no_k8s  -o /app/admin api/admin/admin.go
 
 
 FROM alpine
