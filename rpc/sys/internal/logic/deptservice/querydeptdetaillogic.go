@@ -40,25 +40,29 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq)
 		return nil, errors.New("查询部门信息表详情失败")
 	}
 
-	data := &sysclient.QueryDeptDetailResp{
-		Id:         dept.ID,                                       // 编号
-		DeptName:   dept.DeptName,                                 // 部门名称
-		DeptStatus: dept.DeptStatus,                               // 部门状态
-		DeptSort:   dept.DeptSort,                                 // 部门排序
-		ParentId:   dept.ParentID,                                 // 上级机构ID，一级机构为0
-		Leader:     dept.Leader,                                   // 负责人
-		Phone:      dept.Phone,                                    // 电话号码
-		Email:      dept.Email,                                    // 邮箱
-		Remark:     dept.Remark,                                   // 备注信息
-		IsDeleted:  dept.IsDeleted,                                // 是否删除  0：否  1：是
-		ParentIds:  GetParentIds(dept.ParentIds),                  // 上级机构IDs，一级机构为0
-		CreateBy:   dept.CreateBy,                                 // 创建者
-		CreateTime: dept.CreateTime.Format("2006-01-02 15:04:05"), // 创建时间
-		UpdateBy:   dept.UpdateBy,                                 // 更新者
-		UpdateTime: time_util.TimeToString(dept.UpdateTime),       // 更新时间
+	if dept == nil {
+		logc.Errorf(l.ctx, "查询部门信息表详情失败,参数：%+v,部门不存在", in)
+		return nil, errors.New("查询部门信息表详情失败,部门不存在")
 	}
 
-	logc.Infof(l.ctx, "查询部门信息表详情,参数：%+v,响应：%+v", in, data)
+	createTime := dept.CreateTime.Format("2006-01-02 15:04:05") // 创建时间
+	data := &sysclient.QueryDeptDetailResp{
+		Id:         dept.ID,                                 // 编号
+		DeptName:   dept.DeptName,                           // 部门名称
+		DeptStatus: dept.DeptStatus,                         // 部门状态
+		DeptSort:   dept.DeptSort,                           // 部门排序
+		ParentId:   dept.ParentID,                           // 上级机构ID，一级机构为0
+		Leader:     dept.Leader,                             // 负责人
+		Phone:      dept.Phone,                              // 电话号码
+		Email:      dept.Email,                              // 邮箱
+		Remark:     dept.Remark,                             // 备注信息
+		IsDeleted:  dept.IsDeleted,                          // 是否删除  0：否  1：是
+		ParentIds:  GetParentIds(dept.ParentIds),            // 上级机构IDs，一级机构为0
+		CreateBy:   dept.CreateBy,                           // 创建者
+		CreateTime: createTime,                              // 创建时间
+		UpdateBy:   dept.UpdateBy,                           // 更新者
+		UpdateTime: time_util.TimeToString(dept.UpdateTime), // 更新时间
+	}
 
 	return data, nil
 
