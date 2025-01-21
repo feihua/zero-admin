@@ -64,23 +64,27 @@ func (l *AddDeptLogic) AddDept(in *sysclient.AddDeptReq) (*sysclient.AddDeptResp
 		return nil, errors.New(fmt.Sprintf("查询部门信息失败"))
 	}
 
+	if parentDept == nil {
+		return nil, errors.New("添加部门失败,上级部门不存在")
+	}
+
 	if parentDept.DeptStatus != 1 {
-		logc.Errorf(l.ctx, "部门停用，不允许新增：%+v", parentDept.DeptName)
-		return nil, errors.New(fmt.Sprintf("部门：%s,停用，不允许新增", parentDept.DeptName))
+		return nil, errors.New(fmt.Sprintf("添加部门失败,：%s,停用，不允许新增", parentDept.DeptName))
 	}
 
 	// 4.部门不存在时,则直接添加部门
+	parentId := strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1) // 上级机构IDs，一级机构为0
 	dept := &model.SysDept{
 		DeptName:   in.DeptName,   // 部门名称
 		DeptStatus: in.DeptStatus, // 部门状态
 		DeptSort:   in.DeptSort,   // 部门排序
-		ParentIds:  strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1),
-		Leader:     in.Leader,   // 负责人
-		Phone:      in.Phone,    // 电话号码
-		Email:      in.Email,    // 邮箱
-		Remark:     in.Remark,   // 备注信息
-		IsDeleted:  0,           // 是否删除  0：否  1：是
-		CreateBy:   in.CreateBy, // 创建者
+		ParentIds:  parentId,      // 上级机构IDs，一级机构为0
+		Leader:     in.Leader,     // 负责人
+		Phone:      in.Phone,      // 电话号码
+		Email:      in.Email,      // 邮箱
+		Remark:     in.Remark,     // 备注信息
+		IsDeleted:  0,             // 是否删除  0：否  1：是
+		CreateBy:   in.CreateBy,   // 创建者
 	}
 
 	err = q.Create(dept)

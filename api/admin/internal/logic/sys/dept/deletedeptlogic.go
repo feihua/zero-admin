@@ -35,7 +35,7 @@ func NewDeleteDeptLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteD
 // DeleteDept 删除部门信息
 func (l *DeleteDeptLogic) DeleteDept(req *types.DeleteDeptReq) (*types.DeleteDeptResp, error) {
 	_, err := l.svcCtx.DeptService.DeleteDept(l.ctx, &sysclient.DeleteDeptReq{
-		Ids: req.Ids, // 编号
+		Id: req.Id, // 编号
 	})
 
 	if err != nil {

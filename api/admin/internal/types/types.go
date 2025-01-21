@@ -648,7 +648,7 @@ type DeleteCouponResp struct {
 }
 
 type DeleteDeptReq struct {
-	Ids []int64 `form:"ids"`
+	Id int64 `form:"ids"`
 }
 
 type DeleteDeptResp struct {

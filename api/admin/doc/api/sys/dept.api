@@ -24,7 +24,7 @@ type (
 	}
 	// 删除部门信息
 	DeleteDeptReq {
-		Ids []int64 `form:"ids"`
+		Id int64 `form:"ids"`
 	}
 	DeleteDeptResp {
 		Code    string `json:"code"`
