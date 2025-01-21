@@ -32,29 +32,32 @@ func NewDeleteDictTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *De
 }
 
 // DeleteDictType 删除字典类型
-// 1.查询字典的sys_dict_type表中的dict_type字段
-// 2.删除sys_dict_type表中的字典类记录
-// 3.删除sys_dict_item表中的字典数据记录
+// 1.查询字典是否存在
+// 2.字典类型下是否有字典数据
 func (l *DeleteDictTypeLogic) DeleteDictType(in *sysclient.DeleteDictTypeReq) (*sysclient.DeleteDictTypeResp, error) {
 	err := query.Q.Transaction(func(tx *query.Query) error {
-
-		// 1.查询字典的sys_dict_type中的dict_type字段
-		var dictType []string
 		q := tx.SysDictType
-		err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Select(q.DictType).Scan(&dictType)
-		if err != nil {
-			return err
+		q1 := tx.SysDictItem
+
+		ids := in.Ids
+		for _, id := range ids {
+			// 1.查询字典是否存在
+			dictType, err := q.WithContext(l.ctx).Where(q.ID.Eq(id)).First()
+			if err != nil {
+				return err
+			}
+
+			// 2.字典类型下是否有字典数据
+			count, err := q1.WithContext(l.ctx).Where(q1.DictType.Eq(dictType.DictType)).Count()
+			if err != nil {
+				return err
+			}
+			if count > 0 {
+				return errors.New("字典类型下有字典数据，不允许删除")
+			}
 		}
 
-		// 2.删除sys_dict_type中的字典类记录
-		_, err = q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
-		if err != nil {
-			return err
-		}
-
-		// 3.删除sys_dict_item中的字典数据记录
-		dictItem := tx.SysDictItem
-		_, err = dictItem.WithContext(l.ctx).Where(dictItem.DictType.In(dictType...)).Delete()
+		_, err := q.WithContext(l.ctx).Where(q.ID.In(ids...)).Delete()
 		if err != nil {
 			return err
 		}
@@ -63,8 +66,8 @@ func (l *DeleteDictTypeLogic) DeleteDictType(in *sysclient.DeleteDictTypeReq) (*
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "删除字典类型信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("删除字典类型信息失败")
+		logc.Errorf(l.ctx, "删除字典类型失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除字典类型失败")
 	}
 
 	return &sysclient.DeleteDictTypeResp{}, nil

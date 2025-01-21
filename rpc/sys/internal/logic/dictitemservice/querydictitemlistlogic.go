@@ -54,24 +54,23 @@ func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemLi
 
 	var list []*sysclient.DictItemListData
 
-	for _, dept := range result {
+	for _, dict := range result {
 		list = append(list, &sysclient.DictItemListData{
-			CreateBy:   dept.CreateBy,
-			CreateTime: dept.CreateTime.Format("2006-01-02 15:04:05"),
-			DictLabel:  dept.DictLabel,
-			DictSort:   dept.DictSort,
-			DictStatus: dept.DictStatus,
-			DictType:   dept.DictType,
-			DictValue:  dept.DictValue,
-			Id:         dept.ID,
-			IsDefault:  dept.IsDefault,
-			Remark:     dept.Remark,
-			UpdateBy:   dept.UpdateBy,
-			UpdateTime: time_util.TimeToString(dept.UpdateTime),
+			Id:         dict.ID,                                       // 编号
+			DictType:   dict.DictType,                                 // 字典类型
+			DictLabel:  dict.DictLabel,                                // 字典标签
+			DictValue:  dict.DictValue,                                // 字典键值
+			DictStatus: dict.DictStatus,                               // 字典状态
+			DictSort:   dict.DictSort,                                 // 排序
+			Remark:     dict.Remark,                                   // 备注信息
+			IsDefault:  dict.IsDefault,                                // 是否默认  0：否  1：是
+			IsDeleted:  dict.IsDeleted,                                // 是否删除  0：否  1：是
+			CreateBy:   dict.CreateBy,                                 // 创建者
+			CreateTime: dict.CreateTime.Format("2006-01-02 15:04:05"), // 创建时间
+			UpdateBy:   dict.UpdateBy,                                 // 更新者
+			UpdateTime: time_util.TimeToString(dict.UpdateTime),       // 更新时间
 		})
 	}
-
-	logc.Infof(l.ctx, "查询字典数据列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &sysclient.QueryDictItemListResp{
 		Total: count,

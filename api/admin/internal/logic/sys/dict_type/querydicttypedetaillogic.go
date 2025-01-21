@@ -44,22 +44,24 @@ func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(req *types.QueryDictTypeD
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	dictType := types.QueryDictTypeDetailData{
-		CreateBy:   detail.CreateBy,
-		CreateTime: detail.CreateTime,
-		DictName:   detail.DictType,
-		DictStatus: detail.DictStatus,
-		DictType:   detail.DictType,
-		Id:         detail.Id,
-		IsSystem:   detail.IsSystem,
-		Remark:     detail.Remark,
-		UpdateBy:   detail.UpdateBy,
-		UpdateTime: detail.UpdateTime,
+	data := types.QueryDictTypeDetailData{
+		Id:         detail.Id,         // 编号
+		DictName:   detail.DictName,   // 字典名称
+		DictType:   detail.DictType,   // 字典类型
+		DictStatus: detail.DictStatus, // 字典状态
+		Remark:     detail.Remark,     // 备注信息
+		IsSystem:   detail.IsSystem,   // 是否系统预留  0：否  1：是
+		IsDeleted:  detail.IsDeleted,  // 是否删除  0：否  1：是
+		CreateBy:   detail.CreateBy,   // 创建者
+		CreateTime: detail.CreateTime, // 创建时间
+		UpdateBy:   detail.UpdateBy,   // 更新者
+		UpdateTime: detail.UpdateTime, // 更新时间
+
 	}
 
 	return &types.QueryDictTypeDetailResp{
 		Code:    "000000",
 		Message: "查询字典类型成功",
-		Data:    dictType,
+		Data:    data,
 	}, nil
 }

@@ -33,44 +33,73 @@ func NewAddDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddDi
 
 // AddDictItem 添加字典数据
 // 1.根据字典类型查询字典是否已存在
-// 2.根据字典数据名称查询字典数据是否已存在
-// 3.如果字典数据已存在,则直接返回
-// 4.字典数据不存在时,则直接添加字典数据
+// 2.查询字典标签是否已存在,如果字典标签已存在,则直接返回
+// 3.查询字典键值是否已存在,如果字典键值已存在,则直接返回
+// 4.如果新增字典数据是默认,则修改其他选项为非默认状态
+// 5.字典数据不存在时,则直接添加字典数据
 func (l *AddDictItemLogic) AddDictItem(in *sysclient.AddDictItemReq) (*sysclient.AddDictItemResp, error) {
 	q := query.SysDictItem
 
-	//1.根据字典类型查询字典是否已存在
-	_, err := query.SysDictType.WithContext(l.ctx).Where(query.SysDictType.DictType.Eq(in.DictType)).First()
+	dictType := in.DictType
+
+	// 1.根据字典类型查询字典是否已存在
+	dictData, err := query.SysDictType.WithContext(l.ctx).Where(query.SysDictType.DictType.Eq(dictType)).First()
 	if err != nil {
-		logc.Errorf(l.ctx, "根据字典类型：%s,查询字典信息失败,异常:%s", in.DictType, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询字典信息失败"))
+		logc.Errorf(l.ctx, "根据字典类型：%s,查询字典信息失败,异常:%s", dictType, err.Error())
+		return nil, errors.New(fmt.Sprintf("新增字典数据失败"))
 	}
 
-	//2.根据字典数据名称查询字典数据是否已存在
-	count, err := q.WithContext(l.ctx).Where(q.DictLabel.Eq(in.DictLabel), q.DictType.Eq(in.DictType)).Count()
-
-	if err != nil {
-		logc.Errorf(l.ctx, "根据字典数据名称：%s,查询字典数据信息失败,异常:%s", in.DictLabel, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询字典数据信息失败"))
+	if dictData == nil {
+		logc.Errorf(l.ctx, "新增字典数据失败,字典类型不存在：%+v", in)
+		return nil, errors.New(fmt.Sprintf("新增字典数据失败,字典类型：%s,不存在", dictType))
 	}
 
-	//3.如果字典数据已存在,则直接返回
+	// 2.查询字典标签是否已存在,如果字典标签已存在,则直接返回
+	count, err := q.WithContext(l.ctx).Where(q.DictLabel.Eq(in.DictLabel), q.DictType.Eq(dictType)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据字典标签：%s,查询字典数据信息失败,异常:%s", in.DictLabel, err.Error())
+		return nil, errors.New(fmt.Sprintf("新增字典数据失败"))
+	}
+
 	if count > 0 {
-		logc.Errorf(l.ctx, "字典数据信息已存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("字典数据：%s,已存在", in.DictLabel))
+		logc.Errorf(l.ctx, "新增字典数据失败,字典标签已存在：%+v", in)
+		return nil, errors.New(fmt.Sprintf("新增字典数据失败,字典标签：%s,已存在", in.DictLabel))
 	}
 
-	//4.字典数据不存在时,则直接添加字典数据
+	// 3.查询字典键值是否已存在,如果字典键值已存在,则直接返回
+	count, err = q.WithContext(l.ctx).Where(q.DictValue.Eq(in.DictValue), q.DictType.Eq(dictType)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据字典键值：%s,查询字典数据信息失败,异常:%s", in.DictValue, err.Error())
+		return nil, errors.New(fmt.Sprintf("新增字典数据失败"))
+	}
+
+	if count > 0 {
+		logc.Errorf(l.ctx, "新增字典数据失败,字典键值已存在：%+v", in)
+		return nil, errors.New(fmt.Sprintf("新增字典数据失败,字典键值：%s,已存在", in.DictValue))
+	}
+
+	// 4.如果新增字典数据是默认,则修改其他选项为非默认状态
+	if in.IsDefault == 1 {
+		_, err = q.WithContext(l.ctx).Where(q.DictType.Eq(dictType)).Where(q.IsDefault.Eq(1)).Update(q.IsDefault, 0)
+		if err != nil {
+			logc.Errorf(l.ctx, "修改字典数据默认状态失败,参数:%+v,异常:%s", in, err.Error())
+			return nil, errors.New("新增字典数据失败")
+		}
+	}
+
+	// 5.字典数据不存在时,则直接添加字典数据
 	dictItem := &model.SysDictItem{
-		DictType:   in.DictType,
-		DictLabel:  in.DictLabel,
-		DictValue:  in.DictValue,
-		DictStatus: in.DictStatus,
-		DictSort:   in.DictSort,
-		Remark:     in.Remark,
-		IsDefault:  in.IsDefault,
-		IsDeleted:  0,
-		CreateBy:   in.CreateBy,
+		DictType:   dictType,      // 字典类型
+		DictLabel:  in.DictLabel,  // 字典标签
+		DictValue:  in.DictValue,  // 字典键值
+		DictStatus: in.DictStatus, // 字典状态
+		DictSort:   in.DictSort,   // 排序
+		Remark:     in.Remark,     // 备注信息
+		IsDefault:  in.IsDefault,  // 是否默认  0：否  1：是
+		IsDeleted:  0,             // 是否删除  0：否  1：是
+		CreateBy:   in.CreateBy,   // 创建者
 	}
 
 	err = q.WithContext(l.ctx).Create(dictItem)

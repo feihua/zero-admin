@@ -19,15 +19,16 @@ type AddCompanyAddressResp struct {
 }
 
 type AddDeptReq struct {
-	DeptName   string  `json:"deptName"`        //部门名称
-	DeptSort   int32   `json:"deptSort"`        //部门排序
-	DeptStatus int32   `json:"deptStatus"`      //部门状态
-	Email      string  `json:"email"`           //邮箱
-	Leader     string  `json:"leader"`          //负责人
-	ParentId   int64   `json:"parentId"`        //上级机构ID，一级机构为0
-	ParentIds  []int64 `json:"parentIds"`       //上级机构IDs，一级机构为0
-	Phone      string  `json:"phone"`           //电话号码
-	Remark     string  `json:"remark,optional"` //备注信息
+	DeptName   string  `json:"deptName"`             //部门名称
+	DeptStatus int32   `json:"deptStatus,default=2"` //部门状态
+	DeptSort   int32   `json:"deptSort"`             //部门排序
+	ParentId   int64   `json:"parentId"`             //上级机构ID，一级机构为0
+	Leader     string  `json:"leader"`               //负责人
+	Phone      string  `json:"phone"`                //电话号码
+	Email      string  `json:"email"`                //邮箱
+	Remark     string  `json:"remark,optional"`      //备注信息
+	IsDeleted  int32   `json:"isDeleted"`            //是否删除  0：否  1：是
+	ParentIds  []int64 `json:"parentIds"`            //上级机构IDs，一级机构为0
 }
 
 type AddDeptResp struct {
@@ -36,13 +37,13 @@ type AddDeptResp struct {
 }
 
 type AddDictItemReq struct {
-	DictLabel  string `json:"dictLabel"`       //字典标签
-	DictSort   int32  `json:"dictSort"`        //排序
-	DictStatus int32  `json:"dictStatus"`      //字典状态
-	DictType   string `json:"dictType"`        //字典类型
-	DictValue  string `json:"dictValue"`       //字典键值
-	IsDefault  int32  `json:"isDefault"`       //是否默认  0：否  1：是
-	Remark     string `json:"remark,optional"` //备注信息
+	DictType   string `json:"dictType"`             //字典类型
+	DictLabel  string `json:"dictLabel"`            //字典标签
+	DictValue  string `json:"dictValue"`            //字典键值
+	DictStatus int32  `json:"dictStatus,default=2"` //字典状态
+	DictSort   int32  `json:"dictSort"`             //排序
+	Remark     string `json:"remark,optional"`      //备注信息
+	IsDefault  int32  `json:"isDefault"`            //是否默认  0：否  1：是
 }
 
 type AddDictItemResp struct {
@@ -51,11 +52,11 @@ type AddDictItemResp struct {
 }
 
 type AddDictTypeReq struct {
-	DictName   string `json:"dictName"`        //字典名称
-	DictStatus int32  `json:"dictStatus"`      //字典状态
-	DictType   string `json:"dictType"`        //字典类型
-	IsSystem   int32  `json:"isSystem"`        //是否系统预留  0：否  1：是
-	Remark     string `json:"remark,optional"` //备注信息
+	DictName   string `json:"dictName"`             //字典名称
+	DictType   string `json:"dictType"`             //字典类型
+	DictStatus int32  `json:"dictStatus,default=2"` //字典状态
+	Remark     string `json:"remark,optional"`      //备注信息
+	IsSystem   int32  `json:"isSystem"`             //是否系统预留  0：否  1：是
 }
 
 type AddDictTypeResp struct {
@@ -1967,18 +1968,19 @@ type QueryDeptAndPostListResp struct {
 }
 
 type QueryDeptDetailData struct {
+	Id         int64   `json:"id"`         //编号
+	DeptName   string  `json:"deptName"`   //部门名称
+	DeptStatus int32   `json:"deptStatus"` //部门状态
+	DeptSort   int32   `json:"deptSort"`   //部门排序
+	ParentId   int64   `json:"parentId"`   //上级机构ID，一级机构为0
+	Leader     string  `json:"leader"`     //负责人
+	Phone      string  `json:"phone"`      //电话号码
+	Email      string  `json:"email"`      //邮箱
+	Remark     string  `json:"remark"`     //备注信息
+	IsDeleted  int32   `json:"isDeleted"`  //是否删除  0：否  1：是
+	ParentIds  []int64 `json:"parentIds"`  //上级机构IDs，一级机构为0
 	CreateBy   string  `json:"createBy"`   //创建者
 	CreateTime string  `json:"createTime"` //创建时间
-	DeptName   string  `json:"deptName"`   //部门名称
-	DeptSort   int32   `json:"deptSort"`   //部门排序
-	DeptStatus int32   `json:"deptStatus"` //部门状态
-	Email      string  `json:"email"`      //邮箱
-	Id         int64   `json:"id"`         //编号
-	Leader     string  `json:"leader"`     //负责人
-	ParentId   int64   `json:"parentId"`   //上级机构ID，一级机构为0
-	ParentIds  []int64 `json:"parentIds"`  //上级机构IDs，一级机构为0
-	Phone      string  `json:"phone"`      //电话号码
-	Remark     string  `json:"remark"`     //备注信息
 	UpdateBy   string  `json:"updateBy"`   //更新者
 	UpdateTime string  `json:"updateTime"` //更新时间
 }
@@ -1994,18 +1996,19 @@ type QueryDeptDetailResp struct {
 }
 
 type QueryDeptListData struct {
+	Id         int64   `json:"id"`         //编号
+	DeptName   string  `json:"deptName"`   //部门名称
+	DeptStatus int32   `json:"deptStatus"` //部门状态
+	DeptSort   int32   `json:"deptSort"`   //部门排序
+	ParentId   int64   `json:"parentId"`   //上级机构ID，一级机构为0
+	Leader     string  `json:"leader"`     //负责人
+	Phone      string  `json:"phone"`      //电话号码
+	Email      string  `json:"email"`      //邮箱
+	Remark     string  `json:"remark"`     //备注信息
+	IsDeleted  int32   `json:"isDeleted"`  //是否删除  0：否  1：是
+	ParentIds  []int64 `json:"parentIds"`  //上级机构IDs，一级机构为0
 	CreateBy   string  `json:"createBy"`   //创建者
 	CreateTime string  `json:"createTime"` //创建时间
-	DeptName   string  `json:"deptName"`   //部门名称
-	DeptSort   int32   `json:"deptSort"`   //部门排序
-	DeptStatus int32   `json:"deptStatus"` //部门状态
-	Email      string  `json:"email"`      //邮箱
-	Id         int64   `json:"id"`         //编号
-	Leader     string  `json:"leader"`     //负责人
-	ParentId   int64   `json:"parentId"`   //上级机构ID，一级机构为0
-	ParentIds  []int64 `json:"parentIds"`  //上级机构IDs，一级机构为0
-	Phone      string  `json:"phone"`      //电话号码
-	Remark     string  `json:"remark"`     //备注信息
 	UpdateBy   string  `json:"updateBy"`   //更新者
 	UpdateTime string  `json:"updateTime"` //更新时间
 }
@@ -2024,16 +2027,17 @@ type QueryDeptListResp struct {
 }
 
 type QueryDictItemDetailData struct {
+	Id         int64  `json:"id"`         //编号
+	DictType   string `json:"dictType"`   //字典类型
+	DictLabel  string `json:"dictLabel"`  //字典标签
+	DictValue  string `json:"dictValue"`  //字典键值
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictSort   int32  `json:"dictSort"`   //排序
+	Remark     string `json:"remark"`     //备注信息
+	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
+	IsDeleted  int32  `json:"isDeleted"`  //是否删除  0：否  1：是
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
-	DictLabel  string `json:"dictLabel"`  //字典标签
-	DictSort   int32  `json:"dictSort"`   //排序
-	DictStatus int32  `json:"dictStatus"` //字典状态
-	DictType   string `json:"dictType"`   //字典类型
-	DictValue  string `json:"dictValue"`  //字典键值
-	Id         int64  `json:"id"`         //编号
-	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
-	Remark     string `json:"remark"`     //备注信息
 	UpdateBy   string `json:"updateBy"`   //更新者
 	UpdateTime string `json:"updateTime"` //更新时间
 }
@@ -2049,16 +2053,17 @@ type QueryDictItemDetailResp struct {
 }
 
 type QueryDictItemListData struct {
+	Id         int64  `json:"id"`         //编号
+	DictType   string `json:"dictType"`   //字典类型
+	DictLabel  string `json:"dictLabel"`  //字典标签
+	DictValue  string `json:"dictValue"`  //字典键值
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	DictSort   int32  `json:"dictSort"`   //排序
+	Remark     string `json:"remark"`     //备注信息
+	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
+	IsDeleted  int32  `json:"isDeleted"`  //是否删除  0：否  1：是
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
-	DictLabel  string `json:"dictLabel"`  //字典标签
-	DictSort   int32  `json:"dictSort"`   //排序
-	DictStatus int32  `json:"dictStatus"` //字典状态
-	DictType   string `json:"dictType"`   //字典类型
-	DictValue  string `json:"dictValue"`  //字典键值
-	Id         int64  `json:"id"`         //编号
-	IsDefault  int32  `json:"isDefault"`  //是否默认  0：否  1：是
-	Remark     string `json:"remark"`     //备注信息
 	UpdateBy   string `json:"updateBy"`   //更新者
 	UpdateTime string `json:"updateTime"` //更新时间
 }
@@ -2082,14 +2087,15 @@ type QueryDictItemListResp struct {
 }
 
 type QueryDictTypeDetailData struct {
+	Id         int64  `json:"id"`         //编号
+	DictName   string `json:"dictName"`   //字典名称
+	DictType   string `json:"dictType"`   //字典类型
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	Remark     string `json:"remark"`     //备注信息
+	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
+	IsDeleted  int32  `json:"isDeleted"`  //是否删除  0：否  1：是
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
-	DictName   string `json:"dictName"`   //字典名称
-	DictStatus int32  `json:"dictStatus"` //字典状态
-	DictType   string `json:"dictType"`   //字典类型
-	Id         int64  `json:"id"`         //编号
-	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
-	Remark     string `json:"remark"`     //备注信息
 	UpdateBy   string `json:"updateBy"`   //更新者
 	UpdateTime string `json:"updateTime"` //更新时间
 }
@@ -2105,14 +2111,15 @@ type QueryDictTypeDetailResp struct {
 }
 
 type QueryDictTypeListData struct {
+	Id         int64  `json:"id"`         //编号
+	DictName   string `json:"dictName"`   //字典名称
+	DictType   string `json:"dictType"`   //字典类型
+	DictStatus int32  `json:"dictStatus"` //字典状态
+	Remark     string `json:"remark"`     //备注信息
+	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
+	IsDeleted  int32  `json:"isDeleted"`  //是否删除  0：否  1：是
 	CreateBy   string `json:"createBy"`   //创建者
 	CreateTime string `json:"createTime"` //创建时间
-	DictName   string `json:"dictName"`   //字典名称
-	DictStatus int32  `json:"dictStatus"` //字典状态
-	DictType   string `json:"dictType"`   //字典类型
-	Id         int64  `json:"id"`         //编号
-	IsSystem   int32  `json:"isSystem"`   //是否系统预留  0：否  1：是
-	Remark     string `json:"remark"`     //备注信息
 	UpdateBy   string `json:"updateBy"`   //更新者
 	UpdateTime string `json:"updateTime"` //更新时间
 }
@@ -3351,16 +3358,17 @@ type UpdateCompanyAddressStatusResp struct {
 }
 
 type UpdateDeptReq struct {
-	DeptName   string  `json:"deptName"`        //部门名称
-	DeptSort   int32   `json:"deptSort"`        //部门排序
-	DeptStatus int32   `json:"deptStatus"`      //部门状态
-	Email      string  `json:"email"`           //邮箱
-	Id         int64   `json:"id"`              //编号
-	Leader     string  `json:"leader"`          //负责人
-	ParentId   int64   `json:"parentId"`        //上级机构ID，一级机构为0
-	ParentIds  []int64 `json:"parentIds"`       //上级机构IDs，一级机构为0
-	Phone      string  `json:"phone"`           //电话号码
-	Remark     string  `json:"remark,optional"` //备注信息
+	Id         int64   `json:"id"`                   //编号
+	DeptName   string  `json:"deptName"`             //部门名称
+	DeptStatus int32   `json:"deptStatus,default=2"` //部门状态
+	DeptSort   int32   `json:"deptSort"`             //部门排序
+	ParentId   int64   `json:"parentId"`             //上级机构ID，一级机构为0
+	Leader     string  `json:"leader"`               //负责人
+	Phone      string  `json:"phone"`                //电话号码
+	Email      string  `json:"email"`                //邮箱
+	Remark     string  `json:"remark,optional"`      //备注信息
+	IsDeleted  int32   `json:"isDeleted"`            //是否删除  0：否  1：是
+	ParentIds  []int64 `json:"parentIds"`            //上级机构IDs，一级机构为0
 }
 
 type UpdateDeptResp struct {
@@ -3379,14 +3387,14 @@ type UpdateDeptStatusResp struct {
 }
 
 type UpdateDictItemReq struct {
-	DictLabel  string `json:"dictLabel"`       //字典标签
-	DictSort   int32  `json:"dictSort"`        //排序
-	DictStatus int32  `json:"dictStatus"`      //字典状态
-	DictType   string `json:"dictType"`        //字典类型
-	DictValue  string `json:"dictValue"`       //字典键值
-	Id         int64  `json:"id"`              //编号
-	IsDefault  int32  `json:"isDefault"`       //是否默认  0：否  1：是
-	Remark     string `json:"remark,optional"` //备注信息
+	Id         int64  `json:"id"`                   //编号
+	DictType   string `json:"dictType"`             //字典类型
+	DictLabel  string `json:"dictLabel"`            //字典标签
+	DictValue  string `json:"dictValue"`            //字典键值
+	DictStatus int32  `json:"dictStatus,default=2"` //字典状态
+	DictSort   int32  `json:"dictSort"`             //排序
+	Remark     string `json:"remark,optional"`      //备注信息
+	IsDefault  int32  `json:"isDefault"`            //是否默认  0：否  1：是
 }
 
 type UpdateDictItemResp struct {
@@ -3405,12 +3413,12 @@ type UpdateDictItemStatusResp struct {
 }
 
 type UpdateDictTypeReq struct {
-	DictName   string `json:"dictName"`        //字典名称
-	DictStatus int32  `json:"dictStatus"`      //字典状态
-	DictType   string `json:"dictType"`        //字典类型
-	Id         int64  `json:"id"`              //编号
-	IsSystem   int32  `json:"isSystem"`        //是否系统预留  0：否  1：是
-	Remark     string `json:"remark,optional"` //备注信息
+	Id         int64  `json:"id"`                   //编号
+	DictName   string `json:"dictName"`             //字典名称
+	DictType   string `json:"dictType"`             //字典类型
+	DictStatus int32  `json:"dictStatus,default=2"` //字典状态
+	Remark     string `json:"remark,optional"`      //备注信息
+	IsSystem   int32  `json:"isSystem"`             //是否系统预留  0：否  1：是
 }
 
 type UpdateDictTypeResp struct {

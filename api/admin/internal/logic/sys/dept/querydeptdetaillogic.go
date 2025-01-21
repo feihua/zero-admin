@@ -45,20 +45,21 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(req *types.QueryDeptDetailReq) (r
 	}
 
 	dept := types.QueryDeptDetailData{
-		CreateBy:   detail.CreateBy,
-		CreateTime: detail.CreateTime,
-		DeptName:   detail.DeptName,
-		DeptSort:   detail.DeptSort,
-		DeptStatus: detail.DeptStatus,
-		Email:      detail.Email,
-		Id:         detail.Id,
-		Leader:     detail.Leader,
-		ParentId:   detail.ParentId,
-		ParentIds:  detail.ParentIds,
-		Phone:      detail.Phone,
-		Remark:     detail.Remark,
-		UpdateBy:   detail.UpdateBy,
-		UpdateTime: detail.UpdateTime,
+		Id:         detail.Id,         // 编号
+		DeptName:   detail.DeptName,   // 部门名称
+		DeptStatus: detail.DeptStatus, // 部门状态
+		DeptSort:   detail.DeptSort,   // 部门排序
+		ParentId:   detail.ParentId,   // 上级机构ID，一级机构为0
+		Leader:     detail.Leader,     // 负责人
+		Phone:      detail.Phone,      // 电话号码
+		Email:      detail.Email,      // 邮箱
+		Remark:     detail.Remark,     // 备注信息
+		IsDeleted:  detail.IsDeleted,  // 是否删除  0：否  1：是
+		ParentIds:  detail.ParentIds,  // 上级机构IDs，一级机构为0
+		CreateBy:   detail.CreateBy,   // 创建者
+		CreateTime: detail.CreateTime, // 创建时间
+		UpdateBy:   detail.UpdateBy,   // 更新者
+		UpdateTime: detail.UpdateTime, // 更新时间
 	}
 
 	return &types.QueryDeptDetailResp{

@@ -8,14 +8,15 @@ type (
 	// 添加部门信息
 	AddDeptReq {
 		DeptName   string  `json:"deptName"` //部门名称
+		DeptStatus int32   `json:"deptStatus,default=2"` //部门状态
 		DeptSort   int32   `json:"deptSort"` //部门排序
-		DeptStatus int32   `json:"deptStatus"` //部门状态
-		Email      string  `json:"email"` //邮箱
-		Leader     string  `json:"leader"` //负责人
 		ParentId   int64   `json:"parentId"` //上级机构ID，一级机构为0
-		ParentIds  []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
+		Leader     string  `json:"leader"` //负责人
 		Phone      string  `json:"phone"` //电话号码
+		Email      string  `json:"email"` //邮箱
 		Remark     string  `json:"remark,optional"` //备注信息
+		IsDeleted  int32   `json:"isDeleted"` //是否删除  0：否  1：是
+		ParentIds  []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
 	}
 	AddDeptResp {
 		Code    string `json:"code"`
@@ -31,16 +32,17 @@ type (
 	}
 	// 更新部门信息
 	UpdateDeptReq {
-		DeptName   string  `json:"deptName"` //部门名称
-		DeptSort   int32   `json:"deptSort"` //部门排序
-		DeptStatus int32   `json:"deptStatus"` //部门状态
-		Email      string  `json:"email"` //邮箱
 		Id         int64   `json:"id"` //编号
-		Leader     string  `json:"leader"` //负责人
+		DeptName   string  `json:"deptName"` //部门名称
+		DeptStatus int32   `json:"deptStatus,default=2"` //部门状态
+		DeptSort   int32   `json:"deptSort"` //部门排序
 		ParentId   int64   `json:"parentId"` //上级机构ID，一级机构为0
-		ParentIds  []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
+		Leader     string  `json:"leader"` //负责人
 		Phone      string  `json:"phone"` //电话号码
+		Email      string  `json:"email"` //邮箱
 		Remark     string  `json:"remark,optional"` //备注信息
+		IsDeleted  int32   `json:"isDeleted"` //是否删除  0：否  1：是
+		ParentIds  []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
 	}
 	UpdateDeptResp {
 		Code    string `json:"code"`
@@ -60,18 +62,19 @@ type (
 		Id int64 `form:"id"`
 	}
 	QueryDeptDetailData {
+		Id         int64   `json:"id"` //编号
+		DeptName   string  `json:"deptName"` //部门名称
+		DeptStatus int32   `json:"deptStatus"` //部门状态
+		DeptSort   int32   `json:"deptSort"` //部门排序
+		ParentId   int64   `json:"parentId"` //上级机构ID，一级机构为0
+		Leader     string  `json:"leader"` //负责人
+		Phone      string  `json:"phone"` //电话号码
+		Email      string  `json:"email"` //邮箱
+		Remark     string  `json:"remark"` //备注信息
+		IsDeleted  int32   `json:"isDeleted"` //是否删除  0：否  1：是
+		ParentIds  []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
 		CreateBy   string  `json:"createBy"` //创建者
 		CreateTime string  `json:"createTime"` //创建时间
-		DeptName   string  `json:"deptName"` //部门名称
-		DeptSort   int32   `json:"deptSort"` //部门排序
-		DeptStatus int32   `json:"deptStatus"` //部门状态
-		Email      string  `json:"email"` //邮箱
-		Id         int64   `json:"id"` //编号
-		Leader     string  `json:"leader"` //负责人
-		ParentId   int64   `json:"parentId"` //上级机构ID，一级机构为0
-		ParentIds  []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
-		Phone      string  `json:"phone"` //电话号码
-		Remark     string  `json:"remark"` //备注信息
 		UpdateBy   string  `json:"updateBy"` //更新者
 		UpdateTime string  `json:"updateTime"` //更新时间
 	}
@@ -83,18 +86,19 @@ type (
 	// 分页查询部门信息列
 	QueryDeptListReq  {}
 	QueryDeptListData {
+		Id         int64   `json:"id"` //编号
+		DeptName   string  `json:"deptName"` //部门名称
+		DeptStatus int32   `json:"deptStatus"` //部门状态
+		DeptSort   int32   `json:"deptSort"` //部门排序
+		ParentId   int64   `json:"parentId"` //上级机构ID，一级机构为0
+		Leader     string  `json:"leader"` //负责人
+		Phone      string  `json:"phone"` //电话号码
+		Email      string  `json:"email"` //邮箱
+		Remark     string  `json:"remark"` //备注信息
+		IsDeleted  int32   `json:"isDeleted"` //是否删除  0：否  1：是
+		ParentIds  []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
 		CreateBy   string  `json:"createBy"` //创建者
 		CreateTime string  `json:"createTime"` //创建时间
-		DeptName   string  `json:"deptName"` //部门名称
-		DeptSort   int32   `json:"deptSort"` //部门排序
-		DeptStatus int32   `json:"deptStatus"` //部门状态
-		Email      string  `json:"email"` //邮箱
-		Id         int64   `json:"id"` //编号
-		Leader     string  `json:"leader"` //负责人
-		ParentId   int64   `json:"parentId"` //上级机构ID，一级机构为0
-		ParentIds  []int64 `json:"parentIds"` //上级机构IDs，一级机构为0
-		Phone      string  `json:"phone"` //电话号码
-		Remark     string  `json:"remark"` //备注信息
 		UpdateBy   string  `json:"updateBy"` //更新者
 		UpdateTime string  `json:"updateTime"` //更新时间
 	}

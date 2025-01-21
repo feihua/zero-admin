@@ -35,8 +35,8 @@ func NewUpdateDictTypeStatusLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // UpdateDictTypeStatus 更新字典类型状态
 func (l *UpdateDictTypeStatusLogic) UpdateDictTypeStatus(req *types.UpdateDictTypeStatusReq) (resp *types.UpdateDictTypeStatusResp, err error) {
 	_, err = l.svcCtx.DictTypeService.UpdateDictTypeStatus(l.ctx, &sysclient.UpdateDictTypeStatusReq{
-		Ids:        req.DictIds,
-		DictStatus: req.DictStatus,
+		Ids:        req.DictIds,    // 编号
+		DictStatus: req.DictStatus, // 字典状态
 		UpdateBy:   l.ctx.Value("userName").(string),
 	})
 

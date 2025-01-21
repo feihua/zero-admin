@@ -6,16 +6,17 @@ option go_package = "./proto";
 
 // 添加部门信息表
 message AddDeptReq {
-  string create_by = 1; //创建者
+  int64 id = 1; //编号
   string dept_name = 2; //部门名称
-  int32 dept_sort = 3; //部门排序
-  int32 dept_status = 4; //部门状态
-  string email = 5; //邮箱
+  int32 dept_status = 3; //部门状态
+  int32 dept_sort = 4; //部门排序
+  int64 parent_id = 5; //上级机构ID，一级机构为0
   string leader = 6; //负责人
-  int64 parent_id = 7; //上级机构ID，一级机构为0
-  repeated int64 parent_ids = 8; //上级机构IDs，一级机构为0
-  string phone = 9; //电话号码
-  string remark = 10; //备注信息
+  string phone = 7; //电话号码
+  string email = 8; //邮箱
+  string remark = 9; //备注信息
+  repeated int64 parent_ids = 10; //上级机构IDs，一级机构为0
+  string create_by = 11; //创建者
 
 }
 
@@ -34,16 +35,16 @@ message DeleteDeptResp {
 
 // 更新部门信息表
 message UpdateDeptReq {
-  string dept_name = 1; //部门名称
-  int32 dept_sort = 2; //部门排序
+  int64 id = 1; //编号
+  string dept_name = 2; //部门名称
   int32 dept_status = 3; //部门状态
-  string email = 4; //邮箱
-  int64 id = 5; //编号
+  int32 dept_sort = 4; //部门排序
+  int64 parent_id = 5; //上级机构ID，一级机构为0
   string leader = 6; //负责人
-  int64 parent_id = 7; //上级机构ID，一级机构为0
-  repeated int64 parent_ids = 8; //上级机构IDs，一级机构为0
-  string phone = 9; //电话号码
-  string remark = 10; //备注信息
+  string phone = 7; //电话号码
+  string email = 8; //邮箱
+  string remark = 9; //备注信息
+  repeated int64 parent_ids = 10; //上级机构IDs，一级机构为0
   string update_by = 11; //更新者
 
 }
@@ -70,18 +71,19 @@ message QueryDeptDetailReq {
 }
 
 message QueryDeptDetailResp {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  string dept_name = 3; //部门名称
+  int64 id = 1; //编号
+  string dept_name = 2; //部门名称
+  int32 dept_status = 3; //部门状态
   int32 dept_sort = 4; //部门排序
-  int32 dept_status = 5; //部门状态
-  string email = 6; //邮箱
-  int64 id = 7; //编号
-  string leader = 9; //负责人
-  int64 parent_id = 10; //上级机构ID，一级机构为0
+  int64 parent_id = 5; //上级机构ID，一级机构为0
+  string leader = 6; //负责人
+  string phone = 7; //电话号码
+  string email = 8; //邮箱
+  string remark = 9; //备注信息
+  int32 is_deleted = 10; //是否删除  0：否  1：是
   repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
-  string phone = 12; //电话号码
-  string remark = 13; //备注信息
+  string create_by = 12; //创建者
+  string create_time = 13; //创建时间
   string update_by = 14; //更新者
   string update_time = 15; //更新时间
 
@@ -93,18 +95,19 @@ message QueryDeptListReq {
 }
 
 message DeptListData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  string dept_name = 3; //部门名称
+  int64 id = 1; //编号
+  string dept_name = 2; //部门名称
+  int32 dept_status = 3; //部门状态
   int32 dept_sort = 4; //部门排序
-  int32 dept_status = 5; //部门状态
-  string email = 6; //邮箱
-  int64 id = 7; //编号
-  string leader = 9; //负责人
-  int64 parent_id = 10; //上级机构ID，一级机构为0
+  int64 parent_id = 5; //上级机构ID，一级机构为0
+  string leader = 6; //负责人
+  string phone = 7; //电话号码
+  string email = 8; //邮箱
+  string remark = 9; //备注信息
+  int32 is_deleted = 10; //是否删除  0：否  1：是
   repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
-  string phone = 12; //电话号码
-  string remark = 13; //备注信息
+  string create_by = 12; //创建者
+  string create_time = 13; //创建时间
   string update_by = 14; //更新者
   string update_time = 15; //更新时间
 

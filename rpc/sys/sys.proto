@@ -6,16 +6,17 @@ option go_package = "./sysclient";
 
 // 添加部门信息表
 message AddDeptReq {
-  string create_by = 1; //创建者
+  int64 id = 1; //编号
   string dept_name = 2; //部门名称
-  int32 dept_sort = 3; //部门排序
-  int32 dept_status = 4; //部门状态
-  string email = 5; //邮箱
+  int32 dept_status = 3; //部门状态
+  int32 dept_sort = 4; //部门排序
+  int64 parent_id = 5; //上级机构ID，一级机构为0
   string leader = 6; //负责人
-  int64 parent_id = 7; //上级机构ID，一级机构为0
-  repeated int64 parent_ids = 8; //上级机构IDs，一级机构为0
-  string phone = 9; //电话号码
-  string remark = 10; //备注信息
+  string phone = 7; //电话号码
+  string email = 8; //邮箱
+  string remark = 9; //备注信息
+  repeated int64 parent_ids = 10; //上级机构IDs，一级机构为0
+  string create_by = 11; //创建者
 
 }
 
@@ -34,16 +35,16 @@ message DeleteDeptResp {
 
 // 更新部门信息表
 message UpdateDeptReq {
-  string dept_name = 1; //部门名称
-  int32 dept_sort = 2; //部门排序
+  int64 id = 1; //编号
+  string dept_name = 2; //部门名称
   int32 dept_status = 3; //部门状态
-  string email = 4; //邮箱
-  int64 id = 5; //编号
+  int32 dept_sort = 4; //部门排序
+  int64 parent_id = 5; //上级机构ID，一级机构为0
   string leader = 6; //负责人
-  int64 parent_id = 7; //上级机构ID，一级机构为0
-  repeated int64 parent_ids = 8; //上级机构IDs，一级机构为0
-  string phone = 9; //电话号码
-  string remark = 10; //备注信息
+  string phone = 7; //电话号码
+  string email = 8; //邮箱
+  string remark = 9; //备注信息
+  repeated int64 parent_ids = 10; //上级机构IDs，一级机构为0
   string update_by = 11; //更新者
 
 }
@@ -70,18 +71,19 @@ message QueryDeptDetailReq {
 }
 
 message QueryDeptDetailResp {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  string dept_name = 3; //部门名称
+  int64 id = 1; //编号
+  string dept_name = 2; //部门名称
+  int32 dept_status = 3; //部门状态
   int32 dept_sort = 4; //部门排序
-  int32 dept_status = 5; //部门状态
-  string email = 6; //邮箱
-  int64 id = 7; //编号
-  string leader = 9; //负责人
-  int64 parent_id = 10; //上级机构ID，一级机构为0
+  int64 parent_id = 5; //上级机构ID，一级机构为0
+  string leader = 6; //负责人
+  string phone = 7; //电话号码
+  string email = 8; //邮箱
+  string remark = 9; //备注信息
+  int32 is_deleted = 10; //是否删除  0：否  1：是
   repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
-  string phone = 12; //电话号码
-  string remark = 13; //备注信息
+  string create_by = 12; //创建者
+  string create_time = 13; //创建时间
   string update_by = 14; //更新者
   string update_time = 15; //更新时间
 
@@ -93,18 +95,19 @@ message QueryDeptListReq {
 }
 
 message DeptListData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  string dept_name = 3; //部门名称
+  int64 id = 1; //编号
+  string dept_name = 2; //部门名称
+  int32 dept_status = 3; //部门状态
   int32 dept_sort = 4; //部门排序
-  int32 dept_status = 5; //部门状态
-  string email = 6; //邮箱
-  int64 id = 7; //编号
-  string leader = 9; //负责人
-  int64 parent_id = 10; //上级机构ID，一级机构为0
+  int64 parent_id = 5; //上级机构ID，一级机构为0
+  string leader = 6; //负责人
+  string phone = 7; //电话号码
+  string email = 8; //邮箱
+  string remark = 9; //备注信息
+  int32 is_deleted = 10; //是否删除  0：否  1：是
   repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
-  string phone = 12; //电话号码
-  string remark = 13; //备注信息
+  string create_by = 12; //创建者
+  string create_time = 13; //创建时间
   string update_by = 14; //更新者
   string update_time = 15; //更新时间
 
@@ -136,14 +139,15 @@ service DeptService {
 
 // 添加字典数据表
 message AddDictItemReq {
-  string create_by = 1; //创建者
-  string dict_label = 2; //字典标签
-  int32 dict_sort = 3; //排序
-  int32 dict_status = 4; //字典状态
-  string dict_type = 5; //字典类型
-  string dict_value = 6; //字典键值
-  int32 is_default = 7; //是否默认  0：否  1：是
-  string remark = 8; //备注信息
+  int64 id = 1; //编号
+  string dict_type = 2; //字典类型
+  string dict_label = 3; //字典标签
+  string dict_value = 4; //字典键值
+  int32 dict_status = 5; //字典状态
+  int32 dict_sort = 6; //排序
+  string remark = 7; //备注信息
+  int32 is_default = 8; //是否默认  0：否  1：是
+  string create_by = 9; //创建者
 
 }
 
@@ -162,14 +166,14 @@ message DeleteDictItemResp {
 
 // 更新字典数据表
 message UpdateDictItemReq {
-  string dict_label = 1; //字典标签
-  int32 dict_sort = 2; //排序
-  int32 dict_status = 3; //字典状态
-  string dict_type = 4; //字典类型
-  string dict_value = 5; //字典键值
-  int64 id = 6; //编号
-  int32 is_default = 7; //是否默认  0：否  1：是
-  string remark = 8; //备注信息
+  int64 id = 1; //编号
+  string dict_type = 2; //字典类型
+  string dict_label = 3; //字典标签
+  string dict_value = 4; //字典键值
+  int32 dict_status = 5; //字典状态
+  int32 dict_sort = 6; //排序
+  string remark = 7; //备注信息
+  int32 is_default = 8; //是否默认  0：否  1：是
   string update_by = 9; //更新者
 
 }
@@ -196,16 +200,17 @@ message QueryDictItemDetailReq {
 }
 
 message QueryDictItemDetailResp {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
+  int64 id = 1; //编号
+  string dict_type = 2; //字典类型
   string dict_label = 3; //字典标签
-  int32 dict_sort = 4; //排序
+  string dict_value = 4; //字典键值
   int32 dict_status = 5; //字典状态
-  string dict_type = 6; //字典类型
-  string dict_value = 7; //字典键值
-  int64 id = 8; //编号
-  int32 is_default = 9; //是否默认  0：否  1：是
-  string remark = 11; //备注信息
+  int32 dict_sort = 6; //排序
+  string remark = 7; //备注信息
+  int32 is_default = 8; //是否默认  0：否  1：是
+  int32 is_deleted = 9; //是否删除  0：否  1：是
+  string create_by = 10; //创建者
+  string create_time = 11; //创建时间
   string update_by = 12; //更新者
   string update_time = 13; //更新时间
 
@@ -221,16 +226,17 @@ message QueryDictItemListReq {
 }
 
 message DictItemListData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
+  int64 id = 1; //编号
+  string dict_type = 2; //字典类型
   string dict_label = 3; //字典标签
-  int32 dict_sort = 4; //排序
+  string dict_value = 4; //字典键值
   int32 dict_status = 5; //字典状态
-  string dict_type = 6; //字典类型
-  string dict_value = 7; //字典键值
-  int64 id = 8; //编号
-  int32 is_default = 9; //是否默认  0：否  1：是
-  string remark = 11; //备注信息
+  int32 dict_sort = 6; //排序
+  string remark = 7; //备注信息
+  int32 is_default = 8; //是否默认  0：否  1：是
+  int32 is_deleted = 9; //是否删除  0：否  1：是
+  string create_by = 10; //创建者
+  string create_time = 11; //创建时间
   string update_by = 12; //更新者
   string update_time = 13; //更新时间
 
@@ -248,9 +254,9 @@ service DictItemService {
   // 删除字典数据表
   rpc DeleteDictItem(DeleteDictItemReq) returns (DeleteDictItemResp){}
   // 更新字典数据表
-  rpc UpdateDictItem(UpdateDictItemReq) returns (UpdateDictItemResp ){}
+  rpc UpdateDictItem(UpdateDictItemReq) returns (UpdateDictItemResp){}
   // 更新字典数据表状态
-  rpc UpdateDictItemStatus(UpdateDictItemStatusReq) returns (UpdateDictItemStatusResp ){}
+  rpc UpdateDictItemStatus(UpdateDictItemStatusReq) returns (UpdateDictItemStatusResp){}
   // 查询字典数据表详情
   rpc QueryDictItemDetail(QueryDictItemDetailReq) returns (QueryDictItemDetailResp){}
   // 查询字典数据表列表
@@ -262,12 +268,13 @@ service DictItemService {
 
 // 添加字典类型表
 message AddDictTypeReq {
-  string create_by = 1; //创建者
-  string dict_name = 3; //字典名称
+  int64 id = 1; //编号
+  string dict_name = 2; //字典名称
+  string dict_type = 3; //字典类型
   int32 dict_status = 4; //字典状态
-  string dict_type = 5; //字典类型
-  int32 is_system = 8; //是否系统预留  0：否  1：是
-  string remark = 9; //备注信息
+  string remark = 5; //备注信息
+  int32 is_system = 6; //是否系统预留  0：否  1：是
+  string create_by = 7; //创建者
 
 }
 
@@ -286,12 +293,12 @@ message DeleteDictTypeResp {
 
 // 更新字典类型表
 message UpdateDictTypeReq {
-  string dict_name = 3; //字典名称
+  int64 id = 1; //编号
+  string dict_name = 2; //字典名称
+  string dict_type = 3; //字典类型
   int32 dict_status = 4; //字典状态
-  string dict_type = 5; //字典类型
-  int64 id = 6; //编号
-  int32 is_system = 8; //是否系统预留  0：否  1：是
-  string remark = 9; //备注信息
+  string remark = 5; //备注信息
+  int32 is_system = 6; //是否系统预留  0：否  1：是
   string update_by = 10; //更新者
 
 }
@@ -318,14 +325,15 @@ message QueryDictTypeDetailReq {
 }
 
 message QueryDictTypeDetailResp {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  string dict_name = 3; //字典名称
+  int64 id = 1; //编号
+  string dict_name = 2; //字典名称
+  string dict_type = 3; //字典类型
   int32 dict_status = 4; //字典状态
-  string dict_type = 5; //字典类型
-  int64 id = 6; //编号
-  int32 is_system = 8; //是否系统预留  0：否  1：是
-  string remark = 9; //备注信息
+  string remark = 5; //备注信息
+  int32 is_system = 6; //是否系统预留  0：否  1：是
+  int32 is_deleted = 7; //是否删除  0：否  1：是
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
   string update_by = 10; //更新者
   string update_time = 11; //更新时间
 
@@ -343,14 +351,15 @@ message QueryDictTypeListReq {
 }
 
 message DictTypeListData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  string dict_name = 3; //字典名称
+  int64 id = 1; //编号
+  string dict_name = 2; //字典名称
+  string dict_type = 3; //字典类型
   int32 dict_status = 4; //字典状态
-  string dict_type = 5; //字典类型
-  int64 id = 6; //编号
-  int32 is_system = 8; //是否系统预留  0：否  1：是
-  string remark = 9; //备注信息
+  string remark = 5; //备注信息
+  int32 is_system = 6; //是否系统预留  0：否  1：是
+  int32 is_deleted = 7; //是否删除  0：否  1：是
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
   string update_by = 10; //更新者
   string update_time = 11; //更新时间
 
@@ -368,9 +377,9 @@ service DictTypeService {
   // 删除字典类型表
   rpc DeleteDictType(DeleteDictTypeReq) returns (DeleteDictTypeResp){}
   // 更新字典类型表
-  rpc UpdateDictType(UpdateDictTypeReq) returns (UpdateDictTypeResp ){}
+  rpc UpdateDictType(UpdateDictTypeReq) returns (UpdateDictTypeResp){}
   // 更新字典类型表状态
-  rpc UpdateDictTypeStatus(UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp ){}
+  rpc UpdateDictTypeStatus(UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp){}
   // 查询字典类型表详情
   rpc QueryDictTypeDetail(QueryDictTypeDetailReq) returns (QueryDictTypeDetailResp){}
   // 查询字典类型表列表
@@ -601,20 +610,21 @@ service MenuService {
 
 // 添加系统操作日志表
 message AddOperateLogReq {
-  string dept_name = 1; //部门名称
-  int64 id = 2; //编号
-  string operation_ip = 3; //操作地址
+  int64 id = 1; //编号
+  string title = 2; //系统模块
+  string operation_type = 3; //操作类型
   string operation_name = 4; //操作人员
-  string operation_params = 5; //请求参数
-  string operation_response = 6; //响应参数
-  int32 operation_status = 7; //操作状态
-  int64 use_time = 8; //执行时长(毫秒)
-  string operation_type = 9; //操作类型
-  string operation_url = 10; //操作方法
-  string request_method = 11; //请求方式
-  string title = 12; //系统模块
-  string os = 13; //操作系统信息
-  string browser = 14; //浏览器
+  string request_method = 5; //请求方式
+  string operation_url = 6; //操作方法
+  string operation_params = 7; //请求参数
+  string operation_response = 8; //响应参数
+  int32 operation_status = 9; //操作状态
+  string dept_name = 10; //部门名称
+  int64 use_time = 11; //执行时长(毫秒)
+  string browser = 12; //浏览器
+  string os = 13; //操作信息
+  string operation_ip = 14; //操作地址
+  string operation_time = 15; //操作时间
 
 }
 
@@ -637,21 +647,21 @@ message QueryOperateLogDetailReq {
 }
 
 message QueryOperateLogDetailResp {
-  string dept_name = 1; //部门名称
-  int64 id = 2; //编号
-  string operation_ip = 3; //操作地址
+  int64 id = 1; //编号
+  string title = 2; //系统模块
+  string operation_type = 3; //操作类型
   string operation_name = 4; //操作人员
-  string operation_params = 5; //请求参数
-  string operation_response = 6; //响应参数
-  int32 operation_status = 7; //操作状态
-  string operation_time = 8; //操作时间
-  string operation_type = 9; //操作类型
-  string operation_url = 10; //操作方法
-  string request_method = 11; //请求方式
-  string title = 12; //系统模块
-  int64 use_time = 13; //执行时长(毫秒)
-  string os = 14; //操作系统信息
-  string browser = 15; //浏览器
+  string request_method = 5; //请求方式
+  string operation_url = 6; //操作方法
+  string operation_params = 7; //请求参数
+  string operation_response = 8; //响应参数
+  int32 operation_status = 9; //操作状态
+  string dept_name = 10; //部门名称
+  int64 use_time = 11; //执行时长(毫秒)
+  string browser = 12; //浏览器
+  string os = 13; //操作信息
+  string operation_ip = 14; //操作地址
+  string operation_time = 15; //操作时间
 
 }
 
@@ -671,21 +681,21 @@ message QueryOperateLogListReq {
 }
 
 message OperateLogListData {
-  string dept_name = 1; //部门名称
-  int64 id = 2; //编号
-  string operation_ip = 3; //操作地址
+  int64 id = 1; //编号
+  string title = 2; //系统模块
+  string operation_type = 3; //操作类型
   string operation_name = 4; //操作人员
-  string operation_params = 5; //请求参数
-  string operation_response = 6; //响应参数
-  int32 operation_status = 7; //操作状态
-  string operation_time = 8; //操作时间
-  string operation_type = 9; //操作类型
-  string operation_url = 10; //操作方法
-  string request_method = 11; //请求方式
-  string title = 12; //系统模块
-  int64 use_time = 13; //执行时长(毫秒)
-  string os = 14; //操作系统信息
-  string browser = 15; //浏览器
+  string request_method = 5; //请求方式
+  string operation_url = 6; //操作方法
+  string operation_params = 7; //请求参数
+  string operation_response = 8; //响应参数
+  int32 operation_status = 9; //操作状态
+  string dept_name = 10; //部门名称
+  int64 use_time = 11; //执行时长(毫秒)
+  string browser = 12; //浏览器
+  string os = 13; //操作信息
+  string operation_ip = 14; //操作地址
+  string operation_time = 15; //操作时间
 }
 
 message QueryOperateLogListResp {

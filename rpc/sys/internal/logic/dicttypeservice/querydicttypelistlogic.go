@@ -58,16 +58,17 @@ func (l *QueryDictTypeListLogic) QueryDictTypeList(in *sysclient.QueryDictTypeLi
 	var list []*sysclient.DictTypeListData
 	for _, dict := range result {
 		list = append(list, &sysclient.DictTypeListData{
-			CreateBy:   dict.CreateBy,
-			CreateTime: dict.CreateTime.Format("2006-01-02 15:04:05"),
-			DictName:   dict.DictName,
-			DictStatus: dict.DictStatus,
-			DictType:   dict.DictType,
-			Id:         dict.ID,
-			IsSystem:   dict.IsSystem,
-			Remark:     dict.Remark,
-			UpdateBy:   dict.UpdateBy,
-			UpdateTime: time_util.TimeToString(dict.UpdateTime),
+			Id:         dict.ID,                                       // 编号
+			DictName:   dict.DictName,                                 // 字典名称
+			DictType:   dict.DictType,                                 // 字典类型
+			DictStatus: dict.DictStatus,                               // 字典状态
+			Remark:     dict.Remark,                                   // 备注信息
+			IsSystem:   dict.IsSystem,                                 // 是否系统预留  0：否  1：是
+			IsDeleted:  dict.IsDeleted,                                // 是否删除  0：否  1：是
+			CreateBy:   dict.CreateBy,                                 // 创建者
+			CreateTime: dict.CreateTime.Format("2006-01-02 15:04:05"), // 创建时间
+			UpdateBy:   dict.UpdateBy,                                 // 更新者
+			UpdateTime: time_util.TimeToString(dict.UpdateTime),       // 更新时间
 		})
 	}
 

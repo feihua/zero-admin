@@ -35,8 +35,8 @@ func NewUpdateDeptStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // UpdateDeptStatus 更新部门状态
 func (l *UpdateDeptStatusLogic) UpdateDeptStatus(req *types.UpdateDeptStatusReq) (resp *types.UpdateDeptStatusResp, err error) {
 	_, err = l.svcCtx.DeptService.UpdateDeptStatus(l.ctx, &sysclient.UpdateDeptStatusReq{
-		Ids:        req.DeptIds,
-		DeptStatus: req.DeptStatus,
+		Ids:        req.DeptIds,    // 编号
+		DeptStatus: req.DeptStatus, // 部门状态
 		UpdateBy:   l.ctx.Value("userName").(string),
 	})
 

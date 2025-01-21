@@ -45,18 +45,19 @@ func (l *QueryDictItemDetailLogic) QueryDictItemDetail(req *types.QueryDictItemD
 	}
 
 	dictItem := types.QueryDictItemDetailData{
-		CreateBy:   detail.CreateBy,
-		CreateTime: detail.CreateTime,
-		DictLabel:  detail.DictLabel,
-		DictSort:   detail.DictStatus,
-		DictStatus: detail.DictStatus,
-		DictType:   detail.DictType,
-		DictValue:  detail.DictValue,
-		Id:         detail.Id,
-		IsDefault:  detail.IsDefault,
-		Remark:     detail.Remark,
-		UpdateBy:   detail.UpdateBy,
-		UpdateTime: detail.UpdateTime,
+		Id:         detail.Id,         // 编号
+		DictType:   detail.DictType,   // 字典类型
+		DictLabel:  detail.DictLabel,  // 字典标签
+		DictValue:  detail.DictValue,  // 字典键值
+		DictStatus: detail.DictStatus, // 字典状态
+		DictSort:   detail.DictSort,   // 排序
+		Remark:     detail.Remark,     // 备注信息
+		IsDefault:  detail.IsDefault,  // 是否默认  0：否  1：是
+		IsDeleted:  detail.IsDeleted,  // 是否删除  0：否  1：是
+		CreateBy:   detail.CreateBy,   // 创建者
+		CreateTime: detail.CreateTime, // 创建时间
+		UpdateBy:   detail.UpdateBy,   // 更新者
+		UpdateTime: detail.UpdateTime, // 更新时间
 	}
 
 	return &types.QueryDictItemDetailResp{

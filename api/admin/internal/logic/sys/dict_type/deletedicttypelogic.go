@@ -35,7 +35,7 @@ func NewDeleteDictTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) Del
 // DeleteDictType 删除字典类型信息
 func (l *DeleteDictTypeLogic) DeleteDictType(req *types.DeleteDictTypeReq) (*types.DeleteDictTypeResp, error) {
 	_, err := l.svcCtx.DictTypeService.DeleteDictType(l.ctx, &sysclient.DeleteDictTypeReq{
-		Ids: req.Ids,
+		Ids: req.Ids, // 编号
 	})
 
 	if err != nil {

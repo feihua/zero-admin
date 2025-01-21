@@ -35,12 +35,12 @@ func NewUpdateDictTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) Upd
 // UpdateDictType 更新字典类型信息
 func (l *UpdateDictTypeLogic) UpdateDictType(req *types.UpdateDictTypeReq) (*types.UpdateDictTypeResp, error) {
 	_, err := l.svcCtx.DictTypeService.UpdateDictType(l.ctx, &sysclient.UpdateDictTypeReq{
-		DictName:   req.DictName,
-		DictStatus: req.DictStatus,
-		DictType:   req.DictType,
-		Id:         req.Id,
-		IsSystem:   req.IsSystem,
-		Remark:     req.Remark,
+		Id:         req.Id,         // 编号
+		DictName:   req.DictName,   // 字典名称
+		DictType:   req.DictType,   // 字典类型
+		DictStatus: req.DictStatus, // 字典状态
+		Remark:     req.Remark,     // 备注信息
+		IsSystem:   req.IsSystem,   // 是否系统预留  0：否  1：是
 		UpdateBy:   l.ctx.Value("userName").(string),
 	})
 

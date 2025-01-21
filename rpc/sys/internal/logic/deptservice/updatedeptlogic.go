@@ -48,17 +48,17 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 	}
 
 	dept := &model.SysDept{
-		ID:         in.Id,
-		DeptName:   in.DeptName,
-		DeptStatus: in.DeptStatus,
-		DeptSort:   in.DeptSort,
-		ParentID:   in.ParentId,
-		Leader:     in.Leader,
-		Phone:      in.Phone,
-		Email:      in.Email,
-		Remark:     in.Remark,
+		ID:         in.Id,         // 编号
+		DeptName:   in.DeptName,   // 部门名称
+		DeptStatus: in.DeptStatus, // 部门状态
+		DeptSort:   in.DeptSort,   // 部门排序
+		ParentID:   in.ParentId,   // 上级机构ID，一级机构为0
+		Leader:     in.Leader,     // 负责人
+		Phone:      in.Phone,      // 电话号码
+		Email:      in.Email,      // 邮箱
+		Remark:     in.Remark,     // 备注信息
+		UpdateBy:   in.UpdateBy,   // 更新者
 		ParentIds:  strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1),
-		UpdateBy:   in.UpdateBy,
 	}
 
 	// 2.部门存在时,则直接更新部门

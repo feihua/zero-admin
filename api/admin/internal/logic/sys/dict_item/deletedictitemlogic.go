@@ -35,7 +35,7 @@ func NewDeleteDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *De
 // DeleteDictItem 删除字典数据
 func (l *DeleteDictItemLogic) DeleteDictItem(req *types.DeleteDictItemReq) (resp *types.DeleteDictItemResp, err error) {
 	_, err = l.svcCtx.DictItemService.DeleteDictItem(l.ctx, &sysclient.DeleteDictItemReq{
-		Ids: req.Ids,
+		Ids: req.Ids, // 编号
 	})
 
 	if err != nil {

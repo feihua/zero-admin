@@ -36,16 +36,16 @@ func NewUpdateDeptLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateD
 func (l *UpdateDeptLogic) UpdateDept(req *types.UpdateDeptReq) (*types.UpdateDeptResp, error) {
 
 	_, err := l.svcCtx.DeptService.UpdateDept(l.ctx, &sysclient.UpdateDeptReq{
-		DeptName:   req.DeptName,
-		DeptSort:   req.DeptSort,
-		DeptStatus: req.DeptStatus,
-		Email:      req.Email,
-		Id:         req.Id,
-		Leader:     req.Leader,
-		ParentId:   req.ParentId,
-		ParentIds:  req.ParentIds,
-		Phone:      req.Phone,
-		Remark:     req.Remark,
+		Id:         req.Id,         // 编号
+		DeptName:   req.DeptName,   // 部门名称
+		DeptStatus: req.DeptStatus, // 部门状态
+		DeptSort:   req.DeptSort,   // 部门排序
+		ParentId:   req.ParentId,   // 上级机构ID，一级机构为0
+		Leader:     req.Leader,     // 负责人
+		Phone:      req.Phone,      // 电话号码
+		Email:      req.Email,      // 邮箱
+		Remark:     req.Remark,     // 备注信息
+		ParentIds:  req.ParentIds,  // 上级机构IDs，一级机构为0
 		UpdateBy:   l.ctx.Value("userName").(string),
 	})
 
