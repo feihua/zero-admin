@@ -5,7 +5,6 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -39,9 +38,8 @@ func NewUpdateUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // 3.添加用户与角色的关联
 func (l *UpdateUserRoleListLogic) UpdateUserRoleList(in *sysclient.UpdateUserRoleListReq) (*sysclient.UpdateUserRoleListResp, error) {
 	// 1.判断是否为超级管理员
-	if common.IsAdmin(l.ctx, in.UserId, l.svcCtx.DB) {
-		logc.Errorf(l.ctx, "系统预留超级管理员不用分配,参数:%+v", in)
-		return nil, errors.New("系统预留超级管理员不用分配")
+	if in.UserId == 1 {
+		return nil, errors.New("不允许操作超级管理员用户")
 	}
 
 	err := query.Q.Transaction(func(tx *query.Query) error {

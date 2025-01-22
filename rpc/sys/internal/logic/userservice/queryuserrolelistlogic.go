@@ -5,7 +5,6 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -33,44 +32,47 @@ func NewQueryUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 // QueryUserRoleList 查询用户与角色的关联
+// 1.查询所有角色
+// 2.如果角色不是admin则根据userId查询角色
 func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleListReq) (*sysclient.QueryUserRoleListResp, error) {
-	//1.查询所有角色
+	// 1.查询所有角色
 	offset := (in.Current - 1) * in.PageSize
 	result, total, err := query.SysRole.WithContext(l.ctx).FindByPage(int(offset), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询角色信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询角色信息失败")
+		logc.Errorf(l.ctx, "查询角色失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询角色失败")
 	}
 
 	var roleList []*sysclient.RoleData
 	var roleIds []int64
 
-	for _, role := range result {
+	for _, item := range result {
 		roleList = append(roleList, &sysclient.RoleData{
-			CreateBy:   role.CreateBy,
-			CreateTime: role.CreateTime.Format("2006-01-02 15:04:05"),
-			DataScope:  role.DataScope,
-			Id:         role.ID,
-			IsAdmin:    role.IsAdmin,
-			UpdateTime: time_util.TimeToString(role.UpdateTime),
-			Remark:     role.Remark,
-			RoleKey:    role.RoleKey,
-			RoleName:   role.RoleName,
-			RoleSort:   role.RoleSort,
-			RoleStatus: role.RoleStatus,
-			UpdateBy:   role.UpdateBy,
+			Id:         item.ID,                                 // 编号
+			RoleName:   item.RoleName,                           // 角色名称
+			RoleKey:    item.RoleKey,                            // 权限字符
+			RoleStatus: item.RoleStatus,                         // 角色状态
+			RoleSort:   item.RoleSort,                           // 角色排序
+			DataScope:  item.DataScope,                          // 数据权限
+			IsDeleted:  item.IsDeleted,                          // 是否删除  0：否  1：是
+			IsAdmin:    item.IsAdmin,                            // 是否超级管理员:  0：否  1：是
+			Remark:     item.Remark,                             // 备注
+			CreateBy:   item.CreateBy,                           // 创建者
+			CreateTime: time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:   item.UpdateBy,                           // 更新者
+			UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 		})
-		//admin账号全部角色
-		roleIds = append(roleIds, role.ID)
+
+		// admin账号全部角色
+		roleIds = append(roleIds, item.ID)
 	}
 
-	//2.如果角色不是admin则根据userId查询角色
+	// 2.如果角色不是admin则根据userId查询角色
 	q := query.SysUserRole
-	if !common.IsAdmin(l.ctx, in.UserId, l.svcCtx.DB) {
-		var ids []int64
-		_ = q.WithContext(l.ctx).Select(q.RoleID).Where(q.UserID.Eq(in.UserId)).Scan(&ids)
-		roleIds = ids
+	if in.UserId != 1 {
+		roleIds = roleIds[:0]
+		_ = q.WithContext(l.ctx).Select(q.RoleID).Where(q.UserID.Eq(in.UserId)).Scan(&roleIds)
 	}
 
 	return &sysclient.QueryUserRoleListResp{

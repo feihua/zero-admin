@@ -34,6 +34,9 @@ func NewQueryDeptAndPostListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 // QueryDeptAndPostList 查询所有部门和岗位
+// 1.查询岗位列表信息
+// 2.岗位信息
+// 2.部门信息
 func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(req *types.QueryDeptAndPostListReq) (resp *types.QueryDeptAndPostListResp, err error) {
 	// 1.查询岗位列表信息
 	result, err := l.svcCtx.UserService.QueryDeptAndPostList(l.ctx, &sysclient.QueryDeptAndPostListReq{})
@@ -48,20 +51,21 @@ func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(req *types.QueryDeptAnd
 	var postLists []*types.PostList
 	for _, post := range result.PostListData {
 		postLists = append(postLists, &types.PostList{
-			Id:       post.Id,
-			PostName: post.PostName,
+			Id:       post.Id,       // 岗位id
+			PostName: post.PostName, // 岗位名称
 		})
 	}
 
 	// 3.部门信息
 	var deptLists []*types.DeptList
 	for _, dept := range result.DeptListData {
+		deptId := strconv.FormatInt(dept.Id, 10)
 		deptLists = append(deptLists, &types.DeptList{
-			Id:       dept.Id,
-			DeptKey:  strconv.FormatInt(dept.Id, 10),
-			Value:    strconv.FormatInt(dept.Id, 10),
-			Title:    dept.DeptName,
-			ParentId: dept.ParentId,
+			Id:       dept.Id,       // 部门id
+			DeptKey:  deptId,        // 部门id
+			Value:    deptId,        // 部门id
+			Title:    dept.DeptName, // 部门名称
+			ParentId: dept.ParentId, // 上级部门id
 		})
 	}
 

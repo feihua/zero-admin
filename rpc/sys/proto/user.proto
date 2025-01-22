@@ -241,12 +241,7 @@ message DeptData {
   string phone = 7; //电话号码
   string email = 8; //邮箱
   string remark = 9; //备注信息
-  int32 is_deleted = 10; //是否删除  0：否  1：是
   repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
-  string create_by = 12; //创建者
-  string create_time = 13; //创建时间
-  string update_by = 14; //更新者
-  string update_time = 15; //更新时间
 
 }
 
@@ -257,11 +252,6 @@ message PostData {
   int32 post_status = 4; //岗位状态
   int32 post_sort = 5; //岗位排序
   string remark = 6; //备注信息
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  string create_by = 8; //创建者
-  string create_time = 9; //创建时间
-  string update_by = 10; //更新者
-  string update_time = 11; //更新时间
 
 }
 
