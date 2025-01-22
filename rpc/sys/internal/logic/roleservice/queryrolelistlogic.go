@@ -54,9 +54,8 @@ func (l *QueryRoleListLogic) QueryRoleList(in *sysclient.QueryRoleListReq) (*sys
 		return nil, errors.New("查询角色列表失败")
 	}
 
-	var list []*sysclient.RoleListData
+	var list = make([]*sysclient.RoleListData, 0, len(result))
 	for _, item := range result {
-		createTime := item.CreateTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.RoleListData{
 			Id:         item.ID,                                 // 编号
 			RoleName:   item.RoleName,                           // 角色名称
@@ -68,7 +67,7 @@ func (l *QueryRoleListLogic) QueryRoleList(in *sysclient.QueryRoleListReq) (*sys
 			IsAdmin:    item.IsAdmin,                            // 是否超级管理员:  0：否  1：是
 			Remark:     item.Remark,                             // 备注
 			CreateBy:   item.CreateBy,                           // 创建者
-			CreateTime: createTime,                              // 创建时间
+			CreateTime: time_util.TimeToStr(item.CreateTime),    // 创建时间
 			UpdateBy:   item.UpdateBy,                           // 更新者
 			UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 		})

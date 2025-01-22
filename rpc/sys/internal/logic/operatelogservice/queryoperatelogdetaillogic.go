@@ -3,6 +3,7 @@ package operatelogservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -44,23 +45,22 @@ func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(in *sysclient.QueryOp
 		return nil, errors.New("查询系统操作日志详情失败,操作日志不存在")
 	}
 
-	opTime := item.OperationTime.Format("2006-01-02 15:04:05")
 	data := &sysclient.QueryOperateLogDetailResp{
-		Id:                item.ID,                // 编号
-		Title:             item.Title,             // 系统模块
-		OperationType:     item.OperationType,     // 操作类型
-		OperationName:     item.OperationName,     // 操作人员
-		RequestMethod:     item.RequestMethod,     // 请求方式
-		OperationUrl:      item.OperationURL,      // 操作方法
-		OperationParams:   item.OperationParams,   // 请求参数
-		OperationResponse: item.OperationResponse, // 响应参数
-		OperationStatus:   item.OperationStatus,   // 操作状态
-		DeptName:          item.DeptName,          // 部门名称
-		UseTime:           item.UseTime,           // 执行时长(毫秒)
-		Browser:           item.Browser,           // 浏览器
-		Os:                item.Os,                // 操作信息
-		OperationIp:       item.OperationIP,       // 操作地址
-		OperationTime:     opTime,                 // 操作时间
+		Id:                item.ID,                                 // 编号
+		Title:             item.Title,                              // 系统模块
+		OperationType:     item.OperationType,                      // 操作类型
+		OperationName:     item.OperationName,                      // 操作人员
+		RequestMethod:     item.RequestMethod,                      // 请求方式
+		OperationUrl:      item.OperationURL,                       // 操作方法
+		OperationParams:   item.OperationParams,                    // 请求参数
+		OperationResponse: item.OperationResponse,                  // 响应参数
+		OperationStatus:   item.OperationStatus,                    // 操作状态
+		DeptName:          item.DeptName,                           // 部门名称
+		UseTime:           item.UseTime,                            // 执行时长(毫秒)
+		Browser:           item.Browser,                            // 浏览器
+		Os:                item.Os,                                 // 操作信息
+		OperationIp:       item.OperationIP,                        // 操作地址
+		OperationTime:     time_util.TimeToStr(item.OperationTime), // 操作时间
 	}
 
 	return data, nil

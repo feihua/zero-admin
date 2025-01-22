@@ -52,10 +52,9 @@ func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemLi
 		return nil, errors.New("查询字典数据列表信息失败")
 	}
 
-	var list []*sysclient.DictItemListData
+	var list = make([]*sysclient.DictItemListData, 0, len(result))
 
 	for _, dict := range result {
-		createTime := dict.CreateTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.DictItemListData{
 			Id:         dict.ID,                                 // 编号
 			DictType:   dict.DictType,                           // 字典类型
@@ -67,7 +66,7 @@ func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemLi
 			IsDefault:  dict.IsDefault,                          // 是否默认  0：否  1：是
 			IsDeleted:  dict.IsDeleted,                          // 是否删除  0：否  1：是
 			CreateBy:   dict.CreateBy,                           // 创建者
-			CreateTime: createTime,                              // 创建时间
+			CreateTime: time_util.TimeToStr(dict.CreateTime),    // 创建时间
 			UpdateBy:   dict.UpdateBy,                           // 更新者
 			UpdateTime: time_util.TimeToString(dict.UpdateTime), // 更新时间
 		})

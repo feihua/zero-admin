@@ -3,6 +3,7 @@ package loginlogservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -62,16 +63,15 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(in *sysclient.QueryLoginLogLi
 
 	var list []*sysclient.LoginLogListData
 	for _, item := range result {
-		loginTime := item.LoginTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.LoginLogListData{
-			Id:          item.ID,          // 编号
-			UserName:    item.UserName,    // 用户名
-			LoginStatus: item.LoginStatus, // 登录状态
-			IpAddress:   item.IPAddress,   // IP地址
-			Browser:     item.Browser,     // 浏览器
-			Os:          item.Os,          // 操作系统
-			ErrorMsg:    item.ErrorMsg,    // 登录失败信息
-			LoginTime:   loginTime,        // 登录时间
+			Id:          item.ID,                             // 编号
+			UserName:    item.UserName,                       // 用户名
+			LoginStatus: item.LoginStatus,                    // 登录状态
+			IpAddress:   item.IPAddress,                      // IP地址
+			Browser:     item.Browser,                        // 浏览器
+			Os:          item.Os,                             // 操作系统
+			ErrorMsg:    item.ErrorMsg,                       // 登录失败信息
+			LoginTime:   time_util.TimeToStr(item.LoginTime), // 登录时间
 		})
 	}
 

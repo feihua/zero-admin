@@ -45,7 +45,6 @@ func (l *QueryMenuDetailLogic) QueryMenuDetail(in *sysclient.QueryMenuDetailReq)
 		return nil, errors.New(fmt.Sprintf("查询菜单详情失败,菜单信息不存在"))
 	}
 
-	createTime := menu.CreateTime.Format("2006-01-02 15:04:05")
 	data := &sysclient.QueryMenuDetailResp{
 		Id:            menu.ID,                                 // 编号
 		MenuName:      menu.MenuName,                           // 菜单名称
@@ -56,7 +55,7 @@ func (l *QueryMenuDetailLogic) QueryMenuDetail(in *sysclient.QueryMenuDetailReq)
 		MenuIcon:      menu.MenuIcon,                           // 菜单图标
 		MenuSort:      menu.MenuSort,                           // 菜单排序
 		CreateBy:      menu.CreateBy,                           // 创建者
-		CreateTime:    createTime,                              // 创建时间
+		CreateTime:    time_util.TimeToStr(menu.CreateTime),    // 创建时间
 		UpdateBy:      menu.UpdateBy,                           // 更新者
 		UpdateTime:    time_util.TimeToString(menu.UpdateTime), // 更新时间
 		MenuStatus:    menu.MenuStatus,                         // 菜单状态

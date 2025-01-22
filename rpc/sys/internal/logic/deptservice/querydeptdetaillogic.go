@@ -45,7 +45,6 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq)
 		return nil, errors.New("查询部门信息表详情失败,部门不存在")
 	}
 
-	createTime := dept.CreateTime.Format("2006-01-02 15:04:05") // 创建时间
 	data := &sysclient.QueryDeptDetailResp{
 		Id:         dept.ID,                                 // 编号
 		DeptName:   dept.DeptName,                           // 部门名称
@@ -59,7 +58,7 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq)
 		IsDeleted:  dept.IsDeleted,                          // 是否删除  0：否  1：是
 		ParentIds:  GetParentIds(dept.ParentIds),            // 上级机构IDs，一级机构为0
 		CreateBy:   dept.CreateBy,                           // 创建者
-		CreateTime: createTime,                              // 创建时间
+		CreateTime: time_util.TimeToStr(dept.CreateTime),    // 创建时间
 		UpdateBy:   dept.UpdateBy,                           // 更新者
 		UpdateTime: time_util.TimeToString(dept.UpdateTime), // 更新时间
 	}

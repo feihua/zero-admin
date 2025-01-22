@@ -55,9 +55,8 @@ func (l *QueryDictTypeListLogic) QueryDictTypeList(in *sysclient.QueryDictTypeLi
 		logc.Errorf(l.ctx, "查询字典列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询字典列表信息失败")
 	}
-	var list []*sysclient.DictTypeListData
+	var list = make([]*sysclient.DictTypeListData, 0, len(result))
 	for _, dict := range result {
-		createTime := dict.CreateTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.DictTypeListData{
 			Id:         dict.ID,                                 // 编号
 			DictName:   dict.DictName,                           // 字典名称
@@ -67,7 +66,7 @@ func (l *QueryDictTypeListLogic) QueryDictTypeList(in *sysclient.QueryDictTypeLi
 			IsSystem:   dict.IsSystem,                           // 是否系统预留  0：否  1：是
 			IsDeleted:  dict.IsDeleted,                          // 是否删除  0：否  1：是
 			CreateBy:   dict.CreateBy,                           // 创建者
-			CreateTime: createTime,                              // 创建时间
+			CreateTime: time_util.TimeToStr(dict.CreateTime),    // 创建时间
 			UpdateBy:   dict.UpdateBy,                           // 更新者
 			UpdateTime: time_util.TimeToString(dict.UpdateTime), // 更新时间
 		})

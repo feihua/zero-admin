@@ -38,6 +38,7 @@ func NewAddUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddUserLo
 // 4.用户不存在时,则直接添加用户
 // 5.清空用户与岗位关联
 // 6.添加用户与岗位关联
+// 7.清空用户与角色关联(防止脏数据)
 func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp, error) {
 	q := query.SysUser
 
@@ -132,6 +133,13 @@ func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp
 			return err
 		}
 
+		roleDo := tx.SysUserRole.WithContext(l.ctx)
+		// 7.清空用户与角色关联(防止脏数据)
+		_, err = roleDo.Where(tx.SysUserRole.UserID.Eq(user.ID)).Delete()
+		if err != nil {
+			logc.Errorf(l.ctx, "删除用户与角色关联异常,参数:%+v,异常:%s", user, err.Error())
+			return err
+		}
 		return nil
 	})
 

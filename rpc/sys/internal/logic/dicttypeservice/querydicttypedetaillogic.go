@@ -46,7 +46,6 @@ func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(in *sysclient.QueryDictTy
 		return nil, errors.New("查询字典类型详情失败,字典类型不存在")
 	}
 
-	createTime := dict.CreateTime.Format("2006-01-02 15:04:05")
 	data := &sysclient.QueryDictTypeDetailResp{
 		Id:         dict.ID,                                 // 编号
 		DictName:   dict.DictName,                           // 字典名称
@@ -56,7 +55,7 @@ func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(in *sysclient.QueryDictTy
 		IsSystem:   dict.IsSystem,                           // 是否系统预留  0：否  1：是
 		IsDeleted:  dict.IsDeleted,                          // 是否删除  0：否  1：是
 		CreateBy:   dict.CreateBy,                           // 创建者
-		CreateTime: createTime,                              // 创建时间
+		CreateTime: time_util.TimeToStr(dict.CreateTime),    // 创建时间
 		UpdateBy:   dict.UpdateBy,                           // 更新者
 		UpdateTime: time_util.TimeToString(dict.UpdateTime), // 更新时间
 	}

@@ -53,9 +53,8 @@ func (l *QueryPostListLogic) QueryPostList(in *sysclient.QueryPostListReq) (*sys
 		return nil, errors.New("查询岗位列表信息失败")
 	}
 
-	var list []*sysclient.PostListData
+	var list = make([]*sysclient.PostListData, 0, len(result))
 	for _, job := range result {
-		createTime := job.CreateTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.PostListData{
 			Id:         job.ID,                                 // 岗位id
 			PostName:   job.PostName,                           // 岗位名称
@@ -65,7 +64,7 @@ func (l *QueryPostListLogic) QueryPostList(in *sysclient.QueryPostListReq) (*sys
 			Remark:     job.Remark,                             // 备注信息
 			IsDeleted:  job.IsDeleted,                          // 是否删除  0：否  1：是
 			CreateBy:   job.CreateBy,                           // 创建者
-			CreateTime: createTime,                             // 创建时间
+			CreateTime: time_util.TimeToStr(job.CreateTime),    // 创建时间
 			UpdateBy:   job.UpdateBy,                           // 更新者
 			UpdateTime: time_util.TimeToString(job.UpdateTime), // 更新时间
 		})

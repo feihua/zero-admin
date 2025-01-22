@@ -45,10 +45,9 @@ func (l *QueryDeptListLogic) QueryDeptList(in *sysclient.QueryDeptListReq) (*sys
 		return nil, errors.New("查询部门列表信息失败")
 	}
 
-	var list []*sysclient.DeptListData
+	var list = make([]*sysclient.DeptListData, 0, len(result))
 
 	for _, dept := range result {
-		createTime := dept.CreateTime.Format("2006-01-02 15:04:05") // 创建时间
 		list = append(list, &sysclient.DeptListData{
 			Id:         dept.ID,                                 // 编号
 			DeptName:   dept.DeptName,                           // 部门名称
@@ -62,7 +61,7 @@ func (l *QueryDeptListLogic) QueryDeptList(in *sysclient.QueryDeptListReq) (*sys
 			IsDeleted:  dept.IsDeleted,                          // 是否删除  0：否  1：是
 			ParentIds:  GetParentIds(dept.ParentIds),            // 上级机构IDs，一级机构为0
 			CreateBy:   dept.CreateBy,                           // 创建者
-			CreateTime: createTime,                              // 创建时间
+			CreateTime: time_util.TimeToStr(dept.CreateTime),    // 创建时间
 			UpdateBy:   dept.UpdateBy,                           // 更新者
 			UpdateTime: time_util.TimeToString(dept.UpdateTime), // 更新时间
 		})

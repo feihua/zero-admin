@@ -62,10 +62,9 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 		return nil, errors.New("查询用户列表信息失败")
 	}
 
-	var list []*sysclient.UserData
+	var list = make([]*sysclient.UserData, 0, len(result))
+
 	for _, item := range result {
-		loginTime := item.LoginTime.Format("2006-01-02 15:04:05")
-		createTime := item.CreateTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.UserData{
 			Id:           item.ID,                                 // 编号
 			UserName:     item.UserName,                           // 用户名
@@ -77,12 +76,12 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 			DeptId:       item.DeptID,                             // 部门id
 			Remark:       item.Remark,                             // 备注信息
 			IsDeleted:    item.IsDeleted,                          // 是否删除  0：否  1：是
-			LoginTime:    loginTime,                               // 登录时间
+			LoginTime:    time_util.TimeToString(item.LoginTime),  // 登录时间
 			LoginIp:      item.LoginIP,                            // 登录ip
 			LoginOs:      item.LoginOs,                            // 登录os
 			LoginBrowser: item.LoginBrowser,                       // 登录浏览器
 			CreateBy:     item.CreateBy,                           // 创建者
-			CreateTime:   createTime,                              // 创建时间
+			CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
 			UpdateBy:     item.UpdateBy,                           // 更新者
 			UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
 		})

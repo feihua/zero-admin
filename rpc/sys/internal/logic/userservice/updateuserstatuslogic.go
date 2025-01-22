@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -32,18 +31,21 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // UpdateUserStatus 更新用户状态
+// 1.判断是不是超级管理员
+// 2.更新用户状态
 func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UpdateUserStatusReq) (*sysclient.UpdateUserStatusResp, error) {
-	// 1.排除超级管理员
-	var userIds []int64
-	for _, userId := range in.Ids {
-		if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
-			continue
+	ids := in.Ids // 用户id
+
+	for _, roleId := range ids {
+		// 1.判断是不是超级管理员
+		if roleId == 1 {
+			return nil, errors.New("更新用户状态失败,不允许操作超级管理员用户")
 		}
-		userIds = append(userIds, userId)
 	}
 
+	// 2.更新用户状态
 	q := query.SysUser
-	_, err := q.WithContext(l.ctx).Where(q.ID.In(userIds...)).Update(q.UserStatus, in.UserStatus)
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(ids...)).Update(q.UserStatus, in.UserStatus)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新用户状态异常,参数:%+v,异常:%s", in, err.Error())

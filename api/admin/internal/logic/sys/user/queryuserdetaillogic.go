@@ -63,6 +63,7 @@ func (l *QueryUserDetailLogic) QueryUserDetail(req *types.QueryUserDetailReq) (r
 		CreateTime:   detail.CreateTime,   // 创建时间
 		UpdateBy:     detail.UpdateBy,     // 更新者
 		UpdateTime:   detail.UpdateTime,   // 更新时间
+		PostIds:      detail.PostIds,      // 岗位id
 	}
 
 	return &types.QueryUserDetailResp{

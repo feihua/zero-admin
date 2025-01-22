@@ -41,7 +41,6 @@ func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq)
 		return nil, errors.New("查询角色详情失败")
 	}
 
-	createTime := item.CreateTime.Format("2006-01-02 15:04:05")
 	data := &sysclient.QueryRoleDetailResp{
 		Id:         item.ID,                                 // 编号
 		RoleName:   item.RoleName,                           // 角色名称
@@ -53,7 +52,7 @@ func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq)
 		IsAdmin:    item.IsAdmin,                            // 是否超级管理员:  0：否  1：是
 		Remark:     item.Remark,                             // 备注
 		CreateBy:   item.CreateBy,                           // 创建者
-		CreateTime: createTime,                              // 创建时间
+		CreateTime: time_util.TimeToStr(item.CreateTime),    // 创建时间
 		UpdateBy:   item.UpdateBy,                           // 更新者
 		UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 	}

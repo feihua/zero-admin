@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryUserListLogic 查询用户列表信息
+// QueryUserListLogic 查询用户列表
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 14:35
@@ -30,7 +30,7 @@ func NewQueryUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Que
 	}
 }
 
-// QueryUserList 查询用户列表信息
+// QueryUserList 查询用户列表
 func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sysclient.QueryUserListResp, error) {
 
 	user := query.SysUser
@@ -55,14 +55,12 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询用户列表信息失败")
+		logc.Errorf(l.ctx, "查询用户列表失败,参数：%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询用户列表失败")
 	}
 
-	var list []*sysclient.UserListData
+	var list = make([]*sysclient.UserListData, 0, len(result))
 	for _, item := range result {
-		loginTime := item.LoginTime.Format("2006-01-02 15:04:05")
-		createTime := item.CreateTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.UserListData{
 			Id:           item.ID,                                 // 编号
 			UserName:     item.UserName,                           // 用户名
@@ -72,20 +70,19 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 			Mobile:       item.Mobile,                             // 手机号
 			UserStatus:   item.UserStatus,                         // 帐号状态（0正常 1停用）
 			DeptId:       item.DeptID,                             // 部门id
-			Remark:       item.Remark,                             // 备注信息
+			Remark:       item.Remark,                             // 备注
 			IsDeleted:    item.IsDeleted,                          // 是否删除  0：否  1：是
-			LoginTime:    loginTime,                               // 登录时间
+			LoginTime:    time_util.TimeToString(item.LoginTime),  // 登录时间
 			LoginIp:      item.LoginIP,                            // 登录ip
 			LoginOs:      item.LoginOs,                            // 登录os
 			LoginBrowser: item.LoginBrowser,                       // 登录浏览器
 			CreateBy:     item.CreateBy,                           // 创建者
-			CreateTime:   createTime,                              // 创建时间
+			CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
 			UpdateBy:     item.UpdateBy,                           // 更新者
 			UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
 		})
 	}
 
-	logc.Infof(l.ctx, "查询用户列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.QueryUserListResp{
 		Total: count,
 		List:  list,

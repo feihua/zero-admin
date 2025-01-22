@@ -41,8 +41,8 @@ func (l *QueryRoleMenuListLogic) QueryRoleMenuList(in *sysclient.QueryRoleMenuLi
 		return nil, errors.New("查询菜单列表失败")
 	}
 
-	var menuList []*sysclient.MenuData
-	var menuIds []int64
+	var menuList = make([]*sysclient.MenuData, 0, len(menus))
+	var menuIds = make([]int64, 0, len(menus))
 
 	for _, menu := range menus {
 		menuList = append(menuList, &sysclient.MenuData{

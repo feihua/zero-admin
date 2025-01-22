@@ -40,9 +40,9 @@ func (l *QueryMenuListLogic) QueryMenuList(in *sysclient.QueryMenuListReq) (*sys
 		logc.Errorf(l.ctx, "查询菜单列表信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询菜单列表信息失败")
 	}
-	var list []*sysclient.MenuListData
+	var list = make([]*sysclient.MenuListData, 0, len(result))
+
 	for _, menu := range result {
-		createTime := menu.CreateTime.Format("2006-01-02 15:04:05")
 		list = append(list, &sysclient.MenuListData{
 			Id:            menu.ID,                                 // 编号
 			MenuName:      menu.MenuName,                           // 菜单名称
@@ -53,7 +53,7 @@ func (l *QueryMenuListLogic) QueryMenuList(in *sysclient.QueryMenuListReq) (*sys
 			MenuIcon:      menu.MenuIcon,                           // 菜单图标
 			MenuSort:      menu.MenuSort,                           // 菜单排序
 			CreateBy:      menu.CreateBy,                           // 创建者
-			CreateTime:    createTime,                              // 创建时间
+			CreateTime:    time_util.TimeToStr(menu.CreateTime),    // 创建时间
 			UpdateBy:      menu.UpdateBy,                           // 更新者
 			UpdateTime:    time_util.TimeToString(menu.UpdateTime), // 更新时间
 			MenuStatus:    menu.MenuStatus,                         // 菜单状态
