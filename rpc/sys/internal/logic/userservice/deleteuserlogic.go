@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
-	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -31,29 +30,37 @@ func NewDeleteUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delete
 }
 
 // DeleteUser 删除用户
-// 1.排除超级管理员
+// 1.判断是不是超级管理员
 // 2.删除用户
 // 3.删除用户与角色的关联
+// 4.删除用户与岗位的关联
 func (l *DeleteUserLogic) DeleteUser(in *sysclient.DeleteUserReq) (*sysclient.DeleteUserResp, error) {
-	// 1.排除超级管理员
-	var userIds []int64
-	for _, userId := range in.Ids {
-		if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
-			continue
+	ids := in.Ids
+
+	for _, roleId := range ids {
+		// 1.判断是不是超级管理员
+		if roleId == 1 {
+			return nil, errors.New("删除用户失败,不允许操作超级管理员用户")
 		}
-		userIds = append(userIds, userId)
+
 	}
 
 	err := query.Q.Transaction(func(tx *query.Query) error {
 		// 2.删除用户
 		user := tx.SysUser
-		if _, err := user.WithContext(l.ctx).Where(user.ID.In(userIds...)).Delete(); err != nil {
+		if _, err := user.WithContext(l.ctx).Where(user.ID.In(ids...)).Delete(); err != nil {
 			return err
 		}
 
 		// 3.删除用户与角色的关联
 		role := tx.SysUserRole
-		if _, err := role.WithContext(l.ctx).Where(role.UserID.In(userIds...)).Delete(); err != nil {
+		if _, err := role.WithContext(l.ctx).Where(role.UserID.In(ids...)).Delete(); err != nil {
+			return err
+		}
+
+		// 4.删除用户与岗位的关联
+		post := tx.SysUserPost
+		if _, err := post.WithContext(l.ctx).Where(post.UserID.In(ids...)).Delete(); err != nil {
 			return err
 		}
 

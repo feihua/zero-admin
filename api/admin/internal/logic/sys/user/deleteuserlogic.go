@@ -2,6 +2,8 @@ package user
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -33,7 +35,13 @@ func NewDeleteUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteU
 
 // DeleteUser 删除用户
 func (l *DeleteUserLogic) DeleteUser(req *types.DeleteUserReq) (*types.DeleteUserResp, error) {
+	userId, _ := l.ctx.Value("userId").(json.Number).Int64()
+	for _, id := range req.Ids {
+		if id == userId {
+			return nil, errors.New("删除用户信息失败,当前用户不能删除")
+		}
 
+	}
 	_, err := l.svcCtx.UserService.DeleteUser(l.ctx, &sysclient.DeleteUserReq{
 		Ids: req.Ids, // 用户id
 	})
