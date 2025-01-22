@@ -44,8 +44,8 @@ func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleLi
 		return nil, errors.New("查询角色失败")
 	}
 
-	var roleList []*sysclient.RoleData
-	var roleIds []int64
+	var roleList = make([]*sysclient.RoleData, 0, len(result))
+	var roleIds = make([]int64, 0, len(result))
 
 	for _, item := range result {
 		roleList = append(roleList, &sysclient.RoleData{

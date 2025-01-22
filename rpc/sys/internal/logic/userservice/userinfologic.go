@@ -34,12 +34,13 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 }
 
 // UserInfo 获取用户信息
+// 1.根据id查询用户信息
+// 2.查询用户菜单和权限
 func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, error) {
-	//1.根据id查询用户信息
+	// 1.根据id查询用户信息
 	q := query.SysUser
 	info, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.UserId)).First()
 
-	// 2.判断用户是否存在
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		logc.Errorf(l.ctx, "用户不存在,参数：%+v,异常:%s", in, err.Error())
 		return nil, errors.New("用户不存在")
@@ -50,19 +51,19 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 		return nil, errors.New("查询用户信息异常")
 	}
 
-	//3.查询用户菜单和权限
-	menuList, apiUrls := l.queryUserMenuAndApiUrls(in.UserId)
+	// 2.查询用户菜单和权限
+	menuList, apiUrls := l.queryApis(in.UserId)
 
 	return &sysclient.InfoResp{
-		Avatar:         info.Avatar,
-		Name:           info.UserName,
-		MenuListTree:   menuList,
-		BackgroundUrls: apiUrls,
+		Avatar:         info.Avatar,   // 头像
+		Name:           info.UserName, // 用户名
+		MenuListTree:   menuList,      // 菜单
+		BackgroundUrls: apiUrls,       // 权限
 	}, nil
 }
 
 // 查询用户菜单和权限
-func (l *UserInfoLogic) queryUserMenuAndApiUrls(userId int64) ([]*sysclient.MenuListTree, []string) {
+func (l *UserInfoLogic) queryApis(userId int64) ([]*sysclient.MenuListTree, []string) {
 	var result []*model.SysMenu
 	if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
 		result, _ = query.SysMenu.WithContext(l.ctx).Where(query.SysMenu.IsVisible.Eq(1)).Find()
@@ -84,25 +85,26 @@ func (l *UserInfoLogic) queryUserMenuAndApiUrls(userId int64) ([]*sysclient.Menu
 
 // 构建返回值
 func buildMenuTree(menus []*model.SysMenu) ([]*sysclient.MenuListTree, []string) {
-	var menuListTrees []*sysclient.MenuListTree
-	var urls []string
+	var menuListTrees = make([]*sysclient.MenuListTree, 0, len(menus))
+	var urls = make([]string, 0, len(menus))
+
 	for _, menu := range menus {
 		if menu.MenuType == 1 || menu.MenuType == 0 {
 			menuListTrees = append(menuListTrees, &sysclient.MenuListTree{
-				Id:           menu.ID,
-				Name:         menu.MenuName,
-				Icon:         menu.MenuIcon,
-				ParentId:     menu.ParentID,
-				Path:         menu.MenuPath,
-				VuePath:      menu.VuePath,
-				VueComponent: menu.VueComponent,
-				VueIcon:      menu.VueIcon,
-				VueRedirect:  menu.VueRedirect,
+				Id:           menu.ID,           // 菜单id
+				Name:         menu.MenuName,     // 菜单名称
+				Icon:         menu.MenuIcon,     // 图标
+				ParentId:     menu.ParentID,     // 父级id
+				Path:         menu.MenuPath,     // 路径
+				VuePath:      menu.VuePath,      // vue路径
+				VueComponent: menu.VueComponent, // vue组件
+				VueIcon:      menu.VueIcon,      // vue图标
+				VueRedirect:  menu.VueRedirect,  // vue的路由重定向
 			})
 		}
 
 		if len(strings.TrimSpace(menu.BackgroundURL)) != 0 {
-			urls = append(urls, menu.BackgroundURL)
+			urls = append(urls, menu.BackgroundURL) // 接口地址
 		}
 
 	}
