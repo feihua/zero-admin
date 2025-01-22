@@ -32,43 +32,76 @@ func NewAddUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddUserLo
 }
 
 // AddUser 新增用户
-// 1.根据用户名称查询用户是否已存在
-// 2.如果用户已存在,则直接返回
-// 3.用户不存在时,则直接添加用户
+// 1.查询用户名称是否存在
+// 2.查询手机号是否存在
+// 3.查询邮箱是否存在
+// 4.用户不存在时,则直接添加用户
+// 5.清空用户与岗位关联
+// 6.添加用户与岗位关联
 func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp, error) {
 	q := query.SysUser
-	// 1.根据用户名称查询用户是否已存在
-	userName := in.UserName
-	count, err := q.WithContext(l.ctx).Where(q.UserName.Eq(userName)).Count()
+
+	// 1.查询用户名称是否存在
+	name := in.UserName
+	count, err := q.WithContext(l.ctx).Where(q.UserName.Eq(name)).Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据用户名称：%s,查询用户信息失败,异常:%s", userName, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询用户信息失败"))
+		logc.Errorf(l.ctx, "根据用户名称：%s,查询用户失败,异常:%s", name, err.Error())
+		return nil, errors.New(fmt.Sprintf("新增用户失败"))
 	}
 
-	// 2.如果用户已存在,则直接返回
 	if count > 0 {
-		logc.Errorf(l.ctx, "用户信息已存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("用户：%s,已存在", userName))
+		return nil, errors.New(fmt.Sprintf("用户：%s,已存在", name))
 	}
 
-	// 3.用户不存在时,则直接添加用户
+	// 2.查询手机号是否存在
+	mobile := in.Mobile
+	count, err = q.WithContext(l.ctx).Where(q.Mobile.Eq(mobile)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据手机号：%s,查询用户失败,异常:%s", mobile, err.Error())
+		return nil, errors.New(fmt.Sprintf("新增用户失败"))
+	}
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("手机号：%s,已存在", mobile))
+	}
+
+	// 3.查询邮箱是否存在
+	email := in.Email
+	count, err = q.WithContext(l.ctx).Where(q.Email.Eq(email)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据邮箱：%s,查询用户失败,异常:%s", email, err.Error())
+		return nil, errors.New(fmt.Sprintf("新增用户失败"))
+	}
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("邮箱：%s,已存在", email))
+	}
+
+	avatar := in.Avatar
+	// 默认用户头像
+	if len(avatar) == 0 {
+		avatar = "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
+	}
 	user := &model.SysUser{
 		UserName:   in.UserName,   // 用户名
 		NickName:   in.NickName,   // 昵称
-		Avatar:     in.Avatar,     // 头像
+		Avatar:     avatar,        // 头像
 		Password:   in.Password,   // 密码
 		Salt:       in.Salt,       // 加密盐
 		Email:      in.Email,      // 邮箱
 		Mobile:     in.Mobile,     // 手机号
 		UserStatus: in.UserStatus, // 帐号状态（0正常 1停用）
 		DeptID:     in.DeptId,     // 部门id
-		Remark:     in.Remark,     // 备注信息
+		Remark:     in.Remark,     // 备注
 		IsDeleted:  0,             // 是否删除  0：否  1：是
 		CreateBy:   in.CreateBy,   // 创建者
 	}
 
 	err = query.Q.Transaction(func(tx *query.Query) error {
+		// 4.用户不存在时,则直接添加用户
 		err = tx.SysUser.WithContext(l.ctx).Create(user)
 
 		if err != nil {
@@ -85,13 +118,14 @@ func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp
 		}
 
 		postDo := tx.SysUserPost.WithContext(l.ctx)
-		// 清空脏数字
+		// 5.清空用户与岗位关联
 		_, err = postDo.Where(tx.SysUserPost.UserID.Eq(user.ID)).Delete()
 		if err != nil {
 			logc.Errorf(l.ctx, "删除用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())
 			return err
 		}
 
+		// 6.添加用户与岗位关联
 		err = postDo.Create(userPosts...)
 		if err != nil {
 			logc.Errorf(l.ctx, "新增用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())
