@@ -22,37 +22,37 @@ func NewSubjectCategoryServiceServer(svcCtx *svc.ServiceContext) *SubjectCategor
 	}
 }
 
-// 添加专题分类表
+// 添加专题分类
 func (s *SubjectCategoryServiceServer) AddSubjectCategory(ctx context.Context, in *cmsclient.AddSubjectCategoryReq) (*cmsclient.AddSubjectCategoryResp, error) {
 	l := subjectcategoryservicelogic.NewAddSubjectCategoryLogic(ctx, s.svcCtx)
 	return l.AddSubjectCategory(in)
 }
 
-// 删除专题分类表
+// 删除专题分类
 func (s *SubjectCategoryServiceServer) DeleteSubjectCategory(ctx context.Context, in *cmsclient.DeleteSubjectCategoryReq) (*cmsclient.DeleteSubjectCategoryResp, error) {
 	l := subjectcategoryservicelogic.NewDeleteSubjectCategoryLogic(ctx, s.svcCtx)
 	return l.DeleteSubjectCategory(in)
 }
 
-// 更新专题分类表
+// 更新专题分类
 func (s *SubjectCategoryServiceServer) UpdateSubjectCategory(ctx context.Context, in *cmsclient.UpdateSubjectCategoryReq) (*cmsclient.UpdateSubjectCategoryResp, error) {
 	l := subjectcategoryservicelogic.NewUpdateSubjectCategoryLogic(ctx, s.svcCtx)
 	return l.UpdateSubjectCategory(in)
 }
 
-// 更新专题分类表状态
+// 更新专题分类状态
 func (s *SubjectCategoryServiceServer) UpdateSubjectCategoryStatus(ctx context.Context, in *cmsclient.UpdateSubjectCategoryStatusReq) (*cmsclient.UpdateSubjectCategoryStatusResp, error) {
 	l := subjectcategoryservicelogic.NewUpdateSubjectCategoryStatusLogic(ctx, s.svcCtx)
 	return l.UpdateSubjectCategoryStatus(in)
 }
 
-// 查询专题分类表详情
+// 查询专题分类详情
 func (s *SubjectCategoryServiceServer) QuerySubjectCategoryDetail(ctx context.Context, in *cmsclient.QuerySubjectCategoryDetailReq) (*cmsclient.QuerySubjectCategoryDetailResp, error) {
 	l := subjectcategoryservicelogic.NewQuerySubjectCategoryDetailLogic(ctx, s.svcCtx)
 	return l.QuerySubjectCategoryDetail(in)
 }
 
-// 查询专题分类表列表
+// 查询专题分类列表
 func (s *SubjectCategoryServiceServer) QuerySubjectCategoryList(ctx context.Context, in *cmsclient.QuerySubjectCategoryListReq) (*cmsclient.QuerySubjectCategoryListResp, error) {
 	l := subjectcategoryservicelogic.NewQuerySubjectCategoryListLogic(ctx, s.svcCtx)
 	return l.QuerySubjectCategoryList(in)

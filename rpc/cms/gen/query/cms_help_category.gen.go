@@ -48,12 +48,12 @@ type cmsHelpCategory struct {
 	cmsHelpCategoryDo cmsHelpCategoryDo
 
 	ALL        field.Asterisk
-	ID         field.Int64
-	Name       field.String
+	ID         field.Int64  // 主键ID
+	Name       field.String // 分类名称
 	Icon       field.String // 分类图标
 	HelpCount  field.Int32  // 专题数量
-	ShowStatus field.Int32
-	Sort       field.Int32
+	ShowStatus field.Int32  // 显示状态：0->不显示；1->显示
+	Sort       field.Int32  // 排序
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者

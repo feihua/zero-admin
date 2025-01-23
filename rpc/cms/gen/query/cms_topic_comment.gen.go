@@ -45,13 +45,13 @@ type cmsTopicComment struct {
 	cmsTopicCommentDo cmsTopicCommentDo
 
 	ALL            field.Asterisk
-	ID             field.Int64
-	MemberNickName field.String
-	TopicID        field.Int64
-	MemberIcon     field.String
-	Content        field.String
-	CreateTime     field.Time
-	ShowStatus     field.Int32
+	ID             field.Int64  // 主键ID
+	MemberNickName field.String // 评论人员昵称
+	TopicID        field.Int64  // 专题ID
+	MemberIcon     field.String // 评论人员头像
+	Content        field.String // 评论内容
+	CreateTime     field.Time   // 评论时间
+	ShowStatus     field.Int32  // 是否显示，0->不显示；1->显示
 
 	fieldMap map[string]field.Expr
 }

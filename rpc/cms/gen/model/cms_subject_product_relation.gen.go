@@ -8,9 +8,9 @@ const TableNameCmsSubjectProductRelation = "cms_subject_product_relation"
 
 // CmsSubjectProductRelation 专题商品关系表
 type CmsSubjectProductRelation struct {
-	ID        int64 `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	SubjectID int64 `gorm:"column:subject_id;not null" json:"subject_id"`
-	ProductID int64 `gorm:"column:product_id;not null" json:"product_id"`
+	ID        int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"` // 主键ID
+	SubjectID int64 `gorm:"column:subject_id;not null;comment:专题ID" json:"subject_id"`      // 专题ID
+	ProductID int64 `gorm:"column:product_id;not null;comment:商品ID" json:"product_id"`      // 商品ID
 }
 
 // TableName CmsSubjectProductRelation's table name

@@ -49,13 +49,13 @@ type cmsHelp struct {
 	cmsHelpDo cmsHelpDo
 
 	ALL        field.Asterisk
-	ID         field.Int64
-	CategoryID field.Int64
-	Icon       field.String
-	Title      field.String
-	ShowStatus field.Int32
-	ReadCount  field.Int32
-	Content    field.String
+	ID         field.Int64  // 主键ID
+	CategoryID field.Int64  // 分类ID
+	Icon       field.String // 图标
+	Title      field.String // 标题
+	ShowStatus field.Int32  // 显示状态：0->不显示；1->显示
+	ReadCount  field.Int32  // 阅读量
+	Content    field.String // 内容
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者

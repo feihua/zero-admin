@@ -152,19 +152,21 @@ type (
 	UpdateTopicCommentStatusResp              = cmsclient.UpdateTopicCommentStatusResp
 	UpdateTopicReq                            = cmsclient.UpdateTopicReq
 	UpdateTopicResp                           = cmsclient.UpdateTopicResp
+	UpdateTopicStatusReq                      = cmsclient.UpdateTopicStatusReq
+	UpdateTopicStatusResp                     = cmsclient.UpdateTopicStatusResp
 
 	MemberReportService interface {
-		// 添加用户举报表
+		// 添加用户举报
 		AddMemberReport(ctx context.Context, in *AddMemberReportReq, opts ...grpc.CallOption) (*AddMemberReportResp, error)
-		// 删除用户举报表
+		// 删除用户举报
 		DeleteMemberReport(ctx context.Context, in *DeleteMemberReportReq, opts ...grpc.CallOption) (*DeleteMemberReportResp, error)
-		// 更新用户举报表
+		// 更新用户举报
 		UpdateMemberReport(ctx context.Context, in *UpdateMemberReportReq, opts ...grpc.CallOption) (*UpdateMemberReportResp, error)
-		// 更新用户举报表状态
+		// 更新用户举报状态
 		UpdateMemberReportStatus(ctx context.Context, in *UpdateMemberReportStatusReq, opts ...grpc.CallOption) (*UpdateMemberReportStatusResp, error)
-		// 查询用户举报表详情
+		// 查询用户举报详情
 		QueryMemberReportDetail(ctx context.Context, in *QueryMemberReportDetailReq, opts ...grpc.CallOption) (*QueryMemberReportDetailResp, error)
-		// 查询用户举报表列表
+		// 查询用户举报列表
 		QueryMemberReportList(ctx context.Context, in *QueryMemberReportListReq, opts ...grpc.CallOption) (*QueryMemberReportListResp, error)
 	}
 
@@ -179,37 +181,37 @@ func NewMemberReportService(cli zrpc.Client) MemberReportService {
 	}
 }
 
-// 添加用户举报表
+// 添加用户举报
 func (m *defaultMemberReportService) AddMemberReport(ctx context.Context, in *AddMemberReportReq, opts ...grpc.CallOption) (*AddMemberReportResp, error) {
 	client := cmsclient.NewMemberReportServiceClient(m.cli.Conn())
 	return client.AddMemberReport(ctx, in, opts...)
 }
 
-// 删除用户举报表
+// 删除用户举报
 func (m *defaultMemberReportService) DeleteMemberReport(ctx context.Context, in *DeleteMemberReportReq, opts ...grpc.CallOption) (*DeleteMemberReportResp, error) {
 	client := cmsclient.NewMemberReportServiceClient(m.cli.Conn())
 	return client.DeleteMemberReport(ctx, in, opts...)
 }
 
-// 更新用户举报表
+// 更新用户举报
 func (m *defaultMemberReportService) UpdateMemberReport(ctx context.Context, in *UpdateMemberReportReq, opts ...grpc.CallOption) (*UpdateMemberReportResp, error) {
 	client := cmsclient.NewMemberReportServiceClient(m.cli.Conn())
 	return client.UpdateMemberReport(ctx, in, opts...)
 }
 
-// 更新用户举报表状态
+// 更新用户举报状态
 func (m *defaultMemberReportService) UpdateMemberReportStatus(ctx context.Context, in *UpdateMemberReportStatusReq, opts ...grpc.CallOption) (*UpdateMemberReportStatusResp, error) {
 	client := cmsclient.NewMemberReportServiceClient(m.cli.Conn())
 	return client.UpdateMemberReportStatus(ctx, in, opts...)
 }
 
-// 查询用户举报表详情
+// 查询用户举报详情
 func (m *defaultMemberReportService) QueryMemberReportDetail(ctx context.Context, in *QueryMemberReportDetailReq, opts ...grpc.CallOption) (*QueryMemberReportDetailResp, error) {
 	client := cmsclient.NewMemberReportServiceClient(m.cli.Conn())
 	return client.QueryMemberReportDetail(ctx, in, opts...)
 }
 
-// 查询用户举报表列表
+// 查询用户举报列表
 func (m *defaultMemberReportService) QueryMemberReportList(ctx context.Context, in *QueryMemberReportListReq, opts ...grpc.CallOption) (*QueryMemberReportListResp, error) {
 	client := cmsclient.NewMemberReportServiceClient(m.cli.Conn())
 	return client.QueryMemberReportList(ctx, in, opts...)

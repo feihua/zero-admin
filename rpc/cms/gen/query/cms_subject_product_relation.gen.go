@@ -41,9 +41,9 @@ type cmsSubjectProductRelation struct {
 	cmsSubjectProductRelationDo cmsSubjectProductRelationDo
 
 	ALL       field.Asterisk
-	ID        field.Int64
-	SubjectID field.Int64
-	ProductID field.Int64
+	ID        field.Int64 // 主键ID
+	SubjectID field.Int64 // 专题ID
+	ProductID field.Int64 // 商品ID
 
 	fieldMap map[string]field.Expr
 }

@@ -4,22 +4,22 @@ package main;
 
 option go_package = "./proto";
 
-// 添加帮助分类表
+// 添加帮助分类
 message AddHelpCategoryReq {
-  string create_by = 1; //创建者
-  int32 help_count = 2; //专题数量
+  int64 id = 1; //主键ID
+  string name = 2; //分类名称
   string icon = 3; //分类图标
-  string name = 4; //
-  int32 show_status = 5; //
-  int32 sort = 6; //
-
+  int32 help_count = 4; //专题数量
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  int32 sort = 6; //排序
+  string create_by = 7; //创建者
 }
 
 message AddHelpCategoryResp {
   string pong = 1;
 }
 
-// 删除帮助分类表
+// 删除帮助分类
 message DeleteHelpCategoryReq {
   repeated int64 ids = 1;
 }
@@ -28,72 +28,70 @@ message DeleteHelpCategoryResp {
   string pong = 1;
 }
 
-// 更新帮助分类表
+// 更新帮助分类
 message UpdateHelpCategoryReq {
-  int32 sort = 1; //
-  string update_by = 2; //更新者
-  int32 help_count = 3; //专题数量
-  string icon = 4; //分类图标
-  int64 id = 5; //
-  string name = 6; //
-  int32 show_status = 7; //
-
-
+  int64 id = 1; //主键ID
+  string name = 2; //分类名称
+  string icon = 3; //分类图标
+  int32 help_count = 4; //专题数量
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  int32 sort = 6; //排序
+  string update_by = 9; //更新者
 }
 
 message UpdateHelpCategoryResp {
   string pong = 1;
 }
 
-// 更新帮助分类表状态
+// 更新帮助分类状态
 message UpdateHelpCategoryStatusReq {
-  repeated int64 ids = 1;
-  int32 show_status = 2; //
-
-
+  repeated int64 ids = 1; //主键ID
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  string update_by = 9; //更新者
 }
 
 message UpdateHelpCategoryStatusResp {
   string pong = 1;
 }
 
-// 查询帮助分类表详情
+// 查询帮助分类详情
 message QueryHelpCategoryDetailReq {
     int64 id = 1;
 }
 
 message QueryHelpCategoryDetailResp {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int32 help_count = 3; //专题数量
-  string icon = 4; //分类图标
-  int64 id = 5; //
-  string name = 6; //
-  int32 show_status = 7; //
-  int32 sort = 8; //
+  int64 id = 1; //主键ID
+  string name = 2; //分类名称
+  string icon = 3; //分类图标
+  int32 help_count = 4; //专题数量
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  int32 sort = 6; //排序
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
   string update_by = 9; //更新者
   string update_time = 10; //更新时间
 
 }
 
-// 分页查询帮助分类表列表
+// 分页查询帮助分类列表
 message QueryHelpCategoryListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string name = 3; //
-  int32 show_status = 4; //
-
+  string name = 1; //分类名称
+  string icon = 2; //分类图标
+  int32 help_count = 3; //专题数量
+  int32 show_status = 4; //显示状态：0->不显示；1->显示
+  int32 page_num = 5; //第几页
+  int32 page_size = 6; //每页的数量
 }
 
 message HelpCategoryListData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int32 help_count = 3; //专题数量
-  string icon = 4; //分类图标
-  int64 id = 5; //
-  string name = 6; //
-  int32 show_status = 7; //
-  int32 sort = 8; //
+  int64 id = 1; //主键ID
+  string name = 2; //分类名称
+  string icon = 3; //分类图标
+  int32 help_count = 4; //专题数量
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  int32 sort = 6; //排序
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
   string update_by = 9; //更新者
   string update_time = 10; //更新时间
 
@@ -104,19 +102,19 @@ message QueryHelpCategoryListResp {
   repeated  HelpCategoryListData list = 2;
 }
 
-// 帮助分类表
+// 帮助分类
 service HelpCategoryService {
-  // 添加帮助分类表
+  // 添加帮助分类
   rpc AddHelpCategory(AddHelpCategoryReq) returns (AddHelpCategoryResp){}
-  // 删除帮助分类表
+  // 删除帮助分类
   rpc DeleteHelpCategory(DeleteHelpCategoryReq) returns (DeleteHelpCategoryResp){}
-  // 更新帮助分类表
+  // 更新帮助分类
   rpc UpdateHelpCategory(UpdateHelpCategoryReq) returns (UpdateHelpCategoryResp ){}
-  // 更新帮助分类表状态
+  // 更新帮助分类状态
   rpc UpdateHelpCategoryStatus(UpdateHelpCategoryStatusReq) returns (UpdateHelpCategoryStatusResp ){}
-  // 查询帮助分类表详情
+  // 查询帮助分类详情
    rpc QueryHelpCategoryDetail(QueryHelpCategoryDetailReq) returns (QueryHelpCategoryDetailResp){}
-  // 查询帮助分类表列表
+  // 查询帮助分类列表
   rpc QueryHelpCategoryList(QueryHelpCategoryListReq) returns (QueryHelpCategoryListResp){}
 
 

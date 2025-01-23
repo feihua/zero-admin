@@ -12,13 +12,13 @@ const TableNameCmsTopicComment = "cms_topic_comment"
 
 // CmsTopicComment 专题评论表
 type CmsTopicComment struct {
-	ID             int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	MemberNickName string    `gorm:"column:member_nick_name;not null" json:"member_nick_name"`
-	TopicID        int64     `gorm:"column:topic_id;not null" json:"topic_id"`
-	MemberIcon     string    `gorm:"column:member_icon;not null" json:"member_icon"`
-	Content        string    `gorm:"column:content;not null" json:"content"`
-	CreateTime     time.Time `gorm:"column:create_time;not null" json:"create_time"`
-	ShowStatus     int32     `gorm:"column:show_status;not null" json:"show_status"`
+	ID             int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`           // 主键ID
+	MemberNickName string    `gorm:"column:member_nick_name;not null;comment:评论人员昵称" json:"member_nick_name"`  // 评论人员昵称
+	TopicID        int64     `gorm:"column:topic_id;not null;comment:专题ID" json:"topic_id"`                    // 专题ID
+	MemberIcon     string    `gorm:"column:member_icon;not null;comment:评论人员头像" json:"member_icon"`            // 评论人员头像
+	Content        string    `gorm:"column:content;not null;comment:评论内容" json:"content"`                      // 评论内容
+	CreateTime     time.Time `gorm:"column:create_time;not null;comment:评论时间" json:"create_time"`              // 评论时间
+	ShowStatus     int32     `gorm:"column:show_status;not null;comment:是否显示，0->不显示；1->显示" json:"show_status"` // 是否显示，0->不显示；1->显示
 }
 
 // TableName CmsTopicComment's table name

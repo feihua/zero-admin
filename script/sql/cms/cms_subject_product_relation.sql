@@ -1,9 +1,9 @@
 create table cms_subject_product_relation
 (
     id         bigint auto_increment
-        primary key,
-    subject_id bigint not null,
-    product_id bigint not null
+        primary key comment '主键ID',
+    subject_id bigint not null comment '专题ID',
+    product_id bigint not null comment '商品ID'
 )
     comment '专题商品关系表' charset = utf8;
 

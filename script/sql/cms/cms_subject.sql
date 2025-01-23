@@ -1,25 +1,25 @@
 create table cms_subject
 (
     id               bigint auto_increment
-        primary key,
-    category_id      bigint                             not null,
-    title            varchar(100)                       not null,
-    pic              varchar(500)                       not null comment '专题主图',
-    product_count    int                                not null comment '关联产品数量',
-    recommend_status tinyint                            not null,
-    collect_count    int                                not null,
-    read_count       int                                not null,
-    comment_count    int                                not null,
-    album_pics       varchar(1000)                      not null comment '画册图片用逗号分割',
-    description      varchar(1000)                      null,
-    show_status      tinyint                            not null comment '显示状态：0->不显示；1->显示',
-    content          text                               not null,
-    forward_count    int                                not null comment '转发数',
-    category_name    varchar(200)                       not null comment '专题分类名称',
-    create_by        varchar(50)                        not null comment '创建者',
-    create_time      datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    update_by        varchar(50)                        null comment '更新者',
-    update_time      datetime                           null on update CURRENT_TIMESTAMP comment '更新时间'
+        primary key comment '专题id',
+    category_id      bigint                                not null comment '专题分类id',
+    title            varchar(100)                          not null comment '专题标题',
+    pic              varchar(500)                          not null comment '专题主图',
+    product_count    int                                   not null comment '关联产品数量',
+    recommend_status tinyint                               not null comment '推荐状态：0->不推荐；1->推荐',
+    collect_count    int                                   not null comment '收藏数',
+    read_count       int                                   not null comment '阅读数',
+    comment_count    int                                   not null comment '评论数',
+    album_pics       varchar(1000)                         not null comment '画册图片用逗号分割',
+    description      varchar(1000)                         not null comment '专题内容',
+    show_status      tinyint                               not null comment '显示状态：0->不显示；1->显示',
+    content          text                                  not null comment '专题内容',
+    forward_count    int                                   not null comment '转发数',
+    category_name    varchar(200)                          not null comment '专题分类名称',
+    create_by        varchar(50)                           not null comment '创建者',
+    create_time      datetime    default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_by        varchar(50) default ''                not null comment '更新者',
+    update_time      datetime                              null on update CURRENT_TIMESTAMP comment '更新时间'
 )
     comment '专题表' charset = utf8;
 

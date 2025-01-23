@@ -12,16 +12,16 @@ const TableNameCmsHelp = "cms_help"
 
 // CmsHelp 帮助表
 type CmsHelp struct {
-	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	CategoryID int64      `gorm:"column:category_id;not null" json:"category_id"`
-	Icon       string     `gorm:"column:icon;not null" json:"icon"`
-	Title      string     `gorm:"column:title;not null" json:"title"`
-	ShowStatus int32      `gorm:"column:show_status;not null" json:"show_status"`
-	ReadCount  int32      `gorm:"column:read_count;not null" json:"read_count"`
-	Content    string     `gorm:"column:content;not null" json:"content"`
+	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                        // 主键ID
+	CategoryID int64      `gorm:"column:category_id;not null;comment:分类ID" json:"category_id"`                           // 分类ID
+	Icon       string     `gorm:"column:icon;not null;comment:图标" json:"icon"`                                           // 图标
+	Title      string     `gorm:"column:title;not null;comment:标题" json:"title"`                                         // 标题
+	ShowStatus int32      `gorm:"column:show_status;not null;comment:显示状态：0->不显示；1->显示" json:"show_status"`              // 显示状态：0->不显示；1->显示
+	ReadCount  int32      `gorm:"column:read_count;not null;comment:阅读量" json:"read_count"`                              // 阅读量
+	Content    string     `gorm:"column:content;not null;comment:内容" json:"content"`                                     // 内容
 	CreateBy   string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy   *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                         // 更新者
+	UpdateBy   string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
 	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 

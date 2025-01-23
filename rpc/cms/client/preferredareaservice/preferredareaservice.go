@@ -152,6 +152,8 @@ type (
 	UpdateTopicCommentStatusResp              = cmsclient.UpdateTopicCommentStatusResp
 	UpdateTopicReq                            = cmsclient.UpdateTopicReq
 	UpdateTopicResp                           = cmsclient.UpdateTopicResp
+	UpdateTopicStatusReq                      = cmsclient.UpdateTopicStatusReq
+	UpdateTopicStatusResp                     = cmsclient.UpdateTopicStatusResp
 
 	PreferredAreaService interface {
 		// 添加优选专区

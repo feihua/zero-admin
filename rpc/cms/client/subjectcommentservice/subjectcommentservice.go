@@ -152,19 +152,21 @@ type (
 	UpdateTopicCommentStatusResp              = cmsclient.UpdateTopicCommentStatusResp
 	UpdateTopicReq                            = cmsclient.UpdateTopicReq
 	UpdateTopicResp                           = cmsclient.UpdateTopicResp
+	UpdateTopicStatusReq                      = cmsclient.UpdateTopicStatusReq
+	UpdateTopicStatusResp                     = cmsclient.UpdateTopicStatusResp
 
 	SubjectCommentService interface {
-		// 添加专题评论表
+		// 添加专题评论
 		AddSubjectComment(ctx context.Context, in *AddSubjectCommentReq, opts ...grpc.CallOption) (*AddSubjectCommentResp, error)
-		// 删除专题评论表
+		// 删除专题评论
 		DeleteSubjectComment(ctx context.Context, in *DeleteSubjectCommentReq, opts ...grpc.CallOption) (*DeleteSubjectCommentResp, error)
-		// 更新专题评论表
+		// 更新专题评论
 		UpdateSubjectComment(ctx context.Context, in *UpdateSubjectCommentReq, opts ...grpc.CallOption) (*UpdateSubjectCommentResp, error)
-		// 更新专题评论表状态
+		// 更新专题评论状态
 		UpdateSubjectCommentStatus(ctx context.Context, in *UpdateSubjectCommentStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCommentStatusResp, error)
-		// 查询专题评论表详情
+		// 查询专题评论详情
 		QuerySubjectCommentDetail(ctx context.Context, in *QuerySubjectCommentDetailReq, opts ...grpc.CallOption) (*QuerySubjectCommentDetailResp, error)
-		// 查询专题评论表列表
+		// 查询专题评论列表
 		QuerySubjectCommentList(ctx context.Context, in *QuerySubjectCommentListReq, opts ...grpc.CallOption) (*QuerySubjectCommentListResp, error)
 	}
 
@@ -179,37 +181,37 @@ func NewSubjectCommentService(cli zrpc.Client) SubjectCommentService {
 	}
 }
 
-// 添加专题评论表
+// 添加专题评论
 func (m *defaultSubjectCommentService) AddSubjectComment(ctx context.Context, in *AddSubjectCommentReq, opts ...grpc.CallOption) (*AddSubjectCommentResp, error) {
 	client := cmsclient.NewSubjectCommentServiceClient(m.cli.Conn())
 	return client.AddSubjectComment(ctx, in, opts...)
 }
 
-// 删除专题评论表
+// 删除专题评论
 func (m *defaultSubjectCommentService) DeleteSubjectComment(ctx context.Context, in *DeleteSubjectCommentReq, opts ...grpc.CallOption) (*DeleteSubjectCommentResp, error) {
 	client := cmsclient.NewSubjectCommentServiceClient(m.cli.Conn())
 	return client.DeleteSubjectComment(ctx, in, opts...)
 }
 
-// 更新专题评论表
+// 更新专题评论
 func (m *defaultSubjectCommentService) UpdateSubjectComment(ctx context.Context, in *UpdateSubjectCommentReq, opts ...grpc.CallOption) (*UpdateSubjectCommentResp, error) {
 	client := cmsclient.NewSubjectCommentServiceClient(m.cli.Conn())
 	return client.UpdateSubjectComment(ctx, in, opts...)
 }
 
-// 更新专题评论表状态
+// 更新专题评论状态
 func (m *defaultSubjectCommentService) UpdateSubjectCommentStatus(ctx context.Context, in *UpdateSubjectCommentStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCommentStatusResp, error) {
 	client := cmsclient.NewSubjectCommentServiceClient(m.cli.Conn())
 	return client.UpdateSubjectCommentStatus(ctx, in, opts...)
 }
 
-// 查询专题评论表详情
+// 查询专题评论详情
 func (m *defaultSubjectCommentService) QuerySubjectCommentDetail(ctx context.Context, in *QuerySubjectCommentDetailReq, opts ...grpc.CallOption) (*QuerySubjectCommentDetailResp, error) {
 	client := cmsclient.NewSubjectCommentServiceClient(m.cli.Conn())
 	return client.QuerySubjectCommentDetail(ctx, in, opts...)
 }
 
-// 查询专题评论表列表
+// 查询专题评论列表
 func (m *defaultSubjectCommentService) QuerySubjectCommentList(ctx context.Context, in *QuerySubjectCommentListReq, opts ...grpc.CallOption) (*QuerySubjectCommentListResp, error) {
 	client := cmsclient.NewSubjectCommentServiceClient(m.cli.Conn())
 	return client.QuerySubjectCommentList(ctx, in, opts...)

@@ -48,12 +48,12 @@ type cmsPreferredArea struct {
 	cmsPreferredAreaDo cmsPreferredAreaDo
 
 	ALL        field.Asterisk
-	ID         field.Int64
-	Name       field.String
-	SubTitle   field.String
+	ID         field.Int64  // 主键ID
+	Name       field.String // 专区名称
+	SubTitle   field.String // 子标题
 	Pic        field.String // 展示图片
-	Sort       field.Int32
-	ShowStatus field.Int32
+	Sort       field.Int32  // 排序
+	ShowStatus field.Int32  // 显示状态：0->不显示；1->显示
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者

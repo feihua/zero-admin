@@ -31,17 +31,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HelpServiceClient interface {
-	// 添加帮助表
+	// 添加帮助
 	AddHelp(ctx context.Context, in *AddHelpReq, opts ...grpc.CallOption) (*AddHelpResp, error)
-	// 删除帮助表
+	// 删除帮助
 	DeleteHelp(ctx context.Context, in *DeleteHelpReq, opts ...grpc.CallOption) (*DeleteHelpResp, error)
-	// 更新帮助表
+	// 更新帮助
 	UpdateHelp(ctx context.Context, in *UpdateHelpReq, opts ...grpc.CallOption) (*UpdateHelpResp, error)
-	// 更新帮助表状态
+	// 更新帮助状态
 	UpdateHelpStatus(ctx context.Context, in *UpdateHelpStatusReq, opts ...grpc.CallOption) (*UpdateHelpStatusResp, error)
-	// 查询帮助表详情
+	// 查询帮助详情
 	QueryHelpDetail(ctx context.Context, in *QueryHelpDetailReq, opts ...grpc.CallOption) (*QueryHelpDetailResp, error)
-	// 查询帮助表列表
+	// 查询帮助列表
 	QueryHelpList(ctx context.Context, in *QueryHelpListReq, opts ...grpc.CallOption) (*QueryHelpListResp, error)
 }
 
@@ -111,17 +111,17 @@ func (c *helpServiceClient) QueryHelpList(ctx context.Context, in *QueryHelpList
 // All implementations must embed UnimplementedHelpServiceServer
 // for forward compatibility
 type HelpServiceServer interface {
-	// 添加帮助表
+	// 添加帮助
 	AddHelp(context.Context, *AddHelpReq) (*AddHelpResp, error)
-	// 删除帮助表
+	// 删除帮助
 	DeleteHelp(context.Context, *DeleteHelpReq) (*DeleteHelpResp, error)
-	// 更新帮助表
+	// 更新帮助
 	UpdateHelp(context.Context, *UpdateHelpReq) (*UpdateHelpResp, error)
-	// 更新帮助表状态
+	// 更新帮助状态
 	UpdateHelpStatus(context.Context, *UpdateHelpStatusReq) (*UpdateHelpStatusResp, error)
-	// 查询帮助表详情
+	// 查询帮助详情
 	QueryHelpDetail(context.Context, *QueryHelpDetailReq) (*QueryHelpDetailResp, error)
-	// 查询帮助表列表
+	// 查询帮助列表
 	QueryHelpList(context.Context, *QueryHelpListReq) (*QueryHelpListResp, error)
 	mustEmbedUnimplementedHelpServiceServer()
 }
@@ -318,17 +318,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HelpCategoryServiceClient interface {
-	// 添加帮助分类表
+	// 添加帮助分类
 	AddHelpCategory(ctx context.Context, in *AddHelpCategoryReq, opts ...grpc.CallOption) (*AddHelpCategoryResp, error)
-	// 删除帮助分类表
+	// 删除帮助分类
 	DeleteHelpCategory(ctx context.Context, in *DeleteHelpCategoryReq, opts ...grpc.CallOption) (*DeleteHelpCategoryResp, error)
-	// 更新帮助分类表
+	// 更新帮助分类
 	UpdateHelpCategory(ctx context.Context, in *UpdateHelpCategoryReq, opts ...grpc.CallOption) (*UpdateHelpCategoryResp, error)
-	// 更新帮助分类表状态
+	// 更新帮助分类状态
 	UpdateHelpCategoryStatus(ctx context.Context, in *UpdateHelpCategoryStatusReq, opts ...grpc.CallOption) (*UpdateHelpCategoryStatusResp, error)
-	// 查询帮助分类表详情
+	// 查询帮助分类详情
 	QueryHelpCategoryDetail(ctx context.Context, in *QueryHelpCategoryDetailReq, opts ...grpc.CallOption) (*QueryHelpCategoryDetailResp, error)
-	// 查询帮助分类表列表
+	// 查询帮助分类列表
 	QueryHelpCategoryList(ctx context.Context, in *QueryHelpCategoryListReq, opts ...grpc.CallOption) (*QueryHelpCategoryListResp, error)
 }
 
@@ -398,17 +398,17 @@ func (c *helpCategoryServiceClient) QueryHelpCategoryList(ctx context.Context, i
 // All implementations must embed UnimplementedHelpCategoryServiceServer
 // for forward compatibility
 type HelpCategoryServiceServer interface {
-	// 添加帮助分类表
+	// 添加帮助分类
 	AddHelpCategory(context.Context, *AddHelpCategoryReq) (*AddHelpCategoryResp, error)
-	// 删除帮助分类表
+	// 删除帮助分类
 	DeleteHelpCategory(context.Context, *DeleteHelpCategoryReq) (*DeleteHelpCategoryResp, error)
-	// 更新帮助分类表
+	// 更新帮助分类
 	UpdateHelpCategory(context.Context, *UpdateHelpCategoryReq) (*UpdateHelpCategoryResp, error)
-	// 更新帮助分类表状态
+	// 更新帮助分类状态
 	UpdateHelpCategoryStatus(context.Context, *UpdateHelpCategoryStatusReq) (*UpdateHelpCategoryStatusResp, error)
-	// 查询帮助分类表详情
+	// 查询帮助分类详情
 	QueryHelpCategoryDetail(context.Context, *QueryHelpCategoryDetailReq) (*QueryHelpCategoryDetailResp, error)
-	// 查询帮助分类表列表
+	// 查询帮助分类列表
 	QueryHelpCategoryList(context.Context, *QueryHelpCategoryListReq) (*QueryHelpCategoryListResp, error)
 	mustEmbedUnimplementedHelpCategoryServiceServer()
 }
@@ -605,17 +605,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MemberReportServiceClient interface {
-	// 添加用户举报表
+	// 添加用户举报
 	AddMemberReport(ctx context.Context, in *AddMemberReportReq, opts ...grpc.CallOption) (*AddMemberReportResp, error)
-	// 删除用户举报表
+	// 删除用户举报
 	DeleteMemberReport(ctx context.Context, in *DeleteMemberReportReq, opts ...grpc.CallOption) (*DeleteMemberReportResp, error)
-	// 更新用户举报表
+	// 更新用户举报
 	UpdateMemberReport(ctx context.Context, in *UpdateMemberReportReq, opts ...grpc.CallOption) (*UpdateMemberReportResp, error)
-	// 更新用户举报表状态
+	// 更新用户举报状态
 	UpdateMemberReportStatus(ctx context.Context, in *UpdateMemberReportStatusReq, opts ...grpc.CallOption) (*UpdateMemberReportStatusResp, error)
-	// 查询用户举报表详情
+	// 查询用户举报详情
 	QueryMemberReportDetail(ctx context.Context, in *QueryMemberReportDetailReq, opts ...grpc.CallOption) (*QueryMemberReportDetailResp, error)
-	// 查询用户举报表列表
+	// 查询用户举报列表
 	QueryMemberReportList(ctx context.Context, in *QueryMemberReportListReq, opts ...grpc.CallOption) (*QueryMemberReportListResp, error)
 }
 
@@ -685,17 +685,17 @@ func (c *memberReportServiceClient) QueryMemberReportList(ctx context.Context, i
 // All implementations must embed UnimplementedMemberReportServiceServer
 // for forward compatibility
 type MemberReportServiceServer interface {
-	// 添加用户举报表
+	// 添加用户举报
 	AddMemberReport(context.Context, *AddMemberReportReq) (*AddMemberReportResp, error)
-	// 删除用户举报表
+	// 删除用户举报
 	DeleteMemberReport(context.Context, *DeleteMemberReportReq) (*DeleteMemberReportResp, error)
-	// 更新用户举报表
+	// 更新用户举报
 	UpdateMemberReport(context.Context, *UpdateMemberReportReq) (*UpdateMemberReportResp, error)
-	// 更新用户举报表状态
+	// 更新用户举报状态
 	UpdateMemberReportStatus(context.Context, *UpdateMemberReportStatusReq) (*UpdateMemberReportStatusResp, error)
-	// 查询用户举报表详情
+	// 查询用户举报详情
 	QueryMemberReportDetail(context.Context, *QueryMemberReportDetailReq) (*QueryMemberReportDetailResp, error)
-	// 查询用户举报表列表
+	// 查询用户举报列表
 	QueryMemberReportList(context.Context, *QueryMemberReportListReq) (*QueryMemberReportListResp, error)
 	mustEmbedUnimplementedMemberReportServiceServer()
 }
@@ -1313,17 +1313,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SubjectServiceClient interface {
-	// 添加专题表
+	// 添加专题
 	AddSubject(ctx context.Context, in *AddSubjectReq, opts ...grpc.CallOption) (*AddSubjectResp, error)
-	// 删除专题表
+	// 删除专题
 	DeleteSubject(ctx context.Context, in *DeleteSubjectReq, opts ...grpc.CallOption) (*DeleteSubjectResp, error)
-	// 更新专题表
+	// 更新专题
 	UpdateSubject(ctx context.Context, in *UpdateSubjectReq, opts ...grpc.CallOption) (*UpdateSubjectResp, error)
-	// 更新专题表状态
+	// 更新专题状态
 	UpdateSubjectStatus(ctx context.Context, in *UpdateSubjectStatusReq, opts ...grpc.CallOption) (*UpdateSubjectStatusResp, error)
-	// 查询专题表详情
+	// 查询专题详情
 	QuerySubjectDetail(ctx context.Context, in *QuerySubjectDetailReq, opts ...grpc.CallOption) (*QuerySubjectDetailResp, error)
-	// 查询专题表列表
+	// 查询专题列表
 	QuerySubjectList(ctx context.Context, in *QuerySubjectListReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error)
 	SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error)
 	// 批量更新状态
@@ -1414,17 +1414,17 @@ func (c *subjectServiceClient) UpdateSubjectRecommendStatus(ctx context.Context,
 // All implementations must embed UnimplementedSubjectServiceServer
 // for forward compatibility
 type SubjectServiceServer interface {
-	// 添加专题表
+	// 添加专题
 	AddSubject(context.Context, *AddSubjectReq) (*AddSubjectResp, error)
-	// 删除专题表
+	// 删除专题
 	DeleteSubject(context.Context, *DeleteSubjectReq) (*DeleteSubjectResp, error)
-	// 更新专题表
+	// 更新专题
 	UpdateSubject(context.Context, *UpdateSubjectReq) (*UpdateSubjectResp, error)
-	// 更新专题表状态
+	// 更新专题状态
 	UpdateSubjectStatus(context.Context, *UpdateSubjectStatusReq) (*UpdateSubjectStatusResp, error)
-	// 查询专题表详情
+	// 查询专题详情
 	QuerySubjectDetail(context.Context, *QuerySubjectDetailReq) (*QuerySubjectDetailResp, error)
-	// 查询专题表列表
+	// 查询专题列表
 	QuerySubjectList(context.Context, *QuerySubjectListReq) (*QuerySubjectListResp, error)
 	SubjectListByIds(context.Context, *SubjectListByIdsReq) (*QuerySubjectListResp, error)
 	// 批量更新状态
@@ -1674,17 +1674,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SubjectCategoryServiceClient interface {
-	// 添加专题分类表
+	// 添加专题分类
 	AddSubjectCategory(ctx context.Context, in *AddSubjectCategoryReq, opts ...grpc.CallOption) (*AddSubjectCategoryResp, error)
-	// 删除专题分类表
+	// 删除专题分类
 	DeleteSubjectCategory(ctx context.Context, in *DeleteSubjectCategoryReq, opts ...grpc.CallOption) (*DeleteSubjectCategoryResp, error)
-	// 更新专题分类表
+	// 更新专题分类
 	UpdateSubjectCategory(ctx context.Context, in *UpdateSubjectCategoryReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryResp, error)
-	// 更新专题分类表状态
+	// 更新专题分类状态
 	UpdateSubjectCategoryStatus(ctx context.Context, in *UpdateSubjectCategoryStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryStatusResp, error)
-	// 查询专题分类表详情
+	// 查询专题分类详情
 	QuerySubjectCategoryDetail(ctx context.Context, in *QuerySubjectCategoryDetailReq, opts ...grpc.CallOption) (*QuerySubjectCategoryDetailResp, error)
-	// 查询专题分类表列表
+	// 查询专题分类列表
 	QuerySubjectCategoryList(ctx context.Context, in *QuerySubjectCategoryListReq, opts ...grpc.CallOption) (*QuerySubjectCategoryListResp, error)
 }
 
@@ -1754,17 +1754,17 @@ func (c *subjectCategoryServiceClient) QuerySubjectCategoryList(ctx context.Cont
 // All implementations must embed UnimplementedSubjectCategoryServiceServer
 // for forward compatibility
 type SubjectCategoryServiceServer interface {
-	// 添加专题分类表
+	// 添加专题分类
 	AddSubjectCategory(context.Context, *AddSubjectCategoryReq) (*AddSubjectCategoryResp, error)
-	// 删除专题分类表
+	// 删除专题分类
 	DeleteSubjectCategory(context.Context, *DeleteSubjectCategoryReq) (*DeleteSubjectCategoryResp, error)
-	// 更新专题分类表
+	// 更新专题分类
 	UpdateSubjectCategory(context.Context, *UpdateSubjectCategoryReq) (*UpdateSubjectCategoryResp, error)
-	// 更新专题分类表状态
+	// 更新专题分类状态
 	UpdateSubjectCategoryStatus(context.Context, *UpdateSubjectCategoryStatusReq) (*UpdateSubjectCategoryStatusResp, error)
-	// 查询专题分类表详情
+	// 查询专题分类详情
 	QuerySubjectCategoryDetail(context.Context, *QuerySubjectCategoryDetailReq) (*QuerySubjectCategoryDetailResp, error)
-	// 查询专题分类表列表
+	// 查询专题分类列表
 	QuerySubjectCategoryList(context.Context, *QuerySubjectCategoryListReq) (*QuerySubjectCategoryListResp, error)
 	mustEmbedUnimplementedSubjectCategoryServiceServer()
 }
@@ -1962,17 +1962,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SubjectCommentServiceClient interface {
-	// 添加专题评论表
+	// 添加专题评论
 	AddSubjectComment(ctx context.Context, in *AddSubjectCommentReq, opts ...grpc.CallOption) (*AddSubjectCommentResp, error)
-	// 删除专题评论表
+	// 删除专题评论
 	DeleteSubjectComment(ctx context.Context, in *DeleteSubjectCommentReq, opts ...grpc.CallOption) (*DeleteSubjectCommentResp, error)
-	// 更新专题评论表
+	// 更新专题评论
 	UpdateSubjectComment(ctx context.Context, in *UpdateSubjectCommentReq, opts ...grpc.CallOption) (*UpdateSubjectCommentResp, error)
-	// 更新专题评论表状态
+	// 更新专题评论状态
 	UpdateSubjectCommentStatus(ctx context.Context, in *UpdateSubjectCommentStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCommentStatusResp, error)
-	// 查询专题评论表详情
+	// 查询专题评论详情
 	QuerySubjectCommentDetail(ctx context.Context, in *QuerySubjectCommentDetailReq, opts ...grpc.CallOption) (*QuerySubjectCommentDetailResp, error)
-	// 查询专题评论表列表
+	// 查询专题评论列表
 	QuerySubjectCommentList(ctx context.Context, in *QuerySubjectCommentListReq, opts ...grpc.CallOption) (*QuerySubjectCommentListResp, error)
 }
 
@@ -2042,17 +2042,17 @@ func (c *subjectCommentServiceClient) QuerySubjectCommentList(ctx context.Contex
 // All implementations must embed UnimplementedSubjectCommentServiceServer
 // for forward compatibility
 type SubjectCommentServiceServer interface {
-	// 添加专题评论表
+	// 添加专题评论
 	AddSubjectComment(context.Context, *AddSubjectCommentReq) (*AddSubjectCommentResp, error)
-	// 删除专题评论表
+	// 删除专题评论
 	DeleteSubjectComment(context.Context, *DeleteSubjectCommentReq) (*DeleteSubjectCommentResp, error)
-	// 更新专题评论表
+	// 更新专题评论
 	UpdateSubjectComment(context.Context, *UpdateSubjectCommentReq) (*UpdateSubjectCommentResp, error)
-	// 更新专题评论表状态
+	// 更新专题评论状态
 	UpdateSubjectCommentStatus(context.Context, *UpdateSubjectCommentStatusReq) (*UpdateSubjectCommentStatusResp, error)
-	// 查询专题评论表详情
+	// 查询专题评论详情
 	QuerySubjectCommentDetail(context.Context, *QuerySubjectCommentDetailReq) (*QuerySubjectCommentDetailResp, error)
-	// 查询专题评论表列表
+	// 查询专题评论列表
 	QuerySubjectCommentList(context.Context, *QuerySubjectCommentListReq) (*QuerySubjectCommentListResp, error)
 	mustEmbedUnimplementedSubjectCommentServiceServer()
 }
@@ -2369,26 +2369,29 @@ var SubjectProductRelationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	TopicService_AddTopic_FullMethodName         = "/cmsclient.TopicService/AddTopic"
-	TopicService_DeleteTopic_FullMethodName      = "/cmsclient.TopicService/DeleteTopic"
-	TopicService_UpdateTopic_FullMethodName      = "/cmsclient.TopicService/UpdateTopic"
-	TopicService_QueryTopicDetail_FullMethodName = "/cmsclient.TopicService/QueryTopicDetail"
-	TopicService_QueryTopicList_FullMethodName   = "/cmsclient.TopicService/QueryTopicList"
+	TopicService_AddTopic_FullMethodName          = "/cmsclient.TopicService/AddTopic"
+	TopicService_DeleteTopic_FullMethodName       = "/cmsclient.TopicService/DeleteTopic"
+	TopicService_UpdateTopic_FullMethodName       = "/cmsclient.TopicService/UpdateTopic"
+	TopicService_UpdateTopicStatus_FullMethodName = "/cmsclient.TopicService/UpdateTopicStatus"
+	TopicService_QueryTopicDetail_FullMethodName  = "/cmsclient.TopicService/QueryTopicDetail"
+	TopicService_QueryTopicList_FullMethodName    = "/cmsclient.TopicService/QueryTopicList"
 )
 
 // TopicServiceClient is the client API for TopicService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TopicServiceClient interface {
-	// 添加话题表
+	// 添加话题
 	AddTopic(ctx context.Context, in *AddTopicReq, opts ...grpc.CallOption) (*AddTopicResp, error)
-	// 删除话题表
+	// 删除话题
 	DeleteTopic(ctx context.Context, in *DeleteTopicReq, opts ...grpc.CallOption) (*DeleteTopicResp, error)
-	// 更新话题表
+	// 更新话题
 	UpdateTopic(ctx context.Context, in *UpdateTopicReq, opts ...grpc.CallOption) (*UpdateTopicResp, error)
-	// 查询话题表详情
+	// 更新话题状态
+	UpdateTopicStatus(ctx context.Context, in *UpdateTopicStatusReq, opts ...grpc.CallOption) (*UpdateTopicStatusResp, error)
+	// 查询话题详情
 	QueryTopicDetail(ctx context.Context, in *QueryTopicDetailReq, opts ...grpc.CallOption) (*QueryTopicDetailResp, error)
-	// 查询话题表列表
+	// 查询话题列表
 	QueryTopicList(ctx context.Context, in *QueryTopicListReq, opts ...grpc.CallOption) (*QueryTopicListResp, error)
 }
 
@@ -2427,6 +2430,15 @@ func (c *topicServiceClient) UpdateTopic(ctx context.Context, in *UpdateTopicReq
 	return out, nil
 }
 
+func (c *topicServiceClient) UpdateTopicStatus(ctx context.Context, in *UpdateTopicStatusReq, opts ...grpc.CallOption) (*UpdateTopicStatusResp, error) {
+	out := new(UpdateTopicStatusResp)
+	err := c.cc.Invoke(ctx, TopicService_UpdateTopicStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *topicServiceClient) QueryTopicDetail(ctx context.Context, in *QueryTopicDetailReq, opts ...grpc.CallOption) (*QueryTopicDetailResp, error) {
 	out := new(QueryTopicDetailResp)
 	err := c.cc.Invoke(ctx, TopicService_QueryTopicDetail_FullMethodName, in, out, opts...)
@@ -2449,15 +2461,17 @@ func (c *topicServiceClient) QueryTopicList(ctx context.Context, in *QueryTopicL
 // All implementations must embed UnimplementedTopicServiceServer
 // for forward compatibility
 type TopicServiceServer interface {
-	// 添加话题表
+	// 添加话题
 	AddTopic(context.Context, *AddTopicReq) (*AddTopicResp, error)
-	// 删除话题表
+	// 删除话题
 	DeleteTopic(context.Context, *DeleteTopicReq) (*DeleteTopicResp, error)
-	// 更新话题表
+	// 更新话题
 	UpdateTopic(context.Context, *UpdateTopicReq) (*UpdateTopicResp, error)
-	// 查询话题表详情
+	// 更新话题状态
+	UpdateTopicStatus(context.Context, *UpdateTopicStatusReq) (*UpdateTopicStatusResp, error)
+	// 查询话题详情
 	QueryTopicDetail(context.Context, *QueryTopicDetailReq) (*QueryTopicDetailResp, error)
-	// 查询话题表列表
+	// 查询话题列表
 	QueryTopicList(context.Context, *QueryTopicListReq) (*QueryTopicListResp, error)
 	mustEmbedUnimplementedTopicServiceServer()
 }
@@ -2474,6 +2488,9 @@ func (UnimplementedTopicServiceServer) DeleteTopic(context.Context, *DeleteTopic
 }
 func (UnimplementedTopicServiceServer) UpdateTopic(context.Context, *UpdateTopicReq) (*UpdateTopicResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTopic not implemented")
+}
+func (UnimplementedTopicServiceServer) UpdateTopicStatus(context.Context, *UpdateTopicStatusReq) (*UpdateTopicStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTopicStatus not implemented")
 }
 func (UnimplementedTopicServiceServer) QueryTopicDetail(context.Context, *QueryTopicDetailReq) (*QueryTopicDetailResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryTopicDetail not implemented")
@@ -2548,6 +2565,24 @@ func _TopicService_UpdateTopic_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TopicService_UpdateTopicStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTopicStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicServiceServer).UpdateTopicStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicService_UpdateTopicStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicServiceServer).UpdateTopicStatus(ctx, req.(*UpdateTopicStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TopicService_QueryTopicDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryTopicDetailReq)
 	if err := dec(in); err != nil {
@@ -2604,6 +2639,10 @@ var TopicService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TopicService_UpdateTopic_Handler,
 		},
 		{
+			MethodName: "UpdateTopicStatus",
+			Handler:    _TopicService_UpdateTopicStatus_Handler,
+		},
+		{
 			MethodName: "QueryTopicDetail",
 			Handler:    _TopicService_QueryTopicDetail_Handler,
 		},
@@ -2629,17 +2668,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TopicCategoryServiceClient interface {
-	// 添加话题分类表
+	// 添加话题分类
 	AddTopicCategory(ctx context.Context, in *AddTopicCategoryReq, opts ...grpc.CallOption) (*AddTopicCategoryResp, error)
-	// 删除话题分类表
+	// 删除话题分类
 	DeleteTopicCategory(ctx context.Context, in *DeleteTopicCategoryReq, opts ...grpc.CallOption) (*DeleteTopicCategoryResp, error)
-	// 更新话题分类表
+	// 更新话题分类
 	UpdateTopicCategory(ctx context.Context, in *UpdateTopicCategoryReq, opts ...grpc.CallOption) (*UpdateTopicCategoryResp, error)
-	// 更新话题分类表状态
+	// 更新话题分类状态
 	UpdateTopicCategoryStatus(ctx context.Context, in *UpdateTopicCategoryStatusReq, opts ...grpc.CallOption) (*UpdateTopicCategoryStatusResp, error)
-	// 查询话题分类表详情
+	// 查询话题分类详情
 	QueryTopicCategoryDetail(ctx context.Context, in *QueryTopicCategoryDetailReq, opts ...grpc.CallOption) (*QueryTopicCategoryDetailResp, error)
-	// 查询话题分类表列表
+	// 查询话题分类列表
 	QueryTopicCategoryList(ctx context.Context, in *QueryTopicCategoryListReq, opts ...grpc.CallOption) (*QueryTopicCategoryListResp, error)
 }
 
@@ -2709,17 +2748,17 @@ func (c *topicCategoryServiceClient) QueryTopicCategoryList(ctx context.Context,
 // All implementations must embed UnimplementedTopicCategoryServiceServer
 // for forward compatibility
 type TopicCategoryServiceServer interface {
-	// 添加话题分类表
+	// 添加话题分类
 	AddTopicCategory(context.Context, *AddTopicCategoryReq) (*AddTopicCategoryResp, error)
-	// 删除话题分类表
+	// 删除话题分类
 	DeleteTopicCategory(context.Context, *DeleteTopicCategoryReq) (*DeleteTopicCategoryResp, error)
-	// 更新话题分类表
+	// 更新话题分类
 	UpdateTopicCategory(context.Context, *UpdateTopicCategoryReq) (*UpdateTopicCategoryResp, error)
-	// 更新话题分类表状态
+	// 更新话题分类状态
 	UpdateTopicCategoryStatus(context.Context, *UpdateTopicCategoryStatusReq) (*UpdateTopicCategoryStatusResp, error)
-	// 查询话题分类表详情
+	// 查询话题分类详情
 	QueryTopicCategoryDetail(context.Context, *QueryTopicCategoryDetailReq) (*QueryTopicCategoryDetailResp, error)
-	// 查询话题分类表列表
+	// 查询话题分类列表
 	QueryTopicCategoryList(context.Context, *QueryTopicCategoryListReq) (*QueryTopicCategoryListResp, error)
 	mustEmbedUnimplementedTopicCategoryServiceServer()
 }
@@ -2916,17 +2955,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TopicCommentServiceClient interface {
-	// 添加专题评论表
+	// 添加专题评论
 	AddTopicComment(ctx context.Context, in *AddTopicCommentReq, opts ...grpc.CallOption) (*AddTopicCommentResp, error)
-	// 删除专题评论表
+	// 删除专题评论
 	DeleteTopicComment(ctx context.Context, in *DeleteTopicCommentReq, opts ...grpc.CallOption) (*DeleteTopicCommentResp, error)
-	// 更新专题评论表
+	// 更新专题评论
 	UpdateTopicComment(ctx context.Context, in *UpdateTopicCommentReq, opts ...grpc.CallOption) (*UpdateTopicCommentResp, error)
-	// 更新专题评论表状态
+	// 更新专题评论状态
 	UpdateTopicCommentStatus(ctx context.Context, in *UpdateTopicCommentStatusReq, opts ...grpc.CallOption) (*UpdateTopicCommentStatusResp, error)
-	// 查询专题评论表详情
+	// 查询专题评论详情
 	QueryTopicCommentDetail(ctx context.Context, in *QueryTopicCommentDetailReq, opts ...grpc.CallOption) (*QueryTopicCommentDetailResp, error)
-	// 查询专题评论表列表
+	// 查询专题评论列表
 	QueryTopicCommentList(ctx context.Context, in *QueryTopicCommentListReq, opts ...grpc.CallOption) (*QueryTopicCommentListResp, error)
 }
 
@@ -2996,17 +3035,17 @@ func (c *topicCommentServiceClient) QueryTopicCommentList(ctx context.Context, i
 // All implementations must embed UnimplementedTopicCommentServiceServer
 // for forward compatibility
 type TopicCommentServiceServer interface {
-	// 添加专题评论表
+	// 添加专题评论
 	AddTopicComment(context.Context, *AddTopicCommentReq) (*AddTopicCommentResp, error)
-	// 删除专题评论表
+	// 删除专题评论
 	DeleteTopicComment(context.Context, *DeleteTopicCommentReq) (*DeleteTopicCommentResp, error)
-	// 更新专题评论表
+	// 更新专题评论
 	UpdateTopicComment(context.Context, *UpdateTopicCommentReq) (*UpdateTopicCommentResp, error)
-	// 更新专题评论表状态
+	// 更新专题评论状态
 	UpdateTopicCommentStatus(context.Context, *UpdateTopicCommentStatusReq) (*UpdateTopicCommentStatusResp, error)
-	// 查询专题评论表详情
+	// 查询专题评论详情
 	QueryTopicCommentDetail(context.Context, *QueryTopicCommentDetailReq) (*QueryTopicCommentDetailResp, error)
-	// 查询专题评论表列表
+	// 查询专题评论列表
 	QueryTopicCommentList(context.Context, *QueryTopicCommentListReq) (*QueryTopicCommentListResp, error)
 	mustEmbedUnimplementedTopicCommentServiceServer()
 }

@@ -12,15 +12,15 @@ const TableNameCmsPreferredArea = "cms_preferred_area"
 
 // CmsPreferredArea 优选专区
 type CmsPreferredArea struct {
-	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Name       string     `gorm:"column:name;not null" json:"name"`
-	SubTitle   string     `gorm:"column:sub_title;not null" json:"sub_title"`
-	Pic        string     `gorm:"column:pic;not null;comment:展示图片" json:"pic"` // 展示图片
-	Sort       int32      `gorm:"column:sort;not null" json:"sort"`
-	ShowStatus int32      `gorm:"column:show_status;not null" json:"show_status"`
+	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                        // 主键ID
+	Name       string     `gorm:"column:name;not null;comment:专区名称" json:"name"`                                         // 专区名称
+	SubTitle   string     `gorm:"column:sub_title;not null;comment:子标题" json:"sub_title"`                                // 子标题
+	Pic        string     `gorm:"column:pic;not null;comment:展示图片" json:"pic"`                                           // 展示图片
+	Sort       int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
+	ShowStatus int32      `gorm:"column:show_status;not null;comment:显示状态：0->不显示；1->显示" json:"show_status"`              // 显示状态：0->不显示；1->显示
 	CreateBy   string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy   *string    `gorm:"column:update_by;comment:更新者" json:"update_by"`                                         // 更新者
+	UpdateBy   string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
 	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 

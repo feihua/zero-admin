@@ -4,22 +4,21 @@ package main;
 
 option go_package = "./proto";
 
-// 添加专题评论表
+// 添加专题评论
 message AddSubjectCommentReq {
-  string content = 1; //
-  int32 show_status = 2; //
-  int64 subject_id = 3; //
-  string member_icon = 4; //
-  string member_nick_name = 5; //
-
-
+  int64 id = 1; //编号
+  int64 subject_id = 2; //关联专题id
+  string member_nick_name = 3; //关联会员昵称
+  string member_icon = 4; //会员头像
+  string content = 5; //评论内容
+  int32 show_status = 7; //是否显示，0->不显示；1->显示
 }
 
 message AddSubjectCommentResp {
   string pong = 1;
 }
 
-// 删除专题评论表
+// 删除专题评论
 message DeleteSubjectCommentReq {
   repeated int64 ids = 1;
 }
@@ -28,66 +27,65 @@ message DeleteSubjectCommentResp {
   string pong = 1;
 }
 
-// 更新专题评论表
+// 更新专题评论
 message UpdateSubjectCommentReq {
-  string content = 1; //
-  int64 subject_id = 2; //
-  int64 id = 3; //
-  string member_icon = 4; //
-  string member_nick_name = 5; //
-  int32 show_status = 6; //
-
-
+  int64 id = 1; //编号
+  int64 subject_id = 2; //关联专题id
+  string member_nick_name = 3; //关联会员昵称
+  string member_icon = 4; //会员头像
+  string content = 5; //评论内容
+  int32 show_status = 7; //是否显示，0->不显示；1->显示
 }
 
 message UpdateSubjectCommentResp {
   string pong = 1;
 }
 
-// 更新专题评论表状态
+// 更新专题评论状态
 message UpdateSubjectCommentStatusReq {
-  repeated int64 ids = 1;
-  int32 show_status = 2; //
-
+  repeated int64 ids = 1; //编号
+  int32 show_status = 7; //是否显示，0->不显示；1->显示
 }
 
 message UpdateSubjectCommentStatusResp {
   string pong = 1;
 }
 
-// 查询专题评论表详情
+// 查询专题评论详情
 message QuerySubjectCommentDetailReq {
     int64 id = 1;
 }
 
 message QuerySubjectCommentDetailResp {
-  string content = 1; //
-  string create_time = 2; //
-  int64 id = 3; //
-  string member_icon = 4; //
-  string member_nick_name = 5; //
-  int32 show_status = 6; //
-  int64 subject_id = 7; //
+  int64 id = 1; //编号
+  int64 subject_id = 2; //关联专题id
+  string member_nick_name = 3; //关联会员昵称
+  string member_icon = 4; //会员头像
+  string content = 5; //评论内容
+  string create_time = 6; //创建时间
+  int32 show_status = 7; //是否显示，0->不显示；1->显示
 
 }
 
-// 分页查询专题评论表列表
+// 分页查询专题评论列表
 message QuerySubjectCommentListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string member_nick_name = 5; //
-  int32 show_status = 6; //
-
+  int64 subject_id = 1; //关联专题id
+  string member_nick_name = 2; //关联会员昵称
+  string member_icon = 3; //会员头像
+  string content = 4; //评论内容
+  int32 show_status = 5; //是否显示，0->不显示；1->显示
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
 }
 
 message SubjectCommentListData {
-  string content = 1; //
-  string create_time = 2; //
-  int64 id = 3; //
-  string member_icon = 4; //
-  string member_nick_name = 5; //
-  int32 show_status = 6; //
-  int64 subject_id = 7; //
+  int64 id = 1; //编号
+  int64 subject_id = 2; //关联专题id
+  string member_nick_name = 3; //关联会员昵称
+  string member_icon = 4; //会员头像
+  string content = 5; //评论内容
+  string create_time = 6; //创建时间
+  int32 show_status = 7; //是否显示，0->不显示；1->显示
 
 }
 
@@ -96,19 +94,19 @@ message QuerySubjectCommentListResp {
   repeated  SubjectCommentListData list = 2;
 }
 
-// 专题评论表
+// 专题评论
 service SubjectCommentService {
-  // 添加专题评论表
+  // 添加专题评论
   rpc AddSubjectComment(AddSubjectCommentReq) returns (AddSubjectCommentResp){}
-  // 删除专题评论表
+  // 删除专题评论
   rpc DeleteSubjectComment(DeleteSubjectCommentReq) returns (DeleteSubjectCommentResp){}
-  // 更新专题评论表
+  // 更新专题评论
   rpc UpdateSubjectComment(UpdateSubjectCommentReq) returns (UpdateSubjectCommentResp ){}
-  // 更新专题评论表状态
+  // 更新专题评论状态
   rpc UpdateSubjectCommentStatus(UpdateSubjectCommentStatusReq) returns (UpdateSubjectCommentStatusResp ){}
-  // 查询专题评论表详情
+  // 查询专题评论详情
    rpc QuerySubjectCommentDetail(QuerySubjectCommentDetailReq) returns (QuerySubjectCommentDetailResp){}
-  // 查询专题评论表列表
+  // 查询专题评论列表
   rpc QuerySubjectCommentList(QuerySubjectCommentListReq) returns (QuerySubjectCommentListResp){}
 
 

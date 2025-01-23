@@ -33,12 +33,12 @@ func NewAddSubjectProductRelationLogic(ctx context.Context, svcCtx *svc.ServiceC
 // AddSubjectProductRelation 添加专题商品关系表
 func (l *AddSubjectProductRelationLogic) AddSubjectProductRelation(in *cmsclient.AddSubjectProductRelationReq) (*cmsclient.AddSubjectProductRelationResp, error) {
 	q := query.CmsSubjectProductRelation
-	//1.先删除专题关联
+	// 1.先删除专题关联
 	_, err := q.WithContext(l.ctx).Where(q.ProductID.Eq(in.ProductId)).Delete()
 	if err != nil {
 		return nil, err
 	}
-	//2.添加
+	// 2.添加
 	productRelations := make([]*model.CmsSubjectProductRelation, 0)
 	for _, id := range in.SubjectId {
 		productRelations = append(productRelations, &model.CmsSubjectProductRelation{

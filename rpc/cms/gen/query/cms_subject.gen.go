@@ -57,19 +57,19 @@ type cmsSubject struct {
 	cmsSubjectDo cmsSubjectDo
 
 	ALL             field.Asterisk
-	ID              field.Int64
-	CategoryID      field.Int64
-	Title           field.String
+	ID              field.Int64  // 专题id
+	CategoryID      field.Int64  // 专题分类id
+	Title           field.String // 专题标题
 	Pic             field.String // 专题主图
 	ProductCount    field.Int32  // 关联产品数量
-	RecommendStatus field.Int32
-	CollectCount    field.Int32
-	ReadCount       field.Int32
-	CommentCount    field.Int32
+	RecommendStatus field.Int32  // 推荐状态：0->不推荐；1->推荐
+	CollectCount    field.Int32  // 收藏数
+	ReadCount       field.Int32  // 阅读数
+	CommentCount    field.Int32  // 评论数
 	AlbumPics       field.String // 画册图片用逗号分割
-	Description     field.String
-	ShowStatus      field.Int32 // 显示状态：0->不显示；1->显示
-	Content         field.String
+	Description     field.String // 专题内容
+	ShowStatus      field.Int32  // 显示状态：0->不显示；1->显示
+	Content         field.String // 专题内容
 	ForwardCount    field.Int32  // 转发数
 	CategoryName    field.String // 专题分类名称
 	CreateBy        field.String // 创建者

@@ -1,16 +1,16 @@
 create table cms_preferred_area
 (
     id          bigint auto_increment
-        primary key,
-    name        varchar(255)                       not null,
-    sub_title   varchar(255)                       not null,
-    pic         varchar(500)                       not null comment '展示图片',
-    sort        int                                not null,
-    show_status tinyint                            not null,
-    create_by   varchar(50)                        not null comment '创建者',
-    create_time datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    update_by   varchar(50)                        null comment '更新者',
-    update_time datetime                           null on update CURRENT_TIMESTAMP comment '更新时间'
+        primary key comment '主键ID',
+    name        varchar(255)                          not null comment '专区名称',
+    sub_title   varchar(255)                          not null comment '子标题',
+    pic         varchar(500)                          not null comment '展示图片',
+    sort        int                                   not null comment '排序',
+    show_status tinyint                               not null comment '显示状态：0->不显示；1->显示',
+    create_by   varchar(50)                           not null comment '创建者',
+    create_time datetime    default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_by   varchar(50) default ''                not null comment '更新者',
+    update_time datetime                              null on update CURRENT_TIMESTAMP comment '更新时间'
 )
     comment '优选专区' charset = utf8;
 

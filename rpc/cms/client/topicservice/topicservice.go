@@ -152,17 +152,21 @@ type (
 	UpdateTopicCommentStatusResp              = cmsclient.UpdateTopicCommentStatusResp
 	UpdateTopicReq                            = cmsclient.UpdateTopicReq
 	UpdateTopicResp                           = cmsclient.UpdateTopicResp
+	UpdateTopicStatusReq                      = cmsclient.UpdateTopicStatusReq
+	UpdateTopicStatusResp                     = cmsclient.UpdateTopicStatusResp
 
 	TopicService interface {
-		// 添加话题表
+		// 添加话题
 		AddTopic(ctx context.Context, in *AddTopicReq, opts ...grpc.CallOption) (*AddTopicResp, error)
-		// 删除话题表
+		// 删除话题
 		DeleteTopic(ctx context.Context, in *DeleteTopicReq, opts ...grpc.CallOption) (*DeleteTopicResp, error)
-		// 更新话题表
+		// 更新话题
 		UpdateTopic(ctx context.Context, in *UpdateTopicReq, opts ...grpc.CallOption) (*UpdateTopicResp, error)
-		// 查询话题表详情
+		// 更新话题状态
+		UpdateTopicStatus(ctx context.Context, in *UpdateTopicStatusReq, opts ...grpc.CallOption) (*UpdateTopicStatusResp, error)
+		// 查询话题详情
 		QueryTopicDetail(ctx context.Context, in *QueryTopicDetailReq, opts ...grpc.CallOption) (*QueryTopicDetailResp, error)
-		// 查询话题表列表
+		// 查询话题列表
 		QueryTopicList(ctx context.Context, in *QueryTopicListReq, opts ...grpc.CallOption) (*QueryTopicListResp, error)
 	}
 
@@ -177,31 +181,37 @@ func NewTopicService(cli zrpc.Client) TopicService {
 	}
 }
 
-// 添加话题表
+// 添加话题
 func (m *defaultTopicService) AddTopic(ctx context.Context, in *AddTopicReq, opts ...grpc.CallOption) (*AddTopicResp, error) {
 	client := cmsclient.NewTopicServiceClient(m.cli.Conn())
 	return client.AddTopic(ctx, in, opts...)
 }
 
-// 删除话题表
+// 删除话题
 func (m *defaultTopicService) DeleteTopic(ctx context.Context, in *DeleteTopicReq, opts ...grpc.CallOption) (*DeleteTopicResp, error) {
 	client := cmsclient.NewTopicServiceClient(m.cli.Conn())
 	return client.DeleteTopic(ctx, in, opts...)
 }
 
-// 更新话题表
+// 更新话题
 func (m *defaultTopicService) UpdateTopic(ctx context.Context, in *UpdateTopicReq, opts ...grpc.CallOption) (*UpdateTopicResp, error) {
 	client := cmsclient.NewTopicServiceClient(m.cli.Conn())
 	return client.UpdateTopic(ctx, in, opts...)
 }
 
-// 查询话题表详情
+// 更新话题状态
+func (m *defaultTopicService) UpdateTopicStatus(ctx context.Context, in *UpdateTopicStatusReq, opts ...grpc.CallOption) (*UpdateTopicStatusResp, error) {
+	client := cmsclient.NewTopicServiceClient(m.cli.Conn())
+	return client.UpdateTopicStatus(ctx, in, opts...)
+}
+
+// 查询话题详情
 func (m *defaultTopicService) QueryTopicDetail(ctx context.Context, in *QueryTopicDetailReq, opts ...grpc.CallOption) (*QueryTopicDetailResp, error) {
 	client := cmsclient.NewTopicServiceClient(m.cli.Conn())
 	return client.QueryTopicDetail(ctx, in, opts...)
 }
 
-// 查询话题表列表
+// 查询话题列表
 func (m *defaultTopicService) QueryTopicList(ctx context.Context, in *QueryTopicListReq, opts ...grpc.CallOption) (*QueryTopicListResp, error) {
 	client := cmsclient.NewTopicServiceClient(m.cli.Conn())
 	return client.QueryTopicList(ctx, in, opts...)

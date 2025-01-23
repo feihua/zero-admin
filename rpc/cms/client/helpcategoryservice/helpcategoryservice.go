@@ -152,19 +152,21 @@ type (
 	UpdateTopicCommentStatusResp              = cmsclient.UpdateTopicCommentStatusResp
 	UpdateTopicReq                            = cmsclient.UpdateTopicReq
 	UpdateTopicResp                           = cmsclient.UpdateTopicResp
+	UpdateTopicStatusReq                      = cmsclient.UpdateTopicStatusReq
+	UpdateTopicStatusResp                     = cmsclient.UpdateTopicStatusResp
 
 	HelpCategoryService interface {
-		// 添加帮助分类表
+		// 添加帮助分类
 		AddHelpCategory(ctx context.Context, in *AddHelpCategoryReq, opts ...grpc.CallOption) (*AddHelpCategoryResp, error)
-		// 删除帮助分类表
+		// 删除帮助分类
 		DeleteHelpCategory(ctx context.Context, in *DeleteHelpCategoryReq, opts ...grpc.CallOption) (*DeleteHelpCategoryResp, error)
-		// 更新帮助分类表
+		// 更新帮助分类
 		UpdateHelpCategory(ctx context.Context, in *UpdateHelpCategoryReq, opts ...grpc.CallOption) (*UpdateHelpCategoryResp, error)
-		// 更新帮助分类表状态
+		// 更新帮助分类状态
 		UpdateHelpCategoryStatus(ctx context.Context, in *UpdateHelpCategoryStatusReq, opts ...grpc.CallOption) (*UpdateHelpCategoryStatusResp, error)
-		// 查询帮助分类表详情
+		// 查询帮助分类详情
 		QueryHelpCategoryDetail(ctx context.Context, in *QueryHelpCategoryDetailReq, opts ...grpc.CallOption) (*QueryHelpCategoryDetailResp, error)
-		// 查询帮助分类表列表
+		// 查询帮助分类列表
 		QueryHelpCategoryList(ctx context.Context, in *QueryHelpCategoryListReq, opts ...grpc.CallOption) (*QueryHelpCategoryListResp, error)
 	}
 
@@ -179,37 +181,37 @@ func NewHelpCategoryService(cli zrpc.Client) HelpCategoryService {
 	}
 }
 
-// 添加帮助分类表
+// 添加帮助分类
 func (m *defaultHelpCategoryService) AddHelpCategory(ctx context.Context, in *AddHelpCategoryReq, opts ...grpc.CallOption) (*AddHelpCategoryResp, error) {
 	client := cmsclient.NewHelpCategoryServiceClient(m.cli.Conn())
 	return client.AddHelpCategory(ctx, in, opts...)
 }
 
-// 删除帮助分类表
+// 删除帮助分类
 func (m *defaultHelpCategoryService) DeleteHelpCategory(ctx context.Context, in *DeleteHelpCategoryReq, opts ...grpc.CallOption) (*DeleteHelpCategoryResp, error) {
 	client := cmsclient.NewHelpCategoryServiceClient(m.cli.Conn())
 	return client.DeleteHelpCategory(ctx, in, opts...)
 }
 
-// 更新帮助分类表
+// 更新帮助分类
 func (m *defaultHelpCategoryService) UpdateHelpCategory(ctx context.Context, in *UpdateHelpCategoryReq, opts ...grpc.CallOption) (*UpdateHelpCategoryResp, error) {
 	client := cmsclient.NewHelpCategoryServiceClient(m.cli.Conn())
 	return client.UpdateHelpCategory(ctx, in, opts...)
 }
 
-// 更新帮助分类表状态
+// 更新帮助分类状态
 func (m *defaultHelpCategoryService) UpdateHelpCategoryStatus(ctx context.Context, in *UpdateHelpCategoryStatusReq, opts ...grpc.CallOption) (*UpdateHelpCategoryStatusResp, error) {
 	client := cmsclient.NewHelpCategoryServiceClient(m.cli.Conn())
 	return client.UpdateHelpCategoryStatus(ctx, in, opts...)
 }
 
-// 查询帮助分类表详情
+// 查询帮助分类详情
 func (m *defaultHelpCategoryService) QueryHelpCategoryDetail(ctx context.Context, in *QueryHelpCategoryDetailReq, opts ...grpc.CallOption) (*QueryHelpCategoryDetailResp, error) {
 	client := cmsclient.NewHelpCategoryServiceClient(m.cli.Conn())
 	return client.QueryHelpCategoryDetail(ctx, in, opts...)
 }
 
-// 查询帮助分类表列表
+// 查询帮助分类列表
 func (m *defaultHelpCategoryService) QueryHelpCategoryList(ctx context.Context, in *QueryHelpCategoryListReq, opts ...grpc.CallOption) (*QueryHelpCategoryListResp, error) {
 	client := cmsclient.NewHelpCategoryServiceClient(m.cli.Conn())
 	return client.QueryHelpCategoryList(ctx, in, opts...)

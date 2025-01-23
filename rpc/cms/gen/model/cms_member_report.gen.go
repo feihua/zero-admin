@@ -12,13 +12,13 @@ const TableNameCmsMemberReport = "cms_member_report"
 
 // CmsMemberReport 用户举报表
 type CmsMemberReport struct {
-	ID               int64     `gorm:"column:id;primaryKey" json:"id"`
-	ReportType       int32     `gorm:"column:report_type;not null;comment:举报类型：0->商品评价；1->话题内容；2->用户评论" json:"report_type"` // 举报类型：0->商品评价；1->话题内容；2->用户评论
-	ReportMemberName string    `gorm:"column:report_member_name;not null;comment:举报人" json:"report_member_name"`            // 举报人
-	ReportObject     string    `gorm:"column:report_object;not null" json:"report_object"`
-	ReportStatus     int32     `gorm:"column:report_status;not null;comment:举报状态：0->未处理；1->已处理" json:"report_status"`     // 举报状态：0->未处理；1->已处理
-	HandleStatus     int32     `gorm:"column:handle_status;not null;comment:处理结果：0->无效；1->有效；2->恶意" json:"handle_status"` // 处理结果：0->无效；1->有效；2->恶意
-	Note             *string   `gorm:"column:note" json:"note"`
+	ID               int64     `gorm:"column:id;primaryKey;comment:编号" json:"id"`                                             // 编号
+	ReportType       int32     `gorm:"column:report_type;not null;comment:举报类型：0->商品评价；1->话题内容；2->用户评论" json:"report_type"`   // 举报类型：0->商品评价；1->话题内容；2->用户评论
+	ReportMemberName string    `gorm:"column:report_member_name;not null;comment:举报人" json:"report_member_name"`              // 举报人
+	ReportObject     string    `gorm:"column:report_object;not null;comment:被举报对象" json:"report_object"`                      // 被举报对象
+	ReportStatus     int32     `gorm:"column:report_status;not null;comment:举报状态：0->未处理；1->已处理" json:"report_status"`         // 举报状态：0->未处理；1->已处理
+	HandleStatus     int32     `gorm:"column:handle_status;not null;comment:处理结果：0->无效；1->有效；2->恶意" json:"handle_status"`     // 处理结果：0->无效；1->有效；2->恶意
+	Note             string    `gorm:"column:note;not null;comment:备注" json:"note"`                                           // 备注
 	CreateTime       time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 }
 

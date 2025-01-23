@@ -1,9 +1,9 @@
 create table cms_preferred_area_product_relation
 (
     id                bigint auto_increment
-        primary key,
-    preferred_area_id bigint not null,
-    product_id        bigint not null
+        primary key comment '主键ID',
+    preferred_area_id bigint not null comment '优选专区ID',
+    product_id        bigint not null comment '产品ID'
 )
     comment '优选专区和产品关系表' charset = utf8;
 

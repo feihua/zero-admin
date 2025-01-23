@@ -22,37 +22,37 @@ func NewHelpCategoryServiceServer(svcCtx *svc.ServiceContext) *HelpCategoryServi
 	}
 }
 
-// 添加帮助分类表
+// 添加帮助分类
 func (s *HelpCategoryServiceServer) AddHelpCategory(ctx context.Context, in *cmsclient.AddHelpCategoryReq) (*cmsclient.AddHelpCategoryResp, error) {
 	l := helpcategoryservicelogic.NewAddHelpCategoryLogic(ctx, s.svcCtx)
 	return l.AddHelpCategory(in)
 }
 
-// 删除帮助分类表
+// 删除帮助分类
 func (s *HelpCategoryServiceServer) DeleteHelpCategory(ctx context.Context, in *cmsclient.DeleteHelpCategoryReq) (*cmsclient.DeleteHelpCategoryResp, error) {
 	l := helpcategoryservicelogic.NewDeleteHelpCategoryLogic(ctx, s.svcCtx)
 	return l.DeleteHelpCategory(in)
 }
 
-// 更新帮助分类表
+// 更新帮助分类
 func (s *HelpCategoryServiceServer) UpdateHelpCategory(ctx context.Context, in *cmsclient.UpdateHelpCategoryReq) (*cmsclient.UpdateHelpCategoryResp, error) {
 	l := helpcategoryservicelogic.NewUpdateHelpCategoryLogic(ctx, s.svcCtx)
 	return l.UpdateHelpCategory(in)
 }
 
-// 更新帮助分类表状态
+// 更新帮助分类状态
 func (s *HelpCategoryServiceServer) UpdateHelpCategoryStatus(ctx context.Context, in *cmsclient.UpdateHelpCategoryStatusReq) (*cmsclient.UpdateHelpCategoryStatusResp, error) {
 	l := helpcategoryservicelogic.NewUpdateHelpCategoryStatusLogic(ctx, s.svcCtx)
 	return l.UpdateHelpCategoryStatus(in)
 }
 
-// 查询帮助分类表详情
+// 查询帮助分类详情
 func (s *HelpCategoryServiceServer) QueryHelpCategoryDetail(ctx context.Context, in *cmsclient.QueryHelpCategoryDetailReq) (*cmsclient.QueryHelpCategoryDetailResp, error) {
 	l := helpcategoryservicelogic.NewQueryHelpCategoryDetailLogic(ctx, s.svcCtx)
 	return l.QueryHelpCategoryDetail(in)
 }
 
-// 查询帮助分类表列表
+// 查询帮助分类列表
 func (s *HelpCategoryServiceServer) QueryHelpCategoryList(ctx context.Context, in *cmsclient.QueryHelpCategoryListReq) (*cmsclient.QueryHelpCategoryListResp, error) {
 	l := helpcategoryservicelogic.NewQueryHelpCategoryListLogic(ctx, s.svcCtx)
 	return l.QueryHelpCategoryList(in)

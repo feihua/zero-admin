@@ -8,9 +8,9 @@ const TableNameCmsPreferredAreaProductRelation = "cms_preferred_area_product_rel
 
 // CmsPreferredAreaProductRelation 优选专区和产品关系表
 type CmsPreferredAreaProductRelation struct {
-	ID              int64 `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	PreferredAreaID int64 `gorm:"column:preferred_area_id;not null" json:"preferred_area_id"`
-	ProductID       int64 `gorm:"column:product_id;not null" json:"product_id"`
+	ID              int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`            // 主键ID
+	PreferredAreaID int64 `gorm:"column:preferred_area_id;not null;comment:优选专区ID" json:"preferred_area_id"` // 优选专区ID
+	ProductID       int64 `gorm:"column:product_id;not null;comment:产品ID" json:"product_id"`                 // 产品ID
 }
 
 // TableName CmsPreferredAreaProductRelation's table name

@@ -4,24 +4,23 @@ package main;
 
 option go_package = "./proto";
 
-// 添加帮助表
+// 添加帮助
 message AddHelpReq {
-  int64 category_id = 1; //
-  string content = 2; //
-  string create_by = 3; //创建者
-  string title = 4; //
-  string icon = 5; //
-  int32 read_count = 6; //
-  int32 show_status = 7; //
-
-
+  int64 id = 1; //主键ID
+  int64 category_id = 2; //分类ID
+  string icon = 3; //图标
+  string title = 4; //标题
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  int32 read_count = 6; //阅读量
+  string content = 7; //内容
+  string create_by = 8; //创建者
 }
 
 message AddHelpResp {
   string pong = 1;
 }
 
-// 删除帮助表
+// 删除帮助
 message DeleteHelpReq {
   repeated int64 ids = 1;
 }
@@ -30,74 +29,75 @@ message DeleteHelpResp {
   string pong = 1;
 }
 
-// 更新帮助表
+// 更新帮助
 message UpdateHelpReq {
-  int64 category_id = 1; //
-  string content = 2; //
-  string title = 3; //
-  string update_by = 4; //更新者
-  string icon = 5; //
-  int64 id = 6; //
-  int32 read_count = 7; //
-  int32 show_status = 8; //
-
-
+  int64 id = 1; //主键ID
+  int64 category_id = 2; //分类ID
+  string icon = 3; //图标
+  string title = 4; //标题
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  int32 read_count = 6; //阅读量
+  string content = 7; //内容
+  string update_by = 10; //更新者
 }
 
 message UpdateHelpResp {
   string pong = 1;
 }
 
-// 更新帮助表状态
+// 更新帮助状态
 message UpdateHelpStatusReq {
-  repeated int64 ids = 1;
-  int32 show_status = 8; //
-
+  repeated int64 ids = 1; //主键ID
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  string update_by = 10; //更新者
 }
 
 message UpdateHelpStatusResp {
   string pong = 1;
 }
 
-// 查询帮助表详情
+// 查询帮助详情
 message QueryHelpDetailReq {
     int64 id = 1;
 }
 
 message QueryHelpDetailResp {
-  int64 category_id = 1; //
-  string content = 2; //
-  string create_by = 3; //创建者
-  string create_time = 4; //创建时间
-  string icon = 5; //
-  int64 id = 6; //
-  int32 read_count = 7; //
-  int32 show_status = 8; //
-  string title = 9; //
+  int64 id = 1; //主键ID
+  int64 category_id = 2; //分类ID
+  string icon = 3; //图标
+  string title = 4; //标题
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  int32 read_count = 6; //阅读量
+  string content = 7; //内容
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
   string update_by = 10; //更新者
   string update_time = 11; //更新时间
 
 }
 
-// 分页查询帮助表列表
+// 分页查询帮助列表
 message QueryHelpListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int32 show_status = 3; //
-  string title = 4; //
-
+  int64 category_id = 1; //分类ID
+  string icon = 2; //图标
+  string title = 3; //标题
+  int32 show_status = 4; //显示状态：0->不显示；1->显示
+  int32 read_count = 5; //阅读量
+  string content = 6; //内容
+  int32 page_num = 7; //第几页
+  int32 page_size = 8; //每页的数量
 }
 
 message HelpListData {
-  int64 category_id = 1; //
-  string content = 2; //
-  string create_by = 3; //创建者
-  string create_time = 4; //创建时间
-  string icon = 5; //
-  int64 id = 6; //
-  int32 read_count = 7; //
-  int32 show_status = 8; //
-  string title = 9; //
+  int64 id = 1; //主键ID
+  int64 category_id = 2; //分类ID
+  string icon = 3; //图标
+  string title = 4; //标题
+  int32 show_status = 5; //显示状态：0->不显示；1->显示
+  int32 read_count = 6; //阅读量
+  string content = 7; //内容
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
   string update_by = 10; //更新者
   string update_time = 11; //更新时间
 
@@ -108,19 +108,19 @@ message QueryHelpListResp {
   repeated  HelpListData list = 2;
 }
 
-// 帮助表
+// 帮助
 service HelpService {
-  // 添加帮助表
+  // 添加帮助
   rpc AddHelp(AddHelpReq) returns (AddHelpResp){}
-  // 删除帮助表
+  // 删除帮助
   rpc DeleteHelp(DeleteHelpReq) returns (DeleteHelpResp){}
-  // 更新帮助表
+  // 更新帮助
   rpc UpdateHelp(UpdateHelpReq) returns (UpdateHelpResp ){}
-  // 更新帮助表状态
+  // 更新帮助状态
   rpc UpdateHelpStatus(UpdateHelpStatusReq) returns (UpdateHelpStatusResp ){}
-  // 查询帮助表详情
+  // 查询帮助详情
    rpc QueryHelpDetail(QueryHelpDetailReq) returns (QueryHelpDetailResp){}
-  // 查询帮助表列表
+  // 查询帮助列表
   rpc QueryHelpList(QueryHelpListReq) returns (QueryHelpListResp){}
 
 

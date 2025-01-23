@@ -152,19 +152,21 @@ type (
 	UpdateTopicCommentStatusResp              = cmsclient.UpdateTopicCommentStatusResp
 	UpdateTopicReq                            = cmsclient.UpdateTopicReq
 	UpdateTopicResp                           = cmsclient.UpdateTopicResp
+	UpdateTopicStatusReq                      = cmsclient.UpdateTopicStatusReq
+	UpdateTopicStatusResp                     = cmsclient.UpdateTopicStatusResp
 
 	HelpService interface {
-		// 添加帮助表
+		// 添加帮助
 		AddHelp(ctx context.Context, in *AddHelpReq, opts ...grpc.CallOption) (*AddHelpResp, error)
-		// 删除帮助表
+		// 删除帮助
 		DeleteHelp(ctx context.Context, in *DeleteHelpReq, opts ...grpc.CallOption) (*DeleteHelpResp, error)
-		// 更新帮助表
+		// 更新帮助
 		UpdateHelp(ctx context.Context, in *UpdateHelpReq, opts ...grpc.CallOption) (*UpdateHelpResp, error)
-		// 更新帮助表状态
+		// 更新帮助状态
 		UpdateHelpStatus(ctx context.Context, in *UpdateHelpStatusReq, opts ...grpc.CallOption) (*UpdateHelpStatusResp, error)
-		// 查询帮助表详情
+		// 查询帮助详情
 		QueryHelpDetail(ctx context.Context, in *QueryHelpDetailReq, opts ...grpc.CallOption) (*QueryHelpDetailResp, error)
-		// 查询帮助表列表
+		// 查询帮助列表
 		QueryHelpList(ctx context.Context, in *QueryHelpListReq, opts ...grpc.CallOption) (*QueryHelpListResp, error)
 	}
 
@@ -179,37 +181,37 @@ func NewHelpService(cli zrpc.Client) HelpService {
 	}
 }
 
-// 添加帮助表
+// 添加帮助
 func (m *defaultHelpService) AddHelp(ctx context.Context, in *AddHelpReq, opts ...grpc.CallOption) (*AddHelpResp, error) {
 	client := cmsclient.NewHelpServiceClient(m.cli.Conn())
 	return client.AddHelp(ctx, in, opts...)
 }
 
-// 删除帮助表
+// 删除帮助
 func (m *defaultHelpService) DeleteHelp(ctx context.Context, in *DeleteHelpReq, opts ...grpc.CallOption) (*DeleteHelpResp, error) {
 	client := cmsclient.NewHelpServiceClient(m.cli.Conn())
 	return client.DeleteHelp(ctx, in, opts...)
 }
 
-// 更新帮助表
+// 更新帮助
 func (m *defaultHelpService) UpdateHelp(ctx context.Context, in *UpdateHelpReq, opts ...grpc.CallOption) (*UpdateHelpResp, error) {
 	client := cmsclient.NewHelpServiceClient(m.cli.Conn())
 	return client.UpdateHelp(ctx, in, opts...)
 }
 
-// 更新帮助表状态
+// 更新帮助状态
 func (m *defaultHelpService) UpdateHelpStatus(ctx context.Context, in *UpdateHelpStatusReq, opts ...grpc.CallOption) (*UpdateHelpStatusResp, error) {
 	client := cmsclient.NewHelpServiceClient(m.cli.Conn())
 	return client.UpdateHelpStatus(ctx, in, opts...)
 }
 
-// 查询帮助表详情
+// 查询帮助详情
 func (m *defaultHelpService) QueryHelpDetail(ctx context.Context, in *QueryHelpDetailReq, opts ...grpc.CallOption) (*QueryHelpDetailResp, error) {
 	client := cmsclient.NewHelpServiceClient(m.cli.Conn())
 	return client.QueryHelpDetail(ctx, in, opts...)
 }
 
-// 查询帮助表列表
+// 查询帮助列表
 func (m *defaultHelpService) QueryHelpList(ctx context.Context, in *QueryHelpListReq, opts ...grpc.CallOption) (*QueryHelpListResp, error) {
 	client := cmsclient.NewHelpServiceClient(m.cli.Conn())
 	return client.QueryHelpList(ctx, in, opts...)

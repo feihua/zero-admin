@@ -6,14 +6,13 @@ option go_package = "./proto";
 
 // 添加优选专区
 message AddPreferredAreaReq {
-  string CreateBy = 1; //
-  int32 sort = 2; //
-  string sub_title = 3; //
-  string name = 4; //
-  string pic = 5; //展示图片
-  int32 show_status = 6; //
-
-
+  int64 id = 1; //主键ID
+  string name = 2; //专区名称
+  string sub_title = 3; //子标题
+  string pic = 4; //展示图片
+  int32 sort = 5; //排序
+  int32 show_status = 6; //显示状态：0->不显示；1->显示
+  string create_by = 7; //创建者
 }
 
 message AddPreferredAreaResp {
@@ -31,15 +30,13 @@ message DeletePreferredAreaResp {
 
 // 更新优选专区
 message UpdatePreferredAreaReq {
-  string sub_title = 1; //
-  string update_by = 2; //更新者
-  int64 id = 3; //
-  string name = 4; //
-  string pic = 5; //展示图片
-  int32 show_status = 6; //
-  int32 sort = 7; //
-
-
+  int64 id = 1; //主键ID
+  string name = 2; //专区名称
+  string sub_title = 3; //子标题
+  string pic = 4; //展示图片
+  int32 sort = 5; //排序
+  int32 show_status = 6; //显示状态：0->不显示；1->显示
+  string update_by = 9; //更新者
 }
 
 message UpdatePreferredAreaResp {
@@ -48,10 +45,9 @@ message UpdatePreferredAreaResp {
 
 // 更新优选专区状态
 message UpdatePreferredAreaStatusReq {
-  repeated int64 ids = 1;
-  int32 show_status = 6; //
-
-
+  repeated int64 ids = 1; //主键ID
+  int32 show_status = 6; //显示状态：0->不显示；1->显示
+  string update_by = 9; //更新者
 }
 
 message UpdatePreferredAreaStatusResp {
@@ -64,14 +60,14 @@ message QueryPreferredAreaDetailReq {
 }
 
 message QueryPreferredAreaDetailResp {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int64 id = 3; //
-  string name = 4; //
-  string pic = 5; //展示图片
-  int32 show_status = 6; //
-  int32 sort = 7; //
-  string sub_title = 8; //
+  int64 id = 1; //主键ID
+  string name = 2; //专区名称
+  string sub_title = 3; //子标题
+  string pic = 4; //展示图片
+  int32 sort = 5; //排序
+  int32 show_status = 6; //显示状态：0->不显示；1->显示
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
   string update_by = 9; //更新者
   string update_time = 10; //更新时间
 
@@ -79,23 +75,23 @@ message QueryPreferredAreaDetailResp {
 
 // 分页查询优选专区列表
 message QueryPreferredAreaListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string name = 3; //
-  int32 show_status = 4; //
-  string sub_title = 5; //
-
+  string name = 1; //专区名称
+  string sub_title = 2; //子标题
+  string pic = 3; //展示图片
+  int32 show_status = 4; //显示状态：0->不显示；1->显示
+  int32 page_num = 5; //第几页
+  int32 page_size = 6; //每页的数量
 }
 
 message PreferredAreaListData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int64 id = 3; //
-  string name = 4; //
-  string pic = 5; //展示图片
-  int32 show_status = 6; //
-  int32 sort = 7; //
-  string sub_title = 8; //
+  int64 id = 1; //主键ID
+  string name = 2; //专区名称
+  string sub_title = 3; //子标题
+  string pic = 4; //展示图片
+  int32 sort = 5; //排序
+  int32 show_status = 6; //显示状态：0->不显示；1->显示
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
   string update_by = 9; //更新者
   string update_time = 10; //更新时间
 

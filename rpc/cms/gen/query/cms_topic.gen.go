@@ -53,14 +53,14 @@ type cmsTopic struct {
 	cmsTopicDo cmsTopicDo
 
 	ALL            field.Asterisk
-	ID             field.Int64
-	CategoryID     field.Int64
-	Name           field.String
-	StartTime      field.Time
-	EndTime        field.Time
-	AttendCount    field.Int32 // 参与人数
-	AttentionCount field.Int32 // 关注人数
-	ReadCount      field.Int32
+	ID             field.Int64  // 主键ID
+	CategoryID     field.Int64  // 关联分类id
+	Name           field.String // 话题名称
+	StartTime      field.Time   // 话题开始时间
+	EndTime        field.Time   // 话题结束时间
+	AttendCount    field.Int32  // 参与人数
+	AttentionCount field.Int32  // 关注人数
+	ReadCount      field.Int32  // 阅读数
 	AwardName      field.String // 奖品名称
 	AttendType     field.String // 参与方式
 	Content        field.String // 话题内容

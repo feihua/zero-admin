@@ -152,19 +152,21 @@ type (
 	UpdateTopicCommentStatusResp              = cmsclient.UpdateTopicCommentStatusResp
 	UpdateTopicReq                            = cmsclient.UpdateTopicReq
 	UpdateTopicResp                           = cmsclient.UpdateTopicResp
+	UpdateTopicStatusReq                      = cmsclient.UpdateTopicStatusReq
+	UpdateTopicStatusResp                     = cmsclient.UpdateTopicStatusResp
 
 	SubjectService interface {
-		// 添加专题表
+		// 添加专题
 		AddSubject(ctx context.Context, in *AddSubjectReq, opts ...grpc.CallOption) (*AddSubjectResp, error)
-		// 删除专题表
+		// 删除专题
 		DeleteSubject(ctx context.Context, in *DeleteSubjectReq, opts ...grpc.CallOption) (*DeleteSubjectResp, error)
-		// 更新专题表
+		// 更新专题
 		UpdateSubject(ctx context.Context, in *UpdateSubjectReq, opts ...grpc.CallOption) (*UpdateSubjectResp, error)
-		// 更新专题表状态
+		// 更新专题状态
 		UpdateSubjectStatus(ctx context.Context, in *UpdateSubjectStatusReq, opts ...grpc.CallOption) (*UpdateSubjectStatusResp, error)
-		// 查询专题表详情
+		// 查询专题详情
 		QuerySubjectDetail(ctx context.Context, in *QuerySubjectDetailReq, opts ...grpc.CallOption) (*QuerySubjectDetailResp, error)
-		// 查询专题表列表
+		// 查询专题列表
 		QuerySubjectList(ctx context.Context, in *QuerySubjectListReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error)
 		SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error)
 		// 批量更新状态
@@ -182,37 +184,37 @@ func NewSubjectService(cli zrpc.Client) SubjectService {
 	}
 }
 
-// 添加专题表
+// 添加专题
 func (m *defaultSubjectService) AddSubject(ctx context.Context, in *AddSubjectReq, opts ...grpc.CallOption) (*AddSubjectResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
 	return client.AddSubject(ctx, in, opts...)
 }
 
-// 删除专题表
+// 删除专题
 func (m *defaultSubjectService) DeleteSubject(ctx context.Context, in *DeleteSubjectReq, opts ...grpc.CallOption) (*DeleteSubjectResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
 	return client.DeleteSubject(ctx, in, opts...)
 }
 
-// 更新专题表
+// 更新专题
 func (m *defaultSubjectService) UpdateSubject(ctx context.Context, in *UpdateSubjectReq, opts ...grpc.CallOption) (*UpdateSubjectResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
 	return client.UpdateSubject(ctx, in, opts...)
 }
 
-// 更新专题表状态
+// 更新专题状态
 func (m *defaultSubjectService) UpdateSubjectStatus(ctx context.Context, in *UpdateSubjectStatusReq, opts ...grpc.CallOption) (*UpdateSubjectStatusResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
 	return client.UpdateSubjectStatus(ctx, in, opts...)
 }
 
-// 查询专题表详情
+// 查询专题详情
 func (m *defaultSubjectService) QuerySubjectDetail(ctx context.Context, in *QuerySubjectDetailReq, opts ...grpc.CallOption) (*QuerySubjectDetailResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
 	return client.QuerySubjectDetail(ctx, in, opts...)
 }
 
-// 查询专题表列表
+// 查询专题列表
 func (m *defaultSubjectService) QuerySubjectList(ctx context.Context, in *QuerySubjectListReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error) {
 	client := cmsclient.NewSubjectServiceClient(m.cli.Conn())
 	return client.QuerySubjectList(ctx, in, opts...)

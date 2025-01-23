@@ -41,9 +41,9 @@ type cmsPreferredAreaProductRelation struct {
 	cmsPreferredAreaProductRelationDo cmsPreferredAreaProductRelationDo
 
 	ALL             field.Asterisk
-	ID              field.Int64
-	PreferredAreaID field.Int64
-	ProductID       field.Int64
+	ID              field.Int64 // 主键ID
+	PreferredAreaID field.Int64 // 优选专区ID
+	ProductID       field.Int64 // 产品ID
 
 	fieldMap map[string]field.Expr
 }

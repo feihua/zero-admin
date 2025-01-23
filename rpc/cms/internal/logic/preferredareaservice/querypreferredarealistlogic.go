@@ -2,6 +2,7 @@ package preferredareaservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -54,24 +55,19 @@ func (l *QueryPreferredAreaListLogic) QueryPreferredAreaList(in *cmsclient.Query
 	var list []*cmsclient.PreferredAreaListData
 
 	for _, item := range result {
-		preferredArea := &cmsclient.PreferredAreaListData{}
-		preferredArea.Id = item.ID
-		preferredArea.Name = item.Name
-		preferredArea.SubTitle = item.SubTitle
-		preferredArea.Pic = item.Pic
-		preferredArea.Sort = item.Sort
-		preferredArea.ShowStatus = item.ShowStatus
-		preferredArea.CreateBy = item.CreateBy
-		preferredArea.CreateTime = item.CreateTime.Format("2006-01-02 15:04:05")
+		list = append(list, &cmsclient.PreferredAreaListData{
+			Id:         item.ID,                                 // 主键ID
+			Name:       item.Name,                               // 专区名称
+			SubTitle:   item.SubTitle,                           // 子标题
+			Pic:        item.Pic,                                // 展示图片
+			Sort:       item.Sort,                               // 排序
+			ShowStatus: item.ShowStatus,                         // 显示状态：0->不显示；1->显示
+			CreateBy:   item.CreateBy,                           // 创建者
+			CreateTime: time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:   item.UpdateBy,                           // 更新者
+			UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 
-		if item.UpdateBy != nil {
-			preferredArea.UpdateBy = *item.UpdateBy
-		}
-		if item.UpdateTime != nil {
-			preferredArea.UpdateTime = item.UpdateTime.Format("2006-01-02 15:04:05")
-		}
-
-		list = append(list, preferredArea)
+		})
 	}
 
 	logc.Infof(l.ctx, "查询商品优选列表信息,参数：%+v,响应：%+v", in, list)

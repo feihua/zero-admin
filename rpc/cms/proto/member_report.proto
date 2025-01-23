@@ -4,22 +4,22 @@ package main;
 
 option go_package = "./proto";
 
-// 添加用户举报表
+// 添加用户举报
 message AddMemberReportReq {
-  int32 handle_status = 1; //处理结果：0->无效；1->有效；2->恶意
-  string note = 2; //
+  int64 id = 1; //编号
+  int32 report_type = 2; //举报类型：0->商品评价；1->话题内容；2->用户评论
   string report_member_name = 3; //举报人
-  string report_object = 4; //
+  string report_object = 4; //被举报对象
   int32 report_status = 5; //举报状态：0->未处理；1->已处理
-  int32 report_type = 6; //举报类型：0->商品评价；1->话题内容；2->用户评论
-
+  int32 handle_status = 6; //处理结果：0->无效；1->有效；2->恶意
+  string note = 7; //备注
 }
 
 message AddMemberReportResp {
   string pong = 1;
 }
 
-// 删除用户举报表
+// 删除用户举报
 message DeleteMemberReportReq {
   repeated int64 ids = 1;
 }
@@ -28,73 +28,70 @@ message DeleteMemberReportResp {
   string pong = 1;
 }
 
-// 更新用户举报表
+// 更新用户举报
 message UpdateMemberReportReq {
-  int32 report_type = 1; //举报类型：0->商品评价；1->话题内容；2->用户评论
-  int32 handle_status = 2; //处理结果：0->无效；1->有效；2->恶意
-  int64 id = 3; //
-  string note = 4; //
-  string report_member_name = 5; //举报人
-  string report_object = 6; //
-  int32 report_status = 7; //举报状态：0->未处理；1->已处理
-
-
+  int64 id = 1; //编号
+  int32 report_type = 2; //举报类型：0->商品评价；1->话题内容；2->用户评论
+  string report_member_name = 3; //举报人
+  string report_object = 4; //被举报对象
+  int32 report_status = 5; //举报状态：0->未处理；1->已处理
+  int32 handle_status = 6; //处理结果：0->无效；1->有效；2->恶意
+  string note = 7; //备注
 }
 
 message UpdateMemberReportResp {
   string pong = 1;
 }
 
-// 更新用户举报表状态
+// 更新用户举报状态
 message UpdateMemberReportStatusReq {
-  repeated int64 ids = 1;
-  int32 handle_status = 2; //处理结果：0->无效；1->有效；2->恶意
-  int32 report_status = 3; //举报状态：0->未处理；1->已处理
-  int32 flag =4;
-
+  repeated int64 ids = 1; //编号
+  int32 report_status = 5; //举报状态：0->未处理；1->已处理
+  int32 handle_status = 6; //处理结果：0->无效；1->有效；2->恶意
 }
 
 message UpdateMemberReportStatusResp {
   string pong = 1;
 }
 
-// 查询用户举报表详情
+// 查询用户举报详情
 message QueryMemberReportDetailReq {
     int64 id = 1;
 }
 
 message QueryMemberReportDetailResp {
-  string create_time = 1; //创建时间
-  int32 handle_status = 2; //处理结果：0->无效；1->有效；2->恶意
-  int64 id = 3; //
-  string note = 4; //
-  string report_member_name = 5; //举报人
-  string report_object = 6; //
-  int32 report_status = 7; //举报状态：0->未处理；1->已处理
-  int32 report_type = 8; //举报类型：0->商品评价；1->话题内容；2->用户评论
+  int64 id = 1; //编号
+  int32 report_type = 2; //举报类型：0->商品评价；1->话题内容；2->用户评论
+  string report_member_name = 3; //举报人
+  string report_object = 4; //被举报对象
+  int32 report_status = 5; //举报状态：0->未处理；1->已处理
+  int32 handle_status = 6; //处理结果：0->无效；1->有效；2->恶意
+  string note = 7; //备注
+  string create_time = 8; //创建时间
 
 }
 
-// 分页查询用户举报表列表
+// 分页查询用户举报列表
 message QueryMemberReportListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int32 handle_status = 3; //处理结果：0->无效；1->有效；2->恶意
-  string report_member_name = 4; //举报人
-  int32 report_status = 5; //举报状态：0->未处理；1->已处理
-  int32 report_type = 6; //举报类型：0->商品评价；1->话题内容；2->用户评论
-
+  int32 report_type = 1; //举报类型：0->商品评价；1->话题内容；2->用户评论
+  string report_member_name = 2; //举报人
+  string report_object = 3; //被举报对象
+  int32 report_status = 4; //举报状态：0->未处理；1->已处理
+  int32 handle_status = 5; //处理结果：0->无效；1->有效；2->恶意
+  string note = 6; //备注
+  int32 page_num = 7; //第几页
+  int32 page_size = 8; //每页的数量
 }
 
 message MemberReportListData {
-  string create_time = 1; //创建时间
-  int32 handle_status = 2; //处理结果：0->无效；1->有效；2->恶意
-  int64 id = 3; //
-  string note = 4; //
-  string report_member_name = 5; //举报人
-  string report_object = 6; //
-  int32 report_status = 7; //举报状态：0->未处理；1->已处理
-  int32 report_type = 8; //举报类型：0->商品评价；1->话题内容；2->用户评论
+  int64 id = 1; //编号
+  int32 report_type = 2; //举报类型：0->商品评价；1->话题内容；2->用户评论
+  string report_member_name = 3; //举报人
+  string report_object = 4; //被举报对象
+  int32 report_status = 5; //举报状态：0->未处理；1->已处理
+  int32 handle_status = 6; //处理结果：0->无效；1->有效；2->恶意
+  string note = 7; //备注
+  string create_time = 8; //创建时间
 
 }
 
@@ -103,19 +100,19 @@ message QueryMemberReportListResp {
   repeated  MemberReportListData list = 2;
 }
 
-// 用户举报表
+// 用户举报
 service MemberReportService {
-  // 添加用户举报表
+  // 添加用户举报
   rpc AddMemberReport(AddMemberReportReq) returns (AddMemberReportResp){}
-  // 删除用户举报表
+  // 删除用户举报
   rpc DeleteMemberReport(DeleteMemberReportReq) returns (DeleteMemberReportResp){}
-  // 更新用户举报表
+  // 更新用户举报
   rpc UpdateMemberReport(UpdateMemberReportReq) returns (UpdateMemberReportResp ){}
-  // 更新用户举报表状态
+  // 更新用户举报状态
   rpc UpdateMemberReportStatus(UpdateMemberReportStatusReq) returns (UpdateMemberReportStatusResp ){}
-  // 查询用户举报表详情
+  // 查询用户举报详情
    rpc QueryMemberReportDetail(QueryMemberReportDetailReq) returns (QueryMemberReportDetailResp){}
-  // 查询用户举报表列表
+  // 查询用户举报列表
   rpc QueryMemberReportList(QueryMemberReportListReq) returns (QueryMemberReportListResp){}
 
 

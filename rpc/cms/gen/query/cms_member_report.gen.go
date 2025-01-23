@@ -46,14 +46,14 @@ type cmsMemberReport struct {
 	cmsMemberReportDo cmsMemberReportDo
 
 	ALL              field.Asterisk
-	ID               field.Int64
+	ID               field.Int64  // 编号
 	ReportType       field.Int32  // 举报类型：0->商品评价；1->话题内容；2->用户评论
 	ReportMemberName field.String // 举报人
-	ReportObject     field.String
-	ReportStatus     field.Int32 // 举报状态：0->未处理；1->已处理
-	HandleStatus     field.Int32 // 处理结果：0->无效；1->有效；2->恶意
-	Note             field.String
-	CreateTime       field.Time // 创建时间
+	ReportObject     field.String // 被举报对象
+	ReportStatus     field.Int32  // 举报状态：0->未处理；1->已处理
+	HandleStatus     field.Int32  // 处理结果：0->无效；1->有效；2->恶意
+	Note             field.String // 备注
+	CreateTime       field.Time   // 创建时间
 
 	fieldMap map[string]field.Expr
 }

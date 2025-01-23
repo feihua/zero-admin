@@ -32,14 +32,14 @@ func NewAddPreferredAreaProductRelationLogic(ctx context.Context, svcCtx *svc.Se
 
 // AddPreferredAreaProductRelation 添加优选专区和产品关系表
 func (l *AddPreferredAreaProductRelationLogic) AddPreferredAreaProductRelation(in *cmsclient.AddPreferredAreaProductRelationReq) (*cmsclient.AddPreferredAreaProductRelationResp, error) {
-	//1.先删除优选商品的关联
+	// 1.先删除优选商品的关联
 	q := query.CmsPreferredAreaProductRelation
 	_, err := q.WithContext(l.ctx).Where(q.ProductID.Eq(in.ProductId)).Delete()
 	if err != nil {
 		return nil, err
 	}
 
-	//2.重新添加优选商品的关联
+	// 2.重新添加优选商品的关联
 	productRelations := make([]*model.CmsPreferredAreaProductRelation, 0)
 	for _, id := range in.PreferredAreaId {
 		productRelations = append(productRelations, &model.CmsPreferredAreaProductRelation{

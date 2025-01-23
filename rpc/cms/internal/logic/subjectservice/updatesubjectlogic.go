@@ -2,13 +2,21 @@ package subjectservicelogic
 
 import (
 	"context"
-
+	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
+	"github.com/feihua/zero-admin/rpc/cms/gen/model"
+	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
-
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UpdateSubjectLogic 更新专题
+/*
+Author: LiuFeiHua
+Date: 2025/01/23 15:24:00
+*/
 type UpdateSubjectLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +31,45 @@ func NewUpdateSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 	}
 }
 
-// 更新专题表
+// UpdateSubject 更新专题
 func (l *UpdateSubjectLogic) UpdateSubject(in *cmsclient.UpdateSubjectReq) (*cmsclient.UpdateSubjectResp, error) {
-	// todo: add your logic here and delete this line
+	q := query.CmsSubject.WithContext(l.ctx)
 
+	// 1.根据专题id查询专题是否已存在
+	_, err := q.Where(query.CmsSubject.ID.Eq(in.Id)).First()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据专题id：%d,查询专题失败,异常:%s", in.Id, err.Error())
+		return nil, errors.New(fmt.Sprintf("查询专题失败"))
+	}
+
+	item := &model.CmsSubject{
+		ID:              in.Id,              // 专题id
+		CategoryID:      in.CategoryId,      // 专题分类id
+		Title:           in.Title,           // 专题标题
+		Pic:             in.Pic,             // 专题主图
+		ProductCount:    in.ProductCount,    // 关联产品数量
+		RecommendStatus: in.RecommendStatus, // 推荐状态：0->不推荐；1->推荐
+		CollectCount:    in.CollectCount,    // 收藏数
+		ReadCount:       in.ReadCount,       // 阅读数
+		CommentCount:    in.CommentCount,    // 评论数
+		AlbumPics:       in.AlbumPics,       // 画册图片用逗号分割
+		Description:     in.Description,     // 专题内容
+		ShowStatus:      in.ShowStatus,      // 显示状态：0->不显示；1->显示
+		Content:         in.Content,         // 专题内容
+		ForwardCount:    in.ForwardCount,    // 转发数
+		CategoryName:    in.CategoryName,    // 专题分类名称
+		UpdateBy:        in.UpdateBy,        // 更新者
+	}
+
+	// 2.专题存在时,则直接更新专题
+	_, err = q.Updates(item)
+
+	if err != nil {
+		logc.Errorf(l.ctx, "更新专题失败,参数:%+v,异常:%s", item, err.Error())
+		return nil, errors.New("更新专题失败")
+	}
+
+	logc.Infof(l.ctx, "更新专题成功,参数：%+v", in)
 	return &cmsclient.UpdateSubjectResp{}, nil
 }

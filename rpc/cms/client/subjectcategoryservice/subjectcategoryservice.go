@@ -152,19 +152,21 @@ type (
 	UpdateTopicCommentStatusResp              = cmsclient.UpdateTopicCommentStatusResp
 	UpdateTopicReq                            = cmsclient.UpdateTopicReq
 	UpdateTopicResp                           = cmsclient.UpdateTopicResp
+	UpdateTopicStatusReq                      = cmsclient.UpdateTopicStatusReq
+	UpdateTopicStatusResp                     = cmsclient.UpdateTopicStatusResp
 
 	SubjectCategoryService interface {
-		// 添加专题分类表
+		// 添加专题分类
 		AddSubjectCategory(ctx context.Context, in *AddSubjectCategoryReq, opts ...grpc.CallOption) (*AddSubjectCategoryResp, error)
-		// 删除专题分类表
+		// 删除专题分类
 		DeleteSubjectCategory(ctx context.Context, in *DeleteSubjectCategoryReq, opts ...grpc.CallOption) (*DeleteSubjectCategoryResp, error)
-		// 更新专题分类表
+		// 更新专题分类
 		UpdateSubjectCategory(ctx context.Context, in *UpdateSubjectCategoryReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryResp, error)
-		// 更新专题分类表状态
+		// 更新专题分类状态
 		UpdateSubjectCategoryStatus(ctx context.Context, in *UpdateSubjectCategoryStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryStatusResp, error)
-		// 查询专题分类表详情
+		// 查询专题分类详情
 		QuerySubjectCategoryDetail(ctx context.Context, in *QuerySubjectCategoryDetailReq, opts ...grpc.CallOption) (*QuerySubjectCategoryDetailResp, error)
-		// 查询专题分类表列表
+		// 查询专题分类列表
 		QuerySubjectCategoryList(ctx context.Context, in *QuerySubjectCategoryListReq, opts ...grpc.CallOption) (*QuerySubjectCategoryListResp, error)
 	}
 
@@ -179,37 +181,37 @@ func NewSubjectCategoryService(cli zrpc.Client) SubjectCategoryService {
 	}
 }
 
-// 添加专题分类表
+// 添加专题分类
 func (m *defaultSubjectCategoryService) AddSubjectCategory(ctx context.Context, in *AddSubjectCategoryReq, opts ...grpc.CallOption) (*AddSubjectCategoryResp, error) {
 	client := cmsclient.NewSubjectCategoryServiceClient(m.cli.Conn())
 	return client.AddSubjectCategory(ctx, in, opts...)
 }
 
-// 删除专题分类表
+// 删除专题分类
 func (m *defaultSubjectCategoryService) DeleteSubjectCategory(ctx context.Context, in *DeleteSubjectCategoryReq, opts ...grpc.CallOption) (*DeleteSubjectCategoryResp, error) {
 	client := cmsclient.NewSubjectCategoryServiceClient(m.cli.Conn())
 	return client.DeleteSubjectCategory(ctx, in, opts...)
 }
 
-// 更新专题分类表
+// 更新专题分类
 func (m *defaultSubjectCategoryService) UpdateSubjectCategory(ctx context.Context, in *UpdateSubjectCategoryReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryResp, error) {
 	client := cmsclient.NewSubjectCategoryServiceClient(m.cli.Conn())
 	return client.UpdateSubjectCategory(ctx, in, opts...)
 }
 
-// 更新专题分类表状态
+// 更新专题分类状态
 func (m *defaultSubjectCategoryService) UpdateSubjectCategoryStatus(ctx context.Context, in *UpdateSubjectCategoryStatusReq, opts ...grpc.CallOption) (*UpdateSubjectCategoryStatusResp, error) {
 	client := cmsclient.NewSubjectCategoryServiceClient(m.cli.Conn())
 	return client.UpdateSubjectCategoryStatus(ctx, in, opts...)
 }
 
-// 查询专题分类表详情
+// 查询专题分类详情
 func (m *defaultSubjectCategoryService) QuerySubjectCategoryDetail(ctx context.Context, in *QuerySubjectCategoryDetailReq, opts ...grpc.CallOption) (*QuerySubjectCategoryDetailResp, error) {
 	client := cmsclient.NewSubjectCategoryServiceClient(m.cli.Conn())
 	return client.QuerySubjectCategoryDetail(ctx, in, opts...)
 }
 
-// 查询专题分类表列表
+// 查询专题分类列表
 func (m *defaultSubjectCategoryService) QuerySubjectCategoryList(ctx context.Context, in *QuerySubjectCategoryListReq, opts ...grpc.CallOption) (*QuerySubjectCategoryListResp, error) {
 	client := cmsclient.NewSubjectCategoryServiceClient(m.cli.Conn())
 	return client.QuerySubjectCategoryList(ctx, in, opts...)

@@ -22,37 +22,37 @@ func NewMemberReportServiceServer(svcCtx *svc.ServiceContext) *MemberReportServi
 	}
 }
 
-// 添加用户举报表
+// 添加用户举报
 func (s *MemberReportServiceServer) AddMemberReport(ctx context.Context, in *cmsclient.AddMemberReportReq) (*cmsclient.AddMemberReportResp, error) {
 	l := memberreportservicelogic.NewAddMemberReportLogic(ctx, s.svcCtx)
 	return l.AddMemberReport(in)
 }
 
-// 删除用户举报表
+// 删除用户举报
 func (s *MemberReportServiceServer) DeleteMemberReport(ctx context.Context, in *cmsclient.DeleteMemberReportReq) (*cmsclient.DeleteMemberReportResp, error) {
 	l := memberreportservicelogic.NewDeleteMemberReportLogic(ctx, s.svcCtx)
 	return l.DeleteMemberReport(in)
 }
 
-// 更新用户举报表
+// 更新用户举报
 func (s *MemberReportServiceServer) UpdateMemberReport(ctx context.Context, in *cmsclient.UpdateMemberReportReq) (*cmsclient.UpdateMemberReportResp, error) {
 	l := memberreportservicelogic.NewUpdateMemberReportLogic(ctx, s.svcCtx)
 	return l.UpdateMemberReport(in)
 }
 
-// 更新用户举报表状态
+// 更新用户举报状态
 func (s *MemberReportServiceServer) UpdateMemberReportStatus(ctx context.Context, in *cmsclient.UpdateMemberReportStatusReq) (*cmsclient.UpdateMemberReportStatusResp, error) {
 	l := memberreportservicelogic.NewUpdateMemberReportStatusLogic(ctx, s.svcCtx)
 	return l.UpdateMemberReportStatus(in)
 }
 
-// 查询用户举报表详情
+// 查询用户举报详情
 func (s *MemberReportServiceServer) QueryMemberReportDetail(ctx context.Context, in *cmsclient.QueryMemberReportDetailReq) (*cmsclient.QueryMemberReportDetailResp, error) {
 	l := memberreportservicelogic.NewQueryMemberReportDetailLogic(ctx, s.svcCtx)
 	return l.QueryMemberReportDetail(in)
 }
 
-// 查询用户举报表列表
+// 查询用户举报列表
 func (s *MemberReportServiceServer) QueryMemberReportList(ctx context.Context, in *cmsclient.QueryMemberReportListReq) (*cmsclient.QueryMemberReportListResp, error) {
 	l := memberreportservicelogic.NewQueryMemberReportListLogic(ctx, s.svcCtx)
 	return l.QueryMemberReportList(in)
