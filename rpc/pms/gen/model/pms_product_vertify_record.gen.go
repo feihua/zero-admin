@@ -13,11 +13,11 @@ const TableNamePmsProductVertifyRecord = "pms_product_vertify_record"
 // PmsProductVertifyRecord 商品审核记录
 type PmsProductVertifyRecord struct {
 	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ProductID  int64     `gorm:"column:product_id;not null" json:"product_id"`
-	CreateTime time.Time `gorm:"column:create_time;not null" json:"create_time"`
-	VertifyMan string    `gorm:"column:vertify_man;not null;comment:审核人" json:"vertify_man"` // 审核人
-	Status     int32     `gorm:"column:status;not null" json:"status"`
-	Detail     string    `gorm:"column:detail;not null;comment:反馈详情" json:"detail"` // 反馈详情
+	ProductID  int64     `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`                             // 商品id
+	CreateTime time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	ReviewMan  string    `gorm:"column:review_man;not null;comment:审核人" json:"review_man"`                              // 审核人
+	Status     int32     `gorm:"column:status;not null;comment:审核状态：0->未通过；1->通过" json:"status"`                        // 审核状态：0->未通过；1->通过
+	Detail     string    `gorm:"column:detail;not null;comment:反馈详情" json:"detail"`                                     // 反馈详情
 }
 
 // TableName PmsProductVertifyRecord's table name

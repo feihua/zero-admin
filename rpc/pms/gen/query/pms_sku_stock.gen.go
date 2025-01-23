@@ -50,9 +50,9 @@ type pmsSkuStock struct {
 
 	ALL            field.Asterisk
 	ID             field.Int64
-	ProductID      field.Int64
+	ProductID      field.Int64  // 商品id
 	SkuCode        field.String // sku编码
-	Price          field.Int64
+	Price          field.Int64  // 价格
 	Stock          field.Int32  // 库存
 	LowStock       field.Int32  // 预警库存
 	Pic            field.String // 展示图片

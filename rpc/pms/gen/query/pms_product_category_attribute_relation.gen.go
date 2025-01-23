@@ -42,8 +42,8 @@ type pmsProductCategoryAttributeRelation struct {
 
 	ALL                field.Asterisk
 	ID                 field.Int64
-	ProductCategoryID  field.Int64
-	ProductAttributeID field.Int64
+	ProductCategoryID  field.Int64 // 商品分类id
+	ProductAttributeID field.Int64 // 商品属性id
 
 	fieldMap map[string]field.Expr
 }

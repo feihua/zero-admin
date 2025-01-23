@@ -14,20 +14,20 @@ const TableNameUmsMemberStatisticsInfo = "ums_member_statistics_info"
 type UmsMemberStatisticsInfo struct {
 	ID                  int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	MemberID            int64     `gorm:"column:member_id;not null" json:"member_id"`
-	ConsumeAmount       int64     `gorm:"column:consume_amount;not null;comment:累计消费金额" json:"consume_amount"`       // 累计消费金额
-	OrderCount          int32     `gorm:"column:order_count;not null;comment:订单数量" json:"order_count"`               // 订单数量
-	CouponCount         int32     `gorm:"column:coupon_count;not null;comment:优惠券数量" json:"coupon_count"`            // 优惠券数量
-	CommentCount        int32     `gorm:"column:comment_count;not null;comment:评价数" json:"comment_count"`            // 评价数
-	ReturnOrderCount    int32     `gorm:"column:return_order_count;not null;comment:退货数量" json:"return_order_count"` // 退货数量
-	LoginCount          int32     `gorm:"column:login_count;not null;comment:登录次数" json:"login_count"`               // 登录次数
-	AttendCount         int32     `gorm:"column:attend_count;not null;comment:关注数量" json:"attend_count"`             // 关注数量
-	FansCount           int32     `gorm:"column:fans_count;not null;comment:粉丝数量" json:"fans_count"`                 // 粉丝数量
-	CollectProductCount int32     `gorm:"column:collect_product_count;not null" json:"collect_product_count"`
-	CollectSubjectCount int32     `gorm:"column:collect_subject_count;not null" json:"collect_subject_count"`
-	CollectTopicCount   int32     `gorm:"column:collect_topic_count;not null" json:"collect_topic_count"`
-	CollectCommentCount int32     `gorm:"column:collect_comment_count;not null" json:"collect_comment_count"`
-	InviteFriendCount   int32     `gorm:"column:invite_friend_count;not null" json:"invite_friend_count"`
-	RecentOrderTime     time.Time `gorm:"column:recent_order_time;not null;comment:最后一次下订单时间" json:"recent_order_time"` // 最后一次下订单时间
+	ConsumeAmount       int64     `gorm:"column:consume_amount;not null;comment:累计消费金额" json:"consume_amount"`                  // 累计消费金额
+	OrderCount          int32     `gorm:"column:order_count;not null;comment:订单数量" json:"order_count"`                          // 订单数量
+	CouponCount         int32     `gorm:"column:coupon_count;not null;comment:优惠券数量" json:"coupon_count"`                       // 优惠券数量
+	CommentCount        int32     `gorm:"column:comment_count;not null;comment:评价数" json:"comment_count"`                       // 评价数
+	ReturnOrderCount    int32     `gorm:"column:return_order_count;not null;comment:退货数量" json:"return_order_count"`            // 退货数量
+	LoginCount          int32     `gorm:"column:login_count;not null;comment:登录次数" json:"login_count"`                          // 登录次数
+	AttendCount         int32     `gorm:"column:attend_count;not null;comment:关注数量" json:"attend_count"`                        // 关注数量
+	FansCount           int32     `gorm:"column:fans_count;not null;comment:粉丝数量" json:"fans_count"`                            // 粉丝数量
+	CollectProductCount int32     `gorm:"column:collect_product_count;not null;comment:收藏的商品数量" json:"collect_product_count"`   // 收藏的商品数量
+	CollectSubjectCount int32     `gorm:"column:collect_subject_count;not null;comment:收藏的专题活动数量" json:"collect_subject_count"` // 收藏的专题活动数量
+	CollectTopicCount   int32     `gorm:"column:collect_topic_count;not null;comment:收藏的评论数量" json:"collect_topic_count"`       // 收藏的评论数量
+	CollectCommentCount int32     `gorm:"column:collect_comment_count;not null;comment:收藏的专题活动数量" json:"collect_comment_count"` // 收藏的专题活动数量
+	InviteFriendCount   int32     `gorm:"column:invite_friend_count;not null;comment:邀请好友数" json:"invite_friend_count"`         // 邀请好友数
+	RecentOrderTime     time.Time `gorm:"column:recent_order_time;not null;comment:最后一次下订单时间" json:"recent_order_time"`         // 最后一次下订单时间
 }
 
 // TableName UmsMemberStatisticsInfo's table name

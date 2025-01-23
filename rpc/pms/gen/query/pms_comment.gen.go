@@ -54,20 +54,20 @@ type pmsComment struct {
 
 	ALL              field.Asterisk
 	ID               field.Int64
-	ProductID        field.Int64
-	MemberNickName   field.String
-	ProductName      field.String
+	ProductID        field.Int64  // 商品id
+	MemberNickName   field.String // 评价者昵称
+	ProductName      field.String // 商品名称
 	Star             field.Int32  // 评价星数：0->5
 	MemberIP         field.String // 评价的ip
-	CreateTime       field.Time
-	ShowStatus       field.Int32
+	CreateTime       field.Time   // 评价时间
+	ShowStatus       field.Int32  // 是否显示，0-不显示，1-显示
 	ProductAttribute field.String // 购买时的商品属性
-	CollectCount     field.Int32
-	ReadCount        field.Int32
-	Content          field.String
+	CollectCount     field.Int32  // 点赞数
+	ReadCount        field.Int32  // 阅读数
+	Content          field.String // 内容
 	Pics             field.String // 上传图片地址，以逗号隔开
 	MemberIcon       field.String // 评论用户头像
-	ReplayCount      field.Int32
+	ReplayCount      field.Int32  // 回复数量
 
 	fieldMap map[string]field.Expr
 }

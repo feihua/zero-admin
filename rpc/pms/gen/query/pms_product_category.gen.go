@@ -51,16 +51,16 @@ type pmsProductCategory struct {
 
 	ALL          field.Asterisk
 	ID           field.Int64
-	ParentID     field.Int64 // 上机分类的编号：0表示一级分类
-	Name         field.String
-	Level        field.Int32 // 分类级别：0->1级；1->2级
-	ProductCount field.Int32
-	ProductUnit  field.String
-	NavStatus    field.Int32 // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus   field.Int32 // 显示状态：0->不显示；1->显示
-	Sort         field.Int32
+	ParentID     field.Int64  // 上机分类的编号：0表示一级分类
+	Name         field.String // 商品分类名称
+	Level        field.Int32  // 分类级别：0->1级；1->2级
+	ProductCount field.Int32  // 商品数量
+	ProductUnit  field.String // 商品数量
+	NavStatus    field.Int32  // 是否显示在导航栏：0->不显示；1->显示
+	ShowStatus   field.Int32  // 显示状态：0->不显示；1->显示
+	Sort         field.Int32  // 排序
 	Icon         field.String // 图标
-	Keywords     field.String
+	Keywords     field.String // 关键字
 	Description  field.String // 描述
 
 	fieldMap map[string]field.Expr

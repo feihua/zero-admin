@@ -9,9 +9,9 @@ const TableNamePmsProductFullReduction = "pms_product_full_reduction"
 // PmsProductFullReduction 产品满减表(只针对同商品)
 type PmsProductFullReduction struct {
 	ID          int64 `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ProductID   int64 `gorm:"column:product_id;not null" json:"product_id"`
-	FullPrice   int64 `gorm:"column:full_price;not null" json:"full_price"`
-	ReducePrice int64 `gorm:"column:reduce_price;not null" json:"reduce_price"`
+	ProductID   int64 `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`      // 商品id
+	FullPrice   int64 `gorm:"column:full_price;not null;comment:商品满多少" json:"full_price"`     // 商品满多少
+	ReducePrice int64 `gorm:"column:reduce_price;not null;comment:商品减多少" json:"reduce_price"` // 商品减多少
 }
 
 // TableName PmsProductFullReduction's table name

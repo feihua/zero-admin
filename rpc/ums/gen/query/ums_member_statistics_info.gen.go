@@ -64,12 +64,12 @@ type umsMemberStatisticsInfo struct {
 	LoginCount          field.Int32 // 登录次数
 	AttendCount         field.Int32 // 关注数量
 	FansCount           field.Int32 // 粉丝数量
-	CollectProductCount field.Int32
-	CollectSubjectCount field.Int32
-	CollectTopicCount   field.Int32
-	CollectCommentCount field.Int32
-	InviteFriendCount   field.Int32
-	RecentOrderTime     field.Time // 最后一次下订单时间
+	CollectProductCount field.Int32 // 收藏的商品数量
+	CollectSubjectCount field.Int32 // 收藏的专题活动数量
+	CollectTopicCount   field.Int32 // 收藏的评论数量
+	CollectCommentCount field.Int32 // 收藏的专题活动数量
+	InviteFriendCount   field.Int32 // 邀请好友数
+	RecentOrderTime     field.Time  // 最后一次下订单时间
 
 	fieldMap map[string]field.Expr
 }

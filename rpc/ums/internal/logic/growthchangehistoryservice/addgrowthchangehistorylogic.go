@@ -39,7 +39,7 @@ func (l *AddGrowthChangeHistoryLogic) AddGrowthChangeHistory(in *umsclient.AddGr
 		ChangeType:  in.ChangeType,
 		ChangeCount: in.ChangeCount,
 		OperateMan:  in.OperateMan,
-		OperateNote: &in.OperateNote,
+		OperateNote: in.OperateNote,
 		SourceType:  in.SourceType,
 	})
 

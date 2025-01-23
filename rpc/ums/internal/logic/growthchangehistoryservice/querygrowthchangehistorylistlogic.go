@@ -51,7 +51,7 @@ func (l *QueryGrowthChangeHistoryListLogic) QueryGrowthChangeHistoryList(in *ums
 			ChangeType:  item.ChangeType,
 			ChangeCount: item.ChangeCount,
 			OperateMan:  item.OperateMan,
-			OperateNote: *item.OperateNote,
+			OperateNote: item.OperateNote,
 			SourceType:  item.SourceType,
 		})
 	}

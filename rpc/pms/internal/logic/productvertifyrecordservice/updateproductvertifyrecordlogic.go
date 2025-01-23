@@ -38,7 +38,7 @@ func (l *UpdateProductVertifyRecordLogic) UpdateProductVertifyRecord(in *pmsclie
 		ID:         in.Id,
 		ProductID:  in.ProductId,
 		CreateTime: time.Now(),
-		VertifyMan: in.VertifyMan,
+		ReviewMan:  in.VertifyMan,
 		Status:     in.Status,
 		Detail:     in.Detail,
 	})

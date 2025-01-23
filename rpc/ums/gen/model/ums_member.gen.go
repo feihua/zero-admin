@@ -19,12 +19,12 @@ type UmsMember struct {
 	Nickname              string     `gorm:"column:nickname;not null;comment:昵称" json:"nickname"`                                   // 昵称
 	Phone                 string     `gorm:"column:phone;not null;comment:手机号码" json:"phone"`                                       // 手机号码
 	MemberStatus          int32      `gorm:"column:member_status;not null;comment:帐号启用状态:0->禁用；1->启用" json:"member_status"`         // 帐号启用状态:0->禁用；1->启用
-	Icon                  *string    `gorm:"column:icon;comment:头像" json:"icon"`                                                    // 头像
-	Gender                *int32     `gorm:"column:gender;comment:性别：0->未知；1->男；2->女" json:"gender"`                                // 性别：0->未知；1->男；2->女
-	Birthday              *time.Time `gorm:"column:birthday;comment:生日" json:"birthday"`                                            // 生日
-	City                  *string    `gorm:"column:city;comment:所做城市" json:"city"`                                                  // 所做城市
-	Job                   *string    `gorm:"column:job;comment:职业" json:"job"`                                                      // 职业
-	PersonalizedSignature *string    `gorm:"column:personalized_signature;comment:个性签名" json:"personalized_signature"`              // 个性签名
+	Icon                  string     `gorm:"column:icon;not null;comment:头像" json:"icon"`                                           // 头像
+	Gender                int32      `gorm:"column:gender;not null;comment:性别：0->未知；1->男；2->女" json:"gender"`                       // 性别：0->未知；1->男；2->女
+	Birthday              time.Time  `gorm:"column:birthday;not null;comment:生日" json:"birthday"`                                   // 生日
+	City                  string     `gorm:"column:city;not null;comment:所做城市" json:"city"`                                         // 所做城市
+	Job                   string     `gorm:"column:job;not null;comment:职业" json:"job"`                                             // 职业
+	PersonalizedSignature string     `gorm:"column:personalized_signature;not null;comment:个性签名" json:"personalized_signature"`     // 个性签名
 	SourceType            int32      `gorm:"column:source_type;not null;comment:用户来源" json:"source_type"`                           // 用户来源
 	Integration           int32      `gorm:"column:integration;not null;comment:积分" json:"integration"`                             // 积分
 	Growth                int32      `gorm:"column:growth;not null;comment:成长值" json:"growth"`                                      // 成长值

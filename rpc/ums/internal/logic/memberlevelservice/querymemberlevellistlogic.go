@@ -59,7 +59,7 @@ func (l *QueryMemberLevelListLogic) QueryMemberLevelList(in *umsclient.QueryMemb
 			IsPromotion:        level.IsPromotion,
 			IsMemberPrice:      level.IsMemberPrice,
 			IsBirthday:         level.IsBirthday,
-			Remark:             *level.Remark,
+			Remark:             level.Remark,
 		})
 	}
 

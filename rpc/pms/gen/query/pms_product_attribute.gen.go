@@ -51,8 +51,8 @@ type pmsProductAttribute struct {
 
 	ALL                        field.Asterisk
 	ID                         field.Int64
-	ProductAttributeCategoryID field.Int64
-	Name                       field.String
+	ProductAttributeCategoryID field.Int64  // 商品属性分类id
+	Name                       field.String // 商品属性分类id
 	SelectType                 field.Int32  // 属性选择类型：0->唯一；1->单选；2->多选
 	InputType                  field.Int32  // 属性录入方式：0->手工录入；1->从列表中选取
 	InputList                  field.String // 可选值列表，以逗号隔开

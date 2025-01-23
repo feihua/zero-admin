@@ -35,7 +35,7 @@ func NewQueryProductDetailByIdLogic(ctx context.Context, svcCtx *svc.ServiceCont
 // 7.商品满减价格设置
 // 8.获取商品的会员价格
 func (l *QueryProductDetailByIdLogic) QueryProductDetailById(in *pmsclient.QueryProductDetailByIdReq) (*pmsclient.QueryProductDetailByIdResp, error) {
-	//1.获取商品信息
+	// 1.获取商品信息
 	productListData, product := buildProductListData(l, in.Id)
 
 	productAttributeListData, attributeIds := buildProductAttributeListData(l, product)
@@ -161,7 +161,7 @@ func buildProductAttributeValueListData(l *QueryProductDetailByIdLogic, pmsProdu
 				Id:                 item.ID,
 				ProductId:          item.ProductID,
 				ProductAttributeId: item.ProductAttributeID,
-				Value:              *item.Value,
+				Value:              item.Value,
 			})
 		}
 

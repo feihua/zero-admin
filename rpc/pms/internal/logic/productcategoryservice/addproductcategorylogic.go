@@ -43,7 +43,7 @@ func (l *AddProductCategoryLogic) AddProductCategory(in *pmsclient.AddProductCat
 		Sort:         in.Sort,
 		Icon:         in.Icon,
 		Keywords:     in.Keywords,
-		Description:  &in.Description,
+		Description:  in.Description,
 	}
 	err := query.PmsProductCategory.WithContext(l.ctx).Create(category)
 

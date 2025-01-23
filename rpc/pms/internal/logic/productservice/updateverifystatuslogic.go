@@ -40,13 +40,13 @@ func (l *UpdateVerifyStatusLogic) UpdateVerifyStatus(in *pmsclient.UpdateProduct
 		return nil, err
 	}
 
-	//修改完审核状态后插入审核记录
+	// 修改完审核状态后插入审核记录
 	var list []*model.PmsProductVertifyRecord
 	for _, id := range in.Ids {
 		list = append(list, &model.PmsProductVertifyRecord{
 			ProductID:  id,
 			CreateTime: time.Now(),
-			VertifyMan: in.VertifyMan,
+			ReviewMan:  in.VertifyMan,
 			Status:     in.Status,
 			Detail:     in.Detail,
 		})

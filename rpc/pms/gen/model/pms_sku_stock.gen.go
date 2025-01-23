@@ -9,9 +9,9 @@ const TableNamePmsSkuStock = "pms_sku_stock"
 // PmsSkuStock sku的库存
 type PmsSkuStock struct {
 	ID             int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ProductID      int64  `gorm:"column:product_id;not null" json:"product_id"`
-	SkuCode        string `gorm:"column:sku_code;not null;comment:sku编码" json:"sku_code"` // sku编码
-	Price          int64  `gorm:"column:price;not null" json:"price"`
+	ProductID      int64  `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`             // 商品id
+	SkuCode        string `gorm:"column:sku_code;not null;comment:sku编码" json:"sku_code"`                // sku编码
+	Price          int64  `gorm:"column:price;not null;comment:价格" json:"price"`                         // 价格
 	Stock          int32  `gorm:"column:stock;not null;comment:库存" json:"stock"`                         // 库存
 	LowStock       int32  `gorm:"column:low_stock;not null;comment:预警库存" json:"low_stock"`               // 预警库存
 	Pic            string `gorm:"column:pic;not null;comment:展示图片" json:"pic"`                           // 展示图片

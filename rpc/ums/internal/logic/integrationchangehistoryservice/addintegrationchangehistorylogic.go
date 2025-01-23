@@ -39,7 +39,7 @@ func (l *AddIntegrationChangeHistoryLogic) AddIntegrationChangeHistory(in *umscl
 		ChangeType:  in.ChangeType,
 		ChangeCount: in.ChangeCount,
 		OperateMan:  in.OperateMan,
-		OperateNote: &in.OperateNote,
+		OperateNote: in.OperateNote,
 		SourceType:  in.SourceType,
 	})
 

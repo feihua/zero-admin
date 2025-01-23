@@ -2,9 +2,9 @@ create table pms_product_full_reduction
 (
     id           bigint(11) auto_increment
         primary key,
-    product_id   bigint not null,
-    full_price   bigint not null,
-    reduce_price bigint not null
+    product_id   bigint not null comment '商品id',
+    full_price   bigint not null comment '商品满多少',
+    reduce_price bigint not null comment '商品减多少'
 )
     comment '产品满减表(只针对同商品)';
 

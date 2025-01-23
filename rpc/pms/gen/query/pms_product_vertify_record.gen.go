@@ -30,7 +30,7 @@ func newPmsProductVertifyRecord(db *gorm.DB, opts ...gen.DOOption) pmsProductVer
 	_pmsProductVertifyRecord.ID = field.NewInt64(tableName, "id")
 	_pmsProductVertifyRecord.ProductID = field.NewInt64(tableName, "product_id")
 	_pmsProductVertifyRecord.CreateTime = field.NewTime(tableName, "create_time")
-	_pmsProductVertifyRecord.VertifyMan = field.NewString(tableName, "vertify_man")
+	_pmsProductVertifyRecord.ReviewMan = field.NewString(tableName, "review_man")
 	_pmsProductVertifyRecord.Status = field.NewInt32(tableName, "status")
 	_pmsProductVertifyRecord.Detail = field.NewString(tableName, "detail")
 
@@ -45,10 +45,10 @@ type pmsProductVertifyRecord struct {
 
 	ALL        field.Asterisk
 	ID         field.Int64
-	ProductID  field.Int64
-	CreateTime field.Time
-	VertifyMan field.String // 审核人
-	Status     field.Int32
+	ProductID  field.Int64  // 商品id
+	CreateTime field.Time   // 创建时间
+	ReviewMan  field.String // 审核人
+	Status     field.Int32  // 审核状态：0->未通过；1->通过
 	Detail     field.String // 反馈详情
 
 	fieldMap map[string]field.Expr
@@ -69,7 +69,7 @@ func (p *pmsProductVertifyRecord) updateTableName(table string) *pmsProductVerti
 	p.ID = field.NewInt64(table, "id")
 	p.ProductID = field.NewInt64(table, "product_id")
 	p.CreateTime = field.NewTime(table, "create_time")
-	p.VertifyMan = field.NewString(table, "vertify_man")
+	p.ReviewMan = field.NewString(table, "review_man")
 	p.Status = field.NewInt32(table, "status")
 	p.Detail = field.NewString(table, "detail")
 
@@ -104,7 +104,7 @@ func (p *pmsProductVertifyRecord) fillFieldMap() {
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["product_id"] = p.ProductID
 	p.fieldMap["create_time"] = p.CreateTime
-	p.fieldMap["vertify_man"] = p.VertifyMan
+	p.fieldMap["review_man"] = p.ReviewMan
 	p.fieldMap["status"] = p.Status
 	p.fieldMap["detail"] = p.Detail
 }

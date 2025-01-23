@@ -36,7 +36,7 @@ func (l *AddProductVertifyRecordLogic) AddProductVertifyRecord(in *pmsclient.Add
 	err := query.PmsProductVertifyRecord.WithContext(l.ctx).Create(&model.PmsProductVertifyRecord{
 		ProductID:  in.ProductId,
 		CreateTime: time.Now(),
-		VertifyMan: in.VertifyMan,
+		ReviewMan:  in.VertifyMan,
 		Status:     in.Status,
 		Detail:     in.Detail,
 	})

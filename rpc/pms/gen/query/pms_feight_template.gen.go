@@ -51,8 +51,8 @@ type pmsFeightTemplate struct {
 	ChargeType     field.Int32  // 计费类型:0->按重量；1->按件数
 	FirstWeight    field.Int64  // 首重kg
 	FirstFee       field.Int64  // 首费（元）
-	ContinueWeight field.Int64
-	ContinueFee    field.Int64
+	ContinueWeight field.Int64  // 续重kg
+	ContinueFee    field.Int64  // 续费（元）
 	Dest           field.String // 目的地（省、市）
 
 	fieldMap map[string]field.Expr

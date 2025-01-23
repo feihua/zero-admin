@@ -33,17 +33,17 @@ func NewAddMemberBrandAttentionLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // AddMemberBrandAttention 添加会员关注品牌
 func (l *AddMemberBrandAttentionLogic) AddMemberBrandAttention(in *umsclient.AddMemberBrandAttentionReq) (*umsclient.AddMemberBrandAttentionResp, error) {
-	//1.查询会员信息
+	// 1.查询会员信息
 	member, _ := query.UmsMember.WithContext(l.ctx).Where(query.UmsMember.ID.Eq(in.MemberId)).First()
-	//2.添加品牌关注
+	// 2.添加品牌关注
 	err := query.UmsMemberBrandAttention.WithContext(l.ctx).Create(&model.UmsMemberBrandAttention{
 		MemberID:       member.ID,
 		MemberNickName: member.Nickname,
-		MemberIcon:     *member.Icon,
+		MemberIcon:     member.Icon,
 		BrandID:        in.BrandId,
 		BrandName:      in.BrandName,
 		BrandLogo:      in.BrandLogo,
-		BrandCity:      &in.BrandCity,
+		BrandCity:      in.BrandCity,
 		CreateTime:     time.Now(),
 	})
 

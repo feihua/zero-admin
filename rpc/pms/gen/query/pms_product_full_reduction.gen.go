@@ -43,9 +43,9 @@ type pmsProductFullReduction struct {
 
 	ALL         field.Asterisk
 	ID          field.Int64
-	ProductID   field.Int64
-	FullPrice   field.Int64
-	ReducePrice field.Int64
+	ProductID   field.Int64 // 商品id
+	FullPrice   field.Int64 // 商品满多少
+	ReducePrice field.Int64 // 商品减多少
 
 	fieldMap map[string]field.Expr
 }

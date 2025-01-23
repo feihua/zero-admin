@@ -47,7 +47,7 @@ func (l *QueryProductAttributeValueListLogic) QueryProductAttributeValueList(in 
 			Id:                 item.ID,
 			ProductId:          item.ProductID,
 			ProductAttributeId: item.ProductAttributeID,
-			Value:              *item.Value,
+			Value:              item.Value,
 		})
 	}
 

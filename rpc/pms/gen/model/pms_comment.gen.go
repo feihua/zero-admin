@@ -13,20 +13,20 @@ const TableNamePmsComment = "pms_comment"
 // PmsComment 商品评价表
 type PmsComment struct {
 	ID               int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ProductID        int64     `gorm:"column:product_id;not null" json:"product_id"`
-	MemberNickName   string    `gorm:"column:member_nick_name;not null" json:"member_nick_name"`
-	ProductName      string    `gorm:"column:product_name;not null" json:"product_name"`
-	Star             int32     `gorm:"column:star;not null;comment:评价星数：0->5" json:"star"`       // 评价星数：0->5
-	MemberIP         string    `gorm:"column:member_ip;not null;comment:评价的ip" json:"member_ip"` // 评价的ip
-	CreateTime       time.Time `gorm:"column:create_time;not null" json:"create_time"`
-	ShowStatus       int32     `gorm:"column:show_status;not null" json:"show_status"`
+	ProductID        int64     `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`                   // 商品id
+	MemberNickName   string    `gorm:"column:member_nick_name;not null;comment:评价者昵称" json:"member_nick_name"`      // 评价者昵称
+	ProductName      string    `gorm:"column:product_name;not null;comment:商品名称" json:"product_name"`               // 商品名称
+	Star             int32     `gorm:"column:star;not null;comment:评价星数：0->5" json:"star"`                          // 评价星数：0->5
+	MemberIP         string    `gorm:"column:member_ip;not null;comment:评价的ip" json:"member_ip"`                    // 评价的ip
+	CreateTime       time.Time `gorm:"column:create_time;not null;comment:评价时间" json:"create_time"`                 // 评价时间
+	ShowStatus       int32     `gorm:"column:show_status;not null;comment:是否显示，0-不显示，1-显示" json:"show_status"`      // 是否显示，0-不显示，1-显示
 	ProductAttribute string    `gorm:"column:product_attribute;not null;comment:购买时的商品属性" json:"product_attribute"` // 购买时的商品属性
-	CollectCount     int32     `gorm:"column:collect_count;not null" json:"collect_count"`
-	ReadCount        int32     `gorm:"column:read_count;not null" json:"read_count"`
-	Content          string    `gorm:"column:content;not null" json:"content"`
-	Pics             string    `gorm:"column:pics;not null;comment:上传图片地址，以逗号隔开" json:"pics"`         // 上传图片地址，以逗号隔开
-	MemberIcon       string    `gorm:"column:member_icon;not null;comment:评论用户头像" json:"member_icon"` // 评论用户头像
-	ReplayCount      int32     `gorm:"column:replay_count;not null" json:"replay_count"`
+	CollectCount     int32     `gorm:"column:collect_count;not null;comment:点赞数" json:"collect_count"`              // 点赞数
+	ReadCount        int32     `gorm:"column:read_count;not null;comment:阅读数" json:"read_count"`                    // 阅读数
+	Content          string    `gorm:"column:content;not null;comment:内容" json:"content"`                           // 内容
+	Pics             string    `gorm:"column:pics;not null;comment:上传图片地址，以逗号隔开" json:"pics"`                       // 上传图片地址，以逗号隔开
+	MemberIcon       string    `gorm:"column:member_icon;not null;comment:评论用户头像" json:"member_icon"`               // 评论用户头像
+	ReplayCount      int32     `gorm:"column:replay_count;not null;comment:回复数量" json:"replay_count"`               // 回复数量
 }
 
 // TableName PmsComment's table name

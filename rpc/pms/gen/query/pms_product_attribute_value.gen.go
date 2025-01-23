@@ -43,8 +43,8 @@ type pmsProductAttributeValue struct {
 
 	ALL                field.Asterisk
 	ID                 field.Int64
-	ProductID          field.Int64
-	ProductAttributeID field.Int64
+	ProductID          field.Int64  // 商品id
+	ProductAttributeID field.Int64  // 商品属性id
 	Value              field.String // 手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
 
 	fieldMap map[string]field.Expr

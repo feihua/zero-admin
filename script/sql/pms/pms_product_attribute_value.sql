@@ -2,9 +2,9 @@ create table pms_product_attribute_value
 (
     id                   bigint auto_increment
         primary key,
-    product_id           bigint      not null,
-    product_attribute_id bigint      not null,
-    value                varchar(64) null comment '手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开'
+    product_id           bigint      not null comment '商品id',
+    product_attribute_id bigint      not null comment '商品属性id',
+    value                varchar(64) not null comment '手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开'
 )
     comment '存储产品参数信息的表';
 

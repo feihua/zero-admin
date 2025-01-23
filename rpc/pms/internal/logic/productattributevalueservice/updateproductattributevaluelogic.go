@@ -37,7 +37,7 @@ func (l *UpdateProductAttributeValueLogic) UpdateProductAttributeValue(in *pmscl
 		ID:                 in.Id,
 		ProductID:          in.ProductId,
 		ProductAttributeID: in.ProductAttributeId,
-		Value:              &in.Value,
+		Value:              in.Value,
 	})
 
 	if err != nil {

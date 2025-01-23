@@ -8,10 +8,10 @@ const TableNamePmsProductAttributeValue = "pms_product_attribute_value"
 
 // PmsProductAttributeValue 存储产品参数信息的表
 type PmsProductAttributeValue struct {
-	ID                 int64   `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ProductID          int64   `gorm:"column:product_id;not null" json:"product_id"`
-	ProductAttributeID int64   `gorm:"column:product_attribute_id;not null" json:"product_attribute_id"`
-	Value              *string `gorm:"column:value;comment:手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开" json:"value"` // 手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
+	ID                 int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	ProductID          int64  `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`                       // 商品id
+	ProductAttributeID int64  `gorm:"column:product_attribute_id;not null;comment:商品属性id" json:"product_attribute_id"` // 商品属性id
+	Value              string `gorm:"column:value;not null;comment:手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开" json:"value"`         // 手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
 }
 
 // TableName PmsProductAttributeValue's table name

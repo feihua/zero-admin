@@ -43,9 +43,9 @@ type pmsProductAttributeCategory struct {
 
 	ALL            field.Asterisk
 	ID             field.Int64
-	Name           field.String
-	AttributeCount field.Int32 // 属性数量
-	ParamCount     field.Int32 // 参数数量
+	Name           field.String // 商品属性分类名称
+	AttributeCount field.Int32  // 属性数量
+	ParamCount     field.Int32  // 参数数量
 
 	fieldMap map[string]field.Expr
 }

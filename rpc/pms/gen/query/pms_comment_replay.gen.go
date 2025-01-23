@@ -46,12 +46,12 @@ type pmsCommentReplay struct {
 
 	ALL            field.Asterisk
 	ID             field.Int64
-	CommentID      field.Int64
-	MemberNickName field.String
-	MemberIcon     field.String
-	Content        field.String
-	CreateTime     field.Time
-	Type           field.Int32 // 评论人员类型；0->会员；1->管理员
+	CommentID      field.Int64  // 评论id
+	MemberNickName field.String // 评论人员昵称
+	MemberIcon     field.String // 评论人员头像
+	Content        field.String // 内容
+	CreateTime     field.Time   // 评论时间
+	Type           field.Int32  // 评论人员类型；0->会员；1->管理员
 
 	fieldMap map[string]field.Expr
 }

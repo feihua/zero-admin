@@ -30,10 +30,10 @@ func newPmsProductCollect(db *gorm.DB, opts ...gen.DOOption) pmsProductCollect {
 	_pmsProductCollect.ID = field.NewInt32(tableName, "id")
 	_pmsProductCollect.UserID = field.NewInt32(tableName, "user_id")
 	_pmsProductCollect.ValueID = field.NewInt32(tableName, "value_id")
-	_pmsProductCollect.CollectType = field.NewBool(tableName, "collect_type")
+	_pmsProductCollect.CollectType = field.NewInt32(tableName, "collect_type")
 	_pmsProductCollect.AddTime = field.NewTime(tableName, "add_time")
 	_pmsProductCollect.UpdateTime = field.NewTime(tableName, "update_time")
-	_pmsProductCollect.Deleted = field.NewBool(tableName, "deleted")
+	_pmsProductCollect.Deleted = field.NewInt32(tableName, "deleted")
 
 	_pmsProductCollect.fillFieldMap()
 
@@ -48,10 +48,10 @@ type pmsProductCollect struct {
 	ID          field.Int32
 	UserID      field.Int32 // 用户表的用户ID
 	ValueID     field.Int32 // 如果type=0，则是商品ID；如果type=1，则是专题ID
-	CollectType field.Bool  // 收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+	CollectType field.Int32 // 收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
 	AddTime     field.Time  // 创建时间
 	UpdateTime  field.Time  // 更新时间
-	Deleted     field.Bool  // 逻辑删除
+	Deleted     field.Int32 // 逻辑删除
 
 	fieldMap map[string]field.Expr
 }
@@ -71,10 +71,10 @@ func (p *pmsProductCollect) updateTableName(table string) *pmsProductCollect {
 	p.ID = field.NewInt32(table, "id")
 	p.UserID = field.NewInt32(table, "user_id")
 	p.ValueID = field.NewInt32(table, "value_id")
-	p.CollectType = field.NewBool(table, "collect_type")
+	p.CollectType = field.NewInt32(table, "collect_type")
 	p.AddTime = field.NewTime(table, "add_time")
 	p.UpdateTime = field.NewTime(table, "update_time")
-	p.Deleted = field.NewBool(table, "deleted")
+	p.Deleted = field.NewInt32(table, "deleted")
 
 	p.fillFieldMap()
 

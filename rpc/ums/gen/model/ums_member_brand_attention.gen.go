@@ -19,7 +19,7 @@ type UmsMemberBrandAttention struct {
 	BrandID        int64     `gorm:"column:brand_id;not null;comment:品牌id" json:"brand_id"`                                 // 品牌id
 	BrandName      string    `gorm:"column:brand_name;not null;comment:品牌名称" json:"brand_name"`                             // 品牌名称
 	BrandLogo      string    `gorm:"column:brand_logo;not null;comment:品牌Logo" json:"brand_logo"`                           // 品牌Logo
-	BrandCity      *string   `gorm:"column:brand_city;comment:品牌所在城市" json:"brand_city"`                                    // 品牌所在城市
+	BrandCity      string    `gorm:"column:brand_city;not null;comment:品牌所在城市" json:"brand_city"`                           // 品牌所在城市
 	CreateTime     time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:关注时间" json:"create_time"` // 关注时间
 }
 

@@ -8,19 +8,19 @@ const TableNameUmsMemberLevel = "ums_member_level"
 
 // UmsMemberLevel 会员等级表
 type UmsMemberLevel struct {
-	ID                 int64   `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	LevelName          string  `gorm:"column:level_name;not null;comment:等级名称" json:"level_name"`                           // 等级名称
-	GrowthPoint        int32   `gorm:"column:growth_point;not null;comment:成长点" json:"growth_point"`                        // 成长点
-	DefaultStatus      int32   `gorm:"column:default_status;not null;comment:是否为默认等级：0->不是；1->是" json:"default_status"`     // 是否为默认等级：0->不是；1->是
-	FreeFreightPoint   int64   `gorm:"column:free_freight_point;not null;comment:免运费标准" json:"free_freight_point"`          // 免运费标准
-	CommentGrowthPoint int32   `gorm:"column:comment_growth_point;not null;comment:每次评价获取的成长值" json:"comment_growth_point"` // 每次评价获取的成长值
-	IsFreeFreight      int32   `gorm:"column:is_free_freight;not null;comment:是否有免邮特权" json:"is_free_freight"`              // 是否有免邮特权
-	IsSignIn           int32   `gorm:"column:is_sign_in;not null;comment:是否有签到特权" json:"is_sign_in"`                        // 是否有签到特权
-	IsComment          int32   `gorm:"column:is_comment;not null;comment:是否有评论获奖励特权" json:"is_comment"`                     // 是否有评论获奖励特权
-	IsPromotion        int32   `gorm:"column:is_promotion;not null;comment:是否有专享活动特权" json:"is_promotion"`                  // 是否有专享活动特权
-	IsMemberPrice      int32   `gorm:"column:is_member_price;not null;comment:是否有会员价格特权" json:"is_member_price"`            // 是否有会员价格特权
-	IsBirthday         int32   `gorm:"column:is_birthday;not null;comment:是否有生日特权" json:"is_birthday"`                      // 是否有生日特权
-	Remark             *string `gorm:"column:remark;comment:备注" json:"remark"`                                              // 备注
+	ID                 int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	LevelName          string `gorm:"column:level_name;not null;comment:等级名称" json:"level_name"`                           // 等级名称
+	GrowthPoint        int32  `gorm:"column:growth_point;not null;comment:成长点" json:"growth_point"`                        // 成长点
+	DefaultStatus      int32  `gorm:"column:default_status;not null;comment:是否为默认等级：0->不是；1->是" json:"default_status"`     // 是否为默认等级：0->不是；1->是
+	FreeFreightPoint   int64  `gorm:"column:free_freight_point;not null;comment:免运费标准" json:"free_freight_point"`          // 免运费标准
+	CommentGrowthPoint int32  `gorm:"column:comment_growth_point;not null;comment:每次评价获取的成长值" json:"comment_growth_point"` // 每次评价获取的成长值
+	IsFreeFreight      int32  `gorm:"column:is_free_freight;not null;comment:是否有免邮特权" json:"is_free_freight"`              // 是否有免邮特权
+	IsSignIn           int32  `gorm:"column:is_sign_in;not null;comment:是否有签到特权" json:"is_sign_in"`                        // 是否有签到特权
+	IsComment          int32  `gorm:"column:is_comment;not null;comment:是否有评论获奖励特权" json:"is_comment"`                     // 是否有评论获奖励特权
+	IsPromotion        int32  `gorm:"column:is_promotion;not null;comment:是否有专享活动特权" json:"is_promotion"`                  // 是否有专享活动特权
+	IsMemberPrice      int32  `gorm:"column:is_member_price;not null;comment:是否有会员价格特权" json:"is_member_price"`            // 是否有会员价格特权
+	IsBirthday         int32  `gorm:"column:is_birthday;not null;comment:是否有生日特权" json:"is_birthday"`                      // 是否有生日特权
+	Remark             string `gorm:"column:remark;not null;comment:备注" json:"remark"`                                     // 备注
 }
 
 // TableName UmsMemberLevel's table name

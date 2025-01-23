@@ -2,9 +2,9 @@ create table pms_sku_stock
 (
     id              bigint auto_increment
         primary key,
-    product_id      bigint        not null,
+    product_id      bigint        not null comment '商品id',
     sku_code        varchar(64)   not null comment 'sku编码',
-    price           bigint        not null,
+    price           bigint        not null comment '价格',
     stock           int default 0 not null comment '库存',
     low_stock       int           not null comment '预警库存',
     pic             varchar(255)  not null comment '展示图片',

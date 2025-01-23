@@ -2,21 +2,21 @@ create table pms_brand
 (
     id                    bigint auto_increment
         primary key,
-    name                  varchar(64)                        not null comment '品牌名称',
-    first_letter          varchar(8)                         not null comment '首字母',
-    sort                  int                                not null comment '排序',
-    factory_status        tinyint                            not null comment '是否为品牌制造商：0->不是；1->是',
-    show_status           tinyint                            not null comment '品牌显示状态',
-    recommend_status      tinyint  default 0                 not null comment '推荐状态',
-    product_count         int                                not null comment '产品数量',
-    product_comment_count int                                not null comment '产品评论数量',
-    logo                  varchar(255)                       not null comment '品牌logo',
-    big_pic               varchar(255)                       not null comment '专区大图',
-    brand_story           text                               not null comment '品牌故事',
-    create_by             varchar(50)                        not null comment '创建者',
-    create_time           datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    update_by             varchar(50)                        null comment '更新者',
-    update_time           datetime                           null on update CURRENT_TIMESTAMP comment '更新时间'
+    name                  varchar(64)                           not null comment '品牌名称',
+    first_letter          varchar(8)                            not null comment '首字母',
+    sort                  int                                   not null comment '排序',
+    factory_status        tinyint                               not null comment '是否为品牌制造商：0->不是；1->是',
+    show_status           tinyint                               not null comment '品牌显示状态',
+    recommend_status      tinyint     default 0                 not null comment '推荐状态',
+    product_count         int                                   not null comment '产品数量',
+    product_comment_count int                                   not null comment '产品评论数量',
+    logo                  varchar(255)                          not null comment '品牌logo',
+    big_pic               varchar(255)                          not null comment '专区大图',
+    brand_story           text                                  not null comment '品牌故事',
+    create_by             varchar(50)                           not null comment '创建者',
+    create_time           datetime    default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_by             varchar(50) default ''                not null comment '更新者',
+    update_time           datetime                              null on update CURRENT_TIMESTAMP comment '更新时间'
 )
     comment '品牌表';
 

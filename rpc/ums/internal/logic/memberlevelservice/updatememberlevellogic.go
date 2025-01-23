@@ -45,7 +45,7 @@ func (l *UpdateMemberLevelLogic) UpdateMemberLevel(in *umsclient.UpdateMemberLev
 		IsPromotion:        in.IsPromotion,
 		IsMemberPrice:      in.IsMemberPrice,
 		IsBirthday:         in.IsBirthday,
-		Remark:             &in.Remark,
+		Remark:             in.Remark,
 	})
 
 	if err != nil {

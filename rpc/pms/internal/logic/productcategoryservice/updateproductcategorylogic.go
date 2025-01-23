@@ -32,11 +32,11 @@ func NewUpdateProductCategoryLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // UpdateProductCategory 更新产品分类
 func (l *UpdateProductCategoryLogic) UpdateProductCategory(in *pmsclient.UpdateProductCategoryReq) (*pmsclient.UpdateProductCategoryResp, error) {
-	//更新商品分类时要更新商品中的名称
+	// 更新商品分类时要更新商品中的名称
 	product := query.PmsProduct
 	_, _ = product.WithContext(l.ctx).Where(product.ProductCategoryID.Eq(in.Id)).Update(product.ProductCategoryName, in.Name)
 
-	//同时更新筛选属性的信息
+	// 同时更新筛选属性的信息
 	relation := query.PmsProductCategoryAttributeRelation
 	_, _ = relation.WithContext(l.ctx).Where(relation.ProductCategoryID.Eq(in.Id)).Delete()
 	if len(in.ProductAttributeIdList) > 0 {
@@ -63,7 +63,7 @@ func (l *UpdateProductCategoryLogic) UpdateProductCategory(in *pmsclient.UpdateP
 		Sort:         in.Sort,
 		Icon:         in.Icon,
 		Keywords:     in.Keywords,
-		Description:  &in.Description,
+		Description:  in.Description,
 	})
 
 	if err != nil {

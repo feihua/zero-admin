@@ -55,7 +55,7 @@ func (l *QueryMemberReadHistoryListLogic) QueryMemberReadHistoryList(in *umsclie
 			ProductId:       item.ProductID,
 			ProductName:     item.ProductName,
 			ProductPic:      item.ProductPic,
-			ProductSubTitle: *item.ProductSubTitle,
+			ProductSubTitle: item.ProductSubTitle,
 			ProductPrice:    item.ProductPrice,
 			CreateTime:      item.CreateTime.Format("2006-01-02 15:04:05"),
 		})

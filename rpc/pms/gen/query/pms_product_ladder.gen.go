@@ -44,7 +44,7 @@ type pmsProductLadder struct {
 
 	ALL       field.Asterisk
 	ID        field.Int64
-	ProductID field.Int64
+	ProductID field.Int64 // 商品id
 	Count     field.Int32 // 满足的商品数量
 	Discount  field.Int64 // 折扣
 	Price     field.Int64 // 折后价格

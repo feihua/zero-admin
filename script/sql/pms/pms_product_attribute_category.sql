@@ -2,7 +2,7 @@ create table pms_product_attribute_category
 (
     id              bigint auto_increment
         primary key,
-    name            varchar(64)   not null,
+    name            varchar(64)   not null comment '商品属性分类名称',
     attribute_count int default 0 not null comment '属性数量',
     param_count     int default 0 not null comment '参数数量'
 )

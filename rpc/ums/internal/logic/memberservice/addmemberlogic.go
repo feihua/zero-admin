@@ -63,24 +63,18 @@ func (l *AddMemberLogic) AddMember(in *umsclient.AddMemberReq) (*umsclient.AddMe
 
 func insertMember(in *umsclient.AddMemberReq, l *AddMemberLogic) (int64, error) {
 	member := &model.UmsMember{
-		MemberLevelID:         4, //默认是普通会员
-		MemberName:            in.MemberName,
-		Password:              in.Password,
-		Nickname:              in.MemberName,
-		Phone:                 in.Phone,
-		MemberStatus:          0,
-		CreateTime:            time.Now(),
-		Icon:                  nil,
-		Gender:                nil,
-		Birthday:              nil,
-		City:                  nil,
-		Job:                   nil,
-		PersonalizedSignature: nil,
-		SourceType:            0,
-		Integration:           0,
-		Growth:                0,
-		LotteryCount:          0,
-		HistoryIntegration:    0,
+		MemberLevelID:      4, // 默认是普通会员
+		MemberName:         in.MemberName,
+		Password:           in.Password,
+		Nickname:           in.MemberName,
+		Phone:              in.Phone,
+		MemberStatus:       0,
+		CreateTime:         time.Now(),
+		SourceType:         0,
+		Integration:        0,
+		Growth:             0,
+		LotteryCount:       0,
+		HistoryIntegration: 0,
 	}
 	err := query.UmsMember.WithContext(l.ctx).Create(member)
 

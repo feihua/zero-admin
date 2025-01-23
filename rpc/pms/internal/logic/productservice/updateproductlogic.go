@@ -98,8 +98,8 @@ func (l *UpdateProductLogic) UpdateProduct(in *pmsclient.UpdateProductReq) (*pms
 		return nil, err
 	}
 
-	//根据促销类型设置价格：会员价格、阶梯价格、满减价格
-	//2.会员价格
+	// 根据促销类型设置价格：会员价格、阶梯价格、满减价格
+	// 2.会员价格
 	memberPrice := query.PmsMemberPrice.WithContext(l.ctx)
 	_, _ = memberPrice.Where(query.PmsMemberPrice.ProductID.Eq(productId)).Delete()
 	for _, list := range in.MemberPriceList {
@@ -111,7 +111,7 @@ func (l *UpdateProductLogic) UpdateProduct(in *pmsclient.UpdateProductReq) (*pms
 		})
 	}
 
-	//3.阶梯价格
+	// 3.阶梯价格
 	ladder := query.PmsProductLadder.WithContext(l.ctx)
 	_, _ = ladder.Where(query.PmsProductLadder.ProductID.Eq(productId)).Delete()
 	for _, list := range in.ProductLadderList {
@@ -122,7 +122,7 @@ func (l *UpdateProductLogic) UpdateProduct(in *pmsclient.UpdateProductReq) (*pms
 			Price:     list.Price,
 		})
 	}
-	//4.满减价格
+	// 4.满减价格
 	full := query.PmsProductFullReduction.WithContext(l.ctx)
 	_, _ = full.Where(query.PmsProductFullReduction.ProductID.Eq(productId)).Delete()
 	for _, list := range in.ProductFullReductionList {
@@ -133,7 +133,7 @@ func (l *UpdateProductLogic) UpdateProduct(in *pmsclient.UpdateProductReq) (*pms
 		})
 	}
 
-	//5.更新sku库存信息
+	// 5.更新sku库存信息
 	sku := query.PmsSkuStock.WithContext(l.ctx)
 	_, _ = sku.Where(query.PmsSkuStock.ProductID.Eq(productId)).Delete()
 	for _, list := range in.SkuStockList {
@@ -153,14 +153,14 @@ func (l *UpdateProductLogic) UpdateProduct(in *pmsclient.UpdateProductReq) (*pms
 			SpData:         list.SpData,
 		})
 	}
-	//6.更新商品参数,添加自定义商品规格
+	// 6.更新商品参数,添加自定义商品规格
 	attr := query.PmsProductAttributeValue.WithContext(l.ctx)
 	_, _ = attr.Where(query.PmsProductAttributeValue.ProductID.Eq(productId)).Delete()
 	for _, list := range in.ProductAttributeValueList {
 		_ = attr.Create(&model.PmsProductAttributeValue{
 			ProductID:          productId,
 			ProductAttributeID: list.ProductAttributeId,
-			Value:              &list.AttributeValues,
+			Value:              list.AttributeValues,
 		})
 	}
 

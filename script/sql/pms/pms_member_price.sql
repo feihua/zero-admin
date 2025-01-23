@@ -2,10 +2,10 @@ create table pms_member_price
 (
     id                bigint auto_increment
         primary key,
-    product_id        bigint         not null comment '商品id',
-    member_level_id   bigint         not null comment '会员等级id',
-    member_price bigint not null comment '会员价格',
-    member_level_name varchar(100)   not null comment '会员等级名称'
+    product_id        bigint       not null comment '商品id',
+    member_level_id   bigint       not null comment '会员等级id',
+    member_price      bigint       not null comment '会员价格',
+    member_level_name varchar(100) not null comment '会员等级名称'
 )
     comment '商品会员价格表';
 

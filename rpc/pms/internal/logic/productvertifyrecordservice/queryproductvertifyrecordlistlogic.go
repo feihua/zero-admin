@@ -48,7 +48,7 @@ func (l *QueryProductVertifyRecordListLogic) QueryProductVertifyRecordList(in *p
 			Id:         item.ID,
 			ProductId:  item.ProductID,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
-			VertifyMan: item.VertifyMan,
+			VertifyMan: item.ReviewMan,
 			Status:     item.Status,
 			Detail:     item.Detail,
 		})

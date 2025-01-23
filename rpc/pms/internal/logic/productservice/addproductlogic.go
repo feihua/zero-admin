@@ -52,7 +52,7 @@ func (l *AddProductLogic) AddProduct(in *pmsclient.AddProductReq) (*pmsclient.Ad
 		PromotionEndTime, _ = time.Parse("2006-01-02 15:04:05", in.PromotionEndTime)
 	}
 
-	//1.创建商品
+	// 1.创建商品
 	product := model.PmsProduct{
 		BrandID:                    in.BrandId,
 		ProductCategoryID:          in.ProductCategoryId,
@@ -104,9 +104,9 @@ func (l *AddProductLogic) AddProduct(in *pmsclient.AddProductReq) (*pmsclient.Ad
 	}
 
 	productId := product.ID
-	//根据促销类型设置价格：会员价格、阶梯价格、满减价格
-	//根据促销类型设置价格：会员价格、阶梯价格、满减价格
-	//2.会员价格
+	// 根据促销类型设置价格：会员价格、阶梯价格、满减价格
+	// 根据促销类型设置价格：会员价格、阶梯价格、满减价格
+	// 2.会员价格
 	memberPrice := query.PmsMemberPrice.WithContext(l.ctx)
 	for _, list := range in.MemberPriceList {
 		_ = memberPrice.Create(&model.PmsMemberPrice{
@@ -117,7 +117,7 @@ func (l *AddProductLogic) AddProduct(in *pmsclient.AddProductReq) (*pmsclient.Ad
 		})
 	}
 
-	//3.阶梯价格
+	// 3.阶梯价格
 	ladder := query.PmsProductLadder.WithContext(l.ctx)
 	for _, list := range in.ProductLadderList {
 		_ = ladder.Create(&model.PmsProductLadder{
@@ -127,7 +127,7 @@ func (l *AddProductLogic) AddProduct(in *pmsclient.AddProductReq) (*pmsclient.Ad
 			Price:     list.Price,
 		})
 	}
-	//4.满减价格
+	// 4.满减价格
 	full := query.PmsProductFullReduction.WithContext(l.ctx)
 	for _, list := range in.ProductFullReductionList {
 		_ = full.Create(&model.PmsProductFullReduction{
@@ -137,7 +137,7 @@ func (l *AddProductLogic) AddProduct(in *pmsclient.AddProductReq) (*pmsclient.Ad
 		})
 	}
 
-	//5.更新sku库存信息
+	// 5.更新sku库存信息
 	sku := query.PmsSkuStock.WithContext(l.ctx)
 	for _, list := range in.SkuStockList {
 		if list.SkuCode == "" {
@@ -156,13 +156,13 @@ func (l *AddProductLogic) AddProduct(in *pmsclient.AddProductReq) (*pmsclient.Ad
 			SpData:         list.SpData,
 		})
 	}
-	//6.更新商品参数,添加自定义商品规格
+	// 6.更新商品参数,添加自定义商品规格
 	attr := query.PmsProductAttributeValue.WithContext(l.ctx)
 	for _, list := range in.ProductAttributeValueList {
 		_ = attr.Create(&model.PmsProductAttributeValue{
 			ProductID:          productId,
 			ProductAttributeID: list.ProductAttributeId,
-			Value:              &list.AttributeValues,
+			Value:              list.AttributeValues,
 		})
 	}
 

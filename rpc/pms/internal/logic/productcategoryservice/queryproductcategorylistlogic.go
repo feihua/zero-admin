@@ -62,7 +62,7 @@ func (l *QueryProductCategoryListLogic) QueryProductCategoryList(in *pmsclient.Q
 			Sort:         item.Sort,
 			Icon:         item.Icon,
 			Keywords:     item.Keywords,
-			Description:  *item.Description,
+			Description:  item.Description,
 		})
 	}
 

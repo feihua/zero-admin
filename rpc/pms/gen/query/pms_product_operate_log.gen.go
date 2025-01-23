@@ -45,22 +45,23 @@ func newPmsProductOperateLog(db *gorm.DB, opts ...gen.DOOption) pmsProductOperat
 	return _pmsProductOperateLog
 }
 
+// pmsProductOperateLog 商品操作日志
 type pmsProductOperateLog struct {
 	pmsProductOperateLogDo pmsProductOperateLogDo
 
 	ALL              field.Asterisk
 	ID               field.Int64
-	ProductID        field.Int64
-	PriceOld         field.Int64
-	PriceNew         field.Int64
-	SalePriceOld     field.Int64
-	SalePriceNew     field.Int64
-	GiftPointOld     field.Int32 // 赠送的积分
-	GiftPointNew     field.Int32
-	UsePointLimitOld field.Int32
-	UsePointLimitNew field.Int32
+	ProductID        field.Int64  // 产品id
+	PriceOld         field.Int64  // 原价
+	PriceNew         field.Int64  // 新价格
+	SalePriceOld     field.Int64  // 原售价
+	SalePriceNew     field.Int64  // 新售价
+	GiftPointOld     field.Int32  // 赠送的积分
+	GiftPointNew     field.Int32  // 新的积分
+	UsePointLimitOld field.Int32  // 使用积分限制
+	UsePointLimitNew field.Int32  // 新的使用积分限制
 	OperateMan       field.String // 操作人
-	CreateTime       field.Time
+	CreateTime       field.Time   // 创建时间
 
 	fieldMap map[string]field.Expr
 }

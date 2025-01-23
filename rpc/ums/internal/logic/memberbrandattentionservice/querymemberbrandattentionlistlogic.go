@@ -53,7 +53,7 @@ func (l *QueryMemberBrandAttentionListLogic) QueryMemberBrandAttentionList(in *u
 			BrandId:    item.BrandID,
 			BrandName:  item.BrandName,
 			BrandLogo:  item.BrandLogo,
-			BrandCity:  *item.BrandCity,
+			BrandCity:  item.BrandCity,
 			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
 		})
 	}

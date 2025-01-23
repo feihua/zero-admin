@@ -2,8 +2,8 @@ create table pms_product_category_attribute_relation
 (
     id                   bigint auto_increment
         primary key,
-    product_category_id  bigint not null,
-    product_attribute_id bigint not null
+    product_category_id  bigint not null comment '商品分类id',
+    product_attribute_id bigint not null comment '商品属性id'
 )
     comment '产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）';
 

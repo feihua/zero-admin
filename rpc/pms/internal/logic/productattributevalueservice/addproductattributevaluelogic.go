@@ -35,7 +35,7 @@ func (l *AddProductAttributeValueLogic) AddProductAttributeValue(in *pmsclient.A
 	err := query.PmsProductAttributeValue.WithContext(l.ctx).Create(&model.PmsProductAttributeValue{
 		ProductID:          in.ProductId,
 		ProductAttributeID: in.ProductAttributeId,
-		Value:              &in.Value,
+		Value:              in.Value,
 	})
 
 	if err != nil {

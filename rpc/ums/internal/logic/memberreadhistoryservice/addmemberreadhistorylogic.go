@@ -40,7 +40,7 @@ func (l *AddMemberReadHistoryLogic) AddMemberReadHistory(in *umsclient.AddMember
 		ProductID:       in.ProductId,
 		ProductName:     in.ProductName,
 		ProductPic:      in.ProductPic,
-		ProductSubTitle: &in.ProductSubTitle,
+		ProductSubTitle: in.ProductSubTitle,
 		ProductPrice:    in.ProductPrice,
 		CreateTime:      time.Now(),
 	})
