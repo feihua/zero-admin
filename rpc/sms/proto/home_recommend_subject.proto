@@ -10,10 +10,11 @@ message AddHomeRecommendSubjectReq {
 
 }
 message HomeRecommendSubjectAddData {
-  int64 SubjectId = 1; //专题id
-  string SubjectName = 2; //专题名称
-  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 4; //排序
+  int64 id = 1; //
+  int64 subject_id = 2; //专题id
+  string subject_name = 3; //专题名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
 
 }
 message AddHomeRecommendSubjectResp {
@@ -75,10 +76,10 @@ message QueryHomeRecommendSubjectListReq {
 
 message HomeRecommendSubjectListData {
   int64 id = 1; //
-  int32 recommend_status = 2; //推荐状态：0->不推荐;1->推荐
-  int32 sort = 3; //排序
-  int64 subject_id = 4; //专题id
-  string subject_name = 5; //专题名称
+  int64 subject_id = 2; //专题id
+  string subject_name = 3; //专题名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
 
 }
 

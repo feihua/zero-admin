@@ -6,12 +6,13 @@ option go_package = "./proto";
 
 // 添加限时购通知记录
 message AddFlashPromotionLogReq {
-  string subscribe_time = 1; //会员订阅时间
+  int64 id = 1; //编号
   int64 member_id = 2; //会员id
-  string member_phone = 3; //会员电话
-  int64 product_id = 4; //商品id
+  int64 product_id = 3; //商品id
+  string member_phone = 4; //会员电话
   string product_name = 5; //商品名称
-  string send_time = 6; //发送时间
+  string subscribe_time = 6; //会员订阅时间
+  string send_time = 7; //发送时间
 
 
 }
@@ -38,12 +39,11 @@ message QueryFlashPromotionLogDetailReq {
 message QueryFlashPromotionLogDetailResp {
   int64 id = 1; //编号
   int64 member_id = 2; //会员id
-  string member_phone = 3; //会员电话
-  int64 product_id = 4; //商品id
+  int64 product_id = 3; //商品id
+  string member_phone = 4; //会员电话
   string product_name = 5; //商品名称
-  string send_time = 6; //发送时间
-  string subscribe_time = 7; //会员订阅时间
-
+  string subscribe_time = 6; //会员订阅时间
+  string send_time = 7; //发送时间
 }
 
 // 分页查询限时购通知记录列表
@@ -58,11 +58,11 @@ message QueryFlashPromotionLogListReq {
 message FlashPromotionLogListData {
   int64 id = 1; //编号
   int64 member_id = 2; //会员id
-  string member_phone = 3; //会员电话
-  int64 product_id = 4; //商品id
+  int64 product_id = 3; //商品id
+  string member_phone = 4; //会员电话
   string product_name = 5; //商品名称
-  string send_time = 6; //发送时间
-  string subscribe_time = 7; //会员订阅时间
+  string subscribe_time = 6; //会员订阅时间
+  string send_time = 7; //发送时间
 
 }
 

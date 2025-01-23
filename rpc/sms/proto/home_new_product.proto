@@ -10,10 +10,11 @@ message AddHomeNewProductReq {
 
 }
 message HomeNewProductAddData {
-  int64 ProductId = 1; //商品id
-  string ProductName = 2; //商品名称
-  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 4; //排序
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string product_name = 3; //商品名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
 
 }
 message AddHomeNewProductResp {

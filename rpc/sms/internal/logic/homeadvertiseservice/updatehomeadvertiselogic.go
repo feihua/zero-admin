@@ -38,18 +38,18 @@ func (l *UpdateHomeAdvertiseLogic) UpdateHomeAdvertise(in *smsclient.UpdateHomeA
 
 	q := query.SmsHomeAdvertise
 	_, err := q.WithContext(l.ctx).Updates(&model.SmsHomeAdvertise{
-		ID:         in.Id,
-		Name:       in.Name,
-		Type:       in.Type,
-		Pic:        in.Pic,
-		StartTime:  StartTime,
-		EndTime:    EndTime,
-		Status:     in.Status,
-		ClickCount: in.ClickCount,
-		OrderCount: in.OrderCount,
-		URL:        in.Url,
-		Note:       &in.Note,
-		Sort:       in.Sort,
+		ID:         in.Id,         //
+		Name:       in.Name,       // 名称
+		Type:       in.Type,       // 轮播位置：0->PC首页轮播；1->app首页轮播
+		Pic:        in.Pic,        // 图片地址
+		StartTime:  StartTime,     // 开始时间
+		EndTime:    EndTime,       // 结束时间
+		Status:     in.Status,     // 上下线状态：0->下线；1->上线
+		ClickCount: in.ClickCount, // 点击数
+		OrderCount: in.OrderCount, // 下单数
+		URL:        in.Url,        // 链接地址
+		Note:       in.Note,       // 备注
+		Sort:       in.Sort,       // 排序
 	})
 
 	if err != nil {

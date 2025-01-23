@@ -5,7 +5,7 @@ create table sms_flash_promotion
     title       varchar(200) not null comment '标题',
     start_date  date         not null comment '开始日期',
     end_date    date         not null comment '结束日期',
-    status tinyint not null comment '上下线状态',
+    status      tinyint      not null comment '上下线状态',
     create_time datetime     not null comment '创建时间'
 )
     comment '限时购表';

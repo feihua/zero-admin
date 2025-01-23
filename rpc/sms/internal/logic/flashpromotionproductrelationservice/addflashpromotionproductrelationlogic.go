@@ -35,13 +35,13 @@ func (l *AddFlashPromotionProductRelationLogic) AddFlashPromotionProductRelation
 	var data []*model.SmsFlashPromotionProductRelation
 	for _, item := range in.Data {
 		data = append(data, &model.SmsFlashPromotionProductRelation{
-			FlashPromotionID:        item.FlashPromotionId,
-			FlashPromotionSessionID: item.FlashPromotionSessionId,
-			ProductID:               item.ProductId,
-			FlashPromotionPrice:     item.FlashPromotionPrice,
-			FlashPromotionCount:     item.FlashPromotionCount,
-			FlashPromotionLimit:     item.FlashPromotionLimit,
-			Sort:                    item.Sort,
+			FlashPromotionID:        item.FlashPromotionId,        // 限时购id
+			FlashPromotionSessionID: item.FlashPromotionSessionId, // 编号
+			ProductID:               item.ProductId,               // 商品id
+			FlashPromotionPrice:     item.FlashPromotionPrice,     // 限时购价格
+			FlashPromotionCount:     item.FlashPromotionCount,     // 限时购数量
+			FlashPromotionLimit:     item.FlashPromotionLimit,     // 每人限购数量
+			Sort:                    item.Sort,                    // 排序
 		})
 	}
 

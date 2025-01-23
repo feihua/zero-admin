@@ -6,13 +6,11 @@ option go_package = "./proto";
 
 // 添加限时购场次表
 message AddFlashPromotionSessionReq {
-  string start_time = 1; //每日开始时间
-  string end_time = 2; //每日结束时间
-  int32 status = 3; //启用状态：0->不启用；1->启用
-  string name = 4; //场次名称
-
-
-
+  int64 id = 1; //编号
+  string name = 2; //场次名称
+  string start_time = 3; //每日开始时间
+  string end_time = 4; //每日结束时间
+  int32 status = 5; //启用状态：0->不启用；1->启用
 }
 
 message AddFlashPromotionSessionResp {
@@ -30,13 +28,11 @@ message DeleteFlashPromotionSessionResp {
 
 // 更新限时购场次表
 message UpdateFlashPromotionSessionReq {
-  int32 status = 1; //启用状态：0->不启用；1->启用
-  string end_time = 2; //每日结束时间
-  int64 id = 3; //编号
-  string name = 4; //场次名称
-  string start_time = 5; //每日开始时间
-
-
+  int64 id = 1; //编号
+  string name = 2; //场次名称
+  string start_time = 3; //每日开始时间
+  string end_time = 4; //每日结束时间
+  int32 status = 5; //启用状态：0->不启用；1->启用
 }
 
 message UpdateFlashPromotionSessionResp {
@@ -60,12 +56,12 @@ message QueryFlashPromotionSessionDetailReq {
 }
 
 message QueryFlashPromotionSessionDetailResp {
-  string create_time = 1; //创建时间
-  string end_time = 2; //每日结束时间
-  int64 id = 3; //编号
-  string name = 4; //场次名称
-  string start_time = 5; //每日开始时间
-  int32 status = 6; //启用状态：0->不启用；1->启用
+  int64 id = 1; //编号
+  string name = 2; //场次名称
+  string start_time = 3; //每日开始时间
+  string end_time = 4; //每日结束时间
+  int32 status = 5; //启用状态：0->不启用；1->启用
+  string create_time = 6; //创建时间
 
 }
 
@@ -81,13 +77,12 @@ message QueryFlashPromotionSessionListReq {
 }
 
 message FlashPromotionSessionListData {
-  string create_time = 1; //创建时间
-  string end_time = 2; //每日结束时间
-  int64 id = 3; //编号
-  string name = 4; //场次名称
-  string start_time = 5; //每日开始时间
-  int32 status = 6; //启用状态：0->不启用；1->启用
-
+  int64 id = 1; //编号
+  string name = 2; //场次名称
+  string start_time = 3; //每日开始时间
+  string end_time = 4; //每日结束时间
+  int32 status = 5; //启用状态：0->不启用；1->启用
+  string create_time = 6; //创建时间
 }
 
 message QueryFlashPromotionSessionListResp {

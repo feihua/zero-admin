@@ -37,11 +37,10 @@ func (l *AddFlashPromotionLogic) AddFlashPromotion(in *smsclient.AddFlashPromoti
 	EndDate, _ := time.Parse("2006-01-02", in.EndDate)
 
 	err := query.SmsFlashPromotion.WithContext(l.ctx).Create(&model.SmsFlashPromotion{
-		Title:      in.Title,
-		StartDate:  StartDate,
-		EndDate:    EndDate,
-		Status:     in.Status,
-		CreateTime: time.Now(),
+		Title:     in.Title,  // 标题
+		StartDate: StartDate, // 开始日期
+		EndDate:   EndDate,   // 结束日期
+		Status:    in.Status, // 上下线状态
 	})
 
 	if err != nil {

@@ -52,11 +52,11 @@ func (l *QueryHomeNewProductListLogic) QueryHomeNewProductList(in *smsclient.Que
 	for _, item := range result {
 
 		list = append(list, &smsclient.HomeNewProductListData{
-			Id:              item.ID,
-			ProductId:       item.ProductID,
-			ProductName:     item.ProductName,
-			RecommendStatus: item.RecommendStatus,
-			Sort:            item.Sort,
+			Id:              item.ID,              //
+			ProductId:       item.ProductID,       // 商品id
+			ProductName:     item.ProductName,     // 商品名称
+			RecommendStatus: item.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
+			Sort:            item.Sort,            // 排序
 		})
 	}
 

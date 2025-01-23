@@ -11,13 +11,14 @@ message AddFlashPromotionProductRelationReq {
 }
 
 message FlashPromotionProductRelationAddData {
-  int64 FlashPromotionId = 1; //限时购id
-  int64 FlashPromotionSessionId = 2; //编号
-  int64 ProductId = 3; //商品id
-  int64 FlashPromotionPrice = 4; //限时购价格
-  int32 FlashPromotionCount = 5; //限时购数量
-  int32 FlashPromotionLimit = 6; //每人限购数量
-  int32 Sort = 7; //排序
+  int64 id = 1; //编号
+  int64 flash_promotion_id = 2; //限时购id
+  int64 flash_promotion_session_id = 3; //编号
+  int64 product_id = 4; //商品id
+  int64 flash_promotion_price = 5; //限时购价格
+  int32 flash_promotion_count = 6; //限时购数量
+  int32 flash_promotion_limit = 7; //每人限购数量
+  int32 sort = 8; //排序
 
 }
 
@@ -37,13 +38,13 @@ message DeleteFlashPromotionProductRelationResp {
 
 // 更新商品限时购与商品关系表
 message UpdateFlashPromotionProductRelationReq {
-  int32 flash_promotion_count = 1; //限时购数量
+  int64 id = 1; //编号
   int64 flash_promotion_id = 2; //限时购id
-  int32 flash_promotion_limit = 3; //每人限购数量
-  int64 flash_promotion_price = 4; //限时购价格
-  int64 flash_promotion_session_id = 5; //编号
-  int64 id = 6; //编号
-  int64 product_id = 7; //商品id
+  int64 flash_promotion_session_id = 3; //编号
+  int64 product_id = 4; //商品id
+  int64 flash_promotion_price = 5; //限时购价格
+  int32 flash_promotion_count = 6; //限时购数量
+  int32 flash_promotion_limit = 7; //每人限购数量
   int32 sort = 8; //排序
 
 }
@@ -59,13 +60,13 @@ message QueryFlashPromotionProductRelationDetailReq {
 }
 
 message QueryFlashPromotionProductRelationDetailResp {
-  int32 flash_promotion_count = 1; //限时购数量
+  int64 id = 1; //编号
   int64 flash_promotion_id = 2; //限时购id
-  int32 flash_promotion_limit = 3; //每人限购数量
-  int64 flash_promotion_price = 4; //限时购价格
-  int64 flash_promotion_session_id = 5; //编号
-  int64 id = 6; //编号
-  int64 product_id = 7; //商品id
+  int64 flash_promotion_session_id = 3; //编号
+  int64 product_id = 4; //商品id
+  int64 flash_promotion_price = 5; //限时购价格
+  int32 flash_promotion_count = 6; //限时购数量
+  int32 flash_promotion_limit = 7; //每人限购数量
   int32 sort = 8; //排序
 
 }
@@ -80,13 +81,13 @@ message QueryFlashPromotionProductRelationListReq {
 }
 
 message FlashPromotionProductRelationListData {
-  int32 flash_promotion_count = 1; //限时购数量
+  int64 id = 1; //编号
   int64 flash_promotion_id = 2; //限时购id
-  int32 flash_promotion_limit = 3; //每人限购数量
-  int64 flash_promotion_price = 4; //限时购价格
-  int64 flash_promotion_session_id = 5; //编号
-  int64 id = 6; //编号
-  int64 product_id = 7; //商品id
+  int64 flash_promotion_session_id = 3; //编号
+  int64 product_id = 4; //商品id
+  int64 flash_promotion_price = 5; //限时购价格
+  int32 flash_promotion_count = 6; //限时购数量
+  int32 flash_promotion_limit = 7; //每人限购数量
   int32 sort = 8; //排序
 
 }

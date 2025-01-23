@@ -64,18 +64,18 @@ func (l *QueryHomeAdvertiseListLogic) QueryHomeAdvertiseList(in *smsclient.Query
 	for _, item := range result {
 
 		list = append(list, &smsclient.HomeAdvertiseListData{
-			Id:         item.ID,
-			Name:       item.Name,
-			Type:       item.Type,
-			Pic:        item.Pic,
-			StartTime:  item.StartTime.Format("2006-01-02 15:04:05"),
-			EndTime:    item.EndTime.Format("2006-01-02 15:04:05"),
-			Status:     item.Status,
-			ClickCount: item.ClickCount,
-			OrderCount: item.OrderCount,
-			Url:        item.URL,
-			Note:       *item.Note,
-			Sort:       item.Sort,
+			Id:         item.ID,                                      //
+			Name:       item.Name,                                    // 名称
+			Type:       item.Type,                                    // 轮播位置：0->PC首页轮播；1->app首页轮播
+			Pic:        item.Pic,                                     // 图片地址
+			StartTime:  item.StartTime.Format("2006-01-02 15:04:05"), // 开始时间
+			EndTime:    item.EndTime.Format("2006-01-02 15:04:05"),   // 结束时间
+			Status:     item.Status,                                  // 上下线状态：0->下线；1->上线
+			ClickCount: item.ClickCount,                              // 点击数
+			OrderCount: item.OrderCount,                              // 下单数
+			Url:        item.URL,                                     // 链接地址
+			Note:       item.Note,                                    // 备注
+			Sort:       item.Sort,                                    // 排序
 		})
 	}
 

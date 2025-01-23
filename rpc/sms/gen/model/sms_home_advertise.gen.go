@@ -22,7 +22,7 @@ type SmsHomeAdvertise struct {
 	ClickCount int32     `gorm:"column:click_count;not null;comment:点击数" json:"click_count"`         // 点击数
 	OrderCount int32     `gorm:"column:order_count;not null;comment:下单数" json:"order_count"`         // 下单数
 	URL        string    `gorm:"column:url;not null;comment:链接地址" json:"url"`                        // 链接地址
-	Note       *string   `gorm:"column:note;comment:备注" json:"note"`                                 // 备注
+	Note       string    `gorm:"column:note;not null;comment:备注" json:"note"`                        // 备注
 	Sort       int32     `gorm:"column:sort;not null;comment:排序" json:"sort"`                        // 排序
 }
 

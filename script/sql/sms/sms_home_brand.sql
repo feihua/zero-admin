@@ -4,7 +4,7 @@ create table sms_home_brand
         primary key,
     brand_id         bigint      not null comment '商品品牌id',
     brand_name       varchar(64) not null comment '商品品牌名称',
-    recommend_status tinyint not null comment '推荐状态：0->不推荐;1->推荐',
+    recommend_status tinyint     not null comment '推荐状态：0->不推荐;1->推荐',
     sort             int         not null comment '排序'
 )
     comment '首页推荐品牌表';

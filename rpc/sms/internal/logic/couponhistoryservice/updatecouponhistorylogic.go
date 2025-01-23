@@ -35,17 +35,16 @@ func NewUpdateCouponHistoryLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *UpdateCouponHistoryLogic) UpdateCouponHistory(in *smsclient.UpdateCouponHistoryReq) (*smsclient.UpdateCouponHistoryResp, error) {
 	q := query.SmsCouponHistory
 	_, err := q.WithContext(l.ctx).Updates(&model.SmsCouponHistory{
-		ID:             in.Id,
-		CouponID:       in.CouponId,
-		MemberID:       in.MemberId,
-		CouponCode:     in.CouponCode,
-		MemberNickname: in.MemberNickname,
-		GetType:        in.GetType,
-		CreateTime:     time.Now(),
-		UseStatus:      in.UseStatus,
-		UseTime:        time.Now(),
-		OrderID:        in.OrderId,
-		OrderSn:        in.OrderSn,
+		ID:             in.Id,             //
+		CouponID:       in.CouponId,       // 优惠券id
+		MemberID:       in.MemberId,       // 会员id
+		CouponCode:     in.CouponCode,     // 优惠码
+		MemberNickname: in.MemberNickname, // 领取人昵称
+		GetType:        in.GetType,        // 获取类型：0->后台赠送；1->主动获取
+		UseStatus:      in.UseStatus,      // 使用状态：0->未使用；1->已使用；2->已过期
+		UseTime:        time.Now(),        // 使用时间
+		OrderID:        in.OrderId,        // 订单编号
+		OrderSn:        in.OrderSn,        // 订单号码
 	})
 
 	if err != nil {

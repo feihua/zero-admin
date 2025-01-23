@@ -28,14 +28,14 @@ func NewUpdateCouponHistoryStatusLogic(ctx context.Context, svcCtx *svc.ServiceC
 // 1.更新用户优惠券状态
 // 2.更新优惠券数量
 func (l *UpdateCouponHistoryStatusLogic) UpdateCouponHistoryStatus(in *smsclient.UpdateCouponHistoryStatusReq) (*smsclient.UpdateCouponHistoryStatusResp, error) {
-	//1.更新用户优惠券状态
+	// 1.更新用户优惠券状态
 	q := query.SmsCouponHistory
 	_, err := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId), q.CouponID.Eq(in.CouponId)).Update(q.UseStatus, in.UseStatus)
 	if err != nil {
 		return nil, err
 	}
 
-	//2.更新优惠券数量
+	// 2.更新优惠券数量
 	var sql string
 	if in.UseStatus == 0 {
 		sql = "update sms_coupon set use_count=use_count+1 where `id` = ? and use_count<count"

@@ -38,11 +38,11 @@ func (l *UpdateFlashPromotionLogic) UpdateFlashPromotion(in *smsclient.UpdateFla
 
 	q := query.SmsFlashPromotion
 	_, err := q.WithContext(l.ctx).Updates(&model.SmsFlashPromotion{
-		ID:        in.Id,
-		Title:     in.Title,
-		StartDate: StartDate,
-		EndDate:   EndDate,
-		Status:    in.Status,
+		ID:        in.Id,     // 编号
+		Title:     in.Title,  // 标题
+		StartDate: StartDate, // 开始日期
+		EndDate:   EndDate,   // 结束日期
+		Status:    in.Status, // 上下线状态
 	})
 
 	if err != nil {

@@ -35,12 +35,12 @@ func NewAddFlashPromotionLogLogic(ctx context.Context, svcCtx *svc.ServiceContex
 func (l *AddFlashPromotionLogLogic) AddFlashPromotionLog(in *smsclient.AddFlashPromotionLogReq) (*smsclient.AddFlashPromotionLogResp, error) {
 	SubscribeTime, _ := time.Parse("2006-01-02 15:04:05", in.SubscribeTime)
 	err := query.SmsFlashPromotionLog.WithContext(l.ctx).Create(&model.SmsFlashPromotionLog{
-		MemberID:      in.MemberId,
-		ProductID:     in.ProductId,
-		MemberPhone:   in.MemberPhone,
-		ProductName:   in.ProductName,
-		SubscribeTime: SubscribeTime,
-		SendTime:      time.Now(),
+		MemberID:      in.MemberId,    // 会员id
+		ProductID:     in.ProductId,   // 商品id
+		MemberPhone:   in.MemberPhone, // 会员电话
+		ProductName:   in.ProductName, // 商品名称
+		SubscribeTime: SubscribeTime,  // 会员订阅时间
+		SendTime:      time.Now(),     // 发送时间
 	})
 
 	if err != nil {

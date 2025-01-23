@@ -6,10 +6,11 @@ option go_package = "./proto";
 
 // 添加限时购表
 message AddFlashPromotionReq {
-  string end_date = 1; //结束日期
-  string start_date = 2; //开始日期
-  int32 status = 3; //上下线状态
-  string title = 4; //标题
+  int64 id = 1; //编号
+  string title = 2; //标题
+  string start_date = 3; //开始日期
+  string end_date = 4; //结束日期
+  int32 status = 5; //上下线状态
 
 }
 
@@ -28,10 +29,10 @@ message DeleteFlashPromotionResp {
 
 // 更新限时购表
 message UpdateFlashPromotionReq {
-  string title = 1; //标题
-  string end_date = 2; //结束日期
-  int64 id = 3; //编号
-  string start_date = 4; //开始日期
+  int64 id = 1; //编号
+  string title = 2; //标题
+  string start_date = 3; //开始日期
+  string end_date = 4; //结束日期
   int32 status = 5; //上下线状态
 
 
@@ -57,12 +58,12 @@ message QueryFlashPromotionDetailReq {
 }
 
 message QueryFlashPromotionDetailResp {
-  string create_time = 1; //创建时间
-  string end_date = 2; //结束日期
-  int64 id = 3; //编号
-  string start_date = 4; //开始日期
+  int64 id = 1; //编号
+  string title = 2; //标题
+  string start_date = 3; //开始日期
+  string end_date = 4; //结束日期
   int32 status = 5; //上下线状态
-  string title = 6; //标题
+  string create_time = 6; //创建时间
 
 }
 
@@ -78,12 +79,12 @@ message QueryFlashPromotionListReq {
 }
 
 message FlashPromotionListData {
-  string create_time = 1; //创建时间
-  string end_date = 2; //结束日期
-  int64 id = 3; //编号
-  string start_date = 4; //开始日期
+  int64 id = 1; //编号
+  string title = 2; //标题
+  string start_date = 3; //开始日期
+  string end_date = 4; //结束日期
   int32 status = 5; //上下线状态
-  string title = 6; //标题
+  string create_time = 6; //创建时间
 
 }
 

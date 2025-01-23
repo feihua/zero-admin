@@ -40,25 +40,26 @@ func (l *UpdateCouponLogic) UpdateCoupon(in *smsclient.AddOrUpdateCouponReq) (*s
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
 	EnableTime, _ := time.Parse("2006-01-02 15:04:05", in.EnableTime)
 
-	//1.更新优惠券表
+	// 1.更新优惠券表
 	_, err := query.SmsCoupon.WithContext(l.ctx).Updates(&model.SmsCoupon{
-		ID:           in.Id,
-		Type:         in.Type,
-		Name:         in.Name,
-		Platform:     in.Platform,
-		Amount:       in.Amount,
-		PerLimit:     in.PerLimit,
-		MinPoint:     in.MinPoint,
-		StartTime:    StartTime,
-		EndTime:      EndTime,
-		UseType:      in.UseType,
-		Note:         in.Note,
-		PublishCount: in.PublishCount,
-		UseCount:     in.UseCount,
-		ReceiveCount: in.ReceiveCount,
-		EnableTime:   EnableTime,
-		Code:         in.Code,
-		MemberLevel:  in.MemberLevel,
+		ID:           in.Id,           //
+		Type:         in.Type,         // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+		Name:         in.Name,         // 名称
+		Platform:     in.Platform,     // 使用平台：0->全部；1->移动；2->PC
+		Count:        in.Count,        // 数量
+		Amount:       in.Amount,       // 金额
+		PerLimit:     in.PerLimit,     // 每人限领张数
+		MinPoint:     in.MinPoint,     // 使用门槛；0表示无门槛
+		StartTime:    StartTime,       // 开始时间
+		EndTime:      EndTime,         // 结束时间
+		UseType:      in.UseType,      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+		Note:         in.Note,         // 备注
+		PublishCount: in.PublishCount, // 发行数量
+		UseCount:     in.UseCount,     // 已使用数量
+		ReceiveCount: in.ReceiveCount, // 领取数量
+		EnableTime:   EnableTime,      // 可以领取的日期
+		Code:         in.Code,         // 优惠码
+		MemberLevel:  in.MemberLevel,  // 可领取的会员类型：0->无限时
 	})
 
 	if err != nil {

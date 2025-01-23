@@ -10,10 +10,11 @@ message AddHomeBrandReq {
 
 }
 message HomeBrandAddData {
-  int64 BrandId = 1; //商品品牌id
-  string BrandName = 2; //商品品牌名称
-  int32 RecommendStatus = 3; //推荐状态：0->不推荐;1->推荐
-  int32 Sort = 4; //排序
+  int64 id = 1; //
+  int64 brand_id = 2; //商品品牌id
+  string brand_name = 3; //商品品牌名称
+  int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
+  int32 sort = 5; //排序
 
 }
 
@@ -76,9 +77,9 @@ message QueryHomeBrandListReq {
 }
 
 message HomeBrandListData {
-  int64 brand_id = 1; //商品品牌id
-  string brand_name = 2; //商品品牌名称
-  int64 id = 3; //
+  int64 id = 1; //
+  int64 brand_id = 2; //商品品牌id
+  string brand_name = 3; //商品品牌名称
   int32 recommend_status = 4; //推荐状态：0->不推荐;1->推荐
   int32 sort = 5; //排序
 

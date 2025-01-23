@@ -37,10 +37,10 @@ func (l *AddHomeNewProductLogic) AddHomeNewProduct(in *smsclient.AddHomeNewProdu
 		homeBrand, _ := q.WithContext(l.ctx).Where(q.ProductID.Eq(data.ProductId)).First()
 		if homeBrand == nil {
 			err := q.WithContext(l.ctx).Create(&model.SmsHomeNewProduct{
-				ProductID:       data.ProductId,
-				ProductName:     data.ProductName,
-				RecommendStatus: data.RecommendStatus,
-				Sort:            data.Sort,
+				ProductID:       data.ProductId,       // 商品id
+				ProductName:     data.ProductName,     // 商品名称
+				RecommendStatus: data.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
+				Sort:            data.Sort,            // 排序
 			})
 			if err != nil {
 				return nil, err

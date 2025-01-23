@@ -37,13 +37,13 @@ func (l *AddHomeBrandLogic) AddHomeBrand(in *smsclient.AddHomeBrandReq) (*smscli
 	var brands []*model.SmsHomeBrand
 	for _, item := range in.BrandAddData {
 		homeBrand, _ := q.WithContext(l.ctx).Where(q.BrandID.Eq(item.BrandId)).First()
-		//存在的时候不添加
+		// 存在的时候不添加
 		if homeBrand == nil {
 			brands = append(brands, &model.SmsHomeBrand{
-				BrandID:         item.BrandId,
-				BrandName:       item.BrandName,
-				RecommendStatus: item.RecommendStatus,
-				Sort:            item.Sort,
+				BrandID:         item.BrandId,         // 商品品牌id
+				BrandName:       item.BrandName,       // 商品品牌名称
+				RecommendStatus: item.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
+				Sort:            item.Sort,            // 排序
 			})
 		}
 

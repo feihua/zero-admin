@@ -22,25 +22,26 @@ message CouponProductRelationData{
 
 }
 message AddOrUpdateCouponReq {
-  int64 Id = 1; //
-  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  string Name = 3; //名称
-  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
-  int32 MemberLevel = 5; //可领取的会员类型：0->无限时
-  int64 Amount = 6; //金额
-  int32 PerLimit = 7; //每人限领张数
-  int64 MinPoint = 8; //使用门槛；0表示无门槛
-  string StartTime = 9; //开始时间
-  string EndTime = 10; //结束时间
-  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
-  string Note = 12; //备注
-  int32 PublishCount = 13; //发行数量
-  int32 UseCount = 14; //已使用数量
-  int32 ReceiveCount = 15; //领取数量
-  string EnableTime = 16; //可以领取的日期
-  string Code = 17; //优惠码
-  repeated CouponProductRelationData CouponProductRelationList = 18;//优惠券绑定的商品
-  repeated CouponProductCategoryRelationData CouponProductCategoryRelationList = 19;//优惠券绑定的商品分类
+  int64 id = 1; //
+  int32 type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string name = 3; //名称
+  int32 platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 count = 5; //数量
+  int64 amount = 6; //金额
+  int32 per_limit = 7; //每人限领张数
+  int64 min_point = 8; //使用门槛；0表示无门槛
+  string start_time = 9; //开始时间
+  string end_time = 10; //结束时间
+  int32 use_type = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  string note = 12; //备注
+  int32 publish_count = 13; //发行数量
+  int32 use_count = 14; //已使用数量
+  int32 receive_count = 15; //领取数量
+  string enable_time = 16; //可以领取的日期
+  string code = 17; //优惠码
+  int32 member_level = 18; //可领取的会员类型：0->无限时
+  repeated CouponProductRelationData CouponProductRelationList = 19;//优惠券绑定的商品
+  repeated CouponProductCategoryRelationData CouponProductCategoryRelationList = 20;//优惠券绑定的商品分类
 
 }
 
@@ -69,24 +70,24 @@ message QueryCouponListReq {
 }
 
 message QueryCouponListData {
-  int64 Id = 1; //
-  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  string Name = 3; //名称
-  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
-  int32 Count = 5; //数量
-  int64 Amount = 6; //金额
-  int32 PerLimit = 7; //每人限领张数
-  int64 MinPoint = 8; //使用门槛；0表示无门槛
-  string StartTime = 9; //开始时间
-  string EndTime = 10; //结束时间
-  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
-  string Note = 12; //备注
-  int32 PublishCount = 13; //发行数量
-  int32 UseCount = 14; //已使用数量
-  int32 ReceiveCount = 15; //领取数量
-  string EnableTime = 16; //可以领取的日期
-  string Code = 17; //优惠码
-  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
+  int64 id = 1; //
+  int32 type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string name = 3; //名称
+  int32 platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 count = 5; //数量
+  int64 amount = 6; //金额
+  int32 per_limit = 7; //每人限领张数
+  int64 min_point = 8; //使用门槛；0表示无门槛
+  string start_time = 9; //开始时间
+  string end_time = 10; //结束时间
+  int32 use_type = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  string note = 12; //备注
+  int32 publish_count = 13; //发行数量
+  int32 use_count = 14; //已使用数量
+  int32 receive_count = 15; //领取数量
+  string enable_time = 16; //可以领取的日期
+  string code = 17; //优惠码
+  int32 member_level = 18; //可领取的会员类型：0->无限时
 
 }
 
@@ -100,24 +101,24 @@ message QueryCouponFindByIdReq {
 }
 
 message QueryCouponFindByIdResp {
-  int64 Id = 1; //
-  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  string Name = 3; //名称
-  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
-  int32 Count = 5; //数量
-  int64 Amount = 6; //金额
-  int32 PerLimit = 7; //每人限领张数
-  int64 MinPoint = 8; //使用门槛；0表示无门槛
-  string StartTime = 9; //开始时间
-  string EndTime = 10; //结束时间
-  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
-  string Note = 12; //备注
-  int32 PublishCount = 13; //发行数量
-  int32 UseCount = 14; //已使用数量
-  int32 ReceiveCount = 15; //领取数量
-  string EnableTime = 16; //可以领取的日期
-  string Code = 17; //优惠码
-  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
+  int64 id = 1; //
+  int32 type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string name = 3; //名称
+  int32 platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 count = 5; //数量
+  int64 amount = 6; //金额
+  int32 per_limit = 7; //每人限领张数
+  int64 min_point = 8; //使用门槛；0表示无门槛
+  string start_time = 9; //开始时间
+  string end_time = 10; //结束时间
+  int32 use_type = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  string note = 12; //备注
+  int32 publish_count = 13; //发行数量
+  int32 use_count = 14; //已使用数量
+  int32 receive_count = 15; //领取数量
+  string enable_time = 16; //可以领取的日期
+  string code = 17; //优惠码
+  int32 member_level = 18; //可领取的会员类型：0->无限时
   repeated CouponProductRelationData CouponProductRelationList = 19;//优惠券绑定的商品
   repeated CouponProductCategoryRelationData CouponProductCategoryRelationList = 20;//优惠券绑定的商品分类
 }

@@ -47,14 +47,14 @@ func (l *QueryFlashPromotionProductRelationListLogic) QueryFlashPromotionProduct
 	for _, item := range result {
 
 		list = append(list, &smsclient.FlashPromotionProductRelationListData{
-			Id:                      item.ID,
-			FlashPromotionId:        item.FlashPromotionID,
-			FlashPromotionSessionId: item.FlashPromotionSessionID,
-			ProductId:               item.ProductID,
-			FlashPromotionPrice:     item.FlashPromotionPrice,
-			FlashPromotionCount:     item.FlashPromotionCount,
-			FlashPromotionLimit:     item.FlashPromotionLimit,
-			Sort:                    item.Sort,
+			Id:                      item.ID,                      // 编号
+			FlashPromotionId:        item.FlashPromotionID,        // 限时购id
+			FlashPromotionSessionId: item.FlashPromotionSessionID, // 编号
+			ProductId:               item.ProductID,               // 商品id
+			FlashPromotionPrice:     item.FlashPromotionPrice,     // 限时购价格
+			FlashPromotionCount:     item.FlashPromotionCount,     // 限时购数量
+			FlashPromotionLimit:     item.FlashPromotionLimit,     // 每人限购数量
+			Sort:                    item.Sort,                    // 排序
 		})
 	}
 

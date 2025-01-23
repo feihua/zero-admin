@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
@@ -34,11 +32,10 @@ func NewAddFlashPromotionSessionLogic(ctx context.Context, svcCtx *svc.ServiceCo
 // AddFlashPromotionSession 添加限时购场次表
 func (l *AddFlashPromotionSessionLogic) AddFlashPromotionSession(in *smsclient.AddFlashPromotionSessionReq) (*smsclient.AddFlashPromotionSessionResp, error) {
 	err := query.SmsFlashPromotionSession.WithContext(l.ctx).Create(&model.SmsFlashPromotionSession{
-		Name:       in.Name,
-		StartTime:  in.StartTime,
-		EndTime:    in.EndTime,
-		Status:     in.Status,
-		CreateTime: time.Now(),
+		Name:      in.Name,      // 场次名称
+		StartTime: in.StartTime, // 每日开始时间
+		EndTime:   in.EndTime,   // 每日结束时间
+		Status:    in.Status,    // 启用状态：0->不启用；1->启用
 	})
 
 	if err != nil {

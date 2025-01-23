@@ -45,13 +45,13 @@ func (l *QueryFlashPromotionLogListLogic) QueryFlashPromotionLogList(in *smsclie
 	for _, item := range result {
 
 		list = append(list, &smsclient.FlashPromotionLogListData{
-			Id:            item.ID,
-			MemberId:      item.MemberID,
-			ProductId:     item.ProductID,
-			MemberPhone:   item.MemberPhone,
-			ProductName:   item.ProductName,
-			SubscribeTime: item.SubscribeTime.Format("2006-01-02 15:04:05"),
-			SendTime:      item.SendTime.Format("2006-01-02 15:04:05"),
+			Id:            item.ID,                                          // 编号
+			MemberId:      item.MemberID,                                    // 会员id
+			ProductId:     item.ProductID,                                   // 商品id
+			MemberPhone:   item.MemberPhone,                                 // 会员电话
+			ProductName:   item.ProductName,                                 // 商品名称
+			SubscribeTime: item.SubscribeTime.Format("2006-01-02 15:04:05"), // 会员订阅时间
+			SendTime:      item.SendTime.Format("2006-01-02 15:04:05"),      // 发送时间
 		})
 	}
 

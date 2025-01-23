@@ -6,13 +6,13 @@ option go_package = "./proto";
 
 // 添加优惠券使用、领取历史表
 message AddCouponHistoryReq {
-  string coupon_code = 1; //优惠码
+  int64 id = 1; //
   int64 coupon_id = 2; //优惠券id
-  int32 get_type = 3; //获取类型：0->后台赠送；1->主动获取
-  int64 member_id = 4; //会员id
+  int64 member_id = 3; //会员id
+  string coupon_code = 4; //优惠码
   string member_nickname = 5; //领取人昵称
-  int32 use_status = 6; //使用状态：0->未使用；1->已使用；2->已过期
-
+  int32 get_type = 6; //获取类型：0->后台赠送；1->主动获取
+  int32 use_status = 8; //使用状态：0->未使用；1->已使用；2->已过期
 }
 
 message AddCouponHistoryResp {
@@ -30,17 +30,16 @@ message DeleteCouponHistoryResp {
 
 // 更新优惠券使用、领取历史表
 message UpdateCouponHistoryReq {
-  string coupon_code = 1; //优惠码
+  int64 id = 1; //
   int64 coupon_id = 2; //优惠券id
-  string create_time = 3; //领取时间
-  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
-  int64 id = 5; //
-  int64 member_id = 6; //会员id
-  string member_nickname = 7; //领取人昵称
-  int64 order_id = 8; //订单编号
-  string order_sn = 9; //订单号码
-  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
-  string use_time = 11; //使用时间
+  int64 member_id = 3; //会员id
+  string coupon_code = 4; //优惠码
+  string member_nickname = 5; //领取人昵称
+  int32 get_type = 6; //获取类型：0->后台赠送；1->主动获取
+  int32 use_status = 8; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 9; //使用时间
+  int64 order_id = 10; //订单编号
+  string order_sn = 11; //订单号码
 }
 
 message UpdateCouponHistoryResp {
@@ -66,17 +65,17 @@ message QueryCouponHistoryDetailReq {
 }
 
 message QueryCouponHistoryDetailResp {
-  string coupon_code = 1; //优惠码
+  int64 id = 1; //
   int64 coupon_id = 2; //优惠券id
-  string create_time = 3; //领取时间
-  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
-  int64 id = 5; //
-  int64 member_id = 6; //会员id
-  string member_nickname = 7; //领取人昵称
-  int64 order_id = 8; //订单编号
-  string order_sn = 9; //订单号码
-  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
-  string use_time = 11; //使用时间
+  int64 member_id = 3; //会员id
+  string coupon_code = 4; //优惠码
+  string member_nickname = 5; //领取人昵称
+  int32 get_type = 6; //获取类型：0->后台赠送；1->主动获取
+  string create_time = 7; //领取时间
+  int32 use_status = 8; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 9; //使用时间
+  int64 order_id = 10; //订单编号
+  string order_sn = 11; //订单号码
 
 }
 
@@ -92,17 +91,17 @@ message QueryCouponHistoryListReq {
 }
 
 message CouponHistoryListData {
-  string coupon_code = 1; //优惠码
+  int64 id = 1; //
   int64 coupon_id = 2; //优惠券id
-  string create_time = 3; //领取时间
-  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
-  int64 id = 5; //
-  int64 member_id = 6; //会员id
-  string member_nickname = 7; //领取人昵称
-  int64 order_id = 8; //订单编号
-  string order_sn = 9; //订单号码
-  int32 use_status = 10; //使用状态：0->未使用；1->已使用；2->已过期
-  string use_time = 11; //使用时间
+  int64 member_id = 3; //会员id
+  string coupon_code = 4; //优惠码
+  string member_nickname = 5; //领取人昵称
+  int32 get_type = 6; //获取类型：0->后台赠送；1->主动获取
+  string create_time = 7; //领取时间
+  int32 use_status = 8; //使用状态：0->未使用；1->已使用；2->已过期
+  string use_time = 9; //使用时间
+  int64 order_id = 10; //订单编号
+  string order_sn = 11; //订单号码
 
 }
 
@@ -123,24 +122,24 @@ message QueryMemberCouponListReq {
   int32  UseStatus = 2;
 }
 message QueryCouponData {
-  int64 Id = 1; //
-  int32 Type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-  string Name = 3; //名称
-  int32 Platform = 4; //使用平台：0->全部；1->移动；2->PC
-  int32 Count = 5; //数量
-  int64 Amount = 6; //金额
-  int32 PerLimit = 7; //每人限领张数
-  int64 MinPoint = 8; //使用门槛；0表示无门槛
-  string StartTime = 9; //开始时间
-  string EndTime = 10; //结束时间
-  int32 UseType = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
-  string Note = 12; //备注
-  int32 PublishCount = 13; //发行数量
-  int32 UseCount = 14; //已使用数量
-  int32 ReceiveCount = 15; //领取数量
-  string EnableTime = 16; //可以领取的日期
-  string Code = 17; //优惠码
-  int32 MemberLevel = 18; //可领取的会员类型：0->无限时
+  int64 id = 1; //
+  int32 type = 2; //优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+  string name = 3; //名称
+  int32 platform = 4; //使用平台：0->全部；1->移动；2->PC
+  int32 count = 5; //数量
+  int64 amount = 6; //金额
+  int32 per_limit = 7; //每人限领张数
+  int64 min_point = 8; //使用门槛；0表示无门槛
+  string start_time = 9; //开始时间
+  string end_time = 10; //结束时间
+  int32 use_type = 11; //使用类型：0->全场通用；1->指定分类；2->指定商品
+  string note = 12; //备注
+  int32 publish_count = 13; //发行数量
+  int32 use_count = 14; //已使用数量
+  int32 receive_count = 15; //领取数量
+  string enable_time = 16; //可以领取的日期
+  string code = 17; //优惠码
+  int32 member_level = 18; //可领取的会员类型：0->无限时
 
 }
 message QueryMemberCouponListResp {
