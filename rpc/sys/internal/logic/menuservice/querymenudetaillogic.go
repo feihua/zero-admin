@@ -70,6 +70,5 @@ func (l *QueryMenuDetailLogic) QueryMenuDetail(in *sysclient.QueryMenuDetailReq)
 		BackgroundUrl: menu.BackgroundURL,                      // 接口地址
 	}
 
-	logc.Infof(l.ctx, "查询菜单详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

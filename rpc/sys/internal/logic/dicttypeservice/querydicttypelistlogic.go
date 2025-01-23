@@ -72,7 +72,6 @@ func (l *QueryDictTypeListLogic) QueryDictTypeList(in *sysclient.QueryDictTypeLi
 		})
 	}
 
-	logc.Infof(l.ctx, "查询字典列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.QueryDictTypeListResp{
 		Total: count,
 		List:  list,

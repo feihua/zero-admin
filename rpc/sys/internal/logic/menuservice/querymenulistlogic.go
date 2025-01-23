@@ -68,7 +68,6 @@ func (l *QueryMenuListLogic) QueryMenuList(in *sysclient.QueryMenuListReq) (*sys
 		})
 	}
 
-	logc.Infof(l.ctx, "查询菜单列表信息,参数：%+v,响应：%+v", in, list)
 	return &sysclient.QueryMenuListResp{
 		Total: 0,
 		List:  list,

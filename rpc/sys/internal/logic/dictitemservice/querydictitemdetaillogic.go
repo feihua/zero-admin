@@ -64,8 +64,6 @@ func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictIt
 		UpdateTime: time_util.TimeToString(dictItem.UpdateTime), // 更新时间
 	}
 
-	logc.Infof(l.ctx, "查询字典数据详情,参数：%+v,响应：%+v", in, data)
-
 	return data, nil
 
 }

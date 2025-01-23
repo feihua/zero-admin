@@ -73,7 +73,6 @@ func (l *QueryRoleListLogic) QueryRoleList(in *sysclient.QueryRoleListReq) (*sys
 		})
 	}
 
-	logc.Infof(l.ctx, "查询角色列表,参数：%+v,响应：%+v", in, list)
 	return &sysclient.QueryRoleListResp{
 		Total: count,
 		List:  list,
