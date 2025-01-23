@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -35,6 +36,25 @@ func NewQueryUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // 1.查询所有角色
 // 2.如果角色不是admin则根据userId查询角色
 func (l *QueryUserRoleListLogic) QueryUserRoleList(in *sysclient.QueryUserRoleListReq) (*sysclient.QueryUserRoleListResp, error) {
+	count, err := query.SysUser.WithContext(l.ctx).Where(query.SysUser.ID.Eq(in.UserId)).Count()
+	if err != nil {
+		return nil, errors.New("查询用户失败")
+	}
+
+	if count == 0 {
+		return nil, errors.New("用户不存在")
+	}
+
+	// 1.判断用户是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "用户不存在, 参数：%+v, 异常: %s", in, err.Error())
+		return nil, errors.New("用户不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询用户信息, 参数：%+v, 异常: %s", in, err.Error())
+		return nil, errors.New("查询用户信息异常")
+	}
+
 	// 1.查询所有角色
 	offset := (in.Current - 1) * in.PageSize
 	result, total, err := query.SysRole.WithContext(l.ctx).FindByPage(int(offset), int(in.PageSize))

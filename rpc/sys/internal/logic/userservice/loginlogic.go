@@ -10,6 +10,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
 	"time"
 
@@ -48,13 +49,12 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	user, err := q.WithContext(l.ctx).Where(q.UserName.Eq(in.Account)).Or(q.Mobile.Eq(in.Account)).First()
 
 	// 1.判断用户是否存在
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		l.savaLoginLog(in, "error", fmt.Sprintf("用户不存在: %+v", in))
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "用户不存在, 参数：%+v, 异常: %s", in, err.Error())
 		return nil, errors.New("用户不存在")
-	}
-
-	if err != nil {
-		l.savaLoginLog(in, "error", fmt.Sprintf("查询用户信息异常: %+v", in))
+	case err != nil:
+		logc.Errorf(l.ctx, "查询用户信息, 参数：%+v, 异常: %s", in, err.Error())
 		return nil, errors.New("查询用户信息异常")
 	}
 
@@ -75,10 +75,14 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	// 4.获取部门信息
 	sysDept := query.SysDept
 	dept, err := sysDept.WithContext(l.ctx).Select(sysDept.DeptName).Where(sysDept.ID.Eq(user.DeptID)).First()
-	if err != nil {
-		l.savaLoginLog(in, "error", fmt.Sprintf("查询用户部门信息异常: %+v", in))
-		return nil, errors.New("查询用户部门信息异常")
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return nil, errors.New("用户还没有分配部门,不允许登录")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询部门异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询部门异常")
 	}
+
 	// 5.生成token
 	jwtToken, err := l.createToken(user.ID, user.DeptID, user.UserName, dept.DeptName)
 

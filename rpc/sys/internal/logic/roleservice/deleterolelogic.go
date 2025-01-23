@@ -6,8 +6,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -45,9 +43,23 @@ func (l *DeleteRoleLogic) DeleteRole(in *sysclient.DeleteRoleReq) (*sysclient.De
 			return nil, errors.New("删除角色失败,不允许操作超级管理员角色")
 		}
 
+		q := query.SysRole
+		count, err := q.WithContext(l.ctx).Where(q.ID.Eq(roleId)).Count()
+
+		if err != nil {
+			return nil, errors.New("查询角色失败")
+		}
+
+		if count == 0 {
+			return nil, errors.New("角色不存在")
+		}
+
 		// 2.角色是否已使用
-		q := query.SysUserRole
-		count, _ := q.WithContext(l.ctx).Select(q.RoleID).Where(q.RoleID.Eq(roleId)).Count()
+		q1 := query.SysUserRole
+		count, err = q1.WithContext(l.ctx).Select(q1.RoleID).Where(q1.RoleID.Eq(roleId)).Count()
+		if err != nil {
+			return nil, errors.New("查询用户角色关联失败")
+		}
 		if count > 0 {
 			return nil, errors.New("删除角色失败,已分配,不能删除")
 		}
@@ -72,7 +84,6 @@ func (l *DeleteRoleLogic) DeleteRole(in *sysclient.DeleteRoleReq) (*sysclient.De
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "删除角色失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("删除角色失败")
 	}
 

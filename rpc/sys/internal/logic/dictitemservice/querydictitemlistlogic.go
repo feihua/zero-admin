@@ -48,8 +48,8 @@ func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemLi
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询字典数据列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询字典数据列表信息失败")
+		logc.Errorf(l.ctx, "查询字典数据列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询字典数据列表失败")
 	}
 
 	var list = make([]*sysclient.DictItemListData, 0, len(result))
@@ -62,7 +62,7 @@ func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemLi
 			DictValue:  dict.DictValue,                          // 字典键值
 			DictStatus: dict.DictStatus,                         // 字典状态
 			DictSort:   dict.DictSort,                           // 排序
-			Remark:     dict.Remark,                             // 备注信息
+			Remark:     dict.Remark,                             // 备注
 			IsDefault:  dict.IsDefault,                          // 是否默认  0：否  1：是
 			IsDeleted:  dict.IsDeleted,                          // 是否删除  0：否  1：是
 			CreateBy:   dict.CreateBy,                           // 创建者

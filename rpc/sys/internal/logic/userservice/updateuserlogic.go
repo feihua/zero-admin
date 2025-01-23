@@ -50,15 +50,17 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 	q := user.WithContext(l.ctx)
 
 	// 1.根据用户id查询用户是否已存在
-	_, err := q.Where(user.ID.Eq(in.Id)).First()
-
+	count, err := q.Where(user.ID.Eq(in.Id)).Count()
 	if err != nil {
-		logc.Errorf(l.ctx, "根据用户id：%d,查询用户失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询用户失败"))
+		return nil, errors.New("查询用户失败")
+	}
+
+	if count == 0 {
+		return nil, errors.New("用户不存在")
 	}
 
 	// 2.查询用户名称是否存在
-	count, err := q.Where(user.ID.Neq(in.Id), user.UserName.Eq(name)).Count()
+	count, err = q.Where(user.ID.Neq(in.Id), user.UserName.Eq(name)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据用户名称：%s,查询用户失败,异常:%s", name, err.Error())

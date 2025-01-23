@@ -37,8 +37,18 @@ func NewDeleteMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delete
 func (l *DeleteMenuLogic) DeleteMenu(in *sysclient.DeleteMenuReq) (*sysclient.DeleteMenuResp, error) {
 	q := query.SysMenu
 
+	count, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Count()
+
+	if err != nil {
+		return nil, errors.New("查询菜单失败")
+	}
+
+	if count == 0 {
+		return nil, errors.New("菜单不存在")
+	}
+
 	// 1.查询菜单是否有子菜单
-	count, err := q.WithContext(l.ctx).Where(q.ParentID.Eq(in.Id)).Count()
+	count, err = q.WithContext(l.ctx).Where(q.ParentID.Eq(in.Id)).Count()
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单是否有子菜单,异常:%s", err.Error())
 		return nil, errors.New(fmt.Sprintf("查删除菜单失败"))

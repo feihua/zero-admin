@@ -9,7 +9,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -42,19 +41,23 @@ func (l *UpdateDictTypeLogic) UpdateDictType(in *sysclient.UpdateDictTypeReq) (*
 	q := dictType.WithContext(l.ctx)
 
 	// 1.根据字典id查询字典是否已存在
-	_, err := q.Where(dictType.ID.Eq(in.Id)).First()
+	count, err := q.Where(dictType.ID.Eq(in.Id)).Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据字典id：%d,查询字典信息失败,异常:%s", in.Id, err.Error())
+		logc.Errorf(l.ctx, ".查询字典类型失败,参数：%+v,,异常:%s", in, err.Error())
 		return nil, errors.New(fmt.Sprintf("更新字典信息失败"))
 	}
 
+	if count == 0 {
+		return nil, errors.New("更新字典类型失败,字典类型不存在")
+	}
+
 	// 2.查询字典名称是否已存在,如果字典名称已存在,则直接返回
-	count, err := q.WithContext(l.ctx).Where(dictType.ID.Neq(in.Id), dictType.DictName.Eq(in.DictName)).Count()
+	count, err = q.WithContext(l.ctx).Where(dictType.ID.Neq(in.Id), dictType.DictName.Eq(in.DictName)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, ".查询字典名称失败,参数：%+v,,异常:%s", in, err.Error())
-		return nil, errors.New(fmt.Sprintf("更新字典信息"))
+		return nil, errors.New(fmt.Sprintf("更新字典信息失败"))
 	}
 
 	if count > 0 {

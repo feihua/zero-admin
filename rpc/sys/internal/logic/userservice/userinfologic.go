@@ -41,13 +41,12 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 	q := query.SysUser
 	info, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.UserId)).First()
 
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		logc.Errorf(l.ctx, "用户不存在,参数：%+v,异常:%s", in, err.Error())
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "用户不存在, 参数：%+v, 异常: %s", in, err.Error())
 		return nil, errors.New("用户不存在")
-	}
-
-	if err != nil {
-		logc.Errorf(l.ctx, "查询用户信息,参数：%+v,异常:%s", in, err.Error())
+	case err != nil:
+		logc.Errorf(l.ctx, "查询用户信息, 参数：%+v, 异常: %s", in, err.Error())
 		return nil, errors.New("查询用户信息异常")
 	}
 

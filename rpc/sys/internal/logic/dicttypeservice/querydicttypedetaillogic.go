@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -33,17 +34,18 @@ func NewQueryDictTypeDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // QueryDictTypeDetail 查询字典类型详情
+// 1.判断字典类型是否存在
 func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(in *sysclient.QueryDictTypeDetailReq) (*sysclient.QueryDictTypeDetailResp, error) {
 	dict, err := query.SysDictType.WithContext(l.ctx).Where(query.SysDictType.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询字典类型详情失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询字典类型详情失败")
-	}
-
-	if dict == nil {
-		logc.Errorf(l.ctx, "查询字典类型详情失败,参数：%+v,字典类型不存在", in)
-		return nil, errors.New("查询字典类型详情失败,字典类型不存在")
+	// 1.判断字典类型是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "字典类型不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("字典类型不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询字典类型异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询字典类型异常")
 	}
 
 	data := &sysclient.QueryDictTypeDetailResp{

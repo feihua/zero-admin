@@ -32,13 +32,25 @@ func NewQueryRoleUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 // QueryRoleUserList 查询角色与用户的关联
-// 1.超级管理员不需要分配用户
-// 2.如果角色不是admin则根据roleId查询用户
+// 1.查询角色角色是否已存在
+// 2.超级管理员不需要分配用户
+// 3.如果角色不是admin则根据roleId查询用户
 func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserListReq) (*sysclient.QueryRoleUserListResp, error) {
 	var result []model.SysUser
 
 	userRole := query.SysUserRole
 	sysUser := query.SysUser
+
+	// 1.查询角色角色是否已存在
+	count, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.RoleId)).Count()
+
+	if err != nil {
+		return nil, errors.New("查询角色失败")
+	}
+
+	if count == 0 {
+		return nil, errors.New("角色不存在")
+	}
 
 	q := userRole.WithContext(l.ctx).LeftJoin(sysUser, sysUser.ID.EqCol(userRole.UserID)).Select(sysUser.ALL)
 	if len(in.Mobile) > 0 {
@@ -56,7 +68,7 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 		q = q.Where(userRole.RoleID.Neq(in.RoleId))
 	}
 	offset := (in.PageNum - 1) * in.PageSize
-	count, err := q.ScanByPage(&result, int(offset), int(in.PageSize))
+	count, err = q.ScanByPage(&result, int(offset), int(in.PageSize))
 	if err != nil {
 		logc.Errorf(l.ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询用户列表信息失败")

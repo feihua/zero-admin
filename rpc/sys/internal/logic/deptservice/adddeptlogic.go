@@ -9,12 +9,13 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddDeptLogic 添加部门信息
+// AddDeptLogic 添加部门
 /*
 Author: LiuFeiHua
 Date: 2023/12/18 16:59
@@ -33,7 +34,7 @@ func NewAddDeptLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddDeptLo
 	}
 }
 
-// AddDept 添加部门信息
+// AddDept 添加部门
 // 1.根据部门名称查询部门是否已存在
 // 2.如果部门已存在,则直接返回
 // 3.如果父节点不为正常状态,则不允许新增子节点
@@ -46,26 +47,26 @@ func (l *AddDeptLogic) AddDept(in *sysclient.AddDeptReq) (*sysclient.AddDeptResp
 	count, err := q.Where(query.SysDept.DeptName.Eq(deptName), query.SysDept.ParentID.Eq(in.ParentId)).Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据部门名称：%s,查询部门信息失败,异常:%s", deptName, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询部门信息失败"))
+		logc.Errorf(l.ctx, "根据部门名称：%s,查询部门失败,异常:%s", deptName, err.Error())
+		return nil, errors.New(fmt.Sprintf("查询部门失败"))
 	}
 
 	// 2.如果部门已存在,则直接返回
 	if count > 0 {
-		logc.Errorf(l.ctx, "部门信息已存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("部门：%s,已存在", deptName))
+		logc.Errorf(l.ctx, "部门名称已存在：%+v", in)
+		return nil, errors.New(fmt.Sprintf("部门名称：%s,已存在", deptName))
 	}
 
 	// 3.如果父节点不为正常状态,则不允许新增子节点
 	parentDept, err := q.Where(query.SysDept.ID.Eq(in.ParentId)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据部门ID：%d,查询部门信息失败,异常:%s", in.ParentId, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询部门信息失败"))
-	}
-
-	if parentDept == nil {
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "上级部门不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
 		return nil, errors.New("添加部门失败,上级部门不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询上级部门异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("添加部门失败,查询上级部门异常")
 	}
 
 	if parentDept.DeptStatus != 1 {
@@ -82,7 +83,7 @@ func (l *AddDeptLogic) AddDept(in *sysclient.AddDeptReq) (*sysclient.AddDeptResp
 		Leader:     in.Leader,     // 负责人
 		Phone:      in.Phone,      // 电话号码
 		Email:      in.Email,      // 邮箱
-		Remark:     in.Remark,     // 备注信息
+		Remark:     in.Remark,     // 备注
 		IsDeleted:  0,             // 是否删除  0：否  1：是
 		CreateBy:   in.CreateBy,   // 创建者
 	}
@@ -90,8 +91,8 @@ func (l *AddDeptLogic) AddDept(in *sysclient.AddDeptReq) (*sysclient.AddDeptResp
 	err = q.Create(dept)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "添加部门信息失败,参数:%+v,异常:%s", dept, err.Error())
-		return nil, errors.New("添加部门信息失败")
+		logc.Errorf(l.ctx, "添加部门失败,参数:%+v,异常:%s", dept, err.Error())
+		return nil, errors.New("添加部门失败")
 	}
 
 	return &sysclient.AddDeptResp{}, nil

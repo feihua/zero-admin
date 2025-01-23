@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -33,16 +34,18 @@ func NewQueryOperateLogDetailLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // QueryOperateLogDetail 查询系统操作日志详情
+// 1.判断操作日志是否存在
 func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(in *sysclient.QueryOperateLogDetailReq) (*sysclient.QueryOperateLogDetailResp, error) {
 	item, err := query.SysOperateLog.WithContext(l.ctx).Where(query.SysOperateLog.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询系统操作日志详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询系统操作日志详情失败")
-	}
-	if item == nil {
-		logc.Errorf(l.ctx, "查询系统操作日志详情失败,参数：%+v,操作日志不存在", in)
-		return nil, errors.New("查询系统操作日志详情失败,操作日志不存在")
+	// 1.判断操作日志是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "操作日志不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("操作日志不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询操作日志异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询操作日志异常")
 	}
 
 	data := &sysclient.QueryOperateLogDetailResp{

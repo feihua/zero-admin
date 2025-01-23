@@ -46,16 +46,19 @@ func (l *UpdateRoleLogic) UpdateRole(in *sysclient.UpdateRoleReq) (*sysclient.Up
 	}
 
 	// 1.查询角色角色是否已存在
-	_, err := q.Where(role.ID.Eq(in.Id)).First()
+	count, err := role.WithContext(l.ctx).Where(role.ID.Eq(in.Id)).Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据角色id：%d,查询角色失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("更新角色失败,角色不存在"))
+		return nil, errors.New("查询角色失败")
+	}
+
+	if count == 0 {
+		return nil, errors.New("角色不存在")
 	}
 
 	// 2.查询角色名称是否存在
 	name := in.RoleName
-	count, err := q.Where(role.ID.Neq(in.Id), role.RoleName.Eq(name)).Count()
+	count, err = q.Where(role.ID.Neq(in.Id), role.RoleName.Eq(name)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据角色名称：%s,查询角色失败,异常:%s", name, err.Error())

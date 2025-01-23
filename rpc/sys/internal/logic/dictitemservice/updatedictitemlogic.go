@@ -9,6 +9,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,7 +34,7 @@ func NewUpdateDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 }
 
 // UpdateDictItem 更新字典数据
-// 1.根据字典数据id查询字典数据是否已存在
+// 1.判断字典数据是否存在
 // 2.根据字典类型查询字典是否已存在
 // 3.查询字典标签是否已存在,如果字典标签已存在,则直接返回
 // 4.查询字典键值是否已存在,如果字典键值已存在,则直接返回
@@ -44,33 +45,32 @@ func (l *UpdateDictItemLogic) UpdateDictItem(in *sysclient.UpdateDictItemReq) (*
 
 	dictType := in.DictType
 
-	// 1.根据字典数据id查询字典数据是否已存在
+	// 1.判断字典数据是否存在
 	dictItem, err := q.WithContext(l.ctx).Where(query.SysDictItem.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据字典数据id：%d,查询字典数据失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询字典数据失败"))
+	// 1.判断字典数据是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "字典数据不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("字典数据不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询字典数据异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询字典数据异常")
 	}
 
-	if dictItem == nil {
-		logc.Errorf(l.ctx, "查询字典数据详情失败,参数：%+v,字典数据不存在", in)
-		return nil, errors.New("查询字典数据详情失败,字典数据不存在")
-	}
-
-	// 2.根据字典类型查询字典是否已存在
-	dictData, err := query.SysDictType.WithContext(l.ctx).Where(query.SysDictType.DictType.Eq(dictType)).First()
+	// 2.判断字典类型是否存在
+	count, err := query.SysDictType.WithContext(l.ctx).Where(query.SysDictType.DictType.Eq(dictType)).Count()
 	if err != nil {
 		logc.Errorf(l.ctx, "根据字典类型：%s,查询字典信息失败,异常:%s", dictType, err.Error())
 		return nil, errors.New(fmt.Sprintf("更新字典数据失败"))
 	}
 
-	if dictData == nil {
-		logc.Errorf(l.ctx, "更新字典数据失败,字典类型不存在：%+v", in)
+	if count == 0 {
 		return nil, errors.New(fmt.Sprintf("更新字典数据失败,字典类型：%s,不存在", dictType))
 	}
 
 	// 3.查询字典标签是否已存在,如果字典标签已存在,则直接返回
-	count, err := q.WithContext(l.ctx).Where(q.ID.Neq(in.Id), q.DictLabel.Eq(in.DictLabel), q.DictType.Eq(dictType)).Count()
+	count, err = q.WithContext(l.ctx).Where(q.ID.Neq(in.Id), q.DictLabel.Eq(in.DictLabel), q.DictType.Eq(dictType)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据字典标签：%s,查询字典数据失败,异常:%s", in.DictLabel, err.Error())

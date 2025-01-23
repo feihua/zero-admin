@@ -9,6 +9,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -34,19 +35,23 @@ func NewUpdatePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 }
 
 // UpdatePost 更新岗位信息
-// 1.根据岗位id查询岗位是否已存在,如果岗位不存在,则直接返回
+// 1.判断岗位信息是否存在
 // 2.查询postName是否被占用,如果被占用,则直接返回
 // 3.查询根据postCode是否被占用,如果被占用,则直接返回
 // 4.岗位存在时,则直接更新岗位
 func (l *UpdatePostLogic) UpdatePost(in *sysclient.UpdatePostReq) (*sysclient.UpdatePostResp, error) {
 	q := query.SysPost.WithContext(l.ctx)
 
-	// 1.根据岗位id查询岗位是否已存在
+	// 1.判断岗位信息是否存在
 	post, err := q.Where(query.SysPost.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据岗位id：%d,查询岗位信息失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询岗位信息失败"))
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "岗位信息不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("岗位信息不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询岗位信息异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询岗位信息异常")
 	}
 
 	// 2.查询postName是否被占用,如果被占用,则直接返回

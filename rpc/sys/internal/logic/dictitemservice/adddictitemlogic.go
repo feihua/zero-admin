@@ -43,19 +43,18 @@ func (l *AddDictItemLogic) AddDictItem(in *sysclient.AddDictItemReq) (*sysclient
 	dictType := in.DictType
 
 	// 1.根据字典类型查询字典是否已存在
-	dictData, err := query.SysDictType.WithContext(l.ctx).Where(query.SysDictType.DictType.Eq(dictType)).First()
+	count, err := query.SysDictType.WithContext(l.ctx).Where(query.SysDictType.DictType.Eq(dictType)).Count()
 	if err != nil {
 		logc.Errorf(l.ctx, "根据字典类型：%s,查询字典信息失败,异常:%s", dictType, err.Error())
 		return nil, errors.New(fmt.Sprintf("新增字典数据失败"))
 	}
 
-	if dictData == nil {
-		logc.Errorf(l.ctx, "新增字典数据失败,字典类型不存在：%+v", in)
+	if count == 0 {
 		return nil, errors.New(fmt.Sprintf("新增字典数据失败,字典类型：%s,不存在", dictType))
 	}
 
 	// 2.查询字典标签是否已存在,如果字典标签已存在,则直接返回
-	count, err := q.WithContext(l.ctx).Where(q.DictLabel.Eq(in.DictLabel), q.DictType.Eq(dictType)).Count()
+	count, err = q.WithContext(l.ctx).Where(q.DictLabel.Eq(in.DictLabel), q.DictType.Eq(dictType)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据字典标签：%s,查询字典数据信息失败,异常:%s", in.DictLabel, err.Error())
@@ -63,7 +62,6 @@ func (l *AddDictItemLogic) AddDictItem(in *sysclient.AddDictItemReq) (*sysclient
 	}
 
 	if count > 0 {
-		logc.Errorf(l.ctx, "新增字典数据失败,字典标签已存在：%+v", in)
 		return nil, errors.New(fmt.Sprintf("新增字典数据失败,字典标签：%s,已存在", in.DictLabel))
 	}
 
@@ -76,7 +74,6 @@ func (l *AddDictItemLogic) AddDictItem(in *sysclient.AddDictItemReq) (*sysclient
 	}
 
 	if count > 0 {
-		logc.Errorf(l.ctx, "新增字典数据失败,字典键值已存在：%+v", in)
 		return nil, errors.New(fmt.Sprintf("新增字典数据失败,字典键值：%s,已存在", in.DictValue))
 	}
 

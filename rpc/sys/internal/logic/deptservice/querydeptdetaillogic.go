@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -32,17 +33,18 @@ func NewQueryDeptDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 }
 
 // QueryDeptDetail 查询部门信息表详情
+// 1.判断部门是否存在
 func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq) (*sysclient.QueryDeptDetailResp, error) {
 	dept, err := query.SysDept.WithContext(l.ctx).Where(query.SysDept.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询部门信息表详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询部门信息表详情失败")
-	}
-
-	if dept == nil {
-		logc.Errorf(l.ctx, "查询部门信息表详情失败,参数：%+v,部门不存在", in)
-		return nil, errors.New("查询部门信息表详情失败,部门不存在")
+	// 1.判断部门是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "部门不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("部门不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询部门异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询部门异常")
 	}
 
 	data := &sysclient.QueryDeptDetailResp{

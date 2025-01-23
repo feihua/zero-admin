@@ -46,18 +46,18 @@ func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.Up
 	q := sMenu.WithContext(l.ctx)
 
 	// 1.根据菜单id查询菜单是否已存在
-	sysMenu, err := q.Where(sMenu.ID.Eq(in.Id)).First()
+	count, err := q.Where(sMenu.ID.Eq(in.Id)).Count()
+
 	if err != nil {
-		logc.Errorf(l.ctx, "根据菜单id：%d,查询菜单信息失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询菜单信息失败"))
+		return nil, errors.New("查询菜单失败")
 	}
 
-	if sysMenu == nil {
-		return nil, errors.New(fmt.Sprintf("更新菜单信息失败,菜单信息不存在"))
+	if count == 0 {
+		return nil, errors.New("菜单不存在")
 	}
 
 	// 2.查询菜单名称是否已存在,如果菜单已存在,则直接返回
-	count, err := q.Where(sMenu.ID.Neq(in.Id), sMenu.MenuName.Eq(name)).Count()
+	count, err = q.Where(sMenu.ID.Neq(in.Id), sMenu.MenuName.Eq(name)).Count()
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单名称是否已存在失败, 参数：%s,异常:%s", name, err.Error())
 		return nil, errors.New(fmt.Sprintf("新增菜单失败,菜单名称已存在"))

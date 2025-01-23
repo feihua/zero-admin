@@ -3,10 +3,10 @@ package menuservicelogic
 import (
 	"context"
 	"errors"
-	"fmt"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -37,12 +37,13 @@ func NewQueryMenuDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 func (l *QueryMenuDetailLogic) QueryMenuDetail(in *sysclient.QueryMenuDetailReq) (*sysclient.QueryMenuDetailResp, error) {
 	menu, err := query.SysMenu.WithContext(l.ctx).Where(query.SysMenu.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询菜单详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询菜单详情失败")
-	}
-	if menu == nil {
-		return nil, errors.New(fmt.Sprintf("查询菜单详情失败,菜单信息不存在"))
+	// 1.判断菜单是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return nil, errors.New("菜单不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询菜单异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询菜单异常")
 	}
 
 	data := &sysclient.QueryMenuDetailResp{

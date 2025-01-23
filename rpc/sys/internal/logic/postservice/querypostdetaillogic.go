@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -33,17 +34,18 @@ func NewQueryPostDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 }
 
 // QueryPostDetail 查询岗位管理详情
+// 1.判断岗位信息是否存在
 func (l *QueryPostDetailLogic) QueryPostDetail(in *sysclient.QueryPostDetailReq) (*sysclient.QueryPostDetailResp, error) {
 	job, err := query.SysPost.WithContext(l.ctx).Where(query.SysPost.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询岗位信息详情失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询岗位信息详情失败")
-	}
-
-	if job == nil {
-		logc.Errorf(l.ctx, "查询岗位信息详情失败,参数：%+v,岗位信息不存在", in)
-		return nil, errors.New("查询岗位信息详情失败,岗位信息不存在")
+	// 1.判断岗位信息是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "岗位信息不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("岗位信息不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询岗位信息异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询岗位信息异常")
 	}
 
 	data := &sysclient.QueryPostDetailResp{

@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -35,9 +36,14 @@ func NewQueryUserDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 // QueryUserDetail 查询用户详情
 func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq) (*sysclient.QueryUserDetailResp, error) {
 	item, err := query.SysUser.WithContext(l.ctx).Where(query.SysUser.ID.Eq(in.Id)).First()
-	if err != nil {
-		logc.Errorf(l.ctx, "查询用户详情失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询用户详情失败")
+
+	// 1.判断用户是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return nil, errors.New("用户不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询用户异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询用户异常")
 	}
 
 	list, err := query.SysUserPost.WithContext(l.ctx).Where(query.SysUserPost.UserID.Eq(in.Id)).Find()

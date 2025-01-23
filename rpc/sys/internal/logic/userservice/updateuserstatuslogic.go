@@ -32,14 +32,24 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // UpdateUserStatus 更新用户状态
 // 1.判断是不是超级管理员
-// 2.更新用户状态
+// 2.判断用户是否存在
+// 3.更新用户状态
 func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UpdateUserStatusReq) (*sysclient.UpdateUserStatusResp, error) {
 	ids := in.Ids // 用户id
 
-	for _, roleId := range ids {
+	for _, id := range ids {
 		// 1.判断是不是超级管理员
-		if roleId == 1 {
+		if id == 1 {
 			return nil, errors.New("更新用户状态失败,不允许操作超级管理员用户")
+		}
+		// 2.判断用户是否存在
+		count, err := query.SysUser.WithContext(l.ctx).Where(query.SysUser.ID.Eq(id)).Count()
+		if err != nil {
+			return nil, errors.New("查询用户失败")
+		}
+
+		if count == 0 {
+			return nil, errors.New("用户不存在")
 		}
 	}
 

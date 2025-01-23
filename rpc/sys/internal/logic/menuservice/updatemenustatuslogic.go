@@ -3,7 +3,6 @@ package menuservicelogic
 import (
 	"context"
 	"errors"
-	"fmt"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -40,13 +39,14 @@ func (l *UpdateMenuStatusLogic) UpdateMenuStatus(in *sysclient.UpdateMenuStatusR
 	q := sysMenu.WithContext(l.ctx)
 
 	// 1.判断菜单是否存在
-	menu, err := sysMenu.WithContext(l.ctx).Where(sysMenu.ID.Eq(in.Id)).First()
+	count, err := q.Where(sysMenu.ID.Eq(in.Id)).Count()
+
 	if err != nil {
-		logc.Errorf(l.ctx, "查询菜单失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("更新菜单状态失败")
+		return nil, errors.New("查询菜单失败")
 	}
-	if menu == nil {
-		return nil, errors.New(fmt.Sprintf("查询菜单失败,菜单信息不存在"))
+
+	if count == 0 {
+		return nil, errors.New("菜单不存在")
 	}
 
 	// 2.更新菜单状态

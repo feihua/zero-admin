@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -33,17 +34,18 @@ func NewQueryLoginLogDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // QueryLoginLogDetail 查询系统登录日志表详情
+// 1.判断登录日志是否存在
 func (l *QueryLoginLogDetailLogic) QueryLoginLogDetail(in *sysclient.QueryLoginLogDetailReq) (*sysclient.QueryLoginLogDetailResp, error) {
 	item, err := query.SysLoginLog.WithContext(l.ctx).Where(query.SysLoginLog.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询系统登录日志详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询系统登录日志详情失败")
-	}
-
-	if item == nil {
-		logc.Errorf(l.ctx, "查询系统登录日志详情失败,参数：%+v,登录日志不存在", in)
-		return nil, errors.New("查询系统登录日志详情失败,登录日志不存在")
+	// 1.判断登录日志是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "登录日志不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("登录日志不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询登录日志异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询登录日志异常")
 	}
 
 	data := &sysclient.QueryLoginLogDetailResp{

@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -33,17 +34,18 @@ func NewQueryDictItemDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // QueryDictItemDetail 查询字典数据详情
+// 1.判断字典数据是否存在
 func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictItemDetailReq) (*sysclient.QueryDictItemDetailResp, error) {
 	dictItem, err := query.SysDictItem.WithContext(l.ctx).Where(query.SysDictItem.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询字典数据详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询字典数据详情失败")
-	}
-
-	if dictItem == nil {
-		logc.Errorf(l.ctx, "查询字典数据详情失败,参数：%+v,字典数据不存在", in)
-		return nil, errors.New("查询字典数据详情失败,字典数据不存在")
+	// 1.判断字典数据是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "字典数据不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("字典数据不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询字典数据异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询字典数据异常")
 	}
 
 	data := &sysclient.QueryDictItemDetailResp{

@@ -39,6 +39,17 @@ func (l *CancelAuthorizationLogic) CancelAuthorization(in *sysclient.CancelAutho
 		return nil, errors.New("不允许操作超级管理员角色")
 	}
 
+	// 1.查询角色角色是否已存在
+	count, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.RoleId)).Count()
+
+	if err != nil {
+		return nil, errors.New("查询角色失败")
+	}
+
+	if count == 0 {
+		return nil, errors.New("角色不存在")
+	}
+
 	userRole := query.SysUserRole
 	q := userRole.WithContext(l.ctx)
 
@@ -54,7 +65,7 @@ func (l *CancelAuthorizationLogic) CancelAuthorization(in *sysclient.CancelAutho
 		}
 
 		// 2.添加角色与用户的关联
-		err := q.CreateInBatches(userRoles, len(userRoles))
+		err = q.CreateInBatches(userRoles, len(userRoles))
 
 		if err != nil {
 			logc.Errorf(l.ctx, "授权失败,参数:%+v,异常:%s", in, err.Error())
@@ -64,7 +75,7 @@ func (l *CancelAuthorizationLogic) CancelAuthorization(in *sysclient.CancelAutho
 	}
 
 	// 取消授权
-	_, err := q.Where(userRole.RoleID.Eq(in.RoleId), userRole.UserID.In(in.UserIds...)).Delete()
+	_, err = q.Where(userRole.RoleID.Eq(in.RoleId), userRole.UserID.In(in.UserIds...)).Delete()
 	if err != nil {
 		logc.Errorf(l.ctx, "取消授权失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("取消授权失败")

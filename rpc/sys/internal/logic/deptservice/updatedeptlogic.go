@@ -9,6 +9,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -41,6 +42,7 @@ func NewUpdateDeptLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 // 5.修改下级部门祖级
 // 6.部门存在时,则直接更新部门
 // 7.如果该部门是启用状态，则启用该部门的所有上级部门
+// 8.如果该部门是禁用状态，则禁用该部门的所有下级部门
 func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.UpdateDeptResp, error) {
 
 	dept := query.SysDept
@@ -53,30 +55,31 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 	// 1.根据部门id查询部门是否已存在
 	oldDept, err := q.Where(dept.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据部门id：%d,查询部门信息失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("更新部门失败"))
-	}
-
-	if oldDept == nil {
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "更新部门失败,部门不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
 		return nil, errors.New("更新部门失败,部门不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询部门异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询部门异常")
 	}
 
 	// 2.根据部门parentId查询部门是否已存在
 	parentDept, err := q.Where(dept.ID.Eq(in.ParentId)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据部门id：%d,查询部门信息失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("更新部门失败"))
-	}
-
-	if parentDept == nil {
-		return nil, errors.New("更新部门失败,上级部门不存在")
+	// 1.判断上级部门是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "上级部门不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("上级部门不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询上级部门异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询上级部门异常")
 	}
 
 	// 3.根据部门名称查询部门是否已存在
 	deptName := in.DeptName
-	count, err := q.Where(dept.DeptName.Eq(deptName), dept.ParentID.Eq(in.ParentId)).Count()
+	count, err := q.Where(dept.DeptName.Eq(deptName), dept.ParentID.Eq(parentDept.ID)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据部门名称：%s,查询部门信息失败,异常:%s", deptName, err.Error())

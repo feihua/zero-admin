@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -33,12 +34,17 @@ func NewQueryRoleDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 }
 
 // QueryRoleDetail 查询角色详情
+// 1.判断角色是否存在
 func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq) (*sysclient.QueryRoleDetailResp, error) {
 	item, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询角色详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询角色详情失败")
+	// 1.判断角色是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return nil, errors.New("角色不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询角色异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询角色异常")
 	}
 
 	data := &sysclient.QueryRoleDetailResp{
@@ -57,6 +63,5 @@ func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq)
 		UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
-	logc.Infof(l.ctx, "查询角色详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }
