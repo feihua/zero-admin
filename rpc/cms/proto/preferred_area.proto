@@ -79,8 +79,8 @@ message QueryPreferredAreaListReq {
   string sub_title = 2; //子标题
   string pic = 3; //展示图片
   int32 show_status = 4; //显示状态：0->不显示；1->显示
-  int32 page_num = 5; //第几页
-  int32 page_size = 6; //每页的数量
+  int64 page_num = 5; //第几页
+  int64 page_size = 6; //每页的数量
 }
 
 message PreferredAreaListData {
