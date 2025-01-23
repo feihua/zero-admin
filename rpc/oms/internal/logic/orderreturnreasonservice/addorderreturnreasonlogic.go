@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
@@ -34,10 +32,9 @@ func NewAddOrderReturnReasonLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // AddOrderReturnReason 添加退货原因表
 func (l *AddOrderReturnReasonLogic) AddOrderReturnReason(in *omsclient.AddOrderReturnReasonReq) (*omsclient.AddOrderReturnReasonResp, error) {
 	err := query.OmsOrderReturnReason.WithContext(l.ctx).Create(&model.OmsOrderReturnReason{
-		Name:       in.Name,
-		Sort:       in.Sort,
-		Status:     in.Status,
-		CreateTime: time.Now(),
+		Name:   in.Name,   // 退货类型
+		Sort:   in.Sort,   // 排序
+		Status: in.Status, // 状态：0->不启用；1->启用
 	})
 
 	if err != nil {

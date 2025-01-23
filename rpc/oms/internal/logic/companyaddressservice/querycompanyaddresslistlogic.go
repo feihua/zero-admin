@@ -54,25 +54,23 @@ func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(in *omsclient.Que
 	var list []*omsclient.CompanyAddressListData
 	for _, item := range result {
 
-		address := &omsclient.CompanyAddressListData{}
-		address.Id = item.ID
-		address.AddressName = item.AddressName
-		address.SendStatus = item.SendStatus
-		address.ReceiveStatus = item.ReceiveStatus
-		address.Name = item.Name
-		address.Phone = item.Phone
-		address.Province = item.Province
-		address.City = item.City
-		address.Region = item.Region
-		address.DetailAddress = item.DetailAddress
-		address.CreateBy = item.CreateBy
-		address.CreateTime = item.CreateTime.Format("2006-01-02 15:04:05")
+		list = append(list, &omsclient.CompanyAddressListData{
+			Id:            item.ID,                                 //
+			AddressName:   item.AddressName,                        // 地址名称
+			SendStatus:    item.SendStatus,                         // 默认发货地址：0->否；1->是
+			ReceiveStatus: item.ReceiveStatus,                      // 是否默认收货地址：0->否；1->是
+			Name:          item.Name,                               // 收发货人姓名
+			Phone:         item.Phone,                              // 收货人电话
+			Province:      item.Province,                           // 省/直辖市
+			City:          item.City,                               // 市
+			Region:        item.Region,                             // 区
+			DetailAddress: item.DetailAddress,                      // 详细地址
+			CreateBy:      item.CreateBy,                           // 创建者
+			CreateTime:    time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:      item.UpdateBy,                           // 更新者
+			UpdateTime:    time_util.TimeToString(item.UpdateTime), // 更新时间
 
-		address.UpdateBy = item.UpdateBy
-
-		address.UpdateTime = time_util.TimeToString(item.UpdateTime)
-
-		list = append(list, address)
+		})
 	}
 
 	return &omsclient.QueryCompanyAddressListResp{

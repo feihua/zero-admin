@@ -2,14 +2,13 @@ create table oms_order_operate_history
 (
     id           bigint auto_increment
         primary key,
-    order_id     bigint       not null comment '订单id',
-    operate_man  varchar(100) not null comment '操作人：用户；系统；后台管理员',
-    create_time datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
-    order_status tinyint not null comment '订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单',
-    note         varchar(500) null comment '备注'
+    order_id     bigint                                 not null comment '订单id',
+    operate_man  varchar(100)                           not null comment '操作人：用户；系统；后台管理员',
+    create_time  datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
+    order_status tinyint                                not null comment '订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单',
+    note         varchar(500) default ''                not null comment '备注'
 )
     comment '订单操作历史记录';
-
 
 INSERT INTO oms_order_operate_history (id, order_id, operate_man, create_time, order_status, note) VALUES (5, 12, '后台管理员', '2018-10-12 14:01:29', 2, '完成发货');
 INSERT INTO oms_order_operate_history (id, order_id, operate_man, create_time, order_status, note) VALUES (6, 13, '后台管理员', '2018-10-12 14:01:29', 2, '完成发货');
@@ -33,3 +32,4 @@ INSERT INTO oms_order_operate_history (id, order_id, operate_man, create_time, o
 INSERT INTO oms_order_operate_history (id, order_id, operate_man, create_time, order_status, note) VALUES (24, 30, '后台管理员', '2020-02-25 16:52:37', 0, '修改费用信息');
 INSERT INTO oms_order_operate_history (id, order_id, operate_man, create_time, order_status, note) VALUES (25, 30, '后台管理员', '2020-02-25 16:52:51', 0, '修改费用信息');
 INSERT INTO oms_order_operate_history (id, order_id, operate_man, create_time, order_status, note) VALUES (26, 30, '后台管理员', '2020-02-25 16:54:03', 2, '完成发货');
+

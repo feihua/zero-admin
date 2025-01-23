@@ -2,6 +2,7 @@ package orderreturnapplyservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -53,7 +54,7 @@ func (l *QueryOrderReturnApplyListLogic) QueryOrderReturnApplyList(in *omsclient
 		q = q.Where(query.OmsOrderReturnApply.ReturnPhone.Like("%" + in.ReturnPhone + "%"))
 	}
 
-	//if len(in.CreateTime) > 0 {
+	// if len(in.CreateTime) > 0 {
 	//		where = where + fmt.Sprintf(" AND date_format(create_time,'%%Y-%%m-%%d') = '%s'", strings.Split(in.CreateTime, " ")[0])
 	//	}
 	//	if len(in.HandleTime) > 0 {
@@ -71,33 +72,33 @@ func (l *QueryOrderReturnApplyListLogic) QueryOrderReturnApplyList(in *omsclient
 	for _, item := range result {
 
 		list = append(list, &omsclient.OrderReturnApplyListData{
-			Id:               item.ID,
-			OrderId:          item.OrderID,
-			CompanyAddressId: item.CompanyAddressID,
-			ProductId:        item.ProductID,
-			OrderSn:          item.OrderSn,
-			CreateTime:       item.CreateTime.Format("2006-01-02 15:04:05"),
-			MemberUsername:   item.MemberUsername,
-			ReturnAmount:     item.ReturnAmount,
-			ReturnName:       item.ReturnName,
-			ReturnPhone:      item.ReturnPhone,
-			Status:           item.Status,
-			HandleTime:       item.HandleTime.Format("2006-01-02 15:04:05"),
-			ProductPic:       item.ProductPic,
-			ProductName:      item.ProductName,
-			ProductBrand:     item.ProductBrand,
-			ProductAttr:      item.ProductAttr,
-			ProductCount:     item.ProductCount,
-			ProductPrice:     item.ProductPrice,
-			ProductRealPrice: item.ProductRealPrice,
-			Reason:           item.Reason,
-			Description:      item.Description,
-			ProofPics:        item.ProofPics,
-			HandleNote:       item.HandleNote,
-			HandleMan:        item.HandleMan,
-			ReceiveMan:       item.ReceiveMan,
-			ReceiveTime:      item.ReceiveTime.Format("2006-01-02 15:04:05"),
-			ReceiveNote:      *item.ReceiveNote,
+			Id:               item.ID,                                  //
+			OrderId:          item.OrderID,                             // 订单id
+			CompanyAddressId: item.CompanyAddressID,                    // 收货地址表id
+			ProductId:        item.ProductID,                           // 退货商品id
+			OrderSn:          item.OrderSn,                             // 订单编号
+			CreateTime:       time_util.TimeToStr(item.CreateTime),     // 申请时间
+			MemberUsername:   item.MemberUsername,                      // 会员用户名
+			ReturnAmount:     item.ReturnAmount,                        // 退款金额
+			ReturnName:       item.ReturnName,                          // 退货人姓名
+			ReturnPhone:      item.ReturnPhone,                         // 退货人电话
+			Status:           item.Status,                              // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+			HandleTime:       time_util.TimeToString(item.HandleTime),  // 处理时间
+			ProductPic:       item.ProductPic,                          // 商品图片
+			ProductName:      item.ProductName,                         // 商品名称
+			ProductBrand:     item.ProductBrand,                        // 商品品牌
+			ProductAttr:      item.ProductAttr,                         // 商品销售属性：颜色：红色；尺码：xl;
+			ProductCount:     item.ProductCount,                        // 退货数量
+			ProductPrice:     item.ProductPrice,                        // 商品单价
+			ProductRealPrice: item.ProductRealPrice,                    // 商品实际支付单价
+			Reason:           item.Reason,                              // 原因
+			Description:      item.Description,                         // 描述
+			ProofPics:        item.ProofPics,                           // 凭证图片，以逗号隔开
+			HandleNote:       item.HandleNote,                          // 处理备注
+			HandleMan:        item.HandleMan,                           // 处理人员
+			ReceiveMan:       item.ReceiveMan,                          // 收货人
+			ReceiveTime:      time_util.TimeToString(item.ReceiveTime), // 收货时间
+			ReceiveNote:      item.ReceiveNote,                         // 收货备注
 		})
 	}
 

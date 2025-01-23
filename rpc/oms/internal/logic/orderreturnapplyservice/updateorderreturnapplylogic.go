@@ -40,7 +40,7 @@ func (l *UpdateOrderReturnApplyLogic) UpdateOrderReturnApply(in *omsclient.Updat
 
 	returnApply.Status = in.Status
 	operTime := time.Now()
-	//确认退货
+	// 确认退货
 	if in.Status == 1 {
 		returnApply.CompanyAddressID = in.CompanyAddressId
 		returnApply.HandleTime = &operTime
@@ -48,14 +48,14 @@ func (l *UpdateOrderReturnApplyLogic) UpdateOrderReturnApply(in *omsclient.Updat
 		returnApply.HandleMan = in.HandleMan
 		returnApply.ReturnAmount = in.ReturnAmount
 	}
-	//完成退货
+	// 完成退货
 	if in.Status == 2 {
 		returnApply.CompanyAddressID = in.CompanyAddressId
 		returnApply.ReceiveMan = in.ReceiveMan
 		returnApply.ReceiveTime = &operTime
-		returnApply.ReceiveNote = &in.ReceiveNote
+		returnApply.ReceiveNote = in.ReceiveNote
 	}
-	//拒绝退货
+	// 拒绝退货
 	if in.Status == 3 {
 		returnApply.HandleTime = &operTime
 		returnApply.HandleNote = in.HandleNote

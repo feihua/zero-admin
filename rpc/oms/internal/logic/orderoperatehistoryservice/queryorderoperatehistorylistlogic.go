@@ -2,6 +2,7 @@ package orderoperatehistoryservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -45,12 +46,12 @@ func (l *QueryOrderOperateHistoryListLogic) QueryOrderOperateHistoryList(in *oms
 	for _, item := range result {
 
 		list = append(list, &omsclient.OrderOperateHistoryListData{
-			Id:          item.ID,
-			OrderId:     item.OrderID,
-			OperateMan:  item.OperateMan,
-			CreateTime:  item.CreateTime.Format("2006-01-02 15:04:05"),
-			OrderStatus: item.OrderStatus,
-			Note:        *item.Note,
+			Id:          item.ID,                              //
+			OrderId:     item.OrderID,                         // 订单id
+			OperateMan:  item.OperateMan,                      // 操作人：用户；系统；后台管理员
+			CreateTime:  time_util.TimeToStr(item.CreateTime), // 创建时间
+			OrderStatus: item.OrderStatus,                     // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+			Note:        item.Note,                            // 备注
 		})
 	}
 

@@ -33,7 +33,7 @@ func NewUpdateNoteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 
 // UpdateNote 备注订单
 func (l *UpdateNoteLogic) UpdateNote(in *omsclient.UpdateNoteReq) (*omsclient.UpdateNoteResp, error) {
-	//1.备注订单
+	// 1.备注订单
 	q := query.OmsOrder
 	order, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId)).First()
 	if err != nil {
@@ -50,14 +50,14 @@ func (l *UpdateNoteLogic) UpdateNote(in *omsclient.UpdateNoteReq) (*omsclient.Up
 		return nil, err
 	}
 
-	//2.添加操作记录
+	// 2.添加操作记录
 	var note = "修改备注信息" + in.Note
 	err = query.OmsOrderOperateHistory.WithContext(l.ctx).Create(&model.OmsOrderOperateHistory{
 		OrderID:     in.OrderId,
 		OperateMan:  in.OperateMan,
 		CreateTime:  now,
 		OrderStatus: in.Status,
-		Note:        &note,
+		Note:        note,
 	})
 	if err != nil {
 		return nil, err

@@ -33,7 +33,7 @@ func NewUpdateReceiverInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // UpdateReceiverInfo 修改收货人信息
 func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(in *omsclient.UpdateReceiverInfoReq) (*omsclient.UpdateReceiverInfoResp, error) {
-	//1.批量发货
+	// 1.批量发货
 	q := query.OmsOrder
 	order, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId)).First()
 	if err != nil {
@@ -56,14 +56,14 @@ func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(in *omsclient.UpdateReceive
 		return nil, err
 	}
 
-	//2.添加操作记录
+	// 2.添加操作记录
 	var note = "修改收货人信息"
 	err = query.OmsOrderOperateHistory.WithContext(l.ctx).Create(&model.OmsOrderOperateHistory{
 		OrderID:     in.OrderId,
 		OperateMan:  in.OperateMan,
 		CreateTime:  now,
 		OrderStatus: in.Status,
-		Note:        &note,
+		Note:        note,
 	})
 	if err != nil {
 		return nil, err

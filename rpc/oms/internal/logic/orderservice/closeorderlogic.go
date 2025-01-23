@@ -33,7 +33,7 @@ func NewCloseOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CloseO
 
 // CloseOrder 批量关闭订单
 func (l *CloseOrderLogic) CloseOrder(in *omsclient.CloseOrderReq) (*omsclient.CloseOrderResp, error) {
-	//1.批量关闭订单
+	// 1.批量关闭订单
 	q := query.OmsOrder
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.Status, 4)
 
@@ -41,7 +41,7 @@ func (l *CloseOrderLogic) CloseOrder(in *omsclient.CloseOrderReq) (*omsclient.Cl
 		return nil, err
 	}
 
-	//2.添加操作记录
+	// 2.添加操作记录
 	var note = "订单关闭" + in.Note
 	var histories []*model.OmsOrderOperateHistory
 	for _, id := range in.Ids {
@@ -50,7 +50,7 @@ func (l *CloseOrderLogic) CloseOrder(in *omsclient.CloseOrderReq) (*omsclient.Cl
 			OperateMan:  in.OperateMan,
 			CreateTime:  time.Now(),
 			OrderStatus: 4,
-			Note:        &note,
+			Note:        note,
 		})
 	}
 

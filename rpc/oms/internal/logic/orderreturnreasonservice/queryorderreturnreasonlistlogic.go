@@ -2,6 +2,7 @@ package orderreturnreasonservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -51,11 +52,11 @@ func (l *QueryOrderReturnReasonListLogic) QueryOrderReturnReasonList(in *omsclie
 	var list []*omsclient.OrderReturnReasonListData
 	for _, item := range result {
 		list = append(list, &omsclient.OrderReturnReasonListData{
-			Id:         item.ID,
-			Name:       item.Name,
-			Sort:       item.Sort,
-			Status:     item.Status,
-			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
+			Id:         item.ID,                              //
+			Name:       item.Name,                            // 退货类型
+			Sort:       item.Sort,                            // 排序
+			Status:     item.Status,                          // 状态：0->不启用；1->启用
+			CreateTime: time_util.TimeToStr(item.CreateTime), // 创建时间
 		})
 	}
 

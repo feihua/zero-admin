@@ -33,7 +33,7 @@ func NewUpdateMoneyInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 
 // UpdateMoneyInfo 修改订单费用信息
 func (l *UpdateMoneyInfoLogic) UpdateMoneyInfo(in *omsclient.UpdateMoneyInfoReq) (*omsclient.UpdateMoneyInfoResp, error) {
-	//1.修改订单费用信息
+	// 1.修改订单费用信息
 	q := query.OmsOrder
 	order, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId)).First()
 	if err != nil {
@@ -52,14 +52,14 @@ func (l *UpdateMoneyInfoLogic) UpdateMoneyInfo(in *omsclient.UpdateMoneyInfoReq)
 		return nil, err
 	}
 
-	//2.添加操作记录
+	// 2.添加操作记录
 	var note = "修改订单费用信息"
 	err = query.OmsOrderOperateHistory.WithContext(l.ctx).Create(&model.OmsOrderOperateHistory{
 		OrderID:     in.OrderId,
 		OperateMan:  in.OperateMan,
 		CreateTime:  now,
 		OrderStatus: in.Status,
-		Note:        &note,
+		Note:        note,
 	})
 	if err != nil {
 		return nil, err

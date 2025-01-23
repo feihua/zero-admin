@@ -43,24 +43,24 @@ func (l *QueryCartItemListLogic) QueryCartItemList(in *omsclient.QueryCartItemLi
 	var list []*omsclient.CartItemListData
 	for _, item := range result {
 		list = append(list, &omsclient.CartItemListData{
-			Id:                item.ID,
-			ProductId:         item.ProductID,
-			ProductSkuId:      item.ProductSkuID,
-			MemberId:          item.MemberID,
-			Quantity:          item.Quantity,
-			Price:             item.Price,
-			ProductPic:        item.ProductPic,
-			ProductName:       item.ProductName,
-			ProductSubTitle:   item.ProductSubTitle,
-			ProductSkuCode:    item.ProductSkuCode,
-			MemberNickname:    item.MemberNickname,
-			CreateDate:        item.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateDate:        time_util.TimeToString(item.UpdateTime),
-			DeleteStatus:      item.DeleteStatus,
-			ProductCategoryId: item.ProductCategoryID,
-			ProductBrand:      item.ProductBrand,
-			ProductSn:         item.ProductSn,
-			ProductAttr:       item.ProductAttr,
+			Id:                item.ID,                                 //
+			ProductId:         item.ProductID,                          // 商品id
+			ProductSkuId:      item.ProductSkuID,                       // 商品库存id
+			MemberId:          item.MemberID,                           // 会员id
+			Quantity:          item.Quantity,                           // 购买数量
+			Price:             item.Price,                              // 添加到购物车的价格
+			ProductPic:        item.ProductPic,                         // 商品主图
+			ProductName:       item.ProductName,                        // 商品名称
+			ProductSubTitle:   item.ProductSubTitle,                    // 商品副标题（卖点）
+			ProductSkuCode:    item.ProductSkuCode,                     // 商品sku条码
+			MemberNickname:    item.MemberNickname,                     // 会员昵称
+			CreateTime:        time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateTime:        time_util.TimeToString(item.UpdateTime), // 更新时间
+			DeleteStatus:      item.DeleteStatus,                       // 是否删除
+			ProductCategoryId: item.ProductCategoryID,                  // 商品分类
+			ProductBrand:      item.ProductBrand,                       // 商品品牌
+			ProductSn:         item.ProductSn,                          // 货号
+			ProductAttr:       item.ProductAttr,                        // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 		})
 	}
 

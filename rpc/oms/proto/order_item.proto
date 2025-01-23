@@ -6,26 +6,27 @@ option go_package = "./proto";
 
 // 添加订单中所包含的商品
 message AddOrderItemReq {
-  int64 coupon_amount = 1; //优惠券优惠分解金额
-  int32 gift_growth = 2; //
-  int32 gift_integration = 3; //
-  int64 real_amount = 4; //该商品经过优惠后的分解金额
-  int64 integration_amount = 5; //积分优惠分解金额
-  int64 order_id = 6; //订单id
-  string order_sn = 7; //订单编号
-  string product_attr = 8; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-  string product_brand = 9; //商品品牌
-  int64 product_category_id = 10; //商品分类id
-  int64 product_id = 11; //商品id
-  string product_name = 12; //商品名称
-  string product_pic = 13; //商品图片
-  int64 product_price = 14; //销售价格
-  int32 product_quantity = 15; //购买数量
-  string product_sku_code = 16; //商品sku条码
-  int64 product_sku_id = 17; //商品sku编号
-  string product_sn = 18; //货号
-  int64 promotion_amount = 19; //商品促销分解金额
-  string promotion_name = 20; //商品促销名称
+  int64 id = 1; //
+  int64 order_id = 2; //订单id
+  string order_sn = 3; //订单编号
+  int64 product_id = 4; //商品id
+  string product_pic = 5; //商品图片
+  string product_name = 6; //商品名称
+  string product_brand = 7; //商品品牌
+  string product_sn = 8; //货号
+  int64 product_price = 9; //销售价格
+  int32 product_quantity = 10; //购买数量
+  int64 product_sku_id = 11; //商品sku编号
+  string product_sku_code = 12; //商品sku条码
+  int64 product_category_id = 13; //商品分类id
+  string promotion_name = 14; //商品促销名称
+  int64 promotion_amount = 15; //商品促销分解金额
+  int64 coupon_amount = 16; //优惠券优惠分解金额
+  int64 integration_amount = 17; //积分优惠分解金额
+  int64 real_amount = 18; //该商品经过优惠后的分解金额
+  int32 gift_integration = 19; //
+  int32 gift_growth = 20; //
+  string product_attr = 21; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 
 }
 
@@ -39,27 +40,27 @@ message QueryOrderItemDetailReq {
 }
 
 message QueryOrderItemDetailResp {
-  int64 coupon_amount = 1; //优惠券优惠分解金额
-  int32 gift_growth = 2; //
-  int32 gift_integration = 3; //
-  int64 id = 4; //
-  int64 integration_amount = 5; //积分优惠分解金额
-  int64 order_id = 6; //订单id
-  string order_sn = 7; //订单编号
-  string product_attr = 8; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-  string product_brand = 9; //商品品牌
-  int64 product_category_id = 10; //商品分类id
-  int64 product_id = 11; //商品id
-  string product_name = 12; //商品名称
-  string product_pic = 13; //商品图片
-  int64 product_price = 14; //销售价格
-  int32 product_quantity = 15; //购买数量
-  string product_sku_code = 16; //商品sku条码
-  int64 product_sku_id = 17; //商品sku编号
-  string product_sn = 18; //货号
-  int64 promotion_amount = 19; //商品促销分解金额
-  string promotion_name = 20; //商品促销名称
-  int64 real_amount = 21; //该商品经过优惠后的分解金额
+  int64 id = 1; //
+  int64 order_id = 2; //订单id
+  string order_sn = 3; //订单编号
+  int64 product_id = 4; //商品id
+  string product_pic = 5; //商品图片
+  string product_name = 6; //商品名称
+  string product_brand = 7; //商品品牌
+  string product_sn = 8; //货号
+  int64 product_price = 9; //销售价格
+  int32 product_quantity = 10; //购买数量
+  int64 product_sku_id = 11; //商品sku编号
+  string product_sku_code = 12; //商品sku条码
+  int64 product_category_id = 13; //商品分类id
+  string promotion_name = 14; //商品促销名称
+  int64 promotion_amount = 15; //商品促销分解金额
+  int64 coupon_amount = 16; //优惠券优惠分解金额
+  int64 integration_amount = 17; //积分优惠分解金额
+  int64 real_amount = 18; //该商品经过优惠后的分解金额
+  int32 gift_integration = 19; //
+  int32 gift_growth = 20; //
+  string product_attr = 21; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 
 }
 
@@ -70,27 +71,27 @@ message QueryOrderItemListReq {
 }
 
 message OrderItemListData {
-  int64 coupon_amount = 1; //优惠券优惠分解金额
-  int32 gift_growth = 2; //
-  int32 gift_integration = 3; //
-  int64 id = 4; //
-  int64 integration_amount = 5; //积分优惠分解金额
-  int64 order_id = 6; //订单id
-  string order_sn = 7; //订单编号
-  string product_attr = 8; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-  string product_brand = 9; //商品品牌
-  int64 product_category_id = 10; //商品分类id
-  int64 product_id = 11; //商品id
-  string product_name = 12; //商品名称
-  string product_pic = 13; //商品图片
-  int64 product_price = 14; //销售价格
-  int32 product_quantity = 15; //购买数量
-  string product_sku_code = 16; //商品sku条码
-  int64 product_sku_id = 17; //商品sku编号
-  string product_sn = 18; //货号
-  int64 promotion_amount = 19; //商品促销分解金额
-  string promotion_name = 20; //商品促销名称
-  int64 real_amount = 21; //该商品经过优惠后的分解金额
+  int64 id = 1; //
+  int64 order_id = 2; //订单id
+  string order_sn = 3; //订单编号
+  int64 product_id = 4; //商品id
+  string product_pic = 5; //商品图片
+  string product_name = 6; //商品名称
+  string product_brand = 7; //商品品牌
+  string product_sn = 8; //货号
+  int64 product_price = 9; //销售价格
+  int32 product_quantity = 10; //购买数量
+  int64 product_sku_id = 11; //商品sku编号
+  string product_sku_code = 12; //商品sku条码
+  int64 product_category_id = 13; //商品分类id
+  string promotion_name = 14; //商品促销名称
+  int64 promotion_amount = 15; //商品促销分解金额
+  int64 coupon_amount = 16; //优惠券优惠分解金额
+  int64 integration_amount = 17; //积分优惠分解金额
+  int64 real_amount = 18; //该商品经过优惠后的分解金额
+  int32 gift_integration = 19; //
+  int32 gift_growth = 20; //
+  string product_attr = 21; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 
 }
 

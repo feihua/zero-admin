@@ -46,16 +46,16 @@ func (l *AddCompanyAddressLogic) AddCompanyAddress(in *omsclient.AddCompanyAddre
 		}
 	}
 	err := q.WithContext(l.ctx).Create(&model.OmsCompanyAddress{
-		AddressName:   in.AddressName,
-		SendStatus:    in.SendStatus,
-		ReceiveStatus: in.ReceiveStatus,
-		Name:          in.Name,
-		Phone:         in.Phone,
-		Province:      in.Province,
-		City:          in.City,
-		Region:        in.Region,
-		DetailAddress: in.DetailAddress,
-		CreateBy:      in.CreateBy,
+		AddressName:   in.AddressName,   // 地址名称
+		SendStatus:    in.SendStatus,    // 默认发货地址：0->否；1->是
+		ReceiveStatus: in.ReceiveStatus, // 是否默认收货地址：0->否；1->是
+		Name:          in.Name,          // 收发货人姓名
+		Phone:         in.Phone,         // 收货人电话
+		Province:      in.Province,      // 省/直辖市
+		City:          in.City,          // 市
+		Region:        in.Region,        // 区
+		DetailAddress: in.DetailAddress, // 详细地址
+		CreateBy:      in.CreateBy,      // 创建者
 	})
 
 	if err != nil {

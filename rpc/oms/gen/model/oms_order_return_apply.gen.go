@@ -38,7 +38,7 @@ type OmsOrderReturnApply struct {
 	HandleMan        string     `gorm:"column:handle_man;not null;comment:处理人员" json:"handle_man"`                     // 处理人员
 	ReceiveMan       string     `gorm:"column:receive_man;not null;comment:收货人" json:"receive_man"`                    // 收货人
 	ReceiveTime      *time.Time `gorm:"column:receive_time;comment:收货时间" json:"receive_time"`                          // 收货时间
-	ReceiveNote      *string    `gorm:"column:receive_note;comment:收货备注" json:"receive_note"`                          // 收货备注
+	ReceiveNote      string     `gorm:"column:receive_note;not null;comment:收货备注" json:"receive_note"`                 // 收货备注
 }
 
 // TableName OmsOrderReturnApply's table name

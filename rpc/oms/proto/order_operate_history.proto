@@ -6,10 +6,11 @@ option go_package = "./proto";
 
 // 添加订单操作历史记录
 message AddOrderOperateHistoryReq {
-  string note = 1; //备注
-  string operate_man = 2; //操作人：用户；系统；后台管理员
-  int64 order_id = 3; //订单id
-  int32 order_status = 4; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+  int64 id = 1; //
+  int64 order_id = 2; //订单id
+  string operate_man = 3; //操作人：用户；系统；后台管理员
+  int32 order_status = 5; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+  string note = 6; //备注
 
 }
 
@@ -36,12 +37,12 @@ message QueryOrderOperateHistoryListReq {
 }
 
 message OrderOperateHistoryListData {
-  string create_time = 1; //操作时间
-  int64 id = 2; //
-  string note = 3; //备注
-  string operate_man = 4; //操作人：用户；系统；后台管理员
-  int64 order_id = 5; //订单id
-  int32 order_status = 6; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+  int64 id = 1; //
+  int64 order_id = 2; //订单id
+  string operate_man = 3; //操作人：用户；系统；后台管理员
+  string create_time = 4; //创建时间
+  int32 order_status = 5; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+  string note = 6; //备注
 
 }
 

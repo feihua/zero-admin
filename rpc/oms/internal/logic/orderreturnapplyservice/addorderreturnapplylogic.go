@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
@@ -34,24 +32,23 @@ func NewAddOrderReturnApplyLogic(ctx context.Context, svcCtx *svc.ServiceContext
 // AddOrderReturnApply 添加订单退货申请
 func (l *AddOrderReturnApplyLogic) AddOrderReturnApply(in *omsclient.AddOrderReturnApplyReq) (*omsclient.AddOrderReturnApplyResp, error) {
 	err := query.OmsOrderReturnApply.WithContext(l.ctx).Create(&model.OmsOrderReturnApply{
-		OrderID:          in.OrderId,
-		ProductID:        in.ProductId,
-		OrderSn:          in.OrderSn,
-		CreateTime:       time.Now(),
-		MemberUsername:   in.MemberUsername,
-		ReturnName:       in.ReturnName,
-		ReturnPhone:      in.ReturnPhone,
-		Status:           in.Status,
-		ProductPic:       in.ProductPic,
-		ProductName:      in.ProductName,
-		ProductBrand:     in.ProductBrand,
-		ProductAttr:      in.ProductAttr,
-		ProductCount:     in.ProductCount,
-		ProductPrice:     in.ProductPrice,
-		ProductRealPrice: in.ProductRealPrice,
-		Reason:           in.Reason,
-		Description:      in.Description,
-		ProofPics:        in.ProofPics,
+		OrderID:          in.OrderId,          // 订单id
+		ProductID:        in.ProductId,        // 退货商品id
+		OrderSn:          in.OrderSn,          // 订单编号
+		MemberUsername:   in.MemberUsername,   // 会员用户名
+		ReturnName:       in.ReturnName,       // 退货人姓名
+		ReturnPhone:      in.ReturnPhone,      // 退货人电话
+		Status:           in.Status,           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+		ProductPic:       in.ProductPic,       // 商品图片
+		ProductName:      in.ProductName,      // 商品名称
+		ProductBrand:     in.ProductBrand,     // 商品品牌
+		ProductAttr:      in.ProductAttr,      // 商品销售属性：颜色：红色；尺码：xl;
+		ProductCount:     in.ProductCount,     // 退货数量
+		ProductPrice:     in.ProductPrice,     // 商品单价
+		ProductRealPrice: in.ProductRealPrice, // 商品实际支付单价
+		Reason:           in.Reason,           // 原因
+		Description:      in.Description,      // 描述
+		ProofPics:        in.ProofPics,        // 凭证图片，以逗号隔开
 	})
 
 	if err != nil {

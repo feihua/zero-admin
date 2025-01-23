@@ -6,19 +6,17 @@ option go_package = "./proto";
 
 // 添加公司收发货地址表
 message AddCompanyAddressReq {
-  string address_name = 1; //地址名称
-  string city = 2; //市
-  string create_by = 3; //创建者
-  int32 send_status = 4; //默认发货地址：0->否；1->是
-  string detail_address = 5; //详细地址
-  string region = 6; //区
-  string name = 7; //收发货人姓名
-  string phone = 8; //收货人电话
-  string province = 9; //省/直辖市
-  int32 receive_status = 10; //是否默认收货地址：0->否；1->是
-
-
-
+  int64 id = 1; //
+  string address_name = 2; //地址名称
+  int32 send_status = 3; //默认发货地址：0->否；1->是
+  int32 receive_status = 4; //是否默认收货地址：0->否；1->是
+  string name = 5; //收发货人姓名
+  string phone = 6; //收货人电话
+  string province = 7; //省/直辖市
+  string city = 8; //市
+  string region = 9; //区
+  string detail_address = 10; //详细地址
+  string create_by = 11; //创建者
 }
 
 message AddCompanyAddressResp {
@@ -36,18 +34,17 @@ message DeleteCompanyAddressResp {
 
 // 更新公司收发货地址表
 message UpdateCompanyAddressReq {
-  string address_name = 1; //地址名称
-  string city = 2; //市
-  string region = 3; //区
-  string update_by = 4; //更新者
-  string detail_address = 5; //详细地址
-  int64 id = 6; //
-  string name = 7; //收发货人姓名
-  string phone = 8; //收货人电话
-  string province = 9; //省/直辖市
-
-
-
+  int64 id = 1; //
+  string address_name = 2; //地址名称
+  int32 send_status = 3; //默认发货地址：0->否；1->是
+  int32 receive_status = 4; //是否默认收货地址：0->否；1->是
+  string name = 5; //收发货人姓名
+  string phone = 6; //收货人电话
+  string province = 7; //省/直辖市
+  string city = 8; //市
+  string region = 9; //区
+  string detail_address = 10; //详细地址
+  string update_by = 13; //更新者
 }
 
 message UpdateCompanyAddressResp {
@@ -76,18 +73,18 @@ message QueryCompanyAddressDetailReq {
 }
 
 message QueryCompanyAddressDetailResp {
-  string address_name = 1; //地址名称
-  string city = 2; //市
-  string create_by = 3; //创建者
-  string create_time = 4; //创建时间
-  string detail_address = 5; //详细地址
-  int64 id = 6; //
-  string name = 7; //收发货人姓名
-  string phone = 8; //收货人电话
-  string province = 9; //省/直辖市
-  int32 receive_status = 10; //是否默认收货地址：0->否；1->是
-  string region = 11; //区
-  int32 send_status = 12; //默认发货地址：0->否；1->是
+  int64 id = 1; //
+  string address_name = 2; //地址名称
+  int32 send_status = 3; //默认发货地址：0->否；1->是
+  int32 receive_status = 4; //是否默认收货地址：0->否；1->是
+  string name = 5; //收发货人姓名
+  string phone = 6; //收货人电话
+  string province = 7; //省/直辖市
+  string city = 8; //市
+  string region = 9; //区
+  string detail_address = 10; //详细地址
+  string create_by = 11; //创建者
+  string create_time = 12; //创建时间
   string update_by = 13; //更新者
   string update_time = 14; //更新时间
 
@@ -103,18 +100,18 @@ message QueryCompanyAddressListReq {
 }
 
 message CompanyAddressListData {
-  string address_name = 1; //地址名称
-  string city = 2; //市
-  string create_by = 3; //创建者
-  string create_time = 4; //创建时间
-  string detail_address = 5; //详细地址
-  int64 id = 6; //
-  string name = 7; //收发货人姓名
-  string phone = 8; //收货人电话
-  string province = 9; //省/直辖市
-  int32 receive_status = 10; //是否默认收货地址：0->否；1->是
-  string region = 11; //区
-  int32 send_status = 12; //默认发货地址：0->否；1->是
+  int64 id = 1; //
+  string address_name = 2; //地址名称
+  int32 send_status = 3; //默认发货地址：0->否；1->是
+  int32 receive_status = 4; //是否默认收货地址：0->否；1->是
+  string name = 5; //收发货人姓名
+  string phone = 6; //收货人电话
+  string province = 7; //省/直辖市
+  string city = 8; //市
+  string region = 9; //区
+  string detail_address = 10; //详细地址
+  string create_by = 11; //创建者
+  string create_time = 12; //创建时间
   string update_by = 13; //更新者
   string update_time = 14; //更新时间
 

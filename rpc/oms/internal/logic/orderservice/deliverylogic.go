@@ -33,7 +33,7 @@ func NewDeliveryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delivery
 
 // Delivery 批量发货
 func (l *DeliveryLogic) Delivery(in *omsclient.DeliveryReq) (*omsclient.DeliveryResp, error) {
-	//1.批量发货
+	// 1.批量发货
 	q := query.OmsOrder
 	order, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId)).First()
 	if err != nil {
@@ -52,14 +52,14 @@ func (l *DeliveryLogic) Delivery(in *omsclient.DeliveryReq) (*omsclient.Delivery
 		return nil, err
 	}
 
-	//2.添加操作记录
+	// 2.添加操作记录
 	var note = "完成发货"
 	err = query.OmsOrderOperateHistory.WithContext(l.ctx).Create(&model.OmsOrderOperateHistory{
 		OrderID:     in.OrderId,
 		OperateMan:  in.OperateMan,
 		CreateTime:  now,
 		OrderStatus: 2,
-		Note:        &note,
+		Note:        note,
 	})
 	if err != nil {
 		return nil, err

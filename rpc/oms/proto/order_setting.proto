@@ -6,15 +6,14 @@ option go_package = "./proto";
 
 // 添加订单设置表
 message AddOrderSettingReq {
-  int32 comment_overtime = 1; //订单完成后自动好评时间（天）
-  int32 confirm_overtime = 2; //发货后自动确认收货时间（天）
-  int32 finish_overtime = 3; //自动完成交易时间，不能申请售后（天）
-  int32 flash_order_overtime = 4; //秒杀订单超时关闭时间(分)
-  int32 status = 5; //状态：0->禁用；1->启用
-  int32 is_default = 6; //是否默认：0->否；1->是
-  int32 normal_order_overtime = 7; //正常订单超时时间(分)
-
-
+  int64 id = 1; //
+  int32 flash_order_overtime = 2; //秒杀订单超时关闭时间(分)
+  int32 normal_order_overtime = 3; //正常订单超时时间(分)
+  int32 confirm_overtime = 4; //发货后自动确认收货时间（天）
+  int32 finish_overtime = 5; //自动完成交易时间，不能申请售后（天）
+  int32 status = 6; //状态：0->禁用；1->启用
+  int32 is_default = 7; //是否默认：0->否；1->是
+  int32 comment_overtime = 8; //订单完成后自动好评时间（天）
 }
 
 message AddOrderSettingResp {
@@ -32,12 +31,14 @@ message DeleteOrderSettingResp {
 
 // 更新订单设置表
 message UpdateOrderSettingReq {
-  int32 comment_overtime = 1; //订单完成后自动好评时间（天）
-  int32 confirm_overtime = 2; //发货后自动确认收货时间（天）
-  int32 finish_overtime = 3; //自动完成交易时间，不能申请售后（天）
-  int32 flash_order_overtime = 4; //秒杀订单超时关闭时间(分)
-  int64 id = 5; //
-  int32 normal_order_overtime = 6; //正常订单超时时间(分)
+  int64 id = 1; //
+  int32 flash_order_overtime = 2; //秒杀订单超时关闭时间(分)
+  int32 normal_order_overtime = 3; //正常订单超时时间(分)
+  int32 confirm_overtime = 4; //发货后自动确认收货时间（天）
+  int32 finish_overtime = 5; //自动完成交易时间，不能申请售后（天）
+  int32 status = 6; //状态：0->禁用；1->启用
+  int32 is_default = 7; //是否默认：0->否；1->是
+  int32 comment_overtime = 8; //订单完成后自动好评时间（天）
 
 }
 
@@ -68,14 +69,14 @@ message QueryOrderSettingDetailReq {
 }
 
 message QueryOrderSettingDetailResp {
-  int32 comment_overtime = 1; //订单完成后自动好评时间（天）
-  int32 confirm_overtime = 2; //发货后自动确认收货时间（天）
-  int32 finish_overtime = 3; //自动完成交易时间，不能申请售后（天）
-  int32 flash_order_overtime = 4; //秒杀订单超时关闭时间(分)
-  int64 id = 5; //
-  int32 is_default = 6; //是否默认：0->否；1->是
-  int32 normal_order_overtime = 7; //正常订单超时时间(分)
-  int32 status = 8; //状态：0->禁用；1->启用
+  int64 id = 1; //
+  int32 flash_order_overtime = 2; //秒杀订单超时关闭时间(分)
+  int32 normal_order_overtime = 3; //正常订单超时时间(分)
+  int32 confirm_overtime = 4; //发货后自动确认收货时间（天）
+  int32 finish_overtime = 5; //自动完成交易时间，不能申请售后（天）
+  int32 status = 6; //状态：0->禁用；1->启用
+  int32 is_default = 7; //是否默认：0->否；1->是
+  int32 comment_overtime = 8; //订单完成后自动好评时间（天）
 
 }
 
@@ -88,14 +89,14 @@ message QueryOrderSettingListReq {
 }
 
 message OrderSettingListData {
-  int32 comment_overtime = 1; //订单完成后自动好评时间（天）
-  int32 confirm_overtime = 2; //发货后自动确认收货时间（天）
-  int32 finish_overtime = 3; //自动完成交易时间，不能申请售后（天）
-  int32 flash_order_overtime = 4; //秒杀订单超时关闭时间(分)
-  int64 id = 5; //
-  int32 is_default = 6; //是否默认：0->否；1->是
-  int32 normal_order_overtime = 7; //正常订单超时时间(分)
-  int32 status = 8; //状态：0->禁用；1->启用
+  int64 id = 1; //
+  int32 flash_order_overtime = 2; //秒杀订单超时关闭时间(分)
+  int32 normal_order_overtime = 3; //正常订单超时时间(分)
+  int32 confirm_overtime = 4; //发货后自动确认收货时间（天）
+  int32 finish_overtime = 5; //自动完成交易时间，不能申请售后（天）
+  int32 status = 6; //状态：0->禁用；1->启用
+  int32 is_default = 7; //是否默认：0->否；1->是
+  int32 comment_overtime = 8; //订单完成后自动好评时间（天）
 
 }
 
@@ -111,11 +112,11 @@ service OrderSettingService {
   // 删除订单设置表
   rpc DeleteOrderSetting(DeleteOrderSettingReq) returns (DeleteOrderSettingResp){}
   // 更新订单设置表
-  rpc UpdateOrderSetting(UpdateOrderSettingReq) returns (UpdateOrderSettingResp ){}
+  rpc UpdateOrderSetting(UpdateOrderSettingReq) returns (UpdateOrderSettingResp){}
   // 更新订单设置表是否为默认
-  rpc UpdateOrderSettingIsDefault(UpdateOrderSettingIsDefaultReq) returns (UpdateOrderSettingStatusResp ){}
+  rpc UpdateOrderSettingIsDefault(UpdateOrderSettingIsDefaultReq) returns (UpdateOrderSettingStatusResp){}
   // 更新订单设置表状态
-  rpc UpdateOrderSettingStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp ){}
+  rpc UpdateOrderSettingStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp){}
   // 查询订单设置表详情
   rpc QueryOrderSettingDetail(QueryOrderSettingDetailReq) returns (QueryOrderSettingDetailResp){}
   // 查询订单设置表列表

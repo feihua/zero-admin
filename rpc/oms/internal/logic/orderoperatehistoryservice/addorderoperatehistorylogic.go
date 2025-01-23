@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
@@ -34,11 +32,10 @@ func NewAddOrderOperateHistoryLogic(ctx context.Context, svcCtx *svc.ServiceCont
 // AddOrderOperateHistory 添加订单操作历史记录
 func (l *AddOrderOperateHistoryLogic) AddOrderOperateHistory(in *omsclient.AddOrderOperateHistoryReq) (*omsclient.AddOrderOperateHistoryResp, error) {
 	err := query.OmsOrderOperateHistory.WithContext(l.ctx).Create(&model.OmsOrderOperateHistory{
-		OrderID:     in.OrderId,
-		OperateMan:  in.OperateMan,
-		CreateTime:  time.Now(),
-		OrderStatus: in.OrderStatus,
-		Note:        &in.Note,
+		OrderID:     in.OrderId,     // 订单id
+		OperateMan:  in.OperateMan,  // 操作人：用户；系统；后台管理员
+		OrderStatus: in.OrderStatus, // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+		Note:        in.Note,        // 备注
 	})
 
 	if err != nil {

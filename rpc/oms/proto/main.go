@@ -35,8 +35,8 @@ func main() {
 			fmt.Printf("Error reading file %s: %s\n", fileName, err)
 			continue
 		}
-		startContents = fileData[:65]
-		fileData = fileData[66:]
+		startContents = fileData[:69]
+		fileData = fileData[70:]
 
 		fileContents = append(fileContents, fileData...)
 	}

@@ -6,24 +6,32 @@ option go_package = "./proto";
 
 // 添加订单退货申请
 message AddOrderReturnApplyReq {
-  string return_name = 1; //退货人姓名
-  string return_phone = 2; //退货人电话
-  string description = 3; //描述
-  string reason = 4; //原因
-  int64 return_amount = 5; //退款金额
-  string proof_pics = 6; //凭证图片，以逗号隔开
-  int32 status = 7; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-  string member_username = 8; //会员用户名
-  int64 order_id = 9; //订单id
-  string order_sn = 10; //订单编号
-  string product_attr = 11; //商品销售属性：颜色：红色；尺码：xl;
-  string product_brand = 12; //商品品牌
-  int32 product_count = 13; //退货数量
-  int64 product_id = 14; //退货商品id
-  string product_name = 15; //商品名称
-  string product_pic = 16; //商品图片
-  int64 product_price = 17; //商品单价
-  int64 product_real_price = 18; //商品实际支付单价
+  int64 id = 1; //
+  int64 order_id = 2; //订单id
+  int64 company_address_id = 3; //收货地址表id
+  int64 product_id = 4; //退货商品id
+  string order_sn = 5; //订单编号
+  string member_username = 7; //会员用户名
+  int64 return_amount = 8; //退款金额
+  string return_name = 9; //退货人姓名
+  string return_phone = 10; //退货人电话
+  int32 status = 11; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+  string handle_time = 12; //处理时间
+  string product_pic = 13; //商品图片
+  string product_name = 14; //商品名称
+  string product_brand = 15; //商品品牌
+  string product_attr = 16; //商品销售属性：颜色：红色；尺码：xl;
+  int32 product_count = 17; //退货数量
+  int64 product_price = 18; //商品单价
+  int64 product_real_price = 19; //商品实际支付单价
+  string reason = 20; //原因
+  string description = 21; //描述
+  string proof_pics = 22; //凭证图片，以逗号隔开
+  string handle_note = 23; //处理备注
+  string handle_man = 24; //处理人员
+  string receive_man = 25; //收货人
+  string receive_time = 26; //收货时间
+  string receive_note = 27; //收货备注
 
 }
 
@@ -63,33 +71,33 @@ message QueryOrderReturnApplyDetailReq {
 }
 
 message QueryOrderReturnApplyDetailResp {
-  int64 company_address_id = 1; //收货地址表id
-  string create_time = 2; //申请时间
-  string description = 3; //描述
-  string handle_man = 4; //处理人员
-  string handle_note = 5; //处理备注
-  string handle_time = 6; //处理时间
-  int64 id = 7; //
-  string member_username = 8; //会员用户名
-  int64 order_id = 9; //订单id
-  string order_sn = 10; //订单编号
-  string product_attr = 11; //商品销售属性：颜色：红色；尺码：xl;
-  string product_brand = 12; //商品品牌
-  int32 product_count = 13; //退货数量
-  int64 product_id = 14; //退货商品id
-  string product_name = 15; //商品名称
-  string product_pic = 16; //商品图片
-  int64 product_price = 17; //商品单价
-  int64 product_real_price = 18; //商品实际支付单价
-  string proof_pics = 19; //凭证图片，以逗号隔开
+  int64 id = 1; //
+  int64 order_id = 2; //订单id
+  int64 company_address_id = 3; //收货地址表id
+  int64 product_id = 4; //退货商品id
+  string order_sn = 5; //订单编号
+  string create_time = 6; //申请时间
+  string member_username = 7; //会员用户名
+  int64 return_amount = 8; //退款金额
+  string return_name = 9; //退货人姓名
+  string return_phone = 10; //退货人电话
+  int32 status = 11; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+  string handle_time = 12; //处理时间
+  string product_pic = 13; //商品图片
+  string product_name = 14; //商品名称
+  string product_brand = 15; //商品品牌
+  string product_attr = 16; //商品销售属性：颜色：红色；尺码：xl;
+  int32 product_count = 17; //退货数量
+  int64 product_price = 18; //商品单价
+  int64 product_real_price = 19; //商品实际支付单价
   string reason = 20; //原因
-  string receive_man = 21; //收货人
-  string receive_note = 22; //收货备注
-  string receive_time = 23; //收货时间
-  int64 return_amount = 24; //退款金额
-  string return_name = 25; //退货人姓名
-  string return_phone = 26; //退货人电话
-  int32 status = 27; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+  string description = 21; //描述
+  string proof_pics = 22; //凭证图片，以逗号隔开
+  string handle_note = 23; //处理备注
+  string handle_man = 24; //处理人员
+  string receive_man = 25; //收货人
+  string receive_time = 26; //收货时间
+  string receive_note = 27; //收货备注
 
 }
 
@@ -108,33 +116,33 @@ message QueryOrderReturnApplyListReq {
 }
 
 message OrderReturnApplyListData {
-  int64 company_address_id = 1; //收货地址表id
-  string create_time = 2; //申请时间
-  string description = 3; //描述
-  string handle_man = 4; //处理人员
-  string handle_note = 5; //处理备注
-  string handle_time = 6; //处理时间
-  int64 id = 7; //
-  string member_username = 8; //会员用户名
-  int64 order_id = 9; //订单id
-  string order_sn = 10; //订单编号
-  string product_attr = 11; //商品销售属性：颜色：红色；尺码：xl;
-  string product_brand = 12; //商品品牌
-  int32 product_count = 13; //退货数量
-  int64 product_id = 14; //退货商品id
-  string product_name = 15; //商品名称
-  string product_pic = 16; //商品图片
-  int64 product_price = 17; //商品单价
-  int64 product_real_price = 18; //商品实际支付单价
-  string proof_pics = 19; //凭证图片，以逗号隔开
+  int64 id = 1; //
+  int64 order_id = 2; //订单id
+  int64 company_address_id = 3; //收货地址表id
+  int64 product_id = 4; //退货商品id
+  string order_sn = 5; //订单编号
+  string create_time = 6; //申请时间
+  string member_username = 7; //会员用户名
+  int64 return_amount = 8; //退款金额
+  string return_name = 9; //退货人姓名
+  string return_phone = 10; //退货人电话
+  int32 status = 11; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+  string handle_time = 12; //处理时间
+  string product_pic = 13; //商品图片
+  string product_name = 14; //商品名称
+  string product_brand = 15; //商品品牌
+  string product_attr = 16; //商品销售属性：颜色：红色；尺码：xl;
+  int32 product_count = 17; //退货数量
+  int64 product_price = 18; //商品单价
+  int64 product_real_price = 19; //商品实际支付单价
   string reason = 20; //原因
-  string receive_man = 21; //收货人
-  string receive_note = 22; //收货备注
-  string receive_time = 23; //收货时间
-  int64 return_amount = 24; //退款金额
-  string return_name = 25; //退货人姓名
-  string return_phone = 26; //退货人电话
-  int32 status = 27; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+  string description = 21; //描述
+  string proof_pics = 22; //凭证图片，以逗号隔开
+  string handle_note = 23; //处理备注
+  string handle_man = 24; //处理人员
+  string receive_man = 25; //收货人
+  string receive_time = 26; //收货时间
+  string receive_note = 27; //收货备注
 
 }
 

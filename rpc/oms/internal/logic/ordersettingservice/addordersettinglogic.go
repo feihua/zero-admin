@@ -40,11 +40,13 @@ func (l *AddOrderSettingLogic) AddOrderSetting(in *omsclient.AddOrderSettingReq)
 	}
 
 	err := q.WithContext(l.ctx).Create(&model.OmsOrderSetting{
-		FlashOrderOvertime:  in.FinishOvertime,
-		NormalOrderOvertime: in.NormalOrderOvertime,
-		ConfirmOvertime:     in.ConfirmOvertime,
-		FinishOvertime:      in.FinishOvertime,
-		CommentOvertime:     in.CommentOvertime,
+		FlashOrderOvertime:  in.FlashOrderOvertime,  // 秒杀订单超时关闭时间(分)
+		NormalOrderOvertime: in.NormalOrderOvertime, // 正常订单超时时间(分)
+		ConfirmOvertime:     in.ConfirmOvertime,     // 发货后自动确认收货时间（天）
+		FinishOvertime:      in.FinishOvertime,      // 自动完成交易时间，不能申请售后（天）
+		Status:              in.Status,              // 状态：0->禁用；1->启用
+		IsDefault:           in.IsDefault,           // 是否默认：0->否；1->是
+		CommentOvertime:     in.CommentOvertime,     // 订单完成后自动好评时间（天）
 	})
 
 	if err != nil {
