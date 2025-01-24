@@ -96,15 +96,6 @@ android版本体验地址 [flutter-mall-app](https://www.pgyer.com/OoW2Zy)
 **预览地址**http://110.41.179.89/mall <span  style="color: red;"> 账号：admin 密码: 123456</span>
 > 注：演示账号部分功能修改删除权限未开放。
 
-支付模块：(独立与zero-admin)
-参考[Jeepay](https://github.com/jeecgboot/jeepay)和[dax-pay](https://gitee.com/dromara/dax-pay)
-
-* **半成品**
-* **半成品**
-* **半成品**
-* (react版本预览地址[http://110.41.179.89/pay/home))<span  style="color: red;"> 账号：admin 密码: 123456</span>
-* (vue预览地址[http://110.41.179.89/vue/home))<span  style="color: red;"> 账号：admin 密码: 123456</span>
-
 
 # 2.感谢
 [go-zero](https://github.com/zeromicro/go-zero)
