@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
@@ -34,13 +32,12 @@ func NewAddIntegrationChangeHistoryLogic(ctx context.Context, svcCtx *svc.Servic
 // AddIntegrationChangeHistory 添加积分变化历史记录表
 func (l *AddIntegrationChangeHistoryLogic) AddIntegrationChangeHistory(in *umsclient.AddIntegrationChangeHistoryReq) (*umsclient.AddIntegrationChangeHistoryResp, error) {
 	err := query.UmsIntegrationChangeHistory.WithContext(l.ctx).Create(&model.UmsIntegrationChangeHistory{
-		MemberID:    in.MemberId,
-		CreateTime:  time.Now(),
-		ChangeType:  in.ChangeType,
-		ChangeCount: in.ChangeCount,
-		OperateMan:  in.OperateMan,
-		OperateNote: in.OperateNote,
-		SourceType:  in.SourceType,
+		MemberID:    in.MemberId,    // 会员id
+		ChangeType:  in.ChangeType,  // 改变类型：0->增加；1->减少
+		ChangeCount: in.ChangeCount, // 积分改变数量
+		OperateMan:  in.OperateMan,  // 操作人员
+		OperateNote: in.OperateNote, // 操作备注
+		SourceType:  in.SourceType,  // 积分来源：0->购物；1->管理员修改
 	})
 
 	if err != nil {

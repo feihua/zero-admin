@@ -33,8 +33,8 @@ func NewAddMemberProductCategoryRelationLogic(ctx context.Context, svcCtx *svc.S
 // AddMemberProductCategoryRelation 添加会员与产品分类关系表（用户喜欢的分类）
 func (l *AddMemberProductCategoryRelationLogic) AddMemberProductCategoryRelation(in *umsclient.AddMemberProductCategoryRelationReq) (*umsclient.AddMemberProductCategoryRelationResp, error) {
 	err := query.UmsMemberProductCategoryRelation.WithContext(l.ctx).Create(&model.UmsMemberProductCategoryRelation{
-		MemberID:          in.MemberId,
-		ProductCategoryID: in.ProductCategoryId,
+		MemberID:          in.MemberId,          // 会员id
+		ProductCategoryID: in.ProductCategoryId, // 商品分类id
 	})
 
 	if err != nil {

@@ -33,13 +33,13 @@ func NewAddFeightTemplateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // AddFeightTemplate 添加运费模版
 func (l *AddFeightTemplateLogic) AddFeightTemplate(in *pmsclient.AddFeightTemplateReq) (*pmsclient.AddFeightTemplateResp, error) {
 	err := query.PmsFeightTemplate.WithContext(l.ctx).Create(&model.PmsFeightTemplate{
-		Name:           in.Name,
-		ChargeType:     in.ChargeType,
-		FirstWeight:    in.FirstWeight,
-		FirstFee:       in.FirstFee,
-		ContinueWeight: in.ContinueWeight,
-		ContinueFee:    in.ContinueFee,
-		Dest:           in.Dest,
+		Name:           in.Name,           // 运费模版名称
+		ChargeType:     in.ChargeType,     // 计费类型:0->按重量；1->按件数
+		FirstWeight:    in.FirstWeight,    // 首重kg
+		FirstFee:       in.FirstFee,       // 首费（元）
+		ContinueWeight: in.ContinueWeight, // 续重kg
+		ContinueFee:    in.ContinueFee,    // 续费（元）
+		Dest:           in.Dest,           // 目的地（省、市）
 	})
 
 	if err != nil {

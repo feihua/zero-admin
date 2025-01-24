@@ -56,18 +56,18 @@ func (l *QueryProductAttributeListLogic) QueryProductAttributeList(in *pmsclient
 	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductAttributeListData{
-			Id:                         item.ID,
-			ProductAttributeCategoryId: item.ProductAttributeCategoryID,
-			Name:                       item.Name,
-			SelectType:                 item.SelectType,
-			InputType:                  item.InputType,
-			InputList:                  item.InputList,
-			Sort:                       item.Sort,
-			FilterType:                 item.FilterType,
-			SearchType:                 item.SearchType,
-			RelatedStatus:              item.RelatedStatus,
-			HandAddStatus:              item.HandAddStatus,
-			Type:                       item.Type,
+			Id:                         item.ID,                         //
+			ProductAttributeCategoryId: item.ProductAttributeCategoryID, // 商品属性分类id
+			Name:                       item.Name,                       // 商品属性分类id
+			SelectType:                 item.SelectType,                 // 属性选择类型：0->唯一；1->单选；2->多选
+			InputType:                  item.InputType,                  // 属性录入方式：0->手工录入；1->从列表中选取
+			InputList:                  item.InputList,                  // 可选值列表，以逗号隔开
+			Sort:                       item.Sort,                       // 排序字段：最高的可以单独上传图片
+			FilterType:                 item.FilterType,                 // 分类筛选样式：1->普通；1->颜色
+			SearchType:                 item.SearchType,                 // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
+			RelatedStatus:              item.RelatedStatus,              // 相同属性产品是否关联；0->不关联；1->关联
+			HandAddStatus:              item.HandAddStatus,              // 是否支持手动新增；0->不支持；1->支持
+			Type:                       item.Type,                       // 属性的类型；0->规格；1->参数
 		})
 	}
 

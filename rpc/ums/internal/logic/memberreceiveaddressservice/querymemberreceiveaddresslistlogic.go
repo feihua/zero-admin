@@ -44,21 +44,21 @@ func (l *QueryMemberReceiveAddressListLogic) QueryMemberReceiveAddressList(in *u
 		return nil, err
 	}
 	var list []*umsclient.MemberReceiveAddressListData
-	for _, address := range result {
+	for _, item := range result {
 
 		list = append(list, &umsclient.MemberReceiveAddressListData{
-			Id:            address.ID,
-			MemberId:      address.MemberID,
-			MemberName:    address.MemberName,
-			PhoneNumber:   address.PhoneNumber,
-			DefaultStatus: address.DefaultStatus,
-			PostCode:      address.PostCode,
-			Province:      address.Province,
-			City:          address.City,
-			Region:        address.Region,
-			DetailAddress: address.DetailAddress,
-			CreateTime:    address.CreateTime.Format("2006-01-02 15:04:05"),
-			UpdateTime:    time_util.TimeToString(address.UpdateTime),
+			Id:            item.ID,                                 //
+			MemberId:      item.MemberID,                           // 会员id
+			MemberName:    item.MemberName,                         // 收货人名称
+			PhoneNumber:   item.PhoneNumber,                        // 收货人电话
+			DefaultStatus: item.DefaultStatus,                      // 是否为默认
+			PostCode:      item.PostCode,                           // 邮政编码
+			Province:      item.Province,                           // 省份/直辖市
+			City:          item.City,                               // 城市
+			Region:        item.Region,                             // 区
+			DetailAddress: item.DetailAddress,                      // 详细地址(街道)
+			CreateTime:    time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateTime:    time_util.TimeToString(item.UpdateTime), // 更新时间
 		})
 	}
 

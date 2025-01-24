@@ -6,8 +6,9 @@ option go_package = "./proto";
 
 // 添加用户和标签关系表
 message AddMemberMemberTagRelationReq {
-  int64 member_id = 1; //会员id
-  int64 tag_id = 2; //标签id
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int64 tag_id = 3; //标签id
 
 }
 

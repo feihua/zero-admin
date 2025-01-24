@@ -53,17 +53,17 @@ func (l *UpdateProductCategoryLogic) UpdateProductCategory(in *pmsclient.UpdateP
 	q := query.PmsProductCategory
 	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductCategory{
 		ID:           in.Id,
-		ParentID:     in.ParentId,
-		Name:         in.Name,
-		Level:        in.Level,
-		ProductCount: in.ProductCount,
-		ProductUnit:  in.ProductUnit,
-		NavStatus:    in.NavStatus,
-		ShowStatus:   in.ShowStatus,
-		Sort:         in.Sort,
-		Icon:         in.Icon,
-		Keywords:     in.Keywords,
-		Description:  in.Description,
+		ParentID:     in.ParentId,     // 上机分类的编号：0表示一级分类
+		Name:         in.Name,         // 商品分类名称
+		Level:        in.Level,        // 分类级别：0->1级；1->2级
+		ProductCount: in.ProductCount, // 商品数量
+		ProductUnit:  in.ProductUnit,  // 商品数量
+		NavStatus:    in.NavStatus,    // 是否显示在导航栏：0->不显示；1->显示
+		ShowStatus:   in.ShowStatus,   // 显示状态：0->不显示；1->显示
+		Sort:         in.Sort,         // 排序
+		Icon:         in.Icon,         // 图标
+		Keywords:     in.Keywords,     // 关键字
+		Description:  in.Description,  // 描述
 	})
 
 	if err != nil {

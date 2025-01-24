@@ -45,9 +45,9 @@ func (l *QueryProductCategoryAttributeRelationListLogic) QueryProductCategoryAtt
 	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductCategoryAttributeRelationListData{
-			Id:                 item.ID,
-			ProductCategoryId:  item.ProductCategoryID,
-			ProductAttributeId: item.ProductAttributeID,
+			Id:                 item.ID,                 //
+			ProductCategoryId:  item.ProductCategoryID,  // 商品分类id
+			ProductAttributeId: item.ProductAttributeID, // 商品属性id
 		})
 	}
 

@@ -6,19 +6,19 @@ option go_package = "./proto";
 
 // 添加品牌表
 message AddBrandReq {
-  string big_pic = 1; //专区大图
-  string brand_story = 2; //品牌故事
-  string create_by = 3; //创建者
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string first_letter = 3; //首字母
   int32 sort = 4; //排序
   int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  string first_letter = 6; //首字母
-  int32 show_status = 7; //品牌显示状态
-  string logo = 8; //品牌logo
-  string name = 9; //品牌名称
-  int32 product_comment_count = 10; //产品评论数量
-  int32 product_count = 11; //产品数量
-  int32 recommend_status = 12; //推荐状态
-
+  int32 show_status = 6; //品牌显示状态
+  int32 recommend_status = 7; //推荐状态
+  int32 product_count = 8; //产品数量
+  int32 product_comment_count = 9; //产品评论数量
+  string logo = 10; //品牌logo
+  string big_pic = 11; //专区大图
+  string brand_story = 12; //品牌故事
+  string create_by = 13; //创建者
 }
 
 message AddBrandResp {
@@ -36,19 +36,19 @@ message DeleteBrandResp {
 
 // 更新品牌表
 message UpdateBrandReq {
-  string big_pic = 1; //专区大图
-  string brand_story = 2; //品牌故事
-  int32 sort = 3; //排序
-  string update_by = 4; //更新者
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string first_letter = 3; //首字母
+  int32 sort = 4; //排序
   int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  string first_letter = 6; //首字母
-  int64 id = 7; //
-  string logo = 8; //品牌logo
-  string name = 9; //品牌名称
-  int32 product_comment_count = 10; //产品评论数量
-  int32 product_count = 11; //产品数量
-  int32 recommend_status = 12; //推荐状态
-  int32 show_status = 13; //品牌显示状态
+  int32 show_status = 6; //品牌显示状态
+  int32 recommend_status = 7; //推荐状态
+  int32 product_count = 8; //产品数量
+  int32 product_comment_count = 9; //产品评论数量
+  string logo = 10; //品牌logo
+  string big_pic = 11; //专区大图
+  string brand_story = 12; //品牌故事
+  string update_by = 15; //更新者
 
 
 }
@@ -65,20 +65,20 @@ message QueryBrandDetailReq {
 }
 
 message QueryBrandDetailResp {
-  string big_pic = 1; //专区大图
-  string brand_story = 2; //品牌故事
-  string create_by = 3; //创建者
-  string create_time = 4; //创建时间
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string first_letter = 3; //首字母
+  int32 sort = 4; //排序
   int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  string first_letter = 6; //首字母
-  int64 id = 7; //
-  string logo = 8; //品牌logo
-  string name = 9; //品牌名称
-  int32 product_comment_count = 10; //产品评论数量
-  int32 product_count = 11; //产品数量
-  int32 recommend_status = 12; //推荐状态
-  int32 show_status = 13; //品牌显示状态
-  int32 sort = 14; //排序
+  int32 show_status = 6; //品牌显示状态
+  int32 recommend_status = 7; //推荐状态
+  int32 product_count = 8; //产品数量
+  int32 product_comment_count = 9; //产品评论数量
+  string logo = 10; //品牌logo
+  string big_pic = 11; //专区大图
+  string brand_story = 12; //品牌故事
+  string create_by = 13; //创建者
+  string create_time = 14; //创建时间
   string update_by = 15; //更新者
   string update_time = 16; //更新时间
 
@@ -95,20 +95,20 @@ message QueryBrandListReq {
 }
 
 message BrandListData {
-  string big_pic = 1; //专区大图
-  string brand_story = 2; //品牌故事
-  string create_by = 3; //创建者
-  string create_time = 4; //创建时间
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string first_letter = 3; //首字母
+  int32 sort = 4; //排序
   int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  string first_letter = 6; //首字母
-  int64 id = 7; //
-  string logo = 8; //品牌logo
-  string name = 9; //品牌名称
-  int32 product_comment_count = 10; //产品评论数量
-  int32 product_count = 11; //产品数量
-  int32 recommend_status = 12; //推荐状态
-  int32 show_status = 13; //品牌显示状态
-  int32 sort = 14; //排序
+  int32 show_status = 6; //品牌显示状态
+  int32 recommend_status = 7; //推荐状态
+  int32 product_count = 8; //产品数量
+  int32 product_comment_count = 9; //产品评论数量
+  string logo = 10; //品牌logo
+  string big_pic = 11; //专区大图
+  string brand_story = 12; //品牌故事
+  string create_by = 13; //创建者
+  string create_time = 14; //创建时间
   string update_by = 15; //更新者
   string update_time = 16; //更新时间
 

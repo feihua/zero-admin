@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
@@ -34,15 +32,14 @@ func NewAddMemberProductCollectionLogic(ctx context.Context, svcCtx *svc.Service
 // AddMemberProductCollection 添加用户收藏的商品
 func (l *AddMemberProductCollectionLogic) AddMemberProductCollection(in *umsclient.AddMemberProductCollectionReq) (*umsclient.AddMemberProductCollectionResp, error) {
 	err := query.UmsMemberProductCollection.WithContext(l.ctx).Create(&model.UmsMemberProductCollection{
-		MemberID:        in.MemberId,
-		MemberNickName:  in.MemberNickName,
-		MemberIcon:      in.MemberIcon,
-		ProductID:       in.ProductId,
-		ProductName:     in.ProductName,
-		ProductPic:      in.ProductPic,
-		ProductSubTitle: &in.ProductSubTitle,
-		ProductPrice:    in.ProductPrice,
-		CreateTime:      time.Now(),
+		MemberID:        in.MemberId,        // 会员id
+		MemberNickName:  in.MemberNickName,  // 会员姓名
+		MemberIcon:      in.MemberIcon,      // 会员头像
+		ProductID:       in.ProductId,       // 商品id
+		ProductName:     in.ProductName,     // 商品名称
+		ProductPic:      in.ProductPic,      // 商品图片
+		ProductSubTitle: in.ProductSubTitle, // 商品标题
+		ProductPrice:    in.ProductPrice,    // 商品价格
 	})
 
 	if err != nil {

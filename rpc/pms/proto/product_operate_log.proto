@@ -6,19 +6,17 @@ option go_package = "./proto";
 
 // 添加
 message AddProductOperateLogReq {
-  string create_time = 1; //
-  int32 gift_point_new = 2; //
-  int32 gift_point_old = 3; //赠送的积分
-  int32 use_point_limit_old = 4; //
-  string operate_man = 5; //操作人
-  int64 price_new = 6; //
-  int64 price_old = 7; //
-  int64 product_id = 8; //
-  int64 sale_price_new = 9; //
-  int64 sale_price_old = 10; //
-  int32 use_point_limit_new = 11; //
-
-
+  int64 id = 1; //
+  int64 product_id = 2; //产品id
+  int64 price_old = 3; //原价
+  int64 price_new = 4; //新价格
+  int64 sale_price_old = 5; //原售价
+  int64 sale_price_new = 6; //新售价
+  int32 gift_point_old = 7; //赠送的积分
+  int32 gift_point_new = 8; //新的积分
+  int32 use_point_limit_old = 9; //使用积分限制
+  int32 use_point_limit_new = 10; //新的使用积分限制
+  string operate_man = 11; //操作人
 }
 
 message AddProductOperateLogResp {
@@ -40,19 +38,18 @@ message QueryProductOperateLogDetailReq {
 }
 
 message QueryProductOperateLogDetailResp {
-  string create_time = 1; //
-  int32 gift_point_new = 2; //
-  int32 gift_point_old = 3; //赠送的积分
-  int64 id = 4; //
-  string operate_man = 5; //操作人
-  int64 price_new = 6; //
-  int64 price_old = 7; //
-  int64 product_id = 8; //
-  int64 sale_price_new = 9; //
-  int64 sale_price_old = 10; //
-  int32 use_point_limit_new = 11; //
-  int32 use_point_limit_old = 12; //
-
+  int64 id = 1; //
+  int64 product_id = 2; //产品id
+  int64 price_old = 3; //原价
+  int64 price_new = 4; //新价格
+  int64 sale_price_old = 5; //原售价
+  int64 sale_price_new = 6; //新售价
+  int32 gift_point_old = 7; //赠送的积分
+  int32 gift_point_new = 8; //新的积分
+  int32 use_point_limit_old = 9; //使用积分限制
+  int32 use_point_limit_new = 10; //新的使用积分限制
+  string operate_man = 11; //操作人
+  string create_time = 12; //创建时间
 }
 
 // 分页查询列表
@@ -62,19 +59,18 @@ message QueryProductOperateLogListReq {
 }
 
 message ProductOperateLogListData {
-  string create_time = 1; //
-  int32 gift_point_new = 2; //
-  int32 gift_point_old = 3; //赠送的积分
-  int64 id = 4; //
-  string operate_man = 5; //操作人
-  int64 price_new = 6; //
-  int64 price_old = 7; //
-  int64 product_id = 8; //
-  int64 sale_price_new = 9; //
-  int64 sale_price_old = 10; //
-  int32 use_point_limit_new = 11; //
-  int32 use_point_limit_old = 12; //
-
+  int64 id = 1; //
+  int64 product_id = 2; //产品id
+  int64 price_old = 3; //原价
+  int64 price_new = 4; //新价格
+  int64 sale_price_old = 5; //原售价
+  int64 sale_price_new = 6; //新售价
+  int32 gift_point_old = 7; //赠送的积分
+  int32 gift_point_new = 8; //新的积分
+  int32 use_point_limit_old = 9; //使用积分限制
+  int32 use_point_limit_new = 10; //新的使用积分限制
+  string operate_man = 11; //操作人
+  string create_time = 12; //创建时间
 }
 
 message QueryProductOperateLogListResp {

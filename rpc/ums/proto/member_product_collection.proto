@@ -6,16 +6,15 @@ option go_package = "./proto";
 
 // 添加用户收藏的商品
 message AddMemberProductCollectionReq {
-  int64 product_price = 1; //商品价格
-  string product_sub_title = 2; //商品标题
-  string member_icon = 3; //会员头像
-  int64 member_id = 4; //会员id
-  string member_nick_name = 5; //会员姓名
-  int64 product_id = 6; //商品id
-  string product_name = 7; //商品名称
-  string product_pic = 8; //商品图片
-
-
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 product_id = 5; //商品id
+  string product_name = 6; //商品名称
+  string product_pic = 7; //商品图片
+  string product_sub_title = 8; //商品标题
+  int64 product_price = 9; //商品价格
 }
 
 message AddMemberProductCollectionResp {
@@ -38,16 +37,16 @@ message QueryMemberProductCollectionDetailReq {
 }
 
 message QueryMemberProductCollectionDetailResp {
-  string create_time = 1; //收藏时间
-  int64 id = 2; //
-  string member_icon = 3; //会员头像
-  int64 member_id = 4; //会员id
-  string member_nick_name = 5; //会员姓名
-  int64 product_id = 6; //商品id
-  string product_name = 7; //商品名称
-  string product_pic = 8; //商品图片
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 product_id = 5; //商品id
+  string product_name = 6; //商品名称
+  string product_pic = 7; //商品图片
+  string product_sub_title = 8; //商品标题
   int64 product_price = 9; //商品价格
-  string product_sub_title = 10; //商品标题
+  string create_time = 10; //收藏时间
 
 }
 
@@ -61,16 +60,16 @@ message QueryMemberProductCollectionListReq {
 }
 
 message MemberProductCollectionListData {
-  string create_time = 1; //收藏时间
-  int64 id = 2; //
-  string member_icon = 3; //会员头像
-  int64 member_id = 4; //会员id
-  string member_nick_name = 5; //会员姓名
-  int64 product_id = 6; //商品id
-  string product_name = 7; //商品名称
-  string product_pic = 8; //商品图片
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 product_id = 5; //商品id
+  string product_name = 6; //商品名称
+  string product_pic = 7; //商品图片
+  string product_sub_title = 8; //商品标题
   int64 product_price = 9; //商品价格
-  string product_sub_title = 10; //商品标题
+  string create_time = 10; //收藏时间
 
 }
 

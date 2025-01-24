@@ -40,32 +40,32 @@ func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList(in *pmsclient
 	}
 
 	var list []*pmsclient.ProductAttributeCategoryListData
-	for _, item := range result {
+	for _, item1 := range result {
 		attribute := query.PmsProductAttribute
-		attributes, _ := attribute.WithContext(l.ctx).Where(attribute.ProductAttributeCategoryID.Eq(item.ID)).Find()
+		attributes, _ := attribute.WithContext(l.ctx).Where(attribute.ProductAttributeCategoryID.Eq(item1.ID)).Find()
 
 		var attrList []*pmsclient.ProductAttributeData
-		for _, r := range attributes {
+		for _, item := range attributes {
 			attrList = append(attrList, &pmsclient.ProductAttributeData{
-				Id:                         r.ID,
-				ProductAttributeCategoryId: r.ProductAttributeCategoryID,
-				Name:                       r.Name,
-				SelectType:                 r.SelectType,
-				InputType:                  r.InputType,
-				InputList:                  r.InputList,
-				Sort:                       r.Sort,
-				FilterType:                 r.FilterType,
-				SearchType:                 r.SearchType,
-				RelatedStatus:              r.RelatedStatus,
-				HandAddStatus:              r.HandAddStatus,
-				Type:                       r.Type,
+				Id:                         item.ID,                         //
+				ProductAttributeCategoryId: item.ProductAttributeCategoryID, // 商品属性分类id
+				Name:                       item.Name,                       // 商品属性分类id
+				SelectType:                 item.SelectType,                 // 属性选择类型：0->唯一；1->单选；2->多选
+				InputType:                  item.InputType,                  // 属性录入方式：0->手工录入；1->从列表中选取
+				InputList:                  item.InputList,                  // 可选值列表，以逗号隔开
+				Sort:                       item.Sort,                       // 排序字段：最高的可以单独上传图片
+				FilterType:                 item.FilterType,                 // 分类筛选样式：1->普通；1->颜色
+				SearchType:                 item.SearchType,                 // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
+				RelatedStatus:              item.RelatedStatus,              // 相同属性产品是否关联；0->不关联；1->关联
+				HandAddStatus:              item.HandAddStatus,              // 是否支持手动新增；0->不支持；1->支持
+				Type:                       item.Type,                       // 属性的类型；0->规格；1->参数
 			})
 		}
 		list = append(list, &pmsclient.ProductAttributeCategoryListData{
-			Id:                   item.ID,
-			Name:                 item.Name,
-			AttributeCount:       item.AttributeCount,
-			ParamCount:           item.ParamCount,
+			Id:                   item1.ID,
+			Name:                 item1.Name,
+			AttributeCount:       item1.AttributeCount,
+			ParamCount:           item1.ParamCount,
 			ProductAttributeList: attrList,
 		})
 	}

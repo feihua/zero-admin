@@ -33,8 +33,8 @@ func NewAddProductCategoryAttributeRelationLogic(ctx context.Context, svcCtx *sv
 // AddProductCategoryAttributeRelation 添加产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
 func (l *AddProductCategoryAttributeRelationLogic) AddProductCategoryAttributeRelation(in *pmsclient.AddProductCategoryAttributeRelationReq) (*pmsclient.AddProductCategoryAttributeRelationResp, error) {
 	err := query.PmsProductCategoryAttributeRelation.WithContext(l.ctx).Create(&model.PmsProductCategoryAttributeRelation{
-		ProductCategoryID:  in.ProductCategoryId,
-		ProductAttributeID: in.ProductAttributeId,
+		ProductCategoryID:  in.ProductCategoryId,  // 商品分类id
+		ProductAttributeID: in.ProductAttributeId, // 商品属性id
 	})
 
 	if err != nil {

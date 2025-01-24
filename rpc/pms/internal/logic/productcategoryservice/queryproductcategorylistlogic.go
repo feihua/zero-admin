@@ -51,18 +51,18 @@ func (l *QueryProductCategoryListLogic) QueryProductCategoryList(in *pmsclient.Q
 	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductCategoryListData{
-			Id:           item.ID,
-			ParentId:     item.ParentID,
-			Name:         item.Name,
-			Level:        item.Level,
-			ProductCount: item.ProductCount,
-			ProductUnit:  item.ProductUnit,
-			NavStatus:    item.NavStatus,
-			ShowStatus:   item.ShowStatus,
-			Sort:         item.Sort,
-			Icon:         item.Icon,
-			Keywords:     item.Keywords,
-			Description:  item.Description,
+			Id:           item.ID,           //
+			ParentId:     item.ParentID,     // 上机分类的编号：0表示一级分类
+			Name:         item.Name,         // 商品分类名称
+			Level:        item.Level,        // 分类级别：0->1级；1->2级
+			ProductCount: item.ProductCount, // 商品数量
+			ProductUnit:  item.ProductUnit,  // 商品数量
+			NavStatus:    item.NavStatus,    // 是否显示在导航栏：0->不显示；1->显示
+			ShowStatus:   item.ShowStatus,   // 显示状态：0->不显示；1->显示
+			Sort:         item.Sort,         // 排序
+			Icon:         item.Icon,         // 图标
+			Keywords:     item.Keywords,     // 关键字
+			Description:  item.Description,  // 描述
 		})
 	}
 

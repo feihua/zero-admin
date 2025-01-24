@@ -33,9 +33,9 @@ func NewAddProductAttributeValueLogic(ctx context.Context, svcCtx *svc.ServiceCo
 // AddProductAttributeValue 添加存储产品参数信息的表
 func (l *AddProductAttributeValueLogic) AddProductAttributeValue(in *pmsclient.AddProductAttributeValueReq) (*pmsclient.AddProductAttributeValueResp, error) {
 	err := query.PmsProductAttributeValue.WithContext(l.ctx).Create(&model.PmsProductAttributeValue{
-		ProductID:          in.ProductId,
-		ProductAttributeID: in.ProductAttributeId,
-		Value:              in.Value,
+		ProductID:          in.ProductId,          // 商品id
+		ProductAttributeID: in.ProductAttributeId, // 商品属性id
+		Value:              in.Value,              // 手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
 	})
 
 	if err != nil {

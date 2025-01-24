@@ -6,16 +6,16 @@ option go_package = "./proto";
 
 // 添加会员收货地址表
 message AddMemberReceiveAddressReq {
-  string city = 1; //城市
-  string province = 2; //省份/直辖市
-  int32 default_status = 3; //是否为默认
-  string detail_address = 4; //详细地址(街道)
-  string region = 5; //区
-  int64 member_id = 6; //会员id
-  string member_name = 7; //收货人名称
-  string phone_number = 8; //收货人电话
-  string post_code = 9; //邮政编码
-
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_name = 3; //收货人名称
+  string phone_number = 4; //收货人电话
+  int32 default_status = 5; //是否为默认
+  string post_code = 6; //邮政编码
+  string province = 7; //省份/直辖市
+  string city = 8; //城市
+  string region = 9; //区
+  string detail_address = 10; //详细地址(街道)
 
 }
 
@@ -35,16 +35,16 @@ message DeleteMemberReceiveAddressResp {
 
 // 更新会员收货地址表
 message UpdateMemberReceiveAddressReq {
-  string city = 1; //城市
-  string region = 2; //区
-  int32 default_status = 3; //是否为默认
-  string detail_address = 4; //详细地址(街道)
-  int64 id = 5; //
-  int64 member_id = 6; //会员id
-  string member_name = 7; //收货人名称
-  string phone_number = 8; //收货人电话
-  string post_code = 9; //邮政编码
-  string province = 10; //省份/直辖市
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_name = 3; //收货人名称
+  string phone_number = 4; //收货人电话
+  int32 default_status = 5; //是否为默认
+  string post_code = 6; //邮政编码
+  string province = 7; //省份/直辖市
+  string city = 8; //城市
+  string region = 9; //区
+  string detail_address = 10; //详细地址(街道)
 
 
 }
@@ -72,17 +72,17 @@ message QueryMemberReceiveAddressDetailReq {
 }
 
 message QueryMemberReceiveAddressDetailResp {
-  string city = 1; //城市
-  string create_time = 2; //创建时间
-  int32 default_status = 3; //是否为默认
-  string detail_address = 4; //详细地址(街道)
-  int64 id = 5; //
-  int64 member_id = 6; //会员id
-  string member_name = 7; //收货人名称
-  string phone_number = 8; //收货人电话
-  string post_code = 9; //邮政编码
-  string province = 10; //省份/直辖市
-  string region = 11; //区
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_name = 3; //收货人名称
+  string phone_number = 4; //收货人电话
+  int32 default_status = 5; //是否为默认
+  string post_code = 6; //邮政编码
+  string province = 7; //省份/直辖市
+  string city = 8; //城市
+  string region = 9; //区
+  string detail_address = 10; //详细地址(街道)
+  string create_time = 11; //创建时间
   string update_time = 12; //更新时间
 
 }
@@ -95,17 +95,17 @@ message QueryMemberReceiveAddressListReq {
 }
 
 message MemberReceiveAddressListData {
-  string city = 1; //城市
-  string create_time = 2; //创建时间
-  int32 default_status = 3; //是否为默认
-  string detail_address = 4; //详细地址(街道)
-  int64 id = 5; //
-  int64 member_id = 6; //会员id
-  string member_name = 7; //收货人名称
-  string phone_number = 8; //收货人电话
-  string post_code = 9; //邮政编码
-  string province = 10; //省份/直辖市
-  string region = 11; //区
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_name = 3; //收货人名称
+  string phone_number = 4; //收货人电话
+  int32 default_status = 5; //是否为默认
+  string post_code = 6; //邮政编码
+  string province = 7; //省份/直辖市
+  string city = 8; //城市
+  string region = 9; //区
+  string detail_address = 10; //详细地址(街道)
+  string create_time = 11; //创建时间
   string update_time = 12; //更新时间
 
 }

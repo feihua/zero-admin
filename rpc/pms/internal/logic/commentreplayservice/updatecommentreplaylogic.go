@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
@@ -35,13 +33,12 @@ func NewUpdateCommentReplayLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *UpdateCommentReplayLogic) UpdateCommentReplay(in *pmsclient.UpdateCommentReplayReq) (*pmsclient.UpdateCommentReplayResp, error) {
 	q := query.PmsCommentReplay
 	_, err := q.WithContext(l.ctx).Updates(&model.PmsCommentReplay{
-		ID:             in.Id,
-		CommentID:      in.CommentId,
-		MemberNickName: in.MemberNickName,
-		MemberIcon:     in.MemberIcon,
-		Content:        in.Content,
-		CreateTime:     time.Now(),
-		Type:           in.Type,
+		ID:             in.Id,             //
+		CommentID:      in.CommentId,      // 评论id
+		MemberNickName: in.MemberNickName, // 评论人员昵称
+		MemberIcon:     in.MemberIcon,     // 评论人员头像
+		Content:        in.Content,        // 内容
+		Type:           in.Type,           // 评论人员类型；0->会员；1->管理员
 	})
 
 	if err != nil {

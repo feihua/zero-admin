@@ -32,22 +32,22 @@ func NewQuerySkuStockByProductSkuIdLogic(ctx context.Context, svcCtx *svc.Servic
 // QuerySkuStockByProductSkuId 根据ProductSkuId查询sku
 func (l *QuerySkuStockByProductSkuIdLogic) QuerySkuStockByProductSkuId(in *pmsclient.QuerySkuStockByProductSkuIdReq) (*pmsclient.SkuStockListData, error) {
 	q := query.PmsSkuStock
-	stock, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.ProductSkuId)).First()
+	item, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.ProductSkuId)).First()
 	if err != nil {
 		return nil, err
 	}
 
 	return &pmsclient.SkuStockListData{
-		Id:             stock.ID,
-		ProductId:      stock.ProductID,
-		SkuCode:        stock.SkuCode,
-		Price:          stock.Price,
-		Stock:          stock.Stock,
-		LowStock:       stock.LowStock,
-		Pic:            stock.Pic,
-		Sale:           stock.Sale,
-		PromotionPrice: stock.PromotionPrice,
-		LockStock:      stock.LockStock,
-		SpData:         stock.SpData,
+		Id:             item.ID,             //
+		ProductId:      item.ProductID,      // 商品id
+		SkuCode:        item.SkuCode,        // sku编码
+		Price:          item.Price,          // 价格
+		Stock:          item.Stock,          // 库存
+		LowStock:       item.LowStock,       // 预警库存
+		Pic:            item.Pic,            // 展示图片
+		Sale:           item.Sale,           // 销量
+		PromotionPrice: item.PromotionPrice, // 单品促销价格
+		LockStock:      item.LockStock,      // 锁定库存
+		SpData:         item.SpData,         // 商品销售属性，json格式
 	}, nil
 }

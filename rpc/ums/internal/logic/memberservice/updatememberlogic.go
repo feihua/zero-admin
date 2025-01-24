@@ -35,23 +35,23 @@ func NewUpdateMemberLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upda
 func (l *UpdateMemberLogic) UpdateMember(in *umsclient.UpdateMemberReq) (*umsclient.UpdateMemberResp, error) {
 	birthday, _ := time.Parse("2006-01-02 15:04:05", in.Birthday)
 	_, err := query.UmsMember.WithContext(l.ctx).Updates(&model.UmsMember{
-		ID:                    in.Id,
-		MemberLevelID:         in.MemberLevelId,
-		MemberName:            in.MemberName,
-		Nickname:              in.Nickname,
-		Phone:                 in.Phone,
-		MemberStatus:          in.MemberStatus,
-		Icon:                  in.Icon,
-		Gender:                in.Gender,
-		Birthday:              birthday,
-		City:                  in.City,
-		Job:                   in.Job,
-		PersonalizedSignature: in.PersonalizedSignature,
-		SourceType:            in.SourceType,
-		Integration:           in.Integration,
-		Growth:                in.Growth,
-		LotteryCount:          in.LotteryCount,
-		HistoryIntegration:    in.HistoryIntegration,
+		ID:                    in.Id,                    //
+		MemberLevelID:         in.MemberLevelId,         // 会员等级id
+		MemberName:            in.MemberName,            // 用户名
+		Nickname:              in.Nickname,              // 昵称
+		Phone:                 in.Phone,                 // 手机号码
+		MemberStatus:          in.MemberStatus,          // 帐号启用状态:0->禁用；1->启用
+		Icon:                  in.Icon,                  // 头像
+		Gender:                in.Gender,                // 性别：0->未知；1->男；2->女
+		Birthday:              birthday,                 // 生日
+		City:                  in.City,                  // 所做城市
+		Job:                   in.Job,                   // 职业
+		PersonalizedSignature: in.PersonalizedSignature, // 个性签名
+		SourceType:            in.SourceType,            // 用户来源
+		Integration:           in.Integration,           // 积分
+		Growth:                in.Growth,                // 成长值
+		LotteryCount:          in.LotteryCount,          // 剩余抽奖次数
+		HistoryIntegration:    in.HistoryIntegration,    // 历史积分数量
 	})
 	if err != nil {
 		return nil, err

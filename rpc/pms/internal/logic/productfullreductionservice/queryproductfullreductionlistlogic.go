@@ -43,10 +43,10 @@ func (l *QueryProductFullReductionListLogic) QueryProductFullReductionList(in *p
 	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductFullReductionListData{
-			Id:          item.ID,
-			ProductId:   item.ProductID,
-			FullPrice:   item.FullPrice,
-			ReducePrice: item.ReducePrice,
+			Id:          item.ID,          //
+			ProductId:   item.ProductID,   // 商品id
+			FullPrice:   item.FullPrice,   // 商品满多少
+			ReducePrice: item.ReducePrice, // 商品减多少
 		})
 	}
 

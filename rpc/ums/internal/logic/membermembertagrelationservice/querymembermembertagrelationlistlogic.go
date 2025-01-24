@@ -42,9 +42,9 @@ func (l *QueryMemberMemberTagRelationListLogic) QueryMemberMemberTagRelationList
 	var list []*umsclient.MemberMemberTagRelationListData
 	for _, item := range result {
 		list = append(list, &umsclient.MemberMemberTagRelationListData{
-			Id:       item.ID,
-			MemberId: item.MemberID,
-			TagId:    item.TagID,
+			Id:       item.ID,       //
+			MemberId: item.MemberID, // 会员id
+			TagId:    item.TagID,    // 标签id
 		})
 	}
 

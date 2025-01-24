@@ -2,6 +2,7 @@ package memberproductcollectionservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -51,16 +52,16 @@ func (l *QueryMemberProductCollectionListLogic) QueryMemberProductCollectionList
 	for _, item := range result {
 
 		list = append(list, &umsclient.MemberProductCollectionListData{
-			Id:              item.ID,
-			MemberId:        item.MemberID,
-			MemberNickName:  item.MemberNickName,
-			MemberIcon:      item.MemberIcon,
-			ProductId:       in.ProductId,
-			ProductName:     item.ProductName,
-			ProductPic:      item.ProductPic,
-			ProductSubTitle: *item.ProductSubTitle,
-			ProductPrice:    item.ProductPrice,
-			CreateTime:      item.CreateTime.Format("2006-01-02 15:04:05"),
+			Id:              item.ID,                              //
+			MemberId:        item.MemberID,                        // 会员id
+			MemberNickName:  item.MemberNickName,                  // 会员姓名
+			MemberIcon:      item.MemberIcon,                      // 会员头像
+			ProductId:       item.ProductID,                       // 商品id
+			ProductName:     item.ProductName,                     // 商品名称
+			ProductPic:      item.ProductPic,                      // 商品图片
+			ProductSubTitle: item.ProductSubTitle,                 // 商品标题
+			ProductPrice:    item.ProductPrice,                    // 商品价格
+			CreateTime:      time_util.TimeToStr(item.CreateTime), // 收藏时间
 		})
 	}
 

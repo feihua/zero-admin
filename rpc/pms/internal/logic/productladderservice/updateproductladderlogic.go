@@ -35,10 +35,10 @@ func (l *UpdateProductLadderLogic) UpdateProductLadder(in *pmsclient.UpdateProdu
 	q := query.PmsProductLadder
 	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductLadder{
 		ID:        in.Id,
-		ProductID: in.ProductId,
-		Count:     in.Count,
-		Discount:  in.Discount,
-		Price:     in.Price,
+		ProductID: in.ProductId, // 商品id
+		Count:     in.Count,     // 满足的商品数量
+		Discount:  in.Discount,  // 折扣
+		Price:     in.Price,     // 折后价格
 	})
 
 	if err != nil {

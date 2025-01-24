@@ -6,13 +6,12 @@ option go_package = "./proto";
 
 // 添加收藏表
 message AddProductCollectReq {
-  string add_time = 1; //创建时间
-  int32 collect_type = 2; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
-  int32 deleted = 3; //逻辑删除
-  int32 id = 4; //
-  string update_time = 5; //更新时间
-  int32 user_id = 6; //用户表的用户ID
-  int32 value_id = 7; //如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 id = 1; //
+  int32 user_id = 2; //用户表的用户ID
+  int32 value_id = 3; //如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 collect_type = 4; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+  string add_time = 5; //创建时间
+  int32 deleted = 7; //逻辑删除
 
 }
 
@@ -35,13 +34,12 @@ message QueryProductCollectDetailReq {
 }
 
 message QueryProductCollectDetailResp {
-  string add_time = 1; //创建时间
-  int32 collect_type = 2; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
-  int32 deleted = 3; //逻辑删除
-  int32 id = 4; //
-  string update_time = 5; //更新时间
-  int32 user_id = 6; //用户表的用户ID
-  int32 value_id = 7; //如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 id = 1; //
+  int32 user_id = 2; //用户表的用户ID
+  int32 value_id = 3; //如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 collect_type = 4; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+  string add_time = 5; //创建时间
+  int32 deleted = 7; //逻辑删除
 
 }
 
@@ -55,13 +53,12 @@ message QueryProductCollectListReq {
 }
 
 message ProductCollectListData {
-  string add_time = 1; //创建时间
-  int32 collect_type = 2; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
-  int32 deleted = 3; //逻辑删除
-  int32 id = 4; //
-  string update_time = 5; //更新时间
-  int32 user_id = 6; //用户表的用户ID
-  int32 value_id = 7; //如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 id = 1; //
+  int32 user_id = 2; //用户表的用户ID
+  int32 value_id = 3; //如果type=0，则是商品ID；如果type=1，则是专题ID
+  int32 collect_type = 4; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
+  string add_time = 5; //创建时间
+  int32 deleted = 7; //逻辑删除
 
 }
 

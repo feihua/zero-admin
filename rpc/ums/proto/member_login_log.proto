@@ -27,13 +27,13 @@ message QueryMemberLoginLogListReq {
 }
 
 message MemberLoginLogListData {
-  string city = 1; //登录城市
-  string create_time = 2; //登录时间
-  int64 id = 3; //
-  int32 login_type = 4; //登录类型：0->PC；1->android;2->ios;3->小程序
-  int64 member_id = 5; //会员id
-  string member_ip = 6; //登录ip
-  string province = 7; //登录省份
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_ip = 3; //登录ip
+  string city = 4; //登录城市
+  int32 login_type = 5; //登录类型：0->PC；1->android;2->ios;3->小程序
+  string province = 6; //登录省份
+  string create_time = 7; //登录时间
 
 }
 

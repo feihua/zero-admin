@@ -33,8 +33,8 @@ func NewAddMemberMemberTagRelationLogic(ctx context.Context, svcCtx *svc.Service
 // AddMemberMemberTagRelation 添加用户和标签关系表
 func (l *AddMemberMemberTagRelationLogic) AddMemberMemberTagRelation(in *umsclient.AddMemberMemberTagRelationReq) (*umsclient.AddMemberMemberTagRelationResp, error) {
 	err := query.UmsMemberMemberTagRelation.WithContext(l.ctx).Create(&model.UmsMemberMemberTagRelation{
-		MemberID: in.MemberId,
-		TagID:    in.TagId,
+		MemberID: in.MemberId, // 会员id
+		TagID:    in.TagId,    // 标签id
 	})
 
 	if err != nil {

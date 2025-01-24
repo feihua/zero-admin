@@ -33,18 +33,18 @@ func NewAddMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 // AddMemberLevel 添加会员等级表
 func (l *AddMemberLevelLogic) AddMemberLevel(in *umsclient.AddMemberLevelReq) (*umsclient.AddMemberLevelResp, error) {
 	err := query.UmsMemberLevel.WithContext(l.ctx).Create(&model.UmsMemberLevel{
-		LevelName:          in.LevelName,
-		GrowthPoint:        in.GrowthPoint,
-		DefaultStatus:      in.DefaultStatus,
-		FreeFreightPoint:   in.FreeFreightPoint,
-		CommentGrowthPoint: in.CommentGrowthPoint,
-		IsFreeFreight:      in.IsFreeFreight,
-		IsSignIn:           in.IsSignIn,
-		IsComment:          in.IsComment,
-		IsPromotion:        in.IsPromotion,
-		IsMemberPrice:      in.IsMemberPrice,
-		IsBirthday:         in.IsBirthday,
-		Remark:             in.Remark,
+		LevelName:          in.LevelName,          // 等级名称
+		GrowthPoint:        in.GrowthPoint,        // 成长点
+		DefaultStatus:      in.DefaultStatus,      // 是否为默认等级：0->不是；1->是
+		FreeFreightPoint:   in.FreeFreightPoint,   // 免运费标准
+		CommentGrowthPoint: in.CommentGrowthPoint, // 每次评价获取的成长值
+		IsFreeFreight:      in.IsFreeFreight,      // 是否有免邮特权
+		IsSignIn:           in.IsSignIn,           // 是否有签到特权
+		IsComment:          in.IsComment,          // 是否有评论获奖励特权
+		IsPromotion:        in.IsPromotion,        // 是否有专享活动特权
+		IsMemberPrice:      in.IsMemberPrice,      // 是否有会员价格特权
+		IsBirthday:         in.IsBirthday,         // 是否有生日特权
+		Remark:             in.Remark,             // 备注
 	})
 
 	if err != nil {

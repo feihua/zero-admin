@@ -6,18 +6,17 @@ option go_package = "./proto";
 
 // 添加sku的库存
 message AddSkuStockReq {
-  int32 stock = 1; //库存
-  int32 lock_stock = 2; //锁定库存
-  int32 low_stock = 3; //预警库存
-  string pic = 4; //展示图片
-  int64 price = 5; //
-  int64 product_id = 6; //
-  int64 promotion_price = 7; //单品促销价格
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string sku_code = 3; //sku编码
+  int64 price = 4; //价格
+  int32 stock = 5; //库存
+  int32 low_stock = 6; //预警库存
+  string pic = 7; //展示图片
   int32 sale = 8; //销量
-  string sku_code = 9; //sku编码
-  string sp_data = 10; //商品销售属性，json格式
-
-
+  int64 promotion_price = 9; //单品促销价格
+  int32 lock_stock = 10; //锁定库存
+  string sp_data = 11; //商品销售属性，json格式
 }
 
 message AddSkuStockResp {
@@ -40,17 +39,16 @@ message UpdateSkuStockReq {
 }
 message UpdateSkuStockData {
   int64 id = 1; //
-  int32 lock_stock = 2; //锁定库存
-  int32 low_stock = 3; //预警库存
-  string pic = 4; //展示图片
-  int64 price = 5; //
-  int64 product_id = 6; //
-  int64 promotion_price = 7; //单品促销价格
+  int64 product_id = 2; //商品id
+  string sku_code = 3; //sku编码
+  int64 price = 4; //价格
+  int32 stock = 5; //库存
+  int32 low_stock = 6; //预警库存
+  string pic = 7; //展示图片
   int32 sale = 8; //销量
-  string sku_code = 9; //sku编码
-  string sp_data = 10; //商品销售属性，json格式
-  int32 stock = 11; //库存
-
+  int64 promotion_price = 9; //单品促销价格
+  int32 lock_stock = 10; //锁定库存
+  string sp_data = 11; //商品销售属性，json格式
 }
 
 
@@ -65,17 +63,16 @@ message QuerySkuStockDetailReq {
 
 message QuerySkuStockDetailResp {
   int64 id = 1; //
-  int32 lock_stock = 2; //锁定库存
-  int32 low_stock = 3; //预警库存
-  string pic = 4; //展示图片
-  int64 price = 5; //
-  int64 product_id = 6; //
-  int64 promotion_price = 7; //单品促销价格
+  int64 product_id = 2; //商品id
+  string sku_code = 3; //sku编码
+  int64 price = 4; //价格
+  int32 stock = 5; //库存
+  int32 low_stock = 6; //预警库存
+  string pic = 7; //展示图片
   int32 sale = 8; //销量
-  string sku_code = 9; //sku编码
-  string sp_data = 10; //商品销售属性，json格式
-  int32 stock = 11; //库存
-
+  int64 promotion_price = 9; //单品促销价格
+  int32 lock_stock = 10; //锁定库存
+  string sp_data = 11; //商品销售属性，json格式
 }
 
 // 分页查询sku的库存列表

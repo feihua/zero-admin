@@ -2,6 +2,7 @@ package productoperatelogservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -45,18 +46,18 @@ func (l *QueryProductOperateLogListLogic) QueryProductOperateLogList(in *pmsclie
 	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductOperateLogListData{
-			Id:               item.ID,
-			ProductId:        item.ProductID,
-			PriceOld:         item.PriceOld,
-			PriceNew:         item.PriceNew,
-			SalePriceOld:     item.SalePriceOld,
-			SalePriceNew:     item.SalePriceNew,
-			GiftPointOld:     item.GiftPointOld,
-			GiftPointNew:     item.GiftPointNew,
-			UsePointLimitOld: item.UsePointLimitOld,
-			UsePointLimitNew: item.UsePointLimitNew,
-			OperateMan:       item.OperateMan,
-			CreateTime:       item.CreateTime.Format("2006-01-02 15:04:05"),
+			Id:               item.ID,                              //
+			ProductId:        item.ProductID,                       // 产品id
+			PriceOld:         item.PriceOld,                        // 原价
+			PriceNew:         item.PriceNew,                        // 新价格
+			SalePriceOld:     item.SalePriceOld,                    // 原售价
+			SalePriceNew:     item.SalePriceNew,                    // 新售价
+			GiftPointOld:     item.GiftPointOld,                    // 赠送的积分
+			GiftPointNew:     item.GiftPointNew,                    // 新的积分
+			UsePointLimitOld: item.UsePointLimitOld,                // 使用积分限制
+			UsePointLimitNew: item.UsePointLimitNew,                // 新的使用积分限制
+			OperateMan:       item.OperateMan,                      // 操作人
+			CreateTime:       time_util.TimeToStr(item.CreateTime), // 创建时间
 		})
 	}
 

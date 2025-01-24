@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 
@@ -37,14 +35,13 @@ func (l *AddMemberBrandAttentionLogic) AddMemberBrandAttention(in *umsclient.Add
 	member, _ := query.UmsMember.WithContext(l.ctx).Where(query.UmsMember.ID.Eq(in.MemberId)).First()
 	// 2.添加品牌关注
 	err := query.UmsMemberBrandAttention.WithContext(l.ctx).Create(&model.UmsMemberBrandAttention{
-		MemberID:       member.ID,
-		MemberNickName: member.Nickname,
-		MemberIcon:     member.Icon,
-		BrandID:        in.BrandId,
-		BrandName:      in.BrandName,
-		BrandLogo:      in.BrandLogo,
-		BrandCity:      in.BrandCity,
-		CreateTime:     time.Now(),
+		MemberID:       in.MemberId,       // 会员id
+		MemberNickName: member.MemberName, // 会员姓名
+		MemberIcon:     member.Icon,       // 会员头像
+		BrandID:        in.BrandId,        // 品牌id
+		BrandName:      in.BrandName,      // 品牌名称
+		BrandLogo:      in.BrandLogo,      // 品牌Logo
+		BrandCity:      in.BrandCity,      // 品牌所在城市
 	})
 
 	if err != nil {

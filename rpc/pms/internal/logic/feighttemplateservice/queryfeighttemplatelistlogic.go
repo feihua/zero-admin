@@ -45,14 +45,14 @@ func (l *QueryFeightTemplateListLogic) QueryFeightTemplateList(in *pmsclient.Que
 	for _, item := range result {
 
 		list = append(list, &pmsclient.FeightTemplateListData{
-			Id:             item.ID,
-			Name:           item.Name,
-			ChargeType:     item.ChargeType,
-			FirstWeight:    item.FirstWeight,
-			FirstFee:       item.FirstFee,
-			ContinueWeight: item.ContinueWeight,
-			ContinueFee:    item.ContinueFee,
-			Dest:           item.Dest,
+			Id:             item.ID,             //
+			Name:           item.Name,           // 运费模版名称
+			ChargeType:     item.ChargeType,     // 计费类型:0->按重量；1->按件数
+			FirstWeight:    item.FirstWeight,    // 首重kg
+			FirstFee:       item.FirstFee,       // 首费（元）
+			ContinueWeight: item.ContinueWeight, // 续重kg
+			ContinueFee:    item.ContinueFee,    // 续费（元）
+			Dest:           item.Dest,           // 目的地（省、市）
 		})
 	}
 

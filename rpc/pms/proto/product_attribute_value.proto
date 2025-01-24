@@ -6,9 +6,10 @@ option go_package = "./proto";
 
 // 添加存储产品参数信息的表
 message AddProductAttributeValueReq {
-  int64 product_attribute_id = 1; //
-  int64 product_id = 2; //
-  string value = 3; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int64 product_attribute_id = 3; //商品属性id
+  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
 
 }
 
@@ -28,8 +29,8 @@ message DeleteProductAttributeValueResp {
 // 更新存储产品参数信息的表
 message UpdateProductAttributeValueReq {
   int64 id = 1; //
-  int64 product_attribute_id = 2; //
-  int64 product_id = 3; //
+  int64 product_id = 2; //商品id
+  int64 product_attribute_id = 3; //商品属性id
   string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
 
 }
@@ -47,10 +48,9 @@ message QueryProductAttributeValueListReq {
 
 message ProductAttributeValueListData {
   int64 id = 1; //
-  int64 product_attribute_id = 2; //
-  int64 product_id = 3; //
+  int64 product_id = 2; //商品id
+  int64 product_attribute_id = 3; //商品属性id
   string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
-
 }
 
 message QueryProductAttributeValueListResp {

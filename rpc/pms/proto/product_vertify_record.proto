@@ -6,12 +6,11 @@ option go_package = "./proto";
 
 // 添加商品审核记录
 message AddProductVertifyRecordReq {
-  string create_time = 1; //
-  string detail = 2; //反馈详情
-  string vertify_man = 3; //审核人
-  int64 product_id = 4; //
-  int32 status = 5; //
-
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string review_man = 4; //审核人
+  int32 status = 5; //审核状态：0->未通过；1->通过
+  string detail = 6; //反馈详情
 }
 
 message AddProductVertifyRecordResp {
@@ -29,13 +28,11 @@ message DeleteProductVertifyRecordResp {
 
 // 更新商品审核记录
 message UpdateProductVertifyRecordReq {
-  string create_time = 1; //
-  string detail = 2; //反馈详情
-  int64 id = 3; //
-  int64 product_id = 4; //
-  int32 status = 5; //
-  string vertify_man = 6; //审核人
-
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string review_man = 4; //审核人
+  int32 status = 5; //审核状态：0->未通过；1->通过
+  string detail = 6; //反馈详情
 }
 
 message UpdateProductVertifyRecordResp {
@@ -63,13 +60,12 @@ message QueryProductVertifyRecordDetailReq {
 }
 
 message QueryProductVertifyRecordDetailResp {
-  string create_time = 1; //
-  string detail = 2; //反馈详情
-  int64 id = 3; //
-  int64 product_id = 4; //
-  int32 status = 5; //
-  string vertify_man = 6; //审核人
-
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string create_time = 3; //创建时间
+  string review_man = 4; //审核人
+  int32 status = 5; //审核状态：0->未通过；1->通过
+  string detail = 6; //反馈详情
 }
 
 // 分页查询商品审核记录列表
@@ -79,12 +75,12 @@ message QueryProductVertifyRecordListReq {
 }
 
 message ProductVertifyRecordListData {
-  string create_time = 1; //
-  string detail = 2; //反馈详情
-  int64 id = 3; //
-  int64 product_id = 4; //
-  int32 status = 5; //
-  string vertify_man = 6; //审核人
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string create_time = 3; //创建时间
+  string review_man = 4; //审核人
+  int32 status = 5; //审核状态：0->未通过；1->通过
+  string detail = 6; //反馈详情
 
 }
 

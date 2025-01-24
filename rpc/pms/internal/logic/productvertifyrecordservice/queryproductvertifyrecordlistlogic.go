@@ -2,6 +2,7 @@ package productvertifyrecordservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -45,12 +46,12 @@ func (l *QueryProductVertifyRecordListLogic) QueryProductVertifyRecordList(in *p
 	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductVertifyRecordListData{
-			Id:         item.ID,
-			ProductId:  item.ProductID,
-			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
-			VertifyMan: item.ReviewMan,
-			Status:     item.Status,
-			Detail:     item.Detail,
+			Id:         item.ID,                              //
+			ProductId:  item.ProductID,                       // 商品id
+			CreateTime: time_util.TimeToStr(item.CreateTime), // 创建时间
+			ReviewMan:  item.ReviewMan,                       // 审核人
+			Status:     item.Status,                          // 审核状态：0->未通过；1->通过
+			Detail:     item.Detail,                          // 反馈详情
 		})
 	}
 

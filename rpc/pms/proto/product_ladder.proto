@@ -6,10 +6,11 @@ option go_package = "./proto";
 
 // 添加产品阶梯价格表(只针对同商品)
 message AddProductLadderReq {
-  int32 count = 1; //满足的商品数量
-  int64 discount = 2; //折扣
-  int64 product_id = 3; //
-  int64 price = 4; //折后价格
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int32 count = 3; //满足的商品数量
+  int64 discount = 4; //折扣
+  int64 price = 5; //折后价格
 
 
 }
@@ -29,11 +30,11 @@ message DeleteProductLadderResp {
 
 // 更新产品阶梯价格表(只针对同商品)
 message UpdateProductLadderReq {
-  int32 count = 1; //满足的商品数量
-  int64 discount = 2; //折扣
-  int64 id = 3; //
-  int64 price = 4; //折后价格
-  int64 product_id = 5; //
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int32 count = 3; //满足的商品数量
+  int64 discount = 4; //折扣
+  int64 price = 5; //折后价格
 
 }
 
@@ -47,11 +48,11 @@ message QueryProductLadderDetailReq {
 }
 
 message QueryProductLadderDetailResp {
-  int32 count = 1; //满足的商品数量
-  int64 discount = 2; //折扣
-  int64 id = 3; //
-  int64 price = 4; //折后价格
-  int64 product_id = 5; //
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int32 count = 3; //满足的商品数量
+  int64 discount = 4; //折扣
+  int64 price = 5; //折后价格
 
 }
 
@@ -61,11 +62,11 @@ message QueryProductLadderListReq {
 }
 
 message ProductLadderListData {
-  int32 count = 1; //满足的商品数量
-  int64 discount = 2; //折扣
-  int64 id = 3; //
-  int64 price = 4; //折后价格
-  int64 product_id = 5; //
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int32 count = 3; //满足的商品数量
+  int64 discount = 4; //折扣
+  int64 price = 5; //折后价格
 
 }
 

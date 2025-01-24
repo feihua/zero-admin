@@ -33,9 +33,9 @@ func NewAddProductFullReductionLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // AddProductFullReduction 添加产品满减表(只针对同商品)
 func (l *AddProductFullReductionLogic) AddProductFullReduction(in *pmsclient.AddProductFullReductionReq) (*pmsclient.AddProductFullReductionResp, error) {
 	err := query.PmsProductFullReduction.WithContext(l.ctx).Create(&model.PmsProductFullReduction{
-		ProductID:   in.ProductId,
-		FullPrice:   in.FullPrice,
-		ReducePrice: in.ReducePrice,
+		ProductID:   in.ProductId,   // 商品id
+		FullPrice:   in.FullPrice,   // 商品满多少
+		ReducePrice: in.ReducePrice, // 商品减多少
 	})
 
 	if err != nil {

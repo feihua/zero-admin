@@ -32,14 +32,14 @@ func NewAddMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // AddMemberRuleSetting 添加会员积分成长规则表
 func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(in *umsclient.AddMemberRuleSettingReq) (*umsclient.AddMemberRuleSettingResp, error) {
 	err := query.UmsMemberRuleSetting.WithContext(l.ctx).Create(&model.UmsMemberRuleSetting{
-		ContinueSignDay:   in.ContinueSignDay,
-		ContinueSignPoint: in.ContinueSignPoint,
-		ConsumePerPoint:   in.ConsumePerPoint,
-		LowOrderAmount:    in.LowOrderAmount,
-		MaxPointPerOrder:  in.MaxPointPerOrder,
-		RuleType:          in.RuleType,
-		Status:            in.Status,
-		CreateBy:          in.CreateBy,
+		ContinueSignDay:   in.ContinueSignDay,   // 连续签到天数
+		ContinueSignPoint: in.ContinueSignPoint, // 连续签到赠送数量
+		ConsumePerPoint:   in.ConsumePerPoint,   // 每消费多少元获取1个点
+		LowOrderAmount:    in.LowOrderAmount,    // 最低获取点数的订单金额
+		MaxPointPerOrder:  in.MaxPointPerOrder,  // 每笔订单最高获取点数
+		RuleType:          in.RuleType,          // 类型：0->积分规则；1->成长值规则
+		Status:            in.Status,            // 状态：0->禁用；1->启用
+		CreateBy:          in.CreateBy,          // 创建者
 	})
 
 	if err != nil {

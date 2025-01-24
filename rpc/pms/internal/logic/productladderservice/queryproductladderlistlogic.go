@@ -43,11 +43,11 @@ func (l *QueryProductLadderListLogic) QueryProductLadderList(in *pmsclient.Query
 	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductLadderListData{
-			Id:        item.ID,
-			ProductId: item.ProductID,
-			Count:     item.Count,
-			Discount:  item.Discount,
-			Price:     item.Price,
+			Id:        item.ID,        //
+			ProductId: item.ProductID, // 商品id
+			Count:     item.Count,     // 满足的商品数量
+			Discount:  item.Discount,  // 折扣
+			Price:     item.Price,     // 折后价格
 		})
 	}
 

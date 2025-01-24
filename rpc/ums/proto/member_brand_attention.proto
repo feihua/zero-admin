@@ -6,11 +6,12 @@ option go_package = "./proto";
 
 // 添加会员关注品牌
 message AddMemberBrandAttentionReq {
-  string brand_city = 1; //品牌所在城市
-  int64 brand_id = 2; //品牌id
-  string brand_logo = 3; //品牌Logo
-  string brand_name = 4; //品牌名称
-  int64 member_id = 5; //会员id
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int64 brand_id = 5; //品牌id
+  string brand_name = 6; //品牌名称
+  string brand_logo = 7; //品牌Logo
+  string brand_city = 8; //品牌所在城市
 }
 
 message AddMemberBrandAttentionResp {
@@ -33,15 +34,15 @@ message QueryMemberBrandAttentionDetailReq {
 }
 
 message QueryMemberBrandAttentionDetailResp {
-  string brand_city = 1; //品牌所在城市
-  int64 brand_id = 2; //品牌id
-  string brand_logo = 3; //品牌Logo
-  string brand_name = 4; //品牌名称
-  string create_time = 5; //关注时间
-  int64 id = 6; //
-  string member_icon = 7; //会员头像
-  int64 member_id = 8; //会员id
-  string member_nick_name = 9; //会员姓名
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 brand_id = 5; //品牌id
+  string brand_name = 6; //品牌名称
+  string brand_logo = 7; //品牌Logo
+  string brand_city = 8; //品牌所在城市
+  string create_time = 9; //关注时间
 
 }
 
@@ -52,12 +53,15 @@ message QueryMemberBrandAttentionListReq {
 }
 
 message MemberBrandAttentionListData {
-  string brand_city = 1; //品牌所在城市
-  int64 brand_id = 2; //品牌id
-  string brand_logo = 3; //品牌Logo
-  string brand_name = 4; //品牌名称
-  string create_time = 5; //关注时间
-  int64 id = 6; //
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 brand_id = 5; //品牌id
+  string brand_name = 6; //品牌名称
+  string brand_logo = 7; //品牌Logo
+  string brand_city = 8; //品牌所在城市
+  string create_time = 9; //关注时间
 
 }
 

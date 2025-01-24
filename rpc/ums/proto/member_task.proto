@@ -6,13 +6,13 @@ option go_package = "./proto";
 
 // 添加会员任务表
 message AddMemberTaskReq {
-  string create_by = 1; //创建者
+  int64 id = 1; //
   string task_name = 2; //任务名称
-  int32 task_type = 3; //任务类型：0->新手任务；1->日常任务
-  int32 status = 4; //状态：0->禁用；1->启用
-  int32 task_growth = 5; //赠送成长值
-  int32 task_integral = 6; //赠送积分
-
+  int32 task_growth = 3; //赠送成长值
+  int32 task_integral = 4; //赠送积分
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+  int32 status = 6; //状态：0->禁用；1->启用
+  string create_by = 7; //创建者
 }
 
 message AddMemberTaskResp {
@@ -30,14 +30,13 @@ message DeleteMemberTaskResp {
 
 // 更新会员任务表
 message UpdateMemberTaskReq {
-  int32 task_type = 1; //任务类型：0->新手任务；1->日常任务
-  string update_by = 2; //更新者
-  int64 id = 3; //
-  int32 status = 4; //状态：0->禁用；1->启用
-  int32 task_growth = 5; //赠送成长值
-  int32 task_integral = 6; //赠送积分
-  string task_name = 7; //任务名称
-
+  int64 id = 1; //
+  string task_name = 2; //任务名称
+  int32 task_growth = 3; //赠送成长值
+  int32 task_integral = 4; //赠送积分
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+  int32 status = 6; //状态：0->禁用；1->启用
+  string update_by = 9; //更新者
 
 }
 
@@ -62,14 +61,14 @@ message QueryMemberTaskDetailReq {
 }
 
 message QueryMemberTaskDetailResp {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int64 id = 3; //
-  int32 status = 4; //状态：0->禁用；1->启用
-  int32 task_growth = 5; //赠送成长值
-  int32 task_integral = 6; //赠送积分
-  string task_name = 7; //任务名称
-  int32 task_type = 8; //任务类型：0->新手任务；1->日常任务
+  int64 id = 1; //
+  string task_name = 2; //任务名称
+  int32 task_growth = 3; //赠送成长值
+  int32 task_integral = 4; //赠送积分
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+  int32 status = 6; //状态：0->禁用；1->启用
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
   string update_by = 9; //更新者
   string update_time = 10; //更新时间
 
@@ -86,14 +85,14 @@ message QueryMemberTaskListReq {
 }
 
 message MemberTaskListData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int64 id = 3; //
-  int32 status = 4; //状态：0->禁用；1->启用
-  int32 task_growth = 5; //赠送成长值
-  int32 task_integral = 6; //赠送积分
-  string task_name = 7; //任务名称
-  int32 task_type = 8; //任务类型：0->新手任务；1->日常任务
+  int64 id = 1; //
+  string task_name = 2; //任务名称
+  int32 task_growth = 3; //赠送成长值
+  int32 task_integral = 4; //赠送积分
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+  int32 status = 6; //状态：0->禁用；1->启用
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
   string update_by = 9; //更新者
   string update_time = 10; //更新时间
 

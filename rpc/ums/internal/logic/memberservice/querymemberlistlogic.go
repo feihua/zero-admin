@@ -3,6 +3,7 @@ package memberservicelogic
 import (
 	"context"
 	"github.com/feihua/zero-admin/pkg/pointerprocess"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 	"time"
@@ -62,7 +63,7 @@ func (l *QueryMemberListLogic) QueryMemberList(in *umsclient.QueryMemberListReq)
 			Nickname:              member.Nickname,
 			Phone:                 member.Phone,
 			MemberStatus:          member.MemberStatus,
-			CreateTime:            member.CreateTime.Format("2006-01-02 15:04:05"),
+			CreateTime:            time_util.TimeToStr(member.CreateTime),
 			Icon:                  pointerprocess.DefaltData(member.Icon).(string),
 			Gender:                pointerprocess.DefaltData(member.Gender).(int32),
 			Birthday:              pointerprocess.DefaltData(member.Birthday).(time.Time).Format("2006-01-02 15:04:05"),

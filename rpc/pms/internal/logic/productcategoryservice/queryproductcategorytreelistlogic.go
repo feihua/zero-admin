@@ -26,11 +26,11 @@ func NewQueryProductCategoryTreeListLogic(ctx context.Context, svcCtx *svc.Servi
 
 // 查询商品分类（tree）
 func (l *QueryProductCategoryTreeListLogic) QueryProductCategoryTreeList(in *pmsclient.QueryProductCategoryTreeListReq) (*pmsclient.QueryProductCategoryListTreeResp, error) {
-	//1.查询第一级分类
+	// 1.查询第一级分类
 	categoryList := queryLevel2(l, 0)
 	var list []*pmsclient.QueryProductCategoryListTreeData
 	for _, item := range categoryList {
-		//2.查询第二级分类
+		// 2.查询第二级分类
 		children := queryLevel2(l, item.Id)
 		list = append(list, &pmsclient.QueryProductCategoryListTreeData{
 			Id:       item.Id,

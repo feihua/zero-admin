@@ -2,6 +2,7 @@ package memberbrandattentionservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -49,12 +50,15 @@ func (l *QueryMemberBrandAttentionListLogic) QueryMemberBrandAttentionList(in *u
 	for _, item := range result {
 
 		list = append(list, &umsclient.MemberBrandAttentionListData{
-			Id:         item.ID,
-			BrandId:    item.BrandID,
-			BrandName:  item.BrandName,
-			BrandLogo:  item.BrandLogo,
-			BrandCity:  item.BrandCity,
-			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
+			Id:             item.ID,                              //
+			MemberId:       item.MemberID,                        // 会员id
+			MemberNickName: item.MemberNickName,                  // 会员姓名
+			MemberIcon:     item.MemberIcon,                      // 会员头像
+			BrandId:        item.BrandID,                         // 品牌id
+			BrandName:      item.BrandName,                       // 品牌名称
+			BrandLogo:      item.BrandLogo,                       // 品牌Logo
+			BrandCity:      item.BrandCity,                       // 品牌所在城市
+			CreateTime:     time_util.TimeToStr(item.CreateTime), // 关注时间
 		})
 	}
 

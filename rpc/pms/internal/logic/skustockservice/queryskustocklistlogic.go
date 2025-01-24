@@ -48,17 +48,17 @@ func (l *QuerySkuStockListLogic) QuerySkuStockList(in *pmsclient.QuerySkuStockLi
 	for _, item := range result {
 
 		list = append(list, &pmsclient.SkuStockListData{
-			Id:             item.ID,
-			ProductId:      item.ProductID,
-			SkuCode:        item.SkuCode,
-			Price:          item.Price,
-			Stock:          item.Stock,
-			LowStock:       item.LowStock,
-			Pic:            item.Pic,
-			Sale:           item.Sale,
-			PromotionPrice: item.PromotionPrice,
-			LockStock:      item.LockStock,
-			SpData:         item.SpData,
+			Id:             item.ID,             //
+			ProductId:      item.ProductID,      // 商品id
+			SkuCode:        item.SkuCode,        // sku编码
+			Price:          item.Price,          // 价格
+			Stock:          item.Stock,          // 库存
+			LowStock:       item.LowStock,       // 预警库存
+			Pic:            item.Pic,            // 展示图片
+			Sale:           item.Sale,           // 销量
+			PromotionPrice: item.PromotionPrice, // 单品促销价格
+			LockStock:      item.LockStock,      // 锁定库存
+			SpData:         item.SpData,         // 商品销售属性，json格式
 		})
 	}
 

@@ -2,20 +2,19 @@ package membertaskservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMemberTaskDetailLogic 查询会员任务表详情
+// QueryMemberTaskDetailLogic 查询会员任务详情
 /*
 Author: LiuFeiHua
-Date: 2024/6/11 13:41
+Date: 2025/01/24 10:32:59
 */
 type QueryMemberTaskDetailLogic struct {
 	ctx    context.Context
@@ -31,26 +30,28 @@ func NewQueryMemberTaskDetailLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
-// QueryMemberTaskDetail 查询会员任务表详情
+// QueryMemberTaskDetail 查询会员任务详情
 func (l *QueryMemberTaskDetailLogic) QueryMemberTaskDetail(in *umsclient.QueryMemberTaskDetailReq) (*umsclient.QueryMemberTaskDetailResp, error) {
 	item, err := query.UmsMemberTask.WithContext(l.ctx).Where(query.UmsMemberTask.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员任务列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询会员任务详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询会员任务详情失败")
 	}
 
 	data := &umsclient.QueryMemberTaskDetailResp{
-		Id:           item.ID,
-		TaskName:     item.TaskName,
-		TaskGrowth:   item.TaskGrowth,
-		TaskIntegral: item.TaskIntegral,
-		TaskType:     item.TaskType,
-		CreateTime:   item.CreateTime.Format("2006-01-02 15:04:05"),
-		CreateBy:     item.CreateBy,
-		UpdateTime:   time_util.TimeToString(item.UpdateTime),
-		UpdateBy:     item.UpdateBy,
+		Id:           item.ID,                                 //
+		TaskName:     item.TaskName,                           // 任务名称
+		TaskGrowth:   item.TaskGrowth,                         // 赠送成长值
+		TaskIntegral: item.TaskIntegral,                       // 赠送积分
+		TaskType:     item.TaskType,                           // 任务类型：0->新手任务；1->日常任务
+		Status:       item.Status,                             // 状态：0->禁用；1->启用
+		CreateBy:     item.CreateBy,                           // 创建者
+		CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateBy:     item.UpdateBy,                           // 更新者
+		UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
+	logc.Infof(l.ctx, "查询会员任务详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

@@ -6,9 +6,10 @@ option go_package = "./proto";
 
 // 添加产品满减表(只针对同商品)
 message AddProductFullReductionReq {
-  int64 full_price = 1; //
-  int64 product_id = 2; //
-  int64 reduce_price = 3; //
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int64 full_price = 3; //商品满多少
+  int64 reduce_price = 4; //商品减多少
 
 }
 
@@ -31,10 +32,10 @@ message QueryProductFullReductionListReq {
 }
 
 message ProductFullReductionListData {
-  int64 full_price = 1; //
-  int64 id = 2; //
-  int64 product_id = 3; //
-  int64 reduce_price = 4; //
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int64 full_price = 3; //商品满多少
+  int64 reduce_price = 4; //商品减多少
 
 }
 

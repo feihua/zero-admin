@@ -7,15 +7,13 @@ option go_package = "./proto";
 
 // 添加积分变化历史记录表
 message AddIntegrationChangeHistoryReq {
-  int32 change_count = 1; //积分改变数量
-  int32 change_type = 2; //改变类型：0->增加；1->减少
-  string operate_note = 3; //操作备注
-  int32 source_type = 4; //积分来源：0->购物；1->管理员修改
-  int64 member_id = 5; //会员id
-  string operate_man = 6; //操作人员
-
-
-
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int32 change_type = 3; //改变类型：0->增加；1->减少
+  int32 change_count = 4; //积分改变数量
+  string operate_man = 5; //操作人员
+  string operate_note = 6; //操作备注
+  int32 source_type = 7; //积分来源：0->购物；1->管理员修改
 }
 
 message AddIntegrationChangeHistoryResp {
@@ -37,14 +35,14 @@ message QueryIntegrationChangeHistoryDetailReq {
 }
 
 message QueryIntegrationChangeHistoryDetailResp {
-  int32 change_count = 1; //积分改变数量
-  int32 change_type = 2; //改变类型：0->增加；1->减少
-  string create_time = 3; //创建时间
-  int64 id = 4; //
-  int64 member_id = 5; //会员id
-  string operate_man = 6; //操作人员
-  string operate_note = 7; //操作备注
-  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int32 change_type = 3; //改变类型：0->增加；1->减少
+  int32 change_count = 4; //积分改变数量
+  string operate_man = 5; //操作人员
+  string operate_note = 6; //操作备注
+  int32 source_type = 7; //积分来源：0->购物；1->管理员修改
+  string create_time = 8; //创建时间
 
 }
 
@@ -57,14 +55,14 @@ message QueryIntegrationChangeHistoryListReq {
 }
 
 message IntegrationChangeHistoryListData {
-  int32 change_count = 1; //积分改变数量
-  int32 change_type = 2; //改变类型：0->增加；1->减少
-  string create_time = 3; //创建时间
-  int64 id = 4; //
-  int64 member_id = 5; //会员id
-  string operate_man = 6; //操作人员
-  string operate_note = 7; //操作备注
-  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int32 change_type = 3; //改变类型：0->增加；1->减少
+  int32 change_count = 4; //积分改变数量
+  string operate_man = 5; //操作人员
+  string operate_note = 6; //操作备注
+  int32 source_type = 7; //积分来源：0->购物；1->管理员修改
+  string create_time = 8; //创建时间
 
 }
 

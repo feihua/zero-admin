@@ -44,22 +44,22 @@ func (l *QueryMemberLevelListLogic) QueryMemberLevelList(in *umsclient.QueryMemb
 		return nil, err
 	}
 	var list []*umsclient.MemberLevelListData
-	for _, level := range result {
+	for _, item := range result {
 
 		list = append(list, &umsclient.MemberLevelListData{
-			Id:                 level.ID,
-			LevelName:          level.LevelName,
-			GrowthPoint:        level.GrowthPoint,
-			DefaultStatus:      level.DefaultStatus,
-			FreeFreightPoint:   level.FreeFreightPoint,
-			CommentGrowthPoint: level.CommentGrowthPoint,
-			IsFreeFreight:      level.IsFreeFreight,
-			IsSignIn:           level.IsSignIn,
-			IsComment:          level.IsComment,
-			IsPromotion:        level.IsPromotion,
-			IsMemberPrice:      level.IsMemberPrice,
-			IsBirthday:         level.IsBirthday,
-			Remark:             level.Remark,
+			Id:                 item.ID,                 //
+			LevelName:          item.LevelName,          // 等级名称
+			GrowthPoint:        item.GrowthPoint,        // 成长点
+			DefaultStatus:      item.DefaultStatus,      // 是否为默认等级：0->不是；1->是
+			FreeFreightPoint:   item.FreeFreightPoint,   // 免运费标准
+			CommentGrowthPoint: item.CommentGrowthPoint, // 每次评价获取的成长值
+			IsFreeFreight:      item.IsFreeFreight,      // 是否有免邮特权
+			IsSignIn:           item.IsSignIn,           // 是否有签到特权
+			IsComment:          item.IsComment,          // 是否有评论获奖励特权
+			IsPromotion:        item.IsPromotion,        // 是否有专享活动特权
+			IsMemberPrice:      item.IsMemberPrice,      // 是否有会员价格特权
+			IsBirthday:         item.IsBirthday,         // 是否有生日特权
+			Remark:             item.Remark,             // 备注
 		})
 	}
 

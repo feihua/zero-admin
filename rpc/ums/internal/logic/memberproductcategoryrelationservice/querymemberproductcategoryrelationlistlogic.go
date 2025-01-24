@@ -44,9 +44,9 @@ func (l *QueryMemberProductCategoryRelationListLogic) QueryMemberProductCategory
 	for _, item := range result {
 
 		list = append(list, &umsclient.MemberProductCategoryRelationListData{
-			Id:                item.ID,
-			MemberId:          item.MemberID,
-			ProductCategoryId: item.ProductCategoryID,
+			Id:                item.ID,                //
+			MemberId:          item.MemberID,          // 会员id
+			ProductCategoryId: item.ProductCategoryID, // 商品分类id
 		})
 	}
 

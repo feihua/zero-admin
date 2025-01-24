@@ -6,14 +6,14 @@ option go_package = "./proto";
 
 // 添加运费模版
 message AddFeightTemplateReq {
-  int32 charge_type = 1; //计费类型:0->按重量；1->按件数
-  int64 continue_fee = 2; //
-  int64 continue_weight = 3; //
-  string dest = 4; //目的地（省、市）
+  int64 id = 1; //
+  string name = 2; //运费模版名称
+  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
+  int64 first_weight = 4; //首重kg
   int64 first_fee = 5; //首费（元）
-  int64 first_weight = 6; //首重kg
-  int64 id = 7; //
-  string name = 8; //运费模版名称
+  int64 continue_weight = 6; //续重kg
+  int64 continue_fee = 7; //续费（元）
+  string dest = 8; //目的地（省、市）
 
 }
 
@@ -32,14 +32,14 @@ message DeleteFeightTemplateResp {
 
 // 更新运费模版
 message UpdateFeightTemplateReq {
-  int32 charge_type = 1; //计费类型:0->按重量；1->按件数
-  int64 continue_fee = 2; //
-  int64 continue_weight = 3; //
-  string dest = 4; //目的地（省、市）
+  int64 id = 1; //
+  string name = 2; //运费模版名称
+  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
+  int64 first_weight = 4; //首重kg
   int64 first_fee = 5; //首费（元）
-  int64 first_weight = 6; //首重kg
-  int64 id = 7; //
-  string name = 8; //运费模版名称
+  int64 continue_weight = 6; //续重kg
+  int64 continue_fee = 7; //续费（元）
+  string dest = 8; //目的地（省、市）
 
 }
 
@@ -54,15 +54,14 @@ message QueryFeightTemplateDetailReq {
 }
 
 message QueryFeightTemplateDetailResp {
-  int32 charge_type = 1; //计费类型:0->按重量；1->按件数
-  int64 continue_fee = 2; //
-  int64 continue_weight = 3; //
-  string dest = 4; //目的地（省、市）
+  int64 id = 1; //
+  string name = 2; //运费模版名称
+  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
+  int64 first_weight = 4; //首重kg
   int64 first_fee = 5; //首费（元）
-  int64 first_weight = 6; //首重kg
-  int64 id = 7; //
-  string name = 8; //运费模版名称
-
+  int64 continue_weight = 6; //续重kg
+  int64 continue_fee = 7; //续费（元）
+  string dest = 8; //目的地（省、市）
 }
 
 // 分页查询运费模版列表
@@ -72,14 +71,14 @@ message QueryFeightTemplateListReq {
 }
 
 message FeightTemplateListData {
-  int32 charge_type = 1; //计费类型:0->按重量；1->按件数
-  int64 continue_fee = 2; //
-  int64 continue_weight = 3; //
-  string dest = 4; //目的地（省、市）
+  int64 id = 1; //
+  string name = 2; //运费模版名称
+  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
+  int64 first_weight = 4; //首重kg
   int64 first_fee = 5; //首费（元）
-  int64 first_weight = 6; //首重kg
-  int64 id = 7; //
-  string name = 8; //运费模版名称
+  int64 continue_weight = 6; //续重kg
+  int64 continue_fee = 7; //续费（元）
+  string dest = 8; //目的地（省、市）
 
 }
 

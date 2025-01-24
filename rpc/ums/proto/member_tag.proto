@@ -6,10 +6,11 @@ option go_package = "./proto";
 
 // 添加用户标签表
 message AddMemberTagReq {
-  int64 finish_order_amount = 1; //自动打标签完成订单金额
-  int32 finish_order_count = 2; //自动打标签完成订单数量
-  int32 status = 3; //状态：0->禁用；1->启用
-  string tag_name = 4; //标签名称
+  int64 id = 1; //
+  string tag_name = 2; //标签名称
+  int32 finish_order_count = 3; //自动打标签完成订单数量
+  int32 status = 4; //状态：0->禁用；1->启用
+  int64 finish_order_amount = 5; //自动打标签完成订单金额
 
 }
 
@@ -28,12 +29,11 @@ message DeleteMemberTagResp {
 
 // 更新用户标签表
 message UpdateMemberTagReq {
-  int64 finish_order_amount = 1; //自动打标签完成订单金额
-  int32 finish_order_count = 2; //自动打标签完成订单数量
-  int64 id = 3; //
+  int64 id = 1; //
+  string tag_name = 2; //标签名称
+  int32 finish_order_count = 3; //自动打标签完成订单数量
   int32 status = 4; //状态：0->禁用；1->启用
-  string tag_name = 5; //标签名称
-
+  int64 finish_order_amount = 5; //自动打标签完成订单金额
 }
 
 message UpdateMemberTagResp {
@@ -57,11 +57,11 @@ message QueryMemberTagDetailReq {
 }
 
 message QueryMemberTagDetailResp {
-  int64 finish_order_amount = 1; //自动打标签完成订单金额
-  int32 finish_order_count = 2; //自动打标签完成订单数量
-  int64 id = 3; //
+  int64 id = 1; //
+  string tag_name = 2; //标签名称
+  int32 finish_order_count = 3; //自动打标签完成订单数量
   int32 status = 4; //状态：0->禁用；1->启用
-  string tag_name = 5; //标签名称
+  int64 finish_order_amount = 5; //自动打标签完成订单金额
 
 }
 
@@ -75,11 +75,11 @@ message QueryMemberTagListReq {
 }
 
 message MemberTagListData {
-  int64 finish_order_amount = 1; //自动打标签完成订单金额
-  int32 finish_order_count = 2; //自动打标签完成订单数量
-  int64 id = 3; //
+  int64 id = 1; //
+  string tag_name = 2; //标签名称
+  int32 finish_order_count = 3; //自动打标签完成订单数量
   int32 status = 4; //状态：0->禁用；1->启用
-  string tag_name = 5; //标签名称
+  int64 finish_order_amount = 5; //自动打标签完成订单金额
 
 }
 

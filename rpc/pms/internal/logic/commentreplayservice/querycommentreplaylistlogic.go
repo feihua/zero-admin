@@ -2,6 +2,7 @@ package commentreplayservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -45,13 +46,13 @@ func (l *QueryCommentReplayListLogic) QueryCommentReplayList(in *pmsclient.Query
 	for _, item := range result {
 
 		list = append(list, &pmsclient.CommentReplayListData{
-			Id:             item.ID,
-			CommentId:      item.CommentID,
-			MemberNickName: item.MemberNickName,
-			MemberIcon:     item.MemberIcon,
-			Content:        item.Content,
-			CreateTime:     item.CreateTime.Format("2006-01-02 15:04:05"),
-			Type:           item.Type,
+			Id:             item.ID,                              //
+			CommentId:      item.CommentID,                       // 评论id
+			MemberNickName: item.MemberNickName,                  // 评论人员昵称
+			MemberIcon:     item.MemberIcon,                      // 评论人员头像
+			Content:        item.Content,                         // 内容
+			CreateTime:     time_util.TimeToStr(item.CreateTime), // 评论时间
+			Type:           item.Type,                            // 评论人员类型；0->会员；1->管理员
 		})
 	}
 

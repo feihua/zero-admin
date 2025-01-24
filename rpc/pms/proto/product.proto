@@ -35,53 +35,54 @@ message SkuStockList {
   string    SpData = 9;
 }
 message AddProductReq {
-  string album_pics = 1; //画册图片，连产品图片限制为5张，以逗号分割
+  int64 id = 1; //
   int64 brand_id = 2; //品牌id
-  string brand_name = 3; //品牌名称
-  int32 delete_status = 4; //删除状态：0->未删除；1->已删除
-  string description = 5; //商品描述
-  string detail_desc = 6; //详情描述
-  string detail_html = 7; //产品详情网页内容
-  string detail_mobile_html = 8; //移动端网页详情
-  string detail_title = 9; //详情标题
-  int64 feight_template_id = 10; //商品运费模板id
-  int32 gift_growth = 11; //赠送的成长值
-  int32 gift_point = 12; //赠送的积分
-  int64 weight = 13; //商品重量，默认为克
-  string keywords = 14; //搜索关键字
-  int32 low_stock = 15; //库存预警值
-  string name = 16; //商品名称
-  int32 new_status = 17; //新品状态:0->不是新品；1->新品
-  string note = 18; //备注
-  int64 original_price = 19; //市场价
-  string pic = 20; //商品图片
-  int32 preview_status = 21; //是否为预告商品：0->不是；1->是
-  int64 price = 22; //商品价格
-  int64 product_attribute_category_id = 23; //商品属性分类id
-  int64 product_category_id = 24; //商品分类id
-  string product_category_id_array = 25; //商品分类id字符串
-  string product_category_name = 26; //商品分类名称
-  string product_sn = 27; //货号
-  string promotion_end_time = 28; //促销结束时间
-  int32 promotion_per_limit = 29; //活动限购数量
-  int64 promotion_price = 30; //促销价格
-  string promotion_start_time = 31; //促销开始时间
-  int32 promotion_type = 32; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-  int32 publish_status = 33; //上架状态：0->下架；1->上架
-  int32 recommand_status = 34; //推荐状态；0->不推荐；1->推荐
-  int32 sale = 35; //销量
-  string service_ids = 36; //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
-  int32 sort = 37; //排序
-  int32 stock = 38; //库存
-  string sub_title = 39; //副标题
-  string unit = 40; //单位
-  int32 use_point_limit = 41; //限制使用的积分数
-  int32 verify_status = 42; //审核状态：0->未审核；1->审核通过
-  repeated MemberPriceList      MemberPriceList = 43;
-  repeated ProductAttributeValueList      ProductAttributeValueList = 44;
-  repeated ProductFullReductionList      ProductFullReductionList = 45;
-  repeated ProductLadderList      ProductLadderList = 46;
-  repeated SkuStockList      SkuStockList = 47;
+  int64 product_category_id = 3; //商品分类id
+  int64 feight_template_id = 4; //商品运费模板id
+  int64 product_attribute_category_id = 5; //商品属性分类id
+  string name = 6; //商品名称
+  string pic = 7; //商品图片
+  string product_sn = 8; //货号
+  int32 delete_status = 9; //删除状态：0->未删除；1->已删除
+  int32 publish_status = 10; //上架状态：0->下架；1->上架
+  int32 new_status = 11; //新品状态:0->不是新品；1->新品
+  int32 recommand_status = 12; //推荐状态；0->不推荐；1->推荐
+  int32 verify_status = 13; //审核状态：0->未审核；1->审核通过
+  int32 sort = 14; //排序
+  int32 sale = 15; //销量
+  int64 price = 16; //商品价格
+  int64 promotion_price = 17; //促销价格
+  int32 gift_growth = 18; //赠送的成长值
+  int32 gift_point = 19; //赠送的积分
+  int32 use_point_limit = 20; //限制使用的积分数
+  string sub_title = 21; //副标题
+  string description = 22; //商品描述
+  int64 original_price = 23; //市场价
+  int32 stock = 24; //库存
+  int32 low_stock = 25; //库存预警值
+  string unit = 26; //单位
+  int64 weight = 27; //商品重量，默认为克
+  int32 preview_status = 28; //是否为预告商品：0->不是；1->是
+  string service_ids = 29; //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+  string keywords = 30; //搜索关键字
+  string note = 31; //备注
+  string album_pics = 32; //画册图片，连产品图片限制为5张，以逗号分割
+  string detail_title = 33; //详情标题
+  string detail_desc = 34; //详情描述
+  string detail_html = 35; //产品详情网页内容
+  string detail_mobile_html = 36; //移动端网页详情
+  string promotion_start_time = 37; //促销开始时间
+  string promotion_end_time = 38; //促销结束时间
+  int32 promotion_per_limit = 39; //活动限购数量
+  int32 promotion_type = 40; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+  string brand_name = 41; //品牌名称
+  string product_category_name = 42; //商品分类名称
+  string product_category_id_array = 43; //商品分类id字符串
+  repeated MemberPriceList      MemberPriceList = 44;
+  repeated ProductAttributeValueList      ProductAttributeValueList = 45;
+  repeated ProductFullReductionList      ProductFullReductionList = 46;
+  repeated ProductLadderList      ProductLadderList = 47;
+  repeated SkuStockList      SkuStockList = 48;
 }
 
 message AddProductResp {
@@ -105,49 +106,49 @@ message QueryProductByIdsReq {
 }
 
 message ProductListData{
-  string album_pics = 1; //画册图片，连产品图片限制为5张，以逗号分割
+  int64 id = 1; //
   int64 brand_id = 2; //品牌id
-  string brand_name = 3; //品牌名称
-  int32 delete_status = 4; //删除状态：0->未删除；1->已删除
-  string description = 5; //商品描述
-  string detail_desc = 6; //详情描述
-  string detail_html = 7; //产品详情网页内容
-  string detail_mobile_html = 8; //移动端网页详情
-  string detail_title = 9; //详情标题
-  int64 feight_template_id = 10; //商品运费模板id
-  int32 gift_growth = 11; //赠送的成长值
-  int32 gift_point = 12; //赠送的积分
-  int64 id = 13; //
-  string keywords = 14; //搜索关键字
-  int32 low_stock = 15; //库存预警值
-  string name = 16; //商品名称
-  int32 new_status = 17; //新品状态:0->不是新品；1->新品
-  string note = 18; //备注
-  int64 original_price = 19; //市场价
-  string pic = 20; //商品图片
-  int32 preview_status = 21; //是否为预告商品：0->不是；1->是
-  int64 price = 22; //商品价格
-  int64 product_attribute_category_id = 23; //商品属性分类id
-  int64 product_category_id = 24; //商品分类id
-  string product_category_id_array = 25; //商品分类id字符串
-  string product_category_name = 26; //商品分类名称
-  string product_sn = 27; //货号
-  string promotion_end_time = 28; //促销结束时间
-  int32 promotion_per_limit = 29; //活动限购数量
-  int64 promotion_price = 30; //促销价格
-  string promotion_start_time = 31; //促销开始时间
-  int32 promotion_type = 32; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-  int32 publish_status = 33; //上架状态：0->下架；1->上架
-  int32 recommand_status = 34; //推荐状态；0->不推荐；1->推荐
-  int32 sale = 35; //销量
-  string service_ids = 36; //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
-  int32 sort = 37; //排序
-  int32 stock = 38; //库存
-  string sub_title = 39; //副标题
-  string unit = 40; //单位
-  int32 use_point_limit = 41; //限制使用的积分数
-  int32 verify_status = 42; //审核状态：0->未审核；1->审核通过
-  int64 weight = 43; //商品重量，默认为克
+  int64 product_category_id = 3; //商品分类id
+  int64 feight_template_id = 4; //商品运费模板id
+  int64 product_attribute_category_id = 5; //商品属性分类id
+  string name = 6; //商品名称
+  string pic = 7; //商品图片
+  string product_sn = 8; //货号
+  int32 delete_status = 9; //删除状态：0->未删除；1->已删除
+  int32 publish_status = 10; //上架状态：0->下架；1->上架
+  int32 new_status = 11; //新品状态:0->不是新品；1->新品
+  int32 recommand_status = 12; //推荐状态；0->不推荐；1->推荐
+  int32 verify_status = 13; //审核状态：0->未审核；1->审核通过
+  int32 sort = 14; //排序
+  int32 sale = 15; //销量
+  int64 price = 16; //商品价格
+  int64 promotion_price = 17; //促销价格
+  int32 gift_growth = 18; //赠送的成长值
+  int32 gift_point = 19; //赠送的积分
+  int32 use_point_limit = 20; //限制使用的积分数
+  string sub_title = 21; //副标题
+  string description = 22; //商品描述
+  int64 original_price = 23; //市场价
+  int32 stock = 24; //库存
+  int32 low_stock = 25; //库存预警值
+  string unit = 26; //单位
+  int64 weight = 27; //商品重量，默认为克
+  int32 preview_status = 28; //是否为预告商品：0->不是；1->是
+  string service_ids = 29; //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+  string keywords = 30; //搜索关键字
+  string note = 31; //备注
+  string album_pics = 32; //画册图片，连产品图片限制为5张，以逗号分割
+  string detail_title = 33; //详情标题
+  string detail_desc = 34; //详情描述
+  string detail_html = 35; //产品详情网页内容
+  string detail_mobile_html = 36; //移动端网页详情
+  string promotion_start_time = 37; //促销开始时间
+  string promotion_end_time = 38; //促销结束时间
+  int32 promotion_per_limit = 39; //活动限购数量
+  int32 promotion_type = 40; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+  string brand_name = 41; //品牌名称
+  string product_category_name = 42; //商品分类名称
+  string product_category_id_array = 43; //商品分类id字符串
 
 }
 
@@ -157,49 +158,49 @@ message QueryProductListResp {
 }
 
 message UpdateProductReq {
-  string album_pics = 1; //画册图片，连产品图片限制为5张，以逗号分割
+  int64 id = 1; //
   int64 brand_id = 2; //品牌id
-  string brand_name = 3; //品牌名称
-  int32 delete_status = 4; //删除状态：0->未删除；1->已删除
-  string description = 5; //商品描述
-  string detail_desc = 6; //详情描述
-  string detail_html = 7; //产品详情网页内容
-  string detail_mobile_html = 8; //移动端网页详情
-  string detail_title = 9; //详情标题
-  int64 feight_template_id = 10; //商品运费模板id
-  int32 gift_growth = 11; //赠送的成长值
-  int32 gift_point = 12; //赠送的积分
-  int64 id = 13; //
-  string keywords = 14; //搜索关键字
-  int32 low_stock = 15; //库存预警值
-  string name = 16; //商品名称
-  int32 new_status = 17; //新品状态:0->不是新品；1->新品
-  string note = 18; //备注
-  int64 original_price = 19; //市场价
-  string pic = 20; //商品图片
-  int32 preview_status = 21; //是否为预告商品：0->不是；1->是
-  int64 price = 22; //商品价格
-  int64 product_attribute_category_id = 23; //商品属性分类id
-  int64 product_category_id = 24; //商品分类id
-  string product_category_id_array = 25; //商品分类id字符串
-  string product_category_name = 26; //商品分类名称
-  string product_sn = 27; //货号
-  string promotion_end_time = 28; //促销结束时间
-  int32 promotion_per_limit = 29; //活动限购数量
-  int64 promotion_price = 30; //促销价格
-  string promotion_start_time = 31; //促销开始时间
-  int32 promotion_type = 32; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-  int32 publish_status = 33; //上架状态：0->下架；1->上架
-  int32 recommand_status = 34; //推荐状态；0->不推荐；1->推荐
-  int32 sale = 35; //销量
-  string service_ids = 36; //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
-  int32 sort = 37; //排序
-  int32 stock = 38; //库存
-  string sub_title = 39; //副标题
-  string unit = 40; //单位
-  int32 use_point_limit = 41; //限制使用的积分数
-  int32 verify_status = 42; //审核状态：0->未审核；1->审核通过
-  int64 weight = 43; //商品重量，默认为克
+  int64 product_category_id = 3; //商品分类id
+  int64 feight_template_id = 4; //商品运费模板id
+  int64 product_attribute_category_id = 5; //商品属性分类id
+  string name = 6; //商品名称
+  string pic = 7; //商品图片
+  string product_sn = 8; //货号
+  int32 delete_status = 9; //删除状态：0->未删除；1->已删除
+  int32 publish_status = 10; //上架状态：0->下架；1->上架
+  int32 new_status = 11; //新品状态:0->不是新品；1->新品
+  int32 recommand_status = 12; //推荐状态；0->不推荐；1->推荐
+  int32 verify_status = 13; //审核状态：0->未审核；1->审核通过
+  int32 sort = 14; //排序
+  int32 sale = 15; //销量
+  int64 price = 16; //商品价格
+  int64 promotion_price = 17; //促销价格
+  int32 gift_growth = 18; //赠送的成长值
+  int32 gift_point = 19; //赠送的积分
+  int32 use_point_limit = 20; //限制使用的积分数
+  string sub_title = 21; //副标题
+  string description = 22; //商品描述
+  int64 original_price = 23; //市场价
+  int32 stock = 24; //库存
+  int32 low_stock = 25; //库存预警值
+  string unit = 26; //单位
+  int64 weight = 27; //商品重量，默认为克
+  int32 preview_status = 28; //是否为预告商品：0->不是；1->是
+  string service_ids = 29; //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+  string keywords = 30; //搜索关键字
+  string note = 31; //备注
+  string album_pics = 32; //画册图片，连产品图片限制为5张，以逗号分割
+  string detail_title = 33; //详情标题
+  string detail_desc = 34; //详情描述
+  string detail_html = 35; //产品详情网页内容
+  string detail_mobile_html = 36; //移动端网页详情
+  string promotion_start_time = 37; //促销开始时间
+  string promotion_end_time = 38; //促销结束时间
+  int32 promotion_per_limit = 39; //活动限购数量
+  int32 promotion_type = 40; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+  string brand_name = 41; //品牌名称
+  string product_category_name = 42; //商品分类名称
+  string product_category_id_array = 43; //商品分类id字符串
   repeated MemberPriceList      MemberPriceList = 44;
   repeated ProductAttributeValueList      ProductAttributeValueList = 45;
   repeated ProductFullReductionList      ProductFullReductionList = 46;
@@ -224,36 +225,36 @@ message QueryProductDetailByIdReq {
 }
 
 message BrandData {
-  string big_pic = 1; //专区大图
-  string brand_story = 2; //品牌故事
-  string create_by = 3; //创建者
-  string create_time = 4; //创建时间
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string first_letter = 3; //首字母
+  int32 sort = 4; //排序
   int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  string first_letter = 6; //首字母
-  int64 id = 7; //
-  string logo = 8; //品牌logo
-  string name = 9; //品牌名称
-  int32 product_comment_count = 10; //产品评论数量
-  int32 product_count = 11; //产品数量
-  int32 recommend_status = 12; //推荐状态
-  int32 show_status = 13; //品牌显示状态
-  int32 sort = 14; //排序
+  int32 show_status = 6; //品牌显示状态
+  int32 recommend_status = 7; //推荐状态
+  int32 product_count = 8; //产品数量
+  int32 product_comment_count = 9; //产品评论数量
+  string logo = 10; //品牌logo
+  string big_pic = 11; //专区大图
+  string brand_story = 12; //品牌故事
+  string create_by = 13; //创建者
+  string create_time = 14; //创建时间
   string update_by = 15; //更新者
   string update_time = 16; //更新时间
 
 }
 message ProductAttributeDataList {
-  int32 filter_type = 1; //分类筛选样式：1->普通；1->颜色
-  int32 hand_add_status = 2; //是否支持手动新增；0->不支持；1->支持
-  int64 id = 3; //
-  string input_list = 4; //可选值列表，以逗号隔开
+  int64 id = 1; //
+  int64 product_attribute_category_id = 2; //商品属性分类id
+  string name = 3; //商品属性分类id
+  int32 select_type = 4; //属性选择类型：0->唯一；1->单选；2->多选
   int32 input_type = 5; //属性录入方式：0->手工录入；1->从列表中选取
-  string name = 6; //
-  int64 product_attribute_category_id = 7; //
-  int32 related_status = 8; //相同属性产品是否关联；0->不关联；1->关联
+  string input_list = 6; //可选值列表，以逗号隔开
+  int32 sort = 7; //排序字段：最高的可以单独上传图片
+  int32 filter_type = 8; //分类筛选样式：1->普通；1->颜色
   int32 search_type = 9; //检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-  int32 select_type = 10; //属性选择类型：0->唯一；1->单选；2->多选
-  int32 sort = 11; //排序字段：最高的可以单独上传图片
+  int32 related_status = 10; //相同属性产品是否关联；0->不关联；1->关联
+  int32 hand_add_status = 11; //是否支持手动新增；0->不支持；1->支持
   int32 type = 12; //属性的类型；0->规格；1->参数
 
 }
@@ -266,39 +267,40 @@ message ProductAttributeValueData {
 }
 message SkuStockData {
   int64 id = 1; //
-  int32 lock_stock = 2; //锁定库存
-  int32 low_stock = 3; //预警库存
-  string pic = 4; //展示图片
-  int64 price = 5; //
-  int64 product_id = 6; //
-  int64 promotion_price = 7; //单品促销价格
+  int64 product_id = 2; //商品id
+  string sku_code = 3; //sku编码
+  int64 price = 4; //价格
+  int32 stock = 5; //库存
+  int32 low_stock = 6; //预警库存
+  string pic = 7; //展示图片
   int32 sale = 8; //销量
-  string sku_code = 9; //sku编码
-  string sp_data = 10; //商品销售属性，json格式
-  int32 stock = 11; //库存
+  int64 promotion_price = 9; //单品促销价格
+  int32 lock_stock = 10; //锁定库存
+  string sp_data = 11; //商品销售属性，json格式
+
 
 }
 message ProductLadderData {
-  int32 count = 1; //满足的商品数量
-  int64 discount = 2; //折扣
-  int64 id = 3; //
-  int64 price = 4; //折后价格
-  int64 product_id = 5; //
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int32 count = 3; //满足的商品数量
+  int64 discount = 4; //折扣
+  int64 price = 5; //折后价格
 
 }
 message ProductFullReductionData {
-  int64 full_price = 1; //
-  int64 id = 2; //
-  int64 product_id = 3; //
-  int64 reduce_price = 4; //
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int64 full_price = 3; //商品满多少
+  int64 reduce_price = 4; //商品减多少
 
 }
 message MemberPriceListData {
   int64 id = 1; //
-  int64 member_level_id = 2; //会员等级id
-  string member_level_name = 3; //会员等级名称
+  int64 product_id = 2; //商品id
+  int64 member_level_id = 3; //会员等级id
   int64 member_price = 4; //会员价格
-  int64 product_id = 5; //商品id
+  string member_level_name = 5; //会员等级名称
 
 }
 

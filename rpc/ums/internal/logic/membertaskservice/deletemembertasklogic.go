@@ -2,18 +2,18 @@ package membertaskservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteMemberTaskLogic 会员任务
+// DeleteMemberTaskLogic 删除会员任务
 /*
 Author: LiuFeiHua
-Date: 2024/5/7 9:20
+Date: 2025/01/24 10:32:59
 */
 type DeleteMemberTaskLogic struct {
 	ctx    context.Context
@@ -29,13 +29,17 @@ func NewDeleteMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
-// DeleteMemberTask 删除会员任务表
+// DeleteMemberTask 删除会员任务
 func (l *DeleteMemberTaskLogic) DeleteMemberTask(in *umsclient.DeleteMemberTaskReq) (*umsclient.DeleteMemberTaskResp, error) {
 	q := query.UmsMemberTask
+
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
+
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除会员任务失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除会员任务失败")
 	}
 
+	logc.Infof(l.ctx, "删除会员任务成功,参数：%+v", in)
 	return &umsclient.DeleteMemberTaskResp{}, nil
 }

@@ -6,8 +6,9 @@ option go_package = "./proto";
 
 // 添加产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）
 message AddProductCategoryAttributeRelationReq {
-  int64 product_attribute_id = 1; //
-  int64 product_category_id = 2; //
+  int64 id = 1; //
+  int64 product_category_id = 2; //商品分类id
+  int64 product_attribute_id = 3; //商品属性id
 
 }
 
@@ -24,8 +25,8 @@ message QueryProductCategoryAttributeRelationListReq {
 
 message ProductCategoryAttributeRelationListData {
   int64 id = 1; //
-  int64 product_attribute_id = 2; //
-  int64 product_category_id = 3; //
+  int64 product_category_id = 2; //商品分类id
+  int64 product_attribute_id = 3; //商品属性id
 
 }
 

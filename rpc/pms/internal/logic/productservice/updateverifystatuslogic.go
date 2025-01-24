@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
@@ -44,11 +42,10 @@ func (l *UpdateVerifyStatusLogic) UpdateVerifyStatus(in *pmsclient.UpdateProduct
 	var list []*model.PmsProductVertifyRecord
 	for _, id := range in.Ids {
 		list = append(list, &model.PmsProductVertifyRecord{
-			ProductID:  id,
-			CreateTime: time.Now(),
-			ReviewMan:  in.VertifyMan,
-			Status:     in.Status,
-			Detail:     in.Detail,
+			ProductID: id,            // 商品id
+			ReviewMan: in.VertifyMan, // 审核人
+			Status:    in.Status,     // 审核状态：0->未通过；1->通过
+			Detail:    in.Detail,     // 反馈详情
 		})
 	}
 	err = query.PmsProductVertifyRecord.WithContext(l.ctx).CreateInBatches(list, len(list))

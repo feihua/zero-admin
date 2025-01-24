@@ -34,10 +34,11 @@ func NewUpdateIntegrationConsumeSettingLogic(ctx context.Context, svcCtx *svc.Se
 func (l *UpdateIntegrationConsumeSettingLogic) UpdateIntegrationConsumeSetting(in *umsclient.UpdateIntegrationConsumeSettingReq) (*umsclient.UpdateIntegrationConsumeSettingResp, error) {
 	_, err := query.UmsIntegrationConsumeSetting.WithContext(l.ctx).Updates(&model.UmsIntegrationConsumeSetting{
 		ID:                 in.Id,
-		DeductionPerAmount: in.DeductionPerAmount,
-		MaxPercentPerOrder: in.MaxPercentPerOrder,
-		UseUnit:            in.UseUnit,
-		CouponStatus:       in.CouponStatus,
+		DeductionPerAmount: in.DeductionPerAmount, // 每一元需要抵扣的积分数量
+		MaxPercentPerOrder: in.MaxPercentPerOrder, // 每笔订单最高抵用百分比
+		UseUnit:            in.UseUnit,            // 每次使用积分最小单位100
+		IsDefault:          in.IsDefault,          // 是否默认：0->否；1->是
+		CouponStatus:       in.CouponStatus,       // 是否可以和优惠券同用；0->不可以；1->可以
 	})
 
 	if err != nil {

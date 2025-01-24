@@ -3,16 +3,16 @@ syntax = "proto3";
 package umsclient;
 
 option go_package = "./umsclient";
+
 // 添加成长值变化历史记录表
 message AddGrowthChangeHistoryReq {
-  int32 change_count = 1; //积分改变数量
-  int32 change_type = 2; //改变类型：0->增加；1->减少
-  string operate_note = 3; //操作备注
-  int32 source_type = 4; //积分来源：0->购物；1->管理员修改
-  int64 member_id = 5; //会员id
-  string operate_man = 6; //操作人员
-
-
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int32 change_type = 3; //改变类型：0->增加；1->减少
+  int32 change_count = 4; //积分改变数量
+  string operate_man = 5; //操作人员
+  string operate_note = 6; //操作备注
+  int32 source_type = 7; //积分来源：0->购物；1->管理员修改
 }
 
 message AddGrowthChangeHistoryResp {
@@ -34,14 +34,14 @@ message QueryGrowthChangeHistoryDetailReq {
 }
 
 message QueryGrowthChangeHistoryDetailResp {
-  int32 change_count = 1; //积分改变数量
-  int32 change_type = 2; //改变类型：0->增加；1->减少
-  string create_time = 3; //创建时间
-  int64 id = 4; //
-  int64 member_id = 5; //会员id
-  string operate_man = 6; //操作人员
-  string operate_note = 7; //操作备注
-  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int32 change_type = 3; //改变类型：0->增加；1->减少
+  int32 change_count = 4; //积分改变数量
+  string operate_man = 5; //操作人员
+  string operate_note = 6; //操作备注
+  int32 source_type = 7; //积分来源：0->购物；1->管理员修改
+  string create_time = 8; //创建时间
 
 }
 
@@ -54,14 +54,14 @@ message QueryGrowthChangeHistoryListReq {
 }
 
 message GrowthChangeHistoryListData {
-  int32 change_count = 1; //积分改变数量
-  int32 change_type = 2; //改变类型：0->增加；1->减少
-  string create_time = 3; //创建时间
-  int64 id = 4; //
-  int64 member_id = 5; //会员id
-  string operate_man = 6; //操作人员
-  string operate_note = 7; //操作备注
-  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int32 change_type = 3; //改变类型：0->增加；1->减少
+  int32 change_count = 4; //积分改变数量
+  string operate_man = 5; //操作人员
+  string operate_note = 6; //操作备注
+  int32 source_type = 7; //积分来源：0->购物；1->管理员修改
+  string create_time = 8; //创建时间
 
 }
 
@@ -85,17 +85,16 @@ service GrowthChangeHistoryService {
 }
 
 
+
 // 添加积分变化历史记录表
 message AddIntegrationChangeHistoryReq {
-  int32 change_count = 1; //积分改变数量
-  int32 change_type = 2; //改变类型：0->增加；1->减少
-  string operate_note = 3; //操作备注
-  int32 source_type = 4; //积分来源：0->购物；1->管理员修改
-  int64 member_id = 5; //会员id
-  string operate_man = 6; //操作人员
-
-
-
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int32 change_type = 3; //改变类型：0->增加；1->减少
+  int32 change_count = 4; //积分改变数量
+  string operate_man = 5; //操作人员
+  string operate_note = 6; //操作备注
+  int32 source_type = 7; //积分来源：0->购物；1->管理员修改
 }
 
 message AddIntegrationChangeHistoryResp {
@@ -117,14 +116,14 @@ message QueryIntegrationChangeHistoryDetailReq {
 }
 
 message QueryIntegrationChangeHistoryDetailResp {
-  int32 change_count = 1; //积分改变数量
-  int32 change_type = 2; //改变类型：0->增加；1->减少
-  string create_time = 3; //创建时间
-  int64 id = 4; //
-  int64 member_id = 5; //会员id
-  string operate_man = 6; //操作人员
-  string operate_note = 7; //操作备注
-  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int32 change_type = 3; //改变类型：0->增加；1->减少
+  int32 change_count = 4; //积分改变数量
+  string operate_man = 5; //操作人员
+  string operate_note = 6; //操作备注
+  int32 source_type = 7; //积分来源：0->购物；1->管理员修改
+  string create_time = 8; //创建时间
 
 }
 
@@ -137,14 +136,14 @@ message QueryIntegrationChangeHistoryListReq {
 }
 
 message IntegrationChangeHistoryListData {
-  int32 change_count = 1; //积分改变数量
-  int32 change_type = 2; //改变类型：0->增加；1->减少
-  string create_time = 3; //创建时间
-  int64 id = 4; //
-  int64 member_id = 5; //会员id
-  string operate_man = 6; //操作人员
-  string operate_note = 7; //操作备注
-  int32 source_type = 8; //积分来源：0->购物；1->管理员修改
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int32 change_type = 3; //改变类型：0->增加；1->减少
+  int32 change_count = 4; //积分改变数量
+  string operate_man = 5; //操作人员
+  string operate_note = 6; //操作备注
+  int32 source_type = 7; //积分来源：0->购物；1->管理员修改
+  string create_time = 8; //创建时间
 
 }
 
@@ -167,15 +166,15 @@ service IntegrationChangeHistoryService {
 
 }
 
+
 // 添加积分消费设置
 message AddIntegrationConsumeSettingReq {
-  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int64 id = 1; //
   int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
-  int32 use_unit = 3; //每次使用积分最小单位100
-  int32 is_default = 4; //是否默认：0->否；1->是
-  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
-
-
+  int32 max_percent_per_order = 3; //每笔订单最高抵用百分比
+  int32 use_unit = 4; //每次使用积分最小单位100
+  int32 is_default = 5; //是否默认：0->否；1->是
+  int32 coupon_status = 6; //是否可以和优惠券同用；0->不可以；1->可以
 }
 
 message AddIntegrationConsumeSettingResp {
@@ -193,11 +192,12 @@ message DeleteIntegrationConsumeSettingResp {
 
 // 更新积分消费设置
 message UpdateIntegrationConsumeSettingReq {
-  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int64 id = 1; //
   int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
-  int64 id = 3; //
+  int32 max_percent_per_order = 3; //每笔订单最高抵用百分比
   int32 use_unit = 4; //每次使用积分最小单位100
-  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
+  int32 is_default = 5; //是否默认：0->否；1->是
+  int32 coupon_status = 6; //是否可以和优惠券同用；0->不可以；1->可以
 
 
 }
@@ -223,12 +223,12 @@ message QueryIntegrationConsumeSettingDetailReq {
 }
 
 message QueryIntegrationConsumeSettingDetailResp {
-  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int64 id = 1; //
   int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
-  int64 id = 3; //
-  int32 is_default = 4; //是否默认：0->否；1->是
-  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
-  int32 use_unit = 6; //每次使用积分最小单位100
+  int32 max_percent_per_order = 3; //每笔订单最高抵用百分比
+  int32 use_unit = 4; //每次使用积分最小单位100
+  int32 is_default = 5; //是否默认：0->否；1->是
+  int32 coupon_status = 6; //是否可以和优惠券同用；0->不可以；1->可以
 
 }
 
@@ -239,12 +239,12 @@ message QueryIntegrationConsumeSettingListReq {
 }
 
 message IntegrationConsumeSettingListData {
-  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int64 id = 1; //
   int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
-  int64 id = 3; //
-  int32 is_default = 4; //是否默认：0->否；1->是
-  int32 max_percent_per_order = 5; //每笔订单最高抵用百分比
-  int32 use_unit = 6; //每次使用积分最小单位100
+  int32 max_percent_per_order = 3; //每笔订单最高抵用百分比
+  int32 use_unit = 4; //每次使用积分最小单位100
+  int32 is_default = 5; //是否默认：0->否；1->是
+  int32 coupon_status = 6; //是否可以和优惠券同用；0->不可以；1->可以
 
 }
 
@@ -271,6 +271,7 @@ service IntegrationConsumeSettingService {
 
 }
 
+
 // 添加会员表
 message AddMemberReq {
   string member_name = 1; //用户名
@@ -294,23 +295,24 @@ message DeleteMemberResp {
 
 // 更新会员表
 message UpdateMemberReq {
-  string birthday = 1; //生日
-  string city = 2; //所做城市
-  int32 source_type = 3; //用户来源
-  int32 gender = 4; //性别：0->未知；1->男；2->女
-  int32 growth = 5; //成长值
-  int32 history_integration = 6; //历史积分数量
-  string icon = 7; //头像
-  int64 id = 8; //
-  int32 integration = 9; //积分
-  string job = 10; //职业
-  int32 lottery_count = 11; //剩余抽奖次数
-  int64 member_level_id = 12; //会员等级id
-  string member_name = 13; //用户名
-  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
-  string nickname = 15; //昵称
-  string phone = 16; //手机号码
-  string personalized_signature = 17; //个性签名
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_name = 3; //用户名
+  string password = 4; //密码
+  string nickname = 5; //昵称
+  string phone = 6; //手机号码
+  int32 member_status = 7; //帐号启用状态:0->禁用；1->启用
+  string icon = 8; //头像
+  int32 gender = 9; //性别：0->未知；1->男；2->女
+  string birthday = 10; //生日
+  string city = 11; //所做城市
+  string job = 12; //职业
+  string personalized_signature = 13; //个性签名
+  int32 source_type = 14; //用户来源
+  int32 integration = 15; //积分
+  int32 growth = 16; //成长值
+  int32 lottery_count = 17; //剩余抽奖次数
+  int32 history_integration = 18; //历史积分数量
 
 }
 
@@ -320,26 +322,8 @@ message UpdateMemberResp {
 
 // 更新会员表状态
 message UpdateMemberStatusReq {
-  string birthday = 1; //生日
-  string city = 2; //所做城市
-  string create_time = 3; //创建时间
-  int32 gender = 4; //性别：0->未知；1->男；2->女
-  int32 growth = 5; //成长值
-  int32 history_integration = 6; //历史积分数量
-  string icon = 7; //头像
-  int64 id = 8; //
-  int32 integration = 9; //积分
-  string job = 10; //职业
-  int32 lottery_count = 11; //剩余抽奖次数
-  int64 member_level_id = 12; //会员等级id
-  string member_name = 13; //用户名
-  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
-  string nickname = 15; //昵称
-  string password = 16; //密码
-  string personalized_signature = 17; //个性签名
-  string phone = 18; //手机号码
-  int32 source_type = 19; //用户来源
-  string update_time = 20; //更新时间
+  repeated int64 ids = 1; //
+  int32 member_status = 2; //帐号启用状态:0->禁用；1->启用
 
 }
 
@@ -353,25 +337,25 @@ message QueryMemberDetailReq {
 }
 
 message QueryMemberDetailResp {
-  string birthday = 1; //生日
-  string city = 2; //所做城市
-  string create_time = 3; //创建时间
-  int32 gender = 4; //性别：0->未知；1->男；2->女
-  int32 growth = 5; //成长值
-  int32 history_integration = 6; //历史积分数量
-  string icon = 7; //头像
-  int64 id = 8; //
-  int32 integration = 9; //积分
-  string job = 10; //职业
-  int32 lottery_count = 11; //剩余抽奖次数
-  int64 member_level_id = 12; //会员等级id
-  string member_name = 13; //用户名
-  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
-  string nickname = 15; //昵称
-  string password = 16; //密码
-  string personalized_signature = 17; //个性签名
-  string phone = 18; //手机号码
-  int32 source_type = 19; //用户来源
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_name = 3; //用户名
+  string password = 4; //密码
+  string nickname = 5; //昵称
+  string phone = 6; //手机号码
+  int32 member_status = 7; //帐号启用状态:0->禁用；1->启用
+  string icon = 8; //头像
+  int32 gender = 9; //性别：0->未知；1->男；2->女
+  string birthday = 10; //生日
+  string city = 11; //所做城市
+  string job = 12; //职业
+  string personalized_signature = 13; //个性签名
+  int32 source_type = 14; //用户来源
+  int32 integration = 15; //积分
+  int32 growth = 16; //成长值
+  int32 lottery_count = 17; //剩余抽奖次数
+  int32 history_integration = 18; //历史积分数量
+  string create_time = 19; //创建时间
   string update_time = 20; //更新时间
 
 }
@@ -387,25 +371,25 @@ message QueryMemberListReq {
 }
 
 message MemberListData {
-  string birthday = 1; //生日
-  string city = 2; //所做城市
-  string create_time = 3; //创建时间
-  int32 gender = 4; //性别：0->未知；1->男；2->女
-  int32 growth = 5; //成长值
-  int32 history_integration = 6; //历史积分数量
-  string icon = 7; //头像
-  int64 id = 8; //
-  int32 integration = 9; //积分
-  string job = 10; //职业
-  int32 lottery_count = 11; //剩余抽奖次数
-  int64 member_level_id = 12; //会员等级id
-  string member_name = 13; //用户名
-  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
-  string nickname = 15; //昵称
-  string password = 16; //密码
-  string personalized_signature = 17; //个性签名
-  string phone = 18; //手机号码
-  int32 source_type = 19; //用户来源
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_name = 3; //用户名
+  string password = 4; //密码
+  string nickname = 5; //昵称
+  string phone = 6; //手机号码
+  int32 member_status = 7; //帐号启用状态:0->禁用；1->启用
+  string icon = 8; //头像
+  int32 gender = 9; //性别：0->未知；1->男；2->女
+  string birthday = 10; //生日
+  string city = 11; //所做城市
+  string job = 12; //职业
+  string personalized_signature = 13; //个性签名
+  int32 source_type = 14; //用户来源
+  int32 integration = 15; //积分
+  int32 growth = 16; //成长值
+  int32 lottery_count = 17; //剩余抽奖次数
+  int32 history_integration = 18; //历史积分数量
+  string create_time = 19; //创建时间
   string update_time = 20; //更新时间
 
 }
@@ -456,13 +440,15 @@ service MemberService {
   rpc UpdateMemberIntegration(UpdateMemberIntegrationReq) returns(UpdateMemberIntegrationResp);
 }
 
+
 // 添加会员关注品牌
 message AddMemberBrandAttentionReq {
-  string brand_city = 1; //品牌所在城市
-  int64 brand_id = 2; //品牌id
-  string brand_logo = 3; //品牌Logo
-  string brand_name = 4; //品牌名称
-  int64 member_id = 5; //会员id
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int64 brand_id = 5; //品牌id
+  string brand_name = 6; //品牌名称
+  string brand_logo = 7; //品牌Logo
+  string brand_city = 8; //品牌所在城市
 }
 
 message AddMemberBrandAttentionResp {
@@ -485,15 +471,15 @@ message QueryMemberBrandAttentionDetailReq {
 }
 
 message QueryMemberBrandAttentionDetailResp {
-  string brand_city = 1; //品牌所在城市
-  int64 brand_id = 2; //品牌id
-  string brand_logo = 3; //品牌Logo
-  string brand_name = 4; //品牌名称
-  string create_time = 5; //关注时间
-  int64 id = 6; //
-  string member_icon = 7; //会员头像
-  int64 member_id = 8; //会员id
-  string member_nick_name = 9; //会员姓名
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 brand_id = 5; //品牌id
+  string brand_name = 6; //品牌名称
+  string brand_logo = 7; //品牌Logo
+  string brand_city = 8; //品牌所在城市
+  string create_time = 9; //关注时间
 
 }
 
@@ -504,12 +490,15 @@ message QueryMemberBrandAttentionListReq {
 }
 
 message MemberBrandAttentionListData {
-  string brand_city = 1; //品牌所在城市
-  int64 brand_id = 2; //品牌id
-  string brand_logo = 3; //品牌Logo
-  string brand_name = 4; //品牌名称
-  string create_time = 5; //关注时间
-  int64 id = 6; //
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 brand_id = 5; //品牌id
+  string brand_name = 6; //品牌名称
+  string brand_logo = 7; //品牌Logo
+  string brand_city = 8; //品牌所在城市
+  string create_time = 9; //关注时间
 
 }
 
@@ -532,22 +521,22 @@ service MemberBrandAttentionService {
 
 }
 
+
 // 添加会员等级表
 message AddMemberLevelReq {
-  int32 comment_growth_point = 1; //每次评价获取的成长值
-  int32 default_status = 2; //是否为默认等级：0->不是；1->是
-  int64 free_freight_point = 3; //免运费标准
-  int32 growth_point = 4; //成长点
-  string remark = 5; //备注
-  int32 is_birthday = 6; //是否有生日特权
-  int32 is_comment = 7; //是否有评论获奖励特权
-  int32 is_free_freight = 8; //是否有免邮特权
-  int32 is_member_price = 9; //是否有会员价格特权
+  int64 id = 1; //
+  string level_name = 2; //等级名称
+  int32 growth_point = 3; //成长点
+  int32 default_status = 4; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 5; //免运费标准
+  int32 comment_growth_point = 6; //每次评价获取的成长值
+  int32 is_free_freight = 7; //是否有免邮特权
+  int32 is_sign_in = 8; //是否有签到特权
+  int32 is_comment = 9; //是否有评论获奖励特权
   int32 is_promotion = 10; //是否有专享活动特权
-  int32 is_sign_in = 11; //是否有签到特权
-  string level_name = 12; //等级名称
-
-
+  int32 is_member_price = 11; //是否有会员价格特权
+  int32 is_birthday = 12; //是否有生日特权
+  string remark = 13; //备注
 }
 
 message AddMemberLevelResp {
@@ -565,18 +554,18 @@ message DeleteMemberLevelResp {
 
 // 更新会员等级表
 message UpdateMemberLevelReq {
-  int32 comment_growth_point = 1; //每次评价获取的成长值
-  int32 default_status = 2; //是否为默认等级：0->不是；1->是
-  int64 free_freight_point = 3; //免运费标准
-  int32 growth_point = 4; //成长点
-  int64 id = 5; //
-  int32 is_birthday = 6; //是否有生日特权
-  int32 is_comment = 7; //是否有评论获奖励特权
-  int32 is_free_freight = 8; //是否有免邮特权
-  int32 is_member_price = 9; //是否有会员价格特权
+  int64 id = 1; //
+  string level_name = 2; //等级名称
+  int32 growth_point = 3; //成长点
+  int32 default_status = 4; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 5; //免运费标准
+  int32 comment_growth_point = 6; //每次评价获取的成长值
+  int32 is_free_freight = 7; //是否有免邮特权
+  int32 is_sign_in = 8; //是否有签到特权
+  int32 is_comment = 9; //是否有评论获奖励特权
   int32 is_promotion = 10; //是否有专享活动特权
-  int32 is_sign_in = 11; //是否有签到特权
-  string level_name = 12; //等级名称
+  int32 is_member_price = 11; //是否有会员价格特权
+  int32 is_birthday = 12; //是否有生日特权
   string remark = 13; //备注
 
 }
@@ -602,18 +591,18 @@ message QueryMemberLevelDetailReq {
 }
 
 message QueryMemberLevelDetailResp {
-  int32 comment_growth_point = 1; //每次评价获取的成长值
-  int32 default_status = 2; //是否为默认等级：0->不是；1->是
-  int64 free_freight_point = 3; //免运费标准
-  int32 growth_point = 4; //成长点
-  int64 id = 5; //
-  int32 is_birthday = 6; //是否有生日特权
-  int32 is_comment = 7; //是否有评论获奖励特权
-  int32 is_free_freight = 8; //是否有免邮特权
-  int32 is_member_price = 9; //是否有会员价格特权
+  int64 id = 1; //
+  string level_name = 2; //等级名称
+  int32 growth_point = 3; //成长点
+  int32 default_status = 4; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 5; //免运费标准
+  int32 comment_growth_point = 6; //每次评价获取的成长值
+  int32 is_free_freight = 7; //是否有免邮特权
+  int32 is_sign_in = 8; //是否有签到特权
+  int32 is_comment = 9; //是否有评论获奖励特权
   int32 is_promotion = 10; //是否有专享活动特权
-  int32 is_sign_in = 11; //是否有签到特权
-  string level_name = 12; //等级名称
+  int32 is_member_price = 11; //是否有会员价格特权
+  int32 is_birthday = 12; //是否有生日特权
   string remark = 13; //备注
 
 }
@@ -626,18 +615,18 @@ message QueryMemberLevelListReq {
 }
 
 message MemberLevelListData {
-  int32 comment_growth_point = 1; //每次评价获取的成长值
-  int32 default_status = 2; //是否为默认等级：0->不是；1->是
-  int64 free_freight_point = 3; //免运费标准
-  int32 growth_point = 4; //成长点
-  int64 id = 5; //
-  int32 is_birthday = 6; //是否有生日特权
-  int32 is_comment = 7; //是否有评论获奖励特权
-  int32 is_free_freight = 8; //是否有免邮特权
-  int32 is_member_price = 9; //是否有会员价格特权
+  int64 id = 1; //
+  string level_name = 2; //等级名称
+  int32 growth_point = 3; //成长点
+  int32 default_status = 4; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 5; //免运费标准
+  int32 comment_growth_point = 6; //每次评价获取的成长值
+  int32 is_free_freight = 7; //是否有免邮特权
+  int32 is_sign_in = 8; //是否有签到特权
+  int32 is_comment = 9; //是否有评论获奖励特权
   int32 is_promotion = 10; //是否有专享活动特权
-  int32 is_sign_in = 11; //是否有签到特权
-  string level_name = 12; //等级名称
+  int32 is_member_price = 11; //是否有会员价格特权
+  int32 is_birthday = 12; //是否有生日特权
   string remark = 13; //备注
 
 }
@@ -666,6 +655,7 @@ service MemberLevelService {
 }
 
 
+
 // 删除会员登录记录
 message DeleteMemberLoginLogReq {
   repeated int64 ids = 1;
@@ -688,13 +678,13 @@ message QueryMemberLoginLogListReq {
 }
 
 message MemberLoginLogListData {
-  string city = 1; //登录城市
-  string create_time = 2; //登录时间
-  int64 id = 3; //
-  int32 login_type = 4; //登录类型：0->PC；1->android;2->ios;3->小程序
-  int64 member_id = 5; //会员id
-  string member_ip = 6; //登录ip
-  string province = 7; //登录省份
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_ip = 3; //登录ip
+  string city = 4; //登录城市
+  int32 login_type = 5; //登录类型：0->PC；1->android;2->ios;3->小程序
+  string province = 6; //登录省份
+  string create_time = 7; //登录时间
 
 }
 
@@ -713,10 +703,12 @@ service MemberLoginLogService {
 
 }
 
+
 // 添加用户和标签关系表
 message AddMemberMemberTagRelationReq {
-  int64 member_id = 1; //会员id
-  int64 tag_id = 2; //标签id
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int64 tag_id = 3; //标签id
 
 }
 
@@ -763,10 +755,12 @@ service MemberMemberTagRelationService {
 
 }
 
+
 // 添加会员与产品分类关系表（用户喜欢的分类）
 message AddMemberProductCategoryRelationReq {
-  int64 member_id = 1; //会员id
-  int64 product_category_id = 2; //商品分类id
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  int64 product_category_id = 3; //商品分类id
 
 }
 
@@ -801,18 +795,18 @@ service MemberProductCategoryRelationService {
 
 }
 
+
 // 添加用户收藏的商品
 message AddMemberProductCollectionReq {
-  int64 product_price = 1; //商品价格
-  string product_sub_title = 2; //商品标题
-  string member_icon = 3; //会员头像
-  int64 member_id = 4; //会员id
-  string member_nick_name = 5; //会员姓名
-  int64 product_id = 6; //商品id
-  string product_name = 7; //商品名称
-  string product_pic = 8; //商品图片
-
-
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 product_id = 5; //商品id
+  string product_name = 6; //商品名称
+  string product_pic = 7; //商品图片
+  string product_sub_title = 8; //商品标题
+  int64 product_price = 9; //商品价格
 }
 
 message AddMemberProductCollectionResp {
@@ -835,16 +829,16 @@ message QueryMemberProductCollectionDetailReq {
 }
 
 message QueryMemberProductCollectionDetailResp {
-  string create_time = 1; //收藏时间
-  int64 id = 2; //
-  string member_icon = 3; //会员头像
-  int64 member_id = 4; //会员id
-  string member_nick_name = 5; //会员姓名
-  int64 product_id = 6; //商品id
-  string product_name = 7; //商品名称
-  string product_pic = 8; //商品图片
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 product_id = 5; //商品id
+  string product_name = 6; //商品名称
+  string product_pic = 7; //商品图片
+  string product_sub_title = 8; //商品标题
   int64 product_price = 9; //商品价格
-  string product_sub_title = 10; //商品标题
+  string create_time = 10; //收藏时间
 
 }
 
@@ -858,16 +852,16 @@ message QueryMemberProductCollectionListReq {
 }
 
 message MemberProductCollectionListData {
-  string create_time = 1; //收藏时间
-  int64 id = 2; //
-  string member_icon = 3; //会员头像
-  int64 member_id = 4; //会员id
-  string member_nick_name = 5; //会员姓名
-  int64 product_id = 6; //商品id
-  string product_name = 7; //商品名称
-  string product_pic = 8; //商品图片
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 product_id = 5; //商品id
+  string product_name = 6; //商品名称
+  string product_pic = 7; //商品图片
+  string product_sub_title = 8; //商品标题
   int64 product_price = 9; //商品价格
-  string product_sub_title = 10; //商品标题
+  string create_time = 10; //收藏时间
 
 }
 
@@ -890,17 +884,18 @@ service MemberProductCollectionService {
 
 }
 
+
 // 添加用户商品浏览历史记录
 message AddMemberReadHistoryReq {
-  int64 product_price = 1; //商品价格
-  string product_sub_title = 2; //商品标题
-  string member_icon = 3; //会员头像
-  int64 member_id = 4; //会员id
-  string member_nick_name = 5; //会员姓名
-  int64 product_id = 6; //商品id
-  string product_name = 7; //商品名称
-  string product_pic = 8; //商品图片
-
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 product_id = 5; //商品id
+  string product_name = 6; //商品名称
+  string product_pic = 7; //商品图片
+  string product_sub_title = 8; //商品标题
+  int64 product_price = 9; //商品价格
 
 }
 
@@ -924,16 +919,16 @@ message QueryMemberReadHistoryDetailReq {
 }
 
 message QueryMemberReadHistoryDetailResp {
-  string create_time = 1; //浏览时间
-  int64 id = 2; //
-  string member_icon = 3; //会员头像
-  int64 member_id = 4; //会员id
-  string member_nick_name = 5; //会员姓名
-  int64 product_id = 6; //商品id
-  string product_name = 7; //商品名称
-  string product_pic = 8; //商品图片
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 product_id = 5; //商品id
+  string product_name = 6; //商品名称
+  string product_pic = 7; //商品图片
+  string product_sub_title = 8; //商品标题
   int64 product_price = 9; //商品价格
-  string product_sub_title = 10; //商品标题
+  string create_time = 10; //浏览时间
 
 }
 
@@ -946,16 +941,16 @@ message QueryMemberReadHistoryListReq {
 }
 
 message MemberReadHistoryListData {
-  string create_time = 1; //浏览时间
-  int64 id = 2; //
-  string member_icon = 3; //会员头像
-  int64 member_id = 4; //会员id
-  string member_nick_name = 5; //会员姓名
-  int64 product_id = 6; //商品id
-  string product_name = 7; //商品名称
-  string product_pic = 8; //商品图片
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_nick_name = 3; //会员姓名
+  string member_icon = 4; //会员头像
+  int64 product_id = 5; //商品id
+  string product_name = 6; //商品名称
+  string product_pic = 7; //商品图片
+  string product_sub_title = 8; //商品标题
   int64 product_price = 9; //商品价格
-  string product_sub_title = 10; //商品标题
+  string create_time = 10; //浏览时间
 
 }
 
@@ -978,18 +973,19 @@ service MemberReadHistoryService {
 
 }
 
+
 // 添加会员收货地址表
 message AddMemberReceiveAddressReq {
-  string city = 1; //城市
-  string province = 2; //省份/直辖市
-  int32 default_status = 3; //是否为默认
-  string detail_address = 4; //详细地址(街道)
-  string region = 5; //区
-  int64 member_id = 6; //会员id
-  string member_name = 7; //收货人名称
-  string phone_number = 8; //收货人电话
-  string post_code = 9; //邮政编码
-
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_name = 3; //收货人名称
+  string phone_number = 4; //收货人电话
+  int32 default_status = 5; //是否为默认
+  string post_code = 6; //邮政编码
+  string province = 7; //省份/直辖市
+  string city = 8; //城市
+  string region = 9; //区
+  string detail_address = 10; //详细地址(街道)
 
 }
 
@@ -1009,16 +1005,16 @@ message DeleteMemberReceiveAddressResp {
 
 // 更新会员收货地址表
 message UpdateMemberReceiveAddressReq {
-  string city = 1; //城市
-  string region = 2; //区
-  int32 default_status = 3; //是否为默认
-  string detail_address = 4; //详细地址(街道)
-  int64 id = 5; //
-  int64 member_id = 6; //会员id
-  string member_name = 7; //收货人名称
-  string phone_number = 8; //收货人电话
-  string post_code = 9; //邮政编码
-  string province = 10; //省份/直辖市
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_name = 3; //收货人名称
+  string phone_number = 4; //收货人电话
+  int32 default_status = 5; //是否为默认
+  string post_code = 6; //邮政编码
+  string province = 7; //省份/直辖市
+  string city = 8; //城市
+  string region = 9; //区
+  string detail_address = 10; //详细地址(街道)
 
 
 }
@@ -1046,17 +1042,17 @@ message QueryMemberReceiveAddressDetailReq {
 }
 
 message QueryMemberReceiveAddressDetailResp {
-  string city = 1; //城市
-  string create_time = 2; //创建时间
-  int32 default_status = 3; //是否为默认
-  string detail_address = 4; //详细地址(街道)
-  int64 id = 5; //
-  int64 member_id = 6; //会员id
-  string member_name = 7; //收货人名称
-  string phone_number = 8; //收货人电话
-  string post_code = 9; //邮政编码
-  string province = 10; //省份/直辖市
-  string region = 11; //区
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_name = 3; //收货人名称
+  string phone_number = 4; //收货人电话
+  int32 default_status = 5; //是否为默认
+  string post_code = 6; //邮政编码
+  string province = 7; //省份/直辖市
+  string city = 8; //城市
+  string region = 9; //区
+  string detail_address = 10; //详细地址(街道)
+  string create_time = 11; //创建时间
   string update_time = 12; //更新时间
 
 }
@@ -1069,17 +1065,17 @@ message QueryMemberReceiveAddressListReq {
 }
 
 message MemberReceiveAddressListData {
-  string city = 1; //城市
-  string create_time = 2; //创建时间
-  int32 default_status = 3; //是否为默认
-  string detail_address = 4; //详细地址(街道)
-  int64 id = 5; //
-  int64 member_id = 6; //会员id
-  string member_name = 7; //收货人名称
-  string phone_number = 8; //收货人电话
-  string post_code = 9; //邮政编码
-  string province = 10; //省份/直辖市
-  string region = 11; //区
+  int64 id = 1; //
+  int64 member_id = 2; //会员id
+  string member_name = 3; //收货人名称
+  string phone_number = 4; //收货人电话
+  int32 default_status = 5; //是否为默认
+  string post_code = 6; //邮政编码
+  string province = 7; //省份/直辖市
+  string city = 8; //城市
+  string region = 9; //区
+  string detail_address = 10; //详细地址(街道)
+  string create_time = 11; //创建时间
   string update_time = 12; //更新时间
 
 }
@@ -1107,18 +1103,18 @@ service MemberReceiveAddressService {
 
 }
 
+
 // 添加会员积分成长规则表
 message AddMemberRuleSettingReq {
-  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int64 id = 1; //
   int32 continue_sign_day = 2; //连续签到天数
   int32 continue_sign_point = 3; //连续签到赠送数量
-  string create_by = 4; //创建者
-  int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
-  int32 status = 6; //状态：0->禁用；1->启用
-  int64 low_order_amount = 7; //最低获取点数的订单金额
-  int32 max_point_per_order = 8; //每笔订单最高获取点数
-
-
+  int64 consume_per_point = 4; //每消费多少元获取1个点
+  int64 low_order_amount = 5; //最低获取点数的订单金额
+  int32 max_point_per_order = 6; //每笔订单最高获取点数
+  int32 rule_type = 7; //类型：0->积分规则；1->成长值规则
+  int32 status = 8; //状态：0->禁用；1->启用
+  string create_by = 9; //创建者
 }
 
 message AddMemberRuleSettingResp {
@@ -1136,15 +1132,15 @@ message DeleteMemberRuleSettingResp {
 
 // 更新会员积分成长规则表
 message UpdateMemberRuleSettingReq {
-  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int64 id = 1; //
   int32 continue_sign_day = 2; //连续签到天数
   int32 continue_sign_point = 3; //连续签到赠送数量
-  int32 status = 4; //状态：0->禁用；1->启用
-  string update_by = 5; //更新者
-  int64 id = 6; //
-  int64 low_order_amount = 7; //最低获取点数的订单金额
-  int32 max_point_per_order = 8; //每笔订单最高获取点数
-  int32 rule_type = 9; //类型：0->积分规则；1->成长值规则
+  int64 consume_per_point = 4; //每消费多少元获取1个点
+  int64 low_order_amount = 5; //最低获取点数的订单金额
+  int32 max_point_per_order = 6; //每笔订单最高获取点数
+  int32 rule_type = 7; //类型：0->积分规则；1->成长值规则
+  int32 status = 8; //状态：0->禁用；1->启用
+  string update_by = 9; //更新者
 
 
 }
@@ -1171,16 +1167,16 @@ message QueryMemberRuleSettingDetailReq {
 }
 
 message QueryMemberRuleSettingDetailResp {
-  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int64 id = 1; //
   int32 continue_sign_day = 2; //连续签到天数
   int32 continue_sign_point = 3; //连续签到赠送数量
-  string create_by = 4; //创建者
-  string create_time = 5; //创建时间
-  int64 id = 6; //
-  int64 low_order_amount = 7; //最低获取点数的订单金额
-  int32 max_point_per_order = 8; //每笔订单最高获取点数
-  int32 rule_type = 9; //类型：0->积分规则；1->成长值规则
-  int32 status = 10; //状态：0->禁用；1->启用
+  int64 consume_per_point = 4; //每消费多少元获取1个点
+  int64 low_order_amount = 5; //最低获取点数的订单金额
+  int32 max_point_per_order = 6; //每笔订单最高获取点数
+  int32 rule_type = 7; //类型：0->积分规则；1->成长值规则
+  int32 status = 8; //状态：0->禁用；1->启用
+  string create_by = 9; //创建者
+  string create_time = 10; //创建时间
   string update_by = 11; //更新者
   string update_time = 12; //更新时间
 
@@ -1196,16 +1192,16 @@ message QueryMemberRuleSettingListReq {
 }
 
 message MemberRuleSettingListData {
-  int64 consume_per_point = 1; //每消费多少元获取1个点
+  int64 id = 1; //
   int32 continue_sign_day = 2; //连续签到天数
   int32 continue_sign_point = 3; //连续签到赠送数量
-  string create_by = 4; //创建者
-  string create_time = 5; //创建时间
-  int64 id = 6; //
-  int64 low_order_amount = 7; //最低获取点数的订单金额
-  int32 max_point_per_order = 8; //每笔订单最高获取点数
-  int32 rule_type = 9; //类型：0->积分规则；1->成长值规则
-  int32 status = 10; //状态：0->禁用；1->启用
+  int64 consume_per_point = 4; //每消费多少元获取1个点
+  int64 low_order_amount = 5; //最低获取点数的订单金额
+  int32 max_point_per_order = 6; //每笔订单最高获取点数
+  int32 rule_type = 7; //类型：0->积分规则；1->成长值规则
+  int32 status = 8; //状态：0->禁用；1->启用
+  string create_by = 9; //创建者
+  string create_time = 10; //创建时间
   string update_by = 11; //更新者
   string update_time = 12; //更新时间
 
@@ -1234,24 +1230,25 @@ service MemberRuleSettingService {
 
 }
 
+
 // 添加会员统计信息
 message AddMemberStatisticsInfoReq {
-  int32 attend_count = 1; //关注数量
-  int32 collect_comment_count = 2; //
-  int32 collect_product_count = 3; //
-  int32 collect_subject_count = 4; //
-  int32 collect_topic_count = 5; //
+  int64 id = 1; //
+  int64 member_id = 2; //
+  int64 consume_amount = 3; //累计消费金额
+  int32 order_count = 4; //订单数量
+  int32 coupon_count = 5; //优惠券数量
   int32 comment_count = 6; //评价数
-  int64 consume_amount = 7; //累计消费金额
-  int32 coupon_count = 8; //优惠券数量
-  int32 fans_count = 9; //粉丝数量
-  int64 id = 10; //
-  int32 invite_friend_count = 11; //
-  int32 login_count = 12; //登录次数
-  int64 member_id = 13; //
-  int32 order_count = 14; //订单数量
-  string recent_order_time = 15; //最后一次下订单时间
-  int32 return_order_count = 16; //退货数量
+  int32 return_order_count = 7; //退货数量
+  int32 login_count = 8; //登录次数
+  int32 attend_count = 9; //关注数量
+  int32 fans_count = 10; //粉丝数量
+  int32 collect_product_count = 11; //收藏的商品数量
+  int32 collect_subject_count = 12; //收藏的专题活动数量
+  int32 collect_topic_count = 13; //收藏的评论数量
+  int32 collect_comment_count = 14; //收藏的专题活动数量
+  int32 invite_friend_count = 15; //邀请好友数
+  string recent_order_time = 16; //最后一次下订单时间
 
 }
 
@@ -1266,22 +1263,22 @@ message QueryMemberStatisticsInfoDetailReq {
 }
 
 message QueryMemberStatisticsInfoDetailResp {
-  int32 attend_count = 1; //关注数量
-  int32 collect_comment_count = 2; //
-  int32 collect_product_count = 3; //
-  int32 collect_subject_count = 4; //
-  int32 collect_topic_count = 5; //
+  int64 id = 1; //
+  int64 member_id = 2; //
+  int64 consume_amount = 3; //累计消费金额
+  int32 order_count = 4; //订单数量
+  int32 coupon_count = 5; //优惠券数量
   int32 comment_count = 6; //评价数
-  int64 consume_amount = 7; //累计消费金额
-  int32 coupon_count = 8; //优惠券数量
-  int32 fans_count = 9; //粉丝数量
-  int64 id = 10; //
-  int32 invite_friend_count = 11; //
-  int32 login_count = 12; //登录次数
-  int64 member_id = 13; //
-  int32 order_count = 14; //订单数量
-  string recent_order_time = 15; //最后一次下订单时间
-  int32 return_order_count = 16; //退货数量
+  int32 return_order_count = 7; //退货数量
+  int32 login_count = 8; //登录次数
+  int32 attend_count = 9; //关注数量
+  int32 fans_count = 10; //粉丝数量
+  int32 collect_product_count = 11; //收藏的商品数量
+  int32 collect_subject_count = 12; //收藏的专题活动数量
+  int32 collect_topic_count = 13; //收藏的评论数量
+  int32 collect_comment_count = 14; //收藏的专题活动数量
+  int32 invite_friend_count = 15; //邀请好友数
+  string recent_order_time = 16; //最后一次下订单时间
 
 }
 
@@ -1293,22 +1290,22 @@ message QueryMemberStatisticsInfoListReq {
 }
 
 message QueryMemberStatisticsInfoListData {
-  int32 attend_count = 1; //关注数量
-  int32 collect_comment_count = 2; //
-  int32 collect_product_count = 3; //
-  int32 collect_subject_count = 4; //
-  int32 collect_topic_count = 5; //
+  int64 id = 1; //
+  int64 member_id = 2; //
+  int64 consume_amount = 3; //累计消费金额
+  int32 order_count = 4; //订单数量
+  int32 coupon_count = 5; //优惠券数量
   int32 comment_count = 6; //评价数
-  int64 consume_amount = 7; //累计消费金额
-  int32 coupon_count = 8; //优惠券数量
-  int32 fans_count = 9; //粉丝数量
-  int64 id = 10; //
-  int32 invite_friend_count = 11; //
-  int32 login_count = 12; //登录次数
-  int64 member_id = 13; //
-  int32 order_count = 14; //订单数量
-  string recent_order_time = 15; //最后一次下订单时间
-  int32 return_order_count = 16; //退货数量
+  int32 return_order_count = 7; //退货数量
+  int32 login_count = 8; //登录次数
+  int32 attend_count = 9; //关注数量
+  int32 fans_count = 10; //粉丝数量
+  int32 collect_product_count = 11; //收藏的商品数量
+  int32 collect_subject_count = 12; //收藏的专题活动数量
+  int32 collect_topic_count = 13; //收藏的评论数量
+  int32 collect_comment_count = 14; //收藏的专题活动数量
+  int32 invite_friend_count = 15; //邀请好友数
+  string recent_order_time = 16; //最后一次下订单时间
 
 }
 
@@ -1327,12 +1324,14 @@ service MemberStatisticsInfoService {
 
 }
 
+
 // 添加用户标签表
 message AddMemberTagReq {
-  int64 finish_order_amount = 1; //自动打标签完成订单金额
-  int32 finish_order_count = 2; //自动打标签完成订单数量
-  int32 status = 3; //状态：0->禁用；1->启用
-  string tag_name = 4; //标签名称
+  int64 id = 1; //
+  string tag_name = 2; //标签名称
+  int32 finish_order_count = 3; //自动打标签完成订单数量
+  int32 status = 4; //状态：0->禁用；1->启用
+  int64 finish_order_amount = 5; //自动打标签完成订单金额
 
 }
 
@@ -1351,12 +1350,11 @@ message DeleteMemberTagResp {
 
 // 更新用户标签表
 message UpdateMemberTagReq {
-  int64 finish_order_amount = 1; //自动打标签完成订单金额
-  int32 finish_order_count = 2; //自动打标签完成订单数量
-  int64 id = 3; //
+  int64 id = 1; //
+  string tag_name = 2; //标签名称
+  int32 finish_order_count = 3; //自动打标签完成订单数量
   int32 status = 4; //状态：0->禁用；1->启用
-  string tag_name = 5; //标签名称
-
+  int64 finish_order_amount = 5; //自动打标签完成订单金额
 }
 
 message UpdateMemberTagResp {
@@ -1380,11 +1378,11 @@ message QueryMemberTagDetailReq {
 }
 
 message QueryMemberTagDetailResp {
-  int64 finish_order_amount = 1; //自动打标签完成订单金额
-  int32 finish_order_count = 2; //自动打标签完成订单数量
-  int64 id = 3; //
+  int64 id = 1; //
+  string tag_name = 2; //标签名称
+  int32 finish_order_count = 3; //自动打标签完成订单数量
   int32 status = 4; //状态：0->禁用；1->启用
-  string tag_name = 5; //标签名称
+  int64 finish_order_amount = 5; //自动打标签完成订单金额
 
 }
 
@@ -1398,11 +1396,11 @@ message QueryMemberTagListReq {
 }
 
 message MemberTagListData {
-  int64 finish_order_amount = 1; //自动打标签完成订单金额
-  int32 finish_order_count = 2; //自动打标签完成订单数量
-  int64 id = 3; //
+  int64 id = 1; //
+  string tag_name = 2; //标签名称
+  int32 finish_order_count = 3; //自动打标签完成订单数量
   int32 status = 4; //状态：0->禁用；1->启用
-  string tag_name = 5; //标签名称
+  int64 finish_order_amount = 5; //自动打标签完成订单金额
 
 }
 
@@ -1429,15 +1427,16 @@ service MemberTagService {
 
 }
 
+
 // 添加会员任务表
 message AddMemberTaskReq {
-  string create_by = 1; //创建者
+  int64 id = 1; //
   string task_name = 2; //任务名称
-  int32 task_type = 3; //任务类型：0->新手任务；1->日常任务
-  int32 status = 4; //状态：0->禁用；1->启用
-  int32 task_growth = 5; //赠送成长值
-  int32 task_integral = 6; //赠送积分
-
+  int32 task_growth = 3; //赠送成长值
+  int32 task_integral = 4; //赠送积分
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+  int32 status = 6; //状态：0->禁用；1->启用
+  string create_by = 7; //创建者
 }
 
 message AddMemberTaskResp {
@@ -1455,14 +1454,13 @@ message DeleteMemberTaskResp {
 
 // 更新会员任务表
 message UpdateMemberTaskReq {
-  int32 task_type = 1; //任务类型：0->新手任务；1->日常任务
-  string update_by = 2; //更新者
-  int64 id = 3; //
-  int32 status = 4; //状态：0->禁用；1->启用
-  int32 task_growth = 5; //赠送成长值
-  int32 task_integral = 6; //赠送积分
-  string task_name = 7; //任务名称
-
+  int64 id = 1; //
+  string task_name = 2; //任务名称
+  int32 task_growth = 3; //赠送成长值
+  int32 task_integral = 4; //赠送积分
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+  int32 status = 6; //状态：0->禁用；1->启用
+  string update_by = 9; //更新者
 
 }
 
@@ -1487,14 +1485,14 @@ message QueryMemberTaskDetailReq {
 }
 
 message QueryMemberTaskDetailResp {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int64 id = 3; //
-  int32 status = 4; //状态：0->禁用；1->启用
-  int32 task_growth = 5; //赠送成长值
-  int32 task_integral = 6; //赠送积分
-  string task_name = 7; //任务名称
-  int32 task_type = 8; //任务类型：0->新手任务；1->日常任务
+  int64 id = 1; //
+  string task_name = 2; //任务名称
+  int32 task_growth = 3; //赠送成长值
+  int32 task_integral = 4; //赠送积分
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+  int32 status = 6; //状态：0->禁用；1->启用
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
   string update_by = 9; //更新者
   string update_time = 10; //更新时间
 
@@ -1511,14 +1509,14 @@ message QueryMemberTaskListReq {
 }
 
 message MemberTaskListData {
-  string create_by = 1; //创建者
-  string create_time = 2; //创建时间
-  int64 id = 3; //
-  int32 status = 4; //状态：0->禁用；1->启用
-  int32 task_growth = 5; //赠送成长值
-  int32 task_integral = 6; //赠送积分
-  string task_name = 7; //任务名称
-  int32 task_type = 8; //任务类型：0->新手任务；1->日常任务
+  int64 id = 1; //
+  string task_name = 2; //任务名称
+  int32 task_growth = 3; //赠送成长值
+  int32 task_integral = 4; //赠送积分
+  int32 task_type = 5; //任务类型：0->新手任务；1->日常任务
+  int32 status = 6; //状态：0->禁用；1->启用
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
   string update_by = 9; //更新者
   string update_time = 10; //更新时间
 

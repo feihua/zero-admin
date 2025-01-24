@@ -36,7 +36,7 @@ func (l *AddMemberReceiveAddressLogic) AddMemberReceiveAddress(in *umsclient.Add
 
 		q := tx.UmsMemberReceiveAddress
 
-		//如果新增的地址为默认地址,则需要把之前的默认地址去除默认标识
+		// 如果新增的地址为默认地址,则需要把之前的默认地址去除默认标识
 		addressDo := q.WithContext(l.ctx)
 		if in.DefaultStatus == 1 {
 			if _, err := addressDo.Where(q.MemberID.Eq(in.MemberId), q.DefaultStatus.Eq(1)).Update(q.DefaultStatus, 0); err != nil {
@@ -45,15 +45,15 @@ func (l *AddMemberReceiveAddressLogic) AddMemberReceiveAddress(in *umsclient.Add
 		}
 
 		if err := addressDo.Create(&model.UmsMemberReceiveAddress{
-			MemberID:      in.MemberId,
-			MemberName:    in.MemberName,
-			PhoneNumber:   in.PhoneNumber,
-			DefaultStatus: in.DefaultStatus,
-			PostCode:      in.PostCode,
-			Province:      in.Province,
-			City:          in.City,
-			Region:        in.Region,
-			DetailAddress: in.DetailAddress,
+			MemberID:      in.MemberId,      // 会员id
+			MemberName:    in.MemberName,    // 收货人名称
+			PhoneNumber:   in.PhoneNumber,   // 收货人电话
+			DefaultStatus: in.DefaultStatus, // 是否为默认
+			PostCode:      in.PostCode,      // 邮政编码
+			Province:      in.Province,      // 省份/直辖市
+			City:          in.City,          // 城市
+			Region:        in.Region,        // 区
+			DetailAddress: in.DetailAddress, // 详细地址(街道)
 		}); err != nil {
 			return err
 		}

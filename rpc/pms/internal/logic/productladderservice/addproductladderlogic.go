@@ -33,10 +33,10 @@ func NewAddProductLadderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // AddProductLadder 添加产品阶梯价格表(只针对同商品)
 func (l *AddProductLadderLogic) AddProductLadder(in *pmsclient.AddProductLadderReq) (*pmsclient.AddProductLadderResp, error) {
 	err := query.PmsProductLadder.WithContext(l.ctx).Create(&model.PmsProductLadder{
-		ProductID: in.ProductId,
-		Count:     in.Count,
-		Discount:  in.Discount,
-		Price:     in.Price,
+		ProductID: in.ProductId, // 商品id
+		Count:     in.Count,     // 满足的商品数量
+		Discount:  in.Discount,  // 折扣
+		Price:     in.Price,     // 折后价格
 	})
 
 	if err != nil {

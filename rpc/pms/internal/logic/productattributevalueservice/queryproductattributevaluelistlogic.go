@@ -44,10 +44,10 @@ func (l *QueryProductAttributeValueListLogic) QueryProductAttributeValueList(in 
 	for _, item := range result {
 
 		list = append(list, &pmsclient.ProductAttributeValueListData{
-			Id:                 item.ID,
-			ProductId:          item.ProductID,
-			ProductAttributeId: item.ProductAttributeID,
-			Value:              item.Value,
+			Id:                 item.ID,                 //
+			ProductId:          item.ProductID,          // 商品id
+			ProductAttributeId: item.ProductAttributeID, // 商品属性id
+			Value:              item.Value,              // 手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
 		})
 	}
 

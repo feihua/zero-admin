@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-//创建token
+// 创建token
 func createJwtToken(secretKey, name, mobile string, seconds, memberId int64) (string, error) {
 	iat := time.Now().Unix()
 	claims := make(jwt.MapClaims)

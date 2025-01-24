@@ -36,9 +36,9 @@ func (l *DeleteProductAttributeLogic) DeleteProductAttribute(in *pmsclient.Delet
 	q := query.PmsProductAttribute
 	category := query.PmsProductAttributeCategory
 	for _, id := range in.Ids {
-		//1.根据属性id查询属性信息
+		// 1.根据属性id查询属性信息
 		attribute, _ := q.WithContext(l.ctx).Where(q.ID.Eq(id)).First()
-		//2.根据属性分类id查询分类信息
+		// 2.根据属性分类id查询分类信息
 		categoryDo := category.WithContext(l.ctx).Where(category.ID.Eq(attribute.ProductAttributeCategoryID))
 		first, _ := categoryDo.First()
 

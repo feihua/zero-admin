@@ -33,16 +33,16 @@ func NewAddSkuStockLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddSk
 // AddSkuStock 添加sku的库存
 func (l *AddSkuStockLogic) AddSkuStock(in *pmsclient.AddSkuStockReq) (*pmsclient.AddSkuStockResp, error) {
 	err := query.PmsSkuStock.WithContext(l.ctx).Create(&model.PmsSkuStock{
-		ProductID:      in.ProductId,
-		SkuCode:        in.SkuCode,
-		Price:          in.Price,
-		Stock:          in.Stock,
-		LowStock:       in.LowStock,
-		Pic:            in.Pic,
-		Sale:           in.Sale,
-		PromotionPrice: in.PromotionPrice,
-		LockStock:      in.LockStock,
-		SpData:         in.SpData,
+		ProductID:      in.ProductId,      // 商品id
+		SkuCode:        in.SkuCode,        // sku编码
+		Price:          in.Price,          // 价格
+		Stock:          in.Stock,          // 库存
+		LowStock:       in.LowStock,       // 预警库存
+		Pic:            in.Pic,            // 展示图片
+		Sale:           in.Sale,           // 销量
+		PromotionPrice: in.PromotionPrice, // 单品促销价格
+		LockStock:      in.LockStock,      // 锁定库存
+		SpData:         in.SpData,         // 商品销售属性，json格式
 	})
 
 	if err != nil {

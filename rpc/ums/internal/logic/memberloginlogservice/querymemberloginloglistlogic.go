@@ -2,6 +2,7 @@ package memberloginlogservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -45,13 +46,13 @@ func (l *QueryMemberLoginLogListLogic) QueryMemberLoginLogList(in *umsclient.Que
 	var list []*umsclient.MemberLoginLogListData
 	for _, item := range result {
 		list = append(list, &umsclient.MemberLoginLogListData{
-			Id:         item.ID,
-			MemberId:   item.MemberID,
-			CreateTime: item.CreateTime.Format("2006-01-02 15:04:05"),
-			MemberIp:   item.MemberIP,
-			City:       item.City,
-			LoginType:  item.LoginType,
-			Province:   item.Province,
+			Id:         item.ID,                              //
+			MemberId:   item.MemberID,                        // 会员id
+			MemberIp:   item.MemberIP,                        // 登录ip
+			City:       item.City,                            // 登录城市
+			LoginType:  item.LoginType,                       // 登录类型：0->PC；1->android;2->ios;3->小程序
+			Province:   item.Province,                        // 登录省份
+			CreateTime: time_util.TimeToStr(item.CreateTime), // 登录时间
 		})
 	}
 

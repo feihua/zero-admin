@@ -6,17 +6,17 @@ option go_package = "./proto";
 
 // 添加商品属性参数表
 message AddProductAttributeReq {
-  int32 filter_type = 1; //分类筛选样式：1->普通；1->颜色
-  int32 hand_add_status = 2; //是否支持手动新增；0->不支持；1->支持
-  int64 id = 3; //
-  string input_list = 4; //可选值列表，以逗号隔开
+  int64 id = 1; //
+  int64 product_attribute_category_id = 2; //商品属性分类id
+  string name = 3; //商品属性分类id
+  int32 select_type = 4; //属性选择类型：0->唯一；1->单选；2->多选
   int32 input_type = 5; //属性录入方式：0->手工录入；1->从列表中选取
-  string name = 6; //
-  int64 product_attribute_category_id = 7; //
-  int32 related_status = 8; //相同属性产品是否关联；0->不关联；1->关联
+  string input_list = 6; //可选值列表，以逗号隔开
+  int32 sort = 7; //排序字段：最高的可以单独上传图片
+  int32 filter_type = 8; //分类筛选样式：1->普通；1->颜色
   int32 search_type = 9; //检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-  int32 select_type = 10; //属性选择类型：0->唯一；1->单选；2->多选
-  int32 sort = 11; //排序字段：最高的可以单独上传图片
+  int32 related_status = 10; //相同属性产品是否关联；0->不关联；1->关联
+  int32 hand_add_status = 11; //是否支持手动新增；0->不支持；1->支持
   int32 type = 12; //属性的类型；0->规格；1->参数
 
 }
@@ -47,17 +47,17 @@ message QueryProductAttributeListReq {
 }
 
 message ProductAttributeListData {
-  int32 filter_type = 1; //分类筛选样式：1->普通；1->颜色
-  int32 hand_add_status = 2; //是否支持手动新增；0->不支持；1->支持
-  int64 id = 3; //
-  string input_list = 4; //可选值列表，以逗号隔开
+  int64 id = 1; //
+  int64 product_attribute_category_id = 2; //商品属性分类id
+  string name = 3; //商品属性分类id
+  int32 select_type = 4; //属性选择类型：0->唯一；1->单选；2->多选
   int32 input_type = 5; //属性录入方式：0->手工录入；1->从列表中选取
-  string name = 6; //
-  int64 product_attribute_category_id = 7; //
-  int32 related_status = 8; //相同属性产品是否关联；0->不关联；1->关联
+  string input_list = 6; //可选值列表，以逗号隔开
+  int32 sort = 7; //排序字段：最高的可以单独上传图片
+  int32 filter_type = 8; //分类筛选样式：1->普通；1->颜色
   int32 search_type = 9; //检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-  int32 select_type = 10; //属性选择类型：0->唯一；1->单选；2->多选
-  int32 sort = 11; //排序字段：最高的可以单独上传图片
+  int32 related_status = 10; //相同属性产品是否关联；0->不关联；1->关联
+  int32 hand_add_status = 11; //是否支持手动新增；0->不支持；1->支持
   int32 type = 12; //属性的类型；0->规格；1->参数
 
 }

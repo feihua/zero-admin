@@ -6,20 +6,20 @@ option go_package = "./proto";
 
 // 添加商品评价表
 message AddCommentReq {
-  int32 collect_count = 1; //
-  string content = 2; //
-  int32 star = 3; //评价星数：0->5
-  int32 show_status = 4; //
-  string member_icon = 5; //评论用户头像
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string member_nick_name = 3; //评价者昵称
+  string product_name = 4; //商品名称
+  int32 star = 5; //评价星数：0->5
   string member_ip = 6; //评价的ip
-  string member_nick_name = 7; //
-  string pics = 8; //上传图片地址，以逗号隔开
+  int32 show_status = 8; //是否显示，0-不显示，1-显示
   string product_attribute = 9; //购买时的商品属性
-  int64 product_id = 10; //
-  string product_name = 11; //
-  int32 read_count = 12; //
-  int32 replay_count = 13; //
-
+  int32 collect_count = 10; //点赞数
+  int32 read_count = 11; //阅读数
+  string content = 12; //内容
+  string pics = 13; //上传图片地址，以逗号隔开
+  string member_icon = 14; //评论用户头像
+  int32 replay_count = 15; //回复数量
 
 }
 
@@ -38,20 +38,20 @@ message DeleteCommentResp {
 
 // 更新商品评价表
 message UpdateCommentReq {
-  int32 collect_count = 1; //
-  string content = 2; //
-  int32 star = 3; //评价星数：0->5
-  int64 id = 4; //
-  string member_icon = 5; //评论用户头像
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string member_nick_name = 3; //评价者昵称
+  string product_name = 4; //商品名称
+  int32 star = 5; //评价星数：0->5
   string member_ip = 6; //评价的ip
-  string member_nick_name = 7; //
-  string pics = 8; //上传图片地址，以逗号隔开
+  int32 show_status = 8; //是否显示，0-不显示，1-显示
   string product_attribute = 9; //购买时的商品属性
-  int64 product_id = 10; //
-  string product_name = 11; //
-  int32 read_count = 12; //
-  int32 replay_count = 13; //
-  int32 show_status = 14; //
+  int32 collect_count = 10; //点赞数
+  int32 read_count = 11; //阅读数
+  string content = 12; //内容
+  string pics = 13; //上传图片地址，以逗号隔开
+  string member_icon = 14; //评论用户头像
+  int32 replay_count = 15; //回复数量
 
 
 }
@@ -67,21 +67,21 @@ message QueryCommentDetailReq {
 }
 
 message QueryCommentDetailResp {
-  int32 collect_count = 1; //
-  string content = 2; //
-  string create_time = 3; //
-  int64 id = 4; //
-  string member_icon = 5; //评论用户头像
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string member_nick_name = 3; //评价者昵称
+  string product_name = 4; //商品名称
+  int32 star = 5; //评价星数：0->5
   string member_ip = 6; //评价的ip
-  string member_nick_name = 7; //
-  string pics = 8; //上传图片地址，以逗号隔开
+  string create_time = 7; //评价时间
+  int32 show_status = 8; //是否显示，0-不显示，1-显示
   string product_attribute = 9; //购买时的商品属性
-  int64 product_id = 10; //
-  string product_name = 11; //
-  int32 read_count = 12; //
-  int32 replay_count = 13; //
-  int32 show_status = 14; //
-  int32 star = 15; //评价星数：0->5
+  int32 collect_count = 10; //点赞数
+  int32 read_count = 11; //阅读数
+  string content = 12; //内容
+  string pics = 13; //上传图片地址，以逗号隔开
+  string member_icon = 14; //评论用户头像
+  int32 replay_count = 15; //回复数量
 
 }
 
@@ -95,21 +95,21 @@ message QueryCommentListReq {
 }
 
 message CommentListData {
-  int32 collect_count = 1; //
-  string content = 2; //
-  string create_time = 3; //
-  int64 id = 4; //
-  string member_icon = 5; //评论用户头像
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  string member_nick_name = 3; //评价者昵称
+  string product_name = 4; //商品名称
+  int32 star = 5; //评价星数：0->5
   string member_ip = 6; //评价的ip
-  string member_nick_name = 7; //
-  string pics = 8; //上传图片地址，以逗号隔开
+  string create_time = 7; //评价时间
+  int32 show_status = 8; //是否显示，0-不显示，1-显示
   string product_attribute = 9; //购买时的商品属性
-  int64 product_id = 10; //
-  string product_name = 11; //
-  int32 read_count = 12; //
-  int32 replay_count = 13; //
-  int32 show_status = 14; //
-  int32 star = 15; //评价星数：0->5
+  int32 collect_count = 10; //点赞数
+  int32 read_count = 11; //阅读数
+  string content = 12; //内容
+  string pics = 13; //上传图片地址，以逗号隔开
+  string member_icon = 14; //评论用户头像
+  int32 replay_count = 15; //回复数量
 
 }
 

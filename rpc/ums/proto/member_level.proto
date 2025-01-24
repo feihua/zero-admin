@@ -6,20 +6,19 @@ option go_package = "./proto";
 
 // 添加会员等级表
 message AddMemberLevelReq {
-  int32 comment_growth_point = 1; //每次评价获取的成长值
-  int32 default_status = 2; //是否为默认等级：0->不是；1->是
-  int64 free_freight_point = 3; //免运费标准
-  int32 growth_point = 4; //成长点
-  string remark = 5; //备注
-  int32 is_birthday = 6; //是否有生日特权
-  int32 is_comment = 7; //是否有评论获奖励特权
-  int32 is_free_freight = 8; //是否有免邮特权
-  int32 is_member_price = 9; //是否有会员价格特权
+  int64 id = 1; //
+  string level_name = 2; //等级名称
+  int32 growth_point = 3; //成长点
+  int32 default_status = 4; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 5; //免运费标准
+  int32 comment_growth_point = 6; //每次评价获取的成长值
+  int32 is_free_freight = 7; //是否有免邮特权
+  int32 is_sign_in = 8; //是否有签到特权
+  int32 is_comment = 9; //是否有评论获奖励特权
   int32 is_promotion = 10; //是否有专享活动特权
-  int32 is_sign_in = 11; //是否有签到特权
-  string level_name = 12; //等级名称
-
-
+  int32 is_member_price = 11; //是否有会员价格特权
+  int32 is_birthday = 12; //是否有生日特权
+  string remark = 13; //备注
 }
 
 message AddMemberLevelResp {
@@ -37,18 +36,18 @@ message DeleteMemberLevelResp {
 
 // 更新会员等级表
 message UpdateMemberLevelReq {
-  int32 comment_growth_point = 1; //每次评价获取的成长值
-  int32 default_status = 2; //是否为默认等级：0->不是；1->是
-  int64 free_freight_point = 3; //免运费标准
-  int32 growth_point = 4; //成长点
-  int64 id = 5; //
-  int32 is_birthday = 6; //是否有生日特权
-  int32 is_comment = 7; //是否有评论获奖励特权
-  int32 is_free_freight = 8; //是否有免邮特权
-  int32 is_member_price = 9; //是否有会员价格特权
+  int64 id = 1; //
+  string level_name = 2; //等级名称
+  int32 growth_point = 3; //成长点
+  int32 default_status = 4; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 5; //免运费标准
+  int32 comment_growth_point = 6; //每次评价获取的成长值
+  int32 is_free_freight = 7; //是否有免邮特权
+  int32 is_sign_in = 8; //是否有签到特权
+  int32 is_comment = 9; //是否有评论获奖励特权
   int32 is_promotion = 10; //是否有专享活动特权
-  int32 is_sign_in = 11; //是否有签到特权
-  string level_name = 12; //等级名称
+  int32 is_member_price = 11; //是否有会员价格特权
+  int32 is_birthday = 12; //是否有生日特权
   string remark = 13; //备注
 
 }
@@ -74,18 +73,18 @@ message QueryMemberLevelDetailReq {
 }
 
 message QueryMemberLevelDetailResp {
-  int32 comment_growth_point = 1; //每次评价获取的成长值
-  int32 default_status = 2; //是否为默认等级：0->不是；1->是
-  int64 free_freight_point = 3; //免运费标准
-  int32 growth_point = 4; //成长点
-  int64 id = 5; //
-  int32 is_birthday = 6; //是否有生日特权
-  int32 is_comment = 7; //是否有评论获奖励特权
-  int32 is_free_freight = 8; //是否有免邮特权
-  int32 is_member_price = 9; //是否有会员价格特权
+  int64 id = 1; //
+  string level_name = 2; //等级名称
+  int32 growth_point = 3; //成长点
+  int32 default_status = 4; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 5; //免运费标准
+  int32 comment_growth_point = 6; //每次评价获取的成长值
+  int32 is_free_freight = 7; //是否有免邮特权
+  int32 is_sign_in = 8; //是否有签到特权
+  int32 is_comment = 9; //是否有评论获奖励特权
   int32 is_promotion = 10; //是否有专享活动特权
-  int32 is_sign_in = 11; //是否有签到特权
-  string level_name = 12; //等级名称
+  int32 is_member_price = 11; //是否有会员价格特权
+  int32 is_birthday = 12; //是否有生日特权
   string remark = 13; //备注
 
 }
@@ -98,18 +97,18 @@ message QueryMemberLevelListReq {
 }
 
 message MemberLevelListData {
-  int32 comment_growth_point = 1; //每次评价获取的成长值
-  int32 default_status = 2; //是否为默认等级：0->不是；1->是
-  int64 free_freight_point = 3; //免运费标准
-  int32 growth_point = 4; //成长点
-  int64 id = 5; //
-  int32 is_birthday = 6; //是否有生日特权
-  int32 is_comment = 7; //是否有评论获奖励特权
-  int32 is_free_freight = 8; //是否有免邮特权
-  int32 is_member_price = 9; //是否有会员价格特权
+  int64 id = 1; //
+  string level_name = 2; //等级名称
+  int32 growth_point = 3; //成长点
+  int32 default_status = 4; //是否为默认等级：0->不是；1->是
+  int64 free_freight_point = 5; //免运费标准
+  int32 comment_growth_point = 6; //每次评价获取的成长值
+  int32 is_free_freight = 7; //是否有免邮特权
+  int32 is_sign_in = 8; //是否有签到特权
+  int32 is_comment = 9; //是否有评论获奖励特权
   int32 is_promotion = 10; //是否有专享活动特权
-  int32 is_sign_in = 11; //是否有签到特权
-  string level_name = 12; //等级名称
+  int32 is_member_price = 11; //是否有会员价格特权
+  int32 is_birthday = 12; //是否有生日特权
   string remark = 13; //备注
 
 }

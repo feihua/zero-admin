@@ -2,18 +2,19 @@ package membertaskservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddMemberTaskLogic 会员任务
+// AddMemberTaskLogic 添加会员任务
 /*
 Author: LiuFeiHua
-Date: 2024/5/7 9:44
+Date: 2025/01/24 10:32:59
 */
 type AddMemberTaskLogic struct {
 	ctx    context.Context
@@ -29,20 +30,25 @@ func NewAddMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 	}
 }
 
-// AddMemberTask 添加会员任务表
+// AddMemberTask 添加会员任务
 func (l *AddMemberTaskLogic) AddMemberTask(in *umsclient.AddMemberTaskReq) (*umsclient.AddMemberTaskResp, error) {
-	err := query.UmsMemberTask.WithContext(l.ctx).Create(&model.UmsMemberTask{
-		TaskName:     in.TaskName,
-		TaskGrowth:   in.TaskGrowth,
-		TaskIntegral: in.TaskIntegral,
-		TaskType:     in.TaskType,
-		Status:       in.Status,
-		CreateBy:     in.CreateBy,
-	})
+	q := query.UmsMemberTask
 
-	if err != nil {
-		return nil, err
+	item := &model.UmsMemberTask{
+		TaskName:     in.TaskName,     // 任务名称
+		TaskGrowth:   in.TaskGrowth,   // 赠送成长值
+		TaskIntegral: in.TaskIntegral, // 赠送积分
+		TaskType:     in.TaskType,     // 任务类型：0->新手任务；1->日常任务
+		Status:       in.Status,       // 状态：0->禁用；1->启用
+		CreateBy:     in.CreateBy,     // 创建者
 	}
 
+	err := q.WithContext(l.ctx).Create(item)
+	if err != nil {
+		logc.Errorf(l.ctx, "添加会员任务失败,参数:%+v,异常:%s", item, err.Error())
+		return nil, errors.New("添加会员任务失败")
+	}
+
+	logc.Infof(l.ctx, "添加会员任务成功,参数：%+v", in)
 	return &umsclient.AddMemberTaskResp{}, nil
 }

@@ -27,23 +27,24 @@ message DeleteMemberResp {
 
 // 更新会员表
 message UpdateMemberReq {
-  string birthday = 1; //生日
-  string city = 2; //所做城市
-  int32 source_type = 3; //用户来源
-  int32 gender = 4; //性别：0->未知；1->男；2->女
-  int32 growth = 5; //成长值
-  int32 history_integration = 6; //历史积分数量
-  string icon = 7; //头像
-  int64 id = 8; //
-  int32 integration = 9; //积分
-  string job = 10; //职业
-  int32 lottery_count = 11; //剩余抽奖次数
-  int64 member_level_id = 12; //会员等级id
-  string member_name = 13; //用户名
-  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
-  string nickname = 15; //昵称
-  string phone = 16; //手机号码
-  string personalized_signature = 17; //个性签名
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_name = 3; //用户名
+  string password = 4; //密码
+  string nickname = 5; //昵称
+  string phone = 6; //手机号码
+  int32 member_status = 7; //帐号启用状态:0->禁用；1->启用
+  string icon = 8; //头像
+  int32 gender = 9; //性别：0->未知；1->男；2->女
+  string birthday = 10; //生日
+  string city = 11; //所做城市
+  string job = 12; //职业
+  string personalized_signature = 13; //个性签名
+  int32 source_type = 14; //用户来源
+  int32 integration = 15; //积分
+  int32 growth = 16; //成长值
+  int32 lottery_count = 17; //剩余抽奖次数
+  int32 history_integration = 18; //历史积分数量
 
 }
 
@@ -53,26 +54,8 @@ message UpdateMemberResp {
 
 // 更新会员表状态
 message UpdateMemberStatusReq {
-  string birthday = 1; //生日
-  string city = 2; //所做城市
-  string create_time = 3; //创建时间
-  int32 gender = 4; //性别：0->未知；1->男；2->女
-  int32 growth = 5; //成长值
-  int32 history_integration = 6; //历史积分数量
-  string icon = 7; //头像
-  int64 id = 8; //
-  int32 integration = 9; //积分
-  string job = 10; //职业
-  int32 lottery_count = 11; //剩余抽奖次数
-  int64 member_level_id = 12; //会员等级id
-  string member_name = 13; //用户名
-  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
-  string nickname = 15; //昵称
-  string password = 16; //密码
-  string personalized_signature = 17; //个性签名
-  string phone = 18; //手机号码
-  int32 source_type = 19; //用户来源
-  string update_time = 20; //更新时间
+  repeated int64 ids = 1; //
+  int32 member_status = 2; //帐号启用状态:0->禁用；1->启用
 
 }
 
@@ -86,25 +69,25 @@ message QueryMemberDetailReq {
 }
 
 message QueryMemberDetailResp {
-  string birthday = 1; //生日
-  string city = 2; //所做城市
-  string create_time = 3; //创建时间
-  int32 gender = 4; //性别：0->未知；1->男；2->女
-  int32 growth = 5; //成长值
-  int32 history_integration = 6; //历史积分数量
-  string icon = 7; //头像
-  int64 id = 8; //
-  int32 integration = 9; //积分
-  string job = 10; //职业
-  int32 lottery_count = 11; //剩余抽奖次数
-  int64 member_level_id = 12; //会员等级id
-  string member_name = 13; //用户名
-  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
-  string nickname = 15; //昵称
-  string password = 16; //密码
-  string personalized_signature = 17; //个性签名
-  string phone = 18; //手机号码
-  int32 source_type = 19; //用户来源
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_name = 3; //用户名
+  string password = 4; //密码
+  string nickname = 5; //昵称
+  string phone = 6; //手机号码
+  int32 member_status = 7; //帐号启用状态:0->禁用；1->启用
+  string icon = 8; //头像
+  int32 gender = 9; //性别：0->未知；1->男；2->女
+  string birthday = 10; //生日
+  string city = 11; //所做城市
+  string job = 12; //职业
+  string personalized_signature = 13; //个性签名
+  int32 source_type = 14; //用户来源
+  int32 integration = 15; //积分
+  int32 growth = 16; //成长值
+  int32 lottery_count = 17; //剩余抽奖次数
+  int32 history_integration = 18; //历史积分数量
+  string create_time = 19; //创建时间
   string update_time = 20; //更新时间
 
 }
@@ -120,25 +103,25 @@ message QueryMemberListReq {
 }
 
 message MemberListData {
-  string birthday = 1; //生日
-  string city = 2; //所做城市
-  string create_time = 3; //创建时间
-  int32 gender = 4; //性别：0->未知；1->男；2->女
-  int32 growth = 5; //成长值
-  int32 history_integration = 6; //历史积分数量
-  string icon = 7; //头像
-  int64 id = 8; //
-  int32 integration = 9; //积分
-  string job = 10; //职业
-  int32 lottery_count = 11; //剩余抽奖次数
-  int64 member_level_id = 12; //会员等级id
-  string member_name = 13; //用户名
-  int32 member_status = 14; //帐号启用状态:0->禁用；1->启用
-  string nickname = 15; //昵称
-  string password = 16; //密码
-  string personalized_signature = 17; //个性签名
-  string phone = 18; //手机号码
-  int32 source_type = 19; //用户来源
+  int64 id = 1; //
+  int64 member_level_id = 2; //会员等级id
+  string member_name = 3; //用户名
+  string password = 4; //密码
+  string nickname = 5; //昵称
+  string phone = 6; //手机号码
+  int32 member_status = 7; //帐号启用状态:0->禁用；1->启用
+  string icon = 8; //头像
+  int32 gender = 9; //性别：0->未知；1->男；2->女
+  string birthday = 10; //生日
+  string city = 11; //所做城市
+  string job = 12; //职业
+  string personalized_signature = 13; //个性签名
+  int32 source_type = 14; //用户来源
+  int32 integration = 15; //积分
+  int32 growth = 16; //成长值
+  int32 lottery_count = 17; //剩余抽奖次数
+  int32 history_integration = 18; //历史积分数量
+  string create_time = 19; //创建时间
   string update_time = 20; //更新时间
 
 }

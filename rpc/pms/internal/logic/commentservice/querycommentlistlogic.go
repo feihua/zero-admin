@@ -2,6 +2,7 @@ package commentservicelogic
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -45,21 +46,21 @@ func (l *QueryCommentListLogic) QueryCommentList(in *pmsclient.QueryCommentListR
 	for _, item := range result {
 
 		list = append(list, &pmsclient.CommentListData{
-			Id:               item.ID,
-			ProductId:        item.ProductID,
-			MemberNickName:   item.MemberNickName,
-			ProductName:      item.ProductName,
-			Star:             item.Star,
-			MemberIp:         item.MemberIP,
-			CreateTime:       item.CreateTime.Format("2006-01-02 15:04:05"),
-			ShowStatus:       item.ShowStatus,
-			ProductAttribute: item.ProductAttribute,
-			CollectCount:     item.CollectCount,
-			ReadCount:        item.ReadCount,
-			Content:          item.Content,
-			Pics:             item.Pics,
-			MemberIcon:       item.MemberIcon,
-			ReplayCount:      item.ReplayCount,
+			Id:               item.ID,                              //
+			ProductId:        item.ProductID,                       // 商品id
+			MemberNickName:   item.MemberNickName,                  // 评价者昵称
+			ProductName:      item.ProductName,                     // 商品名称
+			Star:             item.Star,                            // 评价星数：0->5
+			MemberIp:         item.MemberIP,                        // 评价的ip
+			CreateTime:       time_util.TimeToStr(item.CreateTime), // 评价时间
+			ShowStatus:       item.ShowStatus,                      // 是否显示，0-不显示，1-显示
+			ProductAttribute: item.ProductAttribute,                // 购买时的商品属性
+			CollectCount:     item.CollectCount,                    // 点赞数
+			ReadCount:        item.ReadCount,                       // 阅读数
+			Content:          item.Content,                         // 内容
+			Pics:             item.Pics,                            // 上传图片地址，以逗号隔开
+			MemberIcon:       item.MemberIcon,                      // 评论用户头像
+			ReplayCount:      item.ReplayCount,                     // 回复数量
 		})
 	}
 

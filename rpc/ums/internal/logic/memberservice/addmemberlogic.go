@@ -5,11 +5,9 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
-	"github.com/zeromicro/go-zero/core/logc"
-	"time"
-
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -63,18 +61,11 @@ func (l *AddMemberLogic) AddMember(in *umsclient.AddMemberReq) (*umsclient.AddMe
 
 func insertMember(in *umsclient.AddMemberReq, l *AddMemberLogic) (int64, error) {
 	member := &model.UmsMember{
-		MemberLevelID:      4, // 默认是普通会员
-		MemberName:         in.MemberName,
-		Password:           in.Password,
-		Nickname:           in.MemberName,
-		Phone:              in.Phone,
-		MemberStatus:       0,
-		CreateTime:         time.Now(),
-		SourceType:         0,
-		Integration:        0,
-		Growth:             0,
-		LotteryCount:       0,
-		HistoryIntegration: 0,
+		MemberLevelID: 4,             // 默认是普通会员
+		MemberName:    in.MemberName, // 用户名
+		Password:      in.Password,   // 密码
+		Nickname:      in.MemberName, // 昵称
+		Phone:         in.Phone,      // 手机号码
 	}
 	err := query.UmsMember.WithContext(l.ctx).Create(member)
 
