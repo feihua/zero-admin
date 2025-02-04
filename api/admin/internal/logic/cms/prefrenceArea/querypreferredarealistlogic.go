@@ -13,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// QueryPreferredAreaListLogic 查询优选专区列表
+/*
+Author: 刘飞华
+Date: 2025/02/04 14:56:41
+*/
 type QueryPreferredAreaListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -27,13 +32,14 @@ func NewQueryPreferredAreaListLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
+// QueryPreferredAreaList 查询优选专区列表
 func (l *QueryPreferredAreaListLogic) QueryPreferredAreaList(req *types.QueryPreferredAreaListReq) (resp *types.QueryPreferredAreaListResp, err error) {
 	result, err := l.svcCtx.PreferredAreaService.QueryPreferredAreaList(l.ctx, &cmsclient.QueryPreferredAreaListReq{
 		PageNum:    req.Current,
 		PageSize:   req.PageSize,
-		Name:       strings.TrimSpace(req.Name),
-		SubTitle:   strings.TrimSpace(req.SubTitle),
-		ShowStatus: req.ShowStatus,
+		Name:       strings.TrimSpace(req.Name),     //专区名称
+		SubTitle:   strings.TrimSpace(req.SubTitle), //子标题
+		ShowStatus: req.ShowStatus,                  //显示状态：0->不显示；1->显示
 	})
 
 	if err != nil {
@@ -45,16 +51,16 @@ func (l *QueryPreferredAreaListLogic) QueryPreferredAreaList(req *types.QueryPre
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryPreferredAreaListData{
-			Id:         item.Id,
-			Name:       item.Name,
-			SubTitle:   item.SubTitle,
-			Pic:        item.Pic,
-			Sort:       item.Sort,
-			ShowStatus: item.ShowStatus,
-			CreateBy:   item.CreateBy,
-			CreateTime: item.CreateTime,
-			UpdateBy:   item.UpdateBy,
-			UpdateTime: item.UpdateTime,
+			Id:         item.Id,         //主键ID
+			Name:       item.Name,       //专区名称
+			SubTitle:   item.SubTitle,   //子标题
+			Pic:        item.Pic,        //展示图片
+			Sort:       item.Sort,       //排序
+			ShowStatus: item.ShowStatus, //显示状态：0->不显示；1->显示
+			CreateBy:   item.CreateBy,   //创建者
+			CreateTime: item.CreateTime, //创建时间
+			UpdateBy:   item.UpdateBy,   //更新者
+			UpdateTime: item.UpdateTime, //更新时间
 		})
 	}
 

@@ -1,23 +1,23 @@
 info (
 	desc:   "优选专区"
-	author: "liufeihua"
+	author: "刘飞华"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加优选专区
+	// 添加优选专区请求参数
 	AddPreferredAreaReq {
-		Name       string `json:"name"` //
+		Name       string `json:"name"` //专区名称
+		SubTitle   string `json:"subTitle"` //子标题
 		Pic        string `json:"pic"` //展示图片
-		ShowStatus int32  `json:"showStatus"` //
-		Sort       int32  `json:"sort"` //
-		SubTitle   string `json:"subTitle"` //
+		Sort       int32  `json:"sort"` //排序
+		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 	}
 	AddPreferredAreaResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除优选专区
+	// 删除优选专区请求参数
 	DeletePreferredAreaReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -25,41 +25,41 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新优选专区
+	// 更新优选专区请求参数
 	UpdatePreferredAreaReq {
-		Id         int64  `json:"id"` //
-		Name       string `json:"name"` //
+		Id         int64  `json:"id"` //主键ID
+		Name       string `json:"name"` //专区名称
+		SubTitle   string `json:"subTitle"` //子标题
 		Pic        string `json:"pic"` //展示图片
-		ShowStatus int32  `json:"showStatus"` //
-		Sort       int32  `json:"sort"` //
-		SubTitle   string `json:"subTitle"` //
+		Sort       int32  `json:"sort"` //排序
+		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 	}
 	UpdatePreferredAreaResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新优选专区状态
+	// 更新优选专区状态请求参数
 	UpdatePreferredAreaStatusReq {
-		Ids        []int64 `json:"ids"`
-		ShowStatus int32   `json:"showStatus"` //
+		Ids         []int64 `json:"ids"` //主键ID
+		ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 	}
 	UpdatePreferredAreaStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询优选专区详情
+	// 查询优选专区详情请求参数
 	QueryPreferredAreaDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryPreferredAreaDetailData {
+		Id         int64  `json:"id"` //主键ID
+		Name       string `json:"name"` //专区名称
+		SubTitle   string `json:"subTitle"` //子标题
+		Pic        string `json:"pic"` //展示图片
+		Sort       int32  `json:"sort"` //排序
+		ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
-		Id         int64  `json:"id"` //
-		Name       string `json:"name"` //
-		Pic        string `json:"pic"` //展示图片
-		ShowStatus int32  `json:"showStatus"` //
-		Sort       int32  `json:"sort"` //
-		SubTitle   string `json:"subTitle"` //
 		UpdateBy   string `json:"updateBy"` //更新者
 		UpdateTime string `json:"updateTime"` //更新时间
 	}
@@ -68,23 +68,24 @@ type (
 		Message string                       `json:"message"`
 		Data    QueryPreferredAreaDetailData `json:"data"`
 	}
-	// 分页查询优选专区列表
+	// 分页查询优选专区列表请求参数
 	QueryPreferredAreaListReq {
 		Current    int64  `form:"current,default=1"` //第几页
 		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
-		Name       string `form:"name,optional"` //
-		ShowStatus int32  `form:"showStatus,optional"` //
-		SubTitle   string `form:"subTitle,optional"` //
+		Name       string `json:"name,optional"` //专区名称
+		SubTitle   string `json:"subTitle,optional"` //子标题
+		Pic        string `json:"pic,optional"` //展示图片
+		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 	}
 	QueryPreferredAreaListData {
+		Id         int64  `json:"id"` //主键ID
+		Name       string `json:"name"` //专区名称
+		SubTitle   string `json:"subTitle"` //子标题
+		Pic        string `json:"pic"` //展示图片
+		Sort       int32  `json:"sort"` //排序
+		ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
-		Id         int64  `json:"id"` //
-		Name       string `json:"name"` //
-		Pic        string `json:"pic"` //展示图片
-		ShowStatus int32  `json:"showStatus"` //
-		Sort       int32  `json:"sort"` //
-		SubTitle   string `json:"subTitle"` //
 		UpdateBy   string `json:"updateBy"` //更新者
 		UpdateTime string `json:"updateTime"` //更新时间
 	}

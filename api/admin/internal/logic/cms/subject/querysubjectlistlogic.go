@@ -13,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// QuerySubjectListLogic 查询专题表列表
+/*
+Author: 刘飞华
+Date: 2025/02/04 15:04:17
+*/
 type QuerySubjectListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -27,13 +32,14 @@ func NewQuerySubjectListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
+// QuerySubjectList 查询专题表列表
 func (l *QuerySubjectListLogic) QuerySubjectList(req *types.QuerySubjectListReq) (resp *types.QuerySubjectListResp, err error) {
 	subjectList, err := l.svcCtx.SubjectService.QuerySubjectList(l.ctx, &cmsclient.QuerySubjectListReq{
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,
-		Title:           strings.TrimSpace(req.Title),
-		RecommendStatus: req.RecommendStatus,
-		ShowStatus:      req.ShowStatus,
+		Title:           strings.TrimSpace(req.Title), //专题标题
+		RecommendStatus: req.RecommendStatus,          //推荐状态：0->不推荐；1->推荐
+		ShowStatus:      req.ShowStatus,               //显示状态：0->不显示；1->显示
 	})
 
 	if err != nil {
@@ -45,25 +51,25 @@ func (l *QuerySubjectListLogic) QuerySubjectList(req *types.QuerySubjectListReq)
 
 	for _, item := range subjectList.List {
 		list = append(list, &types.QuerySubjectListData{
-			Id:              item.Id,
-			CategoryId:      item.CategoryId,
-			Title:           item.Title,
-			Pic:             item.Pic,
-			ProductCount:    item.ProductCount,
-			RecommendStatus: item.RecommendStatus,
-			CollectCount:    item.CollectCount,
-			ReadCount:       item.ReadCount,
-			CommentCount:    item.CommentCount,
-			AlbumPics:       item.AlbumPics,
-			Description:     item.Description,
-			ShowStatus:      item.ShowStatus,
-			Content:         item.Content,
-			ForwardCount:    item.ForwardCount,
-			CategoryName:    item.CategoryName,
-			CreateBy:        item.CreateBy,
-			CreateTime:      item.CreateTime,
-			UpdateBy:        item.UpdateBy,
-			UpdateTime:      item.UpdateTime,
+			Id:              item.Id,              //专题id
+			CategoryId:      item.CategoryId,      //专题分类id
+			Title:           item.Title,           //专题标题
+			Pic:             item.Pic,             //专题主图
+			ProductCount:    item.ProductCount,    //关联产品数量
+			RecommendStatus: item.RecommendStatus, //推荐状态：0->不推荐；1->推荐
+			CollectCount:    item.CollectCount,    //收藏数
+			ReadCount:       item.ReadCount,       //阅读数
+			CommentCount:    item.CommentCount,    //评论数
+			AlbumPics:       item.AlbumPics,       //画册图片用逗号分割
+			Description:     item.Description,     //专题内容
+			ShowStatus:      item.ShowStatus,      //显示状态：0->不显示；1->显示
+			Content:         item.Content,         //专题内容
+			ForwardCount:    item.ForwardCount,    //转发数
+			CategoryName:    item.CategoryName,    //专题分类名称
+			CreateBy:        item.CreateBy,        //创建者
+			CreateTime:      item.CreateTime,      //创建时间
+			UpdateBy:        item.UpdateBy,        //更新者
+			UpdateTime:      item.UpdateTime,      //更新时间
 		})
 	}
 
