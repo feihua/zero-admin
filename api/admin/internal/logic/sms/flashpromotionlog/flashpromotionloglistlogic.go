@@ -3,12 +3,10 @@ package logic
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
-	"github.com/feihua/zero-admin/rpc/sms/smsclient"
-	"github.com/zeromicro/go-zero/core/logc"
-	"strings"
-
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -42,13 +40,13 @@ func (l *FlashPromotionLogListLogic) FlashPromotionLogList(req types.ListFlashPr
 
 	for _, item := range resp.List {
 		list = append(list, &types.ListFlashPromotionLogData{
-			Id:            item.Id,
-			MemberId:      item.MemberId,
-			ProductId:     item.ProductId,
-			MemberPhone:   strings.TrimSpace(item.MemberPhone),
-			ProductName:   strings.TrimSpace(item.ProductName),
-			SubscribeTime: strings.TrimSpace(item.SubscribeTime),
-			SendTime:      item.SendTime,
+			Id:            item.Id,            // 编号
+			MemberId:      item.MemberId,      // 会员id
+			ProductId:     item.ProductId,     // 商品id
+			MemberPhone:   item.MemberPhone,   // 会员电话
+			ProductName:   item.ProductName,   // 商品名称
+			SubscribeTime: item.SubscribeTime, // 会员订阅时间
+			SendTime:      item.SendTime,      // 发送时间
 		})
 	}
 

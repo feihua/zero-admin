@@ -34,15 +34,16 @@ func NewHomeAdvertiseAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) H
 // HomeAdvertiseAdd 添加首页轮播广告
 func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(req types.AddHomeAdvertiseReq) (*types.AddHomeAdvertiseResp, error) {
 	_, err := l.svcCtx.HomeAdvertiseService.AddHomeAdvertise(l.ctx, &smsclient.AddHomeAdvertiseReq{
-		Name:      req.Name,
-		Type:      req.Type,
-		Pic:       "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20181113/movie_ad.jpg", //暂时没有上传,用这个当默认
-		StartTime: req.StartTime,
-		EndTime:   req.EndTime,
-		Status:    req.Status,
-		Url:       req.Url,
-		Note:      req.Note,
-		Sort:      req.Sort,
+
+		Name:      req.Name,                                                                          // 名称
+		Type:      req.Type,                                                                          // 轮播位置：0->PC首页轮播；1->app首页轮播
+		Pic:       "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20181113/movie_ad.jpg", // 暂时没有上传,用这个当默认
+		StartTime: req.StartTime,                                                                     // 开始时间
+		EndTime:   req.EndTime,                                                                       // 结束时间
+		Status:    req.Status,                                                                        // 上下线状态：0->下线；1->上线
+		Url:       req.Url,                                                                           // 链接地址
+		Note:      req.Note,                                                                          // 备注
+		Sort:      req.Sort,                                                                          // 排序
 	})
 
 	if err != nil {

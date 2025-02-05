@@ -35,7 +35,7 @@ func (l *UpdateRecommendProductStatusLogic) UpdateRecommendProductStatus(req *ty
 	// 1.修改sms_home_recommend_product的记录(sms-rpc)
 	_, err = l.svcCtx.HomeRecommendProductService.UpdateHomeRecommendProductStatus(l.ctx, &smsclient.UpdateHomeRecommendProductStatusReq{
 		Ids:             req.Ids,
-		RecommendStatus: req.RecommendStatus,
+		RecommendStatus: req.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
 	})
 
 	if err != nil {

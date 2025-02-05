@@ -48,12 +48,12 @@ func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(req *types.Li
 
 	for _, item := range resp.List {
 		list = append(list, &types.ListFlashPromotionSessionData{
-			Id:         item.Id,
-			Name:       item.Name,
-			StartTime:  item.StartTime,
-			EndTime:    item.EndTime,
-			Status:     item.Status,
-			CreateTime: item.CreateTime,
+			Id:         item.Id,         // 编号
+			Name:       item.Name,       // 场次名称
+			StartTime:  item.StartTime,  // 每日开始时间
+			EndTime:    item.EndTime,    // 每日结束时间
+			Status:     item.Status,     // 启用状态：0->不启用；1->启用
+			CreateTime: item.CreateTime, // 创建时间
 			Key:        strconv.FormatInt(item.Id, 10),
 		})
 	}

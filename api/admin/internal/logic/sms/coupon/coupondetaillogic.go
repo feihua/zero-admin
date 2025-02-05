@@ -59,24 +59,24 @@ func (l *CouponDetailLogic) CouponDetail(req *types.CouponDetailReq) (resp *type
 // 优惠券基本信息
 func buildCoupon(item *couponservice.QueryCouponFindByIdResp) types.ListCouponData {
 	coupon := types.ListCouponData{
-		Id:           item.Id,
-		Type:         item.Type,
-		Name:         item.Name,
-		Platform:     item.Platform,
-		Count:        item.Count,
-		Amount:       item.Amount,
-		PerLimit:     item.PerLimit,
-		MinPoint:     item.MinPoint,
-		StartTime:    item.StartTime,
-		EndTime:      item.EndTime,
-		UseType:      item.UseType,
-		Note:         item.Note,
-		PublishCount: item.PublishCount,
-		UseCount:     item.UseCount,
-		ReceiveCount: item.ReceiveCount,
-		EnableTime:   item.EnableTime,
-		Code:         item.Code,
-		MemberLevel:  item.MemberLevel,
+		Id:           item.Id,           //
+		Type:         item.Type,         // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+		Name:         item.Name,         // 名称
+		Platform:     item.Platform,     // 使用平台：0->全部；1->移动；2->PC
+		Count:        item.Count,        // 数量
+		Amount:       item.Amount,       // 金额
+		PerLimit:     item.PerLimit,     // 每人限领张数
+		MinPoint:     item.MinPoint,     // 使用门槛；0表示无门槛
+		StartTime:    item.StartTime,    // 开始时间
+		EndTime:      item.EndTime,      // 结束时间
+		UseType:      item.UseType,      // 使用类型：0->全场通用；1->指定分类；2->指定商品
+		Note:         item.Note,         // 备注
+		PublishCount: item.PublishCount, // 发行数量
+		UseCount:     item.UseCount,     // 已使用数量
+		ReceiveCount: item.ReceiveCount, // 领取数量
+		EnableTime:   item.EnableTime,   // 可以领取的日期
+		Code:         item.Code,         // 优惠码
+		MemberLevel:  item.MemberLevel,  // 可领取的会员类型：0->无限时
 	}
 	return coupon
 }

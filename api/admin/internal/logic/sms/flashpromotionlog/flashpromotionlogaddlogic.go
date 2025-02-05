@@ -28,11 +28,11 @@ func NewFlashPromotionLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(req types.AddFlashPromotionLogReq) (*types.AddFlashPromotionLogResp, error) {
 	_, err := l.svcCtx.FlashPromotionLogService.AddFlashPromotionLog(l.ctx, &smsclient.AddFlashPromotionLogReq{
-		MemberId:      req.MemberId,
-		ProductId:     req.ProductId,
-		MemberPhone:   req.MemberPhone,
-		ProductName:   req.ProductName,
-		SubscribeTime: req.SubscribeTime,
+		MemberId:      req.MemberId,      // 会员id
+		ProductId:     req.ProductId,     // 商品id
+		MemberPhone:   req.MemberPhone,   // 会员电话
+		ProductName:   req.ProductName,   // 商品名称
+		SubscribeTime: req.SubscribeTime, // 会员订阅时间
 	})
 
 	if err != nil {

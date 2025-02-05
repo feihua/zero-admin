@@ -49,7 +49,7 @@ func (l *HomeBrandDeleteLogic) HomeBrandDelete(req types.DeleteHomeBrandReq) (*t
 	// 2.修改品牌的推荐状态为不推荐(pms-rpc)
 	_, err = l.svcCtx.BrandService.UpdateBrandRecommendStatus(l.ctx, &pmsclient.UpdateBrandRecommendStatusReq{
 		Ids:             req.BrandIds,
-		RecommendStatus: 0,
+		RecommendStatus: 0, // 推荐状态：0->不推荐;1->推荐
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,修改品牌的推荐状态异常:%s", req, err.Error())

@@ -50,7 +50,7 @@ func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req types.D
 	// 2.修改cms_subject记录的状态为不推荐(cms-rpc)
 	_, err = l.svcCtx.SubjectService.UpdateSubjectRecommendStatus(l.ctx, &cmsclient.UpdateSubjectRecommendStatusReq{
 		Ids:    req.SubjectIds,
-		Status: 0,
+		Status: 0, // 推荐状态：0->不推荐;1->推荐
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,更新人气推荐专题状态异常:%s", req, err.Error())

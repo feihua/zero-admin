@@ -29,15 +29,15 @@ func NewHomeAdvertiseUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(req types.UpdateHomeAdvertiseReq) (*types.UpdateHomeAdvertiseResp, error) {
 	_, err := l.svcCtx.HomeAdvertiseService.UpdateHomeAdvertise(l.ctx, &smsclient.UpdateHomeAdvertiseReq{
 		Id:        req.Id,
-		Name:      req.Name,
-		Type:      req.Type,
+		Name:      req.Name, // 名称
+		Type:      req.Type, // 轮播位置：0->PC首页轮播；1->app首页轮播
 		Pic:       req.Pic,
-		StartTime: req.StartTime,
-		EndTime:   req.EndTime,
-		Status:    req.Status,
-		Url:       req.Url,
-		Note:      req.Note,
-		Sort:      req.Sort,
+		StartTime: req.StartTime, // 开始时间
+		EndTime:   req.EndTime,   // 结束时间
+		Status:    req.Status,    // 上下线状态：0->下线；1->上线
+		Url:       req.Url,       // 链接地址
+		Note:      req.Note,      // 备注
+		Sort:      req.Sort,      // 排序
 	})
 
 	if err != nil {

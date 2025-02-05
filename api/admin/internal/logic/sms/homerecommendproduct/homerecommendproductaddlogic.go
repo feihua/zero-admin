@@ -44,9 +44,9 @@ func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHome
 
 	for _, item := range brandListResp.List {
 		list = append(list, &smsclient.HomeRecommendProductAddData{
-			ProductId:       item.Id,
-			ProductName:     item.Name,
-			RecommendStatus: 1,
+			ProductId:       item.Id,   // 商品id
+			ProductName:     item.Name, // 商品名称
+			RecommendStatus: 1,         // 推荐状态：0->不推荐;1->推荐
 			Sort:            int32(item.Id),
 		})
 	}

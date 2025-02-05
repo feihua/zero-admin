@@ -50,17 +50,17 @@ func (l *CouponHistoryListLogic) CouponHistoryList(req types.ListCouponHistoryRe
 
 	for _, item := range resp.List {
 		list = append(list, &types.ListCouponHistoryData{
-			Id:             item.Id,
-			CouponId:       item.CouponId,
-			MemberId:       item.MemberId,
-			CouponCode:     item.CouponCode,
-			MemberNickname: item.MemberNickname,
-			GetType:        item.GetType,
-			CreateTime:     item.CreateTime,
-			UseStatus:      item.UseStatus,
-			UseTime:        item.UseTime,
-			OrderId:        item.OrderId,
-			OrderSn:        item.OrderSn,
+			Id:             item.Id,             //
+			CouponId:       item.CouponId,       // 优惠券id
+			MemberId:       item.MemberId,       // 会员id
+			CouponCode:     item.CouponCode,     // 优惠码
+			MemberNickname: item.MemberNickname, // 领取人昵称
+			GetType:        item.GetType,        // 获取类型：0->后台赠送；1->主动获取
+			CreateTime:     item.CreateTime,     // 领取时间
+			UseStatus:      item.UseStatus,      // 使用状态：0->未使用；1->已使用；2->已过期
+			UseTime:        item.UseTime,        // 使用时间
+			OrderId:        item.OrderId,        // 订单编号
+			OrderSn:        item.OrderSn,        // 订单号码
 		})
 	}
 

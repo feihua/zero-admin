@@ -34,10 +34,10 @@ func NewFlashPromotionAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // FlashPromotionAdd 添加秒杀活动
 func (l *FlashPromotionAddLogic) FlashPromotionAdd(req *types.AddFlashPromotionReq) (*types.AddFlashPromotionResp, error) {
 	_, err := l.svcCtx.FlashPromotionService.AddFlashPromotion(l.ctx, &smsclient.AddFlashPromotionReq{
-		Title:     req.Title,
-		StartDate: req.StartDate,
-		EndDate:   req.EndDate,
-		Status:    req.Status,
+		Title:     req.Title,     // 标题
+		StartDate: req.StartDate, // 开始日期
+		EndDate:   req.EndDate,   // 结束日期
+		Status:    req.Status,    // 上下线状态
 	})
 
 	if err != nil {

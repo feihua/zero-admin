@@ -39,7 +39,7 @@ func (l *UpdateRecommendSubjectStatusLogic) UpdateRecommendSubjectStatus(req *ty
 	// 1.修改sms_home_recommend_subject的记录推荐状态(sms-rpc)
 	_, err = l.svcCtx.HomeRecommendSubjectService.UpdateHomeRecommendSubjectStatus(l.ctx, &smsclient.UpdateHomeRecommendSubjectStatusReq{
 		Ids:             req.Ids,
-		RecommendStatus: req.RecommendStatus,
+		RecommendStatus: req.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
 	})
 
 	if err != nil {

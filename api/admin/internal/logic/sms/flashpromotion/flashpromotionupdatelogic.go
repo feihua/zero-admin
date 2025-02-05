@@ -35,10 +35,10 @@ func NewFlashPromotionUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 func (l *FlashPromotionUpdateLogic) FlashPromotionUpdate(req *types.UpdateFlashPromotionReq) (*types.UpdateFlashPromotionResp, error) {
 	_, err := l.svcCtx.FlashPromotionService.UpdateFlashPromotion(l.ctx, &smsclient.UpdateFlashPromotionReq{
 		Id:        req.Id,
-		Title:     req.Title,
-		StartDate: req.StartDate,
-		EndDate:   req.EndDate,
-		Status:    req.Status,
+		Title:     req.Title,     // 标题
+		StartDate: req.StartDate, // 开始日期
+		EndDate:   req.EndDate,   // 结束日期
+		Status:    req.Status,    // 上下线状态
 	})
 
 	if err != nil {

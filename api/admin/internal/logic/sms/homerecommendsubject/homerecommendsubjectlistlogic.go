@@ -50,11 +50,11 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req types.ListH
 
 	for _, item := range resp.List {
 		list = append(list, &types.ListHomeRecommendSubjectData{
-			Id:              item.Id,
-			SubjectId:       item.SubjectId,
-			SubjectName:     item.SubjectName,
-			RecommendStatus: item.RecommendStatus,
-			Sort:            item.Sort,
+			Id:              item.Id,              //
+			SubjectId:       item.SubjectId,       // 专题id
+			SubjectName:     item.SubjectName,     // 专题名称
+			RecommendStatus: item.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
+			Sort:            item.Sort,            // 排序
 		})
 	}
 

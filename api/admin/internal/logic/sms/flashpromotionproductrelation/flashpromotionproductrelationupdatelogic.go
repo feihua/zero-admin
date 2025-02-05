@@ -35,13 +35,13 @@ func NewFlashPromotionProductRelationUpdateLogic(ctx context.Context, svcCtx *sv
 func (l *FlashPromotionProductRelationUpdateLogic) FlashPromotionProductRelationUpdate(req *types.UpdateFlashPromotionProductRelationReq) (resp *types.UpdateFlashPromotionProductRelationResp, err error) {
 	_, err = l.svcCtx.FlashPromotionProductRelationService.UpdateFlashPromotionProductRelation(l.ctx, &smsclient.UpdateFlashPromotionProductRelationReq{
 		Id:                      req.ID,
-		FlashPromotionId:        req.FlashPromotionProductRelationID,
-		FlashPromotionSessionId: req.FlashPromotionProductRelationSessionID,
-		ProductId:               req.ProductID,
-		FlashPromotionPrice:     req.FlashPromotionProductRelationPrice,
-		FlashPromotionCount:     req.FlashPromotionProductRelationCount,
-		FlashPromotionLimit:     req.FlashPromotionProductRelationLimit,
-		Sort:                    req.Sort,
+		FlashPromotionId:        req.FlashPromotionProductRelationID,        // 限时购id
+		FlashPromotionSessionId: req.FlashPromotionProductRelationSessionID, // 编号
+		ProductId:               req.ProductID,                              // 商品id
+		FlashPromotionPrice:     req.FlashPromotionProductRelationPrice,     // 限时购价格
+		FlashPromotionCount:     req.FlashPromotionProductRelationCount,     // 限时购数量
+		FlashPromotionLimit:     req.FlashPromotionProductRelationLimit,     // 每人限购数量
+		Sort:                    req.Sort,                                   // 排序
 	})
 
 	if err != nil {

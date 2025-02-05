@@ -62,14 +62,13 @@ func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationLi
 		}
 		if r != nil {
 			list = append(list, &types.ListFlashPromotionProductRelationData{
-				Id:                                     r.Id,
-				FlashPromotionProductRelationID:        r.FlashPromotionId,
-				FlashPromotionProductRelationSessionID: r.FlashPromotionSessionId,
-				ProductID:                              r.ProductId,
-				FlashPromotionProductRelationPrice:     r.FlashPromotionPrice,
-				FlashPromotionProductRelationCount:     r.FlashPromotionCount,
-				FlashPromotionProductRelationLimit:     r.FlashPromotionLimit,
-				Sort:                                   r.Sort,
+				Id:                                     r.Id,                      // 编号
+				FlashPromotionProductRelationID:        r.FlashPromotionId,        // 限时购id
+				FlashPromotionProductRelationSessionID: r.FlashPromotionSessionId, // 编号
+				FlashPromotionProductRelationPrice:     r.FlashPromotionPrice,     // 限时购价格
+				FlashPromotionProductRelationCount:     r.FlashPromotionCount,     // 限时购数量
+				FlashPromotionProductRelationLimit:     r.FlashPromotionLimit,     // 每人限购数量
+				Sort:                                   r.Sort,                    // 排序
 				ProductId:                              item.Id,
 				Name:                                   item.Name,
 				ProductSn:                              item.ProductSn,

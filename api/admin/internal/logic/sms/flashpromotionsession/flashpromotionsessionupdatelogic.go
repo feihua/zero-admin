@@ -35,10 +35,10 @@ func NewFlashPromotionSessionUpdateLogic(ctx context.Context, svcCtx *svc.Servic
 func (l *FlashPromotionSessionUpdateLogic) FlashPromotionSessionUpdate(req *types.UpdateFlashPromotionSessionReq) (*types.UpdateFlashPromotionSessionResp, error) {
 	_, err := l.svcCtx.FlashPromotionSessionService.UpdateFlashPromotionSession(l.ctx, &smsclient.UpdateFlashPromotionSessionReq{
 		Id:        req.Id,
-		Name:      req.Name,
-		StartTime: req.StartTime,
-		EndTime:   req.EndTime,
-		Status:    req.Status,
+		Name:      req.Name,      // 场次名称
+		StartTime: req.StartTime, // 每日开始时间
+		EndTime:   req.EndTime,   // 每日结束时间
+		Status:    req.Status,    // 启用状态：0->不启用；1->启用
 	})
 
 	if err != nil {

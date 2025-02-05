@@ -46,10 +46,10 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHome
 
 	for _, item := range listResp.List {
 		list = append(list, &smsclient.HomeRecommendSubjectAddData{
-			SubjectId:       item.Id,
-			SubjectName:     item.Title,
-			RecommendStatus: 1,
-			Sort:            int32(item.Id),
+			SubjectId:       item.Id,        // 专题id
+			SubjectName:     item.Title,     // 专题名称
+			RecommendStatus: 1,              // 推荐状态：0->不推荐;1->推荐
+			Sort:            int32(item.Id), // 排序
 		})
 	}
 

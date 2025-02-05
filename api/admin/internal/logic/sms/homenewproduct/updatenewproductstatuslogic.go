@@ -39,7 +39,7 @@ func (l *UpdateNewProductStatusLogic) UpdateNewProductStatus(req *types.UpdateNe
 	// 1.修改sms_home_new_product的记录(sms-rpc)
 	_, err = l.svcCtx.HomeNewProductService.UpdateHomeNewProductStatus(l.ctx, &smsclient.UpdateHomeNewProductStatusReq{
 		Ids:             req.Ids,
-		RecommendStatus: req.RecommendStatus,
+		RecommendStatus: req.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
 	})
 
 	if err != nil {

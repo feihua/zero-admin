@@ -38,7 +38,7 @@ func NewUpdateHomeBrandStatusLogic(ctx context.Context, svcCtx *svc.ServiceConte
 func (l *UpdateHomeBrandStatusLogic) UpdateHomeBrandStatus(req *types.UpdateHomeBrandStatusReq) (resp *types.UpdateHomeBrandStatusResp, err error) {
 	_, err = l.svcCtx.HomeBrandService.UpdateHomeBrandStatus(l.ctx, &smsclient.UpdateHomeBrandStatusReq{
 		Ids:             req.Ids,
-		RecommendStatus: req.RecommendStatus,
+		RecommendStatus: req.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
 	})
 
 	if err != nil {

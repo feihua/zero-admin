@@ -37,13 +37,13 @@ func (l *FlashPromotionProductRelationAddLogic) FlashPromotionProductRelationAdd
 	var list []*smsclient.FlashPromotionProductRelationAddData
 	for _, item := range req.Data {
 		list = append(list, &smsclient.FlashPromotionProductRelationAddData{
-			FlashPromotionId:        item.FlashPromotionProductRelationID,
-			FlashPromotionSessionId: item.FlashPromotionProductRelationSessionID,
-			ProductId:               item.ProductID,
-			FlashPromotionPrice:     item.FlashPromotionProductRelationPrice,
-			FlashPromotionCount:     item.FlashPromotionProductRelationCount,
-			FlashPromotionLimit:     item.FlashPromotionProductRelationLimit,
-			Sort:                    item.Sort,
+			FlashPromotionId:        item.FlashPromotionProductRelationID,        // 限时购id
+			FlashPromotionSessionId: item.FlashPromotionProductRelationSessionID, // 编号
+			ProductId:               item.ProductID,                              // 商品id
+			FlashPromotionPrice:     item.FlashPromotionProductRelationPrice,     // 限时购价格
+			FlashPromotionCount:     item.FlashPromotionProductRelationCount,     // 限时购数量
+			FlashPromotionLimit:     item.FlashPromotionProductRelationLimit,     // 每人限购数量
+			Sort:                    item.Sort,                                   // 排序
 		})
 	}
 

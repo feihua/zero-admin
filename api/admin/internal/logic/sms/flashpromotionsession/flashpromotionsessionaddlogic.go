@@ -34,10 +34,10 @@ func NewFlashPromotionSessionAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 // FlashPromotionSessionAdd 添加限时购场次
 func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req *types.AddFlashPromotionSessionReq) (*types.AddFlashPromotionSessionResp, error) {
 	_, err := l.svcCtx.FlashPromotionSessionService.AddFlashPromotionSession(l.ctx, &smsclient.AddFlashPromotionSessionReq{
-		Name:      req.Name,
-		StartTime: req.StartTime,
-		EndTime:   req.EndTime,
-		Status:    req.Status,
+		Name:      req.Name,      // 场次名称
+		StartTime: req.StartTime, // 每日开始时间
+		EndTime:   req.EndTime,   // 每日结束时间
+		Status:    req.Status,    // 启用状态：0->不启用；1->启用
 	})
 
 	if err != nil {

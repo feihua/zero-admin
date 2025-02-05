@@ -52,12 +52,12 @@ func (l *FlashPromotionListLogic) FlashPromotionList(req *types.ListFlashPromoti
 
 	for _, item := range resp.List {
 		list = append(list, &types.ListFlashPromotionData{
-			Id:         item.Id,
-			Title:      item.Title,
-			StartDate:  item.StartDate,
-			EndDate:    item.EndDate,
-			Status:     item.Status,
-			CreateTime: item.CreateTime,
+			Id:         item.Id,         // 编号
+			Title:      item.Title,      // 标题
+			StartDate:  item.StartDate,  // 开始日期
+			EndDate:    item.EndDate,    // 结束日期
+			Status:     item.Status,     // 上下线状态
+			CreateTime: item.CreateTime, // 创建时间
 		})
 	}
 

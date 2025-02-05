@@ -53,18 +53,18 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseRe
 
 	for _, item := range resp.List {
 		list = append(list, &types.ListHomeAdvertiseData{
-			Id:         item.Id,
-			Name:       item.Name,
-			Type:       item.Type,
-			Pic:        item.Pic,
-			StartTime:  item.StartTime,
-			EndTime:    item.EndTime,
-			Status:     item.Status,
-			ClickCount: item.ClickCount,
-			OrderCount: item.OrderCount,
-			Url:        item.Url,
-			Note:       item.Note,
-			Sort:       item.Sort,
+			Id:         item.Id,         //
+			Name:       item.Name,       // 名称
+			Type:       item.Type,       // 轮播位置：0->PC首页轮播；1->app首页轮播
+			Pic:        item.Pic,        // 图片地址
+			StartTime:  item.StartTime,  // 开始时间
+			EndTime:    item.EndTime,    // 结束时间
+			Status:     item.Status,     // 上下线状态：0->下线；1->上线
+			ClickCount: item.ClickCount, // 点击数
+			OrderCount: item.OrderCount, // 下单数
+			Url:        item.Url,        // 链接地址
+			Note:       item.Note,       // 备注
+			Sort:       item.Sort,       // 排序
 		})
 	}
 

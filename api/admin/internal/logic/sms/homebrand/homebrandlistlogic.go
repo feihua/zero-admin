@@ -50,11 +50,11 @@ func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.L
 
 	for _, item := range resp.List {
 		list = append(list, &types.ListHomeBrandData{
-			Id:              item.Id,
-			BrandId:         item.BrandId,
-			BrandName:       item.BrandName,
-			RecommendStatus: item.RecommendStatus,
-			Sort:            item.Sort,
+			Id:              item.Id,              //
+			BrandId:         item.BrandId,         // 商品品牌id
+			BrandName:       item.BrandName,       // 商品品牌名称
+			RecommendStatus: item.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
+			Sort:            item.Sort,            // 排序
 		})
 	}
 
