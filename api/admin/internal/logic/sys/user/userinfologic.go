@@ -58,6 +58,7 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 			Name:     item.Name,
 			ParentId: item.ParentId,
 			Icon:     item.Icon,
+			VueIcon:  item.VueIcon,
 		})
 	}
 
