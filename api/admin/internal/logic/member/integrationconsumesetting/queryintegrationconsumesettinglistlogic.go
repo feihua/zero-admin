@@ -47,12 +47,12 @@ func (l *QueryIntegrationConsumeSettingListLogic) QueryIntegrationConsumeSetting
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryIntegrationConsumeSettingListData{
-			CouponStatus:       item.CouponStatus,
-			DeductionPerAmount: item.DeductionPerAmount,
-			Id:                 item.Id,
-			IsDefault:          item.IsDefault,
-			MaxPercentPerOrder: item.MaxPercentPerOrder,
-			UseUnit:            item.UseUnit,
+			Id:                 item.Id,                 //
+			DeductionPerAmount: item.DeductionPerAmount, // 每一元需要抵扣的积分数量
+			MaxPercentPerOrder: item.MaxPercentPerOrder, // 每笔订单最高抵用百分比
+			UseUnit:            item.UseUnit,            // 每次使用积分最小单位100
+			IsDefault:          item.IsDefault,          // 是否默认：0->否；1->是
+			CouponStatus:       item.CouponStatus,       // 是否可以和优惠券同用；0->不可以；1->可以
 		})
 	}
 

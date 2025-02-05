@@ -1,23 +1,23 @@
 info (
-	desc:   "会员任务表"
-	author: "liufeihua"
+	desc:   "会员任务"
+	author: "刘飞华"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加会员任务表
+	// 添加会员任务请求参数
 	AddMemberTaskReq {
-		Status       int32  `json:"status"` //状态：0->禁用；1->启用
+		TaskName     string `json:"taskName"` //任务名称
 		TaskGrowth   int32  `json:"taskGrowth"` //赠送成长值
 		TaskIntegral int32  `json:"taskIntegral"` //赠送积分
-		TaskName     string `json:"taskName"` //任务名称
 		TaskType     int32  `json:"taskType"` //任务类型：0->新手任务；1->日常任务
+		Status       int32  `json:"status"` //状态：0->禁用；1->启用
 	}
 	AddMemberTaskResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除会员任务表
+	// 删除会员任务请求参数
 	DeleteMemberTaskReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -25,20 +25,20 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新会员任务表
+	// 更新会员任务请求参数
 	UpdateMemberTaskReq {
 		Id           int64  `json:"id"` //
-		Status       int32  `json:"status"` //状态：0->禁用；1->启用
+		TaskName     string `json:"taskName"` //任务名称
 		TaskGrowth   int32  `json:"taskGrowth"` //赠送成长值
 		TaskIntegral int32  `json:"taskIntegral"` //赠送积分
-		TaskName     string `json:"taskName"` //任务名称
 		TaskType     int32  `json:"taskType"` //任务类型：0->新手任务；1->日常任务
+		Status       int32  `json:"status"` //状态：0->禁用；1->启用
 	}
 	UpdateMemberTaskResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新会员任务表状态
+	// 更新会员任务状态请求参数
 	UpdateMemberTaskStatusReq {
 		Ids    []int64 `json:"ids"` //
 		Status int32   `json:"status"` //状态：0->禁用；1->启用
@@ -47,19 +47,19 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询会员任务表详情
+	// 查询会员任务详情请求参数
 	QueryMemberTaskDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryMemberTaskDetailData {
-		CreateBy     string `json:"createBy"` //创建者
-		CreateTime   string `json:"createTime"` //创建时间
 		Id           int64  `json:"id"` //
-		Status       int32  `json:"status"` //状态：0->禁用；1->启用
+		TaskName     string `json:"taskName"` //任务名称
 		TaskGrowth   int32  `json:"taskGrowth"` //赠送成长值
 		TaskIntegral int32  `json:"taskIntegral"` //赠送积分
-		TaskName     string `json:"taskName"` //任务名称
 		TaskType     int32  `json:"taskType"` //任务类型：0->新手任务；1->日常任务
+		Status       int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy     string `json:"createBy"` //创建者
+		CreateTime   string `json:"createTime"` //创建时间
 		UpdateBy     string `json:"updateBy"` //更新者
 		UpdateTime   string `json:"updateTime"` //更新时间
 	}
@@ -68,23 +68,23 @@ type (
 		Message string                    `json:"message"`
 		Data    QueryMemberTaskDetailData `json:"data"`
 	}
-	// 分页查询会员任务表列表
+	// 分页查询会员任务列表请求参数
 	QueryMemberTaskListReq {
 		Current  int64  `form:"current,default=1"` //第几页
 		PageSize int64  `form:"pageSize,default=20"` //每页的数量
-		Status   int32  `form:"status,default=2"` //状态：0->禁用；1->启用
 		TaskName string `form:"taskName,optional"` //任务名称
-		TaskType int32  `form:"taskType,default=2"` //任务类型：0->新手任务；1->日常任务
+		TaskType int32  `form:"taskType,optional"` //任务类型：0->新手任务；1->日常任务
+		Status   int32  `form:"status,default=2"` //状态：0->禁用；1->启用
 	}
 	QueryMemberTaskListData {
-		CreateBy     string `json:"createBy"` //创建者
-		CreateTime   string `json:"createTime"` //创建时间
 		Id           int64  `json:"id"` //
-		Status       int32  `json:"status"` //状态：0->禁用；1->启用
+		TaskName     string `json:"taskName"` //任务名称
 		TaskGrowth   int32  `json:"taskGrowth"` //赠送成长值
 		TaskIntegral int32  `json:"taskIntegral"` //赠送积分
-		TaskName     string `json:"taskName"` //任务名称
 		TaskType     int32  `json:"taskType"` //任务类型：0->新手任务；1->日常任务
+		Status       int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy     string `json:"createBy"` //创建者
+		CreateTime   string `json:"createTime"` //创建时间
 		UpdateBy     string `json:"updateBy"` //更新者
 		UpdateTime   string `json:"updateTime"` //更新时间
 	}
@@ -106,27 +106,27 @@ type (
 	prefix:     /api/member/task
 )
 service admin-api {
-	// 添加会员任务表
+	// 添加会员任务
 	@handler AddMemberTask
 	post /addMemberTask (AddMemberTaskReq) returns (AddMemberTaskResp)
 
-	// 删除会员任务表
+	// 删除会员任务
 	@handler DeleteMemberTask
 	get /deleteMemberTask (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
 
-	// 更新会员任务表
+	// 更新会员任务
 	@handler UpdateMemberTask
 	post /updateMemberTask (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
 
-	// 更新会员任务表状态
+	// 更新会员任务状态
 	@handler UpdateMemberTaskStatus
 	post /updateMemberTaskStatus (UpdateMemberTaskStatusReq) returns (UpdateMemberTaskStatusResp)
 
-	// 查询会员任务表详情
+	// 查询会员任务详情
 	@handler QueryMemberTaskDetail
 	get /queryMemberTaskDetail (QueryMemberTaskDetailReq) returns (QueryMemberTaskDetailResp)
 
-	// 分页查询会员任务表列表
+	// 分页查询会员任务列表
 	@handler QueryMemberTaskList
 	get /queryMemberTaskList (QueryMemberTaskListReq) returns (QueryMemberTaskListResp)
 }

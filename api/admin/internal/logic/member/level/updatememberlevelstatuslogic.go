@@ -2,13 +2,21 @@ package level
 
 import (
 	"context"
-
+	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UpdateMemberLevelStatusLogic 更新会员等级表状态状态
+/*
+Author: 刘飞华
+Date: 2025/02/05 10:34:53
+*/
 type UpdateMemberLevelStatusLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -23,8 +31,22 @@ func NewUpdateMemberLevelStatusLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
+// UpdateMemberLevelStatus 更新会员等级表状态
 func (l *UpdateMemberLevelStatusLogic) UpdateMemberLevelStatus(req *types.UpdateMemberLevelStatusReq) (resp *types.UpdateMemberLevelStatusResp, err error) {
-	// todo: add your logic here and delete this line
+	_, err = l.svcCtx.MemberLevelService.UpdateMemberLevelStatus(l.ctx, &umsclient.UpdateMemberLevelStatusReq{
+		Id:            req.Id,            //
+		DefaultStatus: req.DefaultStatus, // 是否为默认等级：0->不是；1->是
 
-	return
+	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "更新会员等级表状态失败,参数：%+v,响应：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
+
+	return &types.UpdateMemberLevelStatusResp{
+		Code:    "000000",
+		Message: "更新会员等级表状态成功",
+	}, nil
 }

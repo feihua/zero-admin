@@ -49,19 +49,19 @@ func (l *QueryMemberLevelListLogic) QueryMemberLevelList(req *types.QueryMemberL
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryMemberLevelListData{
-			Id:                 item.Id,
-			LevelName:          item.LevelName,
-			GrowthPoint:        item.GrowthPoint,
-			DefaultStatus:      item.DefaultStatus,
-			FreeFreightPoint:   item.FreeFreightPoint,
-			CommentGrowthPoint: item.CommentGrowthPoint,
-			IsFreeFreight:      item.IsFreeFreight,
-			IsSignIn:           item.IsSignIn,
-			IsComment:          item.IsComment,
-			IsPromotion:        item.IsPromotion,
-			IsMemberPrice:      item.IsMemberPrice,
-			IsBirthday:         item.IsBirthday,
-			Remark:             item.Remark,
+			Id:                 item.Id,                 //
+			LevelName:          item.LevelName,          // 等级名称
+			GrowthPoint:        item.GrowthPoint,        // 成长点
+			DefaultStatus:      item.DefaultStatus,      // 是否为默认等级：0->不是；1->是
+			FreeFreightPoint:   item.FreeFreightPoint,   // 免运费标准
+			CommentGrowthPoint: item.CommentGrowthPoint, // 每次评价获取的成长值
+			IsFreeFreight:      item.IsFreeFreight,      // 是否有免邮特权
+			IsSignIn:           item.IsSignIn,           // 是否有签到特权
+			IsComment:          item.IsComment,          // 是否有评论获奖励特权
+			IsPromotion:        item.IsPromotion,        // 是否有专享活动特权
+			IsMemberPrice:      item.IsMemberPrice,      // 是否有会员价格特权
+			IsBirthday:         item.IsBirthday,         // 是否有生日特权
+			Remark:             item.Remark,             // 备注
 		})
 	}
 

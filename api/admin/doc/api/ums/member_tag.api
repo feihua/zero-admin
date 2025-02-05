@@ -1,22 +1,22 @@
 info (
-	desc:   "用户标签表"
+	desc:   "用户标签"
 	author: "liufeihua"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加用户标签表
+	// 添加用户标签请求参数
 	AddMemberTagReq {
-		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+		TagName           string `json:"tagName"` //标签名称
 		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
 		Status            int32  `json:"status"` //状态：0->禁用；1->启用
-		TagName           string `json:"tagName"` //标签名称
+		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
 	}
 	AddMemberTagResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除用户标签表
+	// 删除用户标签请求参数
 	DeleteMemberTagReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -24,56 +24,56 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新用户标签表
+	// 更新用户标签请求参数
 	UpdateMemberTagReq {
-		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
-		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
 		Id                int64  `json:"id"` //
-		Status            int32  `json:"status"` //状态：0->禁用；1->启用
 		TagName           string `json:"tagName"` //标签名称
+		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
+		Status            int32  `json:"status"` //状态：0->禁用；1->启用
+		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
 	}
 	UpdateMemberTagResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新用户标签表状态
+	// 更新用户标签状态请求参数
 	UpdateMemberTagStatusReq {
-		Ids    []int64 `json:"ids"`
+		Ids    []int64 `json:"ids"` //
 		Status int32   `json:"status"` //状态：0->禁用；1->启用
 	}
 	UpdateMemberTagStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询用户标签表详情
+	// 查询用户标签详情请求参数
 	QueryMemberTagDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryMemberTagDetailData {
-		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
-		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
 		Id                int64  `json:"id"` //
-		Status            int32  `json:"status"` //状态：0->禁用；1->启用
 		TagName           string `json:"tagName"` //标签名称
+		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
+		Status            int32  `json:"status"` //状态：0->禁用；1->启用
+		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
 	}
 	QueryMemberTagDetailResp {
 		Code    string                   `json:"code"`
 		Message string                   `json:"message"`
 		Data    QueryMemberTagDetailData `json:"data"`
 	}
-	// 分页查询用户标签表列表
+	// 分页查询用户标签列表请求参数
 	QueryMemberTagListReq {
 		Current  int64  `form:"current,default=1"` //第几页
 		PageSize int64  `form:"pageSize,default=20"` //每页的数量
-		Status   int32  `form:"status,default=2"` //状态：0->禁用；1->启用
 		TagName  string `form:"tagName,optional"` //标签名称
+		Status   int32  `form:"status,default=2"` //状态：0->禁用；1->启用
 	}
 	QueryMemberTagListData {
-		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
-		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
 		Id                int64  `json:"id"` //
-		Status            int32  `json:"status"` //状态：0->禁用；1->启用
 		TagName           string `json:"tagName"` //标签名称
+		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
+		Status            int32  `json:"status"` //状态：0->禁用；1->启用
+		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
 	}
 	QueryMemberTagListResp {
 		Code     string                    `json:"code"`
@@ -93,27 +93,27 @@ type (
 	prefix:     /api/member/tag
 )
 service admin-api {
-	// 添加用户标签表
+	// 添加用户标签
 	@handler AddMemberTag
 	post /addMemberTag (AddMemberTagReq) returns (AddMemberTagResp)
 
-	// 删除用户标签表
+	// 删除用户标签
 	@handler DeleteMemberTag
 	get /deleteMemberTag (DeleteMemberTagReq) returns (DeleteMemberTagResp)
 
-	// 更新用户标签表
+	// 更新用户标签
 	@handler UpdateMemberTag
 	post /updateMemberTag (UpdateMemberTagReq) returns (UpdateMemberTagResp)
 
-	// 更新用户标签表状态
+	// 更新用户标签状态
 	@handler UpdateMemberTagStatus
 	post /updateMemberTagStatus (UpdateMemberTagStatusReq) returns (UpdateMemberTagStatusResp)
 
-	// 查询用户标签表详情
+	// 查询用户标签详情
 	@handler QueryMemberTagDetail
 	get /queryMemberTagDetail (QueryMemberTagDetailReq) returns (QueryMemberTagDetailResp)
 
-	// 分页查询用户标签表列表
+	// 分页查询用户标签列表
 	@handler QueryMemberTagList
 	get /queryMemberTagList (QueryMemberTagListReq) returns (QueryMemberTagListResp)
 }

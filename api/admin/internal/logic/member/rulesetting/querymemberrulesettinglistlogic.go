@@ -49,18 +49,18 @@ func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(req *types.
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryMemberRuleSettingListData{
-			ConsumePerPoint:   item.ConsumePerPoint,
-			ContinueSignDay:   item.ContinueSignDay,
-			ContinueSignPoint: item.ContinueSignPoint,
-			CreateBy:          item.CreateBy,
-			CreateTime:        item.CreateTime,
-			Id:                item.Id,
-			LowOrderAmount:    item.LowOrderAmount,
-			MaxPointPerOrder:  item.MaxPointPerOrder,
-			RuleType:          item.RuleType,
-			Status:            item.Status,
-			UpdateBy:          item.UpdateBy,
-			UpdateTime:        item.UpdateTime,
+			Id:                item.Id,                //
+			ContinueSignDay:   item.ContinueSignDay,   // 连续签到天数
+			ContinueSignPoint: item.ContinueSignPoint, // 连续签到赠送数量
+			ConsumePerPoint:   item.ConsumePerPoint,   // 每消费多少元获取1个点
+			LowOrderAmount:    item.LowOrderAmount,    // 最低获取点数的订单金额
+			MaxPointPerOrder:  item.MaxPointPerOrder,  // 每笔订单最高获取点数
+			RuleType:          item.RuleType,          // 类型：0->积分规则；1->成长值规则
+			Status:            item.Status,            // 状态：0->禁用；1->启用
+			CreateBy:          item.CreateBy,          // 创建者
+			CreateTime:        item.CreateTime,        // 创建时间
+			UpdateBy:          item.UpdateBy,          // 更新者
+			UpdateTime:        item.UpdateTime,        // 更新时间
 		})
 	}
 

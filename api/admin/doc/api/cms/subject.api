@@ -58,9 +58,9 @@ type (
 	}
 	// 更新专题表状态
 	UpdateSubjectStatusReq {
-		Ids        []int64 `json:"ids"`
-		RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐；1->推荐
-		ShowStatus int32   `json:"showStatus"` //显示状态：0->不显示；1->显示
+		Ids             []int64 `json:"ids"`
+		RecommendStatus int32   `json:"recommendStatus"` //推荐状态：0->不推荐；1->推荐
+		ShowStatus      int32   `json:"showStatus"` //显示状态：0->不显示；1->显示
 	}
 	UpdateSubjectStatusResp {
 		Code    string `json:"code"`

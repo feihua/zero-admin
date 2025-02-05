@@ -34,10 +34,10 @@ func NewAddMemberTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddM
 // AddMemberTag 添加会员标签
 func (l *AddMemberTagLogic) AddMemberTag(req *types.AddMemberTagReq) (resp *types.AddMemberTagResp, err error) {
 	_, err = l.svcCtx.MemberTagService.AddMemberTag(l.ctx, &umsclient.AddMemberTagReq{
-		TagName:           req.TagName,
-		FinishOrderCount:  req.FinishOrderCount,
-		FinishOrderAmount: req.FinishOrderAmount,
-		Status:            req.Status,
+		TagName:           req.TagName,           // 标签名称
+		FinishOrderCount:  req.FinishOrderCount,  // 自动打标签完成订单数量
+		Status:            req.Status,            // 状态：0->禁用；1->启用
+		FinishOrderAmount: req.FinishOrderAmount, // 自动打标签完成订单金额
 	})
 
 	if err != nil {

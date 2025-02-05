@@ -1,15 +1,15 @@
 info (
-	desc:   "会员积分成长规则表"
+	desc:   "会员积分成长规则"
 	author: "liufeihua"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加会员积分成长规则表
+	// 添加会员积分成长规则请求参数
 	AddMemberRuleSettingReq {
-		ConsumePerPoint   int64 `json:"consumePerPoint"` //每消费多少元获取1个点
 		ContinueSignDay   int32 `json:"continueSignDay"` //连续签到天数
 		ContinueSignPoint int32 `json:"continueSignPoint"` //连续签到赠送数量
+		ConsumePerPoint   int64 `json:"consumePerPoint"` //每消费多少元获取1个点
 		LowOrderAmount    int64 `json:"lowOrderAmount"` //最低获取点数的订单金额
 		MaxPointPerOrder  int32 `json:"maxPointPerOrder"` //每笔订单最高获取点数
 		RuleType          int32 `json:"ruleType"` //类型：0->积分规则；1->成长值规则
@@ -19,7 +19,7 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除会员积分成长规则表
+	// 删除会员积分成长规则请求参数
 	DeleteMemberRuleSettingReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -27,44 +27,45 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新会员积分成长规则表
+	// 更新会员积分成长规则请求参数
 	UpdateMemberRuleSettingReq {
-		ConsumePerPoint   int64 `json:"consumePerPoint"` //每消费多少元获取1个点
+		Id                int64 `json:"id"` //
 		ContinueSignDay   int32 `json:"continueSignDay"` //连续签到天数
 		ContinueSignPoint int32 `json:"continueSignPoint"` //连续签到赠送数量
-		Id                int64 `json:"id"` //
+		ConsumePerPoint   int64 `json:"consumePerPoint"` //每消费多少元获取1个点
 		LowOrderAmount    int64 `json:"lowOrderAmount"` //最低获取点数的订单金额
 		MaxPointPerOrder  int32 `json:"maxPointPerOrder"` //每笔订单最高获取点数
 		RuleType          int32 `json:"ruleType"` //类型：0->积分规则；1->成长值规则
+		Status            int32 `json:"status"` //状态：0->禁用；1->启用
 	}
 	UpdateMemberRuleSettingResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新会员积分成长规则表状态
+	// 更新会员积分成长规则状态请求参数
 	UpdateMemberRuleSettingStatusReq {
-		Ids    []int64 `json:"ids"`
+		Ids    []int64 `json:"ids"` //
 		Status int32   `json:"status"` //状态：0->禁用；1->启用
 	}
 	UpdateMemberRuleSettingStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询会员积分成长规则表详情
+	// 查询会员积分成长规则详情请求参数
 	QueryMemberRuleSettingDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryMemberRuleSettingDetailData {
-		ConsumePerPoint   int64  `json:"consumePerPoint"` //每消费多少元获取1个点
+		Id                int64  `json:"id"` //
 		ContinueSignDay   int32  `json:"continueSignDay"` //连续签到天数
 		ContinueSignPoint int32  `json:"continueSignPoint"` //连续签到赠送数量
-		CreateBy          string `json:"createBy"` //创建者
-		CreateTime        string `json:"createTime"` //创建时间
-		Id                int64  `json:"id"` //
+		ConsumePerPoint   int64  `json:"consumePerPoint"` //每消费多少元获取1个点
 		LowOrderAmount    int64  `json:"lowOrderAmount"` //最低获取点数的订单金额
 		MaxPointPerOrder  int32  `json:"maxPointPerOrder"` //每笔订单最高获取点数
 		RuleType          int32  `json:"ruleType"` //类型：0->积分规则；1->成长值规则
 		Status            int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy          string `json:"createBy"` //创建者
+		CreateTime        string `json:"createTime"` //创建时间
 		UpdateBy          string `json:"updateBy"` //更新者
 		UpdateTime        string `json:"updateTime"` //更新时间
 	}
@@ -73,24 +74,24 @@ type (
 		Message string                           `json:"message"`
 		Data    QueryMemberRuleSettingDetailData `json:"data"`
 	}
-	// 分页查询会员积分成长规则表列表
+	// 分页查询会员积分成长规则列表请求参数
 	QueryMemberRuleSettingListReq {
 		Current  int64 `form:"current,default=1"` //第几页
 		PageSize int64 `form:"pageSize,default=20"` //每页的数量
-		RuleType int32 `form:"ruleType,default=2"` //类型：0->积分规则；1->成长值规则
+		RuleType int32 `form:"ruleType,optional"` //类型：0->积分规则；1->成长值规则
 		Status   int32 `form:"status,default=2"` //状态：0->禁用；1->启用
 	}
 	QueryMemberRuleSettingListData {
-		ConsumePerPoint   int64  `json:"consumePerPoint"` //每消费多少元获取1个点
+		Id                int64  `json:"id"` //
 		ContinueSignDay   int32  `json:"continueSignDay"` //连续签到天数
 		ContinueSignPoint int32  `json:"continueSignPoint"` //连续签到赠送数量
-		CreateBy          string `json:"createBy"` //创建者
-		CreateTime        string `json:"createTime"` //创建时间
-		Id                int64  `json:"id"` //
+		ConsumePerPoint   int64  `json:"consumePerPoint"` //每消费多少元获取1个点
 		LowOrderAmount    int64  `json:"lowOrderAmount"` //最低获取点数的订单金额
 		MaxPointPerOrder  int32  `json:"maxPointPerOrder"` //每笔订单最高获取点数
 		RuleType          int32  `json:"ruleType"` //类型：0->积分规则；1->成长值规则
 		Status            int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy          string `json:"createBy"` //创建者
+		CreateTime        string `json:"createTime"` //创建时间
 		UpdateBy          string `json:"updateBy"` //更新者
 		UpdateTime        string `json:"updateTime"` //更新时间
 	}
@@ -112,27 +113,27 @@ type (
 	prefix:     /api/member/ruleSetting
 )
 service admin-api {
-	// 添加会员积分成长规则表
+	// 添加会员积分成长规则
 	@handler AddMemberRuleSetting
 	post /addMemberRuleSetting (AddMemberRuleSettingReq) returns (AddMemberRuleSettingResp)
 
-	// 删除会员积分成长规则表
+	// 删除会员积分成长规则
 	@handler DeleteMemberRuleSetting
 	get /deleteMemberRuleSetting (DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp)
 
-	// 更新会员积分成长规则表
+	// 更新会员积分成长规则
 	@handler UpdateMemberRuleSetting
 	post /updateMemberRuleSetting (UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp)
 
-	// 更新会员积分成长规则表状态
+	// 更新会员积分成长规则状态
 	@handler UpdateMemberRuleSettingStatus
 	post /updateMemberRuleSettingStatus (UpdateMemberRuleSettingStatusReq) returns (UpdateMemberRuleSettingStatusResp)
 
-	// 查询会员积分成长规则表详情
+	// 查询会员积分成长规则详情
 	@handler QueryMemberRuleSettingDetail
 	get /queryMemberRuleSettingDetail (QueryMemberRuleSettingDetailReq) returns (QueryMemberRuleSettingDetailResp)
 
-	// 分页查询会员积分成长规则表列表
+	// 分页查询会员积分成长规则列表
 	@handler QueryMemberRuleSettingList
 	get /queryMemberRuleSettingList (QueryMemberRuleSettingListReq) returns (QueryMemberRuleSettingListResp)
 }

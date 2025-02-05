@@ -10,22 +10,22 @@ type (
 		Id int64 `form:"id"`
 	}
 	QueryMemberStatisticsInfoDetailData {
-		AttendCount         int32  `json:"attendCount"` //关注数量
-		CollectCommentCount int32  `json:"collectCommentCount"` //
-		CollectProductCount int32  `json:"collectProductCount"` //
-		CollectSubjectCount int32  `json:"collectSubjectCount"` //
-		CollectTopicCount   int32  `json:"collectTopicCount"` //
-		CommentCount        int32  `json:"commentCount"` //评价数
-		ConsumeAmount       int64  `json:"consumeAmount"` //累计消费金额
-		CouponCount         int32  `json:"couponCount"` //优惠券数量
-		FansCount           int32  `json:"fansCount"` //粉丝数量
 		Id                  int64  `json:"id"` //
-		InviteFriendCount   int32  `json:"inviteFriendCount"` //
-		LoginCount          int32  `json:"loginCount"` //登录次数
-		MemberId            int64  `json:"memberId"` //
+		MemberId            int64  `json:"memberId"` //会员id
+		ConsumeAmount       int64  `json:"consumeAmount"` //累计消费金额
 		OrderCount          int32  `json:"orderCount"` //订单数量
-		RecentOrderTime     string `json:"recentOrderTime"` //最后一次下订单时间
+		CouponCount         int32  `json:"couponCount"` //优惠券数量
+		CommentCount        int32  `json:"commentCount"` //评价数
 		ReturnOrderCount    int32  `json:"returnOrderCount"` //退货数量
+		LoginCount          int32  `json:"loginCount"` //登录次数
+		AttendCount         int32  `json:"attendCount"` //关注数量
+		FansCount           int32  `json:"fansCount"` //粉丝数量
+		CollectProductCount int32  `json:"collectProductCount"` //收藏的商品数量
+		CollectSubjectCount int32  `json:"collectSubjectCount"` //收藏的专题活动数量
+		CollectTopicCount   int32  `json:"collectTopicCount"` //收藏的评论数量
+		CollectCommentCount int32  `json:"collectCommentCount"` //收藏的专题活动数量
+		InviteFriendCount   int32  `json:"inviteFriendCount"` //邀请好友数
+		RecentOrderTime     string `json:"recentOrderTime"` //最后一次下订单时间
 	}
 	QueryMemberStatisticsInfoDetailResp {
 		Code    string                              `json:"code"`
@@ -37,22 +37,22 @@ type (
 		PageSize int64 `form:"pageSize,default=20"`
 	}
 	QueryMemberStatisticsInfoListData {
-		AttendCount         int32  `json:"attendCount"` //关注数量
-		CollectCommentCount int32  `json:"collectCommentCount"` //
-		CollectProductCount int32  `json:"collectProductCount"` //
-		CollectSubjectCount int32  `json:"collectSubjectCount"` //
-		CollectTopicCount   int32  `json:"collectTopicCount"` //
-		CommentCount        int32  `json:"commentCount"` //评价数
-		ConsumeAmount       int64  `json:"consumeAmount"` //累计消费金额
-		CouponCount         int32  `json:"couponCount"` //优惠券数量
-		FansCount           int32  `json:"fansCount"` //粉丝数量
 		Id                  int64  `json:"id"` //
-		InviteFriendCount   int32  `json:"inviteFriendCount"` //
-		LoginCount          int32  `json:"loginCount"` //登录次数
-		MemberId            int64  `json:"memberId"` //
+		MemberId            int64  `json:"memberId"` //会员id
+		ConsumeAmount       int64  `json:"consumeAmount"` //累计消费金额
 		OrderCount          int32  `json:"orderCount"` //订单数量
-		RecentOrderTime     string `json:"recentOrderTime"` //最后一次下订单时间
+		CouponCount         int32  `json:"couponCount"` //优惠券数量
+		CommentCount        int32  `json:"commentCount"` //评价数
 		ReturnOrderCount    int32  `json:"returnOrderCount"` //退货数量
+		LoginCount          int32  `json:"loginCount"` //登录次数
+		AttendCount         int32  `json:"attendCount"` //关注数量
+		FansCount           int32  `json:"fansCount"` //粉丝数量
+		CollectProductCount int32  `json:"collectProductCount"` //收藏的商品数量
+		CollectSubjectCount int32  `json:"collectSubjectCount"` //收藏的专题活动数量
+		CollectTopicCount   int32  `json:"collectTopicCount"` //收藏的评论数量
+		CollectCommentCount int32  `json:"collectCommentCount"` //收藏的专题活动数量
+		InviteFriendCount   int32  `json:"inviteFriendCount"` //邀请好友数
+		RecentOrderTime     string `json:"recentOrderTime"` //最后一次下订单时间
 	}
 	ListMemberStatisticsInfoResp {
 		Code     string                               `json:"code"`

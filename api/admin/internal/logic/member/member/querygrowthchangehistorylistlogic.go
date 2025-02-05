@@ -48,14 +48,14 @@ func (l *QueryGrowthChangeHistoryListLogic) QueryGrowthChangeHistoryList(req *ty
 
 	for _, item := range result.List {
 		list = append(list, &types.ListChangeHistoryData{
-			Id:          item.Id,
-			MemberId:    item.MemberId,
-			CreateTime:  item.CreateTime,
-			ChangeType:  item.ChangeType,
-			ChangeCount: item.ChangeCount,
-			OperateMan:  item.OperateMan,
-			OperateNote: item.OperateNote,
-			SourceType:  item.SourceType,
+			Id:          item.Id,          //
+			MemberId:    item.MemberId,    // 会员id
+			ChangeType:  item.ChangeType,  // 改变类型：0->增加；1->减少
+			ChangeCount: item.ChangeCount, // 积分改变数量
+			OperateMan:  item.OperateMan,  // 操作人员
+			OperateNote: item.OperateNote, // 操作备注
+			SourceType:  item.SourceType,  // 积分来源：0->购物；1->管理员修改
+			CreateTime:  item.CreateTime,  // 创建时间
 		})
 	}
 

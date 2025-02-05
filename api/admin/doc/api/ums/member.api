@@ -13,24 +13,25 @@ type (
 		Status   int32  `form:"status,default=2"` // 帐号启用状态:0->禁用；1->启用
 	}
 	ListMemberData {
-		Id                    int64  `json:"id"`
-		MemberLevelId         int64  `json:"memberLevelId"`
-		Username              string `json:"username"` // 用户名
-		Nickname              string `json:"nickname"` // 昵称
-		Phone                 string `json:"phone"` // 手机号码
-		Status                int32  `json:"status"` // 帐号启用状态:0->禁用；1->启用
-		CreateTime            string `json:"createTime"` // 注册时间
-		Icon                  string `json:"icon"` // 头像
-		Gender                int32  `json:"gender"` // 性别：0->未知；1->男；2->女
-		Birthday              string `json:"birthday"` // 生日
-		City                  string `json:"city"` // 所做城市
-		Job                   string `json:"job"` // 职业
-		PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
-		SourceType            int32  `json:"sourceType"` // 用户来源
-		Integration           int32  `json:"integration"` // 积分
-		Growth                int32  `json:"growth"` // 成长值
-		LuckeyCount           int32  `json:"luckeyCount"` // 剩余抽奖次数
-		HistoryIntegration    int32  `json:"historyIntegration"` // 历史积分数量
+		Id                    int64  `json:"id"` //
+		MemberLevelId         int64  `json:"memberLevelId"` //会员等级id
+		MemberName            string `json:"memberName"` //用户名
+		Nickname              string `json:"nickname"` //昵称
+		Phone                 string `json:"phone"` //手机号码
+		MemberStatus          int32  `json:"memberStatus"` //帐号启用状态:0->禁用；1->启用
+		Icon                  string `json:"icon"` //头像
+		Gender                int32  `json:"gender"` //性别：0->未知；1->男；2->女
+		Birthday              string `json:"birthday"` //生日
+		City                  string `json:"city"` //所做城市
+		Job                   string `json:"job"` //职业
+		PersonalizedSignature string `json:"personalizedSignature"` //个性签名
+		SourceType            int32  `json:"sourceType"` //用户来源
+		Integration           int32  `json:"integration"` //积分
+		Growth                int32  `json:"growth"` //成长值
+		LotteryCount          int32  `json:"lotteryCount"` //剩余抽奖次数
+		HistoryIntegration    int32  `json:"historyIntegration"` //历史积分数量
+		CreateTime            string `json:"createTime"` //创建时间
+		UpdateTime            string `json:"updateTime"` //更新时间
 	}
 	ListMemberResp {
 		Code     string            `json:"code"`
@@ -42,24 +43,24 @@ type (
 		Total    int64             `json:"total"`
 	}
 	UpdateMemberReq {
-		Id                    int64  `json:"id"`
-		MemberLevelId         int64  `json:"memberLevelId"`
-		Username              string `json:"username"` // 用户名
-		Nickname              string `json:"nickname"` // 昵称
-		Phone                 string `json:"phone"` // 手机号码
-		Status                int32  `json:"status"` // 帐号启用状态:0->禁用；1->启用
-		CreateTime            string `json:"createTime"` // 注册时间
-		Icon                  string `json:"icon"` // 头像
-		Gender                int32  `json:"gender"` // 性别：0->未知；1->男；2->女
-		Birthday              string `json:"birthday"` // 生日
-		City                  string `json:"city"` // 所做城市
-		Job                   string `json:"job"` // 职业
-		PersonalizedSignature string `json:"personalizedSignature"` // 个性签名
-		SourceType            int32  `json:"sourceType"` // 用户来源
-		Integration           int32  `json:"integration"` // 积分
-		Growth                int32  `json:"growth"` // 成长值
-		LuckeyCount           int32  `json:"luckeyCount"` // 剩余抽奖次数
-		HistoryIntegration    int32  `json:"historyIntegration"` // 历史积分数量
+		Id                    int64  `json:"id"` //
+		MemberLevelId         int64  `json:"memberLevelId"` //会员等级id
+		MemberName            string `json:"memberName"` //用户名
+		Password              string `json:"password"` //密码
+		Nickname              string `json:"nickname"` //昵称
+		Phone                 string `json:"phone"` //手机号码
+		MemberStatus          int32  `json:"memberStatus"` //帐号启用状态:0->禁用；1->启用
+		Icon                  string `json:"icon"` //头像
+		Gender                int32  `json:"gender"` //性别：0->未知；1->男；2->女
+		Birthday              string `json:"birthday"` //生日
+		City                  string `json:"city"` //所做城市
+		Job                   string `json:"job"` //职业
+		PersonalizedSignature string `json:"personalizedSignature"` //个性签名
+		SourceType            int32  `json:"sourceType"` //用户来源
+		Integration           int32  `json:"integration"` //积分
+		Growth                int32  `json:"growth"` //成长值
+		LotteryCount          int32  `json:"lotteryCount"` //剩余抽奖次数
+		HistoryIntegration    int32  `json:"historyIntegration"` //历史积分数量
 	}
 	UpdateMemberResp {
 		Code    string `json:"code"`
@@ -78,13 +79,13 @@ type (
 		MemberId int64 `form:"memberId"`
 	}
 	ListMemberLoginLogData {
-		Id         int64  `json:"id"`
-		MemberId   int64  `json:"memberId"`
-		CreateTime string `json:"createTime"`
-		Ip         string `json:"ip"`
-		City       string `json:"city"`
-		LoginType  int32  `json:"loginType"` // 登录类型：0->PC；1->android;2->ios;3->小程序
-		Province   string `json:"province"`
+		Id         int64  `json:"id"` //
+		MemberId   int64  `json:"memberId"` //会员id
+		MemberIp   string `json:"memberIp"` //登录ip
+		City       string `json:"city"` //登录城市
+		LoginType  int32  `json:"loginType"` //登录类型：0->PC；1->android;2->ios;3->小程序
+		Province   string `json:"province"` //登录省份
+		CreateTime string `json:"createTime"` //登录时间
 	}
 	ListMemberLoginLogResp {
 		Code     string                    `json:"code"`
@@ -101,14 +102,14 @@ type (
 		MemberId int64 `form:"memberId"`
 	}
 	ListChangeHistoryData {
-		Id          int64  `json:"id"`
-		MemberId    int64  `json:"memberId"`
-		CreateTime  string `json:"createTime"`
-		ChangeType  int32  `json:"changeType"` // 改变类型：0->增加；1->减少
-		ChangeCount int32  `json:"changeCount"` // 积分改变数量
-		OperateMan  string `json:"operateMan"` // 操作人员
-		OperateNote string `json:"operateNote"` // 操作备注
-		SourceType  int32  `json:"sourceType"` // 积分来源：0->购物；1->管理员修改
+		Id          int64  `json:"id"` //
+		MemberId    int64  `json:"memberId"` //会员id
+		ChangeType  int32  `json:"changeType"` //改变类型：0->增加；1->减少
+		ChangeCount int32  `json:"changeCount"` //积分改变数量
+		OperateMan  string `json:"operateMan"` //操作人员
+		OperateNote string `json:"operateNote"` //操作备注
+		SourceType  int32  `json:"sourceType"` //积分来源：0->购物；1->管理员修改
+		CreateTime  string `json:"createTime"` //创建时间
 	}
 	ListChangeHistoryResp {
 		Current  int64                    `json:"current,default=1"`

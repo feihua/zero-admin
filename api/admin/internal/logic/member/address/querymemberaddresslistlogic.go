@@ -48,16 +48,18 @@ func (l *QueryMemberAddressListLogic) QueryMemberAddressList(req *types.ListMemb
 
 	for _, item := range result.List {
 		list = append(list, &types.ListMemberAddressData{
-			Id:            item.Id,
-			MemberId:      item.MemberId,
-			MemberName:    item.MemberName,
-			PhoneNumber:   item.PhoneNumber,
-			DefaultStatus: item.DefaultStatus,
-			PostCode:      item.PostCode,
-			Province:      item.Province,
-			City:          item.City,
-			Region:        item.Region,
-			DetailAddress: item.DetailAddress,
+			Id:            item.Id,            //
+			MemberId:      item.MemberId,      // 会员id
+			MemberName:    item.MemberName,    // 收货人名称
+			PhoneNumber:   item.PhoneNumber,   // 收货人电话
+			DefaultStatus: item.DefaultStatus, // 是否为默认
+			PostCode:      item.PostCode,      // 邮政编码
+			Province:      item.Province,      // 省份/直辖市
+			City:          item.City,          // 城市
+			Region:        item.Region,        // 区
+			DetailAddress: item.DetailAddress, // 详细地址(街道)
+			CreateTime:    item.CreateTime,    // 创建时间
+			UpdateTime:    item.UpdateTime,    // 更新时间
 		})
 	}
 

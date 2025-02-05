@@ -48,13 +48,13 @@ func (l *QueryMemberLoginLogListLogic) QueryMemberLoginLogList(req *types.ListMe
 
 	for _, item := range result.List {
 		list = append(list, &types.ListMemberLoginLogData{
-			Id:         item.Id,
-			MemberId:   item.MemberId,
-			CreateTime: item.CreateTime,
-			Ip:         item.MemberIp,
-			City:       item.City,
-			LoginType:  item.LoginType,
-			Province:   item.Province,
+			Id:         item.Id,         //
+			MemberId:   item.MemberId,   // 会员id
+			MemberIp:   item.MemberIp,   // 登录ip
+			City:       item.City,       // 登录城市
+			LoginType:  item.LoginType,  // 登录类型：0->PC；1->android;2->ios;3->小程序
+			Province:   item.Province,   // 登录省份
+			CreateTime: item.CreateTime, // 登录时间
 		})
 	}
 

@@ -34,11 +34,12 @@ func NewUpdateIntegrationConsumeSettingLogic(ctx context.Context, svcCtx *svc.Se
 // UpdateIntegrationConsumeSetting 更新积分消费设置
 func (l *UpdateIntegrationConsumeSettingLogic) UpdateIntegrationConsumeSetting(req *types.UpdateIntegrationConsumeSettingReq) (resp *types.UpdateIntegrationConsumeSettingResp, err error) {
 	_, err = l.svcCtx.IntegrationConsumeSettingService.UpdateIntegrationConsumeSetting(l.ctx, &umsclient.UpdateIntegrationConsumeSettingReq{
-		CouponStatus:       req.CouponStatus,
-		DeductionPerAmount: req.DeductionPerAmount,
-		Id:                 req.Id,
-		MaxPercentPerOrder: req.MaxPercentPerOrder,
-		UseUnit:            req.UseUnit,
+		Id:                 req.Id,                 //
+		DeductionPerAmount: req.DeductionPerAmount, // 每一元需要抵扣的积分数量
+		MaxPercentPerOrder: req.MaxPercentPerOrder, // 每笔订单最高抵用百分比
+		UseUnit:            req.UseUnit,            // 每次使用积分最小单位100
+		IsDefault:          req.IsDefault,          // 是否默认：0->否；1->是
+		CouponStatus:       req.CouponStatus,       // 是否可以和优惠券同用；0->不可以；1->可以
 	})
 
 	if err != nil {

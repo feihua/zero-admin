@@ -5,19 +5,19 @@ info (
 )
 
 type (
-	// 添加积分消费设置
+	// 添加积分消费设置请求参数
 	AddIntegrationConsumeSettingReq {
-		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
 		DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
-		IsDefault          int32 `json:"isDefault"` //是否默认：0->否；1->是
 		MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
 		UseUnit            int32 `json:"useUnit"` //每次使用积分最小单位100
+		IsDefault          int32 `json:"isDefault"` //是否默认：0->否；1->是
+		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
 	}
 	AddIntegrationConsumeSettingResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除积分消费设置
+	// 删除积分消费设置请求参数
 	DeleteIntegrationConsumeSettingReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -25,19 +25,20 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新积分消费设置
+	// 更新积分消费设置请求参数
 	UpdateIntegrationConsumeSettingReq {
-		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
-		DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
 		Id                 int64 `json:"id"` //
+		DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
 		MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
 		UseUnit            int32 `json:"useUnit"` //每次使用积分最小单位100
+		IsDefault          int32 `json:"isDefault"` //是否默认：0->否；1->是
+		CouponStatus       int32 `json:"couponStatus,default=2"` //是否可以和优惠券同用；0->不可以；1->可以
 	}
 	UpdateIntegrationConsumeSettingResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新积分消费设置状态
+	// 更新积分消费设置状态请求参数
 	UpdateIntegrationConsumeSettingStatusReq {
 		Id        int64 `json:"id"` //
 		IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
@@ -46,41 +47,35 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询积分消费设置详情
+	// 查询积分消费设置详情请求参数
 	QueryIntegrationConsumeSettingDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryIntegrationConsumeSettingDetailData {
-		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
-		DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
 		Id                 int64 `json:"id"` //
-		IsDefault          int32 `json:"isDefault"` //是否默认：0->否；1->是
+		DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
 		MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
 		UseUnit            int32 `json:"useUnit"` //每次使用积分最小单位100
+		IsDefault          int32 `json:"isDefault"` //是否默认：0->否；1->是
+		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
 	}
 	QueryIntegrationConsumeSettingDetailResp {
 		Code    string                                   `json:"code"`
 		Message string                                   `json:"message"`
 		Data    QueryIntegrationConsumeSettingDetailData `json:"data"`
 	}
-	// 分页查询积分消费设置列表
+	// 分页查询积分消费设置列表请求参数
 	QueryIntegrationConsumeSettingListReq {
-		Current            int64 `form:"current,default=1"` //第几页
-		PageSize           int64 `form:"pageSize,default=20"` //每页的数量
-		CouponStatus       int32 `form:"couponStatus,optional"` //是否可以和优惠券同用；0->不可以；1->可以
-		DeductionPerAmount int32 `form:"deductionPerAmount,optional"` //每一元需要抵扣的积分数量
-		Id                 int64 `form:"id,optional"` //
-		IsDefault          int32 `form:"isDefault,optional"` //是否默认：0->否；1->是
-		MaxPercentPerOrder int32 `form:"maxPercentPerOrder,optional"` //每笔订单最高抵用百分比
-		UseUnit            int32 `form:"useUnit,optional"` //每次使用积分最小单位100
+		Current  int64 `form:"current,default=1"` //第几页
+		PageSize int64 `form:"pageSize,default=20"` //每页的数量
 	}
 	QueryIntegrationConsumeSettingListData {
-		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
-		DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
 		Id                 int64 `json:"id"` //
-		IsDefault          int32 `json:"isDefault"` //是否默认：0->否；1->是
+		DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
 		MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
 		UseUnit            int32 `json:"useUnit"` //每次使用积分最小单位100
+		IsDefault          int32 `json:"isDefault"` //是否默认：0->否；1->是
+		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
 	}
 	QueryIntegrationConsumeSettingListResp {
 		Code     string                                    `json:"code"`

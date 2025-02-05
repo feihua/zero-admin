@@ -50,16 +50,16 @@ func (l *QueryMemberTaskListLogic) QueryMemberTaskList(req *types.QueryMemberTas
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryMemberTaskListData{
-			CreateBy:     item.CreateBy,
-			CreateTime:   item.CreateTime,
-			Id:           item.Id,
-			Status:       item.Status,
-			TaskGrowth:   item.TaskGrowth,
-			TaskIntegral: item.TaskIntegral,
-			TaskName:     item.TaskName,
-			TaskType:     item.TaskType,
-			UpdateBy:     item.UpdateBy,
-			UpdateTime:   item.UpdateTime,
+			Id:           item.Id,           //
+			TaskName:     item.TaskName,     // 任务名称
+			TaskGrowth:   item.TaskGrowth,   // 赠送成长值
+			TaskIntegral: item.TaskIntegral, // 赠送积分
+			TaskType:     item.TaskType,     // 任务类型：0->新手任务；1->日常任务
+			Status:       item.Status,       // 状态：0->禁用；1->启用
+			CreateBy:     item.CreateBy,     // 创建者
+			CreateTime:   item.CreateTime,   // 创建时间
+			UpdateBy:     item.UpdateBy,     // 更新者
+			UpdateTime:   item.UpdateTime,   // 更新时间
 		})
 	}
 

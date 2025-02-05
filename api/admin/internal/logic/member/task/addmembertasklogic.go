@@ -34,12 +34,12 @@ func NewAddMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 // AddMemberTask 添加会员任务
 func (l *AddMemberTaskLogic) AddMemberTask(req *types.AddMemberTaskReq) (resp *types.AddMemberTaskResp, err error) {
 	_, err = l.svcCtx.MemberTaskService.AddMemberTask(l.ctx, &umsclient.AddMemberTaskReq{
+		TaskName:     req.TaskName,     // 任务名称
+		TaskGrowth:   req.TaskGrowth,   // 赠送成长值
+		TaskIntegral: req.TaskIntegral, // 赠送积分
+		TaskType:     req.TaskType,     // 任务类型：0->新手任务；1->日常任务
+		Status:       req.Status,       // 状态：0->禁用；1->启用
 		CreateBy:     l.ctx.Value("userName").(string),
-		TaskName:     req.TaskName,
-		TaskType:     req.TaskType,
-		Status:       req.Status,
-		TaskGrowth:   req.TaskGrowth,
-		TaskIntegral: req.TaskIntegral,
 	})
 
 	if err != nil {

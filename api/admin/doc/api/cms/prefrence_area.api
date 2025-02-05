@@ -40,7 +40,7 @@ type (
 	}
 	// 更新优选专区状态请求参数
 	UpdatePreferredAreaStatusReq {
-		Ids         []int64 `json:"ids"` //主键ID
+		Ids        []int64 `json:"ids"` //主键ID
 		ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 	}
 	UpdatePreferredAreaStatusResp {

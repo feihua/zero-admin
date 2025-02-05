@@ -49,26 +49,27 @@ func (l *QueryMemberListLogic) QueryMemberList(req *types.ListMemberReq) (resp *
 
 	var list []*types.ListMemberData
 
-	for _, member := range result.List {
+	for _, item := range result.List {
 		list = append(list, &types.ListMemberData{
-			Id:                    member.Id,
-			MemberLevelId:         member.MemberLevelId,
-			Username:              member.MemberName,
-			Nickname:              member.Nickname,
-			Phone:                 member.Phone,
-			Status:                member.MemberStatus,
-			CreateTime:            member.CreateTime,
-			Icon:                  member.Icon,
-			Gender:                member.Gender,
-			Birthday:              member.Birthday,
-			City:                  member.City,
-			Job:                   member.Job,
-			PersonalizedSignature: member.PersonalizedSignature,
-			SourceType:            member.SourceType,
-			Integration:           member.Integration,
-			Growth:                member.Growth,
-			LuckeyCount:           member.LotteryCount,
-			HistoryIntegration:    member.HistoryIntegration,
+			Id:                    item.Id,                    //
+			MemberLevelId:         item.MemberLevelId,         // 会员等级id
+			MemberName:            item.MemberName,            // 用户名
+			Nickname:              item.Nickname,              // 昵称
+			Phone:                 item.Phone,                 // 手机号码
+			MemberStatus:          item.MemberStatus,          // 帐号启用状态:0->禁用；1->启用
+			Icon:                  item.Icon,                  // 头像
+			Gender:                item.Gender,                // 性别：0->未知；1->男；2->女
+			Birthday:              item.Birthday,              // 生日
+			City:                  item.City,                  // 所做城市
+			Job:                   item.Job,                   // 职业
+			PersonalizedSignature: item.PersonalizedSignature, // 个性签名
+			SourceType:            item.SourceType,            // 用户来源
+			Integration:           item.Integration,           // 积分
+			Growth:                item.Growth,                // 成长值
+			LotteryCount:          item.LotteryCount,          // 剩余抽奖次数
+			HistoryIntegration:    item.HistoryIntegration,    // 历史积分数量
+			CreateTime:            item.CreateTime,            // 创建时间
+			UpdateTime:            item.UpdateTime,            // 更新时间
 		})
 	}
 

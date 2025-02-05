@@ -49,11 +49,11 @@ func (l *QueryMemberTagListLogic) QueryMemberTagList(req *types.QueryMemberTagLi
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryMemberTagListData{
-			Id:                item.Id,
-			TagName:           item.TagName,
-			FinishOrderCount:  item.FinishOrderCount,
-			FinishOrderAmount: item.FinishOrderAmount,
-			Status:            item.Status,
+			Id:                item.Id,                //
+			TagName:           item.TagName,           // 标签名称
+			FinishOrderCount:  item.FinishOrderCount,  // 自动打标签完成订单数量
+			Status:            item.Status,            // 状态：0->禁用；1->启用
+			FinishOrderAmount: item.FinishOrderAmount, // 自动打标签完成订单金额
 		})
 	}
 
