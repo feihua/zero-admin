@@ -44,20 +44,20 @@ func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(req *types.QueryC
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryCompanyAddressListData{
-			Id:            item.Id,
-			AddressName:   item.AddressName,
-			SendStatus:    item.SendStatus,
-			ReceiveStatus: item.ReceiveStatus,
-			Name:          item.Name,
-			Phone:         item.Phone,
-			Province:      item.Province,
-			City:          item.City,
-			Region:        item.Region,
-			DetailAddress: item.DetailAddress,
-			CreateBy:      item.CreateBy,
-			CreateTime:    item.CreateTime,
-			UpdateBy:      item.UpdateBy,
-			UpdateTime:    item.UpdateTime,
+			Id:            item.Id,            //
+			AddressName:   item.AddressName,   // 地址名称
+			SendStatus:    item.SendStatus,    // 默认发货地址：0->否；1->是
+			ReceiveStatus: item.ReceiveStatus, // 是否默认收货地址：0->否；1->是
+			Name:          item.Name,          // 收发货人姓名
+			Phone:         item.Phone,         // 收货人电话
+			Province:      item.Province,      // 省/直辖市
+			City:          item.City,          // 市
+			Region:        item.Region,        // 区
+			DetailAddress: item.DetailAddress, // 详细地址
+			CreateBy:      item.CreateBy,      // 创建者
+			CreateTime:    item.CreateTime,    // 创建时间
+			UpdateBy:      item.UpdateBy,      // 更新者
+			UpdateTime:    item.UpdateTime,    // 更新时间
 		})
 	}
 

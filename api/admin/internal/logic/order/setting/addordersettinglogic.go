@@ -34,11 +34,13 @@ func NewAddOrderSettingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *A
 // AddOrderSetting 添加订单设置
 func (l *AddOrderSettingLogic) AddOrderSetting(req *types.AddOrderSettingReq) (resp *types.AddOrderSettingResp, err error) {
 	_, err = l.svcCtx.OrderSettingService.AddOrderSetting(l.ctx, &omsclient.AddOrderSettingReq{
-		FlashOrderOvertime:  req.FlashOrderOvertime,
-		NormalOrderOvertime: req.NormalOrderOvertime,
-		ConfirmOvertime:     req.ConfirmOvertime,
-		FinishOvertime:      req.FinishOvertime,
-		CommentOvertime:     req.CommentOvertime,
+		FlashOrderOvertime:  req.FlashOrderOvertime,  // 秒杀订单超时关闭时间(分)
+		NormalOrderOvertime: req.NormalOrderOvertime, // 正常订单超时时间(分)
+		ConfirmOvertime:     req.ConfirmOvertime,     // 发货后自动确认收货时间（天）
+		FinishOvertime:      req.FinishOvertime,      // 自动完成交易时间，不能申请售后（天）
+		Status:              req.Status,              // 状态：0->禁用；1->启用
+		IsDefault:           req.IsDefault,           // 是否默认：0->否；1->是
+		CommentOvertime:     req.CommentOvertime,     // 订单完成后自动好评时间（天）
 	})
 
 	if err != nil {

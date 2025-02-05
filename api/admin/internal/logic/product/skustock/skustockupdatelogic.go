@@ -36,17 +36,17 @@ func (l *SkuStockUpdateLogic) SkuStockUpdate(req types.UpdateSkuStockReq) (*type
 	var skuStockList []*pmsclient.UpdateSkuStockData
 	for _, item := range req.SkuStockList {
 		skuStockList = append(skuStockList, &pmsclient.UpdateSkuStockData{
-			Id:             item.Id,
-			ProductId:      item.ProductId,
-			SkuCode:        item.SkuCode,
-			Price:          item.Price,
-			Stock:          item.Stock,
-			LowStock:       item.LowStock,
-			Pic:            item.Pic,
-			Sale:           item.Sale,
-			PromotionPrice: item.PromotionPrice,
-			LockStock:      item.LockStock,
-			SpData:         item.SpData,
+			Id:             item.Id,             //
+			ProductId:      item.ProductId,      // 商品id
+			SkuCode:        item.SkuCode,        // sku编码
+			Price:          item.Price,          // 价格
+			Stock:          item.Stock,          // 库存
+			LowStock:       item.LowStock,       // 预警库存
+			Pic:            item.Pic,            // 展示图片
+			Sale:           item.Sale,           // 销量
+			PromotionPrice: item.PromotionPrice, // 单品促销价格
+			LockStock:      item.LockStock,      // 锁定库存
+			SpData:         item.SpData,         // 商品销售属性，json格式
 		})
 	}
 	_, err := l.svcCtx.SkuStockService.UpdateSkuStock(l.ctx, &pmsclient.UpdateSkuStockReq{

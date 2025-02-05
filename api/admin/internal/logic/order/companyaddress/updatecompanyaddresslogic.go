@@ -35,13 +35,15 @@ func NewUpdateCompanyAddressLogic(ctx context.Context, svcCtx *svc.ServiceContex
 func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(req *types.UpdateCompanyAddressReq) (resp *types.UpdateCompanyAddressResp, err error) {
 	_, err = l.svcCtx.CompanyAddressService.UpdateCompanyAddress(l.ctx, &omsclient.UpdateCompanyAddressReq{
 		Id:            req.Id,
-		AddressName:   req.AddressName,
-		Name:          req.Name,
-		Phone:         req.Phone,
-		Province:      req.Province,
-		City:          req.City,
-		Region:        req.Region,
-		DetailAddress: req.DetailAddress,
+		AddressName:   req.AddressName,   // 地址名称
+		SendStatus:    req.SendStatus,    // 默认发货地址：0->否；1->是
+		ReceiveStatus: req.ReceiveStatus, // 是否默认收货地址：0->否；1->是
+		Name:          req.Name,          // 收发货人姓名
+		Phone:         req.Phone,         // 收货人电话
+		Province:      req.Province,      // 省/直辖市
+		City:          req.City,          // 市
+		Region:        req.Region,        // 区
+		DetailAddress: req.DetailAddress, // 详细地址
 		UpdateBy:      l.ctx.Value("userName").(string),
 	})
 

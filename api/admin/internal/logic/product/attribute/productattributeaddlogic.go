@@ -34,17 +34,17 @@ func NewProductAttributeAddLogic(ctx context.Context, svcCtx *svc.ServiceContext
 // ProductAttributeAdd 添加商品属性
 func (l *ProductAttributeAddLogic) ProductAttributeAdd(req *types.AddProductAttributeReq) (resp *types.AddProductAttributeResp, err error) {
 	_, err = l.svcCtx.ProductAttributeService.AddProductAttribute(l.ctx, &pmsclient.AddProductAttributeReq{
-		ProductAttributeCategoryId: req.ProductAttributeCategoryId,
-		Name:                       req.Name,
-		SelectType:                 req.SelectType,
-		InputType:                  req.InputType,
-		InputList:                  req.InputList,
-		Sort:                       req.Sort,
-		FilterType:                 req.FilterType,
-		SearchType:                 req.SearchType,
-		RelatedStatus:              req.RelatedStatus,
-		HandAddStatus:              req.HandAddStatus,
-		Type:                       req.Type,
+		ProductAttributeCategoryId: req.ProductAttributeCategoryId, // 商品属性分类id
+		Name:                       req.Name,                       // 商品属性分类id
+		SelectType:                 req.SelectType,                 // 属性选择类型：0->唯一；1->单选；2->多选
+		InputType:                  req.InputType,                  // 属性录入方式：0->手工录入；1->从列表中选取
+		InputList:                  req.InputList,                  // 可选值列表，以逗号隔开
+		Sort:                       req.Sort,                       // 排序字段：最高的可以单独上传图片
+		FilterType:                 req.FilterType,                 // 分类筛选样式：1->普通；1->颜色
+		SearchType:                 req.SearchType,                 // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
+		RelatedStatus:              req.RelatedStatus,              // 相同属性产品是否关联；0->不关联；1->关联
+		HandAddStatus:              req.HandAddStatus,              // 是否支持手动新增；0->不支持；1->支持
+		Type:                       req.Type,                       // 属性的类型；0->规格；1->参数
 	})
 
 	if err != nil {

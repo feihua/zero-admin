@@ -34,9 +34,9 @@ func NewAddOrderReturnReasonLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // AddOrderReturnReason 添加退货原因
 func (l *AddOrderReturnReasonLogic) AddOrderReturnReason(req *types.AddOrderReturnReasonReq) (resp *types.AddOrderReturnReasonResp, err error) {
 	_, err = l.svcCtx.OrderReturnReasonService.AddOrderReturnReason(l.ctx, &omsclient.AddOrderReturnReasonReq{
-		Name:   req.Name,
-		Sort:   req.Sort,
-		Status: req.Status,
+		Name:   req.Name,   // 退货类型
+		Sort:   req.Sort,   // 排序
+		Status: req.Status, // 状态：0->不启用；1->启用
 	})
 
 	if err != nil {

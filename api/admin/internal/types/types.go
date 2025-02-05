@@ -3,14 +3,14 @@ package types
 
 type AddCompanyAddressReq struct {
 	AddressName   string `json:"addressName"`   //地址名称
-	City          string `json:"city"`          //市
-	DetailAddress string `json:"detailAddress"` //详细地址
+	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
+	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
 	Name          string `json:"name"`          //收发货人姓名
 	Phone         string `json:"phone"`         //收货人电话
 	Province      string `json:"province"`      //省/直辖市
-	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+	City          string `json:"city"`          //市
 	Region        string `json:"region"`        //区
-	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
+	DetailAddress string `json:"detailAddress"` //详细地址
 }
 
 type AddCompanyAddressResp struct {
@@ -312,13 +312,13 @@ type AddOrderReturnReasonResp struct {
 }
 
 type AddOrderSettingReq struct {
-	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
+	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
+	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
 	ConfirmOvertime     int32 `json:"confirmOvertime"`     //发货后自动确认收货时间（天）
 	FinishOvertime      int32 `json:"finishOvertime"`      //自动完成交易时间，不能申请售后（天）
-	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
-	IsDefault           int32 `json:"isDefault"`           //是否默认：0->否；1->是
-	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
 	Status              int32 `json:"status"`              //状态：0->禁用；1->启用
+	IsDefault           int32 `json:"isDefault"`           //是否默认：0->否；1->是
+	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
 }
 
 type AddOrderSettingResp struct {
@@ -386,14 +386,15 @@ type AddProductAttributeValueList struct {
 }
 
 type AddProductBrandReq struct {
-	Name          string `json:"name"`
-	FirstLetter   string `json:"firstLetter"` // 首字母
-	Sort          int32  `json:"sort"`
-	FactoryStatus int32  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
-	ShowStatus    int32  `json:"showStatus"`
-	Logo          string `json:"logo"`       // 品牌logo
-	BigPic        string `json:"bigPic"`     // 专区大图
-	BrandStory    string `json:"brandStory"` // 品牌故事
+	Name            string `json:"name"`            //品牌名称
+	FirstLetter     string `json:"firstLetter"`     //首字母
+	Sort            int32  `json:"sort"`            //排序
+	FactoryStatus   int32  `json:"factoryStatus"`   //是否为品牌制造商：0->不是；1->是
+	ShowStatus      int32  `json:"showStatus"`      //品牌显示状态
+	RecommendStatus int32  `json:"recommendStatus"` //推荐状态
+	Logo            string `json:"logo"`            //品牌logo
+	BigPic          string `json:"bigPic"`          //专区大图
+	BrandStory      string `json:"brandStory"`      //品牌故事
 }
 
 type AddProductBrandResp struct {
@@ -402,16 +403,16 @@ type AddProductBrandResp struct {
 }
 
 type AddProductCategoryReq struct {
-	ParentId               int64   `json:"parentId"` // 上级分类的编号：0表示一级分类
-	Name                   string  `json:"name"`
-	Level                  int32   `json:"level"`      // 分类级别：0->1级；1->2级
-	NavStatus              int32   `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus             int32   `json:"showStatus"` // 显示状态：0->不显示；1->显示
+	ParentId               int64   `json:"parentId"`   //上机分类的编号：0表示一级分类
+	Name                   string  `json:"name"`       //商品分类名称
+	Level                  int32   `json:"level"`      //分类级别：0->1级；1->2级
+	NavStatus              int32   `json:"navStatus"`  //是否显示在导航栏：0->不显示；1->显示
+	ShowStatus             int32   `json:"showStatus"` //显示状态：0->不显示；1->显示
 	ProductUnit            string  `json:"productUnit"`
-	Sort                   int32   `json:"sort"`
-	Icon                   string  `json:"icon"` // 图标
-	Keywords               string  `json:"keywords,optional"`
-	Description            string  `json:"description,optional"`            // 描述
+	Sort                   int32   `json:"sort"`                            //排序
+	Icon                   string  `json:"icon"`                            //图标
+	Keywords               string  `json:"keywords"`                        //关键字
+	Description            string  `json:"description"`                     //描述
 	ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
 }
 
@@ -421,48 +422,48 @@ type AddProductCategoryResp struct {
 }
 
 type AddProductData struct {
-	BrandId                    int64  `json:"brandId"`
-	ProductCategoryId          int64  `json:"productCategoryId"`
-	ProductCategoryIdArray     string `json:"productCategoryIdArray"`
-	FeightTemplateId           int64  `json:"feightTemplateId"`
-	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
-	Name                       string `json:"name"`
-	Pic                        string `json:"pic"`
-	ProductSn                  string `json:"productSn"`
-	DeleteStatus               int32  `json:"deleteStatus"`
-	PublishStatus              int32  `json:"publishStatus"`
-	NewStatus                  int32  `json:"newStatus"`
-	RecommandStatus            int32  `json:"recommandStatus"`
-	VerifyStatus               int32  `json:"verifyStatus"`
-	Sort                       int32  `json:"sort"`
-	Sale                       int32  `json:"sale"`
-	Price                      int64  `json:"price"`
-	PromotionPrice             int64  `json:"promotionPrice"`
-	GiftGrowth                 int32  `json:"giftGrowth"`
-	GiftPoint                  int32  `json:"giftPoint"`
-	UsePointLimit              int32  `json:"usePointLimit"`
-	SubTitle                   string `json:"subTitle"`
-	OriginalPrice              int64  `json:"originalPrice"`
-	Stock                      int32  `json:"stock"`
-	LowStock                   int32  `json:"lowStock"`
-	Unit                       string `json:"unit"`
-	Weight                     int64  `json:"weight"`
-	PreviewStatus              int32  `json:"previewStatus"`
-	ServiceIds                 string `json:"serviceIds"`
-	Keywords                   string `json:"keywords"`
-	Note                       string `json:"note"`
-	AlbumPics                  string `json:"albumPics"`
-	DetailTitle                string `json:"detailTitle"`
-	PromotionStartTime         string `json:"promotionStartTime"`
-	PromotionEndTime           string `json:"promotionEndTime"`
-	PromotionPerLimit          int32  `json:"promotionPerLimit"`
-	PromotionType              int32  `json:"promotionType"`
-	BrandName                  string `json:"brandName"`
-	ProductCategoryName        string `json:"productCategoryName"`
-	Description                string `json:"description"`
-	DetailDesc                 string `json:"detailDesc"`
-	DetailHTML                 string `json:"detailHtml"`
-	DetailMobileHTML           string `json:"detailMobileHtml"`
+	BrandId                    int64  `json:"brandId"`                    //品牌id
+	ProductCategoryId          int64  `json:"productCategoryId"`          //商品分类id
+	FeightTemplateId           int64  `json:"feightTemplateId"`           //商品运费模板id
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"` //商品属性分类id
+	Name                       string `json:"name"`                       //商品名称
+	Pic                        string `json:"pic"`                        //商品图片
+	ProductSn                  string `json:"productSn"`                  //货号
+	DeleteStatus               int32  `json:"deleteStatus,default=2"`     //删除状态：0->未删除；1->已删除
+	PublishStatus              int32  `json:"publishStatus,default=2"`    //上架状态：0->下架；1->上架
+	NewStatus                  int32  `json:"newStatus,default=2"`        //新品状态:0->不是新品；1->新品
+	RecommandStatus            int32  `json:"recommandStatus,default=2"`  //推荐状态；0->不推荐；1->推荐
+	VerifyStatus               int32  `json:"verifyStatus,default=2"`     //审核状态：0->未审核；1->审核通过
+	Sort                       int32  `json:"sort"`                       //排序
+	Sale                       int32  `json:"sale"`                       //销量
+	Price                      int64  `json:"price"`                      //商品价格
+	PromotionPrice             int64  `json:"promotionPrice"`             //促销价格
+	GiftGrowth                 int32  `json:"giftGrowth"`                 //赠送的成长值
+	GiftPoint                  int32  `json:"giftPoint"`                  //赠送的积分
+	UsePointLimit              int32  `json:"usePointLimit"`              //限制使用的积分数
+	SubTitle                   string `json:"subTitle"`                   //副标题
+	Description                string `json:"description"`                //商品描述
+	OriginalPrice              int64  `json:"originalPrice"`              //市场价
+	Stock                      int32  `json:"stock"`                      //库存
+	LowStock                   int32  `json:"lowStock"`                   //库存预警值
+	Unit                       string `json:"unit"`                       //单位
+	Weight                     int64  `json:"weight"`                     //商品重量，默认为克
+	PreviewStatus              int32  `json:"previewStatus,default=2"`    //是否为预告商品：0->不是；1->是
+	ServiceIds                 string `json:"serviceIds"`                 //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+	Keywords                   string `json:"keywords"`                   //搜索关键字
+	Note                       string `json:"note"`                       //备注
+	AlbumPics                  string `json:"albumPics"`                  //画册图片，连产品图片限制为5张，以逗号分割
+	DetailTitle                string `json:"detailTitle"`                //详情标题
+	DetailDesc                 string `json:"detailDesc"`                 //详情描述
+	DetailHtml                 string `json:"detailHtml"`                 //产品详情网页内容
+	DetailMobileHtml           string `json:"detailMobileHtml"`           //移动端网页详情
+	PromotionStartTime         string `json:"promotionStartTime"`         //促销开始时间
+	PromotionEndTime           string `json:"promotionEndTime"`           //促销结束时间
+	PromotionPerLimit          int32  `json:"promotionPerLimit"`          //活动限购数量
+	PromotionType              int32  `json:"promotionType"`              //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+	BrandName                  string `json:"brandName"`                  //品牌名称
+	ProductCategoryName        string `json:"productCategoryName"`        //商品分类名称
+	ProductCategoryIdArray     string `json:"productCategoryIdArray"`     //商品分类id字符串
 }
 
 type AddProductFullReductionList struct {
@@ -513,15 +514,15 @@ type AddRoleResp struct {
 }
 
 type AddSkuStockList struct {
-	SkuCode        string `json:"skuCode"`
-	Price          int64  `json:"price"`
-	Stock          int32  `json:"stock"`
-	LowStock       int32  `json:"lowStock"`
-	Pic            string `json:"pic"`
-	Sale           int32  `json:"sale"`
-	PromotionPrice int64  `json:"promotionPrice"`
-	LockStock      int32  `json:"lockStock"`
-	SPData         string `json:"spData"`
+	SkuCode        string `json:"skuCode"`        //sku编码
+	Price          int64  `json:"price"`          //价格
+	Stock          int32  `json:"stock"`          //库存
+	LowStock       int32  `json:"lowStock"`       //预警库存
+	Pic            string `json:"pic"`            //展示图片
+	Sale           int32  `json:"sale"`           //销量
+	PromotionPrice int64  `json:"promotionPrice"` //单品促销价格
+	LockStock      int32  `json:"lockStock"`      //锁定库存
+	SpData         string `json:"spData"`         //商品销售属性，json格式
 }
 
 type AddSubjectReq struct {
@@ -565,17 +566,22 @@ type AddUserResp struct {
 }
 
 type BrandData struct {
-	Id                  int64  `json:"id"`
-	Name                string `json:"name"`
-	FirstLetter         string `json:"firstLetter"` // 首字母
-	Sort                int32  `json:"sort"`
-	FactoryStatus       int32  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
-	ShowStatus          int32  `json:"showStatus"`
-	ProductCount        int32  `json:"productCount"`        // 产品数量
-	ProductCommentCount int32  `json:"productCommentCount"` // 产品评论数量
-	Logo                string `json:"logo"`                // 品牌logo
-	BigPic              string `json:"bigPic"`              // 专区大图
-	BrandStory          string `json:"brandStory"`          // 品牌故事
+	Id                  int64  `json:"id"`                  //
+	Name                string `json:"name"`                //品牌名称
+	FirstLetter         string `json:"firstLetter"`         //首字母
+	Sort                int32  `json:"sort"`                //排序
+	FactoryStatus       int32  `json:"factoryStatus"`       //是否为品牌制造商：0->不是；1->是
+	ShowStatus          int32  `json:"showStatus"`          //品牌显示状态
+	RecommendStatus     int32  `json:"recommendStatus"`     //推荐状态
+	ProductCount        int32  `json:"productCount"`        //产品数量
+	ProductCommentCount int32  `json:"productCommentCount"` //产品评论数量
+	Logo                string `json:"logo"`                //品牌logo
+	BigPic              string `json:"bigPic"`              //专区大图
+	BrandStory          string `json:"brandStory"`          //品牌故事
+	CreateBy            string `json:"createBy"`            //创建者
+	CreateTime          string `json:"createTime"`          //创建时间
+	UpdateBy            string `json:"updateBy"`            //更新者
+	UpdateTime          string `json:"updateTime"`          //更新时间
 }
 
 type CancelAuthorizationReq struct {
@@ -1460,76 +1466,76 @@ type ListMenuTreeVue struct {
 }
 
 type ListOrderData struct {
-	Id                    int64                    `json:"id"` // 订单id
-	MemberId              int64                    `json:"memberId"`
-	CouponId              int64                    `json:"couponId"`
-	OrderSn               string                   `json:"orderSn"`                // 订单编号
-	CreateTime            string                   `json:"createTime"`             // 提交时间
-	MemberUsername        string                   `json:"memberUserName"`         // 用户帐号
-	TotalAmount           int64                    `json:"totalAmount"`            // 订单总金额
-	PayAmount             int64                    `json:"payAmount"`              // 应付金额（实际支付金额）
-	FreightAmount         int64                    `json:"freightAmount"`          // 运费金额
-	PromotionAmount       int64                    `json:"promotionAmount"`        // 促销优化金额（促销价、满减、阶梯价）
-	IntegrationAmount     int64                    `json:"integrationAmount"`      // 积分抵扣金额
-	CouponAmount          int64                    `json:"couponAmount"`           // 优惠券抵扣金额
-	DiscountAmount        int64                    `json:"discountAmount"`         // 管理员后台调整订单使用的折扣金额
-	PayType               int32                    `json:"payType"`                // 支付方式：0->未支付；1->支付宝；2->微信
-	SourceType            int32                    `json:"sourceType"`             // 订单来源：0->PC订单；1->app订单
-	Status                int32                    `json:"status"`                 // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-	OrderType             int32                    `json:"orderType"`              // 订单类型：0->正常订单；1->秒杀订单
-	DeliveryCompany       string                   `json:"deliveryCompany"`        // 物流公司(配送方式)
-	DeliverySn            string                   `json:"deliverySn"`             // 物流单号
-	AutoConfirmDay        int32                    `json:"autoConfirmDay"`         // 自动确认时间（天）
-	Integration           int32                    `json:"integration"`            // 可以获得的积分
-	Growth                int32                    `json:"growth"`                 // 可以活动的成长值
-	PromotionInfo         string                   `json:"promotionInfo"`          // 活动信息
-	BillType              int32                    `json:"billType"`               // 发票类型：0->不开发票；1->电子发票；2->纸质发票
-	BillHeader            string                   `json:"billHeader"`             // 发票抬头
-	BillContent           string                   `json:"billContent"`            // 发票内容
-	BillReceiverPhone     string                   `json:"billReceiverPhone"`      // 收票人电话
-	BillReceiverEmail     string                   `json:"billReceiverEmail"`      // 收票人邮箱
-	ReceiverName          string                   `json:"receiverName"`           // 收货人姓名
-	ReceiverPhone         string                   `json:"receiverPhone"`          // 收货人电话
-	ReceiverPostCode      string                   `json:"receiverPostCode"`       // 收货人邮编
-	ReceiverProvince      string                   `json:"receiverProvince"`       // 省份/直辖市
-	ReceiverCity          string                   `json:"receiverCity"`           // 城市
-	ReceiverRegion        string                   `json:"receiverRegion"`         // 区
-	ReceiverDetailAddress string                   `json:"receiverDetailAddress"`  // 详细地址
-	Note                  string                   `json:"note"`                   // 订单备注
-	ConfirmStatus         int32                    `json:"confirmStatus"`          // 确认收货状态：0->未确认；1->已确认
-	DeleteStatus          int32                    `json:"deleteStatus"`           // 删除状态：0->未删除；1->已删除
-	UseIntegration        int32                    `json:"useIntegration"`         // 下单时使用的积分
-	PaymentTime           string                   `json:"paymentTime"`            // 支付时间
-	DeliveryTime          string                   `json:"deliveryTime"`           // 发货时间
-	ReceiveTime           string                   `json:"receiveTime"`            // 确认收货时间
-	CommentTime           string                   `json:"commentTime"`            // 评价时间
-	ModifyTime            string                   `json:"modifyTime"`             // 修改时间
+	Id                    int64                    `json:"id"`                     //订单id
+	MemberId              int64                    `json:"memberId"`               //会员id
+	CouponId              int64                    `json:"couponId"`               //优惠券id
+	OrderSn               string                   `json:"orderSn"`                //订单编号
+	CreateTime            string                   `json:"createTime"`             //提交时间
+	MemberUsername        string                   `json:"memberUsername"`         //用户帐号
+	TotalAmount           int64                    `json:"totalAmount"`            //订单总金额
+	PayAmount             int64                    `json:"payAmount"`              //应付金额（实际支付金额）
+	FreightAmount         int64                    `json:"freightAmount"`          //运费金额
+	PromotionAmount       int64                    `json:"promotionAmount"`        //促销优化金额（促销价、满减、阶梯价）
+	IntegrationAmount     int64                    `json:"integrationAmount"`      //积分抵扣金额
+	CouponAmount          int64                    `json:"couponAmount"`           //优惠券抵扣金额
+	DiscountAmount        int64                    `json:"discountAmount"`         //管理员后台调整订单使用的折扣金额
+	PayType               int32                    `json:"payType"`                //支付方式：0->未支付；1->支付宝；2->微信
+	SourceType            int32                    `json:"sourceType"`             //订单来源：0->PC订单；1->app订单
+	Status                int32                    `json:"status"`                 //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+	OrderType             int32                    `json:"orderType"`              //订单类型：0->正常订单；1->秒杀订单
+	DeliveryCompany       string                   `json:"deliveryCompany"`        //物流公司(配送方式)
+	DeliverySn            string                   `json:"deliverySn"`             //物流单号
+	AutoConfirmDay        int32                    `json:"autoConfirmDay"`         //自动确认时间（天）
+	Integration           int32                    `json:"integration"`            //可以获得的积分
+	Growth                int32                    `json:"growth"`                 //可以活动的成长值
+	PromotionInfo         string                   `json:"promotionInfo"`          //活动信息
+	BillType              int32                    `json:"billType"`               //发票类型：0->不开发票；1->电子发票；2->纸质发票
+	BillHeader            string                   `json:"billHeader"`             //发票抬头
+	BillContent           string                   `json:"billContent"`            //发票内容
+	BillReceiverPhone     string                   `json:"billReceiverPhone"`      //收票人电话
+	BillReceiverEmail     string                   `json:"billReceiverEmail"`      //收票人邮箱
+	ReceiverName          string                   `json:"receiverName"`           //收货人姓名
+	ReceiverPhone         string                   `json:"receiverPhone"`          //收货人电话
+	ReceiverPostCode      string                   `json:"receiverPostCode"`       //收货人邮编
+	ReceiverProvince      string                   `json:"receiverProvince"`       //省份/直辖市
+	ReceiverCity          string                   `json:"receiverCity"`           //城市
+	ReceiverRegion        string                   `json:"receiverRegion"`         //区
+	ReceiverDetailAddress string                   `json:"receiverDetailAddress"`  //详细地址
+	Note                  string                   `json:"note"`                   //订单备注
+	ConfirmStatus         int32                    `json:"confirmStatus"`          //确认收货状态：0->未确认；1->已确认
+	DeleteStatus          int32                    `json:"deleteStatus"`           //删除状态：0->未删除；1->已删除
+	UseIntegration        int32                    `json:"useIntegration"`         //下单时使用的积分
+	PaymentTime           string                   `json:"paymentTime"`            //支付时间
+	DeliveryTime          string                   `json:"deliveryTime"`           //发货时间
+	ReceiveTime           string                   `json:"receiveTime"`            //确认收货时间
+	CommentTime           string                   `json:"commentTime"`            //评价时间
+	ModifyTime            string                   `json:"modifyTime"`             //修改时间
 	ListOperateHistory    []OperateHistoryListData `json:"listOperateHistoryData"` // 操作历史数据
 	ListOrderItem         []ListOrderItemData      `json:"listOrderItemData"`      // 商品数据
 }
 
 type ListOrderItemData struct {
-	Id                int64  `json:"id"`
-	OrderId           int64  `json:"orderId"` // 订单id
-	OrderSn           string `json:"orderSn"` // 订单编号
-	ProductId         int64  `json:"productId"`
-	ProductPic        string `json:"productPic"`
-	ProductName       string `json:"productName"`
-	ProductBrand      string `json:"productBrand"`
-	ProductSn         string `json:"productSn"`
-	ProductPrice      int64  `json:"productPrice"`      // 销售价格
-	ProductQuantity   int32  `json:"productQuantity"`   // 购买数量
-	ProductSkuId      int64  `json:"productSkuId"`      // 商品sku编号
-	ProductSkuCode    string `json:"productSkuCode"`    // 商品sku条码
-	ProductCategoryId int64  `json:"productCategoryId"` // 商品分类id
-	PromotionName     string `json:"promotionName"`     // 商品促销名称
-	PromotionAmount   int64  `json:"promotionAmount"`   // 商品促销分解金额
-	CouponAmount      int64  `json:"couponAmount"`      // 优惠券优惠分解金额
-	IntegrationAmount int64  `json:"integrationAmount"` // 积分优惠分解金额
-	RealAmount        int64  `json:"realAmount"`        // 该商品经过优惠后的分解金额
-	GiftIntegration   int32  `json:"giftIntegration"`
-	GiftGrowth        int32  `json:"gift_growth"`
-	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	Id                int64  `json:"id"`                //
+	OrderId           int64  `json:"orderId"`           //订单id
+	OrderSn           string `json:"orderSn"`           //订单编号
+	ProductId         int64  `json:"productId"`         //商品id
+	ProductPic        string `json:"productPic"`        //商品图片
+	ProductName       string `json:"productName"`       //商品名称
+	ProductBrand      string `json:"productBrand"`      //商品品牌
+	ProductSn         string `json:"productSn"`         //货号
+	ProductPrice      int64  `json:"productPrice"`      //销售价格
+	ProductQuantity   int32  `json:"productQuantity"`   //购买数量
+	ProductSkuId      int64  `json:"productSkuId"`      //商品sku编号
+	ProductSkuCode    string `json:"productSkuCode"`    //商品sku条码
+	ProductCategoryId int64  `json:"productCategoryId"` //商品分类id
+	PromotionName     string `json:"promotionName"`     //商品促销名称
+	PromotionAmount   int64  `json:"promotionAmount"`   //商品促销分解金额
+	CouponAmount      int64  `json:"couponAmount"`      //优惠券优惠分解金额
+	IntegrationAmount int64  `json:"integrationAmount"` //积分优惠分解金额
+	RealAmount        int64  `json:"realAmount"`        //该商品经过优惠后的分解金额
+	GiftIntegration   int32  `json:"giftIntegration"`   //
+	GiftGrowth        int32  `json:"giftGrowth"`        //
+	ProductAttr       string `json:"productAttr"`       //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 }
 
 type ListOrderReq struct {
@@ -1627,17 +1633,22 @@ type ListProductAttributeResp struct {
 }
 
 type ListProductBrandData struct {
-	Id                  int64  `json:"id"`
-	Name                string `json:"name"`
-	FirstLetter         string `json:"firstLetter"` // 首字母
-	Sort                int32  `json:"sort"`
-	FactoryStatus       int32  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
-	ShowStatus          int32  `json:"showStatus"`
-	ProductCount        int32  `json:"productCount"`        // 产品数量
-	ProductCommentCount int32  `json:"productCommentCount"` // 产品评论数量
-	Logo                string `json:"logo"`                // 品牌logo
-	BigPic              string `json:"bigPic"`              // 专区大图
-	BrandStory          string `json:"brandStory"`          // 品牌故事
+	Id                  int64  `json:"id"`                  //
+	Name                string `json:"name"`                //品牌名称
+	FirstLetter         string `json:"firstLetter"`         //首字母
+	Sort                int32  `json:"sort"`                //排序
+	FactoryStatus       int32  `json:"factoryStatus"`       //是否为品牌制造商：0->不是；1->是
+	ShowStatus          int32  `json:"showStatus"`          //品牌显示状态
+	RecommendStatus     int32  `json:"recommendStatus"`     //推荐状态
+	ProductCount        int32  `json:"productCount"`        //产品数量
+	ProductCommentCount int32  `json:"productCommentCount"` //产品评论数量
+	Logo                string `json:"logo"`                //品牌logo
+	BigPic              string `json:"bigPic"`              //专区大图
+	BrandStory          string `json:"brandStory"`          //品牌故事
+	CreateBy            string `json:"createBy"`            //创建者
+	CreateTime          string `json:"createTime"`          //创建时间
+	UpdateBy            string `json:"updateBy"`            //更新者
+	UpdateTime          string `json:"updateTime"`          //更新时间
 }
 
 type ListProductBrandReq struct {
@@ -1659,18 +1670,18 @@ type ListProductBrandResp struct {
 }
 
 type ListProductCategoryData struct {
-	Id           int64  `json:"id"`
-	ParentId     int64  `json:"parentId"` // 上级分类的编号：0表示一级分类
-	Name         string `json:"name"`
-	Level        int32  `json:"level"` // 分类级别：0->1级；1->2级
-	ProductCount int32  `json:"productCount"`
-	ProductUnit  string `json:"productUnit"`
-	NavStatus    int32  `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus   int32  `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	Sort         int32  `json:"sort"`
-	Icon         string `json:"icon"` // 图标
-	Keywords     string `json:"keywords"`
-	Description  string `json:"description"` // 描述
+	Id           int64  `json:"id"`           //
+	ParentId     int64  `json:"parentId"`     //上机分类的编号：0表示一级分类
+	Name         string `json:"name"`         //商品分类名称
+	Level        int32  `json:"level"`        //分类级别：0->1级；1->2级
+	ProductCount int32  `json:"productCount"` //商品数量
+	ProductUnit  string `json:"productUnit"`  //商品数量
+	NavStatus    int32  `json:"navStatus"`    //是否显示在导航栏：0->不显示；1->显示
+	ShowStatus   int32  `json:"showStatus"`   //显示状态：0->不显示；1->显示
+	Sort         int32  `json:"sort"`         //排序
+	Icon         string `json:"icon"`         //图标
+	Keywords     string `json:"keywords"`     //关键字
+	Description  string `json:"description"`  //描述
 }
 
 type ListProductCategoryReq struct {
@@ -1692,17 +1703,17 @@ type ListProductCategoryResp struct {
 }
 
 type ListSkuStockData struct {
-	Id             int64  `json:"id"`
-	ProductId      int64  `json:"productId"`
-	SkuCode        string `json:"skuCode"` // sku编码
-	Price          int64  `json:"price"`
-	Stock          int32  `json:"stock"`          // 库存
-	LowStock       int32  `json:"lowStock"`       // 预警库存
-	Pic            string `json:"pic"`            // 展示图片
-	Sale           int32  `json:"sale"`           // 销量
-	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
-	LockStock      int32  `json:"lockStock"`      // 锁定库存
-	SpData         string `json:"spData"`         // 商品销售属性，json格式
+	Id             int64  `json:"id"`             //
+	ProductId      int64  `json:"productId"`      //商品id
+	SkuCode        string `json:"skuCode"`        //sku编码
+	Price          int64  `json:"price"`          //价格
+	Stock          int32  `json:"stock"`          //库存
+	LowStock       int32  `json:"lowStock"`       //预警库存
+	Pic            string `json:"pic"`            //展示图片
+	Sale           int32  `json:"sale"`           //销量
+	PromotionPrice int64  `json:"promotionPrice"` //单品促销价格
+	LockStock      int32  `json:"lockStock"`      //锁定库存
+	SpData         string `json:"spData"`         //商品销售属性，json格式
 }
 
 type ListSkuStockReq struct {
@@ -1732,11 +1743,11 @@ type LoginResp struct {
 }
 
 type MemberPriceList struct {
-	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`
-	MemberLevelId   int64  `json:"memberLevelId"`
-	MemberPrice     int64  `json:"memberPrice"`
-	MemberLevelName string `json:"memberLevelName"`
+	Id              int64  `json:"id"`              //
+	ProductId       int64  `json:"productId"`       //商品id
+	MemberLevelId   int64  `json:"memberLevelId"`   //会员等级id
+	MemberPrice     int64  `json:"memberPrice"`     //会员价格
+	MemberLevelName string `json:"memberLevelName"` //会员等级名称
 }
 
 type MenuTreeListData struct {
@@ -1777,10 +1788,10 @@ type PostList struct {
 }
 
 type ProductAttributeValueList struct {
-	Id                 int64  `json:"id"`
-	ProductId          int64  `json:"productId"`
-	ProductAttributeId int64  `json:"productAttributeId"`
-	Value              string `json:"value"`
+	Id                 int64  `json:"id"`                 //
+	ProductId          int64  `json:"productId"`          //商品id
+	ProductAttributeId int64  `json:"productAttributeId"` //商品属性id
+	Value              string `json:"value"`              //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开`
 }
 
 type ProductCategoryRelation struct {
@@ -1791,49 +1802,49 @@ type ProductCategoryRelation struct {
 }
 
 type ProductData struct {
-	Id                         int64   `json:"id"`
-	BrandId                    int64   `json:"brandId"`
-	ProductCategoryId          int64   `json:"productCategoryId"`
-	ProductCategoryIdArray     []int64 `json:"productCategoryIdArray"`
-	FeightTemplateId           int64   `json:"feightTemplateId"`
-	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
-	Name                       string  `json:"name"`
-	Pic                        string  `json:"pic"`
-	ProductSn                  string  `json:"productSn"`
-	DeleteStatus               int32   `json:"deleteStatus"`
-	PublishStatus              int32   `json:"publishStatus"`
-	NewStatus                  int32   `json:"newStatus"`
-	RecommandStatus            int32   `json:"recommandStatus"`
-	VerifyStatus               int32   `json:"verifyStatus"`
-	Sort                       int32   `json:"sort"`
-	Sale                       int32   `json:"sale"`
-	Price                      int64   `json:"price"`
-	PromotionPrice             int64   `json:"promotionPrice"`
-	GiftGrowth                 int32   `json:"giftGrowth"`
-	GiftPoint                  int32   `json:"giftPoint"`
-	UsePointLimit              int32   `json:"usePointLimit"`
-	SubTitle                   string  `json:"subTitle"`
-	OriginalPrice              int64   `json:"originalPrice"`
-	Stock                      int32   `json:"stock"`
-	LowStock                   int32   `json:"lowStock"`
-	Unit                       string  `json:"unit"`
-	Weight                     int64   `json:"weight"`
-	PreviewStatus              int32   `json:"previewStatus"`
-	ServiceIds                 string  `json:"serviceIds"`
-	Keywords                   string  `json:"keywords"`
-	Note                       string  `json:"note"`
-	AlbumPics                  string  `json:"albumPics"`
-	DetailTitle                string  `json:"detailTitle"`
-	PromotionStartTime         string  `json:"promotionStartTime"`
-	PromotionEndTime           string  `json:"promotionEndTime"`
-	PromotionPerLimit          int32   `json:"promotionPerLimit"`
-	PromotionType              int32   `json:"promotionType"`
-	BrandName                  string  `json:"brandName"`
-	ProductCategoryName        string  `json:"productCategoryName"`
-	Description                string  `json:"description"`
-	DetailDesc                 string  `json:"detailDesc"`
-	DetailHTML                 string  `json:"detailHtml"`
-	DetailMobileHTML           string  `json:"detailMobileHtml"`
+	Id                         int64   `json:"id"`                         //
+	BrandId                    int64   `json:"brandId"`                    //品牌id
+	ProductCategoryId          int64   `json:"productCategoryId"`          //商品分类id
+	FeightTemplateId           int64   `json:"feightTemplateId"`           //商品运费模板id
+	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"` //商品属性分类id
+	Name                       string  `json:"name"`                       //商品名称
+	Pic                        string  `json:"pic"`                        //商品图片
+	ProductSn                  string  `json:"productSn"`                  //货号
+	DeleteStatus               int32   `json:"deleteStatus"`               //删除状态：0->未删除；1->已删除
+	PublishStatus              int32   `json:"publishStatus"`              //上架状态：0->下架；1->上架
+	NewStatus                  int32   `json:"newStatus"`                  //新品状态:0->不是新品；1->新品
+	RecommandStatus            int32   `json:"recommandStatus"`            //推荐状态；0->不推荐；1->推荐
+	VerifyStatus               int32   `json:"verifyStatus"`               //审核状态：0->未审核；1->审核通过
+	Sort                       int32   `json:"sort"`                       //排序
+	Sale                       int32   `json:"sale"`                       //销量
+	Price                      int64   `json:"price"`                      //商品价格
+	PromotionPrice             int64   `json:"promotionPrice"`             //促销价格
+	GiftGrowth                 int32   `json:"giftGrowth"`                 //赠送的成长值
+	GiftPoint                  int32   `json:"giftPoint"`                  //赠送的积分
+	UsePointLimit              int32   `json:"usePointLimit"`              //限制使用的积分数
+	SubTitle                   string  `json:"subTitle"`                   //副标题
+	Description                string  `json:"description"`                //商品描述
+	OriginalPrice              int64   `json:"originalPrice"`              //市场价
+	Stock                      int32   `json:"stock"`                      //库存
+	LowStock                   int32   `json:"lowStock"`                   //库存预警值
+	Unit                       string  `json:"unit"`                       //单位
+	Weight                     int64   `json:"weight"`                     //商品重量，默认为克
+	PreviewStatus              int32   `json:"previewStatus"`              //是否为预告商品：0->不是；1->是
+	ServiceIds                 string  `json:"serviceIds"`                 //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+	Keywords                   string  `json:"keywords"`                   //搜索关键字
+	Note                       string  `json:"note"`                       //备注
+	AlbumPics                  string  `json:"albumPics"`                  //画册图片，连产品图片限制为5张，以逗号分割
+	DetailTitle                string  `json:"detailTitle"`                //详情标题
+	DetailDesc                 string  `json:"detailDesc"`                 //详情描述
+	DetailHtml                 string  `json:"detailHtml"`                 //产品详情网页内容
+	DetailMobileHtml           string  `json:"detailMobileHtml"`           //移动端网页详情
+	PromotionStartTime         string  `json:"promotionStartTime"`         //促销开始时间
+	PromotionEndTime           string  `json:"promotionEndTime"`           //促销结束时间
+	PromotionPerLimit          int32   `json:"promotionPerLimit"`          //活动限购数量
+	PromotionType              int32   `json:"promotionType"`              //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+	BrandName                  string  `json:"brandName"`                  //品牌名称
+	ProductCategoryName        string  `json:"productCategoryName"`        //商品分类名称
+	ProductCategoryIdArray     []int64 `json:"productCategoryIdArray"`     //商品分类id字符串
 }
 
 type ProductDetailData struct {
@@ -1850,18 +1861,18 @@ type ProductDetailData struct {
 }
 
 type ProductFullReductionList struct {
-	Id          int64 `json:"id"`
-	ProductId   int64 `json:"productId"`
-	FullPrice   int64 `json:"fullPrice"`
-	ReducePrice int64 `json:"reducePrice"`
+	Id          int64 `json:"id"`          //
+	ProductId   int64 `json:"productId"`   //商品id
+	FullPrice   int64 `json:"fullPrice"`   //商品满多少
+	ReducePrice int64 `json:"reducePrice"` //商品减多少
 }
 
 type ProductLadderList struct {
-	Id        int64 `json:"id"`
-	ProductId int64 `json:"productId"`
-	Count     int32 `json:"count"`
-	Discount  int64 `json:"discount"`
-	Price     int64 `json:"price"`
+	Id        int64 `json:"id"`        //
+	ProductId int64 `json:"productId"` //商品id
+	Count     int32 `json:"count"`     //满足的商品数量
+	Discount  int64 `json:"discount"`  //折扣
+	Price     int64 `json:"price"`     //折后价格
 }
 
 type ProductRelation struct {
@@ -1869,13 +1880,6 @@ type ProductRelation struct {
 	ProductId   int64  `json:"id,optional"`        // 产品id
 	ProductName string `json:"name,optional"`      // 商品名称
 	ProductSn   string `json:"productSn,optional"` // 商品编码
-}
-
-type ProductRelationList struct {
-	Id              int64  `json:"id"`
-	PrefrenceAreaId *int64 `json:"prefrenceAreaId,omitempty"`
-	ProductId       int64  `json:"productId"`
-	SubjectId       *int64 `json:"subjectId,omitempty"`
 }
 
 type QueryByproductCategoryIdData struct {
@@ -1894,18 +1898,18 @@ type QueryByproductCategoryIdResp struct {
 }
 
 type QueryCompanyAddressDetailData struct {
-	AddressName   string `json:"addressName"`   //地址名称
-	City          string `json:"city"`          //市
-	CreateBy      string `json:"createBy"`      //创建者
-	CreateTime    string `json:"createTime"`    //创建时间
-	DetailAddress string `json:"detailAddress"` //详细地址
 	Id            int64  `json:"id"`            //
+	AddressName   string `json:"addressName"`   //地址名称
+	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
+	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
 	Name          string `json:"name"`          //收发货人姓名
 	Phone         string `json:"phone"`         //收货人电话
 	Province      string `json:"province"`      //省/直辖市
-	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+	City          string `json:"city"`          //市
 	Region        string `json:"region"`        //区
-	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
+	DetailAddress string `json:"detailAddress"` //详细地址
+	CreateBy      string `json:"createBy"`      //创建者
+	CreateTime    string `json:"createTime"`    //创建时间
 	UpdateBy      string `json:"updateBy"`      //更新者
 	UpdateTime    string `json:"updateTime"`    //更新时间
 }
@@ -1921,28 +1925,30 @@ type QueryCompanyAddressDetailResp struct {
 }
 
 type QueryCompanyAddressListData struct {
-	AddressName   string `json:"addressName"`   //地址名称
-	City          string `json:"city"`          //市
-	CreateBy      string `json:"createBy"`      //创建者
-	CreateTime    string `json:"createTime"`    //创建时间
-	DetailAddress string `json:"detailAddress"` //详细地址
 	Id            int64  `json:"id"`            //
+	AddressName   string `json:"addressName"`   //地址名称
+	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
+	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
 	Name          string `json:"name"`          //收发货人姓名
 	Phone         string `json:"phone"`         //收货人电话
 	Province      string `json:"province"`      //省/直辖市
-	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+	City          string `json:"city"`          //市
 	Region        string `json:"region"`        //区
-	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
+	DetailAddress string `json:"detailAddress"` //详细地址
+	CreateBy      string `json:"createBy"`      //创建者
+	CreateTime    string `json:"createTime"`    //创建时间
 	UpdateBy      string `json:"updateBy"`      //更新者
 	UpdateTime    string `json:"updateTime"`    //更新时间
 }
 
 type QueryCompanyAddressListReq struct {
-	Current     int64  `form:"current,default=1"`    //第几页
-	PageSize    int64  `form:"pageSize,default=20"`  //每页的数量
-	AddressName string `form:"addressName,optional"` //地址名称
-	Name        string `form:"name,optional"`        //收发货人姓名
-	Phone       string `form:"phone,optional"`       //收货人电话
+	Current       int64  `form:"current,default=1"`       //第几页
+	PageSize      int64  `form:"pageSize,default=20"`     //每页的数量
+	AddressName   string `form:"addressName,optional"`    //地址名称
+	SendStatus    int32  `form:"sendStatus,default=2"`    //默认发货地址：0->否；1->是
+	ReceiveStatus int32  `form:"receiveStatus,default=2"` //是否默认收货地址：0->否；1->是
+	Name          string `form:"name,optional"`           //收发货人姓名
+	Phone         string `form:"phone,optional"`          //收货人电话
 }
 
 type QueryCompanyAddressListResp struct {
@@ -2644,33 +2650,33 @@ type QueryOperateLogListResp struct {
 }
 
 type QueryOrderReturnApplyDetailData struct {
-	CompanyAddressId int64  `json:"companyAddressId"` //收货地址表id
-	CreateTime       string `json:"createTime"`       //申请时间
-	Description      string `json:"description"`      //描述
-	HandleMan        string `json:"handleMan"`        //处理人员
-	HandleNote       string `json:"handleNote"`       //处理备注
-	HandleTime       string `json:"handleTime"`       //处理时间
 	Id               int64  `json:"id"`               //
-	MemberUsername   string `json:"memberUserName"`   //会员用户名
 	OrderId          int64  `json:"orderId"`          //订单id
-	OrderSn          string `json:"orderSn"`          //订单编号
-	ProductAttr      string `json:"productAttr"`      //商品销售属性：颜色：红色；尺码：xl;
-	ProductBrand     string `json:"productBrand"`     //商品品牌
-	ProductCount     int32  `json:"productCount"`     //退货数量
+	CompanyAddressId int64  `json:"companyAddressId"` //收货地址表id
 	ProductId        int64  `json:"productId"`        //退货商品id
-	ProductName      string `json:"productName"`      //商品名称
-	ProductPic       string `json:"productPic"`       //商品图片
-	ProductPrice     int64  `json:"productPrice"`     //商品单价
-	ProductRealPrice int64  `json:"productRealPrice"` //商品实际支付单价
-	ProofPics        string `json:"proofPics"`        //凭证图片，以逗号隔开
-	Reason           string `json:"reason"`           //原因
-	ReceiveMan       string `json:"receiveMan"`       //收货人
-	ReceiveNote      string `json:"receiveNote"`      //收货备注
-	ReceiveTime      string `json:"receiveTime"`      //收货时间
+	OrderSn          string `json:"orderSn"`          //订单编号
+	CreateTime       string `json:"createTime"`       //申请时间
+	MemberUsername   string `json:"memberUsername"`   //会员用户名
 	ReturnAmount     int64  `json:"returnAmount"`     //退款金额
 	ReturnName       string `json:"returnName"`       //退货人姓名
 	ReturnPhone      string `json:"returnPhone"`      //退货人电话
 	Status           int32  `json:"status"`           //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleTime       string `json:"handleTime"`       //处理时间
+	ProductPic       string `json:"productPic"`       //商品图片
+	ProductName      string `json:"productName"`      //商品名称
+	ProductBrand     string `json:"productBrand"`     //商品品牌
+	ProductAttr      string `json:"productAttr"`      //商品销售属性：颜色：红色；尺码：xl;
+	ProductCount     int32  `json:"productCount"`     //退货数量
+	ProductPrice     int64  `json:"productPrice"`     //商品单价
+	ProductRealPrice int64  `json:"productRealPrice"` //商品实际支付单价
+	Reason           string `json:"reason"`           //原因
+	Description      string `json:"description"`      //描述
+	ProofPics        string `json:"proofPics"`        //凭证图片，以逗号隔开
+	HandleNote       string `json:"handleNote"`       //处理备注
+	HandleMan        string `json:"handleMan"`        //处理人员
+	ReceiveMan       string `json:"receiveMan"`       //收货人
+	ReceiveTime      string `json:"receiveTime"`      //收货时间
+	ReceiveNote      string `json:"receiveNote"`      //收货备注
 }
 
 type QueryOrderReturnApplyDetailReq struct {
@@ -2684,33 +2690,33 @@ type QueryOrderReturnApplyDetailResp struct {
 }
 
 type QueryOrderReturnApplyListData struct {
-	CompanyAddressId int64  `json:"companyAddressId"` //收货地址表id
-	CreateTime       string `json:"createTime"`       //申请时间
-	Description      string `json:"description"`      //描述
-	HandleMan        string `json:"handleMan"`        //处理人员
-	HandleNote       string `json:"handleNote"`       //处理备注
-	HandleTime       string `json:"handleTime"`       //处理时间
 	Id               int64  `json:"id"`               //
-	MemberUsername   string `json:"memberUserName"`   //会员用户名
 	OrderId          int64  `json:"orderId"`          //订单id
-	OrderSn          string `json:"orderSn"`          //订单编号
-	ProductAttr      string `json:"productAttr"`      //商品销售属性：颜色：红色；尺码：xl;
-	ProductBrand     string `json:"productBrand"`     //商品品牌
-	ProductCount     int32  `json:"productCount"`     //退货数量
+	CompanyAddressId int64  `json:"companyAddressId"` //收货地址表id
 	ProductId        int64  `json:"productId"`        //退货商品id
-	ProductName      string `json:"productName"`      //商品名称
-	ProductPic       string `json:"productPic"`       //商品图片
-	ProductPrice     int64  `json:"productPrice"`     //商品单价
-	ProductRealPrice int64  `json:"productRealPrice"` //商品实际支付单价
-	ProofPics        string `json:"proofPics"`        //凭证图片，以逗号隔开
-	Reason           string `json:"reason"`           //原因
-	ReceiveMan       string `json:"receiveMan"`       //收货人
-	ReceiveNote      string `json:"receiveNote"`      //收货备注
-	ReceiveTime      string `json:"receiveTime"`      //收货时间
+	OrderSn          string `json:"orderSn"`          //订单编号
+	CreateTime       string `json:"createTime"`       //申请时间
+	MemberUsername   string `json:"memberUsername"`   //会员用户名
 	ReturnAmount     int64  `json:"returnAmount"`     //退款金额
 	ReturnName       string `json:"returnName"`       //退货人姓名
 	ReturnPhone      string `json:"returnPhone"`      //退货人电话
 	Status           int32  `json:"status"`           //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+	HandleTime       string `json:"handleTime"`       //处理时间
+	ProductPic       string `json:"productPic"`       //商品图片
+	ProductName      string `json:"productName"`      //商品名称
+	ProductBrand     string `json:"productBrand"`     //商品品牌
+	ProductAttr      string `json:"productAttr"`      //商品销售属性：颜色：红色；尺码：xl;
+	ProductCount     int32  `json:"productCount"`     //退货数量
+	ProductPrice     int64  `json:"productPrice"`     //商品单价
+	ProductRealPrice int64  `json:"productRealPrice"` //商品实际支付单价
+	Reason           string `json:"reason"`           //原因
+	Description      string `json:"description"`      //描述
+	ProofPics        string `json:"proofPics"`        //凭证图片，以逗号隔开
+	HandleNote       string `json:"handleNote"`       //处理备注
+	HandleMan        string `json:"handleMan"`        //处理人员
+	ReceiveMan       string `json:"receiveMan"`       //收货人
+	ReceiveTime      string `json:"receiveTime"`      //收货时间
+	ReceiveNote      string `json:"receiveNote"`      //收货备注
 }
 
 type QueryOrderReturnApplyListReq struct {
@@ -2737,11 +2743,11 @@ type QueryOrderReturnApplyListResp struct {
 }
 
 type QueryOrderReturnReasonDetailData struct {
-	CreateTime string `json:"createTime"` //创建时间
 	Id         int64  `json:"id"`         //
 	Name       string `json:"name"`       //退货类型
 	Sort       int32  `json:"sort"`       //排序
 	Status     int32  `json:"status"`     //状态：0->不启用；1->启用
+	CreateTime string `json:"createTime"` //创建时间
 }
 
 type QueryOrderReturnReasonDetailReq struct {
@@ -2755,11 +2761,11 @@ type QueryOrderReturnReasonDetailResp struct {
 }
 
 type QueryOrderReturnReasonListData struct {
-	CreateTime string `json:"createTime"` //创建时间
 	Id         int64  `json:"id"`         //
 	Name       string `json:"name"`       //退货类型
 	Sort       int32  `json:"sort"`       //排序
 	Status     int32  `json:"status"`     //状态：0->不启用；1->启用
+	CreateTime string `json:"createTime"` //创建时间
 }
 
 type QueryOrderReturnReasonListReq struct {
@@ -2780,14 +2786,14 @@ type QueryOrderReturnReasonListResp struct {
 }
 
 type QueryOrderSettingDetailData struct {
-	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
+	Id                  int64 `json:"id"`                  //
+	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
+	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
 	ConfirmOvertime     int32 `json:"confirmOvertime"`     //发货后自动确认收货时间（天）
 	FinishOvertime      int32 `json:"finishOvertime"`      //自动完成交易时间，不能申请售后（天）
-	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
-	Id                  int64 `json:"id"`                  //
-	IsDefault           int32 `json:"isDefault"`           //是否默认：0->否；1->是
-	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
 	Status              int32 `json:"status"`              //状态：0->禁用；1->启用
+	IsDefault           int32 `json:"isDefault"`           //是否默认：0->否；1->是
+	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
 }
 
 type QueryOrderSettingDetailReq struct {
@@ -2801,14 +2807,14 @@ type QueryOrderSettingDetailResp struct {
 }
 
 type QueryOrderSettingListData struct {
-	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
+	Id                  int64 `json:"id"`                  //
+	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
+	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
 	ConfirmOvertime     int32 `json:"confirmOvertime"`     //发货后自动确认收货时间（天）
 	FinishOvertime      int32 `json:"finishOvertime"`      //自动完成交易时间，不能申请售后（天）
-	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
-	Id                  int64 `json:"id"`                  //
-	IsDefault           int32 `json:"isDefault"`           //是否默认：0->否；1->是
-	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
 	Status              int32 `json:"status"`              //状态：0->禁用；1->启用
+	IsDefault           int32 `json:"isDefault"`           //是否默认：0->否；1->是
+	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
 }
 
 type QueryOrderSettingListReq struct {
@@ -2949,49 +2955,49 @@ type QueryProductDetailResp struct {
 }
 
 type QueryProductListData struct {
-	Id                         int64   `json:"id"`
-	BrandId                    int64   `json:"brandId"`
-	ProductCategoryId          int64   `json:"productCategoryId"`
-	ProductCategoryIdArray     []int64 `json:"productCategoryIdArray"`
-	FeightTemplateId           int64   `json:"feightTemplateId"`
-	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"`
-	Name                       string  `json:"name"`
-	Pic                        string  `json:"pic"`
-	ProductSn                  string  `json:"productSn"`       // 货号
-	DeleteStatus               int32   `json:"deleteStatus"`    // 删除状态：0->未删除；1->已删除
-	PublishStatus              int32   `json:"publishStatus"`   // 上架状态：0->下架；1->上架
-	NewStatus                  int32   `json:"newStatus"`       // 新品状态:0->不是新品；1->新品
-	RecommandStatus            int32   `json:"recommandStatus"` // 推荐状态；0->不推荐；1->推荐
-	VerifyStatus               int32   `json:"verifyStatus"`    // 审核状态：0->未审核；1->审核通过
-	Sort                       int32   `json:"sort"`            // 排序
-	Sale                       int32   `json:"sale"`            // 销量
-	Price                      int64   `json:"price"`
-	PromotionPrice             int64   `json:"promotionPrice"` // 促销价格
-	GiftGrowth                 int32   `json:"giftGrowth"`     // 赠送的成长值
-	GiftPoint                  int32   `json:"giftPoint"`      // 赠送的积分
-	UsePointLimit              int32   `json:"usePointLimit"`  // 限制使用的积分数
-	SubTitle                   string  `json:"subTitle"`       // 副标题
-	Description                string  `json:"description"`    // 商品描述
-	OriginalPrice              int64   `json:"originalPrice"`  // 市场价
-	Stock                      int32   `json:"stock"`          // 库存
-	LowStock                   int32   `json:"lowStock"`       // 库存预警值
-	Unit                       string  `json:"unit"`           // 单位
-	Weight                     int64   `json:"weight"`         // 商品重量，默认为克
-	PreviewStatus              int32   `json:"previewStatus"`  // 是否为预告商品：0->不是；1->是
-	ServiceIds                 string  `json:"serviceIds"`     // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
-	Keywords                   string  `json:"keywords"`
-	Note                       string  `json:"note"`
-	AlbumPics                  string  `json:"albumPics"` // 画册图片，连产品图片限制为5张，以逗号分割
-	DetailTitle                string  `json:"detailTitle"`
-	DetailDesc                 string  `json:"detailDesc"`
-	DetailHtml                 string  `json:"detailHtml"`          // 产品详情网页内容
-	DetailMobileHtml           string  `json:"detailMobileHtml"`    // 移动端网页详情
-	PromotionStartTime         string  `json:"promotionStartTime"`  // 促销开始时间
-	PromotionEndTime           string  `json:"promotionEndTime"`    // 促销结束时间
-	PromotionPerLimit          int32   `json:"promotionPerLimit"`   // 活动限购数量
-	PromotionType              int32   `json:"promotionType"`       // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-	BrandName                  string  `json:"brandName"`           // 品牌名称
-	ProductCategoryName        string  `json:"productCategoryName"` // 商品分类名称
+	Id                         int64   `json:"id"`                         //
+	BrandId                    int64   `json:"brandId"`                    //品牌id
+	ProductCategoryId          int64   `json:"productCategoryId"`          //商品分类id
+	FeightTemplateId           int64   `json:"feightTemplateId"`           //商品运费模板id
+	ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"` //商品属性分类id
+	Name                       string  `json:"name"`                       //商品名称
+	Pic                        string  `json:"pic"`                        //商品图片
+	ProductSn                  string  `json:"productSn"`                  //货号
+	DeleteStatus               int32   `json:"deleteStatus"`               //删除状态：0->未删除；1->已删除
+	PublishStatus              int32   `json:"publishStatus"`              //上架状态：0->下架；1->上架
+	NewStatus                  int32   `json:"newStatus"`                  //新品状态:0->不是新品；1->新品
+	RecommandStatus            int32   `json:"recommandStatus"`            //推荐状态；0->不推荐；1->推荐
+	VerifyStatus               int32   `json:"verifyStatus"`               //审核状态：0->未审核；1->审核通过
+	Sort                       int32   `json:"sort"`                       //排序
+	Sale                       int32   `json:"sale"`                       //销量
+	Price                      int64   `json:"price"`                      //商品价格
+	PromotionPrice             int64   `json:"promotionPrice"`             //促销价格
+	GiftGrowth                 int32   `json:"giftGrowth"`                 //赠送的成长值
+	GiftPoint                  int32   `json:"giftPoint"`                  //赠送的积分
+	UsePointLimit              int32   `json:"usePointLimit"`              //限制使用的积分数
+	SubTitle                   string  `json:"subTitle"`                   //副标题
+	Description                string  `json:"description"`                //商品描述
+	OriginalPrice              int64   `json:"originalPrice"`              //市场价
+	Stock                      int32   `json:"stock"`                      //库存
+	LowStock                   int32   `json:"lowStock"`                   //库存预警值
+	Unit                       string  `json:"unit"`                       //单位
+	Weight                     int64   `json:"weight"`                     //商品重量，默认为克
+	PreviewStatus              int32   `json:"previewStatus"`              //是否为预告商品：0->不是；1->是
+	ServiceIds                 string  `json:"serviceIds"`                 //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+	Keywords                   string  `json:"keywords"`                   //搜索关键字
+	Note                       string  `json:"note"`                       //备注
+	AlbumPics                  string  `json:"albumPics"`                  //画册图片，连产品图片限制为5张，以逗号分割
+	DetailTitle                string  `json:"detailTitle"`                //详情标题
+	DetailDesc                 string  `json:"detailDesc"`                 //详情描述
+	DetailHtml                 string  `json:"detailHtml"`                 //产品详情网页内容
+	DetailMobileHtml           string  `json:"detailMobileHtml"`           //移动端网页详情
+	PromotionStartTime         string  `json:"promotionStartTime"`         //促销开始时间
+	PromotionEndTime           string  `json:"promotionEndTime"`           //促销结束时间
+	PromotionPerLimit          int32   `json:"promotionPerLimit"`          //活动限购数量
+	PromotionType              int32   `json:"promotionType"`              //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+	BrandName                  string  `json:"brandName"`                  //品牌名称
+	ProductCategoryName        string  `json:"productCategoryName"`        //商品分类名称
+	ProductCategoryIdArray     []int64 `json:"productCategoryIdArray"`     //商品分类id字符串
 }
 
 type QueryProductListReq struct {
@@ -3324,17 +3330,17 @@ type RoleMenuListData struct {
 }
 
 type SkuStockList struct {
-	Id             int64  `json:"id"`
-	ProductId      int64  `json:"productId"`
-	SkuCode        string `json:"skuCode"`
-	Price          int64  `json:"price"`
-	Stock          int32  `json:"stock"`
-	LowStock       int32  `json:"lowStock"`
-	Pic            string `json:"pic"`
-	Sale           int32  `json:"sale"`
-	PromotionPrice int64  `json:"promotionPrice"`
-	LockStock      int32  `json:"lockStock"`
-	SpData         string `json:"spData"`
+	Id             int64  `json:"id"`             //
+	ProductId      int64  `json:"productId"`      //商品id
+	SkuCode        string `json:"skuCode"`        //sku编码
+	Price          int64  `json:"price"`          //价格
+	Stock          int32  `json:"stock"`          //库存
+	LowStock       int32  `json:"lowStock"`       //预警库存
+	Pic            string `json:"pic"`            //展示图片
+	Sale           int32  `json:"sale"`           //销量
+	PromotionPrice int64  `json:"promotionPrice"` //单品促销价格
+	LockStock      int32  `json:"lockStock"`      //锁定库存
+	SpData         string `json:"spData"`         //商品销售属性，json格式
 }
 
 type UpdateCompanyAddressReceiveStatusReq struct {
@@ -3343,14 +3349,16 @@ type UpdateCompanyAddressReceiveStatusReq struct {
 }
 
 type UpdateCompanyAddressReq struct {
-	AddressName   string `json:"addressName"`   //地址名称
-	City          string `json:"city"`          //市
-	DetailAddress string `json:"detailAddress"` //详细地址
 	Id            int64  `json:"id"`            //
+	AddressName   string `json:"addressName"`   //地址名称
+	SendStatus    int32  `json:"sendStatus"`    //默认发货地址：0->否；1->是
+	ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
 	Name          string `json:"name"`          //收发货人姓名
 	Phone         string `json:"phone"`         //收货人电话
 	Province      string `json:"province"`      //省/直辖市
+	City          string `json:"city"`          //市
 	Region        string `json:"region"`        //区
+	DetailAddress string `json:"detailAddress"` //详细地址
 }
 
 type UpdateCompanyAddressResp struct {
@@ -3808,9 +3816,10 @@ type UpdateOrderReturnApplyStatusResp struct {
 }
 
 type UpdateOrderReturnReasonReq struct {
-	Id   int64  `json:"id"`   //
-	Name string `json:"name"` //退货类型
-	Sort int32  `json:"sort"` //排序
+	Id     int64  `json:"id"`     //
+	Name   string `json:"name"`   //退货类型
+	Sort   int32  `json:"sort"`   //排序
+	Status int32  `json:"status"` //状态：0->不启用；1->启用
 }
 
 type UpdateOrderReturnReasonResp struct {
@@ -3834,12 +3843,13 @@ type UpdateOrderSettingIsDefaultReq struct {
 }
 
 type UpdateOrderSettingReq struct {
-	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
+	Id                  int64 `json:"id"`                  //
+	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
+	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
 	ConfirmOvertime     int32 `json:"confirmOvertime"`     //发货后自动确认收货时间（天）
 	FinishOvertime      int32 `json:"finishOvertime"`      //自动完成交易时间，不能申请售后（天）
-	FlashOrderOvertime  int32 `json:"flashOrderOvertime"`  //秒杀订单超时关闭时间(分)
-	Id                  int64 `json:"id"`                  //
-	NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
+	Status              int32 `json:"status"`              //状态：0->禁用；1->启用
+	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
 }
 
 type UpdateOrderSettingResp struct {
@@ -3848,8 +3858,8 @@ type UpdateOrderSettingResp struct {
 }
 
 type UpdateOrderSettingStatusReq struct {
-	Ids    []int64 `json:"ids"`    //
-	Status int32   `json:"status"` //状态：0->禁用；1->启用
+	Ids    []int64 `json:"ids"`              //
+	Status int32   `json:"status,default=2"` //状态：0->禁用；1->启用
 }
 
 type UpdateOrderSettingStatusResp struct {
@@ -3944,16 +3954,17 @@ type UpdateProductAttributeValueList struct {
 
 type UpdateProductBrandReq struct {
 	Id                  int64  `json:"id"`
-	Name                string `json:"name"`
-	FirstLetter         string `json:"firstLetter"` // 首字母
-	Sort                int32  `json:"sort"`
-	FactoryStatus       int32  `json:"factoryStatus"` // 是否为品牌制造商：0->不是；1->是
-	ShowStatus          int32  `json:"showStatus"`
-	ProductCount        int32  `json:"productCount"`        // 产品数量
-	ProductCommentCount int32  `json:"productCommentCount"` // 产品评论数量
-	Logo                string `json:"logo"`                // 品牌logo
-	BigPic              string `json:"bigPic"`              // 专区大图
-	BrandStory          string `json:"brandStory"`          // 品牌故事
+	Name                string `json:"name"`                //品牌名称
+	FirstLetter         string `json:"firstLetter"`         //首字母
+	Sort                int32  `json:"sort"`                //排序
+	FactoryStatus       int32  `json:"factoryStatus"`       //是否为品牌制造商：0->不是；1->是
+	ShowStatus          int32  `json:"showStatus"`          //品牌显示状态
+	RecommendStatus     int32  `json:"recommendStatus"`     //推荐状态
+	ProductCount        int32  `json:"productCount"`        //产品数量
+	ProductCommentCount int32  `json:"productCommentCount"` //产品评论数量
+	Logo                string `json:"logo"`                //品牌logo
+	BigPic              string `json:"bigPic"`              //专区大图
+	BrandStory          string `json:"brandStory"`          //品牌故事
 }
 
 type UpdateProductBrandResp struct {
@@ -3973,17 +3984,17 @@ type UpdateProductBrandStatusResp struct {
 
 type UpdateProductCategoryReq struct {
 	Id                     int64   `json:"id"`
-	ParentId               int64   `json:"parentId"` // 上级分类的编号：0表示一级分类
-	Name                   string  `json:"name"`
-	Level                  int32   `json:"level"` // 分类级别：0->1级；1->2级
-	ProductCount           int32   `json:"productCount"`
-	ProductUnit            string  `json:"productUnit"`
-	NavStatus              int32   `json:"navStatus"`  // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus             int32   `json:"showStatus"` // 显示状态：0->不显示；1->显示
-	Sort                   int32   `json:"sort"`
-	Icon                   string  `json:"icon"` // 图标
-	Keywords               string  `json:"keywords"`
-	Description            string  `json:"description"`                     // 描述
+	ParentId               int64   `json:"parentId"`                        //上机分类的编号：0表示一级分类
+	Name                   string  `json:"name"`                            //商品分类名称
+	Level                  int32   `json:"level"`                           //分类级别：0->1级；1->2级
+	ProductCount           int32   `json:"productCount"`                    //商品数量
+	ProductUnit            string  `json:"productUnit"`                     //商品数量
+	NavStatus              int32   `json:"navStatus"`                       //是否显示在导航栏：0->不显示；1->显示
+	ShowStatus             int32   `json:"showStatus"`                      //显示状态：0->不显示；1->显示
+	Sort                   int32   `json:"sort"`                            //排序
+	Icon                   string  `json:"icon"`                            //图标
+	Keywords               string  `json:"keywords"`                        //关键字
+	Description            string  `json:"description"`                     //描述
 	ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
 }
 
@@ -3998,49 +4009,49 @@ type UpdateProductCategoryStatusReq struct {
 }
 
 type UpdateProductData struct {
-	Id                         int64  `json:"id"`
-	BrandId                    int64  `json:"brandId"`
-	ProductCategoryId          int64  `json:"productCategoryId"`
-	ProductCategoryIdArray     string `json:"productCategoryIdArray"`
-	FeightTemplateId           int64  `json:"feightTemplateId"`
-	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
-	Name                       string `json:"name"`
-	Pic                        string `json:"pic"`
-	ProductSn                  string `json:"productSn"`
-	DeleteStatus               int32  `json:"deleteStatus"`
-	PublishStatus              int32  `json:"publishStatus"`
-	NewStatus                  int32  `json:"newStatus"`
-	RecommandStatus            int32  `json:"recommandStatus"`
-	VerifyStatus               int32  `json:"verifyStatus"`
-	Sort                       int32  `json:"sort"`
-	Sale                       int32  `json:"sale"`
-	Price                      int64  `json:"price"`
-	PromotionPrice             int64  `json:"promotionPrice"`
-	GiftGrowth                 int32  `json:"giftGrowth"`
-	GiftPoint                  int32  `json:"giftPoint"`
-	UsePointLimit              int32  `json:"usePointLimit"`
-	SubTitle                   string `json:"subTitle"`
-	OriginalPrice              int64  `json:"originalPrice"`
-	Stock                      int32  `json:"stock"`
-	LowStock                   int32  `json:"lowStock"`
-	Unit                       string `json:"unit"`
-	Weight                     int64  `json:"weight"`
-	PreviewStatus              int32  `json:"previewStatus"`
-	ServiceIds                 string `json:"serviceIds"`
-	Keywords                   string `json:"keywords"`
-	Note                       string `json:"note"`
-	AlbumPics                  string `json:"albumPics"`
-	DetailTitle                string `json:"detailTitle"`
-	PromotionStartTime         string `json:"promotionStartTime"`
-	PromotionEndTime           string `json:"promotionEndTime"`
-	PromotionPerLimit          int32  `json:"promotionPerLimit"`
-	PromotionType              int32  `json:"promotionType"`
-	BrandName                  string `json:"brandName"`
-	ProductCategoryName        string `json:"productCategoryName"`
-	Description                string `json:"description"`
-	DetailDesc                 string `json:"detailDesc"`
-	DetailHTML                 string `json:"detailHtml"`
-	DetailMobileHTML           string `json:"detailMobileHtml"`
+	Id                         int64  `json:"id"`                         //
+	BrandId                    int64  `json:"brandId"`                    //品牌id
+	ProductCategoryId          int64  `json:"productCategoryId"`          //商品分类id
+	FeightTemplateId           int64  `json:"feightTemplateId"`           //商品运费模板id
+	ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"` //商品属性分类id
+	Name                       string `json:"name"`                       //商品名称
+	Pic                        string `json:"pic"`                        //商品图片
+	ProductSn                  string `json:"productSn"`                  //货号
+	DeleteStatus               int32  `json:"deleteStatus,default=2"`     //删除状态：0->未删除；1->已删除
+	PublishStatus              int32  `json:"publishStatus,default=2"`    //上架状态：0->下架；1->上架
+	NewStatus                  int32  `json:"newStatus,default=2"`        //新品状态:0->不是新品；1->新品
+	RecommandStatus            int32  `json:"recommandStatus,default=2"`  //推荐状态；0->不推荐；1->推荐
+	VerifyStatus               int32  `json:"verifyStatus,default=2"`     //审核状态：0->未审核；1->审核通过
+	Sort                       int32  `json:"sort"`                       //排序
+	Sale                       int32  `json:"sale"`                       //销量
+	Price                      int64  `json:"price"`                      //商品价格
+	PromotionPrice             int64  `json:"promotionPrice"`             //促销价格
+	GiftGrowth                 int32  `json:"giftGrowth"`                 //赠送的成长值
+	GiftPoint                  int32  `json:"giftPoint"`                  //赠送的积分
+	UsePointLimit              int32  `json:"usePointLimit"`              //限制使用的积分数
+	SubTitle                   string `json:"subTitle"`                   //副标题
+	Description                string `json:"description"`                //商品描述
+	OriginalPrice              int64  `json:"originalPrice"`              //市场价
+	Stock                      int32  `json:"stock"`                      //库存
+	LowStock                   int32  `json:"lowStock"`                   //库存预警值
+	Unit                       string `json:"unit"`                       //单位
+	Weight                     int64  `json:"weight"`                     //商品重量，默认为克
+	PreviewStatus              int32  `json:"previewStatus,default=2"`    //是否为预告商品：0->不是；1->是
+	ServiceIds                 string `json:"serviceIds"`                 //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+	Keywords                   string `json:"keywords"`                   //搜索关键字
+	Note                       string `json:"note"`                       //备注
+	AlbumPics                  string `json:"albumPics"`                  //画册图片，连产品图片限制为5张，以逗号分割
+	DetailTitle                string `json:"detailTitle"`                //详情标题
+	DetailDesc                 string `json:"detailDesc"`                 //详情描述
+	DetailHtml                 string `json:"detailHtml"`                 //产品详情网页内容
+	DetailMobileHtml           string `json:"detailMobileHtml"`           //移动端网页详情
+	PromotionStartTime         string `json:"promotionStartTime"`         //促销开始时间
+	PromotionEndTime           string `json:"promotionEndTime"`           //促销结束时间
+	PromotionPerLimit          int32  `json:"promotionPerLimit"`          //活动限购数量
+	PromotionType              int32  `json:"promotionType"`              //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+	BrandName                  string `json:"brandName"`                  //品牌名称
+	ProductCategoryName        string `json:"productCategoryName"`        //商品分类名称
+	ProductCategoryIdArray     string `json:"productCategoryIdArray"`     //商品分类id字符串
 }
 
 type UpdateProductFullReductionList struct {
@@ -4188,17 +4199,17 @@ type UpdateRoleStatusResp struct {
 }
 
 type UpdateSkuStockData struct {
-	Id             int64  `json:"id"`
-	ProductId      int64  `json:"productId"`
-	SkuCode        string `json:"skuCode"` // sku编码
-	Price          int64  `json:"price"`
-	Stock          int32  `json:"stock"`          // 库存
-	LowStock       int32  `json:"lowStock"`       // 预警库存
-	Pic            string `json:"pic"`            // 展示图片
-	Sale           int32  `json:"sale"`           // 销量
-	PromotionPrice int64  `json:"promotionPrice"` // 单品促销价格
-	LockStock      int32  `json:"lockStock"`      // 锁定库存
-	SpData         string `json:"spData"`         // 商品销售属性，json格式
+	Id             int64  `json:"id"`             //
+	ProductId      int64  `json:"productId"`      //商品id
+	SkuCode        string `json:"skuCode"`        //sku编码
+	Price          int64  `json:"price"`          //价格
+	Stock          int32  `json:"stock"`          //库存
+	LowStock       int32  `json:"lowStock"`       //预警库存
+	Pic            string `json:"pic"`            //展示图片
+	Sale           int32  `json:"sale"`           //销量
+	PromotionPrice int64  `json:"promotionPrice"` //单品促销价格
+	LockStock      int32  `json:"lockStock"`      //锁定库存
+	SpData         string `json:"spData"`         //商品销售属性，json格式
 }
 
 type UpdateSkuStockList struct {

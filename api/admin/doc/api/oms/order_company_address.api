@@ -1,27 +1,27 @@
 info (
 	desc:   "公司收发货地址表"
-	author: "liufeihua"
+	author: "刘飞华"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加公司收发货地址表
+	// 添加公司收发货地址表请求参数
 	AddCompanyAddressReq {
 		AddressName   string `json:"addressName"` //地址名称
-		City          string `json:"city"` //市
-		DetailAddress string `json:"detailAddress"` //详细地址
+		SendStatus    int32  `json:"sendStatus"` //默认发货地址：0->否；1->是
+		ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
 		Name          string `json:"name"` //收发货人姓名
 		Phone         string `json:"phone"` //收货人电话
 		Province      string `json:"province"` //省/直辖市
-		ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+		City          string `json:"city"` //市
 		Region        string `json:"region"` //区
-		SendStatus    int32  `json:"sendStatus"` //默认发货地址：0->否；1->是
+		DetailAddress string `json:"detailAddress"` //详细地址
 	}
 	AddCompanyAddressResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除公司收发货地址表
+	// 删除公司收发货地址表请求参数
 	DeleteCompanyAddressReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -29,16 +29,18 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新公司收发货地址表
+	// 更新公司收发货地址表请求参数
 	UpdateCompanyAddressReq {
-		AddressName   string `json:"addressName"` //地址名称
-		City          string `json:"city"` //市
-		DetailAddress string `json:"detailAddress"` //详细地址
 		Id            int64  `json:"id"` //
+		AddressName   string `json:"addressName"` //地址名称
+		SendStatus    int32  `json:"sendStatus"` //默认发货地址：0->否；1->是
+		ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
 		Name          string `json:"name"` //收发货人姓名
 		Phone         string `json:"phone"` //收货人电话
 		Province      string `json:"province"` //省/直辖市
+		City          string `json:"city"` //市
 		Region        string `json:"region"` //区
+		DetailAddress string `json:"detailAddress"` //详细地址
 	}
 	UpdateCompanyAddressResp {
 		Code    string `json:"code"`
@@ -57,23 +59,23 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询公司收发货地址表详情
+	// 查询公司收发货地址表详情请求参数
 	QueryCompanyAddressDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryCompanyAddressDetailData {
-		AddressName   string `json:"addressName"` //地址名称
-		City          string `json:"city"` //市
-		CreateBy      string `json:"createBy"` //创建者
-		CreateTime    string `json:"createTime"` //创建时间
-		DetailAddress string `json:"detailAddress"` //详细地址
 		Id            int64  `json:"id"` //
+		AddressName   string `json:"addressName"` //地址名称
+		SendStatus    int32  `json:"sendStatus"` //默认发货地址：0->否；1->是
+		ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
 		Name          string `json:"name"` //收发货人姓名
 		Phone         string `json:"phone"` //收货人电话
 		Province      string `json:"province"` //省/直辖市
-		ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+		City          string `json:"city"` //市
 		Region        string `json:"region"` //区
-		SendStatus    int32  `json:"sendStatus"` //默认发货地址：0->否；1->是
+		DetailAddress string `json:"detailAddress"` //详细地址
+		CreateBy      string `json:"createBy"` //创建者
+		CreateTime    string `json:"createTime"` //创建时间
 		UpdateBy      string `json:"updateBy"` //更新者
 		UpdateTime    string `json:"updateTime"` //更新时间
 	}
@@ -82,27 +84,29 @@ type (
 		Message string                        `json:"message"`
 		Data    QueryCompanyAddressDetailData `json:"data"`
 	}
-	// 分页查询公司收发货地址表列表
+	// 分页查询公司收发货地址表列表请求参数
 	QueryCompanyAddressListReq {
-		Current     int64  `form:"current,default=1"` //第几页
-		PageSize    int64  `form:"pageSize,default=20"` //每页的数量
-		AddressName string `form:"addressName,optional"` //地址名称
-		Name        string `form:"name,optional"` //收发货人姓名
-		Phone       string `form:"phone,optional"` //收货人电话
+		Current       int64  `form:"current,default=1"` //第几页
+		PageSize      int64  `form:"pageSize,default=20"` //每页的数量
+		AddressName   string `form:"addressName,optional"` //地址名称
+		SendStatus    int32  `form:"sendStatus,default=2"` //默认发货地址：0->否；1->是
+		ReceiveStatus int32  `form:"receiveStatus,default=2"` //是否默认收货地址：0->否；1->是
+		Name          string `form:"name,optional"` //收发货人姓名
+		Phone         string `form:"phone,optional"` //收货人电话
 	}
 	QueryCompanyAddressListData {
-		AddressName   string `json:"addressName"` //地址名称
-		City          string `json:"city"` //市
-		CreateBy      string `json:"createBy"` //创建者
-		CreateTime    string `json:"createTime"` //创建时间
-		DetailAddress string `json:"detailAddress"` //详细地址
 		Id            int64  `json:"id"` //
+		AddressName   string `json:"addressName"` //地址名称
+		SendStatus    int32  `json:"sendStatus"` //默认发货地址：0->否；1->是
+		ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
 		Name          string `json:"name"` //收发货人姓名
 		Phone         string `json:"phone"` //收货人电话
 		Province      string `json:"province"` //省/直辖市
-		ReceiveStatus int32  `json:"receiveStatus"` //是否默认收货地址：0->否；1->是
+		City          string `json:"city"` //市
 		Region        string `json:"region"` //区
-		SendStatus    int32  `json:"sendStatus"` //默认发货地址：0->否；1->是
+		DetailAddress string `json:"detailAddress"` //详细地址
+		CreateBy      string `json:"createBy"` //创建者
+		CreateTime    string `json:"createTime"` //创建时间
 		UpdateBy      string `json:"updateBy"` //更新者
 		UpdateTime    string `json:"updateTime"` //更新时间
 	}

@@ -46,18 +46,18 @@ func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList() (resp *type
 		var attr []types.ListProductAttribute
 		for _, i := range item.ProductAttributeList {
 			attr = append(attr, types.ListProductAttribute{
-				Id:                         i.Id,
-				ProductAttributeCategoryId: i.ProductAttributeCategoryId,
-				Name:                       i.Name,
-				SelectType:                 i.SelectType,
-				InputType:                  i.InputType,
-				InputList:                  i.InputList,
-				Sort:                       i.Sort,
-				FilterType:                 i.FilterType,
-				SearchType:                 i.SearchType,
-				RelatedStatus:              i.RelatedStatus,
-				HandAddStatus:              i.HandAddStatus,
-				Type:                       i.Type,
+				Id:                         i.Id,                         //
+				ProductAttributeCategoryId: i.ProductAttributeCategoryId, // 商品属性分类id
+				Name:                       i.Name,                       // 商品属性分类id
+				SelectType:                 i.SelectType,                 // 属性选择类型：0->唯一；1->单选；2->多选
+				InputType:                  i.InputType,                  // 属性录入方式：0->手工录入；1->从列表中选取
+				InputList:                  i.InputList,                  // 可选值列表，以逗号隔开
+				Sort:                       i.Sort,                       // 排序字段：最高的可以单独上传图片
+				FilterType:                 i.FilterType,                 // 分类筛选样式：1->普通；1->颜色
+				SearchType:                 i.SearchType,                 // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
+				RelatedStatus:              i.RelatedStatus,              // 相同属性产品是否关联；0->不关联；1->关联
+				HandAddStatus:              i.HandAddStatus,              // 是否支持手动新增；0->不支持；1->支持
+				Type:                       i.Type,                       // 属性的类型；0->规格；1->参数
 			})
 		}
 		list = append(list, &types.ListProductAttributeCategoryData{

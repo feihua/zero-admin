@@ -34,16 +34,18 @@ func NewProductBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Pr
 // ProductBrandAdd 添加商品品牌
 func (l *ProductBrandAddLogic) ProductBrandAdd(req types.AddProductBrandReq) (*types.AddProductBrandResp, error) {
 	_, err := l.svcCtx.BrandService.AddBrand(l.ctx, &pmsclient.AddBrandReq{
-		Name:                req.Name,
-		FirstLetter:         req.FirstLetter,
-		Sort:                req.Sort,
-		FactoryStatus:       req.FactoryStatus,
-		ShowStatus:          req.ShowStatus,
-		ProductCount:        0,
-		ProductCommentCount: 0,
-		Logo:                req.Logo,
-		BigPic:              req.BigPic,
-		BrandStory:          req.BrandStory,
+		Name:                req.Name,            // 品牌名称
+		FirstLetter:         req.FirstLetter,     // 首字母
+		Sort:                req.Sort,            // 排序
+		FactoryStatus:       req.FactoryStatus,   // 是否为品牌制造商：0->不是；1->是
+		ShowStatus:          req.ShowStatus,      // 品牌显示状态
+		RecommendStatus:     req.RecommendStatus, // 推荐状态
+		ProductCount:        0,                   // 产品数量
+		ProductCommentCount: 0,                   // 产品评论数量
+		Logo:                req.Logo,            // 品牌logo
+		BigPic:              req.BigPic,          // 专区大图
+		BrandStory:          req.BrandStory,      // 品牌故事
+		CreateBy:            l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

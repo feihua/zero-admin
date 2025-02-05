@@ -35,16 +35,18 @@ func NewProductBrandUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 func (l *ProductBrandUpdateLogic) ProductBrandUpdate(req types.UpdateProductBrandReq) (*types.UpdateProductBrandResp, error) {
 	_, err := l.svcCtx.BrandService.UpdateBrand(l.ctx, &pmsclient.UpdateBrandReq{
 		Id:                  req.Id,
-		Name:                req.Name,
-		FirstLetter:         req.FirstLetter,
-		Sort:                req.Sort,
-		FactoryStatus:       req.FactoryStatus,
-		ShowStatus:          req.ShowStatus,
-		ProductCount:        req.ProductCount,
-		ProductCommentCount: req.ProductCommentCount,
-		Logo:                req.Logo,
-		BigPic:              req.BigPic,
-		BrandStory:          req.BrandStory,
+		Name:                req.Name,                // 品牌名称
+		FirstLetter:         req.FirstLetter,         // 首字母
+		Sort:                req.Sort,                // 排序
+		FactoryStatus:       req.FactoryStatus,       // 是否为品牌制造商：0->不是；1->是
+		ShowStatus:          req.ShowStatus,          // 品牌显示状态
+		RecommendStatus:     req.RecommendStatus,     // 推荐状态
+		ProductCount:        req.ProductCount,        // 产品数量
+		ProductCommentCount: req.ProductCommentCount, // 产品评论数量
+		Logo:                req.Logo,                // 品牌logo
+		BigPic:              req.BigPic,              // 专区大图
+		BrandStory:          req.BrandStory,          // 品牌故事
+		UpdateBy:            l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

@@ -5,7 +5,7 @@ info (
 )
 
 type (
-	// 添加退货原因表
+	// 添加退货原因表请求参数
 	AddOrderReturnReasonReq {
 		Name   string `json:"name"` //退货类型
 		Sort   int32  `json:"sort"` //排序
@@ -15,7 +15,7 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除退货原因表
+	// 删除退货原因表请求参数
 	DeleteOrderReturnReasonReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -23,17 +23,18 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新退货原因表
+	// 更新退货原因表请求参数
 	UpdateOrderReturnReasonReq {
-		Id   int64  `json:"id"` //
-		Name string `json:"name"` //退货类型
-		Sort int32  `json:"sort"` //排序
+		Id     int64  `json:"id"` //
+		Name   string `json:"name"` //退货类型
+		Sort   int32  `json:"sort"` //排序
+		Status int32  `json:"status"` //状态：0->不启用；1->启用
 	}
 	UpdateOrderReturnReasonResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新退货原因表状态
+	// 更新退货原因表状态请求参数
 	UpdateOrderReturnReasonStatusReq {
 		Ids    []int64 `json:"ids"` //
 		Status int32   `json:"status"` //状态：0->不启用；1->启用
@@ -42,23 +43,23 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询退货原因表详情
+	// 查询退货原因表详情请求参数
 	QueryOrderReturnReasonDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryOrderReturnReasonDetailData {
-		CreateTime string `json:"createTime"` //创建时间
 		Id         int64  `json:"id"` //
 		Name       string `json:"name"` //退货类型
 		Sort       int32  `json:"sort"` //排序
 		Status     int32  `json:"status"` //状态：0->不启用；1->启用
+		CreateTime string `json:"createTime"` //创建时间
 	}
 	QueryOrderReturnReasonDetailResp {
 		Code    string                           `json:"code"`
 		Message string                           `json:"message"`
 		Data    QueryOrderReturnReasonDetailData `json:"data"`
 	}
-	// 分页查询退货原因表列表
+	// 分页查询退货原因表列表请求参数
 	QueryOrderReturnReasonListReq {
 		Current  int64  `form:"current,default=1"` //第几页
 		PageSize int64  `form:"pageSize,default=20"` //每页的数量
@@ -66,11 +67,11 @@ type (
 		Status   int32  `form:"status,default=2"` //状态：0->不启用；1->启用
 	}
 	QueryOrderReturnReasonListData {
-		CreateTime string `json:"createTime"` //创建时间
 		Id         int64  `json:"id"` //
 		Name       string `json:"name"` //退货类型
 		Sort       int32  `json:"sort"` //排序
 		Status     int32  `json:"status"` //状态：0->不启用；1->启用
+		CreateTime string `json:"createTime"` //创建时间
 	}
 	QueryOrderReturnReasonListResp {
 		Code     string                            `json:"code"`

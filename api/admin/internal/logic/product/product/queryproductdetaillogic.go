@@ -50,17 +50,17 @@ func (l *QueryProductDetailLogic) QueryProductDetail(req *types.QueryProductDeta
 		Id: req.ProductId,
 	})
 
-	//8.查询专题关联
+	// 8.查询专题关联
 	subjectRelationList, _ := l.svcCtx.SubjectProductRelationService.QuerySubjectProductRelationList(l.ctx, &cmsclient.QuerySubjectProductRelationListReq{
 		ProductId: req.ProductId,
 	})
 
-	//9.查询优选关联
+	// 9.查询优选关联
 	areaRelationList, _ := l.svcCtx.PreferredAreaProductRelationService.QueryPreferredAreaProductRelationList(l.ctx, &cmsclient.QueryPreferredAreaProductRelationListReq{
 		ProductId: req.ProductId,
 	})
 
-	//10.商品可用优惠券(根据商品id和分类id查询)
+	// 10.商品可用优惠券(根据商品id和分类id查询)
 	couponList, _ := l.svcCtx.CouponService.QueryCouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
 		ProductId:         req.ProductId,
 		ProductCategoryId: productResp.Product.ProductCategoryId,
@@ -86,57 +86,57 @@ func (l *QueryProductDetailLogic) QueryProductDetail(req *types.QueryProductDeta
 
 // 1.获取商品信息
 func buildProductData(resp *pmsclient.QueryProductDetailByIdResp) types.ProductData {
-	pmsProduct := resp.Product
+	product := resp.Product
 
 	var productCategoryIdArray []int64
-	for _, s := range strings.Split(pmsProduct.ProductCategoryIdArray, ",") {
+	for _, s := range strings.Split(product.ProductCategoryIdArray, ",") {
 		id, _ := strconv.ParseInt(s, 10, 64)
 		productCategoryIdArray = append(productCategoryIdArray, id)
 	}
 	return types.ProductData{
-		Id:                         pmsProduct.Id,
-		BrandId:                    pmsProduct.BrandId,
-		ProductCategoryId:          pmsProduct.ProductCategoryId,
-		ProductCategoryIdArray:     productCategoryIdArray,
-		FeightTemplateId:           pmsProduct.FeightTemplateId,
-		ProductAttributeCategoryId: pmsProduct.ProductAttributeCategoryId,
-		Name:                       pmsProduct.Name,
-		Pic:                        pmsProduct.Pic,
-		ProductSn:                  pmsProduct.ProductSn,
-		DeleteStatus:               pmsProduct.DeleteStatus,
-		PublishStatus:              pmsProduct.PublishStatus,
-		NewStatus:                  pmsProduct.NewStatus,
-		RecommandStatus:            pmsProduct.RecommandStatus,
-		VerifyStatus:               pmsProduct.VerifyStatus,
-		Sort:                       pmsProduct.Sort,
-		Sale:                       pmsProduct.Sale,
-		Price:                      pmsProduct.Price,
-		PromotionPrice:             pmsProduct.PromotionPrice,
-		GiftGrowth:                 pmsProduct.GiftGrowth,
-		GiftPoint:                  pmsProduct.GiftPoint,
-		UsePointLimit:              pmsProduct.UsePointLimit,
-		SubTitle:                   pmsProduct.SubTitle,
-		Description:                pmsProduct.Description,
-		OriginalPrice:              pmsProduct.OriginalPrice,
-		Stock:                      pmsProduct.Stock,
-		LowStock:                   pmsProduct.LowStock,
-		Unit:                       pmsProduct.Unit,
-		Weight:                     pmsProduct.Weight,
-		PreviewStatus:              pmsProduct.PreviewStatus,
-		ServiceIds:                 pmsProduct.ServiceIds,
-		Keywords:                   pmsProduct.Keywords,
-		Note:                       pmsProduct.Note,
-		AlbumPics:                  pmsProduct.AlbumPics,
-		DetailTitle:                pmsProduct.DetailTitle,
-		DetailDesc:                 pmsProduct.DetailDesc,
-		DetailHTML:                 pmsProduct.DetailHtml,
-		DetailMobileHTML:           pmsProduct.DetailMobileHtml,
-		PromotionStartTime:         pmsProduct.PromotionStartTime,
-		PromotionEndTime:           pmsProduct.PromotionEndTime,
-		PromotionPerLimit:          pmsProduct.PromotionPerLimit,
-		PromotionType:              pmsProduct.PromotionType,
-		BrandName:                  pmsProduct.BrandName,
-		ProductCategoryName:        pmsProduct.ProductCategoryName,
+		Id:                         product.Id,
+		BrandId:                    product.BrandId,                    // 品牌id
+		ProductCategoryId:          product.ProductCategoryId,          // 商品分类id
+		FeightTemplateId:           product.FeightTemplateId,           // 商品运费模板id
+		ProductAttributeCategoryId: product.ProductAttributeCategoryId, // 商品属性分类id
+		Name:                       product.Name,                       // 商品名称
+		Pic:                        product.Pic,                        // 商品图片
+		ProductSn:                  product.ProductSn,                  // 货号
+		DeleteStatus:               product.DeleteStatus,               // 删除状态：0->未删除；1->已删除
+		PublishStatus:              product.PublishStatus,              // 上架状态：0->下架；1->上架
+		NewStatus:                  product.NewStatus,                  // 新品状态:0->不是新品；1->新品
+		RecommandStatus:            product.RecommandStatus,            // 推荐状态；0->不推荐；1->推荐
+		VerifyStatus:               product.VerifyStatus,               // 审核状态：0->未审核；1->审核通过
+		Sort:                       product.Sort,                       // 排序
+		Sale:                       product.Sale,                       // 销量
+		Price:                      product.Price,                      // 商品价格
+		PromotionPrice:             product.PromotionPrice,             // 促销价格
+		GiftGrowth:                 product.GiftGrowth,                 // 赠送的成长值
+		GiftPoint:                  product.GiftPoint,                  // 赠送的积分
+		UsePointLimit:              product.UsePointLimit,              // 限制使用的积分数
+		SubTitle:                   product.SubTitle,                   // 副标题
+		Description:                product.Description,                // 商品描述
+		OriginalPrice:              product.OriginalPrice,              // 市场价
+		Stock:                      product.Stock,                      // 库存
+		LowStock:                   product.LowStock,                   // 库存预警值
+		Unit:                       product.Unit,                       // 单位
+		Weight:                     product.Weight,                     // 商品重量，默认为克
+		PreviewStatus:              product.PreviewStatus,              // 是否为预告商品：0->不是；1->是
+		ServiceIds:                 product.ServiceIds,                 // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+		Keywords:                   product.Keywords,                   // 搜索关键字
+		Note:                       product.Note,                       // 备注
+		AlbumPics:                  product.AlbumPics,                  // 画册图片，连产品图片限制为5张，以逗号分割
+		DetailTitle:                product.DetailTitle,                // 详情标题
+		DetailDesc:                 product.DetailDesc,                 // 详情描述
+		DetailHtml:                 product.DetailHtml,                 // 产品详情网页内容
+		DetailMobileHtml:           product.DetailMobileHtml,           // 移动端网页详情
+		PromotionStartTime:         product.PromotionStartTime,         // 促销开始时间
+		PromotionEndTime:           product.PromotionEndTime,           // 促销结束时间
+		PromotionPerLimit:          product.PromotionPerLimit,          // 活动限购数量
+		PromotionType:              product.PromotionType,              // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+		BrandName:                  product.BrandName,                  // 品牌名称
+		ProductCategoryName:        product.ProductCategoryName,        // 商品分类名称
+		ProductCategoryIdArray:     productCategoryIdArray,             // 商品分类id字符串
 	}
 }
 

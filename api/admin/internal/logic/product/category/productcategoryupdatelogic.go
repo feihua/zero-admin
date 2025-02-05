@@ -34,19 +34,18 @@ func NewProductCategoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceConte
 // ProductCategoryUpdate 更新商品分类
 func (l *ProductCategoryUpdateLogic) ProductCategoryUpdate(req types.UpdateProductCategoryReq) (*types.UpdateProductCategoryResp, error) {
 	_, err := l.svcCtx.ProductCategoryService.UpdateProductCategory(l.ctx, &pmsclient.UpdateProductCategoryReq{
-		Id:                     req.Id,
-		ParentId:               req.ParentId,
-		Name:                   req.Name,
-		Level:                  req.Level,
-		ProductCount:           req.ProductCount,
-		ProductUnit:            req.ProductUnit,
-		NavStatus:              req.NavStatus,
-		ShowStatus:             req.ShowStatus,
-		Sort:                   req.Sort,
-		Icon:                   req.Icon,
-		Keywords:               req.Keywords,
-		Description:            req.Description,
-		ProductAttributeIdList: req.ProductAttributeIdList,
+		Id:           req.Id,
+		ParentId:     req.ParentId,     // 上机分类的编号：0表示一级分类
+		Name:         req.Name,         // 商品分类名称
+		Level:        req.Level,        // 分类级别：0->1级；1->2级
+		ProductCount: req.ProductCount, // 商品数量
+		ProductUnit:  req.ProductUnit,  // 商品数量
+		NavStatus:    req.NavStatus,    // 是否显示在导航栏：0->不显示；1->显示
+		ShowStatus:   req.ShowStatus,   // 显示状态：0->不显示；1->显示
+		Sort:         req.Sort,         // 排序
+		Icon:         req.Icon,         // 图标
+		Keywords:     req.Keywords,     // 关键字
+		Description:  req.Description,  // 描述
 	})
 
 	if err != nil {

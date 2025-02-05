@@ -43,48 +43,48 @@ func (l *ProductUpdateLogic) ProductUpdate(req types.UpdateProductReq) (*types.U
 	productId := product.Id
 	_, err := l.svcCtx.ProductService.UpdateProduct(l.ctx, &pmsclient.UpdateProductReq{
 		Id:                         productId,
-		BrandId:                    product.BrandId,
-		ProductCategoryId:          product.ProductCategoryId,
-		ProductCategoryIdArray:     product.ProductCategoryIdArray,
-		FeightTemplateId:           product.FeightTemplateId,
-		ProductAttributeCategoryId: product.ProductAttributeCategoryId,
-		Name:                       product.Name,
-		Pic:                        product.Pic,
-		ProductSn:                  product.ProductSn,
-		DeleteStatus:               product.DeleteStatus,
-		PublishStatus:              product.PublishStatus,
-		NewStatus:                  product.NewStatus,
-		RecommandStatus:            product.RecommandStatus,
-		VerifyStatus:               product.VerifyStatus,
-		Sort:                       product.Sort,
-		Sale:                       product.Sale,
-		Price:                      product.Price,
-		PromotionPrice:             product.PromotionPrice,
-		GiftGrowth:                 product.GiftGrowth,
-		GiftPoint:                  product.GiftPoint,
-		UsePointLimit:              product.UsePointLimit,
-		SubTitle:                   product.SubTitle,
-		Description:                product.Description,
-		OriginalPrice:              product.OriginalPrice,
-		Stock:                      product.Stock,
-		LowStock:                   product.LowStock,
-		Unit:                       product.Unit,
-		Weight:                     product.Weight,
-		PreviewStatus:              product.PreviewStatus,
-		ServiceIds:                 product.ServiceIds,
-		Keywords:                   product.Keywords,
-		Note:                       product.Note,
-		AlbumPics:                  product.AlbumPics,
-		DetailTitle:                product.DetailTitle,
-		DetailDesc:                 product.DetailDesc,
-		DetailHtml:                 product.DetailHTML,
-		DetailMobileHtml:           product.DetailMobileHTML,
-		PromotionStartTime:         product.PromotionStartTime,
-		PromotionEndTime:           product.PromotionEndTime,
-		PromotionPerLimit:          product.PromotionPerLimit,
-		PromotionType:              product.PromotionType,
-		BrandName:                  product.BrandName,
-		ProductCategoryName:        product.ProductCategoryName,
+		BrandId:                    product.BrandId,                    // 品牌id
+		ProductCategoryId:          product.ProductCategoryId,          // 商品分类id
+		FeightTemplateId:           product.FeightTemplateId,           // 商品运费模板id
+		ProductAttributeCategoryId: product.ProductAttributeCategoryId, // 商品属性分类id
+		Name:                       product.Name,                       // 商品名称
+		Pic:                        product.Pic,                        // 商品图片
+		ProductSn:                  product.ProductSn,                  // 货号
+		DeleteStatus:               product.DeleteStatus,               // 删除状态：0->未删除；1->已删除
+		PublishStatus:              product.PublishStatus,              // 上架状态：0->下架；1->上架
+		NewStatus:                  product.NewStatus,                  // 新品状态:0->不是新品；1->新品
+		RecommandStatus:            product.RecommandStatus,            // 推荐状态；0->不推荐；1->推荐
+		VerifyStatus:               product.VerifyStatus,               // 审核状态：0->未审核；1->审核通过
+		Sort:                       product.Sort,                       // 排序
+		Sale:                       product.Sale,                       // 销量
+		Price:                      product.Price,                      // 商品价格
+		PromotionPrice:             product.PromotionPrice,             // 促销价格
+		GiftGrowth:                 product.GiftGrowth,                 // 赠送的成长值
+		GiftPoint:                  product.GiftPoint,                  // 赠送的积分
+		UsePointLimit:              product.UsePointLimit,              // 限制使用的积分数
+		SubTitle:                   product.SubTitle,                   // 副标题
+		Description:                product.Description,                // 商品描述
+		OriginalPrice:              product.OriginalPrice,              // 市场价
+		Stock:                      product.Stock,                      // 库存
+		LowStock:                   product.LowStock,                   // 库存预警值
+		Unit:                       product.Unit,                       // 单位
+		Weight:                     product.Weight,                     // 商品重量，默认为克
+		PreviewStatus:              product.PreviewStatus,              // 是否为预告商品：0->不是；1->是
+		ServiceIds:                 product.ServiceIds,                 // 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+		Keywords:                   product.Keywords,                   // 搜索关键字
+		Note:                       product.Note,                       // 备注
+		AlbumPics:                  product.AlbumPics,                  // 画册图片，连产品图片限制为5张，以逗号分割
+		DetailTitle:                product.DetailTitle,                // 详情标题
+		DetailDesc:                 product.DetailDesc,                 // 详情描述
+		DetailHtml:                 product.DetailHtml,                 // 产品详情网页内容
+		DetailMobileHtml:           product.DetailMobileHtml,           // 移动端网页详情
+		PromotionStartTime:         product.PromotionStartTime,         // 促销开始时间
+		PromotionEndTime:           product.PromotionEndTime,           // 促销结束时间
+		PromotionPerLimit:          product.PromotionPerLimit,          // 活动限购数量
+		PromotionType:              product.PromotionType,              // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+		BrandName:                  product.BrandName,                  // 品牌名称
+		ProductCategoryName:        product.ProductCategoryName,        // 商品分类名称
+		ProductCategoryIdArray:     product.ProductCategoryIdArray,     // 商品分类id字符串
 		MemberPriceList:            buildUpdateMemberPriceList(req),
 		ProductAttributeValueList:  buildUpdateProductAttributeValueList(req),
 		ProductFullReductionList:   buildUpdateProductFullReductionList(req),
@@ -97,10 +97,10 @@ func (l *ProductUpdateLogic) ProductUpdate(req types.UpdateProductReq) (*types.U
 		return nil, errorx.NewDefaultError("更新商品信息失败")
 	}
 
-	//7.关联专题
+	// 7.关联专题
 	updateSubjectProductRelation(req, l, productId)
 
-	//8.关联优选
+	// 8.关联优选
 	updatePreferredAreaProductRelation(req, l, productId)
 
 	return &types.UpdateProductResp{
@@ -180,10 +180,10 @@ func buildUpdateSkuStockList(req types.UpdateProductReq) []*pmsclient.SkuStockLi
 
 // 更新专题关联
 func updateSubjectProductRelation(req types.UpdateProductReq, l *ProductUpdateLogic, productId int64) {
-	//1.先删除专题的关联
-	//_, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationDelete(l.ctx, &cmsclient.SubjectProductRelationDeleteReq{Id: productId})
+	// 1.先删除专题的关联
+	// _, _ = l.svcCtx.SubjectProductRelationService.SubjectProductRelationDelete(l.ctx, &cmsclient.SubjectProductRelationDeleteReq{Id: productId})
 
-	//2.重新添加专题的关联
+	// 2.重新添加专题的关联
 	_, _ = l.svcCtx.SubjectProductRelationService.AddSubjectProductRelation(l.ctx, &cmsclient.AddSubjectProductRelationReq{
 		SubjectId: req.SubjectProductRelationList,
 		ProductId: productId,
@@ -192,10 +192,10 @@ func updateSubjectProductRelation(req types.UpdateProductReq, l *ProductUpdateLo
 
 // 更新优选商品关联
 func updatePreferredAreaProductRelation(req types.UpdateProductReq, l *ProductUpdateLogic, productId int64) {
-	//1.先删除优选商品的关联(由rpc实现)
-	//_, _ = l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationDelete(l.ctx, &cmsclient.PrefrenceAreaProductRelationDeleteReq{Id: productId})
+	// 1.先删除优选商品的关联(由rpc实现)
+	// _, _ = l.svcCtx.PrefrenceAreaProductRelationService.PrefrenceAreaProductRelationDelete(l.ctx, &cmsclient.PrefrenceAreaProductRelationDeleteReq{Id: productId})
 
-	//2.重新添加优选商品的关联
+	// 2.重新添加优选商品的关联
 	_, _ = l.svcCtx.PreferredAreaProductRelationService.AddPreferredAreaProductRelation(l.ctx, &cmsclient.AddPreferredAreaProductRelationReq{
 		PreferredAreaId: req.PrefrenceAreaProductRelationList,
 		ProductId:       int64(productId),

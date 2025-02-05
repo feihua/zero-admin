@@ -56,33 +56,33 @@ func (l *QueryOrderReturnApplyListLogic) QueryOrderReturnApplyList(req *types.Qu
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryOrderReturnApplyListData{
-			Id:               item.Id,
-			OrderId:          item.OrderId,
-			CompanyAddressId: item.CompanyAddressId,
-			ProductId:        item.ProductId,
-			OrderSn:          item.OrderSn,
-			CreateTime:       item.CreateTime,
-			MemberUsername:   item.MemberUsername,
-			ReturnAmount:     item.ReturnAmount,
-			ReturnName:       item.ReturnName,
-			ReturnPhone:      item.ReturnPhone,
-			Status:           item.Status,
-			HandleTime:       item.HandleTime,
-			ProductPic:       item.ProductPic,
-			ProductName:      item.ProductName,
-			ProductBrand:     item.ProductBrand,
-			ProductAttr:      item.ProductAttr,
-			ProductCount:     item.ProductCount,
-			ProductPrice:     item.ProductPrice,
-			ProductRealPrice: item.ProductRealPrice,
-			Reason:           item.Reason,
-			Description:      item.Description,
-			ProofPics:        item.ProofPics,
-			HandleNote:       item.HandleNote,
-			HandleMan:        item.HandleMan,
-			ReceiveMan:       item.ReceiveMan,
-			ReceiveTime:      item.ReceiveTime,
-			ReceiveNote:      item.ReceiveNote,
+			Id:               item.Id,               //
+			OrderId:          item.OrderId,          // 订单id
+			CompanyAddressId: item.CompanyAddressId, // 收货地址表id
+			ProductId:        item.ProductId,        // 退货商品id
+			OrderSn:          item.OrderSn,          // 订单编号
+			CreateTime:       item.CreateTime,       // 申请时间
+			MemberUsername:   item.MemberUsername,   // 会员用户名
+			ReturnAmount:     item.ReturnAmount,     // 退款金额
+			ReturnName:       item.ReturnName,       // 退货人姓名
+			ReturnPhone:      item.ReturnPhone,      // 退货人电话
+			Status:           item.Status,           // 申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
+			HandleTime:       item.HandleTime,       // 处理时间
+			ProductPic:       item.ProductPic,       // 商品图片
+			ProductName:      item.ProductName,      // 商品名称
+			ProductBrand:     item.ProductBrand,     // 商品品牌
+			ProductAttr:      item.ProductAttr,      // 商品销售属性：颜色：红色；尺码：xl;
+			ProductCount:     item.ProductCount,     // 退货数量
+			ProductPrice:     item.ProductPrice,     // 商品单价
+			ProductRealPrice: item.ProductRealPrice, // 商品实际支付单价
+			Reason:           item.Reason,           // 原因
+			Description:      item.Description,      // 描述
+			ProofPics:        item.ProofPics,        // 凭证图片，以逗号隔开
+			HandleNote:       item.HandleNote,       // 处理备注
+			HandleMan:        item.HandleMan,        // 处理人员
+			ReceiveMan:       item.ReceiveMan,       // 收货人
+			ReceiveTime:      item.ReceiveTime,      // 收货时间
+			ReceiveNote:      item.ReceiveNote,      // 收货备注
 		})
 	}
 

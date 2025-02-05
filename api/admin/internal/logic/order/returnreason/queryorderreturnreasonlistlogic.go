@@ -50,11 +50,11 @@ func (l *QueryOrderReturnReasonListLogic) QueryOrderReturnReasonList(req *types.
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryOrderReturnReasonListData{
-			Id:         item.Id,
-			Name:       item.Name,
-			Sort:       item.Sort,
-			Status:     item.Status,
-			CreateTime: item.CreateTime,
+			Id:         item.Id,         //
+			Name:       item.Name,       // 退货类型
+			Sort:       item.Sort,       // 排序
+			Status:     item.Status,     // 状态：0->不启用；1->启用
+			CreateTime: item.CreateTime, // 创建时间
 		})
 	}
 

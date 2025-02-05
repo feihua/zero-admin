@@ -43,10 +43,10 @@ func (l *ProductAttributeCategoryListLogic) ProductAttributeCategoryList(req *ty
 
 	for _, item := range attributeList.List {
 		list = append(list, &types.ListProductAttributeCategoryData{
-			Id:                     item.Id,
-			Name:                   item.Name,
-			AttributecategoryCount: item.AttributeCount,
-			ParamCount:             item.ParamCount,
+			Id:                     item.Id,             //
+			Name:                   item.Name,           // 商品属性分类名称
+			AttributecategoryCount: item.AttributeCount, // 属性数量
+			ParamCount:             item.ParamCount,     // 参数数量
 		})
 	}
 

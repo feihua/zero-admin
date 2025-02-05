@@ -34,18 +34,17 @@ func NewProductCategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // ProductCategoryAdd 添加商品分类
 func (l *ProductCategoryAddLogic) ProductCategoryAdd(req types.AddProductCategoryReq) (*types.AddProductCategoryResp, error) {
 	_, err := l.svcCtx.ProductCategoryService.AddProductCategory(l.ctx, &pmsclient.AddProductCategoryReq{
-		ParentId:               req.ParentId,
-		Name:                   req.Name,
-		Level:                  req.Level,
-		ProductCount:           0,
-		ProductUnit:            req.ProductUnit,
-		NavStatus:              req.NavStatus,
-		ShowStatus:             req.ShowStatus,
-		Sort:                   req.Sort,
-		Icon:                   req.Icon,
-		Keywords:               req.Keywords,
-		Description:            req.Description,
-		ProductAttributeIdList: req.ProductAttributeIdList,
+		ParentId:     req.ParentId,    // 上机分类的编号：0表示一级分类
+		Name:         req.Name,        // 商品分类名称
+		Level:        req.Level,       // 分类级别：0->1级；1->2级
+		ProductCount: 0,               // 商品数量
+		ProductUnit:  req.ProductUnit, // 商品数量
+		NavStatus:    req.NavStatus,   // 是否显示在导航栏：0->不显示；1->显示
+		ShowStatus:   req.ShowStatus,  // 显示状态：0->不显示；1->显示
+		Sort:         req.Sort,        // 排序
+		Icon:         req.Icon,        // 图标
+		Keywords:     req.Keywords,    // 关键字
+		Description:  req.Description, // 描述
 	})
 
 	if err != nil {
