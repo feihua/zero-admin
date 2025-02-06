@@ -36,7 +36,7 @@ func NewUpdateCompanyAddressReceiveStatusLogic(ctx context.Context, svcCtx *svc.
 func (l *UpdateCompanyAddressReceiveStatusLogic) UpdateCompanyAddressReceiveStatus(in *omsclient.UpdateCompanyAddressReceiveStatusReq) (*omsclient.UpdateCompanyAddressStatusResp, error) {
 	err := query.Q.Transaction(func(tx *query.Query) error {
 		q := tx.OmsCompanyAddress
-		address, err := q.WithContext(l.ctx).Where(query.OmsCompanyAddress.ID.Eq(in.Id)).First()
+		address, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 
 		switch {
 		case errors.Is(err, gorm.ErrRecordNotFound):

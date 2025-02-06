@@ -37,7 +37,7 @@ func (l *AddCompanyAddressLogic) AddCompanyAddress(in *omsclient.AddCompanyAddre
 
 	err := query.Q.Transaction(func(tx *query.Query) error {
 		q := tx.OmsCompanyAddress
-		count, err := q.WithContext(l.ctx).Where(q.Name.Eq(in.Name), q.ID.Neq(in.Id)).Count()
+		count, err := q.WithContext(l.ctx).Where(q.AddressName.Eq(in.AddressName)).Count()
 		if count > 0 {
 			return errors.New(fmt.Sprintf("添加公司收发货地址表失败,地址名称已存在"))
 		}

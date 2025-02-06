@@ -39,7 +39,7 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 	err := query.Q.Transaction(func(tx *query.Query) error {
 		q := tx.OmsCompanyAddress
 
-		_, err := q.WithContext(l.ctx).Where(query.OmsCompanyAddress.ID.Eq(in.Id)).First()
+		_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 
 		switch {
 		case errors.Is(err, gorm.ErrRecordNotFound):
@@ -50,7 +50,7 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 			return errors.New("查询公司收发货地址异常")
 		}
 
-		count, err := q.WithContext(l.ctx).Where(q.Name.Eq(in.Name), q.ID.Neq(in.Id)).Count()
+		count, err := q.WithContext(l.ctx).Where(q.AddressName.Eq(in.AddressName), q.ID.Neq(in.Id)).Count()
 		if count > 0 {
 			return errors.New(fmt.Sprintf("更新公司收发货地址表失败,地址名称已存在"))
 		}
