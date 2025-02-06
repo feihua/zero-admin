@@ -67,7 +67,7 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 			}
 		}
 
-		err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Save(&model.OmsCompanyAddress{
+		err = l.svcCtx.DB.Model(&model.OmsCompanyAddress{}).WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Save(&model.OmsCompanyAddress{
 			ID:            in.Id,
 			AddressName:   in.AddressName,   // 地址名称
 			SendStatus:    in.SendStatus,    // 默认发货地址：0->否；1->是
@@ -79,7 +79,7 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 			Region:        in.Region,        // 区
 			DetailAddress: in.DetailAddress, // 详细地址
 			UpdateBy:      in.UpdateBy,      // 创建者
-		})
+		}).Error
 
 		return err
 	})
