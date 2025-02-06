@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -49,7 +50,8 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(req *types.UpdateCompan
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新公司收发货地址信息失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("更新公司收发货地址失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UpdateCompanyAddressResp{

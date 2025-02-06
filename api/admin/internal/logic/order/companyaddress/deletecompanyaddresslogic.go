@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -39,7 +40,8 @@ func (l *DeleteCompanyAddressLogic) DeleteCompanyAddress(req *types.DeleteCompan
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Id: %+v,删除公司地址异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除公司地址失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.DeleteCompanyAddressResp{

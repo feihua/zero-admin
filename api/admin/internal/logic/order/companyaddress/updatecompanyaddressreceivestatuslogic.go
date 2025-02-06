@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -35,12 +36,14 @@ func NewUpdateCompanyAddressReceiveStatusLogic(ctx context.Context, svcCtx *svc.
 func (l *UpdateCompanyAddressReceiveStatusLogic) UpdateCompanyAddressReceiveStatus(req *types.UpdateCompanyAddressReceiveStatusReq) (resp *types.UpdateCompanyAddressStatusResp, err error) {
 	_, err = l.svcCtx.CompanyAddressService.UpdateCompanyAddressReceiveStatus(l.ctx, &omsclient.UpdateCompanyAddressReceiveStatusReq{
 		Id:            req.Id,
-		ReceiveStatus: req.ReceiveStatus,
+		ReceiveStatus: req.ReceiveStatus, // 是否默认收货地址：0->否；1->是
+		UpdateBy:      l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新公司默认收货地址状态失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("更新公司默认收货地址状态失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UpdateCompanyAddressStatusResp{

@@ -55,13 +55,13 @@ message UpdateCompanyAddressResp {
 message UpdateCompanyAddressReceiveStatusReq {
   int64 id = 1;
   int32 receive_status = 2; //是否默认收货地址：0->否；1->是
-
+  string update_by = 3; //更新者
 }
 // 更新公司收发货地址表状态
 message UpdateCompanyAddressSendStatusReq {
   int64 id = 1;
   int32 send_status = 2; //默认发货地址：0->否；1->是
-
+  string update_by = 3; //更新者
 }
 message UpdateCompanyAddressStatusResp {
   string pong = 1;

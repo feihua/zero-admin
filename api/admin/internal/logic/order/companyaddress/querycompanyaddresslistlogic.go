@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -37,7 +38,8 @@ func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(req *types.QueryC
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询公司收发货地址列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询公司收发货地址失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.QueryCompanyAddressListData

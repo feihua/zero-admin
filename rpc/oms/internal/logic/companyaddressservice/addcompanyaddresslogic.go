@@ -2,6 +2,8 @@ package companyaddressservicelogic
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 
@@ -32,30 +34,40 @@ func NewAddCompanyAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // AddCompanyAddress 添加公司收发货地址表
 func (l *AddCompanyAddressLogic) AddCompanyAddress(in *omsclient.AddCompanyAddressReq) (*omsclient.AddCompanyAddressResp, error) {
-	q := query.OmsCompanyAddress
-	if in.ReceiveStatus == 1 {
-		_, err := q.WithContext(l.ctx).Where(q.ReceiveStatus.Eq(1)).Update(q.ReceiveStatus, 0)
-		if err != nil {
-			return nil, err
+
+	err := query.Q.Transaction(func(tx *query.Query) error {
+		q := tx.OmsCompanyAddress
+		count, err := q.WithContext(l.ctx).Where(q.Name.Eq(in.Name), q.ID.Neq(in.Id)).Count()
+		if count > 0 {
+			return errors.New(fmt.Sprintf("添加公司收发货地址表失败,地址名称已存在"))
 		}
-	}
-	if in.SendStatus == 1 {
-		_, err := q.WithContext(l.ctx).Where(q.SendStatus.Eq(1)).Update(q.SendStatus, 0)
-		if err != nil {
-			return nil, err
+
+		if in.ReceiveStatus == 1 {
+			_, err = q.WithContext(l.ctx).Where(q.ReceiveStatus.Eq(1)).Update(q.ReceiveStatus, 0)
+			if err != nil {
+				return err
+			}
 		}
-	}
-	err := q.WithContext(l.ctx).Create(&model.OmsCompanyAddress{
-		AddressName:   in.AddressName,   // 地址名称
-		SendStatus:    in.SendStatus,    // 默认发货地址：0->否；1->是
-		ReceiveStatus: in.ReceiveStatus, // 是否默认收货地址：0->否；1->是
-		Name:          in.Name,          // 收发货人姓名
-		Phone:         in.Phone,         // 收货人电话
-		Province:      in.Province,      // 省/直辖市
-		City:          in.City,          // 市
-		Region:        in.Region,        // 区
-		DetailAddress: in.DetailAddress, // 详细地址
-		CreateBy:      in.CreateBy,      // 创建者
+		if in.SendStatus == 1 {
+			_, err = q.WithContext(l.ctx).Where(q.SendStatus.Eq(1)).Update(q.SendStatus, 0)
+			if err != nil {
+				return err
+			}
+		}
+
+		return q.WithContext(l.ctx).Create(&model.OmsCompanyAddress{
+			AddressName:   in.AddressName,   // 地址名称
+			SendStatus:    in.SendStatus,    // 默认发货地址：0->否；1->是
+			ReceiveStatus: in.ReceiveStatus, // 是否默认收货地址：0->否；1->是
+			Name:          in.Name,          // 收发货人姓名
+			Phone:         in.Phone,         // 收货人电话
+			Province:      in.Province,      // 省/直辖市
+			City:          in.City,          // 市
+			Region:        in.Region,        // 区
+			DetailAddress: in.DetailAddress, // 详细地址
+			CreateBy:      in.CreateBy,      // 创建者
+		})
+
 	})
 
 	if err != nil {
