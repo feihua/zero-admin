@@ -67,7 +67,7 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 			}
 		}
 
-		_, err = q.WithContext(l.ctx).Updates(&model.OmsCompanyAddress{
+		err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Save(&model.OmsCompanyAddress{
 			ID:            in.Id,
 			AddressName:   in.AddressName,   // 地址名称
 			SendStatus:    in.SendStatus,    // 默认发货地址：0->否；1->是
