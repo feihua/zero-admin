@@ -40,7 +40,6 @@ func (l *UpdateCompanyAddressSendStatusLogic) UpdateCompanyAddressSendStatus(in 
 
 		switch {
 		case errors.Is(err, gorm.ErrRecordNotFound):
-			logc.Errorf(l.ctx, "公司收发货地址不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
 			return errors.New("公司收发货地址不存在")
 		case err != nil:
 			logc.Errorf(l.ctx, "查询公司收发货地址异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
