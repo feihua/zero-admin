@@ -2350,7 +2350,7 @@ type QueryMemberRuleSettingListData struct {
 type QueryMemberRuleSettingListReq struct {
 	Current  int64 `form:"current,default=1"`   //第几页
 	PageSize int64 `form:"pageSize,default=20"` //每页的数量
-	RuleType int32 `form:"ruleType,optional"`   //类型：0->积分规则；1->成长值规则
+	RuleType int32 `form:"ruleType,default=2"`  //类型：0->积分规则；1->成长值规则
 	Status   int32 `form:"status,default=2"`    //状态：0->禁用；1->启用
 }
 
