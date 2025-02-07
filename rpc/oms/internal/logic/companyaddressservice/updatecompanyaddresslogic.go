@@ -9,9 +9,9 @@ import (
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"gorm.io/gorm"
-
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
+	"time"
 )
 
 // UpdateCompanyAddressLogic 更新公司收发货地址表
@@ -39,7 +39,7 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 	err := query.Q.Transaction(func(tx *query.Query) error {
 		q := tx.OmsCompanyAddress
 
-		_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
+		address, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 
 		switch {
 		case errors.Is(err, gorm.ErrRecordNotFound):
@@ -67,19 +67,23 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 			}
 		}
 
-		err = l.svcCtx.DB.Model(&model.OmsCompanyAddress{}).WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Save(&model.OmsCompanyAddress{
+		now := time.Now()
+		err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Save(&model.OmsCompanyAddress{
 			ID:            in.Id,
-			AddressName:   in.AddressName,   // 地址名称
-			SendStatus:    in.SendStatus,    // 默认发货地址：0->否；1->是
-			ReceiveStatus: in.ReceiveStatus, // 是否默认收货地址：0->否；1->是
-			Name:          in.Name,          // 收发货人姓名
-			Phone:         in.Phone,         // 收货人电话
-			Province:      in.Province,      // 省/直辖市
-			City:          in.City,          // 市
-			Region:        in.Region,        // 区
-			DetailAddress: in.DetailAddress, // 详细地址
-			UpdateBy:      in.UpdateBy,      // 创建者
-		}).Error
+			AddressName:   in.AddressName,     // 地址名称
+			SendStatus:    in.SendStatus,      // 默认发货地址：0->否；1->是
+			ReceiveStatus: in.ReceiveStatus,   // 是否默认收货地址：0->否；1->是
+			Name:          in.Name,            // 收发货人姓名
+			Phone:         in.Phone,           // 收货人电话
+			Province:      in.Province,        // 省/直辖市
+			City:          in.City,            // 市
+			Region:        in.Region,          // 区
+			DetailAddress: in.DetailAddress,   // 详细地址
+			CreateBy:      address.CreateBy,   // 创建者
+			CreateTime:    address.CreateTime, // 创建时间
+			UpdateBy:      in.UpdateBy,        // 创建者
+			UpdateTime:    &now,
+		})
 
 		return err
 	})
